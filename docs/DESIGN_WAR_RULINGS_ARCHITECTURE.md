@@ -974,6 +974,11 @@ builds after WR-7 — cession-for-peace rides the envoy term-sheet)
   market access / toll exemption), allyship (alliance terms), another settlement
   (the swap), or peace itself (the cession rider carried proactively in an envoy
   term-sheet). One artifact, one compliance machinery, one document.
+  [CORRECTED 2026-08-02 (fp-audit) — cross-program twin of FP-TRADE §3's note:
+  the trade-rights components (exclusivity / market access / toll exemption) do
+  not exist in the tree and land only at FP-TRADE's TR-5; until TR-5 lands,
+  the bundle composes streams/stores/allyship/settlements/peace only — graceful
+  degradation, declared in both programs (DESIGN_FP_TRADE.md §3 Seam One).]
 - **Eligibility:** only satellite edges (wave E lineage) and vassal edges (the
   occupation→vassalized ladder) are tradeable; sovereignty of a free settlement
   is not a commodity (it can only be lost through the war machinery). User-placed

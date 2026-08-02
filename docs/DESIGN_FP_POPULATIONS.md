@@ -240,7 +240,7 @@ owner-signed soak in build order:
 | `departureMemoryEnabled` | the diaspora memory ledger both ends, the kin-pull arm, remembrance receipts | POP-3 |
 | `calamityArcEnabled` | plague arc staging, cause-attributed burial lines, the aftermath/recovery voice | POP-4 |
 | `roadDramaEnabled` | column en-route events, road-death narration, the lost-column inference | POP-5a |
-| `moverPermitsEnabled` | the levy/institution/trade permit consumers + the J-POP-11 gate reconciliation | POP-5b |
+| `moverPermitsEnabled` | the levy/institution/trade/promotion permit consumers + the J-POP-11 gate reconciliation + the treaty-input reads (migration_right, settlement_provision — GR-3's catalog consumed) [CORRECTED 2026-08-02 (fp-audit)] | POP-5b |
 
 **LIT-PRECONDITIONS (the war volume's flag-dependency ruling, applied):**
 `demographicsEnabled` is a LIT-PRECONDITION for every flag above except
@@ -253,20 +253,41 @@ certification walker reds). `believedMigrationEnabled` requires SP-2's
 believed-conditions subject family LANDED (spine infrastructure, built before all
 six programs) and rides the existing infoMode gate; `roadDramaEnabled` requires the
 spatial column lane (spatialCanonVersion — VERIFY-AT-BUILD the exact predicate the
-M4 lane uses). A flag lit out of order is an invalid config, walker-enforced.
+M4 lane uses). [CORRECTED 2026-08-02 (fp-audit): added — the rumor-carrier
+substrate is itself gated and the earlier list omitted it]
+**`migrationRumorsEnabled` is a LIT-PRECONDITION for `believedMigrationEnabled`
+and `roadDramaEnabled`:** migrationRumors.js's two refugee-lane products are
+dormant without it (migrantPaths null, flightEntries []), which would silently
+lose POP-1's bodily-carried cautionary tale (the return column's rumor carriage)
+and POP-5a's column rumor carriage — the carrier half of the correction loop.
+Named arms, walker-enforced (the POP-7 invalid-config walker reds all three
+orderings). A flag lit out of order is an invalid config, walker-enforced.
 
-**THE PULL SEAM RULING (binding; this volume's largest architectural decision):**
+**THE PULL SEAM RULING (binding; this volume's largest architectural decision)
+[CORRECTED 2026-08-02 (fp-audit) — the seam split re-ruled once, propagated to
+POP-1 Mechanics and J-POP-2; the earlier draft belief-resolved the spare/inbound
+read while simultaneously ruling competeForDestinations "TRUTH", which was
+self-contradictory and deleted the built over-send guard]:**
 belief enters migration at EXACTLY ONE SEAM — `destinationMenuFor`
 (demographicsMigration.js:276-315), where every DestinationReading is built. Lit,
-the reading resolver answers each attraction axis from the ORIGIN'S OWN believed
-conditions (SP-2's banded subject family, through the same one-belief-selector
-idiom `perceivedScarcityOf` already proves out for courts); dark, it answers from
-`demographicReadings` byte-identically. ONE menu builder, ONE reading resolver, two
-sources. A second menu builder or a per-axis fork anywhere is a design defect. And
-per BELIEF MOVES FEET, NEVER GRAIN: `competeForDestinations`' capacity cap, spare
-arithmetic, viability gates, and the landing stage remain TRUTH — belief colors
-what the menu PROMISES, physics rules what the road DELIVERS. The gap between the
-two IS the drama, and it is receipt-derivable end to end.
+the reading resolver answers the ATTRACTION AXES (wages-for-hands, land, grain,
+safety) from the ORIGIN'S OWN believed conditions (SP-2's banded subject family,
+through the same one-belief-selector idiom `perceivedScarcityOf` already proves
+out for courts); dark, it answers from `demographicReadings` byte-identically. ONE
+menu builder, ONE reading resolver, two sources. A second menu builder or a
+per-axis fork anywhere is a design defect. And per BELIEF MOVES FEET, NEVER GRAIN:
+menu ADMISSION, the spare/inbound-census read, `competeForDestinations`' capacity
+cap and viability gates stay TRUTH lit or dark — the spare read's own recorded
+purpose is stopping two origins from overspilling one village
+(demographicsMigration.js:302 + the module comment), and that guard is physics,
+not knowledge; deleting it would be a counterforce deletion. The LANDING STAGE
+stays truth-side and CHANGES under this program: it gains THE ARRIVAL CLEARING
+(NEW WORK, owned by POP-1 — the tree today lands every column unconditionally),
+so capacity that moved while the column walked is discovered at the wall. Belief
+colors what the menu PROMISES, physics rules what the road DELIVERS. The gap
+between the two IS the drama — the disappointment bust where the town holds but
+the promise doesn't, the turn-back bust where the room itself is gone — and it is
+receipt-derivable end to end.
 
 **THE VOICE SEAM RULING:** `commonsVoiceKernel.js` stays the ONE crowd writer. The
 refusal rung, its targets, and its pricing land INSIDE that kernel's ladder; the
@@ -287,9 +308,17 @@ worldState.spatialLedgers.departureMemory     — POP-3, writer departureMemory.
       kinBand: word,                          // closed band: none|thin|present|strong|binding
       causeClass: word,                       // closed: flight|opportunity|expulsion|dispersal
       lastFlowTick, sinceTick,
-      rememberedAs: word } }                  // closed, both ends read it with opposite
+      rememberedAs: word } }                  // closed: mourned|sent_forth|cast_out|
+                                              // scattered (one per causeClass —
+                                              // flight|opportunity|expulsion|dispersal
+                                              // in the origin's remembrance grammar);
+                                              // both ends read it with opposite
                                               // grammar: the origin mourns, the
                                               // destination traces its blood
+                                              // [CORRECTED 2026-08-02 (fp-audit):
+                                              // enumerated — an unenumerated "closed"
+                                              // vocabulary is an implementer
+                                              // invention under law 1a-7]
   // BANDED MEMORY, never accounting — migrationDebt stays unbuilt (§2; J-POP-6).
   // Decays toward none on a generational half-life band; refreshed by flows.
   // Deliberately NOT an SP-5 confidence stock: SP-5 is a CLOSED actor-grain
@@ -300,10 +329,19 @@ worldState.spatialLedgers.departureMemory     — POP-3, writer departureMemory.
 worldState.spatialLedgers.calamityArcs        — POP-4, writer calamityArc.js
   [ { id, settlementId, cause: 'sickness',    // closed cause set, v1 = sickness only;
       openedTick, crestTick|null,             // extension is an owner ruling, not a
-      closedTick|null, peakBand } ]           // wave item
+      closedTick|null, peakBand } ]           // peakBand: the house QUANTITY_BANDS
+                                              // vocabulary (closed, existing — no new
+                                              // band words minted)
   // The ONE stored bit of arc state (populationHistory's 12 rows cannot carry a
   // slow verdict — disclosed here exactly as J-WR-3 disclosed dispositions).
   // The slow verdict itself lands in the CHRONICLE at close (existing substrate).
+  // RETENTION [CORRECTED 2026-08-02 (fp-audit): ruled — the earlier shape was
+  // append-only forever in a §4 that promises deliberately small state]: an arc
+  // record is PRUNED once closedTick + the aftermath window has passed and the
+  // recovery/chronicle verdict has landed — the chronicle entry is the durable
+  // history; the ledger holds open arcs + aftermath-window arcs only, so a 300y
+  // soak's array stays bounded by live drama, not by history. The aftermath
+  // window is a band (§7). Drop-when-empty extends to closed members.
 
 column records (EXISTING spatialLedgers.migration rows) — POP-5 EXTENDS IN PLACE
   + events: [ { tick, kind, band, receipt } ] // closed kinds §POP-5; the column is
@@ -334,7 +372,11 @@ it would read).
 ---
 
 ## §5 THE WAVES (dependency order; each: one commit, focused gates per slice, full
-## gate at wave end, ledger row; every wave DARK per §3)
+## gate at wave end, ledger row; every wave DARK per §3. STANDING OBLIGATION
+## [CORRECTED 2026-08-02 (fp-audit)]: any wave landing a cross-layer read adds its
+## CW-0 coupling-registry row — pairId, direction, read, receiptField,
+## counterforce, flags, owningVolume, owningWave — in the SAME commit; the CW-0
+## walker asserts it)
 
 ### POP-1 — THE BELIEVED ROAD (the gold rush and the bust; flag
 `believedMigrationEnabled`; settled ruling elaborated: BELIEVED-CONDITIONS
@@ -351,14 +393,25 @@ letters that emptied the boomtowns as fast as the strike filled them.*
   A hot band above truth mints THE RUSH: voluntary migrants clear the margin on
   promise, not fact.
 - **Counterforce (same evidence):** THE BUST — arrivals meet truth at the landing
-  stage. Placed arrivals whose lived reading falls a band-gap below what they
-  believed, and turned-back arrivals refused at the wall (`no_capacity` — the
-  existing closed refusal, no new word needed), both write LETTERS HOME: a
-  belief-correction event addressed to the origin, traveling at NEWS SPEED on the
-  existing distance-priced machinery, correcting the origin's band toward truth on
-  receipt. Returning columns carry the cautionary tale bodily (the
-  RUMOR_CARRIER_REFUGEE substrate, already built). The same belief substrate that
-  started the rush ends it.
+  stage, in two arms. [CORRECTED 2026-08-02 (fp-audit): the earlier draft called
+  the turn-back "the existing arm"; the tree lands every column unconditionally
+  (§2), so the turn-back arm is NEW WORK, owned here, per the re-ruled §3 seam
+  and J-POP-15.] THE DISAPPOINTMENT ARM (staging over existing landings): placed
+  arrivals whose lived reading falls a band-gap below what they believed write
+  LETTERS HOME — a belief-correction event addressed to the origin, traveling at
+  NEWS SPEED on the existing distance-priced machinery, correcting the origin's
+  band toward truth on receipt. THE TURN-BACK ARM (THE ARRIVAL CLEARING — new
+  work, §3): where the room itself is gone when the column lands, the clearing
+  refuses with the NEW closed landing-refusal word `refused_at_the_wall` (minted
+  here; DISTINCT from pre-departure `no_capacity`, which belongs to migrants who
+  never left — demographicsMigration.js:235,237) and mints THE RETURN COLUMN — a
+  real column on the existing migration ledger walking home, conserved as
+  inTransit until it lands through the same clearing. The return column carries
+  the cautionary tale bodily: it is an in-flight column, so the gated carrier
+  substrate (`migrationRumorsEnabled`, §3) carries its legs — VERIFY-AT-BUILD
+  that the carrier reads ALL in-flight columns rather than outbound-flagged ones;
+  if it filters, the homeward carriage is this wave's named work, not an
+  assumption. The same belief substrate that started the rush ends it.
 - **Belief posture (Law One):** the engine never knows why the rumor was wrong —
   only that arrivals reported a different band. `mistaken` rides the receipt
   exactly as perceivedScarcityOf's clause does for courts.
@@ -367,13 +420,23 @@ letters that emptied the boomtowns as fast as the strike filled them.*
   to a circulating NPC, the Herald may name them: "it was Aldric the factor who
   first spoke of silver in Emberhold." Casting reads H1 circulation + I-ladder
   credibility; no new NPC state; never a fate resolved.
-- **Mechanics (the seams, precisely):**
-  (a) menu ADMISSION and attraction go belief-side when lit — including the
-  origin's knowledge of spare (you cannot know from three weeks away how full the
-  town is; the inbound-census read at MENU time resolves through belief);
-  (b) LANDING clears against truth exactly as today — surplus turns back through
-  the existing `returned` accounting arm; the conservation identity is untouched
-  and its 300-tick pin EXTENDS to cover a rush-bust fixture;
+- **Mechanics (the seams, precisely) [CORRECTED 2026-08-02 (fp-audit): (a) and
+  (b) re-drafted to the re-ruled §3 seam — the earlier draft belief-resolved the
+  spare read (deleting the built over-send guard, whose recorded purpose is
+  stopping two origins from overspilling one village) while calling the landing
+  "exactly as today" (an arm the tree does not have)]:**
+  (a) only the ATTRACTION AXES resolve belief-side when lit (wages-for-hands,
+  land, grain, safety); menu ADMISSION, the spare/inbound-census read, the
+  capacity cap, and the viability gates stay TRUTH lit or dark (§3 — the guard
+  is physics, not knowledge). The rush is real because promise outruns truth on
+  the axes; the bust is real because three weeks of road can change what the
+  menu truthfully said at departure;
+  (b) LANDING gains THE ARRIVAL CLEARING (NEW WORK, this wave — J-POP-15):
+  capacity that moved while the column walked is discovered at the wall — the
+  clearing refuses (`refused_at_the_wall`) and mints the return column; the
+  300-tick conservation identity is RE-DERIVED over the two new arms (turn-back
+  at the wall ⇒ inTransit homeward ⇒ `returned` stamped at the home landing) and
+  its executed pin re-runs with a rush-bust fixture covering both;
   (c) disappointment detection = believed band at departure (frozen on the column
   record — one small field, the K.2 snapshot idiom at flow grain) vs lived reading
   at landing; gap ≥ the disappointment band ⇒ the letter.
@@ -391,12 +454,27 @@ letters that emptied the boomtowns as fast as the strike filled them.*
   scarcity and believed conditions are siblings in one SP-2 family, one decay law;
   WAR — perceivedScarcityOf already proves the selector idiom; GRAMMAR — a
   sustained rush pressure is a typed SP-3 pact trigger (migration rights, labor
-  compacts).
+  compacts), and the consumption runs BOTH ways [CORRECTED 2026-08-02 (fp-audit):
+  the population terms were producer-only across the corpus — the
+  `non_intervention` tombstone shape]: a live `labor_compact` on the pair (GR-3's
+  catalog — GRAMMAR's list is the ONE canonical term list; this volume consumes,
+  never re-authors) lifts the pair's wages-for-hands axis through SP-2's
+  shared/carried provenance, reachability-pinned on a corpus where a compact is
+  signed (the arm CPL-17 names; CW-0 row lands with this wave's commit).
 - **Herald contract:** the rush line ("They say in Emberhold the streets want for
   hands and pay in silver — and the road west is full of feet"); the bust line
   ("Letters came back from Emberhold, and they did not speak of silver"); the
   turn-back line rides the existing departure-line machinery with the returned
-  count it already carries. All banded, pacing-registered (req. 12).
+  count it already carries. **Kinds MINTED:** the rush line + the bust line (two
+  kinds; all three §1c walkers same-commit). **Kinds RIDDEN:** the turn-back
+  count on the existing departure line. All banded; significance classes drawn
+  from the spine's SP-6 narration-kit family (referenced, never minted here);
+  pacing-registered THROUGH POP-6's editor seam (req. 12 — registration is that
+  wave's named work item, not an assertion). [CORRECTED 2026-08-02 (fp-audit)]
+- **Endings entries (producers declared, the corpus-standard field):** `rush` ·
+  `bust` (this wave's arc words) · `turned_back` (minted at THE ARRIVAL
+  CLEARING) · `homecoming` (a return column landing at its origin). [CORRECTED
+  2026-08-02 (fp-audit): the Endings field was absent from every POP wave]
 - **Pins (negative hardest):**
   - dormancy golden — dark byte-identical at the pull seam;
   - THE OMNISCIENCE COLLAPSE — infoMode omniscient ⇒ belief resolves to truth ⇒
@@ -407,8 +485,9 @@ letters that emptied the boomtowns as fast as the strike filled them.*
     column turns back; the origin's band corrects within the letter's travel time;
     the flow STOPS with no clamp, no cap, no authored bust;
   - THE BUST-CORRECTS-WITHOUT-KILLING PIN: the whole arc closes with departures ===
-    arrivals + returned + lost + inTransit exactly (extend the executed identity);
-    the rush kills nobody (J-POP-3);
+    arrivals + returned + lost + inTransit exactly — the identity RE-DERIVED over
+    the clearing + return-column arms and re-executed at 300 ticks, not merely
+    extended [CORRECTED 2026-08-02 (fp-audit)]; the rush kills nobody (J-POP-3);
   - the no-belief-no-change negative: a world where beliefs equal truth everywhere
     produces byte-identical migration lit vs dark;
   - the never-outruns-the-road negative: belief NEVER admits an unreachable or
@@ -437,16 +516,33 @@ simply refuses — with the Pilgrimage of Grace's petition-in-arms one rung up.*
 - **Law:** the ladder extends IN PLACE to petition → gathering → REFUSAL → riot,
   one writer (THE VOICE SEAM, §3). Refusal is the new rung and it is TARGETED: it
   names a live seat act — an underway §5c plan, a levy call, an encouraged
-  emigration. No live target ⇒ the ladder skips the rung (gathering→riot exactly
-  as built — dark-shape preserved by construction).
+  emigration. No live target ⇒ the ladder skips the rung as a TWO-STEP JUMP
+  after ONE dwell (gathering→riot in a single escalation), with LEGIT_DIP
+  re-authored from four slots to five. [CORRECTED 2026-08-02 (fp-audit): the
+  earlier draft claimed dark-shape "preserved by construction"; the built ladder
+  escalates one rung per dwell (commonsVoiceKernel.js:268-272), so inserting a
+  rung puts riot one extra dwell away on every skip — dark-shape is preserved by
+  the JUMP RULE and PINNED (a lit-no-target fixture proves time-to-riot is
+  unchanged vs dark), never by construction. J-POP-16.]
 - **Force:** the existing grievance read, unchanged (0.55·legitimacy-deficit +
   0.35·exposed corruption + 0.55·unrest — the kernel's own arithmetic; this wave
   adds NO new grievance source).
-- **Counterforce (same evidence):** THE ANSWERED PETITION — the assize already
-  runs after the commons in the same tick (wired order, verified); an answer at
-  rung 1 drains the same grievance the ladder scores, and the de-escalation is
-  the REVERSAL PIN (no courage ratchet, req. 10's law applied to crowds).
-  Ignoring compounds through the same three inputs.
+- **Counterforce (same evidence):** THE ANSWERED PETITION — in two arms, because
+  the grievance has three inputs and the built answer reaches one. [CORRECTED
+  2026-08-02 (fp-audit): the assize coupling fires only on a named accused or a
+  corruption-kind grievance (assizeKernel.js:344-347), while 0.55·legitimacy +
+  0.55·unrest — the majority weight — composes grievances no verdict answers;
+  the earlier draft's counterforce was therefore corruption-only. J-POP-16.]
+  THE CORRUPTION ARM (built): the assize already runs after the commons in the
+  same tick (wired order, verified); a verdict naming the ledger's accused
+  answers. THE MISRULE ANSWER (NEW WORK, this wave): one receipted,
+  posture-colored seat verb that addresses a misrule/unrest grievance by redress
+  — a legitimacy repair step plus standing down the named unrest stressor where
+  one is live (banded under the answered-petition drain, §7) — so the
+  majority-weight grievance mass has an answering ACT, not only a decay curve.
+  An answer at rung 1 through EITHER arm drains the same grievance the ladder
+  scores, and the de-escalation is the REVERSAL PIN (no courage ratchet, req.
+  10's law applied to crowds). Ignoring compounds through the same three inputs.
 - **Belief posture (Law One):** the crowd acts on what it can see from the square —
   exposed corruption, felt scarcity, the levy notice — never on DM truth or covert
   state. Covert corruption moves nothing until revealed (the covert/revealed seam
@@ -490,7 +586,19 @@ simply refuses — with the Pilgrimage of Grace's petition-in-arms one rung up.*
   shortfall.
 - **Herald contract:** petition/gathering/riot beats EXIST (built); this wave adds
   the refusal beat + the answered-petition beat (the counterforce gets a voice —
-  "the seat heard them, and the square emptied"), banded, pacing-registered.
+  "the seat heard them, and the square emptied"). **Kinds MINTED:**
+  `commons_refusal` + `commons_answered` (all three §1c walkers same-commit —
+  the kernel's own three built kinds prove the registration shape). **Kinds
+  RIDDEN:** none. Beat ids at this writer are `wizard_news.*`-shaped
+  (commonsVoiceKernel.js:168) — §1c's wizard-news skew PROHIBITION restated at
+  the point of minting: never declare such an id on a certification row's
+  eventTypes/moverFamilies channels. Banded; SP-6 significance classes
+  referenced; pacing-registered through POP-6's editor seam. [CORRECTED
+  2026-08-02 (fp-audit)]
+- **Endings entries:** `petition_answered` (either answering arm) ·
+  `refusal_stood` (a refusal whose target act yields or dies unanswered) ·
+  `riot_spent` (the built rung 3's residue decaying to rest). [CORRECTED
+  2026-08-02 (fp-audit)]
 - **Pins (negative hardest):**
   - dormancy: `commonsArcEnabled` dark ⇒ the three-rung ladder byte-identical
     INCLUDING the skip-refusal path shape;
@@ -500,7 +608,13 @@ simply refuses — with the Pilgrimage of Grace's petition-in-arms one rung up.*
     halves receipted on one fixture;
   - THE REFUSED-LEVY PIN (TELLABLE): the muster shortfall reaches the war lane as
     a smaller real muster with the reason named end to end;
-  - the reversal: answer at petition ⇒ full de-escalation, no residue ratchet;
+  - the reversal: answer at petition ⇒ full de-escalation, no residue ratchet —
+    executed on BOTH arms (a corruption-answered fixture AND a misrule-answered
+    fixture; the corruption-only version is constructible-but-vacuous, the exact
+    shape §1c warns of) [CORRECTED 2026-08-02 (fp-audit)];
+  - THE JUMP-RULE PIN: lit with no live target, time-to-riot equals dark
+    tick-for-tick (the two-step jump; LEGIT_DIP five slots) [CORRECTED
+    2026-08-02 (fp-audit)];
   - the no-target negative: refusal never fires against a seat that asked nothing
     of anyone;
   - vacuous-absence discipline: every pin seeds a live grievance state first.
@@ -528,10 +642,20 @@ old-country parish named in the new one, and the letters that kept both alive.*
   every flow refreshes the pair's band and stamps its causeClass from evidence the
   flow already carries (travelClass + refusal/violence context — flight vs
   opportunity vs expulsion vs dispersal, a CLOSED set).
-- **Counterforce (same evidence):** FORGETTING — the same band decays toward
-  `none` on a generational half-life; no flow, no memory. The tie that is not fed
-  lapses, and its lapse is a band crossing with a receipt ("the last of the old
-  families stopped writing").
+- **Counterforce (same evidence):** two arms. [CORRECTED 2026-08-02 (fp-audit):
+  the earlier draft's only opposition was FORGETTING, which by its own words
+  fires only when no flow runs — leaving the kin-pull loop (flow refreshes band,
+  band pulls flow) opposed by nothing but the J-POP-7 cap, and a cap is a clamp,
+  not a counterforce.] FORGETTING: the band decays toward `none` on a
+  generational half-life; no flow, no memory. The tie that is not fed lapses,
+  and its lapse is a band crossing with a receipt ("the last of the old families
+  stopped writing"). THE SPENT TIE (new — and it opposes the loop WHILE it
+  runs): kin who arrive and find the destination a band-gap worse than the tie
+  promised write the tie WEAKER — the letters-home idiom (POP-1's disappointment
+  evidence, the same gap read) applied to memory — so a band that keeps pulling
+  into a crowded or disappointing destination spends itself, and POP-7's
+  stationarity envelope has a mechanism to converge on rather than only a cap to
+  tune.
 - **Belief posture (Law One):** memory is how the flow is REMEMBERED, not what
   truly happened — causeClass is stamped from the departing column's own receipts
   (the origin's lived experience), and the two ends may remember differently in
@@ -561,7 +685,13 @@ old-country parish named in the new one, and the letters that kept both alive.*
   the refresh is per-flow, immediate.
 - **Herald contract:** the remembrance line ("Twenty years gone, Thornwall still
   sets a place for the generation that left for Emberhold"); the lapse line; the
-  kin-pull rush variant ("they went to their cousins in the east").
+  kin-pull rush variant ("they went to their cousins in the east"). **Kinds
+  MINTED: none here** — all three lines are minted by POP-6's list item (c),
+  which names them explicitly so registration has ONE owner; this wave supplies
+  the band crossings they read. [CORRECTED 2026-08-02 (fp-audit): the lapse and
+  kin-pull lines previously had no registration owner anywhere in the corpus]
+- **Endings entries:** `ties_kept` (a decade crossing at a strong band) ·
+  `ties_lapsed` (the crossing to `none`). [CORRECTED 2026-08-02 (fp-audit)]
 - **Pins (negative hardest):**
   - dormancy golden; drop-when-empty (a world with no migration mints NO ledger —
     byte-absent, not empty-present);
@@ -575,13 +705,19 @@ old-country parish named in the new one, and the letters that kept both alive.*
   - the kin-cap negative: a binding kin band NEVER admits an unreachable
     destination or outweighs a crisis-rung push (kin flavor, not teleport —
     J-P3/J-POP-7);
+  - THE SPENT-TIE PIN: a tie feeding columns into a destination whose lived
+    reading disappoints weakens measurably within the letters' travel time —
+    the loop converges through the counterforce, without touching the cap
+    [CORRECTED 2026-08-02 (fp-audit)];
   - the double-count negative: adoption checkpoints fire identically with the
     ledger lit vs dark (memory feeds narration and pull, never traditions);
   - JSON-round-trip + writer/reader spelling pin (boot the real writer, read
     through the real reader — the drift class).
 - **Lifecycle line:** persists in spatialLedgers — serialize/regen/undo with the
   world; a regen that replays flows re-derives identical bands (determinism pin);
-  import validates band + causeClass words; a settlement's terminal death FREEZES
+  import validates band + causeClass + rememberedAs words (all three closed sets,
+  §4) [CORRECTED 2026-08-02 (fp-audit): rememberedAs was enumerated but skipped
+  by the validator line]; a settlement's terminal death FREEZES
   its pairs (a dead town is still mourned — remnants are frozen history, the
   lifecycle law extended to memory); resettlement (name half-returns) re-opens the
   destination end only.
@@ -590,8 +726,8 @@ old-country parish named in the new one, and the letters that kept both alive.*
   Emberhold" / "the ones who left for Thornwall are still spoken of." A DM sees at
   a glance who this town's people ARE and whom they would take in.
 - **Bands:** generational half-life · refresh step per flow class · kin-pull cap ·
-  remembrance floor (the band below which no line mints) · freeze-at-death rule's
-  band retention.
+  spent-tie weakening step [CORRECTED 2026-08-02 (fp-audit)] · remembrance floor
+  (the band below which no line mints) · freeze-at-death rule's band retention.
 
 ### POP-4 — THE PLAGUE ARC (outbreak → burials → aftermath; flag
 `calamityArcEnabled`; settled ruling elaborated: the plague year becomes an ARC —
@@ -664,7 +800,16 @@ the story is the village, not the disease.*
 - **Herald contract:** THE BELLS LINE ("A sickness walked through Emberhold, and
   the bells did not stop for a month") — banded, cause-attributed, honest; the
   held line ("the sickness came to the gates of Thornwall, and the gates held");
-  the first-market-day line. All pacing-registered.
+  the first-market-day line. **Kinds MINTED:** the sickness burial kind (its own
+  kind — riding `hungry_gap`, whose causeClass is literally 'hunger', would
+  violate J-POP-9's attribution honesty) + the held line + the first-market-day
+  line (three kinds; all three §1c walkers same-commit). **Kinds RIDDEN:** the
+  hunger burial line stays the existing deficit-gated kind. SP-6 significance
+  classes referenced; pacing-registered through POP-6's editor seam. [CORRECTED
+  2026-08-02 (fp-audit)]
+- **Endings entries:** `held_at_the_gates` (the counterforce's close) ·
+  `recovered` (the aftermath's close — POP-6 generalizes the word beyond
+  sickness). [CORRECTED 2026-08-02 (fp-audit)]
 - **Pins (negative hardest):**
   - dormancy golden; zero-new-mortality pin (lit vs dark, identical death totals
     on identical seeds — THE defining pin of this wave);
@@ -681,9 +826,14 @@ the story is the village, not the disease.*
   - the named-cast pin: a fixture where the anonymous pool empties proves the
     cast untouched and the shortfall reported (existing machinery, re-pinned
     under arc conditions).
-- **Lifecycle line:** calamityArcs persist (§4) — JSON-round-trip; regen re-derives
-  stage stamps from replayed evidence identically; undo restores; import validates
-  cause + stage words; a settlement dying MID-ARC closes the arc `terminal` via
+- **Lifecycle line:** calamityArcs persist (§4, incl. the ruled retention prune) —
+  JSON-round-trip; regen re-derives stage stamps from replayed evidence
+  identically; undo restores; import validates the cause word + peakBand against
+  their closed sets and the STAMP MONOTONICITY openedTick ≤ crestTick ≤
+  closedTick [CORRECTED 2026-08-02 (fp-audit): the earlier line validated "stage
+  words" — a field the record does not store; stages are DERIVED from the
+  stamps, so the stamps' ordering is the real import invariant]; a settlement
+  dying MID-ARC closes the arc `terminal` via
   the lifecycle's own death (the arc never outlives its town; the chronicle
   carries both).
 - **DOSSIER ROUND-TRIP:** the town page health line — the open arc's stage band in
@@ -712,11 +862,17 @@ robber-baron tolls for the columns that paid instead of died.*
   danger/decay/charter grades; the armyTransit leg physics); events draw on
   per-column keyed forks (`column:<id>` — declared, draw-accounted per the wave-E
   instrument; the ONE new rng surface this program takes, disclosed here).
-- **Counterforce (same evidence):** THE ROAD'S REPUTATION — the same danger
-  evidence re-routes: a harried leg feeds the existing route-reputation/bypass
-  machinery, later columns price the detour, and the toll that grows too greedy
-  starves its own bridge. (The reputation race is pinned substrate — §2 of the
-  war volume.)
+- **Counterforce (same evidence):** THE ROAD'S REPUTATION — belief-side, and NEW
+  WORK. [CORRECTED 2026-08-02 (fp-audit): the earlier draft called this an
+  existing read; migration columns read NO danger — `populationLegCost` prices
+  grade + season only and claims no traveller kind (§2), and the
+  route-reputation/bypass machinery lives entirely in the trade/army lanes.]
+  A harried leg writes the ORIGIN'S believed condition of that road (POP-1's
+  SP-2 family — the same substrate, a road-shaped subject), and later columns
+  re-rank their route CHOICE on belief while the lived leg cost stays
+  grade + season untouched — belief re-routes, physics does not, so J-P3 and the
+  P2 routing goldens stand unshifted. The toll that grows too greedy starves its
+  own bridge through the same believed-condition write.
 - **THE LOST COLUMN (the inference, K.7's idiom at flow grain):** a column whose
   expected arrival window passes with no landing mints the origin-side inference
   AS AN INFERENCE — "a column left Thornwall in the spring; no word has ever
@@ -725,8 +881,11 @@ robber-baron tolls for the columns that paid instead of died.*
   is untouchable); on M4 columns the loss is already real and now told. The
   false-mourning pin: a delayed column arrives after home mourned it.
 - **Belief posture:** the origin knows what returns, what writes, and what the
-  window implies — never the road's truth. Columns carry rumors both ways
-  (substrate built).
+  window implies — never the road's truth. Outbound columns carry rumors on
+  their in-flight legs (substrate built, gated `migrationRumorsEnabled` — §3);
+  homeward carriage rides POP-1's return column, itself an in-flight column on
+  the same ledger. [CORRECTED 2026-08-02 (fp-audit): "both ways" previously
+  leaned on a substrate that carries outbound legs only]
 - **Named actors:** THE COLUMN'S LEADER — read-wired where a circulating NPC's
   route co-locates with the column; otherwise the column is honestly nameless
   ("three hundred souls" — bands, not names). Never minted.
@@ -747,6 +906,16 @@ robber-baron tolls for the columns that paid instead of died.*
   Marrow's Ford, not all reached the eastern hills"); the lost-column line (the
   inference voice); the sheltered line ("the column wintered at Greyhollow, and
   Greyhollow fed them" — a host's generosity receipted, feeding POP-3's memory).
+  **Kinds MINTED:** all three (all three §1c walkers same-commit). **Kinds
+  RIDDEN:** none. SP-6 significance classes referenced (the graves-line floor
+  below is a materiality floor, not a governor class); pacing-registered through
+  POP-6's editor seam. [CORRECTED 2026-08-02 (fp-audit): these three kinds
+  previously reached the Herald with no declared flow control anywhere in the
+  corpus]
+- **Endings entries:** `lost_on_the_road` (M4's told losses; the P2 inference
+  resolves honestly and never mints it) · `sheltered`; en-route `turned_back`
+  closes into POP-1's clearing accounting and its ending word is POP-1's.
+  [CORRECTED 2026-08-02 (fp-audit)]
 - **Pins (negative hardest):**
   - dormancy; conservation EXTENDED AND UNWEAKENED (every event kind closes into
     the existing identity: turned_back → returned, delayed → late arrival, split
@@ -757,6 +926,12 @@ robber-baron tolls for the columns that paid instead of died.*
     minted, then honest resolution both arms (arrived-late; turned-back);
   - the no-new-mortality negative: P2 columns lit vs dark, identical population
     totals on identical seeds;
+  - THE RE-ROUTE PIN (the counterforce's own): a harried road's believed
+    condition darkens and a later column measurably re-ranks its route while
+    populationLegCost's output stays byte-identical — a ROUTE-CHOICE assertion,
+    not a totals assertion (totals can match while routes differ, so the totals
+    pin alone cannot catch a physics leak here) [CORRECTED 2026-08-02
+    (fp-audit)];
   - draw accounting: event forks keyed per column, the wave-E instrument green;
   - the split negative: a split column's two halves never double-count against
     spare at the destination menu.
@@ -773,8 +948,13 @@ robber-baron tolls for the columns that paid instead of died.*
   inference · shelter host-cost · split threshold · graves-line floor.
 
 **POP-5b — THE PERMIT TABLE GOES LIVE (flag `moverPermitsEnabled`).**
+[CORRECTED 2026-08-02 (fp-audit): the audit found this wave the volume's shallow
+spot — six of the template's blocks present, a gate offered as a counterforce,
+and the sixth permit column left dark by the very wave that claims to cure dark
+vocabulary. Re-drafted to the full twelve; the volume's own POP-3 discipline
+(declare-empty with a reason) is used where a block is genuinely empty.]
 - **Law:** the §7b ladder's authored permit table (5 grades × 6 mover kinds,
-  default-false) gains its three dark consumers — the unreachable-vocabulary
+  default-false) gains its FOUR dark consumers — the unreachable-vocabulary
   hazard cured by wiring, not deletion:
   - **levy:** the conscription/mobilization site reads `moverPermitted(grade,
     'levy')` — a failing town cannot be levied (VERIFY-AT-BUILD the exact muster
@@ -788,27 +968,111 @@ robber-baron tolls for the columns that paid instead of died.*
   - **trade:** caravan/route-assignment reads the trade column — VERIFY-AT-BUILD
     the assignment seam; if the trade program (FP-TRADE) rebuilds that seam, this
     consumer lands THERE and this wave only declares it (report, don't duplicate).
+  - **promotion (the fourth dark column — J-POP-17) [CORRECTED 2026-08-02
+    (fp-audit): the earlier draft wired three and left `promotion` authored-false
+    and read nowhere, so the hazard the wave claims to cure survived it]:** the
+    P3 promotion response's availability gate reads the promotion column — today
+    it gates on `no_next_tier`/`no_headroom` only, never the grade, so the
+    table's authored intent (no promotion at failing/evacuating/remnant) is dead
+    vocabulary. J-P4's next-tier-K-headroom test stays SEPARATE evidence,
+    untouched (headroom prices capacity; the permit gates the verb — the levy
+    damper's shape).
   - **destination (J-POP-11, the reconciliation):** the table WINS — failing may
     receive ("that is how it recovers", the table's own authored comment); the
     wired nonviable refusal narrows to the grades the table refuses; the recovery
     in-migration becomes REACHABLE and pinned.
-- **Counterforce:** the table itself is the counterforce surface — every permit
-  refusal is a receipt ("Thornwall could not answer the levy; the town is
-  failing") feeding the caller's next decision off the same grade evidence.
+  - **THE TREATY INPUTS (GRAMMAR's population terms, consumed at last)
+    [CORRECTED 2026-08-02 (fp-audit): GR-3 mints `migration_right` and
+    `settlement_provision` naming this volume their consumer, and this volume
+    never mentioned them — the `non_intervention` tombstone shape]:** the term
+    families are GRAMMAR's catalog — GR-3's list is the ONE canonical list; this
+    volume consumes, never re-authors. A live `migration_right` on the pair
+    joins the destination lane as a FOURTH permit input (a licensed pair's
+    in-road stands open one banded step deeper than the table alone allows —
+    receipted, the depth step banded, §7); a live `settlement_provision` on the
+    pair is consumed at the ONE founding mint (the existing founding consumer,
+    demographicsResponses.js:244, gains the treaty read beside the grade read).
+    GRAMMAR builds first, so the terms exist by POP time; their consumer-less
+    interval is GRAMMAR's declared degraded arm, not this wave's.
+- **Force:** THE CALLER'S DEMAND — the lanes that keep asking: the levy call,
+  the charter, the caravan assignment, the founding plan, the promotion push.
+  Each asks on its own evidence and cadence, and none of them reads the town's
+  standing today. [CORRECTED 2026-08-02 (fp-audit): the block was absent — the
+  wave named an opposition with nothing to oppose]
+- **Counterforce (same evidence):** THE GRADE'S REFUSAL — the derived viability
+  grade scores against the demand off the same settlement state the caller
+  covets, and every refusal is a RECEIPT ("Thornwall could not answer the levy;
+  the town is failing") feeding the caller's next decision. A refusal is an
+  answer, not a wall: the caller retries when the grade recovers, and the
+  recovery is receipted through the same table. [CORRECTED 2026-08-02
+  (fp-audit): the earlier draft offered "the table itself" as the counterforce —
+  a permit gate is a refusal, not a force; spine §1.2 calls that shape a
+  ratchet. The force and its opposition are now both named and score off the
+  same evidence.]
+- **Belief posture (Law One):** permits read the TRUTH grade — a levy is refused
+  on the town's real standing, never on what the caller believed of it; the
+  refusal receipt is itself the caller's correction (the caller's next belief of
+  the town rides the ordinary news machinery, no special read). [CORRECTED
+  2026-08-02 (fp-audit)]
+- **Named actors (req. 4):** none minted, none cast — the permit speaks through
+  the town's standing line and the callers' own receipts; faces belong to the
+  calling lanes (declared empty, the POP-3 discipline). [CORRECTED 2026-08-02
+  (fp-audit)]
+- **Posture/risk (req. 10):** the permit itself consumes none (a table lookup
+  has no appetite — declared empty); the CALLER'S posture colors what a refusal
+  does next (retry, escalate, abandon) at the calling surfaces. Declared
+  coupling, dark until INTERIOR lands: INT-1 names this volume's permit posture a
+  `booksOf(seat)` consumer — when `seatBooksEnabled` lights (INTERIOR builds
+  LAST), the seat's books may color the caller's press-or-yield at those same
+  surfaces, behind BOTH flags, the receipt naming seatBooks; absent-not-zero
+  until then. [CORRECTED 2026-08-02 (fp-audit): INTERIOR's seatBooks consumer
+  declaration was acknowledged by no consuming volume]
+- **Clock (req. 9):** FAST — the permit read is same-tick at each call site (the
+  refusal lands the tick the levy is called). SLOW — the grade itself re-derives
+  on the viability ladder's own cadence, so a town's standing changes on ladder
+  time, never on caller time; both denominated vs INTERVAL_WEEKS, SP-7
+  walker-asserted. [CORRECTED 2026-08-02 (fp-audit): the block was absent — a
+  hard miss given SP-7 is a declared hard predecessor]
+- **Couplings (rows in DESIGN_FP_COUPLINGS.md; CW-0 registry rows land in THIS
+  wave's commit per §5's standing obligation):** POP×WAR — the levy permit
+  (CPL-3 gains the ADDS row; read `moverPermitted`, receiptField the muster
+  receipt — the levy/consent double-bind fixture is the row's proof);
+  POP×INTERIOR — the institution charter gate + the seatBooks posture coupling
+  above (CPL-18); POP×TRADE — the route-assignment gate (CPL-8); POP×GRAMMAR —
+  the migration_right and settlement_provision consumptions (CPL-17's named
+  arms). [CORRECTED 2026-08-02 (fp-audit): this wave carried no Couplings field
+  and its levy gate was a cross-layer read with no CPL row — the exact shape
+  CW-0's inclusion ratchet reds]
+- **Herald contract:** the permit-refusal line ("Thornwall could not answer the
+  levy; the town is failing" — §8). **Kinds MINTED:** one, the permit-refusal
+  kind (all three §1c walkers same-commit; the caller's own receipt names the
+  same refusal, so newspaper and engine cannot disagree). **Kinds RIDDEN:** a
+  standing's recovery is POP-6's recovery line. SP-6 significance class
+  referenced; pacing-registered through POP-6's editor seam. [CORRECTED
+  2026-08-02 (fp-audit)]
+- **Endings entries:** none minted — permit refusals are receipts on the
+  caller's arc, not endings of their own (declared empty; the callers' arc
+  words carry the story). [CORRECTED 2026-08-02 (fp-audit)]
 - **Pins (negative hardest):** every consumed column gets BOTH arms on real
   corpora (permitted fires, refused fires — the reachability discipline; the
-  seeded failing-town fixture is the lower-bound rule's cure); the recovery
-  in-migration pin (a bound-collapsed but populated town receives the migration
-  the table intends — J-POP-11's proof); the levy/consent double-bind fixture
-  (grade-refused AND commons-refused: one muster receipt, two named reasons);
-  dormancy.
-- **Lifecycle line:** no new state — the table is authored, the grades derived;
-  nothing to serialize.
+  seeded failing-town fixture is the lower-bound rule's cure), promotion now
+  included [CORRECTED 2026-08-02 (fp-audit)]; the recovery in-migration pin (a
+  bound-collapsed but populated town receives the migration the table intends —
+  J-POP-11's proof); the levy/consent double-bind fixture (grade-refused AND
+  commons-refused: one muster receipt, two named reasons); the treaty-input
+  reachability pins (a signed migration_right measurably opens the licensed
+  in-road, a signed settlement_provision licenses a founding the grade alone
+  would refuse — each with its negative on an unsigned pair); dormancy.
+- **Lifecycle line:** no new state — the table is authored, the grades derived,
+  and the treaty terms live in the treaty ledger under GRAMMAR's lifecycle laws;
+  nothing of this wave's serializes.
 - **DOSSIER ROUND-TRIP:** the town page's standing line gains the permit sentence
   — "Thornwall is failing: no levy may be raised here, no charter granted, but
   the road in stands open." Glance → sentence → table.
-- **Bands:** none new — the table IS the authored surface; the wave adds
-  consumers, and any table-cell change is an owner tuning signature.
+- **Bands:** the migration_right depth step (how many banded steps deeper a
+  licensed in-road stands open — the one new band, gathered in §7) [CORRECTED
+  2026-08-02 (fp-audit)]; otherwise none new — the table IS the authored
+  surface, and any table-cell change is an owner tuning signature.
 
 ### POP-6 — THE HOPEFUL HALF (arrival, recovery, remembrance — narration to
 parity; rides the flags of the machinery it voices, plus the disclosed-shift lane
@@ -818,18 +1082,24 @@ to the pier of departure.*
 
 - **Law:** this is the DELIBERATE VOCABULARY-MINTING WAVE the survey names
   (closing the 1:4 story gap "is a deliberate minting wave, not a tuning knob").
-  Every new kind pays the full registration cost — WHAT_PHRASES + heraldRouting +
-  pacing registration — eyes open (hazard 1c). Population's endings vocabulary
-  consolidates HERE; its share envelopes land in POP-7.
-- **The mint list (each banded, floored, pacing-registered — newspaper, never
-  census):**
+  Every new kind pays the full registration cost — WHAT_PHRASES + EXPECTED_VOICE
+  + heraldRouting + pacing registration [CORRECTED 2026-08-02 (fp-audit): the
+  earlier list named two of the three walkers; §1c now carries all three] — eyes
+  open (hazard 1c). Population's endings vocabulary consolidates HERE; its share
+  envelopes land in POP-7.
+- **The mint list (each banded, floored, pacing-registered at item h — newspaper,
+  never census):**
   (a) THE ARRIVAL LINE — inflow crossing a floor band: "newcomers pour into
   Emberhold faster than roofs can be raised" — the departure line's missing
   mirror (survey: arrivals surface only as rumor-net events today);
   (b) THE RECOVERY LINE, generalized — POP-4 built the sickness case; here any
   cleared-crisis + resumed-growth window mints it (the war-torn town's first
   good year);
-  (c) THE REMEMBRANCE BEAT — POP-3's decade crossings;
+  (c) THE REMEMBRANCE FAMILY — POP-3's three lines, named so registration has
+  one owner [CORRECTED 2026-08-02 (fp-audit): the earlier item covered only the
+  decade crossing, leaving the lapse and kin-pull lines with no registration
+  owner]: the decade-crossing remembrance line, the lapse line, and the kin-pull
+  rush variant;
   (d) THE DWINDLING LINE (the ghost town's silent middle, survey-confirmed
   PARTIAL): sub-floor departures aggregate over a SEASON WINDOW (13 ticks) and
   the window total crosses the floor — "one by one, the houses of Marrow's Ford
@@ -846,10 +1116,26 @@ to the pier of departure.*
   de-underscore fallback;
   (g) the R-28 honesty repair (headline verb entailed by receipt counts) and the
   R-33 narration-honesty pin — both CHECK-AT-BUILD against the review register's
-  own lane; no-op if landed.
+  own lane; no-op if landed;
+  (h) THE EDITOR'S SEAM (the named registration work item — NEW WORK; every
+  "pacing-registered" claim in POP-1..POP-5 resolves HERE) [CORRECTED 2026-08-02
+  (fp-audit): the earlier draft asserted registration against machinery that
+  cannot see this program — narrativeTempo gates INDEPENDENT ARC BIRTHS at the
+  candidate seam over the DRAMA_CLASS_REGISTRY taxonomy, while demographic
+  Herald entries are minted directly into newsEntries at demographicsKernel.js:
+  402 and never consult it; the lane's only flow control today is HERALD_TUNING's
+  emission floors]: kernel-minted demographic news gains a per-tick,
+  per-settlement significance budget over the SP-6 significance classes (the
+  spine's narration-kit family — this volume assigns kinds to classes, never
+  authors a scale), applied where demographicNewsEntries returns; kinds whose
+  class warrants arc treatment route through the candidate seam instead and say
+  so. Until this item lands, no POP wave's registration claim is true — which is
+  why it is a work item with its own pins and band, not an assertion.
 - **Force/counterforce (req. 12 IS this wave's pair):** depth vs flood — every
-  mint registers with the pacing/significance governor; the counterforce to a
-  fuller newspaper is the editor, and it is law, not taste.
+  mint registers with the pacing/significance machinery; the counterforce to a
+  fuller newspaper is the editor, and it is law, not taste — and the editor is
+  BUILT HERE (item h), because as the tree stands no governor can read
+  kernel-minted Herald news. [CORRECTED 2026-08-02 (fp-audit)]
 - **Belief posture:** narration reads receipts; it never invents. Every line's
   claim is entailed by its source record (the honesty class, wave-wide).
 - **Named actors:** faces cast per the waves that made the news (POP-1..5's
@@ -858,11 +1144,21 @@ to the pier of departure.*
   walker-asserted.
 - **Couplings:** none new — this wave VOICES the others.
 - **Herald contract:** §8 lists the sentences; this wave is the contract.
+- **Endings entries:** `exodus` (the existing departure machinery's mass-flight
+  arc, voiced here) · `dwindled` (item d's season-window close) · `died` (the
+  lifecycle's terminal death, voiced via item f) · `resettled` (the lifecycle's
+  resettlement, voiced via item f). [CORRECTED 2026-08-02 (fp-audit)]
 - **Pins (negative hardest):** every new kind fires on a real fixture AND its
   negative (below-floor silence pinned — the vacuous-absence discipline inverted:
   seed a near-floor state and prove silence); the dwindling line's window
   arithmetic exact (no double-count across windows); totality walkers green (the
-  registration cost paid in full); R-28-class honesty pins on EVERY headline verb;
+  registration cost paid in full — the walker commit asserts the program's FULL
+  kind roster per §1c); THE FLOOD PIN (the editor's own): a maximally-lit
+  fixture — every POP flag on, every line eligible in one settlement in one tick
+  — proves the significance budget BINDS (the printed set is the budgeted set,
+  receipted), with its negative: a quiet world's single major line always prints
+  (the editor throttles flood, never starves causality) [CORRECTED 2026-08-02
+  (fp-audit)]; R-28-class honesty pins on EVERY headline verb;
   dormancy per underlying flag (a dark machine mints no news — trivially true and
   still pinned).
 - **Lifecycle line:** no new state (the season window derives from populationHistory's
@@ -872,20 +1168,30 @@ to the pier of departure.*
   the story — a DM watching a town recover SEES it recover. The Realm Inspector's
   newspaper architecture (built) is the surface; no new panel.
 - **Bands:** arrival floor · recovery window · remembrance floor · season-window
-  trickle floor · plan-voice materiality band.
+  trickle floor · plan-voice materiality band · the editor's per-settlement
+  significance budget (the flood cap) [CORRECTED 2026-08-02 (fp-audit)].
 
 ### POP-7 — CONVERGENCE INSTRUMENTATION (no flag — measurement, envelopes,
 certification; the war volume's WR-9 discipline applied)
 *Historical archetype: the Domesday Book — the realm finally counted, so the
 stories can be audited.*
 
-- **The population endings mix** — the endings vocabulary consolidated from every
-  wave, each with a SHARE ENVELOPE (req. 11): {absorbed, exodus, rush, bust,
-  turned_back, lost_on_the_road, sheltered, refusal_stood, riot_spent,
-  petition_answered, ties_kept, ties_lapsed, homecoming, passed_over,
-  burned_through, held_at_the_gates, recovered, dwindled, died, resettled}.
-  One path carrying nearly all endings means the others are decoration (L's
-  criterion, applied to people).
+- **The population endings mix** — the endings vocabulary consolidated from the
+  waves' own Endings entries fields (DERIVABLE now, not asserted), each token
+  with a SHARE ENVELOPE (req. 11): {rush, bust, turned_back, homecoming} (POP-1)
+  · {petition_answered, refusal_stood, riot_spent} (POP-2) · {ties_kept,
+  ties_lapsed} (POP-3) · {held_at_the_gates, recovered} (POP-4) ·
+  {lost_on_the_road, sheltered} (POP-5a) · {exodus, dwindled, died, resettled}
+  (POP-6, voicing existing machinery) — seventeen tokens, every one with a named
+  producer. [CORRECTED 2026-08-02 (fp-audit): the earlier 20-token list carried
+  ~11 tokens that occurred exactly once in this file — the `non_intervention`
+  tombstone class at scale — and this was the only volume with no per-wave
+  Endings field. CUT per J-POP-18: `absorbed` (a plan-refusal token,
+  RESPONSE_REFUSALS' word — it lives in the plan vocabulary POP-6(e) voices,
+  not in population endings), `passed_over`, `burned_through` (no producer
+  anywhere; they return if and when a wave mints them).] One path carrying
+  nearly all endings means the others are decoration (L's criterion, applied to
+  people).
 - **The health metrics (each an envelope, each with a mutant negative control per
   the house discipline):**
   - rush:bust ratio in band (a rush that never busts = the belief arm is
@@ -905,7 +1211,10 @@ stories can be audited.*
   dispositive stateKeys channels — `spatialLedgers.departureMemory`,
   `spatialLedgers.calamityArcs`, the commons ledger's rung field, column event
   arrays — turning the estate's most self-denying row family (§2) into an
-  observable one; v5 fields: rush census, commons census, arc census joining the
+  observable one; the `commonsArcEnabled` row declares stateKeys channels ONLY
+  (§1c's wizard-news skew prohibition — its beat ids are `wizard_news.*`-shaped
+  and would classify moverFamily `knowledge`) [CORRECTED 2026-08-02 (fp-audit)];
+  v5 fields: rush census, commons census, arc census joining the
   existing realm demography instrument (null-on-dark preserved).
 - **Lifecycle line:** no persisted world state — envelopes, rows, receipt fields.
 - **This wave is the acceptance harness: the program is DONE when these envelopes
@@ -920,10 +1229,16 @@ stories can be audited.*
   pullScoreOf weighted and capped; truth arms keep majority weight by band. Belief
   can START a rush; only truth can SUSTAIN one. VETO substitutes belief for the
   whole reading.
-- **J-POP-2 (the wall is discovered at the wall):** menu admission and attraction
-  resolve belief-side lit; LANDING clears against truth through the existing
-  returned/refusal arms. VETO adds an origin-side omniscient spare read (which
-  would quietly make the bust impossible again).
+- **J-POP-2 (the wall is discovered at the wall) [CORRECTED 2026-08-02
+  (fp-audit): re-drafted to the re-ruled §3 seam — the earlier text
+  belief-resolved admission and called the landing arms existing]:** only the
+  ATTRACTION AXES resolve belief-side lit; menu admission, the spare/inbound
+  read, capacity, and viability stay TRUTH (the over-send guard is physics);
+  LANDING gains THE ARRIVAL CLEARING (new work, J-POP-15) so capacity that moved
+  while the column walked is discovered at the wall. VETO in either direction:
+  belief-resolving the spare read (deletes the built multi-origin over-send
+  guard), or granting origins a forward-looking read of landing-tick capacity
+  (quietly makes the bust impossible again).
 - **J-POP-3 (the rush kills nobody):** bust and turn-back resolve through
   delay/return, never mortality. VETO prices rush deaths (owner-only).
 - **J-POP-4 (refusal is a rung, priced):** the commons refusal sits between
@@ -966,21 +1281,66 @@ stories can be audited.*
   clothes, its counterforce unpriced. Recorded as an OPEN OWNER QUESTION, not a
   deferral by silence. VETO in either direction: build it with a priced
   counterforce, or strike the question.
+- **J-POP-15 (the wall's word is new, and the road home is real) [CORRECTED
+  2026-08-02 (fp-audit) — resolves the audit's blocking re-ruling per the
+  chair's substrate-truth ruling]:** the turn-back bust is NEW landing-side work
+  (THE ARRIVAL CLEARING) — never "the existing arm"; the tree lands every column
+  unconditionally and `no_capacity` is a pre-departure word. The clearing's
+  closed landing-refusal word is `refused_at_the_wall`, and the turn-back mints
+  a REAL return column on the existing ledger (inTransit homeward, `returned`
+  stamped at the home landing), so §8's "the road home was longer than the road
+  out" is receipt-derivable. VETO restores the same-tick shift — and strikes the
+  returning-column sentence and the `homecoming` ending with it, because a
+  same-tick shift has no road home.
+- **J-POP-16 (the skip is a jump; misrule gets an answering verb) [CORRECTED
+  2026-08-02 (fp-audit)]:** with no live target the ladder jumps gathering→riot
+  as ONE two-step escalation after one dwell (LEGIT_DIP five slots), pinned
+  time-to-riot-unchanged; and the seat gains ONE receipted misrule-answering
+  verb so the majority-weight grievance mass (legitimacy + unrest) has a
+  counterforce beyond the corruption-matched assize. VETO the jump ⇒ accept
+  slower riots on every skip and disclose the same-seed shift; VETO the verb ⇒
+  declare the misrule arm's counterforce to be passive decay and pin THAT as the
+  reversal instead.
+- **J-POP-17 (promotion is the fourth wired column) [CORRECTED 2026-08-02
+  (fp-audit)]:** the P3 promotion response's availability gate reads the permit
+  table under `moverPermitsEnabled`; J-P4's headroom test stays separate
+  evidence (headroom prices capacity, the permit gates the verb). VETO rules the
+  column deliberately dark with the J-P4-subsumption rationale recorded — either
+  way the sixth column's status is authored, never silent.
+- **J-POP-18 (endings are producer-mapped; three tokens cut) [CORRECTED
+  2026-08-02 (fp-audit)]:** the POP-7 mix derives from the waves' Endings
+  entries fields; `absorbed` (a plan-refusal word, not a population ending),
+  `passed_over`, and `burned_through` are CUT — an ending with no producer is
+  the `non_intervention` tombstone. VETO restores a token only by naming its
+  minting wave in the same stroke.
 
 ---
 
 ## §7 THE TUNING SURFACE (owner-signed at the soak, per THE PROMISE)
 
-Every band named in §5, gathered: POP-1 belief-arm cap · disappointment gap ·
-letter step · rush threshold · forgetting half-life · POP-2 refusal threshold ·
-press-through surcharge · levy shortfall · decay tail · POP-3 generational
-half-life · refresh steps · kin cap · remembrance floor · POP-4 arc thresholds ·
+Every band named in §5, gathered — reconciled line-by-line against the waves'
+Bands fields [CORRECTED 2026-08-02 (fp-audit): five named bands had silently
+dropped from this table (posture margin coloring, answered-petition drain,
+freeze-at-death retention, shelter host-cost, split threshold) and the POP-4
+rollup hid three more behind one phrase — a hand-maintained ledger drift, now
+reconciled both directions]: POP-1 belief-arm cap · disappointment gap ·
+letter step · rush threshold · posture margin coloring · forgetting half-life ·
+POP-2 refusal threshold · press-through surcharge · levy shortfall · decay tail ·
+answered-petition drain (either answering arm — the misrule verb's repair step
+is this band's second face) · POP-3 generational half-life · refresh steps ·
+kin cap · spent-tie weakening step · remembrance floor · freeze-at-death band
+retention · POP-4 arc-open threshold · crest band · aftermath window ·
 attribution mix band · bells floor · **the disease_pressure 0.5 floor (carried
 with its 193-year zero-fire soak fact — the owner decides whether the counterforce
-should ever lose)** · POP-5 event weights · window slack · graves floor · POP-6
-arrival/recovery/remembrance/trickle floors · plan materiality · POP-7 envelope
-shapes incl. the parity band and the rush-horizon band. Every one banded, none a
-bare float on a surface, all in one tuning table per wave (the house idiom). Band
+should ever lose)** · POP-5 event weights · window slack · shelter host-cost ·
+split threshold · graves floor · POP-5b migration-right depth step · POP-6
+arrival/recovery/remembrance/trickle floors · plan materiality · the editor's
+per-settlement significance budget · POP-7 envelope shapes incl. the parity band
+and the rush-horizon band. Every one banded, none a bare float on a surface, all
+in one tuning table per wave (the house idiom). SIGNIFICANCE is not tuned here
+[CORRECTED 2026-08-02 (fp-audit)]: significance classes are the spine's SP-6
+narration-kit family — this volume assigns kinds to classes; the family's scale
+is authored and owner-signed ONCE at the spine, never minted per-volume. Band
 FAMILIES shared with the spine keep the signature surface tractable (spine §5's
 priced cost, acknowledged).
 

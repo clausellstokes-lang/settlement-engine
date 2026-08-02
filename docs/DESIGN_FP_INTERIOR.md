@@ -291,8 +291,8 @@ organizing grievance holders are blocs); `seatBooksEnabled` before
 `memoryHorizonSeamEnabled` before `deliberateForgivenessEnabled` (dig-up pricing
 reads wound age through the seam-corrected clock); `warTerminationEnabled` +
 `warDispositionEnabled` + `economicCoupReadEnabled` before `strainAttributionEnabled`
-is MEANINGFUL (it is VALID dark-predecessor config — the attribution receipts simply
-have fewer feeding strains to name; the degraded arm is explicit, per the war
+is MEANINGFUL (it is VALID dark-predecessor config — the pressure receipts simply
+have fewer co-present burdens to name; the degraded arm is explicit, per the war
 volume's flag-dependency ruling shape). A flag lit out of order beyond these
 declared degradations is an invalid config the INT-7 certification walker reds.
 
@@ -302,9 +302,27 @@ volume rules WHERE IT LIVES: a pure read-side module **`seatBooks.js`** — no s
 no writer, the dispositionProfile shape (war volume WR-2) — exporting
 `booksOf(settlementId, worldState)` → `{ settlementPosition, rulerPosition,
 weight01, receipt }`. WR-1/WR-4/WR-5's war reads consume it under
-`warTerminationEnabled`; SP-3's pact acceptance, WR-10's asset sale, TRADE's venture
-appetite, FAITH's stance choices, and POP's permit posture consume it under
-`seatBooksEnabled` + their own flags. A SECOND books evaluator anywhere is a design
+`warTerminationEnabled`; SP-3's pact acceptance and WR-10's asset sale consume it
+under `seatBooksEnabled` + their own flags. [CORRECTED 2026-08-02 (fp-audit)] THE
+CONSUMER LIST IS SPLIT HONESTLY: the war arm and SP-3 are the two consumers with a
+STATED SEAM. TRADE's venture appetite, FAITH's stance choices, and POP's permit
+posture are DECLARED DEFERRALS (a decision, not an omission — the corpus audit
+confirmed none of the three volumes reserves the read: GR-2 reads
+postureOf/riskToleranceOf only, TR-7 consumes house appetite only, WF-3 consumes
+riskToleranceOf(temple) only, POP-5b reads viability grade only). Each deferral
+LIFTS when the consuming volume reserves the seam in its own wave spec — one line
+naming `booksOf` behind `seatBooksEnabled` AND its own flag, with the receipt
+clause ("names seatBooks in its own receipt") included — and the corresponding
+CPL row records the wiring. [CORRECTED 2026-08-02 (fp-audit), cohesion pass:
+TWO of the three deferrals have since LIFTED exactly as this rule requires —
+TRADE reserved the seam at TR-7 (venture appetite coloured by `booksOf` behind
+`seatBooksEnabled` AND `venturesEnabled`, receipt naming seatBooks,
+absent-not-zero) and POP reserved it at POP-5b's posture block (the caller's
+press-or-yield behind both flags, same receipt clause). FAITH's stance choices
+remain the ONE open deferral — WF-3 still consumes `riskToleranceOf(temple)`
+only, and no FAITH wave reserves the read.] Until a volume reserves its seam,
+no interior wave, and no implementer,
+treats the deferred read as built. A SECOND books evaluator anywhere is a design
 defect — exactly the war volume's terms-evaluator law, applied to the seat.
 Composition is fixed: the WEIGHT derives from the ruler's security/legitimacy/
 facets/alignment (amendment B, WR-5's derivation verbatim); the RULER-POSITION term
@@ -346,9 +364,17 @@ decision grievances                          — INT-3: NO NEW LEDGER. A typed e
 worldState.spatialLedgers.burials            — INT-6, writer burialLedger.js (ONE
   [ { id, pairKey,                           // writer; release/dig-up/expiry all
       woundFamily,                           // close through it). woundFamily is a
-      decreedTick, decreedBy,                // CLOSED vocab over the existing
-      price: { receiptId },                  // typed-wound families (§INT-6) — never
-      state } ]                              // a free string. state: held | dug_up
+      decreedTick, decreedBy,                // CLOSED vocab AUTHORED IN §INT-6 —
+      price: { receiptId },                  // seven families partitioning the
+      state } ]                              // tree's open WOUND_TYPE_RE; the
+                                             // regex is REPLACED by INT-6's typed
+                                             // classifier (no "existing typed
+                                             // families" exist in the tree — the
+                                             // audit confirmed the only typing is
+                                             // an open substring regex,
+                                             // grievanceRead.js:48) [CORRECTED
+                                             // 2026-08-02 (fp-audit)]. Never a
+                                             // free string. state: held | dug_up
                                              // | lapsed. Suppression is a READ over
                                              // this ledger (grievanceRead-side);
                                              // no incident row is ever deleted.
@@ -383,8 +409,11 @@ legitimacy crossings                         — INT-7: receipts only (SP-5's gr
 stressors remain the shape — §2 row 9); no "court opinion" stock (blocs + books ARE
 the court's opinion, derived); no dynasty graph (§2 row 17's law stands); no stored
 books/positions (pure reads, receipts only); no second legitimacy writer; no
-tribute→legitimacy write (J-INT-3); no new relationship vocabulary anywhere (the
-burial's woundFamily reuses the existing typed-wound families; postures stay 18).
+tribute→legitimacy write (J-INT-3); no new relationship vocabulary EXCEPT the one
+this volume must author [CORRECTED 2026-08-02 (fp-audit)]: woundFamily — the tree
+has NO closed typed-wound families to reuse (only the open WOUND_TYPE_RE regex);
+INT-6 authors the seven-family enum and the classifier that replaces the regex,
+and postures stay 18.
 
 ---
 
@@ -422,16 +451,40 @@ spine's own formula), so this module feeds posture and must never CONSUME
   existing planes — facets (npcLedgerFacets), temperament (W0/momentum's trait
   table), goals/rivalries where the ladder holds them. Casting is read-wiring; no
   new NPC state.
-- **Receipts (house voice):** every books read emits ONE receipt naming both
+- **Receipts (house voice):** every books read derives ONE receipt naming both
   positions' bands, the weight band, and WHICH BOOK WON — "the Margrave's counsel
   weighed her seat above the town, and the war went on." Bound-Book register floor;
-  band words only (finite semantics).
+  band words only (finite semantics). [CORRECTED 2026-08-02 (fp-audit)] EMISSION IS
+  CHANGE-GATED, NEVER PER-PULSE: the books-standing receipt EMITS only on a
+  weight-band or winning-book CHANGE — the agreement deadband (Bands below) is the
+  gate; it exists to stop oscillating receipts and it stops chronic ones too. The
+  books-standing class is pacing-registered at the LOWEST class (SP-6 significance
+  family — J-INT-11 names this class distinctly from INT-2's counsel beats), and
+  INT-8's pool inventory carries it, so §9's two INT-1 sentences have a pool that
+  can print them.
 - **Consumers (the generalization — each behind ITS program's flag AND
-  `seatBooksEnabled`):** WR-1's termination read (via WR-5 — war volume law); SP-3
-  pact accept/refuse (GRAMMAR); WR-10's sell-the-family-silver divergence (the war
-  volume already names it — this read is how); TRADE venture appetite; FAITH stance
-  choices; POP permit posture. Each consumer names seatBooks in its own receipt
-  ("whose books the refusal served" — WR-5's G2 sentence, now speakable everywhere).
+  `seatBooksEnabled`):** STATED-SEAM TODAY [CORRECTED 2026-08-02 (fp-audit)]:
+  WR-1's termination read (via WR-5 — war volume law); SP-3 pact accept/refuse
+  (GRAMMAR); WR-10's sell-the-family-silver divergence (the war volume already
+  names it — this read is how). RESERVED SEAMS (deferrals lifted per §3's rule
+  [CORRECTED 2026-08-02 (fp-audit), cohesion pass]): TRADE venture appetite
+  (TR-7's posture block — both flags, receipt clause, absent-not-zero) and POP
+  permit posture (POP-5b's posture block, same form) — reserved in spec, dark
+  until both flags light. DECLARED DEFERRAL (§3's seam ruling records why):
+  FAITH stance choices — lifts when a FAITH wave reserves the seam in its own
+  spec; until then that read is NOT built and no receipt claims it. Each live
+  consumer names seatBooks in
+  its own receipt ("whose books the refusal served" — WR-5's G2 sentence, speakable
+  wherever the seam is actually reserved).
+- **THE POSTURE-WIDE DISCLOSED SHIFT [CORRECTED 2026-08-02 (fp-audit)]:** spine
+  SP-4b's posture formula names the ruler's books as an input, and this module —
+  built LAST of the six programs — is that input. Until `seatBooksEnabled` lights,
+  SP-4b composes state × disposition channels only: the books term is ABSENT, not
+  zero (the spine owns the degraded-arm sentence; if SP-4 lacks it at build time,
+  STOP-and-report). Lighting `seatBooksEnabled` therefore moves EVERY postureOf
+  consumer in five programs at once — a disclosed shift adjudicated with the
+  lighting batch, golden'd with-and-without the books term, and named in the
+  owner's lighting queue entry.
 - **Pins (negative hardest):** the CONVERGENCE negative — a secure, endorsed,
   aligned seat produces books that AGREE, and the receipt says so ("seat and town of
   one mind") — divergence must be earned by state, never ambient; both WR-5
@@ -454,7 +507,8 @@ spine's own formula), so this module feeds posture and must never CONSUME
 - **Bands:** weight-derivation bands (security/legitimacy/facet contributions), the
   agreement deadband (books within it read as "of one mind" — no oscillating
   receipts), per-consumer color caps (a book COLOURS a verb's bar, never drowns it —
-  E3's law generalized).
+  E3's law generalized), the books-standing class assignment (SP-6's significance
+  family — lowest class [CORRECTED 2026-08-02 (fp-audit)]).
 - **Endings vocabulary:** none of its own (a read); its receipts feed INT-3's and
   INT-8's endings.
 - **Couplings:** §6 rows 1, 3, 5, 7, 9 — the books read is the interior's largest
@@ -508,11 +562,20 @@ the faction record's existing writer (INT-3 consumes it).
   record (dedup pinned); the survival-bloc dissolution (siege lifts ⇒ bloc gone ⇒
   its counsel stops — state-derived decay honesty); JSON-round-trip on bloc
   member/NPC aliasing (§1c); dormancy golden (the flag is live-composed — pin BOTH
-  compositions dark).
-- **THE DOSSIER ROUND-TRIP PIN:** the town page's faction cards each gain a
-  FOREIGN-COUNSEL line in band words — "The Salt Ring: counsels peace with Ashford;
-  weight in the hall: rising." Open the town, find the bloc, read its position;
-  the pin walks card → latest counsel receipt → the bloc record that produced it.
+  compositions dark); the PRESET NEGATIVE [CORRECTED 2026-08-02 (fp-audit)] —
+  under `quiet_local` (`factionCompetitionEnabled: false`, simulationRules.js:306)
+  with `settlementPoliticsEnabled` lit, NO blocs form, zero counsel receipts, and
+  INT-3's bloc-held grievance lane stays empty, while the re-read, the
+  installed-successor demand, and the émigré still function (§3's declared
+  degraded arm, pinned — the dormancy golden covers only the two dark
+  compositions and cannot catch this).
+- **THE DOSSIER ROUND-TRIP PIN [CORRECTED 2026-08-02 (fp-audit): the surveys
+  gathered zero UI evidence — exact panel VERIFY-AT-BUILD, in INT-1's words;
+  fallback landing = the town page's faction-card family]:** the town page's
+  faction cards each gain a FOREIGN-COUNSEL line in band words — "The Salt Ring:
+  counsels peace with Ashford; weight in the hall: rising." Open the town, find
+  the bloc, read its position; the pin walks card → latest counsel receipt → the
+  bloc record that produced it.
 - **Clock:** blocs re-read per pulse over MIN_DWELL 8 ticks (existing); counsel
   receipts fire on verb events, not per pulse. Fast: the counsel line. Slow: the
   bloc's patience — a counsel overridden repeatedly matures into INT-3's grievance
@@ -523,8 +586,13 @@ the faction record's existing writer (INT-3 consumes it).
   wider divergence before counsel becomes grievance; out-of-posture overrides price
   higher in INT-3.
 - **Bands:** per-verb loading tables, counsel-margin band, patience band (overrides
-  to grievance), counsel-significance registration.
-- **Endings vocabulary:** counsel {heeded, overridden} — consumed by INT-3's endings.
+  to grievance), counsel-significance CLASS ASSIGNMENT — into SP-6's significance
+  family; this volume assigns classes, never mints a scale [CORRECTED 2026-08-02
+  (fp-audit): the corpus audit found a dozen per-volume significance scales
+  feeding one governor — the family is the spine's].
+- **Endings vocabulary:** counsel {heeded, overridden} — consumed by INT-3's
+  endings; share envelope (override floor AND ceiling) authored in INT-7
+  [CORRECTED 2026-08-02 (fp-audit)].
 - **Couplings:** §6 rows 1, 4, 5, 7 — the bloc grammar is how every substance's
   stakes enter the hall; DESIGN_FP_COUPLINGS.md walks the per-substance loadings.
 
@@ -598,14 +666,46 @@ the faction record's existing writer (INT-3 consumes it).
   successor repudiates under one character, REAFFIRMS under another — the
   reaffirmation is a receipt too: "the son kept the father's word"); unreachable-
   conjunction reachability on the grievance gate; dormancy.
-- **THE DOSSIER ROUND-TRIP PIN:** the town page's power-transfer history (the
-  previousGovernments surface family) shows the organizing decision on each verdict
-  row — "Year 34: the seat fell; the peace of Ashford is named in the verdict."
-  Open the town, read WHY the seat fell, walk to the decision's own receipt.
+- **THE DOSSIER ROUND-TRIP PIN:** the town page's power-transfer history — the
+  previousGovernments surface, VERIFIED IN THE TREE [CORRECTED 2026-08-02
+  (fp-audit)]: it renders at src/components/dossier/EngineSections.jsx:225 and
+  src/pdf/sections/PowerStructure.jsx:291 — shows the organizing decision on each
+  verdict row: "Year 34: the seat fell; the peace of Ashford is named in the
+  verdict." Open the town, read WHY the seat fell, walk to the decision's own
+  receipt.
+- **Clock [CORRECTED 2026-08-02 (fp-audit) — the wave's missing bullet; every
+  sibling declares one]:** the RE-READ is event-driven — it evaluates ON the
+  power-change event's own tick (the transfer that installs the successor), never
+  on a polling cadence; the JOIN MARGIN evaluates at verdict time (the coup/capture
+  verdict's tick, reading the live decision-grievance entries at that instant);
+  the `decision` pressureKind composes into coup pressure per pulse, like its
+  legitimacy sibling; a decision-grievance entry lives while its producing bloc
+  lives AND its decision's object stands, then dies on a BANDED TAIL — the tail is
+  INT-2's patience band read in reverse, denominated in INTERVAL_WEEKS under SP-7's
+  assertion. Fast layer: the counsel-override and join receipts. Slow verdict: the
+  seat's fate, and the installed successor's honour-or-betray choice seasons later.
+- **Posture consumption (SP-4) [CORRECTED 2026-08-02 (fp-audit) — discharged
+  inside the wave that owns the decision surface, not by reference from INT-2]:**
+  an OUT-OF-POSTURE override prices higher — the decision-grievance entry's
+  magnitude band reads `postureOf` at write time (a martial town's overridden war
+  counsel wounds deeper than a weary one's), and the join margin consumes the same
+  read at verdict time. Priced and receipted, never forbidden.
 
-**INT-3b — THE ÉMIGRÉ (the ambitious ride SP-1 — the spine's assigned interior
-errand consumer; historical archetype: the Jacobite court in exile — the defeated
-claimant whose hosting is itself a foreign-policy act).**
+**INT-3b — THE ÉMIGRÉ (SP-1's assigned interior errand consumer; historical
+archetype: the Jacobite court in exile — the defeated claimant whose hosting is
+itself a foreign-policy act).**
+- **Scope — A DECLARED NARROWING [CORRECTED 2026-08-02 (fp-audit)]:** spine SP-1
+  names INTERIOR's errand consumer "the ambitious"; this wave mints ONLY the
+  DEFEATED — every trigger below is a contest loss the estate already records.
+  The ambitious-but-undefeated traveller (the second son seeking service abroad,
+  the rising contender shopping for a patron BEFORE risking the challenge) is
+  DEFERRED, not forgotten (§2's verified-absent register carries the entry):
+  rationale — the defeated mint rides receipted contest events that exist today,
+  while the ambitious mint needs a rising-goal departure trigger no event yet
+  produces; J-INT-12's law (the vocabulary never leads the events) applies to
+  errand mints exactly as to decisions. The arm returns when its producer exists —
+  and it is the sharper covert/revealed case (declared-diplomatic / true-personal),
+  so the deferral is recorded where the spine's reader will look, never silent.
 - **Mechanism:** on a contest loss the estate already records (failed coup
   contender, failed ladder challenger dropping a rung, ousted seat-holder), a
   banded, seeded share (keyed `emigre:<npcId>` — §1c stream discipline) of NAMED
@@ -640,17 +740,31 @@ claimant whose hosting is itself a foreign-policy act).**
   path closes through SP-1's writer; a DM KILL mid-errand closes `lost` and the
   host's motive dies with it); the sold-back double receipt (both courts' news name
   the price); the stale-snapshot intervention (the false-hope arc receipted);
-  JSON-alias round-trip (the émigré IS a roster object); dormancy.
-- **THE DOSSIER ROUND-TRIP PIN:** the guest appears on the HOST town's notable-souls
-  surface with the guest mark ("Corin of Thornwall, in exile at this court"); the
-  HOME town's faction card shows the absence ("its captain fled east, year 31").
-  Both walk to the errand record.
+  JSON-alias round-trip (the émigré IS a roster object); the LIFECYCLE TRIAD
+  [CORRECTED 2026-08-02 (fp-audit)] — J-INT-15's projection ruling pinned per
+  path: REGEN (an errand whose NPC no longer exists after regen closes `lost`,
+  never dangles), UNDO (both towns' projections revert with the errand record —
+  the record is the only state there is), IMPORT (an errand referencing an
+  unimported host settlement drops to absent, never a dangling read); dormancy.
+- **THE DOSSIER ROUND-TRIP PIN [CORRECTED 2026-08-02 (fp-audit) — the surveyed
+  tree has NO "notable-souls" surface (the nearest is the NotableNPCs ORDERING,
+  src/components/session/SessionMode.jsx:22); and per J-INT-15 the home page
+  shows an AWAY-MARK, never an absence]:** the guest projection on the HOST
+  town's roster/NPC surface is NEW UI WORK OWNED BY THIS WAVE (exact panel
+  VERIFY-AT-BUILD; the fallback landing is the settlement NPC-listing family the
+  dossier already renders) — "Corin of Thornwall, in exile at this court"; the
+  HOME town's faction card renders the away-mark — "its captain rides east, year
+  31" — the exile still ON its roster (J-INT-15: pure projections over the SP-1
+  errand record, both ends). Both marks walk to the errand record.
 - **Clock:** departure share per contest event; patience band in weeks
   (INTERVAL_WEEKS-denominated); travel on SP-1's kernel. Fast: the flight beat.
   Slow: the return/fade/reconcile verdict seasons later.
 - **Bands (INT-3 family):** grievance patience band, decision-load margin, join
   margin, re-read repudiation band, émigré departure share, émigré patience band,
-  host-decision loadings, harboring-grievance magnitude.
+  émigré cap (one live errand per settlement pair — named here so §8's ledger row
+  has its §5 anchor [CORRECTED 2026-08-02 (fp-audit): the tuning audit caught the
+  cap living only inside the pin list]), host-decision loadings,
+  harboring-grievance magnitude.
 - **Endings vocabulary (INT-3 family):** {held, overturned_war_party,
   overturned_peace_party, demand_honoured, demand_betrayed, repudiated_by_heir,
   reaffirmed_by_heir, exile_returned, exile_faded, exile_reconciled} — share
@@ -671,14 +785,31 @@ READS + receipts + one commons-voice grievance TERM.
   (`economicCoupReadEnabled`) alongside the legitimacy pressure lane; adding a
   parallel write would double-count the same grain (the ratchet lesson). The cure
   is ATTRIBUTION, not amplification.
-- **THE ATTRIBUTED PRESSURE RECEIPT:** when coup pressure crosses birth (0.6, per
-  stressorsCore), the pressure receipt names its top feeding strains from the
-  states the pressure model already read — {tribute_strain, war_exhaustion, famine,
-  occupation, corruption} (closed vocab, banded contributions): "the seat weakens
-  under the tribute of Ashford and a war grown long." When the verdict later lands,
-  INT-3's join receipt completes the chain — "he paid, and it cost him the seat"
-  becomes two receipts a reader walks, or one Herald sentence where the pacing
-  governor grants it the column-inches.
+- **THE ATTRIBUTED PRESSURE RECEIPT — CO-PRESENCE, NOT DECOMPOSITION [CORRECTED
+  2026-08-02 (fp-audit), chair ruling R7 — respecced against the tree]:** the
+  coup's birth pressure is ONE-STRAIN BY CONSTRUCTION — `coup_detat` declares
+  pressureKinds `['legitimacy']` only (stressorsCore.js:239-240); tribute
+  (`vassal_extraction`) classifies into TRADE_ARCHETYPES and feeds the ECONOMY
+  kind the coup never consumes, and war_exhaustion/famine/occupation are absent
+  from LEGITIMACY_ARCHETYPES entirely (pressureModel.js:34-41). The legitimacy
+  stock is a bare persisted integer with no per-hit provenance (§2 row 1), and
+  §4 adds none. So the receipt DOES NOT claim causal shares it cannot compute.
+  When coup pressure crosses birth (0.6), the receipt reads LIVE STATE at the
+  crossing — the outstanding treaty installment stream, the exhaustion scar,
+  active famine/occupation conditions, the corruption plane — and names them as
+  CO-PRESENT BURDENS: {tribute_strain, war_exhaustion, famine, occupation,
+  corruption} (closed vocab, banded presence, band words only): "the seat
+  weakens, and these burdens stand — the tribute of Ashford, a war grown long."
+  The ONE causal clause the substrate supports is stated when true: a matched
+  LEGITIMACY_ARCHETYPES condition (the flat +0.16 term, pressureModel.js:294-301)
+  is named AS cause — corruption_exposed is the only §5 burden in that set. The
+  co-presence read is NEW WORK carrying its own pins (below). Settled ruling 3's
+  narrated middle is discharged by the PAIR of receipts — the crossing receipt
+  names the burdens, and when the verdict later lands, INT-3's join receipt names
+  the decision: "he paid, and it cost him the seat" becomes two receipts a reader
+  walks, or one Herald sentence where the pacing governor grants it the
+  column-inches. Causality lives in the JOIN, where it is real; the crossing
+  speaks only what the state can prove.
 - **THE COMMONS TRIBUTE TERM:** commonsVoiceKernel's grievance composite (today:
   legitimacy/corruption — §2 row 9) gains a TREATY-BURDEN term reading live
   outbound-stream state (the treaty's own compliance records — the payer's book of
@@ -707,9 +838,14 @@ READS + receipts + one commons-voice grievance TERM.
 - **Named-actor casting:** the paying seat's holder is named in the attribution
   receipts through the existing power-structure read; their facets color INT-8's
   pool variants ("the proud Margrave paid in silence").
-- **Pins (negative hardest):** the ATTRIBUTION NEGATIVE (hardest) — a coup born of
-  pure legitimacy collapse with NO tribute outstanding names no tribute (no
-  confabulated causality; seed both states); the dividend pin — same tribute, two
+- **Pins (negative hardest):** the CO-PRESENCE NEGATIVE (hardest) [CORRECTED
+  2026-08-02 (fp-audit) — with the live-state respec this pin is no longer
+  vacuous]: a coup born of pure legitimacy collapse with NO tribute outstanding
+  names no tribute, AND its positive control — the same crossing WITH a live
+  installment stream names it (the pair proves the receipt reads real state, not
+  a hardcoded list; seed both states); the CAUSAL-CLAUSE negative — no burden
+  outside a matched LEGITIMACY_ARCHETYPES condition is ever worded as cause
+  (co-present burdens keep co-presence wording); the dividend pin — same tribute, two
   believed-war-severities ⇒ the term lands at two banded magnitudes, both receipted;
   the rally margin negative — a hold where the war's contribution is sub-margin
   keeps the generic receipt (no false credit); the double-count guard — with
@@ -717,10 +853,18 @@ READS + receipts + one commons-voice grievance TERM.
   from one installment stream stays within the existing clamps (property-shaped:
   attribution adds WORDS, never weight); degraded-arm validity (dark
   `economicCoupReadEnabled` ⇒ fewer named strains, receipts still honest); dormancy.
-- **THE DOSSIER ROUND-TRIP PIN:** the town page's treaty card gains the STRAIN LINE
-  in band words — "The tribute of Ashford: heavy; the town remembers the war it
-  ended." Open the town, read the treaty's domestic cost next to its terms; walk to
-  the latest attributed pressure receipt.
+- **THE DOSSIER ROUND-TRIP PIN [CORRECTED 2026-08-02 (fp-audit) — the tree has NO
+  town-page treaty card: the only treaty surface is src/components/map/
+  TreatyPanel.jsx, by its own header "the Realm Inspector's 'Treaties' tab" (a
+  REALM surface, rendered from HeraldBody.jsx), and under the crown law's own
+  wording a Realm Inspector landing does not discharge "open the town, find the
+  trace"]:** the TOWN-PAGE STRAIN LINE is NEW UI WORK OWNED BY THIS WAVE (exact
+  panel VERIFY-AT-BUILD; the natural home is the town page's treaty/obligation
+  summary in the power-structure card family) — "The tribute of Ashford: heavy;
+  the town remembers the war it ended." The Realm Inspector's treaty panel ALSO
+  gains the line (cheap, the surface exists) but is the secondary landing, not
+  the pin's discharge. Open the town, read the treaty's domestic cost next to
+  its terms; walk to the latest attributed pressure receipt.
 - **Clock:** installments on the treaty's OWN cadence marker (WR-0c item 4's law:
   current treaties 52-week years, legacy 12 — the attribution read resolves the
   treaty's marker and never re-prices it); pressure receipts per crossing; the
@@ -729,7 +873,9 @@ READS + receipts + one commons-voice grievance TERM.
 - **Posture consumption:** the dividend's floor consumes `postureOf` — a defiant-
   posture town forgives tribute more slowly than a weary one; priced, receipted,
   never forbidden.
-- **Bands:** strain-contribution bands per kind, the dividend discount curve, the
+- **Bands:** burden-presence bands per kind (the threshold at which a live burden
+  is named, and its band words — renamed from "contribution" with the co-presence
+  respec [CORRECTED 2026-08-02 (fp-audit)]), the dividend discount curve, the
   rally margin, the treaty-burden term's cap (the commons composite stays clamped).
 - **Endings vocabulary:** {paid_and_fell, paid_and_stood, paid_and_forgiven} —
   share envelopes in INT-7 (paid_and_fell rare-but-present is the health metric; a
@@ -750,10 +896,20 @@ wiring point is the one the module itself documents (relationshipMemory.js:14-23
 "wiring point ready at relationshipMemoryWeight's options").
 - **Law:** relationshipMemory is a LIVE lit-path module — the seam closes DARK
   behind the flag despite being a repair (J-INT-6): dark ⇒ byte-identical weights;
-  lit ⇒ the incident half-life scales by the same D5 band multiplier the
-  mean-reversion uses (fleeting 0.5× … undying = the memoryScore stops decaying on
-  the human clock; erosion becomes event-driven, matching the resentment law it was
-  always meant to mirror).
+  lit ⇒ BOTH `halfLifeTicks` AND `maxLookbackTicks` scale by the same D5 band
+  multiplier the mean-reversion uses (fleeting 0.5× … undying = the memoryScore
+  stops decaying on the human clock; erosion becomes event-driven, matching the
+  resentment law it was always meant to mirror). [CORRECTED 2026-08-02
+  (fp-audit), chair ruling R7 — the audit proved the half-life alone reads
+  nothing old:] `relationshipMemoryWeight` HARD-ZEROES any row older than the
+  24-tick lookback BEFORE the half-life applies (`if (age > maxLookbackTicks)
+  return 0` — relationshipMemory.js:127; `memoryEntry` then drops the row,
+  :136), and 24 ticks is ~24 weeks to ~1.8 years by INTERVAL_WEEKS — 20-80×
+  short of "forty years". The cutoff routes through collectMemories to EVERY
+  store, turningPoints included, so there is no fallback archive either. Both
+  constants are already threadable ({halfLifeTicks, maxLookbackTicks},
+  :116-117) — THREADING THE SECOND IS THIS WAVE'S NEW WORK, carrying its own
+  pins (below), never an assumed substrate.
 - **Force / counterforce, same evidence:** longer memory is MORE grievance fuel
   (revanchism reads decayed memoryScore — the seam directly feeds war appetite in
   long-memoried cultures); the counterforce reads the SAME lengthened record — the
@@ -766,8 +922,10 @@ wiring point is the one the module itself documents (relationshipMemory.js:14-23
   still-scoring typed wound with its age in years and, where the wound's producing
   event receipted a counterpart, the name. INT-8's payoff sentences consume it; no
   new storage (the read derives "the sack of Thornwall, forty years gone" from what
-  the ledger already keeps — under the seam-corrected clock the row is still THERE
-  for long-memoried cultures, which is precisely why the seam must close first).
+  the ledger already keeps — and the row is still there ONLY BECAUSE this wave
+  scales the LOOKBACK WINDOW with the band, not the half-life alone [CORRECTED
+  2026-08-02 (fp-audit)]: under the default 24-tick window a forty-year wound is
+  gone from every store, which is precisely why the seam must close first).
 - **THE INHERITED HOLDER CHAIN:** `originHolderId` preserves the FIRST holder across
   chained successions (V-7 already marks `inherited:true`; the field answers WHO
   first bore it). Read-side: `grudgeLineageOf(grudge)` — "a grudge older than either
@@ -783,8 +941,15 @@ wiring point is the one the module itself documents (relationshipMemory.js:14-23
   successors").
 - **Pins (negative hardest):** BOTH-SIGNS scaling (hardest — the anti-ratchet pin):
   the band lengthens bright-lane memory exactly as it lengthens dark-lane memory,
-  property-shaped over the weight function (same multiplier, both signs, or the
-  seam ships a grudge ratchet); the dark byte-identity golden (a live module — the
+  property-shaped over the weight function — same multiplier, both signs, AND BOTH
+  CONSTANTS [CORRECTED 2026-08-02 (fp-audit)]: the band-scaled LOOKBACK window
+  admits bright-lane rows (gift_forgiven, debt repaid) exactly as it admits
+  wounds, or the seam ships a grudge ratchet; the FORTY-YEAR pin [CORRECTED
+  2026-08-02 (fp-audit) — the current pin set never tests age beyond the default
+  window]: on a REAL GENERATED CORPUS under an `undying` band, an incident row 40
+  campaign-years old still scores non-zero and returns from `foundingWoundOf`
+  (executed, not reasoned — the default window is 24 ticks and this pin is the
+  proof the seam opened it); the dark byte-identity golden (a live module — the
   fence captured FIRST, the J1 precedent); the fleeting negative (a fleeting-band
   town under the lit seam decays FASTER than the human default — the band goes both
   ways); the asymmetric-pair fixture (one wound, two bands, two decays, the
@@ -794,12 +959,16 @@ wiring point is the one the module itself documents (relationshipMemory.js:14-23
   ladder re-stamps only where inheritance re-occurs; undo restores the field with
   the record; import validates the id against the roster or drops to absent —
   never a dangling read).
-- **THE DOSSIER ROUND-TRIP PIN:** the town page's neighbours/relationship card
-  shows the oldest-wound line where one still scores — "Oldest wound: the sack of
-  Thornwall, forty years gone." Open the town, see what the town cannot forget;
-  walk to the incident row.
-- **Clock:** the seam IS a clock correction — half-life 4 ticks × D5 band when lit;
-  all denominations INTERVAL_WEEKS under SP-7's assertion. Fast: nothing new fires.
+- **THE DOSSIER ROUND-TRIP PIN [CORRECTED 2026-08-02 (fp-audit) — the surveys
+  gathered ZERO UI evidence (§2 preamble); the neighbour-card FAMILY exists
+  (src/components/settlementDetail/SettlementDetailLinkNeighbourCard.jsx), the
+  exact panel and line placement are VERIFY-AT-BUILD, fallback landing = that
+  card]:** the town page's neighbours/relationship card shows the oldest-wound
+  line where one still scores — "Oldest wound: the sack of Thornwall, forty years
+  gone." Open the town, see what the town cannot forget; walk to the incident row.
+- **Clock:** the seam IS a clock correction — half-life 4 ticks AND lookback 24
+  ticks, EACH × the D5 band when lit [CORRECTED 2026-08-02 (fp-audit)]; all
+  denominations INTERVAL_WEEKS under SP-7's assertion. Fast: nothing new fires.
   Slow: everything — this wave is the slow verdict's custodian.
 - **Posture consumption:** none directly (a memory law, not a decision surface);
   its products feed every decision surface above.
@@ -821,12 +990,39 @@ price; and THE DIG-UP — the counterforce, priced off the same record.
 **Model:** §4 `spatialLedgers.burials`, ONE writer `burialLedger.js` (the
 REPUDIATE_TREATY twin in shape: exact-pair, deliberate, receipted, feeding existing
 casus machinery — but bright).
-- **Law:** suppression, never deletion (§1b): a held burial makes the covered wound
-  family's grievance/revanchism reads return 0 WITH A RECEIPT NAMING THE BURIAL
-  (grievanceRead-side consumption — the §1b-B suppress-the-score idiom exactly);
-  every incident row stays. The reframe layer's bright crossing (§2 row 14) remains
-  the ORGANIC lane; the burial is the DELIBERATE one — two lanes, one substrate,
-  and the burial's warmth effects run through the EXISTING levers it pays with.
+- **Law:** suppression, never deletion (§1b), IN TWO ARMS WITH TWO SCOPES
+  [CORRECTED 2026-08-02 (fp-audit), chair ruling R7 — respecced against the
+  tree; J-INT-14 rules the fork]: (i) the REVANCHISM arm is family-scoped
+  EXACTLY — the read iterates typed incidents (grievanceRead.js:79-89), so rows
+  classified to the covered woundFamily stop counting, WITH A RECEIPT NAMING THE
+  BURIAL; an uncovered family's rows count on untouched. (ii) the GRIEVANCE arm
+  CANNOT be family-scoped — `scoreGrievanceLean` composes two FAMILY-BLIND edge
+  scalars (0.65 × resentment + 0.35 × memoryScore, §2 row 12) and §4 declines to
+  decompose resentment by family — so a held burial applies a BANDED, RECEIPTED
+  DISCOUNT to the edge's grievance read AS A WHOLE, the family named FOR
+  LEGIBILITY, never for scoping, and NEVER a zero (a zero on a family-blind
+  scalar would be over-broad where other wounds stand, or a lie where the label
+  claims family scope). Every incident row stays, both arms
+  (grievanceRead-side consumption — the §1b-B suppress-the-score idiom). The
+  reframe layer's bright crossing (§2 row 14) remains the ORGANIC lane; the
+  burial is the DELIBERATE one — two lanes, one substrate, and the burial's
+  warmth effects run through the EXISTING levers it pays with.
+- **THE WOUND FAMILIES (the closed vocabulary §4 promises — AUTHORED HERE
+  [CORRECTED 2026-08-02 (fp-audit): six references existed, zero enumerations,
+  and the "existing typed-wound families" the volume claimed to reuse do not
+  exist — the tree's only typing is the OPEN substring regex WOUND_TYPE_RE,
+  grievanceRead.js:48, the exact shape the finite-semantics law forbids]):**
+  seven families partitioning the incident-type space — {armed_conflict (war),
+  betrayal (betray), tribute_burden (tribute), conquest_occupation (conquest,
+  occupation), raid_seizure (sack, raid, seiz-), imposition (impos-), contest
+  (contest_loss, contest_forestalled)}. The regex is REPLACED at its call sites
+  by a single-writer typed classifier `woundFamilyOf(incidentType)` — TOTAL over
+  the incident-type inventory, walker-asserted (an incident type with no family
+  reds the walker; new incident types must register a family or the walker
+  refuses them). THE CLASSIFIER IS THIS WAVE'S FIRST SLICE — its own commit,
+  behavior-identical where the regex matched (golden-pinned), NEW WORK never
+  assumed substrate. Import validates `woundFamily` against this enum; never a
+  free string.
 - **THE PRICE (a burial is a package, not a signature):** the decree binds only
   when its price executes — a composed package through EXISTING physics:
   restitution/gift streams (generosityReactions' machinery — the widow's-mite law
@@ -837,6 +1033,22 @@ casus machinery — but bright).
   reconciliation abroad can cost the seat at home, which is the drama). Out-of-
   posture burials (a martial seat burying a war grudge) price the charge higher
   through `postureOf` — priced and receipted, never forbidden.
+- **THE DOMESTIC DIVIDEND (the counterforce at home, off the SAME record —
+  INT-4's dividend shape [CORRECTED 2026-08-02 (fp-audit): the audit proved the
+  domestic ledger ran one direction only, which made J-INT-5's autonomous arm
+  dead code — a books read that weights seat survival (INT-1) can never CHOOSE a
+  verb whose entire modelled home effect is a legitimacy charge plus downside
+  risk]):** a burial HELD past its hold-dwell pays the seat back at home: a
+  banded LEGITIMACY DIVIDEND and a relief term on the commons grievance
+  composite, both DISCOUNTED by the town's own believed severity of the feud it
+  ended — a burial of a wound the town still feels reads as SURRENDER (no
+  dividend; the charge stands), a burial of a wound the town is tired of reads
+  as STATESMANSHIP (the dividend lands). Both readings receipted, both pinned,
+  the same evidence scoring both (the belief-side severity read INT-4's
+  dividend already uses). The HOLD-DWELL VERDICT READ that scores this is the
+  producer of the {buried_and_blessed, buried_and_borne} endings below — "the
+  seat that made peace and was rewarded for it" becomes measurable at soak
+  (INT-7's envelope) instead of structurally impossible.
 - **Two-sided by belief (Law One):** the burial closes the DECREEING side's ledger
   reads only. The counterpart LEARNS of it at news speed (distance-priced news) and
   its own ledger is its own — a burial the counterpart never answers leaves their
@@ -870,8 +1082,13 @@ casus machinery — but bright).
   RESUME from the surviving rows plus the new betrayal wound — nothing was lost,
   which is the whole design; the unilateral-burial negative (the counterpart's
   casus lanes untouched — seed the counterpart's ledger non-empty first, §1c); the
-  family-scope negative (a burial covers its woundFamily ONLY — an uncovered
-  family's reads unaffected); the price-executes gate (a decree whose package fails
+  family-scope negative [CORRECTED 2026-08-02 (fp-audit) — re-scoped to
+  J-INT-14's two arms]: an uncovered family's REVANCHISM read is unaffected
+  (typed rows, exactly filterable), while the GRIEVANCE discount is banded and
+  receipted and NEVER a zero — both arms asserted on one fixture holding two
+  wound families; the DOMESTIC VERDICT pin — same held burial, two
+  believed-severity states ⇒ surrender (no dividend) vs statesmanship (the
+  dividend lands), both receipted; the price-executes gate (a decree whose package fails
   to execute — insufficient stores — binds NOTHING and receipts the failure: the
   poor seat that could not afford its peace); the bloc-override entry (exactly one
   `grudge_buried` decision-grievance when a live bloc held the wound; none when
@@ -882,25 +1099,37 @@ casus machinery — but bright).
   state exactly; import validates woundFamily against the closed vocab); the
   writer/reader spelling pin (boot burialLedger.js, read through grievanceRead —
   §1c); dormancy golden.
-- **THE DOSSIER ROUND-TRIP PIN:** the town page's neighbours/relationship card
-  shows the burial line — "The grudge with Ashford: buried by decree, spring of
-  year 34; the price was paid in grain and pride." A dug-up burial shows the scar —
-  "…unearthed, year 41." Walk from the line to the decree receipt to the surviving
-  wound rows beneath it.
+- **THE DOSSIER ROUND-TRIP PIN [CORRECTED 2026-08-02 (fp-audit) — surveys
+  gathered zero UI evidence; the neighbour-card FAMILY exists
+  (SettlementDetailLinkNeighbourCard.jsx), exact panel and line placement
+  VERIFY-AT-BUILD, fallback landing = that card]:** the town page's
+  neighbours/relationship card shows the burial line — "The grudge with Ashford:
+  buried by decree, spring of year 34; the price was paid in grain and pride." A
+  dug-up burial shows the scar — "…unearthed, year 41." Walk from the line to
+  the decree receipt to the surviving wound rows beneath it.
 - **Clock:** the decree is an event; the package executes on transfer physics'
   own cadence; the HOLD is the slow verdict (two-timescale echo: fast = the decree
   read aloud; slow = whether it holds a generation). Suppression credits FULLY only
   past a banded hold-dwell (a burial is believed when it has held, not when it is
-  announced — the counterpart's casus discount phases in on the dwell).
+  announced — the counterpart's casus discount phases in on the dwell); the
+  DOMESTIC VERDICT scores at the same hold-dwell maturity [CORRECTED 2026-08-02
+  (fp-audit)] — the dividend is earned by holding, never by announcing.
 - **Posture consumption:** the burial decision consumes `postureOf` +
   `riskToleranceOf` (a bold seat buries bigger wounds); the dig-up petition
   consumes the bloc's patience band (INT-2).
 - **Bands:** package-adequacy derivation (wound magnitude × age → price),
   legitimacy-charge band, hold-dwell band, dig-up age-price curve, patience band,
-  the suppression phase-in.
-- **Endings vocabulary:** {buried_and_held, buried_and_answered, dug_up,
-  lapsed_with_the_pair} — share envelopes in INT-7 (dug_up rare-but-present; a world
-  of permanent burials is a delete pretending otherwise).
+  the suppression phase-in, the grievance-discount band (J-INT-14's arm ii), the
+  domestic-dividend band + believed-severity discount [CORRECTED 2026-08-02
+  (fp-audit)].
+- **Endings vocabulary:** {buried_and_blessed, buried_and_borne,
+  buried_and_answered, dug_up, lapsed_with_the_pair} [CORRECTED 2026-08-02
+  (fp-audit): buried_and_held SPLIT on the hold-dwell domestic verdict —
+  BLESSED (the dividend landed; statesmanship) vs BORNE (held abroad, unforgiven
+  at home; the charge stood); the verdict read above is the producer] — share
+  envelopes in INT-7 (dug_up rare-but-present — a world of permanent burials is
+  a delete pretending otherwise; buried_and_blessed floored — a world where no
+  held peace is ever blessed is the one-way ledger this wave just cured).
 - **Couplings:** §6 rows 3, 5, 7, 9 — the burial consumes TRADE's transfer physics,
   FAITH's rites, GRAMMAR's sealing terms, and drives POP's return migration
   (the reconciled road home); DESIGN_FP_COUPLINGS.md walks each.
@@ -929,16 +1158,49 @@ certified and soak-measured; the interior program gets its endings envelopes.
   AS the transfer's crossing, cause-typed — never a phantom hit). stateKeys stays
   honest per the survey's law: the score is an unconditional field, so aliveness
   rides the EVENT literals (the row documents this, as faction's row does).
-- **THE INTERIOR ENVELOPES (WR-9's discipline for this program):** the endings
-  vocabularies of INT-3/INT-4/INT-6 gather here with share envelopes — coup verdicts
-  carrying a named decision (a floor share: the join must actually fire at soak
-  scale or INT-3 is decoration; a ceiling: if EVERY coup names a foreign decision,
-  the join confabulates); paid_and_fell rare-but-present; dug_up rare-but-present;
-  exile endings distributed (all three reachable at century scale). Plus THE TEMPO
-  ENVELOPE the survey's finding demands: interior DRAMA (verdicts, crossings,
-  burials, digs) at century scale gets a floor above the measured 2/100 baseline —
-  the interior program's acceptance is that long-form readers get interior story,
-  not only interior motion. Envelopes carry mutant negative controls (house law).
+- **THE INTERIOR ENVELOPES (WR-9's discipline for this program) [CORRECTED
+  2026-08-02 (fp-audit): the audit found 12 of 17 declared tokens unenveloped —
+  the gather below is TOTAL over every token §5 declares, grouped by family; a
+  declared ending with no envelope is the drift this correction retires]:**
+  — **INT-2 counsel {heeded, overridden}:** the override share carries a FLOOR
+  (INT-3's grievance chain needs overrides to exist — a hall always heeded means
+  the clamp never binds and blocs are selectors in disguise) AND a CEILING (a
+  hall routinely ignored means the loading never entered the chooser) — this is
+  the direct empirical test of §1b's "positions are pressure, never selectors";
+  the CLAMP pin proves a bound, only this envelope proves the distribution.
+  — **INT-3 {held, overturned_war_party, overturned_peace_party, demand_honoured,
+  demand_betrayed, repudiated_by_heir, reaffirmed_by_heir, exile_returned,
+  exile_faded, exile_reconciled}:** coup verdicts carrying a named decision get a
+  floor (the join must actually fire at soak scale or INT-3 is decoration) and a
+  ceiling (if EVERY coup names a foreign decision, the join confabulates); BOTH
+  overturn polarities present; the succession pair distributed with a FLOOR on
+  reaffirmed_by_heir and demand_honoured (the bright lane must fire); all three
+  exile endings reachable at century scale, exile_reconciled floored.
+  — **INT-4 {paid_and_fell, paid_and_stood, paid_and_forgiven}:** paid_and_fell
+  rare-but-present (every payer falling is a ratchet, none falling is
+  decoration); paid_and_forgiven FLOORED (the dividend must actually land).
+  — **INT-6 {buried_and_blessed, buried_and_borne, buried_and_answered, dug_up,
+  lapsed_with_the_pair}:** dug_up rare-but-present; buried_and_blessed and
+  buried_and_answered FLOORED (the bright-lane counterforces must be measurable
+  or the burial is a one-way ledger).
+  Every envelope carries a mutant negative control (house law).
+- **THE TEMPO ENVELOPE, IN TWO PARTS [CORRECTED 2026-08-02 (fp-audit): the old
+  single floor had no denominator and measured a LARGER, partly-new event set
+  against a baseline that never measured it — it would clear by construction and
+  detect nothing]:** (a) THE REGRESSION FLOOR — over the SAME event set the
+  baseline measured (stressor drama, coup verdicts included), denominated
+  PER-SETTLEMENT-YEAR on the named fixture: the 2/100 baseline is 2 drama-years
+  per 100 years ON THE 4-SETTLEMENT CENTURY FIXTURE (= 0.005 per
+  settlement-year, §2 rows 19/22) — the only honest comparison against the
+  measured number, portable because the denominator travels; (b) THE NEW-KINDS
+  BAND — a separate ABSOLUTE envelope, floor AND ceiling, over the kinds this
+  program mints (legitimacy crossings, burials, dig-ups, domestic verdicts,
+  émigré arcs), authored fresh at soak rather than anchored to a number that
+  never measured them — the CEILING is the counterforce every other envelope in
+  this wave carries (an uncountered drama floor is standing pressure to tune
+  interior drama upward). The program's acceptance: long-form readers get
+  interior story, not only interior motion — and the instrument can actually
+  detect the thinness it exists to fix.
 - **v5 channels:** the burials ledger and the decision-grievance entries join the
   drop-when-empty census (absence-is-evidence per §1c); the row documents
   relationshipStates' structural unobservability as inherited, not cured (curing it
@@ -950,9 +1212,13 @@ certified and soak-measured; the interior program gets its endings envelopes.
   real soak corpus (VERIFY-AT-BUILD: the harness pattern is WR-9's; if WR-9 has not
   landed at build time, this wave lands the interior half standalone and WR-9
   adopts it — coordination note, not a blocker).
-- **THE DOSSIER ROUND-TRIP PIN:** the town page's ruling-power card shows the band
-  word and the LAST CROSSING with its cause — "Standing: Contested (fell year 38 —
-  the assize was a sham)." Walk from the card to the crossing receipt to the hit.
+- **THE DOSSIER ROUND-TRIP PIN [CORRECTED 2026-08-02 (fp-audit): exact panel
+  VERIFY-AT-BUILD — the power-structure surface FAMILY is verified
+  (EngineSections.jsx / PowerStructure.jsx render it), the crossing line's panel
+  is not; fallback landing = the ruling-power card family]:** the town page's
+  ruling-power card shows the band word and the LAST CROSSING with its cause —
+  "Standing: Contested (fell year 38 — the assize was a sham)." Walk from the
+  card to the crossing receipt to the hit.
 - **Clock:** crossings are event-driven (the stock has no passive clock — §2 row 1;
   the row certifies that fact rather than fighting it). Fast: the crossing beat.
   Slow: the band dwelling — the envelopes measure time-in-band distributions.
@@ -972,11 +1238,19 @@ receipted voice defects retired.
   for: coup verdicts (hold + fall, replacing the 2-template/4-fixed-sentence
   inventory), faction competition's seven types (replacing the fixed verb table),
   the investiture beat's variants, legitimacy crossings (INT-7's kinds), counsel
-  given/heeded/overridden (INT-2), the attributed pressure + rally receipts (INT-4),
-  burial/answer/dig-up (INT-6), the émigré's flight/shelter/return/fade (INT-3b).
+  given/heeded/overridden (INT-2), the BOOKS-STANDING receipts (INT-1 —
+  change-gated, lowest class; §9 lists two of its sentences as acceptance
+  criteria, so the pool must exist [CORRECTED 2026-08-02 (fp-audit)]), the
+  crossing + rally receipts (INT-4), burial/answer/dig-up + the domestic verdict
+  (INT-6), the émigré's flight/shelter/return/fade (INT-3b).
   New-kind pools ride their kinds' flags; upgrades to LIT kinds (coup, faction,
-  investiture) are disclosed same-seed prose shifts, adjudicated per the war
-  volume's golden discipline — never silent.
+  investiture) are same-seed prose shifts on shipped worlds and ship ONLY under
+  J-INT-13's RECORDED RULING [CORRECTED 2026-08-02 (fp-audit)] — owner-signed or
+  chair-recorded in FABLE_VALIDATION_QUEUE.md BEFORE the wave starts, field-level
+  diff and estimated golden blast radius quoted in the re-record header (WR-0b's
+  discipline); absent the ruling, the lit-kind pools ship DARK behind a
+  prose-version flag and light with the batch, every existing golden
+  byte-identical — never silent, and never merely "disclosed".
 - **THE PAYOFF ATTRIBUTION SENTENCES (the PARTIAL grudge cured):** when revanchism
   or an inherited grudge materially decides an outcome (war mint, verdict tilt,
   challenge), the receipt consumes INT-5's reads: "the grudge was older than either
@@ -1004,11 +1278,13 @@ receipted voice defects retired.
   DOWN-only assertions (both baselines shrink and the walkers hold them down); the
   disclosed-shift goldens for every lit-kind prose change (field-level diffs quoted
   in the re-record headers, the WR-0b discipline); id-carry on every new push site.
-- **THE DOSSIER ROUND-TRIP PIN:** the chronicle surface (World Book/Herald family)
-  renders every new kind through its registered phrases — open the town's
-  chronicle, find the coup told in pooled prose with the decision named (INT-3),
-  the wound named (INT-5), the burial named (INT-6); walk each sentence's id back to
-  its ledger row. The voice pin IS a dossier pin — a sentence that cannot be walked
+- **THE DOSSIER ROUND-TRIP PIN [CORRECTED 2026-08-02 (fp-audit): the
+  World Book/Herald FAMILY is real (the Herald shipped); the exact chronicle
+  panel per kind is VERIFY-AT-BUILD, fallback landing = the Herald's registered
+  desks]:** the chronicle surface (World Book/Herald family) renders every new
+  kind through its registered phrases — open the town's chronicle, find the coup
+  told in pooled prose with the decision named (INT-3), the wound named (INT-5),
+  the burial named (INT-6); walk each sentence's id back to its ledger row. The voice pin IS a dossier pin — a sentence that cannot be walked
   back is a defect.
 - **Clock:** none (voice). Fast/slow echo lives in WHAT the sentences narrate:
   the fast beats and the slow verdicts each have their register (SP-6's two
@@ -1030,7 +1306,20 @@ receipted voice defects retired.
 ## and the couplings volume disagree, report the conflict, never fork the design.
 ## NO ROW IS DECLARED EMPTY: the seat decides, pays for, and remembers something in
 ## every layer — an interior row with no coupling would mean a substance no court
-## cares about, which is a design defect by definition.)
+## cares about, which is a design defect by definition.
+##
+## [CORRECTED 2026-08-02 (fp-audit)] THE POINTER GRANULARITY RULE: the couplings
+## volume walks 21 UNORDERED pairs keyed CPL-N, each walked both directions
+## inside one row; this register is DIRECTED — TWO rows here map onto ONE CPL
+## row, and the CPL row is the merge point of record. Every trailing pointer
+## below cites the CPL id in the couplings volume's own name order, plus the
+## direction this row contributes; the layer spellings are the couplings
+## volume's (POP, INFO). THE CW-0 OBLIGATION (standing, per the couplings
+## volume's inclusion ratchet): any interior wave landing a cross-layer read
+## adds its CW-0 registry row {pairId, direction, read, receiptField,
+## counterforce, flags, owningVolume, owningWave, intendedDesk} IN THE SAME
+## COMMIT — the walker asserts it, and a cross-layer read with no registry row
+## reds the build.)
 
 **Row 1 — INTERIOR → WAR (the seat chooses the war).**
 Reads: seatBooks (INT-1) weighting WR-1's four-term read; bloc loading on
@@ -1042,7 +1331,7 @@ the commerce bloc and the settlement-position book score the SAME war as ruin �
 the hall that pushes the march contains the party that will name it in the verdict.
 Owning waves: INT-1/INT-2/INT-3 consume-side; WR-1/WR-5 war-side. Archetype: February
 1917 — the war outlived the crowd's patience, and the crowd replaced the seat.
-→ DESIGN_FP_COUPLINGS.md walks INTERIOR×WAR both directions.
+→ CPL-6 (WAR × INTERIOR), the INTERIOR→WAR direction. [CORRECTED 2026-08-02 (fp-audit)]
 
 **Row 2 — WAR → INTERIOR (the war bills the home).**
 Reads: exhaustion tilting verdicts (0.22, BUILT); reinforcement costs biting
@@ -1055,7 +1344,7 @@ same evidence: the SAME war that exhausts the crowd rallies it while it is belie
 winnable (computeWarSentiment's two signs, BUILT — disposition.js:223); the dividend
 discount (INT-4) prices the peace the war eventually buys. Owning wave: INT-4.
 Archetype: the Danegeld — the paying, not the enemy, unmade Æthelred's seat.
-→ DESIGN_FP_COUPLINGS.md row WAR×INTERIOR.
+→ CPL-6 (WAR × INTERIOR), the WAR→INTERIOR direction. [CORRECTED 2026-08-02 (fp-audit)]
 
 **Row 3 — INTERIOR → GRAMMAR (the seat signs, refuses, and repudiates).**
 Reads: seatBooks on every SP-3 accept/refuse (INT-1); the re-read triggering
@@ -1070,7 +1359,7 @@ succession record ("the son kept the father's word") — reaffirmation is as
 receipted as repudiation (INT-3's bidirectional pin). Owning waves: INT-1/INT-3/INT-6.
 Archetype: Brest-Litovsk — the successor regime repudiating the fallen seat's war,
 at a price named in the treaty itself.
-→ DESIGN_FP_COUPLINGS.md row INTERIOR×GRAMMAR.
+→ CPL-21 (GRAMMAR × INTERIOR), the INTERIOR→GRAMMAR direction. [CORRECTED 2026-08-02 (fp-audit)]
 
 **Row 4 — GRAMMAR → INTERIOR (the pact organizes the hall).**
 Reads: a pact signed/refused against the loaded weights writes the decision
@@ -1083,11 +1372,12 @@ pact that burdens the seats bloc enriches the commerce bloc (§2 row 5's two end
 one treaty, two positions, receipted both). Owning waves: INT-2/INT-3/INT-4.
 Archetype: the Corn Laws repeal — the policy signed against the party's wishes,
 and the party splitting the seat over it.
-→ DESIGN_FP_COUPLINGS.md row GRAMMAR×INTERIOR.
+→ CPL-21 (GRAMMAR × INTERIOR), the GRAMMAR→INTERIOR direction. [CORRECTED 2026-08-02 (fp-audit)]
 
 **Row 5 — INTERIOR → TRADE (the hall prices the venture).**
 Reads: the commerce bloc's loadings on severance/venture/pact verbs (INT-2's
-generalization); seatBooks on venture appetite (INT-1 → TRADE's house decisions);
+generalization); seatBooks on venture appetite (INT-1 → TRADE's house decisions —
+seam RESERVED at TR-7 [CORRECTED 2026-08-02 (fp-audit), cohesion pass]);
 the burial's restitution package riding transfer physics (INT-6 — reconciliation
 consumes grain); mercantile posture (SP-4 composing WR-2's mercantile channel,
 consumed at trade bars). Receipts: counsel beats on trade verbs; the burial package
@@ -1096,7 +1386,7 @@ taxes the same ledger the commerce bloc grows — the seats bloc's levy and the 
 Ring's counsel read one granary. Owning waves: INT-1/INT-2/INT-6; TRADE's volume owns
 the house-side consumption. Archetype: the Medici — the bank that bought the
 peace because war was bad for the ledger.
-→ DESIGN_FP_COUPLINGS.md row INTERIOR×TRADE.
+→ CPL-11 (TRADE × INTERIOR), the INTERIOR→TRADE direction. [CORRECTED 2026-08-02 (fp-audit)]
 
 **Row 6 — TRADE → INTERIOR (the ledger crowns and uncrowns).**
 Reads: prosperity as legitimacy's GENERATION SOURCE (BUILT —
@@ -1110,11 +1400,13 @@ peace dividend (INT-4) read the same recovering ledger — the granary that star
 the seat refills and the crowd re-crowns it (live-state recomputation, §INT-3's
 defusal). Owning waves: INT-4/INT-7. Archetype: the Flour War — bread prices as the
 crown's standing, week by week.
-→ DESIGN_FP_COUPLINGS.md row TRADE×INTERIOR.
+→ CPL-11 (TRADE × INTERIOR), the TRADE→INTERIOR direction. [CORRECTED 2026-08-02 (fp-audit)]
 
 **Row 7 — INTERIOR → FAITH (the seat kneels, adopts, and buries by rite).**
 Reads: doctrine blocs loading stance verbs (INT-2's generalization — the zealot
-bloc against the missionary-access term); seatBooks on stance choices (INT-1); the
+bloc against the missionary-access term); seatBooks on stance choices (INT-1 —
+DECLARED DEFERRAL, not a wired read: dark until a FAITH wave reserves the seam
+per §3's rule [CORRECTED 2026-08-02 (fp-audit), cohesion pass]); the
 burial's public rite arm (INT-6 consuming FAITH's shared-rite family where lit —
 the degraded arm without it is the grain-and-decree package, named). Receipts:
 counsel beats on stance moves; the rite-sealed burial's beat names the temple.
@@ -1123,7 +1415,7 @@ bloc feeds (FAITH's mediation, GRAMMAR's generalization — one congregation, tw
 pulls, both scored off the local faith state). Owning waves: INT-1/INT-2/INT-6;
 FAITH's volume owns stance/omen mechanics. Archetype: Canossa — the seat kneeling
 in the snow because the interior could not afford the temple's anger.
-→ DESIGN_FP_COUPLINGS.md row INTERIOR×FAITH.
+→ CPL-15 (FAITH × INTERIOR), the INTERIOR→FAITH direction. [CORRECTED 2026-08-02 (fp-audit)]
 
 **Row 8 — FAITH → INTERIOR (the god steadies or shakes the seat).**
 Reads: religion's typed legitimacy hits (BUILT — §2 row 1's vocabulary); FAITH's
@@ -1137,15 +1429,17 @@ as wrath reads recovery as favour — the bright reading is FAITH's to write and
 INT-7's to certify (no wrath ratchet; both signs on one lens). Owning waves:
 INT-4/INT-7 consume-side; FAITH owns the lens. Archetype: the Mandate of Heaven —
 calamity read as the mandate withdrawn, prosperity as its return.
-→ DESIGN_FP_COUPLINGS.md row FAITH×INTERIOR.
+→ CPL-15 (FAITH × INTERIOR), the FAITH→INTERIOR direction. [CORRECTED 2026-08-02 (fp-audit)]
 
-**Row 9 — INTERIOR → POPULATIONS (the seat's standing moves the feet).**
+**Row 9 — INTERIOR → POP (the seat's standing moves the feet).**
 Reads: the commons rung ladder is POP's popular-arc substrate (spine §3 FP-POP
 rides §2 row 9 — legitimacy-gated by construction); the émigré departure (INT-3b —
 the defeated leave, and SP-1 carries the named ones); the dig-up emptying the
 town (INT-6's revocation arm feeding POP's departure evaluation — a seat that
 unearths a buried peace makes its own believers into leavers); permit posture
-through seatBooks (INT-1 → POP's permit table columns). Receipts: the flight beat;
+through seatBooks (INT-1 → POP's permit table columns — seam RESERVED at
+POP-5b's posture block [CORRECTED 2026-08-02 (fp-audit), cohesion pass]).
+Receipts: the flight beat;
 departure receipts naming the decree that moved them. Counterforce, same
 evidence: the burial HELD is the road home — reconciliation feeds return
 migration and the old-country pull off the same burial record (POP's
@@ -1153,9 +1447,9 @@ departure-memory arm reading INT-6's ledger). Owning waves: INT-3b/INT-6
 consume-side; POP owns flows. Archetype: the Revocation of the Edict of Nantes —
 the dig-up that emptied the towns; and the Huguenot return that never came, which
 is also a story.
-→ DESIGN_FP_COUPLINGS.md row INTERIOR×POPULATIONS.
+→ CPL-18 (POP × INTERIOR), the INTERIOR→POP direction. [CORRECTED 2026-08-02 (fp-audit)]
 
-**Row 10 — POPULATIONS → INTERIOR (the crowd remembers who it is).**
+**Row 10 — POP → INTERIOR (the crowd remembers who it is).**
 Reads: departure memory feeding grudges at both ends (POP's banded diaspora
 memory landing in the same incident/grievance substrate INT-5 corrects — the
 generation that left is a wound with a tick, readable by foundingWoundOf);
@@ -1169,9 +1463,9 @@ the new commerce bloc — one migration, two halls (formation reads the same
 roster). Owning waves: INT-2/INT-5/INT-7 consume-side; POP owns the flows and the
 diaspora ledger. Archetype: the diaspora that funds the reconquest — the spine
 §4's own named archetype, landed at this row.
-→ DESIGN_FP_COUPLINGS.md row POPULATIONS×INTERIOR.
+→ CPL-18 (POP × INTERIOR), the POP→INTERIOR direction. [CORRECTED 2026-08-02 (fp-audit)]
 
-**Row 11 — INTERIOR → INFORMATION (the seat's word is a currency it spends).**
+**Row 11 — INTERIOR → INFO (the seat's word is a currency it spends).**
 Reads: climb-down credibility charges (BUILT); the dig-up's credibility charge
 (INT-6 — the burial was the seat's word); the émigré as motivated source (INT-3b —
 the pretender's account enters at his own credibility, and the host's
@@ -1190,9 +1484,9 @@ lands or corrects the doctrine — STOP-and-report if tempted to write credibili
 state from an interior module. Owning waves: INT-3/INT-6 consume-side; INFO owns
 the ladder. Archetype: the pretender's court believing its own dispatches — and
 the ministers who learned to discount them.
-→ DESIGN_FP_COUPLINGS.md row INTERIOR×INFORMATION.
+→ CPL-20 (INFO × INTERIOR), the INTERIOR→INFO direction. [CORRECTED 2026-08-02 (fp-audit)]
 
-**Row 12 — INFORMATION → INTERIOR (what the hall believes moves the hall).**
+**Row 12 — INFO → INTERIOR (what the hall believes moves the hall).**
 Reads: believed external threat compressing bloc formation (BUILT —
 settlementPolitics.js:489-513, siege/war-footing; survival blocs born of an
 external rally); THE LURE's domestic edge (INFO's program: planted weakness
@@ -1209,7 +1503,7 @@ expose verb) — the hall that was moved by the lie is moved again by its
 unmasking, and the planter pays on row 11's currency. Owning waves: INT-2/INT-3
 consume-side; INFO owns carriers and verbs. Archetype: the Ems Dispatch — a
 doctored paragraph, a hall inflamed, a war chosen by a crowd that read an edit.
-→ DESIGN_FP_COUPLINGS.md row INFORMATION×INTERIOR.
+→ CPL-20 (INFO × INTERIOR), the INFO→INTERIOR direction. [CORRECTED 2026-08-02 (fp-audit)]
 
 **The register's discipline:** every row above rides EXISTING reads or reads a §5
 wave lands — leakage is not coupling (spine req. 8); every row names its
@@ -1273,32 +1567,86 @@ report to the validation chair.
   dormant and the repudiation receipts at settlement grain. VETO mints signer
   provenance in an interior module (a second writer for GRAMMAR's substrate — the
   named defect).
-- **J-INT-11 (counsel is chronic, the governor edits):** counsel receipts register
-  with the pacing/significance machinery at a LOW class; overrides and joins
-  register HIGH. The Herald prints the hall's temper when it matters, not weekly
-  minutes. VETO exempts counsel from pacing and accepts the wallpaper.
+- **J-INT-11 (two chronic classes, the governor edits both) [CORRECTED
+  2026-08-02 (fp-audit): the old wording bound one ambiguous "counsel" class
+  while TWO distinct classes exist — the audit caught INT-1's per-pulse receipt
+  escaping pacing entirely]:** (a) INT-1's BOOKS-STANDING receipts register at
+  the LOWEST class and are CHANGE-GATED — emitted only on a weight-band or
+  winning-book change, the agreement deadband the gate; (b) INT-2's BLOC COUNSEL
+  beats register at a LOW class; overrides and joins register HIGH. Both are
+  class ASSIGNMENTS into SP-6's significance family, never volume-minted scales.
+  The Herald prints the hall's temper when it matters, not weekly minutes. VETO
+  exempts either class from pacing and accepts the wallpaper.
 - **J-INT-12 (the decision vocabulary is a projection):** INT-3's decision
   vocabulary maps 1:1 onto events the estate already receipts; adding a decision
   kind REQUIRES the underlying receipted event to exist first. VETO lets the
   vocabulary lead the events and accepts organizing grievances against decisions
   no reader can find.
+- **J-INT-13 (the lit-kind pool upgrade is OWNER-GATED) [CORRECTED 2026-08-02
+  (fp-audit) — the audit found the volume pre-authorizing a mass golden
+  re-record that §11's verbatim binding of war §10.4 forbids ("a golden that
+  moves unexpectedly is a STOP-and-report, never a re-record"), with no §7
+  block; coup and faction receipts are among the highest-volume interior kinds
+  in the golden corpus, and a same-seed prose shift on shipped worlds sits under
+  THE PROMISE]:** INT-8's upgrades to LIT kinds (coup, faction, investiture)
+  proceed ONLY against a ruling recorded in FABLE_VALIDATION_QUEUE.md
+  (owner-signed or chair-recorded) BEFORE the wave starts, carrying the
+  field-level diff and an estimated golden blast radius quoted in the re-record
+  header (the WR-0b discipline). Until that ruling exists, the lit-kind arm is
+  OWNER-GATED (§10.4's boundary list names it). VETO — the stated alternative
+  the ruling weighs: ship the lit-kind pools DARK behind a prose-version flag
+  and light them with the batch, keeping every existing golden byte-identical.
+- **J-INT-14 (the burial's suppression scope — two arms, two scopes) [CORRECTED
+  2026-08-02 (fp-audit): the old law promised family-scoped zeroes on BOTH
+  reads; the grievance scalar is family-blind (0.65 × resentment + 0.35 ×
+  memoryScore over two edge scalars) and cannot be family-scoped without
+  decomposing resentment by family, which §4 declines]:** the REVANCHISM read
+  suppresses family-scoped and exact (typed incident rows classified by INT-6's
+  `woundFamilyOf`); the GRIEVANCE read takes a BANDED, RECEIPTED DISCOUNT on
+  the whole edge, family named for LEGIBILITY only — never a zero. VETO takes
+  one of the two shapes the chair rejected: (i) suppress revanchism only and
+  leave grievance untouched (re-word the law and Herald sentence accordingly),
+  or (ii) decompose resentment by family (a new memory plane — accept the
+  lifecycle burden consciously).
+- **J-INT-15 (the émigré is a projection, never a roster move) [CORRECTED
+  2026-08-02 (fp-audit): the volume's most lifecycle-exposed wave had ruled
+  neither the roster question nor the regen/undo/import paths]:** the exile
+  STAYS in the HOME settlement's npcs[] — both towns' surfaces render PURE
+  PROJECTIONS over the SP-1 errand record (guest-mark at the host, away-mark at
+  home — never an "absence": the roster did not change). This is the only
+  answer that satisfies spine req. 4 (casting is read-wiring, never new NPC
+  state) and §4's no-new-ledger claim, and it keeps regen/undo/import to the
+  errand record alone (the pinned triad in INT-3b). VETO moves the roster row
+  between settlements and accepts the full lifecycle burden: regen re-derives
+  rosters at both ends, undo must restore both, import must not strand a guest
+  whose host was never imported — the estate's most-bitten class, chosen
+  deliberately or not at all.
 
 ## §8 THE TUNING SURFACE (owner-signed at the soak, per THE PROMISE; every band
 ## named in §5, gathered — band FAMILIES shared with the spine keep the signature
 ## surface tractable)
 
-INT-1 weight-derivation bands + agreement deadband + per-consumer color caps ·
-INT-2 per-verb loading tables + counsel margin + patience band · INT-3 decision-load
-margin + join margin + re-read repudiation band + émigré share/patience/cap +
-host-decision loadings + harboring-grievance magnitude · INT-4 strain-contribution
-bands + dividend discount curve + rally margin + treaty-burden cap · INT-5 the
-EXISTING D5 band table (adopted, never re-authored) + oldest-wound floor · INT-6
+INT-1 weight-derivation bands + agreement deadband + per-consumer color caps +
+books-standing class assignment (SP-6 family) · INT-2 per-verb loading tables +
+counsel margin + patience band + counsel-significance class assignment (SP-6
+family) · INT-3 decision-load margin + join margin + re-read repudiation band +
+émigré share/patience/cap + host-decision loadings + harboring-grievance
+magnitude · INT-4 burden-presence bands per kind + dividend discount curve +
+rally margin + treaty-burden cap · INT-5 the EXISTING D5 band table (adopted,
+never re-authored — scaling BOTH memory constants) + oldest-wound floor · INT-6
 package-adequacy derivation + legitimacy charge + hold-dwell + dig-up age-price
-curve + suppression phase-in · INT-7 the endings share envelopes + the tempo floor
-(the century-scale interior-drama floor above the measured 2/100) + time-in-band
-envelope shapes. None a bare float on any surface; all in one tuning table per
-wave (the house idiom); the spine's tuning-debt acknowledgment (§5 of the spine)
-prices this section's growth deliberately.
+curve + suppression phase-in + grievance-discount band + domestic-dividend band
+with believed-severity discount · INT-7 the endings share envelopes (TOTAL over
+all 20 declared tokens, by family, bright-lane floors named) + the TWO-PART
+tempo envelope (the regression floor per-settlement-year over the baseline's own
+event set on the named fixture; the fresh floor-AND-ceiling band over the new
+kinds) + time-in-band envelope shapes. [CORRECTED 2026-08-02 (fp-audit): this
+table reconciled line-by-line against every §5 Bands field — the tuning audit
+caught one band absent here and one band here absent from §5; both ends now
+match. Significance classes are ASSIGNMENTS into SP-6's spine-owned family —
+this volume references, never mints.] None a bare float on any surface; all in
+one tuning table per wave (the house idiom); the spine's tuning-debt
+acknowledgment (§5 of the spine) prices this section's growth deliberately.
 
 ## §9 HERALD + LEGIBILITY CONTRACT (the sentences this program must be able to
 ## say — an acceptance criterion, not decoration; every one carries id + full
@@ -1325,6 +1673,8 @@ prices this section's growth deliberately.
   still burned." (INT-5/INT-8)
 - "By decree of the seat, the grudge with Ashford is buried; the price was paid
   in grain and pride." (INT-6)
+- "The peace held, and the town came to bless it." (INT-6 — the domestic
+  dividend [CORRECTED 2026-08-02 (fp-audit)])
 - "The grain was given, and Karak-Vol's other grudge still burned." (INT-6)
 - "They dug up what their fathers buried, and the old wound bled new." (INT-6)
 - "The seat stands Endorsed." / "The seat has fallen to Crisis — the assize was a
@@ -1358,8 +1708,11 @@ prices this section's growth deliberately.
    soak, or ratifies a band.
 4. **THE OWNER-HELD BOUNDARY IS UNCHANGED:** the release soak grid, the 300y
    rerun, the certification sweep over new receipts, and the tuning pass wait on
-   the owner. INT-7's envelopes are the program's acceptance harness: the program
-   is DONE when they hold on the owner-ordered soak, and not before.
+   the owner — and INT-8's LIT-KIND POOL UPGRADE sits with them [CORRECTED
+   2026-08-02 (fp-audit)]: it proceeds only against J-INT-13's recorded ruling
+   (a same-seed prose shift on shipped worlds is THE PROMISE's surface). INT-7's
+   envelopes are the program's acceptance harness: the program is DONE when they
+   hold on the owner-ordered soak, and not before.
 
 ## §11 IMPLEMENTER PROTOCOL
 
@@ -1380,7 +1733,14 @@ labeling). Two deltas for this volume:
    from three read-only surveys dated 2026-08-02 @ 38f81d05. Any implementer
    finding a census overstatement STOPS and reports rather than building on it
    (the war volume's J-WR-13 discipline, applied here from day one — this
-   volume's census has NO known overstatements at issue time).
+   volume's census has NO known overstatements at issue time). The surveys
+   covered ENGINE SUBSTRATE ONLY (§2 preamble): every dossier surface not
+   quoting a component file:line is VERIFY-AT-BUILD, per its pin's marking.
+3. **The CW-0 same-commit obligation [CORRECTED 2026-08-02 (fp-audit)]:** any
+   wave landing a cross-layer read adds its CW-0 registry row IN THE SAME
+   COMMIT (§6's standing obligation) — the couplings volume's inclusion ratchet
+   reds a cross-layer read with no registry row, so a wave that defers its row
+   defers its own gate.
 
 
 

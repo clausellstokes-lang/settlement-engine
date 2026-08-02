@@ -192,3 +192,43 @@ avoids a 360-at-once grant); (2) THE WR-9 GATE READING — ratify "product certi
 gates on the WR program landing lit," or split war_convergence_instrumented out of the
 required keys until then. FOLLOW-UP row: verify corrector 4's four companion bracket
 notes landed in DESIGN_REALM_DIRECTIVES (cross-agent seam; sweep at next validation).
+
+
+## FP CORRECTION-PASS CHAIR RULINGS 2026-08-02 (run wf_76214688-ba0: 162 changes by
+## 7 volume correctors + the cohesion fixer; 19 unresolved forks — the FP corpus's
+## own block, distinct from the prior pass's block above)
+TRIAGE: 13 of the 19 were cross-file verification flags, ALL VERIFIED LANDED by the
+chair (grep receipts in the session ledger row): the spine's SP-6a/SP-6b band-family
+table + SP-5b banded-stock family + §5 CW-0 same-commit obligation; INTERIOR's full
+J-INT-* renumber (35 new-form, 0 stale); COUPLINGS' knowledge-desk adoption with
+`deskDisputed` dropped from the schema + CPL-20 repointed at IN-5(d); GR-3's five-row
+faith term family with FAITH consuming GRAMMAR's spellings (`shared_rite`, never
+`shared_rite_compact`) and J-CPL-6 re-ruled; `faith_converted` propagation clean (no
+stale bare-`converted` cross-refs; the misattributing "treaty's own endings" passages
+are gone from FAITH and INFO); CPL-3/8/17/18 ADDS rows + the CPL-16 rewrite (believed
+road, letters home, lost column); GR-3's `labor_compact` executor + banded read; the
+WR-10 graceful-degradation twin note in the war volume; no stale closed-at-three text
+anywhere. ONE MISS REPAIRED BY THE CHAIR: FAITH WF-2a/2b lacked the pilgrim
+flow-class deferral twin (COUPLINGS §10 register row 11) — one marked paragraph
+landed under WF-2b's couplings line.
+RULED (each vetoable):
+- **CR-1 — J-INT-13 (INT-8's lit-kind pool upgrade vs THE PROMISE):** the DARK
+  PROSE-VERSION-FLAG arm is the default — goldens stay byte-identical; the
+  adjudicated batch re-record remains OWNER-ELECTIVE at any tuning window. This row
+  IS the recorded ruling J-INT-13 gates on.
+- **CR-2 — applyWorldPulse.js:322's second storageMonths fold (beside
+  generosityUpdates.applyFoodDeltasToUpdates):** pre-ruled for TR-4 build time — Sol
+  consolidates the two folds into the one applicator FIRST, behind a
+  no-behavior-change pin (same-seed byte-identical pre/post), before the TR-4 arm
+  lands; if consolidation shifts behavior, STOP and report to the chair — a live
+  two-writer defect is adjudicated, never silently normalized.
+- **CR-3 — the tuning audit's machine-readable BAND REGISTRY (proposed as a new
+  spine wave):** DECLINED as a separate wave; the ADOPTED form is the middle the
+  couplings corrector took — SP-6's two standing rules + the table↔wave
+  reconciliation walker ARE the registry, with the volumes' §7/§8 tables as the
+  machine-readable surface; SP-8 remains THE AGE LAYER. If the walker proves
+  insufficient at build, the registry returns as an SP amendment.
+- **CR-4 — FAITH's seatBooks stance-choices seam (WF-3 → INT-1 booksOf):** the
+  reconciled record STANDS (TRADE + POP reserved, FAITH deferred); reserving the
+  seam is WF-3 design work for the FAITH build, not a cohesion edit — revisit when
+  WF-3's decision surface is drafted.

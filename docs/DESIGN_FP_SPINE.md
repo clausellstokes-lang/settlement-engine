@@ -77,6 +77,14 @@
 ## §2 THE SHARED SPINE INFRASTRUCTURE (built once, consumed by all six —
 ## width through reuse is how constant density stays affordable)
 
+[CORRECTED 2026-08-02 (fp-audit) — SP FLAG NAMES, the convention made law
+where it binds: the six volumes drafted in parallel and could not cite SP
+flag names (the trade drafter flagged the gap). SP waves assign their own
+flag names at build; every volume binds its lit-preconditions by SP NUMBER,
+never a guessed flag name, and the implementer resolves names at build
+(VERIFY-AT-BUILD) — the convention FAITH §3 and COUPLINGS §0 already state,
+authored here so "SP-N landed" resolves corpus-wide.]
+
 - **SP-1 THE ERRAND SYSTEM** (extends WR-7a's design): `spatialLedgers.errands`,
   one writer, purpose vocabulary above, declared/true split, per-errand keyed
   forks, the snapshot, interception surface, DM-KILL-closes-`lost` (the ruled
@@ -103,29 +111,114 @@
   faith communion, a migration pressure, a shared threat), drafting is
   TWO-SIDED via the two-picture contract (negotiationPictures — WR-7's seam,
   built once, used for war-end AND peacetime), and FAITH + POPULATION TERM
-  FAMILIES join the catalog (missionary access, shared-rite compacts,
-  pilgrimage rights; migration rights, labor compacts, grain-for-settlement
-  provisions). Expiry gains its receipt; succession-repudiation lands;
-  the standalone NAP gets its writer; renegotiation-from-strength opens.
-  EVERY TREATY, at last, can be negotiated rather than dictated.
+  FAMILIES join the catalog. [CORRECTED 2026-08-02 (fp-audit) — two chair
+  rulings recorded at the constitution: **R1, ONE INSTRUMENT PER PAIR IS
+  LAW** — the treaty ledger's one-per-pair key is not a bug; peacetime
+  formation AMENDS the pair's standing instrument, minting one only where
+  none exists; reciprocal/two-sided pacts are DIRECTIONAL TERMS inside the
+  one instrument (a term gains a beneficiary field; the §13 stacking
+  machinery hosts bilateral direction), and a second security term composes
+  under the stacking rules or is refused with a receipt — GRAMMAR's
+  formation waves are drafted amendment-shaped. **R3, ONE CATALOG LIST** —
+  term-family membership, spelling, and closure for ALL families (faith and
+  population included) live in GRAMMAR's canonical TERM_CATALOG list (GR-3
+  mints); this document and every volume POINT at that list and never carry
+  a second one — the audit found the family specced in two volumes with
+  divergent membership and spelling, and this sentence is the cure.] Expiry
+  gains its receipt; succession-repudiation lands; the standalone NAP gets
+  its writer; renegotiation-from-strength opens. EVERY TREATY, at last, can
+  be negotiated rather than dictated.
 - **SP-4 THE POSTURE READ:** one module composing risk tolerance (SP-4a: the
-  generalized appetite stock, per settlement + per house/temple actor class)
-  with strategic posture bands (SP-4b: derived from state × disposition
-  channels × the ruler's books) exposing `postureOf(settlement)` +
-  `riskToleranceOf(actor)` — threshold-shaped reads only (E3's law: posture
-  colours, never selects targets). Dossier-rendered as band words.
+  generalized appetite stock, per settlement + per house/temple actor class —
+  [CORRECTED 2026-08-02 (fp-audit)] the actor-class set is CLOSED at those
+  two plus the settlement itself; a wave needing a new appetite class
+  (the audit caught a congregation-shaped read in WF-5b) binds to an
+  existing class or takes an explicit SP-4a amendment HERE, never mints a
+  third stock in a volume) with strategic posture bands (SP-4b: derived from
+  state × disposition channels × the ruler's books) exposing
+  `postureOf(settlement)` + `riskToleranceOf(actor)` — threshold-shaped
+  reads only (E3's law: posture colours, never selects targets).
+  [CORRECTED 2026-08-02 (fp-audit) — the sequencing hole the cohesion audit
+  named: the ruler's books land LAST (INTERIOR INT-1, `seatBooksEnabled`)
+  while five programs consume `postureOf` from their first flagged wave.
+  THE DEGRADED ARM, declared: until seatBooks lands, SP-4b composes state ×
+  disposition channels only — the books term is ABSENT, not zero, and the
+  posture receipt names which inputs it had; the SP-4 wave carries the
+  matching golden (posture with and without the books term), and lighting
+  `seatBooksEnabled` is a DISCLOSED same-seed shift for every posture
+  consumer in five programs (INT-1's disclosed-shift list carries it).]
+  Dossier-rendered as band words.
 - **SP-5 THE CONFIDENCE-STOCK FAMILY:** one idiom (banded stock, event-moved,
   decay toward neutral, receipts on band crossings) instantiated as:
   confidence-in-god (FAITH — exists, extends), house credibility (TRADE),
   the seat's domestic credit (INTERIOR — legitimacy exists; the family makes
-  its grammar reusable), source credibility (INFO — exists). No new stock
-  outside the family.
+  its grammar reusable), source credibility (INFO — exists). No new
+  CONFIDENCE stock outside the family [CORRECTED 2026-08-02 (fp-audit): the
+  old absolute "no new stock outside the family" was contradicted by two
+  volumes' legitimate non-confidence stocks (TRADE's house
+  `books.holdings`/`books.credit`, FAITH's `templeWealth`) — the closure is
+  scoped to what it meant, and note TRADE's `books.credit` is a WEALTH band,
+  spelled distinct from this family's "domestic credit" member].
+- **SP-5b THE BANDED-STOCK FAMILY [CORRECTED 2026-08-02 (fp-audit) — new,
+  from the tuning-ledger audit: the banded-decaying-stock idiom was
+  instantiated at least six times with six independently-authored decay
+  bands — the per-volume minting problem on the class the runaway lesson
+  makes most dangerous]:** non-confidence banded stocks (house
+  holdings/credit, temple wealth, the appetite stocks) share ONE idiom:
+  banded, event-moved, a decay-toward-neutral half-life drawn from ONE
+  shared half-life shape, and ONE crossing-receipt grammar. Volumes tune the
+  per-instance half-life BAND from the shared table (their §7 tables carry
+  the instance rows); no volume authors a new decay law or crossing grammar.
+  The anti-ratchet guarantee (every stock decays toward neutral) is the
+  family's, asserted once.
 - **SP-6 THE NARRATION KIT:** the two-voices register, band-word vocabularies,
   the address law, id discipline, WHAT_PHRASES + routing registration, and
   the endings-envelope harness (WR-9's shape) packaged as the checklist every
   program's news classes complete. Plus the pacing registration (§1.12).
+  **THE BAND-FAMILY TABLE [CORRECTED 2026-08-02 (fp-audit) — chair ruling
+  R5: significance/severity band FAMILIES are minted HERE, in the narration
+  kit; volumes REFERENCE a family and assign their kinds to its classes —
+  they never author a scale. The tuning-ledger audit counted a dozen
+  independently-authored significance scales feeding ONE governor, and
+  five of the fourteen tuning-table drift instances were significance
+  bands]:**
+
+  | Family | Shape (minted once, here) | Volumes do |
+  |---|---|---|
+  | **SP-6a SIGNIFICANCE** | one banded scale `routine / notable / major` with the section-cap and significance-floor shapes (the pacing governor's input grammar) | assign each news KIND a class in the wave that mints it (a one-line Bands entry); tune class ASSIGNMENTS in their §7 tables, never the scale |
+  | **SP-6b SEVERITY** | one banded severity ladder for receipts/endings that grade an outcome (the WR-9 share-envelope discipline's grading axis) | grade their endings against the ladder; envelopes reference ladder bands |
+
+  Two standing rules ride the table: (1) EVERY named band in any wave's
+  Bands line lands in that volume's §7/§8 tuning table — a reconciliation
+  walker asserts table↔wave totality BOTH directions (the fourteen-drift
+  class the audit measured dies mechanically, not editorially); (2) a
+  volume-local band that is neither significance nor severity declares
+  itself volume-local in its tuning table row — the owner signs one scale
+  per family plus assignments, never a dozen scales.
 - **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion + the
   mode-speed table (J-D11(b)) landed as spine infrastructure ahead of all six.
+- **SP-8 THE AGE LAYER [CORRECTED 2026-08-02 (fp-audit) — new, per the
+  chair's assignment: J-D12 cross-wired into the corpus as its era layer,
+  which J-D12(e) schedules "after the audit lands" — this is that
+  cross-wire]:** the age toggle (DESIGN_REALM_DIRECTIVES.md J-D12, veto
+  open) joins the spine as the DISPOSITION SYSTEM AT REALM SCALE with the
+  DM's hand on it: two axes — Realm at War ↔ Realm at Peace, and PIOUS ↔
+  SECULAR ↔ DYNAMIC — with the axis FAMILY CLOSED at these two (J-D12(f),
+  owner verbatim), each applying a named
+  BAND-FAMILY PRESET over the EXISTING force/counterforce ledgers this
+  corpus builds — climate, never fabrication (no war without its casus, no
+  faith event without its lens; the preset lowers and raises BARS through
+  the E3 threshold idiom). Convergence physics per J-D12(b): the preset is
+  a DRIFT with its own dwell, hysteresis-guarded, receipted as ERA EVENTS
+  in the Herald's grandest register; targets are MEASURED by per-era WR-9
+  envelope variants (a peace age gone quiet reds exactly as a war age gone
+  total), never enforced. THE PROMISE holds: the toggle is a versioned
+  campaign-rules setting — same seed + same toggle history = same world.
+  What the corpus owes THIS wave: every volume's §7/§8 tuning table marks
+  which of its bands are ERA-PRESET-ELIGIBLE (a preset may move only
+  marked bands), and the dossier round-trip reads the age through each
+  settlement's own posture. One paragraph here is the law; the preset
+  tables land with the age wave itself, owner-signed.
 
 ## §3 CRUX RULINGS PER PROGRAM (binding; the volumes elaborate, never re-open)
 
@@ -188,20 +281,31 @@
   price — reconciliation as policy, not only clock decay).
 
 ## §4 THE COUPLING DOCTRINE (DESIGN_FP_COUPLINGS.md walks every pair)
-21 ordered pairs across seven layers; the volume walks each with reads,
-receipts, counterforce, and a named historical archetype (the tax dispute
-that becomes a reformation; the pilgrimage route that becomes a war target;
-the bank broken by a believed rumor; the diaspora that funds the reconquest).
-Pairs with no designed coupling are DECLARED empty (silence is a decision,
-not an omission).
+21 pairs / 42 directions across seven layers [CORRECTED 2026-08-02
+(fp-audit): the old "21 ordered pairs" was arithmetically wrong — seven
+layers give 21 unordered pairs and 42 ordered directions; the coupling
+volume walks each pair in both directions and its §3 matrix grades all 42];
+the volume walks each with reads, receipts, counterforce, and a named
+historical archetype (the tax dispute that becomes a reformation; the
+pilgrimage route that becomes a war target; the bank broken by a believed
+rumor; the diaspora that funds the reconquest). Pairs with no designed
+coupling are DECLARED empty (silence is a decision, not an omission).
 
 ## §5 SEQUENCING + DISCIPLINE
 Behind the sim-proof path (WR waves → lighting → soaks → tuning), programs
 ordered SP → GRAMMAR → INFO → TRADE → FAITH → POP → INTERIOR-completions →
 COUPLINGS' cross-wires, each wave dark, one commit, full gate, ledger row,
 per the standing implementer protocol (the war volume's §10 binds here
-verbatim). The AUDIT STAGE is part of the build: no volume ships to Sol
-unaudited. Tuning debt is acknowledged: the band count grows into the
-hundreds; band FAMILIES (spine-shared) keep the owner's signature surface
-tractable; the tuning pass grows accordingly and that is the priced cost of
-the ambition.
+verbatim). [CORRECTED 2026-08-02 (fp-audit)] One standing obligation joins
+the protocol: ANY wave landing a cross-layer read adds its CW-0 coupling-
+registry row (pairId, direction, read, receiptField, counterforce, flags,
+owningVolume, owningWave, intendedDesk) in the SAME commit — the walker
+asserts it; the audit found the obligation lived only in the coupling
+volume, so its inclusion ratchet would have redded the waves it guards.
+The AUDIT STAGE is part of the build: no volume ships to Sol unaudited.
+Tuning debt is acknowledged: the band count grows into the hundreds (the
+audit's census: roughly 270 named bands plus ~70 envelope shapes across the
+seven volumes); band FAMILIES (spine-shared, SP-6's table) keep the owner's
+signature surface tractable, and SP-6's reconciliation walker keeps the
+volume tables honest; the tuning pass grows accordingly and that is the
+priced cost of the ambition.

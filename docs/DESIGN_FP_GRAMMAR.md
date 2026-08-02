@@ -83,6 +83,9 @@ INTERVAL_WEEKS plus travel physics where anything moves · posture/risk consumpt
 law: open the town, find the trace where a DM would look). The waves in §5 are
 written with these as labeled fields so the audit stage can hunt shallow spots
 mechanically.
+[CORRECTED 2026-08-02 (fp-audit)] THE TWO-TIMESCALE ECHO IS PER-WAVE LAW here as
+in TRADE's T10: every wave's Clock field names its fast layer AND its slow
+verdict — a Clock line that gives only a denomination is a defect.
 
 ### 1c Grammar-specific laws (each anchored in settled rulings)
 - **THE ONE-INSTRUMENT LAW [CORRECTED 2026-08-02 (fp-audit), chair ruling R1]:**
@@ -269,7 +272,8 @@ was silent on them; silence was the defect):
   dark the band reads clean-by-absence (no charge, no read — the declared
   degraded arm); the counterforce bites only when both are lit. Recorded here so
   the dependency is visible to the walker, not discovered at soak.
-- `seatBooksEnabled` (INTERIOR IN-1): GR-2's acceptance reserve names `booksOf`
+- `seatBooksEnabled` (INTERIOR INT-1 [CORRECTED 2026-08-02 (fp-audit): R4
+  renumbering — bare IN-N is INFORMATION's]): GR-2's acceptance reserve names `booksOf`
   as an INPUT behind `seatBooksEnabled` AND `pactFormationEnabled`; dark ⇒
   posture + risk only (declared degraded arm, receipt names which inputs it had).
 - `routineMajorApproval` (opt-in simulation rule, NOT a program flag): GR-4's
@@ -289,12 +293,25 @@ the same room. Concretely:
 - `pactProposals.js` (NEW, ONE writer for `spatialLedgers.pactProposals`): owns
   the proposal lifecycle — open, answer-due, refused, expired, signed. It never
   mints a treaty.
-- `peaceTerms.js` gains ONE exported pass, `advancePeacetimePacts(worldState)`,
-  called from `pulseKernel` adjacent to `advanceTreaties`, flag-gated at the call
-  site (dark ⇒ the call is absent ⇒ byte-identical). The pass reads accepted
-  proposals and mints through the SAME internal `mintTreaty`, stamping
-  `provenance: 'negotiated'`. One artifact, one compliance stack, one document,
-  two doors.
+- `pactFormation.js` (NEW lazy leaf, writer-family member — §1c R2) owns
+  `advancePeacetimePacts(worldState)`, called from `pulseKernel` adjacent to
+  `advanceTreaties`, flag-gated at the call site (dark ⇒ the call is absent ⇒
+  byte-identical). [CORRECTED 2026-08-02 (fp-audit)] The pass reads ACCEPTED
+  proposals (through `pactProposals.js`' exported closer — it never flips
+  proposal state itself) and executes them AMENDMENT-SHAPED per the
+  one-instrument law: where the pair holds a standing instrument (live,
+  defaulted shell, anything), the acceptance APPENDS a lineage act and the
+  sheet's terms to THAT record through peaceTerms' exported amendment seam;
+  where the pair holds none, it mints through peaceTerms' exported mint seam
+  (the SAME internal `mintTreaty`, net-zero seam line), stamping
+  `provenance: 'negotiated'`. `peaceTerms.js` itself gains only the two exported
+  seam lines, bought net-zero (§1c). One artifact, one compliance stack, one
+  document, two doors — and never a second record at the pair key. The WAR DOOR
+  gains the same amendment awareness under the flag (J-GR-14b): where PASS 1's
+  pair-slot guard today `continue`s against a standing instrument and mints
+  NOTHING, the dictated peace lands as an `amended` lineage act (provenance
+  `dictated`) on the standing record — a disclosed lit-path change; dark ⇒ the
+  landed skip, byte-identical. [CORRECTED 2026-08-02 (fp-audit)]
 - **Transport is the WR-7 two-transport pattern, verbatim:** `envoyDiplomacyEnabled`
   dark ⇒ the proposal travels abstractly — its `answerDueTick` is computed from
   the SAME transit-kernel leg read the errand would use (read-only; no NPC minted),
@@ -331,35 +348,138 @@ worldState.spatialLedgers.pactProposals    — GR-2, writer pactProposals.js
   // expired records prune after their receipt lands (the ledger is a queue,
   // not an archive; the chronicle keeps the story).
 
-treaty record extensions                   — GR-1/GR-2/GR-4; peaceTerms.js stays
-  sworn: { [settlementId]:                 //   the ONE writer
-      { npcId, name, swornTick } }         // stamped at mint from the seat's
-                                           //   legitimate power (existing reads);
+treaty record extensions                   — GR-1/GR-2/GR-4/GR-5; the WRITER
+  sworn: { [settlementId]:                 //   FAMILY (§1c) is the one writer
+      { npcId, name, swornTick } }         // stamped at mint/amendment from
+                                           //   `oathHolderOf` (GR-1 NEW WORK —
+                                           //   see GR-1; the "existing read"
+                                           //   claim was a substrate error);
                                            //   LEGACY treaties carry NO stamp and
                                            //   render seat-voice forever — the
                                            //   treatyTicksPerYear provenance
                                            //   discipline reused verbatim, never
                                            //   backfilled
   provenance: 'dictated' | 'negotiated'    // GR-2/5; legacy unmarked ⇒ 'dictated'
-             | 'renewed' | 'converted'     //   at read, never rewritten
+             | 'renewed' | 'converted'     //   at read, never rewritten; treaty-
+                                           //   level value = the LATEST lineage
+                                           //   act's provenance
+  lineage: [ { act, tick, termIds,         // [CORRECTED 2026-08-02 (fp-audit),
+      ending? } ]                          //   R1] the amendment history on the
+                                           //   LIVING record: act ∈ {formed,
+                                           //   amended, renewed, renegotiated,
+                                           //   converted} — renewal/renegotiation/
+                                           //   conversion are lineage acts, NEVER
+                                           //   a re-mint at the pair key; the
+                                           //   superseded terms' endings live on
+                                           //   the entry; "the third peace of
+                                           //   this name" reads from here; legacy
+                                           //   treaties carry NO lineage (absent
+                                           //   ⇒ single-act at read, never
+                                           //   backfilled)
+  TermRecord gains beneficiary             // [CORRECTED 2026-08-02 (fp-audit),
+                                           //   R1] settlementId | 'both'; the
+                                           //   obligor of a directional term is
+                                           //   the OTHER party; §13 stacking for
+                                           //   `provenance:'negotiated'` lineage
+                                           //   keys on family × beneficiary (a
+                                           //   reciprocal grain-for-ore pact is
+                                           //   two economic terms, opposed
+                                           //   beneficiaries, ONE instrument);
+                                           //   war-door drafting UNCHANGED (no
+                                           //   beneficiary ⇒ victor-directed at
+                                           //   read). Within one family ×
+                                           //   beneficiary cell a SECOND term is
+                                           //   REFUSED WITH A RECEIPT
+                                           //   (`term_refused_stacking`) unless
+                                           //   the pair is on the frozen
+                                           //   COMPOSABLE list — seed member:
+                                           //   {non_aggression, mutual_defense}
+                                           //   (walker-enforced, same freeze
+                                           //   discipline as TERM_CATALOG)
+  per-party compliance                     // [CORRECTED 2026-08-02 (fp-audit)]
+                                           //   a symmetric/two-sided pact has TWO
+                                           //   obligors and TWO monitors; the
+                                           //   role-generalized wrapper lives in
+                                           //   the `pactCompliance.js` leaf:
+                                           //   `evolveCompliance` is respelled
+                                           //   `{ obligorCapacity01,
+                                           //   monitorReach01 }` at its ONE call
+                                           //   site (net-zero param rename) and
+                                           //   the leaf calls it once per obligor
+                                           //   side; `victorMonitorReach`
+                                           //   generalizes to
+                                           //   `observerReach(observerId,
+                                           //   obligorId)` in the leaf; a
+                                           //   symmetric term's complianceState =
+                                           //   worst of its sides; victorId/
+                                           //   loserId persist as LEGACY
+                                           //   PROVENANCE on war-door records,
+                                           //   never required by negotiated
+                                           //   lineage; TREATY_COMPLIANCE_VOICE
+                                           //   gains a symmetric-voice row family
+                                           //   (the house never says "signed
+                                           //   under X's terms" about a Kadesh
+                                           //   pact) — NEW WORK, each piece
+                                           //   pinned (a two-sided pact with each
+                                           //   side separately strained/detected
+                                           //   is the wave pin)
+  worstObservedEver: 'honored'|'strained'  // [CORRECTED 2026-08-02 (fp-audit)]
+             |'defaulted'                  //   MONOTONE, one writer (the PASS 2
+                                           //   worstObserved loop via a net-zero
+                                           //   seam), written ONLY under
+                                           //   `treatyRenewalEnabled` (dark ⇒
+                                           //   never written ⇒ byte-identical);
+                                           //   read `?? 'honored'` — it records
+                                           //   history SINCE LIGHTING, declared;
+                                           //   GR-5's conversion gate and GR-6's
+                                           //   fraying occasion read it BY NAME
   breachType gains 'succession_repudiation' // GR-4; severity BANDED below
                                            //   repudiation's 1.0
 
 TERM_CATALOG extensions                    — GR-3, same-commit with the frozen
+                                           //   walker. [CORRECTED 2026-08-02
+                                           //   (fp-audit), R3] THIS LIST IS
+                                           //   CANONICAL for ALL term families,
+                                           //   corpus-wide: one list, one
+                                           //   spelling, one closure contract
+                                           //   (GR-3 carries the contract);
+                                           //   FAITH/TRADE/POPULATIONS consume
+                                           //   by pointer, never re-mint
   faith family:      missionary_access | shared_rite | pilgrimage_right
+                     | tolerance_guarantee | temple_restitution
+                                           // five rows, GRAMMAR spellings
+                                           //   (`shared_rite`, never
+                                           //   `shared_rite_compact`); the last
+                                           //   two adopted from FAITH WF-6 —
+                                           //   J-GR-15's widening ruling
   population family: migration_right | labor_compact | settlement_provision
   security family +: mutual_defense        // the shared-threat trigger's product;
                                            //   its readers ALREADY EXIST
-                                           //   (warDeployment.js:218-225)
+                                           //   (warDeployment.js:218-225);
+                                           //   composes with non_aggression via
+                                           //   the COMPOSABLE list (above)
   executor kind 'grant' (7th)              // standing-right reads exposed from
                                            //   treatyEnforcement.js (the one-reader
                                            //   law: expiry lifts same tick)
 
-succession questions                       — GR-4: NO new ledger. The question is
-                                           //   an actor-initiated-major proposal
-                                           //   riding worldState.proposals
-                                           //   (actorMajorApproval's machinery),
-                                           //   hold-then-expire-to-HONOR.
+succession questions                       — GR-4: NO new ledger.
+                                           //   [CORRECTED 2026-08-02 (fp-audit)]
+                                           //   TWO MODES, both declared (the
+                                           //   queue is opt-in and dark in every
+                                           //   default world — §2 census row):
+                                           //   `routineMajorApproval` dark ⇒ NO
+                                           //   queued question; the answer scores
+                                           //   directly at the succession event,
+                                           //   HONOR the scored default, DISAVOW
+                                           //   only past a band (silence-
+                                           //   equivalence without the queue).
+                                           //   Lit ⇒ an actor-initiated-major
+                                           //   proposal riding
+                                           //   worldState.proposals,
+                                           //   hold-then-expire-to-HONOR — a
+                                           //   DECLARED divergence from the
+                                           //   landed queue's expire-to-DECLINE
+                                           //   terminal, pinned (GR-4).
 ```
 
 **What is deliberately NOT modeled:** no negotiation-session state beyond the
@@ -383,7 +503,9 @@ order. Historical register: the medieval truce was term-dated and its lapse was 
 public fact — everyone knew the day the truce of Espléchin ran out.
 - **The lapse beat:** the expiry loop already walks every expiring term
   (`peaceTerms.js:720-724`) and the prune site already knows when a treaty is
-  spent (`:763-765`) — the beat is one push away. New kind `treaty_lapsed`:
+  spent (`:763-765`) — the beat is one push away (beat composition lives in the
+  `treatyLifecycleVoice.js` leaf per §1c; the loop gains net-zero seam lines
+  only [CORRECTED 2026-08-02 (fp-audit)]). New kind `treaty_lapsed`:
   id `wizard_news.{tick}.treaty_lapsed.{a}.{b}`, both parties BY NAME, the term
   family that lapsed, the treaty's AGE in years (from `signedTick`, on the
   treaty's own clock marker), and the reason ("ran its term"). The eulogy names
@@ -393,7 +515,9 @@ public fact — everyone knew the day the truce of Espléchin ran out.
   the beat says so in the house voice ("the road between them is open again, to
   anything").
 - **The detection beat:** when a term's OBSERVED state first crosses out of
-  honored (the victor's picture, behind monitor reach — `DETECT_FLOOR`), mint
+  honored (the MONITORING side's picture, behind its reach — `DETECT_FLOOR`;
+  per-party under §4's `pactCompliance.js` role generalization, the victor's
+  picture on legacy war-door records [CORRECTED 2026-08-02 (fp-audit)]), mint
   `treaty_default_detected` naming the term, the defaulter, and what the monitor
   actually saw. The NEGATIVE is the law: an undetected cheat mints NOTHING — the
   fog holds; quiet default stays silent in every feed (Law One: the engine models
@@ -424,6 +548,8 @@ speaks ledger fact; the lie tie speaks only at exposure (a belief event).
 (seat-voice when legacy).
 **Clock:** age and expiry on the treaty's OWN clock marker (52 current / legacy 12
 — WR-0c item (4)'s provenance rule); beats denominated in ticks, spoken in years.
+Fast layer — the beat at the crossing or lapse tick; slow verdict — the age the
+eulogy speaks (the instrument's whole life). [CORRECTED 2026-08-02 (fp-audit)]
 **Posture consumption:** none — receipts don't consult posture (they report).
 **Couplings:** GRAMMAR×INFO (the lie tie). Row in DESIGN_FP_COUPLINGS.md.
 **Endings entries:** `ran_its_term`, `hollowed_detected` join the pact endings
@@ -452,12 +578,21 @@ Treaties and obligations record WHO swore. Historical register: the medieval
 treaty was a personal oath between princes — every royal death reopened every
 question. THE HEIR WHO BREAKS THE FATHER'S OATH becomes tellable (GR-4 pays this
 off; this wave lands the identity).
-- **The stamp:** at mint (BOTH doors — war-end and peacetime), `peaceTerms.js`
-  stamps `sworn` per party from the seat's legitimate power at signature —
-  read-wiring through existing planes (the legitimate-power read the succession
-  machinery already owns; H1 durable ids), never new NPC state. Mediated treaties
-  already name the broker (`peaceTerms.js:893`); the stamp completes the
-  signature line.
+- **The stamp [CORRECTED 2026-08-02 (fp-audit)]:** at mint AND at every lineage
+  act that swears new terms (BOTH doors — war-end and peacetime), the writer
+  family stamps `sworn` per party from
+  `oathHolderOf(worldState, settlementId) -> { npcId, name } | null` — NEW
+  WORK, homed in the `oathHolder.js` leaf (§1c). The original claim of an
+  existing "legitimate-power read" was a substrate error: the survey found NO
+  ruler-person read anywhere in `src/domain` (§2 census; `rulingPower.js` deals
+  in faction/power NAMES, never npc ids). The read is COMPOSED here, once:
+  `governingFactionOf` → that faction's seated NPCs (`npcInFaction` — the
+  sanctioned faction-key helpers ONLY, never hand-rolled) → codepoint-stable
+  pick among seat-holders → H1 durable id (`durableIdForRoster`). `null` (no
+  governing faction, no seated NPC) ⇒ NO stamp ⇒ seat-voice — the same contract
+  legacy treaties get; never an invented name, never new NPC state. Mediated
+  treaties already name the broker (`peaceTerms.js:893`); the stamp completes
+  the signature line.
 - **The provenance rule (reused verbatim from WR-0c item (4)):** legacy treaties
   are NEVER backfilled. Unstamped ⇒ "the seat swore" — seat-voice forever. No
   migration invents a signer.
@@ -484,7 +619,10 @@ any court can make from public history.
 **Casting:** rulers via existing legitimate-power reads; never-kill,
 never-resolve-fates absolute — the stamp records history, it never schedules a
 death.
-**Clock:** `swornTick` on the world clock; no durations introduced.
+**Clock:** `swornTick` on the world clock; no durations introduced. Fast layer —
+the stamp at the signing tick; slow verdict — the oath's decades-long life,
+ended only by GR-4's question or the treaty's own ending. [CORRECTED 2026-08-02
+(fp-audit)]
 **Posture consumption:** none in this wave.
 **Couplings:** GRAMMAR×INTERIOR (the deferred debtor's-heir question);
 GRAMMAR×INFO (succession-risk belief reads). Rows declared.
@@ -498,7 +636,11 @@ taught); JSON-round-trip on stamps (the alias trap — `npcId` references roster
 objects); death of an oath-holder changes NOTHING in this wave (no auto-void, no
 beat — the oath law's negative); both doors stamp (war-end fixture + peacetime
 fixture once GR-2 lands; until then the war-door pin suffices and the GR-2 pin
-extends it); dormancy golden.
+extends it); THE SAME-SEAT pin [CORRECTED 2026-08-02 (fp-audit)] —
+`oathHolderOf` is deterministic (same world, same person — the codepoint-stable
+tie-break pinned), regen re-stamps the regenerated world's SAME seat-holder on
+a rebuilt treaty, and the null contract holds (no holder ⇒ seat-voice, never a
+crash, never an invented name); dormancy golden.
 **Lifecycle:** `sworn` persists with the treaty — serialize + JSON-round-trip
 pinned; regen that rebuilds a treaty re-stamps from the regenerated world's seat;
 undo restores stamps with the record; import validates npcId against the roster
@@ -519,7 +661,13 @@ vassals; the instrument the engine has never minted.
     believes B has dear (both ends beliefs; the wrong-market tragedy is legal and
     receipted — a pact CAN be signed for grain the counterparty never had; the
     world discovers the mismatch as the next grievance, K3's absurdity law
-    reaching peacetime).
+    reaching peacetime). [CORRECTED 2026-08-02 (fp-audit)] Its term family is
+    the EXISTING economic family under §4's beneficiary axis — a demand drafts
+    `resource_share` (or a stream term) directed by beneficiary, and a
+    reciprocal grain-for-ore sheet is two economic terms with opposed
+    beneficiaries on ONE instrument; TRADE's TR-5 commercial family JOINS this
+    trigger's draft lens when it lands (declared there), so the reachability
+    pin is satisfiable at GRAMMAR build time with no TRADE precondition.
   - `faith_communion` — shared-rite alignment: the existing faith-facet quadrant
     reads (`cohesionWeave` substrate) crossing a communion band; proposes faith
     terms (GR-3).
@@ -535,24 +683,60 @@ vassals; the instrument the engine has never minted.
   measure — §1c NO MARGIN IN PEACE). Out-of-posture proposals are LEGAL and priced:
   an insular seat that proposes anyway pays the posture price and the receipt
   says so (Req 10 — priced news, never forbidden).
-- **The answer:** at `answerDueTick` (transit-kernel dwell — §3), the counterparty
-  evaluates under ITS OWN truthFor + ITS reserve (posture- and risk-derived,
-  SP-4): sign (both-yes ⇒ `advancePeacetimePacts` mints, provenance `negotiated`,
-  signing beat with trigger named), refuse (receipted `pact_refused`; a
-  turning-point entry on the relationship record — THE REFUSAL REMEMBERED; banded
-  trust delta only, J-GR-7's asymmetry), or the proposal expires unanswered
-  (silence is an answer; cheaper still, but remembered as silence).
+- **The answer [CORRECTED 2026-08-02 (fp-audit)]:** at `answerDueTick`
+  (transit-kernel dwell — §3), the counterparty evaluates under ITS OWN
+  truthFor + ITS reserve (posture- and risk-derived, SP-4; the reserve ALSO
+  reads the proposer's oathbreaker-credibility band — GR-4's charge gains its
+  biting consumer HERE: a lineage that has disavowed twice is refused on
+  evidence a first-time disavower is not, with an out-of-band "they will not
+  treat with us" receipt; `oathHolderEnabled` dark ⇒ the band reads
+  clean-by-absence, the §3 declared degraded arm): sign (both-yes ⇒
+  `pactFormation.js`' `advancePeacetimePacts` executes AMENDMENT-SHAPED per §3
+  — the pair's standing instrument is amended, or minted only where none
+  exists — provenance `negotiated`, signing beat with trigger named and
+  transport mode recorded), refuse (receipted `pact_refused`; a turning-point
+  entry on the relationship record — THE REFUSAL REMEMBERED; banded trust delta
+  only, J-GR-7's asymmetry), or the proposal expires unanswered (silence is an
+  answer; cheaper still, but remembered as silence).
 - **THE STANDALONE NAP (settled: "the standalone NAP gets its writer"):** the
-  writer IS this pass. A `shared_threat` or post-rivalry détente crossing may
-  propose a sheet of exactly one symmetric `non_aggression` term. Same artifact,
+  writer IS this pass. A `shared_threat` crossing may propose a sheet of
+  exactly one symmetric `non_aggression` term ([CORRECTED 2026-08-02
+  (fp-audit)] the "post-rivalry détente" phrase is STRUCK — it named a sixth
+  trigger outside the closed five with no token, no scorer, and no reachability
+  pin; détente-born NAPs return if and when a `rivalry_cooling` trigger is
+  ruled into the closed set with its own producer machinery — cut per the
+  no-orphan-vocabulary ruling, not deferred by silence). Same artifact,
   same compliance, same war-block read (`treatyBlocksWar` — already pair-symmetric),
   same repudiation surface (WR-0c's `isRepudiableTreaty` gate already keys on a
   live NAP term — the peacetime NAP is repudiable at cost the day it is born).
   The survey's sharpest sentence dies here: two peaceful neighbours can sign one.
-- **DM grammar:** a realm verb `PROPOSE_PACT` (composer lane, always available)
-  lets the DM open a proposal by fiat; engine-minted signings are autonomous like
-  war-end signings (parity), while label changes keep riding their existing
-  proposal lanes untouched.
+- **THE WAR-OVERTAKEN CLOSURE [CORRECTED 2026-08-02 (fp-audit)] (the
+  `broken_by_war` producer — the vocabulary member had none):** the same pass
+  watches for a war OPENING between parties whose standing instrument still
+  carries live negotiated terms (legal where the instrument holds no
+  war-blocking term — a grain pact without a NAP does not block openers — or
+  where the block lifted through default while other terms lived): the live
+  negotiated terms CLOSE with pact ending `broken_by_war` on the lineage entry
+  (no breach shell — the war is its own public fact and the war record carries
+  that story), and the receipt names the war that ate the peace. Reachability:
+  a fixture pair signs a NAP-less grain pact, opens a war, and the ending mints
+  exactly once (pinned below).
+- **DM grammar [CORRECTED 2026-08-02 (fp-audit)] (the WR-0c registration shape
+  in full — the one-sentence verb was this wave's thinnest spot):** a realm
+  verb `PROPOSE_PACT`, composer lane. Registration surfaces, each in the verb's
+  own commit (§10's verb checklist): a `realmManifest.js` row with dials
+  (counterparty, trigger family, term sheet drawn from the closed catalog) and
+  typed veto codes (`no_cap_headroom`, `open_proposal_exists`,
+  `invalid_term_sheet`); the OFFERABILITY PREDICATE — the pair has proposal-cap
+  headroom and NO open proposal between them (a standing instrument is NOT a
+  blocker — formation amends, §1c R1); a `changeAuthorityPolicy.js`
+  always-proposal authority row; a `decisionTier` campaign-altering row; and an
+  execution handler that calls `pactProposals.js`' writer and nothing else.
+  PARITY: a DM-opened proposal is answered by the SAME evaluation path as an
+  engine-opened one (pinned); NEGATIVE: the verb is not offered where the
+  predicate fails (pinned). Engine-minted signings stay autonomous like war-end
+  signings, while label changes keep riding their existing proposal lanes
+  untouched.
 **Force / counterforce (named, same evidence):** force — the demand: believed
 scarcity/communion/pressure/threat scores the proposal. Counterforce — THE
 DEPENDENCY FEAR: the SAME believed-flow evidence scores the counterparty's (and
@@ -586,7 +770,9 @@ H generalized to peacetime; the INTERIOR volume elaborates); GRAMMAR×INFO
 (second-order belief in drafting). Rows declared, each with reads/receipts/
 counterforce per the coupling doctrine.
 **Endings entries (formation vocabulary, closed):** `signed`, `refused`,
-`no_overlap`, `expired_unanswered`.
+`no_overlap`, `expired_unanswered`. Plus ONE pact ending minted by this wave's
+war-overtaken closure: `broken_by_war` (§GR-7's vocabulary — its producer is
+declared above). [CORRECTED 2026-08-02 (fp-audit)]
 **Herald:** "Grain for ore: the courts have set their names to it." · "They asked,
 and were refused; the refusal will be remembered." · "Neither shall march on the
 other — signed in peace, not extracted at a war's end." · "No pact was reached;
@@ -604,7 +790,18 @@ each of the four triggers fires at least once in a real generated corpus
 (the unreachable-predicate hazard; `non_intervention` is the tombstone); NAP
 SYMMETRY — the peacetime NAP blocks BOTH openers and stays repudiable at cost;
 JSON-round-trip + writer/reader payload pin on the proposal ledger (boot the REAL
-writer, read through the REAL reader); dormancy golden.
+writer, read through the REAL reader); [CORRECTED 2026-08-02 (fp-audit)] THE
+STACKING-REFUSAL pin — a sheet colliding in an occupied family × beneficiary
+cell is REFUSED with the `term_refused_stacking` receipt, never silently
+dropped or stacked (§4), and the peacetime and war-end paths AGREE on stacking
+(one fixture, both doors); THE TWO-SIDED COMPLIANCE pin — a symmetric pact with
+each side separately strained/detected through §4's `pactCompliance.js`
+generalization; THE SERIAL-DISAVOWER pin — a twice-disavowed lineage's proposal
+is refused where a first-time disavower's is accepted, and the CLEAN LINEAGE
+pays nothing (GR-4's charge consumed, its negative); DM PARITY + the
+verb-predicate negative (above); THE WAR-OVERTAKEN pin (the `broken_by_war`
+fixture above, minted exactly once); the transport-mode field present on every
+formation receipt (§3's cross-program disclosure); dormancy golden.
 **Lifecycle:** `pactProposals` persists — serialize/JSON-round-trip pinned; regen
 re-derives open proposals from re-scored triggers (proposals are re-derivable
 intentions, NOT precious state — ruled J-GR-8; signed history lives in treaties
@@ -613,15 +810,24 @@ ledger byte-true; import validates trigger tokens against the closed five and
 drops invalid rows with a logged receipt; a DM KILL of a carrying envoy closes
 through WR-7's `lost` path and the proposal expires unanswered (the honest
 silence).
-**Dossier round-trip:** WarFaithTab gains the standing-proposal line ("An offer
-stands before the court: grain for ore; an answer is owed by spring") and the
-refusal memory surfaces through the existing turning-point rendering; TreatyPanel
-lists open proposals for the realm; PDF carries signed pacts as treaties (already
+**Dossier round-trip [CORRECTED 2026-08-02 (fp-audit)]:** WarFaithTab gains the
+standing-proposal line ("An offer stands before the court: grain for ore; an
+answer is owed by spring"); the refusal memory lands on surfaces that EXIST —
+the survey found NO turning-point rendering anywhere in components or pdf (§2)
+— so: the `pact_refused` beat is chronicle-routed (wizard_news plumbing,
+already live), and WarFaithTab gains a "the courts remember" line — NEW WORK on
+a surveyed surface, reading the relationship record's `turningPoints` archive
+(cap 24), with its own house-voice totality row and walker; TreatyPanel lists
+open proposals for the realm; PDF carries signed pacts as treaties (already
 does). The pin opens both towns mid-proposal and finds the line on each side —
-proposer sees "we have asked", counterparty sees "they ask".
+proposer sees "we have asked", counterparty sees "they ask" — and opens the
+refused pair's town to find the remembered refusal on BOTH the chronicle and
+the WarFaithTab line.
 **Bands:** four trigger crossing bands (family-shared shape, SP tuning
 discipline); MAX_OPEN_PROPOSALS (default 2); refusal trust delta; reserve
-derivation weights (posture × risk); out-of-posture price; dwell floor.
+derivation weights (posture × risk); out-of-posture price; dwell floor;
+oathbreaker-credibility refusal band (the GR-4 charge's consumer read)
+[CORRECTED 2026-08-02 (fp-audit)].
 
 ### GR-3 — THE NEW TERM FAMILIES (rides `pactFormationEnabled` — second slice,
 same flag; settled law, SP-3)
@@ -641,6 +847,19 @@ the Ostsiedlung locatio charters — settlers invited on written terms.
     pilgrim errands (FP-FAITH's legates/pilgrims) and by the route layer's
     existing flow classes. The pilgrimage that IS an economy and an interception
     surface is FAITH's to elaborate; the right that makes it lawful is minted here.
+  - `tolerance_guarantee` — executor `grant` [CORRECTED 2026-08-02 (fp-audit),
+    R3/J-GR-15]: adopted INTO the canonical catalog from FAITH WF-6 (GRAMMAR's
+    spellings and closure contract govern — §4): the grantor forswears
+    suppression of a named creed — the grant read gates the eviction/purge
+    lanes for that creed (suppression becomes breach); consumed by FAITH's
+    stance lanes AND load-bearing for WF-5b's underground-surfacing arm ("the
+    doors opened") — the coupling row names both volumes; WF-6 is the CONSUMER
+    wave, a pointer, never a second author.
+  - `temple_restitution` — executor `transfer` [CORRECTED 2026-08-02 (fp-audit),
+    R3/J-GR-15]: adopted from FAITH WF-6 under the same contract — post-war
+    repair of a named impaired/shell temple-class institution riding the
+    EXISTING conserved-stream physics on the payer's side; FAITH's institution
+    status machinery consumes; compliance semantics live HERE.
   - Conversion-mandate is deliberately NOT catalogued (design-doc idea rejected:
     it resolves belief by fiat — Law One; recorded as a declared non-goal, not an
     omission).
@@ -653,7 +872,8 @@ the Ostsiedlung locatio charters — settlers invited on written terms.
     consumed by TRADE/POP production arms (banded bonus, capped — a compact
     colours an economy, never replaces one).
   - `settlement_provision` — executor `transfer` (the existing conserved-grain
-    stream physics, direction chosen at draft) + a founding provision receipt
+    stream physics, direction chosen at draft — carried by §4's `beneficiary`
+    field [CORRECTED 2026-08-02 (fp-audit)]) + a founding provision receipt
     consumed by wave-E/P founding machinery (FP-POPULATIONS elaborates;
     grain-for-settlement is SP-3's own phrase).
 - **Security family gains `mutual_defense`** — executor `grant`:
@@ -662,6 +882,24 @@ the Ostsiedlung locatio charters — settlers invited on written terms.
   with no writer; this is the writer, and reachability is instant because the
   consumers pre-date the term). The voluntary alliance stops being a label with
   no terms.
+- **Catalog mechanics under the §1c ceiling [CORRECTED 2026-08-02 (fp-audit)]:**
+  the nine new rows land by moving `TERM_CATALOG` + its freeze into a pure-data
+  sibling (`termCatalog.js`, no store imports, the freeze walker follows the
+  data) imported by `peaceTerms.js` — a net-NEGATIVE combine on the 794/800
+  file that also buys seam headroom for the other waves; sizeBaseline's
+  TOLERANCE-0 discipline holds (ratchet-DOWN edit in the same commit).
+- **THE CONSUMER-DARK ARM (declared — §9's silence rule answered)
+  [CORRECTED 2026-08-02 (fp-audit)]:** GRAMMAR builds FIRST among the six; the
+  faith and population terms' biting consumers live in programs that land LATER
+  (FAITH/POP/TRADE). Until a consumer wave lands, a granted right is LEGAL
+  PARCHMENT WITH TEETH DEFERRED: it drafts, evolves compliance, strains,
+  expires, and speaks on every dossier surface — but the consuming read
+  (`missionaryAccessFor`, `migrationRightFor`, `laborCompactFor`, …) has no
+  reader yet. Producer-side reachability pins land HERE (each term drafts on a
+  real fixture); consumer-side reachability pins are DEFERRED BY NAME to the
+  consuming volume's wave, documented in each coupling row — deferred, never
+  dropped; `non_intervention`'s fate repeats only if a consumer volume ships
+  without its pin, which the corpus's own producer/consumer law forbids.
 - **Compliance semantics per new term:** `grant` terms evolve compliance like any
   status term (a granted right can be QUIETLY throttled — observed vs true state
   under monitor reach: the pilgrimage right that is honored on parchment and
@@ -674,7 +912,13 @@ the Ostsiedlung locatio charters — settlers invited on written terms.
   the new families where the victor's appraisal reaches them (faith/population
   asset classes join `appraiseLoserPortfolio`'s lens as banded reads — the
   missionary access EXTRACTED at a war's end is Augsburg's darker half, legal and
-  receipted).
+  receipted). [CORRECTED 2026-08-02 (fp-audit)] The war-end lens extension is a
+  LIT-PATH BEHAVIOR SHIFT on a landed, golden-pinned feature — ruled and
+  disclosed as J-GR-14: under `pactFormationEnabled`, same-seed war-end drafts
+  MAY differ (the new asset classes move term selection and budget spend); the
+  shift is expected, receipted (the draft receipt names the lens classes
+  consulted), and declared in §3's flag table; dark ⇒ the lens is
+  byte-identical to landed behavior.
 **Force / counterforce (named, same evidence):** `missionary_access` — force:
 communion/influence; counterforce: SACRED TENSION — the host temple reads the
 same believer-share drift as erosion (FAITH's stance lanes, same evidence, other
@@ -690,7 +934,10 @@ throttling live under fog like every compliance state.
 legates, settlers, factors) are the sibling volumes' SP-1 movers — cross-referenced,
 never duplicated here.
 **Clock:** durations on the treaty clock (52-week year, WR-0c item (4)); `grant`
-reads lift at `expiresTick` the same tick via the one-reader law.
+reads lift at `expiresTick` the same tick via the one-reader law. Fast layer —
+a right's per-pulse exercise and throttling; slow verdict — the term's whole
+life to expiry and the strain it banks across years. [CORRECTED 2026-08-02
+(fp-audit)]
 **Posture consumption:** drafting weights family choice by posture (insular
 courts under-draft access rights; mercantile over-draft compacts) — colour,
 never selection.
@@ -715,7 +962,10 @@ frozen-list discipline); `mutual_defense` fires the EXISTING readers on a fixtur
 (the found-writer pin); war-door drafting of new families respects §13 stacking;
 JSON-round-trip on treaties carrying new terms; dormancy golden (dark ⇒ catalog
 extension inert — no producer runs, no read consulted; the freeze walker is
-updated but behavior is byte-identical).
+updated but behavior is byte-identical); [CORRECTED 2026-08-02 (fp-audit)] the
+J-GR-14 LIGHTING pin — lighting `pactFormationEnabled` moves war-end drafts in
+the declared, receipted way (the golden shift is expected and attributed, never
+a stop-and-report surprise).
 **Lifecycle:** new terms persist inside the existing treaty record (no new
 ledger); import validates term types against the extended frozen list; legacy
 saves never contain them (nothing to migrate); regen/undo ride the treaty
@@ -743,18 +993,35 @@ revolution, and priced the disavowal differently.
 - **The three answers**, run through the new seat's character + books (WR-5's
   machinery where lit; existing legitimacy/alignment reads where dark) + posture
   (SP-4):
-  - HONOR — the default and the expiry outcome: the question rides
+  - HONOR — the default in BOTH MODES [CORRECTED 2026-08-02 (fp-audit); §4's
+    two-mode declaration — the queue is OPT-IN and dark in every default
+    world]: `routineMajorApproval` dark ⇒ NO queue exists; the answer scores
+    directly at the succession event with HONOR the scored default and DISAVOW
+    reachable only past a band (silence-equivalence WITHOUT the queue — J-GR-3's
+    guarantee holds by scoring, not by machinery). Lit ⇒ the question rides
     `worldState.proposals` as an actor-initiated major with
-    hold-then-expire-to-HONOR (J-GR-3: silence honors the oath — the safe
-    default; no forced drama). Honoring mints a small receipted beat ("the young
-    king will keep his father's word") — continuity is ALSO a story.
-  - DISAVOW — breachType `succession_repudiation`: every live term defaults
-    through the EXISTING repudiation machinery (`treatyBreach.js`' shell
-    discipline reused — broken shell legible until horizon, war-block lifts,
-    `treaty_default` casus feeds), but severity is BANDED below 1.0 and graded by
-    succession kind: coup-born seats pay least (the world understands a
-    revolution), lineal heirs most (the world expected the word to hold).
-    Approval-routed like all repudiation (always-proposal discipline preserved).
+    hold-then-expire-to-HONOR — a DECLARED divergence from the landed queue's
+    expire-to-DECLINE terminal, per-type and pinned both ways. Honoring mints a
+    small receipted beat ("the young king will keep his father's word") —
+    continuity is ALSO a story.
+  - DISAVOW — breachType `succession_repudiation` [CORRECTED 2026-08-02
+    (fp-audit), J-GR-16]: the landed gate CANNOT legally reach most treaties —
+    `isRepudiableTreaty` (`treatyBreach.js:46-51`, this volume's own §2 census
+    row) requires a LIVE `non_aggression` term, so a tribute-only instrument
+    (Troyes — exactly what an heir most wants to disavow) is unreachable
+    through it. RULED: the shell machinery is FACTORED and the gates stay
+    separate — `treatyBreach.js` splits into
+    `defaultAllLiveTerms(treaty, breachType, severity)` (shared: broken shell
+    legible until horizon, war-block lifts, `treaty_default` casus feeds) plus
+    TWO eligibility predicates: the DM verb `REPUDIATE_TREATY` keeps
+    `isRepudiableTreaty` UNCHANGED (its composer surface
+    `repudiableTreatyPairs` does not widen — pinned), while succession
+    disavowal takes its OWN predicate (ANY treaty with any live term whose
+    `sworn` stamp names the fallen holder). Severity is BANDED below 1.0 and
+    graded by succession kind: coup-born seats pay least (the world understands
+    a revolution), lineal heirs most (the world expected the word to hold).
+    Approval-routed like all repudiation where the queue exists
+    (always-proposal discipline preserved).
   - RENEGOTIATE — opens GR-5's renewal machinery early (a renewal proposal rides
     the pactProposals ledger, trigger `renewal`); available only where
     `treatyRenewalEnabled` is lit, else the arm is absent (flag independence).
@@ -764,13 +1031,20 @@ revolution, and priced the disavowal differently.
   `fractureCredibilityDeltas` idiom, new consumer) — banded by breach type
   (succession lighter). The oathbreaker's word finally costs something in the
   belief economy; a serial disavowing lineage becomes unpactable BY THE SAME
-  NUMBERS that let it disavow cheaply once. Gated under `oathHolderEnabled`; the
-  WR-0c path's charge is a disclosed lit-path behavior addition, declared here.
+  NUMBERS that let it disavow cheaply once. [CORRECTED 2026-08-02 (fp-audit)]
+  The BITING CONSUMERS are named — a charge nothing reads is a decorative
+  brake: GR-2's acceptance reserve and GR-5's renewal acceptance (which rides
+  GR-2's reserve path) read the accumulated band; the serial-disavower refusal
+  pin and the clean-lineage negative live in GR-2; the cross-wave dependency is
+  a declared §3 flag interaction (`oathHolderEnabled` × `pactFormationEnabled`).
+  Gated under `oathHolderEnabled`; the WR-0c path's charge is a disclosed
+  lit-path behavior addition, declared here.
 **Force / counterforce (same evidence):** force — succession freedom: the
 succession record that names a new holder is what opens the choice. Counterforce
 — THE CREDIBILITY LEDGER: the same succession record grades the price, and the
-accumulated deltas close the door on the third disavowal. Both read the one
-succession + breach history.
+accumulated deltas close the door on the third disavowal (the door that closes
+is GR-2's acceptance reserve — the consumer is named there [CORRECTED
+2026-08-02 (fp-audit)]). Both read the one succession + breach history.
 **Belief posture:** the question and its answer are public court facts;
 NEIGHBOURS' reading of the disavowal arrives at news speed and lands as belief
 (the deceived-distant-court can honor a dead peace for weeks — legal, tellable).
@@ -803,7 +1077,15 @@ D-chain's sibling): coup resolves → question opens → heir disavows → casus
 → the next war cites the broken oath — one fixture, five subsystems, all
 existing; THE HEIR'S DISAVOWAL TELLABLE pin: the survey's IMPOSSIBLE story walks
 end to end in receipts; credibility charge fires for BOTH repudiation paths and
-for NEITHER when dark; dormancy golden.
+for NEITHER when dark; [CORRECTED 2026-08-02 (fp-audit)] THE TRIBUTE-ONLY
+DISAVOWAL pin — a treaty with NO live `non_aggression` term disavows through
+the succession predicate while the DM verb's `repudiableTreatyPairs` list is
+asserted UNCHANGED (the gate-separation negative); THE DARK-MODE
+SILENCE-EQUIVALENCE pin — with `routineMajorApproval` absent, a succession over
+a sworn treaty resolves HONOR-by-default with its receipt and NO queue entry
+exists; THE HONOR-TERMINAL divergence pin — lit-mode expiry resolves HONOR for
+this type while other actor-major types still expire to DECLINE; dormancy
+golden.
 **Lifecycle:** the question rides `worldState.proposals` (existing lifecycle
 laws — VERIFY-AT-BUILD its exact payload shape); `succession_repudiation`
 breach records persist through the existing shell discipline; JSON-round-trip
@@ -814,7 +1096,8 @@ not yet said whether the old peace holds"); after the answer, the treaty block
 shows honored-by-the-heir voice or the broken shell; TreatyPanel + PDF the same.
 The pin opens the town mid-question and after each answer arm.
 **Bands:** severity bands by succession kind; credibility delta bands by breach
-type; question hold window; honor-beat significance.
+type; question hold window; honor-beat significance; the dark-mode disavow band
+(§4's direct-scoring threshold) [CORRECTED 2026-08-02 (fp-audit)].
 
 ### GR-5 — RENEWAL, RENEGOTIATION-FROM-STRENGTH, CONVERSION (flag
 `treatyRenewalEnabled`; settled law: "renegotiation-from-strength opens")
@@ -828,20 +1111,34 @@ had truly moved.
   re-appraises under its OWN present truthFor. A rebuilt loser renegotiates from
   strength — the design's own sentence, now a code path. No taker ⇒ the treaty
   lapses clean through GR-0's eulogy (renewal never forced — law L).
+  [CORRECTED 2026-08-02 (fp-audit), R1] Acceptance executes as a `renewed`
+  LINEAGE ACT on the LIVING record through the `pactAmendment.js` leaf
+  (peaceTerms' exported amendment seam): the superseded term set closes (its
+  endings live on the lineage entry), the new set takes effect, and the record
+  keeps its pair key — NEVER a re-mint at the same key, which the
+  one-instrument law makes impossible anyway.
 - **Renegotiation-from-strength mid-term:** a party whose believed ratio has
   swung past a band may DEMAND renegotiation before the window. The demand is a
   proposal like any other (refusable); refusal leaves the treaty standing and
   mints the strain fact on the demander's side (the existing strain→resentment
   idiom — a refused renegotiation is a grievance seed, not a casus; the war road
   stays the war road). The ask is CAPPED (band): renegotiation extracts toward
-  the current ratio, never past it — no ratchet.
-- **CONVERSION (the §12.5 arm, ruled):** a `compelled_alliance` reaching its
-  window with compliance HONORED throughout and trust above band converts on
-  renewal acceptance: the relationship label proposes `allied` through the
-  EXISTING label-proposal lane, and the new treaty re-mints the alliance as
-  voluntary — `mutual_defense` + `non_aggression`, provenance `converted`
-  (J-GR-9: conversion is a label + re-minted symmetric terms, never a new term
-  type). The compelled thing becomes the chosen thing, and the document says so.
+  the current ratio, never past it — no ratchet. [CORRECTED 2026-08-02
+  (fp-audit)] An ACCEPTED mid-term demand executes as a `renegotiated` lineage
+  act (the superseded set ends `renegotiated`); a window renewal's act ends it
+  `renewed` — the two envelope cells are attributable by construction.
+- **CONVERSION (the §12.5 arm, ruled) [CORRECTED 2026-08-02 (fp-audit)]:** a
+  `compelled_alliance` reaching its window with `worstObservedEver === 'honored'`
+  (§4's monotone field, read BY NAME — the record itself has no memory: the
+  survey confirmed `complianceState` is OVERWRITTEN every advance, so "honored
+  throughout" was unimplementable without the new field) and trust above band
+  converts on renewal acceptance: the relationship label proposes `allied`
+  through the EXISTING label-proposal lane, and a `converted` lineage act
+  rewrites the term set as voluntary symmetric terms — `mutual_defense` +
+  `non_aggression` (composable by §4's frozen list), provenance `converted`
+  (J-GR-9: conversion is a label + a lineage act's symmetric terms, never a new
+  term type). The compelled thing becomes the chosen thing, and the document
+  says so.
 **Force / counterforce (same evidence):** force — the current ratio: the believed
 strength read that moved is what powers the demand. Counterforce — THE STANDING
 PAPER: the same compliance record that proves the treaty held is the argument for
@@ -851,11 +1148,15 @@ concession; the refusal arm is priced by the same ratio read the demand cites).
 joins the pin set); a court that misjudges its own rebuilt strength demands, is
 refused, and the receipt can say why post hoc — the mistaken-court pin, peacetime
 edition.
-**Casting:** GR-1 stamps re-mint on renewal (the NEW holders swear — a renewed
-peace is a new oath; the eulogy of the old and the signing of the new are one
-tick's two beats).
+**Casting:** GR-1 stamps RE-STAMP on every lineage act (the NEW holders swear —
+a renewed peace is a new oath; the eulogy of the superseded terms and the
+signing of the new set are one tick's two beats). [CORRECTED 2026-08-02
+(fp-audit)]
 **Clock:** window and caps on the treaty's own clock marker; renewal proposals
-ride the same dwell physics as GR-2.
+ride the same dwell physics as GR-2. Fast layer — the renewal proposal cycle
+(weeks of drafting, transit, answer); slow verdict — the instrument's lineage
+across acts (decades: "the third peace of this name"). [CORRECTED 2026-08-02
+(fp-audit)]
 **Posture consumption:** demand initiation gated by posture + risk (a timid
 rebuilt court sits on its strength — legal, and the dossier's strategy read may
 say so); acceptance reserve as GR-2.
@@ -872,14 +1173,20 @@ beat, NOTHING else moves (no forced renewal, no grievance mint — the L-law
 negative, hardest); REBUILT-AND-UNBOWED TELLABLE pin: the survey's IMPOSSIBLE
 story on one fixture — loser rebuilds, window opens, terms lighten, both
 appraisals receipted; the ASK-CAP pin (a demand past the cap drafts AT the cap —
-no ratchet); CONVERSION NEGATIVE — compelled alliance with a strained record does
-NOT convert (the gate is the record, not the calendar); mid-term demand refused
+no ratchet); CONVERSION NEGATIVE — a compelled alliance whose
+`worstObservedEver` ever left `'honored'` does NOT convert, even if the
+window-tick observation reads honored (the gate is the RECORDED history, not
+the calendar and not the current tick [CORRECTED 2026-08-02 (fp-audit)]); mid-term demand refused
 ⇒ strain fact, NO casus; the K3 pin set extension; dormancy golden.
-**Lifecycle:** renewal re-mints a NEW treaty record (old one ends `renewed` —
-its full compliance history stays chronicle-legible; no in-place mutation of a
-spent instrument); provenance chain pinned (`renewed`/`converted` point at the
-predecessor's id — VERIFY-AT-BUILD the treaty id shape); JSON-round-trip; regen/
-undo ride the treaty and proposal ledgers' existing pins.
+**Lifecycle [CORRECTED 2026-08-02 (fp-audit), R1]:** renewal/renegotiation/
+conversion are LINEAGE ACTS on the living record (§4) — the record keeps its
+pair key; the superseded term set's endings live on the lineage entry; the full
+compliance history stays chronicle-legible because nothing is pruned or
+re-minted. The lineage array IS the provenance chain (one record, ordered acts
+— no predecessor-id plumbing, no treaty-id-shape verification needed);
+`worstObservedEver` persists across acts (a converted alliance carries its
+whole record). JSON-round-trip on a multi-act record; regen/undo ride the
+treaty and proposal ledgers' existing pins.
 **Dossier round-trip:** WarFaithTab shows the window ("the peace runs out with
 the spring; the courts are speaking"), then the renewed instrument with its
 lineage line ("the third peace of this name"); TreatyPanel + PDF the same. The
@@ -910,7 +1217,11 @@ Tordesillas — the cross-pressured third whose interest is the peace itself.
   cascade: the mediator proposes a renewal round (GR-5's machinery where lit;
   where dark, the pass softens the strain accrual one notch, banded) — the
   neighbour who saves the peace earns the same two-edge trust the war-exit broker
-  does (`accrueMediationTrust` reused).
+  does (`accrueMediationTrust` reused). [CORRECTED 2026-08-02 (fp-audit)] The
+  occasion ALSO reads `worstObservedEver` BY NAME (`?? 'honored'` where
+  `treatyRenewalEnabled` never lit — §4): a record already once-strained lowers
+  the soften notch (the broker works harder for a peace that has already
+  slipped).
 - **Occasion 3 — THE TEMPLE ARM (via FAITH):** when the cross-cut is faith-led on
   BOTH sides, the mediator's TEMPLE is the named broker — casting through the
   existing institution + faith-facet planes (`cohesionWeave.js:261`'s facet
@@ -924,15 +1235,34 @@ Tordesillas — the cross-pressured third whose interest is the peace itself.
   interceptor kind (b) ("a third party wanting the war continued" — WR-7b's
   actor, cross-referenced) — the same evidence that disqualifies the broker
   CASTS the saboteur. No new state; the read is the casting.
+**Force / counterforce (named, same evidence) [CORRECTED 2026-08-02 (fp-audit)
+— the labeled field was this volume's one §1b omission]:** force — THE
+CROSS-PRESSURE ITSELF: the broker's two-sided ties (the same quadrant reads
+that find it) are what push it between the angers — a neighbour with stakes on
+both sides pays for any war between them, and that price is the pressure to
+stand up. Counterforce — THE INTERESTED BROKER (above): the SAME cross-cut
+evidence, failed, casts the saboteur; and the broker's own posture can refuse
+the errand (the declined pass, receipted and priced in trust foregone).
 **Belief posture:** the mediator scores from ITS OWN beliefs of both parties'
 states (K3 — the finder's quadrant reads are already belief-adjacent;
 VERIFY-AT-BUILD that the intent-stage read routes through belief, and pin it into
 the K3 set).
-**Casting:** the mediator settlement BY NAME everywhere (already law at the
-war-exit table); the temple arm names the institution; seats and priests via
-existing planes only.
-**Clock:** mediation attempts per pulse at the trigger sites; no dwell state (a
-pass is a read + a receipt, not a process).
+**Casting [CORRECTED 2026-08-02 (fp-audit)]:** the mediator settlement BY NAME
+everywhere (already law at the war-exit table); when `envoyDiplomacyEnabled` is
+lit the brokerage travels as a NAMED SP-1 legate (purpose `diplomatic` — an
+interceptable person; the sabotage of a brokerage is WR-7b's interceptor kind
+(b) at zero new cost); the temple arm names the institution AND, where a seated
+priest resolves through existing planes, the priest; seats and priests via
+existing planes only — no new NPC state (institution-only voice is the declared
+fallback where no person resolves).
+**Clock [CORRECTED 2026-08-02 (fp-audit)]:** the offer-to-broker rides the SAME
+transit-kernel leg read GR-2's proposals use — a far broker's pass lands late
+BY PHYSICS (law M's floor binds; the volume that prices proposals by legs
+cannot broker at infinite speed), and a REACH BAND caps who can broker at all
+(distant neighbours cannot). `envoyDiplomacyEnabled` dark ⇒ the legs price the
+delay abstractly (no NPC minted); lit ⇒ the named legate travels and can be
+intercepted (WR-7b). Fast layer — the pass and its receipt; slow verdict — the
+trust accrual and the brokered peace's own long life.
 **Posture consumption:** a mediator's WILLINGNESS gates through its own posture
 (insular neighbours decline to broker — receipted decline, priced in trust
 foregone); out-of-posture brokerage legal and priced.
@@ -956,16 +1286,23 @@ deposited, broker found, intent decays, receipt names the broker (the mediation
 story moves from the exhausted end to before the first march); temple-arm
 casting pin (faith-led both sides ⇒ the institution named); single-finder walker
 (no second finder module anywhere — source scan); trust accrues on BOTH edges at
-every occasion (the war-exit invariant preserved); dormancy golden.
+every occasion (the war-exit invariant preserved); THE DISTANT-BROKER negative
+[CORRECTED 2026-08-02 (fp-audit)] — a neighbour beyond the reach band never
+brokers (physics, not preference), and a brokerage pass arrives AFTER its
+transit legs, never same-tick at range; dormancy golden.
 **Lifecycle:** no new persisted state — occasions read existing ledgers; receipts
 only. Nothing to regen or undo.
-**Dossier round-trip:** the mediator's town shows its brokerage ("this court
-stood between Thornwall and the Vale") through the turning-point/chronicle
-rendering; the saved pair's WarFaithTab names the broker on the pact line
-(already does at war-exit — extended to the new occasions). The pin opens all
-three towns.
+**Dossier round-trip [CORRECTED 2026-08-02 (fp-audit)]:** the mediator's town
+shows its brokerage ("this court stood between Thornwall and the Vale") on
+surfaces that EXIST — the chronicle (wizard_news-routed brokerage beat) and the
+same WarFaithTab "the courts remember" line GR-2 lands (one new line, two
+consumers; the turning-point rendering the original text leaned on does not
+exist anywhere in components or pdf — §2); the saved pair's WarFaithTab names
+the broker on the pact line (already does at war-exit — extended to the new
+occasions). The pin opens all three towns.
 **Bands:** intent-stage pressure multiplier (bounded — the embassy precedent);
-fraying-pass strain soften; decline posture threshold; temple-arm significance.
+fraying-pass strain soften; decline posture threshold; temple-arm significance;
+brokerage reach band [CORRECTED 2026-08-02 (fp-audit)].
 
 ### GR-7 — MEASUREMENT + CERTIFICATION (no flag; the WR-9 discipline)
 The survey's flattest finding: NO soak script observes the treaties ledger at
@@ -977,7 +1314,12 @@ claims. This wave is the program's acceptance harness.
   real when negotiated instruments hold a sane share); endings mix; term-lifetime
   distribution against the 52-week clock; grain actually moved by stream terms at
   population scale; proposal refusal/no-overlap rates; mediation occasion counts
-  and save rate; succession-question answer mix.
+  and save rate; succession-question answer mix ([CORRECTED 2026-08-02
+  (fp-audit)] measurable ONLY on soak profiles that set
+  `routineMajorApproval: true` — the queue is opt-in and dark by default (§3);
+  the envelope row declares its profile precondition or it is vacuous — the
+  dark-mode answer mix is observed instead from the direct-scoring receipts,
+  which exist on every profile).
 - **THE PACT ENDINGS VOCABULARY (closed) + share envelopes:** {`ran_its_term`,
   `renewed`, `converted`, `renegotiated`, `repudiated`,
   `disavowed_by_succession`, `hollowed_quiet` (DM-only), `hollowed_detected`,
@@ -985,15 +1327,36 @@ claims. This wave is the program's acceptance harness.
   one path carrying nearly all endings means the others are decoration (L's
   criterion). Lapse+renewal should dominate; repudiation rare; disavowal rarer;
   quiet hollowing a real minority (the fog must actually hide things or the
-  monitor bands are wrong).
+  monitor bands are wrong). [CORRECTED 2026-08-02 (fp-audit)] Every member's
+  producer is NAMED: GR-0 (`ran_its_term`, `hollowed_detected`,
+  `hollowed_quiet`), GR-2's war-overtaken closure (`broken_by_war`), WR-0c
+  (`repudiated`), GR-4 (`disavowed_by_succession`), GR-5 (`renewed` = window
+  act, `renegotiated` = accepted mid-term demand, `converted` = conversion
+  act). PACT ENDINGS are per-instrument/per-lineage-act and NEW; they are NOT
+  the per-term COMPLIANCE STATES (`honored`/`strained`/`defaulted`/`expired` —
+  existing, owned by peaceTerms): a sibling volume citing "the treaty's own
+  endings" means the compliance-state union and must cite it by that name.
 - **Formation envelopes:** trigger mix (no single trigger >banded share);
   refusal rate inside a healthy band (all-signed means reserves are decoration;
-  all-refused means triggers are noise).
+  all-refused means triggers are noise). [CORRECTED 2026-08-02 (fp-audit)] PLUS
+  a FORMATION-ENDINGS mix over the closed four {`signed`, `refused`,
+  `no_overlap`, `expired_unanswered`} with a FLOOR on `no_overlap` (reserves
+  must actually bite) and a nonzero `expired_unanswered` cell under the lit
+  transport (loss exists); and a MEDIATION mix over GR-6's closed four
+  {`brokered_back`, `brokered_terms`, `declined_to_broker`, `brokerage_failed`}
+  with FLOORS on `declined_to_broker` and `brokerage_failed` — the broker must
+  be able to refuse and to fail, or law L is decoration (the save rate alone
+  cannot see this).
 - **Certification rows** for all five flags (the subsystem registry's Growth-lane
   discipline); receipt fields for the formation-trigger histogram and the
   endings histogram (the Herald's "how do pacts die here?" at soak scale). ⚠️
   never declare a `wizard_news.*`-fed identity on a certification row (the
-  moverFamily skew hazard, standing).
+  moverFamily skew hazard, standing). [CORRECTED 2026-08-02 (fp-audit)] The
+  formation-trigger histogram is keyed by TRANSPORT MODE (§3's cross-program
+  disclosure — formation numbers are attributable to a transport), and the
+  certification walker asserts the `envoyDiplomacyEnabled` ×
+  `pactFormationEnabled` combination is LEGAL in both states while still
+  redding GRAMMAR-internal out-of-order lighting.
 - **Every envelope carries a mutant negative control** (house law).
 **Pins:** envelope harness fixtures; the thesis-metric pin (a soaked world with
 formation lit mints ≥1 negotiated treaty — the vacuous-absence discipline:
@@ -1010,11 +1373,16 @@ an owner-ordered soak, and not before.**
 ## §6 JUDGMENT BLOCKS (the drafting chair's rulings under delegation — vetoable
 ## here; an implementer NEVER re-rules these silently)
 
-- **J-GR-1 (the formation seam):** peacetime formation is a second exported pass
-  INSIDE `peaceTerms.js` (`advancePeacetimePacts`), fed by a proposer/ledger pair
-  (`pactTriggers.js` pure, `pactProposals.js` one-writer); `mintTreaty` stays
-  module-internal. VETO builds a second minting module and accepts the forked-
-  writer risk consciously.
+- **J-GR-1 (the formation seam) [CORRECTED 2026-08-02 (fp-audit), R2 — the
+  original ruling put the pass INSIDE a file six effective lines from its
+  ceiling]:** peacetime formation lives in the `pactFormation.js` lazy leaf
+  (writer-FAMILY member — §1c), fed by a proposer/ledger pair
+  (`pactTriggers.js` pure, `pactProposals.js` one-writer; acceptance VALUATION
+  lives in `pactProposals.js`, inside the K3 pin set — §1c); `mintTreaty` stays
+  module-internal to `peaceTerms.js`, reached only through its two net-zero
+  exported seams (amend/mint). VETO folds the pass into `peaceTerms.js` and
+  eats the eslint/sizeBaseline reds consciously, or builds a second minting
+  module outside the family and accepts the forked-writer risk.
 - **J-GR-2 (the demand's measure):** no peacetime margin budget; sheets draft from
   the trigger's own read and clear on the two-sided conjunction. VETO reuses
   `termBudgetFor` with a synthetic margin.
@@ -1039,8 +1407,10 @@ an owner-ordered soak, and not before.**
   re-scored triggers; signed history is what regen preserves. VETO treats open
   proposals as precious state carried through regen.
 - **J-GR-9 (conversion's shape):** compelled→real alliance converts as label
-  (`allied`, existing lane) + re-minted symmetric terms (`mutual_defense` +
-  `non_aggression`), provenance `converted`. VETO invents a conversion term type.
+  (`allied`, existing lane) + a `converted` LINEAGE ACT's symmetric terms
+  (`mutual_defense` + `non_aggression`) on the living record [CORRECTED
+  2026-08-02 (fp-audit), R1], provenance `converted`. VETO invents a conversion
+  term type.
 - **J-GR-10 (no anniversary beats):** longevity is dossier voice + the lapse
   eulogy. VETO schedules anniversary news (and answers to the pacing governor).
 - **J-GR-11 (`mutual_defense` joins security):** SP-3 names faith + population
@@ -1057,18 +1427,59 @@ an owner-ordered soak, and not before.**
   gains its delta under `oathHolderEnabled` — a lit-path behavior addition to a
   landed feature, disclosed here, flag-fenced. VETO scopes the charge to
   succession disavowal only.
+- **J-GR-14 (the war-end lens extension + the war door's amendment awareness)
+  [CORRECTED 2026-08-02 (fp-audit)]:** under `pactFormationEnabled`, (a)
+  war-end drafting's appraisal lens gains the faith/population asset classes —
+  same-seed war-end drafts may differ: a DISCLOSED lit-path shift on a landed,
+  golden-pinned feature, receipted (the draft receipt names the lens classes
+  consulted) and declared in §3's flag table; (b) the war door's pair-slot
+  guard becomes amendment-aware — where the slot holds a standing negotiated
+  instrument (the audit's silent-deletion consequence: today PASS 1's guard
+  `continue`s and mints NOTHING for that pair), the dictated peace lands as an
+  `amended` lineage act (provenance `dictated`) on the standing record instead.
+  Dark ⇒ both byte-identical to landed behavior. VETO keeps the new families
+  peacetime-only (Augsburg's darker half untold) and/or keeps the landed skip
+  as a declared non-goal.
+- **J-GR-15 (the faith family widened to five) [CORRECTED 2026-08-02 (fp-audit),
+  R3]:** GRAMMAR's catalog is CANONICAL corpus-wide — one list, one spelling,
+  one closure contract; WF-6's `tolerance_guarantee` and `temple_restitution`
+  are ADOPTED into GR-3 under GRAMMAR's spellings (`shared_rite`, never
+  `shared_rite_compact`) — SP-3's closed-at-three faith list is amended by this
+  ruling (the spine and COUPLINGS J-CPL-6 carry the matching amendments — a
+  cross-volume edit owned by the cohesion pass). WF-6 becomes a CONSUMER wave
+  (executors' faith-side reads, the communion trigger, receipts — pointers,
+  never rows). VETO holds the list at three and rewrites WF-5b's
+  underground-surfacing arm to stop depending on `tolerance_guarantee`.
+- **J-GR-16 (disavowal eligibility is its own gate) [CORRECTED 2026-08-02
+  (fp-audit)]:** `treatyBreach.js` factors into shared
+  `defaultAllLiveTerms(treaty, breachType, severity)` plus two eligibility
+  predicates — the DM verb keeps `isRepudiableTreaty` (live `non_aggression`
+  only; composer surface unchanged), succession disavowal reaches ANY sworn
+  treaty with any live term. VETO widens the landed verb gate instead and
+  accepts the lit-path change to `repudiableTreatyPairs`.
 
 ## §7 THE TUNING SURFACE (owner-signed, per THE PROMISE; band FAMILIES keep the
 ## signature surface tractable — spine §5)
-GR-0 beat significances + lie-window + age-phrase thresholds · GR-2 trigger
-crossings (ONE family-shaped band set × four triggers) + proposal cap + dwell
-floor + refusal trust delta + reserve weights + out-of-posture price · GR-3
-draft weights + grant-throttle floor + labor caps + right-strain weights · GR-4
-severity-by-succession bands + credibility deltas + hold window · GR-5 renewal
-window + demand threshold + ask cap + conversion trust band · GR-6 intent
-pressure multiplier + strain soften + decline threshold · GR-7 envelope shapes
-(endings mix, trigger mix, refusal band, thesis floor). Every one banded, none a
-bare float on a surface, one tuning table per wave (the house idiom).
+[CORRECTED 2026-08-02 (fp-audit)] Reconciled line-by-line against §5 — the
+audit caught three significance bands dropped from this ledger (GR-4
+honor-beat, GR-5 renewal-beat, GR-6 temple-arm); ALL significance bands below
+are instances of SP-6's shared significance FAMILY (the spine mints the scale;
+this volume tunes class ASSIGNMENTS only, per the corpus ruling that ended
+per-volume significance scales).
+GR-0 beat significances (SP-6 family) + lie-window + age-phrase thresholds ·
+GR-2 trigger crossings (ONE family-shaped band set × four triggers) + proposal
+cap + dwell floor + refusal trust delta + reserve weights + out-of-posture
+price + oathbreaker-credibility refusal band · GR-3 draft weights +
+grant-throttle floor + labor caps + right-strain weights · GR-4
+severity-by-succession bands + credibility deltas + hold window + dark-mode
+disavow band + honor-beat significance (SP-6 family) · GR-5 renewal window +
+demand threshold + ask cap + conversion trust band + renewal-beat significance
+(SP-6 family) · GR-6 intent pressure multiplier + strain soften + decline
+threshold + brokerage reach band + temple-arm significance (SP-6 family) ·
+GR-7 envelope shapes (endings mix, trigger mix, refusal band, formation mix
+with its no_overlap floor, mediation mix with its decline/failure floors,
+thesis floor). Every one banded, none a bare float on a surface, one tuning
+table per wave (the house idiom).
 
 ## §8 HERALD + LEGIBILITY CONTRACT (sentences this program must be able to say)
 - "Grain for ore: the courts have set their names to it." (GR-2)
@@ -1121,3 +1532,19 @@ labeling). Grammar-specific additions:
    chroniclersLetter rows in the kind's own commit.
 4. Any conflict between this volume, the spine, an amendment, or the tree is a
    STOP-and-report to the validation chair.
+5. [CORRECTED 2026-08-02 (fp-audit)] THE CEILING OBLIGATION, per wave: any
+   commit touching `peaceTerms.js` states its effective-line delta and proves
+   net-zero-or-negative (the file sits at 794/800 with no baseline grandfather
+   — §1c writer-family law; sizeBaseline is TOLERANCE-0, ratchet-DOWN in the
+   same commit when shrinking).
+6. [CORRECTED 2026-08-02 (fp-audit)] Any wave landing a cross-layer read adds
+   its CW-0 coupling-registry row (pairId, direction, read, receiptField,
+   counterforce, flags, owningVolume, owningWave, intendedDesk) in the SAME
+   commit — the COUPLINGS walker asserts it; a declared coupling with no
+   registry row is a defect.
+7. [CORRECTED 2026-08-02 (fp-audit)] Every new REALM VERB lands the full WR-0c
+   registration set in the verb's own commit: realmManifest row (dials +
+   offerability predicate + typed veto codes), changeAuthorityPolicy authority
+   row, decisionTier row, actor-major routing entry where routed, and the
+   execution handler — plus the parity pin (item 3's news-kind checklist does
+   not cover verbs; this item does).

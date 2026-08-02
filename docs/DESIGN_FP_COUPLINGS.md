@@ -9,7 +9,14 @@
 ## (claude/composite-r4 @ 38f81d05): trade (3 agents), faith (3), populations (3),
 ## and the information/grammar/interior battery (9). Every EXISTS claim below
 ## carries a survey file:line receipt; anything asserted beyond the surveys is
-## marked VERIFY-AT-BUILD. Implementation is assigned to the external implementer
+## marked VERIFY-AT-BUILD. [CORRECTED 2026-08-02 (fp-audit)] The rule is now
+## grep-able: every parenthetical BUILT carries either a `module.js:NNN` receipt
+## or the VERIFY-AT-BUILD marker — a bare BUILT is a defect the audit stage
+## re-checks mechanically (the audit found the old text stated this rule and
+## then used the marker twice in 1,608 lines, neither time on a substrate
+## claim, so survey-receipted fact and unverified inference were
+## typographically identical in the one document Sol treats as the map of what
+## already works). Implementation is assigned to the external implementer
 ## (Sol); architecture and validation by Fable.
 
 **Status: ARCHITECTURE. This volume is the map every other volume points at when
@@ -21,17 +28,21 @@ reads and receipts (spine req. 7's proof-by-construction), and specs the FOUR
 cross-wire waves (CW-0..CW-3) that no single volume owns. Judgment blocks in §7
 are the drafting chair's rulings under delegation — vetoable there.**
 
-**Cross-reference key.** War volume waves = WR-0..WR-10
-(DESIGN_WAR_RULINGS_ARCHITECTURE.md). Faith = WF-0..WF-9 (DESIGN_FP_FAITH.md).
-Populations = POP-1..POP-7 (DESIGN_FP_POPULATIONS.md). Information = IN-0..IN-6
-(DESIGN_FP_INFORMATION.md). Interior = the waves DESIGN_FP_INTERIOR.md numbers
-IN-1..IN-8 — **cited here as INT-1..INT-8 throughout**, because the information
-volume already holds the IN- prefix (the collision is real in the two volumes as
-drafted and is REPORTED to the validation chair in §10; this volume's aliases are
-unambiguous either way). Trade and Grammar volumes were drafting in parallel when
-this map was written: they are cited by their spine §3 crux rulings as
-**FP-TRADE(...)** and **FP-GRAMMAR(...)**, never by invented wave numbers. Shared
-spine infrastructure = SP-1..SP-7 (spine §2); SP flag names are the SP waves' to
+**Cross-reference key [CORRECTED 2026-08-02 (fp-audit)].** War volume waves =
+WR-0..WR-10 (DESIGN_WAR_RULINGS_ARCHITECTURE.md). Faith = WF-0..WF-9
+(DESIGN_FP_FAITH.md). Populations = POP-1..POP-7 (DESIGN_FP_POPULATIONS.md).
+Information = IN-0..IN-6 with judgment blocks J-INF-* (DESIGN_FP_INFORMATION.md).
+Interior = INT-1..INT-8 with judgment blocks J-INT-* (DESIGN_FP_INTERIOR.md —
+the IN- prefix collision this map reported in §10 is RESOLVED by chair ruling
+R4: the interior volume renumbered to INT-*/J-INT-* and the information volume's
+judgment blocks became J-INF-*; this map's INT- aliases are now the volumes' own
+numbering). Trade = TR-1..TR-9 (DESIGN_FP_TRADE.md) and Grammar = GR-0..GR-7
+(DESIGN_FP_GRAMMAR.md) — both volumes are landed on disk and predate this map's
+audit, so the drafting-era **FP-TRADE(...)**/**FP-GRAMMAR(...)** crux citations
+are retired: every trade- and grammar-side coupling below names its concrete
+owning wave (the audit found the crux-citation style left CW-0's
+`owningWave`-keyed registry unconstructable from this map). Shared spine
+infrastructure = SP-1..SP-8 (spine §2); SP flag names are the SP waves' to
 assign (VERIFY-AT-BUILD).
 
 ---
@@ -43,14 +54,30 @@ assign (VERIFY-AT-BUILD).
    NAMED COUNTERFORCE scoring off the same evidence. Anything less — a shared
    constant, an incidental import, a float that drifts across a boundary — is
    LEAKAGE, and leakage is not coupling.
-2. **The count.** Seven layers give 21 unordered pairs; the spine's "21 ordered
-   pairs" is honored INSIDE each pair section: every pair is walked in BOTH
-   directions (A→B and B→A are separate entries, separately graded), so all 42
-   directions are ruled — designed, existing, or declared empty.
+2. **The count [CORRECTED 2026-08-02 (fp-audit)].** Seven layers give 21
+   unordered pairs and 42 directions. The per-direction GRADE lives in §3's
+   matrix — every one of the 42 directions is ruled there (designed, existing,
+   or declared empty). §4 walks each pair as a UNIT: where the survey evidence
+   is directional the section carries separate **EXISTS, A→B** / **EXISTS,
+   B→A** blocks, and where one merged EXISTS block serves, §3 remains the
+   per-direction authority. CW-0's registry construction therefore takes
+   DIRECTION from §3 and reads/receipts/counterforce from §4 — an implementer
+   never reverse-engineers a direction split from prose. (The old §0.2
+   promised separate directional entries in every section and 12 of 21
+   sections did not carry them; the promise is re-scoped to what the volume
+   actually does, and the spine's "21 ordered pairs" arithmetic is corrected
+   at the spine — see §10 register.)
 3. **Pair anchors.** The pairs are CPL-1..CPL-21 (§4). Other volumes point at
    these anchors when they declare a coupling; a coupling declared in a volume
    with no CPL row, or a CPL row with no owning wave, is a defect one side must
-   fix.
+   fix. [CORRECTED 2026-08-02 (fp-audit)] The obligation is SAME-COMMIT and
+   standing: any wave in any volume that lands a cross-layer read adds its
+   CW-0 registry row (pairId, direction, read, receiptField, counterforce,
+   flags, owningVolume, owningWave, intendedDesk) in the SAME commit, and the
+   walker asserts it — the audit found the registry obligation lived only
+   here, in the guarded volume, so the inclusion ratchet would have redded
+   the very waves it guards (the spine's §5 implementer protocol now carries
+   the reciprocal line).
 4. **The ownership law (J-CPL-1):** every designed coupling has exactly ONE
    owning wave in ONE volume — the wave that builds its writer or its read. This
    volume builds NOTHING per-pair; it builds only the four cross-wires (§6),
@@ -143,9 +170,14 @@ volumes, BOTH volumes' §1 laws bind the coupling — the stricter clause wins.
   whose producing state defaults empty proves nothing — empty-direction pins
   seed the ADJACENT coupling live first (prove the machinery CAN fire, then that
   this direction does not).
-- **The parallel-volume prefix collision:** INFORMATION and INTERIOR both number
-  waves IN-* (§10 report). Cross-references in ANY volume that say bare "IN-3"
-  are ambiguous today; this volume's INT- aliases are the interim discipline.
+- **The parallel-volume prefix collision [CORRECTED 2026-08-02 (fp-audit):
+  RESOLVED]:** INFORMATION and INTERIOR both numbered waves IN-* and — the
+  sharper, previously unreported half — both numbered judgment blocks J-IN-*,
+  so a veto citing "J-IN-4" was unresolvable. Chair ruling R4: INTERIOR is
+  INT-1..INT-8 / J-INT-*; INFORMATION keeps IN-0..IN-6 and its judgment
+  blocks are J-INF-*. Both volumes have renumbered; bare "IN-N" now always
+  means the information volume's wave, and no bare "J-IN-N" may be written
+  anywhere in the corpus.
 
 ---
 
@@ -158,7 +190,7 @@ volumes, BOTH volumes' §1 laws bind the coupling — the stricter clause wins.
 | **TRADE** | tradeSalience (per-commodity value-of-tie), foodCapacityOf's import arm (demographicsRates.js:332-380, ARTERY_IMPORT_FACTORS), entrepot centrality, dispatchEV refusals (evRefused), primarySupplierInto | flow_trade_scarcity, route_disruption, import_shortage, boom/bust, generosity 6-kind family; route_* kinds exist but Herald-silent today (settlementRumors census) | commodityStocks + supplyShipments (conserved, refuse-to-persist — commodityFlow.js:241-269), tradeFlow, merchantAppetite, entrepots, routeNetwork (dark) | caravan legs; EWMA windows; FLIP_COOLDOWN 6 ticks |
 | **FAITH** | faithProximityOf/faithAlignmentQuadrant (sacredClaim.js:67-123), patronSecurity, piety/legitimacy bands, institutionTolerance (baseline IS patron conviction), templeMediated relief warmth (generosityEV.js:243-253) | conversionOutcome, faith_pact/betrayal/foothold, pantheon Ascendancy/Twilight, ~9 phrased tokens (vs war's ~27) | worldState.religionStates (shares/standings/legitimacy/heresyStain/suppressed), worldState.pantheon, institutionTolerance | LOCAL lane every tick on deity presence; SPREAD lane behind faithSpreadEnabled; piety lag 0.06 |
 | **POP** | demographicReadings/destinationMenuFor (the ONE menu seam — demographicsMigration.js:276-315), pressureOf, viability ladder + moverPermitted (one consumer today), realmPressure01 (war-motive only), populationTrendBand (belief axis) | hungry_gap + migration_flight (the two Herald lines, graded the estate's model translation), lifecycle beats (steading_*, terminal death, resettled) | population integer + 12-row history, spatialLedgers.migration columns (travelClass mutex), demographicPlans | weekly rates; columns at leg speed; plans PATIENCE 78; exact conservation pinned w/ negative control |
-| **INFO** | beliefMap per-observer/per-slot reads (beliefMap.js:10-12), credibilityOf (rise 0.6/fall 5, half-life 52), brokerage stamps (measured 18,377-record ladder), detectMisjudgment, reputationRace (built, ZERO consumers) | infowar_lie_exposed/spy_exposed, intel_transfer, belief_misjudgment — 4 beats among 269 routed tokens (~1.5%); speaks only when a secret dies | beliefMaps, rumorLedgers (TTL/top-K/hop-weathered), disinfo, sightPostures, credibility | hop latency + distance surcharge; silence decay 0.92/tick; lie shelf-life 8 ticks |
+| **INFO** | beliefMap per-observer/per-slot reads (beliefMap.js:10-12), credibilityOf (rise 0.6/fall 5, half-life 52), brokerage stamps (measured 18,377-record ladder), detectMisjudgment, reputationRace (built, ZERO consumers) | infowar_lie_exposed/spy_exposed, intel_transfer, belief_misjudgment — 4 beats among 269 routed tokens (~1.5%); speaks only when a secret dies. [CORRECTED 2026-08-02 (fp-audit)] IN-5 mints THE KNOWLEDGE DESK — a seventh Herald section for knowledge-native kinds (J-INF-7); belief_misjudgment REFILES there from the faith desk (J-INF-6) — CW-0 registry rows for INFO-side kinds carry `intendedDesk: knowledge` | beliefMaps, rumorLedgers (TTL/top-K/hop-weathered), disinfo, sightPostures, credibility | hop latency + distance surcharge; silence decay 0.92/tick; lie shelf-life 8 ticks |
 | **GRAMMAR** | treatiesForPair→treaty_default casus, treatyDocument/frayingTermOf, compliance-under-fog (trueState vs observed, DETECT_FLOOR), findCrossPressuredMediator (one finder, two consumers) | treaty_signed (major, cured of the id-less drop), treaty_breached (DM-verb path only); expiry RECEIPTLESS today (peaceTerms.js:720-724) | treaties ledger (11-term catalog, 7 families, six executors; sole mint = war-exit PASS 1) | treaty clock 52-week (WR-0c item 4; legacy 12 marked); strain 0.6/yr; errand legs law M when WR-7 lands |
 | **INTERIOR** | postureOf/blocDecisionFactor (settlementPolitics, dark), publicLegitimacy bands + gates (coup spawn, insurgency null ≥75), grievanceRead (fixation/revanchism), obligations/gratitudeBonds, dispositionStats (permanent until WR-2) | coup verdicts (dice-clean main lane), faction 7-type table, commons petition/gathering/riot, investiture beat, generosity 6 headlines | legitimacy 0-100 stock (never passively decays), factionPairStates, relationshipMemory + turningPoints(24), commonsVoice ledger | same-settlement, same-tick (the fast layer); memory clocks 4-tick incident half-life / 156w bonds / permanent disposition |
 
@@ -167,11 +199,15 @@ volumes, BOTH volumes' §1 laws bind the coupling — the stricter clause wins.
 motive, chooser, siege reads), migrants/merchants/priests do not (populations
 survey: destinationMenuFor reads truth only; trade survey: zero belief imports
 across nine core commerce modules; faith survey: sacred_claim compares embedded
-refs). SP-2's three subject families are the cure, and POP-1/FP-TRADE(believed
-markets)/WF-4 are the owning waves. (2) **The grammar is war-exit-shaped** —
-the single agreement artifact mints only from sue_for_peace (peaceTerms.js PASS
-1, sole caller pulseKernel.js:2371); SP-3 peacetime formation is the cure and
-FP-GRAMMAR owns it. (3) **Every layer's memory outruns its voice** — the
+refs). SP-2's three subject families are the cure, and POP-1/TR-3/WF-4 are the
+owning waves [CORRECTED 2026-08-02 (fp-audit): concrete waves]. (2) **The
+grammar is war-exit-shaped** — the single agreement artifact mints only from
+sue_for_peace (peaceTerms.js PASS 1, sole caller pulseKernel.js:2371); SP-3
+peacetime formation is the cure and GR-2 owns it, amendment-shaped per chair
+ruling R1 (one instrument per pair is LAW: formation AMENDS the pair's standing
+instrument, minting only where none exists; reciprocal pacts are DIRECTIONAL
+terms — the beneficiary axis — inside the one instrument, hosted by the §13
+stacking machinery). (3) **Every layer's memory outruns its voice** — the
 surveys' uniform verdict (population 2 dedicated lines, faith ~9 tokens, info
 ~1.5%, interior single-template) — so EVERY pair below has a narration debt its
 owning volumes' voice waves (WF-8, POP-6, IN-5, INT-8) pay; this volume does not
@@ -180,32 +216,36 @@ duplicate those waves, it routes cascade-grade tellings through CW-1/CW-2.
 ---
 
 ## §3 THE MATRIX (grades per direction: **LIVE** = built + lit today · **DARK**
-## = built, flag-dark · **ADDS** = designed in a named wave · **EMPTY** =
-## declared empty in §4)
+## = built, flag-dark · **ADDS** = designed in a named wave · **ADDS (nil
+## today)** = designed in a named wave, nothing built in the direction yet
+## [CORRECTED 2026-08-02 (fp-audit): a fifth explicit token — the audit found
+## two designed directions graded "EMPTY-today", a grade outside the legend
+## that C-LAW-8 would have read as a STOP-and-report on designed GR-2
+## triggers] · **EMPTY** = declared empty in §4)
 
 | Pair | A→B | B→A |
 |---|---|---|
-| CPL-1 WAR×TRADE | LIVE (interdiction, seizure, treaty grain) | LIVE/ADDS (salience dampener; casus commercii — FP-TRADE) |
+| CPL-1 WAR×TRADE | LIVE (interdiction, seizure, treaty grain) | LIVE/ADDS (salience dampener; casus commercii — TR-1) |
 | CPL-2 WAR×FAITH | LIVE (occupation faith-pull) | LIVE/ADDS (sacred_claim + dissolution; WF-6 terms) |
 | CPL-3 WAR×POP | LIVE (war dead, flight, sack) | LIVE/ADDS (realm-pressure motive; WR-8 razing arithmetic) |
 | CPL-4 WAR×INFO | LIVE (belief-wrapped strength, bluff) | ADDS (the lure, feasibility, race — IN-2/WR-8/IN-4) |
-| CPL-5 WAR×GRAMMAR | LIVE (war-exit mint, enforcement bites) | ADDS (WR-7 transport; SP-3 peacetime; oath identity) |
+| CPL-5 WAR×GRAMMAR | LIVE (war-exit mint, enforcement bites) | ADDS (WR-7 transport; GR-2 peacetime; GR-1 oath identity) |
 | CPL-6 WAR×INTERIOR | LIVE (4 channels) / DARK (war party) | ADDS (WR-5 books/veto/re-read; INT-3/INT-4) |
-| CPL-7 TRADE×FAITH | LIVE (conscience embargo, relational contraband) | ADDS (WF-7 tithe; FP-TRADE moral drift) |
-| CPL-8 TRADE×POP | LIVE (import arm, prosperity pull) | ADDS (POP-1 believed conditions; food pipeline) |
-| CPL-9 TRADE×INFO | LIVE (believed danger EV) / gap (prices read truth) | ADDS (SP-2 believed scarcity; IN-0 HIDE tax; the run) |
-| CPL-10 TRADE×GRAMMAR | EMPTY-today (no peacetime pact) | ADDS (SP-3 IS the cure; trade term families) |
-| CPL-11 TRADE×INTERIOR | LIVE (merchant seats, commerce blocs dark) | ADDS (THE HOUSE; seatBooks venture appetite) |
+| CPL-7 TRADE×FAITH | LIVE (conscience embargo, relational contraband) | ADDS (WF-7 tithe; TR-6 moral drift) |
+| CPL-8 TRADE×POP | LIVE (import arm, prosperity pull) | ADDS (POP-1 believed conditions; TR-4 grain road) |
+| CPL-9 TRADE×INFO | LIVE (believed danger EV) / gap (prices read truth) | ADDS (TR-3 believed scarcity; IN-0 HIDE tax; the run) |
+| CPL-10 TRADE×GRAMMAR | ADDS (nil today) — GR-2 `trade_demand` trigger | ADDS (GR-2 formation; TR-5 pact lane; GR-3 term rows) |
+| CPL-11 TRADE×INTERIOR | LIVE (merchant seats, commerce blocs dark) | ADDS (TR-2 THE HOUSE; INT-1 seatBooks — trade read RESERVED at TR-7) |
 | CPL-12 FAITH×POP | LIVE (crisis conversion, adoption, affinity) | ADDS (WF-2 pilgrims; POP-3 diaspora rite) |
 | CPL-13 FAITH×INFO | LIVE (faithLabel staleness) | ADDS (WF-4 omens; SP-2 believed devotion; lure) |
-| CPL-14 FAITH×GRAMMAR | LIVE (faith-brother mediation) | ADDS (WF-6 faith terms; communion trigger) |
+| CPL-14 FAITH×GRAMMAR | LIVE (faith-brother mediation) | ADDS (GR-3 faith rows; WF-6 executors; communion trigger) |
 | CPL-15 FAITH×INTERIOR | LIVE (divine mandate → legitimacy) | ADDS (WF-1 unseating; the reformation chain) |
 | CPL-16 POP×INFO | LIVE (columns carry rumors — one direction only) | ADDS (POP-1 believed road; letters home; lost column) |
-| CPL-17 POP×GRAMMAR | EMPTY-today (nothing negotiable about people) | ADDS (SP-3 population term families; permits) |
+| CPL-17 POP×GRAMMAR | ADDS (nil today) — GR-2 `migration_pressure` trigger | ADDS (GR-3 population term rows; POP-5b permits) |
 | CPL-18 POP×INTERIOR | DARK (commons voice built, unlit) | ADDS (POP-2 refusal rung; émigré arm INT-3) |
 | CPL-19 INFO×GRAMMAR | LIVE (compliance fog, believed margins) | ADDS (WR-7 envoys; IN-1 mirror; the lie-bought pact named) |
-| CPL-20 INFO×INTERIOR | LIVE (council_schism, exposure blowback) | ADDS (INT-2 counsel receipts; the scandal→fall join) |
-| CPL-21 GRAMMAR×INTERIOR | LIVE (approval lanes) / gap (no signer identity) | ADDS (oath-holder identity; succession-repudiation; INT-4) |
+| CPL-20 INFO×INTERIOR | LIVE (council_schism, exposure blowback) | ADDS (INT-2 counsel receipts; IN-5(d) scandal→fall join) |
+| CPL-21 GRAMMAR×INTERIOR | LIVE (approval lanes) / gap (no signer identity) | ADDS (GR-1 oath identity; GR-4 succession-repudiation; INT-4) |
 
 ---
 
@@ -231,17 +271,19 @@ intent orders WHOM only, no CONQUEST_MARGIN waiver); embargo lanes exist three
 ways (conscience embargo institutionTolerance.js:52-119; trade_dependency_
 embargo relationshipRulesAdversarial.js:535-627; the merchant lever); war
 motive reads perceived scarcity (perceivedScarcityOf, demographicsWar.js:206).
-**ADDS:** FP-TRADE(casus commercii) gives commerce its own walker-enforced
-reason taxonomy with severance↔partnership mirrors — the trade grievance stops
-borrowing war's vocabulary; FP-TRADE(food joins the physical pipeline) makes
-the blockade materially true for the flagship good (today food moves by rate
-arithmetic — foodBalance survey row — so a "starved" city starves by
-percentage, not by intercepted grain); WR-4's home front reads trade partners
-lost + route decay as war cost; WR-6's expenditure read prices allied trade
-spent; WR-10's bundle stacks trade-rights term families — **which do not exist
-in the tree** (trade survey: trade_exclusivity/market_access/toll_exemption,
-zero hits) — a declared cross-volume dependency: SP-3/FP-TRADE mint the term
-families; WR-10 consumes them (§10).
+**ADDS [CORRECTED 2026-08-02 (fp-audit): owning waves concrete]:** TR-1 (casus
+commercii) gives commerce its own walker-enforced reason taxonomy with
+severance↔partnership mirrors — the trade grievance stops borrowing war's
+vocabulary; TR-4 (the grain road) makes the blockade materially true for the
+flagship good (today food moves by rate arithmetic — foodBalance survey row —
+so a "starved" city starves by percentage, not by intercepted grain); WR-4's
+home front reads trade partners lost + route decay as war cost; WR-6's
+expenditure read prices allied trade spent; WR-10's bundle stacks trade-rights
+term families — **which do not exist in the tree** (trade survey:
+trade_exclusivity/market_access/toll_exemption, zero hits) — a declared
+cross-volume dependency: GR-3 mints the catalog rows (chair ruling R3 — ONE
+canonical catalog list, minted in GRAMMAR; TR-5's pact lane consumes), and
+WR-10 consumes them (§10).
 **COUNTERFORCE:** the same dependency edge scores both ways — tradeSalience
 dampens hostility exactly where resource_pressure/opportunism would raise it;
 an embargo that cuts a salient tie charges the embargoer's own supply web
@@ -255,7 +297,7 @@ verdict of the two-timescale echo; the seizure beat is the fast layer.
 **RECEIPTS + DOSSIER:** starvationReceipt is mandatory and causal ("the smithy
 starves: the iron road is cut" — supplyShipments.js:227); webwar_* kinds exist.
 Dossier round-trip: the town page's supply/institution panels already show
-supply_starved impairments with cause; FP-TRADE's dossier waves add the house
+supply_starved impairments with cause; TR-2's dossier round-trip adds the house
 ledger view. The DM asks "why is the smithy dark?" and the walk (CW-2) runs
 seizure→route→war.
 **PINS:** negative-hardest — an embargo against a NON-salient tie moves nothing
@@ -282,9 +324,10 @@ keys on patron_anchor_changed (warTermination.js:88, :308-322 — "a god named
 when the banners rose is no longer worshipped from the same throne"), BUILT and
 flag-dark.
 **ADDS:** WF-1 (the unseating) gives the dissolution a typed, receipted fall to
-anchor on — the believer-side collapse with named causes; WF-6 puts faith terms
-on the table via SP-3 (missionary access, shared-rite compacts, pilgrimage
-rights) so holy wars can END with terms about what they were fought over —
+anchor on — the believer-side collapse with named causes; faith terms reach
+the table via GR-3's canonical catalog rows with WF-6's executors [CORRECTED
+2026-08-02 (fp-audit): R3 ownership — membership and spelling live in GR-3]
+so holy wars can END with terms about what they were fought over —
 today "holy wars can start over gods but never end with terms about them"
 (faith survey verdict); WF-2's pilgrims + legates become interceptable war
 targets (CPL-12/CPL-5; signature story #2); WR-8's world-judgment includes
@@ -292,10 +335,11 @@ deities judging the razing on the observer's axis, and the atrocity casus pair
 (J-WR-14) gives moral outrage its own cause.
 **COUNTERFORCE:** common_rite is the same quadrant table read at the opposite
 pole (RITE_BY_QUADRANT mirrored 0.80/0.45/0/0); patronSecurity gates both
-signs; WF-6's shared-rite compact is the pact-shaped counterforce to the
+signs; the `shared_rite` compact (GR-3 row, WF-6 executor) is the pact-shaped counterforce to the
 sacred_claim war.
 **BELIEF + CLOCK:** the quadrant read compares embedded patron snapshots — a
-LOUD-FACT read under C-LAW-5 (altars are public; ruled J-CPL-6); the neighbours'
+LOUD-FACT read under C-LAW-5 (altars are public; ruled J-CPL-3 [CORRECTED
+2026-08-02 (fp-audit): the old text miscited J-CPL-6, the term-family block]); the neighbours'
 DEVOTION (how sincerely they keep the rite) is a secret and rides SP-2's
 believed-devotion family when WF-4/IN-2 land. Spread moves at carrier reach;
 dissolution re-reads at pulse cadence once warTerminationEnabled lights.
@@ -335,7 +379,17 @@ the war (road drama; the lost-column inference is K.7's shape pointed at
 civilians); POP-3's departure memory turns war exoduses into generational
 story-fuel (CPL-18, signature story #4); WR-3's lineage claims ride wave-P
 overflow foundings (flag-dependency: WR-3 declares demographicsEnabled a
-lit-precondition).
+lit-precondition). [CORRECTED 2026-08-02 (fp-audit) — the cohesion audit found
+POP-5b's levy gate was a declared POP→WAR coupling with no CPL row, which
+CW-0's inclusion ratchet would red at build:] POP-5b's LEVY PERMIT — owning
+wave POP-5b; read `moverPermitted(grade,'levy')` wired at the
+conscription/mobilization site (a failing town cannot be levied);
+receiptField = the muster receipt naming the refused grade; counterforce =
+the caller's demand off the same viability evidence (the seat that needs the
+levy most is reading the grade that forbids it); the double-bind fixture
+POP-5b pins (grade-refused AND commons-refused, two named reasons on one
+receipt) is this row's acceptance shape. Distinct from the declared-empty
+manpower arithmetic below: the permit GATES the verb; it deducts nothing.
 **COUNTERFORCE:** the capability damper — a starving realm WANTS war more and
 can WAGE it less, both read from the same pressure state (demographicsWar's
 motive vs capability floor); the mistaken court's receipt admits the error
@@ -420,16 +474,17 @@ repudiation a first-class approval-routed act with a legible broken shell and
 made the war-block reach the one opener; strain accrues typed tribute_strain
 resentment feeding revanchism; mediation softens budgets 20% and earns the
 broker trust both ways; coalition peel exists.
-**ADDS:** WR-7 replaces the TRANSPORT never the math (the seam ruling: one
-evaluator, two transports; negotiationPictures.js invokes the leaf evaluators
-once PER PARTY under its own truthFor); WR-5 prices refusal (G2: a declined
-peace is a first-class news event with real costs); FP-GRAMMAR(SP-3) opens
-PEACETIME formation so the NAP stops being a victor's term only (survey's
-sharpest fact: two peaceful neighbours cannot sign a non-aggression pact —
-the only path runs through fighting); FP-GRAMMAR(oath-holder identity) puts
-WHO SWORE on the record (CPL-21); expiry gains its receipt (today a
-twenty-year pact dies in total silence — peaceTerms.js:720-724, 763-765);
-renegotiation-from-strength opens (§12.5's unbuilt window).
+**ADDS [CORRECTED 2026-08-02 (fp-audit): owning waves concrete]:** WR-7
+replaces the TRANSPORT never the math (the seam ruling: one evaluator, two
+transports; negotiationPictures.js invokes the leaf evaluators once PER PARTY
+under its own truthFor); WR-5 prices refusal (G2: a declined peace is a
+first-class news event with real costs); GR-2 opens PEACETIME formation so the
+NAP stops being a victor's term only (survey's sharpest fact: two peaceful
+neighbours cannot sign a non-aggression pact — the only path runs through
+fighting; amendment-shaped per R1); GR-1 puts WHO SWORE on the record
+(CPL-21); GR-0 gives expiry its receipt (today a twenty-year pact dies in
+total silence — peaceTerms.js:720-724, 763-765); GR-5 opens
+renegotiation-from-strength (§12.5's unbuilt window).
 **COUNTERFORCE:** compliance fog cuts both ways off the same monitor-reach
 state — a poorly-watched cheat ghosts as honored (the victor's problem), and
 an honest payer under-credited breeds the payer's grievance (the loser's);
@@ -440,7 +495,7 @@ legacy-12-marked (WR-0c item 4 landed). Errand legs at law M when WR-7 lights.
 **RECEIPTS + DOSSIER:** treaty_signed (major) + treaty_breached exist;
 TreatyPanel/WarFaithTab/PDF render per-term compliance and the fraying line —
 mid-life legibility is excellent, both ends near-mute (survey verdict) —
-FP-GRAMMAR's voice work adds lapse/detection/longevity beats. Dossier: the
+GR-0's lifecycle voice adds lapse/detection/longevity beats. Dossier: the
 treaty document IS the round-trip.
 **PINS:** negative-hardest — a live honored NAP blocks the opener AND the
 chooser's deploy weight collapses at warReasonFactor=0 (WR-0c, built + pinned);
@@ -511,13 +566,25 @@ institutions under the patron plane × piety megaphone (moralInstitutionPressure
 stream touches a temple anywhere in src/domain (faith survey, tithe grep;
 'tithe_rights' is a faction-competition prize TOKEN only,
 factionCompetition.js:68).
-**ADDS:** WF-7 THE TITHE COUPLING (the stream, the temple wealth band, the
-relief lever, the sack-lure coupling — a rich temple is a reason to come);
-FP-TRADE(moral drift prices profiteering) — the famine speculator's fortune
-carries a conscience stain the tolerance/moral machinery can read (story #5);
-WF-2's shrine economy makes pilgrim traffic a trade flow (CPL-12); SP-5's
-house credibility and confidence-in-god are siblings in one stock family —
-the grammar of trust is shared, the stocks never merge.
+**ADDS [CORRECTED 2026-08-02 (fp-audit) — the ownership circle broken: FAITH's
+waves pointed the stream executors at TRADE's machinery, TRADE's text pointed
+the tithe back at FAITH, and no wave owned either executor; ruled per the
+correction pass, recorded here as C-LAW-1's row of record]:** WF-7 THE TITHE
+COUPLING — owning wave WF-7, executor OWNED BY FAITH END TO END (tithe.js pure
+leaf computes the draw and the wealth fold; religionStates' one writer
+applies; the receipts mint there; TRADE builds NO stream-physics API for
+external consumers — no TR wave ever specced one, audit-verified). **THE
+DECLARED CPL-7 PORT:** where TRADE's stream physics (TR-4) is LIT, WF-7's
+draw additionally registers a stream entry through TRADE's OWN writer at its
+own chokepoint — consumed, never forked; TRADE dark ⇒ wealth fold + receipts
+only (the degraded arm, declared in FAITH §3). The TRADE side of this pair is
+a READ SURFACE only (house books/fortune bands read by FAITH's executor).
+Also: TR-6 (moral drift prices profiteering) — the famine speculator's
+fortune carries a conscience stain the tolerance/moral machinery can read
+(story #5); WF-2a's shrine economy makes pilgrim traffic a receipted faith
+flow (CPL-12 — same ownership shape, same port); SP-5's house credibility and
+confidence-in-god are siblings in one stock family — the grammar of trust is
+shared, the stocks never merge.
 **COUNTERFORCE:** the same wealth state — the endowment that buys standing
 (WF-7 + faction competition) versus the tolerance/abhorrence read that prices
 how the wealth was made; the temple that refuses the tainted gift is the
@@ -552,15 +619,18 @@ reads the destination's causal economic_capacity (demographicsPushPull.js:
 population class (ROUTE_FLOW_SOURCES attribution table); population IS the
 demand side of every supply chain; boomtown upswing arcs read sustained
 surplus + earned centrality.
-**ADDS:** FP-TRADE(food joins the physical pipeline) — the flagship-good
-asymmetry dies: grain caravans become interceptable objects, so the import arm
-stops being pure arithmetic and starts being a road you can cut and a caravan
-you can rob; POP-1's believed conditions make destination attractiveness a
-belief the trade net carries (the rush chases the boom the rumors sold —
-story #6); SP-3's grain-for-settlement provisions and labor compacts make
-bread-for-people a signable pact (CPL-17); POP-5b lights the permit table's
-trade column (moverPermitted's dark vocabulary — populations survey found ONE
-consumer).
+**ADDS [CORRECTED 2026-08-02 (fp-audit): owning waves concrete]:** TR-4 (the
+grain road) — the flagship-good asymmetry dies: grain caravans become
+interceptable objects, so the import arm stops being pure arithmetic and
+starts being a road you can cut and a caravan you can rob; POP-1's believed
+conditions make destination attractiveness a belief the trade net carries
+(the rush chases the boom the rumors sold — story #6); GR-3's
+`settlement_provision` and `labor_compact` catalog rows (canonical mint per
+R3; POP/TRADE consume with declared arms) make bread-for-people a signable
+pact (CPL-17); POP-5b lights the permit table's trade column — owning wave
+POP-5b; read `moverPermitted(grade,'trade')` at the route-assignment site;
+receiptField = the assignment refusal naming the grade (moverPermitted's dark
+vocabulary — populations survey found ONE consumer).
 **COUNTERFORCE:** capacity truth — competeForDestinations caps takes at true
 spare and the landing stage runs before departures (built); the boomtown that
 cannot feed its arrivals shrinks by the same K_food read that drew them
@@ -572,7 +642,7 @@ POP-5a's road drama.
 **RECEIPTS + DOSSIER:** hungry_gap names the burial line; import_shortage and
 flow_trade_scarcity exist; POP-6 adds the arrival voice ("newcomers pour into
 X" does not exist today — populations survey). Dossier: foodBalance + the
-binding-wall word (granary vs walls) already render; FP-TRADE adds the
+binding-wall word (granary vs walls) already render; TR-4 adds the
 caravan/stock view.
 **PINS:** negative-hardest — cutting the LAST artery drops the import factor
 to the irregular-traffic trickle, never zero (built band); a boom whose
@@ -596,23 +666,28 @@ THE GAP, measured: prices, scarcity, and partner choice read omniscient truth �
 zero belief imports across all nine core commerce modules (trade survey,
 epistemics row); HIDE's trade tax is narrated, not wired (SEAM NOTE,
 informationStatecraft.js:1448-1452).
-**ADDS:** SP-2 BELIEVED SCARCITY ("grain is dear in the east, they say") —
-FP-TRADE(believed markets) owns the consumers: the wrong-market tragedy,
-cornering, the famine speculator; IN-0 lands the HIDE trade tax (the sealed
-court stops hearing prices too); IN-2's planted wealth/planted scarcity are
-the lure pointed at markets; SP-5's house credibility instantiates the
+**ADDS [CORRECTED 2026-08-02 (fp-audit): owning waves concrete]:** SP-2
+BELIEVED SCARCITY ("grain is dear in the east, they say") — TR-3 (believed
+markets) owns the consumers: the wrong-market tragedy, cornering (TR-6), the
+famine speculator; IN-0 lands the HIDE trade tax (the sealed court stops
+hearing prices too); IN-2's planted wealth/planted scarcity are the lure
+pointed at markets; SP-5's house credibility instantiates the
 confidence-stock family for commerce — the run becomes mechanics (story #3);
 IN-4's race decides who-knew-first at the market gate.
 **COUNTERFORCE:** arrivals correct beliefs — every physical delivery is an
 independent witness against the rumor (the stamp ladder's hop-count theorem is
 MEASURED: hop count predicts truth 1.000→0.465, brokerageStamps.js:22-49); a
-house of confirmed record survives tavern-talk (creditors weight by stamp).
+house of confirmed record survives tavern-talk [CORRECTED 2026-08-02
+(fp-audit): the creditor-weighting CONSUMER of the stamp ladder does not
+exist in the tree — it is TR-3's believed-markets consumer (the dispatchEV
+idiom pointed at credit), an ADDS, not a present-tense read; the old text's
+present tense was the finding-6 overreach].
 **BELIEF + CLOCK:** the believed-scarcity subject family decays on the belief
 laws (silence decay, contradiction, forgetting); caravans move slower than
 rumors — the say arrives before the sail, which is exactly the speculator's
 window and the race's stake.
 **RECEIPTS + DOSSIER:** the say-versus-delivery divergence is receipt-
-derivable (belief record vs arrival record); FP-TRADE's dossier lane shows the
+derivable (belief record vs arrival record); TR-2's dossier lane shows the
 house ledger; the brokerage stamps already dress Herald items. Dossier: the
 market panel's scarcity band beside the belief band — the DM sees the wedge.
 **PINS:** negative-hardest — a planted scarcity CONTRADICTED by visible
@@ -638,23 +713,34 @@ generosity CREDIT obligation (maturity→repayment/default, default minting a
 0.7-severity betrayal-class grievance — the casus seam), and it is unilateral.
 demographicsRates.js:271-277 is the tree's own admission: the food-export
 treaty quantity waits on trade agreements landing.
-**ADDS:** SP-3 IS this pair's cure and FP-GRAMMAR owns it — peacetime
-formation from typed triggers (a trade-demand crossing among them), two-sided
-drafting via negotiationPictures (built once for WR-7, used for peacetime),
-the standalone NAP writer, expiry receipts, succession-repudiation,
-renegotiation-from-strength; FP-TRADE(pacts via SP-3) supplies the TRADE TERM
-FAMILIES — including the exclusivity/market-access/toll-exemption rows that
-WR-10's bundle spec name-drops but the tree lacks (trade survey: zero hits;
-the dependency is declared in §10); FP-TRADE(casus commercii) gives pact
-breach its commercial casus siblings so a defaulted grain pact angers like a
-defaulted peace.
+**ADDS [CORRECTED 2026-08-02 (fp-audit): owning waves concrete + chair ruling
+R1 recorded]:** SP-3 IS this pair's cure and GR-2 owns formation — peacetime
+formation from typed triggers (GR-2's `trade_demand` crossing among the
+closed four), two-sided drafting via negotiationPictures (built once for
+WR-7, used for peacetime), the standalone NAP writer; GR-0 owns expiry
+receipts; GR-4 succession-repudiation; GR-5 renegotiation-from-strength.
+**R1 — ONE INSTRUMENT PER PAIR IS LAW:** the treaty ledger's one-per-pair key
+is not a bug; peacetime formation AMENDS the pair's standing instrument
+(minting one only where none exists), and the reciprocal exchange this pair's
+archetype names — wool for wine, grain for ore — is representable as
+DIRECTIONAL TERMS inside the ONE instrument: a term gains a beneficiary
+field, the §13 stacking machinery hosts bilateral direction
+(per-family-per-direction for `provenance:'negotiated'`), and a second
+security term either composes under the stacking rules or is REFUSED with a
+receipt. GRAMMAR §4 carries the model change; TR-5's pact lane consumes it
+and never re-derives it. GR-3 mints the TRADE TERM FAMILY catalog rows
+(canonical per R3) — including the exclusivity/market-access/toll-exemption
+rows that WR-10's bundle spec name-drops but the tree lacks (trade survey:
+zero hits; the dependency is declared in §10); TR-1 (casus commercii) gives
+pact breach its commercial casus siblings so a defaulted grain pact angers
+like a defaulted peace.
 **COUNTERFORCE:** compliance-under-fog transfers whole (the same monitor-reach
 machinery — an unwatched partner's default ghosts as honored); severance
-mirrors partnership in the casus taxonomy (walker-enforced, FP-TRADE crux).
+mirrors partnership in the casus taxonomy (walker-enforced, TR-1's crux).
 **BELIEF + CLOCK:** formation triggers read believed demand (SP-2) — the pact
 you propose is the pact you BELIEVE you need; the treaty clock (52-week,
 marked legacy) governs all durations; food streams ride the physical pipeline
-once FP-TRADE lands it.
+once TR-4 lands it.
 **RECEIPTS + DOSSIER:** treaty_signed already carries per-term reasons;
 peacetime pacts inherit the whole document surface (TreatyPanel, fraying line,
 PDF) for free — the single-artifact ruling pays here. Dossier: the treaty
@@ -681,15 +767,23 @@ archetype ("a merchant reaches for embargo/toll/purchase-denial"). THE GAP,
 measured: no faction or seat HOLDS trade assets — entrepot greed is a
 self-balancing toll derivation, not an actor's choice; "there is no guild that
 gets rich off a route and defends it" (trade survey, actors'-books row).
-**ADDS:** FP-TRADE(THE HOUSE) — the merchant actor at faction grain: books,
-appetite, named factor NPCs (no micro-agents; Law One), ventures as receipted
-risk instruments through the plan lane, endings {fortune, ruin, monopoly,
-collapse, severance, cornered}; SP-4's posture colours the house's appetite
-(SP-4a per house/temple actor class); SP-5's house credibility; INT-1's
-seatBooks is DECLARED a consumer surface for trade venture appetite (INTERIOR
-§3 names TRADE's venture appetite among seatBooks consumers under
-seatBooksEnabled); INT-2's positions generalize so a house-aligned bloc's
-FOREIGN position (favor the partner, oppose the embargo) loads the chooser.
+**ADDS [CORRECTED 2026-08-02 (fp-audit): owning waves concrete; the seatBooks
+one-sided declaration cured per R6 — a coupling is a wave or a DEFERRAL, never
+a prose hope]:** TR-2 (THE HOUSE) — the merchant actor at faction grain:
+books, appetite, named factor NPCs (no micro-agents; Law One), TR-7's
+ventures as receipted risk instruments through the plan lane, endings
+{fortune, ruin, monopoly, collapse, severance, cornered}; SP-4's posture
+colours the house's appetite (SP-4a per house/temple actor class); SP-5's
+house credibility; INT-1 owns the seatBooks WRITER (`booksOf` — one books
+read, many consumers) — and the TRADE-side consumption (venture appetite
+reading the seat's books) was DECLARED DEFERRED until TR-7 reserved it;
+[CORRECTED 2026-08-02 (fp-audit), cohesion pass] TR-7's posture block NOW
+CARRIES the reservation in the exact required form (behind seatBooksEnabled
+AND venturesEnabled, colour-only, receipt naming seatBooks, absent-not-zero
+until INT-1 lands) — the deferral is LIFTED at spec level, the read stays
+dark until both flags light (§10 register); INT-2's
+positions generalize so a house-aligned bloc's FOREIGN position (favor the
+partner, oppose the embargo) loads the chooser.
 **COUNTERFORCE:** the house's own books — a venture priced by appetite that
 outcome-learning reverses (the merchantAppetite pattern generalized, reversal
 pinned by SP-4's law: no courage ratchets); the commons' grievance reads
@@ -701,7 +795,7 @@ them — C-LAW-5); venture arcs run plan-lane clocks (proposed→underway→
 completed|failed).
 **RECEIPTS + DOSSIER:** venture receipts through the plan lane; faction
 competition already narrates institution contests. Dossier: the house's
-standing on the factions panel; FP-TRADE's dossier round-trip pins the ledger
+standing on the factions panel; TR-2's dossier round-trip pins the ledger
 view.
 **PINS:** negative-hardest — a ruined house's seat does not silently absorb
 the loss (the ruin ending must land its interior consequences: bloc
@@ -727,9 +821,17 @@ population — traditions ADOPTION plants an adoptedFrom rite when cumulative
 influx from one origin ≥12% over 3 rolling years (relations.js:48-49,
 traditionsKernel.js:623-646); refugees prefer culturally-near hosts
 (cultureAffinity01 at 0.26 in M4's destination choice).
-**ADDS:** WF-2 makes pilgrims REAL — named pilgrims + legates as SP-1 movers
-with the pilgrim season read and shrine economy (the discarded draw math
-becomes the errand mint's source); WF-5b's covert congregation gives the
+**ADDS [CORRECTED 2026-08-02 (fp-audit)]:** WF-2 makes pilgrims REAL — named
+pilgrims + legates as SP-1 movers with the pilgrim season read and shrine
+economy (the discarded draw math becomes the errand mint's source). **THE
+DECLARED CPL-12 PORT (ownership per the correction pass — the circle where
+FAITH pointed the feast executor at TRADE and TRADE pointed back is broken):**
+WF-2a owns the feast-economy executor END TO END (pilgrimSeason.js pure leaf
+computes the lift; the receipts mint in FAITH); where TRADE's stream physics
+(TR-4) is LIT, the feast additionally registers a stream entry through
+TRADE's OWN writer at its own chokepoint — consumed, never forked; TRADE dark
+⇒ season + receipts only (the degraded arm, declared in FAITH §3). WF-5b's
+covert congregation gives the
 suppressed faith secret practitioners — and its exposure/flight arm is the
 Huguenot mechanism: suppression → underground → exposure or emigration, the
 choice priced by the covert seam; POP-3's departure memory carries the rite
@@ -796,9 +898,11 @@ and its interpretation, separately attributed.
 **PINS:** negative-hardest — a deity-free town reads NO omen (absence of a
 faith is not a lens); a correct-by-luck prophecy still decays on the same
 ledger (no oracle ratchet); the misfile class: every WF-4/IN kind's desk is
-asserted by the CW-0 registry walker (belief_misjudgment's faith-desk seat is
-either ruled intentional or moved — flagged for FP-GRAMMAR/IN-5's routing
-pass, J-CPL-10).
+asserted by the CW-0 registry walker [CORRECTED 2026-08-02 (fp-audit):
+belief_misjudgment's faith-desk seat is RULED — IN-5 refiles it to the
+knowledge desk (J-INF-6) and the no-word-association walker lands there;
+J-CPL-10 is closed by adoption, and CW-0's registry records `intendedDesk:
+knowledge`, never the pre-refile desk].
 **DECLARED EMPTY:** no true divination — the Auspice stays a DM-facing
 deterministic forecast with its honest label ("an omen, not a promise"); no
 prophecy ever reads the future's actual state (seeded purity + Law One).
@@ -811,14 +915,23 @@ via cohesionWeave's temple-facet regex); common_rite is a scored peace REASON
 sacredClaim.js:178-181); and NO faith term exists in TERM_CATALOG — a victor
 cannot demand a creed, missionary access, or temple rights at any table
 (faith survey + grammar survey, both CONFIRMED).
-**ADDS:** WF-6 puts the faith term families into SP-3's catalog — missionary
-access, shared-rite compacts, pilgrimage rights — with executors, so faith
-becomes negotiable WITHOUT becoming dictatable (the families join peacetime
-formation AND the war-exit draft through the one catalog); the COMMUNION
-TRIGGER joins SP-3's typed proposal triggers (a faith communion proposes a
-compact the way a trade-demand crossing proposes a pact); FP-GRAMMAR
-(mediation generalizes) extends the broker beyond war-exit — any
-cross-pressured neighbour, the temple arm explicit.
+**ADDS [CORRECTED 2026-08-02 (fp-audit) — the audit found this family specced
+by TWO would-be author waves (WF-6 five families, GR-3 three) with divergent
+spelling and flags: a C-LAW-1 double-writer at the map's own crown law; chair
+ruling R3 resolves it]:** GR-3 MINTS the faith term catalog rows — the one
+canonical list for ALL term families lives in GRAMMAR (currently five faith
+rows: `missionary_access`, `shared_rite`, `pilgrimage_right`,
+`tolerance_guarantee`, `temple_restitution` — GRAMMAR's spelling binds;
+`shared_rite_compact` is retired); WF-6 is the CONSUMER wave — the faith-side
+executors (lazy leaf siblings per R2), formation triggers, the both-patrons
+guard, and the receipts, behind `faithTermsEnabled`; a faith term forms and
+executes only where GR-3's rows are landed AND WF-6's executors are lit. So
+faith becomes negotiable WITHOUT becoming dictatable (the families join
+peacetime formation AND the war-exit draft through the one catalog); the
+COMMUNION TRIGGER joins GR-2's typed proposal triggers (`faith_communion` —
+a faith communion proposes a compact the way a trade-demand crossing proposes
+a pact); GR-6 (mediation generalized) extends the broker beyond war-exit —
+any cross-pressured neighbour, the temple arm explicit.
 **COUNTERFORCE:** the schism axis blocks communion where it feeds claims
 (same quadrant table, opposite pole — a compact between same-god readers on
 opposite sides of the schism axis is structurally the HARD case and prices
@@ -826,7 +939,7 @@ accordingly); suppression consequences (WF-3's stance lanes landing) make the
 broken faith compact a stance event, not a shrug.
 **BELIEF + CLOCK:** the communion trigger reads the LOUD facts (patrons,
 public rites) plus believed devotion for sincerity (SP-2); compacts live on
-the treaty clock with expiry receipts (FP-GRAMMAR's lapse beat covers faith
+the treaty clock with expiry receipts (GR-0's lapse beat covers faith
 compacts for free — single artifact).
 **RECEIPTS + DOSSIER:** the compact IS a treaty document — TreatyPanel,
 fraying line, PDF, dossier round-trip all inherited; WF-6 adds the
@@ -837,13 +950,14 @@ exactly like imposition (LEGIT_STAIN_IMPOSED reads the formation context —
 a term extracted at war-exit carries the stain a peacetime compact does not);
 the mediator's trust accrual stays TWO-sided (built) and a failed mediation
 accrues nothing.
-**DECLARED EMPTY:** NO CONVERSION MANDATE TERM — the spine's SP-3 family list
-(missionary access, shared-rite compacts, pilgrimage rights) is CLOSED, and
-the old design-doc's "conversion mandate" is deliberately dropped: belief
-itself is never a term's deliverable (Law One — access can be signed,
-conviction cannot; J-CPL-6 records the ruling). No temple as treaty PARTY —
-parties are settlements, ever (the temple is a broker and a beneficiary,
-never a signatory).
+**DECLARED EMPTY [CORRECTED 2026-08-02 (fp-audit)]:** NO CONVERSION MANDATE
+TERM — the faith family's membership closure lives in GR-3's canonical
+catalog (per R3; the closed list is GRAMMAR's five, not this map's former
+three), and the old design-doc's "conversion mandate" stays deliberately
+dropped from it: belief itself is never a term's deliverable (Law One —
+access can be signed, conviction cannot; J-CPL-6 records the ruling). No
+temple as treaty PARTY — parties are settlements, ever (the temple is a
+broker and a beneficiary, never a signatory).
 
 ### CPL-15 — FAITH × INTERIOR (Henry VIII: the revenue dispute that became a reformation)
 **EXISTS:** divine mandate moves publicLegitimacy (applyDivineMandate,
@@ -918,12 +1032,22 @@ outruns correction by construction until arrivals close the loop.
 POP-1 adds disappointment receipts and POP-6 the arrival voice. Dossier:
 the population panel's inbound line beside the belief band — the DM sees
 the promise and the fact.
-**PINS:** negative-hardest — a rush toward a town whose TRUE spare is zero
-lands zero (capacity truth binds; the unplaced are receipted, not teleported
-home); a lost column that was merely SLOW un-mints its inference when it
-arrives (the false-mourning correction, K.7's jewel pointed at civilians);
-belief never enters competeForDestinations' arithmetic (the seam ruling's
-walker).
+**PINS [CORRECTED 2026-08-02 (fp-audit) — aligned to POP-1's corrected seam:
+only the ATTRACTION AXES resolve belief-side; menu ADMISSION, the
+spare/inbound-census read, and competeForDestinations' capacity cap stay
+TRUTH lit or dark (the spare read is the multi-origin overspill guard —
+physics, not knowledge), and the landing stage gains THE ARRIVAL CLEARING
+(NEW WORK owned by POP-1: the tree today lands every column
+unconditionally)]:** negative-hardest — a rush toward a town whose TRUE
+spare is zero at menu time never departs (admission is truth; the belief
+inflated the promise, not the room); capacity that moves WHILE the column
+walks is discovered at the wall by the arrival clearing — the unplaced turn
+back through the `returned` accounting arm, receipted, never teleported and
+never silently landed; a lost column that was merely SLOW un-mints its
+inference when it arrives (the false-mourning correction, K.7's jewel
+pointed at civilians); belief never enters competeForDestinations'
+arithmetic (the seam ruling's walker — implementable again now that spare
+is ruled truth-side).
 **DECLARED EMPTY:** no rumor ever moves grain or capacity (restated from
 CPL-8 — one law, two anchors); no engine-authored "boosterism" actor (the
 lure is a bought plant with a liable planter, never ambient marketing).
@@ -935,19 +1059,29 @@ settlement term anywhere; hostage sureties design-only); refuge is a
 UNILATERAL host posture (E1c); the permit table's destination column is
 authored but the wired gate is stricter and three mover columns are dark
 vocabulary (populations survey, ladder row).
-**ADDS:** SP-3's POPULATION TERM FAMILIES — migration rights, labor
-compacts, grain-for-settlement provisions — with MIGRATION PRESSURE as a
-typed proposal trigger (the crowded realm proposes the compact before it
-exports the crisis); FP-GRAMMAR owns formation; POP-5b lights the permit
-table's levy/institution/trade columns so a signed labor compact has a
-permit lane to run in; WR-10's people-do-not-move law bounds the sovereignty
-market's population effects (the sold town's people stay; only the edge
-rewrites).
-**COUNTERFORCE:** the commons — POP-2's refusal rung prices a compact the
-crowd won't carry (a labor draft the petition ladder refuses is a compact
-the seat signed and cannot deliver — compliance fog then shows the partner
-a default with a NAMED domestic cause); the voluntary margin (nobody walks
-for a treaty that out-promises home by less than 0.06).
+**ADDS [CORRECTED 2026-08-02 (fp-audit): owning waves concrete]:** GR-3's
+POPULATION TERM ROWS — `migration_right`, `labor_compact`,
+`settlement_provision` (canonical mint per R3; POPULATIONS and TRADE carry
+the declared consuming arms) — with GR-2's `migration_pressure` as the typed
+proposal trigger (the crowded realm proposes the compact before it exports
+the crisis); GR-2 owns formation; POP-5b lights the permit table's
+levy/institution/trade columns so a signed labor compact has a permit lane
+to run in; WR-10's people-do-not-move law bounds the sovereignty market's
+population effects (the sold town's people stay; only the edge rewrites).
+**COUNTERFORCE [CORRECTED 2026-08-02 (fp-audit) — the old counterforce rode
+POP-2's refusal rung, whose CLOSED target set (a live §5c plan, a levy call,
+an encouraged emigration) cannot target a signed compact, and whose no-target
+negative pin forbids it; the force shipped as a ratchet]:** GR-2's
+DEPENDENCY FEAR, the owning wave's own named counterforce — the SAME
+believed-flow evidence that raises the `migration_pressure` trigger scores
+both parties' fear of reliance through the existing `dependency`/`leverage`
+axes and the insular posture: the compact that would bind too tightly is
+refused BY THE SAME NUMBERS that invited it. Secondary bound, delivery-side:
+the voluntary margin (nobody walks for a treaty that out-promises home by
+less than 0.06 — a bound on movement, not an opposition to formation, and
+stated as such). Widening POP-2's target set to compact obligations was
+considered and NOT taken (a deferral, §10 register — the rung ladder's
+closed vocabulary is walker-enforced and stays closed).
 **BELIEF + CLOCK:** compacts on the treaty clock; deliveries at column
 speed; the partner's knowledge of compliance rides monitor reach (a
 distant partner learns the columns stopped coming one report late).
@@ -956,11 +1090,17 @@ delivery receipts ride the migration ledger's existing conservation
 identity (departures = arrivals + returned + lost + in-transit — the
 compact's audit is the built identity read against the promised flow).
 Dossier: the treaty document + the population panel's flows, one page.
-**PINS:** negative-hardest — a compact whose flow physics cannot deliver
-(no reachable route, nonviable destination) is REFUSED AT FORMATION by the
-same closed refusal vocabulary the homeostat uses (none/partial/unreachable/
-no_capacity/unattractive — reused, never duplicated); default-by-commons-
-refusal receipts the DOMESTIC cause, not a phantom foreign breach.
+**PINS [CORRECTED 2026-08-02 (fp-audit) — the old pin imported the P2
+homeostat's mover-refusal vocabulary into treaty formation, which would fork
+GR-2's own closed formation set or red its totality walker: two closed sets
+over two different objects are never merged]:** negative-hardest — a compact
+whose flow physics cannot deliver (no reachable route, nonviable
+destination) is REFUSED AT FORMATION with GR-2's own closed ending
+`no_overlap`, the flow-physics read supplying the REASON carried on the
+refusal receipt (the homeostat's none/partial/unreachable/no_capacity/
+unattractive words stay in the mover lane where they are law);
+default-by-commons-refusal receipts the DOMESTIC cause, not a phantom
+foreign breach.
 **DECLARED EMPTY:** no hostage-surety term in v1 (the old design's one
 population-adjacent term stays out: persons as compliance bonds crosses the
 named-cast never-resolve line — a held hostage is WR-7b's foreign-guest
@@ -969,23 +1109,38 @@ transfer term (people are never the PAYMENT — grain, rights, and access
 are; the sovereignty market trades EDGES, not souls).
 
 ### CPL-18 — POP × INTERIOR (the Peasants' Revolt: the levy refused, the petition marched)
-**EXISTS:** the commons voice kernel is BUILT and dark — a persistent
+**EXISTS, pop→interior (DARK) [CORRECTED 2026-08-02 (fp-audit): directional
+split made explicit — this is one of the two asymmetric sections the audit
+flagged]:** the commons voice kernel is BUILT and dark — a persistent
 per-settlement crowd ledger, grievance = 0.55×legitimacy-deficit + 0.35×
 exposed/seated corruption + 0.55×live unrest, deterministic three-rung
 escalation (petition→gathering→riot) with consequences through existing
 writers and news beats commons_petition/gathering/riot (commonsVoiceKernel.js
 :54-197, wired via assizeKernel.js:435 BEFORE the assize so a fresh petition
-is answerable same tick). THE GAPS, measured: no popular veto of §5c plans
-(RESPONSE_REFUSALS is entirely mechanical), no draft resistance (grep zero),
-no strikes; refusal-to-move exists only as the voluntary margin (populations
-survey, people's-voice row).
-**ADDS:** POP-2 THE COMMONS ARC — the REFUSAL rung extends the built ladder
-(the people refuse the seat's plan/levy/emigration-encouragement; priced,
+is answerable same tick). **EXISTS, interior→pop:** THE GAPS, measured: no
+popular veto of §5c plans (RESPONSE_REFUSALS is entirely mechanical), no
+draft resistance (grep zero), no strikes; refusal-to-move exists only as the
+voluntary margin (populations survey, people's-voice row) — the seat's acts
+reach the people today only through the mechanical plan/levy machinery.
+**ADDS [CORRECTED 2026-08-02 (fp-audit): + the institution-charter permit
+row the cohesion audit found declared in POP-5b with no CPL anchor]:** POP-2
+THE COMMONS ARC — the REFUSAL rung extends the built ladder (the people
+refuse the seat's plan/levy/emigration-encouragement; priced,
 legitimacy-gated); the answered-petition counterforce receipts (the seat
-that listens spends less than the seat that suppresses); INT-3's émigré arm
-(the interior veto's exile connection — the ousted party that left keeps a
-voice through POP-3's diaspora memory); INT-7's legitimacy crossings give
-the rung ladder's cause a legible trail.
+that listens spends less than the seat that suppresses); POP-5b's
+INSTITUTION CHARTER PERMIT — owning wave POP-5b; read
+`moverPermitted(grade,'institution')` at the institution-founding site (a
+failing town charters nothing); receiptField = the founding refusal naming
+the grade; counterforce = the founding demand off the same viability
+evidence; [CORRECTED 2026-08-02 (fp-audit), cohesion pass] the SEATBOOKS
+PERMIT-POSTURE seam, RESERVED at POP-5b's posture block (INT-1 → the
+caller's press-or-yield at the permit's calling surfaces, behind
+`seatBooksEnabled` AND `moverPermitsEnabled`, receipt naming seatBooks,
+absent-not-zero until INT-1 lands — the §10 register item 8 lifting,
+recorded here per INT-1 §3's rule); INT-3's émigré arm (the interior veto's
+exile connection — the
+ousted party that left keeps a voice through POP-3's diaspora memory);
+INT-7's legitimacy crossings give the rung ladder's cause a legible trail.
 **COUNTERFORCE:** the answered petition — same grievance state, two seat
 choices, two prices; and the ladder's OWN dwell (3-tick) keeps the crowd
 from being a hair-trigger veto.
@@ -1026,9 +1181,10 @@ one honest channel is the traitor's); IN-1's mirror gives negotiation
 posture its second-order read (what they likely believe of us, derived from
 the outbound record); IN-0's disclosure executor closes the compelled-intel
 seam (the loser can finally feed the channel — and feed it FALSE, Q's
-sibling); FP-GRAMMAR's lie-bought-pact NAMING (the join from exposure beat
-to the treaty it purchased — the survey's missing tie) and succession-
-repudiation reading believed provenance.
+sibling); GR-0's lie-bought-pact NAMING (the join from exposure beat to the
+treaty it purchased — the survey's missing tie; GR-0's fourth beat per the
+grammar volume's census) and GR-4's succession-repudiation reading believed
+provenance [CORRECTED 2026-08-02 (fp-audit): owning waves concrete].
 **COUNTERFORCE:** SEND-TWO — divergent accounts of one parlay are the
 traitor's signature, caught by the corroboration ladder (the same
 credibility evidence prices the envoy's word and unmasks its corruption);
@@ -1066,14 +1222,20 @@ secret → break → fall (each beat independent — info survey); pure inaction
 on an accurate belief is unreceipted ("the court that knew and sat still");
 posture-reason floats escape the prose ratchet via push-indirection
 (relationshipMemory.js:300-302 — latent, not live; carried to CW-0's scan).
-**ADDS:** INT-2's counsel receipts (whose read prevailed at the seat, and
-against whose dissent — the schism gains its resolution voice); IN-3's
-suspicion reads give the interior deliberate counter-intelligence (the
-sweep that finds the asset before the organic roll does); INT-3's causal
-join receipts cover scandal→coup (the standing corruption_exposed condition
-CITED on the capture/coup beat — the survey's named missing line); IN-5's
-inaction receipt (high-confidence hostile belief + no selection = "the court
-knew, and sat still," receipted).
+**ADDS [CORRECTED 2026-08-02 (fp-audit) — the scandal→fall join was assigned
+to INT-3, whose CLOSED decision vocabulary excludes `corruption_exposed` and
+whose hardest pin forbids the confabulation; INFORMATION's IN-5(d) already
+owned it verbatim — the row pointed at the wrong volume]:** INT-2's counsel
+receipts (whose read prevailed at the seat, and against whose dissent — the
+schism gains its resolution voice); IN-3's suspicion reads give the interior
+deliberate counter-intelligence (the sweep that finds the asset before the
+organic roll does); THE JOIN SPLIT, ruled: INT-3a owns the DECISION join
+(decision-grievance → verdict receipt, its closed vocabulary walker-asserted)
+and IN-5(d) owns the SCANDAL join (the persisted `corruption_exposed`
+condition CITED on the coup/capture beat's cause-walk line, composer-side
+only — the survey's named missing line); both joins get CW-0 registry rows
+with DISTINCT receiptFields; IN-5's inaction receipt (high-confidence
+hostile belief + no selection = "the court knew, and sat still," receipted).
 **COUNTERFORCE:** the vindicated minority — a council_schism resolved by
 events pays the faction that read the world right (standing/counsel weight
 off the same belief-vs-outcome evidence that charged the wrong reader).
@@ -1095,19 +1257,23 @@ J-CPL-9); no thought-police verb (suspicion reads target FOREIGN assets and
 travelling strangers, never the resident crowd's beliefs).
 
 ### CPL-21 — GRAMMAR × INTERIOR (Brest-Litovsk and the repudiated debts: the successor who disavows the ancien régime's signature)
-**EXISTS:** treaties are settlement-plane — parties are settlement ids with
-NO ruler, faction, or seat provenance, so "the father's oath" is
-INEXPRESSIBLE (treatyBreach.js:34-37; the interior survey's verdict: the one
-true data-model gap on its list, "cheaply curable with mint-time
-provenance"); WR-0c repudiation is approval-routed with no succession
-trigger; tribute_strain resentment points OUTWARD at the victor, never
-inward at the paying seat (peaceTerms.js:1023-1044); refusal costs are
-G2-designed, not built; the approval machinery (three lanes, hold-then-
-expire) is the DM's, not a faction's.
-**ADDS:** FP-GRAMMAR(THE OATH-HOLDER IDENTITY) — treaties/obligations record
+**EXISTS, grammar→interior (LIVE lanes) [CORRECTED 2026-08-02 (fp-audit):
+directional split made explicit — the second asymmetric section the audit
+flagged]:** the approval machinery (three lanes, hold-then-expire) is the
+DM's, not a faction's; tribute_strain resentment points OUTWARD at the
+victor, never inward at the paying seat (peaceTerms.js:1023-1044) — the
+instrument reaches the interior only as strain, unattributed. **EXISTS,
+interior→grammar (THE GAP):** treaties are settlement-plane — parties are
+settlement ids with NO ruler, faction, or seat provenance, so "the father's
+oath" is INEXPRESSIBLE (treatyBreach.js:34-37; the interior survey's
+verdict: the one true data-model gap on its list, "cheaply curable with
+mint-time provenance"); WR-0c repudiation is approval-routed with no
+succession trigger; refusal costs are G2-designed, not built.
+**ADDS [CORRECTED 2026-08-02 (fp-audit): owning waves concrete]:** GR-1 (THE
+OATH-HOLDER IDENTITY) — treaties/obligations record
 WHO SWORE (mintedUnder provenance: governing faction + seat-holder at
 signature), making the heir-breaks-the-father's-oath TELLABLE and giving
-succession-repudiation its human face (softer reputation cost for the
+GR-4's succession-repudiation its human face (softer reputation cost for the
 coup-born seat that disavows — the world understands a revolution); WR-5's
 refusal price + the coalition inside the walls; INT-4's strain attribution
 (the commons tribute term — the paying seat's OWN crowd finally reads the
@@ -1162,18 +1328,32 @@ changed. Pairs: CPL-15, CPL-7, CPL-2, CPL-13.)*
    of that creed's legitimacy (W_RULER 0.42, religionLegitimacy.js:74-121,
    BUILT): the legitimacy slide is arithmetic, receipted at INT-7/WF-0's band
    crossings.
-5. Legitimacy-weighted schism contest fires (CONTEST_LEGIT_W 0.78,
-   religionState.js:444-496, BUILT): the temple splits — WF-5a types the split;
-   the losing congregation goes UNDERGROUND (WF-5b, the covert seam).
+4b. [CORRECTED 2026-08-02 (fp-audit) — the audit found the old step 5 assumed
+   a challenger creed no earlier step supplied: resolvePatronContest is a seat
+   contest between EXISTING creeds (spread-only law forbids local genesis), so
+   the rival's presence must be a NAMED link.] The rival creed is already in
+   the town, receiptedly: a `missionary_access` term under an earlier pact
+   (GR-3 row, WF-6 executor — the formation receipt is the link) or a WF-3
+   foothold — either way a receipted arrival, not an assumption.
+5. [CORRECTED 2026-08-02 (fp-audit) — the old step ran the split AND the
+   underground off one contest; WF-5's own floor test makes them the two
+   MUTUALLY EXCLUSIVE sides of one branch.] The legitimacy-weighted schism
+   contest fires (CONTEST_LEGIT_W 0.78, religionState.js:444-496, BUILT) and
+   the remnant floor rules the outcome: the loser retains a banded remnant
+   share ABOVE the floor ⇒ WF-5a types the SPLIT — the reformation arc, and
+   THIS story's branch. (Below the floor ⇒ suppression, and WF-5b's covert
+   congregation — the Kakure arc, the branch this story deliberately does not
+   take; story 6 of the faith volume's own register carries it.)
 6. The neighbours' picture goes stale then hostile: faithLabel belief axes
-   (BUILT) read the town's rite wrong, then the schism axis reads it WORSE than
+   (BUILT, beliefAxes.js:10-16) read the town's rite wrong, then the schism axis reads it WORSE than
    a stranger's (CLAIM_BY_QUADRANT schism_axis 0.75 > natural_enemy 0.60,
-   BUILT) — sacred tension with every same-god neighbour, receipted as
+   BUILT, sacredClaim.js:67-84) — sacred tension with every same-god neighbour, receipted as
    religious pressure or a scored sacred_claim (CPL-2).
 7. The Herald tells it at every link (WF-8's voices); CW-2 walks it backward
    from "why does the whole valley hate this town?" to the tithe receipt.
 **COUNTERFORCE:** the seat that settles the tithe dispute at the assize
-(LEGIT_JUST, BUILT) buries the quarrel at step 3 — same grievance state, one
+(LEGIT_JUST, VERIFY-AT-BUILD the assize constant [CORRECTED 2026-08-02
+(fp-audit): no survey receipt in this map]) buries the quarrel at step 3 — same grievance state, one
 honest hearing, no reformation; INT-6 can later bury even the schism, at a
 price, over a party that never forgave the burying.
 
@@ -1183,102 +1363,153 @@ Saladin his casus. Pairs: CPL-12, CPL-1, CPL-2, CPL-5.)*
 1. WF-2's pilgrim season read mints named pilgrim + legate errands (SP-1) down
    the lived route to the shrine town (receipt: the pilgrim column, law M
    legs).
-2. The shrine economy pays BOTH ends: host observance lift (BUILT draw math,
-   finally consumed) + pass-through centrality on the road towns (entrepot
-   crossings, BUILT) — the route's flow class fills (J2 population-class
-   attribution, BUILT).
+2. [CORRECTED 2026-08-02 (fp-audit) — the old step stamped BUILT on two reads
+   that structurally reject errands: `ROUTE_FLOW_SOURCES` is a FROZEN
+   seven-entry table with no errand/pilgrim source
+   (routeNetworkFlows.js:82-90) and `countCrossings` iterates SHIPMENT
+   records only (entrepots.js:246-263).] The shrine economy pays the SHRINE
+   end by real reads: host observance lift (the draw math, subsumed by
+   WF-2a's season read — finally consumed) + WF-2a's banded feast economy
+   (FAITH-owned executor, the declared CPL-12 port where TR-4 is lit). The
+   ROAD TOWNS' pass-through take is NEW WORK, not built: a `pilgrim` source
+   row in ROUTE_FLOW_SOURCES + errand traversals entering `countCrossings`,
+   owned by a named WF-2a follow-on slice with its own pins — DEFERRED until
+   that slice lands (§10 register); until then the road towns' stake in this
+   story is the interception drama of step 3, not an economy.
 3. A hostile neighbour reads the pilgrim road as the shrine town's artery —
    through its BELIEVED web picture (supplyWebWarfare's believedOnly reads,
-   BUILT) — and interdicts: gates turn hostile, pilgrims are intercepted
-   (SP-1's interception surface; a named legate lands in the FOREIGN-GUEST
-   HOLD, WR-7b's one writer).
+   BUILT, supplyWebWarfare.js:267-278) — and interdicts: gates turn hostile,
+   pilgrims are intercepted (SP-1's interception surface; a named legate
+   lands in the FOREIGN-GUEST HOLD, WR-7b's one writer).
 4. Outrage compounds on BOTH axes: the intercepted pilgrimage feeds grievance
-   incidents (E1 machinery, BUILT) AND sacred-tension pressure (CPL-2); the
+   incidents (E1 machinery, VERIFY-AT-BUILD the incident mint site) AND
+   sacred-tension pressure (CPL-2); the
    world judges on the observer's alignment axis (WR-8's judgment read); the
    war that opens carries the road on its casus receipts.
-5. The peace that ends it can finally SAY what it was about: pilgrimage
-   rights are a WF-6 term family in SP-3's catalog — the compact that reopens
-   the road, brokered where a faith-brother mediator stands (BUILT finder).
-**COUNTERFORCE:** the toll instead of the raid — the road town that CHARTERS
-the pilgrim traffic (earned centrality, BUILT brakes) gets rich off what the
-raider burned; same road, same flow, two dispositions (WR-2's channels), two
-endings.
+5. The peace that ends it can finally SAY what it was about: `pilgrimage_right`
+   is a GR-3 catalog row with its WF-6 executor [CORRECTED 2026-08-02
+   (fp-audit): R3 ownership] — the compact that reopens the road, brokered
+   where a faith-brother mediator stands (BUILT finder,
+   peaceTerms.js:1121-1146).
+**COUNTERFORCE [CORRECTED 2026-08-02 (fp-audit): the charter arm honestly
+scoped]:** the toll instead of the raid — the road town that CHARTERS the
+pilgrim traffic gets rich off what the raider burned; same road, same flow,
+two dispositions (WR-2's channels), two endings. The chartering's earned
+centrality rides the SAME deferred widening as step 2 (pilgrim traversals
+entering the crossings count) — until that WF-2a slice lands, the
+counterforce's receipted form is the pact of step 5: the road reopened by
+ink, not the raid priced by tolls.
 
 ### Story 3 — THE BANK BROKEN BY A BELIEVED RUMOR
 *(the Panic of 1907: solvency decided by the whisper, not the audit.
 Pairs: CPL-9, CPL-4, CPL-11, CPL-20.)*
-1. FP-TRADE's HOUSE stands with real books and SP-5 house credibility; its
-   counterparties hold E1b credit obligations (BUILT ledger, CREDIT_TERM 12).
-2. A rival commissions a PLANT with deflate intent against the house's
-   standing — SP-2's believed-scarcity/solvency subject family the target
-   (IN-2 THE LURE; priced by the market, DISREPUTE_SURCHARGE, BUILT pricing).
+1. TR-2's HOUSE stands with real books and SP-5 house credibility; its
+   counterparties hold E1b credit obligations (BUILT ledger, CREDIT_TERM 12 —
+   VERIFY-AT-BUILD the module path).
+2. [CORRECTED 2026-08-02 (fp-audit) — the old step invented a fourth SP-2
+   family ("believed solvency") with no owning wave; SP-2's declared families
+   are exactly three and TR-3's scarcity axis is per-(market, good-class),
+   never per-actor. Re-derived through the DECLARED surface:] a rival
+   commissions a PLANT against the trade the house is KNOWN to carry — SP-2's
+   BELIEVED SCARCITY, per-(market, good-class): "their grain is short; their
+   next deliveries will fail" (IN-2 THE LURE, wealth/scarcity bait,
+   axis-typed per INFORMATION §4; priced by the market,
+   DISREPUTE_SURCHARGE, VERIFY-AT-BUILD the pricing constant).
 3. The lie enters the world through the ONE lifecycle: PLANT_WIRING's fold
-   into processLies (IN-0 seam contract one) — one writer, one exposure law,
-   the market's host wearing liarId (BUILT collateral design).
-4. Creditors' per-observer beliefs update on the belief laws (BUILT);
-   renewals refuse on believed danger exactly as caravans do (the dispatchEV
-   idiom pointed at credit — FP-TRADE's believed-markets consumer); the run
-   is a cascade of individually-receipted refusals.
-5. The house's real books break under the refusals: the RUIN ending from
-   FP-TRADE's endings vocabulary, receipted; the exposure comes too late —
-   the 2-band contradiction fires only when real deliveries contradict, and
-   the deliveries stopped.
+   into processLies (IN-0 seam contract one) — one writer, one axis-typed
+   exposure law, the market's host wearing liarId (the collateral design,
+   brokerageServicesPlant.js:87).
+4. Creditors' per-observer beliefs update on the belief laws (BUILT,
+   beliefMap laws); renewals refuse on the believed scarcity of the house's
+   good exactly as caravans refuse a believed-dangerous road (the dispatchEV
+   idiom pointed at credit — TR-3's believed-markets consumer, an ADDS with
+   its owning wave); the run is a cascade of individually-receipted
+   refusals.
+5. The house's real books break under the refusals, and SP-5 house
+   credibility falls as an EFFECT of the failures — never as the plant's
+   target [CORRECTED: the belief record carries no actor-solvency axis to
+   write]: the RUIN ending from TR-2's endings vocabulary, receipted; the
+   exposure comes too late — the axis-typed contradiction fires only when
+   real deliveries contradict the asserted scarcity, and the deliveries
+   stopped.
 6. Blowback lands where it belongs: the planter's credibility charged
-   LIE_FALL 5 (BUILT), the ruined house's faction mints the grudge
-   (factionPairLedger, BUILT), the interior shifts (CPL-11); CW-2 walks
-   ruin → refusals → belief → plant → patron.
-**COUNTERFORCE:** the stamp ladder — a house of confirmed record survives
-tavern-talk (creditors weight by the MEASURED hop-count theorem, BUILT); the
-run only kills where the rumor arrived corroborated or the books were
-already thin, and the walk shows which.
+   LIE_FALL 5 (BUILT, informationStatecraft.js LIE_TUNING :393-430), the ruined house's
+   faction mints the grudge (factionPairLedger, BUILT), the interior shifts
+   (CPL-11); CW-2 walks ruin → refusals → belief → plant → patron.
+**COUNTERFORCE [CORRECTED 2026-08-02 (fp-audit)]:** the stamp ladder — the
+hop-count theorem is MEASURED (1.000→0.465, brokerageStamps.js:22-49), and
+the creditor consumer that weights by it is TR-3's believed-markets read
+(ADDS, owned there — not present tense); the run only kills where the rumor
+arrived corroborated or the books were already thin, and the walk shows
+which.
 
 ### Story 4 — THE DIASPORA THAT FUNDS THE RETURN
 *(the reconquest funded from beyond the mountains. Pairs: CPL-3, CPL-16,
 CPL-18, CPL-8, plus WR-3/WR-8.)*
 1. A razing or famine year drives the exodus (WR-8's escape share as refugee
    columns / the built hunger-exodus lines; the departure line names every
-   destination BY NAME — BUILT).
+   destination BY NAME — BUILT, demographicsHerald.js [CORRECTED 2026-08-02
+   (fp-audit): receipt attached per the header's BUILT convention]).
 2. POP-3's DEPARTURE MEMORY writes the diaspora ledger at BOTH ends: "the
    generation that left" at the origin's remnant, the old-country tie at
    every host (the wave's own state, banded, decaying generationally).
-3. The diaspora prospers (upswing arcs, BUILT) and the tie WORKS: gratitude
-   bonds + credit instruments flow home-ward (E1 machinery reversed by
-   POP-3's kin-pull arm; FP-TRADE's venture instruments through the plan
-   lane where the flow is commercial).
-4. The ruin is a PRIVILEGED birth site (BUILT resettlement law) and the
-   kin-pull arm makes the diaspora settlements the donors: "New Thornwall,
-   raised on the old stones" (BUILT receipt) — funded, this time, by the
-   grandsons.
+3. The diaspora prospers (upswing arcs, VERIFY-AT-BUILD [CORRECTED
+   2026-08-02 (fp-audit): no survey receipt in this map]) and the tie WORKS:
+   gratitude bonds + credit instruments flow home-ward (E1 machinery
+   reversed by POP-3's kin-pull arm; TR-7's venture instruments through the
+   plan lane where the flow is commercial).
+4. The ruin is a PRIVILEGED birth site (the resettlement law,
+   VERIFY-AT-BUILD) and the kin-pull arm makes the diaspora settlements the
+   donors: "New Thornwall, raised on the old stones" (the refounding
+   receipt, VERIFY-AT-BUILD) — funded, this time, by the grandsons.
 5. And the grudge rode with the silver: departure memory feeds the
    revanchism-shaped claims — WR-3's lineage_claim from the refounded child,
    or the vengeance license an heir may collect (R2, WR-8) — the return that
    is also a reckoning, every link receipted.
-**COUNTERFORCE:** assimilation — traditions ADOPTION at the host (BUILT)
-converts the tie into belonging on the same influx evidence; the diaspora
-that stops remembering funds nothing, and POP-3's decay law says exactly
-when.
+**COUNTERFORCE:** assimilation — traditions ADOPTION at the host (BUILT,
+traditionsKernel.js:623-646) converts the tie into belonging on the same
+influx evidence; the diaspora that stops remembering funds nothing, and
+POP-3's decay law says exactly when.
 
 ### Story 5 — THE FAMINE SPECULATOR WHO BUYS A BISHOPRIC
 *(the Fugger loan behind Albrecht's pallium: the grain corner that financed
 a mitre. Pairs: CPL-9, CPL-7, CPL-15, CPL-20.)*
 1. SP-2's believed scarcity diverges from truth ahead of the hungry gap; the
    HOUSE corners — buys through ventures while the say is still cheap
-   (FP-TRADE's cornering consumer; every purchase a receipted venture).
+   (TR-6's cornering consumer; every purchase a receipted TR-7 venture).
 2. The gap arrives; scarcity bands spike; the house's FORTUNE ending fires —
-   and moral drift PRICES the profiteering (FP-TRADE crux, spine §3): the
+   and moral drift PRICES the profiteering (TR-6, spine §3 crux): the
    fortune carries a conscience stain the tolerance/moral machinery reads
-   (institutionTolerance's abhorrence idiom, BUILT shape).
-3. The house buys standing: its endowment backs a candidate in the
-   temple_authority contest (BUILT contest, tithe_rights prize) — WF-7's
-   temple wealth band receives what the corner earned.
-4. The bought bishop is a COMPROMISED minister: the corruption web's covert
-   mark with the house as patron (BUILT covert seam; directionBias optimizes
-   the patron's books, corruptionWeb.js:506).
-5. Exposure risk runs the organic clock (BUILT per-tick odds): on reveal,
-   CLERGY_REVEALED_SHARPEN (religionLegitimacy.js:127-132, BUILT) makes the
-   scandal bite the creed; the commons read seated corruption at 0.35 weight
-   (commonsVoiceKernel, BUILT) and the ladder climbs; INT-3's causal join
-   cites the standing exposure on whatever falls.
+   (institutionTolerance's abhorrence idiom, institutionTolerance.js:52-119).
+3. [CORRECTED 2026-08-02 (fp-audit) — TR-2's house act set is CLOSED
+   ({sponsor_caravan, take_route_interest, extend_credit, corner_attempt,
+   venture_stake, petition_pact, relief_grant}) and no verb endows a temple
+   or backs a contest candidate; re-derived through the closed set:] the
+   house buys standing with the verbs it HAS — `extend_credit` to the temple
+   (the endowment as a credit obligation; WF-7's temple wealth band is the
+   receiving read) and `relief_grant` at temple grain in the hungry season
+   the house itself made; the temple_authority contest (BUILT contest,
+   tithe_rights prize token, factionCompetition.js:68) is fought by the
+   local faction the house's credit props — influence rides the ledger, not
+   an endowment verb.
+4. [CORRECTED 2026-08-02 (fp-audit) — the corruption web's asset registry
+   admits FOREIGN leashes only (`if (!leash.foreign) return;`,
+   corruptionWeb.js:453-467), so a same-town patron cannot hold the covert
+   mark; the story's geography is corrected:] the house sits in the
+   NEIGHBOURING town — its credit crosses the boundary, and the bought
+   bishop is a COMPROMISED minister under a genuinely FOREIGN leash: the
+   corruption web's covert mark with the house's town as patron (the built
+   covert seam; directionBias optimizes the patron's books,
+   corruptionWeb.js:506; the contest itself stays intra-settlement in the
+   bishop's town).
+5. Exposure risk runs the organic clock (the built per-tick odds,
+   corruptionWeb.js exposure lane): on reveal, CLERGY_REVEALED_SHARPEN
+   (religionLegitimacy.js:127-132, BUILT) makes the scandal bite the creed;
+   the commons read seated corruption at 0.35 weight (commonsVoiceKernel,
+   BUILT) and the ladder climbs; IN-5(d)'s scandal join cites the standing
+   `corruption_exposed` condition on whatever falls [CORRECTED 2026-08-02
+   (fp-audit): the join is INFORMATION's — INT-3a's closed decision
+   vocabulary cannot carry it; see CPL-20].
 **COUNTERFORCE:** the temple that refuses the tainted endowment — the
 alignment gate reading the SAME provenance the stain rides; and the honest
 corner-breaker: arrivals (CPL-9's independent witnesses) collapsing the
@@ -1288,25 +1519,40 @@ believed scarcity before the corner closes.
 *(the Black Hills: gold rumored on treaty land, a rush no court ordered, a
 war no court priced. Pairs: CPL-16, CPL-4, CPL-3, CPL-5, CPL-1.)*
 1. A resource_strike satellite seeds at the border (BUILT provenance,
-   SEED_STRIKE_BONUS).
+   SEED_STRIKE_BONUS — VERIFY-AT-BUILD the module path).
 2. The strike EXAGGERATES in the telling with zero new machinery: per-hop
    magnitude drift ±1 (degradeTelling, rumorNetwork.js:472-507, BUILT) — by
    the third relay the creek is a motherlode (J-CPL-11).
-3. SP-2's believed conditions inflate the destination's pull; POP-1's rush
-   converges columns from BOTH realms (believedMigrationEnabled); capacity
-   truth strands the surplus — unplaced receipts, disappointment writes, the
-   camps swell (crowding→disease lift, sprawl→raid lift, BUILT continuous
-   couplings).
+3. [CORRECTED 2026-08-02 (fp-audit) — the old step's "camps swell" had no
+   mechanism: POP-1's turn-back arm routes the surplus through the existing
+   `returned` accounting (conservation untouched), so turned-back migrants
+   neither camp nor raise destination pressure.] SP-2's believed conditions
+   inflate the destination's pull; POP-1's rush converges columns from BOTH
+   realms (believedMigrationEnabled); capacity truth strands the surplus AT
+   THE WALL — the arrival clearing (POP-1's new work) turns the unplaced
+   back through the `returned` arm with receipts, and the disappointment
+   writes land at the origins; the crowding→disease and sprawl→raid lifts
+   (BUILT continuous couplings, demographics stressor lanes) read the
+   arrivals that actually LAND — the boomtown strains by what it holds, not
+   by a camp the model does not have.
 4. Each court reads the strike through ITS beliefs: mistaken-court reads
-   (the perceivedScarcityOf idiom, `mistaken` receipt clause, BUILT) and —
-   where a rush crosses a standing pact's ground — the treaty_default casus
-   (BUILT) joins resource_pressure and opportunism; an evil believed-ally
-   styles the reports hotter (M9b, BUILT); "X marches on a misjudgment"
-   (belief_misjudgment, BUILT) is the war's own receipt confessing the
+   (the perceivedScarcityOf idiom, `mistaken` receipt clause,
+   demographicsWar.js:206-230) and — where a rush crosses a standing pact's
+   ground — the treaty_default casus joins resource_pressure and opportunism
+   [CORRECTED 2026-08-02 (fp-audit): NOT BUILT — no TERM_CATALOG term
+   carries territorial or migration ground and nothing wires a flow to any
+   term's compliance read; the join is NEW WORK owned by GR-3: a
+   `migration_right`/`settlement_provision` compliance read (a flow crossing
+   an unlicensed pair reads as throttle/default) with its own reachability
+   pins — the Black Hills turn of this story renders only when that GR-3
+   slice lands]; an evil believed-ally styles the reports hotter (M9b,
+   VERIFY-AT-BUILD); "X marches on a misjudgment" (belief_misjudgment,
+   BUILT, beliefMap.js:1362-1457) is the war's own receipt confessing the
    epistemics.
 5. The war nobody wanted opens through the one opener on believed wealth —
    and DISSOLVES the honest way: the bust's letters home (POP-1) correct the
-   belief, Blainey convergence (BUILT) grinds the reckonings together, and
+   belief, Blainey convergence (BUILT, informationStatecraft.js:244-272)
+   grinds the reckonings together, and
    WR-1's opportunism dissolution fires when the victim stops being
    believed-rich; the deciding-term receipt says which force ended it.
 **COUNTERFORCE:** the letters, at every step — arrivals are independent
@@ -1341,15 +1587,36 @@ intendedDesk }`. Three walkers:
 - **The receipt-field walker:** every registry row's receiptField lands on
   receipts emitted under its flags (fixture-sampled, seeded non-empty per
   the vacuous-absence law).
-- **The desk walker:** every registry row's kinds route to intendedDesk in
-  heraldRouting — the belief_misjudgment-under-faith misfile class becomes
-  walker-visible estate-wide (the row for that beat records its CURRENT desk
-  with a `deskDisputed: true` marker until J-CPL-10's referral resolves).
+- **The desk walker [CORRECTED 2026-08-02 (fp-audit) — J-CPL-10 is closed by
+  adoption of IN-5's ruling]:** every registry row's kinds route to
+  intendedDesk in heraldRouting — the belief_misjudgment-under-faith misfile
+  class becomes walker-visible estate-wide. `belief_misjudgment` and all
+  knowledge-native kinds carry `intendedDesk: knowledge` (IN-5's refile,
+  J-INF-6, and its new Herald section, J-INF-7); `deskDisputed` is DROPPED
+  from the schema. Walker precedence, stated: IN-5 owns the refile and the
+  no-word-association assertion; CW-0's desk walker asserts
+  registry-vs-routing AGREEMENT and must never pin the pre-refile desk.
 **Also in scope:** the prose-numerics push-indirection escape (interior
 survey: relationshipMemory.js:300-302 floats escape the walker via
 out.push on a non-prose-named array) — CW-0 extends the prose-numerics
 walk to pushed arrays that feed prose-named returns, and the baseline
-ratchets. **Model:** no world state; registry + tests only. **Lifecycle:**
+ratchets. **The same-commit obligation [CORRECTED 2026-08-02 (fp-audit)]:**
+the registry GROWS — any wave in any volume landing a cross-layer read adds
+its row in the SAME commit (§0.3; the spine's implementer protocol carries
+the reciprocal line), so CW-0's early landing is a growing registry, never a
+retro-fit, and rows are never pre-registered for unbuilt reads (the
+import-time pin below forbids it).
+**Force/counterforce [CORRECTED 2026-08-02 (fp-audit) — the audit found CW-0
+carried roughly half the twelve requirements while auditing everyone else to
+all twelve]:** inclusion pressure vs false-positive cost, off the SAME
+import graph — the ratchet that reds every unregistered cross-layer read is
+opposed by the positive control that proves it still FINDS real reads (a
+scan tightened until it cries wolf is caught by its own control).
+**Clock:** the walkers run at GATE time, never tick time — no engine
+cadence; SP-7's INTERVAL_WEEKS denomination assertion is N/A here and
+declared so. **Narration/endings/pacing:** none minted — the walkers'
+output is gate reds, not news; no pacing registration (declared empty, not
+omitted). **Model:** no world state; registry + tests only. **Lifecycle:**
 nothing persists in saves. **Dossier round-trip:** none (instrument);
 CW-2 carries the crown law for this volume. **Pins:** the ratchet's
 positive control; a registry row whose read does not exist reds at import
@@ -1454,8 +1721,18 @@ from the receipt the coupling landed.
   drama the program promised is vacant (measured, not asserted).
 **Pins:** every envelope carries a mutant negative control (the estate's
 law); the differential harness proves a KNOWN coupling diverges lit-vs-dark
-before it certifies an unknown one (guard-the-guard). **Bands:** floors,
-depth envelope shape, divergence minima. **Lifecycle:** receipts only.
+before it certifies an unknown one (guard-the-guard).
+**Force/counterforce [CORRECTED 2026-08-02 (fp-audit): the density gap the
+audit flagged, closed]:** aliveness pressure vs decoration cost off the same
+soak series — the floors that red a dead coupling are opposed by the mutant
+controls that red a floor passing vacuously. **Clock:** soak-side
+instruments run at soak/gate time, never tick time; the ENVELOPE WINDOWS
+they measure are INTERVAL_WEEKS-denominated (SP-7's assertion applies to the
+measured series, not to the instrument). **Narration/endings/pacing:** none
+minted — measurement, not news (declared empty, not omitted). **Dossier
+round-trip:** none — instrument; CW-2 carries the crown law for this volume
+(same declaration as CW-0). **Bands:** floors, depth envelope shape,
+divergence minima. **Lifecycle:** receipts only.
 **This wave closes the program: the coupling map is DONE when these
 envelopes hold on the owner-signed lit soak, and not before.**
 
@@ -1485,13 +1762,20 @@ envelopes hold on the owner-signed lit soak, and not before.**
 - **J-CPL-5 (the walk fails closed):** CW-2's player walks truncate at
   covert seams leaking nothing — byte-identical to a genuinely-ended chain.
   VETO (stub counts, "N hidden links" hints) leaks covert structure.
-- **J-CPL-6 (no conversion-mandate term):** SP-3's faith family list
-  (missionary access, shared-rite compacts, pilgrimage rights) is CLOSED;
-  the legacy design-doc's "conversion mandate" is dropped — access is
-  signable, conviction is not (Law One). Recorded here because the coupling
-  map is where the old doc's wider list would otherwise leak back in
-  through a cross-reference. Elaborates spine SP-3; vetoable at the spine's
-  level only.
+- **J-CPL-6 (no conversion-mandate term) [CORRECTED 2026-08-02 (fp-audit) —
+  the old ruling closed the faith family at THREE while WF-6 catalogued five
+  and WF-5b's surfacing arm depends on `tolerance_guarantee`; honoring it
+  would have silently broken a named wave. Re-ruled under R3]:** the faith
+  term family's membership, spelling, and CLOSURE live in ONE place — GR-3's
+  canonical TERM_CATALOG list (currently five faith rows; GRAMMAR's
+  spelling: `shared_rite`, never `shared_rite_compact`); this map carries a
+  POINTER, never a second list. What stays ruled HERE: the legacy
+  design-doc's "conversion mandate" remains dropped from that catalog —
+  access is signable, conviction is not (Law One) — recorded because the
+  coupling map is where the old doc's wider list would otherwise leak back
+  in through a cross-reference. Elaborates spine SP-3; membership amendments
+  are GR-3 catalog decisions (with spine SP-3's pointer following), vetoable
+  there.
 - **J-CPL-7 (no faction property in v1):** houses hold BOOKS and
   instruments, never routes or institutions as owned assets; entrepot tolls
   stay earned-centrality derivations with their four brakes. A property
@@ -1507,11 +1791,16 @@ envelopes hold on the owner-signed lit soak, and not before.**
   own commons; the crowd reads true local state. A seat-to-crowd deception
   lane needs its own owner ruling AND its own counterforce before it
   exists. VETO opens it now, with the counterforce named.
-- **J-CPL-10 (the desk-misfile referral):** belief_misjudgment's routing to
-  the faith desk (heraldRouting.js:118) is either ruled intentional or
-  moved when IN-5/FP-GRAMMAR's routing passes land; CW-0's registry carries
-  it `deskDisputed: true` until then. The walker pins the CURRENT desk so
-  moving it is a conscious act (the built discipline, honored).
+- **J-CPL-10 (the desk-misfile referral) [CORRECTED 2026-08-02 (fp-audit):
+  CLOSED — the referral was already superseded when drafted]:** IN-5(a) has
+  ruled it: belief_misjudgment REFILES from the faith desk
+  (heraldRouting.js:118) to the new KNOWLEDGE DESK as a conscious,
+  walker-pinned move (J-INF-6), and all knowledge-native kinds route there
+  (J-INF-7). Adopted here: CW-0's registry carries `intendedDesk: knowledge`
+  for those kinds, `deskDisputed` is dropped from the schema, and CW-0's
+  desk walker asserts registry-vs-routing agreement WITHOUT pinning the
+  pre-refile desk (IN-5 owns the refile and the no-word-association
+  assertion — precedence stated in CW-0).
 - **J-CPL-11 (exaggeration is the carrier's, not new machinery):** the gold
   rush's inflation IS degradeTelling's per-hop magnitude drift — no
   dedicated exaggeration parameter, no boosterism actor. VETO builds a
@@ -1523,7 +1812,10 @@ envelopes hold on the owner-signed lit soak, and not before.**
 
 ## §8 THE TUNING SURFACE (owner-signed at the lit soak, per THE PROMISE)
 This volume's own bands, gathered: CW-1 window · depth threshold · member
-cap · braid significance derivation · CW-2 walk depth + rendered-link caps ·
+cap · braid significance derivation [CORRECTED 2026-08-02 (fp-audit): the
+derivation assigns within SP-6a's spine-minted significance family
+(routine/notable/major) — it derives a CLASS, never a new scale, per R5] ·
+CW-2 walk depth + rendered-link caps ·
 CW-3 aliveness floors · chain-depth envelope shape · divergence minima.
 Everything else in §4 points at bands owned and gathered by the owning
 volumes' §7 tables (C-LAW-2's corollary: the coupling map holds no band a
@@ -1559,28 +1851,32 @@ physics (C-LAW-4) and are never tuned here.
 **Sequencing (spine §5, binding):** per-pair couplings land INSIDE their
 owning volumes' waves, in the spine's program order (SP → GRAMMAR → INFO →
 TRADE → FAITH → POP → INTERIOR-completions); the CROSS-WIRES (CW-0..CW-3)
-land LAST — CW-0 may land early (it is pure prevention and its registry
-grows with each volume's waves), CW-1/CW-2 need C-LAW-7's provenance
-discipline landed across the volumes to have chains to braid and walk, and
-CW-3 closes the whole program. Everything dark, one commit per wave, full
-gate per wave, ledger rows, per the war volume's §10 implementer protocol
-VERBATIM. The owner-held boundary is unchanged: no flag lights, no soak
-runs, no band ratifies outside the owner-signed schedule.
+land LAST — CW-0 lands EARLY as a GROWING registry [CORRECTED 2026-08-02
+(fp-audit): with the SAME-COMMIT obligation — each volume's wave adds its
+registry rows in the commit that lands the read (§0.3, CW-0, spine §5), so
+the early landing is never a retro-fit and never pre-registers unbuilt
+reads], CW-1/CW-2 need C-LAW-7's provenance discipline landed across the
+volumes to have chains to braid and walk, and CW-3 closes the whole
+program. Everything dark, one commit per wave, full gate per wave, ledger
+rows, per the war volume's §10 implementer protocol VERBATIM. The
+owner-held boundary is unchanged: no flag lights, no soak runs, no band
+ratifies outside the owner-signed schedule.
 
 **The coordination register (conflicts and dependencies found while drawing
-this map — each is a bug to report per the spine, reported here):**
-1. **The IN- prefix collision:** DESIGN_FP_INFORMATION.md numbers its waves
-   IN-0..IN-6 and DESIGN_FP_INTERIOR.md numbers its waves IN-1..IN-8. Bare
-   "IN-3" is ambiguous across the program. This volume uses INT- aliases
-   for the interior volume throughout; the two volumes should reconcile
-   (chair's suggested resolution: interior renumbers to INT-*, matching
-   this map — vetoable).
+this map, plus the audit pass's findings — each is a bug to report per the
+spine, reported here; resolution state marked):**
+1. **The IN- prefix collision [RESOLVED 2026-08-02, chair ruling R4]:**
+   INTERIOR renumbered to INT-1..INT-8 / J-INT-*; INFORMATION keeps
+   IN-0..IN-6 with judgment blocks J-INF-*. Both volumes carry the
+   renumbering; this map's aliases are now the canonical numbering.
 2. **The WR-10 trade-rights dependency:** WR-10's bundle spec names trade
    rights (exclusivity / market access / toll exemption) as stackable term
    families; the trade survey verified all three ABSENT from the tree (zero
-   hits). SP-3/FP-TRADE must mint those term families BEFORE WR-10's bundle
+   hits). GR-3 must mint those catalog rows (R3) BEFORE WR-10's bundle
    can stack them — a lit-precondition the war volume's §3 table does not
-   yet carry. Report to the chair for a war-volume amendment row.
+   yet carry. Report to the chair for a war-volume amendment row (WR-10's
+   graceful-degradation note is accepted per R10; the war volume gets the
+   matching one-line note via the cohesion agent).
 3. **The sacred_claim boundary note:** sacredClaim reads both towns'
    embedded patron snapshots — a truth-read ruled LEGAL under J-CPL-3's
    loud-fact exemption (altars are public). Recorded so nobody "fixes" it
@@ -1594,6 +1890,54 @@ this map — each is a bug to report per the spine, reported here):**
 5. **The prose-numerics push-indirection escape** (interior survey) is
    homed in CW-0's scope rather than any interior wave — it is a
    walker-of-walkers repair, which is this volume's trade.
+6. **[CORRECTED 2026-08-02 (fp-audit)] The faith-family double-writer
+   [RESOLVED, R3]:** WF-6 and GR-3 both claimed to mint the faith TERM_
+   CATALOG rows with divergent membership (5 vs 3), spelling
+   (`shared_rite_compact` vs `shared_rite`), and flags — a C-LAW-1
+   violation at the map's own crown law, compounded by the old J-CPL-6
+   closing the family at three while WF-5b depended on a fourth. Ruled:
+   GR-3 mints (canonical list, five rows, GRAMMAR's spelling); WF-6
+   consumes; J-CPL-6 re-ruled to a pointer; spine SP-3's list becomes a
+   pointer likewise.
+7. **[CORRECTED 2026-08-02 (fp-audit)] The stream-executor orphan
+   [RESOLVED]:** FAITH's WF-2a/WF-7 delegated the feast and tithe stream
+   executors to "TRADE's machinery" while TRADE pointed both back at FAITH
+   and no TR wave specced a stream API — two mechanisms owned by nobody,
+   with TRADE building FIRST so the API could never be retrofitted. Ruled:
+   FAITH owns both executors END TO END; the declared CPL-7/CPL-12 ports
+   carry the TRADE-lit stream registration through TRADE's own writer;
+   TRADE dark ⇒ the degraded arms declared in FAITH §3.
+8. **[CORRECTED 2026-08-02 (fp-audit)] The seatBooks consumer orphans
+   [TWO RESERVED, ONE DEFERRED]:** INT-1's consumer list named TRADE venture
+   appetite, FAITH stance choices, and POP permit posture as `booksOf`
+   consumers; at audit time none of the three volumes reserved the read.
+   [Cohesion pass, same date:] TRADE has since RESERVED the seam at TR-7's
+   posture block and POP at POP-5b's posture block — both in the required
+   form (behind seatBooksEnabled AND the volume's own flag, receipt naming
+   seatBooks, absent-not-zero), so those two deferrals are LIFTED at spec
+   level per INT-1 §3's lifting rule (CPL-11 / CPL-18 rows updated). The
+   FAITH-side stance-choices consumption remains DEFERRED to a future FAITH
+   reservation — no registry row exists until a consuming wave lands its
+   read.
+9. **[CORRECTED 2026-08-02 (fp-audit)] The spine's pair arithmetic
+   [RESOLVED at the spine]:** spine §4 said "21 ordered pairs"; seven
+   layers give 21 unordered pairs / 42 directions. The spine now says so
+   (its §4 corrected), and this map's §0.2 reinterpretation is thereby
+   on the record rather than silent.
+10. **[CORRECTED 2026-08-02 (fp-audit)] The migration-compliance join
+   [NEW WORK, GR-3]:** story 6's rush-across-pact-ground turn was stamped
+   BUILT on a join no TERM_CATALOG term can carry (no territorial or
+   migration ground anywhere in compliance). The join is GR-3's new work —
+   a `migration_right`/`settlement_provision` compliance read with its own
+   reachability pins; the story's Black Hills turn renders only when it
+   lands.
+11. **[CORRECTED 2026-08-02 (fp-audit)] The pilgrim flow-class widening
+   [DEFERRED — a decision]:** story 2's road-town pass-through economics
+   need a `pilgrim` source in the frozen ROUTE_FLOW_SOURCES table and
+   errand traversals in `countCrossings`; no wave owns that widening
+   today. Deferred to a named WF-2a follow-on slice with its own pins;
+   until it lands the story's road-town arm rides the interception drama
+   and the step-5 pact, not an economy.
 
 **In one sentence:** the seven layers already touch in more places than any
 one survey suspected — but almost every touch today is either truth leaking
