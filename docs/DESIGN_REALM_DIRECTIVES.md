@@ -729,6 +729,7 @@
 >   earn another round, and whether repeated near-misses widen or narrow it.
 >   ── LEGIBILITY: the Herald must be able to say a peace FAILED ON THE ROAD rather
 >   than failing at the table — "the terms were agreed and the envoy never reached
+>   them" is a different and better sentence than "the war continued".
 > - ⭐⭐⭐ 2026-08-01 AMENDMENT K3 — THE GOVERNING LAW OVER ALL OF K: NOBODY IS EVER
 >   CURRENT. Owner: "information and position are always changing, so they are working
 >   on limited or possibly obsolete knowledge." This is not another mechanic; it is the
@@ -1037,7 +1038,229 @@
 >   evidence, divergent envoy accounts are evidence, and a realm that buys envoys earns
 >   a reputation that makes future parlay harder for everyone — including the next time
 >   it wants peace honestly.
->   them" is a different and better sentence than "the war continued".
+> - ⭐⭐ 2026-08-01 AMENDMENT R — THE RAZING: PUNITIVE VICTORY IS THE THIRD INTENT.
+>   Owner (dictated to the Fable validation session): when the relationship between two
+>   settlements has reached an EXTREME and one has the opportunity and WINS A SIEGE
+>   against the other, the victor may forgo occupation or vassalage and instead raze
+>   the settlement to the ground — demoting it one or two tiers — and then LEAVE, "not
+>   even bothering to occupy." Usually more so for evil-axis settlements. And the
+>   population loss is IMMEDIATE LOSS OF LIFE, not emigration: "some may escape, but
+>   this is a razing and a sacking."
+>   ── THE THIRD INTENT. N3 separated capability from intent and named two goals a
+>   victor can hold: TAKE IT (conquest) or PRICE IT (terms). R adds the third: PUNISH
+>   IT. The sack is war as sentence, not acquisition — the grievance is discharged in
+>   fire and the victor walks home. The intent read rides N3's machinery unchanged:
+>   disposition (E2's martial channel), ALIGNMENT (the evil axis reaches for this
+>   naturally; a good realm almost never — reachable only through N3's deception road,
+>   the righteous atrocity), the ruler's own books (G: terror as a seat's deterrence
+>   policy), and the relationship extreme as the gate's precondition.
+>   ── THE GATE IS DOUBLE, AND THE NEGATIVE CASE PINS HARDEST (the N discipline): the
+>   relationship at its authored EXTREME band AND a won siege, weighted through
+>   character. A victorious besieger whose relationship is merely bad chooses
+>   occupation or terms — razing from mild enmity must be UNREACHABLE, or every war
+>   ends in ash and the acquisition ladder is decoration. [Manager note, vetoable: the
+>   extreme read = the existing relationship-state axes at their authored extreme plus
+>   live grievance magnitude; no new relationship vocabulary is minted — verified
+>   against relationshipEvolution's axes at build time.]
+>   ── DEATHS, NOT DEPARTURES (owner, binding): the razing's population loss is
+>   IMMEDIATE — deaths with a `sack` cause class, conservation-visible through the
+>   demographic engine's §3 accounting; a SMALL banded escape share flees as wave-P
+>   refugees (the broadcast needs survivors — someone carries the story down the
+>   road); and the named cast is NEVER engine-killed (the law holds at the fire's
+>   edge): named NPCs disperse into roaming per the destruction rule, carrying the
+>   grievance personally (the man whose city burned is amendment O's returning
+>   prisoner by another road). SUBSTRATE: warDeployment's conserved sack/forage core
+>   (SACK_POP_FRACTION, the skeleton floor, captured-vs-dead split) is the arithmetic
+>   seed — the razing is its settlement-scale harsher sibling, same conservation
+>   discipline, bigger fractions, deaths-dominant.
+>   ── THE TIER FOLLOWS THE TRUTH: the one-or-two-tier demotion is NEVER a direct
+>   write. The razing's deaths and infrastructure destruction move the population and
+>   the state; demotion rides the EXISTING calamity-demotion path (popToTier) reading
+>   the new truth — never a second writer on the tier transition (the §0b law).
+>   Whether one tier falls or two derives from sack severity (margin, brutality of
+>   character, what the defenses absorbed) — a tuning band, not a coin. Institutions
+>   take damage-impairment or shell per K1's vocabulary; what stands, stands dark —
+>   the infrastructure-remembers law makes the razed city's recovery arc REAL: a town
+>   with a city's quiet towers, the saddest and best map this engine can draw.
+>   ── AND THEY LEAVE. No occupation record, no garrison, no vassal ledger, no terms —
+>   the departure is the signature and the Herald sentence ("They burned Thornwall
+>   and rode home"). Structurally the sack DODGES amendment N's inheritance brake —
+>   all of the punishment, none of the responsibility — so its price lands ENTIRELY
+>   on the moral ledger, and every piece of that ledger already exists: the atrocity
+>   coalition casus (moral outrage — "someone must stop them" builds alliances among
+>   future victims), revanchism at generational scale on the survivors and their
+>   kin, moral drift on the razer (lawful razers drift hard), faith consequences,
+>   and E2's loop honestly learning the dark lesson that razing worked — which is
+>   the feedback that makes an evil realm MORE likely to raze again, as it should
+>   be, and which the counterforces above exist to answer.
+>   ── WHAT SELF-LIMITS IT, with no pacifism term anywhere: ash pays no tribute. The
+>   sack yields one-time plunder against conquest's territory and terms' streams of
+>   years — the material logic already prices punishment as the expensive luxury it
+>   is, and a realm that razes its neighbours impoverishes its own future taking.
+>   Razing the same remnant twice yields nothing (no spoils in ash) — the repeat
+>   atrocity is materially self-defeating before it is morally answered.
+>   ── MEASUREMENT (L's discipline): `punitive_sack` joins the war-endings vocabulary
+>   and the soak's endings-mix envelope. If sacks carry more than a rare share of
+>   endings, the extremity gate is too loose — the same red the conquest share pulls
+>   when N's overwhelming gate leaks.
+> - ⭐⭐⭐ 2026-08-01 AMENDMENT R2 — THE MORAL ECONOMY OF THE RAZING: EVIL INITIATES,
+>   VENGEANCE LICENSES, AND THE WORLD JUDGES. Owner: a settlement that sacks/razes
+>   another takes a MONUMENTAL risk to its relationships among good settlements and
+>   good-aligned deities, with less severe but REAL consequences among neutral
+>   settlements and neutral deities. The razing acts as a deterrent as a
+>   countermeasure — or as FUEL FOR RETRIBUTION among the victim's allies to attack
+>   back. AND THE INITIATION RESTRICTION, binding: "evil settlements are the only
+>   ones that can initiate a sacking/razing" — but any settlement with ADEQUATE
+>   RELATIONSHIP to the victim then holds a JUST CAUSE — ONE PER COALITION — to sack
+>   and raze the razer, ONCE, IN VENGEANCE.
+>   ── ⭐ ALIGNMENT BECOMES A CAPABILITY BOUNDARY, NOT A WEIGHT, and only here.
+>   Everywhere else amendment B lets alignment weight motive; at the razing it is a
+>   hard gate: the punitive intent (R's third intent) is UNREACHABLE at initiation
+>   for non-evil settlements, full stop. No pressure, no deception, no dice sequence
+>   opens it. "Only the wicked burn first" is the legible law, and N3's deception
+>   road is thereby CLOSED for initiation — a deceived good realm may conquer
+>   wrongly, but it cannot be tricked into burning first.
+>   ── ⭐⭐ THE VENGEANCE LICENSE (the counterforce made concrete, per amendment A):
+>   a razing mints a durable world fact — a license held by every settlement whose
+>   relationship to the VICTIM stands at or above the adequacy band (allies, close
+>   friends, patrons; lineage kin qualify — the same edge that mints the lineage
+>   claim carries the right of vengeance). The license legitimizes ONE war of
+>   retribution whose razing intent is unlocked for the license-holder REGARDLESS
+>   of alignment — ONE PER COALITION prosecuting it, executed ONCE. ⭐ AND THE
+>   LICENSE IS ONLY COUPLED (owner clarification, same day) when the holder's OWN
+>   relationship with the INITIATING settlement ALSO reaches an extreme — the
+>   license is necessary, never sufficient. The full vengeance gate is therefore
+>   license + own-relationship extreme + won siege: you do not burn a city you are
+>   merely angry at, even licensed. THE HONEST MECHANISM: the razing's own
+>   monumental relationship hits (below) are what drive the victim's friends
+>   toward that extreme — the atrocity builds the hatred that arms its answer, so
+>   the license legalizes what the world's emotional truth was already reaching
+>   for, and a court whose grief never hardens into hatred simply never collects. ⭐ THE CLOSED
+>   LOOP, binding: a JUST razing discharges the license and MINTS NO NEW ONE — the
+>   sacked razer's allies gain nothing, vengeance is a settlement not a chain
+>   reaction, and the eye-for-an-eye cascade is structurally impossible. The
+>   license is CONSUMED on use (or extinguished if the razer is destroyed by any
+>   other road).
+>   ── ⭐ THE DETERRENT IS PRICED BEFORE THE ACT, believed never true (K3): the
+>   would-be razer's intent read now includes the retaliation web it BELIEVES it
+>   would arm — who loves the victim, what license each would inherit, what their
+>   combined reach is (E3's alliance-web risk read, pointed at the aftermath). A
+>   fat victim with devoted friends is expensive to burn; a friendless one is
+>   cheap — which is honest, dark, and exactly the incentive landscape the owner
+>   named. And the razing's aftermath forks TWO WAYS from one honest read of the
+>   neighbours' character: terror WORKS on the fearful (fear_of_dominance rises;
+>   some submit — the deterrent arm) and BACKFIRES among the principled (the
+>   moral-outrage coalition casus — the retribution arm). Both reachable, neither
+>   default, per-neighbour, and the Herald can say which each court chose.
+>   ── THE WORLD JUDGES ON THE OBSERVER'S AXIS: the relationship hit lands banded
+>   by the OBSERVER's alignment — monumental from good settlements and good
+>   deities (the stance machinery carries divine displeasure), lesser-but-real
+>   from neutral, and from the evil axis... recognition (a war god approves; an
+>   evil court takes notes on a peer). One event, read through every observer's
+>   character — amendment B's coherence law applied to judgment itself.
+>   ── ⭐ THE JUST RAZING IS SANCTIONED, NOT FREE (manager ruling, vetoable): the
+>   license-holder executing vengeance takes BANDED-DOWN consequences — no
+>   atrocity-coalition casus (this WAS the atrocity's answer), reduced moral
+>   drift and relationship hits — but never zero for a good actor: burning a
+>   city is still burning a city, mercy (N3's own celebrated sentence) remains
+>   available, and a good court declining its license is a characterful receipt
+>   the Herald should love ("Thornwall held the right of vengeance, and let it
+>   rest"). The choice must be real; a solved equation has no characters in it.
+>   ── LICENSE PERSISTENCE (manager ruling, vetoable): the license persists until
+>   used, with a GENERATIONAL expiry band (long, default near-horizon) — vengeance
+>   is patient but not eternal; an heir may collect what a father was owed, and a
+>   century-old license is a legend, not a law.
+>   ── MEASUREMENT: the endings envelope tracks initiation sacks and vengeance
+>   sacks SEPARATELY — their ratio is itself a health metric (a world where most
+>   razings are vengeance is a world where evil is being answered; a world of
+>   initiation razings unanswered means the license machinery or the coalition
+>   web is failing, and that is a tuning red).
+> - ⭐⭐ 2026-08-01 AMENDMENT S — THE SOVEREIGNTY MARKET: SATELLITES AND VASSALS ARE
+>   TRADEABLE, THROUGH BELIEF, AT A PRICE THE FUTURE COLLECTS. Owner: originals and
+>   overlords may TRADE their satellite or vassalized settlements — for prosperity,
+>   for other settlements, for TRADE RIGHTS, for ALLYSHIP, for other opportunities
+>   that make sense, OR AS A MEANS OF SUING FOR PEACE — to meet whatever their
+>   demands are; bounded by what makes sense in trade flow and ease of
+>   reinforcement access; and selling for prosperity is immediate benefit against
+>   a LONG-TERM LOSS that must correlate with the settlement's value projected
+>   into the future, the whole comparison made through knowledge and belief
+>   against truth.
+>   ── ⭐⭐ THE RULING THAT MAKES IT COHESIVE: A SETTLEMENT TRADE IS A TREATY, and
+>   SOVEREIGNTY TRANSFER JOINS THE COMPOSABLE TERMS VOCABULARY. Every
+>   consideration the owner names is ALREADY a term family in the peace engine's
+>   catalog — streams and stores (tribute physics reversed: the buyer pays),
+>   trade rights (trade exclusivity, market access, toll exemption), allyship
+>   (the alliance terms), and peace itself (the cession rider, now offerable
+>   PROACTIVELY: a settlement in an envoy's term-sheet as the price of ending a
+>   war). One instrument class, one ledger, one compliance machinery, one
+>   document the DM reads — a peacetime sale for grain and a wartime cession to
+>   buy peace are the SAME artifact with different term compositions. No new
+>   negotiation layer exists anywhere in this amendment.
+>   ── ⭐ THE PRICE IS DENOMINATED IN WHAT EXISTS (there is NO settlement
+>   treasury — verified; prosperity is a label, not a stock): immediate stores
+>   transfer + years-long streams + concession riders. "Immediate but a loss
+>   long term" is therefore STRUCTURAL, not simulated: the seller receives
+>   stocks now and surrenders streams forever.
+>   ── ⭐⭐ VALUATION IS BELIEF, AND THE FUTURE IS A TRAJECTORY READ: both parties
+>   appraise through their OWN belief maps (the victor's appraisal machinery
+>   generalized to the market), with the demographic engine's trajectory as the
+>   projection — a settlement's believed growth curve IS its believed future
+>   value. A trade CLEARS when believed valuations overlap (seller's reserve
+>   under buyer's ceiling — belief-convergence generalized from peace to
+>   commerce; the same evaluator family, never a second one). K3 GOVERNS
+>   ABSOLUTELY: no true-value read anywhere; the mispriced sale is the story —
+>   the parent who sold cheap believing decline, the buyer who overpaid for a
+>   rumoured vein — and the receipt can say the court was mistaken.
+>   ── ⭐ THE BUNDLE (owner clarification, same day): MULTIPLE THINGS TRADE AT
+>   ONCE, and value-matching is the mechanic — one settlement may require
+>   another settlement PLUS allyship because the first is worth more. The
+>   consideration is a COMPOSED BUNDLE from the term families (the peace
+>   engine's own budget-and-stacking machinery run in reverse: the asset's
+>   believed value is the price to be MET; the buyer stacks terms until the
+>   seller's believed valuation of the whole bundle clears its reserve). AND
+>   APPROPRIATENESS IS EMERGENT, NEVER A RULE: each side values each component
+>   through ITS OWN needs and situation (the prize-ranking lens, both
+>   directions) — allyship is worth more to a threatened seller, grain streams
+>   to a hungry one, trade rights to a mercantile one — so an inappropriate
+>   offer (missionary access to a court that does not care) simply never
+>   clears. Situation and belief price everything; nothing is forbidden by
+>   fiat, and nothing absurd clears by accident.
+>   ── ⭐ THE TRUE LONG-TERM COST EMERGES, NEVER A FORMULA: a parent that sells
+>   its satellite has sold its overflow valve (the demographic §5), its food
+>   stream, its reinforcement depth, its strategic position. Belief projects;
+>   reality collects; the gap between them is the drama — and it costs zero new
+>   machinery because every loss lands through engines that already run.
+>   ── THE GEOGRAPHIC BOUND (owner: trade flow and reinforcement access): a
+>   buyer must be able to HOLD what it buys — lived-route reachability,
+>   reinforcement reach within an army-transit leg band, existing trade-flow
+>   connection between buyer and asset. No absentee sovereignty. Swaps apply
+>   the bound symmetrically and should tend to RATIONALIZE borders — each party
+>   acquiring the asset nearer its own web (the §5b contiguity vocabulary).
+>   ── ⭐⭐ THE SOLD SETTLEMENT HAS AN OPINION (the coherence completion): being
+>   sold is a GRIEVANCE for the sold ("our parent sold us to strangers for
+>   grain"); the new overlord starts low-legitimacy with revolt standing (the
+>   puppet-seat fragility precedent); AND THE LINEAGE EDGE SURVIVES THE SALE AS
+>   HISTORY — the original parent may later mint a lineage_claim to reclaim
+>   what it sold (the seller's-remorse war), and a sold satellite that outgrows
+>   its buyer claims independence through the same inversion. The market and
+>   the lineage cause compose for free, in both directions.
+>   ── CHARACTER GOVERNS (B, E2, G): a mercantile realm trades what a
+>   kinship-bound one never would (kinship_bond opposes the sale exactly as it
+>   opposes the lineage war); a ruler may sell the family silver to save their
+>   own seat (G's divergence — the realm's long loss for the seat's short
+>   survival, receipted as whose books); selling a starving satellite to a
+>   rich buyer can be MERCY, selling anyone to a known razer is damnable and
+>   the world judges on the observer's axis (R2's judgment law generalizes).
+>   Wartime firesales are legal and priced by desperation — a losing seller's
+>   assets discount through the buyer's belief of the trajectory (the vulture
+>   buyer, cousin of the vulture war).
+>   ── DEMAND-DRIVEN, ANTI-FLAP: trades fire from the plan lane (band-crossing
+>   pressure episodes — a war-bled realm sells a distant satellite to fund the
+>   war), never from per-tick portfolio churn; rare, headline-class Herald
+>   events with full address chains ("Ashford is sold to the Crown of Merewick
+>   for seven years of grain; the steading learns its new master's name").
+>   User-placed settlements obey the sovereign-hand law (the engine never
+>   trades the DM's own placements without the DM's verb).
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
