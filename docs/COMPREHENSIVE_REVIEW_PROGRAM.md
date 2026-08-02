@@ -174,6 +174,17 @@ ledger — never from a session digest.
 >   ran all-Fable by model inheritance (owner-flagged ~15%+ of weekly); staffing rule recorded
 >   (memory fable-budget-workflow-staffing) — bulk correctors ride Opus henceforth. Accounting
 >   delivered to the owner this session.
+> - 2026-08-02 (~14:00, THE DELEGATED-RULINGS TAIL). Owner granted full delegation; three
+>   rulings landed @ minifold fdf43790 (CR-5 syndicate = a house at the `criminal` faction type
+>   with covert books, TR-2b shape, corruption web admits syndicate-house patrons; CR-6 spine
+>   requirement 13 THE ALIGNMENT COUPLING — alignmentOf is a DERIVED two-axis read, no writer,
+>   waves declare engagement or empty; CR-7 requirement 14 THE EDIT VERB — DM verb + edits-delta
+>   survival + typed-proposal AI surface per new DM-visible state; law now, rows at build). Then
+>   the owner's hook order: DESIGN_HOOK_NONREDUNDANCY.md @ minifold e658c042 — HK-1 closed theme
+>   vocabulary / HK-2 projection-side ranked retention (DM edits sacred, clock-anchored hooks
+>   protected, persisted state untouched) / HK-3 theme-aware draws (one-roll budget, disclosed
+>   shift) — architected for Sol against the measured 8.19%/35% repeat baseline; sequenced
+>   HK-1→2→3, HK-2 before HK-3 so the visible cure ships with zero golden motion.
 > - 2026-08-02 (~04:30, THE NIGHT CLOSES WHOLE). CORRECTION PASS COMPLETE: 134 corrections
 >   across 11 docs by 7 agents (six correctors + the coherence sweeper), 20+3 unresolved
 >   forks all chair-ruled (2 routed to owner: annual credit cadence · WR-9 gate reading);
