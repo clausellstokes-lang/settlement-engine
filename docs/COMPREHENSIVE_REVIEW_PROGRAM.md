@@ -104,6 +104,22 @@ ledger — never from a session digest.
 >   300y×12s research leg (running) completes. Subsystem-certification build (9-agent, parked
 >   script) launches post-soak; then tuning (agenda: knowledge-lane starvation, lifecycle tempo,
 >   strategy-verb monotone, cooling slope, small-N normalization); then wave 3 programs.
+> - 2026-08-01 (⭐⭐ FABLE VALIDATION SESSION OPENS — the Fable-capable account the pause handoff
+>   awaited). Owner orders this session: exhaustive review + the FABLE_VALIDATION_QUEUE re-validation
+>   + architect everything not Fable-architected; ALL implementation assigned to the external
+>   implementer (Sol 5.6); model split reaffirmed (Fable = validation/architecture, Opus 5 =
+>   verification). LANDED @ minifold daee130d: amendments R/R2/S recorded from owner dictation (THE
+>   RAZING — punitive victory, evil-exclusive initiation, the coupled vengeance license, closed-loop;
+>   THE SOVEREIGNTY MARKET — settlements tradeable as treaties, bundles compose until believed values
+>   clear) + docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md (amendments A..S compiled into waves WR-0..WR-10,
+>   implementation-grade, self-contained for the external implementer) + the K2 sentence-split doc
+>   repair. DIRTY-TREE TRIAGE EXECUTED (read-only): cartography TC-0/1/2 tests ALL GREEN (11 files /
+>   154 tests — the "partial edits" assumption is REFUTED by execution); the three W1 reds re-executed
+>   on the settled tree and REAL: anyCast = ratchet-DOWN lock-in (warDeployment 54→53, debt shrank),
+>   beliefMapGolden drifts exactly bg-c|14|unreliable, momentumDormancyGolden exactly mo-b|8 + mo-c|6
+>   — attribution evidence in flight. IN FLIGHT: 13-agent validation-evidence workflow (all 33 queue
+>   rows) + 10-dimension holistic review with Opus verifiers. Queue verdicts + WR-0 landing ruling
+>   follow in this ledger and FABLE_VALIDATION_QUEUE.md when evidence returns.
 
 ## The owner's directive (2026-07-13, verbatim intent)
 1. Fable 5 does the survey + dimensions survey: read/review/analyze the ENTIRE codebase; deliver
