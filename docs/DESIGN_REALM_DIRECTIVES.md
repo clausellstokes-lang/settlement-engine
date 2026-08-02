@@ -1517,6 +1517,32 @@ under a header that still said seven, and directive 11 was filed between 9 and
   (e) Joins the FP corpus as its era layer (cross-wired after the audit lands);
   dossier round-trip: each settlement's page reads the age through its own
   posture ("the age is dark; Cnocby keeps its walls manned").
+  (f) ⭐ THE SECOND AXIS (owner, same session — "and I think that is the only
+  one"; the family is CLOSED at two): PIOUS ↔ SECULAR ↔ DYNAMIC — the faith
+  climate, same convergence-never-switch semantics, same preset-over-existing-
+  bands mechanism, and the survey already named every lever: the unaffiliated
+  sink's revival-vs-secular-drift pair (0.06 vs 0.02 — the dial exists), spread
+  carrier reach, conversion gains, faith legitimacy weights, stance-lane
+  cadence, sacred-tension availability, confidence-in-god drift, temple
+  founding rates. A PIOUS age: revival outruns drift, carriers reach further,
+  the gods weigh heavier in every court, omen reads come easier. A SECULAR
+  age: drift outruns revival, the sink grows, deity-adjacent motives damp —
+  BUT never drama-zero: the secular age's faith stories are EMBERS — the
+  underground rite, the last temple, the revival nobody expected — rarer and
+  therefore more precious (the era envelope enforces embers, never silence).
+  LAW ONE IS LOAD-BEARING HERE: the toggle shapes BELIEVERS — devotion rising
+  or receding — never divine reality; the engine still never confirms or
+  denies a god, in any age. Respects the faith lane's premium gate. [Voice
+  note, parked: the owner said "pious to atheist"; the in-world register
+  likely prefers Devout Age / Secular Age — the label is the voice
+  workstream's, the semantics are fixed.]
+  (g) ⭐⭐ THE COMPOSITION IS FREE AND IT IS THE PAYOFF: two orthogonal axes
+  mint FOUR CORNER AGES from pure band composition — pious war (the crusade
+  age), secular war (the realpolitik age), pious peace (the pilgrimage age),
+  secular peace (the merchant enlightenment) — each a distinct realm flavor
+  with its own measured story mix (the era envelopes gain the 3×3 matrix),
+  and none needed a line of new machinery beyond the two presets. The DM
+  conducts; the orchestra is everything already built.
 
 10. THE MAGIC-ECONOMY DISASTER BUFFER (added 2026-07-31) — high magic and high economy
     each buffer catastrophe individually, and their COMBINATION is the strong buffer:
