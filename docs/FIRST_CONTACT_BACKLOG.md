@@ -418,8 +418,9 @@ box; the toggle lives inside the existing card.
 3. **THE REFUND POLICY — RULED BY THE OWNER 2026-08-01 (supersedes the parked
    call):** NO REFUNDS for subscriptions — every purchase is one-time and final,
    for all purchasers. A refund may be REQUESTED — through FEEDBACK & SUPPORT
-   (the existing channel; owner-specified route 2026-08-01) — but a request is
-   never a guarantee; grants are owner-discretionary.
+   or the Account ▸ Support tab (both routes valid; owner-specified 2026-08-01;
+   both land in the same support channel, one queue never two) — but a request
+   is never a guarantee; grants are owner-discretionary.
    Consequences: (a) the policy is WRITTEN INTO TERMS and disclosed clearly at
    checkout BEFORE annual goes live — with the standard except-where-required-
    by-law carve-out for the legal reviewer's judgment (some consumer
