@@ -126,6 +126,7 @@ const reader = (id, ownerPath, ownerSelector, surfaceRegister, motion = 'none', 
 
 /** Initial high-value reader inventory. AE-2/3/4 expand coverage before enforcement. */
 export const READER_SURFACE_MANIFEST = Object.freeze([
+  reader('account.operator-messages', 'src/components/account/AccountMessagesSection.jsx', 'AccountMessagesSection', 'parchment'),
   reader('realm.wizard-news-entry', 'src/components/map/WizardNewsPanel.jsx', 'NewsEntry', 'manuscript'),
   reader('realm.herald-briefing', 'src/components/map/HeraldCommandBody.jsx', 'BriefingCard', 'parchment'),
   reader('realm.herald-story-shell', 'src/components/map/HeraldCommandBody.jsx', 'StoryCard', 'parchment'),

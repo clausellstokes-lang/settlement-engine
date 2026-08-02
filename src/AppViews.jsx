@@ -107,7 +107,13 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
       {/* Guarded views: render only once authorized. The guard effect
           redirects unauthorized visitors; until the session resolves we
           show the loader rather than flash (or crash on) gated content. */}
-      {view === 'account'     && (authLoading ? <Loading /> : authTier !== 'anon' ? <AccountPage onNavigateAdmin={() => setView('admin')} /> : null)}
+      {view === 'account'     && (authLoading ? <Loading /> : authTier !== 'anon' ? (
+        <AccountPage
+          onNavigateAdmin={() => setView('admin')}
+          routeSection={params.section}
+          routeMessageId={params.message}
+        />
+      ) : null)}
       {view === 'admin'       && (authLoading ? <Loading /> : isElevated ? <AdminPanel onBack={() => setView('account')} /> : null)}
       {view === 'pricing'     && <PricingPage onNavigate={setView} />}
       {view === 'gallery'     && <GalleryPage onNavigate={setView} routeSlug={params.slug} routeHub={params.hub} />}

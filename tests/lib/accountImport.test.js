@@ -19,6 +19,7 @@ import {
   MAX_IMPORT_SETTLEMENTS,
   MAX_IMPORT_BYTES,
 } from '../../src/lib/accountImport.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // LINEAGE ADAPT (master merge W6): this lineage lazily loads the normalizer;
 // prepareSettlementEntry needs it primed (mirrors the saves.js call pattern).
@@ -136,6 +137,24 @@ describe('validateAccountImport — fail-closed envelope', () => {
     const res = validateAccountImport(envelope());
     expect(res.ok).toBe(true);
     expect(res.value).not.toHaveProperty('profile');
+  });
+
+  it('accepts but never imports export-only service records', () => {
+    const res = validateAccountImport(envelope({
+      serviceRecords: {
+        schemaVersion: 1,
+        importable: false,
+        operatorMessages: [{ id: 'foreign-message', body: 'do not recreate' }],
+        consentChanges: [{ consentKey: 'market', newValue: true }],
+      },
+    }));
+    expect(res.ok).toBe(true);
+    expectAbsentWithAnchor(
+      Object.keys(res.value),
+      'serviceRecords',
+      'settlements',
+      'export-only service records are excluded from the live import envelope',
+    );
   });
 });
 

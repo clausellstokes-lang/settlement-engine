@@ -201,12 +201,16 @@ statuses: `queued | applied | ignored | expired | resolved`.
 
 > `session_started` fires at boot but is **held until the first auth resolution** so `auth_state` reflects the real tier (auth resolves asynchronously after boot; firing at boot forced a false `'anon'` for returning signed-in users — F34). Events queue locally, so the 1-2s defer is lossless. `'unknown'` is the honest fallback if auth never resolves (Supabase unconfigured / init not reached).
 
-## 10. `research` / `consent`
+## 10. `research` and consent-service boundary
 
 | Constant | Event | Class | Trigger | Props |
 |---|---|---|---|---|
 | `SETTLEMENT_FINGERPRINT_CAPTURED` | `settlement_fingerprint_captured` | **research** | `captureFingerprint(moment)` in `src/lib/researchCapture.js` at: `generated`, `saved`, `canonized`, `exported`, `ai_polished`, `pulse_advanced`, `published` | `{ moment, consent_version, fingerprint:{…doc 1 §7}, fingerprint_hash, prev_fingerprint_hash, content_hash }` — `prev_fingerprint_hash` makes evolution chains reconstructable; `consent_version` stamps the consent-model basis (see below) |
-| `CONSENT_UPDATED` | `consent_updated` | essential | `setConsent()` in `src/lib/consent.js` | `{ research:'granted'\|'denied'\|'unset', ai_prose:'granted'\|'denied'\|'unset', surface:'account' }` |
+
+> Consent changes are deliberately absent from the analytics registry. Signed-in
+> changes write a durable SERVICE-class compliance record containing the changed
+> purpose, prior/new booleans, source, and timestamp. That record persists
+> independently of telemetry choices and is available through the account export.
 
 > **Consent model v2 (research opt-out).** `research` flipped from opt-IN (default
 > false) to opt-OUT (default `!dntEnabled()`). CONSENT_KEY is preserved: prior
@@ -241,7 +245,7 @@ statuses: `queued | applied | ignored | expired | resolved`.
 | `src/utils/generateSettlementPDF.js` / `generateCampaignPDF.js` call sites | resolve | `pdf_export_completed`, `captureFingerprint('exported')` |
 | `src/lib/gallery.js` call sites | :41/:52 + vote/comment/report | `gallery_*`, `captureFingerprint('published')` |
 | `src/lib/session.js` | session mint | `session_started` |
-| `src/lib/consent.js` | `setConsent` | `consent_updated` |
+| `src/components/PrivacySettings.jsx` | consent toggle | local consent plus `set_my_telemetry_consent` SERVICE record; no analytics event |
 
 ---
 

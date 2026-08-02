@@ -73,6 +73,8 @@ describe('migration rollback discipline', () => {
     'profiles', 'security_answers', 'surveyor_byok_keys',
     'deletion_requests', 'account_deletion_cleanup_jobs',
     'email_preferences', 'support_messages', 'support_ticket_events',
+    'operator_messages', 'operator_message_receipts',
+    'operator_message_delivery_jobs', 'consent_change_records',
     'current_account_session', 'reserved_external_names',
     'analytics_identity_links', 'analytics_device_links',
   ];

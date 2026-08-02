@@ -9,10 +9,14 @@
  */
 import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
 import {
+  BROADCAST_ACTION_SET,
+  BROADCAST_CONFIRMATION_PHRASE,
+  checkBroadcastTwoKey,
   checkTwoKey,
   decodeJwtAmr,
   FRESHNESS_WINDOW_S,
   isProtectedAction,
+  isBroadcastAction,
   latestPasswordAmrTs,
   PROTECTED_ACTION_SET,
 } from "./twoKey.ts";
@@ -37,6 +41,59 @@ Deno.test("fresh password amr + matching typed id → PASS", () => {
   assertEquals(r.ok, true);
   assertEquals(r.reason, "ok");
   assertEquals(r.amrAgeS, 10);
+});
+
+Deno.test("broadcast two-key accepts only exact SEND TO ALL plus fresh password", () => {
+  const pass = checkBroadcastTwoKey({
+    action: "queue_operator_broadcast",
+    typedBroadcastPhrase: BROADCAST_CONFIRMATION_PHRASE,
+    amr: amrAged(10),
+    nowS: NOW,
+  });
+  assertEquals(pass.ok, true);
+  assertEquals(pass.amrAgeS, 10);
+
+  const wrongCase = checkBroadcastTwoKey({
+    action: "queue_operator_broadcast",
+    typedBroadcastPhrase: "send to all",
+    amr: amrAged(10),
+    nowS: NOW,
+  });
+  assertEquals(wrongCase.reason, "typed_phrase_mismatch");
+
+  const missing = checkBroadcastTwoKey({
+    action: "queue_operator_broadcast",
+    typedBroadcastPhrase: null,
+    amr: amrAged(10),
+    nowS: NOW,
+  });
+  assertEquals(missing.reason, "missing_typed_phrase");
+});
+
+Deno.test("broadcast two-key trims paste whitespace but rejects stale/no password AMR", () => {
+  const trimmed = checkBroadcastTwoKey({
+    action: "queue_operator_broadcast",
+    typedBroadcastPhrase: `  ${BROADCAST_CONFIRMATION_PHRASE}\n`,
+    amr: amrAged(0),
+    nowS: NOW,
+  });
+  assertEquals(trimmed.ok, true);
+
+  const stale = checkBroadcastTwoKey({
+    action: "queue_operator_broadcast",
+    typedBroadcastPhrase: BROADCAST_CONFIRMATION_PHRASE,
+    amr: amrAged(FRESHNESS_WINDOW_S + 1),
+    nowS: NOW,
+  });
+  assertEquals(stale.reason, "amr_stale");
+
+  const none = checkBroadcastTwoKey({
+    action: "queue_operator_broadcast",
+    typedBroadcastPhrase: BROADCAST_CONFIRMATION_PHRASE,
+    amr: null,
+    nowS: NOW,
+  });
+  assertEquals(none.reason, "no_password_amr");
 });
 
 Deno.test("typed id MISMATCH → reject (no case-folding, exact compare)", () => {
@@ -188,4 +245,11 @@ Deno.test("PROTECTED_ACTION_SET membership: the seven account-destructive action
   assertEquals(isProtectedAction("list_users"), false);
   assertEquals(isProtectedAction("issue_warning"), false);
   assertEquals(isProtectedAction(undefined), false);
+});
+
+Deno.test("BROADCAST_ACTION_SET contains only queue_operator_broadcast", () => {
+  assertEquals(BROADCAST_ACTION_SET.size, 1);
+  assertEquals(isBroadcastAction("queue_operator_broadcast"), true);
+  assertEquals(isBroadcastAction("cancel_operator_broadcast"), false);
+  assertEquals(isBroadcastAction(undefined), false);
 });

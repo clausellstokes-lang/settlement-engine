@@ -19,7 +19,7 @@
  */
 
 /** Integer revision of the legal/trust page set. Bump on any substantive change. */
-export const POLICY_VERSION = 1;
+export const POLICY_VERSION = 2;
 
 /** Human label for the version (shown on each page). */
 export const POLICY_LABEL = `v${POLICY_VERSION}`;
@@ -28,4 +28,4 @@ export const POLICY_LABEL = `v${POLICY_VERSION}`;
 export const POLICY_STATUS = `${POLICY_LABEL} · under review`;
 
 /** The date this draft went live (ISO). Displayed as the "last updated" line. */
-export const POLICY_EFFECTIVE = '2026-07-10';
+export const POLICY_EFFECTIVE = '2026-08-02';

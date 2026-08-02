@@ -19,7 +19,7 @@
  */
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, screen } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -37,6 +37,8 @@ vi.mock('../../src/lib/analytics.js', () => ({
 const storeState = {
   auth: {
     user: { id: 'u1', email: 'tester@example.com' },
+    session: { access_token: 'session-u1' },
+    loading: false,
     tier: 'free',
     role: 'user',
     displayName: 'Tester',
@@ -56,6 +58,8 @@ const storeState = {
   clearSavedSettlements: vi.fn(),
   deleteCampaign: vi.fn(),
   importAccountData: vi.fn(),
+  productPrefs: {},
+  setProductPref: vi.fn(),
   setAuth: vi.fn(),
 };
 
@@ -83,5 +87,40 @@ describe('AccountPage — decomposition smoke', () => {
     // throw above before reaching here.
     expect(document.body).toBeTruthy();
     expect(container.firstChild).not.toBeNull();
+  });
+
+  test('honors a Messages section deep link', async () => {
+    const AccountPage = (await import('../../src/components/AccountPage.jsx')).default;
+    render(<AccountPage routeSection="messages" onNavigateAdmin={() => {}} />);
+    expect(screen.getAllByText('Messages').length).toBeGreaterThan(1);
+    expect(screen.getByText(/no messages from SettlementForge/i)).toBeTruthy();
+  });
+
+  test('mounts product defaults beside the durable email-category controls', async () => {
+    const AccountPage = (await import('../../src/components/AccountPage.jsx')).default;
+    render(<AccountPage routeSection="preferences" onNavigateAdmin={() => {}} />);
+    expect(screen.getByText('Product Preferences')).toBeTruthy();
+    expect(screen.getByText('Email preferences')).toBeTruthy();
+    expect(screen.queryByLabelText(/^Email notifications$/i)).toBeNull();
+  });
+
+  test('resolves a direct message query into the Support ticket prelink', async () => {
+    const AccountPage = (await import('../../src/components/AccountPage.jsx')).default;
+    const OperatorMessagesProvider = (await import('../../src/components/account/OperatorMessagesProvider.jsx')).default;
+    const service = {
+      listMyOperatorMessages: vi.fn().mockResolvedValue([{
+        id: 'message-route', kind: 'direct', messageClass: 'service', senderRole: 'admin',
+        subject: 'Route-linked concern', body: 'Please reply.', createdAt: '2026-08-02T12:00:00.000Z', readAt: null,
+      }]),
+      getMyOperatorUnreadCount: vi.fn().mockResolvedValue(1),
+      markOperatorMessageRead: vi.fn(),
+    };
+    render(
+      <OperatorMessagesProvider service={service}>
+        <AccountPage routeSection="support" routeMessageId="message-route" onNavigateAdmin={() => {}} />
+      </OperatorMessagesProvider>,
+    );
+    expect((await screen.findByLabelText(/subject/i)).value).toBe('Re: Route-linked concern');
+    expect(screen.getByRole('status').textContent).toMatch(/linked to that notice/i);
   });
 });

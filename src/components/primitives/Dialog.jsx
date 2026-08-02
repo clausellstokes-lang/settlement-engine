@@ -135,6 +135,7 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
 
 export function ConfirmDialog({
   open,
+  heading,
   title,
   body,
   // Optional extra content rendered ABOVE the action row — e.g. a toggle row or a
@@ -151,8 +152,9 @@ export function ConfirmDialog({
   onConfirm,
   onCancel,
 }) {
+  const resolvedTitle = heading ?? title;
   return (
-    <Shell open={open} title={title} body={body} tone={tone} onCancel={onCancel}>
+    <Shell open={open} title={resolvedTitle} body={body} tone={tone} onCancel={onCancel}>
       {extra}
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: SP.sm, flexWrap: 'wrap' }}>
         <Button variant="secondary" onClick={onCancel}>{cancelLabel}</Button>

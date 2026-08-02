@@ -18,8 +18,9 @@
  * developer (owner order: "make that for developers too") — passes the identical
  * gate. The set below is the single source of truth; the walker
  * (tests/edgeFunctions/adminActionTwoKeyWalker.test.js) asserts every switch case
- * in admin-actions is classified into exactly one of PROTECTED / MODERATION /
- * UNGATED, so a new action can never silently escape classification.
+ * in admin-actions is classified into exactly one of PROTECTED / BROADCAST /
+ * MODERATION / UNGATED, so a new action can never silently escape
+ * classification.
  *
  * This module is PURE (no Deno globals, no network, no https imports) so the edge
  * function, the Deno unit test, and the vitest walker can all read it.
@@ -43,6 +44,22 @@ export const PROTECTED_ACTION_SET: ReadonlySet<string> = new Set([
   "grant_surveyor", // grant the surveyor entitlement
   "revoke_surveyor", // revoke the surveyor entitlement (destructive)
 ]);
+
+/**
+ * BROADCAST — the mass-delivery two-key set. Queueing a message to every account
+ * is not an account-targeted mutation, so the account-id guard above cannot
+ * express its deliberate-confirmation key. It gets a separate closed set and a
+ * separate exact phrase while sharing the same fresh-password AMR proof.
+ *
+ * Cancellation is intentionally not here: it reduces blast radius and must stay
+ * available throughout the short mercy window without demanding another
+ * password ceremony. The edge still restricts it to the highest roles.
+ */
+export const BROADCAST_ACTION_SET: ReadonlySet<string> = new Set([
+  "queue_operator_broadcast",
+]);
+
+export const BROADCAST_CONFIRMATION_PHRASE = "SEND TO ALL";
 
 /**
  * MODERATION — reversible, staff-only content moderation. These get the
@@ -100,7 +117,9 @@ export const UNGATED_ACTION_SET: ReadonlySet<string> = new Set([
   "ai_pricing_cron_set",
   "review_billing",
   "diagnostic_bundle",
-  "send_user_email",
+  "send_operator_message",
+  "list_operator_broadcasts",
+  "cancel_operator_broadcast",
   "list_ticket_pool",
   "list_ticket_thread",
   "claim_ticket",
@@ -118,6 +137,11 @@ export const UNGATED_ACTION_SET: ReadonlySet<string> = new Set([
 /** True iff `action` is a two-key protected action. */
 export function isProtectedAction(action: unknown): boolean {
   return typeof action === "string" && PROTECTED_ACTION_SET.has(action);
+}
+
+/** True iff `action` queues a mass delivery and needs broadcast two-key. */
+export function isBroadcastAction(action: unknown): boolean {
+  return typeof action === "string" && BROADCAST_ACTION_SET.has(action);
 }
 
 /** One amr entry as GoTrue mints it. */
@@ -191,6 +215,29 @@ export interface TwoKeyResult {
   amrAgeS: number | null;
 }
 
+export interface BroadcastTwoKeyContext {
+  action: string;
+  /** body.confirm.typedBroadcastPhrase — the phrase the operator retyped. */
+  typedBroadcastPhrase: unknown;
+  /** The caller's decoded JWT `amr` claim (array of {method,timestamp}). */
+  amr: unknown;
+  /** Current time in UNIX seconds. */
+  nowS: number;
+  /** Override the freshness window (seconds); defaults to FRESHNESS_WINDOW_S. */
+  freshnessWindowS?: number;
+}
+
+export interface BroadcastTwoKeyResult {
+  ok: boolean;
+  reason:
+    | "ok"
+    | "missing_typed_phrase"
+    | "typed_phrase_mismatch"
+    | "no_password_amr"
+    | "amr_stale";
+  amrAgeS: number | null;
+}
+
 /**
  * The pure guard core. Rejects unless BOTH keys check out:
  *   1. body.confirm.typedTargetId is present and EXACTLY equals the target user
@@ -218,5 +265,35 @@ export function checkTwoKey(ctx: TwoKeyContext): TwoKeyResult {
   // past (rejected); clock skew a little either way is tolerated symmetrically.
   if (Math.abs(amrAgeS) > win) return { ok: false, reason: "amr_stale", amrAgeS };
 
+  return { ok: true, reason: "ok", amrAgeS };
+}
+
+/**
+ * Mass-delivery sibling of `checkTwoKey`. The literal is deliberately closed,
+ * case-sensitive, and compared after trimming paste-only outer whitespace. A
+ * caller cannot substitute an audience label supplied by the client.
+ */
+export function checkBroadcastTwoKey(
+  ctx: BroadcastTwoKeyContext,
+): BroadcastTwoKeyResult {
+  const typed = typeof ctx.typedBroadcastPhrase === "string"
+    ? ctx.typedBroadcastPhrase.trim()
+    : "";
+  if (!typed) {
+    return { ok: false, reason: "missing_typed_phrase", amrAgeS: null };
+  }
+  if (typed !== BROADCAST_CONFIRMATION_PHRASE) {
+    return { ok: false, reason: "typed_phrase_mismatch", amrAgeS: null };
+  }
+
+  const latest = latestPasswordAmrTs(ctx.amr);
+  if (latest === null) {
+    return { ok: false, reason: "no_password_amr", amrAgeS: null };
+  }
+  const amrAgeS = ctx.nowS - latest;
+  const win = ctx.freshnessWindowS ?? FRESHNESS_WINDOW_S;
+  if (Math.abs(amrAgeS) > win) {
+    return { ok: false, reason: "amr_stale", amrAgeS };
+  }
   return { ok: true, reason: "ok", amrAgeS };
 }

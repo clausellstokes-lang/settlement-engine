@@ -28,7 +28,8 @@ const M_160 = MIG('160', 'founder_transfer_cases');
 const M_081 = MIG('081', 'client_error_events');
 const M_157 = MIG('157', 'money_events');
 const M_137 = MIG('137', 'founder_seats');
-const have = [M_041, M_036, M_160, M_081, M_157, M_137].every(existsSync);
+const M_194 = MIG('194', 'operator_messages');
+const have = [M_041, M_036, M_160, M_081, M_157, M_137, M_194].every(existsSync);
 const rd = (f) => (existsSync(f) ? readFileSync(f, 'utf-8') : '');
 const SRC_041 = rd(M_041);
 const SRC_036 = rd(M_036);
@@ -36,6 +37,7 @@ const SRC_160 = rd(M_160);
 const SRC_081 = rd(M_081);
 const SRC_157 = rd(M_157);
 const SRC_137 = rd(M_137);
+const SRC_194 = rd(M_194);
 
 /** The deny-all targets: [table, migration-source]. RLS-on + zero policies = deny-all. */
 const TARGETS = [
@@ -49,6 +51,11 @@ const TARGETS = [
   ['founder_transfer_events', () => SRC_160],
   ['founder_transfer_challenges', () => SRC_160],
   ['client_error_events', () => SRC_081],
+  // Operator Messages and typed consent history are RPC-only service records.
+  ['operator_messages', () => SRC_194],
+  ['operator_message_receipts', () => SRC_194],
+  ['operator_message_delivery_jobs', () => SRC_194],
+  ['consent_change_records', () => SRC_194],
 ];
 
 /** Owner-SELECT targets: [table, migration-source]. RLS-on + EXACTLY ONE owner-scoped
@@ -80,7 +87,7 @@ const relrowsecurity = async (table) =>
 const policyCount = async (table) =>
   (await db.query(`select count(*)::int c from pg_policies where schemaname = 'public' and tablename = $1`, [table])).rows[0].c;
 
-it('all census migrations (041/036/160/081/157/137) are present (suite is not vacuous)', () => {
+it('all census migrations (041/036/160/081/157/137/194) are present (suite is not vacuous)', () => {
   expect(have).toBe(true);
 });
 
@@ -96,6 +103,10 @@ describe.runIf(have)('deny-all RLS census (pglite)', () => {
       create table public.founder_transfer_events (id bigint primary key generated always as identity);
       create table public.founder_transfer_challenges (id bigint primary key generated always as identity);
       create table public.client_error_events (id bigint primary key generated always as identity);
+      create table public.operator_messages (id uuid primary key);
+      create table public.operator_message_receipts (message_id uuid, user_id uuid, primary key(message_id,user_id));
+      create table public.operator_message_delivery_jobs (id uuid primary key);
+      create table public.consent_change_records (id uuid primary key);
     `);
   }, 60000);
 

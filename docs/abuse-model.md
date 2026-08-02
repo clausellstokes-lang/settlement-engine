@@ -47,7 +47,7 @@ before exposing new attack surface.
 
 ### Edge functions
 
-There are **31** edge functions under `supabase/functions/` (excluding
+There are **33** edge functions under `supabase/functions/` (excluding
 `_shared/`). They split by auth posture, but share one baseline defense
 as of Tier 0.10.
 
@@ -57,10 +57,14 @@ python-requests / headless browsers / bot UAs) with 403 before expensive
 work. Real users are never blocked; the bot pattern list is deliberately
 conservative. `stripe-webhook` skips it because Stripe's own signed POST
 is the trust anchor, `health` admits monitoring clients, and the internal
-`account-deletion-worker` and `payment-refund-worker` use high-entropy,
+`account-deletion-worker`, `payment-refund-worker`, and the disabled-by-default
+`operator-message-worker` use high-entropy,
 constant-time cron secrets as their complete trust anchors. Those
 infrastructure endpoints do not make authorization depend on a mutable
-client UA.
+client UA. `unsubscribe` also skips the bot guard because automated email
+clients legitimately follow and POST one-click unsubscribe links; its opaque
+bearer token, closed category allowlist, POST-only mutation, and opt-out-only
+RPC are the boundary instead.
 
 - **Allow-list.** Stripe's own UA, monitoring services (UptimeRobot,
   Pingdom, BetterStack), Supabase health checks bypass the bot
@@ -141,6 +145,19 @@ flip intent):
   `PAYMENT_REFUND_CRON_SECRET` (503), compares `x-cron-secret`
   constant-time, re-checks the private database kill switch, and only
   then claims service-role-only leased refund obligations.
+- `operator-message-worker` — migration 194 seeds this broadcast courier
+  disabled with no URL or secret. Even if deployed, it refuses an unset or
+  mismatched `OPERATOR_MESSAGE_CRON_SECRET`, re-checks the private database
+  kill switch, heartbeats the active job lease, and must CAS-claim each
+  recipient with that lease before any provider call. Reclaim terminalizes an
+  abandoned `sending` attempt as outcome unknown instead of making it resendable.
+  Provider exceptions are redacted in logs and receipts store a closed reason,
+  never provider-supplied text or recipient PII.
+- `unsubscribe` — public email link endpoint. GET renders confirmation without
+  a database call; POST is the only mutation and uses a service-role client to
+  invoke the narrowly granted token RPC. UUID shape + category are allowlisted,
+  the RPC can only turn a preference off, and unknown tokens do not disclose an
+  account identity. The service-role key never leaves the function.
 
 ### Database (Postgres + RLS)
 

@@ -18,6 +18,7 @@ import AdminAnalyticsPanel from './admin/AdminAnalyticsPanel.jsx';
 import AdminClientErrorsPanel from './admin/AdminClientErrorsPanel.jsx';
 import AdminTrendsPanel from './admin/AdminTrendsPanel.jsx';
 import AdminUsersPanel from './admin/AdminUsersPanel.jsx';
+import AdminBroadcastPanel from './admin/AdminBroadcastPanel.jsx';
 import SupportQueuePanel from './admin/SupportQueuePanel.jsx';
 import AiPricingResyncPanel from './admin/AiPricingResyncPanel.jsx';
 import AdminSimTuningPanel from './admin/AdminSimTuningPanel.jsx';
@@ -171,6 +172,10 @@ export default function AdminPanel({ onBack }) {
           source is the audited list_users / get_user_* edge actions. */}
       <Section heading="User Management">
         <AdminUsersPanel />
+      </Section>
+
+      <Section heading="Broadcast Messages">
+        <AdminBroadcastPanel />
       </Section>
 
       <Section heading="Gallery Reports">

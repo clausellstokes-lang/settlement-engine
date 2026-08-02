@@ -3,9 +3,10 @@
  *
  * tests/lib/consentSync.test.js — the consent MIRROR, both directions.
  *
- * UP (a toggle): the whole record reaches profiles.telemetry_consent, stamped with the
- *   provenance marker, scoped to the signed-in row. A failure is reported, never thrown,
- *   and never touches the local record — localStorage is the offline source of truth.
+ * UP (a toggle): the whole record reaches the authenticated consent service RPC,
+ *   stamped with the provenance marker. That RPC owns both the profile mirror and
+ *   durable prior/new compliance records. A failure is reported, never thrown, and
+ *   never touches the local record — localStorage is the offline source of truth.
  * DOWN (sign-in): a recorded server opt-out narrows the local record and a server grant
  *   never widens it. An UNSTAMPED row is ignored, because every row in the table today is
  *   the column default (036/124) and a default is not a choice.
@@ -13,18 +14,17 @@
 import { describe, test, expect, beforeEach, vi } from 'vitest';
 
 const authGetUser = vi.fn();
-const updateEq = vi.fn();
+const rpc = vi.fn();
 const selectMaybeSingle = vi.fn();
-const captured = { update: null };
 
 vi.mock('../../src/lib/supabase.js', () => ({
   isConfigured: true,
   supabase: {
     auth: { getUser: (...a) => authGetUser(...a) },
+    rpc: (...a) => rpc(...a),
     from: (table) => {
       expect(table).toBe('profiles');
       return {
-        update: (patch) => { captured.update = patch; return { eq: (col, val) => updateEq(col, val) }; },
         select: (cols) => ({ eq: (col, val) => ({ maybeSingle: () => selectMaybeSingle(cols, col, val) }) }),
       };
     },
@@ -40,9 +40,8 @@ const SIGNED_OUT = { data: { user: null }, error: null };
 
 beforeEach(() => {
   localStorage.clear();
-  captured.update = null;
   authGetUser.mockReset().mockResolvedValue(SIGNED_IN);
-  updateEq.mockReset().mockResolvedValue({ error: null });
+  rpc.mockReset().mockResolvedValue({ data: null, error: null });
   selectMaybeSingle.mockReset().mockResolvedValue({ data: null, error: null });
 });
 
@@ -56,24 +55,47 @@ describe('consentRow — the mirrored shape', () => {
 });
 
 describe('UP — a toggle mirrors to the account', () => {
-  test('writes the stamped row scoped to the signed-in profile', async () => {
+  test('writes the stamped row through the compliance-record RPC', async () => {
     setConsent({ research: false });
     const res = await pushTelemetryConsent(getConsent());
     expect(res.ok).toBe(true);
-    expect(captured.update.telemetry_consent.research).toBe(false);
-    expect(captured.update.telemetry_consent.v).toBe(CONSENT_MODEL_VERSION);
-    expect(updateEq).toHaveBeenCalledWith('id', 'user-1');
+    expect(rpc).toHaveBeenCalledWith('set_my_telemetry_consent', {
+      p_expected_user: 'user-1',
+      p_consent: expect.objectContaining({
+        research: false,
+        v: CONSENT_MODEL_VERSION,
+      }),
+      p_source: 'account',
+    });
+  });
+
+  test('refuses a delayed mirror after the captured owner changes', async () => {
+    const res = await pushTelemetryConsent(getConsent(), 'user-2');
+    expect(res).toEqual({ ok: false, skipped: true, reason: 'auth_session_changed' });
+    expect(rpc).not.toHaveBeenCalled();
   });
 
   test('a signed-out user is a skip, not a failure, and writes nothing', async () => {
     authGetUser.mockResolvedValue(SIGNED_OUT);
     const res = await pushTelemetryConsent(getConsent());
     expect(res).toEqual({ ok: true, skipped: true });
-    expect(captured.update).toBe(null);
+    expect(rpc).not.toHaveBeenCalled();
+  });
+
+  test('a signed-in mirror surfaces auth lookup failures instead of silently skipping', async () => {
+    authGetUser.mockRejectedValueOnce(new Error('offline'));
+    await expect(pushTelemetryConsent(getConsent(), 'user-1')).resolves.toEqual({
+      ok: false, skipped: true, reason: 'auth_lookup_failed',
+    });
+    authGetUser.mockResolvedValueOnce({ data: { user: null }, error: new Error('token check failed') });
+    await expect(pushTelemetryConsent(getConsent(), 'user-1')).resolves.toEqual({
+      ok: false, skipped: true, reason: 'auth_lookup_failed',
+    });
+    expect(rpc).not.toHaveBeenCalled();
   });
 
   test('a rejected write reports ok:false and leaves the local record alone', async () => {
-    updateEq.mockResolvedValue({ error: { message: 'rls denied' } });
+    rpc.mockResolvedValue({ error: { message: 'rls denied' } });
     setConsent({ research: false });
     const res = await pushTelemetryConsent(getConsent());
     expect(res.ok).toBe(false);
@@ -82,7 +104,7 @@ describe('UP — a toggle mirrors to the account', () => {
   });
 
   test('a thrown transport error resolves ok:false rather than rejecting', async () => {
-    updateEq.mockRejectedValue(new Error('offline'));
+    rpc.mockRejectedValue(new Error('offline'));
     await expect(pushTelemetryConsent(getConsent())).resolves.toEqual({ ok: false, reason: 'offline' });
   });
 });

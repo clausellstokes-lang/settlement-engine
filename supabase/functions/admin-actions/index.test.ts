@@ -19,7 +19,8 @@
  * NOTE: authored without a local Deno runtime — verified in CI. The env vars below
  * must be set before importing index.ts (the module reads them at load).
  */
-import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { assert, assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import type { MailAdapter, MailMessage } from '../_shared/mailAdapter.ts';
 
 Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
 Deno.env.set('SUPABASE_ANON_KEY', 'anon_dummy');
@@ -809,5 +810,352 @@ Deno.test('a DEVELOPER passes the SAME two-key gate as an admin (action-bound, n
     { userClient: makeUserClient({ id: 'dev1', email: 'dev@x.com' }), adminClient: stub.adminClient },
   );
   assertEquals(res.status, 200); // developer + valid two-key → the ban RPC runs
-  assertEquals(stub.rpc.some((c) => c.fn === 'set_account_banned'), true);
+  assertEquals(stub.rpc.some((c) => c.fn === 'set_account_banned_with_message'), true);
+});
+
+// ── Operator Messages (194) ─────────────────────────────────────────────────
+
+function makeOperatorAdminClient(options: {
+  callerRole?: string;
+  canEmail?: boolean;
+  failRpc?: string;
+} = {}) {
+  const calls: Array<{ fn: string; args: Record<string, unknown> }> = [];
+  const sequence: string[] = [];
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    from: (table: string) => {
+      if (table !== 'profiles') throw new Error(`unexpected table ${table}`);
+      return {
+        select: (columns: string) => ({
+          eq: () => ({
+            single: () => Promise.resolve({
+              data: columns === 'role, email'
+                ? { role: options.callerRole ?? 'admin', email: 'operator@example.com' }
+                : { email: 'target@example.com' },
+              error: null,
+            }),
+          }),
+        }),
+      };
+    },
+    auth: {
+      admin: {
+        updateUserById: () => {
+          sequence.push('auth:updateUserById');
+          return Promise.resolve({ error: null });
+        },
+      },
+    },
+    rpc: (fn: string, args: Record<string, unknown>) => {
+      calls.push({ fn, args });
+      sequence.push(`rpc:${fn}`);
+      if (options.failRpc === fn) {
+        return Promise.resolve({ data: null, error: { message: 'database rejected action' } });
+      }
+      if (fn === 'can_email_user') {
+        return Promise.resolve({ data: options.canEmail ?? true, error: null });
+      }
+      if (fn === 'get_or_mint_unsubscribe_token') {
+        return Promise.resolve({ data: '11111111-1111-4111-8111-111111111111', error: null });
+      }
+      if (fn === 'create_operator_direct_message') {
+        return Promise.resolve({ data: { message_id: 'message-direct' }, error: null });
+      }
+      if (fn === 'issue_warning_with_message') {
+        return Promise.resolve({ data: { warning_id: 'warning-1', message_id: 'message-warning' }, error: null });
+      }
+      if (fn === 'set_account_banned_with_message') {
+        return Promise.resolve({ data: { banned: true, message_id: 'message-ban' }, error: null });
+      }
+      if (fn === 'queue_operator_broadcast') {
+        return Promise.resolve({ data: { message_id: 'message-broadcast', send_after: '2026-08-02T12:05:00Z', audience_count: 12 }, error: null });
+      }
+      if (fn === 'list_operator_broadcasts') {
+        return Promise.resolve({ data: [{ id: 'message-broadcast', subject: 'Letter' }], error: null });
+      }
+      if (fn === 'cancel_operator_broadcast') {
+        return Promise.resolve({ data: { canceled: true }, error: null });
+      }
+      return Promise.resolve({ data: true, error: null });
+    },
+  };
+  return { client, calls, sequence, adminClient: () => client };
+}
+
+function recordingMailer(sequence: string[], failureMessage: string | null = null) {
+  const messages: MailMessage[] = [];
+  return {
+    messages,
+    factory: (): MailAdapter => ({
+      id: 'test-provider',
+      configured: true,
+      from: 'operator@example.com',
+      token: 'test-token',
+      supportsIdempotency: false,
+      send: (message: MailMessage) => {
+        sequence.push('mail:send');
+        messages.push(message);
+        return failureMessage
+          ? Promise.reject(new Error(failureMessage))
+          : Promise.resolve({ id: 'provider-message-1' });
+      },
+    }),
+  };
+}
+
+Deno.test('direct service notice commits Account Message before best-effort provider mail and one receipt', async () => {
+  const stub = makeOperatorAdminClient();
+  const mailer = recordingMailer(stub.sequence);
+  const res = await handleAdminActions(
+    req({
+      action: 'send_operator_message',
+      userId: 'target-1',
+      messageClass: 'service',
+      subject: 'Account notice',
+      messageBody: 'Plain operator body',
+      messageTemplate: 'moderation_notice',
+      actor_user: 'smuggled',
+    }, { Authorization: 'Bearer jwt' }),
+    {
+      userClient: makeUserClient({ id: 'admin-1', email: 'admin@example.com' }),
+      adminClient: stub.adminClient,
+      mailAdapter: mailer.factory,
+    },
+  );
+  assertEquals(res.status, 200);
+  const create = stub.calls.find((call) => call.fn === 'create_operator_direct_message');
+  assertEquals(create?.args, {
+    p_actor: 'admin-1',
+    p_target: 'target-1',
+    p_class: 'service',
+    p_subject: 'Account notice',
+    p_body: 'Plain operator body',
+    p_template: 'moderation_notice',
+  });
+  assert(stub.sequence.indexOf('rpc:create_operator_direct_message') < stub.sequence.indexOf('mail:send'));
+  assert(stub.sequence.indexOf('mail:send') < stub.sequence.indexOf('rpc:record_operator_message_email_result'));
+  const receipt = stub.calls.find((call) => call.fn === 'record_operator_message_email_result');
+  assertEquals(receipt?.args.p_status, 'sent');
+  assertEquals(stub.calls.some((call) => call.fn === 'write_audit'), false);
+});
+
+Deno.test('direct announcement persists but opt-out skips provider mail and records skipped', async () => {
+  const stub = makeOperatorAdminClient({ canEmail: false });
+  const mailer = recordingMailer(stub.sequence);
+  const res = await handleAdminActions(
+    req({
+      action: 'send_operator_message', userId: 'target-1',
+      messageClass: 'announcement', subject: 'News', messageBody: 'Optional news',
+      messageTemplate: 'custom_announcement',
+    }, { Authorization: 'Bearer jwt' }),
+    {
+      userClient: makeUserClient({ id: 'admin-1', email: 'admin@example.com' }),
+      adminClient: stub.adminClient,
+      mailAdapter: mailer.factory,
+    },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(mailer.messages.length, 0);
+  const receipt = stub.calls.find((call) => call.fn === 'record_operator_message_email_result');
+  assertEquals(receipt?.args.p_status, 'skipped');
+  assertEquals(receipt?.args.p_failure_reason, 'announcement_opt_out');
+});
+
+Deno.test('direct database failure never touches the external mail provider', async () => {
+  const stub = makeOperatorAdminClient({ failRpc: 'create_operator_direct_message' });
+  const mailer = recordingMailer(stub.sequence);
+  const res = await handleAdminActions(
+    req({
+      action: 'send_operator_message', userId: 'target-1',
+      messageClass: 'service', subject: 'Notice', messageBody: 'Body',
+      messageTemplate: 'custom_service',
+    }, { Authorization: 'Bearer jwt' }),
+    {
+      userClient: makeUserClient({ id: 'admin-1' }),
+      adminClient: stub.adminClient,
+      mailAdapter: mailer.factory,
+    },
+  );
+  assertEquals(res.status, 500);
+  assertEquals(mailer.messages.length, 0);
+  assertEquals(stub.calls.some((call) => call.fn === 'record_operator_message_email_result'), false);
+});
+
+Deno.test('direct notices reject unknown templates and template/class mismatches before any RPC', async () => {
+  for (const message of [
+    { messageTemplate: 'invented_template', messageClass: 'service' },
+    { messageTemplate: 'moderation_notice', messageClass: 'announcement' },
+  ]) {
+    const stub = makeOperatorAdminClient();
+    const mailer = recordingMailer(stub.sequence);
+    const res = await handleAdminActions(
+      req({
+        action: 'send_operator_message', userId: 'target-1',
+        subject: 'Notice', messageBody: 'Body', ...message,
+      }, { Authorization: 'Bearer jwt' }),
+      {
+        userClient: makeUserClient({ id: 'admin-1' }),
+        adminClient: stub.adminClient,
+        mailAdapter: mailer.factory,
+      },
+    );
+    assertEquals(res.status, 400);
+    assertEquals(stub.calls.length, 0);
+    assertEquals(mailer.messages.length, 0);
+  }
+});
+
+Deno.test('direct provider failure is redacted and persists only the closed provider_error reason', async () => {
+  const stub = makeOperatorAdminClient();
+  const mailer = recordingMailer(
+    stub.sequence,
+    'provider rejected target@example.com while sending',
+  );
+  const logs: string[] = [];
+  const originalConsoleError = console.error;
+  console.error = (...args: unknown[]) => logs.push(args.map(String).join(' '));
+  try {
+    const res = await handleAdminActions(
+      req({
+        action: 'send_operator_message', userId: 'target-1',
+        messageClass: 'service', subject: 'Notice', messageBody: 'Body',
+        messageTemplate: 'custom_service',
+      }, { Authorization: 'Bearer jwt' }),
+      {
+        userClient: makeUserClient({ id: 'admin-1' }),
+        adminClient: stub.adminClient,
+        mailAdapter: mailer.factory,
+      },
+    );
+    assertEquals(res.status, 200);
+    const response = await res.json();
+    assertEquals(response.emailReason, 'provider_error');
+    const receipt = stub.calls.find((call) =>
+      call.fn === 'record_operator_message_email_result'
+    );
+    assertEquals(receipt?.args.p_status, 'failed');
+    assertEquals(receipt?.args.p_failure_reason, 'provider_error');
+    assertEquals(logs.some((line) => line.includes('target@example.com')), false);
+    assert(logs.some((line) => line.includes('[email]')));
+    assert(logs.some((line) => line.includes('mail_provider_send')));
+  } finally {
+    console.error = originalConsoleError;
+  }
+});
+
+Deno.test('warning atomically creates its system notice/audit before transactional mail, even when client asks not to notify', async () => {
+  const stub = makeOperatorAdminClient({ callerRole: 'support' });
+  const mailer = recordingMailer(stub.sequence);
+  const res = await handleAdminActions(
+    req({
+      action: 'issue_warning', userId: 'target-1', severity: 'minor',
+      reason: 'Be civil', metadata: { notify: false },
+    }, { Authorization: 'Bearer jwt' }),
+    {
+      userClient: makeUserClient({ id: 'support-1' }),
+      adminClient: stub.adminClient,
+      mailAdapter: mailer.factory,
+    },
+  );
+  assertEquals(res.status, 200);
+  const warning = stub.calls.find((call) => call.fn === 'issue_warning_with_message');
+  assertEquals(warning?.args.p_actor, 'support-1');
+  assertEquals(warning?.args.p_target, 'target-1');
+  assert(stub.sequence.indexOf('rpc:issue_warning_with_message') < stub.sequence.indexOf('mail:send'));
+  assertEquals(mailer.messages.length, 1);
+  assertEquals(stub.calls.some((call) => call.fn === 'write_audit'), false);
+});
+
+Deno.test('ban atomically commits its service notice/audit before session revocation and mail', async () => {
+  const stub = makeOperatorAdminClient();
+  const mailer = recordingMailer(stub.sequence);
+  const res = await handleAdminActions(
+    req({
+      action: 'set_account_banned', userId: 'target-1', enabled: false,
+      reason: 'Repeated abuse', metadata: { notify: false }, ...confirmFor('target-1'),
+    }, twoKeyHeaders()),
+    {
+      userClient: makeUserClient({ id: 'admin-1' }),
+      adminClient: stub.adminClient,
+      mailAdapter: mailer.factory,
+    },
+  );
+  assertEquals(res.status, 200);
+  const commitAt = stub.sequence.indexOf('rpc:set_account_banned_with_message');
+  assert(commitAt < stub.sequence.indexOf('auth:updateUserById'));
+  assert(commitAt < stub.sequence.indexOf('mail:send'));
+  assertEquals(mailer.messages.length, 1);
+  assertEquals(stub.calls.some((call) => call.fn === 'write_audit'), false);
+});
+
+Deno.test('broadcast guard rejects wrong phrase before RPC and exact phrase queues the fixed all audience', async () => {
+  let stub = makeOperatorAdminClient();
+  let res = await handleAdminActions(
+    req({
+      action: 'queue_operator_broadcast', audience: 'all',
+      messageClass: 'announcement', subject: 'News', messageBody: 'Letter',
+      confirm: { typedBroadcastPhrase: 'send to all' },
+    }, twoKeyHeaders()),
+    { userClient: makeUserClient({ id: 'admin-1' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(stub.calls.length, 0);
+
+  stub = makeOperatorAdminClient();
+  res = await handleAdminActions(
+    req({
+      action: 'queue_operator_broadcast', audience: 'all',
+      messageClass: 'announcement', subject: 'News', messageBody: 'Letter',
+      messageTemplate: 'product_update',
+      confirm: { typedBroadcastPhrase: 'SEND TO ALL' },
+    }, twoKeyHeaders()),
+    { userClient: makeUserClient({ id: 'admin-1' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  const queue = stub.calls.find((call) => call.fn === 'queue_operator_broadcast');
+  assertEquals(queue?.args.p_actor, 'admin-1');
+  assertEquals(queue?.args.p_audience, 'all');
+  assertEquals(typeof queue?.args.p_two_key_amr_age_s, 'number');
+});
+
+Deno.test('broadcast rejects a registered template with the wrong class before queue RPC', async () => {
+  const stub = makeOperatorAdminClient();
+  const res = await handleAdminActions(
+    req({
+      action: 'queue_operator_broadcast', audience: 'all',
+      messageClass: 'service', subject: 'News', messageBody: 'Letter',
+      messageTemplate: 'product_update',
+      confirm: { typedBroadcastPhrase: 'SEND TO ALL' },
+    }, twoKeyHeaders()),
+    { userClient: makeUserClient({ id: 'admin-1' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 400);
+  assertEquals(stub.calls.length, 0);
+});
+
+Deno.test('broadcast list and cancellation remain highest-role RPC routes without another delivery trigger', async () => {
+  const stub = makeOperatorAdminClient();
+  let res = await handleAdminActions(
+    req({ action: 'list_operator_broadcasts' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin-1' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  assertEquals((await res.json()).broadcasts.length, 1);
+
+  res = await handleAdminActions(
+    req({ action: 'cancel_operator_broadcast', messageId: 'message-broadcast' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin-1' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  const cancel = stub.calls.find((call) => call.fn === 'cancel_operator_broadcast');
+  assertEquals(cancel?.args, { p_actor: 'admin-1', p_message_id: 'message-broadcast' });
+
+  const support = makeOperatorAdminClient({ callerRole: 'support' });
+  res = await handleAdminActions(
+    req({ action: 'list_operator_broadcasts' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'support-1' }), adminClient: support.adminClient },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(support.calls.length, 0);
 });

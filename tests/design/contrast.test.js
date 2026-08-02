@@ -49,6 +49,7 @@ import { resolveTownMapStyle, ILLUSTRATED_STYLE_ID, TOWN_MAP_STYLE_IDS } from '.
 import { groundDressOps } from '../../src/domain/townMap/groundDress.js';
 import { buildTownMapModel } from '../../src/domain/townMap/index.js';
 import { makeTownFixture } from '../fixtures/townMapFixtures.js';
+import { semantic } from '../../src/design/tokens.js';
 
 // ── WCAG relative-luminance contrast ─────────────────────────────────────────
 function channel(c) {
@@ -73,6 +74,12 @@ function ratio(a, b) {
 
 const AA_TEXT = 4.5; // normal-size text
 const AA_UI = 3.0;   // UI component boundary (1.4.11)
+
+describe('Operator unread badge legibility (WCAG AA 4.5:1)', () => {
+  test('white numeral clears AA on the named chrome-alert token', () => {
+    expect(ratio(swatch.white, semantic.operatorAlert)).toBeGreaterThanOrEqual(AA_TEXT);
+  });
+});
 
 describe('Button variant text legibility (WCAG AA 4.5:1)', () => {
   // Each pair is the label foreground over the variant's resting fill.

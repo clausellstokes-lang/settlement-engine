@@ -23,7 +23,7 @@
  */
 
 import { describe, test, expect, afterEach, beforeEach, vi } from 'vitest';
-import { render, cleanup, fireEvent, within } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -112,9 +112,7 @@ beforeEach(() => {
 
 async function mountDataSection() {
   const AccountPage = (await import('../../src/components/AccountPage.jsx')).default;
-  render(<AccountPage onNavigateAdmin={() => {}} />);
-  const nav = document.querySelector('nav[aria-label="Account settings"]');
-  fireEvent.click(within(nav).getByRole('button', { name: 'Data' }));
+  render(<AccountPage routeSection="data" onNavigateAdmin={() => {}} />);
   expect(dataSectionProps).not.toBeNull();
   return dataSectionProps;
 }

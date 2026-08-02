@@ -112,3 +112,14 @@ THE PROMISE) → the pushes (the chair confirms with the owner at the moment of
 each push, per standing git discipline). The walk and the legal packet remain
 the owner's own. Sol's obligation to this phase is exactly: build dark, keep
 every dormancy fence golden-pinned, and leave the tuning tables honest.
+
+## §5 BANKED FOR THE CONSOLIDATED ADVERSARIAL PASS
+
+Owner order 2026-08-02: after the current full-gate run, bank failures without
+repair, continue implementing the queue, and adjudicate/fix the bank only in the
+adversarial review after the queued build is complete. A banked row is evidence,
+not a waiver: each remains open until that final pass records a verdict.
+
+| ID | Captured after | CONFIRMED evidence | Status |
+|---|---|---|---|
+| SOL-BANK-1 | Operator Messages exact-tree gate | Main Vitest census passed 2,129 files + 1 skipped and 22,581 tests + 54 skipped, then the process exited 1 on five late `EnvironmentTeardownError` reports from `tests/components/navFlowArrows.test.jsx` attempting to load `src/lib/creditLedger.js` after environment teardown. Earlier same-code full gate exited 0 through build, 311-route prerender, and 364/364 dist tests. | OPEN; cause only PLAUSIBLY load-sensitive. Do not isolate or fix until the consolidated adversarial pass. |

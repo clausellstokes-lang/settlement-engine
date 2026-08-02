@@ -75,8 +75,8 @@ describe('bounded migration rehearsal plan', () => {
 
   it('covers the exact applied-head to repository-head gap in semantic waves', () => {
     expect(plan.appliedHead).toBe(121);
-    expect(plan.repoHead).toBe(193);
-    expect(plan.pendingCount).toBe(72);
+    expect(plan.repoHead).toBe(194);
+    expect(plan.pendingCount).toBe(73);
     expect(plan.waves.map(({ from, to }) => [from, to])).toEqual([
       [122, 136],
       [137, 156],
@@ -90,17 +90,18 @@ describe('bounded migration rehearsal plan', () => {
       [189, 190],
       [191, 192],
       [193, 193],
+      [194, 194],
     ]);
     expect(MIGRATION_WAVES.at(-1).to).toBe(MIGRATION_TRAIN_REPO_HEAD);
 
     const covered = plan.waves.flatMap((wave) =>
       wave.migrations.map((migration) => migration.number));
     expect(covered).toEqual(
-      Array.from({ length: 72 }, (_, index) => 122 + index),
+      Array.from({ length: 73 }, (_, index) => 122 + index),
     );
     expect(new Set(covered).size).toBe(covered.length);
 
-    expect(plan.waves.at(-2)).toMatchObject({
+    expect(plan.waves.at(-3)).toMatchObject({
       id: 'surveyor-probe-and-tier-price',
       from: 191,
       to: 192,
@@ -112,7 +113,7 @@ describe('bounded migration rehearsal plan', () => {
         name: 'spend_credits',
       }],
     });
-    expect(plan.waves.at(-1)).toMatchObject({
+    expect(plan.waves.at(-2)).toMatchObject({
       id: 'bilateral-user-route-command',
       from: 193,
       to: 193,
@@ -122,6 +123,30 @@ describe('bounded migration rehearsal plan', () => {
       }, {
         kind: 'function',
         name: 'assert_create_route_half',
+      }],
+    });
+    expect(plan.waves.at(-1)).toMatchObject({
+      id: 'operator-messages-consent-and-courier',
+      from: 194,
+      to: 194,
+      expectedObjects: [{
+        kind: 'table',
+        name: 'public.operator_messages',
+      }, {
+        kind: 'table',
+        name: 'public.operator_message_receipts',
+      }, {
+        kind: 'table',
+        name: 'public.operator_message_delivery_jobs',
+      }, {
+        kind: 'table',
+        name: 'public.consent_change_records',
+      }, {
+        kind: 'function',
+        name: 'claim_operator_message_recipient',
+      }, {
+        kind: 'function',
+        name: 'list_my_operator_messages',
       }],
     });
   });
@@ -199,8 +224,8 @@ describe('bounded migration rehearsal plan', () => {
     const numbers = staged.copied.map((name) => Number(name.split('_')[0]));
 
     expect(snapshot).toMatchObject({
-      repoHead: 193,
-      migrationCount: 193,
+      repoHead: 194,
+      migrationCount: 194,
       configSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
       workspaceSourceSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
     });
@@ -318,7 +343,7 @@ describe('clone admission is positive and source-bound', () => {
     expect(`${result.stdout}${result.stderr}`).not.toContain('super-secret');
     expect(JSON.parse(result.stdout)).toMatchObject({
       appliedHead: MIGRATION_TRAIN_BASE_HEAD,
-      repoHead: 193,
+      repoHead: 194,
     });
   });
 });

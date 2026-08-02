@@ -26,6 +26,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Download, AlertTriangle, Upload } from 'lucide-react';
 import { downloadAccountExport, requestAccountDeletion } from '../../lib/accountData.js';
+import { getMyOperatorServiceExport } from '../../lib/operatorMessageExport.js';
 import { saves as savesService } from '../../lib/saves.js';
 import { t } from '../../copy/index.js';
 import { MAX_IMPORT_BYTES } from '../../lib/accountImport.js';
@@ -173,9 +174,12 @@ export default function AccountDataPrivacySection({
         // This is an ownership/data-rights read, never an entitlement-gated
         // content-pack export. It includes archived definitions, every
         // immutable revision, pack lineage, environments, and audit receipts.
-        const archiveResult = await state.exportCustomContentArchive({
-          purpose: 'account-export',
-        });
+        const [archiveResult, serviceRecords] = await Promise.all([
+          state.exportCustomContentArchive({
+            purpose: 'account-export',
+          }),
+          getMyOperatorServiceExport(),
+        ]);
         const customContentArchive =
           archiveResult?.archive || archiveResult || null;
 
@@ -183,7 +187,7 @@ export default function AccountDataPrivacySection({
         if (String(loaded.auth?.user?.id || '') !== String(authUserId || '')) {
           throw new Error('The signed-in account changed while its data was loading.');
         }
-        return { state: loaded, customContentArchive };
+        return { state: loaded, customContentArchive, serviceRecords };
       })
       .finally(() => {
         if (exportAccountStateLoadRef.current?.promise === promise) {
@@ -231,6 +235,7 @@ export default function AccountDataPrivacySection({
         campaigns: loadedAccountState.campaigns || state.campaigns,
         customContent: loadedAccountState.customContent || state.customContent,
         customContentArchive: loadedAccountExport.customContentArchive,
+        serviceRecords: loadedAccountExport.serviceRecords,
       });
       setExported(true);
       setTimeout(() => setExported(false), 2000);
@@ -534,7 +539,9 @@ export default function AccountDataPrivacySection({
             Export my data
           </div>
           <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
-            Download your saved settlements, campaigns, and private custom content as a single JSON file.
+            Download your saved settlements, campaigns, private custom content, received messages,
+            and consent history as JSON. Very large service histories arrive in a second,
+            export-only file so the account file stays safe to import.
           </p>
           {exportError && (
             <div role="alert" style={{ fontSize: FS.xs, color: swatch.danger, marginBottom: SP.sm }}>

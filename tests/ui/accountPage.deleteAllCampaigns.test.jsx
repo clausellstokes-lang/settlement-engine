@@ -6,7 +6,7 @@
  * pins that failed rows remain visible and retryable.
  */
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-import { cleanup, fireEvent, render, within } from '@testing-library/react';
+import { cleanup, render } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -72,9 +72,7 @@ beforeEach(() => {
 
 async function mountDataSection() {
   const AccountPage = (await import('../../src/components/AccountPage.jsx')).default;
-  render(<AccountPage onNavigateAdmin={() => {}} />);
-  const nav = document.querySelector('nav[aria-label="Account settings"]');
-  fireEvent.click(within(nav).getByRole('button', { name: 'Data' }));
+  render(<AccountPage routeSection="data" onNavigateAdmin={() => {}} />);
   expect(dataSectionProps).not.toBeNull();
   return dataSectionProps;
 }

@@ -15,8 +15,8 @@ in `src/lib/analyticsEvents.js`, and carries a class in the parallel `EVENT_CLAS
 Props are coarse by construction — enums, bands, counts, booleans, hashes; never names,
 prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamps).
 
-- **EVENTS_REV:** 11
-- **Events:** 131 total — 127 essential, 4 research
+- **EVENTS_REV:** 12
+- **Events:** 130 total — 126 essential, 4 research
 - **Research class** requires explicit opt-in (built + mirrored only under `research` consent, re-clamped server-side).
 - **Enriched props** below are the actual top-level keys the bound extractor emits (code-derived); events built inline at the call site show `—` and are documented in the taxonomy.
 
@@ -198,12 +198,11 @@ prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamp
 | `LIBRARY_VIEWED` | `library_viewed` | essential | — |
 | `SESSION_STARTED` | `session_started` | essential | — |
 
-## v2: research / consent
+## v2: research
 
 | Constant | Event | Class | Enriched props (code-derived) |
 |---|---|---|---|
 | `SETTLEMENT_FINGERPRINT_CAPTURED` | `settlement_fingerprint_captured` | research | — |
-| `CONSENT_UPDATED` | `consent_updated` | essential | — |
 
 ## Surveyor S1: the analyst (§5 eval metrics — coarse, id-free, essential)
 

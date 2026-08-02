@@ -3,8 +3,8 @@
  * ("bracket") settings layout: a rail of sections on the left (AccountNav), the
  * active section's panel on the right. Loads to Profile first.
  *
- * Sections (rail order): Profile · Security · Subscription · Support · Data ·
- * Preferences. AccountPage stays the state owner — every profile/name/billing/
+ * Sections (rail order): Profile · Security · Subscription · Messages · Support
+ * · Data · Preferences. AccountPage stays the state owner — profile/name/billing/
  * purchase useState + handler lives here and is passed to the same section
  * components; the rail only switches which panel is mounted. Security groups the
  * sign-in/security panel with the account-recovery questions. Preferences hosts
@@ -30,7 +30,7 @@ import useIsMobile from '../hooks/useIsMobile.js';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 import Button from './primitives/Button.jsx';
-import AccountNav from './account/AccountNav.jsx';
+import AccountNav, { ACCOUNT_SECTIONS } from './account/AccountNav.jsx';
 import { useAccountSurveyorGate } from './account/useAccountSurveyorGate.js';
 import AccountProfileSection from './account/AccountProfileSection.jsx';
 import AccountSecuritySection from './account/AccountSecuritySection.jsx';
@@ -43,9 +43,12 @@ import { ReferralCard, RedeemBlock } from './account/ReferralRedeemBlocks.jsx';
 import AccountSupportSection from './account/AccountSupportSection.jsx';
 import AccountDataPrivacySection from './account/AccountDataPrivacySection.jsx';
 import AccountEmailPreferencesSection from './account/AccountEmailPreferencesSection.jsx';
+import AccountPreferencesSection from './account/AccountPreferencesSection.jsx';
 import AccountAiKeysSection from './account/AccountAiKeysSection.jsx';
+import AccountMessagesSection from './account/AccountMessagesSection.jsx';
+import { useOperatorMessages } from './account/OperatorMessagesProvider.jsx';
 
-export default function AccountPage({ onNavigateAdmin }) {
+export default function AccountPage({ onNavigateAdmin, routeSection, routeMessageId }) {
   const auth = useStore(s => s.auth);
   const creditBalance = useStore(s => s.creditBalance);
   const isElevated = useStore(s => s.isElevated());
@@ -66,13 +69,24 @@ export default function AccountPage({ onNavigateAdmin }) {
   const activeSaves = activeSaveCount(savedSettlements);
   const inactiveSaves = inactiveRetentionCount(savedSettlements);
   const isMobile = useIsMobile();
+  const {
+    messages: operatorMessages,
+    unreadCount: operatorUnreadCount,
+    loading: operatorMessagesLoading,
+  } = useOperatorMessages();
 
-  // Left-nav section selection. Profile loads first. Panels are mounted on
+  // Left-nav section selection is URL-owned so direct links and Back/Forward
+  // remain truthful. Profile is the fail-closed default. Panels mount on
   // demand — switching away resets a section's in-progress form (a self-
   // contained settings task), which is the expected settings-nav behavior; the
   // section loaders (Security/Recovery/Tickets) are idempotent reads, so a
   // re-entry re-runs them harmlessly.
-  const [section, setSection] = useState('profile');
+  const requestedSectionAllowed = ACCOUNT_SECTIONS.some(row => row.id === routeSection)
+    && (routeSection !== 'ai' || surveyorEntitled);
+  const section = requestedSectionAllowed ? routeSection : 'profile';
+  const setSection = (nextSection) => {
+    navigate('account', { search: `?section=${encodeURIComponent(nextSection)}`, scroll: false });
+  };
   const panelRef = useRef(null);
   // Move focus into the panel on section change so keyboard/SR users land in
   // the freshly-revealed content rather than being stranded on the rail.
@@ -119,7 +133,6 @@ export default function AccountPage({ onNavigateAdmin }) {
   const emailNotifications = profileDraft.emailNotifications;
   const modelPreference = profileDraft.modelPreference;
   const setAvatarInput = (avatarInput) => setProfileDraft(draft => ({ ...draft, avatarInput }));
-  const setEmailNotifications = (emailNotifications) => setProfileDraft(draft => ({ ...draft, emailNotifications }));
   const setModelPreference = (modelPreference) => setProfileDraft(draft => ({ ...draft, modelPreference }));
 
   const handleSaveName = async () => {
@@ -295,6 +308,7 @@ export default function AccountPage({ onNavigateAdmin }) {
     profile: 'Profile',
     security: 'Security',
     subscription: 'Subscription',
+    messages: 'Messages',
     support: 'Customer Support',
     data: 'Data and privacy',
     preferences: 'Preferences',
@@ -309,7 +323,6 @@ export default function AccountPage({ onNavigateAdmin }) {
         <AccountProfileSection
           auth={auth}
           avatarInput={avatarInput} setAvatarInput={setAvatarInput}
-          emailNotifications={emailNotifications} setEmailNotifications={setEmailNotifications}
           modelPreference={modelPreference} setModelPreference={setModelPreference}
           editingName={editingName} setEditingName={setEditingName}
           nameInput={nameInput} setNameInput={setNameInput}
@@ -355,8 +368,24 @@ export default function AccountPage({ onNavigateAdmin }) {
         </div>
       )}
 
+      {section === 'messages' && (
+        <AccountMessagesSection
+          onReply={(message) => navigate('account', {
+            search: `?section=support&message=${encodeURIComponent(message.id)}`,
+            scroll: false,
+          })}
+        />
+      )}
+
       {/* Customer Support (FAQ-first, then tickets). */}
-      {section === 'support' && <AccountSupportSection auth={auth} />}
+      {section === 'support' && (
+        <AccountSupportSection
+          auth={auth}
+          operatorMessage={operatorMessagesLoading ? null : operatorMessages.find(message => (
+            message.id === routeMessageId && message.kind === 'direct'
+          ))}
+        />
+      )}
 
       {/* Data & Privacy (import, export, bulk delete, deletion request, consent). */}
       {section === 'data' && (
@@ -373,8 +402,13 @@ export default function AccountPage({ onNavigateAdmin }) {
         />
       )}
 
-      {/* Preferences — OUR per-category email opt-out (migration 126). */}
-      {section === 'preferences' && <AccountEmailPreferencesSection />}
+      {/* Product defaults + OUR durable per-category email opt-out. */}
+      {section === 'preferences' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: space['space-7'] }}>
+          <AccountPreferencesSection />
+          <AccountEmailPreferencesSection />
+        </div>
+      )}
 
       {/* AI provider & keys — the BYOK MANAGEMENT SURFACE (#29): provider/key/verify,
           per-task model choice, key-health, usage caps + pause, and the lazy meter. */}
@@ -400,6 +434,7 @@ export default function AccountPage({ onNavigateAdmin }) {
           setSection={setSection}
           isElevated={isElevated}
           showAiKeys={surveyorEntitled}
+          unreadCount={operatorUnreadCount}
           onNavigateAdmin={onNavigateAdmin}
         />
         {/* Content panel. tabIndex={-1} + aria-label make it a focusable, named

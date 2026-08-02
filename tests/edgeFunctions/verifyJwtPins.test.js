@@ -54,6 +54,9 @@ const SELF_AUTH_FALSE = new Set([
   // migration 180 — cron-invoked durable payment-refund recovery, authenticated
   // by PAYMENT_REFUND_CRON_SECRET rather than a user JWT.
   'payment-refund-worker',
+  // migration 194 — disabled-by-default operator-message delivery worker,
+  // authenticated by OPERATOR_MESSAGE_CRON_SECRET when deliberately activated.
+  'operator-message-worker',
   // og-image — the callers ARE unfurl bots (no JWT); it reads only already-public
   // gallery data and takes no write path. The platform gate would 401 every social
   // preview. See supabase/functions/og-image/index.ts.
@@ -67,6 +70,9 @@ const SELF_AUTH_FALSE = new Set([
   // uptime monitors / the ops probe with no JWT; it reads no user data and takes
   // no write path. See supabase/functions/health/index.ts.
   'health',
+  // Public token-bearing opt-out endpoint. GET confirms; POST can only disable
+  // an allowed category through unsubscribe_via_token.
+  'unsubscribe',
 ]);
 
 describe('every edge function pins verify_jwt explicitly in config.toml', () => {

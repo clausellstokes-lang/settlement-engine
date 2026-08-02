@@ -5,8 +5,8 @@
  * kept out of the component so they're unit-testable and free of React:
  *
  *   • buildAccountExport(state) — assemble a portable JSON snapshot of the
- *     user's OWN data (profile basics, settlements, campaigns, and private
- *     custom content). Pure;
+ *     user's OWN data (profile basics, settlements, campaigns, private custom
+ *     content, and export-only service records). Pure;
  *     takes a plain store snapshot so it's trivial to test and never touches
  *     the network.
  *   • downloadAccountExport(state) — wrap buildAccountExport in a browser
@@ -60,6 +60,7 @@ const ACCOUNT_EXPORT_PREFLIGHT_SCHEMA_VERSION = 1;
  *   settlements:any[],
  *   campaigns:any[],
  *   customContentArchive:Record<string, any>|null,
+ *   serviceRecords:{schemaVersion:number,importable:false,operatorMessages:any[],consentChanges:any[]},
  *   preflight:Record<string, any>,
  * }} AccountExportPayload
  */
@@ -173,6 +174,15 @@ function serializedAccountExportByteLength(value) {
   return accountTransferByteLength(JSON.stringify(value, null, 2));
 }
 
+function emptyServiceRecordsLike(serviceRecords) {
+  return {
+    schemaVersion: Number(serviceRecords?.schemaVersion) || 1,
+    importable: false,
+    operatorMessages: [],
+    consentChanges: [],
+  };
+}
+
 /**
  * Construct and prove an account-transfer artifact without downloading it.
  *
@@ -187,6 +197,7 @@ function serializedAccountExportByteLength(value) {
  *   campaigns?: any[],
  *   customContent?: Record<string, any[]>,
  *   customContentArchive?: unknown,
+ *   serviceRecords?: unknown,
  * }} state
  * @returns {{ok:true, value:AccountExportPayload,
  *   diagnostics:Readonly<Record<string, unknown>>}
@@ -199,6 +210,28 @@ export function preflightAccountExport(state = {}) {
     : [];
   const campaigns = Array.isArray(state.campaigns) ? state.campaigns : [];
   const contentCount = customContentCount(state.customContent);
+  const parsedServiceRecords = state.serviceRecords
+    && typeof state.serviceRecords === 'object'
+    && !Array.isArray(state.serviceRecords)
+    ? /** @type {Record<string, unknown>} */ (state.serviceRecords)
+    : null;
+  const serviceRecords = parsedServiceRecords
+    ? {
+        schemaVersion: Number(parsedServiceRecords.schemaVersion) || 1,
+        importable: false,
+        operatorMessages: Array.isArray(parsedServiceRecords.operatorMessages)
+          ? parsedServiceRecords.operatorMessages
+          : [],
+        consentChanges: Array.isArray(parsedServiceRecords.consentChanges)
+          ? parsedServiceRecords.consentChanges
+          : [],
+      }
+    : {
+        schemaVersion: 1,
+        importable: false,
+        operatorMessages: [],
+        consentChanges: [],
+      };
   const errors = [];
 
   if (settlements.length > MAX_IMPORT_SETTLEMENTS) {
@@ -287,6 +320,8 @@ export function preflightAccountExport(state = {}) {
       receiptMappableBindingRevisions:
         contentReferences.packMappedRevisions,
       embeddedBindingRevisions: contentReferences.embeddedRevisions,
+      operatorMessages: serviceRecords.operatorMessages.length,
+      consentChanges: serviceRecords.consentChanges.length,
     },
     customContentArchive: customContentArchive
       ? {
@@ -303,16 +338,26 @@ export function preflightAccountExport(state = {}) {
     settlements,
     campaigns,
     customContentArchive,
+    serviceRecords,
     preflight,
   });
   // downloadAccountExport writes this exact pretty-printed representation.
   // Measuring a compact surrogate here could approve a file whose actual
   // browser File.size later exceeds the import cap.
-  const envelopeBytes = serializedAccountExportByteLength(payload);
+  const downloadBytes = serializedAccountExportByteLength(payload);
+  // Service records are export-only and may grow for the lifetime of an
+  // account. They must never consume the hostile-import envelope budget or
+  // prevent the owner exporting otherwise-restorable product state. The
+  // downloader splits them into a second complete JSON file when necessary.
+  const restorablePayload = {
+    ...payload,
+    serviceRecords: emptyServiceRecordsLike(serviceRecords),
+  };
+  const envelopeBytes = serializedAccountExportByteLength(restorablePayload);
   if (envelopeBytes > MAX_IMPORT_BYTES) {
     errors.push({
       code: 'account_export_envelope_limit_exceeded',
-      message: `This account export is ${envelopeBytes} bytes; one restorable file supports at most ${MAX_IMPORT_BYTES} bytes.`,
+      message: `This account's restorable data is ${envelopeBytes} bytes; one importable file supports at most ${MAX_IMPORT_BYTES} bytes.`,
     });
   }
 
@@ -320,6 +365,7 @@ export function preflightAccountExport(state = {}) {
     schemaVersion: ACCOUNT_EXPORT_PREFLIGHT_SCHEMA_VERSION,
     ok: errors.length === 0,
     envelopeBytes,
+    downloadBytes,
     archiveBytes,
     counts: Object.freeze({ ...preflight.counts }),
     errors: Object.freeze(errors.map(error => Object.freeze(error))),
@@ -346,6 +392,7 @@ export function preflightAccountExport(state = {}) {
  *   campaigns?: any[],
  *   customContent?: Record<string, any[]>,
  *   customContentArchive?: unknown,
+ *   serviceRecords?: unknown,
  * }} state
  */
 export function buildAccountExport(state = {}) {
@@ -354,6 +401,44 @@ export function buildAccountExport(state = {}) {
     throw new AccountExportPreflightError(preflight.diagnostics);
   }
   return preflight.value;
+}
+
+/**
+ * Build the actual download set. Ordinary accounts keep the familiar single
+ * JSON. If export-only service history alone would cross the import safety cap,
+ * the restorable account core and the complete non-importable service history
+ * become two clearly named JSON files. No records are truncated.
+ */
+export function planAccountExportDownloads(state = {}) {
+  const payload = buildAccountExport(state);
+  const accountFilename = exportFilename(payload.profile?.email);
+  const combinedJson = JSON.stringify(payload, null, 2);
+  if (accountTransferByteLength(combinedJson) <= MAX_IMPORT_BYTES) {
+    return [{ filename: accountFilename, json: combinedJson, importable: true }];
+  }
+
+  const serviceFilename = accountFilename.replace(/\.json$/, '-service-records.json');
+  const accountPayload = {
+    ...payload,
+    serviceRecords: emptyServiceRecordsLike(payload.serviceRecords),
+  };
+  const accountJson = JSON.stringify(accountPayload, null, 2);
+  if (accountTransferByteLength(accountJson) > MAX_IMPORT_BYTES) {
+    // This should already have been rejected by preflight; retain a local
+    // assertion so future envelope edits cannot make the planner lie.
+    throw new Error('The restorable account export exceeds its import safety limit.');
+  }
+  const serviceJson = JSON.stringify({
+    format: 'settlementforge.operator-service-records',
+    formatVersion: 1,
+    exportedAt: payload.exportedAt,
+    account: { email: payload.profile?.email || null },
+    serviceRecords: payload.serviceRecords,
+  }, null, 2);
+  return [
+    { filename: accountFilename, json: accountJson, importable: true },
+    { filename: serviceFilename, json: serviceJson, importable: false },
+  ];
 }
 
 /** Slugify an email into a safe filename stem. */
@@ -372,23 +457,23 @@ function exportFilename(email) {
  * @returns {string} the download filename
  */
 export function downloadAccountExport(state = {}) {
-  const payload = buildAccountExport(state);
-  const json = JSON.stringify(payload, null, 2);
-  const filename = exportFilename(payload.profile?.email);
+  const downloads = planAccountExportDownloads(state);
 
   // Browser-only side effect; skip cleanly when the APIs are unavailable.
   if (typeof document !== 'undefined' && typeof URL !== 'undefined' && typeof URL.createObjectURL === 'function') {
-    const blob = new Blob([json], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    try { URL.revokeObjectURL(url); } catch { /* ignore */ }
+    for (const download of downloads) {
+      const blob = new Blob([download.json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = download.filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      try { URL.revokeObjectURL(url); } catch { /* ignore */ }
+    }
   }
-  return filename;
+  return downloads[0].filename;
 }
 
 /**

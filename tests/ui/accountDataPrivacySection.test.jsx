@@ -25,9 +25,18 @@ afterEach(cleanup);
 const downloadAccountExport = vi.fn().mockReturnValue('file.json');
 const requestAccountDeletion = vi.fn().mockResolvedValue({ status: 'queued', requestedAt: 'now' });
 vi.mock('../../src/lib/accountData.js', () => ({
-  ACCOUNT_EXPORT_VERSION: 3,
+  ACCOUNT_EXPORT_VERSION: 4,
   downloadAccountExport,
   requestAccountDeletion,
+}));
+const getMyOperatorServiceExport = vi.fn().mockResolvedValue({
+  schemaVersion: 1,
+  importable: false,
+  operatorMessages: [{ id: 'message-1', subject: 'Notice' }],
+  consentChanges: [{ consentKey: 'research', priorValue: true, newValue: false }],
+});
+vi.mock('../../src/lib/operatorMessageExport.js', () => ({
+  getMyOperatorServiceExport: (...args) => getMyOperatorServiceExport(...args),
 }));
 const listSaves = vi.fn();
 vi.mock('../../src/lib/saves.js', () => ({ saves: { list: (...args) => listSaves(...args) } }));
@@ -94,6 +103,12 @@ beforeEach(async () => {
     format: 'settlementforge.custom-content-ledger',
     archiveFingerprint: 'a'.repeat(64),
   });
+  getMyOperatorServiceExport.mockResolvedValue({
+    schemaVersion: 1,
+    importable: false,
+    operatorMessages: [{ id: 'message-1', subject: 'Notice' }],
+    consentChanges: [{ consentKey: 'research', priorValue: true, newValue: false }],
+  });
   ({ default: AccountDataPrivacySection } = await import('../../src/components/account/AccountDataPrivacySection.jsx'));
 });
 
@@ -111,6 +126,11 @@ describe('AccountDataPrivacySection — export', () => {
     expect(arg.customContentArchive).toMatchObject({
       format: 'settlementforge.custom-content-ledger',
     });
+    expect(arg.serviceRecords).toMatchObject({
+      importable: false,
+      operatorMessages: [{ id: 'message-1', subject: 'Notice' }],
+    });
+    expect(getMyOperatorServiceExport).toHaveBeenCalledTimes(1);
   });
 
   it('awaits a cold authenticated cloud-save load before building the archive', async () => {

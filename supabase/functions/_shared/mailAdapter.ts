@@ -19,6 +19,10 @@ export interface MailMessage {
   to: string;
   subject: string;
   text: string;
+  /** Optional RFC mail headers (for example List-Unsubscribe). */
+  headers?: Record<string, string>;
+  /** Stable provider-request key when the selected API can deduplicate sends. */
+  idempotencyKey?: string;
 }
 
 export interface MailResult {
@@ -34,6 +38,8 @@ export interface MailAdapter {
   from: string;
   /** Provider secret ('' when unconfigured) — retained for send-email's test-dispatch seam. */
   token: string;
+  /** Whether this provider API gives the key above true send deduplication. */
+  supportsIdempotency: boolean;
   /** Transport an already-rendered message. Only called when configured. */
   send: (msg: MailMessage) => Promise<MailResult>;
 }
@@ -48,11 +54,25 @@ function resendAdapter(env: EnvGet): MailAdapter {
     configured: Boolean(token && from),
     from,
     token,
+    // Resend retains POST /emails Idempotency-Key results for 24 hours.
+    supportsIdempotency: true,
     send: async (msg: MailMessage): Promise<MailResult> => {
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
-        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ from, to: [msg.to], subject: msg.subject, text: msg.text }),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          ...(msg.idempotencyKey ? { 'Idempotency-Key': msg.idempotencyKey } : {}),
+        },
+        body: JSON.stringify({
+          from,
+          to: [msg.to],
+          subject: msg.subject,
+          text: msg.text,
+          ...(msg.headers && Object.keys(msg.headers).length > 0
+            ? { headers: msg.headers }
+            : {}),
+        }),
       });
       if (!res.ok) {
         throw new Error(`Resend ${res.status}: ${await res.text().catch(() => '')}`);
@@ -71,6 +91,9 @@ function postmarkAdapter(env: EnvGet): MailAdapter {
     configured: Boolean(token && from),
     from,
     token,
+    // Postmark explicitly has no idempotency-key feature. Callers must use their
+    // own claim/no-resend policy and must not mistake a custom mail header for CAS.
+    supportsIdempotency: false,
     send: async (msg: MailMessage): Promise<MailResult> => {
       const res = await fetch('https://api.postmarkapp.com/email', {
         method: 'POST',
@@ -79,7 +102,23 @@ function postmarkAdapter(env: EnvGet): MailAdapter {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify({ From: from, To: msg.to, Subject: msg.subject, TextBody: msg.text }),
+        body: JSON.stringify({
+          From: from,
+          To: msg.to,
+          Subject: msg.subject,
+          TextBody: msg.text,
+          // Privacy posture is code-owned, not a mutable Postmark stream default.
+          TrackOpens: false,
+          TrackLinks: 'None',
+          ...(msg.headers && Object.keys(msg.headers).length > 0
+            ? {
+              Headers: Object.entries(msg.headers).map(([Name, Value]) => ({
+                Name,
+                Value,
+              })),
+            }
+            : {}),
+        }),
       });
       if (!res.ok) {
         throw new Error(`Postmark ${res.status}: ${await res.text().catch(() => '')}`);

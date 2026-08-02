@@ -147,7 +147,7 @@ remembered number.** Migration numbers grow every release, so this guide
 deliberately does NOT pin a "latest" number that would rot and cause an operator
 to under-apply.
 
-**Current migration head: `193_create_route_command.sql`** (this filename is kept
+**Current migration head: `194_operator_messages.sql`** (this filename is kept
 current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js` derives the
 head from `supabase/migrations/` and fails the gate if this line drifts).
 <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
@@ -202,7 +202,7 @@ guard against by discipline:
   exactly why you must only deploy from a commit that job passed.
   (`npm run check:full` = `check` + `check:edge-behavior` mirrors everything CI runs.)
 
-There are 31 functions total — deploy all of them on a first cutover.
+There are 33 functions total — deploy all of them on a first cutover.
 
 ## Edge function — manual
 
@@ -226,7 +226,7 @@ secrets before `db push`, waits for both routes to answer their non-mutating
 method probe, activates and verifies both migration-seeded dispatcher rows
 immediately afterward, then readiness-probes the migration-181 lease RPC before
 creating or deploying the Stripe webhook. To deploy by hand, preserve that ordering
-and mirror what the script derives — the fourteen self-authenticating functions get
+and mirror what the script derives — the sixteen self-authenticating functions get
 `--no-verify-jwt`, the seventeen authenticated ones get no flag:
 
 ```bash
@@ -245,6 +245,8 @@ npx supabase functions deploy founder-transfer --no-verify-jwt        # run_due 
 npx supabase functions deploy retention-warning-cron --no-verify-jwt  # nightly pg_net cron, x-cron-secret shared secret
 npx supabase functions deploy account-deletion-worker --no-verify-jwt # hourly durable deletion cleanup, x-cron-secret
 npx supabase functions deploy payment-refund-worker --no-verify-jwt   # five-minute durable Stripe refund recovery, x-cron-secret
+npx supabase functions deploy operator-message-worker --no-verify-jwt # disabled-by-default leased broadcast courier, x-cron-secret
+npx supabase functions deploy unsubscribe --no-verify-jwt             # public GET-confirm / POST opt-out token boundary
 # verify_jwt = true (require an authenticated user — no flag):
 npx supabase functions deploy create-checkout
 npx supabase functions deploy verify-checkout-session                 # account-bound checkout verification
@@ -265,8 +267,8 @@ npx supabase functions deploy account-actions
 npx supabase functions deploy admin-actions
 ```
 
-There are **31 deployable functions** (every `supabase/functions/*` dir except
-`_shared`) — deploy all of them on a first cutover. The fourteen `verify_jwt = false`
+There are **33 deployable functions** (every `supabase/functions/*` dir except
+`_shared`) — deploy all of them on a first cutover. The sixteen `verify_jwt = false`
 and seventeen `verify_jwt = true` postures above are pinned in `config.toml`, the
 single source of truth `deploy.sh` parses. The freshness pin
 (`tests/docs/deployRunbookFreshness.test.js`) fails the gate if any function dir
@@ -296,6 +298,11 @@ SUPABASE_ANON_KEY            # already set by Supabase
 SUPABASE_SERVICE_ROLE_KEY    # required for admin operations
 CLIENT_URL                   # e.g. https://settlementforge.com
 ```
+
+`OPERATOR_MESSAGE_CRON_SECRET` is intentionally **not** in the required-secret
+list for this release. Deploying the function is safe, but do not set that secret
+or activate its database dispatcher yet; the broadcast courier is deliberately
+shipping dormant as described below.
 
 ### Activate the durable account-deletion worker
 
@@ -367,6 +374,27 @@ retry instead of being marked refunded. Recovery reuses the original
 idempotency key and rebuilds Stripe metadata only from immutable obligation
 identity; nullable user, auto-reload-attempt, and Checkout links stay
 database-only so later fill/null transitions cannot change replay parameters.
+
+### Keep the Operator Messages courier disabled
+
+Deploy `operator-message-worker` and `unsubscribe` with the rest of the function
+inventory, but leave the private `operator_message_delivery_cron` row exactly as
+migration 194 seeds it: `enabled=false`, `url=null`, and `secret=null`. Do not set
+`OPERATOR_MESSAGE_CRON_SECRET` in this rollout. Those three independent gates
+make the service-role worker inert even though its route exists; queued broadcast
+jobs remain durable and Account Messages remains the correctness path.
+
+Activation is a separate, attended owner operation after provider throughput and
+an end-to-end consent/unsubscribe drill have been reviewed. The drill must also
+run two concurrent workers against one eligible recipient, expire a lease before
+recipient claim, and crash after provider acceptance but before terminal receipt
+write. Verify that only a lease-token-bound CAS claim can send and that an
+abandoned `sending` attempt becomes terminal `delivery_outcome_unknown` rather
+than eligible for resend. This change neither authorizes activation nor supplies
+activation SQL. Direct notices and
+warning/ban notices still attempt provider-neutral email immediately after the
+authoritative database transaction; a missing mail provider is recorded as
+`skipped` and never rolls back the in-account message.
 
 Legacy SKU keys (`credits_5`, `credits_15`, `credits_40`, etc.) are
 kept in the price map for refund/replay continuity — set them if you

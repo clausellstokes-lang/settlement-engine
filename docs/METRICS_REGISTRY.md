@@ -235,7 +235,8 @@ not a product funnel), **diagnostic** (health/latency/failure taxonomy), and
 - `foundry_export_completed`
 - `gallery_published`, `gallery_unpublished`, `gallery_dossier_viewed`, `gallery_engagement`
 - `gallery_imported`, `settlement_deleted`, `library_viewed`
-- `settlement_fingerprint_captured`, `consent_updated`
+- `settlement_fingerprint_captured`
+- Consent changes are SERVICE-class compliance records, not analytics events.
 - `landing_funnel_used` — **funnel-leg** (W-DOC): the Welcome landing's ONE
   feature-discriminated event (feature=`view` once per session · `fixture_forge`,
   the determinism-replay click). The landing leg of the funnel already measured

@@ -252,6 +252,12 @@ export function resolveLocation(location) {
       const params = {};
       const slug = url.searchParams.get('slug');
       if (slug) params.slug = slug;
+      if (v === 'account') {
+        const section = url.searchParams.get('section');
+        const message = url.searchParams.get('message');
+        if (section) params.section = section;
+        if (message) params.message = message;
+      }
       return { view: v, params, legacy: true };
     }
   }
@@ -263,7 +269,18 @@ export function resolveLocation(location) {
   if (path === '/') return { view: DEFAULT_VIEW, params: {} };
 
   const exact = PATH_TO_ROUTE[path];
-  if (exact) return { view: exact.view, params: {} };
+  if (exact) {
+    const params = {};
+    // Account subsections are real deep links: preserve their query state so
+    // Back/Forward and links from email/client chrome resolve to one panel.
+    if (exact.view === 'account') {
+      const section = url.searchParams.get('section');
+      const message = url.searchParams.get('message');
+      if (section) params.section = section;
+      if (message) params.message = message;
+    }
+    return { view: exact.view, params };
+  }
 
   for (const pr of PARAM_ROUTES) {
     const m = path.match(pr.re);

@@ -11,8 +11,10 @@
  *             policy (privacyPolicyParity.test.js pins policy ↔ this roster).
  * ai_prose  — reserved; gates nothing today (shown so the UI doesn't churn later).
  *
- * Writes through consent.js and fires CONSENT_UPDATED. Stamp-at-write: downgrades
- * apply going forward; full erasure goes through the account-deletion path.
+ * Writes through consent.js, then mirrors through the server's compliance-record
+ * RPC. Consent changes deliberately do NOT emit product analytics: the durable
+ * prior/new service record is the audit trail. Stamp-at-write downgrades apply going
+ * forward; full erasure goes through the account-deletion path.
  *
  * The write is ALSO mirrored to profiles.telemetry_consent (consentSync.js) so the choice
  * follows the account to the user's other devices and the server clamp finally has a real
@@ -26,10 +28,11 @@
  * that anonymous settlement structure is studied (never names/prose/secrets), it's
  * on by default, and it can be turned off here at any time.
  */
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getConsent, setConsent, dntEnabled } from '../lib/consent.js';
 import { pushTelemetryConsent } from '../lib/consentSync.js';
-import { track, EVENTS } from '../lib/analytics.js';
+import { authSessionIdentity, captureAuthSessionFence, isAuthSessionFenceCurrent } from '../lib/authSessionFence.js';
+import { useStore } from '../store/index.js';
 import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP } from './theme.js';
 
 function Toggle({ on, disabled, onClick, label }) {
@@ -82,25 +85,55 @@ function Row({ id, title, desc, on, disabled, note, onToggle }) {
  *   (onboarding/consent) that still want the self-contained card.
  */
 export default function PrivacySettings({ bare = false }) {
+  const auth = useStore(state => state.auth);
+  const ownerId = auth?.user?.id || null;
+  const sessionIdentity = authSessionIdentity(auth);
   const [consent, setLocal] = useState(getConsent);
   const [syncError, setSyncError] = useState(false);
+  const syncQueue = useRef(Promise.resolve());
+  const syncRevision = useRef(0);
+  const pendingSyncs = useRef(0);
+  const previousOwner = useRef(ownerId);
   const dnt = dntEnabled();
 
+  useEffect(() => {
+    // Invalidate UI callbacks for an account that has just signed out or been
+    // replaced. Already-issued RPCs remain scoped by their captured JWT.
+    syncRevision.current += 1;
+    if (pendingSyncs.current > 0 && previousOwner.current === ownerId && ownerId) {
+      setSyncError(true);
+    } else if (previousOwner.current !== ownerId) {
+      setSyncError(false);
+    }
+    previousOwner.current = ownerId;
+  }, [ownerId, sessionIdentity]);
+
   const update = (key, value) => {
+    const sessionFence = captureAuthSessionFence(useStore.getState().auth);
     const next = setConsent({ [key]: value });
     setLocal(next);
-    track(EVENTS.CONSENT_UPDATED, {
-      research: next.research ? 'granted' : 'denied',
-      ai_prose: next.ai_prose ? 'granted' : 'denied',
-      market: next.market ? 'granted' : 'denied',
-      surface: 'account',
-    });
-    // Mirror to the account. Unawaited on purpose: the choice is already stored locally
-    // and in force, so the only thing left to do is tell the user if it did not travel.
+    // Mirror to the account in click order. The choice is already stored locally
+    // and in force, but an older opt-in must not arrive after a newer opt-out.
+    const revision = ++syncRevision.current;
     setSyncError(false);
-    pushTelemetryConsent(next)
-      .then((r) => setSyncError(!r?.ok))
-      .catch(() => setSyncError(true));
+    const write = syncQueue.current.catch(() => {}).then(() => {
+      if (!isAuthSessionFenceCurrent(sessionFence, useStore.getState().auth)) {
+        return { ok: true, skipped: true, staleSession: true };
+      }
+      return pushTelemetryConsent(next, sessionFence.ownerId);
+    });
+    pendingSyncs.current += 1;
+    syncQueue.current = write;
+    write
+      .then((result) => {
+        if (isAuthSessionFenceCurrent(sessionFence, useStore.getState().auth)
+          && syncRevision.current === revision) setSyncError(!result?.ok);
+      })
+      .catch(() => {
+        if (isAuthSessionFenceCurrent(sessionFence, useStore.getState().auth)
+          && syncRevision.current === revision) setSyncError(true);
+      })
+      .finally(() => { pendingSyncs.current = Math.max(0, pendingSyncs.current - 1); });
   };
 
   const sectionStyle = bare

@@ -29,37 +29,77 @@ Deno.test('EMAIL_PROVIDER=postmark selects postmark; unknown falls back to resen
   assertEquals(MAIL_PROVIDERS.includes('postmark'), true);
 });
 
-Deno.test('resend.send posts to the Resend API and returns the id', async () => {
-  const calls: Array<{ url: string; body: unknown }> = [];
+Deno.test('resend.send posts with a true provider idempotency key and returns the id', async () => {
+  const calls: Array<{ url: string; body: unknown; headers: Headers }> = [];
   const orig = globalThis.fetch;
   globalThis.fetch = ((url: string, init: RequestInit) => {
-    calls.push({ url: String(url), body: JSON.parse(String(init.body)) });
+    calls.push({
+      url: String(url),
+      body: JSON.parse(String(init.body)),
+      headers: new Headers(init.headers),
+    });
     return Promise.resolve(new Response(JSON.stringify({ id: 'resend_123' }), { status: 200 }));
   }) as typeof fetch;
   try {
     const a = selectMailAdapter(envOf({ RESEND_API_KEY: 're_x', RESEND_FROM_EMAIL: 'from@b.co' }));
-    const r = await a.send({ to: 't@b.co', subject: 'Hi', text: 'Body' });
+    const r = await a.send({
+      to: 't@b.co',
+      subject: 'Hi',
+      text: 'Body',
+      headers: {
+        'List-Unsubscribe': '<https://x.test/unsubscribe>',
+        'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+      },
+      idempotencyKey: 'operator-message/message-1/user-1',
+    });
     assertEquals(r.id, 'resend_123');
+    assertEquals(a.supportsIdempotency, true);
     assertEquals(calls[0].url, 'https://api.resend.com/emails');
+    assertEquals(
+      calls[0].headers.get('Idempotency-Key'),
+      'operator-message/message-1/user-1',
+    );
     assertEquals((calls[0].body as { to: string[] }).to[0], 't@b.co');
+    assertEquals(
+      (calls[0].body as { headers: Record<string, string> }).headers['List-Unsubscribe-Post'],
+      'List-Unsubscribe=One-Click',
+    );
   } finally {
     globalThis.fetch = orig;
   }
 });
 
-Deno.test('postmark.send posts to the Postmark API and maps MessageID', async () => {
-  const calls: Array<{ url: string; body: Record<string, unknown> }> = [];
+Deno.test('postmark.send maps MessageID but does not claim provider idempotency', async () => {
+  const calls: Array<{ url: string; body: Record<string, unknown>; headers: Headers }> = [];
   const orig = globalThis.fetch;
   globalThis.fetch = ((url: string, init: RequestInit) => {
-    calls.push({ url: String(url), body: JSON.parse(String(init.body)) });
+    calls.push({
+      url: String(url),
+      body: JSON.parse(String(init.body)),
+      headers: new Headers(init.headers),
+    });
     return Promise.resolve(new Response(JSON.stringify({ MessageID: 'pm_9' }), { status: 200 }));
   }) as typeof fetch;
   try {
     const a = selectMailAdapter(envOf({ EMAIL_PROVIDER: 'postmark', POSTMARK_SERVER_TOKEN: 'pm_x', POSTMARK_FROM_EMAIL: 'from@b.co' }));
-    const r = await a.send({ to: 't@b.co', subject: 'Hi', text: 'Body' });
+    const r = await a.send({
+      to: 't@b.co',
+      subject: 'Hi',
+      text: 'Body',
+      headers: { 'List-Unsubscribe': '<https://x.test/unsubscribe>' },
+      idempotencyKey: 'operator-message/message-1/user-1',
+    });
     assertEquals(r.id, 'pm_9');
+    assertEquals(a.supportsIdempotency, false);
     assertEquals(calls[0].url, 'https://api.postmarkapp.com/email');
+    assertEquals(calls[0].headers.get('Idempotency-Key'), null);
     assertEquals(calls[0].body.TextBody, 'Body');
+    assertEquals(calls[0].body.TrackOpens, false);
+    assertEquals(calls[0].body.TrackLinks, 'None');
+    assertEquals(
+      (calls[0].body.Headers as Array<{ Name: string; Value: string }>)[0],
+      { Name: 'List-Unsubscribe', Value: '<https://x.test/unsubscribe>' },
+    );
   } finally {
     globalThis.fetch = orig;
   }

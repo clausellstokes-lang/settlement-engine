@@ -22,8 +22,10 @@
  * @param {(id:string)=>void} props.setSection   section setter
  * @param {boolean} [props.isElevated=false]     show the Developer-Admin affordance
  * @param {boolean} [props.showAiKeys=true]      show the Surveyor-gated "AI & keys" row
+ * @param {number} [props.unreadCount=0]         shared unopened-message count
  * @param {() => void} [props.onNavigateAdmin]   admin-panel navigator
  */
+import { useMemo } from 'react';
 import { Shield, ChevronRight } from 'lucide-react';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import {
@@ -31,6 +33,7 @@ import {
 import { space } from '../../design/tokens.js';
 import Button from '../primitives/Button.jsx';
 import MobileTabStrip from '../primitives/MobileTabStrip.jsx';
+import UnreadMessageBadge, { normalizeUnreadCount } from './UnreadMessageBadge.jsx';
 
 /**
  * The canonical section order. Profile leads (the default landing section);
@@ -41,6 +44,7 @@ export const ACCOUNT_SECTIONS = [
   { id: 'profile', label: 'Profile' },
   { id: 'security', label: 'Security' },
   { id: 'subscription', label: 'Subscription' },
+  { id: 'messages', label: 'Messages' },
   { id: 'support', label: 'Support' },
   { id: 'data', label: 'Data' },
   { id: 'preferences', label: 'Preferences' },
@@ -55,13 +59,17 @@ export default function AccountNav({
   setSection,
   isElevated = false,
   showAiKeys = true,
+  unreadCount = 0,
   onNavigateAdmin,
 }) {
   const isMobile = useIsMobile();
   const showAdmin = Boolean(isElevated && onNavigateAdmin);
   // The "AI & keys" row is Surveyor-gated (owner ruling 2026-07-19): hidden
   // entirely for non-entitled accounts — no lock-tease, matching the door.
-  const sections = showAiKeys ? ACCOUNT_SECTIONS : ACCOUNT_SECTIONS.filter((s) => s.id !== 'ai');
+  const sections = useMemo(() => (
+    (showAiKeys ? ACCOUNT_SECTIONS : ACCOUNT_SECTIONS.filter((s) => s.id !== 'ai'))
+      .map(row => row.id === 'messages' ? ({ ...row, label: <MessageLabel count={unreadCount} /> }) : row)
+  ), [showAiKeys, unreadCount]);
 
   // ── Mobile: the shipped tab strip, no section hidden ──────────────────────
   // The admin link rides as a trailing tab so the elevated affordance survives
@@ -134,5 +142,16 @@ export default function AccountNav({
         </>
       )}
     </nav>
+  );
+}
+
+function MessageLabel({ count }) {
+  const unread = normalizeUnreadCount(count);
+  return (
+    <span style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs }}>
+      <span aria-hidden={unread > 0 ? 'true' : undefined}>Messages</span>
+      <UnreadMessageBadge count={unread} />
+      {unread > 0 && <span className="sr-only">Messages, {unread} unread message{unread === 1 ? '' : 's'}</span>}
+    </span>
   );
 }

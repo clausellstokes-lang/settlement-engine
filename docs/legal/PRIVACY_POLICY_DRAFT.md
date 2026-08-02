@@ -30,6 +30,10 @@ AI features (when they launch) handle data, and how you stay in control.
 
 - **Account data.** If you register: your email address, account settings, and stored
   recovery answers (so you can regain access).
+- **Operator communications and service records.** Messages SettlementForge sends to
+  your Account inbox, whether you have read them, your current communication choices,
+  and durable prior/new records when telemetry choices change. Message bodies are
+  service content, not analytics events.
 - **Essential product telemetry.** Cookieless, pseudonymous usage signals that keep the
   app working and show where users get stuck. On by default; turns off if your browser
   sends Do Not Track or if you opt out.
@@ -81,7 +85,10 @@ downgrades apply going forward, and full erasure goes through account deletion.
 Your private campaign text, NPC secrets, and personal notes are never collected. The
 research and market tiers capture settlement **structure** and **aggregate categories**
 only — never names, prose, or secrets. Generation seeds and private configuration are
-never exposed on shared or gallery surfaces. **We do not sell your data.**
+never exposed on shared or gallery surfaces. We do not put tracking pixels in email,
+record email opens, or copy operator-message bodies into analytics. Account-message
+read receipts and consent-change history are operational service records, kept outside
+the analytics event stream. **We do not sell your data.**
 
 *(Source of truth: `PrivacyPage.jsx#privacy-never`; the fail-closed public-projection
 rule in `DESIGN_AI_CONTROL_SURFACE.md` §1.)*
@@ -136,15 +143,21 @@ in and to remember settings such as your telemetry choices. These stay on your d
 
 ## 8. Your controls
 
-- **Export.** Download all your saved settlements and campaigns as a single JSON file
-  from Account → Data and privacy.
+- **Export.** Download your saved settlements and campaigns, the operator messages you
+  received and their Account receipt state, and your consent-change history from
+  Account → Data and privacy. The usual download is one JSON file. If long-lived
+  service history would make that file too large to import safely, the export becomes
+  a restorable account JSON plus a second complete, export-only service-record JSON;
+  no service records are truncated or imported into another account.
 - **Delete content.** Delete individual or all saved settlements and campaigns, and
   unpublish gallery content, from your account.
 - **Delete your account.** Request account deletion from Account → Data and privacy. This
   files a **soft-delete request** processed by a server job after a short grace window,
   during which you can contact support to cancel. Some records required to meet legal or
   tax obligations, such as payment receipts, may be retained for the period the law
-  requires.
+  requires. When deletion is processed, direct messages addressed only to you, your
+  message receipts, and your consent-change history are removed. Shared broadcast
+  messages remain as operator records, without your receipt or account association.
 - **Consent.** Change any of the four purposes in §3 at any time; your choice is
   remembered and stamped with the consent-model version.
 
@@ -192,14 +205,14 @@ settlementforge@gmail.com until that operational proof.]]`.
 
 | Section | What it binds | Source-of-truth doc / file |
 |---|---|---|
-| 2. What we collect | Account data, essential telemetry, research snapshots, payment records | `PrivacyPage.jsx#privacy-collect`; `consent.js` |
+| 2. What we collect | Account data, operator communications and service records, essential telemetry, research snapshots, payment records | `PrivacyPage.jsx#privacy-collect`; `consent.js`; `operator_messages` |
 | 3. Consent purposes | The four named planes: `essential`, `research`, `market` (Atlas), `ai_prose` | `PrivacySettings.jsx`; `consent.js`; `DESIGN_CONTENT_PLANE.md` §4b |
 | 3.3 Aggregate Interest Atlas | Distinct external-sharing purpose, opt-in/off; only theme/category/count aggregates leave; k-floors | `DESIGN_CONTENT_PLANE.md` §4b; `consent.js` `market` |
-| 4. Never collected | No campaign text/prose/secrets/seeds; no data sale | `PrivacyPage.jsx#privacy-never` |
+| 4. Never collected | No campaign text/prose/secrets/seeds, email-open tracking, or message bodies in analytics; no data sale | `PrivacyPage.jsx#privacy-never`; `PRIVACY_LOGGING.md` |
 | 5. AI data handling | Forgetting Law, BYOK, id-free rider (condition of service), content-grade opt-in | `DESIGN_AI_CONTROL_SURFACE.md` §3, §3e, §3f |
 | 6. Payments | Stripe processing; we store entitlement records only | `PrivacyPage.jsx#privacy-payments` |
 | 7. Cookies/local storage | Cookieless; local storage for session + settings | `PrivacyPage.jsx#privacy-cookies` |
-| 8. Your controls | Export, delete content, soft-delete account, consent | `AccountDataPrivacySection.jsx`; `PrivacyPage.jsx#privacy-deletion` |
+| 8. Your controls | Export including service records; delete content/account; consent; shared broadcasts retained without receipts | `AccountDataPrivacySection.jsx`; `PrivacyPage.jsx#privacy-deletion` |
 | 9. Retention | Event-grain, collect-fine-aggregate-late; legal retention | `DESIGN_CONTENT_PLANE.md` §4b |
 | 10. Children | Age / children's-data clause | Placeholder — legal review |
 | 11. Int'l transfers | Cross-border basis (GDPR/SCCs) | Placeholder — legal review |

@@ -4,6 +4,7 @@
  * Anonymous visitors get a plain "Sign In" button. Signed-in users see
  * their display name on a chip that opens a small dropdown:
  *   - Account                        → the account page
+ *   - Messages                       → Account ▸ Messages
  *   - Manage subscription & credits  → the subscription page (former Pricing)
  *
  * The "Pricing" hero link was removed from the top bar; subscription and
@@ -14,17 +15,20 @@
  * from theme tokens (no raw hex) so the visual-budget lint stays clean.
  */
 import { useState, useRef, useEffect } from 'react';
-import { User, ChevronDown, Settings, CreditCard } from 'lucide-react';
+import { User, ChevronDown, Settings, CreditCard, MessageSquare } from 'lucide-react';
 import { GOLD, GOLD_BG, INK, BORDER, FS, SP, SLATE, SLATE_DEEP, GREEN, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
+import UnreadMessageBadge, { unreadMessagesLabel } from './account/UnreadMessageBadge.jsx';
+import { useOperatorMessages } from './account/OperatorMessagesProvider.jsx';
 
-function MenuRow({ icon, label, onClick }) {
+function MenuRow({ icon, label, onClick, badge = null, ariaLabel }) {
   const [hover, setHover] = useState(false);
   return (
     <Button
       variant="ghost"
       fullWidth
       role="menuitem"
+      aria-label={ariaLabel}
       onClick={onClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -37,7 +41,8 @@ function MenuRow({ icon, label, onClick }) {
         color: INK, fontSize: FS.sm, fontWeight: 600,
       }}
     >
-      {label}
+      <span style={{ flex: 1 }}>{label}</span>
+      {badge}
     </Button>
   );
 }
@@ -48,11 +53,15 @@ export default function AccountMenu({
   isElevated,
   onSignIn,
   onAccount,
+  onMessages,
   onManageSubscription,
+  unreadCount,
   compact = false,
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
+  const { unreadCount: sharedUnreadCount, refresh: refreshMessages } = useOperatorMessages();
+  const messageUnreadCount = unreadCount ?? sharedUnreadCount;
 
   useEffect(() => {
     if (!open) return undefined;
@@ -71,6 +80,10 @@ export default function AccountMenu({
   const iconSize = compact ? 12 : 13;
   const chipPad = compact ? `${SP.xs + 1}px ${SP.md}px` : `${SP.sm}px ${SP.lg}px`;
   const chipFont = compact ? FS.xs : FS.sm;
+  const toggleMenu = () => {
+    if (!open) refreshMessages();
+    setOpen(current => !current);
+  };
 
   if (isAnon) {
     return (
@@ -102,9 +115,10 @@ export default function AccountMenu({
     <div ref={ref} style={{ position: 'relative', marginLeft: compact ? 0 : SP.xs }}>
       <Button
         variant="secondary"
-        onClick={() => setOpen(o => !o)}
+        onClick={toggleMenu}
         aria-haspopup="menu"
         aria-expanded={open}
+        aria-label={unreadMessagesLabel('Account', messageUnreadCount)}
         icon={<User size={iconSize} style={{ flexShrink: 0 }} />}
         trailingIcon={<ChevronDown size={iconSize} style={{ flexShrink: 0, opacity: 0.8 }} />}
         style={{
@@ -124,6 +138,13 @@ export default function AccountMenu({
         </span>
       </Button>
 
+      {!open && (
+        <UnreadMessageBadge
+          count={messageUnreadCount}
+          style={{ position: 'absolute', right: -5, bottom: -5, pointerEvents: 'none', zIndex: 1 }}
+        />
+      )}
+
       {open && (
         <div
           role="menu"
@@ -139,6 +160,13 @@ export default function AccountMenu({
             icon={<Settings size={15} />}
             label="Account"
             onClick={() => { setOpen(false); onAccount?.(); }}
+          />
+          <MenuRow
+            icon={<MessageSquare size={15} />}
+            label="Messages"
+            ariaLabel={unreadMessagesLabel('Messages', messageUnreadCount)}
+            badge={<UnreadMessageBadge count={messageUnreadCount} />}
+            onClick={() => { setOpen(false); onMessages?.(); }}
           />
           <MenuRow
             icon={<CreditCard size={15} />}

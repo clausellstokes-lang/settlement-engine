@@ -69,4 +69,12 @@ describe('privacy policy ↔ shipped consent model parity', () => {
     expect(migration).toMatch(/interval '3 months'/);
     expect(policy).toMatch(/three-month retention window/);
   });
+
+  it('discloses operator-message records without claiming email-open tracking', () => {
+    expect(policy).toMatch(/Operator communications/);
+    expect(policy).toMatch(/consent-history record/);
+    expect(policy).toMatch(/do not place tracking pixels in email/);
+    expect(policy).toMatch(/Message bodies never enter analytics/);
+    expect(policy).toMatch(/Deletion removes your direct\s+notices, message receipts, and consent history/);
+  });
 });

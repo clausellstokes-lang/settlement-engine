@@ -20,6 +20,8 @@ export default function PrivacyPage() {
         </LegalP>
         <LegalList items={[
           'Account data: if you register, your email address and account settings. Recovery answers are stored so you can regain access.',
+          'Operator communications: service notices and announcements sent to your Account, plus whether you opened or dismissed them in the product. Direct notices are addressed to your account; broadcasts are one shared operator record.',
+          'Consent history: when you change a privacy setting, we keep the setting changed, its prior and new values, and the time of the change as a compliance record.',
           'Essential product telemetry: cookieless usage signals that keep the app working and let us find and fix problems. This is on by default and turns off if your browser sends Do Not Track, or if you opt out.',
           'Research structure: anonymous, structural snapshots of generated settlements that help improve the generator. This tier is on by default (opt-out) and reversible at any time.',
         ]} />
@@ -36,6 +38,13 @@ export default function PrivacyPage() {
           market: never your names, prose, seeds, or campaign content, and never
           anything tied to you.
         </LegalP>
+        <LegalP>
+          We do not place tracking pixels in email or measure email opens. Message
+          receipts may be created when a notice reaches Account Messages or its
+          email courier. An in-product read is recorded only when you open that
+          message's detail. These are service records, not product analytics.
+          Message bodies never enter analytics.
+        </LegalP>
       </LegalSection>
 
       <LegalSection heading="Your consent and control" id="privacy-consent">
@@ -48,12 +57,30 @@ export default function PrivacyPage() {
           no pop-up, so you are never nagged. The market-research tier is off by
           default and covers aggregate, anonymous structure only. You can change
           any of these there whenever you like, and your choice is remembered.
+          Each signed-in change also creates a durable consent-history record so
+          the basis for the setting can be audited without relying on analytics.
         </LegalP>
         <LegalP>
           If your browser sends a Do Not Track signal, we honor it as a full
           opt-out of all telemetry, including the essential tier, regardless of
           these toggles. Every research snapshot is stamped with the version of
           the consent model it was captured under, so its basis is auditable.
+        </LegalP>
+      </LegalSection>
+
+      <LegalSection heading="Messages and email" id="privacy-messages">
+        <LegalP>
+          Account Messages is the source of truth for communications from
+          SettlementForge. Service messages, such as security, policy, account, or
+          moderation notices, appear there and may also be sent to your account
+          email even if you turn off marketing email. Announcements always appear
+          in Account Messages, but are emailed only after you explicitly opt in to
+          Product updates. Every announcement email includes an unsubscribe link.
+        </LegalP>
+        <LegalP>
+          Messages are one-way. If you reply, SettlementForge opens the existing
+          support-ticket flow and links it to the message; it does not create a
+          second private-messaging system.
         </LegalP>
       </LegalSection>
 
@@ -69,20 +96,25 @@ export default function PrivacyPage() {
         <LegalP>
           Our analytics are cookieless. We use your browser’s local storage to
           keep you signed in and to remember settings such as your telemetry
-          choices. These stay on your device.
+          choices. When you are signed in, your consent settings are also mirrored
+          to your account so an opt-out follows you across devices.
         </LegalP>
       </LegalSection>
 
       <LegalSection heading="Deleting your data" id="privacy-deletion">
         <LegalP>
           You can delete settlements and unpublish shared content from your
-          account at any time; that removes them immediately. To request deletion
-          of your account, contact us from the address on your account. After a
+          account at any time; that removes them immediately. Your Account data
+          export includes messages received, their in-product receipts, and your
+          consent-change history. To request deletion of your account, use Account
+          then Data and privacy (or contact support). After a
           short grace window your sign-in is removed, billing stops, and your
           profile is irreversibly anonymised and locked. The anonymised shell
           can never be signed into or written to again. Some records required to
           meet legal or tax obligations, such as payment receipts, may be
-          retained for the period the law requires.
+          retained for the period the law requires. Deletion removes your direct
+          notices, message receipts, and consent history; shared broadcast records
+          remain as operator records without a receipt tied to you.
         </LegalP>
         <LegalP>
           If a paid plan lapses, settlements and maps created under it enter a

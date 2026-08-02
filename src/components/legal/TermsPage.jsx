@@ -58,6 +58,18 @@ export default function TermsPage({ scrollToId = null } = {}) {
         </LegalP>
       </LegalSection>
 
+      <LegalSection heading="Communications from SettlementForge" id="terms-communications">
+        <LegalP>
+          We may place service communications in the Messages section of your
+          account and send them to your account email when they concern security,
+          policy changes, moderation, billing, or the operation of your account.
+          These are not marketing messages. Product announcements always appear in
+          Account Messages and are emailed only when you have explicitly opted in
+          to Product updates; announcement email includes an unsubscribe path.
+          We do not track email opens.
+        </LegalP>
+      </LegalSection>
+
       <LegalSection heading="Acceptable use" id="terms-use">
         <LegalP>Please do not:</LegalP>
         <LegalList items={[

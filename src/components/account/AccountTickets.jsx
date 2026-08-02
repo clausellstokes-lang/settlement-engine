@@ -16,7 +16,7 @@
  * RPC enforces visibility, so there is nothing to hide client-side — the
  * thread payload simply doesn't contain them.
  */
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Plus, ChevronLeft, RefreshCw, Send, CircleDot, CheckCircle2 } from 'lucide-react';
 import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
@@ -67,7 +67,7 @@ function StatusPill({ status }) {
   );
 }
 
-export default function AccountTickets() {
+export default function AccountTickets({ operatorMessage = null }) {
   // Mobile reflow: stack the two-up category/priority row, let the ticket reply
   // box pin its Send button below the textarea, and wrap long ticket subjects
   // instead of truncating them. All guarded so desktop renders byte-identical.
@@ -84,6 +84,8 @@ export default function AccountTickets() {
   const [priority, setPriority] = useState('normal');
   const [settlementId, setSettlementId] = useState('');
   const [creating, setCreating] = useState(false);
+  const [linkedOperatorMessageId, setLinkedOperatorMessageId] = useState(null);
+  const appliedOperatorMessageId = useRef(null);
 
   // thread
   const [active, setActive] = useState(null);   // the selected ticket row
@@ -110,6 +112,17 @@ export default function AccountTickets() {
   // eslint-disable-next-line react-hooks/set-state-in-effect -- mount data-load: loadTickets sets the spinner/list on open (same pattern as GalleryMaps/AdminPanel)
   useEffect(() => { loadTickets(); }, [loadTickets]);
 
+  useEffect(() => {
+    const messageId = typeof operatorMessage?.id === 'string' ? operatorMessage.id.trim() : '';
+    if (!messageId || operatorMessage?.kind !== 'direct' || appliedOperatorMessageId.current === messageId) return;
+    appliedOperatorMessageId.current = messageId;
+    setLinkedOperatorMessageId(messageId);
+    setSubject(`Re: ${operatorMessage.subject || 'Message from SettlementForge'}`);
+    setCategory('account');
+    setError(null);
+    setView('create');
+  }, [operatorMessage]);
+
   const openThread = useCallback(async (ticket) => {
     setActive(ticket); setView('thread'); setEvents([]); setError(null);
     setLoading(true);
@@ -127,14 +140,22 @@ export default function AccountTickets() {
     if (!subject.trim() || !message.trim()) return;
     setCreating(true); setError(null);
     try {
-      const links = settlementId.trim() ? { settlement_id: settlementId.trim() } : {};
+      const links = {
+        ...(settlementId.trim() ? { settlement_id: settlementId.trim() } : {}),
+        ...(linkedOperatorMessageId ? { operator_message_id: linkedOperatorMessageId } : {}),
+      };
+      const metadata = {
+        ...(typeof navigator !== 'undefined' ? { ua: navigator.userAgent } : {}),
+        ...(linkedOperatorMessageId ? { operator_message_id: linkedOperatorMessageId } : {}),
+      };
       await callAccount({
         action: 'create_ticket',
         subject: subject.trim(), message: message.trim(),
         category, priority, links,
-        metadata: typeof navigator !== 'undefined' ? { ua: navigator.userAgent } : {},
+        metadata,
       });
       setSubject(''); setMessage(''); setCategory('general'); setPriority('normal'); setSettlementId('');
+      setLinkedOperatorMessageId(null);
       setView('list');
       await loadTickets();
     } catch (e) {
@@ -142,7 +163,7 @@ export default function AccountTickets() {
     } finally {
       setCreating(false);
     }
-  }, [subject, message, category, priority, settlementId, loadTickets]);
+  }, [subject, message, category, priority, settlementId, linkedOperatorMessageId, loadTickets]);
 
   const submitReply = useCallback(async () => {
     if (!active || !replyBody.trim()) return;
@@ -176,7 +197,11 @@ export default function AccountTickets() {
             <Button variant="ghost" size="sm" onClick={loadTickets} icon={<RefreshCw size={12} />}>
               Refresh
             </Button>
-            <Button variant="gold" size="sm" onClick={() => { setError(null); setView('create'); }}
+            <Button variant="gold" size="sm" onClick={() => {
+              setError(null); setLinkedOperatorMessageId(null);
+              setSubject(''); setMessage(''); setCategory('general'); setPriority('normal'); setSettlementId('');
+              setView('create');
+            }}
               icon={<Plus size={12} />}>
               New ticket
             </Button>
@@ -232,6 +257,11 @@ export default function AccountTickets() {
       {/* ── CREATE ───────────────────────────────────────────────────── */}
       {view === 'create' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
+          {linkedOperatorMessageId && (
+            <div role="status" style={{ padding: `${SP.sm}px ${SP.md}px`, background: CARD_HDR, border: `1px solid ${BORDER}`, color: BODY, fontSize: FS.sm }}>
+              Replying to a direct message from SettlementForge. This support ticket will stay linked to that notice.
+            </div>
+          )}
           <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: SP.sm }}>
             <label htmlFor="ticket-category" style={{ flex: 1, fontSize: FS.xs, color: BODY, fontFamily: sans }}>
               Category

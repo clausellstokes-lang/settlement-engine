@@ -257,7 +257,7 @@ shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (193) — prod applied head tracked in `supabase/applied-head.json`,
+- **migrations/** (194) — prod applied head tracked in `supabase/applied-head.json`,
   ledger-checked by `npm run validate:migration-head`. Schema + RLS policies + credit ledger + gallery +
   version history + save-limit + profile-security + auth/credit trust-boundary
   repair (017) + account/billing models (018) + the community gallery —
@@ -265,16 +265,30 @@ shows all visible items.
   SECURITY DEFINER RPCs with sanitized public reads. The chain extends through
   the subscription/pricing + referral + dossier-entitlement models, world-pulse
   atomic-persist RPCs (optimistic-lock advance), gated security-question recovery,
-  consent + velocity guards, and gallery view-dedup — up to the current head. RLS
-  is the security spine.
-- **functions/** (31 Deno edge functions) (Deno edge):
+  consent + velocity guards, gallery view-dedup, and migration 194's private
+  Operator Messages/receipt substrate with lease-safe broadcast delivery and
+  explicit product-update consent — up to the current head. RLS is the security
+  spine.
+- **functions/** (33 Deno edge functions) (Deno edge):
   - `generate-narrative` — AI prose. JWT-auth → `spend_credits` RPC (RLS,
     atomic) → bot guard → Opus thesis + parallel Haiku refinement passes →
     `refund_credits` on failure. Anthropic key is server-only.
   - `stripe-webhook` — verifies the signature (`constructEvent`) before acting;
     uses the service-role key (no user JWT on webhooks).
   - `admin-actions` — JWT-auth → profile `role` check → 403; allowlisted
-    metadata keys/roles (anti-privilege-escalation).
+    metadata keys/roles (anti-privilege-escalation). Operator direct notices,
+    warnings, and bans commit their Account Message + real-actor audit in the
+    database before provider-neutral best-effort mail; a mass broadcast also
+    requires the exact `SEND TO ALL` confirmation and a fresh password AMR.
+  - `operator-message-worker` — disabled-by-default, secret-gated leased courier
+    for queued broadcasts. Stable recipient cursors and per-user email outcomes
+    are database-owned; each provider send requires a heartbeat plus a
+    lease-token-bound recipient CAS claim, whose fresh address/consent/token is
+    the only delivery authority. Abandoned `sending` attempts become terminal
+    outcome-unknown records and are never resent.
+  - `unsubscribe` — public GET-confirm / POST-mutate bearer-token boundary. It
+    calls only the service-role opt-out RPC; GET never mutates and the token can
+    never enable an email category.
   - `create-checkout`, `send-email` — JWT-authed.
   - `_shared/` — `aiGroundingBundle.js` is **built** from app code by
     `scripts/build-edge-shared.mjs`; a freshness test fails the gate on drift. <!-- @enforced-by tests/edgeFunctions/analyticsEventsBundle.freshness.test.js -->

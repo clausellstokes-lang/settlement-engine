@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 193;
+export const MIGRATION_TRAIN_REPO_HEAD = 194;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -278,6 +278,46 @@ export const MIGRATION_WAVES = Object.freeze([
       Object.freeze({
         kind: 'function',
         name: 'assert_create_route_half',
+      }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'operator-messages-consent-and-courier',
+    from: 194,
+    to: 194,
+    purpose: 'Private operator-message receipts, explicit announcement consent, durable consent history, and the lease-safe broadcast courier.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Roll Account, admin, unsubscribe, and courier callers back before forward-fixing their RPC contracts.',
+        'Preserve in-product delivery receipts and consent-change records as user-facing and compliance evidence; never erase them with an automatic rollback.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({
+        kind: 'table',
+        name: 'public.operator_messages',
+      }),
+      Object.freeze({
+        kind: 'table',
+        name: 'public.operator_message_receipts',
+      }),
+      Object.freeze({
+        kind: 'table',
+        name: 'public.operator_message_delivery_jobs',
+      }),
+      Object.freeze({
+        kind: 'table',
+        name: 'public.consent_change_records',
+      }),
+      Object.freeze({
+        kind: 'function',
+        name: 'claim_operator_message_recipient',
+      }),
+      Object.freeze({
+        kind: 'function',
+        name: 'list_my_operator_messages',
       }),
     ]),
   }),

@@ -50,7 +50,9 @@ const INTENDED_ANON = new Set([
   'retention-warning-cron',// cron pg_net; x-cron-secret shared secret, not a JWT (WBF-d, migration 166)
   'account-deletion-worker', // cron pg_net; x-cron-secret, durable deletion queue (migration 175)
   'payment-refund-worker', // cron pg_net; x-cron-secret, durable refund recovery (migration 180)
+  'operator-message-worker', // disabled-by-default pg_net courier; x-cron-secret when activated (migration 194)
   'send-email',            // anon cap_warning path behind a per-IP/recipient rate limit
+  'unsubscribe',           // logged-out token bearer; POST can only opt out
   'auth-recovery',         // logged-out password recovery; the caller has no JWT
   'og-image',              // unfurl bots (no JWT) fetching public gallery OG cards
   'founder-transfer',      // run_due cron (x-cron-secret, no JWT); user actions self-auth in-handler

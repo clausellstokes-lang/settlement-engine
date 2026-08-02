@@ -1,5 +1,5 @@
 /**
- * consent.js — three-tier telemetry consent (client side of the model).
+ * consent.js — four-purpose telemetry consent (client side of the model).
  *
  * Tiers (doc §3):
  *   essential — product telemetry. Default ON unless DNT or explicit opt-out.
@@ -25,8 +25,8 @@
  * on every research capture so a payload's consent basis is auditable.
  *
  * Dependency-free by design (analytics.js imports this; this must not import
- * analytics, or we'd create a cycle). The CONSENT_UPDATED event is fired by the
- * UI caller (PrivacySettings / banner), not here.
+ * analytics, or we'd create a cycle). Consent changes are SERVICE compliance
+ * records written by consentSync, never analytics events.
  *
  * Server clamps the effective tier (min(client, profiles.telemetry_consent));
  * this client copy decides what is even built/enqueued (defense in depth).
@@ -105,7 +105,8 @@ export function getConsent() {
 
 /**
  * Update consent. Merges the patch, stamps updatedAt, persists. Returns the new
- * consent. Does NOT fire CONSENT_UPDATED — the caller does (avoids a cycle).
+ * consent. The signed-in caller persists the change through consentSync so the
+ * server can keep its durable SERVICE-class compliance history.
  * `stampMs` lets callers pass a deterministic timestamp (tests); defaults to now.
  */
 export function setConsent(patch = {}, stampMs) {

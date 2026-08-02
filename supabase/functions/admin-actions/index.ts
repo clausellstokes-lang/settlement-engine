@@ -7,6 +7,8 @@
  *   list_users           — List all users (with profiles)
  *   get_stats            — System-wide statistics
  *   mint_redeem_code     — Mint an operator redeem code (migration 107)
+ *   send_operator_message — Persist a direct notice, then best-effort email
+ *   queue/cancel/list_operator_broadcasts — Audited mass-message controls
  *
  * Authorization: Only users with role='developer' or role='admin'
  * in the profiles table (or the OWNER_EMAIL identity) can invoke this function.
@@ -45,7 +47,21 @@ import { runPricingResync } from "../_shared/pricingResync.ts";
 // (PROTECTED / MODERATION / UNGATED) + the pure guard core live in the shared,
 // unit-tested module so the walker (tests/edgeFunctions/adminActionTwoKeyWalker)
 // classifies every switch case against the SAME single source of truth.
-import { checkTwoKey, decodeJwtAmr, isProtectedAction } from "../_shared/twoKey.ts";
+import {
+  checkBroadcastTwoKey,
+  checkTwoKey,
+  decodeJwtAmr,
+  isBroadcastAction,
+  isProtectedAction,
+} from "../_shared/twoKey.ts";
+import {
+  selectMailAdapter,
+  type MailAdapter,
+} from "../_shared/mailAdapter.ts";
+import {
+  renderOperatorMessageEmail,
+  type OperatorMessageClass,
+} from "../_shared/operatorMessageEmail.ts";
 
 // CORS: fail CLOSED via the shared allowlist (_shared/cors.ts) — NEVER "*" for
 // this admin endpoint. The endpoint is independently protected by JWT auth +
@@ -77,6 +93,76 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 function hasOwn(record: Record<string, unknown>, key: string) {
   return Object.prototype.hasOwnProperty.call(record, key);
 }
+
+function firstRecord(value: unknown): Record<string, unknown> {
+  const candidate = Array.isArray(value) ? value[0] : value;
+  return isRecord(candidate) ? candidate : {};
+}
+
+function resultMessageId(value: unknown): string | null {
+  const row = firstRecord(value);
+  const id = row.messageId ?? row.message_id ?? row.id;
+  return typeof id === "string" && id ? id : null;
+}
+
+function requiredOperatorText(
+  value: unknown,
+  label: string,
+  maxLength: number,
+): string {
+  const text = typeof value === "string" ? value.trim() : "";
+  if (!text) throw new Error(`${label} is required`);
+  if (text.length > maxLength) throw new Error(`${label} is too long`);
+  return text;
+}
+
+function operatorMessageClass(value: unknown): OperatorMessageClass {
+  if (value === "service" || value === "announcement") return value;
+  throw new Error("Invalid operator message class");
+}
+
+// Template keys are a delivery-policy boundary, not cosmetic metadata. Keep the
+// class binding closed here as defense-in-depth with migration 194: a caller may
+// not relabel product mail as transactional service mail (or vice versa).
+const OPERATOR_MESSAGE_TEMPLATE_CLASSES: Readonly<Record<string, OperatorMessageClass>> =
+  Object.freeze({
+    product_update: "announcement",
+    service_notice: "service",
+    moderation_notice: "service",
+    report_outcome: "service",
+    avatar_removed: "service",
+    display_name_reset: "service",
+    warning: "service",
+    ban_notice: "service",
+    custom_service: "service",
+    custom_announcement: "announcement",
+  });
+
+function operatorMessageTemplate(
+  templateValue: unknown,
+  classValue: unknown,
+): { template: string; messageClass: OperatorMessageClass } {
+  const template = typeof templateValue === "string" ? templateValue.trim() : "";
+  if (!template || !hasOwn(OPERATOR_MESSAGE_TEMPLATE_CLASSES, template)) {
+    throw new Error("Invalid operator message template");
+  }
+  const messageClass = operatorMessageClass(classValue);
+  const registeredClass = OPERATOR_MESSAGE_TEMPLATE_CLASSES[template];
+  if (messageClass !== registeredClass) {
+    throw new Error("Operator message template and class do not match");
+  }
+  return { template, messageClass: registeredClass };
+}
+
+const OPERATOR_MESSAGE_RPCS = Object.freeze({
+  direct: "create_operator_direct_message",
+  queueBroadcast: "queue_operator_broadcast",
+  cancelBroadcast: "cancel_operator_broadcast",
+  listBroadcasts: "list_operator_broadcasts",
+  issueWarning: "issue_warning_with_message",
+  setBanned: "set_account_banned_with_message",
+  recordEmail: "record_operator_message_email_result",
+});
 
 // Crockford base32 (no I/L/O/U): unambiguous when a code is read aloud or
 // retyped from paper. 32 symbols divide 256 evenly, so `byte % 32` carries no
@@ -193,10 +279,13 @@ export async function handleAdminActions(
     // Injection seam for the backfill_money_events verb's Stripe reads (tests stub
     // the list pages); production passes nothing → the pinned Stripe client is built.
     stripeClient?: MoneyBackfillStripe;
+    /** Provider-neutral mail seam; tests inject a recording adapter. */
+    mailAdapter?: () => MailAdapter;
   } = {},
 ): Promise<Response> {
   const makeUserClient = deps.userClient ?? defaultUserClient;
   const makeAdminClient = deps.adminClient ?? defaultAdminClient;
+  const makeMailAdapter = deps.mailAdapter ?? selectMailAdapter;
   // CORS + JSON helper are per-request so the allowed Origin can reflect the
   // caller (when an allowlist is configured).
   const cors = corsHeadersFor(req);
@@ -314,7 +403,11 @@ export async function handleAdminActions(
       // System-mutation params (migration 041 report_* functions)
       configSignature,
       // A4 user-management params
-      severity, note, settlementId, mapId, commentId, enabled, full, emailTemplate, emailPayload,
+      severity, note, settlementId, mapId, commentId, enabled, full,
+      // Operator Messages (migration 194).
+      messageClass: rawMessageClass, subject: rawMessageSubject,
+      messageBody: rawMessageBody, messageTemplate: rawMessageTemplate,
+      messageId, audience,
       // A5 ticket-queue params
       ticketId, status, body: replyBody, visibility, faq,
       // Redeem-code minting params (migration 107)
@@ -346,30 +439,127 @@ export async function handleAdminActions(
       return typeof email === "string" && email.includes("@") ? email : null;
     };
 
-    // A4: notify a TARGET user by email (not the actor). Sends via Resend with the
-    // service-role-resolved address. Soft-fails (returns false) when Resend is
-    // unconfigured or errors — notification is never allowed to block or fail an
-    // admin action. Returns whether the user was actually notified (drives the
-    // `notified` audit flag).
-    const notifyTargetEmail = async (
-      target: string, subject: string, text: string,
-    ): Promise<boolean> => {
+    type TargetMailResult = {
+      status: "sent" | "failed" | "skipped";
+      sent: boolean;
+      reason: string | null;
+      provider: string;
+      providerId: string | null;
+    };
+
+    // A4: notify a target by email after the authoritative database action. The
+    // adapter is provider-neutral and inert when unconfigured. Existing support
+    // notification callers use the boolean wrapper below; Operator Messages use
+    // the detailed result to update their receipt without minting a second audit.
+    const deliverTargetEmail = async (
+      target: string,
+      subject: string,
+      text: string,
+      headers?: Record<string, string>,
+    ): Promise<TargetMailResult> => {
+      const mailer = makeMailAdapter();
       try {
-        const apiKey = Deno.env.get("RESEND_API_KEY");
-        const fromEmail = Deno.env.get("RESEND_FROM_EMAIL");
-        if (!apiKey || !fromEmail) return false; // unconfigured — soft fail
+        if (!mailer.configured) {
+          return { status: "skipped", sent: false, reason: "provider_unconfigured", provider: mailer.id, providerId: null };
+        }
         const to = await resolveTargetEmail(target);
-        if (!to) return false;
-        const res = await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ from: fromEmail, to: [to], subject, text }),
-        });
-        return res.ok;
+        if (!to) {
+          return { status: "skipped", sent: false, reason: "no_email_on_account", provider: mailer.id, providerId: null };
+        }
+        const result = await mailer.send({ to, subject, text, headers });
+        return { status: "sent", sent: true, reason: null, provider: mailer.id, providerId: result.id };
       } catch (e) {
-        console.warn("[admin-actions] notify failed:", errorMessage(e));
-        return false;
+        // Provider responses can echo an address or other request detail. Route
+        // them through the structured redactor and expose only the closed
+        // `provider_error` receipt reason to clients/storage.
+        logError("admin-actions", target, e, { stage: "mail_provider_send" });
+        return { status: "failed", sent: false, reason: "provider_error", provider: mailer.id, providerId: null };
       }
+    };
+
+    const notifyTargetEmail = async (
+      target: string,
+      subject: string,
+      text: string,
+    ): Promise<boolean> => (await deliverTargetEmail(target, subject, text)).sent;
+
+    const recordOperatorEmailResult = async (
+      operatorMessageId: string | null,
+      target: string,
+      result: TargetMailResult,
+    ): Promise<void> => {
+      if (!operatorMessageId) return;
+      const { error } = await adminClient.rpc(OPERATOR_MESSAGE_RPCS.recordEmail, {
+        p_message_id: operatorMessageId,
+        p_user_id: target,
+        p_status: result.status,
+        p_provider: result.provider,
+        p_provider_id: result.providerId,
+        p_failure_reason: result.reason,
+      });
+      if (error) {
+        console.warn("[admin-actions] operator email result write failed:", error.message);
+      }
+    };
+
+    const deliverOperatorMessage = async (input: {
+      target: string;
+      messageId: string | null;
+      messageClass: OperatorMessageClass;
+      subject: string;
+      body: string;
+    }): Promise<TargetMailResult> => {
+      let unsubscribeUrl: string | null = null;
+      if (input.messageClass === "announcement") {
+        const { data: allowed, error: allowedError } = await adminClient.rpc(
+          "can_email_user",
+          { p_user_id: input.target, p_category: "product_updates" },
+        );
+        if (allowedError || allowed !== true) {
+          const skipped: TargetMailResult = {
+            status: allowedError ? "failed" : "skipped",
+            sent: false,
+            reason: allowedError ? "consent_check_failed" : "announcement_opt_out",
+            provider: makeMailAdapter().id,
+            providerId: null,
+          };
+          await recordOperatorEmailResult(input.messageId, input.target, skipped);
+          return skipped;
+        }
+        const { data: token, error: tokenError } = await adminClient.rpc(
+          "get_or_mint_unsubscribe_token",
+          { p_user_id: input.target },
+        );
+        if (tokenError || typeof token !== "string" || !token) {
+          const skipped: TargetMailResult = {
+            status: "failed",
+            sent: false,
+            reason: "unsubscribe_token_unavailable",
+            provider: makeMailAdapter().id,
+            providerId: null,
+          };
+          await recordOperatorEmailResult(input.messageId, input.target, skipped);
+          return skipped;
+        }
+        const base = (Deno.env.get("SUPABASE_URL") || "").replace(/\/$/, "");
+        unsubscribeUrl = `${base}/functions/v1/unsubscribe?token=${encodeURIComponent(token)}&category=product_updates`;
+      }
+      const clientUrl = (Deno.env.get("CLIENT_URL") || "https://settlementforge.com").replace(/\/$/, "");
+      const rendered = renderOperatorMessageEmail({
+        messageClass: input.messageClass,
+        subject: input.subject,
+        body: input.body,
+        accountUrl: `${clientUrl}/?view=account&section=messages`,
+        unsubscribeUrl,
+      });
+      const result = await deliverTargetEmail(
+        input.target,
+        rendered.subject,
+        rendered.text,
+        rendered.headers,
+      );
+      await recordOperatorEmailResult(input.messageId, input.target, result);
+      return result;
     };
 
     // Layer 2 (review B16 #1): toggle GoTrue's NATIVE ban via the service-role
@@ -417,6 +607,7 @@ export async function handleAdminActions(
     // logging the real reason server-side only (via adminFail). The amr age rides
     // the per-action A3 audit row as { twoKey:true, amrAgeS }.
     let twoKeyAmrAgeS: number | null = null;
+    let broadcastAmrAgeS: number | null = null;
     // Only gate when a concrete target is present: a protected action with no
     // userId does nothing (its case returns 400), so we let that natural
     // validation stand rather than masking it with a two-key rejection.
@@ -433,6 +624,27 @@ export async function handleAdminActions(
         return adminFail(`two-key gate rejected ${String(action)}: ${twoKey.reason}`, 403);
       }
       twoKeyAmrAgeS = twoKey.amrAgeS;
+    }
+
+    // Mass delivery has its own closed confirmation target. It shares the fresh
+    // password proof but requires the exact server-owned phrase SEND TO ALL;
+    // no client-supplied audience label participates in the comparison.
+    if (isBroadcastAction(action)) {
+      const broadcastTwoKey = checkBroadcastTwoKey({
+        action,
+        typedBroadcastPhrase: isRecord(twoKeyConfirm)
+          ? twoKeyConfirm.typedBroadcastPhrase
+          : undefined,
+        amr: decodeJwtAmr(String(authHeader || "").replace(/^Bearer\s+/i, "")),
+        nowS: Math.floor(Date.now() / 1000),
+      });
+      if (!broadcastTwoKey.ok) {
+        return adminFail(
+          `broadcast two-key gate rejected ${String(action)}: ${broadcastTwoKey.reason}`,
+          403,
+        );
+      }
+      broadcastAmrAgeS = broadcastTwoKey.amrAgeS;
     }
 
     switch (action) {
@@ -852,25 +1064,38 @@ export async function handleAdminActions(
       // We DON'T double-audit here — the RPC owns the audit so the role snapshot
       // and reason are written in one place. Soft-delete-first throughout.
 
-      // Issue a warning (support+). Optionally notify the user by email.
+      // Issue a warning (support+). The database atomically inserts the warning,
+      // its in-app service notice (outward sender=system), and the ONE real-actor
+      // audit row. Email is attempted only after that transaction commits.
       case "issue_warning": {
         if (!userId) return json({ error: "Missing userId" }, 400);
         if (!auditReason) return json({ error: "A warning reason is required" }, 400);
         const sev = typeof severity === "string" ? severity : "notice";
-        let notified = false;
-        if (metadata?.notify === true) {
-          notified = await notifyTargetEmail(
-            userId,
-            "A notice about your SettlementForge account",
-            `An administrator has issued a ${sev} warning on your account.\n\nReason: ${auditReason}\n\nIf you believe this is in error, reply to this email.`,
-          );
-        }
-        const { data, error } = await adminClient.rpc("issue_warning", {
+        const warningSubject = "A notice about your SettlementForge account";
+        const warningBody = `SettlementForge issued a ${sev} warning on your account.\n\nReason: ${auditReason}\n\nUse Feedback & support from your account if you believe this is in error.`;
+        const { data, error } = await adminClient.rpc(OPERATOR_MESSAGE_RPCS.issueWarning, {
           p_actor: callingUser.id, p_target: userId,
-          p_severity: sev, p_reason: auditReason, p_notified: notified,
+          p_severity: sev, p_reason: auditReason,
+          p_message_subject: warningSubject,
+          p_message_body: warningBody,
         });
         if (error) return adminFail(error, 500);
-        return json({ success: true, warningId: data, notified });
+        const operatorMessageId = resultMessageId(data);
+        const delivery = await deliverOperatorMessage({
+          target: userId,
+          messageId: operatorMessageId,
+          messageClass: "service",
+          subject: warningSubject,
+          body: warningBody,
+        });
+        const result = firstRecord(data);
+        return json({
+          success: true,
+          warningId: result.warningId ?? result.warning_id ?? null,
+          messageId: operatorMessageId,
+          notified: delivery.sent,
+          emailReason: delivery.reason,
+        });
       }
 
       // Add an internal note about a user (support+). The user can never read it.
@@ -1178,22 +1403,19 @@ export async function handleAdminActions(
         return json({ success: true, sessionRevoked: authBan, ...(data || {}) });
       }
 
-      // Ban / unban account — reversible soft flag. HIGHEST role only.
+      // Ban / unban account — reversible soft flag. HIGHEST role only. A ban's
+      // service notice and audit commit in the same RPC; courier mail follows.
       case "set_account_banned": {
         if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
         if (!userId) return json({ error: "Missing userId" }, 400);
         const wantBanned = !(enabled === true);
-        let notified = false;
-        if (wantBanned && metadata?.notify === true) {
-          notified = await notifyTargetEmail(
-            userId,
-            "Your SettlementForge account has been suspended",
-            `Your account has been suspended.${auditReason ? `\n\nReason: ${auditReason}` : ""}\n\nReply to this email to appeal.`,
-          );
-        }
-        const { data, error } = await adminClient.rpc("set_account_banned", {
+        const banSubject = "Your SettlementForge account has been suspended";
+        const banBody = `Your account has been suspended.${auditReason ? `\n\nReason: ${auditReason}` : ""}\n\nUse Feedback & support to appeal.`;
+        const { data, error } = await adminClient.rpc(OPERATOR_MESSAGE_RPCS.setBanned, {
           p_actor: callingUser.id, p_target: userId,
           p_banned: wantBanned, p_reason: auditReason,
+          p_message_subject: wantBanned ? banSubject : null,
+          p_message_body: wantBanned ? banBody : null,
         });
         if (error) return adminFail(error, 500);
         // Layer 2 (review B16 #1): a still-valid JWT no longer grants WRITE access
@@ -1204,7 +1426,24 @@ export async function handleAdminActions(
         // SESSION dies, not just write access — closing the gap the profiles flag
         // alone never could. Soft-fails: the DB+RLS layer stands even if it errors.
         const sessionRevoked = await setGoTrueBan(userId, wantBanned);
-        return json({ success: true, notified, sessionRevoked, ...(data || {}) });
+        const operatorMessageId = wantBanned ? resultMessageId(data) : null;
+        const delivery: TargetMailResult = wantBanned
+          ? await deliverOperatorMessage({
+            target: userId,
+            messageId: operatorMessageId,
+            messageClass: "service",
+            subject: banSubject,
+            body: banBody,
+          })
+          : { status: "skipped", sent: false, reason: "not_applicable", provider: makeMailAdapter().id, providerId: null };
+        return json({
+          ...firstRecord(data),
+          success: true,
+          notified: delivery.sent,
+          emailReason: delivery.reason,
+          sessionRevoked,
+          messageId: operatorMessageId,
+        });
       }
 
       // Soft-delete / restore a settlement — reversible. HIGHEST role only.
@@ -1324,31 +1563,110 @@ export async function handleAdminActions(
         return json({ success: true, bundle: data, full: wantFull });
       }
 
-      // Send an email to a user (reuse a send-email lifecycle template). The
-      // template+payload are forwarded; the target's address is resolved
-      // server-side. Writes one audit row (notified reflects the send result).
-      case "send_user_email": {
-        // HIGHEST role only, like every other user-management write. This forwards a
-        // fully caller-supplied subject+body to an arbitrary user's resolved address —
-        // a brand-impersonation / phishing vector if left on the shared support+ gate.
-        // Support's legitimate outbound is the template-based ticket-reply path below,
-        // not this free-text mailer.
+      // Direct operator notice. The Account message is authoritative and commits
+      // with its real-actor audit before the provider-neutral courier is touched.
+      case "send_operator_message": {
         if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
         if (!userId) return json({ error: "Missing userId" }, 400);
-        const subject = typeof emailPayload?.subject === "string"
-          ? emailPayload.subject : "A message from SettlementForge";
-        const body = typeof emailPayload?.body === "string"
-          ? emailPayload.body
-          : (typeof emailTemplate === "string" ? emailTemplate : "");
-        if (!body.trim()) return json({ error: "An email body is required" }, 400);
-        const notified = await notifyTargetEmail(userId, subject, body);
-        await writeAudit({
-          action: "send_user_email",
-          targetUserId: userId, targetType: "profile", targetId: String(userId),
-          after: { subject, length: body.length },
-          destructive: false, reversible: true, notified,
+        let messageClass: OperatorMessageClass;
+        let subject: string;
+        let body: string;
+        let template: string;
+        try {
+          const registeredTemplate = operatorMessageTemplate(
+            rawMessageTemplate,
+            rawMessageClass,
+          );
+          messageClass = registeredTemplate.messageClass;
+          template = registeredTemplate.template;
+          subject = requiredOperatorText(rawMessageSubject, "Subject", 160);
+          body = requiredOperatorText(rawMessageBody, "Message body", 10000);
+        } catch (validationError) {
+          return json({ error: errorMessage(validationError) }, 400);
+        }
+        const { data, error } = await adminClient.rpc(OPERATOR_MESSAGE_RPCS.direct, {
+          p_actor: callingUser.id,
+          p_target: userId,
+          p_class: messageClass,
+          p_subject: subject,
+          p_body: body,
+          p_template: template,
         });
-        return json({ success: true, notified });
+        if (error) return adminFail(error, 500);
+        const operatorMessageId = resultMessageId(data);
+        const delivery = await deliverOperatorMessage({
+          target: userId,
+          messageId: operatorMessageId,
+          messageClass,
+          subject,
+          body,
+        });
+        return json({
+          success: true,
+          messageId: operatorMessageId,
+          notified: delivery.sent,
+          emailReason: delivery.reason,
+        });
+      }
+
+      case "queue_operator_broadcast": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (audience !== "all") return json({ error: "Broadcast audience must be all" }, 400);
+        let messageClass: OperatorMessageClass;
+        let subject: string;
+        let body: string;
+        let template: string;
+        try {
+          const registeredTemplate = operatorMessageTemplate(
+            rawMessageTemplate,
+            rawMessageClass,
+          );
+          messageClass = registeredTemplate.messageClass;
+          template = registeredTemplate.template;
+          subject = requiredOperatorText(rawMessageSubject, "Subject", 160);
+          body = requiredOperatorText(rawMessageBody, "Message body", 10000);
+        } catch (validationError) {
+          return json({ error: errorMessage(validationError) }, 400);
+        }
+        const { data, error } = await adminClient.rpc(OPERATOR_MESSAGE_RPCS.queueBroadcast, {
+          p_actor: callingUser.id,
+          p_class: messageClass,
+          p_subject: subject,
+          p_body: body,
+          p_template: template,
+          p_audience: "all",
+          p_two_key_amr_age_s: broadcastAmrAgeS,
+        });
+        if (error) return adminFail(error, 500);
+        const result = firstRecord(data);
+        return json({
+          success: true,
+          messageId: resultMessageId(data),
+          sendAfter: result.sendAfter ?? result.send_after ?? null,
+          audienceCount: result.audienceCount ?? result.audience_count ?? null,
+        });
+      }
+
+      case "cancel_operator_broadcast": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (typeof messageId !== "string" || !messageId) {
+          return json({ error: "A messageId is required" }, 400);
+        }
+        const { data, error } = await adminClient.rpc(OPERATOR_MESSAGE_RPCS.cancelBroadcast, {
+          p_actor: callingUser.id,
+          p_message_id: messageId,
+        });
+        if (error) return adminFail(error, 500);
+        return json({ ...firstRecord(data), success: true });
+      }
+
+      case "list_operator_broadcasts": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        const { data, error } = await adminClient.rpc(OPERATOR_MESSAGE_RPCS.listBroadcasts, {
+          p_limit: 25,
+        });
+        if (error) return adminFail(error, 500);
+        return json({ success: true, broadcasts: Array.isArray(data) ? data : [] });
       }
 
       // ── A5 support-ticket agent queue ───────────────────────────────────────

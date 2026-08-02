@@ -460,11 +460,25 @@ verify_jwt = false
 [functions.payment-refund-worker]
 verify_jwt = false
 
+# Cron-invoked Operator Messages courier. Migration 194 seeds its private
+# dispatcher disabled with no URL/secret, so the deployed function remains inert
+# until an owner deliberately configures and enables it. When active it
+# authenticates x-cron-secret in-handler; pg_net carries no user JWT.
+[functions.operator-message-worker]
+verify_jwt = false
+
 # Per-template self-auth: authenticated templates read the recipient from
 # auth.getUser() (401 without it); the anonymous cap_warning path takes an explicit
 # recipient behind a per-IP/per-recipient rate limit + bot guard. The platform gate
 # would block the anonymous cap_warning email (anon users have no user JWT).
 [functions.send-email]
+verify_jwt = false
+
+# Public GET-confirm / POST-opt-out endpoint linked from announcement email.
+# Possession of the opaque per-user token authorizes only an opt-OUT through the
+# migration-194 service-role-only RPC; the edge is the sole bearer-token boundary.
+# Email clients and logged-out users carry no Supabase JWT.
+[functions.unsubscribe]
 verify_jwt = false
 
 # Logged-OUT password recovery (Auth Phase 2): the caller has NO JWT (they forgot

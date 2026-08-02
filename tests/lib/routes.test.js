@@ -84,6 +84,15 @@ describe('routes — resolveLocation paths', () => {
     expect(resolveLocation('/compare/kanka#top').view).toBe('compare-kanka');
   });
 
+  it('preserves Account section and linked-message query state', () => {
+    expect(resolveLocation('/account?section=messages')).toMatchObject({
+      view: 'account', params: { section: 'messages' },
+    });
+    expect(resolveLocation('/account?section=support&message=msg%2Fone')).toMatchObject({
+      view: 'account', params: { section: 'support', message: 'msg/one' },
+    });
+  });
+
   it('marks an unknown path as notFound but still returns the default view', () => {
     const r = resolveLocation('/totally-made-up');
     expect(r.view).toBe('generate');

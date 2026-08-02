@@ -456,6 +456,10 @@
    "kind": "rationale",
    "rationale": "Thin HTTP-shell authority pin paired with executed admission behavior in the custom-content domain and PGlite suites. This source test forbids client-posted vocabulary reconstruction and requires the generated server-version handshake; planting the same textual regression in the standing sweep would duplicate its direct positive and negative source assertions while mutating a shared edge entrypoint."
   },
+  "tests/edgeFunctions/operatorMessagesNoTelemetry.test.js": {
+   "kind": "rationale",
+   "rationale": "Self-proving Operator Messages boundary census: seven exact production surfaces each carry a file-specific live-export anchor, while an embedded two-arm planted fixture proves that both the analytics-emission detector and the Herald/Wizard News register detector fire on every ordinary run. A standing mutation would only replay that synthetic proof while editing multiple production Operator Messages surfaces during a broad sweep."
+  },
   "tests/edgeFunctions/paymentRefundDurableWorker.test.js": {
    "kind": "rationale",
    "ref": "edge-lifecycle-double-pin"
@@ -620,6 +624,10 @@
   "tests/lint/discourseLexiconCoverage.test.js": {
    "kind": "mutation",
    "label": "discourse/lexicon relation-type coverage gap"
+  },
+  "tests/lint/telemetrySimulationSeparation.test.js": {
+   "kind": "rationale",
+   "rationale": "Self-proving telemetry-layer walker: an embedded fixture exercises static import, dynamic import, and require spellings, and the production scans carry non-vacuity floors over both the complete worldPulse tree and the analytics-module roster. A standing source mutation would duplicate the detector fixture while editing broad shared engine or analytics surfaces during the sweep."
   },
   "tests/lint/domainAnyCastBaseline.test.js": {
    "kind": "mutation",
@@ -1193,6 +1201,10 @@
   "tests/security/operationalObligationHealth.pglite.test.js": {
    "kind": "mutation",
    "label": "obligations/webhook critical-age boundary drift"
+  },
+  "tests/security/operatorMessages.pglite.test.js": {
+   "kind": "rationale",
+   "ref": "pglite-executed"
   },
   "tests/security/paymentRefundObligations.pglite.test.js": {
    "kind": "rationale",

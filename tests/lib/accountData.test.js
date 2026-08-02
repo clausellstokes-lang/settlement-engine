@@ -84,7 +84,7 @@ function archiveFor(items = []) {
 }
 
 describe('buildAccountExport', () => {
-  it('captures profile, settlements, campaigns, and the full custom-content ledger archive', async () => {
+  it('captures portable account state plus export-only operator/compliance records', async () => {
     const { buildAccountExport, ACCOUNT_EXPORT_VERSION } = await load();
     const customContent = {
       institutions: [{
@@ -100,6 +100,12 @@ describe('buildAccountExport', () => {
       campaigns: [{ id: 'c1' }],
       customContent,
       customContentArchive: archiveFor(customContent.institutions),
+      serviceRecords: {
+        schemaVersion: 1,
+        importable: false,
+        operatorMessages: [{ id: 'm1', subject: 'A service notice' }],
+        consentChanges: [{ consentKey: 'research', priorValue: true, newValue: false }],
+      },
     });
 
     expect(out.version).toBe(ACCOUNT_EXPORT_VERSION);
@@ -123,6 +129,12 @@ describe('buildAccountExport', () => {
     });
     expect(out.customContentArchive.archiveFingerprint)
       .toMatch(/^[a-f0-9]{64}$/);
+    expect(out.serviceRecords).toEqual({
+      schemaVersion: 1,
+      importable: false,
+      operatorMessages: [{ id: 'm1', subject: 'A service notice' }],
+      consentChanges: [{ consentKey: 'research', priorValue: true, newValue: false }],
+    });
     expect(out.preflight).toMatchObject({
       status: 'portable',
       counts: {
@@ -130,6 +142,8 @@ describe('buildAccountExport', () => {
         campaigns: 1,
         contentDefinitions: 1,
         contentRevisions: 1,
+        operatorMessages: 1,
+        consentChanges: 1,
       },
       customContentArchive: {
         archiveFingerprint: out.customContentArchive.archiveFingerprint,
@@ -146,6 +160,12 @@ describe('buildAccountExport', () => {
     expect(out.settlements).toEqual([]);
     expect(out.campaigns).toEqual([]);
     expect(out.customContentArchive).toBeNull();
+    expect(out.serviceRecords).toEqual({
+      schemaVersion: 1,
+      importable: false,
+      operatorMessages: [],
+      consentChanges: [],
+    });
   });
 
   it('fails before download when loaded custom content lacks its authoritative archive', async () => {
@@ -307,6 +327,30 @@ describe('buildAccountExport', () => {
         code: 'account_export_envelope_limit_exceeded',
       }),
     );
+  });
+
+  it('splits oversized export-only service history without blocking the restorable core', async () => {
+    const { preflightAccountExport, planAccountExportDownloads } = await load();
+    const state = {
+      auth: { user: { email: 'owner@example.test' } },
+      serviceRecords: {
+        schemaVersion: 1,
+        importable: false,
+        operatorMessages: [{ id: 'large-message', body: 'z'.repeat(MAX_IMPORT_BYTES + 1) }],
+        consentChanges: [],
+      },
+    };
+    const preflight = preflightAccountExport(state);
+    expect(preflight.ok).toBe(true);
+    expect(preflight.diagnostics.envelopeBytes).toBeLessThan(MAX_IMPORT_BYTES);
+    expect(preflight.diagnostics.downloadBytes).toBeGreaterThan(MAX_IMPORT_BYTES);
+
+    const downloads = planAccountExportDownloads(state);
+    expect(downloads).toHaveLength(2);
+    expect(downloads.map(download => download.importable)).toEqual([true, false]);
+    expect(downloads[1].filename).toMatch(/-service-records\.json$/);
+    expect(JSON.parse(downloads[0].json).serviceRecords.operatorMessages).toEqual([]);
+    expect(JSON.parse(downloads[1].json).serviceRecords.operatorMessages[0].id).toBe('large-message');
   });
 });
 

@@ -73,7 +73,8 @@ const lightColors = Object.freeze({
   'slate-700': '#435463',  // AI TEXT on slate-100
   'slate-100': '#E4E9EE',
 
-  // Red — destructive actions and hard errors only
+  // Red — destructive actions and hard errors; the only non-destructive use is
+  // the named operatorAlert semantic alias, fenced to unread-count chrome.
   'red-600': '#A23434',
   'red-100': '#F4DEDE',
 
@@ -128,6 +129,9 @@ export const semantic = Object.freeze({
   slateDim:          color['slate-700'],
 
   // Status
+  // Operator-message unread count ONLY. This is an operational chrome alert,
+  // not a general emphasis colour and never a reader/manuscript accent.
+  operatorAlert:  color['red-600'],
   destructive:    color['red-600'],
   destructiveBg:  color['red-100'],
   success:        color['green-600'],

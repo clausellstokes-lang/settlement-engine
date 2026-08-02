@@ -535,7 +535,7 @@ export default function App() {
               displayName={displayName}
               isElevated={isElevated}
               onSignIn={() => setAuthModalOpen(true)}
-              onAccount={() => setView('account')}
+              onAccount={() => setView('account')} onMessages={() => navigate('account', { search: '?section=messages' })}
               onManageSubscription={() => setView('pricing')}
             />
           </header>
@@ -666,7 +666,7 @@ export default function App() {
                 displayName={displayName}
                 isElevated={isElevated}
                 onSignIn={() => setAuthModalOpen(true)}
-                onAccount={() => setView('account')}
+                onAccount={() => setView('account')} onMessages={() => navigate('account', { search: '?section=messages' })}
                 onManageSubscription={() => setView('pricing')}
               />
             </div>

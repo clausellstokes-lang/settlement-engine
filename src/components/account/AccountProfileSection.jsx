@@ -6,7 +6,7 @@
  * and arrive via props. The RoleBadge helper moved here with it (it was only
  * used by this section).
  */
-import { User, Shield, Check, X, Edit3, Mail, Bot, } from 'lucide-react';
+import { User, Shield, Check, X, Edit3, Bot, } from 'lucide-react';
 import { AI_MODEL_OPTIONS } from '../../config/pricing.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
@@ -65,7 +65,6 @@ function avatarBackground(url) {
 export default function AccountProfileSection({
   auth,
   avatarInput, setAvatarInput,
-  emailNotifications, setEmailNotifications,
   modelPreference, setModelPreference,
   editingName, setEditingName,
   nameInput, setNameInput,
@@ -161,16 +160,6 @@ export default function AccountProfileSection({
             placeholder="https://..."
             style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, color: INK }}
           />
-        </label>
-        <label htmlFor="account-email-notifications" style={{ display: 'flex', alignItems: 'center', gap: SP.sm, fontSize: FS.sm, color: SECOND, fontWeight: 700 }}>
-          <input
-            id="account-email-notifications"
-            aria-label="Email notifications"
-            type="checkbox"
-            checked={emailNotifications}
-            onChange={e => setEmailNotifications(e.target.checked)}
-          />
-          <Mail size={14} color={GOLD} /> Email notifications
         </label>
         <label htmlFor="account-model-preference" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Bot size={14} color={GOLD} /> AI model preference</span>

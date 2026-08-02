@@ -18,7 +18,7 @@ import Section from './AccountSection.jsx';
 import AccountFAQ from './AccountFAQ.jsx';
 import AccountTickets from './AccountTickets.jsx';
 
-export default function AccountSupportSection({ auth: _auth } = {}) {
+export default function AccountSupportSection({ auth: _auth, operatorMessage = null } = {}) {
   return (
     <Section title="Customer Support">
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg }}>
@@ -38,7 +38,7 @@ export default function AccountSupportSection({ auth: _auth } = {}) {
         </div>
 
         {/* Tickets — list / create / thread. */}
-        <AccountTickets />
+        <AccountTickets operatorMessage={operatorMessage} />
       </div>
     </Section>
   );

@@ -6,10 +6,11 @@
  * new switch case that nobody classifies could quietly ship an
  * account-mutating action with no two-key confirm. This walker removes that
  * habitat. It parses the edge function's switch and asserts EVERY case label is
- * classified into exactly ONE of the three frozen sets in _shared/twoKey.ts —
- * PROTECTED (two-key: retype id + fresh password amr), MODERATION (typed-item-id
- * confirm, staff-only), or UNGATED (reads + non-destructive staff writes). A new,
- * unclassified action FAILS here with a message telling the author how to comply.
+ * classified into exactly ONE of the four frozen sets in _shared/twoKey.ts —
+ * PROTECTED (two-key: retype id + fresh password amr), BROADCAST (exact mass-send
+ * phrase + fresh password amr), MODERATION (typed-item-id confirm, staff-only),
+ * or UNGATED (reads + non-destructive staff writes). A new, unclassified action
+ * FAILS here with a message telling the author how to comply.
  *
  * It also pins the CLIENT half: no protected action in AdminUsersPanel may reach
  * the edge through a bare runAction/callAdmin — it must route through the
@@ -23,6 +24,8 @@ const repo = process.cwd();
 const twoKeySrc = readFileSync(resolve(repo, 'supabase/functions/_shared/twoKey.ts'), 'utf8');
 const edgeSrc = readFileSync(resolve(repo, 'supabase/functions/admin-actions/index.ts'), 'utf8');
 const panelSrc = readFileSync(resolve(repo, 'src/components/admin/AdminUsersPanel.jsx'), 'utf8');
+const broadcastPanelSrc = readFileSync(resolve(repo, 'src/components/admin/AdminBroadcastPanel.jsx'), 'utf8');
+const twoKeyDialogSrc = readFileSync(resolve(repo, 'src/components/admin/AdminTwoKeyDialog.jsx'), 'utf8');
 
 /** Extract the string members of an `export const NAME ... = new Set([ ... ])`. */
 function extractSet(name) {
@@ -32,6 +35,7 @@ function extractSet(name) {
 }
 
 const PROTECTED = extractSet('PROTECTED_ACTION_SET');
+const BROADCAST = extractSet('BROADCAST_ACTION_SET');
 const MODERATION = extractSet('MODERATION_ACTION_SET');
 const UNGATED = extractSet('UNGATED_ACTION_SET');
 
@@ -48,19 +52,20 @@ describe('admin-actions two-key walker — manifest covers the switch exactly', 
     expect(new Set(caseLabels).size).toBe(caseLabels.length);
   });
 
-  it('the three manifest sets are pairwise DISJOINT', () => {
-    const all = [...PROTECTED, ...MODERATION, ...UNGATED];
+  it('the four manifest sets are pairwise DISJOINT', () => {
+    const all = [...PROTECTED, ...BROADCAST, ...MODERATION, ...UNGATED];
     expect(new Set(all).size, 'an action is classified into more than one set').toBe(all.length);
   });
 
   it('EVERY switch case is classified into exactly one set (new actions must be classified)', () => {
-    const classified = new Set([...PROTECTED, ...MODERATION, ...UNGATED]);
+    const classified = new Set([...PROTECTED, ...BROADCAST, ...MODERATION, ...UNGATED]);
     const unclassified = caseLabels.filter((c) => !classified.has(c));
     expect(
       unclassified,
       `admin-actions switch case(s) not classified in _shared/twoKey.ts:\n  ${unclassified.join('\n  ')}\n` +
         'Add each to PROTECTED_ACTION_SET (account premium/tier/entitlement change, ' +
-        'ban/disable, role change → two-key), MODERATION_ACTION_SET (reversible ' +
+        'ban/disable, role change → account two-key), BROADCAST_ACTION_SET (mass ' +
+        'delivery → exact phrase + password), MODERATION_ACTION_SET (reversible ' +
         'staff content moderation → typed-item-id confirm), or UNGATED_ACTION_SET ' +
         '(reads + non-destructive staff writes). Fail closed: if unsure, PROTECTED.',
     ).toEqual([]);
@@ -68,7 +73,7 @@ describe('admin-actions two-key walker — manifest covers the switch exactly', 
 
   it('NO manifest entry is a phantom (every classified action is a real switch case)', () => {
     const labels = new Set(caseLabels);
-    const phantom = [...PROTECTED, ...MODERATION, ...UNGATED].filter((a) => !labels.has(a));
+    const phantom = [...PROTECTED, ...BROADCAST, ...MODERATION, ...UNGATED].filter((a) => !labels.has(a));
     expect(
       phantom,
       `twoKey.ts classifies action(s) that are not switch cases:\n  ${phantom.join('\n  ')}`,
@@ -88,7 +93,8 @@ describe('admin-actions two-key walker — manifest covers the switch exactly', 
 describe('admin-actions two-key walker — client routes protected actions through the modal', () => {
   it('AdminUsersPanel wires the two-key confirm helper', () => {
     expect(panelSrc).toMatch(/openTwoKey\(/);
-    expect(panelSrc).toMatch(/reauthenticateWithPassword/);
+    expect(panelSrc).toMatch(/AdminTwoKeyDialog/);
+    expect(twoKeyDialogSrc).toMatch(/reauthenticateWithPassword/);
   });
 
   it('no protected action reaches the edge via a bare runAction/callAdmin (must go through openTwoKey)', () => {
@@ -100,6 +106,14 @@ describe('admin-actions two-key walker — client routes protected actions throu
           'route it through openTwoKey (retype id + password) instead.',
       ).toBeNull();
     }
+  });
+
+  it('the broadcast composer routes queueing through exact SEND TO ALL two-key', () => {
+    expect(BROADCAST).toEqual(['queue_operator_broadcast']);
+    expect(broadcastPanelSrc).toContain("const BROADCAST_CONFIRMATION_PHRASE = 'SEND TO ALL'");
+    expect(broadcastPanelSrc).toMatch(/AdminTwoKeyDialog/);
+    expect(broadcastPanelSrc).toMatch(/confirm:\s*\{\s*typedBroadcastPhrase:\s*typedText\s*\}/);
+    expect(broadcastPanelSrc).toMatch(/onConfirmed=[\s\S]*?callAdmin\(\{[\s\S]*?action:\s*'queue_operator_broadcast'/);
   });
 
   it('every protected action literal in the panel lives inside an openTwoKey buildBody', () => {

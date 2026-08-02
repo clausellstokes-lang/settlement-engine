@@ -123,9 +123,10 @@ Rules:
   lightweight banner gates `posthog.init()`. Declining PostHog still allows first-party essential
   telemetry (cookieless, pseudonymous, legitimate-interest posture, DNT honored). Softening options:
   `persistence: 'memory'` (cookieless PostHog, weaker cross-session joins) or the EU cloud host.
-- **UI surfaces:** a `PrivacySettings` section in `src/components/AccountPage.jsx` (three plain-language
-  toggles + data explainer link), and a one-time post-first-save `ResearchOptInCard`
-  (pattern: `src/components/dossier/WelcomeCreditCard.jsx`). Both fire `consent_updated`.
+- **UI surfaces:** a `PrivacySettings` section in `src/components/AccountPage.jsx` (four plain-language
+  toggles + data explainer link). Signed-in changes write a durable SERVICE-class
+  consent-history record; they do not fire product analytics. A future opt-in card
+  must use that same service writer rather than introduce a telemetry event.
 - The default purge deletes **everything including research-consented rows** — erasure beats dataset
   completeness. The research dataset's durability comes from aggregate tables and exports, which
   contain no actor ids.

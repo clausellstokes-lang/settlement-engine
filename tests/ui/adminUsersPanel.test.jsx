@@ -153,12 +153,12 @@ describe('AdminUsersPanel — A4 user-management UI', () => {
       const call = invoke.mock.calls.find(([, opts]) => opts?.body?.action === 'set_account_banned');
       expect(call).toBeTruthy();
       expect(call[1].body.enabled).toBe(false);          // currently unbanned ⇒ ban
-      expect(call[1].body.metadata).toEqual({ notify: true });
+      expect(call[1].body.metadata).toBeUndefined();
       expect(call[1].body.confirm).toEqual({ typedTargetId: 'user-123' });
     });
   });
 
-  test('the two-key modal Confirm stays DISABLED until the retyped account id matches', async () => {
+  test('the two-key modal Confirm stays DISABLED until the id matches and password is present', async () => {
     const Panel = await importPanel();
     render(<Panel />);
     await openAlice();
@@ -171,7 +171,9 @@ describe('AdminUsersPanel — A4 user-management UI', () => {
     fireEvent.change(within(dialog).getByLabelText(/retype the account id/i), { target: { value: 'the-wrong-id' } });
     expect(confirm.disabled).toBe(true);                 // wrong id
     fireEvent.change(within(dialog).getByLabelText(/retype the account id/i), { target: { value: 'user-123' } });
-    expect(confirm.disabled).toBe(false);                // matches ⇒ enabled
+    expect(confirm.disabled).toBe(true);                 // id alone is only one key
+    fireEvent.change(within(dialog).getByLabelText(/your account password/i), { target: { value: 'hunter2' } });
+    expect(confirm.disabled).toBe(false);                // both deliberate-confirmation fields present
   });
 
   test('Grant / refund opens the two-key modal and sends the delta + typed id confirm', async () => {
@@ -190,7 +192,7 @@ describe('AdminUsersPanel — A4 user-management UI', () => {
     });
   });
 
-  test('Issue warning prompts then invokes issue_warning with the reason + notify', async () => {
+  test('Issue warning invokes the atomic message action without a client suppression control', async () => {
     const Panel = await importPanel();
     render(<Panel />);
     await openAlice();
@@ -202,7 +204,73 @@ describe('AdminUsersPanel — A4 user-management UI', () => {
       const call = invoke.mock.calls.find(([, o]) => o?.body?.action === 'issue_warning');
       expect(call).toBeTruthy();
       expect(call[1].body.reason).toBe('be civil');
-      expect(call[1].body.metadata).toEqual({ notify: true });
+      expect(call[1].body.metadata).toBeUndefined();
+    });
+  });
+
+  test('Send notice uses the template-first Operator Message composer and renders hostile markup as text', async () => {
+    const Panel = await importPanel();
+    render(<Panel />);
+    await openAlice();
+    invoke.mockClear();
+
+    fireEvent.click(screen.getByRole('button', { name: /^send notice$/i }));
+    const dialog = await screen.findByRole('dialog');
+    fireEvent.change(within(dialog).getByLabelText(/notice template/i), {
+      target: { value: 'display_name_reset' },
+    });
+    fireEvent.change(within(dialog).getByLabelText(/notice message/i), {
+      target: { value: '<img alt="tracking pixel" src=x> Plain notice' },
+    });
+    expect(within(dialog).queryByAltText('tracking pixel')).toBeNull();
+    expect(within(dialog).getByLabelText(/account message preview/i).textContent)
+      .toContain('<img alt="tracking pixel" src=x> Plain notice');
+
+    fireEvent.click(within(dialog).getByRole('button', { name: /^send notice$/i }));
+    await waitFor(() => {
+      const call = invoke.mock.calls.find(([, opts]) => opts?.body?.action === 'send_operator_message');
+      expect(call).toBeTruthy();
+      expect(call[1].body).toEqual({
+        action: 'send_operator_message',
+        userId: 'user-123',
+        messageClass: 'service',
+        subject: 'Your display name was reset',
+        messageBody: '<img alt="tracking pixel" src=x> Plain notice',
+        messageTemplate: 'display_name_reset',
+      });
+    });
+    expect(invoke.mock.calls.some(([, opts]) => opts?.body?.action === 'send_user_email')).toBe(false);
+  });
+
+  test('Send notice binds custom announcement class to its template with no independent class control', async () => {
+    const Panel = await importPanel();
+    render(<Panel />);
+    await openAlice();
+    invoke.mockClear();
+
+    fireEvent.click(screen.getByRole('button', { name: /^send notice$/i }));
+    const dialog = await screen.findByRole('dialog');
+    expect(within(dialog).queryByRole('combobox', { name: /delivery class/i })).toBeNull();
+    const templates = within(dialog).getByLabelText(/notice template/i);
+    expect(within(templates).getByRole('option', { name: /custom service notice/i })).toBeTruthy();
+    expect(within(templates).getByRole('option', { name: /custom announcement/i })).toBeTruthy();
+    expect(within(templates).queryByRole('option', { name: /^custom notice$/i })).toBeNull();
+    fireEvent.change(templates, { target: { value: 'custom_announcement' } });
+    fireEvent.change(within(dialog).getByLabelText(/notice message/i), {
+      target: { value: 'Optional product news.' },
+    });
+    fireEvent.click(within(dialog).getByRole('button', { name: /^send notice$/i }));
+
+    await waitFor(() => {
+      const call = invoke.mock.calls.find(([, opts]) =>
+        opts?.body?.action === 'send_operator_message'
+      );
+      expect(call?.[1].body).toMatchObject({
+        messageClass: 'announcement',
+        messageTemplate: 'custom_announcement',
+        subject: 'News from SettlementForge',
+        messageBody: 'Optional product news.',
+      });
     });
   });
 

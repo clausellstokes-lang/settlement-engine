@@ -146,3 +146,42 @@ direct-message bodies authored (long; moderation notices are records).
   is correct for this one surface); whether developers may send DIRECT
   notices or only admins (v1 ships both per the owner's words; narrowing is
   one config row).
+
+> ### PROGRESS — 2026-08-02 — OPERATOR MESSAGES IMPLEMENTED (THIS COMMIT)
+>
+> - **IMPLEMENTED:** one operator-message substrate now carries direct notices
+>   and one-row broadcasts; caller-scoped lazy receipts own unread/read truth;
+>   the Account section, all three badge render points, linked support reply,
+>   role-gated admin composition, five-minute broadcast cancellation, explicit
+>   Product updates consent, plain-text provider-neutral mail, data export,
+>   account erasure, compliance history, and the lease-safe courier are wired.
+> - **ALIGNMENT:** declared empty with reason. This is an out-of-world account
+>   and compliance surface; it reads no simulation alignment axis and writes no
+>   settlement constituent, roster, institution, or derived alignment stock.
+> - **EDIT-VERB STORY:** recorded service-only decision. Received messages and
+>   receipts are operator-authored compliance records, not DM-editable world
+>   state. A member may open/read and reply through the existing support verb;
+>   no AI proposal surface exists, because an AI must never author, rewrite, or
+>   dismiss an operator notice on a member's behalf.
+> - **CONFIRMED:** the repair-and-accessibility gate passed **11 files / 91
+>   tests**; the Operator Messages Deno groups passed **81/81** assertions; full
+>   typecheck passed; lint passed with **0 errors / 26 standing warnings**; and
+>   `git diff --check` passed.
+> - **CONFIRMED:** `npm run check:tail` exited **0** after the implementation and
+>   ratchet repairs: the main census passed **2,129 files** with 1 skipped and
+>   **22,581 tests** with 54 skipped; the production build completed; prerender
+>   wrote **311** route documents; and `verify:dist` passed **47 files / 364
+>   tests**. The later ledger/legal-note-only edits passed their focused docs
+>   gate **75/75**.
+> - **BANKED FOR THE FINAL ADVERSARIAL PASS (owner order 2026-08-02; do not fix
+>   now):** the exact-tree full-gate rerun passed the same **2,129 files / 22,581
+>   assertions** but exited **1** on five late Vitest `EnvironmentTeardownError`
+>   reports from `tests/components/navFlowArrows.test.jsx`, where
+>   `src/lib/creditLedger.js` was requested after the test environment closed.
+>   The cause is **PLAUSIBLY** load-sensitive teardown, not adjudicated; no
+>   isolation rerun or repair was attempted, and this item is mirrored in
+>   `docs/SOL_QUEUE.md` §5.
+> - **CONFIRMED INERT:** migration 194 seeds the private courier config with
+>   `enabled=false`, `url=null`, and `secret=null`; no deployment, migration
+>   application, secret configuration, cron activation, email dispatch, soak,
+>   lighting, tuning, push, or golden re-record was performed.

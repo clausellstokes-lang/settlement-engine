@@ -7,7 +7,10 @@
  * that the importer rejects solely because the two sides disagree on limits.
  */
 
-export const ACCOUNT_EXPORT_VERSION = 3;
+// v4 adds an export-only `serviceRecords` section (operator messages/receipts
+// and consent history). Import deliberately ignores it: compliance records are
+// user-readable, not portable state that another account may recreate.
+export const ACCOUNT_EXPORT_VERSION = 4;
 // The constitutional custom-content archive is independently capped at
 // 16 MiB. Leave equal bounded headroom for settlements/campaigns and JSON
 // envelope overhead so a valid archive is not rejected merely because it was

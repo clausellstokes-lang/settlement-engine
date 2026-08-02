@@ -15,6 +15,7 @@ import { installAnalyticsQueue, setAnalyticsElevated } from './lib/analyticsQueu
 import { track, EVENTS } from './lib/analytics.js';
 import { returnVisitBand, stampVisit } from './lib/session.js';
 import { reportError, installGlobalErrorHandlers } from './lib/errorReporter.js';
+import OperatorMessagesProvider from './components/account/OperatorMessagesProvider.jsx';
 
 // Emit design tokens as CSS custom properties on :root so stylesheets and
 // inline styles can read them as `var(--color-gold-500)`, `var(--space-4)`,
@@ -149,6 +150,8 @@ class ErrorBoundary extends Component {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ErrorBoundary>
-    <App />
+    <OperatorMessagesProvider>
+      <App />
+    </OperatorMessagesProvider>
   </ErrorBoundary>,
 );

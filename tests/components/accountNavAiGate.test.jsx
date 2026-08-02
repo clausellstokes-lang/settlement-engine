@@ -28,4 +28,10 @@ describe('AccountNav — AI & keys row gate', () => {
     expect(screen.getByText('Profile')).toBeTruthy();
     expect(screen.getByText('Subscription')).toBeTruthy();
   });
+
+  it('keeps Messages present and gives its shared count an accessible label', () => {
+    render(<AccountNav section="profile" setSection={() => {}} showAiKeys={false} unreadCount={3} />);
+    const messages = screen.getByRole('button', { name: 'Messages, 3 unread messages' });
+    expect(messages.querySelector('[data-operator-unread-badge="true"]')).toBeTruthy();
+  });
 });

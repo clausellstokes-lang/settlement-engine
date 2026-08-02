@@ -18,7 +18,6 @@
   "public.bump_public_view": "029_gallery_view_dedup.sql",
   "public.claim_ticket": "055_support_tickets.sql",
   "public.clear_recovery_lockout_by_email": "068_recovery_lockout_selfheal.sql",
-  "public.create_ticket": "060_enforce_account_status_support_tickets.sql",
   "public.current_user_has_premium_access": "024_billing_retention_and_atomic_mutations.sql",
   "public.current_user_has_role": "050_admin_least_privilege.sql",
   "public.current_user_is_highest": "050_admin_least_privilege.sql",

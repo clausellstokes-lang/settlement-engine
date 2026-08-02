@@ -8,7 +8,8 @@
  * default. This module is that bridge, and only that.
  *
  * ── The two directions, and why they are not symmetric ───────────────────────
- * PUSH (a toggle) mirrors the whole record up. It is FIRE AND FORGET: localStorage is
+ * PUSH (a toggle) mirrors the whole record through the consent RPC. It is FIRE AND
+ * FORGET: localStorage is
  * already written by the time we get here and stays the offline source of truth, so a
  * failed mirror is reported to the user and changes nothing else. It must never revert a
  * toggle, because the user's stated choice is not contingent on our network.
@@ -61,29 +62,48 @@ export function applyServerOptOut(row, local = getConsent()) {
   return patch;
 }
 
-/** The signed-in user, or null. Never throws; an unconfigured build has no user. */
-async function currentUserId() {
-  if (!isConfigured || !supabase) return null;
+/** Resolve auth without conflating a real signed-out state with a failed lookup. */
+async function currentUserLookup() {
+  if (!isConfigured || !supabase) return { userId: null, failure: 'unconfigured' };
   try {
-    const { data } = await supabase.auth.getUser();
-    return data?.user?.id || null;
-  } catch { return null; }
+    const { data, error } = await supabase.auth.getUser();
+    if (error) return { userId: null, failure: 'auth_lookup_failed' };
+    return { userId: data?.user?.id || null, failure: data?.user ? null : 'not_authenticated' };
+  } catch {
+    return { userId: null, failure: 'auth_lookup_failed' };
+  }
+}
+
+/** The signed-in user, or null. Read paths remain best-effort and never throw. */
+async function currentUserId() {
+  return (await currentUserLookup()).userId;
 }
 
 /**
- * Mirror the current (or given) consent up to profiles.telemetry_consent. Resolves to
- * `{ ok }` — it never throws and never rejects, so a caller can leave it unawaited. A
- * signed-out or unconfigured caller is `ok` with a `skipped` reason: there is no row to
- * write and nothing went wrong.
+ * Mirror the current (or given) consent through the authenticated service-record RPC.
+ * Migration 194 updates profiles.telemetry_consent and records each changed toggle's
+ * prior/new value in the same transaction. Consent history is therefore a compliance
+ * record, never an analytics event. Resolves to `{ ok }` — it never throws and never
+ * rejects, so a caller can leave it unawaited. A signed-out or unconfigured caller is
+ * `ok` with a `skipped` reason: there is no row to write and nothing went wrong.
  */
-export async function pushTelemetryConsent(consent = getConsent()) {
-  const userId = await currentUserId();
-  if (!userId) return { ok: true, skipped: true };
+export async function pushTelemetryConsent(consent = getConsent(), expectedOwnerId = null) {
+  const lookup = await currentUserLookup();
+  const userId = lookup.userId;
+  if (!userId) {
+    return expectedOwnerId == null
+      ? { ok: true, skipped: true }
+      : { ok: false, skipped: true, reason: lookup.failure || 'auth_lookup_failed' };
+  }
+  if (expectedOwnerId != null && String(userId) !== String(expectedOwnerId)) {
+    return { ok: false, skipped: true, reason: 'auth_session_changed' };
+  }
   try {
-    const { error } = await supabase
-      .from('profiles')
-      .update({ telemetry_consent: consentRow(consent) })
-      .eq('id', userId);
+    const { error } = await supabase.rpc('set_my_telemetry_consent', {
+      p_expected_user: expectedOwnerId == null ? userId : String(expectedOwnerId),
+      p_consent: consentRow(consent),
+      p_source: 'account',
+    });
     if (error) return { ok: false, reason: error.message || 'update failed' };
     return { ok: true };
   } catch (e) {

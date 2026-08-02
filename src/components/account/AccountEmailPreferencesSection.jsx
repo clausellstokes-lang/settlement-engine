@@ -11,11 +11,14 @@
  *
  * Styling uses this tree's theme vocabulary — no new raw colors.
  */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Mail } from 'lucide-react';
 import { GOLD, INK, BODY, MUTED, BORDER, SP, FS, swatch } from '../theme.js';
 import { EMAIL_CATEGORIES, getMyEmailPreferences, setMyEmailPreference } from '../../lib/emailPreferences.js';
+import { authSessionIdentity, captureAuthSessionFence, isAuthSessionFenceCurrent } from '../../lib/authSessionFence.js';
+import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
+import Button from '../primitives/Button.jsx';
 import Section from './AccountSection.jsx';
 
 function Toggle({ checked, onChange, label }) {
@@ -35,27 +38,110 @@ function Toggle({ checked, onChange, label }) {
 }
 
 export default function AccountEmailPreferencesSection() {
-  const [prefs, setPrefs] = useState(null); // null while loading
-  const [error, setError] = useState(null);
+  const auth = useStore(state => state.auth);
+  const ownerId = auth?.user?.id || null;
+  const sessionIdentity = authSessionIdentity(auth);
+  const [snapshot, setSnapshot] = useState({
+    ownerId: null, sessionIdentity: null, prefs: null, error: null,
+  });
+  const loadRevision = useRef(0);
+  const writeQueues = useRef(new Map());
+  const writeRevisions = useRef(new Map());
+
+  const retryLoad = async () => {
+    const revision = ++loadRevision.current;
+    setSnapshot({ ownerId, sessionIdentity, prefs: null, error: null });
+    try {
+      const loaded = await getMyEmailPreferences();
+      if (loadRevision.current === revision) {
+        setSnapshot({ ownerId, sessionIdentity, prefs: loaded, error: null });
+      }
+    } catch {
+      if (loadRevision.current === revision) {
+        setSnapshot({
+          ownerId,
+          sessionIdentity,
+          prefs: null,
+          error: 'Email preferences could not be loaded. No consent setting was assumed.',
+        });
+      }
+    }
+  };
 
   useEffect(() => {
-    let alive = true;
+    const revision = ++loadRevision.current;
     getMyEmailPreferences()
-      .then((p) => { if (alive) setPrefs(p); })
-      .catch(() => { if (alive) setPrefs({ product_updates: true, referral: true, lifecycle: true }); });
-    return () => { alive = false; };
-  }, []);
+      .then((loaded) => {
+        if (loadRevision.current === revision) {
+          setSnapshot({ ownerId, sessionIdentity, prefs: loaded, error: null });
+        }
+      })
+      .catch(() => {
+        if (loadRevision.current === revision) {
+          setSnapshot({
+            ownerId,
+            sessionIdentity,
+            prefs: null,
+            error: 'Email preferences could not be loaded. No consent setting was assumed.',
+          });
+        }
+      });
+    return () => { loadRevision.current += 1; };
+  }, [ownerId, sessionIdentity]);
 
-  const handleToggle = async (category, next) => {
-    setError(null);
-    // Optimistic flip; roll back if the server write fails.
-    setPrefs(prev => ({ ...prev, [category]: next }));
-    try {
-      await setMyEmailPreference(category, next);
-    } catch {
-      setPrefs(prev => ({ ...prev, [category]: !next }));
-      setError(t('errors.prefSave'));
-    }
+  const snapshotMatches = snapshot.ownerId === ownerId
+    && snapshot.sessionIdentity === sessionIdentity;
+  const visiblePrefs = snapshotMatches ? snapshot.prefs : null;
+  const visibleError = snapshotMatches ? snapshot.error : null;
+
+  const handleToggle = (category, next) => {
+    const sessionFence = captureAuthSessionFence(useStore.getState().auth);
+    const revision = (writeRevisions.current.get(category) || 0) + 1;
+    writeRevisions.current.set(category, revision);
+    setSnapshot(current => current.ownerId === ownerId
+      && current.sessionIdentity === sessionIdentity
+      ? { ...current, error: null, prefs: { ...current.prefs, [category]: next } }
+      : current);
+
+    // Preserve the user's click order per category. A slow older opt-in must
+    // never arrive after a newer opt-out, and an older failure must not roll a
+    // newer optimistic choice backward.
+    const prior = writeQueues.current.get(category) || Promise.resolve();
+    const write = prior.catch(() => {}).then(async () => {
+      if (!isAuthSessionFenceCurrent(sessionFence, useStore.getState().auth)) {
+        return { staleSession: true };
+      }
+      await setMyEmailPreference(category, next, sessionFence.ownerId);
+      return { staleSession: false };
+    });
+    writeQueues.current.set(category, write);
+    write
+      .then((result) => {
+        if (result?.staleSession) return;
+        if (isAuthSessionFenceCurrent(sessionFence, useStore.getState().auth)
+          && writeRevisions.current.get(category) === revision) {
+          setSnapshot(current => current.ownerId === ownerId
+            && current.sessionIdentity === sessionIdentity
+            ? { ...current, error: null }
+            : current);
+        }
+      })
+      .catch(() => {
+        if (isAuthSessionFenceCurrent(sessionFence, useStore.getState().auth)
+          && writeRevisions.current.get(category) === revision) {
+          setSnapshot(current => current.ownerId === ownerId
+            && current.sessionIdentity === sessionIdentity
+            ? {
+                ...current,
+                prefs: { ...current.prefs, [category]: !next },
+                error: t('errors.prefSave'),
+              }
+            : current);
+        }
+      })
+      .finally(() => {
+        if (writeQueues.current.get(category) === write) writeQueues.current.delete(category);
+      });
   };
 
   return (
@@ -65,15 +151,20 @@ export default function AccountEmailPreferencesSection() {
           Choose which non-essential emails you receive. Changes save as you make them.
         </p>
 
-        {error && (
+        {visibleError && (
           <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, fontSize: FS.sm, color: swatch.danger }}>
-            {error}
+            {visibleError}
+            {visiblePrefs === null && (
+              <Button variant="secondary" size="sm" onClick={retryLoad} style={{ marginLeft: SP.sm }}>
+                Retry
+              </Button>
+            )}
           </div>
         )}
 
-        {prefs === null ? (
+        {visiblePrefs === null && !visibleError ? (
           <div style={{ fontSize: FS.sm, color: BODY }}>Loading…</div>
-        ) : (
+        ) : visiblePrefs ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
             {EMAIL_CATEGORIES.map(cat => (
               <div key={cat.id} style={{
@@ -86,14 +177,14 @@ export default function AccountEmailPreferencesSection() {
                   <div style={{ fontSize: FS.sm, color: MUTED, lineHeight: 1.5 }}>{cat.description}</div>
                 </div>
                 <Toggle
-                  checked={prefs[cat.id] !== false}
+                  checked={visiblePrefs[cat.id] !== false}
                   onChange={(next) => handleToggle(cat.id, next)}
                   label={cat.label}
                 />
               </div>
             ))}
           </div>
-        )}
+        ) : null}
 
         <p style={{ fontSize: FS.xs, color: MUTED, margin: 0, lineHeight: 1.5 }}>
           Account and payment emails (receipts, password resets, and email confirmations)

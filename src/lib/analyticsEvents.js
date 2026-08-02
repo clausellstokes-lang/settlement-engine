@@ -55,8 +55,11 @@ export { EDIT_KINDS };
  *  session · 'fixture_forge' with the fixture's constant seed — no user data).
  *  Fired client-side from the lazy landing chunk via
  *  src/lib/landingFunnelAnalytics.js; lands the previously dormant
- *  Funnel.welcomeView / Funnel.landingFixtureForge seams. Essential class. */
-export const EVENTS_REV = 11;
+ *  Funnel.welcomeView / Funnel.landingFixtureForge seams. Essential class.
+ *  rev 12: consent_updated retires from product analytics. Consent changes are
+ *  durable SERVICE-class compliance records in their own store; keeping an
+ *  analytics name after the emitter was removed would misstate the boundary. */
+export const EVENTS_REV = 12;
 
 export const EVENTS = Object.freeze({
   // ── Minimum 4-event funnel ─────────────────────────────────────────────
@@ -219,9 +222,8 @@ export const EVENTS = Object.freeze({
   LIBRARY_VIEWED:                 'library_viewed',
   SESSION_STARTED:                'session_started',
 
-  // ── v2: research / consent ─────────────────────────────────────────────
+  // ── v2: research ───────────────────────────────────────────────────────
   SETTLEMENT_FINGERPRINT_CAPTURED:'settlement_fingerprint_captured',  // research
-  CONSENT_UPDATED:                'consent_updated',
 
   // ── Surveyor S1: the analyst (§5 eval metrics — coarse, id-free, essential) ──
   // Props (never free text): { audience, coverageBand, registerPurityBand, refused,

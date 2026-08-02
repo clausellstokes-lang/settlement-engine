@@ -15,7 +15,7 @@
 > in effect until the owner and legal counsel have signed off and the live page has
 > been updated to match.
 >
-> **Placeholders** are wrapped in `[[ ... ]]` and collected in §16. **Standard-form
+> **Placeholders** are wrapped in `[[ ... ]]` and collected in §17. **Standard-form
 > boilerplate** that a lawyer must supply or replace is flagged inline as
 > `[[STANDARD-FORM PLACEHOLDER]]`. **Dollar figures and percentages** are stated as
 > the repo's current truth and framed "currently," following the founder-terms
@@ -45,7 +45,7 @@ years old to create an account. By creating an account or using paid features, y
 accept these terms and the Privacy Policy.
 
 *(Standard eligibility clause; the minimum age is a legal-review decision tied to
-the GDPR/COPPA question in §16.)*
+the GDPR/COPPA question in §17.)*
 
 ## 2. Your account and security
 
@@ -57,7 +57,18 @@ has been accessed without your permission.
 
 *(Source of truth: live `TermsPage.jsx#terms-account`.)*
 
-## 3. Plans, billing, credits, and task pricing
+## 3. Communications from SettlementForge
+
+We may place service communications in the Messages section of your account and
+send them to your account email when they concern security, policy changes,
+moderation, billing, or the operation of your account. These are not marketing
+messages. Product announcements always appear in Account Messages and are emailed
+only when you have explicitly opted in to Product updates; announcement email
+includes an unsubscribe path. We do not track email opens.
+
+*(Source of truth: live `TermsPage.jsx#terms-communications`.)*
+
+## 4. Plans, billing, credits, and task pricing
 
 Paid plans, one-time purchases, and narrative credits are described on the
 **Pricing page, which is the source of truth for what each option includes and
@@ -102,7 +113,7 @@ pricing tiles, and `docs/DESIGN_AI_CONTROL_SURFACE.md` §4. Numbers stay on the
 Pricing page per the F22 rule; they appear here only as the license/agreement
 context, framed "currently.")*
 
-## 4. Refunds and cancellation
+## 5. Refunds and cancellation
 
 - **Narrative credits.** Failed narrations auto-refund their credit; you are only
   charged for narrations you receive. Your first narration is free.
@@ -124,7 +135,7 @@ context, framed "currently.")*
 *(Source of truth: live `TermsPage.jsx#terms-refunds` — reproduced substantively so
 the consolidated draft is self-contained; numbers remain on the Pricing page.)*
 
-## 5. Founder Lifetime license and transfers
+## 6. Founder Lifetime license and transfers
 
 > **This section already exists in the live Terms (`TermsPage.jsx#terms-founder`)
 > and is the canonical founder covenant. It is integrated here — not replaced or
@@ -157,11 +168,11 @@ not live yet (a concierge process is planned); this section states the terms tha
 will govern it. If we ever need to change how transfers work, substantive changes
 bump the version stamped at the top of the live terms.
 
-> **Legal-review note (for §16):** the outgoing-holder payout ($49.50) needs a
+> **Legal-review note (for §17):** the outgoing-holder payout ($49.50) needs a
 > classification decision (refund vs. rebate vs. marketplace payout) and its tax /
 > money-transmission implications reviewed at the consolidated consult.
 
-## 6. The Surveyor — AI control surface (terms take effect at launch)
+## 7. The Surveyor — AI control surface (terms take effect at launch)
 
 > **Not yet available.** The Surveyor is designed but not built (it follows the fix
 > program; `DESIGN_AI_CONTROL_SURFACE.md` §6). The terms in this section take effect
@@ -169,7 +180,7 @@ bump the version stamped at the top of the live terms.
 > honored by construction from day one. Every clause reflects the AI constitution in
 > `docs/DESIGN_AI_CONTROL_SURFACE.md` §3–§3f.
 
-### 6a. What the Surveyor is — a proposer, never an autonomous actor
+### 7a. What the Surveyor is — a proposer, never an autonomous actor
 
 The Surveyor reads your world and converses about it; it **never changes your world
 on its own.** Any change it suggests becomes a typed, previewed **proposal** that
@@ -177,7 +188,7 @@ does nothing until you approve it. The simulation itself remains AI-free — no 
 inside the engine, and approving a proposal is always required before anything lands.
 *(§3, §3d.)*
 
-### 6b. Two voices: reporting and musing
+### 7b. Two voices: reporting and musing
 
 The Surveyor answers in two visibly distinct registers:
 
@@ -187,19 +198,19 @@ The Surveyor answers in two visibly distinct registers:
 - **Musing (what could be).** Suggestions, ideas, and alternatives are marked as
   suggestions. **Musings are creative and are not guaranteed to be accurate,
   complete, or supported by the engine.** Nothing in this register affects your world
-  except through the approval lane in §6a.
+  except through the approval lane in §7a.
 
 *(§3b — the two-voices law. The client renders the two registers differently by
 construction, so speculation cannot masquerade as fact.)*
 
-### 6c. Refusals
+### 7c. Refusals
 
 When the Surveyor cannot do something, it declines clearly and points you to the
 nearest thing it can do. Some actions are unavailable because no operation exists for
 them, because they arrive at a later stage of the product, because they are the game
 master's sovereign call, or because a request failed validation. *(§3d.)*
 
-### 6d. Bring your own key (BYOK)
+### 7d. Bring your own key (BYOK)
 
 If you supply your own AI provider key:
 
@@ -209,13 +220,13 @@ If you supply your own AI provider key:
   world data, and never used as training data.** You can rotate or delete it, and key
   actions are audited. *(§3, §3e.)*
 - Inference on your BYOK requests runs on your key and your provider account, subject
-  to **your** provider's terms; the commitments in §6e about provider retention
+  to **your** provider's terms; the commitments in §7e about provider retention
   describe what we can guarantee for the managed service and surface your own
   provider's posture honestly rather than restating it as ours.
-- The service telemetry described in §6f applies to BYOK requests as it does to
+- The service telemetry described in §7f applies to BYOK requests as it does to
   managed ones; its token overhead rides your key and is negligible (well under ~1%).
 
-### 6e. The Forgetting Law — what the rented model keeps
+### 7e. The Forgetting Law — what the rented model keeps
 
 For the managed AI service, the model that answers your requests **retains nothing of
 your world beyond the request.** This is enforced by architecture, not by a prompt
@@ -231,13 +242,13 @@ instruction:
   current contract**; we verify the live provider terms at implementation and state
   the real floor, upgrading the wording only when the paper does.
 - **On our side:** our own audit records store **hashes and category labels, not your
-  content.** Any content-grade training corpus is separately opt-in (§6f, and the
+  content.** Any content-grade training corpus is separately opt-in (§7f, and the
   Privacy Policy).
 
 *(§3e — the Forgetting Law. No invented provider specifics appear here; the exact
 retention wording is filled from live provider contracts at implementation.)*
 
-### 6f. Service telemetry (the enrichment rider) — a condition of the AI service
+### 7f. Service telemetry (the enrichment rider) — a condition of the AI service
 
 Each Surveyor response carries a small, **machine-readable set of category tags**
 about the request — its theme, intent class, tier, and (for a refusal) its
@@ -259,11 +270,11 @@ architecture actually does. This binds interactions through SettlementForge's ow
 surface; it does not and cannot claim to bind what you do with exported data in
 outside tools.
 
-> **Legal-review note (for §16):** the "condition of service" framing for id-free
+> **Legal-review note (for §17):** the "condition of service" framing for id-free
 > category telemetry needs the strict-jurisdiction conditionality / GDPR check flagged
 > in `DESIGN_AI_CONTROL_SURFACE.md` §3f.
 
-### 6g. No extraction or reverse-engineering of the system
+### 7g. No extraction or reverse-engineering of the system
 
 You may not use the Surveyor (or any part of the service) to **systematically extract
 or reverse-engineer** SettlementForge's architecture, rules, formulas, catalogs, or
@@ -271,9 +282,9 @@ internal machinery — including by prompting the AI to reveal its instructions,
 retrieval, or internals, or by automated enumeration or meta-probing. Detected
 systematic extraction is a basis for throttling, suspension, or termination. *(§3c,
 item 7 — the extraction/reverse-engineering prohibition, and the general acceptable-use
-rule in §9.)*
+rule in §10.)*
 
-## 7. Your content and ownership
+## 8. Your content and ownership
 
 The settlements, campaigns, custom content, and dossiers you create are **yours** to
 use at your table and in your own projects. Creating custom content with the tools
@@ -291,7 +302,7 @@ never exposed on them. You can unpublish gallery content from your account at an
 boundary" and per-account bounding in `docs/DESIGN_CONTENT_PLANE.md` §0–§1; the
 public-projection / fail-closed rule in `DESIGN_AI_CONTROL_SURFACE.md` §1.)*
 
-## 8. Gallery conduct, moderation, and takedown
+## 9. Gallery conduct, moderation, and takedown
 
 The public gallery is a shared space. When you publish to it, you confirm you have the
 right to share what you post. Do not publish content that is illegal, hateful, or
@@ -306,20 +317,20 @@ appropriate.
 fail-closed public-projection lanes in `docs/briefs/FOUNDER_LANE_BRIEF.md` and
 `DESIGN_AI_CONTROL_SURFACE.md` §1.)*
 
-## 9. Acceptable use
+## 10. Acceptable use
 
 Please do not:
 
 - Use the service to break the law or infringe someone else's rights.
 - Attempt to scrape, overload, reverse-engineer, or bypass the service's access
-  controls or rate limits (see also §6g).
+  controls or rate limits (see also §7g).
 - Upload or publish content to the shared gallery that is illegal, hateful, or that
   you do not have the right to share.
 - Resell or redistribute access to the service as your own.
 
 *(Source of truth: live `TermsPage.jsx#terms-use`.)*
 
-## 10. Availability and changes
+## 11. Availability and changes
 
 SettlementForge is an independently run project provided on a best-effort basis. We may
 add, change, or remove features, and we may update these terms as the product evolves.
@@ -328,7 +339,7 @@ use after a change means you accept the updated terms.
 
 *(Source of truth: live `TermsPage.jsx#terms-availability`.)*
 
-## 11. Disclaimers
+## 12. Disclaimers
 
 `[[STANDARD-FORM PLACEHOLDER — counsel to supply/replace.]]` The service is provided
 "as is" and "as available," without warranties of any kind, whether express or implied,
@@ -341,7 +352,7 @@ mandatory consumer law in your jurisdiction.
 *(Live baseline: `TermsPage.jsx#terms-liability`; expanded to standard form pending
 counsel.)*
 
-## 12. Limitation of liability
+## 13. Limitation of liability
 
 `[[STANDARD-FORM PLACEHOLDER — counsel to supply/replace, including any liability cap
 and its amount.]]` To the extent permitted by law, SettlementForge is not liable for
@@ -353,12 +364,12 @@ applicable law, including mandatory consumer rights.
 *(Live baseline: `TermsPage.jsx#terms-liability`; expanded to standard form pending
 counsel.)*
 
-## 13. Governing law and disputes
+## 14. Governing law and disputes
 
 `[[PLACEHOLDER — governing law, jurisdiction/venue, and any dispute-resolution or
-arbitration terms to be set at legal review, tied to the operating entity in §16.]]`
+arbitration terms to be set at legal review, tied to the operating entity in §17.]]`
 
-## 14. Contact
+## 15. Contact
 
 Questions about these terms? Reach us at
 `[[CONTACT EMAIL — support@settlementforge.com is selected; activate only after
@@ -370,57 +381,60 @@ settlementforge@gmail.com until that operational proof.]]`.
 
 ---
 
-## 15. Summary — what each section binds, and its source of truth
+## 16. Summary — what each section binds, and its source of truth
 
 | Section | What it binds | Source-of-truth doc / file |
 |---|---|---|
 | 0. The service | What SettlementForge is; sim-not-AI framing | `TermsPage.jsx#terms-service`; `DESIGN_AI_CONTROL_SURFACE.md` §0 |
-| 1. Eligibility | Age / capacity to accept | Standard; age = legal-review decision (§16) |
+| 1. Eligibility | Age / capacity to accept | Standard; age = legal-review decision (§17) |
 | 2. Account & security | Account responsibility, recovery, breach notice | `TermsPage.jsx#terms-account` |
-| 3. Plans, billing, credits, task pricing | Tiers, single dossier, credit packs, AI costs, Surveyor pricing — all "currently"; Pricing page canonical | `config/pricing.js`, `config/tierFacts.js`, `copy/en.js`, `DESIGN_AI_CONTROL_SURFACE.md` §4 |
-| 4. Refunds & cancellation | Credit auto-refund, PDF, Cartographer, Founder refund paths | `TermsPage.jsx#terms-refunds` |
-| 5. Founder Lifetime & transfers | 30-seat cap that never grows; $99 in / $49.50 out; succession-only; no investment framing | `TermsPage.jsx#terms-founder`; `FOUNDER_LANE_BRIEF.md`; `COMPREHENSIVE_REVIEW_PROGRAM.md` (FOUNDER rows) |
-| 6a. Surveyor = proposer | AI never writes state; approval always required | `DESIGN_AI_CONTROL_SURFACE.md` §3, §3d |
-| 6b. Two voices | Reporting (cited) vs musing (no accuracy guarantee) | `DESIGN_AI_CONTROL_SURFACE.md` §3b |
-| 6c. Refusals | Cordial, specific refusals naming the nearest door | `DESIGN_AI_CONTROL_SURFACE.md` §3d |
-| 6d. BYOK | Keys server-side only; never logged/shown/trained | `DESIGN_AI_CONTROL_SURFACE.md` §3, §3e |
-| 6e. Forgetting Law | Provider retention contractually bounded, zero where available; hashes not content | `DESIGN_AI_CONTROL_SURFACE.md` §3e |
-| 6f. Enrichment rider | Id-free category telemetry = condition of service; content-grade separately consented | `DESIGN_AI_CONTROL_SURFACE.md` §3f |
-| 6g. No extraction | Systematic extraction / reverse-engineering prohibited | `DESIGN_AI_CONTROL_SURFACE.md` §3c(7) |
-| 7. Content & ownership | User owns creations; gallery publish = display license; master system untouched | `TermsPage.jsx#terms-content`; `DESIGN_CONTENT_PLANE.md` §0–§1 |
-| 8. Gallery conduct & takedown | Right-to-share, moderation, removal, takedown | `TermsPage.jsx#terms-use`/`#terms-content`; `FOUNDER_LANE_BRIEF.md` |
-| 9. Acceptable use | Prohibited uses | `TermsPage.jsx#terms-use` |
-| 10. Availability & changes | Best-effort; version-bump on change | `TermsPage.jsx#terms-availability` |
-| 11. Disclaimers | "As is" warranty disclaimer | `TermsPage.jsx#terms-liability` (standard-form placeholder) |
-| 12. Limitation of liability | Liability limits + cap | `TermsPage.jsx#terms-liability` (standard-form placeholder) |
-| 13. Governing law | Law, venue, disputes | Placeholder — legal review |
-| 14. Contact | Support address | `copy/support.js` |
+| 3. Communications | Service-message channels; Product updates opt-in; unsubscribe path; no open tracking | `TermsPage.jsx#terms-communications` |
+| 4. Plans, billing, credits, task pricing | Tiers, single dossier, credit packs, AI costs, Surveyor pricing — all "currently"; Pricing page canonical | `config/pricing.js`, `config/tierFacts.js`, `copy/en.js`, `DESIGN_AI_CONTROL_SURFACE.md` §4 |
+| 5. Refunds & cancellation | Credit auto-refund, PDF, Cartographer, Founder refund paths | `TermsPage.jsx#terms-refunds` |
+| 6. Founder Lifetime & transfers | 30-seat cap that never grows; $99 in / $49.50 out; succession-only; no investment framing | `TermsPage.jsx#terms-founder`; `FOUNDER_LANE_BRIEF.md`; `COMPREHENSIVE_REVIEW_PROGRAM.md` (FOUNDER rows) |
+| 7a. Surveyor = proposer | AI never writes state; approval always required | `DESIGN_AI_CONTROL_SURFACE.md` §3, §3d |
+| 7b. Two voices | Reporting (cited) vs musing (no accuracy guarantee) | `DESIGN_AI_CONTROL_SURFACE.md` §3b |
+| 7c. Refusals | Cordial, specific refusals naming the nearest door | `DESIGN_AI_CONTROL_SURFACE.md` §3d |
+| 7d. BYOK | Keys server-side only; never logged/shown/trained | `DESIGN_AI_CONTROL_SURFACE.md` §3, §3e |
+| 7e. Forgetting Law | Provider retention contractually bounded, zero where available; hashes not content | `DESIGN_AI_CONTROL_SURFACE.md` §3e |
+| 7f. Enrichment rider | Id-free category telemetry = condition of service; content-grade separately consented | `DESIGN_AI_CONTROL_SURFACE.md` §3f |
+| 7g. No extraction | Systematic extraction / reverse-engineering prohibited | `DESIGN_AI_CONTROL_SURFACE.md` §3c(7) |
+| 8. Content & ownership | User owns creations; gallery publish = display license; master system untouched | `TermsPage.jsx#terms-content`; `DESIGN_CONTENT_PLANE.md` §0–§1 |
+| 9. Gallery conduct & takedown | Right-to-share, moderation, removal, takedown | `TermsPage.jsx#terms-use`/`#terms-content`; `FOUNDER_LANE_BRIEF.md` |
+| 10. Acceptable use | Prohibited uses | `TermsPage.jsx#terms-use` |
+| 11. Availability & changes | Best-effort; version-bump on change | `TermsPage.jsx#terms-availability` |
+| 12. Disclaimers | "As is" warranty disclaimer | `TermsPage.jsx#terms-liability` (standard-form placeholder) |
+| 13. Limitation of liability | Liability limits + cap | `TermsPage.jsx#terms-liability` (standard-form placeholder) |
+| 14. Governing law | Law, venue, disputes | Placeholder — legal review |
+| 15. Contact | Support address | `copy/support.js` |
 
-## 16. Open placeholders (must be resolved before force)
+## 17. Open placeholders (must be resolved before force)
 
 1. **`[[MINIMUM AGE]]`** (§1) — 13 / 16 / 18 by jurisdiction; tied to the GDPR/COPPA
    question.
-2. **Stripe dashboard amount verification** (§3) — the repository now has one
+2. **Stripe dashboard amount verification** (§4) — the repository now has one
    canonical Cartographer figure, **$5.99/month (599 cents)**. Confirm that the
    deployed `STRIPE_PRICE_PREMIUM` object charges 599 cents before launch.
-3. **`[[Surveyor price — $19.99/month, PROVISIONAL]]`** (§3) — owner-queued; not in
+3. **`[[Surveyor price — $19.99/month, PROVISIONAL]]`** (§4) — owner-queued; not in
    force until the feature ships.
-4. **`[[CONTACT EMAIL]]`** (§14) — `support@settlementforge.com` is selected.
+4. **`[[CONTACT EMAIL]]`** (§15) — `support@settlementforge.com` is selected.
    Operational activation still requires MX/forwarding and a successful round-trip;
    `settlementforge@gmail.com` remains the runtime fallback until then.
 5. **`[[Operating entity / legal name]]`** — no legal entity name appears anywhere in
-   the terms; §12–§13 need it.
-6. **`[[Governing law, jurisdiction, disputes/arbitration]]`** (§13).
+   the terms; §13–§14 need it.
+6. **`[[Governing law, jurisdiction, disputes/arbitration]]`** (§14).
 7. **`[[Disclaimer + limitation-of-liability standard form and liability cap]]`**
-   (§11–§12).
-8. **Founder outgoing-payout classification** (§5) — refund vs. rebate vs. marketplace
+   (§12–§13).
+8. **Founder outgoing-payout classification** (§6) — refund vs. rebate vs. marketplace
    payout, with tax / money-transmission review.
-9. **Enrichment-rider conditionality / GDPR** (§6f) — strict-jurisdiction check for the
+9. **Enrichment-rider conditionality / GDPR** (§7f) — strict-jurisdiction check for the
    non-togglable id-free service telemetry.
 
-## 17. Explicit non-goal of this wave
+## 18. Explicit non-goal of this wave
 
-Wiring this draft into the live `TermsPage.jsx` is **out of scope by design.** The live
-page updates **only** after the owner and legal counsel sign off through the
-consolidated pre-launch legal consult. This document and its Privacy Policy sibling are
-the input to that consult, not a replacement for it.
+Deploying this draft as operative terms is **out of scope by design.** This wave
+synchronizes only the Operator Messages communications clause already present in
+`TermsPage.jsx`; it does not import the draft's remaining counsel-gated language,
+resolve any placeholder above, or deploy a legal-page change. The consolidated
+draft and its Privacy Policy sibling remain inputs to the pre-launch legal consult,
+not replacements for it.
