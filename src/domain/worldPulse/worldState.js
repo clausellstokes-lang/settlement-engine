@@ -7,6 +7,7 @@ import { INTERVAL_WEEKS } from './intervalWeeks.js';
 import { migrateTreatyClockMarkers } from './treatyClock.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { isWarReasonType } from './warReasonTaxonomy.js';
+import { migrateDispositionStats } from './dispositionLedger.js';
 
 export const WORLD_STATE_SCHEMA_VERSION = 2;
 
@@ -431,6 +432,8 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
   const raw = runWorldStateMigrations(rawInput);
   const base = createDefaultWorldState(campaign);
   const calendar = raw?.calendar && typeof raw.calendar === 'object' ? raw.calendar : {};
+  const tick = Math.max(0, Math.floor(finite(raw?.tick, 0)));
+  const simulationRules = normalizeSimulationRules(raw?.simulationRules);
   // The SHALLOW `...cloneObject(raw)` spread would otherwise carry a
   // present-but-EMPTY conditional ledger (e.g. `pantheon:{}`) through to the
   // result, breaking dormancy. Strip every conditional key from the shallow
@@ -461,7 +464,7 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     ...shallowRaw,
     schemaVersion: WORLD_STATE_SCHEMA_VERSION,
     canonizedAt: raw?.canonizedAt || null,
-    tick: Math.max(0, Math.floor(finite(raw?.tick, 0))),
+    tick,
     calendar: {
       ...base.calendar,
       ...calendar,
@@ -483,7 +486,7 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     },
     rngSeed: raw?.rngSeed || base.rngSeed,
     volatility: ['calm', 'normal', 'turbulent'].includes(raw?.volatility) ? raw.volatility : base.volatility,
-    simulationRules: normalizeSimulationRules(raw?.simulationRules),
+    simulationRules,
     stressors: cloneStressors(raw?.stressors),
     relationshipStates: cloneObject(raw?.relationshipStates),
     npcStates: cloneObject(raw?.npcStates),
@@ -494,7 +497,13 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     pendingEvents: cloneArray(raw?.pendingEvents).slice(-MAX_PENDING),
     // DEEP-cloned (not the shallow `...cloneObject(raw)` spread above) so a
     // pre-tick snapshot never aliases live ledger state across ticks.
-    dispositionStats: deepCloneLedger(raw?.dispositionStats),
+    // WR-2 is a same-schema, flag-gated extension of the EXISTING ledger. Absent or
+    // explicit false preserves the legacy shape exactly. Only an explicit true folds
+    // the old signed score into martial stock and materializes the other neutral
+    // channels; dispositionLedger owns that migration so it remains the one writer.
+    dispositionStats: simulationRules.dispositionChannelsEnabled === true
+      ? migrateDispositionStats(deepCloneLedger(raw?.dispositionStats), tick)
+      : deepCloneLedger(raw?.dispositionStats),
     deployments: normalizeDeployments(raw?.deployments),
     tradeWarState: deepCloneLedger(raw?.tradeWarState),
     warExhaustion: deepCloneLedger(raw?.warExhaustion),

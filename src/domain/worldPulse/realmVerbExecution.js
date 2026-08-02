@@ -53,6 +53,7 @@ import { forceAbandonSettlement, forceResettleSettlement } from './settlementLif
 import { calamityEnabled } from '../spatial/calamity.js';
 import { realmVerbFor, realmVetoProse } from '../events/realmManifest.js';
 import { repudiateTreaty, repudiableTreatyPairs } from './treatyBreach.js';
+import { dispositionTransitionNewsEntries } from './dispositionNews.js';
 
 /** The one payload kind the applier dispatches on (the siege_initiation idiom). */
 export const REALM_VERB_PAYLOAD_KIND = 'realm_verb_order';
@@ -318,7 +319,13 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       // stale "applies on approval" sentence as an accomplished event.
       const breakerName = nameOf(shim, args.fromId);
       const otherName = nameOf(shim, args.toId);
-      return applied(r.worldState, [], null, {
+      const dispositionNews = dispositionTransitionNewsEntries({
+        transitions: Array.isArray(r.dispositionTransitions) ? r.dispositionTransitions : [],
+        snapshot: shim,
+        worldState: r.worldState,
+        now,
+      });
+      return applied(r.worldState, dispositionNews, null, {
         ...outcome,
         summary: `${breakerName} openly broke its pact with ${otherName}. Every promise under it ended, and ${otherName} now has cause to answer the breach.`,
         reasons: ['The oath was repudiated in public; its restraints no longer bind either court.'],

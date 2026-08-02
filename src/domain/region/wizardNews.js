@@ -7,6 +7,7 @@ export const WIZARD_NEWS_SCHEMA_VERSION = 1;
 export const WIZARD_NEWS_SIGNIFICANCE = Object.freeze({
   MAJOR: 'major',
   NOTABLE: 'notable',
+  ROUTINE: 'routine',
 });
 
 const MAX_ENTRIES = 240;
@@ -70,6 +71,7 @@ const MAX_ENTRIES = 240;
  * @property {string | null} channelType
  * @property {number} severity
  * @property {string[]} settlementIds
+ * @property {string[]} [settlementNames] NEWS ADDRESS LAW reader layer.
  * @property {string[]} impactIds
  * @property {string[]} channelIds
  * @property {string | null} sourceEventId
@@ -79,6 +81,7 @@ const MAX_ENTRIES = 240;
  * @property {string[]} [factionIds]  NEWS ADDRESS LAW actor layer — present only when non-empty.
  * @property {string} [source]
  * @property {boolean} [covert]
+ * @property {string} [familyId] SP-6 structural template family.
  */
 
 /**
@@ -97,6 +100,7 @@ const MAX_ENTRIES = 240;
  * @property {string | null} [channelType]
  * @property {number} [severity]
  * @property {Array<string | number | null | undefined>} [settlementIds]
+ * @property {Array<string | number | null | undefined>} [settlementNames]
  * @property {Array<string | number | null | undefined>} [impactIds]
  * @property {Array<string | number | null | undefined>} [channelIds]
  * @property {string | null} [sourceEventId]
@@ -106,6 +110,7 @@ const MAX_ENTRIES = 240;
  * @property {Array<string | number | null | undefined>} [factionIds]
  * @property {string} [source]
  * @property {boolean} [covert]
+ * @property {string} [familyId]
  */
 
 /**
@@ -301,6 +306,13 @@ function maxCriticality(goods = []) {
 function compactIds(values = []) {
   if (!Array.isArray(values)) return [];
   return [...new Set(values.filter(Boolean).map(String))];
+}
+
+/** Names are an ADDRESS CHAIN parallel to settlementIds, not a set. Preserve two
+ * distinct settlements that honestly share one name instead of deduplicating them. */
+function compactNames(values = []) {
+  if (!Array.isArray(values)) return [];
+  return values.filter(value => value != null && value !== '').map(String);
 }
 
 /**
@@ -501,11 +513,14 @@ function tagList(impact, transition) {
  */
 function normalizeEntry(entry, options = {}) {
   if (!entry?.id) return null;
+  const familyId = entry.familyId ? String(entry.familyId) : '';
   const severity = clamp01(entry.severity);
   const score = Math.max(0, Math.round(finiteNumber(entry.score, severity * 70)));
   const significance = entry.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR
     ? WIZARD_NEWS_SIGNIFICANCE.MAJOR
-    : WIZARD_NEWS_SIGNIFICANCE.NOTABLE;
+    : familyId && entry.significance === WIZARD_NEWS_SIGNIFICANCE.ROUTINE
+      ? WIZARD_NEWS_SIGNIFICANCE.ROUTINE
+      : WIZARD_NEWS_SIGNIFICANCE.NOTABLE;
 
   return {
     schemaVersion: WIZARD_NEWS_SCHEMA_VERSION,
@@ -522,6 +537,12 @@ function normalizeEntry(entry, options = {}) {
     channelType: entry.channelType || null,
     severity,
     settlementIds: compactIds(entry.settlementIds),
+    // The reader half of the governed SP-6 address chain. It rides familyId so
+    // existing v1 producers that happened to pass names remain byte-identical
+    // when the WR-2 flag is dark; new governed rows retain both together.
+    ...(familyId && compactNames(entry.settlementNames).length
+      ? { settlementNames: compactNames(entry.settlementNames) }
+      : {}),
     impactIds: compactIds(entry.impactIds),
     channelIds: compactIds(entry.channelIds),
     sourceEventId: entry.sourceEventId || null,
@@ -553,6 +574,10 @@ function normalizeEntry(entry, options = {}) {
     // World Book's player-face isCovertEntry filter is live end-to-end instead of
     // a dead branch (SB2 finding: covert marks must not survive into the handout).
     ...(entry.covert === true ? { covert: true } : {}),
+    // SP-6 family identity is metadata, never prose. It records which structural
+    // template produced the rendered sentence; changing slot fills cannot disguise
+    // a repeated family from the soak instrument.
+    ...(familyId ? { familyId } : {}),
   };
 }
 
@@ -631,6 +656,37 @@ export function ensureWizardNewsFeed(feed = {}, options = {}) {
     entries: capEntries(sortEntries(entries), MAX_ENTRIES),
     updatedAt: feed?.updatedAt || options.now || nowIso(),
   };
+}
+
+/**
+ * Project one stored Wizard News feed for a reader without rewriting or
+ * re-normalizing it. The DM receives the original feed, byte for byte. Every
+ * other audience fails closed: covert entries and entries explicitly authored
+ * for a DM-only audience are omitted while the feed's schema, clock, and other
+ * sidecar fields are preserved.
+ *
+ * This is deliberately a read-side projection rather than a second feed. A
+ * covert fact stays available to the DM and to replay, but cannot cross a
+ * player/public presentation seam merely because that surface reads the shared
+ * campaign feed directly.
+ *
+ * @template T
+ * @param {T} feed
+ * @param {string} [audience]
+ * @returns {T}
+ */
+export function projectWizardNewsForAudience(feed, audience = 'dm') {
+  if (audience === 'dm' || !feed || typeof feed !== 'object') return feed;
+  const record = /** @type {{entries?: unknown}} */ (feed);
+  if (!Array.isArray(record.entries)) return feed;
+
+  const entries = record.entries.filter((entry) => {
+    if (!entry || typeof entry !== 'object') return true;
+    const row = /** @type {{covert?: unknown, audience?: unknown}} */ (entry);
+    return row.covert !== true && row.audience !== 'dm-only' && row.audience !== 'dm';
+  });
+  if (entries.length === record.entries.length) return feed;
+  return /** @type {T} */ ({ ...record, entries });
 }
 
 /**
@@ -879,6 +935,8 @@ export function applyPulseMover(result, worldState, settlementUpdates, wizardNew
 export function summarizeWizardNews(feed = {}) {
   const current = ensureWizardNewsFeed(feed);
   const major = current.entries.filter(entry => entry.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR);
+  // Preserve the v1 public return shape: routine is a governed subtype of the
+  // existing non-major bucket, not a new unconditional summary key.
   const notables = current.entries.filter(entry => entry.significance !== WIZARD_NEWS_SIGNIFICANCE.MAJOR);
   const byTick = [];
   const groups = new Map();
@@ -927,7 +985,9 @@ function arcIdForEntry(entry) {
  * @returns {number}
  */
 function significanceRank(significance) {
-  return significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR ? 1 : 0;
+  if (significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR) return 2;
+  if (significance === WIZARD_NEWS_SIGNIFICANCE.NOTABLE) return 1;
+  return 0;
 }
 
 /**
@@ -937,7 +997,7 @@ function significanceRank(significance) {
  * @property {WizardNewsEntry[]} entries   chronological (oldest → newest); each carries entry.thread
  * @property {WizardNewsEntry} head        the latest stage (what the panel renders collapsed)
  * @property {number} size
- * @property {string} significance         MAJOR if any stage is major
+ * @property {string} significance         highest SP-6a class across the stages
  * @property {number} tick                 head tick (for ordering)
  * @property {number} score                max score across stages
  * @property {string[]} settlementIds      union across stages
@@ -985,7 +1045,9 @@ export function deriveNewsThreads(entries = []) {
       size: stamped.length,
       significance: stamped.some(e => e.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR)
         ? WIZARD_NEWS_SIGNIFICANCE.MAJOR
-        : WIZARD_NEWS_SIGNIFICANCE.NOTABLE,
+        : stamped.some(e => e.significance === WIZARD_NEWS_SIGNIFICANCE.NOTABLE)
+          ? WIZARD_NEWS_SIGNIFICANCE.NOTABLE
+          : WIZARD_NEWS_SIGNIFICANCE.ROUTINE,
       tick: head.tick,
       score: stamped.reduce((max, e) => Math.max(max, e.score || 0), 0),
       settlementIds: [...new Set(stamped.flatMap(e => e.settlementIds || []))],

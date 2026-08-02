@@ -222,6 +222,30 @@ describe('force ≡ organic at the arm (byte-compared against the kernel functio
     expect(applied.worldState.proposals.find((/** @type {any} */ p) => p.id === minted.proposalId)?.status).toBe('applied');
   });
 
+  it('a lit repudiation crossing reaches the disposition receipt lane in the same verdict', () => {
+    const channels = {
+      martial: { stock01: 0.5, band: 'settled' },
+      mercantile: { stock01: 0.5, band: 'settled' },
+      diplomatic: { stock01: 0.61, band: 'marked' },
+      insular: { stock01: 0.5, band: 'settled' },
+    };
+    const campaign = campaignFixture(
+      { ...WAR_RULES, dispositionChannelsEnabled: true },
+      { ...liveNapWorld(), dispositionStats: { a: { wins: 0, losses: 0, score: 0, channels, updatedTick: 4 } } },
+    );
+    const minted = mintRealmVerbProposal({
+      campaign, saves: SAVES, verb: 'REPUDIATE_TREATY', args: { fromId: 'a', toId: 'b' },
+      now: '2026-01-01T00:00:00.000Z',
+    });
+    const applied = applyWorldPulseProposal({
+      campaign: { ...campaign, worldState: minted.result.worldState }, saves: SAVES,
+      proposalId: minted.proposalId, now: '2026-01-02T00:00:00.000Z',
+    });
+    const beat = applied.newsEntries.find((entry) => entry.impactKind === 'disposition_diplomatic_crossed');
+    expect(beat).toMatchObject({ settlementIds: ['a'], settlementNames: ['Aldford'] });
+    expect(beat.headline).toContain('Aldford');
+  });
+
   it('LAPSE HONESTY: a pact that expires before approval refuses with no treaty residue', () => {
     const campaign = campaignFixture(WAR_RULES, liveNapWorld());
     const minted = mintRealmVerbProposal({

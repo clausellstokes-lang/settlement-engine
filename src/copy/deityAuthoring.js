@@ -25,45 +25,45 @@ export const deityAuthoring = {
   // ── The authoring form (Compendium · Custom Content · Deities) ──────────────
   form: {
     heading:      'Homebrew deity',
-    intro:        'Author a god your campaign can worship. Its axes decide what it does to a settlement once a DM assigns it. Nothing is rolled; every effect is derived.',
+    intro:        'Author a god your campaign can worship. Once a DM assigns it, the axes and supported domain describe how local worship, institutions, and policy lean. Nothing is rolled; every effect is derived.',
     nameLabel:    'Name',
     namePlaceholder: 'e.g. Aurelion, the Dawnfather',
     // Moral axis (alignmentAxis) — good/evil/neutral.
     alignmentLabel: 'Moral axis',
-    alignmentHint:  'Good against evil. A GOOD god purges corruption and installs incorruptible successors; an EVIL god corrupts the faithful even without organized crime. Neutral takes no side.',
+    alignmentHint:  'Good against evil. Under a GOOD creed, institutions expose corruption and choose incorruptible successors; under an EVIL creed, corruption can take root even without organized crime. Neutral takes no side.',
     // Order axis (lawAxis) — lawful/chaotic/neutral.
     lawLabel:       'Order axis',
-    lawHint:        'Law against chaos. A LAWFUL god strengthens law and order and props a traditional ruler’s mandate; a CHAOTIC god erodes order and makes corruption more tolerated. Neutral is inert here.',
+    lawHint:        'Law against chaos. A LAWFUL creed strengthens law and order and props a traditional ruler’s mandate; a CHAOTIC creed erodes order and makes corruption more tolerated. Neutral is inert here.',
     // Rank (rankAxis) — major/minor/cult.
     rankLabel:      'Rank',
-    rankHint:       'The god’s reach. MAJOR anchors religious authority and can tighten a realm’s magic legality; MINOR lends modest authority; a CULT is a fringe following with little sway.',
+    rankHint:       'The faith’s reach. A MAJOR orthodoxy anchors religious authority and can tighten a realm’s magic legality; MINOR worship lends modest authority; a CULT is a fringe following with little sway.',
     // Portfolio (free-text flavor, ZERO mechanics).
     portfolioLabel: 'Portfolio',
     portfolioHint:  'What the god is “of”, in your own words: its sacred domains, myths, the tone of its worship. Pure flavor: it rides the deity onto a settlement for display and NEVER changes the simulation.',
     portfolioPlaceholder: 'e.g. Sunrise oaths, honest courts, and the first seed of spring.',
     // Domain (short display sphere).
     domainLabel:    'Domain',
-    domainHint:     'A one-word sphere shown beside the god (sun, trade, plague). Display only.',
+    domainHint:     'A one-word sphere shown beside the faith. War and conquest lower a devoted settlement’s bar for war, hunt lowers it slightly, and harvest raises it. This read stays dormant until assignment and disposition channels are enabled. Any other sphere remains presentation-only.',
     domainPlaceholder: 'e.g. sun',
     temperNote:     'Temperament (warlike / peacelike) is derived from the moral and order axes. You don’t set it.',
   },
 
   // ── The single-source effect preview ("This god will…") ───────────────────
   preview: {
-    heading:      'This god will…',
-    empty:        'A fully-neutral, unranked god does nothing to the living world. Set a moral or order axis, or a rank, to give it teeth.',
-    dormant:      'Dormant until you assign this deity as a settlement’s patron and the realm advances. Only then does a snapshot embed and touch the substrate.',
+    heading:      'What worship changes',
+    empty:        'No registered living-world effect is selected. Set a moral or order axis, a rank, or a supported domain to describe how worship shapes the settlement.',
+    dormant:      'Dormant until you assign this deity as a settlement’s patron and the realm advances. Only then can local worship and institutions touch the substrate; domain pressure also requires disposition channels.',
     stanceHeading: 'Toward other gods',
     synergyHeading: 'Under a ruler',
     stance: {
-      goodConsolidated: 'Stands with other good gods and turns its aggression on evil alone.',
-      evilTransactional: 'Strikes at rivals of every stripe and bands only transactionally. Its pacts are betrayal-priced.',
-      neutral:          'Keeps to itself, neither crusading nor scheming against its neighbors.',
+      goodConsolidated: 'Good-aligned faiths tend to consolidate with one another and direct hostility toward evil rivals.',
+      evilTransactional: 'Evil-aligned faiths contest rivals of every stripe and cooperate only transactionally. Their pacts are betrayal-priced.',
+      neutral:          'A neutral faith neither crusades nor schemes against its neighbors.',
     },
     synergy: {
-      lawful:  'Props a traditional ruler’s divine mandate. Legitimacy leans on the throne.',
-      chaotic: 'Undercuts a traditional ruler’s mandate. Order answers to no crown.',
-      neutral: 'Neither props nor undercuts the ruling mandate.',
+      lawful:  'A lawful creed props a traditional ruler’s divine mandate. Legitimacy leans on the throne.',
+      chaotic: 'A chaotic creed undercuts a traditional ruler’s mandate. Order answers to no crown.',
+      neutral: 'A neutral creed neither props nor undercuts the ruling mandate.',
     },
   },
 
@@ -106,9 +106,9 @@ export const deityAuthoring = {
     latentDetail:   'Every settlement is generated with gods already latent in its seed, identical for every account. Tier never touches generation.',
     authoredDetail: 'Your homebrew pantheon exists in the catalog.',
     assignedLabel:  'Assigned to a settlement',
-    assignedDetail: 'A deity must be a settlement’s patron before it embeds and acts.',
+    assignedDetail: 'A deity must be a settlement’s patron before its worship can affect local state.',
     dynamicsLabel:  'Dynamics advancing',
-    dynamicsDetail: 'Advance the realm so deities contest converts and gain seats.',
+    dynamicsDetail: 'Advance the realm so faiths contest converts and gain seats.',
     dormantFoot:    'Until a deity is assigned and the realm advances, the pantheon stays dormant, byte-identical to a deity-free world.',
     upsell:         'Author and assign your own gods with a premium campaign.',
     upsellCta:      'Upgrade to premium',

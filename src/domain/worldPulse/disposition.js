@@ -45,6 +45,7 @@ import { COUP_COERCION } from '../rulingPowerCoup.js';
 import { TRAIT_AGGRESSION, TRAIT_ALIGNMENT, acquiredTraitDescriptors } from '../../data/npcTraitWeights.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { readDispositionMultiplier } from './dispositionLedger.js';
+import { thresholdFactorOf } from './dispositionProfile.js';
 import { deityTemper, evil01, chaos01 } from './deityAxes.js';
 // Phase 5.5 M9b — MORAL DRIFT (component 3). The unjust-instigation accumulator
 // drifts the derived alignment: its malice term folds into computeMalice's recent-
@@ -244,9 +245,17 @@ export function computeAggressiveness(item, worldState, opts = {}) {
   // History rides the SAME ledger the ratchet writes. readDispositionMultiplier
   // is already centered on 1.0 (EXACTLY 1.0 when absent/net-zero), so convert it
   // to a signed drive for the blend: (mult − 1) / SPAN ∈ roughly [−1, 1].
+  const channelsActive = worldState?.simulationRules?.dispositionChannelsEnabled === true;
+  const historyEntry = id != null ? worldState?.dispositionStats?.[id] : null;
   const histMult = Number.isFinite(opts.historyMultiplier)
     ? Number(opts.historyMultiplier)
-    : (id != null ? readDispositionMultiplier(worldState?.dispositionStats || {}, id) : 1.0);
+    : channelsActive
+      // WR-2 subordinates the legacy signed score to the martial channel. The
+      // profile returns a BAR factor (positive martial stock lowers the bar), so
+      // reflect it around one for this appetite multiplier. This is ONE read of
+      // the martial lesson — never legacy score multiplied by a second threshold.
+      ? 2 - thresholdFactorOf(historyEntry, 'martial').factor
+      : (id != null ? readDispositionMultiplier(worldState?.dispositionStats || {}, id) : 1.0);
   const hist = (histMult - 1) / MULTIPLIER_SPAN;
 
   // ONE additive warlike-deity term into the SAME drive

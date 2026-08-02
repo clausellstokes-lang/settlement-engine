@@ -9,6 +9,7 @@
  */
 
 import { getSpatialLedger, setSpatialLedger } from '../spatial/distanceRead.js';
+import { advanceDispositionChannels } from './dispositionLedger.js';
 import { peaceCausalActive } from './warReasons.js';
 
 /** @typedef {Record<string, unknown>} Mut */
@@ -84,7 +85,7 @@ export function repudiableTreatyPairs(worldState, tick) {
  * `toId`. Invalid or lapsed requests are strict no-ops (same state reference).
  * @param {Record<string, unknown>} worldState
  * @param {{ fromId?: unknown, toId?: unknown, tick?: unknown }} args
- * @returns {{ ok: true, worldState: Record<string, unknown>, changed: true, treatyKeys: string[] }
+ * @returns {{ ok: true, worldState: Record<string, unknown>, changed: true, treatyKeys: string[], dispositionTransitions?:Array<Record<string, unknown>> }
  *   | { ok: false, code: string, detail: string, worldState: Record<string, unknown> }}
  */
 export function repudiateTreaty(worldState, { fromId, toId, tick } = {}) {
@@ -145,5 +146,30 @@ export function repudiateTreaty(worldState, { fromId, toId, tick } = {}) {
       breachExpiresTick,
     };
   }
-  return { ok: true, worldState: setSpatialLedger(worldState, 'treaties', next), changed: true, treatyKeys: matchingKeys };
+  let nextWorldState = setSpatialLedger(worldState, 'treaties', next);
+  /** @type {Array<Record<string, unknown>>} */
+  let dispositionTransitions = [];
+  const simulationRules = asObject(worldState.simulationRules);
+  if (simulationRules.dispositionChannelsEnabled === true) {
+    const advanced = advanceDispositionChannels(
+      /** @type {Record<string, any>} */ (worldState.dispositionStats || {}),
+      [{
+        id: breaker,
+        channel: 'diplomatic',
+        outcome: 'loss',
+        magnitude: 1,
+        sourceKind: 'treaty_repudiated',
+      }],
+      { enabled: true, tick: nowTick },
+    );
+    nextWorldState = { ...nextWorldState, dispositionStats: advanced.ledger };
+    dispositionTransitions = advanced.transitions;
+  }
+  return {
+    ok: true,
+    worldState: nextWorldState,
+    changed: true,
+    treatyKeys: matchingKeys,
+    ...(dispositionTransitions.length ? { dispositionTransitions } : {}),
+  };
 }

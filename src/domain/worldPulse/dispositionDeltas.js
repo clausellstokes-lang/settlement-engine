@@ -25,3 +25,45 @@ export function collectDispositionDeltas(war = {}, tradeWar = {}) {
     (d) => d && d.id != null && (d.outcome === 'win' || d.outcome === 'loss'),
   );
 }
+
+/**
+ * WR-2's typed collector. The legacy collector above stays byte-exact for every
+ * dark caller; the lit pulse opts into this sibling so the same resolved outcomes
+ * teach the channel they actually exercised:
+ *
+ *   - field war and occupation resistance -> martial
+ *   - supplier contests -> mercantile
+ *
+ * Treaty compliance is collected at its later mover seam because those verdicts
+ * do not exist yet when this function runs. Pure, order-preserving, and tolerant
+ * of malformed resolver rows in the same way as collectDispositionDeltas.
+ *
+ * @param {{ dispositionDeltas?: Array<any> }} [war]
+ * @param {{ dispositionDeltas?: Array<any> }} [tradeWar]
+ * @param {{ dispositionDeltas?: Array<any> }} [occupation]
+ * @returns {Array<{id:string, channel:'martial'|'mercantile', outcome:'win'|'loss',
+ *   magnitude?:number,sourceKind:'war_resolution'|'trade_contest'|'occupation_outcome',
+ *   sourceEventId?:string,sourceEventIds?:string[]}>}
+ */
+export function collectDispositionChannelDeltas(war = {}, tradeWar = {}, occupation = {}) {
+  const typed = (source, channel, sourceKind) => (Array.isArray(source?.dispositionDeltas)
+    ? source.dispositionDeltas
+      .filter((d) => d && d.id != null && (d.outcome === 'win' || d.outcome === 'loss'))
+      .map((d) => ({
+        ...d,
+        channel,
+        sourceKind,
+        ...(d.sourceEventId || d.sourceConquestId
+          ? { sourceEventId: String(d.sourceEventId || d.sourceConquestId) }
+          : {}),
+        ...(Array.isArray(d.sourceEventIds)
+          ? { sourceEventIds: [...new Set(d.sourceEventIds.map(String).filter(Boolean))].sort() }
+          : {}),
+      }))
+    : []);
+  return [
+    ...typed(war, 'martial', 'war_resolution'),
+    ...typed(tradeWar, 'mercantile', 'trade_contest'),
+    ...typed(occupation, 'martial', 'occupation_outcome'),
+  ];
+}

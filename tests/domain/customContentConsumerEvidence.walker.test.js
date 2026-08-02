@@ -85,6 +85,9 @@ const CONSUMER_SITES = Object.freeze({
   // The store module of the same name is a 7-line re-export barrel with none of
   // the axis fields; the domain module is where deitySnapshotFrom projects them.
   deitySnapshot: 'src/domain/deitySnapshot.js',
+  // WR-2's pure read side recognizes the deity domain's closed mechanical set
+  // and returns a neutral record for every other authored word.
+  dispositionProfile: 'src/domain/worldPulse/dispositionProfile.js',
   'dependencyEngine.finishedGoodsSupply': 'src/lib/dependencyEngine.js',
   'dependencyEngine.foodImpactTally': 'src/lib/dependencyEngine.js',
   'dependencyEngine.relationshipRead': 'src/lib/dependencyEngine.js',
@@ -254,6 +257,9 @@ describe('THE CONSUMER-EVIDENCE WALKER (declared evidence must be real)', () => 
     // A distinctive key present in its consumer passes...
     expect(
       evidenceFound({ id: 'deities.alignmentAxis', key: 'alignmentAxis', consumers: ['deitySnapshot'] }),
+    ).toBe(true);
+    expect(
+      evidenceFound({ id: 'deities.domain', key: 'domain', consumers: ['dispositionProfile'] }),
     ).toBe(true);
     // ...and a key absent from that same consumer fails, so a green result above
     // is a real read and not an artifact of the scan always returning true.

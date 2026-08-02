@@ -8,6 +8,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import { composeChroniclersLetter, letterToPlainText, enabledFlagsOf } from '../../src/domain/display/chroniclersLetter.js';
+import { projectWizardNewsForAudience } from '../../src/domain/region/wizardNews.js';
 
 const feed = {
   currentTick: 10,
@@ -79,6 +80,56 @@ describe('V-2 — the empty-diff grace', () => {
     expect(l.sections).toEqual([]);
     expect(l.counts.total).toBe(0);
     expect(l.greeting.toLowerCase()).toMatch(/quiet|still|without event/);
+  });
+});
+
+describe('WR-2 — Wizard News audience projection', () => {
+  const privacyFeed = {
+    schemaVersion: 1,
+    currentTick: 12,
+    updatedAt: '2026-08-02T00:00:00.000Z',
+    entries: [
+      {
+        id: 'public-crossing', tick: 10, significance: 'notable',
+        impactKind: 'disposition_martial_crossed', headline: 'Ashford takes a harder line',
+      },
+      {
+        id: 'suppressed-reading', tick: 11, significance: 'routine',
+        kind: 'war_culture_suppressed', impactKind: 'war_culture_suppressed',
+        headline: "Ashford's books refuse a warlike reading", covert: true,
+      },
+      {
+        id: 'explicit-dm-only', tick: 12, significance: 'routine',
+        impactKind: 'war_culture_suppressed', headline: 'A second private reading',
+        audience: 'dm-only',
+      },
+    ],
+  };
+
+  it('keeps the exact shared feed for the DM, including war_culture_suppressed', () => {
+    const projected = projectWizardNewsForAudience(privacyFeed, 'dm');
+    expect(projected).toBe(privacyFeed);
+    expect(projected.entries.map((entry) => entry.kind || entry.impactKind))
+      .toContain('war_culture_suppressed');
+
+    const letter = composeChroniclersLetter({ wizardNews: privacyFeed, audience: 'dm' });
+    expect(letter.sections.flatMap((section) => section.lines).map((line) => line.id))
+      .toEqual(expect.arrayContaining(['suppressed-reading', 'explicit-dm-only']));
+  });
+
+  it.each(['player', 'public'])('removes covert and explicit DM-only beats for %s readers', (audience) => {
+    const projected = projectWizardNewsForAudience(privacyFeed, audience);
+    expect(projected).toMatchObject({
+      schemaVersion: privacyFeed.schemaVersion,
+      currentTick: privacyFeed.currentTick,
+      updatedAt: privacyFeed.updatedAt,
+    });
+    expect(projected.entries.map((entry) => entry.id)).toEqual(['public-crossing']);
+
+    const letter = composeChroniclersLetter({ wizardNews: privacyFeed, audience });
+    const ids = letter.sections.flatMap((section) => section.lines).map((line) => line.id);
+    expect(ids).toEqual(['public-crossing']);
+    expect(letterToPlainText(letter)).not.toMatch(/books refuse|private reading/i);
   });
 });
 

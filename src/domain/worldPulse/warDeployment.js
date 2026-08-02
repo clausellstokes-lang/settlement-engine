@@ -1420,6 +1420,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
         const withdrawn = besiegers.filter(id => String(deployments[id]?.targetId) === targetId);
         if (withdrawn.length) {
           let guttednessSum = 0; // Σ(1 − returned/start) across the withdrawing coalition.
+          const withdrawalOutcomeIds = [];
           for (const attackerId of withdrawn) {
             const withdrawnRec = deployments[attackerId];
             resolvedDeployments.push({ attackerId, deployment: withdrawnRec, targetId, outcome: 'withdrawal' });
@@ -1442,11 +1443,16 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
               return Number.isFinite(m) && m > 0 && Number.isFinite(c) ? Math.max(0, Math.min(1, c / m)) : 1;
             })();
             guttednessSum += 1 - ratio;
-            dispositionDeltas.push({ id: String(attackerId), outcome: 'loss', magnitude: clamp01(0.5 + (1 - ratio) * 0.5) });
             const name = settlementNameFor(attackerId);
             const targetName = settlementNameFor(targetId);
+            const withdrawalOutcomeId = `world_outcome.siege_abandoned.${stablePart(attackerId)}.${stablePart(targetId)}.${tick}`;
+            withdrawalOutcomeIds.push(withdrawalOutcomeId);
+            dispositionDeltas.push({
+              id: String(attackerId), outcome: 'loss', magnitude: clamp01(0.5 + (1 - ratio) * 0.5),
+              sourceEventId: withdrawalOutcomeId,
+            });
             outcomes.push(warConditionOutcome({
-              id: `world_outcome.siege_abandoned.${stablePart(attackerId)}.${stablePart(targetId)}.${tick}`,
+              id: withdrawalOutcomeId,
               archetype: 'war_exhaustion',
               targetSaveId: attackerId,
               severity: clamp01(0.3 + (warExhaustion[attackerId] || 0) * 0.4),
@@ -1464,7 +1470,10 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
           // loop), magnitude scaled by how gutted the withdrawing force came home. Feeds
           // computeAggressiveness so an emboldened survivor reads differently from an
           // unattacked town. Behind warLayerEnabled; the ±SCORE_MAX clamp bounds it.
-          dispositionDeltas.push({ id: String(targetId), outcome: 'win', magnitude: clamp01(0.4 + (guttednessSum / withdrawn.length) * 0.4) });
+          dispositionDeltas.push({
+            id: String(targetId), outcome: 'win', magnitude: clamp01(0.4 + (guttednessSum / withdrawn.length) * 0.4),
+            sourceEventIds: withdrawalOutcomeIds,
+          });
           continue; // the siege is broken off — no harassment on top.
         }
         // No live deployment to withdraw, but a STALE confirmed war_front channel may

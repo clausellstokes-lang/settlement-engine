@@ -29,6 +29,7 @@ import {
 } from '../../src/domain/content/customSupplyChainActivation.js';
 import { deriveAllCapacities } from '../../src/domain/capacityModel.js';
 import { corruptionPlaneMult } from '../../src/domain/worldPulse/piety.js';
+import { deityPressureOf } from '../../src/domain/worldPulse/dispositionProfile.js';
 import { inferSupplyChains } from '../../src/domain/inferSupplyChains.js';
 import { computeFinishedGoodsDemand } from '../../src/generators/economy/finishedGoodsDemand.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -1049,6 +1050,18 @@ export const MECHANICAL_CLAIM_MATRIX = Object.freeze({
         alignmentAxis: 'evil',
         lawAxis: 'chaotic',
       }, 1),
+    }),
+  ),
+  'deities.domain': claim(
+    'dispositionProfile',
+    'an assigned registered domain changes the war threshold while an arbitrary domain remains neutral',
+    () => ({
+      control: deityPressureOf(
+        deitySettlement('domain', 'sun'),
+      ).thresholdFactor,
+      activated: deityPressureOf(
+        deitySettlement('domain', 'war'),
+      ).thresholdFactor,
     }),
   ),
   'deities.lawAxis': claim(

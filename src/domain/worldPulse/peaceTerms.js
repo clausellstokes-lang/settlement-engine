@@ -63,6 +63,8 @@ import {
   streamInstallmentFraction,
 } from './treatyEnforcement.js';
 import { affordableTreatyDuration, CURRENT_TREATY_TICKS_PER_YEAR, treatyTicksPerYearOf, treatyYearsRemaining } from './treatyClock.js';
+import { dispositionTreatyLearningActive, treatyDispositionDeltas, withTreatyDispositionDeltas } from './treatyDisposition.js';
+import { thresholdFactorOf } from './dispositionProfile.js';
 // THE MATERIAL EXECUTOR: a stream term's installment moves REAL granary months
 // through the conserved sink-only primitive, applied by the existing single
 // food applicator. See treatyTransfer.js for why grain is the honest denomination.
@@ -579,6 +581,7 @@ export function treatiesForPair(worldState, aId, bId) {
  * @property {Record<string, unknown>} worldState
  * @property {boolean} changed
  * @property {Array<Record<string, unknown>>} newsEntries
+ * @property {Array<{id:string, channel:'diplomatic', outcome:'win'|'loss', magnitude?:number}>} [dispositionDeltas]
  * @property {Array<Record<string, unknown>>} [settlementUpdates] the tick's pending
  *   per-settlement writes, with this tick's conserved tribute/reparations/restitution/
  *   resource_share installments folded in. Present only when grain actually moved.
@@ -632,6 +635,8 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
 
   /** @type {Array<Record<string, unknown>>} */
   const newsEntries = [];
+  /** @type {Array<{id:string, channel:'diplomatic', outcome:'win'|'loss', magnitude?:number}>} */
+  const dispositionDeltas = []; const dispositionChannelsActive = dispositionTreatyLearningActive(worldState);
   let workingState = worldState;
   // The tick's conserved granary movements, accumulated across every stream term and
   // folded onto settlementUpdates ONCE at the end (the generosity mover's idiom): a
@@ -679,11 +684,22 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
     // Mint-time executions (overlay nudge, seam registration) + the signing beat.
     workingState = mint.applyMintEffects(workingState, /** @type {Array<Record<string, unknown>>} */ (edges), now);
     newsEntries.push(mint.signingBeat);
+    if (mint.treaty.mediator) {
+      // A mediation that actually lands is a resolved diplomatic outcome for the
+      // broker. Qualification alone teaches nothing; the signed sheet teaches once.
+      dispositionDeltas.push(...treatyDispositionDeltas({
+        enabled: dispositionChannelsActive,
+        outcome: 'mediated',
+        treaty: mint.treaty,
+        mediatorId: String(mint.treaty.mediator.id || ''),
+      }));
+    }
   }
 
   // ── PASS 2: ADVANCE live treaties (execute · monitor · strain · expire) ────
   for (const key of Object.keys(nextLedger).sort()) {
     const treaty = nextLedger[key];
+    const previousCompliance = String(prevLedger?.[key]?.complianceState || treaty.complianceState || 'honored');
     const victorId = String(treaty.victorId);
     const loserId = String(treaty.loserId);
     const terms = /** @type {TermRecord[]} */ (Array.isArray(treaty.terms) ? treaty.terms : []);
@@ -761,6 +777,10 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
     }
 
     if (liveTerms.length === 0) {
+      // A pact that reaches its authored horizon without a default is an outcome,
+      // not mere clock passage: both parties learned that diplomacy held. The
+      // repudiation shell is handled by its direct writer and can never earn this.
+      dispositionDeltas.push(...treatyDispositionDeltas({ enabled: dispositionChannelsActive, outcome: 'held', treaty, previousCompliance, victorId, loserId }));
       delete nextLedger[key]; // all terms lapsed ⇒ the treaty is spent history (prune)
       continue;
     }
@@ -769,6 +789,10 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
     if (defaultSeverity01 > 0) {
       treaty.defaultedBy = loserId;                 // the loser is the oathbreaker (feeds scoreTreatyDefault)
       treaty.defaultSeverity01 = defaultSeverity01;
+      // Learn the breach once on the observed transition, never once per tick of
+      // an already-defaulted treaty. The other party does not receive a synthetic
+      // "win" merely because a promise to it was broken.
+      dispositionDeltas.push(...treatyDispositionDeltas({ enabled: dispositionChannelsActive, outcome: 'defaulted', previousCompliance, loserId, severity01: defaultSeverity01 }));
     } else if ('defaultedBy' in treaty) {
       delete treaty.defaultedBy; delete treaty.defaultSeverity01;
     }
@@ -792,16 +816,14 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
   const nextSerialized = JSON.stringify(hasNext ? sortedLedger(nextLedger) : null);
   const relChanged = workingState !== worldState;
   if (prevSerialized === nextSerialized && !relChanged && !grainMoved && newsEntries.length === 0) {
-    return { worldState, changed: false, newsEntries: [] };
+    return withTreatyDispositionDeltas({ worldState, changed: false, newsEntries: [] }, dispositionChannelsActive, dispositionDeltas);
   }
   let out = workingState;
   out = hasNext ? setSpatialLedger(out, 'treaties', sortedLedger(nextLedger)) : dropSpatialLedger(out, 'treaties');
-  return {
-    worldState: out,
-    changed: true,
-    newsEntries,
+  return withTreatyDispositionDeltas({
+    worldState: out, changed: true, newsEntries,
     settlementUpdates: /** @type {Array<Record<string, unknown>>} */ (nextUpdates),
-  };
+  }, dispositionChannelsActive, dispositionDeltas);
 }
 
 // ── Mint internals ───────────────────────────────────────────────────────────
@@ -838,8 +860,20 @@ function mintTreaty(args) {
 
   // ── MEDIATION (§13): a cross-pressured neighbour brokering the table softens
   // the terms (the §12 magnanimity nudge — bounded) and earns trust both ways.
+  // Eligibility is resolved first from the relationship/faith/alignment graph.
+  // Only then may WR-2 colour the already-qualified broker's propensity; it can
+  // neither nominate a different mediator nor manufacture a relationship.
   const mediator = findCrossPressuredMediator(snapshot, { edges }, victorId, loserId);
-  let effectiveBudget = mediator ? budget * (1 - PEACE_TERMS_TUNING.MEDIATION_SOFTEN) : budget;
+  const mediationDisposition = mediator && dispositionTreatyLearningActive(worldState)
+    ? thresholdFactorOf(
+      /** @type {Record<string, any>} */ (worldState.dispositionStats || {})[mediator.id],
+      'diplomatic',
+    )
+    : null;
+  const mediationScale = mediationDisposition ? 2 - mediationDisposition.factor : 1;
+  let effectiveBudget = mediator
+    ? budget * (1 - PEACE_TERMS_TUNING.MEDIATION_SOFTEN * mediationScale)
+    : budget;
 
   // ── COALITION (§7): the victor's co-besiegers of this loser. >1 member ⇒ the
   // table is COMPOSED; the §H-loaded peel read decides joint vs separate exit.
@@ -873,6 +907,9 @@ function mintTreaty(args) {
   /** @type {string[]} */
   const receipts = [`The Peace of ${loserName} — signed under ${victorName}'s terms (${terms.map((t) => t.type).join(', ')}).`];
   if (mediator) receipts.push(`Brokered by ${mediator.name}, torn between the courts — the terms were the lighter for it.`);
+  if (mediationDisposition && mediationDisposition.factor !== 1) {
+    receipts.push(mediationDisposition.receipt);
+  }
 
   /** @type {TreatyRecord} */
   const treaty = {
@@ -943,7 +980,12 @@ function mintTreaty(args) {
     summary: `${separateExit
       ? `${victorName} makes a separate peace with ${loserName}, binding the defeated court to`
       : `${victorName} binds ${loserName} to`} ${terms.map((term) => termLabel(term.type)).join(', ')}.${mediator ? ` ${mediator.name} brokered the settlement.` : ''}`,
-    reasons: terms.map((term) => signingReason(term, victorName, loserName)),
+    reasons: [
+      ...terms.map((term) => signingReason(term, victorName, loserName)),
+      ...(mediationDisposition && mediationDisposition.factor !== 1
+        ? [mediationDisposition.receipt]
+        : []),
+    ],
     // THE NEWS ADDRESS LAW's place layer. `parties` is this module's own vocabulary and no
     // feed consumer reads it (normalizeEntry, the rumor seeder, the panel's
     // AffectedSettlements and arcIdForEntry all read `settlementIds`), so without this the

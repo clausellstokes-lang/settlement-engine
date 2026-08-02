@@ -43,6 +43,7 @@ import {
   pastCliff,
 } from './momentum.js';
 import { WAR_TERMINATION_DECIDING_TERM_KEYS } from '../certification/warConvergenceContract.js';
+import { deityPressureOf, thresholdFactorOf } from './dispositionProfile.js';
 
 /** @param {unknown} value @returns {Record<string, unknown>} */
 function asObject(value) {
@@ -552,7 +553,31 @@ export function readWarTerminations({
     const causeExit01 = cause.validPins > 0 ? clamp01(1 - cause.cause01) : 0;
     const sueDrive = causeExit01 * T.SUE_CAUSE_W + continue01 * T.SUE_CONTINUE_W;
     const holdDrive = stop01 * T.HOLD_STOP_W + momentum01 * T.HOLD_MOMENTUM_W;
-    const suePressure01 = clamp01(0.5 + (sueDrive - holdDrive) / 2);
+    let suePressure01 = clamp01(0.5 + (sueDrive - holdDrive) / 2);
+    /** @type {string[]} */
+    let dispositionReasons = [];
+    if (rules.dispositionChannelsEnabled === true) {
+      const entry = asObject(asObject(state.dispositionStats)[attackerId]);
+      const martial = thresholdFactorOf(entry, 'martial');
+      const diplomatic = thresholdFactorOf(entry, 'diplomatic');
+      const insular = thresholdFactorOf(entry, 'insular');
+      const deityWar = deityPressureOf(attackerItem, entry);
+      // WR-2 is an END-BAR load, not a fifth deciding term. Diplomatic and
+      // inward-looking cultures lower the exit bar; martial history and a war
+      // domain raise it. The four WR-1 terms, bands, and decidingTerm remain exact.
+      const exitBar = diplomatic.factor * insular.factor
+        * (2 - martial.factor) * (2 - deityWar.thresholdFactor);
+      suePressure01 = clamp01(suePressure01 / Math.max(0.25, exitBar));
+      // Absolute-coherence law: the bar shift is visible on the very receipt that
+      // carries the score. Transition news is later and conditional; it cannot
+      // stand in for the state reads that changed this decision now.
+      dispositionReasons = [martial, diplomatic, insular]
+        .filter((read) => read.factor !== 1)
+        .map((read) => read.receipt);
+      if (deityWar.thresholdFactor !== 1 && deityWar.receipt) {
+        dispositionReasons.push(deityWar.receipt);
+      }
+    }
     const attackerName = settlementName(attackerItem, 'The attacking court');
     const reason = terminationReason({
       attackerName,
@@ -574,6 +599,7 @@ export function readWarTerminations({
       decidingTerm,
       causeState: cause.causeState,
       reason,
+      ...(dispositionReasons.length ? { dispositionReasons } : {}),
     };
     receipts.push(receipt);
     byAttacker.set(attackerId, {

@@ -25,6 +25,7 @@
 import { newsVoiceCategory } from './newsVoice.js';
 import { newsReaderSummary } from './newsBody.js';
 import { humanizeFlagKey, tickCalendarLabel } from './humanizeEngineTokens.js';
+import { projectWizardNewsForAudience } from '../region/wizardNews.js';
 
 /** Local FNV-1a (the newsVoice idiom — each module keeps its own copy rather than
  *  import a sibling's table). @param {string} str @returns {number} */
@@ -266,10 +267,12 @@ function recallFor(lead, sectionId, entries, since) {
  * @param {number} [args.lastReadTick]      the diff floor (default 0)
  * @param {unknown} [args.simulationRules]  the campaign's live flags (for R-16)
  * @param {ReadonlyArray<string>|null} [args.flagsSeen]  recorded flags at last read (null ⇒ R-16 dark)
+ * @param {'dm'|'player'|'public'} [args.audience] reader projection; only exact DM may see covert beats
  * @returns {ChroniclersLetter}
  */
-export function composeChroniclersLetter({ wizardNews, lastReadTick = 0, simulationRules = null, flagsSeen = null }) {
-  const feed = wizardNews && typeof wizardNews === 'object' ? wizardNews : {};
+export function composeChroniclersLetter({ wizardNews, lastReadTick = 0, simulationRules = null, flagsSeen = null, audience = 'dm' }) {
+  const visibleNews = projectWizardNewsForAudience(wizardNews, audience);
+  const feed = visibleNews && typeof visibleNews === 'object' ? visibleNews : {};
   const through = Number.isFinite(feed.currentTick) ? Number(feed.currentTick) : 0;
   const since = Number.isFinite(lastReadTick) ? Number(lastReadTick) : 0;
   const entries = Array.isArray(feed.entries) ? feed.entries : [];

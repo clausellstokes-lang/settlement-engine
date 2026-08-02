@@ -1,8 +1,9 @@
 /**
  * subsystemRowsWar.js — SUBSYSTEM CERTIFICATION ROWS for the WAR STACK:
  * warLayerEnabled, the eight war-depth sub-flags that ship lit only in the
- * full_simulation ceiling preset, the declared-dark warTerminationEnabled read,
- * and the three war-adjacent switches this lane
+ * full_simulation ceiling preset, the two declared-dark WR reads
+ * (warTerminationEnabled and dispositionChannelsEnabled), and the three
+ * war-adjacent switches this lane
  * ADOPTED from their home cohorts because they certify as war and nowhere else
  * (navalEnabled and peaceEngineEnabled out of the WAVES cohort, and
  * allyIntelSharingEnabled out of the baseline opt-in singles). Lane placement is
@@ -377,6 +378,45 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
         name: 'an_exhausted_aggressor_is_couplable',
         description: 'A regime that overextends loses on its own home front, so the scar it accrued abroad is legible in the politics at home.',
         check: 'In a receipt whose years carry war_exhaustion in volume, the same case carries at least one succession attempt across its span. Expressible from the v4 per-year eventTypeCounts plus succession, as a WEAK necessary condition only: it cannot attribute the attempt to the war.',
+      }),
+    ]),
+    soakEvidence: 'unobserved',
+  }),
+  Object.freeze({
+    rule: 'dispositionChannelsEnabled',
+    title: 'Learned disposition channels',
+    module: 'src/domain/worldPulse/dispositionLedger.js,src/domain/worldPulse/dispositionProfile.js,src/domain/worldPulse/dispositionDeltas.js,src/domain/worldPulse/worldState.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY, all three channels. The eight authored disposition
+      // impact kinds are wizard-news receipts, not selected pulse outcomes, so
+      // behavioral eventTypeCounts and moverFamilyOf never see them. The durable
+      // data extends each EXISTING dispositionStats entry in place; the total v5
+      // census counts only that shared top-level ledger and does not descend into
+      // an entry to distinguish legacy {wins,losses,score} from WR-2 channels.
+      eventTypes: Object.freeze([]),
+      moverFamilies: Object.freeze([]),
+      stateKeys: Object.freeze([]),
+      other: 'AUTHORED IN THE WAR LANE, BUT NOT FALSELY CLAIMED AS A STRICT CHILD GATE. Fresh martial, mercantile and insular learning is gathered from the war, trade-war and occupation resolvers inside the war-layer pulse path, and diplomatic learning comes from the peace/treaty path; however, worldState.js migrates an existing legacy dispositionStats entry and settlementStrategy consumes its thresholds whenever dispositionChannelsEnabled itself is exactly true. A dark warLayerEnabled therefore does not by itself make this row dormant when a campaign already carries legacy disposition memory. The extension is SAME-SCHEMA: dispositionLedger.js remains the one writer, preserves wins/losses/score as the martial compatibility mirror, and adds four bounded, decaying channel stocks inside each existing dispositionStats entry rather than inventing a second ledger. THE TWO NEARBY CHANNELS ARE BOTH FALSE EVIDENCE. dispositionStats predates WR-2 and can be non-empty while this flag is dark, so its top-level v5 census entry cannot prove the four-channel extension ran; disposition_martial_crossed, disposition_mercantile_crossed, disposition_diplomatic_crossed, disposition_insular_crossed, disposition_reversal, deity_war_pressure, deity_peace_pressure and war_culture_suppressed are wizard-news impact kinds rather than behavioral selected event types, so declaring any of them here would manufacture a permanently silent event channel. TO OBSERVE: extend the v5 subsystem instrument with a channel-shape census over dispositionStats entries (legacy-only entries, four-channel entries and non-neutral entries by channel) and fold the authored transition family IDs into WR-9 story-mix evidence. That pair can prove both mechanics and reader-visible variety without borrowing traffic from the parent war row.',
+    }),
+    // Existing learned entries decay and feed threshold reads every tick; outcome
+    // resolutions are reactive, but the live memory they create is continuously
+    // consumed. The later channel-shape census therefore owes per-tick coverage.
+    expectedTempo: 'per_tick',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'the_extension_never_invents_a_second_ledger',
+        description: 'Four learned channels live inside the established dispositionStats entry, while the legacy wins, losses and score fields remain its compatibility face.',
+        check: 'A future channel-shape census reports four-channel entries only beneath dispositionStats and the total v5 stateKeys census never acquires a dispositionChannels or dispositionProfiles top-level key.',
+      }),
+      Object.freeze({
+        name: 'news_is_not_behavioral_aliveness',
+        description: 'A disposition transition may be legible in Wizard News without pretending that a reader-facing receipt is a selected simulation outcome.',
+        check: 'WR-9 may count the eight authored disposition impact kinds in its story mix, while behavioral yearly eventTypeCounts and mover counts remain unchanged by those wizard-news receipts.',
+      }),
+      Object.freeze({
+        name: 'dark_means_legacy_shape_and_behavior',
+        description: 'An absent or false flag preserves installed saves and their old disposition behavior exactly; migration and new threshold reads require explicit true.',
+        check: 'Across absent and explicit-false golden runs, serialized dispositionStats entries contain only their legacy wins, losses and score fields and every non-disposition output is byte-identical.',
       }),
     ]),
     soakEvidence: 'unobserved',

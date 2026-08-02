@@ -9,6 +9,8 @@ import {
   AGGRESSION_TUNING as RX_AGGRESSION,
   DEITY_RANK_AUTHORITY as RX_RANK,
   DEITY_MAGIC_LEGALITY_STEPS as RX_MAGIC,
+  DEITY_DOMAIN_PRESSURE as RX_DOMAIN_PRESSURE,
+  DEITY_THRESHOLD_CAP as RX_DOMAIN_CAP,
 } from '../../../src/domain/display/deityEffects.js';
 
 // The ENGINE sources of truth (the inline couplings the engine actually applies).
@@ -27,6 +29,10 @@ import {
   deriveMagicProfile,
   magicLegalityBands,
 } from '../../../src/domain/magicProfile.js';
+import {
+  DEITY_DOMAIN_PRESSURE,
+  DEITY_THRESHOLD_CAP,
+} from '../../../src/domain/worldPulse/dispositionProfile.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // P0.2 — the shared deity-coupling module. It is the SINGLE SOURCE the UI reads;
@@ -41,6 +47,8 @@ describe('deityEffects constants are the ENGINE constants (proven equal)', () =>
     expect(RX_AGGRESSION).toBe(AGGRESSION_TUNING);
     expect(RX_RANK).toBe(DEITY_RANK_AUTHORITY);
     expect(RX_MAGIC).toBe(DEITY_MAGIC_LEGALITY_STEPS);
+    expect(RX_DOMAIN_PRESSURE).toBe(DEITY_DOMAIN_PRESSURE);
+    expect(RX_DOMAIN_CAP).toBe(DEITY_THRESHOLD_CAP);
   });
 
   test('the consolidated map reads the engine values verbatim', () => {
@@ -53,6 +61,10 @@ describe('deityEffects constants are the ENGINE constants (proven equal)', () =>
     expect(DEITY_AXIS_EFFECTS.rank.major.authorityLift).toBe(DEITY_RANK_AUTHORITY.major);
     expect(DEITY_AXIS_EFFECTS.rank.minor.authorityLift).toBe(DEITY_RANK_AUTHORITY.minor);
     expect(DEITY_AXIS_EFFECTS.rank.cult.authorityLift).toBe(DEITY_RANK_AUTHORITY.cult);
+    expect(Object.keys(DEITY_AXIS_EFFECTS.domain)).toEqual(['war', 'conquest', 'hunt', 'harvest']);
+    for (const domain of Object.keys(DEITY_DOMAIN_PRESSURE)) {
+      expect(DEITY_AXIS_EFFECTS.domain[domain].pressure).toBe(DEITY_DOMAIN_PRESSURE[domain]);
+    }
   });
 });
 
@@ -68,13 +80,13 @@ describe('describeDeityEffects — per-axis', () => {
 
   test('evil → corruption onset string', () => {
     expect(describeDeityEffects({ alignmentAxis: 'evil' })).toContain(
-      "Evil, and corrupts the faithful even without organized crime",
+      'Evil-aligned worship lets corruption take root even without organized crime',
     );
   });
 
   test('good → corruption purge string', () => {
     expect(describeDeityEffects({ alignmentAxis: 'good' })).toContain(
-      'Good, and purges corruption, installing incorruptible successors',
+      'Good-aligned worship exposes corruption and favors incorruptible successors',
     );
   });
 
@@ -84,75 +96,96 @@ describe('describeDeityEffects — per-axis', () => {
   // inert to the read.
   test('warlike (derived from evil alignment) → aggression string', () => {
     expect(describeDeityEffects({ alignmentAxis: 'evil', temperamentAxis: 'warlike' })).toContain(
-      "Warlike, and raises the realm's aggression",
+      "A warlike creed raises the realm's aggression",
     );
   });
 
   test('peacelike (derived from good alignment) → aggression-tempering string', () => {
     expect(describeDeityEffects({ alignmentAxis: 'good', temperamentAxis: 'peacelike' })).toContain(
-      "Peacelike, and tempers the realm's aggression",
+      "A peacelike creed tempers the realm's aggression",
     );
   });
 
   test('rank strings for major / minor / cult', () => {
-    expect(describeDeityEffects({ rankAxis: 'major' })).toContain('Major, and anchors religious authority');
-    expect(describeDeityEffects({ rankAxis: 'minor' })).toContain('Minor, and lends modest religious authority');
-    expect(describeDeityEffects({ rankAxis: 'cult' })).toContain('Cult: a fringe following with little authority');
+    expect(describeDeityEffects({ rankAxis: 'major' })).toContain('A major orthodoxy anchors religious authority');
+    expect(describeDeityEffects({ rankAxis: 'minor' })).toContain('Minor worship lends modest religious authority');
+    expect(describeDeityEffects({ rankAxis: 'cult' })).toContain('A cult remains a fringe following with little authority');
   });
 
   test('ONLY a major god tightens magic legality', () => {
     expect(describeDeityEffects({ rankAxis: 'minor' }).some(s => /magic legality/.test(s))).toBe(false);
     expect(describeDeityEffects({ rankAxis: 'cult' }).some(s => /magic legality/.test(s))).toBe(false);
-    expect(describeDeityEffects({ rankAxis: 'major' })).toContain('Tightens magic legality');
+    expect(describeDeityEffects({ rankAxis: 'major' })).toContain('A major orthodoxy tightens magic legality');
   });
 
   test('a warlike/evil major god is the OPENLY OPPOSED magic variant', () => {
     // Temper derives from alignment: the warlike orthodoxy IS the evil-aligned
     // god (both entrances of deityIsRegulatory's disjunction land here).
     expect(describeDeityEffects({ rankAxis: 'major', alignmentAxis: 'evil', temperamentAxis: 'warlike' })).toContain(
-      'Tightens magic legality: the art is openly opposed',
+      'A major orthodoxy tightens magic legality: the art is openly opposed',
     );
     expect(describeDeityEffects({ rankAxis: 'major', alignmentAxis: 'evil' })).toContain(
-      'Tightens magic legality: the art is openly opposed',
+      'A major orthodoxy tightens magic legality: the art is openly opposed',
     );
   });
 
   test('a full war-god lists alignment, temperament, rank, and magic in order', () => {
     const out = describeDeityEffects({ alignmentAxis: 'evil', temperamentAxis: 'warlike', rankAxis: 'major' });
     expect(out).toEqual([
-      "Evil, and corrupts the faithful even without organized crime",
-      "Warlike, and raises the realm's aggression",
-      'Major, and anchors religious authority',
-      'Tightens magic legality: the art is openly opposed',
+      'Evil-aligned worship lets corruption take root even without organized crime',
+      "A warlike creed raises the realm's aggression",
+      'A major orthodoxy anchors religious authority',
+      'A major orthodoxy tightens magic legality: the art is openly opposed',
     ]);
   });
 
   // ── B5: the 4th axis (lawful/chaotic) → law_order ──────────────────────────
   test('lawful → strengthens law and order', () => {
-    expect(describeDeityEffects({ lawAxis: 'lawful' })).toContain('Lawful, and strengthens law and order');
+    expect(describeDeityEffects({ lawAxis: 'lawful' })).toContain('A lawful creed strengthens law and order');
   });
 
   test('chaotic → erodes order, tolerates corruption', () => {
-    expect(describeDeityEffects({ lawAxis: 'chaotic' })).toContain('Chaotic, and erodes order, tolerating corruption');
+    expect(describeDeityEffects({ lawAxis: 'chaotic' })).toContain('A chaotic creed erodes order and tolerates corruption');
   });
 
   test('a law-neutral deity (or a legacy 3-axis deity with no lawAxis) says nothing about law', () => {
-    expect(describeDeityEffects({ lawAxis: 'neutral' }).some(s => /law and order|tolerating corruption/.test(s))).toBe(false);
+    expect(describeDeityEffects({ lawAxis: 'neutral' }).some(s => /law and order|tolerates corruption/.test(s))).toBe(false);
     // Legacy 3-axis deity: rank still speaks, but NO law string.
     const legacy = describeDeityEffects({ alignmentAxis: 'neutral', temperamentAxis: 'neutral', rankAxis: 'minor' });
-    expect(legacy.some(s => /law and order|tolerating corruption/.test(s))).toBe(false);
-    expect(legacy).toContain('Minor, and lends modest religious authority');
+    expect(legacy.some(s => /law and order|tolerates corruption/.test(s))).toBe(false);
+    expect(legacy).toContain('Minor worship lends modest religious authority');
   });
 
   test('law string is APPENDED last, leaving the first four axes order stable', () => {
     const out = describeDeityEffects({ alignmentAxis: 'evil', temperamentAxis: 'warlike', rankAxis: 'major', lawAxis: 'chaotic' });
     expect(out).toEqual([
-      "Evil, and corrupts the faithful even without organized crime",
-      "Warlike, and raises the realm's aggression",
-      'Major, and anchors religious authority',
-      'Tightens magic legality: the art is openly opposed',
-      'Chaotic, and erodes order, tolerating corruption',
+      'Evil-aligned worship lets corruption take root even without organized crime',
+      "A warlike creed raises the realm's aggression",
+      'A major orthodoxy anchors religious authority',
+      'A major orthodoxy tightens magic legality: the art is openly opposed',
+      'A chaotic creed erodes order and tolerates corruption',
     ]);
+  });
+
+  test.each([
+    ['war', 'war-domain worship lowers the settlement’s bar for war'],
+    ['conquest', 'conquest-domain worship lowers the settlement’s bar for war'],
+    ['hunt', 'hunt-domain worship lowers the settlement’s bar for war slightly'],
+    ['harvest', 'harvest-domain worship raises the settlement’s bar for war'],
+  ])('supported domain %s appends its conditional pressure preview', (domain, effect) => {
+    expect(describeDeityEffects({ domain })).toEqual([
+      `With disposition channels active, ${effect}`,
+    ]);
+  });
+
+  test('supported domains are case-normalized by the core reader', () => {
+    expect(describeDeityEffects({ domain: ' War ' })).toEqual([
+      'With disposition channels active, war-domain worship lowers the settlement’s bar for war',
+    ]);
+  });
+
+  test('an arbitrary authored domain remains presentation-only', () => {
+    expect(describeDeityEffects({ domain: 'sun' })).toEqual([]);
   });
 });
 

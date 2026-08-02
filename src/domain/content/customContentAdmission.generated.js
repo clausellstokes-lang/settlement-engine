@@ -11,7 +11,7 @@ function deepFreeze(value) {
 }
 
 export const CUSTOM_CONTENT_ADMISSION_MANIFEST = deepFreeze({
-  "manifestVersion": "2026-07-25.5",
+  "manifestVersion": "2026-08-02.1",
   "buckets": {
     "institutions": {
       "name": {

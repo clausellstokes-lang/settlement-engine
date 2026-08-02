@@ -12,8 +12,9 @@
  * ChroniclersLetterPanel) is on the composite base, so this screen MOUNTS it
  * directly. It null-guards its `campaign` prop — the Letter renders null with no
  * active campaign — so the screen stands even with nothing open. The Letter shows
- * on both faces (it is a reformatting of the public wizardNews chronicle, no
- * secret content), alongside the DM-only ledger and auspice.
+ * on both faces through the shared Wizard News audience projection: DM truth stays
+ * on the DM face while covert and explicitly DM-only beats cannot cross to the
+ * player face. The ledger and auspice remain DM-only.
  */
 import { useState } from 'react';
 import { useStore } from '../../store/index.js';
@@ -94,10 +95,11 @@ export default function DmScreen() {
           <DossierSummary view={view} audience={audience} />
 
           {/* Letter slot — V-B's Chronicler's Letter (fold-pass-2 mount). Shown on
-              both faces; renders null with no active campaign. The panel carries its
-              own header, so the Card supplies only the frame + kicker (no dup title). */}
+              both faces through its audience projection; renders null with no active
+              campaign. The panel carries its own header, so the Card supplies only
+              the frame + kicker (no dup title). */}
           <Card kicker="Session prep">
-            <ChroniclersLetterPanel campaign={activeCampaign} />
+            <ChroniclersLetterPanel campaign={activeCampaign} audience={audience} />
           </Card>
 
           {/* DM-only tools. The player face never renders these. */}

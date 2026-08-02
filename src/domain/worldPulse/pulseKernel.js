@@ -50,11 +50,11 @@ import {
 } from './factionCompetition.js';
 import { admitGuaranteedProposalOutcomes, buildProposalDocket, evaluateWorldPulseRules, rollCandidates, suppressEquivalentPendingProposalCandidates, supersedeLegacyRecordModeProposals, volatilityMultiplier } from './candidateEvents.js';
 import { buildTempoContext, foldNarrativeTempo, tempoReceiptEntries, sublinearBudget, REALM_SCALING } from './narrativeTempo.js';
-import { applyDispositionDeltas, dispositionFactorMap } from './dispositionLedger.js';
+import { dispositionFactorMap } from './dispositionLedger.js';
+import { advancePulseDisposition, advanceTreatiesWithDisposition, collectPulseDispositionDeltas } from './dispositionChannels.js';
 import { advancePantheon, collectFaithDeltas } from './pantheon.js';
 import { computeDispositionFactorMap, computeLawfulness, computeMalice } from './disposition.js';
 import { computeTradeSalienceMap, computeSecondaryStatusOverlay } from './tradeSalience.js';
-import { collectDispositionDeltas } from './dispositionDeltas.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
 import { reconcileSupersededProposalNews, stateOnlyRumorSeedsFromHistory } from './worldPulseFeedCuration.js';
 import { mechanicalPulseRecordFields, partitionPulseOutcomeLanes, publicPulseSurfaces } from './pulseOutcomePartition.js';
@@ -80,7 +80,6 @@ import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons, peaceReasonsFor } from './peaceReasons.js';
 import { readWarTerminations } from './warTermination.js';
 import { momentumActive, commitmentDepositsFor, advanceCommitments, entityThreshold, makeCommitmentDiscountFn, advanceMomentumCracks, MOMENTUM_TUNING } from './momentum.js';
-import { advanceTreaties } from './peaceTerms.js';
 import { advanceIntervention, interventionActive } from './convergence.js';
 import { advanceNaval, navalActive } from './navalKernel.js';
 import { advanceSupplyWebWarfare, supplyWebWarfareActive } from './supplyWebWarfare.js';
@@ -823,7 +822,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // is byte-neutral (applyDispositionDeltas returns the input ledger on []) on the
   // OFF path and on quiet ticks.
   /** @type {any[]} */
-  let pendingDispositionDeltas = [];
+  let pendingDispositionDeltas = [], dispositionTransitions;
   if (simulationRules.warLayerEnabled) {
     // The war-outcome suppression id set, computed ONCE up front (the dismissed majors on
     // the resume path, EVERY major on the pause path, null otherwise). Reused below for
@@ -1025,7 +1024,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // after outcomes apply — the READ-LAST/WRITE-NEXT timing discipline. The occupation
     // layer contributes its own consolidation-win / liberation-loss deltas (deterministic,
     // id-stable) alongside the war/trade contests.
-    pendingDispositionDeltas = [...collectDispositionDeltas(war, tradeWar), ...occupation.dispositionDeltas];
+    pendingDispositionDeltas = collectPulseDispositionDeltas(war, tradeWar, occupation, simulationRules.dispositionChannelsEnabled === true);
     // A DM-DISMISSED conquest must leave NO disposition ledger residue either: the war
     // layer banks a conqueror WIN + a conquered LOSS for each conquest it resolved (the
     // out-of-band ratchet), so a dismissed conquest would otherwise still tilt next-tick
@@ -1339,15 +1338,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // Disposition write-side, the READ-LAST/WRITE-NEXT seam: fold this tick's
   // resolved-contest win/loss deltas into NEXT-tick dispositionStats. The deltas
   // were READ from contests that resolved THIS tick; the ledger they produce is
-  // first READ at candidate-build NEXT tick — never mid-tick. applyDispositionDeltas
-  // sorts by id (commutative, order-independent) and returns the input ledger
-  // unchanged for [] — so this is byte-neutral on the OFF path / quiet ticks.
-  if (pendingDispositionDeltas.length) {
-    memoryState = {
-      ...memoryState,
-      dispositionStats: applyDispositionDeltas(memoryState.dispositionStats, pendingDispositionDeltas),
-    };
-  }
+  // first READ at candidate-build NEXT tick — never mid-tick. The leaf keeps the
+  // legacy writer exact when dark and owns the lit decay/transition orchestration.
+  ({ worldState: memoryState, transitions: dispositionTransitions } = advancePulseDisposition(memoryState, pendingDispositionDeltas, { enabled: simulationRules.dispositionChannelsEnabled === true, tick: worldState.tick }));
   // The SECONDARY-STATUS OVERLAY (compatibility-enforced). Trade
   // ties create/reinforce LAYERED secondary statuses (critical/preferred/military
   // supplier; smuggling for a battlefield primary) on each edge, OVER the primary
@@ -2368,9 +2361,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // The stream terms move REAL grain, so this mover now threads settlementUpdates like
   // the generosity/upswing movers do — hence the applyPulseMover form (byte-identical to
   // the inline block it replaces: an unchanged mover returns the same references).
-  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceTreaties({
+  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceTreatiesWithDisposition({
     snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
     graph: applied.regionalGraph, pIndex, tick: worldState.tick, now,
+    dispositionEnabled: simulationRules.dispositionChannelsEnabled === true, dispositionTransitions,
   }), memoryState, settlementUpdates, wizardNews, now, newsReceiptSink));
   // W-PEACE-1 — THE CAUSAL REASONS LAYER (DESIGN_PEACE_ENGINE.md §14). Two
   // DETERMINISTIC movers (no rng — reasons are reads, not rolls): typed,

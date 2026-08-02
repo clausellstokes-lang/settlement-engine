@@ -147,11 +147,17 @@ export const BODY_POOLS = Object.freeze({
  * unknown/missing transition falls back to a neutral in-world line. VIEW-TIME
  * variety: id-bearing entries draw a per-id line from the pool; id-less entries
  * get the canonical index-0 line (byte-identical to before).
- * @param {{ id?: string|number|null, kind?: string|null, scope?: string|null, severity?: number|null }|null|undefined} entry
+ * Governed SP-6 entries already carry an authored reader sentence plus its
+ * structural family. Show that sentence directly; the generic lifecycle body is
+ * for legacy/unregistered entries. This also keeps the repetition instrument and
+ * the words a reader actually sees on the same projection.
+ * @param {{ id?: string|number|null, kind?: string|null, scope?: string|null,
+ *   severity?: number|null,summary?:string|null,familyId?:string|null }|null|undefined} entry
  * @returns {string}
  */
 export function newsBodyText(entry) {
   if (!entry) return '';
+  if (entry.familyId && String(entry.summary || '').trim()) return String(entry.summary).trim();
   const kind = entry.kind || '';
   const scope = scopePhrase(entry.scope);
   const heavy = clamp01(entry.severity) >= 0.75;

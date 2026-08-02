@@ -49,6 +49,7 @@ import {
   relationshipRoles,
 } from './relationshipEvolution.js';
 import { computeAggressiveness } from './disposition.js';
+import { deityPressureOf, thresholdFactorOf } from './dispositionProfile.js';
 import { humanizeToken } from '../display/humanizeEngineTokens.js';
 import { softmaxWeights, stableSampleByWeight, clamp01, hash01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
@@ -562,7 +563,8 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
  * scoring; a per-archetype set shifts the base-move balance AND adds its non-war
  * levers). A default objective has NO `levers`, so the lever block never runs and
  * the returned move set is IDENTICAL to Wave A's.
- * @param {{ sId: any, ctx: any, aggressiveness: number, strengthFor: (id: any) => number, exhaustion: number,
+ * @param {{ sId: any, ctx: any, aggressiveness: number, peaceAggressiveness?:number,
+ *   strengthFor: (id: any) => number, exhaustion: number,
  *   rng?: RngLike, tick?: number, chaosPull?: number, rust?: number,
  *   objective?: import('./scoringObjective.js').ScoringObjective,
  *   causal?: { warFor: (id: string) => number, peaceFor: (id: string) => number } | null,
@@ -570,12 +572,16 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
  *   commitmentLoad?: { factorFor: (move: string, targetId?: string|null) => number } | null,
  *   extractionEV?: { adjFor: (targetId: string) => number } | null,
  *   embassy?: { suitFor: (foes: string[]) => number } | null,
- *   termination?: { suePressure01:number } | null }} args
- * @returns {Array<{ move:string, score:number, bestTargetId?:string }>}
+ *   termination?: { suePressure01:number } | null,
+ *   dispositionThresholds?: { martial:number, mercantile:number, diplomatic:number,
+ *     insular:number, deityWar:number, martialInAggressiveness?:boolean,
+ *     receipts?:Record<string,string> } | null }} args
+ * @returns {Array<{ move:string, score:number, bestTargetId?:string, dispositionReasons?:string[] }>}
  */
-function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0, objective = DEFAULT_SCORING_OBJECTIVE, causal = null, coalitionLoad = null, commitmentLoad = null, extractionEV = null, embassy = null, termination = null }) {
+function enumerateMoves({ sId, ctx, aggressiveness, peaceAggressiveness = aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0, objective = DEFAULT_SCORING_OBJECTIVE, causal = null, coalitionLoad = null, commitmentLoad = null, extractionEV = null, embassy = null, termination = null, dispositionThresholds = null }) {
   const sStrength = strengthFor(sId);
   const aggr = aggressiveness - 1; // signed drive ∈ ~[-0.5, 0.5]
+  const peaceAggr = peaceAggressiveness - 1;
   // The scorer (VI.3 / M9a): the move coefficients live in the OBJECTIVE descriptor;
   // the arithmetic below is the SAME expression in the SAME order, so a DEFAULT
   // objective is byte-identical to Wave A (M9a's per-archetype sets re-tune it).
@@ -641,7 +647,7 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
     // W-C1 item 1b: the peace-threshold reading is MISREAD toward chaos + rust (a delayed
     // or premature suit); read true (byte-identical) for a lawful, seasoned, deity-free realm.
     const perceived = termination ? clamp01(Number(termination.suePressure01) || 0) : perceivedPeaceExhaustion({ exhaustion, rng, tick, sId, chaosPull, rust });
-    let peaceScore = clamp01(O.sueForPeace.base + perceived * O.sueForPeace.exhaustionGain - aggr * O.sueForPeace.aggrDamp);
+    let peaceScore = clamp01(O.sueForPeace.base + perceived * O.sueForPeace.exhaustionGain - peaceAggr * O.sueForPeace.aggrDamp);
     // W-PEACE-1 §H: the accumulated CASUS PACIS ledger loads the peace weight —
     // the strongest case across the conflicts S is actually in (codepoint-stable
     // max; bounded ≤ ×(1+PEACE_FACTOR_W); ×1 exactly when dark ⇒ byte-identical).
@@ -720,6 +726,79 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
     }
   }
 
+  // WR-2: dispositions colour ACTION BARS only after the ordinary move space and
+  // best target have already been resolved. This placement is structural: no
+  // channel can add a target, turn a friend hostile, or bypass a legality gate.
+  // A factor below one lowers the bar (score rises); above one raises it. The
+  // insular channel deliberately points the other way for outward acts.
+  if (dispositionThresholds) {
+    const D = dispositionThresholds;
+    const outwardInsular = 2 - D.insular;
+    /** @type {Record<string, string[]>} */
+    const dispositionReasons = {};
+    const addReason = (move, key, factor) => {
+      const receipt = D.receipts?.[key];
+      if (factor === 1 || !receipt) return;
+      if (!dispositionReasons[move]) dispositionReasons[move] = [];
+      if (!dispositionReasons[move].includes(receipt)) dispositionReasons[move].push(receipt);
+    };
+    const martialMoves = new Set(['defend', 'hold', 'deploy', 'sue_for_peace', 'credit', 'missionize', 'prestige', 'opportunity']);
+    for (const move of Object.keys(scored)) {
+      let bar = 1;
+      if (D.martialInAggressiveness === true && martialMoves.has(move)
+        && !(move === 'sue_for_peace' && termination)) {
+        // Martial history already entered this move through computeAggressiveness.
+        // Record that single consumption here; never multiply the bar by it again.
+        addReason(move, 'martial', D.martial);
+      }
+      if (move === 'deploy' || move === 'prestige' || move === 'opportunity') {
+        bar *= D.deityWar * outwardInsular;
+        addReason(move, 'deityWar', D.deityWar);
+        addReason(move, 'insular', D.insular);
+      } else if (move === 'sue_for_peace') {
+        // A live WR-1 termination read owns ALL four disposition inputs and its
+        // receipt. Reapplying any of them here would double diplomatic pressure,
+        // contradict insularity, and silently consume martial history twice.
+        if (!termination) {
+          // An inward-looking court is read consistently on both peace paths:
+          // withdrawal is an inward act, so insularity lowers (not raises) its
+          // bar just as it does in warTermination's WR-1-owned exit read.
+          bar *= D.diplomatic * D.insular * (2 - D.deityWar);
+          addReason(move, 'diplomatic', D.diplomatic);
+          addReason(move, 'insular', D.insular);
+          addReason(move, 'deityWar', D.deityWar);
+        }
+      } else if (move === 'reroute' || move === 'embargo' || move === 'credit') {
+        bar *= D.mercantile * outwardInsular;
+        addReason(move, 'mercantile', D.mercantile);
+        addReason(move, 'insular', D.insular);
+      } else if (move === 'missionize') {
+        bar *= D.diplomatic * outwardInsular;
+        addReason(move, 'diplomatic', D.diplomatic);
+        addReason(move, 'insular', D.insular);
+      } else if (move === 'defend' || move === 'hold' || move === 'legitimacy') {
+        bar *= D.insular;
+        addReason(move, 'insular', D.insular);
+      }
+      if (bar !== 1) scored[move] = clamp01(scored[move] / Math.max(0.25, bar));
+    }
+    for (const [move, reasons] of Object.entries(dispositionReasons)) {
+      if (reasons.length) dispositionReasons[move] = [...new Set(reasons)];
+    }
+    // Attach below after canonical move sorting. The sidecar is deliberately local
+    // to this scorer; it never enters target enumeration.
+    return Object.keys(scored)
+      .sort(codepoint)
+      .map((move) => ({
+        move,
+        score: scored[move],
+        ...(move === 'deploy' && bestTargetId != null ? { bestTargetId: String(bestTargetId) } : {}),
+        ...(dispositionReasons[move]?.length
+          ? { dispositionReasons: dispositionReasons[move] }
+          : {}),
+      }));
+  }
+
   return Object.keys(scored)
     .sort(codepoint)
     .map((move) => move === 'deploy' && bestTargetId != null
@@ -782,6 +861,9 @@ function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion,
       : null;
     const reasons = termination ? [
       ...(termination.receipt?.reason ? [termination.receipt.reason] : []),
+      ...(Array.isArray(termination.receipt?.dispositionReasons)
+        ? termination.receipt.dispositionReasons
+        : []),
       ...terminationPeaceReasonLines(peaceEntry),
     ] : [
       `Economic exhaustion ${exhaustion.toFixed(2)} drives ${name} to the table.`,
@@ -928,7 +1010,7 @@ function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion,
  * @param {any} pressureIdx    the derived pressure index (settlementStrength input).
  * @param {Object} context
  * @param {number} [context.tick]
- * @param {{ settlementStrategyEnabled?: boolean }} [context.simulationRules]
+ * @param {{ settlementStrategyEnabled?: boolean, dispositionChannelsEnabled?: boolean }} [context.simulationRules]
  * @param {{ random: () => number, fork: (label:string) => any }} [context.rng]
  * @param {Map<string, { targetId:string, suePressure01:number, dissolvedCauseTypes?:string[], receipt?:{reason?:string} }>|null} [context.warTerminationByAttacker]
  * @returns {any[]} at most ONE probability-1 candidate per settlement.
@@ -1010,6 +1092,12 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
 
     // ── Else: enumerate → score → softmax → sample ONE move. ─────────────────────
     const aggressiveness = computeAggressiveness(item, worldState);
+    // When WR-1 already owns the peace read, remove only WR-2's martial-history
+    // contribution from the strategy scorer's sue arm. Government, personality,
+    // and the older deity-temperament term remain part of the court's character.
+    const peaceAggressiveness = termination && rules.dispositionChannelsEnabled === true
+      ? computeAggressiveness(item, worldState, { historyMultiplier: 1 })
+      : aggressiveness;
     const exhaustion = economicExhaustion(item);
     // W-C1 item 1b: the fidelity pulls on the peace-threshold reading (0 for a lawful/
     // seasoned/deity-free settlement ⇒ enumerate/emit read the TRUE exhaustion, byte-identical).
@@ -1053,7 +1141,32 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     const embassy = getSpatialLedger(worldState, EMBASSY_LEDGER_KEY)
       ? { suitFor: (/** @type {string[]} */ foes) => embassySuitPeaceMult(worldState, String(sId), foes) }
       : null;
-    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective, causal, coalitionLoad, commitmentLoad, extractionEV, embassy, termination });
+    const dispositionThresholds = rules.dispositionChannelsEnabled === true
+      ? (() => {
+        const entry = worldState.dispositionStats?.[sId];
+        const martial = thresholdFactorOf(entry, 'martial');
+        const mercantile = thresholdFactorOf(entry, 'mercantile');
+        const diplomatic = thresholdFactorOf(entry, 'diplomatic');
+        const insular = thresholdFactorOf(entry, 'insular');
+        const deityWar = deityPressureOf(item, entry);
+        return {
+          martial: martial.factor,
+          mercantile: mercantile.factor,
+          diplomatic: diplomatic.factor,
+          insular: insular.factor,
+          deityWar: deityWar.thresholdFactor,
+          martialInAggressiveness: true,
+          receipts: {
+            martial: martial.receipt,
+            mercantile: mercantile.receipt,
+            diplomatic: diplomatic.receipt,
+            insular: insular.receipt,
+            deityWar: deityWar.receipt,
+          },
+        };
+      })()
+      : null;
+    const moves = enumerateMoves({ sId, ctx, aggressiveness, peaceAggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective, causal, coalitionLoad, commitmentLoad, extractionEV, embassy, termination, dispositionThresholds });
     if (!moves.length) continue;
 
     const weights = softmaxWeights(moves.map((m) => m.score), STRATEGY_K);
@@ -1077,7 +1190,14 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
       strengthFor: strengthForObs, rng, chaosPull, rust,
       worldState, beliefActive, trueStrengthFor: strengthFor, termination, warCasusFor,
     });
-    if (candidate) out.push(candidate);
+    if (candidate) {
+      const dispositionReasons = Array.isArray(chosen.dispositionReasons)
+        ? chosen.dispositionReasons.filter(Boolean)
+        : [];
+      out.push(dispositionReasons.length
+        ? { ...candidate, reasons: [...new Set([...(candidate.reasons || []), ...dispositionReasons])] }
+        : candidate);
+    }
   }
 
   return out;

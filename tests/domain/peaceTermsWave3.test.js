@@ -31,6 +31,7 @@ import {
   renderTreatyDocument, renderTreatiesForSettlement,
 } from '../../src/domain/display/treatyDocument.js';
 import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
+import { migrateDispositionStats } from '../../src/domain/worldPulse/dispositionLedger.js';
 
 const LIT = { warLayerEnabled: true, peaceEngineEnabled: true };
 const NOW = '2026-01-01T00:00:00.000Z';
@@ -124,6 +125,35 @@ describe('W-PEACE-3 mediation — a named broker softens the terms and earns tru
     expect(rs['edge.weak.mid'].trust).toBeGreaterThan(0);
     expect(rs['edge.iron.mid'].recentIncidents.some((i) => i.type === 'mediation')).toBe(true);
     expect(rs['edge.weak.mid'].recentIncidents.some((i) => i.type === 'mediation')).toBe(true);
+  });
+
+  it('applies the qualified mediator\'s diplomatic disposition once, then teaches the landed mediation once', () => {
+    const dispositionEntry = (stock01) => {
+      const entry = migrateDispositionStats({ mid: { wins: 0, losses: 0, score: 0 } }, 5).mid;
+      entry.channels.diplomatic = {
+        stock01,
+        band: stock01 > 0.8 ? 'dominant' : stock01 < 0.2 ? 'restrained' : 'settled',
+      };
+      return entry;
+    };
+    const run = (stock01) => advance(suingWorld('iron', 'weak', 5, {
+      simulationRules: { ...LIT, dispositionChannelsEnabled: true },
+      dispositionStats: { mid: dispositionEntry(stock01) },
+    }), items, mediatedEdges, 5);
+
+    const eager = run(1);
+    const neutral = run(0.5);
+    const wary = run(0);
+    const treatyOf = (result) => getSpatialLedger(result.worldState, 'treaties')[treatyPairKey('iron', 'weak')];
+    expect(treatyOf(eager).budgetGranted).toBeLessThan(treatyOf(neutral).budgetGranted);
+    expect(treatyOf(neutral).budgetGranted).toBeLessThan(treatyOf(wary).budgetGranted);
+    expect(treatyOf(eager).receipts).toContain(
+      'Kept agreements have taught this court confidence in parley.',
+    );
+    expect(eager.dispositionDeltas).toContainEqual({
+      id: 'mid', channel: 'diplomatic', outcome: 'win', sourceKind: 'mediation_landed',
+    });
+    expect(eager.dispositionDeltas.filter((delta) => delta.id === 'mid')).toHaveLength(1);
   });
 });
 

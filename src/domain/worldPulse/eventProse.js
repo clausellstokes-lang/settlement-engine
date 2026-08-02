@@ -69,6 +69,30 @@ export function pickLine(pool, seed, interp = {}) {
   return typeof v === 'function' ? String(v(interp)) : String(v);
 }
 
+/**
+ * Pick a phrasing while retaining the STRUCTURAL template family that produced it.
+ * Slot fills never create a new family: every interpolation of pool member 1 keeps
+ * the same `${familyPrefix}.1` identity. That identity is persisted beside Wizard
+ * News prose so the SP-6 repetition instrument can distinguish real authored depth
+ * from one sentence dressed in different names. Pure; consumes no rng draw.
+ *
+ * @param {readonly ProseVariant[]} pool
+ * @param {string | null | undefined} seed
+ * @param {Record<string, unknown>} [interp]
+ * @param {string} [familyPrefix]
+ * @returns {{ line: string, familyId: string, templateIndex: number } | null}
+ */
+export function pickLineWithFamily(pool, seed, interp = {}, familyPrefix = 'prose') {
+  if (!Array.isArray(pool) || pool.length === 0) return null;
+  const templateIndex = seed ? fnv1a32(seed) % pool.length : 0;
+  const variant = pool[templateIndex];
+  return {
+    line: typeof variant === 'function' ? String(variant(interp)) : String(variant),
+    familyId: `${familyPrefix}.${templateIndex + 1}`,
+    templateIndex,
+  };
+}
+
 // ════════════════════════════════════════════════════════════════════════════════════
 // NPC GOAL BEATS (C2-Q2). These two emitters used one fixed telling for every
 // culmination and every context-driven change of ambition. The pools vary only
@@ -272,6 +296,65 @@ export const WAR_RECEIPTS = Object.freeze({
       'Their altars and ours want opposite things of the world. No compact survives that.',
     ],
   },
+  // WR-2 DISPOSITION. These eight pools are copied from the governed war receipt
+  // annex. Each member is a different structural family; interpolated slot values do
+  // not increase the family count. The dedicated selector below persists that family.
+  disposition_martial_crossed: [
+    (x) => `${x.settlement}'s martial temper now leans ${x.lean}; resolved contests changed the lesson.`,
+    (x) => `The muster carries ${x.weight} weight in council than it did a generation ago.`,
+    (x) => `${x.settlement}'s watchfires now draw a ${x.answer} answer from the court.`,
+    (x) => `The court is ${x.answer} when captains ask for another campaign.`,
+    (x) => `What force accomplished has made ${x.settlement} lean ${x.lean} on the next quarrel.`,
+  ],
+  disposition_mercantile_crossed: [
+    (x) => `${x.settlement}'s mercantile temper now leans ${x.lean}; resolved ventures changed the lesson.`,
+    (x) => `The quays carry ${x.weight} weight in council than they did before.`,
+    (x) => `A generation of ledgers has made the court ${x.answer} about another bargain.`,
+    (x) => `The town gives a ${x.answer} answer when its factors propose a costly venture.`,
+    (x) => `What commerce accomplished has made ${x.settlement} lean ${x.lean} on the next bargain.`,
+  ],
+  disposition_diplomatic_crossed: [
+    (x) => `${x.settlement}'s diplomatic temper now leans ${x.lean}; kept and broken pacts changed the lesson.`,
+    (x) => `The treaty table carries ${x.weight} weight in council than it did before.`,
+    (x) => `A generation of agreements has made the court ${x.answer} about another parley.`,
+    (x) => `The town gives a ${x.answer} answer when a legate asks for a hearing.`,
+    (x) => `What diplomacy accomplished has made ${x.settlement} lean ${x.lean} on the next quarrel.`,
+  ],
+  disposition_insular_crossed: [
+    (x) => `${x.settlement}'s inward temper now leans ${x.lean}; its outward history changed the lesson.`,
+    (x) => `The factors of ${x.house} are received ${x.welcome} than they were before.`,
+    (x) => `The roads beyond the walls carry ${x.weight} weight in council than they once did.`,
+    (x) => `The town gives a ${x.answer} answer when outsiders ask it to look beyond itself.`,
+    (x) => `What outside ties accomplished has made ${x.settlement} lean ${x.lean}.`,
+  ],
+  disposition_reversal: [
+    (x) => `${x.settlement}'s ${x.aspect} temper crossed its old balance and now leans ${x.lean}.`,
+    (x) => `Later outcomes reversed what this court expected from ${x.practice}.`,
+    (x) => `A learned habit is not a ratchet: ${x.settlement} now leans ${x.lean} on ${x.practice}.`,
+    (x) => `The council changed its mind about ${x.practice}, slowly and on the evidence.`,
+    (x) => `The old lesson no longer holds; ${x.practice} now draws a ${x.answer} answer.`,
+  ],
+  deity_war_pressure: [
+    (x) => `${x.settlement}'s rites of ${x.domain} make a quicker muster easier to defend in council.`,
+    'The local rites make a quicker muster easier to defend in council.',
+    'Voices of restraint find less purchase in the court shaped by this worship.',
+    'The rites do not order wars; they make restraint harder to argue.',
+    'Local worship has lowered the court’s bar for arms.',
+  ],
+  deity_peace_pressure: [
+    (x) => `${x.settlement}'s harvest rites leave its court ${x.band} slower to muster.`,
+    'The local rites make another season easier to defend than another campaign.',
+    (x) => `The court sets the cost of war beside its trade in ${x.good}, a reckoning no captain likes to hear.`,
+    'Local worship has never forbidden war; it has made war look expensive.',
+    'Where harvest rites shape the court, a grievance is more likely to wait another season.',
+  ],
+  war_culture_suppressed: [
+    (x) => `${x.settlement}'s peaceable house, harvest rites, and book of losses cannot support a warlike reading; the contradiction is written plainly.`,
+    (x) => `The clerks went looking for a martial temper at ${x.settlement} and wrote down what they found instead, item by item.`,
+    'A town that has lost its wars and prays for rain is not made warlike by being asked.',
+    'The court could be pressed and would not move; the ledger explains why before anyone asks.',
+    'The contradiction is visible rather than silent: the warlike reading yields nothing, and every record behind that judgment is on the sheet.',
+  ],
   // fear_of_dominance — authored in hegemonyFear.js (see HEGEMONY_RECEIPTS below).
 });
 
@@ -435,6 +518,114 @@ function resolvePool(root, typeKey) {
  */
 export function warReceipt(typeKey, seed, interp = {}) {
   return pickLine(resolvePool(WAR_RECEIPTS, typeKey), seed ? `${seed}#${typeKey}` : null, interp);
+}
+
+/**
+ * The WR-2 governed phrased-kind registry. This is deliberately narrower than the
+ * legacy pool registry below: every row is a MINTED Wizard News kind and therefore
+ * owes all four joins (pool floor, significance, audience, Herald section). Keeping
+ * the metadata beside the pool makes omission mechanically visible to the walker.
+ */
+/** @typedef {'disposition_martial_crossed'|'disposition_mercantile_crossed'|
+ * 'disposition_diplomatic_crossed'|'disposition_insular_crossed'|'disposition_reversal'|
+ * 'deity_war_pressure'|'deity_peace_pressure'|'war_culture_suppressed'} DispositionReceiptKind */
+/** @typedef {'notable'|'routine'} DispositionReceiptSignificance */
+/** @typedef {'public'|'dm-only'} DispositionReceiptAudience */
+/** @typedef {'war'|'trade'|'events'|'faith'} DispositionReceiptSection */
+/** @typedef {{kind:DispositionReceiptKind,significance:DispositionReceiptSignificance,
+ * audience:DispositionReceiptAudience,section:DispositionReceiptSection,
+ * pool:readonly ProseVariant[],requiredSlots:ReadonlyArray<readonly string[]>}} DispositionReceiptRegistryEntry */
+
+/**
+ * @param {DispositionReceiptKind} kind
+ * @param {DispositionReceiptSignificance} significance
+ * @param {DispositionReceiptAudience} audience
+ * @param {DispositionReceiptSection} section
+ * @param {ReadonlyArray<readonly string[]>} requiredSlots
+ * @returns {Readonly<DispositionReceiptRegistryEntry>}
+ */
+function dispositionKindRow(kind, significance, audience, section, requiredSlots) {
+  return Object.freeze({
+    kind,
+    significance,
+    audience,
+    section,
+    pool: /** @type {readonly ProseVariant[]} */ (WAR_RECEIPTS[kind]),
+    requiredSlots: Object.freeze(
+      requiredSlots.map((slots) => Object.freeze([...slots])),
+    ),
+  });
+}
+
+/** @type {ReadonlyArray<Readonly<DispositionReceiptRegistryEntry>>} */
+export const WAR_DISPOSITION_KIND_REGISTRY = Object.freeze([
+  dispositionKindRow('disposition_martial_crossed', 'notable', 'public', 'war',
+    [['settlement', 'lean'], ['weight'], ['settlement', 'answer'], ['answer'], ['settlement', 'lean']]),
+  dispositionKindRow('disposition_mercantile_crossed', 'notable', 'public', 'trade',
+    [['settlement', 'lean'], ['weight'], ['answer'], ['answer'], ['settlement', 'lean']]),
+  dispositionKindRow('disposition_diplomatic_crossed', 'notable', 'public', 'events',
+    [['settlement', 'lean'], ['weight'], ['answer'], ['answer'], ['settlement', 'lean']]),
+  dispositionKindRow('disposition_insular_crossed', 'notable', 'public', 'events',
+    [['settlement', 'lean'], ['house', 'welcome'], ['weight'], ['answer'], ['settlement', 'lean']]),
+  dispositionKindRow('disposition_reversal', 'notable', 'public', 'events',
+    [['settlement', 'aspect', 'lean'], ['practice'], ['settlement', 'lean', 'practice'], ['practice'], ['practice', 'answer']]),
+  dispositionKindRow('deity_war_pressure', 'notable', 'public', 'faith',
+    [['settlement', 'domain'], [], [], [], []]),
+  dispositionKindRow('deity_peace_pressure', 'notable', 'public', 'faith',
+    [['settlement', 'band'], [], ['good'], [], []]),
+  dispositionKindRow('war_culture_suppressed', 'routine', 'dm-only', 'war',
+    [['settlement'], ['settlement'], [], [], []]),
+]);
+
+/** The exact WR-2 kind set, shared by emitters and structural walkers. */
+export const WAR_DISPOSITION_KINDS = Object.freeze(
+  WAR_DISPOSITION_KIND_REGISTRY.map((row) => row.kind),
+);
+
+/** @type {ReadonlyMap<string, Readonly<DispositionReceiptRegistryEntry>>} */
+const WAR_DISPOSITION_KIND_BY_ID = new Map(
+  /** @type {Array<[string, Readonly<DispositionReceiptRegistryEntry>]>} */ (
+    WAR_DISPOSITION_KIND_REGISTRY.map((row) => [row.kind, row])
+  ),
+);
+
+/**
+ * Resolve one WR-2 receipt plus its persistent structural family and governed
+ * metadata. Unknown kinds return null rather than borrowing generic prose.
+ *
+ * @param {string} kind
+ * @param {string|null|undefined} seed
+ * @param {Record<string, unknown>} [interp]
+ * @returns {{kind:string,line:string,familyId:string,templateIndex:number,
+ *   significance:string,audience:string,section:string} | null}
+ */
+export function dispositionReceipt(kind, seed, interp = {}) {
+  const row = WAR_DISPOSITION_KIND_BY_ID.get(String(kind));
+  if (!row) return null;
+  // NO-FABRICATION RESOLUTION. A template that asks for a house, good, temple,
+  // settlement, or band is eligible only when the caller holds that exact truth.
+  // The fallback remains inside the same authored pool; we never substitute a
+  // generic invented entity. Family ids retain the ORIGINAL pool index so a slot-
+  // constrained draw cannot masquerade as a new structural family.
+  const eligible = row.pool
+    .map((_, templateIndex) => templateIndex)
+    .filter((templateIndex) => row.requiredSlots[templateIndex].every((slot) => (
+      typeof interp[slot] === 'string' && String(interp[slot]).trim().length > 0
+    )));
+  if (eligible.length === 0) return null;
+  const namespacedSeed = seed ? `${seed}#${row.kind}` : '';
+  const templateIndex = namespacedSeed ? eligible[fnv1a32(namespacedSeed) % eligible.length] : eligible[0];
+  const variant = row.pool[templateIndex];
+  const line = typeof variant === 'function' ? String(variant(interp)) : String(variant);
+  return {
+    kind: row.kind,
+    line,
+    familyId: `${row.kind}.${templateIndex + 1}`,
+    templateIndex,
+    significance: row.significance,
+    audience: row.audience,
+    section: row.section,
+  };
 }
 
 /**

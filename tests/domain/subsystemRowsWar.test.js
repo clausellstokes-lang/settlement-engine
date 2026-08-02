@@ -1,17 +1,17 @@
 /**
- * subsystemRowsWar.test.js — the thirteen WAR-STACK certification rows.
+ * subsystemRowsWar.test.js — the fourteen WAR-STACK certification rows.
  *
  * A certification row is a CLAIM ABOUT SOURCE: "this module emits these literals,
  * writes these containers, and owns nothing else". An unchecked row rots into
  * fiction the first time a module is renamed, and a fictional row grades
  * UNOBSERVED forever while reading like diligence. So this file does four jobs:
  *
- *   1. SHAPE     the thirteen rules are authored, not deferred, and every row
+ *   1. SHAPE     the fourteen rules are authored, not deferred, and every row
  *                conforms to the registry contract.
  *   2. TRACE     every DECLARED literal is re-derived from the live source, and
  *                every DELIBERATELY UNDECLARED one is held out with an anchored
  *                negative, so a new emitter or a rename reds here.
- *   3. GAP       the seven rows that own no vocabulary say so through soakEvidence
+ *   3. GAP       the eight rows that own no vocabulary say so through soakEvidence
  *                'unobserved' AND name the observation that would close the gap.
  *   4. VERDICT   each row reaches each verdict it can reach, against receipts that
  *                differ in exactly one field.
@@ -33,7 +33,10 @@ import {
   evaluateSubsystemCertification,
   simulationRuleKeys,
 } from '../../src/domain/certification/subsystemCertification.js';
-import { WAR_PENDING_RULE_KEYS } from '../../src/domain/certification/subsystemRowsWar.js';
+import {
+  WAR_PENDING_RULE_KEYS,
+  WAR_SUBSYSTEM_ROWS,
+} from '../../src/domain/certification/subsystemRowsWar.js';
 import { navalPortsOf } from '../../src/domain/worldPulse/navalKernel.js';
 import { moverFamilyOf } from '../../scripts/audit/behavioral-observation.mjs';
 import { buildWholeWorldSoakSpatialCanon } from '../../scripts/audit/whole-world-soak-spatial-fixture.mjs';
@@ -43,7 +46,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const sourceOf = (rel) => readFileSync(join(ROOT, rel), 'utf8');
 
 const PARENT = 'warLayerEnabled';
-/** The thirteen rules this lane authors, in registry order. */
+/** The fourteen rules this lane authors, in registry order. */
 const WAR_RULES = Object.freeze([
   'warLayerEnabled',
   'warEconomyDrainEnabled',
@@ -54,6 +57,7 @@ const WAR_RULES = Object.freeze([
   'defenderResolveEnabled',
   'allyDefenseEnabled',
   'warDispositionEnabled',
+  'dispositionChannelsEnabled',
   'allyIntelSharingEnabled',
   'navalEnabled',
   'peaceEngineEnabled',
@@ -84,6 +88,7 @@ const NO_CHANNEL_ROWS = Object.freeze({
   defenderResolveEnabled: 'settlement_capitulated',
   allyDefenseEnabled: 'defenderReliefBonus',
   warDispositionEnabled: 'warSentimentAdj',
+  dispositionChannelsEnabled: 'channel-shape census',
   allyIntelSharingEnabled: 'provenance census',
   warTerminationEnabled: 'decidingTerm',
 });
@@ -148,7 +153,7 @@ const WARRING_YEAR = Object.freeze({
 });
 
 describe('war-stack rows — shape and partition', () => {
-  test('all thirteen war-stack rules are authored rather than deferred to a pending list', () => {
+  test('all fourteen war-stack rules are authored rather than deferred to a pending list', () => {
     // Purely positive, on purpose. A bare "not in the pending list" would need an
     // anchor sibling that is ITSELF still pending, and the pending list shrinks
     // under this file as other lanes land rows. The live coverage audit proves the
@@ -160,7 +165,9 @@ describe('war-stack rows — shape and partition', () => {
       registry: SUBSYSTEM_CERTIFICATION_REGISTRY,
       pendingKeys: SUBSYSTEM_CERTIFICATION_PENDING_KEYS,
     });
-    // Scoped to THIS lane's thirteen. The composed partition's own totality is the
+    expect(WAR_RULES).toHaveLength(14);
+    expect(WAR_SUBSYSTEM_ROWS.map((row) => row.rule)).toEqual(WAR_RULES);
+    // Scoped to THIS lane's fourteen. The composed partition's own totality is the
     // walker's assertion, and this tree is written by parallel sessions, so a
     // sibling lane mid-edit must not red the war lane's proof.
     expect(audit.missing).toEqual([]);
@@ -265,7 +272,7 @@ describe('war-stack rows — shape and partition', () => {
     expect(rowFor('allyIntelSharingEnabled').aliveness.other).toContain('pulseKernel.js:1838');
   });
 
-  test('the seven vocabulary-less rows admit the gap and name the observation that closes it', () => {
+  test('the eight vocabulary-less rows admit the gap and name the observation that closes it', () => {
     for (const [rule, token] of Object.entries(NO_CHANNEL_ROWS)) {
       const row = rowFor(rule);
       expect(row.aliveness.eventTypes, `${rule}`).toEqual([]);
@@ -431,6 +438,39 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     expect(row.aliveness.other).toContain('treaty_default is now fed');
   });
 
+  test('the learned-disposition row does not borrow its legacy ledger or wizard-news receipts', () => {
+    const row = rowFor('dispositionChannelsEnabled');
+    expect(row.aliveness.eventTypes).toEqual([]);
+    expect(row.aliveness.moverFamilies).toEqual([]);
+    expect(row.aliveness.stateKeys).toEqual([]);
+    expect(row.soakEvidence).toBe('unobserved');
+    expect(row.expectedTempo).toBe('per_tick');
+
+    // SAME-SCHEMA means the feature extends the established ledger. A top-level
+    // dispositionStats count therefore cannot distinguish WR-2 from legacy state.
+    const worldState = sourceOf('src/domain/worldPulse/worldState.js');
+    expect(worldState).toContain('dispositionStats: simulationRules.dispositionChannelsEnabled === true');
+    expect(worldState).toContain('? migrateDispositionStats(deepCloneLedger(raw?.dispositionStats), tick)');
+    expect(row.aliveness.other).toContain('SAME-SCHEMA');
+    expect(row.aliveness.other).toContain('channel-shape census');
+
+    // The authored impact kinds are presentation receipts, not candidate types.
+    // Holding every aliveness channel empty prevents a wizard_news.* id or its
+    // impactKind from masquerading as selected behavioral evidence.
+    for (const impactKind of [
+      'disposition_martial_crossed',
+      'disposition_mercantile_crossed',
+      'disposition_diplomatic_crossed',
+      'disposition_insular_crossed',
+      'disposition_reversal',
+      'deity_war_pressure',
+      'deity_peace_pressure',
+      'war_culture_suppressed',
+    ]) {
+      expect(row.aliveness.other).toContain(impactKind);
+    }
+  });
+
   test('the naval row declares the sidecar and holds out the news-only literals', () => {
     expect(rowFor('navalEnabled').aliveness.stateKeys).toEqual(['spatialLedgers.navalTransit']);
     const navalKernel = sourceOf('src/domain/worldPulse/navalKernel.js');
@@ -577,7 +617,7 @@ describe('war-stack rows — the verdicts, one field apart', () => {
     }
   });
 
-  test('the seven vocabulary-less rows reach UNOBSERVED and DORMANT, and never ALIVE', () => {
+  test('the eight vocabulary-less rows reach UNOBSERVED and DORMANT, and never ALIVE', () => {
     // A census as rich as any receipt could carry, and a warring year on top: still
     // UNOBSERVED, because none of it is evidence these rows are allowed to claim.
     const rich = receiptV5({

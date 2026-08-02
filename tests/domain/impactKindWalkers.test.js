@@ -63,6 +63,18 @@ const EXPECTED_VOICE = {
   bust: 'trade', calamity: 'calamity', plague_arrival: 'pestilence', generosity_relief: 'succor',
   // deliberately unvoiced (no crier beat for these impacts)
   belief_misjudgment: null, blockade_declared: null, blockade_lifted: null, cause_lifecycle: null, diplomacy: null,
+  // WR-2 disposition receipts already carry their own authored house-voice line.
+  // None borrows a generic crier category: the war/trade cells describe active
+  // blows and shortages, while these records describe learned temper and temple
+  // pressure. The explicit null is the voice decision, not a classifier accident.
+  disposition_martial_crossed: null,
+  disposition_mercantile_crossed: null,
+  disposition_diplomatic_crossed: null,
+  disposition_insular_crossed: null,
+  disposition_reversal: null,
+  deity_war_pressure: null,
+  deity_peace_pressure: null,
+  war_culture_suppressed: null,
   faction_capture: null, field_battle: null, generosity_credit_default: null,
   generosity_purchase: null, generosity_refuge: null, generosity_refusal: null,
   generosity_trade_overture: null, harvest: null, hierarchy_cascade: null, hungry_gap: null,

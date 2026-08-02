@@ -34,6 +34,10 @@ const SAMPLE_INTERP = Object.freeze({
   // THE ROADS tokens (ENGINE LIFT #5) — the roads.* pools read these.
   npc: 'Sir Aldric', home: 'Ashford', dest: 'Briar', captor: 'Corvin', purpose: 'trade',
   payer: 'Wexbridge', // D-5 third-party-ransom voice — the paying court's name
+  // WR-2 governed disposition receipt slots.
+  settlement: 'Ashford', band: 'guarded', good: 'grain', house: 'House Rowan',
+  temple: 'Harvest Chapter', domain: 'hunt', lean: 'toward force', weight: 'more',
+  answer: 'bolder', welcome: 'more readily', aspect: 'martial', practice: 'the use of force',
 });
 
 /** Resolve a pool entry (string or fn) with the sample interp. */
@@ -44,7 +48,7 @@ describe('eventProse — the walker manifest is non-vacuous and well-formed', ()
     expect(EVENT_PROSE_REGISTRY.length).toBeGreaterThanOrEqual(30);
     for (const { id, pool } of EVENT_PROSE_REGISTRY) {
       expect(Array.isArray(pool), `${id} is an array`).toBe(true);
-      expect(pool.length, `${id} has >=2 variants (variety, not a single template)`).toBeGreaterThanOrEqual(2);
+      expect(pool.length, `${id} meets the SP-6 floor of >=4 structural templates`).toBeGreaterThanOrEqual(4);
     }
   });
 });

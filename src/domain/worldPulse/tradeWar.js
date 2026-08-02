@@ -500,11 +500,18 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
       // ── FLIP: re-point C's primary trade_dependency channel to the winner. ─
       const winnerId = result.winnerId;
       const defeatedId = result.incumbentId;
+      const dispositionSourceEventId = `world_outcome.trade_realignment.${prizeId}.${tick}`;
       // Disposition ratchet: the new primary partner banked a trade WIN; the displaced
       // incumbent a LOSS. (Only on a real flip — a held prize banks nothing.)
-      dispositionDeltas.push({ id: String(winnerId), outcome: 'win', magnitude: 1 });
+      dispositionDeltas.push({
+        id: String(winnerId), outcome: 'win', magnitude: 1,
+        sourceEventId: dispositionSourceEventId,
+      });
       if (defeatedId && defeatedId !== winnerId) {
-        dispositionDeltas.push({ id: String(defeatedId), outcome: 'loss', magnitude: 1 });
+        dispositionDeltas.push({
+          id: String(defeatedId), outcome: 'loss', magnitude: 1,
+          sourceEventId: dispositionSourceEventId,
+        });
       }
       const winnerStrength = clamp01(0.55 + (contenders.find(c => c.id === winnerId)?.scoreFor || 0) * 0.35);
       // Shared goods set: channelIdFor keys on goods, so the winner-mint and the
@@ -553,7 +560,7 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
         ? `Trade with ${nameFor(defeatedId)} curtailed: the plane objects to the ${String(defeatedEmbargo.worst).toLowerCase()}.`
         : null;
       outcomes.push(conditionOutcome({
-        id: `world_outcome.trade_realignment.${prizeId}.${tick}`,
+        id: dispositionSourceEventId,
         archetype: 'trade_realignment',
         targetSaveId: buyerId,
         severity: 0.4,

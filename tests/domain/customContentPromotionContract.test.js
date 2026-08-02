@@ -151,7 +151,10 @@ describe('custom-content platform promotion contract', () => {
       presentationAdversarialTierRouteTerrainCases: 18,
       assemblyCoherenceRngIsolation:
         'named_canonical_coherence_substream',
-      registeredValueConditionalFields: ['services.category'],
+      registeredValueConditionalFields: [
+        'deities.domain',
+        'services.category',
+      ],
       unknownFieldRejection: 'every_authorable_bucket',
       referencePackCoverage: 'every_authorable_bucket',
       tierRouteTerrainCases: 6,

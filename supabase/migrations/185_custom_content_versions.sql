@@ -86,7 +86,7 @@ set search_path = public, pg_temp
 as $$
 declare
   -- BEGIN GENERATED CUSTOM-CONTENT VALIDATION MANIFEST
-  -- Source: schema/custom-content.manifest.json @ 2026-07-25.5.
+  -- Source: schema/custom-content.manifest.json @ 2026-08-02.1.
   -- Frozen migration snapshot; generated validation projection, not a third authority.
   v_manifest jsonb := $manifest$
   {

@@ -38,8 +38,9 @@ function downloadLetter(text, tick) {
 /**
  * @param {Object} props
  * @param {any} props.campaign
+ * @param {'dm'|'player'|'public'} [props.audience]
  */
-export default function ChroniclersLetterPanel({ campaign }) {
+export default function ChroniclersLetterPanel({ campaign, audience = 'dm' }) {
   const markCampaignLettersRead = useStore((s) => s.markCampaignLettersRead);
 
   const letter = useMemo(() => composeChroniclersLetter({
@@ -47,7 +48,8 @@ export default function ChroniclersLetterPanel({ campaign }) {
     lastReadTick: campaign?.lastReadTick,
     simulationRules: campaign?.worldState?.simulationRules,
     flagsSeen: campaign?.flagsSeen ?? null,
-  }), [campaign]);
+    audience,
+  }), [campaign, audience]);
 
   if (!campaign) return null;
 

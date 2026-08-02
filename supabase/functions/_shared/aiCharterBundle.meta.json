@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-02T13:35:52.514Z",
+  "generatedAt": "2026-08-02T22:10:48.401Z",
   "entry": "src/domain/aiCharter.js",
-  "sourceHash": "bbcdc5948c0fdec1",
+  "sourceHash": "a74c9c34fd4ab62c",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/index.js",
@@ -80,6 +80,7 @@
     "src/domain/worldPulse/demographicsRates.js",
     "src/domain/worldPulse/demographicsRisk.js",
     "src/domain/worldPulse/demographicsWorks.js",
+    "src/domain/worldPulse/dispositionLedger.js",
     "src/domain/worldPulse/intervalWeeks.js",
     "src/domain/worldPulse/partyImpactKinds.js",
     "src/domain/worldPulse/pressureModel.js",

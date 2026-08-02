@@ -2,14 +2,12 @@
  * significanceVocabulary.test.js — the wizard-news significance vocabulary guard
  * (content-immersion-r2-6).
  *
- * WIZARD_NEWS_SIGNIFICANCE has exactly two real tiers: MAJOR ('major') and NOTABLE
- * ('notable'). The consumer is binary — significanceRank returns 1 for 'major' and 0
- * for everything else, and the rumor seed gate keys on `significance === 'major'`. So a
- * 'minor' or 'moderate' literal is DEAD vocabulary: it renders as a distinct-looking
- * tier that behaves identically to 'notable', and (round-1 CI-6) it let a bad plague sit
- * below the headline tier forever. Those dead tiers were swept to the real vocabulary;
- * this walker keeps them from creeping back — it source-scans every `significance:` mint
- * literal in src/domain and asserts each is 'major' or 'notable'.
+ * SP-6a defines exactly three real tiers: MAJOR ('major'), NOTABLE ('notable'), and
+ * ROUTINE ('routine'). Wizard News preserves all three and ranks them 2/1/0; the
+ * rumor seed gate remains a separate salience decision. A 'minor' or 'moderate'
+ * literal is DEAD vocabulary: it is not a member of the pacing governor's family.
+ * This walker keeps those aliases from creeping back — it source-scans every
+ * `significance:` mint literal in src/domain and asserts membership in SP-6a.
  *
  * Ternary / `|| default` forms are covered (both branches are scanned); mints that use
  * the WIZARD_NEWS_SIGNIFICANCE.* constants carry no string literal and are simply skipped.
@@ -21,7 +19,7 @@ import { describe, expect, test } from 'vitest';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const DOMAIN = join(ROOT, 'src', 'domain');
-const ALLOWED = new Set(['major', 'notable']);
+const ALLOWED = new Set(['major', 'notable', 'routine']);
 
 function walk(dir, out = []) {
   for (const e of readdirSync(dir)) {
@@ -39,14 +37,14 @@ const SIG_VALUE_RE = /significance:\s*([^,\n]+)/g;
 const LITERAL_RE = /['"]([a-z_]+)['"]/g;
 
 describe('wizard-news significance vocabulary (content-immersion-r2-6)', () => {
-  test('every minted significance literal is a real tier (major | notable) — no dead minor/moderate', () => {
+  test('every minted significance literal is an SP-6a tier (routine | notable | major)', () => {
     const offenders = [];
     for (const abs of walk(DOMAIN)) {
       const rel = relative(ROOT, abs).replace(/\\/g, '/');
       const src = readFileSync(abs, 'utf8');
       for (const m of src.matchAll(SIG_VALUE_RE)) {
         for (const lit of m[1].matchAll(LITERAL_RE)) {
-          if (!ALLOWED.has(lit[1])) offenders.push(`${rel}: significance '${lit[1]}' — only 'major'/'notable' are real tiers (sweep to 'notable', or 'major' if it deserves the headline)`);
+          if (!ALLOWED.has(lit[1])) offenders.push(`${rel}: significance '${lit[1]}' — only 'routine'/'notable'/'major' are SP-6a tiers`);
         }
       }
     }

@@ -94,6 +94,18 @@ export const WHAT_PHRASES = Object.freeze({
   field_battle: 'a battle in the field',
   conflict_pressure: 'the drums of war',
   protection_gap: 'defences grown thin',
+  // WR-2 DISPOSITION — four learned tempers, their reversal, and the temple
+  // pressure/suppression receipts. The suppression row is dm-only in the feed,
+  // but remains explicitly phrased so a privileged projection never falls back
+  // to a de-underscored engine token.
+  disposition_martial_crossed: 'a martial temper taking hold',
+  disposition_mercantile_crossed: 'a mercantile temper taking hold',
+  disposition_diplomatic_crossed: 'a taste for parley taking hold',
+  disposition_insular_crossed: 'a town turning inward',
+  disposition_reversal: 'a town changing its temper',
+  deity_war_pressure: 'a warlike teaching at the temple',
+  deity_peace_pressure: 'the harvest rites counselling peace',
+  war_culture_suppressed: 'a warlike reading contradicted by the books',
   // The INDIRECT war and the war of words. These nine are keyed on `kind` rather than
   // `impactKind`, because their authors (momentum.js, supplyWebWarfare.js,
   // informationStatecraft.js) mint no impactKind. That is exactly why the impactKind

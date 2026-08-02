@@ -193,6 +193,29 @@ describe('category-aware effect and activation truth', () => {
     });
   });
 
+  it('limits deity-domain mechanics to the WR-2 registered set and keeps other domains presentational', () => {
+    const field = getCustomContentField('deities', 'domain');
+    expect(field.mechanicalValues).toEqual(['war', 'conquest', 'hunt', 'harvest']);
+    expect(field.fallbackEffect).toBe('presentation');
+    expect(field.condition).toMatch(/assignment to a settlement/i);
+    expect(field.condition).toContain('dispositionChannelsEnabled');
+
+    for (const value of ['war', 'War', ' CONQUEST ', 'hunt', 'HARVEST']) {
+      expect(classifyCustomContentField('deities', 'domain', value), value).toMatchObject({
+        kind: 'mechanical',
+        effectKind: 'mechanical',
+        displayKind: 'conditional',
+      });
+    }
+
+    expect(classifyCustomContentField('deities', 'domain', 'sun')).toMatchObject({
+      kind: 'flavor',
+      effectKind: 'presentation',
+      displayKind: 'presentation',
+      consumers: [],
+    });
+  });
+
   it('rejects a field borrowed from another category and invalid bounded values', () => {
     expect(classifyCustomContentField('traditions', 'criticality', 'critical')).toMatchObject({
       kind: 'unsupported',
@@ -316,6 +339,8 @@ describe('client and edge generated parity', () => {
       ['tradeGoods', 'satisfies', 'custom-curios'],
       ['services', 'criticality', 'critical'],
       ['deities', 'alignmentAxis', 'good'],
+      ['deities', 'domain', 'War'],
+      ['deities', 'domain', 'sun'],
       ['traditions', 'motifElement', 'harvest'],
       ['institutions', 'grantsFlight', true],
     ];

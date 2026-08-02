@@ -404,6 +404,11 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // every other preset; declaring false here puts it under certification without
     // lighting behavior or changing preset inference.
     warTerminationEnabled: false,
+    // WR-2: four learned disposition channels, DECLARED DARK. This virtual key is
+    // absent from DEFAULT_SIMULATION_RULES and every other preset; false here makes
+    // the slice visible to certification without migrating a single installed save.
+    // Every gate reads `=== true`, and lighting belongs to the later measured batch.
+    dispositionChannelsEnabled: false,
     seasonsEnabled: true,
     // Owner ruling (golden sign-off — LIGHT EVERYTHING RECOMMENDED): the ceiling
     // runs the calamity mover. disastersEnabled is an opt-in key ABSENT from

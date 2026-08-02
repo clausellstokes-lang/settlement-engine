@@ -15,6 +15,7 @@ import { observeRealmSelfSufficiency } from '../../src/domain/worldPulse/routeNe
 import { observeRealmDemography } from '../../src/domain/worldPulse/demographicsObservation.js';
 import { isPublicOutcome, isStateOnlyOutcome } from '../../src/domain/worldPulse/pulseHelpers.js';
 import { prosperityRank } from '../../src/data/constants.js';
+import { measurePhraseRepetition } from './phrase-repetition.mjs';
 
 const FAMILY_TOKENS = Object.freeze({
   pressure: Object.freeze([
@@ -902,6 +903,13 @@ export function observeBehavioralYear({
     causal,
     chronicleSample: chronicleSampleOf(records, major.ids),
     stateVectors,
+    // SP-6 narration evidence. The callback supplies the uncapped, freshly-authored
+    // Wizard News rows for this year, including routine and covert records; the pure
+    // instrument groups them by settlement and season. Empty means the lane emitted
+    // no measurable prose, never an invented zero from the capped terminal feed.
+    phraseRepetition: measurePhraseRepetition(
+      Array.isArray(rawWizardNewsEntries) ? rawWizardNewsEntries : [],
+    ),
     // ADDITIVE, and deliberately NOT a BEHAVIORAL_OBSERVATION_VERSION bump: it
     // changes the meaning of no existing field, and bumping would blind the
     // behavioral oracle to every soak receipt already on disk (the same reasoning

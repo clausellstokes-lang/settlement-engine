@@ -834,16 +834,23 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
       // The occupation collapsed (the occupier lost control). Exit the ledger; the
       // occupied settlement banks a (re)liberation; the occupier banks a disposition loss.
       delete occupations[occupiedId];
-      dispositionDeltas.push({ id: String(rec.occupierId), outcome: 'loss', magnitude: 0.6 });
+      const dispositionSourceEventId = `world_outcome.occupation_collapsed.${stablePart(occupiedId)}.${t}`;
+      dispositionDeltas.push({
+        id: String(rec.occupierId), outcome: 'loss', magnitude: 0.6,
+        sourceEventId: dispositionSourceEventId,
+      });
       // worldpulse-war-8: the occupied town banks the WIN — throwing off an occupier
       // through resistance is one of the strongest confidence signals in the fiction
       // ('we reclaimed our own authority'). Bounded; folds through applyDispositionDeltas
       // with the ±SCORE_MAX clamp. Behind warLayerEnabled (this whole pass).
-      dispositionDeltas.push({ id: String(occupiedId), outcome: 'win', magnitude: 0.5 });
+      dispositionDeltas.push({
+        id: String(occupiedId), outcome: 'win', magnitude: 0.5,
+        sourceEventId: dispositionSourceEventId,
+      });
       const occupiedName = nameFor(occupiedId);
       const occupierName = nameFor(rec.occupierId);
       outcomes.push(conditionOutcome({
-        id: `world_outcome.occupation_collapsed.${stablePart(occupiedId)}.${t}`,
+        id: dispositionSourceEventId,
         archetype: 'occupation_lifted',
         targetSaveId: occupiedId,
         severity: 0.3,

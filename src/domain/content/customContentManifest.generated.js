@@ -10,7 +10,7 @@ function deepFreeze(value) {
 }
 
 export const CUSTOM_CONTENT_MANIFEST = deepFreeze({
-  "manifestVersion": "2026-07-25.5",
+  "manifestVersion": "2026-08-02.1",
   "purpose": "The icon-free, category-aware authority for custom-content authoring, compiler admission, and effect truth.",
   "effectKinds": [
     "mechanical",
@@ -1445,14 +1445,30 @@ export const CUSTOM_CONTENT_MANIFEST = deepFreeze({
           "type": "string",
           "maxLength": 300,
           "key": "domain",
-          "effect": "presentation",
-          "activation": "always",
+          "effect": "mechanical",
+          "mechanicalValues": [
+            "war",
+            "conquest",
+            "hunt",
+            "harvest"
+          ],
+          "mechanicalValueAliases": {
+            "war": "war",
+            "conquest": "conquest",
+            "hunt": "hunt",
+            "harvest": "harvest"
+          },
+          "fallbackEffect": "presentation",
+          "activation": "conditional",
+          "condition": "Only after assignment to a settlement and while dispositionChannelsEnabled is active; war, conquest, hunt, and harvest modulate the war threshold. Any other authored domain remains presentation-only.",
           "consumers": [
             "pantheon",
-            "dossier"
+            "dossier",
+            "dispositionProfile"
           ],
-          "effectKind": "presentation",
-          "activationMode": "always"
+          "effectKind": "mechanical",
+          "activationMode": "conditional",
+          "explanation": "Only after assignment to a settlement and while dispositionChannelsEnabled is active; war, conquest, hunt, and harvest modulate the war threshold. Any other authored domain remains presentation-only."
         }
       ],
       "dependencies": []
