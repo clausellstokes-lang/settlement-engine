@@ -166,10 +166,13 @@ explicitly waives legibility at miniature scale; exactness is the goal.
    the landing chunk must not swallow the dossier chunk). Build pin per the 5-layer
    *Lazy recipe WITH the second assertion (lazy parent). First-paint budget untouched
    by construction.
-3. **The scale frame:** `transform: scale(k)` (k ≈ 0.35, derived from measured natural
-   width vs the card column), `transform-origin: top left`, wrapper sized to the
-   scaled footprint, inner scroll (`overflow-y: auto`) INSIDE the frame so the page
-   never grows. Tabs, scrolling, hovers all live — it is the real component.
+3. **The scale frame — FIXED WINDOW, INNER SCROLL (owner clarification, binding):**
+   `transform: scale(k)` (k ≈ 0.35, derived from measured natural width vs the card
+   column), `transform-origin: top left`. The frame has a FIXED height (≈ the current
+   card's footprint) that content can NEVER grow: a long tab (Services is the named
+   example) scrolls WITHIN the window (`overflow-y: auto` inside the frame), exactly
+   like a real viewport in miniature — the card bottom never moves, whatever tab is
+   open. Tabs, scrolling, hovers all live — it is the real component behind glass.
 4. **AUDIENCE RULING (recommended default, owner may override): mount the ANON-TIER
    view.** The miniature must equal what "Forge this exact town" delivers to an
    anonymous visitor — promise-parity is the entire point of the surface. (The
