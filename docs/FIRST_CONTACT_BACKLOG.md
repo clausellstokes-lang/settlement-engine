@@ -339,3 +339,56 @@ visible.
    fixed); the scrim-terminus pin is new — at scroll-top the hero paint region's
    bottom edge equals the ribbon's top edge (a computed-style assertion at two
    viewport heights, the seam's regression test).
+
+---
+
+## LD-5 — RIBBON DROPDOWNS + THE ACCOUNT IA (owner-ordered 2026-08-01;
+## implementation = the external implementer; composes with LD-2's dividers)
+
+**The order:** Compendium, Gallery, and About gain hover-opened dropdowns (styled
+in the SIGN IN button's register); the account dropdown restructures. Every item
+is a real deep link to its page/tab:
+- **Compendium ▾** Built-in Catalog · Custom Content
+- **Gallery ▾** Settlements · Maps · Campaigns · My Saves (NEW: a private per-user
+  tab — ALL the user's saves regardless of category)
+- **About ▾** What this Is · Practical Guide
+- **Account ▾** Profile · Security · Subscription · Support · Data · Preferences
+
+**Binding rulings:**
+1. **PARENTS STAY LINKS.** Compendium/Gallery/About remain clickable routes
+   exactly as today; the dropdown is a shortcut layer, never a replacement.
+   Menu-only parents break muscle memory, middle-click, and crawlability.
+2. **EVERY ITEM IS A ROUTE.** Each entry deep-links through the routes table
+   (the TC-0 sub-tab deep-link precedent): compendium/custom, gallery/maps,
+   gallery/mine, about/guide, account/security, … — shareable URLs; the menu is
+   a list of real `<a>`s, zero JS-only navigation.
+3. **THE TRIPLE-MODE MENU (a11y law):** hover opens (with hover-intent grace so
+   diagonal travel doesn't flicker), FOCUS opens (keyboard: the parent is a
+   focus stop; arrows traverse items; Escape closes and returns focus), TOUCH
+   opens on tap with the caret as the toggle (hover does not exist on touch;
+   the parent link still navigates on direct tap). Menu roles per the house
+   tablist discipline; never a hover-only surface.
+4. **MENUS OBEY RENDER-WHEN-POPULATED:** Gallery ▸ Maps and Campaigns appear
+   only when those shelves exist (DESIGN_GALLERY_SHOWCASE §4 — one law for
+   shelves and their menu items alike); My Saves is auth-gated (absent, not
+   disabled, for anonymous — the presence discipline).
+5. **ONE SAVES TRUTH:** My Saves is a PROJECTION of the same store/data the
+   Library reads — a cross-category private view rendered as a Gallery tab;
+   no second saves list state anywhere. ⚠️ OWNER-PARKED QUESTION recorded, not
+   ruled: the eventual relationship between Library (settlement workspace) and
+   Gallery ▸ My Saves (cross-category view) — two nav paths to saved work is
+   fine as projections, but the long-game IA (does Library fold in when maps/
+   campaigns mature?) is the owner's future call.
+6. **ACCOUNT IS A PAGE-IA RESTRUCTURE, not just a menu:** the six items imply
+   the Account page reorganizes into six deep-linkable tabs (Profile · Security
+   · Subscription · Support · Data · Preferences). Existing account sections
+   map into them (billing → Subscription; telemetry consent + export/delete →
+   Data; narration prefs → Preferences; the feedback widget entry → Support).
+   Data is the privacy/trust surface and earns first-class placement.
+7. **Vocabulary check at build:** the product's existing tab says "Built-in
+   Catalog" — one spelling everywhere (default: the product's existing
+   "Catalog" unless the owner orders the change to "Catalogue").
+8. **LD-2 composition:** dropdown hover zones live inside each nav cell; the
+   dividers (lines/chevrons) sit between cells and are unaffected; the journey
+   trio (Create › Library › Realm) gains NO dropdowns in this order — it stays
+   the clean arrowed path.
