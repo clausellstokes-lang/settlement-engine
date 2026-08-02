@@ -29,6 +29,7 @@ vi.mock('../../src/store/index.js', () => {
 import { useStore } from '../../src/store/index.js';
 import WarFaithTab from '../../src/components/new/tabs/WarFaithTab.jsx';
 import TreatyPanel from '../../src/components/map/TreatyPanel.jsx';
+import { CURRENT_TREATY_TICKS_PER_YEAR } from '../../src/domain/worldPulse/treatyClock.js';
 
 /** A canonized campaign whose treaties ledger holds one Iron>Weak treaty, tribute
  *  strained (so the fraying seam and house voice render). */
@@ -40,9 +41,10 @@ function campaignWithTreaty() {
       spatialLedgers: { treaties: { 'iron>weak': {
         parties: ['iron', 'weak'], victorId: 'iron', loserId: 'weak', victorName: 'Ironhold', loserName: 'Weakmoor',
         mintedTick: 12, believedMarginAtSignature: 0.4, budgetGranted: 3, budgetSpent: 2, complianceState: 'strained',
+        treatyTicksPerYear: CURRENT_TREATY_TICKS_PER_YEAR,
         terms: [
-          { type: 'tribute', family: 'economic', magnitude: 0.4, mintedTick: 12, expiresTick: 96, weightSpent: 1, complianceState: 'strained', trueState: 'strained', burden01: 0.5, receipt: 't' },
-          { type: 'non_aggression', family: 'security', magnitude: 1, mintedTick: 12, expiresTick: 200, weightSpent: 0.4, complianceState: 'honored', trueState: 'honored', burden01: 0, receipt: 'n' },
+          { type: 'tribute', family: 'economic', magnitude: 0.4, mintedTick: 12, expiresTick: 60 + (3 * CURRENT_TREATY_TICKS_PER_YEAR), weightSpent: 1, complianceState: 'strained', trueState: 'strained', burden01: 0.5, receipt: 't' },
+          { type: 'non_aggression', family: 'security', magnitude: 1, mintedTick: 12, expiresTick: 60 + (3 * CURRENT_TREATY_TICKS_PER_YEAR), weightSpent: 0.4, complianceState: 'honored', trueState: 'honored', burden01: 0, receipt: 'n' },
         ],
         receipts: ['The Peace of Weakmoor.'],
       } } },
@@ -63,6 +65,7 @@ describe('WarFaithTab — the treaty document where the settlement is a party', 
     expect(screen.getByTestId('treaty-block')).toBeTruthy();
     expect(container.textContent).toContain('The Peace of Weakmoor');
     expect(container.textContent).toMatch(/as the bound party/);
+    expect(container.textContent).toContain('3y left');
     // The house-voice compliance line for the strained tribute.
     expect(container.textContent).toMatch(/grudgingly/);
     // The fraying seam is named (tribute is the only strained term).
@@ -83,6 +86,7 @@ describe('TreatyPanel — the realm-wide treaty documents', () => {
     expect(screen.getByTestId('treaty-panel')).toBeTruthy();
     expect(container.textContent).toContain('The Peace of Weakmoor');
     expect(container.textContent).toMatch(/tribute/i);
+    expect(container.textContent).toContain('3y left');
     expect(container.textContent).toMatch(/grudgingly/);
   });
 

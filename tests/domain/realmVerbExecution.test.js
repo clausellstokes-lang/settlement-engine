@@ -23,6 +23,7 @@ import { declareCasus, warReasonsFor } from '../../src/domain/worldPulse/warReas
 import { sueForPeaceOrder } from '../../src/domain/worldPulse/peaceReasons.js';
 import { advanceIntervention } from '../../src/domain/worldPulse/convergence.js';
 import { MOMENTUM_TUNING } from '../../src/domain/worldPulse/momentum.js';
+import { LEGACY_TREATY_TICKS_PER_YEAR } from '../../src/domain/worldPulse/treatyClock.js';
 
 const WAR_RULES = { warLayerEnabled: true, peaceEngineEnabled: true };
 
@@ -46,6 +47,7 @@ function liveNapWorld(tick = 4) {
       treaties: {
         'a>b': {
           victorId: 'a', loserId: 'b', parties: ['a', 'b'], complianceState: 'honored',
+          treatyTicksPerYear: LEGACY_TREATY_TICKS_PER_YEAR,
           receipts: ['The pact was sworn.'],
           terms: [
             { type: 'non_aggression', family: 'security', mintedTick: 1, expiresTick: 20, complianceState: 'honored', trueState: 'honored' },

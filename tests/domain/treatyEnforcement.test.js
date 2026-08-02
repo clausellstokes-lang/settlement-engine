@@ -27,6 +27,8 @@ import {
   streamInstallmentFraction, TREATY_ENFORCEMENT_TUNING,
 } from '../../src/domain/worldPulse/treatyEnforcement.js';
 import { PEACE_TERMS_TUNING, treatyPairKey, TERM_CATALOG } from '../../src/domain/worldPulse/peaceTerms.js';
+import { CURRENT_TREATY_TICKS_PER_YEAR } from '../../src/domain/worldPulse/treatyClock.js';
+import { INTERVAL_WEEKS } from '../../src/domain/worldPulse/worldState.js';
 import { evaluateMobilization, isWarReady, cappedRampIndex, RAMP } from '../../src/domain/worldPulse/mobilization.js';
 import { warReasonFactor } from '../../src/domain/worldPulse/warReasons.js';
 import { evaluateOccupations } from '../../src/domain/worldPulse/occupation.js';
@@ -71,20 +73,48 @@ function untreatiedWorld(extra = {}) {
 
 describe('JOIN 3 substrate', () => {
   it('the installment clock matches the duration clock (a term priced for N years pays across exactly its ticks)', () => {
-    // The two constants are duplicated on purpose (peaceTerms imports the leaf, so the
-    // leaf can never import peaceTerms back). This is the guard that keeps the fork honest.
+    expect(CURRENT_TREATY_TICKS_PER_YEAR).toBe(INTERVAL_WEEKS.one_year);
     expect(TREATY_ENFORCEMENT_TUNING.INSTALLMENTS_PER_YEAR).toBe(PEACE_TERMS_TUNING.TICKS_PER_YEAR);
+    expect(TREATY_ENFORCEMENT_TUNING.INSTALLMENTS_PER_YEAR).toBe(CURRENT_TREATY_TICKS_PER_YEAR);
   });
 
   it('streamInstallmentFraction: one tick draws one installment of the yearly share, scaled by what the payer can deliver', () => {
     const full = streamInstallmentFraction({ magnitude: 0.6 }, 1);
     expect(full).toBeCloseTo(0.6 / TREATY_ENFORCEMENT_TUNING.INSTALLMENTS_PER_YEAR, 9);
+    const annual = Array.from(
+      { length: CURRENT_TREATY_TICKS_PER_YEAR },
+      () => streamInstallmentFraction({ magnitude: 0.6 }, 1),
+    ).reduce((sum, installment) => sum + installment, 0);
+    expect(annual).toBeCloseTo(0.6, 9);
     // A half-capacity payer delivers half the installment (the §12 under-delivery signal).
     expect(streamInstallmentFraction({ magnitude: 0.6 }, 0.5)).toBeCloseTo(full / 2, 9);
     // NEGATIVE: no capacity, or no term, draws nothing at all.
     expect(streamInstallmentFraction({ magnitude: 0.6 }, 0)).toBe(0);
     expect(streamInstallmentFraction({ magnitude: 0 }, 1)).toBe(0);
     expect(streamInstallmentFraction(null, 1)).toBe(0);
+  });
+
+  it('streamInstallmentFraction preserves each treaty\'s persisted cadence', () => {
+    const markerlessLegacy = {};
+    const markedLegacy = { treatyTicksPerYear: 12 };
+    const markedCurrent = { treatyTicksPerYear: CURRENT_TREATY_TICKS_PER_YEAR };
+
+    expect(streamInstallmentFraction({ magnitude: 0.6 }, 1, markerlessLegacy)).toBeCloseTo(0.6 / 12, 9);
+    expect(streamInstallmentFraction({ magnitude: 0.6 }, 1, markedLegacy)).toBeCloseTo(0.6 / 12, 9);
+    expect(streamInstallmentFraction({ magnitude: 0.6 }, 1, markedCurrent)).toBeCloseTo(
+      0.6 / CURRENT_TREATY_TICKS_PER_YEAR,
+      9,
+    );
+    expect(streamInstallmentFraction({ magnitude: 0.6 }, 1)).toBeCloseTo(
+      0.6 / CURRENT_TREATY_TICKS_PER_YEAR,
+      9,
+    );
+
+    expect(streamInstallmentFraction({ magnitude: 0.6 }, 0, markerlessLegacy)).toBe(0);
+    expect(streamInstallmentFraction({ magnitude: 0 }, 1, markedLegacy)).toBe(0);
+    expect(streamInstallmentFraction({ magnitude: 'not-a-number' }, 1, markedCurrent)).toBe(0);
+    expect(streamInstallmentFraction({ magnitude: 0.6 }, Number.NaN, markedCurrent)).toBe(0);
+    expect(streamInstallmentFraction(null, 1, markedCurrent)).toBe(0);
   });
 });
 

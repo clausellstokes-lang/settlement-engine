@@ -1376,12 +1376,29 @@
 >   WR-0 → P5 → WR-0c → THE LIGHTING BATCH (five flags incl.
 >   demographicsEnabled, per the correction above) → the grid → tuning.
 >   WR-0c items 1–3 landed @ 622a3aab; item 4 (the peace-terms time-base)
->   is OUTSTANDING. Canonical statement: DESIGN_WAR_RULINGS_ARCHITECTURE.md
+>   ~~is OUTSTANDING~~ **LANDED 2026-08-02.**
+>   Canonical statement: DESIGN_WAR_RULINGS_ARCHITECTURE.md
 >   §9.] Both P5 fixes are dark-side today: zero golden risk, proven by pins
 >   before the flag ever lights. [Corrected 2026-08-02 (self-audit): P5a is a
 >   CEILING unlock — necessary, never sufficient; the equilibrium-criterion
 >   correction and the two new reachability pins (P5c) are recorded in
 >   DESIGN_DEMOGRAPHIC_ENGINE.md §15.]
+> - ⭐ 2026-08-02 (WR-0c item 4 — peace-terms time base): THE RE-DERIVATION ARM
+>   LANDED. New treaties mark a 52-tick year, sourced directly from
+>   `INTERVAL_WEEKS.one_year`; the same-schema v2 migration marks persisted
+>   unmarked/invalid treaties as legacy 12 without rescaling a single horizon,
+>   due date, breach/repudiation fact, or counter. Displays, installments, and
+>   annual strain read each treaty's marker. The product's weekly-calendar warranty
+>   covers the promoted multi-tick route (`one_year` = 52 synchronous weekly ticks),
+>   not the retained `advanceMultiTick=false` compatibility kill-switch. Duration
+>   is re-derived as `(0.5 + margin + margin²) × press`, hard-capped and shortened
+>   to affordable whole years, which removes the `.99 → 1` disappearance cliff.
+>   Reachability is claimed only for product-fed appraisal rows; reparations and
+>   non-intervention remain unfed. WR-1 and WR-9 are now UNBLOCKED; the lighting
+>   batch and soak grid remain owner-held exactly where the standing order placed
+>   them. Final gate: 2,114 files passed, one skipped; 22,410 tests passed, 54
+>   skipped; build + 311-route prerender + dist 364/364 green. No flag, golden,
+>   snapshot, lighting state, or soak changed.
 
 ## The eleven directives (owner, verbatim intent)
 [Retitled + reordered 2026-08-02 (self-audit): the roster had grown to eleven

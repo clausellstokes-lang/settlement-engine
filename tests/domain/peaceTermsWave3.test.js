@@ -24,6 +24,7 @@ import {
   findCrossPressuredMediator, termLabel,
   TERM_CATALOG, TERM_FAMILIES, PEACE_TERMS_TUNING,
 } from '../../src/domain/worldPulse/peaceTerms.js';
+import { CURRENT_TREATY_TICKS_PER_YEAR } from '../../src/domain/worldPulse/treatyClock.js';
 import { advancePeaceReasons, warCausalBrief } from '../../src/domain/worldPulse/peaceReasons.js';
 import {
   TREATY_COMPLIANCE_VOICE, TREATY_COMPLIANCE_FLOOR, treatyStrainLine,
@@ -254,17 +255,21 @@ describe('W-PEACE-3 treaty document — the legible artifact', () => {
       spatialLedgers: { treaties: { [treatyPairKey('iron', 'weak')]: {
         parties: ['iron', 'weak'], victorId: 'iron', loserId: 'weak', victorName: 'Ironhold', loserName: 'Weakmoor',
         mintedTick: 12, believedMarginAtSignature: 0.4, budgetGranted: 3, budgetSpent: 2, complianceState: 'honored',
+        treatyTicksPerYear: CURRENT_TREATY_TICKS_PER_YEAR,
         terms, receipts: ['The Peace of Weakmoor.'], ...patch,
       } } },
     };
   }
   const term = (type, patch = {}) => ({
-    type, family: TERM_CATALOG[type].family, magnitude: 0.4, mintedTick: 12, expiresTick: 200,
+    type, family: TERM_CATALOG[type].family, magnitude: 0.4, mintedTick: 12,
+    expiresTick: 60 + (3 * CURRENT_TREATY_TICKS_PER_YEAR),
     weightSpent: TERM_CATALOG[type].weight, complianceState: 'honored', trueState: 'honored', burden01: 0, receipt: `${type}`, ...patch,
   });
 
   it('treatyDocument renders ledger facts: parties, terms with years remaining, per-term compliance', () => {
-    const ws = treatyLedgerWorld([term('tribute', { expiresTick: 60 + 36 })], {}, 60); // 3 years left @ 12 ticks/yr
+    const ws = treatyLedgerWorld([
+      term('tribute', { expiresTick: 60 + (3 * CURRENT_TREATY_TICKS_PER_YEAR) }),
+    ], {}, 60);
     const doc = treatyDocument(ws, treatyPairKey('iron', 'weak'));
     expect(doc.victorName).toBe('Ironhold');
     expect(doc.loserName).toBe('Weakmoor');
@@ -275,6 +280,24 @@ describe('W-PEACE-3 treaty document — the legible artifact', () => {
     // A pair with no treaty ⇒ null; a dark world ⇒ null.
     expect(treatyDocument(ws, treatyPairKey('iron', 'other'))).toBeNull();
     expect(treatyDocument({ tick: 1 }, treatyPairKey('iron', 'weak'))).toBeNull();
+  });
+
+  it('reads legacy and current treaty clocks independently in the same ledger', () => {
+    const ws = treatyLedgerWorld([
+      term('tribute', { expiresTick: 60 + CURRENT_TREATY_TICKS_PER_YEAR }),
+    ], {}, 60);
+    ws.spatialLedgers.treaties[treatyPairKey('old', 'debtor')] = {
+      parties: ['old', 'debtor'], victorId: 'old', loserId: 'debtor', victorName: 'Oldcourt', loserName: 'Debtorford',
+      mintedTick: 12, believedMarginAtSignature: 0.4, budgetGranted: 3, budgetSpent: 2, complianceState: 'honored',
+      // Intentionally markerless: this persisted treaty keeps the historical
+      // twelve-tick year rather than being reinterpreted under the current clock.
+      terms: [term('tribute', { expiresTick: 60 + 36 })], receipts: ['The Old Peace.'],
+    };
+
+    const current = treatyDocument(ws, treatyPairKey('iron', 'weak'));
+    const legacy = treatyDocument(ws, treatyPairKey('old', 'debtor'));
+    expect(current.terms[0].yearsRemaining).toBe(1);
+    expect(legacy.terms[0].yearsRemaining).toBe(3);
   });
 
   it('A FRAYING treaty NAMES its weakest term (the seam nearest default)', () => {
@@ -358,12 +381,14 @@ describe('W-PEACE-3 house voice — totality + register guard', () => {
       spatialLedgers: { treaties: { [treatyPairKey('iron', 'weak')]: {
         parties: ['iron', 'weak'], victorId: 'iron', loserId: 'weak', victorName: 'Ironhold', loserName: 'Weakmoor',
         mintedTick: 12, believedMarginAtSignature: 0.4, budgetGranted: 3, budgetSpent: 2, complianceState: 'strained',
-        terms: [{ type: 'tribute', family: 'economic', magnitude: 0.4, mintedTick: 12, expiresTick: 200, weightSpent: 1, complianceState: 'strained', trueState: 'strained', burden01: 0.5, receipt: 't' }],
+        treatyTicksPerYear: CURRENT_TREATY_TICKS_PER_YEAR,
+        terms: [{ type: 'tribute', family: 'economic', magnitude: 0.4, mintedTick: 12, expiresTick: 60 + (3 * CURRENT_TREATY_TICKS_PER_YEAR), weightSpent: 1, complianceState: 'strained', trueState: 'strained', burden01: 0.5, receipt: 't' }],
         receipts: ['The Peace of Weakmoor.'],
       } } },
     };
     const view = renderTreatyDocument(ws, treatyPairKey('iron', 'weak'));
     expect(view.title).toBe('The Peace of Weakmoor');
+    expect(view.termLines[0].yearsRemaining).toBe(3);
     expect(view.termLines[0].strainLine).toBe(TREATY_COMPLIANCE_VOICE.economic.strained);
     expect(view.frayingLine).toMatch(/tribute/);
     expect(view.frayingLine).toContain(termLabel('tribute'));

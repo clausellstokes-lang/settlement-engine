@@ -30,14 +30,13 @@
 
 import { getSpatialLedger } from '../spatial/distanceRead.js';
 import { clamp01 } from '../../kernel/math.js';
+import { CURRENT_TREATY_TICKS_PER_YEAR, treatyTicksPerYearOf } from './treatyClock.js';
 
 export const TREATY_ENFORCEMENT_TUNING = Object.freeze({
-  /** Installments a stream term pays per nominal year. MUST equal
-   *  PEACE_TERMS_TUNING.TICKS_PER_YEAR — a term priced for N years must pay across
-   *  exactly the ticks it lives. It is duplicated rather than imported because
-   *  peaceTerms imports THIS module (the cycle above), and a pin in the battery
-   *  asserts the two never drift. */
-  INSTALLMENTS_PER_YEAR: 12,
+  /** Installments a newly minted stream term pays per nominal year. The value is
+   *  owned by the zero-graph treaty clock leaf so duration and enforcement cannot
+   *  silently diverge while peaceTerms continues to import this module. */
+  INSTALLMENTS_PER_YEAR: CURRENT_TREATY_TICKS_PER_YEAR,
 });
 
 /** @typedef {Record<string, unknown>} TreatyRecord */
@@ -149,12 +148,19 @@ export function occupationHoldFor(worldState, occupiedId, occupierId, tick) {
  * and that under-delivery IS the compliance signal the victor may or may not detect).
  * Pure; 0 whenever there is nothing to draw, which keeps a zero-capacity payer's
  * granary byte-identical.
+ * Omitted `treaty` means a newly minted/current-clock calculation. Supplying a
+ * treaty resolves its persisted clock marker; an unmarked raw treaty therefore
+ * retains the legacy twelve-tick installment schedule.
  * @param {{ magnitude?: unknown } | null | undefined} term @param {number} trueDelivery01
+ * @param {TreatyRecord | null | undefined} [treaty]
  * @returns {number}
  */
-export function streamInstallmentFraction(term, trueDelivery01) {
+export function streamInstallmentFraction(term, trueDelivery01, treaty) {
   const magnitude = clamp01(Number(term?.magnitude) || 0);
   const delivery = clamp01(Number(trueDelivery01) || 0);
   if (magnitude <= 0 || delivery <= 0) return 0;
-  return (magnitude * delivery) / TREATY_ENFORCEMENT_TUNING.INSTALLMENTS_PER_YEAR;
+  const installmentsPerYear = treaty && typeof treaty === 'object'
+    ? treatyTicksPerYearOf(treaty)
+    : TREATY_ENFORCEMENT_TUNING.INSTALLMENTS_PER_YEAR;
+  return (magnitude * delivery) / installmentsPerYear;
 }

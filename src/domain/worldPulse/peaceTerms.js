@@ -62,6 +62,7 @@ import {
   treatyLedgerOf, demilitarizationCapFor, treatyBlocksWar, occupationHoldFor,
   streamInstallmentFraction,
 } from './treatyEnforcement.js';
+import { affordableTreatyDuration, CURRENT_TREATY_TICKS_PER_YEAR, treatyTicksPerYearOf, treatyYearsRemaining } from './treatyClock.js';
 // THE MATERIAL EXECUTOR: a stream term's installment moves REAL granary months
 // through the conserved sink-only primitive, applied by the existing single
 // food applicator. See treatyTransfer.js for why grain is the honest denomination.
@@ -78,12 +79,10 @@ import { faithProximityOf } from './sacredClaim.js';
 import { relationshipKeyFromEdge, normalizeRelationshipType } from './relationshipState.js';
 import { deepClone } from '../clone.js';
 import { clamp01 } from '../../kernel/math.js';
-
 // ── Tuning (bounded named constants — owner-retunable per design §8/§15) ─────
-
 export const PEACE_TERMS_TUNING = Object.freeze({
-  /** Nominal ticks/year — maps the §15.2 year-guides onto the engine's tick clock. */
-  TICKS_PER_YEAR: 12,
+  /** Newly minted treaty ticks/year. Persisted treaties carry their own marker. */
+  TICKS_PER_YEAR: CURRENT_TREATY_TICKS_PER_YEAR,
   /** The believed strength gap (settlementStrength is clamp01 0..1) that saturates
    *  the margin — a ~0.5 lead is a crushing victory; margin01 = margin / this. */
   BUDGET_MARGIN_SCALE: 0.5,
@@ -96,13 +95,14 @@ export const PEACE_TERMS_TUNING = Object.freeze({
   /** §4 magnanimity: alignment presses the ask — press = BASE + EVIL_W·evil01. */
   PRESS_BASE: 0.6,
   PRESS_EVIL_W: 0.8,
+  DURATION_CURVE: Object.freeze({ base: 0.5, marginWeight: 1.0, extremityWeight: 1.0 }), // decisive-victory bend; affordability shortens below
   /** Compliance thresholds on the loser's true per-tick delivery capacity. */
   HONORED_FLOOR: 0.75,
   DEFAULT_FLOOR: 0.4,
   /** §12.2 monitoring: below this reach the victor cannot detect under-delivery. */
   DETECT_FLOOR: 0.6,
-  /** §12.3 strain → resentment: per-tick bump on the paying loser's edge (bounded). */
-  STRAIN_RESENTMENT_W: 0.05,
+  /** §12.3 strain → resentment: annual bump, divided by the treaty's own clock. */
+  STRAIN_RESENTMENT_PER_YEAR: 0.6,
   /** How many ticks after a war's negotiated-peace de-escalation the treaty may
    *  still mint — the confirmed peace (proposal machinery) can land a tick or two
    *  after the incident; a live-treaty check keeps it mint-once. */
@@ -438,11 +438,11 @@ export function draftTerms({ ranked, budget, margin01, press, tick }) {
     if (!spec) continue;
     if (usedTypes.has(type) || usedFamilies.has(spec.family)) continue; // §13: no redundant stacking
 
-    // Duration (§15.2): baseYears scaled by the margin × press, hard-capped.
-    const years = Math.min(spec.maxYears, Math.max(1, Math.round(spec.baseYears * (0.5 + margin01) * press)));
-    const durationFactor = years / spec.baseYears; // longer ⇒ more budget
-    const weightSpent = round4(spec.weight * durationFactor);
-    if (weightSpent > remaining + 1e-9) continue; // cannot afford this term at this length
+    // Duration (§15.2): decisive victories bend upward inside the hard ceiling.
+    // Unaffordable asks shorten to whole years, never disappear at the margin boundary.
+    const { years, weightSpent } = affordableTreatyDuration(
+      spec, remaining, margin01, press, PEACE_TERMS_TUNING.DURATION_CURVE);
+    if (years < 1) continue;
 
     const expiresTick = tick + Math.round(years * PEACE_TERMS_TUNING.TICKS_PER_YEAR);
     const magnitude = round4(clamp01(spec.baseMag * (0.5 + margin01) * Math.min(1.5, press)));
@@ -743,7 +743,7 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
         const draw = computeTreatyGrainDraw({
           payer: freshestSettlement(settlementUpdates, snapshot, loserId),
           payee: freshestSettlement(settlementUpdates, snapshot, victorId),
-          takeFraction: streamInstallmentFraction(term, comp.trueDelivery01),
+          takeFraction: streamInstallmentFraction(term, comp.trueDelivery01, treaty),
           committedDebit: -(foodDeltas.get(loserId) || 0),
           committedCredit: foodDeltas.get(victorId) || 0,
         });
@@ -776,7 +776,7 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
     // §12.3 STRAIN → the E1b resentment seam: the paying loser resents its burden;
     // that resentment is the §5 revanchism fuel a future war reads.
     if (anyStrainThisTick) {
-      workingState = accrueStrainResentment(workingState, /** @type {Array<Record<string, unknown>>} */ (edges), loserId, victorId, loserBurden01, now);
+      workingState = accrueStrainResentment(workingState, /** @type {Array<Record<string, unknown>>} */ (edges), loserId, victorId, loserBurden01, now, treaty);
     }
   }
 
@@ -885,6 +885,7 @@ function mintTreaty(args) {
     believedMarginAtSignature: round4(believedMargin),
     budgetGranted: round4(effectiveBudget),
     budgetSpent,
+    treatyTicksPerYear: CURRENT_TREATY_TICKS_PER_YEAR,
     terms,
     complianceState: 'honored',
     receipts,
@@ -1025,13 +1026,14 @@ function nudgeCompelledAlliance(worldState, edges, loserId, victorId, magnitude,
  * it. Uses applyRelationshipPatch on the REAL edge; no edge ⇒ byte-safe no-op.
  * @param {Record<string, unknown>} worldState @param {Array<Record<string, unknown>>} edges
  * @param {string} loserId @param {string} victorId @param {number} burden01 @param {unknown} now
+ * @param {TreatyRecord | null | undefined} treaty
  * @returns {Record<string, unknown>}
  */
-function accrueStrainResentment(worldState, edges, loserId, victorId, burden01, now) {
+function accrueStrainResentment(worldState, edges, loserId, victorId, burden01, now, treaty) {
   const key = edgeKeyBetween(edges, loserId, victorId);
   if (!key) return worldState;
   const current = /** @type {{ relationshipStates?: Record<string, { resentment?: number }> }} */ (worldState).relationshipStates?.[key];
-  const resentment = clamp01((Number(current?.resentment) || 0) + PEACE_TERMS_TUNING.STRAIN_RESENTMENT_W * clamp01(burden01));
+  const resentment = clamp01((Number(current?.resentment) || 0) + (PEACE_TERMS_TUNING.STRAIN_RESENTMENT_PER_YEAR / treatyTicksPerYearOf(treaty)) * clamp01(burden01));
   return applyRelationshipPatch(worldState, {
     relationshipKey: key,
     relationshipPatch: { resentment },
@@ -1306,13 +1308,6 @@ export function fracturesAbandoning(worldState, partyId, tick) {
 // treatyDocument.js); THIS returns only ledger facts (the InstitutionCard honesty
 // gate — never invent, render what the ledger holds). Dark/absent ⇒ null.
 
-/** @param {number} expiresTick @param {number} tick @returns {number} */
-function yearsRemainingOf(expiresTick, tick) {
-  const ticks = Number(expiresTick) - Number(tick);
-  if (!(ticks > 0)) return 0;
-  return Math.ceil(ticks / PEACE_TERMS_TUNING.TICKS_PER_YEAR);
-}
-
 /** Compliance rank for the fraying-seam pick (defaulted worst). @param {string} s @returns {number} */
 function complianceRank(s) { return s === 'defaulted' ? 2 : s === 'strained' ? 1 : 0; }
 
@@ -1320,9 +1315,11 @@ function complianceRank(s) { return s === 'defaulted' ? 2 : s === 'strained' ? 1
  * The term nearest default — the seam that will tear first (§13 "the DM watches
  * the seam that will tear"). Worst observed compliance wins; ties break to the
  * term closest to expiry, then codepoint. Null when every term holds clean.
- * @param {TermRecord[]} terms @param {number} tick @returns {TermRecord | null}
+ * @param {TermRecord[]} terms @param {number} tick
+ * @param {TreatyRecord | null | undefined} [treaty]
+ * @returns {TermRecord | null}
  */
-export function frayingTermOf(terms, tick) {
+export function frayingTermOf(terms, tick, treaty) {
   /** @type {TermRecord | null} */
   let worst = null;
   for (const t of terms) {
@@ -1331,7 +1328,7 @@ export function frayingTermOf(terms, tick) {
     const dr = complianceRank(String(t.complianceState)) - complianceRank(String(worst.complianceState));
     if (dr > 0) { worst = t; continue; }
     if (dr < 0) continue;
-    const dy = yearsRemainingOf(t.expiresTick, tick) - yearsRemainingOf(worst.expiresTick, tick);
+    const dy = treatyYearsRemaining(t.expiresTick, tick, treaty) - treatyYearsRemaining(worst.expiresTick, tick, treaty);
     if (dy < 0 || (dy === 0 && String(t.type) < String(worst.type))) worst = t;
   }
   return worst;
@@ -1348,7 +1345,7 @@ export function treatyFrayingSummary(treaty, tick) {
   const terms = /** @type {TermRecord[]} */ (Array.isArray(treaty?.terms) ? treaty.terms : []);
   if (terms.length === 0) return null;
   const honored = terms.filter((t) => complianceRank(String(t.complianceState)) <= 0).length;
-  const fray = frayingTermOf(terms, tick);
+  const fray = frayingTermOf(terms, tick, treaty);
   const frayingType = fray ? String(fray.type) : null;
   const line = frayingType
     ? `The peace holds by ${honored} term${honored === 1 ? '' : 's'} of ${terms.length}; the ${termLabel(frayingType)} frays.`
@@ -1436,7 +1433,7 @@ export function treatyDocument(worldState, pairKey) {
   const victorId = String(treaty.victorId);
   const loserId = String(treaty.loserId);
   const terms = /** @type {TermRecord[]} */ (Array.isArray(treaty.terms) ? treaty.terms : []);
-  const fray = frayingTermOf(terms, tick);
+  const fray = frayingTermOf(terms, tick, treaty);
   const frayingType = fray ? String(fray.type) : null;
   /** @type {TreatyTermView[]} */
   const termViews = terms.map((t) => {
@@ -1446,7 +1443,7 @@ export function treatyDocument(worldState, pairKey) {
       label: termLabel(String(t.type)),
       family: String(t.family),
       magnitude: round4(clamp01(Number(t.magnitude) || 0)),
-      yearsRemaining: yearsRemainingOf(t.expiresTick, tick),
+      yearsRemaining: treatyYearsRemaining(t.expiresTick, tick, treaty),
       complianceState: String(t.complianceState || 'honored'),
       burden01: round4(clamp01(Number(t.burden01) || 0)),
       fraying: !!fray && t === fray,

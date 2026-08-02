@@ -27,6 +27,11 @@ import {
 import { repudiateTreaty } from '../../src/domain/worldPulse/treatyBreach.js';
 import { TREATY_TRANSFER_TUNING } from '../../src/domain/worldPulse/treatyTransfer.js';
 import { TREATY_ENFORCEMENT_TUNING } from '../../src/domain/worldPulse/treatyEnforcement.js';
+import {
+  CURRENT_TREATY_TICKS_PER_YEAR,
+  LEGACY_TREATY_TICKS_PER_YEAR,
+} from '../../src/domain/worldPulse/treatyClock.js';
+import { INTERVAL_WEEKS } from '../../src/domain/worldPulse/intervalWeeks.js';
 import { advanceWarReasons, warReasonsFor } from '../../src/domain/worldPulse/warReasons.js';
 import { GOVERNING_SEAT_KEY } from '../../src/domain/worldPulse/beliefMap.js';
 import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
@@ -229,6 +234,36 @@ describe('W-PEACE-2 duration caps — perpetual extraction is structurally unrep
     expect(long.expiresTick).toBeGreaterThan(short.expiresTick);
     expect(long.weightSpent).toBeGreaterThan(short.weightSpent);
   });
+
+  it('the decisive-victory curve is monotone across alignment, mediation, and the .99 → 1 boundary', () => {
+    // This is a PRODUCT-FED row: treasury appraisal authors tribute. The known
+    // unfed reparations/non-intervention seams are deliberately not claimed here.
+    const ranked = [{ assetClass: 'treasury', termType: 'tribute', value: 0.9 }];
+    const years = ({ margin01, press, budget = margin01 * PEACE_TERMS_TUNING.BUDGET_MAX }) => {
+      const drafted = draftTerms({ ranked, budget, margin01, press, tick: 0 }).terms[0];
+      return drafted ? drafted.expiresTick / CURRENT_TREATY_TICKS_PER_YEAR : 0;
+    };
+
+    // Alignment authors a wider but still bounded ask at the same crushing margin.
+    expect([
+      years({ margin01: 1, press: 0.6 }),
+      years({ margin01: 1, press: 1.0 }),
+      years({ margin01: 1, press: 1.4 }),
+    ]).toEqual([6, 10, 12]);
+
+    // The previous unaffordability cliff is gone: a near-perfect result stays
+    // live (shortened to what its 2.97 budget can buy) and perfect never shrinks it.
+    const almostPerfect = years({ margin01: 0.99, press: 1.4 });
+    const perfect = years({ margin01: 1, press: 1.4 });
+    expect(almostPerfect).toBe(11);
+    expect(perfect).toBeGreaterThanOrEqual(almostPerfect);
+
+    // A mediated perfect victory has the same authored ask but a softened budget;
+    // affordability shortens the term instead of deleting it from the treaty.
+    const mediated = years({ margin01: 1, press: 1.4, budget: 2.4 });
+    expect(mediated).toBe(9);
+    expect(mediated).toBeLessThan(perfect);
+  });
 });
 
 // ── D) COMPLIANCE / FOG (§12) ────────────────────────────────────────────────
@@ -275,6 +310,8 @@ describe('W-PEACE-2 mint — the sue-for-peace path mints a dictated treaty', ()
     expect(treaty.victorId).toBe('iron');
     expect(treaty.loserId).toBe('weak');
     expect(treaty.parties).toEqual(['iron', 'weak']);
+    expect(treaty.treatyTicksPerYear).toBe(CURRENT_TREATY_TICKS_PER_YEAR);
+    expect(treaty.treatyTicksPerYear).toBe(INTERVAL_WEEKS.one_year);
     expect(treaty.terms.length).toBeGreaterThan(0);
     expect(treaty.budgetSpent).toBeLessThanOrEqual(treaty.budgetGranted + 1e-6);
     for (const t of treaty.terms) expect(t.expiresTick).toBeGreaterThan(t.mintedTick);
@@ -463,6 +500,53 @@ describe('W-PEACE-2 executors — each landed term executes and expires', () => 
     expect(monthsIn(out, 'iron'), 'and credits nothing').toBe(VICTOR_MONTHS);
     const terms = getSpatialLedger(out.worldState, 'treaties')[treatyPairKey('iron', 'weak')].terms;
     expect(terms.some((x) => x.type === 'tribute'), 'and the lapsed term is gone').toBe(false);
+  });
+
+  it('a current one-year stream remains live at week 51 and expires before drawing at week 52', () => {
+    const weeklyFed = [
+      item('iron', { tier: 'town', population: VICTOR_POP, storageMonths: VICTOR_MONTHS }),
+      item('weak', { tier: 'city', population: LOSER_POP, storageMonths: 8 }),
+    ];
+    const currentTreaty = treatyOf(
+      [term('tribute', { magnitude: 1, mintedTick: 0, expiresTick: CURRENT_TREATY_TICKS_PER_YEAR })],
+      { treatyTicksPerYear: CURRENT_TREATY_TICKS_PER_YEAR },
+    );
+    const live = advance(ledgerWorld(currentTreaty, { tick: 51 }), weeklyFed, IW_EDGES, 51);
+    expect(getSpatialLedger(live.worldState, 'treaties')).toBeTruthy();
+    expect(monthsIn(live, 'weak')).toBeLessThan(8);
+
+    const expired = advance(ledgerWorld(currentTreaty, { tick: 52 }), weeklyFed, IW_EDGES, 52);
+    expect(getSpatialLedger(expired.worldState, 'treaties')).toBeUndefined();
+    expect(monthsIn(expired, 'weak'), 'the expiry tick draws no installment').toBe(8);
+    expect(monthsIn(expired, 'iron'), 'the expiry tick credits no installment').toBe(VICTOR_MONTHS);
+  });
+
+  it('strain is annualized by each treaty clock: twelve legacy ticks equal fifty-two current ticks', () => {
+    const pressure = { bySettlement: { weak: [
+      { type: 'economy', severity: 1 },
+      { type: 'food', severity: 1 },
+    ] } };
+    const incrementFor = (treatyTicksPerYear) => {
+      const treaty = treatyOf(
+        [term('non_aggression', { expiresTick: 500 })],
+        { treatyTicksPerYear },
+      );
+      const ws = ledgerWorld(treaty, {
+        tick: 10,
+        relationshipStates: {
+          'edge.iron.weak': { relationshipType: 'cold_war', resentment: 0, trust: 0.2 },
+        },
+      });
+      const out = advance(ws, IW, IW_EDGES, 10, pressure);
+      return out.worldState.relationshipStates['edge.iron.weak'].resentment;
+    };
+
+    const legacyTick = incrementFor(LEGACY_TREATY_TICKS_PER_YEAR);
+    const currentTick = incrementFor(CURRENT_TREATY_TICKS_PER_YEAR);
+    expect(legacyTick).toBeCloseTo(PEACE_TERMS_TUNING.STRAIN_RESENTMENT_PER_YEAR / 12, 9);
+    expect(currentTick).toBeCloseTo(PEACE_TERMS_TUNING.STRAIN_RESENTMENT_PER_YEAR / 52, 9);
+    expect(legacyTick * 12).toBeCloseTo(currentTick * 52, 9);
+    expect(currentTick * 52).toBeCloseTo(PEACE_TERMS_TUNING.STRAIN_RESENTMENT_PER_YEAR, 9);
   });
 
   it('EXECUTE (demilitarization): the cap is queryable while live and lifts after expiry', () => {

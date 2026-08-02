@@ -14,7 +14,20 @@
  */
 import { describe, test, expect } from 'vitest';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
+import { FaithWar } from '../../src/pdf/sections/FaithWar.jsx';
 import { GOVERNING_SEAT_KEY } from '../../src/domain/worldPulse/beliefMap.js';
+import { CURRENT_TREATY_TICKS_PER_YEAR } from '../../src/domain/worldPulse/treatyClock.js';
+
+function collectText(node, out = []) {
+  if (node == null || typeof node === 'boolean') return out;
+  if (typeof node === 'string' || typeof node === 'number') { out.push(String(node)); return out; }
+  if (Array.isArray(node)) { for (const child of node) collectText(child, out); return out; }
+  if (typeof node === 'object') {
+    if (typeof node.type === 'function') return collectText(node.type(node.props), out);
+    return collectText(node.props?.children, out);
+  }
+  return out;
+}
 
 // Every living-world key the PDF liveWorld slice must surface. Keyed on the
 // worldState-derived facts the screen dossier already shows.
@@ -67,8 +80,9 @@ describe('pdf-1 — PDF live-layer parity', () => {
         spatialLedgers: { treaties: { 'iron>weak': {
           parties: ['iron', 'weak'], victorId: 'iron', loserId: 'weak', victorName: 'Ironhold', loserName: 'Weakmoor',
           mintedTick: 12, believedMarginAtSignature: 0.4, budgetGranted: 3, budgetSpent: 2, complianceState: 'strained',
+          treatyTicksPerYear: CURRENT_TREATY_TICKS_PER_YEAR,
           terms: [
-            { type: 'tribute', family: 'economic', magnitude: 0.4, mintedTick: 12, expiresTick: 96, weightSpent: 1, complianceState: 'strained', trueState: 'strained', burden01: 0.5, receipt: 't' },
+            { type: 'tribute', family: 'economic', magnitude: 0.4, mintedTick: 12, expiresTick: 20 + (3 * CURRENT_TREATY_TICKS_PER_YEAR), weightSpent: 1, complianceState: 'strained', trueState: 'strained', burden01: 0.5, receipt: 't' },
           ],
         } } },
       },
@@ -82,6 +96,9 @@ describe('pdf-1 — PDF live-layer parity', () => {
     expect(doc.victorName).toBe('Ironhold');
     expect(doc.terms.length).toBeGreaterThan(0);
     expect(typeof doc.terms[0].label).toBe('string');
+    expect(doc.terms[0].yearsRemaining).toBe(3);
+    const rendered = collectText(FaithWar({ settlement: liveSettlement(), vm: treatyVm })).join(' ');
+    expect(rendered).toMatch(/tribute\s+\(3y\)/);
   });
 
   test('belief-divergence is wired (the DM projection reaches the premium chapter)', () => {

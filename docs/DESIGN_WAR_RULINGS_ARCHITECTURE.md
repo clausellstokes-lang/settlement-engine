@@ -114,7 +114,7 @@ docs/GENERATION_CONTRACTS.md + the gate discipline in §10.
 |---|---|---|
 | Casus taxonomy: 13 war reasons + 13 peace mirrors (CORRECTED 2026-08-02 (self-audit): 13, not 14 — bijection means 13↔13; verified by enumeration, PEACE ends at `common_rite`), walker-enforced totality+bijection | `warReasons.js` (WAR_REASON_TYPES / PEACE_REASON_TYPES / REASON_MIRRORS) | BUILT incl. `opportunism` (predation) + `sacred_claim` (holy war) at HEAD 99e2d54f |
 | Reasons are state-derived, decay-inherent, zero-RNG, per-pair directed ledger | `spatialLedgers.warReasons`, key `${from}>${to}` | BUILT — dissolution (amendment C) is structurally half-present already |
-| Peace terms: budget/appraisal/draft/compliance/fraying, believed-advantage evaluator with injectable belief (`truthFor`) | `peaceTerms.js` (1,501 lines; TERM_CATALOG, believedAdvantage, appraiseLoserPortfolio, draftTerms, advanceTreaties…) | BUILT — the terms MATH the envoy program transports; ⚠️ TIME-BASE FLAG (2026-08-02, self-audit): prices a "year" at 12 ticks while the engine tick is one week — WR-0c item (4) rules it before any WR duration work builds on it; ⚠️ the `truthFor` seam is ONE closure for BOTH parties and advanceTreaties exposes no seam at all — see §3 THE SEAM MECHANICS |
+| Peace terms: budget/appraisal/draft/compliance/fraying, believed-advantage evaluator with injectable belief (`truthFor`) | `peaceTerms.js` (TERM_CATALOG, believedAdvantage, appraiseLoserPortfolio, draftTerms, advanceTreaties…) plus the dependency-light `treatyClock.js` duration/clock leaf | BUILT — the terms MATH the envoy program transports; ⚠️ TIME-BASE FLAG (2026-08-02, self-audit): prices a "year" at 12 ticks while the engine tick is one week — WR-0c item (4) rules it before any WR duration work builds on it [STATUS CORRECTED 2026-08-02: item (4) LANDED — new treaties use the canonical 52-week year; persisted treaties retain their historical cadence through an explicit marker; see the item-(4) receipt below]; ⚠️ the `truthFor` seam is ONE closure for BOTH parties and advanceTreaties exposes no seam at all — see §3 THE SEAM MECHANICS |
 | Treaty enforcement: readiness cap, war block, occupation hold; tribute/reparations/restitution move real grain | `treatyEnforcement.js`, `treatyTransfer.js`, `warIntent.js` | BUILT + GATED (wave W1; landed in the WR-0 W1 commit) |
 | Momentum: commitment stock, cliffs, face-saving exits, climb-downs | `momentum.js` | BUILT, FOREIGN (read-only law above) |
 | NPC durable identity, facets, circulation, belief, transit, verdicts (jailed = the corruption-exposure path ONLY — the sole writer is applyNpcVerdict, which requires a local roster npc + an exposure record; the FOREIGN-GUEST HOLD is NEW WORK, WR-7b) [CORRECTED 2026-08-02 (self-audit)], Wanderers register + DM verbs | H1–H4: `npcLedger*`, `npcCirculation*`, `npcVerdict*` | BUILT |
@@ -354,7 +354,8 @@ Own commit, after WR-0; changes lit-path behavior ⇒ disclosed shift discipline
   every hard AND soft gate runs exactly as for an unordered candidate. Pin the
   negative: an escalation intent against a target failing CONQUEST_MARGIN does
   not open.
-- **(4) THE PEACE-TERMS TIME-BASE (ADDED 2026-08-02, self-audit — OUTSTANDING: the
+- **(4) THE PEACE-TERMS TIME-BASE (ADDED 2026-08-02, self-audit — ~~OUTSTANDING~~
+  STATUS CORRECTED 2026-08-02: LANDED; the
   Progress note below covers items 1–3 only; this lands as its own follow-up
   commit):** `peaceTerms.js` prices a "year" at `TICKS_PER_YEAR: 12` (and
   `treatyEnforcement.js` duplicates `INSTALLMENTS_PER_YEAR: 12` behind a no-drift
@@ -371,7 +372,9 @@ Own commit, after WR-0; changes lit-path behavior ⇒ disclosed shift discipline
   chair, not an implementer pick. Either arm lands WITH A PIN tying the chosen
   constant to `INTERVAL_WEEKS` so the two clocks can never silently drift again.
   WR-9's duration envelopes are BLOCKED on this item (they must state which
-  constant defines a year before they are authored).
+  constant defines a year before they are authored). [STATUS CORRECTED 2026-08-02:
+  the condition is now satisfied by the 52-week current clock + explicit legacy-12
+  provenance rule; WR-9 is unblocked.]
 
 > **Progress — WR-0c complete, 2026-08-01.** The chooser and opener now share one
 > treaty-eligibility read; a zero war factor removes deploy from the move space;
@@ -389,6 +392,29 @@ Own commit, after WR-0; changes lit-path behavior ⇒ disclosed shift discipline
 > modules; 311 static route documents). Dist verification cleared 45/47 files and
 > 362/364 tests in parallel; its two town-scene timeouts passed under `VERIFY_DIST=1`
 > alone (23/23 and 2/2). No golden was re-recorded, no flag was lit, and no soak ran.
+
+> **Progress — WR-0c item (4) landed, 2026-08-02.** The re-derivation arm was
+> taken. New treaties persist
+> `treatyTicksPerYear: 52`, and that current cadence is identity-pinned to the
+> dependency-free `INTERVAL_WEEKS.one_year` source. The schema remains v2: its
+> same-schema nested migration stamps every persisted unmarked/invalid treaty as
+> legacy `12` WITHOUT rescaling authored expiry horizons, breach/repudiation
+> horizons, due dates, or counters. Duration displays, installment draws, and the
+> annual strain rate all resolve the treaty's own marker; current treaties therefore
+> pay and accrue across 52 weekly ticks while old saves continue on the twelve-tick
+> contracts they actually lived. The warranty is deliberately bounded: the promoted
+> multi-tick `one_year` path is 52 synchronous one-week ticks and is weekly-correct;
+> the retained `advanceMultiTick=false` coarse kill-switch remains a legacy
+> compatibility route and is NOT warranted as weekly-correct. Drafted duration now
+> uses `0.5 + margin + margin²`, multiplied by alignment press, then hard-capped and
+> shortened to the longest affordable whole-year term. Thus a product-fed term stays
+> monotone across the `.99 → 1` margin boundary instead of disappearing when its
+> authored ask outruns budget. The reachability proof covers only rows the present
+> appraisal can feed; it makes no claim for the still-unfed `reparations` and
+> `non_intervention` rows. WR-1 and WR-9 are UNBLOCKED by this item. The complete
+> gate passed 2,114 files with one skipped and 22,410 tests with 54 skipped;
+> production build, 311-route prerender, and dist 364/364 are green. No flag was
+> lit, no golden or snapshot was re-recorded, and no soak ran.
 
 ### WR-1 — THE TERMINATION READ (amendments C, C2; flag `warTerminationEnabled`)
 **Scope:** the four-term read — live cause vs cost-to-continue vs cost-to-stop,
@@ -909,9 +935,12 @@ measurement, envelopes, and certification rows)
 - **The war-duration distribution envelope:** tail and no infinity — most wars
   short, some long, a few generational, NONE alive at the soak's full horizon
   (a single year-300 war reds exactly as the trillion-person settlement did).
-  BLOCKED on WR-0c item (4) (added 2026-08-02, self-audit): the duration envelopes
+  ~~BLOCKED on WR-0c item (4) (added 2026-08-02, self-audit): the duration envelopes
   must state which constant defines a year — the engine's 52-week year or
-  peaceTerms' 12-tick one — before they are authored.
+  peaceTerms' 12-tick one — before they are authored.~~ **UNBLOCKED 2026-08-02:**
+  current treaty and WR-9 calendar envelopes use the canonical 52-week year;
+  persisted legacy treaties retain their explicit twelve-tick provenance marker and
+  are evaluated on that historical cadence rather than silently rescaled.
 - **The endings mix:** {terms, exhaustion, ruler_change, fragmentation,
   annihilation, conquest, punitive_sack(initiation), punitive_sack(vengeance)}
   — each with a share envelope; one path carrying nearly all endings means the
@@ -1086,8 +1115,9 @@ alignment consequences · WR-9 envelope shapes. Every one banded, none a bare fl
 on a surface, all in one tuning table per wave (the house idiom).
 Added 2026-08-02 (self-audit): WR-6 join-bar + refusal-cost bands · WR-8
 atrocity-casus decay + the feasibility-asymmetry DIRECTION (a signed band, pinned) ·
-the peace-terms TIME-BASE constant (WR-0c item 4 — whichever arm the ruling takes,
-the constant is owner-signed) · the map km-scale for the transit kernel's mode
+the peace-terms TIME-BASE constant (WR-0c item 4 — [RULING LANDED 2026-08-02:
+current `52 == INTERVAL_WEEKS.one_year`, persisted legacy `12`, selected per treaty;
+the original "whichever arm" fork is closed]) · the map km-scale for the transit kernel's mode
 table (J-D11(b); does not exist in the tree — owner-signed when the mode table
 lands).
 
@@ -1115,7 +1145,8 @@ recorded reason (law 1a-5).
 ruling, recorded in DESIGN_REALM_DIRECTIVES.md Progress 2026-08-01 and carried in
 docs/FABLE_VALIDATION_QUEUE.md, was issued the same day as this volume and the
 volume never carried it):** WR-0 (landed) → P5 (landed @ 47b4ed9d) → WR-0c (items
-1–3 landed; item 4, the time-base ruling, OUTSTANDING) → THE LIGHTING BATCH
+1–3 landed; item 4, the time-base ruling, ~~OUTSTANDING~~ LANDED 2026-08-02) →
+THE LIGHTING BATCH
 (including `demographicsEnabled`) → the release grid + 300y rerun → tuning. The
 WR-1..WR-10 waves BUILD DARK and may proceed after WR-0c per the build order below;
 their flags are NOT in the standing lighting batch — they light at the owner-signed

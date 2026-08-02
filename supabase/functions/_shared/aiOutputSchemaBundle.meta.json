@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-02T02:56:06.970Z",
+  "generatedAt": "2026-08-02T09:35:12.249Z",
   "entry": "src/domain/aiOutputSchema.js",
-  "sourceHash": "c163718f177ebe7f",
+  "sourceHash": "6f29939cf19cfe77",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/index.js",
@@ -80,6 +80,7 @@
     "src/domain/worldPulse/demographicsRates.js",
     "src/domain/worldPulse/demographicsRisk.js",
     "src/domain/worldPulse/demographicsWorks.js",
+    "src/domain/worldPulse/intervalWeeks.js",
     "src/domain/worldPulse/partyImpactKinds.js",
     "src/domain/worldPulse/pressureModel.js",
     "src/domain/worldPulse/provenanceKernel.js",
@@ -92,6 +93,7 @@
     "src/domain/worldPulse/stablePart.js",
     "src/domain/worldPulse/stressorSeverity.js",
     "src/domain/worldPulse/stressorsCore.js",
+    "src/domain/worldPulse/treatyClock.js",
     "src/domain/worldPulse/warFrontReads.js",
     "src/domain/worldPulse/worldSnapshot.js",
     "src/domain/worldPulse/worldState.js",

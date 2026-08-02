@@ -796,6 +796,40 @@ land BEFORE that soak for its evidence to prove what the thesis needs.
   verification passed 364/364. No schema, collector, feature state, required-property
   membership, golden, snapshot, lighting state, or soak artifact changed.
 
+### Addendum implementation receipt — WR-0c(4) TREATY CLOCK LANDED (2026-08-02)
+
+- **New and lived treaties now carry honest, distinct calendar provenance.** The
+  canonical interval table lives in a dependency-free leaf and the current treaty
+  year is identity-tied to its 52-week `one_year`. New mints persist that cadence.
+  A same-schema v2 world migration stamps unmarked or invalid persisted treaties as
+  legacy twelve-tick contracts without rescaling terms, installment counters,
+  due dates, or breach/repudiation horizons; marked records and treaty-free worlds
+  are identity no-ops, and the migration reaches a JSON-round-trip fixed point.
+- **Every treaty consumer reads the same marker.** Stream installments, remaining-
+  year display, fraying order, and annualized strain resolve per treaty. Twelve
+  legacy ticks and fifty-two current ticks accrue the same annual resentment.
+  Domain documents, both screen surfaces, and the PDF text pin an exact current
+  three-year term; a mixed ledger simultaneously renders legacy and current clocks.
+- **The duration curve no longer drops the strongest affordable term.** Authored
+  years use `(0.5 + margin + margin²) × alignment press`, whole-year rounding, and
+  each term's hard ceiling. If the ask outruns remaining budget it shortens to the
+  longest affordable whole-year term, preserving monotonicity at `.99 → 1` and
+  mediated reachability without overspending. Evidence is deliberately limited to
+  product-fed rows; unfed `reparations` and `non_intervention` are not claimed live.
+- **The calendar warranty is executed at the product route.** The promoted
+  orchestrator holds a one-year treaty through week 51 and expires it before week
+  52's enforcement; a named `one_year` composed advance lands on that same boundary.
+  The retained `advanceMultiTick=false` single-coarse-kernel compatibility path is
+  explicitly outside the weekly-correct warranty.
+- **Verification:** the focused affected-contract matrix passed 180/180 and edge-
+  bundle freshness passed 42/42. The first full gate correctly rejected eight
+  structural integration omissions (generated bundles, a markerless legacy fixture,
+  typing/negative/prose-position ratchets, and a transient uncovered helper); each
+  was repaired without widening a baseline. The final complete gate passed 2,114
+  files with one skipped and 22,410 tests with 54 skipped. Production build and the
+  311-route prerender completed; dist verification passed 364/364. No golden,
+  snapshot, feature flag, lighting state, or soak artifact changed.
+
 ### Addendum implementation receipt — A-4 INSTRUMENTS LANDED (2026-08-01)
 
 - **Seed divergence is now a story-mix claim.** The different-seed arm aggregates

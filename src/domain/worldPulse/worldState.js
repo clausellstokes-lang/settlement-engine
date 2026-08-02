@@ -3,6 +3,8 @@ import { normalizeSimulationRules } from './simulationRules.js';
 import { wallClockNow } from '../clock.js';
 import { deepClone } from '../clone.js';
 import { stablePart } from './stablePart.js';
+import { INTERVAL_WEEKS } from './intervalWeeks.js';
+import { migrateTreatyClockMarkers } from './treatyClock.js';
 
 export const WORLD_STATE_SCHEMA_VERSION = 2;
 
@@ -24,14 +26,11 @@ const MAX_PENDING = 400;
 // (never accumulates float months), so coarse == weekly holds by integer
 // construction.
 //
-// This is the SINGLE-SOURCE interval → week-count table (weeksPerInterval in
-// advanceInterval.js re-exports it verbatim; keep them one object).
-export const INTERVAL_WEEKS = Object.freeze({
-  one_week: 1,
-  one_month: 4,
-  one_season: 13,
-  one_year: 52,
-});
+// The dependency-free intervalWeeks.js leaf is the SINGLE-SOURCE interval →
+// week-count table (weeksPerInterval in advanceInterval.js re-exports it
+// verbatim; keep them one object). This historic import path remains an identity
+// re-export for every existing consumer.
+export { INTERVAL_WEEKS };
 
 const MONTHS_PER_YEAR = 12;  // regular 12-month display year over 52 weeks
 const WEEKS_PER_YEAR = 52;
@@ -164,11 +163,10 @@ function freezeConditionalLedger(value) {
 // is written across ticks and MUST keep deep-cloning to avoid pre-tick-snapshot aliasing.
 const FROZEN_CONDITIONAL_LEDGER_KEYS = new Set(['spatialDigest']);
 
-// Forward-compatible worldState migration chain. Empty today (schemaVersion stays
-// 1; the new ledgers are ADDITIVE and need no migration — an absent key normalizes
-// to its empty default). Modelled on settlementMigrations: each entry bumps a
-// breaking shape. The first future BREAKING change registers its step here so the
-// upgrade path is explicit and ordered, never an ad-hoc inline coercion.
+// Forward-compatible VERSIONED worldState migration chain. Modelled on
+// settlementMigrations: each entry bumps a breaking shape, while additive ledgers
+// still normalize from absence without a schema bump. Same-version nested repairs
+// run explicitly after this ordered chain (see runWorldStateMigrations below).
 /** @type {ReadonlyArray<{ to: number, migrate: (raw: any) => any }>} */
 const WORLD_STATE_MIGRATIONS = Object.freeze([
   // v2 — the per-settlement pantheon renamed its leading deity from "chief" to
@@ -204,7 +202,11 @@ const WORLD_STATE_MIGRATIONS = Object.freeze([
 /** @param {any} raw */
 export function runWorldStateMigrations(raw = {}) {
   const input = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};
-  return WORLD_STATE_MIGRATIONS.reduce((state, step) => step.migrate(state), input);
+  const versioned = WORLD_STATE_MIGRATIONS.reduce((state, step) => step.migrate(state), input);
+  // Treaty clock markers are a SAME-VERSION nested migration: the outer world
+  // shape remains v2, while pre-correction treaties retain their historical
+  // twelve-tick horizons and marked treaties preserve their authored clock.
+  return migrateTreatyClockMarkers(versioned);
 }
 
 /** @param {any} campaign */

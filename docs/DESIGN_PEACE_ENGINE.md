@@ -345,3 +345,30 @@ streams): the sub-century horizon, the engine's anti-permanent-ratchet doctrine,
 itself all say open-ended extraction is a fiction — every stream ends, renegotiates (§12.5's
 window, at the CURRENT ratio), converts (the E1 bridge), or breaks (§12.4). A treaty is a
 season of history, never a law of physics.
+
+> **WR-0c(4) CLOCK + DURATION RULING — LANDED 2026-08-02.** A treaty now owns
+> its calendar provenance. Every NEW treaty
+> persists `treatyTicksPerYear: 52`, identity-tied to the engine's canonical
+> `INTERVAL_WEEKS.one_year`; display years, stream installments, and §12.3's
+> resentment strain all read that per-treaty marker. The annual strain coefficient
+> is divided by the treaty's cadence, so twelve legacy ticks and fifty-two current
+> ticks accrue the same authored annual burden. The v2 world-state migration is a
+> same-schema nested normalization: a persisted unmarked/invalid treaty is stamped
+> legacy `12`, while every existing expiry, next-due, breach/repudiation horizon,
+> and paid/missed counter remains untouched. This preserves lived contracts instead
+> of rewriting history.
+>
+> The duration scale is now `0.5 + margin + margin²`, multiplied by the existing
+> alignment press. The result is rounded to whole years, hard-capped by the term's
+> authored maximum, and — when the ask costs more than the remaining settlement
+> budget — shortened to the longest affordable whole-year term rather than dropped.
+> The decisive-victory arm is therefore monotone at `.99 → 1` while duration still
+> spends the same term budget. This proof applies to PRODUCT-FED appraisal rows only;
+> it does not pretend that the presently unfed `reparations` or `non_intervention`
+> catalog rows are reachable. The 52-tick calendar warranty applies to the promoted
+> multi-tick route, where `one_year` composes 52 synchronous weekly ticks. The
+> retained `advanceMultiTick=false` coarse route is compatibility behavior, not a
+> weekly-correct calendar path. The complete repository gate passed 2,114 files
+> with one skipped and 22,410 tests with 54 skipped; production build, 311-route
+> prerender, and distribution verification (364/364) are green. No flag was lit,
+> no golden or snapshot was re-recorded, and no soak ran.

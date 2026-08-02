@@ -1,11 +1,20 @@
 import { describe, expect, test } from 'vitest';
+import { readFileSync } from 'node:fs';
 
 import {
   createDefaultWorldState,
   ensureWorldState,
+  INTERVAL_WEEKS,
   runWorldStateMigrations,
   WORLD_STATE_SCHEMA_VERSION,
 } from '../../src/domain/worldPulse/worldState.js';
+import { INTERVAL_WEEKS as INTERVAL_WEEKS_LEAF } from '../../src/domain/worldPulse/intervalWeeks.js';
+import {
+  CURRENT_TREATY_TICKS_PER_YEAR,
+  LEGACY_TREATY_TICKS_PER_YEAR,
+  migrateTreatyClockMarkers,
+  treatyTicksPerYearOf,
+} from '../../src/domain/worldPulse/treatyClock.js';
 
 // F0 STRUCTURAL ORACLE (persistence seam): pins that ensureWorldState is a SAFE,
 // IDEMPOTENT, NON-ALIASING normalizer — the property the whole save/load pipeline
@@ -247,14 +256,12 @@ describe('worldState ledger persistence — ensureWorldState normalize/round-tri
     expect(Object.prototype.hasOwnProperty.call(raw.pantheon, 'injected')).toBe(false);
   });
 
-  // INVARIANT 6 (F1): the worldState migration chain exists and is an IDENTITY
-  // no-op today — additive ledgers need no migration (an absent key normalizes to
-  // its empty default). ensureWorldState routes rawInput through it before the
-  // spread, so the first future BREAKING shape registers a visible, ordered step
-  // rather than an ad-hoc inline coercion.
-  test('runWorldStateMigrations is an identity no-op today (chain empty)', () => {
+  // INVARIANT 6 (F1): additive ledgers still need no top-level migration. The
+  // same-schema treaty-clock migration is an IDENTITY no-op while that nested
+  // ledger is absent, so ordinary and dormant saves retain their object identity.
+  test('runWorldStateMigrations is an identity no-op when no treaty ledger exists', () => {
     const raw = hotRaw();
-    expect(runWorldStateMigrations(raw)).toEqual(raw);
+    expect(runWorldStateMigrations(raw)).toBe(raw);
     // Defensive: non-object input yields an empty base, never throws.
     expect(runWorldStateMigrations(null)).toEqual({});
     expect(runWorldStateMigrations(undefined)).toEqual({});
@@ -323,5 +330,203 @@ describe('worldState ledger persistence — ensureWorldState normalize/round-tri
     // Deity-free / no religionStates → passes straight through.
     const bare = { tick: 1 };
     expect(runWorldStateMigrations(bare)).toBe(bare);
+  });
+
+  // WR-0c(4): a treaty's duration horizons must keep the clock under which they
+  // were minted. Existing unmarked records are historical twelve-tick treaties;
+  // current records explicitly carry the engine's fifty-two-week year. This is
+  // intentionally a NESTED, SAME-VERSION migration: worldState stays schema v2.
+  test('same-version treaty-clock migration stamps only unmarked/invalid persisted treaties', () => {
+    const unmarked = {
+      parties: ['a', 'b'],
+      victorId: 'a',
+      loserId: 'b',
+      mintedTick: 11,
+      paidInstallments: 7,
+      missedInstallments: 2,
+      terms: [
+        { type: 'tribute', expiresTick: 131, nextDueTick: 23, paidCount: 7 },
+        { type: 'non_aggression', expiresTick: 251 },
+      ],
+      complianceState: 'defaulted',
+      repudiatedTick: 19,
+      breachTick: 19,
+      breachExpiresTick: 251,
+      receipts: ['kept byte-for-byte'],
+    };
+    const markedLegacy = {
+      parties: ['c', 'd'],
+      treatyTicksPerYear: LEGACY_TREATY_TICKS_PER_YEAR,
+      paidInstallments: 3,
+      terms: [{ type: 'resource_share', expiresTick: 91, nextDueTick: 31 }],
+      breachExpiresTick: 91,
+    };
+    const markedCurrent = {
+      parties: ['e', 'f'],
+      treatyTicksPerYear: CURRENT_TREATY_TICKS_PER_YEAR,
+      paidInstallments: 9,
+      terms: [{ type: 'demilitarization', expiresTick: 587 }],
+    };
+    const invalidMarker = {
+      parties: ['g', 'h'],
+      treatyTicksPerYear: 0,
+      missedInstallments: 4,
+      terms: [{ type: 'tribute', expiresTick: 77, nextDueTick: 65 }],
+      repudiatedTick: 52,
+      breachExpiresTick: 77,
+    };
+    const raw = {
+      schemaVersion: WORLD_STATE_SCHEMA_VERSION,
+      tick: 63,
+      spatialLedgers: {
+        unrelated: { untouched: true },
+        treaties: {
+          'a>b': unmarked,
+          'c>d': markedLegacy,
+          'e>f': markedCurrent,
+          'g>h': invalidMarker,
+        },
+      },
+    };
+    const rawBytes = JSON.stringify(raw);
+
+    const out = runWorldStateMigrations(raw);
+
+    expect(out).not.toBe(raw);
+    expect(out.schemaVersion).toBe(2);
+    expect(WORLD_STATE_SCHEMA_VERSION).toBe(2);
+    expect(out.spatialLedgers.treaties['a>b']).toEqual({
+      ...unmarked,
+      treatyTicksPerYear: LEGACY_TREATY_TICKS_PER_YEAR,
+    });
+    expect(out.spatialLedgers.treaties['g>h']).toEqual({
+      ...invalidMarker,
+      treatyTicksPerYear: LEGACY_TREATY_TICKS_PER_YEAR,
+    });
+
+    // Marked records are exact identity no-ops even inside a mixed ledger.
+    expect(out.spatialLedgers.treaties['c>d']).toBe(markedLegacy);
+    expect(out.spatialLedgers.treaties['e>f']).toBe(markedCurrent);
+    // Unrelated ancestors and nested values keep their identities and values.
+    expect(out.spatialLedgers.unrelated).toBe(raw.spatialLedgers.unrelated);
+    expect(out.spatialLedgers.treaties['a>b'].terms).toBe(unmarked.terms);
+
+    // Counters and every previously-authored expiry / repudiation / breach
+    // horizon are facts, not values to scale during marker migration.
+    expect(out.spatialLedgers.treaties['a>b']).toMatchObject({
+      paidInstallments: 7,
+      missedInstallments: 2,
+      repudiatedTick: 19,
+      breachTick: 19,
+      breachExpiresTick: 251,
+    });
+    expect(out.spatialLedgers.treaties['a>b'].terms).toEqual(unmarked.terms);
+    expect(out.spatialLedgers.treaties['g>h']).toMatchObject({
+      missedInstallments: 4,
+      repudiatedTick: 52,
+      breachExpiresTick: 77,
+    });
+    expect(out.spatialLedgers.treaties['g>h'].terms).toEqual(invalidMarker.terms);
+
+    // The source graph is untouched, including the invalid marker being repaired.
+    expect(JSON.stringify(raw)).toBe(rawBytes);
+    expect(unmarked).not.toHaveProperty('treatyTicksPerYear'); // anchored: raw bytes above and the migrated marker pin prove source omission
+    expect(invalidMarker.treatyTicksPerYear).toBe(0);
+
+    // Apart from the marker itself, serialization of each migrated record is
+    // byte-for-byte unchanged (key order included).
+    const { treatyTicksPerYear: added, ...unmarkedRest } = out.spatialLedgers.treaties['a>b'];
+    expect(added).toBe(LEGACY_TREATY_TICKS_PER_YEAR);
+    expect(JSON.stringify(unmarkedRest)).toBe(JSON.stringify(unmarked));
+    const { treatyTicksPerYear: repaired, ...invalidRest } = out.spatialLedgers.treaties['g>h'];
+    const { treatyTicksPerYear: ignored, ...originalInvalidRest } = invalidMarker;
+    expect(repaired).toBe(LEGACY_TREATY_TICKS_PER_YEAR);
+    expect(ignored).toBe(0);
+    expect(JSON.stringify(invalidRest)).toBe(JSON.stringify(originalInvalidRest));
+  });
+
+  test('treaty clock survives JSON reload and reaches an identity fixed point', () => {
+    const raw = {
+      schemaVersion: 2,
+      spatialLedgers: {
+        treaties: {
+          'old>realm': {
+            counter: 6,
+            terms: [{ type: 'tribute', expiresTick: 144, nextDueTick: 36 }],
+            breachExpiresTick: 144,
+          },
+          'new>realm': {
+            treatyTicksPerYear: CURRENT_TREATY_TICKS_PER_YEAR,
+            counter: 2,
+            terms: [{ type: 'tribute', expiresTick: 624, nextDueTick: 104 }],
+          },
+        },
+      },
+    };
+
+    const loaded = JSON.parse(JSON.stringify(raw));
+    const once = runWorldStateMigrations(loaded);
+    const reloaded = JSON.parse(JSON.stringify(once));
+    const twice = runWorldStateMigrations(reloaded);
+
+    expect(twice).toBe(reloaded);
+    expect(JSON.stringify(twice)).toBe(JSON.stringify(once));
+    expect(twice.spatialLedgers.treaties['old>realm'].treatyTicksPerYear).toBe(12);
+    expect(twice.spatialLedgers.treaties['old>realm'].terms[0]).toEqual({
+      type: 'tribute', expiresTick: 144, nextDueTick: 36,
+    });
+    expect(twice.spatialLedgers.treaties['new>realm'].treatyTicksPerYear).toBe(52);
+  });
+
+  test('treaty clock constants and marker reader share the canonical interval leaf', () => {
+    expect(INTERVAL_WEEKS).toBe(INTERVAL_WEEKS_LEAF);
+    expect(CURRENT_TREATY_TICKS_PER_YEAR).toBe(INTERVAL_WEEKS.one_year);
+    expect(LEGACY_TREATY_TICKS_PER_YEAR).toBe(12);
+    expect(treatyTicksPerYearOf(undefined)).toBe(12);
+    expect(treatyTicksPerYearOf({})).toBe(12);
+    expect(treatyTicksPerYearOf({ treatyTicksPerYear: null })).toBe(12);
+    expect(treatyTicksPerYearOf({ treatyTicksPerYear: 0 })).toBe(12);
+    expect(treatyTicksPerYearOf({ treatyTicksPerYear: 12.5 })).toBe(12);
+    expect(treatyTicksPerYearOf({ treatyTicksPerYear: '52' })).toBe(12);
+    expect(treatyTicksPerYearOf({ treatyTicksPerYear: 52 })).toBe(52);
+    expect(treatyTicksPerYearOf({ treatyTicksPerYear: 104 })).toBe(104);
+  });
+
+  test('treaty migration is an identity no-op for marked and treaty-free states', () => {
+    const states = [
+      { schemaVersion: 2, tick: 1 },
+      { schemaVersion: 2, spatialLedgers: {} },
+      { schemaVersion: 2, spatialLedgers: { treaties: {} } },
+      {
+        schemaVersion: 2,
+        spatialLedgers: {
+          treaties: {
+            'a>b': { treatyTicksPerYear: 12, terms: [] },
+            'c>d': { treatyTicksPerYear: 52, terms: [] },
+          },
+        },
+      },
+    ];
+    for (const state of states) {
+      expect(migrateTreatyClockMarkers(state)).toBe(state);
+      expect(runWorldStateMigrations(state)).toBe(state);
+    }
+  });
+
+  test('treatyClock remains a dependency-light leaf outside the peace/war graph', () => {
+    const treatyClockSource = readFileSync(
+      new URL('../../src/domain/worldPulse/treatyClock.js', import.meta.url),
+      'utf8',
+    );
+    const intervalSource = readFileSync(
+      new URL('../../src/domain/worldPulse/intervalWeeks.js', import.meta.url),
+      'utf8',
+    );
+    const importsOf = (source) => [...source.matchAll(/\bfrom\s+['"]([^'"]+)['"]/g)].map((match) => match[1]);
+
+    expect(importsOf(intervalSource)).toEqual([]);
+    expect(importsOf(treatyClockSource)).toEqual(['./intervalWeeks.js']);
+    expect(treatyClockSource).not.toMatch(/peaceTerms|warReasons|treatyEnforcement/); // anchored: exact one-import assertion above proves the leaf was scanned
+    expect(treatyClockSource).not.toMatch(/pulseKernel|worldState|distanceRead|store|components|kernel\/math/); // anchored: exact one-import assertion above proves forbidden graph absence
   });
 });
