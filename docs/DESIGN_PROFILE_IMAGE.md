@@ -155,6 +155,35 @@ right one: the guard rejects a string, never a person).
   principle being: the guard gates where text BECOMES PUBLIC, and never
   polices private worlds (a DM's own campaign may say what it wants at home;
   the product law that the world is theirs holds absolutely). Default: in.
+- **THE TWO MODES (owner refinement, same session — the guard forks by the
+  text's ORIGIN):**
+  - **AUTHORED-PUBLIC fields** (display names, comments, names renamed for a
+    share): the BLOCK mode above — the text was written FOR the public and the
+    gate is the entry.
+  - **PRIVATE-ORIGIN fields riding a share** (DM notes, AI notes — text written
+    in privacy that a sharer may have FORGOTTEN carries a flagged term): the
+    VEIL mode — flagged terms render OBSCURED on every public projection, and
+    the share is NEVER blocked, no friction, no punishment ("those are
+    originally private... people may forget" — the owner's mercy, and it is
+    architecturally correct: the author did nothing public-facing wrong).
+  - **THE STORAGE LAW (binding):** the veil is a PROJECTION TRANSFORM, never a
+    storage write — the author's private text is NEVER modified (their world
+    is theirs, including its language). The mask applies in the public VIEW
+    and in the SHARED/IMPORT PAYLOAD identically (what leaves privacy wears
+    the veil in every form it leaves in); the author's own original survives
+    every share, unshare, and reimport byte-intact. Pinned both ways: the
+    public artifact carries no flagged term; the author's stored note is
+    untouched after a full share round-trip.
+  - **AUDIENCE-LAW INTERACTION (recorded so nobody double-builds):** much of
+    DM-truth never reaches public projections AT ALL (the includeCovert seam
+    excludes it by construction) — the veil applies only to note fields a
+    share CONSCIOUSLY includes; where the audience law already excludes, the
+    veil never arises.
+  - **NAMING HONESTY (vetoable):** the owner said "encrypt"; the mechanism
+    specced is MASKING (a render transform — the term shows as veiled marks).
+    True encryption implies keys and decryptability nobody needs here; if the
+    owner genuinely wants recoverable ciphertext in payloads, that is a
+    different machine and a new ruling — the veil ships unless so ordered.
 - **Limitations recorded:** the v1 lists are English-centric (i18n is a
   future list-versioning matter, not a code change); AI-assisted moderation
   stays PARKED with the avatar-scanning decision (§5 — one paid-service
