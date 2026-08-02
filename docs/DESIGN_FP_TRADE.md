@@ -17,12 +17,18 @@ delegation — vetoable here. The endings vocabulary {fortune, ruin, monopoly,
 collapse, severance, cornered} is OWNER-SETTLED (SPINE §3) — names not vetoable;
 envelopes are.**
 
-**Reading order for the implementer:** DESIGN_FP_SPINE.md (the constitution; its
-twelve requirements bind every mechanism below) → this document top to bottom →
-DESIGN_WAR_RULINGS_ARCHITECTURE.md §1/§3/§10 (the format precedent, the seam-ruling
-idiom, and the implementer protocol that binds here verbatim) →
+**Reading order for the implementer [CORRECTED 2026-08-02 (fp-audit) — the prior
+order left ~20 binding-law shorthands unresolvable]:** DESIGN_FP_SPINE.md (the
+constitution; its twelve requirements bind every mechanism below) → this document
+top to bottom → DESIGN_WAR_RULINGS_ARCHITECTURE.md §1/§3/§10 (the format
+precedent, the seam-ruling idiom, and the implementer protocol that binds here
+verbatim) PLUS its §5/§6 (where WR-7a/7b/7d, WR-8, WR-9, WR-10 and the J-WR
+judgment blocks live — this volume consumes their machinery by name) →
+DESIGN_REALM_DIRECTIVES.md's amendment ladder A..S (amendments A, B, I, L, M and
+the K/P wave laws cited below are BINDING law, not colour) →
 DESIGN_FP_COUPLINGS.md for every coupling this volume declares →
-docs/GENERATION_CONTRACTS.md + the gate discipline.
+docs/GENERATION_CONTRACTS.md + the gate discipline. §1d below maps every
+cross-program shorthand to its source document.
 
 ---
 
@@ -59,11 +65,24 @@ docs/GENERATION_CONTRACTS.md + the gate discipline.
   House books, tolls, credit, stakes, and fortunes are BANDS. Conservation applies
   exactly where objects move: goods units in the M6a balance, grain-months at the
   granary. Money-shaped drama is band drama.
-- **T3 — SINGLE WRITERS, EXTENDED NEVER FORKED:** `peaceTerms.js` stays the single
-  terms writer (the commercial term family EXTENDS TERM_CATALOG); the single granary
-  applicator stays the only writer of food-months; `dispositionLedger.js` stays the
-  disposition writer; every new ledger below names its one writer. A second writer
-  anywhere is a design defect.
+- **T3 — SINGLE WRITERS, EXTENDED NEVER FORKED [CORRECTED 2026-08-02 (fp-audit)]:**
+  "extend never fork" means ONE WRITER FAMILY, never one file. `peaceTerms.js`
+  remains the terms AUTHORITY, but all new commercial capability lands in LAZY
+  LEAF SIBLINGS consuming its exports (the chair's R2 hot-file ruling — peaceTerms
+  gains only net-zero seam lines). The granary lane's tree truth: there is NO
+  single writer of food-months today — FIVE world-write sites move `storageMonths`
+  (the tick advance foodStockpile.js:406/:479; the generosity/treaty delta
+  applicator `generosityUpdates.applyFoodDeltasToUpdates` at generosityUpdates.js
+  :65, which treatyTransfer.js:32/:121-136 names "the existing single applicator"
+  FOR ITS LANE; a second near-identical delta fold at applyWorldPulse.js:322; the
+  magic-buffer draw magicBufferApply.js:357; a DM event leg mutateWorld.js:1143).
+  TR-4 routes ALL new grain-arrival credit through `applyFoodDeltasToUpdates` and
+  lands a source-scan pin: no SIXTH writer of storageMonths lands with this
+  program — the five existing sites are the fence the T7 walker covers. Whether
+  applyWorldPulse.js:322 is a pre-existing second-writer defect is REPORTED to
+  the validation chair at TR-4 build time, never silently ruled here.
+  `dispositionLedger.js` stays the disposition writer; every new ledger below
+  names its one writer. A second writer of any NEW ledger is a design defect.
 - **T4 — E3 FOR COMMERCE:** books, appetite, posture, and disposition COLOUR
   thresholds; they never select a partner, a victim, or a market. No read exported
   by any house/market module may return a target list. Import lists pinned (the P4
@@ -78,11 +97,20 @@ docs/GENERATION_CONTRACTS.md + the gate discipline.
   commons, the seat, and the world's judgment on the observer's axis. The estate's
   one hard alignment boundary remains razing initiation (WR-8); commerce has NONE.
   Out-of-posture acts are priced and receipted news, never forbidden (SPINE §1.10).
-- **T7 — THE DOUBLE-COUNT LAW (this program's native hazard, promoted to law):**
-  exactly ONE live food-import term per settlement per tick. The M2 kernel already
-  excludes food by design (supplyKernel.js header: foodStockpile stays the food
-  buffer, never double-counted — survey-verified); TR-4 replaces terms, never adds
-  them, and a walker asserts the exactly-one property across flag states.
+- **T7 — THE DOUBLE-COUNT LAW (this program's native hazard, promoted to law)
+  [CORRECTED 2026-08-02 (fp-audit) — restated against the real arithmetic]:**
+  exactly ONE live food-import ARM per settlement per tick. There is no per-tick
+  "import term" to replace: import coverage is NETTED into the generation-baseline
+  `baseDeficitPct` stash (foodStockpile.js:288 — the sacred generation baseline),
+  and FOOD_IMPORT_RATES reaches the tick lane only through the blockade arm's
+  `importDependency` read (:314-324). The law therefore fences TWO real sites —
+  the baseDeficitPct import share and blockadePct's importDependency read — plus
+  TR-4's new lit-only arrivals term; the walker asserts that exactly one of
+  {netted rate share, physical arrivals} is live per settlement per tick, in BOTH
+  flag states. The M2 kernel already excludes food by design (supplyKernel.js
+  header — survey-verified). TR-4 SUBSTITUTES inside this fence; it never adds an
+  arm and never rewrites the generation stash (GENERATION IS SACRED,
+  tradeFlow.js:13-18).
 - **T8 — BELIEF DISCIPLINE (K3/K4 commercialized):** no merged market estimate
   exists anywhere; believed scarcity is never refreshed from truth (updates arrive
   only via arrivals, rumor, and plants — all existing belief machinery); every
@@ -105,6 +133,16 @@ docs/GENERATION_CONTRACTS.md + the gate discipline.
 ### 1c Recorded hazards that WILL bite these waves (each has bitten this estate)
 - **JSON-alias trap:** factors and house members ARE `npcs[]` objects in memory;
   every roster-touching fixture JSON-round-trips.
+- **Faction-key/rename family [CORRECTED 2026-08-02 (fp-audit) — omitted at
+  drafting; a recorded estate hazard this program walks straight into]:**
+  archetype/name/membership reads go through `factionArchetype()`/`nameOf`/
+  `governingFactionOf`/`npcInFaction` ONLY, never hand-rolled; storing
+  `.archetype` is FORBIDDEN. `factionArchetype()` resolves category-first and
+  falls back to a NAME/description REGEX (factionArchetypes.js:85-96; the
+  MERCHANT row at :63) — house eligibility is therefore RENAME-SENSITIVE while
+  TR-2's books are event-accrued and NOT re-derivable (J-TR-3): a DM rename must
+  land in TR-2's dormancy rule, never orphan persisted books (the rename
+  round-trip pin, TR-2).
 - **Writer/reader payload-spelling drift:** every new ledger gets a pin that boots
   the REAL writer and reads through the REAL reader.
 - **Self-referential pins:** the corner's share denominator comes from an

@@ -42,14 +42,21 @@ that bite, breach, expiry — exists only for the war-end artifact; peacetime bo
 are labels with scalars and no compliance semantics at all.
 
 This program ends that. The treaty artifact stays ONE instrument (the 89/89-green
-compliance stack, extended, never forked); it gains peacetime formation from typed
-triggers, two-sided drafting through the two-picture contract, faith and
-population term families, an oath-holder's name on every signature, a lifecycle
-that speaks at every moment instead of only at birth and murder, renewal and
-renegotiation, and a mediator who can appear before the first march instead of
-only at the war's exhausted end. Historical register: the treaty of Kadesh —
-the first recorded parity instrument, signed by equals in peacetime, brothers
-not vassals — arriving in an engine that until now knew only Versailles.
+compliance stack, extended, never forked) — and ONE PER PAIR, by law
+[CORRECTED 2026-08-02 (fp-audit)]: the ledger's one-per-unordered-pair key
+(`peaceTerms.js:665-678`, the mint pass's own comment: "one treaty per unordered
+pair") is ruled LAW, not a defect. Peacetime formation AMENDS the pair's standing
+instrument, minting it only when the pair holds none; reciprocity is DIRECTIONAL
+TERMS inside the one instrument (§13's stacking machinery gains a beneficiary
+axis); renewal is lineage inside the record, never a second record. The program
+gains peacetime formation from typed triggers, two-sided drafting through the
+two-picture contract, faith and population term families, an oath-holder's name
+on every signature, a lifecycle that speaks at every moment instead of only at
+birth and murder, renewal and renegotiation, and a mediator who can appear before
+the first march instead of only at the war's exhausted end. Historical register:
+the treaty of Kadesh — the first recorded parity instrument, signed by equals in
+peacetime, brothers not vassals — arriving in an engine that until now knew only
+Versailles.
 
 ---
 
@@ -78,11 +85,29 @@ written with these as labeled fields so the audit stage can hunt shallow spots
 mechanically.
 
 ### 1c Grammar-specific laws (each anchored in settled rulings)
-- **THE SINGLE-WRITER LAW (J-WR-1 extended):** `peaceTerms.js` remains the single
-  terms writer for every treaty in the world — war-end, peacetime, renewal,
-  conversion, sovereignty (WR-10). Peacetime formation is a NEW PASS exported from
-  `peaceTerms.js`, never a second minting module. A second terms writer anywhere
-  is a design defect.
+- **THE ONE-INSTRUMENT LAW [CORRECTED 2026-08-02 (fp-audit), chair ruling R1]:**
+  the treaty ledger's one-record-per-unordered-pair key is LAW. Peacetime
+  formation AMENDS the pair's standing instrument (minting it when absent);
+  reciprocal and two-sided pacts are DIRECTIONAL TERMS inside the one instrument
+  — a term gains a `beneficiary` field and §13 stacking keys on
+  family × beneficiary for `provenance:'negotiated'` lineage (war-door drafting
+  unchanged); two same-family symmetric terms on one treaty compose under the
+  stacking rules or the SECOND IS REFUSED WITH A RECEIPT (never silently
+  dropped, never silently stacked). Renewal, renegotiation, and conversion are
+  amendment lineage acts on the living record, never a re-mint at the same key.
+- **THE WRITER-FAMILY LAW (J-WR-1 extended; [CORRECTED 2026-08-02 (fp-audit),
+  chair ruling R2]):** `peaceTerms.js` remains the HEAD of the one terms-writer
+  FAMILY for every treaty in the world — war-end, peacetime, renewal, conversion,
+  sovereignty (WR-10). "Extend, never fork" means ONE WRITER FAMILY, never one
+  file: peaceTerms.js sits at 794 of its 800 effective-line domain ceiling with
+  NO size-baseline grandfather, so ALL new grammar capability lands in LAZY LEAF
+  SIBLINGS (`pactFormation.js`, `pactAmendment.js`, `treatyLifecycleVoice.js`,
+  `oathHolder.js` — named per wave) consuming peaceTerms' exports; peaceTerms.js
+  itself gains only NET-ZERO seam lines (each export line bought by moving an
+  equal number of read-model lines into a leaf in the same commit — sizeBaseline
+  is TOLERANCE-0). A second terms writer OUTSIDE the family is a design defect;
+  a leaf that mints or amends other than through peaceTerms' exported seam is a
+  fork.
 - **THE TWO-PICTURE LAW (SP-3, settled):** peacetime drafting is TWO-SIDED via
   `negotiationPictures.js` (WR-7's seam, built once, used for war-end AND
   peacetime): each party's sheet is drafted and valued under that party's OWN
@@ -97,10 +122,20 @@ mechanically.
 - **K3 — NOBODY IS EVER CURRENT (structural):** every formation, drafting,
   acceptance, renewal, and mediation read routes through belief machinery
   (SP-2's believed scarcity/conditions/devotion feed the triggers). The K3 pin set
-  extends to this volume's modules: `pactProposals.js`, `pactTriggers.js`, and the
-  renewal evaluator — import lists pinned, token-scanned, guard-the-guard proven
-  against a legitimate truth-reader outside the negotiation set (never
-  `peaceTerms.js`, which cannot sit on both sides of its own guard).
+  extends to this volume's modules: `pactProposals.js`, `pactTriggers.js`,
+  `pactFormation.js`, and the renewal evaluator — import lists pinned,
+  token-scanned, guard-the-guard proven against a legitimate truth-reader outside
+  the negotiation set (never `peaceTerms.js`, which cannot sit on both sides of
+  its own guard). [CORRECTED 2026-08-02 (fp-audit)] THE VALUATION HOME IS RULED:
+  acceptance valuation (each side's own-truthFor value vs its reserve, the
+  two-sided conjunction) lives in `pactProposals.js` — INSIDE the K3 pin set —
+  which writes ONLY the proposal's state through its own writer.
+  `pactFormation.js` EXECUTES accepted proposals (amend/mint through peaceTerms'
+  exported seams) and never values a sheet; a source-scan walker asserts no
+  `negotiationPictures` import inside `peaceTerms.js` OR `pactFormation.js`. The
+  single-writer boundary at signing: `pactProposals.js` owns every proposal state
+  transition including `signed`, exposed to `pactFormation.js` as an exported
+  closer — no second module flips a proposal's state.
 - **PAIRWISE ONLY (law I, verbatim):** no congress, no multilateral pact object.
   A three-realm arrangement is three bilateral treaties that happen to rhyme.
 - **THE REFUSAL LAW (G2 generalized, asymmetric by ruling):** every proposal is
@@ -132,6 +167,15 @@ mechanically.
   producing state empty proves nothing — seed non-empty state first.
 - **Golden discipline:** a golden that moves unexpectedly is STOP-and-report;
   re-records only against a recorded ruling.
+- **Hot files at ceiling [CORRECTED 2026-08-02 (fp-audit)]:** `peaceTerms.js`
+  measures 794 effective lines against the 800 domain `max-lines` ceiling with NO
+  size-baseline grandfather, and `tests/lint/sizeBaseline.test.js` is an
+  EXACT-SET, TOLERANCE-0 property — roughly seven added effective lines red
+  eslint AND the baseline walker. Every wave that touches `peaceTerms.js` obeys
+  the §1c writer-family law: capability in lazy leaf siblings, peaceTerms gains
+  only net-zero seam lines (each seam line bought by moving an equal number of
+  read-model lines into a leaf in the same commit). §10 carries this as a
+  per-wave obligation.
 
 ---
 
@@ -143,7 +187,7 @@ mechanically.
 |---|---|---|
 | Treaty artifact: 11-term TERM_CATALOG across 7 families, 6 executor kinds, codepoint-frozen for the walker | `peaceTerms.js:164-188`, freeze `:190-194` | BUILT, 89/89 focused green |
 | Every stream/status term REQUIRES `expiresTick` — perpetual extraction unrepresentable | TermRecord `peaceTerms.js:399-415` | BUILT |
-| §13 stacking (one term per family, TOP_ASSETS=3) | `draftTerms peaceTerms.js:426-478` | BUILT |
+| §13 stacking (one term per family, TOP_ASSETS=3) | `draftTerms peaceTerms.js:426-478` | BUILT — war-door shape, unchanged; the beneficiary axis for `provenance:'negotiated'` lineage (§1c, §4) is NEW WORK carrying its own pins [CORRECTED 2026-08-02 (fp-audit)] |
 | Victor budget from BELIEVED margin; white peace below CLEAN_EXIT_FLOOR=0.08 | `termBudgetFor`; appraisal `:326-384` | BUILT — war-side only; NOT reused in peace (§1c) |
 | Treaty clock: `treatyTicksPerYear: 52` on new treaties, identity-pinned to `INTERVAL_WEEKS.one_year`; legacy 12 by explicit marker | `treatyClock.js`; WR-0c item (4) LANDED | BUILT — the provenance discipline GR-1 reuses |
 | Sole mint path: advanceTreaties PASS 1, war-exit only (de-escalation off `hostile` + fresh `sue_for_peace`); `mintTreaty` module-internal; sole engine caller `pulseKernel.js:2371` | `peaceTerms.js:643-682` | BUILT — the one-seam fact this program widens |
@@ -175,7 +219,12 @@ mechanically.
 | `negotiationPictures.js` (the two-picture wrapper): NEW WORK homed in WR-7 | war volume §3 | ABSENT — BUILD-PRECONDITION for GR-2/5 (§9) |
 | `warIntents` ledger (W1): landed with WR-0 | war volume §4/WR-0 Progress | BUILT — GR-6's pre-war mediation surface; VERIFY-AT-BUILD its read shape |
 | SP-2 believed subjects, SP-4 `postureOf`/`riskToleranceOf`, SP-1 errands, SP-6 narration kit, SP-7 temporal walker | DESIGN_FP_SPINE.md §2 | SPINE WORK — build-preconditions per §9; VERIFY-AT-BUILD their landed shapes |
-| Dossier surfaces: WarFaithTab treaty block (house voice), TreatyPanel (Realm Inspector via HeraldBody), PDF export | `WarFaithTab.jsx:110-134`; `TreatyPanel.jsx`, `HeraldBody.jsx:227`; `pdf/lib/liveWorld.js:254-261` | BUILT — every GR dossier round-trip lands on these three |
+| Dossier surfaces: WarFaithTab treaty block (house voice), TreatyPanel (Realm Inspector via HeraldBody), PDF export | `WarFaithTab.jsx:110-134`; `TreatyPanel.jsx`, `HeraldBody.jsx:227`; `pdf/lib/liveWorld.js:254-261` | BUILT — every GR dossier round-trip lands on these three, PLUS the chronicle (wizard_news-routed, already live) |
+| Turning-point RENDERING: `turningPoints` lives in four domain modules and in ZERO components and ZERO pdf sections (grep re-verified 2026-08-02) | `relationshipState.js:136` (archive) vs `src/components`, `src/pdf` | ABSENT — the archive is a domain record only; GR-2/GR-6 land their memory surfaces on the chronicle + WarFaithTab lines instead [CORRECTED 2026-08-02 (fp-audit)] |
+| Ruler-person read: NO `rulerOf`/`seatHolder`/`legitimatePowerOf` exists anywhere in `src/domain`; `rulingPower.js` deals in faction/power NAMES, never npc ids | grep re-verified 2026-08-02 | ABSENT — GR-1's `oathHolderOf` is NEW WORK, not read-wiring [CORRECTED 2026-08-02 (fp-audit)] |
+| Compliance history: `complianceState` (term and treaty) is OVERWRITTEN every advance from the current tick's observation; nothing persists a worst-ever mark or strike count | `peaceTerms.js:407-408, :458, :728, :759-768` | ABSENT — GR-5's `worstObservedEver` is NEW WORK [CORRECTED 2026-08-02 (fp-audit)] |
+| Actor-major routing: gated on OPT-IN `simulationRules.routineMajorApproval === true`, DELIBERATELY absent from DEFAULT_SIMULATION_RULES (dark in every default/golden/soak profile); the hold queue EXPIRES TO DECLINE | `actorMajorApproval.js:14-31, :75-76, :103, :122-136` | BUILT — GR-4 declares BOTH modes and its HONOR-terminal divergence explicitly [CORRECTED 2026-08-02 (fp-audit)] |
+| `peaceTerms.js` size: 794 effective lines vs the 800 domain ceiling, no baseline grandfather | eslint max-lines measure, 2026-08-02 | HAZARD — the §1c writer-family law is the cure; §10 per-wave obligation [CORRECTED 2026-08-02 (fp-audit)] |
 
 **The census STOP rule (J-WR-13's discipline, adopted):** any implementer finding
 this table overstating the tree STOPS and reports rather than building on it.
@@ -191,7 +240,7 @@ owner-signed points:
 |---|---|---|
 | `treatyLifecycleVoiceEnabled` | lapse beat, detection beat, longevity voice, the lie-revealed tie, DM true-state chip | GR-0 |
 | `oathHolderEnabled` | sworn stamps on treaties + credit obligations; the succession question; `succession_repudiation`; the repudiation credibility charge | GR-1, GR-4 |
-| `pactFormationEnabled` | the proposal ledger, four peacetime triggers, two-sided drafting, the standalone NAP, the faith/population/mutual-defense terms | GR-2, GR-3 |
+| `pactFormationEnabled` | the proposal ledger, four peacetime triggers, two-sided drafting (amendment-shaped — §1c), the standalone NAP, the war-overtaken closure (`broken_by_war`), the faith/population/mutual-defense terms, AND the war-end draft-lens extension (a DISCLOSED lit-path shift on a landed feature — J-GR-14) | GR-2, GR-3 |
 | `treatyRenewalEnabled` | the renewal window, renegotiation-from-strength, compelled-alliance conversion | GR-5 |
 | `mediationGeneralizedEnabled` | intent-stage mediation, fraying-pact mediation, the temple arm | GR-6 |
 
@@ -204,6 +253,29 @@ and `mediationGeneralizedEnabled` are independent. GR-4's succession question
 requires `oathHolderEnabled` only (same flag, second slice). Lighting order = build
 order (GR-0 → GR-1 → GR-2/3 → GR-4 → GR-5 → GR-6); a flag lit out of order is an
 invalid config the GR-7 certification walker reds.
+[CORRECTED 2026-08-02 (fp-audit)] DECLARED CROSS-PROGRAM INTERACTIONS (this table
+was silent on them; silence was the defect):
+- `envoyDiplomacyEnabled` (WAR program, WR-7): `pactFormationEnabled` is valid
+  under BOTH transports, but lighting envoy SHIFTS pact timing (leg-priced dwell
+  replaces the abstract clock, agreeing only within a band) and INTRODUCES LOSS —
+  an intercepted or DM-KILLed carrier expires the proposal unanswered, an outcome
+  the dark transport can never produce. This is a disclosed same-seed shift at
+  lighting time. Every formation-trigger receipt records its TRANSPORT MODE so a
+  soak's formation numbers are attributable to a transport, and the GR-7
+  certification walker asserts the cross-flag combination is legal in both
+  states (it reds only on GRAMMAR-internal order violations otherwise).
+- `oathHolderEnabled` × `pactFormationEnabled`: GR-2's acceptance reserve reads
+  the oathbreaker-credibility band that only GR-4 writes. With `oathHolderEnabled`
+  dark the band reads clean-by-absence (no charge, no read — the declared
+  degraded arm); the counterforce bites only when both are lit. Recorded here so
+  the dependency is visible to the walker, not discovered at soak.
+- `seatBooksEnabled` (INTERIOR IN-1): GR-2's acceptance reserve names `booksOf`
+  as an INPUT behind `seatBooksEnabled` AND `pactFormationEnabled`; dark ⇒
+  posture + risk only (declared degraded arm, receipt names which inputs it had).
+- `routineMajorApproval` (opt-in simulation rule, NOT a program flag): GR-4's
+  question queue exists only where it is explicitly true — GR-4 declares both
+  modes; the GR-7 succession-mix envelope is measurable ONLY on profiles that
+  set it (declared there).
 
 **THE FORMATION SEAM (this volume's largest architectural decision, binding):**
 peacetime formation does not fork the treaty machinery — it adds a SECOND DOOR to

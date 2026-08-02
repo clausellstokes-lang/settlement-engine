@@ -64,7 +64,13 @@ requirements are the density contract for every mechanism below.
   one is removed, killed, or dissolved by an information event. The spy is
   burned, never hanged by the engine; the accused house is shamed, never
   shuttered. Downstream falls happen through the existing legitimacy/coup
-  machinery on their own law.
+  machinery on their own law. ENFORCEMENT, not convention: no house-voice
+  string in this volume may apply a fate verb (hanged/killed/executed/exiled/
+  shuttered) to a named soul — a phrase scan over the volume's rendered
+  strings pins it (the same shape as the address-law scans). POPULATIONS'
+  R-28 headline-honesty class is ADOPTED volume-wide: a headline may never
+  assert an event that did not happen; the sentence's verb must be entailed
+  by the receipt's counts. [CORRECTED 2026-08-02 (fp-audit)]
 - **THE ONE-SUBSTRATE DISTANCE LAW:** five independent consumers price the SAME
   physical distance through one shared reader (latency hopWeeks, recency
   surcharge ×0.5, route impedance, fidelity attenuation 1/(1+0.75×delay), query
@@ -103,6 +109,15 @@ requirements are the density contract for every mechanism below.
 ### 1c Recorded hazards that WILL bite these waves (each has bitten this estate)
 - **Id-less news drop:** every `newsEntries.push` carries `id`; new kinds
   register in WHAT_PHRASES + heraldRouting or totality walkers red.
+  THE MINT-TIME REGISTRATION RULE [CORRECTED 2026-08-02 (fp-audit)]: every
+  wave registers its OWN kinds — WHAT_PHRASES + heraldRouting + the pacing
+  governor + the knowledge family's OWN-vocabulary token registration
+  (BEHAVIORAL_MOVER_FAMILIES.knowledge grows the new kind tokens, stated per
+  wave) — in the SAME commit that mints them, or that wave's own gate reds on
+  the totality walkers. IN-5(f) is NOT the registration home: it changes only
+  the SECTION already-registered kinds route to, plus the desk itself. Each
+  minting wave's pin list carries "registration complete for kinds minted
+  this wave."
 - **Writer/reader payload-spelling drift:** every new consumer of an existing
   ledger gets a pin that boots the REAL writer and reads through the REAL
   reader (the plant fold and the disclosure executor are exactly this shape).
@@ -158,7 +173,14 @@ any informational casus belli (the 13 WAR_REASON_TYPES carry none; corruption_
 exposed is revelation-as-grievance) · an inaction receipt (the pulse narrates
 selections, never refusals-to-select) · any arc machinery (the spy is one tick,
 exposure-only) · a knowledge Herald desk · the strength-axis divergence measure ·
-the lit/dark differential harness.
+the lit/dark differential harness · WR-7d's SEND-TWO / envoy-vetting reader
+(SPEC-ONLY in DESIGN_WAR_RULINGS_ARCHITECTURE.md — executed grep 2026-08-02:
+zero `envoyErrand|sendTwo|SEND_TWO` hits in src/) · any non-strength belief
+axis for lies (DisinfoRecord is strength-typed in its own fields,
+informationStatecraft.js:500-509; the exposure comparator reads
+`belief.strengthBand` exclusively, :626-628; `CHANNEL_BELIEF_AXES.trade` is
+frozen EMPTY — BELIEVED SCARCITY / CONDITIONS / DEVOTION are SP-2 work that
+does not exist yet). [CORRECTED 2026-08-02 (fp-audit)]
 
 **Cross-volume bug notes (report, not build — spine: conflicts are bugs to
 report):** (1) `peaceTerms.js` avgTieStrength (:1231-1241, consumed :852-856)
@@ -187,18 +209,57 @@ byte-identical, golden-pinned first):
 | `reputationRaceEnabled` | race consumers at arrivals + who-knew-first outcome keys | IN-4 |
 
 **LIT-PRECONDITIONS (the war volume's flag-dependency ruling applies verbatim —
-independent dark switches, ORDERED lighting):** `infoLureEnabled` ⇒
-`informationBrokeragesEnabled` + `infoStatecraftEnabled` + `secondOrderBelief
-Enabled` (the lure aims through the mirror). `counterIntelEnabled` ⇒
-`infoStatecraftEnabled`; its mirror-gap evidence arm degrades dark (named
-degraded read: suspicion scores from exposure/contradiction evidence only when
-the mirror is dark — silence elsewhere means preconditions are hard).
+independent dark switches, ORDERED lighting) [CORRECTED 2026-08-02 (fp-audit)]:**
+
+*IN-0's four slices carry exact gate compositions (they ride existing flags,
+but the compositions were undeclared — a defect, now ruled):*
+- IN-0a (the fold) ⇒ `informationBrokeragesEnabled` (the commission writer) ×
+  `infoStatecraftEnabled` (the disinfo lifecycle it folds into). Either dark ⇒
+  byte-identical.
+- IN-0b (the intercept consumer) ⇒ `informationBrokeragesEnabled`.
+- IN-0c (the disclosure executor) ⇒ `peaceCausalActive` (warLayerEnabled AND
+  peaceEngineEnabled — the term's own gate, peaceTerms.js:24-27) ×
+  `allyIntelSharingEnabled` (the M9b machinery the feed rides). The term
+  MINTS, STRAINS, and EXPIRES as built when the ally-share flag is dark and
+  the feed simply does not execute — a NAMED DEGRADED ARM, pinned: a
+  lit-peace/dark-info world is byte-identical on belief state. The one-time
+  credibility credit at signing rides `infoStatecraftEnabled` (the stock's
+  own flag) × `peaceCausalActive` — a lit-peace/dark-statecraft world writes
+  no credit.
+- IN-0d (the trade tax) ⇒ `infoStatecraftEnabled` (the HIDE posture's flag);
+  dark, the exported factor is the 1.0 identity and trade bytes are
+  golden-fenced identical.
+
+*The wave flags:* `infoLureEnabled` ⇒ `informationBrokeragesEnabled` +
+`infoStatecraftEnabled` + `secondOrderBeliefEnabled` (the lure aims through
+the mirror) — AND, for the WEALTH and DEVOTION baits only, SP-2's
+subject-family extension (`beliefAxesEnabled` + the BELIEVED
+SCARCITY/CONDITIONS/DEVOTION families landing) is a HARD precondition: those
+axes do not exist in the tree (§2's Verified-ABSENT) and the weakness bait is
+the only one buildable ahead of them (§5 IN-2, J-INF-14). The war-side
+`enforceLiveStrength` constraint (WR-1, Amendment B) is an INTERACTION the
+lure must survive in BOTH states — named in IN-2's counterforces and ruled in
+J-INF-14; it is NOT a precondition in either direction.
+`counterIntelEnabled` ⇒ `infoStatecraftEnabled`; its mirror-gap evidence arm
+degrades dark (named degraded read: suspicion scores from
+exposure/contradiction evidence only when the mirror is dark — silence
+elsewhere means preconditions are hard); IN-3's SEND-TWO verb additionally
+depends on the WR-7d divergence reader, which is SPEC-ONLY today — J-INF-15
+rules ownership if INFO lights first.
 `reputationRaceEnabled` ⇒ `distancePricedNewsEnabled` (the story's leg of the
 race IS that machinery) + SP-1's flag for person legs (until SP-1 lights, the
 race runs only at arrivals the existing ledgers already stage: armies, exiles,
 refugee columns — a named degraded arm). Courier migration (IN-4) rides
-`intelTradeEnabled` × SP-1's flag, both lit. IN-5's desk routing is dark-safe
-(routing config moves no bytes while producers are dark); IN-6 has no flag.
+`intelTradeEnabled` × SP-1's flag, both lit.
+IN-5's DESK CONFIG is dark-safe (routing config moves no bytes while
+producers are dark) — but the `belief_misjudgment` REFILE is NOT dark-safe:
+its producer is gated on `beliefsActive` (spatial-canon marker AND `infoMode
+!== 'omniscient'`, beliefMap.js:195-205), and infoMode is an UNLOCKED
+DM-selectable rule with `perfect_delayed`/`full` shipping in preset spreads
+(simulationRules.js:370,416). The refile therefore changes Herald output for
+reachable, already-supported configurations: Herald goldens for those
+infoModes are captured FIRST and the one-time output shift is recorded in the
+ledger (§5 IN-5(a)). IN-6 has no flag.
 
 **SEAM CONTRACT ONE — THE FOLD (PLANT_WIRING, settled to land):** the bought lie
 enters the world through EXACTLY the existing lifecycle: `processLies` folds
@@ -237,10 +298,31 @@ sightPostures, credibility, intelTransfers). This volume's entire program adds:
 worldState.spatialLedgers.disinfo[]         — EXISTING ledger, EXISTING writer.
   IN-2 widens each record's closed subject vocabulary:
   subjectKind: 'strength' (today's bands) | 'scarcity' | 'conditions' | 'devotion'
-  // the three new kinds write the SP-2 banded subject families (BELIEVED
-  // SCARCITY / CONDITIONS / DEVOTION) through the same fold, decay on the same
-  // laws, expose on the same contradiction machinery. No new writer, no new
-  // lifecycle. intent: 'inflate' | 'deflate' stands as built.
+  // [CORRECTED 2026-08-02 (fp-audit)] The widening is REAL LIFECYCLE WORK,
+  // priced as such — the earlier "no new lifecycle, adds almost nothing"
+  // claim was a substrate error. The tree's truth: DisinfoRecord is
+  // strength-typed in its own fields (subjectId = "the strength being lied
+  // about", assertedBand/trueBand — informationStatecraft.js:502-505); the
+  // exposure comparator reads belief.strengthBand EXCLUSIVELY (:626-628);
+  // the exposure receipt is strength-worded (:655); and no scarcity/
+  // conditions/devotion belief axis exists (CHANNEL_BELIEF_AXES.trade is
+  // frozen empty; SP-2's families are unbuilt — §2 Verified-ABSENT).
+  // THE NEW WORK, named: the record generalizes to carry an explicit axis
+  // reference — axis: 'strengthBand' | <SP-2 family axis>, assertedValue,
+  // trueValue (assertedBand/trueBand stand as the strength spelling; absent
+  // axis ⇒ 'strengthBand', LEGACY SEMANTICS — old records load unchanged,
+  // the shape-migration pin); the contradiction comparator becomes
+  // AXIS-TYPED with a per-axis tolerance band; the exposure receipt prose
+  // becomes axis-aware ("that its granaries were emptier than they are",
+  // never a strength sentence on a scarcity plant); devotion targets a
+  // categorical label (faithLabel), so its contradiction test is
+  // label-inequality, not band distance — stated, not discovered. Each
+  // piece carries its own pin, incl. "a non-strength plant exposes by
+  // CONTRADICTION on a real fixture, not only by age." STILL ONE writer,
+  // ONE lifecycle, ONE exposure LAW (J-INF-3) — the law is now axis-typed;
+  // there is still no parallel ledger. The wealth/devotion baits are HARD
+  // BLOCKED on SP-2's families landing (§3 LIT-PRECONDITIONS).
+  // intent: 'inflate' | 'deflate' stands as built.
 
 worldState.spatialLedgers.sightPostures     — EXISTING; IN-3 adds NO fields.
                                             // Gains its first projection
@@ -317,52 +399,107 @@ wave lands them. Historical archetype, one clause each below.
   planted story is the input side of IN-2's baits).
 - **Pins (negative hardest):** a commissioned plant against a mark whose
   independent corroborated sources contradict it DIES at the fold (reconcile's
-  contradiction arm wins — the lure is resistible by good sourcing); a plant
-  whose market's credibility is already spent moves the mark's belief by ~
-  nothing (the weight floor 0.35 — buying from a proven liar buys little);
-  writer/reader pin boots the REAL commission writer and reads through the
-  REAL disinfo reader; reachability pin: in a generated lit corpus at least one
-  plant TAKES (lower-bound discipline); dormancy golden (dark = byte-identical).
+  contradiction arm wins — the lure is resistible by good sourcing); THE SPENT
+  MARKET [CORRECTED 2026-08-02 (fp-audit)]: the same plant from a
+  spent-credibility market moves the mark's belief STRICTLY LESS than from an
+  unmarked one, by a banded margin the fixture asserts (§7 names the expected
+  band) — NOT "by ~nothing": WEIGHT_FLOOR 0.35 is a discount, not silence
+  (the span is centred on 1.0, informationStatecraft.js:143-145), and the
+  honest sibling is pinned too: a FRESH, low-hop, complete plant from a
+  discredited market can still outweigh a stale, high-hop honest prior
+  (aggregateReports multiplies credibility against hop/recency/independence/
+  completeness, beliefMap.js:445-449) — that asymmetry is the drama, not a
+  bug; writer/reader pin boots the REAL commission writer and reads through
+  the REAL disinfo reader; reachability pin: in a generated lit corpus at
+  least one plant TAKES (lower-bound discipline); registration complete for
+  kinds minted this slice (`plant_took` — §1c's mint-time rule); dormancy
+  golden (dark = byte-identical).
 - **Lifecycle line:** disinfo records already persist/round-trip; the fold adds
   no shape change — the JSON-round-trip pin re-runs on a folded record; a regen
   that rebuilds the ledger preserves live plants or the DM-truth trace ghosts
   (the estate's most-bitten class — pinned).
 - **Dossier round-trip pin:** open the town page as DM — "Stories standing
   against this town" renders from `projectPlants` (today zero non-test
-  consumers; this slice mounts it, premium/DM-only, fail-closed). A DM must be
-  able to find every live lie aimed at the town where they'd look: the town.
-- **Bands:** take threshold, DM-projection significance floor.
+  consumers; this slice mounts it, premium/DM-only). AUDIENCE TRUTH
+  [CORRECTED 2026-08-02 (fp-audit)]: `projectPlants` is fail-OPEN on its
+  default — `audience` defaults to 'dm' and returns records unchanged
+  (brokerageServicesPlant.js:369-373); only an explicit `audience: 'player'`
+  filters. The mount therefore passes `audience` EXPLICITLY, and the slice
+  adds an audience-projection pin: the player projection is empty for live
+  plants, and a call site omitting the parameter is caught by a source scan.
+  (The safer alternative — flipping the export's default to 'player' — is a
+  behavior change to a built export; J-INF-17 records it as the vetoable
+  road not taken.) A DM must be able to find every live lie aimed at the
+  town where they'd look: the town.
+- **Bands:** take threshold; the DM-projection line's significance is a CLASS
+  ASSIGNMENT into the spine's SP-6 significance family (routine — a hum),
+  never a volume-minted scale [CORRECTED 2026-08-02 (fp-audit)]. Both land in
+  §7.
 - Archetype: the Fugger newsletters' paid falsehoods — the market that sold
   word and wore the shame when word broke.
 
 **IN-0b — THE INTERCEPT CONSUMER.** brokerage_intercept stops being
 narrative-only.
+[The whole slice rewritten to instantiated fields — it discharged seven of the
+twelve requirements by pointer to IN-0a, whose shapes describe a different
+mechanism. CORRECTED 2026-08-02 (fp-audit).]
 - **Model:** the intercept act grants the patron ONE claim — constructed by
   `claimFrom` (the only claim constructor, as built) — about the rival's most
   recent OUTBOUND ledgered act within the market's reach (an intelTransfer, a
   feed contract's existence, a commission's existence at banded vagueness —
   never its content at full fidelity). Nothing in reach ⇒ the honest refusal
-  token (the five-token vocabulary extends by zero — reuse `nothing_to_sell`;
-  VERIFY-AT-BUILD the token list).
-- **Force / counterforce:** the force is bought awareness of a rival's traffic;
-  the counterforce off the same evidence is the rival's HIDE posture (already
-  degrades paid eyes) and IN-3's sweep — interception is exactly the evidence
-  class that arms the counter-game.
+  token `no_record` — QUERY_REFUSALS' built token for "the register holds
+  nothing about that" (brokerageServices.js:320-322; the five-token vocabulary
+  extends by ZERO; the earlier `nothing_to_sell` named a token that exists in
+  NEITHER frozen refusal vocabulary and must not be minted).
+- **Force / counterforce:** the force is bought awareness of a rival's
+  traffic. The counterforces off the same evidence, honestly priced: (1) THE
+  FOG COMPOSE — NEW WORK, named as such: HIDE's built degradation is
+  sight-posture-specific and does NOT touch the outbound-ledger read this
+  intercept rides, so this slice WIRES it — the rival's HIDE posture composes
+  into the intercept's reach/vagueness read (the existing −0.7 rivals'-reads
+  fog factor applied at the claim's vagueness band), with its own pin: an
+  intercept against a HIDE court reads at degraded vagueness or refuses.
+  (2) IN-3's sweep — interception is exactly the evidence class that arms the
+  counter-game — but IN-3 lights LATER behind `counterIntelEnabled`: between
+  the two lightings the intercept's only opposition is the fog compose plus
+  the act lane's own cooldown/cap, a DECLARED bounded gap (anti-hum law), not
+  an accident.
 - **Belief posture:** the claim lands as a belief record at the stamp ladder's
   rung, never as truth (a bought intercept can be WRONG — fidelity law).
-- **Casting / receipts / clock / posture / endings / couplings / lifecycle:**
-  as IN-0a's shapes — the act exists; this slice only lands its consumer.
-  Receipt (house voice): "Word passes quietly between courts — and quieter
-  still, someone reads it."
+- **Casting:** the market's named reader plane fronts the claim (the broker
+  who "reads what passes"); the rival's side is the ledgered act's own
+  attribution (courier, factor, seat) — read-wiring, no new NPC state.
+- **Receipts (house voice):** "Word passes quietly between courts — and
+  quieter still, someone reads it." (hum, DM-gated; the claim's own line
+  lands on the patron's intelligence surface with its stamp rung.)
+- **Clock:** the act lane's own cadence — cooldown/cap per the
+  INTEL_TRADE_TUNING idiom (§1b's anti-hum house shape); fast layer = the
+  claim landing the tick the act resolves; slow verdict = the counter-game it
+  arms (caught intercepts persist as IN-3's suspicion evidence and decay on
+  that ledger's law).
+- **Posture/risk:** commissioning an intercept consumes SP-4 (a trusting
+  court buying eyes on a friend is out-of-posture, priced and receipted).
+- **Endings entries:** intercept {read, refused, caught} — `read` and
+  `refused` minted HERE (the claim delivered / the honest `no_record`);
+  `caught` minted by IN-3's sweep (the cross-wave producer, declared — the
+  caught-intercept evidence line). Share envelope in IN-6.
+- **Couplings:** INFO×INFO — the intercept arms IN-3's suspicion read (its
+  row rides IN-3's coupling entry in DESIGN_FP_COUPLINGS.md).
+- **Lifecycle line:** NO new persisted state — the claim is a belief record
+  under beliefMap's existing round-trip pins; the act receipt rides the
+  existing act ledger.
 - **Pins:** the negative — an intercept against a rival with an EMPTY outbound
-  record refuses honestly (vacuous-absence discipline: the positive pin seeds a
-  real transfer first); the claim rides claimFrom (a grep pin: no second claim
-  construction site); dormancy.
-- **Dossier round-trip pin:** the patron's town page (DM view) shows the bought
-  claim in its intelligence lines with its stamp rung — same surface the query
-  answer lands on.
+  record refuses honestly with `no_record` (vacuous-absence discipline: the
+  positive pin seeds a real transfer first); the claim rides claimFrom (a grep
+  pin: no second claim construction site); the fog-compose pin (above); the
+  closed-vocabulary pin re-asserts QUERY_REFUSALS unchanged; dormancy.
+- **Dossier round-trip pin:** the patron's town page (DM view) shows the
+  bought claim with its stamp rung — VERIFY-AT-BUILD: the "intelligence
+  lines" surface the query answer lands on (fallback landing if absent: the
+  DM intelligence block IN-0a's panel work mounts). [R9]
 - **Bands:** intercept vagueness band, reach radius (rides the existing market
-  reach read).
+  reach read), the act cooldown/cap — all in §7.
 
 **IN-0c — THE DISCLOSURE EXECUTOR (compelled intel).** The 'disclosure' peace
 term executes. Archetype: the opened arsenals of a dictated peace — inspection
@@ -372,7 +509,15 @@ as a treaty article.
   edge; style: lawful relay ×0.95 — compelled truth, not styled deception),
   plus the one-time credibility credit at signing (the recorded W-PEACE seam,
   informationStatecraft.js:1460-1464, closed here). Strain/expiry stand as
-  built for the term family.
+  built for the term family. Gate composition per §3's LIT-PRECONDITIONS
+  (peaceCausalActive × allyIntelSharingEnabled, with the named degraded arm).
+  THE HOT-FILE LAW [CORRECTED 2026-08-02 (fp-audit)]: peaceTerms.js sits at
+  its size ceiling (R2's ruling binds) — the executor lands in a LAZY LEAF
+  SIBLING consuming peaceTerms' exports (the disclosure term's minting,
+  compliance, and expiry stay peaceTerms'); peaceTerms itself gains only
+  net-zero seam lines. The disclosure term's catalog identity is GRAMMAR's
+  canonical term-family list (R3) — this slice is a CONSUMER, never a second
+  speller.
 - **Force / counterforce:** the force is the opened court; the counterforce off
   the same evidence is the term's OWN compliance machinery — a strained
   disclosure feeds thinner (fidelity follows compliance state), and a defaulted
@@ -391,8 +536,13 @@ as a treaty article.
   item-4 law: current treaties 52-week years); feed cadence per pulse; the slow
   verdict is the credibility credit's decay.
 - **Posture / endings / couplings:** consumes SP-4 on the loser side (a proud
-  posture strains the term earlier — priced); endings ride the treaty's own
-  endings (held/strained/defaulted/expired) — no new vocabulary; INFO×GRAMMAR
+  posture strains the term earlier — priced); endings ride the term's own
+  TERM COMPLIANCE STATES {honored, strained, defaulted, expired} — the
+  per-term union peaceTerms owns (TermRecord.complianceState,
+  peaceTerms.js:405-406), spelled VERBATIM ("honored", not "held"), and
+  DISTINCT from GRAMMAR GR-7's closed per-treaty PACT ENDINGS vocabulary,
+  which this slice neither touches nor extends — no new vocabulary either
+  way [CORRECTED 2026-08-02 (fp-audit)]; INFO×GRAMMAR
   row in DESIGN_FP_COUPLINGS.md.
 - **Pins (negative hardest):** an EXPIRED disclosure term feeds NOTHING the
   next pulse (the fast stop); a defaulted term mints the default receipt and no
@@ -400,9 +550,14 @@ as a treaty article.
   real drafted treaty carrying disclosure executes in a lit fixture; dormancy.
 - **Lifecycle line:** the term already persists on the treaty; the executor
   adds no state — regen/undo ride the treaty record's existing pins.
-- **Dossier round-trip pin:** the treaty document (existing surface) shows the
-  disclosure article LIVE/strained/lapsed; the victor's town page intelligence
-  lines show the compelled feed as a source with its stamp.
+- **Dossier round-trip pin:** the treaty document shows the disclosure
+  article LIVE/strained/lapsed — VERIFY-AT-BUILD: the treaty-document surface
+  and its article rendering (fallback landing if absent: the settlement
+  brief's treaty lines); the victor's town page shows the compelled feed as a
+  source with its stamp — VERIFY-AT-BUILD: the intelligence-lines surface
+  (fallback: IN-0a's DM intelligence block). [CORRECTED 2026-08-02
+  (fp-audit), per R9 — pins assert only survey-verified surfaces or carry
+  the mark and the fallback.]
 - **Bands:** disclosure fidelity band, strain→fidelity map.
 
 **IN-0d — HIDE'S TRADE TAX.** The narrated toll becomes an enforced read.
@@ -422,11 +577,31 @@ Archetype: sakoku — seclusion priced in trade.
   (identity — no ambient tax); the factor is banded and capped (colours, never
   drowns); dormancy golden on the trade side (dark flag ⇒ trade bytes
   identical — the fence captured FIRST).
-- **Clock / posture / endings / lifecycle / bands / dossier:** posture entry
-  already consumes SP-4 (IN-3 adds the response entry path); no state; band =
-  the tax curve per secrecy band; dossier round-trip: the town page's trade
-  lines show the toll's band word next to the gate posture ("sealed, and
-  paying for it") — one glance, one sentence, per the legibility law.
+[The compound bullet unpacked — clock, endings, and casting were listed and
+never given. CORRECTED 2026-08-02 (fp-audit).]
+- **Clock:** the factor is a PER-PULSE pure read that follows the HIDE
+  posture's own enter/exit hysteresis (one clock, not two across the TRADE
+  seam — the cadence is stated here precisely because the consumer lives in
+  another volume). Fast layer = the toll appearing at the counting-house the
+  week the gates shut; slow verdict = the trade relationships that do not
+  come back when they lift. Weekly ticks; SP-7 asserts.
+- **Casting:** the gate-keeper / harbour-master plane fronts the hum,
+  read-wired from existing roles — no new NPC state.
+- **Endings entries:** NONE OF ITS OWN — a deliberate no-new-vocabulary
+  ruling, not an omission: the toll rides HIDE's existing posture
+  transitions (enter/hold/exit), which are already receipted; what IN-6
+  grades is the TOLL INCIDENCE envelope (share of settlement-weeks paying a
+  non-identity factor, banded), declared there.
+- **Posture:** posture entry already consumes SP-4 (IN-3 adds the response
+  entry path).
+- **Lifecycle line:** no state — a pure exported read; nothing to regen,
+  undo, or migrate.
+- **Bands:** the tax curve per secrecy band — in §7.
+- **Dossier round-trip pin:** the town page's trade lines show the toll's
+  band word next to the gate posture ("sealed, and paying for it") — one
+  glance, one sentence, per the legibility law. VERIFY-AT-BUILD: the
+  trade-lines surface (fallback landing: the settlement brief's trade
+  sentence). [R9]
 
 ### IN-1 — THE MIRROR (second-order belief; flag `secondOrderBeliefEnabled`)
 SP-2's settled ruling elaborated: a banded "what they likely believe of us"
@@ -445,12 +620,22 @@ had been shown.
 - **Law / force / counterforce:** the force is self-knowledge — a court that
   knows what it has shown can bluff, lure, and negotiate deliberately. The
   NAMED counterforce, scoring off the SAME record: THE MIRROR LIES BY
-  OMISSION — it derives only from OUR outbound ledger and cannot see the
-  observer's independent sources, so mirror confidence DEGRADES on every
-  evidenced independent arrival (an exposure event, a caught intercept, an act
-  by them inconsistent with the shown picture — "they act on what we never
-  showed them"). Overconfidence in the mirror is the priced failure mode, and
-  the degradation receipt names the inconsistent act.
+  OMISSION — it derives only from OUR record and cannot see the observer's
+  independent sources, so mirror confidence DEGRADES on evidenced
+  independent arrival. THE EVIDENCE SOURCE, NAMED AND INSIDE THE FENCE
+  [CORRECTED 2026-08-02 (fp-audit)] — the degradation arm was a ratchet as
+  first written (its inputs sat outside its own recursion fence): the
+  inconsistency evidence is OUR OWN RECEIVED-EVIDENCE RECEIPTS, all
+  first-person ledgers — (a) our exposure receipts (a lie of ours exposed IN
+  that court), (b) our caught-intercept receipts (they read our traffic —
+  they know things we never showed), and (c) OUR OWN BELIEF RECORD of their
+  acts ("what our court has heard they did") where the heard act is
+  inconsistent with the shown picture — never a read of the observer's
+  actual belief map or true selections (that would be the K3 true-state read
+  Law One forbids; what we have HEARD can itself be wrong, and the mirror
+  degrading on false word is correct behavior, not a bug). Overconfidence in
+  the mirror is the priced failure mode, and the degradation receipt names
+  the inconsistent act as WE heard it.
 - **Belief posture (Law One):** the mirror models the RECORD's implication,
   never the observer's mind. The band vocabulary says so on every surface:
   "the record suggests", "they have been shown", never "they believe".
@@ -458,7 +643,11 @@ had been shown.
   spokesperson plane ("the chancellor keeps the ledger of what the neighbours
   have been given to see") — read-wiring only.
 - **Receipts (house voice):** band-crossing hum `mirror_shift`: "By its own
-  ledger, [X] now counts for less in [Y]'s eyes than it did a year ago."
+  ledger, [X] has shown [Y] less than it did a year ago — and shown it
+  nothing since [season]." [CORRECTED 2026-08-02 (fp-audit) — the earlier
+  "in [Y]'s eyes" wording asserted the observer's perception, exactly the
+  claim Law One forbids; the record voice is the fixed acceptance string,
+  §8 matches verbatim.]
 - **Clock:** staleness bands denominate in weekly ticks against each input
   ledger's own half-life; the fast layer is the outbound act (the mirror moves
   the tick we show something); the slow verdict is staleness — an unshown year
@@ -474,12 +663,21 @@ had been shown.
 - **Pins (negative hardest):** THE EMPTY-RECORD NEGATIVE — with zero outbound
   entries toward an observer the mirror returns UNKNOWN at zero confidence,
   never a fabricated band (and the pin seeds a non-empty sibling to dodge the
-  vacuous-absence trap); THE RECURSION FENCE — `secondOrderBelief.js`'s import
-  list is pinned to EXCLUDE beliefMap's observer-side reads (it may read our
-  own outbound ledgers only), token scan + guard-the-guard per §1b (the
-  positive control points at a module that legitimately reads the observer's
-  map — beliefMap itself); determinism (two identical records, two identical
-  mirrors); dormancy golden.
+  vacuous-absence trap); THE RECURSION FENCE, AS AN ALLOW-LIST [CORRECTED
+  2026-08-02 (fp-audit)] — `secondOrderBelief.js`'s import list is pinned to
+  the NAMED set: our outbound ledgers PLUS our own received-evidence receipts
+  (the counterforce's three inputs above) — and to EXCLUDE beliefMap's
+  observer-side reads; the token scan still bites on any read of the
+  observer's belief slot, guard-the-guard per §1b (the positive control
+  points at a module that legitimately reads the observer's map — beliefMap
+  itself); THE REVERSAL PIN — a court that acts inconsistently with the
+  shown picture drives mirror confidence measurably DOWN on a real fixture
+  (the degradation arm is reachable, or the mirror is a ratchet);
+  determinism (two identical records, two identical mirrors); registration
+  complete for kinds minted this wave (`mirror_shift` — §1c's mint-time
+  rule); THE PHRASE SCAN — the mirror's rendered strings contain no
+  perception verb (no "believes", no "in their eyes"; the band vocabulary
+  enforced, not stated); dormancy golden.
 - **Lifecycle line:** NO persisted state — nothing to regen, undo, or migrate;
   the pin is that a save/load round-trip yields an identical derived mirror
   (pure function of persisted inputs).

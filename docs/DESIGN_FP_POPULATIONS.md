@@ -108,10 +108,16 @@ pronounces death after a 104-tick dwell and rebirth after 52 fallow ticks (BUILT
 
 ### 1c Recorded hazards that WILL bite these waves (each has bitten this estate)
 - **The id-less news-drop class** — every `newsEntries.push` carries `id`; every
-  new kind registers in WHAT_PHRASES + heraldRouting or the totality walkers red.
-  Minting a new impactKind reds THREE registration walkers (demographicsHerald.js
-  :22-31's own recorded refusal) — POP-6 pays that cost DELIBERATELY; no other
-  wave mints one as a side effect.
+  new kind registers in ALL THREE walkers — WHAT_PHRASES (settlementRumors.js),
+  EXPECTED_VOICE (tests/domain/impactKindWalkers.test.js — the walker the Herald's
+  own header names), and heraldRouting.js — or the totality walkers red
+  (demographicsHerald.js:22-31's own recorded refusal). [CORRECTED 2026-08-02
+  (fp-audit): the earlier checklist named only two of the three walkers, and the
+  "POP-6 mints alone" budget was false to this volume's own waves — POP-1/2/4/5a/5b
+  each mint kinds. The budget now reads: every wave's Herald contract carries an
+  explicit **Kinds MINTED / kinds RIDDEN** line; a kind absent from its wave's line
+  is a defect; POP-6 remains the bulk minting wave and its walker commit asserts
+  the program's full kind roster.]
 - **Writer/reader payload-spelling drift** — every new ledger gets a pin booting
   the REAL writer and reading through the REAL reader.
 - **Vacuous absence pins** — a `toHaveLength(0)` against a harness that defaults
@@ -121,13 +127,25 @@ pronounces death after a 104-tick dwell and rebirth after 52 fallow ticks (BUILT
   unless a wave explicitly declares a fork.
 - **Unreachable predicate conjunctions** — every gate composed of ANDed predicates
   gets a reachability pin on real generated corpora (the permit table below is
-  the live example: three authored columns, zero consumers).
+  the live example: FOUR authored columns dark — levy, institution, trade, AND
+  promotion, whose P3 response gates on mechanical refusals only, never the grade
+  — one consumer, founding). [CORRECTED 2026-08-02 (fp-audit): the earlier count
+  of "three authored columns" undercounted; `promotion` is authored false at
+  failing/evacuating/remnant and read nowhere.]
 - **The headline-honesty class (R-28, CONFIRMED open)** — a headline may never
   assert an event that did not happen (the refused-exodus line says "left" when
   departures=0). Every POP headline carries an honesty pin: the sentence's verb
   is entailed by the receipt's counts.
 - **The JSON-alias trap** — factions[].members[] ARE npcs[] in memory; every
   fixture that touches roster + ledger JSON-round-trips.
+- **The wizard-news id skew** [CORRECTED 2026-08-02 (fp-audit): added — the wave
+  most likely to trip it had no warning] — commons beats carry ids of the form
+  `wizard_news.${tick}.${rung}.${sid}` (commonsVoiceKernel.js:168), and every
+  `wizard_news.*` id classifies as moverFamily `knowledge`. PROHIBITION: such an
+  id is never declared on a certification row's eventTypes/moverFamilies channels
+  (it silently mis-attributes the lane) — POP-7's commons row declares stateKeys
+  channels ONLY, and POP-2's beat author sees this rule restated at the point of
+  minting.
 
 ---
 
@@ -144,7 +162,7 @@ pronounces death after a 104-tick dwell and rebirth after 52 fallow ticks (BUILT
 | Transit columns on the existing migration ledger, travelClass mutex vs M4; arrivalTick = tick + max(1, ceil(lived)); P2 columns zero road mortality BY DESIGN (named-cause deferral) | `spatial/migration.js:474-485`, `demographicsMigration.js` header 36-43 | BUILT |
 | M4 crisis flight: 4-axis destination choice incl. cultureAffinity01 (0.26) + refuge posture (W_REFUGE 0.18); TWO mortality sinks (originDeaths, roadDeaths) — **which emit NO news of any kind** | `spatial/migration.js:100-114, 228-268, 349-420`; `migrationKernel.js` (517 lines, zero news) | BUILT, road deaths SILENT |
 | P3 plans: one per settlement, provisioned, failure-capable, PATIENCE 78; closed RESPONSE_REFUSALS incl. `absorbed`; foundings via the ONE mint; **plan lane emits ZERO news** | `demographicsPlans.js`, `demographicsResponses.js:132-140, 322-332` | BUILT, decision story receipt-only |
-| §7b viability ladder: five grades, 5×6 authored permit table, default-false lookup — **ONE consumer (founding); levy/institution/trade columns DARK; destination column CONTRADICTED by the stricter wired P2 gate** | `demographicsLadder.js:85-87, 209-213`; `demographicsResponses.js:244`; `demographicsMigration.js:293,311` | BUILT, ¾ dead vocabulary — POP-5 consumes; J-POP-11 reconciles |
+| §7b viability ladder: five grades, 5×6 authored permit table, default-false lookup — **ONE consumer (founding); levy/institution/trade/promotion columns DARK (the P3 promotion response gates on `no_next_tier`/`no_headroom` only, never the grade); destination column CONTRADICTED by the stricter wired P2 gate** | `demographicsLadder.js:85-87, 209-213`; `demographicsResponses.js:244`; `demographicsMigration.js:293,311` | BUILT, 5 of 6 columns dead vocabulary — POP-5 consumes; J-POP-11 reconciles [CORRECTED 2026-08-02 (fp-audit): promotion added to the dark census] |
 | P4 risk couplings: diseaseLift01 (cap 0.22), raidLift01 (cap 0.20), continuous, at the ONE pressure seam; no realm total reachable inside the deriver (source-scanned) | `demographicsRisk.js`, `pressureModel.js:226-254` | BUILT |
 | P4 war motive: perceivedScarcityOf — **the ONE belief selector any population math consumes today**, with the `mistaken` flag + honest receipt clause; war got the belief read, migration did not | `demographicsWar.js:206-230`; `beliefAxes.js` populationTrendBand (flag `beliefAxesEnabled`) | BUILT for courts; ABSENT for migrants — POP-1's charter |
 | Named-cast floor: deaths draw anonymous pool only; repairs upward; cast-only towns still terminal-eligible | `npcReplacement.js:329-392`, `demographicsKernel.js:282-297` | BUILT |
@@ -164,12 +182,25 @@ pronounces death after a 104-tick dwell and rebirth after 52 fallow ticks (BUILT
 **Verified ABSENT 2026-08-02 (the surveys' gap census) — NEW WORK, each homed in a
 wave; never build on these as if they existed:** the belief arm in any pull
 evaluation (POP-1) · arrival-disappointment handling (POP-1) · the letters-home
-correction write (POP-1) · the commons REFUSAL rung + any consent input to the plan
-lane (POP-2) · draft resistance (POP-2/POP-5) · any departure-memory substrate
+correction write (POP-1) · **the arrival-side capacity clearing + the return
+column (POP-1) [CORRECTED 2026-08-02 (fp-audit): added — the landing stage today
+lands every column UNCONDITIONALLY (`demographicsMigration.js:465-467`);
+`accounting.returned` fires ONLY when a destination has vanished (:474-478), never
+on capacity; `no_capacity` is a PRE-departure word minted by competeForDestinations
+(:235,237) for migrants who never left. The turn-back bust is therefore NEW WORK,
+not "the existing arm" — POP-1 owns it]** · the commons REFUSAL rung + any consent
+input to the plan lane (POP-2) · the misrule-answering seat act (POP-2 — the built
+assize coupling answers only corruption-matched grievances, `assizeKernel.js:
+344-347`) · draft resistance (POP-2/POP-5) · any departure-memory substrate
 (POP-3) · a kin-pull arm (POP-3) · a sickness burial line + any calamity arc
 staging (POP-4) · column en-route events (POP-5) · road-death narration (POP-5) ·
-levy/institution/trade permit consumers (POP-5) · arrival/recovery/remembrance
-narration, plan-lane news, WHAT_PHRASES rows for the eleven fallback kinds (POP-6).
+any danger read in the migration leg cost (`populationLegCost` prices grade +
+season only — POP-5a's road-reputation counterforce is belief-side NEW WORK, not
+an existing read) · levy/institution/trade/promotion permit consumers (POP-5) ·
+arrival/recovery/remembrance narration, plan-lane news, WHAT_PHRASES rows for the
+eleven fallback kinds, any pacing governor that can SEE kernel-minted Herald news
+(POP-6 — narrativeTempo gates independent arc births only; `demographicsKernel.js
+:402` mints directly past it).
 
 **Open-defect register carried into this program (all CONFIRMED by the surveys or
 the comprehensive review; cross-referenced, never silently re-fixed):**
