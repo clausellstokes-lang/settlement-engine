@@ -256,3 +256,45 @@ band and go no deeper: THE ARTWORK IS THE END OF THE PAGE.
   still has it); legal-links presence ON the landing (Terms+Privacy reachable —
   an absence regression here is a legal defect, treated as such); welcomeJourney
   suite green.
+
+---
+
+## LD-4 — THE HERALD MINIATURE (owner-ordered 2026-08-01; implementation = the
+## external implementer; the living-miniature principle's second consumer)
+
+**The order:** the landing's "The Chronicle" card becomes **The Herald** and matches
+EXACTLY how the Herald looks on the Realm page — the real surface, miniaturized,
+not a facsimile.
+
+**Spec (LD-1's architecture verbatim, two deltas):**
+- The "Chronicle half" of `LandingArtifacts.jsx` (:353) is replaced by a second
+  `MiniatureFrame` mounting the REAL `HeraldBody` — the exact component
+  `RealmInspector.jsx` hosts — under the exact label and chrome the realm page
+  gives it. The exactness law: whatever the realm Herald shows (tabs, section
+  doors, severity presentation, pills), the miniature shows; facsimile elements
+  survive ONLY if the real surface has them. Fixed window + inner scroll per
+  LD-1 §4, same frame contract.
+- **Delta 1 — the data is world-side:** fixture v2 additionally emits the RAW
+  inputs `buildHeraldFeed` consumes (the pulse records + campaign wizard-news
+  entries + the read-only fourth source's inputs) from the same 12-tick run —
+  NEVER a pre-built feed. The landing runs the REAL derivation at mount, so the
+  demo exercises the actual pipeline. The facsimile excerpt fields
+  (`fixture.chronicle`, `fixture.relationships`) die with the facsimile (grep
+  for other consumers first). The promise-parity pin extends: the replay must
+  reproduce the herald feed digest, not just the settlement digest.
+- **Delta 2 — the store seam:** verify at build whether HeraldBody is
+  props-driven; if it reads the store, mount through the CONTROLLED-seam idiom
+  (the TC-0 precedent — supply feed/world via props, store path byte-untouched).
+  A second Herald renderer is FORBIDDEN (single writer for the surface).
+- Vocabulary note (first-contact clarity): "Chronicle" names the persistent
+  history ledger in-product; the news surface is THE HERALD. The rename aligns
+  the landing with the product's own nouns.
+
+**⚠️ THE HONEST CONSEQUENCE (recorded so the priority lands):** the real Herald
+renders the real sentences — including the legacy D-grade templates the blind
+grading flagged ("Cnocby shows enough conflict pressure for a new condition to
+emerge" is that exact class). The facsimile currently HIDES the product's worst
+voice; the miniature will EXPOSE it on the landing page. Correct response: the
+legacy receipt sweep (register R-refs; the prose-numerics/authoring walls Sol
+already landed are its enforcement half) graduates to LAUNCH-VISIBLE priority —
+the voice is fixed at the SOURCE, never faked on the landing.
