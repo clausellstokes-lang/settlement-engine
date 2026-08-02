@@ -44,8 +44,34 @@ message_receipts:  { messageId, userId, deliveredAt, readAt, dismissedAt }
   holds).
 - The list: newest first, unread emphasized, class-labeled chips (Service /
   Announcement), read-state per receipt; detail view renders the body + date +
-  a single reply affordance (§4). An unread indicator rides the ribbon's
-  Account control as a quiet dot (candlelight, not notification-red — tokens).
+  a single reply affordance (§4).
+- **THE UNREAD BADGE (owner order 2026-08-02, superseding the chair's quiet-dot
+  ruling — the owner's eye wins and is RIGHT: service notices are must-see, and
+  candlelight under-signals a moderation or security notice):** a small
+  RED-FILLED CIRCLE with a WHITE NUMERAL at the BOTTOM-RIGHT of the ribbon's
+  Account control, counting UNOPENED messages across both classes.
+  - ONE TRUTH, THREE RENDER POINTS: the count derives from receipts
+    (readAt null) and renders identically on (a) the Account button when the
+    dropdown is closed, (b) the MESSAGES ITEM inside the open dropdown — the
+    owner's "moves" behavior: on hover-open the button badge HIDES and the
+    item badge SHOWS, a simultaneous swap that reads as the count travelling
+    to its destination (no flying animation — the motion law permits the
+    settle micro-fade at most; nothing loops, nothing bounces), and (c) the
+    Messages tab label inside the Account page.
+  - ANATOMY + LAW: numeral caps at "9+"; ZERO IS ABSENT (the presence law — no
+    empty badge ever renders); the red is a NAMED TOKEN (the palette gains its
+    alert-register member — permitted in the CHROME register only, fenced from
+    parchment/manuscript surfaces by the Bound Book's chip law: operational
+    red never bleeds into the fiction).
+  - READ SEMANTICS: the count is per-MESSAGE (opening a message marks it read
+    and decrements live; visiting the section alone clears nothing — the
+    numeral means unopened messages, exactly as the owner said).
+  - A11Y: the control's accessible name carries the count ("Account — three
+    unread messages"); the badge itself is aria-hidden (the numeral is visual
+    reinforcement, never the only carrier).
+  - PINS: zero-absent both arms; the swap (button badge hidden while open +
+    item badge present, one fixture); the three render points against one
+    receipts read; the 9+ cap; the accessible-name count.
 - Presence law: the tab always exists for signed-in users (an empty Messages
   tab with the honest empty state beats a tab that pops into being with bad
   news as its first impression).
