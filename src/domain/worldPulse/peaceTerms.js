@@ -494,6 +494,22 @@ function draftReceipt(type, asset, years, magnitude) {
   }
 }
 
+/** @param {unknown} value */
+function humanTermGood(value) {
+  const text = String(value || 'the staple export').replace(/_/g, ' ').trim();
+  return text ? `${text[0].toUpperCase()}${text.slice(1)}` : 'The staple export';
+}
+
+/**
+ * Signing-card reason for one typed term. Exact magnitudes, durations and
+ * budget arithmetic stay on the treaty record; the feed names the obligation.
+ * @param {TermRecord} term @param {string} victorName @param {string} loserName
+ */
+function signingReason(term, victorName, loserName) {
+  if (term.type === 'resource_share') return `${humanTermGood(term.good)} will flow from ${loserName} to ${victorName}.`;
+  return `${loserName} accepts the ${termLabel(term.type)} demanded by ${victorName}.`;
+}
+
 // ── Compliance evolution (§12 — belief-monitored; a distant victor is cheated) ──
 
 /**
@@ -923,7 +939,10 @@ function mintTreaty(args) {
     headline: separateExit
       ? `${victorName} peels from the siege and makes a separate peace with ${loserName}`
       : `${victorName} dictates the peace with ${loserName}`,
-    summary: `A treaty is signed — ${terms.length} term${terms.length === 1 ? '' : 's'} at ${budgetSpent.toFixed(2)} of a ${round4(effectiveBudget).toFixed(2)} budget${mediator ? `, brokered by ${mediator.name}` : ''}.`,
+    summary: `${separateExit
+      ? `${victorName} makes a separate peace with ${loserName}, binding the defeated court to`
+      : `${victorName} binds ${loserName} to`} ${terms.map((term) => termLabel(term.type)).join(', ')}.${mediator ? ` ${mediator.name} brokered the settlement.` : ''}`,
+    reasons: terms.map((term) => signingReason(term, victorName, loserName)),
     // THE NEWS ADDRESS LAW's place layer. `parties` is this module's own vocabulary and no
     // feed consumer reads it (normalizeEntry, the rumor seeder, the panel's
     // AffectedSettlements and arcIdForEntry all read `settlementIds`), so without this the

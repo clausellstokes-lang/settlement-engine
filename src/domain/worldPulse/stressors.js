@@ -57,6 +57,86 @@ export { effectiveStressorSeverity };
 const SPREAD_ATTENUATION = 0.72;
 const SPREAD_SEVERITY_FLOOR = 0.2;
 
+// Pressure rows are analytic inputs shared by several engine lanes. A stressor
+// receipt projects their recurring bookkeeping phrases into world sentences;
+// the numeric score and typed kind stay on the candidate unchanged.
+/** @type {Readonly<Record<string, string>>} */
+const PRESSURE_REASON_SENTENCES = Object.freeze({
+  'winter raises food pressure': 'The deep winter tightens the granaries.',
+  'trade-dependent food access is strained': 'The town depends on food roads that no longer hold.',
+  'a trade-dependency supplier is in a food crisis': 'A town that feeds this one is itself going hungry.',
+  'housing pressure weakens containment': 'Crowded homes make sickness harder to contain.',
+  'military regional channel exists': 'A military road reaches the settlement.',
+  'a hostile neighbour relationship raises conflict pressure': 'A hostile neighbour keeps the border fearful.',
+  'hostile, cold-war, or rival relationships are exerting pressure': 'Old rivalries and open hostility bear on the settlement.',
+  'criminal opportunity drags on commerce': 'The underworld takes its share from honest commerce.',
+  'war-front regional channel exists': 'The war front reaches the settlement.',
+});
+
+// Origin analysis carries exact provenance and, for some variants, contender
+// weights or elapsed ticks. The receipt instead chooses from this closed
+// vocabulary; originContext itself remains on the stressor as machine evidence.
+/** @type {Readonly<Record<string, string>>} */
+const ORIGIN_REASON_SENTENCES = Object.freeze({
+  foreign_sponsored: 'A hostile neighbour has every motive to sponsor treachery.',
+  abandoned_agent: 'The old handler is gone, but the planted agent remains.',
+  internal_conspiracy: 'No foreign hand is evident; the knife came from inside.',
+  declared_war: 'An openly hostile neighbour stands behind the pressure.',
+  unattributed: 'No neighbouring court claims the attack; the force remains unnamed.',
+  resistance: 'Occupation has turned unrest into organized resistance.',
+  servile_uprising: 'Bound and broken labour rises against those who hold it.',
+  tax_revolt: 'The levies of a drowning treasury have broken the commons.',
+  popular_revolt: 'The streets have risen on their own, before any faction can claim them.',
+  arcane_burnout: 'A wild surge burned itself out and left dead ground behind.',
+  leyline_silence: 'The leylines have gone quiet, and no one yet knows why.',
+  barracks_coup: 'The barracks have found a commander willing to gamble for the seat.',
+  merchant_cabal: 'The counting houses have joined their purses against the seat.',
+  temple_putsch: 'The temples have chosen a champion against the ruling seat.',
+  palace_coup: 'A rival court has gathered enough allies to reach for the seat.',
+  arcane_ascendancy: 'The arcane houses have chosen a champion against the ruling seat.',
+  council_schism: 'The governing council has split, and one side now reaches for the seat.',
+});
+
+const READER_MODEL_TOKEN = /(?:\d+(?:\.\d+)?\s*%|\b\d+\.\d+\b|×|\b(?:score|chance|roll|multiplier|weight|gate|causal state|regional channel|ticks?)\b|[_→])/i;
+
+/** @param {unknown} value */
+function upperFirst(value) {
+  const text = String(value || '').trim();
+  return text ? `${text[0].toUpperCase()}${text.slice(1)}` : '';
+}
+
+/** @param {{ reasons?: unknown[], label?: unknown }|null|undefined} pressure */
+function readerPressureReasons(pressure) {
+  return (Array.isArray(pressure?.reasons) ? pressure.reasons : []).map((/** @type {unknown} */ raw) => {
+    const reason = String(raw || '').trim();
+    const active = /^active condition:\s*(.+)$/i.exec(reason);
+    if (active) return `${upperFirst(active[1])} already burdens the settlement.`;
+    if (/ derived from causal state$/i.test(reason)) {
+      return `The settlement's present condition makes ${String(pressure?.label || 'the danger').toLowerCase()} plain to see.`;
+    }
+    return PRESSURE_REASON_SENTENCES[reason]
+      || `The settlement's present condition gives ${String(pressure?.label || 'the danger').toLowerCase()} room to grow.`;
+  }).filter(Boolean);
+}
+
+/** @param {{ reasons?: unknown[] }|null|undefined} gate @param {string} label */
+function readerGateReasons(gate, label) {
+  const reasons = Array.isArray(gate?.reasons) ? gate.reasons : [];
+  return reasons.map((/** @type {unknown} */ raw) => {
+    const reason = String(raw || '').trim();
+    if (reason && !READER_MODEL_TOKEN.test(reason)) return reason;
+    return `Conditions here give ${String(label || 'the crisis').toLowerCase()} room to take root.`;
+  }).filter(Boolean);
+}
+
+/** @param {{ variant?: string }|null|undefined} originContext */
+function readerOriginReasons(originContext) {
+  if (!originContext) return [];
+  const variant = String(originContext.variant || '');
+  return [ORIGIN_REASON_SENTENCES[variant]
+    || 'The crisis has found roots in the settlement, though its first cause remains uncertain.'];
+}
+
 /**
  * @param {any} stressor
  * @param {any} snapshot
@@ -427,13 +507,13 @@ function candidateForTypeAndPressure(type, pressure, tick, extras = {}) {
     probability: Math.min(0.6, Math.max(0.02, Math.min(0.5, Math.max(0.07, pressure.score * 0.34)) * gateMult)),
     applyMode: major ? 'proposal' : 'auto',
     headline: `${stressor.label} may emerge`,
-    summary: `${pressure.settlementName} has enough ${pressure.label.toLowerCase()} for ${stressor.label.toLowerCase()} to become a realm stressor.`,
+    summary: `${stressor.label} is beginning to take root in ${pressure.settlementName}.`,
     reasons: [
-      ...pressure.reasons,
-      `${defaults.label} birth gate passed at ${pressure.score.toFixed(2)} pressure.`,
-      ...(gate?.reasons || []),
-      ...(echo ? [`Re-ignition: the last ${stressor.label.toLowerCase()} is still in living memory (echo ${(echo.memoryStrength ?? 0).toFixed(2)}).`] : []),
-      ...(originContext?.reason ? [originContext.reason] : []),
+      ...readerPressureReasons(pressure),
+      `${defaults.label} has found enough ${pressure.label.toLowerCase()} to take root.`,
+      ...readerGateReasons(gate, defaults.label),
+      ...(echo ? [`The last ${stressor.label.toLowerCase()} remains in living memory, and the old wound opens more readily.`] : []),
+      ...readerOriginReasons(originContext),
     ],
     stressor,
     metadata: {
@@ -441,7 +521,25 @@ function candidateForTypeAndPressure(type, pressure, tick, extras = {}) {
       durationPolicy: stressor.durationPolicy,
       spreadChannels: stressor.spreadChannels,
       residualEffects: stressor.residualEffects,
-      ...(originContext ? { originVariant: originContext.variant } : {}),
+      pressureEvidence: {
+        kind: String(pressure.kind || ''),
+        score: clamp01(Number(pressure.score) || 0),
+        sourceNotes: (Array.isArray(pressure.reasons) ? pressure.reasons : []).map(String),
+      },
+      ...(gate ? {
+        gateEvidence: {
+          probabilityMult: Number.isFinite(gate.probabilityMult) ? gate.probabilityMult : 1,
+          sourceNotes: (Array.isArray(gate.reasons) ? gate.reasons : []).map(String),
+        },
+      } : {}),
+      ...(originContext ? {
+        originVariant: originContext.variant,
+        originEvidence: {
+          variant: originContext.variant,
+          interpretedAtTick: originContext.interpretedAtTick,
+          sourceNote: String(originContext.reason || ''),
+        },
+      } : {}),
     },
     conflictTags: [`stressor:${type}:${targetSaveId}`, `settlement:${targetSaveId}:stressor_birth`],
   };
@@ -644,10 +742,10 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
         probability: Math.min(0.42, 0.08 + strongestPressure * 0.28),
         applyMode: severity >= 0.78 ? 'proposal' : 'auto',
         headline: `${stressor.label} may intensify`,
-        summary: `${stressor.label} has not resolved and matching pressure is still increasing.`,
+        summary: `${stressor.label} has not broken, and the forces feeding it are still gathering.`,
         reasons: [
-          `${stressor.label} remains active.`,
-          `Matching pressure ${strongestPressure.toFixed(2)} exceeds escalation gate.`,
+          `${stressor.label} still grips the settlement.`,
+          'The same forces that birthed the crisis continue to rise.',
         ],
         stressor: normalizeStressor({ ...stressor, severity }),
         metadata: {
@@ -685,10 +783,10 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
           // 0.78 / 0.72 > 1).
           applyMode: stressor.severity >= 0.78 ? 'proposal' : 'auto',
           headline: `${stressor.label} may spread`,
-          summary: `${stressor.label} can spread through ${stressor.spreadChannels.slice(0, 2).join(' and ').replace(/_/g, ' ')} channels, arriving attenuated at severity ${spreadSeverity.toFixed(2)}.`,
+          summary: `${stressor.label} can reach another settlement through the roads and ties that carry it, though it arrives with less force.`,
           reasons: [
-            `${stressor.label} is active at severity ${stressor.severity.toFixed(2)}.`,
-            `A plausible spread channel reaches another settlement; the crisis arrives attenuated to ${spreadSeverity.toFixed(2)} there.`,
+            `${stressor.label} still bears down hard at its source.`,
+            'A path to another settlement lies open, and distance dulls the blow.',
           ],
           stressor: normalizeStressor({
             ...stressor,
@@ -710,4 +808,3 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
 
   return candidates;
 }
-

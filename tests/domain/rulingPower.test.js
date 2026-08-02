@@ -102,6 +102,9 @@ describe('resolveCoupVerdict', () => {
     expect(verdict.holds).toBe(true);
     expect(verdict.pHold).toBeGreaterThan(0.1);
     expect(verdict.winner).toBeNull();
+    expect(verdict.reason).toContain('rallied enough of the court');
+    // anchored: the authored hold sentence above proves verdict prose is present.
+    expect(verdict.reason).not.toMatch(/\b\d+(?:\.\d+)?\b|×|\b(?:weight|multiplier|score|roll|chance)\b/i);
   });
 
   test('no challengers → the plot collapses on its own', () => {
@@ -254,12 +257,20 @@ describe('coup_detat catalog integration', () => {
       regionalGraph: { channels: [] },
       byId: new Map([['oakmere', { settlement, causal: { scores: { ruling_authority: 20 } } }]]),
     });
-    const birthsCoup = (snapshot) =>
+    const coupBirth = (snapshot) =>
       evaluateStressorRules(snapshot, { get: () => null }, { tick: 4, pressures: [pressure] })
-        .some(c => c.candidateType === 'stressor_birth_coup_detat');
+        .find(c => c.candidateType === 'stressor_birth_coup_detat');
+    const birthsCoup = (snapshot) => Boolean(coupBirth(snapshot));
 
     // Coup-ready: legitimacy crisis, weak authority, real challengers.
-    expect(birthsCoup(snapshotFor(settlementFixture()))).toBe(true);
+    const ready = coupBirth(snapshotFor(settlementFixture()));
+    expect(ready).toBeTruthy();
+    expect(ready.reasons).toContain('The barracks have found a commander willing to gamble for the seat.');
+    // anchored: the closed origin phrase above proves the coup receipt projection is populated.
+    expect(ready.reasons.join(' ')).not.toMatch(/\b\d+(?:\.\d+)?\b|×|\b(?:weight|multiplier|score|roll|chance|gate)\b/i);
+    expect(ready.metadata.gateEvidence.probabilityMult).toBeGreaterThan(0);
+    expect(ready.metadata.originEvidence.variant).toBe('barracks_coup');
+    expect(typeof ready.stressor.originContext.contenders[0].weight).toBe('number');
 
     // Tolerated legitimacy → nobody moves.
     const healthy = settlementFixture();
@@ -318,6 +329,9 @@ describe('coupVerdictOutcomes', () => {
     });
     expect(out.condition.archetype).toBe('government_overthrown');
     expect(out.metadata.verdict.holds).toBe(false);
+    expect(out.reasons).toContain('The contest broke against the ruling seat.');
+    // anchored: the exact contest result above proves the outcome reasons are live.
+    expect(out.reasons.join(' ')).not.toMatch(/\b\d+(?:\.\d+)?\b|×|\b(?:weight|multiplier|score|roll|chance)\b/i);
   });
 
   test('a locked governing faction downgrades the transfer to a proposal', () => {
@@ -341,6 +355,9 @@ describe('coupVerdictOutcomes', () => {
     });
     expect(held[0].type).toBe('condition');
     expect(held[0].condition.archetype).toBe('coup_suppressed');
+    expect(held[0].reasons).toContain("The contest broke in the ruling seat's favor.");
+    // anchored: the exact held-seat result above proves the suppression reasons are live.
+    expect(held[0].reasons.join(' ')).not.toMatch(/\b\d+(?:\.\d+)?\b|×|\b(?:weight|multiplier|score|roll|chance)\b/i);
 
     const partyEnded = coupVerdictOutcomes({
       resolved: [resolvedCoup({ resolutionReason: 'Resolved by party action' })],

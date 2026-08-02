@@ -23,6 +23,7 @@
  */
 
 import { newsVoiceCategory } from './newsVoice.js';
+import { newsReaderSummary } from './newsBody.js';
 import { humanizeFlagKey, tickCalendarLabel } from './humanizeEngineTokens.js';
 
 /** Local FNV-1a (the newsVoice idiom — each module keeps its own copy rather than
@@ -285,7 +286,7 @@ export function composeChroniclersLetter({ wizardNews, lastReadTick = 0, simulat
       id: String(e.id ?? `beat_${tick}`),
       tick,
       headline: String(e.headline || 'A matter of the realm'),
-      summary: String(e.summary || ''),
+      summary: newsReaderSummary(e),
       significance,
     });
   }

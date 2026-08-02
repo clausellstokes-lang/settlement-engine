@@ -61,6 +61,24 @@ describe('eventProse — register laws (every resolved variant is clean)', () =>
       });
     });
   }
+
+  it('war grievance and peace exhaustion/convergence never address scalars to the reader', () => {
+    const scalarFree = new Set([
+      'war.grievance',
+      'peace.exhaustion',
+      'peace.belief_convergence.drifting',
+    ]);
+    const selected = EVENT_PROSE_REGISTRY.filter(entry => scalarFree.has(entry.id));
+    expect(selected.map(entry => entry.id).sort()).toEqual([...scalarFree].sort());
+    for (const { id, pool } of selected) {
+      for (const [index, variant] of pool.entries()) {
+        const line = resolve(variant);
+        expect(line.length, `${id}[${index}] authored line`).toBeGreaterThan(0);
+        // anchored: the non-empty selected registry line above proves this corpus cell is live.
+        expect(line, `${id}[${index}]`).not.toMatch(/\b\d+(?:\.\d+)?\b|%|×|\b(?:score|divergence|multiplier|roll)\b/i);
+      }
+    }
+  });
 });
 
 describe('eventProse — CALAMITY bucket-neutrality (constitutional)', () => {

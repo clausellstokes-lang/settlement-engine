@@ -54,6 +54,22 @@ describe('V-2 — the diff, grouping, and priority', () => {
   it('is deterministic — a second compose is byte-identical', () => {
     expect(JSON.stringify(composeChroniclersLetter({ wizardNews: feed, lastReadTick: 4 }))).toBe(JSON.stringify(letter));
   });
+
+  it('projects legacy climb-down analytics before composing or exporting the letter', () => {
+    const momentum = {
+      currentTick: 7,
+      entries: [{
+        id: 'momentum', tick: 7, significance: 'major', impactKind: 'conflict_pressure',
+        kind: 'momentum_climb_down', headline: 'Aldermoor abandons the war',
+        summary: 'Commitment 3.2× its cliff; price 0.62.',
+      }],
+    };
+    const projected = composeChroniclersLetter({ wizardNews: momentum, lastReadTick: 0 });
+    const line = projected.sections.flatMap(section => section.lines)[0];
+    expect(line.summary).toBe('The court held to the war too long; reversing course carried a real political price.');
+    // anchored: the exact projected line above proves the letter included this beat.
+    expect(letterToPlainText(projected)).not.toMatch(/3\.2|0\.62|×|\b(?:commitment|cliff)\b/i);
+  });
 });
 
 describe('V-2 — the empty-diff grace', () => {

@@ -74,6 +74,48 @@ describe('WizardNewsPanel chronicle', () => {
     ));
   });
 
+  it('renders severity as an authored band rather than a percentage', () => {
+    const { container } = render(<WizardNewsPanel campaign={campaignWith(SKEWED_FEED)} />);
+    expect(container.textContent).toContain('Severity critical');
+    // anchored: the authored severity pill above proves the card and severity field rendered.
+    expect(container.textContent).not.toContain('Severity 80%');
+  });
+
+  it('renders the feed clock and entry clocks as in-world calendar phrases', () => {
+    const { container } = render(<WizardNewsPanel campaign={campaignWith(SKEWED_FEED)} />);
+    expect(container.textContent).toContain('week 10 of spring, year 1');
+    expect(container.textContent).toContain('week 5 of spring, year 1');
+    // anchored: the two distinct calendar phrases prove both the feed and entry clocks rendered.
+    expect(container.textContent).not.toMatch(/\bTick\s+\d+/);
+  });
+
+  it('projects legacy climb-down analytics out of pills and the summary tooltip', () => {
+    const feed = {
+      currentTick: 7,
+      entries: [{
+        id: 'wizard_news.7.momentum_climb_down.organic.a.b',
+        tick: 7,
+        scope: 'regional',
+        significance: 'major',
+        score: 68,
+        severity: 0.6,
+        headline: 'Aldermoor climbs down from its war on Brackwater',
+        kind: 'momentum_climb_down',
+        summary: 'Commitment 3.2× its cliff; price 0.62.',
+        settlementIds: [],
+        reasons: ['Stock 3.2× the cliff.', 'Relief 38%.'],
+      }],
+    };
+    const { container } = render(<WizardNewsPanel campaign={campaignWith(feed)} />);
+    const prose = container.textContent;
+    expect(prose).toContain('the court held to the war beyond an easy retreat');
+    expect(prose).toContain('the reversal exacted a real political price');
+    // anchored: both fixed climb-down reason phrases above prove the card projection is live.
+    expect(prose).not.toMatch(/3\.2|0\.62|38%|\bstock\b/i);
+    const body = container.querySelector('p[title]');
+    expect(body?.getAttribute('title')).toBe('The court held to the war too long; reversing course carried a real political price.');
+  });
+
   it('grounds the chronicle on the latest entry tick, not the skewed feed clock', async () => {
     requestSpy.mockResolvedValue({ chronicle: 'A season of hunger.', creditsRemaining: 3 });
     render(<WizardNewsPanel campaign={campaignWith(SKEWED_FEED)} />);

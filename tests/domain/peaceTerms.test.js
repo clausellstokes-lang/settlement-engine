@@ -22,7 +22,7 @@ import {
   advanceTreaties, termBudgetFor, resolveVictor, believedAdvantage,
   appraiseLoserPortfolio, draftTerms, evolveCompliance, alignmentPress,
   treatiesForPair, demilitarizationCapFor, treatyBlocksWar, occupationHoldFor, treatyPairKey,
-  TERM_CATALOG, TERM_TYPES, TERM_FAMILIES, PEACE_TERMS_TUNING,
+  termLabel, TERM_CATALOG, TERM_TYPES, TERM_FAMILIES, PEACE_TERMS_TUNING,
 } from '../../src/domain/worldPulse/peaceTerms.js';
 import { repudiateTreaty } from '../../src/domain/worldPulse/treatyBreach.js';
 import { TREATY_TRANSFER_TUNING } from '../../src/domain/worldPulse/treatyTransfer.js';
@@ -278,7 +278,15 @@ describe('W-PEACE-2 mint — the sue-for-peace path mints a dictated treaty', ()
     expect(treaty.terms.length).toBeGreaterThan(0);
     expect(treaty.budgetSpent).toBeLessThanOrEqual(treaty.budgetGranted + 1e-6);
     for (const t of treaty.terms) expect(t.expiresTick).toBeGreaterThan(t.mintedTick);
-    expect(out.newsEntries.some((n) => n.kind === 'treaty_signed')).toBe(true);
+    const signingBeat = out.newsEntries.find((entry) => entry.kind === 'treaty_signed');
+    expect(signingBeat).toBeTruthy();
+    for (const term of treaty.terms) expect(signingBeat.summary).toContain(termLabel(term.type));
+    expect(signingBeat.reasons).toHaveLength(treaty.terms.length);
+    expect([signingBeat.summary, ...signingBeat.reasons].join(' '))
+      // anchored: named terms and exact reason cardinality above prove the signing projection is live.
+      .not.toMatch(/\b\d+(?:\.\d+)?\b|%|×|\b(?:budget|score|multiplier|roll|weight)\b/i);
+    expect(typeof treaty.budgetSpent).toBe('number');
+    expect(typeof treaty.budgetGranted).toBe('number');
   });
 
   it('NEGATIVE: dormant gate ⇒ no treaty, byte-identical', () => {

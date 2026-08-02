@@ -165,14 +165,41 @@ const IMPACT_LABELS = Object.freeze({
   relief: 'Regional relief',
 });
 
+// Reader-facing scoring receipts. The score and all numeric evidence remain on
+// the entry; these closed phrases are the only form the reasons take in prose.
+const IMPACT_REASON_PHRASES = Object.freeze({
+  high: 'a heavy blow',
+  meaningful: 'a real blow',
+  criticalImpact: 'a matter that cuts deep',
+  criticalChannel: 'carried along a vital road',
+  cascade: 'spreading from town to town',
+  broad: 'reaching across the country',
+  criticalGoods: 'touching goods the country cannot do without',
+  importantGoods: 'touching goods that matter',
+  applied: 'the effect has taken hold',
+  ready: 'the long wait is over',
+  resolved: 'a great pressure lifted',
+  expired: 'the danger has passed',
+  routine: 'a quiet matter',
+});
+
+// The regional graph keeps the typed channel on the record. Prose speaks the
+// same fact through a finite world vocabulary instead of printing an engine key.
 /** @type {Readonly<Record<string, string>>} */
-const TRANSITION_LABELS = Object.freeze({
-  queued: 'Queued',
-  ready: 'Ready',
-  applied: 'Applied',
-  resolved: 'Resolved',
-  ignored: 'Ignored',
-  expired: 'Expired',
+const CHANNEL_PHRASES = Object.freeze({
+  trade_dependency: 'through the trade that binds the two towns',
+  export_market: 'through the markets they share',
+  trade_route: 'along the trade roads',
+  political_authority: 'through the chain of authority',
+  tax_obligation: 'along the tax road',
+  military_protection: 'under the shield that joins them',
+  war_front: 'along the war front',
+  resource_competition: 'through their struggle over scarce goods',
+  service_dependency: 'through the services one town owes the other',
+  religious_authority: 'through the temples that bind them',
+  criminal_corridor: 'along the hidden roads of the underworld',
+  migration_pressure: 'along the roads taken by the displaced',
+  information_flow: 'by rumour and messenger',
 });
 
 function nowIso() {
@@ -214,14 +241,6 @@ function human(value) {
  */
 function impactLabel(kind) {
   return IMPACT_LABELS[/** @type {string} */ (kind)] || human(kind) || 'Regional pressure';
-}
-
-/**
- * @param {string | null | undefined} transition
- * @returns {string}
- */
-function transitionLabel(transition) {
-  return TRANSITION_LABELS[/** @type {string} */ (transition)] || human(transition) || 'Update';
 }
 
 /**
@@ -311,52 +330,52 @@ function scoreImpact(impact, transition = 'queued') {
 
   if (severity >= 0.75) {
     score += 25;
-    reasons.push('high severity');
+    reasons.push(IMPACT_REASON_PHRASES.high);
   } else if (severity >= 0.6) {
     score += 15;
-    reasons.push('meaningful severity');
+    reasons.push(IMPACT_REASON_PHRASES.meaningful);
   }
 
   if (CRITICAL_IMPACT_KINDS.has(impact.kind)) {
     score += 14;
-    reasons.push('critical impact type');
+    reasons.push(IMPACT_REASON_PHRASES.criticalImpact);
   }
 
   if (CRITICAL_CHANNEL_TYPES.has(impact.channelType)) {
     score += 10;
-    reasons.push('critical regional channel');
+    reasons.push(IMPACT_REASON_PHRASES.criticalChannel);
   }
 
   if ((impact.waveDepth || 0) > 0) {
     score += 16;
-    reasons.push('chain propagation');
+    reasons.push(IMPACT_REASON_PHRASES.cascade);
   }
 
   if (pathCount >= 3) {
     score += 14;
-    reasons.push('multi-settlement scope');
+    reasons.push(IMPACT_REASON_PHRASES.broad);
   }
 
   if (criticality >= 0.8) {
     score += 12;
-    reasons.push('critical goods involved');
+    reasons.push(IMPACT_REASON_PHRASES.criticalGoods);
   } else if (criticality >= 0.65) {
     score += 7;
-    reasons.push('important goods involved');
+    reasons.push(IMPACT_REASON_PHRASES.importantGoods);
   }
 
   if (transition === 'applied') {
     score += 10;
-    reasons.push('effect took hold');
+    reasons.push(IMPACT_REASON_PHRASES.applied);
   } else if (transition === 'ready') {
     score += 8;
-    reasons.push('delayed effect matured');
+    reasons.push(IMPACT_REASON_PHRASES.ready);
   } else if (transition === 'resolved' && severity >= 0.6) {
     score += 6;
-    reasons.push('major pressure resolved');
+    reasons.push(IMPACT_REASON_PHRASES.resolved);
   } else if (transition === 'expired') {
     score += 4;
-    reasons.push('threat window closed');
+    reasons.push(IMPACT_REASON_PHRASES.expired);
   }
 
   return { score, reasons };
@@ -380,7 +399,7 @@ function significanceForImpact(impact, transition = 'queued') {
 
   return {
     score,
-    reasons: reasons.length ? reasons : ['routine regional update'],
+    reasons: reasons.length ? reasons : [IMPACT_REASON_PHRASES.routine],
     significance: major ? WIZARD_NEWS_SIGNIFICANCE.MAJOR : WIZARD_NEWS_SIGNIFICANCE.NOTABLE,
   };
 }
@@ -432,21 +451,30 @@ function headlineForImpact(impact, transition, names) {
  * @param {string} transition
  * @param {Map<string, string>} names
  * @param {Map<string, {id?: string | number, type?: string}>} channels
- * @param {WizardGraphEvent | null} event
  * @returns {string}
  */
-function summaryForImpact(impact, transition, names, channels, event) {
+function summaryForImpact(impact, transition, names, channels) {
   const source = names.get(String(impact.sourceSettlementId)) || impact.sourceSettlementName || 'A regional source';
   const target = names.get(String(impact.targetSettlementId)) || impact.targetSettlementName || 'the target';
   const channel = channels.get(String(impact.channelId));
-  const channelType = human(impact.channelType || channel?.type || 'regional channel').toLowerCase();
-  const goods = (impact.goods || []).map(g => g.label || g.id).filter(Boolean).slice(0, 3).join(', ');
-  const eventType = event?.sourceEvent?.type ? human(event.sourceEvent.type).toLowerCase() : null;
-  const explanation = impact.explanation || `${source} is pressuring ${target} through a ${channelType}.`;
-  const prefix = `${transitionLabel(transition)} via ${channelType}`;
-  const goodsPart = goods ? ` around ${goods}` : '';
-  const eventPart = eventType ? ` after ${eventType}` : '';
-  return `${prefix}${goodsPart}${eventPart}: ${explanation}`;
+  const channelType = String(impact.channelType || channel?.type || '');
+  const road = CHANNEL_PHRASES[channelType] || 'across the region';
+  const goods = (impact.goods || [])
+    .map((good) => {
+      if (typeof good === 'string') return human(good);
+      return good?.label || human(good?.id);
+    })
+    .filter(Boolean)
+    .slice(0, 3)
+    .join(', ');
+  const goodsPart = goods ? `, with ${goods} caught in the balance` : '';
+  const label = impactLabel(impact.kind).toLowerCase();
+  if (transition === 'ready') return `${impactLabel(impact.kind)} from ${source} now stands at ${target}'s door ${road}${goodsPart}.`;
+  if (transition === 'applied') return `${impactLabel(impact.kind)} from ${source} has taken hold in ${target} ${road}${goodsPart}.`;
+  if (transition === 'resolved') return `${target} has broken the ${label} that came from ${source} ${road}${goodsPart}.`;
+  if (transition === 'ignored') return `${target} has turned aside the ${label} that came from ${source} ${road}${goodsPart}.`;
+  if (transition === 'expired') return `${impactLabel(impact.kind)} from ${source} faded before it could reach ${target} ${road}${goodsPart}.`;
+  return `${impactLabel(impact.kind)} is moving from ${source} toward ${target} ${road}${goodsPart}.`;
 }
 
 /**
@@ -647,7 +675,7 @@ export function createWizardNewsEntryFromImpact(impact, options = {}) {
     significance,
     score,
     headline: headlineForImpact(impact, transition, names),
-    summary: summaryForImpact(impact, transition, names, channels, event),
+    summary: summaryForImpact(impact, transition, names, channels),
     kind: transition,
     impactKind: impact.kind,
     channelType: impact.channelType || channels.get(String(impact.channelId))?.type || null,

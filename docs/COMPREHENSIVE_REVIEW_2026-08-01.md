@@ -664,6 +664,46 @@ land BEFORE that soak for its evidence to prove what the thesis needs.
   33/33; targeted ESLint and `git diff --check` pass. Full-gate evidence belongs to
   the wave commit receipt, not this pre-commit measurement.
 
+### Addendum implementation receipt — A-2 LEGACY PROSE SWEEP LANDED (2026-08-02)
+
+- **The debt moved down, never sideways.** Wizard News regional impacts, stressor
+  birth/escalation/spread receipts, coup and ruling-power outcomes, faction-capture
+  transitions, war/peace reasons, and peace-term signing prose now speak through
+  authored closed vocabularies. Exact pressure, probability, roll, weight, score,
+  gate, origin, and treaty-budget evidence remains in typed receipt fields; it is no
+  longer interpolated into reader sentences. No simulation score, RNG draw, or
+  transition decision changed.
+- **Every mounted reader of the protected momentum producer is closed.** The
+  producer in `momentum.js` remains byte-untouched and retains exact commitment,
+  cliff, and relief evidence. A shared display projection removes those scalars from
+  Wizard News, the Chronicler's Letter, and Chronicle scrollback without parsing or
+  rewriting persisted records. Wizard News also renders severity as the existing
+  authored band and its feed/entry clocks through the existing in-world calendar,
+  satisfying the Bound Book's manuscript-chip floor without inventing a second
+  band or calendar vocabulary.
+- **The numeric-debt ratchet tightened with the sweep.** The reviewed baseline fell
+  from 442 to 401 category rows, from 267 to 240 exact source sites, and from 120 to
+  112 files. The frozen ceilings are 401 total: 229 float interpolations, 79 percent
+  tokens, 24 multipliers, and 69 two-decimal scores. Both the live tree and committed
+  baseline must stay at or below every ceiling; unknown detector categories fail
+  closed; an executed `+1` mutant proves that regenerating an exactly matching
+  baseline cannot make a 402nd row green. This closes W-A1a at the post-sweep floor.
+- **Residuals are named, not hidden.** The sweep deliberately leaves the separate
+  supply-web warfare EV/confidence prose and peace-term draft-receipt registration
+  seam for their owning slices. W-A1b's one-hop value-flow detector and W-A3a's
+  store-side authoring census remain follow-up wall work; this receipt does not
+  over-claim their coverage.
+- **Verification:** the 18-file affected matrix passed 514/514 with domain-any,
+  voice, prose-numeric, and negative-assertion governance included. The repository
+  gate passed every deterministic check: 2,112 files passed, one skipped; 22,386
+  tests passed, 54 skipped. Its only two reds were the common 20-second load
+  ceilings in pipeline determinism and magic-buffer conjunction reachability; the
+  files passed immediately alone (6/6 and 8/8). The gate began at `31ac37c3` and
+  ended at `3b0ba465`; the two intervening commits changed design documents only
+  (`DESIGN_OPERATOR_MESSAGES.md` and its badge amendment), not executable code or
+  test contracts. No golden or snapshot was re-recorded, no flag was lit, and no
+  soak ran.
+
 ### Addendum implementation receipt — A-4 INSTRUMENTS LANDED (2026-08-01)
 
 - **Seed divergence is now a story-mix claim.** The different-seed arm aggregates

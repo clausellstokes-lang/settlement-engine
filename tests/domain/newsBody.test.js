@@ -10,7 +10,9 @@
 
 import { describe, it, expect } from 'vitest';
 
-import { newsBodyText, newsReasonPhrases, BODY_POOLS } from '../../src/domain/display/newsBody.js';
+import {
+  newsBodyText, newsReaderSummary, newsReasonPhrases, BODY_POOLS,
+} from '../../src/domain/display/newsBody.js';
 
 const TRANSITIONS = ['queued', 'ready', 'applied', 'resolved', 'ignored', 'expired'];
 
@@ -83,6 +85,23 @@ describe('newsBody — reasons recast into fiction', () => {
     expect(newsReasonPhrases(null)).toEqual([]);
     expect(newsReasonPhrases({})).toEqual([]);
     expect(newsReasonPhrases({ reasons: [null, '', undefined] })).toEqual([]);
+  });
+
+  it('fails closed for legacy climb-down analytics and replaces the raw tooltip', () => {
+    const entry = {
+      kind: 'momentum_climb_down',
+      summary: 'Commitment 3.2× its cliff; price 0.62.',
+      reasons: ['Stock 3.2× the cliff.', 'Relief 38%.'],
+    };
+    expect(newsReasonPhrases(entry)).toEqual([
+      'the court held to the war beyond an easy retreat',
+      'the reversal exacted a real political price',
+    ]);
+    expect(newsReaderSummary(entry)).toBe(
+      'The court held to the war too long; reversing course carried a real political price.',
+    );
+    // anchored: the exact reader summary above proves the kind-specific projection fired.
+    expect(newsReaderSummary(entry)).not.toMatch(/\d|%|×|\b(?:stock|commitment|cliff)\b/i);
   });
 });
 

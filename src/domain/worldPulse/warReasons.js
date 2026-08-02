@@ -478,7 +478,7 @@ export function scoreGrievance(relState, seed) {
   const resentment = clamp01(Number(relState?.resentment) || 0);
   const memory = clamp01(Number(relState?.memoryScore) || 0);
   const score = clamp01(REASON_TUNING.GRIEVANCE_RESENTMENT_W * resentment + REASON_TUNING.GRIEVANCE_MEMORY_W * memory);
-  return { score, receipt: warReceipt('grievance', seed, { resentment: resentment.toFixed(2), memory: memory.toFixed(2) }) };
+  return { score, receipt: warReceipt('grievance', seed) };
 }
 
 /**

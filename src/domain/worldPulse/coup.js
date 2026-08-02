@@ -166,7 +166,7 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
         summary: `The conspiracy broke against the seat. Purges and loyalty tests follow; the plotters' names are currency now.`,
         reasons: [
           verdict.reason,
-          `Hold chance ${verdict.pHold}, roll ${verdict.roll}.`,
+          'The contest broke in the ruling seat\'s favor.',
         ],
         condition: {
           archetype: 'coup_suppressed',
@@ -198,7 +198,7 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
       summary: `The ${String(incumbentName).toLowerCase()} fell. ${verdict.winner.name} now commands the government, and the settlement holds its breath.`,
       reasons: [
         verdict.reason,
-        `Hold chance ${verdict.pHold}, roll ${verdict.roll}.`,
+        'The contest broke against the ruling seat.',
         ...(locked
           ? ['The governing faction is locked. The seat cannot change hands without your approval.']
           : []),

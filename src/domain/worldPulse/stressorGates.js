@@ -335,9 +335,9 @@ function famineGate(snapshot, pressure) {
   const besieged = activeTypesAt(snapshot, sid).has('siege');
   return gateResult([
     besieged && { mult: 1.6, reason: 'The blockade is starving the granaries.' },
-    ledger.deficitPct > 15 && { mult: 1.5, reason: `Production already runs ${Math.round(ledger.deficitPct)}% short.` },
+    ledger.deficitPct > 15 && { mult: 1.5, reason: 'Production falls far short of the town\'s needs.' },
     ledger.storageMonths >= 4
-      ? { mult: 0.25, reason: `${Math.round(ledger.storageMonths)} months of stores stand between hunger and the town.` }
+      ? { mult: 0.25, reason: 'Deep stores stand between hunger and the town.' }
       : ledger.storageMonths >= 2
         && { mult: 0.6, reason: 'The granaries hold a real reserve.' },
     foodInst >= 1 && { mult: 0.75, reason: 'Redundant food institutions blunt a bad season.' },
@@ -756,8 +756,8 @@ function coupSpawnGate(snapshot, pressure) {
   return {
     probabilityMult: bandMult * authorityMult,
     reasons: [
-      `Legitimacy stands at ${Math.round(score)} (${legitimacy?.label || 'Contested'}). The seat is exposed.`,
-      `Governing authority ${authority < 30 ? 'is crumbling' : authority < 50 ? 'is strained' : 'still holds'} (ruling authority ${Math.round(authority)}).`,
+      'Legitimacy is openly contested; the seat stands exposed.',
+      `Governing authority ${authority < 30 ? 'is crumbling' : authority < 50 ? 'is strained' : 'still holds'}.`,
       `Factions with the power to move: ${challengers.map(c => c.name).join(', ')}.`,
     ],
   };

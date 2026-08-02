@@ -92,7 +92,7 @@ export const PEACE_REASON_TUNING = Object.freeze({
 export function scoreExhaustion({ scar01 }, /** @type {string | undefined} */ seed) {
   const score = clamp01(Number(scar01) || 0);
   if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: peaceReceipt('exhaustion', seed, { score: score.toFixed(2) }) };
+  return { score, receipt: peaceReceipt('exhaustion', seed) };
 }
 
 /**
@@ -113,7 +113,7 @@ export function scoreBeliefConvergence({ marginA, marginB }, /** @type {string |
     score,
     receipt: converged
       ? peaceReceipt('belief_convergence.converged', seed)
-      : peaceReceipt('belief_convergence.drifting', seed, { divergence: divergence.toFixed(2) }),
+      : peaceReceipt('belief_convergence.drifting', seed),
   };
 }
 

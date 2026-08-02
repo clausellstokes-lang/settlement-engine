@@ -84,6 +84,27 @@ describe('ChronicleScrollback — scrubbable timeline', () => {
     expect(setSelectedSettlementId).toHaveBeenCalledWith('b');
   });
 
+  test('projects legacy climb-down analytics before rendering a pulse headline', () => {
+    STORE = { setSelectedSettlementId };
+    const momentumCampaign = {
+      id: 'momentum',
+      worldState: {
+        pulseHistory: [{
+          tick: 7,
+          selectedOutcomes: [{
+            id: 'm7', kind: 'momentum_climb_down', headline: 'Aldermoor abandons the war',
+            summary: 'Commitment 3.2× its cliff; price 0.62.', severity: 0.6,
+          }],
+          impactDigest: [],
+        }],
+      },
+    };
+    const { container } = render(<ChronicleScrollback campaign={momentumCampaign} nameFor={nameFor} />);
+    expect(container.textContent).toContain('The court held to the war too long; reversing course carried a real political price.');
+    // anchored: the exact authored projection above proves the selected headline body rendered.
+    expect(container.textContent).not.toMatch(/3\.2|0\.62|×|\b(?:commitment|cliff)\b/i);
+  });
+
   test('the selection ANCHORS TO ITS TICK when a new advance prepends a frame (SB2)', () => {
     STORE = { setSelectedSettlementId };
     const { rerender } = render(<ChronicleScrollback campaign={campaign} nameFor={nameFor} />);

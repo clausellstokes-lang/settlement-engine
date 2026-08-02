@@ -181,7 +181,7 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
     return {
       holds: true, pHold: round2(pHold), roll: round2(roll), winner: null, challengers, incumbent,
       reason: incumbent.gated
-        ? `${incumbent.name || 'The ruling power'} presented the stronger case (amplified weight ${incumbent.amplifiedWeight} at ×${incumbent.govMultiplier} legitimacy) and held the seat.`
+        ? `${incumbent.name || 'The ruling power'} rallied enough of the court to hold the seat.`
         : 'Against the odds, the conspirators lost their nerve at the door.',
     };
   }
@@ -198,7 +198,7 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
     holds: false, pHold: round2(pHold), roll: round2(roll),
     winner: { name: winner.name, archetype: winner.archetype }, challengers, incumbent,
     reason: incumbent.gated
-      ? `${winner.name} out-maneuvered both the seat and its rivals (weight ${winner.weight} of ${round2(total)}).`
+      ? `${winner.name} united the strongest opposition and out-maneuvered both the seat and its rivals.`
       : `${incumbent.name || 'The ruling power'}'s case never re-entered the field — ${winner.name} took the seat near-unopposed.`,
   };
 }

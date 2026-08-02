@@ -1,7 +1,8 @@
 import { AlertTriangle, CheckCircle2, Clock3, Megaphone, Newspaper, RadioTower, ShieldAlert, Sparkles } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 
-import { newsBodyText, newsReasonPhrases } from '../../domain/display/newsBody.js';
+import { newsBodyText, newsReaderSummary, newsReasonPhrases } from '../../domain/display/newsBody.js';
+import { tickCalendarDetailLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { newsVoiceLine } from '../../domain/display/newsVoice.js';
 import { summarizeWizardNews, WIZARD_NEWS_SIGNIFICANCE } from '../../domain/region/index.js';
 import { requestCampaignChronicle } from '../../lib/campaignChronicle.js';
@@ -15,11 +16,8 @@ import { AddressChain, AffectedSettlements } from './AddressChain.jsx';
 // only ever loaded through lazy() (HeraldBody + WorldMapStage), so the static
 // import rides the same already-lazy chunk — zero first-paint bytes.
 import ChronicleScrollback from './ChronicleScrollback.jsx';
+import { severityBand } from './heraldFilter.js';
 import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, SECOND, sans, swatch } from '../theme.js';
-
-function percent(value) {
-  return `${Math.round((Number.isFinite(value) ? value : 0) * 100)}%`;
-}
 
 function human(value) {
   return String(value || '').replace(/_/g, ' ');
@@ -76,7 +74,8 @@ function MetaPill({ children, tone = 'neutral', wrap = false }) {
       // `wrap` exists for the REASONS pills: the late-lane authors (momentum, webwar,
       // infowar) write full multi-clause sentences into `reasons` — the recorded-reason
       // half of the NEWS ADDRESS LAW — and a nowrap pill turns a sentence into an
-      // overflow scar. Token pills (tick, kind, severity) keep the nowrap default.
+      // overflow scar. Short authored pills (calendar, kind, severity) keep the
+      // nowrap default.
       whiteSpace: wrap ? 'normal' : 'nowrap',
       ...(wrap ? { textAlign: 'left', overflowWrap: 'anywhere' } : {}),
     }}>
@@ -111,11 +110,12 @@ function NewsEntry({ entry, compact = false }) {
   // to say.
   const voiceLine = newsVoiceLine(entry);
   // The card body, re-composed in the house voice from the entry's structured
-  // fields (transition/scope/severity) rather than its engine-composed summary
-  // ("Applied via trade dependency…"). The raw summary rides a hover tooltip so
-  // a curious DM can still read the mechanical detail. (content-immersion-5)
+  // fields (transition/scope/severity). Regional composers now also store an
+  // authored summary; the tooltip keeps that durable chronicle sentence available
+  // while the card body carries its shorter transition telling. (content-immersion-5)
   const bodyText = newsBodyText(entry);
   const reasonPhrases = newsReasonPhrases(entry);
+  const summaryTooltip = newsReaderSummary(entry);
 
   return (
     <article style={{
@@ -167,7 +167,7 @@ function NewsEntry({ entry, compact = false }) {
         {subject && <AddressChain descriptor={subject} omitSettlement style={{ marginTop: 5 }} />}
 
         {bodyText && (
-          <p title={entry.summary || undefined} style={{
+          <p title={summaryTooltip || undefined} style={{
             margin: '5px 0 0',
             color: BODY,
             fontFamily: sans,
@@ -216,9 +216,9 @@ function NewsEntry({ entry, compact = false }) {
               />
             </span>
           )}
-          <MetaPill>Tick {entry.tick}</MetaPill>
+          <MetaPill>{tickCalendarDetailLabel(entry.tick)}</MetaPill>
           <MetaPill>{human(entry.kind)}</MetaPill>
-          <MetaPill>Severity {percent(entry.severity)}</MetaPill>
+          <MetaPill>Severity {severityBand(entry)}</MetaPill>
           {reasonPhrases.slice(0, 3).map(reason => (
             <MetaPill key={reason} tone={major ? 'major' : 'neutral'} wrap>{reason}</MetaPill>
           ))}
@@ -472,7 +472,7 @@ export default function WizardNewsPanel({ campaign }) {
             fontWeight: 700,
           }}>
             <span>{campaign.name}</span>
-            <span>Tick {summary.feed.currentTick}</span>
+            <span>{tickCalendarDetailLabel(summary.feed.currentTick)}</span>
             <span>{total} update{total === 1 ? '' : 's'}</span>
           </div>
         </div>

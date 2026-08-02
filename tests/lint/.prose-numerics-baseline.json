@@ -300,18 +300,6 @@
     "snippet": "{drill.peakSeverity > 0 ? ` (peak ${Math.round(drill.peakSeverity * 100) / 100})` : ''}"
   },
   {
-    "path": "src/components/map/WizardNewsPanel.jsx",
-    "line": 221,
-    "category": "floatInterpolation",
-    "snippet": "{percent(entry.severity)}"
-  },
-  {
-    "path": "src/components/map/WizardNewsPanel.jsx",
-    "line": 221,
-    "category": "percentToken",
-    "snippet": "{percent(entry.severity)}"
-  },
-  {
     "path": "src/components/map/WorldPulsePanel.jsx",
     "line": 479,
     "category": "floatInterpolation",
@@ -972,18 +960,6 @@
     "snippet": "`${larger.name} holds roughly ${Math.round(populationRatio)}x the population of ${smaller.name}.`"
   },
   {
-    "path": "src/domain/rulingPowerCoup.js",
-    "line": 184,
-    "category": "floatInterpolation",
-    "snippet": "`${incumbent.name || 'The ruling power'} presented the stronger case (amplified weight ${incumbent.amplifiedWeight} at ×${incumbent.govMultiplier} legitimacy) and held the seat.`"
-  },
-  {
-    "path": "src/domain/rulingPowerCoup.js",
-    "line": 184,
-    "category": "multiplier",
-    "snippet": "`${incumbent.name || 'The ruling power'} presented the stronger case (amplified weight ${incumbent.amplifiedWeight} at ×${incumbent.govMultiplier} legitimacy) and held the seat.`"
-  },
-  {
     "path": "src/domain/spatial/distanceRead.js",
     "line": 607,
     "category": "floatInterpolation",
@@ -1078,18 +1054,6 @@
     "line": 710,
     "category": "floatInterpolation",
     "snippet": "Math.round(exposure.factor * 10000)"
-  },
-  {
-    "path": "src/domain/worldPulse/coup.js",
-    "line": 169,
-    "category": "floatInterpolation",
-    "snippet": "`Hold chance ${verdict.pHold}, roll ${verdict.roll}.`"
-  },
-  {
-    "path": "src/domain/worldPulse/coup.js",
-    "line": 201,
-    "category": "floatInterpolation",
-    "snippet": "`Hold chance ${verdict.pHold}, roll ${verdict.roll}.`"
   },
   {
     "path": "src/domain/worldPulse/deityStanceLane.js",
@@ -1198,54 +1162,6 @@
     "line": 471,
     "category": "percentToken",
     "snippet": "`Returning strength ${(ratio * 100).toFixed(0)}% of muster. Hold chance ${verdict.pHold}, roll ${verdict.roll}.`"
-  },
-  {
-    "path": "src/domain/worldPulse/eventProse.js",
-    "line": 191,
-    "category": "floatInterpolation",
-    "snippet": "`A ledger of grievances stands open: resentment ${x.resentment}, memory ${x.memory}.`"
-  },
-  {
-    "path": "src/domain/worldPulse/eventProse.js",
-    "line": 192,
-    "category": "floatInterpolation",
-    "snippet": "`The book of grievances stays open between them: resentment ${x.resentment}, memory ${x.memory}.`"
-  },
-  {
-    "path": "src/domain/worldPulse/eventProse.js",
-    "line": 193,
-    "category": "floatInterpolation",
-    "snippet": "`Old accounts go unsettled: resentment stands at ${x.resentment}, the long memory at ${x.memory}.`"
-  },
-  {
-    "path": "src/domain/worldPulse/eventProse.js",
-    "line": 194,
-    "category": "floatInterpolation",
-    "snippet": "`Every slight is still tallied: resentment ${x.resentment}, memory ${x.memory}, and nothing forgiven.`"
-  },
-  {
-    "path": "src/domain/worldPulse/eventProse.js",
-    "line": 281,
-    "category": "floatInterpolation",
-    "snippet": "`The war has worn the town to the bone: exhaustion ${x.score}; the seat needs peace to survive.`"
-  },
-  {
-    "path": "src/domain/worldPulse/eventProse.js",
-    "line": 282,
-    "category": "floatInterpolation",
-    "snippet": "`The war has ground the town to the bone: exhaustion ${x.score}; the seat must have peace to last.`"
-  },
-  {
-    "path": "src/domain/worldPulse/eventProse.js",
-    "line": 283,
-    "category": "floatInterpolation",
-    "snippet": "`The fighting has hollowed the town: exhaustion ${x.score}; without peace the seat cannot hold.`"
-  },
-  {
-    "path": "src/domain/worldPulse/eventProse.js",
-    "line": 284,
-    "category": "floatInterpolation",
-    "snippet": "`The war has spent the town to its bones: exhaustion ${x.score}; peace is now a matter of survival.`"
   },
   {
     "path": "src/domain/worldPulse/feasibilityGate.js",
@@ -1530,30 +1446,6 @@
     "snippet": "`Occupier benefit fell from ${clamp01(num(previousBenefit)).toFixed(2)} to 0.00.`"
   },
   {
-    "path": "src/domain/worldPulse/peaceReasons.js",
-    "line": 95,
-    "category": "floatInterpolation",
-    "snippet": "score.toFixed(2)"
-  },
-  {
-    "path": "src/domain/worldPulse/peaceReasons.js",
-    "line": 95,
-    "category": "twoDecimalScore",
-    "snippet": "score.toFixed(2)"
-  },
-  {
-    "path": "src/domain/worldPulse/peaceReasons.js",
-    "line": 116,
-    "category": "floatInterpolation",
-    "snippet": "divergence.toFixed(2)"
-  },
-  {
-    "path": "src/domain/worldPulse/peaceReasons.js",
-    "line": 116,
-    "category": "twoDecimalScore",
-    "snippet": "divergence.toFixed(2)"
-  },
-  {
     "path": "src/domain/worldPulse/peaceTerms.js",
     "line": 483,
     "category": "floatInterpolation",
@@ -1588,18 +1480,6 @@
     "line": 486,
     "category": "percentToken",
     "snippet": "`Restitution for a debt long unpaid — ${(magnitude * 100).toFixed(0)}% for ${years} year${years === 1 ? '' : 's'}; the old grain-years, called in at last.`"
-  },
-  {
-    "path": "src/domain/worldPulse/peaceTerms.js",
-    "line": 926,
-    "category": "floatInterpolation",
-    "snippet": "`A treaty is signed — ${terms.length} term${terms.length === 1 ? '' : 's'} at ${budgetSpent.toFixed(2)} of a ${round4(effectiveBudget).toFixed(2)} budget${mediator ? `, brokered by ${mediator.name}` : ''}.`"
-  },
-  {
-    "path": "src/domain/worldPulse/peaceTerms.js",
-    "line": 926,
-    "category": "twoDecimalScore",
-    "snippet": "`A treaty is signed — ${terms.length} term${terms.length === 1 ? '' : 's'} at ${budgetSpent.toFixed(2)} of a ${round4(effectiveBudget).toFixed(2)} budget${mediator ? `, brokered by ${mediator.name}` : ''}.`"
   },
   {
     "path": "src/domain/worldPulse/populationDynamics.js",
@@ -1932,108 +1812,6 @@
     "snippet": "`${contest.incumbent.name || 'The seat'} can still present a case (weight ${contest.incumbent.amplifiedWeight} at ×${contest.incumbent.govMultiplier} legitimacy).`"
   },
   {
-    "path": "src/domain/worldPulse/stressorGates.js",
-    "line": 338,
-    "category": "floatInterpolation",
-    "snippet": "`Production already runs ${Math.round(ledger.deficitPct)}% short.`"
-  },
-  {
-    "path": "src/domain/worldPulse/stressorGates.js",
-    "line": 338,
-    "category": "percentToken",
-    "snippet": "`Production already runs ${Math.round(ledger.deficitPct)}% short.`"
-  },
-  {
-    "path": "src/domain/worldPulse/stressorGates.js",
-    "line": 340,
-    "category": "floatInterpolation",
-    "snippet": "`${Math.round(ledger.storageMonths)} months of stores stand between hunger and the town.`"
-  },
-  {
-    "path": "src/domain/worldPulse/stressorGates.js",
-    "line": 759,
-    "category": "floatInterpolation",
-    "snippet": "`Legitimacy stands at ${Math.round(score)} (${legitimacy?.label || 'Contested'}). The seat is exposed.`"
-  },
-  {
-    "path": "src/domain/worldPulse/stressorGates.js",
-    "line": 760,
-    "category": "floatInterpolation",
-    "snippet": "`Governing authority ${authority < 30 ? 'is crumbling' : authority < 50 ? 'is strained' : 'still holds'} (ruling authority ${Math.round(authority)}).`"
-  },
-  {
-    "path": "src/domain/worldPulse/stressors.js",
-    "line": 433,
-    "category": "floatInterpolation",
-    "snippet": "`${defaults.label} birth gate passed at ${pressure.score.toFixed(2)} pressure.`"
-  },
-  {
-    "path": "src/domain/worldPulse/stressors.js",
-    "line": 433,
-    "category": "twoDecimalScore",
-    "snippet": "`${defaults.label} birth gate passed at ${pressure.score.toFixed(2)} pressure.`"
-  },
-  {
-    "path": "src/domain/worldPulse/stressors.js",
-    "line": 435,
-    "category": "floatInterpolation",
-    "snippet": "`Re-ignition: the last ${stressor.label.toLowerCase()} is still in living memory (echo ${(echo.memoryStrength ?? 0).toFixed(2)}).`"
-  },
-  {
-    "path": "src/domain/worldPulse/stressors.js",
-    "line": 435,
-    "category": "twoDecimalScore",
-    "snippet": "`Re-ignition: the last ${stressor.label.toLowerCase()} is still in living memory (echo ${(echo.memoryStrength ?? 0).toFixed(2)}).`"
-  },
-  {
-    "path": "src/domain/worldPulse/stressors.js",
-    "line": 650,
-    "category": "floatInterpolation",
-    "snippet": "`Matching pressure ${strongestPressure.toFixed(2)} exceeds escalation gate.`"
-  },
-  {
-    "path": "src/domain/worldPulse/stressors.js",
-    "line": 650,
-    "category": "twoDecimalScore",
-    "snippet": "`Matching pressure ${strongestPressure.toFixed(2)} exceeds escalation gate.`"
-  },
-  {
-    "path": "src/domain/worldPulse/stressors.js",
-    "line": 688,
-    "category": "floatInterpolation",
-    "snippet": "`${stressor.label} can spread through ${stressor.spreadChannels.slice(0, 2).join(' and ').replace(/_/g, ' ')} channels, arriving attenuated at severity ${spreadSeverity.toFixed(2)}.`"
-  },
-  {
-    "path": "src/domain/worldPulse/stressors.js",
-    "line": 688,
-    "category": "twoDecimalScore",
-    "snippet": "`${stressor.label} can spread through ${stressor.spreadChannels.slice(0, 2).join(' and ').replace(/_/g, ' ')} channels, arriving attenuated at severity ${spreadSeverity.toFixed(2)}.`"
-  },
-  {
-    "path": "src/domain/worldPulse/stressors.js",
-    "line": 690,
-    "category": "floatInterpolation",
-    "snippet": "`${stressor.label} is active at severity ${stressor.severity.toFixed(2)}.`"
-  },
-  {
-    "path": "src/domain/worldPulse/stressors.js",
-    "line": 690,
-    "category": "twoDecimalScore",
-    "snippet": "`${stressor.label} is active at severity ${stressor.severity.toFixed(2)}.`"
-  },
-  {
-    "path": "src/domain/worldPulse/stressors.js",
-    "line": 691,
-    "category": "floatInterpolation",
-    "snippet": "`A plausible spread channel reaches another settlement; the crisis arrives attenuated to ${spreadSeverity.toFixed(2)} there.`"
-  },
-  {
-    "path": "src/domain/worldPulse/stressors.js",
-    "line": 691,
-    "category": "twoDecimalScore",
-    "snippet": "`A plausible spread channel reaches another settlement; the crisis arrives attenuated to ${spreadSeverity.toFixed(2)} there.`"
-  },
-  {
     "path": "src/domain/worldPulse/supplyWebWarfare.js",
     "line": 431,
     "category": "floatInterpolation",
@@ -2272,30 +2050,6 @@
     "line": 2121,
     "category": "twoDecimalScore",
     "snippet": "`War-exhaustion scar slowly fading at ${decayed.toFixed(2)}.`"
-  },
-  {
-    "path": "src/domain/worldPulse/warReasons.js",
-    "line": 481,
-    "category": "floatInterpolation",
-    "snippet": "memory.toFixed(2)"
-  },
-  {
-    "path": "src/domain/worldPulse/warReasons.js",
-    "line": 481,
-    "category": "floatInterpolation",
-    "snippet": "resentment.toFixed(2)"
-  },
-  {
-    "path": "src/domain/worldPulse/warReasons.js",
-    "line": 481,
-    "category": "twoDecimalScore",
-    "snippet": "memory.toFixed(2)"
-  },
-  {
-    "path": "src/domain/worldPulse/warReasons.js",
-    "line": 481,
-    "category": "twoDecimalScore",
-    "snippet": "resentment.toFixed(2)"
   },
   {
     "path": "src/domain/worldPulse/warRecordMode.js",

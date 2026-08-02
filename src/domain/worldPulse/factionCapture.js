@@ -189,6 +189,14 @@ function transitionSummary(t, settlementName) {
   return `${t.name} has loosened the underworld's arrangements (now ${t.to.replace(/_/g, ' ')}).`;
 }
 
+/** @param {{ name: string, from: string, to: string }} t */
+function transitionReason(t) {
+  if (t.to === 'capture') return `${t.name} has taken the settlement's governing machinery into its hands.`;
+  if (t.from === 'capture') return `${t.name}'s grip on the governing machinery has been broken.`;
+  if (t.to === 'corrupted') return `${t.name}'s influence has passed from isolated bargains into systematic corruption.`;
+  return `${t.name}'s hold over public decisions has weakened.`;
+}
+
 /**
  * Wizard-News entries for this tick's faction-capture transitions. Factual
  * headlines; 'major' significance for full capture and liberation (crossing
@@ -228,7 +236,7 @@ export function captureTransitionNewsEntries(transitions = [], nameFor = (/** @t
       channelIds: [],
       sourceEventId: t.factionId,
       tags: ['world_pulse', 'faction', 'capture', t.to],
-      reasons: [`${t.name} moved ${t.from.replace(/_/g, ' ')} → ${t.to.replace(/_/g, ' ')} on the capture ladder.`],
+      reasons: [transitionReason(t)],
       createdAt: now,
     };
   });

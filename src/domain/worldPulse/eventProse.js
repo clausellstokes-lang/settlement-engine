@@ -15,9 +15,9 @@
  *  2. CANONICAL-AT-ZERO. A falsy seed selects index 0, keeping every seedless caller
  *     on the canonical telling. For pools that predate T5, index 0 preserves the
  *     original semantics while the declared punctuation sweep retires its em dashes.
- *  3. FRAMING-NOT-SEMANTICS. Variants vary PHRASING only. Interpolated semantic tokens
- *     (counts, cause, provenance, names, numbers) are threaded through unchanged, so the
- *     receipt's meaning — the same reason, the same cause — never drifts.
+ *  3. FRAMING-NOT-SEMANTICS. Variants vary PHRASING only. Meaning-bearing counts, causes,
+ *     provenance and names are threaded through unchanged; engine scalars remain on their
+ *     structured records and prose speaks their consequence in world words.
  *  4. PORTABLE SPECIFICITY. Catalog-anchored generics only ("the granaries", "the looms",
  *     "the harbour") — NEVER a canon proper noun. "Just enough generic to drop into any
  *     campaign." (Interpolated settlement/mediator NAMES are the world's own, not ours.)
@@ -188,10 +188,10 @@ export const CALAMITY_REASONS = Object.freeze([
 /** @type {Record<string, ProseVariant[] | Record<string, ProseVariant[]>>} */
 export const WAR_RECEIPTS = Object.freeze({
   grievance: [
-    (x) => `A ledger of grievances stands open: resentment ${x.resentment}, memory ${x.memory}.`, // canonical
-    (x) => `The book of grievances stays open between them: resentment ${x.resentment}, memory ${x.memory}.`,
-    (x) => `Old accounts go unsettled: resentment stands at ${x.resentment}, the long memory at ${x.memory}.`,
-    (x) => `Every slight is still tallied: resentment ${x.resentment}, memory ${x.memory}, and nothing forgiven.`,
+    'A ledger of grievances stands open: resentment runs hot, and old wrongs have not faded.', // canonical
+    'The book of grievances stays open between them; anger endures and every old slight is remembered.',
+    'Old accounts go unsettled, their bitterness kept alive by a long memory.',
+    'Every slight is still tallied, every old wrong remembered, and nothing forgiven.',
   ],
   revanchism: [
     (x) => `Old wounds unforgotten: ${x.wounds} mark${x.s} in the ledger, and the grudge still burns.`, // canonical (keyword: unforgotten)
@@ -278,10 +278,10 @@ export const WAR_RECEIPTS = Object.freeze({
 /** @type {Record<string, ProseVariant[] | Record<string, ProseVariant[]>>} */
 export const PEACE_RECEIPTS = Object.freeze({
   exhaustion: [
-    (x) => `The war has worn the town to the bone: exhaustion ${x.score}; the seat needs peace to survive.`, // canonical (keyword: exhaustion)
-    (x) => `The war has ground the town to the bone: exhaustion ${x.score}; the seat must have peace to last.`,
-    (x) => `The fighting has hollowed the town: exhaustion ${x.score}; without peace the seat cannot hold.`,
-    (x) => `The war has spent the town to its bones: exhaustion ${x.score}; peace is now a matter of survival.`,
+    'War exhaustion has worn the town to the bone; the seat needs peace to survive.', // canonical (keyword: exhaustion)
+    'The war has ground the town to the bone; the seat must have peace to last.',
+    'The fighting has hollowed the town; without peace the seat cannot hold.',
+    'The war has spent the town to its bones; peace is now a matter of survival.',
   ],
   belief_convergence: {
     converged: [
@@ -291,10 +291,10 @@ export const PEACE_RECEIPTS = Object.freeze({
       'The fighting has brought both courts to the same truth. An honest offer no longer offends.',
     ],
     drifting: [
-      (x) => `The courts' reckonings drift closer (divergence ${x.divergence}). The war is running out of illusions.`, // canonical
-      (x) => `The two courts' accounts draw nearer (divergence ${x.divergence}). The war is losing its illusions.`,
-      (x) => `Their reckonings are converging (divergence ${x.divergence}). The war has fewer illusions left to spend.`,
-      (x) => `The courts read the war more alike now (divergence ${x.divergence}). The last illusions are wearing thin.`,
+      "The courts' reckonings drift closer. The war is running out of illusions.", // canonical
+      "The two courts' accounts draw nearer. The war is losing its illusions.",
+      'Their reckonings are converging. The war has fewer illusions left to spend.',
+      'The courts read the war more alike now. The last illusions are wearing thin.',
     ],
   },
   economic_strangulation: {

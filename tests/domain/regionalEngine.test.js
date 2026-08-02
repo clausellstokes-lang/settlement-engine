@@ -30,6 +30,7 @@ import {
   WIZARD_NEWS_SIGNIFICANCE,
 } from '../../src/domain/region/index.js';
 import { findActiveCondition, withoutActiveCondition } from '../../src/domain/activeConditions.js';
+import { createWizardNewsEntryFromImpact } from '../../src/domain/region/wizardNews.js';
 
 function save(id, name, settlement = {}) {
   return {
@@ -753,9 +754,43 @@ describe('wizard news feed', () => {
     const notable = entries.find(entry => entry.impactIds.includes('regional_impact.notable'));
 
     expect(major.significance).toBe(WIZARD_NEWS_SIGNIFICANCE.MAJOR);
-    expect(major.reasons).toContain('high severity');
+    expect(major.reasons).toContain('a heavy blow');
     expect(major.sourceEventId).toBe('evt_grain');
+    expect(major.summary).toContain('Granary Ford');
+    expect(major.summary).toContain('Millcross');
+    expect(major.summary).toContain('Grain');
+    // anchored: source, target, and good above prove the authored regional summary is populated.
+    expect(major.summary).not.toMatch(/\b(?:queued|regional impact|via)\b|_/i);
     expect(notable.significance).toBe(WIZARD_NEWS_SIGNIFICANCE.NOTABLE);
+  });
+
+  it('humanizes a bare goods id in an authored regional summary', () => {
+    const entry = createWizardNewsEntryFromImpact({
+      id: 'regional_impact.bare_good',
+      kind: 'import_shortage',
+      sourceSettlementId: 'supplier',
+      targetSettlementId: 'buyer',
+      channelId: 'channel.trade_dependency.supplier.buyer',
+      channelType: 'trade_dependency',
+      goods: [{ id: 'bulk_grain' }],
+      severity: 0.7,
+      status: 'queued',
+    }, {
+      tick: 3,
+      graph: {
+        nodes: [{ id: 'supplier', name: 'Granary Ford' }, { id: 'buyer', name: 'Millcross' }],
+        channels: [{
+          id: 'channel.trade_dependency.supplier.buyer',
+          type: 'trade_dependency',
+          from: 'supplier',
+          to: 'buyer',
+          status: 'confirmed',
+        }],
+      },
+    });
+    expect(entry.summary).toContain('Bulk Grain');
+    // anchored: the humanized good above proves the bare-id projection rendered.
+    expect(entry.summary).not.toContain('bulk_grain');
   });
 
   it('records a ready update when delayed regional impacts mature', () => {

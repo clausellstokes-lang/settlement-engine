@@ -239,9 +239,12 @@ describe('organic birth gates', () => {
     const gate = STRESSOR_SPAWN_GATES.famine;
     const pressure = pressureRow('oak', 'food', 0.7);
     const stocked = gate(snapshotWith({
-      settlement: { economicState: { foodSecurity: { storageMonths: 5, deficitPct: 0, dailyNeed: 100, dailyProduction: 100 } } },
+      settlement: { economicState: { foodSecurity: { storageMonths: 5, deficitPct: 42, dailyNeed: 100, dailyProduction: 58 } } },
     }), pressure);
     expect(stocked.probabilityMult).toBeLessThan(1);
+    expect(stocked.reasons).toContain('Production falls far short of the town\'s needs.');
+    // anchored: the exact famine-gate sentence above proves the reason collection is live.
+    expect(stocked.reasons.join(' ')).not.toMatch(/\d|%|\b(?:score|multiplier|gate)\b/i);
     const blockaded = gate(snapshotWith({
       stressors: [activeStressor('siege', ['oak'])],
     }), pressure);
@@ -270,6 +273,10 @@ describe('organic birth gates', () => {
     const famine = candidates.find(c => c.candidateType === 'stressor_birth_famine');
     expect(famine).toBeTruthy();
     expect(famine.reasons.join(' ')).toMatch(/blockade is starving/);
+    // anchored: the positive blockade phrase above proves the birth receipt is populated.
+    expect(famine.reasons.join(' ')).not.toMatch(/\b\d+(?:\.\d+)?\b|%|\b(?:score|multiplier|gate)\b/i);
+    expect(famine.metadata.gateEvidence.probabilityMult).toBeGreaterThan(1);
+    expect(famine.metadata.gateEvidence.sourceNotes.join(' ')).toMatch(/blockade is starving/);
 
     const calmPressures = [pressureRow('oak', 'food', 0.7)];
     const calm = evaluateStressorRules(snapshotWith(), pressureIndex(calmPressures), { tick: 5, pressures: calmPressures })

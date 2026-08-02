@@ -125,6 +125,8 @@ describe('war-reason scorers — each typed reason has a positive and a negative
     const hot = scoreGrievance({ resentment: 0.8, memoryScore: 0.4 });
     expect(hot.score).toBeGreaterThan(REASON_TUNING.MIN_SCORE);
     expect(hot.receipt.length).toBeGreaterThan(0);
+    // anchored: score and non-empty receipt assertions above prove this scorer emitted.
+    expect(hot.receipt).not.toMatch(/\b\d+(?:\.\d+)?\b|%|×|\b(?:score|multiplier|roll)\b/i);
     expect(scoreGrievance({ resentment: 0, memoryScore: 0 }).score).toBe(0);
     expect(scoreGrievance(null).score).toBe(0);
   });

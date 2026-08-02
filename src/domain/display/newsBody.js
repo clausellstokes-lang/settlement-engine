@@ -1,16 +1,14 @@
 /**
  * domain/display/newsBody.js — THE WIZARD-NEWS CARD-BODY SIDECAR (content-immersion-5).
  *
- * A pure DISPLAY read-model, cut from the same cloth as newsVoice.js. The stored
- * wizardNews `summary` is composed engine-side as a system-log line:
- *   "Applied via trade dependency around Grain after guild collapse: …"
- * and the scoring `reasons` are analytic receipt pills ("critical regional
- * channel", "chain propagation"). Rendered beneath a diegetic headline and an
- * in-world crier quote, the card carries three registers at war.
+ * A pure DISPLAY read-model, cut from the same cloth as newsVoice.js. Current
+ * wizardNews emissions are authored in world voice, while older persisted
+ * summaries and scoring reasons may still carry the engine-log register that
+ * preceded that authoring law.
  *
  * This module RE-COMPOSES the card body from the entry's persisted STRUCTURED
  * fields — the lifecycle transition (entry.kind), scope, and severity — into one
- * short in-world sentence, and recasts the terse scoring reasons into the fiction
+ * short in-world sentence, and recasts any legacy terse reasons into the fiction
  * register. The headline already names the subject, so the body speaks the beat
  * ("It is being felt across the region now.") without restating it. Prose reasons
  * (world-pulse sentences) pass through unchanged.
@@ -204,12 +202,35 @@ const REASON_PHRASES = Object.freeze({
   population_pressure: 'people leaving under pressure',
 });
 
+// momentum.js is intentionally protected as the machine-evidence producer.
+// Its climb-down record retains exact commitment and price scalars, while the
+// display sidecar gives that one legacy kind a closed, authored projection.
+const MOMENTUM_CLIMB_DOWN_REASONS = Object.freeze([
+  'the court held to the war beyond an easy retreat',
+  'the reversal exacted a real political price',
+]);
+
+/**
+ * Durable reader-summary projection, with closed wording for legacy producers
+ * whose stored sentence contains analytic notation. Shared by every surface
+ * that can expose a wizard-news summary.
+ * @param {{ kind?: string|null, summary?: string|null }|null|undefined} entry
+ */
+export function newsReaderSummary(entry) {
+  if (!entry) return '';
+  if (entry.kind === 'momentum_climb_down') {
+    return 'The court held to the war too long; reversing course carried a real political price.';
+  }
+  return String(entry.summary || '');
+}
+
 /**
  * Fiction-register reason phrases for a wizardNews entry's scoring reasons.
- * @param {{ reasons?: Array<string|null|undefined> }|null|undefined} entry
+ * @param {{ kind?: string|null, reasons?: Array<string|null|undefined> }|null|undefined} entry
  * @returns {string[]}
  */
 export function newsReasonPhrases(entry) {
+  if (entry?.kind === 'momentum_climb_down') return [...MOMENTUM_CLIMB_DOWN_REASONS];
   const reasons = Array.isArray(entry?.reasons) ? entry.reasons : [];
   /** @type {string[]} */
   const out = [];

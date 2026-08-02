@@ -389,7 +389,6 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/simulationProfileValidate.test.js': 2,
   'tests/domain/simulationRulesPreset.stability.test.js': 10,
   'tests/domain/statefulArmies.test.js': 2,
-  'tests/domain/stressorChannels.test.js': 1,
   'tests/domain/stressorCounterforces.test.js': 2,
   'tests/domain/styleOverhaulCompile.test.js': 3,
   'tests/domain/successors.test.js': 2,

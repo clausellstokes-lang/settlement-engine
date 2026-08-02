@@ -71,6 +71,8 @@ describe('peace-reason scorers — each typed reason has a positive and a negati
     const worn = scoreExhaustion({ scar01: 0.6 });
     expect(worn.score).toBeCloseTo(0.6, 5);
     expect(worn.receipt).toMatch(/exhaustion/i);
+    // anchored: the required exhaustion keyword above proves the receipt was minted.
+    expect(worn.receipt).not.toMatch(/\b\d+(?:\.\d+)?\b|%|×|\b(?:score|multiplier|roll)\b/i);
     expect(scoreExhaustion({ scar01: 0 }).score).toBe(0);
   });
 
@@ -85,6 +87,9 @@ describe('peace-reason scorers — each typed reason has a positive and a negati
     const drifting = scoreBeliefConvergence({ marginA: 0.15, marginB: 0.05 });
     expect(drifting.score).toBeGreaterThan(0);
     expect(drifting.score).toBeLessThan(1);
+    expect(drifting.receipt.length).toBeGreaterThan(0);
+    // anchored: the non-empty partial-convergence receipt above proves this lane emitted.
+    expect(drifting.receipt).not.toMatch(/\b\d+(?:\.\d+)?\b|%|×|\b(?:score|divergence|multiplier|roll)\b/i);
   });
 
   it('economic strangulation: severed trade + drained treasury mint; a healthy economy stays silent', () => {

@@ -348,7 +348,7 @@
   "bang": 0
  },
  "src/domain/worldPulse/peaceTerms.js": {
-  "em": 16,
+  "em": 15,
   "bang": 0
  },
  "src/domain/worldPulse/pulseKernel.js": {

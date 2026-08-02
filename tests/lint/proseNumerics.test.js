@@ -18,6 +18,13 @@ import { scanProseNumericsSource } from '../helpers/proseNumericsWalk.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
+const REVIEWED_TOTAL_CEILING = 401;
+const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
+  floatInterpolation: 229,
+  percentToken: 79,
+  multiplier: 24,
+  twoDecimalScore: 69,
+});
 
 function walkSourceFiles(dir, out = []) {
   for (const entry of readdirSync(dir)) {
@@ -38,6 +45,35 @@ function scanLiveTree() {
     if (result.parseError) parseErrors.push(`${path}: ${result.parseError}`);
   }
   return { hits, parseErrors };
+}
+
+function ceilingViolations(hits) {
+  const counts = Object.fromEntries(
+    Object.keys(REVIEWED_CATEGORY_CEILINGS).map((category) => [category, 0]),
+  );
+  const unknownCategories = new Set();
+
+  for (const hit of hits) {
+    if (Object.prototype.hasOwnProperty.call(counts, hit.category)) {
+      counts[hit.category] += 1;
+    } else {
+      unknownCategories.add(String(hit.category));
+    }
+  }
+
+  const violations = [];
+  if (hits.length > REVIEWED_TOTAL_CEILING) {
+    violations.push(`total ${hits.length} exceeds reviewed ceiling ${REVIEWED_TOTAL_CEILING}`);
+  }
+  for (const [category, ceiling] of Object.entries(REVIEWED_CATEGORY_CEILINGS)) {
+    if (counts[category] > ceiling) {
+      violations.push(`${category} ${counts[category]} exceeds reviewed ceiling ${ceiling}`);
+    }
+  }
+  for (const category of [...unknownCategories].sort()) {
+    violations.push(`unknown detector category ${category} has no reviewed ceiling`);
+  }
+  return violations;
 }
 
 const LIVE = scanLiveTree();
@@ -142,6 +178,38 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
       LIVE.hits,
       'A new prose numeric leaked, or legacy debt moved/fell. Humanize additions; when debt falls, regenerate once and review every removed row before committing the lower baseline.',
     ).toEqual(baseline);
+  });
+
+  it('the reviewed post-sweep total and per-category ceilings can only move down', () => {
+    const baseline = JSON.parse(readFileSync(BASELINE_PATH, 'utf8'));
+    const categoryCeilingTotal = Object.values(REVIEWED_CATEGORY_CEILINGS)
+      .reduce((sum, ceiling) => sum + ceiling, 0);
+
+    expect(categoryCeilingTotal).toBe(REVIEWED_TOTAL_CEILING);
+    expect(
+      ceilingViolations(baseline),
+      'The committed baseline exceeds the reviewed 401-row census. Remove the leak; never raise a ceiling.',
+    ).toEqual([]);
+    expect(
+      ceilingViolations(LIVE.hits),
+      'The live tree exceeds the reviewed 401-row census. Humanize the new leak; never raise a ceiling.',
+    ).toEqual([]);
+  });
+
+  it('a regenerated exact baseline cannot make an executed +1 leak green', () => {
+    const mutant = scanProseNumericsSource({
+      source: 'export const beat = { headline: `The court reads pressure ${pressure}.` };',
+      path: 'src/governance-mutant.js',
+    }).hits;
+    expect(mutant.map((hit) => hit.category)).toEqual(['floatInterpolation']);
+
+    const mutatedLive = [...LIVE.hits, ...mutant];
+    const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
+    expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
+    expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
+      'total 402 exceeds reviewed ceiling 401',
+      'floatInterpolation 230 exceeds reviewed ceiling 229',
+    ]);
   });
 
   it('the baseline itself has exact, unique, source-verifiable identities', () => {
