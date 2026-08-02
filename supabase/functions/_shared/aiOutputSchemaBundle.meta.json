@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-02T09:35:12.249Z",
+  "generatedAt": "2026-08-02T13:35:52.595Z",
   "entry": "src/domain/aiOutputSchema.js",
-  "sourceHash": "6f29939cf19cfe77",
+  "sourceHash": "8f76413b03930501",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/index.js",
@@ -41,6 +41,7 @@
     "src/domain/corruption.js",
     "src/domain/defenseLedger.js",
     "src/domain/deityConstants.js",
+    "src/domain/deterministicSort.js",
     "src/domain/display/exportPosture.js",
     "src/domain/display/humanizeEngineTokens.js",
     "src/domain/display/warStatus.js",
@@ -95,6 +96,7 @@
     "src/domain/worldPulse/stressorsCore.js",
     "src/domain/worldPulse/treatyClock.js",
     "src/domain/worldPulse/warFrontReads.js",
+    "src/domain/worldPulse/warReasonTaxonomy.js",
     "src/domain/worldPulse/worldSnapshot.js",
     "src/domain/worldPulse/worldState.js",
     "src/kernel/math.js",

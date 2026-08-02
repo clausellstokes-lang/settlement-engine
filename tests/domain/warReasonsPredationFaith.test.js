@@ -31,11 +31,16 @@ import {
 } from '../../src/domain/worldPulse/peaceReasons.js';
 import {
   scoreOpportunism, scoreHopelessness, vulnerabilityTruthOf, perceivedVulnerabilityOf,
+  liveStrengthContradictsOpportunism,
 } from '../../src/domain/worldPulse/opportunism.js';
 import {
   scoreSacredClaim, scoreCommonRite, faithStandingBetween,
 } from '../../src/domain/worldPulse/sacredClaim.js';
 import { scoreFearOfDominance, scoreBalanceRestored } from '../../src/domain/worldPulse/hegemonyFear.js';
+import {
+  buildPatronCounterforceIndex, patronCounterforceFor,
+} from '../../src/domain/worldPulse/patronCounterforce.js';
+import { isWarReasonType } from '../../src/domain/worldPulse/warReasonTaxonomy.js';
 
 // ── Fixture kit ──────────────────────────────────────────────────────────────
 
@@ -47,6 +52,8 @@ const FAITH_LIT = { ...LIT, faithSpreadEnabled: true, religionDynamicsEnabled: t
 // world must say so explicitly, or every belief read falls back to truth verbatim.
 const FOG = { ...LIT, infoMode: 'full' };
 const FAITH_FOG = { ...FAITH_LIT, infoMode: 'full' };
+const WR1_LIT = { ...LIT, warTerminationEnabled: true };
+const WR1_FOG = { ...FOG, warTerminationEnabled: true };
 
 /** A snapshot member with exactly the substrates a case needs, and no others. */
 function town(id, opts = {}) {
@@ -74,13 +81,15 @@ function snapshotOf(items) {
 }
 
 /** Drive the war mover over one edge with the given rules + members. */
-function driveWar(items, rules = LIT, extra = {}) {
+function driveWar(items, rules = LIT, extra = {}, edges = EDGES) {
   const ws = {
     simulationRules: { ...rules },
     relationshipStates: { 'edge.wolf.lamb': { relationshipType: 'trade_partner', resentment: 0, trust: 0.5 } },
     ...extra,
   };
-  return advanceWarReasons({ snapshot: snapshotOf(items), worldState: ws, graph: { edges: EDGES }, tick: 20 });
+  const snapshot = snapshotOf(items);
+  snapshot.regionalGraph = { edges };
+  return advanceWarReasons({ snapshot, worldState: ws, graph: { edges }, tick: 20 });
 }
 
 /** Drive the peace mover over one live war (wolf marching on lamb). */
@@ -159,6 +168,70 @@ describe('opportunism — the vulture war (the appetite the taxonomy was missing
     expect(scoreOpportunism({ gradient: 0.8, capability01: 0.25 }).score)
       .toBeLessThan(scoreOpportunism({ gradient: 0.8, capability01: 1 }).score);
   });
+
+  it('WR-1 PATRON COUNTERFORCE WINS: protection suppresses a case that otherwise opens', () => {
+    const patronEdge = {
+      id: 'edge.guardian.lamb', from: 'guardian', to: 'lamb', relationshipType: 'patron',
+    };
+    const edges = [...EDGES, patronEdge];
+    const items = [WOLF, LAMB, town('guardian', { tier: 'city', population: 8000, readiness: 0.8 })];
+
+    const unprotected = warReasonsFor(driveWar(items, WR1_LIT).worldState, 'wolf', 'lamb');
+    expect(unprotected?.reasons?.opportunism, 'anti-vacuity: this exact predation opens without protection')
+      .toBeTruthy();
+
+    const protectedWorld = driveWar(items, WR1_LIT, {
+      relationshipStates: {
+        'edge.wolf.lamb': { relationshipType: 'trade_partner', resentment: 0, trust: 0.5 },
+        'edge.guardian.lamb': { relationshipType: 'patron', patronSaveId: 'guardian' },
+      },
+    }, edges).worldState;
+    expect(warReasonsFor(protectedWorld, 'wolf', 'lamb')?.reasons?.opportunism,
+      'the patron is a winning counterforce, not a decorative discount').toBeUndefined();
+
+    const suppressed = scoreOpportunism({
+      gradient: 0.8,
+      patronCounterforce: { patronId: 'guardian', patronIds: ['guardian'] },
+    });
+    expect(suppressed.score).toBe(0);
+    expect(suppressed.receipt).toMatch(/patron.*stays its hand/i);
+    // anchored: the positive semantic receipt assertion above proves prose is present
+    expect(suppressed.receipt).not.toMatch(/\d/);
+  });
+
+  it('the patron read is directional, legacy-aware, multi-patron deterministic, and dark when WR-1 is dark', () => {
+    const edges = [
+      { id: 'z', from: 'zeta', to: 'lamb', relationshipType: 'patron' },
+      // Legacy client orientation is junior -> senior; normalization reverses it.
+      { id: 'a', from: 'lamb', to: 'alpha', relationshipType: 'client' },
+      // State direction wins over authored orientation for a born-in-simulation tie.
+      { id: 'm', from: 'lamb', to: 'mu', relationshipType: 'neutral' },
+    ];
+    const ws = {
+      relationshipStates: {
+        z: { relationshipType: 'patron' },
+        a: { relationshipType: 'client' },
+        m: { relationshipType: 'patron', patronSaveId: 'mu', clientSaveId: 'lamb' },
+      },
+    };
+    const forward = buildPatronCounterforceIndex({ edges }, ws);
+    const reversed = buildPatronCounterforceIndex({ edges: [...edges].reverse() }, ws);
+    expect([...forward.entries()]).toEqual([...reversed.entries()]);
+    expect(patronCounterforceFor(forward, 'lamb')).toEqual({
+      patronId: 'alpha', patronIds: ['alpha', 'mu', 'zeta'],
+    });
+    expect(patronCounterforceFor(forward, 'alpha')).toBeNull();
+
+    const protectedEdges = [...EDGES, edges[0]];
+    const dark = driveWar([WOLF, LAMB], LIT, {
+      relationshipStates: {
+        'edge.wolf.lamb': { relationshipType: 'trade_partner', resentment: 0, trust: 0.5 },
+        z: { relationshipType: 'patron' },
+      },
+    }, protectedEdges).worldState;
+    expect(warReasonsFor(dark, 'wolf', 'lamb')?.reasons?.opportunism,
+      'the absent WR-1 flag preserves the pre-counterforce result').toBeTruthy();
+  });
 });
 
 describe('PREDATION IS EPISTEMIC — the headline property', () => {
@@ -179,6 +252,33 @@ describe('PREDATION IS EPISTEMIC — the headline property', () => {
     expect(rec.receipt, 'the §14.4 bar: the receipt names the error in the house voice')
       .toMatch(/the court is wrong about it/);
     expect(rec.receipt).toMatch(/thinly held/);
+  });
+
+  it('WR-1 LIVE RESTRAINT WINS when fog reverses the live strength sign', () => {
+    const extra = beliefWorldExtra([['wolf', 'lamb', 0, 0.05]]);
+    const prior = warReasonsFor(driveWar([RIVAL, STRONG], FOG, extra).worldState, 'wolf', 'lamb');
+    expect(prior?.reasons?.opportunism,
+      'anti-vacuity: the same fogged picture opens the pre-WR-1 case').toBeTruthy();
+
+    const restrained = warReasonsFor(
+      driveWar([RIVAL, STRONG], WR1_FOG, extra).worldState, 'wolf', 'lamb',
+    );
+    expect(restrained?.reasons?.opportunism,
+      'equal live hosts contradict the weak-victim story').toBeUndefined();
+    expect(liveStrengthContradictsOpportunism(RIVAL, STRONG)).toBe(true);
+
+    const receipt = scoreOpportunism({ gradient: 0.7, liveStrengthContradicted: true });
+    expect(receipt.score).toBe(0);
+    expect(receipt.receipt).toMatch(/live muster.*stays its hand/i);
+    // anchored: the positive semantic receipt assertion above proves prose is present
+    expect(receipt.receipt).not.toMatch(/\d/);
+  });
+
+  it('WR-1 restraint preserves a live advantage: fog may colour degree without reversing sign', () => {
+    expect(liveStrengthContradictsOpportunism(WOLF, LAMB)).toBe(false);
+    const rec = warReasonsFor(driveWar([WOLF, LAMB], WR1_LIT).worldState, 'wolf', 'lamb')
+      ?.reasons?.opportunism;
+    expect(rec, 'the coherence arm does not silence a true weak-victim gradient').toBeTruthy();
   });
 
   it('the SAME fogged world with beliefs dormant falls back to truth verbatim (no appetite)', () => {
@@ -470,6 +570,12 @@ const PEACE_WITNESSES = {
 };
 
 describe('THE DIVERSITY WALKER — every reason CAN win, or this reds', () => {
+  it('the dependency-free taxonomy guard accepts every war kind and rejects foreign values', () => {
+    expect(WAR_REASON_TYPES.every(isWarReasonType)).toBe(true);
+    expect(isWarReasonType('not_a_casus')).toBe(false);
+    expect(isWarReasonType(null)).toBe(false);
+  });
+
   it('the war witness table is EXACTLY the war catalog (no gap, no stale entry)', () => {
     expect(Object.keys(WAR_WITNESSES).sort()).toEqual([...WAR_REASON_TYPES].sort());
   });

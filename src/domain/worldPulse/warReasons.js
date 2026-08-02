@@ -94,6 +94,17 @@ import { demographicsActive } from './demographicsRates.js';
 import { demographicWarTermsFor } from './demographicsWar.js';
 import { demographyMembersFromSnapshot, measureRealmDemography } from './demographicsObservation.js';
 import { warReceipt, pickLine, DECREE_DEFAULT_RECEIPTS } from './eventProse.js';
+import {
+  WAR_REASON_TYPES,
+  PEACE_REASON_TYPES,
+  REASON_MIRRORS,
+  isWarReasonType,
+} from './warReasonTaxonomy.js';
+import { buildPatronCounterforceIndex, patronCounterforceFor } from './patronCounterforce.js';
+
+// Compatibility surface: existing reason consumers keep importing from this
+// module while persistence/termination readers can depend on the taxonomy leaf.
+export { WAR_REASON_TYPES, PEACE_REASON_TYPES, REASON_MIRRORS, isWarReasonType };
 
 // ── Tuning (bounded named constants — owner-retunable per design §8) ────────
 
@@ -129,125 +140,8 @@ export const REASON_TUNING = Object.freeze({
 });
 
 // ── The typed catalogs + the §14.3 mirror table ─────────────────────────────
-
-/** The casus belli taxonomy (design §14.1, the brief's seven + W-CONVERGENCE's clash). */
-export const WAR_REASON_TYPES = Object.freeze([
-  'grievance',
-  'revanchism',
-  'resource_pressure',
-  'treaty_default',
-  'encirclement',
-  'legitimacy_hunger',
-  'corruption_exposed',
-  // W-CONVERGENCE: two sponsors backing OPPOSING sides of one internal contest are
-  // minting their next war BETWEEN themselves (proxy-stays-proxy — the reasons layer
-  // decides escalation; 0 when the intervention layer is dark ⇒ byte-identical).
-  'foreign_clash',
-  // D4 (DESIGN_SIM_DEPTH_R2): fear of a dominant power — Blainey's own first-class cause.
-  // A free settlement fears the BELIEVED strength-share of a hegemony sphere it neighbours
-  // (subordinates excluded — v1 balances, never bandwagons). 0 when no sphere / peaceEngine
-  // dark ⇒ byte-identical.
-  'fear_of_dominance',
-  // D7 THE REFRAME LAYER: the aid we gave, now re-read as a debt unpaid (gift → debt_unpaid →
-  // tribute_extracted). The reframe casus — motive attribution as belief. 0 when reframe dark ⇒
-  // byte-identical. Its DISTINCT mirror is debt_forgiven (the aid re-read as a gift again).
-  'ingratitude_debt',
-  // D7: our trade-dependence, re-read as a leash built on purpose (commerce → dependency_by_design).
-  // 0 when reframe dark ⇒ byte-identical. Its DISTINCT mirror is bonds_of_commerce.
-  'dependency_by_design',
-  // THE VULTURE WAR (§14.1 OPPORTUNISM, "weakness smelled"): the taxonomy modelled fear of
-  // the STRONG and had no appetite for the WEAK, which taught players that being harmless
-  // is safe. EPISTEMIC exactly as fear_of_dominance is — the foe half routes through the
-  // belief selector, so a court can covet a neighbour that is not actually weak. 0 when the
-  // pair publishes no vulnerability substrate ⇒ byte-identical. Mirror: hopelessness.
-  'opportunism',
-  // THE RELIGIOUS CASUS (§14.1 IDEOLOGY/FAITH): the engine ran live faith machinery and no
-  // court ever went to war over a god. Scored off the CLOSED faith×alignment quadrant the
-  // engine already bands. 0 when the faith flag is dark or either town names no patron ⇒
-  // byte-identical. Mirror: common_rite.
-  'sacred_claim',
-]);
-
-/** The casus pacis taxonomy (design §14.2, the brief's seven + W-CONVERGENCE's spheres). */
-export const PEACE_REASON_TYPES = Object.freeze([
-  'exhaustion',
-  'belief_convergence',
-  'economic_strangulation',
-  'coalition_fracture',
-  'mediation',
-  'harvest_pressure',
-  'realignment',
-  // W-CONVERGENCE: the mirror of foreign_clash — two clashing sponsors settling zones
-  // of influence (the mutual-disengagement ground) instead of fighting.
-  'spheres_understanding',
-  // D4: the distinct mirror of fear_of_dominance — the war-reason DIES when the believed
-  // imbalance does. When a once-feared sphere CRUMBLES, its free neighbours reconcile (the
-  // empire falls, the balance is restored). Feeds détente, NOT foreign_clash's mirror.
-  'balance_restored',
-  // D7: the distinct mirror of ingratitude_debt — the debt is FORGIVEN back into a gift (the
-  // both-signs reconciliation lane reverses debt_unpaid → gift_forgiven), and the casus loses
-  // its cause. A distinct peace kind (never a reuse — the walker stays strict + bijective).
-  'debt_forgiven',
-  // D7: the distinct mirror of dependency_by_design — the same trade tie re-read as a MUTUAL
-  // bond that makes war too costly (commercial interdependence, Blainey-adjacent). Distinct kind.
-  'bonds_of_commerce',
-  // The distinct mirror of opportunism, and the pairing §14.3 itself names
-  // ("opportunism↔hopelessness"): the SAME believed vulnerability gradient, read from the
-  // losing end. One measurement, two signs — the mirror cannot drift from the casus because
-  // there is only one number. 0 when the gradient favours the reader ⇒ byte-identical.
-  'hopelessness',
-  // The distinct mirror of sacred_claim: the SAME faith quadrant, read the other way — the
-  // ground two courts already share. Distinct from `mediation` (a THIRD party standing
-  // between them); this is the two of them standing on one floor.
-  'common_rite',
-]);
-
-/**
- * THE §14.3 MIRROR TABLE — every war reason names its peace mirror; the walker
- * test asserts totality + bijection so a future reason added to either side
- * without its mirror is a caught design defect ("equally robust", permanent).
- *
- * WAVE-1 PROVISIONAL PAIRING. Anchored on the design's canonical family pairs
- * where both members exist in wave 1:
- *   encirclement↔realignment (security↔common-threat), resource_pressure↔
- *   economic_strangulation (hunger↔bleeding), legitimacy_hunger↔exhaustion
- *   (diversionary entry↔war-weary exit), treaty_default↔coalition_fracture
- *   (the pact dissolves), corruption_exposed↔belief_convergence (the
- *   information family: revelation drives war, convergence drives peace).
- * The remaining two are provisional until satisfaction/war-guilt land in a
- * later wave: grievance↔mediation (the grudge and the broker who dissolves it)
- * and revanchism↔harvest_pressure (the two clock-driven reasons — the decade
- * clock of memory, the season clock of the fields). Re-pair consciously when
- * the taxonomy grows; the walker forces the update.
- */
-export const REASON_MIRRORS = Object.freeze({
-  grievance: 'mediation',
-  revanchism: 'harvest_pressure',
-  resource_pressure: 'economic_strangulation',
-  treaty_default: 'coalition_fracture',
-  encirclement: 'realignment',
-  legitimacy_hunger: 'exhaustion',
-  corruption_exposed: 'belief_convergence',
-  // W-CONVERGENCE: the clash of sponsors and its mutual-disengagement mirror.
-  foreign_clash: 'spheres_understanding',
-  // D4: fear of a hegemon ↔ the balance restored when it crumbles (a DISTINCT peace kind,
-  // NOT a reuse of spheres_understanding — ruling 2: the walker stays strict + bijective).
-  fear_of_dominance: 'balance_restored',
-  // D7 (DESIGN_SIM_DEPTH_R2 §D7): the two reframe casus and their DISTINCT mirrors. The design
-  // names the war reasons + the both-signs reversal (debt_unpaid → gift_forgiven); it under-
-  // specifies the peace-REASON mirrors, so these are minted Blainey-consistent (JUDGMENT,
-  // vetoable): a debt is forgiven back into a gift; a dependence is re-read as a binding mutual
-  // commerce. Both distinct peace kinds (the strict bijection walker forbids reuse).
-  ingratitude_debt: 'debt_forgiven',
-  dependency_by_design: 'bonds_of_commerce',
-  // §14.3 names this pairing itself ("opportunism↔hopelessness") and it is the strongest
-  // mirror in the table: both sides are the SIGN of one believed vulnerability gradient,
-  // so they are the same evidence read the other way by construction, not by convention.
-  opportunism: 'hopelessness',
-  // The faith pair: one closed quadrant, two columns. Divergence presses a claim,
-  // convergence offers a floor; no quadrant scores on both.
-  sacred_claim: 'common_rite',
-});
+// Owned by warReasonTaxonomy.js. This mover re-exports that dependency-free
+// authority for compatibility with the long-standing public import surface.
 
 // ── The shared substrate (imported by peaceReasons.js — shape law) ──────────
 
@@ -774,6 +668,18 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
   const states = /** @type {Record<string, unknown>} */ (ws.relationshipStates && typeof ws.relationshipStates === 'object' ? ws.relationshipStates : {});
   const prevLedger = /** @type {ReasonLedger | null} */ (getSpatialLedger(ws, 'warReasons'));
 
+  // WR-1 counterforces share the termination flag and remain an exact dark no-op.
+  // The patron index is built once, never per directed pair; legacy client edges and
+  // state-stamped hierarchy direction are resolved inside the relationship-core leaf.
+  const rules = ws.simulationRules && typeof ws.simulationRules === 'object'
+    ? /** @type {Record<string, unknown>} */ (ws.simulationRules)
+    : {};
+  const predationCounterforcesLit = rules.warLayerEnabled === true
+    && rules.warTerminationEnabled === true;
+  const patronCounterforces = predationCounterforcesLit
+    ? buildPatronCounterforceIndex({ edges }, ws)
+    : null;
+
   // The threat-environment index (existing martialReadiness read), built once.
   const threatByCid = buildThreatByCid(snapshot, ws);
 
@@ -883,7 +789,15 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
       // pre-P4 reading. 0 when the pair publishes no vulnerability substrate, when the
       // gradient runs the other way (that is hopelessness, on the peace side), or when
       // fromId is the weaker ⇒ byte-identical.
-      { type: 'opportunism', ...opportunismRead.opportunismOf(fromId, toId, demoTerms?.capability01) },
+      {
+        type: 'opportunism',
+        ...opportunismRead.opportunismOf(fromId, toId, demoTerms?.capability01, {
+          enforceLiveStrength: predationCounterforcesLit,
+          patronCounterforce: predationCounterforcesLit
+            ? patronCounterforceFor(patronCounterforces, toId)
+            : null,
+        }),
+      },
       // THE RELIGIOUS CASUS: fromId's church holds a claim on toId's altars. 0 when the
       // faith flag is dark, when either town names no patron, or when the quadrant is a
       // common-ground one (that is common_rite, on the peace side) ⇒ byte-identical.

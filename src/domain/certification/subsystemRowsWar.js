@@ -1,7 +1,8 @@
 /**
  * subsystemRowsWar.js — SUBSYSTEM CERTIFICATION ROWS for the WAR STACK:
  * warLayerEnabled, the eight war-depth sub-flags that ship lit only in the
- * full_simulation ceiling preset, and the three war-adjacent switches this lane
+ * full_simulation ceiling preset, the declared-dark warTerminationEnabled read,
+ * and the three war-adjacent switches this lane
  * ADOPTED from their home cohorts because they certify as war and nowhere else
  * (navalEnabled and peaceEngineEnabled out of the WAVES cohort, and
  * allyIntelSharingEnabled out of the baseline opt-in singles). Lane placement is
@@ -13,12 +14,12 @@
  * See subsystemRowsWaves.js for the lane split rationale, the add-a-row protocol,
  * and the evidence law. Both are binding here.
  *
- * THE NESTING (traced, not assumed, and NOT uniform). Eight of the nine war
+ * THE NESTING (traced, not assumed, and NOT uniform). The execution-side war-depth
  * switches are AND-gated under warLayerEnabled in the engine: warDeployment.js:1082
  * returns an untouched world before it reads a single sub-flag, and occupation.js:753
- * does the same. peaceEngineEnabled joins them, because peaceCausalActive
- * (warReasons.js:408) is literally `warLayerEnabled === true && peaceEngineEnabled
- * === true`. warDispositionEnabled is nested only IN EFFECT: coup.js:113 reads it on
+ * does the same. peaceEngineEnabled and warTerminationEnabled each join through
+ * their own strict two-flag gate. warDispositionEnabled is nested only IN EFFECT:
+ * coup.js:113 reads it on
  * the stressorsEnabled path, but the war-exhaustion scar it consumes is written
  * nowhere except inside the war layer. THE TWO EXCEPTIONS, stated so nobody infers
  * a gate that is not there: navalActive (navalKernel.js:78) is armyTransitActive AND
@@ -483,6 +484,38 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
       }),
     ]),
     soakEvidence: 'indirect',
+  }),
+  Object.freeze({
+    rule: 'warTerminationEnabled',
+    title: 'War termination read',
+    module: 'src/domain/worldPulse/warTermination.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY. The read emits one pulse-record receipt for each valid
+      // surviving deployment and stores no parallel termination ledger. Its
+      // pulseRecord.warTerminationReads projection is outside the current soak's
+      // event, mover-family and state-key censuses, so claiming any sibling war
+      // channel here would manufacture aliveness.
+      eventTypes: Object.freeze([]),
+      moverFamilies: Object.freeze([]),
+      stateKeys: Object.freeze([]),
+      other: 'Nested under warLayerEnabled through a strict two-flag gate: both warLayerEnabled and warTerminationEnabled must be exactly true before the pure reader runs. Each surviving deployment receives one attacker-centric four-term read per pulse, but pulseRecord.warTerminationReads is pulse evidence and is neither a selected candidate nor a dedicated worldState container. NO EXCLUSIVE ALIVENESS CHANNEL therefore exists in the current certification envelope. TO OBSERVE: WR-9 must fold the termination receipt decidingTerm vocabulary into its behavioral story-mix fields; only that fold can distinguish a live cause, continuing cost, stopping cost or momentum decision without falsely borrowing traffic from the parent war lane. Until a post-WR-9 receipt executes that fold, DORMANT_BY_CONFIG while this declared flag is false and UNOBSERVED when lit are the only honest verdicts.',
+    }),
+    // The reader evaluates every active deployment on every pulse. A quiet realm
+    // has no read to emit, but an active war must not sample its exit sporadically.
+    expectedTempo: 'per_tick',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'one_read_per_valid_surviving_deployment',
+        description: 'Every valid active deployment is read exactly once from its attacker perspective on a lit pulse, with no duplicate graph-front pass.',
+        check: 'Not expressible in the current envelope. WR-9 must record the per-year decidingTerm total beside an active-deployment denominator before a soak receipt can execute this invariant.',
+      }),
+      Object.freeze({
+        name: 'termination_receipts_are_not_state',
+        description: 'The four-term answer is pulse evidence, not a second war ledger, so pulse-history retention never creates a dedicated state twin.',
+        check: 'A v5 stateKeys census must never acquire a terminationRead or warTerminationReads key; WR-9 observes the pulse-record decidingTerm fold instead of adding persisted state.',
+      }),
+    ]),
+    soakEvidence: 'unobserved',
   }),
 ]);
 

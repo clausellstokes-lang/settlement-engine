@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { previewCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
 import { evaluateWarLayer } from '../../src/domain/worldPulse/warDeployment.js';
+import { stampWarIntent } from '../../src/domain/worldPulse/warIntent.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { deriveCausalState } from '../../src/domain/causalState.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
@@ -169,6 +170,65 @@ describe('war layer — deployment + drain', () => {
     expect(deployed.recordMode).toBeUndefined();
   });
 
+  test.each([
+    ['a current patron', { tier: 'town', population: 4000 }, true],
+    ['an equal live host under temporary pressure', {
+      tier: 'city', population: 5000,
+      activeConditions: [{ archetype: 'war_pressure', severity: 1 }],
+    }, false],
+  ])('WR-1 opener rejects stale opportunism contradicted by %s', (_counterforce, targetPatch, hasPatron) => {
+    const saves = [
+      save('strong', 'Ironhold', { tier: 'city', population: 5000 }),
+      save('weak', 'Thornmere', targetPatch),
+      ...(hasPatron ? [save('guardian', 'Highwatch', { tier: 'city', population: 8000 })] : []),
+    ];
+    const edges = {
+      settlementIds: saves.map(item => item.id),
+      edges: [
+        { id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' },
+        ...(hasPatron ? [{ id: 'edge.guardian.weak', from: 'guardian', to: 'weak', relationshipType: 'patron' }] : []),
+      ],
+      relationshipStates: {
+        'edge.strong.weak': { relationshipType: 'hostile' },
+        ...(hasPatron ? { 'edge.guardian.weak': { relationshipType: 'patron', patronSaveId: 'guardian' } } : {}),
+      },
+    };
+    const staleOpportunism = {
+      updatedTick: 1,
+      reasons: {
+        opportunism: {
+          type: 'opportunism', score: 1, sinceTick: 1, tick: 1,
+          receipt: 'The court remembers an undefended prize.',
+        },
+      },
+    };
+    const evaluate = warTerminationEnabled => {
+      const rules = { peaceEngineEnabled: true, warTerminationEnabled };
+      const campaign = warCampaign(rules, {
+        edges,
+        extraState: {
+          warPosture: { strong: { state: 'mobilized', progress: 1, sinceTick: 0 } },
+          spatialCanonVersion: 1,
+          spatialLedgers: { warReasons: { 'strong>weak': staleOpportunism } },
+        },
+      });
+      campaign.worldState = stampWarIntent(campaign.worldState, 'strong', 'weak', 4);
+      const snap = snapshotFor(campaign, saves);
+      return evaluateWarLayer({
+        snapshot: snap, worldState: snap.worldState, rng: createPRNG('stale-opportunism'),
+        tick: 5, now: NOW, rules: snap.worldState.simulationRules,
+      });
+    };
+
+    const dark = evaluate(false);
+    const lit = evaluate(true);
+    expect(dark.deployments.strong?.casusReasons).toEqual([{
+      type: 'opportunism', score: 1, receipt: 'The court remembers an undefended prize.',
+    }]);
+    expect(lit.deployments.strong, 'counterforced opportunism cannot open one stale war').toBeUndefined();
+    expect(lit.graphChannels).toEqual([]);
+  });
+
   test('a fresh age-0 deployment keeps its first conscription visible and conserved', () => {
     const saves = [attacker('strong', 'Ironhold'), victim('weak', 'Thornmere')];
     const edges = {
@@ -195,6 +255,29 @@ describe('war layer — deployment + drain', () => {
     expect(conscription.recordMode).toBeUndefined();
     expect(-conscription.populationDeltas[0].delta)
       .toBe(war.deployments.strong.deployedPopulation);
+  });
+
+  test('light-record migration preserves pinned causes, sacred anchors, and auxiliary deployment state', () => {
+    const saves = [attacker('strong', 'Ironhold'), victim('weak', 'Thornmere')];
+    const edges = {
+      settlementIds: ['strong', 'weak'],
+      edges: [{ id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' }],
+      relationshipStates: { 'edge.strong.weak': { relationshipType: 'hostile' } },
+    };
+    const original = {
+      targetId: 'weak', sinceTick: 1, role: 'siege',
+      casusReasons: [{ type: 'sacred_claim', score: 0.8, receipt: 'The rival patron remains an offense.', atTick: 1 }],
+      attackerPatronRef: 'deity:ash', defenderPatronRef: 'deity:river',
+      auxiliary: { campaignKey: 'winter-oath' },
+    };
+    const snap = snapshotFor(warCampaign({}, { edges, extraState: { deployments: { strong: original } } }), saves);
+    const war = evaluateWarLayer({ snapshot: snap, worldState: snap.worldState, rng: createPRNG('migration'), tick: 5, now: NOW, rules: { warLayerEnabled: true } });
+    expect(war.deployments.strong.casusReasons).toEqual(original.casusReasons);
+    expect(war.deployments.strong).toMatchObject({
+      attackerPatronRef: 'deity:ash', defenderPatronRef: 'deity:river',
+      auxiliary: { campaignKey: 'winter-oath' }, sinceTick: 1, deploymentAge: 5,
+    });
+    expect(war.deployments.strong.currentEffectiveStrength).toBeGreaterThan(0);
   });
 
   // Landed W2b causalState wave — needs causalState economic_capacity system variable

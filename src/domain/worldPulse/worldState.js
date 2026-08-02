@@ -5,6 +5,8 @@ import { deepClone } from '../clone.js';
 import { stablePart } from './stablePart.js';
 import { INTERVAL_WEEKS } from './intervalWeeks.js';
 import { migrateTreatyClockMarkers } from './treatyClock.js';
+import { compareCodepoint } from '../deterministicSort.js';
+import { isWarReasonType } from './warReasonTaxonomy.js';
 
 export const WORLD_STATE_SCHEMA_VERSION = 2;
 
@@ -98,6 +100,40 @@ function cloneObject(value) {
 /** @param {any} value */
 function deepCloneLedger(value) {
   return value && typeof value === 'object' && !Array.isArray(value) ? deepClone(value) : {};
+}
+
+// WR-1 persistence law: deployments are a durable war ledger, but their founding
+// casus list is a CLOSED taxonomy rather than an arbitrary import surface. Rebuild
+// the outer ledger in deterministic key order, retain every deployment field, and
+// keep only well-shaped reasons whose type the live taxonomy knows. An invalid or
+// exhausted casus list disappears instead of surviving as an empty artifact. The
+// whole input is cloned first, so retained nested receipts never alias the loaded
+// save; no schema bump is needed because the additive field remains optional.
+/** @param {unknown} value */
+function normalizeDeployments(value) {
+  const cloned = deepCloneLedger(value);
+  /** @type {Record<string, unknown>} */
+  const normalized = {};
+  for (const key of Object.keys(cloned).sort(compareCodepoint)) {
+    const record = cloned[key];
+    if (!record || typeof record !== 'object' || Array.isArray(record)) {
+      normalized[key] = record;
+      continue;
+    }
+    const next = { ...record };
+    if (Object.prototype.hasOwnProperty.call(next, 'casusReasons')) {
+      const reasons = Array.isArray(next.casusReasons)
+        ? next.casusReasons.filter((/** @type {unknown} */ reason) => (
+          reason && typeof reason === 'object' && !Array.isArray(reason)
+          && isWarReasonType((/** @type {Record<string, unknown>} */ (reason)).type)
+        ))
+        : [];
+      if (reasons.length) next.casusReasons = reasons;
+      else delete next.casusReasons;
+    }
+    normalized[key] = next;
+  }
+  return normalized;
 }
 
 // CONDITIONAL ledger clone (the pantheon). UNLIKE the additive ledgers above, the
@@ -459,7 +495,7 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     // DEEP-cloned (not the shallow `...cloneObject(raw)` spread above) so a
     // pre-tick snapshot never aliases live ledger state across ticks.
     dispositionStats: deepCloneLedger(raw?.dispositionStats),
-    deployments: deepCloneLedger(raw?.deployments),
+    deployments: normalizeDeployments(raw?.deployments),
     tradeWarState: deepCloneLedger(raw?.tradeWarState),
     warExhaustion: deepCloneLedger(raw?.warExhaustion),
     // Spatial-canon marker — present ONLY when the raw carried a valid version

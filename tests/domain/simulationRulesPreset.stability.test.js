@@ -7,6 +7,7 @@ import {
   SIMULATION_RULE_PRESETS,
   normalizeSimulationRules,
 } from '../../src/domain/worldPulse/simulationRules.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // F0 structural tripwire (guards the RULE_COMPARISON_KEYS churn trap): preset
 // identity must survive the addition of future default-false simulation flags
@@ -179,6 +180,38 @@ describe('simulation rules preset — stability under future-flag churn', () => 
     const keyless = { ...SIMULATION_RULE_PRESETS.full_simulation.rules };
     delete keyless.presetId;
     expect(normalizeSimulationRules(keyless).presetId).toBe('full_simulation');
+  });
+
+  // WR-1 — termination is a VIRTUAL, declared-dark certification key. It is
+  // intentionally absent from the default bank (so legacy preset matching does
+  // not change), named only by the ceiling preset, and not lit before WR-9 can
+  // measure its deciding-term distribution.
+  test('war termination is declared false only in full_simulation and remains outside preset identity', () => {
+    const flag = 'warTerminationEnabled';
+    expect(Object.prototype.hasOwnProperty.call(DEFAULT_SIMULATION_RULES, flag)).toBe(false);
+    expect(Object.prototype.hasOwnProperty.call(SIMULATION_RULE_PRESETS.full_simulation.rules, flag)).toBe(true);
+    expect(typeof SIMULATION_RULE_PRESETS.full_simulation.rules[flag]).toBe('boolean');
+    expect(SIMULATION_RULE_PRESETS.full_simulation.rules[flag]).toBe(false);
+
+    for (const id of PRESET_IDS.filter((presetId) => presetId !== 'full_simulation')) {
+      expect(
+        Object.prototype.hasOwnProperty.call(SIMULATION_RULE_PRESETS[id].rules, flag),
+        `${id}.${flag} must remain absent`,
+      ).toBe(false);
+    }
+
+    // Virtual flags are excluded from RULE_COMPARISON_KEYS: even a future lit
+    // value does not make an otherwise exact Full Simulation save lose its preset.
+    expectAbsentWithAnchor(
+      RULE_COMPARISON_KEYS,
+      flag,
+      'warLayerEnabled',
+      'the comparison census is live while the virtual termination key stays outside preset identity',
+    );
+    const keylessLit = { ...SIMULATION_RULE_PRESETS.full_simulation.rules, [flag]: true };
+    delete keylessLit.presetId;
+    expect(normalizeSimulationRules(keylessLit).presetId).toBe('full_simulation');
+    expect(normalizeSimulationRules(keylessLit)[flag]).toBe(true);
   });
 
   // W-R2-LIGHT — the nine post-close engine-wave gates light TOGETHER in the

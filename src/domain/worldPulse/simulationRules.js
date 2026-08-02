@@ -398,6 +398,12 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     warForageEnabled: true,
     warLevyEnabled: true,
     warDispositionEnabled: true,
+    // WR-1: the pure termination read is structurally present but remains DARK
+    // until its WR-9 receipt fold can measure the deciding-term distribution.
+    // This virtual key is deliberately absent from DEFAULT_SIMULATION_RULES and
+    // every other preset; declaring false here puts it under certification without
+    // lighting behavior or changing preset inference.
+    warTerminationEnabled: false,
     seasonsEnabled: true,
     // Owner ruling (golden sign-off — LIGHT EVERYTHING RECOMMENDED): the ceiling
     // runs the calamity mover. disastersEnabled is an opt-in key ABSENT from

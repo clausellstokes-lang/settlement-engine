@@ -22,6 +22,7 @@ import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { REASON_TUNING } from '../../src/domain/worldPulse/warReasons.js';
+import { peaceReasonFactor, peaceReasonsFor } from '../../src/domain/worldPulse/peaceReasons.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 
@@ -79,13 +80,13 @@ function saturatedWarLedger() {
   };
 }
 
-function warWorldState({ lit, withLedger }) {
+function warWorldState({ lit, withLedger, termination = false }) {
   return {
     rngSeed: 'consumption', tick: 4,
     relationshipStates: { 'edge.atk.vic': { relationshipType: 'hostile' } },
     deployments: {},
     warPosture: { atk: { state: 'mobilized', progress: 1, sinceTick: 0 } },
-    simulationRules: { warLayerEnabled: true, ...(lit ? { peaceEngineEnabled: true } : {}) },
+    simulationRules: { warLayerEnabled: true, ...(lit ? { peaceEngineEnabled: true } : {}), ...(termination ? { warTerminationEnabled: true } : {}) },
     ...(withLedger ? { spatialLedgers: { warReasons: saturatedWarLedger() } } : {}),
   };
 }
@@ -100,8 +101,8 @@ function snapFor(worldState) {
   return buildWorldSnapshot({ campaign, saves, worldState });
 }
 
-function runWarLayer({ lit, withLedger }) {
-  const worldState = warWorldState({ lit, withLedger });
+function runWarLayer({ lit, withLedger, termination = false }) {
+  const worldState = warWorldState({ lit, withLedger, termination });
   const snapshot = snapFor(worldState);
   return evaluateWarLayer({
     snapshot, worldState: snapshot.worldState, rng: createPRNG('consumption'), tick: 4, now: NOW,
@@ -145,6 +146,32 @@ describe('enumerateMoves — the causal factors load the deploy / sue_for_peace 
   });
 });
 
+describe('WR-1 peace-reason consumption does not count a dissolved cause twice', () => {
+  it('filters only the dissolved cause mirrors and preserves unrelated peace pressure', () => {
+    const rec = (type, receipt) => ({ type, score: 1, sinceTick: 1, tick: 4, receipt });
+    const worldState = {
+      simulationRules: { warLayerEnabled: true, peaceEngineEnabled: true },
+      spatialLedgers: {
+        peaceReasons: {
+          'atk>vic': {
+            reasons: {
+              hopelessness: rec('hopelessness', 'The weaker court sees no road to victory.'),
+              exhaustion: rec('exhaustion', 'The long campaign has worn the court thin.'),
+            },
+            updatedTick: 4,
+          },
+        },
+      },
+    };
+    const complete = peaceReasonFactor(worldState, 'atk', 'vic');
+    const filtered = peaceReasonFactor(worldState, 'atk', 'vic', ['opportunism']);
+    const filteredEntry = peaceReasonsFor(worldState, 'atk', 'vic', ['opportunism']);
+    expect(filtered).toBeGreaterThan(1);
+    expect(filtered).toBeLessThan(complete);
+    expect(Object.keys(filteredEntry.reasons)).toEqual(['exhaustion']);
+  });
+});
+
 // ── 2. The war-initiation seam (evaluateWarLayer) ────────────────────────────
 
 describe('warDeployment — the accumulated casus emboldens the march and stamps the artifact', () => {
@@ -163,6 +190,7 @@ describe('warDeployment — the accumulated casus emboldens the march and stamps
     expect(Array.isArray(rec.casusReasons)).toBe(true);
     expect(rec.casusReasons.length).toBe(3);
     for (const c of rec.casusReasons) {
+      expect(Object.keys(c).sort()).toEqual(['receipt', 'score', 'type']);
       expect(typeof c.type).toBe('string');
       expect(c.score).toBeGreaterThan(0);
       expect(c.receipt.length).toBeGreaterThan(0);
@@ -171,6 +199,14 @@ describe('warDeployment — the accumulated casus emboldens the march and stamps
     const deployOutcome = lit.outcomes.find((o) => o.candidateType === 'strategy_deploy');
     expect(deployOutcome, 'the march announced itself').toBeTruthy();
     expect(deployOutcome.reasons.some((r) => /^Casus belli: /.test(r)), 'the receipt names the casus').toBe(true);
+  });
+
+  it('the termination flag pins the open-tick on new causes without changing the dark record shape', () => {
+    const lit = runWarLayer({ lit: true, withLedger: true, termination: true });
+    const rec = lit.deployments.atk;
+    expect(rec.casusReasons).toHaveLength(3);
+    expect(rec.casusReasons.every((cause) => cause.atTick === 4)).toBe(true);
+    expect(Object.keys(rec.casusReasons[0]).sort()).toEqual(['atTick', 'receipt', 'score', 'type']);
   });
 
   it('NEGATIVE CONTROL: a hand-seeded ledger under a DARK gate changes nothing at all', () => {

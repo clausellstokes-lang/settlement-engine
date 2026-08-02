@@ -123,7 +123,7 @@ export function faithProximityOf(itemA, itemB) {
 }
 
 /** The patron ref a town names, or '' when it names none. @param {FaithItem | null | undefined} item */
-function patronRefOf(item) {
+export function patronRefOf(item) {
   const snap = asObject(asObject(asObject(item).settlement).config).primaryDeitySnapshot;
   const ref = asObject(snap)._deityRef;
   return ref != null ? String(ref) : '';

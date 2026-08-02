@@ -29,7 +29,7 @@
 import {
   peaceCausalActive, reasonPairKey, foldPairReasons,
   aggregateReasons01, topReasons, REASON_TUNING,
-  WAR_REASON_TYPES, PEACE_REASON_TYPES,
+  WAR_REASON_TYPES, PEACE_REASON_TYPES, REASON_MIRRORS,
 } from './warReasons.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { peaceReceipt } from './eventProse.js';
@@ -264,14 +264,14 @@ export function scoreBondsOfCommerce({ bonds01 }, /** @type {string | undefined}
  * absent; up to 1 + PEACE_FACTOR_W when the case saturates. Consumed at the
  * settlementStrategy sue_for_peace weight seam.
  * @param {Record<string, unknown> | null | undefined} worldState
- * @param {unknown} partyId @param {unknown} foeId
+ * @param {unknown} partyId @param {unknown} foeId @param {readonly string[] | null | undefined} dissolvedCauseTypes
  * @returns {number}
  */
-export function peaceReasonFactor(worldState, partyId, foeId) {
+export function peaceReasonFactor(worldState, partyId, foeId, dissolvedCauseTypes = null) {
   if (!peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */(worldState))) return 1;
   const ledger = /** @type {import('./warReasons.js').ReasonLedger | null} */ (getSpatialLedger(worldState, 'peaceReasons'));
   if (!ledger) return 1;
-  const entry = ledger[reasonPairKey(partyId, foeId)];
+  const entry = withoutDissolvedCauseMirrors(ledger[reasonPairKey(partyId, foeId)], dissolvedCauseTypes);
   const aggregate = aggregateReasons01(entry);
   if (aggregate <= 0) return 1;
   return 1 + REASON_TUNING.PEACE_FACTOR_W * aggregate;
@@ -280,13 +280,29 @@ export function peaceReasonFactor(worldState, partyId, foeId) {
 /**
  * The pair's peace-reason entry (for receipts). Null when dark/absent.
  * @param {Record<string, unknown> | null | undefined} worldState
- * @param {unknown} partyId @param {unknown} foeId
+ * @param {unknown} partyId @param {unknown} foeId @param {readonly string[] | null | undefined} dissolvedCauseTypes
  * @returns {import('./warReasons.js').ReasonPairEntry | null}
  */
-export function peaceReasonsFor(worldState, partyId, foeId) {
+export function peaceReasonsFor(worldState, partyId, foeId, dissolvedCauseTypes = null) {
   const ledger = /** @type {import('./warReasons.js').ReasonLedger | null} */ (getSpatialLedger(worldState, 'peaceReasons'));
   if (!ledger) return null;
-  return ledger[reasonPairKey(partyId, foeId)] || null;
+  return withoutDissolvedCauseMirrors(ledger[reasonPairKey(partyId, foeId)], dissolvedCauseTypes);
+}
+
+/**
+ * A dissolved founding cause already contributes to the termination read. Its peace
+ * mirror must not load the same sue-for-peace choice a second time.
+ * @param {import('./warReasons.js').ReasonPairEntry | null | undefined} entry
+ * @param {unknown} dissolvedCauseTypes
+ * @returns {import('./warReasons.js').ReasonPairEntry | null}
+ */
+function withoutDissolvedCauseMirrors(entry, dissolvedCauseTypes) {
+  if (!entry) return null;
+  const causes = Array.isArray(dissolvedCauseTypes) ? dissolvedCauseTypes : [];
+  const excluded = /** @type {Set<string>} */ (new Set(causes.map((type) => REASON_MIRRORS[/** @type {keyof typeof REASON_MIRRORS} */ (type)]).filter(Boolean)));
+  if (!excluded.size) return entry;
+  const reasons = Object.fromEntries(Object.entries(entry.reasons || {}).filter(([type]) => !excluded.has(type)));
+  return Object.keys(reasons).length ? { ...entry, reasons } : null;
 }
 
 // ── THE IRONY READ-MODEL (§14.4 legibility of motive) ───────────────────────

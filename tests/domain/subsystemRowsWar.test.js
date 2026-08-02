@@ -1,17 +1,17 @@
 /**
- * subsystemRowsWar.test.js — the twelve WAR-STACK certification rows.
+ * subsystemRowsWar.test.js — the thirteen WAR-STACK certification rows.
  *
  * A certification row is a CLAIM ABOUT SOURCE: "this module emits these literals,
  * writes these containers, and owns nothing else". An unchecked row rots into
  * fiction the first time a module is renamed, and a fictional row grades
  * UNOBSERVED forever while reading like diligence. So this file does four jobs:
  *
- *   1. SHAPE     the twelve rules are authored, not deferred, and every row
+ *   1. SHAPE     the thirteen rules are authored, not deferred, and every row
  *                conforms to the registry contract.
  *   2. TRACE     every DECLARED literal is re-derived from the live source, and
  *                every DELIBERATELY UNDECLARED one is held out with an anchored
  *                negative, so a new emitter or a rename reds here.
- *   3. GAP       the six rows that own no vocabulary say so through soakEvidence
+ *   3. GAP       the seven rows that own no vocabulary say so through soakEvidence
  *                'unobserved' AND name the observation that would close the gap.
  *   4. VERDICT   each row reaches each verdict it can reach, against receipts that
  *                differ in exactly one field.
@@ -43,7 +43,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const sourceOf = (rel) => readFileSync(join(ROOT, rel), 'utf8');
 
 const PARENT = 'warLayerEnabled';
-/** The twelve rules this lane authors, in registry order. */
+/** The thirteen rules this lane authors, in registry order. */
 const WAR_RULES = Object.freeze([
   'warLayerEnabled',
   'warEconomyDrainEnabled',
@@ -57,6 +57,7 @@ const WAR_RULES = Object.freeze([
   'allyIntelSharingEnabled',
   'navalEnabled',
   'peaceEngineEnabled',
+  'warTerminationEnabled',
 ]);
 
 // The rows the engine really does AND-gate under the war layer (or, for
@@ -73,6 +74,7 @@ const NESTED_UNDER_PARENT = Object.freeze([
   'allyDefenseEnabled',
   'warDispositionEnabled',
   'peaceEngineEnabled',
+  'warTerminationEnabled',
 ]);
 
 /** The rows that own no vocabulary at all, each with the token its gap note must name. */
@@ -83,6 +85,7 @@ const NO_CHANNEL_ROWS = Object.freeze({
   allyDefenseEnabled: 'defenderReliefBonus',
   warDispositionEnabled: 'warSentimentAdj',
   allyIntelSharingEnabled: 'provenance census',
+  warTerminationEnabled: 'decidingTerm',
 });
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -145,7 +148,7 @@ const WARRING_YEAR = Object.freeze({
 });
 
 describe('war-stack rows — shape and partition', () => {
-  test('all twelve war-stack rules are authored rather than deferred to a pending list', () => {
+  test('all thirteen war-stack rules are authored rather than deferred to a pending list', () => {
     // Purely positive, on purpose. A bare "not in the pending list" would need an
     // anchor sibling that is ITSELF still pending, and the pending list shrinks
     // under this file as other lanes land rows. The live coverage audit proves the
@@ -157,7 +160,7 @@ describe('war-stack rows — shape and partition', () => {
       registry: SUBSYSTEM_CERTIFICATION_REGISTRY,
       pendingKeys: SUBSYSTEM_CERTIFICATION_PENDING_KEYS,
     });
-    // Scoped to THIS lane's twelve. The composed partition's own totality is the
+    // Scoped to THIS lane's thirteen. The composed partition's own totality is the
     // walker's assertion, and this tree is written by parallel sessions, so a
     // sibling lane mid-edit must not red the war lane's proof.
     expect(audit.missing).toEqual([]);
@@ -246,6 +249,8 @@ describe('war-stack rows — shape and partition', () => {
     expect(sourceOf('src/domain/worldPulse/occupation.js')).toContain('if (!rules?.warLayerEnabled) {');
     expect(sourceOf('src/domain/worldPulse/warReasons.js'))
       .toContain('r.warLayerEnabled === true && r.peaceEngineEnabled === true');
+    expect(sourceOf('src/domain/worldPulse/warTermination.js'))
+      .toContain('rules.warLayerEnabled !== true || rules.warTerminationEnabled !== true');
 
     // THE TWO EXCEPTIONS. Neither is gated on the war layer, and a row that claimed
     // otherwise would send the next reader hunting a gate that does not exist.
@@ -260,7 +265,7 @@ describe('war-stack rows — shape and partition', () => {
     expect(rowFor('allyIntelSharingEnabled').aliveness.other).toContain('pulseKernel.js:1838');
   });
 
-  test('the six vocabulary-less rows admit the gap and name the observation that closes it', () => {
+  test('the seven vocabulary-less rows admit the gap and name the observation that closes it', () => {
     for (const [rule, token] of Object.entries(NO_CHANNEL_ROWS)) {
       const row = rowFor(rule);
       expect(row.aliveness.eventTypes, `${rule}`).toEqual([]);
@@ -572,7 +577,7 @@ describe('war-stack rows — the verdicts, one field apart', () => {
     }
   });
 
-  test('the six vocabulary-less rows reach UNOBSERVED and DORMANT, and never ALIVE', () => {
+  test('the seven vocabulary-less rows reach UNOBSERVED and DORMANT, and never ALIVE', () => {
     // A census as rich as any receipt could carry, and a warring year on top: still
     // UNOBSERVED, because none of it is evidence these rows are allowed to claim.
     const rich = receiptV5({

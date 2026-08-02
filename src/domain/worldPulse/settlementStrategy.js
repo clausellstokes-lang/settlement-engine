@@ -79,7 +79,7 @@ import { DEFAULT_SCORING_OBJECTIVE, objectiveForArchetype } from './scoringObjec
 // centered-on-1.0 factors — ×1 exactly when the peace-engine gate is dark or no
 // case stands, so the dormant chooser is byte-identical), and the CHOSEN move's
 // receipt names the top reasons — the weights ARE the reasons.
-import { peaceCausalActive, warReasonFactor, warReasonsFor, topReasons } from './warReasons.js';
+import { peaceCausalActive, topReasons } from './warReasons.js';
 import { peaceReasonFactor, peaceReasonsFor } from './peaceReasons.js';
 // §11b R-8 THE EMBASSY SUIT: a peace embassy that reached the venue deposits a bounded peace
 // modifier into the roads-owned roadsEmbassies ledger; sue_for_peace CONSUMES it here. The
@@ -91,7 +91,7 @@ import { getSpatialLedger } from '../spatial/distanceRead.js';
 // settlement's decision weights toward its END (the SAME §H kernel, receipted in the
 // visible record). Dormant / no ruling bloc ⇒ factor 1.0 ⇒ byte-identical scoring.
 import { settlementPoliticsActive, blocDecisionFactor } from './settlementPolitics.js';
-import { makeCommitmentLoad, moveCourseRelation } from './momentum.js';
+import { makeCommitmentLoad, moveCourseRelation } from './momentum.js'; import { makeCurrentWarCasusRead, terminationPeaceReasonLines, warFactorForCasusRead } from './warTermination.js';
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -569,10 +569,11 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
  *   coalitionLoad?: { factorFor: (move: string) => number } | null,
  *   commitmentLoad?: { factorFor: (move: string, targetId?: string|null) => number } | null,
  *   extractionEV?: { adjFor: (targetId: string) => number } | null,
- *   embassy?: { suitFor: (foes: string[]) => number } | null }} args
+ *   embassy?: { suitFor: (foes: string[]) => number } | null,
+ *   termination?: { suePressure01:number } | null }} args
  * @returns {Array<{ move:string, score:number, bestTargetId?:string }>}
  */
-function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0, objective = DEFAULT_SCORING_OBJECTIVE, causal = null, coalitionLoad = null, commitmentLoad = null, extractionEV = null, embassy = null }) {
+function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0, objective = DEFAULT_SCORING_OBJECTIVE, causal = null, coalitionLoad = null, commitmentLoad = null, extractionEV = null, embassy = null, termination = null }) {
   const sStrength = strengthFor(sId);
   const aggr = aggressiveness - 1; // signed drive ∈ ~[-0.5, 0.5]
   // The scorer (VI.3 / M9a): the move coefficients live in the OBJECTIVE descriptor;
@@ -639,7 +640,7 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
   if (peaceGateOpen && inConflict) {
     // W-C1 item 1b: the peace-threshold reading is MISREAD toward chaos + rust (a delayed
     // or premature suit); read true (byte-identical) for a lawful, seasoned, deity-free realm.
-    const perceived = perceivedPeaceExhaustion({ exhaustion, rng, tick, sId, chaosPull, rust });
+    const perceived = termination ? clamp01(Number(termination.suePressure01) || 0) : perceivedPeaceExhaustion({ exhaustion, rng, tick, sId, chaosPull, rust });
     let peaceScore = clamp01(O.sueForPeace.base + perceived * O.sueForPeace.exhaustionGain - aggr * O.sueForPeace.aggrDamp);
     // W-PEACE-1 §H: the accumulated CASUS PACIS ledger loads the peace weight —
     // the strongest case across the conflicts S is actually in (codepoint-stable
@@ -708,6 +709,7 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
   // expression above is untouched ⇒ a below-cliff/uncommitted actor produces today's bytes.
   if (commitmentLoad) {
     for (const move of Object.keys(scored)) {
+      if (termination && move === 'sue_for_peace') continue;
       const relation = moveCourseRelation(move);
       if (relation === 'neutral') continue;
       // A consistent move binds to the best-margin target it is pursuing; a reversal reads
@@ -745,9 +747,9 @@ function causalReasonLines(entry, label) {
  * INERT marker (no condition, no patch) that still wins the `strategy:<S>`
  * exclusive group and so suppresses the reactive escalation for S — the chooser
  * decided NOT to escalate this tick, with no stray world-state cost.
- * @param {{ move: string, bestTargetId?:string|null, sId: any, item: any, ctx: any, tick: number, exhaustion: number, snapshot: any, strengthFor: (id: any) => number, rng?: RngLike, chaosPull?: number, rust?: number, worldState?: import('./beliefMap.js').BeliefWorldState, beliefActive?: boolean, trueStrengthFor?: ((id: string) => number)|null }} args
+ * @param {{ move: string, bestTargetId?:string|null, sId: any, item: any, ctx: any, tick: number, exhaustion: number, snapshot: any, strengthFor: (id: any) => number, rng?: RngLike, chaosPull?: number, rust?: number, worldState?: import('./beliefMap.js').BeliefWorldState, beliefActive?: boolean, trueStrengthFor?: ((id: string) => number)|null, termination?: { suePressure01:number, dissolvedCauseTypes?:string[], receipt?:{reason?:string}, targetId?:string }|null, warCasusFor?: ReturnType<typeof makeCurrentWarCasusRead>|null }} args
  */
-function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion, snapshot, strengthFor, rng = null, chaosPull = 0, rust = 0, worldState = null, beliefActive = false, trueStrengthFor = null }) {
+function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion, snapshot, strengthFor, rng = null, chaosPull = 0, rust = 0, worldState = null, beliefActive = false, trueStrengthFor = null, termination = null, warCasusFor = null }) {
   const name = item?.name || item?.settlement?.name || String(sId);
 
   if (move === 'sue_for_peace') {
@@ -756,8 +758,10 @@ function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion,
     // war-3, executed on apply — address the SAME conflict), else the codepoint-first
     // hostile edge. (Fixes the old comment/code mismatch: "strongest hostile edge" was
     // really codepoint-first.)
+    const terminationTarget = termination?.targetId != null && hostileEdgeBetween(snapshot, sId, termination.targetId)
+      ? String(termination.targetId) : null;
     const besiegingTarget = ctx.besieging.find((/** @type {string} */ t) => hostileEdgeBetween(snapshot, sId, t));
-    const target = besiegingTarget || ctx.hostileTargets[0] || ctx.besieging[0];
+    const target = terminationTarget || besiegingTarget || ctx.hostileTargets[0] || ctx.besieging[0];
     const edge = target ? hostileEdgeBetween(snapshot, sId, target) : null;
     if (!edge) return null; // no edge to de-escalate — fall through to nothing
     // Read the edge's ACTUAL current label (the relationshipStates overlay wins over
@@ -772,17 +776,19 @@ function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion,
     if (!toType) return null;
     const key = relationshipKeyFromEdge(edge);
     // W-C1 item 1b legibility: name the war-bankruptcy reading + any chaos/rust misread of it.
-    const perceived = perceivedPeaceExhaustion({ exhaustion, rng, tick, sId, chaosPull, rust });
-    const reasons = [
+    const perceived = termination ? clamp01(Number(termination.suePressure01) || 0) : perceivedPeaceExhaustion({ exhaustion, rng, tick, sId, chaosPull, rust });
+    const peaceEntry = peaceCausalActive(worldState)
+      ? peaceReasonsFor(worldState, String(sId), String(target), termination?.dissolvedCauseTypes)
+      : null;
+    const reasons = termination ? [
+      ...(termination.receipt?.reason ? [termination.receipt.reason] : []),
+      ...terminationPeaceReasonLines(peaceEntry),
+    ] : [
       `Economic exhaustion ${exhaustion.toFixed(2)} drives ${name} to the table.`,
       'Sue-for-peace pulls the existing de-escalation levers (hostile_truce / wind-down).',
-      // W-PEACE-1 §14.4: name the typed peace reasons this suit consumed (empty when dark).
-      ...causalReasonLines(
-        peaceCausalActive(worldState) ? peaceReasonsFor(worldState, String(sId), String(target)) : null,
-        'Casus pacis',
-      ),
+      ...causalReasonLines(peaceEntry, 'Casus pacis'),
     ];
-    if (perceived !== exhaustion) {
+    if (!termination && perceived !== exhaustion) {
       const driver = chaosPull > 0 && rust > 0 ? "its patron's chaos and a rusty army"
         : chaosPull > 0 ? "its patron's chaos"
         : 'a rusty army';
@@ -844,7 +850,7 @@ function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion,
         ...(misjudgment ? [misjudgmentReason(misjudgment, name, targetName)] : []),
         // W-PEACE-1 §14.4: name the typed war reasons this march consumed (empty when dark).
         ...causalReasonLines(
-          peaceCausalActive(worldState) && target ? warReasonsFor(worldState, String(sId), String(target)) : null,
+          peaceCausalActive(worldState) && target && warCasusFor ? warCasusFor(String(sId), String(target)).entry : null,
           'Casus belli',
         ),
       ],
@@ -924,6 +930,7 @@ function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion,
  * @param {number} [context.tick]
  * @param {{ settlementStrategyEnabled?: boolean }} [context.simulationRules]
  * @param {{ random: () => number, fork: (label:string) => any }} [context.rng]
+ * @param {Map<string, { targetId:string, suePressure01:number, dissolvedCauseTypes?:string[], receipt?:{reason?:string} }>|null} [context.warTerminationByAttacker]
  * @returns {any[]} at most ONE probability-1 candidate per settlement.
  */
 export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context = {}) {
@@ -933,9 +940,10 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
 
   const tick = Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0;
   const graph = snapshot?.regionalGraph || {};
-  const worldState = snapshot?.worldState || {};
+  const worldState = snapshot?.worldState || {}; const warCasusFor = makeCurrentWarCasusRead({ snapshot, worldState, graph, rules });
   const deployments = worldState.deployments || {};
   const rng = context.rng;
+  const terminationByAttacker = context.warTerminationByAttacker instanceof Map ? context.warTerminationByAttacker : null;
   const strengthFor = buildStrengthLookup(snapshot, pressureIdx);
   // WAVE A: are beliefs live for this campaign? The gate is ORTHOGONAL to
   // settlementStrategyEnabled (spatialCanonVersion + a non-omniscient infoMode).
@@ -955,6 +963,7 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     const item = snapshot?.byId?.get?.(sId);
     if (!item) continue;
     const ctx = contextFor(snapshot, graph, sId, beliefActive, tick);
+    const termination = terminationByAttacker?.get(sId) || null;
     // The observer's belief-sourced strength lookup (self ⇒ truth). Dormant ⇒ the
     // raw ground-truth lookup unchanged (byte-exact).
     const strengthForObs = beliefActive ? makeBeliefStrengthFor(strengthFor, sId, worldState) : strengthFor;
@@ -1016,8 +1025,13 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     // the SAME worldState the ledgers live on) ⇒ the scorer is byte-identical.
     const causal = peaceCausalActive(worldState)
       ? {
-        warFor: (/** @type {string} */ targetId) => warReasonFactor(worldState, sId, targetId),
-        peaceFor: (/** @type {string} */ foeId) => peaceReasonFactor(worldState, sId, foeId),
+        warFor: (/** @type {string} */ targetId) => warFactorForCasusRead(worldState, sId, targetId, warCasusFor(sId, targetId)),
+        peaceFor: (/** @type {string} */ foeId) => peaceReasonFactor(
+          worldState,
+          sId,
+          foeId,
+          termination && String(termination.targetId) === String(foeId) ? termination.dissolvedCauseTypes : null,
+        ),
       }
       : null;
     // W-DOCTRINE-4 §3: the ruling-bloc decision load (null ⇒ dormant ⇒ byte-identical).
@@ -1039,7 +1053,7 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     const embassy = getSpatialLedger(worldState, EMBASSY_LEDGER_KEY)
       ? { suitFor: (/** @type {string[]} */ foes) => embassySuitPeaceMult(worldState, String(sId), foes) }
       : null;
-    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective, causal, coalitionLoad, commitmentLoad, extractionEV, embassy });
+    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective, causal, coalitionLoad, commitmentLoad, extractionEV, embassy, termination });
     if (!moves.length) continue;
 
     const weights = softmaxWeights(moves.map((m) => m.score), STRATEGY_K);
@@ -1061,7 +1075,7 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     const candidate = emitMove({
       move: chosen.move, bestTargetId: chosen.bestTargetId, sId, item, ctx, tick, exhaustion, snapshot,
       strengthFor: strengthForObs, rng, chaosPull, rust,
-      worldState, beliefActive, trueStrengthFor: strengthFor,
+      worldState, beliefActive, trueStrengthFor: strengthFor, termination, warCasusFor,
     });
     if (candidate) out.push(candidate);
   }

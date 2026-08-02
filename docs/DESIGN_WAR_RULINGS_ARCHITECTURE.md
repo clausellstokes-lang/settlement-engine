@@ -237,8 +237,9 @@ worldState.dispositionStats                 — EXISTS today (single-channel, li
   // O(history) — the ONE exception to never-store-a-derivable, disclosed here.
 
 warRecord extensions (the existing war object) — WR-1/WR-6/WR-8, writers unchanged
-  foundingCauses: [ { type, receipt, atTick } ]   // pinned at open, never rewritten
-  terminationRead: receipt-only per pulse (NOT stored beyond the pulse record)
+  deployment.casusReasons: [ { type, score, receipt, atTick } ] // pinned at open, never rewritten
+  deployment.attackerPatronRef / defenderPatronRef               // sacred-casus anchors, immutable
+  pulseRecord.warTerminationReads: pulse evidence (may persist only inside bounded worldState.pulseHistory)
   joinLedger: [ { partyId, joinedTick, cause } ]  // WR-6: per-edge join anchors —
                                                   // the expenditure read derives
                                                   // FROM these anchors + existing
@@ -420,15 +421,16 @@ Own commit, after WR-0; changes lit-path behavior ⇒ disclosed shift discipline
 **Scope:** the four-term read — live cause vs cost-to-continue vs cost-to-stop,
 all against momentum — plus per-cause dissolution.
 - **New module `warTermination.js`** (pure; zero RNG — reads, not rolls; the
-  warReasons discipline). Per active war edge per pulse, emits ONE receipt naming
+  warReasons discipline). Per valid surviving deployment per pulse, emits ONE receipt naming
   the four terms' bands and WHICH TERM IS DECIDING — the Herald's "why is this war
   still going?" answer (amendment C2's legibility demand).
 - **Dissolution:** the reasons layer is already state-derived (decay inherent), so
-  dissolution's substrate exists. NEW: (a) `foundingCauses` pinned on the war record
-  at open (never rewritten); (b) the re-read compares founding causes against the
-  live per-pair reasons — every founding cause absent from the live fold ⇒ the war
-  is CAUSE-DISSOLVED, a named peace force feeding the existing willingness read
-  through the cause's own mirror; (c) each of the three named dissolutions from
+  dissolution's substrate exists. NEW: (a) `deployment.casusReasons` pinned on the war record
+  at open (never rewritten); (b) the re-read compares those pinned casus entries
+  against the live per-pair reasons — every pinned casus absent from the live fold ⇒ the war
+  is CAUSE-DISSOLVED, a named `causeExit01` peace force feeding the existing
+  willingness read directly; its ordinary peace mirror is filtered from that choice
+  so the same dissolution cannot be counted twice; (c) each of the three named dissolutions from
   amendment C is a pin: sacred_claim dies on patron unseating (SUBSTRATE CHECK:
   if deity unseating is not a real transition, the pin documents the dormant arm
   and the dissolution ships structurally ready — never invent a pantheon coup here);
@@ -462,10 +464,12 @@ all against momentum — plus per-cause dissolution.
   the reason standing) — both arms on real fixtures; dissolution totality (every
   WAR_REASON_TYPE names its dissolution read or is explicitly perpetual-until-resolved,
   a walker over the taxonomy); dormancy golden.
-**Lifecycle paths (added 2026-08-02):** `foundingCauses` persists on the war record —
+**Lifecycle paths (added 2026-08-02):** `deployment.casusReasons` persists on the war record —
 serialize + JSON-round-trip pinned, a regen that rebuilds a war re-pins them at open,
 undo restores them with the record, import validates each type against the taxonomy;
-the terminationRead receipt is per-pulse and never persisted.
+the receipts are recorded only on `pulseRecord`; they may persist inside bounded
+`worldState.pulseHistory`, but are never copied into a dedicated top-level state key
+or the deployment ledger.
 **Bands:** term weights, the deciding-term margin, sunk-cost fallback band.
 
 ### WR-2 — DISPOSITION (amendments E, E2, E3; flag `dispositionChannelsEnabled`)
@@ -645,7 +649,7 @@ ledgers).
   applies at the door exactly as at the exit). WR-8's deterrence clause consumes
   THIS read pointed at the aftermath.
 - **Joining:** an ally entering under alliance mints its OWN war edge whose
-  foundingCauses = the alliance obligation (a casus record with its own mirror per
+  deployment.casusReasons = the alliance obligation (a casus record with its own mirror per
   the walker — J-WR-6 rules the pair `alliance_obligation` ↔ `obligation_discharged`,
   names vetoable) and its own dissolution: the originator's cause dissolved OR the
   alliance broken. The joinLedger anchor {partyId, joinedTick, cause} lands on the

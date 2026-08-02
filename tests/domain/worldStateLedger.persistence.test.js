@@ -256,6 +256,62 @@ describe('worldState ledger persistence — ensureWorldState normalize/round-tri
     expect(Object.prototype.hasOwnProperty.call(raw.pantheon, 'injected')).toBe(false);
   });
 
+  // WR-1: deployment casus is imported through the CLOSED reason taxonomy. The
+  // normalizer keeps every other deployment field, orders attacker keys
+  // deterministically, and removes an exhausted/invalid optional list rather than
+  // persisting an empty artifact. This is a same-schema tolerant read.
+  test('deployment casus reasons round-trip cloned, ordered, taxonomy-filtered, and empty-free', () => {
+    const deployments = {
+      'z-front': {
+        targetId: 'b',
+        deployedPopulation: 44,
+        auxiliary: { cohort: 'oak' },
+        attackerPatronRef: 'deity.attacker',
+        defenderPatronRef: 'deity.defender',
+        casusReasons: [
+          {
+            type: 'sacred_claim',
+            score: 0.8,
+            receipt: 'The rival altar stands against ours.',
+            atTick: 17,
+          },
+          { type: 'invented_claim', score: 1, receipt: { reason: 'not in the catalog' } },
+        ],
+      },
+      'a-front': {
+        targetId: 'z',
+        role: 'siege',
+        casusReasons: [{ type: 'fabricated_reason', receipt: { reason: 'drop me' } }],
+      },
+      'middle-front': { targetId: 'a', role: 'relief', callerOwnedField: { keep: true } },
+    };
+
+    const out = ensureWorldState({ deployments }, CAMPAIGN);
+    expect(Object.keys(out.deployments)).toEqual(['a-front', 'middle-front', 'z-front']);
+    expect(out.deployments['a-front']).toEqual({ targetId: 'z', role: 'siege' });
+    expect(out.deployments['middle-front']).toEqual(deployments['middle-front']);
+    expect(out.deployments['z-front'].casusReasons).toEqual([
+      deployments['z-front'].casusReasons[0],
+    ]);
+    expect(out.deployments['z-front'].deployedPopulation).toBe(44);
+    expect(out.deployments['z-front']).toMatchObject({
+      attackerPatronRef: 'deity.attacker',
+      defenderPatronRef: 'deity.defender',
+    });
+    expect(out.deployments['z-front'].auxiliary).toEqual({ cohort: 'oak' });
+
+    // Deep clone, including the retained casus record and unknown auxiliary field:
+    // persistence never hands a caller aliases into the loaded save.
+    expect(out.deployments).not.toBe(deployments);
+    expect(out.deployments['z-front'].casusReasons[0])
+      .not.toBe(deployments['z-front'].casusReasons[0]);
+    expect(out.deployments['z-front'].auxiliary).not.toBe(deployments['z-front'].auxiliary);
+
+    const reloaded = ensureWorldState(JSON.parse(JSON.stringify(out)), CAMPAIGN);
+    expect(reloaded).toEqual(out);
+    expect(reloaded.schemaVersion).toBe(WORLD_STATE_SCHEMA_VERSION);
+  });
+
   // INVARIANT 6 (F1): additive ledgers still need no top-level migration. The
   // same-schema treaty-clock migration is an IDENTITY no-op while that nested
   // ledger is absent, so ordinary and dormant saves retain their object identity.

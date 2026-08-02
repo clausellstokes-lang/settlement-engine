@@ -78,6 +78,7 @@ import { evaluateSettlementLifecycle } from './settlementLifecycleFirstClass.js'
 import { advanceSettlementPolitics } from './settlementPolitics.js';
 import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons, peaceReasonsFor } from './peaceReasons.js';
+import { readWarTerminations } from './warTermination.js';
 import { momentumActive, commitmentDepositsFor, advanceCommitments, entityThreshold, makeCommitmentDiscountFn, advanceMomentumCracks, MOMENTUM_TUNING } from './momentum.js';
 import { advanceTreaties } from './peaceTerms.js';
 import { advanceIntervention, interventionActive } from './convergence.js';
@@ -811,14 +812,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     now,
     rules: simulationRules,
   });
-  let warReturnOutcomes = [];
-  let tradeWarOutcomes = [];
+  /** @type {any[]} */ let warReturnOutcomes = [], tradeWarOutcomes = [], occupationOutcomes = [];
   // Occupation-layer outcomes (occupation_resistance / occupation_burden /
   // war_spoils / vassalization). Empty unless the war layer is ON and an occupation
   // exists — so the conditional `occupations` ledger never materializes and the apply
   // set is byte-identical on the OFF path / a campaign with no conquests.
-  /** @type {any[]} */
-  let occupationOutcomes = [];
   // Disposition write-side accumulator: the id-stable win/loss deltas from the
   // contests resolved this tick (siege conquests + trade-war flips). Empty unless
   // the war layer is ON and something actually resolved — so the post-apply fold
@@ -1148,8 +1146,8 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     }
   }
   const warOutcomes = [...mobilizationOutcomes, ...war.outcomes, ...warReturnOutcomes, ...tradeWarOutcomes, ...occupationOutcomes, ...religiousOutcomes];
-  const pressures = deriveSettlementPressures(postTimeSnapshot);
-  const pIndex = pressureIndex(pressures);
+  const pressures = deriveSettlementPressures(postTimeSnapshot); const pIndex = pressureIndex(pressures);
+  const warTermination = simulationRules.warLayerEnabled === true && simulationRules.warTerminationEnabled === true ? readWarTerminations({ worldState, snapshot: postTimeSnapshot, pIndex, tick: worldState.tick }) : null;
   const tierResource = evaluateTierResourceDynamics(worldState, postTimeSnapshot, pIndex, {
     tick: worldState.tick,
     interval: tickInterval,
@@ -1237,9 +1235,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   //     no-signal settlement is omitted ⇒ still 1.0 (`{}`-equivalent). This map
   //     SUPERSEDES dispositionFactorMap (history is folded in via
   //     readDispositionMultiplier — they are never both applied).
-  const dispositionFactor = simulationRules.warLayerEnabled
-    ? computeDispositionFactorMap(postTimeSnapshot, worldState)
-    : dispositionFactorMap(worldState.dispositionStats);
+  const dispositionFactor = simulationRules.warLayerEnabled ? computeDispositionFactorMap(postTimeSnapshot, worldState) : dispositionFactorMap(worldState.dispositionStats);
   // STRATEGIC TRADE → REDUCED HOSTILITY. Compute the per-edge trade-
   // salience map (a centered-on-1.0 factor that DAMPENS hostile/escalation
   // candidates when a VALUABLE trade tie exists) ONLY under the war layer — off ⇒
@@ -1260,6 +1256,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     dispositionFactor,
     tradeSalienceFactor: tradeSalienceResult.factors,
     tradeSalienceInfo: tradeSalienceResult.salience,
+    warTerminationByAttacker: warTermination?.byAttacker || null,
     // Thread a stable fork to the settlement strategy chooser (the ONLY
     // candidate rule that samples). Forked from the master pulse rng on a constant
     // key; the chooser re-forks per settlement (`strategy:<S>:<tick>`) so the draw
@@ -1631,6 +1628,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         ageBand: e.ageBand, conjunctionKey: e.conjunctionKey,
       })),
     } : {}),
+    ...(warTermination?.receipts.length ? { warTerminationReads: warTermination.receipts } : {}),
   };
   // Realm-scope arcs: promote stressors shared across many settlements into
   // named realm-wide Wizard News ("The Great Hunger", "The War"), plus the

@@ -30,8 +30,10 @@
  *     ABSENCE-AS-INFORMATION all arrive for free, and none of them is re-implemented here.
  *   • `readBeliefStrength(...)` supplies the fogged strength term — the same paired
  *     truth/belief reader fear_of_dominance and the Blainey margins already ride.
- * So a court can covet a neighbour that is NOT actually weak, and the receipt says so.
- * The SELF half is truth by construction: `belief(x, x)` is the self carve-out.
+ * Fog may overstate the DEGREE of a real advantage. Under WR-1's optional coherence
+ * restraint it may not reverse the live sign: a believed appetite contradicted by the
+ * current strength read is suppressed with a receipt naming that contradiction. The
+ * SELF half is truth by construction: `belief(x, x)` is the self carve-out.
  *
  * WHICH HALF THE FOG COVERS, and why. The fog lands on STRENGTH — the host a rival could
  * put in the field, which is exactly what a court guesses at and exactly where
@@ -168,6 +170,21 @@ export function vulnerabilityTruthOf(item) {
 }
 
 /**
+ * Amendment B's coherence read. A believed weak-victim story is contradicted when
+ * the victim's live fighting strength is at least the aggressor's. Absence is not
+ * evidence either way, so incomplete pairs never manufacture a veto.
+ *
+ * @param {VulnerableItem | null | undefined} aggressorItem
+ * @param {VulnerableItem | null | undefined} victimItem
+ */
+export function liveStrengthContradictsOpportunism(aggressorItem, victimItem) {
+  if (!aggressorItem || !victimItem) return false;
+  const aggressorStrength = clamp01(Number(settlementStrength(aggressorItem, {})) || 0);
+  const victimStrength = clamp01(Number(settlementStrength(victimItem, {})) || 0);
+  return victimStrength >= aggressorStrength;
+}
+
+/**
  * @typedef {Object} PerceivedVulnerability
  * @property {number} value01   the vulnerability the observer BELIEVES the subject is under
  * @property {string} source    'truth' | 'belief' | 'unknown'
@@ -246,17 +263,40 @@ export function perceivedVulnerabilityClause(perceived) {
  * resist with and what WE could, damped by whether we can actually march (armies eat —
  * the P4 capability term, ABSENT ⇒ 1 ⇒ byte-identical for every pre-P4 and demographics-
  * dark world). Bounded 0..1 by construction; no gain, no second cap.
- * @param {{ gradient: number, capability01?: number | null, note?: string }} args
+ * @param {{ gradient: number, capability01?: number | null, note?: string,
+ *   liveStrengthContradicted?: boolean,
+ *   patronCounterforce?: { patronId?: string, patronIds?: readonly string[] } | null }} args
  * @param {string} [seed] the directed-pair phrasing seed (absent ⇒ canonical wording)
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreOpportunism({ gradient, capability01, note }, seed) {
+export function scoreOpportunism({
+  gradient,
+  capability01,
+  note,
+  liveStrengthContradicted = false,
+  patronCounterforce = null,
+}, seed) {
   const appetite = clamp01(Number(gradient) || 0);
   if (appetite <= 0) return { score: 0, receipt: '' };
   const numericCapability = Number(capability01 ?? 1);
   const capability = Number.isFinite(numericCapability) ? clamp01(numericCapability) : 1;
   const score = clamp01(appetite * capability);
   if (score <= 0) return { score: 0, receipt: '' };
+  const patronId = typeof patronCounterforce?.patronId === 'string'
+    ? patronCounterforce.patronId.trim()
+    : '';
+  if (patronId) {
+    return {
+      score: 0,
+      receipt: 'A patron stands behind that gate. This is no undefended prize, and the court stays its hand.',
+    };
+  }
+  if (liveStrengthContradicted === true) {
+    return {
+      score: 0,
+      receipt: 'Rumour calls them weak, but the live muster shows an equal or stronger host. The court stays its hand.',
+    };
+  }
   return { score, receipt: `${warReceipt('opportunism', seed)}${typeof note === 'string' ? note : ''}` };
 }
 
@@ -312,20 +352,40 @@ export function makeOpportunismRead({ snapshot, worldState }) {
     // NEITHER MEMBER CARRIED ⇒ no appetite and no despair. A pair the snapshot says
     // nothing about is not a pair of defenceless towns (see the module header).
     if (!ownItem && !foeItem) {
-      return { gradient: 0, foe: { value01: 0, source: 'truth', mistaken: false, truth01: 0 }, own: truthFor(observerId) };
+      return {
+        gradient: 0,
+        foe: { value01: 0, source: 'truth', mistaken: false, truth01: 0 },
+        own: truthFor(observerId),
+        liveStrengthContradicted: false,
+      };
     }
     const own = truthFor(observerId);
     const foe = perceivedVulnerabilityOf({ observerId, subjectId, worldState, item: foeItem });
-    return { gradient: foe.value01 - own.value01, foe, own };
+    return {
+      gradient: foe.value01 - own.value01,
+      foe,
+      own,
+      liveStrengthContradicted: liveStrengthContradictsOpportunism(ownItem, foeItem),
+    };
   };
 
   return {
     /** opportunism for the directed pair (from covets to). `capability01` is P4's own-side
-     *  means term; absent ⇒ 1. @param {string} fromId @param {string} toId @param {number} [capability01] */
-    opportunismOf(fromId, toId, capability01) {
-      const { gradient, foe } = gradientFor(String(fromId), String(toId));
+     * means term; absent ⇒ 1. WR-1 constraints are optional so a dark flag preserves the
+     * prior read byte-for-byte.
+     * @param {string} fromId @param {string} toId @param {number} [capability01]
+     * @param {{ enforceLiveStrength?: boolean,
+     *   patronCounterforce?: { patronId?: string, patronIds?: readonly string[] } | null }} [constraints] */
+    opportunismOf(fromId, toId, capability01, constraints = {}) {
+      const { gradient, foe, liveStrengthContradicted } = gradientFor(String(fromId), String(toId));
       return scoreOpportunism(
-        { gradient, capability01, note: perceivedVulnerabilityClause(foe) },
+        {
+          gradient,
+          capability01,
+          note: perceivedVulnerabilityClause(foe),
+          liveStrengthContradicted: constraints.enforceLiveStrength === true && liveStrengthContradicted,
+          patronCounterforce: constraints.patronCounterforce || null,
+        },
         `${fromId}>${toId}`,
       );
     },

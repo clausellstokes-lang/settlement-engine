@@ -77,12 +77,13 @@ import { mercSupplementOf, mercFidelityPenaltyOf } from './mercenaryMarket.js';
 // on the conquest-margin read — ×1 exactly when the peace-engine gate is dark
 // or no case stands ⇒ byte-identical), and the minted war record CARRIES its
 // casus list (the §14 artifact law: "the war record carries its casus list").
-import { peaceCausalActive, warReasonsFor, aggregateReasons01, topReasons, REASON_TUNING } from './warReasons.js';
+import { peaceCausalActive, aggregateReasons01, topReasons, REASON_TUNING } from './warReasons.js';
 import { deployedQualityMult } from './supplyQuality.js';
 import { computeReinforcement, applyReinforcementToRecord } from './reinforcement.js';
 import { computeSackFoodTransfer, storageCapacityMonths } from './foodStockpile.js';
 import { deriveDecisionTier } from './decisionTier.js';
 import { recurringWarConditionRecordMode, warConditionOutcome, warExhaustionClearanceOutcome } from './warRecordMode.js';
+import { makeCurrentWarCasusRead, pinDeploymentCasusReasons } from './warTermination.js';
 // M2b: the supply-interdiction read (0 when the shipment ledger is absent / dormant
 // ⇒ resolveSiegeVerdict's term is 0 ⇒ the aspatial siege path is byte-identical).
 import { supplyInterdictionLevel } from '../spatial/supplyShipments.js';
@@ -727,7 +728,7 @@ function ensureStatefulRecord(record, cap, tick, logisticsBurden, readiness = 0,
   });
   // Preserve the original sinceTick so deploymentAge reflects the true campaign length.
   const sinceTick = Number.isFinite(r.sinceTick) ? r.sinceTick : tick;
-  return { ...seeded, sinceTick, deploymentAge: Math.max(0, tick - sinceTick) };
+  return { ...r, ...seeded, sinceTick, deploymentAge: Math.max(0, tick - sinceTick) };
 }
 
 /**
@@ -1049,7 +1050,7 @@ function pickOccupier(besiegers, capacityFor, effectiveStrengthFor) {
  * @param {Rng} args.rng
  * @param {number} args.tick
  * @param {string|null} [args.now]
- * @param {{ warLayerEnabled?: boolean, defenderAttritionEnabled?: boolean, warSupplyQualityEnabled?: boolean }} args.rules
+ * @param {{ warLayerEnabled?: boolean, warTerminationEnabled?: boolean, defenderAttritionEnabled?: boolean, warSupplyQualityEnabled?: boolean }} args.rules
  * @returns {{ outcomes: PulseOutcome[], deployments: Record<string, DeploymentRecord>, graphChannels: any[], retiredChannels: string[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number, sourceConquestId?:string}>, warExhaustion: Record<string, number>, defenderSiegeLedger?: (Record<string, any>|null) }}
  *   - outcomes: probability-1 condition / power_transfer outcomes for applyWorldPulseOutcomes
  *   - deployments: the UPDATED one-army ledger to persist onto worldState
@@ -1095,7 +1096,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     };
   }
 
-  const graph = snapshot?.regionalGraph || {};
+  const graph = snapshot?.regionalGraph || {}; const openerCasusFor = makeCurrentWarCasusRead({ snapshot, worldState, graph, rules });
   // M5: SIEGE-AS-STARVATION gate. On the spatial path (marker present) the siege
   // verdict resolves by supply interdiction × time (not the capacity roll). false off
   // the marker ⇒ every verdict runs the capacity-roll VERBATIM ⇒ byte-identical.
@@ -1702,10 +1703,10 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // margin gate reads fromStrength lifted by the bounded case factor
       // (≤ ×(1+WAR_FACTOR_W); exactly ×1 when the peace-engine gate is dark or
       // no case stands, so the dormant comparison is byte-identical).
-      const casusEntry = peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */ (/** @type {unknown} */ (worldState)))
-        ? warReasonsFor(worldState, String(fromId), String(targetId)) : null;
+      const casusRead = peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */ (/** @type {unknown} */ (worldState))) ? openerCasusFor(String(fromId), String(targetId)) : null;
+      const casusEntry = casusRead?.entry || null;
       const casusMult = casusEntry ? 1 + REASON_TUNING.WAR_FACTOR_W * aggregateReasons01(casusEntry) : 1;
-      if (!ordered && fromStrength * casusMult <= strengthFor(targetId) + CONQUEST_MARGIN) continue; // relationship-confidence gate (waived for a resolved march)
+      if ((!ordered || casusRead?.opportunismCounterforced) && fromStrength * casusMult <= strengthFor(targetId) + CONQUEST_MARGIN) continue; // a counterforced stale case restores the prefilter even for an old order
       const defenderCap = capacityFor(targetId);
       const { verdict } = classifyFeasibility({
         attackerCurrent: fromCap.offensive,
@@ -1749,11 +1750,8 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // stands (the dormant record shape is byte-identical). Rides the record
     // through attrition (applyAttritionToRecord spreads ...record) and through
     // the DM-Driven proposalPayload (the seeded record is embedded verbatim).
-    const casusList = peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */ (/** @type {unknown} */ (worldState)))
-      ? topReasons(warReasonsFor(worldState, String(fromId), String(chosenTarget)), 3)
-        .map((r) => ({ type: r.type, score: r.score, receipt: r.receipt }))
-      : [];
-    if (casusList.length) seededRecord.casusReasons = casusList;
+    const { casusReasons: casusList, sacredAnchors } = pinDeploymentCasusReasons({ reasons: peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */ (/** @type {unknown} */ (worldState))) ? topReasons(openerCasusFor(String(fromId), String(chosenTarget)).entry, 3) : [], tick, attackerItem: snapshot?.byId?.get?.(String(fromId)), defenderItem: snapshot?.byId?.get?.(String(chosenTarget)), simulationRules: rules });
+    if (casusList.length) seededRecord.casusReasons = casusList; Object.assign(seededRecord, sacredAnchors);
     // The war_front channel PARAMS (the `now` stamp is applied at mint time). On the
     // legacy path they are minted immediately (below); under DM-Driven they ride the
     // proposalPayload verbatim and the apply re-mints an identical front on approval.
