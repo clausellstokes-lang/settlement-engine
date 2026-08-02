@@ -202,8 +202,18 @@ describe('town cartography — the gate arms (the teeth that bite at TC-1)', () 
       'streets',
       'lit cartography block',
     );
-    expect(Object.keys(lit.cartography)).not.toContain('gates');
-    expect(Object.keys(lit.cartography)).not.toContain('bridges');
+    expectAbsentWithAnchor(
+      Object.keys(lit.cartography),
+      'gates',
+      'streets',
+      'lit cartography block',
+    );
+    expectAbsentWithAnchor(
+      Object.keys(lit.cartography),
+      'bridges',
+      'streets',
+      'lit cartography block',
+    );
 
     const { cartography: _cartography, ...litBase } = lit;
     expect(stableSceneStringify(litBase)).toBe(stableSceneStringify(dark));

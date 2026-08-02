@@ -53,7 +53,9 @@ export const MAP_SUB_TAB_PLAYER = 'player';
  * own order. Plan is first and is the permanent default (§1, §12).
  * @type {ReadonlyArray<'plan'|'panorama'|'portrait3d'>}
  */
-export const PRESENTATION_SUB_TAB_IDS = TOWN_MAP_VIEW_IDS;
+export const PRESENTATION_SUB_TAB_IDS = /** @type {ReadonlyArray<
+ * 'plan'|'panorama'|'portrait3d'
+ * >} */ (TOWN_MAP_VIEW_IDS);
 
 /** The whole closed sub-tab vocabulary, in reading order. */
 export const MAP_SUB_TAB_IDS = Object.freeze([

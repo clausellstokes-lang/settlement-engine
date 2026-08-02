@@ -32,7 +32,11 @@
 import { spreadIndices } from '../lowDiscrepancy.js';
 import { TOWN_SCENE_PLAN_EXTENT } from '../townScene/manifestContract.js';
 import { clampSceneNumber } from '../townScene/sceneCompilePrimitives.js';
-import { TOWN_CARTOGRAPHY_TUNING, cartographyBand } from './cartographyTuning.js';
+import {
+  CARTOGRAPHY_TIERS,
+  TOWN_CARTOGRAPHY_TUNING,
+  cartographyBand,
+} from './cartographyTuning.js';
 
 const T = TOWN_CARTOGRAPHY_TUNING;
 
@@ -146,6 +150,10 @@ export function growArterials(field, morphology, stream) {
     streets.push({
       id: `carto:arterial:${seedIndex}`,
       kind: 'arterial',
+      widthPlan: cartographyBand(
+        T.ARTERIAL_WIDTH_PLAN,
+        CARTOGRAPHY_TIERS[morphology.tierIndex],
+      ),
       centerline,
     });
   }
@@ -324,6 +332,7 @@ export function growLanes(field, arterials, morphology, tier, stream) {
     streets.push({
       id: `carto:lane:${streets.length}`,
       kind: 'lane',
+      widthPlan: cartographyBand(T.LANE_WIDTH_PLAN, tier),
       centerline: [from, to],
     });
   }

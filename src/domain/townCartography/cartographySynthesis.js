@@ -105,7 +105,7 @@ function stableByteLength(value) {
  *              gates: import('./cartographyDefenses.js').CartographyGate[],
  *              bridges: import('./cartographyDefenses.js').CartographyBridge[] }} infrastructureCandidates
  * @property {import('./cartographyMorphology.js').MorphologyReading} morphology
- * @property {object} receipts the determinism and bounded-work evidence
+ * @property {{ tier: string }} receipts the determinism and bounded-work evidence
  */
 
 /**
@@ -208,6 +208,22 @@ function record(value) {
 }
 
 /**
+ * Narrow an untrusted manifest coordinate pair into the exact integer tuple the
+ * infrastructure binder consumes. Keeping the guard here prevents a permissive
+ * array check from leaving `unknown` coordinates inside the distance arithmetic.
+ * @param {unknown} value
+ * @returns {[number, number] | null}
+ */
+function integerPlanPoint(value) {
+  if (!Array.isArray(value) || value.length !== 2) return null;
+  const x = value[0];
+  const z = value[1];
+  if (typeof x !== 'number' || typeof z !== 'number') return null;
+  if (!Number.isInteger(x) || !Number.isInteger(z)) return null;
+  return [x, z];
+}
+
+/**
  * Bind TC-2's geometric defense candidates to infrastructure records the base
  * manifest already owns. A candidate outside the authored radius selects nothing;
  * a tie resolves by canonical id. The return value is ids only, so candidate
@@ -219,22 +235,27 @@ function record(value) {
  * @returns {string[]}
  */
 export function bindCanonicalInfrastructureRefs(candidates, canonicalRows) {
-  const canonical = (Array.isArray(canonicalRows) ? canonicalRows : [])
-    .map(record)
-    .filter((row) => typeof row.id === 'string'
-      && Array.isArray(row.position)
-      && row.position.length === 2
-      && row.position.every((coordinate) => Number.isInteger(coordinate)))
-    .sort((left, right) => (left.id < right.id ? -1 : left.id > right.id ? 1 : 0));
-  const witnessRows = (Array.isArray(candidates) ? candidates : [])
-    .map(record)
-    .filter((row) => Array.isArray(row.position)
-      && row.position.length === 2
-      && row.position.every((coordinate) => Number.isInteger(coordinate)));
+  /** @type {Array<{ id: string, position: [number, number] }>} */
+  const canonical = [];
+  for (const raw of Array.isArray(canonicalRows) ? canonicalRows : []) {
+    const row = record(raw);
+    const position = integerPlanPoint(row.position);
+    if (typeof row.id === 'string' && position) canonical.push({ id: row.id, position });
+  }
+  canonical.sort((left, right) => (left.id < right.id ? -1 : left.id > right.id ? 1 : 0));
+
+  /** @type {Array<{ position: [number, number] }>} */
+  const witnessRows = [];
+  for (const raw of Array.isArray(candidates) ? candidates : []) {
+    const position = integerPlanPoint(record(raw).position);
+    if (position) witnessRows.push({ position });
+  }
   const maximumDistanceSq = T.INFRASTRUCTURE_BINDING_PLAN
     * T.INFRASTRUCTURE_BINDING_PLAN;
+  /** @type {Set<string>} */
   const ids = new Set();
   for (const witness of witnessRows) {
+    /** @type {{ id: string, position: [number, number] } | null} */
     let chosen = null;
     let chosenDistance = Number.POSITIVE_INFINITY;
     for (const row of canonical) {
@@ -309,7 +330,11 @@ export function compileTownCartography(manifest, settlement) {
   // level; filtering here makes the cartography binding fail closed even if this
   // adapter is exercised in isolation against an unvalidated fixture.
   const canonicalGates = (Array.isArray(base.gates) ? base.gates : [])
-    .filter((row) => wallIds.has(record(row).wallId));
+    .filter((row) => {
+      const wallId = record(row).wallId;
+      return typeof wallId === 'string' && wallIds.has(wallId);
+    });
+  /** @param {{ id?: unknown }} a @param {{ id?: unknown }} b */
   const byId = (a, b) => {
     const left = String(a.id);
     const right = String(b.id);
