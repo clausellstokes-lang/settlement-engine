@@ -485,3 +485,36 @@ mount) off a store moment-flag that no route change clears.
 - Pins: the Realm upsell unmounts on navigate-away and re-shows on return
   (undismissed) — the exact reported sequence as a DOM test; a declared-global
   moment still travels; dismissal survives reload (persisted).
+
+---
+
+## LD-8 — THE CREATED SETTLEMENT'S FIRST IMPRESSION + THE RIBBON CLIP
+## (owner-ordered 2026-08-01; implementation = the external implementer)
+
+**Order 1 — "How this was simulated" must not lead.** The simulation-record box
+(SimulationDrawer/PipelineRail) currently renders as the FIRST thing on a freshly
+created settlement. The settlement itself leads — its identity is the first
+impression; the record's EXISTING lower placement (the "same choices and seed
+rebuild the same settlement" drawer) becomes its ONLY placement. Remove the
+top-of-page instance; never two mounts of the record on one page (one surface,
+one home).
+
+**Order 2 — the two pin buttons are REMOVED ENTIRELY:** "A new roll can rename
+the settlement · Keep the name" and "A new roll can move it to different ground ·
+Keep this ground" (LockControls.jsx) leave the created-settlement surface, not
+relocated — deleted from it. NOTE for the record: the underlying reroll-
+preservation machinery (store-level pins) remains built and merely unadvertised —
+reachable-but-unadvertised trips no ratchet; if the owner later wants the pin
+CAPABILITY retired too, that is a separate order touching the reroll lanes
+(history-reroll preservation has an open owner question already; do not entangle).
+
+**Order 3 — the ribbon clip (a layout defect, fix globally):** page content
+scrolls BEHIND the fixed top ribbon and gets visually clipped mid-element (the
+screenshot shows the drawer's intro line half-swallowed). The fix is the standard
+fixed-chrome inset done ONCE, structurally: the scroll region carries top inset =
+LANDING_HEADER_H (the LD-3b token — app pages share the constant or declare
+their own header token), and every in-page anchor target carries
+scroll-margin-top of the same token, so nothing ever slides under the ribbon
+mid-glyph. With LD-3b's two-ribbon model this generalizes: content is inset
+between BOTH chrome tokens. Pin: scroll any dossier anchor into view — its top
+edge lands below the ribbon, asserted at two viewport sizes.
