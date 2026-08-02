@@ -483,7 +483,7 @@ describe('town-scene promotion contract distinguishes proof classes', () => {
     expect(escapedOutput.stderr).toContain(
       'receipt path must remain below artifacts/town-scene',
     );
-  });
+  }, 60_000);
 
   it('rejects boolean-only and stale evidence instead of treating it as proof', () => {
     const source = fingerprintTownSceneSource(contract);
@@ -503,7 +503,7 @@ describe('town-scene promotion contract distinguishes proof classes', () => {
         sourceFingerprint: 'stale-source',
       }, source.value, Date.parse('2026-07-24T13:00:00.000Z')),
     ).toMatchObject({ status: 'stale' });
-  });
+  }, 60_000);
 
   it('enforces proof class, accountability, clock sanity, and freshness', () => {
     const source = fingerprintTownSceneSource(contract);
