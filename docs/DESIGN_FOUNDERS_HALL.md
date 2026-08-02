@@ -147,6 +147,39 @@ a chair is granted or open, and the counter never implies a sale.
   instrument; the hall converts a one-time revenue pool into a permanent
   credibility asset, which matches the experience-first doctrine exactly.
 
+## §5b THE REQUEST FOR A CHAIR (owner order, same session: "claim a founder
+## seat" becomes "request a founder seat" — a letter, not a purchase)
+- **The path:** wherever the old claim/purchase control lived (the pricing
+  Founder card + the Hall itself), the CTA becomes **"Request a chair"** — it
+  opens a guided letter that files into the ONE support queue (the same
+  Feedback & support channel; a `founders_request` tag rides the pre-typed
+  subject — "Founders' Hall — a request for a chair" — so the §4 admin panel
+  filters them without any new system).
+- **THE LETTER IS THE FORM, AND THE FORM IS THE FILTER (owner intent:
+  aspirational, never transactional):** two prompts, written in the covenant's
+  register — *why do you wish to be a founder*, and *what would holding a
+  chair mean* — framed around what a founder IS (a patron whose name the Hall
+  keeps for as long as SettlementForge runs), never around what a founder
+  GETS. No price anywhere. No "apply now." No reach/audience/follower fields —
+  even though chairs will often go to prominent DMs, the FORM must not smell
+  like an influencer application; the owner can read standing from a letter,
+  and the letter format itself selects: transactional forms attract
+  transactions, letters attract believers.
+- **EXPECTATION HONESTY (binding copy law):** the surface says plainly that
+  chairs are few, invitations are rare, and a letter may not be answered with
+  a chair — no queue positions, no status tracker, no implied timeline. One
+  promise only, and it must be TRUE: every letter is read.
+- **Mechanics:** signed-in required (an honor needs a bearer; anonymous
+  visitors see the CTA and are asked to sign in first); ONE open request per
+  account with a long resubmission band after closure; the CIVILITY GUARD's
+  block mode runs on the letter body (authored-public-class text aimed at a
+  human reader); the letter lands as a normal support ticket — the invitation
+  itself, if one ever follows, still flows ONLY through the §4 two-key admin
+  issuance (a request grants nothing and shortcuts nothing).
+- **Pins:** the tag filter surfaces requests in the admin panel; one-open-
+  request enforced; the guard runs; the anonymous path lands on sign-in and
+  returns to the letter afterward.
+
 ## §6 PRIVACY + CONSENT
 Display name is opt-in at acceptance and changeable any time (Account ▸
 Profile); numeral-only is the default and is presented as equally honored,
