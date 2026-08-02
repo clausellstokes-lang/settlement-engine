@@ -97,6 +97,17 @@ of the same three; anything else is refused with a plain sentence).
 - RETIRES: the workshop's panel/button UI (the control surface's presentation
   layer). Its OPERATION architecture (§0), intent compiler, labels, aiOperationLog,
   grounding bundles, capability ladder + charter, atlas — ALL STAY, verbatim law.
+- **THE TASK MENU STAYS (owner clarification 2026-08-01), as the DISCOVERY surface:**
+  the browsable list of what the analyst can do. Two homes: (a) the PRICING page's
+  Surveyor card carries NO purchase button — its only CTA is "See the task menu"
+  (early access + BYOK: the tier is browsed, not bought; consistent with the
+  capability ladder's pricing-half-ships-inert law); (b) in-product, the task menu
+  seeds the chat — its entries render as suggestion chips beside/above the empty
+  prompt box, and choosing one pre-fills a plain-language prompt. This solves the
+  blank-box problem (the "what do I type?" moment) with machinery that already
+  exists: the menu is the atlas's operation families worn as an invitation. The
+  menu DOES nothing anymore — every entry just starts a conversation; the chat is
+  the only doing surface.
 - The existing inline entry points (the Narrate control, dossier narrative CTAs)
   are UNCHANGED by this doc — they are shortcuts into the same machinery; whether
   any fold into the chat later is an owner taste call, parked.
