@@ -522,3 +522,58 @@
 - treatyTransfer.js is a model composition citizen: it reuses the conservation-proven computeSackFoodTransfer primitive (its declared third use), routes deltas through the existing single food applicator instead of becoming a sixth granary writer, and handles same-tick multi-treaty composition via committedDebit/committedCredit.
 - The shared-index commit race did NOT fire across the pause: all three post-freeze commits (99e2d54f, b3417677, daee130d) are docs-only — the frozen W1 and cartography partials were not swallowed; and the dirty _shared bundle metas are timestamp-only regen noise (sourceHash unchanged), not drift.
 - The 07-30 review's live World Book bug ('Under siege' printing undefined) is verifiably fixed — realmChapterRows now reads sg.targetId, with the defect documented in-line as a pinnable doctrine note; and MapTabShell implements the WAI-ARIA tabs pattern properly (labelled tabpanel focus stop), so the a11y blind spot I probed is clean.
+
+---
+
+## ADDENDUM — THE CHALLENGE-FITNESS AUDIT (same day, 3 agents, measured not recalled)
+Question audited: does the architecture meet (1) fraction-legibility — every experienced
+receipt retellable with zero context — and (2) variety-width — the experienced fraction
+provably differs across worlds?
+
+### Measured facts (all CONFIRMED)
+- **A-1 The numeric-leakage class has NO detector.** Exhaustive census of every
+  prose instrument (proseLeak, spellBreakCensus, voiceMechanics, composedProseSeams,
+  newsBody): detector classes cover flagKeys/ticks/rawIds/jsonFragments/software
+  voice — none covers float/percent/scalar interpolation into reader strings. The
+  no-raw-color visual lint has no prose sibling. The register's four scalar-leak
+  findings are the live members of an UNCOVERED CLASS, not four one-offs.
+  **Completion spec: a prose-numerics lint** (detector classes: float interpolation,
+  percent tokens, `N×` multipliers, two-decimal scores in headline/summary/reason
+  templates), same shape as rawColorLiteral + the E-E JSX corpus.
+- **A-2 Receipt quality RISES monotonically era-over-era** (25 templates blind-graded,
+  4 eras): June lanes worst (C/D — bookkeeping voice, rng rolls printed on reader
+  cards: "Hold chance 0.62, roll 0.41"); war era bimodal (A headlines over C/D
+  reasons quoting tuning vocabulary); waves C..K and the 08-01 surfaces BEST (first
+  A-grade reason lines in the product's history; closed authored vocabularies
+  throughout). The chair's newest-work-drifts suspicion is REFUTED; the debt is
+  LEGACY-concentrated. **Completion spec: the legacy receipt sweep** — June lanes
+  (wizardNews regional, stressors, coup reasons, faction-capture reasons) + war-era
+  reason lines (eventProse casus scalars, momentum climb-down model vocabulary,
+  treaty budget arithmetic, W1's nameless mobilization reason — one F grade).
+- **A-3 Authoring-side presence is convention.** Id/address enforcement is
+  resolution-side + tested-path-only; nothing statically censuses `kind:`+`headline:`
+  authoring sites for id/settlementIds presence (peaceTerms shipped `parties` for its
+  whole life); kind-only producers are invisible to all three routing walkers (the
+  exact 10-kind void of 07-31); severity presence is a code comment. **Completion
+  spec: an authoring-site census walker** (source-scan of news-emission sites →
+  id + address + severity + registration required, frozen allowlist for legacy).
+- **A-4 Variety is architecture-ready, evidence-absent.** The story-mix concentration
+  bounds EXIST in behavioralContract (family dominance ≤0.65, ≥12 event types,
+  inverse-Simpson ≥4, type dominance ≤0.55) and have NEVER EXECUTED to a verdict
+  (release.json: complete:false, checks=[]; all receipts on disk are v4). The
+  celebrated "divergent fates" soak check is a HASH-INEQUALITY within 5 years — one
+  differing RNG draw satisfies it; it compares no story mixes. Strategy-verb
+  monotony was found by HUMAN READING, not an instrument. WR-9's endings-mix +
+  deciding-term histogram exist in no schema today. **Completion spec: upgrade the
+  divergence probe to compare event-type DISTRIBUTIONS between seed pairs (not
+  hashes), and land WR-9's fields in the receipt schema with the soak redo.**
+
+### The chair's fitness verdict
+Challenge 1 (fraction legibility): DESIGN meets it fully; IMPLEMENTATION meets it
+structurally for routing/vocabulary/causal-bands, by convention for authoring
+presence, and not at all for the numeric class — with the drift direction HEALTHY
+(newest = best). Challenge 2 (variety width): DESIGN meets it explicitly (variety as
+measured acceptance is rare and right); IMPLEMENTATION is dormant machinery plus one
+weak probe — every width claim currently rests on the pending soak, and two
+instruments (prose-numerics lint aside: the mix-divergence probe, WR-9 fields) must
+land BEFORE that soak for its evidence to prove what the thesis needs.
