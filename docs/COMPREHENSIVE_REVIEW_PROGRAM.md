@@ -120,6 +120,27 @@ ledger — never from a session digest.
 >   — attribution evidence in flight. IN FLIGHT: 13-agent validation-evidence workflow (all 33 queue
 >   rows) + 10-dimension holistic review with Opus verifiers. Queue verdicts + WR-0 landing ruling
 >   follow in this ledger and FABLE_VALIDATION_QUEUE.md when evidence returns.
+> - 2026-08-01 (⭐⭐ THE FABLE VALIDATION PASS COMPLETE — @ minifold d38595c1). Both workflows
+>   landed (14 + 23 agents, 6.4M tokens, 0 errors). ALL 33 queue rows RULED: 27 CONFIRMED /
+>   6 ADJUSTED / 0 engineering reversals — the Opus era's engineering judgments HOLD; the one
+>   systematic lean is process metadata under-recording (missing batch-6 rows, a mislocated
+>   ruling, an unrecorded flag-lighting deviation) — protocol amendment recorded. RULINGS:
+>   W1 goldens = LEGITIMATE lit-path shift, re-record AUTHORIZED (isolation-worktree proof:
+>   base reproduces all six manifest hashes byte-exact; every moved field traces to a declared
+>   join) · neighbour-mirror = inject-dampened (×0.5, capped) at THE ONE REGEN, emergent
+>   suppression the explicit interim · THE LIGHTING BATCH ruled a first-class step before the
+>   soak redo (four directive flags FALSE in full_simulation vs the restart order's record).
+>   REVIEW: 55 verified findings (18 refuted by Opus skeptics) in minifold
+>   docs/COMPREHENSIVE_REVIEW_2026-08-01.md — top: treaty war-block UNREACHABLE at the one
+>   opener (every negotiated NAP structurally worthless — executed proof); scored-vs-ordered
+>   target divergence at the chooser; tradeWar mints a costless ageless siege outside the one
+>   opener; all three specced as WR-0c OPENER HARDENING. Volume amended: WR-2 extends the
+>   EXISTING dispositionStats (the review caught the volume's own census gap — J-WR-11);
+>   WR-3 gains the lineage-substrate gate (satellites are not war-capable settlements —
+>   J-WR-12). ESCALATED TO OWNER: desert promotion-lock (a biome that cannot ascend) ·
+>   migrationKernel SATURATION_POP 9000 vs DENSITY_CEILINGS 38k sibling divergence (reconcile
+>   BEFORE the grid). Owner rulings dictated live: amendments R/R2/S. Implementation corpus for
+>   Sol 5.6 now: WR-0..WR-10 + the 55-finding register + TC-3..8 + the 202-item REM volume.
 
 ## The owner's directive (2026-07-13, verbatim intent)
 1. Fable 5 does the survey + dimensions survey: read/review/analyze the ENTIRE codebase; deliver
