@@ -15,15 +15,15 @@
  *   institutions              [category, name, desc, tags, ...]
  *   npcs                      [id, name, role, goal, secret, ...]   ← goal.short is the blurb
  *   stress                    [type, label, icon, colour, summary, crisisHook, ...]
- *                             — and is a SINGLE OBJECT, not an array (see below)
+ *                             — a bare object for one active stress, an array for several
  *
  * An earlier cut read `.name` / `.description` across all five rows — spellings NO
  * generator record carries. Every faction rendered "Unnamed: ", institutions / NPCs /
  * stressors rendered a bare label with an EMPTY blurb, and conflicts fell through the
  * `|| JSON.stringify(c)` tail and dumped raw JSON at the reader. The Stressors row had a
- * SECOND defect underneath the key one: `settlement.stress` is a single object, so
- * renderList's `Array.isArray` guard dropped that row outright and correcting its key
- * spelling alone would have been cosmetic. Same defect class as the
+ * SECOND defect underneath the key one: a single active stress is a bare object, so
+ * renderList's `Array.isArray` guard dropped that common shape outright and correcting
+ * its key spelling alone would have been cosmetic. Same defect class as the
  * npcLadder faction-key bug (composite 25749ae5 / dc0b6e2b); same cure — rulingPower.nameOf
  * (`.faction || .name`) for the name, real key first with the legacy `.description`
  * spelling kept as a tail fallback for the blurb.
@@ -174,19 +174,15 @@ describe('THE SNAPSHOT-SHAPE BUG: real generator records render their real field
     }
   });
 
-  test('STRESSORS: settlement.stress is a SINGLE OBJECT and must still render', () => {
-    // THE ARRAYNESS HALF OF THIS BUG. `settlement.stress` is never an array — an executed
-    // probe over 40 generations found 0 arrays, 10 plain objects, 30 absent. renderList
-    // guards `if (!Array.isArray(arr) || !arr.length) return null`, so pre-fix the row was
-    // DROPPED ENTIRELY on real data and correcting only its key spelling was cosmetic.
-    // Find a real settlement that carries stress and assert the row actually renders.
-    let s = null;
-    for (let i = 0; i < 40 && !s; i++) {
-      const cand = generateSettlementPipeline({ tier: ['village', 'town', 'city', 'metropolis'][i % 4] });
-      if (cand.stress) s = cand;
-    }
-    expect(s, 'no settlement carrying stress in 40 attempts').not.toBeNull();
-    // Guard the premise: if the generator ever starts emitting an array here, this says so.
+  test('STRESSORS: the single-object settlement.stress shape still renders', () => {
+    // THE ARRAYNESS HALF OF THIS BUG. generateStress intentionally serves null, a bare
+    // object, or an array. Force its one-stress mode so this pin cannot occasionally select
+    // the rare multi-stress shape that the adjacent test covers independently.
+    const s = generateSettlementPipeline(
+      { tier: 'town', stressType: 'famine' },
+      null,
+      { seed: 'chronicle-single-stress', customContent: {} },
+    );
     expect(Array.isArray(s.stress)).toBe(false);
     expect(typeof s.stress).toBe('object');
 
