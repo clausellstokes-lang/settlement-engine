@@ -577,3 +577,31 @@ measured acceptance is rare and right); IMPLEMENTATION is dormant machinery plus
 weak probe — every width claim currently rests on the pending soak, and two
 instruments (prose-numerics lint aside: the mix-divergence probe, WR-9 fields) must
 land BEFORE that soak for its evidence to prove what the thesis needs.
+
+### Addendum implementation receipt — A-1 + A-3 LANDED (2026-08-01)
+
+- **A-1 is now a standing class wall.** `proseNumerics.test.js` parses the complete
+  `src/**/*.js{x}` corpus and recognizes float interpolation, percent tokens,
+  multipliers, and two-decimal engine scores across the authored
+  headline/summary/reason/receipt seams and rendered JSX reader text. Nine executed
+  mutants prove all four classes in JS and JSX, including string concatenation; the
+  negative matrix proves CSS, layout/control expressions, translations, token
+  humanizers, and ordinary whole world counts are not the denominator. The reviewed
+  legacy ledger freezes 442 category rows at 267 exact source sites across 120 files
+  by path + line + snippet. Rows can only be removed; there is no update mode. Some
+  exact rows conservatively freeze legitimate numeric UI (for example money and
+  composed progress text) rather than installing a reusable spelling-based escape
+  hatch. The wall therefore proves **no new member of the class**, not that the A-2
+  legacy prose sweep is complete.
+- **A-3 is now a standing source-side wall.** The AST census parses 696 domain JS
+  files and finds 82 object-literal authoring sites that co-locate `kind` +
+  `headline` across 45 files. Sixty-three already carry id + settlementIds + severity
+  and a registered routing token. Nineteen legacy projection/intermediate sites in
+  ten files are frozen by path + line/column + source signature + exact issue set;
+  they may only disappear. Executed mutants prove all three presence fields,
+  unregistered impactKind, unregistered bare kind, unresolved dynamic bare kind,
+  and the local closed-choice idiom. The historical peace-terms and 07-31 kind-only
+  blind spots are explicit non-vacuity controls.
+- **Focused verification:** the two walls plus mutation-coverage governance pass
+  33/33; targeted ESLint and `git diff --check` pass. Full-gate evidence belongs to
+  the wave commit receipt, not this pre-commit measurement.

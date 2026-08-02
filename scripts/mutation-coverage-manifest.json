@@ -1575,6 +1575,14 @@
    "kind": "mutation",
    "label": "realm/herald routing no-orphan"
   },
+  "tests/lint/wizardNewsAuthoring.walker.test.js": {
+   "kind": "rationale",
+   "ref": "self-proving-meta"
+  },
+  "tests/lint/proseNumerics.test.js": {
+   "kind": "rationale",
+   "ref": "self-proving-meta"
+  },
   "tests/application/commands/commandRegistry.walker.test.js": {
    "kind": "rationale",
    "rationale": "Command-registration walker: its catching power is the makeCommandEnvelope kind census (literal / constant / declared-dynamic-vocabulary resolution) plus the frozen dispatch surface and single-executor scans. FIVE mutation plants were executed at build time and proven red-then-green: a new adapter minting an unregistered literal kind reds the registration assertion; a new adapter whose kind is dynamic and undeclared reds the site-totality assertion; a seventh value added to CUSTOM_CONTENT_COMMAND_KIND reds the registration assertion; a spec registered for a capability nothing builds reds the ghost-spec assertion; and renaming a shared kind constant reds the positive control. Those five executed plants cover every independent scanner branch and already include clean-tree restoration controls, so adding one standing plant would re-run only a strict subset of the same proof at sweep cost without adding catching power."

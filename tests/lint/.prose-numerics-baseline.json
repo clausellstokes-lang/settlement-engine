@@ -1,0 +1,2654 @@
+[
+  {
+    "path": "src/components/InstitutionalGrid.jsx",
+    "line": 249,
+    "category": "floatInterpolation",
+    "snippet": "{Math.round((def.p || 0) * 100)}"
+  },
+  {
+    "path": "src/components/InstitutionalGrid.jsx",
+    "line": 249,
+    "category": "percentToken",
+    "snippet": "{Math.round((def.p || 0) * 100)}"
+  },
+  {
+    "path": "src/components/OutputContainer.jsx",
+    "line": 979,
+    "category": "floatInterpolation",
+    "snippet": "{displayProgress || 'Regenerating\\u2026'}"
+  },
+  {
+    "path": "src/components/TableView.jsx",
+    "line": 236,
+    "category": "floatInterpolation",
+    "snippet": "{pressure}"
+  },
+  {
+    "path": "src/components/account/AccountAutoReloadPanel.jsx",
+    "line": 138,
+    "category": "floatInterpolation",
+    "snippet": "{(status.thisMonthSpentCents / 100).toFixed(2)}"
+  },
+  {
+    "path": "src/components/account/AccountAutoReloadPanel.jsx",
+    "line": 138,
+    "category": "twoDecimalScore",
+    "snippet": "{(status.thisMonthSpentCents / 100).toFixed(2)}"
+  },
+  {
+    "path": "src/components/admin/AdminOperationalHealthPanel.jsx",
+    "line": 184,
+    "category": "floatInterpolation",
+    "snippet": "{severity}"
+  },
+  {
+    "path": "src/components/admin/AdminTrendsCharts.jsx",
+    "line": 212,
+    "category": "floatInterpolation",
+    "snippet": "{((v / total) * 100).toFixed(0)}"
+  },
+  {
+    "path": "src/components/admin/AdminTrendsCharts.jsx",
+    "line": 212,
+    "category": "percentToken",
+    "snippet": "{((v / total) * 100).toFixed(0)}"
+  },
+  {
+    "path": "src/components/admin/AdminTrendsCharts.jsx",
+    "line": 252,
+    "category": "multiplier",
+    "snippet": "`${rk} × ${ck}: ${fmtInt(v)}`"
+  },
+  {
+    "path": "src/components/admin/AdminTrendsPanel.jsx",
+    "line": 253,
+    "category": "floatInterpolation",
+    "snippet": "Math.round((applied / total) * 100)"
+  },
+  {
+    "path": "src/components/admin/AdminTrendsPanel.jsx",
+    "line": 372,
+    "category": "floatInterpolation",
+    "snippet": "{proposalSummary.acceptRate}"
+  },
+  {
+    "path": "src/components/admin/AdminTrendsPanel.jsx",
+    "line": 372,
+    "category": "percentToken",
+    "snippet": "{proposalSummary.acceptRate}"
+  },
+  {
+    "path": "src/components/compendium/CatalogHubs.jsx",
+    "line": 95,
+    "category": "multiplier",
+    "snippet": "{b.scale}"
+  },
+  {
+    "path": "src/components/contentStudio/ContentInterpretation.jsx",
+    "line": 36,
+    "category": "floatInterpolation",
+    "snippet": "{percent}"
+  },
+  {
+    "path": "src/components/contentStudio/ContentInterpretation.jsx",
+    "line": 36,
+    "category": "percentToken",
+    "snippet": "{percent}"
+  },
+  {
+    "path": "src/components/contentStudio/ContentSampleReceipt.jsx",
+    "line": 96,
+    "category": "floatInterpolation",
+    "snippet": "{fixture.result?.fixtureSeverity != null ? ` · fixture severity ${fixture.result.fixtureSeverity}` : ''}"
+  },
+  {
+    "path": "src/components/contentStudio/ContentSampleReceipt.jsx",
+    "line": 97,
+    "category": "floatInterpolation",
+    "snippet": "` · fixture severity ${fixture.result.fixtureSeverity}`"
+  },
+  {
+    "path": "src/components/dossier/DossierNarrativeButtons.jsx",
+    "line": 77,
+    "category": "floatInterpolation",
+    "snippet": "{displayProgress || 'Weaving\\u2026'}"
+  },
+  {
+    "path": "src/components/dossier/DossierNarrativeButtons.jsx",
+    "line": 116,
+    "category": "floatInterpolation",
+    "snippet": "{regenerating ? (displayProgress || 'Regenerating\\u2026') : `Regenerate${costLabel}`}"
+  },
+  {
+    "path": "src/components/dossier/EngineSections.jsx",
+    "line": 102,
+    "category": "floatInterpolation",
+    "snippet": "{model.cap.score}"
+  },
+  {
+    "path": "src/components/dossier/EngineSections.jsx",
+    "line": 110,
+    "category": "floatInterpolation",
+    "snippet": "{model.storageMonths.toFixed(1)}"
+  },
+  {
+    "path": "src/components/dossier/EngineSections.jsx",
+    "line": 164,
+    "category": "floatInterpolation",
+    "snippet": "{model.readiness.score}"
+  },
+  {
+    "path": "src/components/home/LandingArtifacts.jsx",
+    "line": 182,
+    "category": "floatInterpolation",
+    "snippet": "{town.pressure}"
+  },
+  {
+    "path": "src/components/home/landingFixture.js",
+    "line": 101,
+    "category": "percentToken",
+    "snippet": "\"mountain_timber · present but depleted (Tier-weighted depletion (20%) marked this resource as depleted.)\""
+  },
+  {
+    "path": "src/components/home/landingFixture.js",
+    "line": 105,
+    "category": "multiplier",
+    "snippet": "\"travelers_inn · selected (Base chance 59% lifted by ×1.56 from nearby resources + terrain.)\""
+  },
+  {
+    "path": "src/components/home/landingFixture.js",
+    "line": 105,
+    "category": "percentToken",
+    "snippet": "\"travelers_inn · selected (Base chance 59% lifted by ×1.56 from nearby resources + terrain.)\""
+  },
+  {
+    "path": "src/components/home/landingFixture.js",
+    "line": 105,
+    "category": "twoDecimalScore",
+    "snippet": "\"travelers_inn · selected (Base chance 59% lifted by ×1.56 from nearby resources + terrain.)\""
+  },
+  {
+    "path": "src/components/home/landingFixture.js",
+    "line": 124,
+    "category": "multiplier",
+    "snippet": "\"Vael (major) anchors religious authority (piety ×1.35). Religious Authorities carries power 13.\""
+  },
+  {
+    "path": "src/components/home/landingFixture.js",
+    "line": 124,
+    "category": "twoDecimalScore",
+    "snippet": "\"Vael (major) anchors religious authority (piety ×1.35). Religious Authorities carries power 13.\""
+  },
+  {
+    "path": "src/components/howto/LivingWorldTab.jsx",
+    "line": 183,
+    "category": "floatInterpolation",
+    "snippet": "{d.share}"
+  },
+  {
+    "path": "src/components/howto/LivingWorldTab.jsx",
+    "line": 183,
+    "category": "floatInterpolation",
+    "snippet": "{d.standing}"
+  },
+  {
+    "path": "src/components/howto/LivingWorldTab.jsx",
+    "line": 183,
+    "category": "percentToken",
+    "snippet": "{d.share}"
+  },
+  {
+    "path": "src/components/howto/LivingWorldTab.jsx",
+    "line": 191,
+    "category": "percentToken",
+    "snippet": "`${i > 0 ? ', ' : ''}${c.name} ${c.odds}%`"
+  },
+  {
+    "path": "src/components/map/AnnotateToolbar.jsx",
+    "line": 180,
+    "category": "floatInterpolation",
+    "snippet": "{opts.forestDensity.toFixed(2)}"
+  },
+  {
+    "path": "src/components/map/AnnotateToolbar.jsx",
+    "line": 180,
+    "category": "twoDecimalScore",
+    "snippet": "{opts.forestDensity.toFixed(2)}"
+  },
+  {
+    "path": "src/components/map/BeliefDivergenceBand.jsx",
+    "line": 74,
+    "category": "floatInterpolation",
+    "snippet": "{CONFIDENCE_LABEL[belief.confidence] || belief.confidence}"
+  },
+  {
+    "path": "src/components/map/LayersPanel.jsx",
+    "line": 229,
+    "category": "floatInterpolation",
+    "snippet": "{Math.round(regionalMinSeverity * 100)}"
+  },
+  {
+    "path": "src/components/map/LayersPanel.jsx",
+    "line": 229,
+    "category": "percentToken",
+    "snippet": "{Math.round(regionalMinSeverity * 100)}"
+  },
+  {
+    "path": "src/components/map/PantheonPanel.jsx",
+    "line": 186,
+    "category": "floatInterpolation",
+    "snippet": "{aStrength}"
+  },
+  {
+    "path": "src/components/map/PantheonPanel.jsx",
+    "line": 186,
+    "category": "percentToken",
+    "snippet": "{aStrength}"
+  },
+  {
+    "path": "src/components/map/PantheonPanel.jsx",
+    "line": 188,
+    "category": "floatInterpolation",
+    "snippet": "{bStrength}"
+  },
+  {
+    "path": "src/components/map/PantheonPanel.jsx",
+    "line": 188,
+    "category": "percentToken",
+    "snippet": "{bStrength}"
+  },
+  {
+    "path": "src/components/map/PantheonPanel.jsx",
+    "line": 230,
+    "category": "floatInterpolation",
+    "snippet": "`Faith strength ${Math.round(strength * 100)} percent (${statusWord})`"
+  },
+  {
+    "path": "src/components/map/PantheonPanel.jsx",
+    "line": 230,
+    "category": "percentToken",
+    "snippet": "`Faith strength ${Math.round(strength * 100)} percent (${statusWord})`"
+  },
+  {
+    "path": "src/components/map/PantheonPanel.jsx",
+    "line": 231,
+    "category": "floatInterpolation",
+    "snippet": "`Base faith strength: ${Math.round(strength * 100)}%`"
+  },
+  {
+    "path": "src/components/map/PantheonPanel.jsx",
+    "line": 231,
+    "category": "percentToken",
+    "snippet": "`Base faith strength: ${Math.round(strength * 100)}%`"
+  },
+  {
+    "path": "src/components/map/QuickInspector.jsx",
+    "line": 129,
+    "category": "floatInterpolation",
+    "snippet": "{pressure}"
+  },
+  {
+    "path": "src/components/map/TimelapsePanel.jsx",
+    "line": 140,
+    "category": "floatInterpolation",
+    "snippet": "` (peak ${Math.round(drill.peakSeverity * 100) / 100})`"
+  },
+  {
+    "path": "src/components/map/TimelapsePanel.jsx",
+    "line": 140,
+    "category": "floatInterpolation",
+    "snippet": "{drill.peakSeverity > 0 ? ` (peak ${Math.round(drill.peakSeverity * 100) / 100})` : ''}"
+  },
+  {
+    "path": "src/components/map/WizardNewsPanel.jsx",
+    "line": 221,
+    "category": "floatInterpolation",
+    "snippet": "{percent(entry.severity)}"
+  },
+  {
+    "path": "src/components/map/WizardNewsPanel.jsx",
+    "line": 221,
+    "category": "percentToken",
+    "snippet": "{percent(entry.severity)}"
+  },
+  {
+    "path": "src/components/map/WorldPulsePanel.jsx",
+    "line": 479,
+    "category": "floatInterpolation",
+    "snippet": "`memory ${percent(stressor.memoryStrength ?? 0)}`"
+  },
+  {
+    "path": "src/components/map/WorldPulsePanel.jsx",
+    "line": 479,
+    "category": "floatInterpolation",
+    "snippet": "{[`memory ${percent(stressor.memoryStrength ?? 0)}`, 'fading', human(stressor.type)]}"
+  },
+  {
+    "path": "src/components/map/WorldPulsePanel.jsx",
+    "line": 479,
+    "category": "percentToken",
+    "snippet": "{[`memory ${percent(stressor.memoryStrength ?? 0)}`, 'fading', human(stressor.type)]}"
+  },
+  {
+    "path": "src/components/map/WorldPulsePanel.jsx",
+    "line": 518,
+    "category": "floatInterpolation",
+    "snippet": "`Resolution roll ${percent(stressor.resolutionRoll)} against ${percent(stressor.resolutionChance)} chance.`"
+  },
+  {
+    "path": "src/components/map/WorldPulsePanel.jsx",
+    "line": 584,
+    "category": "floatInterpolation",
+    "snippet": "{percent(roll.roll)}"
+  },
+  {
+    "path": "src/components/map/WorldPulsePanel.jsx",
+    "line": 584,
+    "category": "percentToken",
+    "snippet": "{percent(roll.roll)}"
+  },
+  {
+    "path": "src/components/map/WorldPulsePanel.jsx",
+    "line": 585,
+    "category": "floatInterpolation",
+    "snippet": "{percent(roll.probability)}"
+  },
+  {
+    "path": "src/components/map/WorldPulsePanel.jsx",
+    "line": 585,
+    "category": "percentToken",
+    "snippet": "{percent(roll.probability)}"
+  },
+  {
+    "path": "src/components/map/WorldPulsePanel.jsx",
+    "line": 586,
+    "category": "floatInterpolation",
+    "snippet": "{percent(roll.severity)}"
+  },
+  {
+    "path": "src/components/map/WorldPulsePanel.jsx",
+    "line": 586,
+    "category": "percentToken",
+    "snippet": "{percent(roll.severity)}"
+  },
+  {
+    "path": "src/components/new/SummaryTab.jsx",
+    "line": 58,
+    "category": "floatInterpolation",
+    "snippet": "{pct}"
+  },
+  {
+    "path": "src/components/new/SummaryTab.jsx",
+    "line": 58,
+    "category": "percentToken",
+    "snippet": "{pct}"
+  },
+  {
+    "path": "src/components/new/SummaryTab.jsx",
+    "line": 73,
+    "category": "floatInterpolation",
+    "snippet": "{f.power}"
+  },
+  {
+    "path": "src/components/new/SummaryTab.jsx",
+    "line": 73,
+    "category": "percentToken",
+    "snippet": "{f.power}"
+  },
+  {
+    "path": "src/components/new/npcComponents.jsx",
+    "line": 154,
+    "category": "floatInterpolation",
+    "snippet": "{rel.strength}"
+  },
+  {
+    "path": "src/components/new/npcComponents.jsx",
+    "line": 161,
+    "category": "floatInterpolation",
+    "snippet": "{rel.tension}"
+  },
+  {
+    "path": "src/components/new/tabs/DailyLifeTab.jsx",
+    "line": 244,
+    "category": "floatInterpolation",
+    "snippet": "{storeAiProgress || 'Regenerating…'}"
+  },
+  {
+    "path": "src/components/new/tabs/DefenseTab.jsx",
+    "line": 246,
+    "category": "floatInterpolation",
+    "snippet": "{crimFaction.power||0}"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 186,
+    "category": "floatInterpolation",
+    "snippet": "{Math.round(chain.magicRecovery * 100)}"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 186,
+    "category": "percentToken",
+    "snippet": "{Math.round(chain.magicRecovery * 100)}"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 194,
+    "category": "floatInterpolation",
+    "snippet": "{incomeEntry.percentage}"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 194,
+    "category": "percentToken",
+    "snippet": "{incomeEntry.percentage}"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 324,
+    "category": "floatInterpolation",
+    "snippet": "{ecoScore}"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 334,
+    "category": "floatInterpolation",
+    "snippet": "`Output score: ${ecoScore}/100`"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 356,
+    "category": "floatInterpolation",
+    "snippet": "{src.percentage}"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 356,
+    "category": "percentToken",
+    "snippet": "{src.percentage}"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 358,
+    "category": "floatInterpolation",
+    "snippet": "{src.percentage}"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 358,
+    "category": "percentToken",
+    "snippet": "{src.percentage}"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 477,
+    "category": "floatInterpolation",
+    "snippet": "{Math.round((fb.agricultureModifier||1)*100)}"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 477,
+    "category": "percentToken",
+    "snippet": "{Math.round((fb.agricultureModifier||1)*100)}"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 478,
+    "category": "multiplier",
+    "snippet": "{fb.stressModifier}"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 479,
+    "category": "floatInterpolation",
+    "snippet": "{Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 479,
+    "category": "percentToken",
+    "snippet": "{Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 484,
+    "category": "floatInterpolation",
+    "snippet": "{foodDeficit ? fb.importCoverage>0 ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual sho..."
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 486,
+    "category": "floatInterpolation",
+    "snippet": "`Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%. Settle..."
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 486,
+    "category": "percentToken",
+    "snippet": "`Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%. Settle..."
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 487,
+    "category": "floatInterpolation",
+    "snippet": "` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 487,
+    "category": "percentToken",
+    "snippet": "` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 488,
+    "category": "floatInterpolation",
+    "snippet": "`Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 488,
+    "category": "percentToken",
+    "snippet": "`Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 644,
+    "category": "percentToken",
+    "snippet": "`Shadow Economy: ${bmc}% capture`"
+  },
+  {
+    "path": "src/components/new/tabs/EconomicsTab.jsx",
+    "line": 650,
+    "category": "percentToken",
+    "snippet": "{bmc}"
+  },
+  {
+    "path": "src/components/new/tabs/PowerTab.jsx",
+    "line": 81,
+    "category": "floatInterpolation",
+    "snippet": "{leg.score}"
+  },
+  {
+    "path": "src/components/new/tabs/PowerTab.jsx",
+    "line": 130,
+    "category": "floatInterpolation",
+    "snippet": "{governing.power}"
+  },
+  {
+    "path": "src/components/new/tabs/PowerTab.jsx",
+    "line": 200,
+    "category": "floatInterpolation",
+    "snippet": "{Math.round(instab*100)}"
+  },
+  {
+    "path": "src/components/new/tabs/PowerTab.jsx",
+    "line": 200,
+    "category": "percentToken",
+    "snippet": "{Math.round(instab*100)}"
+  },
+  {
+    "path": "src/components/new/tabs/PowerTab.jsx",
+    "line": 212,
+    "category": "floatInterpolation",
+    "snippet": "{Math.round(rung.standing*100)}"
+  },
+  {
+    "path": "src/components/new/tabs/RumorsTab.jsx",
+    "line": 65,
+    "category": "floatInterpolation",
+    "snippet": "{CONFIDENCE_LABEL[rumor.confidence] || rumor.confidence}"
+  },
+  {
+    "path": "src/components/new/tabs/power/PowerStrata.jsx",
+    "line": 189,
+    "category": "floatInterpolation",
+    "snippet": "`${r.name}: ${pct} percent (power ${r.power})`"
+  },
+  {
+    "path": "src/components/new/tabs/power/PowerStrata.jsx",
+    "line": 189,
+    "category": "percentToken",
+    "snippet": "`${r.name}: ${pct} percent (power ${r.power})`"
+  },
+  {
+    "path": "src/components/new/tabs/power/PowerStrata.jsx",
+    "line": 191,
+    "category": "floatInterpolation",
+    "snippet": "{pct}"
+  },
+  {
+    "path": "src/components/new/tabs/power/PowerStrata.jsx",
+    "line": 232,
+    "category": "floatInterpolation",
+    "snippet": "{r.power}"
+  },
+  {
+    "path": "src/components/organic/samples/DossierSample.jsx",
+    "line": 32,
+    "category": "floatInterpolation",
+    "snippet": "{r.score}"
+  },
+  {
+    "path": "src/components/region/RegionalCausalChainViewer.jsx",
+    "line": 121,
+    "category": "floatInterpolation",
+    "snippet": "{Math.round(minSeverity * 100)}"
+  },
+  {
+    "path": "src/components/region/RegionalCausalChainViewer.jsx",
+    "line": 121,
+    "category": "percentToken",
+    "snippet": "{Math.round(minSeverity * 100)}"
+  },
+  {
+    "path": "src/components/region/RegionalCausalChainViewer.jsx",
+    "line": 144,
+    "category": "floatInterpolation",
+    "snippet": "{Math.round((row.impact.severity || 0) * 100)}"
+  },
+  {
+    "path": "src/components/region/RegionalCausalChainViewer.jsx",
+    "line": 144,
+    "category": "percentToken",
+    "snippet": "{Math.round((row.impact.severity || 0) * 100)}"
+  },
+  {
+    "path": "src/components/region/RegionalCausalChainViewer.jsx",
+    "line": 146,
+    "category": "floatInterpolation",
+    "snippet": "` · wave ${row.impact.waveDepth}`"
+  },
+  {
+    "path": "src/components/region/RegionalCausalChainViewer.jsx",
+    "line": 146,
+    "category": "floatInterpolation",
+    "snippet": "{row.impact.waveDepth > 0 ? ` · wave ${row.impact.waveDepth}` : ''}"
+  },
+  {
+    "path": "src/components/region/RegionalGraphSummary.jsx",
+    "line": 181,
+    "category": "floatInterpolation",
+    "snippet": "{Math.round((channel.confidence || 0) * 100)}"
+  },
+  {
+    "path": "src/components/region/RegionalGraphSummary.jsx",
+    "line": 181,
+    "category": "floatInterpolation",
+    "snippet": "{Math.round((channel.strength || 0) * 100)}"
+  },
+  {
+    "path": "src/components/region/RegionalGraphSummary.jsx",
+    "line": 181,
+    "category": "percentToken",
+    "snippet": "{Math.round((channel.confidence || 0) * 100)}"
+  },
+  {
+    "path": "src/components/region/RegionalGraphSummary.jsx",
+    "line": 181,
+    "category": "percentToken",
+    "snippet": "{Math.round((channel.strength || 0) * 100)}"
+  },
+  {
+    "path": "src/components/region/RegionalGraphSummary.jsx",
+    "line": 220,
+    "category": "floatInterpolation",
+    "snippet": "{Math.round((impact.severity || 0) * 100)}"
+  },
+  {
+    "path": "src/components/region/RegionalGraphSummary.jsx",
+    "line": 220,
+    "category": "percentToken",
+    "snippet": "{Math.round((impact.severity || 0) * 100)}"
+  },
+  {
+    "path": "src/components/region/RegionalImpactInbox.jsx",
+    "line": 132,
+    "category": "floatInterpolation",
+    "snippet": "{Math.round((impact.severity || 0) * 100)}"
+  },
+  {
+    "path": "src/components/region/RegionalImpactInbox.jsx",
+    "line": 132,
+    "category": "percentToken",
+    "snippet": "{Math.round((impact.severity || 0) * 100)}"
+  },
+  {
+    "path": "src/components/session/SessionMode.jsx",
+    "line": 437,
+    "category": "floatInterpolation",
+    "snippet": "{n?.power || 0}"
+  },
+  {
+    "path": "src/components/settlement/DeityAssignmentPanel.jsx",
+    "line": 293,
+    "category": "floatInterpolation",
+    "snippet": "{cultCapacity}"
+  },
+  {
+    "path": "src/components/settlement/FaithSection.jsx",
+    "line": 49,
+    "category": "floatInterpolation",
+    "snippet": "{pct}"
+  },
+  {
+    "path": "src/components/settlement/FaithSection.jsx",
+    "line": 49,
+    "category": "percentToken",
+    "snippet": "{pct}"
+  },
+  {
+    "path": "src/components/settlement/FaithSection.jsx",
+    "line": 53,
+    "category": "floatInterpolation",
+    "snippet": "`${label}: ${pct} percent`"
+  },
+  {
+    "path": "src/components/settlement/FaithSection.jsx",
+    "line": 53,
+    "category": "percentToken",
+    "snippet": "`${label}: ${pct} percent`"
+  },
+  {
+    "path": "src/components/settlement/FaithSection.jsx",
+    "line": 174,
+    "category": "floatInterpolation",
+    "snippet": "{d.share}"
+  },
+  {
+    "path": "src/components/settlement/FaithSection.jsx",
+    "line": 174,
+    "category": "floatInterpolation",
+    "snippet": "{d.standing}"
+  },
+  {
+    "path": "src/components/settlement/FaithSection.jsx",
+    "line": 174,
+    "category": "percentToken",
+    "snippet": "{d.share}"
+  },
+  {
+    "path": "src/components/settlement/FaithSection.jsx",
+    "line": 176,
+    "category": "floatInterpolation",
+    "snippet": "{Math.round(d.legitimacy * 100)}"
+  },
+  {
+    "path": "src/components/settlement/FaithSection.jsx",
+    "line": 176,
+    "category": "percentToken",
+    "snippet": "{Math.round(d.legitimacy * 100)}"
+  },
+  {
+    "path": "src/components/settlement/FaithSection.jsx",
+    "line": 179,
+    "category": "floatInterpolation",
+    "snippet": "`${d.name} adherent share ${d.share} percent`"
+  },
+  {
+    "path": "src/components/settlement/FaithSection.jsx",
+    "line": 179,
+    "category": "percentToken",
+    "snippet": "`${d.name} adherent share ${d.share} percent`"
+  },
+  {
+    "path": "src/components/settlement/FaithSection.jsx",
+    "line": 188,
+    "category": "percentToken",
+    "snippet": "{unaffiliated}"
+  },
+  {
+    "path": "src/components/settlement/eventComposer/PreviewPanel.jsx",
+    "line": 58,
+    "category": "floatInterpolation",
+    "snippet": "{w.severity === 'veto' ? vetoProse(w.code, w.detail) : w.message}"
+  },
+  {
+    "path": "src/components/settlementDetail/SettlementDetailNetworkEffectsPanel.jsx",
+    "line": 126,
+    "category": "floatInterpolation",
+    "snippet": "`${src.depth}-hop, ${Math.round(src.decay * 100)}% strength`"
+  },
+  {
+    "path": "src/components/settlementDetail/SettlementDetailNetworkEffectsPanel.jsx",
+    "line": 126,
+    "category": "percentToken",
+    "snippet": "`${src.depth}-hop, ${Math.round(src.decay * 100)}% strength`"
+  },
+  {
+    "path": "src/components/settlementDetail/SettlementDetailNetworkEffectsPanel.jsx",
+    "line": 128,
+    "category": "floatInterpolation",
+    "snippet": "`${src.tierRatio.toFixed(1)}× tier leverage`"
+  },
+  {
+    "path": "src/components/settlementDetail/SettlementDetailNetworkEffectsPanel.jsx",
+    "line": 128,
+    "category": "multiplier",
+    "snippet": "`${src.tierRatio.toFixed(1)}× tier leverage`"
+  },
+  {
+    "path": "src/components/settlements/LivingWorldSignalRow.jsx",
+    "line": 103,
+    "category": "multiplier",
+    "snippet": "`Besieged ×${war.besiegedBy.length}`"
+  },
+  {
+    "path": "src/components/settlements/LivingWorldSignalRow.jsx",
+    "line": 133,
+    "category": "floatInterpolation",
+    "snippet": "`War-weariness: ${warWeary.band} (${warWeary.value.toFixed(2)})`"
+  },
+  {
+    "path": "src/components/settlements/LivingWorldSignalRow.jsx",
+    "line": 133,
+    "category": "twoDecimalScore",
+    "snippet": "`War-weariness: ${warWeary.band} (${warWeary.value.toFixed(2)})`"
+  },
+  {
+    "path": "src/components/settlements/LivingWorldSignalRow.jsx",
+    "line": 144,
+    "category": "floatInterpolation",
+    "snippet": "`${REALM_CONTEST_RECORD_LABEL}: ${standing.wins} wins, ${standing.losses} losses (net ${standing.score > 0 ? '+' : ''}${standing.score}). ${REALM_CONTEST_RECORD_HELP}`"
+  },
+  {
+    "path": "src/components/surveyor/AutonomyPanel.jsx",
+    "line": 336,
+    "category": "floatInterpolation",
+    "snippet": "`Advancing… week ${progress?.week ?? 0}/${progress?.budget ?? maxWeeks}`"
+  },
+  {
+    "path": "src/components/surveyor/AutonomyPanel.jsx",
+    "line": 336,
+    "category": "floatInterpolation",
+    "snippet": "{running ? `Advancing… week ${progress?.week ?? 0}/${progress?.budget ?? maxWeeks}` : 'Advance until it fires'}"
+  },
+  {
+    "path": "src/components/townMap/scene3d/TownSceneInspector.jsx",
+    "line": 227,
+    "category": "floatInterpolation",
+    "snippet": "{Number.isFinite(livingRecord.severityPermille) ? ` (${Math.round(livingRecord.severityPermille / 10)}%)` : ''}"
+  },
+  {
+    "path": "src/components/townMap/scene3d/TownSceneInspector.jsx",
+    "line": 228,
+    "category": "floatInterpolation",
+    "snippet": "` (${Math.round(livingRecord.severityPermille / 10)}%)`"
+  },
+  {
+    "path": "src/components/townMap/scene3d/TownSceneInspector.jsx",
+    "line": 228,
+    "category": "percentToken",
+    "snippet": "` (${Math.round(livingRecord.severityPermille / 10)}%)`"
+  },
+  {
+    "path": "src/components/townMap/scene3d/TownSceneViewerControls.jsx",
+    "line": 89,
+    "category": "floatInterpolation",
+    "snippet": "{effectivePercent}"
+  },
+  {
+    "path": "src/components/townMap/scene3d/TownSceneViewerControls.jsx",
+    "line": 89,
+    "category": "percentToken",
+    "snippet": "{effectivePercent}"
+  },
+  {
+    "path": "src/domain/activeConditions.js",
+    "line": 976,
+    "category": "floatInterpolation",
+    "snippet": "`${c.label} — ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`"
+  },
+  {
+    "path": "src/domain/activeConditions.js",
+    "line": 976,
+    "category": "twoDecimalScore",
+    "snippet": "`${c.label} — ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`"
+  },
+  {
+    "path": "src/domain/autonomy/autonomousRun.js",
+    "line": 78,
+    "category": "floatInterpolation",
+    "snippet": "Math.floor(Number.isFinite(startTick) ? startTick : 0)"
+  },
+  {
+    "path": "src/domain/autonomy/autonomousRun.js",
+    "line": 79,
+    "category": "floatInterpolation",
+    "snippet": "Math.floor(Number.isFinite(stopTick) ? stopTick : 0)"
+  },
+  {
+    "path": "src/domain/autonomy/autonomousRun.js",
+    "line": 80,
+    "category": "floatInterpolation",
+    "snippet": "Math.floor(Number.isFinite(weeksAdvanced) ? weeksAdvanced : 0)"
+  },
+  {
+    "path": "src/domain/autonomy/autonomousRun.js",
+    "line": 81,
+    "category": "floatInterpolation",
+    "snippet": "Math.floor(Number.isFinite(maxWeeks) ? maxWeeks : 0)"
+  },
+  {
+    "path": "src/domain/causalViews.js",
+    "line": 108,
+    "category": "floatInterpolation",
+    "snippet": "`${p.name} (${p.archetype}, power ${p.power}).`"
+  },
+  {
+    "path": "src/domain/causalViews.js",
+    "line": 149,
+    "category": "floatInterpolation",
+    "snippet": "`${d.name} (${d.category}): ${d.wealth}, ${d.safety}. ${d.currentTension}`"
+  },
+  {
+    "path": "src/domain/display/worldSnapshotPublic.js",
+    "line": 595,
+    "category": "floatInterpolation",
+    "snippet": "Math.floor(finiteNum(options.maxHeadlinesPerTick, 12))"
+  },
+  {
+    "path": "src/domain/districtProfile.js",
+    "line": 238,
+    "category": "floatInterpolation",
+    "snippet": "`High criminal opportunity (${crimScore}) drags safety down.`"
+  },
+  {
+    "path": "src/domain/magicProfile.js",
+    "line": 151,
+    "category": "floatInterpolation",
+    "snippet": "`${religious.name} (power ${religious.power}) restricts arcane practice.`"
+  },
+  {
+    "path": "src/domain/magicProfile.js",
+    "line": 159,
+    "category": "floatInterpolation",
+    "snippet": "`${arcane.name} (power ${arcane.power}) normalizes arcane practice.`"
+  },
+  {
+    "path": "src/domain/region/discoverDependencyCandidates.js",
+    "line": 432,
+    "category": "floatInterpolation",
+    "snippet": "`${larger.name} holds roughly ${Math.round(populationRatio)}x the population of ${smaller.name}.`"
+  },
+  {
+    "path": "src/domain/rulingPowerCoup.js",
+    "line": 184,
+    "category": "floatInterpolation",
+    "snippet": "`${incumbent.name || 'The ruling power'} presented the stronger case (amplified weight ${incumbent.amplifiedWeight} at ×${incumbent.govMultiplier} legitimacy) and held the seat.`"
+  },
+  {
+    "path": "src/domain/rulingPowerCoup.js",
+    "line": 184,
+    "category": "multiplier",
+    "snippet": "`${incumbent.name || 'The ruling power'} presented the stronger case (amplified weight ${incumbent.amplifiedWeight} at ×${incumbent.govMultiplier} legitimacy) and held the seat.`"
+  },
+  {
+    "path": "src/domain/spatial/distanceRead.js",
+    "line": 607,
+    "category": "floatInterpolation",
+    "snippet": "Math.round(diameterCost * weeksPerCost)"
+  },
+  {
+    "path": "src/domain/spatial/moralDrift.js",
+    "line": 314,
+    "category": "floatInterpolation",
+    "snippet": "`The reckoning: its derived alignment drifts (malice ${r.malice.toFixed(2)}, lawlessness ${r.lawlessness.toFixed(2)}) — sharpest for a lawful-good aggressor.`"
+  },
+  {
+    "path": "src/domain/spatial/moralDrift.js",
+    "line": 314,
+    "category": "twoDecimalScore",
+    "snippet": "`The reckoning: its derived alignment drifts (malice ${r.malice.toFixed(2)}, lawlessness ${r.lawlessness.toFixed(2)}) — sharpest for a lawful-good aggressor.`"
+  },
+  {
+    "path": "src/domain/timeProgression.js",
+    "line": 439,
+    "category": "floatInterpolation",
+    "snippet": "`Condition expired: ${exp.label} (after ${exp.duration.elapsedTicks.toFixed(2)} ticks).`"
+  },
+  {
+    "path": "src/domain/timeProgression.js",
+    "line": 439,
+    "category": "twoDecimalScore",
+    "snippet": "`Condition expired: ${exp.label} (after ${exp.duration.elapsedTicks.toFixed(2)} ticks).`"
+  },
+  {
+    "path": "src/domain/worldPulse/attrition.js",
+    "line": 222,
+    "category": "floatInterpolation",
+    "snippet": "`${isAttacker ? 'Attacker' : 'Defender'} band ${band} (×${bandMult.toFixed(2)}), strength-tilt ×${tilt.toFixed(2)}, age-ramp ×${ageRamp.toFixed(2)}, fortification ×${fortMult.toFixed(2)}, mitigation ${(mitigation * 100).toFixed(0)}%${rdy..."
+  },
+  {
+    "path": "src/domain/worldPulse/attrition.js",
+    "line": 222,
+    "category": "floatInterpolation",
+    "snippet": "`, readiness ×${(decayMult * firstTickMult).toFixed(2)}`"
+  },
+  {
+    "path": "src/domain/worldPulse/attrition.js",
+    "line": 222,
+    "category": "multiplier",
+    "snippet": "`${isAttacker ? 'Attacker' : 'Defender'} band ${band} (×${bandMult.toFixed(2)}), strength-tilt ×${tilt.toFixed(2)}, age-ramp ×${ageRamp.toFixed(2)}, fortification ×${fortMult.toFixed(2)}, mitigation ${(mitigation * 100).toFixed(0)}%${rdy..."
+  },
+  {
+    "path": "src/domain/worldPulse/attrition.js",
+    "line": 222,
+    "category": "multiplier",
+    "snippet": "`, readiness ×${(decayMult * firstTickMult).toFixed(2)}`"
+  },
+  {
+    "path": "src/domain/worldPulse/attrition.js",
+    "line": 222,
+    "category": "percentToken",
+    "snippet": "`${isAttacker ? 'Attacker' : 'Defender'} band ${band} (×${bandMult.toFixed(2)}), strength-tilt ×${tilt.toFixed(2)}, age-ramp ×${ageRamp.toFixed(2)}, fortification ×${fortMult.toFixed(2)}, mitigation ${(mitigation * 100).toFixed(0)}%${rdy..."
+  },
+  {
+    "path": "src/domain/worldPulse/attrition.js",
+    "line": 222,
+    "category": "twoDecimalScore",
+    "snippet": "`${isAttacker ? 'Attacker' : 'Defender'} band ${band} (×${bandMult.toFixed(2)}), strength-tilt ×${tilt.toFixed(2)}, age-ramp ×${ageRamp.toFixed(2)}, fortification ×${fortMult.toFixed(2)}, mitigation ${(mitigation * 100).toFixed(0)}%${rdy..."
+  },
+  {
+    "path": "src/domain/worldPulse/attrition.js",
+    "line": 222,
+    "category": "twoDecimalScore",
+    "snippet": "`, readiness ×${(decayMult * firstTickMult).toFixed(2)}`"
+  },
+  {
+    "path": "src/domain/worldPulse/beliefMap.js",
+    "line": 1433,
+    "category": "floatInterpolation",
+    "snippet": "`Confidence in the belief it acted on: ${mis.confidence01.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/beliefMap.js",
+    "line": 1433,
+    "category": "twoDecimalScore",
+    "snippet": "`Confidence in the belief it acted on: ${mis.confidence01.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/brokerageServices.js",
+    "line": 429,
+    "category": "floatInterpolation",
+    "snippet": "Math.floor(num(tick, 0))"
+  },
+  {
+    "path": "src/domain/worldPulse/calamityKernel.js",
+    "line": 710,
+    "category": "floatInterpolation",
+    "snippet": "Math.round(exposure.factor * 10000)"
+  },
+  {
+    "path": "src/domain/worldPulse/coup.js",
+    "line": 169,
+    "category": "floatInterpolation",
+    "snippet": "`Hold chance ${verdict.pHold}, roll ${verdict.roll}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/coup.js",
+    "line": 201,
+    "category": "floatInterpolation",
+    "snippet": "`Hold chance ${verdict.pHold}, roll ${verdict.roll}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/deityStanceLane.js",
+    "line": 373,
+    "category": "floatInterpolation",
+    "snippet": "`Local devotion (piety ×${pMult.toFixed(2)}) sharpened the treachery.`"
+  },
+  {
+    "path": "src/domain/worldPulse/deityStanceLane.js",
+    "line": 373,
+    "category": "multiplier",
+    "snippet": "`Local devotion (piety ×${pMult.toFixed(2)}) sharpened the treachery.`"
+  },
+  {
+    "path": "src/domain/worldPulse/deityStanceLane.js",
+    "line": 373,
+    "category": "twoDecimalScore",
+    "snippet": "`Local devotion (piety ×${pMult.toFixed(2)}) sharpened the treachery.`"
+  },
+  {
+    "path": "src/domain/worldPulse/deityStanceLane.js",
+    "line": 394,
+    "category": "floatInterpolation",
+    "snippet": "`Local devotion (piety ×${pMult.toFixed(2)}) deepened the bond.`"
+  },
+  {
+    "path": "src/domain/worldPulse/deityStanceLane.js",
+    "line": 394,
+    "category": "multiplier",
+    "snippet": "`Local devotion (piety ×${pMult.toFixed(2)}) deepened the bond.`"
+  },
+  {
+    "path": "src/domain/worldPulse/deityStanceLane.js",
+    "line": 394,
+    "category": "twoDecimalScore",
+    "snippet": "`Local devotion (piety ×${pMult.toFixed(2)}) deepened the bond.`"
+  },
+  {
+    "path": "src/domain/worldPulse/demographicsPlans.js",
+    "line": 378,
+    "category": "floatInterpolation",
+    "snippet": "Math.round(pressure01 * 10000)"
+  },
+  {
+    "path": "src/domain/worldPulse/deploymentReturn.js",
+    "line": 211,
+    "category": "floatInterpolation",
+    "snippet": "`A returning army at ${(ratio * 100).toFixed(0)}% of its muster strength could not prevail (${kind}). Success ${pSuccess.toFixed(2)}, roll ${roll.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/deploymentReturn.js",
+    "line": 211,
+    "category": "percentToken",
+    "snippet": "`A returning army at ${(ratio * 100).toFixed(0)}% of its muster strength could not prevail (${kind}). Success ${pSuccess.toFixed(2)}, roll ${roll.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/deploymentReturn.js",
+    "line": 211,
+    "category": "twoDecimalScore",
+    "snippet": "`A returning army at ${(ratio * 100).toFixed(0)}% of its muster strength could not prevail (${kind}). Success ${pSuccess.toFixed(2)}, roll ${roll.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/deploymentReturn.js",
+    "line": 369,
+    "category": "floatInterpolation",
+    "snippet": "`A returning army (strength ${(ratio * 100).toFixed(0)}% of muster) broke the occupation. Success ${pSuccess.toFixed(2)}, roll ${roll.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/deploymentReturn.js",
+    "line": 369,
+    "category": "percentToken",
+    "snippet": "`A returning army (strength ${(ratio * 100).toFixed(0)}% of muster) broke the occupation. Success ${pSuccess.toFixed(2)}, roll ${roll.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/deploymentReturn.js",
+    "line": 369,
+    "category": "twoDecimalScore",
+    "snippet": "`A returning army (strength ${(ratio * 100).toFixed(0)}% of muster) broke the occupation. Success ${pSuccess.toFixed(2)}, roll ${roll.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/deploymentReturn.js",
+    "line": 405,
+    "category": "floatInterpolation",
+    "snippet": "`A returning army (strength ${(ratio * 100).toFixed(0)}% of muster) relieved the siege. Success ${pSuccess.toFixed(2)}, roll ${roll.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/deploymentReturn.js",
+    "line": 405,
+    "category": "percentToken",
+    "snippet": "`A returning army (strength ${(ratio * 100).toFixed(0)}% of muster) relieved the siege. Success ${pSuccess.toFixed(2)}, roll ${roll.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/deploymentReturn.js",
+    "line": 405,
+    "category": "twoDecimalScore",
+    "snippet": "`A returning army (strength ${(ratio * 100).toFixed(0)}% of muster) relieved the siege. Success ${pSuccess.toFixed(2)}, roll ${roll.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/deploymentReturn.js",
+    "line": 471,
+    "category": "floatInterpolation",
+    "snippet": "`Returning strength ${(ratio * 100).toFixed(0)}% of muster. Hold chance ${verdict.pHold}, roll ${verdict.roll}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/deploymentReturn.js",
+    "line": 471,
+    "category": "percentToken",
+    "snippet": "`Returning strength ${(ratio * 100).toFixed(0)}% of muster. Hold chance ${verdict.pHold}, roll ${verdict.roll}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/eventProse.js",
+    "line": 191,
+    "category": "floatInterpolation",
+    "snippet": "`A ledger of grievances stands open: resentment ${x.resentment}, memory ${x.memory}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/eventProse.js",
+    "line": 192,
+    "category": "floatInterpolation",
+    "snippet": "`The book of grievances stays open between them: resentment ${x.resentment}, memory ${x.memory}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/eventProse.js",
+    "line": 193,
+    "category": "floatInterpolation",
+    "snippet": "`Old accounts go unsettled: resentment stands at ${x.resentment}, the long memory at ${x.memory}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/eventProse.js",
+    "line": 194,
+    "category": "floatInterpolation",
+    "snippet": "`Every slight is still tallied: resentment ${x.resentment}, memory ${x.memory}, and nothing forgiven.`"
+  },
+  {
+    "path": "src/domain/worldPulse/eventProse.js",
+    "line": 281,
+    "category": "floatInterpolation",
+    "snippet": "`The war has worn the town to the bone: exhaustion ${x.score}; the seat needs peace to survive.`"
+  },
+  {
+    "path": "src/domain/worldPulse/eventProse.js",
+    "line": 282,
+    "category": "floatInterpolation",
+    "snippet": "`The war has ground the town to the bone: exhaustion ${x.score}; the seat must have peace to last.`"
+  },
+  {
+    "path": "src/domain/worldPulse/eventProse.js",
+    "line": 283,
+    "category": "floatInterpolation",
+    "snippet": "`The fighting has hollowed the town: exhaustion ${x.score}; without peace the seat cannot hold.`"
+  },
+  {
+    "path": "src/domain/worldPulse/eventProse.js",
+    "line": 284,
+    "category": "floatInterpolation",
+    "snippet": "`The war has spent the town to its bones: exhaustion ${x.score}; peace is now a matter of survival.`"
+  },
+  {
+    "path": "src/domain/worldPulse/feasibilityGate.js",
+    "line": 182,
+    "category": "floatInterpolation",
+    "snippet": "`Attacker/defender capacity ratio ${ratio.toFixed(2)} (home-ground adjusted).`"
+  },
+  {
+    "path": "src/domain/worldPulse/feasibilityGate.js",
+    "line": 182,
+    "category": "twoDecimalScore",
+    "snippet": "`Attacker/defender capacity ratio ${ratio.toFixed(2)} (home-ground adjusted).`"
+  },
+  {
+    "path": "src/domain/worldPulse/flows.js",
+    "line": 96,
+    "category": "floatInterpolation",
+    "snippet": "`A severe ${human} (${sourceSeverity.toFixed(2)}) is displacing people.`"
+  },
+  {
+    "path": "src/domain/worldPulse/flows.js",
+    "line": 96,
+    "category": "twoDecimalScore",
+    "snippet": "`A severe ${human} (${sourceSeverity.toFixed(2)}) is displacing people.`"
+  },
+  {
+    "path": "src/domain/worldPulse/institutionLifecycle.js",
+    "line": 764,
+    "category": "floatInterpolation",
+    "snippet": "`Build chance now ${Math.round(probability * 100)}%.`"
+  },
+  {
+    "path": "src/domain/worldPulse/institutionLifecycle.js",
+    "line": 764,
+    "category": "percentToken",
+    "snippet": "`Build chance now ${Math.round(probability * 100)}%.`"
+  },
+  {
+    "path": "src/domain/worldPulse/institutionLifecycle.js",
+    "line": 832,
+    "category": "floatInterpolation",
+    "snippet": "`Economic contribution ${Math.round(target.contribution * 100)}%, impairment ${Math.round(target.impairment * 100)}%.`"
+  },
+  {
+    "path": "src/domain/worldPulse/institutionLifecycle.js",
+    "line": 832,
+    "category": "percentToken",
+    "snippet": "`Economic contribution ${Math.round(target.contribution * 100)}%, impairment ${Math.round(target.impairment * 100)}%.`"
+  },
+  {
+    "path": "src/domain/worldPulse/institutionLifecycle.js",
+    "line": 833,
+    "category": "floatInterpolation",
+    "snippet": "`Closure chance now ${Math.round(probability * 100)}%.`"
+  },
+  {
+    "path": "src/domain/worldPulse/institutionLifecycle.js",
+    "line": 833,
+    "category": "percentToken",
+    "snippet": "`Closure chance now ${Math.round(probability * 100)}%.`"
+  },
+  {
+    "path": "src/domain/worldPulse/magicBufferApply.js",
+    "line": 377,
+    "category": "floatInterpolation",
+    "snippet": "Math.round(resolved.mitigation01 * 10000)"
+  },
+  {
+    "path": "src/domain/worldPulse/magicBufferApply.js",
+    "line": 378,
+    "category": "floatInterpolation",
+    "snippet": "Math.round(resolved.relief.demand01 * 10000)"
+  },
+  {
+    "path": "src/domain/worldPulse/magicRegimeLifecycle.js",
+    "line": 246,
+    "category": "floatInterpolation",
+    "snippet": "`The economy reads ${economy01.toFixed(2)}, which ${promoted ? 'carries' : 'drops'} this place from ${priorRegime} to ${resolved.regime}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/magicRegimeLifecycle.js",
+    "line": 246,
+    "category": "twoDecimalScore",
+    "snippet": "`The economy reads ${economy01.toFixed(2)}, which ${promoted ? 'carries' : 'drops'} this place from ${priorRegime} to ${resolved.regime}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/mobilization.js",
+    "line": 413,
+    "category": "floatInterpolation",
+    "snippet": "`ramping toward war (readiness ${readiness.toFixed(2)}× base)`"
+  },
+  {
+    "path": "src/domain/worldPulse/mobilization.js",
+    "line": 413,
+    "category": "multiplier",
+    "snippet": "`ramping toward war (readiness ${readiness.toFixed(2)}× base)`"
+  },
+  {
+    "path": "src/domain/worldPulse/mobilization.js",
+    "line": 413,
+    "category": "twoDecimalScore",
+    "snippet": "`ramping toward war (readiness ${readiness.toFixed(2)}× base)`"
+  },
+  {
+    "path": "src/domain/worldPulse/mobilizationReactions.js",
+    "line": 333,
+    "category": "floatInterpolation",
+    "snippet": "`Disposition ${aggr.toFixed(2)} (centered on 1.0) → ${move}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/mobilizationReactions.js",
+    "line": 333,
+    "category": "twoDecimalScore",
+    "snippet": "`Disposition ${aggr.toFixed(2)} (centered on 1.0) → ${move}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/momentum.js",
+    "line": 1166,
+    "category": "floatInterpolation",
+    "snippet": "`${A} had held its war on ${Tn} well past the point of easy return (commitment ${depth}× its cliff), but a ${faced} let the crown reverse course and still call it a victory — the reversal cost less.`"
+  },
+  {
+    "path": "src/domain/worldPulse/momentum.js",
+    "line": 1166,
+    "category": "multiplier",
+    "snippet": "`${A} had held its war on ${Tn} well past the point of easy return (commitment ${depth}× its cliff), but a ${faced} let the crown reverse course and still call it a victory — the reversal cost less.`"
+  },
+  {
+    "path": "src/domain/worldPulse/momentum.js",
+    "line": 1167,
+    "category": "floatInterpolation",
+    "snippet": "`${A} had held its war on ${Tn} well past the point of easy return (commitment ${depth}× its cliff). Reversing it now spends real credibility and legitimacy — the price of the proud hold come due.`"
+  },
+  {
+    "path": "src/domain/worldPulse/momentum.js",
+    "line": 1167,
+    "category": "multiplier",
+    "snippet": "`${A} had held its war on ${Tn} well past the point of easy return (commitment ${depth}× its cliff). Reversing it now spends real credibility and legitimacy — the price of the proud hold come due.`"
+  },
+  {
+    "path": "src/domain/worldPulse/momentum.js",
+    "line": 1169,
+    "category": "floatInterpolation",
+    "snippet": "`The commitment stock (${depth}× the reconsideration cliff) put ${A} past the cliff — a genuine climb-down, not a free reversal.`"
+  },
+  {
+    "path": "src/domain/worldPulse/momentum.js",
+    "line": 1169,
+    "category": "multiplier",
+    "snippet": "`The commitment stock (${depth}× the reconsideration cliff) put ${A} past the cliff — a genuine climb-down, not a free reversal.`"
+  },
+  {
+    "path": "src/domain/worldPulse/momentum.js",
+    "line": 1171,
+    "category": "floatInterpolation",
+    "snippet": "`The ${faced} off-ramp softened the price (relief ${Math.round((1 - crack.price01) * 100)}%); the reversal could be told as a win.`"
+  },
+  {
+    "path": "src/domain/worldPulse/momentum.js",
+    "line": 1171,
+    "category": "percentToken",
+    "snippet": "`The ${faced} off-ramp softened the price (relief ${Math.round((1 - crack.price01) * 100)}%); the reversal could be told as a win.`"
+  },
+  {
+    "path": "src/domain/worldPulse/moralInstitutionPressure.js",
+    "line": 372,
+    "category": "floatInterpolation",
+    "snippet": "`Viability pressure has built to ${Math.round(best.accum * 100)}% over sustained ticks (an arc, not a decree).`"
+  },
+  {
+    "path": "src/domain/worldPulse/moralInstitutionPressure.js",
+    "line": 372,
+    "category": "percentToken",
+    "snippet": "`Viability pressure has built to ${Math.round(best.accum * 100)}% over sustained ticks (an arc, not a decree).`"
+  },
+  {
+    "path": "src/domain/worldPulse/moralInstitutionPressure.js",
+    "line": 526,
+    "category": "floatInterpolation",
+    "snippet": "`Founding pressure has built to ${Math.round(best.accum * 100)}% over sustained years (an arc, not a decree).`"
+  },
+  {
+    "path": "src/domain/worldPulse/moralInstitutionPressure.js",
+    "line": 526,
+    "category": "percentToken",
+    "snippet": "`Founding pressure has built to ${Math.round(best.accum * 100)}% over sustained years (an arc, not a decree).`"
+  },
+  {
+    "path": "src/domain/worldPulse/npcAgency.js",
+    "line": 909,
+    "category": "floatInterpolation",
+    "snippet": "`Pressure gate ${pressure.toFixed(2)}, ambition ${state.ambition.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/npcAgency.js",
+    "line": 909,
+    "category": "twoDecimalScore",
+    "snippet": "`Pressure gate ${pressure.toFixed(2)}, ambition ${state.ambition.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/npcLadderKernel.js",
+    "line": 862,
+    "category": "floatInterpolation",
+    "snippet": "`A windowed challenge (${windows}) cleared the sustained margin: challenge ${ev.cScore} vs defense ${ev.dScore}. The ranks swapped — conservation holds, no title inflation.`"
+  },
+  {
+    "path": "src/domain/worldPulse/npcLadderKernel.js",
+    "line": 863,
+    "category": "floatInterpolation",
+    "snippet": "`A windowed challenge (${windows}) fell short of the sustained margin: challenge ${ev.cScore} vs defense ${ev.dScore}. The defender held; the challenger dropped a rung and carries the grudge.`"
+  },
+  {
+    "path": "src/domain/worldPulse/occupation.js",
+    "line": 707,
+    "category": "floatInterpolation",
+    "snippet": "`Occupation stabilized to vassalized (resistance ${num(rec.resistance).toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/occupation.js",
+    "line": 707,
+    "category": "twoDecimalScore",
+    "snippet": "`Occupation stabilized to vassalized (resistance ${num(rec.resistance).toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/occupation.js",
+    "line": 852,
+    "category": "floatInterpolation",
+    "snippet": "`Occupation suitability collapsed (resistance ${nextResistance.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/occupation.js",
+    "line": 852,
+    "category": "twoDecimalScore",
+    "snippet": "`Occupation suitability collapsed (resistance ${nextResistance.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/occupation.js",
+    "line": 910,
+    "category": "floatInterpolation",
+    "snippet": "`Resistance at ${nextResistance.toFixed(2)} (occupation ${advanced.state}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/occupation.js",
+    "line": 910,
+    "category": "twoDecimalScore",
+    "snippet": "`Resistance at ${nextResistance.toFixed(2)} (occupation ${advanced.state}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/occupation.js",
+    "line": 976,
+    "category": "floatInterpolation",
+    "snippet": "`Occupation burden ${burdenSeverity.toFixed(2)} across ${occCount} occupation${occCount === 1 ? '' : 's'} (overextension scales with count).`"
+  },
+  {
+    "path": "src/domain/worldPulse/occupation.js",
+    "line": 976,
+    "category": "twoDecimalScore",
+    "snippet": "`Occupation burden ${burdenSeverity.toFixed(2)} across ${occCount} occupation${occCount === 1 ? '' : 's'} (overextension scales with count).`"
+  },
+  {
+    "path": "src/domain/worldPulse/occupation.js",
+    "line": 1018,
+    "category": "floatInterpolation",
+    "snippet": "`Occupier benefit ${benefitYield.toFixed(2)} (HARD-CAPPED at ${OCCUPIER_BENEFIT_CONTAINMENT}); relief ${relief.toFixed(2)} eases war exhaustion.`"
+  },
+  {
+    "path": "src/domain/worldPulse/occupation.js",
+    "line": 1018,
+    "category": "twoDecimalScore",
+    "snippet": "`Occupier benefit ${benefitYield.toFixed(2)} (HARD-CAPPED at ${OCCUPIER_BENEFIT_CONTAINMENT}); relief ${relief.toFixed(2)} eases war exhaustion.`"
+  },
+  {
+    "path": "src/domain/worldPulse/occupationRecordMode.js",
+    "line": 195,
+    "category": "floatInterpolation",
+    "snippet": "`Occupier benefit fell from ${clamp01(num(previousBenefit)).toFixed(2)} to 0.00.`"
+  },
+  {
+    "path": "src/domain/worldPulse/occupationRecordMode.js",
+    "line": 195,
+    "category": "twoDecimalScore",
+    "snippet": "`Occupier benefit fell from ${clamp01(num(previousBenefit)).toFixed(2)} to 0.00.`"
+  },
+  {
+    "path": "src/domain/worldPulse/peaceReasons.js",
+    "line": 95,
+    "category": "floatInterpolation",
+    "snippet": "score.toFixed(2)"
+  },
+  {
+    "path": "src/domain/worldPulse/peaceReasons.js",
+    "line": 95,
+    "category": "twoDecimalScore",
+    "snippet": "score.toFixed(2)"
+  },
+  {
+    "path": "src/domain/worldPulse/peaceReasons.js",
+    "line": 116,
+    "category": "floatInterpolation",
+    "snippet": "divergence.toFixed(2)"
+  },
+  {
+    "path": "src/domain/worldPulse/peaceReasons.js",
+    "line": 116,
+    "category": "twoDecimalScore",
+    "snippet": "divergence.toFixed(2)"
+  },
+  {
+    "path": "src/domain/worldPulse/peaceTerms.js",
+    "line": 483,
+    "category": "floatInterpolation",
+    "snippet": "`A tribute stream — ${(magnitude * 100).toFixed(0)}% of the treasury for ${years} year${years === 1 ? '' : 's'}; it was always the coin they wanted.`"
+  },
+  {
+    "path": "src/domain/worldPulse/peaceTerms.js",
+    "line": 483,
+    "category": "percentToken",
+    "snippet": "`A tribute stream — ${(magnitude * 100).toFixed(0)}% of the treasury for ${years} year${years === 1 ? '' : 's'}; it was always the coin they wanted.`"
+  },
+  {
+    "path": "src/domain/worldPulse/peaceTerms.js",
+    "line": 484,
+    "category": "floatInterpolation",
+    "snippet": "`${asset.good || 'The staple export'} shall flow to the victor — a ${(magnitude * 100).toFixed(0)}% share for ${years} year${years === 1 ? '' : 's'}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/peaceTerms.js",
+    "line": 484,
+    "category": "percentToken",
+    "snippet": "`${asset.good || 'The staple export'} shall flow to the victor — a ${(magnitude * 100).toFixed(0)}% share for ${years} year${years === 1 ? '' : 's'}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/peaceTerms.js",
+    "line": 486,
+    "category": "floatInterpolation",
+    "snippet": "`Restitution for a debt long unpaid — ${(magnitude * 100).toFixed(0)}% for ${years} year${years === 1 ? '' : 's'}; the old grain-years, called in at last.`"
+  },
+  {
+    "path": "src/domain/worldPulse/peaceTerms.js",
+    "line": 486,
+    "category": "percentToken",
+    "snippet": "`Restitution for a debt long unpaid — ${(magnitude * 100).toFixed(0)}% for ${years} year${years === 1 ? '' : 's'}; the old grain-years, called in at last.`"
+  },
+  {
+    "path": "src/domain/worldPulse/peaceTerms.js",
+    "line": 909,
+    "category": "floatInterpolation",
+    "snippet": "`A treaty is signed — ${terms.length} term${terms.length === 1 ? '' : 's'} at ${budgetSpent.toFixed(2)} of a ${round4(effectiveBudget).toFixed(2)} budget${mediator ? `, brokered by ${mediator.name}` : ''}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/peaceTerms.js",
+    "line": 909,
+    "category": "twoDecimalScore",
+    "snippet": "`A treaty is signed — ${terms.length} term${terms.length === 1 ? '' : 's'} at ${budgetSpent.toFixed(2)} of a ${round4(effectiveBudget).toFixed(2)} budget${mediator ? `, brokered by ${mediator.name}` : ''}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/populationDynamics.js",
+    "line": 458,
+    "category": "floatInterpolation",
+    "snippet": "`Food ${score(pressureIdx, sourceId, 'food').toFixed(2)}, defense pressure ${score(pressureIdx, sourceId, 'conflict').toFixed(2)}, trade pressure ${score(pressureIdx, sourceId, 'trade').toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/populationDynamics.js",
+    "line": 458,
+    "category": "twoDecimalScore",
+    "snippet": "`Food ${score(pressureIdx, sourceId, 'food').toFixed(2)}, defense pressure ${score(pressureIdx, sourceId, 'conflict').toFixed(2)}, trade pressure ${score(pressureIdx, sourceId, 'trade').toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/reinforcement.js",
+    "line": 143,
+    "category": "floatInterpolation",
+    "snippet": "`Reinforcement flow ${(flowFraction * 100).toFixed(1)}% of max (supply ×${centeredMult.toFixed(2)}, route ×${routeMult.toFixed(2)}, exhaustion ×${exhaustionMult.toFixed(2)}) restored ${flowPoints.toFixed(1)} pts; origin drain ${drainSeve..."
+  },
+  {
+    "path": "src/domain/worldPulse/reinforcement.js",
+    "line": 143,
+    "category": "multiplier",
+    "snippet": "`Reinforcement flow ${(flowFraction * 100).toFixed(1)}% of max (supply ×${centeredMult.toFixed(2)}, route ×${routeMult.toFixed(2)}, exhaustion ×${exhaustionMult.toFixed(2)}) restored ${flowPoints.toFixed(1)} pts; origin drain ${drainSeve..."
+  },
+  {
+    "path": "src/domain/worldPulse/reinforcement.js",
+    "line": 143,
+    "category": "percentToken",
+    "snippet": "`Reinforcement flow ${(flowFraction * 100).toFixed(1)}% of max (supply ×${centeredMult.toFixed(2)}, route ×${routeMult.toFixed(2)}, exhaustion ×${exhaustionMult.toFixed(2)}) restored ${flowPoints.toFixed(1)} pts; origin drain ${drainSeve..."
+  },
+  {
+    "path": "src/domain/worldPulse/reinforcement.js",
+    "line": 143,
+    "category": "twoDecimalScore",
+    "snippet": "`Reinforcement flow ${(flowFraction * 100).toFixed(1)}% of max (supply ×${centeredMult.toFixed(2)}, route ×${routeMult.toFixed(2)}, exhaustion ×${exhaustionMult.toFixed(2)}) restored ${flowPoints.toFixed(1)} pts; origin drain ${drainSeve..."
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesAdversarial.js",
+    "line": 90,
+    "category": "floatInterpolation",
+    "snippet": "`Power confidence gap ${confidenceGap.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesAdversarial.js",
+    "line": 90,
+    "category": "twoDecimalScore",
+    "snippet": "`Power confidence gap ${confidenceGap.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesAdversarial.js",
+    "line": 200,
+    "category": "floatInterpolation",
+    "snippet": "`Confirmed supply exposure ${exposure.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesAdversarial.js",
+    "line": 200,
+    "category": "floatInterpolation",
+    "snippet": "`Trade stress ${tradeStress.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesAdversarial.js",
+    "line": 200,
+    "category": "twoDecimalScore",
+    "snippet": "`Confirmed supply exposure ${exposure.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesAdversarial.js",
+    "line": 200,
+    "category": "twoDecimalScore",
+    "snippet": "`Trade stress ${tradeStress.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesAdversarial.js",
+    "line": 401,
+    "category": "floatInterpolation",
+    "snippet": "`Attacker attrition ${attackerAttrition.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesAdversarial.js",
+    "line": 401,
+    "category": "twoDecimalScore",
+    "snippet": "`Attacker attrition ${attackerAttrition.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesAdversarial.js",
+    "line": 608,
+    "category": "floatInterpolation",
+    "snippet": "`Trade salience ${info.salience.toFixed(2)} with tension ${tensionDrive.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesAdversarial.js",
+    "line": 608,
+    "category": "twoDecimalScore",
+    "snippet": "`Trade salience ${info.salience.toFixed(2)} with tension ${tensionDrive.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesAdversarial.js",
+    "line": 650,
+    "category": "floatInterpolation",
+    "snippet": "`Trade salience ${info.salience.toFixed(2)} (critical supplier).`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesAdversarial.js",
+    "line": 650,
+    "category": "twoDecimalScore",
+    "snippet": "`Trade salience ${info.salience.toFixed(2)} (critical supplier).`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesCore.js",
+    "line": 63,
+    "category": "floatInterpolation",
+    "snippet": "`Trust ${relState.trust.toFixed(2)}, resentment ${relState.resentment.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesCore.js",
+    "line": 63,
+    "category": "twoDecimalScore",
+    "snippet": "`Trust ${relState.trust.toFixed(2)}, resentment ${relState.resentment.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesCore.js",
+    "line": 82,
+    "category": "floatInterpolation",
+    "snippet": "`Conflict pressure ${combinedConflict.toFixed(2)}, resentment ${relState.resentment.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesCore.js",
+    "line": 82,
+    "category": "twoDecimalScore",
+    "snippet": "`Conflict pressure ${combinedConflict.toFixed(2)}, resentment ${relState.resentment.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesCore.js",
+    "line": 260,
+    "category": "floatInterpolation",
+    "snippet": "`Burden ${burden.toFixed(2)}, endurance ${endurance.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesCore.js",
+    "line": 260,
+    "category": "twoDecimalScore",
+    "snippet": "`Burden ${burden.toFixed(2)}, endurance ${endurance.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesCore.js",
+    "line": 745,
+    "category": "floatInterpolation",
+    "snippet": "`Stable compact gate ${stableVassalage.toFixed(2)} with strain ${vassalStrain.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesCore.js",
+    "line": 745,
+    "category": "twoDecimalScore",
+    "snippet": "`Stable compact gate ${stableVassalage.toFixed(2)} with strain ${vassalStrain.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesCore.js",
+    "line": 780,
+    "category": "floatInterpolation",
+    "snippet": "`Independence pressure ${independencePressure.toFixed(2)} with overlord weakness streak ${weaknessStreak}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesCore.js",
+    "line": 780,
+    "category": "twoDecimalScore",
+    "snippet": "`Independence pressure ${independencePressure.toFixed(2)} with overlord weakness streak ${weaknessStreak}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesCore.js",
+    "line": 781,
+    "category": "floatInterpolation",
+    "snippet": "`Vassal strain ${vassalStrain.toFixed(2)} with resentment ${relState.resentment.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipRulesCore.js",
+    "line": 781,
+    "category": "twoDecimalScore",
+    "snippet": "`Vassal strain ${vassalStrain.toFixed(2)} with resentment ${relState.resentment.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/religiousContest.js",
+    "line": 846,
+    "category": "floatInterpolation",
+    "snippet": "`Deep local devotion (piety ×${pietyMult.toFixed(2)}) makes the schism louder.`"
+  },
+  {
+    "path": "src/domain/worldPulse/religiousContest.js",
+    "line": 846,
+    "category": "multiplier",
+    "snippet": "`Deep local devotion (piety ×${pietyMult.toFixed(2)}) makes the schism louder.`"
+  },
+  {
+    "path": "src/domain/worldPulse/religiousContest.js",
+    "line": 846,
+    "category": "twoDecimalScore",
+    "snippet": "`Deep local devotion (piety ×${pietyMult.toFixed(2)}) makes the schism louder.`"
+  },
+  {
+    "path": "src/domain/worldPulse/religiousContest.js",
+    "line": 878,
+    "category": "floatInterpolation",
+    "snippet": "`Deep local devotion (piety ×${pietyMult.toFixed(2)}) sharpened the upheaval.`"
+  },
+  {
+    "path": "src/domain/worldPulse/religiousContest.js",
+    "line": 878,
+    "category": "multiplier",
+    "snippet": "`Deep local devotion (piety ×${pietyMult.toFixed(2)}) sharpened the upheaval.`"
+  },
+  {
+    "path": "src/domain/worldPulse/religiousContest.js",
+    "line": 878,
+    "category": "twoDecimalScore",
+    "snippet": "`Deep local devotion (piety ×${pietyMult.toFixed(2)}) sharpened the upheaval.`"
+  },
+  {
+    "path": "src/domain/worldPulse/resourceDynamicsKernel.js",
+    "line": 378,
+    "category": "floatInterpolation",
+    "snippet": "`Sustained prospecting pressure has built to ${Math.round(nextAcc * 100)}% (an arc, not a decree).`"
+  },
+  {
+    "path": "src/domain/worldPulse/resourceDynamicsKernel.js",
+    "line": 378,
+    "category": "percentToken",
+    "snippet": "`Sustained prospecting pressure has built to ${Math.round(nextAcc * 100)}% (an arc, not a decree).`"
+  },
+  {
+    "path": "src/domain/worldPulse/seasons.js",
+    "line": 252,
+    "category": "floatInterpolation",
+    "snippet": "`${s.name}: stores below half a month with a ${Math.round(s.deficitPct)}% deficit.`"
+  },
+  {
+    "path": "src/domain/worldPulse/seasons.js",
+    "line": 252,
+    "category": "percentToken",
+    "snippet": "`${s.name}: stores below half a month with a ${Math.round(s.deficitPct)}% deficit.`"
+  },
+  {
+    "path": "src/domain/worldPulse/settlementLifecycleFirstClass.js",
+    "line": 203,
+    "category": "floatInterpolation",
+    "snippet": "`Demoted to the ladder's bottom rung and unsupported (support ${support.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/settlementLifecycleFirstClass.js",
+    "line": 203,
+    "category": "twoDecimalScore",
+    "snippet": "`Demoted to the ladder's bottom rung and unsupported (support ${support.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/settlementLifecycleKernel.js",
+    "line": 895,
+    "category": "floatInterpolation",
+    "snippet": "`Backing fell to ${Math.round(backing01 * 100)}% and stayed there for ${dwell} ticks.`"
+  },
+  {
+    "path": "src/domain/worldPulse/settlementLifecycleKernel.js",
+    "line": 895,
+    "category": "percentToken",
+    "snippet": "`Backing fell to ${Math.round(backing01 * 100)}% and stayed there for ${dwell} ticks.`"
+  },
+  {
+    "path": "src/domain/worldPulse/settlementPolitics.js",
+    "line": 352,
+    "category": "floatInterpolation",
+    "snippet": "`a ${strength || ''} ${type === 'enemy' ? 'enmity' : 'rivalry'} between the leaders`"
+  },
+  {
+    "path": "src/domain/worldPulse/settlementStrategy.js",
+    "line": 276,
+    "category": "floatInterpolation",
+    "snippet": "`${name} marches on ${targetName} through ${parts.join(' and ')} (confidence ${mis.confidence01.toFixed(2)}) — a misjudgment.`"
+  },
+  {
+    "path": "src/domain/worldPulse/settlementStrategy.js",
+    "line": 276,
+    "category": "twoDecimalScore",
+    "snippet": "`${name} marches on ${targetName} through ${parts.join(' and ')} (confidence ${mis.confidence01.toFixed(2)}) — a misjudgment.`"
+  },
+  {
+    "path": "src/domain/worldPulse/settlementStrategy.js",
+    "line": 728,
+    "category": "floatInterpolation",
+    "snippet": "`${label}: ${r.type} (${r.score.toFixed(2)}) — ${r.receipt}`"
+  },
+  {
+    "path": "src/domain/worldPulse/settlementStrategy.js",
+    "line": 728,
+    "category": "twoDecimalScore",
+    "snippet": "`${label}: ${r.type} (${r.score.toFixed(2)}) — ${r.receipt}`"
+  },
+  {
+    "path": "src/domain/worldPulse/settlementStrategy.js",
+    "line": 767,
+    "category": "floatInterpolation",
+    "snippet": "`Economic exhaustion ${exhaustion.toFixed(2)} drives ${name} to the table.`"
+  },
+  {
+    "path": "src/domain/worldPulse/settlementStrategy.js",
+    "line": 767,
+    "category": "twoDecimalScore",
+    "snippet": "`Economic exhaustion ${exhaustion.toFixed(2)} drives ${name} to the table.`"
+  },
+  {
+    "path": "src/domain/worldPulse/settlementStrategy.js",
+    "line": 780,
+    "category": "floatInterpolation",
+    "snippet": "`A misread of war-bankruptcy — ${driver} distorted the reading (perceived ${perceived.toFixed(2)} vs true ${exhaustion.toFixed(2)}), so the suit came ${perceived > exhaustion ? 'early' : 'late'}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/settlementStrategy.js",
+    "line": 780,
+    "category": "twoDecimalScore",
+    "snippet": "`A misread of war-bankruptcy — ${driver} distorted the reading (perceived ${perceived.toFixed(2)} vs true ${exhaustion.toFixed(2)}), so the suit came ${perceived > exhaustion ? 'early' : 'late'}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressorDynamics.js",
+    "line": 900,
+    "category": "floatInterpolation",
+    "snippet": "`${contest.incumbent.name || 'The seat'} can still present a case (weight ${contest.incumbent.amplifiedWeight} at ×${contest.incumbent.govMultiplier} legitimacy).`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressorDynamics.js",
+    "line": 900,
+    "category": "multiplier",
+    "snippet": "`${contest.incumbent.name || 'The seat'} can still present a case (weight ${contest.incumbent.amplifiedWeight} at ×${contest.incumbent.govMultiplier} legitimacy).`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressorGates.js",
+    "line": 338,
+    "category": "floatInterpolation",
+    "snippet": "`Production already runs ${Math.round(ledger.deficitPct)}% short.`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressorGates.js",
+    "line": 338,
+    "category": "percentToken",
+    "snippet": "`Production already runs ${Math.round(ledger.deficitPct)}% short.`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressorGates.js",
+    "line": 340,
+    "category": "floatInterpolation",
+    "snippet": "`${Math.round(ledger.storageMonths)} months of stores stand between hunger and the town.`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressorGates.js",
+    "line": 759,
+    "category": "floatInterpolation",
+    "snippet": "`Legitimacy stands at ${Math.round(score)} (${legitimacy?.label || 'Contested'}). The seat is exposed.`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressorGates.js",
+    "line": 760,
+    "category": "floatInterpolation",
+    "snippet": "`Governing authority ${authority < 30 ? 'is crumbling' : authority < 50 ? 'is strained' : 'still holds'} (ruling authority ${Math.round(authority)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressors.js",
+    "line": 433,
+    "category": "floatInterpolation",
+    "snippet": "`${defaults.label} birth gate passed at ${pressure.score.toFixed(2)} pressure.`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressors.js",
+    "line": 433,
+    "category": "twoDecimalScore",
+    "snippet": "`${defaults.label} birth gate passed at ${pressure.score.toFixed(2)} pressure.`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressors.js",
+    "line": 435,
+    "category": "floatInterpolation",
+    "snippet": "`Re-ignition: the last ${stressor.label.toLowerCase()} is still in living memory (echo ${(echo.memoryStrength ?? 0).toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressors.js",
+    "line": 435,
+    "category": "twoDecimalScore",
+    "snippet": "`Re-ignition: the last ${stressor.label.toLowerCase()} is still in living memory (echo ${(echo.memoryStrength ?? 0).toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressors.js",
+    "line": 650,
+    "category": "floatInterpolation",
+    "snippet": "`Matching pressure ${strongestPressure.toFixed(2)} exceeds escalation gate.`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressors.js",
+    "line": 650,
+    "category": "twoDecimalScore",
+    "snippet": "`Matching pressure ${strongestPressure.toFixed(2)} exceeds escalation gate.`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressors.js",
+    "line": 688,
+    "category": "floatInterpolation",
+    "snippet": "`${stressor.label} can spread through ${stressor.spreadChannels.slice(0, 2).join(' and ').replace(/_/g, ' ')} channels, arriving attenuated at severity ${spreadSeverity.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressors.js",
+    "line": 688,
+    "category": "twoDecimalScore",
+    "snippet": "`${stressor.label} can spread through ${stressor.spreadChannels.slice(0, 2).join(' and ').replace(/_/g, ' ')} channels, arriving attenuated at severity ${spreadSeverity.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressors.js",
+    "line": 690,
+    "category": "floatInterpolation",
+    "snippet": "`${stressor.label} is active at severity ${stressor.severity.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressors.js",
+    "line": 690,
+    "category": "twoDecimalScore",
+    "snippet": "`${stressor.label} is active at severity ${stressor.severity.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressors.js",
+    "line": 691,
+    "category": "floatInterpolation",
+    "snippet": "`A plausible spread channel reaches another settlement; the crisis arrives attenuated to ${spreadSeverity.toFixed(2)} there.`"
+  },
+  {
+    "path": "src/domain/worldPulse/stressors.js",
+    "line": 691,
+    "category": "twoDecimalScore",
+    "snippet": "`A plausible spread channel reaches another settlement; the crisis arrives attenuated to ${spreadSeverity.toFixed(2)} there.`"
+  },
+  {
+    "path": "src/domain/worldPulse/supplyWebWarfare.js",
+    "line": 431,
+    "category": "floatInterpolation",
+    "snippet": "`A direct assault is a losing bet (margin ${margin.toFixed(2)}); the target's web is ${(web.fragility01 * 100).toFixed(0)}% single-sourced — strangle first (indirect ${indirectEV.toFixed(2)} vs direct ${directEV.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/supplyWebWarfare.js",
+    "line": 431,
+    "category": "percentToken",
+    "snippet": "`A direct assault is a losing bet (margin ${margin.toFixed(2)}); the target's web is ${(web.fragility01 * 100).toFixed(0)}% single-sourced — strangle first (indirect ${indirectEV.toFixed(2)} vs direct ${directEV.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/supplyWebWarfare.js",
+    "line": 431,
+    "category": "twoDecimalScore",
+    "snippet": "`A direct assault is a losing bet (margin ${margin.toFixed(2)}); the target's web is ${(web.fragility01 * 100).toFixed(0)}% single-sourced — strangle first (indirect ${indirectEV.toFixed(2)} vs direct ${directEV.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/supplyWebWarfare.js",
+    "line": 432,
+    "category": "floatInterpolation",
+    "snippet": "`The target can be taken directly (margin ${margin.toFixed(2)}); the slow strangulation is not worth the ${timeDiscount.toFixed(2)} time cost (indirect ${indirectEV.toFixed(2)} vs direct ${directEV.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/supplyWebWarfare.js",
+    "line": 432,
+    "category": "twoDecimalScore",
+    "snippet": "`The target can be taken directly (margin ${margin.toFixed(2)}); the slow strangulation is not worth the ${timeDiscount.toFixed(2)} time cost (indirect ${indirectEV.toFixed(2)} vs direct ${directEV.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/supplyWebWarfare.js",
+    "line": 907,
+    "category": "floatInterpolation",
+    "snippet": "`The plan sequences ${stages.length} stage${stages.length === 1 ? '' : 's'} against ${Tn}'s suppliers (indirect EV ${ev.indirectEV.toFixed(2)} vs direct ${ev.directEV.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/supplyWebWarfare.js",
+    "line": 907,
+    "category": "twoDecimalScore",
+    "snippet": "`The plan sequences ${stages.length} stage${stages.length === 1 ? '' : 's'} against ${Tn}'s suppliers (indirect EV ${ev.indirectEV.toFixed(2)} vs direct ${ev.directEV.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/supplyWebWarfare.js",
+    "line": 931,
+    "category": "floatInterpolation",
+    "snippet": "`But ${V} no longer fed ${Tn} — the ${stage.input} had come by another road. ${A} burned the wrong village (read confidence ${confidence01.toFixed(2)}) — a misjudgment.`"
+  },
+  {
+    "path": "src/domain/worldPulse/supplyWebWarfare.js",
+    "line": 931,
+    "category": "twoDecimalScore",
+    "snippet": "`But ${V} no longer fed ${Tn} — the ${stage.input} had come by another road. ${A} burned the wrong village (read confidence ${confidence01.toFixed(2)}) — a misjudgment.`"
+  },
+  {
+    "path": "src/domain/worldPulse/supplyWebWarfare.js",
+    "line": 983,
+    "category": "floatInterpolation",
+    "snippet": "`The campaign ran its ${plan.stages.length} stage${plan.stages.length === 1 ? '' : 's'}; ${Tn} now feels the strangulation (${(plan.strangle01 * 100).toFixed(0)}%).`"
+  },
+  {
+    "path": "src/domain/worldPulse/supplyWebWarfare.js",
+    "line": 983,
+    "category": "percentToken",
+    "snippet": "`The campaign ran its ${plan.stages.length} stage${plan.stages.length === 1 ? '' : 's'}; ${Tn} now feels the strangulation (${(plan.strangle01 * 100).toFixed(0)}%).`"
+  },
+  {
+    "path": "src/domain/worldPulse/tierResourceDynamics.js",
+    "line": 226,
+    "category": "floatInterpolation",
+    "snippet": "`RNG chance now ${Math.round(chance * 100)}%.`"
+  },
+  {
+    "path": "src/domain/worldPulse/tierResourceDynamics.js",
+    "line": 226,
+    "category": "percentToken",
+    "snippet": "`RNG chance now ${Math.round(chance * 100)}%.`"
+  },
+  {
+    "path": "src/domain/worldPulse/tierResourceDynamics.js",
+    "line": 490,
+    "category": "floatInterpolation",
+    "snippet": "`Resource pressure ${effectivePressure.toFixed(2)} and tier ${settlement.tier || 'unknown'}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/tierResourceDynamics.js",
+    "line": 490,
+    "category": "twoDecimalScore",
+    "snippet": "`Resource pressure ${effectivePressure.toFixed(2)} and tier ${settlement.tier || 'unknown'}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/tierResourceDynamics.js",
+    "line": 541,
+    "category": "floatInterpolation",
+    "snippet": "`Resource pressure ${perceivedPressureScore.toFixed(2)} is low enough for recovery.`"
+  },
+  {
+    "path": "src/domain/worldPulse/tierResourceDynamics.js",
+    "line": 541,
+    "category": "twoDecimalScore",
+    "snippet": "`Resource pressure ${perceivedPressureScore.toFixed(2)} is low enough for recovery.`"
+  },
+  {
+    "path": "src/domain/worldPulse/tradeWar.js",
+    "line": 599,
+    "category": "floatInterpolation",
+    "snippet": "`Defeated incumbent strength ${defeatedStrength.toFixed(2)} cleared the escalation gate.`"
+  },
+  {
+    "path": "src/domain/worldPulse/tradeWar.js",
+    "line": 599,
+    "category": "twoDecimalScore",
+    "snippet": "`Defeated incumbent strength ${defeatedStrength.toFixed(2)} cleared the escalation gate.`"
+  },
+  {
+    "path": "src/domain/worldPulse/tradeWar.js",
+    "line": 615,
+    "category": "floatInterpolation",
+    "snippet": "`Defeated incumbent strength ${defeatedStrength.toFixed(2)} below the escalation gate: peaceful adjustment.`"
+  },
+  {
+    "path": "src/domain/worldPulse/tradeWar.js",
+    "line": 615,
+    "category": "twoDecimalScore",
+    "snippet": "`Defeated incumbent strength ${defeatedStrength.toFixed(2)} below the escalation gate: peaceful adjustment.`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 930,
+    "category": "floatInterpolation",
+    "snippet": "`Siege ran the hard ${SIEGE_MAX_AGE}-tick ceiling; auto-resolved ${falls ? 'as a storm' : 'as a withdrawal'} (capacity ${coalitionCurrent.toFixed(1)} vs ${defenderCurrent.toFixed(1)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 1547,
+    "category": "floatInterpolation",
+    "snippet": "`Coalition current capacity ${verdict.coalitionCurrent.toFixed(1)} vs defender ${verdict.defenderCurrent.toFixed(1)} (feasibility: ${verdict.verdict}, ratio ${verdict.ratio.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 1547,
+    "category": "twoDecimalScore",
+    "snippet": "`Coalition current capacity ${verdict.coalitionCurrent.toFixed(1)} vs defender ${verdict.defenderCurrent.toFixed(1)} (feasibility: ${verdict.verdict}, ratio ${verdict.ratio.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 1548,
+    "category": "floatInterpolation",
+    "snippet": "`Fall chance ${verdict.pFall.toFixed(2)}, roll ${verdict.roll.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 1548,
+    "category": "twoDecimalScore",
+    "snippet": "`Fall chance ${verdict.pFall.toFixed(2)}, roll ${verdict.roll.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 1796,
+    "category": "floatInterpolation",
+    "snippet": "`A rusty command ${seededRec.sizingBias > 1 ? 'over' : 'under'}-committed the force (sizing ×${seededRec.sizingBias.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 1796,
+    "category": "multiplier",
+    "snippet": "`A rusty command ${seededRec.sizingBias > 1 ? 'over' : 'under'}-committed the force (sizing ×${seededRec.sizingBias.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 1796,
+    "category": "twoDecimalScore",
+    "snippet": "`A rusty command ${seededRec.sizingBias > 1 ? 'over' : 'under'}-committed the force (sizing ×${seededRec.sizingBias.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 1801,
+    "category": "floatInterpolation",
+    "snippet": "`Thin war-supply degraded the army's kit (deployed quality ×${seededRec.deployedQuality.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 1801,
+    "category": "multiplier",
+    "snippet": "`Thin war-supply degraded the army's kit (deployed quality ×${seededRec.deployedQuality.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 1801,
+    "category": "twoDecimalScore",
+    "snippet": "`Thin war-supply degraded the army's kit (deployed quality ×${seededRec.deployedQuality.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 1807,
+    "category": "floatInterpolation",
+    "snippet": "`Casus belli: ${c.type} (${c.score.toFixed(2)}) — ${c.receipt}`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 1807,
+    "category": "twoDecimalScore",
+    "snippet": "`Casus belli: ${c.type} (${c.score.toFixed(2)}) — ${c.receipt}`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 2067,
+    "category": "floatInterpolation",
+    "snippet": "`Sustained war-exhaustion scar at ${nextScar.toFixed(2)} (non-reverting).`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 2067,
+    "category": "twoDecimalScore",
+    "snippet": "`Sustained war-exhaustion scar at ${nextScar.toFixed(2)} (non-reverting).`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 2117,
+    "category": "floatInterpolation",
+    "snippet": "`War-levy strain accruing at ${decayed.toFixed(2)} (levied again this tick).`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 2117,
+    "category": "twoDecimalScore",
+    "snippet": "`War-levy strain accruing at ${decayed.toFixed(2)} (levied again this tick).`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 2118,
+    "category": "floatInterpolation",
+    "snippet": "`War-exhaustion scar slowly fading at ${decayed.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/warDeployment.js",
+    "line": 2118,
+    "category": "twoDecimalScore",
+    "snippet": "`War-exhaustion scar slowly fading at ${decayed.toFixed(2)}.`"
+  },
+  {
+    "path": "src/domain/worldPulse/warReasons.js",
+    "line": 481,
+    "category": "floatInterpolation",
+    "snippet": "memory.toFixed(2)"
+  },
+  {
+    "path": "src/domain/worldPulse/warReasons.js",
+    "line": 481,
+    "category": "floatInterpolation",
+    "snippet": "resentment.toFixed(2)"
+  },
+  {
+    "path": "src/domain/worldPulse/warReasons.js",
+    "line": 481,
+    "category": "twoDecimalScore",
+    "snippet": "memory.toFixed(2)"
+  },
+  {
+    "path": "src/domain/worldPulse/warReasons.js",
+    "line": 481,
+    "category": "twoDecimalScore",
+    "snippet": "resentment.toFixed(2)"
+  },
+  {
+    "path": "src/domain/worldPulse/warRecordMode.js",
+    "line": 139,
+    "category": "floatInterpolation",
+    "snippet": "`War-exhaustion scar crossed below its renewal floor (${previousScar.toFixed(2)} → ${nextScar.toFixed(2)}).`"
+  },
+  {
+    "path": "src/domain/worldPulse/warRecordMode.js",
+    "line": 139,
+    "category": "twoDecimalScore",
+    "snippet": "`War-exhaustion scar crossed below its renewal floor (${previousScar.toFixed(2)} → ${nextScar.toFixed(2)}).`"
+  },
+  {
+    "path": "src/generators/economy/viability.js",
+    "line": 101,
+    "category": "floatInterpolation",
+    "snippet": "`△ VIABLE WITH PROVISIONING STRAIN: ${deficitPercent}% of daily food need remains uncovered.`"
+  },
+  {
+    "path": "src/generators/economy/viability.js",
+    "line": 101,
+    "category": "percentToken",
+    "snippet": "`△ VIABLE WITH PROVISIONING STRAIN: ${deficitPercent}% of daily food need remains uncovered.`"
+  },
+  {
+    "path": "src/generators/economy/viability.js",
+    "line": 103,
+    "category": "floatInterpolation",
+    "snippet": "`✓ VIABLE WITH PROVISIONING SUPPORT: imports, reserves, or extraordinary supply cover ${rawDeficitPercent}% of daily food need.`"
+  },
+  {
+    "path": "src/generators/economy/viability.js",
+    "line": 103,
+    "category": "percentToken",
+    "snippet": "`✓ VIABLE WITH PROVISIONING SUPPORT: imports, reserves, or extraordinary supply cover ${rawDeficitPercent}% of daily food need.`"
+  },
+  {
+    "path": "src/generators/steps/assembleInstitutions.js",
+    "line": 61,
+    "category": "floatInterpolation",
+    "snippet": "`Base chance for this tier/category was ${Math.round(baseChance * 100)}%.`"
+  },
+  {
+    "path": "src/generators/steps/assembleInstitutions.js",
+    "line": 61,
+    "category": "percentToken",
+    "snippet": "`Base chance for this tier/category was ${Math.round(baseChance * 100)}%.`"
+  },
+  {
+    "path": "src/generators/steps/assembleInstitutions.js",
+    "line": 68,
+    "category": "floatInterpolation",
+    "snippet": "`Base chance ${Math.round(baseChance * 100)}% ${lift} by ×${resourceMult.toFixed(2)} from nearby resources + terrain.`"
+  },
+  {
+    "path": "src/generators/steps/assembleInstitutions.js",
+    "line": 68,
+    "category": "multiplier",
+    "snippet": "`Base chance ${Math.round(baseChance * 100)}% ${lift} by ×${resourceMult.toFixed(2)} from nearby resources + terrain.`"
+  },
+  {
+    "path": "src/generators/steps/assembleInstitutions.js",
+    "line": 68,
+    "category": "percentToken",
+    "snippet": "`Base chance ${Math.round(baseChance * 100)}% ${lift} by ×${resourceMult.toFixed(2)} from nearby resources + terrain.`"
+  },
+  {
+    "path": "src/generators/steps/assembleInstitutions.js",
+    "line": 68,
+    "category": "twoDecimalScore",
+    "snippet": "`Base chance ${Math.round(baseChance * 100)}% ${lift} by ×${resourceMult.toFixed(2)} from nearby resources + terrain.`"
+  },
+  {
+    "path": "src/generators/steps/generateEconomy.js",
+    "line": 405,
+    "category": "floatInterpolation",
+    "snippet": "`Chain depends on ${state.dependency.institution} (${state.dependency.severity || 'unspecified'}).`"
+  },
+  {
+    "path": "src/generators/steps/isolationPass.js",
+    "line": 80,
+    "category": "floatInterpolation",
+    "snippet": "`Capacity ${isolationSupport.capacity}/${isolationSupport.requiredCapacity}.`"
+  },
+  {
+    "path": "src/generators/steps/resolveResources.js",
+    "line": 555,
+    "category": "floatInterpolation",
+    "snippet": "`Tier-weighted depletion (${Math.round((DEPLETION_PROB[tier] ?? 0.25) * 100)}%) marked this resource as depleted.`"
+  },
+  {
+    "path": "src/generators/steps/resolveResources.js",
+    "line": 555,
+    "category": "percentToken",
+    "snippet": "`Tier-weighted depletion (${Math.round((DEPLETION_PROB[tier] ?? 0.25) * 100)}%) marked this resource as depleted.`"
+  },
+  {
+    "path": "src/generators/steps/stressConfirmPass.js",
+    "line": 126,
+    "category": "floatInterpolation",
+    "snippet": "`${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll) — the re-weighted roll dropped it.`"
+  },
+  {
+    "path": "src/generators/steps/stressConfirmPass.js",
+    "line": 126,
+    "category": "multiplier",
+    "snippet": "`${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll) — the re-weighted roll dropped it.`"
+  },
+  {
+    "path": "src/generators/steps/stressConfirmPass.js",
+    "line": 126,
+    "category": "twoDecimalScore",
+    "snippet": "`${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll) — the re-weighted roll dropped it.`"
+  },
+  {
+    "path": "src/generators/steps/stressConfirmPass.js",
+    "line": 127,
+    "category": "floatInterpolation",
+    "snippet": "`The settlement's institutions reduce the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll) — the re-weighted roll dropped it.`"
+  },
+  {
+    "path": "src/generators/steps/stressConfirmPass.js",
+    "line": 127,
+    "category": "multiplier",
+    "snippet": "`The settlement's institutions reduce the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll) — the re-weighted roll dropped it.`"
+  },
+  {
+    "path": "src/generators/steps/stressConfirmPass.js",
+    "line": 127,
+    "category": "twoDecimalScore",
+    "snippet": "`The settlement's institutions reduce the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll) — the re-weighted roll dropped it.`"
+  },
+  {
+    "path": "src/generators/structuralValidator.js",
+    "line": 660,
+    "category": "floatInterpolation",
+    "snippet": "`${tierLabel} closes its isolation-support gap through magical transit (${support.capacity}/${support.requiredCapacity} capacity). If magic fails, its mundane support paths are insufficient.`"
+  },
+  {
+    "path": "src/generators/structuralValidator.js",
+    "line": 667,
+    "category": "floatInterpolation",
+    "snippet": "`${tierLabel} is viable in isolation through ${support.paths.map(path => path.type.replace(/_/g, ' ')).join(', ')} (${support.capacity}/${support.requiredCapacity} support capacity).`"
+  },
+  {
+    "path": "src/generators/structuralValidator.js",
+    "line": 675,
+    "category": "floatInterpolation",
+    "snippet": "`${tierLabel} has only ${support.capacity}/${support.requiredCapacity} isolation-support capacity. Local food, reserves, seasonal access, patronage, and any functional magical transit do not cover the settlement's needs.`"
+  },
+  {
+    "path": "src/lib/shareImage.js",
+    "line": 83,
+    "category": "floatInterpolation",
+    "snippet": "Math.round(population)"
+  },
+  {
+    "path": "src/pdf/lib/headlines.js",
+    "line": 206,
+    "category": "floatInterpolation",
+    "snippet": "`${total} named figure${total === 1 ? '' : 's'}: ${top.name}${top.title ? `, ${top.title}` : ''}, the most powerful (power ${top.power}).`"
+  },
+  {
+    "path": "src/pdf/primitives/Visuals.jsx",
+    "line": 75,
+    "category": "floatInterpolation",
+    "snippet": "` ${Math.round(s.value)}`"
+  },
+  {
+    "path": "src/pdf/primitives/Visuals.jsx",
+    "line": 140,
+    "category": "floatInterpolation",
+    "snippet": "{score ?? '–'}"
+  },
+  {
+    "path": "src/pdf/primitives/Visuals.jsx",
+    "line": 192,
+    "category": "floatInterpolation",
+    "snippet": "{score ?? '–'}"
+  },
+  {
+    "path": "src/pdf/sections/DefenseSecurity.jsx",
+    "line": 222,
+    "category": "floatInterpolation",
+    "snippet": "`${captureScore}%`"
+  },
+  {
+    "path": "src/pdf/sections/DefenseSecurity.jsx",
+    "line": 222,
+    "category": "percentToken",
+    "snippet": "`${captureScore}%`"
+  },
+  {
+    "path": "src/pdf/sections/DefenseSecurity.jsx",
+    "line": 366,
+    "category": "floatInterpolation",
+    "snippet": "{Math.round(sc.score)}"
+  },
+  {
+    "path": "src/pdf/sections/EconomicsTrade.jsx",
+    "line": 299,
+    "category": "floatInterpolation",
+    "snippet": "{flow}"
+  },
+  {
+    "path": "src/pdf/sections/EconomicsTrade.jsx",
+    "line": 422,
+    "category": "floatInterpolation",
+    "snippet": "{iss.severity}"
+  },
+  {
+    "path": "src/pdf/sections/EconomicsTrade.jsx",
+    "line": 529,
+    "category": "floatInterpolation",
+    "snippet": "{fb.deficitPct}"
+  },
+  {
+    "path": "src/pdf/sections/EconomicsTrade.jsx",
+    "line": 529,
+    "category": "percentToken",
+    "snippet": "{fb.deficitPct}"
+  },
+  {
+    "path": "src/pdf/sections/EconomicsTrade.jsx",
+    "line": 534,
+    "category": "floatInterpolation",
+    "snippet": "{fb.coveragePct}"
+  },
+  {
+    "path": "src/pdf/sections/EconomicsTrade.jsx",
+    "line": 534,
+    "category": "percentToken",
+    "snippet": "{fb.coveragePct}"
+  },
+  {
+    "path": "src/pdf/sections/FaithWar.jsx",
+    "line": 312,
+    "category": "floatInterpolation",
+    "snippet": "{d.share}"
+  },
+  {
+    "path": "src/pdf/sections/FaithWar.jsx",
+    "line": 312,
+    "category": "percentToken",
+    "snippet": "{d.share}"
+  },
+  {
+    "path": "src/pdf/sections/FaithWar.jsx",
+    "line": 320,
+    "category": "floatInterpolation",
+    "snippet": "`${i > 0 ? ', ' : ''}${o.name} ${Math.round(o.odds * 100)}%`"
+  },
+  {
+    "path": "src/pdf/sections/FaithWar.jsx",
+    "line": 320,
+    "category": "percentToken",
+    "snippet": "`${i > 0 ? ', ' : ''}${o.name} ${Math.round(o.odds * 100)}%`"
+  },
+  {
+    "path": "src/pdf/sections/FaithWar.jsx",
+    "line": 390,
+    "category": "floatInterpolation",
+    "snippet": "{b.confidence}"
+  },
+  {
+    "path": "src/pdf/sections/FaithWar.jsx",
+    "line": 390,
+    "category": "floatInterpolation",
+    "snippet": "{b.readiness}"
+  },
+  {
+    "path": "src/pdf/sections/FaithWar.jsx",
+    "line": 390,
+    "category": "floatInterpolation",
+    "snippet": "{b.strength}"
+  },
+  {
+    "path": "src/pdf/sections/HistoryFounding.jsx",
+    "line": 402,
+    "category": "floatInterpolation",
+    "snippet": "{Math.round(min + span * p)}"
+  },
+  {
+    "path": "src/pdf/sections/NPCQuickRef.jsx",
+    "line": 78,
+    "category": "floatInterpolation",
+    "snippet": "{npc.power || 0}"
+  },
+  {
+    "path": "src/pdf/sections/NotableNPCs.jsx",
+    "line": 181,
+    "category": "floatInterpolation",
+    "snippet": "{npc.power}"
+  },
+  {
+    "path": "src/pdf/sections/NotableNPCs.jsx",
+    "line": 334,
+    "category": "floatInterpolation",
+    "snippet": "{npc.power}"
+  },
+  {
+    "path": "src/pdf/sections/NotableNPCs.jsx",
+    "line": 387,
+    "category": "floatInterpolation",
+    "snippet": "{npc.power}"
+  },
+  {
+    "path": "src/pdf/sections/Overview.jsx",
+    "line": 559,
+    "category": "floatInterpolation",
+    "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
+  },
+  {
+    "path": "src/pdf/sections/Overview.jsx",
+    "line": 559,
+    "category": "floatInterpolation",
+    "snippet": "{fb.coveragePct != null ? ` · imports cover ${fb.coveragePct}% of gap` : ''}"
+  },
+  {
+    "path": "src/pdf/sections/Overview.jsx",
+    "line": 559,
+    "category": "percentToken",
+    "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
+  },
+  {
+    "path": "src/pdf/sections/PowerStructure.jsx",
+    "line": 108,
+    "category": "floatInterpolation",
+    "snippet": "{p.criminalCapture.score}"
+  },
+  {
+    "path": "src/pdf/sections/PowerStructure.jsx",
+    "line": 357,
+    "category": "floatInterpolation",
+    "snippet": "{f.power}"
+  },
+  {
+    "path": "src/pdf/sections/Services.jsx",
+    "line": 240,
+    "category": "floatInterpolation",
+    "snippet": "{flow}"
+  },
+  {
+    "path": "src/pdf/sections/SystemStateSnapshot.jsx",
+    "line": 130,
+    "category": "floatInterpolation",
+    "snippet": "{row.score}"
+  },
+  {
+    "path": "src/pdf/sections/TonightAtTheTable.jsx",
+    "line": 204,
+    "category": "floatInterpolation",
+    "snippet": "{npc.power || 0}"
+  }
+]
