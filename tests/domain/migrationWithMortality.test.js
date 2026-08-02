@@ -16,6 +16,7 @@
  *   - DORMANT (no marker) ⇒ byte-identical (no ledger, no deaths);
  *   - mortality is AGGREGATE-ONLY — a named NPC survives a mortality tick untouched.
  */
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
@@ -28,8 +29,10 @@ import {
 import { cultureDistance, cultureAffinity, regimeAxes, CULTURE_TUNING, traditionKinship01 } from '../../src/domain/spatial/cultureDistance.js';
 import {
   buildCultureVector, dispatchMigrations, releaseMigrationArrivals, originTolerance,
-  collectRealizedEmigrationEvents,
+  collectRealizedEmigrationEvents, sizeSaturationOf, MIGRATION_KERNEL_TUNING,
 } from '../../src/domain/worldPulse/migrationKernel.js';
+import { demographicReadings } from '../../src/domain/worldPulse/demographicsPushPull.js';
+import { pressureOf } from '../../src/domain/worldPulse/demographicsRates.js';
 
 // ── Fixtures ──────────────────────────────────────────────────────────────────
 function digest8() {
@@ -153,6 +156,70 @@ describe('M4 — DORMANCY: no marker ⇒ no-op, byte-identical', () => {
     const release = releaseMigrationArrivals({ worldState: ws, localSettlements: new Map(), settlements: snapshot.settlements, tick: 5 });
     expect(release.changed).toBe(false);
     expect(release.worldState).toBe(ws);
+  });
+});
+
+// ── P5b: one destination-capacity truth ─────────────────────────────────────
+describe('M4 / P5b — destination size saturation delegates to demography when lit', () => {
+  const legacy = (population) => Math.max(0, Math.min(1,
+    (typeof population === 'number' && Number.isFinite(population) ? Math.max(0, population) : 0)
+      / MIGRATION_KERNEL_TUNING.SATURATION_POP));
+
+  it('DARK: the seam is the legacy pop/9000 arm exactly for every defensive flag shape', () => {
+    const darkWorlds = [
+      undefined,
+      {},
+      { simulationRules: {} },
+      { simulationRules: { demographicsEnabled: false } },
+      { simulationRules: { demographicsEnabled: 1 } },
+      { simulationRules: { demographicsEnabled: 'true' } },
+    ];
+    for (const population of [-10, 0, 1, 4500, 8999, 9000, 20_000, NaN, Infinity]) {
+      for (const worldState of darkWorlds) {
+        expect(sizeSaturationOf({ population }, worldState, 'Cityhold'))
+          .toBe(legacy(population));
+      }
+    }
+  });
+
+  it('DIVERGENCE: a 20k city is full to the legacy lane and about half-full to the demographic bound', () => {
+    const city = { population: 20_000, tier: 'city', config: { tier: 'city' } };
+    const dark = sizeSaturationOf(city, { simulationRules: {} }, 'Cityhold');
+    const worldState = { simulationRules: { demographicsEnabled: true } };
+    const lit = sizeSaturationOf(city, worldState, 'Cityhold');
+    const readings = demographicReadings(city, worldState, 'Cityhold');
+
+    expect(dark).toBe(1);
+    expect(readings.bound).toBe(38_000);
+    expect(lit).toBeCloseTo(20_000 / 38_000, 12);
+    expect(lit).toBeGreaterThan(0.52);
+    expect(lit).toBeLessThan(0.54);
+  });
+
+  it('WRITER/READER SPELLING: settlementId carries completed works into the canonical reader', () => {
+    const city = { population: 20_000, tier: 'city', config: { tier: 'city' } };
+    const worldState = {
+      simulationRules: { demographicsEnabled: true },
+      spatialLedgers: {
+        demographicPlans: { Cityhold: { works: { infrastructure: 3 } } },
+      },
+    };
+    const readings = demographicReadings(city, worldState, 'Cityhold');
+    const throughSeam = sizeSaturationOf(city, worldState, 'Cityhold');
+    const contextBlind = sizeSaturationOf(city, worldState);
+
+    expect(readings.bound).toBe(47_120);
+    expect(throughSeam).toBe(Math.min(1, pressureOf(readings.population, readings.bound)));
+    expect(throughSeam).toBeLessThan(contextBlind);
+
+    // Behaviour proves the context matters; the source pin proves the seam obtains it
+    // from the REAL demographic reader instead of maintaining an isomorphic twin.
+    const source = readFileSync(new URL('../../src/domain/worldPulse/migrationKernel.js', import.meta.url), 'utf8');
+    expect(source).toContain("import { demographicReadings } from './demographicsPushPull.js';");
+    expect(source).toContain("import { pressureOf } from './demographicsRates.js';");
+    expect(source).toContain('const readings = demographicReadings(');
+    expect(source).toContain('return clamp01(pressureOf(readings.population, readings.bound));');
+    expect(source).toContain('const sizeSat = sizeSaturationOf(destItem?.settlement, worldState, destId);');
   });
 });
 

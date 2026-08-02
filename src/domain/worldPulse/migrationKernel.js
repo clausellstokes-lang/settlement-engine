@@ -40,6 +40,8 @@ import {
 import { cultureAffinity } from '../spatial/cultureDistance.js';
 import { pathCost, hopWeeks, distanceWeight, isMapped, setSpatialLedger, dropSpatialLedger, getSpatialLedger } from '../spatial/distanceRead.js';
 import { chooseRoute, riskToleranceFromAlignment } from '../spatial/embattlement.js';
+import { demographicReadings } from './demographicsPushPull.js';
+import { pressureOf } from './demographicsRates.js';
 
 // ── Kernel-local read-shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ population?: number, config?: { primaryDeitySnapshot?: { alignmentAxis?: string, lawAxis?: string } | null },
@@ -63,9 +65,10 @@ function num(v, fallback) {
 
 // ── Congestion + carrying-capacity anchors (documented tuning) ────────────────
 export const MIGRATION_KERNEL_TUNING = Object.freeze({
-  // The population at which a destination reads "saturated" (capacityPressure→1) on
-  // the SIZE axis alone — a big city's pull decays as it approaches this. A
-  // per-capita saturation anchor, not a hard cap (the pull just fades). Retunable.
+  // DARK-ARM LEGACY ONLY (P5b): the population at which a destination reads
+  // "saturated" (capacityPressure→1) while the demographic engine is absent. A
+  // per-capita pull-decay anchor, not a hard cap. Lit worlds delegate to the
+  // demographic engine's effective bound through sizeSaturationOf below.
   SATURATION_POP: 9000,
   // Congestion pressure = the max of size-saturation, crowding food deficit, and
   // size-scaled crime (§II.3-3): a hub that is BIG, HUNGRY, or CRIME-RIDDEN pushes
@@ -89,6 +92,34 @@ export const MIGRATION_KERNEL_TUNING = Object.freeze({
   // Only applied when migrationCorruptionPushEnabled is lit ⇒ otherwise ×1. Vetoable.
   CORRUPTION_PUSH_MAX: 0.25,
 });
+
+/**
+ * THE ONE DESTINATION-CAPACITY TRUTH (wave P5b). The legacy migration lane keeps
+ * its per-capita 9,000-person pull-decay anchor while demography is dark. Once the
+ * demographic engine is lit, this read delegates to its canonical three-reading
+ * seam and uses the sanctioned effective-bound pressure denominator. `settlementId`
+ * is load-bearing: the canonical reader needs it to see live routes, completed works,
+ * and relief obligations rather than silently computing a context-free twin.
+ *
+ * @param {MigSettlement|null|undefined} settlement
+ * @param {Record<string, unknown>|null|undefined} worldState
+ * @param {string} [settlementId]
+ * @returns {number}
+ */
+export function sizeSaturationOf(settlement, worldState, settlementId = '') {
+  const pop = Math.max(0, num(settlement?.population, 0));
+  const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
+  if (!rules || typeof rules !== 'object'
+      || /** @type {Record<string, unknown>} */ (rules).demographicsEnabled !== true) {
+    return clamp01(pop / MIGRATION_KERNEL_TUNING.SATURATION_POP);
+  }
+  const readings = demographicReadings(
+    /** @type {import('./demographicsRates.js').DemoSettlement} */ (/** @type {unknown} */ (settlement)),
+    /** @type {{ spatialLedgers?: unknown, simulationRules?: unknown }} */ (worldState),
+    settlementId,
+  );
+  return clamp01(pressureOf(readings.population, readings.bound));
+}
 
 // ── Live culture-vector extraction (the §II.5-2 LIVE read) ────────────────────
 /**
@@ -206,8 +237,7 @@ function buildDestinationCandidate({ digest, worldState, originId, destItem, ori
 
   // Congestion pressure (§II.3-3 brake input): the hub's pull decays as it fills.
   const K = MIGRATION_KERNEL_TUNING;
-  const pop = Math.max(0, num(destItem?.settlement?.population, 0));
-  const sizeSat = clamp01(pop / K.SATURATION_POP);
+  const sizeSat = sizeSaturationOf(destItem?.settlement, worldState, destId);
   const foodDeficit = clamp01(num(pIndex.get(destId, 'food')?.score, 0));
   const crime = clamp01(num(pIndex.get(destId, 'crime')?.score, 0));
   const capacityPressure01 = clamp01(Math.max(

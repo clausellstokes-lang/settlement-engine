@@ -157,6 +157,12 @@ export const DENSITY_CEILINGS = Object.freeze({
  * plain. Keyed by the canonical terrain vocabulary resolveTerrain.js publishes
  * (plains | hills | forest | riverside | coastal | mountain | desert); an unresolved
  * terrain reads as 1 (no adjustment), never as a hole.
+ *
+ * P5a puts the waterless desert ON the public-works interlock without making it less
+ * harsh than mountain ground. 0.55 is the minimal two-decimal factor for which all
+ * five tier-promotion pairs clear at the maximum infrastructure factor (1.24); 0.54
+ * still strands the thorp below the hamlet floor. Thus a desert settlement can build
+ * its cisterns and caravanserais all the way up the ladder, but only at maximum works.
  * @type {Readonly<Record<string, number>>}
  */
 export const TERRAIN_DENSITY_ADJUST = Object.freeze({
@@ -166,7 +172,7 @@ export const TERRAIN_DENSITY_ADJUST = Object.freeze({
   hills: 0.90,
   forest: 0.85,
   mountain: 0.60,
-  desert: 0.50,
+  desert: 0.55,
 });
 
 /**

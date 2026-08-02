@@ -33,6 +33,10 @@ import {
   reliefCreditorCount,
 } from '../../src/domain/worldPulse/demographicsRates.js';
 import { TIER_ORDER, POPULATION_RANGES } from '../../src/data/constants.js';
+import {
+  DEMOGRAPHIC_PLANS_LEDGER,
+  WORKS_TUNING,
+} from '../../src/domain/worldPulse/demographicsWorks.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 /** A settlement carrying real food physics. */
@@ -75,6 +79,20 @@ const routedWorld = (edges) => ({
   simulationRules: { demographicsEnabled: true, routeLifecycleEnabled: true },
   spatialLedgers: { routeNetwork: { edges } },
 });
+
+const p5aWorksWorld = infrastructure => ({
+  spatialLedgers: {
+    [DEMOGRAPHIC_PLANS_LEDGER]: {
+      p5a: { works: { infrastructure } },
+    },
+  },
+});
+
+const p5aDensityCeiling = (tier, terrain, infrastructure) => densityCeilingOf(
+  place({ tier, terrain }),
+  p5aWorksWorld(infrastructure),
+  'p5a',
+);
 
 describe('the dormancy gate reads the virtual flag and nothing else', () => {
   test('absent, false, and every garbage shape are DARK; only an explicit true is lit', () => {
@@ -128,6 +146,66 @@ describe('the authored tables are TOTAL over the tier and terrain vocabularies',
     }
     expect(TERRAIN_DENSITY_ADJUST.mountain).toBeLessThan(TERRAIN_DENSITY_ADJUST.plains);
     expect(TERRAIN_DENSITY_ADJUST.desert).toBeLessThan(TERRAIN_DENSITY_ADJUST.hills);
+  });
+
+  test('P5a: the terrain-density order remains strictly harshest-to-most-generous', () => {
+    const harshestToMostGenerous = [
+      'desert', 'mountain', 'forest', 'hills', 'coastal', 'plains', 'riverside',
+    ];
+    for (let i = 1; i < harshestToMostGenerous.length; i += 1) {
+      const harsher = harshestToMostGenerous[i - 1];
+      const moreGenerous = harshestToMostGenerous[i];
+      expect(
+        TERRAIN_DENSITY_ADJUST[harsher],
+        `${harsher} must remain strictly harsher than ${moreGenerous}`,
+      ).toBeLessThan(TERRAIN_DENSITY_ADJUST[moreGenerous]);
+    }
+  });
+
+  test('P5a: maximum public works clear every terrain x tier-promotion pair', () => {
+    for (const terrain of Object.keys(TERRAIN_DENSITY_ADJUST)) {
+      for (let i = 0; i < TIER_ORDER.length - 1; i += 1) {
+        const tier = TIER_ORDER[i];
+        const nextTier = TIER_ORDER[i + 1];
+        const ceiling = p5aDensityCeiling(tier, terrain, WORKS_TUNING.WORKS_CAP);
+        expect(
+          ceiling,
+          `${terrain} ${tier} at maximum works must clear ${nextTier}'s floor`,
+        ).toBeGreaterThanOrEqual(POPULATION_RANGES[nextTier].min);
+      }
+    }
+  });
+
+  test('P5a: the interlock is real — mountain locks without works and desert needs the cap', () => {
+    for (let i = 0; i < TIER_ORDER.length - 1; i += 1) {
+      const tier = TIER_ORDER[i];
+      const nextTier = TIER_ORDER[i + 1];
+      const nextFloor = POPULATION_RANGES[nextTier].min;
+      expect(
+        p5aDensityCeiling(tier, 'mountain', 0),
+        `mountain ${tier} without works must remain below ${nextTier}`,
+      ).toBeLessThan(nextFloor);
+      expect(
+        p5aDensityCeiling(tier, 'desert', WORKS_TUNING.WORKS_CAP - 1),
+        `desert ${tier} before maximum works must remain below ${nextTier}`,
+      ).toBeLessThan(nextFloor);
+      expect(p5aDensityCeiling(tier, 'desert', WORKS_TUNING.WORKS_CAP))
+        .toBeGreaterThanOrEqual(nextFloor);
+    }
+  });
+
+  test('P5a: 0.55 is the minimal two-decimal desert factor; the 0.54 mutant stays locked', () => {
+    const maxWorksFactor = 1 + WORKS_TUNING.INFRASTRUCTURE_STEP * WORKS_TUNING.WORKS_CAP;
+    const clearsEveryTierPair = factor => TIER_ORDER.slice(0, -1).every((tier, i) => (
+      Math.round(DENSITY_CEILINGS[tier] * factor * maxWorksFactor)
+        >= POPULATION_RANGES[TIER_ORDER[i + 1]].min
+    ));
+
+    expect(TERRAIN_DENSITY_ADJUST.desert).toBe(0.55);
+    expect(clearsEveryTierPair(TERRAIN_DENSITY_ADJUST.desert)).toBe(true);
+    expect(clearsEveryTierPair(0.54)).toBe(false);
+    expect(Math.round(DENSITY_CEILINGS.thorp * 0.54 * maxWorksFactor))
+      .toBeLessThan(POPULATION_RANGES.hamlet.min);
   });
 
   test('the closed band vocabularies are non-empty and every produced word is a member', () => {

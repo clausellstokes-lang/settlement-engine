@@ -575,9 +575,10 @@ an elegant, evidently designed interlock. Desert being beyond the works ladder
 contradicts DENSITY_CEILINGS' own stated purpose (demographicsRates.js:139-141).
 **THE RULING (owner-ordered fixed; design vetoable):** put desert ON the interlock
 rather than beyond it — raise TERRAIN_DENSITY_ADJUST.desert to the MINIMAL value
-where maximum works clears every tier pair (the agent's arithmetic says ~0.59;
-the implementer computes the exact minimum from the live tables and takes the
-first value that clears all five, keeping desert STRICTLY below mountain's 0.60
+where maximum works clears every tier pair (the live-table arithmetic resolves to
+0.55: the thorp edge rounds 61.38 to 61, while the 0.54 mutant rounds to 60;
+the implementer takes the first value that clears all five, keeping desert STRICTLY
+below mountain's 0.60
 so the ordering desert-harshest survives). The desert story this encodes is the
 honest one: a pure-desert settlement ascends ONLY at maximum public works —
 cisterns and caravanserais, the Palmyra pattern — while a desert town that never
@@ -594,6 +595,12 @@ works) so the interlock property itself is pinned, not just today's values.
 THE PROMISE; dormancy goldens untouched (the flag is lit nowhere); the band
 lands in the §10 table with its flavor sentence so the tuning pass inherits a
 documented value, not a mystery constant.
+
+**LANDED 2026-08-01:** `TERRAIN_DENSITY_ADJUST.desert = 0.55`. The structural
+walker executes all seven terrains across all five tier-promotion pairs through
+the real `densityCeilingOf` works reader at the live maximum factor (1.24). The
+strict terrain ordering, mountain-without-works negative, desert-before-cap
+negative, and 0.54 mutant pin preserve both sides of the interlock.
 
 ### P5b — ONE CAPACITY TRUTH (retire the 9,000-person city wall when the engine is lit)
 **The measured divergence:** the legacy migration lane's size-saturation axis
@@ -617,3 +624,20 @@ boots the REAL demographics kernel, never a hand-rolled twin — the recorded
 hazard class); and the §11b both-flags-lit configuration gains its FIRST fenced
 golden as part of this slice (the same-seed shift §11b predicts is captured and
 documented at the moment it becomes real, not discovered by the soak).
+
+**LANDED 2026-08-01:** `migrationKernel.sizeSaturationOf` preserves the exact
+legacy `population / 9000` arm while dark and delegates to
+`demographicReadings` + `pressureOf` when lit, carrying the settlement id so
+completed works and the other canonical context cannot disappear. The 20k-city
+fixture reads 1.0 dark and 0.526315... lit against the 38,000 city bound. The new
+`demographicsLifecycleGolden` fences four both-flags seeds: each plan-driven
+founding occurs at tick 41 as `plan.Brimhold.1` / `steading.brimhold.41`, while
+the same-seed lifecycle-only twin produces no founding inside the 80-tick fence.
+
+**VERIFIED 2026-08-01:** the combined P5 wave passed the full repository gate:
+2,110 test files passed (one intentionally skipped), 22,319 tests passed with
+54 intentional skips, domain-strict remained at zero errors, the production
+build completed, and all 47 distribution test files / 364 tests passed. The
+fenced both-flags lifecycle golden is registered in the mutation-coverage
+manifest; generated edge bundles were rebuilt to carry the new charter/schema
+source hashes.

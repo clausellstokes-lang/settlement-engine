@@ -821,6 +821,10 @@
    "kind": "rationale",
    "ref": "golden-byte-pin"
   },
+  "tests/property/demographicsLifecycleGolden.test.js": {
+   "kind": "rationale",
+   "ref": "golden-byte-pin"
+  },
   "tests/property/generatorGoldenMaster.test.js": {
    "kind": "rationale",
    "ref": "golden-byte-pin"
