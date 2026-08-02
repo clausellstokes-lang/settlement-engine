@@ -672,6 +672,23 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
     const loserId = String(treaty.loserId);
     const terms = /** @type {TermRecord[]} */ (Array.isArray(treaty.terms) ? treaty.terms : []);
 
+    // WR-0c — a deliberate repudiation is already a resolved compliance verdict,
+    // not another delivery roll. Its writer ended every live term at the breach
+    // tick, lifting ALL enforcement and streams immediately. Keep the broken shell
+    // until the terms' ORIGINAL horizon so treatiesForPair can feed the standing
+    // treaty_default casus, then prune it as spent history. Never restore honored,
+    // execute installments, or accrue ordinary payment strain on this branch.
+    if (String(treaty.breachType || '') === 'repudiation') {
+      const horizon = Number(treaty.breachExpiresTick);
+      if (!Number.isFinite(horizon) || Number(tick) >= horizon) delete nextLedger[key];
+      else {
+        treaty.complianceState = 'defaulted';
+        treaty.defaultSeverity01 = 1;
+        treaty.terms = terms;
+      }
+      continue;
+    }
+
     // The loser's true delivery capacity (economic headroom) + the victor's
     // monitoring reach (belief source — truth ⇒ sight, banded belief ⇒ fog).
     const loserPressure = buildPressureSummary(pIndex, loserId);

@@ -1,7 +1,9 @@
 import { describe, expect, test } from 'vitest';
 
-import { previewCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+import { applyWorldPulseOutcomes, previewCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
 import { evaluateTradeWar } from '../../src/domain/worldPulse/tradeWar.js';
+import { hostileTargetsOf, warIntentFor } from '../../src/domain/worldPulse/warIntent.js';
+import { isLiveWarFront } from '../../src/domain/worldPulse/warFrontReads.js';
 import { supplyCompleteness } from '../../src/domain/worldPulse/supplyCompleteness.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { deriveSettlementPressures, pressureIndex } from '../../src/domain/worldPulse/pressureModel.js';
@@ -358,28 +360,192 @@ describe('trade war — vassal hard-bias + escape valve', () => {
 });
 
 describe('trade war — escalation reachable (conquest path stays open)', () => {
-  test('a defeated CONFIDENT incumbent can escalate to a war_front', () => {
+  test('a defeated CONFIDENT incumbent seeds hostility + intent without minting a direct war_front', () => {
     // A strong incumbent that LOSES the crown (to an even stronger challenger)
-    // can answer the lost trade war with the sword — a war_front the A1 layer
-    // picks up next tick. Soak over forks until the confidence-gated roll fires.
+    // can answer the lost trade war with the sword — but only by giving the ONE
+    // opener a hostile pair + resolved intent. Soak until the confidence roll fires.
     const { saves } = grainContestFixture({ incumbentStrong: true });
     // Make the challenger strictly stronger so the incumbent (strong, confident)
     // can lose AND clear the escalation confidence gate.
     saves[2] = save('chal', 'Bburg', { exports: ['Grain'], tier: 'metropolis', population: 200000, legitimacy: 90 });
-    const channels = [tradeChannel('inc', 'buyer', 0.55), tradeChannel('chal', 'buyer', 0.6)];
+    const channels = [tradeChannel('inc', 'buyer', 0.6), tradeChannel('chal', 'buyer', 0.5)];
     const edges = [
       { id: 'edge.inc.buyer', from: 'inc', to: 'buyer', relationshipType: 'trade_partner' },
       { id: 'edge.chal.buyer', from: 'chal', to: 'buyer', relationshipType: 'trade_partner' },
     ];
 
-    let escalated = false;
-    for (let tick = 4; tick < 80 && !escalated; tick += 1) {
+    let escalation = null;
+    let escalatedRun = null;
+    for (let tick = 4; tick < 80 && !escalation; tick += 1) {
       const campaign = tradeCampaign({}, { settlementIds: ['buyer', 'inc', 'chal'], edges, channels });
       const snap = snapshotFor(campaign, saves);
       const tw = evaluateTradeWar({ snapshot: snap, worldState: snap.worldState, rng: createPRNG(`escal-${tick}`), tick, now: NOW, rules: { warLayerEnabled: true } });
-      if (tw.graphChannels.some(c => c.type === 'war_front')) escalated = true;
+      // tradeWar itself never opens combat, even on the escalation draw.
+      expect(tw.graphChannels.some(c => c.type === 'war_front')).toBe(false);
+      escalation = tw.outcomes.find(o => String(o.id).startsWith('world_outcome.trade_war_escalation.')) || null;
+      if (escalation) escalatedRun = { campaign, snapshot: snap, tw, tick };
     }
-    expect(escalated).toBe(true);
+    expect(escalation).toMatchObject({
+      type: 'condition',
+      candidateType: 'war_pressure',
+      targetSaveId: 'chal',
+      affectedSettlementIds: ['inc', 'chal'],
+      relationshipKey: 'edge.chal.inc',
+      relationshipPatch: { proposedRelationshipType: 'hostile', trajectory: 'transitioning' },
+      proposalPayload: {
+        kind: 'relationship_label_change',
+        relationshipKey: 'edge.chal.inc',
+        fromType: 'neutral',
+        toType: 'hostile',
+      },
+      metadata: {
+        warIntent: { fromId: 'inc', targetId: 'chal' },
+        relationshipSeed: { fromId: 'chal', toId: 'inc', relationshipKey: 'edge.chal.inc' },
+      },
+    });
+    if (!escalatedRun) throw new Error('expected the confidence-gated escalation to be reachable');
+    expect(escalatedRun.tw.graphChannels.some(c => isLiveWarFront(c))).toBe(false);
+
+    // The full canonical apply creates the previously missing pair, relabels it,
+    // and deposits the intent. It still cannot mint a live siege/front itself.
+    const settlementMap = new Map(saves.map(item => [String(item.id), {
+      saveId: String(item.id), save: item, settlement: item.settlement,
+    }]));
+    const applied = applyWorldPulseOutcomes({
+      snapshot: escalatedRun.snapshot,
+      worldState: escalatedRun.snapshot.worldState,
+      regionalGraph: escalatedRun.snapshot.regionalGraph,
+      wizardNews: escalatedRun.campaign.wizardNews,
+      settlementMap,
+      outcomes: [escalation],
+      tick: escalatedRun.tick,
+      now: NOW,
+      advanceNewsTick: false,
+      advanceRegionalImpacts: false,
+      simulationRules: escalatedRun.snapshot.worldState.simulationRules,
+    });
+    expect(applied.regionalGraph.edges.find(e => e.id === 'edge.chal.inc')?.relationshipType).toBe('hostile');
+    expect(applied.worldState.relationshipStates['edge.chal.inc']?.relationshipType).toBe('hostile');
+    expect(warIntentFor(applied.worldState, 'inc', escalatedRun.tick)).toEqual({
+      targetId: 'chal', tick: escalatedRun.tick,
+    });
+    expect(applied.regionalGraph.channels.some(c => isLiveWarFront(c))).toBe(false);
+    const beat = applied.newsEntries.find(n => n.sourceEventId === escalation.id);
+    expect(beat?.settlementIds).toEqual(['inc', 'chal']);
+
+    // Two prizes can theoretically make the same suppliers escalate in opposite
+    // directions from one pre-tick snapshot. Both outcomes must still name one
+    // unordered relationship identity; reversing apply order may not create an
+    // orphan state key or a second edge. March direction remains per intent.
+    const reciprocal = {
+      ...escalation,
+      id: `${escalation.id}.reciprocal`,
+      targetSaveId: 'inc',
+      affectedSettlementIds: ['chal', 'inc'],
+      headline: 'Bburg answers lost trade with the sword',
+      summary: 'Bburg opens hostilities against the former incumbent.',
+      reasons: ['A second lost market brought the rival court into the opener lane.'],
+      metadata: {
+        ...escalation.metadata,
+        fromSaveId: 'chal',
+        toSaveId: 'inc',
+        warIntent: { fromId: 'chal', targetId: 'inc' },
+      },
+    };
+    const applyPair = (outcomes) => applyWorldPulseOutcomes({
+      snapshot: escalatedRun.snapshot,
+      worldState: escalatedRun.snapshot.worldState,
+      regionalGraph: escalatedRun.snapshot.regionalGraph,
+      wizardNews: escalatedRun.campaign.wizardNews,
+      settlementMap,
+      outcomes,
+      tick: escalatedRun.tick,
+      now: NOW,
+      advanceNewsTick: false,
+      advanceRegionalImpacts: false,
+      simulationRules: escalatedRun.snapshot.worldState.simulationRules,
+    });
+    for (const result of [applyPair([escalation, reciprocal]), applyPair([reciprocal, escalation])]) {
+      const pairEdges = result.regionalGraph.edges.filter((edge) =>
+        new Set([String(edge.from), String(edge.to)]).size === 2
+        && [String(edge.from), String(edge.to)].every(id => id === 'inc' || id === 'chal'));
+      // Two-way relationship bundles intentionally carry the graph's reverse
+      // channel_inferred transport edge. The one canonical relationship edge is
+      // stable, and only that key may acquire relationship state.
+      expect(pairEdges.filter(edge => edge.relationshipType !== 'channel_inferred')).toEqual([expect.objectContaining({
+        id: 'edge.chal.inc', from: 'chal', to: 'inc', relationshipType: 'hostile',
+      })]);
+      expect(pairEdges.map(edge => edge.id).sort()).toEqual(['edge.chal.inc', 'edge.inc.chal']);
+      const pairStates = result.worldState.relationshipStates;
+      expect(pairStates['edge.chal.inc']?.relationshipType).toBe('hostile');
+      // refreshRelationshipMemory gives every graph edge a posture row, including
+      // the known reverse channel_inferred transport edge. It must stay inferred;
+      // a directional second outcome would wrongly patch this key to hostile.
+      expect(pairStates['edge.inc.chal']?.relationshipType).toBe('channel_inferred');
+      expect((pairStates['edge.inc.chal']?.history || []).some(row =>
+        row.type === 'label_proposal_applied')).toBe(false);
+      expect(warIntentFor(result.worldState, 'inc', escalatedRun.tick)?.targetId).toBe('chal');
+      expect(warIntentFor(result.worldState, 'chal', escalatedRun.tick)?.targetId).toBe('inc');
+    }
+  });
+
+  test('an existing defeated→winner edge keeps its true key and becomes opener-visible hostility', () => {
+    const { saves } = grainContestFixture({ incumbentStrong: true });
+    saves[2] = save('chal', 'Bburg', { exports: ['Grain'], tier: 'metropolis', population: 200000, legitimacy: 90 });
+    const channels = [tradeChannel('inc', 'buyer', 0.6), tradeChannel('chal', 'buyer', 0.5)];
+    const edges = [
+      { id: 'edge.inc.buyer', from: 'inc', to: 'buyer', relationshipType: 'trade_partner' },
+      { id: 'edge.chal.buyer', from: 'chal', to: 'buyer', relationshipType: 'trade_partner' },
+      { id: 'edge.true.trade.rivals', from: 'inc', to: 'chal', relationshipType: 'rival' },
+    ];
+
+    let found = null;
+    for (let tick = 4; tick < 80 && !found; tick += 1) {
+      const campaign = tradeCampaign({}, { settlementIds: ['buyer', 'inc', 'chal'], edges, channels });
+      const snapshot = snapshotFor(campaign, saves);
+      const tw = evaluateTradeWar({ snapshot, worldState: snapshot.worldState, rng: createPRNG(`escal-${tick}`), tick, now: NOW, rules: { warLayerEnabled: true } });
+      const outcome = tw.outcomes.find(o => String(o.id).startsWith('world_outcome.trade_war_escalation.'));
+      if (outcome) found = { campaign, snapshot, outcome, tick };
+    }
+
+    expect(found?.outcome).toMatchObject({
+      relationshipKey: 'edge.true.trade.rivals',
+      proposalPayload: {
+        kind: 'relationship_label_change',
+        relationshipKey: 'edge.true.trade.rivals',
+        fromType: 'rival',
+        toType: 'hostile',
+      },
+      metadata: { warIntent: { fromId: 'inc', targetId: 'chal' } },
+    });
+    if (!found) throw new Error('expected an escalation outcome on the existing relationship edge');
+    expect(found?.outcome.metadata.relationshipSeed).toBeUndefined();
+
+    const settlementMap = new Map(saves.map(item => [String(item.id), {
+      saveId: String(item.id),
+      save: item,
+      settlement: item.settlement,
+    }]));
+    const applied = applyWorldPulseOutcomes({
+      snapshot: found.snapshot,
+      worldState: found.snapshot.worldState,
+      regionalGraph: found.snapshot.regionalGraph,
+      wizardNews: found.campaign.wizardNews,
+      settlementMap,
+      outcomes: [found.outcome],
+      tick: found.tick,
+      now: NOW,
+      advanceNewsTick: false,
+      advanceRegionalImpacts: false,
+      simulationRules: found.snapshot.worldState.simulationRules,
+    });
+    expect(applied.regionalGraph.edges.find(e => e.id === 'edge.true.trade.rivals')?.relationshipType).toBe('hostile');
+    expect(applied.worldState.relationshipStates['edge.true.trade.rivals']?.relationshipType).toBe('hostile');
+    expect(warIntentFor(applied.worldState, 'inc', found.tick)).toEqual({ targetId: 'chal', tick: found.tick });
+    expect(hostileTargetsOf({ ...found.snapshot, worldState: applied.worldState, regionalGraph: applied.regionalGraph }, 'inc')).toContain('chal');
+    // The hostile relationship's decorative bundle may contain war_front rows,
+    // but provenance keeps every one non-live until the opener deploys an army.
+    expect(applied.regionalGraph.channels.some(c => isLiveWarFront(c))).toBe(false);
   });
 
   test('a defeated WEAK incumbent winds down peacefully (no war_front), not a forced escalation', () => {
@@ -390,8 +556,13 @@ describe('trade war — escalation reachable (conquest path stays open)', () => 
       const snap = snapshotFor(campaign, saves);
       const tw = evaluateTradeWar({ snapshot: snap, worldState: snap.worldState, rng: createPRNG(`wind-${tick}`), tick, now: NOW, rules: { warLayerEnabled: true } });
       const flipped = tw.outcomes.some(o => o.candidateType === 'trade_realignment');
-      const escalated = tw.graphChannels.some(c => c.type === 'war_front');
-      if (flipped && !escalated && tw.outcomes.some(o => o.candidateType === 'market_shock')) woundDown = true;
+      expect(tw.graphChannels.some(c => c.type === 'war_front')).toBe(false);
+      if (flipped) {
+        // The confidence gate refused: neither half of the opener handoff exists.
+        expect(tw.outcomes.some(o => o.metadata?.warIntent)).toBe(false);
+        expect(tw.outcomes.some(o => o.proposalPayload?.kind === 'relationship_label_change')).toBe(false);
+        if (tw.outcomes.some(o => o.candidateType === 'market_shock')) woundDown = true;
+      }
     }
     expect(woundDown).toBe(true);
   });

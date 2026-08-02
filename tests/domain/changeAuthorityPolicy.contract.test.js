@@ -99,6 +99,7 @@ const SOURCE_ANCHORS = Object.freeze({
   npc_adversarial_action: "const proposal = severity >= action.proposalAt || ['defect', 'sabotage', 'seek_promotion', 'undermine_rival'].includes(actionFamily);",
   faction_government_challenge: "ruleId: `faction_${band}_government_challenge`,\n    severity,\n    probability: (band === 'crisis' ? 0.12 : 0.04) + severity * (band === 'crisis' ? 0.34 : 0.22),\n    applyMode: 'proposal'",
   relationship_label_change: 'candidateType,\n    applyMode: "proposal",',
+  treaty_breached: "applyMode: 'proposal',\n      forced: true",
   tier_change: "ruleFamily: 'tier',\n    targetSaveId: item.id,\n    severity: drift.severity,\n    probability: chance,\n    // Honor majorChangesRequireProposal, consistent with resource_depletion in\n    // this module: a tier change stays a DM proposal under the conservative\n    // default (flag on), and auto-applies only when a campaign opts out of\n    // proposal gating (flag off, e.g. dramatic_campaign). CL-0: the flag gate\n    // is the LEGACY mode fed through authorityFor (verbatim under routine/full;\n    // forced to proposal under dm_only/recommendations).\n    applyMode: authorityFor(rules, 'tier_change', rules.majorChangesRequireProposal ? 'proposal' : 'auto'),",
   // structural-proposal: auto by default; one branch routes via a proposal-only lever.
   strategy_move: "applyMode: proposal ? 'proposal' : 'auto'",
@@ -239,6 +240,7 @@ describe('change-authority contract — campaignAltering markers (Advance-scalin
     'faction_government_challenge',
     'intervention_ordered',
     'blockade_declared',
+    'treaty_breached',
     // W-LIFECYCLE: a settlement's terminal death removes a living roster member
     // (the digest cell stays, as a remnant).
     'settlement_terminal_death',
@@ -271,6 +273,7 @@ describe('change-authority contract — campaignAltering markers (Advance-scalin
     faction_government_challenge: { candidateType: 'faction_government_challenge', proposalPayload: { kind: 'government_change' }, severity: 0.55 },
     intervention_ordered: { candidateType: 'intervention_ordered', type: 'condition', severity: 0.6 },
     blockade_declared: { candidateType: 'blockade_declared', type: 'condition', severity: 0.6 },
+    treaty_breached: { candidateType: 'treaty_breached', type: 'realm_verb', severity: 1 },
     settlement_terminal_death: { candidateType: 'settlement_terminal_death', type: 'lifecycle', lifecyclePatch: { kind: 'terminal_death', saveId: 'a' }, severity: 0.8 },
   });
 

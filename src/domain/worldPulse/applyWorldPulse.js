@@ -20,7 +20,8 @@ import { storageCapacityMonths } from './foodStockpile.js';
 import { applyRelationshipPatch, relationshipKeyFromEdge, relationshipRoles } from './relationshipEvolution.js';
 // JOIN 1 — THE RESOLVED MARCH: the chooser→opener order seam (see the two arms in the
 // auto-apply loop). Same lazy pulse chunk as every import above ⇒ zero new eager bytes.
-import { stampWarIntent, consumeWarIntent, stampDeploymentRecall } from './warIntent.js';
+import { applyWarIntentOutcome, stampDeploymentRecall } from './warIntent.js';
+import { ensureRelationshipEdgeSeed } from './relationshipEdgeSeed.js';
 import { refreshRelationshipMemory } from './relationshipMemory.js';
 import { resolveRelationshipHierarchy } from './relationshipHierarchy.js';
 import { applyNpcPatch, npcId } from './npcAgency.js';
@@ -998,6 +999,10 @@ export function applyWorldPulseOutcomes({
     }
 
     if (outcome.relationshipKey && outcome.relationshipPatch) {
+      // WR-0c: trade-war rivals can share a buyer without having a pair edge.
+      // Materialize only that explicitly declared identity before the ordinary
+      // relationship writers apply the hostile transition below.
+      graph = ensureRelationshipEdgeSeed(graph, outcome, now);
       // Capture the pre-change label: the wind-down handshake below needs to
       // know the edge WAS hostile before this outcome rewrote it.
       const beforeEdge = relationshipEdgeForOutcome(graph, outcome);
@@ -1145,20 +1150,11 @@ export function applyWorldPulseOutcomes({
     // chooser's `deploy` move deposits an ORDER naming the target its seat resolved
     // on; warDeployment step 4 — still the ONE opener — reads it next tick, tries that
     // target FIRST and waives only the CONQUEST_MARGIN pre-filter for it (never the
-    // feasibility gate, never the posture gate). Keyed on the CHOOSER's own metadata
-    // (`strategyMove: 'deploy'` + a target), which the war layer's own strategy_deploy
-    // outcome never carries — so the two can never be confused. No order ⇒ no write.
-    if (outcome.metadata?.strategyMove === 'deploy' && outcome.metadata?.deployTargetId != null) {
-      state = stampWarIntent(state, outcome.targetSaveId, outcome.metadata.deployTargetId, tick);
-    }
-    // …and the order RETIRES the moment the opener obeys it: the war layer's own
-    // siege-initiation outcome (ruleFamily 'stressor', never the chooser's 'strategy')
-    // means this besieger's army is committed. consumeWarIntent clears only an order
-    // from an EARLIER tick, so it is order-independent inside this pass — a march the
-    // chooser resolved on THIS tick survives regardless of which outcome applies first.
-    if (outcome.candidateType === 'strategy_deploy' && outcome.ruleFamily === 'stressor') {
-      state = consumeWarIntent(state, outcome.targetSaveId, tick);
-    }
+    // feasibility gate, never the posture gate). The shared join accepts both the
+    // chooser contract and `metadata.warIntent` from non-chooser producers (trade
+    // escalation), and retires an earlier order when the opener obeys it.
+    // Same-tick producer/opener order remains commutative inside the apply pass.
+    state = applyWarIntentOutcome(state, outcome, tick ?? 0);
     // war-2 — APPROVED FACTION PROPOSALS APPLY FOR REAL. A DM-facing faction payload
     // moves real settlement state (the government read-path, the named institution, the
     // roster power scalars), additive on top of applyFactionPatch above.

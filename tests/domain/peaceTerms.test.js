@@ -21,9 +21,10 @@ import { describe, it, expect } from 'vitest';
 import {
   advanceTreaties, termBudgetFor, resolveVictor, believedAdvantage,
   appraiseLoserPortfolio, draftTerms, evolveCompliance, alignmentPress,
-  treatiesForPair, demilitarizationCapFor, treatyBlocksWar, treatyPairKey,
+  treatiesForPair, demilitarizationCapFor, treatyBlocksWar, occupationHoldFor, treatyPairKey,
   TERM_CATALOG, TERM_TYPES, TERM_FAMILIES, PEACE_TERMS_TUNING,
 } from '../../src/domain/worldPulse/peaceTerms.js';
+import { repudiateTreaty } from '../../src/domain/worldPulse/treatyBreach.js';
 import { TREATY_TRANSFER_TUNING } from '../../src/domain/worldPulse/treatyTransfer.js';
 import { TREATY_ENFORCEMENT_TUNING } from '../../src/domain/worldPulse/treatyEnforcement.js';
 import { advanceWarReasons, warReasonsFor } from '../../src/domain/worldPulse/warReasons.js';
@@ -492,6 +493,61 @@ describe('W-PEACE-2 executors — each landed term executes and expires', () => 
     const expired = ledgerWorld(treatyOf([term('occupation_continuation', { expiresTick: 5 })]));
     const out2 = advance(expired, IW, IW_EDGES, 10);
     expect(getSpatialLedger(out2.worldState, 'treaties')).toBeUndefined();
+  });
+});
+
+// ── E) WR-0c DELIBERATE REPUDIATION ─────────────────────────────────────────
+
+describe('WR-0c deliberate treaty breach — one verdict, every effect lifted', () => {
+  it('defaults every live promise idempotently, preserves the broken shell, mints casus, then prunes at the original horizon', () => {
+    const source = ledgerWorld(treatyOf([
+      term('non_aggression', { expiresTick: 40 }),
+      term('tribute', { expiresTick: 30, deliveredToVictor: 2, extractedFromLoser: 3 }),
+      term('demilitarization', { expiresTick: 35, magnitude: 0.6 }),
+      term('occupation_continuation', { expiresTick: 25 }),
+    ]), { tick: 10 });
+
+    const breached = repudiateTreaty(source, { fromId: 'iron', toId: 'weak', tick: 10 });
+    expect(breached.ok).toBe(true);
+    const treaty = getSpatialLedger(breached.worldState, 'treaties')[treatyPairKey('iron', 'weak')];
+    expect(treaty).toMatchObject({
+      complianceState: 'defaulted', defaultedBy: 'iron', defaultSeverity01: 1,
+      breachType: 'repudiation', repudiatedTick: 10, breachExpiresTick: 40,
+    });
+    expect(treaty.terms.every((t) => t.complianceState === 'defaulted' && t.trueState === 'defaulted' && t.expiresTick === 10)).toBe(true);
+    expect(treaty.terms.map((t) => t.repudiatedExpiresTick).sort((a, b) => a - b)).toEqual([25, 30, 35, 40]);
+
+    expect(treatyBlocksWar(breached.worldState, 'iron', 'weak', 10)).toBe(false);
+    expect(demilitarizationCapFor(breached.worldState, 'weak', 10)).toBeNull();
+    expect(occupationHoldFor(breached.worldState, 'weak', 'iron', 10)).toBe(false);
+
+    const repeated = repudiateTreaty(breached.worldState, { fromId: 'iron', toId: 'weak', tick: 10 });
+    expect(repeated.ok).toBe(false);
+    expect(repeated.code).toBe('treaty_breach_no_live_nap');
+    expect(repeated.worldState).toBe(breached.worldState);
+
+    const held = advance(breached.worldState, FED, IW_EDGES, 11);
+    expect(held.changed).toBe(false);
+    expect(held.worldState).toBe(breached.worldState);
+    expect(held.settlementUpdates).toBeUndefined();
+    const casus = advanceWarReasons({
+      snapshot: snapshotFor(FED, IW_EDGES), worldState: held.worldState,
+      graph: { edges: IW_EDGES }, pIndex: null, tick: 11,
+    });
+    expect(warReasonsFor(casus.worldState, 'weak', 'iron')?.reasons?.treaty_default?.score).toBe(1);
+
+    const spent = advance(breached.worldState, FED, IW_EDGES, 40);
+    expect(getSpatialLedger(spent.worldState, 'treaties')).toBeUndefined();
+  });
+
+  it('invalid parties and a world with no live NAP leave no residue', () => {
+    const noNap = ledgerWorld(treatyOf([term('tribute', { expiresTick: 40 })]));
+    for (const args of [{ fromId: 'iron', toId: 'iron', tick: 10 }, { fromId: 'iron', toId: 'weak', tick: 10 }]) {
+      const out = repudiateTreaty(noNap, args);
+      expect(out.ok).toBe(false);
+      expect(out.worldState).toBe(noNap);
+      expect(getSpatialLedger(out.worldState, 'treaties')).toEqual(getSpatialLedger(noNap, 'treaties'));
+    }
   });
 });
 

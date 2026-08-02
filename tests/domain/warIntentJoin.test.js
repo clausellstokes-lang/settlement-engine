@@ -2,11 +2,13 @@ import { describe, expect, test } from 'vitest';
 
 import { advanceCampaignWorld } from '../../src/domain/worldPulse/index.js';
 import { evaluateWarLayer } from '../../src/domain/worldPulse/warDeployment.js';
-import { evaluateSettlementStrategyRules } from '../../src/domain/worldPulse/settlementStrategy.js';
+import { enumerateMoves, evaluateSettlementStrategyRules } from '../../src/domain/worldPulse/settlementStrategy.js';
 import {
   stampWarIntent, consumeWarIntent, warIntentFor, intentTargetOrder, intentNamesTarget,
-  hostileTargetsOf, WAR_INTENT_LEDGER_KEY, WAR_INTENT_TTL_TICKS,
+  applyWarIntentOutcome, hostileTargetsOf, treatyEligibleWarTargets,
+  WAR_INTENT_LEDGER_KEY, WAR_INTENT_TTL_TICKS,
 } from '../../src/domain/worldPulse/warIntent.js';
+import { declareCasus } from '../../src/domain/worldPulse/warReasons.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { deriveSettlementPressures, pressureIndex } from '../../src/domain/worldPulse/pressureModel.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
@@ -26,7 +28,8 @@ import { createPRNG } from '../../src/kernel/prng.js';
 //   • THE TARGET — the war that opens is the war the seat resolved on.
 //   • DRAW ACCOUNTING — the new consumer forks no rng and steals no draw: the seeded
 //     stream is byte-identical with and without a live order, on both sides of the seam.
-//   • DORMANCY — chooser dark ⇒ no ledger key ⇒ the war layer is byte-identical.
+//   • DORMANCY — no chooser or escalation intent ⇒ no ledger key ⇒ the war layer is
+//     byte-identical.
 //   • THE LIFECYCLE — the order expires, and is consumed the tick it is obeyed.
 //
 // There is still exactly ONE opener: warIntent.js mints no front, seeds no deployment
@@ -101,6 +104,38 @@ function world(spec, { extraState = {}, tick = 6 } = {}) {
   return { snapshot, pIdx: pressureIndex(deriveSettlementPressures(snapshot)), worldState, saves, campaign };
 }
 
+/** Rebuild a fixture's snapshot over a changed worldState (settlements stay fixed). */
+function withWorldState(fixture, worldState) {
+  const campaign = { ...fixture.campaign, worldState };
+  const snapshot = buildWorldSnapshot({ campaign, saves: fixture.saves, worldState });
+  return { ...fixture, campaign, snapshot, worldState };
+}
+
+/** Add one live non-aggression pact without disturbing any sibling spatial ledger. */
+function withNonAggression(worldState, aId, bId, { expiresTick = 100, complianceState = 'honored' } = {}) {
+  const priorSpatial = worldState.spatialLedgers || {};
+  const priorTreaties = priorSpatial.treaties || {};
+  return {
+    ...worldState,
+    simulationRules: {
+      ...(worldState.simulationRules || {}),
+      warLayerEnabled: true,
+      peaceEngineEnabled: true,
+    },
+    spatialLedgers: {
+      ...priorSpatial,
+      treaties: {
+        ...priorTreaties,
+        [`nap.${aId}.${bId}`]: {
+          parties: [String(aId), String(bId)],
+          complianceState,
+          terms: [{ type: 'non_aggression', expiresTick }],
+        },
+      },
+    },
+  };
+}
+
 /** Run the ONE opener over a world state, with a fresh seeded stream each time. */
 const openWars = (snapshot, worldState, tick = 6) => evaluateWarLayer({
   snapshot, worldState, rng: createPRNG('join1-war'), tick, now: NOW,
@@ -150,6 +185,112 @@ describe('JOIN 1 — the chooser makes its march machine-readable', () => {
     const others = all.filter(c => c.candidateType !== 'strategy_deploy');
     expect(others.length).toBeGreaterThan(0);
     for (const c of others) expect(c.metadata.deployTargetId).toBeUndefined();
+  });
+
+  test('the 3-hostile score row carries the max-margin target through emission and casus prose', () => {
+    const spec = [
+      ['strong', 'Ironhold', CITY],
+      ['alpha', 'Alderfen', LARGE_TOWN],
+      ['beta', 'Briarwatch', LARGE_TOWN],
+      ['zeta', 'Zephyr Mill', HAMLET],
+    ];
+    const base = world(spec);
+
+    // Direct scorer pin: alpha sorts first and is out-muscled, but zeta owns the
+    // largest margin. The scored row must carry zeta rather than discarding identity.
+    const strengths = new Map([
+      ['strong', 0.81], ['alpha', 0.71], ['beta', 0.69], ['zeta', 0.54],
+    ]);
+    const scored = enumerateMoves({
+      sId: 'strong',
+      ctx: { hostileTargets: ['alpha', 'beta', 'zeta'], vassalIds: [], homeBesieged: false, vassalBesieged: false, besieging: [] },
+      aggressiveness: 1.2,
+      strengthFor: (id) => strengths.get(String(id)) || 0,
+      exhaustion: 0,
+    });
+    expect(scored.find((row) => row.move === 'deploy')?.bestTargetId).toBe('zeta');
+
+    // Give ONLY zeta a typed casus receipt. If emitMove reselects alphabetically,
+    // metadata/prose and the consumed causal line will all expose the split.
+    const lit = {
+      ...base.worldState,
+      simulationRules: { ...base.worldState.simulationRules, peaceEngineEnabled: true },
+    };
+    const declared = declareCasus(lit, {
+      fromId: 'strong', toId: 'zeta', type: 'grievance', severity01: 0.8,
+      receipt: 'Zephyr broke the old border oath.', tick: 6,
+    });
+    if (!declared.ok) throw new Error(`casus fixture failed: ${declared.error}`);
+    const fixture = withWorldState(base, declared.worldState);
+    let deploy = null;
+    for (let i = 0; i < 128 && !deploy; i += 1) {
+      deploy = evaluateSettlementStrategyRules(fixture.snapshot, fixture.pIdx, {
+        tick: 6, simulationRules: { settlementStrategyEnabled: true }, rng: createPRNG(`three-hostile-${i}`),
+      }).find((row) => row.candidateType === 'strategy_deploy') || null;
+    }
+    expect(deploy).toBeTruthy();
+    expect(deploy.metadata.deployTargetId).toBe('zeta');
+    expect(deploy.summary).toContain('Zephyr Mill');
+    expect(deploy.summary).not.toContain('Alderfen'); // anchored: the preceding Zephyr assertion proves the emitted target sentence is live and names the scored rival
+    expect(deploy.reasons).toContainEqual(expect.stringContaining('Zephyr broke the old border oath.'));
+  });
+});
+
+describe('WR-0c — treaty eligibility is shared by chooser and opener', () => {
+  test('one pact-bound target is removed while an eligible hostile remains attackable', () => {
+    const base = world([
+      ['strong', 'Ironhold', CITY],
+      ['alpha', 'Alderfen', HAMLET],
+      ['zeta', 'Zephyr Mill', HAMLET],
+    ]);
+    // Deliberately make the persisted clock later than the term. The evaluation's
+    // explicit tick (6) must govern both chooser and opener eligibility.
+    const boundState = { ...withNonAggression(base.worldState, 'strong', 'alpha'), tick: 101 };
+    const bound = withWorldState(base, boundState);
+    const offered = ['alpha', 'zeta'];
+
+    expect(treatyEligibleWarTargets(boundState, 'strong', offered, 6)).toEqual(['zeta']);
+    expect(hostileTargetsOf(bound.snapshot, 'strong', 6)).toEqual(['zeta']);
+    expect(hostileTargetsOf(bound.snapshot, 'strong')).toEqual(['alpha', 'zeta']);
+    // The opener must thread its live evaluation tick rather than silently fall back
+    // to the later persisted clock above.
+    expect(openWars(bound.snapshot, boundState).deployments.strong?.targetId).toBe('zeta');
+
+    const chooserTargets = [];
+    for (let i = 0; i < 96; i += 1) {
+      const deploy = evaluateSettlementStrategyRules(bound.snapshot, bound.pIdx, {
+        tick: 6, simulationRules: { settlementStrategyEnabled: true }, rng: createPRNG(`pact-multi-${i}`),
+      }).find((row) => row.candidateType === 'strategy_deploy');
+      if (deploy) chooserTargets.push(deploy.metadata.deployTargetId);
+    }
+    expect(chooserTargets.length).toBeGreaterThan(0);
+    expect(new Set(chooserTargets)).toEqual(new Set(['zeta']));
+  });
+
+  test('a sole pact-bound hostile produces no deploy across the seed sweep; expiry restores it', () => {
+    const base = world([['strong', 'Ironhold', CITY], ['alpha', 'Alderfen', HAMLET]]);
+    const boundState = withNonAggression(base.worldState, 'strong', 'alpha', { expiresTick: 20 });
+    const bound = withWorldState(base, boundState);
+
+    const deploys = [];
+    for (let i = 0; i < 128; i += 1) {
+      deploys.push(...evaluateSettlementStrategyRules(bound.snapshot, bound.pIdx, {
+        tick: 6, simulationRules: { settlementStrategyEnabled: true }, rng: createPRNG(`pact-only-${i}`),
+      }).filter((row) => row.candidateType === 'strategy_deploy'));
+    }
+    expect(deploys).toEqual([]);
+
+    // Explicit tick proves the expiry clock is consumed rather than hardcoded to 0.
+    expect(hostileTargetsOf(bound.snapshot, 'strong', 21)).toEqual(['alpha']);
+    const expiredState = { ...boundState, tick: 21 };
+    const expired = withWorldState(base, expiredState);
+    let restored = false;
+    for (let i = 0; i < 128 && !restored; i += 1) {
+      restored = evaluateSettlementStrategyRules(expired.snapshot, expired.pIdx, {
+        tick: 21, simulationRules: { settlementStrategyEnabled: true }, rng: createPRNG(`pact-expired-${i}`),
+      }).some((row) => row.candidateType === 'strategy_deploy');
+    }
+    expect(restored).toBe(true);
   });
 });
 
@@ -386,6 +527,53 @@ describe('JOIN 1 — THE LIFECYCLE of an order', () => {
 });
 
 describe('JOIN 1 — the pure order helpers', () => {
+  test('applyWarIntentOutcome accepts chooser and generic producers and ignores malformed rows', () => {
+    const base = { tick: 9 };
+    const chooser = applyWarIntentOutcome(base, {
+      targetSaveId: 'strong',
+      metadata: { strategyMove: 'deploy', deployTargetId: 'mid' },
+    }, 9);
+    expect(warIntentFor(chooser, 'strong', 9)).toEqual({ targetId: 'mid', tick: 9 });
+
+    const generic = applyWarIntentOutcome(base, {
+      metadata: { warIntent: { fromId: 'trader', targetId: 'oathbreaker' } },
+    }, 9);
+    expect(warIntentFor(generic, 'trader', 9)).toEqual({ targetId: 'oathbreaker', tick: 9 });
+
+    const malformed = { metadata: { warIntent: { fromId: 'trader' } } };
+    expect(applyWarIntentOutcome(base, malformed, 9)).toBe(base);
+    expect(applyWarIntentOutcome(base, null, 9)).toBe(base);
+  });
+
+  test('applyWarIntentOutcome consumes an earlier opener order but preserves a same-tick order in either apply order', () => {
+    const opener = {
+      targetSaveId: 'strong', candidateType: 'strategy_deploy', ruleFamily: 'stressor',
+    };
+    const producer = {
+      metadata: { warIntent: { fromId: 'strong', targetId: 'mid' } },
+    };
+
+    const earlier = stampWarIntent({ tick: 8 }, 'strong', 'old-target', 8);
+    expect(warIntentFor(applyWarIntentOutcome(earlier, opener, 9), 'strong', 9)).toBeNull();
+
+    const producerThenOpener = applyWarIntentOutcome(
+      applyWarIntentOutcome({ tick: 9 }, producer, 9), opener, 9,
+    );
+    const openerThenProducer = applyWarIntentOutcome(
+      applyWarIntentOutcome({ tick: 9 }, opener, 9), producer, 9,
+    );
+    expect(JSON.stringify(producerThenOpener)).toBe(JSON.stringify(openerThenProducer));
+    expect(warIntentFor(producerThenOpener, 'strong', 9)).toEqual({ targetId: 'mid', tick: 9 });
+
+    // A later producer may share the opener outcome shape; stamp-first plus the
+    // same-tick consume guard still leaves its fresh order intact.
+    const combined = applyWarIntentOutcome({ tick: 9 }, {
+      ...opener,
+      metadata: { warIntent: { fromId: 'strong', targetId: 'mid' } },
+    }, 9);
+    expect(warIntentFor(combined, 'strong', 9)).toEqual({ targetId: 'mid', tick: 9 });
+  });
+
   test('intentTargetOrder returns the INPUT REFERENCE when no order applies', () => {
     const targets = ['alpha', 'zeta'];
     expect(intentTargetOrder(targets, null)).toBe(targets);

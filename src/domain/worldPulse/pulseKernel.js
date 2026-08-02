@@ -927,7 +927,8 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // The trade-war layer. The per-commodity primary-supplier contest composes
     // with the war layer inside the SAME gated block: a flip re-points C's primary
     // trade_dependency channel and (confidence-gated) either winds the defeated
-    // incumbent down or escalates to a war_front the war layer picks up next tick.
+    // incumbent down or deposits hostility + a war intent. The ONE opener reads that
+    // intent next tick and may still refuse it on treaty/posture/army/feasibility gates.
     // Reads the SAME post-mint snapshot (so the war layer's fresh fronts are
     // visible) and persists its per-prize cooldown ledger onto worldState.tradeWarState.
     const tradeWar = evaluateTradeWar({

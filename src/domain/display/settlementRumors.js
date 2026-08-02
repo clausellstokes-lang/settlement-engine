@@ -89,6 +89,7 @@ export const WHAT_PHRASES = Object.freeze({
   war_spoils: 'the spoils of war',
   army_homecoming: 'soldiers returning home',
   siege_lifted: 'a siege lifted',
+  treaty_breached: 'an oath between realms broken',
   conquest: 'a conquest',
   field_battle: 'a battle in the field',
   conflict_pressure: 'the drums of war',

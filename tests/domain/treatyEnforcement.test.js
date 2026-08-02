@@ -10,8 +10,8 @@
  * So every pin here drives the REAL CONSUMER, not the read:
  *   readiness_cap  → mobilization.evaluateMobilization (does the beaten court's war
  *                    footing actually stop climbing?)
- *   war_block      → warReasons.warReasonFactor (does the deploy weight the strategy
- *                    multiplies by actually collapse?)
+ *   war_block      → shared chooser/opener target eligibility + warReasonFactor
+ *                    (does legality remove the pair, and does zero omit deploy?)
  *   occupation_hold→ occupation.evaluateOccupations (does the ceded occupation actually
  *                    survive the army going home?)
  *
@@ -30,6 +30,8 @@ import { PEACE_TERMS_TUNING, treatyPairKey, TERM_CATALOG } from '../../src/domai
 import { evaluateMobilization, isWarReady, cappedRampIndex, RAMP } from '../../src/domain/worldPulse/mobilization.js';
 import { warReasonFactor } from '../../src/domain/worldPulse/warReasons.js';
 import { evaluateOccupations } from '../../src/domain/worldPulse/occupation.js';
+import { enumerateMoves } from '../../src/domain/worldPulse/settlementStrategy.js';
+import { treatyEligibleWarTargets } from '../../src/domain/worldPulse/warIntent.js';
 
 const LIT = { warLayerEnabled: true, peaceEngineEnabled: true };
 
@@ -163,7 +165,7 @@ function mobItem(id) {
   };
 }
 
-// ── C) war_block — THE CONSUMER IS THE DEPLOY-WEIGHT MULTIPLIER ─────────────
+// ── C) war_block — THE CONSUMERS ARE TARGET LEGALITY + MOVE OMISSION ────────
 
 describe('JOIN 3 war_block — a live non-aggression pact collapses the war lane', () => {
   it('CONSUMER: warReasonFactor returns 0 for a pact-bound pair (the strategy multiplies its deployScore by this)', () => {
@@ -193,6 +195,45 @@ describe('JOIN 3 war_block — a live non-aggression pact collapses the war lane
 
   it('a treaty carrying NO non_aggression term blocks nothing (the term, not the treaty, is the block)', () => {
     expect(warReasonFactor(treatyWorld([term('tribute')]), 'iron', 'weak')).toBe(1);
+  });
+
+  it('the shared target filter removes only the pact-bound rival and preserves dormant identity/order', () => {
+    const offered = ['weak', 'stranger', 'zeta'];
+    expect(treatyEligibleWarTargets(
+      treatyWorld([term('non_aggression')]), 'iron', offered, 10,
+    )).toEqual(['stranger', 'zeta']);
+
+    const noPact = ['weak', 'stranger', 'zeta'];
+    expect(treatyEligibleWarTargets(untreatiedWorld(), 'iron', noPact, 10)).toBe(noPact);
+    const expired = ['weak', 'stranger', 'zeta'];
+    expect(treatyEligibleWarTargets(
+      treatyWorld([term('non_aggression', { expiresTick: 5 })]), 'iron', expired, 10,
+    )).toBe(expired);
+    const dark = ['weak', 'stranger', 'zeta'];
+    const darkWorld = { ...treatyWorld([term('non_aggression')]), simulationRules: { warLayerEnabled: true } };
+    expect(treatyEligibleWarTargets(darkWorld, 'iron', dark, 10)).toBe(dark);
+  });
+
+  it('a zero war factor omits deploy entirely; the identity factor restores the exact target row', () => {
+    const args = {
+      sId: 'iron',
+      ctx: {
+        hostileTargets: ['weak'], vassalIds: [], homeBesieged: false,
+        vassalBesieged: false, besieging: [],
+      },
+      aggressiveness: 1.2,
+      strengthFor: (id) => String(id) === 'iron' ? 0.8 : 0.5,
+      exhaustion: 0,
+    };
+    const blocked = enumerateMoves({
+      ...args, causal: { warFor: () => 0, peaceFor: () => 1 },
+    });
+    expect(blocked.some((row) => row.move === 'deploy')).toBe(false);
+
+    const open = enumerateMoves({
+      ...args, causal: { warFor: () => 1, peaceFor: () => 1 },
+    });
+    expect(open.find((row) => row.move === 'deploy')?.bestTargetId).toBe('weak');
   });
 });
 

@@ -41,8 +41,8 @@
  *     had already made and stores its target, so no new consumer can steal a draw.
  *   - The ledger is CONDITIONAL and DROP-WHEN-EMPTY (spatialLedgers.warIntents, the
  *     same namespace `interventions` / `commitments` / `campaignPlans` use). Absent
- *     while the chooser is dark or has resolved on no march ⇒ a legacy / layer-off
- *     campaign serializes byte-identically.
+ *     when no producer (the chooser or a routed escalation) has resolved on a march
+ *     ⇒ a legacy / layer-off campaign serializes byte-identically.
  *   - Every reader is TOTAL over a missing/garbage ledger (⇒ null ⇒ the opener runs
  *     its pre-existing expression verbatim), and `intentTargetOrder` returns the
  *     INPUT ARRAY REFERENCE unchanged when no order applies — so the dormant loop is
@@ -63,6 +63,7 @@ import {
   ensureRelationshipState,
 } from './relationshipEvolution.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { treatyBlocksWar } from './treatyEnforcement.js';
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -256,6 +257,45 @@ export function consumeWarIntent(worldState, besiegerId, tick) {
 }
 
 /**
+ * THE ONE APPLY-SIDE INTENT JOIN. It accepts both the chooser's original metadata
+ * (`strategyMove:'deploy'` + `deployTargetId`) and the generic producer contract
+ * (`metadata.warIntent:{fromId,targetId}`) used by non-chooser escalation lanes.
+ * The war layer's own siege-initiation outcome consumes an earlier order here too.
+ *
+ * SAME-TICK ORDER INDEPENDENCE is inherited from consumeWarIntent: a fresh order
+ * stamped at T is never consumed at T. Therefore chooser/trade intent then opener,
+ * or opener then chooser/trade intent, both leave the same fresh row. Irrelevant or
+ * malformed outcomes return the input reference unchanged.
+ *
+ * @param {Record<string, unknown>} state
+ * @param {Record<string, unknown>|null|undefined} outcome
+ * @param {number} tick
+ * @returns {Record<string, unknown>}
+ */
+export function applyWarIntentOutcome(state, outcome, tick) {
+  const row = asObject(outcome);
+  const metadata = asObject(row.metadata);
+  const generic = asObject(metadata.warIntent);
+  let next = state;
+
+  if (generic.fromId != null && generic.targetId != null) {
+    next = stampWarIntent(next, String(generic.fromId), String(generic.targetId), tick);
+  } else if (metadata.strategyMove === 'deploy' && metadata.deployTargetId != null) {
+    next = stampWarIntent(
+      next,
+      row.targetSaveId == null ? null : String(row.targetSaveId),
+      String(metadata.deployTargetId),
+      tick,
+    );
+  }
+
+  if (row.candidateType === 'strategy_deploy' && row.ruleFamily === 'stressor') {
+    next = consumeWarIntent(next, row.targetSaveId == null ? null : String(row.targetSaveId), tick);
+  }
+  return next;
+}
+
+/**
  * Stamp a STRATEGIC-WITHDRAWAL order onto a live deployment (war-3 sue-for-peace /
  * war-4 return-home). The chooser's OTHER order to the war layer, and the precedent
  * this module generalizes: the war layer consumes the `recalled` stamp at the top of
@@ -283,8 +323,45 @@ export function stampDeploymentRecall(state, attackerId, targetId, cause, tick) 
 }
 
 /**
+ * Remove treaty-blocked pairs from an already-canonical target list. This is the
+ * shared eligibility seam for BOTH the ground-truth opener and the belief-aware
+ * chooser: beliefs may disagree about hostility, but they cannot make an honored
+ * non-aggression pact disappear.
+ *
+ * DORMANT / NO-BLOCK IDENTITY: when the peace-engine gate is dark, no treaty ledger
+ * exists, or no pair is blocked, return the INPUT ARRAY REFERENCE unchanged. When a
+ * block applies, preserve the incoming order exactly among the surviving targets.
+ *
+ * @param {Record<string, unknown>|null|undefined} worldState
+ * @param {string|number} fromId
+ * @param {string[]} targets
+ * @param {number|null} [tick]
+ * @returns {string[]}
+ */
+export function treatyEligibleWarTargets(worldState, fromId, targets, tick = null) {
+  if (!Array.isArray(targets) || targets.length === 0) return targets;
+  const rules = asObject(asObject(worldState).simulationRules);
+  if (rules.warLayerEnabled !== true || rules.peaceEngineEnabled !== true) return targets;
+  const at = tick == null || !Number.isFinite(Number(tick))
+    ? (Number(asObject(worldState).tick) || 0)
+    : Number(tick);
+  /** @type {string[]|null} */
+  let survivors = null;
+  for (let i = 0; i < targets.length; i += 1) {
+    const targetId = String(targets[i]);
+    if (treatyBlocksWar(worldState, fromId, targetId, at)) {
+      if (survivors == null) survivors = targets.slice(0, i);
+    } else if (survivors != null) {
+      survivors.push(targets[i]);
+    }
+  }
+  return survivors || targets;
+}
+
+/**
  * Hostile targets of a settlement, read from the pre-tick relationshipStates + edges.
- * Returns codepoint-sorted target ids the settlement could besiege.
+ * Returns codepoint-sorted target ids the settlement could besiege, excluding pairs
+ * held shut by a live honored non-aggression pact.
  *
  * Lives here rather than inside the opener because it is the OTHER half of the same
  * question this module answers — the set of wars a settlement may open is exactly the
@@ -293,9 +370,10 @@ export function stampDeploymentRecall(state, attackerId, targetId, cause, tick) 
  *   regionalGraph?: { edges?: unknown[] }, relationships?: unknown[],
  *   byId?: { has?: (id: string) => boolean } }} snapshot
  * @param {string|number} fromId
+ * @param {number|null} [tick] current tick; omitted reads snapshot.worldState.tick
  * @returns {string[]}
  */
-export function hostileTargetsOf(snapshot, fromId) {
+export function hostileTargetsOf(snapshot, fromId, tick = null) {
   const states = snapshot?.worldState?.relationshipStates || {};
   /** @type {Set<string>} */
   const out = new Set();
@@ -309,7 +387,8 @@ export function hostileTargetsOf(snapshot, fromId) {
     if (a === String(fromId) && snapshot?.byId?.has?.(b)) out.add(b);
     else if (b === String(fromId) && snapshot?.byId?.has?.(a)) out.add(a);
   }
-  return [...out].sort(codepoint);
+  const sorted = [...out].sort(codepoint);
+  return treatyEligibleWarTargets(snapshot?.worldState, fromId, sorted, tick);
 }
 
 export const WAR_INTENT_TUNING = Object.freeze({ WAR_INTENT_TTL_TICKS });

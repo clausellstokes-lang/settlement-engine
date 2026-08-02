@@ -55,6 +55,7 @@ import { stablePart } from './worldState.js';
 import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
 import { chaosPullOf, fidelityFactor } from './fidelityNoise.js';
 import { rustOf } from './martialReadiness.js';
+import { treatyEligibleWarTargets } from './warIntent.js';
 // W-UPSWING stage 4 — MOTIVE INTEGRATION. The extraction-upswing EV term for the deploy
 // score reads the target's economic worth (conquestFeeds) + the conqueror's OWN
 // corruption conversion leak (corruptionWeb foreignGrip). Both lazy worldPulse leaves.
@@ -347,7 +348,7 @@ function perceivedPeaceExhaustion({ exhaustion, rng, tick, sId, chaosPull, rust 
  * (or any vassal) is besieged/occupied. All sets codepoint-sorted / order-free.
  * @param {any} snapshot @param {any} graph @param {any} sId
  */
-function contextFor(snapshot, graph, sId, active = false) {
+function contextFor(snapshot, graph, sId, active = false, tick = null) {
   const states = snapshot?.worldState?.relationshipStates || {};
   const worldState = snapshot?.worldState;
   const id = String(sId);
@@ -385,8 +386,9 @@ function contextFor(snapshot, graph, sId, active = false) {
   const homeBesieged = beliefAwareBesieged(id, id, graph, worldState, active); // self ⇒ truth
   const vassalBesieged = [...vassalIds].some((vid) => beliefAwareBesieged(id, vid, graph, worldState, active));
 
+  const sortedHostileTargets = [...hostileTargets].sort(codepoint);
   return {
-    hostileTargets: [...hostileTargets].sort(codepoint),
+    hostileTargets: treatyEligibleWarTargets(worldState, id, sortedHostileTargets, tick),
     vassalIds: [...vassalIds].sort(codepoint),
     homeBesieged,
     vassalBesieged,
@@ -553,8 +555,9 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
  * relieve-ally / liberate / hold / attrition / rout / sue-for-peace); we ship the
  * subset that maps onto built levers (defend / deploy / hold / sue_for_peace),
  * scored from aggressiveness, strength vs targets, current war/siege state, vassal
- * status, and economic exhaustion. Returns `[{ move, score }, ...]` sorted by move
- * key (NOT by score) so the softmax input order is canonical and order-free.
+ * status, and economic exhaustion. Returns scored rows sorted by move key (NOT by
+ * score) so the softmax input order is canonical and order-free; the deploy row also
+ * carries the exact best-margin target identity that its score was computed against.
  * M9a: `objective` selects the coefficient set (DEFAULT ⇒ byte-identical Wave-A
  * scoring; a per-archetype set shifts the base-move balance AND adds its non-war
  * levers). A default objective has NO `levers`, so the lever block never runs and
@@ -567,6 +570,7 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
  *   commitmentLoad?: { factorFor: (move: string, targetId?: string|null) => number } | null,
  *   extractionEV?: { adjFor: (targetId: string) => number } | null,
  *   embassy?: { suitFor: (foes: string[]) => number } | null }} args
+ * @returns {Array<{ move:string, score:number, bestTargetId?:string }>}
  */
 function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0, objective = DEFAULT_SCORING_OBJECTIVE, causal = null, coalitionLoad = null, commitmentLoad = null, extractionEV = null, embassy = null }) {
   const sStrength = strengthFor(sId);
@@ -608,18 +612,22 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
     // the best-margin target (bounded ≤ ×(1+WAR_FACTOR_W); ×1 exactly when the
     // gate is dark or no case stands — the dormant expression above is untouched,
     // so byte-identity holds).
-    if (causal && bestTargetId != null) {
-      const warMult = causal.warFor(String(bestTargetId));
+    const warMult = causal && bestTargetId != null
+      ? causal.warFor(String(bestTargetId))
+      : 1;
+    // A treaty block is LEGALITY, not a weak preference. A zero-scored softmax row
+    // still has positive probability, so factor 0 omits deploy from the move space.
+    if (warMult !== 0) {
       if (warMult !== 1) deployScore = clamp01(deployScore * warMult);
+      // W-UPSWING §0.5: the bounded, signed extraction-upswing EV term — what this
+      // conquest BUYS after burden + the conqueror's corruption leak. NULL (⇒ +0) when
+      // the upswing gate is dark, so the dormant expression above is untouched.
+      if (extractionEV && bestTargetId != null) {
+        const adj = extractionEV.adjFor(String(bestTargetId));
+        if (adj !== 0) deployScore = clamp01(deployScore + adj);
+      }
+      scored.deploy = deployScore;
     }
-    // W-UPSWING §0.5: the bounded, signed extraction-upswing EV term — what this
-    // conquest BUYS after burden + the conqueror's corruption leak. NULL (⇒ +0) when
-    // the upswing gate is dark, so the dormant expression above is untouched.
-    if (extractionEV && bestTargetId != null) {
-      const adj = extractionEV.adjFor(String(bestTargetId));
-      if (adj !== 0) deployScore = clamp01(deployScore + adj);
-    }
-    scored.deploy = deployScore;
   }
 
   // sue_for_peace — GATED: S and ALL its vassals must be free (not besieged/
@@ -712,7 +720,9 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
 
   return Object.keys(scored)
     .sort(codepoint)
-    .map((move) => ({ move, score: scored[move] }));
+    .map((move) => move === 'deploy' && bestTargetId != null
+      ? { move, score: scored[move], bestTargetId: String(bestTargetId) }
+      : { move, score: scored[move] });
 }
 
 /**
@@ -735,9 +745,9 @@ function causalReasonLines(entry, label) {
  * INERT marker (no condition, no patch) that still wins the `strategy:<S>`
  * exclusive group and so suppresses the reactive escalation for S — the chooser
  * decided NOT to escalate this tick, with no stray world-state cost.
- * @param {{ move: string, sId: any, item: any, ctx: any, tick: number, exhaustion: number, snapshot: any, strengthFor: (id: any) => number, rng?: RngLike, chaosPull?: number, rust?: number, worldState?: import('./beliefMap.js').BeliefWorldState, beliefActive?: boolean, trueStrengthFor?: ((id: string) => number)|null }} args
+ * @param {{ move: string, bestTargetId?:string|null, sId: any, item: any, ctx: any, tick: number, exhaustion: number, snapshot: any, strengthFor: (id: any) => number, rng?: RngLike, chaosPull?: number, rust?: number, worldState?: import('./beliefMap.js').BeliefWorldState, beliefActive?: boolean, trueStrengthFor?: ((id: string) => number)|null }} args
  */
-function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFor, rng = null, chaosPull = 0, rust = 0, worldState = null, beliefActive = false, trueStrengthFor = null }) {
+function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion, snapshot, strengthFor, rng = null, chaosPull = 0, rust = 0, worldState = null, beliefActive = false, trueStrengthFor = null }) {
   const name = item?.name || item?.settlement?.name || String(sId);
 
   if (move === 'sue_for_peace') {
@@ -811,7 +821,8 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
     // override's `metadata.recallTargetId`), the apply pass deposits it as an ORDER
     // (warIntent.stampWarIntent), and the ONE opener — warDeployment step 4 — reads
     // that order next tick. This module still mints no front and seeds no deployment.
-    const target = ctx.hostileTargets.find((/** @type {any} */ t) => strengthFor(sId) > strengthFor(t)) || ctx.hostileTargets[0];
+    const target = bestTargetId != null ? String(bestTargetId) : null;
+    if (!target) return null;
     // WAVE A misjudgment-as-cause: the chooser committed to an offensive on a
     // BELIEF about the target. If that belief diverges from ground truth beyond
     // the band (a stale strength read, or a hostility the world has left behind),
@@ -838,12 +849,11 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
         ),
       ],
       // APPEND-ONLY key order: `deployTargetId` sits AFTER `misjudgment`, so an
-      // existing metadata bag's serialized key order is untouched. Conditional
-      // (drop-when-empty): a deploy with no resolvable target carries no key, and the
-      // apply-side stamp is a no-op without one.
+      // existing metadata bag's serialized key order is untouched. Target identity
+      // is mandatory for deploy: a malformed row without one returned null above.
       metadata: {
         ...(misjudgment ? { misjudgment } : {}),
-        ...(target ? { deployTargetId: String(target) } : {}),
+        deployTargetId: target,
       },
       condition: {
         archetype: 'army_deployed',
@@ -944,7 +954,7 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
   for (const sId of settlementIds) {
     const item = snapshot?.byId?.get?.(sId);
     if (!item) continue;
-    const ctx = contextFor(snapshot, graph, sId, beliefActive);
+    const ctx = contextFor(snapshot, graph, sId, beliefActive, tick);
     // The observer's belief-sourced strength lookup (self ⇒ truth). Dormant ⇒ the
     // raw ground-truth lookup unchanged (byte-exact).
     const strengthForObs = beliefActive ? makeBeliefStrengthFor(strengthFor, sId, worldState) : strengthFor;
@@ -1046,10 +1056,10 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
       }
     }
     if (idx < 0 || idx >= moves.length) idx = 0;
-    const chosen = moves[idx].move;
+    const chosen = moves[idx];
 
     const candidate = emitMove({
-      move: chosen, sId, item, ctx, tick, exhaustion, snapshot,
+      move: chosen.move, bestTargetId: chosen.bestTargetId, sId, item, ctx, tick, exhaustion, snapshot,
       strengthFor: strengthForObs, rng, chaosPull, rust,
       worldState, beliefActive, trueStrengthFor: strengthFor,
     });

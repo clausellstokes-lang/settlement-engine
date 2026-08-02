@@ -1591,13 +1591,13 @@
   },
   {
     "path": "src/domain/worldPulse/peaceTerms.js",
-    "line": 909,
+    "line": 926,
     "category": "floatInterpolation",
     "snippet": "`A treaty is signed — ${terms.length} term${terms.length === 1 ? '' : 's'} at ${budgetSpent.toFixed(2)} of a ${round4(effectiveBudget).toFixed(2)} budget${mediator ? `, brokered by ${mediator.name}` : ''}.`"
   },
   {
     "path": "src/domain/worldPulse/peaceTerms.js",
-    "line": 909,
+    "line": 926,
     "category": "twoDecimalScore",
     "snippet": "`A treaty is signed — ${terms.length} term${terms.length === 1 ? '' : 's'} at ${budgetSpent.toFixed(2)} of a ${round4(effectiveBudget).toFixed(2)} budget${mediator ? `, brokered by ${mediator.name}` : ''}.`"
   },
@@ -1873,49 +1873,49 @@
   },
   {
     "path": "src/domain/worldPulse/settlementStrategy.js",
-    "line": 276,
+    "line": 277,
     "category": "floatInterpolation",
     "snippet": "`${name} marches on ${targetName} through ${parts.join(' and ')} (confidence ${mis.confidence01.toFixed(2)}) — a misjudgment.`"
   },
   {
     "path": "src/domain/worldPulse/settlementStrategy.js",
-    "line": 276,
+    "line": 277,
     "category": "twoDecimalScore",
     "snippet": "`${name} marches on ${targetName} through ${parts.join(' and ')} (confidence ${mis.confidence01.toFixed(2)}) — a misjudgment.`"
   },
   {
     "path": "src/domain/worldPulse/settlementStrategy.js",
-    "line": 728,
+    "line": 738,
     "category": "floatInterpolation",
     "snippet": "`${label}: ${r.type} (${r.score.toFixed(2)}) — ${r.receipt}`"
   },
   {
     "path": "src/domain/worldPulse/settlementStrategy.js",
-    "line": 728,
+    "line": 738,
     "category": "twoDecimalScore",
     "snippet": "`${label}: ${r.type} (${r.score.toFixed(2)}) — ${r.receipt}`"
   },
   {
     "path": "src/domain/worldPulse/settlementStrategy.js",
-    "line": 767,
+    "line": 777,
     "category": "floatInterpolation",
     "snippet": "`Economic exhaustion ${exhaustion.toFixed(2)} drives ${name} to the table.`"
   },
   {
     "path": "src/domain/worldPulse/settlementStrategy.js",
-    "line": 767,
+    "line": 777,
     "category": "twoDecimalScore",
     "snippet": "`Economic exhaustion ${exhaustion.toFixed(2)} drives ${name} to the table.`"
   },
   {
     "path": "src/domain/worldPulse/settlementStrategy.js",
-    "line": 780,
+    "line": 790,
     "category": "floatInterpolation",
     "snippet": "`A misread of war-bankruptcy — ${driver} distorted the reading (perceived ${perceived.toFixed(2)} vs true ${exhaustion.toFixed(2)}), so the suit came ${perceived > exhaustion ? 'early' : 'late'}.`"
   },
   {
     "path": "src/domain/worldPulse/settlementStrategy.js",
-    "line": 780,
+    "line": 790,
     "category": "twoDecimalScore",
     "snippet": "`A misread of war-bankruptcy — ${driver} distorted the reading (perceived ${perceived.toFixed(2)} vs true ${exhaustion.toFixed(2)}), so the suit came ${perceived > exhaustion ? 'early' : 'late'}.`"
   },
@@ -2137,25 +2137,25 @@
   },
   {
     "path": "src/domain/worldPulse/tradeWar.js",
-    "line": 599,
+    "line": 603,
     "category": "floatInterpolation",
     "snippet": "`Defeated incumbent strength ${defeatedStrength.toFixed(2)} cleared the escalation gate.`"
   },
   {
     "path": "src/domain/worldPulse/tradeWar.js",
-    "line": 599,
+    "line": 603,
     "category": "twoDecimalScore",
     "snippet": "`Defeated incumbent strength ${defeatedStrength.toFixed(2)} cleared the escalation gate.`"
   },
   {
     "path": "src/domain/worldPulse/tradeWar.js",
-    "line": 615,
+    "line": 638,
     "category": "floatInterpolation",
     "snippet": "`Defeated incumbent strength ${defeatedStrength.toFixed(2)} below the escalation gate: peaceful adjustment.`"
   },
   {
     "path": "src/domain/worldPulse/tradeWar.js",
-    "line": 615,
+    "line": 638,
     "category": "twoDecimalScore",
     "snippet": "`Defeated incumbent strength ${defeatedStrength.toFixed(2)} below the escalation gate: peaceful adjustment.`"
   },
@@ -2191,85 +2191,85 @@
   },
   {
     "path": "src/domain/worldPulse/warDeployment.js",
-    "line": 1796,
+    "line": 1799,
     "category": "floatInterpolation",
     "snippet": "`A rusty command ${seededRec.sizingBias > 1 ? 'over' : 'under'}-committed the force (sizing ×${seededRec.sizingBias.toFixed(2)}).`"
   },
   {
     "path": "src/domain/worldPulse/warDeployment.js",
-    "line": 1796,
+    "line": 1799,
     "category": "multiplier",
     "snippet": "`A rusty command ${seededRec.sizingBias > 1 ? 'over' : 'under'}-committed the force (sizing ×${seededRec.sizingBias.toFixed(2)}).`"
   },
   {
     "path": "src/domain/worldPulse/warDeployment.js",
-    "line": 1796,
+    "line": 1799,
     "category": "twoDecimalScore",
     "snippet": "`A rusty command ${seededRec.sizingBias > 1 ? 'over' : 'under'}-committed the force (sizing ×${seededRec.sizingBias.toFixed(2)}).`"
   },
   {
     "path": "src/domain/worldPulse/warDeployment.js",
-    "line": 1801,
+    "line": 1804,
     "category": "floatInterpolation",
     "snippet": "`Thin war-supply degraded the army's kit (deployed quality ×${seededRec.deployedQuality.toFixed(2)}).`"
   },
   {
     "path": "src/domain/worldPulse/warDeployment.js",
-    "line": 1801,
+    "line": 1804,
     "category": "multiplier",
     "snippet": "`Thin war-supply degraded the army's kit (deployed quality ×${seededRec.deployedQuality.toFixed(2)}).`"
   },
   {
     "path": "src/domain/worldPulse/warDeployment.js",
-    "line": 1801,
+    "line": 1804,
     "category": "twoDecimalScore",
     "snippet": "`Thin war-supply degraded the army's kit (deployed quality ×${seededRec.deployedQuality.toFixed(2)}).`"
   },
   {
     "path": "src/domain/worldPulse/warDeployment.js",
-    "line": 1807,
+    "line": 1810,
     "category": "floatInterpolation",
     "snippet": "`Casus belli: ${c.type} (${c.score.toFixed(2)}) — ${c.receipt}`"
   },
   {
     "path": "src/domain/worldPulse/warDeployment.js",
-    "line": 1807,
+    "line": 1810,
     "category": "twoDecimalScore",
     "snippet": "`Casus belli: ${c.type} (${c.score.toFixed(2)}) — ${c.receipt}`"
   },
   {
     "path": "src/domain/worldPulse/warDeployment.js",
-    "line": 2067,
+    "line": 2070,
     "category": "floatInterpolation",
     "snippet": "`Sustained war-exhaustion scar at ${nextScar.toFixed(2)} (non-reverting).`"
   },
   {
     "path": "src/domain/worldPulse/warDeployment.js",
-    "line": 2067,
+    "line": 2070,
     "category": "twoDecimalScore",
     "snippet": "`Sustained war-exhaustion scar at ${nextScar.toFixed(2)} (non-reverting).`"
   },
   {
     "path": "src/domain/worldPulse/warDeployment.js",
-    "line": 2117,
+    "line": 2120,
     "category": "floatInterpolation",
     "snippet": "`War-levy strain accruing at ${decayed.toFixed(2)} (levied again this tick).`"
   },
   {
     "path": "src/domain/worldPulse/warDeployment.js",
-    "line": 2117,
+    "line": 2120,
     "category": "twoDecimalScore",
     "snippet": "`War-levy strain accruing at ${decayed.toFixed(2)} (levied again this tick).`"
   },
   {
     "path": "src/domain/worldPulse/warDeployment.js",
-    "line": 2118,
+    "line": 2121,
     "category": "floatInterpolation",
     "snippet": "`War-exhaustion scar slowly fading at ${decayed.toFixed(2)}.`"
   },
   {
     "path": "src/domain/worldPulse/warDeployment.js",
-    "line": 2118,
+    "line": 2121,
     "category": "twoDecimalScore",
     "snippet": "`War-exhaustion scar slowly fading at ${decayed.toFixed(2)}.`"
   },

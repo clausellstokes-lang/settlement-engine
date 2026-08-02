@@ -270,6 +270,23 @@ Own commit, after WR-0; changes lit-path behavior ⇒ disclosed shift discipline
   it is for) instead of minting a front; the opener then opens it with a real
   deployment, or refuses it through the same gates every war faces.
 
+> **Progress — WR-0c complete, 2026-08-01.** The chooser and opener now share one
+> treaty-eligibility read; a zero war factor removes deploy from the move space;
+> deliberate repudiation is an exact-pair, approval-routed realm act that ends every
+> live term, retains the broken treaty only through its original horizon, and feeds
+> the existing treaty-default casus. The scored deploy target is the emitted and
+> ordered target. Trade escalation now writes a canonical hostile relationship plus
+> a directed intent, never a live front; reciprocal same-tick escalations cannot fork
+> the relationship identity, and applied news addresses both courts. Focused WR-0c
+> and adjacent-contract matrix: 23 files, 367 tests passed; domain-strict remains zero.
+> The whole corpus cleared every deterministic check: 2,111 files passed, one skipped,
+> 22,364 tests passed, 54 skipped. Its only two reds were unrelated 20-second load
+> timeouts; `townScene3dLazy` passed alone (20 passed, 3 skipped) and
+> `magicBufferIntegration` passed alone (8 passed). Production build is green (3,638
+> modules; 311 static route documents). Dist verification cleared 45/47 files and
+> 362/364 tests in parallel; its two town-scene timeouts passed under `VERIFY_DIST=1`
+> alone (23/23 and 2/2). No golden was re-recorded, no flag was lit, and no soak ran.
+
 ### WR-1 — THE TERMINATION READ (amendments C, C2; flag `warTerminationEnabled`)
 **Scope:** the four-term read — live cause vs cost-to-continue vs cost-to-stop,
 all against momentum — plus per-cause dissolution.

@@ -40,6 +40,7 @@ import { calamityEnabled } from '../spatial/calamity.js';
 import { settlementLifecycleActive, forceFoundSteadingEntry } from '../worldPulse/settlementLifecycleKernel.js';
 import { forceAbandonEntry, forceResettleEntry } from '../worldPulse/settlementLifecycleFirstClass.js';
 import { activeSpatialDigest } from '../spatial/distanceRead.js';
+import { repudiableTreatyPairs } from '../worldPulse/treatyBreach.js';
 
 /** The schema-owned loose record alias (the affordanceManifest Mut idiom —
  * the looseness is declared and any-census-counted where it is OWNED,
@@ -122,6 +123,17 @@ export function belligerentOptions(worldState, ctx) {
   return Object.keys(deployments).sort()
     .filter(id => deployments[id] && deployments[id].targetId != null && !deployments[id].recalled)
     .map(id => ({ id, name: nameFor(ctx, id) }));
+}
+
+/** Parties to a still-live non-aggression pact — the exact domain read the
+ * REPUDIATE_TREATY writer validates again at approval time.
+ * @param {Mut} worldState @param {RealmCtx} ctx */
+export function repudiableTreatyPartyOptions(worldState, ctx) {
+  const ids = new Set();
+  for (const pair of repudiableTreatyPairs(worldState, Number(ctx?.tick) || 0)) {
+    ids.add(pair.fromId); ids.add(pair.toId);
+  }
+  return campaignSettlementOptions(ctx).filter(option => ids.has(option.id));
 }
 
 /** The contested settlements of live coup contests — ORDER_INTERVENTION's legal
@@ -236,6 +248,22 @@ export const REALM_MANIFEST = Object.freeze({
       !peaceCausalActive(ws) ? darkWar()
         : gate(belligerentOptions(ws, ctx).length > 0,
           'No court has an army in the field — there is no war to wind down.'),
+  }),
+  REPUDIATE_TREATY: Object.freeze({
+    verb: 'REPUDIATE_TREATY', label: 'Repudiate a treaty', family: 'War',
+    scope: 'realm', lane: 'proposal', module: 'treatyBreach.js',
+    candidateType: 'treaty_breached', authority: 'treaty_breached',
+    dials: [
+      settlementTargetDial('fromId', 'The oathbreaking court'),
+      settlementTargetDial('toId', 'The other signatory'),
+    ],
+    targetsFrom: 'campaignSettlements',
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => repudiableTreatyPartyOptions(ws, ctx),
+    coversVetoCodes: ['treaty_breach_gate_dark', 'treaty_breach_invalid', 'treaty_breach_no_live_nap'],
+    predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
+      !peaceCausalActive(ws) ? darkWar()
+        : gate(repudiableTreatyPairs(ws, Number(ctx?.tick) || 0).length > 0,
+          'No live non-aggression pact remains to repudiate.'),
   }),
 
   // ── The supply-web doctrine pair (W-DOCTRINE-1) ────────────────────────
@@ -442,6 +470,9 @@ export const REALM_MANIFEST = Object.freeze({
 // ── Veto prose (the refusal TEACHES — the module feeds, merged) ──────────────
 /** @type {Record<string, (d: string) => string>} */
 const REALM_VETO_PROSE_LOCAL = {
+  treaty_breach_gate_dark: () => `The causal reasons layer is not active in this campaign. Pick the Dramatic Campaign or Full Simulation preset, or light War and “Causes of war and peace” under ${WAVES_PATH}.`,
+  treaty_breach_invalid: () => 'A treaty repudiation needs two different named signatories.',
+  treaty_breach_no_live_nap: () => 'No live non-aggression pact binds those courts; there is no oath left to repudiate.',
   intervention_gate_dark: () => `The intervention layer is not active in this campaign. Pick the Dramatic Campaign or Full Simulation preset, or light War and “Intervention” under ${WAVES_PATH}.`,
   intervention_no_contest: d => `No coup contest is live at ${d || 'that settlement'} — an intervention needs a brewing coup to join.`,
   intervention_busy: d => `${d || 'That court'} already has an army committed elsewhere (the one-army law).`,

@@ -79,8 +79,9 @@ describe('M10a — authorityFor: the routine major-approval gate', () => {
   });
 
   test('the helpers agree with the routing', () => {
-    expect([...ACTOR_INITIATED_MAJOR_TYPES].sort()).toEqual(['blockade_declared', 'coup_succeeded', 'intervention_ordered', 'strategy_deploy']);
+    expect([...ACTOR_INITIATED_MAJOR_TYPES].sort()).toEqual(['blockade_declared', 'coup_succeeded', 'intervention_ordered', 'strategy_deploy', 'treaty_breached']);
     expect(isActorInitiatedMajorType('strategy_deploy')).toBe(true);
+    expect(isActorInitiatedMajorType('treaty_breached')).toBe(true);
     expect(isActorInitiatedMajorType('conquest')).toBe(false);
     expect(routineMajorApprovalEnabled({ routineMajorApproval: true })).toBe(true);
     expect(routineMajorApprovalEnabled({ routineMajorApproval: 'yes' })).toBe(false); // tolerant: only explicit true

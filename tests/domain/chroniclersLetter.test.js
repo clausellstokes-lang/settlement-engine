@@ -111,13 +111,14 @@ describe('C2 — the letter-local kind → section fallback (the sundry monocult
   it('routes promoted candidateType kinds to their house sections (crier untouched)', () => {
     const l = composeChroniclersLetter({ wizardNews: { currentTick: 9, entries: [
       mk('n1', 'npc_ladder', 'The steward rises'),
+      mk('o1', 'treaty_breached', 'The old pact is torn up'),
       mk('b1', 'field_battle', 'Battle at the ford'),
       mk('h1', 'harvest', 'The harvest comes in'),
       mk('t1', 'tradition_change', 'An old custom bends'),
       mk('r1', 'generosity_refusal', 'The gates stay shut'),
     ] }, lastReadTick: 0 });
     const byId = Object.fromEntries(l.sections.map((s) => [s.id, s.lines.map((x) => x.id)]));
-    expect(byId.courts).toEqual(['n1']);
+    expect(byId.courts).toEqual(['n1', 'o1']);
     expect(byId.wars).toEqual(['b1']);
     expect(byId.trade).toEqual(['h1']);
     expect(byId.traditions).toEqual(['t1']);

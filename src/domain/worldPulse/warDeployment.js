@@ -1681,7 +1681,10 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // when the chooser is dark, resolved otherwise, or the order has expired.
     const marchOrder = warIntentFor(worldState, fromId, tick);
     let chosenTarget = null;
-    for (const targetId of intentTargetOrder(hostileTargetsOf(snapshot, fromId), marchOrder)) {
+    // WR-0c: the shared target census removes any pair protected by an honored
+    // non-aggression term at this tick. Repudiation is a separate, receipted realm
+    // decision; the opener never treats a march order as permission to ignore a pact.
+    for (const targetId of intentTargetOrder(hostileTargetsOf(snapshot, fromId, tick), marchOrder)) {
       // The ordered target is tried FIRST (intentTargetOrder above) and is the one
       // target for which the CONQUEST_MARGIN pre-filter is waived below: that filter
       // stands in for a deliberation the seat has now actually performed. Every HARD

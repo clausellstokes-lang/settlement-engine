@@ -48,6 +48,9 @@ const CAMPAIGN_ALTERING_CANDIDATE_TYPES = new Set([
   // W-NAVY: a navy throwing a blockade across a hostile port's sea approaches (a siege
   // from the water — the siege-initiation twin).
   'blockade_declared',
+  // WR-0c: an actor openly tears up a live non-aggression pact, lifting every
+  // restraint and furnishing the other court with a full treaty-default casus.
+  'treaty_breached',
   // W-LIFECYCLE: a settlement's TERMINAL DEATH — the map itself changes (the entity
   // keeps its digest cell as a remnant, but the living roster shrinks). The DM sees
   // it coming (the extended terminal dwell) and can force or veto.

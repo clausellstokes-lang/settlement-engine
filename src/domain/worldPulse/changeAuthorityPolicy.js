@@ -220,6 +220,14 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     rationale:
       'Every diplomatic relabel built through labelProposal emits a bare applyMode: "proposal". A visible relationship label flip (neutral->rival, allied, vassal rebellion, etc.) is a new premise and is unconditionally offered to the DM. Distinct from relationship_evolution, which is the severity-gated internal-drift path.',
   }),
+  treaty_breached: Object.freeze({
+    authority: 'always-proposal',
+    module: 'realmVerbExecution.js',
+    consultsProposalFlag: false,
+    campaignAltering: true,
+    rationale:
+      'WR-0c: publicly repudiating a live non-aggression pact lifts every treaty restraint and creates a full treaty_default casus. It is an actor-initiated campaign premise and the realm verb lane always stages it as a proposal; no autonomy flag or severity threshold may auto-apply it.',
+  }),
   // ── STRUCTURAL-PROPOSAL: auto by default; one branch routes to proposal via a
   //    proposal-only lever. ───────────────────────────────────────────────────
   strategy_move: Object.freeze({

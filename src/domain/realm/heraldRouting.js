@@ -138,7 +138,7 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   // Intelligence bought or gifted between courts, ledgered through the SAME obligation
   // machinery as the generosity beats above (see the war-section note for the cohort).
   intel_transfer: 'trade',
-  relationship_label_change: 'trade', diplomacy_trade: 'trade', treaty_signed: 'trade',
+  relationship_label_change: 'trade', diplomacy_trade: 'trade', treaty_signed: 'trade', treaty_breached: 'trade',
   // Bare `diplomacy` has exactly ONE producer: the treaty signing beat (peaceTerms.js
   // signingBeat, impactKind 'diplomacy'). Routing law reads impactKind before kind, so
   // this key — not the treaty_signed row above — decides where a signed treaty files.
@@ -212,7 +212,7 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   // realm-verb candidateType literals (realmManifest.js) + realm_verb_${verb} impactKinds,
   // filed by the verb's nature.
   calamity_forced: 'events', steading_forced: 'events',
-  realm_verb_declare_casus: 'war', realm_verb_sue_for_peace: 'war',
+  realm_verb_declare_casus: 'war', realm_verb_sue_for_peace: 'war', realm_verb_repudiate_treaty: 'trade',
   realm_verb_order_supply_raid: 'war', realm_verb_declare_trade_embargo: 'trade',
   realm_verb_order_intervention: 'war', realm_verb_reinforce: 'war', realm_verb_intercept: 'war',
   realm_verb_order_convoy: 'war', realm_verb_declare_blockade: 'war',
@@ -425,6 +425,10 @@ export const KIND_SECTION_DIVERGENCES = Object.freeze(/** @type {Record<string, 
   // the beat's routing keys now agree (JUDGMENT 2026-07-31, vetoable; queued for
   // Fable re-examination in docs/FABLE_VALIDATION_QUEUE.md).
   diplomacy: 'trade',
+  // KIND_SECTION files an oathbreaking under `courts`; the Herald files the
+  // repudiated treaty beside the terms and tribute it extinguishes (JUDGMENT,
+  // vetoable), matching treaty_signed and diplomacy.
+  treaty_breached: 'trade',
   // NB: cause_lifecycle and moral_reckoning are `traditions` keys, and `traditions`
   // is a documented SPLIT (faith | events) — routing them to events is a split
   // outcome, not a divergence, so they are deliberately NOT listed here.

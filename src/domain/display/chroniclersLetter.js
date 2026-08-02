@@ -89,6 +89,7 @@ export const KIND_SECTION = Object.freeze({
   coup_succeeded: 'courts', coup_suppressed: 'courts', faction_government_challenge: 'courts',
   faction_rival_power_contest: 'courts', faction_capture: 'courts', faction_exhaustion: 'courts',
   hierarchy_cascade: 'courts', assize_verdict: 'courts', diplomacy: 'courts',
+  treaty_breached: 'courts',
   vassal_tribute_extraction: 'courts', reconsideration_forced: 'courts',
   commons_gathering: 'courts', commons_petition: 'courts', commons_riot: 'courts',
   npc_goal_culmination: 'courts', npc_goal_rebranch: 'courts', npc_growth: 'courts',

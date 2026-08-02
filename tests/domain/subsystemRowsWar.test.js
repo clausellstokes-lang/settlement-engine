@@ -380,7 +380,10 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     expect(opener).toContain('warIntentFor(worldState, fromId, tick)');
     expect(opener).toContain('siegeArrivalGate(/** @type {{ spatialLedgers?: unknown }} */ (worldState), tick)');
     expect(sourceOf('src/domain/worldPulse/applyWorldPulse.js'))
-      .toContain('state = consumeWarIntent(state, outcome.targetSaveId, tick);');
+      .toContain('state = applyWarIntentOutcome(state, outcome, tick ?? 0);');
+    const intentJoin = sourceOf('src/domain/worldPulse/warIntent.js');
+    expect(intentJoin).toContain("row.candidateType === 'strategy_deploy' && row.ruleFamily === 'stressor'");
+    expect(intentJoin).toContain('next = consumeWarIntent(next, row.targetSaveId == null ? null : String(row.targetSaveId), tick);');
     expect(row.aliveness.stateKeys).toEqual(['deployments', 'occupations', 'warExhaustion', 'warPosture']);
   });
 

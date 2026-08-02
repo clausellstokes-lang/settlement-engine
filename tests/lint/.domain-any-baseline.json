@@ -1,6 +1,6 @@
 {
-  "total": 2216,
-  "totalAny": 2178,
+  "total": 2215,
+  "totalAny": 2177,
   "totalSuppress": 38,
   "files": {
     "src/domain/activeConditions.js": {
@@ -496,7 +496,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/settlementStrategy.js": {
-      "any": 30,
+      "any": 29,
       "suppress": 0
     },
     "src/domain/worldPulse/simulationRules.js": {

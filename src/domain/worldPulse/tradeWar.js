@@ -13,9 +13,9 @@
  *
  * A flip re-points C's primary trade_dependency channel to the winner, stamps a
  * trade-realignment condition, and (confidence-gated) either WINDS the defeated
- * incumbent DOWN (a peaceful cold_war on A↔B) or lets A ESCALATE — A emits a
- * hostility/war_front the war layer picks up next tick (conquest path stays
- * open, never automatic).
+ * incumbent DOWN (a peaceful cold_war on A↔B) or lets A ESCALATE — A turns
+ * the pair hostile and deposits a war intent for the one war opener to judge
+ * next tick (conquest path stays open, never automatic).
  *
  * HARD OVERRIDE — vassalage: if C is a vassal of X and the overlord compels the
  * trade, X wins regardless of the roll. The forced commitment is ROUTED THROUGH
@@ -61,6 +61,7 @@ import { stablePart } from './worldState.js';
 // active morally-loaded institutions penalizes that supplier's trade score. Absent objection
 // ⇒ mult 1 ⇒ byte-identical partner selection (the neutrality interlock the brief names).
 import { effectiveToleranceOf, institutionConscience } from './institutionTolerance.js';
+import { canonicalRelationshipSeed } from './relationshipEdgeSeed.js';
 
 /**
  * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js).
@@ -84,8 +85,8 @@ const FLIP_COOLDOWN_TICKS = 6;
 // FLIP_COOLDOWN_TICKS). Rides the EXISTING tradeWarState ledger (a new lastCoercionTick
 // field on the per-prize entry — no new top-level worldState key).
 const COERCION_RENEWAL_TICKS = 6;
-// Escalation gate: only a CONFIDENT defeated incumbent can open a war
-// (conquest stays reachable but not automatic — most losers wind down).
+// Escalation gate: only a CONFIDENT defeated incumbent can request a march
+// (the one opener still judges it; most losers wind down).
 const ESCALATION_CONFIDENCE = 0.5;
 
 /** @param {string} a @param {string} b @returns {number} */
@@ -576,31 +577,53 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
         const escalates = defeatedStrength >= ESCALATION_CONFIDENCE
           && escalationRng.random() < clamp01(defeatedStrength - ESCALATION_CONFIDENCE + 0.2);
         if (escalates) {
-          // ESCALATE: A opens a war_front toward the winner — the war layer
-          // resolves the siege next tick (conquest stays reachable, not automatic).
-          graphChannels.push(mintDirectedChannel({
-            type: 'war_front',
-            from: defeatedId,
-            to: winnerId,
-            strength: clamp01(0.45 + defeatedStrength * 0.3),
-            confidence: 0.75,
-            explanation: `${nameFor(defeatedId)} escalates the lost trade war against ${nameFor(winnerId)}.`,
-            relationshipKey: `war_front.${stablePart(defeatedId)}.${stablePart(winnerId)}`,
-            source: 'trade_war_escalation',
-            now,
-          }));
-          outcomes.push(conditionOutcome({
-            id: `world_outcome.trade_war_escalation.${prizeId}.${tick}`,
-            archetype: 'war_pressure',
-            targetSaveId: winnerId,
-            severity: clamp01(0.4 + defeatedStrength * 0.2),
-            headline: `${nameFor(defeatedId)} answers lost trade with the sword`,
-            summary: `Defeated in the contest for ${nameFor(buyerId)}'s ${commodityLabelFor(commodityId)} trade, ${nameFor(defeatedId)} opens hostilities against ${nameFor(winnerId)}.`,
-            reasons: [`Defeated incumbent strength ${defeatedStrength.toFixed(2)} cleared the escalation gate.`],
-            tick,
-            sourceEventTargetId: defeatedId,
-            causes: [{ source: defeatedId, effect: 'war_pressure', reason: `${nameFor(defeatedId)} escalated a lost trade war.` }],
-          }));
+          // ESCALATE THROUGH THE ONE OPENER. Hostility makes the pair eligible;
+          // warIntent names the march the trade loser wants. The apply pass owns
+          // both writes and the war layer still decides next tick whether posture,
+          // treaty, one-army, and feasibility gates permit a real deployment.
+          // When the pair had no authored edge, carry a deterministic seed so the
+          // apply pass can establish it before using the ordinary label-change lane.
+          const existingRelationship = relationshipBetween(snapshot, defeatedId, winnerId);
+          const relationshipSeed = existingRelationship
+            ? null
+            : canonicalRelationshipSeed(defeatedId, winnerId);
+          const relationshipKey = existingRelationship
+            ? relationshipKeyFromEdge(existingRelationship.edge)
+            : relationshipSeed?.relationshipKey;
+          if (!relationshipKey) continue;
+          const fromType = existingRelationship?.relState?.relationshipType || 'neutral';
+          outcomes.push({
+            ...conditionOutcome({
+              id: `world_outcome.trade_war_escalation.${prizeId}.${tick}`,
+              archetype: 'war_pressure',
+              targetSaveId: winnerId,
+              severity: clamp01(0.4 + defeatedStrength * 0.2),
+              headline: `${nameFor(defeatedId)} answers lost trade with the sword`,
+              summary: `Defeated in the contest for ${nameFor(buyerId)}'s ${commodityLabelFor(commodityId)} trade, ${nameFor(defeatedId)} opens hostilities against ${nameFor(winnerId)}.`,
+              reasons: [`Defeated incumbent strength ${defeatedStrength.toFixed(2)} cleared the escalation gate.`],
+              tick,
+              sourceEventTargetId: defeatedId,
+              causes: [{ source: defeatedId, effect: 'war_pressure', reason: `${nameFor(defeatedId)} escalated a lost trade war.` }],
+            }),
+            affectedSettlementIds: [String(defeatedId), String(winnerId)],
+            relationshipKey,
+            relationshipPatch: { proposedRelationshipType: 'hostile', trajectory: 'transitioning' },
+            proposalPayload: {
+              kind: 'relationship_label_change',
+              relationshipKey,
+              fromType,
+              toType: 'hostile',
+              reason: `${nameFor(defeatedId)} escalated a lost trade war against ${nameFor(winnerId)}.`,
+            },
+            metadata: {
+              fromSaveId: String(defeatedId),
+              toSaveId: String(winnerId),
+              fromType,
+              toType: 'hostile',
+              warIntent: { fromId: String(defeatedId), targetId: String(winnerId) },
+              ...(relationshipSeed ? { relationshipSeed } : {}),
+            },
+          });
         } else {
           // WIND DOWN: a peaceful economic adjustment — a reversible cold_war
           // strain condition on the defeated incumbent (the market loss bites,

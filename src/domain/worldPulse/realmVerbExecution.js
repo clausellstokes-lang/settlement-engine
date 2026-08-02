@@ -52,6 +52,7 @@ import { settlementLifecycleActive, forceFoundSteading, satellitesOf } from './s
 import { forceAbandonSettlement, forceResettleSettlement } from './settlementLifecycleFirstClass.js';
 import { calamityEnabled } from '../spatial/calamity.js';
 import { realmVerbFor, realmVetoProse } from '../events/realmManifest.js';
+import { repudiateTreaty, repudiableTreatyPairs } from './treatyBreach.js';
 
 /** The one payload kind the applier dispatches on (the siege_initiation idiom). */
 export const REALM_VERB_PAYLOAD_KIND = 'realm_verb_order';
@@ -107,7 +108,7 @@ const nameOf = (/** @type {Mut} */ snapshot, /** @type {unknown} */ id) => {
 /** Which arg names the ACTING settlement, per verb (targetSaveId + the
  * pendingActorMajorFor dedup key — the M10a "acting settlement" convention). */
 const ACTOR_ARG = Object.freeze({
-  DECLARE_CASUS: 'fromId', SUE_FOR_PEACE: 'partyId',
+  DECLARE_CASUS: 'fromId', SUE_FOR_PEACE: 'partyId', REPUDIATE_TREATY: 'fromId',
   ORDER_SUPPLY_RAID: 'aggressorId', DECLARE_TRADE_EMBARGO: 'aggressorId',
   ORDER_INTERVENTION: 'patronId', ORDER_CONVOY: 'ownerId', DECLARE_BLOCKADE: 'ownerId',
   FORCE_RECONSIDERATION: 'targetId', FORCE_CALAMITY: 'targetId',
@@ -121,6 +122,7 @@ function headlineFor(verb, args, snapshot) {
   switch (verb) {
     case 'DECLARE_CASUS': return `${n(args.fromId)} declares a reason for war against ${n(args.toId)}`;
     case 'SUE_FOR_PEACE': return `${n(args.partyId)} sues for peace`;
+    case 'REPUDIATE_TREATY': return `${n(args.fromId)} repudiates its treaty with ${n(args.toId)}`;
     case 'ORDER_SUPPLY_RAID': return `${n(args.aggressorId)} opens a supply-web campaign against ${n(args.targetId)}`;
     case 'DECLARE_TRADE_EMBARGO': return `${n(args.aggressorId)} declares a trade embargo on ${n(args.targetId)}`;
     case 'ORDER_INTERVENTION': return `${n(args.patronId)} commits an army to the contest at ${n(args.targetId)}`;
@@ -163,10 +165,31 @@ export function buildRealmVerbOutcome({ verb, args, worldState, snapshot, tick }
     a.strength = round4(Math.max(1, num(a.strength, Math.max(1, p01 * 100) * (1 + merc.factor))));
     a.motive = String(a.motive || 'dm_order');
   }
+  if (verb === 'REPUDIATE_TREATY') {
+    a.fromId = String(a.fromId ?? '').trim();
+    a.toId = String(a.toId ?? '').trim();
+  }
   const actorId = String(a[/** @type {Record<string, string>} */ (ACTOR_ARG)[verb]] ?? a.targetId ?? '');
+  const treatyParties = verb === 'REPUDIATE_TREATY'
+    ? [...new Set([String(a.fromId ?? ''), String(a.toId ?? '')].filter(Boolean))]
+    : [];
   // The manifest predicate verdict, surfaced for the mint's bounded-by-
   // construction gate (LAW 1). Total: never throws on a dark world.
   const predicate = entry.predicate(worldState, { settlements: asObject(snapshot).settlements || [], tick: nowTick });
+  // The manifest can prove that SOME NAP exists, but its two target dials share
+  // one flat party list. Refuse a cross-pact combination before it reaches the
+  // queue; approval still rechecks the same pair against the then-current world.
+  if (predicate.available && verb === 'REPUDIATE_TREATY') {
+    const fromId = String(a.fromId ?? '');
+    const toId = String(a.toId ?? '');
+    const invalid = !fromId || !toId || fromId === toId;
+    const exact = !invalid && repudiableTreatyPairs(worldState, nowTick)
+      .some(pair => pair.fromId === fromId && pair.toId === toId);
+    if (!exact) {
+      const code = invalid ? 'treaty_breach_invalid' : 'treaty_breach_no_live_nap';
+      return { ok: false, code, prose: realmVetoProse(code) };
+    }
+  }
   return {
     ok: true,
     predicate,
@@ -177,8 +200,10 @@ export function buildRealmVerbOutcome({ verb, args, worldState, snapshot, tick }
       targetSaveId: actorId,
       headline: headlineFor(verb, a, snapshot),
       summary: `A realm order staged from the composer: ${String(entry.label).toLowerCase()}. It applies on approval; the world's own walls still hold.`,
-      severity: entry.candidateType === 'intervention_ordered' || entry.candidateType === 'blockade_declared'
-        || entry.candidateType === 'settlement_terminal_death' ? 0.7 : 0.5,
+      severity: entry.candidateType === 'treaty_breached' ? 1
+        : entry.candidateType === 'intervention_ordered' || entry.candidateType === 'blockade_declared'
+          || entry.candidateType === 'settlement_terminal_death' ? 0.7 : 0.5,
+      ...(treatyParties.length ? { affectedSettlementIds: treatyParties, sourceEventTargetId: String(a.toId ?? '') } : {}),
       reasons: ['Ordered from the realm composer (DM provenance).'],
       applyMode: 'proposal',
       forced: true,
@@ -282,6 +307,22 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
         headlineFor(verb, args, shim),
         `${nameOf(shim, partyId)}'s army is ordered home — the recall resolves through the standing withdrawal next tick.`,
         [partyId, foeId].filter(Boolean), nowTick, now)]);
+    }
+    case 'REPUDIATE_TREATY': {
+      const r = repudiateTreaty(state, { fromId: args.fromId, toId: args.toId, tick: nowTick });
+      if (r.ok !== true) return refused(refuse(r.code, r.detail));
+      // No side-channel orderNews: the standing outcome curation lane emits the
+      // single treaty_breached beat, addressed to both parties by the outcome.
+      // Substitute only its reader prose: the proposal summary truthfully described
+      // a staged order, but approval has now broken the pact and must not repeat the
+      // stale "applies on approval" sentence as an accomplished event.
+      const breakerName = nameOf(shim, args.fromId);
+      const otherName = nameOf(shim, args.toId);
+      return applied(r.worldState, [], null, {
+        ...outcome,
+        summary: `${breakerName} openly broke its pact with ${otherName}. Every promise under it ended, and ${otherName} now has cause to answer the breach.`,
+        reasons: ['The oath was repudiated in public; its restraints no longer bind either court.'],
+      });
     }
     case 'ORDER_SUPPLY_RAID':
     case 'DECLARE_TRADE_EMBARGO': {

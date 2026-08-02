@@ -267,7 +267,7 @@ describe('read-model mechanics', () => {
       'army_homecoming', 'siege_lifted', 'conquest', 'field_battle', 'conflict_pressure',
       'protection_gap', 'coup_succeeded', 'coup_suppressed', 'faction_exhaustion',
       'faction_government_challenge', 'faction_rival_power_contest', 'faction_capture',
-      'hierarchy_cascade', 'authority_instability', 'occupation_lifted', 'occupation_vassalized',
+      'hierarchy_cascade', 'authority_instability', 'occupation_lifted', 'occupation_vassalized', 'treaty_breached',
       'faith_foothold_recruited', 'faith_pact_formed', 'religious_pressure', 'pantheon_ascendancy',
       'pantheon_twilight', 'moral_reckoning', 'belief_misjudgment',
       'stressor_birth_religious_conversion_fracture', 'stressor_birth_religious_pact_betrayal',
@@ -299,6 +299,7 @@ describe('read-model mechanics', () => {
     }
     expect(whatPhrase('')).toBe('unrest');
     expect(whatPhrase(null)).toBe('unrest');
+    expect(whatPhrase('treaty_breached')).toBe('an oath between realms broken');
     // An unknown future token degrades to readable words, never a raw slug.
     expect(whatPhrase('npc_some_future_arc')).toBe('some future arc');
     expect(whatPhrase('utterly_new_beat')).toBe('utterly new beat');
