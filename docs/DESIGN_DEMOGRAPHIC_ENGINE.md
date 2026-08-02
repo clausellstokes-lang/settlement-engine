@@ -548,3 +548,72 @@ Paired check: the B1b small-N stasis medicine re-measured on the same run.
 - **J-P8:** the user exception is total — no engine rule ever refuses or
   relocates a user-placed settlement, matching the user-route immunity law.
   VETO subjects user placements to MIN_SEPARATION warnings (never blocks).
+
+---
+
+## §15 WAVE P5 — PRE-SOAK RECONCILIATION (owner-ordered 2026-08-01: "push them to
+## before soak grid"; architecture by the Fable chair same day; implementation =
+## the external implementer; sequenced WR-0 → P5 → the lighting batch → the grid)
+
+Both items were 2026-08-01 validation escalations with executed evidence. Both are
+DARK today (the demographics flag is in no preset), so both fixes carry ZERO golden
+risk now and land before the flag ever lights — the cheapest possible window. Both
+would corrupt the soak's evidence if left: the desert lock would surface as global
+"tier-promotion flatness" and invite a WRONG global tune for a biome-local
+arithmetic bug; the saturation divergence would make the legacy migration lane
+refuse destinations the density law calls half-empty, distorting the exact
+homeostat the soak exists to grade. Fix the instruments, then run the experiment.
+
+### P5a — THE DESERT UNLOCK (preserve the interlock, keep the desert harshest)
+**The measured defect:** TERRAIN_DENSITY_ADJUST.desert (0.50) × DENSITY_CEILINGS ×
+max public works (×1.24) sits below the NEXT tier's POPULATION_RANGES.min at ALL
+FIVE tier pairs (56<61 · 372<401 · 868<901 · 4650<5001 · 23560<25001), and
+populations equilibrate at 76–83% of bound, so the lock is absolute — a desert
+thorp can never become a hamlet regardless of anything it builds. Desert is the
+ONLY locked terrain; mountain (0.60) locks WITHOUT works and unlocks at max works —
+an elegant, evidently designed interlock. Desert being beyond the works ladder
+contradicts DENSITY_CEILINGS' own stated purpose (demographicsRates.js:139-141).
+**THE RULING (owner-ordered fixed; design vetoable):** put desert ON the interlock
+rather than beyond it — raise TERRAIN_DENSITY_ADJUST.desert to the MINIMAL value
+where maximum works clears every tier pair (the agent's arithmetic says ~0.59;
+the implementer computes the exact minimum from the live tables and takes the
+first value that clears all five, keeping desert STRICTLY below mountain's 0.60
+so the ordering desert-harshest survives). The desert story this encodes is the
+honest one: a pure-desert settlement ascends ONLY at maximum public works —
+cisterns and caravanserais, the Palmyra pattern — while a desert town that never
+builds stays locked forever, which is directive 9's "geographic fate" preserved.
+(A riverside desert settlement already carries the riverside class; this cell is
+the waterless extreme only.)
+**STRUCTURAL PREVENTION (mandatory, the actual point):** a WALKER over
+TERRAIN_DENSITY_ADJUST × DENSITY_CEILINGS × works-max × POPULATION_RANGES
+asserting, for EVERY terrain, max works clears EVERY tier pair — so no future
+band edit can silently re-create a locked biome — plus the ordering pin
+(desert < mountain < … strictly) and the mountain negative arm (locked without
+works) so the interlock property itself is pinned, not just today's values.
+**Discipline:** dark-side band correction pre-first-lighting, recorded here per
+THE PROMISE; dormancy goldens untouched (the flag is lit nowhere); the band
+lands in the §10 table with its flavor sentence so the tuning pass inherits a
+documented value, not a mystery constant.
+
+### P5b — ONE CAPACITY TRUTH (retire the 9,000-person city wall when the engine is lit)
+**The measured divergence:** the legacy migration lane's size-saturation axis
+saturates at SATURATION_POP 9,000 (migrationKernel.js:65-70 — a per-capita
+"pull fades" anchor, not a wall) while DENSITY_CEILINGS puts a city at 38,000 and
+a metropolis at 140,000. A 20k city reads FULL to the legacy lane and half-empty
+to the P2 homeostat. The lanes share no imports; the collision lands exactly at
+the both-flags-lit soak configuration §11b already warns has no golden coverage.
+**THE RULING (vetoable):** when `demographicsEnabled` is lit, the legacy lane's
+size-saturation axis DELEGATES to the engine's own reading — pressure01
+(population / min(K_food, D_tier), the §2b-sanctioned denominator role) via a
+single read-seam `sizeSaturationOf(settlement, world)`; dark, the seam returns
+the legacy pop/9000 formula BYTE-IDENTICALLY. One capacity truth when lit; zero
+behavior change when dark; SATURATION_POP survives only inside the dark arm and
+retires with the legacy lane. NEVER two notions of "full" in a lit world — this
+is the canonical-truth doctrine applied to urban capacity.
+**Pins:** dormancy (dark arm byte-identical, object-identity where the house
+pattern applies); the divergence fixture (a 20k city: legacy arm saturated, lit
+arm ~0.53 of bound — both asserted); the writer/reader spelling pin (the seam
+boots the REAL demographics kernel, never a hand-rolled twin — the recorded
+hazard class); and the §11b both-flags-lit configuration gains its FIRST fenced
+golden as part of this slice (the same-seed shift §11b predicts is captured and
+documented at the moment it becomes real, not discovered by the soak).

@@ -1305,6 +1305,17 @@
 >   the migrationKernel-vs-DENSITY_CEILINGS sibling divergence (reconcile before
 >   the grid runs). Model split this session per owner: Fable = validation +
 >   architecture; Opus 5 = verification; Sol 5.6 = implementation.
+> - ⭐ 2026-08-01 (owner rules the two escalations): BOTH FIXED, BEFORE THE SOAK
+>   GRID — architected as WAVE P5 (DESIGN_DEMOGRAPHIC_ENGINE.md §15): P5a THE
+>   DESERT UNLOCK (desert joins the works interlock at the minimal all-pairs-
+>   clearing adjust, strictly under mountain; a locked-biome walker prevents
+>   recurrence structurally) · P5b ONE CAPACITY TRUTH (the legacy 9,000
+>   saturation axis delegates to pressure01 when demographics is lit,
+>   byte-identical dark; the both-flags-lit config gains its first fenced
+>   golden). THE PRE-SOAK ORDER IS NOW: WR-0 (land the tree + authorized
+>   re-records) → P5 → THE LIGHTING BATCH → the release grid + 300y rerun →
+>   tuning. Both P5 fixes are dark-side today: zero golden risk, proven by pins
+>   before the flag ever lights.
 
 ## The seven directives (owner, verbatim intent)
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism
