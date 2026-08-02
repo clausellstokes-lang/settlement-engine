@@ -81,7 +81,7 @@ a chair is granted or open, and the counter never implies a sale.
   SettlementForge runs"). One surface states the deal; the hall embodies it.
 - Register: the ceremonial gold treatment, token-derived (the A-9 palette
   discipline — grandeur through restraint, no foreign color world); the
-  legibility ladder holds (glance: thirty chairs and how many stand open;
+  legibility ladder holds (glance: how many chairs are held, of thirty;
   sentence: any chair's line; table: the roll).
 
 ## §2b THE GRANDEUR SPEC (owner emphasis: "still make the page more grand" —
@@ -110,7 +110,7 @@ a chair is granted or open, and the counter never implies a sale.
   grandeur through restraint; the no-raw-color lint applies to the hall like
   any surface). No gradients-of-the-week, no glow effects: candlelight, not
   neon.
-- **THE LADDER HOLDS EVEN HERE:** glance — thirty chairs, how many lit;
+- **THE LADDER HOLDS EVEN HERE:** glance — how many chairs are held, of thirty;
   sentence — any plate read aloud; table — the roll as a real, screen-reader-
   honest list beneath the ceremony (the hall is never the only path to the
   facts). Lazy route, zero eager bytes, the artwork under the image-weight

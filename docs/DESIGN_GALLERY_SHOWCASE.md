@@ -497,3 +497,10 @@ sections framework)
 3. The sponsored shelf's name in the house voice ("The Sponsored Shelf" /
    "Patrons of the Realm" / plain "Sponsored") — legal wants plain; voice wants
    world; the label likely needs both ("Sponsored · Patrons of the Realm").
+
+## CHAIR RULING 2026-08-02 (identity fork, sweeper-escalated): the profile-image
+## SINGLE OPT-IN governs the author name AND image from the moment the identity
+## object lands — G-A-1's name-renders-without-consent reading is superseded then.
+## Migration default: any account that ever SET external_name counts as opted in
+## (their action was the consent); unset accounts default private. One consent
+## truth, no surface exceptions.
