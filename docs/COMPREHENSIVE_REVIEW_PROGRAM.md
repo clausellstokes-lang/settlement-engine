@@ -185,6 +185,16 @@ ledger — never from a session digest.
 >   protected, persisted state untouched) / HK-3 theme-aware draws (one-roll budget, disclosed
 >   shift) — architected for Sol against the measured 8.19%/35% repeat baseline; sequenced
 >   HK-1→2→3, HK-2 before HK-3 so the visible cure ships with zero golden motion.
+> - 2026-08-02 (evening, THE CONTENT + PRODUCT TAIL). Under continued full delegation: THE
+>   RECEIPT-POOL CORPUS authored + adversarially verified @ minifold c9493790 (8 annexes, 676
+>   kinds, ~3,000 angle-distinct variants, 284 verify-pass fixes; SP-6 content-depth floor +
+>   phrase-repetition envelope lawed @ 5dca5fcd — variability measured, never assumed); the
+>   TR-2 universality clause @ 34122c46 (economic capacity universal + derived; books earned,
+>   never a birthright); SOL_QUEUE landed @ 67331032 with the terminal phase (soaks/lighting/
+>   tuning/pushes) reassigned to the Fable chair by owner order; THE REALM MAGIC TOGGLE specced
+>   @ 16231a72 (projection not gate; twelve-leak register reproduce-first; magic ≠ faith ruled
+>   vetoable). Sol banked SOL-BANK-1 (nav-flow teardown flake class) per owner order for the
+>   consolidated adversarial pass.
 > - 2026-08-02 (~04:30, THE NIGHT CLOSES WHOLE). CORRECTION PASS COMPLETE: 134 corrections
 >   across 11 docs by 7 agents (six correctors + the coherence sweeper), 20+3 unresolved
 >   forks all chair-ruled (2 routed to owner: annual credit cadence · WR-9 gate reading);
