@@ -45,11 +45,13 @@ a chair is granted or open, and the counter never implies a sale.
   held" is already grand). Open chairs stand honestly open ("Seat
   XXIV stands open — the Hall invites"). Every chair is invitational; there
   is no purchasable class and the hall never implies one.
-- **LINEAGE IS THE GRANDEUR** (and founderLineage.js already exists): a chair
-  carries its history — "Seat IX · held by NAME · first held by NAME" — so a
-  legally-transferred seat deepens the hall instead of eroding it. The chair
-  persists; holders pass through it. This is THE PROMISE applied to patronage:
-  a seat is a seat, forever.
+- **PERMANENCE IS THE GRANDEUR (owner order, same session: seats are NOT
+  traded — that piece is removed entirely):** a chair is bound to its founder
+  PERMANENTLY — "Seat IX · NAME" is a sentence that will never change. One
+  holder per chair, ever. No transfers, no market, no inheritance mechanics —
+  an honor is personal, and the hall's promise is that the roll only ever
+  grows more true. This is THE PROMISE applied to patronage in its strongest
+  form.
 - **THE COVENANT** renders beside the roll: what a founder receives, in the
   house voice, permanent tense ("Everything Cartographer runs, for as long as
   SettlementForge runs"). One surface states the deal; the hall embodies it.
@@ -91,9 +93,14 @@ a chair is granted or open, and the counter never implies a sale.
   entitlement minted without payment — the Stripe webhook is not involved;
   the grant writes the same seat ledger the purchase path writes, one seat
   truth). No payment fields, no checkout theater, for an honor.
-- Post-acceptance, invited seats ride the EXISTING founder-transfer machinery
-  unchanged — including its standing LEGAL SIGN-OFF activation gate; nothing
-  here loosens it.
+- **TRANSFERS ARE ABOLISHED (owner order):** no post-acceptance transfer path
+  exists. RETIREMENT WORK ITEM: the founder-transfer machinery (code-complete,
+  key-inert, never legally activated — migration 160's cases, the transfer
+  flows, founderLineage's transfer arcs) is RETIRED ENTIRELY — ⚠️ the
+  op-retirement cascade checklist applies (the recorded five-frozen-artifacts
+  hazard; dry-run every anchor), and the retirement is its own commit with the
+  capability atlas and any advertising surface swept. The legal sign-off gate
+  becomes moot for founders and is closed as RESOLVED-BY-REMOVAL in the queue.
 
 ## §5 THE PAGE (the pricing card, purchase-free by design)
 - The Founder card STAYS on the pricing page — prestige is the product being
@@ -116,21 +123,23 @@ not as a fallback. No email, no PII, ever, anywhere on the roll. Consent
 withdrawal reverts the chair to numeral-only immediately.
 
 ## §7 PINS (the hall lies never)
-- COUNTER TRUTH: rendered counts equal the seat ledger, pinned (charter
-  remaining + invited held + open = 50, exactly, always).
+- COUNTER TRUTH: rendered counts equal the seat ledger, pinned (held + open
+  = 30, exactly, always).
 - NEVER-SOLD: structural pin — no billing config, checkout branch, or
   entitlement path reaches Founder except the admin grant lane (the negative
   case pins hardest, per house discipline).
 - COPY: no surface says "payment", "buy", "remaining for sale", or a price in
   the same breath as Founder — pinned against the rewritten copy keys.
 - CONSENT: no name renders without its opt-in flag; withdrawal round-trips.
-- LINEAGE: a transfer preserves the chair numeral and appends, never
-  rewrites, the holder history (JSON-round-trip + the transfer fixture).
+- PERMANENCE: no code path reassigns a granted chair's holder (the
+  never-traded structural pin — walk the entitlement writers and assert the
+  absence; the negative case pins hardest).
 
 ## §8 ACTIVATION GATES (unchanged by this design)
-Founder transfers stay legal-gated (the standing memory: code-complete,
-key-inert, LEGAL SIGN-OFF is the activation gate). The invite covenant's
-terms language joins the same legal-review packet as the refund rewrite.
+The founder-transfer lane is RETIRED (owner order — see §4); its legal gate
+closes as resolved-by-removal. The invite covenant's terms language joins the
+same legal-review packet as the refund rewrite (and now states plainly: chairs
+are personal and non-transferable).
 Seat-ledger schema changes (the invited class, invites table) join the
 migration train per deploy law. ⚠️ Build-time check: reconcile with
 src/config/firstHundred.js (an existing early-supporter config whose
