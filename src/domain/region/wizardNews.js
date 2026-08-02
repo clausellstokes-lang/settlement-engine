@@ -82,6 +82,8 @@ const MAX_ENTRIES = 240;
  * @property {string} [source]
  * @property {boolean} [covert]
  * @property {string} [familyId] SP-6 structural template family.
+ * @property {string} [audience] Governed reader audience for authored receipts.
+ * @property {string} [section] Governed Herald desk for authored receipts.
  */
 
 /**
@@ -111,6 +113,8 @@ const MAX_ENTRIES = 240;
  * @property {string} [source]
  * @property {boolean} [covert]
  * @property {string} [familyId]
+ * @property {string} [audience]
+ * @property {string} [section]
  */
 
 /**
@@ -578,6 +582,12 @@ function normalizeEntry(entry, options = {}) {
     // template produced the rendered sentence; changing slot fills cannot disguise
     // a repeated family from the soak instrument.
     ...(familyId ? { familyId } : {}),
+    ...(entry.audience === 'public' || entry.audience === 'dm-only'
+      ? { audience: entry.audience }
+      : {}),
+    ...(entry.section === 'war' || entry.section === 'events'
+      ? { section: entry.section }
+      : {}),
   };
 }
 

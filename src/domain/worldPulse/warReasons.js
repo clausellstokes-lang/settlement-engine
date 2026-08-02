@@ -69,6 +69,10 @@ import { makeOpportunismRead } from './opportunism.js';
 // quadrant. Faith flag dark or either town patronless ⇒ 0 ⇒ byte-identical.
 // One-directional: sacredClaim never imports this module.
 import { makeSacredClaimRead } from './sacredClaim.js';
+// WR-3 lineage_claim + kinship_bond: one durable founding-edge read, projected
+// in both directions. Exact-dark unless lineageClaimEnabled === true.
+import { makeLineageClaimRead } from './lineageClaim.js';
+import { lineageWarTransitionNewsEntries } from './lineageNews.js';
 // D7 THE REFRAME LAYER (DESIGN_SIM_DEPTH_R2 §D7): the reframe interpretation mover runs at the
 // TOP of advanceWarReasons behind its OWN gate (reframeActive), and its dark-aid read feeds the
 // ingratitude_debt casus. reframeKernel is a pure leaf (never imports back — the reasons DAG
@@ -97,6 +101,7 @@ import { warReceipt, pickLine, DECREE_DEFAULT_RECEIPTS } from './eventProse.js';
 import {
   WAR_REASON_TYPES,
   PEACE_REASON_TYPES,
+  DECLARABLE_WAR_REASON_TYPES,
   REASON_MIRRORS,
   isWarReasonType,
 } from './warReasonTaxonomy.js';
@@ -104,7 +109,13 @@ import { buildPatronCounterforceIndex, patronCounterforceFor } from './patronCou
 
 // Compatibility surface: existing reason consumers keep importing from this
 // module while persistence/termination readers can depend on the taxonomy leaf.
-export { WAR_REASON_TYPES, PEACE_REASON_TYPES, REASON_MIRRORS, isWarReasonType };
+export {
+  WAR_REASON_TYPES,
+  PEACE_REASON_TYPES,
+  DECLARABLE_WAR_REASON_TYPES,
+  REASON_MIRRORS,
+  isWarReasonType,
+};
 
 // ── Tuning (bounded named constants — owner-retunable per design §8) ────────
 
@@ -687,6 +698,7 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
   // truth reads inside; both are cheap no-ops when their own substrate is dark).
   const opportunismRead = makeOpportunismRead({ snapshot, worldState: ws });
   const sacredClaimRead = makeSacredClaimRead({ snapshot, worldState: ws });
+  const lineageClaimRead = makeLineageClaimRead({ snapshot, worldState: ws, graph });
 
   // WAVE P4: the REALM's carrying-capacity divergence, measured ONCE per pass rather
   // than per pair (it is a realm reading, and a per-pair recomputation would be the
@@ -722,6 +734,7 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
 
   /** @type {ReasonLedger} */
   const nextLedger = {};
+  const newsEntries = [];
   for (const key of orderedKeys) {
     const { fromId, toId, edge } = /** @type {{ fromId: string, toId: string, edge: Record<string, unknown> }} */ (pairs.get(key));
     const relKey = relationshipKeyFromEdge(edge);
@@ -748,6 +761,8 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
       })
       : null;
 
+    const lineageStanding = lineageClaimRead.lineageStandingOf(fromId, toId);
+    const lineageClaim = lineageClaimRead.lineageClaimOf(fromId, toId);
     const computed = [
       { type: 'grievance', ...scoreGrievance(relState, key) },
       { type: 'revanchism', ...scoreRevanchism(relState, tick, key) },
@@ -802,10 +817,35 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
       // faith flag is dark, when either town names no patron, or when the quadrant is a
       // common-ground one (that is common_rite, on the peace side) ⇒ byte-identical.
       { type: 'sacred_claim', ...sacredClaimRead.sacredClaimOf(fromId, toId) },
+      // WR-3: the durable parent edge becomes a claim only under a live size
+      // inversion. The shared leaf also applies the corroborated-provisioning
+      // counterforce, which wins by returning exact zero.
+      { type: 'lineage_claim', ...lineageClaim },
     ];
 
-    const entry = foldPairReasons(prevLedger?.[key], computed, tick);
+    const previousSuppressionSinceTick = prevLedger?.[key]?.memo?.lineageSuppressionSinceTick;
+    const currentSuppressionSinceTick = lineageClaim.suppressed === true
+      ? (Number.isFinite(previousSuppressionSinceTick) ? Number(previousSuppressionSinceTick) : tick)
+      : undefined;
+    const entry = foldPairReasons(
+      prevLedger?.[key],
+      computed,
+      tick,
+      Number.isFinite(currentSuppressionSinceTick)
+        ? { lineageSuppressionSinceTick: Number(currentSuppressionSinceTick) }
+        : null,
+    );
     if (entry) nextLedger[key] = entry;
+    newsEntries.push(...lineageWarTransitionNewsEntries({
+      snapshot,
+      standing: lineageStanding,
+      claim: lineageClaim,
+      previousReason: prevLedger?.[key]?.reasons?.lineage_claim,
+      currentReason: entry?.reasons?.lineage_claim,
+      previousSuppressionSinceTick,
+      currentSuppressionSinceTick: entry?.memo?.lineageSuppressionSinceTick,
+      tick,
+    }));
   }
 
   // r2 worldpulse-war-military-5: carry forward any pair that holds a LIVE decree but has NO edge
@@ -824,12 +864,12 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
   const nextSerialized = JSON.stringify(hasNext ? nextLedger : null);
   if (prevSerialized === nextSerialized) {
     // No war-reason change — but a reframe transition may still have moved ws this tick.
-    return { worldState: ws, changed: reframeChanged, newsEntries: [] };
+    return { worldState: ws, changed: reframeChanged, newsEntries };
   }
   const nextWorldState = hasNext
     ? setSpatialLedger(ws, 'warReasons', nextLedger)
     : dropSpatialLedger(ws, 'warReasons');
-  return { worldState: nextWorldState, changed: true, newsEntries: [] };
+  return { worldState: nextWorldState, changed: true, newsEntries };
 }
 
 /**
@@ -863,6 +903,7 @@ function pressureBlend(pIndex, id) {
 export const CASUS_VETO_PROSE = Object.freeze({
   casus_gate_dark: 'The causal reasons layer is not active in this campaign. Pick the Dramatic Campaign or Full Simulation preset, or light War and “Causes of war and peace” under Simulation rules → Engine waves.',
   casus_unknown_type: 'That is not a typed reason for war this engine tracks.',
+  casus_engine_derived: 'That cause must arise from the world’s own record. A lineage claim requires a surviving founding edge and a live inversion; decree cannot invent either one.',
   casus_self: 'A court cannot hold a casus belli against itself.',
 });
 
@@ -881,7 +922,11 @@ export function declareCasus(worldState, { fromId, toId, type, severity01 = 0.6,
   if (!peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */(worldState))) {
     return { ok: false, code: 'casus_gate_dark', detail: 'peace-engine gate absent' };
   }
-  if (!WAR_REASON_TYPES.includes(String(type))) {
+  const reasonType = String(type);
+  if (isWarReasonType(reasonType) && !DECLARABLE_WAR_REASON_TYPES.includes(reasonType)) {
+    return { ok: false, code: 'casus_engine_derived', detail: reasonType };
+  }
+  if (!DECLARABLE_WAR_REASON_TYPES.includes(reasonType)) {
     return { ok: false, code: 'casus_unknown_type', detail: String(type) };
   }
   const from = String(fromId);
@@ -894,11 +939,11 @@ export function declareCasus(worldState, { fromId, toId, type, severity01 = 0.6,
   const ledger = /** @type {ReasonLedger | null} */ (getSpatialLedger(worldState, 'warReasons'));
   const prevEntry = ledger?.[key] || null;
   const record = reasonRecord({
-    type: String(type),
+    type: reasonType,
     score,
     tick: Number.isFinite(tick) ? Number(tick) : 0,
-    sinceTick: prevEntry?.reasons?.[String(type)]?.sinceTick,
-    receipt: String(receipt || '').trim() || pickLine(DECREE_DEFAULT_RECEIPTS, `${key}#decree`, { type: String(type), to }),
+    sinceTick: prevEntry?.reasons?.[reasonType]?.sinceTick,
+    receipt: String(receipt || '').trim() || pickLine(DECREE_DEFAULT_RECEIPTS, `${key}#decree`, { type: reasonType, to }),
   });
   // r2 worldpulse-war-military-5: write the decree into a DECREED sub-ledger so the next tick's
   // state-derived fold carries it (max-merged, ramping down) instead of dropping it — `force ≡

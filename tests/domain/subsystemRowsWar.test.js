@@ -1,12 +1,12 @@
 /**
- * subsystemRowsWar.test.js — the fourteen WAR-STACK certification rows.
+ * subsystemRowsWar.test.js — the fifteen WAR-STACK certification rows.
  *
  * A certification row is a CLAIM ABOUT SOURCE: "this module emits these literals,
  * writes these containers, and owns nothing else". An unchecked row rots into
  * fiction the first time a module is renamed, and a fictional row grades
  * UNOBSERVED forever while reading like diligence. So this file does four jobs:
  *
- *   1. SHAPE     the fourteen rules are authored, not deferred, and every row
+ *   1. SHAPE     the fifteen rules are authored, not deferred, and every row
  *                conforms to the registry contract.
  *   2. TRACE     every DECLARED literal is re-derived from the live source, and
  *                every DELIBERATELY UNDECLARED one is held out with an anchored
@@ -46,7 +46,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const sourceOf = (rel) => readFileSync(join(ROOT, rel), 'utf8');
 
 const PARENT = 'warLayerEnabled';
-/** The fourteen rules this lane authors, in registry order. */
+/** The fifteen rules this lane authors, in registry order. */
 const WAR_RULES = Object.freeze([
   'warLayerEnabled',
   'warEconomyDrainEnabled',
@@ -62,6 +62,7 @@ const WAR_RULES = Object.freeze([
   'navalEnabled',
   'peaceEngineEnabled',
   'warTerminationEnabled',
+  'lineageClaimEnabled',
 ]);
 
 // The rows the engine really does AND-gate under the war layer (or, for
@@ -79,6 +80,7 @@ const NESTED_UNDER_PARENT = Object.freeze([
   'warDispositionEnabled',
   'peaceEngineEnabled',
   'warTerminationEnabled',
+  'lineageClaimEnabled',
 ]);
 
 /** The rows that own no vocabulary at all, each with the token its gap note must name. */
@@ -91,6 +93,7 @@ const NO_CHANNEL_ROWS = Object.freeze({
   dispositionChannelsEnabled: 'channel-shape census',
   allyIntelSharingEnabled: 'provenance census',
   warTerminationEnabled: 'decidingTerm',
+  lineageClaimEnabled: 'five lineage familyId values',
 });
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -153,7 +156,7 @@ const WARRING_YEAR = Object.freeze({
 });
 
 describe('war-stack rows — shape and partition', () => {
-  test('all fourteen war-stack rules are authored rather than deferred to a pending list', () => {
+  test('all fifteen war-stack rules are authored rather than deferred to a pending list', () => {
     // Purely positive, on purpose. A bare "not in the pending list" would need an
     // anchor sibling that is ITSELF still pending, and the pending list shrinks
     // under this file as other lanes land rows. The live coverage audit proves the
@@ -165,9 +168,9 @@ describe('war-stack rows — shape and partition', () => {
       registry: SUBSYSTEM_CERTIFICATION_REGISTRY,
       pendingKeys: SUBSYSTEM_CERTIFICATION_PENDING_KEYS,
     });
-    expect(WAR_RULES).toHaveLength(14);
+    expect(WAR_RULES).toHaveLength(15);
     expect(WAR_SUBSYSTEM_ROWS.map((row) => row.rule)).toEqual(WAR_RULES);
-    // Scoped to THIS lane's fourteen. The composed partition's own totality is the
+    // Scoped to THIS lane's fifteen. The composed partition's own totality is the
     // walker's assertion, and this tree is written by parallel sessions, so a
     // sibling lane mid-edit must not red the war lane's proof.
     expect(audit.missing).toEqual([]);
@@ -272,7 +275,7 @@ describe('war-stack rows — shape and partition', () => {
     expect(rowFor('allyIntelSharingEnabled').aliveness.other).toContain('pulseKernel.js:1838');
   });
 
-  test('the eight vocabulary-less rows admit the gap and name the observation that closes it', () => {
+  test('the nine vocabulary-less rows admit the gap and name the observation that closes it', () => {
     for (const [rule, token] of Object.entries(NO_CHANNEL_ROWS)) {
       const row = rowFor(rule);
       expect(row.aliveness.eventTypes, `${rule}`).toEqual([]);
@@ -471,6 +474,34 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     }
   });
 
+  test('the lineage row stays unobserved instead of borrowing shared reason ledgers or reader prose', () => {
+    const row = rowFor('lineageClaimEnabled');
+    expect(row.aliveness.eventTypes).toEqual([]);
+    expect(row.aliveness.moverFamilies).toEqual([]);
+    expect(row.aliveness.stateKeys).toEqual([]);
+    expect(row.soakEvidence).toBe('unobserved');
+    expect(row.expectedTempo).toBe('per_tick');
+    expect(row.module.split(',')).toEqual(expect.arrayContaining([
+      'src/domain/certification/couplingRegistry.js',
+      'src/domain/worldPulse/lineageClaim.js',
+      'src/domain/worldPulse/warReasons.js',
+      'src/domain/worldPulse/peaceReasons.js',
+      'src/domain/worldPulse/eventProse.js',
+    ]));
+    expect(row.aliveness.other).toContain('five lineage familyId values');
+    expect(row.aliveness.other).toContain('spatialLedgers.warReasons');
+    expect(row.aliveness.other).toContain('spatialLedgers.peaceReasons');
+    for (const kind of [
+      'lineage_edge_recorded',
+      'casus_lineage_claim_parent',
+      'casus_lineage_claim_child',
+      'mirror_kinship_bond',
+      'lineage_claim_suppressed',
+    ]) {
+      expect(row.aliveness.other).toContain(kind);
+    }
+  });
+
   test('the naval row declares the sidecar and holds out the news-only literals', () => {
     expect(rowFor('navalEnabled').aliveness.stateKeys).toEqual(['spatialLedgers.navalTransit']);
     const navalKernel = sourceOf('src/domain/worldPulse/navalKernel.js');
@@ -617,7 +648,7 @@ describe('war-stack rows — the verdicts, one field apart', () => {
     }
   });
 
-  test('the eight vocabulary-less rows reach UNOBSERVED and DORMANT, and never ALIVE', () => {
+  test('the nine vocabulary-less rows reach UNOBSERVED and DORMANT, and never ALIVE', () => {
     // A census as rich as any receipt could carry, and a warring year on top: still
     // UNOBSERVED, because none of it is evidence these rows are allowed to claim.
     const rich = receiptV5({

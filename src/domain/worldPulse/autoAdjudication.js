@@ -73,7 +73,11 @@
  *   migrate   — none owed: additive, absent-tolerant.
  */
 import { applyWorldPulseProposal } from './applyWorldPulse.js';
-import { foldUpdatesOntoSaves } from './advanceInterval.js';
+import {
+  foldMemberBirthsOntoCampaign,
+  foldMemberBirthsOntoSaves,
+  foldUpdatesOntoSaves,
+} from './advanceInterval.js';
 import { ENGINE_AUTO_ADJUDICATOR, isEngineAdjudicated } from './adjudicationMark.js';
 
 /**
@@ -231,16 +235,19 @@ export function autoAdjudicateAdvanceProposals({
   // Thread the ADVANCE's committed world (not the pre-advance clone) into the
   // first ruling, exactly as the store would have had the DM clicked Apply the
   // instant the advance returned.
-  let runningCampaign = {
+  let runningCampaign = foldMemberBirthsOntoCampaign({
     ...campaign,
     worldState: result.worldState,
     regionalGraph: result.regionalGraph,
     wizardNews: result.wizardNews,
-  };
+  }, result.memberBirths);
   /** @type {SettlementUpdate[]} */
   const advanceUpdates = Array.isArray(result.settlementUpdates) ? result.settlementUpdates : [];
   /** @type {unknown[]} */
-  let runningSaves = foldUpdatesOntoSaves(saves, advanceUpdates);
+  let runningSaves = foldMemberBirthsOntoSaves(
+    foldUpdatesOntoSaves(saves, advanceUpdates),
+    result.memberBirths,
+  );
   /** id-keyed accumulator (last-write-wins), seeded with the advance's own updates.
    *  @type {Map<string, SettlementUpdate>} */
   const updatesById = new Map(advanceUpdates.map((u) => [String(u.saveId), u]));

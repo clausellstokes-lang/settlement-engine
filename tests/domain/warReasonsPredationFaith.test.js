@@ -36,6 +36,7 @@ import {
 import {
   scoreSacredClaim, scoreCommonRite, faithStandingBetween,
 } from '../../src/domain/worldPulse/sacredClaim.js';
+import { scoreLineageClaim, scoreKinshipBond } from '../../src/domain/worldPulse/lineageClaim.js';
 import { scoreFearOfDominance, scoreBalanceRestored } from '../../src/domain/worldPulse/hegemonyFear.js';
 import {
   buildPatronCounterforceIndex, patronCounterforceFor,
@@ -527,6 +528,18 @@ const SPHERE = [{
   centerId: 'lamb', centerName: 'lamb', strengthShare: 0.9, memberCount: 4,
   members: [{ id: 'x' }], strain: { strainedCount: 3 },
 }];
+const LINEAGE_CLAIM_STANDING = {
+  eligible: true,
+  direction: 'parent_to_child',
+  parentId: 'wolf', childId: 'lamb', parentName: 'wolf', childName: 'lamb',
+  inversion01: 0.7, claimScore01: 0.7, bondScore01: 0, suppression: null,
+};
+const LINEAGE_BOND_STANDING = {
+  ...LINEAGE_CLAIM_STANDING,
+  inversion01: 0,
+  claimScore01: 0,
+  bondScore01: 0.7,
+};
 
 /** @type {Record<string, () => number>} */
 const WAR_WITNESSES = {
@@ -548,6 +561,7 @@ const WAR_WITNESSES = {
   dependency_by_design: () => scoreDependencyByDesign({ design01: 0.8 }).score,
   opportunism: () => scoreOpportunism({ gradient: 0.7, capability01: 1 }).score,
   sacred_claim: () => scoreSacredClaim({ standing: SCHISM_STANDING }).score,
+  lineage_claim: () => scoreLineageClaim({ standing: LINEAGE_CLAIM_STANDING }).score,
 };
 
 /** @type {Record<string, () => number>} */
@@ -567,6 +581,7 @@ const PEACE_WITNESSES = {
   bonds_of_commerce: () => scoreBondsOfCommerce({ bonds01: 0.8 }).score,
   hopelessness: () => scoreHopelessness({ gradient: -0.7 }).score,
   common_rite: () => scoreCommonRite({ standing: BROTHERS_STANDING }).score,
+  kinship_bond: () => scoreKinshipBond({ standing: LINEAGE_BOND_STANDING }).score,
 };
 
 describe('THE DIVERSITY WALKER — every reason CAN win, or this reds', () => {

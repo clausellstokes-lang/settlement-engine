@@ -1,8 +1,9 @@
 /**
  * subsystemRowsWar.js — SUBSYSTEM CERTIFICATION ROWS for the WAR STACK:
  * warLayerEnabled, the eight war-depth sub-flags that ship lit only in the
- * full_simulation ceiling preset, the two declared-dark WR reads
- * (warTerminationEnabled and dispositionChannelsEnabled), and the three
+ * full_simulation ceiling preset, the three declared-dark WR reads
+ * (warTerminationEnabled, dispositionChannelsEnabled, and
+ * lineageClaimEnabled), and the three
  * war-adjacent switches this lane
  * ADOPTED from their home cohorts because they certify as war and nowhere else
  * (navalEnabled and peaceEngineEnabled out of the WAVES cohort, and
@@ -553,6 +554,44 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
         name: 'termination_receipts_are_not_state',
         description: 'The four-term answer is pulse evidence, not a second war ledger, so pulse-history retention never creates a dedicated state twin.',
         check: 'A v5 stateKeys census must never acquire a terminationRead or warTerminationReads key; WR-9 observes the pulse-record decidingTerm fold instead of adding persisted state.',
+      }),
+    ]),
+    soakEvidence: 'unobserved',
+  }),
+  Object.freeze({
+    rule: 'lineageClaimEnabled',
+    title: 'Lineage claim and kinship mirror',
+    module: 'src/domain/certification/couplingRegistry.js,src/domain/worldPulse/lineageClaim.js,src/domain/worldPulse/lineageNews.js,src/domain/worldPulse/warReasons.js,src/domain/worldPulse/peaceReasons.js,src/domain/worldPulse/eventProse.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY. WR-3's five governed kinds are Wizard News
+      // presentation receipts, not selected behavioral outcomes, and the
+      // transition composer owns no exclusive state key. A numeric suppression
+      // onset memo rides the shared warReasons pair entry solely for once-only
+      // narration. Borrowing that shared ledger here would still let any other
+      // casus falsely certify lineage.
+      eventTypes: Object.freeze([]),
+      moverFamilies: Object.freeze([]),
+      stateKeys: Object.freeze([]),
+      other: 'BUILT AND DEFAULT-DARK, WITH NO BORROWED ALIVENESS CHANNEL. lineageClaimEnabled is a virtual key absent from defaults and explicitly false in full_simulation. When deliberately lit beneath the warLayerEnabled plus peaceEngineEnabled reason engine, a real campaign-member parentRef and its live edge feed one shared POP→WAR read: a size inversion materializes lineage_claim, the opposite sign materializes kinship_bond on a live war, and corroborated provisioning defeats the claim. The reason records themselves use the governed lineage prose pools. lineage_edge_recorded, casus_lineage_claim_parent, casus_lineage_claim_child, mirror_kinship_bond and lineage_claim_suppressed now all reach Wizard News with familyId, significance, audience and desk metadata; claim and bond beats fire only on reason materialization, while a numeric onset memo inside the shared warReasons pair makes suppression fire exactly once even when founding support predates the later inversion. None is a selected candidate type or an exclusive state container. spatialLedgers.warReasons and spatialLedgers.peaceReasons are shared by every cause and mirror, so this row may not borrow either key as proof. TO OBSERVE: WR-9 must fold the five lineage familyId values into its story-mix evidence and record a reachable campaign-member parent-child pair denominator beside positive claim, kinship and suppression totals. Until that instrument executes, a false flag is DORMANT_BY_CONFIG and a deliberately true flag is behaviorally implemented but soak-UNOBSERVED.',
+    }),
+    // Once lit, both signs are recomputed from the same live edge each pulse;
+    // presentation emission is reactive, but the causal read itself is per-tick.
+    expectedTempo: 'per_tick',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'one_edge_two_opposite_signs',
+        description: 'Lineage claim and kinship bond read one parent-child evidence record in opposite directions rather than maintaining drifting twins.',
+        check: 'WR-9 must record one shared lineage evidence identity beside both signs and reject a receipt whose claim and bond name different relationship records.',
+      }),
+      Object.freeze({
+        name: 'reader_receipts_are_not_behavioral_aliveness',
+        description: 'Five fully authored Wizard News kinds make the cause legible without masquerading as selected simulation outcomes.',
+        check: 'The story-mix instrument may count lineage familyId values while behavioral eventTypeCounts, mover counts and the subsystem state-key census remain unchanged by prose alone.',
+      }),
+      Object.freeze({
+        name: 'dark_lineage_adds_no_persisted_surface',
+        description: 'Absent and explicit-false lineage flags preserve the pre-WR-3 world and never mint an empty reason, mirror, or lineage sidecar.',
+        check: 'A pre-wire dormancy golden compares absent versus explicit false and requires byte identity across world state, settlements, graph, news and pulse receipts.',
       }),
     ]),
     soakEvidence: 'unobserved',

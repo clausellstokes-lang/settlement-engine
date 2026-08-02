@@ -519,6 +519,15 @@ describe('resettlement (the privileged birth site)', () => {
 
   it('the rebirth writer: status clears, tier restarts at thorp, peakTier RESTARTS, the name dual-writes', () => {
     const remnant = thorp('a', { population: 24, peakTier: 'city', lifecycleStatus: 'relic_ruin', diedAt: 100 });
+    const historicalParentRef = {
+      version: 1,
+      parentId: 'old-parent-save',
+      sourceSatelliteId: 'satellite-old-stones',
+      foundedTick: 20,
+      graduatedTick: 35,
+      birthId: 'birth-old-stones',
+    };
+    remnant.parentRef = historicalParentRef;
     const reborn = applySettlementLifecycleOutcomeToSettlement(remnant, {
       id: 'outcome.resettle.a', targetSaveId: 'a',
       lifecyclePatch: { kind: 'resettle', saveId: 'a', name: 'New a-name' },
@@ -532,6 +541,9 @@ describe('resettlement (the privileged birth site)', () => {
     expect(reborn.config.peakTier).toBe('thorp');              // glory aspired to, not inherited
     expect(reborn._config.peakTier).toBe('thorp');
     expect(reborn.config.lifecycleDiedAtTick).toBeUndefined();
+    // Resettlement revives this existing member; it is not a new birth and may
+    // not rewrite or invent the campaign-member founding receipt.
+    expect(reborn.parentRef).toBe(historicalParentRef);
     expect(reborn.lifecycleHistory.at(-1)).toMatchObject({ event: 'resettled', fromGrade: 'relic_ruin', formerName: 'a-name' });
     const evt = (reborn.history.historicalEvents || []).find((e) => e.campaignEra);
     expect(evt.name).toContain('Raised on the Old Stones');

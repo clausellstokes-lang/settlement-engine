@@ -44,6 +44,7 @@ import {
   accountCampaignBindingDestinations,
   remapAccountSettlementContentProvenance,
 } from '../lib/accountSettlementContentPortability.js';
+import { remapSettlementParentRefForImport } from '../domain/settlementParentRef.js';
 import {
   archiveImportWasConfirmed,
 } from '../lib/customContentCutover.js';
@@ -453,7 +454,7 @@ export const createAccountImportSlice = (set, get) => ({
     // Build oldId→newId so imported campaigns can remap their members. A
     // same-owner failure attempts cleanup; an auth switch cannot safely delete
     // the prior owner's rows and is reported explicitly below.
-    const idMap = {};
+    const idMap = Object.create(null);
     const inserted = [];
     const landed = [];
     try {
@@ -465,6 +466,21 @@ export const createAccountImportSlice = (set, get) => ({
         inserted.push(newId);
         if (oldId) idMap[oldId] = newId;
         landed.push({ ...entry, id: newId, savedAt: Date.now() });
+        assertSessionCurrent();
+      }
+
+      // A parent's fresh save id is unknowable until every create returns. Re-address
+      // the immutable founding receipt in a second, still-owner-fenced pass. The helper
+      // is intentionally dormant when the source parent did not land (including a parent
+      // dropped by the slot cap): its source id remains historical provenance, and this
+      // import path creates no live regional lineage edge from the receipt alone.
+      for (let i = 0; i < landed.length; i += 1) {
+        const current = landed[i];
+        const settlement = remapSettlementParentRefForImport(current.settlement, idMap);
+        if (settlement === current.settlement) continue;
+        assertSessionCurrent();
+        await savesService.update(current.id, { settlement }, saveOptions);
+        landed[i] = { ...current, settlement };
         assertSessionCurrent();
       }
     } catch (err) {

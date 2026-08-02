@@ -90,6 +90,75 @@ export function campaignClockTick(campaign) {
 export function applyWorldPulseResultToState(state, campaign, result, now, authoredEventBySave = null) {
   const persistUpdates = [];
   const updates = Array.isArray(result?.settlementUpdates) ? result.settlementUpdates : [];
+  const births = Array.isArray(result?.memberBirths) ? result.memberBirths : [];
+  /** @type {Map<string, Record<string, unknown>>} */
+  const birthPersistById = new Map();
+  // WR-3: materialize first-class births BEFORE ordinary updates.  A long
+  // interval may update a child on a later tick, and the composed result then
+  // legitimately contains both lanes.  One deterministic id + one upsert
+  // envelope keeps retry and pause/resume idempotent.
+  if (!Array.isArray(campaign.settlementIds)) campaign.settlementIds = [];
+  const memberIds = new Set(campaign.settlementIds.map(String));
+  for (const birth of births) {
+    const saveId = String(birth?.saveId || birth?.save?.id || '');
+    const incoming = birth?.save;
+    if (!saveId || !incoming?.settlement) continue;
+    const incomingBirthId = String(incoming.settlement?.parentRef?.birthId || '');
+    if (!incomingBirthId || incomingBirthId !== String(birth.birthId || '')) {
+      throw new Error(`Invalid lineage member birth envelope for ${saveId}`);
+    }
+    let saveIdx = state.savedSettlements.findIndex(save => String(save.id) === saveId);
+    if (saveIdx !== -1) {
+      const heldBirthId = String(state.savedSettlements[saveIdx]?.settlement?.parentRef?.birthId || '');
+      // Replay may converge only on the SAME child while it is still attached
+      // to THIS campaign.  An unrelated row with the same deterministic id —
+      // or the exact child after a DM deliberately detached/rehomed it — is
+      // user-owned library state, not scratch space for the pulse to reclaim.
+      if (heldBirthId !== incomingBirthId || !memberIds.has(saveId)) {
+        throw new Error(`Lineage member id collision for ${saveId}`);
+      }
+    }
+    let systemState = incoming.campaignState?.systemState || null;
+    try {
+      systemState = deriveSystemState(incoming.settlement);
+    } catch (e) {
+      console.warn('[campaignSlice] deriveSystemState failed for lineage member birth', e);
+    }
+    const campaignState = campaignStateForWorldPulse(
+      state,
+      incoming,
+      systemState,
+      now,
+      result,
+    );
+    const nextSave = {
+      ...incoming,
+      id: saveId,
+      phase: 'canon',
+      settlement: cloneJson(incoming.settlement),
+      campaignState,
+      timestamp: now,
+    };
+    if (saveIdx === -1) {
+      state.savedSettlements.push(nextSave);
+      saveIdx = state.savedSettlements.length - 1;
+    } else {
+      state.savedSettlements[saveIdx] = {
+        ...state.savedSettlements[saveIdx],
+        ...nextSave,
+      };
+    }
+    if (!memberIds.has(saveId)) {
+      memberIds.add(saveId);
+      campaign.settlementIds.push(saveId);
+    }
+    const persist = {
+      saveId,
+      createSave: cloneJson(state.savedSettlements[saveIdx]),
+    };
+    persistUpdates.push(persist);
+    birthPersistById.set(saveId, persist);
+  }
   // Crisis-triple sync (Wave 8 #4 — the asymmetry the D-wave deferred, owner
   // decision: SYNC IT): roaming stressors the pulse resolved ORGANICALLY
   // wind down their origin settlement's local representations — the stress
@@ -149,11 +218,16 @@ export function applyWorldPulseResultToState(state, campaign, result, now, autho
       state.editedAt = now;
     }
 
-    persistUpdates.push({
-      saveId: save.id,
-      settlement: cloneJson(nextSettlement),
-      campaignState: cloneJson(campaignState),
-    });
+    const birthPersist = birthPersistById.get(String(save.id));
+    if (birthPersist) {
+      birthPersist.createSave = cloneJson(nextSave);
+    } else {
+      persistUpdates.push({
+        saveId: save.id,
+        settlement: cloneJson(nextSettlement),
+        campaignState: cloneJson(campaignState),
+      });
+    }
   }
 
   campaign.worldState = ensureWorldState(result.worldState, campaign);

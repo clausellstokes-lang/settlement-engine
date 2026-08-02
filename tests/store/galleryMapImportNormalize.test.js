@@ -44,6 +44,7 @@ vi.mock('../../src/lib/analytics.js', () => ({
 }));
 
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
+import { saves as savesService } from '../../src/lib/saves.js';
 
 function makeStore() {
   return create(immer((set, get, api) => ({
@@ -54,7 +55,12 @@ function makeStore() {
   })));
 }
 
-beforeEach(() => { fetchGalleryMap.mockReset(); });
+beforeEach(() => {
+  vi.clearAllMocks();
+  fetchGalleryMap.mockReset();
+  savesService.save.mockResolvedValue('new-save-id');
+  savesService.update.mockResolvedValue();
+});
 afterEach(() => { delete global.fetch; });
 
 describe('importGalleryMapWithCampaign normalizes each member clone (SB1)', () => {
@@ -128,5 +134,81 @@ describe('importGalleryMapWithCampaign normalizes each member clone (SB1)', () =
     expect(saved.config.cultDeitySnapshots).toBeUndefined();
     expect(saved.config.faithProfile).toBeUndefined();
     expect(saved.config._seed).toBeUndefined();
+  });
+
+  test('remaps parentRef only when both shared campaign members land', async () => {
+    savesService.save
+      .mockResolvedValueOnce('new-parent-id')
+      .mockResolvedValueOnce('new-child-id');
+    const sourceRef = {
+      version: 1,
+      parentId: 'old-parent-id',
+      sourceSatelliteId: 'satellite-gallery',
+      foundedTick: 30,
+      graduatedTick: 48,
+      birthId: 'birth-gallery',
+      futureEvidence: { seal: 'blue' },
+    };
+    fetchGalleryMap.mockResolvedValue({
+      kind: 'map_with_campaign',
+      name: 'Lineage Realm',
+      members: [
+        {
+          old_id: 'old-parent-id',
+          name: 'Parent',
+          tier: 'town',
+          settlement: { name: 'Parent', tier: 'town' },
+        },
+        {
+          old_id: 'old-child-id',
+          name: 'Child',
+          tier: 'village',
+          settlement: { name: 'Child', tier: 'village', parentRef: sourceRef },
+        },
+      ],
+      mapState: { placements: {} },
+    });
+
+    const store = makeStore();
+    const campaignId = await store.getState().importGalleryMapWithCampaign('lineage');
+    const child = store.getState().savedSettlements.find(s => s.id === 'new-child-id');
+
+    expect(child.settlement.parentRef).toEqual({ ...sourceRef, parentId: 'new-parent-id' });
+    expect(savesService.update).toHaveBeenCalledWith(
+      'new-child-id',
+      { settlement: expect.objectContaining({ parentRef: { ...sourceRef, parentId: 'new-parent-id' } }) },
+      expect.objectContaining({ expectedOwnerId: 'u1' }),
+    );
+    const campaign = store.getState().campaigns.find(c => c.id === campaignId);
+    expect(campaign.regionalGraph?.edges || []).toEqual([]);
+  });
+
+  test('keeps parentRef as history when the shared parent is absent', async () => {
+    const sourceRef = {
+      version: 1,
+      parentId: 'outside-this-share',
+      sourceSatelliteId: 'satellite-gallery-orphan',
+      foundedTick: 3,
+      graduatedTick: 5,
+      birthId: 'birth-gallery-orphan',
+    };
+    fetchGalleryMap.mockResolvedValue({
+      kind: 'map_with_campaign',
+      name: 'Historical Realm',
+      members: [{
+        old_id: 'old-child-id',
+        name: 'Child',
+        tier: 'village',
+        settlement: { name: 'Child', tier: 'village', parentRef: sourceRef },
+      }],
+      mapState: { placements: {} },
+    });
+
+    const store = makeStore();
+    await store.getState().importGalleryMapWithCampaign('historical-lineage');
+    const child = store.getState().savedSettlements.find(s => s.id === 'new-save-id');
+
+    expect(child.settlement.parentRef).toEqual(sourceRef);
+    expect(savesService.update).not.toHaveBeenCalled();
   });
 });

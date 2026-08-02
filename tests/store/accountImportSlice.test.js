@@ -23,11 +23,12 @@ import { immer } from 'zustand/middleware/immer';
 let idSeq = 0;
 const saveMock = vi.fn(() => Promise.resolve(`fresh-${++idSeq}`));
 const deleteMock = vi.fn(() => Promise.resolve());
+const updateMock = vi.fn(() => Promise.resolve());
 vi.mock('../../src/lib/saves.js', () => ({
   saves: {
     save: (...a) => saveMock(...a),
     delete: (...a) => deleteMock(...a),
-    update: vi.fn(() => Promise.resolve()),
+    update: (...a) => updateMock(...a),
     isConfigured: false,
   },
 }));
@@ -271,6 +272,8 @@ beforeEach(() => {
   saveMock.mockImplementation(() => Promise.resolve(`fresh-${++idSeq}`));
   deleteMock.mockReset();
   deleteMock.mockResolvedValue();
+  updateMock.mockReset();
+  updateMock.mockResolvedValue();
 });
 
 describe('importAccountData — gating + fail-closed', () => {
@@ -416,6 +419,68 @@ describe('importAccountData — campaigns', () => {
     expect(camp.settlementIds.every(id => id.startsWith('fresh-'))).toBe(true);
   });
 
+  test('remaps a child parentRef when both campaign members import', async () => {
+    const sourceRef = {
+      version: 1,
+      parentId: 'old-parent',
+      sourceSatelliteId: 'satellite-11',
+      foundedTick: 80,
+      graduatedTick: 96,
+      birthId: 'birth-11',
+      futureEvidence: { charter: 'kept' },
+    };
+    const store = makeStore();
+    const res = await store.getState().importAccountData(fileFor({
+      settlements: [
+        { ...SETTLEMENT('Parent'), id: 'old-parent' },
+        {
+          ...SETTLEMENT('Child'),
+          id: 'old-child',
+          settlement: { name: 'Child', tier: 'village', parentRef: sourceRef },
+        },
+      ],
+      campaigns: [{ id: 'old-camp', name: 'Lineage Realm', settlementIds: ['old-parent', 'old-child'] }],
+    }));
+
+    expect(res.ok).toBe(true);
+    const child = store.getState().savedSettlements.find(s => s.name === 'Child');
+    expect(child.settlement.parentRef).toEqual({ ...sourceRef, parentId: 'fresh-1' });
+    expect(updateMock).toHaveBeenCalledWith(
+      'fresh-2',
+      { settlement: expect.objectContaining({ parentRef: { ...sourceRef, parentId: 'fresh-1' } }) },
+      expect.objectContaining({ expectedOwnerId: 'IMPORTER-ID' }),
+    );
+    const campaign = store.getState().campaigns[0];
+    expect(campaign.regionalGraph?.edges || []).toEqual([]);
+  });
+
+  test('keeps an absent parent as historical provenance without fabricating a live member', async () => {
+    const sourceRef = {
+      version: 1,
+      parentId: 'parent-not-imported',
+      sourceSatelliteId: 'satellite-orphan',
+      foundedTick: 8,
+      graduatedTick: 13,
+      birthId: 'birth-orphan',
+    };
+    const store = makeStore();
+    const res = await store.getState().importAccountData(fileFor({
+      settlements: [{
+        ...SETTLEMENT('Historical Child'),
+        id: 'old-child',
+        settlement: { name: 'Historical Child', tier: 'village', parentRef: sourceRef },
+      }],
+      campaigns: [{ id: 'old-camp', name: 'Orphan History', settlementIds: ['old-child'] }],
+    }));
+
+    expect(res.ok).toBe(true);
+    const child = store.getState().savedSettlements.find(s => s.name === 'Historical Child');
+    expect(child.settlement.parentRef).toEqual(sourceRef);
+    expect(updateMock).not.toHaveBeenCalled();
+    expect(store.getState().campaigns[0].settlementIds).toEqual(['fresh-1']);
+    expect(store.getState().campaigns[0].regionalGraph?.edges || []).toEqual([]);
+  });
+
   test('non-premium skips campaigns with a notice', async () => {
     const store = makeStore({
       auth: { user: { id: 'IMPORTER-ID' }, tier: 'free', role: 'user' },
@@ -499,6 +564,15 @@ describe('importAccountData — export→import round-trip', () => {
     const harborSettlement = {
       name: 'Harbor',
       tier: 'town',
+      parentRef: {
+        version: 1,
+        parentId: 'a-2',
+        sourceSatelliteId: 'satellite-export-round-trip',
+        foundedTick: 10,
+        graduatedTick: 22,
+        birthId: 'birth-export-round-trip',
+        futureEvidence: { charterSeal: 'green-wax' },
+      },
       institutions: [{
         name: currentContent.name,
         source: 'custom',
@@ -611,6 +685,13 @@ describe('importAccountData — export→import round-trip', () => {
     const harbor = store.getState().savedSettlements.find(
       settlement => settlement.name === 'Harbor',
     );
+    const ridge = store.getState().savedSettlements.find(
+      settlement => settlement.name === 'Ridge',
+    );
+    expect(harbor.settlement.parentRef).toEqual({
+      ...harborSettlement.parentRef,
+      parentId: ridge.id,
+    });
     expect(harbor.settlement.customContentProvenance).toMatchObject({
       scope: 'campaign',
       bindingHash: camp.contentBinding.bindingHash,

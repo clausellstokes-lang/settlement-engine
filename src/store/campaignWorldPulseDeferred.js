@@ -462,12 +462,45 @@ function advanceDepthOf(state, campaignId) {
  * restore semantics can never drift. Mutates `state`/`campaign`, appends the
  * save writes to `persistUpdates`, returns nothing.
  */
-function restorePulseSnapshotOnDraft(state, campaign, snapshot, stamp, persistUpdates) {
+function restorePulseSnapshotOnDraft(
+  state,
+  campaign,
+  snapshot,
+  stamp,
+  persistUpdates,
+  deleteSaveIds,
+) {
   // Campaign world, topology, and news are one undo unit.
   campaign.worldState = ensureWorldState(snapshot.worldState, campaign);
   campaign.regionalGraph = ensureRegionalGraph(snapshot.regionalGraph, { now: stamp });
   campaign.wizardNews = ensureWizardNewsFeed(snapshot.wizardNews, { now: stamp });
   campaign.updatedAt = stamp;
+
+  // WR-3 birth inverse: remove only a still-attached save carrying the exact
+  // birth token this snapshot says the advance created.  A child detached or
+  // rehomed since then is user-owned current state and is deliberately left
+  // alone, matching the existing "detached saves are not rewound" doctrine.
+  let removedActiveBirth = false;
+  const attached = new Set((campaign.settlementIds || []).map(String));
+  const removable = new Set();
+  for (const born of Array.isArray(snapshot.memberBirths) ? snapshot.memberBirths : []) {
+    const saveId = String(born?.saveId || '');
+    const birthId = String(born?.birthId || '');
+    if (!saveId || !birthId || !attached.has(saveId)) continue;
+    const save = state.savedSettlements.find(item => String(item.id) === saveId);
+    if (String(save?.settlement?.parentRef?.birthId || '') !== birthId) continue;
+    removable.add(saveId);
+    deleteSaveIds.push(saveId);
+    if (state.activeSaveId != null && String(state.activeSaveId) === saveId) {
+      removedActiveBirth = true;
+    }
+  }
+  if (removable.size) {
+    campaign.settlementIds = (campaign.settlementIds || [])
+      .filter(id => !removable.has(String(id)));
+    state.savedSettlements = state.savedSettlements
+      .filter(save => !removable.has(String(save.id)));
+  }
 
   const memberIds = new Set((campaign.settlementIds || []).map(String));
   // Membership is read at undo time. A save detached since the snapshot must
@@ -490,6 +523,28 @@ function restorePulseSnapshotOnDraft(state, campaign, snapshot, stamp, persistUp
       settlement: cloneJson(restoredSettlement),
       campaignState: cloneJson(restoredCampaignState),
     });
+  }
+
+  if (removedActiveBirth) {
+    const fallbackId = snapshot.active?.saveId != null
+      ? String(snapshot.active.saveId)
+      : null;
+    state.activeSaveId = fallbackId && memberIds.has(fallbackId)
+      ? fallbackId
+      : null;
+    if (state.activeSaveId == null) {
+      // The active view pointed at the child we just deleted and there is no
+      // still-attached pre-advance member to restore.  Clear the projection as
+      // one unit; leaving the deleted settlement behind under a null id makes
+      // later draft edits operate on a ghost library row.
+      state.settlement = null;
+      state.systemState = null;
+      state.eventLog = [];
+      state.phase = 'draft';
+      state.locks = {};
+      state.canonizedAt = null;
+      state.lastExportAt = null;
+    }
   }
 
   if (state.activeSaveId != null) {
@@ -557,6 +612,7 @@ export async function runUndoLastPulse({
 }) {
   if (!isSessionCurrent() || get().isAdvanceInFlight(campaignId)) return false;
   const persistUpdates = [];
+  const deleteSaveIds = [];
   let campaignPersist = null;
   let didUndo = false;
   // Restore every coupled store projection and capture its persistence work in
@@ -581,7 +637,14 @@ export async function runUndoLastPulse({
     const snapshot = index === -1 ? (parked ? cloneJson(parked) : null) : stack[index];
     if (!snapshot) return;
     const stamp = new Date().toISOString();
-    restorePulseSnapshotOnDraft(state, campaign, snapshot, stamp, persistUpdates);
+    restorePulseSnapshotOnDraft(
+      state,
+      campaign,
+      snapshot,
+      stamp,
+      persistUpdates,
+      deleteSaveIds,
+    );
 
     if (index !== -1) {
       // Pop exactly the restored entry; older snapshots remain for stepwise undo.
@@ -619,6 +682,7 @@ export async function runUndoLastPulse({
     result: didUndo,
     campaignPersist,
     persistUpdates,
+    deleteSaveIds,
     campaignId,
     isSessionCurrent,
   });
@@ -652,6 +716,7 @@ export async function runUndoLastProposalApply({
   // (undoLastPulse stays the documented abandon path for a pause; this is not.)
   if (get().getPausedAdvance(campaignId)) return false;
   const persistUpdates = [];
+  const deleteSaveIds = [];
   let campaignPersist = null;
   let didUndo = false;
   // Same one-producer discipline as runUndoLastPulse: every coupled projection
@@ -683,7 +748,14 @@ export async function runUndoLastProposalApply({
     const campaign = findActiveCampaign(state.campaigns, campaignId);
     if (!campaign) return;
     const stamp = new Date().toISOString();
-    restorePulseSnapshotOnDraft(state, campaign, snapshot, stamp, persistUpdates);
+    restorePulseSnapshotOnDraft(
+      state,
+      campaign,
+      snapshot,
+      stamp,
+      persistUpdates,
+      deleteSaveIds,
+    );
 
     // Pop exactly the restored entry; older proposal snapshots remain for a
     // stepwise walk-back. pulseUndoStack is untouched by construction.
@@ -697,6 +769,7 @@ export async function runUndoLastProposalApply({
     result: didUndo,
     campaignPersist,
     persistUpdates,
+    deleteSaveIds,
     campaignId,
     isSessionCurrent,
   });

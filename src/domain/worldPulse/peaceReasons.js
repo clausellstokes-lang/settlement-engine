@@ -55,6 +55,8 @@ import { makeOpportunismRead } from './opportunism.js';
 // common_rite — the mirror of sacred_claim, off the SAME closed faith×alignment quadrant.
 // 0 when the faith flag is dark or either town names no patron ⇒ byte-identical.
 import { makeSacredClaimRead } from './sacredClaim.js';
+import { makeLineageClaimRead } from './lineageClaim.js';
+import { lineagePeaceTransitionNewsEntries } from './lineageNews.js';
 // D7 (DESIGN_SIM_DEPTH_R2 §D7): the two reframe peace mirrors — debt_forgiven (aid re-read as a
 // gift again) + bonds_of_commerce (the trade tie re-read as a binding mutual commerce). Pure
 // reads over THIS tick's reframe ledger (written by advanceWarReasons, which runs first). 0 when
@@ -406,6 +408,7 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
   // mover builds, so both sides of each mirror come off one reading.
   const opportunismRead = makeOpportunismRead({ snapshot, worldState });
   const sacredClaimRead = makeSacredClaimRead({ snapshot, worldState });
+  const lineageClaimRead = makeLineageClaimRead({ snapshot, worldState, graph: liveGraph });
 
   // The live war pairs, both directions, codepoint-ordered.
   /** @type {Map<string, { partyId: string, foeId: string }>} */
@@ -438,6 +441,7 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
 
   /** @type {import('./warReasons.js').ReasonLedger} */
   const nextLedger = {};
+  const newsEntries = [];
   for (const key of orderedKeys) {
     const { partyId, foeId } = /** @type {{ partyId: string, foeId: string }} */ (pairs.get(key));
 
@@ -487,6 +491,8 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
     // Realignment: a common third attacker on both, or distinct thirds on each.
     const third = thirdThreatRead(deployments, liveGraph, partyId, foeId);
 
+    const lineageStanding = lineageClaimRead.lineageStandingOf(partyId, foeId);
+    const kinshipBond = lineageClaimRead.kinshipBondOf(partyId, foeId);
     const computed = [
       { type: 'exhaustion', ...scoreExhaustion({ scar01: Number(warExhaustion[partyId]) || 0 }, key) },
       { type: 'belief_convergence', ...scoreBeliefConvergence({ marginA, marginB }, key) },
@@ -524,22 +530,33 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
       // COMMON RITE: the two courts already stand on one floor. Distinct from `mediation`,
       // which is a THIRD party standing between them.
       { type: 'common_rite', ...sacredClaimRead.commonRiteOf(partyId, foeId) },
+      // WR-3: the peace mirror is the same surviving founding-edge and inversion
+      // read as lineage_claim. Corroborated care restores the bond strongly
+      // enough to defeat the claim; no second evidence model can drift here.
+      { type: 'kinship_bond', ...kinshipBond },
     ];
 
     const entry = foldPairReasons(prevLedger?.[key], computed, tick, memo);
     if (entry) nextLedger[key] = entry;
+    newsEntries.push(...lineagePeaceTransitionNewsEntries({
+      snapshot,
+      standing: lineageStanding,
+      previousReason: prevLedger?.[key]?.reasons?.kinship_bond,
+      currentReason: entry?.reasons?.kinship_bond,
+      tick,
+    }));
   }
 
   const hasNext = Object.keys(nextLedger).length > 0;
   const prevSerialized = JSON.stringify(prevLedger || null);
   const nextSerialized = JSON.stringify(hasNext ? nextLedger : null);
   if (prevSerialized === nextSerialized) {
-    return { worldState, changed: false, newsEntries: [] };
+    return { worldState, changed: false, newsEntries };
   }
   const nextWorldState = hasNext
     ? setSpatialLedger(worldState, 'peaceReasons', nextLedger)
     : dropSpatialLedger(worldState, 'peaceReasons');
-  return { worldState: nextWorldState, changed: true, newsEntries: [] };
+  return { worldState: nextWorldState, changed: true, newsEntries };
 }
 
 // ── Internal reads ───────────────────────────────────────────────────────────

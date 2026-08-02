@@ -88,6 +88,7 @@ export const WAR_CAUSE_DISSOLUTION = Object.freeze({
   dependency_by_design: 'live_reason_absent',
   opportunism: 'weakness_or_patron_changed',
   sacred_claim: 'patron_anchor_changed',
+  lineage_claim: 'lineage_edge_or_living_child_changed',
 });
 
 /** Closed reader-language clauses for a casus that no longer survives its live read. @type {Readonly<Record<string, string>>} */
@@ -105,6 +106,7 @@ const DISSOLVED_CAUSE_PROSE = Object.freeze({
   dependency_by_design: 'the market leash that raised the banners has broken',
   opportunism: 'the court no longer sees an undefended prize',
   sacred_claim: 'a god named when the banners rose is no longer worshipped from the same throne',
+  lineage_claim: 'the living family edge that raised the banners no longer supports the claim',
 });
 
 /** Closed, number-free peace clauses for the WR-1 reader surface. */
@@ -122,6 +124,7 @@ const TERMINATION_PEACE_PROSE = Object.freeze({
   bonds_of_commerce: 'Shared markets bind both courts to a peace neither can cheaply break.',
   hopelessness: 'The court no longer believes victory lies down this road.',
   common_rite: 'A shared rite offers both courts ground on which to stand.',
+  kinship_bond: 'The surviving family bond gives both courts a reason to step back.',
 });
 
 /** Closed qualitative projection used by every persisted term. */

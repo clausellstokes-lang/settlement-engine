@@ -26,7 +26,7 @@
  * REALM_MANIFEST_LAZY_SENTINEL. @enforced-by tests/build/vendorPdfLazy.test.js.
  */
 
-import { peaceCausalActive, WAR_REASON_TYPES, CASUS_VETO_PROSE } from '../worldPulse/warReasons.js';
+import { peaceCausalActive, DECLARABLE_WAR_REASON_TYPES, CASUS_VETO_PROSE } from '../worldPulse/warReasons.js';
 import { PEACE_VETO_PROSE } from '../worldPulse/peaceReasons.js';
 import { supplyWebWarfareActive, WEBWAR_VETO_PROSE } from '../worldPulse/supplyWebWarfare.js';
 import {
@@ -225,7 +225,7 @@ export const REALM_MANIFEST = Object.freeze({
     dials: [
       settlementTargetDial('fromId', 'The aggrieved court'),
       settlementTargetDial('toId', 'Against'),
-      enumDial('type', [...WAR_REASON_TYPES], WAR_REASON_TYPES[0], 'The typed grievance'),
+      enumDial('type', [...DECLARABLE_WAR_REASON_TYPES], DECLARABLE_WAR_REASON_TYPES[0], 'The typed grievance'),
       bandDial('severity01', 'Severity', REALM_SEVERITY_VALUES, 'moderate'),
     ],
     targetsFrom: 'campaignSettlements',

@@ -21,7 +21,8 @@
 import { describe, it, expect } from 'vitest';
 
 import {
-  declareCasus, CASUS_VETO_PROSE, warReasonsFor, warReasonFactor, REASON_TUNING, WAR_REASON_TYPES, advanceWarReasons,
+  declareCasus, CASUS_VETO_PROSE, warReasonsFor, warReasonFactor, REASON_TUNING,
+  WAR_REASON_TYPES, DECLARABLE_WAR_REASON_TYPES, advanceWarReasons,
 } from '../../src/domain/worldPulse/warReasons.js';
 import { sueForPeaceOrder, PEACE_VETO_PROSE } from '../../src/domain/worldPulse/peaceReasons.js';
 import { evaluateWarLayer } from '../../src/domain/worldPulse/warDeployment.js';
@@ -43,6 +44,13 @@ describe('DECLARE_CASUS — the war-side forceable verb', () => {
       .toEqual({ ok: false, code: 'casus_unknown_type', detail: 'vibes' });
     expect(declareCasus(litWorld(), { fromId: 'a', toId: 'a', type: 'grievance' }))
       .toEqual({ ok: false, code: 'casus_self', detail: 'a' });
+  });
+
+  it('engine-derived lineage cannot be manufactured by the generic decree verb', () => {
+    expect(WAR_REASON_TYPES).toContain('lineage_claim');
+    expect(DECLARABLE_WAR_REASON_TYPES).not.toContain('lineage_claim');
+    expect(declareCasus(litWorld(), { fromId: 'a', toId: 'b', type: 'lineage_claim' }))
+      .toEqual({ ok: false, code: 'casus_engine_derived', detail: 'lineage_claim' });
   });
 
   it('a lit decree mints the typed, receipted record and the consumption factor rises', () => {
@@ -85,18 +93,19 @@ describe('DECLARE_CASUS — the war-side forceable verb', () => {
   });
 
   it('VETO-CHANNEL COMPLIANCE: every refusal code carries DM-facing prose, and no prose is stale', () => {
-    const raised = ['casus_gate_dark', 'casus_unknown_type', 'casus_self'];
+    const raised = ['casus_gate_dark', 'casus_unknown_type', 'casus_engine_derived', 'casus_self'];
     expect(Object.keys(CASUS_VETO_PROSE).sort()).toEqual([...raised].sort());
     for (const code of raised) {
       expect(CASUS_VETO_PROSE[code].length).toBeGreaterThan(20);
     }
   });
 
-  it('every typed reason in the catalog is decree-able (the verb spans the taxonomy)', () => {
-    for (const type of WAR_REASON_TYPES) {
+  it('every authorable reason is decree-able; the derived subset remains closed', () => {
+    for (const type of DECLARABLE_WAR_REASON_TYPES) {
       const r = declareCasus(litWorld(), { fromId: 'a', toId: 'b', type, severity01: 0.5, tick: 1 });
       expect(r.ok, `${type} is decree-able`).toBe(true);
     }
+    expect(DECLARABLE_WAR_REASON_TYPES).toHaveLength(WAR_REASON_TYPES.length - 1);
   });
 });
 

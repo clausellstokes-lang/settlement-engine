@@ -35,7 +35,7 @@ const SAMPLE_INTERP = Object.freeze({
   npc: 'Sir Aldric', home: 'Ashford', dest: 'Briar', captor: 'Corvin', purpose: 'trade',
   payer: 'Wexbridge', // D-5 third-party-ransom voice — the paying court's name
   // WR-2 governed disposition receipt slots.
-  settlement: 'Ashford', band: 'guarded', good: 'grain', house: 'House Rowan',
+  settlement: 'Ashford', counterpart: 'Eastvale', band: 'guarded', good: 'grain', house: 'House Rowan',
   temple: 'Harvest Chapter', domain: 'hunt', lean: 'toward force', weight: 'more',
   answer: 'bolder', welcome: 'more readily', aspect: 'martial', practice: 'the use of force',
 });

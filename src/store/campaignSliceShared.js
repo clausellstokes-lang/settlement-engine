@@ -21,6 +21,8 @@ import {
   getActiveOutboxOwner,
   setOutboxScheduler,
   OP_KIND_BARRIER,
+  OP_KIND_FULL_ROW_UPSERT,
+  OP_KIND_FULL_ROW_DELETE,
 } from './outbox.js';
 
 // Campaign merge/signature bookkeeping is only exercised after an authenticated
@@ -315,6 +317,9 @@ const COLUMN_FOR_PARTIAL_KEY = Object.freeze({
   aiData: 'ai_data', name: 'name', tier: 'tier', config: 'config', seed: 'seed',
 });
 
+const OP_KIND_SAVE_UPSERT = OP_KIND_FULL_ROW_UPSERT;
+const OP_KIND_SAVE_DELETE = OP_KIND_FULL_ROW_DELETE;
+
 /**
  * The op "kind" is the sorted set of DB COLUMNS the partial writes — NOT its raw
  * keys. Keying on columns (a) collapses ops that touch the SAME columns even when a
@@ -351,9 +356,15 @@ async function outboxRunner(op, payload) {
   if (op.kind === OP_KIND_BARRIER) return true;
   let ok;
   try {
-    await savesService.update(op.saveId, payload, {
-      expectedOwnerId: op.ownerId,
-    });
+    if (op.kind === OP_KIND_SAVE_UPSERT) {
+      await savesService.upsert(payload, { expectedOwnerId: op.ownerId });
+    } else if (op.kind === OP_KIND_SAVE_DELETE) {
+      await savesService.delete(op.saveId, op.ownerId);
+    } else {
+      await savesService.update(op.saveId, payload, {
+        expectedOwnerId: op.ownerId,
+      });
+    }
     ok = true;
   } catch (e) {
     // Never rethrow — callers fire-and-forget, and the pool must not reject.
@@ -367,6 +378,13 @@ async function outboxRunner(op, payload) {
   if (ok && op.differential && op.payloadFingerprint != null) {
     const ownerId = op.ownerId;
     if (ownerId) lastPersistedFingerprints.set(`${ownerId}:${op.saveId}`, op.payloadFingerprint);
+  }
+  // A successful delete invalidates the differential witness for that row.
+  // Otherwise an undo followed by the same deterministic birth can present the
+  // same bytes and be skipped as "already persisted" even though the cloud row
+  // no longer exists.
+  if (ok && op.kind === OP_KIND_SAVE_DELETE && op.ownerId) {
+    lastPersistedFingerprints.delete(`${op.ownerId}:${op.saveId}`);
   }
   return ok;
 }
@@ -455,12 +473,16 @@ function fingerprintPersistPartial(partial) {
 export async function persistSaveUpdates(updates = []) {
   const summary = { attempted: 0, skipped: 0, failed: 0 };
   if (!savesService.isConfigured) {
-    const localResults = await Promise.all(updates.map(update =>
-      persistSaveUpdate(update?.saveId, {
-        settlement: update.settlement,
-        campaignState: update.campaignState,
-        versionHistory: update.versionHistory,
-      })));
+    const localResults = await Promise.all(updates.map(update => update?.createSave
+      ? outboxRunner(
+          { saveId: update.saveId, kind: OP_KIND_SAVE_UPSERT },
+          update.createSave,
+        )
+      : persistSaveUpdate(update?.saveId, {
+          settlement: update.settlement,
+          campaignState: update.campaignState,
+          versionHistory: update.versionHistory,
+        })));
     summary.attempted = localResults.length;
     summary.failed = localResults.filter(ok => !ok).length;
     return summary;
@@ -468,6 +490,27 @@ export async function persistSaveUpdates(updates = []) {
   const enqueued = [];
   const ownerId = getActiveOutboxOwner();
   for (const update of updates) {
+    if (update?.createSave) {
+      const saveId = update.saveId || update.createSave.id;
+      if (!saveId) {
+        summary.attempted += 1;
+        continue;
+      }
+      const fingerprint = fingerprintPersistPartial(update.createSave);
+      if (ownerId
+          && lastPersistedFingerprints.get(`${ownerId}:${saveId}`) === fingerprint) {
+        summary.skipped += 1;
+        continue;
+      }
+      enqueued.push(outboxEnqueue({
+        saveId,
+        kind: OP_KIND_SAVE_UPSERT,
+        payload: update.createSave,
+        fingerprint,
+        differential: true,
+      }));
+      continue;
+    }
     const partial = {
       settlement: update.settlement,
       campaignState: update.campaignState,
@@ -508,6 +551,48 @@ export async function persistSaveUpdates(updates = []) {
 }
 
 /**
+ * Persist the inverse of deterministic member births.  Deletes use the same
+ * durable, owner-scoped, per-save outbox as updates, so an offline undo cannot
+ * leave an invisible cloud orphan forever.
+ */
+export async function persistSaveDeletes(saveIds = []) {
+  const ids = [...new Set((saveIds || []).map(String).filter(Boolean))];
+  if (!ids.length) return { attempted: 0, failed: 0 };
+  if (!savesService.isConfigured) {
+    const results = await Promise.all(ids.map(saveId => outboxRunner(
+      { saveId, kind: OP_KIND_SAVE_DELETE },
+      { saveId },
+    )));
+    return {
+      attempted: results.length,
+      failed: results.filter(ok => !ok).length,
+    };
+  }
+  const ownerId = getActiveOutboxOwner();
+  // The tombstone is now the newest desired state even if its first network
+  // attempt fails.  Invalidate the old upsert witness at intent time so a
+  // subsequent identical re-birth cannot be differential-skipped; its full-row
+  // upsert must enter the queue and supersede this pending delete.
+  if (ownerId) {
+    for (const saveId of ids) {
+      lastPersistedFingerprints.delete(`${ownerId}:${saveId}`);
+    }
+  }
+  const ops = ids.map(saveId => outboxEnqueue({
+    saveId,
+    kind: OP_KIND_SAVE_DELETE,
+    payload: { saveId },
+    fingerprint: null,
+    differential: false,
+  }));
+  const results = await attemptOps(ops, outboxRunner);
+  return {
+    attempted: results.length,
+    failed: results.filter(result => !result.ok).length,
+  };
+}
+
+/**
  * Shared persist tail for the world-pulse mutators (advanceCampaignWorld /
  * applyWorldPulseProposal / recordPartyImpact): flush the per-save updates, then
  * sync the campaign snapshot. Both awaits run only when the mutator produced
@@ -518,12 +603,15 @@ export async function flushWorldPulsePersist({
   result,
   campaignPersist,
   persistUpdates,
+  deleteSaveIds = [],
   campaignId,
   isSessionCurrent = null,
 }) {
   if (!(result && campaignPersist)) return;
   if (isSessionCurrent && !isSessionCurrent()) return;
   await persistSaveUpdates(persistUpdates);
+  if (isSessionCurrent && !isSessionCurrent()) return;
+  await persistSaveDeletes(deleteSaveIds);
   if (isSessionCurrent && !isSessionCurrent()) return;
   await syncCampaignSnapshot(
     campaignPersist.snapshot,

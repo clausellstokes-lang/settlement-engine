@@ -18,7 +18,12 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 vi.mock('../../src/lib/saves.js', () => ({
-  saves: { update: vi.fn(() => Promise.resolve()), isConfigured: true },
+  saves: {
+    update: vi.fn(() => Promise.resolve()),
+    upsert: vi.fn(entry => Promise.resolve(entry?.id)),
+    delete: vi.fn(id => Promise.resolve(id)),
+    isConfigured: true,
+  },
 }));
 
 vi.mock('../../src/lib/campaigns.js', () => ({
@@ -37,6 +42,7 @@ import { campaigns } from '../../src/lib/campaigns.js';
 import {
   persistSaveUpdate,
   persistSaveUpdates,
+  persistSaveDeletes,
   flushWorldPulsePersist,
   clearPersistFingerprintCache,
   clearCampaignSyncBookkeeping,
@@ -58,6 +64,10 @@ function makeUpdate(saveId, { tick = 1, blob = 'x'.repeat(200) } = {}) {
 beforeEach(() => {
   saves.update.mockReset();
   saves.update.mockResolvedValue(undefined);
+  saves.upsert.mockReset();
+  saves.upsert.mockImplementation(entry => Promise.resolve(entry?.id));
+  saves.delete.mockReset();
+  saves.delete.mockImplementation(id => Promise.resolve(id));
   campaigns.upsert.mockReset();
   campaigns.upsert.mockImplementation(c => Promise.resolve(c?.id));
   clearPersistFingerprintCache();
@@ -257,6 +267,108 @@ describe('differential persistence', () => {
     const third = await persistSaveUpdates(updates);
     expect(saves.update).toHaveBeenCalledTimes(2);
     expect(third).toMatchObject({ attempted: 0, skipped: 1 });
+  });
+
+  test('a successful birth delete clears its fingerprint so the same birth can be restored', async () => {
+    const birth = {
+      saveId: 'lineage-child',
+      createSave: {
+        id: 'lineage-child',
+        name: 'Weirbrook',
+        settlement: { name: 'Weirbrook', parentRef: { birthId: 'lineage.birth.child' } },
+        campaignState: { phase: 'canon' },
+      },
+    };
+
+    const first = await persistSaveUpdates([birth]);
+    expect(first).toMatchObject({ attempted: 1, skipped: 0 });
+    expect(saves.upsert).toHaveBeenCalledTimes(1);
+
+    await persistSaveDeletes([birth.saveId]);
+    expect(saves.delete).toHaveBeenCalledTimes(1);
+
+    const restored = await persistSaveUpdates([birth]);
+    expect(restored).toMatchObject({ attempted: 1, skipped: 0 });
+    expect(saves.upsert).toHaveBeenCalledTimes(2);
+  });
+
+  test('a birth tombstone supersedes a parked create instead of waiting for it to resurrect', async () => {
+    initPersistFailureReporter(vi.fn());
+    const birth = {
+      saveId: 'lineage-offline-child',
+      createSave: {
+        id: 'lineage-offline-child',
+        name: 'Weirbrook',
+        settlement: { name: 'Weirbrook', parentRef: { birthId: 'lineage.birth.offline' } },
+        campaignState: { phase: 'canon' },
+      },
+    };
+    saves.upsert.mockRejectedValueOnce(new Error('offline'));
+
+    const failedCreate = await persistSaveUpdates([birth]);
+    expect(failedCreate).toMatchObject({ attempted: 1, failed: 1 });
+    expect(peekOps().some(op => op.kind === 'world_pulse_save_upsert')).toBe(true);
+
+    const deleted = await persistSaveDeletes([birth.saveId]);
+    expect(deleted).toMatchObject({ attempted: 1, failed: 0 });
+    expect(saves.delete).toHaveBeenCalledWith(birth.saveId, 'test-owner');
+    expect(peekOps().filter(op => op.kind !== 'barrier')).toHaveLength(0);
+
+    // Connectivity returning cannot replay the superseded create.
+    saves.upsert.mockResolvedValue(birth.saveId);
+    await retryOutboxPersist();
+    expect(saves.upsert).toHaveBeenCalledTimes(1);
+  });
+
+  test('a birth tombstone follows then supersedes an inflight create that fails', async () => {
+    let rejectCreate;
+    saves.upsert.mockImplementationOnce(() => new Promise((resolve, reject) => {
+      rejectCreate = reject;
+    }));
+    const birth = {
+      saveId: 'lineage-inflight-child',
+      createSave: {
+        id: 'lineage-inflight-child',
+        name: 'Weirbrook',
+        settlement: { name: 'Weirbrook', parentRef: { birthId: 'lineage.birth.inflight' } },
+        campaignState: { phase: 'canon' },
+      },
+    };
+
+    const creating = persistSaveUpdates([birth]);
+    while (!rejectCreate) await Promise.resolve();
+    const deleting = persistSaveDeletes([birth.saveId]);
+    rejectCreate(new Error('response lost'));
+
+    const [failedCreate, deleted] = await Promise.all([creating, deleting]);
+    expect(failedCreate).toMatchObject({ attempted: 1, failed: 1 });
+    expect(deleted).toMatchObject({ attempted: 1, failed: 0 });
+    expect(saves.delete).toHaveBeenCalledWith(birth.saveId, 'test-owner');
+    expect(peekOps().filter(op => op.kind !== 'barrier')).toHaveLength(0);
+  });
+
+  test('a failed tombstone cannot make an identical re-birth differential-skip', async () => {
+    const birth = {
+      saveId: 'lineage-redo-child',
+      createSave: {
+        id: 'lineage-redo-child',
+        name: 'Weirbrook',
+        settlement: { name: 'Weirbrook', parentRef: { birthId: 'lineage.birth.redo' } },
+        campaignState: { phase: 'canon' },
+      },
+    };
+    await persistSaveUpdates([birth]);
+    expect(saves.upsert).toHaveBeenCalledTimes(1);
+
+    saves.delete.mockRejectedValueOnce(new Error('offline'));
+    const failedDelete = await persistSaveDeletes([birth.saveId]);
+    expect(failedDelete).toMatchObject({ attempted: 1, failed: 1 });
+    expect(peekOps().some(op => op.kind === 'world_pulse_save_delete')).toBe(true);
+
+    const restored = await persistSaveUpdates([birth]);
+    expect(restored).toMatchObject({ attempted: 1, skipped: 0, failed: 0 });
+    expect(saves.upsert).toHaveBeenCalledTimes(2);
+    expect(peekOps().filter(op => op.kind !== 'barrier')).toHaveLength(0);
   });
 });
 

@@ -355,6 +355,45 @@ export const WAR_RECEIPTS = Object.freeze({
     'The court could be pressed and would not move; the ledger explains why before anyone asks.',
     'The contradiction is visible rather than silent: the warlike reading yields nothing, and every record behind that judgment is on the sheet.',
   ],
+  // WR-3 LINEAGE CLAIM. The five governed kinds are copied from the receipt
+  // annex. A parent/child name is interpolated only where the selected family
+  // actually asks for it; lineageReceipt skips a family rather than inventing a
+  // missing house, settlement, counterpart, or authored inversion band.
+  lineage_edge_recorded: [
+    (x) => `The steading at ${x.settlement} stands on its own books now, and remembers whose granary fed it.`,
+    (x) => `${x.counterpart} seeded it, provisioned it, and has been outgrown by it.`,
+    'What was a satellite is a settlement; the parish register says so, which is what matters later.',
+    'The daughter house keeps its own reeve and its own quarrel with the tolls.',
+    'A lineage edge is a small entry in a book and the cause of a great deal.',
+  ],
+  casus_lineage_claim_parent: [
+    (x) => `${x.settlement} claims ${x.counterpart} by right of founding: it seeded the place, and the place has fallen ${x.band} below the seeding.`,
+    'The parent house says the daughter cannot hold what it was given, and offers to hold it instead.',
+    (x) => `There is a founding charter in the chest at ${x.settlement} and a hungry season at ${x.counterpart}; the two arguments arrived together.`,
+    'They call it reclamation and their neighbours call it what it is.',
+    "A thriving parent has no quarrel with a modest steading — which is why this parent's books are worth reading.",
+  ],
+  casus_lineage_claim_child: [
+    (x) => `${x.settlement} was founded out of ${x.counterpart} and has outgrown it; the seat, it says, should follow the granary.`,
+    'The daughter house keeps the bigger market and asks why it keeps the smaller title.',
+    (x) => `The factors of ${x.house}, who once shipped through the parent's wharf, own it in all but the charter.`,
+    'The child claims the seat by the simplest argument there is: it feeds more people.',
+    'What was gratitude for a generation has become a grievance in a single harvest.',
+  ],
+  mirror_kinship_bond: [
+    (x) => `The same founding that arms a claim binds a peace: ${x.settlement} and ${x.counterpart} read one edge and chose the other sign.`,
+    'They share a charter and a graveyard; the courts remembered the graveyard.',
+    'Kin do not sack kin cheaply, and both books said so.',
+    'The lineage was cited by both sides to opposite ends, and the quieter reading held.',
+    (x) => `The bond cost ${x.settlement} the claim, and the council called it a bargain.`,
+  ],
+  lineage_claim_suppressed: [
+    'You do not sack the satellite you spent a generation provisioning; the claim scores nothing and the chronicle is named against it.',
+    'The relationship record contradicts the casus, and the receipt says which entries do it.',
+    'The court could raise the claim; its own wagon books refuse it.',
+    'Sustained provisioning stands in the ledger where the grievance would go.',
+    'Nothing was minted, so nothing decays; this claim waits on a change in the wagon books, not a change of heart.',
+  ],
   // fear_of_dominance — authored in hegemonyFear.js (see HEGEMONY_RECEIPTS below).
 });
 
@@ -607,6 +646,101 @@ export function dispositionReceipt(kind, seed, interp = {}) {
   // The fallback remains inside the same authored pool; we never substitute a
   // generic invented entity. Family ids retain the ORIGINAL pool index so a slot-
   // constrained draw cannot masquerade as a new structural family.
+  const eligible = row.pool
+    .map((_, templateIndex) => templateIndex)
+    .filter((templateIndex) => row.requiredSlots[templateIndex].every((slot) => (
+      typeof interp[slot] === 'string' && String(interp[slot]).trim().length > 0
+    )));
+  if (eligible.length === 0) return null;
+  const namespacedSeed = seed ? `${seed}#${row.kind}` : '';
+  const templateIndex = namespacedSeed ? eligible[fnv1a32(namespacedSeed) % eligible.length] : eligible[0];
+  const variant = row.pool[templateIndex];
+  const line = typeof variant === 'function' ? String(variant(interp)) : String(variant);
+  return {
+    kind: row.kind,
+    line,
+    familyId: `${row.kind}.${templateIndex + 1}`,
+    templateIndex,
+    significance: row.significance,
+    audience: row.audience,
+    section: row.section,
+  };
+}
+
+/**
+ * The WR-3 governed phrased-kind registry. These are reader receipts rather
+ * than behavioral candidate types: the registry pays SP-6's pool,
+ * significance, audience, and Herald-desk joins without claiming that any of
+ * them is an aliveness channel for the still-dark lineage scorer.
+ */
+/** @typedef {'lineage_edge_recorded'|'casus_lineage_claim_parent'|
+ * 'casus_lineage_claim_child'|'mirror_kinship_bond'|'lineage_claim_suppressed'} LineageReceiptKind */
+/** @typedef {{kind:LineageReceiptKind,significance:'major'|'notable'|'routine',
+ * audience:'public'|'dm-only',section:'war'|'events',pool:readonly ProseVariant[],
+ * requiredSlots:ReadonlyArray<readonly string[]>}} LineageReceiptRegistryEntry */
+
+/**
+ * @param {LineageReceiptKind} kind
+ * @param {'major'|'notable'|'routine'} significance
+ * @param {'public'|'dm-only'} audience
+ * @param {'war'|'events'} section
+ * @param {ReadonlyArray<readonly string[]>} requiredSlots
+ * @returns {Readonly<LineageReceiptRegistryEntry>}
+ */
+function lineageKindRow(kind, significance, audience, section, requiredSlots) {
+  return Object.freeze({
+    kind,
+    significance,
+    audience,
+    section,
+    pool: /** @type {readonly ProseVariant[]} */ (WAR_RECEIPTS[kind]),
+    requiredSlots: Object.freeze(
+      requiredSlots.map((slots) => Object.freeze([...slots])),
+    ),
+  });
+}
+
+/** @type {ReadonlyArray<Readonly<LineageReceiptRegistryEntry>>} */
+export const WAR_LINEAGE_KIND_REGISTRY = Object.freeze([
+  lineageKindRow('lineage_edge_recorded', 'notable', 'public', 'events',
+    [['settlement'], ['counterpart'], [], [], []]),
+  lineageKindRow('casus_lineage_claim_parent', 'major', 'public', 'war',
+    [['settlement', 'counterpart', 'band'], [], ['settlement', 'counterpart'], [], []]),
+  lineageKindRow('casus_lineage_claim_child', 'major', 'public', 'war',
+    [['settlement', 'counterpart'], [], ['house'], [], []]),
+  lineageKindRow('mirror_kinship_bond', 'notable', 'public', 'events',
+    [['settlement', 'counterpart'], [], [], [], ['settlement']]),
+  lineageKindRow('lineage_claim_suppressed', 'routine', 'dm-only', 'war',
+    [[], [], [], [], []]),
+]);
+
+/** The exact WR-3 reader-kind set, shared by future emitters and walkers. */
+export const WAR_LINEAGE_KINDS = Object.freeze(
+  WAR_LINEAGE_KIND_REGISTRY.map((row) => row.kind),
+);
+
+/** @type {ReadonlyMap<string, Readonly<LineageReceiptRegistryEntry>>} */
+const WAR_LINEAGE_KIND_BY_ID = new Map(
+  /** @type {Array<[string, Readonly<LineageReceiptRegistryEntry>]>} */ (
+    WAR_LINEAGE_KIND_REGISTRY.map((row) => [row.kind, row])
+  ),
+);
+
+/**
+ * Resolve one WR-3 lineage receipt plus its stable structural family and
+ * governed presentation metadata. A template is eligible only when every
+ * truth slot it names is present; an unavailable house, settlement,
+ * counterpart, or inversion band is never fabricated. Pure and deterministic.
+ *
+ * @param {string} kind
+ * @param {string|null|undefined} seed
+ * @param {Record<string, unknown>} [interp]
+ * @returns {{kind:string,line:string,familyId:string,templateIndex:number,
+ *   significance:string,audience:string,section:string} | null}
+ */
+export function lineageReceipt(kind, seed, interp = {}) {
+  const row = WAR_LINEAGE_KIND_BY_ID.get(String(kind));
+  if (!row) return null;
   const eligible = row.pool
     .map((_, templateIndex) => templateIndex)
     .filter((templateIndex) => row.requiredSlots[templateIndex].every((slot) => (

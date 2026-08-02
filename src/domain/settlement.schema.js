@@ -188,6 +188,33 @@ export const FIELD_ALIASES = Object.freeze({
  */
 
 /**
+ * Immutable historical provenance for a campaign member founded from a
+ * satellite. The separately persisted regional lineage edge is the live bond;
+ * this receipt records the founding even after that edge is severed or sold.
+ * Import remaps `parentId` only when the parent lands in the same imported set.
+ *
+ * @typedef {Object} SettlementParentRef
+ * @property {1} version
+ * @property {string} parentId
+ *   Campaign save id of the founding settlement in the current address space,
+ *   or the preserved source id when that parent was not imported.
+ * @property {string} sourceSatelliteId
+ * @property {string} birthId
+ * @property {string} liveEdgeId
+ *   Id of the edge minted at graduation. Its continued presence in the regional
+ *   graph, not this historical value, decides whether the bond remains live.
+ * @property {number} foundedTick
+ * @property {number} graduatedTick
+ * @property {string} foundingTier
+ * @property {'village'} graduationTier
+ * @property {number} graduationPopulation
+ * @property {'growth'|'resource_strike'|'resettlement'|'forced'} provenance
+ * @property {Record<string, unknown>} [site]
+ * @property {string[]} [resources]
+ * @property {{id:string, kind:'founding_support', fromId:string, evidenceIds:string[]}} [provisioningRecord]
+ */
+
+/**
  * @typedef {Object} CanonicalSettlement
  *
  * @property {string} id
@@ -201,6 +228,9 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {number} schemaVersion
  * @property {number} simulationVersion
  * @property {string} generatorVersion
+ * @property {SettlementParentRef} [parentRef]
+ *   Immutable founding history. Never use its presence as proof that the live
+ *   regional lineage edge still exists.
  *
  * @property {SettlementIdentity} identity
  *   Display-facing facts: name, tier, dominant culture, magic level, genre.
@@ -360,7 +390,8 @@ export const FIELD_ALIASES = Object.freeze({
  *   power?: Record<string, any>,
  *   economy?: Record<string, any>,
  *   spatialLayout?: Record<string, any>,
- *   primaryDeity?: Record<string, any>
+ *   primaryDeity?: Record<string, any>,
+ *   parentRef?: SettlementParentRef
  * } & Record<string, any>} SimSettlement
  *
  * The current FLAT settlement shape consumed by the simulation layer. Loose by

@@ -80,6 +80,13 @@ export const DRAIN_CAP = 4;
 const BACKOFF_MS = [1000, 5000, 30000];
 
 export const OP_KIND_BARRIER = 'barrier';
+// Full-row intents used by deterministic world-pulse births.  They participate
+// in the same per-save FIFO as column patches, but unlike a column set they
+// supersede every older non-inflight intent for that row: an upsert is the full
+// desired row, while a delete is its tombstone.
+export const OP_KIND_FULL_ROW_UPSERT = 'world_pulse_save_upsert';
+export const OP_KIND_FULL_ROW_DELETE = 'world_pulse_save_delete';
+const FULL_ROW_KINDS = new Set([OP_KIND_FULL_ROW_UPSERT, OP_KIND_FULL_ROW_DELETE]);
 
 // ── Injectable clock + scheduler ─────────────────────────────────────────────
 // Backoff timestamps use a clock; retries fire through a scheduler. Both are
@@ -412,12 +419,35 @@ function earlierOpForSameOwnerAndSave(op, opIndex = _ops.indexOf(op)) {
   )) || null;
 }
 
+/**
+ * A newer covering write may have been enqueued while its predecessor was
+ * inflight.  Enqueue cannot recall that request, but once the gate settles a
+ * failed/backing-off predecessor is safe to supersede before the newer intent
+ * runs.  This is especially load-bearing for a row tombstone following a birth
+ * upsert whose response was lost: the delete must not park forever behind the
+ * stale create it exists to reverse.
+ */
+function pruneCoveredPredecessors(op) {
+  const index = _ops.indexOf(op);
+  if (index <= 0) return;
+  const covered = _ops.slice(0, index).filter(candidate => (
+    candidate.kind !== OP_KIND_BARRIER
+    && candidate.ownerId === op.ownerId
+    && candidate.saveId === op.saveId
+    && candidate.status !== 'inflight'
+    && kindCovers(op.kind, candidate.kind)
+  ));
+  for (const candidate of covered) pruneOp(candidate);
+}
+
 // A kind is a '+'-joined sorted COLUMN set (campaignSliceShared.kindForPartial).
 // `newKind` COVERS `oldKind` when every column oldKind writes is also written by
 // newKind (oldKind ⊆ newKind) — so a newer op with newKind fully overwrites the
 // older op's columns with fresher data, making the older op redundant.
 function kindCovers(newKind, oldKind) {
   if (newKind === oldKind) return true;
+  if (FULL_ROW_KINDS.has(newKind)) return true;
+  if (FULL_ROW_KINDS.has(oldKind)) return false;
   const cols = new Set(newKind ? String(newKind).split('+') : []);
   const old = oldKind ? String(oldKind).split('+') : [];
   return old.length > 0 && old.every(c => cols.has(c));
@@ -572,6 +602,7 @@ export async function attemptOps(ops, runner) {
       && op.ownerPending !== true
       && op.ownerId === _activeOwnerId;
     if (!ownerCanRun() || !_ops.includes(op)) return { op, ok: false, ownerMismatch: true };
+    pruneCoveredPredecessors(op);
     const predecessor = earlierOpForSameOwnerAndSave(op);
     // A queued/failed predecessor is in retry backoff (or deliberately parked).
     // Do not let this newer op overtake it. An inflight predecessor is handled by
@@ -606,6 +637,7 @@ export async function attemptOps(ops, runner) {
       if (op.status !== 'queued' || op.nextAttemptAt > _clock()) {
         return { op, ok: false, blockedByBackoff: true };
       }
+      pruneCoveredPredecessors(op);
       const survivingPredecessor = earlierOpForSameOwnerAndSave(op);
       // The predecessor may have failed into backoff while this op waited on its
       // in-flight gate. It still owns FIFO priority; do not overtake it.

@@ -24,6 +24,8 @@
 import { describe, expect, it } from 'vitest';
 
 import { createPRNG } from '../../src/kernel/prng.js';
+import { appendWizardNewsEntries } from '../../src/domain/region/index.js';
+import { SECTION_OF } from '../../src/domain/realm/heraldRouting.js';
 import {
   SETTLEMENT_LIFECYCLE_TUNING,
   advanceSettlementLifecycle,
@@ -34,6 +36,10 @@ import {
   settlementLifecycleActive,
   drawSteadingName,
 } from '../../src/domain/worldPulse/settlementLifecycleKernel.js';
+import {
+  applyLineageBirthsToGraph,
+  lineageMemberSaveId,
+} from '../../src/domain/worldPulse/lineageMemberBirth.js';
 
 const T = SETTLEMENT_LIFECYCLE_TUNING;
 const NOW = '2026-01-01T00:00:00.000Z';
@@ -423,6 +429,113 @@ describe('charter-pending (visible, never a silent cap)', () => {
     const popAtPending = sats[0].population;
     const again = drive({ settlements, ticks: 3, ledger: worldState.spatialLedgers.satellites });
     expect(satellitesOf(again.worldState.spatialLedgers.satellites, 'a')[0].population).toBe(popAtPending);
+  });
+
+  it('WR-3: a pending village graduates once into a canon member with a live lineage edge', () => {
+    const parent = town('a', { tier: 'city', population: 12000 });
+    parent.populationHistory = [
+      { tick: 200, delta: -20, population: 12020, outcomeId: 'lifecycle.grow.s1.200' },
+      { tick: 220, delta: -30, population: 11990, outcomeId: 'lifecycle.grow.s1.220' },
+    ];
+    const satellite = {
+      id: 's1', name: 'Weirbrook', parentId: 'a', tier: 'hamlet', population: 430,
+      foundedTick: 100, provenance: 'growth', orbit: 0, inflow: 430, backing01: 0.6,
+      charterPending: true, charterPendingSince: 299, history: ['A charter awaits.'],
+    };
+    const snapshot = {
+      campaign: { id: 'camp-1' },
+      settlements: [{ id: 'a', name: parent.name, settlement: parent }],
+    };
+    const updates = [{ saveId: 'a', settlement: parent }];
+    const worldState = {
+      tick: 300,
+      simulationRules: {
+        settlementLifecycleEnabled: true,
+        lineageClaimEnabled: true,
+      },
+      spatialLedgers: {
+        satellites: { a: { steadings: { s1: satellite } } },
+      },
+    };
+    const beforePopulation = parent.population + satellite.population;
+    const out = advanceSettlementLifecycle({
+      snapshot,
+      worldState,
+      settlementUpdates: updates,
+      pIndex: pIndexOf(),
+      rng: createPRNG('lineage-graduation'),
+      tick: 300,
+      now: NOW,
+    });
+
+    expect(out.memberBirths).toHaveLength(1);
+    const birth = out.memberBirths[0];
+    expect(birth.saveId).toBe(lineageMemberSaveId(['lineage-member', 'camp-1', 'a', 's1']));
+    expect(birth.save.campaignState.phase).toBe('canon');
+    expect(birth.save.settlement.parentRef).toMatchObject({
+      parentId: 'a', sourceSatelliteId: 's1', graduatedTick: 300,
+      foundingTier: 'thorp', graduationTier: 'village',
+      graduationPopulation: 430, liveEdgeId: birth.graphEdge.id,
+    });
+    expect(birth.save.settlement.npcs).toEqual([]);
+    expect(birth.save.settlement.factions).toEqual([]);
+    expect(satellitesOf(out.worldState.spatialLedgers?.satellites || null, 'a')).toEqual([]);
+    expect(out.settlementUpdates[0].settlement.population + birth.save.settlement.population)
+      .toBe(beforePopulation);
+    const lineageNews = out.newsEntries.find(entry => entry.impactKind === 'lineage_edge_recorded');
+    expect(lineageNews).toMatchObject({
+      settlementIds: ['a', birth.saveId],
+      settlementNames: [parent.name, satellite.name],
+      audience: 'public',
+      section: 'events',
+    });
+    const normalizedLineageNews = appendWizardNewsEntries({}, [lineageNews], { now: NOW }).entries[0];
+    expect(normalizedLineageNews).toMatchObject({
+      settlementIds: ['a', birth.saveId],
+      settlementNames: [parent.name, satellite.name],
+      audience: 'public',
+      section: 'events',
+    });
+    expect(SECTION_OF(normalizedLineageNews.impactKind)).toBe(normalizedLineageNews.section);
+
+    const graph = applyLineageBirthsToGraph({ nodes: [], edges: [] }, out.memberBirths, NOW);
+    expect(graph.nodes.some(node => String(node.id) === String(birth.saveId))).toBe(true);
+    expect(graph.edges.find(edge => edge.id === birth.graphEdge.id)).toMatchObject({
+      from: 'a', to: birth.saveId, relationshipType: 'neutral', status: 'active',
+    });
+    // Replay is an idempotent replacement, not a duplicate topology.
+    const replayed = applyLineageBirthsToGraph(graph, out.memberBirths, NOW);
+    expect(replayed.nodes.filter(node => String(node.id) === String(birth.saveId))).toHaveLength(1);
+    expect(replayed.edges.filter(edge => edge.id === birth.graphEdge.id)).toHaveLength(1);
+  });
+
+  it('WR-3 stays completely dark when lineageClaimEnabled is absent', () => {
+    const parent = town('a', { tier: 'city', population: 12000 });
+    const satellite = {
+      id: 's1', name: 'Weirbrook', parentId: 'a', tier: 'hamlet', population: 430,
+      foundedTick: 100, provenance: 'growth', orbit: 0, inflow: 430, backing01: 0.6,
+      charterPending: true, charterPendingSince: 299, history: [],
+    };
+    const snapshot = {
+      campaign: { id: 'camp-1' },
+      settlements: [{ id: 'a', name: parent.name, settlement: parent }],
+    };
+    const worldState = {
+      simulationRules: { settlementLifecycleEnabled: true },
+      spatialLedgers: { satellites: { a: { steadings: { s1: satellite } } } },
+    };
+    const out = advanceSettlementLifecycle({
+      snapshot,
+      worldState,
+      settlementUpdates: [{ saveId: 'a', settlement: parent }],
+      pIndex: pIndexOf(),
+      rng: createPRNG('lineage-dark'),
+      tick: 300,
+      now: NOW,
+    });
+    expect(out.memberBirths).toBeUndefined();
+    expect(satellitesOf(out.worldState.spatialLedgers.satellites, 'a')[0].charterPending).toBe(true);
+    expect(out.newsEntries.some(entry => entry.impactKind === 'lineage_edge_recorded')).toBe(false);
   });
 });
 

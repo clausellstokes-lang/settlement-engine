@@ -106,6 +106,14 @@ export const WHAT_PHRASES = Object.freeze({
   deity_war_pressure: 'a warlike teaching at the temple',
   deity_peace_pressure: 'the harvest rites counselling peace',
   war_culture_suppressed: 'a warlike reading contradicted by the books',
+  // WR-3 LINEAGE CLAIM — all five governed reader kinds are phrased even while
+  // their virtual engine flag remains dark. The private suppression kind still
+  // needs an authored phrase for DM projections and future replay tooling.
+  lineage_edge_recorded: 'a daughter settlement entered in the books',
+  casus_lineage_claim_parent: 'a parent house pressing its founding claim',
+  casus_lineage_claim_child: 'a daughter settlement claiming the elder seat',
+  mirror_kinship_bond: 'kinship holding two settlements from war',
+  lineage_claim_suppressed: 'a lineage claim refused by its own wagon books',
   // The INDIRECT war and the war of words. These nine are keyed on `kind` rather than
   // `impactKind`, because their authors (momentum.js, supplyWebWarfare.js,
   // informationStatecraft.js) mint no impactKind. That is exactly why the impactKind

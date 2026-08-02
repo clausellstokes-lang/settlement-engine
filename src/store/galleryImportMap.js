@@ -12,6 +12,7 @@
 import { saves as savesService } from '../lib/saves.js';
 import { scrubImportedConfig } from '../lib/importScrub.js';
 import { track, EVENTS } from '../lib/analytics.js';
+import { remapSettlementParentRefForImport } from '../domain/settlementParentRef.js';
 import {
   campaignSessionChangedError,
   captureCampaignSession,
@@ -260,7 +261,7 @@ export async function importGalleryMapWithCampaignImpl(get, set, slug) {
 
   const { normalizeSettlement } = await import('../domain/normalizeSettlement.js');
   assertGalleryImportSession(get, session);
-  const saveIdBySourceId = {};
+  const saveIdBySourceId = Object.create(null);
   const importedEntries = [];
 
   try {
@@ -293,6 +294,23 @@ export async function importGalleryMapWithCampaignImpl(get, set, slug) {
       const newSaveId = await savesService.save(entry, saveOptions);
       saveIdBySourceId[String(member.old_id)] = newSaveId;
       importedEntries.push({ ...entry, id: newSaveId, savedAt: Date.now() });
+    }
+
+    // The save service mints ids, so only the complete source→destination table
+    // can re-address a child's historical parent receipt. Persist that projection
+    // before exposing any entry in the live cache. A parent absent from this import
+    // deliberately leaves the source receipt untouched; no regional lineage edge is
+    // synthesized from historical provenance.
+    for (let i = 0; i < importedEntries.length; i += 1) {
+      const current = importedEntries[i];
+      const settlement = remapSettlementParentRefForImport(
+        current.settlement,
+        saveIdBySourceId,
+      );
+      if (settlement === current.settlement) continue;
+      assertGalleryImportSession(get, session, importedEntries.length);
+      await savesService.update(current.id, { settlement }, saveOptions);
+      importedEntries[i] = { ...current, settlement };
     }
     assertGalleryImportSession(get, session, importedEntries.length);
   } catch (error) {

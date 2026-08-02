@@ -409,6 +409,13 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // the slice visible to certification without migrating a single installed save.
     // Every gate reads `=== true`, and lighting belongs to the later measured batch.
     dispositionChannelsEnabled: false,
+    // WR-3: campaign-member lineage claims and their kinship mirror, DECLARED
+    // DARK. Like the WR-1/WR-2 keys above, this is virtual: absent from the
+    // default bank and every other preset, false only on the ceiling so
+    // certification can hold the slice without changing installed saves or
+    // preset identity. The eventual read must gate on exact true; lighting waits
+    // for the member-graduation seam and WR-9 story-mix evidence.
+    lineageClaimEnabled: false,
     seasonsEnabled: true,
     // Owner ruling (golden sign-off — LIGHT EVERYTHING RECOMMENDED): the ceiling
     // runs the calamity mover. disastersEnabled is an opt-in key ABSENT from

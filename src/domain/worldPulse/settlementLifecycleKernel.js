@@ -70,8 +70,12 @@ import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, activeSpatialDig
 import { withActiveCondition, withoutActiveCondition } from '../activeConditions.js';
 import { stablePart } from './stablePart.js';
 import { advanceDemographics } from './demographicsKernel.js';
-import { pickLine, LIFECYCLE_NEWS } from './eventProse.js';
+import { lineageReceipt, pickLine, LIFECYCLE_NEWS } from './eventProse.js';
 import { chooseSteadingSite, deriveSteadingResources, landformPlaceName, resourcePhrase } from './steadingTopography.js';
+import {
+  buildLineageMemberBirth,
+  lineageMemberBirthActive,
+} from './lineageMemberBirth.js';
 
 // ── Kernel-local read shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ archetype?: string, id?: string, triggeredAt?: { sourceEventTargetId?: string } }} LcCondition */
@@ -103,7 +107,7 @@ import { chooseSteadingSite, deriveSteadingResources, landformPlaceName, resourc
  * mismatch is. One record, one spelling, no third shape minted.
  */
 /** @typedef {{ id?: (string|number), name?: string, settlement?: LcSettlement }} LcSnapItem */
-/** @typedef {{ settlements?: LcSnapItem[] }} LcSnapshot */
+/** @typedef {{ campaign?: { id?: (string|number) }, settlements?: LcSnapItem[] }} LcSnapshot */
 /** @typedef {{ saveId?: (string|number), settlement?: LcSettlement }} LcUpdate */
 /** @typedef {{ get?: (id: string, kind: string) => ({ score?: number } | undefined) }} LcPressureIdx */
 /** @typedef {{ fork?: (k: string) => { random: () => number } }} LcRng */
@@ -499,6 +503,7 @@ function steadingNews(kind, parentId, tick, now, body) {
  * @property {boolean} changed
  * @property {Array<Record<string, unknown>>} newsEntries
  * @property {Array<Record<string, unknown>>} receipts
+ * @property {Array<ReturnType<typeof buildLineageMemberBirth>>} [memberBirths]
  */
 
 /**
@@ -616,6 +621,8 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
     ...demo.migrationReceipts,
     ...demo.planReceipts,
   ];
+  /** @type {Array<ReturnType<typeof buildLineageMemberBirth>>} */
+  const memberBirths = [];
   // WAVE P3: completed satellite plans, indexed by the parent that committed to them.
   // The plan lane decided; this lane founds, through the ONE mint.
   /** @type {Map<string, import('./demographicsPlans.js').FoundIntent>} */
@@ -823,6 +830,82 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
       const backing01 = steadingBacking01(parentLive, pIndex, parentId);
       /** @type {SatelliteRecord} */
       let next = { ...rec, backing01: Math.round(backing01 * 10000) / 10000 };
+
+      // WR-3 — APPROVE THE VILLAGE CHARTER.  `charterPending` is deliberately
+      // observed on a later pass: the threshold tick remains visible, then the
+      // next tick makes the population a first-class member.  Removing the
+      // satellite and minting the birth in ONE result conserves population —
+      // those people were already debited from the parent while the steading
+      // grew, so graduation performs no second transfer.
+      if (next.charterPending && lineageMemberBirthActive(worldState)) {
+        const campaignId = snapshot?.campaign?.id != null
+          ? String(snapshot.campaign.id)
+          : '';
+        if (campaignId) {
+          const birth = buildLineageMemberBirth({
+            campaignId,
+            parentId,
+            parent: /** @type {Record<string, unknown>} */ (parentLive || {}),
+            satellite: next,
+            tick,
+            now,
+          });
+          memberBirths.push(birth);
+          const parentName = String(parentLive?.name || '').trim();
+          const childName = String(next.name || '').trim();
+          if (!parentName || !childName) throw new Error('lineage member birth requires authored settlement names');
+          const steadings = { ...(nextLedger[parentId]?.steadings || {}) };
+          delete steadings[next.id];
+          nextLedger[parentId] = { ...(nextLedger[parentId] || {}), steadings };
+          ledgerChanged = true;
+          receipts.push({
+            id: birth.birthId,
+            kind: 'lineage_edge_recorded',
+            parentId,
+            childId: birth.saveId,
+            satelliteId: next.id,
+            edgeId: birth.graphEdge.id,
+            reason: `${parentName} recognized ${childName} as a settlement in its own right.`,
+          });
+          const voice = lineageReceipt('lineage_edge_recorded', birth.birthId, {
+            settlement: childName,
+            counterpart: parentName,
+          });
+          if (!voice) throw new Error('lineage_edge_recorded receipt vocabulary is incomplete');
+          newsEntries.push({
+            id: `wizard_news.${tick}.lineage_edge_recorded.${parentId}.${birth.saveId}`,
+            tick,
+            createdAt: now,
+            scope: 'regional',
+            significance: voice.significance,
+            severity: 0.55,
+            score: 66,
+            headline: `${childName} takes a charter of its own`,
+            summary: voice.line,
+            kind: 'applied',
+            impactKind: 'lineage_edge_recorded',
+            channelType: 'political_authority',
+            settlementIds: [parentId, birth.saveId],
+            settlementNames: [parentName, childName],
+            impactIds: [],
+            channelIds: [],
+            sourceEventId: birth.birthId,
+            familyId: voice.familyId,
+            audience: voice.audience,
+            section: voice.section,
+            tags: ['world_pulse', 'lifecycle', 'lineage_edge_recorded'],
+            reasons: ['The former steading now keeps its own books and seat, while its founding line remains remembered.'],
+            ...(voice.audience === 'dm-only' ? { covert: true } : {}),
+          });
+          continue;
+        }
+        receipts.push({
+          id: parentId,
+          kind: 'satellite_charter_deferred',
+          satId: next.id,
+          reason: 'campaign identity unavailable',
+        });
+      }
 
       if (backing01 >= T.GROW_BACKING_FLOOR && !next.charterPending) {
         // GROW — a parent→steading transfer (conserved; headroom-capped).
@@ -1042,7 +1125,14 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
     changed = true;
   }
 
-  return { worldState: nextWorldState, settlementUpdates: nextUpdates, changed, newsEntries, receipts };
+  return {
+    worldState: nextWorldState,
+    settlementUpdates: nextUpdates,
+    changed,
+    newsEntries,
+    receipts,
+    ...(memberBirths.length ? { memberBirths } : {}),
+  };
 }
 
 // ════════════════════════════════════════════════════════════════════════════

@@ -214,6 +214,34 @@ describe('simulation rules preset — stability under future-flag churn', () => 
     expect(normalizeSimulationRules(keylessLit)[flag]).toBe(true);
   });
 
+  // WR-3 — the lineage claim follows the same virtual declaration law as the
+  // two earlier war-rulings reads: visible to certification, behaviorally dark,
+  // and absent from legacy preset identity until the measured lighting batch.
+  test('lineage claim is declared false only in full_simulation and remains outside preset identity', () => {
+    const flag = 'lineageClaimEnabled';
+    expect(Object.prototype.hasOwnProperty.call(DEFAULT_SIMULATION_RULES, flag)).toBe(false);
+    expect(Object.prototype.hasOwnProperty.call(SIMULATION_RULE_PRESETS.full_simulation.rules, flag)).toBe(true);
+    expect(SIMULATION_RULE_PRESETS.full_simulation.rules[flag]).toBe(false);
+
+    for (const id of PRESET_IDS.filter((presetId) => presetId !== 'full_simulation')) {
+      expect(
+        Object.prototype.hasOwnProperty.call(SIMULATION_RULE_PRESETS[id].rules, flag),
+        `${id}.${flag} must remain absent`,
+      ).toBe(false);
+    }
+
+    expectAbsentWithAnchor(
+      RULE_COMPARISON_KEYS,
+      flag,
+      'warLayerEnabled',
+      'the comparison census is live while the virtual lineage key stays outside preset identity',
+    );
+    const keylessLit = { ...SIMULATION_RULE_PRESETS.full_simulation.rules, [flag]: true };
+    delete keylessLit.presetId;
+    expect(normalizeSimulationRules(keylessLit).presetId).toBe('full_simulation');
+    expect(normalizeSimulationRules(keylessLit)[flag]).toBe(true);
+  });
+
   // W-R2-LIGHT — the nine post-close engine-wave gates light TOGETHER in the
   // three world-alive presets (owner ruling 2026-07-16). Unlike the eight war
   // sub-flags (which graduated INTO RULE_COMPARISON_KEYS), these are VIRTUAL —

@@ -222,6 +222,49 @@ export function foldUpdatesOntoSaves(saves, updates) {
 }
 
 /**
+ * Fold first-class member births into the saves that feed the next tick.
+ * Deterministic birth ids make this an idempotent append: a resume/retry that
+ * re-derives the same charter never duplicates or rewinds an already-updated
+ * child save.
+ * @param {any[]} saves
+ * @param {any[]} [births]
+ * @returns {any[]}
+ */
+export function foldMemberBirthsOntoSaves(saves, births) {
+  if (!Array.isArray(births) || births.length === 0) return saves;
+  const existing = new Set((saves || []).map(save => saveId(save)));
+  const next = [...(saves || [])];
+  for (const birth of births) {
+    const id = String(birth?.saveId || birth?.save?.id || '');
+    if (!id || existing.has(id) || !birth?.save) continue;
+    existing.add(id);
+    next.push(birth.save);
+  }
+  return next;
+}
+
+/**
+ * Fold the same births into campaign membership for the next snapshot.
+ * @param {any} campaign
+ * @param {any[]} [births]
+ * @returns {any}
+ */
+export function foldMemberBirthsOntoCampaign(campaign, births) {
+  if (!Array.isArray(births) || births.length === 0) return campaign;
+  const settlementIds = Array.isArray(campaign?.settlementIds)
+    ? [...campaign.settlementIds]
+    : [];
+  const seen = new Set(settlementIds.map(String));
+  for (const birth of births) {
+    const id = String(birth?.saveId || birth?.save?.id || '');
+    if (!id || seen.has(id)) continue;
+    seen.add(id);
+    settlementIds.push(id);
+  }
+  return { ...campaign, settlementIds };
+}
+
+/**
  * Advance-scaling Stage 1/3 orchestrator. Runs the one-week kernel `tickCount`
  * times and composes the per-tick outputs into ONE result with the SAME shape the
  * kernel returns. The kernel is pure and re-seeds per tick, so this is
@@ -336,6 +379,8 @@ export async function simulateCampaignWorldInterval({
   // id-keyed accumulator (last-write-wins) for the composed settlementUpdates.
   /** @type {Map<string, any>} */
   const updatesById = new Map();
+  /** @type {Map<string, any>} deterministic member births in this segment */
+  const birthsById = new Map();
   const candidates = [];
   const selected = [];
   const rollExplanations = [];
@@ -434,6 +479,19 @@ export async function simulateCampaignWorldInterval({
     for (const update of tickResult.settlementUpdates || []) {
       updatesById.set(String(update.saveId), update);
     }
+    for (const birth of tickResult.memberBirths || []) {
+      birthsById.set(String(birth.saveId), birth);
+    }
+    // A child born earlier in this interval may receive ordinary updates on a
+    // later tick.  Persist the final envelope, not its birth-tick projection.
+    for (const update of tickResult.settlementUpdates || []) {
+      const born = birthsById.get(String(update.saveId));
+      if (!born?.save) continue;
+      birthsById.set(String(update.saveId), {
+        ...born,
+        save: { ...born.save, settlement: update.settlement },
+      });
+    }
     if (tickResult.candidates) candidates.push(...tickResult.candidates);
     if (tickResult.selected) selected.push(...tickResult.selected);
     if (tickResult.rollExplanations) rollExplanations.push(...tickResult.rollExplanations);
@@ -480,18 +538,22 @@ export async function simulateCampaignWorldInterval({
         preWizardNews: runningCampaign.wizardNews,
         preSaves: runningSaves,
         settlementUpdates: [...updatesById.values()],
+        ...(birthsById.size ? { memberBirths: [...birthsById.values()] } : {}),
         candidates, selected, rollExplanations, autoApplied, proposals, resolvedStressors, majors,
       };
     }
 
     // Thread this tick's output into the next tick's input.
-    runningCampaign = {
+    runningCampaign = foldMemberBirthsOntoCampaign({
       ...runningCampaign,
       worldState: tickResult.worldState,
       regionalGraph: tickResult.regionalGraph,
       wizardNews: tickResult.wizardNews,
-    };
-    runningSaves = foldUpdatesOntoSaves(runningSaves, tickResult.settlementUpdates);
+    }, tickResult.memberBirths);
+    runningSaves = foldMemberBirthsOntoSaves(
+      foldUpdatesOntoSaves(runningSaves, tickResult.settlementUpdates),
+      tickResult.memberBirths,
+    );
     last = tickResult;
 
     // Yield between tick batches (not after the final tick) so the toolbar
@@ -528,6 +590,7 @@ export async function simulateCampaignWorldInterval({
     status: 'complete',
     interval: chosenInterval,
     settlementUpdates: [...updatesById.values()],
+    ...(birthsById.size ? { memberBirths: [...birthsById.values()] } : {}),
     candidates,
     selected,
     rollExplanations,

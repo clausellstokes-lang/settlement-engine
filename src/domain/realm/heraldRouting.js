@@ -95,6 +95,8 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   cold_war_supply_sanctions: 'war', ally_burden: 'war', alliance_burden: 'war', relief_burden: 'war',
   casus_declared: 'war', peace_sued: 'war', supply_raid_ordered: 'war', military_protection: 'war',
   disposition_martial_crossed: 'war', war_culture_suppressed: 'war',
+  casus_lineage_claim_parent: 'war', casus_lineage_claim_child: 'war',
+  lineage_claim_suppressed: 'war',
   // THE INDIRECT WAR + THE WAR OF WORDS. These nine route on `kind`, not `impactKind`
   // (their authors mint none), which is exactly why the automatic discovery scan above
   // never surfaced them: it reads `impactKind:` and `candidateType:` literals only. They
@@ -196,7 +198,7 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   npc_action: 'events', npc_goal_culmination: 'events', npc_goal_rebranch: 'events',
   npc_growth: 'events', npc_ladder: 'events', npc_contest: 'events', npc_support: 'events',
   disposition_diplomatic_crossed: 'events', disposition_insular_crossed: 'events',
-  disposition_reversal: 'events',
+  disposition_reversal: 'events', lineage_edge_recorded: 'events', mirror_kinship_bond: 'events',
   // traditions / custom / values (KIND_SECTION `traditions` custom-half → events)
   tradition: 'events', tradition_change: 'events', moral_reckoning: 'events', cause_lifecycle: 'events',
   // mercy (KIND_SECTION `mercy` → events)

@@ -74,6 +74,7 @@ import { advanceGenerosity, advanceObligationDecay } from './generosityKernel.js
 import { advanceUpswing } from './upswingKernel.js';
 import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
 import { advanceSettlementLifecycle } from './settlementLifecycleKernel.js';
+import { applyLineageBirthsToGraph } from './lineageMemberBirth.js';
 import { evaluateSettlementLifecycle } from './settlementLifecycleFirstClass.js';
 import { advanceSettlementPolitics } from './settlementPolitics.js';
 import { advanceWarReasons } from './warReasons.js';
@@ -2259,10 +2260,21 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // everything. DORMANT behind the virtual settlementLifecycleEnabled flag ⇒ a
   // complete no-op (zero forks, zero keys) — the fenced pre-wire dormancy golden
   // (aspatial + spatial) proves wired-but-dormant is byte-identical. AGGREGATE-only.
-  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceSettlementLifecycle({
+  const lifecycleAdvance = advanceSettlementLifecycle({
     snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
     pIndex, rng, tick: worldState.tick, now,
-  }), memoryState, settlementUpdates, wizardNews, now, newsReceiptSink));
+  });
+  const memberBirths = Array.isArray(lifecycleAdvance.memberBirths)
+    ? lifecycleAdvance.memberBirths
+    : [];
+  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(
+    lifecycleAdvance,
+    memoryState,
+    settlementUpdates,
+    wizardNews,
+    now,
+    newsReceiptSink,
+  ));
   // THE GROWTH LAYER — acquired/temporary NPC traits (owner commission #36). Runs LAST of
   // the per-settlement movers so its deposits read THIS tick's fully-settled durable
   // outcomes — the calamity stamped, the boom/bust/flourishing/reconstruction condition
@@ -2387,6 +2399,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       tick: worldState.tick,
     });
     if (warCausal.changed) memoryState = warCausal.worldState;
+    if (warCausal.newsEntries.length) {
+      wizardNews = appendObservedWizardNewsEntries(wizardNews, warCausal.newsEntries, { now }, newsReceiptSink);
+    }
   }
   {
     const peaceCausal = advancePeaceReasons({
@@ -2401,6 +2416,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       blaineyCredibility: makeBlaineyCredibilityFn(memoryState, worldState.tick),
     });
     if (peaceCausal.changed) memoryState = peaceCausal.worldState;
+    if (peaceCausal.newsEntries.length) {
+      wizardNews = appendObservedWizardNewsEntries(wizardNews, peaceCausal.newsEntries, { now }, newsReceiptSink);
+    }
   }
   // W-MOMENTUM — THE COMMITMENT LEDGER (DESIGN_MOMENTUM.md §1). LAST of the read-movers,
   // AFTER the causal-reason movers so the deposits read THIS tick's fully-settled public
@@ -2475,13 +2493,27 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     }
   }
   // @pulse-stage: finalize_receipt
-  const finalWorldState = appendPulseHistoryWithProvenance(memoryState, pulseRecord, applied);
+  const finalRegionalGraph = applyLineageBirthsToGraph(applied.regionalGraph, memberBirths, now);
+  const finalPulseRecord = memberBirths.length
+    ? {
+        ...pulseRecord,
+        memberBirths: memberBirths.map(birth => ({
+          birthId: birth.birthId,
+          saveId: birth.saveId,
+          parentId: birth.parentId,
+          satelliteId: birth.satelliteId,
+          edgeId: birth.graphEdge.id,
+          kind: 'lineage_edge_recorded',
+        })),
+      }
+    : pulseRecord;
+  const finalWorldState = appendPulseHistoryWithProvenance(memoryState, finalPulseRecord, applied);
   // G — test-gated self-check: on a PAUSED tick, every deferred major's out-of-band
   // residue must have been stripped. Read-only + NODE_ENV==='test' only (byte-neutral to
   // the simulation), so a forgotten/drifted strip in a known residue store reds a test
   // across the WHOLE suite rather than surfacing as a silent determinism drift. Inert
   // (deferredMajors is empty) on the autoresolve path.
-  assertNoResidueLeak(finalWorldState, applied.regionalGraph, deferredMajors);
+  assertNoResidueLeak(finalWorldState, finalRegionalGraph, deferredMajors);
 
   return {
     campaignId: campaign?.id,
@@ -2489,7 +2521,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     tick: finalWorldState.tick,
     calendar: finalWorldState.calendar,
     worldState: finalWorldState,
-    regionalGraph: applied.regionalGraph,
+    regionalGraph: finalRegionalGraph,
     wizardNews,
     settlementUpdates: settlementUpdates.map(update => ({
       ...update,
@@ -2517,6 +2549,16 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // storms). Present ONLY when non-empty (governor active + something deferred) — so
     // the dormant/OFF path never adds this key (byte-identical). Test-observable.
     ...(tempoDeferred.length ? { tempoDeferred } : {}),
-    pulseRecord,
+    ...(memberBirths.length ? {
+      memberBirths: memberBirths.map(birth => ({
+        ...birth,
+        save: {
+          ...birth.save,
+          settlement: clone(birth.save.settlement),
+          campaignState: clone(birth.save.campaignState),
+        },
+      })),
+    } : {}),
+    pulseRecord: finalPulseRecord,
   };
 }

@@ -487,6 +487,42 @@ async function supabaseSave(
   return data.id;
 }
 
+/**
+ * Idempotent explicit-id save used by deterministic world-pulse member births.
+ * Ordinary user saves keep server-minted ids through supabaseSave; this seam is
+ * intentionally separate so replaying one birth converges on one row.
+ */
+async function supabaseUpsert(
+  entry,
+  { expectedOwnerId = null, isSessionCurrent = null } = {},
+) {
+  const ownerId = await assertExpectedSupabaseOwner(
+    expectedOwnerId,
+    isSessionCurrent,
+  );
+  const v2 = migrateSaveToV2(entry);
+  if (!v2?.id) throw new Error('Explicit-id save upsert requires an id.');
+  const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
+  const row = {
+    ...mutationRow({ ...v2, settlement }),
+    user_id: ownerId,
+  };
+  assertSaveSessionCurrent(ownerId, isSessionCurrent, ownerId);
+  const { data, error } = await supabase
+    .from('settlements')
+    .upsert(row, { onConflict: 'id' })
+    .select('id')
+    .single();
+  if (error) throw error;
+  if (String(data?.id || '') !== String(v2.id)) {
+    throw Object.assign(
+      new Error('Settlement upsert did not confirm the requested row.'),
+      { code: 'settlement_upsert_unconfirmed' },
+    );
+  }
+  return data.id;
+}
+
 async function supabaseUpdate(
   id,
   partial,
@@ -731,6 +767,29 @@ async function localSaveEntry(
   return id;
 }
 
+async function localUpsert(
+  entry,
+  { expectedOwnerId = null, isSessionCurrent = null } = {},
+) {
+  assertSaveSessionCurrent(expectedOwnerId, isSessionCurrent, expectedOwnerId);
+  const v2 = migrateSaveToV2(entry);
+  if (!v2?.id) throw new Error('Explicit-id save upsert requires an id.');
+  const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
+  const rows = await localLoad();
+  const index = rows.findIndex(row => String(row.id) === String(v2.id));
+  const next = {
+    ...(index === -1 ? {} : rows[index]),
+    ...v2,
+    settlement,
+    id: v2.id,
+    savedAt: index === -1 ? Date.now() : rows[index].savedAt,
+  };
+  if (index === -1) rows.unshift(next);
+  else rows[index] = next;
+  localWrite(rows);
+  return v2.id;
+}
+
 async function localUpdate(id, partial) {
   const saves = await localLoad();
   // String() both sides (ported master fix): a numeric id passed as a string
@@ -800,6 +859,7 @@ export const saves = {
   /** F42: metadata-only library projection (no blob columns) for grid paint. */
   listMeta: isConfigured ? supabaseListMeta : localListMeta,
   save:     isConfigured ? supabaseSave     : localSaveEntry,
+  upsert:   isConfigured ? supabaseUpsert   : localUpsert,
   update:   isConfigured ? supabaseUpdate   : localUpdate,
   delete:   isConfigured ? supabaseDelete   : localDelete,
   count:    isConfigured ? supabaseCount    : localCount,

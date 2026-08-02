@@ -27,9 +27,10 @@ describe('the symmetry law — war and peace reasons equally typed, equally rece
     // 7 wave-1 casus + W-CONVERGENCE's foreign_clash↔spheres_understanding + D4's
     // fear_of_dominance↔balance_restored + D7's two reframe casus (ingratitude_debt↔
     // debt_forgiven, dependency_by_design↔bonds_of_commerce) + the two motive-gap
-    // closures: opportunism↔hopelessness (the vulture war, §14.1/§14.3) and
-    // sacred_claim↔common_rite (the religious casus, §14.1 IDEOLOGY/FAITH).
-    expect(WAR_REASON_TYPES.length).toBe(13);
+    // closures: opportunism↔hopelessness (the vulture war, §14.1/§14.3),
+    // sacred_claim↔common_rite (the religious casus, §14.1 IDEOLOGY/FAITH),
+    // and WR-3's lineage_claim↔kinship_bond founding-edge pair.
+    expect(WAR_REASON_TYPES.length).toBe(14);
   });
 
   it('the receipt shapes match across war/peace (the shared record factory)', () => {

@@ -161,6 +161,26 @@ export function buildPausedAdvanceCursor(result, now, preIntervalUndo = null) {
 }
 
 /**
+ * Attach the exact inverse of deterministic member births to a pre-advance
+ * snapshot.  The snapshot remains absent-shape-compatible when no birth fired.
+ * @param {any} snapshot
+ * @param {any[]} births
+ */
+function withUndoMemberBirths(snapshot, births) {
+  if (!snapshot || !Array.isArray(births) || births.length === 0) return snapshot;
+  const byId = new Map(
+    (Array.isArray(snapshot.memberBirths) ? snapshot.memberBirths : [])
+      .map(row => [String(row.saveId), row]),
+  );
+  for (const birth of births) {
+    const saveId = String(birth?.saveId || '');
+    const birthId = String(birth?.birthId || '');
+    if (saveId && birthId) byId.set(saveId, { saveId, birthId });
+  }
+  return { ...snapshot, memberBirths: [...byId.values()] };
+}
+
+/**
  * Deposit-and-consume reconcile (fix wave 2 #2). applyWorldPulseResultToState commits
  * `result.wizardNews` WHOLESALE, and that feed was derived from the pre-advance clone
  * lifted BEFORE the advance's in-flight yield. A wizardNews write that landed on the
@@ -464,6 +484,8 @@ export async function runAdvanceCampaignWorld({
       );
     }
 
+    preSnapshot = withUndoMemberBirths(preSnapshot, result?.memberBirths || []);
+
     // ── Phase 2: commit the pure result back onto the draft.
     if (simCampaign && result) {
       set(state => {
@@ -682,7 +704,7 @@ export async function runResolveIntervalMajors({
   // never reads it, so deep-copying it on every resume would charge a full extra
   // pre-interval world per DM verdict for nothing. Same read window as the lift
   // below (the advance-in-flight guard serializes both against any other writer).
-  const parkedUndo = parkedIntervalUndoSnapshot(
+  let parkedUndo = parkedIntervalUndoSnapshot(
     findActiveCampaign(get().campaigns, campaignId),
   );
   set(state => {
@@ -749,6 +771,8 @@ export async function runResolveIntervalMajors({
     : simulateCampaignWorldInterval(resumeArgs));
   if (!sessionCurrent(isSessionCurrent)) return AUTH_SESSION_CHANGED_RESULT;
 
+  parkedUndo = withUndoMemberBirths(parkedUndo, result?.memberBirths || []);
+
   if (result && result.status) {
     // Deposit-and-consume reconcile (fix wave 2 #2): re-append only wizardNews
     // entries that landed during this resume's yield (see runAdvanceCampaignWorld)
@@ -765,6 +789,19 @@ export async function runResolveIntervalMajors({
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       persistUpdates = applyWorldPulseResultToState(state, c, result, now);
+      // The initial paused commit already pushed the pre-interval snapshot onto
+      // the session undo stack.  A later resume segment can mint additional
+      // deterministic members, so refresh that existing entry with the parked
+      // snapshot's accumulated birth inverses.  Without this replacement the
+      // cursor knew about the later child, but completing the interval dropped
+      // the cursor and Undo left that child orphaned.
+      if (parkedUndo && Array.isArray(state.pulseUndoStack)) {
+        for (let i = state.pulseUndoStack.length - 1; i >= 0; i -= 1) {
+          if (String(state.pulseUndoStack[i]?.campaignId) !== String(campaignId)) continue;
+          state.pulseUndoStack[i] = parkedUndo;
+          break;
+        }
+      }
       // Park a FRESH cursor if the resumed segment paused again; else CLEAR the
       // cursor back to byte-neutral (the interval finished). The pre-INTERVAL undo
       // snapshot rides across verbatim (R-5b): a re-pause is still the SAME advance,

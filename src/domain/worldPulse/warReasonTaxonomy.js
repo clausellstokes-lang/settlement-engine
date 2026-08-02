@@ -7,7 +7,7 @@
  * into their import graph.
  */
 
-/** The thirteen shipped casus-belli kinds. */
+/** The fourteen shipped casus-belli kinds. */
 export const WAR_REASON_TYPES = Object.freeze([
   'grievance',
   'revanchism',
@@ -22,9 +22,10 @@ export const WAR_REASON_TYPES = Object.freeze([
   'dependency_by_design',
   'opportunism',
   'sacred_claim',
+  'lineage_claim',
 ]);
 
-/** The thirteen shipped casus-pacis kinds. */
+/** The fourteen shipped casus-pacis kinds. */
 export const PEACE_REASON_TYPES = Object.freeze([
   'exhaustion',
   'belief_convergence',
@@ -39,7 +40,19 @@ export const PEACE_REASON_TYPES = Object.freeze([
   'bonds_of_commerce',
   'hopelessness',
   'common_rite',
+  'kinship_bond',
 ]);
+
+/**
+ * The DM-declarable subset. `lineage_claim` is derived from a durable parent
+ * edge plus a live size inversion; admitting it through the generic decree
+ * verb would manufacture both facts. Keep derived causes in the closed reason
+ * taxonomy (persistence/termination still validate them) but out of the
+ * authoring dial.
+ */
+export const DECLARABLE_WAR_REASON_TYPES = Object.freeze(
+  WAR_REASON_TYPES.filter((type) => type !== 'lineage_claim'),
+);
 
 /**
  * The symmetry-law bijection: every war reason has one distinct peace mirror.
@@ -59,6 +72,7 @@ export const REASON_MIRRORS = Object.freeze({
   dependency_by_design: 'bonds_of_commerce',
   opportunism: 'hopelessness',
   sacred_claim: 'common_rite',
+  lineage_claim: 'kinship_bond',
 });
 
 /** Total validation for an unknown persisted casus type. @param {unknown} type */

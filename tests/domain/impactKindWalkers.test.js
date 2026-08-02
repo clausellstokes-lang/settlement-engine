@@ -75,6 +75,9 @@ const EXPECTED_VOICE = {
   deity_war_pressure: null,
   deity_peace_pressure: null,
   war_culture_suppressed: null,
+  // WR-3's graduation beat owns its authored lineage sentence; it must not
+  // borrow a generic events or war crier voice on top of that receipt.
+  lineage_edge_recorded: null,
   faction_capture: null, field_battle: null, generosity_credit_default: null,
   generosity_purchase: null, generosity_refuge: null, generosity_refusal: null,
   generosity_trade_overture: null, harvest: null, hierarchy_cascade: null, hungry_gap: null,
