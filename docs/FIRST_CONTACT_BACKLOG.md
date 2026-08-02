@@ -392,3 +392,47 @@ is a real deep link to its page/tab:
    dividers (lines/chevrons) sit between cells and are unaffected; the journey
    trio (Create › Library › Realm) gains NO dropdowns in this order — it stays
    the clean arrowed path.
+
+---
+
+## LD-6 — THE ANNUAL TOGGLE (owner-ordered 2026-08-01; paid surface — owner-authorized
+## by the order itself; implementation = the external implementer)
+
+**The order:** the Cartographer card gains a monthly/annual toggle — $5.99/mo ↔
+$59.99/yr (owner explicitly accepts the ~$11.89 discount) — switching both the
+displayed price and the Stripe destination the Subscribe button targets. No new
+box; the toggle lives inside the existing card.
+
+**Spec:**
+1. **Two Stripe Prices, one Product:** `cartographer_monthly` + `cartographer_annual`
+   on the same Stripe product; the pair lives in billing CONFIG (single source),
+   never hardcoded in the component. The toggle swaps which price/link the button
+   uses. (If the current button is a Payment Link, mint the annual link the same
+   way; if it is a checkout-session endpoint, the endpoint takes the priceId.)
+2. **⚠️ THE DOUBLE-SUBSCRIBE GATE (real hazard):** Payment Links/checkout do NOT
+   dedupe existing subscribers — a current monthly subscriber clicking the annual
+   checkout can end up with TWO subscriptions. Already-subscribed users' button
+   routes to the Stripe Customer Portal (plan switch with proration) instead of
+   checkout. Verify the existing button's subscribed-state behavior at build; if
+   the gate doesn't exist yet, it ships WITH this toggle or the toggle waits.
+3. **⚠️ THE REFUND-POLICY DEPENDENCY (intersects a standing order):** annual
+   subscriptions make prorated-refund requests routine (the month-3 cancellation),
+   and the standing hazard stands: until the webhook train deploys, partial
+   refunds claw back whole seats — ISSUE NONE. Therefore: (a) the annual refund
+   policy is WRITTEN INTO TERMS before annual goes live (owner call, parked:
+   no-prorated / prorate-to-month / goodwill case-by-case); (b) annual launch is
+   sequenced AFTER the webhook train deploy, or with an explicit owner acceptance
+   of the interim no-refunds posture.
+4. **Honest math on the face:** the annual side shows the real numbers in house
+   voice — "$59.99 a year · two months free" (or equivalent-monthly phrasing,
+   owner's taste) — the discount is the lever; show it, never bury it.
+5. **MONTHLY IS THE DEFAULT STATE** (anti-dark-pattern ruling, vetoable): the
+   toggle opens on monthly; annual is chosen, never preselected.
+6. **The toggle is a real control:** labeled radio-pair/switch semantics, keyboard
+   operable, state readable by screen readers; PRICING copy keys centralized as
+   today (the PREMIUM_PITCH discipline — coordinated with its pinned tests).
+7. **Entitlements:** the webhook mirrors Stripe's current_period_end regardless of
+   cadence — verify no period-length assumption anywhere in the entitlement
+   reads (a grep, not a rewrite; annual should be free if the webhook is honest).
+8. **Analytics:** toggle-state + checkout-initiation events extend the existing
+   funnel vocabulary, consent-gated as ever.
