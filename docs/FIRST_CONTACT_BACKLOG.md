@@ -415,14 +415,21 @@ box; the toggle lives inside the existing card.
    routes to the Stripe Customer Portal (plan switch with proration) instead of
    checkout. Verify the existing button's subscribed-state behavior at build; if
    the gate doesn't exist yet, it ships WITH this toggle or the toggle waits.
-3. **⚠️ THE REFUND-POLICY DEPENDENCY (intersects a standing order):** annual
-   subscriptions make prorated-refund requests routine (the month-3 cancellation),
-   and the standing hazard stands: until the webhook train deploys, partial
-   refunds claw back whole seats — ISSUE NONE. Therefore: (a) the annual refund
-   policy is WRITTEN INTO TERMS before annual goes live (owner call, parked:
-   no-prorated / prorate-to-month / goodwill case-by-case); (b) annual launch is
-   sequenced AFTER the webhook train deploy, or with an explicit owner acceptance
-   of the interim no-refunds posture.
+3. **THE REFUND POLICY — RULED BY THE OWNER 2026-08-01 (supersedes the parked
+   call):** NO REFUNDS for subscriptions — every purchase is one-time and final,
+   for all purchasers. A refund may be REQUESTED (route: Account ▸ Support, the
+   LD-5 tab), but a request is never a guarantee; grants are owner-discretionary.
+   Consequences: (a) the policy is WRITTEN INTO TERMS and disclosed clearly at
+   checkout BEFORE annual goes live — with the standard except-where-required-
+   by-law carve-out for the legal reviewer's judgment (some consumer
+   jurisdictions impose statutory rights no contract can waive; the carve-out
+   is the lawyer's to word, flagged here so the tail's legal review sees it);
+   (b) the webhook-train interaction SHRINKS but does not vanish — any
+   DISCRETIONARY refund granted before the train deploys still claws back whole
+   seats (the standing order: issue none until then applies to goodwill grants
+   exactly as it did to policy refunds); (c) cancellation stays self-serve and
+   immediate-effect-at-period-end in the portal (no-refunds never means
+   no-cancellation — the subscription simply runs out its paid term).
 4. **Honest math on the face:** the annual side shows the real numbers in house
    voice — "$59.99 a year · two months free" (or equivalent-monthly phrasing,
    owner's taste) — the discount is the lever; show it, never bury it.
