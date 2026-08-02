@@ -613,6 +613,29 @@ and a faction at once.*
   salt trade; Factor Maren Verren, abroad at Threeways"). DM-only: covert
   interests ride includeCovert.
 
+**TR-2b — THE COVERT LEDGER (the syndicate variant) [CHAIR AMENDMENT 2026-08-02
+under full owner delegation — vetoable; a RECORDED DECISION + SHAPE, not a
+drafted wave: the full spec (all requirements, pins, bands) is drafted when the
+owner sequences it, as its own audited slice behind its own flag
+`syndicateHousesEnabled`, after TR-2]:** the criminal syndicate is A HOUSE, not
+a new actor class — SP-4a's closure holds; it binds to the house appetite
+class. Shape, all riding built machinery: a house at the existing `criminal`
+faction type (factionCatalog.js:32) carries PUBLIC books (the front — a
+legitimate interest) plus COVERT interests (contraband stock/route kinds —
+TR-2's existing includeCovert seam, widened); its factors travel declared
+`commercial`, true `covert` (the Q amendment's declared/true split, SP-1);
+direction of compromised NPCs rides the CORRUPTION WEB with the syndicate-house
+admitted as a patron — the ONE substrate widening this variant needs (today
+only courts mint covert assets; same caps, same leash material, same paid
+eyes); counterforces are the BUILT exposure stack (IN-3's sweep,
+corruption_exposed's blowback triple, conscience-gated seizures, TR-6's moral
+drift, the assize) — nothing new opposes it, which is what makes it
+design-cheap. INFO inherits (the syndicate as brokerage customer, no new
+surface); the POP direction is DECLARED EMPTY in v1 (no protection-racket lane
+without its own ruling and its own counterforce). Law One holds absolutely: the
+syndicate is faction-grain, operatives cast by read-wiring, no crime-boss
+micro-agent, no named-cast death, ever. Queue row CR-5 records the ruling.
+
 ### TR-3 — BELIEVED MARKETS (flag `believedMarketsEnabled`)
 *Historical archetype: the Antwerp price letters — merchants sailed on last
 month's prices and found this month's.*

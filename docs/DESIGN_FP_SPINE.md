@@ -73,6 +73,38 @@
     the Herald; every program's news classes register with the pacing/
     significance machinery so depth never becomes wallpaper. Story density has
     flow control by law.
+13. **THE ALIGNMENT COUPLING (both axes, both directions) [CHAIR AMENDMENT
+    2026-08-02 under full owner delegation — vetoable; the corpus's "twelve
+    requirements" phrases refer to the ratified core above, and waves pick
+    13–14 up at build]:** the settlement's alignment is a DERIVED two-axis
+    read — `alignmentOf(id) → { lawfulness01, malice01 }` (beliefMap.js:915,
+    informationStatecraft.js:584) — composed from its people; it is never a
+    stored settlement stock and gains NO writer (never-store-a-derivable).
+    Every mechanism names its READ engagement — which axes colour it
+    (quadrant reads, contraband/conscience gates, the extremity and
+    just-razing gates, the world's judgment on the observer's axis) — or
+    declares alignment-empty WITH REASON (a decision, not an omission).
+    WRITE-side: a mechanism that moves a town's soul moves the CONSTITUENTS
+    — NPC alignment, roster, institutions — through their existing writers
+    only; a parallel settlement-alignment stock or writer is a design
+    defect. Each wave carries an Alignment line; the audit stage enforces
+    totality. POPULATIONS' current zero engagement resolves at POP build
+    under this requirement.
+14. **THE EDIT VERB (the DM's pen and the clerk's proposal) [CHAIR AMENDMENT
+    2026-08-02 under full owner delegation — vetoable]:** every new
+    player/DM-visible state ships its edit story IN THE SAME WAVE: (a) the
+    DM VERB through the established store-action lane (operationRegistry-
+    registered, compendium data regenerated, approval-routed where the edit
+    overrides an engine outcome — the REPUDIATE_TREATY twin discipline);
+    (b) LIFECYCLE SURVIVAL — the edit survives regen/undo/import via the
+    edits-delta idiom, round-trip pinned (the estate's most-bitten class);
+    (c) the AI SURFACE — the AI edits nothing directly, ever: it proposes
+    TYPED operations from closed vocabularies that drive the SAME DM verb
+    (finite-semantics law: the AI is a bucketing clerk, never a writer). A
+    state with no verb is a RECORDED decision ("engine-only, because X"),
+    never silence. GRAMMAR's approval-lane rows and INTERIOR's burial verb
+    are the house pattern; TRADE/POP/INFO currently name no verbs and pick
+    theirs up at build under this requirement.
 
 ## §2 THE SHARED SPINE INFRASTRUCTURE (built once, consumed by all six —
 ## width through reuse is how constant density stays affordable)

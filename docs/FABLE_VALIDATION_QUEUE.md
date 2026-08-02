@@ -232,3 +232,38 @@ RULED (each vetoable):
   reconciled record STANDS (TRADE + POP reserved, FAITH deferred); reserving the
   seam is WF-3 design work for the FAITH build, not a cohesion edit — revisit when
   WF-3's decision surface is drafted.
+
+RULED UNDER FULL DELEGATION 2026-08-02 (owner: "i leave absolutely everything to
+you best judgment fable" — each vetoable):
+- **CR-5 — THE SYNDICATE RULING (the owner's criminal-organizations question):**
+  adopted as VOCABULARY over built machinery, not new ontology: the syndicate =
+  a house at the existing `criminal` faction type with covert books beside its
+  public front (TR-2b — recorded as decision + shape; the full wave spec drafts
+  when the owner sequences it, dark behind `syndicateHousesEnabled`). The one
+  substrate widening: the corruption web admits a syndicate-house as patron
+  (today only courts mint covert assets). Compromised front-NPCs = the existing
+  covert (patron, target) bindings; front/true = the declared/true purpose seam.
+  INFO inherits; the POP direction DECLARED EMPTY in v1. Ontology closure judged
+  RESPECTED — no new actor class (SP-4a holds), no new stock family. Veto strikes
+  TR-2b, or escalates to a full ontology re-opening instead.
+- **CR-6 — SPINE REQUIREMENT 13, THE ALIGNMENT COUPLING (the owner's both-axes
+  question):** the honest audit answer was NO — alignment threaded where
+  substance demanded (FAITH quadrants, TRADE moral pricing + relational
+  contraband, WAR's evil-exclusive razing + observer's-axis judgment, GRAMMAR's
+  quadrant mediation) but POPULATIONS engaged zero and no requirement enforced
+  it. Cure = requirement 13: both axes (lawfulness01/malice01 — a DERIVED
+  settlement read with NO writer) join the density contract; every wave declares
+  read-engagement or alignment-empty with reason; write-side only through
+  constituents' existing writers — a settlement-alignment stock is a defect.
+  SCOPE RULING: the law lands now; per-wave Alignment lines land at build under
+  the audit stage, NOT via a third corpus pass tonight.
+- **CR-7 — SPINE REQUIREMENT 14, THE EDIT VERB (the owner's editability
+  question):** the honest audit answer was NO — read-side legibility is law (the
+  dossier round-trip) but no write-side contract existed; GRAMMAR/INTERIOR carry
+  verbs (approval lanes, the burial), TRADE/POP/INFO name none. Cure =
+  requirement 14: every new player/DM-visible state ships its DM verb
+  (store-action lane, operationRegistry, approval-routed where it overrides an
+  engine outcome), lifecycle survival (edits-delta idiom, round-trip pinned),
+  and its AI surface as TYPED PROPOSAL driving the same verb (the AI is a
+  bucketing clerk, never a writer); verb-less state is a recorded engine-only
+  decision. Same scope ruling: the law now, per-wave rows at build.
