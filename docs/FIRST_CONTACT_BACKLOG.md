@@ -417,8 +417,9 @@ box; the toggle lives inside the existing card.
    the gate doesn't exist yet, it ships WITH this toggle or the toggle waits.
 3. **THE REFUND POLICY — RULED BY THE OWNER 2026-08-01 (supersedes the parked
    call):** NO REFUNDS for subscriptions — every purchase is one-time and final,
-   for all purchasers. A refund may be REQUESTED (route: Account ▸ Support, the
-   LD-5 tab), but a request is never a guarantee; grants are owner-discretionary.
+   for all purchasers. A refund may be REQUESTED — through FEEDBACK & SUPPORT
+   (the existing channel; owner-specified route 2026-08-01) — but a request is
+   never a guarantee; grants are owner-discretionary.
    Consequences: (a) the policy is WRITTEN INTO TERMS and disclosed clearly at
    checkout BEFORE annual goes live — with the standard except-where-required-
    by-law carve-out for the legal reviewer's judgment (some consumer
