@@ -26,12 +26,17 @@ import { afterEach, describe, expect, test } from 'vitest';
 
 afterEach(cleanup);
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import CausalityPopup from '../../src/components/map/CausalityPopup.jsx';
 import HeraldHeadline from '../../src/components/map/HeraldHeadline.jsx';
 import { CONNECTIVE_POOLS } from '../../src/domain/display/heraldCausalGrammar.js';
 import { UNRECEIPTED_HOP } from '../../src/domain/display/receiptClauseFloor.js';
 
 const LINEAGE = 'disinfo:karsh:elmspur:10';
+/** The DEEPEST hop's recorded clause. Every disclosure row renders its own hop's
+ *  clause, which makes this the natural same-path liveness anchor for the
+ *  attribution exclusions below. */
+const DEEP_CLAUSE = 'the eastern road was cut';
 
 /** A world whose provenance ledger records one two-link chain off `evt-root`. */
 function makeWorld({ lit = true } = {}) {
@@ -92,11 +97,15 @@ describe('THE POPUP CONVENTION — no acknowledge control, so outside-click clos
   test('renders no acknowledge/continue/dismiss control of any kind', () => {
     render(<CausalityPopup open onClose={() => {}} item={ITEM} worldState={makeWorld()} nameById={NAMES} seesSecrets />);
     const buttons = screen.getAllByRole('button').map((b) => (b.getAttribute('aria-label') || b.textContent || '').toLowerCase());
+    // THE LIVENESS ANCHOR FIRST: the popup really does render an affordance list,
+    // and the one affordance present is a CLOSE. Without this the sweep below
+    // would pass just as happily over an empty button list.
+    expect(buttons.length).toBeGreaterThan(0);
+    expect(buttons.some((l) => l.includes('close'))).toBe(true);
     for (const label of buttons) {
+      // anchored: the button list is pinned non-empty and to carry a `close` label above
       expect(label).not.toMatch(/got it|continue|acknowledge|don.t show|understood|ok\b/);
     }
-    // The one affordance present is a CLOSE, and it says so.
-    expect(buttons.some((l) => l.includes('close'))).toBe(true);
     expect(screen.getByTestId('causality-popup-scrim').getAttribute('data-popup-convention')).toBe('outside-click');
   });
 
@@ -169,12 +178,20 @@ describe('THE MANIPULATION DISCLOSURE', () => {
     const worn = screen.getAllByTestId('causality-disclosure-row')
       .find((r) => r.getAttribute('data-integrity') === 'worn');
     expect(worn).toBeTruthy();
-    expect(worn.textContent).not.toContain('House Vell');
-    expect(worn.textContent).not.toContain('Sown as:');
+    // THE ANCHOR travels the same path as the exclusion: every disclosure row
+    // renders its hop's own clause, so a row that still shows "the eastern road
+    // was cut" is demonstrably rendered and populated. A row that silently stopped
+    // rendering would fail HERE rather than pass the two exclusions below.
+    expectAbsentWithAnchor(worn.textContent, 'House Vell', DEEP_CLAUSE, 'a merely-worn link names no commissioner');
+    expectAbsentWithAnchor(worn.textContent, 'Sown as:', DEEP_CLAUSE, 'a merely-worn link shows no seeded assertion');
     // And the compound row's own line still attributes the GROWTH to no one.
     const planted = screen.getAllByTestId('causality-disclosure-row')
       .find((r) => r.getAttribute('data-integrity') === 'planted_worn');
     expect(planted.textContent).toMatch(/never wrote|nobody's design|finished by accident|wear has no author/);
+    // GUARD-THE-GUARD: the compound row in the SAME popup DOES name the sowing, so
+    // the exclusions above measure attribution rather than a renderer that never
+    // prints a culprit at all.
+    expect(planted.textContent).toContain('House Vell');
   });
 
   test('THE DIVERGENCE PIN: an ORGANIC lineage reads the same on both surfaces (F2)', () => {
@@ -188,13 +205,17 @@ describe('THE MANIPULATION DISCLOSURE', () => {
     render(<CausalityPopup open onClose={() => {}} item={ITEM} worldState={world} nameById={NAMES} seesSecrets />);
 
     const states = screen.getAllByTestId('causality-disclosure-row').map((r) => r.getAttribute('data-integrity'));
-    expect(states).toContain('clean');
-    expect(states).not.toContain('planted');
-    expect(states).not.toContain('planted_worn');
+    expectAbsentWithAnchor(states, 'planted', 'clean', 'an organic lineage reads clean on the register');
+    expectAbsentWithAnchor(states, 'planted_worn', 'clean', 'an organic lineage is not compound either');
 
     // …and the TELLING beside it spends no connective from the `planted` pool.
     const telling = screen.getByTestId('causality-telling').textContent;
+    // THE LIVENESS ANCHOR for the sweep: the telling really did compose over this
+    // hop, so an exclusion over it is measuring wording rather than an empty node.
+    expect(telling).toContain('the grain levy failed at Karsh');
+    expect(CONNECTIVE_POOLS.planted.length).toBeGreaterThan(0);
     for (const line of CONNECTIVE_POOLS.planted) {
+      // anchored: the telling is pinned to carry the hop's own clause, and the pool non-empty, above
       expect(telling, `the telling says "${line.text}" where the register says clean`).not.toContain(line.text);
     }
     // GUARD-THE-GUARD: the same fixture wearing the SYNTHETIC prefix does reach
@@ -221,9 +242,10 @@ describe('THE MANIPULATION DISCLOSURE', () => {
     expect(states).toContain('unknown');
     // The unknown row names no culprit and invents no provenance.
     const unknown = rows.find((r) => r.getAttribute('data-integrity') === 'unknown');
-    expect(unknown.textContent).toContain(UNRECEIPTED_HOP);
-    expect(unknown.textContent).not.toContain('House Vell');
-    expect(unknown.textContent).not.toContain('Sown as:');
+    // The row renders the walk's own line, which is BOTH the assertion and the
+    // anchor: a row that stopped rendering could not carry it.
+    expectAbsentWithAnchor(unknown.textContent, 'House Vell', UNRECEIPTED_HOP, 'an unreceipted hop names no commissioner');
+    expectAbsentWithAnchor(unknown.textContent, 'Sown as:', UNRECEIPTED_HOP, 'an unreceipted hop shows no seeded assertion');
     // GUARD-THE-GUARD: the RECEIPTED hops in the same popup do read clean, so the
     // pin is measuring the missing receipt and not a popup that says unknown to
     // everything.
