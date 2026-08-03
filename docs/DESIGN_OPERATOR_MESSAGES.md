@@ -42,6 +42,23 @@ message_receipts:  { messageId, userId, deliveredAt, readAt, dismissedAt }
   trust-correct one — a moderation notice must not arrive costumed) — joining
   the LD-5 menu as its seventh item (the map amends; the dropdown grammar
   holds).
+  - **THE LD-5 SEAM [Lane C, 2026-08-03 — read before building LD-5].** This
+    surface LANDED AHEAD of LD-5, so LD-5's Account ▾ block in
+    `docs/FIRST_CONTACT_BACKLOG.md` was written without it. That block is now
+    amended there to match, and the amendment is recorded on BOTH sides so
+    neither doc can be followed into a regression. Three things bind:
+    (a) **"Seventh item" means a seventh MEMBER, not position seven.** The
+    dropdown mirrors `ACCOUNT_SECTIONS`, which places Messages FOURTH, after
+    Subscription. (Chair call, vetoable — say "veto" to append it last.)
+    (b) **The deep-link param is `?section=`, not `?tab=`.** LD-5's `?tab=`
+    spelling was never built; the reply affordance's link is
+    `?section=support&message=<id>`, and the section allowlist is DERIVED from
+    `ACCOUNT_SECTIONS` rather than hardcoded — keep it derived, or `messages`
+    silently drops out of the deep-link grammar.
+    (c) **Deleting the Messages row from Account ▾ is a REGRESSION, not a
+    simplification.** It carries the badge's second render point (the hover
+    swap), and `tests/components/accountMenuMessages.test.jsx` reds on its
+    removal. That red must never be re-baselined to match a stale spec.
 - The list: newest first, unread emphasized, class-labeled chips (Service /
   Announcement), read-state per receipt; detail view renders the body + date +
   a single reply affordance (§4).

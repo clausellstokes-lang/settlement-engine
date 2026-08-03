@@ -87,9 +87,27 @@ volumes corrected @ 36862650 + fdf43790):
 21. **The 2026-08-02 dictation corpus** (all audited + corrected; specs in
     their named design docs): the Founders' Hall (all-invited 30, no-trade,
     petition letters, presence-sealed) · profile identity + the civility
-    guard's block/veil · operator messages · LD-1..LD-11 · the About split ·
+    guard's block/veil · ~~operator messages~~ **(✅ BUILT — do not re-dispatch;
+    see below)** · LD-1..LD-11 · the About split ·
     DESIGN_GALLERY_SHOWCASE · DESIGN_AI_CHAT_SURFACE · the Bound Book register.
     Order within this block is Sol's to optimize (independent surfaces).
+    - **✅ OPERATOR MESSAGES IS BUILT** @ `59d298d3` (substrate, Account section,
+      admin surfaces, worker, migration 194) + `3b0ba465` (the unread badge).
+      Re-verified live on 2026-08-03: 11 vitest files / 88 tests green, and the
+      three operator Deno groups 25/25 green. Spec conformance audited against
+      `DESIGN_OPERATOR_MESSAGES.md` §1–§8 — no gaps found. **This row's earlier
+      unmarked state caused one lane to be dispatched as greenfield against an
+      already-complete surface; do not repeat that.**
+    - ⚠️ **BEFORE DISPATCHING ANY OTHER SURFACE IN THIS BLOCK, CHECK GIT FIRST.**
+      The block lists specs, not open work, and several landed after it was
+      written. `git log --oneline -- docs/<ITS_DESIGN_DOC>.md` plus a read of
+      that doc's PROGRESS blockquote settles build state in one step. The build
+      state of the remaining entries is UNVERIFIED here — this note deliberately
+      claims nothing about them rather than guessing.
+    - ⚠️ **LD-5 CARRIES A LANDED-SURFACE HAZARD.** Its Account ▾ block predates
+      Messages and, built verbatim, would delete it. Both `FIRST_CONTACT_BACKLOG.md`
+      (LD-5) and `DESIGN_OPERATOR_MESSAGES.md` §2 now carry the binding
+      amendment; read either before touching `AccountMenu.jsx`.
 22. **THE RECEIPT-POOL ANNEXES ARE PRE-AUTHORED (2026-08-02)** — docs/content/
     RECEIPT_POOLS_{WAR,TRADE,FAITH,POPULATIONS,INFORMATION,GRAMMAR,INTERIOR,
     COUPLINGS}.md: 676 phrased kinds, ~3,000 angle-distinct variants, authored

@@ -498,7 +498,28 @@ is a real deep link to its page/tab:
 - **Gallery ▾** Settlements · Maps · Campaigns · My Saves (NEW: a private per-user
   tab — ALL the user's saves regardless of category)
 - **About ▾** What this Is · Practical Guide
-- **Account ▾** Profile · Security · Subscription · Support · Data · Preferences
+- **Account ▾** Profile · Security · Subscription · **Messages** · Support · Data ·
+  Preferences — SEVEN items, in exactly this order.
+
+**[AMENDED 2026-08-03 — Lane C, operator messages. This block was written on
+2026-08-01, before Messages existed; building it verbatim would DELETE a landed
+surface.]** **Messages** shipped ahead of LD-5 (`DESIGN_OPERATOR_MESSAGES.md` §2;
+commits `59d298d3` + `3b0ba465`) and is owner-ordered, not chair-elective. Three
+corrections bind any LD-5 build:
+1. **The Messages row is mandatory in Account ▾.** It carries the unread badge's
+   SECOND render point — the owner's "moves" behavior, where opening the menu
+   hides the Account button's numeral and shows the Messages item's numeral in
+   the same frame. `tests/components/accountMenuMessages.test.jsx` reds if the
+   row or either badge arm is dropped; that red is a REAL regression, never
+   stale test debt to be re-baselined against this doc.
+2. **The order mirrors the page rail, so Messages sits FOURTH, not seventh.**
+   `ACCOUNT_SECTIONS` (`src/components/account/AccountNav.jsx`) is the one
+   canonical order and already places Messages after Subscription. The operator-
+   messages design doc's "seventh item" meant "a seventh member of a six-item
+   menu", not position seven; the dropdown mirrors the rail rather than
+   appending. (Chair call, vetoable — say "veto" to append it last instead.)
+3. **The AI & keys row stays Surveyor-gated and out of this list**, exactly as
+   the rail already filters it.
 
 **Binding rulings [CORRECTED 2026-08-02 (self-audit): rulings 1, 2, 4, 5, and 6
 were written against substrate that does not exist or already exists — each is
@@ -534,11 +555,18 @@ respecced against the tree]:**
      source. (If literal path forms are ever wanted, they must register AHEAD
      of the slug regex plus a reserved-slug denylist at publish for
      maps/campaigns/mine — recorded, not chosen here.)
-   - Account ▾ → `/account?tab=profile|security|subscription|support|data|
-     preferences`. NEW WORK: AccountPage's section is local
-     `useState('profile')` (AccountPage.jsx:75) with no route read/write —
-     it gains a mount-time query read + URL sync so the six sections become
-     shareable deep links.
+   - Account ▾ → **`/account?section=profile|security|subscription|messages|
+     support|data|preferences`**. **[CORRECTED 2026-08-03 — Lane C: this bullet
+     is now a DESCRIPTION of landed code, not new work.]** The param is spelled
+     **`section`**, not `tab`; the `?tab=` form here was never built and writing
+     it now would break the landed links, including the operator-message reply
+     deep link `?section=support&message=<id>` (`AccountPage.jsx`). The cited
+     "local `useState('profile')` at AccountPage.jsx:75 with no route read/write"
+     is STALE: `AccountPage` already takes `routeSection`/`routeMessageId` props and
+     the URL sync landed at `59d298d3`. The allowlist is DERIVED from
+     `ACCOUNT_SECTIONS` rather than hardcoded, so adding a rail section adds its
+     deep link for free — keep it derived; a hardcoded list here would silently
+     drop `messages`.
    The menu is a list of real `<a>`s to those URLs, zero JS-only navigation.
 3. **THE TRIPLE-MODE MENU (a11y law):** hover opens (with hover-intent grace so
    diagonal travel doesn't flicker), FOCUS opens (keyboard: the parent is a
