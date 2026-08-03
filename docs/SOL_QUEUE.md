@@ -100,6 +100,15 @@ volumes corrected @ 36862650 + fdf43790):
     finds wanting or unspecced is a STOP-and-report, never a silent rewrite.
     The annex headers carry the slot convention; volume exemplars are variant
     1 verbatim wherever the volume speaks one.
+23a. **THE WAR AMENDMENTS: CONVENIENCE + TRIBUTE**
+    (DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md, 2026-08-02) — Lane A tail, AFTER
+    their preconditions: CV-1..CV-4 (the exit vocabulary {settled, defaulted,
+    cold} + the cold edge · the turncoat shape · the alignment weights ·
+    the betrayal market) after WR-6/WR-7; TB-1..TB-4 (the tribute family —
+    five bases, three-goal demand doctrine, share/service/index/population
+    executors, justice-scaled strain, remission) after GR-3 + WR-10 (+TR-4,
+    POP-1/3 for their bases). Multi-coalition dynamics documented EMERGENT
+    (§5 — no wave); J-CT-1..10 vetoable; chair checkpoints in its §9.
 23. **THE REALM MAGIC TOGGLE** (DESIGN_REALM_MAGIC_TOGGLE.md, 2026-08-02) —
     MG-1 the pre-generation modal + fourth realm knob → MG-2 the projection
     into every member's config at mint (the core: one spread, whole-lifecycle
