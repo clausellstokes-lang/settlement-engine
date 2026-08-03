@@ -78,7 +78,29 @@ function provenanceOf(worldState) {
  * @property {string} type
  * @property {string[]} settlementIds
  * @property {boolean} covert
+ * @property {string[]} lineageIds   the telling lineages the receipt already carries
+ * @property {number} accuracy01     1 when the record measured no drift
  */
+
+/**
+ * THE INTEGRITY ATOMS a receipt already carries — read, never derived. The
+ * causality popup's manipulation disclosure classifies a link from these two
+ * persisted fields plus the disinfo ledger; without them every link would fall
+ * to UNKNOWN and the disclosure could never tell the truth it holds. Both are
+ * plain reads off the same raw record the headline comes from, and both are
+ * ABSENT-SAFE: a receipt that carries neither reads as an undrifted telling with
+ * no lineage, which is exactly what an ordinary engine receipt is.
+ * @param {unknown} raw
+ * @returns {{ lineageIds: string[], accuracy01: number }}
+ */
+function integrityAtomsOf(raw) {
+  const r = raw && typeof raw === 'object' ? /** @type {Record<string, unknown>} */ (raw) : {};
+  const lineage = Array.isArray(r.lineageIds)
+    ? r.lineageIds.map(String)
+    : (typeof r.lineageId === 'string' && r.lineageId ? [r.lineageId] : []);
+  const accuracy = typeof r.accuracy01 === 'number' && Number.isFinite(r.accuracy01) ? r.accuracy01 : 1;
+  return { lineageIds: lineage, accuracy01: accuracy };
+}
 
 /**
  * Build receiptId → resolved display, indexed across every pulseHistory record.
@@ -101,6 +123,7 @@ function buildReceiptIndex(worldState) {
         type: node.dramaClass || node.kind,
         settlementIds: node.settlementIds,
         covert: receiptIsCovert(node.raw),
+        ...integrityAtomsOf(node.raw),
       });
     }
   }
@@ -116,6 +139,8 @@ function buildReceiptIndex(worldState) {
  * @property {number|null} tick
  * @property {string} type
  * @property {string[]} settlementIds
+ * @property {string[]} lineageIds   the telling lineages the receipt carries (empty when redacted)
+ * @property {number} accuracy01     the drift the record measured (1 when none)
  * @property {boolean} redacted      true when a covert hop was hidden from this viewer
  */
 
@@ -143,7 +168,10 @@ function resolveReceipt(id, index, ledger, seesSecrets) {
   const ledgerEntry = ledger ? ledger[id] : undefined;
   const covert = found ? found.covert : false;
   if (covert && !seesSecrets) {
-    return { headline: REDACTED_HOP, tick: found ? found.tick : (ledgerEntry?.tick ?? null), type: 'hidden', settlementIds: [], covert: true, redacted: true };
+    // A covert hop's LINEAGE is content too: it names the telling a planter
+    // seeded. Redaction strips it with the rest, so a non-DM viewer cannot infer
+    // a plant from a field the headline no longer carries.
+    return { headline: REDACTED_HOP, tick: found ? found.tick : (ledgerEntry?.tick ?? null), type: 'hidden', settlementIds: [], covert: true, lineageIds: [], accuracy01: 1, redacted: true };
   }
   if (found) return { ...found, redacted: false };
   // A parent not in pulseHistory (e.g. a root sourceEventId): fall back to the
@@ -154,6 +182,8 @@ function resolveReceipt(id, index, ledger, seesSecrets) {
     type: ledgerEntry?.type || 'event',
     settlementIds: [],
     covert: false,
+    lineageIds: [],
+    accuracy01: 1,
     redacted: false,
   };
 }
@@ -180,7 +210,7 @@ export function buildCauseWalk({ worldState, rootId, seesSecrets = false }) {
   if (rootCovert && !seesSecrets) {
     return {
       rootId: id,
-      root: { headline: REDACTED_HOP, tick: rootResolvedFull ? rootResolvedFull.tick : null, type: 'hidden', settlementIds: [], covert: true },
+      root: { headline: REDACTED_HOP, tick: rootResolvedFull ? rootResolvedFull.tick : null, type: 'hidden', settlementIds: [], covert: true, lineageIds: [], accuracy01: 1 },
       ledgerDark: edges.size === 0,
       atRoot: true,
       gated: true,
@@ -214,7 +244,7 @@ export function buildCauseWalk({ worldState, rootId, seesSecrets = false }) {
     nextParents.sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
     for (const pid of nextParents) {
       const r = resolveReceipt(pid, index, provenance, seesSecrets);
-      chain.push({ id: pid, depth, headline: r.headline, tick: r.tick, type: r.type, settlementIds: r.settlementIds, redacted: r.redacted });
+      chain.push({ id: pid, depth, headline: r.headline, tick: r.tick, type: r.type, settlementIds: r.settlementIds, lineageIds: r.lineageIds, accuracy01: r.accuracy01, redacted: r.redacted });
     }
     frontier = nextParents;
     depth += 1;
