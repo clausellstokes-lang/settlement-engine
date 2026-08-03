@@ -153,7 +153,7 @@ describe('WR-1 opening pins and total dissolution table', () => {
 
   it('covers the taxonomy exactly and projects only the closed four bands', () => {
     expect(Object.keys(WAR_CAUSE_DISSOLUTION).sort()).toEqual([...WAR_REASON_TYPES].sort());
-    expect(Object.keys(WAR_CAUSE_DISSOLUTION)).toHaveLength(14);
+    expect(Object.keys(WAR_CAUSE_DISSOLUTION)).toHaveLength(15);
     expect(WAR_TERMINATION_BANDS).toEqual(['quiet', 'present', 'pressing', 'decisive']);
     expect([0, 0.2, 0.45, 0.7].map(warTerminationBand))
       .toEqual(['quiet', 'present', 'pressing', 'decisive']);
@@ -210,8 +210,12 @@ describe('WR-1 deployment census and dormancy', () => {
 });
 
 describe('WR-1 cause dissolution', () => {
-  it('treats every ordinary founding cause as live only while its current fold survives', () => {
-    const ordinary = WAR_REASON_TYPES.filter((type) => !['opportunism', 'sacred_claim'].includes(type));
+  it('treats every ledger-derived founding cause as live only while its current fold survives', () => {
+    // alliance_obligation is not ledger-derived: its closed join anchor and
+    // exact bilateral compact override a stale reason fold in both directions.
+    const ordinary = WAR_REASON_TYPES.filter((type) => ![
+      'opportunism', 'sacred_claim', 'alliance_obligation',
+    ].includes(type));
     for (const type of ordinary) {
       const live = readWarTerminations({
         worldState: world({

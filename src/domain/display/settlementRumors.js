@@ -142,6 +142,21 @@ export const WHAT_PHRASES = Object.freeze({
   successor_repudiates_war: 'a successor repudiating a war',
   successor_escalates_war: 'a successor widening a war',
   war_dissolved_by_verdict: 'a verdict dissolving a war',
+  // WR-6 THE COALITION GRAPH. All twelve kinds remain phrased even when the
+  // virtual engine flag is dark, so privileged replay and future rumor
+  // propagation can never fall back to de-underscored engine vocabulary.
+  coalition_entry_priced: 'an allied court pricing a call to war',
+  coalition_joined: 'an ally answering a call to war',
+  coalition_refused: 'an ally refusing a call to war',
+  casus_alliance_obligation: 'an alliance compact named as cause for war',
+  mirror_obligation_discharged: 'an alliance obligation discharged',
+  coalition_expenditure_read: 'an allied court reckoning its wartime cost',
+  coalition_stayed: 'an ally choosing to stay in the field',
+  coalition_separate_peace: 'an ally making a separate peace',
+  coalition_apportionment: 'a coalition settlement apportioned',
+  coalition_spoils_divided: 'coalition spoils divided',
+  coalition_debt_paid: 'a coalition debt paid',
+  coalition_debt_unpaid: 'a coalition debt left unpaid',
   // The INDIRECT war and the war of words. These nine are keyed on `kind` rather than
   // `impactKind`, because their authors (momentum.js, supplyWebWarfare.js,
   // informationStatecraft.js) mint no impactKind. That is exactly why the impactKind

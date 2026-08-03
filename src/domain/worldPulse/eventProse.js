@@ -563,6 +563,94 @@ export const WAR_RECEIPTS = Object.freeze({
     'A verdict in one hall closed a war in another.',
     'They went to war over a corruption and unmade the war by exposing it, which the chronicles will call luck.',
   ],
+  // WR-6 THE COALITION GRAPH. These twelve kinds are copied from the war
+  // receipt annex. `warCoalitionReceipt` admits only families whose named
+  // facts are present, so an unknown road, good, settlement, ally, enemy, or
+  // qualitative band can never be improvised onto a reader card.
+  coalition_entry_priced: [
+    (x) => `${x.settlement} counted who might answer for ${x.counterpart}, and then who might answer for those.`,
+    'The court priced the far compacts as beliefs, not promises of who would arrive.',
+    'The obligation is plain and the arithmetic behind it is not.',
+    (x) => `Entering a war is cheap; entering the war behind it is not, and this one prices ${x.band}.`,
+    'They read the whole web before they read the field, which is why they are still deciding.',
+  ],
+  coalition_joined: [
+    (x) => `${x.settlement} answered the call and opened its own edge against ${x.third_party}; the casus on the record is the obligation itself.`,
+    (x) => `The banners went out down ${x.route}; the joined court now owns a separate front.`,
+    'They came because they had said they would, and because the reading of not coming was worse.',
+    "An ally's war is a war, with its own ledger and its own ending.",
+    (x) => `${x.settlement}'s own war edge now records the alliance call among its causes.`,
+  ],
+  coalition_refused: [
+    'They were called, and would not come.',
+    (x) => `${x.settlement} read the alliance web, read its own books, and sent regrets down ${x.route}.`,
+    (x) => `The refusal is a fact in the record now; how ${x.counterpart} reads it is ${x.counterpart}'s character.`,
+    'The obligation was real and the answer was no, and both will be remembered.',
+    'The refusal is archived on the allied edge as a durable fact.',
+  ],
+  casus_alliance_obligation: [
+    (x) => `${x.settlement} is in this war because ${x.counterpart} called and the compact answers for it.`,
+    'The alliance obligation is one recorded cause on this edge; other live causes remain their own facts.',
+    "The borrowed cause remains anchored to the caller's exact war episode and compact.",
+    'They march for a paper, which is a better reason than most.',
+    (x) => `This edge against ${x.third_party} exists because an older edge does.`,
+  ],
+  mirror_obligation_discharged: [
+    (x) => `The obligation is discharged: ${x.settlement} came when called.`,
+    'The record now carries service under the compact beside the obligation it answered.',
+    'They answered the alliance in the field, and that answer is recorded.',
+    'What was owed under this call was given; other claims remain separate.',
+    'The compact survived this use, and the relationship record says so.',
+  ],
+  coalition_expenditure_read: [
+    (x) => `${x.settlement}'s surviving current-episode evidence reads ${x.band}; no lifetime total is invented.`,
+    'The read uses deployed strength, recorded attrition, live exposure, and attributable home-front evidence.',
+    'Damage that healed or left the bounded record is silence in this reckoning.',
+    'What the alliance cost was never written down as a total — it is what the other books already say.',
+    'The reckoning exists whether or not the coalition wants to hold it.',
+  ],
+  coalition_stayed: [
+    'They stayed.',
+    (x) => `${x.settlement} reread its open edge against ${x.third_party} and kept its army in the field.`,
+    'The council reread the war, weighed the same ledgers as its neighbours, and reached the opposite conclusion.',
+    'Staying was a decision and not an inertia, and the record says who made it.',
+    'The ally that stays is owed differently from the ally that came.',
+  ],
+  coalition_separate_peace: [
+    'They went home.',
+    (x) => `${x.settlement} settled its own edge with ${x.third_party} and left the rest of the war standing.`,
+    'The peace was pairwise, as every peace in this world is; the others learned of it from travellers.',
+    'What the abandoned call betrayal, the departed call arithmetic, and the record carries both.',
+    'One edge closed; every other front kept its own state and ending.',
+  ],
+  coalition_apportionment: [
+    (x) => `The losers were assessed together and pay separately: ${x.band} in ${x.good} falls on ${x.settlement} by capacity, culpability, and who called whom.`,
+    'One aggregate judgment became separate bilateral shares under the same settlement identifier.',
+    'Capacity, culpability, field loss, and the alliance call all bear on the share; none alone dictates it.',
+    'Collective liability, pairwise payment — the wagons roll along the edges they always rolled along.',
+    'The apportionment is archived as a durable relationship fact.',
+  ],
+  coalition_spoils_divided: [
+    'The victors divided the settlement by who bled, who led, and who came late.',
+    (x) => `${x.settlement} received ${x.band} of the ${x.good} under the coalition settlement.`,
+    'What was won together was assigned along ordinary bilateral transfer edges.',
+    'What was won together is held separately, with every share archived on the relationship record.',
+    "Every share is an explicit judgment on contribution under the same settlement identifier.",
+  ],
+  coalition_debt_paid: [
+    'They paid what they owed.',
+    (x) => `${x.counterpart} settled the recorded coalition claim owed to ${x.settlement}.`,
+    'The conserved transfer met the recorded claim, and no unpaid remainder was minted.',
+    (x) => `The payment travelled along ${x.route} and is archived as payment, never forgiveness.`,
+    'This coalition claim is closed; other causes and obligations remain separate.',
+  ],
+  coalition_debt_unpaid: [
+    'They never paid.',
+    (x) => `${x.settlement}'s recorded claim against ${x.counterpart} remains unpaid along ${x.route}.`,
+    (x) => `The missing ${x.good} remains an ordinary live obligation between the allied courts.`,
+    'The coalition settlement closed without settling this internal claim.',
+    'The unpaid obligation may later be read as ingratitude; it is not yet a new war.',
+  ],
   // fear_of_dominance — authored in hegemonyFear.js (see HEGEMONY_RECEIPTS below).
 });
 
@@ -1130,6 +1218,120 @@ const WAR_RULING_KIND_BY_ID = new Map(
  */
 export function warRulingReceipt(kind, seed, interp = {}) {
   const row = WAR_RULING_KIND_BY_ID.get(String(kind));
+  if (!row) return null;
+  const eligible = row.pool
+    .map((_, templateIndex) => templateIndex)
+    .filter((templateIndex) => row.requiredSlots[templateIndex].every((slot) => (
+      typeof interp[slot] === 'string' && String(interp[slot]).trim().length > 0
+    )));
+  if (eligible.length === 0) return null;
+  const namespacedSeed = seed ? `${seed}#${row.kind}` : '';
+  const templateIndex = namespacedSeed ? eligible[fnv1a32(namespacedSeed) % eligible.length] : eligible[0];
+  const variant = row.pool[templateIndex];
+  const line = typeof variant === 'function' ? String(variant(interp)) : String(variant);
+  return {
+    kind: row.kind,
+    line,
+    familyId: `${row.kind}.${templateIndex + 1}`,
+    templateIndex,
+    significance: row.significance,
+    audience: row.audience,
+    section: row.section,
+  };
+}
+
+/**
+ * WR-6's governed coalition-reader kinds. Coalition structure remains a graph
+ * of bilateral facts; this registry governs only how an already-earned fact is
+ * spoken, including the two adjudication records whose desk cannot be inferred
+ * from their token alone.
+ */
+/** @typedef {'coalition_entry_priced'|'coalition_joined'|'coalition_refused'|
+ * 'casus_alliance_obligation'|'mirror_obligation_discharged'|
+ * 'coalition_expenditure_read'|'coalition_stayed'|'coalition_separate_peace'|
+ * 'coalition_apportionment'|'coalition_spoils_divided'|'coalition_debt_paid'|
+ * 'coalition_debt_unpaid'} WarCoalitionReceiptKind */
+/** @typedef {{kind:WarCoalitionReceiptKind,significance:'major'|'notable',
+ * audience:'public',section:'war'|'trade'|'events'|'adjudication',
+ * pool:readonly ProseVariant[],requiredSlots:ReadonlyArray<readonly string[]>}} WarCoalitionReceiptRegistryEntry */
+
+/**
+ * @param {WarCoalitionReceiptKind} kind
+ * @param {'major'|'notable'} significance
+ * @param {'war'|'trade'|'events'|'adjudication'} section
+ * @param {ReadonlyArray<readonly string[]>} requiredSlots
+ * @returns {Readonly<WarCoalitionReceiptRegistryEntry>}
+ */
+function warCoalitionKindRow(kind, significance, section, requiredSlots) {
+  return Object.freeze({
+    kind,
+    significance,
+    audience: 'public',
+    section,
+    pool: /** @type {readonly ProseVariant[]} */ (WAR_RECEIPTS[kind]),
+    requiredSlots: Object.freeze(
+      requiredSlots.map((slots) => Object.freeze([...slots])),
+    ),
+  });
+}
+
+/** @type {ReadonlyArray<Readonly<WarCoalitionReceiptRegistryEntry>>} */
+export const WAR_COALITION_KIND_REGISTRY = Object.freeze([
+  warCoalitionKindRow('coalition_entry_priced', 'notable', 'war',
+    [['settlement', 'counterpart'], [], [], ['band'], []]),
+  warCoalitionKindRow('coalition_joined', 'major', 'war',
+    [['settlement', 'third_party'], ['route'], [], [], ['settlement']]),
+  warCoalitionKindRow('coalition_refused', 'major', 'war',
+    [[], ['settlement', 'route'], ['settlement', 'counterpart'], [], []]),
+  warCoalitionKindRow('casus_alliance_obligation', 'notable', 'war',
+    [['settlement', 'counterpart'], [], [], [], ['third_party']]),
+  warCoalitionKindRow('mirror_obligation_discharged', 'notable', 'events',
+    [['settlement'], [], [], [], []]),
+  warCoalitionKindRow('coalition_expenditure_read', 'notable', 'trade',
+    // Every family is confined to the evidence-bounded current-episode read;
+    // no historic stores, named losses, healed damage, or lifetime total is
+    // inferred from an absent ledger.
+    [['settlement', 'band'], [], [], [], []]),
+  warCoalitionKindRow('coalition_stayed', 'notable', 'war',
+    // Staying does not imply that the borrowed cause ended.
+    [[], ['settlement', 'third_party'], [], [], []]),
+  warCoalitionKindRow('coalition_separate_peace', 'major', 'adjudication',
+    [[], ['settlement', 'third_party'], [], [], []]),
+  warCoalitionKindRow('coalition_apportionment', 'major', 'adjudication',
+    [['settlement', 'band', 'good'], [], [], [], []]),
+  warCoalitionKindRow('coalition_spoils_divided', 'major', 'trade',
+    [[], ['settlement', 'band', 'good'], [], [], []]),
+  warCoalitionKindRow('coalition_debt_paid', 'notable', 'trade',
+    [[], ['counterpart', 'settlement'], [], ['route'], []]),
+  warCoalitionKindRow('coalition_debt_unpaid', 'major', 'trade',
+    [[], ['settlement', 'counterpart', 'route'], ['good'], [], []]),
+]);
+
+/** The exact WR-6 governed reader-kind set. */
+export const WAR_COALITION_KINDS = Object.freeze(
+  WAR_COALITION_KIND_REGISTRY.map((row) => row.kind),
+);
+
+/** @type {ReadonlyMap<string, Readonly<WarCoalitionReceiptRegistryEntry>>} */
+const WAR_COALITION_KIND_BY_ID = new Map(
+  /** @type {Array<[string, Readonly<WarCoalitionReceiptRegistryEntry>]>} */ (
+    WAR_COALITION_KIND_REGISTRY.map((row) => [row.kind, row])
+  ),
+);
+
+/**
+ * Resolve one WR-6 sentence from exact supplied truths. Missing slots remove
+ * only the families that name them; unknown kinds stay closed, and a slotless
+ * authored sibling is always preferred to fabricated identity or scalar prose.
+ *
+ * @param {string} kind
+ * @param {string|null|undefined} seed
+ * @param {Record<string, unknown>} [interp]
+ * @returns {{kind:string,line:string,familyId:string,templateIndex:number,
+ *   significance:string,audience:string,section:string} | null}
+ */
+export function warCoalitionReceipt(kind, seed, interp = {}) {
+  const row = WAR_COALITION_KIND_BY_ID.get(String(kind));
   if (!row) return null;
   const eligible = row.pool
     .map((_, templateIndex) => templateIndex)

@@ -1,9 +1,9 @@
 /**
  * subsystemRowsWar.js — SUBSYSTEM CERTIFICATION ROWS for the WAR STACK:
  * warLayerEnabled, the eight war-depth sub-flags that ship lit only in the
- * full_simulation ceiling preset, the three declared-dark WR reads
+ * full_simulation ceiling preset, the four declared-dark WR reads
  * (warTerminationEnabled, dispositionChannelsEnabled, and
- * lineageClaimEnabled), and the three
+ * lineageClaimEnabled, plus coalitionLedgerEnabled), and the three
  * war-adjacent switches this lane
  * ADOPTED from their home cohorts because they certify as war and nowhere else
  * (navalEnabled and peaceEngineEnabled out of the WAVES cohort, and
@@ -642,6 +642,55 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
         name: 'dark_lineage_adds_no_persisted_surface',
         description: 'Absent and explicit-false lineage flags preserve the pre-WR-3 world and never mint an empty reason, mirror, or lineage sidecar.',
         check: 'A pre-wire dormancy golden compares absent versus explicit false and requires byte identity across world state, settlements, graph, news and pulse receipts.',
+      }),
+    ]),
+    soakEvidence: 'unobserved',
+  }),
+  Object.freeze({
+    rule: 'coalitionLedgerEnabled',
+    title: 'Coalition graph, expenditure, and pairwise settlement',
+    module: 'src/domain/certification/couplingRegistry.js,src/domain/worldPulse/warCoalitionGraph.js,src/domain/worldPulse/warAllianceRisk.js,src/domain/worldPulse/warCoalitionDecision.js,src/domain/worldPulse/warCoalitionLedger.js,src/domain/worldPulse/warCoalitionExpenditure.js,src/domain/worldPulse/warCoalitionSettlement.js,src/domain/worldPulse/warCoalitionEvidence.js,src/domain/worldPulse/warCoalitionNews.js,src/domain/worldPulse/warCoalitionPulse.js,src/domain/worldPulse/warDeployment.js,src/domain/worldPulse/warPeaceDecision.js,src/domain/worldPulse/peaceTerms.js,src/domain/worldPulse/peaceReasons.js,src/domain/worldPulse/relationshipEvolution.js,src/domain/worldPulse/eventProse.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY. `joinLedger` is nested inside the parent war
+      // deployment container, while alliance-obligation reasons live in shared
+      // war/peace ledgers. Neither can exclusively certify WR-6. Its twelve
+      // Wizard News kinds are presentation receipts, not selected behavior.
+      eventTypes: Object.freeze([]),
+      moverFamilies: Object.freeze([]),
+      stateKeys: Object.freeze([]),
+      other: 'BUILT AND DEFAULT-DARK, WITH NO BORROWED ALIVENESS CHANNEL. coalitionLedgerEnabled is a virtual key absent from DEFAULT_SIMULATION_RULES and every other preset, explicitly false only in full_simulation. Its behavioral seams require warLayerEnabled, warTerminationEnabled, peaceEngineEnabled, and coalitionLedgerEnabled to read exact true. A candidate ally prices direct and second-order retaliation through its own belief map, then answers with its own WR-5 books and WR-2 temperament. Joining opens a separate bilateral deployment and war edge with alliance_obligation as its cause; the bounded joinLedger is nested inside the existing deployments record and therefore deployments cannot certify this row. Refusal is a durable bilateral relationship fact, but the relationship container is shared. The alliance cause and obligation_discharged mirror enter spatialLedgers.warReasons and spatialLedgers.peaceReasons, both shared across every reason family and therefore false aliveness here. Expenditure is a pure derived read from existing people, store, territory and home-front evidence rather than a stored total. Staying and separate peace rerun the same four-term read under the ally court\'s own books; a separate peace closes only its pairwise edge. Coalition settlement makes one aggregate judgment, apportions it among losers, pays through existing bilateral transfer owners, divides winner spoils by contribution, and compares received against spent to record paid, unpaid, forgiven, or ingratitude consequences without a congress object. coalition_entry_priced, coalition_joined, coalition_refused, casus_alliance_obligation, mirror_obligation_discharged, coalition_expenditure_read, coalition_stayed, coalition_separate_peace, coalition_apportionment, coalition_spoils_divided, coalition_debt_paid and coalition_debt_unpaid are governed reader families and may not masquerade as behavioral eventTypes. TO OBSERVE: WR-9 must record an eligible-call denominator; join and refuse totals; open-ally stay and exit totals; qualitative expenditure cost bands; qualitative apportionment, spoils and payment bands; explicit aggregate coalition-settlement outcomes with their pairwise edge closures; and all twelve exact familyId values. Until that envelope executes to a verdict, false is DORMANT_BY_CONFIG and deliberately lit is UNOBSERVED, never ALIVE by inherited deployment traffic, shared reason ledgers, relationship traffic, transfer traffic, or reader prose.',
+    }),
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'coalitions_remain_bilateral_graphs',
+        description: 'A joining ally opens its own deployment and war edge; no war object grows a member list or congress ledger.',
+        check: 'WR-9 must pair each joined decision with one exact joinLedger row and one bilateral front, and reject any aggregate member-list state owner.',
+      }),
+      Object.freeze({
+        name: 'a_call_is_scored_not_automatic',
+        description: 'An alliance makes a court eligible to be called but never decides the answer by itself.',
+        check: 'WR-9 must record the eligible-call denominator beside mutually exclusive join/refuse decisions, each carrying risk, books, and temperament evidence.',
+      }),
+      Object.freeze({
+        name: 'expenditure_is_derived_not_stored',
+        description: 'Coalition cost is reread from the existing books since entry and never accumulated in a parallel total.',
+        check: 'Every WR-9 expenditure row must name its evidence completeness and qualitative component bands while the state-key census remains free of a coalition expenditure-total container.',
+      }),
+      Object.freeze({
+        name: 'separate_peace_closes_one_edge',
+        description: 'An ally may settle its own pairwise front while every other front remains independently live.',
+        check: 'WR-9 must match each exit to one closed bilateral edge and show that unrelated coalition edges are neither recalled nor settled by that decision id.',
+      }),
+      Object.freeze({
+        name: 'aggregate_judgment_pays_pairwise',
+        description: 'The coalition agrees one aggregate outcome, then apportions, transfers, and records debt on exact settlement pairs.',
+        check: 'WR-9 must carry one coalitionSettlementId across the aggregate outcome and every pairwise apportionment, spoils, payment, and debt fact, with no anonymous residual share.',
+      }),
+      Object.freeze({
+        name: 'reader_families_are_not_behavioral_aliveness',
+        description: 'Twelve authored public receipt families make the coalition legible but cannot prove that a call or settlement occurred in a soak.',
+        check: 'WR-9 may count all twelve familyId values for story mix only beside the behavioral denominators and outcome fields; prose alone leaves this row unobserved.',
       }),
     ]),
     soakEvidence: 'unobserved',

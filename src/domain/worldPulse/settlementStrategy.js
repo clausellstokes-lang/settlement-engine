@@ -405,6 +405,19 @@ function contextFor(snapshot, graph, sId, active = false, tick = null) {
   };
 }
 
+/** Exact public helper for WR-6's pre-decision hard-override parity. */
+export function strategyEmergencyRecallFor(snapshot, settlementId, tick = null) {
+  const worldState = snapshot?.worldState || {};
+  const context = contextFor(
+    snapshot,
+    snapshot?.regionalGraph || {},
+    String(settlementId),
+    beliefsActive(worldState),
+    tick,
+  );
+  return context.homeBesieged || context.vassalBesieged;
+}
+
 /**
  * The relationship edge between two settlements (raw), for a sue-for-peace proposal.
  * @param {any} snapshot @param {any} a @param {any} b
@@ -1076,12 +1089,24 @@ function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion,
  * @param {{ settlementStrategyEnabled?: boolean, dispositionChannelsEnabled?: boolean }} [context.simulationRules]
  * @param {{ random: () => number, fork: (label:string) => any }} [context.rng]
  * @param {Map<string, { targetId:string, suePressure01:number, dissolvedCauseTypes?:string[], receipt?:{reason?:string} }>|null} [context.warTerminationByAttacker]
+ * @param {Map<string, { partyId:string, targetId:string, decision:'stay'|'exit' }>|null} [context.coalitionDecisionByParty]
  * @returns {any[]} at most ONE probability-1 candidate per settlement.
  */
 export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context = {}) {
   const rules = context.simulationRules || {};
+  // WR-6's standing allied-front ruling has its own exact four-flag activation
+  // law. It may reuse this chooser's existing hold/peace writers without making
+  // `settlementStrategyEnabled` a hidden fifth gate. When the generic chooser is
+  // dark, only explicitly supplied joined-party decisions enter the pass.
+  const coalitionOnly = rules.settlementStrategyEnabled !== true
+    && rules.warLayerEnabled === true
+    && rules.warTerminationEnabled === true
+    && rules.peaceEngineEnabled === true
+    && rules.coalitionLedgerEnabled === true
+    && context.coalitionDecisionByParty instanceof Map
+    && context.coalitionDecisionByParty.size > 0;
   // ── Gate: byte-identical no-op (no candidate, no rng draw) when OFF. ──────────
-  if (!rules.settlementStrategyEnabled) return [];
+  if (!rules.settlementStrategyEnabled && !coalitionOnly) return [];
 
   const tick = Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0;
   const graph = snapshot?.regionalGraph || {};
@@ -1089,6 +1114,9 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
   const deployments = worldState.deployments || {};
   const rng = context.rng;
   const terminationByAttacker = context.warTerminationByAttacker instanceof Map ? context.warTerminationByAttacker : null;
+  const coalitionDecisionByParty = context.coalitionDecisionByParty instanceof Map
+    ? context.coalitionDecisionByParty
+    : null;
   const strengthFor = buildStrengthLookup(snapshot, pressureIdx);
   // WAVE A: are beliefs live for this campaign? The gate is ORTHOGONAL to
   // settlementStrategyEnabled (spatialCanonVersion + a non-omniscient infoMode).
@@ -1109,6 +1137,8 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     if (!item) continue;
     const ctx = contextFor(snapshot, graph, sId, beliefActive, tick);
     const termination = terminationByAttacker?.get(sId) || null;
+    const coalitionDecision = coalitionDecisionByParty?.get(sId) || null;
+    if (coalitionOnly && !coalitionDecision) continue;
     // The observer's belief-sourced strength lookup (self ⇒ truth). Dormant ⇒ the
     // raw ground-truth lookup unchanged (byte-exact).
     const strengthForObs = beliefActive ? makeBeliefStrengthFor(strengthFor, sId, worldState) : strengthFor;
@@ -1243,7 +1273,18 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
       : null;
     let decisionMoves = moves;
     let chosen = null;
-    if (inheritedDemand?.desiredAction === 'peace') {
+    if (coalitionDecision
+      && String(coalitionDecision.partyId || '') === sId
+      && String(coalitionDecision.targetId || '') === String(termination?.targetId || '')) {
+      // WR-6 G/G2: a joined ally's standing choice is the decision, not one
+      // more softmax input.  Staying is the existing mutation-free hold arm;
+      // exiting is the existing bilateral sue-for-peace proposal and therefore
+      // still needs the opponent's separate assent before any edge closes.
+      chosen = moves.find((move) => move.move === (
+        coalitionDecision.decision === 'exit' ? 'sue_for_peace' : 'hold'
+      )) || null;
+      if (!chosen) continue;
+    } else if (inheritedDemand?.desiredAction === 'peace') {
       chosen = moves.find((move) => move.move === 'sue_for_peace') || null;
       if (!chosen) continue;
     } else {
@@ -1280,9 +1321,29 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
       const withDemand = inheritedDemand
         ? { ...candidate, metadata: { ...(candidate.metadata || {}), inheritedWarDemand: inheritedDemand } }
         : candidate;
+      const withCoalitionDecision = coalitionDecision
+        ? {
+            ...withDemand,
+            metadata: {
+              ...(withDemand.metadata || {}),
+              coalitionStandingDecision: {
+                partyId: String(coalitionDecision.partyId || ''),
+                callerId: String(coalitionDecision.callerId || ''),
+                targetId: String(coalitionDecision.targetId || ''),
+                decision: coalitionDecision.decision,
+              },
+            },
+            reasons: [
+              ...(withDemand.reasons || []),
+              coalitionDecision.decision === 'exit'
+                ? 'The allied court chose to seek a bilateral exit from this front.'
+                : 'The allied court chose to keep this front standing.',
+            ],
+          }
+        : withDemand;
       out.push(dispositionReasons.length
-        ? { ...withDemand, reasons: [...new Set([...(withDemand.reasons || []), ...dispositionReasons])] }
-        : withDemand);
+        ? { ...withCoalitionDecision, reasons: [...new Set([...(withCoalitionDecision.reasons || []), ...dispositionReasons])] }
+        : withCoalitionDecision);
     }
   }
 

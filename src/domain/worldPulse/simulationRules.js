@@ -416,6 +416,14 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // preset identity. The eventual read must gate on exact true; lighting waits
     // for the member-graduation seam and WR-9 story-mix evidence.
     lineageClaimEnabled: false,
+    // WR-6: scored coalition calls, bilateral allied fronts, and derived
+    // expenditure/settlement reads, DECLARED DARK. This virtual key is absent
+    // from the default bank and every other preset; false only on the ceiling
+    // makes the slice visible to subsystem certification without migrating an
+    // installed save or changing preset identity. Every behavioral seam reads
+    // exact true, and lighting waits for WR-9's eligible-call, decision-mix,
+    // expenditure, payment, and governed-family observations.
+    coalitionLedgerEnabled: false,
     seasonsEnabled: true,
     // Owner ruling (golden sign-off — LIGHT EVERYTHING RECOMMENDED): the ceiling
     // runs the calamity mover. disastersEnabled is an opt-in key ABSENT from

@@ -21,13 +21,14 @@ import {
   advanceWarReasons, warReasonsFor,
   scoreGrievance, scoreRevanchism, scoreResourcePressure, scoreTreatyDefault,
   scoreEncirclement, scoreLegitimacyHunger, scoreCorruptionExposed, scoreForeignClash,
-  scoreIngratitudeDebt, scoreDependencyByDesign,
+  scoreIngratitudeDebt, scoreDependencyByDesign, scoreAllianceObligation,
 } from '../../src/domain/worldPulse/warReasons.js';
 import {
   advancePeaceReasons, peaceReasonsFor,
   scoreExhaustion, scoreBeliefConvergence, scoreEconomicStrangulation,
   scoreCoalitionFracture, scoreMediation, scoreHarvestPressure, scoreRealignment,
   scoreSpheresUnderstanding, scoreDebtForgiven, scoreBondsOfCommerce,
+  scoreObligationDischarged,
 } from '../../src/domain/worldPulse/peaceReasons.js';
 import {
   scoreOpportunism, scoreHopelessness, vulnerabilityTruthOf, perceivedVulnerabilityOf,
@@ -562,6 +563,7 @@ const WAR_WITNESSES = {
   opportunism: () => scoreOpportunism({ gradient: 0.7, capability01: 1 }).score,
   sacred_claim: () => scoreSacredClaim({ standing: SCHISM_STANDING }).score,
   lineage_claim: () => scoreLineageClaim({ standing: LINEAGE_CLAIM_STANDING }).score,
+  alliance_obligation: () => scoreAllianceObligation({ active: true }).score,
 };
 
 /** @type {Record<string, () => number>} */
@@ -582,6 +584,7 @@ const PEACE_WITNESSES = {
   hopelessness: () => scoreHopelessness({ gradient: -0.7 }).score,
   common_rite: () => scoreCommonRite({ standing: BROTHERS_STANDING }).score,
   kinship_bond: () => scoreKinshipBond({ standing: LINEAGE_BOND_STANDING }).score,
+  obligation_discharged: () => scoreObligationDischarged({ discharged: true }).score,
 };
 
 describe('THE DIVERSITY WALKER — every reason CAN win, or this reds', () => {

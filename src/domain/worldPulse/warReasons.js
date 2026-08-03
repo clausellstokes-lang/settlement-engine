@@ -106,6 +106,7 @@ import {
   isWarReasonType,
 } from './warReasonTaxonomy.js';
 import { buildPatronCounterforceIndex, patronCounterforceFor } from './patronCounterforce.js';
+import { allianceObligationReason, joinAnchorOf } from './warCoalitionLedger.js';
 
 // Compatibility surface: existing reason consumers keep importing from this
 // module while persistence/termination readers can depend on the taxonomy leaf.
@@ -384,6 +385,13 @@ export function scoreGrievance(relState, seed) {
   const memory = clamp01(Number(relState?.memoryScore) || 0);
   const score = clamp01(REASON_TUNING.GRIEVANCE_RESENTMENT_W * resentment + REASON_TUNING.GRIEVANCE_MEMORY_W * memory);
   return { score, receipt: warReceipt('grievance', seed) };
+}
+
+/** WR-6 closed witness/scorer for a live, exact alliance anchor. */
+export function scoreAllianceObligation({ active = false } = {}) {
+  return active
+    ? { score: 1, receipt: 'A sworn ally remains in the field under the same living cause.' }
+    : { score: 0, receipt: '' };
 }
 
 /**
@@ -821,6 +829,10 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
       // inversion. The shared leaf also applies the corroborated-provisioning
       // counterforce, which wins by returning exact zero.
       { type: 'lineage_claim', ...lineageClaim },
+      // WR-6: a joining party's own deployment carries exactly one alliance
+      // anchor.  The cause lives only while that exact caller/root episode and
+      // alliance contract survive; no membership object is consulted.
+      { type: 'alliance_obligation', ...allianceObligationReason(ws, snapshot, fromId, toId) },
     ];
 
     const previousSuppressionSinceTick = prevLedger?.[key]?.memo?.lineageSuppressionSinceTick;
@@ -846,6 +858,25 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
       currentSuppressionSinceTick: entry?.memo?.lineageSuppressionSinceTick,
       tick,
     }));
+  }
+
+  // A joining ally need not have had a pre-war relationship edge with the
+  // enemy.  Its own deployment is still a real directed war pair, so fold the
+  // obligation for those anchor-backed pairs without fabricating a hostile
+  // relationship state (and without widening every ordinary deployment pair).
+  const deployments = ws.deployments && typeof ws.deployments === 'object'
+    ? /** @type {Record<string, Record<string, unknown>>} */ (ws.deployments)
+    : {};
+  for (const partyId of Object.keys(deployments).sort()) {
+    const deployment = deployments[partyId];
+    const anchor = joinAnchorOf(deployment, partyId);
+    const foeId = deployment?.targetId != null ? String(deployment.targetId) : '';
+    const key = reasonPairKey(partyId, foeId);
+    if (!anchor || !foeId || pairs.has(key)) continue;
+    const entry = foldPairReasons(prevLedger?.[key], [
+      { type: 'alliance_obligation', ...allianceObligationReason(ws, snapshot, partyId, foeId) },
+    ], tick);
+    if (entry) nextLedger[key] = entry;
   }
 
   // r2 worldpulse-war-military-5: carry forward any pair that holds a LIVE decree but has NO edge

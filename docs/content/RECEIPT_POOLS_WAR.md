@@ -623,8 +623,8 @@ AUDIENCE: public
 ### coalition_entry_priced (WR-6) — the alliance-web risk read, war desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {third_party}, {band}
 AUDIENCE: public
-1. {settlement} counted who would answer for {counterpart}, and then who would answer for those, and the counting took a season.
-2. The word is that the far houses would come; whether they would come in time is a different word.
+1. {settlement} counted who might answer for {counterpart}, and then who might answer for those.
+2. The court priced the far compacts as beliefs, not promises of who would arrive.
 3. The obligation is plain and the arithmetic behind it is not.
 4. Entering a war is cheap; entering the war behind it is not, and this one prices {band}.
 5. They read the whole web before they read the field, which is why they are still deciding.
@@ -633,10 +633,10 @@ AUDIENCE: public
 SLOTS: {settlement}, {counterpart}, {third_party}, {route}
 AUDIENCE: public
 1. {settlement} answered the call and opened its own edge against {third_party}; the casus on the record is the obligation itself.
-2. The banners went out down {route} within the fortnight, which the quays took as a good sign and the granaries did not.
+2. The banners went out down {route}; the joined court now owns a separate front.
 3. They came because they had said they would, and because the reading of not coming was worse.
 4. An ally's war is a war, with its own ledger and its own ending.
-5. {settlement} is now at war with a settlement it has no quarrel with, on paper and in fact.
+5. {settlement}'s own war edge now records the alliance call among its causes.
 
 ### coalition_refused (WR-6) — Herald, war desk — significance: major
 SLOTS: {settlement}, {counterpart}, {route}
@@ -645,32 +645,32 @@ AUDIENCE: public
 2. {settlement} read the alliance web, read its own books, and sent regrets down {route}.
 3. The refusal is a fact in the record now; how {counterpart} reads it is {counterpart}'s character.
 4. The obligation was real and the answer was no, and both will be remembered.
-5. Nothing was broken that day except an expectation, which is the durable kind.
+5. The refusal is archived on the allied edge as a durable fact.
 
 ### casus_alliance_obligation (WR-6) — casus receipt, war desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {third_party}
 AUDIENCE: public
 1. {settlement} is in this war because {counterpart} called and the compact answers for it.
-2. There is no grievance in the ledger — only a signature, and the signature was enough.
-3. The obligation is the whole cause; when the caller's cause dies, so does this one.
+2. The alliance obligation is one recorded cause on this edge; other live causes remain their own facts.
+3. The borrowed cause remains anchored to the caller's exact war episode and compact.
 4. They march for a paper, which is a better reason than most.
 5. This edge against {third_party} exists because an older edge does.
 
 ### mirror_obligation_discharged (WR-6) — mirror receipt, events desk — significance: notable
 SLOTS: {settlement}, {counterpart}
 AUDIENCE: public
-1. The obligation is discharged: {settlement} came when called, and the compact is quiet again.
-2. What stood between them as a claim stands as a bond.
-3. They paid the alliance in the only coin it takes, and the ledger closed even.
-4. What was owed was given, and nobody has to remember it as a grievance.
-5. The compact survived being used, which is the only test that matters.
+1. The obligation is discharged: {settlement} came when called.
+2. The record now carries service under the compact beside the obligation it answered.
+3. They answered the alliance in the field, and that answer is recorded.
+4. What was owed under this call was given; other claims remain separate.
+5. The compact survived this use, and the relationship record says so.
 
 ### coalition_expenditure_read (WR-6) — the derived bill, trade desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {band}, {route}
 AUDIENCE: public
-1. Since it joined, {settlement} has drawn {band} from its stores and {band} from its rolls, and the bill is legible to anyone who can read a granary.
-2. Nobody kept a war ledger; the wagon books and the burial register kept it for them.
-3. The territory it holds is worth less than {route} was worth before the army wore it out.
+1. {settlement}'s surviving current-episode evidence reads {band}; no lifetime total is invented.
+2. The read uses deployed strength, recorded attrition, live exposure, and attributable home-front evidence.
+3. Damage that healed or left the bounded record is silence in this reckoning.
 4. What the alliance cost was never written down as a total — it is what the other books already say.
 5. The reckoning exists whether or not the coalition wants to hold it.
 
@@ -678,7 +678,7 @@ AUDIENCE: public
 SLOTS: {settlement}, {counterpart}, {third_party}
 AUDIENCE: public
 1. They stayed. *(§8)*
-2. {settlement}'s cause went out of the ledger a season ago and its levies are still in {third_party}'s fields.
+2. {settlement} reread its open edge against {third_party} and kept its army in the field.
 3. The council reread the war, weighed the same ledgers as its neighbours, and reached the opposite conclusion.
 4. Staying was a decision and not an inertia, and the record says who made it.
 5. The ally that stays is owed differently from the ally that came.
@@ -690,43 +690,43 @@ AUDIENCE: public
 2. {settlement} settled its own edge with {third_party} and left the rest of the war standing.
 3. The peace was pairwise, as every peace in this world is; the others learned of it from travellers.
 4. What the abandoned call betrayal, the departed call arithmetic, and the record carries both.
-5. One edge closed, and the war it belonged to did not notice for a season.
+5. One edge closed; every other front kept its own state and ending.
 
 ### coalition_apportionment (WR-6) — the settlement, adjudication desk — significance: major
 SLOTS: {settlement}, {counterpart}, {band}, {good}
 AUDIENCE: public
 1. The losers were assessed together and pay separately: {band} in {good} falls on {settlement} by capacity, culpability, and who called whom.
-2. The aggregate was agreed in an afternoon and the apportionment took the winter.
-3. The town that started it pays most, which surprised the town that started it.
+2. One aggregate judgment became separate bilateral shares under the same settlement identifier.
+3. Capacity, culpability, field loss, and the alliance call all bear on the share; none alone dictates it.
 4. Collective liability, pairwise payment — the wagons roll along the edges they always rolled along.
-5. The apportionment goes permanently into the record and will be quoted at the next war.
+5. The apportionment is archived as a durable relationship fact.
 
 ### coalition_spoils_divided (WR-6) — the settlement, trade desk — significance: major
 SLOTS: {settlement}, {counterpart}, {band}, {good}
 AUDIENCE: public
-1. The victors divided by who bled, who led, and who came late, and the late ones argued.
-2. {settlement} took {band} of the {good} and thinks it took too little.
-3. Spoils are the war after the war, fought over a table.
-4. What was won together is held separately, and the holding is where alliances die.
-5. Every share is a judgment on somebody's contribution, and every judgment is remembered.
+1. The victors divided the settlement by who bled, who led, and who came late.
+2. {settlement} received {band} of the {good} under the coalition settlement.
+3. What was won together was assigned along ordinary bilateral transfer edges.
+4. What was won together is held separately, with every share archived on the relationship record.
+5. Every share is an explicit judgment on contribution under the same settlement identifier.
 
 ### coalition_debt_paid (WR-6) — Herald, trade desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {route}
 AUDIENCE: public
 1. They paid what they owed. *(§8)*
-2. {counterpart} settled with {settlement} in full and in season, and the alliance is stronger than the war left it.
-3. The wagons came when they were supposed to, which is rarer than victory.
-4. A debt discharged is a bond; the ledger says so and so does {route}.
-5. Nobody will make a war out of this one.
+2. {counterpart} settled the recorded coalition claim owed to {settlement}.
+3. The conserved transfer met the recorded claim, and no unpaid remainder was minted.
+4. The payment travelled along {route} and is archived as payment, never forgiveness.
+5. This coalition claim is closed; other causes and obligations remain separate.
 
 ### coalition_debt_unpaid (WR-6) — Herald, trade desk — significance: major
 SLOTS: {settlement}, {counterpart}, {route}, {good}
 AUDIENCE: public
 1. They never paid. *(§8)*
-2. {settlement} bled for {counterpart} and has been sent excuses down {route} for a season.
-3. The {good} given in the lean years is a debt in one book and a courtesy in the other.
-4. The coalition won, and the winners are the two parties to the next quarrel.
-5. An unpaid ally is a casus that has not been filed yet.
+2. {settlement}'s recorded claim against {counterpart} remains unpaid along {route}.
+3. The missing {good} remains an ordinary live obligation between the allied courts.
+4. The coalition settlement closed without settling this internal claim.
+5. The unpaid obligation may later be read as ingratitude; it is not yet a new war.
 
 ---
 

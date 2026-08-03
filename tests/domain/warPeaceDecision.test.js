@@ -12,6 +12,7 @@ import {
   inheritedWarDemandFor,
   readWarPeaceDecision,
 } from '../../src/domain/worldPulse/warPeaceDecision.js';
+import { advanceTreaties } from '../../src/domain/worldPulse/peaceTerms.js';
 
 const NOW = '2026-08-02T00:00:00.000Z';
 const EDGE = { id: 'edge.offerer.target', from: 'offerer', to: 'target', relationshipType: 'hostile' };
@@ -150,7 +151,7 @@ function withTargetDemand(base, desiredAction, { rulerId = 'new', tick = 11 } = 
   };
 }
 
-function apply(f, state = f.worldState, saves = f.saves, graph = f.graph) {
+function apply(f, state = f.worldState, saves = f.saves, graph = f.graph, appliedOutcome = outcome()) {
   const settlementMap = new Map(saves.map((row) => [row.id, {
     saveId: row.id,
     save: { name: row.name },
@@ -166,7 +167,7 @@ function apply(f, state = f.worldState, saves = f.saves, graph = f.graph) {
     regionalGraph: graph,
     wizardNews: { currentTick: 12, entries: [] },
     settlementMap,
-    outcomes: [outcome()],
+    outcomes: [appliedOutcome],
     tick: 12,
     now: NOW,
     advanceNewsTick: false,
@@ -455,5 +456,287 @@ describe('WR-5 bilateral peace', () => {
     };
     expect(readWarPeaceDecision({ worldState: state, snapshot: base.snapshot, outcome: outcome(), tick: 12 }).decision)
       .toBe('refuse');
+  });
+});
+
+describe('WR-6 live peace closure parity', () => {
+  function coalitionFixture() {
+    const root = save('root', 'High Court', 1000);
+    const rootEdge = {
+      id: 'edge.root.offerer', from: 'root', to: 'offerer', relationshipType: 'allied',
+    };
+    const base = fixture({
+      targetPopulation: 12000,
+      targetExhaustion: 1,
+      targetRulerId: 'new',
+      extraSaves: [root],
+      extraEdges: [rootEdge],
+      extraDeployments: {
+        root: { targetId: 'target', sinceTick: 1 },
+      },
+    });
+    const fullRules = {
+      ...RULES,
+      peaceEngineEnabled: true,
+      coalitionLedgerEnabled: true,
+    };
+    const anchor = {
+      callId: 'coalition_call.root.offerer.target.1',
+      partyId: 'offerer',
+      callerId: 'root',
+      enemyId: 'target',
+      joinedTick: 3,
+      callerDeploymentSinceTick: 1,
+      originAttackerId: 'root',
+      originSinceTick: 1,
+      allianceRelationshipKey: rootEdge.id,
+      sourceCauseTypes: ['grievance'],
+      cause: 'alliance_obligation',
+    };
+    let worldState = {
+      ...base.worldState,
+      simulationRules: fullRules,
+      deployments: {
+        ...base.worldState.deployments,
+        offerer: {
+          ...base.worldState.deployments.offerer,
+          maxStartStrength: 100,
+          currentEffectiveStrength: 45,
+          accumulatedAttrition: 0.55,
+          deployedPopulation: 200,
+          joinLedger: [anchor],
+        },
+        root: { targetId: 'target', sinceTick: 1 },
+      },
+      relationshipStates: {
+        ...base.worldState.relationshipStates,
+        [rootEdge.id]: { relationshipType: 'allied', trust: 0.8, resentment: 0.1 },
+      },
+    };
+    worldState = withTargetDemand({ ...base, worldState }, 'peace');
+    for (const row of base.saves) {
+      row.settlement.economicState.foodSecurity = {
+        storageMonths: row.id === 'root' ? 6 : row.id === 'offerer' ? 1 : 3,
+        stockpile: { capacityMonths: 8 },
+      };
+    }
+    const congressClosure = {
+      coalitionSettlementId: 'congress.explicit.12',
+      closureId: 'closure.target.offerer',
+      relationshipKey: KEY,
+      winnerId: 'target',
+      loserId: 'offerer',
+      capacity01: 0.5,
+      culpability01: 0.4,
+      fieldLoss01: 0.3,
+      callerId: 'target',
+      bled01: 0.5,
+      led01: 0.5,
+      late01: 0.5,
+      aggregateClaim01: 0.2,
+      componentClosureIds: ['closure.target.offerer', 'closure.target.root'],
+    };
+    return { ...base, worldState, fullRules, rootEdge, congressClosure };
+  }
+
+  function manualApply(f) {
+    const storedOutcome = outcome({
+      applyMode: 'proposal',
+      proposalPayload: { coalitionSettlementClosure: f.congressClosure },
+    });
+    const proposalId = 'world_proposal.peace.offerer.12';
+    const proposal = {
+      id: proposalId,
+      status: 'pending',
+      recordModeVersion: 4,
+      tick: 12,
+      outcome: storedOutcome,
+      headline: storedOutcome.headline,
+      summary: storedOutcome.summary,
+      reasons: storedOutcome.reasons,
+    };
+    const state = ensureWorldState({ ...f.worldState, proposals: [proposal] }, { id: 'campaign.coalition.peace' });
+    return applyWorldPulseProposal({
+      campaign: {
+        id: 'campaign.coalition.peace',
+        settlementIds: f.saves.map((row) => row.id),
+        worldState: state,
+        regionalGraph: f.graph,
+        wizardNews: { currentTick: 12, entries: [] },
+      },
+      saves: f.saves,
+      proposalId,
+      now: NOW,
+    });
+  }
+
+  it.each([
+    ['automatic same-pulse closure', false],
+    ['manually approved between-pulse closure', true],
+  ])('preserves coalition context and reaches exact reimbursement for %s', (_label, manual) => {
+    const f = coalitionFixture();
+    const applied = manual
+      ? manualApply(f)
+      : apply(
+          f,
+          f.worldState,
+          f.saves,
+          f.graph,
+          outcome({ proposalPayload: { coalitionSettlementClosure: f.congressClosure } }),
+        );
+    expect(applied).toBeTruthy();
+    const peaceState = applied.worldState.relationshipStates[KEY];
+    const peaceIncident = peaceState.recentIncidents.find((row) => (
+      String(row.outcomeId || '').includes('sue_for_peace')
+    ));
+    expect(peaceIncident.coalitionPeaceClosure).toMatchObject({
+      departingId: 'offerer',
+      enemyId: 'target',
+      callerId: 'root',
+      abandoned: ['root'],
+      expenditurePressure01: expect.any(Number),
+      joinAnchor: { callId: 'coalition_call.root.offerer.target.1' },
+    });
+    expect(peaceIncident.coalitionSettlementClosure).toEqual(f.congressClosure);
+
+    const settlementUpdates = applied.settlementUpdates;
+    const nextDeployments = manual
+      ? Object.fromEntries(Object.entries(applied.worldState.deployments || {})
+        .filter(([id]) => id !== 'offerer'))
+      : applied.worldState.deployments;
+    const settled = advanceTreaties({
+      snapshot: {
+        settlements: f.saves,
+        byId: new Map(f.saves.map((row) => [row.id, row])),
+        regionalGraph: applied.regionalGraph,
+      },
+      worldState: {
+        ...applied.worldState,
+        tick: manual ? 13 : 12,
+        deployments: nextDeployments,
+      },
+      settlementUpdates,
+      graph: applied.regionalGraph,
+      tick: manual ? 13 : 12,
+      now: NOW,
+    });
+    const reimbursement = settled.worldState.relationshipStates[f.rootEdge.id]
+      .coalitionSettlements.find((row) => row.action === 'reimbursement');
+    expect(reimbursement).toMatchObject({
+      fromId: 'root', toId: 'offerer', closureId: 'coalition_call.root.offerer.target.1',
+    });
+    expect(settled.coalitionEvidence.some((row) => (
+      row.kind === 'coalition_debt_paid' || row.kind === 'coalition_debt_unpaid'
+    ))).toBe(true);
+    expect(settled.coalitionEvidence).toContainEqual(expect.objectContaining({
+      kind: 'coalition_separate_peace',
+      settlementId: 'offerer',
+      counterpartId: 'root',
+      thirdPartyId: 'target',
+    }));
+  });
+
+  it('persists and reimburses every anchored member when the root caller closes its front', () => {
+    const memberA = save('member-a', 'Ash', 800);
+    const memberB = save('member-b', 'Birch', 900);
+    const memberAEdge = {
+      id: 'edge.offerer.member-a', from: 'offerer', to: 'member-a', relationshipType: 'allied',
+    };
+    const memberBEdge = {
+      id: 'edge.offerer.member-b', from: 'offerer', to: 'member-b', relationshipType: 'allied',
+    };
+    const f = fixture({
+      targetPopulation: 12000,
+      targetExhaustion: 1,
+      targetRulerId: 'new',
+      extraSaves: [memberA, memberB],
+      extraEdges: [memberAEdge, memberBEdge],
+    });
+    const fullRules = {
+      ...RULES,
+      peaceEngineEnabled: true,
+      coalitionLedgerEnabled: true,
+    };
+    const joined = (memberId, joinedTick, relationshipKey) => ({
+      callId: `coalition_call.offerer.${memberId}.target.3`,
+      partyId: memberId,
+      callerId: 'offerer',
+      enemyId: 'target',
+      joinedTick,
+      callerDeploymentSinceTick: 3,
+      originAttackerId: 'offerer',
+      originSinceTick: 3,
+      allianceRelationshipKey: relationshipKey,
+      sourceCauseTypes: ['grievance'],
+      cause: 'alliance_obligation',
+    });
+    let worldState = {
+      ...f.worldState,
+      simulationRules: fullRules,
+      deployments: {
+        ...f.worldState.deployments,
+        'member-a': {
+          targetId: 'target', sinceTick: 5, maxStartStrength: 100,
+          currentEffectiveStrength: 50, accumulatedAttrition: 0.5,
+          deployedPopulation: 120, joinLedger: [joined('member-a', 5, memberAEdge.id)],
+        },
+        'member-b': {
+          targetId: 'target', sinceTick: 6, maxStartStrength: 100,
+          currentEffectiveStrength: 40, accumulatedAttrition: 0.6,
+          deployedPopulation: 140, joinLedger: [joined('member-b', 6, memberBEdge.id)],
+        },
+      },
+      relationshipStates: {
+        ...f.worldState.relationshipStates,
+        [memberAEdge.id]: { relationshipType: 'allied', trust: 0.8, resentment: 0.1 },
+        [memberBEdge.id]: { relationshipType: 'allied', trust: 0.8, resentment: 0.1 },
+      },
+    };
+    worldState = withTargetDemand({ ...f, worldState }, 'peace');
+    for (const row of f.saves) {
+      row.settlement.economicState.foodSecurity = {
+        storageMonths: row.id === 'offerer' ? 6 : row.id.startsWith('member-') ? 1 : 3,
+        stockpile: { capacityMonths: 8 },
+      };
+    }
+
+    const applied = apply(f, worldState, f.saves, f.graph, outcome());
+    const peaceIncident = applied.worldState.relationshipStates[KEY].recentIncidents.find((row) => (
+      String(row.outcomeId || '').includes('sue_for_peace')
+    ));
+    expect(peaceIncident.coalitionPeaceClosure).toMatchObject({
+      departingId: 'offerer',
+      callerId: 'offerer',
+      enemyId: 'target',
+      abandoned: ['member-a', 'member-b'],
+    });
+    expect(peaceIncident.coalitionPeaceClosure.reimbursementClaims.map((row) => row.memberId))
+      .toEqual(['member-a', 'member-b']);
+
+    const deployments = Object.fromEntries(Object.entries(applied.worldState.deployments || {})
+      .filter(([id]) => !id.startsWith('member-')));
+    const settled = advanceTreaties({
+      snapshot: {
+        settlements: f.saves,
+        byId: new Map(f.saves.map((row) => [row.id, row])),
+        regionalGraph: applied.regionalGraph,
+      },
+      worldState: { ...applied.worldState, deployments },
+      settlementUpdates: applied.settlementUpdates,
+      graph: applied.regionalGraph,
+      tick: 12,
+      now: NOW,
+    });
+    const reimbursements = [memberAEdge.id, memberBEdge.id].map((edgeId) => (
+      settled.worldState.relationshipStates[edgeId].coalitionSettlements
+        .find((row) => row.action === 'reimbursement')
+    ));
+    expect(reimbursements).toEqual([
+      expect.objectContaining({ fromId: 'offerer', toId: 'member-a' }),
+      expect.objectContaining({ fromId: 'offerer', toId: 'member-b' }),
+    ]);
+    expect(settled.coalitionEvidence.filter((row) => (
+      row.kind === 'coalition_debt_paid' || row.kind === 'coalition_debt_unpaid'
+    ))).toHaveLength(2);
   });
 });

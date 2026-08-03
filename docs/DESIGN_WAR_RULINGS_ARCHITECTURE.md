@@ -690,23 +690,34 @@ war-state ledger.
   THIS read pointed at the aftermath.
 - **Joining:** an ally entering under alliance mints its OWN war edge whose
   deployment.casusReasons = the alliance obligation (a casus record with its own mirror per
-  the walker — J-WR-6 rules the pair `alliance_obligation` ↔ `obligation_discharged`,
-  names vetoable) and its own dissolution: the originator's cause dissolved OR the
-  alliance broken. The joinLedger anchor {partyId, joinedTick, cause} lands on the
-  war record — the ONLY stored addition.
-- **The expenditure read (I2):** pure derivation per party per war — stores drawn
-  since joinTick (foodStockpile deltas), population + named cast spent (P1/P1a
-  accounting), territory transferred, home-front degradation (WR-4's stream summed
-  since join). NO STORED TOTALS (I2's own law: the bill is what the other engines
-  already recorded). Feeds: the momentum term (sunk cost through the side door) and
+  the walker — J-WR-4 rules the pair `alliance_obligation` ↔ `obligation_discharged`,
+  names vetoable) and its own dissolution: the exact caller/root deployment episode's
+  anchored cause dissolved OR the exact alliance broken. A closed joinLedger anchor lands
+  on the JOINER'S war record: call id, joining party, immediate caller, enemy, joined tick,
+  caller/root deployment episode, alliance relationship key, anchored source-cause types,
+  and `cause: alliance_obligation`. The episode provenance is required: the old three-field
+  sketch could let a later war borrow a dead call. This is the only new WAR-record field;
+  refusal/settlement memory extends the existing relationship record's bounded archive.
+- **The expenditure read (I2, live-census correction 2026-08-02):** pure,
+  EVIDENCE-BOUNDED derivation per party per ACTIVE war episode — its own deployed
+  population net of sourced levies, recorded attrition/effective-strength loss, CURRENT
+  source-attributable WR-4 home-front degradation, and live occupation/territorial
+  exposure. The engine does not retain food deltas in compact history, recovered roads /
+  institutions / territory erase their old state, and P1a records no named wartime cast;
+  therefore evicted/healed evidence and named lives are SILENCE, never an invented lifetime
+  sum. NO STORED TOTALS and no parallel expenditure journal. Feeds: the momentum term
+  (sunk cost through the side door) and
   the REPARATIONS CLAIM — a demand with TWO possible debtors (the enemy, through
   that edge's peace terms; or the ally who called them, when the enemy cannot or
   will not pay).
-- **The unpaid claim IS ingratitude_debt** (reason #10, already wired with its
-  debt_forgiven mirror): war participation feeds the existing reframe substrate —
-  a coalition that wins and does not settle up mints its own next war. The
-  counterforce is settling honestly (debt_forgiven — a bond instead of a grudge).
-  Both outcomes pinned, Herald names which ("they paid what they owed" / "they
+- **The unpaid claim feeds ingratitude_debt** (reason #10, already wired with its
+  debt_forgiven mirror): an unpaid caller reimbursement mints an ordinary live
+  obligation which the existing reframe substrate may later read darkly; a coalition
+  that wins and does not settle up can thereby mint its own next war. Payment is a
+  conserved transfer + `coalition_debt_paid` fact and consumes/reduces the obligation.
+  It does NOT fabricate `debt_forgiven`: that mirror remains the bright interpretation
+  of a still-live obligation (forgiveness, not payment). Both reader outcomes are pinned,
+  while the Herald separately names paid/unpaid ("they paid what they owed" / "they
   never paid").
 - **The open ally decision (I3, the prohibition verbatim):** NO hard-wired rule in
   either direction — no "expenditure above X ⇒ continue", no "cause dissolved ⇒
@@ -729,10 +740,16 @@ war-state ledger.
   losers, shattered losers), all four pinned, apportionment written PERMANENTLY to
   relationship record + chronicle (J's compounding-history demand), and it feeds
   the WR-2 channels (a war that paid teaches; a war whose spoils were stolen
-  teaches something else).
-**Lifecycle paths (added 2026-08-02):** joinLedger anchors and refusal facts persist
-on EXISTING records (the war record, the relationship record) and round-trip, regen,
-and undo with them; no expenditure totals are ever stored (J-WR-5).
+  teaches something else). **Trigger correction:** one accepted bilateral edge proves
+  only that edge's exit. Aggregate/apportionment executes only when every component
+  closure carries the SAME explicit coalition-settlement id; until coordinated
+  ratification exists, the engine performs pairwise enemy terms and internal ally
+  reimbursement without pretending a congress occurred.
+**Lifecycle paths (added 2026-08-02; live-census corrected):** joinLedger anchors and
+refusal/settlement facts persist on EXISTING records (the war record, the relationship
+record) and round-trip, regen, and undo with them. "Permanent" means campaign-durable,
+reroll-preserved, bounded history under the project's state law, not an unbounded log;
+no expenditure totals are ever stored (J-WR-5).
 **Bands:** apportionment weights, adequacy-of-payment band, exit-cost weighting,
 join-bar + refusal-cost bands (added 2026-08-02).
 **Scope fence (I, verbatim law):** peace is negotiated PAIRWISE along edges. No

@@ -13,8 +13,11 @@
  * signed*Factor) are re-exported from the helper leaf for the same reason.
  */
 import {
+  appendRelationshipAllianceCall,
+  appendRelationshipCoalitionSettlement,
   appendRelationshipTurningPoint,
   clamp01,
+  coalitionSettlementActionWasRecorded,
   RELATIONSHIP_DEFAULTS,
   relationshipKeyFromEdge,
   getRelationshipSettlements,
@@ -24,12 +27,16 @@ import {
 import { pressureFor, strongestPressure, EMPTY_DISPOSITION, EMPTY_TRADE_SALIENCE, buildRelationshipIndex, sharedEnemyAllianceCandidate } from './relationshipRuleHelpers.js';
 import { RULE_EVALUATORS, tradeLeverageCandidate } from './relationshipRulesAdversarial.js';
 import { facetOf } from '../spatial/cohesionWeave.js';
+import { coalitionClosureWitness, joinAnchorOf, warCoalitionActive } from './warCoalitionLedger.js';
 
 export {
   RELATIONSHIP_TYPE_ALIASES, normalizeRelationshipType,
   relationshipKeyFromEdge, getRelationshipSettlements, relationshipRoles,
   normalizeRelationshipEdge, ensureRelationshipState,
   appendRelationshipTurningPoint, RELATIONSHIP_TURNING_POINT_CAP,
+  appendRelationshipAllianceCall, RELATIONSHIP_ALLIANCE_CALL_CAP, normalizeAllianceCalls,
+  appendRelationshipCoalitionSettlement, coalitionSettlementActionWasRecorded,
+  RELATIONSHIP_COALITION_SETTLEMENT_CAP, normalizeCoalitionSettlements,
 } from './relationshipState.js';
 export {
   candidateDirection, signedDispositionFactor, signedTradeSalienceFactor, settlementStrength,
@@ -362,6 +369,107 @@ export function mintMemoryWeaveIncident(worldState, { relationshipKey, incidentT
 export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type {any} */ outcome, /** @type {any} */ now) {
   if (!outcome.relationshipKey || !outcome.relationshipPatch) return worldState;
   const current = ensureRelationshipState({}, worldState.relationshipStates?.[outcome.relationshipKey]);
+  // WR-6 exact-once: an applied approval can be replayed, but the same alliance
+  // call may never erode the relationship twice or duplicate its durable fact.
+  const allianceCall = outcome.metadata?.allianceCall;
+  if (allianceCall && String(allianceCall.relationshipKey || '') !== String(outcome.relationshipKey)) return worldState;
+  if (allianceCall?.callId && (current.allianceCalls || [])
+    .some((row) => String(row?.callId || '') === String(allianceCall.callId)
+      && String(row?.relationshipKey || '') === String(outcome.relationshipKey))) return worldState;
+  const nextAllianceCalls = allianceCall
+    ? appendRelationshipAllianceCall(current, allianceCall)
+    : null;
+  if (allianceCall && !nextAllianceCalls.some((row) => (
+    String(row?.callId || '') === String(allianceCall.callId)
+    && String(row?.relationshipKey || '') === String(outcome.relationshipKey)
+  ))) return worldState;
+  const coalitionSettlement = outcome.metadata?.coalitionSettlement;
+  // An explicitly coordinated congress closure rides the accepted bilateral
+  // peace incident until peaceTerms can see every declared component. It is not
+  // itself a payment or proof that the other edges closed; the treaty mover
+  // validates the complete census before any value moves.
+  const rawCongressClosure = warCoalitionActive(worldState)
+    && outcome.proposalPayload?.peaceOffer === true
+    ? (outcome.proposalPayload?.coalitionSettlementClosure
+      || outcome.metadata?.coalitionSettlementClosure)
+    : null;
+  const livePeaceWitness = outcome.proposalPayload?.peaceOffer === true
+    ? coalitionClosureWitness(
+        worldState,
+        outcome.proposalPayload?.offererId,
+        outcome.proposalPayload?.targetId,
+        worldState.tick,
+        outcome.proposalPayload?.offererId,
+      )
+    : null;
+  const expenditureRows = Array.isArray(outcome.metadata?.coalitionPeaceExpenditures)
+    ? outcome.metadata.coalitionPeaceExpenditures
+    : [];
+  const closureExpenditure = livePeaceWitness
+    ? expenditureRows.find((row) => String(row?.partyId || '') === livePeaceWitness.departingId)
+    : null;
+  const expenditurePressure01 = Number(closureExpenditure?.pressure01);
+  const reimbursementPartyIds = livePeaceWitness
+    ? (livePeaceWitness.departingId === livePeaceWitness.callerId
+      ? livePeaceWitness.abandoned
+      : [livePeaceWitness.departingId])
+    : [];
+  const reimbursementClaims = reimbursementPartyIds.map((memberId) => {
+    const deployment = worldState.deployments?.[memberId];
+    const anchor = joinAnchorOf(deployment, memberId);
+    const expenditure = expenditureRows.find((row) => String(row?.partyId || '') === memberId);
+    const pressure01 = Number(expenditure?.pressure01);
+    if (!anchor || !Number.isFinite(pressure01)
+      || anchor.callerId !== livePeaceWitness?.callerId
+      || anchor.enemyId !== livePeaceWitness?.enemyId) return null;
+    return {
+      memberId,
+      pressure01: clamp01(pressure01),
+      joinAnchor: {
+        ...anchor,
+        sourceCauseTypes: Array.isArray(anchor.sourceCauseTypes)
+          ? [...anchor.sourceCauseTypes]
+          : [],
+      },
+    };
+  }).filter(Boolean);
+  const coalitionPeaceClosure = livePeaceWitness ? {
+    ...livePeaceWitness,
+    ...(livePeaceWitness.joinAnchor ? {
+      joinAnchor: {
+        ...livePeaceWitness.joinAnchor,
+        sourceCauseTypes: Array.isArray(livePeaceWitness.joinAnchor.sourceCauseTypes)
+          ? [...livePeaceWitness.joinAnchor.sourceCauseTypes]
+          : [],
+      },
+    } : {}),
+    ...(Number.isFinite(expenditurePressure01)
+      ? { expenditurePressure01: clamp01(expenditurePressure01) }
+      : {}),
+    ...(reimbursementClaims.length
+      ? { reimbursementClaims }
+      : {}),
+  } : null;
+  const congressClosure = rawCongressClosure
+    && typeof rawCongressClosure === 'object'
+    && !Array.isArray(rawCongressClosure)
+    ? {
+        ...rawCongressClosure,
+        ...(Array.isArray(rawCongressClosure.componentClosureIds)
+          ? { componentClosureIds: [...rawCongressClosure.componentClosureIds] }
+          : {}),
+      }
+    : null;
+  if (coalitionSettlementActionWasRecorded(current, coalitionSettlement?.actionId)) return worldState;
+  const nextCoalitionSettlements = coalitionSettlement
+    ? appendRelationshipCoalitionSettlement(current, coalitionSettlement)
+    : null;
+  // A value-moving relationship patch without a valid, same-edge archive row
+  // would be replayable and unauditable.  Fail the entire write closed.
+  if (coalitionSettlement && (
+    String(coalitionSettlement.relationshipKey || '') !== String(outcome.relationshipKey)
+    || !nextCoalitionSettlements.some((row) => row.actionId === coalitionSettlement.actionId)
+  )) return worldState;
   const historyEntry = outcome.proposalPayload?.kind === "relationship_label_change"
     ? {
         tick: worldState.tick,
@@ -417,11 +525,19 @@ export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type 
         type: outcome.metadata?.incidentType || outcome.candidateType,
         severity: outcome.severity,
         outcomeId: outcome.id || null,
+        ...(coalitionPeaceClosure ? { coalitionPeaceClosure } : {}),
+        ...(congressClosure ? { coalitionSettlementClosure: congressClosure } : {}),
       },
     ],
     history: historyEntry ? [...(current.history || []).slice(-11), historyEntry] : current.history || [],
     ...(historyEntry
       ? { turningPoints: appendRelationshipTurningPoint(current, historyEntry) }
+      : {}),
+    ...(allianceCall
+      ? { allianceCalls: nextAllianceCalls }
+      : {}),
+    ...(coalitionSettlement
+      ? { coalitionSettlements: nextCoalitionSettlements }
       : {}),
   };
 

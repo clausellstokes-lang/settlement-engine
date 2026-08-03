@@ -56,6 +56,7 @@ import { makeOpportunismRead } from './opportunism.js';
 // 0 when the faith flag is dark or either town names no patron ⇒ byte-identical.
 import { makeSacredClaimRead } from './sacredClaim.js';
 import { makeLineageClaimRead } from './lineageClaim.js';
+import { joinAnchorOf, obligationDischargedReason } from './warCoalitionLedger.js';
 import { lineagePeaceTransitionNewsEntries } from './lineageNews.js';
 // D7 (DESIGN_SIM_DEPTH_R2 §D7): the two reframe peace mirrors — debt_forgiven (aid re-read as a
 // gift again) + bonds_of_commerce (the trade tie re-read as a binding mutual commerce). Pure
@@ -95,6 +96,13 @@ export function scoreExhaustion({ scar01 }, /** @type {string | undefined} */ se
   const score = clamp01(Number(scar01) || 0);
   if (score <= 0) return { score: 0, receipt: '' };
   return { score, receipt: peaceReceipt('exhaustion', seed) };
+}
+
+/** WR-6 closed witness/scorer for the ended borrowed cause. */
+export function scoreObligationDischarged({ discharged = false } = {}) {
+  return discharged
+    ? { score: 1, receipt: 'The compact or original quarrel no longer supplies a borrowed cause for war.' }
+    : { score: 0, receipt: '' };
 }
 
 /**
@@ -369,6 +377,7 @@ export function warCausalBrief(worldState, partyId, foeId) {
  * @property {Record<string, unknown>} worldState
  * @property {boolean} changed
  * @property {Array<Record<string, unknown>>} newsEntries
+ * @property {Array<Record<string, unknown>>} coalitionEvidence
  */
 
 /**
@@ -394,7 +403,7 @@ export function warCausalBrief(worldState, partyId, foeId) {
 export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null, tick, blaineyCredibility = null }) {
   // ── DORMANCY GATE (§8): absent ⇒ an immediate no-op. No key, no read. ──
   if (!peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */(worldState))) {
-    return { worldState, changed: false, newsEntries: [] };
+    return { worldState, changed: false, newsEntries: [], coalitionEvidence: [] };
   }
 
   const deployments = /** @type {Record<string, { targetId?: unknown }>} */ (
@@ -442,6 +451,11 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
   /** @type {import('./warReasons.js').ReasonLedger} */
   const nextLedger = {};
   const newsEntries = [];
+  // WR-6 governed facts are emitted beside, not inside, the legacy lineage-news
+  // stream.  The pulse composer projects this typed evidence through the single
+  // coalition receipt registry; the causal mover itself never authors a second
+  // reader surface.
+  const coalitionEvidence = [];
   for (const key of orderedKeys) {
     const { partyId, foeId } = /** @type {{ partyId: string, foeId: string }} */ (pairs.get(key));
 
@@ -493,6 +507,7 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
 
     const lineageStanding = lineageClaimRead.lineageStandingOf(partyId, foeId);
     const kinshipBond = lineageClaimRead.kinshipBondOf(partyId, foeId);
+    const obligationDischarged = obligationDischargedReason(worldState, snapshot, partyId, foeId);
     const computed = [
       { type: 'exhaustion', ...scoreExhaustion({ scar01: Number(warExhaustion[partyId]) || 0 }, key) },
       { type: 'belief_convergence', ...scoreBeliefConvergence({ marginA, marginB }, key) },
@@ -534,10 +549,35 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
       // read as lineage_claim. Corroborated care restores the bond strongly
       // enough to defeat the claim; no second evidence model can drift here.
       { type: 'kinship_bond', ...kinshipBond },
+      // WR-6 mirror: the joining army's sworn cause ends when the exact
+      // caller/root episode or alliance contract ends.  The same anchor read
+      // supplies both polarities, so the reason and its discharge cannot drift.
+      { type: 'obligation_discharged', ...obligationDischarged },
     ];
 
     const entry = foldPairReasons(prevLedger?.[key], computed, tick, memo);
     if (entry) nextLedger[key] = entry;
+    // The peace mirror is a transition fact, not a metronome.  Emit exactly
+    // when a live, anchor-backed obligation first becomes discharged.  The
+    // shared lifecycle read above returns zero for alliance rupture, so a
+    // broken compact can never be misreported as service rendered.
+    const anchor = obligationDischarged.score > 0
+      ? joinAnchorOf(deployments[partyId], partyId)
+      : null;
+    if (anchor
+      && !prevLedger?.[key]?.reasons?.obligation_discharged
+      && entry?.reasons?.obligation_discharged) {
+      coalitionEvidence.push({
+        id: `${anchor.callId}.mirror_obligation_discharged.${Math.max(0, Math.floor(Number(tick) || 0))}`,
+        kind: 'mirror_obligation_discharged',
+        tick: Math.max(0, Math.floor(Number(tick) || 0)),
+        settlementId: partyId,
+        counterpartId: anchor.callerId,
+        thirdPartyId: foeId,
+        callId: anchor.callId,
+        relationshipKey: anchor.allianceRelationshipKey,
+      });
+    }
     newsEntries.push(...lineagePeaceTransitionNewsEntries({
       snapshot,
       standing: lineageStanding,
@@ -551,12 +591,12 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
   const prevSerialized = JSON.stringify(prevLedger || null);
   const nextSerialized = JSON.stringify(hasNext ? nextLedger : null);
   if (prevSerialized === nextSerialized) {
-    return { worldState, changed: false, newsEntries };
+    return { worldState, changed: false, newsEntries, coalitionEvidence };
   }
   const nextWorldState = hasNext
     ? setSpatialLedger(worldState, 'peaceReasons', nextLedger)
     : dropSpatialLedger(worldState, 'peaceReasons');
-  return { worldState: nextWorldState, changed: true, newsEntries };
+  return { worldState: nextWorldState, changed: true, newsEntries, coalitionEvidence };
 }
 
 // ── Internal reads ───────────────────────────────────────────────────────────

@@ -98,7 +98,25 @@ import { getSpatialLedger } from '../spatial/distanceRead.js';
 // open) moved to that leaf because it is the other half of the same question the order
 // answers, and because this file is at its frozen size ceiling. The three intent reads
 // are TOTAL and rng-free: no order ⇒ null ⇒ step 4 runs its pre-existing expression.
-import { warIntentFor, intentNamesTarget, intentTargetOrder, hostileTargetsOf } from './warIntent.js';
+import {
+  warIntentFor,
+  intentNamesTarget,
+  intentTargetOrder,
+  hostileTargetsOf,
+  treatyEligibleWarTargets,
+} from './warIntent.js';
+import {
+  coalitionCallArchiveRow,
+  coalitionDecisionEvidence,
+  readCoalitionJoinDecisions,
+} from './warCoalitionDecision.js';
+import { COALITION_REFUSAL_CAUSES } from './warCoalitionEvidence.js';
+import {
+  joinAnchorOf,
+  warCoalitionActive,
+} from './warCoalitionLedger.js';
+import { thresholdFactorOf } from './dispositionProfile.js';
+import { readWarSeatBooks } from './warSeatBooks.js';
 
 /**
  * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js) — named,
@@ -127,6 +145,89 @@ const HOSTILE_CONFIDENCE = 0.42;
 const CONQUEST_MARGIN = 0.12;
 const WAR_DRAIN_PER_FRONT = 0.34; // severity per active war_front from the home (capped 1)
 const ARMY_DEPLOYED_SEVERITY = 0.5;
+
+// WR-6 refusal aftermath.  The refusal is one earned relationship fact; the
+// calling court's own books plus WR-2 history colour how heavily that fact lands.  The
+// bounded multiplier cannot erase the consequence or override the compact.
+export const COALITION_REFUSAL_TUNING = Object.freeze({
+  TRUST_HIT: 0.08,
+  RESENTMENT_GAIN: 0.12,
+  OBLIGATION_FATIGUE_GAIN: 0.1,
+  MIN_CHARACTER_MULT: 0.8,
+  MAX_CHARACTER_MULT: 1.2,
+  QUIET_MAX: 0.9,
+  PRESSING_MIN: 1.1,
+});
+const COALITION_REFUSAL_CAUSE_SET = new Set(COALITION_REFUSAL_CAUSES);
+const COALITION_REFUSAL_CAUSE_REASON = Object.freeze({
+  army_committed: 'The court cannot answer while its only field army is committed elsewhere.',
+  army_returned: 'The returning army cannot be committed to another campaign at once.',
+  home_threatened: 'The court keeps its army at home while its own walls are threatened.',
+  occupied: 'An occupying power prevents the court from marching into a different war.',
+  front_infeasible: 'The court cannot field a force capable of opening this separate front.',
+});
+
+/** Keep persisted relationship costs byte-tidy across floating arithmetic. */
+const round4 = (value) => Math.round(value * 10_000) / 10_000;
+
+/**
+ * The caller's bounded reading of one real refusal.  Martial confidence makes
+ * a failed call weigh more; diplomatic confidence and an inward-looking court
+ * make room for prudence.  This is an aftermath bar only: it cannot select an
+ * enemy, invent a refusal, remove its base cost, or change the relationship.
+ */
+function coalitionRefusalCharacterRead(worldState, rules, snapshot, callerId, refusingId) {
+  const books = readWarSeatBooks({
+    worldState,
+    snapshot,
+    actorId: String(callerId),
+    opponentId: String(refusingId),
+  });
+  const continueBias = clamp01(Number(books.continueBias01));
+  const peaceBias = clamp01(Number(books.peaceBias01));
+  const T = COALITION_REFUSAL_TUNING;
+  const authored = Math.max(T.MIN_CHARACTER_MULT, Math.min(
+    T.MAX_CHARACTER_MULT,
+    1 + (continueBias - peaceBias) * 0.4,
+  ));
+  let learned = 1;
+  if (rules?.dispositionChannelsEnabled === true) {
+    const entry = worldState?.dispositionStats?.[String(callerId)] || null;
+    const martial = thresholdFactorOf(entry, 'martial');
+    const diplomatic = thresholdFactorOf(entry, 'diplomatic');
+    const insular = thresholdFactorOf(entry, 'insular');
+    // A high learned stock produces factor < 1.  Invert martial because confidence
+    // in force hardens the expected obligation; keep diplomatic/insular in their
+    // published direction because confidence in parley and inwardness soften it.
+    learned = ((2 - martial.factor) + diplomatic.factor + insular.factor) / 3;
+  }
+  const multiplier = round4(Math.max(T.MIN_CHARACTER_MULT, Math.min(
+    T.MAX_CHARACTER_MULT,
+    rules?.dispositionChannelsEnabled === true ? (authored + learned) / 2 : authored,
+  )));
+  const characterSource = rules?.dispositionChannelsEnabled === true
+    ? 'own books and history'
+    : 'own books';
+  if (multiplier >= T.PRESSING_MIN) {
+    return {
+      multiplier,
+      costBand: 'pressing',
+      receipt: `The calling court's ${characterSource} make the broken expectation weigh heavily against the compact.`,
+    };
+  }
+  if (multiplier <= T.QUIET_MAX) {
+    return {
+      multiplier,
+      costBand: 'quiet',
+      receipt: `The calling court's ${characterSource} leave room to read the refusal as prudence rather than betrayal.`,
+    };
+  }
+  return {
+    multiplier,
+    costBand: 'present',
+    receipt: 'The calling court records the refusal as a breach of allied expectation.',
+  };
+}
 
 // ── War-exhaustion SCAR tunables (the homeostasis closer) ────────────────────────
 // The scar is a worldState ledger (warExhaustion[homeId] → 0..1) ratcheted up while a
@@ -246,13 +347,17 @@ const LEVY_STRAIN_GROSS_PER_TICK = LEVY_STRAIN_PER_TICK + EXHAUSTION_DECAY_PER_T
  * @param {PulseSnapshot} snapshot @param {string} targetId @param {(id:any)=>any} capacityFor @param {Set<string>} besiegedSet
  * @returns {number}
  */
-export function computeAllyRelief(snapshot, targetId, capacityFor, besiegedSet) {
+export function computeAllyRelief(snapshot, targetId, capacityFor, besiegedSet, coalitionLit = false) {
   const states = snapshot?.worldState?.relationshipStates || {};
   const allies = new Set();
   for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
     const edge = normalizeRelationshipEdge(rawEdge);
     const relState = ensureRelationshipState(edge, states[relationshipKeyFromEdge(rawEdge)]);
     if (!ALLY_SUPPORT_TYPES.has(relState.relationshipType)) continue;
+    // WR-6: peer alliances become priced, explicit deployments.  They may no
+    // longer appear a second time as free wall relief.  Hierarchical protection
+    // (vassal/patron) remains the separate existing institution it always was.
+    if (coalitionLit && relState.relationshipType !== 'vassal' && relState.relationshipType !== 'patron') continue;
     const { from, to } = getRelationshipSettlements(edge);
     const a = String(from);
     const b = String(to);
@@ -279,13 +384,16 @@ export function computeAllyRelief(snapshot, targetId, capacityFor, besiegedSet) 
  * @param {PulseSnapshot} snapshot @param {string} homeId @param {Set<string>} excludeSet
  * @returns {string[]}
  */
-export function computeLevySources(snapshot, homeId, excludeSet) {
+export function computeLevySources(snapshot, homeId, excludeSet, coalitionLit = false) {
   const states = snapshot?.worldState?.relationshipStates || {};
   const sources = new Set();
   for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
     const edge = normalizeRelationshipEdge(rawEdge);
     const relState = ensureRelationshipState(edge, states[relationshipKeyFromEdge(rawEdge)]);
     if (!LEVY_SUPPORT_TYPES.has(relState.relationshipType)) continue;
+    // WR-6 removes free peer levies: a canonical ally either joins with its own
+    // army or refuses.  The senior→vassal levy remains hierarchical support.
+    if (coalitionLit && relState.relationshipType !== 'vassal') continue;
     const { from, to } = getRelationshipSettlements(edge);
     const a = String(from);
     const b = String(to);
@@ -609,6 +717,32 @@ function buildCapacityLookup(snapshot, deployments) {
     cache.set(key, out);
     return out;
   };
+}
+
+/**
+ * Reusable hard feasibility read for a coalition join, including delayed
+ * proposal approval. A compact can authorize mobilization; it cannot make an
+ * independently hopeless army pass the one opener's physical siege law.
+ */
+export function coalitionJoinFeasibility(snapshot, worldState, partyId, enemyId) {
+  const party = String(partyId || '');
+  const enemy = String(enemyId || '');
+  if (!party || !enemy || party === enemy
+    || !snapshot?.byId?.has?.(party) || !snapshot?.byId?.has?.(enemy)) {
+    return { allowed: false, verdict: 'auto_fail' };
+  }
+  const capacityFor = buildCapacityLookup(snapshot, worldState?.deployments || {});
+  const attacker = capacityFor(party);
+  const defender = capacityFor(enemy);
+  const { verdict } = classifyFeasibility({
+    attackerCurrent: attacker.offensive,
+    defenderCurrent: defender.homeDefense,
+    coalitionSize: 1,
+    defenderItem: snapshot.byId.get(enemy),
+    attackerFacets: attacker.facets,
+    defenderFacets: defender.facets,
+  });
+  return { allowed: verdictPermitsSiege(verdict), verdict };
 }
 
 /**
@@ -1109,6 +1243,17 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   const atWalls = siegeArrivalGate(/** @type {{ spatialLedgers?: unknown }} */ (worldState), tick);
   // settlementStrength stays the RELATIONSHIP-dynamics confidence input (unchanged).
   const strengthFor = buildStrengthLookup(snapshot);
+  // WR-6 coalition law is stricter than the host war gate: all four constituent
+  // flags must be exact true.  Decisions read the PRE-TICK deployment ledger,
+  // so a war opened this tick can summon allies only on the following tick.
+  const coalitionWorldState = { ...worldState, simulationRules: rules };
+  const coalitionLit = warCoalitionActive(coalitionWorldState);
+  const coalitionJoinDecisions = coalitionLit
+    ? readCoalitionJoinDecisions({ snapshot, worldState: coalitionWorldState, tick, strengthFor })
+    : [];
+  const coalitionDecisionByParty = new Map(
+    coalitionJoinDecisions.map((decision) => [String(decision.partyId), decision]),
+  );
   // The war-specific MILITARY CAPACITY model (theoretical/current). The
   // deploy/siege math reads CURRENT capacity (theoretical minus exhaustion/drain
   // minus army-away); the feasibility gate classifies the capacity ratio.
@@ -1334,7 +1479,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // P3 ally defense: allied/vassal/patron neighbours (not themselves besieged) send
     // relief. 0 when the flag is off ⇒ the verdict is unchanged.
     const defenderReliefBonus = allyDefenseEnabled
-      ? computeAllyRelief(snapshot, targetId, capacityFor, new Set(targets))
+      ? computeAllyRelief(snapshot, targetId, capacityFor, new Set(targets), coalitionLit)
       : 0;
     // W-F4b item 2a: the PRIMARY besieger's (besiegers[0]) alignment-conditioned
     // fidelity pull — 0 (⇒ the classify inputs stay TRUE, byte-identical) unless it
@@ -1653,32 +1798,165 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     }
   }
 
+  const coalitionNameFor = (id, fallback) => {
+    const item = snapshot?.byId?.get?.(String(id));
+    const name = item?.name || item?.settlement?.name;
+    return typeof name === 'string' && name.trim() ? name.trim() : fallback;
+  };
+  const pushCoalitionRefusal = (decision, refusalCause = 'strategic') => {
+    const partyName = coalitionNameFor(decision.partyId, 'The allied court');
+    const callerName = coalitionNameFor(decision.callerId, 'the calling ally');
+    const enemyName = coalitionNameFor(decision.enemyId, 'the opposing court');
+    const relation = decision.relationshipState || {};
+    const callerReading = coalitionRefusalCharacterRead(
+      worldState,
+      rules,
+      snapshot,
+      decision.callerId,
+      decision.partyId,
+    );
+    const refusalTuning = COALITION_REFUSAL_TUNING;
+    const retaliationReason = decision.riskBand === 'decisive' || decision.riskBand === 'pressing'
+      ? `The court believes answering ${callerName} would expose the realm to retaliation beyond the present war.`
+      : `The court weighed the wider retaliation that a march against ${enemyName} could awaken.`;
+    const closedRefusalCause = COALITION_REFUSAL_CAUSE_SET.has(refusalCause)
+      ? refusalCause
+      : 'strategic';
+    const refusalReason = COALITION_REFUSAL_CAUSE_REASON[closedRefusalCause]
+      || retaliationReason;
+    outcomes.push({
+      id: `world_outcome.coalition_refused.${stablePart(decision.callId)}.${tick}`,
+      type: 'relationship_shift',
+      candidateType: 'coalition_refused',
+      ruleId: 'war_coalition_refusal',
+      ruleFamily: 'relationship',
+      applyMode: 'auto',
+      probability: 1,
+      targetSaveId: decision.partyId,
+      sourceEventTargetId: decision.callerId,
+      severity: 0.5,
+      headline: `${partyName} refuses ${callerName}'s call`,
+      summary: `${partyName} will not send its army against ${enemyName}; the refusal now stands between the allied courts.`,
+      reasons: [
+        refusalReason,
+        callerReading.receipt,
+      ],
+      relationshipKey: decision.relationshipKey,
+      relationshipPatch: {
+        trust: round4(clamp01((Number(relation.trust) || 0)
+          - refusalTuning.TRUST_HIT * callerReading.multiplier)),
+        resentment: round4(clamp01((Number(relation.resentment) || 0)
+          + refusalTuning.RESENTMENT_GAIN * callerReading.multiplier)),
+        obligationFatigue: round4(clamp01((Number(relation.obligationFatigue) || 0)
+          + refusalTuning.OBLIGATION_FATIGUE_GAIN * callerReading.multiplier)),
+      },
+      metadata: {
+        incidentType: 'coalition_refused',
+        allianceCall: coalitionCallArchiveRow(decision, 'refused', tick),
+        refusalCostBand: callerReading.costBand,
+        coalitionEvidence: coalitionDecisionEvidence(decision, false, tick).map((row) => (
+          row.kind === 'coalition_refused'
+            ? { ...row, costBand: callerReading.costBand, refusalCause: closedRefusalCause }
+            : row
+        )),
+      },
+    });
+  };
+
   for (const fromId of candidateIds) {
+    const coalitionDecision = coalitionDecisionByParty.get(fromId) || null;
     if (deployments[fromId]) continue;                 // one-army constraint
-    if (activeIntervenerIds.has(fromId)) continue;     // r2 war-military-2: already committed as an intervention column
     // M10a — HOLD (dedup): a HELD war-init (warInitMode 'proposal') withholds the
     // deployment, so the mobilized besieger would otherwise re-propose the SAME
     // siege every tick, spamming the approval queue. While a pending strategy_deploy
     // proposal for this besieger sits unresolved, the actor HOLDS — no duplicate.
     // The legacy/auto path mints inline (caught by the one-army gate above) and
     // never holds ⇒ this guard is byte-invisible when initiation is not proposal-gated.
-    if (warInitMode === 'proposal' && pendingActorMajorFor(worldState, 'strategy_deploy', fromId)) continue;
-    if (clearedAttackers.has(fromId)) continue;        // army just returned this tick
-    if (isBesieged(graph, fromId)) continue;           // can't march while besieged/occupied
+    if ((warInitMode === 'proposal' || coalitionDecision)
+      && pendingActorMajorFor(worldState, 'strategy_deploy', fromId)) continue;
+    if (coalitionDecision) {
+      // The call was priced from the pre-tick root, but the root siege resolved
+      // before this opener.  Revalidate against the UPDATED ledger so a conquest,
+      // withdrawal, recall, or vanished target cannot resurrect an ended episode.
+      // A lapsed call emits neither join nor refusal: there is no longer a call
+      // to answer by the time this army would march.
+      const anchor = coalitionDecision.anchor;
+      const root = deployments[anchor.originAttackerId];
+      const rootTargetId = anchor.originAttackerId === anchor.callerId
+        ? anchor.enemyId
+        : anchor.callerId;
+      const rootSurvives = root
+        && root.recalled == null
+        && Number(root.sinceTick) === anchor.originSinceTick
+        && String(root.targetId || '') === rootTargetId
+        && !joinAnchorOf(root, anchor.originAttackerId)
+        && snapshot?.byId?.has?.(anchor.partyId)
+        && snapshot?.byId?.has?.(anchor.callerId)
+        && snapshot?.byId?.has?.(anchor.enemyId)
+        && treatyEligibleWarTargets(
+          coalitionWorldState,
+          anchor.partyId,
+          [anchor.enemyId],
+          tick,
+        ).length === 1;
+      if (!rootSurvives) continue;
+    }
+    if (coalitionDecision && !coalitionDecision.accepted) {
+      pushCoalitionRefusal(coalitionDecision);
+      continue;
+    }
+    if (activeIntervenerIds.has(fromId)) {             // already committed as an intervention column
+      if (coalitionDecision) pushCoalitionRefusal(coalitionDecision, 'army_committed');
+      continue;
+    }
+    if (clearedAttackers.has(fromId)) {                // army just returned this tick
+      if (coalitionDecision) pushCoalitionRefusal(coalitionDecision, 'army_returned');
+      continue;
+    }
+    if (isBesieged(graph, fromId)) {                   // can't march while besieged/occupied
+      if (coalitionDecision) pushCoalitionRefusal(coalitionDecision, 'home_threatened');
+      continue;
+    }
     // MOBILIZATION POSTURE GATE (the keystone): a settlement cannot launch a
     // serious siege from peace. It must have RAMPED to a war-ready posture
     // (mobilized / deployed) over prior ticks. A `peace`/`alert`/`war_preparation`
     // settlement is BLOCKED here — no fresh front, no matter how strong. (Pre-seeded
     // sieges already in the graph are resolved above regardless of posture; this gate
     // only governs OPENING a NEW one.)
-    if (!isWarReady(warPosture[fromId]?.state)) continue;
+    // A ratified alliance call is itself the mobilizing authority for the
+    // joining court.  Ordinary opportunistic wars still require the pre-built
+    // posture; otherwise a defender's ally could never replace the free relief
+    // this lit mode deliberately removes.
+    if (!coalitionDecision && !isWarReady(warPosture[fromId]?.state)) continue;
 
     const fromStrength = strengthFor(fromId);
-    if (fromStrength < HOSTILE_CONFIDENCE) continue;   // not confident enough to wage war (relationship gate)
+    if (!coalitionDecision && fromStrength < HOSTILE_CONFIDENCE) continue; // ordinary hostile confidence gate
     const fromCap = capacityFor(fromId);
     // worldpulse-war-9: is this settlement under an active occupation, and by whom? An
     // occupied town may march ONLY against its occupier (a rising), never a third party.
     const occupierOfFrom = occupations[fromId]?.occupierId != null ? String(occupations[fromId].occupierId) : null;
+    if (coalitionDecision && occupierOfFrom && coalitionDecision.enemyId !== occupierOfFrom) {
+      pushCoalitionRefusal(coalitionDecision, 'occupied');
+      continue;
+    }
+    if (coalitionDecision) {
+      const defenderCap = capacityFor(coalitionDecision.enemyId);
+      const { verdict } = classifyFeasibility({
+        attackerCurrent: fromCap.offensive,
+        defenderCurrent: defenderCap.homeDefense,
+        coalitionSize: 1,
+        defenderItem: snapshot?.byId?.get?.(coalitionDecision.enemyId),
+        attackerFacets: fromCap.facets,
+        defenderFacets: defenderCap.facets,
+      });
+      if (!verdictPermitsSiege(verdict)) {
+        pushCoalitionRefusal(
+          coalitionDecision,
+          'front_infeasible',
+        );
+        continue;
+      }
+    }
 
     // Pick the first hostile target (codepoint-sorted) this settlement can PLAUSIBLY
     // besiege ALONE — the hard feasibility gate runs on the CURRENT-capacity matchup
@@ -1689,12 +1967,12 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // for the opener when the strategy chooser resolved on `deploy` last tick. Null —
     // and every consumer below therefore a no-op, running today's expression verbatim —
     // when the chooser is dark, resolved otherwise, or the order has expired.
-    const marchOrder = warIntentFor(worldState, fromId, tick);
-    let chosenTarget = null;
+    const marchOrder = coalitionDecision ? null : warIntentFor(worldState, fromId, tick);
+    let chosenTarget = coalitionDecision ? coalitionDecision.enemyId : null;
     // WR-0c: the shared target census removes any pair protected by an honored
     // non-aggression term at this tick. Repudiation is a separate, receipted realm
     // decision; the opener never treats a march order as permission to ignore a pact.
-    for (const targetId of intentTargetOrder(hostileTargetsOf(snapshot, fromId, tick), marchOrder)) {
+    for (const targetId of coalitionDecision ? [] : intentTargetOrder(hostileTargetsOf(snapshot, fromId, tick), marchOrder)) {
       // The ordered target is tried FIRST (intentTargetOrder above) and is the one
       // target for which the CONQUEST_MARGIN pre-filter is waived below: that filter
       // stands in for a deliberation the seat has now actually performed. Every HARD
@@ -1753,13 +2031,23 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // W-C1 item 3: supply-gap quality on the committed force (flag off ⇒ 1 ⇒ byte-identical).
       qualityMult: qualityMultFor(fromId),
     });
+    if (coalitionDecision) seededRecord.joinLedger = [coalitionDecision.anchor];
     // W-PEACE-1 §14 (the artifact law): the war record CARRIES its casus list —
     // the top typed reasons standing against the chosen target at the moment the
     // army marched. Stamped ONLY when the peace-engine gate is lit and a case
     // stands (the dormant record shape is byte-identical). Rides the record
     // through attrition (applyAttritionToRecord spreads ...record) and through
     // the DM-Driven proposalPayload (the seeded record is embedded verbatim).
-    const { casusReasons: casusList, sacredAnchors } = pinDeploymentCasusReasons({ reasons: peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */ (/** @type {unknown} */ (worldState))) ? topReasons(openerCasusFor(String(fromId), String(chosenTarget)).entry, 3) : [], tick, attackerItem: snapshot?.byId?.get?.(String(fromId)), defenderItem: snapshot?.byId?.get?.(String(chosenTarget)), simulationRules: rules });
+    const openingReasons = coalitionDecision
+      ? [{
+        type: 'alliance_obligation',
+        score: coalitionDecision.score01,
+        receipt: 'A sworn ally remains in the field under the same living cause.',
+      }]
+      : peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */ (/** @type {unknown} */ (worldState)))
+        ? topReasons(openerCasusFor(String(fromId), String(chosenTarget)).entry, 3)
+        : [];
+    const { casusReasons: casusList, sacredAnchors } = pinDeploymentCasusReasons({ reasons: openingReasons, tick, attackerItem: snapshot?.byId?.get?.(String(fromId)), defenderItem: snapshot?.byId?.get?.(String(chosenTarget)), simulationRules: rules });
     if (casusList.length) seededRecord.casusReasons = casusList; Object.assign(seededRecord, sacredAnchors);
     // The war_front channel PARAMS (the `now` stamp is applied at mint time). On the
     // legacy path they are minted immediately (below); under DM-Driven they ride the
@@ -1770,9 +2058,16 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       to: chosenTarget,
       strength: clamp01(0.5 + fromStrength * 0.3),
       confidence: 0.8,
-      explanation: `${settlementNameFor(fromId)} marches on ${settlementNameFor(chosenTarget)}.`,
+      explanation: coalitionDecision
+        ? `${coalitionNameFor(fromId, 'The allied court')} marches on ${coalitionNameFor(chosenTarget, 'the opposing court')}.`
+        : `${settlementNameFor(fromId)} marches on ${settlementNameFor(chosenTarget)}.`,
       relationshipKey: `war_front.${stablePart(fromId)}.${stablePart(chosenTarget)}`,
-      source: 'war_layer_deploy',
+      source: coalitionDecision ? 'war_layer_coalition_join' : 'war_layer_deploy',
+      ...(coalitionDecision ? {
+        coalitionCallId: coalitionDecision.callId,
+        coalitionCallerId: coalitionDecision.callerId,
+        coalitionRelationshipKey: coalitionDecision.relationshipKey,
+      } : {}),
     };
     if (warInitMode !== 'proposal') {
       // LEGACY / AUTO — install the siege inline, byte-identically to the pre-M9d engine.
@@ -1795,42 +2090,83 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // war_front channel). targetSaveId is the BESIEGER (the actor mobilizing the army) and
     // sourceEventTargetId the BESIEGED — the pulseKernel residue strip reads both off this
     // outcome to drop the new deployment + its front when the siege is deferred/dismissed.
-    const fromName = settlementNameFor(fromId);
-    const chosenName = settlementNameFor(chosenTarget);
+    const fromName = coalitionDecision
+      ? coalitionNameFor(fromId, 'The allied court')
+      : settlementNameFor(fromId);
+    const chosenName = coalitionDecision
+      ? coalitionNameFor(chosenTarget, 'the opposing court')
+      : settlementNameFor(chosenTarget);
+    const callerName = coalitionDecision
+      ? coalitionNameFor(coalitionDecision.callerId, 'the calling ally')
+      : '';
+    const coalitionProposal = !!coalitionDecision && warInitMode === 'proposal';
     // W-C1 legibility: name the two new martial causes when they moved the committed force.
     // Read the just-seeded record directly (under DM-Driven it is NOT in `deployments`).
     const seededRec = seededRecord;
-    const deployReasons = [`${fromName} is war-ready and ${chosenName} is a feasible target.`];
-    if (Number.isFinite(seededRec?.sizingBias) && seededRec.sizingBias !== 1) {
+    const deployReasons = coalitionDecision
+      ? (coalitionProposal
+        ? [
+          `${fromName} is prepared to answer ${callerName}'s living cause if the proposed march is approved.`,
+          `The court weighed the wider retaliation the proposed march could awaken.`,
+          `Proposed casus belli: a sworn alliance obligation under the same living cause.`,
+        ]
+        : [
+          `${fromName} judged ${callerName}'s living cause strong enough to answer the alliance call.`,
+          `The court weighed the wider retaliation the march could awaken before committing its own army.`,
+          `Casus belli: a sworn alliance obligation under the same living cause.`,
+        ])
+      : [`${fromName} is war-ready and ${chosenName} is a feasible target.`];
+    if (!coalitionDecision && Number.isFinite(seededRec?.sizingBias) && seededRec.sizingBias !== 1) {
       deployReasons.push(
         `A rusty command ${seededRec.sizingBias > 1 ? 'over' : 'under'}-committed the force (sizing ×${seededRec.sizingBias.toFixed(2)}).`,
       );
     }
-    if (Number.isFinite(seededRec?.deployedQuality) && seededRec.deployedQuality !== 1) {
+    if (!coalitionDecision && Number.isFinite(seededRec?.deployedQuality) && seededRec.deployedQuality !== 1) {
       deployReasons.push(
         `Thin war-supply degraded the army's kit (deployed quality ×${seededRec.deployedQuality.toFixed(2)}).`,
       );
     }
     // W-PEACE-1 §14.4: the march's receipt NAMES its typed casus (empty when the
     // peace-engine gate is dark ⇒ the dormant outcome is byte-identical).
-    for (const c of casusList) {
+    for (const c of coalitionDecision ? [] : casusList) {
       deployReasons.push(`Casus belli: ${c.type} (${c.score.toFixed(2)}) — ${c.receipt}`);
     }
     outcomes.push({
       id: `world_outcome.strategy_deploy.${stablePart(fromId)}.${stablePart(chosenTarget)}.${tick}`,
       type: 'strategy_deploy',
       candidateType: 'strategy_deploy',
-      ruleId: 'war_layer_strategy_deploy',
+      ruleId: coalitionDecision ? 'war_coalition_join' : 'war_layer_strategy_deploy',
       ruleFamily: 'stressor',
       // LEGACY ⇒ 'auto' (byte-identical); DM-DRIVEN ⇒ 'proposal' (routes to the queue).
       applyMode: warInitMode,
       probability: 1,
       targetSaveId: fromId,
       severity: clamp01(0.5 + fromStrength * 0.2),
-      headline: `${fromName} marches on ${chosenName}`,
-      summary: `${fromName} commits its army to a siege of ${chosenName}. The campaign is opened.`,
+      headline: coalitionDecision
+        ? (coalitionProposal
+          ? `${fromName} proposes to answer ${callerName}'s call`
+          : `${fromName} answers ${callerName}'s call`)
+        : `${fromName} marches on ${chosenName}`,
+      summary: coalitionDecision
+        ? (coalitionProposal
+          ? `${fromName} would commit its own army against ${chosenName} if the answer is approved; each ally would keep a separate command.`
+          : `${fromName} commits its own army against ${chosenName}; the alliance is now a set of separate wars, not a shared command.`)
+        : `${fromName} commits its army to a siege of ${chosenName}. The campaign is opened.`,
       reasons: deployReasons,
       sourceEventTargetId: chosenTarget,
+      ...(coalitionDecision ? {
+        relationshipKey: coalitionDecision.relationshipKey,
+        relationshipPatch: {},
+        metadata: {
+          incidentType: 'coalition_joined',
+          allianceCall: coalitionCallArchiveRow(coalitionDecision, 'joined', tick),
+          coalitionEvidence: coalitionDecisionEvidence(coalitionDecision, true, tick),
+          coalitionEnemyRelationship: {
+            partyId: String(fromId),
+            enemyId: String(chosenTarget),
+          },
+        },
+      } : {}),
       // M9d — the siege-initiation payload. Present ONLY under DM-Driven (the legacy
       // outcome is byte-identical — no field added). On approval, applyWorldPulseOutcomes
       // re-mints the WITHHELD deployment + war_front from this payload. `deployment` is the
@@ -1843,6 +2179,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
             besieged: String(chosenTarget),
             deployment: seededRecord,
             warFront: frontParams,
+            ...(coalitionDecision ? { coalition: coalitionDecision.anchor } : {}),
           },
         }
         : {}),
@@ -1929,7 +2266,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       let totalLevied = 0;
       /** @type {Record<string, number>} */
       const leviedBySource = {};
-      for (const srcId of computeLevySources(snapshot, fromId, excludeSet)) {
+      for (const srcId of computeLevySources(snapshot, fromId, excludeSet, coalitionLit)) {
         const src = snapshot?.byId?.get?.(srcId)?.settlement;
         if (!src) continue;
         const srcName = settlementNameFor(srcId);

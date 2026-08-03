@@ -17,11 +17,18 @@ import { queueRegionalImpacts, addRegionalChannels, mintDirectedChannel } from '
 import { activeSpatialDigest, getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { parkArrivals, drainDueArrivals } from '../spatial/spatialArrival.js';
 import { storageCapacityMonths } from './foodStockpile.js';
-import { applyRelationshipPatch, relationshipKeyFromEdge, relationshipRoles } from './relationshipEvolution.js';
+import {
+  applyRelationshipPatch,
+  ensureRelationshipState,
+  getRelationshipSettlements,
+  normalizeRelationshipEdge,
+  relationshipKeyFromEdge,
+  relationshipRoles,
+} from './relationshipEvolution.js';
 // JOIN 1 — THE RESOLVED MARCH: the chooser→opener order seam (see the two arms in the
 // auto-apply loop). Same lazy pulse chunk as every import above ⇒ zero new eager bytes.
 import { applyWarIntentOutcome, stampDeploymentRecall } from './warIntent.js';
-import { ensureRelationshipEdgeSeed } from './relationshipEdgeSeed.js';
+import { canonicalRelationshipSeed, ensureRelationshipEdgeSeed } from './relationshipEdgeSeed.js';
 import { refreshRelationshipMemory } from './relationshipMemory.js';
 import { resolveRelationshipHierarchy } from './relationshipHierarchy.js';
 import { applyNpcPatch, npcId } from './npcAgency.js';
@@ -73,6 +80,16 @@ import {
   governmentTransitionRulingEvidence,
   peaceDecisionRulingEvidence,
 } from './warRulingsEvidence.js';
+import { warCoalitionEvidenceFromOutcome } from './warCoalitionEvidence.js';
+import { warCoalitionNewsEntries } from './warCoalitionNews.js';
+import {
+  allianceCallWasDecided,
+  coalitionObligationRead,
+  joinAnchorOf,
+} from './warCoalitionLedger.js';
+import { warFrontsInto } from './warFrontReads.js';
+import { treatyBlocksWar } from './treatyEnforcement.js';
+import { coalitionJoinFeasibility } from './warDeployment.js';
 
 function clone(/** @type {any} */ value) {
   return value == null ? value : deepClone(value);
@@ -94,6 +111,85 @@ function relationshipOutcomeDisposition(worldState, outcome) {
   return [...incidents, ...history].some((row) => String(row?.outcomeId || '') === id)
     ? 'same'
     : null;
+}
+
+/**
+ * A joined army owns a real bilateral war address, not only a front channel.
+ * Open or relabel that exact party/enemy relationship through the existing
+ * relationship writers after (and only after) the alliance-call archive lands.
+ * This makes the ordinary sue-for-peace writer reachable without inventing an
+ * N-party war object or a second approval question.
+ */
+function openCoalitionEnemyRelationship({
+  worldState,
+  regionalGraph,
+  outcome,
+  settlementUpdates,
+  tick,
+  now,
+}) {
+  const request = outcome?.metadata?.coalitionEnemyRelationship;
+  const identity = canonicalRelationshipSeed(request?.partyId, request?.enemyId);
+  if (!identity) return { worldState, regionalGraph };
+  let graph = ensureRelationshipEdgeSeed(regionalGraph, {
+    id: `${outcome.id}.enemy_relationship`,
+    headline: outcome.headline,
+    metadata: {
+      relationshipSeed: {
+        ...identity,
+        fromType: 'neutral',
+        source: 'war_coalition_join',
+      },
+    },
+  }, now);
+  const rawEdge = (graph.edges || []).find((edge) => {
+    const endpoints = getRelationshipSettlements(normalizeRelationshipEdge(edge));
+    const a = String(endpoints.from || '');
+    const b = String(endpoints.to || '');
+    return (a === identity.fromId && b === identity.toId)
+      || (a === identity.toId && b === identity.fromId);
+  });
+  if (!rawEdge) return { worldState, regionalGraph };
+  const relationshipKey = relationshipKeyFromEdge(rawEdge);
+  const current = ensureRelationshipState(
+    normalizeRelationshipEdge(rawEdge),
+    worldState.relationshipStates?.[relationshipKey],
+  );
+  if (current.relationshipType === 'hostile') return { worldState, regionalGraph: graph };
+  const labelOutcome = {
+    id: `${outcome.id}.enemy_relationship`,
+    relationshipKey,
+    relationshipPatch: {},
+    severity: outcome.severity,
+    metadata: { incidentType: 'coalition_joined_war_edge' },
+    proposalPayload: {
+      kind: 'relationship_label_change',
+      relationshipKey,
+      fromType: current.relationshipType,
+      toType: 'hostile',
+      reason: 'An allied court answered a live call and opened its own bilateral war edge.',
+    },
+  };
+  const nextState = applyRelationshipPatch(worldState, labelOutcome, now);
+  graph = applyRelationshipLabelToGraph(graph, labelOutcome, now);
+  const nextEdge = relationshipEdgeForOutcome(graph, labelOutcome);
+  if (nextEdge) {
+    const oriented = roleOrientedEdge(nextEdge, nextState.relationshipStates?.[relationshipKey]);
+    graph = syncRelationshipChannelBundle(graph, oriented, 'hostile', {
+      now,
+      status: 'confirmed',
+      outcomeId: outcome.id,
+      relationshipKey,
+      reason: labelOutcome.proposalPayload.reason,
+    });
+    writeRelationshipLabelToNeighbourNetworks({
+      settlementUpdates,
+      edge: oriented,
+      toType: 'hostile',
+      tick,
+    });
+  }
+  return { worldState: nextState, regionalGraph: graph };
 }
 
 
@@ -958,8 +1054,106 @@ export function applyWorldPulseOutcomes({
     if (outcome.proposalPayload?.kind === 'siege_initiation') {
       const pay = outcome.proposalPayload;
       const besieger = String(pay.besieger);
-      if (pay.deployment && !(state.deployments && state.deployments[besieger])) {
-        state = { ...state, deployments: { ...(state.deployments || {}), [besieger]: clone(pay.deployment) } };
+      let deployment = pay.deployment ? clone(pay.deployment) : null;
+      const coalitionAnchor = pay.coalition ? joinAnchorOf(deployment, besieger) : null;
+      if (pay.coalition) {
+        const liveSnapshot = { ...snapshot, regionalGraph: graph, worldState: state };
+        const armyFree = !(state.deployments && state.deployments[besieger]);
+        const callAlreadyDecided = !!coalitionAnchor && allianceCallWasDecided(
+          state.relationshipStates?.[coalitionAnchor.allianceRelationshipKey],
+          coalitionAnchor.callId,
+          coalitionAnchor.allianceRelationshipKey,
+        );
+        const partiesLive = !!coalitionAnchor
+          && liveSnapshot.byId?.has?.(coalitionAnchor.partyId)
+          && liveSnapshot.byId?.has?.(coalitionAnchor.callerId)
+          && liveSnapshot.byId?.has?.(coalitionAnchor.enemyId);
+        const interventions = getSpatialLedger(state, 'interventions');
+        const activelyIntervening = Object.values(
+          interventions && typeof interventions === 'object' ? interventions : {},
+        ).some((row) => String(row?.interId || '') === besieger);
+        const homeBesieged = warFrontsInto(graph, besieger).length > 0;
+        const occupierId = String(state.occupations?.[besieger]?.occupierId || '');
+        const occupiedAgainstAnother = !!occupierId
+          && occupierId !== String(coalitionAnchor?.enemyId || '');
+        const treatyBlocked = !!coalitionAnchor && treatyBlocksWar(
+          state,
+          coalitionAnchor.partyId,
+          coalitionAnchor.enemyId,
+          tick,
+        );
+        const returnedThisTick = (Array.isArray(state.pulseHistory) ? state.pulseHistory : [])
+          .some((pulse) => Number(pulse?.tick) === Number(tick)
+            && Array.isArray(pulse?.warReturnedSettlementIds)
+            && pulse.warReturnedSettlementIds.map(String).includes(besieger));
+        const obligation = coalitionAnchor
+          ? coalitionObligationRead({
+              worldState: state,
+              snapshot: liveSnapshot,
+              partyId: besieger,
+              deployment,
+            })
+          : { active: false };
+        const joinFeasible = coalitionAnchor
+          ? coalitionJoinFeasibility(
+              liveSnapshot,
+              state,
+              coalitionAnchor.partyId,
+              coalitionAnchor.enemyId,
+            ).allowed
+          : false;
+        if (!armyFree || callAlreadyDecided || !partiesLive || activelyIntervening || homeBesieged
+          || returnedThisTick
+          || occupiedAgainstAnother || treatyBlocked || !joinFeasible || !obligation.active) {
+          lapsedOutcomeIds.push(String(outcome.id || ''));
+          continue;
+        }
+        // Approval may happen several ticks after the proposal. The army joins
+        // NOW, not retroactively at the question's creation tick. Retime every
+        // joined fact together while preserving the exact root-episode call id.
+        const appliedTick = Math.max(0, Math.floor(Number(tick) || 0));
+        const joinedAnchor = { ...coalitionAnchor, joinedTick: appliedTick };
+        deployment = {
+          ...deployment,
+          sinceTick: appliedTick,
+          deploymentAge: 0,
+          joinLedger: [joinedAnchor],
+          ...(Array.isArray(deployment.casusReasons)
+            ? {
+                casusReasons: deployment.casusReasons.map((reason) => (
+                  reason?.type === 'alliance_obligation'
+                    ? { ...reason, atTick: appliedTick }
+                    : reason
+                )),
+              }
+            : {}),
+        };
+        outcome = {
+          ...outcome,
+          proposalPayload: {
+            ...pay,
+            deployment,
+            coalition: joinedAnchor,
+          },
+          metadata: {
+            ...(outcome.metadata || {}),
+            ...(outcome.metadata?.allianceCall
+              ? { allianceCall: { ...outcome.metadata.allianceCall, tick: appliedTick } }
+              : {}),
+            ...(Array.isArray(outcome.metadata?.coalitionEvidence)
+              ? {
+                  coalitionEvidence: outcome.metadata.coalitionEvidence.map((row) => ({
+                    ...row,
+                    tick: appliedTick,
+                    ...(Object.hasOwn(row || {}, 'joinedTick') ? { joinedTick: appliedTick } : {}),
+                  })),
+                }
+              : {}),
+          },
+        };
+      }
+      if (deployment && !(state.deployments && state.deployments[besieger])) {
+        state = { ...state, deployments: { ...(state.deployments || {}), [besieger]: deployment } };
       }
       if (pay.warFront) {
         const frontChannel = /** @type {import('../region/graph.js').RegionChannel} */ (mintDirectedChannel({ ...pay.warFront, now }));
@@ -1102,6 +1296,9 @@ export function applyWorldPulseOutcomes({
         metadata: {
           ...(outcome.metadata || {}),
           peaceDecision: peaceDecision.receipt,
+          ...(peaceDecision.coalitionPeaceExpenditures?.length
+            ? { coalitionPeaceExpenditures: peaceDecision.coalitionPeaceExpenditures }
+            : {}),
         },
       };
     }
@@ -1158,7 +1355,20 @@ export function applyWorldPulseOutcomes({
       // know the edge WAS hostile before this outcome rewrote it.
       const beforeEdge = relationshipEdgeForOutcome(graph, outcome);
       const beforeType = beforeEdge ? String(beforeEdge.relationshipType || beforeEdge.type || '') : null;
+      const beforeRelationshipWrite = state;
       state = applyRelationshipPatch(state, outcome, now);
+      if (state !== beforeRelationshipWrite && outcome.metadata?.coalitionEnemyRelationship) {
+        const coalitionWarEdge = openCoalitionEnemyRelationship({
+          worldState: state,
+          regionalGraph: graph,
+          outcome,
+          settlementUpdates,
+          tick,
+          now,
+        });
+        state = coalitionWarEdge.worldState;
+        graph = coalitionWarEdge.regionalGraph;
+      }
       graph = applyRelationshipLabelToGraph(graph, outcome, now);
       if (outcome.proposalPayload?.kind === 'relationship_label_change') {
         const edge = relationshipEdgeForOutcome(graph, outcome);
@@ -1401,11 +1611,23 @@ export function applyWorldPulseOutcomes({
       }
     }
     autoApplied.push(outcome);
+    // WR-6: an alliance call is carried through the ordinary outcome/proposal
+    // lane, but once it actually applies its reader face belongs to the governed
+    // coalition corpus. Proposal creation continued above, so a held call cannot
+    // speak as joined/refused before approval. If typed identities are incomplete
+    // the projector fails closed and the ordinary outcome prose remains available.
+    const coalitionNews = warCoalitionNewsEntries({
+      evidence: warCoalitionEvidenceFromOutcome(outcome),
+      snapshot,
+      now,
+    });
     // FEED curation only: autoApplied above records every applied outcome.
     // Pulse history then partitions public selections from bounded mechanical
     // and consequence receipts; record mode changes visibility, not mechanics.
     const appliedEntry = newsEntryForOutcome(outcome, tick, 'applied');
-    if (stateOnly) {
+    if (coalitionNews.length) {
+      newsEntries.push(...coalitionNews);
+    } else if (stateOnly) {
       if (!isDriftOnlyOutcome(outcome)
           || !isMetronomeRepeat(
             appliedEntry,
@@ -1576,7 +1798,10 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
       updateProposalStatus(campaign.worldState, proposalId, 'superseded', {
         supersededAt: now,
         supersededAtTick: tick,
-        supersessionReason: 'bilateral_peace_lapsed',
+        supersessionReason: outcome.proposalPayload?.kind === 'siege_initiation'
+          && outcome.proposalPayload?.coalition
+          ? 'coalition_join_lapsed'
+          : 'bilateral_peace_lapsed',
         updatedAt: now,
         ...(adjudicatedBy ? { adjudicatedBy } : {}),
       }),

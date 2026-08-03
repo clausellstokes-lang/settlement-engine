@@ -102,6 +102,8 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   war_continued_for_the_seat: 'war', war_ended_against_rival_triumph: 'war',
   refusal_cost_ally_patience: 'war', successor_repudiates_war: 'war',
   successor_escalates_war: 'war',
+  coalition_entry_priced: 'war', coalition_joined: 'war', coalition_refused: 'war',
+  casus_alliance_obligation: 'war', coalition_stayed: 'war',
   // THE INDIRECT WAR + THE WAR OF WORDS. These nine route on `kind`, not `impactKind`
   // (their authors mint none), which is exactly why the automatic discovery scan above
   // never surfaced them: it reads `impactKind:` and `candidateType:` literals only. They
@@ -133,6 +135,8 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   flow_trade_scarcity: 'trade', flow_migration: 'trade', trade_embargo_collapse: 'trade',
   disposition_mercantile_crossed: 'trade',
   home_front_roads: 'trade', home_front_markets: 'trade',
+  coalition_expenditure_read: 'trade', coalition_spoils_divided: 'trade',
+  coalition_debt_paid: 'trade', coalition_debt_unpaid: 'trade',
   trade_embargo: 'trade', trade_embargo_declared: 'trade', trade_realignment: 'trade',
   vassal_trade_coercion: 'trade', vassal_tribute_extraction: 'trade', vassal_extraction: 'trade',
   resource_discovery: 'trade', resource_depletion: 'trade', resource_recovery: 'trade',
@@ -206,6 +210,7 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   disposition_diplomatic_crossed: 'events', disposition_insular_crossed: 'events',
   disposition_reversal: 'events', lineage_edge_recorded: 'events', mirror_kinship_bond: 'events',
   home_front_stores: 'events', home_front_hands: 'events', home_front_institutions: 'events',
+  mirror_obligation_discharged: 'events',
   // WR-5 decision records persist `section: 'adjudication'`, which the record
   // router honours below. Their token-only fallback is events: adjudication is
   // a property of the governed record, never a second meaning for the token.
@@ -213,6 +218,7 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   refusal_cost_legitimacy: 'events', ruler_books_compromised: 'events',
   war_party_overturns_peacemaker: 'events', peace_party_overturns_warmonger: 'events',
   succession_demand_inherited: 'events', war_dissolved_by_verdict: 'events',
+  coalition_separate_peace: 'events', coalition_apportionment: 'events',
   // traditions / custom / values (KIND_SECTION `traditions` custom-half → events)
   tradition: 'events', tradition_change: 'events', moral_reckoning: 'events', cause_lifecycle: 'events',
   // mercy (KIND_SECTION `mercy` → events)
@@ -411,7 +417,8 @@ export function heraldSectionOfRecord(record = {}) {
   if (isPendingDecision(r) || isResolution(r)) return 'adjudication';
   if (isEmergingForecast(r)) return 'divination';
   const supplied = tokenStr(r.section);
-  if (r.sectionAuthority === 'war_rulings_registry'
+  if ((r.sectionAuthority === 'war_rulings_registry'
+      || r.sectionAuthority === 'war_coalition_registry')
     && HERALD_SECTIONS.includes(/** @type {HeraldSection} */ (supplied))) {
     return /** @type {HeraldSection} */ (supplied);
   }

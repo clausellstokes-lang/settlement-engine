@@ -54,6 +54,7 @@ import { WAR_TERMINATION_DECIDING_TERM_KEYS } from '../certification/warConverge
 import { deityPressureOf, thresholdFactorOf } from './dispositionProfile.js';
 import { readWarSeatBooks } from './warSeatBooks.js';
 import { corruptionVerdictIdFor } from './warAuthorityVerdict.js';
+import { allianceObligationReason } from './warCoalitionLedger.js';
 
 /** @param {unknown} value @returns {Record<string, unknown>} */
 function asObject(value) {
@@ -99,6 +100,7 @@ export const WAR_CAUSE_DISSOLUTION = Object.freeze({
   opportunism: 'weakness_or_patron_changed',
   sacred_claim: 'patron_anchor_changed',
   lineage_claim: 'lineage_edge_or_living_child_changed',
+  alliance_obligation: 'alliance_or_origin_episode_changed',
 });
 
 /** Closed reader-language clauses for a casus that no longer survives its live read. @type {Readonly<Record<string, string>>} */
@@ -117,6 +119,7 @@ const DISSOLVED_CAUSE_PROSE = Object.freeze({
   opportunism: 'the court no longer sees an undefended prize',
   sacred_claim: 'a god named when the banners rose is no longer worshipped from the same throne',
   lineage_claim: 'the living family edge that raised the banners no longer supports the claim',
+  alliance_obligation: 'the sworn call or the original quarrel that raised these banners has ended',
 });
 
 /** Closed, number-free peace clauses for the WR-1 reader surface. */
@@ -135,6 +138,7 @@ const TERMINATION_PEACE_PROSE = Object.freeze({
   hopelessness: 'The court no longer believes victory lies down this road.',
   common_rite: 'A shared rite offers both courts ground on which to stand.',
   kinship_bond: 'The surviving family bond gives both courts a reason to step back.',
+  obligation_discharged: 'The alliance call has been discharged, leaving no sworn cause to continue the war.',
 });
 
 /** Closed qualitative projection used by every persisted term. */
@@ -569,7 +573,26 @@ export function readWarTerminations({
     const attackerItem = byId.get(attackerId) || null;
     const defenderItem = byId.get(targetId) || null;
     const liveEntry = warReasonsFor(state, attackerId, targetId);
-    const liveReasons = liveEntry ? asObject(liveEntry.reasons) : null;
+    let liveReasons = liveEntry ? asObject(liveEntry.reasons) : null;
+    // A join is installed before this tick's reason refold.  Read its exact
+    // anchor directly so the brand-new cause cannot appear dissolved for one
+    // tick merely because the prior war-reason ledger predates the deployment.
+    const allianceCause = allianceObligationReason(state, snapshot, attackerId, targetId);
+    const allianceWasFoundingCause = (Array.isArray(deployment.casusReasons)
+      ? deployment.casusReasons
+      : []).some((raw) => String(asObject(raw).type || '') === 'alliance_obligation');
+    if (allianceWasFoundingCause && allianceCause.score > 0) {
+      liveReasons = {
+        ...(liveReasons || {}),
+        alliance_obligation: { type: 'alliance_obligation', score: allianceCause.score },
+      };
+    } else if (allianceWasFoundingCause && liveReasons?.alliance_obligation) {
+      // Direct anchor truth overrides the prior fold in both directions.  If
+      // the cause/alliance died this tick, yesterday's ledger may not keep the
+      // borrowed casus falsely live for one extra termination decision.
+      liveReasons = { ...liveReasons };
+      delete liveReasons.alliance_obligation;
+    }
     const cause = readFoundingCauses(
       deployment,
       liveReasons,

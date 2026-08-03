@@ -46,6 +46,11 @@ export const DISPOSITION_SOURCE_KINDS = Object.freeze([
   'treaty_default',
   'treaty_repudiated',
   'mediation_landed',
+  'coalition_reimbursement_paid',
+  'coalition_reimbursement_unpaid',
+  'coalition_settlement_profit',
+  'coalition_settlement_honored',
+  'coalition_settlement_shortfall',
 ]);
 const DISPOSITION_SOURCE_KIND_SET = new Set(DISPOSITION_SOURCE_KINDS);
 

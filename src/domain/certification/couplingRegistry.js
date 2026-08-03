@@ -243,10 +243,127 @@ export const WR5_WAR_RULING_COUPLINGS = Object.freeze([
   WR5_REFUSAL_PRICE_COUPLING,
 ]);
 
+/** WR-6 / CPL-4. A candidate prices direct and second-order retaliation through
+ * its own belief map; the same web may instead support a refusal. */
+export const WR6_ALLIANCE_RISK_COUPLING = couplingRow({
+  couplingId: 'CPL-4.INFO_TO_WAR.WR-6.alliance_web_risk',
+  pairId: 'CPL-4',
+  direction: 'INFO→WAR',
+  read: 'src/domain/worldPulse/warAllianceRisk.js#readAllianceWebRisk',
+  receiptField: 'pulseRecord.warCoalitionEvidence[kind=coalition_entry_priced].{band,callId,relationshipKey,settlementId,counterpartId,thirdPartyId}',
+  counterforce: 'src/domain/worldPulse/warAllianceRisk.js#readAllianceWebRisk',
+  flags: ['warLayerEnabled', 'warTerminationEnabled', 'peaceEngineEnabled', 'coalitionLedgerEnabled'],
+  owningVolume: 'WAR',
+  owningWave: 'WR-6',
+  intendedDesk: 'war',
+});
+
+/** WR-6 / CPL-6. The called court's own seat books and learned temperament
+ * answer the call; the same evidence can honestly produce either arm. */
+export const WR6_COALITION_BOOKS_COUPLING = couplingRow({
+  couplingId: 'CPL-6.INTERIOR_TO_WAR.WR-6.coalition_books',
+  pairId: 'CPL-6',
+  direction: 'INTERIOR→WAR',
+  read: 'src/domain/worldPulse/warCoalitionDecision.js#readCoalitionJoinDecisions',
+  receiptField: 'pulseRecord.warCoalitionEvidence[kind=coalition_joined|coalition_refused].{decision,booksDirection,temperamentDirection,riskBand,callId,relationshipKey}',
+  counterforce: 'src/domain/worldPulse/warCoalitionDecision.js#readCoalitionJoinDecisions',
+  flags: ['warLayerEnabled', 'warTerminationEnabled', 'peaceEngineEnabled', 'coalitionLedgerEnabled'],
+  owningVolume: 'WAR',
+  owningWave: 'WR-6',
+  intendedDesk: 'war',
+});
+
+/** WR-6 / CPL-3. People spent since entry are derived from the existing
+ * deployment/population books; survival and homecoming are the counter-reading. */
+export const WR6_PEOPLE_EXPENDITURE_COUPLING = couplingRow({
+  couplingId: 'CPL-3.POP_TO_WAR.WR-6.coalition_people_spent',
+  pairId: 'CPL-3',
+  direction: 'POP→WAR',
+  read: 'src/domain/worldPulse/warCoalitionExpenditure.js#readCoalitionExpenditure',
+  receiptField: 'pulseRecord.warCoalitionEvidence[kind=coalition_expenditure_read].{componentBands.population,componentBands.attrition,componentBands.force,incompleteEvidence,settlementId}',
+  counterforce: 'src/domain/worldPulse/warCoalitionExpenditure.js#readCoalitionExpenditure',
+  flags: ['warLayerEnabled', 'warTerminationEnabled', 'peaceEngineEnabled', 'coalitionLedgerEnabled'],
+  owningVolume: 'WAR',
+  owningWave: 'WR-6',
+  intendedDesk: 'trade',
+});
+
+/** WR-6 / CPL-1. Live territorial and attributable home-front degradation are
+ * read from their existing owners and never copied into a coalition total. */
+export const WR6_TRADE_EXPENDITURE_COUPLING = couplingRow({
+  couplingId: 'CPL-1.TRADE_TO_WAR.WR-6.coalition_expenditure',
+  pairId: 'CPL-1',
+  direction: 'TRADE→WAR',
+  read: 'src/domain/worldPulse/warCoalitionExpenditure.js#readCoalitionExpenditure',
+  receiptField: 'pulseRecord.warCoalitionEvidence[kind=coalition_expenditure_read].{componentBands.territory,componentBands.homeFront,incompleteEvidence,settlementId}',
+  counterforce: 'src/domain/worldPulse/warCoalitionExpenditure.js#readCoalitionExpenditure',
+  flags: ['warLayerEnabled', 'warTerminationEnabled', 'peaceEngineEnabled', 'coalitionLedgerEnabled'],
+  owningVolume: 'WAR',
+  owningWave: 'WR-6',
+  intendedDesk: 'trade',
+});
+
+/** WR-6 / CPL-1. Coalition settlement turns one aggregate judgment into
+ * pairwise material payments and winner shares through existing transfer owners. */
+export const WR6_COALITION_SETTLEMENT_TRADE_COUPLING = couplingRow({
+  couplingId: 'CPL-1.WAR_TO_TRADE.WR-6.coalition_settlement',
+  pairId: 'CPL-1',
+  direction: 'WAR→TRADE',
+  read: 'src/domain/worldPulse/warCoalitionSettlement.js#planCoalitionSettlement',
+  receiptField: 'pulseRecord.warCoalitionEvidence[kind=coalition_apportionment|coalition_spoils_divided].{coalitionSettlementId,band,allocationBasis,settlementId,counterpartId}',
+  counterforce: 'src/domain/worldPulse/warCoalitionSettlement.js#planCoalitionSettlement',
+  flags: ['warLayerEnabled', 'warTerminationEnabled', 'peaceEngineEnabled', 'coalitionLedgerEnabled'],
+  owningVolume: 'WAR',
+  owningWave: 'WR-6',
+  intendedDesk: 'trade',
+});
+
+/** WR-6 / CPL-6. A refusal and an underpaid ally become durable relationship
+ * facts; service honored or debt paid is the same-evidence counterforce. */
+export const WR6_COALITION_RELATIONSHIP_COUPLING = couplingRow({
+  couplingId: 'CPL-6.WAR_TO_INTERIOR.WR-6.coalition_relationship',
+  pairId: 'CPL-6',
+  direction: 'WAR→INTERIOR',
+  read: 'src/domain/worldPulse/relationshipEvolution.js#applyRelationshipPatch',
+  receiptField: 'pulseRecord.warCoalitionEvidence[].{kind,settlementId,counterpartId}',
+  counterforce: 'src/domain/worldPulse/relationshipEvolution.js#applyRelationshipPatch',
+  flags: ['warLayerEnabled', 'warTerminationEnabled', 'peaceEngineEnabled', 'coalitionLedgerEnabled'],
+  owningVolume: 'WAR',
+  owningWave: 'WR-6',
+  intendedDesk: 'trade',
+});
+
+/** WR-6 / CPL-5. A coalition settlement is aggregate in judgment but closes
+ * and pays only bilateral edges; a separate peace leaves all other edges open. */
+export const WR6_PAIRWISE_SETTLEMENT_COUPLING = couplingRow({
+  couplingId: 'CPL-5.WAR_TO_GRAMMAR.WR-6.pairwise_settlement',
+  pairId: 'CPL-5',
+  direction: 'WAR→GRAMMAR',
+  read: 'src/domain/worldPulse/warCoalitionSettlement.js#validateCoalitionSettlementClosures',
+  receiptField: 'pulseRecord.warCoalitionEvidence[kind=coalition_separate_peace].{settlementId,counterpartId,thirdPartyId}; pulseRecord.warCoalitionEvidence[kind=coalition_apportionment|coalition_spoils_divided].{coalitionSettlementId,settlementId,counterpartId}',
+  counterforce: 'src/domain/worldPulse/warCoalitionSettlement.js#validateCoalitionSettlementClosures',
+  flags: ['warLayerEnabled', 'warTerminationEnabled', 'peaceEngineEnabled', 'coalitionLedgerEnabled'],
+  owningVolume: 'WAR',
+  owningWave: 'WR-6',
+  intendedDesk: 'adjudication',
+});
+
+/** The seven WR-6 cross-layer reads, in call-to-settlement order. */
+export const WR6_WAR_COALITION_COUPLINGS = Object.freeze([
+  WR6_ALLIANCE_RISK_COUPLING,
+  WR6_COALITION_BOOKS_COUPLING,
+  WR6_PEOPLE_EXPENDITURE_COUPLING,
+  WR6_TRADE_EXPENDITURE_COUPLING,
+  WR6_COALITION_SETTLEMENT_TRADE_COUPLING,
+  WR6_COALITION_RELATIONSHIP_COUPLING,
+  WR6_PAIRWISE_SETTLEMENT_COUPLING,
+]);
+
 export const COUPLING_REGISTRY = Object.freeze([
   WR3_LINEAGE_COUPLING,
   ...WR4_WAR_COST_COUPLINGS,
   ...WR5_WAR_RULING_COUPLINGS,
+  ...WR6_WAR_COALITION_COUPLINGS,
 ]);
 
 /** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */

@@ -20,6 +20,13 @@ import {
   relationshipKeyFromEdge,
 } from './relationshipState.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
+import {
+  coalitionJoinAnchor,
+  coalitionLedgerActive,
+  coalitionSunkCostPressureFor,
+  readCoalitionExpenditure,
+} from './warCoalitionExpenditure.js';
+import { coalitionClosureWitness } from './warCoalitionLedger.js';
 
 /** Named, bounded decision threshold; tuning can move the height, not the rule. */
 export const WAR_PEACE_DECISION_TUNING = Object.freeze({ ACCEPT_AT: 0.5 });
@@ -160,6 +167,7 @@ export function inheritedWarDemandFor(worldState, actorId, opponentId, snapshot 
  *   offererTermination:NonNullable<ReturnType<typeof readWarTerminationForParty>>,
  *   offererRead:Record<string,unknown>,
  *   termination:NonNullable<ReturnType<typeof readWarTerminationForParty>>,
+ *   coalitionPeaceExpenditures:Array<Record<string,unknown>>,
  *   receipt:Record<string,unknown>,
  * }|null}
  */
@@ -237,6 +245,17 @@ export function readWarPeaceDecision({
   const livePressureIndex = pIndex && typeof pIndex.get === 'function'
     ? pIndex
     : pressureIndex(deriveSettlementPressures(decisionSnapshot));
+  // WR-6: once the exact coalition gate is lit, the same current-episode
+  // expenditure reader is offered to BOTH courts' exact WR-1 evaluator. Keep
+  // the callback absent on the dark path so enabling WR-5 alone remains
+  // byte-identical to its pre-coalition decision arithmetic.
+  const sunkCostPressureFor = coalitionLedgerActive(worldState)
+    ? coalitionSunkCostPressureFor({
+        worldState,
+        snapshot: decisionSnapshot,
+        tick,
+      })
+    : null;
   const termination = readWarTerminationForParty({
     worldState,
     snapshot,
@@ -244,6 +263,7 @@ export function readWarPeaceDecision({
     tick,
     actorId: targetId,
     opponentId: offererId,
+    sunkCostPressureFor,
   });
   if (!termination) return null;
   const offererTermination = readWarTerminationForParty({
@@ -253,8 +273,38 @@ export function readWarPeaceDecision({
     tick,
     actorId: offererId,
     opponentId: targetId,
+    sunkCostPressureFor,
   });
   if (!offererTermination) return null;
+  const closureWitness = coalitionLedgerActive(worldState)
+    ? coalitionClosureWitness(worldState, offererId, targetId, tick, offererId)
+    : null;
+  const expenditurePartyIds = [...new Set([
+    offererId,
+    targetId,
+    ...(Array.isArray(closureWitness?.abandoned) ? closureWitness.abandoned : []),
+  ])];
+  const coalitionPeaceExpenditures = coalitionLedgerActive(worldState)
+    ? expenditurePartyIds.map((partyId) => {
+        const deployment = asObject(deployments[partyId]);
+        const opponentId = String(deployment.targetId || '');
+        if (!opponentId || ![offererId, targetId].includes(opponentId)) return null;
+        return readCoalitionExpenditure({
+          worldState,
+          snapshot: decisionSnapshot,
+          partyId,
+          targetId: opponentId,
+          deployment,
+          tick,
+        });
+      }).filter(Boolean).map((read) => ({
+        partyId: String(read.partyId),
+        callerId: String(read.callerId),
+        targetId: String(read.targetId),
+        joinedTick: Number(read.joinedTick),
+        pressure01: Number(read.pressure01),
+      }))
+    : [];
   const storedOffererRead = asObject(asObject(row.metadata).warRulingRead);
   const storedPairMatches = String(storedOffererRead.attackerId || '') === offererId
     && String(storedOffererRead.targetId || '') === targetId;
@@ -296,6 +346,7 @@ export function readWarPeaceDecision({
     offererTermination,
     offererRead,
     termination,
+    coalitionPeaceExpenditures,
     receipt: {
       id: `war-peace-decision.${stablePart(offererId)}.${stablePart(targetId)}.${now}`,
       kind: 'war_peace_acceptance_read',
@@ -316,5 +367,102 @@ export function readWarPeaceDecision({
       reason,
       ...(inheritedDemand ? { inheritedDemand } : {}),
     },
+  };
+}
+
+/**
+ * Re-open a standing ally's choice without a hard expenditure/cause rule. The
+ * exact WR-1 four-term evaluator already blends WR-5's books and WR-2's
+ * temperament; expenditure enters only through its sanctioned sunk-cost side
+ * door. The output is a typed fact for the caller to turn into stay or pairwise
+ * peace machinery.
+ *
+ * @param {{worldState?:Record<string,unknown>|null,snapshot?:unknown,pIndex?:unknown,
+ *   partyId:unknown,targetId:unknown,tick?:unknown}} args
+ * @returns {Record<string,unknown>|null}
+ */
+export function readStandingCoalitionDecision({
+  worldState = null,
+  snapshot = null,
+  pIndex = null,
+  partyId,
+  targetId,
+  tick = null,
+} = {}) {
+  if (!coalitionLedgerActive(worldState)) return null;
+  const state = asObject(worldState);
+  const party = String(partyId || '');
+  const target = String(targetId || '');
+  const deployment = asObject(asObject(state.deployments)[party]);
+  const now = wholeTick(tick ?? state.tick);
+  const anchor = coalitionJoinAnchor(deployment, party, now);
+  if (!party || !target || party === target
+    || String(deployment.targetId || '') !== target
+    || !anchor
+    // Read-last/write-next parity: an auto-applied ally and a held/approved ally
+    // both get one complete tick in the field before the standing court can
+    // reconsider the call. Otherwise only the auto lane could join and sue for
+    // peace in the same pulse that minted its army.
+    || now <= anchor.joinedTick) return null;
+  const decisionSnapshot = snapshot
+    ? { ...asObject(snapshot), worldState }
+    : { settlements: [], worldState };
+  const livePressureIndex = pIndex && typeof pIndex.get === 'function'
+    ? pIndex
+    : pressureIndex(deriveSettlementPressures(decisionSnapshot));
+  const sunkCostPressureFor = coalitionSunkCostPressureFor({
+    worldState,
+    snapshot: decisionSnapshot,
+    tick: now,
+  });
+  const termination = readWarTerminationForParty({
+    worldState,
+    snapshot: /** @type {any} */ (decisionSnapshot),
+    pIndex: livePressureIndex,
+    tick: now,
+    actorId: party,
+    opponentId: target,
+    sunkCostPressureFor,
+  });
+  const expenditure = readCoalitionExpenditure({
+    worldState,
+    snapshot: decisionSnapshot,
+    partyId: party,
+    targetId: target,
+    deployment,
+    tick: now,
+  });
+  if (!termination || !expenditure) return null;
+  const inheritedDemand = inheritedWarDemandFor(state, party, target, /** @type {any} */ (snapshot));
+  const exits = inheritedDemand
+    ? inheritedDemand.desiredAction === 'peace'
+    : termination.suePressure01 >= WAR_PEACE_DECISION_TUNING.ACCEPT_AT;
+  // An exit decision is only a suit for peace: the opponent can still refuse
+  // it.  The actual separate-peace fact is emitted by peaceTerms only after
+  // that bilateral edge closes.  A stay, by contrast, is already true here.
+  const decisionEvidence = exits ? [] : [{
+    id: `coalition_stayed.${stablePart(party)}.${stablePart(target)}.${now}`,
+    kind: 'coalition_stayed',
+    tick: now,
+    settlementId: party,
+    counterpartId: anchor.callerId,
+    thirdPartyId: target,
+    callerId: anchor.callerId,
+    targetId: target,
+    decidingTerm: termination.decidingTerm,
+    bands: termination.bands,
+    expenditureBand: expenditure.band,
+    joinedTick: anchor.joinedTick,
+    ...(inheritedDemand ? { inheritedDemand } : {}),
+  }];
+  return {
+    partyId: party,
+    callerId: anchor.callerId,
+    targetId: target,
+    decision: exits ? 'exit' : 'stay',
+    termination,
+    expenditure,
+    inheritedDemand,
+    coalitionEvidence: [expenditure.receipt, ...decisionEvidence],
   };
 }

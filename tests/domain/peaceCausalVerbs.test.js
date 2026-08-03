@@ -51,6 +51,10 @@ describe('DECLARE_CASUS — the war-side forceable verb', () => {
     expect(DECLARABLE_WAR_REASON_TYPES).not.toContain('lineage_claim');
     expect(declareCasus(litWorld(), { fromId: 'a', toId: 'b', type: 'lineage_claim' }))
       .toEqual({ ok: false, code: 'casus_engine_derived', detail: 'lineage_claim' });
+    expect(WAR_REASON_TYPES).toContain('alliance_obligation');
+    expect(DECLARABLE_WAR_REASON_TYPES).not.toContain('alliance_obligation');
+    expect(declareCasus(litWorld(), { fromId: 'a', toId: 'b', type: 'alliance_obligation' }))
+      .toEqual({ ok: false, code: 'casus_engine_derived', detail: 'alliance_obligation' });
   });
 
   it('a lit decree mints the typed, receipted record and the consumption factor rises', () => {
@@ -105,7 +109,7 @@ describe('DECLARE_CASUS — the war-side forceable verb', () => {
       const r = declareCasus(litWorld(), { fromId: 'a', toId: 'b', type, severity01: 0.5, tick: 1 });
       expect(r.ok, `${type} is decree-able`).toBe(true);
     }
-    expect(DECLARABLE_WAR_REASON_TYPES).toHaveLength(WAR_REASON_TYPES.length - 1);
+    expect(DECLARABLE_WAR_REASON_TYPES).toHaveLength(WAR_REASON_TYPES.length - 2);
   });
 });
 

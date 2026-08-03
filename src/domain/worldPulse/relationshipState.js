@@ -134,6 +134,148 @@ export const normalizeType = normalizeRelationshipType;
 // four matches the incident-memory maximum lookback horizon while retaining
 // twice the ordinary history window.
 export const RELATIONSHIP_TURNING_POINT_CAP = 24;
+// WR-6: alliance calls outlive the short incident window because a refused
+// summons is a diplomatic fact, but remain bounded like every relationship
+// archive.  Kept beside the turning-point cap so save normalization and the
+// sanctioned writer share one limit.
+export const RELATIONSHIP_ALLIANCE_CALL_CAP = 24;
+// WR-6: coalition settlements and reimbursements are diplomatic facts, not
+// rolling incidents.  Keep their exact-once receipts beside alliance calls on
+// the relationship that actually paid, owed, or forgave the obligation.
+export const RELATIONSHIP_COALITION_SETTLEMENT_CAP = 24;
+
+/** Closed persisted alliance-call row; malformed imports do not become facts. */
+function normalizeAllianceCall(raw) {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+  const row = /** @type {Record<string, unknown>} */ (raw);
+  const callId = typeof row.callId === 'string' ? row.callId.trim() : '';
+  const partyId = typeof row.partyId === 'string' ? row.partyId.trim() : '';
+  const callerId = typeof row.callerId === 'string' ? row.callerId.trim() : '';
+  const enemyId = typeof row.enemyId === 'string' ? row.enemyId.trim() : '';
+  const relationshipKey = typeof row.relationshipKey === 'string' ? row.relationshipKey.trim() : '';
+  const tick = Number(row.tick);
+  const callerDeploymentSinceTick = Number(row.callerDeploymentSinceTick);
+  const originSinceTick = Number(row.originSinceTick);
+  const originAttackerId = typeof row.originAttackerId === 'string' ? row.originAttackerId.trim() : '';
+  const decision = row.decision === 'joined' || row.decision === 'refused' ? row.decision : '';
+  if (!callId || !partyId || !callerId || !enemyId || !relationshipKey || !decision
+    || row.cause !== 'alliance_obligation' || !Number.isInteger(tick) || tick < 0
+    || !Number.isInteger(callerDeploymentSinceTick) || callerDeploymentSinceTick < 0
+    || !Number.isInteger(originSinceTick) || originSinceTick !== callerDeploymentSinceTick
+    || (originAttackerId !== callerId && originAttackerId !== enemyId)
+    || callId !== ['coalition_call', callerId, partyId, enemyId, callerDeploymentSinceTick].join('.')) return null;
+  return {
+    callId, partyId, callerId, enemyId, relationshipKey, tick,
+    callerDeploymentSinceTick, originAttackerId, originSinceTick, decision, cause: 'alliance_obligation',
+  };
+}
+
+/** Sanitize, dedupe by stable call id, and bound a persisted call archive. */
+export function normalizeAllianceCalls(value) {
+  const rows = (Array.isArray(value) ? value : [])
+    .map(normalizeAllianceCall)
+    .filter(Boolean)
+    .sort((a, b) => (a.tick - b.tick)
+      || (a.callId < b.callId ? -1 : a.callId > b.callId ? 1 : 0)
+      || (a.decision < b.decision ? -1 : a.decision > b.decision ? 1 : 0));
+  // Stable duplicate rule: the oldest well-shaped decision wins.  Reordered
+  // imports therefore select the same fact before the newest-cap is applied.
+  const byId = new Map();
+  for (const row of rows) if (!byId.has(row.callId)) byId.set(row.callId, row);
+  return [...byId.values()].slice(-RELATIONSHIP_ALLIANCE_CALL_CAP);
+}
+
+/** Exact-once append through the relationship plane's one writer. */
+export function appendRelationshipAllianceCall(state, raw) {
+  const current = normalizeAllianceCalls(state?.allianceCalls);
+  const row = normalizeAllianceCall(raw);
+  if (!row) return current;
+  if (current.some((entry) => entry.callId === row.callId
+    && entry.relationshipKey === row.relationshipKey)) return current;
+  // A well-shaped imported row can still be stored on the wrong relationship.
+  // The call id proves one caller/party/enemy/root episode, so the owning edge's
+  // writer replaces that conflicting placement instead of letting it poison the
+  // real decision forever (the read requires id + relationship key as well).
+  return normalizeAllianceCalls([
+    ...current.filter((entry) => entry.callId !== row.callId),
+    row,
+  ]);
+}
+
+const COALITION_SETTLEMENT_ACTIONS = new Set([
+  'settlement_transfer',
+  'reimbursement',
+  'forgiveness',
+  'separate_peace',
+]);
+const COALITION_SETTLEMENT_STATUSES = new Set(['paid', 'partial', 'unpaid', 'forgiven', 'recorded']);
+
+/** Closed persisted coalition-settlement row; malformed imports do not become facts. */
+function normalizeCoalitionSettlement(raw) {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+  const row = /** @type {Record<string, unknown>} */ (raw);
+  const actionId = typeof row.actionId === 'string' ? row.actionId.trim() : '';
+  const coalitionSettlementId = typeof row.coalitionSettlementId === 'string'
+    ? row.coalitionSettlementId.trim()
+    : '';
+  const closureId = typeof row.closureId === 'string' ? row.closureId.trim() : '';
+  const relationshipKey = typeof row.relationshipKey === 'string' ? row.relationshipKey.trim() : '';
+  const fromId = typeof row.fromId === 'string' ? row.fromId.trim() : '';
+  const toId = typeof row.toId === 'string' ? row.toId.trim() : '';
+  const action = typeof row.action === 'string' ? row.action.trim() : '';
+  const status = typeof row.status === 'string' ? row.status.trim() : '';
+  const tick = Number(row.tick);
+  const expectedActionId = [coalitionSettlementId, closureId, action].join('.');
+  if (!actionId || !coalitionSettlementId || !closureId || !relationshipKey
+    || !fromId || !toId || fromId === toId
+    || !COALITION_SETTLEMENT_ACTIONS.has(action)
+    || !COALITION_SETTLEMENT_STATUSES.has(status)
+    || (action === 'forgiveness'
+      ? status !== 'forgiven'
+      : action === 'separate_peace'
+        ? status !== 'recorded'
+        : status === 'forgiven' || status === 'recorded')
+    || actionId !== expectedActionId
+    || !Number.isInteger(tick) || tick < 0) return null;
+  return {
+    actionId,
+    coalitionSettlementId,
+    closureId,
+    relationshipKey,
+    fromId,
+    toId,
+    action,
+    tick,
+    status,
+  };
+}
+
+/** Sanitize, deterministically dedupe, and bound the durable settlement archive. */
+export function normalizeCoalitionSettlements(value) {
+  const rows = (Array.isArray(value) ? value : [])
+    .map(normalizeCoalitionSettlement)
+    .filter(Boolean)
+    .sort((a, b) => (a.tick - b.tick)
+      || (a.actionId < b.actionId ? -1 : a.actionId > b.actionId ? 1 : 0));
+  const byId = new Map();
+  for (const row of rows) if (!byId.has(row.actionId)) byId.set(row.actionId, row);
+  return [...byId.values()].slice(-RELATIONSHIP_COALITION_SETTLEMENT_CAP);
+}
+
+/** Whether this relationship has already applied the named value-moving action. */
+export function coalitionSettlementActionWasRecorded(state, actionId) {
+  const id = typeof actionId === 'string' ? actionId.trim() : '';
+  return Boolean(id) && normalizeCoalitionSettlements(state?.coalitionSettlements)
+    .some((row) => row.actionId === id);
+}
+
+/** Exact-once append through the relationship plane's one writer. */
+export function appendRelationshipCoalitionSettlement(state, raw) {
+  const current = normalizeCoalitionSettlements(state?.coalitionSettlements);
+  const row = normalizeCoalitionSettlement(raw);
+  if (!row || current.some((entry) => entry.actionId === row.actionId)) return current;
+  return normalizeCoalitionSettlements([...current, row]);
+}
 
 /** @param {Record<string, unknown>} row */
 function isRelationshipTurningPoint(row) {
@@ -246,6 +388,8 @@ export function ensureRelationshipState(edge, existing = {}) {
   const turningPoints = turningPointsSource
     .filter(isRelationshipTurningPoint)
     .slice(-RELATIONSHIP_TURNING_POINT_CAP);
+  const allianceCalls = normalizeAllianceCalls(existing.allianceCalls);
+  const coalitionSettlements = normalizeCoalitionSettlements(existing.coalitionSettlements);
 
   return {
     relationshipType,
@@ -262,6 +406,8 @@ export function ensureRelationshipState(edge, existing = {}) {
     recentIncidents,
     history,
     ...(turningPoints.length ? { turningPoints } : {}),
+    ...(allianceCalls.length ? { allianceCalls } : {}),
+    ...(coalitionSettlements.length ? { coalitionSettlements } : {}),
     hierarchyResolutions: Array.isArray(existing.hierarchyResolutions) ? existing.hierarchyResolutions.slice(-6) : [],
     trajectory: existing.trajectory || "stable",
     proposedRelationshipType: existing.proposedRelationshipType || null,

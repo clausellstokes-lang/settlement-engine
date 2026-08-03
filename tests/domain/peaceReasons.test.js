@@ -308,9 +308,9 @@ describe('warCausalBrief — the dramatic-irony read-model', () => {
     const brief = warCausalBrief(r.worldState, 'a', 'b');
     expect(brief.peacePresent).toBeGreaterThanOrEqual(REASON_TUNING.IRONY_DYING_AT);
     expect(brief.line).toBe(`${brief.peacePresent} of ${PEACE_REASON_TYPES.length} peace reasons now present; this war is dying`);
-    // Fourteen: the prior thirteen plus WR-3's lineage_claim↔kinship_bond.
-    expect(brief.peace.length).toBe(14);
-    expect(brief.war.length).toBe(14);
+    // Fifteen: WR-6 adds alliance_obligation↔obligation_discharged.
+    expect(brief.peace.length).toBe(15);
+    expect(brief.war.length).toBe(15);
     // Present rows carry their receipts + birth ticks; absent rows read empty.
     const present = brief.peace.find((row) => row.type === 'exhaustion');
     expect(present.present).toBe(true);
@@ -318,7 +318,7 @@ describe('warCausalBrief — the dramatic-irony read-model', () => {
     expect(present.sinceTick).toBe(10);
   });
 
-  it('renders the calm form below the dying threshold and "0 of 14" on a dark world', () => {
+  it('renders the calm form below the dying threshold and the full dark count', () => {
     const one = advancePeaceReasons({
       snapshot: snapshotFor([item('a'), item('b')]),
       worldState: warWorld({ simulationRules: { ...LIT_RULES, infoMode: 'full' }, calendar: { elapsedWeeks: 40 }, spatialCanonVersion: 1, spatialLedgers: { beliefMaps: {
@@ -331,7 +331,7 @@ describe('warCausalBrief — the dramatic-irony read-model', () => {
     expect(brief.peacePresent).toBeLessThan(REASON_TUNING.IRONY_DYING_AT);
     expect(brief.line).not.toMatch(/dying/);
     const dark = warCausalBrief({ simulationRules: {} }, 'a', 'b');
-    expect(dark.line).toBe('0 of 14 peace reasons now present');
+    expect(dark.line).toBe('0 of 15 peace reasons now present');
     expect(dark.peacePresent).toBe(0);
     expect(dark.warPresent).toBe(0);
   });

@@ -83,6 +83,14 @@ import { readWarTerminations } from './warTermination.js';
 import { warAuthorityVerdictsForPulse } from './warAuthorityVerdict.js';
 import { priorWarCostReceipt } from './warCosts.js';
 import { warCostTransitionNewsEntries } from './warCostsNews.js';
+import { coalitionLedgerActive, coalitionSunkCostPressureFor } from './warCoalitionExpenditure.js';
+import { warCoalitionEvidenceFromOutcomes } from './warCoalitionEvidence.js';
+import { warCoalitionNewsEntries } from './warCoalitionNews.js';
+import {
+  coalitionStandingTransitionEvidence,
+  mergeWarCoalitionEvidence,
+  readCoalitionStandingFronts,
+} from './warCoalitionPulse.js';
 import { applyVerdictWarDissolutions } from './warRulingsEvidence.js';
 import { warRulingNewsEntries } from './warRulingsNews.js';
 import { momentumActive, commitmentDepositsFor, advanceCommitments, entityThreshold, makeCommitmentDiscountFn, advanceMomentumCracks, MOMENTUM_TUNING } from './momentum.js';
@@ -1176,12 +1184,24 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const warOutcomes = [...mobilizationOutcomes, ...war.outcomes, ...warReturnOutcomes, ...tradeWarOutcomes, ...occupationOutcomes, ...religiousOutcomes];
   const pressures = deriveSettlementPressures(postTimeSnapshot); const pIndex = pressureIndex(pressures);
   const warAuthorityVerdicts = warAuthorityVerdictsForPulse(simulationRules, h2AuthorityVerdicts);
+  // Preserve WR-1's exact dark sentinel. A callback that returns `undefined`
+  // is not equivalent to no callback here: WR-1 deliberately distinguishes its
+  // null injection from the attrition/exhaustion fallback. Install the WR-6
+  // callback only under the complete four-flag coalition gate.
+  const coalitionSunkCostPressure = coalitionLedgerActive(worldState)
+    ? coalitionSunkCostPressureFor({
+        worldState,
+        snapshot: postTimeSnapshot,
+        tick: worldState.tick,
+      })
+    : null;
   const warTermination = simulationRules.warLayerEnabled === true && simulationRules.warTerminationEnabled === true ? readWarTerminations({
     worldState,
     snapshot: postTimeSnapshot,
     pIndex,
     tick: worldState.tick,
     authorityVerdicts: warAuthorityVerdicts,
+    sunkCostPressureFor: coalitionSunkCostPressure,
   }) : null;
   const warCostNewsEntries = warTermination?.receipts.flatMap((receipt) => (
     warCostTransitionNewsEntries({
@@ -1208,6 +1228,28 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   postTimeSnapshot = { ...postTimeSnapshot, worldState };
   const warRulingTransitionNewsEntries = warRulingNewsEntries({
     evidence: verdictDissolutions.evidence,
+    snapshot: postTimeSnapshot,
+    now,
+  });
+  // WR-6 G/G2 reads after authority-driven recalls have landed. A joined ally
+  // therefore decides against the real surviving origin episode, never the
+  // pre-verdict picture that existed at the start of this same pulse.
+  const coalitionStanding = readCoalitionStandingFronts({
+    worldState,
+    snapshot: postTimeSnapshot,
+    pIndex,
+    tick: worldState.tick,
+  });
+  const warTerminationByAttacker = new Map(warTermination?.byAttacker || []);
+  for (const decision of coalitionStanding.decisions) {
+    warTerminationByAttacker.set(String(decision.partyId), decision.termination);
+  }
+  const standingCoalitionTransitionEvidence = coalitionStandingTransitionEvidence(
+    worldState,
+    coalitionStanding.evidence,
+  );
+  const coalitionStandingNewsEntries = warCoalitionNewsEntries({
+    evidence: standingCoalitionTransitionEvidence,
     snapshot: postTimeSnapshot,
     now,
   });
@@ -1319,7 +1361,8 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     dispositionFactor,
     tradeSalienceFactor: tradeSalienceResult.factors,
     tradeSalienceInfo: tradeSalienceResult.salience,
-    warTerminationByAttacker: warTermination?.byAttacker || null,
+    warTerminationByAttacker,
+    coalitionDecisionByParty: coalitionStanding.byParty,
     // Thread a stable fork to the settlement strategy chooser (the ONLY
     // candidate rule that samples). Forked from the master pulse rng on a constant
     // key; the chooser re-forks per settlement (`strategy:<S>:<tick>`) so the draw
@@ -1375,6 +1418,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     season: roadSeason,
     simulationRules,
   });
+  const appliedCoalitionEvidence = warCoalitionEvidenceFromOutcomes(applied.autoApplied);
+  /** Direct evidence returned by late movers rather than generic outcomes. */
+  let treatyCoalitionEvidence = [];
+  let reasonCoalitionEvidence = [];
   // applied.worldState already carries this tick's posture/memory stamp:
   // applyWorldPulseOutcomes refreshes ONCE after outcomes land (the same
   // inputs this duplicate call used to re-derive byte-identically).
@@ -1795,7 +1842,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const tempoReceiptNews = (tempoContext.active && tempoDeferred.length)
     ? tempoReceiptEntries(tempoDeferred, worldState.tick)
     : [];
-  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...npcVerdictNewsEntries, ...causeLifecycleNews, ...beliefMisjudgmentNews, ...warCostNewsEntries, ...warRulingTransitionNewsEntries, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries, ...thawEntries, ...tempoReceiptNews];
+  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...npcVerdictNewsEntries, ...causeLifecycleNews, ...beliefMisjudgmentNews, ...warCostNewsEntries, ...warRulingTransitionNewsEntries, ...coalitionStandingNewsEntries, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries, ...thawEntries, ...tempoReceiptNews];
   // Thread the pinned `now` (same as applyWorldPulse's regional-news append) so the
   // feed's `updatedAt` stamps the deterministic tick time, not the wall clock. Without
   // it, any tick that surfaces kernel-side news (realm arcs, aftermath, captures,
@@ -2437,11 +2484,21 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // The stream terms move REAL grain, so this mover now threads settlementUpdates like
   // the generosity/upswing movers do — hence the applyPulseMover form (byte-identical to
   // the inline block it replaces: an unchanged mover returns the same references).
-  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceTreatiesWithDisposition({
+  const treatyAdvance = advanceTreatiesWithDisposition({
     snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
     graph: applied.regionalGraph, pIndex, tick: worldState.tick, now,
     dispositionEnabled: simulationRules.dispositionChannelsEnabled === true, dispositionTransitions,
-  }), memoryState, settlementUpdates, wizardNews, now, newsReceiptSink));
+  });
+  treatyCoalitionEvidence = mergeWarCoalitionEvidence(treatyAdvance.coalitionEvidence);
+  const treatyCoalitionNews = warCoalitionNewsEntries({
+    evidence: treatyCoalitionEvidence,
+    snapshot: postTimeSnapshot,
+    now,
+  });
+  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover({
+    ...treatyAdvance,
+    newsEntries: [...(treatyAdvance.newsEntries || []), ...treatyCoalitionNews],
+  }, memoryState, settlementUpdates, wizardNews, now, newsReceiptSink));
   // W-PEACE-1 — THE CAUSAL REASONS LAYER (DESIGN_PEACE_ENGINE.md §14). Two
   // DETERMINISTIC movers (no rng — reasons are reads, not rolls): typed,
   // receipted REASONS FOR WAR accumulate per directed edge pair (grievance /
@@ -2479,9 +2536,16 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       // when dormant / no credibility ledger ⇒ byte-identical.
       blaineyCredibility: makeBlaineyCredibilityFn(memoryState, worldState.tick),
     });
+    reasonCoalitionEvidence = mergeWarCoalitionEvidence(peaceCausal.coalitionEvidence);
     if (peaceCausal.changed) memoryState = peaceCausal.worldState;
-    if (peaceCausal.newsEntries.length) {
-      wizardNews = appendObservedWizardNewsEntries(wizardNews, peaceCausal.newsEntries, { now }, newsReceiptSink);
+    const peaceCoalitionNews = warCoalitionNewsEntries({
+      evidence: reasonCoalitionEvidence,
+      snapshot: postTimeSnapshot,
+      now,
+    });
+    const peaceNews = [...peaceCausal.newsEntries, ...peaceCoalitionNews];
+    if (peaceNews.length) {
+      wizardNews = appendObservedWizardNewsEntries(wizardNews, peaceNews, { now }, newsReceiptSink);
     }
   }
   // W-MOMENTUM — THE COMMITMENT LEDGER (DESIGN_MOMENTUM.md §1). LAST of the read-movers,
@@ -2558,9 +2622,31 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   }
   // @pulse-stage: finalize_receipt
   const finalRegionalGraph = applyLineageBirthsToGraph(applied.regionalGraph, memberBirths, now);
+  const warCoalitionEvidence = mergeWarCoalitionEvidence(
+    standingCoalitionTransitionEvidence,
+    appliedCoalitionEvidence,
+    treatyCoalitionEvidence,
+    reasonCoalitionEvidence,
+  );
+  const returnedSettlementIds = coalitionLedgerActive(simulationRules)
+    ? [...new Set((war.resolvedDeployments || [])
+      .map((row) => String(row?.attackerId || ''))
+      .filter(Boolean))].sort()
+    : [];
+  const coalitionReturnRecord = returnedSettlementIds.length
+    ? { ...pulseRecord, warReturnedSettlementIds: returnedSettlementIds }
+    : pulseRecord;
+  const coalitionPulseRecord = warCoalitionEvidence.length
+    // Standing rows are already transition-only (one stay per joined episode;
+    // expenditure only on a worsening band), while the other producers are
+    // exact event facts. Preserve the whole finite per-pulse census: an arbitrary
+    // 48-row cut could erase the once-only witness for the twenty-fifth ally and
+    // make its public stay repeat forever on later ticks.
+    ? { ...coalitionReturnRecord, warCoalitionEvidence }
+    : coalitionReturnRecord;
   const finalPulseRecord = memberBirths.length
     ? {
-        ...pulseRecord,
+        ...coalitionPulseRecord,
         memberBirths: memberBirths.map(birth => ({
           birthId: birth.birthId,
           saveId: birth.saveId,
@@ -2570,7 +2656,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
           kind: 'lineage_edge_recorded',
         })),
       }
-    : pulseRecord;
+    : coalitionPulseRecord;
   const finalWorldState = appendPulseHistoryWithProvenance(memoryState, finalPulseRecord, applied);
   // G — test-gated self-check: on a PAUSED tick, every deferred major's out-of-band
   // residue must have been stripped. Read-only + NODE_ENV==='test' only (byte-neutral to

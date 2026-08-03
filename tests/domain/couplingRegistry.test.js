@@ -16,12 +16,20 @@ import {
   WR5_SEAT_BOOKS_COUPLING,
   WR5_WAR_DECISION_GRIEVANCE_COUPLING,
   WR5_WAR_RULING_COUPLINGS,
+  WR6_ALLIANCE_RISK_COUPLING,
+  WR6_COALITION_BOOKS_COUPLING,
+  WR6_COALITION_RELATIONSHIP_COUPLING,
+  WR6_COALITION_SETTLEMENT_TRADE_COUPLING,
+  WR6_PAIRWISE_SETTLEMENT_COUPLING,
+  WR6_PEOPLE_EXPENDITURE_COUPLING,
+  WR6_TRADE_EXPENDITURE_COUPLING,
+  WR6_WAR_COALITION_COUPLINGS,
   couplingRowFor,
   couplingRowsFor,
 } from '../../src/domain/certification/couplingRegistry.js';
 
 describe('CW-0 coupling registry', () => {
-  test('schema v2 preserves prior waves and appends WR-5 in decision-flow order', () => {
+  test('schema v2 preserves prior waves and appends later waves in decision-flow order', () => {
     expect(COUPLING_REGISTRY_SCHEMA_VERSION).toBe(2);
     expect(WR4_WAR_COST_COUPLINGS).toEqual([
       WR4_TRADE_HOME_FRONT_COUPLING,
@@ -33,6 +41,7 @@ describe('CW-0 coupling registry', () => {
       WR3_LINEAGE_COUPLING,
       ...WR4_WAR_COST_COUPLINGS,
       ...WR5_WAR_RULING_COUPLINGS,
+      ...WR6_WAR_COALITION_COUPLINGS,
     ]);
     expect(WR3_LINEAGE_COUPLING).toEqual({
       couplingId: 'CPL-3.POP_TO_WAR.WR-3.lineage',
@@ -165,6 +174,37 @@ describe('CW-0 coupling registry', () => {
     }
   });
 
+  test('records the seven WR-6 reads from alliance risk through pairwise settlement', () => {
+    expect(WR6_WAR_COALITION_COUPLINGS).toEqual([
+      WR6_ALLIANCE_RISK_COUPLING,
+      WR6_COALITION_BOOKS_COUPLING,
+      WR6_PEOPLE_EXPENDITURE_COUPLING,
+      WR6_TRADE_EXPENDITURE_COUPLING,
+      WR6_COALITION_SETTLEMENT_TRADE_COUPLING,
+      WR6_COALITION_RELATIONSHIP_COUPLING,
+      WR6_PAIRWISE_SETTLEMENT_COUPLING,
+    ]);
+    expect(WR6_WAR_COALITION_COUPLINGS.map((row) => [row.pairId, row.direction]))
+      .toEqual([
+        ['CPL-4', 'INFO→WAR'],
+        ['CPL-6', 'INTERIOR→WAR'],
+        ['CPL-3', 'POP→WAR'],
+        ['CPL-1', 'TRADE→WAR'],
+        ['CPL-1', 'WAR→TRADE'],
+        ['CPL-6', 'WAR→INTERIOR'],
+        ['CPL-5', 'WAR→GRAMMAR'],
+    ]);
+    for (const row of WR6_WAR_COALITION_COUPLINGS) {
+      expect(row.flags).toEqual([
+        'warLayerEnabled', 'warTerminationEnabled', 'peaceEngineEnabled', 'coalitionLedgerEnabled',
+      ]);
+      expect(row.owningVolume).toBe('WAR');
+      expect(row.owningWave).toBe('WR-6');
+      expect(Object.isFrozen(row)).toBe(true);
+      expect(Object.isFrozen(row.flags)).toBe(true);
+    }
+  });
+
   test('every schema-v2 row has one stable unique identity and a closed shape', () => {
     const expectedKeys = [
       'couplingId', 'pairId', 'direction', 'read', 'receiptField',
@@ -183,21 +223,33 @@ describe('CW-0 coupling registry', () => {
     expect(Object.isFrozen(WR3_LINEAGE_COUPLING)).toBe(true);
     expect(Object.isFrozen(WR3_LINEAGE_COUPLING.flags)).toBe(true);
     const popWar = couplingRowsFor('CPL-3', 'POP→WAR');
-    expect(popWar).toEqual([WR3_LINEAGE_COUPLING, WR4_HANDS_HOME_FRONT_COUPLING]);
+    expect(popWar).toEqual([
+      WR3_LINEAGE_COUPLING,
+      WR4_HANDS_HOME_FRONT_COUPLING,
+      WR6_PEOPLE_EXPENDITURE_COUPLING,
+    ]);
     expect(Object.isFrozen(popWar)).toBe(true);
     expect(couplingRowFor('CPL-3', 'POP→WAR')).toBe(WR3_LINEAGE_COUPLING);
-    expect(couplingRowsFor('CPL-1', 'TRADE→WAR')).toEqual([WR4_TRADE_HOME_FRONT_COUPLING]);
+    expect(couplingRowsFor('CPL-1', 'TRADE→WAR')).toEqual([
+      WR4_TRADE_HOME_FRONT_COUPLING,
+      WR6_TRADE_EXPENDITURE_COUPLING,
+    ]);
     expect(couplingRowFor('CPL-4', 'INFO→WAR')).toBe(WR4_BELIEF_TRAJECTORY_COUPLING);
     const interiorWar = couplingRowsFor('CPL-6', 'INTERIOR→WAR');
     expect(interiorWar).toEqual([
       WR4_INSTITUTION_HOME_FRONT_COUPLING,
       WR5_SEAT_BOOKS_COUPLING,
+      WR6_COALITION_BOOKS_COUPLING,
     ]);
     expect(Object.isFrozen(interiorWar)).toBe(true);
     expect(couplingRowFor('CPL-6', 'INTERIOR→WAR')).toBe(WR4_INSTITUTION_HOME_FRONT_COUPLING);
     expect(couplingRowsFor('CPL-6', 'WAR→INTERIOR'))
-      .toEqual([WR5_WAR_DECISION_GRIEVANCE_COUPLING]);
+      .toEqual([WR5_WAR_DECISION_GRIEVANCE_COUPLING, WR6_COALITION_RELATIONSHIP_COUPLING]);
     expect(couplingRowFor('CPL-5', 'WAR→GRAMMAR')).toBe(WR5_BILATERAL_PEACE_COUPLING);
+    expect(couplingRowsFor('CPL-5', 'WAR→GRAMMAR'))
+      .toEqual([WR5_BILATERAL_PEACE_COUPLING, WR6_PAIRWISE_SETTLEMENT_COUPLING]);
+    expect(couplingRowsFor('CPL-1', 'WAR→TRADE'))
+      .toEqual([WR6_COALITION_SETTLEMENT_TRADE_COUPLING]);
     expect(couplingRowFor('CPL-21', 'INTERIOR→GRAMMAR')).toBe(WR5_SEAT_ACCEPTANCE_COUPLING);
     expect(couplingRowFor('CPL-21', 'GRAMMAR→INTERIOR')).toBe(WR5_REFUSAL_PRICE_COUPLING);
     expect(couplingRowFor('CPL-3', 'WAR→POP')).toBeNull();

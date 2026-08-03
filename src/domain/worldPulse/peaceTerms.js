@@ -65,6 +65,7 @@ import {
 import { affordableTreatyDuration, CURRENT_TREATY_TICKS_PER_YEAR, treatyTicksPerYearOf, treatyYearsRemaining } from './treatyClock.js';
 import { dispositionTreatyLearningActive, treatyDispositionDeltas, withTreatyDispositionDeltas } from './treatyDisposition.js';
 import { thresholdFactorOf } from './dispositionProfile.js';
+import { readWarSeatBooks } from './warSeatBooks.js';
 // THE MATERIAL EXECUTOR: a stream term's installment moves REAL granary months
 // through the conserved sink-only primitive, applied by the existing single
 // food applicator. See treatyTransfer.js for why grain is the honest denomination.
@@ -81,6 +82,16 @@ import { faithProximityOf } from './sacredClaim.js';
 import { relationshipKeyFromEdge, normalizeRelationshipType } from './relationshipState.js';
 import { deepClone } from '../clone.js';
 import { clamp01 } from '../../kernel/math.js';
+import {
+  coalitionLedgerActive,
+  readCoalitionExpenditure,
+} from './warCoalitionExpenditure.js';
+import { coalitionClosureWitness, joinAnchorOf, normalizeJoinAnchor } from './warCoalitionLedger.js';
+import {
+  applyCoalitionReimbursement,
+  applyCoalitionSettlement,
+  planCoalitionSettlement,
+} from './warCoalitionSettlement.js';
 // ── Tuning (bounded named constants — owner-retunable per design §8/§15) ─────
 export const PEACE_TERMS_TUNING = Object.freeze({
   /** Newly minted treaty ticks/year. Persisted treaties carry their own marker. */
@@ -142,6 +153,13 @@ export const PEACE_TERMS_TUNING = Object.freeze({
   /** How many ticks a fracture record stays live for the coalition_fracture peace
    *  reason to consume (the peel is legible for a window after it is signed). */
   FRACTURE_WINDOW: 6,
+});
+
+export const COALITION_BETRAYAL_CHARACTER_TUNING = Object.freeze({
+  MIN_MULTIPLIER: 0.8,
+  MAX_MULTIPLIER: 1.2,
+  PRUDENCE_MAX: 0.95,
+  GRIEVANCE_MIN: 1.05,
 });
 
 // ── The typed term catalog (§11) ────────────────────────────────────────────
@@ -220,6 +238,16 @@ const CLASS_TERM = Object.freeze({
 
 /** @param {number} n @returns {number} */
 function round4(n) { return Math.round(n * 10000) / 10000; }
+
+/** @param {unknown} value @returns {Record<string, unknown>} */
+function recordOf(value) {
+  return value && typeof value === 'object' && !Array.isArray(value)
+    ? /** @type {Record<string, unknown>} */ (value)
+    : {};
+}
+
+/** @param {unknown} value @returns {string} */
+function explicitText(value) { return typeof value === 'string' ? value.trim() : ''; }
 
 /** The directed treaty key: the victor's treaty OVER the loser. `${victor}>${loser}`.
  *  @param {unknown} victorId @param {unknown} loserId @returns {string} */
@@ -581,6 +609,7 @@ export function treatiesForPair(worldState, aId, bId) {
  * @property {Record<string, unknown>} worldState
  * @property {boolean} changed
  * @property {Array<Record<string, unknown>>} newsEntries
+ * @property {Array<Record<string, unknown>>} [coalitionEvidence]
  * @property {Array<{id:string, channel:'diplomatic', outcome:'win'|'loss', magnitude?:number}>} [dispositionDeltas]
  * @property {Array<Record<string, unknown>>} [settlementUpdates] the tick's pending
  *   per-settlement writes, with this tick's conserved tribute/reparations/restitution/
@@ -635,9 +664,15 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
 
   /** @type {Array<Record<string, unknown>>} */
   const newsEntries = [];
+  const coalitionLit = coalitionLedgerActive(worldState);
+  /** @type {Array<Record<string, unknown>>} */
+  const coalitionEvidence = [];
+  /** @type {Array<Record<string, unknown>>} */
+  const congressClosures = [];
   /** @type {Array<{id:string, channel:'diplomatic', outcome:'win'|'loss', magnitude?:number}>} */
   const dispositionDeltas = []; const dispositionChannelsActive = dispositionTreatyLearningActive(worldState);
   let workingState = worldState;
+  let workingSettlementUpdates = settlementUpdates;
   // The tick's conserved granary movements, accumulated across every stream term and
   // folded onto settlementUpdates ONCE at the end (the generosity mover's idiom): a
   // loser paying two victors debits a single, ordered running total rather than two
@@ -663,26 +698,167 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
     const a = rawEdge?.from != null ? String(rawEdge.from) : '';
     const b = rawEdge?.to != null ? String(rawEdge.to) : '';
     if (!a || !b || a === b) continue;
-    const rel = relStates[relationshipKeyFromEdge(rawEdge)];
+    const relationshipKey = relationshipKeyFromEdge(rawEdge);
+    const rel = relStates[relationshipKey];
     if (!rel) continue;
     if (normalizeRelationshipType(String(rel.relationshipType || '')) === 'hostile') continue; // the war has NOT ended
-    if (!recentSueForPeace(rel.recentIncidents, tick)) continue;                 // no fresh negotiated peace here
+    const peaceIncident = recentSueForPeaceIncident(rel.recentIncidents, tick);
+    if (!peaceIncident) continue;                                                // no fresh negotiated peace here
     const unordered = a < b ? `${a}|${b}` : `${b}|${a}`;
     if (mintedThisPair.has(unordered)) continue;                                 // one treaty per unordered pair
     mintedThisPair.add(unordered);
 
     const { victorId, loserId, believedMargin } = resolveVictor(a, b, workingState, truthFor);
+    const persistedContext = persistedCoalitionPeaceContext(
+      peaceIncident.coalitionPeaceClosure,
+      a,
+      b,
+    );
+    const coalitionContext = coalitionLit
+      ? (persistedContext || coalitionPeaceContext(workingState, a, b, tick))
+      : null;
+    const peaceOutcomeId = explicitText(peaceIncident.outcomeId)
+      || `bilateral_peace.${stablePart(a)}.${stablePart(b)}.${Math.floor(Number(peaceIncident.tick) || tick)}`;
+
+    // The congress payload is merely a declaration until this exact edge has
+    // really closed and its claimed winner/loser/key agree with the live peace
+    // read. The complete declared census is validated after every edge is read.
+    const congressClosure = recordOf(peaceIncident.coalitionSettlementClosure);
+    if (coalitionLit
+      && Object.keys(congressClosure).length
+      && explicitText(congressClosure.relationshipKey) === relationshipKey
+      && explicitText(congressClosure.winnerId) === victorId
+      && explicitText(congressClosure.loserId) === loserId) {
+      congressClosures.push(congressClosure);
+    }
+
+    // The closing edge owns one durable public fact. Record its stable marker
+    // before treaty minting so white peace and an already-present treaty obey
+    // the same exact-once law across the whole mint window.
+    let coalitionExitFirst = false;
+    if (coalitionContext) {
+      const marked = markCoalitionSeparatePeace(
+        workingState,
+        relationshipKey,
+        peaceOutcomeId,
+        Number(peaceIncident.tick),
+        now,
+        coalitionContext,
+      );
+      workingState = marked.worldState;
+      coalitionExitFirst = marked.first;
+      if (marked.first) coalitionEvidence.push(coalitionSeparatePeaceEvidence(
+        coalitionContext,
+        Number(peaceIncident.tick),
+        peaceOutcomeId,
+      ));
+    }
+
+    // Pairwise closure settles every anchored member's measured current bill.
+    // A joined member's own exit has one claim; a root caller's exit carries
+    // every member it abandons. Acceptance-time claims survive deployment
+    // removal, while the live read remains the backwards-compatible fallback.
+    if (coalitionContext) {
+      const settlementSnapshot = { ...snapshot, regionalGraph: { ...(snapshot.regionalGraph || {}), edges } };
+      let reimbursementClaims = Array.isArray(coalitionContext.reimbursementClaims)
+        ? coalitionContext.reimbursementClaims.map((claim) => ({ ...claim }))
+        : [];
+      if (!reimbursementClaims.length
+        && coalitionContext.departingId !== coalitionContext.callerId
+        && Number.isFinite(Number(coalitionContext.expenditurePressure01))
+        && coalitionContext.joinAnchor) {
+        reimbursementClaims = [{
+          memberId: coalitionContext.departingId,
+          pressure01: Number(coalitionContext.expenditurePressure01),
+          joinAnchor: coalitionContext.joinAnchor,
+        }];
+      }
+      if (!reimbursementClaims.length) {
+        const reimbursementPartyIds = coalitionContext.departingId === coalitionContext.callerId
+          ? coalitionContext.abandoned
+          : [coalitionContext.departingId];
+        reimbursementClaims = reimbursementPartyIds.map((memberId) => {
+          const deployment = recordOf(recordOf(workingState.deployments)[memberId]);
+          const anchor = joinAnchorOf(deployment, memberId);
+          if (!anchor || anchor.callerId !== coalitionContext.callerId
+            || anchor.enemyId !== coalitionContext.enemyId) return null;
+          const expenditure = readCoalitionExpenditure({
+            worldState: workingState,
+            snapshot: settlementSnapshot,
+            partyId: memberId,
+            targetId: coalitionContext.enemyId,
+            deployment,
+            tick,
+          });
+          const pressure01 = Number(expenditure?.pressure01);
+          return Number.isFinite(pressure01)
+            ? { memberId, pressure01, joinAnchor: anchor }
+            : null;
+        }).filter(Boolean);
+      }
+      reimbursementClaims.sort((left, right) => (
+        String(left.memberId) < String(right.memberId) ? -1 : String(left.memberId) > String(right.memberId) ? 1 : 0
+      ));
+      for (const reimbursementClaim of reimbursementClaims) {
+        const claim = Number(reimbursementClaim.pressure01);
+        if (!Number.isFinite(claim) || claim <= 0) continue;
+        const reimbursement = applyCoalitionReimbursement({
+          worldState: workingState,
+          snapshot: settlementSnapshot,
+          settlementUpdates: workingSettlementUpdates,
+          coalitionSettlementId: peaceOutcomeId,
+          callerId: coalitionContext.callerId,
+          memberId: reimbursementClaim.memberId,
+          targetId: coalitionContext.enemyId,
+          claim01: claim,
+          tick,
+          joinAnchor: reimbursementClaim.joinAnchor,
+        });
+        if (reimbursement.changed) {
+          workingState = reimbursement.worldState;
+          workingSettlementUpdates = reimbursement.settlementUpdates;
+          coalitionEvidence.push(...(reimbursement.coalitionEvidence || []));
+          if (dispositionChannelsActive && Array.isArray(reimbursement.dispositionDeltas)) {
+            dispositionDeltas.push(...reimbursement.dispositionDeltas);
+          }
+        }
+      }
+    }
     // Already under a live treaty? Don't re-mint (idempotent within the window).
     if (nextLedger[treatyPairKey(victorId, loserId)] || nextLedger[treatyPairKey(loserId, victorId)]) continue;
 
     const mint = mintTreaty({
       victorId, loserId, believedMargin, worldState: workingState, snapshot,
       pIndex, threatByCid, adjacency, truthFor, tick, edges,
+      coalitionContext,
+      coalitionOutcomeId: peaceOutcomeId,
+      coalitionOutcomeTick: Number(peaceIncident.tick),
     });
-    if (!mint) continue; // white peace / no affordable term ⇒ no key (the clean exit)
+    if (!mint) {
+      // White peace has no treaty ledger shell, but the actual coalition edge
+      // still closed. Stable outcome ids make both betrayal pricing and public
+      // evidence exact-once across the mint window.
+      if (coalitionContext && coalitionExitFirst) {
+        workingState = accrueBetrayal(
+          workingState,
+          /** @type {Array<Record<string, unknown>>} */ (edges),
+          coalitionContext.departingId,
+          coalitionContext.abandoned,
+          now,
+          peaceOutcomeId,
+          snapshot,
+        );
+      }
+      continue; // white peace / no affordable term ⇒ no treaty key
+    }
     nextLedger[treatyPairKey(victorId, loserId)] = mint.treaty;
     // Mint-time executions (overlay nudge, seam registration) + the signing beat.
-    workingState = mint.applyMintEffects(workingState, /** @type {Array<Record<string, unknown>>} */ (edges), now);
+    workingState = mint.applyMintEffects(
+      workingState,
+      /** @type {Array<Record<string, unknown>>} */ (edges),
+      now,
+      coalitionExitFirst,
+    );
     newsEntries.push(mint.signingBeat);
     if (mint.treaty.mediator) {
       // A mediation that actually lands is a resolved diplomatic outcome for the
@@ -693,6 +869,34 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
         treaty: mint.treaty,
         mediatorId: String(mint.treaty.mediator.id || ''),
       }));
+    }
+  }
+
+  // An aggregate congress is a distinct, explicit coordination fact. Group
+  // actual fresh closures by their declared id, demand the declared complete
+  // census, then run the canonical planner/applicator. A lone tagged peace edge
+  // cannot become a congress.
+  const congressIds = [...new Set(congressClosures
+    .map((row) => explicitText(row.coalitionSettlementId)).filter(Boolean))].sort();
+  for (const settlementId of congressIds) {
+    const prepared = explicitCongressPlan(
+      congressClosures.filter((row) => explicitText(row.coalitionSettlementId) === settlementId),
+      tick,
+    );
+    if (!prepared) continue;
+    const appliedCongress = applyCoalitionSettlement({
+      worldState: workingState,
+      snapshot: { ...snapshot, regionalGraph: { ...(snapshot.regionalGraph || {}), edges } },
+      settlementUpdates: workingSettlementUpdates,
+      plan: prepared.plan,
+      closures: prepared.closures,
+    });
+    if (!appliedCongress.changed) continue;
+    workingState = appliedCongress.worldState;
+    workingSettlementUpdates = appliedCongress.settlementUpdates;
+    coalitionEvidence.push(...(appliedCongress.coalitionEvidence || []));
+    if (dispositionChannelsActive && Array.isArray(appliedCongress.dispositionDeltas)) {
+      dispositionDeltas.push(...appliedCongress.dispositionDeltas);
     }
   }
 
@@ -757,8 +961,8 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
       const spec = TERM_CATALOG[term.type];
       if (spec?.stream) {
         const draw = computeTreatyGrainDraw({
-          payer: freshestSettlement(settlementUpdates, snapshot, loserId),
-          payee: freshestSettlement(settlementUpdates, snapshot, victorId),
+          payer: freshestSettlement(workingSettlementUpdates, snapshot, loserId),
+          payee: freshestSettlement(workingSettlementUpdates, snapshot, victorId),
           takeFraction: streamInstallmentFraction(term, comp.trueDelivery01, treaty),
           committedDebit: -(foodDeltas.get(loserId) || 0),
           committedCredit: foodDeltas.get(victorId) || 0,
@@ -809,19 +1013,25 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
   // (clamped to each granary's capacity, rounded to the tenth-month). Zero deltas ⇒ the
   // same array by reference, so a tick where no term drew is byte-identical here.
   const nextUpdates = applyTreatyFoodDeltas(
-    /** @type {Array<{ saveId?: unknown }>} */ (settlementUpdates), foodDeltas);
+    /** @type {Array<{ saveId?: unknown }>} */ (workingSettlementUpdates), foodDeltas);
   const grainMoved = nextUpdates !== settlementUpdates;
   const hasNext = Object.keys(nextLedger).length > 0;
   const prevSerialized = JSON.stringify(prevLedger || null);
   const nextSerialized = JSON.stringify(hasNext ? sortedLedger(nextLedger) : null);
   const relChanged = workingState !== worldState;
   if (prevSerialized === nextSerialized && !relChanged && !grainMoved && newsEntries.length === 0) {
-    return withTreatyDispositionDeltas({ worldState, changed: false, newsEntries: [] }, dispositionChannelsActive, dispositionDeltas);
+    return withTreatyDispositionDeltas({
+      worldState,
+      changed: false,
+      newsEntries: [],
+      ...(coalitionLit ? { coalitionEvidence } : {}),
+    }, dispositionChannelsActive, dispositionDeltas);
   }
   let out = workingState;
   out = hasNext ? setSpatialLedger(out, 'treaties', sortedLedger(nextLedger)) : dropSpatialLedger(out, 'treaties');
   return withTreatyDispositionDeltas({
     worldState: out, changed: true, newsEntries,
+    ...(coalitionLit ? { coalitionEvidence } : {}),
     settlementUpdates: /** @type {Array<Record<string, unknown>>} */ (nextUpdates),
   }, dispositionChannelsActive, dispositionDeltas);
 }
@@ -845,12 +1055,18 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
  *           worldState: Record<string, unknown>, snapshot: { byId?: Map<string, Record<string, unknown>> },
  *           pIndex: Record<string, unknown> | null, threatByCid: Map<string, number>,
  *           adjacency: Map<string, Set<string>>, truthFor: (id: string) => number, tick: number,
- *           edges: Array<Record<string, unknown>> }} args
+ *           edges: Array<Record<string, unknown>>, coalitionContext?:Record<string,unknown>|null,
+ *           coalitionOutcomeId?:string, coalitionOutcomeTick?:number }} args
  * @returns {{ treaty: TreatyRecord, signingBeat: Record<string, unknown>,
- *             applyMintEffects: (ws: Record<string, unknown>, edges: Array<Record<string, unknown>>, now: unknown) => Record<string, unknown> } | null}
+ *             applyMintEffects: (ws: Record<string, unknown>, edges: Array<Record<string, unknown>>, now: unknown) => Record<string, unknown>,
+ *             coalitionEvidence?: Array<Record<string, unknown>> } | null}
  */
 function mintTreaty(args) {
-  const { victorId, loserId, believedMargin, worldState, snapshot, pIndex, threatByCid, adjacency, truthFor, tick, edges } = args;
+  const {
+    victorId, loserId, believedMargin, worldState, snapshot, pIndex,
+    threatByCid, adjacency, truthFor, tick, edges,
+    coalitionOutcomeId = '', coalitionOutcomeTick = tick,
+  } = args;
   const { margin01, budget, whitePeace } = termBudgetFor(believedMargin);
   if (whitePeace || budget <= 0) return null;
 
@@ -881,14 +1097,35 @@ function mintTreaty(args) {
     worldState.deployments && typeof worldState.deployments === 'object' ? worldState.deployments : {});
   const warExhaustion = /** @type {Record<string, unknown>} */ (
     worldState.warExhaustion && typeof worldState.warExhaustion === 'object' ? worldState.warExhaustion : {});
-  const coBesiegers = coBesiegersOf(deployments, victorId, loserId);
-  const coalition = [victorId, ...coBesiegers].sort();
-  const { mode, peelPropensity } = chooseCoalitionMode({
+  const wr6Active = coalitionLedgerActive(worldState);
+  const rawCoalitionContext = wr6Active
+    ? (args.coalitionContext || coalitionPeaceContext(worldState, victorId, loserId, tick))
+    : null;
+  const coalitionContext = rawCoalitionContext ? {
+    ...rawCoalitionContext,
+    departingName: String(/** @type {{name?:unknown}} */ (
+      snapshot?.byId?.get?.(rawCoalitionContext.departingId) || {}).name || rawCoalitionContext.departingId),
+    enemyName: String(/** @type {{name?:unknown}} */ (
+      snapshot?.byId?.get?.(rawCoalitionContext.enemyId) || {}).name || rawCoalitionContext.enemyId),
+  } : null;
+  const coBesiegers = wr6Active
+    ? (coalitionContext?.abandoned || [])
+    : coBesiegersOf(deployments, victorId, loserId);
+  const coalition = wr6Active
+    ? (coalitionContext?.members || [victorId])
+    : [victorId, ...coBesiegers].sort();
+  const legacyMode = wr6Active ? { mode: 'joint', peelPropensity: 0 } : chooseCoalitionMode({
     victorExhaustion01: Number(warExhaustion[victorId]) || 0,
     avgTie01: avgTieStrength(worldState, edges, victorId, coBesiegers),
     coalitionSize: coalition.length,
   });
-  const separateExit = coalition.length > 1 && mode === 'separate_exit';
+  const peelPropensity = legacyMode.peelPropensity;
+  // WR-6's stay/exit choice has already been made through the four-term ruling.
+  // If another anchored front survives, this treaty closes this pair only.  No
+  // table-time heuristic may turn it into a joint treaty or veto the exit.
+  const separateExit = wr6Active
+    ? !!coalitionContext
+    : coalition.length > 1 && legacyMode.mode === 'separate_exit';
   if (separateExit) effectiveBudget *= PEACE_TERMS_TUNING.SEPARATE_EXIT_BUDGET; // a solo bargain is lighter
 
   const ranked = appraiseLoserPortfolio({
@@ -932,7 +1169,7 @@ function mintTreaty(args) {
   // JOINT coalition: the roster + committed-strength shares are legible on the
   // treaty (§7 — reparations distribute pro-rata; the transfer physics credit the
   // lead negotiator, per-member distribution is a later-wave transfer seam).
-  if (coalition.length > 1 && !separateExit) {
+  if (!wr6Active && coalition.length > 1 && !separateExit) {
     treaty.coalitionScope = coalition;
     treaty.shares = coalitionShares(coalition, truthFor);
     receipts.push(`A coalition peace — ${coalition.length} besiegers bind ${loserName} jointly, the spoils split by the strength each brought.`);
@@ -941,11 +1178,15 @@ function mintTreaty(args) {
   // co-besiegers, the coalition size, and the recorded credibility hit (the
   // W-DOCTRINE-2 reliability seam). The coalition_fracture peace reason reads it.
   if (separateExit) {
-    const fractureReceipt = `${victorName} left the siege — its own peace bought, its co-besiegers abandoned at the walls.`;
+    const deserterId = coalitionContext?.departingId || victorId;
+    const deserterItem = snapshot?.byId?.get?.(deserterId) || null;
+    const deserterName = String(/** @type {{ name?: unknown }} */ (deserterItem || {}).name || deserterId);
+    const abandoned = coalitionContext?.abandoned || coBesiegers;
+    const fractureReceipt = `${deserterName} left the siege — its own peace bought, its allies' fronts left standing.`;
     treaty.separateExit = true;
     treaty.fracture = {
-      deserter: victorId,
-      abandoned: coBesiegers,
+      deserter: deserterId,
+      abandoned,
       coalitionSize: coalition.length,
       credibilityHit: round4(PEACE_TERMS_TUNING.CREDIBILITY_HIT),
       peelPropensity,
@@ -974,10 +1215,14 @@ function mintTreaty(args) {
     severity: 0.55,
     score: 66,
     tick,
-    headline: separateExit
+    headline: separateExit && coalitionContext
+      ? `${coalitionContext.departingName} closes its own war edge with ${coalitionContext.enemyName}`
+      : separateExit
       ? `${victorName} peels from the siege and makes a separate peace with ${loserName}`
       : `${victorName} dictates the peace with ${loserName}`,
-    summary: `${separateExit
+    summary: `${separateExit && coalitionContext
+      ? `${coalitionContext.departingName} settles only its own edge with ${coalitionContext.enemyName}, leaving the allied fronts standing under`
+      : separateExit
       ? `${victorName} makes a separate peace with ${loserName}, binding the defeated court to`
       : `${victorName} binds ${loserName} to`} ${terms.map((term) => termLabel(term.type)).join(', ')}.${mediator ? ` ${mediator.name} brokered the settlement.` : ''}`,
     reasons: [
@@ -999,7 +1244,12 @@ function mintTreaty(args) {
    *  seam registrations, plus WAVE-3 the mediation trust (both mediator edges)
    *  and the separate-exit betrayal (each abandoned co-besiegers' edge). Streams/
    *  readiness/war-block execute lazily via the reads + the advance pass. */
-  const applyMintEffects = (/** @type {Record<string, unknown>} */ ws, /** @type {Array<Record<string, unknown>>} */ eff, /** @type {unknown} */ now) => {
+  const applyMintEffects = (
+    /** @type {Record<string, unknown>} */ ws,
+    /** @type {Array<Record<string, unknown>>} */ eff,
+    /** @type {unknown} */ now,
+    coalitionExitFirst = true,
+  ) => {
     let state = ws;
     for (const term of terms) {
       if (term.type === 'compelled_alliance') {
@@ -1010,11 +1260,32 @@ function mintTreaty(args) {
       }
     }
     if (mediator) state = accrueMediationTrust(state, eff, mediator.id, victorId, loserId, now);
-    if (separateExit) state = accrueBetrayal(state, eff, victorId, coBesiegers, now);
+    if (separateExit && (!wr6Active || coalitionExitFirst)) state = accrueBetrayal(
+      state,
+      eff,
+      coalitionContext?.departingId || victorId,
+      coalitionContext?.abandoned || coBesiegers,
+      now,
+      wr6Active ? coalitionOutcomeId : '',
+      snapshot,
+    );
     return state;
   };
 
-  return { treaty, signingBeat, applyMintEffects };
+  const mintCoalitionEvidence = coalitionContext
+    ? [coalitionSeparatePeaceEvidence(
+        coalitionContext,
+        coalitionOutcomeTick,
+        coalitionOutcomeId,
+      )]
+    : [];
+
+  return {
+    treaty,
+    signingBeat,
+    applyMintEffects,
+    ...(wr6Active ? { coalitionEvidence: mintCoalitionEvidence } : {}),
+  };
 }
 
 // ── Overlay + strain writes (the E1b/E1c relationship seam) ──────────────────
@@ -1113,20 +1384,131 @@ function loserAllyStrength(adjacency, loserId, victorId) {
   return clamp01(n / PEACE_TERMS_TUNING.ALLY_SATURATION);
 }
 
-/** Did this edge carry a sue-for-peace de-escalation within the mint window? The
+/** The exact sue-for-peace de-escalation inside the mint window. The
  *  incident is stamped by applyRelationshipPatch when the peace label change applies
  *  ({ type: 'strategy_sue_for_peace', outcomeId: '…sue_for_peace…' }). Durable —
  *  it survives on recentIncidents long after the deployment recall is consumed.
+ *  Imported order is not chronology, so the newest exact row wins
+ *  deterministically.
  *  @param {Array<{ type?: unknown, tick?: unknown, outcomeId?: unknown }> | undefined} incidents
- *  @param {number} tick @returns {boolean} */
-function recentSueForPeace(incidents, tick) {
-  if (!Array.isArray(incidents)) return false;
-  for (const inc of incidents) {
+ *  @param {number} tick @returns {Record<string, unknown>|null} */
+function recentSueForPeaceIncident(incidents, tick) {
+  if (!Array.isArray(incidents)) return null;
+  const candidates = [];
+  for (const raw of incidents) {
+    const inc = recordOf(raw);
     const at = Number(inc?.tick);
     if (!Number.isFinite(at) || at > tick || tick - at > PEACE_TERMS_TUNING.PEACE_MINT_WINDOW) continue;
-    if (String(inc?.type || '').includes('sue_for_peace') || String(inc?.outcomeId || '').includes('sue_for_peace')) return true;
+    if (String(inc?.type || '').includes('sue_for_peace')
+      || String(inc?.outcomeId || '').includes('sue_for_peace')) candidates.push(inc);
   }
-  return false;
+  candidates.sort((left, right) => (Number(right.tick) - Number(left.tick))
+    || (explicitText(left.outcomeId) < explicitText(right.outcomeId) ? -1
+      : explicitText(left.outcomeId) > explicitText(right.outcomeId) ? 1 : 0));
+  return candidates[0] || null;
+}
+
+/** Validate the acceptance-time coalition witness before it can price an exit. */
+function persistedCoalitionPeaceContext(raw, aId, bId) {
+  const row = recordOf(raw);
+  const departingId = explicitText(row.departingId);
+  const enemyId = explicitText(row.enemyId);
+  const callerId = explicitText(row.callerId);
+  const pair = new Set([String(aId), String(bId)]);
+  if (!departingId || !enemyId || !callerId || departingId === enemyId
+    || !pair.has(departingId) || !pair.has(enemyId) || pair.size !== 2) return null;
+  const abandoned = [...new Set((Array.isArray(row.abandoned) ? row.abandoned : [])
+    .map(explicitText).filter((id) => id && id !== departingId && id !== enemyId))].sort();
+  if (!abandoned.length) return null;
+  let joinAnchor = null;
+  if (departingId !== callerId) {
+    const rawAnchor = recordOf(row.joinAnchor);
+    joinAnchor = normalizeJoinAnchor(
+      rawAnchor,
+      departingId,
+      enemyId,
+      rawAnchor.joinedTick,
+    );
+    if (!joinAnchor || joinAnchor.callerId !== callerId) return null;
+  } else if (callerId === enemyId) return null;
+  const expenditurePressure = Number(row.expenditurePressure01);
+  let reimbursementClaims = null;
+  if (Object.prototype.hasOwnProperty.call(row, 'reimbursementClaims')) {
+    if (!Array.isArray(row.reimbursementClaims)) return null;
+    const expectedMembers = (departingId === callerId ? abandoned : [departingId]).slice().sort();
+    const seen = new Set();
+    reimbursementClaims = [];
+    for (const rawClaim of row.reimbursementClaims) {
+      const claimRow = recordOf(rawClaim);
+      const memberId = explicitText(claimRow.memberId);
+      const pressure01 = Number(claimRow.pressure01);
+      const rawAnchor = recordOf(claimRow.joinAnchor);
+      const claimAnchor = normalizeJoinAnchor(
+        rawAnchor,
+        memberId,
+        enemyId,
+        rawAnchor.joinedTick,
+      );
+      if (!memberId || memberId === callerId || memberId === enemyId
+        || !expectedMembers.includes(memberId) || seen.has(memberId)
+        || !Number.isFinite(pressure01) || pressure01 < 0 || pressure01 > 1
+        || !claimAnchor || claimAnchor.callerId !== callerId) return null;
+      seen.add(memberId);
+      reimbursementClaims.push({
+        memberId,
+        pressure01: clamp01(pressure01),
+        joinAnchor: claimAnchor,
+      });
+    }
+    reimbursementClaims.sort((left, right) => left.memberId < right.memberId ? -1 : left.memberId > right.memberId ? 1 : 0);
+    if (reimbursementClaims.map((claim) => claim.memberId).join('\u0000')
+      !== expectedMembers.join('\u0000')) return null;
+  }
+  return {
+    departingId,
+    enemyId,
+    callerId,
+    abandoned,
+    members: [departingId, ...abandoned].sort(),
+    ...(joinAnchor ? { joinAnchor } : {}),
+    ...(Number.isFinite(expenditurePressure)
+      ? { expenditurePressure01: clamp01(expenditurePressure) }
+      : {}),
+    ...(reimbursementClaims ? { reimbursementClaims } : {}),
+  };
+}
+
+/** One congress exists only when every row declares the same complete census. */
+function explicitCongressPlan(rawClosures, tick) {
+  const rows = Array.isArray(rawClosures) ? rawClosures.map(recordOf) : [];
+  if (rows.length < 2) return null;
+  const settlementId = explicitText(rows[0].coalitionSettlementId);
+  const claim = Number(rows[0].aggregateClaim01);
+  if (!settlementId || !Number.isFinite(claim) || claim <= 0 || claim > 1
+    || rows.some((row) => explicitText(row.coalitionSettlementId) !== settlementId
+      || Number(row.aggregateClaim01) !== claim)) return null;
+  const declared = [...new Set((Array.isArray(rows[0].componentClosureIds)
+    ? rows[0].componentClosureIds : []).map(explicitText).filter(Boolean))].sort();
+  if (declared.length < 2 || rows.some((row) => {
+    const census = [...new Set((Array.isArray(row.componentClosureIds)
+      ? row.componentClosureIds : []).map(explicitText).filter(Boolean))].sort();
+    return census.join('\u0000') !== declared.join('\u0000');
+  })) return null;
+  const actual = rows.map((row) => explicitText(row.closureId)).sort();
+  if (actual.some((id) => !id)
+    || new Set(actual).size !== actual.length
+    || actual.join('\u0000') !== declared.join('\u0000')) return null;
+  const parties = new Set(rows.flatMap((row) => [
+    explicitText(row.winnerId), explicitText(row.loserId),
+  ]).filter(Boolean));
+  if (parties.size < 3) return null;
+  const plan = planCoalitionSettlement({
+    coalitionSettlementId: settlementId,
+    closures: rows,
+    aggregateClaim01: claim,
+    tick,
+  });
+  return plan ? { plan, closures: rows } : null;
 }
 
 /** The victor's monitoring reach over the loser (§12.2): truth-sourced belief ⇒
@@ -1215,6 +1597,92 @@ function accrueMediationTrust(worldState, edges, mediatorId, victorId, loserId, 
 // ── Coalition negotiation + the separate exit (§7 / §13) ─────────────────────
 
 /**
+ * Resolve the anchored coalition around one closing bilateral edge. A joined
+ * party can be the departing side, or a root caller can close its own edge while
+ * joined members remain. Recalled rows still count here: they are the exact
+ * just-approved exit fact and the war layer removes them on its next pass.
+ * Unrelated same-target deployments never enter this read.
+ *
+ * @param {Record<string, unknown>} worldState
+ * @param {string} aId @param {string} bId @param {unknown} tick
+ * @returns {null|{departingId:string,enemyId:string,callerId:string,
+ *   abandoned:string[],members:string[]}}
+ */
+export function coalitionPeaceContext(worldState, aId, bId, tick) {
+  return coalitionClosureWitness(worldState, aId, bId, tick);
+}
+
+/** Persist the public exit fact before emitting it so a mint-window replay is silent. */
+function markCoalitionSeparatePeace(worldState, relationshipKey, peaceOutcomeId, tick, now, context) {
+  const sourceId = explicitText(peaceOutcomeId);
+  const key = explicitText(relationshipKey);
+  const departingId = explicitText(recordOf(context).departingId);
+  const enemyId = explicitText(recordOf(context).enemyId);
+  const at = Number(tick);
+  if (!sourceId || !key || !departingId || !enemyId || departingId === enemyId
+    || !Number.isInteger(at) || at < 0) return { worldState, first: false };
+  const closureId = `coalition_exit.${stablePart(departingId)}.${stablePart(enemyId)}`;
+  const actionId = `${sourceId}.${closureId}.separate_peace`;
+  const current = recordOf(recordOf(worldState.relationshipStates)[key]);
+  if (Array.isArray(current.coalitionSettlements)
+    && current.coalitionSettlements.some((row) => explicitText(recordOf(row).actionId) === actionId)) {
+    return { worldState, first: false };
+  }
+  const nextState = applyRelationshipPatch(worldState, {
+    id: `${sourceId}:coalition_separate_peace`,
+    relationshipKey: key,
+    relationshipPatch: {},
+    metadata: {
+      incidentType: 'coalition_separate_peace',
+      coalitionSettlement: {
+        actionId,
+        coalitionSettlementId: sourceId,
+        closureId,
+        relationshipKey: key,
+        fromId: departingId,
+        toId: enemyId,
+        action: 'separate_peace',
+        tick: at,
+        status: 'recorded',
+      },
+    },
+    severity: 0.55,
+    proposalPayload: null,
+  }, overlayStamp(worldState, now));
+  const next = recordOf(recordOf(nextState.relationshipStates)[key]);
+  const recorded = Array.isArray(next.coalitionSettlements)
+    && next.coalitionSettlements.some((row) => explicitText(recordOf(row).actionId) === actionId);
+  return { worldState: nextState, first: recorded };
+}
+
+/** One stable typed fact for one actually closed coalition edge. */
+function coalitionSeparatePeaceEvidence(context, tick, outcomeId = '') {
+  const row = recordOf(context);
+  const departingId = explicitText(row.departingId);
+  const enemyId = explicitText(row.enemyId);
+  const callerId = explicitText(row.callerId);
+  const abandoned = Array.isArray(row.abandoned) ? row.abandoned.map(String).sort() : [];
+  const at = Number.isFinite(Number(tick)) ? Math.max(0, Math.floor(Number(tick))) : 0;
+  const source = explicitText(outcomeId)
+    || `${stablePart(departingId)}.${stablePart(enemyId)}.${at}`;
+  const joinAnchor = recordOf(row.joinAnchor);
+  return {
+    id: `coalition-separate-peace.${stablePart(source)}.${stablePart(departingId)}.${stablePart(enemyId)}`,
+    kind: 'coalition_separate_peace',
+    tick: at,
+    settlementId: departingId,
+    counterpartId: departingId !== callerId ? callerId : (abandoned[0] || callerId),
+    thirdPartyId: enemyId,
+    callerId,
+    targetId: enemyId,
+    abandonedIds: abandoned,
+    ...(Number.isInteger(Number(joinAnchor.joinedTick))
+      ? { joinedTick: Number(joinAnchor.joinedTick) }
+      : {}),
+  };
+}
+
+/**
  * The victor's co-besieger coalition against this loser: OTHER attackers whose
  * live deployment targets the same loser (the exact primitive the coalition_
  * fracture peace reason reads — reused so the two features stay consistent).
@@ -1283,23 +1751,99 @@ function avgTieStrength(worldState, edges, victorId, coBesiegers) {
 }
 
 /**
- * §7 THE EXIT'S PRICE: mint betrayal on every abandoned co-besieger's edge to the
- * deserter — resentment bump, typed 'coalition_betrayal' (the /betray/ revanchism
- * clock reads it). The reliability discount is RECORDED on the fracture record
- * (the W-DOCTRINE-2 credibility seam), not yet enforced. Missing edges are no-ops.
- * @param {Record<string, unknown>} worldState @param {Array<Record<string, unknown>>} edges
- * @param {string} deserterId @param {string[]} abandoned @param {unknown} now
+ * Read how one abandoned ally prices a coalition betrayal through that ally's
+ * own authored war-seat books and, when WR-2 is lit, learned disposition.
+ * Partial WR-6 activation is deliberately neutral.
+ *
+ * @param {{worldState?:Record<string,unknown>|null,
+ *   snapshot?:Record<string,unknown>|null,allyId?:unknown,deserterId?:unknown}} [input]
+ * @returns {{multiplier:number,interpretation:'grievance'|'prudence'|'balanced'}}
+ */
+export function coalitionBetrayalCharacterRead({
+  worldState = null,
+  snapshot = null,
+  allyId = '',
+  deserterId = '',
+} = {}) {
+  const neutral = { multiplier: 1, interpretation: 'balanced' };
+  if (!coalitionLedgerActive(worldState)) return neutral;
+  const ally = explicitText(allyId);
+  const deserter = explicitText(deserterId);
+  if (!ally || !deserter || ally === deserter) return neutral;
+  const learnedActive = worldState?.simulationRules?.dispositionChannelsEnabled === true;
+  let learned = 1;
+  if (learnedActive) {
+    const entry = recordOf(recordOf(worldState.dispositionStats)[ally]);
+    const martial = thresholdFactorOf(entry, 'martial').factor;
+    const diplomatic = thresholdFactorOf(entry, 'diplomatic').factor;
+    const insular = thresholdFactorOf(entry, 'insular').factor;
+    learned = ((2 - martial) + diplomatic + insular) / 3;
+  }
+  // High martial confidence hardens the broken expectation. Diplomatic and
+  // inward-looking histories retain their published direction and make room
+  // for prudence. This is the same bounded learned-character grammar already
+  // used by the WR-6 refusal aftermath, now read by the abandoned court itself.
+  const books = readWarSeatBooks({ worldState, snapshot, actorId: ally, opponentId: deserter });
+  const continueBias01 = clamp01(Number(books.continueBias01));
+  const authored = 0.8 + continueBias01 * 0.4;
+  const T = COALITION_BETRAYAL_CHARACTER_TUNING;
+  const multiplier = round4(Math.max(T.MIN_MULTIPLIER, Math.min(
+    T.MAX_MULTIPLIER,
+    learnedActive ? (learned + authored) / 2 : authored,
+  )));
+  return {
+    multiplier,
+    interpretation: multiplier >= T.GRIEVANCE_MIN
+      ? 'grievance'
+      : multiplier <= T.PRUDENCE_MAX ? 'prudence' : 'balanced',
+  };
+}
+
+/**
+ * §7 THE EXIT'S PRICE: mint betrayal on every abandoned co-besieger's edge to
+ * the deserter. Each WR-6 incident is exact-once and prices the resentment bump
+ * and trust loss through the abandoned ally's character. Missing edges are
+ * no-ops; the WR-6-dark legacy path preserves the original fixed effects.
+ *
+ * @param {Record<string, unknown>} worldState
+ * @param {Array<Record<string, unknown>>} edges
+ * @param {string} deserterId
+ * @param {string[]} abandoned
+ * @param {unknown} now
+ * @param {string} [sourceOutcomeId]
+ * @param {Record<string, unknown>|null} [snapshot]
  * @returns {Record<string, unknown>}
  */
-function accrueBetrayal(worldState, edges, deserterId, abandoned, now) {
+function accrueBetrayal(
+  worldState,
+  edges,
+  deserterId,
+  abandoned,
+  now,
+  sourceOutcomeId = '',
+  snapshot = null,
+) {
   let state = worldState;
   for (const allyId of abandoned) {
     const key = edgeKeyBetween(edges, allyId, deserterId);
     if (!key) continue;
-    const current = /** @type {{ relationshipStates?: Record<string, { resentment?: number, trust?: number }> }} */ (state).relationshipStates?.[key];
-    const resentment = clamp01((Number(current?.resentment) || 0) + PEACE_TERMS_TUNING.BETRAYAL_RESENTMENT_W);
-    const trust = clamp01((Number(current?.trust) || 0) * (1 - PEACE_TERMS_TUNING.CREDIBILITY_HIT));
+    const current = /** @type {{ relationshipStates?: Record<string, { resentment?: number, trust?: number, recentIncidents?:Array<{outcomeId?:unknown}> }> }} */ (state).relationshipStates?.[key];
+    const eventId = explicitText(sourceOutcomeId)
+      ? `${sourceOutcomeId}:coalition_betrayal:${deserterId}:${allyId}`
+      : '';
+    if (eventId && current?.recentIncidents?.some((row) => String(row?.outcomeId || '') === eventId)) continue;
+    const character = eventId
+      ? coalitionBetrayalCharacterRead({ worldState: state, snapshot, allyId, deserterId })
+      : { multiplier: 1 };
+    const multiplier = Number(character.multiplier) || 1;
+    const resentment = clamp01(
+      (Number(current?.resentment) || 0) + PEACE_TERMS_TUNING.BETRAYAL_RESENTMENT_W * multiplier,
+    );
+    const trust = clamp01(
+      (Number(current?.trust) || 0) * (1 - PEACE_TERMS_TUNING.CREDIBILITY_HIT * multiplier),
+    );
     state = applyRelationshipPatch(state, {
+      ...(eventId ? { id: eventId } : {}),
       relationshipKey: key,
       relationshipPatch: { resentment, trust },
       metadata: { incidentType: 'coalition_betrayal' },

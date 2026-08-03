@@ -7,6 +7,7 @@ import { INTERVAL_WEEKS } from './intervalWeeks.js';
 import { migrateTreatyClockMarkers } from './treatyClock.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { isWarReasonType } from './warReasonTaxonomy.js';
+import { normalizeJoinAnchor } from './warCoalitionLedger.js';
 import { migrateDispositionStats } from './dispositionLedger.js';
 
 export const WORLD_STATE_SCHEMA_VERSION = 2;
@@ -131,6 +132,17 @@ function normalizeDeployments(value) {
         : [];
       if (reasons.length) next.casusReasons = reasons;
       else delete next.casusReasons;
+    }
+    // WR-6: `joinLedger` is exactly one closed anchor, never an extensible
+    // membership surface.  Validate it against the owning deployment key and
+    // target; malformed, empty, or multi-row imports disappear fail-closed.
+    if (Object.prototype.hasOwnProperty.call(next, 'joinLedger')) {
+      const anchor = Array.isArray(next.joinLedger) && next.joinLedger.length === 1
+        && Number.isInteger(Number(next.sinceTick)) && Number(next.sinceTick) >= 0
+        ? normalizeJoinAnchor(next.joinLedger[0], key, next.targetId, next.sinceTick)
+        : null;
+      if (anchor) next.joinLedger = [anchor];
+      else delete next.joinLedger;
     }
     normalized[key] = next;
   }

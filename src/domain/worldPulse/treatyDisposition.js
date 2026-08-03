@@ -46,6 +46,63 @@ export function treatyDispositionDeltas(input) {
   }));
 }
 
+/** Two channels learn from one material coalition verdict; the disposition
+ * ledger remains the sole writer. `magnitude` is always the observed paid or
+ * missing share, never the authored headline amount.
+ * @param {{enabled?:boolean,id?:unknown,outcome?:unknown,magnitude?:unknown,
+ *   sourceKind?:unknown,sourceEventId?:unknown}} input */
+export function coalitionAftermathDispositionDeltas(input) {
+  if (input?.enabled !== true || (input.outcome !== 'win' && input.outcome !== 'loss')) return [];
+  const id = typeof input.id === 'string' ? input.id.trim() : '';
+  const sourceEventId = typeof input.sourceEventId === 'string' ? input.sourceEventId.trim() : '';
+  const sourceKind = typeof input.sourceKind === 'string' ? input.sourceKind.trim() : '';
+  const magnitude = Number(input.magnitude);
+  if (!id || !sourceEventId || ![
+    'coalition_reimbursement_paid',
+    'coalition_reimbursement_unpaid',
+    'coalition_settlement_profit',
+    'coalition_settlement_honored',
+    'coalition_settlement_shortfall',
+  ].includes(sourceKind) || !Number.isFinite(magnitude) || magnitude <= 0) return [];
+  const bounded = Math.round(Math.max(0, Math.min(1, magnitude)) * 1_000_000) / 1_000_000;
+  return ['mercantile', 'diplomatic'].map((channel) => ({
+    id,
+    channel,
+    outcome: input.outcome,
+    magnitude: bounded,
+    sourceKind,
+    sourceEventId,
+  }));
+}
+
+/** Compare the actual captured return with the winner's current, evidenced war
+ * spend. Exact equality is an honored-claim win: the alliance met the ledger,
+ * even though it produced no surplus. Missing/zero spend remains silence.
+ * @param {{enabled?:boolean,id?:unknown,got01?:unknown,spent01?:unknown,
+ *   sourceEventId?:unknown}} input */
+export function coalitionSettlementDispositionDeltas(input) {
+  if (input?.enabled !== true) return [];
+  const got01 = Number(input.got01);
+  const spent01 = Number(input.spent01);
+  if (!Number.isFinite(got01) || !Number.isFinite(spent01)
+    || got01 < 0 || spent01 < 0 || (got01 === 0 && spent01 === 0)) return [];
+  const got = Math.max(0, Math.min(1, got01));
+  const spent = Math.max(0, Math.min(1, spent01));
+  const difference = Math.abs(got - spent);
+  const honored = difference <= 0.0001;
+  const met = got + 0.0001 >= spent;
+  return coalitionAftermathDispositionDeltas({
+    enabled: true,
+    id: input.id,
+    outcome: met ? 'win' : 'loss',
+    magnitude: honored ? spent : difference,
+    sourceKind: honored
+      ? 'coalition_settlement_honored'
+      : met ? 'coalition_settlement_profit' : 'coalition_settlement_shortfall',
+    sourceEventId: input.sourceEventId,
+  });
+}
+
 /** @param {Record<string, unknown>} worldState */
 export function dispositionTreatyLearningActive(worldState) {
   const rules = /** @type {{dispositionChannelsEnabled?:unknown}} */ (worldState?.simulationRules || {});

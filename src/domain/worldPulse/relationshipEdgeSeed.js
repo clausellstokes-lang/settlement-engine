@@ -34,6 +34,7 @@ import { edgeIdFor } from '../region/graph.js';
  * @property {unknown} [toId]
  * @property {unknown} [relationshipKey]
  * @property {unknown} [fromType]
+ * @property {unknown} [source]
  */
 /**
  * @typedef {Object} SeedOutcome
@@ -100,6 +101,7 @@ export function ensureRelationshipEdgeSeed(graph, outcome, now) {
     || 'neutral';
   const stamp = text(now) || null;
   const reason = text(outcome?.headline) || `${from} escalates against ${to}.`;
+  const source = text(seed.source) || 'trade_war_escalation';
   return /** @type {T} */ ({
     ...graph,
     edges: [
@@ -111,7 +113,7 @@ export function ensureRelationshipEdgeSeed(graph, outcome, now) {
         relationshipType: fromType,
         status: 'active',
         channelIds: [],
-        evidence: [{ source: 'trade_war_escalation', reason, outcomeId: text(outcome?.id) || null }],
+        evidence: [{ source, reason, outcomeId: text(outcome?.id) || null }],
         ...(stamp ? { updatedAt: stamp } : {}),
       },
     ],

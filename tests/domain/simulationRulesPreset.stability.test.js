@@ -242,6 +242,34 @@ describe('simulation rules preset — stability under future-flag churn', () => 
     expect(normalizeSimulationRules(keylessLit)[flag]).toBe(true);
   });
 
+  // WR-6 — the coalition graph uses the same virtual declaration law. It is
+  // visible to certification now, but remains dark until WR-9 can distinguish
+  // eligible calls, decisions, costs, payments, and all governed families.
+  test('coalition ledger is declared false only in full_simulation and remains outside preset identity', () => {
+    const flag = 'coalitionLedgerEnabled';
+    expect(Object.prototype.hasOwnProperty.call(DEFAULT_SIMULATION_RULES, flag)).toBe(false);
+    expect(Object.prototype.hasOwnProperty.call(SIMULATION_RULE_PRESETS.full_simulation.rules, flag)).toBe(true);
+    expect(SIMULATION_RULE_PRESETS.full_simulation.rules[flag]).toBe(false);
+
+    for (const id of PRESET_IDS.filter((presetId) => presetId !== 'full_simulation')) {
+      expect(
+        Object.prototype.hasOwnProperty.call(SIMULATION_RULE_PRESETS[id].rules, flag),
+        `${id}.${flag} must remain absent`,
+      ).toBe(false);
+    }
+
+    expectAbsentWithAnchor(
+      RULE_COMPARISON_KEYS,
+      flag,
+      'warLayerEnabled',
+      'the comparison census is live while the virtual coalition key stays outside preset identity',
+    );
+    const keylessLit = { ...SIMULATION_RULE_PRESETS.full_simulation.rules, [flag]: true };
+    delete keylessLit.presetId;
+    expect(normalizeSimulationRules(keylessLit).presetId).toBe('full_simulation');
+    expect(normalizeSimulationRules(keylessLit)[flag]).toBe(true);
+  });
+
   // W-R2-LIGHT — the nine post-close engine-wave gates light TOGETHER in the
   // three world-alive presets (owner ruling 2026-07-16). Unlike the eight war
   // sub-flags (which graduated INTO RULE_COMPARISON_KEYS), these are VIRTUAL —
