@@ -712,6 +712,82 @@ export const WHAT_PHRASE_POOLS = Object.freeze({
     'a favour that will be called in later',
     'word going where the roads say it should not',
   ]),
+
+  // ── THE FAITH DESK (RECEIPT_POOLS_LEGACY.md §3b) ────────────────────────────────────
+  // Five kinds, and LAW ONE governs every line of them: temples, chapters and believers
+  // act; the god never does. Nothing here says a god struck, favoured or withdrew — the
+  // variants are the OBSERVABLE of a faith rising or fading, which is what a townsperson
+  // could actually report: a congregation meeting where there was none, a roof left
+  // unmended, a calendar the council stops scheduling around. belief_misjudgment carries
+  // the corpus's BELIEF ATTRIBUTION rule hardest, because it is a kind ABOUT being wrong:
+  // every one of its variants marks the reading as a reading rather than as engine truth.
+
+  // belief_misjudgment — doc variants 2..6; variant 1 ('a dangerous misjudgement') is the live
+  // anchor and is NOT stored here. CADENCE notable → floor 6 · live 1 · +5.
+  belief_misjudgment: Object.freeze([
+    'a court acting on what it believed rather than on what was so',
+    'a reading of a neighbour that the record does not support',
+    'a decision the council will be asked about later',
+    'men who were certain, and were not right',
+    'word travelling well ahead of the truth of it',
+  ]),
+
+  // faith_foothold_recruited — doc variants 2..8; variant 1 ('a new faith taking root') is the live
+  // anchor and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7.
+  faith_foothold_recruited: Object.freeze([
+    'a new congregation meeting where there was none',
+    'a chapter house entered in the parish register',
+    'a doorway with fresh marks cut over it',
+    'an observance the town will have to make room for',
+    'preachers on the road finding listeners here',
+    'a first festival kept in a season that had none',
+    'one more calendar for the clerks to keep track of',
+  ]),
+
+  // faith_pact_formed — doc variants 2..6; variant 1 ('a pact sworn between faiths') is the live
+  // anchor and is NOT stored here. CADENCE notable → floor 6 · live 1 · +5.
+  faith_pact_formed: Object.freeze([
+    'chapter houses agreeing on a shared calendar',
+    'an accord between observances entered in both registers',
+    'a quarrel taken off the street and into a vestry',
+    'rites that used to be kept on opposite days',
+    'travellers reporting the temples on speaking terms',
+  ]),
+
+  // pantheon_ascendancy — doc variants 2..4; variant 1 ('a faith ascendant') is the live
+  // anchor and is NOT stored here. CADENCE major/rare → floor 4 · live 1 · +3.
+  pantheon_ascendancy: Object.freeze([
+    'an observance the council now schedules around',
+    'offerings coming in from well beyond the walls',
+    'a chapter house that has had to be enlarged',
+  ]),
+
+  // pantheon_twilight — doc variants 2..4; variant 1 ('a faith in twilight') is the live
+  // anchor and is NOT stored here. CADENCE major/rare → floor 4 · live 1 · +3.
+  pantheon_twilight: Object.freeze([
+    'an observance kept by fewer each year',
+    'a chapter house with its roof unmended',
+    'a calendar the council no longer schedules around',
+  ]),
+
+  // ── THE DIVINATION DESK (RECEIPT_POOLS_LEGACY.md §3e) ───────────────────────────────
+  // One kind. conflict_pressure is a FORECAST token — it fires on a war that has not been
+  // declared — so BELIEF ATTRIBUTION binds absolutely: every variant reads as what is
+  // feared, drilled for or seen on the road, and not one asserts a war. 'the drums of
+  // war' (the live anchor) is the loudest line in the pool by design; the widening is
+  // what makes it land as one reading among several rather than as a standing verdict.
+
+  // conflict_pressure — doc variants 2..8; variant 1 ('the drums of war') is the live
+  // anchor and is NOT stored here. CADENCE chronic → floor 8 · live 1 · +7.
+  conflict_pressure: Object.freeze([
+    'talk in the lanes of a muster that has not been called',
+    'a quarrel the record shows worsening each season',
+    'what usually comes before a levy',
+    'neighbours who have stopped visiting',
+    'travellers reporting armed men on both sides of the border',
+    'a watch that has begun drilling in daylight',
+    'a spring in which nobody expects a quiet summer',
+  ]),
 });
 
 /*
@@ -809,6 +885,26 @@ export const TRADE_DESK_KINDS = Object.freeze([
 ]);
 
 /**
+ * §3b — the faith desk. LAW ONE governs the whole roster.
+ * @type {ReadonlyArray<string>}
+ */
+export const FAITH_DESK_KINDS = Object.freeze([
+  'belief_misjudgment',
+  'faith_foothold_recruited',
+  'faith_pact_formed',
+  'pantheon_ascendancy',
+  'pantheon_twilight',
+]);
+
+/**
+ * §3e — the divination desk. A single forecast kind, under BELIEF ATTRIBUTION.
+ * @type {ReadonlyArray<string>}
+ */
+export const DIVINATION_DESK_KINDS = Object.freeze([
+  'conflict_pressure',
+]);
+
+/**
  * Every kind this retrofit has wired so far, desk by desk in wiring order. The blast
  * radius of the disclosed same-seed prose shift is exactly this list — a kind that is not
  * here reads today exactly as it read before the retrofit began.
@@ -819,4 +915,6 @@ export const WIRED_DESK_KINDS = Object.freeze([
   ...WAR_DESK_KINDS,
   ...EVENTS_DESK_KINDS,
   ...TRADE_DESK_KINDS,
+  ...FAITH_DESK_KINDS,
+  ...DIVINATION_DESK_KINDS,
 ]);

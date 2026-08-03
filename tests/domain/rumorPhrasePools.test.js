@@ -3,11 +3,19 @@
  *
  * SP-6's legacy clause (DESIGN_FP_SPINE.md §2, AMENDED 2026-08-03) extends the
  * frequency-scaled floor to the LIVE ROUTED TOKENS, whose pools are pre-authored in
- * docs/content/RECEIPT_POOLS_LEGACY.md. This file governs every desk wired so far:
- * §3c's population/demographics kinds (slice 1), §3a's war kinds and §3d's events kinds
- * (slice 2), and the rest of §3c — the economy/trade kinds (slice 3). The desk rosters
- * live in the source leaf and this file reads them, so a desk cannot be wired without
- * arriving here.
+ * docs/content/RECEIPT_POOLS_LEGACY.md. This file governs the AUTHORED-ANCHOR half of
+ * that corpus — §3, whose kinds each carry a live WHAT_PHRASES row — and §3 IS NOW
+ * CLOSED AT 63 OF 63: §3c's population/demographics kinds (slice 1), §3a's war kinds and
+ * §3d's events kinds (slice 2), the rest of §3c's economy/trade kinds (slice 3), and
+ * §3b's faith desk plus §3e's single divination kind (slice 4, this one). The desk
+ * rosters live in the source leaf and this file reads them, so a desk cannot be wired
+ * without arriving here.
+ *
+ * ITS SIBLING IS tests/domain/rumorFallbackPhrasePools.test.js, which governs §4 — the
+ * 107 kinds that carry NO WHAT_PHRASES row and whose variant 1 is the string whatPhrase()
+ * COMPUTES. The two files pin the same five properties over the same selector; they are
+ * separate because the provenance of index 0 differs, and that difference is the whole
+ * reason the corpus is split into §3 and §4.
  *
  * FIVE THINGS ARE PINNED, and the order is the order the retrofit disclosure demands.
  *
@@ -50,7 +58,9 @@ import {
   WHAT_PHRASES,
 } from '../../src/domain/display/settlementRumors.js';
 import {
+  DIVINATION_DESK_KINDS,
   EVENTS_DESK_KINDS,
+  FAITH_DESK_KINDS,
   POPULATION_DESK_KINDS,
   TRADE_DESK_KINDS,
   WAR_DESK_KINDS,
@@ -71,7 +81,22 @@ const DESKS = Object.freeze([
   ['the war desk (§3a)', WAR_DESK_KINDS],
   ['the events desk (§3d)', EVENTS_DESK_KINDS],
   ['the economy/trade desk (§3c)', TRADE_DESK_KINDS],
+  ['the faith desk (§3b)', FAITH_DESK_KINDS],
+  ['the divination desk (§3e)', DIVINATION_DESK_KINDS],
 ]);
+
+/**
+ * THE NEGATIVE CONTROL, AND WHY IT MOVED TWICE.
+ *
+ * The control must be a kind that is REGISTERED in WHAT_PHRASES and deliberately NOT
+ * wired, so the blast radius has something real to be measured against. Slice 2 moved it
+ * from `conquest` (which it wired) to `pantheon_ascendancy`; this slice wires the faith
+ * desk, so `pantheon_ascendancy` is spent too. It moves to `war_mobilization`, and this
+ * is the LAST such move: §3 is now closed at 63 of 63, so the control is drawn from the
+ * 102 registered kinds the census never placed below floor and which therefore appear in
+ * NEITHER §3 nor §4. Those cannot be consumed by a later slice of this retrofit.
+ */
+const UNWIRED_CONTROL = 'war_mobilization';
 
 /**
  * Parse the authored R1 pools out of the corpus, with the floor its CADENCE line prices.
@@ -241,10 +266,10 @@ describe('THE STRICT NO-OP — a seedless call is byte-identical to before the w
   });
 
   it('an UNWIRED registered kind ignores the seed entirely', () => {
-    // The blast radius of the retrofit is WIRED_DESK_KINDS and nothing else. The faith
-    // desk (§3b) is authored in the corpus and deliberately not yet wired, so it is the
-    // live negative control: registered, pooled in the DOC, single-voiced in the CODE.
-    const control = 'pantheon_ascendancy';
+    // The blast radius of the retrofit is WIRED_DESK_KINDS and nothing else. The control
+    // is registered in WHAT_PHRASES and authored in NEITHER §3 nor §4, so it is
+    // single-voiced in the code and stays that way: registered, unpooled, seed-inert.
+    const control = UNWIRED_CONTROL;
     // The roster's own liveness is the anchor: migration_flight travels the identical
     // path and IS on it, so a roster that emptied or drifted reds here rather than
     // quietly certifying that nothing is wired.
@@ -419,6 +444,8 @@ const LIVE_PATH_KINDS = Object.freeze([
   ['the war desk', 'field_battle'],
   ['the events desk', 'authority_instability'],
   ['the economy/trade desk', 'import_shortage'],
+  ['the faith desk', 'faith_foothold_recruited'],
+  ['the divination desk', 'conflict_pressure'],
 ]);
 
 describe.each(LIVE_PATH_KINDS)('THE LIVE PATH — %s hears the widened pool', (_desk, kind) => {
@@ -471,10 +498,10 @@ describe.each(LIVE_PATH_KINDS)('THE LIVE PATH — %s hears the widened pool', (_
 
 describe('THE LIVE PATH — the blast radius, on the read-model', () => {
   it('an unwired kind on the same live path still renders one fixed phrase', () => {
-    // The negative control for the blast radius: pantheon_ascendancy is registered and
-    // authored in the corpus but not wired, so the live path must show it exactly as it
-    // showed it before.
-    const control = 'pantheon_ascendancy';
+    // The negative control for the blast radius, driven through the real read-model
+    // rather than through the selector: a registered kind the corpus never placed below
+    // floor must reach the reader exactly as it did before the retrofit began.
+    const control = UNWIRED_CONTROL;
     const feed = Array.from({ length: 8 }, (_, i) => tellingEvent(i, control));
     const rumors = settlementRumors({ worldState: worldWith(feed), settlementId: 'a' });
     const subjects = new Set(rumors.map((r) => subjectOf(r.headline, control)).filter(Boolean));

@@ -18,6 +18,7 @@ import {
   settlementRumors,
   whatPhrase,
 } from '../../src/domain/display/settlementRumors.js';
+import { WHAT_PHRASE_POOLS } from '../../src/domain/display/rumorPhrasePools.js';
 import { advanceRumorLedgers, rumorEventKey } from '../../src/domain/spatial/rumorNetwork.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
@@ -367,10 +368,47 @@ describe('read-model mechanics', () => {
   });
 
   it('ANTI-REPETITION: distinct event refs reach the whole pool of each band', () => {
+    // THE CARRIER MUST BE SINGLE-VOICED, and that is now a real constraint rather than an
+    // accident. This test counts DISTINCT RENDERED HEADLINES and reads that count as the
+    // number of reachable FRAMES — which is only sound while the subject phrase is
+    // constant across event refs. The legacy retrofit (RECEIPT_POOLS_LEGACY.md §3/§4)
+    // widened the subject phrase of 170 kinds, so a widened carrier makes this count
+    // frames × phrases instead: 'conflict_pressure' was the original carrier and now
+    // yields 32 (4 frames × 8 phrases), not 4.
+    //
+    // 'war_mobilization' is registered in WHAT_PHRASES and appears in NEITHER §3 nor §4,
+    // so it is single-voiced and stays that way — the retrofit is closed at 170 of 170
+    // and cannot consume it. tests/domain/rumorPhrasePools.test.js pins the same kind as
+    // its unwired control, so if that ever stops being true, this test's premise reds
+    // there by name rather than silently inflating a count here.
+    const SINGLE_VOICED = 'war_mobilization';
+    expect(WHAT_PHRASE_POOLS[SINGLE_VOICED], `${SINGLE_VOICED} must stay single-voiced for this count to mean frames`)
+      .toBeUndefined();
+    for (const [band, cfg] of Object.entries(BANDS)) {
+      const seen = new Set();
+      for (let i = 0; i < 300; i++) seen.add(renderHeadline(SINGLE_VOICED, { eventRef: `ev_${i}`, ...cfg }));
+      expect(seen.size, `${band} fully reachable`).toBe(HEADLINE_FRAMES[band].length);
+    }
+  });
+
+  it('a WIDENED carrier reaches frames × phrases — except in the subject-less thin band', () => {
+    // The positive counterpart of the pin above, and the reason it had to change: the
+    // same census over a widened kind now walks BOTH axes, so the disclosed prose shift is
+    // measured at the headline surface rather than asserted.
+    //
+    // THE THIN BAND IS THE EXCEPTION, AND IT IS A REAL PROPERTY, NOT A TOLERANCE. Its
+    // frames carry no {what} slot at all — the register test above encodes that as
+    // `if (band !== 'thin')` — because a rumor this degraded has stopped being about a
+    // specific subject and is only "trouble near {where}". So the widened pool CANNOT
+    // reach thin headlines, and thin stays at exactly its frame count. Anything else
+    // would mean a subject leaked into the vaguest band.
+    const pool = 1 + (WHAT_PHRASE_POOLS.conflict_pressure?.length ?? 0);
+    expect(pool, 'conflict_pressure must be wired for this pin to mean anything').toBeGreaterThan(1);
     for (const [band, cfg] of Object.entries(BANDS)) {
       const seen = new Set();
       for (let i = 0; i < 300; i++) seen.add(renderHeadline('conflict_pressure', { eventRef: `ev_${i}`, ...cfg }));
-      expect(seen.size, `${band} fully reachable`).toBe(HEADLINE_FRAMES[band].length);
+      const axes = band === 'thin' ? 1 : pool;
+      expect(seen.size, `${band}: frames × phrases`).toBe(HEADLINE_FRAMES[band].length * axes);
     }
   });
 

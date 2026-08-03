@@ -40,6 +40,7 @@ import { compareCodepoint } from '../deterministicSort.js';
 import { getSpatialLedger, activeSpatialDigest } from '../spatial/distanceRead.js';
 import { routeAwareHopDelayTicks } from '../worldPulse/distancePricedNews.js';
 import { embattlementLevel } from '../spatial/embattlement.js';
+import { FALLBACK_PHRASE_POOLS } from './rumorFallbackPhrasePools.js';
 import { WHAT_PHRASE_POOLS } from './rumorPhrasePools.js';
 
 /** @typedef {import('../spatial/rumorNetwork.js').RumorArrivalRecord} RumorArrivalRecord */
@@ -354,15 +355,26 @@ const WHAT_STRIP_PREFIX = /^(npc_|stressor_birth_|stressor_|party_|flow_|faction
  * 'unrest'; any other unknown token strips its engine prefix and de-underscores
  * (readable, never a raw slug), falling to 'unrest' if nothing usable remains.
  *
- * THE WIDENED POOLS (SP-6's legacy clause, RECEIPT_POOLS_LEGACY.md §3). A kind
- * registered in WHAT_PHRASE_POOLS draws from `[its WHAT_PHRASES row, ...variants]`
- * by the same FNV-1a fold the headline frames use. Two properties hold by
- * construction rather than by inspection:
- *   • CANONICAL AT ZERO — index 0 IS the live WHAT_PHRASES row, not a copy of it,
- *     so the byte-identity anchor cannot drift from the string it anchors.
- *   • SEEDLESS IS BYTE-IDENTICAL — no seed means index 0, so every caller that
- *     asks for a phrase without a telling to key on (walkers, glossary checks,
- *     the impactKind census) reads exactly what it read before this wiring.
+ * THE WIDENED POOLS (SP-6's legacy clause, RECEIPT_POOLS_LEGACY.md §3 and §4).
+ * BOTH arms of this function now widen, from two corpora that differ only in where
+ * their variant 1 comes from:
+ *   • THE CANONICAL ARM (§3, 63 kinds) — the kind has a WHAT_PHRASES row, and that
+ *     row is index 0. Variants come from WHAT_PHRASE_POOLS.
+ *   • THE FALLBACK ARM (§4, 107 kinds) — the kind has NO WHAT_PHRASES row, so its
+ *     live phrase is the one this function COMPUTES by stripping and de-underscoring
+ *     the token. That computed string is index 0. Variants come from
+ *     FALLBACK_PHRASE_POOLS. Before this corpus these kinds were not merely
+ *     single-voiced, they were UNVOICED — the reader was shown de-underscored engine
+ *     slugs like 'realm verb force found steading'.
+ * Three properties hold by CONSTRUCTION rather than by inspection:
+ *   • CANONICAL AT ZERO — index 0 is the live string itself, never a transcription of
+ *     it, on both arms. The byte-identity anchor cannot drift from what it anchors.
+ *   • SEEDLESS IS BYTE-IDENTICAL — no seed means index 0, so every caller that asks
+ *     for a phrase without a telling to key on (walkers, glossary checks, the
+ *     impactKind census) reads exactly what it read before this wiring.
+ *   • AN UNREGISTERED TOKEN IS UNTOUCHED — a token in neither corpus takes the same
+ *     path it always took, seeded or not, so the blast radius is exactly the 170
+ *     pooled kinds.
  * @param {unknown} value
  * @param {string} [seed] the telling's stable ref; absent ⇒ the canonical row
  * @returns {string}
@@ -371,15 +383,29 @@ export function whatPhrase(value, seed = '') {
   const key = String(value || '').trim().toLowerCase();
   if (!key) return 'unrest';
   const canonical = WHAT_PHRASES[key];
-  if (canonical) {
-    const widened = WHAT_PHRASE_POOLS[key];
-    if (!seed || !widened || widened.length === 0) return canonical;
-    const pool = [canonical, ...widened];
-    return pool[avalanche32(fnv1a32(`${seed}::what::${key}`)) % pool.length];
-  }
+  if (canonical) return widenedPhrase(key, canonical, WHAT_PHRASE_POOLS[key], seed);
   if (TRANSITION_KINDS.has(key)) return 'unrest';
   const stripped = key.replace(WHAT_STRIP_PREFIX, '').replace(/_/g, ' ').trim();
-  return stripped || 'unrest';
+  if (!stripped) return 'unrest';
+  return widenedPhrase(key, stripped, FALLBACK_PHRASE_POOLS[key], seed);
+}
+
+/**
+ * Draw from `[canonical, ...variants]` on the telling's stable ref, or return the
+ * canonical line unchanged when there is no seed and no pool. ONE selector serves both
+ * arms deliberately: the hash key is `${seed}::what::${key}` on either side, so the two
+ * corpora cannot drift into different selection behavior, and the §3 draws that shipped
+ * in the earlier slices are bit-identical under this refactor.
+ * @param {string} key the raw what-token, which keys the fold
+ * @param {string} canonical the live string — index 0, always
+ * @param {ReadonlyArray<string>|undefined} variants doc variants 2..N, if any
+ * @param {string} seed
+ * @returns {string}
+ */
+function widenedPhrase(key, canonical, variants, seed) {
+  if (!seed || !variants || variants.length === 0) return canonical;
+  const pool = [canonical, ...variants];
+  return pool[avalanche32(fnv1a32(`${seed}::what::${key}`)) % pool.length];
 }
 
 // ── The in-world vocabulary (fiction-not-internals) ─────────────────────────

@@ -396,3 +396,71 @@ the faith desk (§3b, five kinds) and the divination desk (§3e, one). Two rulin
   kinds carry authored corpus pools that the code does not yet read. That is the next
   desk, and it is deliberately deferred rather than swept in — documented here, not a bug
   to re-find.
+
+## THE LEGACY RETROFIT — WIRING SLICE 4, AND THE R1 HALF CLOSES (Fable chair, 2026-08-03; vetoable)
+
+The last two §3 desks (faith §3b, five kinds; divination §3e, one) and the WHOLE of §4
+(107 fallback-voiced kinds, five desks) wire in one commit. **§3 + §4 = 170 of 170 R1
+kinds are live.** §1's 24 receipt-sentence pools and §2's 6 news-summary pools are NOT
+closed and are ruled out of this lane below. Six rulings.
+
+- **J-LEG-WIRE-12 — THE LANE CLOSES R1, NOT "THE RETROFIT", AND THE BOUNDARY IS THE
+  CONSUMER.** The brief said the legacy retrofit closes. It closes for §3 and §4, which
+  share one pure selector (`whatPhrase`), take no slots, and are proved by one harness.
+  §1 is consumed by five REGISTRY-BACKED receipt functions in `eventProse.js`, each
+  indexing a PARALLEL `requiredSlots` array — the annex's own retrofit disclosure §4 says
+  a pool grown without its parallel row THROWS at the new index — and wiring note LEG-3
+  demands a new walker for that invariant before any of it lights. §2 is
+  `{headline, summary, reasons}` triples carrying live interp keys. Wiring 30 pools whose
+  failure mode is a runtime throw, inside a commit whose gate was built for a pure string
+  selector, is how a retrofit ships a crash. Deferred, priced and written into the annex
+  header rather than attempted; the alternative — 200/200 in one commit — was rejected
+  for that reason and not for size.
+- **J-LEG-WIRE-13 — §4's INDEX 0 IS COMPUTED, NOT COPIED, AND THAT IS THE STRONGER
+  FORM.** §4's kinds have no `WHAT_PHRASES` row; their live phrase is what `whatPhrase`
+  derives at call time. Two shapes were available: transcribe the 107 computed strings
+  into the leaf as variant 1, or have the selector compute the fallback and PREPEND it.
+  Transcription was rejected — it creates 107 strings that can drift from the function
+  that generates them, and twelve of them are mutilated slugs nobody would notice going
+  stale. Prepending makes index 0 *be* the live computation, so the byte-identity anchor
+  cannot drift by construction. The §3 arm already had this property (its index 0 stays
+  in `WHAT_PHRASES`); §4 now has the same property from the other direction.
+- **J-LEG-WIRE-14 — ONE SELECTOR SERVES BOTH ARMS.** `whatPhrase` now calls a single
+  `widenedPhrase(key, canonical, variants, seed)` helper from both the canonical and the
+  fallback arm, on the identical hash key `${seed}::what::${key}`. Duplicating the three
+  lines per arm was rejected: two copies of a selection rule drift, and a drift here
+  silently re-rolls every phrase in a shipped world. MEASURED, not asserted: 28,500 seeded
+  draws across the 57 kinds already shipped in slices 1–3 are BIT-IDENTICAL before and
+  after this refactor (0 moved), so the earlier slices' disclosed shift is not re-disclosed.
+- **J-LEG-WIRE-15 — THE MUTILATED TWELVE ARE PINNED, NOT REPAIRED.** `coup_detat` still
+  renders "detat" at index 0. J-LEG-4 and LEG-7 make de-slugging owner-gated, because it
+  REPLACES a live string rather than widening a pool. The roster is frozen as a literal in
+  the test AND parsed from the doc, and the two must agree — so a silent repair reds, and
+  so does a NEW mutilation introduced by a future `WHAT_STRIP_PREFIX` edit. The widening
+  still improves all twelve: the slug stops being the only voice and becomes one of six or
+  eight, which is a strict gain available without the gated change.
+- **J-LEG-WIRE-16 — ATTRIBUTION IS LONGEST-MATCH, AND THE THREE NESTING CANONICALS ARE
+  FROZEN.** On the §4 arm index 0 is a bare de-underscored token, so it can legitimately
+  sit inside its own variants — 'hostile' inside 'an edge the record carries as hostile'
+  (3 kinds: hostile, patron, institution_capture). Scanning a pool in order would then
+  attribute that headline to the canonical and UNDER-REPORT the widening, making the
+  live-path pin weaker than it looks. The harness sorts by length descending instead, and
+  pins two facts: no two AUTHORED variants nest (measured: zero), and the canonical-nesting
+  set is exactly those three.
+- **J-LEG-WIRE-17 — THE UNWIRED CONTROL MOVES ONCE MORE, AND FOR THE LAST TIME.** Slice 2
+  moved it from `conquest`; this slice consumes `pantheon_ascendancy`. It becomes
+  `war_mobilization`, drawn from the 102 kinds registered in `WHAT_PHRASES` that the census
+  never placed below floor and which appear in NEITHER §3 nor §4 — a pool no later slice of
+  this retrofit can consume, because there are no later slices. `tests/domain/
+  settlementRumors.test.js` now depends on the same kind staying single-voiced and says so
+  by name, so the two files fail together rather than one silently inflating a count.
+
+**ONE PRE-EXISTING TEST REPAIRED, DISCLOSED HERE.** `settlementRumors.test.js`'s
+ANTI-REPETITION pin counted DISTINCT RENDERED HEADLINES and read that as the number of
+reachable FRAMES — sound only while the carrier's subject phrase was constant. Wiring
+`conflict_pressure` (§3e) made it 32 (4 frames × 8 phrases), not 4. The carrier moved to a
+single-voiced kind so the count means frames again, and a NEW pin asserts the widened
+carrier reaches frames × phrases. That second pin surfaced a real property worth recording:
+**the `thin` band does not widen at all**, because its frames carry no `{what}` slot — a
+rumor that degraded is only "trouble near {where}". Pinned as `band === 'thin' ? 1 : pool`,
+so a subject leaking into the vaguest band would red.

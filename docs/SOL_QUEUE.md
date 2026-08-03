@@ -118,6 +118,30 @@ volumes corrected @ 36862650 + fdf43790):
     finds wanting or unspecced is a STOP-and-report, never a silent rewrite.
     The annex headers carry the slot convention; volume exemplars are variant
     1 verbatim wherever the volume speaks one.
+    - ✅ **THE LEGACY ANNEX'S R1 HALF IS BUILT — DO NOT RE-WIRE IT.**
+      `RECEIPT_POOLS_LEGACY.md` (the ninth annex, covering the kinds the engine
+      ALREADY routes) is wired at **170 of 200 kinds**: §3's 63 authored-anchor
+      pools and §4's 107 fallback-voiced pools are LIVE in
+      `src/domain/display/rumorPhrasePools.js`,
+      `rumorFallbackPhrasePools.js` and `rumorFallbackPhrasePoolsEvents.js`,
+      selected by `whatPhrase` in `settlementRumors.js`, across four slices
+      (`1b9b2b10`, `6d33aa8d`, `9dc12049`, and slice 4). The annex header carries
+      the RETROFIT COMPLETE table; chair rulings J-LEG-WIRE-1..17 are in
+      `FABLE_VALIDATION_QUEUE.md`.
+    - ⛔ **WHAT REMAINS IN THAT ANNEX IS §1 + §2 (30 pools) AND IT IS A
+      DIFFERENT BUILD.** §1's 24 receipt-sentence pools are consumed by the five
+      registry-backed receipt functions in `eventProse.js`, each carrying a
+      PARALLEL `requiredSlots` array — **a pool grown without its parallel row
+      THROWS at the new index** — so wiring note LEG-3's walker
+      (`pool.length === requiredSlots.length`, every registry-backed kind) is a
+      PREREQUISITE, not a follow-up. §2's 6 are `{headline, summary, reasons}`
+      triples keeping live interp keys. Per J-LEG-WIRE-12 these were deliberately
+      NOT bundled into the R1 wiring; treat them as their own wave with their own
+      golden plan.
+    - ⛔ **STILL OWNER-GATED (LEG-7):** DEFECT-1/2/3's de-slugging of the twelve
+      MUTILATED §4 anchors (`coup_detat` still renders "detat") and DEFECT-8's
+      digit retirement. Each REPLACES a live string rather than widening a pool.
+      The twelve are frozen by test roster; do not repair them opportunistically.
 23a. **THE WAR AMENDMENTS: CONVENIENCE + TRIBUTE + STATECRAFT + EXPANSION**
     (DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md, final 2026-08-03 — cohesion-checked
     against all seven volumes, 128 findings folded, re-verified, residuals

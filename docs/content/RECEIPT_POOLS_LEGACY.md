@@ -15,6 +15,54 @@ It is the authored corpus a wiring wave consumes.**
 
 ---
 
+## ✅ RETROFIT COMPLETE — THE R1 SUBJECT-PHRASE HALF IS WIRED, 170 OF 170 KINDS (2026-08-03)
+
+**`170 / 200 kinds wired.` §3 and §4 — every R1 subject-phrase pool in this annex — are
+LIVE in `src/`. The remaining 30 are §1's 24 receipt-sentence pools (R2) and §2's 6
+news-summary pools (R3), which are deliberately NOT closed here; see the boundary below.**
+
+| Section | Desk | Kinds | Wired | Slice |
+|---|---|---|---|---|
+| §3c | population / demographics | 4 | ✅ | 1 — `1b9b2b10` |
+| §3a | war | 12 | ✅ | 2 — `6d33aa8d` |
+| §3d | events | 28 | ✅ | 2 — `6d33aa8d` |
+| §3c | economy / trade | 13 | ✅ | 3 — `9dc12049` |
+| §3b | faith | 5 | ✅ | **4** |
+| §3e | divination | 1 | ✅ | **4** |
+| §4a | war (fallback-voiced) | 29 | ✅ | **4** |
+| §4b | trade (fallback-voiced) | 27 | ✅ | **4** |
+| §4c | faith (fallback-voiced) | 5 | ✅ | **4** |
+| §4d | divination (fallback-voiced) | 5 | ✅ | **4** |
+| §4e | events (fallback-voiced) | 41 | ✅ | **4** |
+| **§3 + §4 total** | | **170** | **✅ 170** | |
+| §1 | receipt sentences (R2) | 24 | ⛔ not this lane | — |
+| §2 | news summaries (R3) | 6 | ⛔ not this lane | — |
+
+**WHERE THE CODE IS.** `src/domain/display/rumorPhrasePools.js` holds §3's 63 pools;
+`rumorFallbackPhrasePools.js` + `rumorFallbackPhrasePoolsEvents.js` hold §4's 107 (split
+for the 800-effective-line domain ceiling, R-BLD-4). `settlementRumors.js`'s `whatPhrase`
+is the single selector; both arms widen through one helper on one hash key, so the corpora
+cannot drift into different selection behavior. Enforced by
+`tests/domain/rumorPhrasePools.test.js` and `tests/domain/rumorFallbackPhrasePools.test.js`.
+
+**WHY §1 AND §2 ARE A DIFFERENT LANE, NOT AN OVERSIGHT.** §3/§4 are read by ONE pure
+selector that takes no slots. §1's pools are consumed by the five registry-backed receipt
+functions in `eventProse.js`, each carrying a PARALLEL `requiredSlots` array — *a pool
+grown without its parallel row throws at the new index* (retrofit disclosure §4) — and
+wiring note LEG-3 additionally requires a new walker asserting
+`pool.length === requiredSlots.length`. §2's are `{headline, summary, reasons}` triples
+carrying live interp keys. Different consumer, different failure mode, different gate.
+Bundling them into an R1 wiring wave is exactly what LEG-7 forbids for the sibling case.
+**Deliberately deferred, documented, priced — not a bug to re-find.**
+
+**WHAT DID NOT MOVE.** The three owner-gated items are untouched and remain owner-gated:
+DEFECT-1/2/3's de-slugging of the twelve MUTILATED §4 anchors (`coup_detat` → "detat" is
+still live, now as one voice in six rather than the only one), and DEFECT-8's digit
+retirement. `tests/domain/rumorFallbackPhrasePools.test.js` freezes the mutilated roster
+at exactly twelve so neither a silent repair nor a new mutilation can land unremarked.
+
+---
+
 ## ⚠️ THE RETROFIT DISCLOSURE — READ BEFORE WIRING A SINGLE POOL
 
 Every pool in this file RETROFITS a kind that is **already live and already
