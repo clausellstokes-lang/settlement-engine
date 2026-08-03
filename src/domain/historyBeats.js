@@ -59,7 +59,12 @@
 /**
  * One entry of `settlement.history.currentTensions[]`. The generator emits
  * bare strings from one path and objects from another; both are handled.
- * @typedef {string|{ text?: string, description?: string, name?: string, label?: string }} CurrentTension
+ *
+ * `type` is the shape the CURRENT generator writes — a snake_case token beside
+ * a `description` sentence — and it was missing from this typedef for as long
+ * as the likely-future mirror was failing to read it. `label`/`name`/`text`
+ * are authored-import spellings, retained for tolerance.
+ * @typedef {string|{ type?: string, text?: string, description?: string, name?: string, label?: string }} CurrentTension
  */
 
 /**
@@ -360,15 +365,52 @@ function deriveUnresolvedWound(settlement) {
   };
 }
 
+/**
+ * The humanized name of a tension, read the way the generator actually writes
+ * one. THIS IS THE MIRRORED RULE — `deriveLikelyFuture` in simulationSpine.js
+ * reads a tension by the same three-step ladder, and the lockstep pin in
+ * tests/domain/historyBeats.test.js reds if the two ever disagree about which
+ * tension a settlement is bound to.
+ *
+ * The ladder exists because a tension arrives in three shapes and only one of
+ * them is common. Generated tensions carry `.type` (a snake_case token) and
+ * `.description` (a whole sentence) and NOTHING ELSE — the keys are
+ * type/description/severity/factions/plotHooks. `.label` and `.name` are
+ * authored-import shapes, kept for tolerance.
+ *
+ * The `.description` is deliberately NOT a rung here: it is a full sentence,
+ * and "Tensions point toward The population changed faster than the settlement
+ * could absorb.." is the splice defect the spine was rebuilt to retire.
+ *
+ * @param {CurrentTension|undefined} tension
+ * @returns {string|null}
+ */
+function tensionName(tension) {
+  if (typeof tension === 'string') return firstNonEmpty(tension);
+  const labelled = firstNonEmpty(tension?.label, tension?.name);
+  if (labelled) return labelled;
+  const type = firstNonEmpty(tension?.type);
+  return type ? type.replace(/_/g, ' ') : null;
+}
+
 /** @param {HistoryBeatSource} settlement */
 function deriveLikelyFuture(settlement) {
   // Pull from history.currentTensions trajectory if available, else
   // power-structure stability. Mirrors the simulationSpine logic so the
   // two derivations stay consistent — but produces a structured beat.
+  //
+  // THE MIRROR HAD DIVERGED. This read was `firstNonEmpty(first?.label,
+  // first?.name)`, and a generated tension carries neither: it carries `.type`
+  // and `.description`. So the tension arm was DEAD — measured over six real
+  // settlements that between them carried eleven tensions, it fired zero
+  // times, and all six printed the same fallback line ("Continuity, with the
+  // usual slow erosion of any settlement.") while the spine beside them named
+  // the actual tension. The docstring above claimed a mirror the code had
+  // stopped being; `tensionName` is now the shared rule, spelled once here and
+  // pinned in lockstep against the spine's.
   const tensions = settlement?.history?.currentTensions;
   if (Array.isArray(tensions) && tensions.length) {
-    const first = tensions[0];
-    const text = typeof first === 'string' ? first : firstNonEmpty(first?.label, first?.name);
+    const text = tensionName(tensions[0]);
     if (text) {
       return {
         key: 'likelyFuture',

@@ -14,6 +14,8 @@ import {
   historyBeatRows,
   historyBeatPresence,
 } from '../../src/domain/historyBeats.js';
+import { deriveSimulationSpine } from '../../src/domain/simulationSpine.js';
+import { gen } from '../simulation/simHelpers.js';
 
 // ── Sample settlements ──────────────────────────────────────────────────
 
@@ -301,5 +303,118 @@ describe('historyBeatPresence()', () => {
     const p = historyBeatPresence(sparseHistorySettlement());
     expect(p.definingCrisis).toBe(false);
     expect(p.unresolvedWound).toBe(false);
+  });
+});
+
+// ── The lockstep the docstring promises ────────────────────────────────
+
+/**
+ * `deriveLikelyFuture` in historyBeats.js says, in its own comment, that it
+ * "Mirrors the simulationSpine logic so the two derivations stay consistent."
+ * That sentence was false for as long as it has existed: the mirror read a
+ * tension by `.label`/`.name`, and a GENERATED tension carries neither — it
+ * carries `.type` (a snake_case token) and `.description` (a sentence).
+ *
+ * Measured over six real settlements carrying eleven tensions between them,
+ * the mirror's tension arm fired ZERO times. All six printed the identical
+ * fallback, "Continuity, with the usual slow erosion of any settlement.",
+ * while the spine beside them named the actual tension. A docstring is not an
+ * invariant; this block is the one that stops the two from drifting again, and
+ * it names the side that moved.
+ */
+describe('the likely-future mirror moves in lockstep with the spine', () => {
+  /** The two arms, read off each derivation's OBSERVABLE output. */
+  const spineArmOf = (spine) =>
+    spine.likelyFuture.includes('bound to the unresolved') ? 'tensions'
+      : spine.likelyFuture === 'Its likely future is whatever the table decides to make it.' ? 'none'
+        : 'stability';
+  const beatArmOf = (beat) =>
+    beat === null ? 'none'
+      : beat.source === 'history.currentTensions' ? 'tensions'
+        : 'stability';
+
+  const FIXTURES = [
+    ['the live generated shape (.type + .description)', {
+      history: { currentTensions: [
+        { type: 'magical_controversy', description: 'Debate over the role of magic. It has run for years.' },
+        { type: 'trade_dispute', description: 'A dispute over terms.' },
+      ] },
+    }],
+    ['an authored .label shape', {
+      history: { currentTensions: [{ label: 'Guild Rivalry', description: 'Two guilds. One wharf.' }] },
+    }],
+    ['an authored .name shape', {
+      history: { currentTensions: [{ name: 'Succession Doubt' }] },
+    }],
+    ['bare strings', {
+      history: { currentTensions: ['water rights'] },
+    }],
+    ['no tensions, critical stability', {
+      history: { currentTensions: [] }, powerStructure: { stability: 'Critical (active siege)' },
+    }],
+    ['no tensions, unstable stability', {
+      powerStructure: { stability: 'unstable' },
+    }],
+    ['no tensions, stable stability', {
+      powerStructure: { stability: 'Stable' },
+    }],
+    ['nothing at all', {}],
+  ];
+
+  it.each(FIXTURES)('agrees on which ARM answered: %s', (_label, settlement) => {
+    const spineArm = spineArmOf(deriveSimulationSpine(settlement));
+    const beatArm = beatArmOf(deriveHistoryBeats(settlement).likelyFuture);
+    expect(
+      beatArm,
+      `THE MIRROR DRIFTED — historyBeats answered from "${beatArm}" while`
+      + ` simulationSpine answered from "${spineArm}". historyBeats.js`
+      + ` deriveLikelyFuture is the side that must follow the spine.`,
+    ).toBe(spineArm);
+  });
+
+  it('agrees on WHICH TENSION, not merely that there was one', () => {
+    // The arm check alone would pass if both read a tension and disagreed
+    // about which. The spine names up to two; the beat names the first, and
+    // the spine's line must contain it.
+    for (const [label, settlement] of FIXTURES) {
+      const beat = deriveHistoryBeats(settlement).likelyFuture;
+      if (beat?.source !== 'history.currentTensions') continue;
+      const named = beat.text.replace(/^Tensions point toward /, '').replace(/\.$/, '');
+      expect(
+        deriveSimulationSpine(settlement).likelyFuture.toLowerCase(),
+        `THE MIRROR DRIFTED on "${label}" — historyBeats bound the future to`
+        + ` "${named}", which the spine's line does not name.`,
+      ).toContain(named.toLowerCase());
+    }
+  });
+
+  it('over REAL generated settlements, the tension arm is REACHABLE on both sides', () => {
+    // The anti-vacuity control, and the pin on the defect itself: if the
+    // mirror regresses to a dead key it falls to `stability` on every real
+    // settlement, the arms disagree, and the per-arm pin above cannot see it
+    // because these fixtures are hand-written.
+    const family = [
+      ['mirror-a', { settType: 'town', tradeRouteAccess: 'crossroads' }],
+      ['mirror-b', { settType: 'village', tradeRouteAccess: 'river' }],
+      ['mirror-c', { settType: 'city', tradeRouteAccess: 'port' }],
+      ['mirror-d', { settType: 'hamlet' }],
+    ];
+    let tensionArmHits = 0;
+    for (const [seed, config] of family) {
+      const settlement = gen(config, seed);
+      // Positive control: these settlements really do carry tensions, so a
+      // zero census below is a defect and not an empty corpus.
+      expect(settlement.history.currentTensions.length,
+        `seed ${seed} generated no tensions — the census would be vacuous`)
+        .toBeGreaterThan(0);
+      const beat = deriveHistoryBeats(settlement).likelyFuture;
+      const spine = deriveSimulationSpine(settlement);
+      expect(beatArmOf(beat), `seed ${seed}: the arms disagree`).toBe(spineArmOf(spine));
+      if (beat?.source === 'history.currentTensions') tensionArmHits++;
+    }
+    expect(tensionArmHits,
+      'the mirror never reached the tension arm on a real settlement — the'
+      + ' dead-key defect is back')
+      .toBe(family.length);
   });
 });
