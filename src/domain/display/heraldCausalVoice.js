@@ -167,15 +167,55 @@ const EDGE_WARRANTS = Object.freeze([
 ]);
 
 /**
- * The connective pool one link draws from. The default is `followed`, and the
- * default is load-bearing: it asserts succession and refuses causation.
+ * DIRECTION SAFETY (lane HR) — the type-warranted pools whose FORWARD corpus
+ * lines presuppose that the CHILD is the warranted thing, and so compose a false
+ * claim when pointed at it.
+ *
+ * A type warrant is read off the PARENT's own `type`: `plant_exposed` says the
+ * PARENT was the surfacing, `peace_refused` that the PARENT was the refusal,
+ * `treaty_default_detected` that the PARENT was the breach. In `back` the
+ * connective sits after the child and points at that parent, so every line is
+ * true. In `fwd` it sits after the parent and points at the child, and the same
+ * lines say "and what came out was the truth that <child>", "and the refusal
+ * entered against it is what stood at issue when <child>", "and what was broken
+ * was the promise that stood until <child>" — three assertions the ledger does
+ * not carry, about the wrong end of the edge.
+ *
+ * So in `fwd` these three fall back to the DIRECTION-NEUTRAL families: `caused`
+ * when the origination warrant is independently present on the link, `followed`
+ * otherwise. That is a demotion, never a promotion — `followed` asserts
+ * succession and nothing more, which is exactly what a forward hop is known to
+ * be.
+ *
+ * NOT LISTED, AND DELIBERATELY: `dissolved`, whose only `fwd` line is an `A` and
+ * therefore already undrawable, and `planted`, whose only `fwd` line spends the
+ * declared `planted::N` hole. Both are permanent forward drops today, and
+ * redirecting them here would silently convert a recorded drop into prose.
+ *
+ * THIS RE-OPENS PER POOL. The restriction is a property of the CORPUS, not of the
+ * edge: the day §3 authors a forward line for one of these that predicates on the
+ * parent rather than the child, that pool comes off this list and keeps its full
+ * warrant in both directions.
+ * @type {ReadonlyArray<string>}
+ */
+const FWD_CHILD_PRESUPPOSING_POOLS = Object.freeze(['exposed', 'refused', 'breached']);
+
+/**
+ * The connective pool one link draws from, in the direction it will be read. The
+ * default is `followed`, and the default is load-bearing: it asserts succession
+ * and refuses causation.
  * @param {Record<string, unknown>} link
+ * @param {'back'|'fwd'} [direction]
  * @returns {string}
  */
-export function poolForLink(link) {
+export function poolForLink(link, direction = 'back') {
   const row = link && typeof link === 'object' ? link : {};
   for (const { pool, warrant } of EDGE_WARRANTS) {
-    if (warrant(/** @type {Record<string, unknown>} */ (row))) return pool;
+    if (!warrant(/** @type {Record<string, unknown>} */ (row))) continue;
+    if (direction === 'fwd' && FWD_CHILD_PRESUPPOSING_POOLS.includes(pool)) {
+      return row.causedByParent === true ? 'caused' : 'followed';
+    }
+    return pool;
   }
   return 'followed';
 }
@@ -214,7 +254,9 @@ function connectiveForLink({ link, seed, direction, seesSecrets }) {
   // The audience swap happens FIRST and once: on a player surface the DM-only
   // `planted` arm degrades to `believed` by connective swap (R-W5-F), and the
   // drawable subset is then measured against the pool actually being read.
-  const pool = audiencePoolFor(poolForLink(link), !!seesSecrets);
+  // …and the DIRECTION is consulted before the audience swap, because a pool that
+  // presupposes the child in `fwd` is unsafe for every audience.
+  const pool = audiencePoolFor(poolForLink(link, direction), !!seesSecrets);
   const drawn = pickCausal(drawableLines(pool, direction), `${seed}::conn::${pool}::${direction}`);
   if (!drawn) return null;
   return { text: drawn.text, pool, edge: POOL_PARENT[pool], arg: drawn.arg };

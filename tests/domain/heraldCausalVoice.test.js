@@ -410,6 +410,27 @@ describe('THE JOIN MOLDS — the argument supply §3’s tags were written to re
     }
   });
 
+  test('planted::F is bound to its FREE-RELATIVE connective shape (lane HR)', () => {
+    // `SAID_WHEN` ("was said when …") is a PREDICATE, not a general `F` mold. It
+    // composes only because the one connective it completes ends in a dangling
+    // `what`: "believing exactly what" + "was said when the tribute went unpaid".
+    // A second `F` line here that did not end that way would draw the same mold
+    // and print "believing was said when …" — the verifier's exact gap.
+    const fLines = CONNECTIVE_POOLS.planted.filter((line) => line.arg === 'F');
+    expect(fLines.length, 'the pool spends no F line — this binding pin is vacuous').toBeGreaterThan(0);
+    for (const line of fLines) {
+      expect(/\bwhat$/.test(line.text), `planted F line "${line.text}" is not a free relative`).toBe(true);
+    }
+    const forms = moldFormsFor('planted', 'F');
+    expect(forms).toHaveLength(1);
+    expect(forms[0].startsWith(CLAUSE_TOKEN), 'the mold must FOLLOW the relative, not lead').toBe(false);
+    // …and the composition it licenses reads as one clause end to end.
+    for (const line of fLines) {
+      expect(`${line.text} ${forms[0].replace(CLAUSE_TOKEN, DEEP_CLAUSE)}`)
+        .toBe(`${line.text} was said when ${DEEP_CLAUSE}`);
+    }
+  });
+
   test('`A` is argument-less BY LAW — no pool molds it, for any pool', () => {
     for (const pool of Object.keys(CONNECTIVE_POOLS)) {
       expect(argIsMolded(pool, 'A'), pool).toBe(false);
@@ -545,6 +566,108 @@ describe('THE JOIN MOLDS — the argument supply §3’s tags were written to re
     }
     const dm = heraldTellingRegister({ worldState: LIT, walk, seed: 's1', seesSecrets: true });
     expect(dm.links[0].pool).toBe('planted');
+  });
+});
+
+// ── LANE HR — THE VOCABULARY AMENDMENTS + DIRECTION SAFETY ──────────────────
+
+describe('THE VOCABULARY AMENDMENTS — a mold may not add a shade the edge lacks', () => {
+  test('refused::N is the AT-ISSUE form ALONE: a gate edge never composes a denial', () => {
+    // "for the refusal of the fact that the tribute went unpaid" reads as the
+    // refusal OF A FACT. The gate edge carries a blocked act, not a contested
+    // truth, so law 1 forbids the shade.
+    const forms = moldFormsFor('refused', 'N');
+    expect(forms).toHaveLength(1);
+    for (const line of CONNECTIVE_POOLS.refused.filter((l) => l.arg === 'N')) {
+      const composed = `${line.text} ${forms[0].replace(CLAUSE_TOKEN, DEEP_CLAUSE)}`;
+      // anchored: `forms` is asserted to have exactly one member above and the
+      // composed string is rebuilt from it here, so this negative cannot pass by
+      // the pool having emptied.
+      expect(composed, line.text).not.toContain('the fact that');
+      expect(composed).toContain('what stood at issue when');
+    }
+  });
+
+  test('breached::N never names a past event as the content of a promise', () => {
+    const forms = moldFormsFor('breached', 'N');
+    expect(forms.length).toBeGreaterThan(0);
+    for (const form of forms) {
+      const filled = form.replace(CLAUSE_TOKEN, DEEP_CLAUSE);
+      // anchored: every form is asserted to carry the clause verbatim on the next
+      // line, so the collection is provably live and correctly filled.
+      expect(filled, form).not.toContain(`the promise that ${DEEP_CLAUSE}`);
+      expect(filled).toContain(DEEP_CLAUSE);
+      // The obligation is NAMED and the clause DATES it — "stood until", "held
+      // until" — rather than being asserted as its content.
+      expect(/\b(?:stood|held) until\b/.test(filled), form).toBe(true);
+    }
+    // Both directions read: the `fwd` line agrees in number with every form.
+    for (const line of CONNECTIVE_POOLS.breached.filter((l) => l.arg === 'N')) {
+      for (const form of forms) {
+        expect(`${line.text} ${form.replace(CLAUSE_TOKEN, DEEP_CLAUSE)}`).toMatch(/^\S/);
+      }
+    }
+  });
+});
+
+describe('DIRECTION SAFETY — a fwd line may not presuppose the child', () => {
+  const CHILD_PRESUPPOSING = Object.freeze([
+    ['exposed', { type: 'plant_exposed' }],
+    ['refused', { type: 'peace_refused' }],
+    ['breached', { type: 'treaty_default_detected' }],
+  ]);
+
+  test('the back direction keeps the FULL warrant', () => {
+    for (const [pool, link] of CHILD_PRESUPPOSING) {
+      expect(poolForLink(link), pool).toBe(pool);
+      expect(poolForLink(link, 'back'), pool).toBe(pool);
+    }
+  });
+
+  test('the fwd direction demotes them to the direction-neutral families only', () => {
+    for (const [pool, link] of CHILD_PRESUPPOSING) {
+      expect(poolForLink(link, 'fwd'), pool).toBe('followed');
+      // …and `caused` only when the origination warrant is independently there.
+      expect(poolForLink({ ...link, causedByParent: true }, 'fwd'), pool).toBe('caused');
+      expect(poolForLink({ ...link, causedByParent: true }, 'back'), pool).toBe(pool);
+    }
+  });
+
+  test('A FWD DRAW OVER AN EXPOSURE HOP composes followed/caused form only', () => {
+    const walk = walkWarranted({ type: 'plant_exposed' });
+    const failures = collectSeedFailures(SEEDS, (seed) => {
+      const fwd = heraldTellingRegister({ worldState: LIT, walk, seed, seesSecrets: true, direction: 'fwd' });
+      let drawn = 0;
+      for (const link of fwd.links) {
+        if (!link.connective) continue;
+        drawn += 1;
+        expect(['followed', 'caused'], `${seed}: ${link.pool}`).toContain(link.pool);
+        // The false claim the corpus would otherwise compose, named exactly.
+        // anchored: `drawn` is asserted non-zero below, so the sweep provably ran
+        // over composed connectives rather than an all-dropped chain.
+        expect(fwd.text, seed).not.toContain('and what came out was');
+      }
+      expect(drawn, `${seed}: the fwd telling drew nothing — the pin is vacuous`).toBeGreaterThan(0);
+      // The BACK telling of the same walk still speaks in the exposure's own voice,
+      // so the restriction is a direction rule and not a lost warrant.
+      const back = heraldTellingRegister({ worldState: LIT, walk, seed, seesSecrets: true, direction: 'back' });
+      expect(back.links.some((l) => l.pool === 'exposed'), `${seed}: back lost the warrant`).toBe(true);
+    });
+    expectNoSeedFailures(failures, 'a fwd exposure hop never composes an exposure connective');
+  });
+
+  test('the TWO permanent fwd drops stay drops (they are not redirected)', () => {
+    // `dissolved` is all-`A` in fwd and `planted`'s one fwd line spends the
+    // declared `planted::N` hole. Redirecting either would silently convert a
+    // recorded drop into prose, which is why neither is on the restricted list.
+    expect(poolForLink({ type: 'war_cause_dissolved' }, 'fwd')).toBe('dissolved');
+    expect(poolForLink({ lineageIds: ['disinfo:a:b:3'] }, 'fwd')).toBe('planted');
+    for (const [pool, extra] of [['dissolved', { type: 'war_cause_dissolved' }], ['planted', { lineageIds: ['disinfo:a:b:3'] }]]) {
+      const out = heraldTellingRegister({
+        worldState: LIT, walk: walkWarranted(extra), seed: 'dir-1', seesSecrets: true, direction: 'fwd',
+      });
+      expect(out.links.every((l) => l.pool !== pool), `${pool} drew a fwd connective`).toBe(true);
+    }
   });
 });
 

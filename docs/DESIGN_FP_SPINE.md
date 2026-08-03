@@ -692,10 +692,13 @@ priced cost of the ambition.
 > 186/200, and at 159 always. THIS IS DESIGNED BEHAVIOUR — the cap is the
 > headline register's honesty, and a gesture that will not fit is dropped rather
 > than shortened into a claim the receipt does not carry. The item still renders
-> its recorded headline exactly as it does today. One pool-level drop is
-> permanent and deterministic rather than seeded: `dissolved` in the `fwd`
-> direction is all-`A`, so a forward telling of a dissolution names the link and
-> asserts no relation.
+> its recorded headline exactly as it does today. **TWO** pool-level drops are
+> permanent and deterministic rather than seeded, on the pools a warrant actually
+> reaches: `dissolved` in the `fwd` direction is all-`A`, and `planted` in `fwd`
+> spends only the declared `planted::N` hole — so a forward telling of either
+> names the link and asserts no relation to it. *(CORRECTED 2026-08-03, lane HR:
+> this row said "one" and named `dissolved` alone. Machine-counted over the
+> drawable-subset filter, the wired total is two.)*
 >
 > **WHAT THIS WAVE DELIBERATELY DID NOT DO** — recorded so no one re-finds it as
 > a bug:
@@ -720,6 +723,69 @@ priced cost of the ambition.
 >    both registers read them as a line. That predates this wave and is unchanged
 >    by it; the `fwd` composition inherits the same assumption and guards only the
 >    gap a DROPPED hop would leave.
+
+> **LANE HR — THE HERALD GRAMMAR CLOSURE: THE CYCLE-11 FINDINGS, CHAIR-RULED AND
+> LANDED, 2026-08-03.** On `claude/composite-r4` in the minifold worktree, nothing
+> pushed, everything still behind `simulationRules.heraldCausalVoiceEnabled`.
+>
+> **THE LIGHTING BLOCKER — A CONNECTIVE OVER A RECEIPT NOBODY FOUND.** `causeWalk`
+> prints `UNRECEIPTED_HOP` ("an earlier cause") whenever the provenance ledger
+> names a parent no pulseHistory record resolves — a root `sourceEventId`, or a
+> receipt aged past MAX_HISTORY=80. It is a NOUN PHRASE and it carries
+> `redacted:false`, so nothing structural marked it, and the composer fed it
+> straight into a §1 mold: *"…; the year after the day an earlier cause"*.
+> `chronicleGraph`'s two pulse fallbacks reach the same slot the same way whenever
+> a durable record carries no headline.
+>
+> RULED AND IMPLEMENTED: such a hop is TERMINAL, treated exactly as a REDACTED one
+> — the causal clause is dropped, the edge is never re-labelled to fit the prose,
+> and §3.2's terminal carries the honesty instead (`chain_end`, forced, because the
+> walk cannot tell a root from an aged-out receipt and `horizon` claims retention).
+> The guard binds to an EXPORTED constant, never a literal, and the constants
+> needed a home that the contamination fence would accept: `receiptClauseFloor.js`
+> now owns the three PLACEHOLDER CLAUSES and the predicate over them, both
+> producers read their constants from it, and the fence closure gains exactly one
+> reviewed row. `REDACTED_HOP` deliberately stayed in `causeWalk` — a covert hop is
+> already marked structurally, and the composer reads that boolean.
+>
+> IN CLASS, FOUND WHILE FIXING, CLOSED HERE: `childKept` now means "the child
+> contributes a USABLE clause". In `fwd` the connective's argument is the child's
+> clause, so a placeholder left "kept" was molded into the NEXT link's slot — the
+> same defect one link deeper, and it was live for REDACTED hops too.
+>
+> **THE VOCABULARY AMENDMENTS.** `refused::N` restricts to the AT-ISSUE form: the
+> factive frame composed "for the refusal of the fact that the tribute went
+> unpaid", which reads as the refusal OF A FACT — a denial, a shade the gate edge
+> does not carry and law 1 forbids a mold from adding. `breached::N` is recast
+> whole: "after the breach of the promise that <a past event>" named the event as
+> the CONTENT of the promise, when the promise is the obligation and the event is
+> its breach. The three forms now NAME the obligation and let the clause DATE it —
+> "the promise that stood until …", "the undertaking that stood until …", "the
+> writing that held until …" — all singular, so the `fwd` line agrees in number.
+>
+> **`planted::F` IS BOUND TO ITS CONNECTIVE'S SHAPE.** `SAID_WHEN` is a predicate,
+> not a general `F` mold; it composes only because the one line it completes ends
+> in a dangling `what`. A second `F` line without that shape would draw the same
+> mold and print "believing was said when …". Pinned as a shape assertion rather
+> than left to a comment.
+>
+> **DIRECTION SAFETY, AND IT RE-OPENS PER POOL.** A TYPE warrant is read off the
+> PARENT's `type`, so `exposed` / `refused` / `breached` are true in `back`, where
+> the connective points at that parent, and FALSE in `fwd`, where the same corpus
+> lines say "and what came out was the truth that <child>". In `fwd` those three
+> now fall back to the direction-neutral families — `caused` when the origination
+> warrant is independently present, `followed` otherwise. A demotion, never a
+> promotion. `dissolved` and `planted` are deliberately NOT on the list: both are
+> permanent forward drops today, and redirecting them would convert a recorded drop
+> into prose. THE RESTRICTION IS A PROPERTY OF THE CORPUS, NOT THE EDGE — the day
+> §3 authors a forward line for one of these that predicates on the PARENT, that
+> pool comes off the list and keeps its full warrant in both directions.
+>
+> **DEFERRED, so it is not re-found as a bug:** the two pulse fallbacks keep four
+> other spellings in `src/**` (chronicleTimeline, worldSnapshotPublic,
+> CampaignStatePanel, and pulseHelpers twice). None reaches a clause slot, so none
+> can compose the defect; the single-writer scan stays scoped to `UNRECEIPTED_HOP`
+> alone, and one of the four lives in a file the war lane is live on.
 
 > **LANE P — THE DOSSIER-NATIVE STATE-PROSE PROJECTION: THE READER IS BUILT AND
 > DARK, 2026-08-03.** Five commits on `claude/composite-r4` in the minifold

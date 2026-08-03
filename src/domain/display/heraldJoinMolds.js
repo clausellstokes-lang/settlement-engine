@@ -90,7 +90,27 @@ const STATE_OF_THINGS = `the state of things when ${CLAUSE_TOKEN}`;
 /** THE INSTRUMENT'S NOMINALS — the drafted artifact the join runs through. */
 const INSTRUMENT = `the instrument by which ${CLAUSE_TOKEN}`;
 const WRITING = `the writing under which ${CLAUSE_TOKEN}`;
-const PROMISE = `the promise that ${CLAUSE_TOKEN}`;
+
+/**
+ * THE BREACH'S NOMINALS — the obligation, dated by the event that ENDED it.
+ *
+ * `breached` is the one instrument pool whose parent clause is the BREAKING, not
+ * the thing done under the instrument, and that inverts what its argument may
+ * say. The frames above are lawful under `enforced` ("under the terms of the
+ * instrument by which the levy was raised": the writing governed the act) and
+ * unlawful here, where the same shape would make the writing govern its own
+ * violation. A `the promise that ${CLAUSE_TOKEN}` frame was worse still — it
+ * printed "after the breach of the promise that the tribute went unpaid",
+ * naming a past event as the content of the promise, when the promise is the
+ * OBLIGATION and the event is its breach.
+ *
+ * The cure is temporal rather than propositional: the obligation is named, and
+ * the receipt's clause dates the moment it stopped holding. Every form is
+ * SINGULAR so the `fwd` line ("and what was broken was …") agrees in number.
+ */
+const PROMISE_UNTIL = `the promise that stood until ${CLAUSE_TOKEN}`;
+const UNDERTAKING_UNTIL = `the undertaking that stood until ${CLAUSE_TOKEN}`;
+const WRITING_UNTIL = `the writing that held until ${CLAUSE_TOKEN}`;
 
 /** THE IDENTITY FORM — an `F` slot wants a finite clause, which is what we hold. */
 const AS_RECORDED = CLAUSE_TOKEN;
@@ -118,17 +138,30 @@ export const JOIN_MOLDS = Object.freeze({
   // held, and the connective supplies the holding.
   believed: Object.freeze({ N: Object.freeze([TRUTH, FACT]), F: Object.freeze([AS_RECORDED]) }),
   // planted's `N` lines take the PLANTER (see UNSUPPLIED_ARGS). Its one `F` line
-  // ("believing exactly what …") wants a free relative, which SAID_WHEN supplies
+  // ("believing exactly what …") wants a FREE RELATIVE, which SAID_WHEN supplies
   // without naming a hand.
+  //
+  // THE BINDING IS NARROW, AND PINNED (lane HR). `SAID_WHEN` is not a general `F`
+  // mold — it is a predicate, and it only composes because the connective it
+  // completes ends in a dangling `what`. A second `F` line in this pool that did
+  // NOT end that way would draw the same mold and print "believing was said when
+  // the tribute went unpaid". The pin in tests/domain/heraldCausalVoice.test.js
+  // asserts the shape rather than trusting the comment: every `planted` `F`
+  // connective must end in the free relative this mold was authored to follow.
   planted: Object.freeze({ F: Object.freeze([SAID_WHEN]) }),
   judged: Object.freeze({}),
   // gate and instrument spend no `F` line at all — every one of their clause-
   // taking positions is an `A`. A mold for an arg the pool never draws would be
   // dead content, and the totality pin reds on it.
-  refused: Object.freeze({ N: Object.freeze([AT_ISSUE, FACT]) }),
+  // `refused` takes AT_ISSUE ALONE (lane HR). A factive frame here composed "for
+  // the refusal of the fact that the tribute went unpaid" — which reads as the
+  // refusal OF A FACT, a denial. The gate edge carries a blocked act, never a
+  // contested truth, so law 1 forbids the shade: a mold may not assert something
+  // the edge does not already carry, and denial is a whole extra claim.
+  refused: Object.freeze({ N: Object.freeze([AT_ISSUE]) }),
   dissolved: Object.freeze({ N: Object.freeze([AT_ISSUE, STATE_OF_THINGS]) }),
   enforced: Object.freeze({ N: Object.freeze([INSTRUMENT, WRITING]) }),
-  breached: Object.freeze({ N: Object.freeze([INSTRUMENT, WRITING, PROMISE]) }),
+  breached: Object.freeze({ N: Object.freeze([PROMISE_UNTIL, UNDERTAKING_UNTIL, WRITING_UNTIL]) }),
   inherited: Object.freeze({}),
   buried: Object.freeze({}),
   carried: Object.freeze({}),
