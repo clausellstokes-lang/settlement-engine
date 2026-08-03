@@ -9,6 +9,7 @@ import {
   nativeSemanticResourceKeys,
 } from '../domain/content/customContentSemanticAuthority.js';
 import { cultureInstitutionMultiplier } from '../domain/cultureProfiles.js';
+import { isArcaneInstitution } from '../domain/arcaneInstitutionIdentity.js';
 
 const getPriorityModifiers = (tier, goodsToggles = {}) => {
   const tierGoods = GOODS_MODIFIERS_BY_TIER[tier] || {};
@@ -285,6 +286,22 @@ export const getBaseChance = (
   // tier, world law, route, resources, and explicit toggles still decide what
   // is possible. The helper clamps even stacked matches to a narrow band.
   chance *= cultureInstitutionMultiplier(config.culture, category, name);
+
+  // ── MG-3h / L11 — THE DIRECT WORLD-FACT GATE ─────────────────────────────
+  // Every magic suppression above is INDIRECT: it rides `config.priorityMagic`, which
+  // resolveConfig zeroes when magic does not exist (resolveConfig.js:79). That holds only
+  // for a RESOLVED config. A caller handing this function the RAW config keeps the dial's
+  // 50 default, and an arcane institution then survives a dead-magic world at full
+  // probability — the leak the register recorded. `magicExists:false` is a hard world
+  // fact, so it gates directly and last, after every multiplier.
+  //
+  // Arcane-ness is read from the canonical detector (R-BLD-5): the catalog's authored tag
+  // where a catalog identity exists, magicFilter's keyword vocabulary as the fallback.
+  // On the resolved path this line changes NOTHING — the dial is already 0 there and the
+  // chance is already 0 — which is why no same-seed generation golden moves.
+  if (config.magicExists === false && isArcaneInstitution(name, category)) {
+    return 0;
+  }
 
   return Math.min(Math.max(chance, 0), 1);
 };

@@ -269,7 +269,99 @@ its ceiling, L3 is those two lines plus the withheld integration pins** (a munda
 realm's deployment record mints magicSupport 0; its magical and axis-less twins are
 byte-identical), which ran green before being withheld.
 
-#### ⛔ MG-3h L10–L12 — RECORDED STOP + PROPOSED DESIGN (2026-08-03, Fable; not a bug to re-find)
+#### ✅ MG-3h L10–L12 — CLOSED 2026-08-03 under CHAIR RULING R-BLD-5
+
+⚠️ **The STOP below is SUPERSEDED — kept for the reasoning, not for its verdict.** The
+chair ruled R-BLD-5 and the closure landed; read this block first.
+
+**THE RULING.** *The CATALOG'S AUTHORED arcane TAG is the canonical detector (the W-K2
+incident's recorded cure — name-regexes misclassified cobblers' guilds). The four
+classifiers consult the catalog tag wherever a catalog identity exists; name-patterns
+remain ONLY as fallback for non-catalog entities and must apply worldLaw's
+NEGATED_MAGIC_PATTERNS.*
+
+**WHY THE RULING DISSOLVES THE STOP.** The stop was correct about its own design: an
+opt-in options bag threading each settlement's `magicLedger` into `factionArchetype()`
+would need a 10+ site consumer census, and most of those sites hold a faction row with no
+settlement in scope — the N−1 sweep. R-BLD-5 removes the need entirely by changing what
+the question is. Arcane-ness becomes a property of the ENTITY (what the author said it is),
+not of the WORLD, so **no signature changes and no world law is threaded anywhere**. Every
+one of the 10+ consumers is correct by inheritance.
+
+**WHAT LANDED.**
+
+- `src/domain/magicAssertionText.js` (new) — `MAGIC_ASSERTION_PATTERN`,
+  `NEGATED_MAGIC_PATTERNS`, `stripNegatedMagic`, `textAssertsFunctionalMagic`, lifted
+  verbatim out of `generationContext.js`, which now re-exports them. The world law and the
+  detector cannot drift into two readings of the same sentence. 39 world-law + dead-magic
+  tests green across the move.
+- `src/domain/arcaneIdentity.js` (new) — THE LAW plus the FACTION catalog index over
+  `FACTION_DESCRIPTORS` ∪ `FACTION_DESCRIPTORS_EXTRA`. Exact-match then containment, so the
+  dedup pass's adjectival prefixes ("The Greater Tower Alliance") keep their authored tag.
+- `src/domain/arcaneInstitutionIdentity.js` (new) — the INSTITUTION adapter over
+  `institutionalCatalog`'s authored `tags`. Split from the law deliberately: the 2,500-line
+  catalog must not be re-parented into the faction closure that ~30 pulse modules import.
+  Two adapters, one law.
+- The four classifiers adopt it: `factionArchetypes` (arcane slot keeps its ordering,
+  delegates the decision), `power/factionCategories` (magic bucket likewise),
+  `institutionProbability` (a DIRECT `magicExists === false` gate, last, after every
+  multiplier), `customContent` (catalog tag before its own pattern, plus the registered
+  L12 fix — the magic-level hint now reads `magicLedger` and gains an honest magic-off arm).
+- `src/data/powerData.js` gains `FACTION_DESCRIPTORS_EXTRA`, moved from
+  `lib/instantWorld/factionDedup.js` (which re-exports it). The pool is unchanged and still
+  never merged into `FACTION_DESCRIPTORS` — only its address moved, so the detector can
+  read the authored tag of "The Tower Union" instead of guessing.
+
+**THE VOCABULARIES WERE NOT UNIFIED, DELIBERATELY.** Each classifier keeps its own token
+list, split into certain/ambiguous but unchanged in membership; what is shared is the
+PROCEDURE. Merging the four vocabularies would silently reclassify names on surfaces this
+ruling never named — a live same-seed change dressed as a refactor. Residual recorded here,
+not deferred silently.
+
+**DISCLOSED BEHAVIOUR CHANGES (all authorised by R-BLD-5; each is the fix).**
+1. An ambiguous token alone no longer classifies a NON-CATALOG faction arcane. "The Tower
+   Cobblers' Guild" was `arcane`, is now `merchant`. Measured at base 0150bd01.
+2. A catalog faction filed under `magic` now classifies arcane even with no token in its
+   name. "The Enlightened" was `other`, is now `arcane` — the false-negative half of L10,
+   which the register never noticed.
+3. `customContent` emits a new `environment_inert` contributor for an arcane institution in
+   a magic-off world, and a distinct none-band line. The legacy band vocabulary now folds,
+   so a save carrying `magicLevel:'moderate'` reaches the right arm for the first time.
+4. `institutionProbability`'s new gate is a NO-OP on the resolved path (resolveConfig
+   already zeroes the dial at :79) — pinned, so no same-seed generation golden moves.
+
+**⚠️ WHAT THE CENSUS FOUND — 8 MORE SITES, RECORDED NOT CONVERTED.**
+`tests/lint/arcaneClassifierCensus.walker.test.js` is the habitat guard: it fires on any
+alternation MIXING an arcane token with an ambiguous one. Run across `src/` it turned up
+**eight sites in seven files the leak register never saw**. Four are TRUE MEMBERS of the
+L10 class — `districtProfile.js:112`, `npcProfile.js:333` and `:374` (the same table forked
+twice in one file), `stressorDynamics.js:53` (whose arcane row is *entirely* ambiguous
+tokens, so every match it makes is a guess), `tierOutcomeApply.js:143`. Three are
+contextually scoped and not the class (`factionRoles.js:57`, `isolationGenerator.js:97`,
+`contradictions.js:222` — each runs only after an entity is already classified arcane).
+They are FROZEN in the walker's `KNOWN_UNCONVERTED` baseline, shrink-only, each with its
+disposition. **Not converted because each decides live generated output** (district
+categories, NPC domains, stressor subsystems, ruin fates) and R-BLD-5 names four
+classifiers, not twelve. Converting them is a disclosed same-seed wave of its own — chair
+to schedule. Also allowlisted with a stated reason: `lib/entities.js`'s
+`INSTITUTION_KEYWORD_TAGS`, a tag backfill that is already W-K2-correct (unambiguous tokens
+only; it files tower/academy/college under SCHOLARLY).
+
+**ALSO DELIBERATELY NOT FOLDED:** `magicLedger.ARCANE_INSTITUTION_PATTERN`. It answers a
+different question — how much arcane infrastructure stands in a roster — has one home
+already, and converting it moves magicProfile/capacityModel output.
+
+**RECEIPTS.** 39 pins in `tests/domain/arcaneIdentity.test.js`; 5 pins in the census
+walker. Guard-the-guard: five mutants, each reverting ONE closure, run individually —
+faction detector un-gated **6 red**, 'Tower' back in the certain tier **1 red**, L11 gate
+dropped **1 red**, L12 raw `magicLevel` restored **4 red**, L12 catalog consult dropped
+**1 red**. The last of those started VACUOUS and was rebuilt: `Bardic college` (authored
+`tags:['education']`) is the only catalog name in the whole file that matches this surface's
+ambiguous pattern yet is authored mundane, so it is the only pin that can prove the consult.
+
+---
+
+#### ⛔ MG-3h L10–L12 — the SUPERSEDED stop (2026-08-03, Fable; kept for its reasoning)
 
 L1 and L4–L9 are closed (L2 is NOT — see the corrected MG-3b block above; it is blocked
 with L3 on the same warDeployment line). **L10–L12 are NOT attempted**, and the reason is a substrate fact the

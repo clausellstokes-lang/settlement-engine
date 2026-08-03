@@ -25,28 +25,17 @@ import {
 import {
   isGeneratorOwnedEntity,
 } from '../domain/generationOwnership.js';
+// MG-3h: the assertion vocabulary and its denial clauses moved to a domain leaf so the
+// arcane-identity detector reads them too. Re-exported below — the world law's answers
+// are unchanged; only the address of the patterns moved.
+import {
+  textAssertsFunctionalMagic,
+} from '../domain/magicAssertionText.js';
+
+export { textAssertsFunctionalMagic };
 
 const MAGIC_ROLE_PATTERN =
   /\b(?:archmag(?:e|ister)|artificer|druid|enchanter|hedge witch|mage|magister|sorcerer|warlock|witch|wizard)\b/i;
-
-const MAGIC_ASSERTION_PATTERN =
-  /\b(?:arcane|artificer|cantrips?|curses?|druid|enchant(?:ed|ing|ment)?|golems?|mage|magic|magical|necromanc(?:er|y|tic)|planar|runes?|scry(?:ing)?|sorcerer|spells?|teleport(?:ation)?|undead|warlock|witch|wizard)\b/i;
-
-/**
- * Explicit denials of functional magic. These are clause-shaped instead of
- * deleting broad words such as "no" or "not": "no magic in it" is benign,
- * while "no ward stops the wizard" still retains its affirmative wizard claim.
- * The final certification receipt uses this same predicate as the producers.
- */
-const NEGATED_MAGIC_PATTERNS = Object.freeze([
-  /\bnon[- ]magical\b/gi,
-  /\bno\s+(?:actual\s+|real\s+|functional\s+)?magic(?:al)?(?:\s+(?:ability|compound|effect|ingredient|power|properties|quality|value)s?)?(?:\s+(?:in|to|within)\s+(?:it|them|this|the\s+[a-z'-]+))?\b/gi,
-  /\bnothing\s+magical(?:\s+(?:here|about\s+(?:it|this)))?\b/gi,
-  /\brather than (?:any\s+)?(?:actual\s+|real\s+|functional\s+)?magic\b/gi,
-  /\bwhere the alchemist deals in magical compounds? and acid, this trade does not\b/gi,
-  /\b(?:mere|only|purely)\s+stage magic\b/gi,
-  /\bstage magic\b/gi,
-]);
 
 const MAGIC_HISTORY_TYPES = new Set([
   'magical',
@@ -112,14 +101,6 @@ function carriesExplicitMagicMetadata(entity, category = '') {
       || ARCANE_INST_TAGS.includes(tag)
     ))
   );
-}
-
-export function textAssertsFunctionalMagic(value) {
-  let text = String(value || '');
-  for (const pattern of NEGATED_MAGIC_PATTERNS) {
-    text = text.replace(pattern, '');
-  }
-  return MAGIC_ASSERTION_PATTERN.test(text);
 }
 
 export function textAssertsMaritimeCapability(value) {

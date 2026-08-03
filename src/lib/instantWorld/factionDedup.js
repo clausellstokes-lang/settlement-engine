@@ -23,7 +23,7 @@
  * that regenerates with everything else at the ONE REGEN).
  */
 
-import { FACTION_DESCRIPTORS } from '../../data/powerData.js';
+import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA } from '../../data/powerData.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
 import { compareCodepoint } from '../../domain/deterministicSort.js';
 
@@ -40,26 +40,18 @@ import { compareCodepoint } from '../../domain/deterministicSort.js';
 //      STRUCTURALLY IMPOSSIBLE — proved by the banned-stack guard over the whole space.
 //   3. A numeric disambiguator only if even that is exhausted (never, for any realm).
 //
-// The widened pool is DEDUP-ONLY and lives HERE, never in powerData.FACTION_DESCRIPTORS:
+// The widened pool is DEDUP-ONLY and is never merged into powerData.FACTION_DESCRIPTORS:
 // generateFactions draws per-settlement names from that shared table through a draw-count-
 // VARIABLE retry loop, so widening it would perturb the per-settlement rng stream and
 // cascade the generator golden. This pass is rng-free and runs only on the composed
 // bundle, so these extras touch nothing in per-settlement generation.
 //
-// Each extra contains its OWN category keyword (or, for 'other'/crafts, no other
-// category's keyword) so inferFactionCategory(name) stays in {thatCategory, 'other'} —
-// a rename never mis-assigns a faction to a WRONG specific category (guarded by a test).
-export const FACTION_DESCRIPTORS_EXTRA = Object.freeze({
-  economy: ["The Merchants' Consortium", 'The Trade Syndicate', 'The Market Guild', 'The Ledger Houses', 'The Commerce League', "The Factors' Union"],
-  government: ['The Civic Assembly', 'The Municipal Council', "The Magistrates' Court", 'The Chancery Bench', "The Aldermen's Board", "The Governors' Seat"],
-  military: ['The Guard Union', 'The Garrison Order', "The Knights' Charter", "The Soldiers' League", "The Watchmen's Company", 'The Mercenary Compact'],
-  religious: ['The Temple Union', 'The Congregation League', 'The Ecclesiastical Council', 'The Faithful Order', 'The Devout League', 'The Clergy Chapter'],
-  magic: ["The Mages' Conclave", 'The Arcane Order', "The Wizards' League", 'The Tower Union', "The Alchemists' Circle", "The Sorcerers' Compact"],
-  criminal: ["The Thieves' Union", 'The Shadow League', 'The Underworld Compact', "The Smugglers' Ring", 'The Cartel', "The Assassins' Circle"],
-  crafts: ["The Craftsmen's Union", "The Artisans' League", "The Makers' Compact", 'The Guild of Artificers', 'The Craft Consortium', "The Journeymen's Circle"],
-  noble: ['The Noble Houses', 'The Landed Gentry', 'The Manor Bloc', 'The Aristocratic Circle', 'The Feudal Order', 'The Heritage Houses'],
-  other: ['The Independent Circle', 'The Free League', 'The Common Union', 'The Neutral Bloc', 'The Popular Front', 'The Unaligned Bloc'],
-});
+// MG-3h moved the CONSTANT to src/data/powerData.js (beside the pool it widens) and
+// re-exports it here for every existing consumer. The reason is single-source: the
+// authored category key IS the arcane tag, and domain/arcaneIdentity.js — the canonical
+// detector under chair ruling R-BLD-5 — must read the same authored table rather than
+// re-guessing "The Tower Union" from a name regex. Nothing about the pool changed.
+export { FACTION_DESCRIPTORS_EXTRA } from '../../data/powerData.js';
 
 // Collective/organisational nouns — the tokens a faction name ends on. Two of these in
 // the ADDED disambiguation is the clunk the amendment forbids; a MODIFIER is never one.
