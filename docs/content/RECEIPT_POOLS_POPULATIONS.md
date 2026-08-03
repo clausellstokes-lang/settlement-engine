@@ -193,6 +193,7 @@ AUDIENCE: public
 ### bust (POP-1) — endings token, chronicle close — significance: notable
 SLOTS: {settlement}, {counterpart}, {band}, {good}
 AUDIENCE: public
+ALSO POOLED: `RECEIPT_POOLS_LEGACY.md` §2 carries a pool also named `bust` — the live `UPSWING_NEWS` trade-collapse SUMMARY, a different id space from this POP-1 endings token. A NAME COLLISION, not a co-owned kind [J-LEG-8]
 1. The promise of {counterpart} did not hold, and the road emptied faster than it had filled.
 2. By spring {settlement} spoke of {counterpart} the way it speaks of a bad harvest.
 3. {counterpart} keeps the houses that were raised for the ones who did not stay.
@@ -243,6 +244,7 @@ AUDIENCE: dm-only
 ### commons_petition (POP-2) — Herald, commons desk (BUILT kind, pre-existing registration) — significance: routine
 SLOTS: {settlement}, {faction}, {reason}
 AUDIENCE: public
+ALSO POOLED: the R1 subject-phrase pool for this kind lives in `RECEIPT_POOLS_LEGACY.md` §3d (`whatPhrase()`) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. The commons of {settlement} petitioned their seat over {reason}.
 2. They came to the hall of {settlement} with a paper, and stood until it was taken.
 3. A petition out of {settlement} was entered against {faction}, naming {reason}.
@@ -256,6 +258,7 @@ AUDIENCE: public
 ### commons_gathering (POP-2) — Herald, commons desk (BUILT kind, pre-existing registration) — significance: notable
 SLOTS: {settlement}, {faction}, {reason}
 AUDIENCE: public
+ALSO POOLED: the R1 subject-phrase pool for this kind lives in `RECEIPT_POOLS_LEGACY.md` §3d (`whatPhrase()`) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. The commons of {settlement} gathered in the square over {reason}.
 2. The market of {settlement} did not open; the square was full and the stalls were not.
 3. {faction} shuttered its hall in {settlement} while the square filled.
@@ -267,6 +270,7 @@ AUDIENCE: public
 ### commons_riot (POP-2) — Herald, commons desk (BUILT kind, pre-existing registration) — significance: major
 SLOTS: {settlement}, {faction}, {reason}
 AUDIENCE: public
+ALSO POOLED: the R1 subject-phrase pool for this kind lives in `RECEIPT_POOLS_LEGACY.md` §3d (`whatPhrase()`) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. The streets of {settlement} rose over {reason}.
 2. They took the gates off the granary of {settlement} and carried little of it away.
 3. {faction}'s writ did not run in {settlement} for a night.
@@ -1013,6 +1017,19 @@ variant and must red.
 
 *(Bulleted deliberately: a numbered list here would parse as a variant pool.)*
 
+- **⚠️ FOUR KINDS HERE ARE ALSO POOLED IN `RECEIPT_POOLS_LEGACY.md`, AND THAT IS BY
+  DESIGN (J-LEG-8, 2026-08-03).** A cross-annex uniqueness scan flagged `bust`,
+  `commons_petition`, `commons_gathering` and `commons_riot` as co-owned kind ids. They
+  are not. `commons_petition` / `commons_gathering` / `commons_riot` are BUILT kinds with
+  a pre-existing registration, and the legacy annex pools their **R1 subject phrase**
+  (`whatPhrase()` — a lowercase noun phrase with no terminal stop) while this file pools
+  their **R2 Herald receipt sentence**. Both render, on one entry, in different fields;
+  merging them would put a finite clause inside *"Travellers bring word of …"*. `bust` is
+  not even one kind — this file's `bust` is the POP-1 **endings token** for a migration
+  rush that failed; the legacy annex's `bust` is the live `UPSWING_NEWS` trade-collapse
+  summary. A name collision across two id spaces. Each of the four carries an
+  `ALSO POOLED:` line naming its sibling. **Do not merge these four**, and do not
+  re-flag them: the ruling is recorded, not a bug to re-find.
 - **Registration.** Every kind above that the volume marks MINTED pays the full §1c
   registration cost in its wave's commit — WHAT_PHRASES (`settlementRumors.js`),
   EXPECTED_VOICE (`tests/domain/impactKindWalkers.test.js`) and `heraldRouting.js` —

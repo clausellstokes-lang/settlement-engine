@@ -969,6 +969,7 @@ AUDIENCE: public
 ### faction_government_challenge (INT-8, upgrade of a lit kind) — Herald, the hall — significance: notable
 SLOTS: {settlement}, {faction}, {npc}
 AUDIENCE: public
+ALSO POOLED: the R1 subject-phrase pool for this kind lives in `RECEIPT_POOLS_LEGACY.md` §3d (`whatPhrase()`) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. {faction} presses a challenge to the government of {settlement}. *(existing verb table, applied voice)*
 2. {faction} has stopped petitioning the seat of {settlement} and started counting against it.
 3. The challenge was entered in the hall of {settlement} in proper form, which is how {faction} does things.
@@ -979,6 +980,7 @@ AUDIENCE: public
 ### faction_institution_suppression (INT-8, upgrade of a lit kind) — Herald, the hall — significance: notable
 SLOTS: {settlement}, {faction}, {npc}
 AUDIENCE: public
+ALSO POOLED: the R1 subject-phrase pool for this kind lives in `RECEIPT_POOLS_LEGACY.md` §4e (`whatPhrase()`) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. {faction} moves to suppress an institution of {settlement}. *(existing verb table, applied voice)*
 2. The doors of the house {faction} objects to are shut in {settlement}, and the keys are with the seat.
 3. {faction} has decided {settlement} would be better with fewer voices in it.
@@ -989,6 +991,7 @@ AUDIENCE: public
 ### faction_institution_capture (INT-8, upgrade of a lit kind) — Herald, the hall — significance: notable
 SLOTS: {settlement}, {faction}, {house}
 AUDIENCE: public
+ALSO POOLED: the R1 subject-phrase pool for this kind lives in `RECEIPT_POOLS_LEGACY.md` §4e (`whatPhrase()`) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. {faction} moves to capture an institution of {settlement}. *(existing verb table, applied voice)*
 2. The house stands in {settlement} where it stood; the hands on it are {faction}'s now.
 3. {faction} did not close the institution of {settlement}. {faction} kept it and changed the locks.
@@ -999,6 +1002,7 @@ AUDIENCE: public
 ### faction_service_bolster (INT-8, upgrade of a lit kind) — Herald, the street — significance: routine
 SLOTS: {settlement}, {faction}, {good}
 AUDIENCE: public
+ALSO POOLED: the R1 subject-phrase pool for this kind lives in `RECEIPT_POOLS_LEGACY.md` §4e (`whatPhrase()`) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. {faction} bolsters its services in {settlement}. *(existing verb table, applied voice)*
 2. {faction} has been giving out {good} in {settlement}, and letting the town see who is giving it.
 3. The wells of {settlement} were mended by {faction}, and the mending was mentioned.
@@ -1012,6 +1016,7 @@ AUDIENCE: public
 ### faction_law_preference_push (INT-8, upgrade of a lit kind) — Herald, the hall — significance: routine
 SLOTS: {settlement}, {faction}, {npc}
 AUDIENCE: public
+ALSO POOLED: the R1 subject-phrase pool for this kind lives in `RECEIPT_POOLS_LEGACY.md` §4e (`whatPhrase()`) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. {faction} pushes its preferred laws in {settlement}. *(existing verb table, applied voice)*
 2. The statutes of {settlement} are being read again, and {faction} is holding the pen.
 3. {faction} wants {settlement} governed the way {faction} would govern it, and has begun with the small clauses.
@@ -1025,6 +1030,7 @@ AUDIENCE: public
 ### faction_exhaustion (INT-8, upgrade of a lit kind) — Herald, the hall — significance: routine
 SLOTS: {settlement}, {faction}, {band}
 AUDIENCE: public
+ALSO POOLED: the R1 subject-phrase pool for this kind lives in `RECEIPT_POOLS_LEGACY.md` §3d (`whatPhrase()`) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. {faction} exhausts itself in {settlement}. *(existing verb table, applied voice)*
 2. {faction} has spent more in {settlement} this season than it took in, and the hall can tell.
 3. The men of {faction} are tired, and the roll of {settlement} is shorter for it.
@@ -1038,6 +1044,7 @@ AUDIENCE: public
 ### faction_rival_power_contest (INT-8, upgrade of a lit kind) — Herald, the hall — significance: notable
 SLOTS: {settlement}, {faction}, {house}
 AUDIENCE: public
+ALSO POOLED: the R1 subject-phrase pool for this kind lives in `RECEIPT_POOLS_LEGACY.md` §3d (`whatPhrase()`) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. {faction} contests a rival's power in {settlement}. *(existing verb table, applied voice)*
 2. The houses of {settlement} want the same ground, and none of them has taken it.
 3. {faction} has moved against its rival in the hall of {settlement}, and not yet against the seat.
@@ -1051,6 +1058,21 @@ AUDIENCE: public
 
 *(Bulleted deliberately: a numbered list here would parse as a variant pool.)*
 
+- **⚠️ SEVEN INT-8 KINDS ARE ALSO POOLED IN `RECEIPT_POOLS_LEGACY.md`, AND THAT IS BY
+  DESIGN (J-LEG-8, 2026-08-03).** A cross-annex uniqueness scan flagged
+  `faction_exhaustion`, `faction_government_challenge`, `faction_rival_power_contest`,
+  `faction_institution_capture`, `faction_institution_suppression`,
+  `faction_law_preference_push` and `faction_service_bolster` as co-owned kind ids. They
+  are not co-owned pools — they are one kind on TWO AXES, which is exactly what
+  *upgrade of a lit kind* means. This file pools their **R2 Herald receipt sentence**;
+  the legacy annex pools their **R1 subject phrase** (`whatPhrase()` — a lowercase noun
+  phrase, no terminal stop, no slots), and for four of the seven that R1 variant 1 is a
+  MUTILATED computed fallback the legacy annex has logged as its own defect. Both
+  render, on one entry, in different fields. Merging them would put
+  *"{faction} moves to capture an institution of {settlement}."* inside *"Travellers
+  bring word of …"* — a register violation, not a de-duplication. Each of the seven
+  carries an `ALSO POOLED:` line naming its sibling. **Do not merge these seven**, and
+  do not re-flag them: the ruling is recorded, not a bug to re-find.
 - **Registration.** Every kind the volume marks MINTED pays the full registration
   cost in its wave's commit — `WHAT_PHRASES`, `EXPECTED_VOICE`, `heraldRouting` —
   plus the SP-6 floor assertion over its pool, plus the pacing/significance class

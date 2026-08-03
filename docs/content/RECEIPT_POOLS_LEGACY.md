@@ -238,7 +238,7 @@ its parallel `requiredSlots` row throws at the new index.**
 ## §1a — THE COALITION POOLS (`warCoalitionReceipt`)
 
 ### casus_alliance_obligation — R2 receipt sentence — significance: notable — desk: war
-CADENCE: notable → floor 6 · live 5 · +1
+CADENCE: notable → floor 6 · live 5 · +2
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "an alliance compact named as cause for war" [J-LEG-2 deferred axis]
 1. {settlement} is in this war because {counterpart} called and the compact answers for it. `[live, verbatim]` · `requiredSlots: ['settlement','counterpart']`
@@ -247,9 +247,10 @@ ALSO LIVE: whatPhrase subject "an alliance compact named as cause for war" [J-LE
 4. They march for a paper, which is a better reason than most. `[live, verbatim]` · `requiredSlots: []`
 5. This edge against {third_party} exists because an older edge does. `[live, verbatim]` · `requiredSlots: ['third_party']`
 6. The compact was read aloud in council before the muster was called, which is the order the clerks entered it in. `requiredSlots: []`
+7. Not a soul in {settlement} has a quarrel with {third_party}, and the levies went out all the same. `[merged ← WAR WR-6 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['settlement','third_party']`
 
 ### coalition_debt_paid — R2 receipt sentence — significance: notable — desk: trade
-CADENCE: notable → floor 6 · live 5 · +1
+CADENCE: notable → floor 6 · live 5 · +2
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "a coalition debt paid" [J-LEG-2 deferred axis]
 1. They paid what they owed. `[live, verbatim]` · `requiredSlots: []`
@@ -258,9 +259,10 @@ ALSO LIVE: whatPhrase subject "a coalition debt paid" [J-LEG-2 deferred axis]
 4. The payment travelled along {route} and is archived as payment, never forgiveness. `[live, verbatim]` · `requiredSlots: ['route']`
 5. This coalition claim is closed; other causes and obligations remain separate. `[live, verbatim]` · `requiredSlots: []`
 6. The factors on the quay had counted the wagons in before the court finished reading the writ. `requiredSlots: []`
+7. It was paid late and paid whole, with no thanks offered in either direction. `[merged ← WAR WR-6 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
 
 ### coalition_entry_priced — R2 receipt sentence — significance: notable — desk: war
-CADENCE: notable → floor 6 · live 5 · +1
+CADENCE: notable → floor 6 · live 5 · +2
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "an allied court pricing a call to war" [J-LEG-2 deferred axis]
 1. {settlement} counted who might answer for {counterpart}, and then who might answer for those. `[live, verbatim]` · `requiredSlots: ['settlement','counterpart']`
@@ -269,9 +271,10 @@ ALSO LIVE: whatPhrase subject "an allied court pricing a call to war" [J-LEG-2 d
 4. Entering a war is cheap; entering the war behind it is not, and this one prices {band}. `[live, verbatim]` · `requiredSlots: ['band']`
 5. They read the whole web before they read the field, which is why they are still deciding. `[live, verbatim]` · `requiredSlots: []`
 6. Whatever the court settles on, the price it has written down will be quoted back to it the next time it calls. `requiredSlots: []`
+7. The reckoning wanted a wider sheet than the war itself had ever required. `[merged ← WAR WR-6 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
 
 ### coalition_expenditure_read — R2 receipt sentence — significance: notable — desk: trade
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +4
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "an allied court reckoning its wartime cost" [J-LEG-2 deferred axis]
 1. {settlement}'s surviving current-episode evidence reads {band}; no lifetime total is invented. `[live, verbatim]` · `requiredSlots: ['settlement','band']`
@@ -282,9 +285,10 @@ ALSO LIVE: whatPhrase subject "an allied court reckoning its wartime cost" [J-LE
 6. The tally was read at the table, and nobody asked to have it read twice. `requiredSlots: []`
 7. A factor down from the coast asked what the alliance had cost and was given a band, not a figure. `requiredSlots: []`
 8. Taken again at the turn of the season the reckoning reads {band}, and nothing is added that the other books do not already hold. `requiredSlots: ['band']`
+9. Both halls will quote the reckoning at one another, each taking the half that suits it. `[merged ← WAR WR-6 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
 
 ### coalition_stayed — R2 receipt sentence — significance: notable — desk: war
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +4
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "an ally choosing to stay in the field" [J-LEG-2 deferred axis]
 1. They stayed. `[live, verbatim]` · `requiredSlots: []`
@@ -295,9 +299,10 @@ ALSO LIVE: whatPhrase subject "an ally choosing to stay in the field" [J-LEG-2 d
 6. The levies were told at the muster field that they were not going home, and the field took it quietly. `requiredSlots: []`
 7. The road home through {route} stood open the whole season and no column took it. `requiredSlots: ['route']`
 8. By harvest the army was still in the field, which is longer than the council had reckoned for. `requiredSlots: []`
+9. The men were told they were going home, and then they were not, and that telling outlasts the campaign. `[merged ← WAR WR-6 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
 
 ### mirror_obligation_discharged — R2 receipt sentence — significance: notable — desk: events
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +4
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "an alliance obligation discharged" [J-LEG-2 deferred axis]
 1. The obligation is discharged: {settlement} came when called. `[live, verbatim]` · `requiredSlots: ['settlement']`
@@ -308,11 +313,12 @@ ALSO LIVE: whatPhrase subject "an alliance obligation discharged" [J-LEG-2 defer
 6. The clerks of {counterpart} entered the service the week the column came home. `requiredSlots: ['counterpart']`
 7. A compact that has been used once is worth more than a compact that never has. `requiredSlots: []`
 8. The men who answered the call are back at their own harvest, and the entry stands whether or not anyone thanks them. `requiredSlots: []`
+9. The next call on this compact begins from a shorter account than this one did. `[merged ← WAR WR-6 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
 
 ## §1b — THE REFUSAL-COST POOLS (`warRulingReceipt`)
 
 ### refusal_cost_ally_patience — R2 receipt sentence — significance: notable — desk: war
-CADENCE: notable → floor 6 · live 5 · +1
+CADENCE: notable → floor 6 · live 5 · +2
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "an ally tiring of a refused peace" [J-LEG-2 deferred axis]
 1. {counterpart} was refused, and {third_party} read the refusal as a bill it had not agreed to. `[live, verbatim]` · `requiredSlots: ['counterpart','third_party']`
@@ -321,9 +327,10 @@ ALSO LIVE: whatPhrase subject "an ally tiring of a refused peace" [J-LEG-2 defer
 4. They refused peace with somebody else's soldiers in the field. `[live, verbatim]` · `requiredSlots: []`
 5. The alliance held. It is thinner than it was, and both courts know it. `[live, verbatim]` · `requiredSlots: []`
 6. The council of {third_party} has begun reading its compact aloud before it discusses anything else. `requiredSlots: ['third_party']`
+7. The allied captains dined apart that week, and the servants understood it before the clerks did. `[merged ← WAR WR-5 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
 
 ### refusal_cost_legitimacy — R2 receipt sentence — significance: notable — desk: adjudication
-CADENCE: notable → floor 6 · live 5 · +1
+CADENCE: notable → floor 6 · live 5 · +2
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "a ruler paying for a refused peace" [J-LEG-2 deferred axis]
 1. {settlement} refused peace, and the streets priced the refusal within the season. `[live, verbatim]` · `requiredSlots: ['settlement']`
@@ -332,6 +339,7 @@ ALSO LIVE: whatPhrase subject "a ruler paying for a refused peace" [J-LEG-2 defe
 4. The council's confidence in {npc} reads {band}, and the refusal is the reason on every tongue. `[live, verbatim]` · `requiredSlots: ['npc','band']`
 5. Nothing was lost in the field that day. A good deal was lost in the market square. `[live, verbatim]` · `requiredSlots: []`
 6. The refusal was posted at the assize door and read by more people than any decree that year. `requiredSlots: []`
+7. The next levy will be harder to raise than the last, and the reason will not appear on the summons. `[merged ← WAR WR-5 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
 
 ## §1c — THE CASUS-REASON POOL (`warReceipt`)
 
@@ -349,7 +357,7 @@ ALSO LIVE: condition label "Corruption scandal" · condition gloss "Public expos
 ## §1d — THE DISPOSITION POOLS (`dispositionReceipt`, WR-2)
 
 ### disposition_martial_crossed — R2 receipt sentence — significance: notable — desk: war
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +9
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "a martial temper taking hold" [J-LEG-2 deferred axis]
 1. {settlement}'s martial temper now leans {lean}; resolved contests changed the lesson. `[live, verbatim]` · `requiredSlots: ['settlement','lean']`
@@ -360,9 +368,15 @@ ALSO LIVE: whatPhrase subject "a martial temper taking hold" [J-LEG-2 deferred a
 6. The armoury is opened for inspection more often than the granary is, which was not always the order of things. `requiredSlots: []`
 7. Travellers on the {route} report the watch turned out in daylight, which is new. `requiredSlots: ['route']`
 8. A generation of settled quarrels taught this court what force is for, and the lesson has become the shortest argument in the room. `requiredSlots: []`
+9. The martial temper of {settlement} stands {band} now; the drill ground is busier than the market. `[merged ← WAR WR-2 v1 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['settlement','band']`
+10. The reeve's muster rolls are read aloud on feast days, which tells you where the town keeps its pride. `[merged ← WAR WR-2 v2 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+11. Boys who would have gone to the quays go to the watchfires instead. `[merged ← WAR WR-2 v3 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+12. It is a {band} appetite for war, and the council has stopped arguing about it. `[merged ← WAR WR-2 v4 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['band']`
+13. They have learned to answer questions with soldiers, and the answers keep working. `[merged ← WAR WR-2 v5 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+14. The armoury's accounts have overtaken the almshouse's, and nobody in {settlement} finds it worth remarking. `[merged ← WAR WR-2 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['settlement']`
 
 ### disposition_mercantile_crossed — R2 receipt sentence — significance: notable — desk: trade
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +9
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "a mercantile temper taking hold" [J-LEG-2 deferred axis]
 1. {settlement}'s mercantile temper now leans {lean}; resolved ventures changed the lesson. `[live, verbatim]` · `requiredSlots: ['settlement','lean']`
@@ -373,9 +387,15 @@ ALSO LIVE: whatPhrase subject "a mercantile temper taking hold" [J-LEG-2 deferre
 6. The staple is swept before the assize hall is, and the factors of {house} notice such things. `requiredSlots: ['house']`
 7. Merchants say a venture gets a faster hearing here than a grievance does. `requiredSlots: []`
 8. The ledgers of a generation stand behind the habit, and the habit now argues for itself. `requiredSlots: []`
+9. {settlement}'s mercantile temper stands {band}; the council counts in cargoes. `[merged ← WAR WR-2 v1 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['settlement','band']`
+10. The quays set the price of everything now, including opinions. `[merged ← WAR WR-2 v2 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+11. A generation of good ledgers has made the merchants louder than the captains. `[merged ← WAR WR-2 v3 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+12. Where the town once asked whether a thing was right, it asks what it costs. `[merged ← WAR WR-2 v4 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+13. The staple in {good} is the politics; the rest is ceremony. `[merged ← WAR WR-2 v5 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['good']`
+14. A place on the council of {settlement} is got with a warehouse now rather than a grandfather. `[merged ← WAR WR-2 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['settlement']`
 
 ### disposition_diplomatic_crossed — R2 receipt sentence — significance: notable — desk: events
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +9
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "a taste for parley taking hold" [J-LEG-2 deferred axis]
 1. {settlement}'s diplomatic temper now leans {lean}; kept and broken pacts changed the lesson. `[live, verbatim]` · `requiredSlots: ['settlement','lean']`
@@ -386,9 +406,15 @@ ALSO LIVE: whatPhrase subject "a taste for parley taking hold" [J-LEG-2 deferred
 6. The council keeps a room set aside for legates, and it has been in use. `requiredSlots: []`
 7. Carters off the {route} say this town will talk before it bars a gate. `requiredSlots: ['route']`
 8. A generation of parleys sits behind the habit, and the habit is now the shorter argument. `requiredSlots: []`
+9. {settlement} carries a {band} appetite for parley; the hall keeps more chairs than it needs. `[merged ← WAR WR-2 v1 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['settlement','band']`
+10. Every quarrel goes to a table first, and most of them stay there. `[merged ← WAR WR-2 v2 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+11. The seat has learned that a legate is cheaper than a levy. `[merged ← WAR WR-2 v3 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+12. They talk before they march, which their neighbours read as either wisdom or weakness, according to taste. `[merged ← WAR WR-2 v4 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+13. The town's best rooms are kept for guests it does not like. `[merged ← WAR WR-2 v5 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+14. It has kept {settlement} out of wars it might have won, and the hall has stopped apologising for it. `[merged ← WAR WR-2 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['settlement']`
 
 ### disposition_insular_crossed — R2 receipt sentence — significance: notable — desk: events
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +9
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "a town turning inward" [J-LEG-2 deferred axis]
 1. {settlement}'s inward temper now leans {lean}; its outward history changed the lesson. `[live, verbatim]` · `requiredSlots: ['settlement','lean']`
@@ -399,9 +425,15 @@ ALSO LIVE: whatPhrase subject "a town turning inward" [J-LEG-2 deferred axis]
 6. The gate is barred at the hour it has always been barred, and the hour has been getting earlier. `requiredSlots: []`
 7. Factors out of {counterpart} say the town hears them politely and buys nothing. `requiredSlots: ['counterpart']`
 8. What the outer roads brought in was weighed against what they carried off, and the weighing settled the temper. `requiredSlots: []`
+9. {settlement} has turned {band} inward; the gates close earlier each year. `[merged ← WAR WR-2 v1 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['settlement','band']`
+10. The factors of {house} are lodged outside the walls now, courteously and firmly. `[merged ← WAR WR-2 v2 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['house']`
+11. The council's answer to every road is that the road can wait. `[merged ← WAR WR-2 v3 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+12. They want nothing from anyone, which is a policy until it is a weakness. `[merged ← WAR WR-2 v4 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+13. The tolls are high and the welcome is thin, and the town calls both prudence. `[merged ← WAR WR-2 v5 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+14. The inn by the gate keeps fewer beds each year and calls the shrinkage demand. `[merged ← WAR WR-2 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
 
 ### disposition_reversal — R2 receipt sentence — significance: notable — desk: events
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +9
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "a town changing its temper" [J-LEG-2 deferred axis]
 1. {settlement}'s {aspect} temper crossed its old balance and now leans {lean}. `[live, verbatim]` · `requiredSlots: ['settlement','aspect','lean']`
@@ -412,9 +444,15 @@ ALSO LIVE: whatPhrase subject "a town changing its temper" [J-LEG-2 deferred axi
 6. The clerks recopied the standing orders on {practice}, and the new copy does not read like the old one. `requiredSlots: ['practice']`
 7. Men who argued one way at the last council argued the other way at this one, and said why. `requiredSlots: []`
 8. A turned temper takes a season to be believed and a generation to be forgotten. `requiredSlots: []`
+9. What the victories taught {settlement}, the losses have untaught. `[merged ← WAR WR-2 v1 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['settlement']`
+10. The same council that voted the levies votes the granaries now. `[merged ← WAR WR-2 v2 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+11. A temper is not a ratchet: {settlement}'s appetite has turned back toward where it began, and reads {band}. `[merged ← WAR WR-2 v3 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['settlement','band']`
+12. Men who argued for the war argue for the road, and are not embarrassed. `[merged ← WAR WR-2 v4 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+13. The town changed its mind slowly, the way towns do, and over the same ledgers. `[merged ← WAR WR-2 v5 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+14. Neighbours who learned what to expect of {settlement} will be a season late unlearning it. `[merged ← WAR WR-2 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['settlement']`
 
 ### deity_war_pressure — R2 receipt sentence — significance: notable — desk: faith
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +9
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "a warlike teaching at the temple" [J-LEG-2 deferred axis]
 LAW ONE: the rites counsel and the council decides; nothing here says a god acted.
@@ -426,9 +464,15 @@ LAW ONE: the rites counsel and the council decides; nothing here says a god acte
 6. The {temple} blesses the muster and does not bless the waiting, and the council has noticed which is which. `requiredSlots: ['temple']`
 7. It is said in the market that a captain wanting a hearing should ask for it on a feast day. `requiredSlots: []`
 8. The observance keeps a calendar with more days for arms in it than its neighbours' calendars hold. `requiredSlots: []`
+9. The {temple} of {settlement} keeps a war god's calendar, and the bar for a quarrel sits {band} lower for it. `[merged ← WAR WR-2 v1 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['temple','settlement','band']`
+10. The chantry blesses the muster before the harvest, and has for a generation. `[merged ← WAR WR-2 v2 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+11. Priests who speak of restraint find thin congregations here. `[merged ← WAR WR-2 v3 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+12. It is not that the altar orders wars; it is that it has never argued against one. `[merged ← WAR WR-2 v4 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+13. A town takes its temper from whatever it prays over. `[merged ← WAR WR-2 v5 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+14. The {temple}'s great feast falls when the roads dry, which is also when columns move. `[merged ← WAR WR-2 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['temple']`
 
 ### deity_peace_pressure — R2 receipt sentence — significance: notable — desk: faith
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +9
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "the harvest rites counselling peace" [J-LEG-2 deferred axis]
 LAW ONE: the rites counsel and the council decides; nothing here says a god acted.
@@ -440,11 +484,17 @@ LAW ONE: the rites counsel and the council decides; nothing here says a god acte
 6. The {temple} keeps a calendar full of sowing days and thin on marching days, and the council keeps the calendar. `requiredSlots: ['temple']`
 7. Travellers say the town will hear a grievance out and then ask what it would cost to wait. `requiredSlots: []`
 8. Where the harvest rites set the year, a muster called at sowing argues against the whole calendar. `requiredSlots: []`
+9. {settlement}'s {temple} keeps the harvest rites, and its court is {band} slower to muster. `[merged ← WAR WR-2 v1 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['settlement','temple','band']`
+10. The pews are full at sowing and the drill ground is empty. `[merged ← WAR WR-2 v2 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+11. The chapter house prices a war in seed {good}, which is a price no captain likes to hear. `[merged ← WAR WR-2 v3 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['good']`
+12. The altar has never forbidden a war; it has merely made one look expensive. `[merged ← WAR WR-2 v4 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+13. Where the tithe is grain, the answer to a grievance is usually another season. `[merged ← WAR WR-2 v5 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+14. Neighbours have learned they can lose an argument here without losing a season, and they bring more arguments for it. `[merged ← WAR WR-2 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
 
 ## §1e — THE LINEAGE POOLS (`lineageReceipt`, WR-3)
 
 ### lineage_edge_recorded — R2 receipt sentence — significance: notable — desk: events
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +4
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "a daughter settlement entered in the books" [J-LEG-2 deferred axis]
 1. The steading at {settlement} stands on its own books now, and remembers whose granary fed it. `[live, verbatim]` · `requiredSlots: ['settlement']`
@@ -455,9 +505,10 @@ ALSO LIVE: whatPhrase subject "a daughter settlement entered in the books" [J-LE
 6. The clerk who made the entry spelled the daughter house's name one way and then the other, and settled on the second. `requiredSlots: []`
 7. It is an ordinary line in an ordinary register, and it will be read aloud in a quarrel a generation from now. `requiredSlots: []`
 8. Carters out of {counterpart} still call it the new steading, which it has not been for some time. `requiredSlots: ['counterpart']`
+9. The founding road still runs between them and is the busiest road either keeps. `[merged ← WAR WR-3 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
 
 ### mirror_kinship_bond — R2 receipt sentence — significance: notable — desk: events
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +4
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "kinship holding two settlements from war" [J-LEG-2 deferred axis]
 1. The same founding that arms a claim binds a peace: {settlement} and {counterpart} read one edge and chose the other sign. `[live, verbatim]` · `requiredSlots: ['settlement','counterpart']`
@@ -468,9 +519,10 @@ ALSO LIVE: whatPhrase subject "kinship holding two settlements from war" [J-LEG-
 6. Both registers open at the same founding entry, and both councils read as far as it and stopped. `requiredSlots: []`
 7. The road between {settlement} and {counterpart} carried grain this season where it might have carried columns. `requiredSlots: ['settlement','counterpart']`
 8. Nobody made a speech about it. The muster was simply not called. `requiredSlots: []`
+9. The two towns keep each other's feast days, which is a compact nobody drafted and nobody signs. `[merged ← WAR WR-3 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
 
 ### lineage_claim_suppressed — R2 receipt sentence — significance: routine — desk: war
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +8
 AUDIENCE: **dm-only** — projected behind includeGroundTruth; a free surface never sees this pool.
 ALSO LIVE: whatPhrase subject "a lineage claim refused by its own wagon books" [J-LEG-2 deferred axis]
 1. You do not sack the satellite you spent a generation provisioning; the claim scores nothing and the chronicle is named against it. `[live, verbatim]` · `requiredSlots: []`
@@ -481,11 +533,16 @@ ALSO LIVE: whatPhrase subject "a lineage claim refused by its own wagon books" [
 6. The clerks found the provisioning entries before the court found its grievance. `requiredSlots: []`
 7. A claim the wagon books contradict is a claim that stays in the drawer. `requiredSlots: []`
 8. Nothing here is denied; it is outweighed by the town's own record of what it sent. `requiredSlots: []`
+9. A generation of wagons out of {settlement} is a long argument, and it is still being made every quarter. `[merged ← WAR WR-3 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['settlement']`
+10. A claim and a supply line may run to the same place; only one of them scores. `[merged ← WAR WR-3 v7 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+11. To press the claim, {settlement} would have to starve the place first, and the ledger has already done that arithmetic. `[merged ← WAR WR-3 v8 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['settlement']`
+12. The drovers who would have to burn that granary have been unloading at it since they were boys. `[merged ← WAR WR-3 v9 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
+13. The clerk who entered the claim entered the season's deliveries, and made no remark on either. `[merged ← WAR WR-3 v10 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: []`
 
 ## §1f — THE HOME-FRONT POOLS (`warCostReceipt`, WR-4)
 
 ### home_front_hands — R2 receipt sentence — significance: notable — desk: events
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +4
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "the muster emptying fields and workshops" [J-LEG-2 deferred axis]
 LAW ONE: names on the roll are OUT OF THE WORKSHOP, never dead.
@@ -497,9 +554,10 @@ LAW ONE: names on the roll are OUT OF THE WORKSHOP, never dead.
 6. The carts go out short-handed and come back late, and have done since the roll was read. `requiredSlots: ['harvestLabor']`
 7. A traveller wanting a smith on this road was sent on to the next valley. `requiredSlots: ['smithMuster']`
 8. {settlement} will feel this muster in its workshops long after the war is a date in a book. `requiredSlots: ['settlement']`
+9. The apprenticeships went unfilled through the war, and the gap will reach the market a generation from now. `[merged ← WAR WR-4 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['smithMuster']`
 
 ### home_front_stores — R2 receipt sentence — significance: notable — desk: events
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +4
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "the granaries running lean during war" [J-LEG-2 deferred axis]
 1. The granaries of {settlement} hold {band}, and there is another season of war in front of them. `[live, verbatim]` · `requiredSlots: ['settlement','band','granary']`
@@ -510,9 +568,10 @@ ALSO LIVE: whatPhrase subject "the granaries running lean during war" [J-LEG-2 d
 6. The reeve carries the granary keys on his own belt now, which he did not last year. `requiredSlots: ['granary']`
 7. There is bread, and there is a queue for it, and the queue is the news. `requiredSlots: ['breadSupply']`
 8. Last year's store is carrying this year's spring, and it reads {band}. `requiredSlots: ['band']`
+9. The bakers have changed the loaf again, and have not been asked to explain it. `[merged ← WAR WR-4 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['breadSupply']`
 
 ### home_front_roads — R2 receipt sentence — significance: notable — desk: trade
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +4
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "the roads going to ruts during war" [J-LEG-2 deferred axis]
 1. {route} has gone to ruts while the levies were away, and the tolls have gone with it. `[live, verbatim]` · `requiredSlots: ['route','tollLoss']`
@@ -523,9 +582,10 @@ ALSO LIVE: whatPhrase subject "the roads going to ruts during war" [J-LEG-2 defe
 6. The road menders were on the roll before the frost, and the frost did what frost does. `requiredSlots: ['causewayNeglect']`
 7. Drovers coming into {settlement} ask which crossing is still good, and the answer keeps changing. `requiredSlots: ['settlement']`
 8. A road left untended for a season is a road every carter has to learn again. `requiredSlots: []`
+9. Each season {route} goes unmended costs more to mend, and the reeve says so at every sitting. `[merged ← WAR WR-4 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['route','causewayNeglect']`
 
 ### home_front_markets — R2 receipt sentence — significance: notable — desk: trade
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +4
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "a wartime market closing" [J-LEG-2 deferred axis]
 1. The factors of {house} no longer come to {settlement}'s staple, and the wharf shows it. `[live, verbatim]` · `requiredSlots: ['house','settlement']`
@@ -536,9 +596,10 @@ ALSO LIVE: whatPhrase subject "a wartime market closing" [J-LEG-2 deferred axis]
 6. The stalls at the {settlement} staple are set out each market day and taken in unsold. `requiredSlots: ['settlement']`
 7. Carters who used to fight for a place on the quay now choose one. `requiredSlots: ['wharfLabor']`
 8. What the tolls brought in last season they do not bring in now, and the difference reads {band}. `requiredSlots: ['band','tollLoss']`
+9. The carriers have learned another road, and a road is only learned the once. `[merged ← WAR WR-4 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['tollLoss']`
 
 ### home_front_institutions — R2 receipt sentence — significance: notable — desk: events
-CADENCE: chronic → floor 8 · live 5 · +3
+CADENCE: chronic → floor 8 · live 5 · +4
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "the courts and temples thinning under war" [J-LEG-2 deferred axis]
 1. The assize at {settlement} sits with a clerk and no justice; the court has been hollowed by the war's bill. `[live, verbatim]` · `requiredSlots: ['settlement','courtOffice']`
@@ -549,6 +610,7 @@ ALSO LIVE: whatPhrase subject "the courts and temples thinning under war" [J-LEG
 6. The {temple} still rings the hours and has stopped keeping the register. `requiredSlots: ['temple']`
 7. Petitions are taken and stacked, and nobody has said they will not be heard. `requiredSlots: []`
 8. A traveller with a suit to bring was told to come back after the war. `requiredSlots: ['courtOffice']`
+9. The remaining clerk keeps the register out of habit, and is owed a year of wages for it. `[merged ← WAR WR-4 v6 — one-kind-one-pool, 2026-08-03]` · `requiredSlots: ['courtOffice']`
 
 ---
 
@@ -594,6 +656,7 @@ CADENCE: notable → floor 6 · live 4 · +2
 AUDIENCE: public
 ALSO LIVE: whatPhrase subject "hard times" · headline pool ×4 · reasons pool ×4 [J-LEG-2]
 SLOT NOTE: {reason} maps to the live `${x.cause}` — a recorded cause clause, never free text.
+ALSO POOLED: `RECEIPT_POOLS_POPULATIONS.md` (POP-1) carries a pool also named `bust` — the POP-1 ENDINGS TOKEN for a migration rush that failed, a different id space from this live `UPSWING_NEWS` trade-collapse summary. A NAME COLLISION, not a co-owned kind [J-LEG-8]
 1. The trade that made {settlement} rich has collapsed because {reason}. The boom curdles into flight and empty stalls. `[live, verbatim]`
 2. The commerce that made {settlement} rich has fallen apart because {reason}. The boom sours into flight and shuttered stalls. `[live, verbatim]`
 3. What made {settlement} rich has come undone because {reason}. The boom curdles into departures and empty market rows. `[live, verbatim]`
@@ -1034,6 +1097,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 
 ### commons_gathering — R1 subject phrase — significance: notable — desk: events
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
+ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_POPULATIONS.md` (POP-2) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. the commons gathered in the square `[live, verbatim]`
 2. a crowd that came without being called
 3. a gathering the clerks have started counting
@@ -1043,6 +1107,7 @@ CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 
 ### commons_petition — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
+ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_POPULATIONS.md` (POP-2) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. a petition raised by the common folk `[live, verbatim]`
 2. a paper carried from door to door
 3. a petition entered for the next sitting
@@ -1054,6 +1119,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 
 ### commons_riot — R1 subject phrase — significance: major — desk: events
 CADENCE: major/rare → floor 4 · live 1 · +3 · AUDIENCE: public
+ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_POPULATIONS.md` (POP-2) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. the streets risen in a riot-band `[live, verbatim]`
 2. a crowd that stopped asking
 3. shutters up on every street off the square
@@ -1101,6 +1167,7 @@ CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 
 ### faction_exhaustion — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
+ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_INTERIOR.md` (INT-8) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. a faction spent and failing `[live, verbatim]`
 2. a hall that used to be full at meetings
 3. dues unpaid and rolls unrenewed
@@ -1112,6 +1179,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 
 ### faction_government_challenge — R1 subject phrase — significance: notable — desk: events
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
+ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_INTERIOR.md` (INT-8) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. a challenge to those in power `[live, verbatim]`
 2. an interest putting its claim to the seat's face
 3. a challenge entered and dated
@@ -1121,6 +1189,7 @@ CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 
 ### faction_rival_power_contest — R1 subject phrase — significance: notable — desk: events
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
+ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_INTERIOR.md` (INT-8) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. a contest between rival powers `[live, verbatim]`
 2. rival houses bidding for the same room
 3. a contest recorded with neither side conceding
@@ -2183,6 +2252,7 @@ LAW ONE: OUT OF THE SEAT — never a resolved fate.
 
 ### faction_institution_capture — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
+ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_INTERIOR.md` (INT-8) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. institution capture `[fallback, live — byte-identity anchor · ⚠️ MUTILATED, DEFECT-2 — this is the de-underscored spelling of the DISTINCT kind institution_capture, which itself renders only "capture"]`
 2. an interest taking a hall for its own
 3. an entry on the roll naming the interest the hall now answers to
@@ -2194,6 +2264,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 
 ### faction_institution_suppression — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
+ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_INTERIOR.md` (INT-8) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. institution suppression `[fallback, live — byte-identity anchor · ⚠️ MUTILATED, DEFECT-2 — this is the de-underscored spelling of the DISTINCT kind institution_suppression, which itself renders only "suppression"]`
 2. an interest closing a hall it could not hold
 3. a suppression entered against the hall under a faction's name
@@ -2205,6 +2276,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 
 ### faction_law_preference_push — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
+ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_INTERIOR.md` (INT-8) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. law preference push `[fallback, live — byte-identity anchor · ⚠️ MUTILATED, DEFECT-2]`
 2. an interest pressing for the law it wants
 3. a preference entered on the council's own record
@@ -2227,6 +2299,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 
 ### faction_service_bolster — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
+ALSO POOLED: the R2 Herald receipt-sentence pool for this kind lives in `RECEIPT_POOLS_INTERIOR.md` (INT-8) — a DIFFERENT AXIS of one kind, not a co-owned pool [J-LEG-8]
 1. service bolster `[fallback, live — byte-identity anchor · ⚠️ MUTILATED, DEFECT-2]`
 2. an interest paying to keep a service standing
 3. a payment entered where a levy would normally stand
@@ -2477,8 +2550,8 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 | | |
 |---|---|
 | Kinds deepened | **200** (every LIVE routed token the census returned below floor) |
-| Variants in the corpus | **1,412** |
-| Variants ADDED by this annex | **1,099** |
+| Variants in the corpus | **1,474** (1,412 authored here + **62 MERGED IN** from `RECEIPT_POOLS_WAR.md` under J-LEG-7, 2026-08-03) |
+| Variants ADDED by this annex | **1,161** (1,099 authored + 62 merged) |
 | Variants reproduced VERBATIM from `src/` | **313** (206 authored live strings + 107 computed fallbacks) |
 | Pools by axis | §1 receipt sentence **24** · §2 news summary **6** · §3 authored subject phrase **63** · §4 fallback subject phrase **107** |
 | Pools by desk | war 47 · trade 53 · events 81 · adjudication 1 · faith 12 · divination 6 |
@@ -2509,6 +2582,17 @@ live-anchor count equals the census's `currentVariants` (the census is not in th
 the executed substitute is the stronger check that each equals the LIVE pool length in
 `src/`, which passed in all 200.
 
+**RE-VERIFIED AFTER THE J-LEG-7 MERGE (2026-08-03).** The digit-scan line above now
+reads **1,474**, not 1,412. Re-executed over the merged file: 200 pools · 1,474
+variants · `live N · +M` equals the actual pool length in **all 200** (the 23 merged
+pools' `+M` terms were restated, and only those) · **zero duplicate lines within any
+pool** · variant numbering contiguous from one in all 200 · zero literal numerals in
+rendered prose · zero slot outside the declared set. The merge was **append-only for
+prose**: the diff against the pre-merge file carries no deletion of any variant line
+and no renumbering, so every seeded draw that already landed on an index still lands
+there and THE PROMISE is undisturbed. The only deleted lines are the 23 restated
+`CADENCE:` headers.
+
 ---
 
 # THE RULINGS REGISTER (chair rulings, all VETOABLE)
@@ -2521,6 +2605,8 @@ the executed substitute is the stronger check that each equals the LIVE pool len
 | **J-LEG-4** | Variant 1 stays the FALLBACK string for the 107 unvoiced kinds; the twelve MUTILATED fallbacks are a separate, owner-gated repair. | The byte-identity clause is absolute and does not distinguish authored strings from computed ones. But retiring *"detat"* is a second prose shift with its own golden and must not ride in on a pool-widening commit. |
 | **J-LEG-5** | The R1 subject-phrase pools take NO SLOTS. | The live frame supplies the settlement name and the address chain around the phrase — the NEWS ADDRESS LAW is satisfied by the sentence the phrase lands in, not by the phrase. A slot inside the phrase would double the name. |
 | **J-LEG-6** | `requiredSlots` parity is a WIRING PRECONDITION, and a walker must assert it. | Six registries index a parallel array by template index. A pool grown without its row throws at the new index — a defect this annex's own additions would cause if wired carelessly. Structural prevention, not vigilance. |
+| **J-LEG-7** | **ONE KIND, ONE POOL — and where the kind is LIVE, THIS ANNEX OWNS IT.** The 23 kinds that carried a same-register (R2) pool in BOTH this file and `RECEIPT_POOLS_WAR.md` are merged here; the war annex's pool body is replaced by a one-line pointer. | Two annexes claiming one selector is not a prose defect, it is an ownership defect: at wiring the two lists either merge into one draw set — and the duplicated members become literal repeats inside one pool — or one annex silently loses. LIVE beats DARK: these kinds already mint and route today, their live strings are the byte-identity anchors, and those anchors live here. The merge is APPEND-ONLY (variant 1..N untouched, nothing renumbered), so THE PROMISE holds. **62 variants moved; 80 exact duplicates dropped.** |
+| **J-LEG-8** | **A SECOND AXIS IS NOT CO-OWNERSHIP.** Where the other annex's pool is a DIFFERENT AXIS of the same kind — an R2 Herald receipt against this file's R1 subject phrase or R3 news summary — both pools STAY, one per axis, and each carries an `ALSO POOLED:` cross-reference. | This is J-LEG-2's own doctrine read the other way round: a legacy kind does not have "a string", it has axes, and both render on one entry in different fields. Merging a finite-clause receipt into an R1 pool would put *"{faction} moves to capture an institution of {settlement}."* inside *"Travellers bring word of …"* — a register violation, not a de-duplication. **Eleven kinds** are disposed this way (four against POPULATIONS, seven against INTERIOR); they are the same by-design class as the CAUSAL §2 clause forms. One of the eleven — `bust` — is not even one kind: this file's `bust` is the live `UPSWING_NEWS` trade-collapse summary, POPULATIONS' `bust` is an ENDINGS TOKEN of the POP-1 mix. A name collision across two id spaces, disambiguated below, never merged. |
 
 **THREE AMENDMENT REQUESTS TO THE SPINE (unassumed — this annex does not edit
 `DESIGN_FP_SPINE.md`).** J-LEG-1 NARROWS SP-6's floor scope (names excluded);
@@ -2529,6 +2615,74 @@ the promoter; J-LEG-4 CLARIFIES that the byte-identity clause binds computed
 fallbacks as well as authored strings. All three are chair rulings taken under
 delegated authority and should be rowed into `docs/FABLE_VALIDATION_QUEUE.md` by
 the coordinating chair for re-validation. **They are recorded, not assumed.**
+
+**J-LEG-7 AND J-LEG-8 ARE CROSS-ANNEX RULINGS AND EDIT A SIBLING FILE.** They are
+the only rulings in this register whose effect reaches outside this annex: J-LEG-7
+removed 23 pool bodies from `RECEIPT_POOLS_WAR.md` and replaced each with a pointer
+here; J-LEG-8 added `ALSO POOLED:` cross-references to eleven pools here and to
+their eleven counterparts in `RECEIPT_POOLS_POPULATIONS.md` and
+`RECEIPT_POOLS_INTERIOR.md`. Both are vetoable and both are reversible from the
+markers alone — every merged line carries its `[merged ← WAR …]` provenance tag
+naming the wave and the source index it came from, so a veto restores the war
+annex's pools exactly. Row both into `docs/FABLE_VALIDATION_QUEUE.md`.
+
+---
+
+## THE MERGE RESIDUE (J-LEG-7) — what the RE-CUT wave inherits
+
+The merge was an OWNERSHIP operation and dropped only clones: 80 of the 142 war-annex
+variants were byte-equal (after slot and marker normalisation) to a line already here
+and were dropped; 62 moved. **What it did NOT do is re-cut PARAPHRASES**, and the
+seven WR-2 pools that moved whole are where they cluster: the war annex authored a
+parallel pool at the SAME angles as the live one, so the merged pool can hold one
+proposition twice in two wordings. Token-similarity does not catch these — the pairs
+below run from 0.62 down to under 0.30 jaccard and were found by reading. They are a
+FAMILY-RULE backlog (hard constraint 6), not an ownership question, and the
+protected side is always the live anchor.
+
+| Merged pool | the paraphrase pair (merged index ↔ resident index) | the proposition said twice |
+|---|---|---|
+| `deity_peace_pressure` | v9↔v1 · v11↔v3 · v12↔v4 · v13↔v5 | four of the six moved lines restate a live anchor: the harvest rites slow the muster · the cost of war priced in seed, "no captain likes to hear" · the altar never forbade war, it made war look expensive · a grievance waits another season |
+| `deity_war_pressure` | v11↔v3 · v12↔v4 · v10↔v6 · v9↔v5/v8 · v14↔v7/v8 | restraint finds no purchase · the rites do not order wars · the blessing of the muster · the lowered bar for arms · the feast-day calendar |
+| `disposition_insular_crossed` | v9↔v1+v6 · v10↔v2 · v11↔v3 · v13↔v7 | the gates closing earlier · the factors of `{house}` received coldly · the roads' weight in council · heard politely and bought from not at all |
+| `disposition_diplomatic_crossed` | v9↔v1+v6 · v12↔v7 · v13↔v6 | the hall's spare chairs vs the room set aside for legates · talks before it marches |
+| `disposition_reversal` | v11↔v3 · v12↔v7 · v13↔v4 · v14↔v8 | "a temper is not a ratchet" (near-verbatim formula) · the men who argued one way arguing the other · the mind changed slowly · the season needed to believe it |
+| `disposition_mercantile_crossed` | v9↔v1 · v10↔v2 · v11↔v3/v8 | the temper stated plain · the quays' weight in council · "a generation of ledgers" |
+| `disposition_martial_crossed` | v9↔v1 · v12↔v9 (both moved) · v14↔v6 | the temper stated plain, three times across the merged set · the armoury-vs-civic-building comparative closing on "nobody remarks" |
+| `coalition_stayed` | v9↔v6 | the men told they were going home and then not |
+| `mirror_obligation_discharged` | v9↔v7 | a compact is worth more for having been used once |
+| `lineage_claim_suppressed` | v13↔v6 | the clerk who entered the deliveries beside the claim and remarked on neither |
+| `home_front_hands` | v9↔v3/v8 | the muster's cost arriving a generation later, now stated three times |
+| `home_front_institutions` | v9↔v4/v6 | the register kept out of habit in an office that has stopped working |
+
+**Two CAUSAL §2 clause-form pools now source from this file, and one of them sources
+from a non-anchor line.** `RECEIPT_POOLS_CAUSAL.md` §2 carries a compressed clause form
+for exactly two of the 23 merged kinds — `WAR/casus_alliance_obligation (WR-6)` and
+`WAR/disposition_reversal (WR-2)`. Its §2.0 contract makes the sibling annex's VARIANT 1
+the authority on what a kind asserts. For `casus_alliance_obligation` nothing moved: that
+annex's `F1` is byte-equal to this file's variant 1, which is the live string. For
+`disposition_reversal` its `F1`/`F2` were compressed from the war annex's v1/v2, which
+are now this pool's **v9 and v10** — still present, still verbatim, but no longer the
+anchor. Both clause forms remain faithful to what the kind ASSERTS (a temper that
+crossed back), so this is a provenance note and not a contradiction: **the wave label
+`WR-2` in that annex is still correct, only the file the pool sits in has changed.**
+Recorded so the next reader does not re-derive it; no edit to the causal annex is
+implied.
+
+**The one J-LEG-8 pair the scan flagged, and why it is FENCED rather than re-cut.**
+`commons_gathering`'s R1 anchor here — *"the commons gathered in the square"* — reads at
+0.63 against POPULATIONS' R2 anchor *"The commons of {settlement} gathered in the square
+over {reason}."* Both are PROTECTED: the first is the live `WHAT_PHRASES` row, the second
+is the volume's §8 exemplar. The re-cut rule has no legal target on either side, and the
+two land in different fields of one entry — the phrase NAMES the thing, the sentence
+TELLS it, and a reader meeting both meets a heading and its story rather than the same
+line twice. Accepted, recorded, not a bug to re-find.
+
+**The disposition-pool count is the tell.** Seven pools jumped from 8 to 14 in one
+step. Fourteen is far above their chronic floor of 8 and above even the envelope's
+12 — so the re-cut wave has room to CUT rather than rewrite, and cutting a paraphrase
+of a live anchor costs the pool nothing. **The live anchors (variants 1..5 of every
+merged pool) are untouchable in that wave, as they are here.**
 
 ---
 
@@ -2674,7 +2828,8 @@ before LEG-5 may light a selector.*
 
 ---
 
-*END — RECEIPT_POOLS_LEGACY.md · 200 kinds · 1,412 variants · 1,099 added ·
+*END — RECEIPT_POOLS_LEGACY.md · 200 kinds · 1,474 variants · 1,161 added
+(1,099 authored + 62 merged in from `RECEIPT_POOLS_WAR.md` under J-LEG-7) ·
 Fable 5, 2026-08-03.*
 
 

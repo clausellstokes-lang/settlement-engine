@@ -159,6 +159,55 @@ is fourteen sentences across twelve rows, and each half of each pair is its own 
 answered by the deciding term* — and it is satisfied by WR-1's four deciding-term pools
 rather than by a single exemplar.
 
+## ⚠️ THE ONE-KIND-ONE-POOL MERGE — 2026-08-03. TWENTY-THREE POOLS NOW LIVE IN THE LEGACY ANNEX.
+
+**Read this before looking for a pool in this file and not finding it.** A global
+cross-annex uniqueness scan found thirty-four kind ids authored in two annexes at once.
+Twenty-three of them are kinds this file pooled that **the engine already mints and
+routes today** — their live strings are byte-identity anchors, and those anchors live in
+`RECEIPT_POOLS_LEGACY.md`, the annex that discharges the spine's LEGACY CLAUSE. Two
+annexes claiming one selector is an ownership defect, not a prose one: at wiring the two
+lists either merge into one draw set (and the duplicated members become literal repeats
+inside one pool) or one annex silently loses. **The chair ruled ONE KIND, ONE POOL, and
+LIVE BEATS DARK** (`RECEIPT_POOLS_LEGACY.md` J-LEG-7, vetoable).
+
+| Wave | kinds whose pool moved | count |
+|---|---|---:|
+| WR-2 | `disposition_martial_crossed` · `disposition_mercantile_crossed` · `disposition_diplomatic_crossed` · `disposition_insular_crossed` · `disposition_reversal` · `deity_war_pressure` · `deity_peace_pressure` | 7 |
+| WR-3 | `lineage_edge_recorded` · `mirror_kinship_bond` · `lineage_claim_suppressed` | 3 |
+| WR-4 | `home_front_roads` · `home_front_stores` · `home_front_hands` · `home_front_institutions` · `home_front_markets` | 5 |
+| WR-5 | `refusal_cost_ally_patience` · `refusal_cost_legitimacy` | 2 |
+| WR-6 | `coalition_entry_priced` · `casus_alliance_obligation` · `mirror_obligation_discharged` · `coalition_expenditure_read` · `coalition_stayed` · `coalition_debt_paid` | 6 |
+| | **TOTAL** | **23** |
+
+**Nothing was lost.** Of the 142 variants those pools held here, **80 were byte-equal**
+(after slot and marker normalisation) to a line already in the legacy pool — they were
+the same sentence twice, and were dropped as duplicates. The other **62 moved**, each
+appended under the legacy pool's last line and tagged
+`` `[merged ← WAR WR-n vN — one-kind-one-pool, 2026-08-03]` `` with the wave and the
+index it came from, so this ruling is reversible from the markers alone. The merge was
+append-only there: no legacy variant was renumbered, reworded, or removed, so THE
+PROMISE is undisturbed for every seeded draw that already landed.
+
+**What this changes in this file's own claims.** The kind census above still reads
+**158 kinds** — the twenty-three are still declared kinds of their waves and still carry
+their `###` header, significance, and desk; only the POOL moved. But the corpus count
+falls: **915 variants → 773**. Every count claim below that quotes 915 (the DEEPENING
+PASS and the VERIFIER PASS) is to be read as 773 over 135 pooled kinds; the per-pool
+floor claims for the other 135 are untouched, and the 23 merged pools each stand at or
+above the maximum of the two counts they came from (14, 13, 9, or 7 against floors of
+8 or 6) in the legacy annex. **Two of the fourteen §8 Herald-contract sentences moved
+with their pools** — *"They stayed."* (`coalition_stayed`) and *"They paid what they
+owed."* (`coalition_debt_paid`). Both survive as **variant 1, live and verbatim**, of
+their merged pool, which is a stronger anchor than the exemplar marker they carried
+here; the §8 contract is intact, it is just discharged in the other annex for those two.
+
+**The eleven kinds NOT merged.** The other eleven of the thirty-four co-owned ids are a
+DIFFERENT AXIS of one kind — an R2 Herald receipt here against an R1 subject phrase or
+an R3 news summary there — and both pools stay, one per axis, cross-referenced by an
+`ALSO POOLED:` line (J-LEG-8). None of them is in this file; they fall to
+`RECEIPT_POOLS_POPULATIONS.md` and `RECEIPT_POOLS_INTERIOR.md`.
+
 ---
 
 # WR-0c — OPENER HARDENING
@@ -307,74 +356,25 @@ AUDIENCE: public
 # WR-2 — DISPOSITION
 
 ### disposition_martial_crossed (WR-2) — Herald, war desk — significance: notable
-SLOTS: {settlement}, {band}
-AUDIENCE: public
-1. The martial temper of {settlement} stands {band} now; the drill ground is busier than the market.
-2. The reeve's muster rolls are read aloud on feast days, which tells you where the town keeps its pride.
-3. Boys who would have gone to the quays go to the watchfires instead.
-4. It is a {band} appetite for war, and the council has stopped arguing about it.
-5. They have learned to answer questions with soldiers, and the answers keep working.
-6. The armoury's accounts have overtaken the almshouse's, and nobody in {settlement} finds it worth remarking.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### disposition_mercantile_crossed (WR-2) — Herald, trade desk — significance: notable
-SLOTS: {settlement}, {band}, {good}
-AUDIENCE: public
-1. {settlement}'s mercantile temper stands {band}; the council counts in cargoes.
-2. The quays set the price of everything now, including opinions.
-3. A generation of good ledgers has made the merchants louder than the captains.
-4. Where the town once asked whether a thing was right, it asks what it costs.
-5. The staple in {good} is the politics; the rest is ceremony.
-6. A place on the council of {settlement} is got with a warehouse now rather than a grandfather.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### disposition_diplomatic_crossed (WR-2) — Herald, events desk — significance: notable
-SLOTS: {settlement}, {band}
-AUDIENCE: public
-1. {settlement} carries a {band} appetite for parley; the hall keeps more chairs than it needs.
-2. Every quarrel goes to a table first, and most of them stay there.
-3. The seat has learned that a legate is cheaper than a levy.
-4. They talk before they march, which their neighbours read as either wisdom or weakness, according to taste.
-5. The town's best rooms are kept for guests it does not like.
-6. It has kept {settlement} out of wars it might have won, and the hall has stopped apologising for it.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### disposition_insular_crossed (WR-2) — Herald, events desk — significance: notable
-SLOTS: {settlement}, {band}, {house}
-AUDIENCE: public
-1. {settlement} has turned {band} inward; the gates close earlier each year.
-2. The factors of {house} are lodged outside the walls now, courteously and firmly.
-3. The council's answer to every road is that the road can wait.
-4. They want nothing from anyone, which is a policy until it is a weakness.
-5. The tolls are high and the welcome is thin, and the town calls both prudence.
-6. The inn by the gate keeps fewer beds each year and calls the shrinkage demand.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### disposition_reversal (WR-2) — Herald, events desk — significance: notable
-SLOTS: {settlement}, {band}
-AUDIENCE: public
-1. What the victories taught {settlement}, the losses have untaught.
-2. The same council that voted the levies votes the granaries now.
-3. A temper is not a ratchet: {settlement}'s appetite has turned back toward where it began, and reads {band}.
-4. Men who argued for the war argue for the road, and are not embarrassed.
-5. The town changed its mind slowly, the way towns do, and over the same ledgers.
-6. Neighbours who learned what to expect of {settlement} will be a season late unlearning it.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### deity_war_pressure (WR-2) — Herald, faith desk — significance: notable
-SLOTS: {settlement}, {temple}, {band}
-AUDIENCE: public
-1. The {temple} of {settlement} keeps a war god's calendar, and the bar for a quarrel sits {band} lower for it.
-2. The chantry blesses the muster before the harvest, and has for a generation.
-3. Priests who speak of restraint find thin congregations here.
-4. It is not that the altar orders wars; it is that it has never argued against one.
-5. A town takes its temper from whatever it prays over.
-6. The {temple}'s great feast falls when the roads dry, which is also when columns move.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### deity_peace_pressure (WR-2) — Herald, faith desk — significance: notable
-SLOTS: {settlement}, {temple}, {band}, {good}
-AUDIENCE: public
-1. {settlement}'s {temple} keeps the harvest rites, and its court is {band} slower to muster.
-2. The pews are full at sowing and the drill ground is empty.
-3. The chapter house prices a war in seed {good}, which is a price no captain likes to hear.
-4. The altar has never forbidden a war; it has merely made one look expensive.
-5. Where the tithe is grain, the answer to a grievance is usually another season.
-6. Neighbours have learned they can lose an argument here without losing a season, and they bring more arguments for it.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### war_culture_suppressed (WR-2) — §1b-B suppression receipt, war desk — significance: routine
 SLOTS: {settlement}, {temple}
@@ -395,14 +395,7 @@ AUDIENCE: dm-only
 # WR-3 — THE LINEAGE CLAIM
 
 ### lineage_edge_recorded (WR-3) — Herald, events desk — significance: notable
-SLOTS: {settlement}, {counterpart}
-AUDIENCE: public
-1. The steading at {settlement} stands on its own books now, and remembers whose granary fed it.
-2. {counterpart} seeded it, provisioned it, and has been outgrown by it.
-3. What was a satellite is a settlement; the parish register says so, which is what matters later.
-4. The daughter house keeps its own reeve and its own quarrel with the tolls.
-5. A lineage edge is a small entry in a book and the cause of a great deal.
-6. The founding road still runs between them and is the busiest road either keeps.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### casus_lineage_claim_parent (WR-3) — Herald, war desk — significance: major
 SLOTS: {settlement}, {counterpart}, {band}
@@ -423,28 +416,10 @@ AUDIENCE: public
 5. What was gratitude for a generation has become a grievance in a single harvest.
 
 ### mirror_kinship_bond (WR-3) — Herald, events desk — significance: notable
-SLOTS: {settlement}, {counterpart}
-AUDIENCE: public
-1. The same founding that arms a claim binds a peace: {settlement} and {counterpart} read one edge and chose the other sign.
-2. They share a charter and a graveyard; the courts remembered the graveyard.
-3. Kin do not sack kin cheaply, and both books said so.
-4. The lineage was cited by both sides to opposite ends, and the quieter reading held.
-5. The bond cost {settlement} the claim, and the council called it a bargain.
-6. The two towns keep each other's feast days, which is a compact nobody drafted and nobody signs.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### lineage_claim_suppressed (WR-3) — §1b-B suppression receipt, war desk — significance: routine
-SLOTS: {settlement}, {counterpart}
-AUDIENCE: dm-only
-1. You do not sack the satellite you spent a generation provisioning; the claim scores nothing and the chronicle is named against it.
-2. The relationship record contradicts the casus, and the receipt says which entries do it.
-3. The court could raise the claim; its own wagon books refuse it.
-4. Sustained provisioning stands in the ledger where the grievance would go.
-5. Nothing was minted, so nothing decays; this claim waits on a change in the wagon books, not a change of heart.
-6. A generation of wagons out of {settlement} is a long argument, and it is still being made every quarter.
-7. A claim and a supply line may run to the same place; only one of them scores.
-8. To press the claim, {settlement} would have to starve the place first, and the ledger has already done that arithmetic.
-9. The drovers who would have to burn that granary have been unloading at it since they were boys.
-10. The clerk who entered the claim entered the season's deliveries, and made no remark on either.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ---
 
@@ -471,54 +446,19 @@ AUDIENCE: public
 6. The plate is going inland by cart, and the town has counted every cart.
 
 ### home_front_roads (WR-4) — warCosts receipt, trade desk — significance: notable
-SLOTS: {settlement}, {route}, {band}
-AUDIENCE: public
-1. {route} has gone to ruts while the levies were away, and the tolls have gone with it.
-2. Nobody has cut the causeway brush in a season; the drovers take the long way and charge for it.
-3. While the war continues, the road-work goes undone.
-4. The bridge at the ford held through the war and has not held since.
-5. One of {settlement}'s wartime roads has worsened; the loss is {band} harder to ignore.
-6. Each season {route} goes unmended costs more to mend, and the reeve says so at every sitting.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### home_front_stores (WR-4) — warCosts receipt, events desk — significance: notable
-SLOTS: {settlement}, {band}, {good}
-AUDIENCE: public
-1. The granaries of {settlement} hold {band}, and there is another season of war in front of them.
-2. The reeve has begun measuring the seed {good}, which is the last measure before hunger.
-3. The war eats first and the town eats after; that order is written in the stores.
-4. The campaign continues while the stores remain low.
-5. There is bread enough for the season, and the season is not the question.
-6. The bakers have changed the loaf again, and have not been asked to explain it.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### home_front_hands (WR-4) — warCosts receipt, events desk — significance: notable
-SLOTS: {settlement}, {band}, {npc}
-AUDIENCE: public
-1. {settlement} has sent {band} of its hands to the field, and the work at home has noticed.
-2. The harvest was got in by the old and the young, and got in late.
-3. The muster took the smiths first, which the town will feel for a generation.
-4. Names that ran the market are on the roll instead of the ledger, {npc} among them.
-5. A town can survive a war; it cannot keep sending its working hands away without paying for it at home.
-6. The apprenticeships went unfilled through the war, and the gap will reach the market a generation from now.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### home_front_institutions (WR-4) — warCosts receipt, events desk — significance: notable
-SLOTS: {settlement}, {temple}
-AUDIENCE: public
-1. The assize at {settlement} sits with a clerk and no justice; the court has been hollowed by the war's bill.
-2. The {temple} keeps its doors and has stopped keeping its school.
-3. Institutions need not fall to thin, and thin, and one day fail at the thing they are for.
-4. What was a working court is a room with a register in it.
-5. The buildings remain. Their offices cannot do the work they were built to do.
-6. The remaining clerk keeps the register out of habit, and is owed a year of wages for it.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### home_front_markets (WR-4) — warCosts receipt, trade desk — significance: notable
-SLOTS: {settlement}, {counterpart}, {good}, {house}
-AUDIENCE: public
-1. The factors of {house} no longer come to {settlement}'s staple, and the wharf shows it.
-2. The wharf hands stand about by the middle of the morning, and have done so since the levies went out.
-3. {good} that moved through this town moves around it now.
-4. A recorded market tie has closed while the war continues.
-5. The tolls are what they were and there is nothing to toll.
-6. The carriers have learned another road, and a road is only learned the once.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### winning_abroad_losing_at_home (WR-4) — warCosts receipt, war desk — significance: major
 SLOTS: {settlement}, {counterpart}, {band}
@@ -593,24 +533,10 @@ AUDIENCE: public
 5. {npc} said no, and the saying of it hardened everything after.
 
 ### refusal_cost_legitimacy (WR-5) — Herald, adjudication desk — significance: notable
-SLOTS: {settlement}, {npc}, {band}
-AUDIENCE: public
-1. {settlement} refused peace, and the streets priced the refusal within the season.
-2. The seat spent its standing to keep its war.
-3. Men who bore the levy quietly do not bear a refused peace quietly.
-4. The council's confidence in {npc} reads {band}, and the refusal is the reason on every tongue.
-5. Nothing was lost in the field that day. A good deal was lost in the market square.
-6. The next levy will be harder to raise than the last, and the reason will not appear on the summons.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### refusal_cost_ally_patience (WR-5) — Herald, war desk — significance: notable
-SLOTS: {settlement}, {counterpart}, {third_party}, {band}
-AUDIENCE: public
-1. {counterpart} was refused, and {third_party} read the refusal as a bill it had not agreed to.
-2. The ally's factors have begun asking how long, which is the question before the door.
-3. Patience is a stock like any other, and this drew {band} on it.
-4. They refused peace with somebody else's soldiers in the field.
-5. The alliance held. It is thinner than it was, and both courts know it.
-6. The allied captains dined apart that week, and the servants understood it before the clerks did.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### ruler_books_compromised (WR-5) — the covert seam, adjudication desk — significance: major
 SLOTS: {settlement}, {npc}, {faction}
@@ -681,14 +607,7 @@ AUDIENCE: public
 # WR-6 — THE COALITION GRAPH
 
 ### coalition_entry_priced (WR-6) — the alliance-web risk read, war desk — significance: notable
-SLOTS: {settlement}, {counterpart}, {third_party}, {band}
-AUDIENCE: public
-1. {settlement} counted who might answer for {counterpart}, and then who might answer for those.
-2. The court priced the far compacts as beliefs, not promises of who would arrive.
-3. The obligation is plain and the arithmetic behind it is not.
-4. Entering a war is cheap; entering the war behind it is not, and this one prices {band}.
-5. They read the whole web before they read the field, which is why they are still deciding.
-6. The reckoning wanted a wider sheet than the war itself had ever required.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### coalition_joined (WR-6) — Herald, war desk — significance: major
 SLOTS: {settlement}, {counterpart}, {third_party}, {route}
@@ -709,44 +628,16 @@ AUDIENCE: public
 5. The refusal is archived on the allied edge as a durable fact.
 
 ### casus_alliance_obligation (WR-6) — casus receipt, war desk — significance: notable
-SLOTS: {settlement}, {counterpart}, {third_party}
-AUDIENCE: public
-1. {settlement} is in this war because {counterpart} called and the compact answers for it.
-2. The alliance obligation is one recorded cause on this edge; other live causes remain their own facts.
-3. The borrowed cause remains anchored to the caller's exact war episode and compact.
-4. They march for a paper, which is a better reason than most.
-5. This edge against {third_party} exists because an older edge does.
-6. Not a soul in {settlement} has a quarrel with {third_party}, and the levies went out all the same.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### mirror_obligation_discharged (WR-6) — mirror receipt, events desk — significance: notable
-SLOTS: {settlement}, {counterpart}
-AUDIENCE: public
-1. The obligation is discharged: {settlement} came when called.
-2. The record now carries service under the compact beside the obligation it answered.
-3. They answered the alliance in the field, and that answer is recorded.
-4. What was owed under this call was given; other claims remain separate.
-5. The compact survived this use, and the relationship record says so.
-6. The next call on this compact begins from a shorter account than this one did.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### coalition_expenditure_read (WR-6) — the derived bill, trade desk — significance: notable
-SLOTS: {settlement}, {counterpart}, {band}, {route}
-AUDIENCE: public
-1. {settlement}'s surviving current-episode evidence reads {band}; no lifetime total is invented.
-2. The read uses deployed strength, recorded attrition, live exposure, and attributable home-front evidence.
-3. Damage that healed or left the bounded record is silence in this reckoning.
-4. What the alliance cost was never written down as a total — it is what the other books already say.
-5. The reckoning exists whether or not the coalition wants to hold it.
-6. Both halls will quote the reckoning at one another, each taking the half that suits it.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### coalition_stayed (WR-6) — Herald, war desk — significance: notable
-SLOTS: {settlement}, {counterpart}, {third_party}
-AUDIENCE: public
-1. They stayed. *(§8)*
-2. {settlement} reread its open edge against {third_party} and kept its army in the field.
-3. The council reread the war, weighed the same ledgers as its neighbours, and reached the opposite conclusion.
-4. Staying was a decision and not an inertia, and the record says who made it.
-5. The ally that stays is owed differently from the ally that came.
-6. The men were told they were going home, and then they were not, and that telling outlasts the campaign.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### coalition_separate_peace (WR-6) — Herald, adjudication desk — significance: major
 SLOTS: {settlement}, {counterpart}, {third_party}
@@ -776,14 +667,7 @@ AUDIENCE: public
 5. Every share is an explicit judgment on contribution under the same settlement identifier.
 
 ### coalition_debt_paid (WR-6) — Herald, trade desk — significance: notable
-SLOTS: {settlement}, {counterpart}, {route}
-AUDIENCE: public
-1. They paid what they owed. *(§8)*
-2. {counterpart} settled the recorded coalition claim owed to {settlement}.
-3. The conserved transfer met the recorded claim, and no unpaid remainder was minted.
-4. The payment travelled along {route} and is archived as payment, never forgiveness.
-5. This coalition claim is closed; other causes and obligations remain separate.
-6. It was paid late and paid whole, with no thanks offered in either direction.
+→ pool lives in RECEIPT_POOLS_LEGACY.md — merged under the one-kind-one-pool ruling, 2026-08-03
 
 ### coalition_debt_unpaid (WR-6) — Herald, trade desk — significance: major
 SLOTS: {settlement}, {counterpart}, {route}, {good}
@@ -1870,7 +1754,12 @@ variant three still draws variant three.
 - **The major and rare kinds are unchanged at five**, which remains one above the
   SP-6 floor of four. Seventy-nine kinds sit there deliberately.
 - **The corpus stands at nine hundred and fifteen variants across one hundred
-  fifty-eight kinds.**
+  fifty-eight kinds.** *(SUPERSEDED 2026-08-03 by the one-kind-one-pool merge at the head
+  of this file: **773 variants across the 135 kinds still pooled here**, the other 23
+  kinds' pools having moved to `RECEIPT_POOLS_LEGACY.md` under J-LEG-7. Every count in
+  this section and the verifier section below was true of the file as it stood on
+  2026-08-03 before that merge, and each is restated by subtraction rather than
+  re-derived: nothing was re-authored, 142 lines left, 80 of them as proven duplicates.)*
 
 **The angles the deepening used.** The original palette (event plain · street · ledger ·
 consequence forward · understatement) was exhausted at five, so the widened palette
