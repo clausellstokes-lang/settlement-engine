@@ -1,6 +1,19 @@
 /**
- * warMagicGate.test.js — MG-3b: LEAK L2 CLOSED; LEAK L3 REPRODUCED AND BLOCKED
+ * warMagicGate.test.js — MG-3b: LEAKS L2 AND L3 BOTH REPRODUCED, BOTH STILL OPEN
  * (docs/DESIGN_REALM_MAGIC_TOGGLE.md §3 leak register, §4 MG-3 slice b).
+ *
+ * ⚠️ HEADER CORRECTED 2026-08-03 BY THE LANE-B VERIFIER. This file previously said
+ * "LEAK L2 CLOSED". It is not. The L2 pins below are UNIT pins over a hand-crafted
+ * `{ magicFunctions: false }` literal; they never boot the real writer, and the real
+ * writer does not exist. `stampWarMagicLaw` has ZERO callers in src/ — the one line
+ * that would apply it lives at warDeployment.js:716 (`facets: model.facets`), inside
+ * the very file the size ratchet blocks. So in the RUNNING engine every facets envelope
+ * is unstamped, `pairMagicFunctions` always answers true, and a whole-mundane realm
+ * still earns `require_magic` off ironmongery — measured end-to-end through
+ * `feasibilityOutlook` with facets from the real `deriveMilitaryCapacity` (verdict
+ * `require_magic`; `harassment` once the withheld stamp is applied). Keep these pins —
+ * they are the correct unit contract and they go live the instant the stamp lands — but
+ * DO NOT read them as proof the leak is shut. L2 unblocks with L3, on the same line.
  *
  * REPRODUCE-FIRST. Both leaks are pre-existing per-settlement defects that the realm
  * magic toggle makes impossible to ignore, and both are asserted here in the shape the

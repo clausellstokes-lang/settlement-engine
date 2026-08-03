@@ -131,7 +131,7 @@ and a provenance echo. One question, zero new authorities.
 | # | Leak | Receipt |
 |---|---|---|
 | L1 | teleportEdges is config-blind: deriveTeleportEligibility(seeds, institutionsById) takes NO config; a legacy roster's 'Teleportation circle' forms teleport edges in a magic-off world | teleportEdges.js:116-132,150-158 vs its own header claim :16-18 |
-| L2 | feasibilityGate can verdict `require_magic` ("arcane force could tip…") off PURELY MUNDANE materiel (weapon/armor/forge/siege terms) | feasibilityGate.js:148,196 |
+| L2 | ⚠️ **STILL OPEN** (reader wired 2026-08-03, writer blocked with L3 — see the corrected MG-3b block below) feasibilityGate can verdict `require_magic` ("arcane force could tip…") off PURELY MUNDANE materiel (weapon/armor/forge/siege terms) | feasibilityGate.js:148,196 |
 | L3 | warDeployment mints a magicSupport combat facet from materiel with no magic gate | warDeployment.js:672-679 |
 | L4 | neighbourGenerator mints 'Arcane Exchange Circle', 'Arcane Envoys', 'Arcane Observers', 'Anti-N Arcane Resistance' with zero magicExists reads | neighbourGenerator.js:313-384 |
 | L5 | legacyGenerator branches on type==='magical' with no worldLaw import | legacyGenerator.js:165-170 |
@@ -219,7 +219,37 @@ adversarial-verify's reproduce-then-clear.
 
 #### ⛔ MG-3b L3 — RECORDED BLOCK (2026-08-03, Fable; deliberately deferred, NOT a bug to re-find)
 
-L2 is CLOSED and landed. **L3 is reproduced, written, proven green in the working
+⚠️ **CORRECTED 2026-08-03 BY THE LANE-B VERIFIER — read this before trusting the
+paragraph below.** The original text here read "L2 is CLOSED and landed." That is
+WRONG, and the same size-ratchet wall that blocks L3 is the reason. L2's READER
+(feasibilityGate's `pairMagicFunctions` call) landed; L2's WRITER never did.
+`stampWarMagicLaw` has **ZERO callers in `src/`** — the only invocation in the tree is
+inside `tests/domain/warMagicGate.test.js`, which hand-crafts `{ magicFunctions: false }`
+onto a literal facets object instead of booting the real writer (the estate's
+writer/reader payload-spelling pin class). Every production producer of
+`attackerFacets`/`defenderFacets` is `cap.facets` from `warDeployment.buildCapacityLookup`,
+which returns `facets: model.facets` UNSTAMPED (warDeployment.js:716) — so
+`pairMagicFunctions` answers `true` on every live matchup and the arcane arm is exactly
+as open as it was before MG-3b. **The L2 pin is green and the leak is still live.**
+
+CONFIRMED BY EXECUTION, not by reading. Against a clean detached worktree at 96e27699,
+two settlements configured exactly as MG-2's mundane projection stamps them
+(`{ magicExists:false, priorityMagic:0, magicLevel:'none' }`), facets taken from the real
+`deriveMilitaryCapacity`, attacker exporting weapons/armour/siege engines/warhorses/
+blades/gunpowder (materiel 92) against a grain-and-wool defender (materiel 50, edge 42
+vs the threshold of 22), fed through `feasibilityOutlook` — the live display caller:
+
+    attacker facets keys: manpower,institutions,materiel,logistics,economy,will
+    has magicFunctions stamp? false
+    LIVE PATH  (facets as buildCapacityLookup returns them): require_magic
+    WITH the withheld one-line stamp applied              : harassment
+
+A whole-mundane realm still produces "arcane force could tip an otherwise-hopeless
+siege" off ironmongery. **L2 and L3 are ONE blocked item, not one closed and one
+blocked**, and both unblock on the same line at warDeployment.js:716. The register's
+L2 row must stay OPEN until that line lands.
+
+L2's reader is wired and inert. **L3 is reproduced, written, proven green in the working
 tree, and CANNOT BE COMMITTED.** The closure is one line at warDeployment.js's
 magicSupport mint — `magicSupport: facets.magicFunctions === false ? 0 :
 norm(facets.materiel, 0.5)` — plus the one-line stamp at buildCapacityLookup
@@ -241,7 +271,8 @@ byte-identical), which ran green before being withheld.
 
 #### ⛔ MG-3h L10–L12 — RECORDED STOP + PROPOSED DESIGN (2026-08-03, Fable; not a bug to re-find)
 
-L1–L9 are closed. **L10–L12 are NOT attempted**, and the reason is a substrate fact the
+L1 and L4–L9 are closed (L2 is NOT — see the corrected MG-3b block above; it is blocked
+with L3 on the same warDeployment line). **L10–L12 are NOT attempted**, and the reason is a substrate fact the
 register could not see when it ranked them "lowest load": L10's gate is a change to the
 signature of a CANONICAL DETECTOR, not a local edit.
 
@@ -274,6 +305,60 @@ detector is not a lane decision. It also could not be verified to this program's
 standard right now: the working tree does not build (another lane's untracked
 `envoyInterceptionStage.js` imports a `targetCommissionedPlant` that exists nowhere), so
 no chunk- or build-side evidence is available for a change of that reach.
+
+#### ✅ MG-3 VERIFIER PASS (Lane B adversarial verify, 2026-08-03; all receipts executed)
+
+Run in a CLEAN detached worktree at 96e27699 (the live minifold tree carries other lanes'
+dirty files and does not build). Findings beyond the L2 correction above:
+
+- **GUARD-THE-GUARD PASSES for all eight landed closures.** Baseline 6 files / 61 tests
+  green; then each closure reverted INDIVIDUALLY to its own parent and the pin re-run:
+  L1 4 red · L2 (unit) 2 red · L4+L5 7 red · L7 1 red · L6 2 red · L8 2 red (walker +
+  deadCode) · L9 4 red. No pin is vacuous; every one fails without its fix.
+- **CONTENT-DEPTH FLOOR MET AND TOTAL.** All 7 mundane neighbour slots carry exactly 4
+  variants, all 4 distinct, none null, and none re-trips `allowsGeneratedContent`. Swept
+  across every content profile (standard/pg13/family/gritty/mature/default) × every
+  relationship × every faction type: **exactly 7 substitutions, all in the `magic` slot** —
+  no non-magic label is ever mis-substituted into the scholarly pool, and no slot falls to
+  the null/skip arm. A magical world: 0 labels moved, **0 rng draws**. legacyGenerator
+  carries 2 slots × 4 variants on a stable per-event hash. MG-LAW-3 holds.
+- **MG-LAW-2 HELD ABSOLUTELY.** Zero deity/faith/temple/belief/patron modules appear in
+  the lane's whole commit range (50b69622..96e27699).
+- **L7 ENVELOPE SHAPE CLEAN.** The new short-circuit returns the identical 9-key set as
+  the dead-magic envelope AND the normal ladder; the present-guard holds (an axis-less
+  record still reads `limited`/`restricted`, unmoved); MG-LAW-4 conditioning works (an
+  authored tower at dial 0 keeps the ladder running).
+- ⚠️ **UNDISCLOSED BEHAVIOUR SHIFT IN MG-3e (small, benign, but state it).** The commit
+  claims "every other input bands identically to the replaced ladder, pinned at the
+  0/25/26/65/66 boundaries". The DIAL boundaries are indeed identical (the only dial
+  divergence is priority 0: old `low` → new `none`, which IS the fix). The LEGACY BAND
+  vocabulary is not: the replaced ladder passed `rare`/`moderate`/`common`/`pervasive`
+  through RAW, and the canonical accessor folds them. Measured on a `Teleportation circle`
+  roster — `{ magicLevel: 'rare' }` (no dial) produced **0 warnings before, 1 after**
+  ("Magic level is set to Low…"). Only reachable from a legacy or imported save carrying
+  the stale lens vocabulary the generator never emits, and the new warning is arguably the
+  more correct reading — but it is a live output change on existing saves and belongs on
+  the record rather than in a paragraph asserting equivalence.
+- ⚠️ **MG-3g's RECEIPT HAS NO CONSUMER.** `unknownBand` / `KNOWN_MAGIC_BAND_TOKENS` /
+  `UNKNOWN_BAND_FALLBACK` are read by `tests/domain/magicBandReceipt.test.js` and by
+  NOTHING in `src/`. The silent guess is now an unread receipt: a drifted band token is
+  still invisible to the running system, and no walker censuses the vocabulary. The fix is
+  a real improvement in shape and no improvement in observability until a certification row
+  or a walker reads it. Recommend pairing it with a census before L9 is called closed.
+- **LATENT, NOT LIVE — the present-guard's own edge.** `magicLedger.present` is keyed on a
+  numeric `priorityMagic` OR a non-empty band string, NOT on the magic axis: `magicLedger({
+  config: { magicExists: false } })` returns the NEUTRAL envelope (`present:false`), so a
+  config carrying only `magicExists:false` escapes every present-guarded gate this lane
+  wrote. Not reachable today — `DEFAULT_CONFIG` always carries `priorityMagic:50`, MG-2's
+  projection stamps `{ magicExists:false, priorityMagic:0 }`, and ConfigurationPanel zeroes
+  the dial — so every real mundane record is `present:true` and gated correctly. It bites
+  only a hand-crafted or partially-imported config. Recorded so it is not re-found as a bug.
+- **REGRESSION ATTRIBUTED.** `tests/domain` + `tests/generators` at 96e27699 in a clean
+  worktree: 891 files / 11,693 tests, 8 red in 5 files (changeAuthorityPolicy.contract,
+  coalitionTrust, generosityReactions, guidanceRegistry.walker, roadsParticipation). The
+  SAME 5 files / 8 tests are red at the pre-lane base 50b69622 — identical, none Lane B's;
+  the walker censuses name other lanes' files (npcVerdictPulse, warRulingsNews,
+  warSeatBooks). `tsc --noEmit` reports zero errors on every file the lane touched.
 
 ### MG-4 — THE MEASURE (realm-scope acceptance)
 
