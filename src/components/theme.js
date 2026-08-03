@@ -79,166 +79,256 @@ export const PARCH_100 = L.PARCH_100;
 // off the first-paint closure budget. See design/tokens.js.
 export { GOLD_TXT, GOLD_SOFT, BORDER_STRONG } from '../design/tokens.js';
 
-// ── THE FLETCHED RIBBON (owner directive, 2026-08-03; RIBBON V2 same day) ─────
-// The desktop ribbon reads as the back half of an arrow in flight. V1 drew a
-// leather-brown band on a dark ink bar. THE V2 DIRECTIVE INVERTS THE MATERIAL: the
-// WHOLE bar — wordmark included — becomes ONE continuous LIGHT-WOOD SHAFT, and the
-// Create · Library · Realm trio becomes three DARK-BROWN, GILT-EDGED feathers lying
-// on it. These constants are that composition's only colour source; NavRibbon.jsx,
-// NavDivider.jsx and App.jsx read them and spell no hex of their own.
+// ── THE HALF-SEEN WAR ARROW (owner directive, 2026-08-03 evening; RIBBON V3) ──
 //
-// FLETCH_BROWN is the theme's OWN gold-800 — the deepest brown in the gold family,
-// already carried as GOLD_TXT — so the fletching is DERIVED from the palette rather
-// than invented beside it, and a palette edit moves it. FLETCH_BROWN_LIFT is the one
-// authored step between gold-800 (#6A511F) and gold-700 (#8C6F32): the ACTIVE
-// feather's lift, the LIGHTEST value that still clears AA for the ribbon's 12px label.
+// THE COMPOSITION, and every token below serves it: the top ribbon is HALF OF AN
+// ARROW IN PROFILE. The arrow lies along the top screen edge and the viewport shows
+// this side's half — so the whole bar, wordmark included, is the SHAFT'S VISIBLE
+// HALF, modelled as a cylinder (lit along the centreline at the top, falling off to
+// a dark silhouette at the bottom edge), and Create · Library · Realm are the NEAR
+// SIDE'S THREE FLETCHES rooted on it, quill bases at the shaft line, vanes sweeping
+// toward Realm. Two red-brown thread wraps frame the cluster. ONE object.
 //
-// MEASURED (tests/design/contrast.test.js recomputes every ratio below; WCAG 2.2
-// AA = 4.5:1 for normal text, SC 1.4.11 = 3:1 for a UI boundary):
-//   PARCH_100 on FLETCH_BROWN ......... 6.24:1  resting feather label        AA ✓
-//   PARCH     on FLETCH_BROWN_LIFT .... 5.71:1  active feather label         AA ✓
-//   PARCH_100 on FLETCH_BROWN_LIFT .... 5.18:1  the label register's floor   AA ✓
-//   GOLD      on FLETCH_BROWN ......... 3.12:1  the gilt hairline, against the
-//                                               feather it traces            1.4.11 ✓
-//   GOLD_B    on FLETCH_BROWN ......... 3.83:1  the ACTIVE feather's brighter
-//                                               gilt, against the same       1.4.11 ✓
-//   GOLD_B    on FLETCH_BROWN_LIFT .... 3.18:1  brighter gilt on the lifted fill it
-//                                               actually sits on             1.4.11 ✓
-//   GOLD      on FLETCH_BROWN_LIFT .... 2.59:1  RECORDED, NOT HIDDEN: the RESTING
-//       gilt tone against the ACTIVE fill is under 3:1 — but that pairing is never
-//       rendered (an active feather wears GOLD_B, a resting one wears FLETCH_BROWN).
-//       Kept as the negative control the contrast pin asserts stays unused.
-export const FLETCH_BROWN = L.GOLD_TXT;
-export const FLETCH_BROWN_LIFT = '#7A5C23';
-
-// THE BARB TEXTURE (V2 directive §4). A fine diagonal grain running WITH the
-// feather's slant, at a DIFFERENT direction and scale from the shaft's horizontal
-// wood grain so the two textures never read as one moiré. Authored as OPAQUE steps
-// rather than an alpha wash precisely so "AA against the darkest point of the
-// texture" is a computable claim and not a hand-wave: these ARE the darkest points.
-//   FLETCH_BARB      4.63% darker than FLETCH_BROWN      (directive band: 3–5%)
-//   FLETCH_BARB_LIFT 4.13% darker than FLETCH_BROWN_LIFT (directive band: 3–5%)
-//   PARCH_100 on FLETCH_BARB ..... 6.43:1  resting label on its darkest barb  AA ✓
-//   PARCH     on FLETCH_BARB_LIFT  5.88:1  active label on its darkest barb   AA ✓
-export const FLETCH_BARB = '#684F1E';
-export const FLETCH_BARB_LIFT = '#785A22';
-
-// THE GILT (V2 directive §4) — gilding, never neon. GILT is a HAIRLINE tracing each
-// feather's silhouette; GILT_ACTIVE is the brighter tone that, with the gold
-// underline, is the active cell's second distinguisher now that the label weight no
-// longer rises to 700. GILT_BLOOM is the very-low-alpha outer glow: alpha, not a
-// hue, so it warms whatever it falls on and never becomes a second edge.
-// ⚠️ THE GILT IS DECORATION, NEVER A STATE CARRIER. Against the LIGHT SHAFT the gilt
-// measures 1.92:1 — nowhere near 1.4.11's 3:1 — and that is correct and recorded:
-// the boundary that says "this is a feather" is FLETCH_BROWN against the shaft at
-// 5.97:1, and the boundary that says "this feather is active" is carried by the
-// lifted fill, the brighter PARCH label, the gold underline and aria-current="page".
-// Nothing legible depends on seeing the gilt.
-export const GILT = L.GOLD;
-export const GILT_ACTIVE = L.GOLD_B;
-// DERIVED, not spelled. The obvious way to write this is a fourth gold value with
-// an alpha channel — but that forks the palette (a GOLD edit would leave the bloom
-// behind at the old hue) AND adds a row to the deep-craft translucent-literal
-// burn-down ratchet, which is a worklist trending to zero, not a budget to spend.
-// `color-mix` keeps the bloom a function OF the gilt: one tone, two strengths, and
-// the ratchet's count is untouched. The idiom is already load-bearing in index.css
-// (.sf-btn's hover mix), so this adds no new browser assumption.
-// (⚠️ Do not write the translucent-colour function's name literally in this file —
-// tests/design/deepCraftKillList.test.js counts LINE MATCHES, so even a comment
-// mentioning it adds one to the ratchet. That is exactly how this note got here.)
-export const GILT_BLOOM = `color-mix(in srgb, ${L.GOLD} 22%, transparent)`;
+// WHAT V3 RETIRED, so nobody re-finds it: V2's parallelogram feathers, its GILT
+// hairline + GILT_ACTIVE + GILT_BLOOM, its FLETCH_BROWN/_LIFT gold-family fletching,
+// its FLETCH_BARB_LIFT, and its SHAFT_GRAIN/SHAFT_GRAIN_DEEP two-streak plank are
+// all GONE — not deprecated, deleted, with their consumers moved in the same commit.
+// The species changed too: the owner corrected turkey → GREY GOOSE, the English
+// war-arrow feather, which is cooler, more uniform and barred far more quietly.
+//
+// ⚠️⚠️ THE GROUND MOVED AGAIN, AND THAT IS THE WHOLE HAZARD OF THIS FILE. V2's
+// lesson was that tones correct on an ink bar are wrong on light wood. V3 repeats it
+// one step darker: the plank went from cream (#F1E5C8, L 0.789) to honey-tan
+// (L 0.42–0.55), and THREE foregrounds that cleared AA on the cream fail on the
+// honey — GOLD_TXT (5.75 → 3.38), GREEN_DEEP (5.00 → 2.93) and SLATE_DEEP
+// (4.28 → 3.53). All three moved in this commit; all three are pinned as negative
+// controls in tests/design/contrast.test.js so "just put the old colour back" reds
+// with the reason attached instead of shipping an unreadable header.
 
 /**
- * THE LIGHT-WOOD SHAFT (V2 directive §2 + §3) — the desktop AND mobile header's one
- * continuous material, running the full width INCLUDING under the wordmark.
+ * THE SHAFT — honey-tan wood from the owner's reference photo, modelled as the
+ * near half of a CYLINDER.
  *
- * SHAFT is a single step deeper than the cream page body (1.15:1 against PARCH):
- * enough that the ribbon separates as its own plank, gentle enough that it still
- * reads as the same room. Two more devices finish the separation rather than one
- * loud one — a BORDER hairline along the bottom edge and ELEV[2]'s soft shadow.
+ * Five steps down the barrel, lit from above. SHAFT_SHEEN is the satin highlight
+ * along the visible centreline at the very top; SHAFT is the body; SHAFT_BODY is
+ * THE LABEL FLOOR (see SHAFT_STOPS); SHAFT_EDGE and SHAFT_RIM are the falloff into
+ * the silhouette at the bottom, which is what makes the bar read as a round shaft
+ * rather than a flat plank. The modelling range top-to-bottom is 2.67:1.
  *
- * SHAFT_GRAIN / SHAFT_GRAIN_DEEP are the two streak tones. MEASURED, not stated:
- * they sit 1.96% and 3.89% below SHAFT in relative luminance. The directive named a
- * 2–4% band, so the DEEP streak is inside it and the light one is 0.04pp under its
- * floor — an honest ≈2–4%, recorded that way rather than rounded into compliance.
- * The tone was deliberately NOT nudged to meet the floor: 0.04pp of relative
- * luminance is invisible, the owner's word for the grain was SUBTLE, and moving a
- * measured colour to make a sentence true is the reflex this very bar's 60-vs-124
- * history exists to warn against. The band is a target, not a threshold anything
- * depends on — what keeps the grain a material and not a stripe pattern is the pair
- * staying ordered and staying quiet, which tests/components/navFletching.test.jsx
- * measures on every run. SHAFT_GRAIN_DEEP is THE DARKEST STREAK:
- * every label that rides the shaft owes its AA to THAT value, not to SHAFT, and
- * tests/design/contrast.test.js measures each one against it:
- *   GOLD_TXT   on SHAFT_GRAIN_DEEP .... 5.75:1  wordmark + active reference tab AA ✓
- *   BODY       on SHAFT_GRAIN_DEEP .... 8.33:1  resting reference tab           AA ✓
- *   SECOND     on SHAFT_GRAIN_DEEP ... 12.04:1  the ghost-button register       AA ✓
- *   GREEN_DEEP on SHAFT_GRAIN_DEEP .... 5.00:1  the signed-in account chip      AA ✓
- *   GREEN (the V1 chip tone) .......... 3.91:1  FAILS as text on wood — which is
- *       exactly why AccountMenu moved to GREEN_DEEP; pinned as a negative control.
+ * ⚠️ SHAFT_BODY, NOT SHAFT_RIM, IS THE REFERENCE GROUND FOR TEXT — and unlike V2's
+ * "darkest streak anywhere", that is a GEOMETRIC claim, not a hopeful one. The
+ * cylinder's dark falloff is confined BELOW the label band by SHAFT_STOPS.body, and
+ * tests pin that the stop clears the vertically-centred label box on both header
+ * heights. Measuring against SHAFT_RIM instead would be over-strict by a factor no
+ * glyph ever touches (it would force every label to near-black); measuring against
+ * SHAFT_SHEEN would be a lie. SHAFT_BODY is the darkest tone a letterform can land
+ * on, and the stop geometry is what makes that true.
+ *
+ * MEASURED against SHAFT_BODY (tests/design/contrast.test.js recomputes all of it;
+ * WCAG 2.2 AA = 4.5:1 for text, SC 1.4.11 = 3:1 for a UI boundary):
+ *   INK_DEEP    on SHAFT_BODY .... 7.06:1  wordmark + active reference tab   AA ✓
+ *   BODY        on SHAFT_BODY .... 4.89:1  resting reference tab             AA ✓
+ *   SECOND      on SHAFT_BODY .... 7.06:1  the ghost-button register         AA ✓
+ *   SHAFT_GREEN on SHAFT_BODY .... 4.87:1  the signed-in account chip        AA ✓
+ *   SHAFT_SLATE on SHAFT_BODY .... 4.96:1  the developer account chip        AA ✓
+ *   GOLD_TXT    on SHAFT_BODY .... 3.38:1  the active tab's underline — a BOUNDARY
+ *                                          beside an already-ink label       1.4.11 ✓
+ *   FLETCH_VANE on SHAFT_BODY .... 4.46:1  the boundary that says "fletch"   1.4.11 ✓
  */
-export const SHAFT = '#F1E5C8';
-export const SHAFT_GRAIN = '#EFE3C6';
-export const SHAFT_GRAIN_DEEP = '#EDE1C4';
-
-// SHAFT_RULE — the seam between two REFERENCE tabs, read as a groove cut in the
-// plank. It replaces BORDER on this one surface for a measured reason: BORDER is
-// the house hairline against CARD and PARCH, and it was ~5:1 against the ink bar V1
-// drew it on, but against light wood it collapses to 1.56:1 and the reference tabs
-// lost their separation entirely. This is 2.50:1 — a decorative divider carries no
-// WCAG floor (it is not a boundary anyone must perceive to operate the nav), so the
-// number is chosen by eye against the BALANCE LAW rather than by a threshold:
-// present, quiet, and deliberately weaker than the gilt seams inside the fletching,
-// because the hierarchy between "the journey" and "the shelf" is the whole point.
-export const SHAFT_RULE = '#A39062';
+export const SHAFT_SHEEN = '#E8CE9E';
+export const SHAFT = '#D2B27E';
+export const SHAFT_BODY = '#CCA972';
+export const SHAFT_EDGE = '#BE9760';
+export const SHAFT_RIM = '#A0763F';
 
 /**
- * SHAFT_GRAIN_LAYERS — the wood grain itself, as ONE CSS background-image string
- * both headers share, so the mobile and desktop planks are the same board.
+ * SHAFT_STOPS — where each cylinder step sits, as a FRACTION of the bar's height.
  *
- * Two layered HORIZONTAL streak gradients, asset-free. Their periods are 13px and
- * 29px — COPRIME, so the combined figure only repeats every 377px, and the bar is
- * 48px tall: no tiling rhythm is visible because none of it is ever on screen twice.
- * Within each period the streaks sit at irregular offsets and sub-pixel widths, so
- * even one period reads as drifting figure rather than as a ruled pair of lines.
+ * Fractions, not px, and that is load-bearing: the desktop bar is 48px and the
+ * mobile one 59px, and both must be the same barrel. A px ladder tuned to 48 would
+ * put the mobile silhouette 11px too high and drop the dark falloff straight through
+ * the mobile wordmark.
+ *
+ * ⚠️ `body` IS A CLEARANCE, NOT A TASTE. It is the last stop at or above which the
+ * wood never goes darker than SHAFT_BODY, so it must sit BELOW the bottom of a
+ * vertically-centred label box on every header height. LABEL_BOX below is that box;
+ * the pin re-derives (1 + LABEL_BOX/height)/2 on both bars rather than trusting 0.75.
+ */
+export const LABEL_BOX = 20;
+export const SHAFT_STOPS = Object.freeze({ lit: 0.09, mid: 0.38, body: 0.75, edge: 0.92 });
+
+/**
+ * SHAFT_CYLINDER — the barrel shading, as one CSS gradient.
+ *
+ * The falloff deliberately ACCELERATES toward the bottom (0 → 9% holds the sheen,
+ * then 9 → 75% descends gently across the label band, then 75 → 100% drops fast into
+ * the rim). That is how a real cylinder shades: cos-falloff is flat near the
+ * centreline and steep near the silhouette. Painting it linearly would read as a
+ * gradient-filled rectangle, which is the exact "feathers on a plank" failure the
+ * directive names.
+ */
+export const SHAFT_CYLINDER =
+  `linear-gradient(180deg, ${SHAFT_SHEEN} 0%, ${SHAFT_SHEEN} ${SHAFT_STOPS.lit * 100}%,`
+  + ` ${SHAFT} ${SHAFT_STOPS.mid * 100}%, ${SHAFT_BODY} ${SHAFT_STOPS.body * 100}%,`
+  + ` ${SHAFT_EDGE} ${SHAFT_STOPS.edge * 100}%, ${SHAFT_RIM} 100%)`;
+
+/**
+ * SHAFT_GRAIN_TEXTURE — the fine LONGITUDINAL wood grain, as a deterministic inline
+ * SVG data URI (owner directive: feTurbulence, FIXED seed).
+ *
+ * `baseFrequency='0.008 0.42'` is the whole trick: wildly anisotropic noise, slow
+ * across the shaft and fast along its short axis, which turns fractal noise into
+ * fine LENGTHWISE streaks — grain running with the shaft, as real turned wood does.
+ * `seed='7'` and `stitchTiles='stitch'` make it deterministic AND seamless when the
+ * 320px tile repeats, so the plank has no visible join at any viewport width.
+ *
+ * The feColorMatrix paints a fixed dark-brown at an alpha DERIVED from the noise
+ * (0.20·(R+G+B) − 0.22), so the wash averages ~8% and clamps to zero in the gaps —
+ * a grain you can see and never a set of stripes. There is no random call anywhere
+ * in this module: the string below is a constant, which is what the determinism pin
+ * asserts.
+ *
+ * ⚠️ ENCODE IN THIS ORDER. `%` must be escaped BEFORE `#`, `<` and `>`, or the
+ * `%23` this function itself emits would be re-escaped into `%2523`. The SVG is
+ * authored with single-quoted attributes and explicit userSpaceOnUse numbers (never
+ * `100%`) precisely to keep the character set this small.
+ */
+const GRAIN_SVG = [
+  "<svg xmlns='http://www.w3.org/2000/svg' width='320' height='64'>",
+  "<filter id='grain' filterUnits='userSpaceOnUse' x='0' y='0' width='320' height='64'>",
+  "<feTurbulence type='fractalNoise' baseFrequency='0.008 0.42' numOctaves='3'",
+  " seed='7' stitchTiles='stitch' result='noise'/>",
+  "<feColorMatrix in='noise' type='matrix' values='",
+  "0 0 0 0 0.36 0 0 0 0 0.26 0 0 0 0 0.13 0.20 0.20 0.20 0 -0.22'/>",
+  '</filter>',
+  "<rect x='0' y='0' width='320' height='64' filter='url(#grain)'/>",
+  '</svg>',
+].join('');
+export const SHAFT_GRAIN_TEXTURE = `url("data:image/svg+xml,${GRAIN_SVG
+  .replace(/%/g, '%25').replace(/#/g, '%23').replace(/</g, '%3C').replace(/>/g, '%3E')}")`;
+
+/**
+ * SHAFT_GRAIN_LAYERS — the finished plank, as ONE CSS background-image string both
+ * headers share, so the mobile and desktop bars are the same piece of wood.
+ *
+ * Order is paint order: the grain rides ON TOP of the cylinder shading, because
+ * grain is a property of the surface and the shading is the light falling on it.
+ * Reversed, the barrel would wash over the grain and the wood would go flat.
  *
  * ⚠️ Consumers must paint this OVER the SHAFT base colour (`background-image` +
  * `background-color`), never as the whole `background` shorthand with no base — the
- * gradients are transparent between streaks and would otherwise let the page show
- * through the bar.
+ * grain is transparent in its gaps and the page would show through the shaft.
  */
-export const SHAFT_GRAIN_LAYERS = [
-  `repeating-linear-gradient(180deg, transparent 0, transparent 3px, ${SHAFT_GRAIN} 3px,`
-  + ` ${SHAFT_GRAIN} 3.75px, transparent 3.75px, transparent 8px, ${SHAFT_GRAIN} 8px,`
-  + ` ${SHAFT_GRAIN} 8.5px, transparent 8.5px, transparent 13px)`,
-  `repeating-linear-gradient(180deg, transparent 0, transparent 6px, ${SHAFT_GRAIN_DEEP} 6px,`
-  + ` ${SHAFT_GRAIN_DEEP} 6.75px, transparent 6.75px, transparent 19px, ${SHAFT_GRAIN_DEEP} 19px,`
-  + ` ${SHAFT_GRAIN_DEEP} 19.6px, transparent 19.6px, transparent 29px)`,
-].join(', ');
+export const SHAFT_GRAIN_LAYERS = [SHAFT_GRAIN_TEXTURE, SHAFT_CYLINDER].join(', ');
+
+// SHAFT_RULE — the seam between two REFERENCE tabs, read as a groove cut in the
+// barrel. Retoned for the honey wood: V2's #A39062 was chosen against cream and
+// measures 1.29:1 on this ground, which is invisible. This is 2.14:1 — a decorative
+// divider carries no WCAG floor (nothing about reaching Compendium depends on seeing
+// it), so the number is chosen by eye: present, quiet, and deliberately weaker than
+// the fletch silhouettes, because the hierarchy between "the journey" and "the shelf"
+// is the point.
+export const SHAFT_RULE = '#8C6E42';
+
+// SHAFT_GREEN / SHAFT_SLATE — the account chip's status tones FOR TEXT RIDING THE
+// WOOD, and they exist because the chip's background is `transparent`, so its label
+// is read against whatever the header paints.
+// ⚠️ THE TWO-STEP COLLAPSED, DELIBERATELY. V2 could keep a brighter RULE (GREEN) and
+// a deeper LABEL (GREEN_DEEP) because the cream ground let the rule clear 1.4.11 at
+// 3.91:1. On honey-tan, GREEN falls to 2.18:1 and GREEN_DEEP to 2.93:1 — the rule no
+// longer clears the boundary floor at EITHER step, so there is no honest two-step
+// left to keep. Rule and label both take these tones (4.87:1 / 4.96:1), which clears
+// text AA and the boundary floor at once. The status hue is preserved; only its
+// brightness moved, and it moved because the ground did.
+export const SHAFT_GREEN = '#2A4420';
+export const SHAFT_SLATE = '#303E4A';
+
+/**
+ * THE GREY-GOOSE VANE — the English war-arrow feather, in profile.
+ *
+ * The owner corrected the species from turkey, and the correction is the whole
+ * character of these tones: goose primaries are COOLER, more UNIFORM and far more
+ * quietly marked than turkey. So there is no bold barring anywhere here. What
+ * carries the material instead is a fine ladder — a paler LEADING edge, a mid VANE,
+ * a darker trailing TIP, near-invisible BARB striations, two broad SHEEN bands where
+ * the barbs catch light, and a pale RACHIS the barbs comb off. This is a quieter
+ * feather than V2's, and that is a feature: it is what lets the labels breathe.
+ *
+ * EVERY TONE IS OPAQUE, and that is the same discipline V2 established for its
+ * barbs: "AA against the lightest band under a label" is only a computable claim if
+ * the lightest band is a value this file can name. An alpha wash would make it a
+ * hand-wave. The governing number is therefore the LIGHTEST tone in the ladder —
+ * FLETCH_SHEEN_LIFT, the active fletch's brightened sheen — and every pale label in
+ * both registers is measured against THAT, never against the vane body.
+ *
+ * MEASURED (tests/design/contrast.test.js):
+ *   PARCH_100 on FLETCH_SHEEN_LIFT .... 4.84:1  the label register's FLOOR    AA ✓
+ *   PARCH     on FLETCH_SHEEN_LIFT .... 5.33:1  the active label on it        AA ✓
+ *   PARCH_100 on FLETCH_SHEEN ......... 5.49:1  resting label, resting sheen  AA ✓
+ *   PARCH_100 on FLETCH_LEAD .......... 6.30:1  on the paler leading edge     AA ✓
+ *   PARCH_100 on FLETCH_VANE .......... 8.24:1  on the vane body              AA ✓
+ *   PARCH_100 on FLETCH_BARB .......... 8.60:1  on a barb striation           AA ✓
+ *   GOLD      on FLETCH_VANE .......... 4.12:1  the active gold underline, on the
+ *       LIGHTEST ground it can touch — the sheen bands stop short of the vane's
+ *       lower edge on purpose (GooseFletch SHEEN_FLOOR) so the underline's ground is
+ *       the vertical gradient alone, which only darkens downward.  1.4.11 ✓
+ */
+export const FLETCH_LEAD = '#5C5347';
+export const FLETCH_VANE = '#4A4238';
+export const FLETCH_TIP = '#3B352D';
+export const FLETCH_BARB = '#454035';
+export const FLETCH_SHEEN = '#655C4E';
+export const FLETCH_SHEEN_LIFT = '#6E6456';
+export const FLETCH_RACHIS = '#6E6456';
+// The seam where two fletches overlap: a quill SHADOW, not a gilt hairline. It is
+// 1.23:1 against the vane and that is exactly right — feather-on-feather shadows are
+// nearly tonal, and the boundary a user actually needs is the vane against the wood
+// (4.46:1). Recorded, not hidden.
+export const FLETCH_SEAM = '#3B352D';
+
+// THE WRAPS — two narrow glossy red-brown thread bands riding the shaft, framing the
+// fletching cluster: the silk/linen whipping from the reference photo. WRAP is the
+// thread, WRAP_GLOSS its specular highlight (measured against WRAP, not the wood —
+// it is a highlight INSIDE the binding), WRAP_EDGE the shadowed lower turn.
+// WRAP on SHAFT_BODY is 3.16:1, so the binding clears 1.4.11 as a boundary even
+// though nothing depends on perceiving it.
+export const WRAP = '#8A4630';
+export const WRAP_GLOSS = '#A85E45';
+export const WRAP_EDGE = '#67321F';
+
+// FLETCH_SHADOW — the soft drop shadow that seats a feather on the wood. Authored as
+// an 8-DIGIT HEX rather than the translucent-colour function on purpose: that
+// function's occurrences are a burn-down ratchet trending to zero
+// (tests/design/deepCraftKillList.test.js counts them), and a decoration has no
+// business spending a row of a worklist. Alpha 0x59 ≈ 35% of a near-black brown:
+// enough to lift the vane off the barrel, far too little to read as a second edge.
+export const FLETCH_SHADOW = '#2A251E59';
 
 /**
  * FLETCH — the fletching's GEOMETRY, deliberately kept apart from CHROME: none of
  * it may enter the header's layout box.
  *
- * `slant` is the horizontal run of every feather edge AND of the angled stroke
- * between feathers. ONE number for both is what makes the strokes exactly parallel
- * to the vanes: each traverses `slant` px over the same band height.
+ * `overhang` is how far the vanes' lower edges PEEK below the ribbon (the directive's
+ * ~6px). ⚠️ IT IS PAINT AND NEVER LAYOUT — see GooseFletch.jsx's overflow note. It
+ * contributes no height, margin, border or offset to any box, which is what keeps
+ * ANCHOR_OFFSET (and with it every About / guide / Compendium anchor landing)
+ * describing the bar the ribbon actually is.
  *
- * `overhang` is how far the fletching's PAINT extends below the ribbon. It is drawn
- * as a drop-shadow of the band's own clipped silhouette — pure paint, contributing
- * no height, margin, border or out-of-flow offset to any box — so the ribbon adds NO
- * layout height, which is what keeps ANCHOR_OFFSET (and with it every About /
- * guide / Compendium anchor landing) describing the bar it actually is.
+ * `barbRun` / `barbGap` are the barb striations' sweep and spacing in the fletch's
+ * own coordinate space; FLETCH_BARB_DEG below is derived from `barbRun` so the comb
+ * angle can never drift from the geometry that produced it.
  *
- * `gilt` is the hairline's width and `bloom` the outer glow's blur radius — both
- * held here beside the slant so the whole feather is described in one place.
+ * `slant` survives V2 with a NARROWER JOB. It is no longer a feather edge — the
+ * vanes are shield-cut paths now, not parallelograms — it is the seam box's width
+ * and lean, kept because NavDivider still traverses `slant` px over the bar's height
+ * and the quill shadow should lean with the comb.
  *
- * The barb streaks' ANGLE is not here: it needs CHROME.headerDesktop, which is
- * declared below, so it lives with the rest of the derived chrome as
- * FLETCH_BARB_DEG rather than as a getter that would read CHROME out of its own
- * temporal dead zone during module evaluation.
+ * `wrap` is each whipping band's width; `seam` the gap that lets two adjacent
+ * silhouettes read as two feathers rather than one smear.
  */
-export const FLETCH = Object.freeze({ slant: 10, overhang: 4, gilt: 1, bloom: 5 });
+export const FLETCH = Object.freeze({
+  slant: 10, overhang: 6, barbRun: 26, barbGap: 3.4, wrap: 7, seam: 1,
+});
 
 // swatch — exact-value migration swatchbook (see design/tokens.js). Routes the
 // long tail of raw inline hex colors through the token system with zero visual
@@ -353,18 +443,21 @@ export const CHROME = Object.freeze({
 export const ANCHOR_OFFSET = CHROME.headerDesktop + SP.xxl;
 
 /**
- * FLETCH_BARB_DEG — the CSS gradient angle of the feather's barb texture, DERIVED.
+ * FLETCH_BARB_DEG — THE COMB ANGLE: how far off vertical the barb striations (and,
+ * with them, the sheen bands they catch the light in) lean. DERIVED, never spelled.
  *
- * A barb must lie parallel to the feather's own edge, and that edge runs
- * FLETCH.slant px horizontally over exactly CHROME.headerDesktop px vertically. CSS
- * measures a gradient angle clockwise from "up", and stripes leaning forward by θ
- * from vertical need their gradient LINE (which is perpendicular to them) at
- * 90° + θ. So the angle is 90 + atan(slant / headerDesktop), and it re-derives
- * itself the moment the slant or the bar height moves. At slant 10 over a 48px
- * shaft that is 102° — deliberately far from the shaft grain's 180°, which is what
- * keeps the two textures reading as different materials instead of one moiré.
+ * A barb leaves the rachis and sweeps toward the trailing tip, running FLETCH.barbRun
+ * across the fletch over exactly CHROME.headerDesktop of depth. So the angle is
+ * atan(barbRun / headerDesktop) and it re-derives the moment either number moves.
+ * At barbRun 26 over a 48px shaft that is 28° — a comb, not a rake.
+ *
+ * ⚠️ IT IS SHARED, WHICH IS THE POINT. GooseFletch draws the barbs, the sheen bands
+ * AND the rachis taper off this one number; three angles maintained separately is
+ * how a feather stops looking like one feather. It is also deliberately far from the
+ * shaft grain's own direction (the grain runs LENGTHWISE, along the shaft), so vane
+ * and wood never read as one interference pattern where a fletch meets bare barrel.
  */
-export const FLETCH_BARB_DEG = 90 + Math.round((Math.atan2(FLETCH.slant, CHROME.headerDesktop) * 180) / Math.PI);
+export const FLETCH_BARB_DEG = Math.round((Math.atan2(FLETCH.barbRun, CHROME.headerDesktop) * 180) / Math.PI);
 
 /**
  * bottomClearance — safe-area-aware bottom offset for fixed/sticky mobile

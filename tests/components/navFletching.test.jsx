@@ -1,98 +1,98 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/components/navFletching.test.jsx — THE FLETCHED RIBBON (owner directive,
- * 2026-08-03; lane FL).
+ * tests/components/navFletching.test.jsx — THE HALF-SEEN WAR ARROW (owner directive,
+ * 2026-08-03 evening; RIBBON V3, from a reference photo plus two live
+ * clarifications).
  *
- * The order: Create · Library · Realm stop being three separate tabs and become
- * ONE leather-brown band of three feathers whose parallel edges lean FORWARD,
- * toward Realm — the back half of an arrow in flight. The reference tabs beyond
- * it stay plain, because the hierarchy between "the journey" and "the shelf" IS
- * the point. This file pins the four claims that make the band safe to ship, and
- * it exists because three of them are invisible to the eye and to every other
- * suite:
+ * The composition: the bar is HALF OF AN ARROW IN PROFILE. The arrow lies along the
+ * top screen edge, the viewport shows this side's half, so the whole header is the
+ * SHAFT'S VISIBLE HALF — a honey-tan barrel shaded as a cylinder — and Create ·
+ * Library · Realm are the NEAR SIDE'S THREE FLETCHES rooted on it, quill bases at the
+ * shaft line, vanes sweeping toward Realm, bound down by two silk wraps.
  *
- *   1. THE BAND'S MEMBERSHIP IS DERIVED, NOT LISTED. It is the maximal NAV run
- *      whose consecutive pairs are declared in routes.js NAV_FLOW, read through
- *      the one predicate that owns that declaration (NavFlowArrow.flowsInto). A
- *      hardcoded trio would silently keep painting the wrong tabs after a nav
- *      reorder — the exact second truth routes.js:163 exists to forbid.
+ * This file pins the claims that make it safe to ship, and it exists because most of
+ * them are invisible to the eye and to every other suite:
  *
- *   2. ⚠️⚠️ THE OVERHANG IS PAINT, NEVER LAYOUT. The band's brown extends
- *      FLETCH.overhang px BELOW the ribbon, and it MUST do so without adding one
+ *   1. THE FLETCHING'S MEMBERSHIP IS DERIVED, NOT LISTED. It is the maximal NAV run
+ *      whose consecutive pairs are declared in routes.js NAV_FLOW, read through the
+ *      one predicate that owns that declaration (NavFlowArrow.flowsInto). A hardcoded
+ *      trio would silently keep painting the wrong tabs after a nav reorder — the
+ *      exact second truth routes.js:163 exists to forbid.
+ *
+ *   2. ⚠️⚠️ THE OVERHANG IS PAINT, NEVER LAYOUT. The vanes' lower edges peek
+ *      FLETCH.overhang px BELOW the ribbon, and they MUST do so without adding one
  *      pixel to any box. This is the load-bearing one: theme.js derives
- *      ANCHOR_OFFSET from CHROME.headerDesktop, and every About / guide /
- *      Compendium / dossier in-page anchor lands on that number. A margin, a
- *      padding, a height or a negative offset here would push the sticky header
- *      taller and every anchor in the estate would land 4px worse — a defect no
- *      nav test would ever see. So both halves are pinned: the derivation chain,
- *      and the ABSENCE of any box that spends the overhang.
+ *      ANCHOR_OFFSET from CHROME.headerDesktop, and every About / guide / Compendium
+ *      / dossier in-page anchor in the estate lands on that number. A height, a
+ *      margin, or a negative offset here would push the sticky header taller and
+ *      every anchor would land worse — a defect no nav test would ever see. V3
+ *      changes the MECHANISM (V2 faked the peek with a drop-shadow of a clipped
+ *      silhouette; V3 draws the real vane past the bottom under `overflow: visible`)
+ *      so all three halves are pinned: the overflow, the geometry that reaches past
+ *      the bar, and the ABSENCE of any box that spends it.
  *
- *      ⚠️ NEVER PIN THE SUM (v2 directive §1). Every assertion here names
- *      `CHROME.headerDesktop + SP.xxl`, not the number it happens to evaluate to.
- *      A pin on the literal survives an edit that BREAKS the derivation and fails
- *      on an edit that HONOURS it, which is exactly backwards; the literals below
- *      appear only as a second, clearly-labelled today's-value line so a reader
- *      knows what the bar currently measures.
+ *      ⚠️ NEVER PIN THE SUM. Every assertion here names `CHROME.headerDesktop +
+ *      SP.xxl`, not the number it happens to evaluate to. A pin on the literal
+ *      survives an edit that BREAKS the derivation and fails on one that HONOURS it,
+ *      which is exactly backwards; literals appear only as a second, clearly-labelled
+ *      today's-value line.
  *
- *      ⚠️ jsdom HAS NO LAYOUT, so this file can only pin the STRUCTURE that makes
- *      the overhang paint-only; the height itself was proved in a real browser and
- *      the receipt is recorded here so nobody re-derives it. V1's receipt at
- *      1440×900 read header 124px / nav 100px on BOTH base and the fletched tree —
- *      zero layout cost, but also 124 against a constant that said 60. V2 found
- *      the cause rather than moving the number: NavDivider's SVG was IN FLOW with
- *      `height="100%"` against an indefinite parent, so it fell back to its own
- *      viewBox height of 100 and that set the header's flex line. With the SVG out
- *      of flow and the header spending CHROME.headerDesktop as its min-height, the
- *      SAME measurement now reads header 48 / nav 47 / main-top 48 / every divider
- *      box 47 — so the derivation is TRUE, not merely tidy. The structural half of
- *      that repair is pinned in tests/components/navDividers.test.jsx.
+ *      ⚠️ jsdom HAS NO LAYOUT, so this file pins the STRUCTURE that makes the
+ *      overhang paint-only; the height itself was proved in a real browser and the
+ *      receipt is recorded here so nobody re-derives it. V2's measurement at
+ *      1440×900 read header 48 / nav 47 / main-top 48 with the fletching present and
+ *      identical without it. V3 re-took it and it is unchanged — see the lane's
+ *      screenshot receipt — which is the whole point of swapping the mechanism
+ *      without touching a box.
  *
- *   3. ⚠️ THE CLIP NEVER TOUCHES A FOCUSABLE ELEMENT. `clip-path` clips an
- *      element's whole rendering INCLUDING its outline, and a11y.css draws the
- *      global focus ring as `outline: 3px` at a positive `outline-offset` —
- *      entirely OUTSIDE the border box. Clipping the <button> would therefore
- *      swallow the keyboard focus ring while leaving every visual test green.
- *      The feather shape is painted by an aria-hidden VANE layer inside the
- *      button; neither the button nor any ancestor of it may carry a clip-path
- *      or an `overflow: hidden`, and this file asserts the whole chain.
+ *   3. ⚠️ NOTHING CLIPPED IS EVER FOCUSABLE. `clip-path` clips an element's whole
+ *      rendering INCLUDING its outline, and a11y.css draws the global focus ring as
+ *      `outline: 3px` at a positive `outline-offset` — entirely OUTSIDE the border
+ *      box. Clipping the control would therefore swallow the keyboard focus ring
+ *      while leaving every visual test green. All clipping lives inside GooseFletch's
+ *      aria-hidden SVG; neither the control nor any ancestor of it may carry a
+ *      clip-path or an `overflow: hidden`, and this file asserts the whole chain.
  *
- *   4. THE ACTIVE FEATHER BRIGHTENS WITH THE EXISTING GOLD GRAMMAR, on four
- *      channels — lifted fill, brighter label, brighter gilt + gold underline, and
- *      aria-current="page" — so the state never rests on colour alone. ⚠️ WEIGHT
- *      IS NO LONGER ONE OF THEM. V2 fixes every feather label at 600 under the
- *      BALANCE LAW, which is precisely why the directive added the brighter gilt:
- *      a channel was spent, so a channel was replaced. The test that used to
- *      assert 700-on-active now asserts 600-on-BOTH, and the replacement channel
- *      is asserted beside it, so the swap cannot be half-made.
+ *   4. ⚠️⚠️ AA IS OWED AGAINST THE LIGHTEST TONAL BAND, NOT THE VANE. A pale label
+ *      on a dark feather fails at the feather's LIGHT points, so the governing
+ *      number is the lightest tone in the whole goose ladder — FLETCH_SHEEN_LIFT,
+ *      the active fletch's brightened sheen. Every tone is authored OPAQUE precisely
+ *      so "the lightest band" is a value this file can name rather than a hand-wave,
+ *      and the ratios are quoted, not asserted vaguely.
  *
- *   5. THE FIVE STACKED DEVICES STAY DIALLED DOWN (the BALANCE LAW). Band, slant,
- *      gilt, texture and weight all now emphasise the same three cells. The pins
- *      hold each one's dialled-down value — the gilt is FLETCH.gilt px and not
- *      more, the label weight is 600 and not 700 — so "turn them all up" fails
- *      here rather than shipping.
+ *   5. THE TEXTURE IS DETERMINISTIC. The shaft grain is feTurbulence with a FIXED
+ *      seed in an inline data URI. A random source anywhere in that chain would make
+ *      the plank differ per render — invisible in review, and a golden-shift bomb.
+ *      Pinned as: the seed is present, the string is a constant across evaluations,
+ *      and the module names no random source.
  *
- * The mobile bottom nav is untouched by the directive and is pinned here as the
- * negative control: no band, no feather, no paint.
+ * The mobile bottom nav is untouched by the directive and is pinned as the negative
+ * control: no fletching, no wrap, no vane.
  *
- * App.jsx is a pure layout shell over the Zustand store + path router, so the
- * store, the route hook, the breakpoint hook and the routed view are stubbed —
- * the render then exercises only the nav chrome under test (the sibling suites'
- * idiom, kept identical on purpose). The active/resting A/B renders NavRibbon as
- * a LEAF, so a register can be observed without mounting a lazy view.
+ * App.jsx is a pure layout shell over the Zustand store + path router, so the store,
+ * the route hook, the breakpoint hook and the routed view are stubbed — the render
+ * then exercises only the nav chrome under test (the sibling suites' idiom, kept
+ * identical on purpose). The active/resting A/B renders NavRibbon as a LEAF, so a
+ * register can be observed without mounting a lazy view.
  */
 
 import React from 'react';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
 
 import { NAV, NAV_FLOW } from '../../src/lib/routes.js';
 import { flowsInto } from '../../src/components/nav/NavFlowArrow.jsx';
 import {
-  ANCHOR_OFFSET, BODY, CHROME, FLETCH, FLETCH_BARB, FLETCH_BARB_DEG, FLETCH_BARB_LIFT,
-  FLETCH_BROWN, FLETCH_BROWN_LIFT, GILT, GILT_ACTIVE, GILT_BLOOM, GOLD_TXT, PARCH, PARCH_100,
-  SHAFT, SHAFT_GRAIN, SHAFT_GRAIN_DEEP, SHAFT_GRAIN_LAYERS, SP,
+  ANCHOR_OFFSET, BODY, CHROME, FLETCH, FLETCH_BARB, FLETCH_BARB_DEG, FLETCH_LEAD,
+  FLETCH_RACHIS, FLETCH_SHEEN, FLETCH_SHEEN_LIFT, FLETCH_TIP, FLETCH_VANE, GOLD, GOLD_TXT,
+  INK_DEEP, LABEL_BOX, PARCH, PARCH_100, SHAFT, SHAFT_BODY, SHAFT_CYLINDER, SHAFT_EDGE,
+  SHAFT_GRAIN_LAYERS, SHAFT_GRAIN_TEXTURE, SHAFT_RIM, SHAFT_SHEEN, SHAFT_STOPS, SP, WRAP,
 } from '../../src/components/theme.js';
+import { B, LAP, SHEEN_FLOOR, VANE_LOWER, VANE_PATH, W } from '../../src/components/nav/GooseFletch.jsx';
 
 const H = vi.hoisted(() => ({
   route: { view: 'generate', params: {}, legacy: false, notFound: false },
@@ -128,8 +128,8 @@ vi.mock('../../src/lib/stripe.js', () => ({
 }));
 
 // Sever the pricing surface's lazy stripe->creditLedger chain at the component
-// boundary — this suite tests the nav ribbon, not pricing internals, and the
-// chain's dynamic import races environment teardown under gate load.
+// boundary — this suite tests the nav ribbon, not pricing internals, and the chain's
+// dynamic import races environment teardown under gate load.
 vi.mock('../../src/components/pricing/PricingMomentCard.jsx', () => ({
   default: () => null,
 }));
@@ -183,9 +183,9 @@ function rgb(hex) {
   return `rgb(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255})`;
 }
 
-/** WCAG relative luminance of an authored #rrggbb, for the grain-band record. */
+/** WCAG relative luminance of an authored #rrggbb. */
 function relLuminance(hex) {
-  const n = parseInt(hex.slice(1), 16);
+  const n = parseInt(hex.slice(1, 7), 16);
   const [r, g, b] = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => {
     const c = v / 255;
     return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
@@ -193,36 +193,46 @@ function relLuminance(hex) {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
 
-/** How far below SHAFT a streak tone sits, in percent of SHAFT's own luminance. */
-const dropPct = (tone) => ((relLuminance(SHAFT) - relLuminance(tone)) / relLuminance(SHAFT)) * 100;
-
-/**
- * THE BLOOM'S FROZEN SPELLING (v2 verifier tail §2). The overhang pin below used
- * to assert the rendered filter against `${GILT_BLOOM}` — the very token the
- * component interpolates — so it proved the component and the theme agreed and
- * NOTHING about the alpha itself. A palette edit that moved the gold, or a retune
- * of the 22%, moved both sides at once and stayed green. The literal is frozen
- * here instead, and the drift message names which side moved.
- */
-const GILT_BLOOM_FROZEN = 'color-mix(in srgb, #C9A24C 22%, transparent)';
-const BLOOM_DRIFT = [
-  `GILT_BLOOM no longer reads ${GILT_BLOOM_FROZEN}.`,
-  'THE THEME MOVED, not the ribbon: either L.GOLD was re-toned (the mix is a',
-  'function OF the gilt, so a gold edit reaches the bloom) or the 22% alpha was',
-  'retuned. Both are legitimate edits — but the BALANCE LAW dials this device to',
-  'about half on purpose, so re-record this literal deliberately, in a commit that',
-  'says which of the two moved and why.',
-].join('\n  ');
+/** WCAG contrast ratio between two authored hexes. */
+function ratio(a, b) {
+  const [hi, lo] = [relLuminance(a), relLuminance(b)].sort((x, y) => y - x);
+  return (hi + 0.05) / (lo + 0.05);
+}
 
 const feathers = (c) => [...c.querySelectorAll('[data-nav-cell="feather"]')];
 const plains = (c) => [...c.querySelectorAll('[data-nav-cell="plain"]')];
 const label = (b) => b.textContent.trim();
+const fletchOf = (btn) => btn.querySelector('[data-testid^="nav-fletch-"]');
+
+/** Every y coordinate authored into an SVG path's `d`, for the geometry pins. */
+function pathYs(d) {
+  const nums = (d.match(/-?\d+(?:\.\d+)?/g) || []).map(Number);
+  return nums.filter((_, i) => i % 2 === 1);
+}
+
+/**
+ * The ON-CURVE vertices of an SVG path — the points the silhouette actually passes
+ * through, discarding Bézier control points (which pull the curve without lying on
+ * it). Every `M`/`L` endpoint and the LAST pair of every `C`. Geometry pins ask
+ * about the shape, and a control point is not part of the shape.
+ */
+function ONCURVE(d) {
+  const out = [];
+  for (const seg of d.match(/[MLC][^MLCZ]*/g) || []) {
+    const n = (seg.match(/-?\d+(?:\.\d+)?/g) || []).map(Number);
+    if (n.length >= 2) out.push({ x: n[n.length - 2], y: n[n.length - 1] });
+  }
+  return out;
+}
 
 /** The membership the DERIVATION demands, computed here the long way round. */
 function derivedBandIds() {
   return NAV.filter((n, i) => flowsInto(n.id, NAV[i + 1]?.id) || flowsInto(NAV[i - 1]?.id, n.id))
     .map((n) => n.id);
 }
+
+const HERE = dirname(fileURLToPath(import.meta.url));
+const SRC = (rel) => readFileSync(join(HERE, '../../src', rel), 'utf8');
 
 beforeEach(() => {
   H.route = { view: 'generate', params: {}, legacy: false, notFound: false };
@@ -236,8 +246,8 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-describe('1 — the band’s membership is DERIVED from the flow, never listed', () => {
-  test('the rendered feathers are exactly the declared flow run', () => {
+describe('1 — the fletching’s membership is DERIVED from the flow, never listed', () => {
+  test('the rendered fletches are exactly the declared flow run', () => {
     const { container } = render(<App />);
     expect(feathers(container).map(label)).toEqual(['Create', 'Library', 'Realm']);
     // …and that trio is not typed in: it is what the predicate answers.
@@ -255,18 +265,17 @@ describe('1 — the band’s membership is DERIVED from the flow, never listed',
     expect(feathers(container).length + plains(container).length).toBe(NAV.length);
   });
 
-  test('there is exactly ONE band, and it wraps exactly the feathers', () => {
+  test('there is exactly ONE cluster, and it wraps exactly the fletches', () => {
     const { container } = render(<App />);
     const bands = [...container.querySelectorAll('[data-testid="nav-fletch-band"]')];
     expect(bands.length).toBe(1);
-    // Every feather is inside it; no plain tab is.
     for (const f of feathers(container)) expect(bands[0].contains(f)).toBe(true);
     for (const p of plains(container)) expect(bands[0].contains(p)).toBe(false);
   });
 
   test('a cell with no declared flow neighbour can never be fletched', () => {
-    // The negative control the derivation needs: NAV_FLOW names two pairs, and
-    // the band is exactly their union. If this ever grew, the predicate stopped
+    // The negative control the derivation needs: NAV_FLOW names two pairs, and the
+    // fletching is exactly their union. If this ever grew, the predicate stopped
     // being the source and something restated the trio.
     const declared = new Set(Object.entries(NAV_FLOW).flat());
     expect(new Set(derivedBandIds())).toEqual(declared);
@@ -276,149 +285,332 @@ describe('1 — the band’s membership is DERIVED from the flow, never listed',
   });
 });
 
-describe('2 — ⚠️⚠️ the overhang is PAINT, and the layout box stays exactly CHROME.headerDesktop', () => {
+describe('2 — ONE FLETCH PATH PER TAB, and it is a shield-cut war vane', () => {
+  test('every fletched cell carries its own vane path; no plain cell does', () => {
+    const { container } = render(<App />);
+    const drawn = feathers(container);
+    expect(drawn.length).toBe(3); // not a vacuous loop
+    for (const btn of drawn) {
+      const svg = fletchOf(btn);
+      expect(svg, `${label(btn)} has no fletch`).toBeTruthy();
+      expect(svg.tagName.toLowerCase()).toBe('svg');
+      // The silhouette is really drawn, and it is THE shared silhouette — three
+      // vanes cut from one geometry is what makes them read as one fletching.
+      const vane = [...svg.querySelectorAll('path')].map((p) => p.getAttribute('d'));
+      expect(vane).toContain(VANE_PATH);
+    }
+    for (const btn of plains(container)) expect(fletchOf(btn)).toBeNull();
+    // The ids are per-cell, or three fletches on one page would share SVG-local ids
+    // and the last clipPath defined would silently win for all three.
+    const ids = drawn.map((b) => fletchOf(b).getAttribute('data-testid'));
+    expect(new Set(ids).size).toBe(3);
+  });
+
+  test('⚠️ the silhouette RAKES toward Realm — a fletch, never a shield or a tab', () => {
+    // ⚠️⚠️ THE PIN THIS LANE DID NOT HAVE AND NEEDED — TWICE. V3's first cut drew a
+    // symmetric shield; its second squared the leading end off at the quill. Every
+    // structural pin passed both times, every ratio passed both times, and the bar
+    // rendered three heraldic escutcheons and then three dark tabs — which is exactly
+    // the "feathers on a plank" failure the directive names. jsdom cannot see "that
+    // looks like a badge"; it CAN see the geometry that makes it one, so the geometry
+    // is what is pinned, parsed from the path rather than regexed out of it.
+    const pts = ONCURVE(VANE_PATH);
+    expect(pts.length).toBeGreaterThanOrEqual(4); // not a vacuous parse
+
+    // 1. IT LAPS BACK over the fletch behind it. A vane that stops inside its own
+    //    cell leaves bare wood at every seam, and three separated shapes can never
+    //    read as one fletching however well each one is drawn.
+    expect(LAP).toBeGreaterThan(0);
+    expect(Math.min(...pts.map((p) => p.x))).toBe(-LAP);
+    //    …and its quill runs past the trailing edge, so the NEXT vane laps over it.
+    expect(Math.max(...pts.map((p) => p.x))).toBeGreaterThan(W);
+
+    // 2. THE LEADING END IS A POINT ON THE QUILL, not a corner at depth. This is the
+    //    difference between a feather entering a binding and a rectangle.
+    const leadTip = pts.reduce((a, p) => (p.x < a.x ? p : a));
+    expect(leadTip.y).toBeLessThan(CHROME.headerDesktop * 0.15);
+
+    // 3. THE RAKE — deeper at the trailing end than at the leading one. That
+    //    asymmetry IS the sweep toward Realm, and a shield, being symmetric about
+    //    its centre, cannot have it.
+    const deepest = pts.reduce((a, p) => (p.y > a.y ? p : a));
+    expect(deepest.y).toBe(B);
+    expect(deepest.x).toBeGreaterThan(W / 2);
+
+    // 4. IT STILL COVERS THE LABEL. The taper must finish before the label starts, or
+    //    a pale label would sit on bare honey wood at 1.85:1 and be unreadable — the
+    //    exact trap a prettier silhouette invites.
+    const overLabel = pts.filter((p) => p.x > 0 && p.x < W);
+    expect(overLabel.length).toBeGreaterThan(0);
+    for (const p of overLabel) {
+      expect(p.y, `the vane is only ${p.y} deep at x=${p.x}`)
+        .toBeGreaterThan(CHROME.headerDesktop * 0.7);
+    }
+  });
+
+  test('the gold edge traces the LOWER silhouette only — a highlight, not a border', () => {
+    // The first cut stroked the whole closed path, so the gold ran up the leading
+    // edge and along the quill and read as "this badge is selected". The open lower
+    // path is the fix, and it is pinned as a containment relationship rather than a
+    // literal so retouching the curve cannot silently re-close it.
+    expect(VANE_LOWER.startsWith(`M ${W + 4} 0`)).toBe(true);
+    expect(VANE_LOWER.trim().endsWith('Z')).toBe(false);
+    expect(VANE_PATH).toContain(VANE_LOWER.slice(`M ${W + 4} 0 `.length));
+    // …and the leading taper is in the CLOSED path but NOT in the stroked one.
+    const taper = VANE_PATH.slice(VANE_PATH.lastIndexOf('C '), VANE_PATH.lastIndexOf('Z'));
+    expect(VANE_LOWER).not.toContain(taper.trim());
+  });
+
+  test('the barb striations are present, fine, and combed at the DERIVED angle', () => {
+    const { container } = render(<App />);
+    for (const btn of feathers(container)) {
+      const barbs = fletchOf(btn).querySelector(`[data-testid^="nav-fletch-barbs-"]`);
+      expect(barbs, `${label(btn)} has no barbs`).toBeTruthy();
+      const d = barbs.getAttribute('d');
+      // Genuinely dense: a "fine parallel striation" is dozens of marks, not four.
+      const strokes = (d.match(/M /g) || []).length;
+      expect(strokes).toBeGreaterThan(30);
+      expect(barbs.getAttribute('stroke')).toBe(FLETCH_BARB);
+      // Non-scaling stroke is load-bearing under preserveAspectRatio="none": the
+      // three tabs are different widths, so a scaled hairline would come out
+      // heavier on Create than on Realm and they would stop being one fletching.
+      expect(barbs.getAttribute('vector-effect')).toBe('non-scaling-stroke');
+      expect(barbs.getAttribute('fill')).toBe('none');
+    }
+  });
+
+  test('the comb angle is DERIVED from the sweep and the bar, never spelled', () => {
+    // A barb leaves the rachis and runs FLETCH.barbRun across the fletch over exactly
+    // the bar's depth. That is a relationship between two numbers, so it is pinned as
+    // one: move either and the angle must follow, unasked.
+    expect(FLETCH_BARB_DEG).toBe(
+      Math.round((Math.atan2(FLETCH.barbRun, CHROME.headerDesktop) * 180) / Math.PI),
+    );
+    expect(FLETCH_BARB_DEG).toBe(28); // today's value — a comb, not a rake
+    // NEGATIVE CONTROL: the comb must not run with the wood. The shaft's grain is
+    // LONGITUDINAL (the turbulence is stretched along the shaft), so a vertical or
+    // horizontal comb would read as one interference pattern where vane meets barrel.
+    expect(FLETCH_BARB_DEG % 90).not.toBe(0);
+  });
+
+  test('the rachis and the sheen bands are present, and the sheen STOPS SHORT', () => {
+    const { container } = render(<App />);
+    for (const btn of feathers(container)) {
+      const svg = fletchOf(btn);
+      expect(svg.querySelector('[data-testid^="nav-fletch-rachis-"]')).toBeTruthy();
+      const sheen = svg.querySelector('[data-testid^="nav-fletch-sheen-"]');
+      expect(sheen).toBeTruthy();
+      const bands = [...sheen.querySelectorAll('path')];
+      expect(bands.length).toBe(2); // two soft runs, the goose reading — never a set of stripes
+      // ⚠️ THE CONTRAST GUARANTEE, AS GEOMETRY. The active fletch's gold underline
+      // runs along the vane's own bottom, and GOLD is 2.74:1 on a sheen band but
+      // 4.12:1 on the vane gradient. A band reaching the lower edge would put a
+      // state-carrying boundary under 1.4.11's floor at whatever x it crossed.
+      for (const p of bands) {
+        expect(Math.max(...pathYs(p.getAttribute('d')))).toBeLessThanOrEqual(SHEEN_FLOOR);
+      }
+      expect(SHEEN_FLOOR).toBeLessThan(CHROME.headerDesktop);
+    }
+  });
+});
+
+describe('3 — THE WRAPS: two glossy bands riding the shaft, framing the cluster', () => {
+  test('both wraps render, on bare barrel OUTSIDE the fletching', () => {
+    const { container } = render(<App />);
+    const band = container.querySelector('[data-testid="nav-fletch-band"]');
+    const lead = container.querySelector('[data-testid="nav-shaft-wrap-lead"]');
+    const trail = container.querySelector('[data-testid="nav-shaft-wrap-trail"]');
+    expect(lead).toBeTruthy();
+    expect(trail).toBeTruthy();
+    // They FRAME the cluster: each sits entirely outside its box, which is what makes
+    // them bind the fletching rather than decorate it.
+    expect(lead.style.right).toBe('100%');
+    expect(trail.style.left).toBe('100%');
+    expect(band.contains(lead)).toBe(true);
+    // Out of flow, so they spend no row width and cannot wrap the header to a
+    // second flex line.
+    for (const w of [lead, trail]) {
+      expect(w.style.position).toBe('absolute');
+      expect(w.getAttribute('aria-hidden')).toBe('true');
+      expect(w.style.pointerEvents).toBe('none');
+      expect(w.textContent).toBe('');
+      expect(w.style.width).toBe(`${FLETCH.wrap}px`);
+      // The thread is red-brown and WOUND — the turns are what stop it reading as a
+      // painted stripe.
+      expect(w.style.backgroundColor).toBe(rgb(WRAP));
+      expect(w.style.backgroundImage).toContain('repeating-linear-gradient');
+    }
+  });
+
+  test('the wrap is lit by the SAME light as the barrel it rides', () => {
+    // A wrap with its own highlight position reads as a sticker on a shaft. Sharing
+    // SHAFT_STOPS is what makes the two cylinders one object.
+    const { container } = render(<App />);
+    const lead = container.querySelector('[data-testid="nav-shaft-wrap-lead"]');
+    expect(lead.style.backgroundImage).toContain(`${SHAFT_STOPS.lit * 100}%`);
+    expect(lead.style.backgroundImage).toContain(`${SHAFT_STOPS.mid * 100}%`);
+  });
+});
+
+describe('4 — THE CYLINDER: the bar is a shaft seen in profile, not a plank', () => {
+  test('the barrel is shaded, and it darkens DOWNWARD toward the silhouette', () => {
+    // The read the whole composition rests on: lighter above, darker toward the
+    // bottom edge. Inverted, the bar would look like a lit shelf, not a round shaft.
+    const ladder = [SHAFT_SHEEN, SHAFT, SHAFT_BODY, SHAFT_EDGE, SHAFT_RIM];
+    for (let i = 1; i < ladder.length; i += 1) {
+      expect(relLuminance(ladder[i]), `${ladder[i]} must be darker than ${ladder[i - 1]}`)
+        .toBeLessThan(relLuminance(ladder[i - 1]));
+    }
+    // All five really are in the painted gradient — a ladder nobody paints is a lie.
+    for (const tone of ladder) expect(SHAFT_CYLINDER).toContain(tone);
+    expect(SHAFT_CYLINDER).toContain('180deg');
+    // The modelling range: a real barrel, and still one piece of wood.
+    expect(ratio(SHAFT_SHEEN, SHAFT_RIM)).toBeCloseTo(2.67, 2);
+  });
+
+  test('the falloff ACCELERATES toward the rim — that is what makes it round', () => {
+    // A cylinder's cos-falloff is flat near the centreline and steep near the
+    // silhouette. Painted linearly it reads as a gradient-filled rectangle, which is
+    // exactly the "feathers on a plank" failure the directive names.
+    const early = (SHAFT_STOPS.mid - SHAFT_STOPS.lit);
+    const late = (1 - SHAFT_STOPS.edge);
+    const dropEarly = relLuminance(SHAFT_SHEEN) - relLuminance(SHAFT);
+    const dropLate = relLuminance(SHAFT_EDGE) - relLuminance(SHAFT_RIM);
+    expect(dropLate / late).toBeGreaterThan(dropEarly / early);
+  });
+
+  test('⚠️ SHAFT_STOPS.body CLEARS THE LABEL BOX on BOTH header heights', () => {
+    // THE PIN THAT MAKES "SHAFT_BODY is the reference ground" A GEOMETRIC CLAIM
+    // rather than a hopeful one. Every AA number in this lane is measured against
+    // SHAFT_BODY, and that is only honest if the cylinder never goes darker than
+    // SHAFT_BODY anywhere a letterform can land. Labels are vertically centred, so
+    // the bottom of the label box sits at (1 + LABEL_BOX/height)/2 of the bar — and
+    // the stop must be BELOW that on the desktop bar AND the taller mobile one.
+    for (const h of [CHROME.headerDesktop, CHROME.headerMobile]) {
+      const labelBottom = (1 + LABEL_BOX / h) / 2;
+      expect(SHAFT_STOPS.body, `label box is not clear of the falloff on a ${h}px bar`)
+        .toBeGreaterThan(labelBottom);
+    }
+    // Today's values, recorded so a reader knows the bar without running it.
+    expect(SHAFT_STOPS.body).toBe(0.75);
+    expect(LABEL_BOX).toBe(20);
+  });
+
+  test('BOTH headers paint the same barrel, grain OVER shading, over a base colour', () => {
+    const { container } = render(<App />);
+    const header = container.querySelector('header');
+    expect(header.style.backgroundColor).toBe(rgb(SHAFT));
+    // Paint order is the claim: grain is a property of the surface, shading is the
+    // light falling on it. Reversed, the barrel washes over the grain and the wood
+    // goes flat.
+    expect(SHAFT_GRAIN_LAYERS.indexOf(SHAFT_GRAIN_TEXTURE))
+      .toBeLessThan(SHAFT_GRAIN_LAYERS.indexOf(SHAFT_CYLINDER));
+    // ⚠️ background-IMAGE over background-COLOR, never the shorthand: the grain is
+    // transparent in its gaps and the page would show through the shaft.
+    expect(header.style.backgroundImage).toBeTruthy();
+  });
+});
+
+describe('5 — THE TEXTURE IS DETERMINISTIC: a fixed seed, and no random source', () => {
+  test('the grain is inline feTurbulence at a FIXED seed, stretched ALONG the shaft', () => {
+    expect(SHAFT_GRAIN_TEXTURE).toContain('data:image/svg+xml');
+    expect(SHAFT_GRAIN_TEXTURE).toContain('feTurbulence');
+    expect(SHAFT_GRAIN_TEXTURE).toContain("seed='7'");
+    // ANISOTROPY IS THE WHOLE TRICK: slow across the shaft, fast along its short
+    // axis, which is what turns fractal noise into LONGITUDINAL grain. An isotropic
+    // baseFrequency would give a blotchy stucco, not turned wood.
+    const bf = SHAFT_GRAIN_TEXTURE.match(/baseFrequency='([\d.]+) ([\d.]+)'/);
+    expect(bf, 'the grain must declare a two-axis baseFrequency').toBeTruthy();
+    expect(Number(bf[2])).toBeGreaterThan(Number(bf[1]) * 10);
+    // Seamless when the tile repeats, or the plank shows a join at some width.
+    expect(SHAFT_GRAIN_TEXTURE).toContain("stitchTiles='stitch'");
+  });
+
+  test('the data URI is a CONSTANT and the module names no random source', async () => {
+    // Non-vacuity: re-importing the module fresh yields the identical string. A
+    // texture built at import time from a random source would differ here and be
+    // invisible in review.
+    vi.resetModules();
+    const again = await import('../../src/components/theme.js');
+    expect(again.SHAFT_GRAIN_TEXTURE).toBe(SHAFT_GRAIN_TEXTURE);
+    const src = SRC('components/theme.js');
+    expect(src).not.toMatch(/Math\.random|crypto\.getRandomValues|Date\.now/);
+  });
+
+  test('the URI is escaped in the ORDER that makes it valid', () => {
+    // `%` must be escaped BEFORE `#`, or the `%23` the escaper itself emits gets
+    // re-escaped into `%2523` and the filter reference dangles — a bug that renders
+    // as a completely untextured bar and nothing else.
+    expect(SHAFT_GRAIN_TEXTURE).toContain('%23grain');
+    expect(SHAFT_GRAIN_TEXTURE).not.toContain('%2523');
+    expect(SHAFT_GRAIN_TEXTURE).not.toContain('<');
+    expect(SHAFT_GRAIN_TEXTURE).not.toContain('>');
+  });
+});
+
+describe('6 — ⚠️⚠️ the overhang is PAINT, and the layout box stays CHROME.headerDesktop', () => {
   test('the anchor derivation chain the overhang must not disturb', () => {
-    // This is the reason clause 2 exists. Pinned here, beside the thing that could
-    // break it, rather than only in the theme. THE DERIVATION IS THE CLAIM: assert
-    // the sum's SHAPE, never the number it currently reaches, so that slimming the
-    // shaft again moves this pin's expectation with it instead of failing it.
+    // The reason this whole block exists, pinned beside the thing that could break
+    // it. THE DERIVATION IS THE CLAIM: assert the sum's SHAPE, never the number it
+    // currently reaches, so slimming the shaft again moves this pin with it.
     expect(ANCHOR_OFFSET).toBe(CHROME.headerDesktop + SP.xxl);
-    // Today's values, recorded so a reader knows the bar without running it — and
-    // deliberately in a SEPARATE assertion from the derivation above, so a future
-    // resize edits one line that is obviously a record and never the invariant.
+    // Today's values, in a SEPARATE assertion so a future resize edits one line that
+    // is obviously a record and never the invariant.
     expect(CHROME.headerDesktop).toBe(48);
     expect(ANCHOR_OFFSET).toBe(72);
   });
 
   test('the DESKTOP HEADER ITSELF spends CHROME.headerDesktop, in border-box', () => {
-    // ⚠️ THE PIN THE V2 VERIFIER FOUND MISSING. Everything else in this block
-    // proves the fletching does not ADD height. Nothing proved the bar SPENDS the
-    // token at all — and that is the half V2 actually repaired: before it, the
-    // header sized by content and an in-flow SVG set the flex line at 124 while
-    // the token said 60. Delete `minHeight`/`boxSizing` from App.jsx's desktop
-    // header and every other assertion here stays green while ANCHOR_OFFSET goes
-    // back to describing a bar that does not exist.
+    // ⚠️ Everything else here proves the fletching does not ADD height. This proves
+    // the bar SPENDS the token at all — the half V2 actually repaired, when the
+    // header sized by content and an in-flow SVG set the flex line at 124 while the
+    // token said 60.
     const { container } = render(<App />);
     const header = container.querySelector('header');
     expect(header).toBeTruthy();
     expect(header.style.minHeight).toBe(`${CHROME.headerDesktop}px`);
-    // border-box is load-bearing beside it: the header carries `0 SP.xxl` padding,
-    // and under content-box the min-height would be the CONTENT box, so the bar
-    // would still measure the token plus whatever vertical padding arrives later.
+    // border-box is load-bearing beside it: under content-box the min-height would
+    // be the CONTENT box and the bar would measure the token plus any padding.
     expect(header.style.boxSizing).toBe('border-box');
     // …and it is a FLOOR, never a fixed height (J-V2-1): the desktop breakpoint is
-    // 640px while this row wants ~1000, so flexWrap really fires on a narrow
-    // desktop and a fixed height would clip the second line instead of growing.
+    // 640px while this row wants ~1000, so flexWrap really fires on a narrow desktop
+    // and a fixed height would clip the second line instead of growing.
     expect(header.style.height).toBeFalsy();
     expect(header.style.maxHeight).toBeFalsy();
   });
 
-  test('the barb angle is DERIVED from the slant and the bar, never spelled', () => {
-    // The texture has to lie parallel to the edge of the feather carrying it. That
-    // is a relationship between two numbers, so it is pinned as one: change the
-    // slant or the bar height and the angle must follow, unasked.
-    expect(FLETCH_BARB_DEG).toBe(
-      90 + Math.round((Math.atan2(FLETCH.slant, CHROME.headerDesktop) * 180) / Math.PI),
-    );
-    expect(FLETCH_BARB_DEG).toBe(102); // today's value
-    // NEGATIVE CONTROL: the barbs and the shaft grain must not share a direction,
-    // or the two textures interfere where a feather meets bare wood. The grain is
-    // horizontal (a 180deg gradient line); the barbs may never be.
-    expect(FLETCH_BARB_DEG % 180).not.toBe(0);
-    expect(SHAFT_GRAIN_LAYERS).toContain('180deg');
-    expect(SHAFT_GRAIN_LAYERS).not.toContain(`${FLETCH_BARB_DEG}deg`);
-  });
-
-  test('the shaft grain is two layers whose periods are COPRIME, so it cannot tile visibly', () => {
-    // Non-vacuity: there really are two streak layers on the plank.
-    expect((SHAFT_GRAIN_LAYERS.match(/repeating-linear-gradient/g) || []).length).toBe(2);
-    // The periods are the last stop of each layer. 13 and 29 are coprime, so the
-    // combined figure repeats every 377px — against a 48px bar, never twice.
-    expect(SHAFT_GRAIN_LAYERS).toContain('transparent 13px');
-    expect(SHAFT_GRAIN_LAYERS).toContain('transparent 29px');
-    const gcd = (a, b) => (b ? gcd(b, a % b) : a);
-    expect(gcd(13, 29)).toBe(1);
-    expect(13 * 29).toBeGreaterThan(CHROME.headerDesktop * 4);
-    // Both streak tones are named, and the DARKEST is the one every label on the
-    // shaft owes its AA to (measured in tests/design/contrast.test.js).
-    expect(SHAFT_GRAIN_LAYERS).toContain(SHAFT_GRAIN);
-    expect(SHAFT_GRAIN_LAYERS).toContain(SHAFT_GRAIN_DEEP);
-  });
-
-  test('THE GRAIN-BAND RECORD IS THE MEASUREMENT, and the measurement is honest', () => {
-    // The directive asked for streaks 2–4% below the plank. MEASURED, to two
-    // decimals: 1.96% and 3.89% — so the LIGHTER streak sits 0.04pp under the
-    // stated floor and the record used to claim both were "inside" the band.
-    // Kept rather than nudged, and the reason is the estate's own lesson: the
-    // number was measured and the prose was not, so the prose moves. Deepening
-    // #EFE3C6 by one step to satisfy a hand-set floor would move a tone nobody
-    // can see it move (0.04pp of relative luminance) purely to make a sentence
-    // true — the "move the number to fit" reflex this ribbon's own history
-    // (60-vs-124) exists to warn against. The owner's word was SUBTLE; 1.96%
-    // is subtle, and the band is a target, not a threshold anything depends on.
-    expect(dropPct(SHAFT_GRAIN)).toBeCloseTo(1.96, 2);
-    expect(dropPct(SHAFT_GRAIN_DEEP)).toBeCloseTo(3.89, 2);
-    // What IS a floor: the pair must stay ordered, stay visible, and stay quiet.
-    expect(dropPct(SHAFT_GRAIN)).toBeLessThan(dropPct(SHAFT_GRAIN_DEEP));
-    expect(dropPct(SHAFT_GRAIN)).toBeGreaterThan(1); // a stripe you can see
-    expect(dropPct(SHAFT_GRAIN_DEEP)).toBeLessThan(4); // never a ruled line
-  });
-
-  test('the paint layer is a zero-inset absolute box — it is not in flow at all', () => {
+  test('the vane really REACHES past the bar — the overhang is non-vacuous', () => {
+    // FIRST, that the peek exists at all. Without this, the absence census below
+    // would pass just as happily on a fletching that had lost it.
+    expect(B).toBe(CHROME.headerDesktop + FLETCH.overhang);
+    expect(FLETCH.overhang).toBe(6); // today's value — the directive's ~6px
+    const ys = pathYs(VANE_PATH);
+    expect(Math.max(...ys)).toBeGreaterThan(CHROME.headerDesktop);
+    // …and the viewBox is exactly the BAR, so one user unit is one pixel and `B` is
+    // a real measurement rather than a coordinate that happens to look like one.
     const { container } = render(<App />);
-    const paint = container.querySelector('[data-testid="nav-fletch-paint"]');
-    expect(paint).toBeTruthy();
-    expect(paint.style.position).toBe('absolute');
-    for (const side of ['top', 'right', 'bottom', 'left']) {
-      expect(paint.style[side], `paint.${side} must be flush with the band`).toBe('0px');
+    const svg = fletchOf(feathers(container)[0]);
+    expect(svg.getAttribute('viewBox')).toBe(`0 0 ${W} ${CHROME.headerDesktop}`);
+    expect(svg.getAttribute('preserveAspectRatio')).toBe('none');
+  });
+
+  test('the peek is bought with OVERFLOW on a zero-inset box, not with a taller one', () => {
+    // ⚠️ THE MECHANISM PIN. Every other way to reach below this box — a taller
+    // height, `calc(100% + 6px)`, a negative `bottom` — spends a layout property.
+    // Painting outside your own box costs no box; growing it costs every anchor in
+    // the estate.
+    const { container } = render(<App />);
+    for (const btn of feathers(container)) {
+      const svg = fletchOf(btn);
+      expect(svg.style.overflow).toBe('visible');
+      expect(svg.style.position).toBe('absolute');
+      for (const side of ['top', 'right', 'bottom', 'left']) {
+        expect(svg.style[side], `fletch.${side} must be flush with the cell`).toBe('0px');
+      }
+      expect(svg.style.height).toBe('100%');
+      expect(svg.getAttribute('aria-hidden')).toBe('true');
+      expect(svg.style.pointerEvents).toBe('none');
     }
-    expect(paint.getAttribute('aria-hidden')).toBe('true');
-    expect(paint.style.pointerEvents).toBe('none');
-    expect(paint.textContent).toBe('');
-  });
-
-  test('the overhang exists, and exists ONLY as a filter', () => {
-    const { container } = render(<App />);
-    const paint = container.querySelector('[data-testid="nav-fletch-paint"]');
-    // NON-VACUITY FIRST: the overhang is really drawn. Without this, the absence
-    // census below would pass just as happily on a band that had lost it.
-    // (cssstyle normalizes `background` to rgb() but leaves `filter` verbatim.)
-    // The filter now carries TWO shadows: the brown overhang, then the gilt bloom.
-    // Both are pinned, in order, because "still has a filter" is not the claim.
-    expect(paint.style.filter).toBe(
-      `drop-shadow(0 ${FLETCH.overhang}px 0 ${FLETCH_BROWN})`
-      + ` drop-shadow(0 0 ${FLETCH.bloom}px ${GILT_BLOOM})`,
-    );
-    // …and the bloom's own STRENGTH, against a frozen literal rather than against
-    // itself. The assertion above compares the render to the token the render is
-    // built from: true of a 22% bloom and equally true of a 90% one. These two
-    // are what actually hold the alpha — the token as authored, and the token as
-    // it reaches the DOM.
-    expect(GILT_BLOOM, BLOOM_DRIFT).toBe(GILT_BLOOM_FROZEN);
-    expect(paint.style.filter, BLOOM_DRIFT).toContain(GILT_BLOOM_FROZEN);
-  });
-
-  test('the gilt is a HAIRLINE around the fletching, not a second fill', () => {
-    const { container } = render(<App />);
-    const paint = container.querySelector('[data-testid="nav-fletch-paint"]');
-    const fill = container.querySelector('[data-testid="nav-fletch-fill"]');
-    expect(fill).toBeTruthy();
-    // The outer layer is the GILT, the inner one the brown body, and the ONLY
-    // thing that turns the outer into an edge rather than a gold band is the
-    // inset. Pin all three together — any one alone is satisfiable by a bug.
-    expect(paint.style.background).toContain(rgb(GILT));
-    expect(fill.style.background).toContain(rgb(FLETCH_BROWN));
-    expect(fill.style.inset).toBe(`${FLETCH.gilt}px`);
-    expect(FLETCH.gilt).toBe(1); // dialled down: a hairline, per the BALANCE LAW
-    // The body carries the barbs, at the derived angle, in the opaque darkest step
-    // the contrast suite measures the label against.
-    expect(fill.style.backgroundImage).toContain(`${FLETCH_BARB_DEG}deg`);
-    expect(fill.style.backgroundImage).toContain(rgb(FLETCH_BARB));
-    // NEGATIVE CONTROL: the gilt layer itself must not also carry the texture, or
-    // the hairline would be a dotted line rather than an edge. (The `background`
-    // shorthand resets backgroundImage to the literal 'none', so the honest
-    // assertion is "no gradient", not "falsy".)
-    expect(paint.style.backgroundImage).not.toContain('gradient');
   });
 
   test('NO element in the ribbon spends the overhang on a LAYOUT property', () => {
@@ -442,7 +634,9 @@ describe('2 — ⚠️⚠️ the overhang is PAINT, and the layout box stays exa
           `<${el.tagName}> spends the overhang on ${prop}: ${v}`,
         ).toBe(false);
       }
-      // And no negative pull either — the other way to fake an overhang.
+      // And no negative VERTICAL pull either — the other way to fake an overhang.
+      // (Horizontal is exempt and deliberately so: the wraps hang outside the
+      // cluster on `right: 100%`, which is paint beside the box, not height under it.)
       for (const prop of ['marginBottom', 'bottom', 'marginTop', 'top']) {
         const v = el.style[prop];
         if (v) expect(String(v).startsWith('-'), `<${el.tagName}> ${prop}=${v}`).toBe(false);
@@ -451,32 +645,21 @@ describe('2 — ⚠️⚠️ the overhang is PAINT, and the layout box stays exa
   });
 });
 
-describe('3 — ⚠️ the clip never touches a focusable element, so the focus ring survives', () => {
-  test('the clipped layers are the aria-hidden vanes, never the buttons', () => {
+describe('7 — ⚠️ the clip never touches a focusable element, so the focus ring survives', () => {
+  test('the clipped layers are inside aria-hidden vanes, never the controls', () => {
     const { container } = render(<App />);
-    const clipped = [...container.querySelectorAll('header nav *')]
-      .filter((el) => el.style?.clipPath);
-    // Non-vacuity: something really is clipped — and the count is stated as the
-    // STRUCTURE that produces it, not as a number that happened to match. Two
-    // layers for the band (gilt + fill) and two for the ACTIVE cell (gilt + fill);
-    // resting cells draw none, so this is 4 whether the nav holds three feathers
-    // or thirty. (The old `1 + feathers.length` was 4 only by coincidence.)
-    const BAND_LAYERS = 2;
-    const ACTIVE_LAYERS = 2;
-    expect(container.querySelectorAll('[aria-current="page"][data-nav-cell="feather"]').length).toBe(1);
-    expect(clipped.length).toBe(BAND_LAYERS + ACTIVE_LAYERS);
+    const clipped = [...container.querySelectorAll('header nav [clip-path], header nav clipPath')];
+    expect(clipped.length).toBeGreaterThan(0); // non-vacuity: something really is clipped
     for (const el of clipped) {
-      expect(el.tagName).toBe('SPAN');
-      expect(el.getAttribute('aria-hidden')).toBe('true');
-      expect(el.hasAttribute('tabindex')).toBe(false);
-      expect(el.style.pointerEvents).toBe('none');
-      expect(el.textContent).toBe('');
+      expect(el.tagName.toLowerCase()).not.toBe('button');
       // The decisive one: a clipped node may not CONTAIN anything focusable.
       expect(el.querySelector('button, a, input, [tabindex]')).toBeNull();
+      // …and it lives inside an aria-hidden decoration, so it contributes no name.
+      expect(el.closest('[aria-hidden="true"]')).toBeTruthy();
     }
   });
 
-  test('no feather button — nor any ancestor up to the header — clips or hides overflow', () => {
+  test('no fletch control — nor any ancestor up to the header — clips or hides overflow', () => {
     const { container } = render(<App />);
     const drawn = feathers(container);
     expect(drawn.length).toBe(3); // not a vacuous loop
@@ -491,19 +674,30 @@ describe('3 — ⚠️ the clip never touches a focusable element, so the focus 
     }
   });
 
-  test('a feather takes keyboard focus and stays a real button', () => {
+  test('the fletches are in the TAB ORDER, in reading order, and take focus', () => {
     const { container } = render(<App />);
-    for (const button of feathers(container)) {
-      // A native <button type="button"> is focusable and Enter/Space-activated by
-      // the platform; nothing in the refit may downgrade it to a div.
+    // The tab order jsdom can prove: every nav control is a native button with no
+    // tabindex override, so the platform sequences them in DOM order — and the
+    // fletching's decorations are not in it at all. (A real Tab traversal was also
+    // driven in a browser for this lane; the receipt is in the lane notes.)
+    const order = [...container.querySelectorAll('header nav button')];
+    expect(order.map(label)).toEqual(NAV.map((n) => n.label));
+    for (const button of order) {
       expect(button.getAttribute('type')).toBe('button');
       expect(button.hasAttribute('disabled')).toBe(false);
+      expect(button.hasAttribute('tabindex')).toBe(false);
       button.focus();
       expect(document.activeElement, `${label(button)} did not take focus`).toBe(button);
     }
+    // The paint is NOT a tab stop: an SVG with focusable="false" and aria-hidden.
+    for (const btn of feathers(container)) {
+      const svg = fletchOf(btn);
+      expect(svg.getAttribute('focusable')).toBe('false');
+      expect(svg.querySelector('[tabindex]')).toBeNull();
+    }
   });
 
-  test('clicking a feather still navigates — the vane is not eating the pointer', () => {
+  test('clicking a fletch still navigates — the vane is not eating the pointer', () => {
     const onNavClick = vi.fn();
     const { container } = render(<NavRibbon view="generate" onNavClick={onNavClick} />);
     const realm = feathers(container).find((b) => label(b) === 'Realm');
@@ -519,33 +713,50 @@ describe('3 — ⚠️ the clip never touches a focusable element, so the focus 
   });
 });
 
-describe('4 — the active feather brightens with the existing gold grammar', () => {
-  /** The active cell's OUTER gilt layer (never the inner fill — the ^= would match both). */
-  const vane = (button) => button.querySelector(`[data-testid="nav-feather-${button.dataset.navId || ''}"]`)
-    || [...button.querySelectorAll('[data-testid^="nav-feather-"]')]
-      .find((el) => !el.dataset.testid.startsWith('nav-feather-fill-'));
-  /** The active cell's INNER fill layer. */
-  const fill = (button) => button.querySelector('[data-testid^="nav-feather-fill-"]');
-
-  test('the active feather lifts, brightens and gilds — four channels, weight NOT among them', () => {
+describe('8 — the active fletch LIGHTENS, and takes the gold along its own edge', () => {
+  test('active brightens the sheen, brightens the label, and gilds the silhouette', () => {
     const { container } = render(<NavRibbon view="settlements" onNavClick={() => {}} />);
     const active = feathers(container).find((b) => label(b) === 'Library');
 
-    expect(active.getAttribute('aria-current')).toBe('page');        // 1 — semantics
-    expect(active.style.color).toBe(rgb(PARCH));                     // 2 — brighter label
-    const v = vane(active);
-    const f = fill(active);
-    expect(v.style.background).toContain(rgb(GILT_ACTIVE));          // 3 — brighter gilt
-    expect(f.style.background).toContain(rgb(FLETCH_BROWN_LIFT));    // 4 — lifted fill
-    expect(f.style.borderBottom).toBe(`2px solid ${rgb(GILT_ACTIVE)}`); // the gold, translated
-    // The barbs continue over the lift, in the lifted step's own darkest tone —
-    // otherwise the active feather would go smooth and read as a different material.
-    expect(f.style.backgroundImage).toContain(rgb(FLETCH_BARB_LIFT));
+    expect(active.getAttribute('aria-current')).toBe('page');          // 1 — semantics
+    expect(active.style.color).toBe(rgb(PARCH));                       // 2 — brighter label
+    const svg = fletchOf(active);
+    expect(svg.getAttribute('data-fletch-state')).toBe('active');
+    // 3 — THE SHEEN BANDS BRIGHTEN. This is the directive's own words for what
+    // "active" looks like on a feather, and it is the channel that replaced V2's
+    // whole-fill lift.
+    const bands = [...svg.querySelectorAll('[data-testid^="nav-fletch-sheen-"] path')];
+    expect(bands.length).toBe(2);
+    for (const b of bands) expect(b.getAttribute('fill')).toBe(FLETCH_SHEEN_LIFT);
+    // 4 — the gold, stroked along the vane's OWN lower silhouette so it follows the
+    // rounded back instead of drawing a rectangle across the cell.
+    const edge = svg.querySelector('[data-testid^="nav-fletch-edge-"]');
+    expect(edge).toBeTruthy();
+    expect(edge.getAttribute('stroke')).toBe(GOLD);
+    expect(edge.getAttribute('fill')).toBe('none');
+    // Authored at double width because the clip halves it: 2px survives inside.
+    expect(edge.getAttribute('stroke-width')).toBe('4');
   });
 
-  test('⚠️ WEIGHT IS NOT A STATE CHANNEL — both registers of feather label are 600', () => {
-    // The V1 grammar put active at 700 and resting at 500. V2's BALANCE LAW spends
-    // that channel: EVERY feather label is 600, and the difference between the band
+  test('a resting fletch carries none of the channels — the A/B is real', () => {
+    const { container } = render(<NavRibbon view="settlements" onNavClick={() => {}} />);
+    const resting = feathers(container).find((b) => label(b) === 'Realm');
+    const svg = fletchOf(resting);
+
+    expect(resting.getAttribute('aria-current')).toBeNull();
+    expect(resting.style.color).toBe(rgb(PARCH_100));
+    expect(svg.getAttribute('data-fletch-state')).toBe('resting');
+    for (const b of svg.querySelectorAll('[data-testid^="nav-fletch-sheen-"] path')) {
+      expect(b.getAttribute('fill')).toBe(FLETCH_SHEEN);
+    }
+    // Absence is the assertion, and it is non-vacuous because the block above proves
+    // the gold edge exists when it should.
+    expect(svg.querySelector('[data-testid^="nav-fletch-edge-"]')).toBeNull();
+  });
+
+  test('⚠️ WEIGHT IS NOT A STATE CHANNEL — both registers of fletch label are 600', () => {
+    // V1's grammar put active at 700 and resting at 500. The BALANCE LAW spends that
+    // channel: EVERY fletch label is 600, and the difference between the fletching
     // and the shelf (500) is what the weight now carries. Pinned as an equality
     // between the two states, so half-reverting one of them fails here.
     const { container } = render(<NavRibbon view="settlements" onNavClick={() => {}} />);
@@ -553,98 +764,109 @@ describe('4 — the active feather brightens with the existing gold grammar', ()
     const resting = feathers(container).find((b) => label(b) === 'Realm');
     expect(active.style.fontWeight).toBe('600');
     expect(resting.style.fontWeight).toBe('600');
-    expect(active.style.fontWeight).toBe(resting.style.fontWeight);
-    // …and the reference tabs still sit a step below, or the band stops reading.
     expect(plains(container)[0].style.fontWeight).toBe('500');
   });
-
-  test('a resting feather carries none of the channels — the A/B is real', () => {
-    const { container } = render(<NavRibbon view="settlements" onNavClick={() => {}} />);
-    const resting = feathers(container).find((b) => label(b) === 'Realm');
-
-    expect(resting.getAttribute('aria-current')).toBeNull();
-    expect(resting.style.color).toBe(rgb(PARCH_100));
-    // A resting feather draws NO vane at all now: the band's own paint layer
-    // already gives it brown, gilt and barbs, so an empty vane would be a box
-    // painting nothing. Absence is the assertion — and it is non-vacuous because
-    // the active cell above proves the vane exists when it should.
-    expect(vane(resting)).toBeFalsy();
-    expect(fill(resting)).toBeNull();
-  });
-
-  test('the gold edge is clipped to the VANE, so it follows the feather’s own bottom', () => {
-    // If the edge were drawn on the button it would run straight across the
-    // slants and the band would read as three rectangles again.
-    const { container } = render(<NavRibbon view="generate" onNavClick={() => {}} />);
-    const active = feathers(container).find((b) => label(b) === 'Create');
-    // (CELL_BASE sets `border: none`, so the shorthand getter reads back the
-    // initial 'medium' width — the claim worth pinning is that no rule is DRAWN.)
-    expect(active.style.borderBottom).not.toContain('solid');
-    expect(active.style.borderBottomStyle).not.toBe('solid');
-    expect(vane(active).style.clipPath).toContain(`${FLETCH.slant}px`);
-    expect(fill(active).style.clipPath).toContain(`${FLETCH.slant}px`);
-  });
-
-  test('the feather clip leans FORWARD — toward Realm, never back', () => {
-    const { container } = render(<App />);
-    const shapes = new Set(
-      [...container.querySelectorAll('header nav *')]
-        .filter((el) => el.style?.clipPath)
-        .map((el) => el.style.clipPath),
-    );
-    // ONE silhouette for the band and every feather — that is what makes three
-    // vanes read as one fletching rather than three chips.
-    expect(shapes.size).toBe(1);
-    const [shape] = [...shapes];
-    // Top edge starts `slant` px AHEAD of the bottom edge on BOTH sides: the
-    // whole parallelogram rakes forward.
-    expect(shape).toBe(
-      `polygon(${FLETCH.slant}px 0, 100% 0, calc(100% - ${FLETCH.slant}px) 100%, 0 100%)`,
-    );
-  });
 });
 
-describe('4b — the plain register INVERTED for the light shaft', () => {
-  // The reference tabs stopped sitting on an ink bar and started sitting on wood.
-  // Their V1 tones (PARCH_100 resting, GOLD active) were built for the dark ground
-  // and are 1.7–1.9:1 on the light one — legible-looking in a screenshot taken on
-  // the wrong background, and unreadable in the app. This block exists because
-  // NOTHING else would have caught that: the cells still render, still navigate,
-  // still carry aria-current, and every structural test above stays green.
-  test('a resting reference tab takes the ink browns, never the pale register', () => {
-    const { container } = render(<NavRibbon view="settlements" onNavClick={() => {}} />);
-    const resting = plains(container).find((b) => label(b) === 'Compendium');
-    expect(resting.style.color).toBe(rgb(BODY));
-    expect(resting.style.color).not.toBe(rgb(PARCH_100)); // the V1 tone, now wrong
+describe('9 — ⚠️⚠️ AA against the LIGHTEST tonal band, and the ratios are QUOTED', () => {
+  // The whole hazard of a pale label on a dark feather: it fails at the feather's
+  // LIGHT points, not its dark ones. So the governing ground is the lightest tone in
+  // the entire goose ladder, and every tone is authored opaque so that ground is a
+  // value this file can name rather than a hand-wave.
+  const LADDER = {
+    FLETCH_TIP, FLETCH_BARB, FLETCH_VANE, FLETCH_LEAD, FLETCH_SHEEN,
+    FLETCH_RACHIS, FLETCH_SHEEN_LIFT,
+  };
+
+  test('FLETCH_SHEEN_LIFT really IS the lightest band a label can land on', () => {
+    // Non-vacuity for every claim below: if some other tone were lighter, measuring
+    // against this one would be measuring the wrong thing while staying green.
+    const lightest = Object.entries(LADDER)
+      .sort((a, b) => relLuminance(b[1]) - relLuminance(a[1]))[0];
+    expect(relLuminance(lightest[1])).toBe(relLuminance(FLETCH_SHEEN_LIFT));
   });
 
-  test('an active reference tab underlines in GOLD_TXT — the legible-on-light gold', () => {
+  test('every label register clears AA on the lightest band — quoted to 2dp', () => {
+    expect(ratio(PARCH_100, FLETCH_SHEEN_LIFT)).toBeGreaterThanOrEqual(4.5);
+    expect(ratio(PARCH, FLETCH_SHEEN_LIFT)).toBeGreaterThanOrEqual(4.5);
+    expect(ratio(PARCH_100, FLETCH_SHEEN_LIFT).toFixed(2)).toBe('4.84');
+    expect(ratio(PARCH, FLETCH_SHEEN_LIFT).toFixed(2)).toBe('5.33');
+    // …and on every other band too, so the "lightest governs" argument is not the
+    // only thing holding the register up.
+    for (const [name, tone] of Object.entries(LADDER)) {
+      expect(ratio(PARCH_100, tone), `PARCH_100 on ${name}`).toBeGreaterThanOrEqual(4.5);
+      expect(ratio(PARCH, tone), `PARCH on ${name}`).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+
+  test('the barbs are FINE, not barring — the goose correction, as a number', () => {
+    // ⚠️ THE SPECIES PIN. A turkey primary is boldly BARRED; a goose primary is not.
+    // If a future edit deepened the barbs back toward V2's turkey texture this reds,
+    // with the reason attached. 6.64% is a comb; V2's was 27% of this vane's
+    // luminance, which is a stripe.
+    const drop = (relLuminance(FLETCH_VANE) - relLuminance(FLETCH_BARB))
+      / relLuminance(FLETCH_VANE) * 100;
+    expect(drop).toBeCloseTo(7.96, 1);
+    expect(drop).toBeGreaterThan(4);   // a striation you can see
+    expect(drop).toBeLessThan(12);     // never a bar
+  });
+
+  test('the vane is the boundary that says "fletch"; the seam is not', () => {
+    // What tells a user where a fletch is, is the DARK VANE against the honey wood —
+    // comfortably past SC 1.4.11's 3:1 — not the quill-shadow seam, which is nearly
+    // tonal by design because feather-on-feather shadows are.
+    expect(ratio(FLETCH_VANE, SHAFT_BODY)).toBeGreaterThanOrEqual(3);
+    expect(ratio(FLETCH_VANE, SHAFT_BODY).toFixed(2)).toBe('4.46');
+    // The gold underline is a STATE carrier, so it owes the boundary floor on the
+    // lightest ground it can touch — which the SHEEN_FLOOR geometry above keeps at
+    // the vane gradient rather than at a sheen band.
+    expect(ratio(GOLD, FLETCH_VANE)).toBeGreaterThanOrEqual(3);
+    expect(ratio(GOLD, FLETCH_VANE).toFixed(2)).toBe('4.12');
+    expect(ratio(GOLD, FLETCH_SHEEN_LIFT)).toBeLessThan(3); // why the bands stop short
+  });
+
+  test('the plain register is RE-INKED for the honey barrel, with its negative control', () => {
     const { container } = render(<NavRibbon view="compendium" onNavClick={() => {}} />);
     const active = plains(container).find((b) => label(b) === 'Compendium');
-    expect(active.getAttribute('aria-current')).toBe('page');
-    expect(active.style.color).toBe(rgb(GOLD_TXT));
+    const resting = plains(container).find((b) => label(b) === 'Gallery');
+    expect(active.style.color).toBe(rgb(INK_DEEP));
+    expect(resting.style.color).toBe(rgb(BODY));
     expect(active.style.borderBottom).toBe(`2px solid ${rgb(GOLD_TXT)}`);
-    expect(active.style.fontWeight).toBe('700');
-    // The plain register keeps its 700, which is exactly why the FEATHERS could
-    // afford to give theirs up: the two registers carry state differently.
+    // The measurements that forced the move, quoted. GOLD_TXT was V2's ACTIVE LABEL
+    // at 5.75:1 on cream; on this barrel it is 3.38:1, which fails AA as text and is
+    // why it survives only as the UNDERLINE, where 1.4.11's 3:1 is the floor.
+    expect(ratio(INK_DEEP, SHAFT_BODY).toFixed(2)).toBe('7.06');
+    expect(ratio(BODY, SHAFT_BODY).toFixed(2)).toBe('4.89');
+    expect(ratio(GOLD_TXT, SHAFT_BODY).toFixed(2)).toBe('3.38');
+    expect(ratio(GOLD_TXT, SHAFT_BODY)).toBeLessThan(4.5);      // FAILS as text
+    expect(ratio(GOLD_TXT, SHAFT_BODY)).toBeGreaterThanOrEqual(3); // clears as a boundary
   });
 });
 
-describe('5 — the mobile bottom nav is untouched by the directive', () => {
+describe('10 — the mobile bottom nav is untouched by the directive', () => {
   beforeEach(() => { H.isMobile = true; });
 
-  test('a phone renders its bar with no band, no feather and no paint', () => {
+  test('a phone renders its bar with no fletching, no wrap and no vane', () => {
     const { container } = render(<App />);
-    // Presence control: the mobile bar really did render (else every absence
-    // below would be vacuous).
+    // Presence control: the mobile bar really did render (else every absence below
+    // would be vacuous).
     const labels = [...container.querySelectorAll('button')]
       .map(label)
       .filter((t) => ['Create', 'Library', 'Gallery', 'Compendium', 'About'].includes(t));
     expect(labels).toEqual(['Create', 'Library', 'Gallery', 'Compendium', 'About']);
 
     expect(container.querySelectorAll('[data-testid="nav-fletch-band"]').length).toBe(0);
-    expect(container.querySelectorAll('[data-testid="nav-fletch-paint"]').length).toBe(0);
+    expect(container.querySelectorAll('[data-testid^="nav-fletch-"]').length).toBe(0);
+    expect(container.querySelectorAll('[data-testid^="nav-shaft-wrap-"]').length).toBe(0);
     expect(container.querySelectorAll('[data-nav-cell="feather"]').length).toBe(0);
-    expect([...container.querySelectorAll('*')].filter((el) => el.style?.clipPath).length).toBe(0);
+  });
+
+  test('…but the mobile HEADER is the same barrel — one arrow, both breakpoints', () => {
+    // The shaft is not a desktop decoration: the directive says the arrow runs the
+    // full width of the top edge, and the phone has a top edge too.
+    const { container } = render(<App />);
+    const header = container.querySelector('header');
+    expect(header.style.backgroundColor).toBe(rgb(SHAFT));
+    expect(header.style.backgroundImage).toContain('data:image/svg+xml');
   });
 });

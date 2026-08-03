@@ -31,7 +31,7 @@ import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
 import { allowsFloatingFeedback, guardForView, redirectForView, viewToPath, NAV } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
 import {
-  GOLD, GOLD_BG, GOLD_TXT, INK, INK_DEEP, PARCH_100, BORDER, BODY, ELEV, SHAFT, SHAFT_GRAIN_LAYERS, SLATE, SLATE_BG, sans, serif_, SP, R, FS, swatch, CHROME, bottomClearance,
+  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, ELEV, SHAFT, SHAFT_GRAIN_LAYERS, SLATE, SLATE_BG, sans, serif_, SP, R, FS, swatch, CHROME, bottomClearance,
 } from './components/theme.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
@@ -476,19 +476,27 @@ export default function App() {
     .filter(Boolean)
     .slice(0, 5);
 
-  // THE SHAFT (ribbon v2, owner directive 2026-08-03). Both headers are ONE
-  // continuous plank of light wood — full width, and deliberately unbroken under
-  // the wordmark, which is what makes the bar read as the arrow's shaft rather than
-  // as a dark bar with a brown patch stuck on it. Three quiet devices separate it
-  // from the cream page body instead of one loud one: the wood is a single step
-  // deeper than PARCH (1.15:1), a BORDER hairline closes the bottom edge, and
-  // ELEV[2] drops the house's soft sticky-chrome shadow. The grain is
-  // SHAFT_GRAIN_LAYERS — asset-free, and painted as background-IMAGE over the
-  // background-COLOR, never as a shorthand, since the streaks are transparent
-  // between one another and the page would otherwise show through the plank.
+  // THE SHAFT (ribbon v3, owner directive 2026-08-03 evening). Both headers are the
+  // VISIBLE HALF OF ONE ARROW SHAFT — a honey-tan barrel running full width, and
+  // deliberately unbroken under the wordmark, which is what makes the bar read as an
+  // arrow lying along the top edge rather than as a bar with feathers stuck on it.
+  // SHAFT_GRAIN_LAYERS carries both halves of the material: the CYLINDER shading
+  // (lit along the centreline at the top, falling off to a dark silhouette at the
+  // bottom) and, painted over it, the deterministic feTurbulence LONGITUDINAL grain.
+  // Asset-free, and applied as background-IMAGE over the background-COLOR, never as
+  // a shorthand — the grain is transparent in its gaps and the page would otherwise
+  // show through the barrel.
+  //
+  // ⚠️ THE BOTTOM HAIRLINE WENT WITH THE CREAM. V2 closed the plank's lower edge
+  // with a BORDER rule because a flat cream bar needed one. The barrel does not: its
+  // own SHAFT_RIM silhouette IS the bottom edge, and drawing a second line under it
+  // reads as a bar with a border rather than as a round shaft — it also cuts the
+  // fletch overhang off visually at exactly the place the overhang exists to cross.
+  // ELEV[2] still drops the house's soft sticky-chrome shadow, which is what
+  // separates the header from the page now that the wood no longer needs a rule.
   const headerStyle = {
     backgroundColor: SHAFT, backgroundImage: SHAFT_GRAIN_LAYERS,
-    borderBottom: `1px solid ${BORDER}`, boxShadow: ELEV[2],
+    boxShadow: ELEV[2],
   };
 
   // Per-view painted background. On the Create page a generation flow blows up the
@@ -532,7 +540,7 @@ export default function App() {
               style={{ gap: SP.xs, minHeight: 44, padding: `0 ${SP.xs}px` }}
             >
               <HouseDevice size={20} mode="light" style={{ flexShrink: 0 }} />
-              <span aria-hidden="true" style={{ fontSize: FS.lg, fontWeight: 800, color: GOLD_TXT, fontFamily: serif_, letterSpacing: '0.01em' }}>
+              <span aria-hidden="true" style={{ fontSize: FS.lg, fontWeight: 800, color: INK_DEEP, fontFamily: serif_, letterSpacing: '0.01em' }}>
                 <span style={{ fontSize: '1.28em' }}>S</span>ettlement<span style={{ fontSize: '1.28em' }}>F</span>orge
               </span>
             </Button>
@@ -568,12 +576,17 @@ export default function App() {
                 <HouseDevice size={26} mode="light" style={{ marginRight: SP.sm, flexShrink: 0 }} />
                 <h1
                   aria-hidden="true"
-                  // The wordmark's DARK-BROWN variant (v2 directive §2). GOLD was
-                  // right on the ink bar and is 1.85:1 on wood; GOLD_TXT is the
-                  // palette's own legible-gold-on-light step and measures 5.75:1
-                  // against the grain's darkest streak. `mode="light"` swaps the
-                  // house mark to its ink draw for the same reason.
-                  style={{ margin: 0, fontSize: FS.h1, fontWeight: 800, color: GOLD_TXT, fontFamily: serif_, letterSpacing: '0.01em', lineHeight: 1.1 }}
+                  // THE WORDMARK IS DARK INK (v3 directive). It has now moved twice
+                  // with the ground beneath it, and both moves were forced, not
+                  // stylistic: GOLD was right on V1's ink bar and 1.85:1 on wood;
+                  // GOLD_TXT was right on V2's cream plank at 5.75:1 and is 3.38:1 on
+                  // V3's honey-tan barrel, which fails AA as text. INK_DEEP measures
+                  // 7.06:1 against SHAFT_BODY — the darkest tone the cylinder reaches
+                  // inside the label band — and is what the directive asks for in its
+                  // own words. `mode="light"` keeps the house mark on its ink draw.
+                  // The MOBILE wordmark above takes INK_DEEP for the same reason: it
+                  // paints the same honey barrel out of the same headerStyle.
+                  style={{ margin: 0, fontSize: FS.h1, fontWeight: 800, color: INK_DEEP, fontFamily: serif_, letterSpacing: '0.01em', lineHeight: 1.1 }}
                 >
                   <span style={{ fontSize: '1.32em', fontWeight: 800 }}>S</span><span>ettlement</span><span style={{ fontSize: '1.32em', fontWeight: 800 }}>F</span><span>orge</span>
                 </h1>

@@ -5,10 +5,11 @@
  * The original order: nav items are separated by vertical lines running
  * top-to-bottom of the bar, EXCEPT inside the Create → Library → Realm trio,
  * whose seams were full-height CHEVRONS — two strokes converging on a mid-height
- * apex. THE CURVED-CHEVRON READING IS RETIRED ON DESKTOP. The trio now sits in a
- * single leather-brown fletched band (NavRibbon.jsx), and the seams between its
- * feathers become what a fletching's seams actually are: SHARP STRAIGHT ANGLED
- * STROKES, one per boundary, cut at exactly the angle the feathers lean.
+ * apex. THE CURVED-CHEVRON READING IS RETIRED ON DESKTOP. The trio now sits as
+ * three fletches rooted on the arrow shaft (NavRibbon.jsx + GooseFletch.jsx), and
+ * the seams between them become what a fletching's seams actually are: one straight
+ * angled stroke per boundary, leaning with the comb — the shadow where one vane
+ * overlaps the next.
  *
  * THE KIND IS STILL DERIVED, NEVER MAPPED. `dividerKind` asks the flow predicate
  * NavFlowArrow already owns (lib/routes.js NAV_FLOW) whether the left cell feeds
@@ -43,13 +44,15 @@
  * the ribbon's height and asserts it is NOT the viewBox's, so no future edit can put
  * the coordinate space back into the layout.
  *
- * WHY THE FLETCH STROKE IS `FLETCH.slant` WIDE AND NOTHING ELSE. The feather's
- * clipped edge runs `FLETCH.slant` px horizontally over the band's full height
- * (NavRibbon's FEATHER_CLIP). Giving this mark the SAME width and drawing it
- * corner-to-corner — bottom-left to top-right — makes it traverse the same run
- * over the same height, so the stroke is PARALLEL to the vanes by construction
- * rather than by a second angle someone has to keep in sync. Change FLETCH.slant
- * and both move together.
+ * WHY THE FLETCH STROKE IS `FLETCH.slant` WIDE AND NOTHING ELSE. ⚠️ `slant` SURVIVED
+ * V3 WITH A NARROWER JOB. Under V2 it was the parallelogram feather's own edge run,
+ * and this mark borrowed it so the seam and the vane leaned identically. V3's vanes
+ * are shield-cut PATHS, so there is no parallelogram edge left to match — but the
+ * seam still wants to lean rather than stand vertical, because a fletch's overlap
+ * shadow does. So `slant` is now exactly this: the seam box's width, drawn
+ * corner-to-corner so the stroke traverses `slant` over the bar's height. The barbs
+ * lean at their OWN derived angle (FLETCH_BARB_DEG, off FLETCH.barbRun); do not
+ * re-couple the two, because they are no longer the same geometry.
  *
  * WIDTH + CLEARANCE. The plain rule stays 7px wide and the ribbon's flex `gap`
  * stays 0, so the divider IS the seam rather than an addition to it: each label
@@ -61,16 +64,16 @@
  *
  * A11Y. Pure decoration: `aria-hidden`, no focus stop, no pointer surface, no
  * text content, so no nav link's accessible name changes. The ribbon's buttons
- * carry the whole accessible name and keyboard behaviour. The fletch stroke takes
- * GILT, measured at 3.12:1 against FLETCH_BROWN — clear of WCAG 1.4.11's 3:1 for
- * a non-text boundary (the ratio is recorded in theme.js and recomputed by
- * tests/design/contrast.test.js). The plain rule takes SHAFT_RULE at 2.50:1 against
- * the wood and does NOT clear 3:1, which is correct and recorded: 1.4.11 governs
- * boundaries a user must perceive to understand or operate a control, and these
- * separate two already-legible labels that each carry their own text, focus ring
- * and hit area. Nothing about reaching Compendium depends on seeing the groove.
+ * carry the whole accessible name and keyboard behaviour. NEITHER stroke clears
+ * WCAG 1.4.11's 3:1, and under V3 that is true by design for both: the fletch seam
+ * is a quill shadow (1.23:1 on the vane) and the plain rule a groove (2.14:1 on the
+ * barrel). 1.4.11 governs boundaries a user must perceive to understand or operate a
+ * control; these separate two already-legible labels that each carry their own text,
+ * focus ring and hit area. Nothing about reaching Compendium depends on seeing the
+ * groove, and nothing about reaching Realm depends on seeing the seam — the vane's
+ * own silhouette against the wood (4.46:1) is what says where a fletch is.
  */
-import { GILT, SHAFT_RULE, FLETCH } from '../theme.js';
+import { FLETCH_SEAM, SHAFT_RULE, FLETCH } from '../theme.js';
 import { flowsInto } from './NavFlowArrow.jsx';
 
 /** The plain rule's own coordinate space; scaled to the bar by preserveAspectRatio. */
@@ -94,13 +97,18 @@ export default function NavDivider({ kind, from, to }) {
   // corner-to-corner diagonal is the vanes' own angle (see the geometry note).
   const w = isFletch ? FLETCH.slant : W;
   const stroke = {
-    // GILT inside the fletching, a wood groove between the reference tabs. Both
-    // tones moved with the material under ribbon v2: the seam colours that read on
-    // an ink bar are not the seam colours that read on a light plank, and the plain
-    // rule in particular went invisible (BORDER is 1.56:1 on wood) until it became
-    // SHAFT_RULE. The GAP between the two — gilt at 3.12:1, groove at 2.50:1 — is
-    // the hierarchy, and it is deliberate.
-    stroke: isFletch ? GILT : SHAFT_RULE,
+    // A QUILL SHADOW inside the fletching, a wood groove between the reference tabs.
+    // ⚠️ THE FLETCH SEAM IS NO LONGER GOLD, and the reason is the species. V2 edged
+    // its parallelogram feathers in a GILT hairline and cut the seams in the same
+    // gold, which read as ornament. Real fletching has no metal in it: where two
+    // vanes meet you see one feather's shadow on the next. So the seam took
+    // FLETCH_SEAM — the vane's own darkest tone — which measures 1.23:1 against the
+    // vane. That is correct and recorded, not an oversight: feather-on-feather
+    // shadows ARE nearly tonal, and the boundary a user must actually perceive is
+    // the vane against the wood at 4.46:1, which GooseFletch's silhouette carries.
+    // The groove keeps SHAFT_RULE, retoned for the honey barrel (V2's #A39062 was
+    // picked against cream and measures 1.29:1 here, i.e. invisible).
+    stroke: isFletch ? FLETCH_SEAM : SHAFT_RULE,
     strokeWidth: 1,
     vectorEffect: 'non-scaling-stroke',
   };

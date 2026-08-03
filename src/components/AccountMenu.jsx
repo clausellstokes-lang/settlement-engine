@@ -16,7 +16,7 @@
  */
 import { useState, useRef, useEffect } from 'react';
 import { User, ChevronDown, Settings, CreditCard, MessageSquare } from 'lucide-react';
-import { GOLD, GOLD_BG, INK, BORDER, FS, SP, SLATE, SLATE_DEEP, GREEN, GREEN_DEEP, swatch } from './theme.js';
+import { GOLD, GOLD_BG, INK, BORDER, FS, SP, SHAFT_GREEN, SHAFT_SLATE, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
 import UnreadMessageBadge, { unreadMessagesLabel } from './account/UnreadMessageBadge.jsx';
 import { useOperatorMessages } from './account/OperatorMessagesProvider.jsx';
@@ -108,18 +108,26 @@ export default function AccountMenu({
   // Status reads in a colored rule + ink, not a wash (deep-craft): the founder/
   // developer chip is the in-palette slate channel, the active account is green.
   //
-  // ⚠️ THE LABEL TONE IS GREEN_DEEP, NOT GREEN, AND THE GROUND IS WHY. This chip is
-  // `background: transparent`, so its label is read against whatever the header is
-  // painting — and under ribbon v2 that is the light-wood SHAFT, not the old ink
-  // bar. GREEN (green-600) measures 3.91:1 on the grain's darkest streak and fails
-  // AA as text there; GREEN_DEEP (green-700) is the palette's own step for exactly
-  // this case and measures 5.00:1. The BORDER stays GREEN: it is a UI boundary
-  // under 1.4.11's 3:1, which 3.91:1 clears, and keeping the rule at the brighter
-  // step is what preserves the status colour's read. Both ratios are recomputed in
-  // tests/design/contrast.test.js, GREEN pinned as the negative control.
+  // ⚠️ THE CHIP'S TONES ARE A FUNCTION OF THE HEADER'S GROUND, AND THE GROUND HAS
+  // NOW MOVED TWICE. This chip is `background: transparent`, so its label and its
+  // rule are read against whatever the header paints — which is the arrow SHAFT.
+  //   V1  ink bar    → GREEN / GREEN both fine.
+  //   V2  cream wood → GREEN fell to 3.91:1 as text, so the LABEL took GREEN_DEEP
+  //                    (5.00:1) while the RULE stayed GREEN, still clear of
+  //                    1.4.11's 3:1. A legible two-step that kept the status hue.
+  //   V3  honey wood → the barrel is much darker (theme.js SHAFT_BODY). GREEN falls
+  //                    to 2.18:1 and GREEN_DEEP to 2.93:1, so the rule no longer
+  //                    clears the BOUNDARY floor at either step and the label no
+  //                    longer clears AA at all. There is no honest two-step left to
+  //                    keep, so it collapses: rule and label both take SHAFT_GREEN /
+  //                    SHAFT_SLATE, the palette's on-wood status steps (4.87:1 and
+  //                    4.96:1), which clear text AA and 1.4.11 together.
+  // Every ratio here is recomputed in tests/design/contrast.test.js, with GREEN,
+  // GREEN_DEEP and SLATE_DEEP all pinned as negative controls so putting any of the
+  // older tones back reds with the reason attached.
   const chipBg = 'transparent';
-  const chipBorder = isElevated ? SLATE : GREEN;
-  const chipColor = isElevated ? SLATE_DEEP : GREEN_DEEP;
+  const chipBorder = isElevated ? SHAFT_SLATE : SHAFT_GREEN;
+  const chipColor = isElevated ? SHAFT_SLATE : SHAFT_GREEN;
 
   return (
     <div ref={ref} style={{ position: 'relative', marginLeft: compact ? 0 : SP.xs }}>
