@@ -257,7 +257,7 @@ shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (194) — prod applied head tracked in `supabase/applied-head.json`,
+- **migrations/** (195) — prod applied head tracked in `supabase/applied-head.json`,
   ledger-checked by `npm run validate:migration-head`. Schema + RLS policies + credit ledger + gallery +
   version history + save-limit + profile-security + auth/credit trust-boundary
   repair (017) + account/billing models (018) + the community gallery —
