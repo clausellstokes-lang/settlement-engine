@@ -79,6 +79,21 @@ import {
   relationshipRoles,
   getRelationshipSettlements,
 } from './relationshipEvolution.js';
+// WR-8 amendment N — CONQUEST EXECUTION. `conquestDoctrineActive` is the flag
+// chain (dark by default, and WR-8 lights LAST of the whole WR chain); the
+// execution leaf is import-free and prices margins and famines from numbers this
+// module has already read. DARK ⇒ neither is ever called and every expression
+// below is the pre-wire one, which is what keeps the occupation ledger and its
+// conditions byte-identical for every campaign that never lit it.
+import { conquestDoctrineActive } from './conquestDoctrineStage.js';
+import {
+  conquestCeilingRank,
+  conquestMarginVerdict,
+  inheritanceBenefitFactor,
+  inheritanceBurdenAddend,
+  inheritedHunger,
+} from './conquestExecution.js';
+import { storageCapacityMonths } from './foodStockpile.js';
 
 /**
  * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js).
@@ -771,6 +786,37 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
   };
   const itemFor = (/** @type {any} */ id) => snapshot?.byId?.get?.(String(id));
 
+  // ── WR-8 amendment N: CONQUEST EXECUTION. Read ONCE per pass. Dark (and it is
+  // dark by default, behind the whole WR chain) ⇒ every expression below this
+  // point is the pre-wire one and this layer is byte-identical. ──────────────
+  const conquestLit = conquestDoctrineActive(worldState);
+  /** Theoretical military capacity, cached per id — the truth read the EXECUTION
+   *  half is entitled to (belief decides the march; the world decides whether it
+   *  worked). Reuses the same model `occupiedUsefulness` already runs on. */
+  const capacityCache = new Map();
+  const capacityOf = (/** @type {any} */ id) => {
+    const key = String(id);
+    if (capacityCache.has(key)) return capacityCache.get(key);
+    const item = itemFor(key);
+    const economicCapacityScore = item?.causal?.scores?.economic_capacity;
+    const value = item
+      ? num(deriveMilitaryCapacity(item, {
+        economicCapacityScore: Number.isFinite(economicCapacityScore) ? economicCapacityScore : undefined,
+      }).theoreticalCapacity)
+      : NaN;
+    capacityCache.set(key, value);
+    return value;
+  };
+  /** THE OVERWHELMING GATE for one hold. Null while dark. */
+  const marginFor = (/** @type {string} */ occupierId, /** @type {string} */ occupiedId) => (conquestLit
+    ? conquestMarginVerdict({
+      occupierCapacity: capacityOf(occupierId),
+      occupiedCapacity: capacityOf(occupiedId),
+      occupierName: nameFor(occupierId),
+      occupiedName: nameFor(occupiedId),
+    })
+    : null);
+
   // ── Step 1+2: seed fresh conquests, drop liberated ones. Work on a COPY (read-last/
   // write-next — never mutate worldState's ledger). ────────────────────────────────
   /** @type {Record<string, any>} */
@@ -875,6 +921,19 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
     // normally) — only the terminal promotion is undone. Inert without dismissals.
     let nextState = advanced.state;
     let nextStateHeld = advanced.stateHeld;
+    // ── WR-8 (N) THE OVERWHELMING GATE, and it is the whole amendment's hardest
+    // pin sitting in four lines. A hold whose victor is merely CLEARLY WINNING —
+    // or whose margin cannot be measured — may climb the ladder in the ordinary
+    // way up to `extractive` and NO FURTHER, so `stabilized` and the client-state
+    // rung `vassalized` are unreachable to it and its war can only end at a
+    // table. Only an OVERWHELMING margin opens the top of the ladder. The dwell
+    // is reset with the cap so a capped occupation does not bank pressure it can
+    // never spend. Dark ⇒ `margin` is null ⇒ `nextState` is untouched. ────────
+    const margin = marginFor(String(rec.occupierId), occupiedId);
+    if (margin && stateRank(nextState) > conquestCeilingRank(margin)) {
+      nextState = STATE_LADDER[conquestCeilingRank(margin)];
+      nextStateHeld = 0;
+    }
     if (vassalizationDismissed
         && advanced.state === 'vassalized' && prevState !== 'vassalized'
         && vassalizationDismissed(occupiedId)) {
@@ -927,6 +986,33 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
   const burden = computeOccupierBurden(occupations);
   const previousBurden = computeOccupierBurden(existing);
 
+  // ── WR-8 (N) THE INHERITANCE COUNTERFORCE. "A realm that conquers a dying
+  // neighbour has annexed a famine." The victor's food deficit is SUMMED over
+  // what it now holds, through the two readers the food engine already exposes,
+  // and it bites twice: it nets the tribute DOWN (an empty granary pays nothing)
+  // and it raises the garrison bill (you are feeding them now). Uncapped by
+  // count on purpose — the brake must be able to outgrow the prize. Dark ⇒ the
+  // map is empty ⇒ factor 1 and addend 0 everywhere ⇒ byte-identical. ─────────
+  /** @type {Record<string, ReturnType<typeof inheritedHunger>>} */
+  const inherited = {};
+  if (conquestLit) {
+    /** @type {Record<string, Array<{ storageMonths: unknown, capacityMonths: unknown }>>} */
+    const heldByOccupier = {};
+    for (const occupiedId of Object.keys(occupations).sort(codepoint)) {
+      const occupierId = String(occupations[occupiedId]?.occupierId || '');
+      if (!occupierId) continue;
+      const settlement = itemFor(occupiedId)?.settlement;
+      (heldByOccupier[occupierId] = heldByOccupier[occupierId] || []).push({
+        storageMonths: settlement?.economicState?.foodSecurity?.storageMonths,
+        capacityMonths: storageCapacityMonths(settlement),
+      });
+    }
+    for (const occupierId of Object.keys(heldByOccupier).sort(codepoint)) {
+      inherited[occupierId] = inheritedHunger(heldByOccupier[occupierId]);
+    }
+  }
+  const hungerOf = (/** @type {string} */ id) => num(inherited[id]?.hunger);
+
   // A producer that falls silent still owns one real transition: its renewal ended.
   // Emit one aggregate public receipt per occupier on that edge, without changing the
   // bounded expiry tail already carried by the active condition.
@@ -971,7 +1057,10 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
     const occupierName = nameFor(occupierId);
     const occCount = Object.keys(occupations).filter(id => String(occupations[id]?.occupierId) === occupierId).length;
 
-    const burdenSeverity = clamp01(num(burden[occupierId]));
+    // WR-8 (N): the inherited famine is part of the garrison bill. Addend 0 while
+    // dark or while nothing held is hungry ⇒ the pre-wire severity exactly.
+    const inheritedHere = inherited[occupierId] || null;
+    const burdenSeverity = clamp01(num(burden[occupierId]) + inheritanceBurdenAddend(hungerOf(occupierId)));
     if (burdenSeverity > 0) {
       outcomes.push(conditionOutcome({
         id: `world_outcome.occupation_burden.${stablePart(occupierId)}.${t}`,
@@ -980,10 +1069,19 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
         severity: burdenSeverity,
         headline: `${occupierName} is stretched thin holding its conquests`,
         summary: `Garrisons, administrators, and suppression tie down ${occupierName}'s strength across ${occCount} occupation${occCount === 1 ? '' : 's'}.`,
-        reasons: [`Occupation burden ${burdenSeverity.toFixed(2)} across ${occCount} occupation${occCount === 1 ? '' : 's'} (overextension scales with count).`],
+        reasons: [
+          `Occupation burden ${burdenSeverity.toFixed(2)} across ${occCount} occupation${occCount === 1 ? '' : 's'} (overextension scales with count).`,
+          // The counterforce is NAMED, not buried in a float. Absent while dark.
+          ...(inheritedHere && inheritedHere.hunger > 0 ? [`Inherited hunger ${inheritedHere.hunger.toFixed(2)}: ${inheritedHere.receipt}`] : []),
+        ],
         tick: t,
         sourceEventTargetId: occupierId,
-        causes: [{ source: occupierId, effect: 'occupation_burden', reason: `${occupierName} garrisons and administers ${occCount} occupied settlement${occCount === 1 ? '' : 's'}.` }],
+        causes: [
+          { source: occupierId, effect: 'occupation_burden', reason: `${occupierName} garrisons and administers ${occCount} occupied settlement${occCount === 1 ? '' : 's'}.` },
+          ...(inheritedHere && inheritedHere.hunger > 0
+            ? [{ source: occupierId, effect: 'occupation_burden', reason: `${occupierName} has annexed a famine: ${inheritedHere.receipt}` }]
+            : []),
+        ],
         recordMode: recurringOccupationConditionRecordMode({
           snapshot,
           archetype: 'occupation_burden',
@@ -998,7 +1096,9 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
 
     // war_spoils: the CAPPED benefit relief. It EASES war_exhaustion (extends supply
     // endurance), modelled as an easing condition whose severity is the capped benefit.
-    const benefitYield = clamp01(num(benefit[occupierId]));
+    // WR-8 (N): you cannot draw tribute from an empty granary. Factor is exactly
+    // 1 while dark or while nothing held is hungry ⇒ the pre-wire yield exactly.
+    const benefitYield = clamp01(num(benefit[occupierId]) * inheritanceBenefitFactor(hungerOf(occupierId)));
     if (benefitYield > 0) {
       const relief = clamp01(benefitYield * BENEFIT_RELIEF_SCALE);
       const recordMode = recurringOccupationConditionRecordMode({
@@ -1022,7 +1122,12 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
         severity: relief,
         headline: `${occupierName} draws strength from its occupations`,
         summary: `Tribute, levies, and materiel from stabilized occupations sustain ${occupierName}'s war effort.`,
-        reasons: [`Occupier benefit ${benefitYield.toFixed(2)} (HARD-CAPPED at ${OCCUPIER_BENEFIT_CONTAINMENT}); relief ${relief.toFixed(2)} eases war exhaustion.`],
+        reasons: [
+          `Occupier benefit ${benefitYield.toFixed(2)} (HARD-CAPPED at ${OCCUPIER_BENEFIT_CONTAINMENT}); relief ${relief.toFixed(2)} eases war exhaustion.`,
+          ...(inheritedHere && inheritedHere.hunger > 0
+            ? [`Netted down by inherited hunger ${inheritedHere.hunger.toFixed(2)} — ${inheritedHere.receipt}`]
+            : []),
+        ],
         ...(recordMode ? { recordMode } : {}),
         // war_spoils is the INVERSE of war_exhaustion — it RELIEVES economic_capacity. The
         // apply path treats it as an easing condition (status 'easing'); it feeds the
