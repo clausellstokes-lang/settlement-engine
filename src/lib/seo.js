@@ -71,7 +71,9 @@ export const VIEW_DESCRIPTIONS = {
   pricing:    'SettlementForge pricing. Generate and save settlements for free, or unlock the Realm, AI narration, and cross-settlement simulation.',
   howto:      'Why SettlementForge can be trusted: a deterministic world simulator built by one person, with the AI caged by mechanism.',
   gallery:    'Browse settlements and realms shared by the SettlementForge community.',
-  founders:   'The SettlementForge Founders: thirty lifetime seats, shown as a public lineage. Meet the people who backed the project first.',
+  // The Hall is an invitation, never an offer — the description must not read as
+  // a sales blurb for something that cannot be bought (DESIGN_FOUNDERS_HALL §1).
+  founders:   "The Founders' Hall: thirty chairs, given by invitation and never sold, to the people who carried SettlementForge before it could carry itself.",
   terms:      'The SettlementForge terms of service: your account, acceptable use, subscriptions, cancellation, and refunds.',
   privacy:    'The SettlementForge privacy policy: what we collect, how research telemetry is consent-gated and opt-out, and how to request deletion.',
   // /refunds is a back-compat alias that renders the Terms "Refunds and

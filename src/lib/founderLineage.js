@@ -13,8 +13,22 @@
  * its own 1..30 skeleton. Nothing about a holder is ever surfaced except what the
  * server projection already deemed public (opted-in + moderation-approved).
  *
- * Zero eager: this module is imported lazily from inside FoundersPage (itself a lazy
- * route), so it never touches the first-paint graph.
+ * ⚠️ ORPHANED 2026-08-03 — NO PRODUCT SURFACE READS THIS MODULE ANY MORE.
+ * Its only consumer was components/founders/FoundersPage.jsx, the seat-LINEAGE
+ * page of the transferable-seat design, which THE FOUNDERS' HALL superseded
+ * (docs/DESIGN_FOUNDERS_HALL.md §1/§2: chairs are granted not sold, and bound to
+ * one founder permanently, so a lineage of prior holders describes a mechanic
+ * that no longer exists). The Hall reads lib/foundersHall.js instead.
+ *
+ * IT IS LEFT IN PLACE ON PURPOSE, NOT BY OVERSIGHT. Retiring it is part of the
+ * §4 TRANSFER-MACHINERY RETIREMENT — migration 160's cases, the transfer flows,
+ * founderLineage's transfer arcs — which the design orders as ITS OWN COMMIT
+ * under the op-retirement cascade checklist (five frozen artifacts; every anchor
+ * dry-run first). Deleting it here would have taken half of that cascade in a
+ * commit that could not sweep the other half. tests/lib/founderLineage.test.js
+ * keeps it honest until the retirement lands.
+ *
+ * Zero eager: nothing imports this module statically.
  */
 
 import { supabase, isConfigured } from './supabase.js';

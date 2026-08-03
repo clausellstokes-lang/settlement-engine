@@ -57,9 +57,12 @@ const PrivacyPage       = lazy(() => import('./components/legal/PrivacyPage.jsx'
 const CovenantPage      = lazy(() => import('./components/legal/CovenantPage.jsx'));
 const BountyPage        = lazy(() => import('./components/legal/BountyPage.jsx'));
 const DmScreen          = lazy(() => import('./components/screen/DmScreen.jsx'));
-// The public Founder seat-lineage page. Lazy — off the first-paint graph; its lineage
-// read (lib/founderLineage.js) is dynamically imported on mount and fails closed.
-const FoundersPage      = lazy(() => import('./components/founders/FoundersPage.jsx'));
+// THE FOUNDERS' HALL (/founders) — thirty chairs, all by invitation, none ever
+// sold. Lazy — off the first-paint graph; its chair read (lib/foundersHall.js) and
+// its letterbox seam (lib/founderChairRequest.js) are both dynamically imported on
+// mount and fail closed. Supersedes the seat-LINEAGE page of the retired
+// transferable-seat design (docs/DESIGN_FOUNDERS_HALL.md §1/§2).
+const FoundersHallPage  = lazy(() => import('./components/founders/FoundersHallPage.jsx'));
 // The First Hundred honor roll (/first-hundred) and the public roadmap (/roadmap).
 // Lazy — off the first-paint graph; each renders from a committed data module.
 const FirstHundredPage  = lazy(() => import('./components/founders/FirstHundredPage.jsx'));
@@ -117,7 +120,7 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
       {view === 'admin'       && (authLoading ? <Loading /> : isElevated ? <AdminPanel onBack={() => setView('account')} /> : null)}
       {view === 'pricing'     && <PricingPage onNavigate={setView} />}
       {view === 'gallery'     && <GalleryPage onNavigate={setView} routeSlug={params.slug} routeHub={params.hub} />}
-      {view === 'founders'    && <FoundersPage onNavigate={setView} />}
+      {view === 'founders'    && <FoundersHallPage onNavigate={setView} />}
       {view === 'first-hundred' && <FirstHundredPage onNavigate={setView} />}
       {view === 'roadmap'     && <RoadmapPage onNavigate={setView} />}
       {view === 'world'       && <WorldPage code={params.code} onNavigate={setView} />}

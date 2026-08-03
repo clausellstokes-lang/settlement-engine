@@ -86,6 +86,15 @@ const lightColors = Object.freeze({
   'amber-500': '#D08020',  // amber fill / icon / border
   'amber-700': '#8A5212',  // amber TEXT on amber-100 (WCAG AA — amber-500 on amber-100 is 2.85:1)
   'amber-100': '#FDF4EC',
+
+  // THE ROLE RINGS (docs/DESIGN_FOUNDERS_HALL.md §2) — the two staff hues worn
+  // as a ring around a Founders' Hall plate when a chair-holder is ALSO staff.
+  // Deliberately outside the gold family: a role is what you are to the product,
+  // a chair is an honor you hold, and a staff mark must never read as purchasable
+  // prestige. Used ONLY through the founderRing* named tokens below; the ring is
+  // never the sole carrier of the fact (the plate also names the role in text).
+  'ring-blue-400':  '#5B8FD6',  // Developer ring on the Hall's dark ceremonial field
+  'ring-mauve-400': '#C86FB0',  // Admin ring — the purplish-pink of the owner's order
 });
 
 export const color = lightColors;
@@ -707,3 +716,16 @@ export const legacy = Object.freeze({
 export const GOLD_TXT  = '#6A511F';  // legible gold TEXT on light / gold-tint surfaces (WCAG AA)
 export const GOLD_SOFT = '#F3E7C6';  // opaque soft-gold fill (tertiary gold button surface)
 export const BORDER_STRONG = '#A6863C'; // interactive-control border ≥3:1 vs card + page (WCAG 1.4.11)
+
+// ── Founders' Hall role rings (tree-shakeable standalone exports) ────────────
+// Same discipline as the Realm/map chrome above, and for the same reason: these
+// are consumed ONLY by the lazily-loaded Hall chunk (components/founders/*), so
+// they stay OUT of the eager `legacy` object. Deliberately NOT re-exported through
+// components/theme.js — that shim is eager, and welding two ceremonial hues into
+// first paint to save an import path would spend the closure budget on a route
+// most visitors never open.
+//
+// The ring is never the sole carrier of the fact: ChairPlate also names the role
+// in text, so the hue is reinforcement, not information (WCAG 1.4.1).
+export const founderRingDeveloper = '#5B8FD6'; // Developer ring — the Hall's blue
+export const founderRingAdmin     = '#C86FB0'; // Admin ring — the purplish-pink of the owner's order

@@ -379,11 +379,17 @@ export default function PricingPage({ onNavigate }) {
         loading={loading === 'founder_lifetime'}
       />
 
-      {/* The Founder tier's proof surface: the public seat lineage. A quiet link so
-          a prospective Founder can see who is already in — the page is the proof. */}
+      {/* The Founder tier's proof surface: THE FOUNDERS' HALL. A quiet link so a
+          visitor can see who is already seated — the Hall is the proof.
+          LABEL ONLY. The Founder CARD above still carries the purchase copy of the
+          superseded design; abolishing that path (DESIGN_FOUNDERS_HALL §1/§5) is a
+          paid-surface change gated on the build-time never-sold verification
+          against the seat ledger and purchase history, and is NOT this lane's to
+          make. Renaming the destination is not the same act as removing the door,
+          and the two must not ride in one commit. */}
       <div style={{ textAlign: 'center', marginTop: `-${SP.md}px`, marginBottom: SECTION_GAP }}>
         <Button variant="ghost" size="sm" onClick={() => onNavigate?.('founders')}>
-          Meet the Founders &rarr;
+          Visit the Founders&rsquo; Hall &rarr;
         </Button>
       </div>
 

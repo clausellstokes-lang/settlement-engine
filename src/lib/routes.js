@@ -58,10 +58,13 @@ export const ROUTES = Object.freeze([
   { view: 'admin',                 path: '/admin',                 title: 'Admin',                         guard: 'elevated' },
   { view: 'pricing',               path: '/pricing',               title: 'Pricing' },
   { view: 'gallery',               path: '/gallery',               title: 'Gallery',                       nav: { label: 'Gallery',    order: 60 } },
-  // The Founders page — the public seat lineage (30 lifetime seats). Public +
-  // indexable, footer-linked (no top-nav block), no guard. Lazy route; its lineage
-  // read is fail-closed (components/founders/FoundersPage.jsx).
-  { view: 'founders',              path: '/founders',              title: 'Founders' },
+  // THE FOUNDERS' HALL — thirty numbered chairs, all by invitation, none ever
+  // sold (docs/DESIGN_FOUNDERS_HALL.md). Public + indexable, footer-linked (no
+  // top-nav block), no guard. Lazy route; its chair read is fail-closed
+  // (components/founders/FoundersHallPage.jsx). The PATH stays /founders on
+  // purpose — the page's design changed, its address did not, so every link and
+  // index entry already in the world still lands.
+  { view: 'founders',              path: '/founders',              title: "The Founders' Hall" },
   // The First Hundred: the founding-cohort honor roll (an unpriced acknowledgment of
   // early members, distinct from the paid Founder seats). Public + indexable, no
   // top-nav block, no guard. Reached by direct link + the sitemap (it links out to
