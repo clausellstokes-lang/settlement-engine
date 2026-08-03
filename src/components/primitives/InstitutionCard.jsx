@@ -18,6 +18,7 @@ import {
   BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, R, SP, sans,
 } from '../theme.js';
 import IconButton from './IconButton.jsx';
+import { useIconsOn } from './IconsContext.js';
 import { useDialogFocusTrap } from './useDialogFocusTrap.js';
 import { deriveInstitutionProfile } from '../../domain/display/institutionProfile.js';
 
@@ -43,6 +44,7 @@ export default function InstitutionCard({ open, institution, settlement, onClose
   // does NOT re-run the effect and yank focus out mid-read (the recorded
   // onClose-identity bug class this popover shared with GlossaryCard).
   const cardRef = useDialogFocusTrap(open, onClose);
+  const iconsOn = useIconsOn();
 
   if (!open) return null;
 
@@ -74,13 +76,19 @@ export default function InstitutionCard({ open, institution, settlement, onClose
           padding: `${SP.lg}px ${SP.lg}px ${SP.md}px`,
           borderBottom: `1px solid ${BORDER}`, background: CARD_ALT,
         }}>
-          <div style={{
-            width: 32, height: 32, borderRadius: R.lg, border: `1px solid ${BORDER}`,
-            background: CARD, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: GOLD, flexShrink: 0,
-          }}>
-            <Landmark size={16} aria-hidden="true" />
-          </div>
+          {/* Icons-off (IconsContext): the decorative Landmark medallion goes,
+              and its 32px box goes WITH it — leaving the box would keep an
+              empty bordered square eating the header's gap (the lane IC
+              dead-slot lesson). Same shape as Dialog/DesktopOnlyGate. */}
+          {iconsOn && (
+            <div style={{
+              width: 32, height: 32, borderRadius: R.lg, border: `1px solid ${BORDER}`,
+              background: CARD, display: 'flex', alignItems: 'center', justifyContent: 'center',
+              color: GOLD, flexShrink: 0,
+            }}>
+              <Landmark size={16} aria-hidden="true" />
+            </div>
+          )}
           <div style={{ flex: 1, minWidth: 0 }}>
             <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, lineHeight: 1.25, fontWeight: 900 }}>
               {profile.name}

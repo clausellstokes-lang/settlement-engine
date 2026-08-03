@@ -10,22 +10,26 @@
  * Accessibility: the badge announces itself with role="status" so
  * screen readers pick up phase changes. The label inside is the
  * authoritative text for assistive tech; the icon is decorative.
+ *
+ * ICONS-OFF (lane LU): this primitive is one of the five IconsContext.js NAMED
+ * as consulting the gate that in fact never did — every StateBadge in the app
+ * has been rendering its lucide glyph straight through the ratified icons-off
+ * redesign. It consults the gate now. Nothing is lost when the icon goes: the
+ * two channels IconsContext documents as surviving — the kind's COLOR and the
+ * uppercase TEXT label (P7) — are both still here, and the label is what the
+ * pins and assistive tech already read.
  */
 
-import {
-  Edit3, BookMarked, AlertTriangle, Hourglass,
-  Sparkles, Box, Lock,
-} from 'lucide-react';
 import { tx } from '../../copy/index.js';
 
 const KINDS = {
-  draft:         { bg: '#f3ead8',                 fg: '#6a4a1c', border: '#c8a96a',                 Icon: Edit3 },
-  canon:         { bg: '#1a3a2a',                 fg: '#e0d6b8', border: '#2d5a44',                 Icon: BookMarked },
-  preplay:       { bg: '#fff7ec',                 fg: '#7a4f0f', border: '#e0b070',                 Icon: AlertTriangle },
-  event_pending: { bg: '#fff5f5',                 fg: '#8b1a1a', border: '#c89a9a',                 Icon: Hourglass },
-  narrated:      { bg: 'rgba(90,42,138,0.14)',    fg: '#6a2a9a', border: 'rgba(160,100,220,0.35)',  Icon: Sparkles },
-  raw:           { bg: 'rgba(156,128,104,0.14)',  fg: '#6b5340', border: 'rgba(156,128,104,0.35)',  Icon: Box },
-  locked:        { bg: '#fff7e0',                 fg: '#7a4f0f', border: '#c8a96a',                 Icon: Lock },
+  draft:         { bg: '#f3ead8',                 fg: '#6a4a1c', border: '#c8a96a' },
+  canon:         { bg: '#1a3a2a',                 fg: '#e0d6b8', border: '#2d5a44' },
+  preplay:       { bg: '#fff7ec',                 fg: '#7a4f0f', border: '#e0b070' },
+  event_pending: { bg: '#fff5f5',                 fg: '#8b1a1a', border: '#c89a9a' },
+  narrated:      { bg: 'rgba(90,42,138,0.14)',    fg: '#6a2a9a', border: 'rgba(160,100,220,0.35)' },
+  raw:           { bg: 'rgba(156,128,104,0.14)',  fg: '#6b5340', border: 'rgba(156,128,104,0.35)' },
+  locked:        { bg: '#fff7e0',                 fg: '#7a4f0f', border: '#c8a96a' },
 };
 
 /**
@@ -38,10 +42,9 @@ const KINDS = {
 export default function StateBadge({ kind, size = 'md', tooltip, suffix }) {
   const k = KINDS[kind];
   if (!k) return null;
-  const Icon = k.Icon;
   const dim = size === 'sm'
-    ? { fs: 9,  py: 2, px: 6, ic: 9  }
-    : { fs: 11, py: 3, px: 8, ic: 11 };
+    ? { fs: 9,  py: 2, px: 6 }
+    : { fs: 11, py: 3, px: 8 };
   const label = tx('state.badges')?.[kind] || kind;
   const aria = tooltip || tx('state.tooltips')?.[kind] || `${label} state`;
   return (
@@ -61,7 +64,7 @@ export default function StateBadge({ kind, size = 'md', tooltip, suffix }) {
         whiteSpace: 'nowrap',
       }}
     >
-      <Icon size={dim.ic} aria-hidden="true" /> {label.toUpperCase()}
+      {label.toUpperCase()}
       {suffix != null && (
         <span style={{ opacity: 0.7, marginLeft: 4 }} aria-hidden="true">· {suffix}</span>
       )}

@@ -1,6 +1,7 @@
 import { useId, useRef, useState } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { BORDER, CARD, CARD_HDR, FS, INK, MUTED, SECOND, SP, sans } from '../theme.js';
+import { useIconsOn } from './IconsContext.js';
 import Badge from './Badge.jsx';
 
 export default function Disclosure({
@@ -22,6 +23,12 @@ export default function Disclosure({
   // call site lazily teach a deep control (analytics step, coach) without a
   // separate effect. Pre-armed when defaultOpen so it doesn't fire on mount.
   const fired = useRef(defaultOpen);
+  // Icons-off everywhere but the Realm map (IconsContext). The open/closed
+  // chevron is an AFFORDANCE, not decoration, so it keeps a channel: outside
+  // the map it falls back to the unicode TEXT chevron IconsContext.js names as
+  // exempt from the gate. The fallback keeps the icon's 14px box so the title
+  // does not shift horizontally between the open and closed states.
+  const iconsOn = useIconsOn();
   const Icon = open ? ChevronDown : ChevronRight;
   const toggle = () => setOpen((value) => {
     const next = !value;
@@ -57,7 +64,12 @@ export default function Disclosure({
           fontFamily: sans,
         }}
       >
-        <Icon size={14} color={MUTED} />
+        {iconsOn
+          ? <Icon size={14} color={MUTED} />
+          : <span aria-hidden="true" style={{
+              width: 14, flexShrink: 0, textAlign: 'center',
+              fontSize: FS.xs, lineHeight: 1, color: MUTED,
+            }}>{open ? '▾' : '▸'}</span>}
         <span style={{
           flex: 1,
           minWidth: 0,
