@@ -34,7 +34,7 @@ import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/ec
 import { DOSSIER_CAUSAL_PROSE } from '../../src/data/dossierCausalProse.generated.js';
 import { PROSPERITY_TIERS } from '../../src/data/constants.js';
 import { deriveProsperityLabel } from '../../src/generators/economy/prosperity.js';
-import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 /**
  * DS-ECO-8's rungs, SPLIT BY REACHABILITY (lane PT, 2026-08-03).
@@ -109,6 +109,10 @@ describe('the state-prose reader — the corpus keys on bands the ladder can rea
     expect(first).toEqual(second);
     expect(deriveProsperityLabel('Moderate', { stressTypes: [] }, [])).toBe('Moderate');
     expect(deriveProsperityLabel('Poor', { stressTypes: ['under_siege'] }, [])).toBe('Struggling');
+    // The RNG arm this sweep must never touch: `deriveProsperityLabel` rolls
+    // `_rng()` on the 'Subsistence' INPUT alone, so a base list carrying it would
+    // make every cell above seed-dependent and the exact set equality a flake.
+    // anchored: the subject is a literal array declared in this file (line ~88), never a produced collection, so it cannot drift out from under the assertion
     expect(LADDER_SWEEP_BASES).not.toContain('Subsistence');
   });
 
@@ -134,8 +138,25 @@ describe('the state-prose reader — the corpus keys on bands the ladder can rea
     const emitted = [...emittedProsperityLabels()];
     // Compared in BOTH spellings on purpose: the pool key is upper-case and the label is
     // title-case, and a case-blind comparison here would pass whatever the ladder did.
-    expect(emitted.map((label) => String(label).toUpperCase())).not.toContain(LEGACY_RUNG.pool);
-    expect(emitted).not.toContain(PROSPERITY_TIERS[0]);
+    //
+    // THE ANCHOR IS THE RUNG NEXT TO IT. `Struggling` is PROSPERITY_TIERS[1] — rung 1,
+    // the lowest band the ladder does emit, reached by the very same `under_siege`
+    // clamp that would reach rung 0 if rung 0 were reachable. It travels the identical
+    // code path, so a ladder that stopped emitting anything, or an `emittedProsperityLabels`
+    // that stopped calling the real function, reds on the anchor instead of passing the
+    // exclusion. A hard-coded sibling the sweep never produces would not do.
+    expectAbsentWithAnchor(
+      emitted.map((label) => String(label).toUpperCase()),
+      LEGACY_RUNG.pool,
+      PROSPERITY_TIERS[1].toUpperCase(),
+      'the legacy rung, upper-cased like the pool key',
+    );
+    expectAbsentWithAnchor(
+      emitted,
+      PROSPERITY_TIERS[0],
+      PROSPERITY_TIERS[1],
+      'the legacy rung, title-cased like the emitted label',
+    );
     expect(PROSPERITY_TIERS[0]).toBe('Subsistence');
     expect(LEGACY_RUNG.pool).toBe(PROSPERITY_TIERS[0].toUpperCase());
   });
@@ -171,11 +192,22 @@ describe('the state-prose reader — anchored liveness', () => {
     });
 
     it(`substitutes the fill and leaves no placeholder behind — ${rung.pool} [${rung.why}]`, () => {
+      // THE LIVENESS ANCHOR, in two halves. The corpus side: this rung provably
+      // CARRIES a slot token, so the regex below has something it could catch —
+      // over a slot-free pool the negative would be true of prose that never had a
+      // placeholder to leave behind. The reader side: the draw provably returned
+      // prose, so the regex is looking at live output rather than at undefined.
+      const pool = DOSSIER_STATE_PROSE_ECONOMY[rung.block].pools[rung.pool];
+      expect(
+        pool.some((v) => /\{[a-z_]+\}/i.test(v.text)),
+        `${rung.pool} carries no slot token at all — the no-placeholder negative would be vacuous`,
+      ).toBe(true);
       const line = readStateProse(
         DOSSIER_STATE_PROSE_ECONOMY, rung.block, rung.pool,
         { slots: { settlement: 'Thornwall' }, seed: 'save-1::eco-8', audience: AUDIENCE_DM },
       );
       expect(line?.text).toBeTruthy();
+      // anchored: the two assertions above prove the pool can produce a slot token and that the reader returned live prose, so this measures substitution rather than absence-of-everything
       expect(line?.text).not.toMatch(/\{[a-z_]+\}/i);
     });
   }
@@ -248,7 +280,15 @@ describe('the state-prose reader — fail-closed audience', () => {
   it('treats an unrecognised audience as the player — the restrictive read', () => {
     const { pool, covert, slots } = covertPool();
     const unknown = eligibleVariants(pool, { audience: 'auditor', slots });
-    expect(unknown).not.toContain(covert[0]);
+    // THE ANCHOR IS AN OPEN SIBLING FROM THE SAME POOL. `covertPool` guarantees the
+    // pool mixes covert and open variants, so an open one exists; it travels the
+    // identical eligibility path and must SURVIVE the unknown-audience read. Without
+    // it, a filter that returned [] for every unrecognised audience — or a slot bag
+    // that stopped satisfying the pool — would pass the exclusion while proving the
+    // opposite of the restrictive read this test claims.
+    const openSibling = eligibleVariants(pool, { audience: AUDIENCE_DM, slots })
+      .find((v) => !(v.marks || []).includes('dm-only'));
+    expectAbsentWithAnchor(unknown, covert[0], openSibling, 'the unrecognised audience reads as the player');
     expect(variantIsAudible(covert[0], 'auditor')).toBe(false);
     expect(variantIsAudible(covert[0], AUDIENCE_DM)).toBe(true);
   });
