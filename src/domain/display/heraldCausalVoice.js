@@ -70,6 +70,18 @@
  * `receiptClauseFloor.isPlaceholderClause`, never to a literal, because a private
  * copy would keep composing over the placeholder the day a wording moved.
  *
+ * THE ROOT IS ON THE FLOOR TOO (cycle-12 finding F1). The floor above reads the
+ * CHAIN, and the telling's root arrived unread — yet in `fwd` the root is the
+ * nearest link's `childClause`, which is exactly the argument that link's
+ * connective molds. A headline-less durable record at the root therefore composed
+ * a connective over a placeholder by the other door: "…and after it the turning
+ * when World pulse outcome". So `rootClause` is floored by the SAME predicate,
+ * the root's own `childKept` starts false, and the root counts toward the
+ * truncation that forbids `horizon` — a telling whose head is a hole may not
+ * claim the record reaches. In `back` the root is the head sentence and prints
+ * bare, which is what a placeholder is always allowed to do: stand alone,
+ * asserting no relation.
+ *
  * ── DORMANCY ────────────────────────────────────────────────────────────────
  * Dark unless `simulationRules.heraldCausalVoiceEnabled === true`. Every entry
  * point returns null when dark, so the feed is byte-identical to a world that
@@ -444,16 +456,22 @@ export function heraldTellingRegister({
   if (!rootClause) return null;
 
   const held = direction === 'fwd' ? 'fwd' : 'back';
+  // THE ROOT JOINS THE FLOOR (cycle-12 F1). The root is the nearest link's CHILD,
+  // so in `fwd` its clause is what that link's connective molds — a placeholder
+  // root reached a slot through the one door the chain-side guard does not watch.
+  const rootClauseless = isPlaceholderClause(rootClause);
   /** @type {Array<TellingLink>} */
   const links = [];
   /** @type {string[]} */
   const visibleIds = [];
   // The CHILD of chain[i] in the printed sequence: the root for the nearest hop,
   // otherwise the hop before it. `childKept` is false when that hop was dropped,
-  // which forbids a `fwd` connective from reaching across the gap.
+  // which forbids a `fwd` connective from reaching across the gap — and a
+  // placeholder root is "not kept" in exactly that sense: it is present on the
+  // page and unusable as an argument.
   let childId = '';
   let childClause = rootClause;
-  let childKept = true;
+  let childKept = !rootClauseless;
   for (const hop of chain) {
     const clause = String(hop?.headline || '').trim();
     const hopId = String(hop?.id ?? '');
@@ -514,11 +532,13 @@ export function heraldTellingRegister({
     terminal,
     // VISIBLE CHAIN ONLY.
     seed: `${seed}::visible::${visibleIds.join('|')}`,
-    // BOTH truncations forbid `horizon`. A covert seam because naming retention
-    // there would be a tell; a clauseless hop because the walk cannot tell a root
-    // `sourceEventId` from a receipt aged past MAX_HISTORY, so "the trail runs
-    // past living memory" would be a coin-flip claim. `chain_end` is true of both.
-    truncated: links.some((l) => l.redacted || l.clauseless),
+    // ALL THREE truncations forbid `horizon`. A covert seam because naming
+    // retention there would be a tell; a clauseless hop because the walk cannot
+    // tell a root `sourceEventId` from a receipt aged past MAX_HISTORY, so "the
+    // trail runs past living memory" would be a coin-flip claim; and a CLAUSELESS
+    // ROOT because a telling whose head is a hole has even less standing to claim
+    // the record reaches. `chain_end` is true of all three.
+    truncated: rootClauseless || links.some((l) => l.redacted || l.clauseless),
   });
 
   const text = `${composeSentences({ links, rootClause, held }).join('; ')} — ${terminalText}.`;

@@ -770,6 +770,34 @@ const headlinelessRecordWorld = () => ({
   }],
 });
 
+/**
+ * THE CYCLE-12 F1 FIXTURE: the ROOT record carries no headline, and its parent is
+ * fully receipted. The shipped path stamps `PULSE_OUTCOME_FALLBACK` on the root,
+ * and in `fwd` the root is the nearest link's CHILD — the very slot that link's
+ * connective molds — so the placeholder reached a connective through the one door
+ * the chain-side floor never watched.
+ */
+const headlinelessRootWorld = () => ({
+  simulationRules: { heraldCausalVoiceEnabled: true },
+  spatialLedgers: {
+    provenance: { 'evt-root': { parents: ['evt-a'], type: 'war_declared', tick: 70 } },
+  },
+  pulseHistory: [{
+    tick: 70,
+    selectedOutcomes: [
+      { id: 'evt-root', type: 'war_declared' },
+      { id: 'evt-a', headline: 'the grain levy failed at Karsh', type: 'levy_shortfall' },
+    ],
+  }],
+});
+
+/** The same fixture with the root's recorded headline restored (the control). */
+const voicedRootWorld = () => {
+  const world = headlinelessRootWorld();
+  world.pulseHistory[0].selectedOutcomes[0].headline = 'Karsh declares war on Elmspur';
+  return world;
+};
+
 const walkOf = (world, rootId = 'evt-root') => buildCauseWalk({ worldState: world, rootId, seesSecrets: true });
 
 describe('THE CLAUSE FLOOR — a placeholder is TERMINAL, never an argument', () => {
@@ -881,5 +909,121 @@ describe('THE CLAUSE FLOOR — a placeholder is TERMINAL, never an argument', ()
     // REDACTED_HOP is deliberately NOT in this set: a covert hop carries a
     // structural `redacted` flag, and the composer reads the boolean.
     expect(PLACEHOLDER_CLAUSES).toHaveLength(3);
+  });
+});
+
+// ── CYCLE-12 F1 — THE ROOT JOINS THE FLOOR ──────────────────────────────────
+// The clause floor read the CHAIN and left `walk.root.headline` bare. In `fwd`
+// the root is the nearest link's `childClause`, which is exactly the argument
+// that link's connective molds, so a headline-less durable root composed the
+// defect through the other door — the executed counterexample being
+// "…and after it the turning when World pulse outcome". The fixture is a REAL
+// buildCauseWalk over a real ledger, because a hand-built walk could assert the
+// guard while the producer stopped producing the case.
+
+describe('THE CLAUSE FLOOR — the ROOT is on it too (F1)', () => {
+  test('the SHIPPED PATH really produces a placeholder ROOT (without this the guards below are vacuous)', () => {
+    const walk = walkOf(headlinelessRootWorld());
+    expect(walk.root, 'the root record resolved to nothing at all').toBeTruthy();
+    expect(walk.root.headline).toBe(PULSE_OUTCOME_FALLBACK);
+    expect(isPlaceholderClause(walk.root.headline)).toBe(true);
+    // …and the parent IS receipted, so the nearest link has a real clause of its
+    // own and nothing but the ROOT is on the floor in this fixture.
+    expect(walk.chain).toHaveLength(1);
+    expect(walk.chain[0].headline).toBe('the grain levy failed at Karsh');
+    expect(walk.chain[0].redacted).toBe(false);
+    // The control fixture differs in exactly one field.
+    expect(walkOf(voicedRootWorld()).root.headline).toBe('Karsh declares war on Elmspur');
+  });
+
+  test('THE REMOVAL, measured: the fwd connective molds a RECORDED root and never a placeholder one', () => {
+    const before = heraldTellingRegister({
+      worldState: voicedRootWorld(), walk: walkOf(voicedRootWorld()), seed: 'root-floor-1', seesSecrets: true, direction: 'fwd',
+    });
+    const after = heraldTellingRegister({
+      worldState: headlinelessRootWorld(), walk: walkOf(headlinelessRootWorld()), seed: 'root-floor-1', seesSecrets: true, direction: 'fwd',
+    });
+    // THE LIVENESS ANCHOR: with a recorded root the nearest link really does mold
+    // it into its slot, so "no argument afterwards" measures the floor rather than
+    // a register that composes nothing for this fixture at all.
+    expect(before.links[0].argText, 'the recorded root composed no fwd argument — the negative would be vacuous').toBeTruthy();
+    expect(before.links[0].argText).toContain('Karsh declares war on Elmspur');
+    expectPresentThenAbsent(
+      before.links.map((l) => String(l.argText)),
+      after.links.map((l) => String(l.argText)),
+      String(before.links[0].argText),
+      'the placeholder root loses the argument slot the recorded root earns',
+    );
+    expect(after.links[0].connective, 'a connective survived over a placeholder root').toBeNull();
+    expect(after.links[0].argText).toBeNull();
+    expect(after.links[0].childKept, 'the placeholder root must not read as a usable child').toBe(false);
+    // Nothing is LOST: the root still prints, bare, asserting no relation.
+    expect(after.text).toContain(PULSE_OUTCOME_FALLBACK);
+    expect(after.text).toContain('the grain levy failed at Karsh');
+  });
+
+  test('no placeholder ever reaches a molded argument, in EITHER direction, at any seed', () => {
+    let composedArguments = 0;
+    const cases = DIRECTIONS.flatMap((direction) => SEEDS.map((seed) => ({ direction, seed })));
+    const failures = collectSeedFailures(cases, ({ direction, seed }) => {
+      const mute = headlinelessRootWorld();
+      const out = heraldTellingRegister({
+        worldState: mute, walk: walkOf(mute), seed, seesSecrets: true, direction,
+      });
+      for (const link of out.links) {
+        if (link.argText) composedArguments += 1;
+        for (const placeholder of PLACEHOLDER_CLAUSES) {
+          // `controlArguments` (this same sweep over a RECORDED root) and
+          // `composedArguments` are both asserted non-zero after the sweep, so an
+          // empty link list or a register that stopped molding reds there.
+          // anchored: composedArguments + controlArguments are asserted non-zero after the sweep
+          expect(String(link.argText ?? ''), `${direction} @ ${seed}`).not.toContain(placeholder);
+        }
+      }
+      // The executed counterexample, named exactly: the connective slot the
+      // placeholder used to fill sat behind the `after it the turning when` mold.
+      // anchored: `out.text` is asserted to carry both recorded beats two lines down
+      expect(out.text, `${direction} @ ${seed}`).not.toContain(`when ${PULSE_OUTCOME_FALLBACK}`);
+      expect(out.text).toContain(PULSE_OUTCOME_FALLBACK);
+      expect(out.text).toContain('the grain levy failed at Karsh');
+    });
+    expectNoSeedFailures(failures, 'a placeholder root never enters a connective slot');
+    // GUARD-THE-GUARD: the same sweep over the RECORDED root does compose molded
+    // arguments, so the zero above is the floor and not a dead register.
+    let controlArguments = 0;
+    for (const { direction, seed } of cases) {
+      const voiced = voicedRootWorld();
+      const out = heraldTellingRegister({
+        worldState: voiced, walk: walkOf(voiced), seed, seesSecrets: true, direction,
+      });
+      for (const link of out.links) if (link.argText) controlArguments += 1;
+    }
+    expect(controlArguments, 'the control sweep composed no argument — the negative sweep is vacuous').toBeGreaterThan(0);
+    expect(composedArguments, 'the floored fixture still molded an argument in back (its own clause)').toBeGreaterThan(0);
+  });
+
+  test('a placeholder ROOT counts toward the truncation, so the terminal may not claim retention', () => {
+    // `horizon`'s family claims the trail runs past living memory. A telling whose
+    // HEAD is a hole has no standing to say that. The caller must ASK for `horizon`
+    // for the truncation to be load-bearing — with the default `chain_end` the
+    // terminal is chain_end either way and the pin would prove nothing — so this
+    // is the one place the register is called with the retention terminal.
+    for (const direction of DIRECTIONS) {
+      const mute = headlinelessRootWorld();
+      const out = heraldTellingRegister({
+        worldState: mute, walk: walkOf(mute), seed: 'root-floor-2', seesSecrets: true, direction, terminal: 'horizon',
+      });
+      expect(TERMINALS.chain_end, direction).toContain(out.terminal);
+      // anchored: the line above pins this same terminal INTO the chain_end family
+      expect(TERMINALS.horizon, direction).not.toContain(out.terminal);
+      // THE LIVENESS ANCHOR for the whole pin: the SAME call over the recorded root
+      // does reach `horizon`, so the assertions above measure the root's truncation
+      // rather than a register that can never render the retention family at all.
+      const voiced = voicedRootWorld();
+      const control = heraldTellingRegister({
+        worldState: voiced, walk: walkOf(voiced), seed: 'root-floor-2', seesSecrets: true, direction, terminal: 'horizon',
+      });
+      expect(TERMINALS.horizon, `${direction}: the control never reached horizon — the pin is vacuous`).toContain(control.terminal);
+    }
   });
 });
