@@ -97,7 +97,7 @@ floor) bind throughout.
   under-reported harvest, the smugglers' road out the back gate), monitoring
   reach is the victor's, and the whole contest rides believed-vs-true.
 - **TB-LAW-7 — THE HEALING LATTICE + THE SATURATION BAND (owner addendum,
-  2026-08-02).** Resentment has FIVE standing REDUCERS, each on its own
+  2026-08-02).** Resentment has SIX standing REDUCERS, each on its own
   clock, each riding built or specced machinery: MUTUALLY BENEFICIAL TRADE
   — and only that: the healing read requires BOTH sides' own-picture
   valuations positive (the two-picture discipline applied to commerce), and
@@ -113,7 +113,19 @@ floor) bind throughout.
   of convenience become something more, the CV machinery's own redemption
   arc (with its own risk: the same web prices betrayal, and a defaulted
   co-belligerence wounds DEEPER than distance ever did — the healing lane
-  and the betrayal market read the same record); MIGRATION (kin ties — departure
+  and the betrayal market read the same record); CHARITY — unilateral
+  relief on the BUILT generosity lane (the relief applicator, the house's
+  relief_grant act, famine_relief as profiteering's own casus mirror,
+  gratitude bonds): grain in the famine year and aid after the sack write
+  the bright ledger on the fastest crisis clock — the enemy who fed us is
+  hard to hate — with TWO built-in edges: above the saturation band the
+  gift reads through BELIEF (refused, or received as scheming — the
+  mistrusted gift is a receipt, not a heal), and charity has its shadow
+  PRICE already in the tree: the corruption web reads sustained generosity
+  as cheap recruitment ("the patron who has been generous for a decade
+  recruits cheap"), so the same record serves grace and the leash,
+  distinguished only by declared-vs-true purpose — alms and angling are
+  one ledger read two ways; MIGRATION (kin ties — departure
   memory's bright lane, kinship_bond, assimilation converting ties into
   belonging); SIMILAR FAITH (common_rite — the quadrant table's bright
   pole — and the shared_rite communion term); and ALIGNMENT AFFINITY
