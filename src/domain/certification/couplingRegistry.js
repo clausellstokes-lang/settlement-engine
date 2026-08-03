@@ -141,9 +141,112 @@ export const WR4_WAR_COST_COUPLINGS = Object.freeze([
   WR4_INSTITUTION_HOME_FRONT_COUPLING,
 ]);
 
+/**
+ * WR-5 / CPL-6. The legitimate seat's security, character, and exact covert
+ * patron divide the realm and private books used by the four-term war read.
+ * The same book can press toward peace or continued war.
+ */
+export const WR5_SEAT_BOOKS_COUPLING = couplingRow({
+  couplingId: 'CPL-6.INTERIOR_TO_WAR.WR-5.seat_books',
+  pairId: 'CPL-6',
+  direction: 'INTERIOR→WAR',
+  read: 'src/domain/worldPulse/warSeatBooks.js#readWarSeatBooks',
+  receiptField: 'pulseRecord.warTerminationReads[].{authoritySignature,booksInterest,booksDirection,rulerSecurityBand,rulerLawfulnessBand,rulerMoralityBand,booksReason,booksPublicReason}',
+  counterforce: 'src/domain/worldPulse/warSeatBooks.js#readWarSeatBooks',
+  flags: ['warLayerEnabled', 'warTerminationEnabled'],
+  owningVolume: 'WAR',
+  owningWave: 'WR-5',
+  intendedDesk: 'war',
+});
+
+/**
+ * WR-5 / CPL-6. A signed or refused peace can organize the faction that wanted
+ * the opposite decision. An aligned faction writes nothing from the same read;
+ * the ordinary faction contest remains the counterforce against an automatic coup.
+ */
+export const WR5_WAR_DECISION_GRIEVANCE_COUPLING = couplingRow({
+  couplingId: 'CPL-6.WAR_TO_INTERIOR.WR-5.war_decision_grievance',
+  pairId: 'CPL-6',
+  direction: 'WAR→INTERIOR',
+  read: 'src/domain/worldPulse/warPoliticalLoop.js#applyWarDecisionPolitics',
+  receiptField: 'worldState.factionPairStates[...].incidents[].{type,context.{decisionId,actualAction,desiredAction}}',
+  counterforce: 'src/domain/worldPulse/warPoliticalLoop.js#applyWarDecisionPolitics',
+  flags: [
+    'warLayerEnabled',
+    'warTerminationEnabled',
+    'factionCompetitionEnabled',
+    'memoryWeaveEnabled',
+  ],
+  owningVolume: 'WAR',
+  owningWave: 'WR-5',
+  intendedDesk: 'adjudication',
+});
+
+/**
+ * WR-5 / CPL-5. The offerer's approval is only the first yes: the named target
+ * court runs the same four-term war read before the existing peace writer may act.
+ */
+export const WR5_BILATERAL_PEACE_COUPLING = couplingRow({
+  couplingId: 'CPL-5.WAR_TO_GRAMMAR.WR-5.bilateral_peace',
+  pairId: 'CPL-5',
+  direction: 'WAR→GRAMMAR',
+  read: 'src/domain/worldPulse/warPeaceDecision.js#readWarPeaceDecision',
+  receiptField: 'readWarPeaceDecision(...).receipt.{decision,actualAction,decidingTerm,bands,reason}',
+  counterforce: 'src/domain/worldPulse/warPeaceDecision.js#readWarPeaceDecision',
+  flags: ['warLayerEnabled', 'warTerminationEnabled'],
+  owningVolume: 'WAR',
+  owningWave: 'WR-5',
+  intendedDesk: 'adjudication',
+});
+
+/**
+ * WR-5 / CPL-21. The current seat accepts or refuses on its own termination
+ * evidence, with an exact inherited faction demand overriding either arm.
+ */
+export const WR5_SEAT_ACCEPTANCE_COUPLING = couplingRow({
+  couplingId: 'CPL-21.INTERIOR_TO_GRAMMAR.WR-5.seat_acceptance',
+  pairId: 'CPL-21',
+  direction: 'INTERIOR→GRAMMAR',
+  read: 'src/domain/worldPulse/warPeaceDecision.js#readWarPeaceDecision',
+  receiptField: 'readWarPeaceDecision(...).receipt.{decision,actualAction,booksDirection,booksInterest,interestServed,inheritedDemand,booksPublicReason}',
+  counterforce: 'src/domain/worldPulse/warPeaceDecision.js#readWarPeaceDecision',
+  flags: ['warLayerEnabled', 'warTerminationEnabled'],
+  owningVolume: 'WAR',
+  owningWave: 'WR-5',
+  intendedDesk: 'adjudication',
+});
+
+/**
+ * WR-5 / CPL-21. Refusing a live peace offer charges the relationship, the
+ * refuser's legitimacy, and only actual co-besieging allies; acceptance is the
+ * counterforce that resumes the existing peace path without those costs.
+ */
+export const WR5_REFUSAL_PRICE_COUPLING = couplingRow({
+  couplingId: 'CPL-21.GRAMMAR_TO_INTERIOR.WR-5.refusal_price',
+  pairId: 'CPL-21',
+  direction: 'GRAMMAR→INTERIOR',
+  read: 'src/domain/worldPulse/warPeaceRefusal.js#applyWarPeaceRefusal',
+  receiptField: 'applyWarPeaceRefusal(...).evidence[].{kind,id,settlementId,counterpartId,thirdPartyId,decision,interestServed}',
+  counterforce: 'src/domain/worldPulse/warPeaceDecision.js#readWarPeaceDecision',
+  flags: ['warLayerEnabled', 'warTerminationEnabled'],
+  owningVolume: 'WAR',
+  owningWave: 'WR-5',
+  intendedDesk: 'adjudication',
+});
+
+/** The five WR-5 cross-layer reads, in the wave's decision-flow order. */
+export const WR5_WAR_RULING_COUPLINGS = Object.freeze([
+  WR5_SEAT_BOOKS_COUPLING,
+  WR5_WAR_DECISION_GRIEVANCE_COUPLING,
+  WR5_BILATERAL_PEACE_COUPLING,
+  WR5_SEAT_ACCEPTANCE_COUPLING,
+  WR5_REFUSAL_PRICE_COUPLING,
+]);
+
 export const COUPLING_REGISTRY = Object.freeze([
   WR3_LINEAGE_COUPLING,
   ...WR4_WAR_COST_COUPLINGS,
+  ...WR5_WAR_RULING_COUPLINGS,
 ]);
 
 /** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */

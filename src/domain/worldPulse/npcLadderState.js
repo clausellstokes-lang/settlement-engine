@@ -92,6 +92,10 @@ export const LADDER_TUNING = Object.freeze({
   CHURN_BUMP: 0.35,            // per contested challenge this advance (win OR fail)
   LEGIT_TAX: 0.12,             // per NORM-BREAKING (leverage/stigma) succession
   LEGIT_MOD_MIN: 0.8,
+  // WR-5: recent governing-seat changes are durable campaign facts, but this sidecar is
+  // not a second chronicle. Twenty-four preserves a long court memory while imposing a
+  // hard, serialization-level bound on every settlement record.
+  SEAT_TRANSITION_CAP: 24,
 });
 
 // Ladder length by settlement tier (3–5 rungs; a thorp is a single seat). JUDGMENT.
@@ -172,15 +176,21 @@ function structuralRankScore(npc) {
  * then npcId codepoint (byte-stable tiebreak). Stasis NPCs and below-floor extras are
  * excluded. Returns [{ npcId, name }].
  * @param {string} sid @param {{ npcs?: unknown }} settlement @param {{ id?: unknown, name?: unknown }} faction
- * @param {string} fkey @returns {Array<{ npcId: string, name: string }>}
+ * @param {string} fkey @param {{excludeDead?:boolean}} [options]
+ * @returns {Array<{ npcId: string, name: string }>}
  */
-export function eligibleMembersOf(sid, settlement, faction, fkey) {
+export function eligibleMembersOf(sid, settlement, faction, fkey, { excludeDead = false } = {}) {
   const npcs = Array.isArray(asObject(settlement).npcs) ? /** @type {Record<string, unknown>[]} */ (asObject(settlement).npcs) : [];
   /** @type {Array<{ npcId: string, name: string, w: number, dots: number, rank: number }>} */
   const rows = [];
   npcs.forEach((npc, index) => {
     const n = asObject(npc);
     if (isOffStage(n)) return; // BELT (THE ROADS §8): stasis OR a roads hostage — defense-in-depth
+    // A killed office-holder remains on the authored NPC roster as campaign canon,
+    // but cannot keep a live rung. KILL_NPC writes this exact status; filtering at
+    // the eligibility chokepoint lets the ordinary reconciliation promote the next
+    // eligible member instead of leaving a dead ruler at the top indefinitely.
+    if (excludeDead && String(n.status || '').toLowerCase() === 'dead') return;
     if (!npcInFaction(n, faction, fkey)) return;
     const w = importanceWeight(/** @type {Parameters<typeof importanceWeight>[0]} */ (/** @type {unknown} */ (n)));
     if (w < LADDER_TUNING.RUNG_ELIGIBLE_FLOOR) return;
@@ -641,6 +651,92 @@ export function normalizeFactionRec(v) {
     instability: clamp01(num(o.instability, 0)), week: num(o.week, 0),
   };
 }
+
+/** @param {unknown} v @returns {string|null} */
+function textOrNull(v) {
+  if (v == null) return null;
+  const value = String(v).trim();
+  return value || null;
+}
+
+/** Normalize WR-5's optional inherited war charge. Partial or open-vocabulary
+ *  records are absence: a malformed historical row can never command a ruler.
+ *  @param {unknown} v
+ *  @returns {{actorId:string,targetId:string,decisionId:string,desiredAction:'peace'|'continue'}|null} */
+function normalizeWarDemand(v) {
+  const o = asObject(v);
+  const actorId = textOrNull(o.actorId);
+  const targetId = textOrNull(o.targetId);
+  const decisionId = textOrNull(o.decisionId);
+  const desiredAction = o.desiredAction === 'peace' || o.desiredAction === 'continue'
+    ? o.desiredAction
+    : null;
+  if (!actorId || !targetId || actorId === targetId || !decisionId || !desiredAction) return null;
+  return { actorId, targetId, decisionId, desiredAction };
+}
+
+/** A stable identity for a transition whose caller did not supply one. A typed war
+ *  demand is already keyed by the decision that installed the seat; ordinary organic
+ *  succession falls back to its immutable fact tuple. Record scope supplies the cid.
+ *  @param {import('./npcLadderKernel.js').SeatTransition} row @returns {string} */
+function seatTransitionIdentity(row) {
+  if (row.warDemand) return `decision:${row.warDemand.decisionId}`;
+  return [
+    'seat', row.cause, row.tick, row.fromRulerId || 'none', row.toRulerId || 'none',
+    row.installerFactionId || 'none', row.governingFactionId || 'none',
+  ].map((part) => encodeURIComponent(String(part))).join(':');
+}
+
+/** Normalize and cap the authoritative governing-seat history. Rows always carry
+ *  nullable from/to keys; faction identities remain additive-optional because a
+ *  legacy or organic transition may genuinely not know its installer. Oldest first.
+ *  @param {unknown} v @returns {import('./npcLadderKernel.js').SeatTransition[]} */
+export function normalizeSeatTransitions(v) {
+  const rows = Array.isArray(v) ? v : [];
+  /** @type {import('./npcLadderKernel.js').SeatTransition[]} */
+  const out = [];
+  for (const value of rows) {
+    const o = asObject(value);
+    const fromRulerId = textOrNull(o.fromRulerId);
+    const toRulerId = textOrNull(o.toRulerId);
+    const cause = textOrNull(o.cause);
+    const hasTick = o.tick != null
+      && !(typeof o.tick === 'string' && o.tick.trim() === '');
+    const rawTick = Number(o.tick);
+    // A row with no seat on either side is not a transition and cannot be made true
+    // by normalization. Nor may a defensive read invent a cause or a date. Null on
+    // one side is admitted only when the writer knew there was a vacancy/birth.
+    if ((!fromRulerId && !toRulerId) || !cause || !hasTick || !Number.isFinite(rawTick)) continue;
+    /** @type {import('./npcLadderKernel.js').SeatTransition} */
+    const row = {
+      id: '',
+      fromRulerId,
+      toRulerId,
+      cause,
+      tick: Math.max(0, Math.floor(rawTick)),
+    };
+    const installerFactionId = textOrNull(o.installerFactionId);
+    const installerFactionName = textOrNull(o.installerFactionName);
+    const governingFactionId = textOrNull(o.governingFactionId);
+    const governingFactionName = textOrNull(o.governingFactionName);
+    const authorityEpoch = textOrNull(o.authorityEpoch);
+    if (authorityEpoch) row.authorityEpoch = authorityEpoch;
+    if (installerFactionId) row.installerFactionId = installerFactionId;
+    if (installerFactionName) row.installerFactionName = installerFactionName;
+    if (governingFactionId) row.governingFactionId = governingFactionId;
+    if (governingFactionName) row.governingFactionName = governingFactionName;
+    const warDemand = normalizeWarDemand(o.warDemand);
+    if (warDemand) row.warDemand = warDemand;
+    row.id = textOrNull(o.id) || textOrNull(o.transitionId) || seatTransitionIdentity(row);
+    out.push(row);
+  }
+  // Imported and legacy records are not entitled to make array insertion order
+  // mean chronology. Persist the bounded history oldest-first, with the stable
+  // transition identity as the total-order tie-break for same-tick transfers.
+  out.sort((a, b) => (a.tick - b.tick) || compareCodepoint(a.id, b.id));
+  return out.slice(-LADDER_TUNING.SEAT_TRANSITION_CAP);
+}
+
 /** @param {unknown} v @param {number} weeks @returns {import('./npcLadderKernel.js').LadderRecord} */
 export function normalizeRecord(v, weeks) {
   const o = asObject(v);
@@ -657,6 +753,9 @@ export function normalizeRecord(v, weeks) {
   // D-4: the additive contests sub-key (absent on legacy / dark records ⇒ no key).
   const contests = normalizeContests(o.contests);
   if (Object.keys(contests).length) rec.contests = contests;
+  // WR-5: the governing-seat history is additive-optional (legacy records omit it).
+  const seatTransitions = normalizeSeatTransitions(o.seatTransitions);
+  if (seatTransitions.length) rec.seatTransitions = seatTransitions;
   return rec;
 }
 
@@ -740,14 +839,40 @@ export function sortedRecord(rec) {
     npcs[nid] = sortedStanding(rec.npcs[nid]);
   }
   const contests = sortedContests(rec.contests); // D-4 (drop-when-empty ⇒ byte-identical dark)
+  const seatTransitions = normalizeSeatTransitions(rec.seatTransitions).map((row) => {
+    // Fixed key order; optional faction/demand fields drop when unknown. This makes
+    // normalize → serialize byte-stable across import, regeneration, and undo.
+    /** @type {Record<string, unknown>} */
+    const out = {};
+    if (row.authorityEpoch) out.authorityEpoch = row.authorityEpoch;
+    out.cause = row.cause;
+    out.fromRulerId = row.fromRulerId;
+    if (row.governingFactionId) out.governingFactionId = row.governingFactionId;
+    if (row.governingFactionName) out.governingFactionName = row.governingFactionName;
+    out.id = row.id;
+    if (row.installerFactionId) out.installerFactionId = row.installerFactionId;
+    if (row.installerFactionName) out.installerFactionName = row.installerFactionName;
+    out.tick = row.tick;
+    out.toRulerId = row.toRulerId;
+    if (row.warDemand) {
+      out.warDemand = {
+        actorId: row.warDemand.actorId,
+        decisionId: row.warDemand.decisionId,
+        desiredAction: row.warDemand.desiredAction,
+        targetId: row.warDemand.targetId,
+      };
+    }
+    return out;
+  });
   const hasF = Object.keys(factions).length > 0;
   const hasN = Object.keys(npcs).length > 0;
-  if (!hasF && !hasN && !contests) return null;
+  if (!hasF && !hasN && !contests && !seatTransitions.length) return null;
   /** @type {Record<string, unknown>} */
   const out = {};
   if (hasF) out.factions = factions;
   if (hasN) out.npcs = npcs;
   if (contests) out.contests = contests;
+  if (seatTransitions.length) out.seatTransitions = seatTransitions;
   return out;
 }
 

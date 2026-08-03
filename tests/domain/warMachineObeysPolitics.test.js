@@ -11,6 +11,7 @@ import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { relationshipKeyFromEdge } from '../../src/domain/worldPulse/relationshipEvolution.js';
 import { governingFactionOf } from '../../src/domain/rulingPower.js';
 import { createPRNG } from '../../src/kernel/prng.js';
+import { applyWarDecisionPolitics } from '../../src/domain/worldPulse/warPoliticalLoop.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // G1a — "THE WAR MACHINE OBEYS ITS POLITICS." Pins for the five war fixes:
@@ -114,6 +115,92 @@ describe('war-2 — approved faction proposals apply for real', () => {
     const merchant = factionByName(after, 'Merchant League');
     expect(merchant.modifiers).toContain('ascendant');
     expect(merchant.power).toBe(45 + 6);
+  });
+
+  test('a war-organized government transfer records the named seat and inherited demand once', () => {
+    const factions = [
+      { id: 'fac.old', faction: 'Old Guard', category: 'military', power: 60, isGoverning: true },
+      { id: 'fac.merchants', faction: 'Merchant League', category: 'merchant', power: 45 },
+    ];
+    const town = townWith(factions);
+    town.settlement.npcs = [
+      { id: 'old_ruler', name: 'Mara Venn', faction: 'Old Guard' },
+      { id: 'new_ruler', name: 'Ilan Roe', faction: 'Merchant League' },
+    ];
+    const politicalSnapshot = {
+      settlements: [{ id: 'town', name: town.name, settlement: town.settlement }],
+      byId: new Map([['town', { id: 'town', name: town.name, settlement: town.settlement }]]),
+    };
+    const baseWorld = {
+      tick: 6,
+      calendar: { elapsedWeeks: 6 },
+      simulationRules: {
+        warLayerEnabled: true,
+        warTerminationEnabled: true,
+        factionCompetitionEnabled: true,
+        memoryWeaveEnabled: true,
+      },
+      spatialLedgers: {
+        npcLadder: {
+          town: {
+            factions: {
+              'fac.old': { rungs: ['old_ruler'] },
+              'fac.merchants': { rungs: ['new_ruler'] },
+            },
+            npcs: {},
+          },
+        },
+      },
+    };
+    const organized = applyWarDecisionPolitics({
+      worldState: baseWorld,
+      snapshot: politicalSnapshot,
+      actorId: 'town',
+      targetId: 'enemy',
+      actualAction: 'continue',
+      decisionId: 'decision.refuse',
+      tick: 6,
+    }).worldState;
+    const outcome = {
+      id: 'candidate.faction.government.town.6', type: 'faction', candidateType: 'faction_government_challenge',
+      ruleFamily: 'faction', targetSaveId: 'town', factionId: 'town:fac_merchants', severity: 0.8, probability: 1, applyMode: 'auto',
+      headline: 'Merchant League presses its challenge', summary: '', reasons: [],
+      factionPatch: { momentum: 0.5 },
+      metadata: { factionName: 'Merchant League', archetype: 'merchant' },
+      proposalPayload: {
+        kind: 'government_change', factionId: 'town:fac_merchants', settlementId: 'town',
+        governmentPreference: 'merchant_charter', legitimacyBand: 'crisis', preserveInstitutions: true,
+        warDecisionId: 'decision.refuse',
+        warDemand: {
+          actorId: 'town', targetId: 'enemy', decisionId: 'decision.refuse', desiredAction: 'peace',
+        },
+      },
+    };
+    const first = applyOutcomes({ settlements: [town], worldState: organized, outcomes: [outcome] });
+    const transition = first.worldState.spatialLedgers.npcLadder.town.seatTransitions.at(-1);
+    expect(transition).toMatchObject({
+      fromRulerId: 'old_ruler',
+      // transferRulingPower preserves the governing body while installing the
+      // challenger behind it; WR-5 records that truthful same-seat authority
+      // transition rather than fabricating a new NPC succession.
+      toRulerId: 'old_ruler',
+      installerFactionId: 'town:fac_merchants',
+      warDemand: {
+        actorId: 'town', targetId: 'enemy', decisionId: 'decision.refuse', desiredAction: 'peace',
+      },
+    });
+    expect(first.newsEntries.map((entry) => entry.impactKind)).toEqual(expect.arrayContaining([
+      'peace_party_overturns_warmonger',
+      'succession_demand_inherited',
+    ]));
+
+    const afterTown = first.settlementUpdates.find((row) => row.saveId === 'town');
+    const second = applyOutcomes({
+      settlements: [{ ...town, settlement: afterTown.settlement }],
+      worldState: first.worldState,
+      outcomes: [outcome],
+    });
+    expect(second.worldState.spatialLedgers.npcLadder.town.seatTransitions).toHaveLength(1);
   });
 
   test('institution_suppression impairs the named institution (status bites, not just a text list)', () => {

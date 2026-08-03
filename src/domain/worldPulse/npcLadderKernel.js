@@ -77,13 +77,14 @@
  */
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
+import { isOffStage } from '../roads/state.js';
 import { npcId } from './npcAgency.js';
 import { memoryHorizonMultiplierOf, memoryWeaveActive } from './relationshipEvolution.js';
 import { advanceNpcGrowthWithFabricAndConsequence } from './spatialConsequenceKernel.js';
 import {
   LADDER_TUNING, num, asObject, compareCodepoint, round4, ladderFactionKey, eligibleMembersOf,
   rungCapForTier, seedStandingForRung, decayStandingTowardBaseline, normalizeRecord,
-  sortedRecord, mirrorOf, maintainMarks, mintBond,
+  normalizeSeatTransitions, sortedRecord, mirrorOf, maintainMarks, mintBond,
   designateHeir, swapIntoSeat, inheritSeatMemory,
 } from './npcLadderState.js';
 import { readRoadsBondEvents } from '../roads/thirdPartyRansom.js';
@@ -94,6 +95,7 @@ import { faithRuptured } from './npcLadderCoherence.js';
 import { freshLieExposureFor, hasNpcCredibilityLedger, npcCredibilityActive } from './npcCredibility.js';
 import { advanceContests, contestChallengeInputs } from './npcLadderContest.js';
 import { mintFactionPairIncident } from './factionPairLedger.js';
+import { authorityTransferEpochFor, previousGovernmentLabelsOf } from '../rulingPower.js';
 // coherence-14: the ruling-bloc read (a PURE, dormant⇒null read; settlementPolitics imports only
 // pure leaves, so no cycle). Consumed ONLY behind ladderPoliticalWindowsEnabled ⇒ dark ⇒ never called.
 import { rulingBlocOf } from './settlementPolitics.js';
@@ -143,6 +145,16 @@ import { rulingBlocOf } from './settlementPolitics.js';
  *   inherited (V-7): a bond carried to an heir at a seat succession, dampened + marked. */
 /** @typedef {{ rungs: string[], cooldownUntil: number, lastPower: number, instability: number, week: number }} LadderFactionRec */
 /**
+ * @typedef {Object} SeatTransition — WR-5's bounded legitimate-authority history.
+ * @property {string} id stable transition identity (record-scoped)
+ * @property {string|null} fromRulerId @property {string|null} toRulerId
+ * @property {string} cause @property {number} tick
+ * @property {string} [authorityEpoch] label-free governing-transfer epoch at the transition
+ * @property {string} [installerFactionId] @property {string} [installerFactionName]
+ * @property {string} [governingFactionId] @property {string} [governingFactionName]
+ * @property {{actorId:string,targetId:string,decisionId:string,desiredAction:'peace'|'continue'}} [warDemand]
+ */
+/**
  * @typedef {Object} ContestSide — one contestant's per-contest view (§8 D-4b awareness fog).
  * @property {string} nid @property {string} [verb] the goal verb captured AT GENESIS ('raise'|'hold')
  * @property {number|null} awareSince the week discovery stamped (null ⇒ UNKNOWING — a blind race)
@@ -159,9 +171,10 @@ import { rulingBlocOf } from './settlementPolitics.js';
  * @property {number|null} resolvedWeek @property {string|null} outcome @property {string|null} loserNid
  */
 /** @typedef {{ factions: Record<string, LadderFactionRec>, npcs: Record<string, LadderStanding>,
- *   contests?: Record<string, ContestRec> }} LadderRecord
+ *   contests?: Record<string, ContestRec>, seatTransitions?: SeatTransition[] }} LadderRecord
  *   contests (D-4): the additive contested-goals sub-key (absent unless contestedGoals lit and a
- *   contest opened — the drop-when-empty dormancy contract). */
+ *   contest opened — the drop-when-empty dormancy contract).
+ *   seatTransitions (WR-5): bounded, oldest-first facts about real governing-seat changes. */
 
 // The pure state helpers (num/asObject/compareCodepoint/round4 + derivation, decay,
 // normalization, byte-stable sort, mirror) live in the npcLadderState.js sibling leaf.
@@ -217,6 +230,56 @@ export function ladderPoliticalWindowsActive(worldState) {
 export function heirsActive(worldState) {
   const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
   return !!(rules && typeof rules === 'object' && /** @type {Record<string, unknown>} */ (rules).heirsEnabled === true);
+}
+
+/**
+ * Append one real governing-seat transition through the ladder's sole authoritative
+ * writer. The helper is deliberately usable outside the pulse mover: an applied
+ * governing-power transfer occurs at the proposal applicator, while an organic court
+ * succession occurs inside this kernel. Both converge on exactly this normalizer,
+ * identity check, bound, and serializer.
+ *
+ * Idempotence is two-layered: a repeated transition id is a no-op, and a repeated
+ * typed war-decision id is also a no-op even if a caller reconstructed the surrounding
+ * transfer metadata differently. A malformed/no-seat row returns the caller's exact
+ * worldState reference. Existing faction, standing, contest, and transition fields are
+ * preserved through the record normalizer/serializer.
+ *
+ * @param {Record<string, unknown>} worldState
+ * @param {string} cid
+ * @param {unknown} transition
+ * @returns {Record<string, unknown>}
+ */
+export function appendNpcLadderSeatTransition(worldState, cid, transition) {
+  const settlementId = String(cid || '').trim();
+  if (!settlementId || !worldState || typeof worldState !== 'object') return worldState;
+  const row = normalizeSeatTransitions([transition])[0];
+  if (!row) return worldState;
+  const ledger = asObject(getSpatialLedger(worldState, 'npcLadder'));
+  const rec = normalizeRecord(ledger[settlementId], row.tick);
+  const prior = rec.seatTransitions || [];
+  const decisionId = row.warDemand?.decisionId || null;
+  if (prior.some((existing) => existing.id === row.id)) return worldState;
+  // A decision id may organize more than one opposition faction. If another
+  // faction later wins a distinct, real authority transition, preserve that
+  // seat fact but do not duplicate the already-carried command.
+  const repeatedDemand = decisionId != null
+    && prior.some((existing) => existing.warDemand?.decisionId === decisionId);
+  const appendRow = repeatedDemand
+    ? /** @type {SeatTransition} */ (({ warDemand: _duplicateDemand, ...rest }) => rest)(row)
+    : row;
+  /** @type {LadderRecord} */
+  const nextRec = {
+    ...rec,
+    seatTransitions: normalizeSeatTransitions([...prior, appendRow]),
+  };
+  const serialized = sortedRecord(nextRec);
+  if (!serialized) return worldState; // defensive: a valid transition makes this unreachable
+  /** @type {Record<string, unknown>} */
+  const nextLedger = {};
+  const keys = Array.from(new Set([...Object.keys(ledger), settlementId])).sort(compareCodepoint);
+  for (const key of keys) nextLedger[key] = key === settlementId ? serialized : ledger[key];
+  return setSpatialLedger(worldState, 'npcLadder', nextLedger);
 }
 
 // v1 goals reference NO pressure signals, so an empty pressures stub satisfies the S7
@@ -356,10 +419,14 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
   // system that consumes it is lit. Dark ⇒ no deposit, no sidecar key, byte-identical (a bluff that
   // no one can charge is dropped, exactly as before this seam closed).
   const bluffChargeLit = contestsLit && npcCredibilityActive(worldState);
+  const warRulingsLit = asObject(worldState.simulationRules).warLayerEnabled === true
+    && asObject(worldState.simulationRules).warTerminationEnabled === true;
   /** @type {Array<{ a: string, b: string, type: string, resentmentDelta: number, sev: number }>} D-4c §10.5 cross-faction loss deposits */
   const factionPairDeposits = [];
   /** @type {Array<{ nid: string, band: number }>} D-4→D-2 contradicted-bluff exposures carried to the bluffExposures sidecar */
   const bluffDeposits = [];
+  /** @type {Array<{ cid: string, transition: SeatTransition }>} WR-5 organic governing-seat changes, applied through the shared writer after ladder persistence */
+  const organicSeatTransitions = [];
 
   // The S7 reading frame for goal predicates — the registry evaluator resolves causal
   // signals from the snapshot's memoized item.causal (settlement-scoped, freshness-safe).
@@ -397,6 +464,23 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
     const prior = normalizeRecord(priorLedger[sid], weeks);
     const factionsList = Array.isArray(asObject(asObject(s).powerStructure).factions)
       ? /** @type {Array<Record<string, unknown>>} */ (asObject(asObject(s).powerStructure).factions) : [];
+    const governingFkey = governingLadderFkeyOf(s);
+    const priorGovernmentLabels = warRulingsLit
+      ? previousGovernmentLabelsOf(/** @type {any} */ (s))
+      : [];
+    const priorGovernmentAliases = priorGovernmentLabels.map((label) => ({
+      label,
+      key: ladderFactionKey({ faction: label }),
+    }));
+    const aliasedPriorGoverningRec = priorGovernmentAliases
+      .map((alias) => prior.factions[alias.key])
+      .find(Boolean) || null;
+    const priorGoverningRec = governingFkey
+      ? (prior.factions[governingFkey]
+        || aliasedPriorGoverningRec)
+      : null;
+    const priorGoverningSeat = priorGoverningRec?.rungs?.[0] || null;
+    let governingSeatCause = 'succession';
     const cap = rungCapForTier(/** @type {string} */ (asObject(s).tier));
     const causalItem = snapshot?.byId?.get?.(sid) || itemById.get(sid) || null;
     const bandMult = memoryHorizonMultiplierOf(/** @type {Parameters<typeof memoryHorizonMultiplierOf>[0]} */ (/** @type {unknown} */ (s)));
@@ -434,7 +518,7 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
     // D-7e (ii): this settlement's gratitude deposits (if any) land on its RULING seat —
     // resolve the governing faction's ladder key once per settlement (canonical accessor).
     const gratSidEvents = gratitudeBondEvents.size ? (gratitudeBondEvents.get(sid) || null) : null;
-    const gratGovFkey = gratSidEvents ? governingLadderFkeyOf(s) : null;
+    const gratGovFkey = gratSidEvents ? governingFkey : null;
     // coherence-14: the settlement's ruling bloc (rulingBlocOf is dormant⇒null and needs
     // settlementPolitics lit; only consulted when the political-windows flag is lit). The GOVERNING
     // faction of a consolidated bloc — definitionally a bloc member — gets the bloc_backed window,
@@ -444,11 +528,45 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
     for (const faction of factionsList) {
       const fkey = ladderFactionKey(faction);
       if (factions[fkey]) continue; // first faction wins a duplicate key (byte-stable)
-      const eligible = eligibleMembersOf(sid, s, faction, fkey);
+      const directEligible = eligibleMembersOf(sid, s, faction, fkey, { excludeDead: warRulingsLit });
+      const aliasEligible = warRulingsLit && fkey === governingFkey
+        ? priorGovernmentAliases.flatMap((alias) => alias.key === fkey ? [] : eligibleMembersOf(
+          sid,
+          s,
+          { faction: alias.label },
+          alias.key,
+          { excludeDead: true },
+        ))
+        : [];
+      const eligible = [...directEligible];
+      const eligibleNids = new Set(directEligible.map((member) => member.npcId));
+      for (const member of aliasEligible) {
+        if (!eligibleNids.has(member.npcId)) {
+          eligible.push(member);
+          eligibleNids.add(member.npcId);
+        }
+      }
+      // Once WR-5 has migrated a name-keyed governing ladder, its exact prior
+      // governing record is the durable membership bridge across later label
+      // transfers. Preserve only live, on-stage persisted rungs; this prevents
+      // the bounded previous-government label history from ejecting a ruler on
+      // transfer seven without reviving a dead or absent office-holder.
+      if (warRulingsLit && fkey === governingFkey && aliasedPriorGoverningRec) {
+        for (const rawNid of aliasedPriorGoverningRec.rungs || []) {
+          const nid = typeof rawNid === 'string' && rawNid ? rawNid : null;
+          const member = nid ? npcByNid.get(nid) : null;
+          if (!nid || !member || eligibleNids.has(nid)
+            || String(member.status || '').toLowerCase() === 'dead'
+            || isOffStage(member)) continue;
+          eligible.push({ npcId: nid, name: String(member.name || member.label || nid) });
+          eligibleNids.add(nid);
+        }
+      }
       for (const m of eligible) nameByNid.set(m.npcId, m.name);
       const eligibleIds = eligible.map((m) => m.npcId);
       const eligibleSet = new Set(eligibleIds);
-      const priorRec = prior.factions[fkey];
+      const priorRec = prior.factions[fkey]
+        || (warRulingsLit && fkey === governingFkey ? aliasedPriorGoverningRec : null);
 
       // Reconcile the persistent ordering: keep prior rungs still eligible (the ladder
       // is CONTESTED, not re-derived — challenges own the ordering); append new eligible
@@ -606,6 +724,12 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
           newsEntries.push(investitureBeat(sid, townName, fkey, seatAfter, seatBefore, nameByNid, truncated ? 'coup' : 'challenge', now2, now));
         }
       }
+      if (governingFkey && fkey === governingFkey) {
+        if (truncated && rec.rungs[0] !== priorGoverningSeat) governingSeatCause = 'coup';
+        else if (plan.events.some((event) => event.kind === 'rise'
+          && event.challengerNid === rec.rungs[0]
+          && event.defenderNid === priorGoverningSeat)) governingSeatCause = 'challenge';
+      }
       // §8 THE STANDING LOOP (single-writer to the mirror): leadership quality → the power
       // modifier; churn → the decaying instability tax; the HOW → the legitimacy modifier.
       const decayWeeks = priorRec ? Math.max(0, weeks - priorRec.week) : 0;
@@ -617,6 +741,29 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
       rec.instability = loop.instab;
       modByFkey.set(fkey, { power: loop.power, legit: loop.legit, instab: loop.instab });
       factions[fkey] = rec;
+    }
+
+    // WR-5: first derivation is not a historical transition. Once a governing ladder
+    // existed, however, a changed top rung (including a genuine vacancy) is a durable
+    // authority fact. Queue it now and apply it later through the SAME exported writer
+    // governing-power transfers use; this loop never grows a second append path.
+    const nextGoverningSeat = governingFkey ? (factions[governingFkey]?.rungs?.[0] || null) : null;
+    if (warRulingsLit && governingFkey && priorGoverningRec && priorGoverningSeat !== nextGoverningSeat) {
+      const governingFaction = factionsList.find((faction) => ladderFactionKey(faction) === governingFkey) || null;
+      const faction = asObject(governingFaction);
+      const governingFactionName = String(faction.faction || faction.name || faction.label || '').trim();
+      /** @type {SeatTransition} */
+      const transition = /** @type {SeatTransition} */ ({
+        id: `ladder:${sid}:${now2}:${priorGoverningSeat || 'vacant'}:${nextGoverningSeat || 'vacant'}`,
+        fromRulerId: priorGoverningSeat,
+        toRulerId: nextGoverningSeat,
+        cause: nextGoverningSeat ? governingSeatCause : 'vacancy',
+        tick: now2,
+        authorityEpoch: authorityTransferEpochFor(/** @type {any} */ (s)),
+        governingFactionId: String(faction.id || governingFkey),
+        ...(governingFactionName ? { governingFactionName } : {}),
+      });
+      organicSeatTransitions.push({ cid: sid, transition });
     }
 
     // Orphan standings (an NPC that held a rung last tick but is on none now): decay on the base
@@ -682,6 +829,7 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
     /** @type {LadderRecord} */
     const settlementRec = { factions, npcs };
     if (contests) settlementRec.contests = contests;
+    if (prior.seatTransitions?.length) settlementRec.seatTransitions = prior.seatTransitions;
     nextLedger[sid] = settlementRec;
   }
 
@@ -725,6 +873,14 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
       ? setSpatialLedger(worldState, 'npcLadder', persisted)
       : dropSpatialLedger(worldState, 'npcLadder');
     changed = true;
+  }
+  // WR-5's organic succession half: use the exact public writer applied governing-
+  // power transfers call. Running after the base ladder fold means the helper reads
+  // the final rungs while preserving every record field and prior transition.
+  for (const queued of organicSeatTransitions) {
+    const withTransition = appendNpcLadderSeatTransition(nextWorldState, queued.cid, queued.transition);
+    if (withTransition !== nextWorldState) changed = true;
+    nextWorldState = withTransition;
   }
   // ── D-4c §10.5 THE CROSS-FACTION LOSS LOOP: apply the collected faction-pair incidents through
   // the faction-pair ledger's OWN writer (the sanctioned applicator idiom — the ladder requests,

@@ -93,9 +93,17 @@ import { getSpatialLedger } from '../spatial/distanceRead.js';
 // visible record). Dormant / no ruling bloc ⇒ factor 1.0 ⇒ byte-identical scoring.
 import { settlementPoliticsActive, blocDecisionFactor } from './settlementPolitics.js';
 import { makeCommitmentLoad, moveCourseRelation } from './momentum.js'; import { makeCurrentWarCasusRead, terminationPeaceReasonLines, warFactorForCasusRead } from './warTermination.js';
+import { inheritedWarDemandFor } from './warPeaceDecision.js';
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+
+/** Parse a persisted tick without allowing null/blank input to masquerade as 0. */
+function inputTick(value) {
+  if (value == null || (typeof value === 'string' && value.trim() === '')) return null;
+  const number = Number(value);
+  return Number.isFinite(number) ? Math.max(0, Math.floor(number)) : null;
+}
 
 /** @typedef {{ fork?: (key: string) => { random: () => number } }|null} RngLike */
 
@@ -551,6 +559,38 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
 }
 
 /**
+ * Persist only the qualitative, identity-addressed half of WR-5's live
+ * termination read on a held peace proposal. Approval may happen on a later
+ * pulse; this compact row records whose books actually made the offer without
+ * freezing any control scalar or copying the full pulse receipt into the
+ * proposal docket.
+ * @param {any} termination
+ */
+function compactWarRulingRead(termination) {
+  const receipt = termination?.receipt && typeof termination.receipt === 'object'
+    ? termination.receipt
+    : null;
+  if (!receipt) return null;
+  const keys = [
+    'id', 'tick', 'attackerId', 'targetId', 'authoritySignature',
+    'booksInterest', 'booksDirection', 'booksReason', 'booksPublicReason',
+    'rulerId', 'rulerName', 'factionId', 'factionName', 'patronId', 'patronName',
+    'rulerSecurityBand', 'rulerLawfulnessBand', 'rulerMoralityBand',
+    'rivalTriumphBand', 'trajectory', 'trajectoryMarginBand', 'momentumBroken',
+    'decidingTerm', 'causeState', 'dissolvedCauseTypes', 'authorityDissolvedCauseTypes', 'reason',
+  ];
+  /** @type {Record<string, unknown>} */
+  const out = {};
+  for (const key of keys) {
+    if (receipt[key] !== undefined && receipt[key] !== null && receipt[key] !== '') {
+      out[key] = receipt[key];
+    }
+  }
+  if (receipt.bands && typeof receipt.bands === 'object') out.bands = { ...receipt.bands };
+  return Object.keys(out).length ? out : null;
+}
+
+/**
  * The legal move set for a settlement, codepoint-sorted, each with a deterministic
  * utility score. The move space mirrors the spec's enumeration (defend / deploy /
  * relieve-ally / liberate / hold / attrition / rout / sue-for-peace); we ship the
@@ -830,6 +870,8 @@ function causalReasonLines(entry, label) {
  */
 function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion, snapshot, strengthFor, rng = null, chaosPull = 0, rust = 0, worldState = null, beliefActive = false, trueStrengthFor = null, termination = null, warCasusFor = null }) {
   const name = item?.name || item?.settlement?.name || String(sId);
+  const warRulingsLit = worldState?.simulationRules?.warLayerEnabled === true
+    && worldState?.simulationRules?.warTerminationEnabled === true;
 
   if (move === 'sue_for_peace') {
     // Wind down the war we are ACTUALLY fighting: prefer the settlement we besiege that
@@ -861,6 +903,7 @@ function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion,
       : null;
     const reasons = termination ? [
       ...(termination.receipt?.reason ? [termination.receipt.reason] : []),
+      ...(termination.receipt?.booksPublicReason ? [termination.receipt.booksPublicReason] : []),
       ...(Array.isArray(termination.receipt?.dispositionReasons)
         ? termination.receipt.dispositionReasons
         : []),
@@ -878,6 +921,13 @@ function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion,
         `A misread of war-bankruptcy — ${driver} distorted the reading (perceived ${perceived.toFixed(2)} vs true ${exhaustion.toFixed(2)}), so the suit came ${perceived > exhaustion ? 'early' : 'late'}.`,
       );
     }
+    const warRulingRead = warRulingsLit ? compactWarRulingRead(termination) : null;
+    const peaceFront = worldState?.deployments?.[String(sId)];
+    const peaceFrontSinceTick = inputTick(peaceFront?.sinceTick);
+    const bilateralOffer = warRulingsLit
+      && !!termination
+      && String(peaceFront?.targetId || '') === String(target)
+      && peaceFrontSinceTick != null;
     return strategyCandidate({
       move,
       sId,
@@ -886,6 +936,9 @@ function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion,
       headline: `${name} sues for peace`,
       summary: `War-weary and economically drained, ${name} seeks to wind the conflict down.`,
       reasons,
+      metadata: {
+        ...(warRulingRead ? { warRulingRead } : {}),
+      },
       proposal: {
         relationshipKey: key,
         relationshipPatch: { proposedRelationshipType: toType, trajectory: 'transitioning' },
@@ -894,6 +947,16 @@ function emitMove({ move, bestTargetId = null, sId, item, ctx, tick, exhaustion,
           relationshipKey: key,
           fromType,
           toType,
+          // WR-5 G2: approval is the OFFERER'S yes, not bilateral peace by
+          // itself. The apply mouth resolves the named target court's second
+          // decision before this existing label/recall/treaty writer may run.
+          ...(bilateralOffer ? {
+            peaceOffer: true,
+            offererId: String(sId),
+            targetId: String(target),
+            peaceFrontOwnerId: String(sId),
+            peaceFrontSinceTick,
+          } : {}),
           reason: `${name} sued for peace; the sponsored hostility winds down.`,
         },
       },
@@ -1169,21 +1232,41 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     const moves = enumerateMoves({ sId, ctx, aggressiveness, peaceAggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective, causal, coalitionLoad, commitmentLoad, extractionEV, embassy, termination, dispositionThresholds });
     if (!moves.length) continue;
 
-    const weights = softmaxWeights(moves.map((m) => m.score), STRATEGY_K);
-    // Sample ONCE on a stable per-settlement fork. A missing rng/fork (test stubs)
-    // falls back to the canonical top (index 0) — deterministic either way.
-    let idx = 0;
-    if (rng && typeof rng.fork === 'function') {
-      idx = stableSampleByWeight(weights, rng.fork(`strategy:${stablePart(sId)}:${tick}`));
-    } else if (weights.length) {
-      // No rng: pick the argmax (canonical), tie-broken by the codepoint move key.
-      let best = -Infinity;
-      for (let i = 0; i < weights.length; i += 1) {
-        if (weights[i] > best) { best = weights[i]; idx = i; }
+    // WR-5 H — the faction that actually installed this still-current seat gets
+    // the war decision it organized around. The demand controls only the legal
+    // move set: it cannot invent a hostile edge or bypass an emergency recall.
+    // Peace is deterministic when that legal arm exists; a continue charge
+    // removes only sue_for_peace and leaves the ordinary chooser to decide how
+    // the court continues. A later seat transition retires the demand.
+    const inheritedDemand = termination?.targetId
+      ? inheritedWarDemandFor(worldState, String(sId), String(termination.targetId), snapshot)
+      : null;
+    let decisionMoves = moves;
+    let chosen = null;
+    if (inheritedDemand?.desiredAction === 'peace') {
+      chosen = moves.find((move) => move.move === 'sue_for_peace') || null;
+      if (!chosen) continue;
+    } else {
+      if (inheritedDemand?.desiredAction === 'continue') {
+        decisionMoves = moves.filter((move) => move.move !== 'sue_for_peace');
+        if (!decisionMoves.length) continue;
       }
+      const weights = softmaxWeights(decisionMoves.map((m) => m.score), STRATEGY_K);
+      // Sample ONCE on a stable per-settlement fork. A missing rng/fork (test stubs)
+      // falls back to the canonical top (index 0) — deterministic either way.
+      let idx = 0;
+      if (rng && typeof rng.fork === 'function') {
+        idx = stableSampleByWeight(weights, rng.fork(`strategy:${stablePart(sId)}:${tick}`));
+      } else if (weights.length) {
+        // No rng: pick the argmax (canonical), tie-broken by the codepoint move key.
+        let best = -Infinity;
+        for (let i = 0; i < weights.length; i += 1) {
+          if (weights[i] > best) { best = weights[i]; idx = i; }
+        }
+      }
+      if (idx < 0 || idx >= decisionMoves.length) idx = 0;
+      chosen = decisionMoves[idx];
     }
-    if (idx < 0 || idx >= moves.length) idx = 0;
-    const chosen = moves[idx];
 
     const candidate = emitMove({
       move: chosen.move, bestTargetId: chosen.bestTargetId, sId, item, ctx, tick, exhaustion, snapshot,
@@ -1194,9 +1277,12 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
       const dispositionReasons = Array.isArray(chosen.dispositionReasons)
         ? chosen.dispositionReasons.filter(Boolean)
         : [];
+      const withDemand = inheritedDemand
+        ? { ...candidate, metadata: { ...(candidate.metadata || {}), inheritedWarDemand: inheritedDemand } }
+        : candidate;
       out.push(dispositionReasons.length
-        ? { ...candidate, reasons: [...new Set([...(candidate.reasons || []), ...dispositionReasons])] }
-        : candidate);
+        ? { ...withDemand, reasons: [...new Set([...(withDemand.reasons || []), ...dispositionReasons])] }
+        : withDemand);
     }
   }
 

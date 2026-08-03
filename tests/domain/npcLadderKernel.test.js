@@ -65,6 +65,17 @@ describe('ladder derivation — structural ordering + conservation (commit 2)', 
     expect(members.map((m) => m.npcId)).toEqual(['a:n_master']);
   });
 
+  it('excludes a dead top candidate so the next living member can hold the seat', () => {
+    const npcs = [
+      { ...npc('n_master', 'Guildmaster Aldric', 'pillar', 3, 'dominant'), status: 'dead' },
+      npc('n_factor', 'Factor Maera', 'key', 2, 'subordinate'),
+    ];
+    const members = eligibleMembersOf(
+      'a', courtSettlement(npcs), guild, ladderFactionKey(guild), { excludeDead: true },
+    );
+    expect(members.map((m) => m.npcId)).toEqual(['a:n_factor']);
+  });
+
   it('CONSERVATION: rung count == eligible member count (capped by tier); no invented rungs', () => {
     const npcs = [
       npc('n1', 'One', 'pillar', 3, 'dominant'), npc('n2', 'Two', 'key', 2, 'subordinate'),

@@ -461,6 +461,108 @@ export const WAR_RECEIPTS = Object.freeze({
     'The terms about to be drafted rest on a report the world has already overtaken.',
     'Nobody in that hall is wrong on purpose, which will be no comfort to anyone afterward.',
   ],
+  // WR-5 THE TWO BOOKS + THE POLITICAL LOOP. These fourteen kinds are copied
+  // from the war receipt annex. The section-eight parentheticals in the source
+  // volume are editorial cross-references, not reader prose, so they are not
+  // persisted with the first sentence of either suing pool.
+  sued_for_peace_seat: [
+    (x) => `${x.npc} sued for peace.`,
+    "The offer went out over the seat's name and not the town's, and the quays noticed the distinction.",
+    'It was the seat that could not carry another season, whatever the granaries said.',
+    (x) => `${x.npc} sued, and the council was told afterward.`,
+    'The peace served the man before it served the walls, and the receipt names whose books it answered.',
+  ],
+  sued_for_peace_realm: [
+    'The realm sued for peace.',
+    (x) => `The council of ${x.settlement} voted the offer and ${x.npc} carried it, willing or not.`,
+    'The granaries wrote the terms; the seat only signed them.',
+    'It was the town that wanted it ended and the town that will pay for the ending.',
+    "The offer went out over the settlement's name, which tells you which book was open.",
+  ],
+  war_continued_for_the_seat: [
+    (x) => `The war ruins ${x.settlement} and secures ${x.npc}, and it continues.`,
+    "The council's arithmetic and the seat's arithmetic parted in the spring; the seat's won.",
+    'Peace would cost the hall more than the war costs the town.',
+    (x) => `Every season of this war is a season ${x.faction} cannot move.`,
+    "The receipt names whose books were served, and they were not the town's.",
+  ],
+  war_ended_against_rival_triumph: [
+    (x) => `${x.settlement} ended a war it was winning, because winning it would have crowned ${x.npc}.`,
+    "The victory was already spoken for, and the seat declined to pay for another man's triumph.",
+    'Terms were taken that the field did not require.',
+    'A general too successful is a problem no treaty solves, so the treaty solved the war instead.',
+    'They stopped short, and the reason is in the hall rather than the field.',
+  ],
+  peace_refused: [
+    (x) => `${x.counterpart} offered terms and ${x.settlement} refused them; the refusal stands on the record with ${x.reason} and a name beside it.`,
+    (x) => `The legate was heard, thanked, and sent back down ${x.route} with nothing.`,
+    'The offer was read aloud in council, which is how the town learned there had been one.',
+    'A refusal is a fact like a battle and goes into the same book.',
+    (x) => `${x.npc} said no, and the saying of it hardened everything after.`,
+  ],
+  refusal_cost_legitimacy: [
+    (x) => `${x.settlement} refused peace, and the streets priced the refusal within the season.`,
+    'The seat spent its standing to keep its war.',
+    'Men who bore the levy quietly do not bear a refused peace quietly.',
+    (x) => `The council's confidence in ${x.npc} reads ${x.band}, and the refusal is the reason on every tongue.`,
+    'Nothing was lost in the field that day. A good deal was lost in the market square.',
+  ],
+  refusal_cost_ally_patience: [
+    (x) => `${x.counterpart} was refused, and ${x.third_party} read the refusal as a bill it had not agreed to.`,
+    "The ally's factors have begun asking how long, which is the question before the door.",
+    (x) => `Patience is a stock like any other, and this drew ${x.band} on it.`,
+    "They refused peace with somebody else's soldiers in the field.",
+    'The alliance held. It is thinner than it was, and both courts know it.',
+  ],
+  ruler_books_compromised: [
+    (x) => `${x.npc} optimises a third book: the terms answer ${x.faction}'s needs before ${x.settlement}'s.`,
+    'Every concession refused is a concession the patron would have paid for.',
+    "The seat's arithmetic is sound; it is being done for somebody else.",
+    'The web already knows whose interest this is, and the receipt names it.',
+    'The war serves a party that has not sent a single man to it.',
+  ],
+  war_party_overturns_peacemaker: [
+    (x) => `The peace ${x.npc} signed cost the seat: the war party took the hall and named the treaty as their grievance.`,
+    (x) => `${x.faction} organised around one decision and rode it into the council chamber.`,
+    'Men who were nobody in the spring hold the gate keys by the harvest.',
+    'The town did not overturn a ruler; it overturned a signature.',
+    'A peace made against the powers is a coup with a delay on it.',
+  ],
+  peace_party_overturns_warmonger: [
+    (x) => `${x.settlement} put down the seat that kept the war, and the granaries did the counting.`,
+    (x) => `${x.faction} formed at the almsgate and finished in the hall.`,
+    'The war was the whole of the grievance and the whole of the programme.',
+    'They removed the man and kept the levies, which is how these things usually end.',
+    'The successor inherits a peace he must now actually make.',
+  ],
+  succession_demand_inherited: [
+    (x) => `${x.faction} seated ${x.npc} on one condition, and the condition rides the succession record.`,
+    'The new seat is not free: it was seated to do a particular thing about the war.',
+    'A coup that does not bind its successor was a coup for nothing.',
+    'The demand is written where the succession is written, and the next re-read must answer it.',
+    'He holds the hall, and the hall holds a receipt.',
+  ],
+  successor_repudiates_war: [
+    (x) => `${x.npc} came to the seat, read the war again, and the levies are coming home.`,
+    'The quarrel belonged to a man who no longer holds the chair.',
+    'The new seat owes the dead nothing and says so, which is easier from that chair than from any other.',
+    'Momentum breaks at a succession, and this one broke loudly.',
+    'Nothing changed in the field. Everything changed in the hall.',
+  ],
+  successor_escalates_war: [
+    (x) => `${x.npc} came to the seat and widened the war his predecessor could not end.`,
+    'The same state, the same ledgers, a different character — and a new front.',
+    'The successor opened with a muster, and the town read it correctly.',
+    'The restraint was never in the ledgers; it sat in a chair, and it sits there no longer.',
+    'He inherited a stalemate and called it an opportunity.',
+  ],
+  war_dissolved_by_verdict: [
+    (x) => `The officeholder whose rot opened the war was removed; ${x.npc} holds no quarrel with ${x.counterpart}, and the war has nothing left to stand on.`,
+    'The casus was a man, and the man is out of office.',
+    'The court that raised the grievance cannot now find anyone in it who owns the grievance.',
+    'A verdict in one hall closed a war in another.',
+    'They went to war over a corruption and unmade the war by exposing it, which the chronicles will call luck.',
+  ],
   // fear_of_dominance — authored in hegemonyFear.js (see HEGEMONY_RECEIPTS below).
 });
 
@@ -912,6 +1014,122 @@ const WAR_COST_KIND_BY_ID = new Map(
  */
 export function warCostReceipt(kind, seed, interp = {}) {
   const row = WAR_COST_KIND_BY_ID.get(String(kind));
+  if (!row) return null;
+  const eligible = row.pool
+    .map((_, templateIndex) => templateIndex)
+    .filter((templateIndex) => row.requiredSlots[templateIndex].every((slot) => (
+      typeof interp[slot] === 'string' && String(interp[slot]).trim().length > 0
+    )));
+  if (eligible.length === 0) return null;
+  const namespacedSeed = seed ? `${seed}#${row.kind}` : '';
+  const templateIndex = namespacedSeed ? eligible[fnv1a32(namespacedSeed) % eligible.length] : eligible[0];
+  const variant = row.pool[templateIndex];
+  const line = typeof variant === 'function' ? String(variant(interp)) : String(variant);
+  return {
+    kind: row.kind,
+    line,
+    familyId: `${row.kind}.${templateIndex + 1}`,
+    templateIndex,
+    significance: row.significance,
+    audience: row.audience,
+    section: row.section,
+  };
+}
+
+/**
+ * WR-5's governed reader kinds. Adjudication is a RECORD desk rather than a
+ * token-map output: the projector persists the row's explicit `section`, and
+ * heraldSectionOfRecord honours that governed section after its structural
+ * pending/resolution/forecast precedence.
+ */
+/** @typedef {'sued_for_peace_seat'|'sued_for_peace_realm'|
+ * 'war_continued_for_the_seat'|'war_ended_against_rival_triumph'|'peace_refused'|
+ * 'refusal_cost_legitimacy'|'refusal_cost_ally_patience'|'ruler_books_compromised'|
+ * 'war_party_overturns_peacemaker'|'peace_party_overturns_warmonger'|
+ * 'succession_demand_inherited'|'successor_repudiates_war'|
+ * 'successor_escalates_war'|'war_dissolved_by_verdict'} WarRulingReceiptKind */
+/** @typedef {{kind:WarRulingReceiptKind,significance:'major'|'notable',
+ * audience:'public'|'dm-only',section:'war'|'adjudication',pool:readonly ProseVariant[],
+ * requiredSlots:ReadonlyArray<readonly string[]>}} WarRulingReceiptRegistryEntry */
+
+/**
+ * @param {WarRulingReceiptKind} kind
+ * @param {'major'|'notable'} significance
+ * @param {'public'|'dm-only'} audience
+ * @param {'war'|'adjudication'} section
+ * @param {ReadonlyArray<readonly string[]>} requiredSlots
+ * @returns {Readonly<WarRulingReceiptRegistryEntry>}
+ */
+function warRulingKindRow(kind, significance, audience, section, requiredSlots) {
+  return Object.freeze({
+    kind,
+    significance,
+    audience,
+    section,
+    pool: /** @type {readonly ProseVariant[]} */ (WAR_RECEIPTS[kind]),
+    requiredSlots: Object.freeze(
+      requiredSlots.map((slots) => Object.freeze([...slots])),
+    ),
+  });
+}
+
+/** @type {ReadonlyArray<Readonly<WarRulingReceiptRegistryEntry>>} */
+export const WAR_RULING_KIND_REGISTRY = Object.freeze([
+  warRulingKindRow('sued_for_peace_seat', 'major', 'public', 'adjudication',
+    [['npc'], [], [], ['npc'], []]),
+  warRulingKindRow('sued_for_peace_realm', 'major', 'public', 'adjudication',
+    [[], ['settlement', 'npc'], [], [], []]),
+  warRulingKindRow('war_continued_for_the_seat', 'major', 'public', 'war',
+    [['settlement', 'npc'], [], [], ['faction'], []]),
+  warRulingKindRow('war_ended_against_rival_triumph', 'major', 'public', 'war',
+    [['settlement', 'npc'], [], [], [], []]),
+  warRulingKindRow('peace_refused', 'major', 'public', 'adjudication',
+    [['counterpart', 'settlement', 'reason'], ['route'], [], [], ['npc']]),
+  warRulingKindRow('refusal_cost_legitimacy', 'notable', 'public', 'adjudication',
+    [['settlement'], [], [], ['npc', 'band'], []]),
+  warRulingKindRow('refusal_cost_ally_patience', 'notable', 'public', 'war',
+    [['counterpart', 'third_party'], [], ['band'], [], []]),
+  warRulingKindRow('ruler_books_compromised', 'major', 'dm-only', 'adjudication',
+    [['npc', 'faction', 'settlement'], [], [], [], []]),
+  warRulingKindRow('war_party_overturns_peacemaker', 'major', 'public', 'adjudication',
+    [['npc'], ['faction'], [], [], []]),
+  warRulingKindRow('peace_party_overturns_warmonger', 'major', 'public', 'adjudication',
+    [['settlement'], ['faction'], [], [], []]),
+  warRulingKindRow('succession_demand_inherited', 'notable', 'public', 'adjudication',
+    [['faction', 'npc'], [], [], [], []]),
+  warRulingKindRow('successor_repudiates_war', 'major', 'public', 'war',
+    [['npc'], [], [], [], []]),
+  warRulingKindRow('successor_escalates_war', 'major', 'public', 'war',
+    [['npc'], [], [], [], []]),
+  warRulingKindRow('war_dissolved_by_verdict', 'major', 'public', 'adjudication',
+    [['npc', 'counterpart'], [], [], [], []]),
+]);
+
+/** The exact WR-5 governed reader-kind set. */
+export const WAR_RULING_KINDS = Object.freeze(
+  WAR_RULING_KIND_REGISTRY.map((row) => row.kind),
+);
+
+/** @type {ReadonlyMap<string, Readonly<WarRulingReceiptRegistryEntry>>} */
+const WAR_RULING_KIND_BY_ID = new Map(
+  /** @type {Array<[string, Readonly<WarRulingReceiptRegistryEntry>]>} */ (
+    WAR_RULING_KIND_REGISTRY.map((row) => [row.kind, row])
+  ),
+);
+
+/**
+ * Resolve one WR-5 sentence without inventing a ruler, faction, ally, route,
+ * reason, or qualitative band. Families whose named source facts are absent are
+ * ineligible; their slotless siblings remain honest authored fallbacks.
+ *
+ * @param {string} kind
+ * @param {string|null|undefined} seed
+ * @param {Record<string, unknown>} [interp]
+ * @returns {{kind:string,line:string,familyId:string,templateIndex:number,
+ *   significance:string,audience:string,section:string} | null}
+ */
+export function warRulingReceipt(kind, seed, interp = {}) {
+  const row = WAR_RULING_KIND_BY_ID.get(String(kind));
   if (!row) return null;
   const eligible = row.pool
     .map((_, templateIndex) => templateIndex)

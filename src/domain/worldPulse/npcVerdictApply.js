@@ -450,6 +450,7 @@ export function verdictHeraldItem({ decision, settlementId, settlementName, rost
  * @property {{ settlementId: string, kind: string, untilTick?: number, indefinite?: true }|null} exclusion
  * @property {number|null} jailUntilTick
  * @property {{ roster: number, groupingMembers: number, powerMembers: number }} homes
+ * @property {{id:string,kind:'npc_verdict',source:'applyNpcVerdict',settlementId:string,npcId:string,rosterId:string,verdict:string,exposureKind:'ousted',tick:number}|null} authorityVerdict
  * @property {boolean} changed
  */
 
@@ -468,6 +469,7 @@ function noVerdict(worldState, settlement) {
     exclusion: null,
     jailUntilTick: null,
     homes: { roster: 0, groupingMembers: 0, powerMembers: 0 },
+    authorityVerdict: null,
     changed: false,
   };
 }
@@ -564,6 +566,36 @@ export function applyNpcVerdict({
 
   const stripped = stripNpcInfluence(settlement, { rosterId, mark: Object.freeze(mark) });
 
+  const news = verdictHeraldItem({
+    decision,
+    settlementId,
+    settlementName,
+    rosterId,
+    wnpcId: text(wnpcId),
+    npcName,
+    tick,
+  });
+  // WR-5 consumes only this exact H2 receipt, never npcAgency's raw organic
+  // `ousted` event. The exposure must address the same global roster identity
+  // that was actually stripped; malformed/manual cross-NPC calls can still use
+  // H2's ordinary result, but cannot manufacture authority-verdict provenance.
+  const exposureRecord = asObject(exposure);
+  const exposedNpcId = text(exposureRecord.npcId);
+  const exactNpcId = `${text(settlementId)}:${rosterId}`;
+  const authorityVerdict = exposureRecord.kind === 'ousted' && exposedNpcId === exactNpcId
+    ? Object.freeze({
+        id: news.id,
+        kind: /** @type {'npc_verdict'} */ ('npc_verdict'),
+        source: /** @type {'applyNpcVerdict'} */ ('applyNpcVerdict'),
+        settlementId: text(settlementId),
+        npcId: exposedNpcId,
+        rosterId,
+        verdict: decision.verdict,
+        exposureKind: /** @type {'ousted'} */ ('ousted'),
+        tick: tickOf(tick),
+      })
+    : null;
+
   return {
     worldState: nextWorld,
     settlement: stripped.settlement,
@@ -578,18 +610,11 @@ export function applyNpcVerdict({
       verdict: decision.verdict,
       tick,
     }),
-    news: verdictHeraldItem({
-      decision,
-      settlementId,
-      settlementName,
-      rosterId,
-      wnpcId: text(wnpcId),
-      npcName,
-      tick,
-    }),
+    news,
     exclusion,
     jailUntilTick,
     homes: stripped.homes,
+    authorityVerdict,
     changed: true,
   };
 }

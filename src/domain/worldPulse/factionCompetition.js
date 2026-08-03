@@ -1,10 +1,15 @@
 import { clamp01 } from '../../kernel/math.js';
-import { decayFactionPairStates, mintFactionPairIncident, factionPairOf } from './factionPairLedger.js';
+import {
+  decayFactionPairStates,
+  mintFactionPairIncident,
+  selectWarDecisionIncident,
+} from './factionPairLedger.js';
 import { stablePart } from './worldState.js';
 import { factionArchetype, FACTION_ARCHETYPES as FA } from '../factionArchetypes.js';
 import { governingCoalition } from './beliefMap.js';
 import { memoryWeaveActive } from './relationshipEvolution.js';
 import { compareCodepoint } from '../deterministicSort.js';
+import { governingFactionOf } from '../rulingPower.js';
 
 // Canonical archetype → factionCompetition's local vocabulary (the FACTION_POWER_BASES
 // keys). Folds the archetypes this layer doesn't model: government/other → civic,
@@ -84,6 +89,19 @@ function pick(rng, arr) {
 function factionId(saveId, faction, index) {
   const name = faction?.id || faction?.faction || faction?.name || faction?.label || `faction_${index}`;
   return `${saveId}:${stablePart(name)}`;
+}
+
+/**
+ * Canonical faction-plane identity shared with cross-module producers. A raw
+ * generator faction id is not itself a factionCompetition id: the settlement
+ * scope is load-bearing because otherwise two realms may alias the same local
+ * token and a deposited pair grievance becomes unreadable by this owner.
+ * @param {unknown} saveId
+ * @param {import('../settlement.schema.js').SimFaction} faction
+ * @param {number} [index]
+ */
+export function factionCompetitionId(saveId, faction, index = 0) {
+  return factionId(saveId, faction, index);
 }
 
 function inferFactionArchetype(faction = {}) {
@@ -606,11 +624,47 @@ function candidateBase(/** @type {any} */ { item, entry, state, tick, candidateT
   };
 }
 
-/** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} legitimacy @param {any} conflict */
-function governmentChallenge(item, entry, state, tick, legitimacy, conflict) {
+/**
+ * Newest bounded WR-5 war-decision grievance held by this challenger against
+ * the current governing faction. The pair plane owns storage/decay; this is a
+ * read-only pressure contribution, never an automatic coup.
+ * @param {any} item @param {any} worldState @param {string} challengerId
+ */
+function warDecisionOpposition(item, worldState, challengerId) {
+  if (worldState?.simulationRules?.warLayerEnabled !== true
+    || worldState?.simulationRules?.warTerminationEnabled !== true) return null;
+  const factions = settlementFactions(item);
+  const governing = governingFactionOf(item?.settlement);
+  if (!governing) return null;
+  const governingIndex = factions.indexOf(governing);
+  const governingId = factionId(item.id, governing, Math.max(0, governingIndex));
+  const incident = selectWarDecisionIncident(worldState, governingId, challengerId);
+  if (!incident) return null;
+  return {
+    pressure01: clamp01(Number(incident.sev) || 0),
+    decisionId: String(incident.context.decisionId || ''),
+    demand: {
+      actorId: String(incident.context.actorId || ''),
+      targetId: String(incident.context.targetId || ''),
+      decisionId: String(incident.context.decisionId || ''),
+      desiredAction: String(incident.context.desiredAction || ''),
+    },
+  };
+}
+
+/** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} legitimacy @param {any} conflict @param {any} warOpposition */
+function governmentChallenge(item, entry, state, tick, legitimacy, conflict, warOpposition = null) {
   const band = legitimacyBand(legitimacy);
-  if (band === 'stable') return null;
-  const severity = clamp01(legitimacy * 0.48 + entry.power * 0.28 + state.riskTolerance * 0.14 + conflict * 0.1);
+  const warPressure = clamp01(Number(warOpposition?.pressure01) || 0);
+  // A secure seat can weather ordinary opposition; only an exceptional, live
+  // coalition grievance opens its normal challenge lane while legitimacy is
+  // otherwise stable.
+  if (band === 'stable' && warPressure < 0.68) return null;
+  // Preserve the legacy challenge exactly when WR-5 contributes no grievance;
+  // its pressure is an independent bounded addition, not a rewrite of the base.
+  const baseSeverity = clamp01(legitimacy * 0.48 + entry.power * 0.28
+    + state.riskTolerance * 0.14 + conflict * 0.1);
+  const severity = clamp01(baseSeverity + (1 - baseSeverity) * warPressure * 0.22);
   if (severity < (band === 'crisis' ? 0.5 : 0.58)) return null;
   return candidateBase({
     item,
@@ -620,11 +674,14 @@ function governmentChallenge(item, entry, state, tick, legitimacy, conflict) {
     candidateType: 'faction_government_challenge',
     ruleId: `faction_${band}_government_challenge`,
     severity,
-    probability: (band === 'crisis' ? 0.12 : 0.04) + severity * (band === 'crisis' ? 0.34 : 0.22),
+    probability: (band === 'crisis' ? 0.12 : 0.04)
+      + severity * (band === 'crisis' ? 0.34 : 0.22)
+      + warPressure * 0.08,
     applyMode: 'proposal',
     reasons: [
       `Government legitimacy is ${band}.`,
       `${state.name} is one of the top three factions and prefers ${state.governmentPreference.replace(/_/g, ' ')}.`,
+      ...(warPressure > 0 ? ['A recent war decision has organized this faction against the governing seat.'] : []),
       'Government changes preserve existing institutions unless a separate institution event changes them.',
     ],
     factionPatch: {
@@ -641,6 +698,10 @@ function governmentChallenge(item, entry, state, tick, legitimacy, conflict) {
       governmentPreference: state.governmentPreference,
       legitimacyBand: band,
       preserveInstitutions: true,
+      ...(warOpposition?.decisionId ? {
+        warDecisionId: warOpposition.decisionId,
+        warDemand: warOpposition.demand,
+      } : {}),
     },
     condition: {
       archetype: 'faction_challenge',
@@ -654,7 +715,13 @@ function governmentChallenge(item, entry, state, tick, legitimacy, conflict) {
       causes: [{ source: state.factionId, effect: 'legitimacy_challenge', reason: 'Faction competition intensified under weak legitimacy.' }],
     },
     conflictTags: [`settlement:${item.id}:government_change`],
-    metadata: { legitimacyBand: band },
+    metadata: {
+      legitimacyBand: band,
+      ...(warPressure > 0 ? {
+        warDecisionOpposition: true,
+        warDecisionId: warOpposition.decisionId,
+      } : {}),
+    },
   });
 }
 
@@ -855,7 +922,15 @@ export function evaluateFactionRules(snapshot, pressureIdx, options = {}) {
       const cooldown = state.lastActedTick != null && tick - state.lastActedTick < 2;
       if (cooldown && (state.exhaustion || 0) < 0.62) continue;
       const candidates = [
-        governmentChallenge(item, entry, state, tick, legitimacy, conflict),
+        governmentChallenge(
+          item,
+          entry,
+          state,
+          tick,
+          legitimacy,
+          conflict,
+          warDecisionOpposition(item, snapshot.worldState, String(state.factionId)),
+        ),
         institutionCandidate(
           item,
           entry,

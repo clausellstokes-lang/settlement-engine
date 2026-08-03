@@ -53,13 +53,47 @@ import {
   reconcileSupersededProposalNews,
   stateOnlyRumorSeedsFromHistory,
 } from './worldPulseFeedCuration.js';
-import { transferRulingPower } from '../rulingPower.js';
+import {
+  authorityTransferEpochFor,
+  governingFactionOf,
+  nameOf,
+  transferRulingPower,
+} from '../rulingPower.js';
 import { withImpairment } from '../entities/status.js';
 import { rolesForCanonicalEdge } from '../relationships/canonicalRelationship.js';
 import { deepClone } from '../clone.js';
+import { isBilateralPeaceOffer, readWarPeaceDecision } from './warPeaceDecision.js';
+import { applyWarPeaceRefusal } from './warPeaceRefusal.js';
+import { applyWarDecisionPolitics, warDemandForInstaller } from './warPoliticalLoop.js';
+import { appendNpcLadderSeatTransition } from './npcLadderKernel.js';
+import { buildWorldSnapshot } from './worldSnapshot.js';
+import { rulingSeatNidOf } from './gratitudeBonds.js';
+import { warRulingNewsEntries } from './warRulingsNews.js';
+import {
+  governmentTransitionRulingEvidence,
+  peaceDecisionRulingEvidence,
+} from './warRulingsEvidence.js';
 
 function clone(/** @type {any} */ value) {
   return value == null ? value : deepClone(value);
+}
+
+/** One approved/refused bilateral offer is one immutable relationship fact. */
+function relationshipOutcomeDisposition(worldState, outcome) {
+  const key = String(outcome?.relationshipKey || outcome?.proposalPayload?.relationshipKey || '');
+  const id = String(outcome?.id || '');
+  if (!key || !id) return null;
+  const record = worldState?.relationshipStates?.[key];
+  if (String(record?.peaceDecisionOutcomeId || '') === id) return 'same';
+  const candidateTick = Number(outcome?.generatedAtTick ?? outcome?.tick ?? worldState?.tick);
+  if (Number.isFinite(candidateTick)
+    && Number.isFinite(record?.peaceDecisionTick)
+    && Number(record.peaceDecisionTick) >= Math.floor(candidateTick)) return 'superseded';
+  const incidents = Array.isArray(record?.recentIncidents) ? record.recentIncidents : [];
+  const history = Array.isArray(record?.history) ? record.history : [];
+  return [...incidents, ...history].some((row) => String(row?.outcomeId || '') === id)
+    ? 'same'
+    : null;
 }
 
 
@@ -831,6 +865,7 @@ export function applyWorldPulseOutcomes({
   const autoApplied = [];
   const proposals = [];
   const newsEntries = [];
+  const lapsedOutcomeIds = [];
   // Direct state-only headlines stay off every public/raw-news surface, but the
   // rumor/belief plane historically consumed those entries as simulation input.
   // Preserve that exact seed on an internal return lane.
@@ -953,6 +988,122 @@ export function applyWorldPulseOutcomes({
         }
       }
       if (armed.substituteOutcome) outcome = armed.substituteOutcome;
+    }
+
+    // WR-5 G2 — BILATERAL PEACE. Approval of the stored strategy proposal is
+    // the suing court's yes. Before any settlement, relationship, graph, recall,
+    // or treaty-facing mutation occurs, ask the named target court through the
+    // same four-term evaluator. A stale offer with no live war fails closed. A
+    // refusal substitutes a priced fact and deliberately skips the existing
+    // label-change path, leaving hostility and both deployments intact.
+    const warRulingsLit = state?.simulationRules?.warLayerEnabled === true
+      && state?.simulationRules?.warTerminationEnabled === true;
+    if (isBilateralPeaceOffer(outcome) && warRulingsLit) {
+      const priorDisposition = relationshipOutcomeDisposition(state, outcome);
+      if (priorDisposition === 'same') continue;
+      if (priorDisposition === 'superseded') {
+        lapsedOutcomeIds.push(String(outcome.id || ''));
+        continue;
+      }
+      const decisionSnapshot = { ...snapshot, regionalGraph: graph, worldState: state };
+      const peaceDecision = readWarPeaceDecision({
+        worldState: state,
+        snapshot: decisionSnapshot,
+        outcome,
+        tick,
+      });
+      if (!peaceDecision) {
+        lapsedOutcomeIds.push(String(outcome.id || ''));
+        continue;
+      }
+      newsEntries.push(...warRulingNewsEntries({
+        evidence: peaceDecisionRulingEvidence({ outcome, decision: peaceDecision, tick }),
+        snapshot,
+        now,
+      }));
+      if (!peaceDecision.accepted) {
+        const priced = applyWarPeaceRefusal({
+          worldState: state,
+          settlementUpdates: [...settlementUpdates.values()],
+          regionalGraph: graph,
+          outcome,
+          decision: peaceDecision,
+          tick,
+          now,
+        });
+        state = priced.worldState;
+        // The offerer chose peace; the target chose continued war. Each court's
+        // own opposition gets an independent, typed organizing grievance.
+        state = applyWarDecisionPolitics({
+          worldState: state, snapshot,
+          actorId: peaceDecision.offererId,
+          targetId: peaceDecision.targetId,
+          actualAction: 'peace',
+          decisionId: `${String(outcome.id)}:offerer`,
+          tick,
+        }).worldState;
+        state = applyWarDecisionPolitics({
+          worldState: state, snapshot,
+          actorId: peaceDecision.targetId,
+          targetId: peaceDecision.offererId,
+          actualAction: 'continue',
+          decisionId: `${String(outcome.id)}:target`,
+          tick,
+        }).worldState;
+        if (priced.settlementUpdates !== null) {
+          for (const entry of priced.settlementUpdates) {
+            if (entry?.saveId != null) settlementUpdates.set(String(entry.saveId), entry);
+          }
+        }
+        newsEntries.push(...warRulingNewsEntries({
+          evidence: priced.evidence,
+          snapshot,
+          now,
+        }));
+        autoApplied.push({
+          ...outcome,
+          candidateType: 'peace_refused',
+          relationshipKey: null,
+          relationshipPatch: null,
+          proposalPayload: null,
+          metadata: {
+            ...(outcome.metadata || {}),
+            peaceDecision: peaceDecision.receipt,
+          },
+        });
+        continue;
+      }
+      state = applyWarDecisionPolitics({
+        worldState: state, snapshot,
+        actorId: peaceDecision.offererId,
+        targetId: peaceDecision.targetId,
+        actualAction: 'peace',
+        decisionId: `${String(outcome.id)}:offerer`,
+        tick,
+      }).worldState;
+      state = applyWarDecisionPolitics({
+        worldState: state, snapshot,
+        actorId: peaceDecision.targetId,
+        targetId: peaceDecision.offererId,
+        actualAction: 'peace',
+        decisionId: `${String(outcome.id)}:target`,
+        tick,
+      }).worldState;
+      outcome = {
+        ...outcome,
+        relationshipPatch: {
+          ...(outcome.relationshipPatch || {}),
+          peaceDecisionOutcomeId: String(outcome.id || ''),
+          peaceDecisionTick: Number.isFinite(Number(outcome.generatedAtTick ?? tick))
+            ? Math.max(0, Math.floor(Number(outcome.generatedAtTick ?? tick)))
+            : 0,
+          peaceDecision: 'accepted',
+        },
+        metadata: {
+          ...(outcome.metadata || {}),
+          peaceDecision: peaceDecision.receipt,
+        },
+      };
     }
 
     for (const saveId of affectedSaveIdsForOutcome(outcome)) {
@@ -1162,9 +1313,63 @@ export function applyWorldPulseOutcomes({
       const sid = String(outcome.proposalPayload.settlementId ?? outcome.targetSaveId ?? '');
       const entry = settlementUpdates.get(sid);
       if (entry?.settlement) {
+        const installerFactionId = String(outcome.proposalPayload.factionId || outcome.factionId || '');
+        const ladderRecord = getSpatialLedger(state, 'npcLadder')?.[sid];
+        const fromRulerId = rulingSeatNidOf(ladderRecord, entry.settlement);
+        const inheritedWarDemand = outcome.proposalPayload.kind === 'government_change'
+          && installerFactionId
+          && typeof outcome.proposalPayload.warDecisionId === 'string'
+          && outcome.proposalPayload.warDecisionId
+          ? warDemandForInstaller(state, entry.settlement, sid, installerFactionId, {
+              decisionId: outcome.proposalPayload.warDecisionId,
+              carriedDemand: outcome.proposalPayload.warDemand,
+            })
+          : null;
         const nextSettlement = applyFactionPayloadEffect(entry.settlement, outcome, state, { now, tick });
         if (nextSettlement !== entry.settlement) {
           settlementUpdates.set(sid, { ...entry, settlement: nextSettlement });
+          // WR-5 H/D — an approved government transfer and an organic ladder
+          // succession converge on the ladder's one bounded transition writer.
+          // The old governing court is still required to recover the organizing
+          // grievance above; after transfer, the same ladder resolves the new seat.
+          if (outcome.proposalPayload.kind === 'government_change' && warRulingsLit) {
+            // transferRulingPower preserves the governing body while changing
+            // the authority behind it. An id-backed ladder resolves that same
+            // seat directly; a legacy name-keyed ladder cannot follow the body
+            // rename, so the known pre-transfer holder remains the truthful
+            // seat instead of becoming a fabricated vacancy.
+            const toRulerId = rulingSeatNidOf(ladderRecord, nextSettlement) || fromRulerId;
+            const governingFaction = governingFactionOf(nextSettlement);
+            const governingFactionId = String(governingFaction?.id || installerFactionId || '');
+            const governingFactionName = governingFaction ? nameOf(governingFaction) : '';
+            const seatTransition = {
+              id: `applied:${String(outcome.id || '')}`,
+              fromRulerId,
+              toRulerId,
+              cause: 'government_change',
+              tick: Number.isFinite(Number(tick)) ? Number(tick) : 0,
+              authorityEpoch: authorityTransferEpochFor(nextSettlement),
+              ...(installerFactionId ? { installerFactionId } : {}),
+              ...(outcome.metadata?.factionName
+                ? { installerFactionName: String(outcome.metadata.factionName) }
+                : {}),
+              ...(governingFactionId ? { governingFactionId } : {}),
+              ...(governingFactionName ? { governingFactionName } : {}),
+              ...(inheritedWarDemand ? { warDemand: inheritedWarDemand } : {}),
+            };
+            const beforeTransition = state;
+            state = appendNpcLadderSeatTransition(state, sid, seatTransition);
+            if (state !== beforeTransition) {
+              newsEntries.push(...warRulingNewsEntries({
+                evidence: governmentTransitionRulingEvidence({
+                  transition: seatTransition,
+                  outcome,
+                }),
+                snapshot,
+                now,
+              }));
+            }
+          }
         }
       }
     }
@@ -1269,6 +1474,7 @@ export function applyWorldPulseOutcomes({
     autoApplied,
     proposals,
     newsEntries,
+    ...(lapsedOutcomeIds.length ? { lapsedOutcomeIds } : {}),
     ...(rumorSeedEntries.length ? { rumorSeedEntries } : {}),
   };
 }
@@ -1323,16 +1529,30 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
   // applyWorldPulseOutcomes.
   const outcome = resolveProposalToOutcome(proposal.outcome);
   const settlementMap = new Map((saves || []).map(save => [String(save.id || save.settlement?.id), { saveId: String(save.id || save.settlement?.id), save, settlement: save.settlement || save }]));
-  const snapshot = {
-    campaign,
-    regionalGraph: ensureRegionalGraph(campaign?.regionalGraph, { now }),
-    settlements: [...settlementMap.values()].map(item => ({ id: item.saveId, settlement: item.settlement, name: item.settlement?.name || item.save?.name || item.saveId })),
-  };
+  const adjudicationGraph = ensureRegionalGraph(campaign?.regionalGraph, { now });
+  // Manual approval must read the same causal/system/active-condition snapshot
+  // as an organic pulse. The former hand-built three-field items silently erased
+  // pressure evidence and could make the same target court refuse manually after
+  // accepting in autoresolve.
+  const snapshot = buildWorldSnapshot({
+    campaign: {
+      ...campaign,
+      settlementIds: [...settlementMap.keys()],
+      regionalGraph: adjudicationGraph,
+      worldState: campaign.worldState,
+    },
+    // The proposal queue already scopes these saves as campaign participants;
+    // preserve that historical behavior while using the canonical derivation.
+    saves: (saves || []).map((save) => ({ ...save, phase: 'canon' })),
+    worldState: campaign.worldState,
+    regionalGraph: adjudicationGraph,
+  });
   const result = applyWorldPulseOutcomes({
     snapshot,
-    // updatedAt threaded explicitly: updateProposalStatus falls back to the
-    // wall clock for it, which would break replay-identical worldState.
-    worldState: updateProposalStatus(campaign.worldState, proposalId, 'applied', { appliedAt: now, updatedAt: now, ...(adjudicatedBy ? { adjudicatedBy } : {}) }),
+    // Keep the docket pending until the live-world applicator returns a terminal
+    // disposition. Pre-stamping `appliedAt` made a lapsed offer claim both
+    // "applied" and "superseded" in the same durable row.
+    worldState: campaign.worldState,
     regionalGraph: campaign.regionalGraph,
     wizardNews: campaign.wizardNews,
     settlementMap,
@@ -1343,6 +1563,37 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
     advanceRegionalImpacts: false,
     simulationRules: campaign.worldState?.simulationRules,
   });
+  if (Array.isArray(result.lapsedOutcomeIds)
+    && result.lapsedOutcomeIds.includes(String(outcome.id || ''))) {
+    const tick = campaign.worldState?.tick || proposal.tick || 0;
+    // A lapsed bilateral question is a docket transition only. The generic
+    // applicator performs end-of-pass maintenance even when its sole outcome
+    // fails closed (notably relationship-memory refresh), so never use that
+    // speculative world as the tombstone base. Otherwise clicking a stale
+    // offer could materialize relationship posture/scalars without applying
+    // the offer, and the superseded store lane intentionally has no undo entry.
+    const reconciled = reconcileSupersededProposalNews(
+      updateProposalStatus(campaign.worldState, proposalId, 'superseded', {
+        supersededAt: now,
+        supersededAtTick: tick,
+        supersessionReason: 'bilateral_peace_lapsed',
+        updatedAt: now,
+        ...(adjudicatedBy ? { adjudicatedBy } : {}),
+      }),
+      campaign.wizardNews,
+    );
+    return {
+      ...result,
+      worldState: reconciled.worldState,
+      regionalGraph: adjudicationGraph,
+      wizardNews: reconciled.wizardNews,
+      settlementUpdates: [],
+      autoApplied: [],
+      proposals: [],
+      newsEntries: [],
+      proposalDisposition: 'superseded',
+    };
+  }
   // W-COMPOSER-2 lapse honesty: a realm-verb order whose gates refused at apply is stamped 'refused'
   // (visible in the queue's history), never 'applied' — the §10 phantom-hole law at the proposal
   // mouth. Organic outcomes are untouched. correctness-4: the SAME provenance writer the organic tick

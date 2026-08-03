@@ -627,9 +627,14 @@ standalone ledger, regen path, or separate undo verb.
   by choice, and costs legitimacy + ally patience — all existing ledgers. A
   declined peace is a first-class news event with the address chain naming who
   offered, who refused, and whose books the refusal served where the receipt
-  honestly knows. The two-yeses-one-no asymmetry needs NO code — it is the
-  structure of bilateral acceptance — but the deadlock-dissolving refusal costs
-  are pinned as genuinely accruing (no free refusals).
+  honestly knows. **LIVE-CENSUS CORRECTION (2026-08-02):** the current proposal
+  path contains only the suing court's yes: approval immediately changes the
+  relationship, recalls armies, and later mints terms. WR-5 therefore adds the
+  target court's accept/refuse decision before that mutation. Acceptance resumes
+  the one existing label-change/recall/treaty path; refusal leaves hostility and
+  deployments live and prices the refusal exactly once by the offer outcome id.
+  The two-yeses-one-no asymmetry is an outcome of this machinery, not something
+  the pre-WR-5 tree already supplied.
 - **The coalition inside the walls (H):** a refused-or-signed peace against the
   powers' wishes feeds the EXISTING coup/faction-capture lane as an organizing
   grievance with the war decision named on the receipt. Both polarities pinned
@@ -637,21 +642,30 @@ standalone ledger, regen path, or separate undo verb.
   faction-installed successor INHERITS THE DECISION: the installing faction's
   demand rides the succession record so D's re-read must honour it (or the coup
   was pointless — the pin).
-- **The re-read (D):** on ANY legitimate-power change (succession, coup, faction
-  capture, H2 verdict removal, DM KILL/ASSIGN), the war's four terms re-read
+- **The re-read (D):** on a real legitimate-authority signature change (the
+  ruling-seat NPC and/or a governing-power transfer), the war's four terms re-read
   under the NEW ruler's character. THE MOMENTUM BREAK: the re-read applies a
   ruler-change discount to the momentum TERM in warTermination's read (momentum.js
   is never touched — the term is discounted at consumption, the sanctioned
-  momentum-breaking event, receipted as such). Bidirectional pin: a successor
-  repudiates OR escalates from the same state under different character.
+  momentum-breaking event, receipted as such). `CHANGE_RULING_POWER`, an applied
+  coup/faction government transfer, and an actual ladder-seat change qualify.
+  `KILL_NPC`, `ASSIGN_NPC_TO_ROLE`, and an H2 opening do not qualify by verb name;
+  they qualify only if the seat later changes. Pure renames do not change the
+  signature. Bidirectional pin: a successor repudiates OR escalates from the same
+  state under different character.
 - **The composition pin (amendment D's chain, the program's signature test):**
   corruption_exposed opens a war → H2 verdict removes the exposed officeholder →
   the successor holds no quarrel → the war dissolves. One fixture, five
   subsystems, all existing.
-**Lifecycle paths (added 2026-08-02):** the installing faction's demand rides the
-EXISTING succession record — it serializes, regens, and undoes with that record's
-own pins; no other state is added (refusal costs and grievances land on existing
-ledgers).
+**Lifecycle paths (added 2026-08-02; corrected after live census):** no existing
+record carries NPC succession or the installing faction's war demand.
+`spatialLedgers.npcLadder[cid]` therefore gains a bounded, ladder-owned
+`seatTransitions` history. Each row carries from/to ruler ids, cause, tick,
+installer/governing faction identity, and (only when earned) a typed war demand.
+The same normalizer/serializer and pulse undo path that own the ladder own this
+history. Refusal costs and faction opposition still land through their existing
+relationship, legitimacy, and faction-pair writers; there is no parallel coup or
+war-state ledger.
 **Bands:** books-weight derivation bands, refusal-cost bands, re-read discount.
 
 ### WR-6 — THE COALITION GRAPH (amendments I, I2, I3, J; flag `coalitionLedgerEnabled`)
@@ -1124,7 +1138,7 @@ legitimacy start, plan-trigger thresholds.
   structurally-unreachable cause).
 - **J-WR-13 (the census STOP rule — REWRITTEN 2026-08-02, self-audit; the first
   issue claimed the §2 rows were already corrected while the table stood
-  unamended, and undercounted the corrections):** SIX census overstatements are
+  unamended, and undercounted the corrections):** NINE census overstatements are
   KNOWN and now corrected in place or by a pre-build ruling: (1) "jailed applies to any named soul" —
   false; jailed is the corruption-exposure path only, and the foreign-guest hold
   is named NEW WORK in WR-7b; (2) the disposition row — the tree already carries
@@ -1135,7 +1149,12 @@ legitimacy start, plan-trigger thresholds.
   belief-ratio trend does not exist, corrected to consecutive qualitative pulse
   receipts; (6) P1/P1a does not account named people spent by war, so WR-4 reads
   only the attacker's own conscript share of the conserved aggregate deployment
-  bank (net of allied/vassal source levies) and skips `{npc}` prose. STANDING
+  bank (net of allied/vassal source levies) and skips `{npc}` prose; (7) WR-5's
+  bilateral acceptance does not exist, so the target decision must precede the
+  current mutation path; (8) KILL/ASSIGN/H2 are not ruler transfers, so re-read
+  keys on a semantic authority-signature change and dead ladder members become
+  ineligible; (9) no succession-demand record exists, so the bounded ladder-owned
+  `seatTransitions` history is the admitted lifecycle home. STANDING
   RULE: any implementer finding another census overstatement STOPS and reports
   before correcting or building on it.
 - **J-WR-14 (the atrocity pair, added 2026-08-02):** the atrocity-coalition casus

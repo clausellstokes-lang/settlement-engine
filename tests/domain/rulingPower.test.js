@@ -186,6 +186,22 @@ describe('transferRulingPower', () => {
     expect(garrison.modifiers).toContain('ascendant');
   });
 
+  test('a legacy transfer does not silently run the broader faction-rename cascade', () => {
+    const base = settlementFixture({
+      npcs: [{
+        id: 'clerk',
+        name: 'Mara Venn',
+        factionAffiliation: 'Town Council',
+        role: 'Town Council clerk',
+        pressureSentence: 'The Town Council still calls the roll.',
+      }],
+    });
+    const { settlement, error } = transferRulingPower(base, 'The Garrison', { cause: 'coup' });
+    expect(error).toBeNull();
+    expect(settlement.npcs).toEqual(base.npcs);
+    expect(settlement.powerStructure.governingName).toBe('Military Council');
+  });
+
   test('legitimacy reseeds by cause — deposing a hated ruler starts warmer', () => {
     // Old score 22 (hated): coup seed = 38 + (50-22)*0.25 = 45 → Tolerated.
     const hated = transferRulingPower(settlementFixture(), 'The Garrison', { cause: 'coup' });

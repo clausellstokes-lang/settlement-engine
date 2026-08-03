@@ -10,12 +10,18 @@ import {
   WR4_INSTITUTION_HOME_FRONT_COUPLING,
   WR4_TRADE_HOME_FRONT_COUPLING,
   WR4_WAR_COST_COUPLINGS,
+  WR5_BILATERAL_PEACE_COUPLING,
+  WR5_REFUSAL_PRICE_COUPLING,
+  WR5_SEAT_ACCEPTANCE_COUPLING,
+  WR5_SEAT_BOOKS_COUPLING,
+  WR5_WAR_DECISION_GRIEVANCE_COUPLING,
+  WR5_WAR_RULING_COUPLINGS,
   couplingRowFor,
   couplingRowsFor,
 } from '../../src/domain/certification/couplingRegistry.js';
 
 describe('CW-0 coupling registry', () => {
-  test('schema v2 preserves the WR-3 row and appends WR-4 in coupling-map order', () => {
+  test('schema v2 preserves prior waves and appends WR-5 in decision-flow order', () => {
     expect(COUPLING_REGISTRY_SCHEMA_VERSION).toBe(2);
     expect(WR4_WAR_COST_COUPLINGS).toEqual([
       WR4_TRADE_HOME_FRONT_COUPLING,
@@ -26,6 +32,7 @@ describe('CW-0 coupling registry', () => {
     expect(COUPLING_REGISTRY).toEqual([
       WR3_LINEAGE_COUPLING,
       ...WR4_WAR_COST_COUPLINGS,
+      ...WR5_WAR_RULING_COUPLINGS,
     ]);
     expect(WR3_LINEAGE_COUPLING).toEqual({
       couplingId: 'CPL-3.POP_TO_WAR.WR-3.lineage',
@@ -83,6 +90,81 @@ describe('CW-0 coupling registry', () => {
     expect(WR4_INSTITUTION_HOME_FRONT_COUPLING.intendedDesk).not.toBe('adjudication');
   });
 
+  test('records exactly five WR-5 reads against their live receipt surfaces', () => {
+    expect(WR5_WAR_RULING_COUPLINGS).toEqual([
+      {
+        couplingId: 'CPL-6.INTERIOR_TO_WAR.WR-5.seat_books',
+        pairId: 'CPL-6',
+        direction: 'INTERIOR→WAR',
+        read: 'src/domain/worldPulse/warSeatBooks.js#readWarSeatBooks',
+        receiptField: 'pulseRecord.warTerminationReads[].{authoritySignature,booksInterest,booksDirection,rulerSecurityBand,rulerLawfulnessBand,rulerMoralityBand,booksReason,booksPublicReason}',
+        counterforce: 'src/domain/worldPulse/warSeatBooks.js#readWarSeatBooks',
+        flags: ['warLayerEnabled', 'warTerminationEnabled'],
+        owningVolume: 'WAR',
+        owningWave: 'WR-5',
+        intendedDesk: 'war',
+      },
+      {
+        couplingId: 'CPL-6.WAR_TO_INTERIOR.WR-5.war_decision_grievance',
+        pairId: 'CPL-6',
+        direction: 'WAR→INTERIOR',
+        read: 'src/domain/worldPulse/warPoliticalLoop.js#applyWarDecisionPolitics',
+        receiptField: 'worldState.factionPairStates[...].incidents[].{type,context.{decisionId,actualAction,desiredAction}}',
+        counterforce: 'src/domain/worldPulse/warPoliticalLoop.js#applyWarDecisionPolitics',
+        flags: [
+          'warLayerEnabled',
+          'warTerminationEnabled',
+          'factionCompetitionEnabled',
+          'memoryWeaveEnabled',
+        ],
+        owningVolume: 'WAR',
+        owningWave: 'WR-5',
+        intendedDesk: 'adjudication',
+      },
+      {
+        couplingId: 'CPL-5.WAR_TO_GRAMMAR.WR-5.bilateral_peace',
+        pairId: 'CPL-5',
+        direction: 'WAR→GRAMMAR',
+        read: 'src/domain/worldPulse/warPeaceDecision.js#readWarPeaceDecision',
+        receiptField: 'readWarPeaceDecision(...).receipt.{decision,actualAction,decidingTerm,bands,reason}',
+        counterforce: 'src/domain/worldPulse/warPeaceDecision.js#readWarPeaceDecision',
+        flags: ['warLayerEnabled', 'warTerminationEnabled'],
+        owningVolume: 'WAR',
+        owningWave: 'WR-5',
+        intendedDesk: 'adjudication',
+      },
+      {
+        couplingId: 'CPL-21.INTERIOR_TO_GRAMMAR.WR-5.seat_acceptance',
+        pairId: 'CPL-21',
+        direction: 'INTERIOR→GRAMMAR',
+        read: 'src/domain/worldPulse/warPeaceDecision.js#readWarPeaceDecision',
+        receiptField: 'readWarPeaceDecision(...).receipt.{decision,actualAction,booksDirection,booksInterest,interestServed,inheritedDemand,booksPublicReason}',
+        counterforce: 'src/domain/worldPulse/warPeaceDecision.js#readWarPeaceDecision',
+        flags: ['warLayerEnabled', 'warTerminationEnabled'],
+        owningVolume: 'WAR',
+        owningWave: 'WR-5',
+        intendedDesk: 'adjudication',
+      },
+      {
+        couplingId: 'CPL-21.GRAMMAR_TO_INTERIOR.WR-5.refusal_price',
+        pairId: 'CPL-21',
+        direction: 'GRAMMAR→INTERIOR',
+        read: 'src/domain/worldPulse/warPeaceRefusal.js#applyWarPeaceRefusal',
+        receiptField: 'applyWarPeaceRefusal(...).evidence[].{kind,id,settlementId,counterpartId,thirdPartyId,decision,interestServed}',
+        counterforce: 'src/domain/worldPulse/warPeaceDecision.js#readWarPeaceDecision',
+        flags: ['warLayerEnabled', 'warTerminationEnabled'],
+        owningVolume: 'WAR',
+        owningWave: 'WR-5',
+        intendedDesk: 'adjudication',
+      },
+    ]);
+    expect(Object.isFrozen(WR5_WAR_RULING_COUPLINGS)).toBe(true);
+    for (const row of WR5_WAR_RULING_COUPLINGS) {
+      expect(Object.isFrozen(row), row.couplingId).toBe(true);
+      expect(Object.isFrozen(row.flags), row.couplingId).toBe(true);
+    }
+  });
+
   test('every schema-v2 row has one stable unique identity and a closed shape', () => {
     const expectedKeys = [
       'couplingId', 'pairId', 'direction', 'read', 'receiptField',
@@ -106,7 +188,18 @@ describe('CW-0 coupling registry', () => {
     expect(couplingRowFor('CPL-3', 'POP→WAR')).toBe(WR3_LINEAGE_COUPLING);
     expect(couplingRowsFor('CPL-1', 'TRADE→WAR')).toEqual([WR4_TRADE_HOME_FRONT_COUPLING]);
     expect(couplingRowFor('CPL-4', 'INFO→WAR')).toBe(WR4_BELIEF_TRAJECTORY_COUPLING);
+    const interiorWar = couplingRowsFor('CPL-6', 'INTERIOR→WAR');
+    expect(interiorWar).toEqual([
+      WR4_INSTITUTION_HOME_FRONT_COUPLING,
+      WR5_SEAT_BOOKS_COUPLING,
+    ]);
+    expect(Object.isFrozen(interiorWar)).toBe(true);
     expect(couplingRowFor('CPL-6', 'INTERIOR→WAR')).toBe(WR4_INSTITUTION_HOME_FRONT_COUPLING);
+    expect(couplingRowsFor('CPL-6', 'WAR→INTERIOR'))
+      .toEqual([WR5_WAR_DECISION_GRIEVANCE_COUPLING]);
+    expect(couplingRowFor('CPL-5', 'WAR→GRAMMAR')).toBe(WR5_BILATERAL_PEACE_COUPLING);
+    expect(couplingRowFor('CPL-21', 'INTERIOR→GRAMMAR')).toBe(WR5_SEAT_ACCEPTANCE_COUPLING);
+    expect(couplingRowFor('CPL-21', 'GRAMMAR→INTERIOR')).toBe(WR5_REFUSAL_PRICE_COUPLING);
     expect(couplingRowFor('CPL-3', 'WAR→POP')).toBeNull();
     expect(couplingRowFor('CPL-99', 'POP→WAR')).toBeNull();
     expect(couplingRowFor(null, null)).toBeNull();

@@ -125,6 +125,23 @@ export const WHAT_PHRASES = Object.freeze({
   home_front_markets: 'a wartime market closing',
   winning_abroad_losing_at_home: 'victory abroad and hardship at home',
   trajectory_misread: 'a court misreading the course of war',
+  // WR-5 THE TWO BOOKS + THE POLITICAL LOOP. The covert patron-books receipt
+  // remains phrased for a privileged projection, but player projection still
+  // removes the record before this vocabulary is consulted.
+  sued_for_peace_seat: 'a ruler suing for peace',
+  sued_for_peace_realm: 'a realm suing for peace',
+  war_continued_for_the_seat: 'a war continued to secure the seat',
+  war_ended_against_rival_triumph: 'a victory declined to deny a rival',
+  peace_refused: 'an offer of peace refused',
+  refusal_cost_legitimacy: 'a ruler paying for a refused peace',
+  refusal_cost_ally_patience: 'an ally tiring of a refused peace',
+  ruler_books_compromised: 'a ruler serving a hidden patron',
+  war_party_overturns_peacemaker: 'a war party overturning a peacemaker',
+  peace_party_overturns_warmonger: 'a peace party overturning a warmonger',
+  succession_demand_inherited: 'a war demand following a successor into office',
+  successor_repudiates_war: 'a successor repudiating a war',
+  successor_escalates_war: 'a successor widening a war',
+  war_dissolved_by_verdict: 'a verdict dissolving a war',
   // The INDIRECT war and the war of words. These nine are keyed on `kind` rather than
   // `impactKind`, because their authors (momentum.js, supplyWebWarfare.js,
   // informationStatecraft.js) mint no impactKind. That is exactly why the impactKind

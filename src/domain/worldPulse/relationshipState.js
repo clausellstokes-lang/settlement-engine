@@ -266,6 +266,15 @@ export function ensureRelationshipState(edge, existing = {}) {
     trajectory: existing.trajectory || "stable",
     proposedRelationshipType: existing.proposedRelationshipType || null,
     lastTransitionTick: Number.isFinite(existing.lastTransitionTick) ? existing.lastTransitionTick : null,
+    ...(typeof existing.peaceDecisionOutcomeId === 'string' && existing.peaceDecisionOutcomeId
+      ? { peaceDecisionOutcomeId: existing.peaceDecisionOutcomeId }
+      : {}),
+    ...(Number.isFinite(existing.peaceDecisionTick)
+      ? { peaceDecisionTick: Math.max(0, Math.floor(existing.peaceDecisionTick)) }
+      : {}),
+    ...(existing.peaceDecision === 'accepted' || existing.peaceDecision === 'refused'
+      ? { peaceDecision: existing.peaceDecision }
+      : {}),
     updatedAt: existing.updatedAt || null,
     overlordWeaknessStreak: Math.max(0, Math.floor(Number(existing.overlordWeaknessStreak) || 0)),
     posture: existing.posture || null,

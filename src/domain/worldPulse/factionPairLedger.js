@@ -15,7 +15,7 @@
  *     [pairKey]: {                    // pairKey = `${a}|${b}`, a/b codepoint-sorted (canonical)
  *       trust: 0..1,                  // the POSITIVE sign — standing-together, alliance affinity
  *       resentment: 0..1,             // the NEGATIVE sign — betrayal, rivalry
- *       incidents: [{ tick, type, sev }],  // ≤ 8, typed, decaying (the same wound/deed vocabulary)
+ *       incidents: [{ tick, type, sev, context? }], // ≤ 8, typed, decaying; optional source context
  *       week: number,                 // last-update week (the decay anchor)
  *     }
  *   }
@@ -66,11 +66,73 @@ export function factionPairKey(a, b) {
 }
 
 /** The pair record for (a, b), or null when absent. @param {any} worldState @param {string} a @param {string} b
- *  @returns {{ trust: number, resentment: number, incidents: Array<{tick:number,type:string,sev:number}>, week: number }|null} */
+ *  @returns {{ trust: number, resentment: number, incidents: Array<{tick:number,type:string,sev:number,context?:Record<string,unknown>}>, week: number }|null} */
 export function factionPairOf(worldState, a, b) {
   const ledger = asObject(asObject(worldState).factionPairStates);
   const rec = ledger[factionPairKey(a, b)];
   return rec ? /** @type {any} */ (rec) : null;
+}
+
+/**
+ * Select the one causal WR-5 war-decision grievance for a challenger.
+ *
+ * Severity decides first (the grievance capable of opening the challenge), then
+ * the newer incident tick, then the codepoint decision id.  Both the candidate
+ * reader and the eventual installer-demand reader use this function so a later,
+ * weaker grievance cannot steal attribution from the decision that minted a
+ * pending government challenge.
+ *
+ * @param {unknown} worldState
+ * @param {string} governingFactionId
+ * @param {string} challengerFactionId
+ * @param {string|null} [requiredDecisionId]
+ * @returns {{tick:number,type:string,sev:number,context:Record<string,unknown>}|null}
+ */
+export function selectWarDecisionIncident(
+  worldState,
+  governingFactionId,
+  challengerFactionId,
+  requiredDecisionId = null,
+) {
+  const governingId = String(governingFactionId || '');
+  const challengerId = String(challengerFactionId || '');
+  const wanted = requiredDecisionId == null ? null : String(requiredDecisionId || '');
+  if (!governingId || !challengerId || governingId === challengerId || wanted === '') return null;
+  const rec = factionPairOf(worldState, governingId, challengerId);
+  const incidents = Array.isArray(rec?.incidents) ? rec.incidents : [];
+  /** @type {{tick:number,type:string,sev:number,context:Record<string,unknown>}|null} */
+  let selected = null;
+  for (const raw of incidents) {
+    const incident = asObject(raw);
+    if (String(incident.type || '') !== 'war_decision') continue;
+    const context = asObject(incident.context);
+    const decisionId = String(context.decisionId || '');
+    const actorId = String(context.actorId || '');
+    const targetId = String(context.targetId || '');
+    const desiredAction = String(context.desiredAction || '');
+    if (!decisionId
+      || (wanted != null && decisionId !== wanted)
+      || String(context.factionId || '') !== challengerId
+      || String(context.governingFactionId || '') !== governingId
+      || !actorId
+      || !targetId
+      || actorId === targetId
+      || !['peace', 'continue'].includes(desiredAction)) continue;
+    const candidate = {
+      tick: Math.floor(num(incident.tick, 0)),
+      type: 'war_decision',
+      sev: round4(clamp01(num(incident.sev, 0))),
+      context,
+    };
+    if (!selected
+      || candidate.sev > selected.sev
+      || (candidate.sev === selected.sev && candidate.tick > selected.tick)
+      || (candidate.sev === selected.sev && candidate.tick === selected.tick
+        && compareCodepoint(decisionId, String(selected.context.decisionId || '')) < 0)) {
+      selected = candidate;
+    }
+  }
+  return selected;
 }
 
 /**
@@ -80,21 +142,35 @@ export function factionPairOf(worldState, a, b) {
  * gated on memoryWeaveActive ∧ its host flag; a missing pair id ⇒ a byte-safe no-op.
  * ONE event, one deposit — the pair plane's own consume of a settlement-plane event (law 5).
  * @param {any} worldState
- * @param {{ a: string, b: string, type: string, trustDelta?: number, resentmentDelta?: number, sev?: number, tick: number, weeks: number }} spec
+ * @param {{ a: string, b: string, type: string, trustDelta?: number, resentmentDelta?: number, sev?: number, tick: number, weeks: number, context?:Record<string,unknown>|null }} spec
  * @returns {any}
  */
-export function mintFactionPairIncident(worldState, { a, b, type, trustDelta = 0, resentmentDelta = 0, sev = 0.3, tick, weeks }) {
+export function mintFactionPairIncident(worldState, { a, b, type, trustDelta = 0, resentmentDelta = 0, sev = 0.3, tick, weeks, context = null }) {
   if (!a || !b || String(a) === String(b)) return worldState;
   const key = factionPairKey(a, b);
   const ledger = asObject(asObject(worldState).factionPairStates);
   const prior = asObject(ledger[key]);
   const incidents = Array.isArray(prior.incidents) ? /** @type {Array<any>} */ (prior.incidents) : [];
+  const source = asObject(context);
+  const decisionId = typeof source.decisionId === 'string' ? source.decisionId : '';
+  // WR-5 exact-once law: proposal retries may revisit the apply mouth, but one
+  // political decision can organize this faction pair only once.
+  if (decisionId && incidents.some((incident) => (
+    String(incident?.type || '') === String(type)
+      && String(asObject(incident?.context).decisionId || '') === decisionId
+  ))) return worldState;
+  const incident = {
+    tick: Math.floor(num(tick, 0)),
+    type: String(type),
+    sev: round4(clamp01(num(sev, 0.3))),
+    ...(Object.keys(source).length ? { context: source } : {}),
+  };
   const next = {
     trust: round4(clamp01(num(prior.trust, 0) + num(trustDelta, 0))),
     resentment: round4(clamp01(num(prior.resentment, 0) + num(resentmentDelta, 0))),
     incidents: [
       ...incidents.slice(-(FACTION_PAIR_TUNING.MAX_INCIDENTS - 1)),
-      { tick: Math.floor(num(tick, 0)), type: String(type), sev: round4(clamp01(num(sev, 0.3))) },
+      incident,
     ],
     week: Math.floor(num(weeks, 0)),
   };
@@ -141,7 +217,12 @@ export function decayFactionPairStates(worldState, weeks, bandMult = 1) {
     // leaves `i.tick` untouched for the reader. Byte-identical when tick === week (every existing
     // pin mints at tick===week ⇒ dw === now - i.tick).
     const incidents = rawInc
-      .map((i) => ({ tick: Math.floor(num(i?.tick, 0)), type: String(i?.type || ''), sev: round4(decayScalar(clamp01(num(i?.sev, 0)), dw, bandMult)) }))
+      .map((i) => ({
+        tick: Math.floor(num(i?.tick, 0)),
+        type: String(i?.type || ''),
+        sev: round4(decayScalar(clamp01(num(i?.sev, 0)), dw, bandMult)),
+        ...(Object.keys(asObject(i?.context)).length ? { context: asObject(i.context) } : {}),
+      }))
       .filter((i) => i.sev >= T.PRUNE_EPSILON);
     if (trust < T.PRUNE_EPSILON && resentment < T.PRUNE_EPSILON && incidents.length === 0) { changed = true; continue; } // drop
     next[key] = { trust, resentment, incidents, week: now };

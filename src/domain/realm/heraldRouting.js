@@ -99,6 +99,9 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   lineage_claim_suppressed: 'war',
   war_trajectory_winning: 'war', war_trajectory_losing: 'war',
   winning_abroad_losing_at_home: 'war', trajectory_misread: 'war',
+  war_continued_for_the_seat: 'war', war_ended_against_rival_triumph: 'war',
+  refusal_cost_ally_patience: 'war', successor_repudiates_war: 'war',
+  successor_escalates_war: 'war',
   // THE INDIRECT WAR + THE WAR OF WORDS. These nine route on `kind`, not `impactKind`
   // (their authors mint none), which is exactly why the automatic discovery scan above
   // never surfaced them: it reads `impactKind:` and `candidateType:` literals only. They
@@ -203,6 +206,13 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   disposition_diplomatic_crossed: 'events', disposition_insular_crossed: 'events',
   disposition_reversal: 'events', lineage_edge_recorded: 'events', mirror_kinship_bond: 'events',
   home_front_stores: 'events', home_front_hands: 'events', home_front_institutions: 'events',
+  // WR-5 decision records persist `section: 'adjudication'`, which the record
+  // router honours below. Their token-only fallback is events: adjudication is
+  // a property of the governed record, never a second meaning for the token.
+  sued_for_peace_seat: 'events', sued_for_peace_realm: 'events', peace_refused: 'events',
+  refusal_cost_legitimacy: 'events', ruler_books_compromised: 'events',
+  war_party_overturns_peacemaker: 'events', peace_party_overturns_warmonger: 'events',
+  succession_demand_inherited: 'events', war_dissolved_by_verdict: 'events',
   // traditions / custom / values (KIND_SECTION `traditions` custom-half → events)
   tradition: 'events', tradition_change: 'events', moral_reckoning: 'events', cause_lifecycle: 'events',
   // mercy (KIND_SECTION `mercy` → events)
@@ -386,7 +396,8 @@ function isEmergingForecast(r) {
  *   1. a pending decision (a proposal awaiting the DM) → adjudication.
  *   2. a resolved ruling (manual or autoresolve) → adjudication (its log).
  *   3. an emerging-stage stressor / rising-pressure signal → divination (forecast).
- *   4. otherwise → SECTION_OF(routingKeyOf(record)) — filed by content.
+ *   4. an authored Wizard News receipt with a valid governed `section` keeps it.
+ *   5. otherwise → SECTION_OF(routingKeyOf(record)) — filed by content.
  *
  * The `__adjudicationPending` / `__resolution` / `__forecast` markers let a caller
  * that already knows a record's role tag it explicitly; without them the status /
@@ -399,6 +410,11 @@ export function heraldSectionOfRecord(record = {}) {
   const r = record || {};
   if (isPendingDecision(r) || isResolution(r)) return 'adjudication';
   if (isEmergingForecast(r)) return 'divination';
+  const supplied = tokenStr(r.section);
+  if (r.sectionAuthority === 'war_rulings_registry'
+    && HERALD_SECTIONS.includes(/** @type {HeraldSection} */ (supplied))) {
+    return /** @type {HeraldSection} */ (supplied);
+  }
   return SECTION_OF(routingKeyOf(r));
 }
 

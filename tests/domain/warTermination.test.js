@@ -463,11 +463,14 @@ describe('WR-1 four-term disagreement and receipt envelope', () => {
     const read = readWarTerminations({ worldState: state, tick: 9 });
     const receipt = read.receipts[0];
     expect(Object.keys(receipt).sort()).toEqual([
-      'attackerId', 'believedBalanceBand', 'causeBand', 'causeState',
+      'attackerId', 'authoritySignature', 'believedBalanceBand', 'booksDirection',
+      'booksInterest', 'booksPublicReason', 'booksReason', 'causeBand', 'causeState',
       'costToContinueBand', 'costToStopBand', 'decidingTerm', 'homeFrontBand',
       'homeFrontComponents', 'homeFrontDurationBand', 'id', 'kind',
-      'momentumBand', 'reason', 'settlementIds', 'targetId', 'tick',
-      'trajectory', 'trajectoryMisread', 'truthBalanceBand',
+      'momentumBand', 'momentumBroken', 'opponentAuthoritySignature',
+      'opponentBelievedBalanceBand', 'opponentTruthBalanceBand', 'reason', 'rulerLawfulnessBand',
+      'rulerMoralityBand', 'rulerSecurityBand', 'settlementIds', 'targetId',
+      'tick', 'trajectory', 'trajectoryMisread', 'truthBalanceBand',
     ]);
     expect(Object.values(receipt).filter((value) => typeof value === 'number')).toEqual([9]);
     const numericLeaves = [];

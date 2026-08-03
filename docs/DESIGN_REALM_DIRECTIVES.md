@@ -268,6 +268,12 @@
 >   the seat, an H2 verdict removing a compromised officeholder (jailed, banished,
 >   turncoat), and the DM's own KILL and ASSIGN verbs. Each changes WHO answers the
 >   war question, and none of them currently changes the answer.
+>   ── IMPLEMENTATION CORRECTION (2026-08-02, live census): those verbs and verdicts
+>   do not uniformly change the seat. KILL marks a roster NPC dead, ASSIGN fills an
+>   institution role, and H2 opens a vacancy without installing a successor. WR-5
+>   therefore re-reads only after the legitimate-authority signature actually
+>   changes: ruling-seat NPC and/or governing-power transfer. A cause verb is not a
+>   proxy for that fact, and a pure rename is ignored.
 >   ── THE SUCCESSOR RE-READS ALL FOUR TERMS WITH THEIR OWN CHARACTER: the cause (do I
 >   hold my predecessor's quarrel at all?), the cost of continuing and the cost of
 >   stopping (what do I value, what will my seat survive?), weighted by their own
@@ -486,6 +492,11 @@
 >   therefore structurally harder than continuing it, with no pessimism term needed
 >   anywhere. That single fact explains protraction better than any weight could, and
 >   it is why long wars exist.
+>   ── IMPLEMENTATION CORRECTION (2026-08-02, live census): the pre-WR-5 path has
+>   only the suing court's decision; approving it mutates the relationship and recalls
+>   the armies immediately. WR-5 must insert the target court's accept/refuse read
+>   before those writes. The existing de-escalation and treaty path remains the sole
+>   acceptance writer.
 >   ── ⚠️ BUT DECLINING MUST NOT BE FREE, or the asymmetry becomes a deadlock
 >   generator. Every refusal accrues its own costs, all of them from existing state:
 >   the refusal IS A FACT and hardens the other side (a grievance the reasons layer
@@ -514,6 +525,10 @@
 >   BY a peace faction arrives owing them a peace, which D's re-read must honour or
 >   the coup was pointless. The Herald names the chain — refusal, coalition, removal,
 >   terms — because that sequence is a whole story and a table will remember it.
+>   ── IMPLEMENTATION CORRECTION (2026-08-02, live census): no current succession
+>   record can carry that demand. The admitted home is a bounded `seatTransitions`
+>   history inside the authoritative NPC-ladder record, written by one ladder helper
+>   for organic seat changes and applied governing-power transfers.
 > - ⭐⭐ 2026-08-01 AMENDMENT I — MULTI-PARTY AND COALITION WAR: EVERY RULING ABOVE
 >   EXTENDS, AND THE ARCHITECTURE ALREADY WANTS IT. Owner: expand all of this to wars
 >   between allied kingdoms and to three-or-more-party wars.

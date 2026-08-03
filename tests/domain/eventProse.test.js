@@ -38,6 +38,9 @@ const SAMPLE_INTERP = Object.freeze({
   settlement: 'Ashford', counterpart: 'Eastvale', band: 'guarded', good: 'grain', house: 'House Rowan',
   temple: 'Harvest Chapter', domain: 'hunt', lean: 'toward force', weight: 'more',
   answer: 'bolder', welcome: 'more readily', aspect: 'martial', practice: 'the use of force',
+  // WR-4/WR-5 governed war receipt slots.
+  term: 'concession', route: 'the Eastvale road', faction: 'House Rowan',
+  third_party: 'Greywatch', reason: 'the court chose to hold the field',
 });
 
 /** Resolve a pool entry (string or fn) with the sample interp. */

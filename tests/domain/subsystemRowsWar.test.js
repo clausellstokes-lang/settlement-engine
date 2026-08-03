@@ -474,7 +474,7 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     }
   });
 
-  test('the one termination row owns WR-4 receipt evidence without borrowing aliveness', () => {
+  test('the one termination row owns WR-4 and WR-5 receipt evidence without borrowing aliveness', () => {
     const rows = SUBSYSTEM_CERTIFICATION_REGISTRY
       .filter((candidate) => candidate.rule === 'warTerminationEnabled');
     expect(rows).toHaveLength(1);
@@ -490,6 +490,13 @@ describe('war-stack rows — the source trace behind every declared literal', ()
       'src/domain/worldPulse/warCosts.js',
       'src/domain/worldPulse/warCostsNews.js',
       'src/domain/worldPulse/warTermination.js',
+      'src/domain/worldPulse/warSeatBooks.js',
+      'src/domain/worldPulse/warPeaceDecision.js',
+      'src/domain/worldPulse/warPeaceRefusal.js',
+      'src/domain/worldPulse/warPoliticalLoop.js',
+      'src/domain/worldPulse/warRulingsEvidence.js',
+      'src/domain/worldPulse/warRulingsNews.js',
+      'src/domain/worldPulse/npcLadderKernel.js',
       'src/domain/worldPulse/eventProse.js',
     ]));
 
@@ -510,8 +517,36 @@ describe('war-stack rows — the source trace behind every declared literal', ()
       'decidingTerm',
       'familyId',
       'NO EXCLUSIVE ALIVENESS CHANNEL',
+      'authoritySignature',
+      'opponentAuthoritySignature',
+      'booksInterest',
+      'booksDirection',
+      'rulerSecurityBand',
+      'rulerLawfulnessBand',
+      'rulerMoralityBand',
+      'rulerId',
+      'opponentRulerId',
+      'factionId',
+      'patronId',
+      'rivalTriumphBand',
+      'momentumBroken',
+      'authorityChangeKind',
+      'authorityVerdictId',
+      'authorityDissolvedCauseTypes',
+      'opponentAuthorityDissolvedCauseTypes',
+      'opponentBelievedBalanceBand',
+      'opponentTruthBalanceBand',
+      'pulseRecord.warAuthorityVerdicts',
+      'rosterId',
+      'exposureKind',
+      'actualAction',
+      'interestServed',
+      'inheritedDemand',
+      'seatTransitions',
+      'two yeses',
+      'one refusal',
     ]) {
-      expect(row.aliveness.other, `missing WR-4 evidence token ${token}`).toContain(token);
+      expect(row.aliveness.other, `missing WR-4/WR-5 evidence token ${token}`).toContain(token);
     }
     for (const kind of [
       'war_trajectory_winning',
@@ -526,6 +561,24 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     ]) {
       expect(row.aliveness.other).toContain(kind);
     }
+    for (const kind of [
+      'sued_for_peace_seat',
+      'sued_for_peace_realm',
+      'war_continued_for_the_seat',
+      'war_ended_against_rival_triumph',
+      'peace_refused',
+      'refusal_cost_legitimacy',
+      'refusal_cost_ally_patience',
+      'ruler_books_compromised',
+      'war_party_overturns_peacemaker',
+      'peace_party_overturns_warmonger',
+      'succession_demand_inherited',
+      'successor_repudiates_war',
+      'successor_escalates_war',
+      'war_dissolved_by_verdict',
+    ]) {
+      expect(row.aliveness.other).toContain(kind);
+    }
     expect(row.aliveness.other).toContain('institution degradation is an events receipt');
     expect(row.aliveness.other).not.toContain('institution degradation is an adjudication');
     expect(row.invariants.map((invariant) => invariant.name)).toEqual(expect.arrayContaining([
@@ -535,6 +588,12 @@ describe('war-stack rows — the source trace behind every declared literal', ()
       'home_front_reuses_existing_degradation',
       'duration_never_invents_home_front_cost',
       'war_cost_news_is_transition_only',
+      'two_books_never_mint_a_fifth_term',
+      'bilateral_peace_requires_two_yeses',
+      'only_the_current_seat_inherits_a_war_demand',
+      'private_patron_books_never_enter_public_prose',
+      'seat_transitions_have_one_bounded_writer',
+      'verdict_dissolution_cannot_revive_the_exposed_quarrel',
     ]));
   });
 

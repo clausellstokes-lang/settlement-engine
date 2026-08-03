@@ -194,6 +194,67 @@ export function governingFactionOf(settlement) {
     || null;
 }
 
+/**
+ * Label-free epoch for legitimate-authority transfers.
+ *
+ * `previousGovernments` is intentionally bounded and legacy event transfers may
+ * carry a null tick.  Cause/tick tuples alone can therefore collide once the
+ * bound is full.  `transferRulingPower` also appends one `ascendant` marker to
+ * the exact winning roster entry on every real transfer; folding only those
+ * marker counts (by stable roster position/id) distinguishes that otherwise
+ * invisible transfer without making a display-name edit look like succession.
+ * This is a read helper only: dark campaigns gain no persisted bytes.
+ *
+ * @param {RulingPowerSettlement | null | undefined} settlement
+ * @returns {string}
+ */
+export function authorityTransferEpochFor(settlement) {
+  const ps = settlement?.powerStructure || {};
+  const history = Array.isArray(ps.previousGovernments) ? ps.previousGovernments : [];
+  const transfers = history.map((raw) => {
+    const row = raw && typeof raw === 'object' ? raw : {};
+    const tick = Number(row.tick);
+    return [String(row.cause || ''), Number.isFinite(tick) && row.tick != null ? Math.floor(tick) : null];
+  });
+  const factions = Array.isArray(ps.factions) ? ps.factions : [];
+  const lineage = factions.map((faction, index) => {
+    const modifiers = Array.isArray(faction?.modifiers) ? faction.modifiers : [];
+    const ascensions = modifiers.reduce((count, marker) => (
+      String(marker) === 'ascendant' ? count + 1 : count
+    ), 0);
+    return ascensions > 0 ? [index, typeof faction?.id === 'string' ? faction.id : null, ascensions] : null;
+  }).filter(Boolean);
+  return JSON.stringify([transfers, lineage]);
+}
+
+/**
+ * Governing-body labels from real power transfers, newest first.
+ *
+ * This is a read-only compatibility bridge for name-keyed ladder membership:
+ * legacy/generated NPCs may still name the old governing body after the transfer
+ * reshapes that body. Consumers may use these exact history rows as aliases while
+ * they migrate their own keyed state. Pure display renames never append a
+ * previous-government row, so they cannot masquerade as a transfer here.
+ *
+ * @param {RulingPowerSettlement | null | undefined} settlement
+ * @returns {string[]}
+ */
+export function previousGovernmentLabelsOf(settlement) {
+  const history = settlement?.powerStructure?.previousGovernments;
+  if (!Array.isArray(history) || !history.length) return [];
+  const labels = [];
+  const seen = new Set();
+  for (let index = history.length - 1; index >= 0; index -= 1) {
+    const row = history[index];
+    if (!row || typeof row !== 'object') continue;
+    const label = String(row.label || '').trim();
+    if (!label || seen.has(label)) continue;
+    seen.add(label);
+    labels.push(label);
+  }
+  return labels;
+}
+
 // ── Coup contenders ────────────────────────────────────────────────────────
 // Per-archetype coercion factor: raw power converts into coup capability at
 // different rates — a garrison couples better than a craft guild. Influence

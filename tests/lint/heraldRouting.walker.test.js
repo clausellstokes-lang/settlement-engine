@@ -245,6 +245,7 @@ describe('Herald routing table — totality + single-home + consistency', () => 
       expect(heraldSectionOfRecord({ outcome: { impactKind: 'pantheon_ascendancy' } })).toBe('faith');
       expect(heraldSectionOfRecord({ impactKind: 'harvest' })).toBe('trade');
       expect(heraldSectionOfRecord({ candidateType: 'war_levy' })).toBe('war');
+      expect(heraldSectionOfRecord({ impactKind: 'harvest', section: 'adjudication' })).toBe('trade');
     });
     test('routingKeyOf prefers structured nature fields, never the prose headline', () => {
       expect(routingKeyOf({ headline: 'A great siege', impactKind: 'roads' })).toBe('roads');

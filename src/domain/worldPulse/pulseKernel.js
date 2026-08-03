@@ -43,7 +43,7 @@ import {
   captureTransitionNewsEntries, recordCaptureTransitionsIntoHistory,
 } from './factionCapture.js';
 import { computeGuildStrengthBy, applyGuildToSettlement } from './thievesGuild.js';
-import { replaceOustedNpcs } from './successorNpc.js';
+import { applyOrganicNpcVerdicts } from './npcVerdictPulse.js';
 import {
   ensureFactionStates, pruneFactionStates, relaxFactionStates, seatNpcsIntoFactions,
   projectFactionStatesOntoSettlement,
@@ -80,8 +80,11 @@ import { advanceSettlementPolitics } from './settlementPolitics.js';
 import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons, peaceReasonsFor } from './peaceReasons.js';
 import { readWarTerminations } from './warTermination.js';
+import { warAuthorityVerdictsForPulse } from './warAuthorityVerdict.js';
 import { priorWarCostReceipt } from './warCosts.js';
 import { warCostTransitionNewsEntries } from './warCostsNews.js';
+import { applyVerdictWarDissolutions } from './warRulingsEvidence.js';
+import { warRulingNewsEntries } from './warRulingsNews.js';
 import { momentumActive, commitmentDepositsFor, advanceCommitments, entityThreshold, makeCommitmentDiscountFn, advanceMomentumCracks, MOMENTUM_TUNING } from './momentum.js';
 import { advanceIntervention, interventionActive } from './convergence.js';
 import { advanceNaval, navalActive } from './navalKernel.js';
@@ -514,6 +517,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // institution/faction. Flows through settlementMap →
   // settlementUpdates → persistence. (The replacement NPC is seeded further below.)
   const reformEvents = [];
+  // H2 verdicts are richer than npcAgency's organic exposure. Keep both products
+  // ephemeral here; only WR-5's exact two-flag receipt projection may persist the
+  // global NPC identity used to retire a founding corruption cause.
+  const h2AuthorityVerdicts = [];
+  const npcVerdictNewsEntries = [];
   // M9a DISSENT: the PRIOR-tick per-faction belief maps (read-last/write-next — the
   // advance runs below). Null (skipped) when beliefs are dormant ⇒ byte-identical.
   const beliefMapsPrior = beliefsActive(worldState) ? getSpatialLedger(worldState, 'beliefMaps') : null;
@@ -554,10 +562,28 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // legitimacy from the guild's strength, and stamp thievesGuildStrength.
     const gStrength = guildStrengthBy.get(String(sid));
     if (gStrength) s = applyGuildToSettlement(s, gStrength);
-    // An ousted NPC is replaced by a fresh successor
-    // who inherits their seat in the faction/power.
-    const oustedNames = exps.filter((e) => e.kind === 'ousted').map((e) => e.name);
-    if (oustedNames.length) s = replaceOustedNpcs(s, oustedNames, rng.fork(`replace:${sid}:${worldState.tick}`));
+    // H2 sentences each exact organically-ousted roster identity BEFORE the
+    // established successor pass. The successor must inherit the PRE-STRIP seat,
+    // while the disgraced person's saved alias copies remain stripped; otherwise
+    // either the new authority loses the office or the old faction copy keeps it.
+    const oustedNames = oustedExps.map((e) => e.name);
+    if (oustedNames.length) {
+      const snapshotItem = snapshot.byId.get(String(sid));
+      const verdicts = applyOrganicNpcVerdicts({
+        worldState,
+        settlement: s,
+        exposures: oustedExps,
+        settlementSeed: String(snapshotItem?.save?.seed || snapshotItem?.settlement?.seed || sid),
+        settlementId: String(sid),
+        settlementName: String(snapshotItem?.name || s?.name || sid),
+        tick: worldState.tick,
+        successorRng: rng.fork(`replace:${sid}:${worldState.tick}`),
+      });
+      worldState = verdicts.worldState;
+      s = verdicts.settlement;
+      h2AuthorityVerdicts.push(...verdicts.authorityVerdicts);
+      npcVerdictNewsEntries.push(...verdicts.newsEntries);
+    }
     // M9a DISSENT → council_schism: a faction reading the world materially
     // differently from the ruling coalition splits the council — a legible internal
     // stressor (an activeCondition; no mechanical coup this wave). Pure detection off
@@ -1149,7 +1175,14 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   }
   const warOutcomes = [...mobilizationOutcomes, ...war.outcomes, ...warReturnOutcomes, ...tradeWarOutcomes, ...occupationOutcomes, ...religiousOutcomes];
   const pressures = deriveSettlementPressures(postTimeSnapshot); const pIndex = pressureIndex(pressures);
-  const warTermination = simulationRules.warLayerEnabled === true && simulationRules.warTerminationEnabled === true ? readWarTerminations({ worldState, snapshot: postTimeSnapshot, pIndex, tick: worldState.tick }) : null;
+  const warAuthorityVerdicts = warAuthorityVerdictsForPulse(simulationRules, h2AuthorityVerdicts);
+  const warTermination = simulationRules.warLayerEnabled === true && simulationRules.warTerminationEnabled === true ? readWarTerminations({
+    worldState,
+    snapshot: postTimeSnapshot,
+    pIndex,
+    tick: worldState.tick,
+    authorityVerdicts: warAuthorityVerdicts,
+  }) : null;
   const warCostNewsEntries = warTermination?.receipts.flatMap((receipt) => (
     warCostTransitionNewsEntries({
       current: receipt,
@@ -1166,6 +1199,18 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       now,
     })
   )) || [];
+  const verdictDissolutions = applyVerdictWarDissolutions({
+    worldState,
+    receipts: warTermination?.receipts || [],
+    tick: worldState.tick,
+  });
+  worldState = verdictDissolutions.worldState;
+  postTimeSnapshot = { ...postTimeSnapshot, worldState };
+  const warRulingTransitionNewsEntries = warRulingNewsEntries({
+    evidence: verdictDissolutions.evidence,
+    snapshot: postTimeSnapshot,
+    now,
+  });
   const tierResource = evaluateTierResourceDynamics(worldState, postTimeSnapshot, pIndex, {
     tick: worldState.tick,
     interval: tickInterval,
@@ -1640,6 +1685,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         ageBand: e.ageBand, conjunctionKey: e.conjunctionKey,
       })),
     } : {}),
+    ...(warAuthorityVerdicts.length ? { warAuthorityVerdicts } : {}),
     ...(warTermination?.receipts.length ? { warTerminationReads: warTermination.receipts } : {}),
   };
   // Realm-scope arcs: promote stressors shared across many settlements into
@@ -1749,7 +1795,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const tempoReceiptNews = (tempoContext.active && tempoDeferred.length)
     ? tempoReceiptEntries(tempoDeferred, worldState.tick)
     : [];
-  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...causeLifecycleNews, ...beliefMisjudgmentNews, ...warCostNewsEntries, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries, ...thawEntries, ...tempoReceiptNews];
+  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...npcVerdictNewsEntries, ...causeLifecycleNews, ...beliefMisjudgmentNews, ...warCostNewsEntries, ...warRulingTransitionNewsEntries, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries, ...thawEntries, ...tempoReceiptNews];
   // Thread the pinned `now` (same as applyWorldPulse's regional-news append) so the
   // feed's `updatedAt` stamps the deterministic tick time, not the wall clock. Without
   // it, any tick that surfaces kernel-side news (realm arcs, aftermath, captures,
