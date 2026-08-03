@@ -633,3 +633,59 @@ priced cost of the ambition.
 > 4. **THE DOSSIER-NATIVE REGISTER IS NOT THIS LANE'S.** SP-6's fourth
 >    register belongs to the dossier lane, which is live on
 >    `src/domain/display/stateProse/` in the same tree.
+
+> **LANE P — THE DOSSIER-NATIVE STATE-PROSE PROJECTION: THE READER IS BUILT AND
+> DARK, 2026-08-03.** Five commits on `claude/composite-r4` in the minifold
+> worktree, nothing pushed. Dark by construction rather than by flag: no
+> component imports any of it, so the page is byte-identical.
+>
+> | Commit | What landed |
+> |---|---|
+> | `a277f53d` | **THE CORPUS BECOMES CODE.** `scripts/generate-dossier-state-prose.mjs` — one strict projection of both authored annexes into six desk leaves plus the causal leaf. The doc stays the source the chair vetoes; the runtime never parses markdown. MEASURED: 58 state blocks (DS-GEN-4 is folded into DS-STR-1 by §0h V1-a and keeps its id without a pool), 664 pools, 2,153 variants; 78 causal families, 468 variants. |
+> | `20a7ee24` `23d118eb` | **THE READER.** `stateProseKernel.js` (anchored liveness · fail-closed audience · the avalanche draw · canonical-at-zero), `causalDossierProse.js` (the [angle × arm] join reader), `economyStateProse.js` + `legibilityRung.js` (the reference desk in three rungs). |
+> | `20a7ee24` | **THE DM-FIELD PROJECTION RULE.** `dmFieldProjection.js` — machine prose renders BESIDE the DM's pen and has nowhere to write. |
+> | `<this row>` | The progress record. |
+>
+> **RECEIPTS.** 86/86 across the five lane-P files plus the domain any-cast and
+> domain-strict ratchets; eslint clean; domain strict typecheck clean on all
+> five modules. Two negative controls EXECUTED rather than asserted: a raw
+> `fnv1a32 % 8` over the degenerate family `wizard_news.{i}.applied.evt{i}`
+> reaches residues {0,2,4,6} — four of eight variants dead — where the finalized
+> draw reaches all eight; and injecting `s.arrivalScene = v` into the projection
+> leaf reds the no-writer source scan, which greens again on restore.
+>
+> **FIVE PROJECTION DEFECTS THE STRICT PARSER CAUGHT**, each of which would have
+> shipped as missing prose nobody reports: WRITER-4's compact one-line pools
+> (225 variants invisible to the per-line grammar); the second `[dm-only]` tag
+> carrying R-DOS-G's audience mark (89 covert variants that would have
+> published); two trailing authoring-note forms; four bold RULE headings taken
+> for pool labels, one of which split a causal family's pool in half; and the
+> arms extractor's hyphen-less character class, which dropped JF-CPL-14a's
+> `broker-town` arm and orphaned two variants — reachable by no arm, renderable
+> never.
+>
+> **WHAT THIS LANE DELIBERATELY DID NOT DO** — recorded so no one re-finds it as
+> a bug:
+>
+> 1. **FIVE OF THE SIX DESKS ARE UNWIRED.** power, defense, warFaith, stressors
+>    and general have their corpus projected and their leaves in place; their
+>    state→pool-key maps are not written. The economy desk is the reference
+>    shape and the pin pattern (every emittable key asserted against the shipped
+>    corpus) transfers verbatim.
+> 2. **NO COMPONENT CONSUMES THE READER.** The panels, the flag, and the
+>    section composition are a wave of their own. The reader's contract is
+>    settled and pinned, so that wave is wiring rather than design.
+> 3. **THE JOIN DERIVATION IS NOT WRITTEN.** `causalDossierProse` renders only
+>    joins it is handed; deriving them from `causes[]` / `sourceEventId` / CW-0's
+>    `receiptField` map is the caller's job and is unbuilt. This is deliberate —
+>    a reader able to select a family from a band would let the page invent
+>    history, which is why the module has no path to state at all.
+> 4. **DS-ECO-1's RUNG CUT IS A CHAIR CALL, VETO OPEN.** The annex names "a high
+>    rung / the middle rungs / a low rung" and leaves the boundary to the
+>    implementer; it is set at low = Subsistence–Poor, middle =
+>    Moderate–Comfortable, high = Prosperous–Wealthy.
+> 5. **THE SLOTS-LINE READING IS RECORDED, NOT ENFORCED TO ZERO.** Several
+>    blocks use a cluster-minted slot (§0c-2) without restating it on their own
+>    SLOTS line. The reader treats an undeclared slot exactly as a declared one,
+>    so this is corpus hygiene rather than a runtime hazard; the contract test
+>    ratchets the count downward only.
