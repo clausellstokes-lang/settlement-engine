@@ -202,7 +202,18 @@ ledger — never from a session digest.
 >   (five banded bases incl. the prosperity INDEX and population-as-columns, three-goal demand
 >   doctrine Herald-named, justice-scaled strain, remission, no clamps) + TB-LAW-7 THE HEALING
 >   LATTICE (five reducers — mutual-gain trade, co-belligerence, kin, common rite, affinity —
->   saturation-gated with hysteresis). J-CT-1..10 vetoable.
+>   saturation-gated with hysteresis). J-CT-1..10 vetoable. 
+> - 2026-08-03 (THE WAR AMENDMENTS CLOSE WHOLE @ minifold 7da2aabf). The full adversarial arc
+>   executed: 6-checker cohesion pass (128 findings — incl. the BUILT tribute/resource_share
+>   catalog rows, landed WR-1..5, the reserve floor, CPL-17's declared-empty vs the owner's
+>   population-levy order, the K4 merged-estimate inequity, gratitudeBonds' leverage refusal)
+>   → repair under chair rulings R-A..R-L → re-verify (122/127, zero HIGH) → 14 residuals
+>   cleared. Final: 2,697 lines, 23 waves (CV-1..4 · TB-1..7 + TB-1b the faith wing ·
+>   XW-1..8 incl. the secret protocol, the wedge, preventive pressure, subsidy/loan, the
+>   guarantee class, scorched earth OWNER-GATED), J-CT-1..34 each with veto consequence,
+>   remission-before-alms, the per-observer inequity read, rapprochement as the ONE new
+>   trigger token. CPL-17 carries the owner-override line; three cross-volume amendment
+>   requests recorded unassumed. SOL_QUEUE 23a final.
 > - 2026-08-02 (~04:30, THE NIGHT CLOSES WHOLE). CORRECTION PASS COMPLETE: 134 corrections
 >   across 11 docs by 7 agents (six correctors + the coherence sweeper), 20+3 unresolved
 >   forks all chair-ruled (2 routed to owner: annual credit cadence · WR-9 gate reading);
