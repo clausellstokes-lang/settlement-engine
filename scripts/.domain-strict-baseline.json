@@ -1,5 +1,5 @@
 {
-  "total": 1329,
+  "total": 1328,
   "files": {
     "src/domain/display/heraldCausalGrammar.js": 2,
     "src/domain/display/heraldCausalVoice.js": 3,
@@ -31,7 +31,7 @@
     "src/domain/worldPulse/envoyErrandRecords.js": 27,
     "src/domain/worldPulse/envoyErrandTransit.js": 8,
     "src/domain/worldPulse/envoyErrandVocabulary.js": 7,
-    "src/domain/worldPulse/envoyInterceptionStage.js": 126,
+    "src/domain/worldPulse/envoyInterceptionStage.js": 125,
     "src/domain/worldPulse/envoyNegotiationPictureBuilder.js": 37,
     "src/domain/worldPulse/envoyNews.js": 35,
     "src/domain/worldPulse/envoyPulse.js": 19,
