@@ -19,16 +19,34 @@
  * either route the site through domain/arcaneIdentity.js (almost always right), or add it
  * here WITH a stated reason for why the canonical detector does not fit.
  *
+ * ⚠️ THE EXEMPTION IS PER-ALTERNATION, NOT PER-FILE (closed 2026-08-03). This census used
+ * to `continue` on the whole file the moment its path appeared on the allowlist, which
+ * meant the ten most magic-literate modules in the estate — precisely the ones an author
+ * reaches for when they need to know whether a thing is arcane — were the ONLY ten where
+ * the L10-L12 class could regrow completely unseen. Four of them carry a mixed alternation
+ * today (arcaneIdentity, magicLedger, customContent, factionArchetypes); a fifth spelling
+ * added beside any of those four was invisible to this guard, and a guard with a hole
+ * shaped like its own subject matter is worse than none. Each entry below therefore
+ * records the EXACT alternation(s) its exemption covers. An alternation in an allowlisted
+ * file that is not recorded here is reported exactly like one in any other file, and a
+ * recorded alternation that has vanished is reported as a stale exemption. Signatures are
+ * the regex literal itself, so a pattern that merely MOVES within its file stays green
+ * while a pattern that CHANGES comes back for a decision.
+ *
  * CANNOT-CATCH (this guard's stated evasion gaps):
  *   (a) A classifier built from an ARRAY of keywords rather than a regex alternation —
  *       `['arcane','mage'].some(k => n.includes(k))`. magicFilter's ARCANE_INST_KW is
  *       exactly that shape and is on the allowlist by name, but a NEW array would slip
- *       past. Hand-search `includes(` near 'arcane' when auditing this class.
+ *       past. Hand-search `includes(` near 'arcane' when auditing this class. This is now
+ *       the guard's WIDEST gap, inside allowlisted files and outside them alike.
  *   (b) A single-token test (`/arcane/i.test(x)`) — no alternation, so no match here.
  *       Single tokens are also the least drift-prone shape, which is why the pattern
  *       requires two arcane tokens before it counts.
  *   (c) Anything outside src/ — the Deno edge tree is not scanned.
  *   (d) Tokens spelled through a variable or built at runtime.
+ *   (e) An arcane token and an ambiguous one split across two LINES of one multi-line
+ *       regex. Detection is line-scoped, which is what keeps the frozen baselines below
+ *       stable and readable; a reformatted multi-line pattern is the price.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -36,30 +54,61 @@ import { readFileSync } from 'node:fs';
 import { globSync } from 'node:fs';
 
 /**
- * THE ALLOWLIST — every module permitted to spell an arcane-token alternation, each with
- * the reason it is not simply a call to the canonical detector.
+ * THE ALLOWLIST — every module permitted to spell an arcane-token alternation.
+ *
+ * `why` is the reason the site is not simply a call to the canonical detector.
+ * `covers` is the EXACT set of mixed alternations that reason licenses, verbatim as the
+ * regex literal appears in source. An empty `covers` is the strongest kind of entry: the
+ * module is exempt on its vocabulary as a whole (arrays, unambiguous-only alternations)
+ * and has NO mixed alternation today, so the very first one to appear will be reported.
  */
 const ALLOWED = Object.freeze({
-  'src/domain/arcaneIdentity.js':
-    'THE CANONICAL DETECTOR (R-BLD-5). The certain/ambiguous split lives here by design.',
-  'src/domain/arcaneInstitutionIdentity.js':
-    'The institution catalog adapter. Its alternation is DERIVED from magicFilter.ARCANE_INST_KW, never re-typed.',
-  'src/domain/magicAssertionText.js':
-    'The world law\'s own assertion vocabulary — the question "does this text CLAIM magic works?", which is upstream of identity and shared with generationContext.',
-  'src/domain/magicFilter.js':
-    'ARCANE_INST_TAGS / ARCANE_INST_KW — the estate\'s authored catalog-strip vocabulary, reused BY the detector rather than duplicated.',
-  'src/domain/magicLedger.js':
-    'ARCANE_INSTITUTION_PATTERN answers a DIFFERENT question — "how much arcane infrastructure stands in this roster?", a census over already-generated institutions. Deliberately not folded (recorded in DESIGN_REALM_MAGIC_TOGGLE.md MG-3h); converting it moves magicProfile/capacityModel output.',
-  'src/generators/generationContext.js':
-    'MAGIC_ROLE_PATTERN — the generation world law\'s role vocabulary, a different axis from entity identity.',
-  'src/domain/customContent.js':
-    'INSTITUTION_CATEGORY_PATTERNS\' arcane row is this surface\'s own AUTHORED vocabulary for user-typed names, consulted only after the catalog tag (R-BLD-5) and read with the denial clauses struck.',
-  'src/generators/power/factionCategories.js':
-    'MAGIC_CERTAIN/AMBIGUOUS_KEYWORDS — this surface\'s own authored vocabulary, split per R-BLD-5 and run THROUGH the canonical procedure.',
-  'src/domain/factionArchetypes.js':
-    'NAME_RULES\' arcane row keeps its ordering slot in the first-match loop; the decision itself is delegated to the canonical detector.',
-  'src/lib/entities.js':
-    'INSTITUTION_KEYWORD_TAGS\' arcane row is a TAG BACKFILL for tag dispatch, not an identity classifier, and it is already W-K2-correct: it carries only UNAMBIGUOUS tokens (mage|wizard|arcane|spellcast|sorcer|conjur|enchant|magus) and files tower/academy/college under SCHOLARLY instead. Its own header documents it as a migration-era fallback that stops firing as the catalog gains declared tags. FOUND BY THIS CENSUS during MG-3h and left deliberately: converting it moves institutionTags() output estate-wide, which is not this lane\'s ruling. Recorded in DESIGN_REALM_MAGIC_TOGGLE.md\'s MG-3h block.',
+  'src/domain/arcaneIdentity.js': Object.freeze({
+    why: 'THE CANONICAL DETECTOR (R-BLD-5). The certain/ambiguous split lives here by design.',
+    covers: Object.freeze(['/tower|academy|college|sage/i']),
+  }),
+  'src/domain/arcaneInstitutionIdentity.js': Object.freeze({
+    why: 'The institution catalog adapter. Its alternation is DERIVED from magicFilter.ARCANE_INST_KW, never re-typed.',
+    covers: Object.freeze([]),
+  }),
+  'src/domain/magicAssertionText.js': Object.freeze({
+    why: 'The world law\'s own assertion vocabulary — the question "does this text CLAIM magic works?", which is upstream of identity and shared with generationContext.',
+    covers: Object.freeze([]),
+  }),
+  'src/domain/magicFilter.js': Object.freeze({
+    why: 'ARCANE_INST_TAGS / ARCANE_INST_KW — the estate\'s authored catalog-strip vocabulary, reused BY the detector rather than duplicated.',
+    covers: Object.freeze([]),
+  }),
+  'src/domain/magicLedger.js': Object.freeze({
+    why: 'ARCANE_INSTITUTION_PATTERN answers a DIFFERENT question — "how much arcane infrastructure stands in this roster?", a census over already-generated institutions. Deliberately not folded (recorded in DESIGN_REALM_MAGIC_TOGGLE.md MG-3h); converting it moves magicProfile/capacityModel output.',
+    covers: Object.freeze([
+      '/(tower|sanctum|college|conclave|circle|guild.*mage|enclave|atheneum|library.*arcane)/i',
+    ]),
+  }),
+  'src/generators/generationContext.js': Object.freeze({
+    why: 'MAGIC_ROLE_PATTERN — the generation world law\'s role vocabulary, a different axis from entity identity.',
+    covers: Object.freeze([]),
+  }),
+  'src/domain/customContent.js': Object.freeze({
+    why: 'INSTITUTION_CATEGORY_PATTERNS\' arcane row is this surface\'s own AUTHORED vocabulary for user-typed names, consulted only after the catalog tag (R-BLD-5) and read with the denial clauses struck.',
+    covers: Object.freeze([
+      '/(tower|college|conclave|circle|enclave|atheneum|library.*arcane|sanctum)/i',
+    ]),
+  }),
+  'src/generators/power/factionCategories.js': Object.freeze({
+    why: 'MAGIC_CERTAIN/AMBIGUOUS_KEYWORDS — this surface\'s own authored vocabulary, split per R-BLD-5 and run THROUGH the canonical procedure. Authored as Title-Case ARRAYS joined into a RegExp at module load, so it spells no alternation on any single line.',
+    covers: Object.freeze([]),
+  }),
+  'src/domain/factionArchetypes.js': Object.freeze({
+    why: 'NAME_RULES\' arcane row keeps its ordering slot in the first-match loop; the decision itself is delegated to the canonical detector.',
+    covers: Object.freeze([
+      '/mage|arcane|wizard|sorcer|alchem|warlock|magister|tower|academy|college|sage/i',
+    ]),
+  }),
+  'src/lib/entities.js': Object.freeze({
+    why: 'INSTITUTION_KEYWORD_TAGS\' arcane row is a TAG BACKFILL for tag dispatch, not an identity classifier, and it is already W-K2-correct: it carries only UNAMBIGUOUS tokens (mage|wizard|arcane|spellcast|sorcer|conjur|enchant|magus) and files tower/academy/college under SCHOLARLY instead. Its own header documents it as a migration-era fallback that stops firing as the catalog gains declared tags. FOUND BY THIS CENSUS during MG-3h and left deliberately: converting it moves institutionTags() output estate-wide, which is not this lane\'s ruling. Recorded in DESIGN_REALM_MAGIC_TOGGLE.md\'s MG-3h block.',
+    covers: Object.freeze([]),
+  }),
 });
 
 /**
@@ -78,6 +127,14 @@ const TOKENS = [
 const AMBIGUOUS = ['tower', 'academy', 'college', 'sage', 'conclave', 'enclave', 'atheneum'];
 
 const ALTERNATION_LINE = /\/[^/\n]*\|[^/\n]*\/[gimsuy]*/;
+
+/**
+ * Every alternation regex literal spelled on one line, in source order. This is the
+ * exemption SIGNATURE: it survives the line moving, and it does not survive the pattern
+ * changing — which is the trade the per-alternation allowlist is built on.
+ * @param {string} line
+ */
+const alternationsOn = (line) => line.match(new RegExp(ALTERNATION_LINE.source, 'g')) || [];
 
 /**
  * ⚠️ THE UNCONVERTED POPULATION — FROZEN 2026-08-03, SHRINK-ONLY.
@@ -123,22 +180,30 @@ describe('the arcane-spelling census (MG-3h / R-BLD-5)', () => {
     expect(files.length).toBeGreaterThan(500);
   });
 
-  it('no alternation mixes arcane tokens with ambiguous ones outside the allowlist', () => {
+  it('no alternation mixes arcane tokens with ambiguous ones outside the recorded set', () => {
     /** @type {string[]} */
     const found = [];
     for (const file of files) {
       const rel = file.replace(/\\/g, '/');
-      if (ALLOWED[rel]) continue;
+      const exemption = ALLOWED[rel];
       for (const [i, line] of readFileSync(file, 'utf8').split('\n').entries()) {
         if (!ALTERNATION_LINE.test(line)) continue;
         const lower = line.toLowerCase();
         const arcane = TOKENS.filter((t) => lower.includes(t));
         const ambiguous = AMBIGUOUS.filter((t) => lower.includes(t));
         if (!arcane.length || !ambiguous.length) continue;
+        const site = `${rel}:${i + 1} — arcane [${arcane.join(', ')}] mixed with ambiguous [${ambiguous.join(', ')}]`;
+        if (exemption) {
+          // An allowlisted FILE is not an allowlisted LINE. Only the alternations the
+          // exemption's reason actually covers ride; anything else is regrowth in the
+          // one place the old file-scoped skip could never see it.
+          const unrecorded = alternationsOn(line).filter((a) => !exemption.covers.includes(a));
+          if (!unrecorded.length) continue;
+          found.push(`${site} — UNRECORDED IN AN ALLOWLISTED FILE: ${unrecorded.join(' ')}`);
+          continue;
+        }
         if (KNOWN_UNCONVERTED[`${rel}:${i + 1}`]) continue;
-        found.push(
-          `${rel}:${i + 1} — arcane [${arcane.join(', ')}] mixed with ambiguous [${ambiguous.join(', ')}]`,
-        );
+        found.push(site);
       }
     }
     expect(
@@ -151,16 +216,26 @@ describe('the arcane-spelling census (MG-3h / R-BLD-5)', () => {
       + 'resolveArcaneIdentity / isArcaneInstitution), which reads the catalog\'s authored\n'
       + 'tag first and demands a functional-magic assertion before an ambiguous token\n'
       + 'decides anything. If the canonical detector genuinely does not fit, add the file\n'
-      + 'to ALLOWED above WITH the reason. Do not add it silently.\n',
+      + 'to ALLOWED above WITH the reason. Do not add it silently.\n'
+      + '\n'
+      + 'A site marked UNRECORDED IN AN ALLOWLISTED FILE is the same class landing inside\n'
+      + 'a module that already holds an exemption. The exemption covers the alternations\n'
+      + 'named in its `covers` list and nothing else — being one of the ten magic-literate\n'
+      + 'modules is not a licence to grow an eleventh spelling. Either route the new site\n'
+      + 'through the canonical detector, or add its literal to that file\'s `covers` and\n'
+      + 'extend `why` to say what the new alternation decides that the detector cannot.\n',
     ).toEqual([]);
   });
 
-  it('every allowlisted module still exists and still spells an alternation', () => {
+  it('every allowlisted module still exists, still spells an alternation, and states why', () => {
     // A shrink-only census: an entry whose file lost its pattern is a stale exemption and
     // must be DELETED, or the allowlist slowly becomes a licence rather than a record.
     /** @type {string[]} */
     const stale = [];
-    for (const rel of Object.keys(ALLOWED)) {
+    for (const [rel, exemption] of Object.entries(ALLOWED)) {
+      if (!exemption.why || exemption.why.length < 40) {
+        stale.push(`${rel} — allowlisted without a stated reason; an exemption is a decision, not a path`);
+      }
       /** @type {string} */
       let text;
       try {
@@ -178,6 +253,37 @@ describe('the arcane-spelling census (MG-3h / R-BLD-5)', () => {
     }
     expect(stale, 'Delete the stale allowlist entries; an exemption outlives its reason.')
       .toEqual([]);
+  });
+
+  it('every recorded exemption alternation is still spelled in its file', () => {
+    // The other half of the per-alternation allowlist. Without this, a `covers` entry
+    // survives the conversion of the very pattern it licenses, and the exemption silently
+    // widens back into the file-scoped skip this census was rebuilt to remove.
+    /** @type {string[]} */
+    const stale = [];
+    for (const [rel, exemption] of Object.entries(ALLOWED)) {
+      if (!exemption.covers.length) continue;
+      /** @type {string} */
+      let text;
+      try {
+        text = readFileSync(rel, 'utf8');
+      } catch {
+        stale.push(`${rel} — covers recorded but the file is gone`);
+        continue;
+      }
+      for (const alternation of exemption.covers) {
+        if (!text.includes(alternation)) stale.push(`${rel} — covers \`${alternation}\`, which the file no longer spells`);
+      }
+    }
+    expect(
+      stale,
+      'A RECORDED EXEMPTION ALTERNATION HAS VANISHED.\n'
+      + 'If you CONVERTED it to the canonical detector: delete it from that file\'s\n'
+      + '`covers` — that locks the win, and if the list empties, the very next mixed\n'
+      + 'alternation to appear in the file gets reported.\n'
+      + 'If you merely REWROTE it: paste the new literal in, and check that `why` still\n'
+      + 'describes what it now decides.\n',
+    ).toEqual([]);
   });
 
   it('the unconverted baseline only ever shrinks', () => {
