@@ -13,6 +13,43 @@
  * To regenerate after an INTENTIONAL output change, run:
  *   UPDATE_GOLDEN=1 npx vitest run tests/property/generatorGoldenMaster.test.js
  * and review the diff before committing.
+ *
+ * ── SHIFT RECORD ────────────────────────────────────────────────────────────
+ * A hash manifest cannot show WHY it moved, so every re-record is written down
+ * here. Re-recording without adding a row is a deleted alarm.
+ *
+ * 2026-08-03 — THE ICON SWEEP (all 525 rows moved). Cause: d9a1ea5a, the owner's
+ *   icon-sweep directive of 2026-08-03 ("remove ALL icons of any kind that are
+ *   not logos"), which deleted 94 dead `icon: ""` slots from the src/data files
+ *   that feed generation (resourceData.js, stressTypes.js, supplyChainData.js)
+ *   and the `icon` fields of computeActiveChains.js's INSTITUTIONAL_SERVICE_MAP.
+ *   PROVEN SHAPE-ONLY BEFORE RE-RECORDING: all 525 settlements were regenerated
+ *   at HEAD and at HEAD-with-d9a1ea5a-reverted and deep-diffed field by field.
+ *   The complete census of differing path-templates is FIVE, every one a key
+ *   REMOVAL of a dead icon slot, none of them a value change:
+ *     $.economicState.activeChains[*].needIcon            6,676 removals / 477 rows
+ *     $.economicState.activeChains[*].resourceIcon        2,214 removals / 453 rows
+ *     $.economicState.institutionalServices[*].icon       1,409 removals / 260 rows
+ *     $.stress.icon                                         516 removals / 516 rows
+ *     $.stressors.icon                                      516 removals / 516 rows
+ *   Zero `changed`, zero `added`, zero array-length moves, zero key-order moves:
+ *   no name, count, id, or rng draw moved. TOTALITY: the pre-sweep regeneration
+ *   reproduced the OLD manifest on all 525 rows (0 mismatches), which proves the
+ *   sweep is the ONLY cause of the drift and that nothing else had crept in.
+ *   Old values removed were "" and the orphan U+FE0F variation selector — dead
+ *   strings an earlier emoji strip had left behind, rendering nothing.
+ *   EXPECT A SECOND ICON RE-RECORD (deliberately deferred here, not a bug to
+ *   re-find): the sweep removed only the slots whose value was the orphan
+ *   U+FE0F, so 4,462 `activeChains[*].resourceIcon: ""` slots STILL ship in
+ *   generated output, sourced from 56 residual `resourceIcon: ''` fields in
+ *   src/data/supplyChainData.js (plus 2 `needIcon: ''` in
+ *   src/domain/inferSupplyChains.js). tests/lint/copyCorruption.test.js SIG 1
+ *   cannot see them: its regex is /\bicon\s*[:=]\s*(?:""|'')/, and `\bicon`
+ *   is case-sensitive, so camelCase `resourceIcon`/`needIcon` never match.
+ *   Closing that remainder will move these hashes again; that is expected.
+ * 2026-08-03 — HK-3 (46255ad5), theme-aware hook draws. Owner-ruled; do not redo.
+ * 2026-08-01 — I1 (99974c4a), four houses that trade in what is true. Owner-signed.
+ * 2026-07-30 — mountain_pass seasonal tier (aa33eba5), a golden ADDITION. Owner-signed.
  */
 
 import { describe, it, expect } from 'vitest';
