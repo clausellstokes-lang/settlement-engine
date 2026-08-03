@@ -184,6 +184,49 @@ taken. Engineering delegation to Opus is otherwise re-affirmed at full scope.
 row; it was moved up INTO the NEW ROWS table 2026-08-02 (self-audit), text verbatim.]
 
 
+## CHAIR RULINGS 2026-08-03 — THE WR-8 GATE ANSWERED (CR-WR8-A..D, each vetoable;
+## answers the ⛔ WR-8 STOP row above; the volume's §5 gate text is amended to match)
+**CR-WR8-A (question b — THE STRUCTURE CARRIES THE MEMORY):** the razing FLIPS THE
+EDGE TYPE to `hostile` on every existing victim-adequate edge the holder shares with
+the razer. Durable structure, existing vocabulary, an existing evolution surface — no
+new writer class. The axes spike and decay exactly as they always do: the emotion
+fades, the structure remains, and rapprochement stays a real road (the healing lattice
+can re-type the edge over years, at which point the license decouples — "we forgave,
+and the license lapsed unused" is a reachable receipt, and the license POSITIVE-
+REACHABILITY pin still binds). The D5 `undying` arm is the road NOT taken:
+`memoryHorizon` is declared-only content today, and making the razing the engine's
+first author of the facet would mint a new persistence surface mid-wave — an
+owner-gated class. Recorded, re-openable with INT-5.
+**CR-WR8-B (question c — "EXTREME" IS A COMPOSITE, NOT A SCALAR):** edge type
+`hostile` AND resentment at/above its own type baseline (0.78) AND a LIVE grievance or
+atrocity-casus against the razer at/above the LICENSE-ADEQUACY band — one existing
+band reused, no new band minted. This threads the ubiquitous-or-unreachable fork the
+gate measured: the type conjunct makes extreme REACHABLE (the flip plus rest reaches
+0.78 without an eternal spike), the live-grievance conjunct breaks UBIQUITY (a
+hostile-at-rest pair with no live grievance is not extreme). The composite serves all
+three consumers from one answer — R's own extremity gate, the extremity negative-case
+pin (now writable in BOTH directions: victorious+hostile+no-live-grievance cannot
+raze; healed-below-baseline cannot raze even holding a grievance), and the license
+coupling. The volume's scoping sentence is corrected alongside: (c) was never confined
+to the license slice. J-WR-10 honored — no new relationship vocabulary anywhere.
+**CR-WR8-C (ONE ATROCITY SPELLING):** `atrocity_answer` ↔ `atrocity_atoned` —
+J-WR-14's own spelling, prefix-stable (one grep family `atrocity_*`), and the mirror
+keeps the atrocity as its subject, which is how the Herald receipts a resolution. The
+2026-08-02 block's `atrocity_outrage` ↔ `atonement_accepted` is RETIRED before any
+code carries either — a zero-cost retirement; the older block below stays verbatim as
+history and THIS ruling supersedes it by name.
+**CR-WR8-D (WIRED, NOT DARK — THE SEQUENCING):** WR-8 WAITS for THE DECOMPOSITION
+WAVE's war tranche. Unlike WR-7's pure evaluators, conquest and the razing WRITE world
+state; a fourth consecutive dark wave — this one a writer — is the inferior option
+under the owner's risk law (the best option is wired-and-proven, and the cost of
+decomposing first is merely sequencing). The war tranche opens both pulse mouths
+(applyWorldPulse 1395, pulseKernel 1580) plus envoyErrand (2638) and peaceTerms
+(1680), and the SAME tranche discharges the three recorded wiring deferrals
+(WR-7b/7c/7d pulse stages, stage-neuter negative controls per R-BLD-1, dormancy
+goldens byte-identical with the flags dark). WR-8 then builds WIRED. Dispatched as the
+war lane's next work the day of this ruling.
+
+
 ## CHAIR RULINGS 2026-08-02 — the correction pass's 20 unresolved items (each was a
 ## genuine fork the correctors rightly refused to decide; ruled here, vetoable)
 RATIFIED AS PROPOSED: chat thread/upload lifecycle defaults (world-delete purges both

@@ -112,7 +112,7 @@ docs/GENERATION_CONTRACTS.md + the gate discipline in §10.
 
 | Substrate | Where | State |
 |---|---|---|
-| Casus taxonomy: 13 war reasons + 13 peace mirrors (CORRECTED 2026-08-02 (self-audit): 13, not 14 — bijection means 13↔13; verified by enumeration, PEACE ends at `common_rite`), walker-enforced totality+bijection | `warReasons.js` (WAR_REASON_TYPES / PEACE_REASON_TYPES / REASON_MIRRORS) | BUILT incl. `opportunism` (predation) + `sacred_claim` (holy war) at HEAD 99e2d54f |
+| Casus taxonomy: 13 war reasons + 13 peace mirrors (CORRECTED 2026-08-02 (self-audit): 13, not 14 — bijection means 13↔13; verified by enumeration, PEACE ends at `common_rite`; RE-CORRECTED 2026-08-03 under J-WR-13: the live tree holds **15↔15** — `lineage_claim ↔ kinship_bond` (WR-3) and `alliance_obligation ↔ obligation_discharged` (WR-4/WR-6) landed since; the atrocity pair mints as #16), walker-enforced totality+bijection | `warReasons.js` (WAR_REASON_TYPES / PEACE_REASON_TYPES / REASON_MIRRORS) | BUILT incl. `opportunism` (predation) + `sacred_claim` (holy war) at HEAD 99e2d54f |
 | Reasons are state-derived, decay-inherent, zero-RNG, per-pair directed ledger | `spatialLedgers.warReasons`, key `${from}>${to}` | BUILT — dissolution (amendment C) is structurally half-present already |
 | Peace terms: budget/appraisal/draft/compliance/fraying, believed-advantage evaluator with injectable belief (`truthFor`) | `peaceTerms.js` (TERM_CATALOG, believedAdvantage, appraiseLoserPortfolio, draftTerms, advanceTreaties…) plus the dependency-light `treatyClock.js` duration/clock leaf | BUILT — the terms MATH the envoy program transports; ⚠️ TIME-BASE FLAG (2026-08-02, self-audit): prices a "year" at 12 ticks while the engine tick is one week — WR-0c item (4) rules it before any WR duration work builds on it [STATUS CORRECTED 2026-08-02: item (4) LANDED — new treaties use the canonical 52-week year; persisted treaties retain their historical cadence through an explicit marker; see the item-(4) receipt below]; ⚠️ the `truthFor` seam is ONE closure for BOTH parties and advanceTreaties exposes no seam at all — see §3 THE SEAM MECHANICS |
 | Treaty enforcement: readiness cap, war block, occupation hold; tribute/reparations/restitution move real grain | `treatyEnforcement.js`, `treatyTransfer.js`, `warIntent.js` | BUILT + GATED (wave W1; landed in the WR-0 W1 commit) |
@@ -1023,12 +1023,30 @@ ransom dwell + price bands, vetting-quality derivation.
   of magnitude faster than the license unless the razing flips the edge TYPE,
   which R2 never says; (3) no type baseline exceeds hostile's resentment 0.78, so
   "the axes at their authored extreme" resolves to either nearly-unreachable or
-  ubiquitous unless the band is named. The license slice DOES NOT BUILD past this
-  gate until the validation chair rules: whether a razing MINTS an edge to
-  non-neighbour holders (or the license is restricted to existing-edge holders);
-  whether the atrocity flips the edge TYPE (durable) or only the axes (decaying);
-  and which authored band "extreme" names — J-WR-10 constrains all three (no new
-  relationship vocabulary). STOP-and-report if reached unruled.
+  ubiquitous unless the band is named. **RULED 2026-08-03 — THE GATE IS OPEN**
+  (chair block CR-WR8-A..D in FABLE_VALIDATION_QUEUE.md; all three questions
+  answered, each vetoable): (a) the license is restricted to EXISTING-EDGE
+  holders — a razing mints no edge to strangers (ruled 2026-08-02; this text
+  had never been told); (b) the razing FLIPS THE EDGE TYPE to `hostile` on
+  every existing victim-adequate edge the holder shares with the razer — the
+  durable structure carries the memory while the axes spike and decay as they
+  always do, and the healing lattice can re-type the edge over years, at which
+  point the license decouples (the D5 `undying` memoryHorizon arm is EXPLICITLY
+  NOT taken: the facet is declared-only content, and the razing must not become
+  the engine's first author of a new persistence surface — recorded, re-openable
+  with INT-5); (c) "extreme" is the COMPOSITE, not a scalar: edge type `hostile`
+  AND resentment at/above its own type baseline (0.78) AND a LIVE grievance or
+  atrocity-casus against the razer at/above the LICENSE-ADEQUACY band (one band
+  reused, none minted). The type conjunct makes extreme reachable; the
+  live-grievance conjunct breaks ubiquity. The SAME composite serves R's own
+  extremity gate, the extremity negative-case pin (writable in both directions),
+  and the license coupling — the scoping sentence formerly here ("the license
+  slice does not build past this gate") is corrected: (c) reached the razing
+  slice too, and both are now unblocked together. J-WR-10 honored: no new
+  relationship vocabulary anywhere in the answer. SEQUENCING (CR-WR8-D): WR-8
+  builds WIRED, after THE DECOMPOSITION WAVE's war tranche opens both pulse
+  mouths — not as a fourth dark wave, because conquest and the razing write
+  world state.
 - **Pins:** the overwhelming negative case; the extremity negative case
   (victorious-but-not-extreme cannot raze); the initiation gate (non-evil
   initiation structurally unreachable — walk the intent table); license coupling
