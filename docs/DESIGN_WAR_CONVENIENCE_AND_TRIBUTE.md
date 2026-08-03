@@ -349,6 +349,94 @@ feature; disclosed, flag-fenced, receipted).
   amendment machinery — mercy as receipted policy, buying strain relief and
   a credibility credit at the price of revenue; the taper is tellable.
 
+### TB-3b — THE ECONOMIC STATECRAFT COMPLETIONS (owner addendum 2026-08-02:
+### "all the fixings you would look at in war," commercial edition)
+
+Confirmed COVERED BY COMPOSITION, with pointers, no new machinery: growth
+limitation (the containment doctrine's material skim, TB-2, +
+trade_exclusivity's primacy lock); supply REDIRECTION (provision terms
+toward allies + embargo/severance toward enemies — two pairwise
+instruments; a "redirect" verb would violate law I and is not built);
+the resentment-led refusal (the grievance/strain read feeding the embargo
+lever and severance drafting, now NAMED and receipted — "No grain of ours
+crosses their gates" — pool under the content-depth floor). THE SELF-PRICING
+LAW, stated: market_exclusion is the EMBARGOED party's casus (TR-1's own
+mirror), so every refusal manufactures the refused party's grievance — the
+blockade of the hated town is also the minting of its war reason; no
+embargo is free, ever.
+
+NEW TERM ROWS (GR-3 mints per R3; executors in lazy leaves per R2; both
+under the no-producer-less-term law with named producers AND consumers):
+- **`embargo_compact`** — the commercial mutual_defense: a PAIRWISE pledge
+  of joint refusal toward a NAMED third party. Producers: the economic
+  shared-threat read (the corner-monopolist or rising trade power as
+  common enemy — GR-2's trigger family gains the economic arm) and
+  grievance-led drafting. Consumers: dispatch EV and the exclusion reads
+  (the pledge BITES where caravans choose). THE TRADE BLOC IS A WEB of
+  these compacts — no bloc object (CT-LAW-1's commercial twin); it forms,
+  frays, and fragments exactly as war coalitions do, with CV-1's exit
+  vocabulary applying whole. Compliance under fog: THE SMUGGLERS' ROAD IS
+  THE DEFECTION LANE — the ally secretly trading with the target is a
+  defaulted term + a betrayal-market entry when caught, and the catching
+  rides the existing believed-smuggling/exposure machinery.
+- **`route_restriction`** — the economic demilitarization clause: a
+  negative obligation against forming/chartering NEW routes with named
+  parties. Producer: the containment doctrine's drafting. Consumer: route
+  formation/chartering reads it (a biting consumer exists — the term is
+  legal parchment with live teeth from day one).
+- **`trade_cap` is CUT** — proposed and rejected under the non_intervention
+  tombstone: no consumer in the tree bites a volume cap; the token returns
+  only when a wave names its producer AND its biting consumer in the same
+  stroke. Recorded as a decision, not an omission.
+THE OLIVE-BRANCH ARM (owner addendum — trade as an INTENTIONAL means of
+making friends): the peacetime formation triggers gain the rapprochement
+arm — a seat may PROPOSE trade specifically to mend a wounded pair, the
+deliberate lane of the healing lattice standing beside the burial and
+remission: priced (the proposal across a hot ledger costs posture and may
+be refused with the standing grievance as the recorded reason), receipted,
+and effective even AT the saturation band because it is a deliberate act,
+not ambient contact. Its acceptance still requires both pictures positive —
+you cannot mend with a deal the other side reads as tribute.
+
+THE PRAGMATIC OVERRIDE (owner addendum — economic benefit weighs no matter
+who it comes from): grievance and resentment COLOR the formation and
+acceptance thresholds; they never veto a sufficiently beneficial deal —
+the E3 shape applied to commerce: a court whose books are desperate may
+trade with the hated, and the act is receipted and PRICED on the other
+ledgers (the commons judge the seat that sells to the butchers of the
+next valley; the conscience machinery reads the counterparty; legitimacy
+pays where the crowd cares). Gold has no grudge; the town that takes it
+still does.
+
+THE INEQUITY READ (owner addendum — bad deals and great deals EXIST):
+deal quality is a DERIVED, per-instrument read — the two own-picture
+valuations compared at signature and RE-READ as pictures shift — banded
+closed {boon, fair, lean, extractive}. Bad deals arise two honest ways,
+both already lawful: BELIEF ERROR (a picture was wrong — the wrong-market
+tragedy at treaty scale; the deal was fair in the mind and lean on the
+ground) and COMPULSION (the least-bad acceptance under dependency or
+weakness — signed, valid, and resented). Consumers: the HEALING RATE
+(TB-LAW-7 sharpened — a boon mends fastest, a fair deal mends, a lean one
+mends nothing, an extractive one ACCRUES strain through TB-LAW-5's justice
+lens even while honored: the unequal treaty is a slow wound wearing a
+seal); RENEGOTIATION (GR-5's from-strength machinery is exactly the lean
+deal's exit — the read names which instruments are ripe); and THE HERALD
+(deal quality is tellable: "The wool went cheap, and both sides knew it" —
+pools under the floor). A deal fair at signing that the world's movement
+turns extractive is the RE-READ's story — the resentment of changed
+circumstance, receipted when the band crosses.
+
+The war-parallel kit is hereby COMPLETE and auditable in one line: reasons
+(TR-1) · contests (tradeWar, the corner) · coalitions (embargo webs) ·
+envoys (factors) · intelligence (believed markets, the lure) · tribute
+(TB-1..3) · termination (severance, renegotiation) · healing (TB-LAW-7 +
+the olive branch) · the deal itself (the inequity read) · proxy
+discipline (§5). Pins: the embargo web forms on an economic
+shared-threat fixture; a caught defection defaults + prices; the
+self-pricing law (every embargo mints the target's grievance — asserted);
+route_restriction blocks a charter on a real fixture; the cut trade_cap
+stays cut (source scan).
+
 ### TB-4 — THE STRAIN + THE MEASURE
 
 The justice-scaled strain law implemented: strainDelta = ask magnitude
