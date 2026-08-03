@@ -853,6 +853,35 @@ congress, no multilateral table, ever.
 - **Per-envoy term-sheets (K4):** divergent sheets from different counterparties
   are competing offers before the vote; failure to choose IS the close-vote case.
 
+> **Progress — WR-7c's EVALUATORS landed 2026-08-03; its PULSE WIRING is owed.**
+> Three pure leaves ship dark and whole: `envoyTestimony.js` (the credibility
+> ladder over envoy accounts plus the ruler's belief-selection, receipted as a
+> political act), `coalitionRatification.js` (the member's own-picture ballot,
+> the weighted majority of legitimate powers, and the coalition's veto of a
+> member's ruler), and `compromiseRound.js` (the derived round index, the
+> monotone drain-accelerated widening, the both-sides mandate, and the
+> convergence projection). K4 is structural: one picture per ballot, never the
+> same picture twice, no signature anywhere that takes two, and every selected
+> testimony digest byte-equal to exactly one input account's own. The K3 pin set
+> extends to all three — `coalitionRatification` reaches the terms math ONLY
+> through `negotiationPictures`, and the other two reach nothing at all.
+> THE UNANIMOUS-IN-JUDGMENT, SPLIT-IN-FACT pin is executed against sheets the
+> real `negotiateFromPictures` producer mints, with a same-picture negative
+> control proving the split is caused by the divergent pictures and nothing else.
+>
+> ⚠️ **DEFERRED, NOT DROPPED — the live pulse wiring.** Ratification belongs at
+> the home-delivery seam in `envoyPulse.js`, and a compromise round must re-mint
+> errands through `envoyErrand.js`. All three files the wiring must edit —
+> `envoyErrand.js` (2,638), `applyWorldPulse.js` (1,395) and `peaceTerms.js`
+> (1,680) — sit at EXACTLY their R-BLD-6 baseline with zero headroom, so a single
+> added effective line reds eslint at the pre-commit hook, and R-BLD-6 forbids
+> raising a baseline again outside an explicit chair ruling with a measured
+> census. Raising one here, for a wave whose whole architecture ships without it,
+> would be precisely the licence R-BLD-6 says the file is not. The wiring is
+> therefore owed to THE DECOMPOSITION WAVE and must land in the slice that brings
+> `envoyErrand.js` under its ceiling — recorded in the validation queue, not a
+> bug to re-find. Nothing in this wave is lit, no golden moved, no soak ran.
+
 **WR-7d — RANSOM + THE COMPROMISED ENVOY (O, Q).**
 - **Captivity → ransom (O):** dwell-gated (band; the dwell read is WR-7b's hold
   ledger `heldSinceTick` — corrected 2026-08-02); the claim rides the I2
@@ -1192,7 +1221,12 @@ alignment consequences · WR-9 envelope shapes. Every one banded, none a bare fl
 on a surface, all in one tuning table per wave (the house idiom).
 Added 2026-08-02 (self-audit): WR-6 join-bar + refusal-cost bands · WR-8
 atrocity-casus decay + the feasibility-asymmetry DIRECTION (a signed band, pinned) ·
-the peace-terms TIME-BASE constant (WR-0c item 4 — [RULING LANDED 2026-08-02:
+Added 2026-08-03 (WR-7c build): the RATIFICATION POWER WEIGHTS (minor/ordinary/
+principal — a coalition is not one-settlement-one-vote) · the close-band share ·
+the widening step, its band ceiling, and the DRAIN ACCELERATION table that turns
+WR-4's home-front read into L's fourth force. All five live in
+`RATIFICATION_TUNING` / `COMPROMISE_ROUND_TUNING` and are raw-authored, unsoaked.
+The peace-terms TIME-BASE constant (WR-0c item 4 — [RULING LANDED 2026-08-02:
 current `52 == INTERVAL_WEEKS.one_year`, persisted legacy `12`, selected per treaty;
 the original "whichever arm" fork is closed]) · the map km-scale for the transit kernel's mode
 table (J-D11(b); does not exist in the tree — owner-signed when the mode table

@@ -1,5 +1,5 @@
 /**
- * envoyK3BeliefSeam.test.js — WR-7b's K3 structural pin set.
+ * envoyK3BeliefSeam.test.js — the K3 structural pin set (WR-7b, extended WR-7c).
  *
  * Amendment K3 (NOBODY IS EVER CURRENT) says no negotiation path — terms, vote,
  * interceptor judgment, close-vote comparison, feasibility — may read true world
@@ -57,7 +57,22 @@ const TRUE_STATE_TOKENS = Object.freeze([
   'foodSecurity',
 ]);
 
-/** The negotiation set: every module WR-7b lets a negotiation read through. */
+/**
+ * The negotiation set: every module a negotiation is let read through.
+ *
+ * WR-7c extends it by three, and the extension is the point of the amendment's
+ * own list — "terms, VOTE, interceptor judgment, CLOSE-VOTE COMPARISON,
+ * feasibility". The ratification vote and the compromise round are negotiation
+ * paths as surely as the parlay is, so they are pinned the same way.
+ *
+ * `envoyTestimony.js` and `compromiseRound.js` are pinned to the EMPTY import
+ * list: they consume closed bands their callers already read through belief
+ * machinery, and there is no module they may reach for. `envoyTestimony`
+ * deliberately re-declares the reliability ladder rather than importing
+ * brokerageStamps (which reads institutions); a pin in
+ * envoyTestimonyWr7c.test.js asserts the two spellings are equal, so refusing
+ * the import costs no drift.
+ */
 const NEGOTIATION_MODULES = Object.freeze({
   'src/domain/worldPulse/envoyErrand.js': [
     './namedPersonTransit.js',
@@ -72,6 +87,11 @@ const NEGOTIATION_MODULES = Object.freeze({
   'src/domain/worldPulse/foreignGuestHold.js': [
     '../spatial/distanceRead.js',
   ],
+  'src/domain/worldPulse/coalitionRatification.js': [
+    './negotiationPictures.js',
+  ],
+  'src/domain/worldPulse/envoyTestimony.js': [],
+  'src/domain/worldPulse/compromiseRound.js': [],
 });
 
 const TRUTH_READER = 'src/domain/worldPulse/warDeployment.js';
@@ -127,6 +147,32 @@ describe('WR-7b K3 — nobody is ever current', () => {
     // proven-present import, not a collection that drifted away.
     expect(source).not.toContain('advanceTreaties'); // anchored: import list asserted above
     expect(source).not.toContain('worldState'); // anchored: import list asserted above
+  });
+
+  test('WR-7c: the vote reaches the terms math only through the two-picture wrapper', () => {
+    const source = code('src/domain/worldPulse/coalitionRatification.js');
+    expect(source.length, 'the ratification module read empty').toBeGreaterThan(1000);
+    // The ballot is drawn under one member's own frozen picture, through the
+    // same wrapper the parlay uses. A direct peaceTerms import here would be a
+    // second terms evaluator — the design defect the seam ruling names.
+    expect(importsOf(source)).toEqual(['./negotiationPictures.js']);
+    expect(source).not.toContain('peaceTerms'); // anchored: import list asserted above
+    expect(source).not.toContain('worldState'); // anchored: import list asserted above
+  });
+
+  test('WR-7c: the two band-only leaves reach nothing at all', () => {
+    for (const rel of [
+      'src/domain/worldPulse/envoyTestimony.js',
+      'src/domain/worldPulse/compromiseRound.js',
+    ]) {
+      const source = code(rel);
+      expect(source.length, `${rel} read empty`).toBeGreaterThan(1000);
+      // Zero imports is the strongest form of this pin: a module that reaches
+      // nothing cannot reach truth, and adding the first import is a reviewed
+      // event rather than a refactor detail.
+      expect(importsOf(source), `${rel} import list`).toEqual([]);
+      expect(source, `${rel} must not name worldState`).not.toContain('worldState'); // anchored: see above
+    }
   });
 
   test('GUARD-THE-GUARD: the same scan finds those tokens where truth is read', () => {
