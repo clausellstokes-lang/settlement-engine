@@ -226,6 +226,20 @@ ledger — never from a session digest.
 >   surfaces, 2,149 variants (9a9094a3) · the completion pass (06afec27). ~10,600 authored,
 >   adversarially verified sentences across 12 annex files; SOL_QUEUE item 24 gathers the
 >   wiring. Every verifier PASS; every chair/writer ruling recorded vetoable in-file.
+> - 2026-08-03 (THE BUILD TAKEOVER — Sol out of usage; Fable chairs, Opus implements+verifies,
+>   owner away under total delegation + pre-approval; 30-min heartbeat). FIVE CYCLES LANDED:
+>   ⭐ WR-7b WHOLE @ minifold e51ec17e (54 files +12,043/−1,264; interception/parlay/hold/
+>   two-pictures; reachability proven by stage-neuter negative controls; single-writer FAMILY
+>   per R-BLD-4; R-BLD-6 re-baselined the size ratchet at measured truth — 17 exact entries,
+>   the ratchet was broken at HEAD and the wave REPAIRED it; burn-down owed at THE
+>   DECOMPOSITION WAVE) · MG-3a-h ALL twelve magic leaks closed (R-BLD-5: the catalog tag is
+>   canonical) + MG-4 harness @ a80c0be4/eea5a6c6 · HK-1+HK-2 · the FOUNDERS' HALL C1-C6 ·
+>   profile identity + civility guard (6 commits; the veil moved to the PAYLOAD BOUNDARY @
+>   5283557a after a live bypass was caught by probe) · THE LEGACY RETROFIT LIVE @ 1b9b2b10
+>   (population desk, first pools speaking) · live defects fixed en route (factionPairOf
+>   ReferenceError; MG-4's false recorded census corrected BEFORE any band signing) · content
+>   quality chain closed (uniqueness 115→11 irreducible; one-kind-one-pool @ 50b69622).
+>   Rulings R-BLD-1..6 + method hazards in memory fable-build-era-takeover.
 > - 2026-08-02 (~04:30, THE NIGHT CLOSES WHOLE). CORRECTION PASS COMPLETE: 134 corrections
 >   across 11 docs by 7 agents (six correctors + the coherence sweeper), 20+3 unresolved
 >   forks all chair-ruled (2 routed to owner: annual credit cadence · WR-9 gate reading);
