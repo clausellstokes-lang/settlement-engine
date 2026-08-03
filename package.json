@@ -24,6 +24,7 @@
     "gen:atlas-samples": "node scripts/gen-atlas-samples.mjs",
     "gen:glossary": "node scripts/generate-glossary.mjs",
     "gen:compendium-data": "node scripts/generate-compendium-data.mjs",
+    "gen:dossier-prose": "node scripts/generate-dossier-state-prose.mjs",
     "tuning:weekly": "node scripts/tuning-weekly.mjs",
     "optimize:backgrounds": "node scripts/optimize-backgrounds.mjs",
     "optimize:landing-backgrounds": "node scripts/optimize-landing-backgrounds.mjs",
