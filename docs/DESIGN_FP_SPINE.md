@@ -288,6 +288,22 @@ authored here so "SP-N landed" resolves corpus-wide.]
   already persisted, the voice only reads it). The frequency-scaled floor
   applies per join FAMILY; the phrase-repetition envelope covers composed
   sentences at the family grain.
+  **[AMENDED 2026-08-03 (owner constraint) — THE TWO REGISTERS:]** the
+  causal voice obeys the LEGIBILITY LAW's tiers (glance → sentence →
+  table), which it does not flatten: (1) THE HEADLINE REGISTER — the
+  Herald list item stays HEADLINE-SHAPED: the event plus AT MOST ONE
+  causal gesture (one join, one connective clause, hard length cap —
+  "X declares vengeance on its weakened neighbour — a generation's
+  grudge will be met" is the ceiling, never a cascade); chain shapes of
+  two-plus links are FORBIDDEN in this register. (2) THE TELLING
+  REGISTER — behind the click, a NEW narrative tier between headline and
+  the cause-walk table: the full composed chain (multi-link cascades,
+  the complete join molds), coherent and entailed per-link but freed
+  from headline compression. (3) THE TABLE stands beneath both — the
+  cause walk's receipts remain the ground truth the telling projects.
+  The causal annex labels every mold HEADLINE or TELLING; every join
+  family carries both registers; the pacing governor reads headlines
+  only (the telling is pull, never push).
 - **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion + the
   mode-speed table (J-D11(b)) landed as spine infrastructure ahead of all six.
 - **SP-8 THE AGE LAYER [CORRECTED 2026-08-02 (fp-audit) — new, per the
