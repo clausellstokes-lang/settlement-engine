@@ -53,6 +53,12 @@ const AVATAR_READERS = Object.freeze({
     'The account self-view header, which renders through PublicAvatar.',
   'src/components/AccountPage.jsx':
     'Owns the auth-refresh call whose payload carries avatarUrl through setAuth.',
+  'src/lib/accountData.js':
+    'THE DATA-RIGHTS EXPORT (§4). Deliberately NOT routed through publicIdentityOf: '
+    + 'an export is the user asking for their OWN data, so it must carry their image '
+    + 'whether or not they consented to show it PUBLICLY. Running it through the '
+    + 'public resolver would blank the field for exactly the privacy-minded user most '
+    + 'likely to request an export — the opposite of what a data right is for.',
 });
 
 /** Files allowed to build an <img> from an avatar source. Exactly one. */

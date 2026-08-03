@@ -56,7 +56,7 @@ const ACCOUNT_EXPORT_PREFLIGHT_SCHEMA_VERSION = 1;
  * @typedef {{
  *   version:number,
  *   exportedAt:string,
- *   profile:{email:string|null,displayName:string|null,tier:string|null},
+ *   profile:{email:string|null,displayName:string|null,tier:string|null,avatarUrl:string|null},
  *   settlements:any[],
  *   campaigns:any[],
  *   customContentArchive:Record<string, any>|null,
@@ -293,6 +293,13 @@ export function preflightAccountExport(state = {}) {
     email: auth.user?.email || null,
     displayName: auth.displayName || null,
     tier: auth.tier || null,
+    // DATA RIGHTS (DESIGN_PROFILE_IMAGE.md §4): the profile image belongs in the
+    // export. The URL is exported rather than the bytes — the object is public,
+    // immutable and content-addressed, so the link IS a durable reference to the
+    // exact image, and inlining a base64 blob would bloat every export for a
+    // fidelity nobody gains. null when the account has no image, which is an
+    // ordinary state (the letter-circle is the permanent fallback), not a gap.
+    avatarUrl: auth.avatarUrl || null,
   };
   const preflight = {
     schemaVersion: ACCOUNT_EXPORT_PREFLIGHT_SCHEMA_VERSION,

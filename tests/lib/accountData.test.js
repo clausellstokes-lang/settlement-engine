@@ -110,7 +110,15 @@ describe('buildAccountExport', () => {
 
     expect(out.version).toBe(ACCOUNT_EXPORT_VERSION);
     expect(typeof out.exportedAt).toBe('string');
-    expect(out.profile).toEqual({ email: 'me@x.test', displayName: 'Me', tier: 'free' });
+    // §4 DATA RIGHTS: the profile image joined the export. Kept as an EXACT
+    // toEqual rather than a toMatchObject — this block is the account's own
+    // identity leaving the product, and an exact pin is what makes a future
+    // field addition a decision somebody makes on purpose. avatarUrl is null
+    // here because this fixture's account has no image, which is the ordinary
+    // state, not a gap.
+    expect(out.profile).toEqual({
+      email: 'me@x.test', displayName: 'Me', tier: 'free', avatarUrl: null,
+    });
     expect(out.settlements).toHaveLength(2);
     expect(out.campaigns).toHaveLength(1);
     expect(out.customContentArchive).toMatchObject({
