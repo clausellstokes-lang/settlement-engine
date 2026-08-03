@@ -159,8 +159,21 @@ export function mintEnvoyErrand({
   if (errands.some((errand) => errand.npcId === personId && isActiveErrand(errand))) {
     return { worldState, changed: false, evidence: [], errand: null, reason: 'npc_in_transit' };
   }
-  const activeAtOrigin = errands.filter((errand) => errand.from === from && isActiveErrand(errand)).length;
-  if (activeAtOrigin >= MAX_CONCURRENT_ENVOYS) {
+  // CR-WIRE-C — CAPACITY COUNTS EPISODES, NOT ERRANDS. `MAX_CONCURRENT_ENVOYS`
+  // bounds how many separate NEGOTIATIONS one origin can carry at once, which is
+  // what a court's diplomatic reach actually is. A continuation re-mint — the
+  // compromise round's next embassy, a resumed mission on a fresh attempt id —
+  // carries an episode key the origin is ALREADY running, so it is the same
+  // negotiation continuing and takes no second seat. A genuinely NEW mission at
+  // capacity still refuses, unchanged. Counting errands made a court that had
+  // been refused twice unable to answer at all, which turned the compromise
+  // round's own convergence engine off at exactly the episode it was built for.
+  const episodeKey = envoyOfferEpisodeKey(offer);
+  const activeEpisodesAtOrigin = new Set(errands
+    .filter((errand) => errand.from === from && isActiveErrand(errand))
+    .map((errand) => envoyOfferEpisodeKey(errand.offer)));
+  if (!activeEpisodesAtOrigin.has(episodeKey)
+    && activeEpisodesAtOrigin.size >= MAX_CONCURRENT_ENVOYS) {
     return { worldState, changed: false, evidence: [], errand: null, reason: 'origin_capacity' };
   }
   const plan = normalizeRoutePlan(routePlan, {
@@ -172,7 +185,7 @@ export function mintEnvoyErrand({
   if (!plan) {
     return { worldState, changed: false, evidence: [], errand: null, reason: 'invalid_route_plan' };
   }
-  const errandId = errands.some((row) => envoyOfferEpisodeKey(row.offer) === envoyOfferEpisodeKey(offer))
+  const errandId = errands.some((row) => envoyOfferEpisodeKey(row.offer) === episodeKey)
     ? envoyAttemptIdForOffer(offer)
     : envoyErrandIdForOffer(offer);
   const fullPicture = negotiationPicture == null

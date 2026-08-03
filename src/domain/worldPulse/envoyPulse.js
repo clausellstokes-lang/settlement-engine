@@ -41,6 +41,7 @@ import {
   resolveStartInterceptions,
 } from './envoyInterceptionStage.js';
 import { envoyNewsEntries } from './envoyNews.js';
+import { ratifyCarriedSheets } from './envoyRatificationStage.js';
 import { npcLedgerOf } from './npcLedger.js';
 
 /** @param {unknown} value @returns {Record<string, unknown>} */
@@ -128,6 +129,7 @@ export function advanceEnvoyDiplomacyPulse({
       evidence: [],
       autoApplied: [],
       newsEntries: [],
+      ratifications: [],
       commissionedPlants,
     };
   }
@@ -230,6 +232,17 @@ export function advanceEnvoyDiplomacyPulse({
     newsEntries.push(...transitionNews);
   }
 
+  // WR-7c — THE RATIFICATION STAGE, decided BEFORE the mouth sees anything.
+  // Every terms-bearing return in this pulse is voted on together, because two
+  // envoys of one side home on the same tick are rival offers and a side that
+  // cannot choose between them has chosen neither. Deciding per delivery inside
+  // the loop below would let the first sheet through the mouth before its rival
+  // was ever weighed. `envoyRatificationStage.js` owns the vote's body.
+  const ratified = ratifyCarriedSheets({
+    worldState: state,
+    homeDeliveries: advanced.homeDeliveries,
+  });
+
   for (const delivery of advanced.homeDeliveries) {
     const marked = markEnvoyHome({
       worldState: /** @type {Record<string, unknown>} */ (state),
@@ -249,7 +262,17 @@ export function advanceEnvoyDiplomacyPulse({
       syncEnvoyNpcTransit(tentativeState, marked.errand, tick)
     );
     if (!envoyIsPhysicallyHome(tentativeState, delivery)) continue;
-    const outcome = envoyHomeOutcome(delivery);
+    // WR-7c AT THE MOUTH (CR-WIRE-B): NOTHING BINDS UNRATIFIED. A sheet the
+    // side did not choose is stripped from the delivery, so the man still comes
+    // home and his return is still receipted — the errand closes, the silence
+    // inference clears, H1 lands — but not one clause of what he agreed to
+    // travels into `applyWorldPulseOutcomes`. The absence of a verdict is
+    // treated exactly like a refusal, because a sheet nobody voted on is a
+    // sheet nobody ratified. An envoy carrying no sheet is untouched here.
+    const verdict = ratified.verdicts.get(String(delivery.errandId || '')) || null;
+    const carriesSheet = !!asObject(delivery.termSheet).id;
+    const bound = !carriesSheet || verdict?.bound === true;
+    const outcome = envoyHomeOutcome(bound ? delivery : { ...delivery, termSheet: null });
     if (!outcome) continue;
     if (envoyReturnAlreadyApplied(tentativeState, outcome, graph)) {
       // The mechanical fact is already in the immutable relationship history.
@@ -306,6 +329,10 @@ export function advanceEnvoyDiplomacyPulse({
     evidence,
     autoApplied,
     newsEntries,
+    // The vote's own record, handed back rather than folded into `evidence`:
+    // ratification is not an errand transition, and the news/belief adapters
+    // read `evidence` by a closed transition vocabulary they own.
+    ratifications: ratified.ratifications,
     commissionedPlants: planted.commissionedPlants,
   };
 }

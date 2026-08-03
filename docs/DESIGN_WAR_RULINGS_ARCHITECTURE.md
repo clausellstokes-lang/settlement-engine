@@ -869,18 +869,65 @@ congress, no multilateral table, ever.
 > real `negotiateFromPictures` producer mints, with a same-picture negative
 > control proving the split is caused by the divergent pictures and nothing else.
 >
-> ⚠️ **DEFERRED, NOT DROPPED — the live pulse wiring.** Ratification belongs at
-> the home-delivery seam in `envoyPulse.js`, and a compromise round must re-mint
-> errands through `envoyErrand.js`. All three files the wiring must edit —
-> `envoyErrand.js` (2,638), `applyWorldPulse.js` (1,395) and `peaceTerms.js`
-> (1,680) — sit at EXACTLY their R-BLD-6 baseline with zero headroom, so a single
-> added effective line reds eslint at the pre-commit hook, and R-BLD-6 forbids
-> raising a baseline again outside an explicit chair ruling with a measured
-> census. Raising one here, for a wave whose whole architecture ships without it,
-> would be precisely the licence R-BLD-6 says the file is not. The wiring is
-> therefore owed to THE DECOMPOSITION WAVE and must land in the slice that brings
-> `envoyErrand.js` under its ceiling — recorded in the validation queue, not a
-> bug to re-find. Nothing in this wave is lit, no golden moved, no soak ran.
+> ✅ **THE PULSE WIRING LANDED 2026-08-03 (LANE W), under CR-WIRE-A/B/C.** The
+> deferral below was measured on a premise the decomposition wave has since
+> retired: `envoyErrand.js` is 691/800 effective and `envoyPulse.js` is 248/800,
+> so the mouths were never touched and no baseline was raised. `ratifyCarriedSheets`
+> in the new leaf `envoyRatificationStage.js` runs BEFORE the home-delivery loop —
+> every terms-bearing return of one pulse is voted on together, because two
+> envoys of one side home on the same tick are rival offers and deciding one at a
+> time would let the first sheet through the mouth before its rival was weighed.
+>
+> **THE GATE:** a delivery whose sheet is not bound reaches `envoyHomeOutcome`
+> with `termSheet: null`, so the man comes home, the errand closes, the silence
+> inference clears and H1 lands — and not one clause travels into
+> `applyWorldPulseOutcomes`. An ABSENT verdict is treated exactly as a refusal.
+>
+> **THE THREE RULINGS, VETOABLE.** (A) The power band is PICTURE-DERIVED per
+> member from its own frozen picture; `ratificationPowerBandFromPicture` takes
+> one argument and there is no parameter through which truth could enter, so the
+> K3 import pin stays closed. Executed through the live pulse: the home court's
+> own picture says `strong`, so it votes PRINCIPAL at weight 3 — the real
+> settlements (1,000 against 12,000) reach the number nowhere. (B) A
+> coalition-less episode ratifies through `chooseAmongCompetingOffers`' SOLE-OFFER
+> arm; nothing binds unratified. Disclosed flagged-behaviour change, flag dark.
+> (C) Capacity counts EPISODES, not errands, in `mintEnvoyErrand`: a continuation
+> re-mint carrying an episode the origin already runs takes no second seat, and a
+> genuinely NEW mission at capacity still refuses. Counting errands made a court
+> refused twice unable to answer at all, which switched off the compromise
+> round's own convergence engine at exactly the episode it exists for.
+>
+> **DORMANCY PROVED, NOT ASSERTED.** With every war flag dark the pulse's eight
+> output references hash byte-identically before and after the wiring —
+> `9b0225f07480db7d245da31a5a68abd1` / `f639b5702a581893e88fda90b8e982ae` /
+> `71fdafc3553262b32a22f6d8f8d48627` — and the harness's own negative control
+> (the same conjunction LIT) hashes differently, so the fence is not measuring a
+> rock. Inputs still return by reference; `ratifications` is `[]`.
+>
+> ⚠️ **STILL DEFERRED, AND MEASURED — the compromise round's RE-MINT.** On a
+> close verdict the stage COMPUTES the round through `openCompromiseRound` and
+> hands both mandates back; it does not mint them. Minting the counterpart's
+> mandate needs an authored bilateral offer with the COUNTERPART as offerer, and
+> no such offer exists anywhere in the pulse's reach — the returning errand
+> carries the home side's offer only. Sending one side and holding the other is
+> the exact failure `openCompromiseRound`'s return shape was built to prevent, so
+> the stage stops at the mandates rather than committing half a round. CR-WIRE-C
+> is nonetheless built and pinned, because it is the mint head's own law and is
+> needed the moment the re-mint lands.
+>
+> ⚠️ **STILL DEFERRED — the SEAT arm.** Every wired ballot is cast on the realm's
+> book (`seatPresent: false`). A seat's decision is a character act — which envoy
+> the ruler chose to believe, through `selectBelievedAccount` — and the pulse
+> builds no account corpus to choose from. Wiring one today would mean inventing
+> the ruler's judgment. The seat arm stays unit-proven in `coalitionRatification.js`.
+>
+> ⚠️ **OPEN QUESTION FOR THE CHAIR, recorded rather than hidden.** Which belief a
+> court must hold to REFUSE a sheet its own envoy carried home is NOT
+> characterised: a picture asserting the court spent and its foe dominant still
+> ratifies. Both vote directions are exercised through the WEIGHT (strong ⇒ 3,
+> spent ⇒ 1) and the refusal arm is pinned on the law's own suite, but the
+> pulse-level refusal is an unpinned arm until the belief that produces it is
+> found. Nothing is lit, no golden moved, no soak ran.
 
 **WR-7d — RANSOM + THE COMPROMISED ENVOY (O, Q).**
 - **Captivity → ransom (O):** dwell-gated (band; the dwell read is WR-7b's hold
