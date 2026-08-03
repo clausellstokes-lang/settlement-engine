@@ -95,6 +95,13 @@ function simConfig(rules) {
     travel_mode: enumStr(r.travelMode),
     migration_mode: enumStr(r.migrationMode),
     intensity: enumStr(r.intensity),
+    // MG-2: the realm's arcane stance. It rides here as an ENUM rather than as a
+    // TRACKED_FLAGS member, because `realmMagicDefault` is a string key and that
+    // list is filtered on `=== true` — adding the name there would emit nothing
+    // at all while looking measured, which is worse than being absent. Undefined
+    // for every realm built before the question existed, and for every magical
+    // one, so the reading is honestly "how many worlds chose mundane".
+    realm_magic: enumStr(r.realmMagicDefault),
     flags_on: flagsOn,
   };
 }

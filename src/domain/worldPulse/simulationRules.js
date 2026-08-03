@@ -559,6 +559,25 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // matrix, device evidence, a11y evidence, the owner's eye, field soak), after the
     // synthesis, painter and join slices land; flip this one value there.
     townCartographyEnabled: false,
+    // MG-2: THE REALM'S MAGIC DEFAULT, DECLARED AT ITS INERT VALUE
+    // (docs/DESIGN_REALM_MAGIC_TOGGLE §4). `realmMagicDefault` is a VIRTUAL key of
+    // the same class as the flags above — absent from DEFAULT_SIMULATION_RULES,
+    // absent from every other preset, and read `=== 'mundane'` at its single seam,
+    // so the value declared here is behaviourally identical to absence and cannot
+    // perturb a byte. Preset identity is untouched: RULE_COMPARISON_KEYS derives
+    // from DEFAULT_SIMULATION_RULES' BOOLEAN surface, and this key is neither in
+    // the defaults nor a boolean.
+    //
+    // IT IS NOT A SUBSYSTEM GATE, WHICH IS WHY IT CARRIES NO CERTIFICATION ROW.
+    // The realm's magic answer is not consulted by any generator, mover, or
+    // display path (MG-LAW-1) — it is stamped into each member's own config at
+    // mint, and every consumer reads that. What survives at realm scope is a
+    // DEFAULT-FOR-LATER whose one reader is the single-settlement wizard's
+    // pre-selection. Declaring it here is documentation for the next reader of
+    // this catalog, not a claim of engine behavior; the subsystem-certification
+    // census is boolean-only (subsystemCertification.simulationRuleKeys), so a
+    // string key is invisible to it either way.
+    realmMagicDefault: 'magical',
     // W-R2-LIGHT: the ceiling is everything-on by name — it runs the full nine-wave
     // anti-stasis stack (warLayer is lit above, so intervention/peaceEngine/
     // supplyWebWarfare fire here; the composition smoke + whole-world soak drive
@@ -616,6 +635,29 @@ function enumValue(value, allowed, fallback) {
 export function worldProgressionOf(rules) {
   const v = rules && typeof rules === 'object' ? rules.worldProgression : null;
   return (v === 'frozen' || v === 'living' || v === 'autonomous') ? v : 'dm_advanced';
+}
+
+/**
+ * MG-2: is this realm's DEFAULT for a newly generated settlement a mundane one?
+ * (docs/DESIGN_REALM_MAGIC_TOGGLE §4.)
+ *
+ * THE ONE READER of `realmMagicDefault`, so the two surfaces that consume it —
+ * the single-settlement wizard's pre-selection and the campaign's read-only
+ * stance line — can never drift on what the key means. Exact-match on 'mundane'
+ * and total on garbage: the key is VIRTUAL (it rides `...input` unnormalized),
+ * so absent, misspelled, or corrupt all mean the same thing they meant before
+ * this key existed — a world of magic.
+ *
+ * IT IS NOT AN ENGINE GATE (MG-LAW-1). No generator, mover, or display path may
+ * call this: a settlement's magic is its own config's `magicExists`, which the
+ * composer stamped at mint. This answers only "what should the NEXT settlement's
+ * config start as", which is a UI default, not a world fact.
+ *
+ * @param {Record<string, unknown> | null | undefined} rules
+ * @returns {boolean}
+ */
+export function realmMagicIsMundane(rules) {
+  return !!rules && typeof rules === 'object' && rules.realmMagicDefault === 'mundane';
 }
 
 /**

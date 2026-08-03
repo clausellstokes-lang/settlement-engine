@@ -14,6 +14,7 @@ import Disclosure from './primitives/Disclosure.jsx';
 import { ClerkNote } from './generate/ClerkNote.jsx';
 import CharacterPresetCard from './generate/CharacterPresetCard.jsx';
 import PlaceInRegionCard from './generate/PlaceInRegionCard.jsx';
+import { useRealmMagicDefault } from './generate/useRealmMagicDefault.js';
 
 const PARCHMENT=swatch['#F7F0E4'];
 const DEFAULT_CONTENT_BOUNDARIES=Object.freeze({
@@ -265,6 +266,10 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
   // ── Isolation + magic constraint flags ──────────────────────────────────
   const magic       = config.priorityMagic || 0;
   const noMagic     = config.magicExists === false || magic === 0;
+  // MG-2: a settlement generated INTO a mundane realm starts from that realm's
+  // premise. Pre-selection only — the control below stays sovereign, and the
+  // line beneath it says why the answer moved.
+  const realmIsMundane = useRealmMagicDefault();
 
   return<div style={{background:CARD,border:`1px solid ${BORDER2}`}}>
     <div style={{padding:'0 16px 14px'}}>
@@ -451,6 +456,12 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
             <option value="yes">✦ Yes. Magic exists</option>
             <option value="no">○ No. Historical mode</option>
           </Sel>
+          {realmIsMundane && (
+            <div data-testid="realm-mundane-note" style={{fontSize:FS.xs,color:MUTED,marginTop:4,lineHeight:1.4}}>
+              This realm was built without magic, so that is the starting answer
+              here. Change it if this one place is the exception.
+            </div>
+          )}
           {noMagic && config.tradeRouteAccess === 'isolated'
             && ['town','city','metropolis'].includes(config.settType) && (
             <div style={{fontSize:FS.xs,color:swatch['#C05010'],marginTop:4,lineHeight:1.4}}>

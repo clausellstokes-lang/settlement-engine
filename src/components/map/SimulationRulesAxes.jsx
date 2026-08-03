@@ -1,4 +1,4 @@
-import { infoModeOf, politicalAutonomyOf, worldProgressionOf, } from '../../domain/worldPulse/simulationRules.js';
+import { infoModeOf, politicalAutonomyOf, realmMagicIsMundane, worldProgressionOf, } from '../../domain/worldPulse/simulationRules.js';
 import { domainState } from '../../domain/worldPulse/simulationProfile.js';
 import { BODY, BORDER2, CARD, FS, GOLD_BG, INK, MUTED, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
@@ -224,6 +224,48 @@ export function WorldLawAxes({ draft, advanceBlocked, frozenAutonomyLaw, onSetFi
           </div>
         );
       })}
+      <RealmMagicStance draft={draft} />
+    </div>
+  );
+}
+
+/**
+ * MG-2 / MG-LAW-7: the realm's arcane stance, READ-ONLY.
+ *
+ * It sits among the world laws because that is what it is — but it is the one
+ * law with no chips, and deliberately so. Every member of this realm was minted
+ * under the answer given before the realm existed; flipping a switch here would
+ * change nothing about them while looking like it changed everything, which is
+ * the dishonesty this card exists to refuse. The honest verb is regeneration,
+ * and each settlement keeps its own per-settlement magic control regardless.
+ *
+ * Absence reads as magic (the virtual-key discipline), so every realm built
+ * before the question existed renders truthfully as a world of magic.
+ */
+function RealmMagicStance({ draft }) {
+  const mundane = realmMagicIsMundane(draft);
+  return (
+    <div
+      data-testid="axis-realmMagic"
+      style={{ display: 'grid', gap: 6, padding: SP.sm, border: `1px solid ${BORDER2}`, background: CARD }}
+    >
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, flexWrap: 'wrap' }}>
+        <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>Magic</span>
+        <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750 }}>
+          Does magic exist in these lands?
+        </span>
+      </div>
+      <div style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>
+        {mundane ? 'A mundane world' : 'A world of magic'}
+      </div>
+      <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
+        {mundane
+          ? 'No working magic anywhere in this realm. Gods and temples remain — belief is not a spell.'
+          : 'Mages, arcane orders, and enchanted trade belong in this realm.'}
+      </div>
+      <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, lineHeight: 1.4, fontStyle: 'italic' }}>
+        Chosen at creation — new settlements follow it; regenerate the realm to change it.
+      </div>
     </div>
   );
 }

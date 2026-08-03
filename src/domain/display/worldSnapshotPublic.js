@@ -105,6 +105,13 @@ const PUBLIC_SIMULATION_RULE_KEYS = Object.freeze([
   'propagationMode',
   'intensity',
   'migrationMode',
+  // MG-2: the realm's arcane stance. Coarse world SHAPE of exactly this class —
+  // a player who has walked a mundane realm already knows there is no magic in
+  // it — and it must be listed here or the field silently drops from every
+  // public projection (gallery, shared realm, world export), leaving a shared
+  // mundane realm indistinguishable from a magical one. Present only when the
+  // realm was built mundane, so a magical realm's public block is unchanged.
+  'realmMagicDefault',
 ]);
 
 /** Covert / seed / prose key names scrubbed from every serialized value as a final

@@ -18,6 +18,15 @@
  *          the same organic channel discovery the manual "discover channels" runs)
  *        → assemble the campaign (tone preset applied to worldState.simulationRules)
  *
+ * THE REALM'S ARCANE STANCE (MG-2, docs/DESIGN_REALM_MAGIC_TOGGLE) is answered
+ * once, before any of that, and then PROJECTED: a mundane realm stamps
+ * magicExists:false + priorityMagic:0 into every member's config at mint
+ * (memberConfigFor below). It is deliberately not a realm-level gate — the whole
+ * engine already reads per-settlement truth, so projecting the answer makes
+ * generation, the pulse, display, regen, share, and export correct by
+ * inheritance rather than by fifteen new checks. The realm keeps only a
+ * default-for-later (simulationRules.realmMagicDefault) and a provenance echo.
+ *
  * COMPOSITION-EQUIVALENCE (the spec): the returned bundle is state-shape-identical
  * to a hand-built realm at the same stage — an active campaign (owner-clarified:
  * the instant world lands the user IN a campaign; a realm IS a campaign, so
@@ -71,6 +80,46 @@ const MAX_COHERENCE_RETRIES = 3;
 const EPOCH_ISO = '1970-01-01T00:00:00.000Z';
 
 /**
+ * THE MEMBER CONFIG — one source, two consumers (MG-2).
+ *
+ * This is the ONLY place an Instant World member's generation config is spelled.
+ * It is read twice — once as the pipeline's input at mint, once as the save
+ * entry's `config` (which becomes the member's persisted `_config`) — and those
+ * two had drifted into two literals that merely happened to agree. A projection
+ * written into one of them and not the other would produce a member generated
+ * mundane whose stored config claims magic, and the next regeneration would
+ * quietly restore the magic. One spelling makes that class impossible.
+ *
+ * THE PROJECTION (MG-2, docs/DESIGN_REALM_MAGIC_TOGGLE §4). A mundane realm is
+ * not a live gate anyone consults later: the realm's answer is STAMPED into each
+ * member's own config here, after which every existing mechanism — the
+ * generation world law, the pulse's per-settlement magicLedger read, the display
+ * envelope, full regen, section reroll, share, export — is already correct,
+ * because they all read per-settlement truth and always did. Both fields move
+ * together, matching what the per-settlement UI itself writes
+ * (ConfigurationPanel: magicExists:false ⇒ priorityMagic:0).
+ *
+ * Byte-identity when magical: both keys already exist in DEFAULT_CONFIG, so the
+ * mundane override replaces values in place and the conditional spread is empty
+ * for 'yes' — key order and content are unchanged from before this knob existed.
+ *
+ * @param {{ slot:number, tier:string, seed:string, x:number, y:number, burgId:string }} site
+ * @param {{ magic?: string }} plan
+ * @returns {Record<string, any>}
+ */
+function memberConfigFor(site, plan) {
+  return {
+    ...DEFAULT_CONFIG,
+    settType: site.tier,
+    // "Surprise-me within curated bounds": the pipeline rolls the priority
+    // sliders (5..95) off the seed, and the DEFAULT_CONFIG random sentinels
+    // (random_trade / random_culture / random_threat) resolve per-seed too.
+    _randomizePriorities: true,
+    ...(plan?.magic === 'no' ? { magicExists: false, priorityMagic: 0 } : {}),
+  };
+}
+
+/**
  * Mint one settlement dossier for a planned site, re-forking deterministically
  * until it passes the dossier trust gate (or the retry budget is spent).
  * @param {{ generateSettlementPipeline: Function }} engine
@@ -81,22 +130,18 @@ const EPOCH_ISO = '1970-01-01T00:00:00.000Z';
  *   explicitConfigFields?: object,
  *   provenance?: object,
  * } | null} contentRuntime
+ * @param {Record<string, any>} memberConfig the ONE config (memberConfigFor)
  * @returns {{ settlement:any, seed:string, retries:number }}
  */
-function mintSettlement(engine, site, contentRuntime) {
+function mintSettlement(engine, site, contentRuntime, memberConfig) {
   let settlement = null;
   let usedSeed = site.seed;
   let retries = 0;
   for (let attempt = 0; attempt <= MAX_COHERENCE_RETRIES; attempt++) {
     usedSeed = attempt === 0 ? site.seed : `${site.seed}::retry${attempt}`;
-    const config = {
-      ...DEFAULT_CONFIG,
-      settType: site.tier,
-      // "Surprise-me within curated bounds": the pipeline rolls the priority
-      // sliders (5..95) off the seed, and the DEFAULT_CONFIG random sentinels
-      // (random_trade / random_culture / random_threat) resolve per-seed too.
-      _randomizePriorities: true,
-    };
+    // A fresh copy per attempt: the pipeline is handed an object it may resolve
+    // in place, and a retry must start from the same raw truth as attempt 0.
+    const config = { ...memberConfig };
     // An omitted runtime preserves the composer's headless, vanilla contract.
     // The store binding supplies one exact reviewed snapshot so an Instant
     // World's initial members and its campaign cutoff are born from the same
@@ -127,7 +172,7 @@ function mintSettlement(engine, site, contentRuntime) {
  *
  * @param {object} [args]
  * @param {string} [args.seed]                       outer seed (drives everything)
- * @param {{ realmSize?:string, tone?:string, mapKind?:string }} [args.basicConfig]
+ * @param {{ realmSize?:string, tone?:string, mapKind?:string, magic?:string }} [args.basicConfig]
  * @param {string} [args.name]                       campaign name (default derived)
  * @param {{ generateSettlementPipeline:Function }} [args.engine]  injectable generator
  * @param {{
@@ -167,17 +212,23 @@ export function composeInstantWorld({
 
   // ── Mint + wrap the tier-mixed members as CANON saves ──────────────────────
   const settlements = plan.sites.map((site) => {
+    const memberConfig = memberConfigFor(site, plan);
     const { settlement, seed: usedSeed, retries } = mintSettlement(
       engine,
       site,
       contentRuntime || null,
+      memberConfig,
     );
     return {
       id: mkId(),
       name: settlement?.name || 'Settlement',
       tier: settlement?.tier || site.tier,
       settlement,
-      config: { ...DEFAULT_CONFIG, settType: site.tier, _randomizePriorities: true },
+      // The RAW config the member was generated under — this is what the save
+      // persists as `_config`, and what a full regen replays. Neither projected
+      // field is in the DERIVED_CONFIG_KEYS strip list, so the stance survives
+      // regen, reroll, save/load, share, and account export untouched.
+      config: { ...memberConfig },
       seed: usedSeed,
       aiData: {},
       // Canon phase — the manual prerequisite for placement + world membership
@@ -220,8 +271,22 @@ export function composeInstantWorld({
 
   // ── Apply the tone preset to a fresh, spatially-un-canonized worldState ─────
   const tonePreset = SIMULATION_RULE_PRESETS[/** @type {keyof typeof SIMULATION_RULE_PRESETS} */ (plan.tonePresetId)] || SIMULATION_RULE_PRESETS.realistic_regional;
+  // THE REALM'S REMAINDER (MG-2). The members carry the whole truth; what the
+  // realm keeps is a DEFAULT-FOR-LATER, written at the same site the tone preset
+  // already writes rules. Its one consumer is the single-settlement wizard, which
+  // pre-selects a mundane config when generating INTO this realm — visibly and
+  // overridably, because the DM's one strange glowing city is a deliberate act.
+  // No generator, pulse, or display path ever reads it (MG-LAW-1): a realm rule
+  // consulted at read time is the double-authority defect this design avoids.
+  //
+  // VIRTUAL-FLAG DISCIPLINE (MG-LAW-6): written ONLY for a mundane realm, so a
+  // magical realm's rules are byte-identical to the preset's and absence means
+  // magical. It is not a RULE_COMPARISON_KEY (those derive from the boolean
+  // surface of DEFAULT_SIMULATION_RULES, which this key is absent from), so
+  // preset identity and preset inference are untouched.
+  const mundaneRealm = plan.magic === 'no';
   const worldState = ensureWorldState(
-    { simulationRules: tonePreset.rules },
+    { simulationRules: mundaneRealm ? { ...tonePreset.rules, realmMagicDefault: 'mundane' } : tonePreset.rules },
     { id: campaignId, name: campaignName },
   );
 
@@ -264,8 +329,17 @@ export function composeInstantWorld({
     accessState: 'active',
     pendingSync: true,
     // Provenance marker — distinguishes an instant realm from a hand-built one
-    // for analytics + support; carries no behavior.
-    instantWorld: { seed: plan.seed, realmSize: plan.realmSize, tone: plan.tonePresetId, mapKind: plan.mapKind },
+    // for analytics + support; carries no behavior. `magic` rides the same
+    // virtual discipline as the rules key above: recorded only when the answer
+    // was 'no', so a magical realm's marker is byte-identical to every marker
+    // written before the question existed.
+    instantWorld: {
+      seed: plan.seed,
+      realmSize: plan.realmSize,
+      tone: plan.tonePresetId,
+      mapKind: plan.mapKind,
+      ...(mundaneRealm ? { magic: 'no' } : {}),
+    },
   };
 
   return {
