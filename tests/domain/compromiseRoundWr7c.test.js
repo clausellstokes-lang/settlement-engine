@@ -5,11 +5,16 @@
  * whole time. Amendment L forbids a round limit and names the widening plus the
  * home-front drain as the convergence guarantee instead.
  *
- * The pins that matter here are the structural ones: no round is ever compared
- * with a maximum, no ceasefire exists in any shape this file can produce, and
- * the widening is monotone and symmetric rather than a number somebody hoped
- * was rising. Convergence is a PROJECTION, and the honest answer — "widening
- * alone will not close this one" — is a first-class result, not a failure.
+ * The pins that matter here are the structural ones: NO ROUND LIMIT — nothing
+ * declines to open the next round, however many have failed — no ceasefire in
+ * any shape this file can produce, and a widening that is monotone and
+ * symmetric rather than a number somebody hoped was rising. Two bounds do
+ * exist and are pinned as what they are: the BAND CEILING (how far a court
+ * concedes, not how long it fights) and `compromiseConvergence`'s PROBE
+ * HORIZON, which bounds an arithmetic search and answers `beyond_probe` with
+ * no round rather than deciding anything about a war. Convergence is a
+ * PROJECTION, and the honest answers — "widening alone will not close this
+ * one", "you did not give me enough horizon to say" — are first-class results.
  *
  * @enforced-by this file
  */
@@ -91,12 +96,26 @@ describe('WR-7c — the widening', () => {
     expect(widen(500, 'decisive')).toBe(cap);
     expect(widen(50000, 'decisive')).toBe(cap);
     // Amendment L: no war-length cap, no forced peace, no round limit. A ceiling
-    // on how far a band widens is not a ceiling on how long a war may run — and
-    // no round count in this module is ever compared with anything.
+    // on how far a band widens is not a ceiling on how long a war may run.
     expect(SOURCE.length).toBeGreaterThan(1000);
     for (const token of ['MAX_ROUND', 'ROUND_LIMIT', 'roundCap', 'MAX_ROUNDS', 'forcePeace']) {
       expect(SOURCE, `compromiseRound must not name ${token}`).not.toContain(token); // anchored: see above
     }
+    // AND THE ROUND ITSELF IS NEVER REFUSED. Executed rather than asserted from
+    // the token scan: a court refused ten thousand times still opens the next
+    // round, at full width, with the war still running.
+    const late = openCompromiseRound({
+      verdict: 'close',
+      episodeKey: 'war.iron.reed.4',
+      sides: [
+        { partyId: 'reed', drainBand: 'decisive' },
+        { partyId: 'iron', drainBand: 'quiet' },
+      ],
+      priorRoundIndex: 9999,
+    });
+    expect(late.opened).toBe(true);
+    expect(late.roundIndex).toBe(10000);
+    expect(late.warContinues).toBe(true);
   });
 
   it('refuses an unreadable input instead of widening on a guess', () => {
@@ -203,6 +222,27 @@ describe('WR-7c — convergence is projected, never promised', () => {
 
   it('closes at round zero only when there was nothing to close', () => {
     expect(compromiseConvergence({ gap01: 0, sides: sides('quiet', 'quiet') }).closesAtRound).toBe(0);
+  });
+
+  it('THE PROBE HORIZON: a search that runs out declines to answer, and decides nothing', () => {
+    // The one place in this module where a round index meets a bound. It is a
+    // bound on a SEARCH, and the honest arm proves it: asked for a horizon
+    // shorter than the arithmetic needs, the projection returns NO round rather
+    // than the last one it happened to reach. A limit on a war would have to
+    // name a round; this one refuses to.
+    const reachable = compromiseConvergence({ gap01: 0.6, sides: sides('quiet', 'quiet') });
+    expect(reachable.closesAtRound).toBe(5);
+    const short = compromiseConvergence({ gap01: 0.6, sides: sides('quiet', 'quiet'), maxProbe: 2 });
+    expect(short.reason).toBe('beyond_probe');
+    expect(short.closesAtRound).toBeNull();
+    // The gap is REACHABLE — this is not the ceilings-cannot-cover-it case
+    // wearing a different name, which is what would make the arm dishonest.
+    expect(short.gap01).toBeLessThanOrEqual(short.ceilingReach01);
+    expect(reachable.reason).toBe('projected');
+    // And a horizon wide enough gets the same answer the default does, so the
+    // parameter tunes the search and nothing else.
+    expect(compromiseConvergence({ gap01: 0.6, sides: sides('quiet', 'quiet'), maxProbe: 50 })
+      .closesAtRound).toBe(5);
   });
 
   it('refuses an unreadable projection instead of returning a number', () => {

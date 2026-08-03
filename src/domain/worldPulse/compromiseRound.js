@@ -6,9 +6,17 @@
  * whole time — there is no ceasefire in this model, anywhere, and no shape in
  * this file could hold one.
  *
- * Amendment L forbids a round limit. Nothing here counts rounds down, caps
- * them, or forces a peace. What ends a war instead is the pair of forces this
- * leaf makes arithmetic:
+ * Amendment L forbids a ROUND LIMIT, and there is none: nothing here counts
+ * rounds down, refuses to open the next one, or forces a peace. Two bounds do
+ * exist and neither is that, so both are named rather than left for a reader to
+ * discover — THE BAND IS CAPPED (`WIDENING_CAP_01`: how far a court's
+ * acceptance can widen, not how long its war may run), and
+ * `compromiseConvergence` searches under a PROBE HORIZON. The horizon is a
+ * bound on an arithmetic search, not on a war: when it runs out the projection
+ * answers `beyond_probe` and returns no round at all, so it can never end,
+ * shorten, or force one.
+ *
+ * What ends a war instead is the pair of forces this leaf makes arithmetic:
  *
  *   THE WIDENING.  Every failed round widens BOTH parties' acceptance bands.
  *     Widening is monotone and symmetric: a court that has sent three embassies
@@ -48,8 +56,12 @@ export const COMPROMISE_ROUND_TUNING = Object.freeze({
   /**
    * The widest a band ever gets. This is a BAND CEILING, not a round limit: at
    * the cap the widening simply stops helping, and the drain — or nothing —
-   * decides. Amendment L's prohibition is on capping ROUNDS, and no round count
-   * is ever compared with anything in this file.
+   * decides. Amendment L's prohibition is on capping ROUNDS: a court may be
+   * refused ten thousand times and this module will widen it, open the next
+   * round, and never once decline to. The only place a round index meets a
+   * bound at all is the probe horizon inside `compromiseConvergence`, which
+   * searches a projection and reports `beyond_probe` rather than deciding
+   * anything about the war.
    */
   WIDENING_CAP_01: 0.75,
   /** Drain multiplier per band; quiet contributes nothing rather than a floor. */
@@ -132,7 +144,8 @@ export function widenAcceptance({ roundIndex, drainBand } = {}) {
       roundIndex: 0, drainBand: '', widening01: 0, band: COMPROMISE_WIDENING_BANDS[0], reason: 'invalid_input',
     };
   }
-  const acceleration = Number(COMPROMISE_ROUND_TUNING.DRAIN_ACCELERATION[drain]) || 0;
+  const drains = /** @type {Record<string, number>} */ (COMPROMISE_ROUND_TUNING.DRAIN_ACCELERATION);
+  const acceleration = Number(drains[drain]) || 0;
   const drainFactor = 1 + COMPROMISE_ROUND_TUNING.DRAIN_WEIGHT_01 * acceleration;
   const raw = COMPROMISE_ROUND_TUNING.WIDENING_STEP_01 * rounds * drainFactor;
   const widening01 = round4(Math.min(COMPROMISE_ROUND_TUNING.WIDENING_CAP_01, raw));
@@ -167,6 +180,7 @@ function normalizeSide(value) {
  * @returns {Record<string, unknown>}
  */
 export function openCompromiseRound({ verdict, episodeKey, sides, priorRoundIndex } = {}) {
+  /** @param {string} reason */
   const refusal = (reason) => ({
     opened: false, reason, episodeKey: '', roundIndex: 0, mandates: [], warContinues: true,
   });
@@ -222,10 +236,19 @@ export function openCompromiseRound({ verdict, episodeKey, sides, priorRoundInde
  * means the widening alone will not end this war, and the home front or a
  * ruler change will have to.
  *
+ * `maxProbe` IS A PROBE HORIZON — the only bound on a round index anywhere in
+ * this module, and it bounds a SEARCH, not a war. A projection that runs off
+ * the end of its horizon returns `beyond_probe` with `closesAtRound: null`: it
+ * declines to answer rather than naming a round, so no caller can read a
+ * horizon as a limit on how long the fighting may go on. The ceiling test
+ * above it already answers the unreachable case, so a horizon overrun means
+ * only that the caller asked for a shorter look than the arithmetic needed.
+ *
  * @param {{gap01?:unknown, sides?:unknown, maxProbe?:unknown}} args
  * @returns {Record<string, unknown>}
  */
 export function compromiseConvergence({ gap01, sides, maxProbe } = {}) {
+  /** @param {string} reason */
   const refusal = (reason) => ({
     reason, closesAtRound: null, gap01: 0, ceilingReach01: 0, sides: [],
   });
@@ -239,8 +262,9 @@ export function compromiseConvergence({ gap01, sides, maxProbe } = {}) {
   const known = /** @type {Array<Record<string, unknown>>} */ (rows);
 
   // The reach both ceilings together can ever cover. Comparing against it first
-  // is what lets the probe below terminate without inventing a round limit: the
-  // loop is a search over a bounded arithmetic answer, not a rule about wars.
+  // is what makes the search below finite for every gap it will ever be asked
+  // about: the loop is a search over a bounded arithmetic answer, not a rule
+  // about wars, and its horizon decides nothing (see the docstring).
   const ceilingReach01 = round4(2 * COMPROMISE_ROUND_TUNING.WIDENING_CAP_01);
   const summary = {
     reason: 'projected',

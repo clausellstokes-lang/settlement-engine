@@ -45,7 +45,18 @@ export const TESTIMONY_SEAT_LAWFULNESS = Object.freeze(['lawless', 'balanced', '
 export const TESTIMONY_SEAT_MORALITY = Object.freeze(['merciful', 'balanced', 'malicious']);
 export const TESTIMONY_SEAT_SECURITY = Object.freeze(['unseated', 'precarious', 'holding', 'secure']);
 
-/** What a court wants out of the episode. Closed; never a free-text motive. */
+/**
+ * What a court wants out of the episode. Closed; never a free-text motive.
+ *
+ * THE ONE SPELLING FOR THE WHOLE WR-7c FAMILY. `coalitionRatification.js`
+ * imports this exact list rather than declaring its own: a ballot's
+ * `desiredOutcome` and a seat's are the same fact about the same court, and
+ * unanimity is decided by comparing them. Two spellings of peace — `Peace`,
+ * `peace `, `make_peace` — would read as two different wishes and quietly
+ * break `unanimousInJudgment`, which is the finite-semantics law's exact
+ * failure mode. This leaf owns the vocabulary because it imports nothing at
+ * all, so depending on it cannot widen anyone's K3 reach.
+ */
 export const TESTIMONY_DESIRED_OUTCOMES = Object.freeze(['peace', 'war', 'undecided']);
 
 const ACCOUNT_KEYS = Object.freeze([
@@ -316,6 +327,7 @@ function compareKeys(left, right) {
  *   passedOverAccountId:string|null, reason:string}}
  */
 export function selectBelievedAccount({ testimony, seat } = {}) {
+  /** @param {string} reason */
   const refusal = (reason) => ({
     chosen: null,
     chosenDigest: null,

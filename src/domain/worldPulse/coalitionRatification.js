@@ -23,7 +23,11 @@
  *
  * Divergent sheets are COMPETING OFFERS, never a blend. When no single sheet
  * carries a majority, the coalition has failed to choose — and failure to
- * choose is exactly the close-vote case that opens the compromise round.
+ * choose is exactly the close-vote case that opens the compromise round. The
+ * majority a rival sheet must carry is a majority of the WHOLE coalition's
+ * weight (ruling R-BLD-7), not of the members who happened to vote on that one
+ * sheet: a sub-tally of three, however unanimous, does not outrank a coalition
+ * of thirty.
  *
  * PURE: no world state, no writer, no RNG.
  */
@@ -33,6 +37,12 @@ import {
   evaluateNegotiationPicture,
   normalizeParlayTermSheet,
 } from './negotiationPictures.js';
+// THE ONE COURT-DESIRE VOCABULARY. `desiredOutcome` means the same thing on a
+// ballot as it does on a seat reading testimony, so it is declared ONCE and
+// imported — two spellings of peace would silently break unanimity (the
+// finite-semantics law). `envoyTestimony.js` reaches nothing at all, so this
+// import cannot widen the vote's K3 reach; the seam pin records it as reviewed.
+import { TESTIMONY_DESIRED_OUTCOMES } from './envoyTestimony.js';
 
 /** Closed verdict vocabulary. `close` is a real outcome, not an error. */
 export const RATIFICATION_VERDICTS = Object.freeze(['ratified', 'refused', 'close']);
@@ -100,10 +110,16 @@ function codepoint(a, b) {
   return a < b ? -1 : a > b ? 1 : 0;
 }
 
+/** @param {number} value @returns {number} four-decimal fixed rounding */
+function round4(value) {
+  return Math.round(value * 10000) / 10000;
+}
+
 /** @param {unknown} band @returns {number} */
 export function ratificationPowerWeight(band) {
   const key = closedValue(band, RATIFICATION_POWER_BANDS);
-  return key ? Number(RATIFICATION_TUNING.POWER_WEIGHT[key]) : 0;
+  const weights = /** @type {Record<string, number>} */ (RATIFICATION_TUNING.POWER_WEIGHT);
+  return key ? Number(weights[key]) : 0;
 }
 
 /** @param {unknown} value @returns {Record<string, unknown> | null} */
@@ -114,7 +130,7 @@ export function normalizeRatificationMember(value) {
   const sideId = strictText(row.sideId);
   const counterpartId = strictText(row.counterpartId);
   const powerBand = closedValue(row.powerBand, RATIFICATION_POWER_BANDS);
-  const desiredOutcome = strictText(row.desiredOutcome);
+  const desiredOutcome = closedValue(row.desiredOutcome, TESTIMONY_DESIRED_OUTCOMES);
   const seatPresent = row.seatPresent === true;
   const seatDecision = row.seatDecision === null
     ? null
@@ -147,7 +163,7 @@ export function normalizeRatificationBallot(value) {
   const seatDecision = row.seatDecision === null
     ? null
     : closedValue(row.seatDecision, BALLOT_DECISIONS);
-  const desiredOutcome = strictText(row.desiredOutcome);
+  const desiredOutcome = closedValue(row.desiredOutcome, TESTIMONY_DESIRED_OUTCOMES);
   const reason = strictText(row.reason);
   if (!memberId || !sideId || !counterpartId || sideId === counterpartId
     || memberId === counterpartId || !episodeKey
@@ -238,6 +254,7 @@ export function ratifyTermSheet({ ballots, closeBand01 } = {}) {
     && closeBand01 >= 0 && closeBand01 <= 1
     ? closeBand01
     : RATIFICATION_TUNING.CLOSE_BAND_01;
+  /** @param {string} reason */
   const refusal = (reason) => ({
     verdict: '',
     reason,
@@ -327,10 +344,55 @@ export function ratifyTermSheet({ ballots, closeBand01 } = {}) {
 }
 
 /**
+ * THE UNION COALITION'S WEIGHT. Every member that cast a ballot on ANY of the
+ * rival sheets, counted exactly once at its own power weight. This is the
+ * denominator ruling R-BLD-7 makes law: a rival sheet is measured against the
+ * whole coalition, not against the subset of members who happened to hold a
+ * picture of it.
+ *
+ * A member whose power band differs between two tallies is a coalition that
+ * cannot be summed, so the read fails closed rather than picking a weight.
+ *
+ * @param {Array<Record<string, unknown>>} rows
+ * @returns {{weight:number, reason:string}}
+ */
+function unionCoalitionWeight(rows) {
+  /** @type {Map<string, number>} */
+  const byMember = new Map();
+  for (const row of rows) {
+    const cast = Array.isArray(row.ballots) ? row.ballots : null;
+    if (!cast || cast.length === 0) return { weight: 0, reason: 'offer_without_ballots' };
+    for (const entry of cast) {
+      const ballot = normalizeRatificationBallot(entry);
+      if (!ballot) return { weight: 0, reason: 'invalid_offer' };
+      const memberId = String(ballot.memberId);
+      const weight = ratificationPowerWeight(ballot.powerBand);
+      if (weight <= 0) return { weight: 0, reason: 'invalid_power_band' };
+      const seen = byMember.get(memberId);
+      if (seen != null && seen !== weight) return { weight: 0, reason: 'member_band_mismatch' };
+      byMember.set(memberId, weight);
+    }
+  }
+  let weight = 0;
+  for (const value of byMember.values()) weight += value;
+  return weight > 0 ? { weight, reason: 'summed' } : { weight: 0, reason: 'empty_coalition' };
+}
+
+/**
  * Divergent sheets from different counterparties are COMPETING OFFERS, decided
  * against each other and never merged. A sheet wins only by carrying a real
  * majority of the whole coalition's weight; if none does, the coalition has
  * failed to choose, and failure to choose IS the close-vote case.
+ *
+ * "A real majority of the whole" is arithmetic, not a figure of speech: a
+ * sheet's own accept weight is compared against the UNION coalition's weight,
+ * and the surplus must clear the close band. Three weight voting yes among
+ * thirty is a sub-tally, not a mandate, however unanimous that three was.
+ *
+ * ONE offer is not a contest. With a single tally the union IS that tally, so
+ * `unionMargin01` and the tally's own margin are the same number and its own
+ * verdict already answers this law — with the one thing the contest arm cannot
+ * say, which is the difference between a REFUSAL and a stalemate.
  *
  * @param {{tallies?:unknown, closeBand01?:unknown}} args
  * @returns {Record<string, unknown>}
@@ -340,8 +402,9 @@ export function chooseAmongCompetingOffers({ tallies, closeBand01 } = {}) {
     && closeBand01 >= 0 && closeBand01 <= 1
     ? closeBand01
     : RATIFICATION_TUNING.CLOSE_BAND_01;
+  /** @param {string} reason */
   const refusal = (reason) => ({
-    verdict: '', reason, chosenTermSheetId: null, offers: [], closeBand01: band,
+    verdict: '', reason, chosenTermSheetId: null, offers: [], unionWeight: 0, closeBand01: band,
   });
   if (!Array.isArray(tallies) || tallies.length === 0) return refusal('no_offers');
   const rows = tallies.map(recordOf);
@@ -354,41 +417,54 @@ export function chooseAmongCompetingOffers({ tallies, closeBand01 } = {}) {
   }
   const sheetIds = rows.map((row) => String(row.termSheetId));
   if (new Set(sheetIds).size !== sheetIds.length) return refusal('duplicate_offer');
+  const union = unionCoalitionWeight(rows);
+  if (union.weight <= 0) return refusal(union.reason);
 
   const offers = [...rows]
     .sort((left, right) => codepoint(String(left.termSheetId), String(right.termSheetId)))
-    .map((row) => ({
-      termSheetId: String(row.termSheetId),
-      verdict: String(row.verdict || ''),
-      acceptWeight: Number(row.acceptWeight || 0),
-      totalWeight: Number(row.totalWeight || 0),
-      margin01: Number(row.margin01 || 0),
-    }));
-  // A single offer is not a contest; its own tally already decided it.
+    .map((row) => {
+      const acceptWeight = Number(row.acceptWeight || 0);
+      // Surplus of yes over the whole coalition's no, as a share of the whole.
+      const unionMargin01 = round4((2 * acceptWeight - union.weight) / union.weight);
+      return {
+        termSheetId: String(row.termSheetId),
+        verdict: String(row.verdict || ''),
+        acceptWeight,
+        totalWeight: Number(row.totalWeight || 0),
+        margin01: Number(row.margin01 || 0),
+        unionMargin01,
+        holds: unionMargin01 > band,
+      };
+    });
+  // A single offer is not a contest; its own tally already decided it, and that
+  // verdict is provably the same test — see the docstring.
   if (offers.length === 1) {
     return {
       verdict: offers[0].verdict,
       reason: 'sole_offer',
       chosenTermSheetId: offers[0].verdict === 'ratified' ? offers[0].termSheetId : null,
       offers,
+      unionWeight: union.weight,
       closeBand01: band,
     };
   }
-  const ratified = offers.filter((offer) => offer.verdict === 'ratified');
-  if (ratified.length !== 1) {
+  const holding = offers.filter((offer) => offer.holds === true);
+  if (holding.length !== 1) {
     return {
       verdict: 'close',
-      reason: ratified.length === 0 ? 'no_sheet_holds_a_majority' : 'rival_sheets_both_hold',
+      reason: holding.length === 0 ? 'no_sheet_holds_a_majority' : 'rival_sheets_both_hold',
       chosenTermSheetId: null,
       offers,
+      unionWeight: union.weight,
       closeBand01: band,
     };
   }
   return {
     verdict: 'ratified',
     reason: 'one_sheet_holds',
-    chosenTermSheetId: ratified[0].termSheetId,
+    chosenTermSheetId: holding[0].termSheetId,
     offers,
+    unionWeight: union.weight,
     closeBand01: band,
   };
 }

@@ -14,6 +14,10 @@
  * The jewel is `unanimousInJudgment && splitInFact`: three courts all wanting
  * peace, voting three different ways, because each heard from its own envoy.
  *
+ * RULING R-BLD-7 is pinned in the competing-offers block: a rival sheet is
+ * measured against the UNION coalition's weight, so a unanimous sub-tally of
+ * three cannot outrank a coalition of thirty that refused.
+ *
  * @enforced-by this file
  */
 import { readFileSync } from 'node:fs';
@@ -35,6 +39,7 @@ import {
   createNegotiationPicture,
   negotiateFromPictures,
 } from '../../src/domain/worldPulse/negotiationPictures.js';
+import { TESTIMONY_DESIRED_OUTCOMES } from '../../src/domain/worldPulse/envoyTestimony.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -207,6 +212,34 @@ describe('WR-7c — level one: the member reads the sheet through its own pictur
     }).reason).toBe('foreign_picture');
   });
 
+  it('reads desiredOutcome from the ONE court-desire vocabulary, case and all', () => {
+    // FINITE SEMANTICS. `desiredOutcome` decides `unanimousInJudgment`, which is
+    // an EQUALITY over strings — so a second spelling of peace would not read as
+    // a disagreement, it would read as a coalition that never agreed at all.
+    // The vocabulary is declared once, in envoyTestimony.js, and imported here
+    // from there: this loop proves the ratification module accepts exactly it.
+    const sheet = agreedSheet();
+    expect(TESTIMONY_DESIRED_OUTCOMES.length).toBeGreaterThan(1);
+    for (const outcome of TESTIMONY_DESIRED_OUTCOMES) {
+      const cast = castRatificationBallot({
+        member: member('reed', { desiredOutcome: outcome }),
+        picture: memberPicture('picture.reed.a', 'dominant', 'npc.envoy.a'),
+        termSheet: sheet,
+      });
+      expect(cast.reason, outcome).toBe('cast');
+      expect(cast.ballot.desiredOutcome).toBe(outcome);
+    }
+    // Case drift, whitespace drift, and a plausible synonym are all rejected
+    // rather than silently carried onto the tally as a fourth wish.
+    for (const drift of ['Peace', 'PEACE', ' peace', 'peace ', 'make_peace', 'ceasefire', '']) {
+      expect(castRatificationBallot({
+        member: member('reed', { desiredOutcome: drift }),
+        picture: memberPicture('picture.reed.a', 'dominant', 'npc.envoy.a'),
+        termSheet: sheet,
+      }).reason, JSON.stringify(drift)).toBe('invalid_member');
+    }
+  });
+
   it('rejects a ballot whose recorded decision does not follow from its own authority', () => {
     const honest = normalizeRatificationBallot({
       memberId: 'reed',
@@ -229,6 +262,8 @@ describe('WR-7c — level one: the member reads the sheet through its own pictur
       { authority: 'seat' },
       { authority: 'realm', seatDecision: 'accept' },
       { powerBand: 'imperial' },
+      { desiredOutcome: 'Peace' },
+      { desiredOutcome: 'glory' },
     ]) {
       expect(normalizeRatificationBallot({ ...honest, ...patch }), JSON.stringify(patch)).toBeNull();
     }
@@ -381,24 +416,56 @@ describe('WR-7c — THE UNANIMOUS-IN-JUDGMENT, SPLIT-IN-FACT PIN (K4\'s best con
 });
 
 describe('WR-7c — competing offers, and failure to choose', () => {
-  const tallyFor = (termSheetId, decisions) => ({
-    verdict: '', reason: 'tallied', episodeKey: 'war.iron.reed.4', termSheetId,
-    acceptWeight: decisions.accept, refuseWeight: decisions.refuse,
-    totalWeight: decisions.accept + decisions.refuse,
-    margin01: 0, closeBand01: 0.15,
-    ...(decisions.verdict ? { verdict: decisions.verdict } : {}),
-  });
+  /**
+   * A REAL tally over REAL ballots. Every row goes through the actual ballot
+   * normalizer and the actual weighted tally, so the offers this block decides
+   * between are artifacts `ratifyTermSheet` really produces — including their
+   * `ballots`, which is where the union coalition's weight is read from.
+   */
+  const tallyOf = (termSheetId, rows, closeBand01 = 0.15) => {
+    const ballots = rows.map(({ memberId, powerBand, decision }) => normalizeRatificationBallot({
+      memberId,
+      sideId: 'reed',
+      counterpartId: 'iron',
+      episodeKey: 'war.iron.reed.4',
+      termSheetId,
+      pictureId: `picture.${termSheetId}.${memberId}`,
+      powerBand,
+      decision,
+      authority: 'realm',
+      seatDecision: null,
+      realmDecision: decision,
+      desiredOutcome: 'peace',
+      reason: decision === 'accept' ? 'bounded' : 'budget_refused',
+    }));
+    expect(ballots.every(Boolean), termSheetId).toBe(true);
+    const tally = ratifyTermSheet({ ballots, closeBand01 });
+    expect(tally.reason, termSheetId).toBe('tallied');
+    return tally;
+  };
+
+  /** The whole coalition: 3 + 2 + 1 = 6 weight, and it never changes below. */
+  const coalition = (decisions) => [
+    { memberId: 'reed', powerBand: 'principal', decision: decisions[0] },
+    { memberId: 'ash', powerBand: 'ordinary', decision: decisions[1] },
+    { memberId: 'thorn', powerBand: 'minor', decision: decisions[2] },
+  ];
 
   it('lets one sheet win only when it alone carries the coalition', () => {
     const chosen = chooseAmongCompetingOffers({
       tallies: [
-        tallyFor('term_sheet.a', { accept: 5, refuse: 1, verdict: 'ratified' }),
-        tallyFor('term_sheet.b', { accept: 1, refuse: 5, verdict: 'refused' }),
+        tallyOf('term_sheet.a', coalition(['accept', 'accept', 'refuse'])),
+        tallyOf('term_sheet.b', coalition(['refuse', 'refuse', 'refuse'])),
       ],
     });
     expect(chosen).toMatchObject({
       verdict: 'ratified', reason: 'one_sheet_holds', chosenTermSheetId: 'term_sheet.a',
+      unionWeight: 6,
     });
+    // 5 of the coalition's 6 weight said yes to this sheet: the surplus over
+    // the WHOLE coalition, not over the members who happened to vote on it.
+    expect(chosen.offers.find((row) => row.termSheetId === 'term_sheet.a').unionMargin01)
+      .toBe(Math.round(((2 * 5 - 6) / 6) * 10000) / 10000);
   });
 
   it('treats failure to choose between rival sheets AS the close-vote case', () => {
@@ -407,8 +474,10 @@ describe('WR-7c — competing offers, and failure to choose', () => {
     // choose IS the close vote, so the compromise round opens on it.
     const stalemate = chooseAmongCompetingOffers({
       tallies: [
-        tallyFor('term_sheet.a', { accept: 3, refuse: 3, verdict: 'close' }),
-        tallyFor('term_sheet.b', { accept: 2, refuse: 4, verdict: 'refused' }),
+        // 3 of 6 for one sheet, 2 of 6 for the other: a dead-even coalition and
+        // a minority, and neither is a majority of the whole.
+        tallyOf('term_sheet.a', coalition(['accept', 'refuse', 'refuse'])),
+        tallyOf('term_sheet.b', coalition(['refuse', 'accept', 'refuse'])),
       ],
     });
     expect(stalemate).toMatchObject({
@@ -418,11 +487,73 @@ describe('WR-7c — competing offers, and failure to choose', () => {
     // ratifying two incompatible peaces at once.
     const both = chooseAmongCompetingOffers({
       tallies: [
-        tallyFor('term_sheet.a', { accept: 5, refuse: 1, verdict: 'ratified' }),
-        tallyFor('term_sheet.b', { accept: 5, refuse: 1, verdict: 'ratified' }),
+        tallyOf('term_sheet.a', coalition(['accept', 'accept', 'refuse'])),
+        tallyOf('term_sheet.b', coalition(['accept', 'accept', 'refuse'])),
       ],
     });
     expect(both).toMatchObject({ verdict: 'close', reason: 'rival_sheets_both_hold' });
+  });
+
+  it('R-BLD-7: a unanimous sub-tally of three does not outrank a coalition of thirty', () => {
+    // ONE principal court's envoy came home with sheet A and that court alone
+    // ratified it — unanimously, on its own little tally. Nine other principal
+    // courts weighed sheet B and refused it. Reading each sheet against its OWN
+    // tally would hand the coalition a peace three weight signed for, so the
+    // denominator is the union: 3 + 27 = 30, and 3 is not a majority of 30.
+    const alone = tallyOf('term_sheet.a', [
+      { memberId: 'reed', powerBand: 'principal', decision: 'accept' },
+    ]);
+    const many = tallyOf('term_sheet.b', Array.from({ length: 9 }, (_, index) => ({
+      memberId: `power.${index}`, powerBand: 'principal', decision: 'refuse',
+    })));
+    // The sub-tally really did ratify itself — that is the whole trap.
+    expect({ verdict: alone.verdict, accept: alone.acceptWeight }).toEqual({ verdict: 'ratified', accept: 3 });
+    expect({ verdict: many.verdict, refuse: many.refuseWeight }).toEqual({ verdict: 'refused', refuse: 27 });
+
+    const chosen = chooseAmongCompetingOffers({ tallies: [alone, many] });
+    expect(chosen).toMatchObject({
+      verdict: 'close', reason: 'no_sheet_holds_a_majority', chosenTermSheetId: null,
+      unionWeight: 30,
+    });
+    expect(chosen.offers.map((row) => [row.termSheetId, row.verdict, row.holds])).toEqual([
+      ['term_sheet.a', 'ratified', false],
+      ['term_sheet.b', 'refused', false],
+    ]);
+  });
+
+  it('reads the union from the ballots, and fails closed when it cannot', () => {
+    const good = tallyOf('term_sheet.a', coalition(['accept', 'accept', 'refuse']));
+    const rival = tallyOf('term_sheet.b', coalition(['refuse', 'refuse', 'refuse']));
+    // An offer with no ballots carries no coalition to measure against.
+    expect(chooseAmongCompetingOffers({
+      tallies: [{ ...good, ballots: [] }, rival],
+    }).reason).toBe('offer_without_ballots');
+    // The same court cannot be a principal on one sheet and a minor on the
+    // other: that coalition has two different total weights and neither is real.
+    const shifted = tallyOf('term_sheet.b', [
+      { memberId: 'reed', powerBand: 'minor', decision: 'refuse' },
+      { memberId: 'ash', powerBand: 'ordinary', decision: 'refuse' },
+    ]);
+    expect(chooseAmongCompetingOffers({ tallies: [good, shifted] }).reason)
+      .toBe('member_band_mismatch');
+  });
+
+  it('answers a sole offer with its own verdict, which is the same union test', () => {
+    // With one tally the union IS that tally, so `holds` and a `ratified`
+    // verdict cannot disagree — asserted here rather than assumed, across a
+    // ratified, a refused and a close sole offer.
+    const cases = [
+      [coalition(['accept', 'accept', 'accept']), 'ratified', 'term_sheet.a'],
+      [coalition(['refuse', 'refuse', 'refuse']), 'refused', null],
+      [coalition(['accept', 'refuse', 'refuse']), 'close', null],
+    ];
+    for (const [rows, verdict, chosenTermSheetId] of cases) {
+      const tally = tallyOf('term_sheet.a', rows);
+      expect(tally.verdict, verdict).toBe(verdict);
+      const chosen = chooseAmongCompetingOffers({ tallies: [tally] });
+      expect(chosen).toMatchObject({ verdict, reason: 'sole_offer', chosenTermSheetId });
+      expect(chosen.offers[0].holds, verdict).toBe(verdict === 'ratified');
+    }
   });
 
   it('never averages two offers into a third that nobody signed', () => {

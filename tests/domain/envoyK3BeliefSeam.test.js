@@ -72,6 +72,14 @@ const TRUE_STATE_TOKENS = Object.freeze([
  * brokerageStamps (which reads institutions); a pin in
  * envoyTestimonyWr7c.test.js asserts the two spellings are equal, so refusing
  * the import costs no drift.
+ *
+ * REVIEWED ADDITION (WR-7c repair slice): `coalitionRatification.js` reaches
+ * `envoyTestimony.js` for ONE thing — the closed court-desire vocabulary a
+ * ballot and a seat must share, because two spellings of peace would break
+ * unanimity (the finite-semantics law). The reach is K3-safe by construction
+ * and the guard is the pin directly below it: `envoyTestimony` is pinned to
+ * ZERO imports, so a module that reaches nothing cannot pass truth along. The
+ * empty-list pin is therefore now load-bearing for two modules, not one.
  */
 const NEGOTIATION_MODULES = Object.freeze({
   'src/domain/worldPulse/envoyErrand.js': [
@@ -88,6 +96,7 @@ const NEGOTIATION_MODULES = Object.freeze({
     '../spatial/distanceRead.js',
   ],
   'src/domain/worldPulse/coalitionRatification.js': [
+    './envoyTestimony.js',
     './negotiationPictures.js',
   ],
   'src/domain/worldPulse/envoyTestimony.js': [],
@@ -155,7 +164,9 @@ describe('WR-7b K3 — nobody is ever current', () => {
     // The ballot is drawn under one member's own frozen picture, through the
     // same wrapper the parlay uses. A direct peaceTerms import here would be a
     // second terms evaluator — the design defect the seam ruling names.
-    expect(importsOf(source)).toEqual(['./negotiationPictures.js']);
+    // The second entry is the reviewed vocabulary reach documented above; the
+    // test below proves the module it reaches for reaches nothing itself.
+    expect(importsOf(source)).toEqual(['./envoyTestimony.js', './negotiationPictures.js']);
     expect(source).not.toContain('peaceTerms'); // anchored: import list asserted above
     expect(source).not.toContain('worldState'); // anchored: import list asserted above
   });
