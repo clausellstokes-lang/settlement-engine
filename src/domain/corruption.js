@@ -51,14 +51,14 @@ const FLAW_VECTOR = Object.freeze({
 
 export const CORRUPTIBLE_FLAWS = Object.freeze(Object.keys(FLAW_VECTOR));
 
-/** @param {any} flaw */
+/** @param {unknown} flaw */
 export function isCorruptibleFlaw(flaw) {
   if (!flaw) return false;
   return Object.prototype.hasOwnProperty.call(FLAW_VECTOR, String(flaw).toLowerCase());
 }
 
 /** Corruption vector for a flaw; defaults to 'greed' for an unmapped value.
- *  @param {any} flaw */
+ *  @param {unknown} flaw */
 export function corruptionVectorForFlaw(flaw) {
   return /** @type {Record<string, string>} */ (FLAW_VECTOR)[String(flaw || '').toLowerCase()] || 'greed';
 }
@@ -125,7 +125,7 @@ export const CORRUPTION_TUNING = Object.freeze({
 
 /** @param {number} x @param {number} lo @param {number} hi @returns {number} */
 const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
-/** @param {any} x @returns {number} */
+/** @param {number} x @returns {number} */
 const n01 = (x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
 
 // ── Good/evil deity → corruption pressure ───────────────────────────────────
@@ -395,7 +395,7 @@ export function exposureChance({ security = 0.5, prosperity = 0.5, guildStrength
 export const IMPORTANCE_LADDER = Object.freeze(['pillar', 'key', 'notable', 'minor']);
 
 /** Demote one importance step (floor = minor). Unknown → 'notable'.
- *  @param {any} importance */
+ *  @param {string} importance */
 export function demoteImportance(importance) {
   const i = IMPORTANCE_LADDER.indexOf(importance);
   if (i < 0) return 'notable';
@@ -403,13 +403,13 @@ export function demoteImportance(importance) {
 }
 
 /** Demote one dotRank step (3=leader → 2=lieutenant → 1=agent; floor = 1).
- *  @param {any} dotRank */
+ *  @param {unknown} dotRank */
 export function demoteDotRank(dotRank) {
   return Math.max(1, (Number(dotRank) || 1) - 1);
 }
 
 /** A corrupt NPC eroded to 'notable' (or lower) is eligible to be outed+replaced.
- *  @param {any} importance */
+ *  @param {string|null|undefined} importance */
 export function canBeOuted(importance) {
   return importance === 'notable' || importance === 'minor';
 }
@@ -421,7 +421,7 @@ export function canBeOuted(importance) {
 export const CAPTURE_LADDER = Object.freeze(['none', 'adversarial', 'equilibrium', 'corrupted', 'capture']);
 
 /** Step the ladder one rung up (toward capture) or down (toward none).
- *  @param {any} state @param {any} up */
+ *  @param {string} state @param {boolean} up */
 export function advanceCaptureState(state, up) {
   const i = CAPTURE_LADDER.indexOf(state);
   const cur = i < 0 ? 0 : i;
@@ -498,7 +498,7 @@ const PROSPERITY_SCORE = Object.freeze({
   prosperous: 0.8, thriving: 0.8, wealthy: 1.0, affluent: 1.0, opulent: 1.0,
 });
 
-/** @param {any} value */
+/** @param {unknown} value */
 function prosperityScore(value) {
   const s = String(value || '').toLowerCase();
   for (const [k, v] of Object.entries(PROSPERITY_SCORE)) { if (s.includes(k)) return v; }
@@ -529,6 +529,9 @@ export function readCorruptionClimate(settlement) {
   const sp = eco.safetyProfile || settlement?.safetyProfile || {};
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
 
+  // The inline cast below stays: `.map(i => i.name)` yields (string|undefined)[]
+  // and `.filter(Boolean)` does not narrow it, so letting i infer as
+  // SimInstitution makes the declared `criminalInstitutions: string[]` red.
   const criminalInstitutions = institutions.filter(isCriminalInstitution).map((/** @type {any} */ i) => i.name).filter(Boolean);
   const hasCriminalInst = criminalInstitutions.length > 0
     || (Array.isArray(sp.criminalInstitutions) && sp.criminalInstitutions.length > 0);
@@ -571,7 +574,7 @@ export const PATRONAGE_TUNING = Object.freeze({
   proximityVisibilityBonus: 0.25, // investigators circle a PUBLICLY corrupt institution
 });
 
-/** @param {any} a @param {any} b */
+/** @param {unknown} a @param {unknown} b */
 function nameMatches(a, b) {
   const x = String(a || '').trim().toLowerCase();
   const y = String(b || '').trim().toLowerCase();
@@ -599,7 +602,7 @@ export function npcHomeInstitution(npc) {
 export function compromisedSecurityInstitutions(settlement) {
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   const securityInstitutions = institutions
-    .filter((/** @type {any} */ inst) => SECURITY_INSTITUTION_RE.test(String(inst?.name || '')));
+    .filter((inst) => SECURITY_INSTITUTION_RE.test(String(inst?.name || '')));
   if (!securityInstitutions.length) return { covert: [], revealed: [] };
 
   // A 'corruption'-typed impairment is PUBLIC record only when it is not flagged
@@ -610,9 +613,9 @@ export function compromisedSecurityInstitutions(settlement) {
   const revealed = new Set();
   const covert = new Set();
   for (const inst of securityInstitutions) {
-    const corruptionImps = (inst.impairments || []).filter((/** @type {any} */ imp) => imp?.type === 'corruption');
+    const corruptionImps = (inst.impairments || []).filter((imp) => imp?.type === 'corruption');
     if (!corruptionImps.length) continue;
-    if (corruptionImps.some((/** @type {any} */ imp) => imp?.covert !== true)) revealed.add(inst.name);
+    if (corruptionImps.some((imp) => imp?.covert !== true)) revealed.add(inst.name);
     else covert.add(inst.name);
   }
 
@@ -620,7 +623,7 @@ export function compromisedSecurityInstitutions(settlement) {
     if (npc?.corrupt !== true || npc?.ousted) continue;
     const home = npcHomeInstitution(npc);
     if (!home) continue;
-    const match = securityInstitutions.find((/** @type {any} */ inst) => nameMatches(inst.name, home));
+    const match = securityInstitutions.find((inst) => nameMatches(inst.name, home));
     if (match && !revealed.has(match.name)) covert.add(match.name);
   }
 
