@@ -157,9 +157,17 @@ export const GILT_BLOOM = `color-mix(in srgb, ${L.GOLD} 22%, transparent)`;
  * reads as the same room. Two more devices finish the separation rather than one
  * loud one — a BORDER hairline along the bottom edge and ELEV[2]'s soft shadow.
  *
- * SHAFT_GRAIN / SHAFT_GRAIN_DEEP are the two streak tones, at 1.96% and 3.89%
- * below SHAFT — inside the directive's 2–4% luminance band, which is what keeps the
- * grain a material and not a stripe pattern. SHAFT_GRAIN_DEEP is THE DARKEST STREAK:
+ * SHAFT_GRAIN / SHAFT_GRAIN_DEEP are the two streak tones. MEASURED, not stated:
+ * they sit 1.96% and 3.89% below SHAFT in relative luminance. The directive named a
+ * 2–4% band, so the DEEP streak is inside it and the light one is 0.04pp under its
+ * floor — an honest ≈2–4%, recorded that way rather than rounded into compliance.
+ * The tone was deliberately NOT nudged to meet the floor: 0.04pp of relative
+ * luminance is invisible, the owner's word for the grain was SUBTLE, and moving a
+ * measured colour to make a sentence true is the reflex this very bar's 60-vs-124
+ * history exists to warn against. The band is a target, not a threshold anything
+ * depends on — what keeps the grain a material and not a stripe pattern is the pair
+ * staying ordered and staying quiet, which tests/components/navFletching.test.jsx
+ * measures on every run. SHAFT_GRAIN_DEEP is THE DARKEST STREAK:
  * every label that rides the shaft owes its AA to THAT value, not to SHAFT, and
  * tests/design/contrast.test.js measures each one against it:
  *   GOLD_TXT   on SHAFT_GRAIN_DEEP .... 5.75:1  wordmark + active reference tab AA ✓

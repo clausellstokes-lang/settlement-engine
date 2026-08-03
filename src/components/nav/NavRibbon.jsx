@@ -60,7 +60,10 @@
  * ⚠️ THE CLIP NEVER TOUCHES A FOCUSABLE ELEMENT. `clip-path` clips an element's
  * whole rendering INCLUDING its outline, and a11y.css draws the global focus ring
  * as `outline: 3px` at `outline-offset: 2px` — entirely outside the border box,
- * so clipping the <button> would silently swallow the keyboard focus ring. The
+ * so clipping the cell's own button element would silently swallow the keyboard
+ * focus ring. (Spelled in prose on purpose: the raw-button ratchet counts the JSX
+ * tag by source match, so a docstring that wrote it out would spend a unit of the
+ * migration budget on a sentence. See tests/lint/rawButtonBaseline.test.js.) The
  * feather shape is therefore painted by an aria-hidden VANE layer inside each
  * button; the button itself is never clipped and its ring renders whole. No
  * ancestor may introduce `overflow: hidden` or a clip-path either; the pin

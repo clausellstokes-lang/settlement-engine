@@ -35,7 +35,15 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // spend it. Migrating the 45 grandfathered buttons themselves is a burn-down
 // lane (each swap changes rendered chrome — border/minHeight/padding — so it
 // is per-surface craft work, not a mechanical sweep).
-const BUTTON_BUDGET = 45;
+// LANE VT (2026-08-03): tightened 45 → 44, and NOT by a migration. The detector
+// is a source match, so it had been counting a DOCSTRING — NavRibbon.jsx's note
+// about why the focus ring survives the clip wrote the JSX tag out longhand and
+// spent the last unit of the budget. The sentence now says it in prose, and the
+// unit it was holding is locked here rather than left as headroom a genuinely new
+// raw button could quietly spend. (This is the ratchet's own honesty rule read in
+// the direction it is usually read the other way round: the ceiling follows the
+// MEASURED count, whichever way the measurement moved.)
+const BUTTON_BUDGET = 44;
 
 const BUTTON_FILE_RE = /<button[\s/>]/;
 const BUTTON_OCC_RE = /<button[\s/>]/g;

@@ -39,7 +39,8 @@ function Tip({ children }) {
 
 export default function CompareSection() {
   return (
-    // scrollMarginTop (theme.js ANCHOR_OFFSET, 84): #how-we-compare is the busiest
+    // scrollMarginTop (theme.js ANCHOR_OFFSET = CHROME.headerDesktop + SP.xxl —
+    // the sticky bar plus one gutter, never a spelled number): #how-we-compare is the busiest
     // inbound anchor on this page — every /compare, /compare-chatgpt,
     // /compare-worldographer and /compare-kanka URL in the world redirects onto it —
     // so a landing that parks the heading under the sticky ribbon is exactly the

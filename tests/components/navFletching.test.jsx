@@ -91,7 +91,7 @@ import { flowsInto } from '../../src/components/nav/NavFlowArrow.jsx';
 import {
   ANCHOR_OFFSET, BODY, CHROME, FLETCH, FLETCH_BARB, FLETCH_BARB_DEG, FLETCH_BARB_LIFT,
   FLETCH_BROWN, FLETCH_BROWN_LIFT, GILT, GILT_ACTIVE, GILT_BLOOM, GOLD_TXT, PARCH, PARCH_100,
-  SHAFT_GRAIN, SHAFT_GRAIN_DEEP, SHAFT_GRAIN_LAYERS, SP,
+  SHAFT, SHAFT_GRAIN, SHAFT_GRAIN_DEEP, SHAFT_GRAIN_LAYERS, SP,
 } from '../../src/components/theme.js';
 
 const H = vi.hoisted(() => ({
@@ -183,6 +183,37 @@ function rgb(hex) {
   return `rgb(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255})`;
 }
 
+/** WCAG relative luminance of an authored #rrggbb, for the grain-band record. */
+function relLuminance(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  const [r, g, b] = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => {
+    const c = v / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+/** How far below SHAFT a streak tone sits, in percent of SHAFT's own luminance. */
+const dropPct = (tone) => ((relLuminance(SHAFT) - relLuminance(tone)) / relLuminance(SHAFT)) * 100;
+
+/**
+ * THE BLOOM'S FROZEN SPELLING (v2 verifier tail §2). The overhang pin below used
+ * to assert the rendered filter against `${GILT_BLOOM}` — the very token the
+ * component interpolates — so it proved the component and the theme agreed and
+ * NOTHING about the alpha itself. A palette edit that moved the gold, or a retune
+ * of the 22%, moved both sides at once and stayed green. The literal is frozen
+ * here instead, and the drift message names which side moved.
+ */
+const GILT_BLOOM_FROZEN = 'color-mix(in srgb, #C9A24C 22%, transparent)';
+const BLOOM_DRIFT = [
+  `GILT_BLOOM no longer reads ${GILT_BLOOM_FROZEN}.`,
+  'THE THEME MOVED, not the ribbon: either L.GOLD was re-toned (the mix is a',
+  'function OF the gilt, so a gold edit reaches the bloom) or the 22% alpha was',
+  'retuned. Both are legitimate edits — but the BALANCE LAW dials this device to',
+  'about half on purpose, so re-record this literal deliberately, in a commit that',
+  'says which of the two moved and why.',
+].join('\n  ');
+
 const feathers = (c) => [...c.querySelectorAll('[data-nav-cell="feather"]')];
 const plains = (c) => [...c.querySelectorAll('[data-nav-cell="plain"]')];
 const label = (b) => b.textContent.trim();
@@ -259,6 +290,29 @@ describe('2 — ⚠️⚠️ the overhang is PAINT, and the layout box stays exa
     expect(ANCHOR_OFFSET).toBe(72);
   });
 
+  test('the DESKTOP HEADER ITSELF spends CHROME.headerDesktop, in border-box', () => {
+    // ⚠️ THE PIN THE V2 VERIFIER FOUND MISSING. Everything else in this block
+    // proves the fletching does not ADD height. Nothing proved the bar SPENDS the
+    // token at all — and that is the half V2 actually repaired: before it, the
+    // header sized by content and an in-flow SVG set the flex line at 124 while
+    // the token said 60. Delete `minHeight`/`boxSizing` from App.jsx's desktop
+    // header and every other assertion here stays green while ANCHOR_OFFSET goes
+    // back to describing a bar that does not exist.
+    const { container } = render(<App />);
+    const header = container.querySelector('header');
+    expect(header).toBeTruthy();
+    expect(header.style.minHeight).toBe(`${CHROME.headerDesktop}px`);
+    // border-box is load-bearing beside it: the header carries `0 SP.xxl` padding,
+    // and under content-box the min-height would be the CONTENT box, so the bar
+    // would still measure the token plus whatever vertical padding arrives later.
+    expect(header.style.boxSizing).toBe('border-box');
+    // …and it is a FLOOR, never a fixed height (J-V2-1): the desktop breakpoint is
+    // 640px while this row wants ~1000, so flexWrap really fires on a narrow
+    // desktop and a fixed height would clip the second line instead of growing.
+    expect(header.style.height).toBeFalsy();
+    expect(header.style.maxHeight).toBeFalsy();
+  });
+
   test('the barb angle is DERIVED from the slant and the bar, never spelled', () => {
     // The texture has to lie parallel to the edge of the feather carrying it. That
     // is a relationship between two numbers, so it is pinned as one: change the
@@ -291,6 +345,25 @@ describe('2 — ⚠️⚠️ the overhang is PAINT, and the layout box stays exa
     expect(SHAFT_GRAIN_LAYERS).toContain(SHAFT_GRAIN_DEEP);
   });
 
+  test('THE GRAIN-BAND RECORD IS THE MEASUREMENT, and the measurement is honest', () => {
+    // The directive asked for streaks 2–4% below the plank. MEASURED, to two
+    // decimals: 1.96% and 3.89% — so the LIGHTER streak sits 0.04pp under the
+    // stated floor and the record used to claim both were "inside" the band.
+    // Kept rather than nudged, and the reason is the estate's own lesson: the
+    // number was measured and the prose was not, so the prose moves. Deepening
+    // #EFE3C6 by one step to satisfy a hand-set floor would move a tone nobody
+    // can see it move (0.04pp of relative luminance) purely to make a sentence
+    // true — the "move the number to fit" reflex this ribbon's own history
+    // (60-vs-124) exists to warn against. The owner's word was SUBTLE; 1.96%
+    // is subtle, and the band is a target, not a threshold anything depends on.
+    expect(dropPct(SHAFT_GRAIN)).toBeCloseTo(1.96, 2);
+    expect(dropPct(SHAFT_GRAIN_DEEP)).toBeCloseTo(3.89, 2);
+    // What IS a floor: the pair must stay ordered, stay visible, and stay quiet.
+    expect(dropPct(SHAFT_GRAIN)).toBeLessThan(dropPct(SHAFT_GRAIN_DEEP));
+    expect(dropPct(SHAFT_GRAIN)).toBeGreaterThan(1); // a stripe you can see
+    expect(dropPct(SHAFT_GRAIN_DEEP)).toBeLessThan(4); // never a ruled line
+  });
+
   test('the paint layer is a zero-inset absolute box — it is not in flow at all', () => {
     const { container } = render(<App />);
     const paint = container.querySelector('[data-testid="nav-fletch-paint"]');
@@ -316,6 +389,13 @@ describe('2 — ⚠️⚠️ the overhang is PAINT, and the layout box stays exa
       `drop-shadow(0 ${FLETCH.overhang}px 0 ${FLETCH_BROWN})`
       + ` drop-shadow(0 0 ${FLETCH.bloom}px ${GILT_BLOOM})`,
     );
+    // …and the bloom's own STRENGTH, against a frozen literal rather than against
+    // itself. The assertion above compares the render to the token the render is
+    // built from: true of a 22% bloom and equally true of a 90% one. These two
+    // are what actually hold the alpha — the token as authored, and the token as
+    // it reaches the DOM.
+    expect(GILT_BLOOM, BLOOM_DRIFT).toBe(GILT_BLOOM_FROZEN);
+    expect(paint.style.filter, BLOOM_DRIFT).toContain(GILT_BLOOM_FROZEN);
   });
 
   test('the gilt is a HAIRLINE around the fletching, not a second fill', () => {
