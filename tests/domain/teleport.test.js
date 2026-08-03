@@ -261,3 +261,83 @@ describe('M9c — the ZERO-HOP HI-FI intel carrier (round 9/11)', () => {
     }
   });
 });
+
+/**
+ * MG-3a — LEAK L1 CLOSED (docs/DESIGN_REALM_MAGIC_TOGGLE.md §3 L1).
+ *
+ * THE LEAK: `deriveTeleportEligibility(seeds, institutionsById)` took NO config, so a
+ * legacy roster carrying a 'Teleportation circle' formed teleport edges in a world where
+ * magic does not function — contradicting this module's own header ("MAGIC-gated (absent
+ * in a magic-opt-out world)"). The realm magic toggle (MG-2) makes the leak visible at
+ * realm scale: EVERY member of a mundane realm carries magicExists:false, so one authored
+ * circle pair would light a whole bloc in a world with no magic in it.
+ *
+ * THE CLOSURE: capability = a teleport-capable institution ∧ the settlement's own
+ * magicExists (the per-settlement truth MG-LAW-1 names as the ONE authority). The gate is
+ * `=== false` (defensive, the magicLedger idiom): an ABSENT magic map means "not asserted"
+ * and stays magical, so every pre-MG digest, canon and golden is byte-identical.
+ *
+ * NOT gated on the BAND: a magicExists:true settlement whose priorityMagic is 0 (band
+ * 'none') KEEPS its circle — an authored magical premise survives by design (MG-LAW-4);
+ * the structural validator warns about it (MG-3e), and erasure is never the answer.
+ */
+describe('MG-3a — L1: teleport capability is MAGIC-gated (the config gate)', () => {
+  const seeds3 = [{ id: 'a', cellId: 0 }, { id: 'b', cellId: 1 }, { id: 'c', cellId: 2 }];
+  const roster3 = { a: CIRCLE, b: CIRCLE, c: CIRCLE };
+
+  it('a magic-OFF pair holding circles forms NO bloc (the leak, closed)', () => {
+    const mundane = buildTeleportEdges(
+      [{ id: 'a', cellId: 0 }, { id: 'b', cellId: 1 }],
+      { a: CIRCLE, b: CIRCLE },
+      { a: false, b: false },
+    );
+    expect(mundane).toBeNull();
+    // The eligibility rows still EXIST (the census is total) — they are simply not capable.
+    const elig = deriveTeleportEligibility(
+      [{ id: 'a', cellId: 0 }, { id: 'b', cellId: 1 }],
+      { a: CIRCLE, b: CIRCLE },
+      { a: false, b: false },
+    );
+    expect(elig.map((e) => e.id)).toEqual(['a', 'b']);
+    expect(elig.every((e) => e.teleport === false)).toBe(true);
+  });
+
+  it('a mundane member drops OUT of a mixed bloc; the magical members keep theirs', () => {
+    const set = buildTeleportEdges(seeds3, roster3, { b: false });
+    expect(set).toBeTruthy();
+    expect(set.nodes).toEqual(['a', 'c']); // b is mundane despite its circle
+    expect(set.edges.map((e) => e.between)).toEqual([['a', 'c']]);
+  });
+
+  it('ONE magical circle-holder left after the gate ⇒ the dormancy floor ⇒ NULL', () => {
+    expect(buildTeleportEdges(seeds3, roster3, { b: false, c: false })).toBeNull();
+  });
+
+  it('an ABSENT magic map leaves every pre-MG derivation byte-identical (defensive default)', () => {
+    const gatedAbsent = buildTeleportEdges(seeds3, roster3);
+    const gatedEmpty = buildTeleportEdges(seeds3, roster3, {});
+    const gatedNull = buildTeleportEdges(seeds3, roster3, null);
+    expect(JSON.stringify(gatedEmpty)).toBe(JSON.stringify(gatedAbsent));
+    expect(JSON.stringify(gatedNull)).toBe(JSON.stringify(gatedAbsent));
+    expect(gatedAbsent.nodes).toEqual(['a', 'b', 'c']);
+  });
+
+  it('MG-LAW-4 — an AUTHORED premise survives: magicExists:true at band none keeps its circle', () => {
+    // priorityMagic 0 ⇒ band 'none', but magic FUNCTIONS in this world (the DM placed a
+    // strange glowing city). The bloc forms; MG-3e's validator warning carries the story.
+    const set = buildTeleportEdges(seeds3, roster3, { a: true, b: true, c: true });
+    expect(set.nodes).toEqual(['a', 'b', 'c']);
+  });
+
+  it('the DIGEST honours the placement rows own magicExists (the realm-scope closure)', () => {
+    const { pack, placements } = makeTeleportIslandPack();
+    const magical = buildSpatialDigest({ pack, placements, teleport: true });
+    expect(magical.reserved.teleportEdges).toBeTruthy();
+    const mundanePlacements = placements.map((p) => ({ ...p, magicExists: false }));
+    const mundane = buildSpatialDigest({ pack, placements: mundanePlacements, teleport: true });
+    expect(mundane.reserved.teleportEdges).toBeNull();
+    // …and the mundane realm's members are back to plain land routing: the ocean channel
+    // cuts the island off exactly as it does with the teleport slot unlit.
+    expect(pathCost(mundane, 'main', 'isle')).toBeNull();
+  });
+});

@@ -27,16 +27,24 @@
 
 import { getSpatialCaptureBridge } from './spatialCaptureRegistry.js';
 import { findActiveCampaign } from '../store/campaignSliceShared.js';
+import { magicLedger } from '../domain/magicLedger.js';
 
 /**
  * The campaign's settlement placements as the digest builder consumes them:
- * [{ id: settlementId, cellId, institutions }], scoped to the campaign's settlements
- * when known. The `institutions` roster (M8) is the port-eligibility CAPABILITY read
- * — the digest derives a port from geography ∧ a water-access institution, so the
- * roster travels WITH the placement. A settlement without a roster row carries an
- * empty list (never a port). Read-only projection; no mutation of state.
+ * [{ id: settlementId, cellId, institutions, magicExists }], scoped to the campaign's
+ * settlements when known. The `institutions` roster (M8) is the port-eligibility
+ * CAPABILITY read — the digest derives a port from geography ∧ a water-access
+ * institution, so the roster travels WITH the placement. A settlement without a roster
+ * row carries an empty list (never a port).
+ *
+ * MG-3a (leak L1): `magicExists` travels the same way — the digest's teleport bloc is
+ * magic-gated, and the ONE authority on a settlement's magic is its own config
+ * (MG-LAW-1), read through the canonical `magicLedger` accessor rather than a hand-rolled
+ * config poke. Only an explicit false is stamped; an un-generated or magical settlement
+ * carries no flag, so every existing canon re-derives byte-identically.
+ * Read-only projection; no mutation of state.
  * @param {any} state @param {string} campaignId
- * @returns {Array<{id:string, cellId:number, institutions:any[]}>}
+ * @returns {Array<{id:string, cellId:number, institutions:any[], magicExists?:boolean}>}
  */
 function placementsFor(state, campaignId) {
   const placements = state?.mapState?.placements || {};
@@ -44,16 +52,26 @@ function placementsFor(state, campaignId) {
   const inRealm = Array.isArray(campaign?.settlementIds) && campaign.settlementIds.length
     ? new Set(campaign.settlementIds.map(String))
     : null;
-  // Index each settlement's institution roster by settlement id (the M8 capability read).
+  // Index each settlement's institution roster by settlement id (the M8 capability read)
+  // and its magic truth (the MG-3a gate).
   const savedSettlements = Array.isArray(state?.savedSettlements) ? state.savedSettlements : [];
   /** @type {Map<string, any[]>} */
   const institutionsById = new Map();
+  /** @type {Set<string>} */
+  const mundaneIds = new Set();
   for (const s of savedSettlements) {
     const id = s?.id != null ? String(s.id) : '';
+    if (!id) continue;
     const insts = s?.settlement?.institutions;
-    if (id && Array.isArray(insts)) institutionsById.set(id, insts);
+    if (Array.isArray(insts)) institutionsById.set(id, insts);
+    // PRESENT-guarded: magicLedger's neutral default for an UN-GENERATED settlement is
+    // itself magicExists:false, so an unguarded read would declare every config-less
+    // legacy row mundane. Only a settlement that actually carries a magic axis AND
+    // asserts magic absent is stamped.
+    const ledger = magicLedger(s?.settlement);
+    if (ledger.present && ledger.magicExists === false) mundaneIds.add(id);
   }
-  /** @type {Array<{id:string, cellId:number, institutions:any[]}>} */
+  /** @type {Array<{id:string, cellId:number, institutions:any[], magicExists?:boolean}>} */
   const out = [];
   for (const burgId of Object.keys(placements).sort()) {
     const pl = placements[burgId];
@@ -61,7 +79,12 @@ function placementsFor(state, campaignId) {
     const cellId = Number(pl?.cellId);
     if (!id || !Number.isInteger(cellId)) continue;
     if (inRealm && !inRealm.has(id)) continue; // scope the digest to THIS realm's settlements
-    out.push({ id, cellId, institutions: institutionsById.get(id) || [] });
+    const row = /** @type {{id:string, cellId:number, institutions:any[], magicExists?:boolean}} */ (
+      { id, cellId, institutions: institutionsById.get(id) || [] });
+    // Additive ONLY when magic is asserted absent — an unstamped row keeps the exact
+    // pre-MG shape, so no existing capture, canon or golden moves a byte.
+    if (mundaneIds.has(id)) row.magicExists = false;
+    out.push(row);
   }
   return out;
 }

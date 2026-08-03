@@ -74,8 +74,11 @@ import { buildTeleportEdges } from './teleportEdges.js';
  * One raw settlement placement row as callers supply it (the live capture, the
  * store seam, or a test fixture): settlement id + FMG cell. Tolerant — the row
  * may be nullish and its fields loosely typed; resolveSeeds normalizes
- * (String/Number) and drops the invalid.
- * @typedef {{ id?: string|number|null, cellId?: number|string|null } | null | undefined} SpatialPlacementRow
+ * (String/Number) and drops the invalid. The optional `institutions` roster (M8/M9c
+ * capability read) and `magicExists` (MG-3a — the realm magic toggle's per-settlement
+ * projection) ride the row so eligibility stays a pure function of the frozen inputs.
+ * @typedef {{ id?: string|number|null, cellId?: number|string|null,
+ *   institutions?: unknown, magicExists?: unknown } | null | undefined} SpatialPlacementRow
  */
 
 /**
@@ -279,6 +282,9 @@ function buildBiomeTexture(seeds, idOf, crossings, gateKeys, pack) {
  * placement roster), magic-gated + geography-independent (§4e). With fewer than two
  * circle-holders the slot stays null (the dormancy floor). Omitted, or opted-in but
  * <2 holders (every existing golden/canon) ⇒ teleportEdges null ⇒ dormant, byte-identical.
+ * MG-3a: a placement row may carry `magicExists:false` (the realm magic toggle's
+ * per-settlement projection) — a circle in a mundane world is masonry, so that member is
+ * not teleport-capable. Absent ⇒ magical ⇒ every pre-MG canon derives byte-identically.
  * BIOME TRUTH (V-6): `biomeTexture:true` appends the additive `biomes` key (per-settlement
  * biome id + terrain class, and per-leg gate biome) extracted from the captured pack's
  * per-cell biome array. DARK by default: OMITTED (the default, and every existing golden/
@@ -311,15 +317,21 @@ export function buildSpatialDigest(input) {
   const teleportOptIn = input?.teleport === true;
   /** @type {Record<string, Array<string | { name?: unknown, catalogId?: unknown }>>} */
   const institutionsById = {};
+  // MG-3a (leak L1): the per-settlement magic truth travels WITH the placement, exactly
+  // as the institution roster does. Only an EXPLICIT false is recorded — an absent flag
+  // means "not asserted" and leaves every pre-MG canon/golden byte-identical.
+  /** @type {Record<string, boolean>} */
+  const magicById = {};
   // The institution roster is the shared CAPABILITY substrate for BOTH the sea-lane
   // port derivation (geography ∧ institution) AND the teleport eligibility (a magic
-  // institution). Build it once when EITHER slot opts in — an internal derivation, so
-  // building it under teleport does not alter the seaLanes digest bytes.
+  // institution ∧ a world with magic in it). Build it once when EITHER slot opts in — an
+  // internal derivation, so building it under teleport does not alter the seaLanes bytes.
   if (seaLanesOptIn || teleportOptIn) {
     for (const pl of Array.isArray(input?.placements) ? input.placements : []) {
       const id = pl == null ? '' : String(pl.id ?? '');
       const insts = pl && /** @type {{ institutions?: unknown }} */ (pl).institutions;
       if (id !== '' && Array.isArray(insts)) institutionsById[id] = insts;
+      if (id !== '' && pl && /** @type {{ magicExists?: unknown }} */ (pl).magicExists === false) magicById[id] = false;
     }
   }
   // The edge set is built LATER (after the land distance matrix), so a sea lane can be
@@ -333,7 +345,7 @@ export function buildSpatialDigest(input) {
   // needing no distance matrix or domination pruning (unlike sea lanes). Null with <2
   // circle-holders (dormant). The KEY ORDER (teleportEdges LAST in reservedSlots) is
   // preserved regardless, so an unlit slot is byte-identical to a pre-M9c digest.
-  const teleportEdges = teleportOptIn ? buildTeleportEdges(seeds, institutionsById) : null;
+  const teleportEdges = teleportOptIn ? buildTeleportEdges(seeds, institutionsById, magicById) : null;
 
   const spatialGeometryVersion = Number.isInteger(input?.spatialGeometryVersion) ? input.spatialGeometryVersion : SPATIAL_GEOMETRY_VERSION;
   const costLawVersion = Number.isInteger(input?.costLawVersion) ? input.costLawVersion : COST_LAW_VERSION;

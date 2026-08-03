@@ -107,6 +107,26 @@ export function teleportInstitutionNames() {
 }
 
 /**
+ * MG-3a — THE MAGIC GATE (docs/DESIGN_REALM_MAGIC_TOGGLE.md §3 leak L1).
+ *
+ * A circle only teleports where magic FUNCTIONS. The gate reads the per-settlement truth
+ * (`magicExists`, MG-LAW-1's ONE authority — never a realm-level rule consulted at read
+ * time) projected onto the placement row and carried here as an id→boolean map.
+ *
+ * DEFENSIVE `=== false`, the magicLedger idiom: an ABSENT entry means "not asserted", not
+ * "mundane", so every pre-MG canon, digest and golden derives byte-identically. The BAND
+ * is deliberately NOT read — a magicExists:true settlement at band 'none' keeps an
+ * authored circle (MG-LAW-4: authored premises survive; the validator warns, MG-3e).
+ * @param {Record<string, unknown> | null | undefined} magicById
+ * @param {string} id
+ * @returns {boolean}
+ */
+function magicFunctionsAt(magicById, id) {
+  if (!magicById || typeof magicById !== 'object') return true;
+  return /** @type {Record<string, unknown>} */ (magicById)[id] !== false;
+}
+
+/**
  * Does an institution roster hold a teleport-capable institution? Each row may be a
  * string name or a `{ name, catalogId? }` object (the settlement roster shape). Matches
  * id-first (a catalog-stamped renamed circle keeps capability) then by canonical name.
@@ -136,23 +156,27 @@ export function hasTeleportInstitution(institutions) {
  * @typedef {Object} TeleportEligibility
  * @property {string} id
  * @property {number} cellId
- * @property {boolean} teleport   capability: a teleport-capable institution present
+ * @property {boolean} teleport   capability: a teleport-capable institution IN A WORLD WITH MAGIC
  */
 
 /**
- * Derive per-seed teleport eligibility. Purely institutional (magic bypasses
- * geography — a mountain fastness with a circle is as connected as a port city).
- * Pure + deterministic (a function of the roster); codepoint-sorted by id.
+ * Derive per-seed teleport eligibility. Institutional ∧ MAGICAL: geography is bypassed
+ * (a mountain fastness with a circle is as connected as a port city) but the world's own
+ * magic law is not (MG-3a — a circle in a mundane world is masonry). Pure + deterministic
+ * (a function of the roster and the projected per-settlement magic truth); codepoint-
+ * sorted by id. The census stays TOTAL — every seed gets a row; the gate moves `teleport`
+ * to false rather than dropping the settlement.
  * @param {Array<{ id:string, cellId:number }>} seeds  the resolved digest seeds
  * @param {Record<string, Array<string | { name?: unknown, catalogId?: unknown }>>} institutionsById
+ * @param {Record<string, unknown> | null} [magicById]  id → magicExists; absent ⇒ magical (MG-3a)
  * @returns {TeleportEligibility[]}
  */
-export function deriveTeleportEligibility(seeds, institutionsById) {
+export function deriveTeleportEligibility(seeds, institutionsById, magicById = null) {
   const roster = institutionsById && typeof institutionsById === 'object' ? institutionsById : {};
   const rows = (Array.isArray(seeds) ? seeds : []).map((s) => ({
     id: String(s.id),
     cellId: Number(s.cellId),
-    teleport: hasTeleportInstitution(roster[String(s.id)]),
+    teleport: magicFunctionsAt(magicById, String(s.id)) && hasTeleportInstitution(roster[String(s.id)]),
   }));
   return rows.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
 }
@@ -190,14 +214,15 @@ export function buildTeleportEdgeSet(eligibility) {
 
 /**
  * The ONE builder entry point spatialDigest calls when `teleport:true` is opted in.
- * Derives teleport eligibility (a teleport-capable institution) then builds the clique
- * edge set, or NULL when <2 circle-holders (dormant). Pure + deterministic; NO pack
- * needed (magic bypasses geography, unlike sea lanes).
+ * Derives teleport eligibility (a teleport-capable institution ∧ a world where magic
+ * functions) then builds the clique edge set, or NULL when <2 circle-holders (dormant).
+ * Pure + deterministic; NO pack needed (magic bypasses geography, unlike sea lanes).
  * @param {Array<{ id:string, cellId:number }>} seeds
  * @param {Record<string, Array<string | { name?: unknown, catalogId?: unknown }>>} institutionsById
+ * @param {Record<string, unknown> | null} [magicById]  id → magicExists; absent ⇒ magical (MG-3a)
  * @returns {{ version:number, nodes:string[], edges:Array<{ between:[string,string], cost:number, capacity:number }>, edgeCost:number, edgeCapacity:number }|null}
  */
-export function buildTeleportEdges(seeds, institutionsById) {
-  const eligibility = deriveTeleportEligibility(seeds, institutionsById);
+export function buildTeleportEdges(seeds, institutionsById, magicById = null) {
+  const eligibility = deriveTeleportEligibility(seeds, institutionsById, magicById);
   return buildTeleportEdgeSet(eligibility);
 }
