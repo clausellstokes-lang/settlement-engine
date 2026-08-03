@@ -21,23 +21,32 @@
  *   2. ⚠️⚠️ THE OVERHANG IS PAINT, NEVER LAYOUT. The band's brown extends
  *      FLETCH.overhang px BELOW the ribbon, and it MUST do so without adding one
  *      pixel to any box. This is the load-bearing one: theme.js derives
- *      ANCHOR_OFFSET (84) from CHROME.headerDesktop (60), and every About /
- *      guide / Compendium in-page anchor lands on that number. A margin, a
+ *      ANCHOR_OFFSET from CHROME.headerDesktop, and every About / guide /
+ *      Compendium / dossier in-page anchor lands on that number. A margin, a
  *      padding, a height or a negative offset here would push the sticky header
  *      taller and every anchor in the estate would land 4px worse — a defect no
  *      nav test would ever see. So both halves are pinned: the derivation chain,
  *      and the ABSENCE of any box that spends the overhang.
  *
+ *      ⚠️ NEVER PIN THE SUM (v2 directive §1). Every assertion here names
+ *      `CHROME.headerDesktop + SP.xxl`, not the number it happens to evaluate to.
+ *      A pin on the literal survives an edit that BREAKS the derivation and fails
+ *      on an edit that HONOURS it, which is exactly backwards; the literals below
+ *      appear only as a second, clearly-labelled today's-value line so a reader
+ *      knows what the bar currently measures.
+ *
  *      ⚠️ jsdom HAS NO LAYOUT, so this file can only pin the STRUCTURE that makes
  *      the overhang paint-only; the height itself was proved in a real browser and
- *      the receipt is recorded here so nobody re-derives it. At 1440×900, base
- *      83b18609 and the fletched tree were served side by side and BOTH reported
- *      header 124px / nav 100px (base also main-top 124) — the refit cost zero
- *      layout height. ⚠️⚠️ AND NOTE WHAT THAT MEASUREMENT ALSO SAYS:
- *      CHROME.headerDesktop is 60 while the live desktop header is 124. That
- *      divergence is PRE-EXISTING and estate-wide, was reported by lane FL-2, and
- *      is deliberately not repaired here — the constant is still pinned below
- *      because the ribbon must not MOVE it, not because it measures this header.
+ *      the receipt is recorded here so nobody re-derives it. V1's receipt at
+ *      1440×900 read header 124px / nav 100px on BOTH base and the fletched tree —
+ *      zero layout cost, but also 124 against a constant that said 60. V2 found
+ *      the cause rather than moving the number: NavDivider's SVG was IN FLOW with
+ *      `height="100%"` against an indefinite parent, so it fell back to its own
+ *      viewBox height of 100 and that set the header's flex line. With the SVG out
+ *      of flow and the header spending CHROME.headerDesktop as its min-height, the
+ *      SAME measurement now reads header 48 / nav 47 / main-top 48 / every divider
+ *      box 47 — so the derivation is TRUE, not merely tidy. The structural half of
+ *      that repair is pinned in tests/components/navDividers.test.jsx.
  *
  *   3. ⚠️ THE CLIP NEVER TOUCHES A FOCUSABLE ELEMENT. `clip-path` clips an
  *      element's whole rendering INCLUDING its outline, and a11y.css draws the
@@ -49,8 +58,19 @@
  *      or an `overflow: hidden`, and this file asserts the whole chain.
  *
  *   4. THE ACTIVE FEATHER BRIGHTENS WITH THE EXISTING GOLD GRAMMAR, on four
- *      channels — lifted fill, brighter label, weight 700, aria-current="page" —
- *      so the state never rests on colour alone.
+ *      channels — lifted fill, brighter label, brighter gilt + gold underline, and
+ *      aria-current="page" — so the state never rests on colour alone. ⚠️ WEIGHT
+ *      IS NO LONGER ONE OF THEM. V2 fixes every feather label at 600 under the
+ *      BALANCE LAW, which is precisely why the directive added the brighter gilt:
+ *      a channel was spent, so a channel was replaced. The test that used to
+ *      assert 700-on-active now asserts 600-on-BOTH, and the replacement channel
+ *      is asserted beside it, so the swap cannot be half-made.
+ *
+ *   5. THE FIVE STACKED DEVICES STAY DIALLED DOWN (the BALANCE LAW). Band, slant,
+ *      gilt, texture and weight all now emphasise the same three cells. The pins
+ *      hold each one's dialled-down value — the gilt is FLETCH.gilt px and not
+ *      more, the label weight is 600 and not 700 — so "turn them all up" fails
+ *      here rather than shipping.
  *
  * The mobile bottom nav is untouched by the directive and is pinned here as the
  * negative control: no band, no feather, no paint.
@@ -69,7 +89,9 @@ import { cleanup, render } from '@testing-library/react';
 import { NAV, NAV_FLOW } from '../../src/lib/routes.js';
 import { flowsInto } from '../../src/components/nav/NavFlowArrow.jsx';
 import {
-  ANCHOR_OFFSET, CHROME, FLETCH, FLETCH_BROWN, FLETCH_BROWN_LIFT, GOLD, PARCH, PARCH_100, SP,
+  ANCHOR_OFFSET, BODY, CHROME, FLETCH, FLETCH_BARB, FLETCH_BARB_DEG, FLETCH_BARB_LIFT,
+  FLETCH_BROWN, FLETCH_BROWN_LIFT, GILT, GILT_ACTIVE, GILT_BLOOM, GOLD_TXT, PARCH, PARCH_100,
+  SHAFT_GRAIN, SHAFT_GRAIN_DEEP, SHAFT_GRAIN_LAYERS, SP,
 } from '../../src/components/theme.js';
 
 const H = vi.hoisted(() => ({
@@ -225,13 +247,48 @@ describe('1 — the band’s membership is DERIVED from the flow, never listed',
 
 describe('2 — ⚠️⚠️ the overhang is PAINT, and the layout box stays exactly CHROME.headerDesktop', () => {
   test('the anchor derivation chain the overhang must not disturb', () => {
-    // This is the reason clause 2 exists. Pinned here, beside the thing that
-    // could break it, rather than only in the theme. These are the numbers the
-    // ribbon must leave ALONE — not a claim that 60 measures the live header
-    // (it does not; see the ⚠️⚠️ note in the file header).
-    expect(CHROME.headerDesktop).toBe(60);
+    // This is the reason clause 2 exists. Pinned here, beside the thing that could
+    // break it, rather than only in the theme. THE DERIVATION IS THE CLAIM: assert
+    // the sum's SHAPE, never the number it currently reaches, so that slimming the
+    // shaft again moves this pin's expectation with it instead of failing it.
     expect(ANCHOR_OFFSET).toBe(CHROME.headerDesktop + SP.xxl);
-    expect(ANCHOR_OFFSET).toBe(84);
+    // Today's values, recorded so a reader knows the bar without running it — and
+    // deliberately in a SEPARATE assertion from the derivation above, so a future
+    // resize edits one line that is obviously a record and never the invariant.
+    expect(CHROME.headerDesktop).toBe(48);
+    expect(ANCHOR_OFFSET).toBe(72);
+  });
+
+  test('the barb angle is DERIVED from the slant and the bar, never spelled', () => {
+    // The texture has to lie parallel to the edge of the feather carrying it. That
+    // is a relationship between two numbers, so it is pinned as one: change the
+    // slant or the bar height and the angle must follow, unasked.
+    expect(FLETCH_BARB_DEG).toBe(
+      90 + Math.round((Math.atan2(FLETCH.slant, CHROME.headerDesktop) * 180) / Math.PI),
+    );
+    expect(FLETCH_BARB_DEG).toBe(102); // today's value
+    // NEGATIVE CONTROL: the barbs and the shaft grain must not share a direction,
+    // or the two textures interfere where a feather meets bare wood. The grain is
+    // horizontal (a 180deg gradient line); the barbs may never be.
+    expect(FLETCH_BARB_DEG % 180).not.toBe(0);
+    expect(SHAFT_GRAIN_LAYERS).toContain('180deg');
+    expect(SHAFT_GRAIN_LAYERS).not.toContain(`${FLETCH_BARB_DEG}deg`);
+  });
+
+  test('the shaft grain is two layers whose periods are COPRIME, so it cannot tile visibly', () => {
+    // Non-vacuity: there really are two streak layers on the plank.
+    expect((SHAFT_GRAIN_LAYERS.match(/repeating-linear-gradient/g) || []).length).toBe(2);
+    // The periods are the last stop of each layer. 13 and 29 are coprime, so the
+    // combined figure repeats every 377px — against a 48px bar, never twice.
+    expect(SHAFT_GRAIN_LAYERS).toContain('transparent 13px');
+    expect(SHAFT_GRAIN_LAYERS).toContain('transparent 29px');
+    const gcd = (a, b) => (b ? gcd(b, a % b) : a);
+    expect(gcd(13, 29)).toBe(1);
+    expect(13 * 29).toBeGreaterThan(CHROME.headerDesktop * 4);
+    // Both streak tones are named, and the DARKEST is the one every label on the
+    // shaft owes its AA to (measured in tests/design/contrast.test.js).
+    expect(SHAFT_GRAIN_LAYERS).toContain(SHAFT_GRAIN);
+    expect(SHAFT_GRAIN_LAYERS).toContain(SHAFT_GRAIN_DEEP);
   });
 
   test('the paint layer is a zero-inset absolute box — it is not in flow at all', () => {
@@ -253,8 +310,35 @@ describe('2 — ⚠️⚠️ the overhang is PAINT, and the layout box stays exa
     // NON-VACUITY FIRST: the overhang is really drawn. Without this, the absence
     // census below would pass just as happily on a band that had lost it.
     // (cssstyle normalizes `background` to rgb() but leaves `filter` verbatim.)
-    expect(paint.style.filter).toBe(`drop-shadow(0 ${FLETCH.overhang}px 0 ${FLETCH_BROWN})`);
-    expect(paint.style.background).toContain(rgb(FLETCH_BROWN));
+    // The filter now carries TWO shadows: the brown overhang, then the gilt bloom.
+    // Both are pinned, in order, because "still has a filter" is not the claim.
+    expect(paint.style.filter).toBe(
+      `drop-shadow(0 ${FLETCH.overhang}px 0 ${FLETCH_BROWN})`
+      + ` drop-shadow(0 0 ${FLETCH.bloom}px ${GILT_BLOOM})`,
+    );
+  });
+
+  test('the gilt is a HAIRLINE around the fletching, not a second fill', () => {
+    const { container } = render(<App />);
+    const paint = container.querySelector('[data-testid="nav-fletch-paint"]');
+    const fill = container.querySelector('[data-testid="nav-fletch-fill"]');
+    expect(fill).toBeTruthy();
+    // The outer layer is the GILT, the inner one the brown body, and the ONLY
+    // thing that turns the outer into an edge rather than a gold band is the
+    // inset. Pin all three together — any one alone is satisfiable by a bug.
+    expect(paint.style.background).toContain(rgb(GILT));
+    expect(fill.style.background).toContain(rgb(FLETCH_BROWN));
+    expect(fill.style.inset).toBe(`${FLETCH.gilt}px`);
+    expect(FLETCH.gilt).toBe(1); // dialled down: a hairline, per the BALANCE LAW
+    // The body carries the barbs, at the derived angle, in the opaque darkest step
+    // the contrast suite measures the label against.
+    expect(fill.style.backgroundImage).toContain(`${FLETCH_BARB_DEG}deg`);
+    expect(fill.style.backgroundImage).toContain(rgb(FLETCH_BARB));
+    // NEGATIVE CONTROL: the gilt layer itself must not also carry the texture, or
+    // the hairline would be a dotted line rather than an edge. (The `background`
+    // shorthand resets backgroundImage to the literal 'none', so the honest
+    // assertion is "no gradient", not "falsy".)
+    expect(paint.style.backgroundImage).not.toContain('gradient');
   });
 
   test('NO element in the ribbon spends the overhang on a LAYOUT property', () => {
@@ -292,8 +376,15 @@ describe('3 — ⚠️ the clip never touches a focusable element, so the focus 
     const { container } = render(<App />);
     const clipped = [...container.querySelectorAll('header nav *')]
       .filter((el) => el.style?.clipPath);
-    // Non-vacuity: something really is clipped (the paint layer + three vanes).
-    expect(clipped.length).toBe(1 + feathers(container).length);
+    // Non-vacuity: something really is clipped — and the count is stated as the
+    // STRUCTURE that produces it, not as a number that happened to match. Two
+    // layers for the band (gilt + fill) and two for the ACTIVE cell (gilt + fill);
+    // resting cells draw none, so this is 4 whether the nav holds three feathers
+    // or thirty. (The old `1 + feathers.length` was 4 only by coincidence.)
+    const BAND_LAYERS = 2;
+    const ACTIVE_LAYERS = 2;
+    expect(container.querySelectorAll('[aria-current="page"][data-nav-cell="feather"]').length).toBe(1);
+    expect(clipped.length).toBe(BAND_LAYERS + ACTIVE_LAYERS);
     for (const el of clipped) {
       expect(el.tagName).toBe('SPAN');
       expect(el.getAttribute('aria-hidden')).toBe('true');
@@ -349,31 +440,56 @@ describe('3 — ⚠️ the clip never touches a focusable element, so the focus 
 });
 
 describe('4 — the active feather brightens with the existing gold grammar', () => {
-  /** The vane layer belonging to a given feather button. */
-  const vane = (button) => button.querySelector('[data-testid^="nav-feather-"]');
+  /** The active cell's OUTER gilt layer (never the inner fill — the ^= would match both). */
+  const vane = (button) => button.querySelector(`[data-testid="nav-feather-${button.dataset.navId || ''}"]`)
+    || [...button.querySelectorAll('[data-testid^="nav-feather-"]')]
+      .find((el) => !el.dataset.testid.startsWith('nav-feather-fill-'));
+  /** The active cell's INNER fill layer. */
+  const fill = (button) => button.querySelector('[data-testid^="nav-feather-fill-"]');
 
-  test('the active feather lifts, brightens and keeps a gold edge — four channels', () => {
+  test('the active feather lifts, brightens and gilds — four channels, weight NOT among them', () => {
     const { container } = render(<NavRibbon view="settlements" onNavClick={() => {}} />);
     const active = feathers(container).find((b) => label(b) === 'Library');
 
     expect(active.getAttribute('aria-current')).toBe('page');        // 1 — semantics
-    expect(active.style.fontWeight).toBe('700');                     // 2 — weight
-    expect(active.style.color).toBe(rgb(PARCH));                     // 3 — brighter label
+    expect(active.style.color).toBe(rgb(PARCH));                     // 2 — brighter label
     const v = vane(active);
-    expect(v.style.background).toContain(rgb(FLETCH_BROWN_LIFT));    // 4 — lifted fill
-    expect(v.style.borderBottom).toBe(`2px solid ${rgb(GOLD)}`);     // the gold, translated
+    const f = fill(active);
+    expect(v.style.background).toContain(rgb(GILT_ACTIVE));          // 3 — brighter gilt
+    expect(f.style.background).toContain(rgb(FLETCH_BROWN_LIFT));    // 4 — lifted fill
+    expect(f.style.borderBottom).toBe(`2px solid ${rgb(GILT_ACTIVE)}`); // the gold, translated
+    // The barbs continue over the lift, in the lifted step's own darkest tone —
+    // otherwise the active feather would go smooth and read as a different material.
+    expect(f.style.backgroundImage).toContain(rgb(FLETCH_BARB_LIFT));
   });
 
-  test('a resting feather carries none of the four — the A/B is real', () => {
+  test('⚠️ WEIGHT IS NOT A STATE CHANNEL — both registers of feather label are 600', () => {
+    // The V1 grammar put active at 700 and resting at 500. V2's BALANCE LAW spends
+    // that channel: EVERY feather label is 600, and the difference between the band
+    // and the shelf (500) is what the weight now carries. Pinned as an equality
+    // between the two states, so half-reverting one of them fails here.
+    const { container } = render(<NavRibbon view="settlements" onNavClick={() => {}} />);
+    const active = feathers(container).find((b) => label(b) === 'Library');
+    const resting = feathers(container).find((b) => label(b) === 'Realm');
+    expect(active.style.fontWeight).toBe('600');
+    expect(resting.style.fontWeight).toBe('600');
+    expect(active.style.fontWeight).toBe(resting.style.fontWeight);
+    // …and the reference tabs still sit a step below, or the band stops reading.
+    expect(plains(container)[0].style.fontWeight).toBe('500');
+  });
+
+  test('a resting feather carries none of the channels — the A/B is real', () => {
     const { container } = render(<NavRibbon view="settlements" onNavClick={() => {}} />);
     const resting = feathers(container).find((b) => label(b) === 'Realm');
 
     expect(resting.getAttribute('aria-current')).toBeNull();
-    expect(resting.style.fontWeight).toBe('500');
     expect(resting.style.color).toBe(rgb(PARCH_100));
-    const v = vane(resting);
-    expect(v.style.background).toBe('transparent');
-    expect(v.style.borderBottom).toBeFalsy();
+    // A resting feather draws NO vane at all now: the band's own paint layer
+    // already gives it brown, gilt and barbs, so an empty vane would be a box
+    // painting nothing. Absence is the assertion — and it is non-vacuous because
+    // the active cell above proves the vane exists when it should.
+    expect(vane(resting)).toBeFalsy();
+    expect(fill(resting)).toBeNull();
   });
 
   test('the gold edge is clipped to the VANE, so it follows the feather’s own bottom', () => {
@@ -386,6 +502,7 @@ describe('4 — the active feather brightens with the existing gold grammar', ()
     expect(active.style.borderBottom).not.toContain('solid');
     expect(active.style.borderBottomStyle).not.toBe('solid');
     expect(vane(active).style.clipPath).toContain(`${FLETCH.slant}px`);
+    expect(fill(active).style.clipPath).toContain(`${FLETCH.slant}px`);
   });
 
   test('the feather clip leans FORWARD — toward Realm, never back', () => {
@@ -404,6 +521,32 @@ describe('4 — the active feather brightens with the existing gold grammar', ()
     expect(shape).toBe(
       `polygon(${FLETCH.slant}px 0, 100% 0, calc(100% - ${FLETCH.slant}px) 100%, 0 100%)`,
     );
+  });
+});
+
+describe('4b — the plain register INVERTED for the light shaft', () => {
+  // The reference tabs stopped sitting on an ink bar and started sitting on wood.
+  // Their V1 tones (PARCH_100 resting, GOLD active) were built for the dark ground
+  // and are 1.7–1.9:1 on the light one — legible-looking in a screenshot taken on
+  // the wrong background, and unreadable in the app. This block exists because
+  // NOTHING else would have caught that: the cells still render, still navigate,
+  // still carry aria-current, and every structural test above stays green.
+  test('a resting reference tab takes the ink browns, never the pale register', () => {
+    const { container } = render(<NavRibbon view="settlements" onNavClick={() => {}} />);
+    const resting = plains(container).find((b) => label(b) === 'Compendium');
+    expect(resting.style.color).toBe(rgb(BODY));
+    expect(resting.style.color).not.toBe(rgb(PARCH_100)); // the V1 tone, now wrong
+  });
+
+  test('an active reference tab underlines in GOLD_TXT — the legible-on-light gold', () => {
+    const { container } = render(<NavRibbon view="compendium" onNavClick={() => {}} />);
+    const active = plains(container).find((b) => label(b) === 'Compendium');
+    expect(active.getAttribute('aria-current')).toBe('page');
+    expect(active.style.color).toBe(rgb(GOLD_TXT));
+    expect(active.style.borderBottom).toBe(`2px solid ${rgb(GOLD_TXT)}`);
+    expect(active.style.fontWeight).toBe('700');
+    // The plain register keeps its 700, which is exactly why the FEATHERS could
+    // afford to give theirs up: the two registers carry state differently.
   });
 });
 

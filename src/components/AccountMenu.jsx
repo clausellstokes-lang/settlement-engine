@@ -16,7 +16,7 @@
  */
 import { useState, useRef, useEffect } from 'react';
 import { User, ChevronDown, Settings, CreditCard, MessageSquare } from 'lucide-react';
-import { GOLD, GOLD_BG, INK, BORDER, FS, SP, SLATE, SLATE_DEEP, GREEN, swatch } from './theme.js';
+import { GOLD, GOLD_BG, INK, BORDER, FS, SP, SLATE, SLATE_DEEP, GREEN, GREEN_DEEP, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
 import UnreadMessageBadge, { unreadMessagesLabel } from './account/UnreadMessageBadge.jsx';
 import { useOperatorMessages } from './account/OperatorMessagesProvider.jsx';
@@ -107,9 +107,19 @@ export default function AccountMenu({
   const name = displayName || (isElevated ? 'Developer' : 'Account');
   // Status reads in a colored rule + ink, not a wash (deep-craft): the founder/
   // developer chip is the in-palette slate channel, the active account is green.
+  //
+  // ⚠️ THE LABEL TONE IS GREEN_DEEP, NOT GREEN, AND THE GROUND IS WHY. This chip is
+  // `background: transparent`, so its label is read against whatever the header is
+  // painting — and under ribbon v2 that is the light-wood SHAFT, not the old ink
+  // bar. GREEN (green-600) measures 3.91:1 on the grain's darkest streak and fails
+  // AA as text there; GREEN_DEEP (green-700) is the palette's own step for exactly
+  // this case and measures 5.00:1. The BORDER stays GREEN: it is a UI boundary
+  // under 1.4.11's 3:1, which 3.91:1 clears, and keeping the rule at the brighter
+  // step is what preserves the status colour's read. Both ratios are recomputed in
+  // tests/design/contrast.test.js, GREEN pinned as the negative control.
   const chipBg = 'transparent';
   const chipBorder = isElevated ? SLATE : GREEN;
-  const chipColor = isElevated ? SLATE_DEEP : GREEN;
+  const chipColor = isElevated ? SLATE_DEEP : GREEN_DEEP;
 
   return (
     <div ref={ref} style={{ position: 'relative', marginLeft: compact ? 0 : SP.xs }}>

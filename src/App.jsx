@@ -31,7 +31,7 @@ import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
 import { allowsFloatingFeedback, guardForView, redirectForView, viewToPath, NAV } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
 import {
-  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, SLATE, SLATE_BG, sans, serif_, SP, R, FS, swatch, CHROME, bottomClearance,
+  GOLD, GOLD_BG, GOLD_TXT, INK, INK_DEEP, PARCH_100, BORDER, BODY, ELEV, SHAFT, SHAFT_GRAIN_LAYERS, SLATE, SLATE_BG, sans, serif_, SP, R, FS, swatch, CHROME, bottomClearance,
 } from './components/theme.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
@@ -476,9 +476,19 @@ export default function App() {
     .filter(Boolean)
     .slice(0, 5);
 
+  // THE SHAFT (ribbon v2, owner directive 2026-08-03). Both headers are ONE
+  // continuous plank of light wood — full width, and deliberately unbroken under
+  // the wordmark, which is what makes the bar read as the arrow's shaft rather than
+  // as a dark bar with a brown patch stuck on it. Three quiet devices separate it
+  // from the cream page body instead of one loud one: the wood is a single step
+  // deeper than PARCH (1.15:1), a BORDER hairline closes the bottom edge, and
+  // ELEV[2] drops the house's soft sticky-chrome shadow. The grain is
+  // SHAFT_GRAIN_LAYERS — asset-free, and painted as background-IMAGE over the
+  // background-COLOR, never as a shorthand, since the streaks are transparent
+  // between one another and the page would otherwise show through the plank.
   const headerStyle = {
-    background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
-    boxShadow: '0 2px 12px rgba(0,0,0,0.35)',
+    backgroundColor: SHAFT, backgroundImage: SHAFT_GRAIN_LAYERS,
+    borderBottom: `1px solid ${BORDER}`, boxShadow: ELEV[2],
   };
 
   // Per-view painted background. On the Create page a generation flow blows up the
@@ -521,8 +531,8 @@ export default function App() {
               aria-label="SettlementForge home"
               style={{ gap: SP.xs, minHeight: 44, padding: `0 ${SP.xs}px` }}
             >
-              <HouseDevice size={20} style={{ flexShrink: 0 }} />
-              <span aria-hidden="true" style={{ fontSize: FS.lg, fontWeight: 800, color: GOLD, fontFamily: serif_, letterSpacing: '0.01em' }}>
+              <HouseDevice size={20} mode="light" style={{ flexShrink: 0 }} />
+              <span aria-hidden="true" style={{ fontSize: FS.lg, fontWeight: 800, color: GOLD_TXT, fontFamily: serif_, letterSpacing: '0.01em' }}>
                 <span style={{ fontSize: '1.28em' }}>S</span>ettlement<span style={{ fontSize: '1.28em' }}>F</span>orge
               </span>
             </Button>
@@ -541,7 +551,7 @@ export default function App() {
 
         {/* ── Desktop header ──────────────────────────────────── */}
         {!isMobile && (
-          <header style={{ ...headerStyle, padding: `${SP.md}px ${SP.xxl}px`, position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.md }}>
+          <header style={{ ...headerStyle, minHeight: CHROME.headerDesktop, boxSizing: 'border-box', padding: `0 ${SP.xxl}px`, position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.md }}>
             {/* Brand block — the wordmark stands alone. "SettlementForge" reads as a
                 single bold serif word with the two capitals (S, F) set a step
                 larger. The wordmark doubles as the home link; rendered as a button
@@ -555,10 +565,15 @@ export default function App() {
                 aria-label="SettlementForge home"
                 style={{ background: 'none', border: 'none', padding: 0, margin: 0, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
               >
-                <HouseDevice size={26} style={{ marginRight: SP.sm, flexShrink: 0 }} />
+                <HouseDevice size={26} mode="light" style={{ marginRight: SP.sm, flexShrink: 0 }} />
                 <h1
                   aria-hidden="true"
-                  style={{ margin: 0, fontSize: FS.h1, fontWeight: 800, color: GOLD, fontFamily: serif_, letterSpacing: '0.01em', lineHeight: 1.1 }}
+                  // The wordmark's DARK-BROWN variant (v2 directive §2). GOLD was
+                  // right on the ink bar and is 1.85:1 on wood; GOLD_TXT is the
+                  // palette's own legible-gold-on-light step and measures 5.75:1
+                  // against the grain's darkest streak. `mode="light"` swaps the
+                  // house mark to its ink draw for the same reason.
+                  style={{ margin: 0, fontSize: FS.h1, fontWeight: 800, color: GOLD_TXT, fontFamily: serif_, letterSpacing: '0.01em', lineHeight: 1.1 }}
                 >
                   <span style={{ fontSize: '1.32em', fontWeight: 800 }}>S</span><span>ettlement</span><span style={{ fontSize: '1.32em', fontWeight: 800 }}>F</span><span>orge</span>
                 </h1>
@@ -620,7 +635,10 @@ export default function App() {
                   size="md"
                   icon={<Zap size={13} />}
                   onClick={() => setView('pricing')}
-                  style={{ color: PARCH_100, letterSpacing: '0.04em', textTransform: 'uppercase' }}
+                  // No colour override any more: PARCH_100 was the pale register
+                  // for the ink bar and is unreadable on wood. Ghost's own fg
+                  // (SECOND) is 12.04:1 against the grain's darkest streak.
+                  style={{ letterSpacing: '0.04em', textTransform: 'uppercase' }}
                 >
                   Upgrade
                 </Button>

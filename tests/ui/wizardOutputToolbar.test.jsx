@@ -70,11 +70,16 @@ describe('WizardOutputToolbar layering + controls', () => {
     const bar = container.firstChild;
     expect(bar.style.position).toBe('sticky');
     // Desktop: the bar must pin BELOW the whole sticky header, not merely at a
-    // positive offset. The header is ~59px tall; an offset short of that (the
-    // old top:52) left the bar's top edge tucked under the header. Require the
-    // offset to clear the full header so the pinned toolbar reads as a clean
-    // band, never partly hidden behind the chrome above it.
-    expect(parseInt(bar.style.top, 10)).toBeGreaterThanOrEqual(59);
+    // positive offset. An offset short of the header (the old top:52) left the
+    // bar's top edge tucked under the chrome.
+    //
+    // ⚠️ THIS ASSERTED `>= 59` UNTIL RIBBON V2, AND 59 WAS NEVER THIS BAR'S NUMBER.
+    // It is CHROME.headerMobile, and it passed only because headerDesktop happened
+    // to be 60 — one greater. Slimming the shaft to 48 made a correct toolbar fail
+    // a pin that was measuring the wrong surface all along. The real contract is an
+    // EQUALITY with the desktop header token: the toolbar pins flush beneath the
+    // bar, so it tracks any future resize instead of needing this line edited.
+    expect(parseInt(bar.style.top, 10)).toBe(CHROME.headerDesktop);
     // Lower than the header's z-index (50) so the header wins the overlap.
     expect(Number(bar.style.zIndex)).toBeLessThan(50);
   });

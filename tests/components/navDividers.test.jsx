@@ -291,6 +291,64 @@ describe('desktop ribbon — the rendered seam matches the derivation exactly', 
   });
 });
 
+describe('⚠️⚠️ a decoration may never price the bar — the viewBox is not a height', () => {
+  /**
+   * THE BUG THIS EXISTS FOR, because it cost two lanes to find and was invisible
+   * to every suite including this one.
+   *
+   * The divider draws an inline SVG whose viewBox is `0 0 w 100`. That 100 is a
+   * COORDINATE SPACE — `preserveAspectRatio="none"` rescales it to whatever height
+   * the seam turns out to be. But the SVG was IN FLOW asking for `height="100%"`,
+   * and every ancestor up to the header sized itself by content, so the percentage
+   * had nothing definite to resolve against. A percentage that cannot resolve falls
+   * back to the element's INTRINSIC size — for an SVG, its viewBox — so the divider
+   * asked the layout for 100px, got it, and became the tallest thing on the
+   * header's flex line. The desktop header measured 124px (100 + 2×12 padding)
+   * against a CHROME.headerDesktop that said 60. ANCHOR_OFFSET is derived from that
+   * constant, so every in-page anchor in the estate landed ~40px under the chrome,
+   * and the dossier toolbar — which pins at `top: CHROME.headerDesktop` — sat 64px
+   * beneath the bar it was supposed to hug. Lane FL-2 measured the divergence and
+   * could not name its cause. This was the cause.
+   *
+   * jsdom has no layout, so the pin is STRUCTURAL: it asserts the property that
+   * made the fallback possible is gone. Out of flow, the percentage resolves
+   * against a definite containing block and the mark contributes no height at all.
+   * The live receipt at 1440×900 after the repair: header 48, nav 47, every
+   * divider box 47 — the viewBox's 100 appears nowhere in the layout.
+   */
+  test('every divider SVG is out of flow, so its viewBox cannot become a height', () => {
+    const { container } = render(<App />);
+    const svgs = [...container.querySelectorAll('[data-divider-kind] svg')];
+    expect(svgs.length).toBeGreaterThan(0); // not a vacuous walk
+    for (const svg of svgs) {
+      expect(svg.style.position, 'an in-flow divider SVG re-prices the header').toBe('absolute');
+      expect(svg.style.inset).toBe('0px');
+      // Its own span must be the positioning context, or `inset: 0` would resolve
+      // against some ancestor and the mark would span the wrong box.
+      expect(svg.parentElement.style.position).toBe('relative');
+    }
+  });
+
+  test('no divider spends a LAYOUT height — the box is the seam, nothing more', () => {
+    const { container } = render(<App />);
+    const marks = [...container.querySelectorAll('[data-divider-kind]')];
+    expect(marks.length).toBeGreaterThan(0);
+    for (const d of marks) {
+      // It stretches to the bar; it never states a height of its own, in any
+      // spelling. `flex: 0 0 Npx` is a WIDTH along the row and is expected.
+      expect(d.style.alignSelf).toBe('stretch');
+      for (const prop of ['height', 'minHeight', 'maxHeight', 'marginTop', 'marginBottom']) {
+        expect(d.style[prop], `divider spends ${prop}=${d.style[prop]}`).toBeFalsy();
+      }
+      // NEGATIVE CONTROL: the viewBox number must not leak into any inline style
+      // anywhere on the mark or its SVG — that leak IS the bug.
+      const svg = d.querySelector('svg');
+      expect(svg.getAttribute('viewBox')).toMatch(/ 100$/); // the space still says 100…
+      expect(`${d.style.cssText} ${svg.style.cssText}`).not.toContain('100px'); // …the layout never does
+    }
+  });
+});
+
 describe('mobile bottom nav — the dividers are desktop-only', () => {
   beforeEach(() => { H.isMobile = true; });
 

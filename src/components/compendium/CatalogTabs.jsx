@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { GOLD, GOLD_TXT, INK, BODY, MUTED as MUT, SECOND as SEC, BORDER as BOR, serif_, FS, SP, swatch, EMPTY_VALUE } from '../theme.js';
+import { GOLD, GOLD_TXT, INK, BODY, MUTED as MUT, SECOND as SEC, BORDER as BOR, serif_, FS, SP, swatch, EMPTY_VALUE, ANCHOR_OFFSET } from '../theme.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes';
 import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../../generators/lookups.js';
 // THE REGISTRY-RENDER LAW: tiers, archetypes and relationships all render from the
@@ -142,7 +142,7 @@ export function PowerTab_({ search='' }) {
     )}
     {/* How far a criminal interest has taken a seat of power: the capture ladder.
         id="power" so the glossary capture-rung lifeline lands on the ladder itself. */}
-    <div id="power" style={{ marginTop:16, scrollMarginTop:80 }}>
+    <div id="power" style={{ marginTop:16, scrollMarginTop:ANCHOR_OFFSET }}>
       {laddersFor('power').map((l) => (
         <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={CAT_COLORS.Criminal} />))}
     </div>

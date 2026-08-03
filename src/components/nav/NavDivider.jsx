@@ -23,6 +23,26 @@
  * every bar height, and `vectorEffect="non-scaling-stroke"` keeps the hairline
  * exactly one device pixel under that non-uniform scale.
  *
+ * ⚠️⚠️ THE SVG IS ABSOLUTELY POSITIONED, AND THAT IS LOAD-BEARING — A DECORATION
+ * MUST NEVER PRICE THE BAR. `H` below is a COORDINATE SPACE, not a measurement. When
+ * this SVG was in flow it asked for `height="100%"` against a parent whose height was
+ * indefinite (the whole chain up to the header was `alignSelf: stretch`, which
+ * resolves against the flex line, which is itself derived from the content). A
+ * percentage against an indefinite height does not resolve, so the SVG fell back to
+ * its INTRINSIC size — the viewBox's 100 — and that number then became the tallest
+ * item on the header's flex line and set the bar. The desktop header measured 124px
+ * (100 + 2×12 padding) while CHROME.headerDesktop said 60, ANCHOR_OFFSET inherited
+ * the 40px shortfall so every in-page anchor landed under the chrome, and the dossier
+ * toolbar pinned itself 64px beneath the bar it was supposed to sit flush under.
+ * Lane FL-2 measured that divergence and could not name its cause; this was the cause.
+ *
+ * `position: absolute` with all four insets 0 resolves the percentage against the
+ * span's used height instead (an absolutely positioned box's containing block is
+ * always definite), so the mark still spans the seam exactly — and contributes zero
+ * intrinsic height doing it. tests/components/navDividers.test.jsx pins the box to
+ * the ribbon's height and asserts it is NOT the viewBox's, so no future edit can put
+ * the coordinate space back into the layout.
+ *
  * WHY THE FLETCH STROKE IS `FLETCH.slant` WIDE AND NOTHING ELSE. The feather's
  * clipped edge runs `FLETCH.slant` px horizontally over the band's full height
  * (NavRibbon's FEATHER_CLIP). Giving this mark the SAME width and drawing it
@@ -42,11 +62,15 @@
  * A11Y. Pure decoration: `aria-hidden`, no focus stop, no pointer surface, no
  * text content, so no nav link's accessible name changes. The ribbon's buttons
  * carry the whole accessible name and keyboard behaviour. The fletch stroke takes
- * GOLD, measured at 3.12:1 against FLETCH_BROWN — clear of WCAG 1.4.11's 3:1 for
+ * GILT, measured at 3.12:1 against FLETCH_BROWN — clear of WCAG 1.4.11's 3:1 for
  * a non-text boundary (the ratio is recorded in theme.js and recomputed by
- * tests/design/contrast.test.js).
+ * tests/design/contrast.test.js). The plain rule takes SHAFT_RULE at 2.50:1 against
+ * the wood and does NOT clear 3:1, which is correct and recorded: 1.4.11 governs
+ * boundaries a user must perceive to understand or operate a control, and these
+ * separate two already-legible labels that each carry their own text, focus ring
+ * and hit area. Nothing about reaching Compendium depends on seeing the groove.
  */
-import { BORDER, GOLD, FLETCH } from '../theme.js';
+import { GILT, SHAFT_RULE, FLETCH } from '../theme.js';
 import { flowsInto } from './NavFlowArrow.jsx';
 
 /** The plain rule's own coordinate space; scaled to the bar by preserveAspectRatio. */
@@ -70,7 +94,13 @@ export default function NavDivider({ kind, from, to }) {
   // corner-to-corner diagonal is the vanes' own angle (see the geometry note).
   const w = isFletch ? FLETCH.slant : W;
   const stroke = {
-    stroke: isFletch ? GOLD : BORDER,
+    // GILT inside the fletching, a wood groove between the reference tabs. Both
+    // tones moved with the material under ribbon v2: the seam colours that read on
+    // an ink bar are not the seam colours that read on a light plank, and the plain
+    // rule in particular went invisible (BORDER is 1.56:1 on wood) until it became
+    // SHAFT_RULE. The GAP between the two — gilt at 3.12:1, groove at 2.50:1 — is
+    // the hierarchy, and it is deliberate.
+    stroke: isFletch ? GILT : SHAFT_RULE,
     strokeWidth: 1,
     vectorEffect: 'non-scaling-stroke',
   };
@@ -94,7 +124,10 @@ export default function NavDivider({ kind, from, to }) {
       <svg
         width="100%" height="100%" viewBox={`0 0 ${w} ${H}`}
         preserveAspectRatio="none" focusable="false" aria-hidden="true"
-        style={{ display: 'block', overflow: 'visible' }}
+        // Out of flow on purpose — see the GEOMETRY note. The insets, not the
+        // percentages, are what make this box the seam's exact size, and taking it
+        // out of flow is what stops the viewBox from becoming a layout height.
+        style={{ position: 'absolute', inset: 0, display: 'block', overflow: 'visible' }}
       >
         {isFletch ? (
           // ONE straight stroke, bottom-left → top-right: the same forward lean

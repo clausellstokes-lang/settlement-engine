@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FS, swatch, MUTED, EMPTY_VALUE } from '../theme.js';
+import { FS, swatch, MUTED, EMPTY_VALUE, ANCHOR_OFFSET } from '../theme.js';
 import { formatCount } from '../../domain/formatNumber.js';
 import { TIER_LABELS, catColor } from './design';
 import { serif } from './Primitives';
@@ -63,7 +63,7 @@ function FactionBar({ factions }) {
         {factions.map((f,i)=>{
           const c=FACTION_COLORS[i%FACTION_COLORS.length];
           const mods=(f.modifiers||[]).concat(f.modifier?[f.modifier]:[]);
-          return <div id={entityAnchor('faction', { id:f.id || f.faction, name:f.faction })} key={i} style={{display:'flex',alignItems:'center',gap:7,scrollMarginTop:80}}>
+          return <div id={entityAnchor('faction', { id:f.id || f.faction, name:f.faction })} key={i} style={{display:'flex',alignItems:'center',gap:7,scrollMarginTop:ANCHOR_OFFSET}}>
             <div style={{width:10,height:10,background:c,flexShrink:0}}/>
             <span style={{fontSize:FS.sm,fontWeight:600,color:ink,flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{f.faction}</span>
             {mods.slice(0,2).map((mod,j)=>{
@@ -264,7 +264,7 @@ function SummaryTab({ settlement:r }) {
               const traits=normalizeNpcTraits(v);
               const visibleTraits=traits.filter(t=>t.visibility!=='gm').slice(0,5);
               const catCol=catColor(v.category)||gold;
-              return <div id={entityAnchor('npc', v)} key={i} style={{display:'flex',gap:8,alignItems:'flex-start',padding:'6px 0',borderBottom:i<topNPCs.length-2||isMobile?'1px solid #f0ead8':'none',scrollMarginTop:80}}>
+              return <div id={entityAnchor('npc', v)} key={i} style={{display:'flex',gap:8,alignItems:'flex-start',padding:'6px 0',borderBottom:i<topNPCs.length-2||isMobile?'1px solid #f0ead8':'none',scrollMarginTop:ANCHOR_OFFSET}}>
                 <div style={{width:3,background:catCol,alignSelf:'stretch',flexShrink:0,minHeight:32}}/>
                 <div style={{flex:1,minWidth:0}}>
                   <div style={{display:'flex',alignItems:'baseline',gap:5,marginBottom:2,flexWrap:'wrap'}}>
@@ -302,7 +302,7 @@ function SummaryTab({ settlement:r }) {
             {allHooks.map((v,i)=>{
               const meta=PLOT_HOOK_CATEGORIES[v.category]||PLOT_HOOK_CATEGORIES.tension;
               return (
-              <div id={entityAnchor('hook', { id:`${v.category}-${i}`, name:v.text.slice(0,40) })} key={i} style={{display:'flex',gap:10,alignItems:'flex-start',scrollMarginTop:80}}>
+              <div id={entityAnchor('hook', { id:`${v.category}-${i}`, name:v.text.slice(0,40) })} key={i} style={{display:'flex',gap:10,alignItems:'flex-start',scrollMarginTop:ANCHOR_OFFSET}}>
                 <span style={{width:4,alignSelf:'stretch',background:meta.color,opacity:v.accent?1:0.55,flexShrink:0}}/>
                 <div style={{flex:1,minWidth:0}}>
                   <span style={{fontSize:FS.xxs,fontWeight:700,color:meta.color,textTransform:'uppercase',letterSpacing:'0.04em',marginRight:6}}>{v.source}</span>
@@ -373,7 +373,7 @@ function SummaryTab({ settlement:r }) {
               <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
                 {instByCat[cat].sort((a,b)=>a.name.localeCompare(b.name)).map((inst,i)=>{
                   const srcColor=inst.source==='required'?gold:inst.source==='forced'?'#1a5a28':inst.source==='auto-resolved'?'#2a3a7a':'#6b5340';
-                  return <span id={entityAnchor('institution', inst)} key={i} style={{fontSize:FS.xs,padding:'2px 8px',background:`${srcColor}10`,border:`1px solid ${srcColor}30`,color:ink,fontWeight:500,scrollMarginTop:80}}>{inst.name}</span>;
+                  return <span id={entityAnchor('institution', inst)} key={i} style={{fontSize:FS.xs,padding:'2px 8px',background:`${srcColor}10`,border:`1px solid ${srcColor}30`,color:ink,fontWeight:500,scrollMarginTop:ANCHOR_OFFSET}}>{inst.name}</span>;
                 })}
               </div>
             </div>

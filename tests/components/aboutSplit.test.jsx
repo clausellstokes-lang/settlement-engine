@@ -33,6 +33,7 @@ import {
   anchorFor, destinationForLegacyTab, destinationForLegacySearch, unitsForView,
 } from '../../src/lib/aboutMapping.js';
 import { ROUTES, NAV, isKnownView, viewToPath, redirectForView } from '../../src/lib/routes.js';
+import { ANCHOR_OFFSET, CHROME, SP } from '../../src/components/theme.js';
 // The guide's hand-keyed nav blurb table. Imported (rather than DOM-sniffed) because
 // the pin below has to see its KEY SET, which no rendered subtitle can show: a missing
 // key renders an empty string, not a hole a DOM assertion can name.
@@ -470,14 +471,22 @@ describe('About split — §3 the in-page section nav (the MAY, ruled BUILD)', (
   it('the nav lands its target CLEAR of the sticky header, the way the Compendium does', async () => {
     // App's ribbon is `position:'sticky', top:0` (App.jsx), so a bare fragment jump
     // parks the section heading UNDERNEATH it. The Compendium answers this with
-    // scroll-margin-top (its ANCHOR_SCROLL_MARGIN, 84). Both About pages read the
-    // same 84 from theme.js's ANCHOR_OFFSET, itself derived from the chrome token it
-    // measures — CHROME.headerDesktop (60) + SP.xxl (24) — so the surfaces cannot
-    // drift apart through a copied magic number.
+    // scroll-margin-top, and as of ribbon v2 its ANCHOR_SCROLL_MARGIN is a
+    // re-export of this very token rather than a matching literal — so the About
+    // pages, the Compendium and the dossier now share ONE measurement.
+    //
+    // ⚠️ ASSERT THE DERIVATION, NEVER THE SUM (v2 directive §1). This pin used to
+    // read `.toBe('84px')`, which is a pin on the arithmetic of the day: when the
+    // shaft slimmed from 60 to 48 it would have failed an edit that was CORRECT and
+    // would have passed one that quietly hardcoded 84 back into a component. Naming
+    // ANCHOR_OFFSET means the expectation moves with the header, which is the only
+    // behaviour that makes this a guard rather than a tripwire.
     const { container } = await renderGuide();
+    expect(ANCHOR_OFFSET, 'the token must stay DERIVED, not respelled')
+      .toBe(CHROME.headerDesktop + SP.xxl);
     for (const u of unitsForView(ABOUT_GUIDE_VIEW)) {
       const el = container.querySelector(`#${u.anchor}`);
-      expect(el.style.scrollMarginTop, `#${u.anchor} scroll margin`).toBe('84px');
+      expect(el.style.scrollMarginTop, `#${u.anchor} scroll margin`).toBe(`${ANCHOR_OFFSET}px`);
     }
   });
 });
@@ -521,7 +530,7 @@ describe('About split — the anchor landing, on the OTHER page', () => {
         el.style.scrollMarginTop,
         `#${u.anchor} (rendered by ${OWNER[u.anchor]}) has no anchor scroll margin —`
         + ` a deep link to it parks the heading under the sticky ribbon`,
-      ).toBe('84px');
+      ).toBe(`${ANCHOR_OFFSET}px`);
     }
   });
 
@@ -538,7 +547,7 @@ describe('About split — the anchor landing, on the OTHER page', () => {
     const whatMargins = unitsForView(ABOUT_WHAT_VIEW)
       .map((u) => what.querySelector(`#${u.anchor}`).style.scrollMarginTop);
     expect(new Set([...guideMargins, ...whatMargins]), 'one measurement across both pages')
-      .toEqual(new Set(['84px']));
+      .toEqual(new Set([`${ANCHOR_OFFSET}px`]));
   });
 });
 

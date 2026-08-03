@@ -13,9 +13,11 @@
 import { describe, expect, test } from 'vitest';
 
 import {
-  AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, BODY, BORDER_STRONG, CARD, FLETCH_BROWN, FLETCH_BROWN_LIFT,
+  AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, BODY, BORDER, BORDER_STRONG, CARD, FLETCH_BARB,
+  FLETCH_BARB_LIFT, FLETCH_BROWN, FLETCH_BROWN_LIFT, GILT, GILT_ACTIVE,
   GOLD, GOLD_DEEP, GOLD_SOFT,
-  GOLD_TXT, GREEN, GREEN_BG, GREEN_DEEP, INK, MUTED, PARCH, PARCH_100, RED, RED_BG, SLATE, SLATE_BG, SLATE_DEEP,
+  GOLD_TXT, GREEN, GREEN_BG, GREEN_DEEP, INK, MUTED, PARCH, PARCH_100, RED, RED_BG, SECOND,
+  SHAFT, SHAFT_GRAIN, SHAFT_GRAIN_DEEP, SHAFT_RULE, SLATE, SLATE_BG, SLATE_DEEP,
   swatch,
 } from '../../src/components/theme.js';
 // THE LIVING BACKDROP wash strength — imported (not hard-coded) so raising the
@@ -527,8 +529,40 @@ describe('THE FLETCHED RIBBON — the leather band carries text, so it owes AA',
     expect(ratio(GOLD, FLETCH_BROWN)).toBeGreaterThanOrEqual(AA_UI);
   });
 
-  test('the active feather’s gold edge is BELOW 3:1 — recorded, and redundant by design', () => {
+  test('the active feather’s gold edge is BELOW 3:1 — recorded, and never rendered', () => {
+    // GOLD on the LIFT is the pairing V1 shipped and recorded as under-floor. V2
+    // does not render it at all: an active feather wears GILT_ACTIVE, a resting one
+    // sits on FLETCH_BROWN, so this combination has no drawing site left. Kept as
+    // the negative control that the brighter gilt really did replace it.
     expect(ratio(GOLD, FLETCH_BROWN_LIFT)).toBeLessThan(AA_UI);
+    expect(ratio(GILT_ACTIVE, FLETCH_BROWN_LIFT)).toBeGreaterThanOrEqual(AA_UI);
+  });
+
+  test('the ACTIVE gilt clears 3:1 on both tones it can touch', () => {
+    // The brighter gilt is the channel that replaced weight-700, so unlike a
+    // decorative edge it does carry state — and therefore owes the UI floor on
+    // the lifted fill it traces AND on the band it is cut into.
+    expect(ratio(GILT_ACTIVE, FLETCH_BROWN_LIFT)).toBeGreaterThanOrEqual(AA_UI);
+    expect(ratio(GILT_ACTIVE, FLETCH_BROWN)).toBeGreaterThanOrEqual(AA_UI);
+    expect(ratio(GILT_ACTIVE, FLETCH_BROWN).toFixed(2)).toBe('3.83');
+    expect(ratio(GILT_ACTIVE, FLETCH_BROWN_LIFT).toFixed(2)).toBe('3.18');
+  });
+
+  test('the BARB texture darkens the feather without dropping its label below AA', () => {
+    // The barbs are opaque steps, so the darkest pixel a label can sit on is a
+    // KNOWN colour rather than a guess — which is the whole reason they were
+    // authored opaque. Each label is measured against its own register's barb.
+    expect(ratio(PARCH_100, FLETCH_BARB)).toBeGreaterThanOrEqual(AA_TEXT);
+    expect(ratio(PARCH, FLETCH_BARB_LIFT)).toBeGreaterThanOrEqual(AA_TEXT);
+    expect(ratio(PARCH_100, FLETCH_BARB).toFixed(2)).toBe('6.43');
+    expect(ratio(PARCH, FLETCH_BARB_LIFT).toFixed(2)).toBe('5.88');
+    // And the texture stays INSIDE the directive's 3–5% luminance band: strong
+    // enough to be a material, weak enough not to become stripes.
+    const drop = (barb, base) => ((luminance(base) - luminance(barb)) / luminance(base)) * 100;
+    for (const [barb, base] of [[FLETCH_BARB, FLETCH_BROWN], [FLETCH_BARB_LIFT, FLETCH_BROWN_LIFT]]) {
+      expect(drop(barb, base)).toBeGreaterThanOrEqual(3);
+      expect(drop(barb, base)).toBeLessThanOrEqual(5);
+    }
   });
 
   test('the band is DERIVED from the gold family, not invented beside it', () => {
@@ -538,5 +572,111 @@ describe('THE FLETCHED RIBBON — the leather band carries text, so it owes AA',
     // And the lift is a genuine step LIGHTER than the band — otherwise "active
     // brightens" would be a lie the eye could not see.
     expect(ratio(FLETCH_BROWN_LIFT, '#000000')).toBeGreaterThan(ratio(FLETCH_BROWN, '#000000'));
+  });
+});
+
+/**
+ * THE LIGHT-WOOD SHAFT (ribbon v2 directive §2–§3) — every label that rides the
+ * plank, measured against THE DARKEST STREAK OF THE GRAIN.
+ *
+ * ⚠️ THE REFERENCE GROUND IS SHAFT_GRAIN_DEEP, NOT SHAFT. This is the whole point
+ * of the block. The bar is not one flat colour: it is a base with two streak
+ * gradients painted over it, so a label's worst case is wherever a dark streak
+ * happens to run behind a letterform — and on a 48px bar with a 13px and a 29px
+ * period, some letter somewhere always lands there. Measuring against SHAFT would
+ * pass a palette that is genuinely unreadable at the streaks; that is why the
+ * grain tones were authored as OPAQUE steps rather than an alpha wash, so "the
+ * darkest pixel" is a value this file can name.
+ *
+ * The inversion is also why this block exists at all. Every one of these
+ * foregrounds was correct on the ink bar V1 drew and wrong on wood, and NOTHING
+ * else in the suite would have noticed: the header still rendered, the tabs still
+ * navigated, the structural nav pins all stayed green.
+ */
+describe('THE LIGHT-WOOD SHAFT — the plank carries text, so it owes AA at its darkest streak', () => {
+  const DARKEST = SHAFT_GRAIN_DEEP;
+
+  test('the grain stays inside the directive’s 2–4% luminance band', () => {
+    // Below 2% the wood reads as flat paper; above 4% it reads as stripes. Both
+    // streak tones are checked, and the ORDER is checked too — a "deep" streak
+    // lighter than the mid one would silently make DARKEST the wrong reference.
+    const drop = (streak) => ((luminance(SHAFT) - luminance(streak)) / luminance(SHAFT)) * 100;
+    expect(drop(SHAFT_GRAIN)).toBeGreaterThanOrEqual(1.5);
+    expect(drop(SHAFT_GRAIN)).toBeLessThanOrEqual(4);
+    expect(drop(SHAFT_GRAIN_DEEP)).toBeGreaterThanOrEqual(2);
+    expect(drop(SHAFT_GRAIN_DEEP)).toBeLessThanOrEqual(4);
+    expect(luminance(SHAFT_GRAIN_DEEP)).toBeLessThan(luminance(SHAFT_GRAIN));
+  });
+
+  test('the shaft separates from the cream page body without becoming a dark bar', () => {
+    // A plank, not a stripe: deeper than PARCH, but nowhere near a boundary that
+    // would make the header read as chrome bolted onto the page.
+    expect(ratio(SHAFT, PARCH)).toBeGreaterThan(1.1);
+    expect(ratio(SHAFT, PARCH)).toBeLessThan(1.4);
+    expect(luminance(SHAFT)).toBeLessThan(luminance(PARCH));
+  });
+
+  test('every label on the shaft clears AA against the darkest streak', () => {
+    const riders = [
+      ['wordmark + active reference tab', GOLD_TXT],
+      ['resting reference tab',           BODY],
+      ['ghost buttons (Upgrade)',         SECOND],
+      ['signed-in account chip',          GREEN_DEEP],
+      ['developer account chip',          SLATE_DEEP],
+    ];
+    for (const [who, fg] of riders) {
+      expect(ratio(fg, DARKEST), `${who}: ${fg} on ${DARKEST}`).toBeGreaterThanOrEqual(AA_TEXT);
+    }
+  });
+
+  test('⚠️ NEGATIVE CONTROLS: the tones V1 used on the ink bar FAIL on wood', () => {
+    // These are the exact substitutions ribbon v2 had to make. Pinned as failures
+    // so that "just put the old colour back" reds here with the reason attached,
+    // instead of shipping an unreadable header that screenshots fine in isolation.
+    expect(ratio(PARCH_100, DARKEST)).toBeLessThan(AA_TEXT);  // the old nav label tone
+    expect(ratio(GOLD, DARKEST)).toBeLessThan(AA_TEXT);       // the old wordmark tone
+    expect(ratio(GREEN, DARKEST)).toBeLessThan(AA_TEXT);      // the old account-chip tone
+    // …and the replacement really is better, or the swap bought nothing.
+    expect(ratio(GREEN_DEEP, DARKEST)).toBeGreaterThan(ratio(GREEN, DARKEST));
+    expect(ratio(GOLD_TXT, DARKEST)).toBeGreaterThan(ratio(GOLD, DARKEST));
+  });
+
+  test('the recorded shaft ratios in theme.js are the MEASURED ones, to 2dp', () => {
+    expect(ratio(GOLD_TXT, DARKEST).toFixed(2)).toBe('5.75');
+    expect(ratio(BODY, DARKEST).toFixed(2)).toBe('8.33');
+    expect(ratio(SECOND, DARKEST).toFixed(2)).toBe('12.04');
+    expect(ratio(GREEN_DEEP, DARKEST).toFixed(2)).toBe('5.00');
+    expect(ratio(GREEN, DARKEST).toFixed(2)).toBe('3.91');
+    expect(ratio(SHAFT, PARCH).toFixed(2)).toBe('1.15');
+  });
+
+  test('the account chip’s BORDER stays a 1.4.11 boundary even though its label moved', () => {
+    // The label went to GREEN_DEEP for AA; the rule stayed GREEN so the status
+    // colour still reads. That is only defensible if the rule itself clears the
+    // 3:1 UI floor on the ground it is drawn against.
+    expect(ratio(GREEN, DARKEST)).toBeGreaterThanOrEqual(AA_UI);
+    expect(ratio(SLATE, DARKEST)).toBeGreaterThanOrEqual(AA_UI);
+  });
+
+  test('the feather is the boundary that says "feather", and the gilt is not', () => {
+    // The structural claim behind recording the gilt as decoration: what tells a
+    // user where a feather is, is the DARK BROWN against the wood — comfortably
+    // past 1.4.11 — not the hairline, which is 1.85:1 there and carries nothing.
+    expect(ratio(FLETCH_BROWN, SHAFT)).toBeGreaterThanOrEqual(AA_UI);
+    expect(ratio(FLETCH_BROWN, DARKEST)).toBeGreaterThanOrEqual(AA_UI);
+    expect(ratio(FLETCH_BROWN, SHAFT).toFixed(2)).toBe('5.97');
+    expect(ratio(GILT, SHAFT)).toBeLessThan(AA_UI); // recorded, not hidden
+    expect(ratio(GILT, SHAFT).toFixed(2)).toBe('1.92');
+  });
+
+  test('the reference-tab groove is quieter than the fletching’s gilt seam — the hierarchy', () => {
+    // Both are decorative dividers with no WCAG floor, so what is pinned is the
+    // RELATIONSHIP the design depends on: the journey's seams read stronger than
+    // the shelf's. If a future edit inverted these, the band would stop leading.
+    expect(ratio(GILT, FLETCH_BROWN)).toBeGreaterThan(ratio(SHAFT_RULE, SHAFT));
+    expect(ratio(SHAFT_RULE, SHAFT).toFixed(2)).toBe('2.50');
+    // And the groove is genuinely visible, unlike the BORDER it replaced here.
+    expect(ratio(SHAFT_RULE, SHAFT)).toBeGreaterThan(ratio(BORDER, SHAFT));
+    expect(ratio(BORDER, SHAFT)).toBeLessThan(1.6); // why BORDER had to go
   });
 });
