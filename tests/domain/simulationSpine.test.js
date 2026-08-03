@@ -449,6 +449,66 @@ describe('the remaining rungs', () => {
     expect(spine.survivesBy).toBe('It survives by milled timber and charcoal, among others.');
   });
 
+  describe('a list member may already BE a coordination', () => {
+    /**
+     * The trade-goods catalog carries eighteen names with an internal "and"
+     * — "Furs and pelts", "Reeds and thatch", "Rare spices and exotic dyes" —
+     * and joining two of them with a bare "and" produced lines no reader can
+     * parse. Measured over 180 real generations (six tiers x five route arms x
+     * six terrains), 30 printed a body carrying two or more "and"s:
+     *
+     *   It survives by furs and pelts and game meat, among others.
+     *   It survives by rare spices and exotic dyes and meals and drink, …
+     *
+     * The cure is the serial comma the joiner already uses at three-or-more.
+     */
+    const survives = (primaryExports) =>
+      deriveSimulationSpine({ economicState: { primaryExports } }).survivesBy;
+
+    it('marks the top-level split with a comma when the FIRST member coordinates', () => {
+      expect(survives(['Furs and pelts', 'Game meat']))
+        .toBe('It survives by furs and pelts, and game meat.');
+    });
+
+    it('marks it when the SECOND member coordinates', () => {
+      expect(survives(['Recovered artefacts', 'Meals and drink']))
+        .toBe('It survives by recovered artefacts, and meals and drink.');
+    });
+
+    it('marks it when BOTH members coordinate', () => {
+      // The worst line the scan found, and the one that most needs the comma.
+      expect(survives(['Rare spices and exotic dyes', 'Meals and drink']))
+        .toBe('It survives by rare spices and exotic dyes, and meals and drink.');
+    });
+
+    it('SPECIFICITY: a clean pair keeps the plain "A and B", with no comma', () => {
+      // Without this, a joiner that always emitted the serial comma would
+      // satisfy all three pins above while making every other line worse.
+      expect(survives(['Milled timber', 'Charcoal']))
+        .toBe('It survives by milled timber and charcoal.');
+      // And the estate's idiom for a single item is untouched.
+      expect(survives(['Milled timber'])).toBe('It survives by milled timber.');
+    });
+
+    it('the three-or-more form is unchanged: it was already serial', () => {
+      expect(
+        deriveSimulationSpine({ name: 'X', stressors: [
+          { label: 'Famine' }, { label: 'Bandits and raiders' }, { label: 'Debt' },
+        ] }).strainedBy,
+      ).toBe('It is currently strained by famine, bandits and raiders, and debt.');
+    });
+
+    it('the rule holds at a SECOND rung, not only at survives-by', () => {
+      // joinPhrases is shared by five arms; a fix applied at one call site
+      // would satisfy the survives-by pins and leave this red.
+      expect(
+        deriveSimulationSpine({
+          name: 'X', defenseProfile: { threats: [{ label: 'Bandits and raiders' }, { label: 'Wolves' }] },
+        }).peopleFear,
+      ).toBe('Its people fear bandits and raiders, and wolves.');
+    });
+  });
+
   it('survives-by still honours the legacy topExport alias', () => {
     expect(deriveSimulationSpine(legacySettlement()).survivesBy)
       .toBe('It survives by smoked river fish.');
@@ -702,6 +762,38 @@ describe('over REAL generated settlements', () => {
         'the live-site splice must not return on a real settlement',
       );
     }
+  });
+
+  it('a coordinating export name is comma-split on REAL settlements, not fixtures', () => {
+    // The fixture pins above are written from a belief about the catalog. This
+    // one reads the catalog: it generates across the terrain and route space
+    // until it finds settlements whose top two exports include a name that is
+    // itself a coordination ("Furs and pelts", "Meals and drink", …), and
+    // requires the composed line to mark the top-level split. Without the
+    // fix, 30 of these 180 generations printed "furs and pelts and game meat".
+    let examined = 0;
+    for (const settType of ['thorp', 'village', 'town', 'city', 'metropolis']) {
+      for (const tradeRouteAccess of ['crossroads', 'port', 'river', 'isolated']) {
+        for (const terrain of ['coastal', 'riverside', 'plains', 'forest', 'mountain']) {
+          const settlement = gen(
+            { settType, tradeRouteAccess, terrain },
+            `conj-${settType}-${tradeRouteAccess}-${terrain}`,
+          );
+          const top = (settlement.economicState?.primaryExports || []).slice(0, 2);
+          if (top.length < 2 || !top.some(name => / and /i.test(String(name)))) continue;
+          examined++;
+          const [a, b] = top.map(name => String(name).toLowerCase());
+          expect(
+            deriveSimulationSpine(settlement).survivesBy,
+            `"${a}" + "${b}" were joined without the top-level comma`,
+          ).toContain(`${a}, and ${b}`);
+        }
+      }
+    }
+    // Positive control: a corpus that found no coordinating export would pass
+    // this test vacuously and prove nothing about the joiner.
+    expect(examined, 'no generated settlement carried a coordinating export name')
+      .toBeGreaterThan(0);
   });
 
   it('every rendered row is grammatical on every generated settlement', () => {

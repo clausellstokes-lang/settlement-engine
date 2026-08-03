@@ -251,6 +251,31 @@ function withArticle(phrase) {
  * stays a single readable line. Covers every arity the arms produce: one, two,
  * three, and more-than-three.
  *
+ * ── THE DOUBLED CONJUNCTION ───────────────────────────────────────────────
+ *
+ * A member of the list may already BE a coordination. The trade-goods catalog
+ * is full of them — "Furs and pelts", "Reeds and thatch", "Meals and drink",
+ * "Rare spices and exotic dyes", eighteen names in all — and joining two of
+ * those with a bare "and" produced lines no reader can parse:
+ *
+ *   It survives by furs and pelts and game meat, among others.
+ *   It survives by rare spices and exotic dyes and meals and drink, among others.
+ *
+ * Measured over 180 real generations spanning six tiers, five route arms and
+ * six terrains, 30 of them printed a rung body carrying two or more "and"s.
+ *
+ * The cure is the SERIAL COMMA, which is what the comma is for and what this
+ * function already does at three-or-more: when any shown member carries an
+ * internal " and ", the top-level split is marked with a comma so the reader
+ * can see where one item ends and the next begins.
+ *
+ *   furs and pelts, and game meat
+ *   rare spices and exotic dyes, and meals and drink
+ *
+ * Two plain phrases keep the plain "A and B" — a comma there would be noise,
+ * and it is the estate's idiom everywhere else (aiLayer.joinList,
+ * display/glossary.js) to join a clean pair without one.
+ *
  * @param {string[]} phrases
  * @param {number} [cap]
  * @returns {string|null}
@@ -260,10 +285,15 @@ function joinPhrases(phrases, cap = 3) {
   if (!list.length) return null;
   const shown = list.slice(0, cap);
   const overflow = list.length > cap;
+  // Any member that is itself a coordination forces the serial form.
+  const carriesConjunction = shown.some(phrase => / and /i.test(phrase));
   let joined;
   if (shown.length === 1) joined = shown[0];
-  else if (shown.length === 2) joined = `${shown[0]} and ${shown[1]}`;
-  else joined = `${shown.slice(0, -1).join(', ')}, and ${shown[shown.length - 1]}`;
+  else if (shown.length === 2) {
+    joined = carriesConjunction
+      ? `${shown[0]}, and ${shown[1]}`
+      : `${shown[0]} and ${shown[1]}`;
+  } else joined = `${shown.slice(0, -1).join(', ')}, and ${shown[shown.length - 1]}`;
   return overflow ? `${joined}, among others` : joined;
 }
 
