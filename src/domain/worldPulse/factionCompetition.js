@@ -1,6 +1,7 @@
 import { clamp01 } from '../../kernel/math.js';
 import {
   decayFactionPairStates,
+  factionPairOf,
   mintFactionPairIncident,
   selectWarDecisionIncident,
 } from './factionPairLedger.js';
