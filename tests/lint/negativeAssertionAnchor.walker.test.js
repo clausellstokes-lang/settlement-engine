@@ -237,7 +237,11 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/components/tableLedgerPanel.test.jsx': 2,
   'tests/components/termsRefundsSection.test.jsx': 1,
   'tests/components/tradeDynamicsGoodsSource.test.js': 2,
-  'tests/components/uiMiscHardening.test.jsx': 2,
+  // Lowered 2 -> 1 by the profile-identity lane: re-pinning finding #2 anchored
+  // one of its two bare negatives (the CSS-url exclusion now sits beside a
+  // positive that proves an <img> really is rendered). Shrink-only ratchet, so
+  // the win is banked here rather than left as slack for the next drift.
+  'tests/components/uiMiscHardening.test.jsx': 1,
   'tests/components/versionsTabPitchHonesty.test.js': 4,
   'tests/components/warFaithMapOverlay.test.jsx': 1,
   'tests/components/worldMapShellMemo.test.jsx': 1,

@@ -19,6 +19,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import ImageCropper from '../../src/components/gallery/ImageCropper.jsx';
 
 /** What the stubbed canvas recorded on the last commit. */
@@ -85,7 +86,12 @@ describe('the gallery cover path is UNCHANGED by the profile-image extension', (
       <ImageCropper src="blob:fake" aspect={16 / 9} onCommit={() => {}} onCancel={() => {}} />,
     );
     const viewport = container.querySelector('[role="application"]');
-    expect(viewport.getAttribute('style')).not.toContain('border-radius');
+    // Anchored on a sibling declaration the same style object always carries,
+    // so this cannot pass just because the viewport lost its style attribute.
+    expectAbsentWithAnchor(
+      viewport.getAttribute('style'), 'border-radius', 'overflow: hidden',
+      'cover viewport keeps square corners',
+    );
   });
 });
 

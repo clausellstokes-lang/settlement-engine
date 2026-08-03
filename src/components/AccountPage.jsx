@@ -19,6 +19,8 @@ import {
 } from '../store/savedSettlementsHydration.js';
 import { navigate } from '../hooks/useRoute.js';
 import { auth as authService } from '../lib/auth.js';
+import { checkCivility } from '../lib/civility.js';
+import { t } from '../copy/index.js';
 import { saves as savesService } from '../lib/saves.js';
 import { startCheckout, startCustomerPortal } from '../lib/stripe.js';
 import { getPendingRedeemCode, clearPendingRedeemCode } from '../lib/referralRedeem.js';
@@ -100,6 +102,7 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState(auth.displayName || '');
   const [nameSaving, setNameSaving] = useState(false);
+  const [nameError, setNameError] = useState(null);
   // The resync key covers exactly the fields THIS draft owns. auth.avatarUrl is
   // deliberately no longer among them: the profile image is written by
   // AccountIdentitySection, so leaving it in the key meant that uploading an
@@ -137,6 +140,21 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
 
   const handleSaveName = async () => {
     if (!nameInput.trim()) return;
+
+    // THE CIVILITY GUARD, BLOCK MODE (DESIGN_PROFILE_IMAGE.md §9). A display
+    // name is an AUTHORED-PUBLIC field, so the gate is the entry: the name is
+    // not saved and NOTHING ELSE happens to the account — no lockout, no strike,
+    // no shadow penalty. The owner's proportionality ruling, and the right one:
+    // the guard rejects a string, never a person.
+    //
+    // Client mirror = courtesy; the server mirror in update_display_name
+    // (migration 195) is the law. Both read one shared vector file.
+    setNameError(null);
+    if (checkCivility(nameInput.trim()).blocked) {
+      setNameError(t('errors.civilityName'));
+      return;
+    }
+
     setNameSaving(true);
     try {
       await authService.updateDisplayName(nameInput.trim());
@@ -157,7 +175,11 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
         );
       }
     } catch (e) {
+      // Previously console-only: the spinner stopped and the user was told
+      // nothing at all. With a refusal line already on this row, there is no
+      // reason left for a save failure to be invisible.
       console.error('Failed to update name:', e);
+      setNameError(e?.message || t('errors.namingFail'));
     } finally {
       setNameSaving(false);
     }
@@ -330,6 +352,7 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
           editingName={editingName} setEditingName={setEditingName}
           nameInput={nameInput} setNameInput={setNameInput}
           nameSaving={nameSaving} handleSaveName={handleSaveName}
+          nameError={nameError}
           profileError={profileError} profileSaving={profileSaving} profileSaved={profileSaved}
           handleSaveProfilePreferences={handleSaveProfilePreferences}
         />

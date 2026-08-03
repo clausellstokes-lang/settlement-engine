@@ -6,6 +6,8 @@ import {
 import {
   BODY, BORDER, CARD, CARD_ALT, FS, INK, MUTED, RED, RED_BG, SP, sans, serif_ } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import { checkCivility } from '../../lib/civility.js';
+import { t } from '../../copy/index.js';
 import DeleteConfirmation from '../DeleteConfirmation.jsx';
 import { formatDate, REPORT_REASON_OPTIONS } from './galleryUtils.js';
 
@@ -147,6 +149,20 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
 
   const submit = async () => {
     if (!auth?.user || !commentText.trim() || busy) return;
+
+    // THE CIVILITY GUARD, BLOCK MODE (DESIGN_PROFILE_IMAGE.md §9). A comment is
+    // an AUTHORED-PUBLIC field — written FOR the public — so the gate is the
+    // entry: the text is simply not posted, and NOTHING ELSE happens. No strike,
+    // no lockout, no shadow penalty, no record. The author edits and posts again.
+    //
+    // This is the CLIENT mirror and it is a courtesy, not the law: the same
+    // check runs server-side in add_gallery_comment (migration 195), so a
+    // bypassed client is refused there. Both mirrors read one shared vector file.
+    if (checkCivility(commentText).blocked) {
+      setError(t('errors.civilityComment'));
+      return;
+    }
+
     setBusy(true);
     setError(null);
     try {

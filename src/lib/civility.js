@@ -384,12 +384,36 @@ export function veilText(text) {
  */
 export function veilDeep(value) {
   if (typeof value === 'string') return /** @type {T} */ (/** @type {unknown} */ (veilText(value)));
-  if (Array.isArray(value)) return /** @type {T} */ (/** @type {unknown} */ (value.map(veilDeep)));
+
+  // STRUCTURAL SHARING: when nothing beneath a node changed, the ORIGINAL node
+  // comes back rather than a rebuilt copy. This is not micro-optimisation — the
+  // veil sits on a projection that runs over a whole settlement payload on every
+  // public dossier read and over every save in a world export, and the
+  // overwhelmingly common case is that nothing is flagged at all. Returning the
+  // same references makes the clean case allocation-free, and it makes "this
+  // projection changed nothing" checkable by identity rather than by deep
+  // comparison.
+  if (Array.isArray(value)) {
+    let changed = false;
+    const out = value.map((child) => {
+      const next = veilDeep(child);
+      if (next !== child) changed = true;
+      return next;
+    });
+    return /** @type {T} */ (/** @type {unknown} */ (changed ? out : value));
+  }
+
   if (value && typeof value === 'object' && Object.getPrototypeOf(value) === Object.prototype) {
     /** @type {Record<string, unknown>} */
     const out = {};
-    for (const [key, child] of Object.entries(value)) out[key] = veilDeep(child);
-    return /** @type {T} */ (/** @type {unknown} */ (out));
+    let changed = false;
+    for (const [key, child] of Object.entries(value)) {
+      const next = veilDeep(child);
+      if (next !== child) changed = true;
+      out[key] = next;
+    }
+    return /** @type {T} */ (/** @type {unknown} */ (changed ? out : value));
   }
+
   return value;
 }

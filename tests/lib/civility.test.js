@@ -107,6 +107,24 @@ describe('civility guard — VEIL mode', () => {
     }
   });
 
+  test('STRUCTURAL SHARING: a clean payload comes back by reference, not rebuilt', () => {
+    // The veil rides toPublicSafe, which runs over a whole settlement on every
+    // public dossier read and over every save in a world export. The
+    // overwhelmingly common case is that nothing is flagged, and in that case
+    // this must cost no allocation at all. It also makes "this projection
+    // changed nothing" checkable by identity rather than by deep comparison.
+    const clean = { a: 'a quiet hook', b: { c: ['nothing', 'flagged'] } };
+    expect(veilDeep(clean)).toBe(clean);
+    expect(veilDeep(clean).b).toBe(clean.b);
+
+    // Non-vacuity: a flagged payload really is rebuilt, and only along the path
+    // that changed — the untouched sibling subtree is still shared.
+    const dirty = { flagged: 'a shit hook', untouched: { deep: ['fine'] } };
+    const out = veilDeep(dirty);
+    expect(out).not.toBe(dirty);
+    expect(out.untouched).toBe(dirty.untouched);
+  });
+
   test('veilDeep leaves non-JSON values alone rather than reconstructing them', () => {
     const when = new Date(0);
     const out = veilDeep({ when, count: 3, flag: false, missing: null });

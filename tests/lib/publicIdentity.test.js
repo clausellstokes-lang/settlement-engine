@@ -9,6 +9,7 @@
  */
 import { describe, expect, test } from 'vitest';
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import {
   AVATAR_RUNGS, avatarAlt, avatarHue, avatarLetter, avatarRungUrl, avatarSources,
   publicIdentityOf,
@@ -128,8 +129,14 @@ describe('the size ladder', () => {
     expect(micro.srcSet).toContain(`${AVATAR_RUNGS.standard}w`);
     // The master's own filename must be absent from the micro candidate list, at
     // any pixel density — this is the design's "the 512 never ships to a 32px
-    // slot" made structural rather than hoped for.
-    expect(micro.srcSet).not.toContain('abc123.webp');
+    // slot" made structural rather than hoped for. Anchored on the 128 sibling,
+    // which travels the same ladder path: without the anchor this would pass
+    // just as happily if srcSet stopped being emitted at all, which is the exact
+    // regression it exists to catch.
+    expectAbsentWithAnchor(
+      micro.srcSet, 'abc123.webp', 'abc123-128.webp',
+      'micro slot never offers the 512 master',
+    );
     expect(micro.src).toContain('-32.webp');
   });
 

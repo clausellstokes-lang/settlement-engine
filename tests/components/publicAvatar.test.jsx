@@ -19,6 +19,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import PublicAvatar from '../../src/components/primitives/PublicAvatar.jsx';
 import { publicIdentityOf } from '../../src/lib/publicIdentity.js';
 
@@ -60,7 +61,13 @@ describe('the image arm', () => {
     const img = screen.getByTestId('public-avatar-image');
     expect(img.getAttribute('sizes')).toBe('32px');
     expect(img.getAttribute('src')).toContain('-32.webp');
-    expect(img.getAttribute('srcset')).not.toContain('abc123.webp');
+    // The 512 master must be absent — anchored on a sibling candidate that
+    // travels the same ladder code path, so this cannot pass merely because
+    // srcSet stopped being emitted at all.
+    expectAbsentWithAnchor(
+      img.getAttribute('srcset'), 'abc123.webp', 'abc123-128.webp',
+      'micro slot never offers the 512 master',
+    );
   });
 
   it('alt text is the display name — identity is never carried by the image alone', () => {

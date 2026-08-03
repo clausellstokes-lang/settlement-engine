@@ -25,6 +25,10 @@
  */
 
 import { deepClone } from '../clone.js';
+// The civility guard's VEIL mode. civility.js is a pure leaf (its only import is
+// the authored word lists), so this domain→lib edge stays headless — no React,
+// no store, nothing that could taint the engine spine through the back door.
+import { veilDeep } from '../../lib/civility.js';
 
 // ── Public top-level allowlist ──────────────────────────────────────────────
 // Character-identical (order-independent) to the FUSED migration 123's
@@ -361,5 +365,40 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
       })
       .filter(npc => npc.name || npc.role);
   }
-  return result;
+
+  // ── THE CIVILITY VEIL (DESIGN_PROFILE_IMAGE.md §9, the VEIL mode) ───────────
+  // The LAST thing that happens to a public projection, and the right place for
+  // it for three reasons that together make this the only correct seam:
+  //
+  //   1. ORIGIN. Everything reaching this line is PRIVATE-ORIGIN text — an NPC
+  //      secret, a plot hook, a goal, the DM Compass — written in a private world
+  //      and carried into public by the owner's shareDm opt-in. §9's ruling is
+  //      that such text is VEILED, never BLOCKED: "those are originally
+  //      private... people may forget". The author did nothing public-facing
+  //      wrong, so nothing is refused and no friction is applied. Text the author
+  //      wrote FOR the public (a display name, a comment, a gallery description)
+  //      is a different mode entirely and is gated at ITS entry, not here.
+  //
+  //   2. ONE TRANSFORM, BOTH FORMS. §9 requires the mask to apply "in the public
+  //      VIEW and in the SHARED/IMPORT PAYLOAD identically". Both already flow
+  //      through this one function — the gallery dossier read (lib/gallery.js)
+  //      and the world export payload (lib/worldExport.js) — so veiling here
+  //      covers both by construction instead of by remembering to.
+  //
+  //   3. THE STORAGE LAW. This is a projection that never writes. The author's
+  //      stored note is untouched and survives every share, unshare and reimport
+  //      byte-intact; only what LEAVES privacy wears the veil.
+  //
+  // Applied to BOTH modes, not just `full`. Default mode already strips DM
+  // blocks, but user-authored strings still ride it (names, renames), and a veil
+  // is harmless on clean text — veilDeep returns the SAME references when nothing
+  // is flagged, so this costs no allocation on the overwhelmingly common path.
+  //
+  // ⚠️ CLIENT MIRROR ONLY, and the honesty matters: the SERVER's
+  // _gallery_sanitize_public_json is the authoritative boundary for stored public
+  // reads, and it does NOT yet veil (migration 195 ships the block-mode server
+  // mirror; masking inside JSON prose in SQL is recorded as deferred). Until then
+  // the veil is defense-in-depth on every path that renders through this module,
+  // which is every path this client serves.
+  return veilDeep(result);
 }

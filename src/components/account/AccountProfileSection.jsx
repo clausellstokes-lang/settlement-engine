@@ -52,7 +52,7 @@ export default function AccountProfileSection({
   modelPreference, setModelPreference,
   editingName, setEditingName,
   nameInput, setNameInput,
-  nameSaving, handleSaveName,
+  nameSaving, handleSaveName, nameError,
   profileError, profileSaving, profileSaved,
   handleSaveProfilePreferences,
 }) {
@@ -128,6 +128,16 @@ export default function AccountProfileSection({
               </>
             )}
           </div>
+          {/* The civility refusal (and any save failure) lands HERE, on the row
+              that caused it — not in the Save-profile error slot further down,
+              which the user is not looking at while renaming themselves. The copy
+              is non-accusatory and never echoes the matched word: checkCivility
+              does not return it, so this surface could not echo it if it tried. */}
+          {nameError && (
+            <div role="alert" style={{ marginTop: SP.xs, fontSize: FS.xs, color: swatch.danger, fontFamily: sans }}>
+              {nameError}
+            </div>
+          )}
           <div style={{ fontSize: FS.sm, color: MUTED }}>{auth.user.email}</div>
           <div style={{ marginTop: SP.sm, display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
             <RoleBadge role={auth.role} />

@@ -991,6 +991,15 @@ export const en = Object.freeze({
     canonRecoveryOpenFail: 'The recovery check could not be opened. No command was retried.',
     worldClockStartFail: 'The world clock could not be started. Try again in a moment.',
     namingFail:          'That name could not be saved. Try again in a moment.',
+    // THE CIVILITY REFUSALS (DESIGN_PROFILE_IMAGE.md §9). Polite and
+    // NON-ACCUSATORY by explicit design: no moralising, no lecture, and never an
+    // echo of the matched word — checkCivility does not even return it, so no
+    // surface can. Each carries a mistake path in the same breath, because false
+    // positives are support tickets, not an appeals court. The guard rejects a
+    // string, never a person, and the copy has to sound like that is true.
+    civilityName:        'That name can’t be used here. Think this is wrong? Feedback & support.',
+    civilityComment:     'That comment can’t be posted. Think this is wrong? Feedback & support.',
+    civilityShareText:   'Some of that wording can’t be published. Think this is wrong? Feedback & support.',
     notesSaveFail:       'Those notes could not be saved. Your text is still here. Try again.',
     snapshotRestoreUnavailable: 'Snapshot restore is unavailable.',
     snapshotRestoreFail: 'Snapshot could not be restored.',
