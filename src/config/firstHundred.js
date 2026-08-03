@@ -7,12 +7,18 @@
  *   thank-you, not a leaderboard and not a product. It has NO mechanics: no seat, no
  *   license, no entitlement rides on being listed here.
  *
- * NOT THE FOUNDER SEATS. This is a DIFFERENT thing from the thirty lifetime Founder
- *   seats (src/lib/founderSeats.js, /founders). Founder seats are a limited, paid,
- *   transferable license capped at FOUNDER_SEAT_CAP. The First Hundred is an open,
- *   unpriced acknowledgment of early members, capped at FIRST_HUNDRED_CAP. The two lists
- *   are independent: a person may be on either, both, or neither. Nothing here changes
- *   the Founder count or implies a paid tier.
+ * NOT THE FOUNDERS' HALL. This is a DIFFERENT thing from the thirty numbered chairs of
+ *   the Founders' Hall (src/lib/foundersHall.js, /founders). A chair is GIVEN, never
+ *   sold: all thirty are by invitation, each is bound to one founder permanently, and no
+ *   transfer path exists — the paid, transferable license this note used to describe was
+ *   the SUPERSEDED design and was abolished before it ever sold (docs/
+ *   DESIGN_FOUNDERS_HALL.md §1/§4). The First Hundred is an open, unpriced
+ *   acknowledgment of early members, capped at FIRST_HUNDRED_CAP.
+ *
+ * THE RELATIONSHIP, STATED RATHER THAN DISCOVERED (DESIGN_FOUNDERS_HALL §8 build-time
+ *   check): the two lists are INDEPENDENT. A person may be on either, both, or neither;
+ *   a place on this roll is not a claim on a chair, and holding a chair does not put a
+ *   name here. Nothing in this file changes the chair count or implies a paid tier.
  *
  * CLAIMS-PARITY (the law): this list ships EMPTY and carries only real, opted-in names.
  *   No placeholder people, no seeded examples, no "coming soon" names. The page renders

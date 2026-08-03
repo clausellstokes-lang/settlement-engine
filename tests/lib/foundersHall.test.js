@@ -9,7 +9,7 @@
  * vocabulary anywhere in the Hall's source), PERMANENCE (no writer reassigns a
  * chair), and DISPLAY LAW (zero unfilled chairs, ever).
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, expect, test } from 'vitest';
@@ -332,5 +332,33 @@ describe('THE NEGATIVE PINS — the ones that pin hardest', () => {
       expect(codeOf(rel).length, `${rel} read as empty — the pin above scanned nothing`).toBeGreaterThan(400);
     }
     expect(hallSources).toHaveLength(8);
+  });
+
+  test('CONTROL: the list COVERS the Hall — a new Hall surface cannot slip past the pins', () => {
+    // The third way a source-scan goes vacuous, and the quietest: the detectors
+    // stay sharp and the files stay real, but a NEW Hall component lands and is
+    // simply never added to the list. Nothing reds; the pin just stops covering
+    // the surface it was written for. So the list is checked against the DIRECTORY
+    // rather than against itself.
+    //
+    // ONE NAMED EXCLUSION, with its reason: FirstHundredPage.jsx shares the folder
+    // but is a different surface entirely (/first-hundred — an open, unpriced
+    // acknowledgment of early members, explicitly NOT the thirty chairs; the
+    // relationship is stated in src/config/firstHundred.js per §8).
+    const NOT_THE_HALL = new Set(['FirstHundredPage.jsx']);
+    const onDisk = readdirSync(join(ROOT, 'src/components/founders'))
+      .filter((f) => /\.(jsx?|mjs)$/.test(f) && !NOT_THE_HALL.has(f));
+    const scanned = new Set(
+      hallSources
+        .filter((rel) => rel.startsWith('src/components/founders/'))
+        .map((rel) => rel.split('/').pop()),
+    );
+    const unscanned = onDisk.filter((f) => !scanned.has(f));
+    expect(
+      unscanned,
+      `a Hall surface exists that no negative pin walks — add it to hallSources (or to NOT_THE_HALL with a reason):\n${unscanned.join('\n')}`,
+    ).toEqual([]);
+    // Non-vacuity: the directory read actually found the Hall's components.
+    expect(onDisk.length).toBeGreaterThan(4);
   });
 });

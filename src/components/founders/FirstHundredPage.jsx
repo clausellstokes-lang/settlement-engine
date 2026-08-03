@@ -6,9 +6,12 @@
  * empty. With no names it shows the dignified "still being written" state, where the
  * invitation is the content. It has NO mechanics: nothing here grants anything.
  *
- * DISTINCT FROM /founders. That page is the thirty lifetime Founder seats (a limited,
- * paid, transferable license). This page is an unpriced acknowledgment of early members.
- * A short line links between them so no one mistakes one for the other.
+ * DISTINCT FROM /founders. That page is THE FOUNDERS' HALL — thirty numbered chairs,
+ * all by invitation and none ever sold, each bound to one founder permanently
+ * (docs/DESIGN_FOUNDERS_HALL.md §1/§4; the "paid, transferable license" this note used
+ * to describe was the superseded design). This page is an unpriced acknowledgment of
+ * early members, and the two rolls are INDEPENDENT (§8) — a person may be on either,
+ * both, or neither. A short line links between them so no one mistakes one for the other.
  *
  * ZERO EAGER. Lazy route (AppViews registers it via lazy()); the roll is a pure config
  * import. Nothing here touches the first-paint graph.
@@ -81,13 +84,13 @@ export default function FirstHundredPage({ onNavigate }) {
           and the first hundred stay the first hundred.
         </p>
         <p style={{ margin: 0, fontFamily: sans, fontSize: FS.sm, color: BODY, lineHeight: 1.65 }}>
-          The Founder seats are a separate thing, with their own page:{' '}
+          The founder chairs are a separate thing, with their own page:{' '}
           <a
             href={viewToPath('founders')}
             onClick={(e) => { if (onNavigate) { e.preventDefault(); onNavigate('founders'); } }}
             style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 600, color: GOLD_DEEP, textDecoration: 'none' }}
           >
-            the Founders
+            the Founders&rsquo; Hall
           </a>
           .
         </p>
