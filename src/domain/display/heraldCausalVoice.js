@@ -42,6 +42,19 @@
  * `caused` when `followed` did not fit would manufacture exactly the causality
  * the corpus promises never to manufacture.
  *
+ * ── THE ARGUMENT FORM (§3's four tags, dispatched) ──────────────────────────
+ * Every connective declares what its slot takes — `N` a noun phrase, `F` a
+ * finite clause, `V` a bare verb phrase, `A` nothing at all. The walk hands this
+ * composer one FINITE CLAUSE per hop, so an `N` line fed the raw clause prints
+ * "against the refusal of the eastern road was cut". §1's JOIN MOLDS are the
+ * supply those tags were written to receive: `heraldJoinMolds.js` renders the
+ * hop's own clause in the form the slot demands, per pool, asserting nothing the
+ * edge does not carry. THE RULE HERE: a connective line is DRAWABLE only when
+ * its argument is molded for its pool — an unmolded line (and every `A` line,
+ * which carries its own parent and would point at nothing this page showed) is
+ * never drawn, and a pool with no drawable line in the held direction DROPS the
+ * link rather than re-labelling it into a pool whose edge would fit the prose.
+ *
  * ── DORMANCY ────────────────────────────────────────────────────────────────
  * Dark unless `simulationRules.heraldCausalVoiceEnabled === true`. Every entry
  * point returns null when dark, so the feed is byte-identical to a world that
@@ -56,12 +69,13 @@
 import {
   CONNECTIVE_POOLS,
   POOL_PARENT,
-  connectiveFor,
+  audiencePoolFor,
   pickCausal,
   terminalLine,
   timeBandOf,
   timeBandWord,
 } from './heraldCausalGrammar.js';
+import { argIsMolded, moldFormFor } from './heraldJoinMolds.js';
 
 /** The virtual dormancy flag (the discourseProseActive idiom). */
 export function heraldCausalVoiceActive(worldState) {
@@ -128,9 +142,23 @@ function fillable(text) {
 }
 
 /**
+ * THE DRAWABLE SUBSET of a pool in one direction: lines whose slots this
+ * composer can fill AND whose argument type it can mold. Filtering BEFORE the
+ * draw rather than repairing after it is what makes the law structural — an
+ * ungrammatical line is not rejected downstream, it is never selected.
+ * @param {string} pool
+ * @param {'back'|'fwd'} direction
+ * @returns {ReadonlyArray<{ text: string, dir: string, arg: string }>}
+ */
+function drawableLines(pool, direction) {
+  const lines = CONNECTIVE_POOLS[pool] || [];
+  return lines.filter((l) => l.dir === direction && fillable(l.text) && argIsMolded(pool, l.arg));
+}
+
+/**
  * Draw a printable connective for one link: the pool the edge licenses, in one
- * held direction, filtered to lines this composer can fill. Null ⇒ the link is
- * DROPPED (never re-labelled).
+ * held direction, over the drawable subset only. Null ⇒ the link is DROPPED
+ * (never re-labelled — the EDGE never changes to suit the prose).
  * @param {Object} args
  * @param {Record<string, unknown>} args.link
  * @param {string} args.seed
@@ -139,18 +167,34 @@ function fillable(text) {
  * @returns {{ text: string, pool: string, edge: string, arg: string }|null}
  */
 function connectiveForLink({ link, seed, direction, seesSecrets }) {
-  const pool = poolForLink(link);
-  const drawn = connectiveFor({ pool, seed, direction, seesSecrets });
+  // The audience swap happens FIRST and once: on a player surface the DM-only
+  // `planted` arm degrades to `believed` by connective swap (R-W5-F), and the
+  // drawable subset is then measured against the pool actually being read.
+  const pool = audiencePoolFor(poolForLink(link), !!seesSecrets);
+  const drawn = pickCausal(drawableLines(pool, direction), `${seed}::conn::${pool}::${direction}`);
   if (!drawn) return null;
-  if (fillable(drawn.text)) return { text: drawn.text, pool: drawn.pool, edge: drawn.edge, arg: drawn.arg };
-  // The drawn line needs a slot this composer cannot fill; retry within the same
-  // pool over the fillable subset only, so the EDGE never changes to suit the
-  // prose. Still nothing ⇒ drop the link.
-  const lines = (CONNECTIVE_POOLS[drawn.pool] || []).filter((l) => l.dir === direction && fillable(l.text));
-  const retry = pickCausal(lines, `${seed}::conn-fill::${drawn.pool}::${direction}`);
-  return retry
-    ? { text: retry.text, pool: drawn.pool, edge: POOL_PARENT[drawn.pool], arg: retry.arg }
-    : null;
+  return { text: drawn.text, pool, edge: POOL_PARENT[pool], arg: drawn.arg };
+}
+
+/**
+ * One link's connective AND its argument, composed. Null ⇒ the link is dropped:
+ * either no line in the pool is drawable, or the hop carried no clause to put in
+ * the slot. Never a connective without its argument, and never an argument in a
+ * form the pool did not license.
+ * @param {Object} args
+ * @param {Record<string, unknown>} args.link
+ * @param {string} args.clause  the hop's own byte-verbatim recorded headline
+ * @param {string} args.seed
+ * @param {'back'|'fwd'} args.direction
+ * @param {boolean} args.seesSecrets
+ * @returns {{ text: string, pool: string, edge: string, arg: string, argText: string }|null}
+ */
+function joinForLink({ link, clause, seed, direction, seesSecrets }) {
+  const connective = connectiveForLink({ link, seed, direction, seesSecrets });
+  if (!connective) return null;
+  const argText = moldFormFor({ pool: connective.pool, arg: connective.arg, clause, seed });
+  if (!argText) return null;
+  return { ...connective, argText };
 }
 
 /**
@@ -184,7 +228,7 @@ export function timeGesture({ sinceTicks, position, intervalWeeks = 1 }) {
  * @param {{ chain?: ReadonlyArray<Record<string, unknown>> }} args.walk
  * @param {string} args.seed
  * @param {boolean} [args.seesSecrets]
- * @returns {{ text: string, gestures: number, pool: string, edge: string }|null}
+ * @returns {{ text: string, gestures: number, pool: string, edge: string, arg: string, argText: string }|null}
  */
 export function heraldHeadlineRegister({ worldState, item, walk, seed, seesSecrets = false }) {
   if (!heraldCausalVoiceActive(worldState)) return null;
@@ -201,15 +245,20 @@ export function heraldHeadlineRegister({ worldState, item, walk, seed, seesSecre
   const parentClause = String(nearest.headline || '').trim();
   if (!parentClause) return null;
 
-  const connective = connectiveForLink({ link: nearest, seed: `${seed}::headline`, direction: 'back', seesSecrets });
-  if (!connective) return null;
-  // `A` connectives carry their own parent and take no argument; in the headline
-  // register that would leave the gesture pointing at nothing the reader can see.
-  if (connective.arg === 'A') return null;
+  // The gesture is the connective AND the argument its slot demands, molded from
+  // this hop's own clause. `A` lines are not drawable at all (they carry their
+  // own parent and would leave the gesture pointing at nothing the reader can
+  // see), so the register cannot compose one by construction.
+  const join = joinForLink({
+    link: nearest, clause: parentClause, seed: `${seed}::headline`, direction: 'back', seesSecrets,
+  });
+  if (!join) return null;
 
-  const text = `${event} — ${connective.text} ${parentClause}`;
+  const text = `${event} — ${join.text} ${join.argText}`;
   if (text.length > HEADLINE_MAX_CHARS) return null;
-  return { text, gestures: HEADLINE_MAX_GESTURES, pool: connective.pool, edge: connective.edge };
+  return {
+    text, gestures: HEADLINE_MAX_GESTURES, pool: join.pool, edge: join.edge, arg: join.arg, argText: join.argText,
+  };
 }
 
 /**
@@ -238,6 +287,26 @@ export function heraldSubheaderRegister({ worldState, item }) {
 }
 
 /**
+ * One composed link of a telling. `argText` is the molded argument — the OTHER
+ * end of this link, in the form the connective's slot declares — and `arg` is the
+ * §3 tag that chose the mold, so a pin can parse the shape rather than the words.
+ * `childId` / `childClause` name the link's child in the printed sequence, and
+ * `childKept` is false when that hop was dropped.
+ * @typedef {Object} TellingLink
+ * @property {string} id
+ * @property {string} clause
+ * @property {string|null} connective
+ * @property {string|null} arg
+ * @property {string|null} argText
+ * @property {string|null} pool
+ * @property {string|null} edge
+ * @property {boolean} redacted
+ * @property {string} childId
+ * @property {string} childClause
+ * @property {boolean} childKept
+ */
+
+/**
  * THE TELLING REGISTER. The full composed chain, behind the click.
  *
  * ONE DIRECTION, HELD: a telling picks `back` or `fwd` once and keeps it for the
@@ -248,6 +317,14 @@ export function heraldSubheaderRegister({ worldState, item }) {
  * Redacted hops keep their place in the SHAPE but contribute no connective: the
  * walk already replaced their content, and a connective drawn over a placeholder
  * would assert a relation to something the viewer cannot see.
+ *
+ * THE ARGUMENT IS THE OTHER END OF THE LINK. `back` puts the connective after the
+ * CHILD pointing at the PARENT, so the argument is the hop's own clause; `fwd`
+ * puts it after the PARENT pointing at the CHILD, so the argument is the child's
+ * clause and the whole telling runs deepest-first. Either way the argument is
+ * MOLDED into the form the connective's slot declares. A `fwd` link whose child
+ * was dropped keeps its clause and loses its connective: a connective reaching
+ * across a dropped hop would assert an edge the walk does not hold.
  *
  * THE TERMINAL is seeded on the VISIBLE chain only — `chain_end` serves both the
  * genuine origin and a covert truncation, so a seed that included the hidden link
@@ -260,7 +337,7 @@ export function heraldSubheaderRegister({ worldState, item }) {
  * @param {boolean} [args.seesSecrets]
  * @param {'back'|'fwd'} [args.direction]
  * @param {'chain_end'|'horizon'} [args.terminal]
- * @returns {{ links: Array<{ id: string, clause: string, connective: string|null, pool: string|null, edge: string|null, redacted: boolean }>, text: string, terminal: string }|null}
+ * @returns {{ links: Array<TellingLink>, text: string, terminal: string }|null}
  */
 export function heraldTellingRegister({
   worldState, walk, seed, seesSecrets = false, direction = 'back', terminal = 'chain_end',
@@ -271,28 +348,56 @@ export function heraldTellingRegister({
   if (!rootClause) return null;
 
   const held = direction === 'fwd' ? 'fwd' : 'back';
-  /** @type {Array<{ id: string, clause: string, connective: string|null, pool: string|null, edge: string|null, redacted: boolean }>} */
+  /** @type {Array<TellingLink>} */
   const links = [];
   /** @type {string[]} */
   const visibleIds = [];
+  // The CHILD of chain[i] in the printed sequence: the root for the nearest hop,
+  // otherwise the hop before it. `childKept` is false when that hop was dropped,
+  // which forbids a `fwd` connective from reaching across the gap.
+  let childId = '';
+  let childClause = rootClause;
+  let childKept = true;
   for (const hop of chain) {
     const clause = String(hop?.headline || '').trim();
-    if (!clause) continue;
+    const hopId = String(hop?.id ?? '');
+    if (!clause) { childId = hopId; childClause = clause; childKept = false; continue; }
     const redacted = hop?.redacted === true;
     if (redacted) {
-      links.push({ id: String(hop.id ?? ''), clause, connective: null, pool: null, edge: null, redacted: true });
+      links.push({ id: hopId, clause, connective: null, arg: null, argText: null, pool: null, edge: null, redacted: true, childId, childClause, childKept });
+      childId = hopId; childClause = clause; childKept = true;
       continue;
     }
-    visibleIds.push(String(hop.id ?? ''));
-    const drawn = connectiveForLink({
-      link: /** @type {Record<string, unknown>} */ (hop),
-      seed: `${seed}::telling::${hop.id ?? ''}`,
-      direction: held,
-      seesSecrets,
+    visibleIds.push(hopId);
+    // In `fwd` the connective points at the CHILD, so the child's clause is what
+    // the slot receives — and a missing child means no connective at all.
+    const argSource = held === 'back' ? clause : (childKept ? childClause : '');
+    const drawn = argSource
+      ? joinForLink({
+        link: /** @type {Record<string, unknown>} */ (hop),
+        clause: argSource,
+        seed: `${seed}::telling::${hopId}`,
+        direction: held,
+        seesSecrets,
+      })
+      : null;
+    // A link with no printable connective is DROPPED, never re-labelled. In `fwd`
+    // the hop stays in the sequence so its own clause is not lost with it.
+    if (!drawn && held === 'back') { childId = hopId; childClause = clause; childKept = false; continue; }
+    links.push({
+      id: hopId,
+      clause,
+      connective: drawn ? drawn.text : null,
+      arg: drawn ? drawn.arg : null,
+      argText: drawn ? drawn.argText : null,
+      pool: drawn ? drawn.pool : null,
+      edge: drawn ? drawn.edge : null,
+      redacted: false,
+      childId,
+      childClause,
+      childKept,
     });
-    // A link with no printable connective is DROPPED, never re-labelled.
-    if (!drawn) continue;
-    links.push({ id: String(hop.id ?? ''), clause, connective: drawn.text, pool: drawn.pool, edge: drawn.edge, redacted: false });
+    childId = hopId; childClause = clause; childKept = true;
   }
 
   const terminalText = terminalLine({
@@ -302,13 +407,48 @@ export function heraldTellingRegister({
     covertTruncation: links.some((l) => l.redacted),
   });
 
-  const sentences = [rootClause];
-  for (const link of links) {
-    if (link.redacted || !link.connective) { sentences.push(link.clause); continue; }
-    sentences.push(held === 'back' ? `${link.connective} ${link.clause}` : `${link.clause}, ${link.connective}`);
-  }
-  const text = `${sentences.join('; ')} — ${terminalText}.`;
+  const text = `${composeSentences({ links, rootClause, held }).join('; ')} — ${terminalText}.`;
   return { links, text, terminal: terminalText };
+}
+
+/**
+ * The telling's sentences, in the held direction's own order.
+ *
+ * `back` reads newest-first: the root, then each connective with the parent it
+ * points at, molded into the slot's form. `fwd` reads oldest-first: the deepest
+ * clause, then each connective with the CHILD it points at — so the sequence is
+ * reversed and every clause is emitted exactly once, either as the head or as
+ * some connective's argument. A link that lost its connective emits its child's
+ * clause plainly, asserting no relation at all.
+ * @param {Object} args
+ * @param {ReadonlyArray<TellingLink>} args.links
+ * @param {string} args.rootClause
+ * @param {'back'|'fwd'} args.held
+ * @returns {string[]}
+ */
+function composeSentences({ links, rootClause, held }) {
+  if (held === 'back') {
+    const sentences = [rootClause];
+    for (const link of links) {
+      if (link.redacted || !link.connective || !link.argText) { sentences.push(link.clause); continue; }
+      sentences.push(`${link.connective} ${link.argText}`);
+    }
+    return sentences;
+  }
+  /** @type {string[]} */
+  const sentences = [];
+  /** @type {string|null} */
+  let printedId = null;
+  for (const link of [...links].reverse()) {
+    if (link.id !== printedId) { sentences.push(link.clause); printedId = link.id; }
+    if (link.redacted || !link.connective || !link.argText) {
+      if (link.childClause) { sentences.push(link.childClause); printedId = link.childId; }
+      continue;
+    }
+    sentences.push(`${link.connective} ${link.argText}`);
+    printedId = link.childId;
+  }
+  return sentences.length ? sentences : [rootClause];
 }
 
 /**

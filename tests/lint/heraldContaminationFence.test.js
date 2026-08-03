@@ -95,6 +95,10 @@ const REVIEWED_CLOSURE = Object.freeze([
   'src/domain/display/heraldCausalGrammar.js',
   'src/domain/display/heraldCausalVoice.js',
   'src/domain/display/heraldIndex.js',
+  // THE JOIN MOLDS (lane HG): the argument FORMS §3's connective tags demand.
+  // Reviewed onto the closure deliberately — it holds frames and a draw, reads
+  // nothing, and its whole charter is to assert nothing the edge does not carry.
+  'src/domain/display/heraldJoinMolds.js',
   'src/domain/display/humanizeEngineTokens.js',
   'src/domain/display/newsBody.js',
   'src/domain/formatNumber.js',

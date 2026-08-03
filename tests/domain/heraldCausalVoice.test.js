@@ -17,6 +17,10 @@
  *                   HALF of it under the raw one (the negative control).
  *   THE TERMINAL    seeded on the VISIBLE chain only, and a covert truncation
  *                   never reaches the `horizon` pool.
+ *   THE ARG FORM    (lane HG) every composed argument PARSES against the mold
+ *                   its pool licensed for the connective's own §3 argument tag —
+ *                   shape, not substring — with the pre-cure finite clause in an
+ *                   `N` slot as the executed negative control.
  *
  * @enforced-by this file
  */
@@ -37,6 +41,16 @@ import {
   timeBandOf,
   timeBandWord,
 } from '../../src/domain/display/heraldCausalGrammar.js';
+import {
+  CLAUSE_TOKEN,
+  JOIN_MOLDS,
+  MOLDED_ARGS,
+  UNSUPPLIED_ARGS,
+  argIsMolded,
+  clauseBody,
+  conformsToMold,
+  moldFormsFor,
+} from '../../src/domain/display/heraldJoinMolds.js';
 import {
   HEADLINE_MAX_GESTURES,
   heraldEntryProse,
@@ -291,5 +305,216 @@ describe('THE TIME BANDS — no digits, and the predicate-only sixth', () => {
     expect(timeBandOf(10_000, 1).id).toBe('older_than_bearers');
     // Interval scaling: the same tick count in a four-week world bands older.
     expect(timeBandOf(10, 4).id).toBe('within_the_year');
+  });
+});
+
+// ── LANE HG — THE JOIN MOLDS ────────────────────────────────────────────────
+// The cure for the measured defect: an `N` connective handed the receipt's own
+// finite clause printed "against the refusal of the eastern road was cut" on 49
+// of the 71 back-direction lines. These pins assert SHAPE — every composed
+// argument is parsed against the mold its pool licensed for that argument tag —
+// so a future composer that goes back to interpolating the raw clause reds here
+// rather than in a soak.
+
+/** Every warrant the composer wires, with the link that reaches it. */
+const WARRANTED = Object.freeze([
+  ['followed', {}],
+  ['exposed', { type: 'plant_exposed' }],
+  ['refused', { type: 'peace_refused' }],
+  ['breached', { type: 'treaty_default_detected' }],
+  ['dissolved', { type: 'war_cause_dissolved' }],
+  ['caused', { causedByParent: true }],
+  ['planted', { lineageIds: ['disinfo:a:b:3'] }],
+]);
+
+const PARENT_CLAUSE = 'the grain levy failed at Karsh';
+const DEEP_CLAUSE = 'the eastern road was cut';
+const SEEDS = Object.freeze(['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8']);
+
+/** A two-hop walk whose NEAREST hop carries the warrant under test. */
+const walkWarranted = (extra) => ({
+  root: { headline: 'Karsh declares war on Elmspur' },
+  chain: [
+    { id: 'evt-a', depth: 1, headline: PARENT_CLAUSE, type: 'levy_shortfall', redacted: false, ...extra },
+    { id: 'evt-b', depth: 2, headline: DEEP_CLAUSE, type: 'route_severed', redacted: false },
+  ],
+});
+
+describe('THE JOIN MOLDS — the argument supply §3’s tags were written to receive', () => {
+  test('TOTALITY: every (pool, arg) the connective corpus spends is molded or declared unsupplied, and neither list has rotted', () => {
+    /** @type {Set<string>} */
+    const spent = new Set();
+    for (const [pool, lines] of Object.entries(CONNECTIVE_POOLS)) {
+      for (const line of lines) if (line.arg !== 'A') spent.add(`${pool}::${line.arg}`);
+    }
+    expect(spent.size).toBeGreaterThan(0);
+    for (const key of spent) {
+      const [pool, arg] = key.split('::');
+      const molded = moldFormsFor(pool, arg).length > 0;
+      const declared = Object.prototype.hasOwnProperty.call(UNSUPPLIED_ARGS, key);
+      expect(molded || declared, `${key} is neither molded nor declared unsupplied`).toBe(true);
+      expect(molded && declared, `${key} is molded AND declared unsupplied`).toBe(false);
+    }
+    // A declared hole that no connective spends is a stale reason nobody reads.
+    for (const [key, reason] of Object.entries(UNSUPPLIED_ARGS)) {
+      expect(spent.has(key), `${key} is declared unsupplied but no connective spends it`).toBe(true);
+      expect(reason.length, key).toBeGreaterThan(40);
+    }
+    // A mold for an arg the pool never draws is dead content.
+    for (const [pool, byArg] of Object.entries(JOIN_MOLDS)) {
+      for (const arg of Object.keys(byArg)) {
+        expect(spent.has(`${pool}::${arg}`), `${pool}::${arg} is molded but no connective spends it`).toBe(true);
+      }
+    }
+  });
+
+  test('every mold carries the clause token exactly once and mints no other slot', () => {
+    for (const [pool, byArg] of Object.entries(JOIN_MOLDS)) {
+      for (const [arg, forms] of Object.entries(byArg)) {
+        expect(MOLDED_ARGS).toContain(arg);
+        for (const form of forms) {
+          expect(form.split(CLAUSE_TOKEN), `${pool}::${arg} :: ${form}`).toHaveLength(2);
+          expect(form.replace(CLAUSE_TOKEN, ''), `${pool}::${arg} :: ${form}`).not.toMatch(/\{[a-z_]+\}/);
+        }
+        expect(new Set(forms).size, `${pool}::${arg}`).toBe(forms.length);
+      }
+    }
+  });
+
+  test('`A` is argument-less BY LAW — no pool molds it, for any pool', () => {
+    for (const pool of Object.keys(CONNECTIVE_POOLS)) {
+      expect(argIsMolded(pool, 'A'), pool).toBe(false);
+      expect(moldFormsFor(pool, 'A'), pool).toHaveLength(0);
+    }
+  });
+
+  test('the clause enters a mold byte-verbatim, less the terminal stop the composer owns', () => {
+    expect(clauseBody('the eastern road was cut.')).toBe('the eastern road was cut');
+    expect(clauseBody('  the eastern road was cut  ')).toBe('the eastern road was cut');
+    // `!` and `?` are content, not punctuation the composer applies.
+    expect(clauseBody('was the road cut?')).toBe('was the road cut?');
+    expect(clauseBody('')).toBe('');
+  });
+
+  test('THE HEADLINE REGISTER: the gesture is connective + a molded argument, and the argument PARSES against its mold', () => {
+    for (const [pool, extra] of WARRANTED) {
+      const walk = walkWarranted(extra);
+      let composed = 0;
+      for (const seed of SEEDS) {
+        const out = heraldHeadlineRegister({ worldState: LIT, item: ITEM, walk, seed, seesSecrets: true });
+        // NO SILENT DROPS: every warranted pool holds at least one drawable line
+        // in `back`, so a null here means a line was drawn that could not be
+        // filled — the failure mode the drawable filter exists to remove.
+        expect(out, `${pool} composed nothing at seed ${seed}`).not.toBeNull();
+        composed += 1;
+        expect(out.pool, `${pool} @ ${seed}`).toBe(pool);
+        expect(out.text).toBe(`${ITEM.headline} — ${out.text.split(' — ')[1]}`);
+        // SHAPE: the argument is exactly one of the pool's licensed forms filled
+        // with this hop's own clause — not a substring match on the words.
+        expect(
+          conformsToMold({ pool: out.pool, arg: out.arg, clause: PARENT_CLAUSE, text: out.argText }),
+          `${pool}/${out.arg} @ ${seed}: "${out.argText}"`,
+        ).toBe(true);
+        expect(out.text).toBe(`${ITEM.headline} — ${CONNECTIVE_POOLS[pool].find((l) => out.text.includes(l.text)).text} ${out.argText}`);
+      }
+      expect(composed, `${pool} composed no headline at any seed`).toBe(SEEDS.length);
+    }
+  });
+
+  test('THE TELLING REGISTER (back): every link’s argument is its OWN clause, molded', () => {
+    for (const [pool, extra] of WARRANTED) {
+      const out = heraldTellingRegister({ worldState: LIT, walk: walkWarranted(extra), seed: 'telling-1', seesSecrets: true });
+      expect(out.links.length, pool).toBeGreaterThan(0);
+      for (const link of out.links) {
+        if (!link.connective) continue;
+        expect(
+          conformsToMold({ pool: link.pool, arg: link.arg, clause: link.clause, text: link.argText }),
+          `${link.pool}/${link.arg}: "${link.argText}"`,
+        ).toBe(true);
+        // And the composed passage carries the pair adjacently, in that order.
+        expect(out.text).toContain(`${link.connective} ${link.argText}`);
+      }
+    }
+  });
+
+  test('THE TELLING REGISTER (fwd): the connective points at the CHILD, and the child’s clause is what the slot receives', () => {
+    for (const [pool, extra] of WARRANTED) {
+      const out = heraldTellingRegister({
+        worldState: LIT, walk: walkWarranted(extra), seed: 'telling-2', seesSecrets: true, direction: 'fwd',
+      });
+      for (const link of out.links) {
+        if (!link.connective) continue;
+        expect(
+          conformsToMold({ pool: link.pool, arg: link.arg, clause: link.childClause, text: link.argText }),
+          `${pool} fwd ${link.pool}/${link.arg}: "${link.argText}" over child "${link.childClause}"`,
+        ).toBe(true);
+        expect(out.text).toContain(`${link.connective} ${link.argText}`);
+      }
+      // Every visible clause still appears exactly once — the reversal loses none.
+      for (const clause of [ITEM.headline, PARENT_CLAUSE, DEEP_CLAUSE]) {
+        expect(out.text.split(clause).length - 1, `${pool} fwd: "${clause}"`).toBe(1);
+      }
+    }
+  });
+
+  test('no drawn connective is an `A` line, in either register or direction', () => {
+    const absolutes = Object.values(CONNECTIVE_POOLS).flat().filter((l) => l.arg === 'A').map((l) => l.text);
+    expect(absolutes.length).toBeGreaterThan(0);
+    for (const [, extra] of WARRANTED) {
+      for (const seed of SEEDS) {
+        for (const direction of /** @type {const} */ (['back', 'fwd'])) {
+          const telling = heraldTellingRegister({ worldState: LIT, walk: walkWarranted(extra), seed, seesSecrets: true, direction });
+          for (const link of telling.links) expect(absolutes).not.toContain(link.connective);
+        }
+        const headline = heraldHeadlineRegister({ worldState: LIT, item: ITEM, walk: walkWarranted(extra), seed, seesSecrets: true });
+        if (headline) expect(absolutes).not.toContain(headline.text.split(' — ')[1]);
+      }
+    }
+  });
+
+  test('THE NEGATIVE CONTROL: the pre-cure form — a bare finite clause in an `N` slot — fails the parse, and no draw produces it', () => {
+    // The exact line the cycle-9 verifier sampled off the shipped composer.
+    const preCure = `${ITEM.headline} — against the refusal of ${DEEP_CLAUSE}`;
+    expect(conformsToMold({ pool: 'refused', arg: 'N', clause: DEEP_CLAUSE, text: DEEP_CLAUSE })).toBe(false);
+    expect(conformsToMold({ pool: 'followed', arg: 'N', clause: PARENT_CLAUSE, text: PARENT_CLAUSE })).toBe(false);
+    // …while the F slot's mold IS the clause, which is why F was never the bug.
+    expect(conformsToMold({ pool: 'caused', arg: 'F', clause: PARENT_CLAUSE, text: PARENT_CLAUSE })).toBe(true);
+
+    // GUARD-THE-GUARD at the composer: sweep every warrant × seed × direction and
+    // assert no `N` argument is ever the bare clause again.
+    let checked = 0;
+    for (const [, extra] of WARRANTED) {
+      for (const seed of SEEDS) {
+        for (const direction of /** @type {const} */ (['back', 'fwd'])) {
+          const out = heraldTellingRegister({ worldState: LIT, walk: walkWarranted(extra), seed, seesSecrets: true, direction });
+          for (const link of out.links) {
+            if (link.arg !== 'N') continue;
+            checked += 1;
+            expect(link.argText).not.toBe(link.clause);
+            expect(link.argText).not.toBe(link.childClause);
+            // …and the PASSAGE never carries the pre-cure pairing either, which
+            // is the half a molded-but-unused argument would leave green.
+            expect(out.text, `${link.pool}/N @ ${seed}`).not.toContain(`${link.connective} ${link.clause}`);
+            if (link.childClause) expect(out.text).not.toContain(`${link.connective} ${link.childClause}`);
+          }
+          expect(out.text).not.toBe(preCure);
+        }
+      }
+    }
+    expect(checked, 'the sweep exercised no N slot at all — the guard is vacuous').toBeGreaterThan(0);
+  });
+
+  test('the audience swap survives the molded draw: a player never reads a `planted` connective', () => {
+    const walk = walkWarranted({ lineageIds: ['disinfo:a:b:3'] });
+    for (const seed of SEEDS) {
+      const player = heraldTellingRegister({ worldState: LIT, walk, seed, seesSecrets: false });
+      for (const link of player.links) {
+        if (!link.pool) continue;
+        expect(link.pool, seed).not.toBe('planted');
+        expect(link.connective).not.toMatch(/planted|bought|sold|furnished|a lie/);
+      }
+    }
+    const dm = heraldTellingRegister({ worldState: LIT, walk, seed: 's1', seesSecrets: true });
+    expect(dm.links[0].pool).toBe('planted');
   });
 });
