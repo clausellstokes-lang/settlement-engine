@@ -23,6 +23,14 @@ worlds keep their sentences forever (THE PROMISE). The kind's WHAT_PHRASES regis
 walker asserts the floor: a two-variant kind reds the gate exactly as an unregistered
 one does (volume §10-5).
 
+**THE FREQUENCY-SCALED FLOOR (SP-6 amendment 2026-08-03).** Four is the floor only
+for rare or major kinds. Notable kinds carry at least six angle-distinct families;
+routine kinds carry eight to twelve according to their authored cadence, and any
+weekly-in-transit kind carries twelve. The phrase-repetition envelope remains the
+empirical arbiter: a numerically compliant pool that exhausts in its observed season
+window is still shallow. The same law applies when the legacy routed kinds are moved
+behind lit-kind prose-version flags.
+
 **THE FAMILY RULE.** Slot variety is not depth. Two templates differing only in slot
 fills are ONE family for the floor's count. Every variant below takes a different
 STRUCTURE and a different ANGLE off the palette: *the event plain · the street's view ·
@@ -742,6 +750,7 @@ AUDIENCE: public
 3. The town watched a man leave and understood that the war now moves at his pace.
 4. He carries what the court believes, which is not the same as what is.
 5. An errand is a week to a leg, and there are several legs.
+6. By the time the seal leaves sight of the gate, the facts beneath it have begun to age.
 
 ### envoy_on_the_road (WR-7a) — transit kernel receipt, events desk — significance: routine
 SLOTS: {npc}, {route}, {settlement}, {counterpart}
@@ -751,6 +760,13 @@ AUDIENCE: public
 3. Nothing has changed at either hall, and something has changed everywhere he has passed.
 4. News overtakes a man on a road. It always has.
 5. He will arrive with the world he left and find another.
+6. The horse must rest. The fighting need not.
+7. Each mile carries the messenger farther from the council that chose the words.
+8. A sealed message can be in motion while every power it names remains where it was.
+9. Those who hear of the journey may know more of it than either waiting court.
+10. The messenger has no new vote to cast between one mile and the next.
+11. A public road gives a sealed purpose no promise of privacy.
+12. The message moves; its authority waits.
 
 ### envoy_intercepted (WR-7b) — Herald, war desk — significance: major
 SLOTS: {npc}, {settlement}, {counterpart}, {third_party}, {route}
@@ -787,6 +803,7 @@ AUDIENCE: public
 3. He carries the peace at the speed of a horse and the war at the speed of couriers.
 4. The court that sent him is waiting on a road, which is a poor thing to wait on.
 5. Nothing is settled until he tells it.
+6. Every mile home carries an agreement closer to authority and leaves it exposed a little longer.
 
 ### envoy_home (WR-7a) — Herald, adjudication desk — significance: major
 SLOTS: {npc}, {settlement}, {counterpart}

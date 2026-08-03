@@ -89,6 +89,9 @@ export function WandererCard({ row, seesSecrets, campaignId, places }) {
       {row.doorsLine && (
         <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>{row.doorsLine}</div>
       )}
+      {row.whereaboutsLine && (
+        <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>{row.whereaboutsLine}</div>
+      )}
       <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>{row.whenLine}</div>
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', fontFamily: sans, fontSize: FS.xxs, color: MUTED }}>
         {/* THE ORIGIN STORY POINTER (design §8): the place whose trouble put them here. */}

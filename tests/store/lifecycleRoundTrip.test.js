@@ -95,6 +95,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { normalizeServicesToggles } from '../../src/store/toggleSlice.js';
 import { createDisplayPrefsSlice, DEFAULT_DISPLAY_PREFS } from '../../src/store/displayPrefsSlice.js';
 import { deepClone } from '../../src/domain/clone.js';
+import { envoyErrandIdForOffer } from '../../src/domain/worldPulse/envoyErrand.js';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // THE REGISTRY — every persisted state family, with its lifecycle policies.
@@ -189,7 +190,7 @@ const WORLD_STATE_CONDITIONAL_KEYS = Object.freeze([
   'pantheon', 'religionStates', 'warPosture', 'occupations', 'pausedAdvance',
   'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog',
   'spatialDigest', 'spatialLedgers', 'narrativeTempo', 'politicsLedgers',
-  'factionPairStates',
+  'factionPairStates', 'envoyErrands',
 ]);
 
 /** The conditionally-present SCALAR gate (not a ledger — see worldState.js). */
@@ -329,6 +330,92 @@ function makeStore() {
   })));
 }
 
+/** One live WR-7a record with nested, mutable-shaped cargo.  Keeping this in the
+ *  lifecycle fixture makes the generic campaign cache/import/clone/undo walkers
+ *  exercise the conditional ARRAY instead of proving only object ledgers. */
+function envoyErrandFixture() {
+  const offer = {
+    outcomeId: 'peace-outcome-1',
+    generatedAtTick: 5,
+    severity: 0.7,
+    candidateType: 'strategy_sue_for_peace',
+    targetSaveId: 'ashford',
+    relationshipKey: 'ashford::irontown',
+    relationshipPatch: { proposedRelationshipType: 'neutral' },
+    proposalPayload: {
+      kind: 'relationship_label_change',
+      relationshipKey: 'ashford::irontown',
+      fromType: 'hostile',
+      toType: 'neutral',
+      peaceOffer: true,
+      offererId: 'ashford',
+      targetId: 'irontown',
+      peaceFrontOwnerId: 'ashford',
+      peaceFrontSinceTick: 4,
+      reason: 'The court carries an authored peace offer home.',
+    },
+  };
+  return {
+    id: envoyErrandIdForOffer(offer),
+    npcId: 'reeve',
+    npcName: 'Reeve Mara',
+    from: 'ashford',
+    fromName: 'Ashford',
+    to: 'irontown',
+    toName: 'Irontown',
+    purpose: 'sue',
+    offer,
+    acceptance: {
+      accepted: true,
+      offererId: 'ashford',
+      targetId: 'irontown',
+      receipt: {
+        id: 'war-peace-decision.ashford.irontown.5',
+        kind: 'war_peace_acceptance_read',
+        tick: 5,
+        offerId: 'peace-outcome-1',
+        offererId: 'ashford', targetId: 'irontown', decision: 'accept', actualAction: 'peace',
+        decidingTerm: 'cost_to_continue',
+        bands: {
+          cause: 'present', cost_to_continue: 'pressing', cost_to_stop: 'present', momentum: 'quiet',
+        },
+        reason: 'Both courts accept the carried peace.',
+      },
+      offererRead: {
+        id: 'war-termination.ashford.irontown.5', kind: 'war_termination_read', tick: 5,
+        attackerId: 'ashford', targetId: 'irontown', settlementIds: ['ashford', 'irontown'],
+        decidingTerm: 'momentum',
+      },
+      targetTerminationReceipt: {
+        id: 'war-termination.irontown.ashford.5', kind: 'war_termination_read', tick: 5,
+        attackerId: 'irontown', targetId: 'ashford', settlementIds: ['irontown', 'ashford'],
+        decidingTerm: 'cost_to_continue',
+      },
+      inheritedDemand: null,
+      coalitionPeaceExpenditures: [{ settlementId: 'ashford', costBand: 'present' }],
+    },
+    snapshot: {
+      storesBand: 'thin',
+      strengthBand: 'ready',
+      moraleExhaustionBand: 'present',
+      foundingCauseStatus: 'live',
+      believedRatioBand: 'matched',
+    },
+    termSheet: null,
+    legs: [{
+      fromId: 'ashford', toId: 'irontown', departTick: 5, arrivalTick: 7,
+      journey: 'outbound', routeRef: { id: 'road-ash-iron', name: 'North Road' },
+    }],
+    positionRef: {
+      journey: 'outbound', legIndex: 0, fromId: 'ashford', toId: 'irontown',
+      progressBand: 'departed',
+    },
+    departedTick: 5,
+    expectedReturnTick: 12,
+    state: 'travelling',
+  };
+}
+
 /** A RICH worldState raw: every base container populated, every conditional
  *  ledger present, the scalar gate set, plus one FORWARD-COMPAT unknown key
  *  (fixtures that hide population are how defect classes survive — memory). */
@@ -375,6 +462,7 @@ function richWorldStateRaw() {
     narrativeTempo: { lullTicks: 1, lastMajorTick: 4 },
     politicsLedgers: { ashford: { blocs: [{ id: 'bloc1', members: ['reeve'], glue: ['grain'], end: 'grain_control', strain: 0.1, sinceTick: 3 }] } },
     factionPairStates: { 'league|temple': { trust: 0.5, resentment: 0.1 } },
+    envoyErrands: [envoyErrandFixture()],
     futureLedgerX: { forwardCompat: true }, // unknown key — MUST pass through (tolerant-forward law)
   };
 }
@@ -477,6 +565,7 @@ describe('E-C completeness — every persisted family is registered (new family 
       'worldState conditional ledger',
       'add it to WORLD_STATE_CONDITIONAL_KEYS (and populate it in richWorldStateRaw so the round-trip covers it)',
     );
+    expect(CONDITIONAL_LEDGER_KEYS.at(-1)).toBe('envoyErrands');
     // The fully-populated ensure output carries EXACTLY base ∪ scalar ∪
     // conditional ∪ the forward-compat unknown — nothing invented, nothing lost.
     const ensured = ensureWorldState(richWorldStateRaw(), { id: CAMPAIGN_ID });
@@ -486,6 +575,7 @@ describe('E-C completeness — every persisted family is registered (new family 
       'ensured worldState (fully-populated fixture)',
       'a new persisted worldState key must be registered as base, conditional, or the scalar gate',
     );
+    expect(Object.keys(ensured).at(-1)).toBe('envoyErrands');
   });
 
   test('per-save campaignState: migrateSaveToV2 default block matches the registry exactly', async () => {
@@ -591,6 +681,143 @@ describe('E-C worldState — ensure fixpoint, persist, clone, migrate, dormancy'
     expectByteEqual(revived, w1);
   });
 
+  test('envoy errands survive normalization and reload without aliasing nested terms, legs, or labels', () => {
+    const raw = richWorldStateRaw();
+    Object.assign(raw.envoyErrands[0], {
+      state: 'returning',
+      parlayTick: 7,
+      returnStartedTick: 8,
+      scheduledHomeTick: 12,
+      termSheet: {
+        id: 'terms-1',
+        clauses: [{ kind: 'ceasefire', parties: ['ashford', 'irontown'] }],
+      },
+      legs: [
+        ...raw.envoyErrands[0].legs,
+        {
+          fromId: 'irontown', toId: 'ashford', departTick: 8, arrivalTick: 10,
+          journey: 'return', routeRef: { id: 'road-ash-iron', name: 'North Road' },
+        },
+      ],
+      positionRef: {
+        journey: 'return', legIndex: 0, fromId: 'irontown', toId: 'ashford',
+        progressBand: 'departed',
+      },
+    });
+    const ensured = ensureWorldState(raw, { id: CAMPAIGN_ID });
+    expect(ensured.envoyErrands).toHaveLength(1);
+    expect(ensured.envoyErrands).not.toBe(raw.envoyErrands);
+    expect(ensured.envoyErrands[0].termSheet).not.toBe(raw.envoyErrands[0].termSheet);
+    expect(ensured.envoyErrands[0].legs[0].routeRef).not.toBe(raw.envoyErrands[0].legs[0].routeRef);
+    expect(ensured.envoyErrands[0].acceptance).not.toBe(raw.envoyErrands[0].acceptance);
+
+    raw.envoyErrands[0].termSheet.clauses[0].kind = 'tampered';
+    raw.envoyErrands[0].legs[0].routeRef.name = 'False Road';
+    raw.envoyErrands[0].acceptance.receipt.decision = 'tampered';
+    raw.envoyErrands[0].npcName = 'False Name';
+    expect(ensured.envoyErrands[0].termSheet.clauses[0].kind).toBe('ceasefire');
+    expect(ensured.envoyErrands[0].legs[0].routeRef.name).toBe('North Road');
+    expect(ensured.envoyErrands[0].acceptance.receipt.decision).toBe('accept');
+    expect(ensured.envoyErrands[0].npcName).toBe('Reeve Mara');
+
+    const revived = ensureWorldState(JSON.parse(JSON.stringify(ensured)), { id: CAMPAIGN_ID });
+    expectByteEqual(revived.envoyErrands, ensured.envoyErrands);
+  });
+
+  test('ensureWorldState rejects envoy lifecycle rows whose cursor or terminal clocks claim a teleport', () => {
+    const parlaying = richWorldStateRaw();
+    Object.assign(parlaying.envoyErrands[0], {
+      state: 'parlaying',
+      parlayTick: 7,
+      positionRef: {
+        journey: 'outbound', legIndex: 0, fromId: 'ashford', toId: 'irontown',
+        progressBand: 'underway',
+      },
+    });
+    expect(ensureWorldState(parlaying, { id: CAMPAIGN_ID })).not.toHaveProperty('envoyErrands');
+
+    const home = richWorldStateRaw();
+    Object.assign(home.envoyErrands[0], {
+      state: 'home',
+      parlayTick: 7,
+      returnStartedTick: 8,
+      scheduledHomeTick: 10,
+      homeTick: 10,
+      closedTick: 10,
+      legs: [
+        ...home.envoyErrands[0].legs,
+        {
+          fromId: 'irontown', toId: 'ashford', departTick: 8, arrivalTick: 10,
+          journey: 'return', routeRef: { id: 'road-ash-iron', name: 'North Road' },
+        },
+      ],
+      positionRef: {
+        journey: 'return', legIndex: 0, fromId: 'irontown', toId: 'ashford',
+        progressBand: 'underway',
+      },
+    });
+    expect(ensureWorldState(home, { id: CAMPAIGN_ID })).not.toHaveProperty('envoyErrands');
+
+    const mismatchedHomeClock = structuredClone(home);
+    mismatchedHomeClock.envoyErrands[0].positionRef.progressBand = 'arrived';
+    mismatchedHomeClock.envoyErrands[0].closedTick = 11;
+    expect(ensureWorldState(mismatchedHomeClock, { id: CAMPAIGN_ID }))
+      .not.toHaveProperty('envoyErrands');
+
+    const mismatchedLossClock = richWorldStateRaw();
+    Object.assign(mismatchedLossClock.envoyErrands[0], {
+      state: 'lost', lossCause: 'route_lost', lostTick: 8, closedTick: 9,
+    });
+    expect(ensureWorldState(mismatchedLossClock, { id: CAMPAIGN_ID }))
+      .not.toHaveProperty('envoyErrands');
+
+    const predepartureLoss = richWorldStateRaw();
+    Object.assign(predepartureLoss.envoyErrands[0], {
+      state: 'lost', lossCause: 'route_lost', lostTick: 4, closedTick: 4,
+    });
+    expect(ensureWorldState(predepartureLoss, { id: CAMPAIGN_ID }))
+      .not.toHaveProperty('envoyErrands');
+
+    const prematureSilence = richWorldStateRaw();
+    prematureSilence.envoyErrands[0].silenceInferredAtTick = 12;
+    expect(ensureWorldState(prematureSilence, { id: CAMPAIGN_ID }))
+      .not.toHaveProperty('envoyErrands');
+
+    const outboundTerms = richWorldStateRaw();
+    outboundTerms.envoyErrands[0].termSheet = {
+      id: 'terms.never-agreed', clauses: [{ kind: 'ceasefire' }],
+    };
+    expect(ensureWorldState(outboundTerms, { id: CAMPAIGN_ID }))
+      .not.toHaveProperty('envoyErrands');
+
+    const crossedParlayLoss = richWorldStateRaw();
+    Object.assign(crossedParlayLoss.envoyErrands[0], {
+      state: 'lost', lossCause: 'route_lost', parlayTick: 7, lostTick: 8, closedTick: 8,
+    });
+    expect(ensureWorldState(crossedParlayLoss, { id: CAMPAIGN_ID }))
+      .not.toHaveProperty('envoyErrands');
+
+    const crossedReturnLoss = richWorldStateRaw();
+    Object.assign(crossedReturnLoss.envoyErrands[0], {
+      state: 'lost',
+      lossCause: 'route_lost',
+      parlayTick: 7,
+      returnStartedTick: 8,
+      scheduledHomeTick: 10,
+      lostTick: 9,
+      closedTick: 9,
+      legs: [
+        ...crossedReturnLoss.envoyErrands[0].legs,
+        {
+          fromId: 'irontown', toId: 'ashford', departTick: 8, arrivalTick: 10,
+          journey: 'return', routeRef: { id: 'road-ash-iron', name: 'North Road' },
+        },
+      ],
+    });
+    expect(ensureWorldState(crossedReturnLoss, { id: CAMPAIGN_ID }))
+      .not.toHaveProperty('envoyErrands');
+  });
+
   test('the clone hop: deepClone is byte-exact and the state is structuredClone-safe', () => {
     const w1 = ensureWorldState(richWorldStateRaw(), { id: CAMPAIGN_ID });
     expect(() => structuredClone(w1)).not.toThrow();
@@ -606,7 +833,13 @@ describe('E-C worldState — ensure fixpoint, persist, clone, migrate, dormancy'
   });
 
   test('dormancy: empty conditional ledgers are stripped; absent stays absent (legacy byte-identity)', () => {
-    const withEmpties = { tick: 1, pantheon: {}, spatialLedgers: {}, politicsLedgers: {} };
+    const withEmpties = {
+      tick: 1,
+      pantheon: {},
+      spatialLedgers: {},
+      politicsLedgers: {},
+      envoyErrands: [],
+    };
     const ensured = ensureWorldState(withEmpties, { id: CAMPAIGN_ID });
     for (const key of WORLD_STATE_CONDITIONAL_KEYS) {
       expect(Object.prototype.hasOwnProperty.call(ensured, key)).toBe(false);
@@ -685,6 +918,7 @@ describe('E-C the undo hop — the REAL undoLastPulse, walked over the campaign 
       c.worldState.tick = 9;                    // restored family
       c.worldState.stressors.push({ id: 'str_2', type: 'plague', severity: 'severe' });
       delete c.worldState.pantheon;             // a conditional ledger drops
+      delete c.worldState.envoyErrands;         // the conditional array drops
       c.wizardNews.currentTick = 9;             // restored family
       c.wizardNews.entries = [];
       c.regionalGraph.eventLog.push({ id: 'rg-ev', at: NOW }); // restored family
@@ -720,6 +954,7 @@ describe('E-C the undo hop — the REAL undoLastPulse, walked over the campaign 
       }
     }
     expect(violations).toEqual([]);
+    expectByteEqual(after.worldState.envoyErrands, baseline.worldState.envoyErrands);
 
     // Member save: settlement + campaignState restore byte-exact; timestamp is the stamp.
     const memberAfter = store.getState().savedSettlements[0];

@@ -219,6 +219,11 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   war_party_overturns_peacemaker: 'events', peace_party_overturns_warmonger: 'events',
   succession_demand_inherited: 'events', war_dissolved_by_verdict: 'events',
   coalition_separate_peace: 'events', coalition_apportionment: 'events',
+  // WR-7a errand records carry governed desks below. Token-only fallbacks for
+  // the court acts remain events; the moving-person beat is likewise an event.
+  // Silence is a belief forecast and therefore has an explicit divination home.
+  envoy_departed: 'events', envoy_on_the_road: 'events', envoy_returning: 'events',
+  envoy_home: 'events', envoy_lost: 'events', terms_never_reached: 'events',
   // traditions / custom / values (KIND_SECTION `traditions` custom-half → events)
   tradition: 'events', tradition_change: 'events', moral_reckoning: 'events', cause_lifecycle: 'events',
   // mercy (KIND_SECTION `mercy` → events)
@@ -250,7 +255,7 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   // ── DIVINATION — the forecast tokens (pressure / emergence in the token itself) ─
   regional_pressure: 'divination', food_pressure: 'divination', disease_pressure: 'divination',
   conflict_pressure: 'divination', trade_pressure: 'divination', legitimacy_pressure: 'divination',
-  crime_pressure: 'divination',
+  crime_pressure: 'divination', envoy_silence_inference: 'divination',
 }));
 
 /**
@@ -418,7 +423,8 @@ export function heraldSectionOfRecord(record = {}) {
   if (isEmergingForecast(r)) return 'divination';
   const supplied = tokenStr(r.section);
   if ((r.sectionAuthority === 'war_rulings_registry'
-      || r.sectionAuthority === 'war_coalition_registry')
+      || r.sectionAuthority === 'war_coalition_registry'
+      || r.sectionAuthority === 'envoy_registry')
     && HERALD_SECTIONS.includes(/** @type {HeraldSection} */ (supplied))) {
     return /** @type {HeraldSection} */ (supplied);
   }

@@ -57,7 +57,9 @@ import { compareCodepoint } from '../deterministicSort.js';
 import { factionArchetype } from '../factionArchetypes.js';
 import { infoModeOf } from './simulationRules.js';
 import { settlementStrength, buildPressureSummary } from './relationshipEvolution.js';
-import { hasSpatialLedger, getSpatialLedger, activeSpatialDigest } from '../spatial/distanceRead.js';
+import {
+  hasSpatialLedger, getSpatialLedger, setSpatialLedger, activeSpatialDigest,
+} from '../spatial/distanceRead.js';
 import { routeAwareHopDelayTicks } from './distancePricedNews.js';
 import { embattlementLevel } from '../spatial/embattlement.js';
 import { beliefAxesActive, axisGroundTruth, foldBeliefAxes } from './beliefAxes.js';
@@ -227,6 +229,108 @@ export function beliefRecord(worldState, observerId, subjectId, factionId = GOVE
   return rec && typeof rec === 'object' && !Array.isArray(rec) ? /** @type {BeliefRecord} */ (rec) : null;
 }
 
+/** Resolve the exact existing belief row an envoy-silence inference may amend. */
+function envoySilenceTarget(worldState, observerId, subjectId, errandId) {
+  if (!beliefsActive(worldState)) return null;
+  const observer = String(observerId || '');
+  const subject = String(subjectId || '');
+  const id = String(errandId || '');
+  if (!observer || !subject || observer === subject || !id) return null;
+  const maps = asObject(getSpatialLedger(worldState, 'beliefMaps'));
+  const observerMap = asObject(maps[observer]);
+  const seat = asObject(observerMap[GOVERNING_SEAT_KEY]);
+  const prior = seat[subject];
+  if (!prior || typeof prior !== 'object' || Array.isArray(prior)) {
+    return null;
+  }
+  const existing = asObject(/** @type {Record<string,unknown>} */ (prior).hostilityInference);
+  const priorAllianceLabel = typeof /** @type {Record<string,unknown>} */ (prior).allianceLabel === 'string'
+    ? String(/** @type {Record<string,unknown>} */ (prior).allianceLabel).trim()
+    : '';
+  if (!priorAllianceLabel || Object.keys(existing).length) return null;
+  return { observer, subject, id, maps, observerMap, seat, prior, priorAllianceLabel };
+}
+
+/** Can the belief writer acknowledge this exact inference right now? */
+export function canApplyEnvoySilenceInference({ worldState, observerId, subjectId, errandId }) {
+  return !!envoySilenceTarget(worldState, observerId, subjectId, errandId);
+}
+
+/**
+ * Record the court's false-capable inference from an overdue envoy without
+ * inventing unobserved strength, readiness, or faith. A real prior picture is
+ * required: the inference amends only that picture's relationship reading.
+ *
+ * @param {{worldState:Record<string,unknown>,observerId:string,subjectId:string,
+ *   errandId:string,tick:number}} args
+ * @returns {{worldState:Record<string,unknown>,changed:boolean}}
+ */
+export function applyEnvoySilenceInference({ worldState, observerId, subjectId, errandId, tick }) {
+  const target = envoySilenceTarget(worldState, observerId, subjectId, errandId);
+  if (!target) return { worldState, changed: false };
+  const { observer, subject, id, maps, observerMap, seat, prior, priorAllianceLabel } = target;
+  const sinceTick = Math.max(0, Math.floor(finiteNumber(tick, 0)));
+  const nextMaps = {
+    ...maps,
+    [observer]: {
+      ...observerMap,
+      [GOVERNING_SEAT_KEY]: {
+        ...seat,
+        [subject]: {
+          .../** @type {Record<string,unknown>} */ (prior),
+          allianceLabel: 'hostile',
+          hostilityInference: {
+            kind: 'envoy_silence',
+            errandId: id,
+            sinceTick,
+            priorAllianceLabel,
+            priorLastUpdateTick: finiteNumber(
+              /** @type {Record<string,unknown>} */ (prior).lastUpdateTick,
+              0,
+            ),
+          },
+        },
+      },
+    },
+  };
+  return { worldState: setSpatialLedger(worldState, 'beliefMaps', nextMaps), changed: true };
+}
+
+/** Clear only the silence inference answered by this exact envoy's return. */
+export function clearEnvoySilenceInference({ worldState, observerId, subjectId, errandId }) {
+  const observer = String(observerId || '');
+  const subject = String(subjectId || '');
+  const id = String(errandId || '');
+  const maps = asObject(getSpatialLedger(worldState, 'beliefMaps'));
+  const observerMap = asObject(maps[observer]);
+  const seat = asObject(observerMap[GOVERNING_SEAT_KEY]);
+  const prior = seat[subject];
+  if (!prior || typeof prior !== 'object' || Array.isArray(prior)) {
+    return { worldState, changed: false };
+  }
+  const inference = asObject(/** @type {Record<string,unknown>} */ (prior).hostilityInference);
+  if (inference.kind !== 'envoy_silence' || String(inference.errandId || '') !== id) {
+    return { worldState, changed: false };
+  }
+  const { hostilityInference: _answered, ...withoutInference } = /** @type {Record<string,unknown>} */ (prior);
+  const restorePriorLabel = String(withoutInference.allianceLabel || '') === 'hostile'
+    && finiteNumber(withoutInference.lastUpdateTick, 0)
+      === finiteNumber(inference.priorLastUpdateTick, Number.NaN)
+    && typeof inference.priorAllianceLabel === 'string'
+    && inference.priorAllianceLabel.trim() !== '';
+  const answered = restorePriorLabel
+    ? { ...withoutInference, allianceLabel: inference.priorAllianceLabel.trim() }
+    : withoutInference;
+  const nextMaps = {
+    ...maps,
+    [observer]: {
+      ...observerMap,
+      [GOVERNING_SEAT_KEY]: { ...seat, [subject]: answered },
+    },
+  };
+  return { worldState: setSpatialLedger(worldState, 'beliefMaps', nextMaps), changed: true };
+}
+
 /**
  * @typedef {Object} BeliefRecord
  * @property {number} readiness        believed war readiness 0..1
@@ -235,6 +339,8 @@ export function beliefRecord(worldState, observerId, subjectId, factionId = GOVE
  * @property {string | null} faithLabel believed dominant faith (public deity name)
  * @property {number} confidence01     0..1
  * @property {number} lastUpdateTick   tick of the last refresh
+ * @property {{kind:'envoy_silence',errandId:string,sinceTick:number,
+ *   priorAllianceLabel:string,priorLastUpdateTick:number}} [hostilityInference]
  * @property {number} [populationTrendBand]  D-1 DEMOGRAPHIC axis: believed −2..+2 (emptying…swelling); present only when beliefAxesEnabled
  * @property {string | null} [observanceLabel]  D-1 CULTURAL axis: believed dominant rite `${motif}:${patron}`; present only when beliefAxesEnabled
  */

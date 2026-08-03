@@ -359,11 +359,93 @@ export const WR6_WAR_COALITION_COUPLINGS = Object.freeze([
   WR6_PAIRWISE_SETTLEMENT_COUPLING,
 ]);
 
+const WR7_ENVOY_FLAGS = Object.freeze([
+  'warLayerEnabled',
+  'warTerminationEnabled',
+  'peaceEngineEnabled',
+  'envoyDiplomacyEnabled',
+  'npcConsequencesEnabled',
+  'routeLifecycleEnabled',
+]);
+
+/** WR-7a / CPL-5. An accepted war decision becomes a carried message instead
+ * of mutating the hostile edge immediately. Failure to resolve a durable person
+ * and lived route is the same-read counterforce: no errand is minted. */
+export const WR7_PEACE_DISPATCH_COUPLING = couplingRow({
+  couplingId: 'CPL-5.WAR_TO_GRAMMAR.WR-7.peace_dispatch',
+  pairId: 'CPL-5',
+  direction: 'WAR→GRAMMAR',
+  read: 'src/domain/worldPulse/envoyDiplomacy.js#dispatchAcceptedPeaceEnvoy',
+  receiptField: 'pulseRecord.envoyEvidence[kind=envoy_departed].{id,errandId,npcId,settlementId,counterpartId,sourceOfferId,state}',
+  counterforce: 'src/domain/worldPulse/envoyDiplomacy.js#dispatchAcceptedPeaceEnvoy',
+  flags: WR7_ENVOY_FLAGS,
+  owningVolume: 'WAR',
+  owningWave: 'WR-7',
+  intendedDesk: 'adjudication',
+});
+
+/** WR-7a / CPL-5. Only the exact persisted errand in its home state can carry
+ * the accepted decision back into the ordinary war/relationship applicator;
+ * every earlier state leaves the war physically live. */
+export const WR7_HOME_DELIVERY_COUPLING = couplingRow({
+  couplingId: 'CPL-5.GRAMMAR_TO_WAR.WR-7.home_delivery',
+  pairId: 'CPL-5',
+  direction: 'GRAMMAR→WAR',
+  read: 'src/domain/worldPulse/envoyDiplomacy.js#envoyReturnAcceptance',
+  receiptField: 'worldState.envoyErrands[state=home].{id,npcId,from,to,offer,acceptance,termSheet,homeTick}; pulseRecord.envoyEvidence[kind=envoy_home].{id,errandId,npcId,settlementId,counterpartId,sourceOfferId,state,termSheetId}',
+  counterforce: 'src/domain/worldPulse/envoyDiplomacy.js#envoyReturnAcceptance',
+  flags: WR7_ENVOY_FLAGS,
+  owningVolume: 'WAR',
+  owningWave: 'WR-7',
+  intendedDesk: 'adjudication',
+});
+
+/** WR-7a / CPL-19. A moving envoy may alter its closed departure picture only
+ * from a telling that has reached its current position and two beliefs already
+ * held there. No arrived telling or no belief picture means no mutation. */
+export const WR7_MOVING_PICTURE_COUPLING = couplingRow({
+  couplingId: 'CPL-19.INFO_TO_GRAMMAR.WR-7.moving_picture',
+  pairId: 'CPL-19',
+  direction: 'INFO→GRAMMAR',
+  read: 'src/domain/worldPulse/envoyDiplomacy.js#envoyRumorPatchFor',
+  receiptField: 'worldState.envoyErrands[].{heardRumorIds,snapshot.believedRatioBand,positionRef}',
+  counterforce: 'src/domain/worldPulse/envoyDiplomacy.js#envoyRumorPatchFor',
+  flags: WR7_ENVOY_FLAGS,
+  owningVolume: 'WAR',
+  owningWave: 'WR-7',
+  intendedDesk: 'events',
+});
+
+/** WR-7a / CPL-19. An overdue carried message may harden an existing court
+ * belief; the exact envoy's return removes only that inference. Both arms name
+ * the same errand rather than importing hidden truth about its fate. */
+export const WR7_SILENCE_INFERENCE_COUPLING = couplingRow({
+  couplingId: 'CPL-19.GRAMMAR_TO_INFO.WR-7.silence_inference',
+  pairId: 'CPL-19',
+  direction: 'GRAMMAR→INFO',
+  read: 'src/domain/worldPulse/beliefMap.js#applyEnvoySilenceInference',
+  receiptField: 'pulseRecord.envoyEvidence[kind=envoy_silence_inference].{id,errandId,npcId,settlementId,counterpartId,inferenceBasis}; worldState.spatialLedgers.beliefMaps[...].hostilityInference.{kind,errandId,sinceTick}',
+  counterforce: 'src/domain/worldPulse/beliefMap.js#clearEnvoySilenceInference',
+  flags: WR7_ENVOY_FLAGS,
+  owningVolume: 'WAR',
+  owningWave: 'WR-7',
+  intendedDesk: 'divination',
+});
+
+/** The four WR-7a transport and belief couplings, in lifecycle order. */
+export const WR7_ENVOY_COUPLINGS = Object.freeze([
+  WR7_PEACE_DISPATCH_COUPLING,
+  WR7_HOME_DELIVERY_COUPLING,
+  WR7_MOVING_PICTURE_COUPLING,
+  WR7_SILENCE_INFERENCE_COUPLING,
+]);
+
 export const COUPLING_REGISTRY = Object.freeze([
   WR3_LINEAGE_COUPLING,
   ...WR4_WAR_COST_COUPLINGS,
   ...WR5_WAR_RULING_COUPLINGS,
   ...WR6_WAR_COALITION_COUPLINGS,
+  ...WR7_ENVOY_COUPLINGS,
 ]);
 
 /** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */

@@ -55,6 +55,12 @@ import { RUMOR_NOTABLE_SCORE_FLOOR } from '../spatial/rumorNetwork.js';
 // per-mission war-reads elsewhere keep the raw embassyHazard helpers.
 import { atWarWithIdx, relationshipTypeBetweenIdx, tradeNeighbourIndex, occupiedByIndex } from './tickIndices.js';
 import { seasonForTick } from './worldState.js';
+import {
+  namedPersonArrivalTick,
+  namedPersonLegTicks,
+  namedPersonPathPosition,
+} from './namedPersonTransit.js';
+import { envoyDiplomacyActive } from './envoyErrand.js';
 import { createPRNG } from '../../kernel/prng.js';
 import { pickLine } from './eventProse.js';
 import { ROADS_NEWS, thirdPartyRansomPool } from '../../data/roadsProse.js';
@@ -157,6 +163,17 @@ function observanceMatch(destRecs, weekOfYear, hopWeeksOut) {
 
 // ── §7 THE GAUNTLET — hop location + threat reads ──────────────────────────────
 /**
+ * Price one Roads mission leg through the shared named-person floor. Route choice and
+ * geometry remain Roads/distanceRead concerns; the leg clock has one authority.
+ * @param {import('../spatial/distanceRead.js').SpatialDigest} digest
+ * @param {string} fromId @param {string} toId @param {string|null} season
+ * @returns {number}
+ */
+function roadLegWeeks(digest, fromId, toId, season) {
+  return namedPersonLegTicks({ nominalWeeks: hopWeeks(digest, fromId, toId, season) });
+}
+
+/**
  * The path node the traveller occupies right now (§7): the dest while visiting; interpolated
  * along the frozen path (forward outbound, reverse returning). Pure.
  * @param {Record<string, unknown>} m @param {number} weekClock @param {import('../spatial/distanceRead.js').SpatialDigest} digest @param {string|null} season
@@ -166,17 +183,24 @@ function currentHopOf(m, weekClock, digest, season) {
   const path = Array.isArray(m.path) ? /** @type {string[]} */ (m.path) : [];
   if (!path.length) return str(m.destId);
   if (m.phase === 'visiting') return str(m.destId);
-  const last = path.length - 1;
   if (m.phase === 'outbound') {
-    const span = Math.max(1, num(m.legArrivalTick, 0) - num(m.departTick, 0));
-    const f = clamp01((weekClock - num(m.departTick, 0)) / span);
-    return String(path[Math.max(0, Math.min(last, Math.floor(f * last)))]);
+    return namedPersonPathPosition({
+      path,
+      departTick: num(m.departTick, 0),
+      arrivalTick: num(m.legArrivalTick, 0),
+      tick: weekClock,
+    }).nodeId;
   }
   // returning — reverse the frozen path.
-  const retWeeks = Math.max(1, num(hopWeeks(digest, str(m.destId), str(m.homeId), season), 1));
+  const retWeeks = roadLegWeeks(digest, str(m.destId), str(m.homeId), season);
   const start = num(m.legArrivalTick, 0) - retWeeks;
-  const g = clamp01((weekClock - start) / retWeeks);
-  return String(path[Math.max(0, Math.min(last, Math.floor((1 - g) * last)))]);
+  return namedPersonPathPosition({
+    path,
+    departTick: start,
+    arrivalTick: num(m.legArrivalTick, 0),
+    tick: weekClock,
+    reverse: true,
+  }).nodeId;
 }
 
 /**
@@ -285,10 +309,18 @@ function sortKeys(obj) {
  */
 function expectedReturnWeek(m, digest, season) {
   if (m.trappedBySiege) return null;
-  const retWeeks = Math.max(1, num(hopWeeks(digest, str(m.destId), str(m.homeId), season), 1));
+  const retWeeks = roadLegWeeks(digest, str(m.destId), str(m.homeId), season);
   if (m.phase === 'returning') return num(m.legArrivalTick, 0);
-  if (m.phase === 'visiting') return num(m.legArrivalTick, 0) + retWeeks; // legArrival is the visit-end
-  return num(m.legArrivalTick, 0) + num(m.stayWeeks, 1) + retWeeks; // outbound
+  if (m.phase === 'visiting') {
+    return namedPersonArrivalTick({
+      departTick: num(m.legArrivalTick, 0),
+      nominalWeeks: retWeeks,
+    }); // legArrival is the visit-end
+  }
+  return namedPersonArrivalTick({
+    departTick: num(m.legArrivalTick, 0) + num(m.stayWeeks, 1),
+    nominalWeeks: retWeeks,
+  }); // outbound
 }
 
 /**
@@ -431,7 +463,7 @@ function advanceLitRoads(args) {
     // self-cleared by the mirror pass). The leg is priced from the destination (at-destination) or
     // symmetric to the distance already covered (outbound). The heavy body lives in the leaf so
     // this at-ceiling kernel stays net-neutral.
-    if (consumeMissionRecall(m, hit.npc, weekClock, num(hopWeeks(digest, str(m.destId), homeId, season), 1))) { missions[mid] = m; continue; }
+    if (consumeMissionRecall(m, hit.npc, weekClock, roadLegWeeks(digest, str(m.destId), homeId, season))) { missions[mid] = m; continue; }
     if (m.phase === 'outbound' && weekClock >= num(m.legArrivalTick, 0)) {
       m.phase = 'visiting';
       m.legArrivalTick = num(m.legArrivalTick, 0) + Math.max(1, num(m.stayWeeks, 1)); // visit-end week
@@ -455,9 +487,9 @@ function advanceLitRoads(args) {
             m.waitReceipted = true;
           }
         } else {
-          const retWeeks = Math.max(1, num(hopWeeks(digest, str(m.destId), homeId, season), 1));
+          const retWeeks = roadLegWeeks(digest, str(m.destId), homeId, season);
           m.phase = 'returning';
-          m.legArrivalTick = weekClock + retWeeks;
+          m.legArrivalTick = namedPersonArrivalTick({ departTick: weekClock, nominalWeeks: retWeeks });
           m.waitReceipted = false;
         }
       }
@@ -523,8 +555,10 @@ function advanceLitRoads(args) {
     const w = roadsImportanceWeight(npc.npc);
     const protection = protectionOf({ importanceWeight: w, militaryQuality01: num(m.escort01, 1) });
     const legWeeks = phase === 'visiting' ? num(m.stayWeeks, 1)
-      : phase === 'returning' ? Math.max(1, num(hopWeeks(digest, destId, homeId, season), 1))
-        : Math.max(1, num(m.legArrivalTick, 0) - num(m.departTick, 0));
+      : phase === 'returning' ? roadLegWeeks(digest, destId, homeId, season)
+        : namedPersonLegTicks({
+          nominalWeeks: num(m.legArrivalTick, 0) - num(m.departTick, 0),
+        });
     const exposure = exposureOf({ legWeeks, phase });
     const hop = currentHopOf(m, weekClock, digest, season);
     const fork = createPRNG(`${rngSeed}::roads-hazard:${mid}:${now2}`);
@@ -649,8 +683,10 @@ function advanceLitRoads(args) {
         homeId, destId, venue: str(res.venue), envoyWeight01: num(res.envoyWeight01, 0),
         amplifier: num(res.amplifier, 0), intensity01: num(res.intensity01, 0),
       });
-      const retWeeks = Math.max(1, num(hopWeeks(digest, destId, homeId, season), 1));
-      m.phase = 'returning'; m.legArrivalTick = weekClock + retWeeks; m.embassyHeard = true;
+      const retWeeks = roadLegWeeks(digest, destId, homeId, season);
+      m.phase = 'returning';
+      m.legArrivalTick = namedPersonArrivalTick({ departTick: weekClock, nominalWeeks: retWeeks });
+      m.embassyHeard = true;
       const seed = `embassy.${mid}`;
       newsEntries.push(roadsBeat({
         sid: homeId, tick: now2, now, significance: 'notable',
@@ -661,8 +697,10 @@ function advanceLitRoads(args) {
     } else if (res.outcome === 'embassy_turned_home') {
       // §11b TURNED HOME (honour & chivalry — never worse than expulsion): the suit is refused a
       // hearing; the envoy rides home, the war unabated.
-      const retWeeks = Math.max(1, num(hopWeeks(digest, destId, homeId, season), 1));
-      m.phase = 'returning'; m.legArrivalTick = weekClock + retWeeks; m.expelled = true;
+      const retWeeks = roadLegWeeks(digest, destId, homeId, season);
+      m.phase = 'returning';
+      m.legArrivalTick = namedPersonArrivalTick({ departTick: weekClock, nominalWeeks: retWeeks });
+      m.expelled = true;
       const seed = `embassy-rebuff.${mid}`;
       newsEntries.push(roadsBeat({
         sid: homeId, tick: now2, now, significance: 'notable',
@@ -688,8 +726,10 @@ function advanceLitRoads(args) {
         newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'notable', headline: pickLine(ROADS_NEWS.robbed.headline, seed, interp), summary: pickLine(ROADS_NEWS.robbed.summary, seed, interp), seed, tags: ['robbed'] }));
       }
     } else if (res.outcome === 'expelled') {
-      const retWeeks = Math.max(1, num(hopWeeks(digest, destId, homeId, season), 1));
-      m.phase = 'returning'; m.legArrivalTick = weekClock + retWeeks; m.expelled = true;
+      const retWeeks = roadLegWeeks(digest, destId, homeId, season);
+      m.phase = 'returning';
+      m.legArrivalTick = namedPersonArrivalTick({ departTick: weekClock, nominalWeeks: retWeeks });
+      m.expelled = true;
       const seed = `expel.${mid}`;
       newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'notable', headline: pickLine(ROADS_NEWS.expulsion.headline, seed, interp), summary: pickLine(ROADS_NEWS.expulsion.summary, seed, interp), seed, tags: ['expulsion'] }));
     }
@@ -742,7 +782,7 @@ function advanceLitRoads(args) {
     // A PARTY RESCUE (§11) VOIDS the covert conversion — the captor's leverage was broken, not
     // bargained — by dropping willConvert on the returning mission (consumed on arrival home).
     delete ransoms[rid];
-    const retWeeks = Math.max(1, num(hopWeeks(digest, captorId, homeId, season), 1));
+    const retWeeks = roadLegWeeks(digest, captorId, homeId, season);
     // Captivity interrupts a mission; it does not mint a second journey identity. New ransom
     // records carry both fields, while the fallbacks keep pre-field persisted records releasable.
     const backMid = str(r.missionId) || `road.${homeId}.${npcKey}.${weekClock}`;
@@ -750,7 +790,9 @@ function advanceLitRoads(args) {
     missions[backMid] = {
       id: backMid, npcKey, npcName: str(r.npcName), homeId, destId: captorId,
       purpose: { kind: str(r.purposeKind) || 'trade', ref: '' }, phase: 'returning', path: [captorId, homeId],
-      departTick: weekClock, legArrivalTick: weekClock + retWeeks, stayWeeks: 0,
+      departTick: weekClock,
+      legArrivalTick: namedPersonArrivalTick({ departTick: weekClock, nominalWeeks: retWeeks }),
+      stayWeeks: 0,
       escort01: 1, riskTolerance01: 0.65, knownDangerAtDispatch: 0, trappedBySiege: false,
       startedYear: num(r.startedYear, year), releasedFromRansom: true, willConvert: willConvertOut, captorId,
     };
@@ -803,6 +845,10 @@ function advanceLitRoads(args) {
   // ── PASS 5: GENESIS (§4) ──
   const priorTraditions = asObject(getSpatialLedger(worldState, 'traditions'));
   const ladderLit = npcLadderActive(worldState);
+  // WR-7a owns peace-envoy genesis while exact-lit. Suppress only NEW legacy Roads
+  // embassies; PASS 0-4 deliberately remain unchanged so missions already on the road
+  // still arrive, parley, return, or become ransoms under their original contract.
+  const legacyEmbassyGenesisSuppressed = envoyDiplomacyActive(worldState);
   for (const sid of orderedIds) {
     const s = freshSettlement(sid);
     if (!s) continue;
@@ -825,13 +871,15 @@ function advanceLitRoads(args) {
     // finds them. Codepoint-stable, first target sued.
     /** @type {Array<{ dest: string, hopWeeksOut: number }>} */
     const warTargets = [];
-    for (const dest of orderedIds) {
-      if (dest === sid || !idSet.has(dest)) continue;
-      // H18: atWarWith via the per-graph war/relationship index (O(1) instead of an all-edges +
-      // all-channels scan per pair) — identical boolean, so the codepoint-first target is unchanged.
-      if (!atWarWithIdx(graph, worldState, sid, dest)) continue;
-      const hw = num(hopWeeks(digest, sid, dest, season), 0);
-      if (hw >= 1 && hw <= ROADS_TUNING.EMBASSY_MAX_HOP_WEEKS) warTargets.push({ dest, hopWeeksOut: hw });
+    if (!legacyEmbassyGenesisSuppressed) {
+      for (const dest of orderedIds) {
+        if (dest === sid || !idSet.has(dest)) continue;
+        // H18: atWarWith via the per-graph war/relationship index (O(1) instead of an all-edges +
+        // all-channels scan per pair) — identical boolean, so the codepoint-first target is unchanged.
+        if (!atWarWithIdx(graph, worldState, sid, dest)) continue;
+        const hw = num(hopWeeks(digest, sid, dest, season), 0);
+        if (hw >= 1 && hw <= ROADS_TUNING.EMBASSY_MAX_HOP_WEEKS) warTargets.push({ dest, hopWeeksOut: hw });
+      }
     }
     warTargets.sort((x, y) => cmp(x.dest, y.dest));
     // §11b PURPOSE 6 DOMINION INSPECTION targets: holdings this court OCCUPIES (over all
@@ -943,7 +991,7 @@ function advanceLitRoads(args) {
         cadence[c.npcKey] = year; // the year is spent — the refusal receipt
         continue;
       }
-      const legWeeks = Math.max(1, num(hopWeeks(digest, sid, c.dest, season), 1));
+      const legWeeks = roadLegWeeks(digest, sid, c.dest, season);
       const stayFork = createPRNG(`${rngSeed}::roads:stay:${sid}:${c.npcKey}:${year}`);
       const stayWeeks = ROADS_TUNING.STAY_BASE_WEEKS + Math.round(stayFork.random());
       // §11b ESCORT REFINEMENT (all purposes): the home power+influence ranking scales the escort
@@ -958,7 +1006,8 @@ function advanceLitRoads(args) {
       missions[missionId] = {
         id: missionId, npcKey: c.npcKey, npcName: str(c.npc.name || c.npcKey),
         homeId: sid, destId: c.dest, purpose: c.purpose, phase: 'outbound',
-        path: route.path.slice(), departTick: weekClock, legArrivalTick: weekClock + legWeeks,
+        path: route.path.slice(), departTick: weekClock,
+        legArrivalTick: namedPersonArrivalTick({ departTick: weekClock, nominalWeeks: legWeeks }),
         stayWeeks, escort01, riskTolerance01: riskTolerance, knownDangerAtDispatch: believedDanger,
         trappedBySiege: false, startedYear: year,
         // D-6 SEA ROADS (§10): freeze per-hop modality at dispatch (absent when dark ⇒ legacy all-land).

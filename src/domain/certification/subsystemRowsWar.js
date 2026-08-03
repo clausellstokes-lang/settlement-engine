@@ -1,9 +1,9 @@
 /**
  * subsystemRowsWar.js — SUBSYSTEM CERTIFICATION ROWS for the WAR STACK:
  * warLayerEnabled, the eight war-depth sub-flags that ship lit only in the
- * full_simulation ceiling preset, the four declared-dark WR reads
+ * full_simulation ceiling preset, the five declared-dark WR reads
  * (warTerminationEnabled, dispositionChannelsEnabled, and
- * lineageClaimEnabled, plus coalitionLedgerEnabled), and the three
+ * lineageClaimEnabled, plus coalitionLedgerEnabled and envoyDiplomacyEnabled), and the three
  * war-adjacent switches this lane
  * ADOPTED from their home cohorts because they certify as war and nowhere else
  * (navalEnabled and peaceEngineEnabled out of the WAVES cohort, and
@@ -691,6 +691,51 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
         name: 'reader_families_are_not_behavioral_aliveness',
         description: 'Twelve authored public receipt families make the coalition legible but cannot prove that a call or settlement occurred in a soak.',
         check: 'WR-9 may count all twelve familyId values for story mix only beside the behavioral denominators and outcome fields; prose alone leaves this row unobserved.',
+      }),
+    ]),
+    soakEvidence: 'unobserved',
+  }),
+  Object.freeze({
+    rule: 'envoyDiplomacyEnabled',
+    title: 'Durable peace envoys and carried terms',
+    module: 'src/domain/certification/couplingRegistry.js,src/domain/worldPulse/applyWorldPulse.js,src/domain/worldPulse/beliefMap.js,src/domain/worldPulse/candidateEvents.js,src/domain/worldPulse/envoyDiplomacy.js,src/domain/worldPulse/envoyErrand.js,src/domain/worldPulse/envoyNews.js,src/domain/worldPulse/envoyPulse.js,src/domain/worldPulse/eventProse.js,src/domain/worldPulse/namedPersonTransit.js,src/domain/worldPulse/npcDmVerbs.js,src/domain/worldPulse/pulseKernel.js,src/domain/worldPulse/roadsKernel.js,src/domain/worldPulse/worldState.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY. `worldState.envoyErrands` is an exclusive persisted
+      // substrate, but the v5 state-key census records only presence/max size: it
+      // cannot distinguish a departure from a completed return, a lost term sheet,
+      // or a functioning peace replay. The seven news kinds are presentation.
+      // Neither is enough to certify the end-to-end behavior or variety claim.
+      eventTypes: Object.freeze([]),
+      moverFamilies: Object.freeze([]),
+      stateKeys: Object.freeze([]),
+      other: 'BUILT AND DEFAULT-DARK, WITH NO PARTIAL-LIFECYCLE ALIVENESS CLAIM. envoyDiplomacyEnabled is a virtual key absent from DEFAULT_SIMULATION_RULES and every preset except an explicit false in full_simulation. Its exact gate also requires warLayerEnabled, warTerminationEnabled, peaceEngineEnabled, npcConsequencesEnabled, and routeLifecycleEnabled. A valid accepted bilateral peace offer leaves ordinary proposal life and can mint one bounded H1-durable envoyErrands row, with a detached accepted-ruling capsule, one frozen qualitative departure picture, detached terms, named-person route legs, and an exact travelling, parlaying, returning, home, or lost state. Peace remains unapplied while the legate travels; only a home delivery may replay that exact carried acceptance, offer, and terms without adjudicating a later court a second time. Silence can harden a court belief without becoming omniscient truth. envoy_departed, envoy_on_the_road, envoy_returning, envoy_home, envoy_lost, envoy_silence_inference, and terms_never_reached are governed truth-reader families and may not masquerade as behavioral eventTypes; remote envoy_lost and terms_never_reached facts are DM-only until observed, while the public silence line reports the court believing as the true event. The current v5 state-key census could see envoyErrands presence but cannot see the eligible peace-offer denominator, transition sequence, carried-term delivery, loss branch, false silence inference, or story mix, so this row intentionally does not borrow that coarse key as a complete pass. TO OBSERVE: WR-9 must record an eligible peace-offer denominator; mint, capacity-rejection, outbound-arrival, parlay, return, home, loss, silence-inference, terms-never-reached, and offer-replay totals; one bounded transition history per errand; paired H1 and settlement addresses; qualitative carried-picture changes; route-leg and delivery outcomes; and all seven exact familyId values in both aggregate story mix and divergent-seed distribution comparisons. Until that envelope executes to a verdict, false is DORMANT_BY_CONFIG and deliberately lit is UNOBSERVED, never ALIVE from a stranded ledger row or reader prose alone.',
+    }),
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'peace_waits_for_the_returning_person',
+        description: 'Acceptance at a remote parley is carried state, not authority; the bilateral peace applies only after the named legate reaches the sending court.',
+        check: 'WR-9 must pair each applied carried offer with one prior returning-to-home transition and reject any apply tick earlier than that exact home arrival.',
+      }),
+      Object.freeze({
+        name: 'the_departure_picture_does_not_refresh_itself',
+        description: 'The traveller carries a frozen qualitative picture that can move only through an injected heard-rumour step, never by rereading live war truth.',
+        check: 'WR-9 must show departure and arrival picture bands plus typed heard-rumour ids, and reject any multi-rung or unproven live-truth refresh between them.',
+      }),
+      Object.freeze({
+        name: 'one_durable_person_uses_the_lived_route',
+        description: 'Every errand belongs to one H1 identity and advances over frozen named-person route legs rather than teleporting or storing a roster index.',
+        check: 'WR-9 must resolve every transition to one durable npcId and contiguous route-leg addresses, with no duplicate active errand for the same bilateral front episode.',
+      }),
+      Object.freeze({
+        name: 'silence_is_inference_not_hidden_truth',
+        description: 'A missed return window may alter what a court believes, but the record may not invent capture, death, or a responsible counterparty.',
+        check: 'Every WR-9 silence-inference row must carry inferenceBasis silence and no lossCause unless a separate typed loss transition has actually closed the errand.',
+      }),
+      Object.freeze({
+        name: 'seven_reader_families_are_not_behavioral_width',
+        description: 'Authored public phrasing makes each errand state legible but does not prove that campaigns reach varied states or divergent story mixes.',
+        check: 'WR-9 may count the seven familyId values only beside eligible-offer and transition denominators plus event-type distribution comparisons between seed pairs.',
       }),
     ]),
     soakEvidence: 'unobserved',

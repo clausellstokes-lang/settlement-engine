@@ -157,6 +157,15 @@ export const WHAT_PHRASES = Object.freeze({
   coalition_spoils_divided: 'coalition spoils divided',
   coalition_debt_paid: 'a coalition debt paid',
   coalition_debt_unpaid: 'a coalition debt left unpaid',
+  // WR-7a THE ERRAND — physical peace messages and the court's false reading of
+  // silence. Every public projection gets world words rather than an envoy slug.
+  envoy_departed: 'a legate leaving with an offer',
+  envoy_on_the_road: 'a legate between courts',
+  envoy_returning: 'a legate carrying terms home',
+  envoy_home: 'a legate returning to council',
+  envoy_lost: 'a legate missing on the road',
+  envoy_silence_inference: 'a court fearing for its missing legate',
+  terms_never_reached: 'terms stranded upon the road',
   // The INDIRECT war and the war of words. These nine are keyed on `kind` rather than
   // `impactKind`, because their authors (momentum.js, supplyWebWarfare.js,
   // informationStatecraft.js) mint no impactKind. That is exactly why the impactKind

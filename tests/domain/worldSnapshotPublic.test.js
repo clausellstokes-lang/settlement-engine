@@ -46,6 +46,10 @@ function poisonWorldState() {
     },
     deferredImpacts: [{ id: 'di1', covert: true }],
     deferredWarFronts: [{ instigatorId: 'x', targetId: 'y', covert: true }],
+    envoyErrands: [{
+      id: 'envoy_errand:SECRET', npcId: 'npc:aldric', from: 'warhawk', to: 'forge',
+      snapshot: { storesBand: 'thin' }, termSheet: { secretConcession: 'the eastern gate' },
+    }],
     // ── Public-derivable ledgers ────────────────────────────────────────────────
     dispositionStats: { warhawk: { wins: 3, losses: 1, score: 2 }, forge: { wins: 0, losses: 0 } },
     tradeWarState: {
@@ -136,7 +140,7 @@ describe('serializeWorldSnapshotPublic — HARD-DENY (every section enabled)', (
       // security-privacy-r2-1: the conditional-ledger keys that had lagged the census.
       'religionStates', 'warPosture', 'occupations', 'martialReadiness', 'conquestFeeds',
       'mercenaryMarket', 'rulesetLog', 'spatialDigest', 'spatialLedgers', 'narrativeTempo',
-      'politicsLedgers',
+      'politicsLedgers', 'envoyErrands',
     ]) {
       expect(keys.has(denied)).toBe(false);
     }
@@ -153,6 +157,7 @@ describe('serializeWorldSnapshotPublic — HARD-DENY (every section enabled)', (
     expect(strings).not.toContain('whispered dread');
     expect(strings).not.toContain('cand:secret');
     expect(strings).not.toContain('smuggling ring detail');
+    expect(strings).not.toContain('the eastern gate');
     // No 'covert' key survives anywhere.
     expect(keys.has('covert')).toBe(false);
   });

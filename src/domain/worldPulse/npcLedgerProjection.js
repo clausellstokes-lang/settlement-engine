@@ -69,6 +69,7 @@ export const DM_TRUTH_KEY = 'dmTruth';
  * @property {number} sinceTick
  * @property {number} elapsedTicks  how long they have been in this state
  * @property {ReadonlyArray<string>} shutDoors  settlement ids currently excluding them
+ * @property {true} [whereaboutsUnknown] DM VIEW ONLY: no route or residence supports a place
  * @property {{ compromiseSource: string }} [dmTruth]  DM VIEW ONLY
  */
 
@@ -108,6 +109,8 @@ function projectRecord(wnpcId, record, exclusions, opts) {
     .sort(compareCodepoint);
   const residency = asObject(record.residency);
   const transit = asObject(record.transit);
+  const assignment = asObject(record.dmAssignment);
+  const restingAt = String(residency.settlementId || assignment.atSettlementId || '');
 
   /** @type {Record<string, unknown>} */
   const out = {
@@ -128,13 +131,17 @@ function projectRecord(wnpcId, record, exclusions, opts) {
     // W-H3, BOTH CONDITIONAL AT THE FIELD LEVEL. A record that carries neither a
     // residency nor a transit leg projects EXACTLY the shape H1 projected, so the H1
     // pins keep measuring the same object rather than one with two new null keys.
-    ...(String(residency.settlementId || '') ? { restingAt: String(residency.settlementId) } : {}),
+    ...(restingAt ? { restingAt } : {}),
     ...(String(transit.toId || '') ? { travellingTo: String(transit.toId) } : {}),
   };
   // THE ONE COVERT ATTACHMENT, and the ONLY statement in this file that can write it.
   // The player path never reaches this branch, so a player projection cannot carry the
   // key even if a future record grows new covert fields underneath it.
   if (opts.includeCovert) {
+    // A remote loss is not public knowledge merely because the simulation knows it.
+    // Until an observation carrier earns that knowledge, only the DM projection may
+    // say that the person's whereabouts are unsupported.
+    if (record.whereaboutsUnknown === true) out.whereaboutsUnknown = true;
     const dmTruth = asObject(record[DM_TRUTH_KEY]);
     if (typeof dmTruth.compromiseSource === 'string') {
       out[DM_TRUTH_KEY] = { compromiseSource: dmTruth.compromiseSource };
@@ -168,8 +175,10 @@ export function projectNpcPool({ worldState, tick = 0, includeCovert = false, se
     // from while they have taken no lodging yet. The fallback is what keeps every H1
     // record, which carries no residency at all, projecting into exactly the local view
     // it projected into before this lane existed.
-    const resting = String(asObject(rec.residency).settlementId || '')
-      || String(asObject(rec.originRef).settlementId || '');
+    const resting = rec.whereaboutsUnknown === true || !!String(asObject(rec.transit).toId || '')
+      ? ''
+      : String(asObject(rec.residency).settlementId || asObject(rec.dmAssignment).atSettlementId || '')
+        || String(asObject(rec.originRef).settlementId || '');
     if (scope !== null && resting !== scope) continue;
     roamers.push(projectRecord(id, rec, ledger.exclusions[id] || [], opts));
   }

@@ -25,6 +25,7 @@ import {
   isSuppressionOnlyOutcome,
   proposalRequiresRecordModeSupersession,
 } from './pulseHelpers.js';
+import { envoyDiplomacyActive, hasActiveEnvoyForOffer } from './envoyErrand.js';
 
 export { admitGuaranteedProposalOutcomes, buildProposalDocket };
 
@@ -159,16 +160,16 @@ export function proposalSemanticKey(outcome) {
 export function suppressEquivalentPendingProposalCandidates(candidates, worldState) {
   if (!Array.isArray(candidates) || candidates.length === 0) return candidates;
   const proposals = proposalRecord(worldState)?.proposals;
-  if (!Array.isArray(proposals) || proposals.length === 0) return candidates;
   const pendingKeys = new Set();
-  for (const raw of proposals) {
+  for (const raw of Array.isArray(proposals) ? proposals : []) {
     const proposal = proposalRecord(raw);
     if (proposal?.status !== 'pending') continue;
     if (proposalRequiresRecordModeSupersession(proposal)) continue;
     const key = proposalSemanticKey(proposal.outcome);
     if (key) pendingKeys.add(key);
   }
-  if (!pendingKeys.size) return candidates;
+  const envoyHoldActive = envoyDiplomacyActive(worldState);
+  if (!pendingKeys.size && !envoyHoldActive) return candidates;
   let suppressed = false;
   const next = candidates.filter(candidate => {
     // Upgrade safety: pre-v4 saves may hold proposal copies of outcomes that are
@@ -176,7 +177,11 @@ export function suppressEquivalentPendingProposalCandidates(candidates, worldSta
     // required state refresh or remove a conflict suppressor before arbitration.
     if (isStateOnlyOutcome(candidate) || isSuppressionOnlyOutcome(candidate)) return true;
     const key = proposalSemanticKey(candidate);
-    const held = key != null && pendingKeys.has(key);
+    // Once a proposal becomes terminal its physical envoy is the hold. Without
+    // this second half, the strategy chooser would emit the same offer every
+    // week while the first named person was still on the road.
+    const held = (key != null && pendingKeys.has(key))
+      || (envoyHoldActive && hasActiveEnvoyForOffer(worldState, candidate));
     if (held) suppressed = true;
     return !held;
   });

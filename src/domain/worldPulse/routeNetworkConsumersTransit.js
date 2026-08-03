@@ -10,10 +10,10 @@
  * ON once the network is alive.
  *
  * ── THE DIVISION OF LABOUR, AND WHY IT IS NOT A FORK ────────────────────────
- * H3 OWNS POSITION. `wanderPosition` decides whether a leg has landed and where the
- * walker is while it has not, and this module calls it rather than re-deriving it:
- * a second answer to "where is the walker" would be the kind of drift that shows up
- * a wave later as a roamer standing in two places.
+ * THE SHARED NAMED-PERSON KERNEL OWNS POSITION. `namedPersonLegPosition` decides
+ * whether a leg has landed and where the walker is while it has not, and this module
+ * calls it rather than re-deriving it: a second answer to "where is the walker" would
+ * be the kind of drift that shows up a wave later as a roamer standing in two places.
  *
  * J4 OWNS SELECTION AND PRICE. Which way leaves this settlement is a question about
  * the LIVED network, which did not exist when H3 was written, and what the way costs
@@ -45,9 +45,14 @@
  */
 
 import { activeSpatialDigest, hopWeeks } from '../spatial/distanceRead.js';
-import { wanderPosition } from './npcCirculationTransit.js';
 import { livedRouteToward, mayUseHiddenPaths } from './routeNetworkConsumers.js';
 import { routeLifecycleActive } from './routeNetworkLedger.js';
+import {
+  NAMED_PERSON_TRANSIT_TUNING,
+  namedPersonLegPosition,
+  namedPersonLegTicks,
+  openNamedPersonLeg,
+} from './namedPersonTransit.js';
 
 /** @typedef {import('./npcCirculationTransit.js').WanderLeg} WanderLeg */
 /** @typedef {import('./routeNetworkConsumers.js').LivedHop} LivedHop */
@@ -81,7 +86,7 @@ export const ROUTE_TRANSIT_TUNING = Object.freeze({
     track: 1.5,
     hidden: 2,
   }),
-  MIN_LEG_TICKS: 1,
+  MIN_LEG_TICKS: NAMED_PERSON_TRANSIT_TUNING.MIN_LEG_TICKS,
   /**
    * The weeks a lived edge costs when the frozen geometry cannot price the pair at
    * all. Only a USER route can reach this rung: genesis derives from the digest's
@@ -89,7 +94,7 @@ export const ROUTE_TRANSIT_TUNING = Object.freeze({
    * expedition-worth ceiling, so an unpriceable pair is the DM asserting a road the
    * geometry does not know about. The floor is the honest reading of that assertion.
    */
-  UNPRICED_LEG_WEEKS: 1,
+  UNPRICED_LEG_WEEKS: NAMED_PERSON_TRANSIT_TUNING.UNPRICED_LEG_WEEKS,
 });
 
 /** @param {unknown} value @returns {string} */
@@ -137,11 +142,11 @@ export function livedLegTicks(input) {
   const nominal = digest
     ? hopWeeks(digest, text(input.fromId), text(input.hop.toId), input.season || null)
     : null;
-  const weeks = nominal == null || !Number.isFinite(Number(nominal)) || Number(nominal) <= 0
-    ? Number(ROUTE_TRANSIT_TUNING.UNPRICED_LEG_WEEKS)
-    : Number(nominal);
-  const priced = Math.floor(weeks * gradeLegMultiplier(input.hop.grade));
-  return Math.max(Number(ROUTE_TRANSIT_TUNING.MIN_LEG_TICKS), priced);
+  return namedPersonLegTicks({
+    nominalWeeks: nominal,
+    gradeMultiplier: gradeLegMultiplier(input.hop.grade),
+    unpricedWeeks: ROUTE_TRANSIT_TUNING.UNPRICED_LEG_WEEKS,
+  });
 }
 
 /**
@@ -165,18 +170,14 @@ export function livedLegTicks(input) {
  * @returns {LivedLegPlan}
  */
 export function openLivedLeg(input) {
-  const depart = tickOf(input.tick);
   const ticks = livedLegTicks(input);
-  /** @type {Record<string, unknown>} */
-  const leg = {
+  const leg = openNamedPersonLeg({
     fromId: text(input.fromId),
     toId: text(input.hop.toId),
-    departTick: depart,
-    arrivalTick: depart + ticks,
-  };
-  // Conditional, drop-when-false, and it is H3's own key: a leg down an ordinary road
-  // serializes without it, so a roamer ledger written by either lane reads the same.
-  if (input.hop.hidden) leg.hidden = true;
+    departTick: tickOf(input.tick),
+    nominalWeeks: ticks,
+    hidden: input.hop.hidden === true,
+  });
   return { leg: /** @type {WanderLeg} */ (leg), hop: input.hop, ticks };
 }
 
@@ -327,7 +328,7 @@ export function advanceLivedTraveller(input) {
   // mid-road would be a lifecycle hole rather than a dormancy guarantee, and the
   // guarantee Law 7 actually asks for is that a dark world never STARTS anything.
   if (leg && text(leg.toId)) {
-    const position = wanderPosition(leg, now);
+    const position = namedPersonLegPosition(leg, now);
     if (!position.arrived) {
       return stepOf({
         leg, atSettlementId: '', verdict: 'in_transit', progress01: position.progress01,

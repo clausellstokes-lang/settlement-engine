@@ -181,11 +181,24 @@ export function collapseIntervalHistory(worldState, appendedRecords, wizardNews 
     .some((/** @type {NonNullable<Parameters<typeof stateOnlyRumorSeedsFromHistory>[0]>[number]} */ record) => (
       Array.isArray(record?.mechanicalRumorSeeds)
     ));
+  // WR-7a's seven typed evidence families are durable interval facts, not merely
+  // interior narration. Preserve first occurrence in tick order and dedupe by the
+  // producer-owned evidence id so a retry cannot multiply a departure or delivery.
+  const envoyEvidenceById = new Map();
+  for (const record of intervalRecords) {
+    for (const evidence of Array.isArray(record?.envoyEvidence) ? record.envoyEvidence : []) {
+      const id = String(evidence?.id || '');
+      if (id && !envoyEvidenceById.has(id)) envoyEvidenceById.set(id, evidence);
+    }
+  }
+  const envoyEvidence = [...envoyEvidenceById.values()];
+  let composedFinalRecord = (mechanicalRumorSeeds.length || carriesAuthoritativeMechanicalSeeds)
+    ? { ...finalRecord, mechanicalRumorSeeds }
+    : finalRecord;
+  if (envoyEvidence.length) composedFinalRecord = { ...composedFinalRecord, envoyEvidence };
   const composed = [
     ...survivors,
-    (mechanicalRumorSeeds.length || carriesAuthoritativeMechanicalSeeds)
-      ? { ...finalRecord, mechanicalRumorSeeds }
-      : finalRecord,
+    composedFinalRecord,
   ];
   return reconcileProvenanceAfterHistoryCollapse(
     { ...worldState, pulseHistory: composed },

@@ -278,6 +278,20 @@ function normalizeRecord(raw, opts) {
   if (residency) out.residency = residency;
   const transit = normalizeTransit(r.transit);
   if (transit) out.transit = transit;
+  // A DM assignment is a destination carried BESIDE the current exact H3/J4 leg,
+  // never inside it. Keeping the journey goal separate preserves TransitLeg's closed
+  // one-leg shape while allowing the pulse to open the next lived hop after arrival.
+  // It belongs only to a roamer: final placement clears the journey goal, and refusing
+  // it on placed records prevents a competing mover from stranding an assignment marker
+  // on somebody another lifecycle has already settled.
+  const assignment = normalizeDmAssignment(r.dmAssignment);
+  if (assignment && !opts.placed) out.dmAssignment = assignment;
+  // A lost traveler can be alive without a supportable route or settlement. This
+  // marker is conditional on there being no stronger physical fact, so any later
+  // placement/residency/transit automatically clears the unknown state.
+  if (r.whereaboutsUnknown === true && !opts.placed && !residency && !transit && !assignment) {
+    out.whereaboutsUnknown = true;
+  }
   const dmTruth = normalizeDmTruth(r.dmTruth);
   if (dmTruth) out.dmTruth = dmTruth;
   return /** @type {RoamerRecord | PlacementRecord} */ (out);
@@ -331,6 +345,30 @@ function normalizeTransit(raw) {
   const leg = { fromId, toId, departTick, arrivalTick: Math.max(departTick, tickOf(r.arrivalTick)) };
   if (r.hidden === true) leg.hidden = true;
   return /** @type {TransitLeg} */ (leg);
+}
+
+/**
+ * @typedef {Object} DmAssignmentTransit
+ * @property {string} targetSettlementId the ruling's final destination
+ * @property {string} atSettlementId      an intermediate rest point; empty on a leg
+ * @property {number} issuedTick          exact assignment episode token
+ */
+
+/**
+ * Normalize the small goal carried while a DM-assigned person walks. This is not a
+ * second position: `transit` owns a live leg, while `atSettlementId` is populated only
+ * after that leg lands and cleared before the next opens.
+ * @param {unknown} raw @returns {DmAssignmentTransit | null}
+ */
+function normalizeDmAssignment(raw) {
+  const r = asObject(raw);
+  const targetSettlementId = text(r.targetSettlementId);
+  if (!targetSettlementId) return null;
+  return {
+    targetSettlementId,
+    atSettlementId: text(r.atSettlementId),
+    issuedTick: tickOf(r.issuedTick),
+  };
 }
 
 /**

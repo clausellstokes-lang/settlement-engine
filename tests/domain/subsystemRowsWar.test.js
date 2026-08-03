@@ -1,12 +1,12 @@
 /**
- * subsystemRowsWar.test.js — the sixteen WAR-STACK certification rows.
+ * subsystemRowsWar.test.js — the seventeen WAR-STACK certification rows.
  *
  * A certification row is a CLAIM ABOUT SOURCE: "this module emits these literals,
  * writes these containers, and owns nothing else". An unchecked row rots into
  * fiction the first time a module is renamed, and a fictional row grades
  * UNOBSERVED forever while reading like diligence. So this file does four jobs:
  *
- *   1. SHAPE     the sixteen rules are authored, not deferred, and every row
+ *   1. SHAPE     the seventeen rules are authored, not deferred, and every row
  *                conforms to the registry contract.
  *   2. TRACE     every DECLARED literal is re-derived from the live source, and
  *                every DELIBERATELY UNDECLARED one is held out with an anchored
@@ -46,7 +46,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const sourceOf = (rel) => readFileSync(join(ROOT, rel), 'utf8');
 
 const PARENT = 'warLayerEnabled';
-/** The sixteen rules this lane authors, in registry order. */
+/** The seventeen rules this lane authors, in registry order. */
 const WAR_RULES = Object.freeze([
   'warLayerEnabled',
   'warEconomyDrainEnabled',
@@ -64,6 +64,7 @@ const WAR_RULES = Object.freeze([
   'warTerminationEnabled',
   'lineageClaimEnabled',
   'coalitionLedgerEnabled',
+  'envoyDiplomacyEnabled',
 ]);
 
 // The rows the engine really does AND-gate under the war layer (or, for
@@ -83,6 +84,7 @@ const NESTED_UNDER_PARENT = Object.freeze([
   'warTerminationEnabled',
   'lineageClaimEnabled',
   'coalitionLedgerEnabled',
+  'envoyDiplomacyEnabled',
 ]);
 
 /** The rows that own no vocabulary at all, each with the token its gap note must name. */
@@ -97,6 +99,7 @@ const NO_CHANNEL_ROWS = Object.freeze({
   warTerminationEnabled: 'decidingTerm',
   lineageClaimEnabled: 'five lineage familyId values',
   coalitionLedgerEnabled: 'eligible-call denominator',
+  envoyDiplomacyEnabled: 'eligible peace-offer denominator',
 });
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -159,7 +162,7 @@ const WARRING_YEAR = Object.freeze({
 });
 
 describe('war-stack rows — shape and partition', () => {
-  test('all sixteen war-stack rules are authored rather than deferred to a pending list', () => {
+  test('all seventeen war-stack rules are authored rather than deferred to a pending list', () => {
     // Purely positive, on purpose. A bare "not in the pending list" would need an
     // anchor sibling that is ITSELF still pending, and the pending list shrinks
     // under this file as other lanes land rows. The live coverage audit proves the
@@ -171,9 +174,9 @@ describe('war-stack rows — shape and partition', () => {
       registry: SUBSYSTEM_CERTIFICATION_REGISTRY,
       pendingKeys: SUBSYSTEM_CERTIFICATION_PENDING_KEYS,
     });
-    expect(WAR_RULES).toHaveLength(16);
+    expect(WAR_RULES).toHaveLength(17);
     expect(WAR_SUBSYSTEM_ROWS.map((row) => row.rule)).toEqual(WAR_RULES);
-    // Scoped to THIS lane's sixteen. The composed partition's own totality is the
+    // Scoped to THIS lane's seventeen. The composed partition's own totality is the
     // walker's assertion, and this tree is written by parallel sessions, so a
     // sibling lane mid-edit must not red the war lane's proof.
     expect(audit.missing).toEqual([]);
@@ -278,7 +281,7 @@ describe('war-stack rows — shape and partition', () => {
     expect(rowFor('allyIntelSharingEnabled').aliveness.other).toContain('pulseKernel.js:1838');
   });
 
-  test('the ten vocabulary-less rows admit the gap and name the observation that closes it', () => {
+  test('the eleven vocabulary-less rows admit the gap and name the observation that closes it', () => {
     for (const [rule, token] of Object.entries(NO_CHANNEL_ROWS)) {
       const row = rowFor(rule);
       expect(row.aliveness.eventTypes, `${rule}`).toEqual([]);
@@ -693,6 +696,69 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     ]));
   });
 
+  test('the envoy row stays unobserved until WR-9 sees complete lifecycle and story width', () => {
+    const row = rowFor('envoyDiplomacyEnabled');
+    expect(row.aliveness.eventTypes).toEqual([]);
+    expect(row.aliveness.moverFamilies).toEqual([]);
+    expect(row.aliveness.stateKeys).toEqual([]);
+    expect(row.soakEvidence).toBe('unobserved');
+    expect(row.expectedTempo).toBe('reactive');
+    expect(row.module.split(',')).toEqual(expect.arrayContaining([
+      'src/domain/certification/couplingRegistry.js',
+      'src/domain/worldPulse/applyWorldPulse.js',
+      'src/domain/worldPulse/beliefMap.js',
+      'src/domain/worldPulse/candidateEvents.js',
+      'src/domain/worldPulse/envoyDiplomacy.js',
+      'src/domain/worldPulse/envoyErrand.js',
+      'src/domain/worldPulse/envoyNews.js',
+      'src/domain/worldPulse/envoyPulse.js',
+      'src/domain/worldPulse/eventProse.js',
+      'src/domain/worldPulse/namedPersonTransit.js',
+      'src/domain/worldPulse/npcDmVerbs.js',
+      'src/domain/worldPulse/pulseKernel.js',
+      'src/domain/worldPulse/roadsKernel.js',
+      'src/domain/worldPulse/worldState.js',
+    ]));
+    for (const rule of [
+      'warLayerEnabled',
+      'warTerminationEnabled',
+      'peaceEngineEnabled',
+      'npcConsequencesEnabled',
+      'routeLifecycleEnabled',
+    ]) {
+      expect(row.aliveness.other).toContain(rule);
+    }
+    for (const token of [
+      'eligible peace-offer denominator',
+      'capacity-rejection',
+      'outbound-arrival',
+      'offer-replay totals',
+      'all seven exact familyId values',
+      'divergent-seed distribution comparisons',
+      'envoyErrands presence',
+    ]) {
+      expect(row.aliveness.other).toContain(token);
+    }
+    for (const kind of [
+      'envoy_departed',
+      'envoy_on_the_road',
+      'envoy_returning',
+      'envoy_home',
+      'envoy_lost',
+      'envoy_silence_inference',
+      'terms_never_reached',
+    ]) {
+      expect(row.aliveness.other).toContain(kind);
+    }
+    expect(row.invariants.map((invariant) => invariant.name)).toEqual(expect.arrayContaining([
+      'peace_waits_for_the_returning_person',
+      'the_departure_picture_does_not_refresh_itself',
+      'one_durable_person_uses_the_lived_route',
+      'silence_is_inference_not_hidden_truth',
+      'seven_reader_families_are_not_behavioral_width',
+    ]));
+  });
+
   test('the naval row declares the sidecar and holds out the news-only literals', () => {
     expect(rowFor('navalEnabled').aliveness.stateKeys).toEqual(['spatialLedgers.navalTransit']);
     const navalKernel = sourceOf('src/domain/worldPulse/navalKernel.js');
@@ -839,7 +905,7 @@ describe('war-stack rows — the verdicts, one field apart', () => {
     }
   });
 
-  test('the nine vocabulary-less rows reach UNOBSERVED and DORMANT, and never ALIVE', () => {
+  test('the eleven vocabulary-less rows reach UNOBSERVED and DORMANT, and never ALIVE', () => {
     // A census as rich as any receipt could carry, and a warring year on top: still
     // UNOBSERVED, because none of it is evidence these rows are allowed to claim.
     const rich = receiptV5({

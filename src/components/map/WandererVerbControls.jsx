@@ -229,6 +229,8 @@ export function noteFor(result, name) {
   }
   if (refusal === 'nothing_to_lift') return `Nothing stands against ${name} to lift.`;
   if (refusal === 'already_there') return `${name} is already settled there.`;
+  if (refusal === 'no_route') return `No lived road can carry ${name} there from where they stand.`;
+  if (refusal === 'active_errand') return `${name} is already carrying a charge for the realm.`;
   if (refusal === 'unknown_identity') return `The register no longer holds ${name}.`;
   if (refusal === 'no_settlement') return 'Choose a place for them first.';
   if (refusal === 'dormant') return 'This realm does not follow its people once they leave.';

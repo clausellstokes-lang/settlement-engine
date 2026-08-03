@@ -90,6 +90,12 @@ import {
 import { warFrontsInto } from './warFrontReads.js';
 import { treatyBlocksWar } from './treatyEnforcement.js';
 import { coalitionJoinFeasibility } from './warDeployment.js';
+import { envoyDiplomacyActive } from './envoyErrand.js';
+import {
+  dispatchAcceptedPeaceEnvoy,
+  envoyReturnAcceptance,
+} from './envoyDiplomacy.js';
+import { envoyNewsEntries } from './envoyNews.js';
 
 function clone(/** @type {any} */ value) {
   return value == null ? value : deepClone(value);
@@ -961,6 +967,7 @@ export function applyWorldPulseOutcomes({
   const autoApplied = [];
   const proposals = [];
   const newsEntries = [];
+  const envoyEvidence = [];
   const lapsedOutcomeIds = [];
   // Direct state-only headlines stay off every public/raw-news surface, but the
   // rumor/belief plane historically consumed those entries as simulation input.
@@ -1200,7 +1207,17 @@ export function applyWorldPulseOutcomes({
         continue;
       }
       const decisionSnapshot = { ...snapshot, regionalGraph: graph, worldState: state };
-      const peaceDecision = readWarPeaceDecision({
+      const transportMarker = outcome.metadata?.envoyTransportReturn;
+      const transportedDecision = transportMarker
+        ? envoyReturnAcceptance(state, outcome, graph)
+        : null;
+      // A return marker is engine-only authority. A malformed, stale, or
+      // non-home marker may never bypass the live bilateral evaluator.
+      if (transportMarker && !transportedDecision) {
+        lapsedOutcomeIds.push(String(outcome.id || ''));
+        continue;
+      }
+      const peaceDecision = transportedDecision || readWarPeaceDecision({
         worldState: state,
         snapshot: decisionSnapshot,
         outcome,
@@ -1210,12 +1227,12 @@ export function applyWorldPulseOutcomes({
         lapsedOutcomeIds.push(String(outcome.id || ''));
         continue;
       }
-      newsEntries.push(...warRulingNewsEntries({
-        evidence: peaceDecisionRulingEvidence({ outcome, decision: peaceDecision, tick }),
-        snapshot,
-        now,
-      }));
       if (!peaceDecision.accepted) {
+        newsEntries.push(...warRulingNewsEntries({
+          evidence: peaceDecisionRulingEvidence({ outcome, decision: peaceDecision, tick }),
+          snapshot,
+          now,
+        }));
         const priced = applyWarPeaceRefusal({
           worldState: state,
           settlementUpdates: [...settlementUpdates.values()],
@@ -1267,6 +1284,52 @@ export function applyWorldPulseOutcomes({
         });
         continue;
       }
+      // WR-7a replaces only the TRANSPORT. The exact WR-5 ruling above is
+      // frozen onto one H1 person, while every settlement/relationship/graph,
+      // politics, stressor, recall, and treaty-facing mutation remains below
+      // this interception point. Auto and proposal approvals converge here.
+      if (!transportedDecision && envoyDiplomacyActive(state)) {
+        const dispatched = dispatchAcceptedPeaceEnvoy({
+          worldState: state,
+          snapshot: decisionSnapshot,
+          outcome,
+          decision: peaceDecision,
+          tick,
+          season,
+        });
+        const existingActive = dispatched.reason === 'duplicate_episode'
+          && dispatched.errand
+          && !['home', 'lost'].includes(String(dispatched.errand.state));
+        if (dispatched.changed || existingActive) {
+          state = dispatched.worldState;
+          envoyEvidence.push(...dispatched.evidence);
+          newsEntries.push(...envoyNewsEntries({
+            evidence: dispatched.evidence,
+            snapshot: { ...decisionSnapshot, worldState: state },
+            now,
+          }));
+          autoApplied.push({
+            ...outcome,
+            recordMode: 'state_only',
+            candidateType: 'envoy_dispatched',
+            relationshipKey: null,
+            relationshipPatch: null,
+            proposalPayload: null,
+            metadata: {
+              ...(outcome.metadata || {}),
+              envoyErrandId: dispatched.errand?.id || null,
+            },
+          });
+          continue;
+        }
+        lapsedOutcomeIds.push(String(outcome.id || ''));
+        continue;
+      }
+      newsEntries.push(...warRulingNewsEntries({
+        evidence: peaceDecisionRulingEvidence({ outcome, decision: peaceDecision, tick }),
+        snapshot,
+        now,
+      }));
       state = applyWarDecisionPolitics({
         worldState: state, snapshot,
         actorId: peaceDecision.offererId,
@@ -1288,8 +1351,8 @@ export function applyWorldPulseOutcomes({
         relationshipPatch: {
           ...(outcome.relationshipPatch || {}),
           peaceDecisionOutcomeId: String(outcome.id || ''),
-          peaceDecisionTick: Number.isFinite(Number(outcome.generatedAtTick ?? tick))
-            ? Math.max(0, Math.floor(Number(outcome.generatedAtTick ?? tick)))
+          peaceDecisionTick: Number.isFinite(Number(transportedDecision ? tick : outcome.generatedAtTick ?? tick))
+            ? Math.max(0, Math.floor(Number(transportedDecision ? tick : outcome.generatedAtTick ?? tick)))
             : 0,
           peaceDecision: 'accepted',
         },
@@ -1698,6 +1761,7 @@ export function applyWorldPulseOutcomes({
     newsEntries,
     ...(lapsedOutcomeIds.length ? { lapsedOutcomeIds } : {}),
     ...(rumorSeedEntries.length ? { rumorSeedEntries } : {}),
+    ...(envoyEvidence.length ? { envoyEvidence } : {}),
   };
 }
 

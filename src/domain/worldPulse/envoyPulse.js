@@ -1,0 +1,255 @@
+/**
+ * envoyPulse.js — WR-7a's late pulse composition.
+ *
+ * The errand writer advances after rumors and beliefs, then an exact home
+ * delivery re-enters the ordinary outcome applicator. This keeps the peace
+ * engine's one mutation path while making the message physically travel.
+ */
+
+import { appendWizardNewsEntries } from '../region/index.js';
+import {
+  applyEnvoySilenceInference,
+  canApplyEnvoySilenceInference,
+  clearEnvoySilenceInference,
+} from './beliefMap.js';
+import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
+import {
+  envoyHomeOutcome,
+  envoyReturnAlreadyApplied,
+  envoyReturnVisibleAtHome,
+  envoyRumorPatchFor,
+  syncEnvoyNpcTransit,
+} from './envoyDiplomacy.js';
+import {
+  advanceEnvoyErrands,
+  envoyDiplomacyActive,
+  envoyErrandsOf,
+  markEnvoyHome,
+} from './envoyErrand.js';
+import { envoyNewsEntries } from './envoyNews.js';
+import { npcLedgerOf } from './npcLedger.js';
+
+/** @param {unknown} value @returns {Record<string, unknown>} */
+function asObject(value) {
+  return value && typeof value === 'object' && !Array.isArray(value)
+    ? /** @type {Record<string, unknown>} */ (value)
+    : {};
+}
+
+/** The exact post-sync H1 fact required before carried authority can land. */
+function envoyIsPhysicallyHome(worldState, delivery) {
+  const npcId = String(delivery?.npcId || '');
+  const originId = String(delivery?.from || '');
+  if (!npcId || !originId) return false;
+  const ledger = npcLedgerOf(worldState);
+  if (Object.prototype.hasOwnProperty.call(ledger.roamers, npcId)) return false;
+  const record = asObject(ledger.placed[npcId]);
+  return String(record.hostSettlementId || '') === originId
+    && Object.keys(asObject(record.transit)).length === 0
+    && Object.keys(asObject(record.residency)).length === 0
+    && Object.keys(asObject(record.dmAssignment)).length === 0
+    && record.whereaboutsUnknown !== true;
+}
+
+/** Build a current snapshot view without mutating the pulse's frozen input. */
+function snapshotWithUpdates(snapshot, settlementUpdates, worldState, regionalGraph) {
+  const updates = new Map((Array.isArray(settlementUpdates) ? settlementUpdates : [])
+    .map((row) => [String(row?.saveId || row?.id || ''), row])
+    .filter(([id]) => id));
+  const priorRows = Array.isArray(snapshot?.settlements) ? snapshot.settlements : [];
+  const priorById = new Map(priorRows.map((row) => [String(row?.id || ''), row]));
+  const ids = [...new Set([...priorById.keys(), ...updates.keys()])].filter(Boolean).sort();
+  const settlements = ids.map((id) => {
+    const prior = asObject(priorById.get(id));
+    const update = asObject(updates.get(id));
+    const settlement = update.settlement || prior.settlement || asObject(prior.save).settlement;
+    const save = Object.keys(asObject(update.save)).length
+      ? update.save
+      : Object.keys(asObject(prior.save)).length
+        ? { ...asObject(prior.save), settlement }
+        : undefined;
+    return {
+      ...prior,
+      id,
+      ...(save ? { save } : {}),
+      settlement,
+    };
+  });
+  return {
+    ...snapshot,
+    settlements,
+    byId: new Map(settlements.map((row) => [String(row.id), row])),
+    worldState,
+    regionalGraph,
+  };
+}
+
+/**
+ * Advance all active envoys once and apply any exact home deliveries through
+ * `applyWorldPulseOutcomes`. Dark/partial configurations return every input
+ * reference unchanged.
+ */
+export function advanceEnvoyDiplomacyPulse({
+  worldState,
+  snapshot,
+  regionalGraph,
+  wizardNews,
+  settlementUpdates,
+  tick,
+  now,
+  season = null,
+  simulationRules = null,
+} = {}) {
+  if (!envoyDiplomacyActive(worldState)) {
+    return {
+      worldState,
+      regionalGraph,
+      wizardNews,
+      settlementUpdates,
+      evidence: [],
+      autoApplied: [],
+      newsEntries: [],
+    };
+  }
+
+  const beforeAdvance = worldState;
+  const reservedSilenceTargets = new Set();
+  const advanced = advanceEnvoyErrands({
+    worldState,
+    tick,
+    rumorPatchFor: (errand, atTick) => envoyRumorPatchFor(beforeAdvance, errand, atTick),
+    canInferSilenceFor: (errand) => {
+      const observerId = String(errand.from || '');
+      const subjectId = String(errand.to || '');
+      const targetKey = `${observerId}\u0000${subjectId}`;
+      if (reservedSilenceTargets.has(targetKey)) return false;
+      const eligible = canApplyEnvoySilenceInference({
+        worldState: beforeAdvance,
+        observerId,
+        subjectId,
+        errandId: String(errand.id || ''),
+      });
+      if (eligible) reservedSilenceTargets.add(targetKey);
+      return eligible;
+    },
+    isReturnVisibleFor: (errand, atTick) => (
+      envoyReturnVisibleAtHome(beforeAdvance, errand, atTick)
+    ),
+  });
+  let state = advanced.worldState;
+  let graph = regionalGraph;
+  let feed = wizardNews;
+  let updates = settlementUpdates;
+  const evidence = [...advanced.transitionEvidence];
+  const autoApplied = [];
+  const newsEntries = [];
+
+  // A silence receipt is earned only if the home court had a real prior belief
+  // for the inference to amend. Missing belief remains silence, never a fabricated
+  // map row or a public assertion that a belief write occurred.
+  for (const row of advanced.silenceInferences) {
+    const inferred = applyEnvoySilenceInference({
+      worldState: /** @type {Record<string, unknown>} */ (state),
+      observerId: String(row.settlementId || ''),
+      subjectId: String(row.counterpartId || ''),
+      errandId: String(row.errandId || ''),
+      tick: Number(row.tick),
+    });
+    if (inferred.changed) {
+      state = inferred.worldState;
+      evidence.push(row);
+    }
+  }
+
+  // The errand is authoritative; H1 is its conserved positional projection.
+  // The synchronizer itself proves ownership before moving an active person, so
+  // missing or conflicting H1 state cannot be repaired into transport authority.
+  for (const errand of envoyErrandsOf(state)) {
+    state = syncEnvoyNpcTransit(state, errand, tick);
+  }
+
+  let currentSnapshot = snapshotWithUpdates(snapshot, updates, state, graph);
+  const transitionNews = envoyNewsEntries({ evidence, snapshot: currentSnapshot, now });
+  if (transitionNews.length) {
+    feed = appendWizardNewsEntries(feed, transitionNews, { now });
+    newsEntries.push(...transitionNews);
+  }
+
+  for (const delivery of advanced.homeDeliveries) {
+    const marked = markEnvoyHome({
+      worldState: /** @type {Record<string, unknown>} */ (state),
+      errandId: String(delivery.errandId || ''),
+      tick,
+    });
+    if (!marked.changed || !marked.errand) continue;
+    let tentativeState = /** @type {Record<string, unknown>} */ (marked.worldState);
+    const answered = clearEnvoySilenceInference({
+      worldState: tentativeState,
+      observerId: String(delivery.from || ''),
+      subjectId: String(delivery.to || ''),
+      errandId: String(delivery.errandId || ''),
+    });
+    if (answered.changed) tentativeState = answered.worldState;
+    tentativeState = /** @type {Record<string, unknown>} */ (
+      syncEnvoyNpcTransit(tentativeState, marked.errand, tick)
+    );
+    if (!envoyIsPhysicallyHome(tentativeState, delivery)) continue;
+    const outcome = envoyHomeOutcome(delivery);
+    if (!outcome) continue;
+    if (envoyReturnAlreadyApplied(tentativeState, outcome, graph)) {
+      // The mechanical fact is already in the immutable relationship history.
+      // Commit only this errand's exact home/H1/belief closure; replaying politics,
+      // recalls, settlement effects, or its pulse receipt would duplicate history.
+      state = tentativeState;
+    } else {
+      currentSnapshot = snapshotWithUpdates(snapshot, updates, tentativeState, graph);
+      const settlementMap = new Map((Array.isArray(updates) ? updates : [])
+        .map((row) => [String(row?.saveId || row?.id || ''), row])
+        .filter(([id]) => id));
+      const applied = applyWorldPulseOutcomes({
+        snapshot: currentSnapshot,
+        worldState: tentativeState,
+        regionalGraph: graph,
+        wizardNews: feed,
+        settlementMap,
+        outcomes: [outcome],
+        tick,
+        now,
+        season,
+        advanceNewsTick: false,
+        advanceRegionalImpacts: false,
+        simulationRules,
+      });
+      const landed = applied.autoApplied.some((row) => String(row?.id || '') === String(outcome.id))
+        && !(applied.lapsedOutcomeIds || []).includes(String(outcome.id));
+      if (!landed) continue;
+      state = applied.worldState;
+      graph = applied.regionalGraph;
+      feed = applied.wizardNews;
+      updates = applied.settlementUpdates;
+      autoApplied.push(...applied.autoApplied);
+      newsEntries.push(...applied.newsEntries);
+      if (Array.isArray(applied.envoyEvidence)) evidence.push(...applied.envoyEvidence);
+    }
+    evidence.push(...marked.evidence);
+    const homeNews = envoyNewsEntries({
+      evidence: marked.evidence,
+      snapshot: snapshotWithUpdates(snapshot, updates, state, graph),
+      now,
+    });
+    if (homeNews.length) {
+      feed = appendWizardNewsEntries(feed, homeNews, { now });
+      newsEntries.push(...homeNews);
+    }
+  }
+
+  return {
+    worldState: state,
+    regionalGraph: graph,
+    wizardNews: feed,
+    settlementUpdates: updates,
+    evidence,
+    autoApplied,
+    newsEntries,
+  };
+}

@@ -9,6 +9,7 @@ import { compareCodepoint } from '../deterministicSort.js';
 import { isWarReasonType } from './warReasonTaxonomy.js';
 import { normalizeJoinAnchor } from './warCoalitionLedger.js';
 import { migrateDispositionStats } from './dispositionLedger.js';
+import { normalizeEnvoyErrands } from './envoyErrand.js';
 
 export const WORLD_STATE_SCHEMA_VERSION = 2;
 
@@ -423,6 +424,12 @@ export const CONDITIONAL_LEDGER_KEYS = Object.freeze([
   // deepCloneConditionalLedger branch. Materialized ONLY under the memoryWeave flag;
   // absent/empty ⇒ key omitted ⇒ byte-identical-dormant. APPEND-ONLY. [lifecycle-2]
   'factionPairStates',
+  // WR-7a THE ERRAND — the only top-level conditional ARRAY.  Accepted peace
+  // offers can remain physically in transit across save/reload and undo, so the
+  // durable traveller rows belong in worldState rather than proposal or news
+  // state.  The owning normalizer validates, bounds, sorts, and deep-clones the
+  // closed records; absent/non-array/empty ⇒ key omitted. APPEND-ONLY.
+  'envoyErrands',
 ]);
 
 // The spatial-canon MARKER (Phase 5.5 KEYSTONE) is a conditionally-present SCALAR
@@ -466,10 +473,14 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     // The FROZEN keys (spatialDigest) are shared by reference (deep-frozen) so the
     // ~11 ensures per tick stop cloning the 47-400KB digest and hand back a stable
     // identity; every other conditional ledger deep-clones (mutable across ticks).
-    const materialized = FROZEN_CONDITIONAL_LEDGER_KEYS.has(key)
-      ? freezeConditionalLedger(raw?.[key])
-      : deepCloneConditionalLedger(raw?.[key]);
-    if (materialized !== undefined) conditionalLedgers[key] = materialized;
+    const materialized = key === 'envoyErrands'
+      ? normalizeEnvoyErrands(raw?.[key])
+      : FROZEN_CONDITIONAL_LEDGER_KEYS.has(key)
+        ? freezeConditionalLedger(raw?.[key])
+        : deepCloneConditionalLedger(raw?.[key]);
+    if (Array.isArray(materialized)
+      ? materialized.length > 0
+      : materialized !== undefined) conditionalLedgers[key] = materialized;
   }
   return {
     ...base,

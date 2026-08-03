@@ -651,6 +651,68 @@ export const WAR_RECEIPTS = Object.freeze({
     'The coalition settlement closed without settling this internal claim.',
     'The unpaid obligation may later be read as ingratitude; it is not yet a new war.',
   ],
+  // WR-7a THE ERRAND. These seven pools are the first physical peace-message
+  // states. `envoyReceipt` admits a family only when every identity/place it
+  // names is supplied by typed evidence; silence uses authored slotless siblings
+  // rather than an engine id, route token, or timing scalar.
+  envoy_departed: [
+    (x) => `${x.npc} left ${x.settlement} for ${x.counterpart}'s court by ${x.route}, carrying the seat's authority and nothing faster than a horse.`,
+    'The legate went out at first light with a sealed sheet and a picture of the world already going stale.',
+    'The town watched a man leave and understood that the war now moves at his pace.',
+    'He carries what the court believes, which is not the same as what is.',
+    'An errand is a week to a leg, and there are several legs.',
+    'By the time the seal leaves sight of the gate, the facts beneath it have begun to age.',
+  ],
+  envoy_on_the_road: [
+    (x) => `${x.npc} lies at ${x.route} this week; a road is a place, and he is in it.`,
+    'The legate is somewhere between the courts, which is the only honest thing anyone can say.',
+    'Nothing has changed at either hall, and something has changed everywhere he has passed.',
+    'News overtakes a man on a road. It always has.',
+    'He will arrive with the world he left and find another.',
+    'The horse must rest. The fighting need not.',
+    'Each mile carries the messenger farther from the council that chose the words.',
+    'A sealed message can be in motion while every power it names remains where it was.',
+    'Those who hear of the journey may know more of it than either waiting court.',
+    'The messenger has no new vote to cast between one mile and the next.',
+    'A public road gives a sealed purpose no promise of privacy.',
+    'The message moves; its authority waits.',
+  ],
+  envoy_returning: [
+    (x) => `${x.npc} rides for ${x.settlement} with the terms and is a richer target than he was going out.`,
+    'The return leg is the dangerous one, and every party that wanted the war continued knows it.',
+    'He carries the peace at the speed of a horse and the war at the speed of couriers.',
+    'The court that sent him is waiting on a road, which is a poor thing to wait on.',
+    'Nothing is settled until he tells it.',
+    'Every mile home carries an agreement closer to authority and leaves it exposed a little longer.',
+  ],
+  envoy_home: [
+    (x) => `${x.npc} came home to ${x.settlement} and told the terms, and only then did they mean anything.`,
+    "The sheet was read aloud in council, and the council heard one man's account of another court.",
+    'He arrived, and the world he described had moved on without either of them.',
+    'The errand is closed and the argument is beginning.',
+    'The peace exists now, and it exists because a man got back.',
+  ],
+  envoy_lost: [
+    (x) => `The errand closed without word: ${x.npc} did not reach ${x.counterpart} and has not come home.`,
+    'Nothing is known beyond the silence, and the record says exactly that.',
+    (x) => `${x.route} took him, in whatever sense roads take people; the receipt does not pretend to know.`,
+    'What the court does next rests on an absence.',
+    'A man is missing, and a peace is missing with him.',
+  ],
+  envoy_silence_inference: [
+    (x) => `No word has come from ${x.route}; the court fears the worst.`,
+    (x) => `The window for his return closed a fortnight ago, and the hall has begun to speak of ${x.npc} in the past tense.`,
+    'Silence is being read as an answer, and it may not be one.',
+    (x) => `${x.settlement} believes ${x.counterpart} has taken its legate. It believes this because nothing has arrived.`,
+    'The court is hardening around an absence, which is the cheapest thing in the world to be wrong about.',
+  ],
+  terms_never_reached: [
+    'The terms were agreed and the envoy never reached them.',
+    (x) => `Peace was made on ${x.route} and died there.`,
+    'Two courts have agreed and neither of them knows it.',
+    'The sheet exists. The war exists. Nothing has connected them.',
+    'What was signed at the parley is the property of the road now.',
+  ],
   // fear_of_dominance — authored in hegemonyFear.js (see HEGEMONY_RECEIPTS below).
 });
 
@@ -1332,6 +1394,100 @@ const WAR_COALITION_KIND_BY_ID = new Map(
  */
 export function warCoalitionReceipt(kind, seed, interp = {}) {
   const row = WAR_COALITION_KIND_BY_ID.get(String(kind));
+  if (!row) return null;
+  const eligible = row.pool
+    .map((_, templateIndex) => templateIndex)
+    .filter((templateIndex) => row.requiredSlots[templateIndex].every((slot) => (
+      typeof interp[slot] === 'string' && String(interp[slot]).trim().length > 0
+    )));
+  if (eligible.length === 0) return null;
+  const namespacedSeed = seed ? `${seed}#${row.kind}` : '';
+  const templateIndex = namespacedSeed ? eligible[fnv1a32(namespacedSeed) % eligible.length] : eligible[0];
+  const variant = row.pool[templateIndex];
+  const line = typeof variant === 'function' ? String(variant(interp)) : String(variant);
+  return {
+    kind: row.kind,
+    line,
+    familyId: `${row.kind}.${templateIndex + 1}`,
+    templateIndex,
+    significance: row.significance,
+    audience: row.audience,
+    section: row.section,
+  };
+}
+
+/**
+ * WR-7a's governed errand-reader kinds. Adjudication is authorized by the
+ * governed record; the moving-person beat files under events and the false-read
+ * beat is explicitly divination.
+ */
+/** @typedef {'envoy_departed'|'envoy_on_the_road'|'envoy_returning'|'envoy_home'|
+ * 'envoy_lost'|'envoy_silence_inference'|'terms_never_reached'} EnvoyReceiptKind */
+/** @typedef {{kind:EnvoyReceiptKind,significance:'major'|'notable'|'routine',
+ * audience:'public'|'dm-only',section:'events'|'divination'|'adjudication',
+ * pool:readonly ProseVariant[],requiredSlots:ReadonlyArray<readonly string[]>}} EnvoyReceiptRegistryEntry */
+
+/**
+ * @param {EnvoyReceiptKind} kind
+ * @param {'major'|'notable'|'routine'} significance
+ * @param {'events'|'divination'|'adjudication'} section
+ * @param {ReadonlyArray<readonly string[]>} requiredSlots
+ * @param {'public'|'dm-only'} [audience]
+ * @returns {Readonly<EnvoyReceiptRegistryEntry>}
+ */
+function envoyKindRow(kind, significance, section, requiredSlots, audience = 'public') {
+  return Object.freeze({
+    kind,
+    significance,
+    audience,
+    section,
+    pool: /** @type {readonly ProseVariant[]} */ (WAR_RECEIPTS[kind]),
+    requiredSlots: Object.freeze(
+      requiredSlots.map((slots) => Object.freeze([...slots])),
+    ),
+  });
+}
+
+/** @type {ReadonlyArray<Readonly<EnvoyReceiptRegistryEntry>>} */
+export const ENVOY_KIND_REGISTRY = Object.freeze([
+  envoyKindRow('envoy_departed', 'notable', 'adjudication',
+    [['npc', 'settlement', 'counterpart', 'route'], [], [], [], [], []]),
+  envoyKindRow('envoy_on_the_road', 'routine', 'events',
+    [['npc', 'route'], [], [], [], [], [], [], [], [], [], [], []]),
+  envoyKindRow('envoy_returning', 'notable', 'adjudication',
+    [['npc', 'settlement'], [], [], [], [], []]),
+  envoyKindRow('envoy_home', 'major', 'adjudication',
+    [['npc', 'settlement'], [], [], [], []]),
+  envoyKindRow('envoy_lost', 'major', 'adjudication',
+    [['npc', 'counterpart'], [], ['route'], [], []], 'dm-only'),
+  envoyKindRow('envoy_silence_inference', 'major', 'divination',
+    [['route'], ['npc'], [], ['settlement', 'counterpart'], []]),
+  envoyKindRow('terms_never_reached', 'major', 'adjudication',
+    [[], ['route'], [], [], []], 'dm-only'),
+]);
+
+/** The exact WR-7a reader-kind set. */
+export const ENVOY_KINDS = Object.freeze(ENVOY_KIND_REGISTRY.map((row) => row.kind));
+
+/** @type {ReadonlyMap<string, Readonly<EnvoyReceiptRegistryEntry>>} */
+const ENVOY_KIND_BY_ID = new Map(
+  /** @type {Array<[string, Readonly<EnvoyReceiptRegistryEntry>]>} */ (
+    ENVOY_KIND_REGISTRY.map((row) => [row.kind, row])
+  ),
+);
+
+/**
+ * Resolve one WR-7a sentence from exact supplied truths. Missing names remove
+ * only the families that use them; unknown kinds stay closed.
+ *
+ * @param {string} kind
+ * @param {string|null|undefined} seed
+ * @param {Record<string, unknown>} [interp]
+ * @returns {{kind:string,line:string,familyId:string,templateIndex:number,
+ *   significance:string,audience:string,section:string} | null}
+ */
+export function envoyReceipt(kind, seed, interp = {}) {
+  const row = ENVOY_KIND_BY_ID.get(String(kind));
   if (!row) return null;
   const eligible = row.pool
     .map((_, templateIndex) => templateIndex)

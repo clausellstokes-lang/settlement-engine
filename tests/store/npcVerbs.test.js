@@ -41,6 +41,20 @@ import { createNpcVerbsSlice } from '../../src/store/npcVerbsSlice.js';
 import { graduateNpc, addExclusionEdge, npcLedgerOf } from '../../src/domain/worldPulse/npcLedger.js';
 import { npcRulingsOf } from '../../src/domain/worldPulse/npcRulingRegister.js';
 import { NPC_CONSEQUENCE_KEY } from '../../src/domain/worldPulse/npcVerdictApply.js';
+import { advanceAssignedNpcTransits } from '../../src/domain/worldPulse/npcDmVerbs.js';
+import {
+  ENVOY_REQUIRED_RULES,
+  advanceEnvoyErrands,
+  beginEnvoyReturn,
+  envoyErrandsOf,
+  mintEnvoyErrand,
+} from '../../src/domain/worldPulse/envoyErrand.js';
+import {
+  emptyRouteNetwork,
+  routeEdge,
+  withRouteEdges,
+  writeRouteNetwork,
+} from '../../src/domain/worldPulse/routeNetworkLedger.js';
 
 function installLocalStorage() {
   const data = new Map();
@@ -122,6 +136,121 @@ function seedRealm(store, { wnpcIdOut } = {}) {
   return g.wnpcId;
 }
 
+function lightAssignmentRoutes(store, { connected = true } = {}) {
+  store.setState((state) => {
+    const prior = state.campaigns[0].worldState;
+    const lit = {
+      ...prior,
+      simulationRules: { ...prior.simulationRules, routeLifecycleEnabled: true },
+    };
+    if (!connected) {
+      state.campaigns[0].worldState = lit;
+      return;
+    }
+    const edge = routeEdge({
+      a: 'sav_kelder', b: 'sav_thorn', grade: 'road', mode: 'land',
+      provenance: 'generated', flavor: 'genesis', tick: 0,
+    });
+    state.campaigns[0].worldState = writeRouteNetwork(
+      lit,
+      withRouteEdges(emptyRouteNetwork(), [edge]),
+    );
+  });
+}
+
+/** Add one terms-bearing return journey to the store's real campaign world. */
+function seedReturningEnvoy(store) {
+  const wnpcId = seedRealm(store);
+  const relationshipKey = 'sav_kelder::sav_thorn';
+  const outcome = {
+    id: 'peace.store-kill.1',
+    generatedAtTick: 20,
+    type: 'relationship',
+    candidateType: 'strategy_sue_for_peace',
+    ruleFamily: 'strategy',
+    targetSaveId: 'sav_kelder',
+    severity: 0.6,
+    relationshipKey,
+    relationshipPatch: { proposedRelationshipType: 'neutral', trajectory: 'transitioning' },
+    proposalPayload: {
+      kind: 'relationship_label_change', relationshipKey,
+      fromType: 'hostile', toType: 'neutral', peaceOffer: true,
+      offererId: 'sav_kelder', targetId: 'sav_thorn',
+      peaceFrontOwnerId: 'sav_kelder', peaceFrontSinceTick: 8,
+      reason: 'Kelder offers terms to Thornreach.',
+    },
+  };
+  const worldState = campaignOf(store).worldState;
+  const lit = {
+    ...worldState,
+    simulationRules: {
+      ...worldState.simulationRules,
+      ...Object.fromEntries(ENVOY_REQUIRED_RULES.map((key) => [key, true])),
+    },
+  };
+  const minted = mintEnvoyErrand({
+    worldState: lit,
+    outcome,
+    acceptance: {
+      accepted: true,
+      offererId: 'sav_kelder',
+      targetId: 'sav_thorn',
+      receipt: {
+        id: 'decision.store-kill', kind: 'war_peace_acceptance_read', tick: 20,
+        offerId: outcome.id, offererId: 'sav_kelder', targetId: 'sav_thorn',
+        decision: 'accept', actualAction: 'peace', decidingTerm: 'cause',
+        reason: 'Both courts accept the carried peace ruling.',
+        bands: { cause: 'live', cost_to_continue: 'pressing', cost_to_stop: 'quiet', momentum: 'present' },
+      },
+      offererRead: {
+        id: 'read.store-kill.home', kind: 'war_termination_read', tick: 20,
+        attackerId: 'sav_kelder', targetId: 'sav_thorn',
+        settlementIds: ['sav_kelder', 'sav_thorn'],
+      },
+      termination: {
+        receipt: {
+          id: 'read.store-kill.away', kind: 'war_termination_read', tick: 20,
+          attackerId: 'sav_thorn', targetId: 'sav_kelder',
+          settlementIds: ['sav_thorn', 'sav_kelder'],
+        },
+      },
+      inheritedDemand: null,
+      coalitionPeaceExpenditures: [],
+    },
+    npcId: wnpcId,
+    npcName: 'Maera Voss',
+    fromName: 'Kelder',
+    toName: 'Thornreach',
+    snapshot: {
+      storesBand: 'thin', strengthBand: 'ready', moraleExhaustionBand: 'pressing',
+      foundingCauseStatus: 'live', believedRatioBand: 'matched',
+    },
+    routePlan: {
+      legs: [{ fromId: 'sav_kelder', toId: 'sav_thorn', departTick: 20, arrivalTick: 22 }],
+      expectedReturnTick: 30,
+      routeRef: { id: 'road.kelder-thorn', name: 'Thorn Road' },
+    },
+    tick: 20,
+  });
+  expect(minted.reason).toBe('minted');
+  const parlay = advanceEnvoyErrands({ worldState: minted.worldState, tick: 22 });
+  const returning = beginEnvoyReturn({
+    worldState: parlay.worldState,
+    errandId: minted.errand.id,
+    routePlan: {
+      legs: [{ fromId: 'sav_thorn', toId: 'sav_kelder', departTick: 23, arrivalTick: 26 }],
+      expectedReturnTick: 26,
+      routeRef: { id: 'road.kelder-thorn', name: 'Thorn Road' },
+    },
+    termSheet: { id: 'terms.store-kill', clauses: [{ kind: 'ceasefire' }] },
+    tick: 23,
+  });
+  store.setState((state) => {
+    state.campaigns[0].worldState = { ...returning.worldState, tick: 24 };
+  });
+  return wnpcId;
+}
+
 const campaignOf = store => store.getState().campaigns[0];
 const kelderOf = store => store.getState().savedSettlements[0];
 
@@ -149,6 +278,69 @@ describe('W-H4 store wiring — the three verbs', () => {
     expect(npcRulingsOf(campaignOf(store).worldState)).toHaveLength(1);
   });
 
+  test('route-lit ASSIGN persists a one-week-or-longer lived leg and undo restores the origin', async () => {
+    const store = makeStore();
+    const wnpcId = seedRealm(store);
+    lightAssignmentRoutes(store);
+
+    const assigned = await store.getState().assignNpc('camp-1', {
+      wnpcId, settlementId: 'sav_thorn', overrideExclusions: true,
+    });
+    expect(assigned).toMatchObject({ ok: true, receipt: { assignmentState: 'in_transit' } });
+    const travelling = npcLedgerOf(campaignOf(store).worldState).roamers[wnpcId];
+    expect(travelling.transit).toMatchObject({
+      fromId: 'sav_kelder', toId: 'sav_thorn', departTick: 20,
+    });
+    expect(travelling.transit.arrivalTick).toBeGreaterThanOrEqual(21);
+    expect(npcLedgerOf(campaignOf(store).worldState).placed[wnpcId]).toBeUndefined();
+
+    const undone = await store.getState().undoLastNpcVerb('camp-1');
+    expect(undone).toMatchObject({ ok: true, verb: 'assign' });
+    expect(npcLedgerOf(campaignOf(store).worldState).placed[wnpcId]).toMatchObject({
+      hostSettlementId: 'sav_kelder', sinceTick: 4,
+    });
+    expect(npcLedgerOf(campaignOf(store).worldState).placed[wnpcId]).not.toHaveProperty('transit');
+  });
+
+  test('route-lit ASSIGN with no lived path fails closed and does not grow the undo ring', async () => {
+    const store = makeStore();
+    const wnpcId = seedRealm(store);
+    lightAssignmentRoutes(store, { connected: false });
+    const before = JSON.stringify(campaignOf(store).worldState);
+
+    const refusedRun = await store.getState().assignNpc('camp-1', {
+      wnpcId, settlementId: 'sav_thorn', overrideExclusions: true,
+    });
+    expect(refusedRun).toMatchObject({ ok: false, verb: 'assign', refusal: 'no_route' });
+    expect(JSON.stringify(campaignOf(store).worldState)).toBe(before);
+    expect(store.getState().npcVerbUndoStack).toHaveLength(0);
+    expect(npcRulingsOf(campaignOf(store).worldState)).toHaveLength(0);
+  });
+
+  test('an assignment that has already arrived rejects undo atomically and keeps its ring entry', async () => {
+    const store = makeStore();
+    const wnpcId = seedRealm(store);
+    lightAssignmentRoutes(store);
+    await store.getState().assignNpc('camp-1', {
+      wnpcId, settlementId: 'sav_thorn', overrideExclusions: true,
+    });
+    const arrivalTick = npcLedgerOf(campaignOf(store).worldState).roamers[wnpcId].transit.arrivalTick;
+    store.setState((state) => {
+      state.campaigns[0].worldState = advanceAssignedNpcTransits({
+        worldState: state.campaigns[0].worldState,
+        tick: arrivalTick,
+      }).worldState;
+    });
+    const before = JSON.stringify(campaignOf(store).worldState);
+
+    const rejected = await store.getState().undoLastNpcVerb('camp-1');
+    expect(rejected).toMatchObject({ ok: false, verb: 'assign', refusal: 'undo_conflict' });
+    expect(JSON.stringify(campaignOf(store).worldState)).toBe(before);
+    expect(store.getState().npcVerbUndoStack).toHaveLength(1);
+    expect(npcLedgerOf(campaignOf(store).worldState).placed[wnpcId].hostSettlementId)
+      .toBe('sav_thorn');
+  });
+
   test('KILL reaches the ledger, the saved row AND the live view, and undo reverses all three', async () => {
     const store = makeStore();
     const wnpcId = seedRealm(store);
@@ -168,6 +360,53 @@ describe('W-H4 store wiring — the three verbs', () => {
     expect(kelderOf(store).settlement.npcs.find(n => n.id === 'npc_3')[NPC_CONSEQUENCE_KEY].deceasedByDm).toBeUndefined();
     expect(store.getState().settlement.npcs.find(n => n.id === 'npc_3')[NPC_CONSEQUENCE_KEY].deceasedByDm).toBeUndefined();
     expect(npcRulingsOf(campaignOf(store).worldState)).toHaveLength(0);
+  });
+
+  test('KILL carries private envoy loss evidence without publishing remote truth, and undo restores it', async () => {
+    const store = makeStore();
+    const wnpcId = seedReturningEnvoy(store);
+
+    const killed = await store.getState().killNpc('camp-1', { wnpcId });
+    expect(killed.ok).toBe(true);
+    expect(killed.envoyEvidence.map((row) => row.kind)).toEqual([
+      'envoy_lost',
+      'terms_never_reached',
+    ]);
+    expect(killed).not.toHaveProperty('envoyNews');
+    expect(envoyErrandsOf(campaignOf(store).worldState)[0]).toMatchObject({
+      npcId: wnpcId,
+      state: 'lost',
+      lossCause: 'killed',
+    });
+    expect(npcRulingsOf(campaignOf(store).worldState).map((row) => row.kind || row.candidateType))
+      .toEqual(['npc_death']);
+
+    const undone = await store.getState().undoLastNpcVerb('camp-1');
+    expect(undone).toMatchObject({ ok: true, verb: 'kill' });
+    expect(envoyErrandsOf(campaignOf(store).worldState)[0]).toMatchObject({ state: 'returning' });
+    expect(npcLedgerOf(campaignOf(store).worldState).placed[wnpcId]).toBeTruthy();
+    expect(npcRulingsOf(campaignOf(store).worldState)).toHaveLength(0);
+  });
+
+  test('a stale envoy closure keeps the store undo and settlement death intact', async () => {
+    const store = makeStore();
+    const wnpcId = seedReturningEnvoy(store);
+    await store.getState().killNpc('camp-1', { wnpcId });
+    store.setState((state) => {
+      const row = state.campaigns[0].worldState.envoyErrands[0];
+      row.lostTick = 25;
+      row.closedTick = 25;
+    });
+    const beforeWorld = JSON.stringify(campaignOf(store).worldState);
+    const beforeSettlement = JSON.stringify(kelderOf(store).settlement);
+
+    const rejected = await store.getState().undoLastNpcVerb('camp-1');
+    expect(rejected).toMatchObject({ ok: false, verb: 'kill', refusal: 'undo_conflict' });
+    expect(JSON.stringify(campaignOf(store).worldState)).toBe(beforeWorld);
+    expect(JSON.stringify(kelderOf(store).settlement)).toBe(beforeSettlement);
+    expect(store.getState().npcVerbUndoStack).toHaveLength(1);
+    expect(envoyErrandsOf(campaignOf(store).worldState)[0]).toMatchObject({ state: 'lost', lostTick: 25 });
+    expect(npcLedgerOf(campaignOf(store).worldState).placed[wnpcId]).toBeUndefined();
   });
 
   test('PARDON lifts the edict and releases the hold, and undo restores both', async () => {

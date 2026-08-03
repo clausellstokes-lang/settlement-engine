@@ -424,6 +424,13 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // exact true, and lighting waits for WR-9's eligible-call, decision-mix,
     // expenditure, payment, and governed-family observations.
     coalitionLedgerEnabled: false,
+    // WR-7: H1-durable peace envoys moving over the lived route network,
+    // DECLARED DARK. The key is virtual (absent from defaults and every other
+    // preset) and every behavior mouth requires it, the war/peace stack, NPC
+    // consequences, and route lifecycle to be exact true. Declaring false here
+    // exposes the lane to certification without lighting it or changing preset
+    // identity; WR-9 must measure the seven governed errand families first.
+    envoyDiplomacyEnabled: false,
     seasonsEnabled: true,
     // Owner ruling (golden sign-off — LIGHT EVERYTHING RECOMMENDED): the ceiling
     // runs the calamity mover. disastersEnabled is an opt-in key ABSENT from

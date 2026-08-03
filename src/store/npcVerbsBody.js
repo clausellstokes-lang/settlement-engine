@@ -52,6 +52,8 @@ export const NPC_VERB_UNDO_DEPTH = 40;
  * @property {string|null} refusal   the refusal word when ok is false, null when it landed
  * @property {Record<string, unknown>|null} receipt  the ruling's receipt when it landed
  * @property {Record<string, unknown>|null} news     the address-chain item when it landed
+ * @property {ReadonlyArray<Record<string, unknown>>} [envoyEvidence] WR-7a loss
+ *   evidence when KILL closes a live errand
  */
 
 /** The refused result, shaped like the granted one so a caller never branches on shape.
@@ -197,7 +199,16 @@ export async function runKillNpc({ set, campaignId, wnpcId }) {
       return;
     }
     writes = commitVerbResult({ state, campaign, result, settlementId: hostId, priorSettlement });
-    out = { ok: true, verb: 'kill', refusal: null, receipt: result.receipt, news: result.news };
+    out = {
+      ok: true,
+      verb: 'kill',
+      refusal: null,
+      receipt: result.receipt,
+      news: result.news,
+      ...(Array.isArray(result.envoyEvidence)
+        ? { envoyEvidence: result.envoyEvidence }
+        : {}),
+    };
   });
   await flushSaveWrites(writes);
   return out;
@@ -267,6 +278,13 @@ export async function runUndoLastNpcVerb({ set, campaignId }) {
     if (!campaign) return;
     const worldState = ensureWorldState(campaign.worldState, campaign);
     const back = undoDmVerb({ worldState, undo: entry.undo });
+    // A typed inverse may reject after a later writer changes one of its exact
+    // conflict tokens. Keep the ring and both persistence halves untouched; popping a
+    // rejected inverse would advertise success while only the settlement snapshot moved.
+    if (!back.changed) {
+      out = { ok: false, verb: back.verb, refusal: 'undo_conflict', receipt: null, news: null };
+      return;
+    }
     campaign.worldState = back.worldState;
     campaign.updatedAt = new Date().toISOString();
     if (entry.settlementId) {

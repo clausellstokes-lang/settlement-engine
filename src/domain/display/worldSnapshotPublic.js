@@ -93,6 +93,7 @@ export const WORLD_SNAPSHOT_HARD_DENY = Object.freeze([
   'narrativeTempo',
   'politicsLedgers',
   'factionPairStates',
+  'envoyErrands',
 ]);
 
 /** simulationRules keys safe to surface publicly (coarse world-shape toggles the

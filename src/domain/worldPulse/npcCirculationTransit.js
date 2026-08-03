@@ -43,20 +43,14 @@
  */
 
 import { candidateRoutes, hopWeeks, pathCost } from '../spatial/distanceRead.js';
-import { clamp01 } from '../../kernel/math.js';
 import { NPC_CONSEQUENCES_TUNING } from './npcConsequencesTuning.js';
+import {
+  namedPersonLegPosition,
+  openNamedPersonLeg,
+} from './namedPersonTransit.js';
 
 /** @typedef {import('../spatial/distanceRead.js').SpatialDigest} SpatialDigest */
-/** @typedef {import('./npcLedger.js').NpcLedger} NpcLedger */
-
-/**
- * @typedef {Object} WanderLeg
- * @property {string} fromId
- * @property {string} toId
- * @property {number} departTick
- * @property {number} arrivalTick
- * @property {true} [hidden]
- */
+/** @typedef {import('./namedPersonTransit.js').NamedPersonLeg} WanderLeg */
 
 /** @param {unknown} v @returns {string} */
 function text(v) {
@@ -139,17 +133,14 @@ export function planWanderLeg({ digest, fromId, destId, tick, hiddenHopsOf = nul
   if (!hop) return null;
   const depart = tickOf(tick);
   const nominal = hopWeeks(/** @type {SpatialDigest} */ (digest), text(fromId), hop.toId);
-  const weeks = Math.max(1, Number.isFinite(nominal) && nominal != null ? Number(nominal) : 1);
-  const cost = hop.hidden ? weeks * NPC_CONSEQUENCES_TUNING.HIDDEN_PATH_SLOWDOWN : weeks;
-  /** @type {Record<string, unknown>} */
-  const leg = {
+  return /** @type {WanderLeg} */ (openNamedPersonLeg({
     fromId: text(fromId),
     toId: hop.toId,
     departTick: depart,
-    arrivalTick: depart + Math.max(1, Math.floor(cost)),
-  };
-  if (hop.hidden) leg.hidden = true;
-  return /** @type {WanderLeg} */ (leg);
+    nominalWeeks: nominal,
+    gradeMultiplier: hop.hidden ? NPC_CONSEQUENCES_TUNING.HIDDEN_PATH_SLOWDOWN : 1,
+    hidden: hop.hidden,
+  }));
 }
 
 /**
@@ -166,14 +157,7 @@ export function planWanderLeg({ digest, fromId, destId, tick, hiddenHopsOf = nul
  * @returns {{ arrived: boolean, atSettlementId: string|null, progress01: number }}
  */
 export function wanderPosition(leg, tick) {
-  if (!leg || !text(leg.fromId) || !text(leg.toId)) {
-    return { arrived: true, atSettlementId: null, progress01: 1 };
-  }
-  const now = tickOf(tick);
-  const depart = tickOf(leg.departTick);
-  const arrive = Math.max(depart + 1, tickOf(leg.arrivalTick));
-  if (now >= arrive) return { arrived: true, atSettlementId: text(leg.toId), progress01: 1 };
-  return { arrived: false, atSettlementId: null, progress01: clamp01((now - depart) / (arrive - depart)) };
+  return namedPersonLegPosition(leg, tick);
 }
 
 /**

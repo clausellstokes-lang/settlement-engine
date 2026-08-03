@@ -421,6 +421,25 @@ describe('world-pulse record modes — central lanes', () => {
       .toBe('mechanical');
   });
 
+  test('interval collapse carries interior envoy evidence once in chronological producer-id order', () => {
+    const departed = { id: 'envoy.evidence.departed', kind: 'envoy_departed', tick: 1 };
+    const silence = { id: 'envoy.evidence.silence', kind: 'envoy_silence_inference', tick: 2 };
+    const home = { id: 'envoy.evidence.home', kind: 'envoy_home', tick: 3 };
+    const collapsed = collapseIntervalHistory({
+      pulseHistory: [
+        { tick: 1, envoyEvidence: [departed] },
+        { tick: 2, envoyEvidence: [silence, departed] },
+        { tick: 3, envoyEvidence: [home, silence] },
+        { tick: 4 },
+      ],
+    }, 4, { entries: [] });
+    expect(collapsed.pulseHistory).toHaveLength(1);
+    expect(collapsed.pulseHistory[0].envoyEvidence).toEqual([departed, silence, home]);
+
+    const empty = collapseIntervalHistory({ pulseHistory: [{ tick: 1 }, { tick: 2 }] }, 2, { entries: [] });
+    expect(empty.pulseHistory[0]).not.toHaveProperty('envoyEvidence');
+  });
+
   test('interval collapse cannot let low-score reconstructed rows crowd out a significant seed', () => {
     const lowOutcomes = Array.from({ length: 72 }, (_, index) =>
       compactOutcomeForHistory({

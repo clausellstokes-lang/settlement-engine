@@ -93,6 +93,8 @@ import {
 } from './warCoalitionPulse.js';
 import { applyVerdictWarDissolutions } from './warRulingsEvidence.js';
 import { warRulingNewsEntries } from './warRulingsNews.js';
+import { advanceEnvoyDiplomacyPulse } from './envoyPulse.js';
+import { advanceAssignedNpcTransits } from './npcDmVerbs.js';
 import { momentumActive, commitmentDepositsFor, advanceCommitments, entityThreshold, makeCommitmentDiscountFn, advanceMomentumCracks, MOMENTUM_TUNING } from './momentum.js';
 import { advanceIntervention, interventionActive } from './convergence.js';
 import { advanceNaval, navalActive } from './navalKernel.js';
@@ -1418,7 +1420,8 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     season: roadSeason,
     simulationRules,
   });
-  const appliedCoalitionEvidence = warCoalitionEvidenceFromOutcomes(applied.autoApplied);
+  let envoyEvidence = Array.isArray(applied.envoyEvidence) ? [...applied.envoyEvidence] : [];
+  let lateEnvoyApplied = [];
   /** Direct evidence returned by late movers rather than generic outcomes. */
   let treatyCoalitionEvidence = [];
   let reasonCoalitionEvidence = [];
@@ -1968,6 +1971,45 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       }
     }
   }
+  // WR-7a — THE PHYSICAL MESSAGE. Rumors and beliefs move first so the
+  // traveler's closed picture can hear only what is available where they stand.
+  // A home delivery then re-enters the ordinary outcome applicator; until that
+  // exact moment the hostile edge, political books, stressors, and armies remain
+  // untouched. Dark/partial configurations return every reference unchanged.
+  {
+    const envoys = advanceEnvoyDiplomacyPulse({
+      worldState: memoryState,
+      snapshot: postTimeSnapshot,
+      regionalGraph: applied.regionalGraph,
+      wizardNews,
+      settlementUpdates,
+      tick: worldState.tick,
+      now,
+      season: roadSeason,
+      simulationRules,
+    });
+    memoryState = envoys.worldState;
+    settlementUpdates = envoys.settlementUpdates;
+    wizardNews = envoys.wizardNews;
+    applied.regionalGraph = envoys.regionalGraph;
+    if (envoys.evidence.length) envoyEvidence.push(...envoys.evidence);
+    if (envoys.autoApplied.length) {
+      lateEnvoyApplied = [...envoys.autoApplied];
+      applied.autoApplied.push(...envoys.autoApplied);
+    }
+    if (envoys.newsEntries.length) {
+      applied.newsEntries.push(...envoys.newsEntries);
+      if (Array.isArray(newsReceiptSink)) newsReceiptSink.push(...envoys.newsEntries);
+    }
+  }
+  // WR-7a — DM ASSIGN is also lived named-person transit while J4 is lit.
+  // Advance at most one route transition after the envoy projection so both
+  // named-person lanes read the same settled rumor/belief/world state.
+  memoryState = advanceAssignedNpcTransits({
+    worldState: memoryState,
+    tick: worldState.tick,
+    season: roadSeason,
+  }).worldState;
   // W-DOCTRINE-2 — INFORMATION STATECRAFT (DESIGN_INFORMATION_STATECRAFT.md). AFTER the
   // belief advance (the LIE writes onto/against the just-formed beliefs): runs the LIE
   // lifecycle (seed a garrison bluff into believed-hostile neighbours → contradict →
@@ -2622,6 +2664,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   }
   // @pulse-stage: finalize_receipt
   const finalRegionalGraph = applyLineageBirthsToGraph(applied.regionalGraph, memberBirths, now);
+  const appliedCoalitionEvidence = warCoalitionEvidenceFromOutcomes(applied.autoApplied);
   const warCoalitionEvidence = mergeWarCoalitionEvidence(
     standingCoalitionTransitionEvidence,
     appliedCoalitionEvidence,
@@ -2633,9 +2676,21 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       .map((row) => String(row?.attackerId || ''))
       .filter(Boolean))].sort()
     : [];
+  const envoyPulseRecord = {
+    ...pulseRecord,
+    // Late home delivery re-enters the ordinary apply lane after the initial
+    // shell was assembled, so refresh every mechanical receipt field from the
+    // final applied census rather than leaving state and evidence divergent.
+    ...mechanicalPulseRecordFields({
+      applied,
+      selectedForApply: [...selectedForApply, ...lateEnvoyApplied],
+    }),
+    ...(envoyEvidence.length ? { envoyEvidence } : {}),
+    impactDigest: compactImpactDigest(applied.newsEntries),
+  };
   const coalitionReturnRecord = returnedSettlementIds.length
-    ? { ...pulseRecord, warReturnedSettlementIds: returnedSettlementIds }
-    : pulseRecord;
+    ? { ...envoyPulseRecord, warReturnedSettlementIds: returnedSettlementIds }
+    : envoyPulseRecord;
   const coalitionPulseRecord = warCoalitionEvidence.length
     // Standing rows are already transition-only (one stay per joined episode;
     // expenditure only on a worsening band), while the other producers are

@@ -16,6 +16,7 @@ import {
 } from '../../src/domain/roads/state.js';
 import { embassySuitPeaceMult, embassyPairKey, EMBASSY_LEDGER_KEY } from '../../src/domain/roads/embassyLedger.js';
 import { rumorEventKey } from '../../src/domain/spatial/rumorNetwork.js';
+import { ENVOY_REQUIRED_RULES } from '../../src/domain/worldPulse/envoyErrand.js';
 
 // Four settlements: h (home, the suer), t (the war target), x (a road waystation), p (a third power).
 const SIDS = ['h', 't', 'x', 'p'];
@@ -26,6 +27,9 @@ const DIGEST = (() => {
 })();
 const TICK = 60;
 const MID = 'road.h.h:env.40';
+const WR7A_RULES = Object.freeze(Object.fromEntries(
+  ENVOY_REQUIRED_RULES.map((rule) => [rule, true]),
+));
 
 const envoy = (over = {}) => ({ id: 'env', name: 'The Envoy', importance: 'notable', category: 'government', personality: { dominant: 'bold' }, faction: 'Crown', ...over });
 function town(name, npcs = [], over = {}) {
@@ -151,6 +155,54 @@ describe('§11b GENESIS — the peace embassy', () => {
     const missions = Object.values(r.worldState?.spatialLedgers?.roads?.missions || {});
     expect(missions.length, 'the besieged court still dispatched (only the embassy)').toBe(1);
     expect(missions[0].purpose.kind).toBe('embassy');
+  });
+
+  it('WR-7a exact-lit suppresses NEW legacy Roads embassies', () => {
+    const seed = seedThatFires('h:env');
+    const world = worldFor({
+      seed,
+      calendarWeeks: 51,
+      rules: WR7A_RULES,
+    });
+    const r = advanceRoads(argsFor(world, graphWith(), [envoy()]));
+    const missions = Object.values(r.worldState?.spatialLedgers?.roads?.missions || {});
+    expect(missions.some((m) => m.purpose?.kind === 'embassy')).toBe(false);
+    expect((r.newsEntries || []).some((e) => e.tags?.includes('embassy_departure'))).toBe(false);
+  });
+
+  it('every partial WR-7a configuration preserves legacy Roads embassy genesis', () => {
+    const seed = seedThatFires('h:env');
+    for (const missingRule of ENVOY_REQUIRED_RULES) {
+      const world = worldFor({
+        seed,
+        calendarWeeks: 51,
+        rules: { ...WR7A_RULES, [missingRule]: false },
+      });
+      const r = advanceRoads(argsFor(world, graphWith(), [envoy()]));
+      const missions = Object.values(r.worldState?.spatialLedgers?.roads?.missions || {});
+      expect(
+        missions.some((m) => m.purpose?.kind === 'embassy'),
+        `legacy embassy was suppressed while ${missingRule} was not exact true`,
+      ).toBe(true);
+      expect(
+        (r.newsEntries || []).some((e) => e.tags?.includes('embassy_departure')),
+        `legacy embassy departure went silent while ${missingRule} was not exact true`,
+      ).toBe(true);
+    }
+  });
+
+  it('WR-7a exact-lit lets a legacy embassy already on the road finish its lifecycle', () => {
+    const existing = embassyMission({ phase: 'returning', legArrivalTick: TICK + 20 });
+    const world = worldFor({
+      seed: 'existing-embassy',
+      mission: existing,
+      rules: WR7A_RULES,
+    });
+    const r = advanceRoads(argsFor(world, graphWith(), [envoy()]));
+    const mission = r.worldState?.spatialLedgers?.roads?.missions?.[MID];
+    expect(mission, 'the pre-existing mission is carried forward').toBeTruthy();
+    expect(mission.purpose.kind).toBe('embassy');
+    expect(mission.phase).toBe('returning');
   });
 });
 

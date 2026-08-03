@@ -21,7 +21,11 @@ import { hopWeeks } from '../spatial/distanceRead.js';
 import { seaEdgesOfPath, activeBlockadeTargets, stormMultOf } from '../spatial/navalLayer.js';
 import { embattlementLevel } from '../spatial/embattlement.js';
 import { relationshipTypeBetween, atOpenWar } from './embassyHazard.js';
-import { ROADS_TUNING, asObject, num, clampNum, clamp01, cmp, captureProbability } from './state.js';
+import { ROADS_TUNING, asObject, num, clampNum, cmp, captureProbability } from './state.js';
+import {
+  namedPersonLegTicks,
+  namedPersonPathPosition,
+} from '../worldPulse/namedPersonTransit.js';
 
 // ── THE DORMANCY GATE (§1 law 1) ────────────────────────────────────────────────
 /**
@@ -84,19 +88,28 @@ export function currentSeaHop(m, weekClock, digest, season) {
   const path = Array.isArray(m.path) ? /** @type {string[]} */ (m.path).map(String) : [];
   const last = path.length - 1;
   if (last < 1 || m.phase === 'visiting') return { overSea: false, a: '', b: '' };
-  let nodeIdx;
+  let position;
   if (m.phase === 'outbound') {
-    const span = Math.max(1, num(m.legArrivalTick, 0) - num(m.departTick, 0));
-    const f = clamp01((weekClock - num(m.departTick, 0)) / span);
-    nodeIdx = Math.floor(f * last);
+    position = namedPersonPathPosition({
+      path,
+      departTick: num(m.departTick, 0),
+      arrivalTick: num(m.legArrivalTick, 0),
+      tick: weekClock,
+    });
   } else { // returning — reverse the frozen path
-    const retWeeks = Math.max(1, num(hopWeeks(digest, String(m.destId), String(m.homeId), season), 1));
+    const retWeeks = namedPersonLegTicks({
+      nominalWeeks: hopWeeks(digest, String(m.destId), String(m.homeId), season),
+    });
     const start = num(m.legArrivalTick, 0) - retWeeks;
-    const g = clamp01((weekClock - start) / retWeeks);
-    nodeIdx = Math.floor((1 - g) * last);
+    position = namedPersonPathPosition({
+      path,
+      departTick: start,
+      arrivalTick: num(m.legArrivalTick, 0),
+      tick: weekClock,
+      reverse: true,
+    });
   }
-  const hopIdx = m.phase === 'returning'
-    ? clampNum(nodeIdx - 1, 0, last - 1) : clampNum(nodeIdx, 0, last - 1);
+  const hopIdx = position.hopIndex;
   const a = path[hopIdx]; const b = path[hopIdx + 1];
   const legModes = Array.isArray(m.legModes) ? /** @type {string[]} */ (m.legModes) : null;
   const overSea = legModes

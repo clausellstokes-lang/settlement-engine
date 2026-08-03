@@ -36,6 +36,10 @@ import { importanceWeight } from '../entities/npcs.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { clamp01 } from '../../kernel/math.js';
 import { provenanceLedgerActive } from '../worldPulse/provenanceKernel.js';
+import {
+  namedPersonArrivalTick,
+  namedPersonLegTicks,
+} from '../worldPulse/namedPersonTransit.js';
 
 // ── narrowing helpers (self-contained; the traditionsKernel/npcLadderState idiom) ──────
 /** @param {unknown} x @returns {Record<string, unknown>} */
@@ -175,11 +179,16 @@ export function consumeMissionRecall(mission, npc, weekClock, retWeeksAtDest) {
   const w = npc && typeof npc === 'object' ? /** @type {Record<string, unknown>} */ (npc).whereabouts : null;
   if (mission.phase === 'returning'
     || !(w && typeof w === 'object' && /** @type {Record<string, unknown>} */ (w).recall === true)) return false;
-  const retWeeks = mission.phase === 'visiting'
-    ? Math.max(1, num(retWeeksAtDest, 1))
-    : Math.max(1, weekClock - num(mission.departTick, 0));
+  const retWeeks = namedPersonLegTicks({
+    nominalWeeks: mission.phase === 'visiting'
+      ? num(retWeeksAtDest, 1)
+      : weekClock - num(mission.departTick, 0),
+  });
   mission.phase = 'returning';
-  mission.legArrivalTick = weekClock + retWeeks;
+  mission.legArrivalTick = namedPersonArrivalTick({
+    departTick: weekClock,
+    nominalWeeks: retWeeks,
+  });
   mission.recalled = true;
   mission.waitReceipted = false;
   return true;

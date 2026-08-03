@@ -173,6 +173,7 @@ function shutDoorsLine(shutDoors, nameFor) {
  * @property {ReadonlyArray<string>} standingLines  competence / scandal, when read
  * @property {string} whenLine       the time band, in turnings
  * @property {string} doorsLine      the shut-doors sentence, or ''
+ * @property {string} whereaboutsLine the supported present-location sentence, or ''
  * @property {string} originId       the origin STORY POINTER, for a link (never printed)
  * @property {string} originName
  * @property {string} restingId      where they are now, for a link (never printed)
@@ -225,6 +226,9 @@ function rowOf(person, nameFor, roaming) {
       ? wanderingLabel(Number(person.elapsedTicks))
       : restingLabel(Number(person.elapsedTicks)),
     doorsLine: shutDoorsLine(person.shutDoors, nameFor),
+    whereaboutsLine: person.whereaboutsUnknown === true
+      ? 'Their present whereabouts are unknown.'
+      : '',
     originId,
     originName: nameFor(originId),
     restingId,

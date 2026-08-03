@@ -419,6 +419,59 @@ describe('importAccountData — campaigns', () => {
     expect(camp.settlementIds.every(id => id.startsWith('fresh-'))).toBe(true);
   });
 
+  test('keeps imported campaigns fresh instead of smuggling source-world envoy authority', async () => {
+    const sourceWorldState = {
+      tick: 91,
+      simulationRules: {
+        warLayerEnabled: true,
+        warTerminationEnabled: true,
+        peaceEngineEnabled: true,
+        envoyDiplomacyEnabled: true,
+        npcConsequencesEnabled: true,
+        routeLifecycleEnabled: true,
+      },
+      relationshipStates: {
+        'source-war-edge': { relationshipType: 'hostile' },
+      },
+      deployments: {
+        'old-a': { targetId: 'old-b', sinceTick: 40, role: 'siege' },
+      },
+      envoyErrands: [{
+        id: 'source-envoy-authority',
+        npcId: 'source-npc',
+        from: 'old-a',
+        to: 'old-b',
+        state: 'returning',
+      }],
+    };
+    const store = makeStore();
+
+    const res = await store.getState().importAccountData(fileFor({
+      settlements: [
+        { ...SETTLEMENT('Member A'), id: 'old-a' },
+        { ...SETTLEMENT('Member B'), id: 'old-b' },
+      ],
+      campaigns: [{
+        id: 'old-camp',
+        name: 'Source War Realm',
+        settlementIds: ['old-a', 'old-b'],
+        worldState: sourceWorldState,
+        regionalGraph: {
+          edges: [{ id: 'source-war-edge', from: 'old-a', to: 'old-b' }],
+        },
+      }],
+    }));
+
+    expect(res.ok).toBe(true);
+    expect(res.campaignsImported).toBe(1);
+    const [, importedInitial] = store.getState().createImportedCampaign.mock.calls[0];
+    expect(importedInitial.settlementIds).toEqual(['fresh-1', 'fresh-2']);
+    expect(importedInitial).not.toHaveProperty('worldState');
+    expect(importedInitial).not.toHaveProperty('regionalGraph');
+    expect(JSON.stringify(store.getState().campaigns[0]))
+      .not.toMatch(/source-envoy-authority|source-war-edge|source-npc/);
+  });
+
   test('remaps a child parentRef when both campaign members import', async () => {
     const sourceRef = {
       version: 1,

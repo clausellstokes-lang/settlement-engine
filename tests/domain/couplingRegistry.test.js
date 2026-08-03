@@ -24,6 +24,11 @@ import {
   WR6_PEOPLE_EXPENDITURE_COUPLING,
   WR6_TRADE_EXPENDITURE_COUPLING,
   WR6_WAR_COALITION_COUPLINGS,
+  WR7_ENVOY_COUPLINGS,
+  WR7_HOME_DELIVERY_COUPLING,
+  WR7_MOVING_PICTURE_COUPLING,
+  WR7_PEACE_DISPATCH_COUPLING,
+  WR7_SILENCE_INFERENCE_COUPLING,
   couplingRowFor,
   couplingRowsFor,
 } from '../../src/domain/certification/couplingRegistry.js';
@@ -42,6 +47,7 @@ describe('CW-0 coupling registry', () => {
       ...WR4_WAR_COST_COUPLINGS,
       ...WR5_WAR_RULING_COUPLINGS,
       ...WR6_WAR_COALITION_COUPLINGS,
+      ...WR7_ENVOY_COUPLINGS,
     ]);
     expect(WR3_LINEAGE_COUPLING).toEqual({
       couplingId: 'CPL-3.POP_TO_WAR.WR-3.lineage',
@@ -205,6 +211,46 @@ describe('CW-0 coupling registry', () => {
     }
   });
 
+  test('records both WR-7a transport directions and both belief directions under the exact conjunction', () => {
+    expect(WR7_ENVOY_COUPLINGS).toEqual([
+      WR7_PEACE_DISPATCH_COUPLING,
+      WR7_HOME_DELIVERY_COUPLING,
+      WR7_MOVING_PICTURE_COUPLING,
+      WR7_SILENCE_INFERENCE_COUPLING,
+    ]);
+    expect(WR7_ENVOY_COUPLINGS.map((row) => [row.pairId, row.direction, row.intendedDesk]))
+      .toEqual([
+        ['CPL-5', 'WAR→GRAMMAR', 'adjudication'],
+        ['CPL-5', 'GRAMMAR→WAR', 'adjudication'],
+        ['CPL-19', 'INFO→GRAMMAR', 'events'],
+        ['CPL-19', 'GRAMMAR→INFO', 'divination'],
+      ]);
+    for (const row of WR7_ENVOY_COUPLINGS) {
+      expect(row.flags, row.couplingId).toEqual([
+        'warLayerEnabled',
+        'warTerminationEnabled',
+        'peaceEngineEnabled',
+        'envoyDiplomacyEnabled',
+        'npcConsequencesEnabled',
+        'routeLifecycleEnabled',
+      ]);
+      expect(row.owningVolume).toBe('WAR');
+      expect(row.owningWave).toBe('WR-7');
+      expect(Object.isFrozen(row)).toBe(true);
+      expect(Object.isFrozen(row.flags)).toBe(true);
+    }
+    expect(WR7_PEACE_DISPATCH_COUPLING.read)
+      .toBe('src/domain/worldPulse/envoyDiplomacy.js#dispatchAcceptedPeaceEnvoy');
+    expect(WR7_HOME_DELIVERY_COUPLING.read)
+      .toBe('src/domain/worldPulse/envoyDiplomacy.js#envoyReturnAcceptance');
+    expect(WR7_MOVING_PICTURE_COUPLING.read)
+      .toBe('src/domain/worldPulse/envoyDiplomacy.js#envoyRumorPatchFor');
+    expect(WR7_SILENCE_INFERENCE_COUPLING.read)
+      .toBe('src/domain/worldPulse/beliefMap.js#applyEnvoySilenceInference');
+    expect(WR7_SILENCE_INFERENCE_COUPLING.counterforce)
+      .toBe('src/domain/worldPulse/beliefMap.js#clearEnvoySilenceInference');
+  });
+
   test('every schema-v2 row has one stable unique identity and a closed shape', () => {
     const expectedKeys = [
       'couplingId', 'pairId', 'direction', 'read', 'receiptField',
@@ -247,7 +293,17 @@ describe('CW-0 coupling registry', () => {
       .toEqual([WR5_WAR_DECISION_GRIEVANCE_COUPLING, WR6_COALITION_RELATIONSHIP_COUPLING]);
     expect(couplingRowFor('CPL-5', 'WAR→GRAMMAR')).toBe(WR5_BILATERAL_PEACE_COUPLING);
     expect(couplingRowsFor('CPL-5', 'WAR→GRAMMAR'))
-      .toEqual([WR5_BILATERAL_PEACE_COUPLING, WR6_PAIRWISE_SETTLEMENT_COUPLING]);
+      .toEqual([
+        WR5_BILATERAL_PEACE_COUPLING,
+        WR6_PAIRWISE_SETTLEMENT_COUPLING,
+        WR7_PEACE_DISPATCH_COUPLING,
+      ]);
+    expect(couplingRowsFor('CPL-5', 'GRAMMAR→WAR'))
+      .toEqual([WR7_HOME_DELIVERY_COUPLING]);
+    expect(couplingRowsFor('CPL-19', 'INFO→GRAMMAR'))
+      .toEqual([WR7_MOVING_PICTURE_COUPLING]);
+    expect(couplingRowsFor('CPL-19', 'GRAMMAR→INFO'))
+      .toEqual([WR7_SILENCE_INFERENCE_COUPLING]);
     expect(couplingRowsFor('CPL-1', 'WAR→TRADE'))
       .toEqual([WR6_COALITION_SETTLEMENT_TRADE_COUPLING]);
     expect(couplingRowFor('CPL-21', 'INTERIOR→GRAMMAR')).toBe(WR5_SEAT_ACCEPTANCE_COUPLING);

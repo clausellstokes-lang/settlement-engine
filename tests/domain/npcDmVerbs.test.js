@@ -36,6 +36,7 @@ import {
 } from '../../src/domain/worldPulse/npcLedger.js';
 import {
   assignRoamer,
+  advanceAssignedNpcTransits,
   killNamedNpc,
   pardonNpc,
   undoDmVerb,
@@ -55,6 +56,21 @@ import {
 } from '../../src/domain/worldPulse/npcLedgerProjection.js';
 import { NPC_CONSEQUENCE_KEY } from '../../src/domain/worldPulse/npcVerdictApply.js';
 import { isExplicitlyRouted } from '../../src/domain/realm/heraldRouting.js';
+import {
+  ENVOY_REQUIRED_RULES,
+  advanceEnvoyErrands,
+  beginEnvoyReturn,
+  envoyErrandsOf,
+  mintEnvoyErrand,
+} from '../../src/domain/worldPulse/envoyErrand.js';
+import { ensureWorldState } from '../../src/domain/worldPulse/worldState.js';
+import { syncEnvoyNpcTransit } from '../../src/domain/worldPulse/envoyDiplomacy.js';
+import {
+  emptyRouteNetwork,
+  routeEdge,
+  withRouteEdges,
+  writeRouteNetwork,
+} from '../../src/domain/worldPulse/routeNetworkLedger.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -83,6 +99,29 @@ function banished(opts) {
   return { worldState: shut.worldState, wnpcId: f.wnpcId };
 }
 
+/** The ordinary H4 fixture with the lived route substrate exact-lit. */
+function routeLitFixture({ connected = true, via = false } = {}) {
+  const base = fixture();
+  const lit = {
+    ...base.worldState,
+    simulationRules: {
+      ...base.worldState.simulationRules,
+      routeLifecycleEnabled: true,
+    },
+  };
+  if (!connected) return { worldState: lit, wnpcId: base.wnpcId };
+  const edge = (a, b) => routeEdge({
+    a, b, grade: 'road', mode: 'land', provenance: 'generated', flavor: 'genesis', tick: 0,
+  });
+  const edges = via
+    ? [edge('sav_kelder', 'sav_middle'), edge('sav_middle', 'sav_thorn')]
+    : [edge('sav_kelder', 'sav_thorn')];
+  return {
+    worldState: writeRouteNetwork(lit, withRouteEdges(emptyRouteNetwork(), edges)),
+    wnpcId: base.wnpcId,
+  };
+}
+
 /** A settlement carrying the H2 jail mark on the roster record. */
 function jailedSettlement() {
   return {
@@ -93,6 +132,123 @@ function jailedSettlement() {
       { id: 'npc_3', name: 'Maera Voss', [NPC_CONSEQUENCE_KEY]: { verdictCause: 'jailed', tick: 4, jailUntilTick: 40 } },
     ],
   };
+}
+
+/** One H1-durable person physically returning with terms under WR-7a's exact gate. */
+function returningEnvoyFixture() {
+  const { worldState, wnpcId } = fixture();
+  const lit = {
+    ...worldState,
+    simulationRules: {
+      ...worldState.simulationRules,
+      ...Object.fromEntries(ENVOY_REQUIRED_RULES.map((key) => [key, true])),
+    },
+  };
+  const relationshipKey = 'sav_kelder::sav_thorn';
+  const offer = {
+    id: 'peace.dm-kill.1',
+    generatedAtTick: 20,
+    type: 'relationship',
+    candidateType: 'strategy_sue_for_peace',
+    ruleFamily: 'strategy',
+    targetSaveId: 'sav_kelder',
+    severity: 0.6,
+    relationshipKey,
+    relationshipPatch: {
+      proposedRelationshipType: 'neutral',
+      trajectory: 'transitioning',
+    },
+    proposalPayload: {
+      kind: 'relationship_label_change',
+      relationshipKey,
+      fromType: 'hostile',
+      toType: 'neutral',
+      peaceOffer: true,
+      offererId: 'sav_kelder',
+      targetId: 'sav_thorn',
+      peaceFrontOwnerId: 'sav_kelder',
+      peaceFrontSinceTick: 8,
+      reason: 'Kelder offers terms to Thornreach.',
+    },
+  };
+  const minted = mintEnvoyErrand({
+    worldState: lit,
+    outcome: offer,
+    acceptance: {
+      accepted: true,
+      offererId: 'sav_kelder',
+      targetId: 'sav_thorn',
+      receipt: {
+        id: 'decision.sav_kelder.sav_thorn',
+        kind: 'war_peace_acceptance_read',
+        tick: 20,
+        offerId: offer.id,
+        offererId: 'sav_kelder',
+        targetId: 'sav_thorn',
+        decision: 'accept',
+        actualAction: 'peace',
+        decidingTerm: 'cause',
+        reason: 'Both courts accept the carried peace ruling.',
+        bands: {
+          cause: 'live', cost_to_continue: 'pressing', cost_to_stop: 'quiet', momentum: 'present',
+        },
+      },
+      offererRead: {
+        id: 'termination.sav_kelder.sav_thorn',
+        kind: 'war_termination_read',
+        tick: 20,
+        attackerId: 'sav_kelder',
+        targetId: 'sav_thorn',
+        settlementIds: ['sav_kelder', 'sav_thorn'],
+      },
+      termination: {
+        receipt: {
+          id: 'termination.sav_thorn.sav_kelder',
+          kind: 'war_termination_read',
+          tick: 20,
+          attackerId: 'sav_thorn',
+          targetId: 'sav_kelder',
+          settlementIds: ['sav_thorn', 'sav_kelder'],
+        },
+      },
+      inheritedDemand: null,
+      coalitionPeaceExpenditures: [],
+    },
+    npcId: wnpcId,
+    npcName: 'Maera Voss',
+    fromName: 'Kelder',
+    toName: 'Thornreach',
+    snapshot: {
+      storesBand: 'thin',
+      strengthBand: 'ready',
+      moraleExhaustionBand: 'pressing',
+      foundingCauseStatus: 'live',
+      believedRatioBand: 'matched',
+    },
+    routePlan: {
+      legs: [{ fromId: 'sav_kelder', toId: 'sav_thorn', departTick: 20, arrivalTick: 22 }],
+      expectedReturnTick: 30,
+      routeRef: { id: 'road.kelder-thorn', name: 'Thorn Road' },
+    },
+    tick: 20,
+  });
+  expect(minted.reason).toBe('minted');
+  const outboundState = syncEnvoyNpcTransit(minted.worldState, minted.errand, 20);
+  const parlay = advanceEnvoyErrands({ worldState: outboundState, tick: 22 });
+  const parlayWorldState = syncEnvoyNpcTransit(parlay.worldState, parlay.errand, 22);
+  const returning = beginEnvoyReturn({
+    worldState: parlayWorldState,
+    errandId: minted.errand.id,
+    routePlan: {
+      legs: [{ fromId: 'sav_thorn', toId: 'sav_kelder', departTick: 23, arrivalTick: 26 }],
+      expectedReturnTick: 26,
+      routeRef: { id: 'road.kelder-thorn', name: 'Thorn Road' },
+    },
+    termSheet: { id: 'terms.dm-kill', clauses: [{ kind: 'ceasefire' }] },
+    tick: 23,
+  });
+  const returningWorldState = syncEnvoyNpcTransit(returning.worldState, returning.errand, 23);
+  return { worldState: returningWorldState, parlayWorldState, wnpcId };
 }
 
 describe('W-H4 — DORMANCY (law 5)', () => {
@@ -163,6 +319,132 @@ describe('W-H4 — ASSIGN is sovereign, and its override is named', () => {
     expect(back.changed).toBe(true);
     expect(JSON.stringify(npcLedgerOf(back.worldState))).toBe(before);
   });
+
+  test('with both substrates lit, ASSIGN opens a lived leg and cannot arrive inside one week', () => {
+    const { worldState, wnpcId } = routeLitFixture();
+    const before = JSON.stringify(npcLedgerOf(worldState));
+    const beforeWorld = JSON.stringify(worldState);
+    const assigned = assignRoamer({
+      worldState, wnpcId, settlementId: 'sav_thorn', settlementName: 'Thornreach', tick: 20,
+    });
+    expect(assigned).toMatchObject({ changed: true, refusal: null });
+    expect(assigned.receipt).toMatchObject({ assignmentState: 'in_transit' });
+    expect(assigned.news.headline).toBe('Maera Voss sets out for Thornreach.');
+    const travelling = npcLedgerOf(assigned.worldState).roamers[wnpcId];
+    expect(travelling.dmAssignment).toMatchObject({
+      targetSettlementId: 'sav_thorn', atSettlementId: '', issuedTick: 20,
+    });
+    expect(travelling.transit).toMatchObject({
+      fromId: 'sav_kelder', toId: 'sav_thorn', departTick: 20,
+    });
+    expect(travelling.transit.arrivalTick).toBeGreaterThanOrEqual(21);
+    expect(npcLedgerOf(assigned.worldState).placed[wnpcId]).toBeUndefined();
+
+    const sameWeek = advanceAssignedNpcTransits({
+      worldState: assigned.worldState, tick: 20,
+    });
+    expect(sameWeek.changed).toBe(false);
+    expect(sameWeek.worldState).toBe(assigned.worldState);
+    expect(npcLedgerOf(sameWeek.worldState).roamers[wnpcId].transit).toBeTruthy();
+
+    const back = undoDmVerb({ worldState: assigned.worldState, undo: assigned.undo });
+    expect(back.changed).toBe(true);
+    expect(JSON.stringify(npcLedgerOf(back.worldState))).toBe(before);
+    expect(JSON.stringify(back.worldState)).toBe(beforeWorld);
+  });
+
+  test('a missing lived route refuses the whole ASSIGN without a ruling or partial move', () => {
+    const { worldState, wnpcId } = routeLitFixture({ connected: false });
+    const before = JSON.stringify(worldState);
+    const refusedRun = assignRoamer({
+      worldState, wnpcId, settlementId: 'sav_thorn', tick: 20,
+    });
+    expect(refusedRun).toMatchObject({ changed: false, refusal: 'no_route', news: null, undo: null });
+    expect(refusedRun.worldState).toBe(worldState);
+    expect(JSON.stringify(refusedRun.worldState)).toBe(before);
+    expect(npcRulingsOf(refusedRun.worldState)).toHaveLength(0);
+  });
+
+  test('a parlaying envoy cannot acquire a competing DM assignment lifecycle', () => {
+    const { parlayWorldState, wnpcId } = returningEnvoyFixture();
+    const errand = envoyErrandsOf(parlayWorldState)[0];
+    const physicallyParlaying = syncEnvoyNpcTransit(parlayWorldState, errand, 22);
+    expect(npcLedgerOf(physicallyParlaying).placed[wnpcId]).toMatchObject({
+      hostSettlementId: 'sav_thorn',
+    });
+
+    const withRoad = writeRouteNetwork(physicallyParlaying, withRouteEdges(
+      emptyRouteNetwork(),
+      [routeEdge({
+        a: 'sav_thorn', b: 'sav_middle', grade: 'road', mode: 'land',
+        provenance: 'generated', flavor: 'genesis', tick: 0,
+      })],
+    ));
+    const before = JSON.stringify(withRoad);
+    const refusedRun = assignRoamer({
+      worldState: withRoad,
+      wnpcId,
+      settlementId: 'sav_middle',
+      tick: 22,
+    });
+    expect(refusedRun).toMatchObject({
+      changed: false,
+      refusal: 'active_errand',
+      news: null,
+      receipt: null,
+      undo: null,
+    });
+    expect(refusedRun.worldState).toBe(withRoad);
+    expect(JSON.stringify(refusedRun.worldState)).toBe(before);
+    expect(npcLedgerOf(refusedRun.worldState).placed[wnpcId]).not.toHaveProperty('dmAssignment');
+    expect(npcRulingsOf(refusedRun.worldState)).toHaveLength(0);
+  });
+
+  test('the assignment advancer lands exactly at arrival and a stale inverse cannot teleport them back', () => {
+    const { worldState, wnpcId } = routeLitFixture();
+    const assigned = assignRoamer({ worldState, wnpcId, settlementId: 'sav_thorn', tick: 20 });
+    const arrivalTick = npcLedgerOf(assigned.worldState).roamers[wnpcId].transit.arrivalTick;
+    const arrived = advanceAssignedNpcTransits({ worldState: assigned.worldState, tick: arrivalTick });
+    expect(arrived).toMatchObject({ changed: true, arrivedNpcIds: [wnpcId] });
+    expect(npcLedgerOf(arrived.worldState).placed[wnpcId]).toMatchObject({
+      hostSettlementId: 'sav_thorn', sinceTick: arrivalTick,
+    });
+    expect(npcLedgerOf(arrived.worldState).placed[wnpcId]).not.toHaveProperty('transit');
+    expect(npcLedgerOf(arrived.worldState).placed[wnpcId]).not.toHaveProperty('dmAssignment');
+
+    const stale = undoDmVerb({ worldState: arrived.worldState, undo: assigned.undo });
+    expect(stale.changed).toBe(false);
+    expect(stale.worldState).toBe(arrived.worldState);
+  });
+
+  test('a multi-hop assignment stands at the intermediate road node before opening the next leg', () => {
+    const { worldState, wnpcId } = routeLitFixture({ via: true });
+    const assigned = assignRoamer({ worldState, wnpcId, settlementId: 'sav_thorn', tick: 20 });
+    const firstLeg = npcLedgerOf(assigned.worldState).roamers[wnpcId].transit;
+    expect(firstLeg).toMatchObject({ fromId: 'sav_kelder', toId: 'sav_middle' });
+    expect(projectNpcPool({
+      worldState: assigned.worldState, tick: 20, settlementId: 'sav_kelder',
+    }).total).toBe(0);
+
+    const middle = advanceAssignedNpcTransits({
+      worldState: assigned.worldState, tick: firstLeg.arrivalTick,
+    });
+    expect(middle.arrivedNpcIds).toEqual([]);
+    expect(npcLedgerOf(middle.worldState).roamers[wnpcId]).toMatchObject({
+      dmAssignment: { targetSettlementId: 'sav_thorn', atSettlementId: 'sav_middle' },
+    });
+    expect(npcLedgerOf(middle.worldState).roamers[wnpcId]).not.toHaveProperty('transit');
+    expect(projectNpcPool({
+      worldState: middle.worldState, tick: firstLeg.arrivalTick, settlementId: 'sav_middle',
+    }).roamers[0]).toMatchObject({ wnpcId, restingAt: 'sav_middle' });
+
+    const next = advanceAssignedNpcTransits({
+      worldState: middle.worldState, tick: firstLeg.arrivalTick + 1,
+    });
+    const secondLeg = npcLedgerOf(next.worldState).roamers[wnpcId].transit;
+    expect(secondLeg).toMatchObject({ fromId: 'sav_middle', toId: 'sav_thorn' });
+    expect(secondLeg.arrivalTick).toBeGreaterThanOrEqual(firstLeg.arrivalTick + 2);
+  });
 });
 
 describe('W-H4 — KILL is the only death, and it is undoable', () => {
@@ -177,10 +459,74 @@ describe('W-H4 — KILL is the only death, and it is undoable', () => {
     expect(Object.keys(drained.roamers)).toEqual([]);
     expect(Object.keys(drained.placed)).toEqual([]);
     expect(Object.keys(drained.exclusions)).toEqual([]);
+    // WR-7a is not fully lit in this fixture: the legacy KILL result does not grow
+    // dormant envoy fields merely because the integration module exists.
+    expect(killed).not.toHaveProperty('envoyEvidence');
+    expect(killed.undo).not.toHaveProperty('envoyPriorErrands');
 
     const revived = undoDmVerb({ worldState: killed.worldState, undo: killed.undo });
     expect(revived.changed).toBe(true);
     expect(JSON.stringify(npcLedgerOf(revived.worldState))).toBe(beforeLedger);
+  });
+
+  test('a returning terms-bearer closes lost, and imported undo restores both ledgers atomically', () => {
+    const returning = returningEnvoyFixture();
+    const before = ensureWorldState(returning.worldState, { id: 'campaign.dm-kill' });
+    const beforeNpc = JSON.stringify(npcLedgerOf(before));
+    const beforeErrands = JSON.stringify(envoyErrandsOf(before));
+
+    const killed = killNamedNpc({ worldState: before, wnpcId: returning.wnpcId, tick: 24 });
+    expect(killed.changed).toBe(true);
+    expect(killed.envoyEvidence.map((row) => row.kind)).toEqual([
+      'envoy_lost',
+      'terms_never_reached',
+    ]);
+    expect(killed.envoyEvidence[1].termSheetId).toBe('terms.dm-kill');
+    // The remote loss is private mechanical truth until an observation carrier reaches
+    // a court. KILL must not publish either loss beat merely because the DM knows it.
+    expect(killed).not.toHaveProperty('envoyNews');
+    expect(npcRulingsOf(killed.worldState).map((row) => row.kind || row.candidateType))
+      .toEqual([DEATH_NEWS_TYPE]);
+    expect(envoyErrandsOf(killed.worldState)[0]).toMatchObject({
+      npcId: returning.wnpcId,
+      state: 'lost',
+      lossCause: 'killed',
+      lostTick: 24,
+      closedTick: 24,
+    });
+    expect(killed.undo.envoyPriorErrands).toHaveLength(1);
+    expect(killed.undo.envoyPriorErrands[0]).toMatchObject({ state: 'returning' });
+
+    // The real import boundary is JSON followed by ensureWorldState. The session undo
+    // payload is JSON-safe too, so replay it after the same transport hop.
+    const importedWorld = ensureWorldState(
+      JSON.parse(JSON.stringify(killed.worldState)),
+      { id: 'campaign.dm-kill' },
+    );
+    const importedUndo = JSON.parse(JSON.stringify(killed.undo));
+    const revived = undoDmVerb({ worldState: importedWorld, undo: importedUndo });
+    expect(revived.changed).toBe(true);
+    expect(JSON.stringify(npcLedgerOf(revived.worldState))).toBe(beforeNpc);
+    expect(JSON.stringify(envoyErrandsOf(revived.worldState))).toBe(beforeErrands);
+    expect(revived.worldState).toEqual(before);
+  });
+
+  test('a stale envoy closure rejects the whole KILL inverse, including the NPC restore', () => {
+    const returning = returningEnvoyFixture();
+    const killed = killNamedNpc({ worldState: returning.worldState, wnpcId: returning.wnpcId, tick: 24 });
+    const staleWorld = {
+      ...killed.worldState,
+      envoyErrands: killed.worldState.envoyErrands.map((row) => ({
+        ...row,
+        lostTick: row.id === killed.undo.envoyPriorErrands[0].id ? 25 : row.lostTick,
+        closedTick: row.id === killed.undo.envoyPriorErrands[0].id ? 25 : row.closedTick,
+      })),
+    };
+    const rejected = undoDmVerb({ worldState: staleWorld, undo: killed.undo });
+    expect(rejected.changed).toBe(false);
+    expect(rejected.worldState).toBe(staleWorld);
+    expect(npcLedgerOf(rejected.worldState).roamers[returning.wnpcId]).toBeUndefined();
+    expect(envoyErrandsOf(rejected.worldState)[0]).toMatchObject({ state: 'lost', lostTick: 25 });
   });
 
   test('the restore FAILS CLOSED when the id has been taken back in the meantime', () => {

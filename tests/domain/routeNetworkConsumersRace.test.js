@@ -40,6 +40,7 @@ import {
   writeRouteNetwork,
 } from '../../src/domain/worldPulse/routeNetworkLedger.js';
 import { brokerageChannelCompetence } from '../../src/data/informationBrokerageTuning.js';
+import { NAMED_PERSON_TRANSIT_TUNING } from '../../src/domain/worldPulse/namedPersonTransit.js';
 
 /** The same Vale the transit pins walk: five seats, every pair priced and gated. */
 const VALE_DISTANCES = {
@@ -144,6 +145,7 @@ describe('J4 §9 THE REPUTATION RACE: grade alone decides who reaches the gate f
   });
 
   it('the whole grade ladder moves both clocks, and the story is always the faster rider', () => {
+    expect(NAMED_PERSON_TRANSIT_TUNING.MIN_LEG_TICKS).toBe(1);
     for (const grade of ['highway', 'road', 'track']) {
       const race = reputationRace({
         worldState: valeWorld({ shortcut: grade }),
