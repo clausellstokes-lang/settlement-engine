@@ -21,14 +21,9 @@
  *      cross-writer defect the estate has already paid for elsewhere, and the deposit /
  *      consume idiom (roadsReturnedCaptives, intelTransfers, bluffExposures) exists
  *      precisely so a producer never reaches into a consumer's container.
- *   2. Producing the record makes the composition TESTABLE END TO END WITHOUT the wiring:
- *      tests/domain/brokeragePlant.test.js hands a commissioned record to the REAL
- *      `processLies` and watches the real triple fire, so the claim "the existing
- *      contradict, expose and blowback prices failure" is executed rather than asserted.
- *
- * THE REQUIRED WIRING IS ONE CALL, and it is reported rather than made because
- * informationStatecraft.js is another session's file this session. See the block comment
- * at `PLANT_WIRING` below for the precise edit.
+ *   2. Producing the record keeps the composition testable at its boundary:
+ *      `processLies` consumes the envelope through the one writer, then the same
+ *      contradict, expose, and blowback lifecycle prices failure.
  *
  * ── THE MARKET'S CREDIBILITY BACKS THE LIE, AND PAYS FOR IT ──
  *
@@ -58,33 +53,23 @@ import {
   credibilityScoreOf,
   credibilityWeight,
 } from './informationStatecraft.js';
+import { getSpatialLedger } from '../spatial/distanceRead.js';
 import { brokerageEffectsActive, brokerageHouseRosterIn } from './brokerageStamps.js';
 import { servicesAvailable, patronPurse01, QUERY_PRICE_BANDS } from './brokerageServices.js';
 
 /**
- * THE PRECISE WIRING THIS SLICE COULD NOT MAKE (informationStatecraft.js is foreign this
- * session). Inside `processLies`, immediately after the seed loop over `liarIds` and
- * before `const disinfo = Object.keys(nextDisinfo).length ? ... `:
- *
- *     for (const plant of commissionedPlants || []) {
- *       if (nextDisinfo[plant.key]) continue;
- *       setOverride(plant.record.audienceId, plant.record.subjectId, plant.override);
- *       nextDisinfo[plant.key] = plant.record;
- *     }
- *
- * with `commissionedPlants` threaded from `advanceInformationStatecraft`, which would call
- * `commissionPlants(...)` from this module. FOUR PROPERTIES make that edit safe, and each
- * is pinned here rather than asserted there:
+ * THE WIRING. `processLies` consumes `commissionedPlants` after carrying/exposing
+ * prior lies and before spontaneous genesis. FOUR PROPERTIES keep that edit safe:
  *   - the key namespace is `plant:*`, disjoint from the verb's own `lie:*`, so neither can
  *     silently overwrite the other and the verb's one-bluff-per-pair guard is untouched;
  *   - the record shape is byte-compatible with DisinfoRecord, so the carry-forward branch,
  *     the exposure branch and the ledger sort all treat a plant as a first-class lie;
  *   - the override is a complete BeliefRecord, so `applyBeliefOverrides` needs no new case;
- *   - with the brokerage flag dark `commissionPlants` returns an EMPTY array, so the loop
+ *   - with the brokerage flag dark the producer returns no plant, so the loop
  *     above runs zero times and the verb is byte-identical.
  * @type {string}
  */
-export const PLANT_WIRING = 'informationStatecraft.processLies: fold commissionPlants() into nextDisinfo';
+export const PLANT_WIRING = 'informationStatecraft.processLies: commissionedPlants fold into nextDisinfo';
 
 /**
  * The two things a patron can pay to have believed. Closed vocabulary. INFLATE is the
@@ -97,7 +82,21 @@ export const PLANT_INTENTS = Object.freeze(['inflate', 'deflate']);
 
 /** The closed refusal vocabulary. @type {readonly string[]} */
 export const PLANT_REFUSALS = Object.freeze([
-  'dormant', 'no_market', 'bad_intent', 'cannot_pay', 'no_channel',
+  'dormant', 'no_market', 'bad_intent', 'cannot_pay', 'no_channel', 'already_active',
+]);
+
+/** Fields a paid plant may move on one frozen WR-7b negotiation picture. */
+export const ENVOY_PICTURE_PLANT_FIELDS = Object.freeze([
+  'strengthBand',
+  'storesBand',
+  'foodPressureBand',
+  'economyPressureBand',
+  'tradePressureBand',
+  'threatBand',
+  'allyStrengthBand',
+  'restitutionClaimBand',
+  'warExhaustionBand',
+  'alignmentPressBand',
 ]);
 
 /**
@@ -128,8 +127,160 @@ function asObject(v) {
 }
 
 /** @param {unknown} v @returns {string} */
+function strictText(v) {
+  return typeof v === 'string' && v.length > 0 && v.trim() === v ? v : '';
+}
+
+/** @param {unknown} v @returns {string} */
 function text(v) {
   return typeof v === 'string' ? v : String(v == null ? '' : v);
+}
+
+/** @param {Record<string, unknown>} row @param {readonly string[]} expected */
+function hasExactKeys(row, expected) {
+  const actual = Object.keys(row).sort();
+  const wanted = [...expected].sort();
+  return actual.length === wanted.length
+    && actual.every((key, index) => key === wanted[index]);
+}
+
+/** A plant may name one exact frozen envoy picture, or no picture at all. */
+function envoyPictureTarget(value, patronId, subjectId = null, intent = null) {
+  if (value == null) return null;
+  const row = asObject(value);
+  const expected = [
+    'kind', 'errandId', 'npcId', 'pictureId', 'episodeKey', 'subjectId',
+    'field', 'direction', 'commissionerId', 'purpose',
+  ].sort();
+  if (!hasExactKeys(row, expected)) return null;
+  const target = {
+    kind: strictText(row.kind),
+    errandId: strictText(row.errandId),
+    npcId: strictText(row.npcId),
+    pictureId: strictText(row.pictureId),
+    episodeKey: strictText(row.episodeKey),
+    subjectId: strictText(row.subjectId),
+    field: strictText(row.field),
+    direction: strictText(row.direction),
+    commissionerId: strictText(row.commissionerId),
+    purpose: strictText(row.purpose),
+  };
+  if (target.kind !== 'envoy_picture'
+    || !target.errandId || !target.npcId || !target.pictureId
+    || !target.episodeKey || !target.subjectId
+    || (subjectId != null && target.subjectId !== strictText(subjectId))
+    || !ENVOY_PICTURE_PLANT_FIELDS.includes(target.field)
+    || !['rise', 'fall'].includes(target.direction)
+    || (intent != null && target.direction !== (strictText(intent) === 'inflate' ? 'rise' : 'fall'))
+    || target.commissionerId !== strictText(patronId)
+    || target.purpose !== 'intercepted_envoy_appraisal') return null;
+  return target;
+}
+
+const COMMISSIONED_PLANT_KEYS = Object.freeze(['key', 'record', 'override', 'receipt']);
+const PLANT_RECORD_KEYS = Object.freeze([
+  'assertedBand', 'audienceId', 'liarId', 'lineageId',
+  'seededTick', 'subjectId', 'trueBand',
+]);
+const PLANT_OVERRIDE_KEYS = Object.freeze([
+  'readiness', 'strengthBand', 'allianceLabel', 'faithLabel',
+  'confidence01', 'lastUpdateTick',
+]);
+const PLANT_RECEIPT_KEYS = Object.freeze([
+  'marketId', 'marketName', 'hostId', 'patronId', 'intent',
+  'assertedBand', 'trueBand', 'priceBand', 'commissionedAtTick',
+]);
+
+/** @param {unknown} value @returns {number | null} */
+function tickOf(value) {
+  return Number.isInteger(value) && Number(value) >= 0 ? Number(value) : null;
+}
+
+/** @param {unknown} value @returns {number | null} */
+function strengthBand(value) {
+  return Number.isInteger(value) && Number(value) >= 0 && Number(value) <= 4
+    ? Number(value) : null;
+}
+
+/** @param {unknown} value @returns {number | null} */
+function unitInterval(value) {
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 1
+    ? value : null;
+}
+
+/**
+ * Strictly normalize the receipt-backed, already-paid part of a commission.
+ * The returned graph is detached; a caller cannot mutate the paid deposit by
+ * retaining an input reference.
+ * @param {unknown} value
+ * @returns {CommissionedPlant|null}
+ */
+function paidPlantEnvelope(value) {
+  const row = asObject(value);
+  if (!hasExactKeys(row, COMMISSIONED_PLANT_KEYS)) return null;
+  const record = asObject(row.record);
+  const override = asObject(row.override);
+  const receipt = asObject(row.receipt);
+  if (!hasExactKeys(record, PLANT_RECORD_KEYS)
+    || !hasExactKeys(override, PLANT_OVERRIDE_KEYS)
+    || !hasExactKeys(receipt, PLANT_RECEIPT_KEYS)
+    || record === override || record === receipt || override === receipt) return null;
+
+  const liarId = strictText(record.liarId);
+  const audienceId = strictText(record.audienceId);
+  const subjectId = strictText(record.subjectId);
+  const lineageId = strictText(record.lineageId);
+  const hostId = strictText(receipt.hostId);
+  const patronId = strictText(receipt.patronId);
+  const intent = strictText(receipt.intent);
+  const seededTick = tickOf(record.seededTick);
+  const commissionedAtTick = tickOf(receipt.commissionedAtTick);
+  const trueBand = strengthBand(record.trueBand);
+  const assertedBand = strengthBand(record.assertedBand);
+  const expectedAsserted = intent === 'inflate'
+    ? Math.min(4, Number(trueBand) + LIE_TUNING.INFLATE_BANDS)
+    : Math.max(0, Number(trueBand) - LIE_TUNING.INFLATE_BANDS);
+  if (!liarId || !audienceId || !subjectId || !lineageId || !hostId || !patronId
+    || !PLANT_INTENTS.includes(intent) || seededTick == null || commissionedAtTick == null
+    || trueBand == null || assertedBand == null || assertedBand !== expectedAsserted
+    || record.lineageId !== `disinfo:${liarId}:${audienceId}:${seededTick}`
+    || row.key !== `plant:${liarId}:${audienceId}:${subjectId}`
+    || hostId !== liarId || commissionedAtTick !== seededTick
+    || receipt.assertedBand !== assertedBand || receipt.trueBand !== trueBand
+    || !strictText(receipt.marketId) || !strictText(receipt.marketName)
+    || !QUERY_PRICE_BANDS.includes(String(receipt.priceBand))
+    || strengthBand(override.strengthBand) !== assertedBand
+    || tickOf(override.lastUpdateTick) !== seededTick
+    || unitInterval(override.readiness) == null || unitInterval(override.confidence01) == null
+    || !strictText(override.allianceLabel)
+    || !(override.faithLabel == null || strictText(override.faithLabel))) return null;
+
+  return {
+    key: String(row.key),
+    record: { ...record },
+    override: { ...override },
+    receipt: { ...receipt },
+  };
+}
+
+/**
+ * Attach one exact envoy-picture address to an already-paid generic plant.
+ * This is deliberately not a second commission: it has no world input, no
+ * charge result, and returns only a detached envelope for the sole lie writer.
+ * A targeted or otherwise widened envelope cannot be retargeted.
+ * @param {unknown} commissionedPlant
+ * @param {unknown} target
+ * @returns {CommissionedPlant|null}
+ */
+export function attachEnvoyPictureTarget(commissionedPlant, target) {
+  const row = asObject(commissionedPlant);
+  const paid = paidPlantEnvelope(row);
+  if (!paid || target === row.record || target === row.override || target === row.receipt) return null;
+  const exactTarget = envoyPictureTarget(
+    target, paid.receipt.patronId, paid.record.subjectId, paid.receipt.intent,
+  );
+  if (!exactTarget) return null;
+  return { ...paid, target: { ...exactTarget } };
 }
 
 /** @param {unknown} v @param {number} fallback @returns {number} */
@@ -190,6 +341,7 @@ export function plantPrice({ bands, credibility01 }) {
  * @property {Record<string, unknown>} record   a DisinfoRecord, byte-compatible
  * @property {Record<string, unknown>} override the BeliefRecord to plant
  * @property {Record<string, unknown>} receipt  DM truth: who paid, for what, at what price
+ * @property {Record<string, unknown>} [target] exact frozen envoy-picture address
  */
 
 /**
@@ -225,10 +377,12 @@ function refuse(reason, detail) {
  * @param {Record<string, unknown>|null} args.audienceBelief the audience's current belief
  * @param {unknown} args.intent one of PLANT_INTENTS
  * @param {number} args.tick
+ * @param {Record<string, unknown>|null} [args.target] optional exact WR-7b envoy-picture target
  * @returns {PlantResult}
  */
 export function commissionPlant({
   worldState, item, patronId, audienceId, subjectId, subjectTrueBand, audienceBelief, intent, tick,
+  target = null,
 }) {
   if (!brokerageEffectsActive(worldState)) {
     return refuse('dormant', 'No market in this world sells that.');
@@ -244,8 +398,21 @@ export function commissionPlant({
   if (!Object.keys(prior).length) {
     return refuse('no_channel', 'That court has never heard of the place; there is nothing to correct and no ear to correct it in.');
   }
+  const pictureTarget = target == null
+    ? null
+    : envoyPictureTarget(target, patronId, subjectId, intent);
+  if (target != null && !pictureTarget) {
+    return refuse('bad_intent', 'The order does not name one exact envoy picture.');
+  }
   const hostId = text(asObject(item).id);
   const now = Math.max(0, Math.floor(num(tick, 0)));
+  const plantKey = `plant:${hostId}:${text(audienceId)}:${text(subjectId)}`;
+  const activeDisinfo = asObject(getSpatialLedger(
+    /** @type {Parameters<typeof getSpatialLedger>[0]} */ (worldState), 'disinfo',
+  ));
+  if (Object.prototype.hasOwnProperty.call(activeDisinfo, plantKey)) {
+    return refuse('already_active', 'That story is already being carried in that court.');
+  }
   const credW = credibilityWeight(credibilityScoreOf(
     /** @type {Parameters<typeof credibilityScoreOf>[0]} */ (asObject(worldState)), hostId, now,
   ));
@@ -279,9 +446,10 @@ export function commissionPlant({
     refused: false,
     refusal: null,
     plant: {
-      key: `plant:${hostId}:${text(audienceId)}:${text(subjectId)}`,
+      key: plantKey,
       record,
       override,
+      ...(pictureTarget ? { target: pictureTarget } : {}),
       receipt: {
         marketId: market.institutionId,
         marketName: market.name,

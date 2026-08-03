@@ -1,5 +1,5 @@
 /**
- * WR-7a phrased-kind walker: exact seven-kind census, frequency-scaled
+ * WR-7 phrased-kind walker: exact sixteen-kind census, frequency-scaled
  * annex-authored families, governed metadata/desks, and no-fabrication
  * truth-slot selection.
  * This certifies presentation width only; it is not behavioral soak evidence.
@@ -9,6 +9,7 @@ import { describe, expect, test } from 'vitest';
 
 import { WHAT_PHRASES } from '../../src/domain/display/settlementRumors.js';
 import { heraldSectionOfRecord, SECTION_OF } from '../../src/domain/realm/heraldRouting.js';
+import { ENVOY_EVIDENCE_KINDS } from '../../src/domain/worldPulse/envoyErrand.js';
 import {
   ENVOY_KIND_REGISTRY,
   ENVOY_KINDS,
@@ -23,6 +24,15 @@ const EXPECTED = Object.freeze([
   ['envoy_lost', 'major', 'dm-only', 'adjudication', 5],
   ['envoy_silence_inference', 'major', 'public', 'divination', 5],
   ['terms_never_reached', 'major', 'dm-only', 'adjudication', 5],
+  ['envoy_intercepted', 'major', 'dm-only', 'war', 5],
+  ['envoy_parlaying', 'notable', 'dm-only', 'adjudication', 6],
+  ['envoy_terms_agreed', 'major', 'dm-only', 'adjudication', 5],
+  ['envoy_held', 'major', 'dm-only', 'adjudication', 5],
+  ['terms_signed_for_a_fallen_town', 'major', 'dm-only', 'adjudication', 5],
+  ['parlay_at_an_occupied_venue', 'notable', 'dm-only', 'adjudication', 6],
+  ['interceptor_dilemma', 'notable', 'dm-only', 'war', 6],
+  ['interceptor_parlays_own_edge', 'major', 'dm-only', 'adjudication', 5],
+  ['parlay_terms_neither_court_drafted', 'major', 'dm-only', 'adjudication', 5],
 ]);
 
 const FLOOR_BY_SIGNIFICANCE = Object.freeze({ routine: 8, notable: 6, major: 4 });
@@ -32,11 +42,31 @@ const INTERP = Object.freeze({
   counterpart: 'Irontown',
   npc: 'Reeve Mara',
   route: 'North Road',
+  third_party: 'Westmere',
+  term: 'road concession',
+  reason: 'the sealed terms',
 });
+
+const LEGACY_ON_ROAD_TAIL = Object.freeze([
+  'Each mile carries the messenger farther from the council that chose the words.',
+  'A sealed message can be in motion while every power it names remains where it was.',
+  'Those who hear of the journey may know more of it than either waiting court.',
+  'The messenger has no new vote to cast between one mile and the next.',
+  'A public road gives a sealed purpose no promise of privacy.',
+  'The message moves; its authority waits.',
+]);
+
+const CORRECTED_SELF_PARLAY = Object.freeze([
+  'Ashford opened a parley on its own edge with Irontown; the rest of the war remained standing.',
+  'An ally looked for its own reason to keep fighting and found none.',
+  'A new peace errand left through the coalition edge nobody was watching.',
+  'The borrowed quarrel no longer answered for a fresh season in the field.',
+  'One court sent its own legate because an alliance can open a war without deciding how long it lasts.',
+]);
 
 function annexLines(kind) {
   const source = readFileSync(new URL('../../docs/content/RECEIPT_POOLS_WAR.md', import.meta.url), 'utf8');
-  const wr7a = source.slice(source.indexOf('## WR-7a'), source.indexOf('## WR-7b'));
+  const wr7a = source.slice(source.indexOf('## WR-7a'), source.indexOf('## WR-7c'));
   const heading = `### ${kind} `;
   const start = wr7a.indexOf(heading);
   expect(start, `${kind}: missing WR-7a annex heading`).toBeGreaterThanOrEqual(0);
@@ -50,10 +80,11 @@ function annexLines(kind) {
   ));
 }
 
-describe('SP-6 phrased-kind registry — WR-7a envoy errands', () => {
-  test('the seven-kind census and every reader join are exact', () => {
+describe('SP-6 phrased-kind registry — WR-7 envoy errands and parlays', () => {
+  test('the sixteen-kind census and every reader join are exact', () => {
     expect(ENVOY_KINDS).toEqual(EXPECTED.map(([kind]) => kind));
-    expect(ENVOY_KIND_REGISTRY).toHaveLength(7);
+    expect(ENVOY_EVIDENCE_KINDS).toEqual(ENVOY_KINDS);
+    expect(ENVOY_KIND_REGISTRY).toHaveLength(16);
     for (const [kind, significance, audience, section, depth] of EXPECTED) {
       const row = ENVOY_KIND_REGISTRY.find((candidate) => candidate.kind === kind);
       expect(row).toMatchObject({ kind, significance, audience, section });
@@ -79,12 +110,43 @@ describe('SP-6 phrased-kind registry — WR-7a envoy errands', () => {
       const rendered = row.pool.map((variant) => (
         typeof variant === 'function' ? String(variant(INTERP)) : String(variant)
       ));
-      expect(rendered).toEqual(annexLines(row.kind));
+      if (row.kind === 'envoy_on_the_road') {
+        // The later receipt-corpus deepening rewrote the tail after WR-7a shipped.
+        // Runtime compatibility is binding here: the original twelve reader
+        // outputs remain unchanged while WR-7b adds only new kinds.
+        expect(rendered.slice(0, 6)).toEqual(annexLines(row.kind).slice(0, 6));
+        expect(rendered.slice(6)).toEqual(LEGACY_ON_ROAD_TAIL);
+      } else if (row.kind === 'interceptor_parlays_own_edge') {
+        // The later Convenience ruling supersedes this annex family: self-parlay
+        // is proactive, with no collision and no commander ontology. Keep the
+        // protected corpus untouched, but never project its contradictory lines.
+        expect(rendered).toEqual(CORRECTED_SELF_PARLAY);
+        expect(annexLines(row.kind).join('\n')).toMatch(/took the legate|commander/i);
+        // anchored: `rendered` is pinned EXACTLY by the toEqual two lines up and the annex is proven to still CARRY the superseded vocabulary one line up, so an emptied pool or a rotted annex read reds there rather than passing vacuously here.
+        expect(rendered.join('\n')).not.toMatch(/intercept|stopp(?:ed|ing)|commander|roadside|took the legate/i);
+      } else if (row.kind === 'interceptor_dilemma') {
+        const governed = annexLines(row.kind);
+        governed[1] = "The column's court must choose between a paper and a position, and its books disagree.";
+        governed[3] = 'The column can hold the field or carry home terms, and not both this season.';
+        expect(annexLines(row.kind).join('\n')).toMatch(/commander/i);
+        expect(rendered).toEqual(governed);
+        // anchored: `rendered` is pinned EXACTLY by the toEqual one line up and the annex is proven to still CARRY `commander` two lines up, so an emptied pool or a rotted annex read reds there rather than passing vacuously here.
+        expect(rendered.join('\n')).not.toMatch(/commander/i);
+      } else if (row.kind === 'parlay_terms_neither_court_drafted') {
+        const governed = annexLines(row.kind);
+        governed[2] = 'The parties in the field drafted from what they had seen; the courts will read it from what they were told.';
+        expect(annexLines(row.kind).join('\n')).toMatch(/commanders/i);
+        expect(rendered).toEqual(governed);
+        // anchored: `rendered` is pinned EXACTLY by the toEqual one line up and the annex is proven to still CARRY `commanders` two lines up, so an emptied pool or a rotted annex read reds there rather than passing vacuously here.
+        expect(rendered.join('\n')).not.toMatch(/commander/i);
+      } else {
+        expect(rendered).toEqual(annexLines(row.kind));
+      }
       expect(new Set(rendered).size).toBe(row.pool.length);
       for (const line of rendered) {
         expect(line).toBe(line.trim());
         expect(line).not.toMatch(/\d|%|×|_|\$\{|\bundefined\b|\bNaN\b/);
-        expect(line).not.toMatch(/\b(?:rng|roll|score|ratio|tick|chance|probability|threshold|multiplier)\b/i);
+        expect(line).not.toMatch(/\b(?:rng|roll|score|ratio|tick|chance|probability|threshold|multiplier|schema|json|stateRead|flag)\b/i);
       }
     },
   );
@@ -121,7 +183,7 @@ describe('SP-6 phrased-kind registry — WR-7a envoy errands', () => {
     },
   );
 
-  test('unknown kinds stay closed and remote loss truth remains DM-only', () => {
+  test('unknown kinds stay closed and every immediate WR-7b fact remains DM-only', () => {
     expect(envoyReceipt('envoy_unknown', 'seed', INTERP)).toBeNull();
     expect(Object.fromEntries(ENVOY_KIND_REGISTRY.map((row) => [row.kind, row.audience])))
       .toMatchObject({
@@ -129,6 +191,15 @@ describe('SP-6 phrased-kind registry — WR-7a envoy errands', () => {
         envoy_silence_inference: 'public',
         envoy_lost: 'dm-only',
         terms_never_reached: 'dm-only',
+        envoy_intercepted: 'dm-only',
+        envoy_parlaying: 'dm-only',
+        envoy_terms_agreed: 'dm-only',
+        envoy_held: 'dm-only',
+        terms_signed_for_a_fallen_town: 'dm-only',
+        parlay_at_an_occupied_venue: 'dm-only',
+        interceptor_dilemma: 'dm-only',
+        interceptor_parlays_own_edge: 'dm-only',
+        parlay_terms_neither_court_drafted: 'dm-only',
       });
   });
 });

@@ -432,11 +432,100 @@ export const WR7_SILENCE_INFERENCE_COUPLING = couplingRow({
   intendedDesk: 'divination',
 });
 
-/** The four WR-7a transport and belief couplings, in lifecycle order. */
+/** WR-7b / CPL-5. Columns and envoys are projected from the same pre-mutation
+ * cut; collision selection either returns one codepoint-stable encounter or no
+ * encounter. No writer is advanced by this read. */
+export const WR7_ENCOUNTER_COUPLING = couplingRow({
+  couplingId: 'CPL-5.WAR_TO_GRAMMAR.WR-7.envoy_encounter',
+  pairId: 'CPL-5',
+  direction: 'WAR→GRAMMAR',
+  read: 'src/domain/worldPulse/envoyEncounter.js#selectEnvoyEncounters',
+  receiptField: 'pulseRecord.envoyEvidence[kind=envoy_intercepted|envoy_parlaying|envoy_held|interceptor_dilemma].{errandId,encounterId,thirdPartyId,armyId,venueId}',
+  counterforce: 'src/domain/worldPulse/envoyEncounter.js#selectEnvoyEncounters',
+  flags: WR7_ENVOY_FLAGS,
+  owningVolume: 'WAR',
+  owningWave: 'WR-7',
+  intendedDesk: 'war',
+});
+
+/** WR-7b / CPL-5. The unexpected door is a separate proactive census over one
+ * exact coalition join anchor and the member's own live causes. It never borrows
+ * an interception to create the errand. */
+export const WR7_SELF_PARLAY_COUPLING = couplingRow({
+  couplingId: 'CPL-5.WAR_TO_GRAMMAR.WR-7.self_parlay',
+  pairId: 'CPL-5',
+  direction: 'WAR→GRAMMAR',
+  read: 'src/domain/worldPulse/envoyEncounter.js#censusProactiveSelfParlays',
+  receiptField: 'pulseRecord.envoyEvidence[kind=interceptor_parlays_own_edge].{errandId,settlementId,counterpartId,sourceOfferId}',
+  counterforce: 'src/domain/worldPulse/envoyEncounter.js#censusProactiveSelfParlays',
+  flags: WR7_ENVOY_FLAGS,
+  owningVolume: 'WAR',
+  owningWave: 'WR-7',
+  intendedDesk: 'adjudication',
+});
+
+/** WR-7b / CPL-5. Each party drafts once from its own complete carried picture;
+ * acceptance and refusal are opposite verdicts of this same pure read. */
+export const WR7_TWO_PICTURE_PARLAY_COUPLING = couplingRow({
+  couplingId: 'CPL-5.WAR_TO_GRAMMAR.WR-7.two_picture_parlay',
+  pairId: 'CPL-5',
+  direction: 'WAR→GRAMMAR',
+  read: 'src/domain/worldPulse/negotiationPictures.js#negotiateFromPictures',
+  receiptField: 'worldState.envoyErrands[].{negotiationPicture,termSheet}; pulseRecord.envoyEvidence[kind=envoy_terms_agreed|parlay_terms_neither_court_drafted].{errandId,termSheetId,envoyPictureId,interceptorPictureId}',
+  counterforce: 'src/domain/worldPulse/negotiationPictures.js#negotiateFromPictures',
+  flags: WR7_ENVOY_FLAGS,
+  owningVolume: 'WAR',
+  owningWave: 'WR-7',
+  intendedDesk: 'adjudication',
+});
+
+/** WR-7b / CPL-5. Home arrival turns the exact carried sheet into authoritative
+ * clauses. Invalid or absent cargo is the same-read counterforce: no materialized
+ * treaty input exists and live war truth is never consulted as a substitute. */
+export const WR7_CARRIED_SHEET_COUPLING = couplingRow({
+  couplingId: 'CPL-5.GRAMMAR_TO_WAR.WR-7.carried_sheet',
+  pairId: 'CPL-5',
+  direction: 'GRAMMAR→WAR',
+  read: 'src/domain/worldPulse/peaceTerms.js#materializeCarriedTermSheet',
+  receiptField: 'worldState.envoyErrands[state=home].termSheet.{id,partyIds,relationshipKey,episodeKey,clauses,agreedTick}; spatialLedgers.treaties[].{sourceTermSheetId,sourceErrandId,sourceEncounterId,signedTick}',
+  counterforce: 'src/domain/worldPulse/peaceTerms.js#materializeCarriedTermSheet',
+  flags: WR7_ENVOY_FLAGS,
+  owningVolume: 'WAR',
+  owningWave: 'WR-7',
+  intendedDesk: 'adjudication',
+});
+
+const WR7_PLANT_FLAGS = Object.freeze([
+  ...WR7_ENVOY_FLAGS,
+  'infoStatecraftEnabled',
+  'informationBrokeragesEnabled',
+]);
+
+/** WR-7b / CPL-19. A paid envoy-picture plant enters through the one lie writer;
+ * the returned one-rung patch and later contradiction/exposure share one lineage. */
+export const WR7_ENVOY_PLANT_COUPLING = couplingRow({
+  couplingId: 'CPL-19.INFO_TO_GRAMMAR.WR-7.envoy_picture_plant',
+  pairId: 'CPL-19',
+  direction: 'INFO→GRAMMAR',
+  read: 'src/domain/worldPulse/informationStatecraft.js#processLies',
+  receiptField: 'spatialLedgers.disinfo[plant:*].{liarId,audienceId,subjectId,lineageId}; processLies(...).envoyPicturePatches[].{errandId,pictureId,field,direction,sourceId,lineageId}',
+  counterforce: 'src/domain/worldPulse/informationStatecraft.js#processLies',
+  flags: WR7_PLANT_FLAGS,
+  owningVolume: 'WAR',
+  owningWave: 'WR-7',
+  intendedDesk: 'events',
+});
+
+/** WR-7 transport, parlay, carried-authority, and belief couplings in lifecycle order. */
 export const WR7_ENVOY_COUPLINGS = Object.freeze([
   WR7_PEACE_DISPATCH_COUPLING,
+  WR7_SELF_PARLAY_COUPLING,
+  WR7_ENCOUNTER_COUPLING,
+  WR7_TWO_PICTURE_PARLAY_COUPLING,
   WR7_HOME_DELIVERY_COUPLING,
+  WR7_CARRIED_SHEET_COUPLING,
   WR7_MOVING_PICTURE_COUPLING,
+  WR7_ENVOY_PLANT_COUPLING,
   WR7_SILENCE_INFERENCE_COUPLING,
 ]);
 

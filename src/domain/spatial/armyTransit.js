@@ -110,6 +110,18 @@ export const ARMY_ROLES = Object.freeze({
   CONVOY: 'convoy', BLOCKADE: 'blockade',
 });
 
+// WR-7b keeps encounter intent on the aggregate column.  This is deliberately a
+// singular value: a malformed row cannot smuggle several private goals into the
+// encounter arbiter and let array order choose the winner.
+export const ARMY_ENVOY_INTENT_KINDS = Object.freeze(['war_continue', 'private_goal']);
+export const ARMY_ENVOY_PRIVATE_GOALS = Object.freeze(['plant', 'imprison', 'terms_shop']);
+export const ARMY_INTERCEPTION_DECISIONS = Object.freeze(['carry_terms', 'hold_mission']);
+export const ARMY_INTERCEPTION_DECISION_SCHEMA_VERSION = 1;
+
+const ARMY_ENVOY_INTENT_KIND_SET = new Set(ARMY_ENVOY_INTENT_KINDS);
+const ARMY_ENVOY_PRIVATE_GOAL_SET = new Set(ARMY_ENVOY_PRIVATE_GOALS);
+const ARMY_INTERCEPTION_DECISION_SET = new Set(ARMY_INTERCEPTION_DECISIONS);
+
 // The KNOWN role set (the role-coercion allow-list). An unrecognized role coerces to
 // MARCH; a recognized one (including the W-NAVY naval roles) passes through unchanged.
 const KNOWN_ROLES = new Set(/** @type {string[]} */ (Object.values(ARMY_ROLES)));
@@ -124,6 +136,123 @@ function finiteNumber(v, fallback) {
 /** @param {unknown} v @returns {Record<string, unknown>} */
 function asObject(v) {
   return v && typeof v === 'object' && !Array.isArray(v) ? /** @type {Record<string, unknown>} */ (v) : {};
+}
+/** @param {unknown} value @returns {string} */
+function strictText(value) {
+  return typeof value === 'string' && value.length > 0 && value.trim() === value ? value : '';
+}
+/** @param {Record<string, unknown>} row @param {readonly string[]} keys */
+function hasExactKeys(row, keys) {
+  const actual = Object.keys(row).sort();
+  const expected = [...keys].sort();
+  return actual.length === expected.length
+    && actual.every((key, index) => key === expected[index]);
+}
+
+/**
+ * Detach JSON-shaped sidecars without importing a world-pulse writer into this
+ * spatial leaf.  The army kernel applies the authoritative picture/sheet schema
+ * normalizers before every write; this boundary prevents aliasing and rejects
+ * Maps, Dates, functions, cycles, non-finite numbers, and undefined cargo.
+ * @param {unknown} value
+ * @param {Set<unknown>} [seen]
+ * @returns {unknown}
+ */
+function detachedJson(value, seen = new Set()) {
+  if (value === null || typeof value === 'string' || typeof value === 'boolean') return value;
+  if (typeof value === 'number') return Number.isFinite(value) ? value : undefined;
+  if (!value || typeof value !== 'object' || seen.has(value)) return undefined;
+  const proto = Object.getPrototypeOf(value);
+  if (proto !== Object.prototype && proto !== null && !Array.isArray(value)) return undefined;
+  seen.add(value);
+  if (Array.isArray(value)) {
+    const out = [];
+    for (const entry of value) {
+      const cloned = detachedJson(entry, seen);
+      if (cloned === undefined) { seen.delete(value); return undefined; }
+      out.push(cloned);
+    }
+    seen.delete(value);
+    return out;
+  }
+  /** @type {Record<string, unknown>} */
+  const out = {};
+  for (const key of Object.keys(/** @type {Record<string, unknown>} */ (value))) {
+    const cloned = detachedJson(/** @type {Record<string, unknown>} */ (value)[key], seen);
+    if (cloned === undefined) { seen.delete(value); return undefined; }
+    out[key] = cloned;
+  }
+  seen.delete(value);
+  return out;
+}
+
+/**
+ * Strict persisted encounter intent.  Plant intent additionally names the exact
+ * commissioned lineage and envoy target; an untargeted or merely "eligible"
+ * plant is not a fact and therefore fails closed.
+ * @param {unknown} value
+ * @returns {Record<string, unknown>|null}
+ */
+export function normalizeArmyEnvoyIntent(value) {
+  const row = asObject(value);
+  const kind = strictText(row.kind);
+  const intentId = strictText(row.intentId);
+  if (!intentId || !ARMY_ENVOY_INTENT_KIND_SET.has(kind)) return null;
+  if (kind === 'war_continue') {
+    return hasExactKeys(row, ['kind', 'intentId']) ? { kind, intentId } : null;
+  }
+  if (!Array.isArray(row.privateGoals) || row.privateGoals.length !== 1) return null;
+  const privateGoal = strictText(row.privateGoals[0]);
+  if (!ARMY_ENVOY_PRIVATE_GOAL_SET.has(privateGoal)) return null;
+  if (privateGoal !== 'plant') {
+    return hasExactKeys(row, ['kind', 'intentId', 'privateGoals'])
+      ? { kind, intentId, privateGoals: [privateGoal] }
+      : null;
+  }
+  const plantLineageId = strictText(row.plantLineageId);
+  const plantTargetErrandId = strictText(row.plantTargetErrandId);
+  if (!hasExactKeys(row, [
+    'kind', 'intentId', 'privateGoals', 'plantEligible',
+    'plantLineageId', 'plantTargetErrandId',
+  ]) || row.plantEligible !== true || !plantLineageId || !plantTargetErrandId) return null;
+  return {
+    kind,
+    intentId,
+    privateGoals: ['plant'],
+    plantEligible: true,
+    plantLineageId,
+    plantTargetErrandId,
+  };
+}
+
+/** @param {unknown} value @returns {Record<string, unknown>|null} */
+export function normalizeArmyInterceptionDecision(value) {
+  const row = asObject(value);
+  const withSheet = Object.prototype.hasOwnProperty.call(row, 'termSheetId');
+  const keys = [
+    'schemaVersion', 'id', 'kind', 'tick', 'encounterId', 'errandId',
+    ...(withSheet ? ['termSheetId'] : []),
+  ];
+  const id = strictText(row.id);
+  const kind = strictText(row.kind);
+  const tick = typeof row.tick === 'number' && Number.isInteger(row.tick) ? row.tick : null;
+  const encounterId = strictText(row.encounterId);
+  const errandId = strictText(row.errandId);
+  const termSheetId = withSheet ? strictText(row.termSheetId) : '';
+  if (!hasExactKeys(row, keys)
+    || row.schemaVersion !== ARMY_INTERCEPTION_DECISION_SCHEMA_VERSION
+    || !id || !ARMY_INTERCEPTION_DECISION_SET.has(kind)
+    || tick == null || tick < 0 || !encounterId || !errandId
+    || (withSheet && !termSheetId) || (kind === 'carry_terms' && !termSheetId)) return null;
+  return {
+    schemaVersion: ARMY_INTERCEPTION_DECISION_SCHEMA_VERSION,
+    id,
+    kind,
+    tick,
+    encounterId,
+    errandId,
+    ...(termSheetId ? { termSheetId } : {}),
+  };
 }
 /** @param {number} v @returns {number} 4-dp round for byte-tidy persisted floats */
 function round4(v) {
@@ -187,6 +316,10 @@ export function armyMarchWeeks(baseHopWeeks, readiness01 = 0.5) {
  * @property {number} funding       0..1 economic backing of the army
  * @property {number} beliefStaleness ticks since last home contact (courier umbilical)
  * @property {number} lastTick      the tick this record last advanced
+ * @property {Record<string, unknown>} [commandPicture] WR-7b frozen qualitative picture
+ * @property {Record<string, unknown>} [envoyIntent] one singular WR-7b encounter intent
+ * @property {Record<string, unknown>} [carriedTermSheet] exact authority-neutral parlay sheet
+ * @property {Record<string, unknown>} [interceptionDecision] last exact interceptor dilemma verdict
  */
 
 /** @param {unknown} rec @returns {ArmyTransitRecord|null} */
@@ -195,6 +328,10 @@ export function armyRecordOf(rec) {
   const r = /** @type {Record<string, unknown>} */ (rec);
   const path = Array.isArray(r.path) ? r.path.map(String) : [];
   const role = String(r.role ?? ARMY_ROLES.MARCH);
+  const commandPicture = detachedJson(r.commandPicture);
+  const envoyIntent = normalizeArmyEnvoyIntent(r.envoyIntent);
+  const carriedTermSheet = detachedJson(r.carriedTermSheet);
+  const interceptionDecision = normalizeArmyInterceptionDecision(r.interceptionDecision);
   return {
     armyId: String(r.armyId ?? ''),
     // The role-coercion fix (W-NAVY §2): a KNOWN role passes through; anything unknown
@@ -213,6 +350,14 @@ export function armyRecordOf(rec) {
     funding: clamp01(finiteNumber(r.funding, 0.5)),
     beliefStaleness: Math.max(0, Math.floor(finiteNumber(r.beliefStaleness, 0))),
     lastTick: Math.max(0, Math.floor(finiteNumber(r.lastTick, 0))),
+    ...(commandPicture && typeof commandPicture === 'object' && !Array.isArray(commandPicture)
+      ? { commandPicture: /** @type {Record<string, unknown>} */ (commandPicture) }
+      : {}),
+    ...(envoyIntent ? { envoyIntent } : {}),
+    ...(carriedTermSheet && typeof carriedTermSheet === 'object' && !Array.isArray(carriedTermSheet)
+      ? { carriedTermSheet: /** @type {Record<string, unknown>} */ (carriedTermSheet) }
+      : {}),
+    ...(interceptionDecision ? { interceptionDecision } : {}),
   };
 }
 

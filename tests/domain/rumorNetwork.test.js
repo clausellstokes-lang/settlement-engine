@@ -424,6 +424,25 @@ describe('expiry / top-K / continuation guard / significance gate', () => {
     expect(ledgers).toBe(null);
   });
 
+  it('DM-only and covert facts never seed, while an equally salient public sibling does', () => {
+    const entries = [
+      majorEntry({ ref: 'evt.dm-only', witnesses: ['a'], extra: { audience: 'dm-only' } }),
+      majorEntry({ ref: 'evt.covert', witnesses: ['a'], extra: { covert: true } }),
+      majorEntry({ ref: 'evt.public', witnesses: ['a'], extra: { audience: 'public' } }),
+    ];
+    const ledgers = drive({
+      ids,
+      graph,
+      entries,
+      mode: 'perfect_delayed',
+      from: 5,
+      to: 6,
+    });
+    expect(ledgers?.a?.[rumorEventKey('evt.public')]).toBeTruthy();
+    expect(ledgers?.a?.[rumorEventKey('evt.dm-only')]).toBeUndefined();
+    expect(ledgers?.a?.[rumorEventKey('evt.covert')]).toBeUndefined();
+  });
+
   it('hop budget: a notable telling fades after 2 hops; a major travels farther', () => {
     const lineIds = ['a', 'b', 'c', 'd', 'e', 'f'];
     const lineGraph = { channels: [

@@ -104,6 +104,7 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   successor_escalates_war: 'war',
   coalition_entry_priced: 'war', coalition_joined: 'war', coalition_refused: 'war',
   casus_alliance_obligation: 'war', coalition_stayed: 'war',
+  envoy_intercepted: 'war', interceptor_dilemma: 'war',
   // THE INDIRECT WAR + THE WAR OF WORDS. These nine route on `kind`, not `impactKind`
   // (their authors mint none), which is exactly why the automatic discovery scan above
   // never surfaced them: it reads `impactKind:` and `candidateType:` literals only. They
@@ -224,6 +225,10 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   // Silence is a belief forecast and therefore has an explicit divination home.
   envoy_departed: 'events', envoy_on_the_road: 'events', envoy_returning: 'events',
   envoy_home: 'events', envoy_lost: 'events', terms_never_reached: 'events',
+  envoy_parlaying: 'events', envoy_terms_agreed: 'events', envoy_held: 'events',
+  terms_signed_for_a_fallen_town: 'events', parlay_at_an_occupied_venue: 'events',
+  interceptor_parlays_own_edge: 'events', parlay_terms_neither_court_drafted: 'events',
+  envoy_dispatched: 'events',
   // traditions / custom / values (KIND_SECTION `traditions` custom-half → events)
   tradition: 'events', tradition_change: 'events', moral_reckoning: 'events', cause_lifecycle: 'events',
   // mercy (KIND_SECTION `mercy` → events)

@@ -24,13 +24,18 @@ import {
   PLANT_INTENTS,
   PLANT_REFUSALS,
   PLANT_WIRING,
+  attachEnvoyPictureTarget,
   commissionPlant,
   marketHouseOf,
   plantIsExposed,
   plantPrice,
   projectPlants,
 } from '../../src/domain/worldPulse/brokerageServicesPlant.js';
-import { LIE_TUNING, processLies } from '../../src/domain/worldPulse/informationStatecraft.js';
+import {
+  LIE_TUNING,
+  advanceInformationStatecraft,
+  processLies,
+} from '../../src/domain/worldPulse/informationStatecraft.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 const MARKET = Object.freeze({
@@ -109,6 +114,27 @@ const SNAPSHOT = {
   byId: new Map([['aaa', A], ['bbb', B], ['ccc', C]]),
 };
 
+const ENVOY_TARGET = Object.freeze({
+  kind: 'envoy_picture',
+  errandId: 'envoy-errand-7',
+  npcId: 'npc-envoy-7',
+  pictureId: 'picture-envoy-7',
+  episodeKey: 'war-episode-7',
+  subjectId: 'bbb',
+  field: 'strengthBand',
+  direction: 'fall',
+  commissionerId: 'aaa:ashwater_syndicate',
+  purpose: 'intercepted_envoy_appraisal',
+});
+
+/**
+ * The same address for an INFLATING commission. A lie's direction is bound to
+ * its intent, so `commission()` (intent 'inflate') can only carry a 'rise'
+ * target — pairing it with the 'fall' address above rejects on the intent
+ * coupling alone, which would make every forgery pin below pass vacuously.
+ */
+const ENVOY_TARGET_RISE = Object.freeze({ ...ENVOY_TARGET, direction: 'rise' });
+
 /** Commission the canonical plant used across the lifecycle tests. */
 function commission(world = worldOf(LIT_RULES)) {
   return commissionPlant({
@@ -157,7 +183,9 @@ describe('W-I I4 — only the market sells a plant', () => {
 
   test('the closed vocabularies hold and the wiring note names its own seam', () => {
     expect(PLANT_INTENTS).toEqual(['inflate', 'deflate']);
-    expect(PLANT_REFUSALS).toEqual(['dormant', 'no_market', 'bad_intent', 'cannot_pay', 'no_channel']);
+    expect(PLANT_REFUSALS).toEqual([
+      'dormant', 'no_market', 'bad_intent', 'cannot_pay', 'no_channel', 'already_active',
+    ]);
     expect(PLANT_WIRING).toMatch(/processLies/);
   });
 });
@@ -182,6 +210,219 @@ describe('W-I I4 — the commission is the LIE verb\'s own record', () => {
     // silently overwrite the other.
     expect(key.startsWith('plant:')).toBe(true);
     expect(key.startsWith('lie:')).toBe(false);
+  });
+
+  test('a generic paid plant folds through processLies without inventing an envoy patch', () => {
+    const { plant } = commission();
+    const moved = processLies({
+      snapshot: SNAPSHOT,
+      worldState: worldOf(LIT_RULES),
+      beliefMaps: { ccc: { seat: { bbb: belief(2) } } },
+      rng: null,
+      tick: 3,
+      strengthOf: () => 0.4,
+      alignmentOf: () => ({ malice01: 0, lawfulness01: 1 }),
+      nameFor: (/** @type {string} */ id) => id,
+      commissionedPlants: [plant],
+    });
+    expect(moved.disinfo[plant.key]).toEqual({
+      ...plant.record,
+      commission: { receipt: plant.receipt },
+    });
+    expect(moved.overrides.get('ccc').get('bbb')).toEqual(plant.override);
+    expect(moved.envoyPicturePatches).toEqual([]);
+  });
+
+  test('advanceInformationStatecraft persists the generic plant through the sole writer', () => {
+    const { plant } = commission();
+    const world = worldOf(LIT_RULES, 0.9, {
+      beliefMaps: { ccc: { seat: { bbb: belief(2) } } },
+    });
+    const moved = advanceInformationStatecraft({
+      snapshot: SNAPSHOT,
+      worldState: world,
+      rng: null,
+      tick: 3,
+      strengthOf: () => 0.4,
+      alignmentOf: () => ({ malice01: 0, lawfulness01: 1 }),
+      nameFor: (/** @type {string} */ id) => id,
+      commissionedPlants: [plant],
+    });
+    const ledgers = moved.worldState.spatialLedgers;
+    expect(ledgers.disinfo[plant.key]).toEqual({
+      ...plant.record,
+      commission: { receipt: plant.receipt },
+    });
+    expect(ledgers.beliefMaps.ccc.seat.bbb).toEqual(plant.override);
+    expect(moved.envoyPicturePatches).toEqual([]);
+  });
+
+  test('the no-charge attachment helper validates, detaches, and cannot retarget', () => {
+    const generic = commission().plant;
+    const target = { ...ENVOY_TARGET_RISE };
+    const attached = attachEnvoyPictureTarget(generic, target);
+    expect(attached).toEqual({ ...generic, target: ENVOY_TARGET_RISE });
+    expect(attached.record).not.toBe(generic.record);
+    expect(attached.override).not.toBe(generic.override);
+    expect(attached.receipt).not.toBe(generic.receipt);
+    expect(attached.target).not.toBe(target);
+    expect(attached).not.toHaveProperty('charge'); // anchored: full envelope asserted equal above
+
+    generic.record.assertedBand = 0;
+    target.field = 'storesBand';
+    expect(attached.record.assertedBand).toBe(4);
+    expect(attached.target.field).toBe('strengthBand');
+    expect(attachEnvoyPictureTarget(attached, ENVOY_TARGET_RISE)).toBeNull();
+  });
+
+  test('the attachment helper rejects extra keys, aliases, and provenance mismatches', () => {
+    const generic = commission().plant;
+    // The address below is the one the test above proves ATTACHES, so each
+    // refusal here is caused by the forgery under test and nothing else.
+    expect(attachEnvoyPictureTarget(generic, ENVOY_TARGET_RISE)).not.toBeNull();
+    expect(attachEnvoyPictureTarget(
+      { ...generic, unpricedAuthority: true }, ENVOY_TARGET_RISE,
+    )).toBeNull();
+    expect(attachEnvoyPictureTarget(
+      { ...generic, receipt: { ...generic.receipt, extra: true } }, ENVOY_TARGET_RISE,
+    )).toBeNull();
+    expect(attachEnvoyPictureTarget(
+      { ...generic, override: generic.record }, ENVOY_TARGET_RISE,
+    )).toBeNull();
+    expect(attachEnvoyPictureTarget(generic, {
+      ...ENVOY_TARGET_RISE, commissionerId: 'another:patron',
+    })).toBeNull();
+    expect(attachEnvoyPictureTarget(generic, {
+      ...ENVOY_TARGET_RISE, subjectId: 'another-subject',
+    })).toBeNull();
+    expect(attachEnvoyPictureTarget(generic, {
+      ...ENVOY_TARGET_RISE, extraAuthority: true,
+    })).toBeNull();
+    // The intent coupling itself: an inflating commission cannot carry a
+    // falling address, which is what made these pins vacuous before.
+    expect(attachEnvoyPictureTarget(generic, ENVOY_TARGET)).toBeNull();
+  });
+
+  test('the writer rejects malformed generic envelopes rather than partially planting them', () => {
+    const generic = commission().plant;
+    const forged = [
+      { ...generic, extraAuthority: true },
+      { ...generic, key: `${generic.key}:alias` },
+      { ...generic, receipt: { ...generic.receipt, hostId: 'another-host' } },
+      { ...generic, record: { ...generic.record, subjectId: 'another-subject' } },
+    ];
+    const moved = processLies({
+      snapshot: SNAPSHOT,
+      worldState: worldOf(LIT_RULES),
+      beliefMaps: { ccc: { seat: { bbb: belief(2) } } },
+      rng: null,
+      tick: 3,
+      strengthOf: () => 0.4,
+      alignmentOf: () => ({ malice01: 0, lawfulness01: 1 }),
+      nameFor: (/** @type {string} */ id) => id,
+      commissionedPlants: forged,
+    });
+    expect(moved.disinfo).toBeNull();
+    expect(moved.overrides.size).toBe(0);
+    expect(moved.envoyPicturePatches).toEqual([]);
+  });
+
+  test('WR-7b folds one paid envoy-picture plant through the sole lie writer', () => {
+    const target = { ...ENVOY_TARGET };
+    const commissioned = commissionPlant({
+      worldState: worldOf(LIT_RULES),
+      item: A,
+      patronId: 'aaa:ashwater_syndicate',
+      audienceId: 'ccc',
+      subjectId: 'bbb',
+      subjectTrueBand: 2,
+      audienceBelief: belief(2),
+      intent: 'deflate',
+      tick: 3,
+      target,
+    });
+    expect(commissioned.refused).toBe(false);
+    expect(commissioned.plant.target).toEqual(target);
+
+    const moved = processLies({
+      snapshot: SNAPSHOT,
+      worldState: worldOf(LIT_RULES),
+      beliefMaps: { ccc: { seat: { bbb: belief(2) } } },
+      rng: null,
+      tick: 3,
+      strengthOf: () => 0.4,
+      alignmentOf: () => ({ malice01: 0, lawfulness01: 1 }),
+      nameFor: (/** @type {string} */ id) => id,
+      commissionedPlants: [commissioned.plant],
+    });
+    expect(moved.disinfo[commissioned.plant.key]).toEqual({
+      ...commissioned.plant.record,
+      commission: {
+        receipt: commissioned.plant.receipt,
+        target: commissioned.plant.target,
+      },
+    });
+    expect(moved.overrides.get('ccc').get('bbb')).toEqual(commissioned.plant.override);
+    expect(moved.envoyPicturePatches).toEqual([{
+      id: `envoy_picture_patch:${commissioned.plant.record.lineageId}`,
+      kind: 'plant',
+      sourceId: commissioned.plant.record.lineageId,
+      lineageId: commissioned.plant.record.lineageId,
+      targetKind: 'envoy_picture',
+      errandId: 'envoy-errand-7',
+      npcId: 'npc-envoy-7',
+      pictureId: 'picture-envoy-7',
+      episodeKey: 'war-episode-7',
+      subjectId: 'bbb',
+      field: 'strengthBand',
+      direction: 'fall',
+      tick: 3,
+    }]);
+  });
+
+  test('WR-7b rejects a forged or stale envoy target without writing disinfo', () => {
+    const base = {
+      worldState: worldOf(LIT_RULES),
+      item: A,
+      patronId: 'aaa:ashwater_syndicate',
+      audienceId: 'ccc',
+      subjectId: 'bbb',
+      subjectTrueBand: 2,
+      audienceBelief: belief(2),
+      intent: 'deflate',
+      tick: 3,
+      target: {
+        kind: 'envoy_picture',
+        errandId: 'envoy-errand-7',
+        npcId: 'npc-envoy-7',
+        pictureId: 'picture-envoy-7',
+        episodeKey: 'war-episode-7',
+        subjectId: 'bbb',
+        field: 'strengthBand',
+        direction: 'fall',
+        commissionerId: 'aaa:ashwater_syndicate',
+        purpose: 'intercepted_envoy_appraisal',
+      },
+    };
+    expect(commissionPlant({
+      ...base,
+      target: { ...base.target, extraAuthority: true },
+    }).refusal.reason).toBe('bad_intent');
+
+    const valid = commissionPlant(base).plant;
+    const moved = processLies({
+      snapshot: SNAPSHOT,
+      worldState: worldOf(LIT_RULES),
+      beliefMaps: { ccc: { seat: { bbb: belief(2) } } },
+      rng: null,
+      tick: 4,
+      strengthOf: () => 0.4,
+      alignmentOf: () => ({ malice01: 0, lawfulness01: 1 }),
+      nameFor: (/** @type {string} */ id) => id,
+      commissionedPlants: [valid],
+    });
+    expect(moved.disinfo).toBeNull();
+    expect(moved.envoyPicturePatches).toEqual([]);
   });
 
   test('a deflating commission is the mirror, and both directions are bounded to the band range', () => {
@@ -278,6 +519,19 @@ describe('W-I I4 — the market\'s credibility backs the lie and prices it', () 
     expect(broke.plant).toBeNull();
     expect(broke.charge).toBeNull();
   });
+
+  test('an already-active exact plant key is refused before any second charge exists', () => {
+    const first = commission();
+    const world = worldOf(LIT_RULES, 0.9, {
+      disinfo: { [first.plant.key]: first.plant.record },
+    });
+    const duplicate = commission(world);
+    expect(duplicate.refused).toBe(true);
+    expect(duplicate.refusal.reason).toBe('already_active');
+    expect(duplicate.plant).toBeNull();
+    expect(duplicate.price).toBeNull();
+    expect(duplicate.charge).toBeNull();
+  });
 });
 
 describe('W-I I4 — PLANTS ARE DM TRUTH UNTIL EXPOSED', () => {
@@ -342,6 +596,13 @@ describe('W-I I4 — honest refusals and dormancy', () => {
     // in. That is the LIE verb's own rule applied at the counter.
     seen.add(commissionPlant({ ...base, worldState: worldOf(LIT_RULES), audienceBelief: null }).refusal.reason);
     seen.add(commissionPlant({ ...base, worldState: worldOf(LIT_RULES, 0) }).refusal.reason);
+    const active = commissionPlant({ ...base, worldState: worldOf(LIT_RULES) });
+    seen.add(commissionPlant({
+      ...base,
+      worldState: worldOf(LIT_RULES, 0.9, {
+        disinfo: { [active.plant.key]: active.plant.record },
+      }),
+    }).refusal.reason);
     expect([...seen].sort()).toEqual([...PLANT_REFUSALS].sort());
   });
 

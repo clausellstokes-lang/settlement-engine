@@ -98,6 +98,70 @@ export function joinAnchorOf(deployment, partyId = null) {
 }
 
 /**
+ * The positive, independently-owned causes currently standing on one exact
+ * deployment edge.  `alliance_obligation` is deliberately absent: it is the
+ * borrowed permission to enter the war, never a reason the joined court owns.
+ *
+ * A supplied deployment is only a witness for the current persisted episode;
+ * stale target/since rows cannot lend a later front their causes.  Any row that
+ * claims coalition membership must also carry one valid closed join anchor.
+ * Root callers may request `foundingOnly` to retain WR-6's stricter rule that a
+ * coalition call remains grounded in a cause pinned when that root marched.
+ *
+ * @param {unknown} worldState
+ * @param {unknown} partyId
+ * @param {unknown} enemyId
+ * @param {{deployment?:unknown,requireJoinAnchor?:boolean,foundingOnly?:boolean}} [options]
+ * @returns {string[]}
+ */
+export function independentLiveWarCauseTypes(
+  worldState,
+  partyId,
+  enemyId,
+  { deployment = null, requireJoinAnchor = false, foundingOnly = false } = {},
+) {
+  const state = asObject(worldState);
+  const party = typeof partyId === 'string' ? partyId.trim() : '';
+  const enemy = typeof enemyId === 'string' ? enemyId.trim() : '';
+  if (!party || !enemy || party === enemy) return [];
+
+  const current = asObject(asObject(state.deployments)[party]);
+  const witness = deployment == null ? current : asObject(deployment);
+  const currentSince = Number(current.sinceTick);
+  const witnessSince = Number(witness.sinceTick);
+  if (!Object.keys(current).length
+    || current.recalled != null
+    || String(current.targetId || '') !== enemy
+    || !Number.isInteger(currentSince) || currentSince < 0
+    || String(witness.targetId || '') !== enemy
+    || witnessSince !== currentSince) return [];
+
+  const currentHasJoinClaim = Object.prototype.hasOwnProperty.call(current, 'joinLedger');
+  const witnessHasJoinClaim = Object.prototype.hasOwnProperty.call(witness, 'joinLedger');
+  const currentAnchor = joinAnchorOf(current, party);
+  const witnessAnchor = joinAnchorOf(witness, party);
+  if ((currentHasJoinClaim && !currentAnchor)
+    || (witnessHasJoinClaim && !witnessAnchor)
+    || (requireJoinAnchor && (!currentAnchor || !witnessAnchor))
+    || (!!currentAnchor !== !!witnessAnchor)
+    || (currentAnchor
+      && JSON.stringify(currentAnchor) !== JSON.stringify(witnessAnchor))) return [];
+
+  const ledger = asObject(getSpatialLedger(state, 'warReasons'));
+  const reasons = asObject(asObject(ledger[`${party}>${enemy}`]).reasons);
+  const positive = Object.keys(reasons)
+    .filter((type) => isWarReasonType(type)
+      && type !== COALITION_JOIN_CAUSE
+      && Number(asObject(reasons[type]).score) > 0);
+  if (!foundingOnly) return [...new Set(positive)].sort();
+
+  const founding = new Set((Array.isArray(current.casusReasons) ? current.casusReasons : [])
+    .map((row) => String(asObject(row).type || ''))
+    .filter((type) => type && type !== COALITION_JOIN_CAUSE));
+  return [...new Set(positive.filter((type) => founding.has(type)))].sort();
+}
+
+/**
  * Durable witness for the anchored coalition around one closing bilateral edge.
  * This pure read is deliberately homed below peaceTerms so the relationship
  * writer can preserve it at acceptance time, before a later war pass removes

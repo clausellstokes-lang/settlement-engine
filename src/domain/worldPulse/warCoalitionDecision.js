@@ -16,6 +16,7 @@ import {
 import {
   allianceCallWasDecided,
   coalitionCallIdFor,
+  independentLiveWarCauseTypes,
   joinAnchorOf,
   warCoalitionActive,
 } from './warCoalitionLedger.js';
@@ -25,15 +26,6 @@ const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
 function codepoint(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
 function asObject(value) {
   return value && typeof value === 'object' && !Array.isArray(value) ? value : {};
-}
-
-function liveRootCauses(worldState, callerId, enemyId, deployment) {
-  const ledger = asObject(asObject(worldState.spatialLedgers).warReasons);
-  const reasons = asObject(asObject(ledger[`${callerId}>${enemyId}`]).reasons);
-  return [...new Set((Array.isArray(deployment?.casusReasons) ? deployment.casusReasons : [])
-    .map((row) => String(row?.type || ''))
-    .filter((type) => type && type !== 'alliance_obligation' && Number(asObject(reasons[type]).score) > 0))]
-    .sort(codepoint);
 }
 
 function truthRelationshipFor(snapshot, observerId, subjectId) {
@@ -71,7 +63,12 @@ export function readCoalitionJoinDecisions({ snapshot, worldState, tick, strengt
     if (!snapshot?.byId?.has?.(callerId) || !snapshot?.byId?.has?.(rootTargetId)) continue;
     const sinceTick = Number(deployment.sinceTick);
     if (!rootTargetId || !Number.isInteger(sinceTick) || sinceTick < 0) continue;
-    const sourceCauseTypes = liveRootCauses(worldState, callerId, rootTargetId, deployment);
+    const sourceCauseTypes = independentLiveWarCauseTypes(
+      worldState,
+      callerId,
+      rootTargetId,
+      { deployment, foundingOnly: true },
+    );
     if (!sourceCauseTypes.length) continue;
     // Both courts may call: the attacking seat calls allies into its campaign;
     // the defending seat calls allies against the physical root attacker.  Both

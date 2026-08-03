@@ -178,6 +178,7 @@ function shutDoorsLine(shutDoors, nameFor) {
  * @property {string} originName
  * @property {string} restingId      where they are now, for a link (never printed)
  * @property {string} restingName
+ * @property {boolean} heldAbroad    DM-ONLY knowledge expressed as authored prose
  * @property {string} dmLine         DM-ONLY: the covert read, or '' for a player
  */
 
@@ -186,6 +187,15 @@ function shutDoorsLine(shutDoors, nameFor) {
 const COMPROMISE_LINE = Object.freeze({
   rival_power: 'Your notes: a rival power held their leash.',
   criminal_institution: 'Your notes: the underworld held their leash.',
+});
+
+/** Why the foreign power stopped the traveller. These are DM sentences over the
+ * hold writer's closed cause vocabulary; no engine token is allowed to fall through. */
+const FOREIGN_HOLD_CAUSE_LINE = Object.freeze({
+  war_continuation: 'The captor means to keep the war in motion.',
+  private_imprisonment: 'The captor chose imprisonment for reasons of their own.',
+  terms_shopping: 'The captor is carrying the terms from court to court.',
+  parlay_refused: 'The meeting ended without leave to depart.',
 });
 
 /**
@@ -206,9 +216,22 @@ const COMPROMISE_LINE = Object.freeze({
  */
 function rowOf(person, nameFor, roaming) {
   const originId = String(person.originSettlementId || '');
-  const restingId = String(person.restingAt || person.hostSettlementId || '');
-  const covert = person.dmTruth && typeof person.dmTruth === 'object'
-    ? String(/** @type {Record<string, unknown>} */ (person.dmTruth).compromiseSource || '')
+  const covertTruth = person.dmTruth && typeof person.dmTruth === 'object'
+    ? /** @type {Record<string, unknown>} */ (person.dmTruth)
+    : {};
+  const covert = String(covertTruth.compromiseSource || '');
+  const foreignHold = covertTruth.foreignGuestHold
+    && typeof covertTruth.foreignGuestHold === 'object'
+    && !Array.isArray(covertTruth.foreignGuestHold)
+    ? /** @type {Record<string, unknown>} */ (covertTruth.foreignGuestHold)
+    : null;
+  const heldAbroad = !!foreignHold;
+  const heldVenueId = foreignHold ? String(foreignHold.venueId || '') : '';
+  const restingId = heldVenueId || String(person.restingAt || person.hostSettlementId || '');
+  const heldVenueName = nameFor(heldVenueId);
+  const captorName = foreignHold ? nameFor(String(foreignHold.captorId || '')) : '';
+  const custodyDmLine = foreignHold
+    ? `Your register names ${captorName || 'a foreign power'} as the captor. ${FOREIGN_HOLD_CAUSE_LINE[String(foreignHold.cause || '')] || 'Their purpose is not yet known.'}`
     : '';
   const standing = [
     COMPETENCE_LINE[String(person.competenceRead || 'unknown')] || '',
@@ -219,23 +242,32 @@ function rowOf(person, nameFor, roaming) {
     name: String(person.name || '') || 'A stranger',
     title: formerTitle(String(person.role || '')),
     roaming,
-    whyLine: CAUSE_LINE[String(person.verdictCause || 'none')] || CAUSE_LINE.none,
+    whyLine: heldAbroad
+      ? 'They are held abroad while carrying the realm\'s business.'
+      : CAUSE_LINE[String(person.verdictCause || 'none')] || CAUSE_LINE.none,
     notorietyLine: NOTORIETY_LINE[String(person.notorietyBand || 'unknown')] || NOTORIETY_LINE.unknown,
     standingLines: Object.freeze(standing),
-    whenLine: roaming
-      ? wanderingLabel(Number(person.elapsedTicks))
-      : restingLabel(Number(person.elapsedTicks)),
+    whenLine: heldAbroad
+      ? 'Their journey waits on a foreign gaoler.'
+      : roaming
+        ? wanderingLabel(Number(person.elapsedTicks))
+        : restingLabel(Number(person.elapsedTicks)),
     doorsLine: shutDoorsLine(person.shutDoors, nameFor),
-    whereaboutsLine: person.whereaboutsUnknown === true
-      ? 'Their present whereabouts are unknown.'
-      : '',
+    whereaboutsLine: heldAbroad
+      ? (heldVenueName
+          ? `They are held abroad at ${heldVenueName}.`
+          : 'They are held abroad at a place the register cannot name.')
+      : person.whereaboutsUnknown === true
+        ? 'Their present whereabouts are unknown.'
+        : '',
     originId,
     originName: nameFor(originId),
     restingId,
     restingName: nameFor(restingId),
+    heldAbroad,
     // Present ONLY because the projection built it. A player row cannot reach this
     // branch, because a player projection carries no covert field to read.
-    dmLine: COMPROMISE_LINE[covert] || '',
+    dmLine: [COMPROMISE_LINE[covert] || '', custodyDmLine].filter(Boolean).join(' '),
   };
 }
 

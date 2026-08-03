@@ -103,7 +103,7 @@ export function WandererCard({ row, seesSecrets, campaignId, places }) {
         )}
         {row.restingId && (
           <span>
-            {row.roaming ? 'Resting at ' : 'Held at '}
+            {row.heldAbroad ? 'Held abroad at ' : row.roaming ? 'Resting at ' : 'Held at '}
             <RealmEntityLink settlementSaveId={row.restingId} label={row.restingName || 'a place the record does not name'} />
           </span>
         )}

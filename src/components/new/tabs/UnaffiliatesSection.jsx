@@ -65,6 +65,11 @@ function UnaffiliateCard({ row, campaignId, seesSecrets }) {
         {row.whyLine} {row.notorietyLine}
       </div>
       <div style={{ fontFamily: sans, fontSize: FS.xxs, color: MUTED }}>{row.whenLine}</div>
+      {row.whereaboutsLine && (
+        <div style={{ fontFamily: sans, fontSize: FS.xxs, color: MUTED, fontWeight: 800 }}>
+          {row.whereaboutsLine}
+        </div>
+      )}
       {row.dmLine && (
         <div data-testid="unaffiliate-dm-line" style={{ fontFamily: sans, fontSize: FS.xxs, color: MUTED, fontStyle: 'italic' }}>
           {row.dmLine}

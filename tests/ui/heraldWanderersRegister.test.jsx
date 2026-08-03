@@ -62,11 +62,13 @@ import UnaffiliatesSection from '../../src/components/new/tabs/UnaffiliatesSecti
 import { realmInspectorSectionsFor, REALM_INSPECTOR_SECTIONS } from '../../src/components/map/RealmInspector.jsx';
 import { wandererRows, unaffiliateRows, wanderersDoorOpen } from '../../src/components/map/heraldWanderers.js';
 import { graduateNpc, addExclusionEdge } from '../../src/domain/worldPulse/npcLedger.js';
+import { openForeignGuestHold } from '../../src/domain/worldPulse/foreignGuestHold.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SAVES = [
   { id: 'sav_kelder', name: 'Kelder', settlement: { id: 'sav_kelder', name: 'Kelder' } },
   { id: 'sav_thorn', name: 'Thornreach', settlement: { id: 'sav_thorn', name: 'Thornreach' } },
+  { id: 'sav_captor', name: 'Greywatch', settlement: { id: 'sav_captor', name: 'Greywatch' } },
 ];
 
 /** A campaign whose ledger holds one banished harbourmaster resting at Thornreach. */
@@ -101,6 +103,51 @@ function campaignWithWanderer({ lit = true, resting = 'sav_thorn' } = {}) {
   return {
     campaign: { id: 'camp-1', settlementIds: ['sav_kelder', 'sav_thorn'], worldState },
     wnpcId: g.wnpcId,
+  };
+}
+
+/** The same named person, stopped abroad under an exact DM-only custody row. */
+function campaignWithHeldWanderer() {
+  const base = campaignWithWanderer({ resting: null });
+  const opened = openForeignGuestHold({
+    worldState: base.campaign.worldState,
+    hold: {
+      schemaVersion: 1,
+      id: 'hold:maera-greywatch',
+      npcId: base.wnpcId,
+      errandId: 'errand:maera-greywatch',
+      encounterId: 'encounter:maera-greywatch',
+      captorId: 'sav_kelder',
+      venueId: 'sav_captor',
+      venueRef: { kind: 'settlement', settlementId: 'sav_captor' },
+      heldSinceTick: 10,
+      cause: 'private_imprisonment',
+      continuation: {
+        schemaVersion: 1,
+        resumeState: 'travelling',
+        journey: 'outbound',
+        destinationId: 'sav_thorn',
+        interruptedTick: 9,
+        positionRef: {
+          journey: 'outbound', legIndex: 0, fromId: 'sav_captor', toId: 'sav_thorn',
+          progressBand: 'underway',
+        },
+        journeyLegs: [{
+          fromId: 'sav_captor', toId: 'sav_thorn', departTick: 8, arrivalTick: 15,
+          journey: 'outbound', routeRef: { id: 'road:greywatch-thorn' },
+        }],
+        expectedReturnTick: 20,
+      },
+    },
+  });
+  expect(opened.reason).toBe('opened');
+  return {
+    ...base,
+    campaign: {
+      ...base.campaign,
+      settlementIds: [...base.campaign.settlementIds, 'sav_captor'],
+      worldState: opened.worldState,
+    },
   };
 }
 
@@ -162,6 +209,32 @@ describe('W-H4 — the register reads as prose, never as engine tokens', () => {
     expect(player.dmLine).toBe('');
     expect(JSON.stringify(player).includes('rival_power')).toBe(false);
   });
+
+  test('foreign custody has its own DM wording and leaks neither captor nor venue to a player', () => {
+    const { campaign } = campaignWithHeldWanderer();
+    const dm = wandererRows({ campaign, saves: SAVES, seesSecrets: true }).roaming[0];
+    const player = wandererRows({ campaign, saves: SAVES, seesSecrets: false }).roaming[0];
+
+    expect(dm).toMatchObject({
+      heldAbroad: true,
+      whyLine: 'They are held abroad while carrying the realm\'s business.',
+      whenLine: 'Their journey waits on a foreign gaoler.',
+      whereaboutsLine: 'They are held abroad at Greywatch.',
+      restingId: 'sav_captor',
+      restingName: 'Greywatch',
+    });
+    expect(dm.dmLine).toContain('Kelder as the captor');
+    expect(dm.dmLine).toContain('chose imprisonment');
+    expect(dm.whyLine).not.toBe('They are held under sentence.');
+
+    expect(player.heldAbroad).toBe(false);
+    expect(player.whyLine).toBe('They were put out by an edict.');
+    expect(player.whereaboutsLine).toBe('');
+    const playerBytes = JSON.stringify(player);
+    for (const secret of ['sav_captor', 'Greywatch', 'hold:maera-greywatch', 'Kelder as the captor']) {
+      expect(playerBytes.includes(secret), `player row leaked ${secret}`).toBe(false);
+    }
+  });
 });
 
 describe('W-H4 — one truth, two views', () => {
@@ -204,6 +277,16 @@ describe('W-H4 — the Herald door renders', () => {
     expect(screen.queryByTestId('wanderer-verbs')).toBeNull();
     expect(screen.queryByTestId('wanderer-dm-line')).toBeNull();
     storeState.auth = priorAuth;
+  });
+
+  test('an owner reads foreign custody distinctly from resting or a local jail', () => {
+    const { campaign } = campaignWithHeldWanderer();
+    storeState.savedSettlements = SAVES;
+    render(<HeraldWanderers campaign={campaign} saves={SAVES} />);
+    expect(screen.getByText('They are held abroad at Greywatch.')).toBeTruthy();
+    expect(screen.getByText(/Held abroad at/)).toBeTruthy();
+    expect(screen.getByText(/Kelder as the captor/)).toBeTruthy();
+    expect(screen.queryByText(/Resting at Greywatch/)).toBeNull();
   });
 
   test('EMPTY STATE: a realm that has exiled nobody says so, in world words', () => {

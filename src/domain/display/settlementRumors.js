@@ -166,6 +166,18 @@ export const WHAT_PHRASES = Object.freeze({
   envoy_lost: 'a legate missing on the road',
   envoy_silence_inference: 'a court fearing for its missing legate',
   terms_never_reached: 'terms stranded upon the road',
+  // WR-7b facts remain DM truth at their immediate source. These phrases are
+  // closed world-language fallbacks for a later earned observation carrier;
+  // their presence here grants no public audience by itself.
+  envoy_intercepted: 'a legate stopped by a marching column',
+  envoy_parlaying: 'a legate seated at parley',
+  envoy_terms_agreed: 'terms agreed away from home',
+  envoy_held: 'a foreign legate held as a guest',
+  terms_signed_for_a_fallen_town: 'terms naming a town already fallen',
+  parlay_at_an_occupied_venue: 'a parley held under an occupying garrison',
+  interceptor_dilemma: 'a column choosing between terms and the field',
+  interceptor_parlays_own_edge: 'an ally opening peace on its own edge',
+  parlay_terms_neither_court_drafted: 'field terms neither court drafted',
   // The INDIRECT war and the war of words. These nine are keyed on `kind` rather than
   // `impactKind`, because their authors (momentum.js, supplyWebWarfare.js,
   // informationStatecraft.js) mint no impactKind. That is exactly why the impactKind

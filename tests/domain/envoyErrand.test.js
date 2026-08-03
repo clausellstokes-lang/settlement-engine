@@ -6,22 +6,32 @@ import {
   MAX_TERMINAL_ENVOY_HISTORY,
   advanceEnvoyErrands,
   advanceEnvoySilence,
+  agreeEnvoyTerms,
   applyEnvoyRumorPatch,
   beginEnvoyReturn,
   closeEnvoyErrandsForNpcDeath,
   envoyDiplomacyActive,
+  envoyContinuationForHold,
   envoyErrandForOffer,
   envoyErrandIdForOffer,
+  envoyOfferEpisodeKey,
   envoyErrandsOf,
   hasActiveEnvoyForOffer,
+  markEnvoyIntercepted,
   markEnvoyHome,
   markEnvoyLost,
   mintEnvoyErrand,
   normalizeEnvoyAcceptance,
   normalizeEnvoyDepartureSnapshot,
   normalizeEnvoyPeaceOffer,
+  previewEnvoyPosition,
+  projectEnvoyForEncounter,
+  releaseHeldEnvoy,
+  resolveEnvoyInterception,
   restoreEnvoyErrands,
+  updateEnvoyNegotiationPicture,
 } from '../../src/domain/worldPulse/envoyErrand.js';
+import { createNegotiationPicture } from '../../src/domain/worldPulse/negotiationPictures.js';
 
 const LIT_RULES = Object.freeze(Object.fromEntries(
   ENVOY_REQUIRED_RULES.map((key) => [key, true]),
@@ -160,6 +170,12 @@ function mintOne(worldState, options = {}) {
   const acceptance = Object.prototype.hasOwnProperty.call(options, 'acceptance')
     ? options.acceptance
     : acceptedRuling(outcome);
+  const negotiationPicture = options.negotiationPicture ?? null;
+  // The pairing is the contract, so the default mirrors it rather than letting a
+  // caller mint a half-sighted parlay by omission. Its negative pin lives below.
+  const targetCourtPicture = Object.prototype.hasOwnProperty.call(options, 'targetCourtPicture')
+    ? options.targetCourtPicture
+    : (negotiationPicture ? courtPictureFor(outcome) : null);
   return mintEnvoyErrand({
     worldState,
     outcome,
@@ -169,9 +185,132 @@ function mintOne(worldState, options = {}) {
     fromName: options.fromName || 'Ashford',
     toName: options.toName || 'Irontown',
     snapshot: options.snapshot || SNAPSHOT,
+    negotiationPicture,
+    targetCourtPicture,
+    purpose: options.purpose || 'sue',
     routePlan: options.routePlan || routePlan(),
     tick: options.tick ?? 10,
   });
+}
+
+function negotiationPictureFor(outcome = peaceOffer(), options = {}) {
+  const normalized = normalizeEnvoyPeaceOffer(outcome);
+  const from = normalized.proposalPayload.offererId;
+  const to = normalized.proposalPayload.targetId;
+  return createNegotiationPicture({
+    id: options.id || `picture.${from}.${to}`,
+    carrier: { kind: 'envoy', id: envoyErrandIdForOffer(outcome) },
+    partyId: from,
+    counterpartId: to,
+    relationshipKey: normalized.relationshipKey,
+    episodeKey: envoyOfferEpisodeKey(outcome),
+    frontOwnerId: normalized.proposalPayload.peaceFrontOwnerId,
+    frontSinceTick: normalized.proposalPayload.peaceFrontSinceTick,
+    capturedTick: options.tick ?? normalized.generatedAtTick,
+    causeStatus: 'live',
+    subjects: [
+      { settlementId: from, strengthBand: 'ready', storesBand: 'thin' },
+      { settlementId: to, strengthBand: 'strong', storesBand: 'stocked' },
+    ],
+    evidenceIds: [],
+  });
+}
+
+/**
+ * The receiving court's own frozen picture. The two-picture contract pairs it
+ * with the envoy's: neither party ever evaluates on a merged estimate (K4).
+ */
+function courtPictureFor(outcome = peaceOffer(), options = {}) {
+  const normalized = normalizeEnvoyPeaceOffer(outcome);
+  const from = normalized.proposalPayload.offererId;
+  const to = normalized.proposalPayload.targetId;
+  return createNegotiationPicture({
+    id: options.id || `court-picture.${to}`,
+    carrier: { kind: 'court', id: options.carrierId || to },
+    partyId: to,
+    counterpartId: from,
+    relationshipKey: normalized.relationshipKey,
+    episodeKey: envoyOfferEpisodeKey(outcome),
+    frontOwnerId: normalized.proposalPayload.peaceFrontOwnerId,
+    frontSinceTick: normalized.proposalPayload.peaceFrontSinceTick,
+    capturedTick: options.tick ?? normalized.generatedAtTick,
+    causeStatus: 'live',
+    subjects: [
+      { settlementId: to, strengthBand: 'strong', storesBand: 'stocked' },
+      { settlementId: from, strengthBand: 'ready', storesBand: 'thin' },
+    ],
+    evidenceIds: [],
+  });
+}
+
+/**
+ * An interceptor column's own picture, carried by the army rather than a court.
+ * Sourced from that column's belief exposure only — never from truth (K3).
+ */
+function armyPictureFor({
+  outcome = peaceOffer(),
+  armyId,
+  interceptorId,
+  counterpartId,
+  tick,
+  id,
+} = {}) {
+  const normalized = normalizeEnvoyPeaceOffer(outcome);
+  const payload = normalized.proposalPayload;
+  return createNegotiationPicture({
+    id: id || `army-picture.${armyId}`,
+    carrier: { kind: 'army', id: armyId },
+    partyId: interceptorId,
+    counterpartId,
+    relationshipKey: normalized.relationshipKey,
+    episodeKey: envoyOfferEpisodeKey(outcome),
+    frontOwnerId: payload.peaceFrontOwnerId,
+    frontSinceTick: payload.peaceFrontSinceTick,
+    capturedTick: tick,
+    causeStatus: 'live',
+    subjects: [
+      { settlementId: interceptorId, strengthBand: 'strong', storesBand: 'stocked' },
+      { settlementId: counterpartId, strengthBand: 'ready', storesBand: 'thin' },
+    ],
+    evidenceIds: [],
+  });
+}
+
+function whitePeaceSheet(errand, agreedTick) {
+  return {
+    schemaVersion: 1,
+    id: `sheet.${errand.id}`,
+    errandId: errand.id,
+    encounterId: errand.parlayId,
+    episodeKey: envoyOfferEpisodeKey(errand.offer),
+    relationshipKey: errand.offer.relationshipKey,
+    parties: [errand.from, errand.to].sort(),
+    proposerId: errand.from,
+    responderId: errand.to,
+    victorId: errand.from,
+    loserId: errand.to,
+    agreedTick,
+    pictureIds: {
+      proposer: errand.negotiationPicture.id,
+      responder: `court-picture.${errand.to}`,
+    },
+    clauses: [],
+    budgetSpent: 0,
+    valuations: [
+      {
+        partyId: errand.from,
+        pictureId: errand.negotiationPicture.id,
+        role: 'proposer',
+        decision: 'accept',
+      },
+      {
+        partyId: errand.to,
+        pictureId: `court-picture.${errand.to}`,
+        role: 'responder',
+        decision: 'accept',
+      },
+    ],
+  };
 }
 
 describe('WR-7a envoy errand activation and minting', () => {
@@ -765,5 +904,384 @@ describe('WR-7a envoy information and bounded persistence', () => {
         reason: 'invalid_acceptance',
       });
     }
+  });
+});
+
+describe('WR-7b envoy interception substrate', () => {
+  it('records proactive self-parlay as an ordinary envoy genesis, not a collision', () => {
+    const outcome = peaceOffer();
+    const minted = mintOne(litWorld(), {
+      outcome,
+      purpose: 'self_parlay',
+      negotiationPicture: negotiationPictureFor(outcome),
+    });
+    expect(minted).toMatchObject({ changed: true, reason: 'minted' });
+    expect(minted.errand).toMatchObject({ purpose: 'self_parlay', state: 'travelling' });
+    // anchored: the errand's purpose and state are asserted immediately above, so
+    // it is demonstrably a real minted row — this absence proves a proactive
+    // self-parlay carries no collision history, not that minting returned nothing.
+    expect(minted.errand).not.toHaveProperty('encounters'); // anchored: errand proven populated above
+    expect(minted.evidence.map((row) => row.kind)).toEqual([
+      'envoy_departed',
+      'interceptor_parlays_own_edge',
+    ]);
+  });
+
+  it('projects one shared temporal cut and records exactly one T interception', () => {
+    const outcome = peaceOffer();
+    const picture = negotiationPictureFor(outcome);
+    const minted = mintOne(litWorld(), {
+      outcome,
+      routePlan: {
+        legs: [
+          { fromId: 'ashford', toId: 'ford', departTick: 10, arrivalTick: 12 },
+          { fromId: 'ford', toId: 'irontown', departTick: 13, arrivalTick: 15 },
+        ],
+        expectedReturnTick: 20,
+        routeRef: { id: 'road.north' },
+      },
+      negotiationPicture: picture,
+    });
+    expect(minted.reason).toBe('minted');
+    expect(previewEnvoyPosition(minted.errand, 11)).toMatchObject({
+      nodeId: 'ashford',
+      journey: 'outbound',
+      projectionPhase: 'pre_mutation',
+      complete: false,
+    });
+    expect(previewEnvoyPosition(minted.errand, 12)).toMatchObject({
+      nodeId: 'ford',
+      positionRef: { progressBand: 'arrived' },
+    });
+    expect(previewEnvoyPosition(minted.errand, 13)).toMatchObject({
+      nodeId: 'ford',
+      positionRef: { legIndex: 1, progressBand: 'departed' },
+    });
+    expect(projectEnvoyForEncounter(minted.errand, 11)).toMatchObject({
+      errandId: minted.errand.id,
+      relationshipKey: 'ashford::irontown',
+      nodeId: 'ashford',
+      projectedTick: 11,
+    });
+
+    const candidate = {
+      id: 'encounter.1',
+      kind: 'private_goal',
+      privateGoal: 'imprison',
+      tick: 11,
+      errandId: minted.errand.id,
+      npcId: 'npc.reeve',
+      actorId: 'red-court',
+      armyId: 'army.red.1',
+      nodeId: 'ashford',
+      relationshipKey: 'ashford::irontown',
+      episodeKey: envoyOfferEpisodeKey(outcome),
+      routeId: 'road.north',
+      venueRef: { id: 'ashford', kind: 'field_node' },
+    };
+    const interceptorPicture = armyPictureFor({
+      outcome,
+      armyId: 'army.red.1',
+      interceptorId: 'red-court',
+      counterpartId: 'ashford',
+      tick: 11,
+    });
+    const intercepted = markEnvoyIntercepted({
+      worldState: minted.worldState,
+      errandId: minted.errand.id,
+      encounter: candidate,
+      interceptorPicture,
+      expectedErrand: minted.errand,
+      tick: 11,
+    });
+    expect(intercepted).toMatchObject({ changed: true, reason: 'intercepted' });
+    expect(intercepted.errand).toMatchObject({
+      state: 'intercepted',
+      positionRef: { journey: 'outbound', progressBand: 'underway' },
+      encounters: [{
+        schemaVersion: 1,
+        id: 'encounter.1',
+        resolution: 'pending',
+        interceptorId: 'red-court',
+        armyId: 'army.red.1',
+        venueId: 'ashford',
+      }],
+    });
+    expect(intercepted.evidence[0]).toMatchObject({
+      kind: 'envoy_intercepted',
+      thirdPartyId: 'red-court',
+      encounterId: 'encounter.1',
+    });
+    // Re-offering the exact collision is refused because an already-intercepted
+    // errand is no longer travelling — not merely for want of a picture. The
+    // reason is asserted so the idempotence pin cannot pass vacuously.
+    const replayed = markEnvoyIntercepted({
+      worldState: intercepted.worldState,
+      errandId: minted.errand.id,
+      encounter: candidate,
+      interceptorPicture,
+      expectedErrand: intercepted.errand,
+      tick: 11,
+    });
+    expect(replayed.reason).toBe('stale_errand');
+    expect(replayed.worldState).toBe(intercepted.worldState);
+    expect(resolveEnvoyInterception({
+      worldState: intercepted.worldState,
+      errandId: minted.errand.id,
+      encounterId: 'encounter.1',
+      resolution: 'held',
+      tick: 11,
+    })).toMatchObject({ changed: false, reason: 'stale_encounter' });
+  });
+
+  it('keeps held envoys active, resumes from the exact venue, and preserves the original deadline', () => {
+    const minted = mintOne(litWorld(), {
+      routePlan: routePlan({ arrivalTick: 15, expectedReturnTick: 20 }),
+    });
+    const intercepted = markEnvoyIntercepted({
+      worldState: minted.worldState,
+      errandId: minted.errand.id,
+      encounter: {
+        id: 'encounter.hold',
+        kind: 'private_goal',
+        privateGoal: 'imprison',
+        tick: 11,
+        actorId: 'red-court',
+        armyId: 'army.red.1',
+        nodeId: 'ashford',
+        routeId: 'road.north',
+        venueRef: { id: 'ashford', kind: 'field_node' },
+      },
+      interceptorPicture: armyPictureFor({
+        armyId: 'army.red.1',
+        interceptorId: 'red-court',
+        counterpartId: 'ashford',
+        tick: 11,
+      }),
+      tick: 11,
+    });
+    const held = resolveEnvoyInterception({
+      worldState: intercepted.worldState,
+      errandId: minted.errand.id,
+      encounterId: 'encounter.hold',
+      resolution: 'held',
+      tick: 12,
+    });
+    expect(held).toMatchObject({ changed: true, reason: 'held' });
+    expect(held.errand).toMatchObject({ state: 'held', heldTick: 12 });
+    expect(envoyContinuationForHold(held.errand, 'encounter.hold')).toMatchObject({
+      schemaVersion: 1,
+      resumeState: 'travelling',
+      journey: 'outbound',
+      destinationId: 'irontown',
+      interruptedTick: 11,
+      expectedReturnTick: 20,
+      journeyLegs: [{ routeRef: { id: 'road.north' } }],
+    });
+    expect(hasActiveEnvoyForOffer(held.worldState, minted.errand.offer)).toBe(true);
+    expect(mintOne(held.worldState, {
+      outcome: peaceOffer({ id: 'other.offer', to: 'another-court', frontSinceTick: 5 }),
+      npcId: 'npc.reeve',
+      routePlan: routePlan({ to: 'another-court' }),
+    }).reason).toBe('npc_in_transit');
+
+    const released = releaseHeldEnvoy({
+      worldState: held.worldState,
+      errandId: minted.errand.id,
+      encounterId: 'encounter.hold',
+      routePlan: routePlan({
+        from: 'ashford', to: 'irontown', departTick: 13, arrivalTick: 16,
+        expectedReturnTick: 18,
+      }),
+      tick: 13,
+    });
+    expect(released).toMatchObject({ changed: true, reason: 'resumed' });
+    expect(released.errand).toMatchObject({
+      state: 'travelling',
+      expectedReturnTick: 20,
+      positionRef: { fromId: 'ashford', toId: 'irontown', progressBand: 'departed' },
+      encounters: [{
+        resolution: 'resumed',
+        continuation: {
+          destinationId: 'irontown',
+          resumedTick: 13,
+          scheduledArrivalTick: 18,
+        },
+      }],
+    });
+
+    const imported = JSON.parse(JSON.stringify(held.worldState));
+    imported.envoyErrands[0].encounters[0].smuggled = 'not allowed';
+    expect(envoyErrandsOf(imported)).toEqual([]);
+
+    const killed = closeEnvoyErrandsForNpcDeath({
+      worldState: held.worldState,
+      npcId: 'npc.reeve',
+      tick: 14,
+    });
+    expect(killed.priorErrands[0].state).toBe('held');
+    const restored = restoreEnvoyErrands({
+      worldState: killed.worldState,
+      priorErrands: killed.priorErrands,
+      killedAtTick: 14,
+    });
+    expect(restored).toMatchObject({ changed: true, reason: 'restored' });
+    expect(envoyErrandsOf(restored.worldState)[0].state).toBe('held');
+  });
+
+  it('can turn an en-route field parlay around from its exact occupied node', () => {
+    const minted = mintOne(litWorld(), {
+      routePlan: {
+        legs: [
+          { fromId: 'ashford', toId: 'ford', departTick: 10, arrivalTick: 12 },
+          { fromId: 'ford', toId: 'irontown', departTick: 13, arrivalTick: 15 },
+        ],
+        expectedReturnTick: 20,
+        routeRef: { id: 'road.north' },
+      },
+    });
+    const intercepted = markEnvoyIntercepted({
+      worldState: minted.worldState,
+      errandId: minted.errand.id,
+      encounter: {
+        id: 'encounter.field',
+        kind: 'field_parlay',
+        tick: 12,
+        actorId: 'irontown',
+        armyId: 'army.iron',
+        nodeId: 'ford',
+        routeId: 'road.north',
+        venueRef: { id: 'ford', kind: 'field_node' },
+      },
+      // A field parlay is the one kind whose two pictures must span the exact
+      // warring pair, so the target's own column carries this one.
+      interceptorPicture: armyPictureFor({
+        armyId: 'army.iron',
+        interceptorId: 'irontown',
+        counterpartId: 'ashford',
+        tick: 12,
+      }),
+      tick: 12,
+    });
+    const parlay = resolveEnvoyInterception({
+      worldState: intercepted.worldState,
+      errandId: minted.errand.id,
+      encounterId: 'encounter.field',
+      resolution: 'parlaying',
+      tick: 13,
+    });
+    expect(parlay.errand).toMatchObject({
+      state: 'parlaying',
+      parlayId: 'encounter.field',
+      positionRef: { toId: 'ford', progressBand: 'arrived' },
+    });
+    const returning = beginEnvoyReturn({
+      worldState: parlay.worldState,
+      errandId: minted.errand.id,
+      routePlan: routePlan({
+        from: 'ford', to: 'ashford', departTick: 14, arrivalTick: 17,
+        expectedReturnTick: 17,
+      }),
+      tick: 14,
+    });
+    expect(returning).toMatchObject({ changed: true, reason: 'returning' });
+    expect(returning.errand).toMatchObject({
+      returnOriginId: 'ford',
+      state: 'returning',
+      positionRef: { fromId: 'ford', toId: 'ashford' },
+    });
+  });
+
+  it('mutates a complete picture once and carries only an exact agreed versioned sheet', () => {
+    const outcome = peaceOffer();
+    const picture = negotiationPictureFor(outcome);
+    let result = mintEnvoyErrand({
+      worldState: litWorld(),
+      outcome,
+      acceptance: acceptedRuling(outcome),
+      npcId: 'npc.reeve',
+      snapshot: SNAPSHOT,
+      negotiationPicture: picture,
+      targetCourtPicture: courtPictureFor(outcome),
+      routePlan: routePlan(),
+      tick: 10,
+    });
+    result = updateEnvoyNegotiationPicture({
+      worldState: result.worldState,
+      errandId: result.errand.id,
+      patch: {
+        id: 'picture-mutation.1',
+        pictureId: picture.id,
+        episodeKey: envoyOfferEpisodeKey(outcome),
+        sourceId: 'rumor.typed.1',
+        kind: 'rumor',
+        tick: 11,
+        subjectId: 'ashford',
+        field: 'strengthBand',
+        fromBand: 'ready',
+        toBand: 'strong',
+        direction: 'rise',
+      },
+    });
+    expect(result).toMatchObject({ changed: true, reason: 'picture_updated' });
+    expect(result.errand.negotiationPicture.subjects
+      .find((subject) => subject.settlementId === 'ashford').strengthBand).toBe('strong');
+    // K.2's whole point is that this picture mutates en route, so the mutated
+    // errand must survive its own ledger. It once did not: the reader rejected
+    // any picture whose lastChangedTick had advanced past departure, and the
+    // errand vanished on the first rumor that reached it.
+    expect(envoyErrandsOf(result.worldState)).toHaveLength(1);
+    expect(envoyErrandsOf(result.worldState)[0].negotiationPicture.lastChangedTick).toBe(11);
+    const duplicate = updateEnvoyNegotiationPicture({
+      worldState: result.worldState,
+      errandId: result.errand.id,
+      patch: {
+        id: 'picture-mutation.1',
+        pictureId: picture.id,
+        episodeKey: envoyOfferEpisodeKey(outcome),
+        sourceId: 'rumor.typed.1',
+        kind: 'rumor',
+        tick: 11,
+        subjectId: 'ashford',
+        field: 'strengthBand',
+        fromBand: 'ready',
+        toBand: 'strong',
+        direction: 'rise',
+      },
+    });
+    expect(duplicate.worldState).toBe(result.worldState);
+    expect(duplicate.reason).toBe('picture_unchanged');
+
+    result = advanceEnvoyErrands({ worldState: result.worldState, tick: 12 });
+    const parlaying = envoyErrandForOffer(result.worldState, outcome);
+    expect(parlaying).toMatchObject({ state: 'parlaying' });
+    expect(parlaying.parlayId).toContain('target_parlay:');
+    const sheet = whitePeaceSheet(parlaying, 13);
+    const agreed = agreeEnvoyTerms({
+      worldState: result.worldState,
+      errandId: parlaying.id,
+      termSheet: sheet,
+      tick: 13,
+    });
+    expect(agreed).toMatchObject({ changed: true, reason: 'terms_agreed' });
+    expect(agreed.errand.termSheet).toEqual(sheet);
+    sheet.pictureIds.proposer = 'tampered-after-write';
+    expect(agreed.errand.termSheet.pictureIds.proposer).toBe(picture.id);
+
+    const returning = beginEnvoyReturn({
+      worldState: agreed.worldState,
+      errandId: parlaying.id,
+      routePlan: routePlan({
+        from: 'irontown', to: 'ashford', departTick: 14, arrivalTick: 17,
+        expectedReturnTick: 17,
+      }),
+      tick: 14,
+    });
+    expect(returning).toMatchObject({ changed: true, reason: 'returning' });
+    expect(returning.errand.termSheet).toEqual(agreed.errand.termSheet);
+
+    const malformed = JSON.parse(JSON.stringify(returning.worldState));
+    malformed.envoyErrands[0].termSheet.extraAuthorityClock = 99;
+    expect(envoyErrandsOf(malformed)).toEqual([]);
   });
 });

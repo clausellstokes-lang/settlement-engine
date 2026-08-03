@@ -25,10 +25,15 @@ import {
   WR6_TRADE_EXPENDITURE_COUPLING,
   WR6_WAR_COALITION_COUPLINGS,
   WR7_ENVOY_COUPLINGS,
+  WR7_CARRIED_SHEET_COUPLING,
+  WR7_ENCOUNTER_COUPLING,
+  WR7_ENVOY_PLANT_COUPLING,
   WR7_HOME_DELIVERY_COUPLING,
   WR7_MOVING_PICTURE_COUPLING,
   WR7_PEACE_DISPATCH_COUPLING,
+  WR7_SELF_PARLAY_COUPLING,
   WR7_SILENCE_INFERENCE_COUPLING,
+  WR7_TWO_PICTURE_PARLAY_COUPLING,
   couplingRowFor,
   couplingRowsFor,
 } from '../../src/domain/certification/couplingRegistry.js';
@@ -211,29 +216,48 @@ describe('CW-0 coupling registry', () => {
     }
   });
 
-  test('records both WR-7a transport directions and both belief directions under the exact conjunction', () => {
+  test('records WR-7 transport, parlay, authority, and belief reads under only CPL-5 and CPL-19', () => {
     expect(WR7_ENVOY_COUPLINGS).toEqual([
       WR7_PEACE_DISPATCH_COUPLING,
+      WR7_SELF_PARLAY_COUPLING,
+      WR7_ENCOUNTER_COUPLING,
+      WR7_TWO_PICTURE_PARLAY_COUPLING,
       WR7_HOME_DELIVERY_COUPLING,
+      WR7_CARRIED_SHEET_COUPLING,
       WR7_MOVING_PICTURE_COUPLING,
+      WR7_ENVOY_PLANT_COUPLING,
       WR7_SILENCE_INFERENCE_COUPLING,
     ]);
     expect(WR7_ENVOY_COUPLINGS.map((row) => [row.pairId, row.direction, row.intendedDesk]))
       .toEqual([
         ['CPL-5', 'WAR→GRAMMAR', 'adjudication'],
+        ['CPL-5', 'WAR→GRAMMAR', 'adjudication'],
+        ['CPL-5', 'WAR→GRAMMAR', 'war'],
+        ['CPL-5', 'WAR→GRAMMAR', 'adjudication'],
         ['CPL-5', 'GRAMMAR→WAR', 'adjudication'],
+        ['CPL-5', 'GRAMMAR→WAR', 'adjudication'],
+        ['CPL-19', 'INFO→GRAMMAR', 'events'],
         ['CPL-19', 'INFO→GRAMMAR', 'events'],
         ['CPL-19', 'GRAMMAR→INFO', 'divination'],
       ]);
     for (const row of WR7_ENVOY_COUPLINGS) {
-      expect(row.flags, row.couplingId).toEqual([
+      const requiredFlags = [
         'warLayerEnabled',
         'warTerminationEnabled',
         'peaceEngineEnabled',
         'envoyDiplomacyEnabled',
         'npcConsequencesEnabled',
         'routeLifecycleEnabled',
-      ]);
+      ];
+      expect(row.flags.slice(0, requiredFlags.length), row.couplingId).toEqual(requiredFlags);
+      if (row === WR7_ENVOY_PLANT_COUPLING) {
+        expect(row.flags.slice(requiredFlags.length)).toEqual([
+          'infoStatecraftEnabled',
+          'informationBrokeragesEnabled',
+        ]);
+      } else {
+        expect(row.flags).toEqual(requiredFlags);
+      }
       expect(row.owningVolume).toBe('WAR');
       expect(row.owningWave).toBe('WR-7');
       expect(Object.isFrozen(row)).toBe(true);
@@ -249,6 +273,18 @@ describe('CW-0 coupling registry', () => {
       .toBe('src/domain/worldPulse/beliefMap.js#applyEnvoySilenceInference');
     expect(WR7_SILENCE_INFERENCE_COUPLING.counterforce)
       .toBe('src/domain/worldPulse/beliefMap.js#clearEnvoySilenceInference');
+    expect(WR7_SELF_PARLAY_COUPLING.read)
+      .toBe('src/domain/worldPulse/envoyEncounter.js#censusProactiveSelfParlays');
+    expect(WR7_ENCOUNTER_COUPLING.read)
+      .toBe('src/domain/worldPulse/envoyEncounter.js#selectEnvoyEncounters');
+    expect(WR7_TWO_PICTURE_PARLAY_COUPLING.read)
+      .toBe('src/domain/worldPulse/negotiationPictures.js#negotiateFromPictures');
+    expect(WR7_CARRIED_SHEET_COUPLING.read)
+      .toBe('src/domain/worldPulse/peaceTerms.js#materializeCarriedTermSheet');
+    expect(WR7_ENVOY_PLANT_COUPLING.read)
+      .toBe('src/domain/worldPulse/informationStatecraft.js#processLies');
+    expect(new Set(WR7_ENVOY_COUPLINGS.map((row) => row.pairId)))
+      .toEqual(new Set(['CPL-5', 'CPL-19']));
   });
 
   test('every schema-v2 row has one stable unique identity and a closed shape', () => {
@@ -297,11 +333,14 @@ describe('CW-0 coupling registry', () => {
         WR5_BILATERAL_PEACE_COUPLING,
         WR6_PAIRWISE_SETTLEMENT_COUPLING,
         WR7_PEACE_DISPATCH_COUPLING,
+        WR7_SELF_PARLAY_COUPLING,
+        WR7_ENCOUNTER_COUPLING,
+        WR7_TWO_PICTURE_PARLAY_COUPLING,
       ]);
     expect(couplingRowsFor('CPL-5', 'GRAMMAR→WAR'))
-      .toEqual([WR7_HOME_DELIVERY_COUPLING]);
+      .toEqual([WR7_HOME_DELIVERY_COUPLING, WR7_CARRIED_SHEET_COUPLING]);
     expect(couplingRowsFor('CPL-19', 'INFO→GRAMMAR'))
-      .toEqual([WR7_MOVING_PICTURE_COUPLING]);
+      .toEqual([WR7_MOVING_PICTURE_COUPLING, WR7_ENVOY_PLANT_COUPLING]);
     expect(couplingRowsFor('CPL-19', 'GRAMMAR→INFO'))
       .toEqual([WR7_SILENCE_INFERENCE_COUPLING]);
     expect(couplingRowsFor('CPL-1', 'WAR→TRADE'))

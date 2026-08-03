@@ -1,9 +1,17 @@
 /**
- * envoyPulse.js — WR-7a's late pulse composition.
+ * envoyPulse.js — WR-7a's late pulse composition, WR-7b's collision sequence.
  *
  * The errand writer advances after rumors and beliefs, then an exact home
  * delivery re-enters the ordinary outcome applicator. This keeps the peace
  * engine's one mutation path while making the message physically travel.
+ *
+ * WR-7b inserts three stages AHEAD of that advance, all of them read from the
+ * SAME pre-mutation cut of the world (`envoyInterceptionStage.js` owns their
+ * bodies): the paid plant targeting, the shared-cut encounter census, and the
+ * resolution of rows that entered this tick already intercepted or already
+ * parlaying. Every stage moves a row at most one transition, so a row that
+ * changed here is never advanced again by `advanceEnvoyErrands` on the same
+ * pulse and the army column is neither reordered nor advanced twice.
  */
 
 import { appendWizardNewsEntries } from '../region/index.js';
@@ -26,6 +34,12 @@ import {
   envoyErrandsOf,
   markEnvoyHome,
 } from './envoyErrand.js';
+import {
+  markSharedCutEncounters,
+  prepareEnvoyPlantTargets,
+  resolveMaturedParlays,
+  resolveStartInterceptions,
+} from './envoyInterceptionStage.js';
 import { envoyNewsEntries } from './envoyNews.js';
 import { npcLedgerOf } from './npcLedger.js';
 
@@ -88,6 +102,10 @@ function snapshotWithUpdates(snapshot, settlementUpdates, worldState, regionalGr
  * Advance all active envoys once and apply any exact home deliveries through
  * `applyWorldPulseOutcomes`. Dark/partial configurations return every input
  * reference unchanged.
+ *
+ * `commissionedPlants` are already-paid I4 envelopes from the pure brokerage
+ * producer. They are handed back — targeted or untouched — for the information
+ * writer to fold; this pulse never mints or charges one.
  */
 export function advanceEnvoyDiplomacyPulse({
   worldState,
@@ -99,6 +117,7 @@ export function advanceEnvoyDiplomacyPulse({
   now,
   season = null,
   simulationRules = null,
+  commissionedPlants = [],
 } = {}) {
   if (!envoyDiplomacyActive(worldState)) {
     return {
@@ -109,13 +128,49 @@ export function advanceEnvoyDiplomacyPulse({
       evidence: [],
       autoApplied: [],
       newsEntries: [],
+      commissionedPlants,
     };
   }
 
-  const beforeAdvance = worldState;
+  let state = worldState;
+  const evidence = [];
+
+  // WR-7b (1) — THE PAID PLANT'S TARGET. Attaching an exact envoy-picture target
+  // to an already-purchased envelope before the census, so the census sees the
+  // intent it will have to honour. Nothing is minted or charged here.
+  const planted = prepareEnvoyPlantTargets({ worldState: state, tick, commissionedPlants });
+  state = planted.worldState;
+
+  // WR-7b (2) — THE SHARED CUT. Both ledgers are projected from this one
+  // pre-mutation world to the same tick boundary; only then may a collision
+  // mark an errand.
+  const cut = markSharedCutEncounters({ worldState: state, snapshot, regionalGraph, tick });
+  state = cut.worldState;
+  evidence.push(...cut.evidence);
+
+  // WR-7b (3) — CUSTODY, CARRIAGE, AND CONTINUATION for rows that entered this
+  // tick already intercepted. Rows marked in (2) carry this tick's clock and are
+  // therefore not eligible until the next pulse.
+  const interceptions = resolveStartInterceptions({
+    worldState: state,
+    startErrands: cut.startErrands,
+    snapshot,
+    tick,
+    season,
+  });
+  state = interceptions.worldState;
+  evidence.push(...interceptions.evidence);
+
+  // WR-7b (4) — THE PARLAY. One draft under the two frozen pictures, then the
+  // separately priced mandatory return on a later tick.
+  const parlays = resolveMaturedParlays({ worldState: state, tick, season });
+  state = parlays.worldState;
+  evidence.push(...parlays.evidence);
+
+  const beforeAdvance = state;
   const reservedSilenceTargets = new Set();
   const advanced = advanceEnvoyErrands({
-    worldState,
+    worldState: state,
     tick,
     rumorPatchFor: (errand, atTick) => envoyRumorPatchFor(beforeAdvance, errand, atTick),
     canInferSilenceFor: (errand) => {
@@ -136,11 +191,11 @@ export function advanceEnvoyDiplomacyPulse({
       envoyReturnVisibleAtHome(beforeAdvance, errand, atTick)
     ),
   });
-  let state = advanced.worldState;
+  state = advanced.worldState;
   let graph = regionalGraph;
   let feed = wizardNews;
   let updates = settlementUpdates;
-  const evidence = [...advanced.transitionEvidence];
+  evidence.push(...advanced.transitionEvidence);
   const autoApplied = [];
   const newsEntries = [];
 
@@ -251,5 +306,6 @@ export function advanceEnvoyDiplomacyPulse({
     evidence,
     autoApplied,
     newsEntries,
+    commissionedPlants: planted.commissionedPlants,
   };
 }

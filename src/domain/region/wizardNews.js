@@ -87,11 +87,15 @@ const MAX_ENTRIES = 240;
  * @property {string[]} reasons
  * @property {string[]} [npcIds]      NEWS ADDRESS LAW actor layer — present only when non-empty.
  * @property {string[]} [factionIds]  NEWS ADDRESS LAW actor layer — present only when non-empty.
+ * @property {string[]} [thirdPartyIds] Governed third-party actor addresses.
+ * @property {string[]} [venueIds] Governed parley/hold place addresses.
+ * @property {string[]} [termSheetIds] Governed carried-sheet provenance addresses.
  * @property {string} [source]
  * @property {boolean} [covert]
  * @property {string} [familyId] SP-6 structural template family.
  * @property {string} [audience] Governed reader audience for authored receipts.
  * @property {string} [section] Governed Herald desk for authored receipts.
+ * @property {string} [sectionAuthority] Closed registry that authored `section`.
  */
 
 /**
@@ -118,11 +122,15 @@ const MAX_ENTRIES = 240;
  * @property {Array<string | number | null | undefined>} [reasons]
  * @property {Array<string | number | null | undefined>} [npcIds]
  * @property {Array<string | number | null | undefined>} [factionIds]
+ * @property {Array<string | number | null | undefined>} [thirdPartyIds]
+ * @property {Array<string | number | null | undefined>} [venueIds]
+ * @property {Array<string | number | null | undefined>} [termSheetIds]
  * @property {string} [source]
  * @property {boolean} [covert]
  * @property {string} [familyId]
  * @property {string} [audience]
  * @property {string} [section]
+ * @property {string} [sectionAuthority]
  */
 
 /**
@@ -575,6 +583,13 @@ function normalizeEntry(entry, options = {}) {
     // before. Absent-tolerant on old saves without a migration.
     ...(compactIds(entry.npcIds).length ? { npcIds: compactIds(entry.npcIds) } : {}),
     ...(compactIds(entry.factionIds).length ? { factionIds: compactIds(entry.factionIds) } : {}),
+    ...(compactIds(entry.thirdPartyIds).length
+      ? { thirdPartyIds: compactIds(entry.thirdPartyIds) }
+      : {}),
+    ...(compactIds(entry.venueIds).length ? { venueIds: compactIds(entry.venueIds) } : {}),
+    ...(compactIds(entry.termSheetIds).length
+      ? { termSheetIds: compactIds(entry.termSheetIds) }
+      : {}),
     // V-17 provenance: table-authored history (source:'table') is distinguishable
     // from world-authored (the soak excludes 'table'). BYTE-NEUTRAL: world entries
     // pass no `source`, so this spread adds nothing and their serialization is
@@ -595,6 +610,12 @@ function normalizeEntry(entry, options = {}) {
       : {}),
     ...(WIZARD_NEWS_SECTIONS.has(entry.section)
       ? { section: entry.section }
+      : {}),
+    ...((entry.sectionAuthority === 'war_rulings_registry'
+        || entry.sectionAuthority === 'war_coalition_registry'
+        || entry.sectionAuthority === 'envoy_registry')
+      && WIZARD_NEWS_SECTIONS.has(entry.section)
+      ? { sectionAuthority: entry.sectionAuthority }
       : {}),
   };
 }

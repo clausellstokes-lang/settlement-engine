@@ -193,7 +193,7 @@ export const RUMOR_FIDELITY_FLOOR = 0.05;
  *   severity?: number, scope?: string, kind?: string, impactKind?: string | null,
  *   settlementIds?: Array<string | number>, sourceEventId?: string | null,
  *   tags?: string[], causeClass?: string, deityName?: string,
- *   recordMode?: string }} RumorSeedEntry
+ *   recordMode?: string, audience?: string, covert?: boolean }} RumorSeedEntry
  */
 
 /** The rng surface this module consumes (the kernel PRNG's fork/draw subset). */
@@ -589,6 +589,11 @@ export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, seas
       && finiteNumber(entry.tick, -1) >= Math.max(floor, now - RUMOR_SEED_LOOKBACK_TICKS)
       && finiteNumber(entry.tick, -1) <= now
       && passesSignificanceGate(entry)
+      // Truth Law: a DM fact is not an observation carrier. Keep it in the
+      // canonical feed for replay, but never turn it into a player-readable
+      // telling merely because it was major or named several settlements.
+      && entry.covert !== true
+      && entry.audience !== 'dm-only'
       && Array.isArray(entry.settlementIds) && entry.settlementIds.length > 0
       && !(entry.tags || []).includes('proposal'))
     .sort((a, b) => (finiteNumber(b.tick, 0) - finiteNumber(a.tick, 0))

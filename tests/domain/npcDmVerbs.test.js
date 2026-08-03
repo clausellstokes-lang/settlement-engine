@@ -60,9 +60,19 @@ import {
   ENVOY_REQUIRED_RULES,
   advanceEnvoyErrands,
   beginEnvoyReturn,
+  envoyContinuationForHold,
   envoyErrandsOf,
+  envoyOfferEpisodeKey,
+  markEnvoyIntercepted,
   mintEnvoyErrand,
+  resolveEnvoyInterception,
 } from '../../src/domain/worldPulse/envoyErrand.js';
+import { createNegotiationPicture } from '../../src/domain/worldPulse/negotiationPictures.js';
+import {
+  foreignGuestHoldForNpc,
+  foreignGuestHoldsOf,
+  openForeignGuestHold,
+} from '../../src/domain/worldPulse/foreignGuestHold.js';
 import { ensureWorldState } from '../../src/domain/worldPulse/worldState.js';
 import { syncEnvoyNpcTransit } from '../../src/domain/worldPulse/envoyDiplomacy.js';
 import {
@@ -249,6 +259,93 @@ function returningEnvoyFixture() {
   });
   const returningWorldState = syncEnvoyNpcTransit(returning.worldState, returning.errand, 23);
   return { worldState: returningWorldState, parlayWorldState, wnpcId };
+}
+
+/** A returning WR-7 envoy stopped and held at Thornreach, with the lived road needed
+ * for a later DM pardon to price a fresh route home. */
+function heldEnvoyFixture() {
+  const returning = returningEnvoyFixture();
+  const road = routeEdge({
+    a: 'sav_kelder', b: 'sav_thorn', grade: 'road', mode: 'land',
+    provenance: 'generated', flavor: 'genesis', tick: 0,
+  });
+  const routed = writeRouteNetwork(
+    { ...returning.worldState, tick: 24 },
+    withRouteEdges(emptyRouteNetwork(), [road]),
+  );
+  const current = envoyErrandsOf(routed)[0];
+  // Thornreach's own column carries the belief it would bring to a parlay; the
+  // captor never reads truth, so custody still travels through a picture (K3).
+  const captorPicture = createNegotiationPicture({
+    id: 'army-picture.thorn',
+    carrier: { kind: 'army', id: 'army.thorn.1' },
+    partyId: 'sav_thorn',
+    counterpartId: 'sav_kelder',
+    relationshipKey: 'sav_kelder::sav_thorn',
+    episodeKey: envoyOfferEpisodeKey(current.offer),
+    frontOwnerId: 'sav_kelder',
+    frontSinceTick: 8,
+    capturedTick: 24,
+    causeStatus: 'live',
+    subjects: [
+      { settlementId: 'sav_thorn', strengthBand: 'strong', storesBand: 'stocked' },
+      { settlementId: 'sav_kelder', strengthBand: 'ready', storesBand: 'thin' },
+    ],
+    evidenceIds: [],
+  });
+  const intercepted = markEnvoyIntercepted({
+    worldState: routed,
+    errandId: current.id,
+    encounter: {
+      id: 'encounter.dm-hold',
+      kind: 'private_goal',
+      privateGoal: 'imprison',
+      tick: 24,
+      actorId: 'sav_thorn',
+      armyId: 'army.thorn.1',
+      nodeId: 'sav_thorn',
+      routeId: 'road.kelder-thorn',
+      venueRef: { id: 'sav_thorn', kind: 'field_node' },
+    },
+    interceptorPicture: captorPicture,
+    expectedErrand: current,
+    tick: 24,
+  });
+  expect(intercepted.reason).toBe('intercepted');
+  const held = resolveEnvoyInterception({
+    worldState: intercepted.worldState,
+    errandId: current.id,
+    encounterId: 'encounter.dm-hold',
+    resolution: 'held',
+    expectedErrand: intercepted.errand,
+    tick: 25,
+  });
+  expect(held.reason).toBe('held');
+  const heldWithH1 = syncEnvoyNpcTransit({ ...held.worldState, tick: 25 }, held.errand, 25);
+  const continuation = envoyContinuationForHold(held.errand, 'encounter.dm-hold');
+  expect(continuation).toBeTruthy();
+  const opened = openForeignGuestHold({
+    worldState: heldWithH1,
+    hold: {
+      schemaVersion: 1,
+      id: 'hold.dm-hold',
+      npcId: returning.wnpcId,
+      errandId: current.id,
+      encounterId: 'encounter.dm-hold',
+      captorId: 'sav_thorn',
+      venueId: 'sav_thorn',
+      venueRef: { kind: 'settlement', settlementId: 'sav_thorn' },
+      heldSinceTick: 25,
+      cause: 'private_imprisonment',
+      continuation,
+    },
+  });
+  expect(opened.reason).toBe('opened');
+  return {
+    worldState: { ...opened.worldState, tick: 26 },
+    wnpcId: returning.wnpcId,
+    errandId: current.id,
+  };
 }
 
 describe('W-H4 — DORMANCY (law 5)', () => {
@@ -529,6 +626,85 @@ describe('W-H4 — KILL is the only death, and it is undoable', () => {
     expect(envoyErrandsOf(rejected.worldState)[0]).toMatchObject({ state: 'lost', lostTick: 25 });
   });
 
+  test('a held foreign guest dies as one H1/envoy/custody transaction and undo restores every byte', () => {
+    const held = heldEnvoyFixture();
+    const before = held.worldState;
+    expect(foreignGuestHoldForNpc(held.worldState, held.wnpcId)).toMatchObject({
+      id: 'hold.dm-hold', errandId: held.errandId, venueId: 'sav_thorn',
+    });
+    expect(envoyErrandsOf(held.worldState)[0].state).toBe('held');
+
+    const killed = killNamedNpc({ worldState: held.worldState, wnpcId: held.wnpcId, tick: 26 });
+    expect(killed).toMatchObject({ changed: true, refusal: null });
+    expect(npcLedgerOf(killed.worldState).roamers[held.wnpcId]).toBeUndefined();
+    expect(npcLedgerOf(killed.worldState).placed[held.wnpcId]).toBeUndefined();
+    expect(envoyErrandsOf(killed.worldState)[0]).toMatchObject({
+      id: held.errandId, state: 'lost', lossCause: 'killed', lostTick: 26,
+    });
+    expect(foreignGuestHoldsOf(killed.worldState)).toEqual([]);
+    expect(killed.undo.foreignGuestHoldClosure).toMatchObject({
+      closeReason: 'death', hold: { id: 'hold.dm-hold' }, closedTick: 26,
+    });
+    expect(killed.news.targetSaveId).toBe('sav_kelder');
+    expect(killed.news.dmTruth.receipt.foreignGuestHoldClosed).toBe(true);
+    const publicDeathWords = [
+      killed.news.headline, killed.news.summary, ...killed.news.reasons,
+    ].join(' ');
+    for (const privateFact of ['Thornreach', 'sav_thorn', 'custody', 'captor', 'hold.dm-hold']) {
+      expect(publicDeathWords.includes(privateFact), `death prose leaked ${privateFact}`).toBe(false);
+    }
+
+    const revived = undoDmVerb({ worldState: killed.worldState, undo: killed.undo });
+    expect(revived.changed).toBe(true);
+    expect(revived.worldState).toEqual(before);
+  });
+
+  test('a stale custody/errand join makes KILL fail closed before any ledger changes', () => {
+    const held = heldEnvoyFixture();
+    const rows = held.worldState.spatialLedgers.foreignGuestHolds.map((row) => ({
+      ...row,
+      errandId: row.id === 'hold.dm-hold' ? 'errand:replacement' : row.errandId,
+    }));
+    const stale = {
+      ...held.worldState,
+      spatialLedgers: { ...held.worldState.spatialLedgers, foreignGuestHolds: rows },
+    };
+    const killed = killNamedNpc({ worldState: stale, wnpcId: held.wnpcId, tick: 26 });
+    expect(killed).toMatchObject({ changed: false, refusal: 'foreign_hold_conflict' });
+    expect(killed.worldState).toBe(stale);
+    expect(npcLedgerOf(stale).roamers[held.wnpcId]
+      || npcLedgerOf(stale).placed[held.wnpcId]).toBeTruthy();
+    expect(envoyErrandsOf(stale)[0].state).toBe('held');
+    expect(foreignGuestHoldsOf(stale)).toHaveLength(1);
+  });
+
+  test('a foreign-custody DM verb cannot mint an undo token against a different world tick', () => {
+    const held = heldEnvoyFixture();
+    for (const result of [
+      killNamedNpc({ worldState: held.worldState, wnpcId: held.wnpcId, tick: 27 }),
+      pardonNpc({ worldState: held.worldState, wnpcId: held.wnpcId, tick: 27 }),
+    ]) {
+      expect(result).toMatchObject({ changed: false, refusal: 'foreign_hold_conflict', undo: null });
+      expect(result.worldState).toBe(held.worldState);
+    }
+  });
+
+  test('foreign-custody death cleanup and its inverse stay lawful after every creation rule goes dark', () => {
+    const held = heldEnvoyFixture();
+    const darkRules = Object.fromEntries(ENVOY_REQUIRED_RULES.map((key) => [key, false]));
+    const dark = { ...held.worldState, simulationRules: darkRules };
+    const killed = killNamedNpc({ worldState: dark, wnpcId: held.wnpcId, tick: 26 });
+    expect(killed).toMatchObject({ changed: true, refusal: null });
+    expect(killed.worldState.simulationRules).toBe(darkRules);
+    expect(envoyErrandsOf(killed.worldState)[0].state).toBe('lost');
+    expect(foreignGuestHoldsOf(killed.worldState)).toEqual([]);
+
+    const restored = undoDmVerb({ worldState: killed.worldState, undo: killed.undo });
+    expect(restored.changed).toBe(true);
+    expect(restored.worldState).toEqual(dark);
+    expect(restored.worldState.simulationRules).toBe(darkRules);
+  });
+
   test('the restore FAILS CLOSED when the id has been taken back in the meantime', () => {
     const { worldState, wnpcId } = fixture();
     const killed = killNamedNpc({ worldState, wnpcId, tick: 21 });
@@ -635,6 +811,119 @@ describe('W-H4 — PARDON lifts, releases, and emits', () => {
     // The disgrace happened; only the sentence is over.
     expect(mark.verdictCause).toBe('jailed');
     expect(released.news.headline).toContain('walks free');
+  });
+
+  test('foreign custody closes only with a fresh lived route, resumed envoy, and exact H1 leg', () => {
+    const held = heldEnvoyFixture();
+    const before = held.worldState;
+    const priorErrand = envoyErrandsOf(held.worldState)[0];
+    const pardoned = pardonNpc({
+      worldState: held.worldState,
+      wnpcId: held.wnpcId,
+      tick: 26,
+      settlementName: 'Thornreach',
+    });
+    expect(pardoned).toMatchObject({ changed: true, refusal: null });
+    expect(pardoned.receipt).toMatchObject({
+      releasedFromHold: true,
+      releasedFromForeignCustody: true,
+    });
+    expect(pardoned.news.headline).toBe('Maera Voss is pardoned.');
+    expect(pardoned.news.summary).toBe(
+      'The realm sets aside what stood against the traveller and sends them onward.',
+    );
+    expect(pardoned.news.dmTruth.receipt.releasedFromForeignCustody).toBe(true);
+    const publicWords = [
+      pardoned.news.headline, pardoned.news.summary, ...pardoned.news.reasons,
+    ].join(' ');
+    for (const privateFact of ['foreign', 'custody', 'captor', 'Thornreach']) {
+      expect(publicWords.includes(privateFact), `pardon prose leaked ${privateFact}`).toBe(false);
+    }
+    expect(foreignGuestHoldsOf(pardoned.worldState)).toEqual([]);
+    const resumed = envoyErrandsOf(pardoned.worldState)[0];
+    expect(resumed).toMatchObject({
+      id: held.errandId,
+      state: 'returning',
+      releasedTick: 26,
+      positionRef: {
+        journey: 'return', fromId: 'sav_thorn', toId: 'sav_kelder', progressBand: 'departed',
+      },
+      encounters: [{
+        id: 'encounter.dm-hold', resolution: 'resumed',
+        continuation: { resumedTick: 26, destinationId: 'sav_kelder' },
+      }],
+    });
+    expect(resumed.legs).not.toEqual(priorErrand.legs);
+    expect(npcLedgerOf(pardoned.worldState).roamers[held.wnpcId].transit).toEqual({
+      fromId: 'sav_thorn', toId: 'sav_kelder', departTick: 26, arrivalTick: 27,
+    });
+    expect(pardoned.undo).toMatchObject({
+      foreignGuestHoldClosure: { closeReason: 'pardon', hold: { id: 'hold.dm-hold' } },
+      foreignGuestPriorErrand: { state: 'held' },
+      foreignGuestReleasedErrand: { state: 'returning', releasedTick: 26 },
+      foreignGuestReleaseTick: 26,
+    });
+
+    const walkedBack = undoDmVerb({ worldState: pardoned.worldState, undo: pardoned.undo });
+    expect(walkedBack.changed).toBe(true);
+    expect(walkedBack.worldState).toEqual(before);
+  });
+
+  test('a later envoy transition rejects the whole foreign PARDON inverse', () => {
+    const held = heldEnvoyFixture();
+    const pardoned = pardonNpc({ worldState: held.worldState, wnpcId: held.wnpcId, tick: 26 });
+    const advanced = advanceEnvoyErrands({
+      worldState: { ...pardoned.worldState, tick: 27 },
+      tick: 27,
+    });
+    expect(advanced.errand?.state).not.toBe('returning');
+    const stale = advanced.worldState;
+    const refused = undoDmVerb({ worldState: stale, undo: pardoned.undo });
+    expect(refused.changed).toBe(false);
+    expect(refused.worldState).toBe(stale);
+    expect(foreignGuestHoldsOf(stale)).toEqual([]);
+    expect(envoyErrandsOf(stale)[0].state).not.toBe('held');
+  });
+
+  test('an intervening hold-ledger write rejects PARDON undo without partially restoring the envoy', () => {
+    const held = heldEnvoyFixture();
+    const pardoned = pardonNpc({ worldState: held.worldState, wnpcId: held.wnpcId, tick: 26 });
+    const template = pardoned.undo.foreignGuestHoldClosure.hold;
+    const other = openForeignGuestHold({
+      worldState: pardoned.worldState,
+      hold: {
+        ...template,
+        id: 'hold.other-guest',
+        npcId: 'wnpc_other_guest',
+        errandId: 'envoy_errand:other-guest',
+        encounterId: 'encounter.other-guest',
+        captorId: 'sav_other-captor',
+      },
+    });
+    expect(other.reason).toBe('opened');
+    const refused = undoDmVerb({ worldState: other.worldState, undo: pardoned.undo });
+    expect(refused.changed).toBe(false);
+    expect(refused.worldState).toBe(other.worldState);
+    expect(envoyErrandsOf(refused.worldState)[0]).toMatchObject({
+      state: 'returning', releasedTick: 26,
+    });
+    expect(foreignGuestHoldsOf(refused.worldState).map((row) => row.id))
+      .toEqual(['hold.other-guest']);
+  });
+
+  test('foreign PARDON and undo remain lawful after creation gates darken, without relighting them', () => {
+    const held = heldEnvoyFixture();
+    const darkRules = Object.fromEntries(ENVOY_REQUIRED_RULES.map((key) => [key, false]));
+    const dark = { ...held.worldState, simulationRules: darkRules };
+    const pardoned = pardonNpc({ worldState: dark, wnpcId: held.wnpcId, tick: 26 });
+    expect(pardoned).toMatchObject({ changed: true, refusal: null });
+    expect(pardoned.worldState.simulationRules).toBe(darkRules);
+    expect(foreignGuestHoldsOf(pardoned.worldState)).toEqual([]);
+
+    const restored = undoDmVerb({ worldState: pardoned.worldState, undo: pardoned.undo });
+    expect(restored.changed).toBe(true);
+    expect(restored.worldState).toEqual(dark);
+    expect(restored.worldState.simulationRules).toBe(darkRules);
   });
 });
 

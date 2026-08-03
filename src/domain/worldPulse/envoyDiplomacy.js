@@ -16,12 +16,16 @@ import { beliefRecord, strengthBandOf } from './beliefMap.js';
 import {
   ENVOY_STRENGTH_BANDS,
   envoyDiplomacyActive,
+  envoyErrandIdForOffer,
   envoyErrandForOffer,
   envoyErrandsOf,
   mintEnvoyErrand,
   normalizeEnvoyAcceptance,
   normalizeEnvoyPeaceOffer,
 } from './envoyErrand.js';
+import {
+  normalizeParlayTermSheet,
+} from './negotiationPictures.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import {
   buildPressureSummary,
@@ -29,6 +33,7 @@ import {
   relationshipKeyFromEdge,
   settlementStrength,
 } from './relationshipEvolution.js';
+import { censusProactiveSelfParlays } from './envoyEncounter.js';
 import {
   durableIdForRoster,
   graduateNpc,
@@ -36,16 +41,13 @@ import {
   npcLedgerOf,
 } from './npcLedger.js';
 import { livedHopToward, livedLegTicks } from './routeNetworkConsumersTransit.js';
+import {
+  PRESSURE_BANDS,
+  RATIO_BANDS,
+  STORES_FROM_PRESSURE,
+  buildEnvoyNegotiationPicture,
+} from './envoyNegotiationPictureBuilder.js';
 
-const PRESSURE_BANDS = Object.freeze(['quiet', 'present', 'pressing', 'decisive']);
-const RATIO_BANDS = Object.freeze(['far_behind', 'behind', 'matched', 'ahead', 'far_ahead']);
-
-const STORES_FROM_PRESSURE = Object.freeze({
-  quiet: 'deep',
-  present: 'stocked',
-  pressing: 'thin',
-  decisive: 'bare',
-});
 
 export const ENVOY_TRANSPORT_RETURN_KIND = 'envoy_transport_return';
 
@@ -65,6 +67,17 @@ function text(value) {
 function wholeTick(value) {
   const number = Number(value);
   return Number.isFinite(number) ? Math.max(0, Math.floor(number)) : null;
+}
+
+/** WR-7a admitted opaque legacy cargo; only a versioned WR-7b sheet carries
+ * treaty authority. Keep that compatibility branch without treating it as a
+ * malformed attempt at the new schema. */
+function carriedTermSheetRead(value) {
+  if (value == null || !Object.prototype.hasOwnProperty.call(asObject(value), 'schemaVersion')) {
+    return { versioned: false, sheet: null };
+  }
+  const sheet = normalizeParlayTermSheet(value);
+  return { versioned: true, sheet };
 }
 
 /** The exact persisted route leg named by an errand's current position cursor. */
@@ -148,6 +161,21 @@ function unclaimedOriginAt(position, settlementId, notAfterTick) {
     && Object.keys(asObject(record.dmAssignment)).length === 0;
 }
 
+/** The exact road position frozen into the latest encounter still owns H1. */
+function transitMatchesEncounterPosition(position, encounter) {
+  if (!position || position.placed) return false;
+  const record = asObject(position.record);
+  const prior = asObject(encounter?.priorPosition);
+  const encounteredTick = wholeTick(encounter?.encounteredTick);
+  return encounteredTick != null
+    && Number(record.sinceTick || 0) <= encounteredTick
+    && record.whereaboutsUnknown !== true
+    && Object.keys(asObject(record.residency)).length === 0
+    && Object.keys(asObject(record.dmAssignment)).length === 0
+    && text(asObject(record.transit).fromId) === text(prior.fromId)
+    && text(asObject(record.transit).toId) === text(prior.toId);
+}
+
 /** The active errand may advance only the exact H1 position it already owns. */
 function activeOwnsLeg(position, errand, journeyLegs, legIndex, leg) {
   if (!position || !leg || legIndex == null) return false;
@@ -156,6 +184,24 @@ function activeOwnsLeg(position, errand, journeyLegs, legIndex, leg) {
     && record.whereaboutsUnknown !== true
     && Object.keys(asObject(record.residency)).length === 0
     && Object.keys(asObject(record.dmAssignment)).length === 0;
+  const latestEncounter = Array.isArray(errand.encounters)
+    ? asObject(errand.encounters.at(-1))
+    : {};
+  const releasedTick = wholeTick(errand.releasedTick);
+  const resumedAtEncounter = ['resumed', 'plant_resumed'].includes(text(latestEncounter.resolution))
+    && releasedTick != null
+    && text(leg.fromId) === text(latestEncounter.venueId);
+  if (resumedAtEncounter && (
+    unclaimedPlacementAt(position, text(latestEncounter.venueId), releasedTick)
+    || transitMatchesEncounterPosition(position, latestEncounter)
+  )) return true;
+  const returningFromFieldParlay = text(leg.journey) === 'return'
+    && text(latestEncounter.resolution) === 'parlaying'
+    && text(leg.fromId) === text(latestEncounter.venueId);
+  if (returningFromFieldParlay && (
+    unclaimedPlacementAt(position, text(latestEncounter.venueId), wholeTick(errand.returnStartedTick))
+    || transitMatchesEncounterPosition(position, latestEncounter)
+  )) return true;
   if (unclaimedRoamer && sameEnvoyLeg(record.transit, leg)) return true;
   if (legIndex > 0 && unclaimedRoamer
     && sameEnvoyLeg(record.transit, journeyLegs[legIndex - 1])) return true;
@@ -168,7 +214,9 @@ function activeOwnsLeg(position, errand, journeyLegs, legIndex, leg) {
   }
   if (legIndex !== 0) return false;
   const journey = text(leg.journey);
-  const startSettlementId = journey === 'return' ? text(errand.to) : text(errand.from);
+  const startSettlementId = journey === 'return'
+    ? text(errand.returnOriginId || errand.to)
+    : text(errand.from);
   const startTick = wholeTick(journey === 'return' ? errand.returnStartedTick : errand.departedTick);
   return unclaimedPlacementAt(position, startSettlementId, startTick)
     || unclaimedOriginAt(position, startSettlementId, startTick);
@@ -365,6 +413,7 @@ export function envoyDeparturePicture(decision, {
   };
 }
 
+
 /**
  * Convert one already-accepted bilateral decision into a physical errand.
  * Work is transactional: a failed mint or movement returns the original world.
@@ -398,9 +447,52 @@ export function dispatchAcceptedPeaceEnvoy({
     worldState,
     settlementId: fromId,
   });
+  const errandId = envoyErrandIdForOffer(offer);
+  const negotiationPicture = buildEnvoyNegotiationPicture({
+    worldState,
+    snapshot,
+    offer,
+    partyId: fromId,
+    carrierKind: 'envoy',
+    carrierId: errandId,
+    tick: atTick,
+    termination: asObject(decision).offererTermination,
+  });
+  // The receiving court's own frozen picture, carried by the court rather than
+  // the envoy and sourced from the TARGET's own termination read. The two are
+  // minted as a pair because acceptance is compared on each party's own-picture
+  // valuation (K4): a dispatch carrying one picture has no second party to
+  // evaluate against, and the errand writer refuses it.
+  const targetCourtPicture = buildEnvoyNegotiationPicture({
+    worldState,
+    snapshot,
+    offer,
+    partyId: toId,
+    carrierKind: 'court',
+    carrierId: toId,
+    tick: atTick,
+    termination: asObject(decision).termination,
+  });
+  const standing = asObject(asObject(asObject(outcome).metadata).coalitionStandingDecision);
+  const selfParlay = standing.decision === 'exit'
+    ? censusProactiveSelfParlays({
+        worldState,
+        relationshipRows: [{
+          partyId: fromId,
+          targetId: toId,
+          relationshipKey: String(offer.relationshipKey),
+        }],
+      }).find((row) => row.partyId === fromId && row.targetId === toId)
+    : null;
+  const purpose = selfParlay
+    && String(standing.partyId || '') === fromId
+    && String(standing.targetId || '') === toId
+    ? 'self_parlay'
+    : 'sue';
   const routePlan = buildEnvoyRoutePlan({ worldState, fromId, toId, tick: atTick, journey: 'outbound', season });
   const expectedReturnTick = expectedRoundTripTick(worldState, fromId, toId, routePlan, season);
-  if (atTick == null || !candidate || !picture || !routePlan || expectedReturnTick == null) {
+  if (atTick == null || !candidate || !picture || !negotiationPicture
+    || !targetCourtPicture || !routePlan || expectedReturnTick == null) {
     return { worldState, changed: false, evidence: [], errand: null, reason: !candidate ? 'no_envoy' : !routePlan ? 'no_route' : 'invalid_departure_picture' };
   }
   routePlan.expectedReturnTick = expectedReturnTick;
@@ -431,6 +523,9 @@ export function dispatchAcceptedPeaceEnvoy({
     fromName: settlementName(snapshot, fromId),
     toName: settlementName(snapshot, toId),
     snapshot: picture,
+    negotiationPicture,
+    targetCourtPicture,
+    purpose,
     routePlan,
     tick: atTick,
   });
@@ -522,7 +617,7 @@ export function envoyRumorPatchFor(worldState, errand, tick) {
 }
 
 /** Keep the H1 person's one transit record aligned to the errand writer. */
-export function syncEnvoyNpcTransit(worldState, errand, tick) {
+export function syncEnvoyNpcTransit(worldState, errand, tick, encounterVenueRef = null) {
   if (!envoyDiplomacyActive(worldState) || !errand) return worldState;
   const state = text(errand.state);
   const npcId = text(errand.npcId);
@@ -555,9 +650,61 @@ export function syncEnvoyNpcTransit(worldState, errand, tick) {
       sinceTick: atTick,
     }).worldState;
   }
+  if (state === 'intercepted' || state === 'held') {
+    const encounters = Array.isArray(errand.encounters) ? errand.encounters : [];
+    const latest = asObject(encounters.at(-1));
+    const venue = asObject(encounterVenueRef);
+    const venueId = text(latest.venueId);
+    const settlementVenue = text(venue.kind) === 'settlement'
+      && text(venue.settlementId) === venueId;
+    const routeVenue = text(venue.kind) === 'route_node'
+      && text(venue.nodeId) === venueId
+      && text(venue.routeId) === text(latest.routeId);
+    const position = envoyNpcPosition(worldState, npcId);
+    if (!position || (!settlementVenue && !routeVenue)) return worldState;
+    // A road custody row leaves the person on the exact interrupted leg. The
+    // hold ledger carries the typed route-node venue; H1 has no settlement to
+    // invent there.
+    if (routeVenue) return worldState;
+    const authorityTick = wholeTick(latest.encounteredTick);
+    if (unclaimedPlacementAt(position, venueId, authorityTick)) return worldState;
+    if (!transitMatchesEncounterPosition(position, latest)) return worldState;
+    return moveNpcRecord({
+      worldState,
+      wnpcId: npcId,
+      hostSettlementId: venueId,
+      patch: { residency: null, transit: null, whereaboutsUnknown: null },
+      sinceTick: atTick,
+    }).worldState;
+  }
   if (state === 'parlaying') {
     const position = envoyNpcPosition(worldState, npcId);
     if (!position) return worldState;
+    const encounters = Array.isArray(errand.encounters) ? errand.encounters : [];
+    const latest = asObject(encounters.at(-1));
+    const encounterParlay = text(latest.id) === text(errand.parlayId)
+      && text(latest.resolution) === 'parlaying';
+    if (encounterParlay) {
+      const venue = asObject(encounterVenueRef);
+      const venueId = text(latest.venueId);
+      const settlementVenue = text(venue.kind) === 'settlement'
+        && text(venue.settlementId) === venueId;
+      const routeVenue = text(venue.kind) === 'route_node'
+        && text(venue.nodeId) === venueId
+        && text(venue.routeId) === text(latest.routeId);
+      if (routeVenue) return worldState;
+      if (!settlementVenue) return worldState;
+      const parlayTick = wholeTick(errand.parlayTick);
+      if (unclaimedPlacementAt(position, venueId, parlayTick)) return worldState;
+      if (!transitMatchesEncounterPosition(position, latest)) return worldState;
+      return moveNpcRecord({
+        worldState,
+        wnpcId: npcId,
+        hostSettlementId: venueId,
+        patch: { residency: null, transit: null, whereaboutsUnknown: null },
+        sinceTick: atTick,
+      }).worldState;
+    }
     const finalOutboundLeg = (Array.isArray(errand.legs) ? errand.legs : [])
       .map(asObject)
       .filter((leg) => text(leg.journey) === 'outbound')
@@ -639,8 +786,9 @@ export function envoyHomeOutcome(delivery) {
   const row = asObject(delivery);
   const offer = normalizeEnvoyPeaceOffer(row.offer);
   const acceptance = normalizeEnvoyAcceptance(row.acceptance, offer);
+  const carried = carriedTermSheetRead(row.termSheet);
   const errandId = text(row.errandId);
-  if (!offer || !acceptance || !errandId) return null;
+  if (!offer || !acceptance || !errandId || (carried.versioned && !carried.sheet)) return null;
   return {
     ...offer,
     id: offer.id,
@@ -655,6 +803,7 @@ export function envoyHomeOutcome(delivery) {
         errandId,
         npcId: text(row.npcId),
       },
+      ...(carried.sheet ? { carriedTermSheet: carried.sheet } : {}),
       peaceDecision: acceptance.receipt,
       ...(acceptance.offererInheritedDemand
         ? { inheritedWarDemand: acceptance.offererInheritedDemand }
@@ -719,12 +868,20 @@ function exactEnvoyReturn(worldState, outcome, regionalGraph) {
   const errand = envoyErrandsOf(worldState).find((row) => String(row.id) === errandId);
   const persistedOffer = normalizeEnvoyPeaceOffer(errand?.offer);
   const returnedOffer = normalizeEnvoyPeaceOffer(outcome);
+  const persistedTermSheet = carriedTermSheetRead(errand?.termSheet);
+  const returnedTermSheet = carriedTermSheetRead(asObject(outcome).metadata?.carriedTermSheet);
   if (!errand || errand.state !== 'home' || !markerNpcId || markerNpcId !== text(errand.npcId)
     || !persistedOffer || !returnedOffer
     || !exactEnvoyRelationshipAddress(regionalGraph, persistedOffer)
-    || JSON.stringify(persistedOffer) !== JSON.stringify(returnedOffer)) return null;
+    || JSON.stringify(persistedOffer) !== JSON.stringify(returnedOffer)
+    || (persistedTermSheet.versioned && !persistedTermSheet.sheet)
+    || (returnedTermSheet.versioned && !returnedTermSheet.sheet)
+    || persistedTermSheet.versioned !== returnedTermSheet.versioned
+    || JSON.stringify(persistedTermSheet.sheet) !== JSON.stringify(returnedTermSheet.sheet)) return null;
   const acceptance = normalizeEnvoyAcceptance(errand.acceptance, errand.offer);
-  return acceptance ? { errand, offer: persistedOffer, acceptance } : null;
+  return acceptance
+    ? { errand, offer: persistedOffer, acceptance, termSheet: persistedTermSheet.sheet }
+    : null;
 }
 
 /** Validate a return marker against the exact persisted home errand and live war episode. */
@@ -739,10 +896,15 @@ export function envoyReturnAcceptance(worldState, outcome, regionalGraph) {
   const frontSinceTick = wholeTick(payload.peaceFrontSinceTick);
   const expectedOpponent = frontOwnerId === offererId ? targetId : offererId;
   const deployment = asObject(asObject(worldState).deployments)[frontOwnerId];
-  if (Object.keys(asObject(deployment)).length
+  // WR-7a's opaque cargo still proves the original front when one survives.
+  // A WR-7b agreement is K3 historical authority: once both pictures signed,
+  // later fronts may make the bargain absurd but cannot reality-check it away.
+  if (!exact.termSheet && Object.keys(asObject(deployment)).length
     && (text(asObject(deployment).targetId) !== expectedOpponent
       || wholeTick(asObject(deployment).sinceTick) !== frontSinceTick)) return null;
-  return exact.acceptance;
+  return exact.termSheet
+    ? { ...exact.acceptance, carriedTermSheet: exact.termSheet }
+    : exact.acceptance;
 }
 
 /**

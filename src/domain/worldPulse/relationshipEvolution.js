@@ -27,6 +27,7 @@ import {
 import { pressureFor, strongestPressure, EMPTY_DISPOSITION, EMPTY_TRADE_SALIENCE, buildRelationshipIndex, sharedEnemyAllianceCandidate } from './relationshipRuleHelpers.js';
 import { RULE_EVALUATORS, tradeLeverageCandidate } from './relationshipRulesAdversarial.js';
 import { facetOf } from '../spatial/cohesionWeave.js';
+import { deepClone } from '../clone.js';
 import { coalitionClosureWitness, joinAnchorOf, warCoalitionActive } from './warCoalitionLedger.js';
 
 export {
@@ -366,6 +367,44 @@ export function mintMemoryWeaveIncident(worldState, { relationshipKey, incidentT
   }, now);
 }
 
+/**
+ * The relationship incident transports an already-validated WR-7b sheet; it
+ * does not validate or invent one. Require the exact engine-only home marker,
+ * pair, errand, and relationship address before copying the detached artifact.
+ * @param {any} outcome
+ * @returns {{ present:boolean, sheet:Record<string,unknown>|null }}
+ */
+function carriedTermSheetForIncident(outcome) {
+  const metadata = outcome?.metadata && typeof outcome.metadata === 'object'
+    && !Array.isArray(outcome.metadata) ? outcome.metadata : {};
+  if (!Object.prototype.hasOwnProperty.call(metadata, 'carriedTermSheet')) {
+    return { present: false, sheet: null };
+  }
+  const marker = metadata.envoyTransportReturn && typeof metadata.envoyTransportReturn === 'object'
+    && !Array.isArray(metadata.envoyTransportReturn) ? metadata.envoyTransportReturn : {};
+  const sheet = metadata.carriedTermSheet && typeof metadata.carriedTermSheet === 'object'
+    && !Array.isArray(metadata.carriedTermSheet) ? metadata.carriedTermSheet : {};
+  const payload = outcome?.proposalPayload && typeof outcome.proposalPayload === 'object'
+    && !Array.isArray(outcome.proposalPayload) ? outcome.proposalPayload : {};
+  const offererId = String(payload.offererId || '');
+  const targetId = String(payload.targetId || '');
+  const parties = [offererId, targetId].sort();
+  const sheetParties = Array.isArray(sheet.parties) ? sheet.parties.map(String) : [];
+  const valid = marker.kind === 'envoy_transport_return'
+    && String(marker.errandId || '') !== ''
+    && String(sheet.errandId || '') === String(marker.errandId)
+    && Number(sheet.schemaVersion) === 1
+    && String(sheet.id || '') !== ''
+    && String(sheet.episodeKey || '') !== ''
+    && String(sheet.relationshipKey || '') === String(outcome.relationshipKey || '')
+    && offererId !== '' && targetId !== '' && offererId !== targetId
+    && JSON.stringify(sheetParties) === JSON.stringify(parties)
+    && Number.isInteger(sheet.agreedTick) && Number(sheet.agreedTick) >= 0
+    && Array.isArray(sheet.clauses)
+    && Array.isArray(sheet.valuations);
+  return { present: true, sheet: valid ? deepClone(sheet) : null };
+}
+
 export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type {any} */ outcome, /** @type {any} */ now) {
   if (!outcome.relationshipKey || !outcome.relationshipPatch) return worldState;
   const current = ensureRelationshipState({}, worldState.relationshipStates?.[outcome.relationshipKey]);
@@ -383,6 +422,8 @@ export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type 
     String(row?.callId || '') === String(allianceCall.callId)
     && String(row?.relationshipKey || '') === String(outcome.relationshipKey)
   ))) return worldState;
+  const carriedTermSheet = carriedTermSheetForIncident(outcome);
+  if (carriedTermSheet.present && !carriedTermSheet.sheet) return worldState;
   const coalitionSettlement = outcome.metadata?.coalitionSettlement;
   // An explicitly coordinated congress closure rides the accepted bilateral
   // peace incident until peaceTerms can see every declared component. It is not
@@ -527,6 +568,7 @@ export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type 
         outcomeId: outcome.id || null,
         ...(coalitionPeaceClosure ? { coalitionPeaceClosure } : {}),
         ...(congressClosure ? { coalitionSettlementClosure: congressClosure } : {}),
+        ...(carriedTermSheet.sheet ? { carriedTermSheet: carriedTermSheet.sheet } : {}),
       },
     ],
     history: historyEntry ? [...(current.history || []).slice(-11), historyEntry] : current.history || [],

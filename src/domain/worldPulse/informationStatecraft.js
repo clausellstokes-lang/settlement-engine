@@ -65,6 +65,21 @@ import {
 } from './npcCredibility.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
+// THE LIE'S LAW AND THE PLANT'S ENVELOPE live in a pure leaf of this writer family
+// (ruling R-BLD-4). This file remains the sole belief/disinfo WRITER; the leaf holds the
+// tuning, the willingness gate, the byte-stable belief-override application and the paid
+// plant's boundary validator. LIE_TUNING and lieWillingness are RE-EXPORTED below so this
+// module's public surface is unchanged — brokerageServicesPlant.js and the pin suites
+// import them from here exactly as before.
+import {
+  LIE_TUNING,
+  applyBeliefOverrides,
+  commissionedPlantAt,
+  lieWillingness,
+  seatBeliefRecord,
+} from './disinformationPlant.js';
+
+export { LIE_TUNING, lieWillingness };
 
 // ── Small pure helpers ────────────────────────────────────────────────────────
 /** @param {unknown} v @param {number} fallback @returns {number} */
@@ -377,122 +392,6 @@ export function fractureCredibilityDeltas(worldState, tick) {
   return out;
 }
 
-// ── LIE — disinformation (design §2.3; alignment/structure-gated, blowback-priced) ──
-// The LIE seeds a false belief into the audience carrying a SYNTHETIC lineage, then
-// propagates/corroborates/contradicts/exposes like any telling — the lifecycle the
-// design pins. It is modelled as a GATED belief-injection (the twin of the LIVE
-// ally-intel deceit path applyAllyIntelSharing, which already injects a crafted hostile
-// belief at high confidence), reaching the liar's believed-hostile neighbours, with a
-// synthetic-origin record kept in the spatialLedgers.disinfo ledger for exposure
-// accounting. [JUDGMENT: belief-injection over a rumor-ledger seed — the mover runs
-// AFTER advanceBeliefMaps (~pulseKernel 1713), so a rumor SEED would need pre-rumor
-// timing (line 1659); the injection delivers seed/propagate/corroborate/contradict/
-// expose faithfully AND keeps every rumor/belief golden byte-identical (it is gated
-// off in all of them). Say "veto" to move to a pre-rumor synthetic-feed seed.]
-//
-// The canonical lie is the GARRISON BLUFF (§2.3): a settlement facing a believed-
-// hostile, believed-stronger neighbour INFLATES its own strength in that neighbour's
-// belief map to deter the war (the Blainey mechanic then consumes the false belief).
-
-export const LIE_TUNING = Object.freeze({
-  // WILLINGNESS: alignment + structure decide. A lawful-good seat will not; a deceitful
-  // or desperate one will. willingness rises with malice + desperation, falls with a
-  // lawful-good conscience (lawful AND good = strong restraint).
-  WILLING_FLOOR: 0.35,
-  MALICE_W: 0.7,
-  DESPERATION_W: 0.6,
-  LAWGOOD_RESTRAINT: 0.9,
-  // INITIATION rarity (E0 tempo — a drama-classed event, not a hum): the loaded-dice
-  // baseline (shouldInitiateAsk idiom), ramped by willingness². [JUDGMENT: rarity-gated
-  // via the existing loaded-dice idiom rather than minting a new E0 drama class — the
-  // drama-class taxonomy is a pinned-at-7 near-schema public surface; §6 frames the
-  // drama-classing as initiation TEMPO, which this achieves. Say "veto" to add a
-  // 'deception' drama class + bump the dramaClassRegistry contract to 8.]
-  INITIATE_BASE: 0.12,
-  // The inflation the bluff plants (strength bands, 0..4 scale) above the audience's
-  // current belief — bounded so a lie is a plausible exaggeration, not a fantasy.
-  INFLATE_BANDS: 2,
-  // The bluff is planted at a confidence scaled by the liar's credibility (a proven
-  // liar is believed less even before exposure — the boy who cried wolf, ex ante).
-  BASE_CONFIDENCE: 0.7,
-  // EXPOSURE: a lie is exposed when the audience's belief has re-anchored back toward
-  // truth (the normal reconcile CONTRADICTS it) past this band gap, OR it has been
-  // afield this many ticks (a long-standing bluff eventually meets independent word).
-  EXPOSE_CONTRADICT_BANDS: 2,
-  EXPOSE_MAX_AGE_TICKS: 8,
-  // The exposed-lie credibility charge magnitude (fed as a 'deception' delta — the
-  // SHARP fall side of the asymmetry).
-  EXPOSE_CHARGE01: 1,
-  // The resentment an exposed lie banks on the (audience↔liar) relationship edge — the
-  // people-held grievance the news already narrates, now WRITTEN through the E1 incident
-  // machinery. Bounded (a single lie is a wound, not instant max-hatred).
-  EXPOSE_GRIEVANCE_W: 0.3,
-});
-
-/**
- * The liar's WILLINGNESS to seed disinformation, in [0,1] (design §2.3 gating).
- * Alignment + structure: malice and desperation raise it; a lawful-good conscience
- * lowers it (lawful AND good = the council that will not).
- * @param {{ malice01: number, lawfulness01: number, desperation01: number }} inputs
- * @returns {number}
- */
-export function lieWillingness({ malice01, lawfulness01, desperation01 }) {
-  const m = clamp01(finiteNumber(malice01, 0.5));
-  const l = clamp01(finiteNumber(lawfulness01, 0.5));
-  const d = clamp01(finiteNumber(desperation01, 0));
-  const T = LIE_TUNING;
-  const restraint = T.LAWGOOD_RESTRAINT * l * (1 - m); // lawful-good restraint
-  return clamp01(T.MALICE_W * m + T.DESPERATION_W * d - restraint);
-}
-
-// ── The belief-map manipulation (a NEW maps, byte-stable, codepoint-sorted) ─────
-/** @typedef {import('./beliefMap.js').BeliefRecord} BeliefRecord */
-
-/** The observer's seat belief record about a subject, or null. Total on garbage.
- *  @param {Record<string, unknown>} maps @param {string} observerId @param {string} subjectId
- *  @returns {BeliefRecord | null} */
-function seatBeliefRecord(maps, observerId, subjectId) {
-  const observer = asObject(maps[String(observerId)]);
-  const seat = asObject(observer[GOVERNING_SEAT_KEY]);
-  const rec = seat[String(subjectId)];
-  return rec && typeof rec === 'object' && !Array.isArray(rec) ? /** @type {BeliefRecord} */ (rec) : null;
-}
-
-/**
- * Return a NEW beliefMaps with the given (observer → subject → record) overrides
- * applied to each observer's SEAT slot, codepoint-sorted at every level (byte-stable).
- * Observers/subjects absent from `overrides` keep their exact prior reference.
- * @param {Record<string, unknown>} maps
- * @param {Map<string, Map<string, BeliefRecord>>} overrides
- * @returns {Record<string, unknown>}
- */
-function applyBeliefOverrides(maps, overrides) {
-  if (!overrides.size) return maps;
-  /** @type {Record<string, unknown>} */
-  const out = {};
-  const observerIds = [...new Set([...Object.keys(maps), ...overrides.keys()])].sort(compareCodepoint);
-  for (const observerId of observerIds) {
-    const bySubject = overrides.get(observerId);
-    if (!bySubject || !bySubject.size) { out[observerId] = maps[observerId]; continue; }
-    const priorObserver = asObject(maps[observerId]);
-    const priorSeat = asObject(priorObserver[GOVERNING_SEAT_KEY]);
-    /** @type {Record<string, unknown>} */
-    const nextSeat = {};
-    const subjectIds = [...new Set([...Object.keys(priorSeat), ...bySubject.keys()])].sort(compareCodepoint);
-    for (const subjectId of subjectIds) {
-      const override = bySubject.get(subjectId);
-      nextSeat[subjectId] = override !== undefined ? override : priorSeat[subjectId];
-    }
-    /** @type {Record<string, unknown>} */
-    const nextObserver = {};
-    for (const k of Object.keys(priorObserver).sort(compareCodepoint)) {
-      nextObserver[k] = k === GOVERNING_SEAT_KEY ? nextSeat : priorObserver[k];
-    }
-    if (!(GOVERNING_SEAT_KEY in nextObserver)) nextObserver[GOVERNING_SEAT_KEY] = nextSeat;
-    out[observerId] = nextObserver;
-  }
-  return out;
-}
 
 const HOSTILE_LABELS = new Set(['hostile', 'cold_war', 'rival']);
 
@@ -509,6 +408,8 @@ const HOSTILE_LABELS = new Set(['hostile', 'cold_war', 'rival']);
  * @property {string} [spokespersonNpcId] D-2: the court's mouthpiece (the named npcId that
  *   fronted the bluff) — present only when npcCredibilityEnabled is lit; on exposure the
  *   personal credibility charge + the lie-stigma land on this soul (a REPUTATION cost, §0.5).
+ * @property {{receipt:Record<string,unknown>,target?:Record<string,unknown>}} [commission]
+ *   paid-plant provenance retained on the plant row; ordinary court lies omit it.
  */
 
 // D-2 (design §6): only government/notable souls front a court's bluff (the mouthpiece floor
@@ -583,11 +484,23 @@ function buildLiveNpcIds(snapshot) {
  * @param {(id: string) => number} args.strengthOf  ground-truth 0..1 strength
  * @param {(id: string) => { malice01: number, lawfulness01: number }} args.alignmentOf  derived alignment
  * @param {(id: string) => string} args.nameFor
+ * @param {unknown[]} [args.commissionedPlants] paid plant envelopes from the pure brokerage producer
  * @returns {{ overrides: Map<string, Map<string, BeliefRecord>>, disinfo: Record<string, DisinfoRecord> | null,
  *   deltas: CredibilityDelta[], npcDeltas: import('./npcCredibility.js').NpcCredibilityDelta[],
- *   grievances: GrievanceWrite[], newsEntries: Array<Record<string, unknown>> }}
+ *   grievances: GrievanceWrite[], newsEntries: Array<Record<string, unknown>>,
+ *   envoyPicturePatches: Array<Record<string, unknown>> }}
  */
-export function processLies({ snapshot, worldState, beliefMaps, rng, tick, strengthOf, alignmentOf, nameFor }) {
+export function processLies({
+  snapshot,
+  worldState,
+  beliefMaps,
+  rng,
+  tick,
+  strengthOf,
+  alignmentOf,
+  nameFor,
+  commissionedPlants = [],
+}) {
   const T = LIE_TUNING;
   const now = Math.max(0, Math.floor(finiteNumber(tick, 0)));
   const name = typeof nameFor === 'function' ? nameFor : (/** @type {string} */ id) => String(id);
@@ -607,6 +520,8 @@ export function processLies({ snapshot, worldState, beliefMaps, rng, tick, stren
   const grievances = [];
   /** @type {Array<Record<string, unknown>>} */
   const newsEntries = [];
+  /** @type {Array<Record<string, unknown>>} */
+  const envoyPicturePatches = [];
 
   const priorDisinfo = asObject(getSpatialLedger(worldState, 'disinfo'));
   /** @type {Record<string, DisinfoRecord>} */
@@ -677,7 +592,21 @@ export function processLies({ snapshot, worldState, beliefMaps, rng, tick, stren
     nextDisinfo[key] = rec; // still afield
   }
 
-  // ── (2) SEED NEW LIES: a willing, desperate liar plants a garrison bluff in each
+  // ── (2) FOLD PAID PLANTS through this one writer. They enter the same
+  // disinfo lifecycle as an ordinary bluff; the optional envoy target emits
+  // only a typed one-rung request for the envoy writer to consume.
+  const paidPlants = (Array.isArray(commissionedPlants) ? commissionedPlants : [])
+    .map((plant) => commissionedPlantAt(plant, now))
+    .filter(Boolean)
+    .sort((left, right) => compareCodepoint(left.key, right.key));
+  for (const plant of paidPlants) {
+    if (nextDisinfo[plant.key]) continue;
+    setOverride(plant.record.audienceId, plant.record.subjectId, plant.override);
+    nextDisinfo[plant.key] = plant.record;
+    if (plant.patch) envoyPicturePatches.push(plant.patch);
+  }
+
+  // ── (3) SEED NEW LIES: a willing, desperate liar plants a garrison bluff in each
   //        believed-hostile neighbour that has a channel to hear it. ────────────────
   const liarIds = [...new Set((snapshot?.settlements || []).map((s) => String(s.id)))].sort(compareCodepoint);
   for (const liarId of liarIds) {
@@ -727,6 +656,7 @@ export function processLies({ snapshot, worldState, beliefMaps, rng, tick, stren
       // the informational neighbourhood the carriers deliver). No channel ⇒ no reach.
       const prior = seatBeliefRecord(beliefMaps, audienceId, liarId);
       if (!prior) continue;
+      if (overrides.get(audienceId)?.has(liarId)) continue;
       const lieKey = `lie:${liarId}:${audienceId}`;
       if (nextDisinfo[lieKey]) continue; // one active bluff per (liar, audience)
       /** @type {BeliefRecord} */
@@ -749,7 +679,15 @@ export function processLies({ snapshot, worldState, beliefMaps, rng, tick, stren
   }
 
   const disinfo = Object.keys(nextDisinfo).length ? sortDisinfo(nextDisinfo) : null;
-  return { overrides, disinfo, deltas, npcDeltas, grievances, newsEntries };
+  return {
+    overrides,
+    disinfo,
+    deltas,
+    npcDeltas,
+    grievances,
+    newsEntries,
+    envoyPicturePatches,
+  };
 }
 
 /** Codepoint-stable disinfo ledger ordering. @param {Record<string, DisinfoRecord>} ledger
@@ -1273,11 +1211,25 @@ function applyExposureGrievances(worldState, edges, grievances, now) {
  * @param {(id: string) => string} [args.nameFor]
  * @param {CredibilityDelta[]} [args.provenTrue]  proven-true rises + resolved intel sales (SHARE-SELL self-policing)
  * @param {import('./npcCredibility.js').NpcCredibilityDelta[]} [args.npcProvenTrue]  D-2/D-3: per-NPC proven-true rises (a mouthpiece's sale/warning proved out)
- * @returns {{ worldState: unknown, changed: boolean, newsEntries: Array<Record<string, unknown>> }}
+ * @param {unknown[]} [args.commissionedPlants] paid plant envelopes consumed by the lie writer
+ * @returns {{ worldState: unknown, changed: boolean, newsEntries: Array<Record<string, unknown>>, envoyPicturePatches: Array<Record<string, unknown>> }}
  */
-export function advanceInformationStatecraft({ snapshot, worldState, graph = null, rng = null, tick, now = null, strengthOf, alignmentOf, nameFor, provenTrue = [], npcProvenTrue = [] }) {
+export function advanceInformationStatecraft({
+  snapshot,
+  worldState,
+  graph = null,
+  rng = null,
+  tick,
+  now = null,
+  strengthOf,
+  alignmentOf,
+  nameFor,
+  provenTrue = [],
+  npcProvenTrue = [],
+  commissionedPlants = [],
+}) {
   if (!infoStatecraftActive(worldState)) {
-    return { worldState, changed: false, newsEntries: [] };
+    return { worldState, changed: false, newsEntries: [], envoyPicturePatches: [] };
   }
   let state = /** @type {Record<string, unknown>} */ (worldState);
   let changed = false;
@@ -1315,7 +1267,17 @@ export function advanceInformationStatecraft({ snapshot, worldState, graph = nul
   }
 
   // (3) THE LIE LIFECYCLE over the just-advanced beliefMaps.
-  const lie = processLies({ snapshot: snap, worldState: state, beliefMaps, rng, tick, strengthOf: strengthFn, alignmentOf: alignFn, nameFor: nameFn });
+  const lie = processLies({
+    snapshot: snap,
+    worldState: state,
+    beliefMaps,
+    rng,
+    tick,
+    strengthOf: strengthFn,
+    alignmentOf: alignFn,
+    nameFor: nameFn,
+    commissionedPlants,
+  });
   if (lie.overrides.size) {
     const nextMaps = applyBeliefOverrides(beliefMaps, lie.overrides);
     state = /** @type {Record<string, unknown>} */ (setSpatialLedger(state, 'beliefMaps', nextMaps));
@@ -1438,7 +1400,12 @@ export function advanceInformationStatecraft({ snapshot, worldState, graph = nul
     }
   }
 
-  return { worldState: state, changed, newsEntries: [...sightRes.newsEntries, ...lie.newsEntries, ...intelNews] };
+  return {
+    worldState: state,
+    changed,
+    newsEntries: [...sightRes.newsEntries, ...lie.newsEntries, ...intelNews],
+    envoyPicturePatches: lie.envoyPicturePatches,
+  };
 }
 
 /* ───────────────────────────────────────────────────────────────────────────────
@@ -1470,4 +1437,3 @@ export function advanceInformationStatecraft({ snapshot, worldState, graph = nul
  *   against a "constant whisper-war hum"; the SELL primitives are available to future wiring /
  *   the DM-verb path, mirroring how E1a registered `warning` LIVE without an autonomous spammer.
  * ─────────────────────────────────────────────────────────────────────────────── */
-

@@ -18,6 +18,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { graduateNpc, setNpcLedger, npcLedgerOf } from '../../src/domain/worldPulse/npcLedger.js';
+import { openForeignGuestHold } from '../../src/domain/worldPulse/foreignGuestHold.js';
 import { projectNpcPool, findDmTruthPaths, DM_TRUTH_KEY } from '../../src/domain/worldPulse/npcLedgerProjection.js';
 import { PRIVATE_KEY_RE, sanitizePublicValue } from '../../src/domain/display/publicSafe.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -60,6 +61,52 @@ function populatedWorld() {
     },
   });
   return { worldState, banishedId: String(banished.wnpcId), jailedId: String(jailed.wnpcId) };
+}
+
+/** Put the hosted official into one exact foreign-custody episode. The fixture uses a
+ * venue unrelated to either origin so a public leak has an unambiguous search token. */
+function heldAbroadWorld() {
+  const base = populatedWorld();
+  const opened = openForeignGuestHold({
+    worldState: base.worldState,
+    hold: {
+      schemaVersion: 1,
+      id: 'hold:odo-abroad',
+      npcId: base.jailedId,
+      errandId: 'errand:odo-abroad',
+      encounterId: 'encounter:odo-abroad',
+      captorId: 'power:rival-court',
+      venueId: 'thornwatch',
+      venueRef: { kind: 'settlement', settlementId: 'thornwatch' },
+      heldSinceTick: 10,
+      cause: 'private_imprisonment',
+      continuation: {
+        schemaVersion: 1,
+        resumeState: 'travelling',
+        journey: 'outbound',
+        destinationId: 'aldermoor',
+        interruptedTick: 9,
+        positionRef: {
+          journey: 'outbound',
+          legIndex: 0,
+          fromId: 'thornwatch',
+          toId: 'aldermoor',
+          progressBand: 'underway',
+        },
+        journeyLegs: [{
+          fromId: 'thornwatch',
+          toId: 'aldermoor',
+          departTick: 8,
+          arrivalTick: 15,
+          journey: 'outbound',
+          routeRef: { id: 'road:thornwatch-aldermoor' },
+        }],
+        expectedReturnTick: 20,
+      },
+    },
+  });
+  expect(opened.reason).toBe('opened');
+  return { ...base, worldState: opened.worldState };
 }
 
 describe('the pool projection is live and correctly shaped (the anchor for every negative)', () => {
@@ -164,6 +211,51 @@ describe('LAW 7 — zero dmTruth keys reach a player projection', () => {
     const dmRecord = projectNpcPool({ worldState: contaminated, tick: 20, includeCovert: true }).roamers[0];
     expect(Object.keys(dmRecord)).not.toContain('secretPatron'); // anchored: the same key list is asserted to contain dmTruth on the next line, proving the record is live and populated
     expect(Object.keys(dmRecord)).toContain(DM_TRUTH_KEY);
+  });
+
+  test('foreign custody is exact DM truth while every public address and captor fact stays dark', () => {
+    const { worldState, jailedId } = heldAbroadWorld();
+    const dm = projectNpcPool({ worldState, tick: 20, includeCovert: true });
+    const player = projectNpcPool({ worldState, tick: 20, includeCovert: false });
+
+    // A prison abroad is not a new settlement membership: both audiences keep the
+    // person in the roaming half, while only the DM receives the exact custody DTO.
+    const dmOdo = dm.roamers.find((row) => row.wnpcId === jailedId);
+    const playerOdo = player.roamers.find((row) => row.wnpcId === jailedId);
+    expect(dmOdo?.dmTruth?.foreignGuestHold).toMatchObject({
+      id: 'hold:odo-abroad',
+      npcId: jailedId,
+      errandId: 'errand:odo-abroad',
+      encounterId: 'encounter:odo-abroad',
+      captorId: 'power:rival-court',
+      venueId: 'thornwatch',
+      heldSinceTick: 10,
+      cause: 'private_imprisonment',
+      continuation: { destinationId: 'aldermoor', journey: 'outbound' },
+    });
+    expect(dmOdo?.hostSettlementId).toBe('crowmarch');
+    expect(playerOdo).toMatchObject({ wnpcId: jailedId, hostSettlementId: null });
+    // The toMatchObject directly above proves `playerOdo` is a live, correctly keyed
+    // projection row, so a dropped or emptied row reds THERE rather than passing these
+    // two whereabouts exclusions vacuously.
+    // anchored: live, correctly keyed row proven by the toMatchObject above.
+    expect(playerOdo).not.toHaveProperty('restingAt');
+    // anchored: same live-row proof from the toMatchObject above.
+    expect(playerOdo).not.toHaveProperty('travellingTo');
+    expect(findDmTruthPaths(player)).toEqual([]);
+    const playerBytes = JSON.stringify(player);
+    for (const secret of ['hold:odo-abroad', 'errand:odo-abroad', 'power:rival-court', 'thornwatch']) {
+      expect(playerBytes.includes(secret), `public projection leaked ${secret}`).toBe(false);
+    }
+
+    // Local scope cannot disclose the secret venue. The same DM projection can address
+    // its exact settlement; the player projection has no local row there at all.
+    expect(projectNpcPool({
+      worldState, tick: 20, settlementId: 'thornwatch', includeCovert: true,
+    }).roamers.map((row) => row.wnpcId)).toEqual([jailedId]);
+    expect(projectNpcPool({
+      worldState, tick: 20, settlementId: 'thornwatch', includeCovert: false,
+    }).total).toBe(0);
   });
 
   test('the internal positional slot id is never projected to any audience', () => {

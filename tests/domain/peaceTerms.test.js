@@ -20,7 +20,8 @@ import { describe, it, expect } from 'vitest';
 
 import {
   advanceTreaties, termBudgetFor, resolveVictor, believedAdvantage,
-  appraiseLoserPortfolio, draftTerms, evolveCompliance, alignmentPress,
+  believedAdvantageFromInputs, appraiseLoserPortfolio, appraiseLoserPortfolioFromInputs,
+  draftTerms, evolveCompliance, alignmentPress, alignmentPressFromInput,
   treatiesForPair, demilitarizationCapFor, treatyBlocksWar, occupationHoldFor, treatyPairKey,
   termLabel, TERM_CATALOG, TERM_TYPES, TERM_FAMILIES, PEACE_TERMS_TUNING,
 } from '../../src/domain/worldPulse/peaceTerms.js';
@@ -138,6 +139,32 @@ describe('W-PEACE-2 catalog + substrate', () => {
     const good = alignmentPress(item('saint', { patron: deity('Dawn', 'good') }));
     const evil = alignmentPress(item('tyrant', { patron: deity('Maw', 'evil') }));
     expect(evil).toBeGreaterThan(good);
+  });
+
+  it('the historic belief/appraisal/alignment adapters delegate byte-exactly to the input-only leaves', () => {
+    const ws = { simulationRules: { ...LIT } };
+    const victor = item('v', { category: 'merchant' });
+    const loser = item('weak', { exports: [{ name: 'Silver' }] });
+    const truthFor = (id) => (id === 'v' ? 0.8 : 0.35);
+    expect(believedAdvantage('v', 'weak', ws, truthFor))
+      .toBe(believedAdvantageFromInputs(0.8, 0.35));
+    expect(alignmentPress(victor)).toBe(alignmentPressFromInput(0.5));
+    expect(appraiseLoserPortfolio({
+      victorId: 'v', loserId: 'weak', worldState: ws,
+      victorItem: victor, loserItem: loser,
+      victorPressure: { food: 0.6, economy: 0.4, trade: 0.2 },
+      victorThreat01: 0.5, loserTruthStrength: 0.35, loserAllyStrength01: 0.3,
+    })).toEqual(appraiseLoserPortfolioFromInputs({
+      believedLoserStrength: 0.35,
+      victorFoodPressure01: 0.6,
+      victorEconomyPressure01: 0.4,
+      victorTradePressure01: 0.2,
+      victorThreat01: 0.5,
+      loserAllyStrength01: 0.3,
+      loserExports: ['Silver'],
+      victorArchetype: 'merchant',
+      restitutionClaim01: 0,
+    }));
   });
 });
 

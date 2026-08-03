@@ -40,6 +40,7 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
+import { foreignGuestHoldsOf } from './foreignGuestHold.js';
 import { npcLedgerOf } from './npcLedger.js';
 import { exclusionActiveAt, EDICT_EXCLUSION_KINDS } from './npcLedgerFacets.js';
 
@@ -70,7 +71,8 @@ export const DM_TRUTH_KEY = 'dmTruth';
  * @property {number} elapsedTicks  how long they have been in this state
  * @property {ReadonlyArray<string>} shutDoors  settlement ids currently excluding them
  * @property {true} [whereaboutsUnknown] DM VIEW ONLY: no route or residence supports a place
- * @property {{ compromiseSource: string }} [dmTruth]  DM VIEW ONLY
+ * @property {{ compromiseSource?: string, foreignGuestHold?: Record<string, unknown> }}
+ *   [dmTruth]  DM VIEW ONLY
  */
 
 /** @param {unknown} v @returns {Record<string, unknown>} */
@@ -91,14 +93,23 @@ function asObject(v) {
  * @param {Record<string, unknown>} record
  * @param {ReadonlyArray<ExclusionEdge>} exclusions
  * @param {{ includeCovert: boolean, tick: number }} opts
+ * @param {Record<string, unknown>|null} foreignGuestHold
  * @returns {ProjectedNpc}
  */
-function projectRecord(wnpcId, record, exclusions, opts) {
+function projectRecord(wnpcId, record, exclusions, opts, foreignGuestHold = null) {
   const identity = asObject(record.identityFacets);
   const reputation = asObject(record.reputation);
   const origin = asObject(record.originRef);
   const sinceTick = Number(record.sinceTick) || 0;
-  const host = record.hostSettlementId == null ? null : String(record.hostSettlementId);
+  // Foreign custody is immediate DM truth under SP-6. H1 may correctly place the
+  // physical person at the captor's venue, but that mechanical position is not itself
+  // an observation carrier. A player projection therefore withholds the host and road
+  // facets as part of the SAME allowlist decision that withholds the hold row; otherwise
+  // the supposedly private custody would still be disclosed by its address.
+  const heldCovert = !!foreignGuestHold && !opts.includeCovert;
+  const host = heldCovert || record.hostSettlementId == null
+    ? null
+    : String(record.hostSettlementId);
   // EDICT KINDS ONLY (W-H3). The exclusions map now also carries rehost cooldowns, which
   // are circulation bookkeeping rather than a legal fact about a person: a cooldown is
   // the wanderer not knocking again yet, not a door shut against them, and listing it in
@@ -110,7 +121,10 @@ function projectRecord(wnpcId, record, exclusions, opts) {
   const residency = asObject(record.residency);
   const transit = asObject(record.transit);
   const assignment = asObject(record.dmAssignment);
-  const restingAt = String(residency.settlementId || assignment.atSettlementId || '');
+  const restingAt = heldCovert
+    ? ''
+    : String(residency.settlementId || assignment.atSettlementId || '');
+  const travellingTo = heldCovert ? '' : String(transit.toId || '');
 
   /** @type {Record<string, unknown>} */
   const out = {
@@ -132,7 +146,7 @@ function projectRecord(wnpcId, record, exclusions, opts) {
     // residency nor a transit leg projects EXACTLY the shape H1 projected, so the H1
     // pins keep measuring the same object rather than one with two new null keys.
     ...(restingAt ? { restingAt } : {}),
-    ...(String(transit.toId || '') ? { travellingTo: String(transit.toId) } : {}),
+    ...(travellingTo ? { travellingTo } : {}),
   };
   // THE ONE COVERT ATTACHMENT, and the ONLY statement in this file that can write it.
   // The player path never reaches this branch, so a player projection cannot carry the
@@ -143,8 +157,17 @@ function projectRecord(wnpcId, record, exclusions, opts) {
     // say that the person's whereabouts are unsupported.
     if (record.whereaboutsUnknown === true) out.whereaboutsUnknown = true;
     const dmTruth = asObject(record[DM_TRUTH_KEY]);
-    if (typeof dmTruth.compromiseSource === 'string') {
-      out[DM_TRUTH_KEY] = { compromiseSource: dmTruth.compromiseSource };
+    if (typeof dmTruth.compromiseSource === 'string' || foreignGuestHold) {
+      out[DM_TRUTH_KEY] = {
+        ...(typeof dmTruth.compromiseSource === 'string'
+          ? { compromiseSource: dmTruth.compromiseSource }
+          : {}),
+        // `foreignGuestHoldsOf` already returns a strict detached DTO. Carrying that
+        // complete row here gives the DM the exact person/errand/encounter/captor/
+        // venue/cause/continuation facts without teaching this projection a second
+        // normalization or a second spelling for custody.
+        ...(foreignGuestHold ? { foreignGuestHold } : {}),
+      };
     }
   }
   return /** @type {ProjectedNpc} */ (out);
@@ -165,30 +188,53 @@ export function projectNpcPool({ worldState, tick = 0, includeCovert = false, se
   const ledger = npcLedgerOf(worldState);
   const opts = { includeCovert: includeCovert === true, tick: Number(tick) || 0 };
   const scope = settlementId == null ? null : String(settlementId);
+  const holdsByNpc = new Map(foreignGuestHoldsOf(worldState)
+    .map((hold) => [String(hold.npcId), hold]));
+
+  /** A held guest belongs to a local dossier only for a DM who can see the exact
+   * settlement venue. Route nodes are realm positions, never settlement dossiers. */
+  const heldSettlement = (hold) => {
+    const venue = asObject(asObject(hold).venueRef);
+    return opts.includeCovert && venue.kind === 'settlement'
+      ? String(venue.settlementId || '')
+      : '';
+  };
 
   /** @type {ProjectedNpc[]} */
   const roamers = [];
   for (const id of Object.keys(ledger.roamers).sort(compareCodepoint)) {
     const rec = /** @type {Record<string, unknown>} */ (/** @type {unknown} */ (ledger.roamers[id]));
+    const hold = holdsByNpc.get(id) || null;
     // A roamer's "home" for the local view is WHERE THEY ARE RESTING (design §6c: the
     // unaffiliates section of a settlement dossier), falling back to where they came
     // from while they have taken no lodging yet. The fallback is what keeps every H1
     // record, which carries no residency at all, projecting into exactly the local view
     // it projected into before this lane existed.
-    const resting = rec.whereaboutsUnknown === true || !!String(asObject(rec.transit).toId || '')
-      ? ''
-      : String(asObject(rec.residency).settlementId || asObject(rec.dmAssignment).atSettlementId || '')
-        || String(asObject(rec.originRef).settlementId || '');
+    const resting = hold
+      ? heldSettlement(hold)
+      : rec.whereaboutsUnknown === true || !!String(asObject(rec.transit).toId || '')
+        ? ''
+        : String(asObject(rec.residency).settlementId || asObject(rec.dmAssignment).atSettlementId || '')
+          || String(asObject(rec.originRef).settlementId || '');
     if (scope !== null && resting !== scope) continue;
-    roamers.push(projectRecord(id, rec, ledger.exclusions[id] || [], opts));
+    roamers.push(projectRecord(id, rec, ledger.exclusions[id] || [], opts, hold));
   }
   /** @type {ProjectedNpc[]} */
   const placed = [];
   for (const id of Object.keys(ledger.placed).sort(compareCodepoint)) {
     const rec = /** @type {Record<string, unknown>} */ (/** @type {unknown} */ (ledger.placed[id]));
-    if (scope !== null && String(rec.hostSettlementId || '') !== scope) continue;
-    placed.push(projectRecord(id, rec, ledger.exclusions[id] || [], opts));
+    const hold = holdsByNpc.get(id) || null;
+    const localSettlement = hold ? heldSettlement(hold) : String(rec.hostSettlementId || '');
+    if (scope !== null && localSettlement !== scope) continue;
+    const projected = projectRecord(id, rec, ledger.exclusions[id] || [], opts, hold);
+    // Foreign custody is not settlement membership. Even when H1 physically places a
+    // guest in a captor's hall, the Wanderers register keeps them on its roaming side;
+    // it must never claim they have "found a place again" in a prison abroad.
+    if (hold) roamers.push(projected);
+    else placed.push(projected);
   }
+  roamers.sort((left, right) => compareCodepoint(left.wnpcId, right.wnpcId));
+  placed.sort((left, right) => compareCodepoint(left.wnpcId, right.wnpcId));
   return { roamers, placed, total: roamers.length + placed.length };
 }
 

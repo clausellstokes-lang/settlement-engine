@@ -705,16 +705,24 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     expect(row.expectedTempo).toBe('reactive');
     expect(row.module.split(',')).toEqual(expect.arrayContaining([
       'src/domain/certification/couplingRegistry.js',
+      'src/domain/spatial/armyTransit.js',
       'src/domain/worldPulse/applyWorldPulse.js',
+      'src/domain/worldPulse/armyTransitKernel.js',
       'src/domain/worldPulse/beliefMap.js',
+      'src/domain/worldPulse/brokerageServicesPlant.js',
       'src/domain/worldPulse/candidateEvents.js',
       'src/domain/worldPulse/envoyDiplomacy.js',
+      'src/domain/worldPulse/envoyEncounter.js',
       'src/domain/worldPulse/envoyErrand.js',
       'src/domain/worldPulse/envoyNews.js',
       'src/domain/worldPulse/envoyPulse.js',
       'src/domain/worldPulse/eventProse.js',
+      'src/domain/worldPulse/foreignGuestHold.js',
+      'src/domain/worldPulse/informationStatecraft.js',
       'src/domain/worldPulse/namedPersonTransit.js',
+      'src/domain/worldPulse/negotiationPictures.js',
       'src/domain/worldPulse/npcDmVerbs.js',
+      'src/domain/worldPulse/peaceTerms.js',
       'src/domain/worldPulse/pulseKernel.js',
       'src/domain/worldPulse/roadsKernel.js',
       'src/domain/worldPulse/worldState.js',
@@ -733,8 +741,8 @@ describe('war-stack rows — the source trace behind every declared literal', ()
       'capacity-rejection',
       'outbound-arrival',
       'offer-replay totals',
-      'all seven exact familyId values',
-      'divergent-seed distribution comparisons',
+      'all sixteen exact familyId values',
+      'divergent-seed event-type distribution comparisons',
       'envoyErrands presence',
     ]) {
       expect(row.aliveness.other).toContain(token);
@@ -747,6 +755,15 @@ describe('war-stack rows — the source trace behind every declared literal', ()
       'envoy_lost',
       'envoy_silence_inference',
       'terms_never_reached',
+      'envoy_intercepted',
+      'envoy_parlaying',
+      'envoy_terms_agreed',
+      'envoy_held',
+      'terms_signed_for_a_fallen_town',
+      'parlay_at_an_occupied_venue',
+      'interceptor_dilemma',
+      'interceptor_parlays_own_edge',
+      'parlay_terms_neither_court_drafted',
     ]) {
       expect(row.aliveness.other).toContain(kind);
     }
@@ -755,7 +772,10 @@ describe('war-stack rows — the source trace behind every declared literal', ()
       'the_departure_picture_does_not_refresh_itself',
       'one_durable_person_uses_the_lived_route',
       'silence_is_inference_not_hidden_truth',
-      'seven_reader_families_are_not_behavioral_width',
+      'one_pre_mutation_cut_decides_each_encounter',
+      'carried_terms_are_not_reappraised_at_home',
+      'foreign_holds_keep_one_person_one_place',
+      'sixteen_reader_families_are_not_behavioral_width',
     ]));
   });
 

@@ -24,11 +24,21 @@ import {
   NAMED_PERSON_TRANSIT_TUNING,
   namedPersonLegPosition,
 } from './namedPersonTransit.js';
+import {
+  applyNegotiationPictureMutation,
+  negotiateFromPictures,
+  normalizeNegotiationPicture,
+  normalizeParlayTermSheet,
+} from './negotiationPictures.js';
 
 export const ENVOY_ERRAND_LEDGER_KEY = 'envoyErrands';
 export const MAX_CONCURRENT_ENVOYS = 2;
 export const MAX_TERMINAL_ENVOY_HISTORY = 24;
 export const MAX_ENVOY_RUMOR_REFS = 16;
+export const MAX_ENVOY_ENCOUNTER_HISTORY = 16;
+export const ENVOY_ENCOUNTER_SCHEMA_VERSION = 1;
+export const ENVOY_CONTINUATION_SCHEMA_VERSION = 1;
+export const ENVOY_PARLAY_REFUSAL_SCHEMA_VERSION = 1;
 
 export const ENVOY_REQUIRED_RULES = Object.freeze([
   'warLayerEnabled',
@@ -42,6 +52,8 @@ export const ENVOY_REQUIRED_RULES = Object.freeze([
 export const ENVOY_ERRAND_STATES = Object.freeze([
   'travelling',
   'parlaying',
+  'intercepted',
+  'held',
   'returning',
   'home',
   'lost',
@@ -55,6 +67,15 @@ export const ENVOY_EVIDENCE_KINDS = Object.freeze([
   'envoy_lost',
   'envoy_silence_inference',
   'terms_never_reached',
+  'envoy_intercepted',
+  'envoy_parlaying',
+  'envoy_terms_agreed',
+  'envoy_held',
+  'terms_signed_for_a_fallen_town',
+  'parlay_at_an_occupied_venue',
+  'interceptor_dilemma',
+  'interceptor_parlays_own_edge',
+  'parlay_terms_neither_court_drafted',
 ]);
 
 export const ENVOY_STORES_BANDS = Object.freeze([
@@ -105,14 +126,97 @@ export const ENVOY_PICTURE_DIRECTIONS = Object.freeze(['rise', 'fall']);
 export const ENVOY_POSITION_BANDS = Object.freeze(['departed', 'underway', 'near', 'arrived']);
 export const ENVOY_JOURNEYS = Object.freeze(['outbound', 'return']);
 export const ENVOY_LOSS_CAUSES = Object.freeze(['killed', 'route_lost', 'dm_removed']);
+export const ENVOY_PURPOSES = Object.freeze(['sue', 'self_parlay']);
+export const ENVOY_ENCOUNTER_KINDS = Object.freeze([
+  'field_parlay',
+  'war_continue',
+  'private_goal',
+]);
+export const ENVOY_PRIVATE_GOALS = Object.freeze(['plant', 'imprison', 'terms_shop']);
+export const ENVOY_ENCOUNTER_RESOLUTIONS = Object.freeze([
+  'pending',
+  'parlaying',
+  'held',
+  'resumed',
+  'plant_resumed',
+]);
+export const ENVOY_ENCOUNTER_VENUE_KINDS = Object.freeze([
+  'allied_hall',
+  'occupied_enemy_settlement',
+  'field_node',
+]);
+export const ENVOY_PARLAY_REFUSAL_REASONS = Object.freeze([
+  'orientation_refused',
+  'budget_refused',
+  'family_refused',
+  'asset_refused',
+  'magnitude_refused',
+  'duration_refused',
+  'weight_refused',
+  'no_sheet',
+]);
 
 const STATE_SET = new Set(ENVOY_ERRAND_STATES);
+// Every state a parlay can already have happened in. `travelling` is the only
+// one excluded: nothing has been drafted there, so a refusal witness on it is a
+// forged import.
+const REFUSAL_BEARING_STATES = new Set(
+  ENVOY_ERRAND_STATES.filter((state) => state !== 'travelling'),
+);
 const EVIDENCE_KIND_SET = new Set(ENVOY_EVIDENCE_KINDS);
 const JOURNEY_SET = new Set(ENVOY_JOURNEYS);
 const POSITION_BAND_SET = new Set(ENVOY_POSITION_BANDS);
 const LOSS_CAUSE_SET = new Set(ENVOY_LOSS_CAUSES);
+const PURPOSE_SET = new Set(ENVOY_PURPOSES);
+const ENCOUNTER_KIND_SET = new Set(ENVOY_ENCOUNTER_KINDS);
+const PRIVATE_GOAL_SET = new Set(ENVOY_PRIVATE_GOALS);
+const ENCOUNTER_RESOLUTION_SET = new Set(ENVOY_ENCOUNTER_RESOLUTIONS);
+const ENCOUNTER_VENUE_KIND_SET = new Set(ENVOY_ENCOUNTER_VENUE_KINDS);
+const PARLAY_REFUSAL_REASON_SET = new Set(ENVOY_PARLAY_REFUSAL_REASONS);
 const TERMINAL_STATES = new Set(['home', 'lost']);
-const ACTIVE_STATES = new Set(['travelling', 'parlaying', 'returning']);
+const ACTIVE_STATES = new Set(['travelling', 'parlaying', 'intercepted', 'held', 'returning']);
+
+const ENCOUNTER_KEYS = Object.freeze([
+  'schemaVersion',
+  'id',
+  'kind',
+  'interceptorId',
+  'armyId',
+  'venueId',
+  'venueRef',
+  'routeId',
+  'encounteredTick',
+  'resolvedTick',
+  'priorState',
+  'priorJourney',
+  'priorPosition',
+  'destinationId',
+  'continuation',
+  'privateGoal',
+  'resolution',
+  'interceptorPictureId',
+  'interceptorPicture',
+  'termSheetId',
+]);
+
+const PARLAY_REFUSAL_KEYS = Object.freeze([
+  'schemaVersion',
+  'id',
+  'parlayId',
+  'attemptedTick',
+  'proposerPictureId',
+  'responderPictureId',
+  'reason',
+]);
+
+const CONTINUATION_KEYS = Object.freeze([
+  'schemaVersion',
+  'resumeState',
+  'journey',
+  'destinationId',
+  'resumedTick',
+  'scheduledArrivalTick',
+]);
 
 const PICTURE_BANDS = Object.freeze({
   storesBand: ENVOY_STORES_BANDS,
@@ -191,6 +295,198 @@ function jsonRecord(value) {
   const cloned = cloneData(value);
   const row = asObject(cloned);
   return Object.keys(row).length ? row : null;
+}
+
+/** @param {Record<string, unknown>} row @param {ReadonlyArray<string>} keys */
+function hasExactKeys(row, keys) {
+  const actual = Object.keys(row).sort(compareCodepoint);
+  const expected = [...keys].sort(compareCodepoint);
+  return actual.length === expected.length
+    && actual.every((key, index) => key === expected[index]);
+}
+
+/** Authored WR-7b identities are not trimmed or coerced at persistence seams. */
+function strictText(value) {
+  return typeof value === 'string' && value.length > 0 && value === value.trim()
+    && ![...value].some((character) => {
+      const code = character.charCodeAt(0);
+      return code <= 31 || code === 127;
+    })
+    ? value
+    : '';
+}
+
+/** Collision-free identity text for persisted witnesses. */
+function stableIdentity(parts) {
+  return parts.map((value) => {
+    const part = String(value);
+    return `${part.length}:${part}`;
+  }).join('|');
+}
+
+function parlayRefusalId(errandId, parlayId, attemptedTick) {
+  return `envoy_parlay_refusal:${stableIdentity([errandId, parlayId, attemptedTick])}`;
+}
+
+function normalizeParlayRefusalReason(value) {
+  const reason = strictText(value);
+  if (PARLAY_REFUSAL_REASON_SET.has(reason)) return reason;
+  return ['proposer_has_no_sheet', 'invalid_proposer_evaluation', 'invalid_responder_evaluation']
+    .includes(reason)
+    ? 'no_sheet'
+    : '';
+}
+
+function normalizeParlayRefusal(raw) {
+  const row = asObject(raw);
+  if (!hasExactKeys(row, PARLAY_REFUSAL_KEYS)
+    || row.schemaVersion !== ENVOY_PARLAY_REFUSAL_SCHEMA_VERSION) return null;
+  const id = strictText(row.id);
+  const parlayId = strictText(row.parlayId);
+  const attemptedTick = wholeTick(row.attemptedTick);
+  const proposerPictureId = strictText(row.proposerPictureId);
+  const responderPictureId = strictText(row.responderPictureId);
+  const reason = normalizeParlayRefusalReason(row.reason);
+  if (!id || !parlayId || attemptedTick == null || !proposerPictureId
+    || !responderPictureId || proposerPictureId === responderPictureId || !reason
+    || reason !== row.reason) return null;
+  return {
+    schemaVersion: ENVOY_PARLAY_REFUSAL_SCHEMA_VERSION,
+    id,
+    parlayId,
+    attemptedTick,
+    proposerPictureId,
+    responderPictureId,
+    reason,
+  };
+}
+
+function normalizeEncounterVenueRef(raw, venueId, routeId) {
+  const row = asObject(raw);
+  if (!hasExactKeys(row, ['id', 'kind'])) return null;
+  const id = strictText(row.id);
+  const kind = strictText(row.kind);
+  if (!id || id !== venueId || !ENCOUNTER_VENUE_KIND_SET.has(kind)
+    || (kind === 'field_node' && !routeId)) return null;
+  return { id, kind };
+}
+
+/** @param {unknown} raw */
+function normalizeEncounterContinuation(raw) {
+  if (raw == null) return null;
+  const row = asObject(raw);
+  if (!hasExactKeys(row, CONTINUATION_KEYS)
+    || row.schemaVersion !== ENVOY_CONTINUATION_SCHEMA_VERSION) return null;
+  const resumeState = strictText(row.resumeState);
+  const journey = strictText(row.journey);
+  const destinationId = strictText(row.destinationId);
+  const resumedTick = wholeTick(row.resumedTick);
+  const scheduledArrivalTick = wholeTick(row.scheduledArrivalTick);
+  if (!['travelling', 'returning'].includes(resumeState)
+    || !JOURNEY_SET.has(journey)
+    || (resumeState === 'travelling') !== (journey === 'outbound')
+    || !destinationId || resumedTick == null || scheduledArrivalTick == null
+    || scheduledArrivalTick < resumedTick) return null;
+  return {
+    schemaVersion: ENVOY_CONTINUATION_SCHEMA_VERSION,
+    resumeState,
+    journey,
+    destinationId,
+    resumedTick,
+    scheduledArrivalTick,
+  };
+}
+
+function normalizeHistoricalPosition(raw, forcedJourney) {
+  const row = asObject(raw);
+  if (!hasExactKeys(row, ['journey', 'legIndex', 'fromId', 'toId', 'progressBand'])) return null;
+  const journey = strictText(row.journey);
+  const legIndex = wholeTick(row.legIndex);
+  const fromId = strictText(row.fromId);
+  const toId = strictText(row.toId);
+  const progressBand = strictText(row.progressBand);
+  if (journey !== forcedJourney || !JOURNEY_SET.has(journey) || legIndex == null
+    || !fromId || !toId || fromId === toId || !POSITION_BAND_SET.has(progressBand)) return null;
+  return { journey, legIndex, fromId, toId, progressBand };
+}
+
+/** Strict, complete persistence DTO for one actual army/envoy collision. */
+function normalizeEnvoyEncounter(raw) {
+  const row = asObject(raw);
+  if (!hasExactKeys(row, ENCOUNTER_KEYS)
+    || row.schemaVersion !== ENVOY_ENCOUNTER_SCHEMA_VERSION) return null;
+  const id = strictText(row.id);
+  const kind = strictText(row.kind);
+  const interceptorId = strictText(row.interceptorId);
+  const armyId = strictText(row.armyId);
+  const venueId = strictText(row.venueId);
+  const routeId = row.routeId == null ? null : strictText(row.routeId);
+  const venueRef = normalizeEncounterVenueRef(row.venueRef, venueId, routeId);
+  const encounteredTick = wholeTick(row.encounteredTick);
+  const resolvedTick = row.resolvedTick == null ? null : wholeTick(row.resolvedTick);
+  const priorState = strictText(row.priorState);
+  const priorJourney = strictText(row.priorJourney);
+  const destinationId = strictText(row.destinationId);
+  const privateGoal = row.privateGoal == null ? null : strictText(row.privateGoal);
+  const resolution = strictText(row.resolution);
+  const interceptorPictureId = strictText(row.interceptorPictureId);
+  const interceptorPicture = normalizeNegotiationPicture(row.interceptorPicture);
+  const termSheetId = row.termSheetId == null ? null : strictText(row.termSheetId);
+  if (!id || !ENCOUNTER_KIND_SET.has(kind) || !interceptorId || !armyId || !venueId
+    || !venueRef || (row.routeId != null && !routeId) || encounteredTick == null
+    || !['travelling', 'returning'].includes(priorState)
+    || !JOURNEY_SET.has(priorJourney)
+    || (priorState === 'travelling') !== (priorJourney === 'outbound')
+    || !destinationId || !ENCOUNTER_RESOLUTION_SET.has(resolution)
+    || !interceptorPictureId || !interceptorPicture
+    || interceptorPicture.id !== interceptorPictureId
+    || interceptorPicture.carrier?.kind !== 'army'
+    || interceptorPicture.carrier?.id !== armyId
+    || interceptorPicture.partyId !== interceptorId
+    || Number(interceptorPicture.lastChangedTick) > Number(encounteredTick)
+    || (row.termSheetId != null && !termSheetId)) return null;
+  if ((kind === 'private_goal') !== !!privateGoal
+    || (privateGoal && !PRIVATE_GOAL_SET.has(privateGoal))) return null;
+  const priorPosition = normalizeHistoricalPosition(row.priorPosition, priorJourney);
+  if (!priorPosition) return null;
+  const continuation = normalizeEncounterContinuation(row.continuation);
+  if (resolution === 'pending') {
+    if (resolvedTick != null || continuation) return null;
+  } else if (resolvedTick == null || resolvedTick < encounteredTick + 1) {
+    return null;
+  }
+  if (['resumed', 'plant_resumed'].includes(resolution)) {
+    if (!continuation || Number(continuation.resumedTick) !== resolvedTick
+      || continuation.resumeState !== priorState || continuation.journey !== priorJourney
+      || continuation.destinationId !== destinationId) return null;
+  } else if (continuation) return null;
+  return {
+    schemaVersion: ENVOY_ENCOUNTER_SCHEMA_VERSION,
+    id,
+    kind,
+    interceptorId,
+    armyId,
+    venueId,
+    venueRef,
+    routeId,
+    encounteredTick,
+    resolvedTick,
+    priorState,
+    priorJourney,
+    priorPosition,
+    destinationId,
+    continuation,
+    privateGoal,
+    resolution,
+    interceptorPictureId,
+    interceptorPicture,
+    termSheetId,
+  };
+}
+
+function encounterOrder(left, right) {
+  return Number(left.encounteredTick) - Number(right.encounteredTick)
+    || compareCodepoint(String(left.id), String(right.id));
 }
 
 /** Exact activation: all six prerequisite laws must be explicitly true. */
@@ -574,12 +870,29 @@ function validJourneyRoute(legs, journey, fromId, toId) {
   return true;
 }
 
-/** A term sheet is opaque to WR-7a but must be detached and JSON-safe. */
-function normalizeTermSheet(raw) {
-  if (raw == null) return null;
+/**
+ * WR-7a sheets remain opaque JSON cargo. A version marker opts into WR-7b's
+ * exact carried-sheet contract; malformed versioned cargo must not be silently
+ * downgraded to a permissive legacy object.
+ */
+function normalizeTermSheetResult(raw) {
+  if (raw == null) return { valid: true, value: null, versioned: false };
+  const row = asObject(raw);
+  if (Object.prototype.hasOwnProperty.call(row, 'schemaVersion')) {
+    const exact = normalizeParlayTermSheet(raw);
+    return exact
+      ? { valid: true, value: exact, versioned: true }
+      : { valid: false, value: null, versioned: true };
+  }
   const cloned = cloneData(raw);
-  const row = asObject(cloned);
-  return Object.keys(row).length ? row : null;
+  const legacy = asObject(cloned);
+  return Object.keys(legacy).length
+    ? { valid: true, value: legacy, versioned: false }
+    : { valid: false, value: null, versioned: false };
+}
+
+function normalizeTermSheet(raw) {
+  return normalizeTermSheetResult(raw).value;
 }
 
 /** @param {unknown} raw @returns {Record<string, unknown>|null} */
@@ -593,15 +906,30 @@ function normalizeErrand(raw) {
   const from = text(row.from);
   const to = text(row.to);
   const state = text(row.state);
+  const purpose = text(row.purpose);
   const departedTick = wholeTick(row.departedTick);
   const expectedReturnTick = wholeTick(row.expectedReturnTick);
   const baseId = envoyErrandIdForOffer(offer);
   const attemptId = envoyAttemptIdForOffer(offer);
   const scheduledHomeTick = wholeTick(row.scheduledHomeTick);
+  const authoredReturnOriginId = row.returnOriginId == null ? '' : strictText(row.returnOriginId);
+  const returnOriginId = authoredReturnOriginId || to;
+  const termSheetRead = normalizeTermSheetResult(row.termSheet);
+  const negotiationPicture = row.negotiationPicture == null
+    ? null
+    : normalizeNegotiationPicture(row.negotiationPicture);
+  const targetCourtPicture = row.targetCourtPicture == null
+    ? null
+    : normalizeNegotiationPicture(row.targetCourtPicture);
   if (!offer || !acceptance || !snapshot || !id || ![baseId, attemptId].includes(id) || !npcId
-    || !from || !to || from === to || text(row.purpose) !== 'sue'
+    || !from || !to || from === to || !PURPOSE_SET.has(purpose)
     || !STATE_SET.has(state) || departedTick == null || expectedReturnTick == null
-    || expectedReturnTick < departedTick) return null;
+    || expectedReturnTick < departedTick || !termSheetRead.valid
+    || (termSheetRead.versioned && (!negotiationPicture || !targetCourtPicture))
+    || (!!negotiationPicture !== !!targetCourtPicture)
+    || (row.returnOriginId != null && !authoredReturnOriginId)
+    || (row.negotiationPicture != null && !negotiationPicture)
+    || (row.targetCourtPicture != null && !targetCourtPicture)) return null;
   const payload = /** @type {Record<string, unknown>} */ (offer.proposalPayload);
   if (payload.offererId !== from || payload.targetId !== to) return null;
   const rawLegs = Array.isArray(row.legs) ? row.legs : [];
@@ -615,12 +943,13 @@ function normalizeErrand(raw) {
   const persistedJourney = text(asObject(row.positionRef).journey);
   const expectedJourney = state === 'returning' || state === 'home'
     ? 'return'
-    : state === 'lost' && JOURNEY_SET.has(persistedJourney)
+    : ['parlaying', 'intercepted', 'held', 'lost'].includes(state)
+      && JOURNEY_SET.has(persistedJourney)
       ? persistedJourney
       : 'outbound';
-  if ((expectedJourney === 'return' && !validJourneyRoute(normalizedLegs, 'return', to, from))
-    || (returning.length && !validJourneyRoute(normalizedLegs, 'return', to, from))
-    || (returning.length && ['travelling', 'parlaying'].includes(state))) return null;
+  if ((expectedJourney === 'return' && !validJourneyRoute(normalizedLegs, 'return', returnOriginId, from))
+    || (returning.length && !validJourneyRoute(normalizedLegs, 'return', returnOriginId, from))
+    || (returning.length && state === 'travelling')) return null;
   const outboundArrivalTick = Number(outbound.at(-1)?.arrivalTick);
   const returnArrivalTick = Number(returning.at(-1)?.arrivalTick);
   if (expectedReturnTick < outboundArrivalTick
@@ -628,13 +957,24 @@ function normalizeErrand(raw) {
     || (!returning.length && scheduledHomeTick != null)) return null;
   const positionRef = normalizePositionRef(row.positionRef, normalizedLegs, expectedJourney);
   if (!positionRef) return null;
+  const rawEncounters = row.encounters == null ? [] : row.encounters;
+  if (!Array.isArray(rawEncounters) || rawEncounters.length > MAX_ENVOY_ENCOUNTER_HISTORY) return null;
+  const encounters = rawEncounters.map((entry) => normalizeEnvoyEncounter(entry));
+  if (encounters.some((entry) => !entry)
+    || !encounters.every((entry, index) => index === 0
+      || encounterOrder(encounters[index - 1], entry) < 0)
+    || new Set(encounters.map((entry) => entry.id)).size !== encounters.length) return null;
+  const latestEncounter = encounters.at(-1) || null;
   const finalOutboundPosition = positionRef.journey === 'outbound'
     && Number(positionRef.legIndex) === outbound.length - 1
     && positionRef.progressBand === 'arrived';
   const finalReturnPosition = positionRef.journey === 'return'
     && Number(positionRef.legIndex) === returning.length - 1
     && positionRef.progressBand === 'arrived';
-  if ((state === 'parlaying' && !finalOutboundPosition)
+  const encounterParlay = state === 'parlaying'
+    && latestEncounter?.resolution === 'parlaying'
+    && text(row.parlayId) === latestEncounter.id;
+  if ((state === 'parlaying' && !finalOutboundPosition && !encounterParlay)
     || (state === 'home' && !finalReturnPosition)) return null;
 
   /** @type {Record<string, unknown>} */
@@ -643,16 +983,20 @@ function normalizeErrand(raw) {
     npcId,
     from,
     to,
-    purpose: 'sue',
+    purpose,
     offer,
     acceptance,
     snapshot,
-    termSheet: normalizeTermSheet(row.termSheet),
+    termSheet: termSheetRead.value,
+    ...(negotiationPicture ? { negotiationPicture } : {}),
+    ...(targetCourtPicture ? { targetCourtPicture } : {}),
+    ...(encounters.length ? { encounters } : {}),
     legs: normalizedLegs,
     positionRef,
     departedTick,
     expectedReturnTick,
     ...(scheduledHomeTick != null ? { scheduledHomeTick } : {}),
+    ...(authoredReturnOriginId ? { returnOriginId: authoredReturnOriginId } : {}),
     state,
   };
   for (const key of ['npcName', 'fromName', 'toName']) {
@@ -662,6 +1006,7 @@ function normalizeErrand(raw) {
   for (const key of [
     'parlayTick', 'returnStartedTick', 'homeTick', 'lostTick', 'closedTick',
     'silenceInferredAtTick', 'lastMovedTick', 'lossKnownAtHomeTick',
+    'interceptedTick', 'heldTick', 'releasedTick',
   ]) {
     const tick = wholeTick(row[key]);
     if (tick != null) out[key] = tick;
@@ -675,17 +1020,119 @@ function normalizeErrand(raw) {
   const lastMovedTick = wholeTick(out.lastMovedTick);
   const silenceInferredAtTick = wholeTick(out.silenceInferredAtTick);
   const lossKnownAtHomeTick = wholeTick(out.lossKnownAtHomeTick);
+  const interceptedTick = wholeTick(out.interceptedTick);
+  const heldTick = wholeTick(out.heldTick);
+  const releasedTick = wholeTick(out.releasedTick);
+  const parlayId = text(row.parlayId);
+  if (parlayId) out.parlayId = parlayId;
+  const parlayRefusal = row.parlayRefusal == null
+    ? null
+    : normalizeParlayRefusal(row.parlayRefusal);
+  if (row.parlayRefusal != null && !parlayRefusal) return null;
+  if (parlayRefusal) {
+    const parlayEncounter = encounters.find((entry) => entry.id === parlayId) || null;
+    const proposerPictureId = parlayEncounter
+      ? String(parlayEncounter.interceptorPictureId)
+      : String(targetCourtPicture?.id || '');
+    const proposerPicture = parlayEncounter
+      ? asObject(parlayEncounter.interceptorPicture)
+      : targetCourtPicture;
+    // The witness is DURABLE, not a parlay-phase flag. It exists to stop a later
+    // pulse silently re-drafting, so it has to survive the mandatory return and
+    // the terminal close; bounding it to `parlaying` deleted the whole errand
+    // from this reader the moment a refused envoy started walking home. Only
+    // `travelling` is impossible: nothing has been drafted yet there.
+    if (!REFUSAL_BEARING_STATES.has(state) || termSheetRead.value !== null || !parlayId
+      || parlayRefusal.parlayId !== parlayId
+      || parlayRefusal.id !== parlayRefusalId(id, parlayId, Number(parlayRefusal.attemptedTick))
+      || parlayRefusal.proposerPictureId !== proposerPictureId
+      || parlayRefusal.responderPictureId !== negotiationPicture?.id
+      || parlayTick == null || Number(parlayRefusal.attemptedTick) < parlayTick + 1
+      || Number(parlayRefusal.attemptedTick) < Number(asObject(proposerPicture).lastChangedTick)
+      || Number(parlayRefusal.attemptedTick) < Number(negotiationPicture?.lastChangedTick)) return null;
+    out.parlayRefusal = parlayRefusal;
+  }
   const terminalTick = state === 'home' ? homeTick : state === 'lost' ? lostTick : null;
   // An imported row may not place any lifecycle fact before the offer existed
   // or before this person departed.  Terminal clocks then close only facts that
   // had already happened; silence is the one deliberate exception because a
   // home court can infer it after a remote loss it has not observed.
   if (Number(offer.generatedAtTick) > departedTick
-    || [parlayTick, returnStartedTick, homeTick, lostTick, lastMovedTick]
+    || [parlayTick, returnStartedTick, homeTick, lostTick, lastMovedTick,
+      interceptedTick, heldTick, releasedTick]
       .some((value) => value != null && value < departedTick)
     || (silenceInferredAtTick != null && silenceInferredAtTick <= expectedReturnTick)
     || (lossKnownAtHomeTick != null && (lostTick == null || lossKnownAtHomeTick < lostTick))
-    || (terminalTick != null && lastMovedTick != null && lastMovedTick > terminalTick)) return null;
+    || (terminalTick != null && lastMovedTick != null && lastMovedTick > terminalTick)
+    || encounters.some((entry) => Number(entry.encounteredTick) < departedTick
+      || (terminalTick != null && Number(entry.encounteredTick) > terminalTick))) return null;
+  const episodeKey = envoyOfferEpisodeKey(offer);
+  // The envoy's own picture is frozen AT DEPARTURE and mutates only afterwards
+  // (K.2): the capture may not postdate the departure, but `lastChangedTick`
+  // advances with every rumor the road exposes them to.  Bounding the changed
+  // clock by `departedTick` — as the court's frozen picture below rightly is —
+  // deleted the errand from this reader on its first mutation.  Only the
+  // terminal clock bounds it, exactly as encounters are bounded above.
+  if (negotiationPicture && (
+    negotiationPicture.carrier?.kind !== 'envoy'
+    || negotiationPicture.carrier?.id !== id
+    || negotiationPicture.partyId !== from
+    || negotiationPicture.counterpartId !== to
+    || negotiationPicture.relationshipKey !== offer.relationshipKey
+    || negotiationPicture.episodeKey !== episodeKey
+    || negotiationPicture.frontOwnerId !== payload.peaceFrontOwnerId
+    || Number(negotiationPicture.frontSinceTick) !== Number(payload.peaceFrontSinceTick)
+    || Number(negotiationPicture.capturedTick) > departedTick
+    || (terminalTick != null && Number(negotiationPicture.lastChangedTick) > terminalTick)
+  )) return null;
+  // The receiving court's picture is frozen at dispatch and never mutates, so
+  // its changed clock legitimately may not pass the departure at all.
+  if (targetCourtPicture && (
+    targetCourtPicture.carrier?.kind !== 'court'
+    || targetCourtPicture.partyId !== to
+    || targetCourtPicture.counterpartId !== from
+    || targetCourtPicture.relationshipKey !== offer.relationshipKey
+    || targetCourtPicture.episodeKey !== episodeKey
+    || targetCourtPicture.frontOwnerId !== payload.peaceFrontOwnerId
+    || Number(targetCourtPicture.frontSinceTick) !== Number(payload.peaceFrontSinceTick)
+    || Number(targetCourtPicture.lastChangedTick) > departedTick
+  )) return null;
+  if (encounters.some((entry) => {
+    const interceptorPicture = asObject(entry.interceptorPicture);
+    const pair = [String(interceptorPicture.partyId), String(interceptorPicture.counterpartId)]
+      .sort(compareCodepoint);
+    const offerPair = [from, to].sort(compareCodepoint);
+    return interceptorPicture.relationshipKey !== offer.relationshipKey
+      || interceptorPicture.episodeKey !== episodeKey
+      || !offerPair.includes(String(interceptorPicture.counterpartId))
+      || (entry.kind === 'field_parlay'
+        && JSON.stringify(pair) !== JSON.stringify(offerPair));
+  })) return null;
+  if (termSheetRead.versioned) {
+    const sheet = /** @type {Record<string, unknown>} */ (termSheetRead.value);
+    if (sheet.errandId !== id || sheet.episodeKey !== episodeKey
+      || sheet.relationshipKey !== offer.relationshipKey
+      || JSON.stringify(sheet.parties) !== JSON.stringify([from, to].sort(compareCodepoint))
+      || Number(sheet.agreedTick) < departedTick || !parlayId
+      || !Object.values(asObject(sheet.pictureIds)).includes(negotiationPicture?.id)
+      || sheet.encounterId !== parlayId
+      || (returnStartedTick != null && returnStartedTick < Number(sheet.agreedTick) + 1)) return null;
+  }
+  if (latestEncounter) {
+    if (interceptedTick == null || interceptedTick !== Number(latestEncounter.encounteredTick)) return null;
+    if (state === 'intercepted' && latestEncounter.resolution !== 'pending') return null;
+    if (state === 'held' && (latestEncounter.resolution !== 'held'
+      || heldTick !== Number(latestEncounter.resolvedTick))) return null;
+    if (state === 'parlaying' && parlayId === latestEncounter.id
+      && latestEncounter.resolution !== 'parlaying') return null;
+    if (releasedTick != null && ['travelling', 'returning'].includes(state)
+      && !['resumed', 'plant_resumed'].includes(String(latestEncounter.resolution))) return null;
+    if (releasedTick != null && !['resumed', 'plant_resumed'].includes(String(latestEncounter.resolution))) return null;
+  } else if (interceptedTick != null || heldTick != null || releasedTick != null
+    || ['intercepted', 'held'].includes(state)) return null;
+  if (authoredReturnOriginId && authoredReturnOriginId !== to
+    && (!encounters.some((entry) => entry.venueId === authoredReturnOriginId
+      && entry.resolution === 'parlaying') || !returning.length)) return null;
   if (state === 'lost') {
     if (!LOSS_CAUSE_SET.has(lossCause) || lostTick == null || closedTick == null
       || lostTick !== closedTick || homeTick != null
@@ -700,8 +1147,9 @@ function normalizeErrand(raw) {
     if (lostReturning) {
       if (positionRef.journey !== 'return' || parlayTick == null || returnStartedTick == null) return null;
     } else if (lostAtParlay) {
-      if (returnStartedTick != null || !finalOutboundPosition
-        || parlayTick < outboundArrivalTick || out.termSheet !== null) return null;
+      if (returnStartedTick != null || (!finalOutboundPosition && !latestEncounter)
+        || (!latestEncounter && parlayTick < outboundArrivalTick)
+        || (out.termSheet !== null && !termSheetRead.versioned)) return null;
     } else if (returnStartedTick != null || positionRef.journey !== 'outbound') {
       return null;
     }
@@ -713,10 +1161,13 @@ function normalizeErrand(raw) {
     return null;
   }
   if (['parlaying', 'returning', 'home'].includes(state)
-    && (parlayTick == null || parlayTick < outboundArrivalTick)) return null;
+    && (parlayTick == null || (!latestEncounter && parlayTick < outboundArrivalTick))) return null;
   if (state === 'travelling' && (parlayTick != null || returnStartedTick != null)) return null;
-  if (state === 'parlaying' && returnStartedTick != null) return null;
-  if (['travelling', 'parlaying'].includes(state) && out.termSheet !== null) return null;
+  if (state === 'parlaying' && expectedJourney === 'outbound' && returnStartedTick != null) return null;
+  if (state === 'travelling' && out.termSheet !== null) return null;
+  if (state === 'parlaying' && out.termSheet !== null && !termSheetRead.versioned) return null;
+  if (['intercepted', 'held'].includes(state) && expectedJourney === 'outbound'
+    && out.termSheet !== null) return null;
   if (returning.length && (parlayTick == null || returnStartedTick == null
     || returnStartedTick < parlayTick + 1
     || Number(returning[0].departTick) < returnStartedTick)) return null;
@@ -800,8 +1251,28 @@ export function normalizeEnvoyEvidence(evidence) {
   const lossCause = text(row.lossCause);
   if (lossCause && LOSS_CAUSE_SET.has(lossCause)) out.lossCause = lossCause;
   if (kind === 'envoy_silence_inference') out.inferenceBasis = 'silence';
-  const termSheetId = text(row.termSheetId);
-  if (termSheetId) out.termSheetId = termSheetId;
+  for (const key of [
+    'encounterId', 'interceptorId', 'armyId',
+    'envoyPictureId', 'interceptorPictureId', 'parlayId',
+  ]) {
+    const value = strictText(row[key]);
+    if (value) out[key] = value;
+  }
+  for (const [idKey, nameKey] of [
+    ['thirdPartyId', 'thirdPartyName'],
+    ['venueId', 'venueName'],
+    ['termSheetId', 'termName'],
+    ['reasonId', 'reasonName'],
+  ]) {
+    const value = strictText(row[idKey]);
+    const label = strictText(row[nameKey]);
+    if (value) {
+      out[idKey] = value;
+      if (label) out[nameKey] = label;
+    }
+  }
+  const privateGoal = strictText(row.privateGoal);
+  if (privateGoal && PRIVATE_GOAL_SET.has(privateGoal)) out.privateGoal = privateGoal;
   return out;
 }
 
@@ -835,6 +1306,14 @@ function evidenceFor(errand, kind, tick, extra = {}) {
     } : {}),
     ...extra,
   }));
+}
+
+/** Detached typed evidence factory for adapters that observe an existing row. */
+export function envoyEvidenceFor(errand, kind, tick, extra = {}) {
+  const normalized = normalizeErrand(errand);
+  const at = wholeTick(tick);
+  if (!normalized || !EVIDENCE_KIND_SET.has(text(kind)) || at == null) return null;
+  return evidenceFor(normalized, text(kind), at, asObject(cloneData(extra)));
 }
 
 /** @param {Record<string, unknown>} errand */
@@ -919,6 +1398,9 @@ export function mintEnvoyErrand({
   fromName = '',
   toName = '',
   snapshot,
+  negotiationPicture = null,
+  targetCourtPicture = null,
+  purpose = 'sue',
   routePlan,
   tick,
 } = {}) {
@@ -929,8 +1411,9 @@ export function mintEnvoyErrand({
   const acceptedRuling = normalizeEnvoyAcceptance(acceptance, offer);
   const personId = text(npcId);
   const picture = normalizeEnvoyDepartureSnapshot(snapshot);
+  const missionPurpose = text(purpose);
   const departedTick = wholeTick(tick);
-  if (!offer || !personId || !picture || departedTick == null) {
+  if (!offer || !personId || !picture || !PURPOSE_SET.has(missionPurpose) || departedTick == null) {
     return { worldState, changed: false, evidence: [], errand: null, reason: 'invalid_departure' };
   }
   if (!acceptedRuling) {
@@ -960,18 +1443,51 @@ export function mintEnvoyErrand({
   if (!plan) {
     return { worldState, changed: false, evidence: [], errand: null, reason: 'invalid_route_plan' };
   }
+  const errandId = errands.some((row) => envoyOfferEpisodeKey(row.offer) === envoyOfferEpisodeKey(offer))
+    ? envoyAttemptIdForOffer(offer)
+    : envoyErrandIdForOffer(offer);
+  const fullPicture = negotiationPicture == null
+    ? null
+    : normalizeNegotiationPicture(negotiationPicture);
+  const frozenTargetCourtPicture = targetCourtPicture == null
+    ? null
+    : normalizeNegotiationPicture(targetCourtPicture);
+  if (negotiationPicture != null && (!fullPicture
+    || fullPicture.carrier?.kind !== 'envoy'
+    || fullPicture.carrier?.id !== errandId
+    || fullPicture.partyId !== from
+    || fullPicture.counterpartId !== to
+    || fullPicture.relationshipKey !== offer.relationshipKey
+    || fullPicture.episodeKey !== envoyOfferEpisodeKey(offer)
+    || fullPicture.frontOwnerId !== payload.peaceFrontOwnerId
+    || Number(fullPicture.frontSinceTick) !== Number(payload.peaceFrontSinceTick)
+    || Number(fullPicture.lastChangedTick) > departedTick)) {
+    return { worldState, changed: false, evidence: [], errand: null, reason: 'invalid_negotiation_picture' };
+  }
+  if (!!fullPicture !== !!frozenTargetCourtPicture
+    || (targetCourtPicture != null && (!frozenTargetCourtPicture
+      || frozenTargetCourtPicture.carrier?.kind !== 'court'
+      || frozenTargetCourtPicture.partyId !== to
+      || frozenTargetCourtPicture.counterpartId !== from
+      || frozenTargetCourtPicture.relationshipKey !== offer.relationshipKey
+      || frozenTargetCourtPicture.episodeKey !== envoyOfferEpisodeKey(offer)
+      || frozenTargetCourtPicture.frontOwnerId !== payload.peaceFrontOwnerId
+      || Number(frozenTargetCourtPicture.frontSinceTick) !== Number(payload.peaceFrontSinceTick)
+      || Number(frozenTargetCourtPicture.lastChangedTick) > departedTick))) {
+    return { worldState, changed: false, evidence: [], errand: null, reason: 'invalid_target_court_picture' };
+  }
   /** @type {Record<string, unknown>} */
   const errand = {
-    id: errands.some((row) => envoyOfferEpisodeKey(row.offer) === envoyOfferEpisodeKey(offer))
-      ? envoyAttemptIdForOffer(offer)
-      : envoyErrandIdForOffer(offer),
+    id: errandId,
     npcId: personId,
     from,
     to,
-    purpose: 'sue',
+    purpose: missionPurpose,
     offer,
     acceptance: acceptedRuling,
     snapshot: picture,
+    ...(fullPicture ? { negotiationPicture: fullPicture } : {}),
+    ...(frozenTargetCourtPicture ? { targetCourtPicture: frozenTargetCourtPicture } : {}),
     termSheet: null,
     legs: plan.legs,
     positionRef: plan.positionRef,
@@ -984,7 +1500,12 @@ export function mintEnvoyErrand({
   };
   const nextWorldState = writeErrands(worldState, [...errands, errand]);
   const persisted = envoyErrandForOffer(nextWorldState, offer);
-  const evidence = persisted ? [evidenceFor(persisted, 'envoy_departed', departedTick)] : [];
+  const evidence = persisted ? [
+    evidenceFor(persisted, 'envoy_departed', departedTick),
+    ...(missionPurpose === 'self_parlay'
+      ? [evidenceFor(persisted, 'interceptor_parlays_own_edge', departedTick)]
+      : []),
+  ] : [];
   return { worldState: nextWorldState, changed: nextWorldState !== worldState, evidence, errand: persisted, reason: 'minted' };
 }
 
@@ -1019,8 +1540,433 @@ export function updateEnvoyPosition({ worldState, errandId, positionRef, tick } 
   };
 }
 
-/** Outbound arrival opens the parlay; it does not settle or draft terms here. */
-export function markEnvoyParlaying({ worldState, errandId, tick } = {}) {
+function exactExpectedErrand(current, expectedErrand) {
+  if (expectedErrand == null) return true;
+  const expected = normalizeErrand(expectedErrand);
+  return !!expected && JSON.stringify(expected) === JSON.stringify(current);
+}
+
+function normalizePictureForErrand(raw, errand) {
+  const picture = normalizeNegotiationPicture(raw);
+  const offer = asObject(errand.offer);
+  return picture
+    && picture.carrier?.kind === 'envoy'
+    && picture.carrier?.id === errand.id
+    && picture.partyId === errand.from
+    && picture.counterpartId === errand.to
+    && picture.relationshipKey === offer.relationshipKey
+    && picture.episodeKey === envoyOfferEpisodeKey(offer)
+    ? picture
+    : null;
+}
+
+function replaceErrand(worldState, errands, index, nextErrand) {
+  const next = [...errands];
+  next[index] = nextErrand;
+  return writeErrands(worldState, next);
+}
+
+/**
+ * Record the one T transition from travel into interception. The encounter
+ * census is external; this writer proves that its projected node and temporal
+ * cut still match the exact ledger row before adopting the result.
+ */
+export function markEnvoyIntercepted({
+  worldState,
+  errandId,
+  encounter,
+  interceptorPicture = null,
+  expectedErrand = null,
+  tick,
+} = {}) {
+  if (!envoyDiplomacyActive(worldState)) {
+    return { worldState, changed: false, evidence: [], errand: null, reason: 'dark' };
+  }
+  const id = strictText(errandId);
+  const at = wholeTick(tick);
+  const candidate = asObject(encounter);
+  const errands = envoyErrandsOf(worldState);
+  const index = errandIndex(errands, id);
+  const current = index >= 0 ? errands[index] : null;
+  if (!current || at == null || !['travelling', 'returning'].includes(String(current.state))
+    || !exactExpectedErrand(current, expectedErrand)) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'stale_errand' };
+  }
+  const preview = previewEnvoyPosition(current, at);
+  const encounterId = strictText(candidate.id);
+  const kind = strictText(candidate.kind);
+  const interceptorId = strictText(candidate.actorId || candidate.interceptorId);
+  const armyId = strictText(candidate.armyId);
+  const venueId = strictText(candidate.nodeId || candidate.venueId);
+  const routeId = candidate.routeId == null ? null : strictText(candidate.routeId);
+  const venueRef = normalizeEncounterVenueRef(candidate.venueRef, venueId, routeId);
+  const privateGoal = candidate.privateGoal == null ? null : strictText(candidate.privateGoal);
+  const candidateTick = wholeTick(candidate.tick);
+  const offer = asObject(current.offer);
+  if (!preview || !encounterId || !ENCOUNTER_KIND_SET.has(kind) || !interceptorId || !armyId
+    || !venueId || !venueRef || venueId !== preview.nodeId || candidateTick !== at
+    || (candidate.errandId != null && strictText(candidate.errandId) !== id)
+    || (candidate.npcId != null && strictText(candidate.npcId) !== current.npcId)
+    || (candidate.relationshipKey != null
+      && strictText(candidate.relationshipKey) !== offer.relationshipKey)
+    || (candidate.episodeKey != null
+      && strictText(candidate.episodeKey) !== envoyOfferEpisodeKey(offer))
+    || (candidate.routeId != null && (!routeId || routeId !== (preview.routeId || '')))
+    || ((kind === 'private_goal') !== !!privateGoal)
+    || (privateGoal && !PRIVATE_GOAL_SET.has(privateGoal))) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_encounter' };
+  }
+  const priorEncounters = Array.isArray(current.encounters) ? current.encounters : [];
+  if (priorEncounters.some((row) => row.id === encounterId)
+    || priorEncounters.some((row) => Number(row.encounteredTick) === at)) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'encounter_already_recorded' };
+  }
+  const otherPicture = normalizeNegotiationPicture(interceptorPicture);
+  const offerPair = [String(current.from), String(current.to)].sort(compareCodepoint);
+  const picturePair = otherPicture
+    ? [String(otherPicture.partyId), String(otherPicture.counterpartId)].sort(compareCodepoint)
+    : [];
+  if (!otherPicture
+    || otherPicture.carrier?.kind !== 'army'
+    || otherPicture.carrier?.id !== armyId
+    || otherPicture.partyId !== interceptorId
+    || !offerPair.includes(String(otherPicture.counterpartId))
+    || otherPicture.relationshipKey !== offer.relationshipKey
+    || otherPicture.episodeKey !== envoyOfferEpisodeKey(offer)
+    || Number(otherPicture.lastChangedTick) > at
+    || (kind === 'field_parlay'
+      && JSON.stringify(picturePair) !== JSON.stringify(offerPair))
+    || (candidate.interceptorPictureId != null
+      && strictText(candidate.interceptorPictureId) !== otherPicture.id)) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_interceptor_picture' };
+  }
+  const encounterRow = normalizeEnvoyEncounter({
+    schemaVersion: ENVOY_ENCOUNTER_SCHEMA_VERSION,
+    id: encounterId,
+    kind,
+    interceptorId,
+    armyId,
+    venueId,
+    venueRef,
+    routeId,
+    encounteredTick: at,
+    resolvedTick: null,
+    priorState: current.state,
+    priorJourney: preview.journey,
+    priorPosition: preview.positionRef,
+    destinationId: current.state === 'returning' ? current.from : current.to,
+    continuation: null,
+    privateGoal,
+    resolution: 'pending',
+    interceptorPictureId: String(otherPicture.id),
+    interceptorPicture: otherPicture,
+    termSheetId: current.termSheet ? termSheetIdOf(current) || null : null,
+  });
+  if (!encounterRow) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_encounter' };
+  }
+  const nextErrand = {
+    ...current,
+    state: 'intercepted',
+    positionRef: preview.positionRef,
+    interceptedTick: at,
+    encounters: [...priorEncounters, encounterRow].sort(encounterOrder)
+      .slice(-MAX_ENVOY_ENCOUNTER_HISTORY),
+  };
+  const nextWorldState = replaceErrand(worldState, errands, index, nextErrand);
+  const persisted = envoyErrandsOf(nextWorldState).find((row) => row.id === id) || null;
+  return {
+    worldState: nextWorldState,
+    changed: nextWorldState !== worldState,
+    evidence: persisted ? [evidenceFor(persisted, 'envoy_intercepted', at, {
+      encounterId,
+      interceptorId,
+      thirdPartyId: interceptorId,
+      armyId,
+      venueId,
+      ...(privateGoal ? { privateGoal } : {}),
+      ...(current.negotiationPicture ? { envoyPictureId: current.negotiationPicture.id } : {}),
+      interceptorPictureId: otherPicture.id,
+    })] : [],
+    errand: persisted,
+    reason: persisted ? 'intercepted' : 'invalid_result',
+  };
+}
+
+function latestEncounterFor(current, encounterId) {
+  const rows = Array.isArray(current.encounters) ? current.encounters : [];
+  const latest = rows.at(-1) || null;
+  return latest && latest.id === encounterId ? latest : null;
+}
+
+/** Detached latest collision projection for integration readers. */
+export function envoyEncounterForErrand(rawErrand, encounterId = '') {
+  const errand = normalizeErrand(rawErrand);
+  if (!errand || !Array.isArray(errand.encounters)) return null;
+  const id = strictText(encounterId);
+  const row = id
+    ? errand.encounters.find((entry) => entry.id === id)
+    : errand.encounters.at(-1);
+  return row ? cloneData(row) : null;
+}
+
+/** Detached frozen receiving-court picture captured at dispatch. */
+export function envoyTargetCourtPictureForErrand(rawErrand) {
+  const errand = normalizeErrand(rawErrand);
+  return errand?.targetCourtPicture
+    ? cloneData(errand.targetCourtPicture)
+    : null;
+}
+
+/**
+ * Exact bridge cargo for `foreignGuestHold`'s separate one writer. No venue,
+ * captor, cause, or hold authority is invented here; this is only the frozen
+ * journey the hold row must carry and later hand back on release.
+ */
+export function envoyContinuationForHold(rawErrand, encounterId) {
+  const errand = normalizeErrand(rawErrand);
+  const encounter = errand ? latestEncounterFor(errand, strictText(encounterId)) : null;
+  if (!errand || !encounter || !['pending', 'held'].includes(String(encounter.resolution))) return null;
+  const journey = String(encounter.priorJourney);
+  const journeyLegs = /** @type {Array<Record<string, unknown>>} */ (errand.legs)
+    .filter((leg) => leg.journey === journey)
+    .map((leg) => /** @type {Record<string, unknown>} */ (cloneData(leg)));
+  if (!journeyLegs.length || journeyLegs.some((leg) => !normalizeRouteRef(leg.routeRef))) return null;
+  const continuation = {
+    schemaVersion: 1,
+    resumeState: String(encounter.priorState),
+    journey,
+    destinationId: String(encounter.destinationId),
+    interruptedTick: Number(encounter.encounteredTick),
+    positionRef: /** @type {Record<string, unknown>} */ (cloneData(encounter.priorPosition)),
+    journeyLegs,
+    expectedReturnTick: Number(errand.expectedReturnTick),
+    ...(journey === 'return' ? { scheduledHomeTick: Number(errand.scheduledHomeTick) } : {}),
+  };
+  return journey === 'return' && wholeTick(errand.scheduledHomeTick) == null
+    ? null
+    : continuation;
+}
+
+function updateLatestEncounter(current, nextEncounter) {
+  const rows = Array.isArray(current.encounters) ? current.encounters : [];
+  return [...rows.slice(0, -1), nextEncounter];
+}
+
+function resumeFromEncounter({ current, encounter, routePlan, tick, plantResumed = false }) {
+  const plan = normalizeRoutePlan(routePlan, {
+    fromId: String(encounter.venueId),
+    toId: String(encounter.destinationId),
+    journey: /** @type {'outbound'|'return'} */ (encounter.priorJourney),
+    notBeforeTick: tick,
+  });
+  if (!plan) return null;
+  const journey = String(encounter.priorJourney);
+  const oldJourney = /** @type {Array<Record<string, unknown>>} */ (current.legs)
+    .filter((leg) => leg.journey === journey);
+  const priorPosition = asObject(encounter.priorPosition);
+  const priorIndex = Number(priorPosition.legIndex);
+  const prefixLength = priorPosition.progressBand === 'arrived' ? priorIndex + 1 : priorIndex;
+  const prefix = oldJourney.slice(0, Math.max(0, prefixLength));
+  const otherJourney = /** @type {Array<Record<string, unknown>>} */ (current.legs)
+    .filter((leg) => leg.journey !== journey);
+  const combinedJourney = [...prefix, ...plan.legs];
+  const legs = journey === 'outbound'
+    ? [...combinedJourney, ...otherJourney.filter((leg) => leg.journey === 'return')]
+    : [...otherJourney.filter((leg) => leg.journey === 'outbound'), ...combinedJourney];
+  const positionRef = {
+    ...plan.positionRef,
+    legIndex: prefix.length + Number(plan.positionRef.legIndex),
+  };
+  const continuation = normalizeEncounterContinuation({
+    schemaVersion: ENVOY_CONTINUATION_SCHEMA_VERSION,
+    resumeState: encounter.priorState,
+    journey,
+    destinationId: encounter.destinationId,
+    resumedTick: tick,
+    scheduledArrivalTick: plan.expectedReturnTick,
+  });
+  const nextEncounter = normalizeEnvoyEncounter({
+    ...encounter,
+    resolution: plantResumed ? 'plant_resumed' : 'resumed',
+    resolvedTick: tick,
+    continuation,
+  });
+  if (!continuation || !nextEncounter) return null;
+  return {
+    ...current,
+    state: encounter.priorState,
+    legs,
+    positionRef,
+    releasedTick: tick,
+    ...(journey === 'return' ? { scheduledHomeTick: plan.expectedReturnTick } : {}),
+    encounters: updateLatestEncounter(current, nextEncounter),
+  };
+}
+
+/** Resolve no earlier than T+1 to parlay, custody, or an externally priced continuation. */
+export function resolveEnvoyInterception({
+  worldState,
+  errandId,
+  encounterId,
+  resolution,
+  routePlan = null,
+  negotiationPicture = null,
+  expectedErrand = null,
+  tick,
+} = {}) {
+  if (!envoyDiplomacyActive(worldState)) {
+    return { worldState, changed: false, evidence: [], errand: null, reason: 'dark' };
+  }
+  const id = strictText(errandId);
+  const encounterKey = strictText(encounterId);
+  const at = wholeTick(tick);
+  const outcome = strictText(resolution);
+  const errands = envoyErrandsOf(worldState);
+  const index = errandIndex(errands, id);
+  const current = index >= 0 ? errands[index] : null;
+  const encounter = current ? latestEncounterFor(current, encounterKey) : null;
+  if (!current || current.state !== 'intercepted' || !encounter
+    || encounter.resolution !== 'pending' || at == null
+    || at < Number(encounter.encounteredTick) + 1
+    || !exactExpectedErrand(current, expectedErrand)) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'stale_encounter' };
+  }
+  let nextErrand;
+  let evidenceKind = '';
+  let reason;
+  if (outcome === 'parlaying') {
+    const picture = negotiationPicture == null
+      ? current.negotiationPicture || null
+      : normalizePictureForErrand(negotiationPicture, current);
+    if (negotiationPicture != null && !picture) {
+      return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_negotiation_picture' };
+    }
+    const resolved = normalizeEnvoyEncounter({
+      ...encounter,
+      resolution: 'parlaying',
+      resolvedTick: at,
+    });
+    if (!resolved) return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_result' };
+    nextErrand = {
+      ...current,
+      state: 'parlaying',
+      parlayTick: at,
+      parlayId: encounterKey,
+      ...(picture ? { negotiationPicture: picture } : {}),
+      encounters: updateLatestEncounter(current, resolved),
+    };
+    evidenceKind = 'envoy_parlaying';
+    reason = 'parlaying';
+  } else if (outcome === 'held') {
+    const resolved = normalizeEnvoyEncounter({
+      ...encounter,
+      resolution: 'held',
+      resolvedTick: at,
+    });
+    if (!resolved) return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_result' };
+    nextErrand = {
+      ...current,
+      state: 'held',
+      heldTick: at,
+      encounters: updateLatestEncounter(current, resolved),
+    };
+    evidenceKind = 'envoy_held';
+    reason = 'held';
+  } else if (outcome === 'resumed' || outcome === 'plant_resumed') {
+    nextErrand = resumeFromEncounter({
+      current,
+      encounter,
+      routePlan,
+      tick: at,
+      plantResumed: outcome === 'plant_resumed',
+    });
+    reason = outcome;
+  } else {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_resolution' };
+  }
+  if (!nextErrand) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_route_plan' };
+  }
+  const nextWorldState = replaceErrand(worldState, errands, index, nextErrand);
+  const persisted = envoyErrandsOf(nextWorldState).find((row) => row.id === id) || null;
+  const evidence = persisted && evidenceKind ? [evidenceFor(persisted, evidenceKind, at, {
+    encounterId: encounterKey,
+    interceptorId: encounter.interceptorId,
+    thirdPartyId: encounter.interceptorId,
+    armyId: encounter.armyId,
+    venueId: encounter.venueId,
+    ...(encounter.privateGoal ? { privateGoal: encounter.privateGoal } : {}),
+  })] : [];
+  return {
+    worldState: nextWorldState,
+    changed: nextWorldState !== worldState,
+    evidence,
+    errand: persisted,
+    reason: persisted ? reason : 'invalid_result',
+  };
+}
+
+/** Reprice and resume the exact interrupted journey after custody or parlay. */
+export function resumeEnvoyJourney({
+  worldState,
+  errandId,
+  encounterId,
+  routePlan,
+  plantResumed = false,
+  expectedErrand = null,
+  tick,
+} = {}) {
+  if (!envoyDiplomacyActive(worldState)) {
+    return { worldState, changed: false, evidence: [], errand: null, reason: 'dark' };
+  }
+  const id = strictText(errandId);
+  const encounterKey = strictText(encounterId);
+  const at = wholeTick(tick);
+  const errands = envoyErrandsOf(worldState);
+  const index = errandIndex(errands, id);
+  const current = index >= 0 ? errands[index] : null;
+  const encounter = current ? latestEncounterFor(current, encounterKey) : null;
+  if (!current || !['held', 'parlaying'].includes(String(current.state)) || !encounter
+    || !['held', 'parlaying'].includes(String(encounter.resolution))
+    || at == null || at < Number(encounter.resolvedTick) + 1
+    || !exactExpectedErrand(current, expectedErrand)) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'stale_encounter' };
+  }
+  const nextErrand = resumeFromEncounter({ current, encounter, routePlan, tick: at, plantResumed });
+  if (!nextErrand) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_route_plan' };
+  }
+  const nextWorldState = replaceErrand(worldState, errands, index, nextErrand);
+  const persisted = envoyErrandsOf(nextWorldState).find((row) => row.id === id) || null;
+  return {
+    worldState: nextWorldState,
+    changed: nextWorldState !== worldState,
+    evidence: [],
+    errand: persisted,
+    reason: persisted ? 'resumed' : 'invalid_result',
+  };
+}
+
+/** Foreign-hold integration spelling; custody itself remains in its own writer. */
+export function releaseHeldEnvoy(args = {}) {
+  return resumeEnvoyJourney(args);
+}
+
+/** Explicit hold transition spelling for integration callers. */
+export function markEnvoyHeld(args = {}) {
+  return resolveEnvoyInterception({ ...args, resolution: 'held' });
+}
+
+/** Outbound arrival opens an ordinary target-court parlay. */
+export function openEnvoyParlay({
+  worldState,
+  errandId,
+  negotiationPicture = null,
+  parlayId = '',
+  expectedErrand = null,
+  tick,
+} = {}) {
   if (!envoyDiplomacyActive(worldState)) {
     return { worldState, changed: false, evidence: [], errand: null, reason: 'dark' };
   }
@@ -1033,15 +1979,25 @@ export function markEnvoyParlaying({ worldState, errandId, tick } = {}) {
     ? /** @type {Array<Record<string, unknown>>} */ (current.legs).filter((leg) => leg.journey === 'outbound')
     : [];
   if (!current || current.state !== 'travelling' || now == null || !outbound.length
-    || now < Number(outbound[outbound.length - 1].arrivalTick)) {
+    || now < Number(outbound[outbound.length - 1].arrivalTick)
+    || !exactExpectedErrand(current, expectedErrand)) {
     return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_state' };
+  }
+  const picture = negotiationPicture == null
+    ? current.negotiationPicture || null
+    : normalizePictureForErrand(negotiationPicture, current);
+  if (negotiationPicture != null && !picture) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_negotiation_picture' };
   }
   const lastIndex = outbound.length - 1;
   const last = outbound[lastIndex];
+  const eventId = strictText(parlayId) || `target_parlay:${current.id}:${now}`;
   const nextErrand = {
     ...current,
     state: 'parlaying',
     parlayTick: now,
+    parlayId: eventId,
+    ...(picture ? { negotiationPicture: picture } : {}),
     positionRef: {
       journey: 'outbound',
       legIndex: lastIndex,
@@ -1053,7 +2009,276 @@ export function markEnvoyParlaying({ worldState, errandId, tick } = {}) {
   const next = [...errands];
   next[index] = nextErrand;
   const nextWorldState = writeErrands(worldState, next);
-  return { worldState: nextWorldState, changed: nextWorldState !== worldState, evidence: [], errand: nextErrand, reason: 'parlaying' };
+  const persisted = envoyErrandsOf(nextWorldState).find((row) => row.id === id) || null;
+  return {
+    worldState: nextWorldState,
+    changed: nextWorldState !== worldState,
+    evidence: persisted ? [evidenceFor(persisted, 'envoy_parlaying', now, { parlayId: eventId })] : [],
+    errand: persisted,
+    reason: persisted ? 'parlaying' : 'invalid_result',
+  };
+}
+
+/** Backward-compatible WR-7a spelling. */
+export function markEnvoyParlaying(args = {}) {
+  return openEnvoyParlay(args);
+}
+
+/** Apply one exact typed observation to the WR-7b picture through this writer. */
+export function updateEnvoyNegotiationPicture({
+  worldState,
+  errandId,
+  patch,
+  expectedErrand = null,
+} = {}) {
+  if (!envoyDiplomacyActive(worldState)) {
+    return { worldState, changed: false, errand: null, reason: 'dark' };
+  }
+  const id = strictText(errandId);
+  const errands = envoyErrandsOf(worldState);
+  const index = errandIndex(errands, id);
+  const current = index >= 0 ? errands[index] : null;
+  if (!current || !isActiveErrand(current) || !current.negotiationPicture
+    || !exactExpectedErrand(current, expectedErrand)) {
+    return { worldState, changed: false, errand: current, reason: 'stale_errand' };
+  }
+  const nextPicture = applyNegotiationPictureMutation(current.negotiationPicture, patch);
+  const normalized = normalizePictureForErrand(nextPicture, current);
+  if (!normalized || JSON.stringify(normalized) === JSON.stringify(current.negotiationPicture)) {
+    return { worldState, changed: false, errand: current, reason: 'picture_unchanged' };
+  }
+  const nextErrand = { ...current, negotiationPicture: normalized };
+  const nextWorldState = replaceErrand(worldState, errands, index, nextErrand);
+  const persisted = envoyErrandsOf(nextWorldState).find((row) => row.id === id) || null;
+  return {
+    worldState: nextWorldState,
+    changed: nextWorldState !== worldState,
+    errand: persisted,
+    reason: persisted ? 'picture_updated' : 'invalid_result',
+  };
+}
+
+/**
+ * The exact pair of ALREADY FROZEN pictures one parlay compares (K4). At a field
+ * parlay the proposer is the intercepting column's captured picture; at the
+ * receiving court it is the picture that court froze at dispatch. Nothing is
+ * re-read from live truth, and the negotiator and the refusal witness below
+ * derive the pair from this one place so they can never disagree about it.
+ */
+function frozenParlayPictures(errand) {
+  const row = asObject(errand);
+  const parlayId = strictText(row.parlayId);
+  const encounter = parlayId && Array.isArray(row.encounters)
+    ? row.encounters.find((entry) => strictText(asObject(entry).id) === parlayId) || null
+    : null;
+  return {
+    parlayId,
+    proposer: normalizeNegotiationPicture(
+      encounter ? asObject(encounter).interceptorPicture : row.targetCourtPicture,
+    ),
+    responder: normalizeNegotiationPicture(row.negotiationPicture),
+  };
+}
+
+/**
+ * Draft once from the proposer's frozen picture and let the responder's own
+ * frozen picture bound it. Pure: no world, no snapshot, no truth — the two
+ * pictures are the whole evidence, which is what keeps K3 structural rather
+ * than conventional.
+ */
+export function negotiateEnvoyParlay({ errand, tick } = {}) {
+  const row = asObject(errand);
+  const at = wholeTick(tick);
+  const offer = normalizeEnvoyPeaceOffer(row.offer);
+  const { parlayId, proposer, responder } = frozenParlayPictures(row);
+  if (!offer || !proposer || !responder || !parlayId || at == null) {
+    return { agreed: false, reason: 'invalid_picture', termSheet: null, proposerPicture: null };
+  }
+  const proposerId = String(row.to);
+  const responderId = String(row.from);
+  const result = negotiateFromPictures({
+    proposerPicture: proposer,
+    responderPicture: responder,
+    termSheetId: `term_sheet:${[row.id, parlayId, at]
+      .map((part) => `${String(part).length}:${String(part)}`).join('|')}`,
+    errandId: String(row.id),
+    encounterId: parlayId,
+    episodeKey: envoyOfferEpisodeKey(offer),
+    relationshipKey: String(offer.relationshipKey),
+    proposerId,
+    responderId,
+    victorId: proposerId,
+    loserId: responderId,
+    agreedTick: at,
+  });
+  return { ...result, proposerPicture: proposer };
+}
+
+/**
+ * Persist the first terminal no-sheet verdict for one parlay. Retries and
+ * compromise belong to WR-7c, so this witness prevents a later pulse from
+ * rebuilding either frozen picture and silently drafting again.
+ */
+export function recordEnvoyParlayRefusal({
+  worldState,
+  errandId,
+  expectedErrand = null,
+  attempt,
+  tick,
+} = {}) {
+  if (!envoyDiplomacyActive(worldState)) {
+    return { worldState, changed: false, evidence: [], errand: null, reason: 'dark' };
+  }
+  const id = strictText(errandId);
+  const at = wholeTick(tick);
+  const tried = asObject(attempt);
+  const errands = envoyErrandsOf(worldState);
+  const index = errandIndex(errands, id);
+  const current = index >= 0 ? errands[index] : null;
+  if (!current || current.state !== 'parlaying' || at == null
+    || !exactExpectedErrand(current, expectedErrand)) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'stale_errand' };
+  }
+  if (current.termSheet) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'terms_already_agreed' };
+  }
+  if (current.parlayRefusal) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'parlay_already_refused' };
+  }
+  const parlayTick = wholeTick(current.parlayTick);
+  const { parlayId, proposer: frozenProposer, responder: frozenResponder } = frozenParlayPictures(current);
+  const attemptedProposer = tried.proposerPicture == null
+    ? frozenProposer
+    : normalizeNegotiationPicture(tried.proposerPicture);
+  const attemptedResponder = tried.responderPicture == null
+    ? frozenResponder
+    : normalizeNegotiationPicture(tried.responderPicture);
+  const reason = normalizeParlayRefusalReason(tried.reason);
+  const offer = asObject(current.offer);
+  const pair = [String(current.from), String(current.to)].sort(compareCodepoint);
+  if (tried.agreed !== false || tried.termSheet != null || !reason
+    || parlayTick == null || !parlayId || at < parlayTick + 1
+    || !frozenProposer || !frozenResponder || !attemptedProposer || !attemptedResponder
+    || JSON.stringify(attemptedProposer) !== JSON.stringify(frozenProposer)
+    || JSON.stringify(attemptedResponder) !== JSON.stringify(frozenResponder)
+    || (tried.proposerPictureId != null
+      && strictText(tried.proposerPictureId) !== frozenProposer.id)
+    || (tried.responderPictureId != null
+      && strictText(tried.responderPictureId) !== frozenResponder.id)
+    || frozenProposer.partyId !== current.to
+    || frozenProposer.counterpartId !== current.from
+    || frozenResponder.partyId !== current.from
+    || frozenResponder.counterpartId !== current.to
+    || JSON.stringify([String(frozenProposer.partyId), String(frozenProposer.counterpartId)]
+      .sort(compareCodepoint)) !== JSON.stringify(pair)
+    || frozenProposer.relationshipKey !== offer.relationshipKey
+    || frozenResponder.relationshipKey !== offer.relationshipKey
+    || frozenProposer.episodeKey !== envoyOfferEpisodeKey(offer)
+    || frozenResponder.episodeKey !== envoyOfferEpisodeKey(offer)
+    || at < Number(frozenProposer.lastChangedTick)
+    || at < Number(frozenResponder.lastChangedTick)) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_refusal' };
+  }
+  const refusal = normalizeParlayRefusal({
+    schemaVersion: ENVOY_PARLAY_REFUSAL_SCHEMA_VERSION,
+    id: parlayRefusalId(id, parlayId, at),
+    parlayId,
+    attemptedTick: at,
+    proposerPictureId: frozenProposer.id,
+    responderPictureId: frozenResponder.id,
+    reason,
+  });
+  if (!refusal) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_refusal' };
+  }
+  const nextErrand = { ...current, parlayRefusal: refusal };
+  const nextWorldState = replaceErrand(worldState, errands, index, nextErrand);
+  const persisted = envoyErrandsOf(nextWorldState).find((row) => row.id === id) || null;
+  return {
+    worldState: nextWorldState,
+    changed: nextWorldState !== worldState,
+    evidence: persisted ? [evidenceFor(persisted, 'parlay_terms_neither_court_drafted', at, {
+      parlayId,
+      envoyPictureId: frozenResponder.id,
+      interceptorPictureId: frozenProposer.id,
+      reasonId: reason,
+    })] : [],
+    errand: persisted,
+    reason: persisted ? 'parlay_refused' : 'invalid_result',
+  };
+}
+
+/** Persist the exact already-negotiated artifact; drafting remains outside. */
+export function agreeEnvoyTerms({
+  worldState,
+  errandId,
+  termSheet,
+  expectedErrand = null,
+  tick,
+} = {}) {
+  if (!envoyDiplomacyActive(worldState)) {
+    return { worldState, changed: false, evidence: [], errand: null, reason: 'dark' };
+  }
+  const id = strictText(errandId);
+  const at = wholeTick(tick);
+  const sheet = normalizeParlayTermSheet(termSheet);
+  const errands = envoyErrandsOf(worldState);
+  const index = errandIndex(errands, id);
+  const current = index >= 0 ? errands[index] : null;
+  const offer = current ? asObject(current.offer) : {};
+  const pair = current ? [String(current.from), String(current.to)].sort(compareCodepoint) : [];
+  if (current?.parlayRefusal) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'parlay_already_refused' };
+  }
+  if (!current || current.state !== 'parlaying' || at == null || !sheet
+    || !current.negotiationPicture
+    || wholeTick(current.parlayTick) == null || at < Number(current.parlayTick) + 1
+    || at < Number(current.negotiationPicture.lastChangedTick)
+    || !exactExpectedErrand(current, expectedErrand)
+    || sheet.errandId !== id || sheet.agreedTick !== at
+    || sheet.encounterId !== text(current.parlayId)
+    || sheet.episodeKey !== envoyOfferEpisodeKey(offer)
+    || sheet.relationshipKey !== offer.relationshipKey
+    || JSON.stringify(sheet.parties) !== JSON.stringify(pair)
+    || !Object.values(asObject(sheet.pictureIds)).includes(current.negotiationPicture.id)) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_term_sheet' };
+  }
+  if (current.termSheet) {
+    return JSON.stringify(current.termSheet) === JSON.stringify(sheet)
+      ? { worldState, changed: false, evidence: [], errand: current, reason: 'terms_already_agreed' }
+      : { worldState, changed: false, evidence: [], errand: current, reason: 'terms_conflict' };
+  }
+  const latest = Array.isArray(current.encounters) ? current.encounters.at(-1) : null;
+  let encounters = current.encounters;
+  if (latest && latest.id === current.parlayId) {
+    const updated = normalizeEnvoyEncounter({ ...latest, termSheetId: sheet.id });
+    if (!updated) return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_result' };
+    encounters = updateLatestEncounter(current, updated);
+  }
+  const nextErrand = {
+    ...current,
+    termSheet: sheet,
+    ...(encounters ? { encounters } : {}),
+  };
+  const nextWorldState = replaceErrand(worldState, errands, index, nextErrand);
+  const persisted = envoyErrandsOf(nextWorldState).find((row) => row.id === id) || null;
+  return {
+    worldState: nextWorldState,
+    changed: nextWorldState !== worldState,
+    evidence: persisted ? [evidenceFor(persisted, 'envoy_terms_agreed', at, {
+      parlayId: current.parlayId,
+      termSheetId: sheet.id,
+      ...(latest ? {
+        encounterId: latest.id,
+        interceptorId: latest.interceptorId,
+        thirdPartyId: latest.interceptorId,
+        armyId: latest.armyId,
+        venueId: latest.venueId,
+      } : {}),
+    })] : [],
+    errand: persisted,
+    reason: persisted ? 'terms_agreed' : 'invalid_result',
+  };
 }
 
 /**
@@ -1061,7 +2286,7 @@ export function markEnvoyParlaying({ worldState, errandId, tick } = {}) {
  * caller must supply a separately-priced return plan, whether or not it carries
  * a term sheet.
  */
-export function beginEnvoyReturn({ worldState, errandId, routePlan, termSheet = null, tick } = {}) {
+export function beginEnvoyReturn({ worldState, errandId, routePlan, termSheet = undefined, tick } = {}) {
   if (!envoyDiplomacyActive(worldState)) {
     return { worldState, changed: false, evidence: [], errand: null, reason: 'dark' };
   }
@@ -1074,8 +2299,12 @@ export function beginEnvoyReturn({ worldState, errandId, routePlan, termSheet = 
     || wholeTick(current.parlayTick) == null || now < Number(current.parlayTick) + 1) {
     return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_state' };
   }
+  const latest = Array.isArray(current.encounters) ? current.encounters.at(-1) : null;
+  const returnOriginId = latest && latest.id === current.parlayId
+    ? String(latest.venueId)
+    : String(current.to);
   const plan = normalizeRoutePlan(routePlan, {
-    fromId: String(current.to),
+    fromId: returnOriginId,
     toId: String(current.from),
     journey: 'return',
     notBeforeTick: now,
@@ -1083,9 +2312,23 @@ export function beginEnvoyReturn({ worldState, errandId, routePlan, termSheet = 
   if (!plan) {
     return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_route_plan' };
   }
-  const normalizedTerms = normalizeTermSheet(termSheet);
-  if (termSheet != null && !normalizedTerms) {
+  const rawTerms = termSheet === undefined ? current.termSheet : termSheet;
+  const termRead = normalizeTermSheetResult(rawTerms);
+  const normalizedTerms = termRead.value;
+  if (!termRead.valid) {
     return { worldState, changed: false, evidence: [], errand: current, reason: 'invalid_term_sheet' };
+  }
+  if (termRead.versioned && JSON.stringify(normalizedTerms) !== JSON.stringify(current.termSheet)) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'terms_not_agreed' };
+  }
+  // A recorded refusal forbids CARRYING terms, never the mandatory return: the
+  // envoy still has to walk home empty-handed, and WR-7c owns any retry.
+  if (current.parlayRefusal && termRead.versioned) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'parlay_already_refused' };
+  }
+  if (termRead.versioned
+    && now < Number(asObject(normalizedTerms).agreedTick) + 1) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'terms_not_ready' };
   }
   const nextErrand = {
     ...current,
@@ -1095,6 +2338,7 @@ export function beginEnvoyReturn({ worldState, errandId, routePlan, termSheet = 
     positionRef: plan.positionRef,
     returnStartedTick: now,
     scheduledHomeTick: plan.expectedReturnTick,
+    ...(returnOriginId !== current.to ? { returnOriginId } : {}),
   };
   const next = [...errands];
   next[index] = nextErrand;
@@ -1332,6 +2576,67 @@ export function restoreEnvoyErrands({
   };
 }
 
+/**
+ * Restore the exact held row after an authorized PARDON undo.
+ *
+ * This is deliberately ungated cleanup: a later rules edit may darken envoy
+ * diplomacy, but it must not strand a release that an undo still owns.  The
+ * released row is the conflict token.  Any subsequent movement, evidence
+ * patch, second release, or competing active errand for the same person makes
+ * the inverse a no-op.
+ */
+export function restoreReleasedEnvoy({
+  worldState,
+  priorErrand,
+  releasedErrand,
+  releaseTick,
+} = {}) {
+  const at = wholeTick(releaseTick);
+  const prior = normalizeErrand(priorErrand);
+  const released = normalizeErrand(releasedErrand);
+  if (at == null || !prior || !released || prior.state !== 'held'
+    || !['travelling', 'returning'].includes(String(released.state))
+    || prior.id !== released.id || prior.npcId !== released.npcId
+    || Number(released.releasedTick) !== at) {
+    return { worldState, changed: false, evidence: [], errand: null, reason: 'invalid_restore' };
+  }
+  const priorEncounter = Array.isArray(prior.encounters) ? prior.encounters.at(-1) : null;
+  const releasedEncounter = Array.isArray(released.encounters) ? released.encounters.at(-1) : null;
+  if (!priorEncounter || !releasedEncounter
+    || priorEncounter.id !== releasedEncounter.id
+    || priorEncounter.resolution !== 'held'
+    || !['resumed', 'plant_resumed'].includes(String(releasedEncounter.resolution))
+    || Number(releasedEncounter.resolvedTick) !== at
+    || Number(releasedEncounter.continuation?.resumedTick) !== at
+    || releasedEncounter.continuation?.resumeState !== released.state) {
+    return { worldState, changed: false, evidence: [], errand: null, reason: 'invalid_restore' };
+  }
+  const errands = envoyErrandsOf(worldState);
+  const index = errandIndex(errands, String(prior.id));
+  const current = index >= 0 ? errands[index] : null;
+  if (!current || JSON.stringify(current) !== JSON.stringify(released)
+    || errands.some((errand) => errand.id !== prior.id
+      && errand.npcId === prior.npcId && isActiveErrand(errand))) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'restore_conflict' };
+  }
+  const nextWorldState = writeErrands(worldState, [
+    ...errands.slice(0, index),
+    prior,
+    ...errands.slice(index + 1),
+  ]);
+  const persisted = envoyErrandsOf(nextWorldState).find((errand) => errand.id === prior.id) || null;
+  if (!persisted || JSON.stringify(persisted) !== JSON.stringify(prior)) {
+    return { worldState, changed: false, evidence: [], errand: current, reason: 'restore_conflict' };
+  }
+  return {
+    worldState: nextWorldState,
+    changed: nextWorldState !== worldState,
+    evidence: [],
+    errand: persisted,
+    reason: 'restored',
+  };
+}
+
 /** A lost traveller remains silence-eligible until observation reaches home. */
 function silenceEligible(errand, tick, returnVisibleOverride = null) {
   const position = asObject(errand.positionRef);
@@ -1495,6 +2800,66 @@ function scheduledPosition(errand, tick) {
   };
 }
 
+/**
+ * Pure same-cut transit preview. A partial leg still occupies its authored
+ * `from` node; only an arrived cursor occupies `to`. The shared leg law is
+ * evaluated once, so a boundary arrival cannot also hop onto a later leg.
+ */
+export function previewEnvoyPosition(rawErrand, tick) {
+  const errand = normalizeErrand(rawErrand);
+  const at = wholeTick(tick);
+  if (!errand || at == null || !['travelling', 'returning'].includes(String(errand.state))) return null;
+  const scheduled = scheduledPosition(errand, at);
+  if (!scheduled) return null;
+  const positionRef = /** @type {Record<string, unknown>} */ (cloneData(scheduled.positionRef));
+  const nodeId = positionRef.progressBand === 'arrived'
+    ? String(positionRef.toId)
+    : String(positionRef.fromId);
+  const journeyLegs = /** @type {Array<Record<string, unknown>>} */ (errand.legs)
+    .filter((leg) => leg.journey === positionRef.journey);
+  const leg = asObject(journeyLegs[Number(positionRef.legIndex)]);
+  const routeRef = normalizeRouteRef(leg.routeRef);
+  return {
+    errandId: String(errand.id),
+    npcId: String(errand.npcId),
+    state: String(errand.state),
+    journey: String(positionRef.journey),
+    nodeId,
+    projectedTick: at,
+    projectionPhase: 'pre_mutation',
+    complete: scheduled.complete === true,
+    positionRef,
+    ...(routeRef ? { routeId: routeRef.id } : {}),
+  };
+}
+
+/** Shape the pure preview for `envoyEncounter` without lending it write power. */
+export function projectEnvoyForEncounter(rawErrand, tick, venueRef = null) {
+  const errand = normalizeErrand(rawErrand);
+  const preview = previewEnvoyPosition(errand, tick);
+  if (!errand || !preview) return null;
+  const offer = /** @type {Record<string, unknown>} */ (errand.offer);
+  const venue = asObject(venueRef);
+  const venueId = strictText(venue.id);
+  const venueKind = strictText(venue.kind);
+  if (venueRef != null && (!venueId || venueId !== preview.nodeId || !venueKind)) return null;
+  return {
+    errandId: String(errand.id),
+    npcId: String(errand.npcId),
+    fromId: String(errand.from),
+    toId: String(errand.to),
+    relationshipKey: String(offer.relationshipKey),
+    episodeKey: envoyOfferEpisodeKey(offer),
+    nodeId: preview.nodeId,
+    journey: preview.journey,
+    projectedTick: preview.projectedTick,
+    projectionPhase: preview.projectionPhase,
+    ...(preview.routeId ? { routeId: preview.routeId } : {}),
+    ...(venueRef != null ? { venueRef: { id: venueId, kind: venueKind } } : {}),
+    ...(errand.termSheet ? { termsBearing: true } : {}),
+  };
+}
+
 /** @param {Record<string, unknown>} errand */
 function homeDeliveryFor(errand) {
   return {
@@ -1561,14 +2926,17 @@ export function advanceEnvoyErrands({
       if (scheduled) {
         const oldPosition = JSON.stringify(errand.positionRef);
         if (scheduled.complete && errand.state === 'travelling') {
+          const parlayId = `target_parlay:${errand.id}:${now}`;
           errand = {
             ...errand,
             state: 'parlaying',
             parlayTick: now,
+            parlayId,
             positionRef: scheduled.positionRef,
           };
           touched = true;
           transitionEvidence.push(evidenceFor(errand, 'envoy_on_the_road', now));
+          transitionEvidence.push(evidenceFor(errand, 'envoy_parlaying', now, { parlayId }));
         } else if (scheduled.complete && errand.state === 'returning') {
           if (oldPosition !== JSON.stringify(scheduled.positionRef)) {
             errand = { ...errand, positionRef: scheduled.positionRef, lastMovedTick: now };

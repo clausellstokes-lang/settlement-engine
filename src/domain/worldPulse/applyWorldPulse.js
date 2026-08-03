@@ -1346,6 +1346,13 @@ export function applyWorldPulseOutcomes({
         decisionId: `${String(outcome.id)}:target`,
         tick,
       }).worldState;
+      // Imported/proposal metadata is not transport authority. Only the exact
+      // persisted home errand validated above may place a carried sheet on the
+      // relationship incident consumed by the sole treaty writer.
+      const {
+        carriedTermSheet: _untrustedCarriedTermSheet,
+        ...trustedOutcomeMetadata
+      } = outcome.metadata || {};
       outcome = {
         ...outcome,
         relationshipPatch: {
@@ -1357,8 +1364,11 @@ export function applyWorldPulseOutcomes({
           peaceDecision: 'accepted',
         },
         metadata: {
-          ...(outcome.metadata || {}),
+          ...trustedOutcomeMetadata,
           peaceDecision: peaceDecision.receipt,
+          ...(transportedDecision?.carriedTermSheet
+            ? { carriedTermSheet: transportedDecision.carriedTermSheet }
+            : {}),
           ...(peaceDecision.coalitionPeaceExpenditures?.length
             ? { coalitionPeaceExpenditures: peaceDecision.coalitionPeaceExpenditures }
             : {}),

@@ -264,8 +264,21 @@ export function treatyPairKey(victorId, loserId) {
  * @returns {number}
  */
 export function believedAdvantage(selfId, foeId, worldState, truthFor) {
-  return readBeliefStrength(selfId, selfId, worldState, truthFor(selfId))
-    - readBeliefStrength(selfId, foeId, worldState, truthFor(foeId));
+  return believedAdvantageFromInputs(
+    readBeliefStrength(selfId, selfId, worldState, truthFor(selfId)),
+    readBeliefStrength(selfId, foeId, worldState, truthFor(foeId)),
+  );
+}
+
+/**
+ * The terms evaluator's input-only strength leaf. WR-7b calls this once for
+ * each frozen negotiating picture; the historic adapter above supplies the
+ * same two belief reads and therefore retains byte-exact dark behavior.
+ * @param {number} believedSelfStrength @param {number} believedFoeStrength
+ * @returns {number}
+ */
+export function believedAdvantageFromInputs(believedSelfStrength, believedFoeStrength) {
+  return believedSelfStrength - believedFoeStrength;
 }
 
 /**
@@ -307,7 +320,17 @@ export function termBudgetFor(believedMargin) {
  *  @param {Record<string, unknown> | null | undefined} victorItem @returns {number} */
 export function alignmentPress(victorItem) {
   const deity = readDeitySnapshot(victorItem);
-  return PEACE_TERMS_TUNING.PRESS_BASE + PEACE_TERMS_TUNING.PRESS_EVIL_W * clamp01(evil01(deity));
+  return alignmentPressFromInput(evil01(deity));
+}
+
+/**
+ * Input-only alignment leaf for a frozen negotiating picture. The coordinate
+ * is the same 0..1 malice axis used by the existing deity adapter.
+ * @param {number} evilCoordinate @returns {number}
+ */
+export function alignmentPressFromInput(evilCoordinate) {
+  return PEACE_TERMS_TUNING.PRESS_BASE
+    + PEACE_TERMS_TUNING.PRESS_EVIL_W * clamp01(evilCoordinate);
 }
 
 /** @param {unknown} item @returns {Record<string, unknown> | null} */
@@ -362,12 +385,54 @@ export function appraiseLoserPortfolio(args) {
   // The victor's BELIEF of the loser's wealth/strength (never truth) — the fog
   // that lets a deceived victor over- or under-value the prize.
   const believedLoserStrength = readBeliefStrength(victorId, loserId, worldState, loserTruthStrength);
-  const believedWealth01 = clamp01(believedLoserStrength / PEACE_TERMS_TUNING.WEALTH_SCALE);
-
-  const econScarcity = clamp01(0.6 * clamp01(Number(victorPressure?.food) || 0) + 0.4 * clamp01(Number(victorPressure?.economy) || 0));
-  const tradeScarcity = clamp01(Number(victorPressure?.trade) || 0);
-  const exports = loserExports(loserItem);
   const archetype = String(governingCoalition(/** @type {import('./beliefMap.js').SnapItem} */ (victorItem)).governing || '');
+  return appraiseLoserPortfolioFromInputs({
+    believedLoserStrength,
+    victorFoodPressure01: clamp01(Number(victorPressure?.food) || 0),
+    victorEconomyPressure01: clamp01(Number(victorPressure?.economy) || 0),
+    victorTradePressure01: clamp01(Number(victorPressure?.trade) || 0),
+    victorThreat01: clamp01(victorThreat01),
+    loserAllyStrength01: clamp01(loserAllyStrength01),
+    loserExports: loserExports(loserItem),
+    victorArchetype: archetype,
+    restitutionClaim01: restitutionClaim01(worldState, victorId, loserId),
+  });
+}
+
+/**
+ * Input-only §15 appraisal leaf. A caller may pass `null` for an observation it
+ * does not possess; the affected asset is then omitted instead of silently
+ * treating ignorance as a neutral or zero fact. The legacy adapter above passes
+ * every historic numeric fallback explicitly, preserving its exact behavior.
+ *
+ * @param {{ believedLoserStrength:number|null,
+ *   victorFoodPressure01:number|null, victorEconomyPressure01:number|null,
+ *   victorTradePressure01:number|null, victorThreat01:number|null,
+ *   loserAllyStrength01:number|null, loserExports:string[]|null,
+ *   victorArchetype:string|null, restitutionClaim01:number|null }} args
+ * @returns {AppraisedAsset[]}
+ */
+export function appraiseLoserPortfolioFromInputs(args) {
+  const believedLoserStrength = finite01OrNull(args.believedLoserStrength);
+  const foodPressure = finite01OrNull(args.victorFoodPressure01);
+  const economyPressure = finite01OrNull(args.victorEconomyPressure01);
+  const tradePressure = finite01OrNull(args.victorTradePressure01);
+  const threat = finite01OrNull(args.victorThreat01);
+  const allyStrength = finite01OrNull(args.loserAllyStrength01);
+  const restitution = finite01OrNull(args.restitutionClaim01);
+  const exports = Array.isArray(args.loserExports)
+    ? [...args.loserExports].map(String).filter(Boolean).sort()
+    : null;
+  const archetype = typeof args.victorArchetype === 'string'
+    ? args.victorArchetype
+    : null;
+  if (believedLoserStrength == null || archetype == null) return [];
+
+  const believedWealth01 = clamp01(believedLoserStrength / PEACE_TERMS_TUNING.WEALTH_SCALE);
+  const econScarcity = foodPressure == null || economyPressure == null
+    ? null
+    : clamp01(0.6 * foodPressure + 0.4 * economyPressure);
+  const tradeScarcity = tradePressure;
   const tilt = archetypeTilt(archetype);
 
   /** @type {AppraisedAsset[]} */
@@ -381,22 +446,25 @@ export function appraiseLoserPortfolio(args) {
   };
 
   // ECONOMIC — the iron-starved / trade-poor victor ranks the loser's flows first.
-  push('export_flows', (0.4 + econScarcity) * believedWealth01 * (exports.length ? 1.15 : 0.85) * tilt.economic, exports[0] || '');
-  push('treasury', (0.35 + econScarcity) * believedWealth01 * tilt.economic, '');
+  if (econScarcity != null && exports != null) {
+    push('export_flows', (0.4 + econScarcity) * believedWealth01 * (exports.length ? 1.15 : 0.85) * tilt.economic, exports[0] || '');
+  }
+  if (econScarcity != null) push('treasury', (0.35 + econScarcity) * believedWealth01 * tilt.economic, '');
   // MILITARY GEOGRAPHY — the threatened victor ranks the loser's arms + ground.
-  push('military_posture', (0.3 + victorThreat01) * believedWealth01 * tilt.military, '');
-  push('territory', (0.2 + victorThreat01) * believedWealth01 * 0.9 * tilt.military, '');
+  if (threat != null) {
+    push('military_posture', (0.3 + threat) * believedWealth01 * tilt.military, '');
+    push('territory', (0.2 + threat) * believedWealth01 * 0.9 * tilt.military, '');
+  }
   // THE LOSER'S ALLIANCE NETWORK — compelled alliance ranks high when it has friends.
-  push('alliance_network', (0.25 + loserAllyStrength01) * tilt.relational, '');
+  if (allyStrength != null) push('alliance_network', (0.25 + allyStrength) * tilt.relational, '');
   // SECURITY — the low-weight fallback every peace can afford.
-  push('security', (0.35 + 0.4 * victorThreat01) * tilt.security, '');
+  if (threat != null) push('security', (0.35 + 0.4 * threat) * tilt.security, '');
   // D7 REFRAME CLAIM — a victor that has re-read its old aid to the loser as a debt unpaid
   // (restitutionClaim01 > 0) brings that reframed claim to the table as an economic restitution
   // term. Pushed ONLY when the reframe reading exists ⇒ the asset list is byte-identical when the
   // reframe layer is dark (no phantom 0-value asset). Ranks by the reframe strength × believed
   // ability to pay — a strong grievance against a wealthy loser is a strong claim.
-  const restitution01 = restitutionClaim01(worldState, victorId, loserId);
-  if (restitution01 > 0) push('reframed_debt', restitution01 * (0.6 + believedWealth01), '');
+  if (restitution != null && restitution > 0) push('reframed_debt', restitution * (0.6 + believedWealth01), '');
   // D4 SEAM (DELIBERATELY DEFERRED — DESIGN_SIM_DEPTH_R2 D4 consumers (i)/(ii)): the design
   // has fear_of_dominance TILT defensive/mutual_defense + sovereignty/non_intervention term
   // weights between free settlements near a hegemon. NOT built this wave: `defensive`/
@@ -408,9 +476,14 @@ export function appraiseLoserPortfolio(args) {
   // DENIAL motive). The fear read is available via makeHegemonyFear when this seam is closed.
   // POLITICAL / INTEL — seam classes; low base, only a rich budget + fitting lens reaches them.
   push('government', 0.18 * believedWealth01 * tilt.political, '');
-  push('intel', (0.15 + 0.5 * tradeScarcity) * tilt.informational, '');
+  if (tradeScarcity != null) push('intel', (0.15 + 0.5 * tradeScarcity) * tilt.informational, '');
 
   return assets.sort((x, y) => (y.value - x.value) || (x.assetClass < y.assetClass ? -1 : 1));
+}
+
+/** @param {unknown} value @returns {number | null} */
+function finite01OrNull(value) {
+  return typeof value === 'number' && Number.isFinite(value) ? clamp01(value) : null;
 }
 
 /** Archetype lens multipliers (§15.1: archetype picks the term TYPE emphasis).
@@ -505,6 +578,268 @@ export function draftTerms({ ranked, budget, margin01, press, tick }) {
   terms.sort((x, y) => (x.type < y.type ? -1 : x.type > y.type ? 1 : 0));
   const budgetSpent = round4(terms.reduce((s, t) => s + t.weightSpent, 0));
   return { terms, budgetSpent };
+}
+
+/** WR-7b's carried-sheet schema. Agreement persists durations, never authority
+ * clocks; `mintedTick` and `expiresTick` first exist when the sheet reaches home. */
+export const CARRIED_TERM_SHEET_SCHEMA_VERSION = 1;
+
+/**
+ * Strip one freshly drafted term down to the authority-neutral clause carried
+ * by an envoy. The clause keeps the exact negotiated burden while deliberately
+ * dropping mint, expiry, compliance, execution counters, and rendered receipt.
+ * @param {TermRecord} term
+ * @returns {Record<string, unknown> | null}
+ */
+export function carriedClauseFromDraft(term) {
+  const spec = TERM_CATALOG[String(term?.type || '')];
+  const mintedTick = Number(term?.mintedTick);
+  const expiresTick = Number(term?.expiresTick);
+  if (!spec || !Number.isInteger(mintedTick) || !Number.isInteger(expiresTick) || expiresTick <= mintedTick) return null;
+  /** @type {Record<string, unknown>} */
+  const clause = {
+    type: String(term.type),
+    family: spec.family,
+    magnitude: Number(term.magnitude),
+    durationTicks: expiresTick - mintedTick,
+    weightSpent: Number(term.weightSpent),
+    burden01: Number(term.burden01),
+  };
+  if (term.good) clause.good = String(term.good);
+  if (term.seam === true) clause.seam = true;
+  return normalizeCarriedClause(clause);
+}
+
+/**
+ * Strict canonical validator for a versioned parlay sheet. Unknown properties,
+ * mutable authority clocks, unsorted identifiers, duplicate families, and
+ * malformed provenance all fail closed. This validates the artifact that was
+ * agreed; it intentionally performs no present-day geography or holdings read.
+ * @param {unknown} value @returns {Record<string, unknown> | null}
+ */
+export function normalizeCarriedTermSheet(value) {
+  const row = recordOf(value);
+  if (!hasExactKeys(row, [
+    'schemaVersion', 'id', 'errandId', 'encounterId', 'episodeKey',
+    'relationshipKey', 'parties', 'proposerId', 'responderId', 'victorId',
+    'loserId', 'agreedTick', 'pictureIds', 'clauses', 'budgetSpent', 'valuations',
+  ])) return null;
+  if (row.schemaVersion !== CARRIED_TERM_SHEET_SCHEMA_VERSION) return null;
+
+  const id = strictText(row.id);
+  const errandId = strictText(row.errandId);
+  const encounterId = strictText(row.encounterId);
+  const episodeKey = strictText(row.episodeKey);
+  const relationshipKey = strictText(row.relationshipKey);
+  const proposerId = strictText(row.proposerId);
+  const responderId = strictText(row.responderId);
+  const victorId = strictText(row.victorId);
+  const loserId = strictText(row.loserId);
+  const agreedTick = nonNegativeInteger(row.agreedTick);
+  if (!id || !errandId || !encounterId || !episodeKey || !relationshipKey
+    || !proposerId || !responderId || !victorId || !loserId
+    || agreedTick == null || proposerId === responderId || victorId === loserId) return null;
+
+  const parties = strictSortedPair(row.parties);
+  const expectedParties = [proposerId, responderId].sort();
+  if (!parties || JSON.stringify(parties) !== JSON.stringify(expectedParties)
+    || !parties.includes(victorId) || !parties.includes(loserId)) return null;
+
+  const pictureIds = recordOf(row.pictureIds);
+  if (!hasExactKeys(pictureIds, ['proposer', 'responder'])) return null;
+  const proposerPictureId = strictText(pictureIds.proposer);
+  const responderPictureId = strictText(pictureIds.responder);
+  if (!proposerPictureId || !responderPictureId || proposerPictureId === responderPictureId) return null;
+
+  if (!Array.isArray(row.clauses) || row.clauses.length > PEACE_TERMS_TUNING.TOP_ASSETS) return null;
+  /** @type {Array<Record<string, unknown>>} */
+  const clauses = [];
+  const families = new Set();
+  for (const rawClause of row.clauses) {
+    const clause = normalizeCarriedClause(rawClause);
+    if (!clause || families.has(String(clause.family))) return null;
+    families.add(String(clause.family));
+    clauses.push(clause);
+  }
+  if (!isSortedUnique(clauses.map((clause) => String(clause.type)))) return null;
+  const budgetSpent = canonicalNonNegativeNumber(row.budgetSpent);
+  if (budgetSpent == null || budgetSpent !== round4(clauses.reduce((sum, clause) => sum + Number(clause.weightSpent), 0))) return null;
+  if ((clauses.length === 0) !== (budgetSpent === 0)) return null;
+
+  if (!Array.isArray(row.valuations) || row.valuations.length !== 2) return null;
+  const proposerValuation = normalizeCarriedValuation(row.valuations[0]);
+  const responderValuation = normalizeCarriedValuation(row.valuations[1]);
+  if (!proposerValuation || !responderValuation
+    || proposerValuation.role !== 'proposer' || responderValuation.role !== 'responder'
+    || proposerValuation.partyId !== proposerId || responderValuation.partyId !== responderId
+    || proposerValuation.pictureId !== proposerPictureId || responderValuation.pictureId !== responderPictureId) return null;
+
+  return {
+    schemaVersion: CARRIED_TERM_SHEET_SCHEMA_VERSION,
+    id, errandId, encounterId, episodeKey, relationshipKey, parties,
+    proposerId, responderId, victorId, loserId, agreedTick,
+    pictureIds: { proposer: proposerPictureId, responder: responderPictureId },
+    clauses,
+    budgetSpent,
+    valuations: [proposerValuation, responderValuation],
+  };
+}
+
+/**
+ * Materialize an agreed carried sheet into the existing treaty-record shape.
+ * Only this boundary stamps authority clocks. The sheet is never re-appraised
+ * and no current route, front, settlement, or holding can veto its odd terms.
+ * @param {{ termSheet:unknown, homeTick:unknown }} args
+ * @returns {TreatyRecord | null}
+ */
+export function materializeCarriedTermSheet({ termSheet, homeTick }) {
+  const sheet = normalizeCarriedTermSheet(termSheet);
+  const mintedTick = nonNegativeInteger(homeTick);
+  if (!sheet || mintedTick == null || mintedTick < Number(sheet.agreedTick)) return null;
+  const victorId = String(sheet.victorId);
+  const loserId = String(sheet.loserId);
+  /** @type {TermRecord[]} */
+  const terms = /** @type {Array<Record<string, unknown>>} */ (sheet.clauses).map((clause) => {
+    const type = String(clause.type);
+    const spec = TERM_CATALOG[type];
+    const magnitude = Number(clause.magnitude);
+    const durationTicks = Number(clause.durationTicks);
+    /** @type {TermRecord} */
+    const term = {
+      type,
+      family: String(clause.family),
+      magnitude,
+      mintedTick,
+      expiresTick: mintedTick + durationTicks,
+      weightSpent: Number(clause.weightSpent),
+      complianceState: 'honored',
+      trueState: 'honored',
+      burden01: Number(clause.burden01),
+      receipt: draftReceipt(type, {
+        assetClass: /** @type {AssetClass} */ ('treasury'),
+        termType: type,
+        value: 0,
+        ...(clause.good ? { good: String(clause.good) } : {}),
+      }, durationTicks / CURRENT_TREATY_TICKS_PER_YEAR, magnitude),
+    };
+    if (clause.good) term.good = String(clause.good);
+    if (clause.seam === true) term.seam = true;
+    if (spec.stream) { term.deliveredToVictor = 0; term.extractedFromLoser = 0; }
+    return term;
+  });
+  return {
+    parties: [victorId, loserId],
+    victorId,
+    loserId,
+    mintedTick,
+    budgetGranted: Number(sheet.budgetSpent),
+    budgetSpent: Number(sheet.budgetSpent),
+    treatyTicksPerYear: CURRENT_TREATY_TICKS_PER_YEAR,
+    terms,
+    complianceState: 'honored',
+    receipts: [],
+    sourceTermSheetId: String(sheet.id),
+    sourceErrandId: String(sheet.errandId),
+    sourceEncounterId: String(sheet.encounterId),
+    sourceRelationshipKey: String(sheet.relationshipKey),
+    sourceEpisodeKey: String(sheet.episodeKey),
+    sourcePictureIds: { .../** @type {Record<string, string>} */ (sheet.pictureIds) },
+    termsAgreedTick: Number(sheet.agreedTick),
+    signedTick: mintedTick,
+  };
+}
+
+/** @param {unknown} value @returns {Record<string, unknown> | null} */
+function normalizeCarriedClause(value) {
+  const clause = recordOf(value);
+  const keys = Object.keys(clause).sort();
+  const baseKeys = ['burden01', 'durationTicks', 'family', 'magnitude', 'type', 'weightSpent'];
+  const optionalKeys = ['good', 'seam'];
+  if (keys.some((key) => !baseKeys.includes(key) && !optionalKeys.includes(key))
+    || baseKeys.some((key) => !keys.includes(key))) return null;
+  const type = strictText(clause.type);
+  const spec = TERM_CATALOG[type];
+  const family = strictText(clause.family);
+  const magnitude = canonicalBoundedNumber(clause.magnitude);
+  const durationTicks = positiveInteger(clause.durationTicks);
+  const weightSpent = canonicalPositiveNumber(clause.weightSpent);
+  const burden01 = canonicalBoundedNumber(clause.burden01);
+  if (!spec || family !== spec.family || magnitude == null || durationTicks == null
+    || durationTicks % CURRENT_TREATY_TICKS_PER_YEAR !== 0
+    || durationTicks > spec.maxYears * CURRENT_TREATY_TICKS_PER_YEAR
+    || weightSpent == null || burden01 !== 0) return null;
+  const good = 'good' in clause ? strictText(clause.good) : '';
+  if ((type === 'resource_share') !== !!good) return null;
+  const seam = 'seam' in clause ? clause.seam : undefined;
+  if ((spec.executor === 'seam') !== (seam === true)) return null;
+  return {
+    type, family, magnitude, durationTicks, weightSpent, burden01,
+    ...(good ? { good } : {}),
+    ...(seam === true ? { seam: true } : {}),
+  };
+}
+
+/** @param {unknown} value @returns {Record<string, string> | null} */
+function normalizeCarriedValuation(value) {
+  const row = recordOf(value);
+  if (!hasExactKeys(row, ['partyId', 'pictureId', 'role', 'decision'])) return null;
+  const partyId = strictText(row.partyId);
+  const pictureId = strictText(row.pictureId);
+  const role = row.role === 'proposer' || row.role === 'responder' ? row.role : '';
+  if (!partyId || !pictureId || !role || row.decision !== 'accept') return null;
+  return { partyId, pictureId, role, decision: 'accept' };
+}
+
+/** @param {Record<string, unknown>} row @param {string[]} expected */
+function hasExactKeys(row, expected) {
+  const actual = Object.keys(row).sort();
+  const wanted = [...expected].sort();
+  return actual.length === wanted.length && actual.every((key, index) => key === wanted[index]);
+}
+
+/** @param {unknown} value @returns {string} */
+function strictText(value) {
+  return typeof value === 'string' && value.length > 0 && value.trim() === value ? value : '';
+}
+
+/** @param {unknown} value @returns {number | null} */
+function nonNegativeInteger(value) {
+  return Number.isInteger(value) && Number(value) >= 0 ? Number(value) : null;
+}
+
+/** @param {unknown} value @returns {number | null} */
+function positiveInteger(value) {
+  return Number.isInteger(value) && Number(value) > 0 ? Number(value) : null;
+}
+
+/** @param {unknown} value @returns {number | null} */
+function canonicalNonNegativeNumber(value) {
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0 && round4(value) === value
+    ? value : null;
+}
+
+/** @param {unknown} value @returns {number | null} */
+function canonicalPositiveNumber(value) {
+  const number = canonicalNonNegativeNumber(value);
+  return number != null && number > 0 ? number : null;
+}
+
+/** @param {unknown} value @returns {number | null} */
+function canonicalBoundedNumber(value) {
+  const number = canonicalNonNegativeNumber(value);
+  return number != null && number <= 1 ? number : null;
+}
+
+/** @param {unknown} value @returns {string[] | null} */
+function strictSortedPair(value) {
+  if (!Array.isArray(value) || value.length !== 2) return null;
+  const pair = value.map(strictText);
+  return pair.every(Boolean) && pair[0] < pair[1] ? pair : null;
+}
+
+/** @param {string[]} values */
+function isSortedUnique(values) {
+  return values.every((value, index) => index === 0 || values[index - 1] < value);
 }
 
 /** @param {string} type @param {AppraisedAsset} asset @param {number} years @param {number} magnitude @returns {string} */
@@ -708,7 +1043,31 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
     if (mintedThisPair.has(unordered)) continue;                                 // one treaty per unordered pair
     mintedThisPair.add(unordered);
 
-    const { victorId, loserId, believedMargin } = resolveVictor(a, b, workingState, truthFor);
+    const carriesTermSheet = Object.prototype.hasOwnProperty.call(
+      peaceIncident,
+      'carriedTermSheet',
+    );
+    const carriedTermSheet = carriesTermSheet
+      ? normalizeCarriedTermSheet(peaceIncident.carriedTermSheet)
+      : null;
+    const expectedParties = [a, b].sort();
+    // Presence is authoritative: a malformed carried artifact may never fall
+    // back to the live victor/appraisal path. The exact historical bargain is
+    // either consumed whole or refused whole.
+    if (carriesTermSheet && (!carriedTermSheet
+      || carriedTermSheet.relationshipKey !== relationshipKey
+      || JSON.stringify(carriedTermSheet.parties) !== JSON.stringify(expectedParties)
+      || Number(carriedTermSheet.agreedTick) > Number(peaceIncident.tick))) continue;
+    const liveOrientation = carriedTermSheet
+      ? null
+      : resolveVictor(a, b, workingState, truthFor);
+    const victorId = carriedTermSheet
+      ? String(carriedTermSheet.victorId)
+      : String(liveOrientation.victorId);
+    const loserId = carriedTermSheet
+      ? String(carriedTermSheet.loserId)
+      : String(liveOrientation.loserId);
+    const believedMargin = carriedTermSheet ? null : Number(liveOrientation.believedMargin);
     const persistedContext = persistedCoalitionPeaceContext(
       peaceIncident.coalitionPeaceClosure,
       a,
@@ -827,13 +1186,23 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
     // Already under a live treaty? Don't re-mint (idempotent within the window).
     if (nextLedger[treatyPairKey(victorId, loserId)] || nextLedger[treatyPairKey(loserId, victorId)]) continue;
 
-    const mint = mintTreaty({
-      victorId, loserId, believedMargin, worldState: workingState, snapshot,
-      pIndex, threatByCid, adjacency, truthFor, tick, edges,
-      coalitionContext,
-      coalitionOutcomeId: peaceOutcomeId,
-      coalitionOutcomeTick: Number(peaceIncident.tick),
-    });
+    const mint = carriedTermSheet
+      ? mintTreatyFromCarriedSheet({
+          termSheet: carriedTermSheet,
+          homeTick: tick,
+          snapshot,
+          edges,
+          coalitionContext,
+          coalitionOutcomeId: peaceOutcomeId,
+          coalitionOutcomeTick: Number(peaceIncident.tick),
+        })
+      : mintTreaty({
+          victorId, loserId, believedMargin, worldState: workingState, snapshot,
+          pIndex, threatByCid, adjacency, truthFor, tick, edges,
+          coalitionContext,
+          coalitionOutcomeId: peaceOutcomeId,
+          coalitionOutcomeTick: Number(peaceIncident.tick),
+        });
     if (!mint) {
       // White peace has no treaty ledger shell, but the actual coalition edge
       // still closed. Stable outcome ids make both betrayal pricing and public
@@ -1285,6 +1654,135 @@ function mintTreaty(args) {
     signingBeat,
     applyMintEffects,
     ...(wr6Active ? { coalitionEvidence: mintCoalitionEvidence } : {}),
+  };
+}
+
+/**
+ * Materialize the exact WR-7b artifact without reopening any live appraisal.
+ * Names color the signing receipt only; present-day strength, holdings, roads,
+ * fronts, alignment, mediation, and affordability cannot alter the clauses.
+ * @param {{ termSheet:unknown, homeTick:number,
+ *   snapshot:{byId?:Map<string,Record<string,unknown>>},
+ *   edges:Array<Record<string,unknown>>, coalitionContext?:Record<string,unknown>|null,
+ *   coalitionOutcomeId?:string, coalitionOutcomeTick?:number }} args
+ */
+function mintTreatyFromCarriedSheet(args) {
+  const sheet = normalizeCarriedTermSheet(args.termSheet);
+  const materialized = materializeCarriedTermSheet({
+    termSheet: sheet,
+    homeTick: args.homeTick,
+  });
+  if (!sheet || !materialized || !Array.isArray(materialized.terms)
+    || materialized.terms.length === 0) return null;
+
+  const victorId = String(sheet.victorId);
+  const loserId = String(sheet.loserId);
+  const victorItem = args.snapshot?.byId?.get?.(victorId) || null;
+  const loserItem = args.snapshot?.byId?.get?.(loserId) || null;
+  const victorName = String(/** @type {{name?:unknown}} */ (victorItem || {}).name || victorId);
+  const loserName = String(/** @type {{name?:unknown}} */ (loserItem || {}).name || loserId);
+  const terms = /** @type {TermRecord[]} */ (materialized.terms);
+  const coalitionContext = args.coalitionContext || null;
+  const separateExit = !!coalitionContext;
+  const receipts = [
+    `The Peace of ${loserName} — carried home under ${victorName}'s agreed terms (${terms.map((term) => term.type).join(', ')}).`,
+  ];
+  /** @type {TreatyRecord} */
+  const treaty = {
+    ...materialized,
+    victorName,
+    loserName,
+    receipts,
+  };
+  if (separateExit) {
+    const departingId = String(coalitionContext.departingId || victorId);
+    const departingItem = args.snapshot?.byId?.get?.(departingId) || null;
+    const departingName = String(/** @type {{name?:unknown}} */ (departingItem || {}).name || departingId);
+    const abandoned = Array.isArray(coalitionContext.abandoned)
+      ? coalitionContext.abandoned.map(String).sort()
+      : [];
+    const members = Array.isArray(coalitionContext.members)
+      ? coalitionContext.members.map(String)
+      : [departingId, ...abandoned];
+    const fractureReceipt = `${departingName} left the siege — its own peace bought, its allies' fronts left standing.`;
+    treaty.separateExit = true;
+    treaty.fracture = {
+      deserter: departingId,
+      abandoned,
+      coalitionSize: members.length,
+      credibilityHit: round4(PEACE_TERMS_TUNING.CREDIBILITY_HIT),
+      peelPropensity: 0,
+      tick: args.homeTick,
+      receipt: fractureReceipt,
+    };
+    receipts.push(fractureReceipt);
+  }
+
+  const signingBeat = {
+    id: `wizard_news.${args.homeTick}.treaty_signed.${stablePart(victorId)}.${stablePart(loserId)}`,
+    kind: 'treaty_signed',
+    impactKind: 'diplomacy',
+    significance: 'major',
+    severity: 0.55,
+    score: 66,
+    tick: args.homeTick,
+    headline: separateExit
+      ? `${String(coalitionContext.departingName || victorName)} closes its own war edge with ${String(coalitionContext.enemyName || loserName)}`
+      : `${victorName} carries the agreed peace home from ${loserName}`,
+    summary: `${separateExit
+      ? `${String(coalitionContext.departingName || victorName)} settles only its own edge with ${String(coalitionContext.enemyName || loserName)}, leaving allied fronts standing under`
+      : `${victorName} binds ${loserName} to`} ${terms.map((term) => termLabel(term.type)).join(', ')}.`,
+    reasons: terms.map((term) => signingReason(term, victorName, loserName)),
+    settlementIds: [victorId, loserId],
+    parties: [victorId, loserId],
+  };
+
+  const applyMintEffects = (
+    /** @type {Record<string,unknown>} */ worldState,
+    /** @type {Array<Record<string,unknown>>} */ edges,
+    /** @type {unknown} */ now,
+    coalitionExitFirst = true,
+  ) => {
+    let state = worldState;
+    for (const term of terms) {
+      if (term.type === 'compelled_alliance') {
+        state = nudgeCompelledAlliance(
+          state,
+          edges,
+          loserId,
+          victorId,
+          term.magnitude,
+          now,
+        );
+      }
+    }
+    if (separateExit && coalitionExitFirst) {
+      state = accrueBetrayal(
+        state,
+        edges,
+        String(coalitionContext.departingId || victorId),
+        Array.isArray(coalitionContext.abandoned)
+          ? coalitionContext.abandoned.map(String)
+          : [],
+        now,
+        String(args.coalitionOutcomeId || ''),
+        args.snapshot,
+      );
+    }
+    return state;
+  };
+
+  return {
+    treaty,
+    signingBeat,
+    applyMintEffects,
+    ...(coalitionContext ? {
+      coalitionEvidence: [coalitionSeparatePeaceEvidence(
+        coalitionContext,
+        args.coalitionOutcomeTick ?? args.homeTick,
+        args.coalitionOutcomeId || '',
+      )],
+    } : {}),
   };
 }
 
