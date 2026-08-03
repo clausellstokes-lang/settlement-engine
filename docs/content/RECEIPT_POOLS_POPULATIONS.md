@@ -17,12 +17,31 @@ LEAST FOUR templates, seeded per-entity so same-seed worlds keep their sentences
 (THE PROMISE). The kind's WHAT_PHRASES registration walker asserts the floor — a
 two-variant kind reds the gate exactly as an unregistered one does.
 
+**THE FREQUENCY-SCALED FLOOR (spine amendment, 2026-08-03).** Four is the floor for a
+kind a reader meets once. A kind a reader meets every season needs more, or the world
+starts rhyming with itself. The amended floor scales by how often the kind FIRES:
+chronic/routine kinds carry EIGHT to TWELVE angle-distinct variants, notable kinds SIX
+or more, major/rare kinds FOUR or more. The FAMILY RULE below governs the counting —
+slot-swaps are one family, not two variants — so a pool meets the amended floor only
+on ANGLES, never on lines.
+
+**[VERIFIER 2026-08-03 — POP-3's four ROUTINE pools were repaired to floor.]** The
+deepening pass carried all of POP-3 to seven, which is the NOTABLE depth; four of its
+kinds are classed `routine` and were therefore a variant short. `remembered_as_sent_forth`,
+`memory_elder_face`, `ties_kept` and `ties_lapsed` each gained two angle-distinct
+lines — the traveller's report and, per pool, the season's frame, the institution's
+consequence, the small human detail, or the road's indifference — bringing them to
+NINE, the depth every other routine pool in this annex already stands at. The repair is
+APPEND ONLY: no existing variant was reworded, renumbered or dropped, and no `SLOTS:`
+line changed. Every other pool in this annex clears its class floor as authored.
+
 **THE FAMILY RULE.** Slot variety is not depth. Two templates differing only in slot
 fills are ONE family for the floor's count. Every variant below takes a different
 STRUCTURE and a different ANGLE off the angle palette: *the event plain · the street's
 view · the ledger's or institution's view · the consequence forward · the understatement
-or irony*. A pool that reads as one sentence five times has not met the floor, whatever
-the count says.
+or irony*, widened by the frequency-scaled floor with *the traveller's report · the
+season's frame · the small human detail*. A pool that reads as one sentence five times
+has not met the floor, whatever the count says.
 
 **THE SLOT CONVENTION.** No proper noun and no cause is ever baked into a template. The
 closed slot set:
@@ -111,6 +130,8 @@ AUDIENCE: public
 3. {settlement}'s roll is short {band}, and the reason given at every gate is {counterpart}.
 4. The young of {settlement} have set out for {counterpart}; the fields will want them by harvest.
 5. Nobody in {settlement} has seen the {good} of {counterpart}; nobody in {settlement} doubts it either.
+6. A carter off the {route} reports he has not driven an empty seat toward {counterpart} since the thaw.
+7. In {settlement} a cart horse cannot be had for love nor silver, and nobody has to ask why.
 
 ### pop_rush_face (POP-1) — Herald, the rumour's face (read-wired) — significance: routine
 SLOTS: {settlement}, {counterpart}, {npc}, {house}, {good}
@@ -120,6 +141,10 @@ AUDIENCE: public
 3. {house} had it from {npc}; {house} has had it from {npc} before.
 4. {npc} named {counterpart} once in the market of {settlement}, and a road filled.
 5. {npc} tells it well; whether {npc} has ever seen {counterpart} is a separate question.
+6. In the lanes of {settlement} the word is not {counterpart}'s any more; it is {npc}'s.
+7. {house} entered the {good} of {counterpart} in its book on {npc}'s word and nothing else.
+8. Whatever the road finds at {counterpart}, {settlement} will lay it at {npc}'s door.
+9. {npc} tells it the same way every time, which is either honesty or practice.
 
 ### pop_bust (POP-1) — Herald, demographic desk (letters home) — significance: notable
 SLOTS: {settlement}, {counterpart}, {good}, {route}
@@ -129,6 +154,8 @@ AUDIENCE: public
 3. {settlement}'s clerks have stopped entering {counterpart} beside the departures.
 4. What the letters said in {settlement} this season the road will say next; the {route} runs quiet.
 5. They still speak of {good} in {settlement} — more quietly than they did.
+6. The talk in the taverns of {settlement} has turned from {good} to the price of getting home.
+7. A house of {settlement} sold its roof for the road, and would like the roof back.
 
 ### refused_at_the_wall (POP-1) — the arrival clearing, column receipt — significance: notable
 SLOTS: {settlement}, {counterpart}, {band}, {route}
@@ -138,6 +165,8 @@ AUDIENCE: public
 3. {counterpart}'s stores were counted at the gate; the count refused {settlement}'s column, and the refusal was entered.
 4. What {settlement} does with them when they come back is a question for {settlement}.
 5. {counterpart} had room when they set out. That is the whole of it.
+6. It was the wrong season to be outside a wall, and they were outside it.
+7. The gate of {counterpart} was not barred against them; it was held, by men who had to look at them.
 
 ### pop_return_column (POP-1) — Herald, demographic desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {band}, {route}
@@ -147,6 +176,8 @@ AUDIENCE: public
 3. {band} were struck from {settlement}'s departures and entered again beside their old names.
 4. Those who walked back from {counterpart} will be asked about the {route} all winter.
 5. {settlement} sent them off with a blessing; it took them back without one.
+6. A drover on the {route} counted them past his gate the better part of a week, all going the one way.
+7. They came in with the tools they had carried out, and nothing else they had carried out.
 
 ### rush (POP-1) — endings token, chronicle close — significance: notable
 SLOTS: {settlement}, {counterpart}, {band}, {route}
@@ -156,6 +187,8 @@ AUDIENCE: public
 3. {counterpart}'s rolls gained {band} in a season, and the clerks stopped writing where from.
 4. {counterpart} was made by the ones who believed in it.
 5. It was a good year to keep an inn on the {route}.
+6. The thaw opened the {route}, and the {route} did not empty again until the leaves went.
+7. Travellers of that year say you could follow {settlement}'s people to {counterpart} by what they left at the verges.
 
 ### bust (POP-1) — endings token, chronicle close — significance: notable
 SLOTS: {settlement}, {counterpart}, {band}, {good}
@@ -165,6 +198,8 @@ AUDIENCE: public
 3. {counterpart} keeps the houses that were raised for the ones who did not stay.
 4. {settlement} lost {band} to {counterpart} and got most of them back, older.
 5. There was {good} in {counterpart}, men said. There was mud in the spring.
+6. {settlement} will hear the name {counterpart} for a generation, and hear it as a warning.
+7. The ones who came back kept their boots and threw the maps away.
 
 ### turned_back (POP-1) — endings token, chronicle close — significance: notable
 SLOTS: {settlement}, {counterpart}, {band}
@@ -174,6 +209,8 @@ AUDIENCE: public
 3. The gate count at {counterpart} closed the matter; {band} were entered as returned.
 4. {settlement} fed through the winter the mouths it had meant to be rid of.
 5. They had walked a long way to be told the town was full.
+6. They went out at the sowing and were home before the reaping, and had missed both.
+7. The children among them thought it a fine long walk, and said so, and were not thanked for saying it.
 
 ### homecoming (POP-1) — endings token, chronicle close — significance: routine
 SLOTS: {settlement}, {counterpart}, {route}
@@ -183,6 +220,10 @@ AUDIENCE: public
 3. {settlement}'s roll closed the year where it opened, by a different road.
 4. What {settlement} knows of the {route} it knows from the ones who came back.
 5. The ones who went furthest had the least to say.
+6. The inns of {settlement} would not take their money the first night, and took it after.
+7. {settlement}'s clerks struck the departures and entered no reason, there being no word for it.
+8. They came back at the harvest, and there was work for them by the accident of the season.
+9. A dog in {settlement} knew them before the neighbours did.
 
 ### pop_rush_plant_disclosure (POP-1) — DM dossier, the LURE coupling (INFO→POP) — significance: notable
 SLOTS: {settlement}, {counterpart}, {npc}, {faction}, {house}
@@ -192,6 +233,8 @@ AUDIENCE: dm-only
 3. The column walking to {counterpart} is walking where {faction} would have it, and cannot know that.
 4. {npc} was paid to say it in the market of {settlement}, and was paid little.
 5. The word was false when it was planted. It has since come nearly true, which was nobody's design.
+6. {house}'s books carry the cost of the word under a heading that means nothing to a clerk.
+7. If it is ever traced, it will be traced to {house} and not to {faction}, which was the arrangement.
 
 ---
 
@@ -205,6 +248,10 @@ AUDIENCE: public
 3. A petition out of {settlement} was entered against {faction}, naming {reason}.
 4. The seat of {settlement} has been asked; what it does next is the story.
 5. They asked politely. It was the first asking.
+6. The paper was read out in the market of {settlement} before it was carried anywhere.
+7. It came at the end of the season, when a town has the leisure to write things down.
+8. A traveller through {settlement} was asked to carry word of it, and was told it was nothing.
+9. The hand that wrote it was steadier than the hands that made their marks under it.
 
 ### commons_gathering (POP-2) — Herald, commons desk (BUILT kind, pre-existing registration) — significance: notable
 SLOTS: {settlement}, {faction}, {reason}
@@ -214,6 +261,8 @@ AUDIENCE: public
 3. {faction} shuttered its hall in {settlement} while the square filled.
 4. Nothing was broken in {settlement} that day, and everyone marked the day.
 5. A crowd that only stands is still a crowd.
+6. It fell in the slack week after the harvest, when a town has nothing to do but agree with itself.
+7. Somebody carried a bench out for the old ones, and nobody carried it back for a week.
 
 ### commons_riot (POP-2) — Herald, commons desk (BUILT kind, pre-existing registration) — significance: major
 SLOTS: {settlement}, {faction}, {reason}
@@ -233,6 +282,7 @@ AUDIENCE: public
 4. The seat of {settlement} may press on, and it will pay for pressing.
 5. {band} were called out of {settlement}; the roll came back with the same names and no marks.
 6. They did not riot. They simply did not come.
+7. A carter out of {settlement} that week found the yards full of men and no work being done in them.
 
 ### commons_answered (POP-2) — Herald, commons desk (MINTED, the counterforce) — significance: notable
 SLOTS: {settlement}, {reason}
@@ -243,6 +293,7 @@ AUDIENCE: public
 4. {settlement}'s seat stood down the {reason} it had imposed, and the gathering thinned.
 5. {settlement} will ask again, and it will remember being answered.
 6. It cost the seat of {settlement} little, and it was very nearly too late.
+7. They read the answer aloud at the hall door, and the reading took less time than the waiting had.
 
 ### commons_voice_face (POP-2) — Herald, the voice's face (read-wired) — significance: routine
 SLOTS: {settlement}, {npc}, {faction}
@@ -252,6 +303,10 @@ AUDIENCE: public
 3. {faction} knows {npc}'s name now, which {npc} may not thank the square for.
 4. Whatever {settlement} asks next, it will ask in {npc}'s voice.
 5. {npc} had never spoken in the square before, and has not stopped since.
+6. In the lanes of {settlement} they had always taken {npc} for the quiet sort.
+7. The clerk of {settlement} entered the grievance under {npc}'s name, having no body to enter it under.
+8. {npc} speaks in the square only when the season is bad, which is to say most seasons of late.
+9. {npc} stood on a fish crate to be heard, and would not be helped down off it.
 
 ### plan_pressed_through (POP-2) — plan receipt, priced never forbidden — significance: notable
 SLOTS: {settlement}
@@ -261,6 +316,8 @@ AUDIENCE: public
 3. The work went up in {settlement} with nobody watching it go up.
 4. {settlement} has what it built and a seat with less standing than it had.
 5. The seat was right, and it will be a while before anyone in {settlement} says so.
+6. It was raised through the worst season {settlement} had to give, and raised anyway.
+7. The masons of {settlement} were fed at the seat's table and ate elsewhere when they could.
 
 ### refused_by_the_commons (POP-2) — plan abandonment receipt — significance: notable
 SLOTS: {settlement}
@@ -270,6 +327,8 @@ AUDIENCE: public
 3. The stone lies where it was dropped in {settlement}, and no one has moved it.
 4. What {settlement} needed is still needed, and cannot be asked for this year.
 5. The seat yielded, and called the yielding prudence.
+6. The square of {settlement} settled it before the hall did, and the hall knew that it had.
+7. They put it off until a better season, and have not named which season that would be.
 
 ### levy_shortfall (POP-2) — muster receipt, war desk — significance: notable
 SLOTS: {settlement}, {faction}, {band}, {reason}
@@ -280,6 +339,7 @@ AUDIENCE: public
 4. {faction} will fight with the men {settlement} gave, not the men it wrote down.
 5. The roll was full. The field was not.
 6. {faction}'s clerk entered the shortfall against {settlement}, and wrote {reason} beside it.
+7. The muster field of {settlement} was mown for the standing of the men, and the grass went to waste.
 
 ### emigration_encouragement_refused (POP-2) — plan-lane receipt — significance: routine
 SLOTS: {settlement}, {counterpart}
@@ -289,6 +349,10 @@ AUDIENCE: public
 3. They were told there was room in {counterpart}; they stayed where their dead are.
 4. {settlement} keeps the mouths it hoped to lose, and the winter is the same length.
 5. The seat encouraged. The commons declined to be encouraged.
+6. The offer was posted at the hall door of {settlement} and read aloud for the sport of reading it.
+7. It was put to them in the lean months, which is when such offers are always put.
+8. Travellers say the road out of {settlement} was no emptier that season than any other, and no fuller.
+9. A grandmother of {settlement} said she would go when her ground went, and the lane repeated it all winter.
 
 ### petition_answered (POP-2) — endings token, chronicle close — significance: routine
 SLOTS: {settlement}
@@ -298,6 +362,10 @@ AUDIENCE: public
 3. It ended in the hall of {settlement}, which is where it should have ended.
 4. {settlement} learned that asking works — a thing a seat may live to regret.
 5. Nothing happened in {settlement}, and that was the whole of the achievement.
+6. The square of {settlement} emptied in the time it takes to walk home from it.
+7. It was done before the season turned, which is faster than such things are done.
+8. Travellers heard of it in the next town before {settlement} had finished talking of it.
+9. The seat came out to say it rather than sending it out, and that was noticed.
 
 ### refusal_stood (POP-2) — endings token, chronicle close — significance: notable
 SLOTS: {settlement}
@@ -307,6 +375,8 @@ AUDIENCE: public
 3. The square held its ground until there was nothing left to hold it against.
 4. {settlement}'s seat will think twice before the next call, and everyone knows it.
 5. They won by staying home.
+6. It held through the whole of a hard season, which is longer than anger usually holds.
+7. There was nobody to arrest, which was the difficulty.
 
 ### riot_spent (POP-2) — endings token, chronicle close — significance: notable
 SLOTS: {settlement}
@@ -316,6 +386,8 @@ AUDIENCE: public
 3. By the third market day the square was a market again.
 4. The anger of {settlement} went out of the streets and into the memory of them.
 5. Nothing was settled in {settlement}; everyone was tired.
+6. Travellers who came the week after saw a town like any other, and were told nothing.
+7. The shutters went back up one at a time, and one shop's stayed down.
 
 ---
 
@@ -333,6 +405,8 @@ AUDIENCE: public
 3. The {temple} of {settlement} still reads the roll of the ones who took the {route}.
 4. A house in {settlement} that lost its people to {counterpart} will not lend to {counterpart}.
 5. They left because they had to; {settlement} has never quite forgiven them for it.
+6. The mourning is kept at the season they went, not the season word came back.
+7. There are chairs in {settlement} that are not sat in, and everyone knows whose they were.
 
 ### remembered_as_sent_forth (POP-3) — departure memory, causeClass `opportunity` — significance: routine
 SLOTS: {settlement}, {counterpart}, {house}, {route}
@@ -342,6 +416,10 @@ AUDIENCE: public
 3. {house} counts its people in {counterpart} among its holdings, and is not wrong to.
 4. {settlement} expects something back from {counterpart}, and one year it will ask.
 5. Sent forth, they say. The grain ran short the same spring.
+6. In the inns of {settlement} the leaving is told as an adventure, and told well.
+7. The children of {settlement} can point down the {route} and name the turning, and have never been past it.
+8. A traveller in from {counterpart} is asked at every table in {settlement} how they do there, and learns to have the answer ready.
+9. {settlement} dates that spring by the leaving, and dates nothing else that happened in it.
 
 ### remembered_as_cast_out (POP-3) — departure memory, causeClass `expulsion` — significance: notable
 SLOTS: {settlement}, {counterpart}, {faction}, {reason}, {route}
@@ -351,6 +429,8 @@ AUDIENCE: public
 3. {faction} entered the expulsion at {settlement} as a keeping of the peace.
 4. What {counterpart} thinks of {settlement}, it learned from the ones {settlement} cast out.
 5. It was done for {reason}, and the reason has outlived everyone who agreed with it.
+6. It was done in the cold, which is remembered better than the reason is.
+7. The houses they left were taken by neighbours who still call them by the old families' names.
 
 ### remembered_as_scattered (POP-3) — departure memory, causeClass `dispersal` — significance: notable
 SLOTS: {settlement}
@@ -360,6 +440,8 @@ AUDIENCE: public
 3. {settlement}'s clerks entered no destination that year; there was none to enter.
 4. {settlement}'s blood is in a dozen towns, and thin in all of them.
 5. A town can lose its people without anyone deciding where they go.
+6. Travellers bring word to {settlement} of people who might be theirs, and are thanked either way.
+7. There is a wall in {settlement} where names were scratched, and no two hands wrote in the same year.
 
 ### memory_elder_face (POP-3) — remembrance beat, the elder who remembers (read-wired) — significance: routine
 SLOTS: {settlement}, {counterpart}, {npc}, {temple}, {band}
@@ -369,6 +451,10 @@ AUDIENCE: public
 3. {npc} reads the old roll at the {temple} of {settlement} each year, and reads it slower each year.
 4. When {settlement} wants to know what it owes {counterpart}, it asks {npc}.
 5. {npc} was a child when they left, and remembers it better than the ones who went.
+6. The lanes of {settlement} send their children to {npc} for the story, and {npc} tells it the same way each time.
+7. {npc} keeps a coin out of {counterpart} that will not spend anywhere.
+8. Travellers out of {counterpart} are brought to {npc} before they are brought to the seat, and are kept the longer of the two visits.
+9. {settlement} has no second keeper of the roll, and the {temple} has begun to say so out loud.
 
 ### ties_kept (POP-3) — endings token, decade crossing at a strong band — significance: routine
 SLOTS: {settlement}, {counterpart}, {band}
@@ -378,6 +464,10 @@ AUDIENCE: public
 3. A stranger out of {counterpart} eats free in {settlement}, and does not have to ask.
 4. What befalls {counterpart} is felt in {settlement} inside the season.
 5. They have not seen {counterpart} in a generation; they would still take up arms for it.
+6. The kin roll of {settlement} is copied fresh when the ink fades, and the copying is somebody's office.
+7. At the turning of the year the names out of {counterpart} are read in {settlement} among its own.
+8. The carters who work the road between {settlement} and {counterpart} are asked for news at both ends before they are asked for their loads.
+9. Children in {settlement} are given names out of {counterpart}'s families, and nobody has thought it worth remarking on.
 
 ### ties_lapsed (POP-3) — endings token, the crossing to `none` — significance: routine
 SLOTS: {settlement}, {counterpart}, {route}
@@ -387,6 +477,10 @@ AUDIENCE: public
 3. The children of {settlement} know {counterpart} as a name on the {route} and no more.
 4. {settlement} could not vouch for a stranger out of {counterpart} now; there is nobody left to do the vouching.
 5. Nothing was broken between {settlement} and {counterpart}. Nothing was kept, either.
+6. There was a year when the letters stopped, and nobody in {settlement} can say which year it was.
+7. A box of old letters in {settlement} went to starting a fire, and nobody thought twice about it.
+8. A traveller out of {counterpart} put up at {settlement} and was housed as a stranger, which by then he was.
+9. The {route} still runs, and carries between {settlement} and {counterpart} what any road carries between two towns with nothing particular to say to each other.
 
 ---
 
@@ -404,6 +498,8 @@ AUDIENCE: public
 3. The {temple} of {settlement} opened its doors to the sick, and the seat sent what it had.
 4. {settlement} has closed its market until the thing has run its course.
 5. It came in with the carts, as such things do.
+6. What {settlement} does in the next fortnight it will be judged on for a generation.
+7. Travellers off the {route} are being asked where they slept last, and are answering carefully.
 
 ### calamity_arc_crest (POP-4) — arc transition, crest — significance: major
 SLOTS: {settlement}, {temple}
@@ -422,6 +518,8 @@ AUDIENCE: public
 3. The doors of {settlement} are open again, and the lanes are wider than they were.
 4. {settlement} will be short of hands at harvest, and short of them for years.
 5. It ended the way it began — quietly, and with nobody able to say why.
+6. It broke with the weather, and {settlement} has not settled whether to thank the weather.
+7. The sickhouse of {settlement} was scrubbed out and given back to whatever it had been before.
 
 ### burial_sickness (POP-4) — Herald, THE BELLS LINE (MINTED) — significance: major
 SLOTS: {settlement}, {temple}, {band}
@@ -458,6 +556,8 @@ AUDIENCE: public
 3. {settlement} shut the {route} for a season and ate its own stores, and it answered.
 4. {counterpart} buried {band}; {settlement} buried its ordinary dead.
 5. Nothing happened in {settlement} that year. It cost a great deal.
+6. {settlement}'s burial roll for the year reads like any other year's, and was read against one to be sure.
+7. The gate order that held it will be read out every season now, whether or not there is anything to hold.
 
 ### first_market_day (POP-4) — Herald, the recovery line (MINTED) — significance: notable
 SLOTS: {settlement}, {counterpart}, {temple}, {route}
@@ -467,6 +567,8 @@ AUDIENCE: public
 3. The {temple} of {settlement} rang for a market and not for a burial.
 4. {settlement} is trading again, and the {route} to {counterpart} will know it within the month.
 5. There was less to sell and more buyers than the year had any right to.
+6. Some stalls stood empty, and their neighbours spread quietly into the gaps.
+7. A pedlar off the {route} says he has not seen {settlement} buy like that in years.
 
 ### sickhouse_face (POP-4) — the arc's face (read-wired; NAMED-CAST MERCY) — significance: routine
 SLOTS: {settlement}, {npc}, {temple}
@@ -476,6 +578,10 @@ AUDIENCE: public
 3. The {temple} of {settlement} gave {npc} its floor and asked no questions about the ordering of it.
 4. {settlement} will give {npc} whatever {npc} asks for, for about a year.
 5. {npc} was not thanked at the time; there was nobody at leisure to do it.
+6. The lanes of {settlement} carried what they could to the sickhouse door and left it there without knocking.
+7. The seat of {settlement} entered the sickhouse under {npc}'s name, having nobody else to enter it under.
+8. {npc} kept the door through the whole of that winter, and opened it in the spring out of habit.
+9. {npc} has not been able to smell vinegar since without going quiet.
 
 ### calamity_arc_terminal (POP-4) — arc close at the town's death — significance: major
 SLOTS: {settlement}, {counterpart}, {route}
@@ -494,6 +600,8 @@ AUDIENCE: public
 3. The {route} was shut, the market was thin, and the town lived.
 4. {counterpart} sends to {settlement} now to ask how it was done.
 5. The healers of {settlement} were paid in thanks, which buys little bread.
+6. It went past in the summer, and {settlement} did not breathe out until the frost.
+7. The gate watch of {settlement} slept in the gatehouse all that season and went home strangers to their own.
 
 ### recovered (POP-4) — endings token, the aftermath's close — significance: notable
 SLOTS: {settlement}
@@ -503,6 +611,8 @@ AUDIENCE: public
 3. The lanes of {settlement} filled in their own time, and mostly with strangers.
 4. {settlement} will be a generation getting back what it lost, and it has begun.
 5. They call it a recovery in {settlement}. The ones who remember call it what is left.
+6. It took the length of a childhood, and the children of it know no other {settlement}.
+7. There are more weddings in {settlement} than the hall can seat, which is how these things mend.
 
 ---
 
@@ -520,6 +630,8 @@ AUDIENCE: public
 3. The {route} was entered as unsafe in {settlement}'s books that same season.
 4. The next column out of {settlement} will take the long way, and everyone will know why.
 5. Nobody was taken. Everything was.
+6. Drovers on the {route} tell it as a warning now, and add to it with each telling.
+7. They came into {counterpart} walking beside the carts to keep the weight off them.
 
 ### column_event_tolled (POP-5a) — column receipt, en-route event — significance: routine
 SLOTS: {settlement}, {counterpart}, {house}, {good}, {route}
@@ -529,6 +641,10 @@ AUDIENCE: public
 3. They reached {counterpart} with their {good} and without their money.
 4. A road that costs that much will be a road nobody takes.
 5. The toll was lawful. That was the worst of it.
+6. They counted out the last of it at the last bridge, and argued about it well after.
+7. {settlement}'s book of the journey carries more entries for tolls than for days.
+8. It is a season for tolls; every {house} on the {route} has a bridge to keep and a reason to keep it.
+9. A child of the column asked what the money was for, and got no answer worth the asking.
 
 ### column_event_turned_back (POP-5a) — column receipt, en-route event — significance: notable
 SLOTS: {settlement}, {counterpart}, {route}
@@ -538,6 +654,8 @@ AUDIENCE: public
 3. {settlement}'s departures were amended that week; the column never reached {counterpart}.
 4. What turned them will turn the next one, until somebody clears the {route}.
 5. They walked a week to learn what a traveller could have told them.
+6. {settlement} watched them come back over the same rise, and put the kettles on without a word.
+7. They turned in the wet season, when the {route} is less a road than a rumour of one.
 
 ### column_event_sheltered (POP-5a) — column receipt, en-route event — significance: routine
 SLOTS: {settlement}, {counterpart}, {band}
@@ -547,6 +665,10 @@ AUDIENCE: public
 3. {counterpart} fed {band} out of its own stores, and entered it as given, not lent.
 4. {settlement} owes {counterpart} a thing that is written nowhere.
 5. {counterpart} had little, and shared it, which is how these things usually go.
+6. The lanes of {counterpart} made room the way lanes do — badly at first, and then completely.
+7. They came in at the first hard frost and went out with the thaw, and were not idle between.
+8. Travellers who wintered at {counterpart} that year say the barns were warmer than the inn.
+9. A child of {settlement} learned to walk on a floor in {counterpart}, and the house has not forgotten it.
 
 ### column_event_delayed (POP-5a) — column receipt, en-route event — significance: routine
 SLOTS: {settlement}, {counterpart}, {band}, {reason}, {route}
@@ -556,6 +678,10 @@ AUDIENCE: public
 3. {counterpart} set aside room for {band} and held it longer than it meant to.
 4. A column that arrives late arrives hungry, and {counterpart} knows it.
 5. The road was not dangerous. It was only long.
+6. The road wardens of {counterpart} rode out to look for them twice, and came back both times with nothing to report.
+7. The provision was costed for the {route} as it is in summer, and the {route} was not.
+8. They lost the good weather to {reason}, and the rest of the walking was done in the wet.
+9. The children learned the name of every field between; the elders learned the name of none of them.
 
 ### column_event_split (POP-5a) — column receipt, en-route event — significance: notable
 SLOTS: {settlement}, {counterpart}, {route}
@@ -565,6 +691,8 @@ AUDIENCE: public
 3. One departure out of {settlement} was entered at two gates, and both entries were right.
 4. {settlement}'s people are in two towns now, and will be counted as two peoples.
 5. Neither half thought it was the half that left.
+6. Travellers on the {route} were asked by both parties for word of the other, and had none to give.
+7. They divided what they had at the parting, and each party thought it had the worse of it.
 
 ### road_graves (POP-5a) — Herald, the graves line (MINTED; M4 sinks) — significance: major
 SLOTS: {settlement}, {counterpart}, {band}, {reason}, {route}
@@ -592,6 +720,8 @@ AUDIENCE: public
 3. The {temple} of {counterpart} kept the column through the lean months and asked the seat for nothing.
 4. {settlement} will remember {counterpart} for it longer than {counterpart} remembers doing it.
 5. It cost {counterpart} a winter's grain to be spoken well of in a town it has never seen.
+6. It was the lean end of winter when they came, which is the worst time to be generous and the only time it counts.
+7. The bread was short and cut thin, and nobody at the table remarked on the thinness.
 
 ### column_leader_face (POP-5a) — the column's leader (read-wired) — significance: routine
 SLOTS: {settlement}, {counterpart}, {npc}, {route}
@@ -601,6 +731,10 @@ AUDIENCE: public
 3. {counterpart}'s gate entered the column under {npc}'s name, for want of another.
 4. If they come through, {npc} may ask {settlement} for anything.
 5. {npc} had never been further than the market, and it showed.
+6. In {settlement} they had chosen {npc} for having a carrying voice and a map.
+7. {npc} walks at the back of it, where the ones who cannot keep up are.
+8. Travellers on the {route} are stopped by {npc} for word of what lies ahead, and are thanked either way.
+9. {npc} sets the pace by the shortest legs in the column, and is argued with for it daily.
 
 ### lost_on_the_road (POP-5a) — endings token, M4's told losses — significance: major
 SLOTS: {settlement}, {counterpart}, {band}, {route}
@@ -619,6 +753,10 @@ AUDIENCE: public
 3. There are children in {counterpart} now who were born on the road to somewhere else.
 4. The {route} between {settlement} and {counterpart} is a kinder road than it was.
 5. {counterpart} has been called many things by {settlement}. That year it was called generous.
+6. {counterpart}'s stores were entered short in the spring, and the word entered beside them was hospitality.
+7. They came in with the first snow and went out with the last of it, and were counted at both ends.
+8. Travellers say you can still find {settlement}'s way of thatching on {counterpart}'s outbuildings.
+9. Somebody in {counterpart} kept a list of who slept where, and keeps it still.
 
 ---
 
@@ -630,7 +768,8 @@ AUDIENCE: public
 SELECTION (honesty condition, R-28 — this kind covers FOUR callers): variants 1–4 are
 keyed to the refused permit column — levy (1), institution (2), trade (3), promotion
 (4) — and a column-named variant NEVER prints for another column's refusal. Variants
-5–6 are caller-agnostic and select for any column. Selecting the pool blind would put
+5 and onward are caller-agnostic and select for any column (the deepening pass appends
+only caller-agnostic lines, by this rule). Selecting the pool blind would put
 "no charter was granted" on a levy refusal, which is the R-28 shape exactly.
 1. {settlement} could not answer the levy; the town is failing. *(§8)*
 2. No charter was granted in {settlement} this year; a town that is emptying does not raise halls.
@@ -638,6 +777,7 @@ keyed to the refused permit column — levy (1), institution (2), trade (3), pro
 4. {settlement} will not be raised while it stands as it stands, whatever its numbers say.
 5. They asked {settlement} for what a standing town gives, and {settlement} had none of it to give.
 6. The refusal was entered, and the asking will come again when the standing does.
+7. The clerk wrote the refusal in the same hand as the asking, and set the two aside together.
 
 ### permit_licensed (POP-5b) — caller receipt, treaty inputs + J-POP-11 recovery in-road — significance: notable
 SLOTS: {settlement}, {counterpart}, {faction}, {route}
@@ -647,6 +787,8 @@ AUDIENCE: public
 3. {faction} licensed the founding on {settlement}'s ground under the standing pact with {counterpart}.
 4. They came in over the {route} without being stopped, which is new.
 5. The town could raise neither levy nor hall, and could still take in strangers; the clerks saw no contradiction in it.
+6. Whatever {settlement} becomes now, {counterpart} will have a hand in it and a claim on it.
+7. The first families in over the {route} were given the empty houses and asked nothing about the last tenants.
 
 ---
 
@@ -660,6 +802,8 @@ AUDIENCE: public
 3. {settlement} entered {band} at the gate this season, and has entered no such number in living memory.
 4. {settlement} will be a different town within the year, and a bigger one.
 5. The old families of {settlement} are being very polite about it.
+6. They have come through the whole of a season without a break in it, and the season is not out.
+7. Children sleep in the roof spaces of {settlement} and think it an adventure.
 
 ### recovery_line (POP-6) — Herald, generalized recovery (MINTED) — significance: notable
 SLOTS: {settlement}, {temple}, {reason}
@@ -669,6 +813,8 @@ AUDIENCE: public
 3. The market of {settlement} ran the full day, which it had not done since the trouble.
 4. The {temple} of {settlement} kept a feast it had let lapse.
 5. Nobody in {settlement} called it a recovery until it had been one for a while.
+6. The masons of {settlement} are busy again, which is the first thing a town notices.
+7. {settlement} will be asked to lend before the year is out, and will be able to.
 
 ### remembrance_line (POP-6) — Herald, the decade crossing (MINTED, POP-3's band) — significance: routine
 SLOTS: {settlement}, {counterpart}, {temple}, {band}
@@ -678,6 +824,10 @@ AUDIENCE: public
 3. The {temple} of {settlement} keeps the day, though the seat stopped funding it.
 4. A child of {settlement} learns {counterpart} as a grief before learning it as a place.
 5. The ones who left are better remembered than the ones who stayed.
+6. In the lanes of {settlement} they still say over there, and nobody has to ask where.
+7. The {temple} of {settlement} keeps the roll of that year bound apart from the other years.
+8. The day falls at the end of the harvest, when {settlement} has bread enough to give some away.
+9. A house in {settlement} keeps the key to a door in {counterpart} that nobody alive has seen.
 
 ### lapse_line (POP-6) — Herald, the band crossing to `none` (MINTED) — significance: routine
 SLOTS: {settlement}, {counterpart}
@@ -687,6 +837,10 @@ AUDIENCE: public
 3. The day for the old country is still on the calendar in {settlement}; nobody keeps it.
 4. {settlement} and {counterpart} are strangers now, and neither noticed becoming so.
 5. It did not end. It stopped.
+6. Ask in the market of {settlement} after {counterpart} and you will be given directions and nothing else.
+7. The kin roll was closed with a line and no note, there being no note to make.
+8. The season for the old letters came round and went by, and the going by was not remarked on.
+9. There is a chest of letters in {settlement} and nobody now who can say whose hand wrote them.
 
 ### kin_pull_line (POP-6) — Herald, the kin-pull rush variant (MINTED) — significance: routine
 SLOTS: {settlement}, {counterpart}, {band}, {route}
@@ -696,6 +850,10 @@ AUDIENCE: public
 3. {counterpart}'s gate entered {band} out of {settlement}, and every one of them was vouched for.
 4. Where {settlement}'s blood already is, {settlement}'s people will go.
 5. They had heard nothing good of {counterpart} — but they had heard it from family.
+6. The lane went where the lane had already gone, and nobody called it a decision.
+7. {counterpart}'s clerks stopped asking where from and began asking whose.
+8. They go after the harvest, when the cousins have room and work both.
+9. They carried a letter with a name on the outside of it and nothing written within.
 
 ### dwindling_line (POP-6) — Herald, the season-window trickle (MINTED, J-POP-13) — significance: notable
 SLOTS: {settlement}, {band}
@@ -705,6 +863,8 @@ AUDIENCE: public
 3. The lane that had families along its whole length has {band} on it now, and the change took years.
 4. {settlement} has not been struck by anything. {settlement} is going out.
 5. There was no exodus from {settlement}. There is simply less of it.
+6. A carrier who calls at {settlement} twice a year says the difference is easier to see that way.
+7. The school of {settlement} was let go for want of children, and the room is a store now.
 
 ### plan_proposed (POP-6) — Herald, the plan voice — significance: routine
 SLOTS: {settlement}, {counterpart}, {faction}
@@ -714,6 +874,10 @@ AUDIENCE: public
 3. They are measuring ground in {settlement} that nobody has measured before.
 4. If it stands, {settlement} is the town that has one; if it does not, {settlement} has paid for a hole.
 5. Ambitious, {counterpart} said, in the tone kept for that word.
+6. The lanes of {settlement} have settled what it is to be called before the ground is broken.
+7. The provision sits in {settlement}'s book under a heading the clerks had to invent.
+8. It was put up at the turn of the year, when a town believes most in itself.
+9. An old man of {settlement} has been out to look at the stakes every morning since they went in.
 
 ### plan_completed (POP-6) — Herald, the plan voice — significance: notable
 SLOTS: {settlement}, {faction}
@@ -723,6 +887,8 @@ AUDIENCE: public
 3. The scaffolding came down in {settlement}, and the square looked strange without it.
 4. {settlement} can do things this season it could not do last, and it will.
 5. It took more than it was costed at, which is to say it went well.
+6. It was finished out of season, in the wet, the seat refusing to let it stand unfinished another year.
+7. The last stone was set by the hand that set the first, which had been arranged for.
 
 ### plan_failed (POP-6) — Herald, the plan voice (named failure words) — significance: notable
 SLOTS: {settlement}, {reason}
@@ -732,6 +898,8 @@ AUDIENCE: public
 3. The stone for {settlement}'s great work is holding down a field.
 4. {settlement} will not try that again while anyone who tried it is alive.
 5. The town could afford to begin. Nobody asked about finishing.
+6. In {settlement} they still call the ground by the name of the thing that was to stand on it.
+7. Travellers ask what was meant to be there, and get a shorter answer every year.
 
 ### plan_abandoned (POP-6) — Herald, the plan voice — significance: notable
 SLOTS: {settlement}, {reason}
@@ -741,6 +909,8 @@ AUDIENCE: public
 3. They stopped building in {settlement}, and nobody has said out loud that they stopped.
 4. The provision goes back to the stores of {settlement}, less what it cost to learn.
 5. Abandoned, the books say. Prudent, the seat says.
+6. The work stopped when the good weather came, which is the season it should have gone fastest in.
+7. The tools were carried home one evening, and nobody carried them back out.
 
 ### exodus (POP-6) — endings token, the mass-flight arc — significance: major
 SLOTS: {settlement}, {counterpart}, {band}, {route}
@@ -759,6 +929,8 @@ AUDIENCE: public
 3. The last market day in {settlement} was one stall, and it closed early.
 4. {settlement} stands on the map and is a name to the people around it.
 5. Nobody left {settlement}. Everybody left {settlement}.
+6. Travellers say there is still smoke at {settlement}, and say it as a curiosity.
+7. The bell of {settlement} is rung by whoever remembers, which is not every week.
 
 ### died (POP-6) — endings token, the lifecycle's terminal death — significance: major
 SLOTS: {settlement}, {counterpart}, {route}
@@ -777,6 +949,8 @@ AUDIENCE: public
 3. They found the wells where the old maps said, which was the whole reason for coming.
 4. {settlement} begins again lower than it ended, and will be a long while climbing.
 5. The new people of {settlement} keep the old feast at the {temple} and do not know what it commemorates.
+6. They came in the spring with seed, which is how you tell settlers from scavengers.
+7. The new people of {settlement} plough up the old fence lines and put them back where they were.
 
 ## POP-6(f) — THE ELEVEN FALLBACK KINDS (WHAT_PHRASES rows — NOT pools, declared with reason)
 

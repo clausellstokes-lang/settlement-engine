@@ -12,6 +12,13 @@
 ## extension — reconciled here, decision unchanged]. Where the volume names a
 ## sentence, that sentence is variant 1.
 
+**DEEPENED 2026-08-03 to the spine's FREQUENCY-SCALED FLOOR** (SP-6 amendment:
+chronic and routine kinds at EIGHT to TWELVE angle-distinct templates, notable at
+SIX or more, major and rare at FOUR or more). The seventeen CHRONIC pools — the
+braid's headline and body lines and all ten cause-walk lines, which a reader meets
+on every braided item and every walk — now stand at TEN. The six signature-story
+braids are major and stand at five or six. The deepening is APPEND ONLY; see N-j.
+
 **What this file covers, and what it deliberately does not.** The coupling map
 builds NOTHING per-pair (J-CPL-1): every per-pair receipt in §4 is minted by
 another volume's wave and is pooled in that volume's annex. This volume builds
@@ -177,6 +184,11 @@ AUDIENCE: public
 3. The chroniclers have entered it as one account and not {band}: {reason} at {settlement}, and everything that followed from it.
 4. {counterpart} had no part in the beginning and will be paying for it into the next generation.
 5. Nothing new happened this season. What happened is that the old thing finished arriving.
+6. A carter who has never seen {settlement} can tell you what happened there, and tells it out of order.
+7. It began in one season and has not finished in the seasons since.
+8. The children at {counterpart} were born into the middle of it and take it for weather.
+9. The cost is spread across {band} books, and no single book carries enough of it to alarm a clerk.
+10. The reason on the first entry and the reason on the last are the same words; everything between them is towns.
 
 ### cascade.chain_open (CW-1) `[POOL HANDLE]` — the braid body, first link (the named ancestor) — significance: n/a (braid body line)
 SLOTS: {settlement} {counterpart} {reason}
@@ -186,6 +198,11 @@ AUDIENCE: public
 3. The account opens where the record opens: {settlement}, {reason}, and nobody yet alarmed.
 4. Everything below hangs from that one entry, and {counterpart} has never once been told so.
 5. Start at {settlement}. Whatever you have heard since, the paper starts there.
+6. In {settlement} that season it was one item among many, and not the item anyone discussed.
+7. Travellers came through {settlement} that season carrying no word of it, having seen nothing worth carrying.
+8. The clerk who entered it has been asked about it in every season since.
+9. What is written first is {reason}; what is remembered first is whatever hurt most.
+10. The opening entry cost {settlement} nothing, which is the part that has aged worst.
 
 ### cascade.chain_forward_link (CW-1) `[POOL HANDLE]` — the braid body, a forward step — significance: n/a (braid body line)
 SLOTS: {settlement} {counterpart} {reason} {good} {route}
@@ -195,6 +212,11 @@ AUDIENCE: public
 3. The next entry stands in {settlement}'s book and names the last one as its cause.
 4. Because of it the {good} stopped moving on the {route}, and towns that had never heard of the quarrel went short.
 5. Then {counterpart}, which had no interest in any of it until it had no choice.
+6. The news went up the {route} faster than the {good} it concerned.
+7. By the next season it was {counterpart}'s trouble, and {counterpart} had its own name for it.
+8. The hands at the {settlement} scales knew the price had moved before the seat did.
+9. The seat at {settlement} answered the way a seat answers: it wrote to {counterpart}, and it doubled the watch.
+10. One town's remedy is the next town's cause, and {counterpart}'s book carries both on one page.
 
 ### cascade.chain_link_covert (CW-1) `[POOL HANDLE]` — the braid body, DM projection — significance: n/a (braid body line)
 SLOTS: {settlement} {counterpart} {npc} {faction} {reason}
@@ -204,6 +226,11 @@ AUDIENCE: dm-only
 3. {faction} is the hand between {settlement} and {counterpart}, unnamed in every telling the towns have.
 4. Nothing in either town's book names it, and both books were kept honestly.
 5. The towns will go on blaming each other for it, having nothing else to blame.
+6. The money for it sits in {faction}'s book under a heading no clerk from either town would think to question.
+7. {npc} was paid for a small errand and told nothing of what the errand joined.
+8. The towns will publish this account for a generation, and it will always be missing this line.
+9. Nobody lied to the chroniclers; the chroniclers were simply never told.
+10. Pull this thread at your table and both towns' account of themselves comes apart.
 
 ### cascade.chain_close (CW-1) `[POOL HANDLE]` — the braid body, the standing verdict — significance: n/a (braid body line)
 SLOTS: {settlement} {counterpart} {band} {reason}
@@ -213,6 +240,11 @@ AUDIENCE: public
 3. It has stopped moving, which is not the same as being over.
 4. What began as {reason} is now the ordinary condition of {settlement}, and no one calls it news.
 5. At {settlement} they blame the nearest name; the first entry names another.
+6. A stranger arriving now would take the state of {settlement} for its natural one.
+7. It is a season's work to undo, and {settlement} has no season to spare for it.
+8. The men who carried the worst of it are back at their trades and do not speak of it there.
+9. {counterpart} still carries the cost in its ledger, under a heading nobody now can explain.
+10. The account is closed and the habit is not: {settlement} still does what {reason} first required of it.
 
 ### cascade.address_roll (CW-1) `[POOL HANDLE]` — the braid body, the roll of towns — significance: n/a (braid body line)
 SLOTS: {settlement} {counterpart} {band}
@@ -222,6 +254,11 @@ AUDIENCE: public
 3. The account is entered on every page it touches: {settlement} and {counterpart} both carry it, word for word.
 4. {counterpart} was never party to a line of it and will carry the entry for as long as the book lasts.
 5. The roll of towns is longer than the tale deserves, and every one of them is named in it.
+6. The roll reads like a carter's route, because for a season that is what it was.
+7. It is read out at {settlement} on the season's accounting, and it is longer each time it is read.
+8. Some of these towns are a day apart and some a month, and the trouble did not notice.
+9. Children at {counterpart} can recite the roll and could not tell you what the first name on it did.
+10. The clerks name every town, including the ones that only ever heard about it.
 
 ### cascade.braid_partial_public (CW-1) `[POOL HANDLE]` — Herald, the braided lead item over a chain with a gap — significance: derived (routine | notable | major, per R5)
 SLOTS: {settlement} {counterpart}
@@ -232,6 +269,11 @@ AUDIENCE: public
 3. The towns had joined these two events long before any book did.
 4. Whatever crossed between them crossed without a witness who wrote.
 5. The account runs {settlement}, then {counterpart}. What it does not run is why.
+6. The two ends are certain and the middle is a matter of opinion.
+7. Every telling supplies its own middle, and no two tellings supply the same one.
+8. {counterpart}'s book carries the consequence and no cause, which is common enough and comfortable to nobody.
+9. A traveller riding between them that season would tell you the road was ordinary.
+10. The unwritten part costs nothing to guess at, and the guessing has cost {counterpart} plenty.
 
 ---
 
@@ -318,6 +360,11 @@ AUDIENCE: public
 3. The clerks give one sentence and then the table — {counterpart}, {reason}, {band} steps between.
 4. Whatever {settlement} does next, it will be doing it about {reason}.
 5. It is not a mystery. It is only long.
+6. Ask in the {settlement} market and you get the same answer as at the seat, with worse manners.
+7. It is a matter of seasons and not of one bad week, and {settlement} will tell you so in that order.
+8. The road to {counterpart} carries a shorter version of this, and it is not wrong, only thin.
+9. The oldest hands at {settlement} start the account a generation before the clerks do; the walk keeps to what was written.
+10. The whole of it fits in a sentence, and not one of the towns in it will accept that sentence.
 
 ### walk.link (CW-2) `[POOL HANDLE]` — the cause-walk surface, a rendered step — significance: n/a (walk surface line)
 SLOTS: {settlement} {counterpart} {reason}
@@ -327,6 +374,11 @@ AUDIENCE: public
 3. The step before is entered in {settlement}'s book, cause and season together, as {reason}.
 4. It was {reason} at {settlement} that made the next thing possible, and the next thing has never said so.
 5. Then {counterpart}, which is where most tellings of this stop.
+6. A season lies between this step and the next, and the season is the part nobody entered.
+7. The clerk at {settlement} wrote it up as ordinary business, and at the time it was.
+8. On the road this step is remembered as a bad month; the book gives it a line.
+9. What {settlement} did here it did for its own reasons, and those reasons are {reason} and no larger.
+10. From here the account belongs to {counterpart}, which received it without asking for it.
 
 ### walk.link_person (CW-2) `[POOL HANDLE]` — the cause-walk surface, a step a named person made — significance: n/a (walk surface line)
 SLOTS: {settlement} {npc} {band} {reason}
@@ -336,6 +388,11 @@ AUDIENCE: public
 3. The entry names {npc} and gives the reason as {reason}, and gives no more than that.
 4. Whatever {npc} does hereafter, a walk backward will find this page first.
 5. One person, one decision, and {band} towns downstream of it.
+6. The entry gives {npc}'s office and not {npc}'s reasons; the reasons are the town's guess.
+7. It took {npc} an afternoon and it has taken {settlement} seasons.
+8. Riders carried {npc}'s name further than {npc} has ever travelled.
+9. {npc} signed where {npc} was expected to sign, and the signature is what the walk has.
+10. Whether {npc} understood what it would come to is not in the record; that {npc} did it is.
 
 ### walk.link_belief (CW-2) `[POOL HANDLE]` — the cause-walk surface, a step that is a record of belief — significance: n/a (walk surface line)
 SLOTS: {settlement} {counterpart} {reason}
@@ -345,6 +402,11 @@ AUDIENCE: public
 3. The entry reads believed and not confirmed — the clerks marked it so at the time, and it stands marked.
 4. {settlement} moved on what it took to be true, and the page after this one answers for the taking.
 5. The reason on this step is not what {settlement} was, but what {counterpart} took it for.
+6. What {settlement} had was a report, and a report was enough to move a seat.
+7. The {settlement} market believed it by the afternoon, and a market is not required to check.
+8. Both towns entered accounts of that season as certain, and the two accounts do not agree.
+9. The belief cost {settlement} what a fact would have cost, and cost it in the same season.
+10. The clerk wrote down what was brought to the door, and noted who brought it.
 
 ### walk.link_covert (CW-2) `[POOL HANDLE]` — the cause-walk surface, DM projection (`includeCovert`) — significance: n/a (walk surface line)
 SLOTS: {settlement} {counterpart} {npc} {faction} {reason}
@@ -354,6 +416,11 @@ AUDIENCE: dm-only
 3. The covert entry names {npc} and a patron in {counterpart}, and the reason entered is {reason}.
 4. Take this step out and the public chain still reads, which is exactly why it holds.
 5. The join the towns cannot see is the join that carried the whole weight.
+6. The arrangement was made a season before it was needed, which is the part that is not accident.
+7. The towns have a telling of this step they like better, and years in which to smooth it.
+8. A handful at {settlement} could tell you the truth of it, and none of them has a reason to.
+9. The word travelled by a road neither town would have thought to watch.
+10. This step is the difference between what happened and what is known to have happened.
 
 ### walk.crossing (CW-2) `[POOL HANDLE]` — the cause-walk surface, a step that crosses layers — significance: n/a (walk surface line)
 SLOTS: {settlement} {counterpart} {layer} {reason}
@@ -363,6 +430,11 @@ AUDIENCE: public
 3. The entry appears in two books at once — {layer}'s and the one that follows — with one reason between them, {reason}.
 4. From here on it is not the same kind of trouble, and the towns that answer for it are new ones.
 5. {layer} handed it on and did not follow it. The walk does.
+6. The hands that held it in {layer} would not recognise what it became.
+7. It changed hands the way goods change hands, and lost its papers in the changing.
+8. {counterpart} met it in its second form and has never seen the first.
+9. A season stands between the two entries, and the later book enters it as a fresh matter.
+10. The reason travels whole and the manner of it does not: {reason}, argued now in a room that keeps different books.
 
 ### walk.chain_end (CW-2) `[POOL HANDLE]` — the cause-walk surface, the end of the trail — significance: n/a (walk surface line)
 SLOTS: {settlement}
@@ -373,6 +445,11 @@ AUDIENCE: public
 3. The book opens here, and a book's opening is not always a beginning.
 4. Whatever made this, it was made out of the walk's sight, and the walk says so plainly.
 5. This is as far back as anyone can honestly take you.
+6. {settlement} has had a long while to invent something earlier, and has not troubled to.
+7. Whatever came earlier left no entry in any book {settlement} keeps.
+8. Ask a carter and the account starts further back, with nothing written under the starting.
+9. The oldest hands at {settlement} agree on a season and on nothing inside it.
+10. What lies further back is somebody's telling and not the town's record.
 
 ### walk.horizon (CW-2) `[POOL HANDLE]` — the cause-walk surface, the retention horizon — significance: n/a (walk surface line)
 SLOTS: {settlement}
@@ -383,6 +460,11 @@ AUDIENCE: public
 3. The town keeps its books only so long, and the earlier entries have been let go.
 4. Whatever caused this is older than the record, and the record will not guess on your behalf.
 5. It goes further back. The paper does not.
+6. The earlier books were kept until the room was wanted, and then they were not.
+7. What is missing here was written once, and the keeping of it was another generation's charge.
+8. Books this old go for the ordinary reasons: damp, a move, a clerk with no room for them.
+9. Travellers still repeat what the older entries said, and the repeating is all that is left of them.
+10. {settlement} remembers the shape of what it no longer holds the paper for.
 
 ### walk.depth_capped (CW-2) `[POOL HANDLE]` — the cause-walk surface, the rendered-link cap — significance: n/a (walk surface line)
 SLOTS: {band}
@@ -392,6 +474,11 @@ AUDIENCE: public
 3. The stop here is the page's and not the record's — the entries continue below it.
 4. Follow it further and you will be in another generation's business.
 5. The rest is entered and unread, which is the ordinary fate of entries.
+6. There is more, and the more of it is the same shape as this.
+7. Any clerk with an afternoon can take it back another {band} steps.
+8. The deeper entries belong to grandfathers, and grandfathers keep their own order.
+9. The rest of the account keeps; it has kept this long.
+10. The deeper part gets told on long roads, and lengthens with the road.
 
 ### walk.table_caption (CW-2) `[POOL HANDLE]` — the cause-walk surface, the table tier — significance: n/a (walk surface line)
 SLOTS: {band}
@@ -401,6 +488,11 @@ AUDIENCE: public
 3. The bottom row is the oldest, and it is the one still costing.
 4. What follows is the table the sentence above was made of.
 5. {band} steps, {band} towns, and one cause holding them together.
+6. Each row was somebody's ordinary season before it was a step in this.
+7. The order is the clerks' and not the town's; the town would put itself last.
+8. Nothing in the table is argued; the argument starts after it.
+9. Take the table on the road and any town named in it will add to it.
+10. The columns are short because the entries were short. The trouble was not.
 
 ---
 
@@ -518,3 +610,60 @@ block, and a numbered list here would be scooped as variants of the last kind.*
    kept); `{layer}` (N-c, precedented in FAITH); the six story braids as
    shape-keyed pools (R-CPL-E — a chair veto retires them into the generic
    pool and the census becomes seventeen, exactly as drafted).
+
+**N-j. THE DEEPENING PASS, 2026-08-03 — the frequency-scaled floor applied.**
+   *This note supersedes N-i's clause "every block at five or six variants" and
+   nothing else in it.* The spine's SP-6 amendment scales the floor to how often
+   a reader meets a kind, and both CW families are CHRONIC: a braid renders its
+   headline plus a body line for every member, and the cause-walk is a surface a
+   DM opens on every question, so a reader meets these seventeen sentences more
+   often than any other in this volume. All seventeen were raised to TEN
+   variants, IN PLACE and BY APPEND: no existing variant was renumbered,
+   reworded or dropped, and no `SLOTS:` line changed, so a same-seed world that
+   already drew variant three still draws variant three. The six signature-story
+   braids were left at five and six — a named shape is a once-a-generation lead
+   item (R-CPL-E, N-h) and sits at its own class floor. The census stays at
+   twenty-three kinds; only depth moved, from one hundred seventeen variants to
+   two hundred two.
+
+   **The angles the deepening used.** The original five (event plain · street ·
+   ledger · consequence forward · understatement) were spent at five, so the
+   appended lines run on the widened palette: *the traveller's report* (the
+   carter who has the shape of it and not the reason; the road that carries a
+   thinner version), *the season's frame* (a season lying between two entries;
+   an account that began in one season and has not finished in the seasons
+   since), and *the small human detail* (the clerk who has been asked about it
+   every season since; the hands at the scales who knew before the seat; the
+   children born into the middle of it). The two DM-only pools took the palette
+   hardest, since the street's view is not available to a covert line: their new
+   variants run on the money's heading, the errand-runner told nothing, the
+   timing that is not accident, and what a table does with the thread.
+
+   **The two SECURITY pools were deepened under their own constraints, not
+   relaxed by them (N-g stands).** Every appended `walk.chain_end` variant is
+   true both at a genuine origin and at a covert truncation and none asserts a
+   beginning — the town's failure to invent an earlier cause, the carter's
+   unwritten start, the oldest hands agreeing on a season and nothing inside it,
+   what lies further back being somebody's telling. Every appended
+   `cascade.braid_partial_public` variant is likewise true of a covert seam and
+   an honestly-unrecorded cause alike, and the traveller variant was written so
+   that an ordinary road is what a rider would report in BOTH cases. No appended
+   variant in either pool hints at anything withheld. `walk.horizon` kept
+   R-CPL-C: all five new lines assert retention and only retention (books kept
+   until the room was wanted, a charge that belonged to another generation, damp
+   and a move and a clerk with no room), and not one of them could stand at a
+   covert seam.
+
+   **Mechanically verified over the whole file after the pass (CONFIRMED — all
+   twenty-three blocks parsed):** numbering contiguous from one in every block;
+   the pre-deepening variant list is a byte-exact prefix of every block's new
+   list; every `SLOTS:` line unchanged; zero digits, zero engine number words and
+   zero exclamation marks in the eighty-five new variants; every slot token used
+   is declared by its own pool's `SLOTS:` line; maximum pairwise similarity
+   inside any pool, slots blanked, is 0.38 against the corpus's 0.45 family-rule
+   ceiling, and the worst cross-pool pair is 0.39. Two appended variants were
+   rewritten during the pass for restating a pool-mate's rhetorical move rather
+   than its subject — a belief-side line that reprised variant five's "not what
+   it was but what it was taken for", and a chain-end line that reprised variant
+   one's plain absence. Angle distinctness itself is an authored judgment and is
+   recorded here as one; the similarity number is only its proxy.

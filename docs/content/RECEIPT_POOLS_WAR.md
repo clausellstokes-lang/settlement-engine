@@ -171,6 +171,11 @@ AUDIENCE: public
 3. The captains of {settlement} were told the {term} forbade it, and told again.
 4. There was no march that season. The paper was worth what it cost, which surprised the quays.
 5. {settlement} kept its oath to {counterpart} quietly, and the grievance is still open on the ledger.
+6. Carters in from {counterpart} report the frontier quiet, and were made to say it twice at the staple.
+7. A whole campaigning season passed under the {term}, which is the only proof such papers ever get.
+8. The armourer of {settlement} mended and did not forge, and complained about it where the council could hear.
+9. In the {settlement} rolls the year carries an open grievance and no muster, which is a rarer pairing than the chronicles suggest.
+10. Nothing was spent and nothing was settled; {reason} will keep, and keeping is what grievances do best.
 
 ### treaty_repudiated (WR-0c) — Herald, adjudication desk — significance: major
 SLOTS: {settlement}, {counterpart}, {npc}, {reason}, {term}
@@ -189,6 +194,7 @@ AUDIENCE: public
 3. The chandlers of {settlement} wanted redress and were given a deployment question instead.
 4. {settlement} names {counterpart} an enemy over {reason}; whether an army follows is another court's arithmetic.
 5. The tariff war ended the way tariff wars end — with a name written into the wrong ledger.
+6. The factors who began the quarrel over {good} are asking one another, quietly, whether they meant this.
 
 ---
 
@@ -202,6 +208,7 @@ AUDIENCE: public
 3. The cause reads {band} in the ledger and the cost does not; that is the whole of the court's arithmetic.
 4. The grievance has outlasted the season, the harvest, and every argument in council.
 5. They are fighting for what they marched for, which the chronicles record more often than the world provides.
+6. In the market square the war has one explanation, and for once it is the hall's explanation too.
 
 ### war_termination_cost_to_continue (WR-1) — warTermination receipt, war desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {band}, {good}
@@ -211,6 +218,7 @@ AUDIENCE: public
 3. Ask why the court hesitates and the answer is the wagons, not the wrong.
 4. The quarrel is unchanged; the arithmetic is not.
 5. In {settlement}'s hall the argument has moved from the grievance to the {good}, and that is where wars are decided.
+6. The victuallers of {settlement} want payment before delivery now, which is how a court learns what it is worth.
 
 ### war_termination_cost_to_stop (WR-1) — warTermination receipt, war desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {npc}, {band}, {term}
@@ -220,6 +228,7 @@ AUDIENCE: public
 3. They would stop if stopping were cheaper than continuing; it is not.
 4. The concession is the obstacle, not the enemy.
 5. What holds the levies in the field is the price of calling them home, and {npc} can count it as well as anyone.
+6. The town would take the {term} tomorrow. The town is not the party that signs.
 
 ### war_termination_momentum (WR-1) — warTermination receipt, war desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {npc}, {band}
@@ -229,6 +238,7 @@ AUDIENCE: public
 3. {npc} could end it and could not survive ending it; the seat decides before the ledger does.
 4. It is not the cause and it is not the cost — it is the climbing down.
 5. The war carries itself; the court has become a passenger, and the stock of commitment reads {band}.
+6. There are fresh names cut into the chantry wall at {settlement}, and no council argues with a wall.
 
 ### war_cause_dissolved (WR-1) — Herald, war desk — significance: major
 SLOTS: {settlement}, {counterpart}, {reason}
@@ -256,6 +266,7 @@ AUDIENCE: public
 3. The seat's entire argument was a granary that no longer feeds anyone.
 4. They marched to take back what the winter had already taken.
 5. The lineage is history now rather than title, and history is not a casus.
+6. The register at {counterpart} closed the entry, and the closing is the whole of the defence.
 
 ### war_cause_dissolved_opportunism (WR-1) — Herald, war desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {faction}
@@ -265,6 +276,7 @@ AUDIENCE: public
 3. A patron alters an arithmetic no grievance could.
 4. They came for a weak neighbour and found a protected one.
 5. The season passed, the walls were mended, and the reason for the war mended with them.
+6. Travellers describe a garrison where there was none, and the describing has done more work than the garrison.
 
 ### casus_suppressed (WR-1) — §1b-B suppression receipt, war desk — significance: routine
 SLOTS: {settlement}, {counterpart}, {reason}
@@ -274,6 +286,11 @@ AUDIENCE: dm-only
 3. Nothing was minted, so nothing can ripen: the grievance waits on {reason} moving, not on the seat's temper.
 4. The clerks kept both entries — the claim, and the record that refuses it — and filed them on the same page.
 5. The cause exists on paper and dies against the state that produced it.
+6. The suppression carries the same address the claim would have carried: both seats, {reason}, and the entry that refuses it.
+7. Season after season the claim is raised and refused by the same entries, and the entries have not moved.
+8. A grievance that cannot be scored is not yet a grievance; it is a note.
+9. The ledger line that sinks the claim was written for another purpose entirely, and sinks it regardless.
+10. The court's appetite was never in question. Its own record was, and the record is what scores.
 
 ### patron_deterrence (WR-1) — Herald, war desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {faction}, {band}
@@ -283,6 +300,7 @@ AUDIENCE: public
 3. The captains of {settlement} priced the second army as well as the first and stopped there.
 4. It is said a word from {faction} is worth a garrison; this season it was.
 5. A protected neighbour is a poor prize, and the season went by without a march.
+6. The venture was not abandoned but postponed, to a season when {faction} might be busy elsewhere.
 
 ---
 
@@ -296,6 +314,7 @@ AUDIENCE: public
 3. Boys who would have gone to the quays go to the watchfires instead.
 4. It is a {band} appetite for war, and the council has stopped arguing about it.
 5. They have learned to answer questions with soldiers, and the answers keep working.
+6. The armoury's accounts have overtaken the almshouse's, and nobody in {settlement} finds it worth remarking.
 
 ### disposition_mercantile_crossed (WR-2) — Herald, trade desk — significance: notable
 SLOTS: {settlement}, {band}, {good}
@@ -305,6 +324,7 @@ AUDIENCE: public
 3. A generation of good ledgers has made the merchants louder than the captains.
 4. Where the town once asked whether a thing was right, it asks what it costs.
 5. The staple in {good} is the politics; the rest is ceremony.
+6. A place on the council of {settlement} is got with a warehouse now rather than a grandfather.
 
 ### disposition_diplomatic_crossed (WR-2) — Herald, events desk — significance: notable
 SLOTS: {settlement}, {band}
@@ -314,6 +334,7 @@ AUDIENCE: public
 3. The seat has learned that a legate is cheaper than a levy.
 4. They talk before they march, which their neighbours read as either wisdom or weakness, according to taste.
 5. The town's best rooms are kept for guests it does not like.
+6. It has kept {settlement} out of wars it might have won, and the hall has stopped apologising for it.
 
 ### disposition_insular_crossed (WR-2) — Herald, events desk — significance: notable
 SLOTS: {settlement}, {band}, {house}
@@ -323,6 +344,7 @@ AUDIENCE: public
 3. The council's answer to every road is that the road can wait.
 4. They want nothing from anyone, which is a policy until it is a weakness.
 5. The tolls are high and the welcome is thin, and the town calls both prudence.
+6. The inn by the gate keeps fewer beds each year and calls the shrinkage demand.
 
 ### disposition_reversal (WR-2) — Herald, events desk — significance: notable
 SLOTS: {settlement}, {band}
@@ -332,6 +354,7 @@ AUDIENCE: public
 3. A temper is not a ratchet: {settlement}'s appetite has turned back toward where it began, and reads {band}.
 4. Men who argued for the war argue for the road, and are not embarrassed.
 5. The town changed its mind slowly, the way towns do, and over the same ledgers.
+6. Neighbours who learned what to expect of {settlement} will be a season late unlearning it.
 
 ### deity_war_pressure (WR-2) — Herald, faith desk — significance: notable
 SLOTS: {settlement}, {temple}, {band}
@@ -341,6 +364,7 @@ AUDIENCE: public
 3. Priests who speak of restraint find thin congregations here.
 4. It is not that the altar orders wars; it is that it has never argued against one.
 5. A town takes its temper from whatever it prays over.
+6. The {temple}'s great feast falls when the roads dry, which is also when columns move.
 
 ### deity_peace_pressure (WR-2) — Herald, faith desk — significance: notable
 SLOTS: {settlement}, {temple}, {band}, {good}
@@ -350,6 +374,7 @@ AUDIENCE: public
 3. The chapter house prices a war in seed {good}, which is a price no captain likes to hear.
 4. The altar has never forbidden a war; it has merely made one look expensive.
 5. Where the tithe is grain, the answer to a grievance is usually another season.
+6. Neighbours have learned they can lose an argument here without losing a season, and they bring more arguments for it.
 
 ### war_culture_suppressed (WR-2) — §1b-B suppression receipt, war desk — significance: routine
 SLOTS: {settlement}, {temple}
@@ -359,6 +384,11 @@ AUDIENCE: dm-only
 3. A town that has lost its wars and prays for rain is not made warlike by being asked.
 4. The court could be pressed and would not move; the ledger explains why before anyone asks.
 5. Incoherence is visible rather than silent: the score is nothing, and every record that made it nothing is on the sheet.
+6. The sheet names every input — the {temple}'s calendar, the book of losses, the town's temper — and each of them argues the other way.
+7. Press the town again next season and the read returns the same nothing, unless the {temple} changes hands.
+8. Somebody wanted a war out of {settlement} and went looking for the temper to build it on; the sheet is what they found.
+9. The drill ground at {settlement} is pasture most of the year, and the reeve rents it out.
+10. A war culture is built rather than asked for, and nothing in {settlement}'s book has been building one.
 
 ---
 
@@ -372,6 +402,7 @@ AUDIENCE: public
 3. What was a satellite is a settlement; the parish register says so, which is what matters later.
 4. The daughter house keeps its own reeve and its own quarrel with the tolls.
 5. A lineage edge is a small entry in a book and the cause of a great deal.
+6. The founding road still runs between them and is the busiest road either keeps.
 
 ### casus_lineage_claim_parent (WR-3) — Herald, war desk — significance: major
 SLOTS: {settlement}, {counterpart}, {band}
@@ -399,6 +430,7 @@ AUDIENCE: public
 3. Kin do not sack kin cheaply, and both books said so.
 4. The lineage was cited by both sides to opposite ends, and the quieter reading held.
 5. The bond cost {settlement} the claim, and the council called it a bargain.
+6. The two towns keep each other's feast days, which is a compact nobody drafted and nobody signs.
 
 ### lineage_claim_suppressed (WR-3) — §1b-B suppression receipt, war desk — significance: routine
 SLOTS: {settlement}, {counterpart}
@@ -408,6 +440,11 @@ AUDIENCE: dm-only
 3. The court could raise the claim; its own wagon books refuse it.
 4. Sustained provisioning stands in the ledger where the grievance would go.
 5. Nothing was minted, so nothing decays; this claim waits on a change in the wagon books, not a change of heart.
+6. A generation of wagons out of {settlement} is a long argument, and it is still being made every quarter.
+7. A claim and a supply line may run to the same place; only one of them scores.
+8. To press the claim, {settlement} would have to starve the place first, and the ledger has already done that arithmetic.
+9. The drovers who would have to burn that granary have been unloading at it since they were boys.
+10. The clerk who entered the claim entered the season's deliveries, and made no remark on either.
 
 ---
 
@@ -421,6 +458,7 @@ AUDIENCE: public
 3. Terms that would have been signed in the spring are refused by the harvest, on no better evidence.
 4. Believing you are winning is expensive; the court has begun to pay for it.
 5. It is said the enemy is spent {band}. The couriers who say so have been a fortnight on the road.
+6. The lenders of {settlement} have begun advancing against the victory, which is the surest sign the hall has convinced somebody.
 
 ### war_trajectory_losing (WR-4) — warCosts receipt, war desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {term}
@@ -430,6 +468,7 @@ AUDIENCE: public
 3. Every report is read for the worst line in it.
 4. They may be wrong. They are certainly frightened, and the {term} they draft will show it.
 5. A court that believes it is losing will sign what a court that is losing would not.
+6. The plate is going inland by cart, and the town has counted every cart.
 
 ### home_front_roads (WR-4) — warCosts receipt, trade desk — significance: notable
 SLOTS: {settlement}, {route}, {band}
@@ -439,6 +478,7 @@ AUDIENCE: public
 3. While the war continues, the road-work goes undone.
 4. The bridge at the ford held through the war and has not held since.
 5. One of {settlement}'s wartime roads has worsened; the loss is {band} harder to ignore.
+6. Each season {route} goes unmended costs more to mend, and the reeve says so at every sitting.
 
 ### home_front_stores (WR-4) — warCosts receipt, events desk — significance: notable
 SLOTS: {settlement}, {band}, {good}
@@ -448,6 +488,7 @@ AUDIENCE: public
 3. The war eats first and the town eats after; that order is written in the stores.
 4. The campaign continues while the stores remain low.
 5. There is bread enough for the season, and the season is not the question.
+6. The bakers have changed the loaf again, and have not been asked to explain it.
 
 ### home_front_hands (WR-4) — warCosts receipt, events desk — significance: notable
 SLOTS: {settlement}, {band}, {npc}
@@ -457,6 +498,7 @@ AUDIENCE: public
 3. The muster took the smiths first, which the town will feel for a generation.
 4. Names that ran the market are on the roll instead of the ledger, {npc} among them.
 5. A town can survive a war; it cannot keep sending its working hands away without paying for it at home.
+6. The apprenticeships went unfilled through the war, and the gap will reach the market a generation from now.
 
 ### home_front_institutions (WR-4) — warCosts receipt, events desk — significance: notable
 SLOTS: {settlement}, {temple}
@@ -466,6 +508,7 @@ AUDIENCE: public
 3. Institutions need not fall to thin, and thin, and one day fail at the thing they are for.
 4. What was a working court is a room with a register in it.
 5. The buildings remain. Their offices cannot do the work they were built to do.
+6. The remaining clerk keeps the register out of habit, and is owed a year of wages for it.
 
 ### home_front_markets (WR-4) — warCosts receipt, trade desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {good}, {house}
@@ -475,6 +518,7 @@ AUDIENCE: public
 3. {good} that moved through this town moves around it now.
 4. A recorded market tie has closed while the war continues.
 5. The tolls are what they were and there is nothing to toll.
+6. The carriers have learned another road, and a road is only learned the once.
 
 ### winning_abroad_losing_at_home (WR-4) — warCosts receipt, war desk — significance: major
 SLOTS: {settlement}, {counterpart}, {band}
@@ -493,6 +537,11 @@ AUDIENCE: dm-only
 3. The belief is honest and wrong, which is the most expensive combination there is.
 4. The terms about to be drafted rest on a report the world has already overtaken.
 5. Nobody in that hall is wrong on purpose, which will be no comfort to anyone afterward.
+6. The clerk at {settlement} entered the report exactly as it came, correctly, and the entry has been wrong ever since.
+7. Every offer {settlement}'s hall prices this season is priced against a country that is no longer there.
+8. One arrival from the field closes the gap at {settlement}, and nothing else in the world will.
+9. The captains who could correct the hall are the ones the hall has not heard from.
+10. Carters through {counterpart} have carried the truer picture for a season, and nobody at {settlement} thought to ask them.
 
 ---
 
@@ -551,6 +600,7 @@ AUDIENCE: public
 3. Men who bore the levy quietly do not bear a refused peace quietly.
 4. The council's confidence in {npc} reads {band}, and the refusal is the reason on every tongue.
 5. Nothing was lost in the field that day. A good deal was lost in the market square.
+6. The next levy will be harder to raise than the last, and the reason will not appear on the summons.
 
 ### refusal_cost_ally_patience (WR-5) — Herald, war desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {third_party}, {band}
@@ -560,6 +610,7 @@ AUDIENCE: public
 3. Patience is a stock like any other, and this drew {band} on it.
 4. They refused peace with somebody else's soldiers in the field.
 5. The alliance held. It is thinner than it was, and both courts know it.
+6. The allied captains dined apart that week, and the servants understood it before the clerks did.
 
 ### ruler_books_compromised (WR-5) — the covert seam, adjudication desk — significance: major
 SLOTS: {settlement}, {npc}, {faction}
@@ -596,6 +647,7 @@ AUDIENCE: public
 3. A coup that does not bind its successor was a coup for nothing.
 4. The demand is written where the succession is written, and the next re-read must answer it.
 5. He holds the hall, and the hall holds a receipt.
+6. Should {npc} read the war some other way, the hall that opened for him is still a door.
 
 ### successor_repudiates_war (WR-5) — Herald, war desk — significance: major
 SLOTS: {settlement}, {counterpart}, {npc}
@@ -636,6 +688,7 @@ AUDIENCE: public
 3. The obligation is plain and the arithmetic behind it is not.
 4. Entering a war is cheap; entering the war behind it is not, and this one prices {band}.
 5. They read the whole web before they read the field, which is why they are still deciding.
+6. The reckoning wanted a wider sheet than the war itself had ever required.
 
 ### coalition_joined (WR-6) — Herald, war desk — significance: major
 SLOTS: {settlement}, {counterpart}, {third_party}, {route}
@@ -663,6 +716,7 @@ AUDIENCE: public
 3. The borrowed cause remains anchored to the caller's exact war episode and compact.
 4. They march for a paper, which is a better reason than most.
 5. This edge against {third_party} exists because an older edge does.
+6. Not a soul in {settlement} has a quarrel with {third_party}, and the levies went out all the same.
 
 ### mirror_obligation_discharged (WR-6) — mirror receipt, events desk — significance: notable
 SLOTS: {settlement}, {counterpart}
@@ -672,6 +726,7 @@ AUDIENCE: public
 3. They answered the alliance in the field, and that answer is recorded.
 4. What was owed under this call was given; other claims remain separate.
 5. The compact survived this use, and the relationship record says so.
+6. The next call on this compact begins from a shorter account than this one did.
 
 ### coalition_expenditure_read (WR-6) — the derived bill, trade desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {band}, {route}
@@ -681,6 +736,7 @@ AUDIENCE: public
 3. Damage that healed or left the bounded record is silence in this reckoning.
 4. What the alliance cost was never written down as a total — it is what the other books already say.
 5. The reckoning exists whether or not the coalition wants to hold it.
+6. Both halls will quote the reckoning at one another, each taking the half that suits it.
 
 ### coalition_stayed (WR-6) — Herald, war desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {third_party}
@@ -690,6 +746,7 @@ AUDIENCE: public
 3. The council reread the war, weighed the same ledgers as its neighbours, and reached the opposite conclusion.
 4. Staying was a decision and not an inertia, and the record says who made it.
 5. The ally that stays is owed differently from the ally that came.
+6. The men were told they were going home, and then they were not, and that telling outlasts the campaign.
 
 ### coalition_separate_peace (WR-6) — Herald, adjudication desk — significance: major
 SLOTS: {settlement}, {counterpart}, {third_party}
@@ -726,6 +783,7 @@ AUDIENCE: public
 3. The conserved transfer met the recorded claim, and no unpaid remainder was minted.
 4. The payment travelled along {route} and is archived as payment, never forgiveness.
 5. This coalition claim is closed; other causes and obligations remain separate.
+6. It was paid late and paid whole, with no thanks offered in either direction.
 
 ### coalition_debt_unpaid (WR-6) — Herald, trade desk — significance: major
 SLOTS: {settlement}, {counterpart}, {route}, {good}
@@ -761,12 +819,12 @@ AUDIENCE: public
 4. News overtakes a man on a road. It always has.
 5. He will arrive with the world he left and find another.
 6. The horse must rest. The fighting need not.
-7. Each mile carries the messenger farther from the council that chose the words.
-8. A sealed message can be in motion while every power it names remains where it was.
-9. Those who hear of the journey may know more of it than either waiting court.
-10. The messenger has no new vote to cast between one mile and the next.
-11. A public road gives a sealed purpose no promise of privacy.
-12. The message moves; its authority waits.
+7. The inns along {route} know the errand passed, and will know it passed back before either court does.
+8. The column {settlement} opened for this errand holds nothing yet, and will hold nothing until he is back in it.
+9. Villages on {route} have held the news he is carrying for a week and have had nobody to give it to.
+10. He asks after the war at every crossing on {route} and is told a different week of it each time.
+11. The errand will have eaten a season before {settlement} has its answer, and the season is a cost neither hall entered.
+12. Whatever {counterpart}'s hall settles this week, it settles without him, and he will meet it coming home.
 
 ### envoy_intercepted (WR-7b) — Herald, war desk — significance: major
 SLOTS: {npc}, {settlement}, {counterpart}, {third_party}, {route}
@@ -785,6 +843,7 @@ AUDIENCE: public
 3. Two courts' beliefs have met in one room, and neither of them is the truth.
 4. The talking has begun, which is not the same as the stopping.
 5. Whatever is agreed here binds nothing until it is carried home and told.
+6. They spent a fortnight on the seating and a morning on the terms, which is the ordinary proportion.
 
 ### envoy_terms_agreed (WR-7b) — Herald, adjudication desk — significance: major
 SLOTS: {npc}, {settlement}, {counterpart}, {term}
@@ -869,6 +928,7 @@ AUDIENCE: public
 3. A legal venue is a legal venue; the irony is not the clerks' business.
 4. The seat that owns the town was not in the room.
 5. Peace was discussed where the war had already been decided.
+6. The town served both delegations and was counted as a party to neither.
 
 ### interceptor_dilemma (WR-7b) — Herald, war desk — significance: notable
 SLOTS: {third_party}, {settlement}, {counterpart}, {route}
@@ -878,6 +938,7 @@ AUDIENCE: public
 3. Carrying the sheet is a real military cost, and the court will not see it that way.
 4. He can win the war or end it, and not both this season.
 5. The mission was to hold {route}. The opportunity is on the table.
+6. There is no standing order for this, which is why it will be judged so confidently afterward.
 
 ### interceptor_parlays_own_edge (WR-7b) — Herald, adjudication desk — significance: major
 SLOTS: {npc}, {settlement}, {counterpart}, {third_party}, {route}
@@ -943,6 +1004,7 @@ AUDIENCE: public
 3. Two men saw one parley. The seat picked one of them, and the picking was politics.
 4. Credibility was weighed, and so were other things.
 5. Whose account carries a hall is a fact about the hall.
+6. The account that was believed will be sent for again, which is how a hall comes to hold the picture it likes.
 
 ### testimony_corroborated (WR-7c) — the credibility ladder, divination desk — significance: notable
 SLOTS: {settlement}, {counterpart}
@@ -952,6 +1014,7 @@ AUDIENCE: public
 3. Sending more than one was expensive and has become cheap.
 4. The word is confirmed by its own repetition, and the hall knows the difference.
 5. It is still an account. It is merely a better one.
+6. The clerks entered what agreed as record and what did not as report, and marked the seam between them.
 
 ### testimony_lone (WR-7c) — the credibility ladder, divination desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {npc}
@@ -961,6 +1024,7 @@ AUDIENCE: public
 3. A single source with a great deal riding on it — the ladder has a name for that.
 4. The hall is deciding a war on a man's memory of a room.
 5. He may be honest and mistaken, and the sheet cannot tell them apart.
+6. The market heard the parley described before the council did, and from the same mouth.
 
 ### compromise_round_opened (WR-7c) — Herald, adjudication desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {route}
@@ -970,6 +1034,7 @@ AUDIENCE: public
 3. {settlement} and {counterpart} are negotiating and campaigning in the same season, as everyone does.
 4. A near miss is an invitation, and both halls took it.
 5. {route} carries legates in both directions, and neither court will know for a fortnight.
+6. An inn on {route} is holding rooms for both legations and has mentioned it to neither.
 
 ### acceptance_bands_widened (WR-7c) — the convergence instrument, adjudication desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {band}
@@ -979,6 +1044,7 @@ AUDIENCE: public
 3. Nobody conceded. Everybody's floor moved.
 4. What was unthinkable in the spring is merely unpleasant by the harvest.
 5. The war is being ended by an attrition of expectations rather than of armies.
+6. The instructions the legates carry are shorter than last season's, and the shortening is where the movement shows.
 
 ## WR-7d — RANSOM + THE COMPROMISED ENVOY
 
@@ -1026,6 +1092,7 @@ AUDIENCE: public
 3. He was fed, kept, and sent home down {route} with an escort, which is its own kind of terms.
 4. Nothing was asked. Everything was said.
 5. Mercy is legible and so is calculation, and the record does not distinguish them.
+6. He rides home carrying the shape of that hall in his head, and the hall knew it when it opened the door.
 
 ### guest_escaped (WR-7d) — foreignGuestHold receipt, adjudication desk — significance: notable
 SLOTS: {npc}, {settlement}, {counterpart}
@@ -1035,6 +1102,7 @@ AUDIENCE: public
 3. The court will hear it from him, which is the only way it will hear it.
 4. A hold that ends this way ends a ransom claim with it.
 5. What he saw in that house is travelling now.
+6. The clerks of {counterpart} entered the hold as ended and did not enter how it ended.
 
 ### returned_abandoned (WR-7d) — Herald, adjudication desk — significance: major
 SLOTS: {npc}, {settlement}, {counterpart}, {faction}
@@ -1071,6 +1139,7 @@ AUDIENCE: public
 3. Vetting costs a season and saves a war, when it works.
 4. The careful court sends the safer man on purpose, and {house} is not consulted.
 5. They chose slowly, and the choosing is itself a record of the seat's character.
+6. The errand went out late because of the asking, and the lateness is a cost the record carries too.
 
 ### vetting_hurried (WR-7d) — the seat's choice, adjudication desk — significance: notable
 SLOTS: {npc}, {settlement}
@@ -1080,6 +1149,7 @@ AUDIENCE: public
 3. A hurried seat picks the willing, and the willing are sometimes willing for a reason.
 4. The errand went out the door with the man who wanted it.
 5. It may be nothing. It is on the record either way.
+6. The record shows how long the choosing took, and it will be read out later by somebody unfriendly.
 
 ### send_two (WR-7d) — counter-intelligence, adjudication desk — significance: notable
 SLOTS: {settlement}, {counterpart}
@@ -1089,6 +1159,7 @@ AUDIENCE: public
 3. Two accounts of one room are the only counter-intelligence a hall can afford.
 4. If they disagree, the disagreement is the intelligence.
 5. It is an expensive way of saying the court does not entirely trust its own men.
+6. The pair rode out civil with one another and were watched to the gate by everyone who had an opinion.
 
 ### envoy_accounts_diverged (WR-7d) — the traitor's signature, divination desk — significance: major
 SLOTS: {settlement}, {counterpart}, {npc}
@@ -1120,6 +1191,7 @@ AUDIENCE: public
 3. Whether it is true is a separate question the campaign will settle.
 4. Feasibility is a belief with wagons attached.
 5. The captains march on the picture, not on the country.
+6. Every sheet drafted from here assumes a country nobody in the hall has walked.
 
 ### bargaining_ranges_do_not_overlap (WR-8) — the belief composite, war desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {term}, {band}
@@ -1129,6 +1201,7 @@ AUDIENCE: public
 3. The distance between the two offers reads {band}, and no envoy can ride that far.
 4. There is nothing to sign yet. There is a great deal still to say.
 5. The grind is not stubbornness. It is arithmetic, done twice, out of two different books.
+6. The season will settle it because nothing on paper can, and the settling will be dear in both books.
 
 ### conquest_overreach_misread (WR-8) — the mistaken-feasibility receipt, war desk — significance: major
 SLOTS: {settlement}, {counterpart}
@@ -1165,6 +1238,7 @@ AUDIENCE: public
 3. Capability never implies intent, and this hall knows the difference.
 4. They will beat them and leave them standing, which is a policy and not a kindness.
 5. The refusal is receipted with what was believed about {counterpart}, and the belief is the reason.
+6. The levies were told there would be no garrison duty, and took it better than their captains had expected.
 
 ### conquest_mercy (WR-8) — Herald, war desk — significance: major
 SLOTS: {settlement}, {counterpart}, {npc}
@@ -1192,6 +1266,7 @@ AUDIENCE: public
 3. Clearly ahead is not the same as able to hold, and the captains said so first.
 4. They will take terms because taking the place is beyond them this season.
 5. A war won is not a country taken, and the gate held.
+6. The {term} will be read out as a victory and honoured as a bargain.
 
 ### occupation_begun (WR-8) — Herald, war desk — significance: major
 SLOTS: {settlement}, {counterpart}, {band}
@@ -1210,6 +1285,7 @@ AUDIENCE: public
 3. Nothing has happened yet, which is what everyone says before it does.
 4. The garrison costs more each season and buys less.
 5. {faction} is organising in a town that has nothing else to do.
+6. The soldiers are billeted in houses where nobody speaks at supper.
 
 ### occupation_revolt (WR-8) — Herald, war desk — significance: major
 SLOTS: {settlement}, {counterpart}
@@ -1300,6 +1376,7 @@ AUDIENCE: public
 3. It was a bad thing in a season of bad things.
 4. Nobody's alliance changed, which is its own verdict.
 5. Distance is a kind of forgiveness, and the roads were long.
+6. The chronicles will give it a line rather than a chapter, and the line will be accurate.
 
 ### razing_judged_recognized (WR-8) — the world judges, events desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {house}
@@ -1309,6 +1386,7 @@ AUDIENCE: public
 3. What one court calls atrocity another calls an example.
 4. The judgment falls on the observer's axis, and some axes point the other way.
 5. {house} sent gifts, and the gifts are in the record.
+6. Travellers report the burning spoken of admiringly in halls that never saw {settlement}, which is where such talk comes cheapest.
 
 ### razing_deterrence_weighed (WR-8) — the retaliation web, war desk — significance: routine
 SLOTS: {settlement}, {counterpart}, {band}
@@ -1318,6 +1396,11 @@ AUDIENCE: dm-only
 3. The deterrence was real and was not enough.
 4. The weighing is done; what the neighbours actually do with it is a later entry in a later book.
 5. What the razer expected of the world, and what it thought that expectation was worth, are both on the sheet.
+6. Nothing in the weighing accounts for {settlement} having friends nobody at {counterpart} had heard of.
+7. If the neighbours answer, this sheet is the reason it will not have been a surprise.
+8. The expected answer was entered as a price like any other, beside the wagons and the winter.
+9. Somebody in that hall argued the other way, and the argument is on the record without a name attached to it.
+10. The weighing took an evening. The account it opened runs for a generation.
 
 ### terror_works (WR-8) — the neighbour's read, war desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {route}
@@ -1327,6 +1410,7 @@ AUDIENCE: public
 3. Fear is a policy with a shelf life, and this one is still good.
 4. Nobody has tested them. That is the whole of the result.
 5. It worked, and that it worked is the part the chronicles will have trouble with.
+6. On that frontier children are quieted with {counterpart}'s name, and their parents do not enjoy doing it.
 
 ### terror_backfires (WR-8) — the neighbour's read, war desk — significance: major
 SLOTS: {settlement}, {counterpart}, {faction}
@@ -1345,6 +1429,7 @@ AUDIENCE: public
 3. The captains chose the wagon over the ledger, and the ledger noticed.
 4. What was burned cannot be taxed, which is an argument that never persuades an angry court.
 5. They took everything, and they took it the once.
+6. The tribute column in {counterpart}'s book runs to the year of the burning and stops there.
 
 ### remnant_nothing_left (WR-8) — the material self-limit, war desk — significance: routine
 SLOTS: {settlement}, {counterpart}
@@ -1354,6 +1439,11 @@ AUDIENCE: public
 3. The granaries were empty, the register gone, and the wells already fouled.
 4. Vengeance arrived after the fact and found no fact.
 5. {counterpart} spent a season reaching a conclusion the world had already reached.
+6. Travellers had been saying for a season that the place was stripped; the column preferred to see for itself.
+7. The men were promised a sack and given a long walk, and they say so in every tavern on the road home.
+8. In {counterpart}'s books the expedition is a cost with nothing set against it.
+9. There was no fighting at {settlement}, and no reason for any.
+10. What was carried off would not have filled a wagon, and it was carried off all the same.
 
 ### vengeance_license_minted (WR-8) — the license ledger, adjudication desk — significance: major
 SLOTS: {settlement}, {counterpart}, {band}
@@ -1390,6 +1480,7 @@ AUDIENCE: public
 3. It is a legend in the hall now rather than a law in the book.
 4. Grandsons inherited a permission and no appetite.
 5. The clerks struck it from the live record and kept the entry, as clerks do.
+6. The feast that kept the memory is still kept, and few at the table could now say what it was owed for.
 
 ### vengeance_license_uncoupled (WR-8) — the coupling gate, adjudication desk — significance: routine
 SLOTS: {settlement}, {counterpart}
@@ -1399,6 +1490,11 @@ AUDIENCE: dm-only
 3. The coupling failed, and the receipt names both readings.
 4. {settlement} may prosecute when it hates enough, and it does not.
 5. The permission is live and unusable, which is the design.
+6. Let {settlement}'s feeling for {counterpart} reach its extreme and the license arms itself, with no new grievance required.
+7. The grievance that bought this permission is older than any seat now sitting at {settlement}, and every seat since has inherited it unused.
+8. Nothing {counterpart} has done since has been bad enough to arm it, and {counterpart} has not been trying to be careful.
+9. It has sat unspent through season after season, and neither book has moved toward the other.
+10. The heirs know they hold it. They do not hate {counterpart} enough to raise it, and the record is content to say so.
 
 ### casus_atrocity_answer (WR-8) — casus receipt, war desk — significance: major
 SLOTS: {settlement}, {counterpart}, {third_party}
@@ -1417,6 +1513,7 @@ AUDIENCE: public
 3. Atonement is expensive and cheaper than the coalition it prevents.
 4. What could not be undone was at least paid for, publicly and by name.
 5. The just answer minted nothing against the avenger; the answer was the answer.
+6. The rebuilt {temple} is a finer building than the one that burned, and nobody at {settlement} says so aloud.
 
 ### just_razing_sanctioned (WR-8) — J-WR-8's price, faith desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {band}
@@ -1426,6 +1523,7 @@ AUDIENCE: public
 3. The courts that approved it have not forgotten that they approved it.
 4. Mercy remained available throughout, which is why the price is real.
 5. Righteousness discounts the bill; it does not tear it up.
+6. {counterpart} will be received in every hall and warmly in none of them for a while yet.
 
 ---
 
@@ -1515,6 +1613,7 @@ AUDIENCE: public
 3. A settlement is a treaty like any other, drafted by the same clerks on the same paper.
 4. The offer went out to the halls that could actually hold it, which is a short list.
 5. What is being sold is an edge on a map and a great many people who were not asked.
+6. The word reached {settlement} the ordinary way, from a carter who had heard it at the far end of {route}.
 
 ### sovereignty_sale_cleared (WR-10) — Herald, trade desk — significance: major
 SLOTS: {settlement}, {counterpart}, {third_party}, {good}, {route}
@@ -1533,6 +1632,11 @@ AUDIENCE: public
 3. The bundle was stacked as high as it would go and stood {band} short.
 4. There was no bargain, and the absence is on the record with the reason.
 5. What the buyer offered, the seller's needs valued at nothing; appropriateness is not a rule anyone can write.
+6. {settlement} learned it had been offered and not taken, which is a strange thing for a town to carry.
+7. The factors went home by the road they came, and the drovers read the whole affair off their faces.
+8. Nothing happened. It took a season and a great deal of paper.
+9. The offer can be made again at another price, and {counterpart} and {third_party} both know it.
+10. The clerks entered a bundle, a reserve, and a refusal, and closed the file with no transfer under it.
 
 ### sovereignty_swap (WR-10) — Herald, trade desk — significance: major
 SLOTS: {settlement}, {counterpart}, {third_party}, {route}
@@ -1560,6 +1664,7 @@ AUDIENCE: public
 3. Nobody moved house. The wagons take {route} instead.
 4. The charter chest changed halls; the reeve did not change.
 5. What was owed to one seat is owed to another, and the owing is unchanged.
+6. The seal above the assize door was changed in an afternoon; the door is the door it always was.
 
 ### sold_settlement_grievance (WR-10) — Herald, events desk — significance: major
 SLOTS: {settlement}, {counterpart}, {third_party}
@@ -1578,6 +1683,7 @@ AUDIENCE: public
 3. The garrison is small and the compliance is polite, and neither is a settlement.
 4. They own the town and negotiate with it weekly.
 5. Nothing was conquered, so nothing was decided.
+6. The first hard season will be the test, and the neighbours have already worked out which season that is.
 
 ### lineage_survives_the_sale (WR-10) — the surviving edge, events desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {third_party}
@@ -1587,6 +1693,7 @@ AUDIENCE: public
 3. A seller's remorse has a name and a charter behind it.
 4. The town it seeded answers to {third_party} now and still remembers whose granary fed it.
 5. Independence and reclamation are mintable from the same entry, which is the joke.
+6. The founding entry was not in the bundle, because nobody thought to put it there.
 
 ### wartime_firesale (WR-10) — Herald, trade desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {third_party}, {band}
@@ -1596,6 +1703,7 @@ AUDIENCE: public
 3. The seller took {band} of what the town was worth in peacetime, and took it gladly.
 4. Nobody buys at that price out of charity.
 5. {third_party} is wagering that the decline continues and has put wagons behind the wager.
+6. {settlement} has learned what its own overlord thought of its prospects, and learned it in public.
 
 ### sovereignty_sale_judged (WR-10) — the world judges, faith desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {third_party}, {temple}
@@ -1605,6 +1713,7 @@ AUDIENCE: public
 3. The {temple} spoke about it, which it does not do about ordinary contracts.
 4. The price was good and the standing was expensive.
 5. Some halls will not receive {counterpart}'s factors this season and have not said why.
+6. The judgment will outlive the compact, as judgments do, and the compact was not drafted to last.
 
 ### kinship_opposes_the_sale (WR-10) — the coherence read, adjudication desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {house}
@@ -1614,6 +1723,7 @@ AUDIENCE: public
 3. Kinship is a valuation like any other, and it valued this above grain.
 4. The offer was refused without a counter, which says everything.
 5. What a house will not sell is a fact about the house.
+6. The offer has not been withdrawn, and the council has not stopped having to hear it.
 
 ### sale_books_diverged (WR-10) — the two books, adjudication desk — significance: major
 SLOTS: {settlement}, {counterpart}, {npc}
@@ -1632,6 +1742,7 @@ AUDIENCE: public
 3. They are {band} over their ceiling and out of land they can call their own.
 4. A satellite is a place to put people, and the ledger had no column for that.
 5. The squeeze arrived a generation after the sale, on schedule and unforeseen.
+6. The younger sons who would have gone out to that steading are still at their fathers' tables.
 
 ### streams_rerouted (WR-10) — the transfer, trade desk — significance: routine
 SLOTS: {settlement}, {counterpart}, {third_party}, {good}, {route}
@@ -1641,6 +1752,11 @@ AUDIENCE: public
 3. The caravans changed destination and nothing else changed.
 4. The wharf at {counterpart} is quieter than it was, and the quiet has a cause with a name.
 5. Streams follow the edge, and the edge moved.
+6. The carter who has driven that load since he was a boy turns left at the crossing now.
+7. The toll book at {counterpart} shows the same goods passing and none of the takings.
+8. A {route} that carries nothing for a season stops being mended, and the mending is what costs.
+9. It took a single season for the new arrangement to look like the old one.
+10. At {third_party} the arrivals are entered as though they had always come, and in a generation the books will agree.
 
 ---
 
@@ -1728,3 +1844,117 @@ was found and fixed, so the next reader does not re-derive it:
   fourteen §8 Herald sentences present as variant 1 of their kind, slot-substituted
   and otherwise verbatim. Every kind stands at five variants — one above the SP-6
   floor of four.
+
+---
+
+## DEEPENING PASS — 2026-08-03 (the frequency-scaled floor applied)
+
+**This section supersedes the last clause of the 2026-08-02 verification pass above.**
+That pass closed with "every kind stands at five variants"; the spine's frequency-scaled
+floor (SP-6 amendment, restated in THE FREQUENCY-SCALED FLOOR at the head of this file)
+has since raised the bar for anything that fires often, and the pools were deepened IN
+PLACE to meet it. No existing variant was renumbered, reworded, or removed — every
+addition is an append under its kind's last line, so a same-seed world that already drew
+variant three still draws variant three.
+
+- **The chronic kinds now carry ten** (`treaty_war_blocked`, `casus_suppressed`,
+  `war_culture_suppressed`, `lineage_claim_suppressed`, `trajectory_misread`,
+  `razing_deterrence_weighed`, `remnant_nothing_left`, `vengeance_license_uncoupled`,
+  `sovereignty_no_trade`, `streams_rerouted`). `envoy_on_the_road` was raised from five
+  to **twelve** in this pass under the weekly-in-transit clause — it is the deepest pool
+  in the file and the one that fires most.
+- **The notable kinds now carry six** — all sixty-eight of them, raised here. The
+  baseline stood at exactly five variants for every one of the hundred and fifty-eight
+  kinds, `envoy_departed` and `envoy_returning` included; no pool entered this pass
+  already above the old floor.
+- **The major and rare kinds are unchanged at five**, which remains one above the
+  SP-6 floor of four. Seventy-nine kinds sit there deliberately.
+- **The corpus stands at nine hundred and fifteen variants across one hundred
+  fifty-eight kinds.**
+
+**The angles the deepening used.** The original palette (event plain · street · ledger ·
+consequence forward · understatement) was exhausted at five, so the widened palette
+carried the new lines: *the traveller's report* (what the roads say the town has not yet
+heard), *the season's frame* (what a whole campaigning season did or failed to do), *the
+small human detail* (the armourer with nothing to forge, the loaf changed again, the
+carter who turns left now, the sons still at their fathers' tables), and *the clerk's
+hand* (what was entered, in what order, and what was not entered at all). The dm-only
+suppression pools took the widened palette hardest, since the street's view is
+unavailable to them: their new lines run on the counterfactual (what would have to move
+for the claim to score), the address the suppression itself carries, and the season's
+repetition of a refusal by unchanged entries.
+
+**Verified mechanically over the whole file, not only the additions.** Variant numbering
+contiguous from one in all one hundred fifty-eight blocks; no numeral in any rendered
+line (nine hundred and fifteen scanned, the numbering and the *(§8)* marker stripped);
+no slot used that its kind does not declare — no SLOTS line was widened, so every new
+line draws from the declaration that was already ratified; no exclamation marks; no two
+variants identical anywhere in the corpus. A five-word shingle scan of every added line
+against the rest of the file returned six echoes, all cured but one: *"the whole of the
+—"*, a house construction the corpus already uses ten times with ten different
+completions, kept as register rather than repetition.
+
+**Open for the chair.** The chronic pools were set at ten rather than the permitted eight
+or twelve. Ten leaves headroom under the weekly-in-transit clause without pretending a
+suppression receipt fires as often as a transit one. If the repetition envelope later
+shows any of the ten exhausting inside its observed season window, that pool is the one
+to deepen, and the empirical arbiter outranks this judgment.
+
+### VERIFIER PASS — 2026-08-03 (adversarial re-check of the deepening)
+
+The deepened blocks were re-checked against the annex-header contract and the
+frequency-scaled floor. The counts held (one hundred fifty-eight kinds, nine hundred
+fifteen variants; zero pools below floor; zero digits in rendered prose; zero undeclared
+slots; zero identical variants) and the append discipline held absolutely — the diff
+against the pre-deepening blob carries **no deletion line at all**, so no pre-existing
+variant was renumbered, reworded, or removed and THE PROMISE is undisturbed for every
+seeded draw that already landed on variants one through five.
+
+Three claims above were **wrong and are corrected in place**: `envoy_on_the_road` was not
+"already at twelve and left untouched" (it stood at five and was raised here), and
+`envoy_departed` / `envoy_returning` were not "already standing at six" (they stood at
+five like everything else). The baseline was uniformly five across all one hundred
+fifty-eight kinds.
+
+**What the family rule caught, and what was re-authored.** The floor counts variants;
+the family rule counts ANGLES, and eleven added lines were restatements of an angle their
+own pool already held. They were re-authored in place — not deleted, not renumbered, so
+the index identity of every variant is unchanged and only the sentence at that index
+moved:
+
+- `envoy_on_the_road` v7, v8, v10, v11, v12 — the worst case in the file. Four of the
+  seven added lines (7, 8, 10, 12) said one thing: *the message travels, its authority
+  does not.* All seven carried **no slot at all**, on the annex's highest-frequency kind,
+  which fails the address law (§1a-5) precisely where it matters most; and they drifted
+  the register to "the messenger"/"the message" against the pool's own *the legate / he /
+  {npc}*. Re-authored to five distinct angles — the road's own witnesses, the dispatch
+  book's open column, the villages holding news with nobody to give it to, the crossings
+  that answer him differently each time, the season the errand eats, and the far hall
+  deciding without him — all slotted and back in register.
+- `trajectory_misread` v6, v8, v9, v10 — the added five re-hit the three families the
+  frozen five already held (*both readings on the record · honest error, not deceit ·
+  the stale courier*), leaving a nominal ten at four real families. Re-authored to the
+  clerk's hand, the counterfactual that would close the gap, the captains who are not
+  heard from, and the carters who have carried the truer picture all season.
+- `casus_suppressed` v9, `war_culture_suppressed` v8, `lineage_claim_suppressed` v8,
+  `razing_deterrence_weighed` v6, `vengeance_license_uncoupled` v7 and v8, and
+  `streams_rerouted` v10 — each restated a frozen variant's angle (and v9 of
+  `casus_suppressed` echoed v3's distinctive *temper* outright). Re-authored to angles no
+  sibling holds: the refusing record's unrelated provenance, the party who went looking
+  for a temper, the cost of pressing a claim against your own supply line, the blind spot
+  the weighing did not price, the permission's inherited age, the counterpart who has not
+  been careful, and the buyer's books that will agree in a generation.
+
+**The shingle finding is amended.** The pass above reports "six echoes, all cured but
+one". A five-gram scan of every added line against the whole three-annex corpus returns
+**ninety-seven** distinct echo groups. Most are legitimate: deliberate mirror pairs
+(`route.promoted` / `route.demoted`, piety up / down, reading fulfilled / failed), the
+fixed grammar of dossier panel lines, and settled house constructions. Two were real
+formula over-deployment and were cured in the trade annex — see its own verifier note.
+The *"the whole of the —"* judgment is upheld.
+
+**Not changed, and why.** `remnant_nothing_left` v9 and `sovereignty_no_trade` v10 sit
+close to siblings but each carries a fact no sibling states. The traveller's-report angle
+runs at roughly three per hundred added lines against roughly three per thousand in the
+baseline; that is the widened palette working as designed, not repetition, since the
+instances are spread one-per-pool. The faith annex needed no re-authoring.

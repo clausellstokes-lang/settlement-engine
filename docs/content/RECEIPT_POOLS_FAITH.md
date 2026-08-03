@@ -8,6 +8,32 @@
 ## family and do not count twice — the pools below are angle-distinct by
 ## construction, not by slot variety.
 
+**Deepened 2026-08-03 under the FREQUENCY-SCALED FLOOR amendment (DESIGN_FP_SPINE.md
+§2 SP-6, chair amendment).** Kinds that fire often now carry deeper pools: chronic
+and routine kinds stand at eight to twelve angle-distinct variants, notable kinds at
+six or more, major and rare kinds at four or more. Variants added in that pass are
+APPENDED beneath the original ones — no existing variant was renumbered, reworded, or
+moved, so a seeded draw that already pinned a sentence still finds it at its old
+index and THE PROMISE is undisturbed for the shared prefix. The angle palette was
+widened for the pass: *the event plain · the street · the institution's ledger · the
+consequence forward · the understatement · the traveller's report · the season's
+frame · the small human detail*.
+
+**VERIFIER PASS, 2026-08-03 (adversarial re-check).** This annex passed with no
+re-authoring required. One hundred three kinds at seven hundred thirty-six variants;
+no pool below its scaled floor; no digit in any rendered line; no undeclared slot; no
+identical pair; no exclamation. The diff against the pre-deepening blob carries **no
+deletion line at all**, so nothing was renumbered, reworded, or removed. LAW ONE holds
+across all two hundred eighty-five added lines: no god is confirmed to have acted (the
+{temple} reads, the book enters, the parish arranges itself — the patron never strikes),
+and no named person's fate is resolved (`faith.covert.shepherd_fled` in particular keeps
+{npc} a swept room, a description with nobody to put it on, and a rider seen going away).
+Belief attribution holds on the reading pools — the wrath, the test, and the portent are
+always the temple's reading or the word at {settlement}, never the engine's truth. The
+second-person constructions (*"Ask in the market … and you will be told {reason}"*) were
+checked against precedent rather than assumed wrong: they are settled house register,
+used the same way in the untouched populations and interior annexes.
+
 **This annex is CONTENT, not law.** Where it and DESIGN_FP_FAITH.md disagree, the
 volume wins and the disagreement is a bug to report. Kind ids below are
 DESCRIPTIVE placeholders for the census — the canonical spelling of every id is
@@ -153,6 +179,8 @@ AUDIENCE: public
 3. The roster at {settlement} lists a patron and no congregation worth the name.
 4. They did not turn against {creed} in {settlement}; they simply stopped turning up.
 5. No rival won {settlement}. The empty nave did.
+6. The sexton at {settlement} keeps {temple} swept out of habit, and locks a door nobody tries.
+7. The parish at {settlement} will need a patron before the next harvest rite, and nobody has proposed one.
 
 ### faith.fall.imposed (WF-1) — Herald `faith` — significance: major
 SLOTS: {creed} {rival_creed} {settlement} {faction}
@@ -198,6 +226,8 @@ AUDIENCE: public
 3. The sacred claim is dissolved — its anchor at {settlement} fell {reason} — and the tables have nothing left to argue.
 4. {faction} marches for a rite {settlement} stopped keeping a season ago.
 5. The quarrel outlived the seat it was fought over, which is the ordinary way of quarrels.
+6. The clerks at {settlement} struck the sacred claim from the war roll {reason}, and left the muster where it was.
+7. Men on the road ask what {faction} is fighting over now, and get a different answer at every inn.
 
 ### faith.dossier.fall_cause (WF-1) — FaithSection (town dossier) — significance: n/a (dossier line)
 SLOTS: {creed} {rival_creed} {npc} {reason}
@@ -206,6 +236,12 @@ AUDIENCE: public
 2. This seat changed hands {reason} — {creed} out, {rival_creed} in.
 3. {creed}'s fall here is recorded {reason}; the register names {npc} among the causes.
 4. Seat history: {creed}, fallen {reason}. {rival_creed} keeps the altar.
+5. The seat is {rival_creed}'s by way of {reason}; the older families still say the old name.
+6. Cause of the fall: {reason}. The parish has not been asked to forget it.
+7. {creed} kept this altar for generations and lost it {reason}.
+8. Ask in the market why the calendar changed and you will be told {reason}.
+9. The register's hand shows it plainly — {creed} crossed out, {rival_creed} entered, {reason} in the margin.
+10. Travellers still ask for {creed}'s house here; they are directed to {rival_creed}'s.
 
 ---
 
@@ -219,6 +255,11 @@ AUDIENCE: public
 3. The shrine at {settlement} kept its rite and its quiet; the tolls barely noticed.
 4. {temple} laid in stores for a crowd that did not come.
 5. The word went out from {settlement} and did not go far.
+6. {temple}'s hospitality book at {settlement} shows the same names as last year and few beside them.
+7. The pilgrim beds at {settlement} were aired for nothing; the maids had the week to themselves.
+8. Carters on {route} report a quiet run to {settlement} — no crowds to slow them, and no custom either.
+9. {creed}'s shrine will keep its rite on the parish's own coin this year.
+10. A thin year on {route}, which is what the seasons are, most years.
 
 ### faith.season.steady (WF-2a) — Herald `faith` — significance: routine
 SLOTS: {settlement} {temple} {route}
@@ -227,6 +268,12 @@ AUDIENCE: public
 2. A steady season at {settlement} — {temple}'s hospitality book shows the ordinary names in the ordinary weeks.
 3. {temple} turned nobody away and sent for no extra bread; {route} brought the season it always brings.
 4. Nothing remarkable on the {settlement} road, which the innkeepers count as a good year.
+5. The tolls at {route} came in level with the year before, to the clerk's mild disappointment.
+6. {temple} baked what it baked last season and had neither loaves left nor loaves short.
+7. Pilgrims to {settlement} found beds where they expected beds.
+8. The shrine's year at {settlement} will pay for the roof and not the tower.
+9. Neither a feast year nor a thin one at {settlement}; the ordinary weeks carried the ordinary crowd.
+10. Nobody at {settlement} has anything to say about the pilgrim season, which says it.
 
 ### faith.season.feast (WF-2a) — Herald `faith` — significance: notable
 SLOTS: {settlement} {creed} {temple} {route} {when}
@@ -236,6 +283,8 @@ AUDIENCE: public
 3. The toll-books at {route} show the feast weeks in a hand that got hurried.
 4. Bread went dear at {settlement} and nobody left; the feast of {creed} is worth a hungry week.
 5. They came for {creed} and stayed for the market, which is the way of feasts.
+6. The reeve of {settlement} put extra men on the lanes for the feast week and does not begrudge the wages.
+7. Every barn within a walk of {settlement} was let as lodging at {when}, and let dear.
 
 ### faith.season.flood (WF-2a) — Herald `faith` — significance: major
 SLOTS: {settlement} {creed} {temple} {route} {faction}
@@ -253,6 +302,9 @@ AUDIENCE: public
 2. {temple} kept the observance whole this year; nothing was cut for want of coin or nerve.
 3. The feast-week entry at {settlement} closes clean: the roads held, the crowd came, the rite finished.
 4. {settlement} kept the feast, and the year will be measured from it as usual.
+5. The vestments came out of the chest at {temple} and went back in mended.
+6. {creed}'s observance at {settlement} was kept without shortening, and the seat was seen at every station of it.
+7. Children at {settlement} will remember this feast as the ordinary shape of a feast, which is the point of keeping it.
 
 ### faith.season.roads_closed (WF-2a, arc transition — the counterforce) — Herald `faith` — significance: notable
 SLOTS: {settlement} {creed} {route} {faction} {temple} {reason}
@@ -262,6 +314,8 @@ AUDIENCE: public
 3. {temple} let the procession lapse for {reason}; the shrine kept its rite before an empty nave.
 4. The inns at {settlement} laid in for a feast and drank it themselves.
 5. Danger on {route} did what no bishop could: it emptied the pilgrim season.
+6. The hospitality book at {temple} carries a blank where the feast week should be, and a note about {reason}.
+7. Pilgrims who set out for {settlement} turned at the far toll house and went home the long way.
 
 ### faith.legate.dispatched (WF-2b) — Herald `faith` — significance: routine
 SLOTS: {temple} {npc} {creed} {counterpart} {route}
@@ -270,6 +324,12 @@ AUDIENCE: public
 2. A rider of {creed} is on {route} tonight, and {counterpart} will have a guest before the feast.
 3. {npc} left under {creed}'s seal, bound for {counterpart}.
 4. {temple}'s dispatch book names {npc}, {route}, and {counterpart} — and no purpose.
+5. Horses were taken from {temple}'s stable before light, and the stableman was told not to remember it.
+6. {creed} has business at {counterpart}, and has sent someone to have it.
+7. The seat at {counterpart} will have a guest by the feast and has had no letter warning of one.
+8. Carters on {route} gave way to a rider in {creed}'s colours going hard toward {counterpart}.
+9. {temple}'s clerks made a fair copy of the letters and sealed it apart from the rest.
+10. It is the season for legates; {temple} has sent its own out on {route} with the others.
 
 ### faith.legate.arrived (WF-2b) — Herald `faith` — significance: notable
 SLOTS: {creed} {npc} {settlement} {counterpart} {faction}
@@ -279,6 +339,8 @@ AUDIENCE: public
 3. The court at {settlement} recorded a legate's arrival and no business; the clerks left the column blank.
 4. {npc} has taken rooms at {settlement} and asked, twice over, after {faction}.
 5. The legate brought greetings from {creed}. The legate also brought a notary.
+6. The kitchens at {settlement} were told to expect guests of rank and not told for how long.
+7. {counterpart} sent a legate and {settlement} received one; what passes between them will be known later, if at all.
 
 ### faith.legate.withheld (WF-2b, posture receipt) — Herald `faith` — significance: routine
 SLOTS: {creed} {temple} {settlement} {route}
@@ -288,6 +350,11 @@ AUDIENCE: public
 3. The summons from {settlement} went unanswered; {creed}'s ministers stayed within their walls.
 4. {temple} judged {route} too dangerous for a man in a mitre, and said so plainly.
 5. Nobody came from {creed}, which is itself an answer.
+6. {temple}'s dispatch book carries the request from {settlement} and no entry beside it.
+7. The seat at {settlement} waited out the week for a rider that was never saddled.
+8. {creed}'s ministers are keeping to their own walls this season, and the roads are why.
+9. They asked at {settlement} whether the legate had been delayed. They have stopped asking.
+10. No man in a mitre has been seen on {route} since the spring, and none is expected.
 
 ### faith.legate.returned (WF-2b) — Herald `faith` — significance: routine
 SLOTS: {npc} {temple} {counterpart} {route} {when}
@@ -296,6 +363,12 @@ AUDIENCE: public
 2. The legate returned with terms, or with something the seat is calling terms.
 3. {temple}'s dispatch book closes {npc}'s errand: out on {route}, home by {when}, business unrecorded.
 4. {npc} came home from {counterpart} with less to say than when they set out.
+5. The horses came back to {temple} in poor condition, and nobody has asked about the road.
+6. {temple}'s doors were shut for the reading of the return letter, which they are not, usually.
+7. Whatever {counterpart} sent back with {npc}, the seat will act on it before {when}.
+8. The inns on {route} say the return was a hard ride, and the party paid without haggling.
+9. The errand is closed in {temple}'s book and closed nowhere else.
+10. {npc} reached {temple} in the last of the good weather, which was the whole of the plan.
 
 ### faith.pilgrim.named_departs (WF-2b) — Herald `faith` — significance: routine
 SLOTS: {npc} {settlement} {counterpart} {creed} {house}
@@ -305,6 +378,11 @@ AUDIENCE: public
 3. {npc}, ailing, rides for the shrine at {settlement}; the physicians of {counterpart} have run out of counsel.
 4. {npc} left {counterpart} without ceremony, bound for {creed}'s shrine and telling nobody why.
 5. The oracle of {settlement} was summoned to court at {counterpart}, and went.
+6. The household at {counterpart} was left in the steward's hands, and the steward was given no return date.
+7. {npc} goes to {creed}'s shrine on a vow made in a bad winter.
+8. {house}'s factors along the road have been told to expect {npc} and to ask nothing.
+9. The road out of {counterpart} carried a small party under {creed}'s badge, travelling without arms.
+10. Much of the parish at {settlement} came out to see {npc} off, which is more than came to the feast.
 
 ### faith.pilgrim.intercepted (WF-2b) — Herald `faith` — significance: notable
 SLOTS: {npc} {route} {settlement} {counterpart} {faction} {creed}
@@ -314,6 +392,8 @@ AUDIENCE: public
 3. The pilgrim road took {npc}: held at {counterpart}, on a charge nobody at {settlement} recognises.
 4. {settlement} has asked after {npc} twice over; {counterpart} has acknowledged the asking.
 5. Safe passage was promised on {route}. {npc} is at {counterpart}, learning what the promise was worth.
+6. {creed}'s seal was read aloud at the {route} barrier and did not open it.
+7. The letters {npc} carried are at {counterpart} now, and the seat at {settlement} is writing them again from memory.
 
 ### faith.pilgrim.turned_back (WF-2b, the WR-7b-dark degraded arm) — Herald `faith` — significance: routine
 SLOTS: {npc} {route} {settlement} {faction} {creed}
@@ -322,6 +402,12 @@ AUDIENCE: public
 2. {faction}'s men met {creed}'s legate on {route} and suggested another road; the suggestion carried spears.
 3. The party from {settlement} came home by the way it went — {route} is shut to {creed} this season.
 4. {npc} reached the {route} bridge and got no further than the toll house.
+5. The escort was polite, the refusal was polite, and the road stayed shut.
+6. {settlement} has entered the refusal in its book and asked {faction} for a reason in writing.
+7. {creed}'s pilgrims will keep the feast at home this year, and the shrine will notice.
+8. Carters coming the other way on {route} say the barrier has stood there since the thaw.
+9. {npc} came back to {settlement} with the letters still sealed and the horses still fresh.
+10. A season of closed roads, and this is the ordinary shape of it.
 
 ### faith.dossier.season_line (WF-2a) — FaithSection (town dossier) — significance: n/a (dossier line)
 SLOTS: {band} {settlement} {creed} {counterpart} {route} {temple} {when}
@@ -330,6 +416,12 @@ AUDIENCE: public
 2. The shrine here draws {band}; the roads fill from {counterpart} and beyond at {when}.
 3. {settlement} keeps a pilgrim road. This year it is {band}.
 4. Pilgrims: {band}. {temple} keeps the hospitality book, and {route} keeps the traffic.
+5. The roads bring {band} to {creed}'s shrine; the inns here price accordingly.
+6. Pilgrim traffic: {band}. The tolls on {route} are set with that in mind.
+7. At {when} the town is not its own; the rest of the year it is.
+8. Ask an innkeeper here what the season was and you will be told {band}, with feeling.
+9. Strangers here are mostly pilgrims: {band}, arriving from {counterpart} by {route}.
+10. The shrine is why strangers come here at all — {band} of them this year.
 
 ---
 
@@ -343,6 +435,8 @@ AUDIENCE: public
 3. {temple} and {rival_creed}'s house share a feast-day now; the tolerance ledger at {settlement} shows it.
 4. Both creeds keep a single calendar at {settlement} now — the merchants noticed before the theologians did.
 5. They agreed on nothing except the date, and the date was enough.
+6. Both houses at {settlement} have begun lending each other candles, which is further than the theologians have got.
+7. {temple}'s compliance book carries the joint observance kept, and carries it without a note.
 
 ### faith.pact.frayed (WF-3 — the over-extension counterforce) — Herald `faith` — significance: routine
 SLOTS: {creed} {rival_creed} {settlement} {temple}
@@ -352,6 +446,11 @@ AUDIENCE: public
 3. The joint rite at {settlement} was let slip again; the compliance book calls it strained.
 4. {creed} has communions in every quarter of the realm and a friend in none of them.
 5. Nobody broke the compact at {settlement}. It simply stopped being kept.
+6. {rival_creed}'s ministers were not sent for this year, and did not ask why.
+7. The joint feast at {settlement} is still on the calendar and no longer on anyone's road.
+8. {temple} keeps the compact in its book and its ministers keep it nowhere else.
+9. There will be a season when somebody at {settlement} asks whether the compact still stands, and nobody will have an answer ready.
+10. The parish at {settlement} has stopped calling it a communion and started calling it an arrangement.
 
 ### faith.pact.betrayed (WF-3, arc transition — existing site, pool supplied for the floor) — Herald `faith` — significance: major
 SLOTS: {creed} {rival_creed} {settlement} {faction} {temple} {reason}
@@ -368,6 +467,12 @@ AUDIENCE: public
 2. {rival_creed} has a minister inside {settlement}'s temple now — invited, credentialed, and counting.
 3. The tolerance ledger at {settlement} shows a new hand in the margins.
 4. {temple} took in a guest of {rival_creed} for a season. The guest has not asked after the road home.
+5. A house on the lower street at {settlement} keeps a lamp lit on the wrong nights.
+6. {rival_creed}'s carriers have found a hearing at {settlement} where before they found a door.
+7. {temple} allowed the visitors their own rite in a side room, and the side room has been busy.
+8. The seat at {settlement} has not been told, and will be told when it cannot be helped.
+9. Nobody at {settlement} has converted; the listening has begun all the same.
+10. Travellers who keep {rival_creed}'s calendar find company at {settlement} now, which they did not last year.
 
 ### faith.stance.out_of_posture_pact (WF-3, posture receipt) — Herald `faith` — significance: routine
 SLOTS: {creed} {rival_creed} {settlement} {temple}
@@ -376,6 +481,12 @@ AUDIENCE: public
 2. A bold compact out of {settlement} — {creed} courts a house it has quarrelled with for a generation.
 3. The seat at {settlement} judged the pact reckless and let it stand; the judgment is on the record.
 4. {creed}'s cautious ministers were overruled, and the compact is signed.
+5. {temple} signed with {rival_creed} on a morning when nobody expected a signature.
+6. The parish at {settlement} heard of it in the market before it heard of it from the pulpit.
+7. The compact is entered in {settlement}'s ledger with a clerk's note that it was not advised.
+8. If the pact holds, {creed}'s caution will be remembered as cowardice; if it fails, as sense.
+9. A bold thing, done quietly, in a season for neither.
+10. The elder ministers of {temple} attended the signing and stood at the back of it.
 
 ### faith.dossier.stance_consequence (WF-3) — FaithSection (town dossier) — significance: n/a (dossier line)
 SLOTS: {creed} {rival_creed} {band} {when}
@@ -384,6 +495,12 @@ AUDIENCE: public
 2. {creed} stands in compact with {rival_creed} — {band} warmth, and holding.
 3. Faith relations: communion with {rival_creed}, kept since {when}.
 4. The old quarrel with {rival_creed} is not settled here, only postponed by the compact.
+5. Both calendars are kept here; the clergy manage it better than the congregations do.
+6. Stance: communion. The quarrel with {rival_creed} is older than the compact and will outlast it.
+7. Since {when} the houses have shared a feast; the shared feast is the whole of the friendship.
+8. Visitors of {rival_creed} are received here, which is not true a day's ride in any direction.
+9. Faith relations: {band}. The old families remember the quarrel better than they remember the compact.
+10. The compact is kept for the trade it protects as much as for the rite.
 
 ---
 
@@ -401,6 +518,8 @@ AUDIENCE: public
 3. The word at {settlement} is that the {calamity} came for a cause, and that the cause is in the parish.
 4. {temple} has called a rite of penance; attendance is not being described as voluntary.
 5. Nobody at {settlement} asked whether the harvest failed for weather. They asked whose fault it was.
+6. {temple}'s book enters the {calamity} under the wrath reading, and enters the parish's failings beside it.
+7. The unaffiliated at {settlement} have found reasons to be seen at the rite this month.
 
 ### faith.reading.test (WF-4) — Herald `faith` — significance: notable
 SLOTS: {settlement} {creed} {npc} {calamity} {temple}
@@ -410,6 +529,8 @@ AUDIENCE: public
 3. {temple} opened its stores rather than its accusations; the reading at {settlement} is a test, not a wrath.
 4. The pulpit at {settlement} asks the parish to hold; the pews have heard worse readings.
 5. It is a test, {creed}'s ministers say. The hungry are testing well enough.
+6. {temple}'s book calls the {calamity} a trial and sets no season on its ending, which the clerks note as prudent.
+7. More come to {temple} for bread than for penance, and the ministers have not remarked on it.
 
 ### faith.reading.abandonment (WF-4) — Herald `faith` — significance: notable
 SLOTS: {settlement} {creed} {npc} {calamity} {temple} {route}
@@ -419,6 +540,8 @@ AUDIENCE: public
 3. The word out of {settlement} is that the old patron has gone quiet, and {route} is busier for it.
 4. {temple} kept the rite through the {calamity} and got nothing back that anyone could point to.
 5. No wrath, no test — only silence, and silence empties a nave faster than either.
+6. {temple}'s roster at {settlement} shows the ministers still in post and the rail thinning by the week.
+7. Carriers of other rites have begun stopping at {settlement} on their way along {route}, and finding the doors open.
 
 ### faith.reading.vindication (WF-4) — Herald `faith` — significance: notable
 SLOTS: {settlement} {counterpart} {creed} {calamity} {temple}
@@ -428,6 +551,8 @@ AUDIENCE: public
 3. {temple} has ordered a thanksgiving; the reading is vindication, and the record says so.
 4. They kept the rite at {settlement} and the {calamity} passed them by, which is all the argument anyone there requires.
 5. {counterpart} suffered and {settlement} did not. In {settlement} this is theology.
+6. {temple}'s coffers took the thank-offerings of a frightened year, and the clerks entered them cheerfully.
+7. Families at {settlement} who had let the rite lapse are at the rail again, and nobody is making anything of it aloud.
 
 ### faith.reading.portent (WF-4) — Herald `faith` — significance: notable
 SLOTS: {settlement} {creed} {npc} {calamity} {temple} {when}
@@ -437,6 +562,8 @@ AUDIENCE: public
 3. {temple} entered the sign in its book with a season beside it — an unusual courage.
 4. The word at {settlement} is that the {calamity} was the first of something, and the market has raised prices on the strength of it.
 5. It is a portent, {creed}'s ministers say, and portents can be checked.
+6. {temple} has told the parish to lay in stores against {when}, and the parish is doing it.
+7. The word out of {settlement} has travelled further than the {calamity} did.
 
 ### faith.reading.expectation_open (WF-4) — Herald `divination` — significance: routine
 SLOTS: {settlement} {creed} {npc} {temple} {when} {reason}
@@ -445,6 +572,12 @@ AUDIENCE: public
 2. {temple} has named {when} — keep the rite, they say, and the rains return.
 3. The open expectation at {settlement}: {reason} answered by {when}, or the reading falls.
 4. {npc} has told the parish what to watch for and when to stop watching.
+5. {temple}'s book carries the promise, the season, and a blank column for the outcome.
+6. Until {when}, the parish at {settlement} keeps the rite and keeps count of the weeks.
+7. {creed}'s ministers have named a date they cannot move, which is either faith or carelessness.
+8. Everything the seat at {settlement} does before {when} will be measured against this promise.
+9. They are watching the sky at {settlement} on the ministers' instructions.
+10. The reading stands open at {settlement}: {reason}, unanswered, and the record says so plainly.
 
 ### faith.reading.fulfilled (WF-4) — Herald `faith` — significance: notable
 SLOTS: {settlement} {creed} {npc} {temple} {when} {calamity}
@@ -454,6 +587,8 @@ AUDIENCE: public
 3. {temple}'s standing at {settlement} rose on a promise kept; the pews have not been fuller since the {calamity}.
 4. {npc} said it would turn by {when}. It turned.
 5. The parish will remember this one, and the ministers will see that it does.
+6. {temple}'s book closes the expectation kept, and the clerk who entered it has told the story at every inn since.
+7. The offerings at {settlement} have not been this heavy since before the {calamity}, and the masons have been sent for.
 
 ### faith.reading.failed (WF-4 — the counterforce) — Herald `faith` — significance: notable
 SLOTS: {settlement} {creed} {npc} {temple} {when}
@@ -463,6 +598,8 @@ AUDIENCE: public
 3. {npc} named {when}, and {when} came and went; {settlement} has noticed.
 4. {temple} has stopped mentioning the promise. The parish has not.
 5. The reading failed at {settlement}, which is the sceptic's best sermon and costs nothing to preach.
+6. {temple}'s book closes the expectation unanswered, in a smaller hand than it was opened in.
+7. The pilgrims who came to {settlement} for the promise have gone home to explain it.
 
 ### faith.reading.two_towns (WF-4 crossing beat) — Herald `faith` — significance: major
 SLOTS: {settlement} {counterpart} {creed} {rival_creed} {calamity}
@@ -480,6 +617,12 @@ AUDIENCE: public
 2. {temple}'s book carries more failed readings than kept ones, and the parish can count.
 3. {npc} read the {calamity} at {settlement}, and the pews waited to see rather than to pray.
 4. They still come to hear it at {settlement}. They no longer act on it.
+5. A reading was given at {settlement} and the market did not move on it.
+6. The parish at {settlement} has learned to wait out a prophecy the way it waits out weather.
+7. {temple} has taken to reading the {calamity} in careful language, with the seasons left out.
+8. Old men at {settlement} can name the promises of their youth and what came of them.
+9. Travellers who ask at {settlement} what the pulpit is saying are told, and told not to trouble themselves.
+10. The ministers are heard out at {settlement}, politely, to the end.
 
 ### faith.dossier.reading_line (WF-4) — FaithSection (town dossier) — significance: n/a (dossier line)
 SLOTS: {reason} {calamity} {temple} {npc} {when}
@@ -488,6 +631,12 @@ AUDIENCE: public
 2. {temple} reads the {calamity} as {reason}; the expectation stands open until {when}.
 3. Reading on the books: {reason}, entered by {npc}, unresolved.
 4. Last reading here: {reason} — and it failed. The parish remembers.
+5. The {calamity} is read here as {reason}; the town has arranged itself around that reading.
+6. {temple} keeps a book of readings and their outcomes, and shows it to nobody.
+7. Ask at the market what the {calamity} meant and you will hear {reason} before you finish the question.
+8. The pulpit has promised an answer by {when}. The granaries are being counted meanwhile.
+9. Readings here are heard and not much acted on; the book explains why.
+10. {npc} gave the reading; travellers carry it further than the parish does.
 
 ---
 
@@ -509,6 +658,9 @@ AUDIENCE: public
 2. {settlement} kept only as many rites as it had room for, and {rival_creed}'s was the one too many.
 3. The split at {settlement} lasted a season — the slots were never there for it.
 4. {temple} absorbed what was left of the other congregation, and nobody calls it a reconciliation.
+5. The weaker congregation at {settlement} met in a hired room until the rent came due.
+6. {settlement}'s roster carries a single congregation again, and the clerk did not need a new page.
+7. Those who walked out of {temple} in the split are back inside it, and the responses have not changed.
 
 ### faith.covert.gone_underground (WF-5b) — Herald `faith`, covert projection — significance: notable
 SLOTS: {creed} {settlement} {npc} {band}
@@ -517,6 +669,9 @@ AUDIENCE: dm-only
 2. {npc} keeps a list of who still comes, and keeps it where it will not be found.
 3. The rite of {creed} is proscribed at {settlement} and observed at {settlement} — the register knows only the proscription.
 4. The public record at {settlement} shows {creed} extinguished. {band} know better.
+5. The vessels of {creed} were carried out of {settlement} in a grain cart and have not been carried back.
+6. What was a congregation at {settlement} is now {band} and a locked door.
+7. The seat at {settlement} believes the matter closed, and will go on believing it for years.
 
 ### faith.covert.rite_kept (WF-5b) — Herald `faith`, covert projection — significance: routine
 SLOTS: {creed} {settlement} {npc} {temple} {band}
@@ -526,6 +681,11 @@ AUDIENCE: dm-only
 3. {temple} stands empty of {creed} on every day the register troubles to check.
 4. They keep the feast at {settlement} on the wrong night, in the wrong room, and they keep it.
 5. The cellar congregation at {settlement} is {band}, and has been for years.
+6. The responses are said low at {settlement}, and the children have learned to say them low.
+7. {creed}'s calendar is kept at {settlement} out of memory; there is no book left to keep it from.
+8. A cellar door at {settlement} is oiled rather more often than a cellar door needs to be.
+9. Every year the rite is kept at {settlement} is a year the roster's entry grows more wrong.
+10. Strangers of {creed} passing {settlement} are fed, housed, and told nothing.
 
 ### faith.covert.exposed (WF-5b) — Herald `faith` — significance: major
 SLOTS: {settlement} {npc} {faction} {creed} {reason}
@@ -553,6 +713,11 @@ AUDIENCE: dm-only
 3. Nobody stopped them keeping the rite at {settlement}, and so fewer and fewer did.
 4. {npc} still lights the candle. The room is largely empty now.
 5. The undercroft rite ended at {settlement} the ordinary way: everyone was free to leave, and they did.
+6. The younger families at {settlement} keep the open rite and speak of the old one as their grandparents' business.
+7. {creed}'s hidden calendar at {settlement} has lost its feasts to the public ones, week by week.
+8. The list of who still comes at {settlement} is kept, and has not needed a new page in years.
+9. Within a generation there will be nobody at {settlement} who can say the words unprompted.
+10. Tolerance is the slower purge, and the surer one.
 
 ### faith.covert.surfaced (WF-5b) — Herald `faith` — significance: major
 SLOTS: {settlement} {creed} {temple}
@@ -570,6 +735,12 @@ AUDIENCE: dm-only
 2. The shepherd of the cellar congregation left by {route}; the wanderers' register carries the name now.
 3. {npc} recanted at the font in {settlement}, publicly and at length, and the cellar congregation has a new keeper.
 4. The congregation at {settlement} is leaderless and still meeting.
+5. {npc}'s room at {settlement} was found swept, and the vessels were not in it.
+6. {faction} has a name and a description and nobody to put them on.
+7. A rider answering {npc}'s description was seen on {route} going away from {settlement}, and was not stopped.
+8. The congregation at {settlement} will keep the feast without a shepherd, badly, for as long as it takes.
+9. Nobody at {settlement} admits to having warned {npc}, and somebody did.
+10. The wanderers' register carries a name that {settlement}'s no longer does.
 
 ### faith.dossier.covert_line (WF-5b) — FaithSection (town dossier), covert projection — significance: n/a (dossier line)
 SLOTS: {creed} {band} {npc}
@@ -578,6 +749,12 @@ AUDIENCE: dm-only
 2. Covert: {creed}, {band}, kept since the suppression; shepherd {npc}.
 3. {creed} is proscribed here and practised here — {band}, under {npc}.
 4. Hidden congregation: {band}. No shepherd named; they keep it between them.
+5. The old rite is kept here after dark — {band}, and they know one another by sight.
+6. Proscribed and practised: {creed}, {band}. The seat has not looked hard.
+7. Covert congregation: {band}, thinning. {npc} keeps them at it.
+8. There is a cellar in this town where {creed}'s calendar is still correct.
+9. Hidden here: {creed}. Ask the wrong person and you will be told there is nobody.
+10. {band} keep {creed} out of sight; a traveller of the rite would find them inside a week.
 
 ---
 
@@ -604,6 +781,9 @@ AUDIENCE: public
 2. The access granted at {settlement} lasted until the first sermon; {faction} closed the channel and called it public order.
 3. {creed}'s carriers were turned out of {settlement} — {reason} — and the compliance book records a default.
 4. The pulpit was promised. The pulpit is barred.
+5. The compliance book at {settlement} carries the default, and the seat has not asked for it to be read aloud.
+6. {creed}'s preachers wait outside the gate on market days, where the treaty says they need not wait.
+7. The realm will hear of it before the season turns, and {faction} knows that as well as anyone.
 
 ### faith.term.pilgrimage_right.formed (WF-6) — treaty document + Herald `faith` — significance: notable
 SLOTS: {settlement} {counterpart} {creed} {route}
@@ -612,6 +792,9 @@ AUDIENCE: public
 2. {settlement} has guaranteed the road: {route} is open to the faithful of {creed} in every season.
 3. The instrument names {route} and names the penalty, and {counterpart}'s marshals have been told.
 4. Safe passage bought with ink instead of blood — {creed}'s pilgrims have {route} again.
+5. The toll houses on {route} have new instructions and a copy of the terms nailed up beside them.
+6. {settlement} expects a heavier season now, and the innkeepers are laying in for it.
+7. The road was never closed by law; it is now open by it.
 
 ### faith.term.pilgrimage_right.breached (WF-6) — Herald `faith` — significance: notable
 SLOTS: {npc} {settlement} {route} {faction} {creed}
@@ -620,6 +803,9 @@ AUDIENCE: public
 2. {npc} was taken on a road the instrument says is open, and {settlement} has sent for the terms.
 3. The guarantee on {route} held until {faction} wanted the crossing.
 4. The escort promised at {settlement} did not appear, and neither did the pilgrims at the far end.
+5. The terms are nailed up at the {route} toll house, and the barrier stands in front of them.
+6. {settlement} has sent for the instrument and for a clerk who can read it aloud in company.
+7. Pilgrims coming the other way say the road has been shut since before the notice was posted.
 
 ### faith.term.shared_rite.formed (WF-6) — treaty document + Herald `faith` — significance: notable
 SLOTS: {settlement} {creed} {rival_creed} {temple}
@@ -628,6 +814,9 @@ AUDIENCE: public
 2. The compact at {settlement} binds both houses to a shared feast each year, and to civility for the rest of it.
 3. {temple} and {rival_creed}'s house will keep the rite together at {settlement}; the sacred quarrel is now a matter of contract.
 4. They signed for a common altar at {settlement}, which is cheaper than a common war.
+5. The joint feast has a date, a place, and a clause naming who provides the bread.
+6. Both congregations at {settlement} will stand in the same nave at the joint feast, and both know it.
+7. The families at {settlement} who married across the quarrel have been quietly pleased.
 
 ### faith.term.shared_rite.breached (WF-6) — Herald `faith` — significance: notable
 SLOTS: {settlement} {creed} {rival_creed} {temple}
@@ -636,6 +825,9 @@ AUDIENCE: public
 2. {creed} kept the shared feast alone this year; the instrument calls that a default, and the realm agrees.
 3. The common altar at {settlement} has been re-consecrated by a single house, which is the whole quarrel again in a sentence.
 4. Neither house came. Both blame the other. The compliance book blames both.
+5. The bread for the joint feast was baked at {temple} and eaten there.
+6. {settlement}'s compliance book has the default entered and the cause left blank.
+7. Whatever the instrument bought at {settlement}, it has stopped buying it.
 
 ### faith.term.tolerance_guarantee.formed (WF-6) — treaty document + Herald `faith` — significance: major
 SLOTS: {settlement} {creed} {faction} {temple}
@@ -660,6 +852,9 @@ AUDIENCE: public
 2. The instrument at {settlement} names the shell of {temple} and names who pays for the roof.
 3. Restitution granted — {creed}'s house at {settlement} comes off the impaired roster at {counterpart}'s expense.
 4. A war that burned an altar is ending with a bill for the altar.
+5. Masons have been asked their terms at {settlement}, and the answer will go to {counterpart}.
+6. The parish at {settlement} has been told the roof is coming, and has heard that before.
+7. {creed}'s house will stand again on somebody else's coin, which is the best kind of restoration.
 
 ### faith.term.temple_restitution.breached (WF-6) — Herald `faith` — significance: notable
 SLOTS: {settlement} {counterpart} {temple}
@@ -668,6 +863,9 @@ AUDIENCE: public
 2. {counterpart} has paid nothing toward {temple}, and the compliance book has stopped calling it strained.
 3. The scaffolding came down at {settlement} with the roof still open.
 4. They agreed to rebuild. They agreed to it again last season.
+5. Rain has been getting into {temple} at {settlement} for as long as the instrument has been in force.
+6. {settlement}'s clerks have written to {counterpart} about the roof more often than about anything else.
+7. The shell is a landmark now, and strangers are given their directions by it.
 
 ### faith.term.refused (WF-6 — the guard and the proud seat) — Herald `faith` — significance: notable
 SLOTS: {settlement} {counterpart} {creed} {temple} {route}
@@ -677,6 +875,8 @@ AUDIENCE: public
 3. {temple} would not sit for terms about the rite, and the instrument closed without a faith clause.
 4. {counterpart} offered a term on {route}, and {settlement} would not have it at any price.
 5. They were proud about it, it will cost them, and they knew both.
+6. The clause was struck at the table and struck from the fair copy, and the drafting book records both.
+7. {settlement} will pay for the refusal in the next season's traffic on {route}, and has been told so.
 
 ### faith.term.communion_trigger (WF-6 → SP-3 proposal) — Herald `faith` — significance: routine
 SLOTS: {settlement} {counterpart} {creed} {rival_creed} {temple} {npc}
@@ -685,6 +885,12 @@ AUDIENCE: public
 2. Both houses keep the same patron — {temple} has asked what else they might keep.
 3. A communion is on the table between {settlement} and {counterpart}; the legate carries the draft.
 4. {npc} came to {counterpart} with a proposal for a shared feast, which is how these things usually start.
+5. The draft between {settlement} and {counterpart} is short and has been copied fair, which is a sign of intent.
+6. Nothing has been agreed between {creed} and {rival_creed}; a great deal has been discussed.
+7. If the communion is signed, the quarrel between {settlement} and {counterpart} loses its best argument.
+8. Merchants of {settlement} and {counterpart} have heard of the proposal and are already pleased.
+9. {temple}'s clerks have been looking out older instruments to see how such things are worded.
+10. A legate goes between {settlement} and {counterpart} more often this season than the season warrants.
 
 ### faith.dossier.treaty_line (WF-6) — treaty document + FaithSection — significance: n/a (dossier line)
 SLOTS: {creed} {settlement} {counterpart} {route}
@@ -693,6 +899,12 @@ AUDIENCE: public
 2. {settlement} is bound: no suppression of {creed}, guaranteed at {counterpart}.
 3. By instrument with {counterpart}: {route} open to {creed}'s pilgrims, in force.
 4. Faith terms touching {creed} are in force here, and kept — for now.
+5. Faith clauses bind {settlement}; the seat did not write them and cannot strike them.
+6. The instrument with {counterpart} is kept in the strongroom and cited more often than it is read.
+7. {route} carries a clause for {creed}'s pilgrims; a traveller of the rite is safe on it here.
+8. A treaty with {counterpart} decides what may be preached here. The parish had no part in it.
+9. In force: {creed}'s clauses. Breach them and {counterpart} will hear before the week is out.
+10. Old clauses, and kept: {creed} holds rights here that no one now living granted.
 
 ---
 
@@ -706,6 +918,8 @@ AUDIENCE: public
 3. The tithe books at {settlement} show a good year for {temple} and a thin one for everybody else.
 4. {npc} preached generosity at {settlement} to a congregation that had just been counted.
 5. They give what is asked at {settlement}. They no longer give anything else.
+6. The render at {settlement} is collected on the day it falls due, by men who do not linger.
+7. {temple} will build with what it takes this year, and the parish will look at what it built.
 
 ### faith.tithe.remission (WF-7) — Herald `faith` — significance: notable
 SLOTS: {settlement} {temple} {npc} {reason}
@@ -714,6 +928,9 @@ AUDIENCE: public
 2. {npc} struck the render from the books at {settlement} for a season; the coffers are lighter and the nave is full.
 3. {temple} took nothing from {settlement} this quarter — {reason} — and said nothing about it afterward.
 4. The tithe was forgiven at {settlement}, which cost {temple} a great deal and bought more.
+5. {temple}'s book carries the quarter with a line through it and {reason} in the margin.
+6. Families at {settlement} who would have sold the plough kept the plough.
+7. There is a generation at {settlement} that will not hear {temple} spoken against, and this is why.
 
 ### faith.tithe.resentment (WF-7 — the counterforce) — Herald `faith` — significance: notable
 SLOTS: {settlement} {temple} {faction}
@@ -723,6 +940,8 @@ AUDIENCE: public
 3. {temple}'s take is up and its congregation is down, which the ledger notices before the pulpit does.
 4. They pay {temple} at {settlement}, and they pray at home.
 5. {faction} calls it a tax dispute. It has begun to sound like something else.
+6. The render comes in late at {settlement} now, and comes in short.
+7. Sermons at {settlement} are heard out, and the plate goes round lighter each quarter.
 
 ### faith.tithe.dispute (WF-7) — Herald `faith` — significance: routine
 SLOTS: {settlement} {counterpart} {temple} {npc} {faction} {house} {good}
@@ -731,6 +950,12 @@ AUDIENCE: public
 2. {temple} claims the mill's share at {settlement}; {faction} claims the mill.
 3. The tithe dispute at {settlement} has gone to {counterpart} for arbitration, which suits neither side.
 4. {house} has stopped rendering on {good} and dares {temple} to say so publicly.
+5. The question at {settlement} is whether the render falls on the crop or on the sale of it, and both sides have precedent.
+6. {temple}'s clerks and {faction}'s clerks have read the same old grant and arrived at different towns with it.
+7. Nobody at {settlement} is paying the disputed share while the matter is open, which suits neither argument.
+8. The market at {settlement} has taken sides, mostly against whoever collects.
+9. It is a small sum and an old principle, which is why it will take years.
+10. {house}'s factors at {counterpart} have been told to render nothing on {good} until they hear otherwise.
 
 ### faith.temple.endowed (WF-7, arc transition) — Herald `faith` — significance: notable
 SLOTS: {settlement} {temple} {house} {npc}
@@ -739,6 +964,9 @@ AUDIENCE: public
 2. {temple}'s coffers are full for the first time in a generation, and the mason has been engaged.
 3. The endowment at {settlement} is entered in {temple}'s book with the donor's conditions attached.
 4. {npc} gave the harvest of a good year to {temple}, and expects the parish to know it.
+5. The mason's terms were accepted at {settlement} without haggling, which the mason has told everyone.
+6. {temple} can lend now, and the seat at {settlement} noticed that before the parish did.
+7. The lintel will carry a name for longer than the name will be remembered.
 
 ### faith.temple.plundered (WF-7, arc transition — the sack lure) — Herald `faith` — significance: major
 SLOTS: {settlement} {temple} {faction} {route}
@@ -756,6 +984,9 @@ AUDIENCE: public
 2. The endowment at {settlement} stayed where it was and changed whose name is on it.
 3. {temple} kept its coffers through the fall — the building outlasts the creed, as buildings do.
 4. Whatever {creed} laid up at {settlement}, {rival_creed} is spending.
+5. The strongroom at {temple} was opened with the old keys, and the inventory matched.
+6. {rival_creed} inherits the debts with the plate, which is less pleasant and less discussed.
+7. The donors' names are still cut in the lintel at {settlement}, under a rite the donors never kept.
 
 ### faith.temple.coffers_dispersed (WF-7, J-WF-15 dispersal arm) — Herald `faith` — significance: notable
 SLOTS: {settlement} {creed} {temple} {band}
@@ -764,6 +995,9 @@ AUDIENCE: public
 2. The strongroom at {settlement} was found lighter than the roster promised, and {temple}'s charity is doing well this month.
 3. {creed}'s treasury was dispersed before the eviction was complete — {band} of it, by the seat's own reckoning.
 4. They came for the gold at {settlement} and found the alms had beaten them to it.
+5. Alms were given at {settlement} in the last week at a rate no ordinary year would explain.
+6. {temple}'s plate went out in small parcels, and no book records where.
+7. Whoever holds {creed}'s gold at {settlement} now will be careful about spending it for a while.
 
 ### faith.temple.splendor (WF-7) — Herald `faith` — significance: routine
 SLOTS: {settlement} {counterpart} {temple}
@@ -772,6 +1006,12 @@ AUDIENCE: public
 2. The new bell at {settlement} can be heard at {counterpart}, which is the point of the new bell.
 3. {temple}'s splendor is entered in the institution roster at {settlement} — backing lent, not bought.
 4. Gold gilds a seat at {settlement}. It has never bought one.
+5. There is glass in the east window at {temple} now, and the parish has been to look at it.
+6. Visitors to {settlement} are taken to see {temple} whether they asked to or not.
+7. {temple}'s fabric account shows more spent on the nave this year than on the poor.
+8. A splendid house draws splendid guests, and {settlement}'s seat will meet them there.
+9. The masons have not left {settlement} in years, and are not expected to.
+10. {counterpart}'s house was the finer within living memory. It is not now.
 
 ### faith.dossier.tithe_line (WF-7) — FaithSection (town dossier) — significance: n/a (dossier line)
 SLOTS: {band} {temple} {settlement}
@@ -780,6 +1020,12 @@ AUDIENCE: public
 2. Render here: {band}. {temple}'s wealth: {band}.
 3. Tithe pressure {band} against {band} piety — the sink is widening.
 4. {temple} takes {band} from {settlement}, and forgave it once, in the famine year.
+5. Render {band}; the parish pays it and talks about it.
+6. {temple}'s coffers stand {band} against a render of {band} — read that how you like.
+7. Tithe: {band}. What it buys is visible from the market square.
+8. The render here is {band}, and collected on the day.
+9. Tithe {band}. The unaffiliated rolls grow a little each year.
+10. Ask about the tithe at {settlement} and you will get an answer whether you wanted one or not.
 
 ---
 
@@ -796,6 +1042,11 @@ AUDIENCE: public
 3. The carriers came up {route} from {counterpart} and left {creed} behind them at {settlement}.
 4. {npc} said the first mass of {creed} at {settlement} to a room that was not full.
 5. Nobody at {settlement} much noticed, which is how most of them start.
+6. A room over a warehouse at {settlement} has been taken for a rite nobody there can name.
+7. {settlement}'s tolerance ledger had a slot free, and {creed} has taken it.
+8. The seat at {settlement} was informed as a courtesy and asked no questions.
+9. Whether {creed} is still at {settlement} in a decade is a question for a decade hence.
+10. Travellers of {creed} on {route} now have somewhere to stop between here and {counterpart}.
 
 ### faith.eviction (WF-8) — Herald `faith` — significance: notable
 SLOTS: {settlement} {creed} {temple} {route} {counterpart}
@@ -804,6 +1055,9 @@ AUDIENCE: public
 2. {settlement} had slots for so many rites, and {creed} was the weakest of them.
 3. The evicted congregation of {creed} has gone up {route} to {counterpart}, where there is room.
 4. {temple} took the building and the calendar; {creed}'s ministers took the road.
+5. The furnishings of {creed}'s house at {settlement} were sold where they stood.
+6. {settlement}'s roster is shorter by a rite, and the clerk recorded no reason.
+7. What was {creed}'s congregation at {settlement} will be somebody's on {route} by the spring.
 
 ### faith.suppression (WF-8) — Herald `faith` — significance: major
 SLOTS: {settlement} {creed} {npc} {reason}
@@ -820,6 +1074,9 @@ AUDIENCE: public
 2. The suppression lifted at {settlement}, and {creed} re-entered inside the season.
 3. {temple} reopened at {settlement} to a crowd nobody had counted.
 4. They said the rite was finished at {settlement}. It was resting.
+5. The vessels came back to {temple} from wherever they had been, and nobody asked where.
+6. {settlement}'s roster restores {creed} to standing, and the seat signed it without comment.
+7. There are families at {settlement} who will keep both calendars now, to be safe.
 
 ### faith.standing.cult_to_established (WF-8) — Herald `faith` — significance: routine
 SLOTS: {settlement} {creed} {temple}
@@ -828,6 +1085,12 @@ AUDIENCE: public
 2. The roster at {settlement} moves {creed} up from cult, and the tolerance ledger stops flagging it.
 3. {temple} has taken a permanent building at {settlement}; the landlord is content and the parish is used to them.
 4. {creed} stopped being a curiosity at {settlement} some time last year, and the register has caught up.
+5. {creed}'s feast at {settlement} was kept in the open street this year, which it never was before.
+6. The parish register at {settlement} has begun recording {creed}'s burials as a matter of course.
+7. {temple} pays its dues to the seat now, and the seat takes them.
+8. Tradesmen at {settlement} have started closing on {creed}'s holy days.
+9. The next quarrel at {settlement} over a niche will have {creed} on the strong side of it.
+10. Travellers of {creed} ask for the house by name at {settlement} and are pointed to it.
 
 ### faith.standing.established_to_ascendant (WF-8) — Herald `faith` — significance: notable
 SLOTS: {settlement} {creed} {rival_creed} {npc}
@@ -836,6 +1099,9 @@ AUDIENCE: public
 2. {settlement}'s calendar is {creed}'s calendar now, in everything but the name of the office.
 3. The roster at {settlement} names {creed} ascendant; {rival_creed} keeps a chapel and its dignity.
 4. They asked {npc} to bless the assize at {settlement}, which settles the question of who is ascendant.
+5. The market at {settlement} keeps {creed}'s holy days now, and the seat did not have to ask.
+6. {rival_creed}'s ministers are still invited to the seat's table, and seated further down it.
+7. What {creed} wants at {settlement} in the next generation, {creed} will mostly get.
 
 ### faith.standing.demoted (WF-8) — Herald `faith` — significance: routine
 SLOTS: {settlement} {creed} {temple}
@@ -844,6 +1110,12 @@ AUDIENCE: public
 2. The roster at {settlement} moves {creed} down — no scandal, no purge, only arithmetic.
 3. {temple} has given up its outer house at {settlement}.
 4. {creed} was ascendant at {settlement} within living memory, which is the only place it is ascendant now.
+5. {temple}'s ministers at {settlement} are fewer, and the ones remaining are older.
+6. The seat at {settlement} stopped sending to {temple} for blessings some quarters ago.
+7. {creed} keeps its feasts at {settlement}, and keeps them in the side street.
+8. The fabric account at {temple} shows repairs deferred and deferred again.
+9. Nothing was taken from {creed} at {settlement}. Less was given.
+10. A rite in decline is slow to look like one, and this one has had years.
 
 ### faith.legitimacy.crossing_up (WF-8) — Herald `faith` — significance: routine
 SLOTS: {settlement} {creed} {npc} {band}
@@ -852,6 +1124,12 @@ AUDIENCE: public
 2. {npc}'s conduct has done what a decade of preaching could not, and {creed} is {band} legitimate at {settlement} now.
 3. The stain of the old scandal has decayed off {creed}'s record at {settlement}; the crossing is entered.
 4. They have stopped apologising for {creed} at {settlement}.
+5. Disputes at {settlement} are being brought to {creed}'s ministers again, which is the only measure that counts.
+6. The roster at {settlement} enters the crossing to {band} and enters nothing about how.
+7. {npc} is asked to witness wills at {settlement} now.
+8. Men at {settlement} who would not say the name in company say it in company.
+9. A generation of ordinary conduct at {settlement} has done what no sermon did.
+10. Travellers are told at {settlement} that {creed}'s word is good here, and it is meant.
 
 ### faith.legitimacy.crossing_down (WF-8) — Herald `faith` — significance: notable
 SLOTS: {settlement} {creed} {npc} {band} {reason}
@@ -860,6 +1138,9 @@ AUDIENCE: public
 2. The stain took, and the crossing followed; {creed} is heard less respectfully at {settlement} this season.
 3. {npc}'s conduct sits on the roster beside {creed}'s standing, and the standing has moved.
 4. Nobody at {settlement} has renounced {creed}. They have merely stopped citing it.
+5. Oaths at {settlement} are being sworn on other names this season.
+6. {settlement}'s register enters the crossing to {band} and enters {reason} beside it, in full.
+7. {creed}'s ministers are still called to the deathbeds at {settlement}, and to little else.
 
 ### faith.piety.crossing_up (WF-8) — Herald `faith` — significance: routine
 SLOTS: {settlement} {temple} {band} {calamity}
@@ -868,6 +1149,12 @@ AUDIENCE: public
 2. Piety at {settlement} stands {band} — the crossing is entered, and {temple} is not asking why.
 3. Attendance at {settlement} has held past the crisis that caused it, which the register calls devout.
 4. They came for fear and stayed for the rite.
+5. {temple} has put on a further rite at {settlement} because the nave will not hold the parish at the ordinary hour.
+6. The offerings at {settlement} are up, and they are up in small coin.
+7. Work stops at {settlement} for the holy days now, and the masters have stopped arguing about it.
+8. Children at {settlement} are being sent to the rail with their grandparents.
+9. What the {calamity} began at {settlement}, habit has taken over.
+10. Piety here is {band}, and a stranger notices it before he is told.
 
 ### faith.piety.crossing_down (WF-8) — Herald `faith` — significance: routine
 SLOTS: {settlement} {temple} {band}
@@ -876,6 +1163,12 @@ AUDIENCE: public
 2. Piety at {settlement} falls to {band} — no crisis, no scandal, only a long good season.
 3. {temple} counts fewer at the rail each quarter, and the crossing is entered.
 4. A burned church holds its flock for years. {settlement}'s has finally let go.
+5. {temple}'s candles last longer at {settlement} than they used to.
+6. The offerings at {settlement} are thin, and were thin last quarter.
+7. The holy days at {settlement} are kept by the shops for the morning and by the rest not at all.
+8. {temple} has stopped ringing the lesser hours; nobody was coming to them.
+9. Observance at {settlement} is {band}, and the ministers have made their peace with it.
+10. Nothing happened at {settlement}. That is what a long good season does to a parish.
 
 ### faith.niche.contest (WF-8) — Herald `faith` — significance: routine
 SLOTS: {settlement} {creed} {rival_creed} {temple}
@@ -884,6 +1177,12 @@ AUDIENCE: public
 2. The quarrel at {settlement} was over a niche, not the altar — which did not make it quieter.
 3. {temple} lost the funerary rite at {settlement} to {rival_creed} and kept everything else.
 4. Neither creed came near the patron seat at {settlement}, and both spent a season trying.
+5. The dispute at {settlement} was over who blesses the boats, and it went to the seat to settle.
+6. {rival_creed} undercut {temple} on burial fees at {settlement}, which decided more than the preaching did.
+7. The roster at {settlement} records the niche changing hands and records no cause.
+8. {creed} keeps the lesser rite at {settlement} for now, and both houses expect to have this out again.
+9. It was not about the altar. It was never going to be about the altar.
+10. Guild men at {settlement} were asked which house they preferred, and answered by custom rather than conviction.
 
 ### faith.tolerance.shift_open (WF-8) — Herald `faith` — significance: routine
 SLOTS: {settlement} {faction} {npc}
@@ -892,6 +1191,12 @@ AUDIENCE: public
 2. The ledger at {settlement} opens a slot — {faction} judged the quarrel more expensive than the creed.
 3. {npc} argued for the strangers' rite at {settlement}, and was heard.
 4. The doors at {settlement} are open a little wider this year, and nobody has said why.
+5. Foreign carriers at {settlement} have been given leave to hire a room and use it.
+6. The gate men at {settlement} have new instructions about strangers with vessels.
+7. {faction} counted what the closed door was costing in trade, and opened it.
+8. There will be rites kept in {settlement} within the decade that nobody there can name today.
+9. The old families at {settlement} are not pleased, and are not being consulted.
+10. Travellers say {settlement} is an easier town to keep a rite in than it was.
 
 ### faith.tolerance.shift_close (WF-8) — Herald `faith` — significance: notable
 SLOTS: {settlement} {faction} {creed} {reason}
@@ -900,6 +1205,9 @@ AUDIENCE: public
 2. The ledger at {settlement} closes a slot — {reason} — and {creed}'s carriers are turning back at the gate.
 3. {faction} has decided {settlement} keeps too many calendars.
 4. Nothing is forbidden at {settlement}. It is only made difficult.
+5. The rooms the foreign rites hired at {settlement} have been let to other trades.
+6. {settlement}'s ledger closes the slot and names {reason}; the clerk wrote it without comment.
+7. Carriers of {creed} go round {settlement} now rather than through it.
 
 ### faith.mandate.band_move (WF-8) — Herald `faith` — significance: notable
 SLOTS: {settlement} {creed} {temple} {npc} {band}
@@ -908,6 +1216,9 @@ AUDIENCE: public
 2. {temple} has withdrawn its countenance from {settlement}'s seat, and {creed}'s mandate has moved with it.
 3. The divine mandate at {settlement} stands {band} — the crossing is entered, and the court has felt it.
 4. {npc} did not attend the seat's investiture at {settlement}, and everyone counted the empty chair.
+5. The seat's proclamations at {settlement} are read from the temple steps again, which they were not last year.
+6. {temple}'s blessing is entered on the seat's roll at {band}, and the court reads the roll.
+7. What the seat at {settlement} may ask of the parish has moved with the mandate, and both sides have felt it.
 
 ---
 
