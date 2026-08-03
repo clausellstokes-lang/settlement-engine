@@ -21,6 +21,24 @@
  * and has no update mode. Its 19-row ceiling only shrinks: clean the source and delete
  * the now-stale row; a new site may never buy itself an exception.
  *
+ * EXACT RE-PIN 2026-08-03 — THREE ROWS MOVED, NOTHING WAS BOUGHT. The ledger and the
+ * one exclusion are location-bound on purpose, so ordinary landed work relocates them
+ * and the walker reds until a maintainer re-measures. Re-pinned at MEASURED truth with
+ * each cause named; the ceiling is still 19, no row was added, and every issue set is
+ * byte-identical to the frozen one, which is what makes this a re-pin and not a
+ * widening:
+ *   1. `src/store/campaignWorldPulseDeferred.js` proposal-undo EXCLUSION 779 → 852,
+ *      SIGNATURE UNCHANGED (`f4ac01180f8aaf35`). Cause: `526c5e31` (WR-3 LINEAGE
+ *      CLAIM) grew the file 1030 → 1103 lines above the site. An unchanged signature
+ *      is the proof the literal's own bytes never moved — a pure relocation.
+ *   2+3. `src/domain/display/chronicleGraph.js` 258 → 260 and 273 → 279, signatures
+ *      `891f425c…` → `6a81853b…` and `7e9cd928…` → `e0f59002…`. Cause: `397c184b`
+ *      (Lane HR (1)) replaced the two inline noun-phrase fallbacks with the shared
+ *      `PULSE_OUTCOME_FALLBACK` / `PULSE_IMPACT_FALLBACK` constants and added a
+ *      comment above the first. The signatures changed because the literals really
+ *      were edited; the DEBT did not, and that is the check that matters here — both
+ *      rows still carry exactly `missing-field:id` plus their unrouted bare kind.
+ *
  * @enforced-module src/domain/region/wizardNews.js
  * @enforced-module src/domain/realm/heraldRouting.js
  */
@@ -87,12 +105,16 @@ describe('Wizard News authoring presence — static census wall', () => {
     ]);
   });
 
+  // EXACT RE-PIN 2026-08-03: `line` moved 779 → 852, SIGNATURE UNCHANGED. The cause
+  // is commit 526c5e31 (WR-3 LINEAGE CLAIM), which added 73 lines above this site
+  // (1030 → 1103); the object literal's own bytes never changed, which is exactly
+  // what the identical signature proves. Re-anchored at measured truth, not widened.
   test('the store-side proposal undo snapshot is the one exact non-authoring exclusion', () => {
     expect(census.candidateSites.length).toBe(census.sites.length + 1);
     expect(census.excludedSites).toEqual([
       expect.objectContaining({
         path: 'src/store/campaignWorldPulseDeferred.js',
-        line: 779,
+        line: 852,
         column: 23,
         signature: 'f4ac01180f8aaf35',
         routeField: 'kind',

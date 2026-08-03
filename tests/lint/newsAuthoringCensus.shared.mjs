@@ -18,10 +18,19 @@ import { ancestor } from 'acorn-walk';
 
 const REQUIRED_FIELDS = Object.freeze(['id', 'settlementIds', 'severity']);
 
+// EXACT RE-PIN 2026-08-03 (shrink-only spirit: the row is re-anchored at measured
+// truth, never widened). The snapshot moved 779 → 852 with its SIGNATURE UNCHANGED
+// (`f4ac01180f8aaf35`), which is the proof this is a pure relocation and not a new
+// or edited site: the bytes of the object literal are identical. CAUSE, named and
+// measured — commit `526c5e31` ("WR-3 LINEAGE CLAIM: graduate living members and
+// receipt both signs") grew the file 1030 → 1103 lines above this site; every other
+// commit touching the file left it at 779 (018e4119 779, 68d14324 769, b0a137db 744).
+// A line-bound exclusion is the point: it can only ever be re-anchored to a site
+// whose bytes still hash the same, so a relocation is cheap and an EDIT is not.
 const NON_AUTHORING_SITE_EXCLUSIONS = Object.freeze([
   Object.freeze({
     path: 'src/store/campaignWorldPulseDeferred.js',
-    line: 779,
+    line: 852,
     column: 23,
     signature: 'f4ac01180f8aaf35',
     reason: 'proposal-undo-snapshot',
