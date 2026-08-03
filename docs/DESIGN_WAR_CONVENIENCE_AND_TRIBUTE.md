@@ -385,6 +385,25 @@ pathological stable cycle as a tuning failure). A NEW coalition entering is
 NOT a side-switch and needs no record beyond its own formations — CV-2's
 shape applies only to a member crossing between existing webs.
 
+**TRADE AS THE PROXY FRONT — confirmed integrated, and its two absences are
+DELIBERATE (owner question 2026-08-02, ruled):** trade is war's structural
+sibling end to end — TR-1's mirrored casus commercii as the reasons layer,
+tradeWar + the corner as the contest engines, {severance, cornered,
+collapse} as the war-shaped endings, ONE disciplined crossing (the intent
+deposit, no gate relief, per WR-0c(3) + J-TR-2) — and the proxy spectrum
+(mercantile disposition channel, the merchant seat's war-averse levers,
+blockade↔embargo continuum, the containment demand doctrine, belief-lane
+economic deception) runs tariff-to-siege with no seam. TWO absences are
+decisions, not gaps: (1) NO ECONOMIC-CAMPAIGN OBJECT — the sustained
+squeeze of a rival EMERGES from standing grievances driving individually
+priced verbs, exactly as coalitions emerge from edges; building a campaign
+object would be the coalition-object mistake in commercial dress. (2) THE
+CROWN CANNOT COMMAND THE HOUSE — no seat verb orders a corner; proxy war
+through houses happens by INTEREST ALIGNMENT (the crown's war makes the
+corner profitable; the house follows the dear bands) — deniability by
+emergence, Law One's grain separation absolute. Implementing either
+"absence" is a STOP-and-report.
+
 ## §6 TUNING SURFACE (owner-signed at the soak; SP-6a class assignments; no bare floats)
 
 | Band | Wave |
