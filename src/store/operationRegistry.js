@@ -355,6 +355,12 @@ export const OPERATIONS = Object.freeze({
   hydrateAiFromSave: { opType:'hydrateAiFromSave', label:"Load AI content from a save", description:"Restores stored AI content from a saved settlement.", klass:'mechanical', slice:'aiSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   setAuth: { opType:'setAuth', label:"Set the auth session", description:"Stores the current sign-in session. It can be cleared with Clear the auth session.", klass:'mechanical', slice:'authSlice', targetScope:'global', receiptRef:null, undoToken:'clearAuth', undoState:'action' },
   clearAuth: { opType:'clearAuth', label:"Clear the auth session", description:"Signs the user out locally by clearing the sign-in session.", klass:'mechanical', slice:'authSlice', targetScope:'global', receiptRef:null, undoToken:'setAuth', undoState:'action' },
+  // The store field comes back by re-calling this with the prior URL, so the
+  // documented inverse-call token is the honest row. It is 'external:' rather
+  // than 'action' on purpose: the STORE value is restorable, but the storage
+  // object behind the old URL may already have been swept at persist time, so
+  // this is recovery through other machinery (re-upload) and not a full inverse.
+  setAvatarUrl: { opType:'setAvatarUrl', label:"Set the profile image", description:"Points the account at a newly uploaded profile image, or clears it back to the letter circle.", klass:'mechanical', slice:'authSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'external:inverse-call' },
   clearDossierEntitlements: { opType:'clearDossierEntitlements', label:"Clear dossier entitlements", description:"Removes all stored dossier entitlements.", klass:'mechanical', slice:'authSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'external:refreshDossierEntitlement' },
   refreshDossierEntitlement: { opType:'refreshDossierEntitlement', label:"Refresh a dossier entitlement", description:"Re-reads a dossier entitlement's current state.", klass:'mechanical', slice:'authSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   initAuth: { opType:'initAuth', label:"Initialize sign-in", description:"Sets up the sign-in session on startup from any stored session.", klass:'mechanical', slice:'authSlice', targetScope:'global', receiptRef:null, undoToken:'clearAuth', undoState:'action' },

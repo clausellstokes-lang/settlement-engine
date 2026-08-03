@@ -159,6 +159,33 @@ export const createAuthSlice = (set, get) => ({
     });
   },
 
+  /**
+   * Patch ONLY the profile image pointer (DESIGN_PROFILE_IMAGE.md §4).
+   *
+   * The avatar pipeline writes profiles.avatar_url directly and then calls this
+   * so the surfaces already reading auth.avatarUrl (the account circle, the nav
+   * menu) update without a reload. Deliberately NOT folded into setAuth: that
+   * action rebuilds the whole auth object from a session read, and threading one
+   * field through its nine positional parameters at every call site — for a
+   * value the very next session refresh re-reads from the profile anyway — would
+   * buy nothing and drop the field wherever a caller forgot it.
+   *
+   * The store is a CACHE of the profile here; the row is authoritative.
+   *
+   * ⚠️ The public-identity OPT-IN is deliberately absent from this store. It is
+   * owned locally by AccountIdentitySection (the FounderCreditToggle pattern),
+   * because setAuth's full-object rebuild would silently reset any consent flag
+   * held in `auth` on every session refresh — a consent switch that quietly
+   * flips itself back is worse than one that lives in one place.
+   *
+   * @param {string|null} avatarUrl
+   */
+  setAvatarUrl: (avatarUrl) => {
+    set(state => {
+      state.auth.avatarUrl = avatarUrl || null;
+    });
+  },
+
   clearAuth: () => {
     // Detach synchronously so no scheduled retry can cross an account boundary.
     // The old owner's pending writes remain in that owner's durable mirror.

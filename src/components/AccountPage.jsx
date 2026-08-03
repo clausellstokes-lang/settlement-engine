@@ -100,14 +100,17 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState(auth.displayName || '');
   const [nameSaving, setNameSaving] = useState(false);
+  // The resync key covers exactly the fields THIS draft owns. auth.avatarUrl is
+  // deliberately no longer among them: the profile image is written by
+  // AccountIdentitySection, so leaving it in the key meant that uploading an
+  // image would resync this draft and silently discard an unsaved AI-model-
+  // preference edit sitting beside it.
   const profileSourceKey = [
-    auth.avatarUrl || '',
     auth.emailNotifications !== false ? 'email:on' : 'email:off',
     auth.modelPreference || DEFAULT_MODEL_PREFERENCE,
   ].join('|');
   const [profileDraft, setProfileDraft] = useState(() => ({
     sourceKey: profileSourceKey,
-    avatarInput: auth.avatarUrl || '',
     emailNotifications: auth.emailNotifications !== false,
     modelPreference: auth.modelPreference || DEFAULT_MODEL_PREFERENCE,
   }));
@@ -123,16 +126,13 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
   if (!profileSaving && profileDraft.sourceKey !== profileSourceKey) {
     setProfileDraft({
       sourceKey: profileSourceKey,
-      avatarInput: auth.avatarUrl || '',
       emailNotifications: auth.emailNotifications !== false,
       modelPreference: auth.modelPreference || DEFAULT_MODEL_PREFERENCE,
     });
   }
 
-  const avatarInput = profileDraft.avatarInput;
   const emailNotifications = profileDraft.emailNotifications;
   const modelPreference = profileDraft.modelPreference;
-  const setAvatarInput = (avatarInput) => setProfileDraft(draft => ({ ...draft, avatarInput }));
   const setModelPreference = (modelPreference) => setProfileDraft(draft => ({ ...draft, modelPreference }));
 
   const handleSaveName = async () => {
@@ -168,8 +168,12 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
     setProfileSaved(false);
     setProfileError(null);
     try {
+      // NOTE: avatarUrl is deliberately ABSENT from this payload.
+      // AccountIdentitySection is the SINGLE WRITER of profiles.avatar_url
+      // (DESIGN_PROFILE_IMAGE.md §3/§4). Sending a draft string from here too
+      // would let a stale value clobber a freshly uploaded image on the next
+      // Save — the classic second-writer bug, and it would have been silent.
       const profile = await authService.updateProfilePreferences({
-        avatarUrl: avatarInput,
         emailNotifications,
         modelPreference,
       });
@@ -182,7 +186,7 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
         next.role || auth.role,
         next.displayName || auth.displayName,
         next.isFounder ?? auth.isFounder,
-        profile?.avatarUrl ?? next.avatarUrl ?? avatarInput,
+        profile?.avatarUrl ?? next.avatarUrl ?? auth.avatarUrl,
         profile?.emailNotifications ?? next.emailNotifications ?? emailNotifications,
         profile?.modelPreference ?? next.modelPreference ?? modelPreference,
       );
@@ -322,7 +326,6 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
       {section === 'profile' && (
         <AccountProfileSection
           auth={auth}
-          avatarInput={avatarInput} setAvatarInput={setAvatarInput}
           modelPreference={modelPreference} setModelPreference={setModelPreference}
           editingName={editingName} setEditingName={setEditingName}
           nameInput={nameInput} setNameInput={setNameInput}

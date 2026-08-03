@@ -186,6 +186,35 @@ export function encodeAvatarRung(imageSource, size) {
 }
 
 /**
+ * Decode a blob into something a canvas can draw.
+ *
+ * The crop step hands back a LOSSLESS PNG square, and every rung is then encoded
+ * from that one decode. Going through a lossless intermediate is deliberate: if
+ * the cropper handed back WebP and the rungs were re-encoded from it, the master
+ * would carry two generations of lossy compression for no benefit. The PNG never
+ * leaves memory.
+ *
+ * Prefers createImageBitmap (fast, off the main thread where supported) and
+ * falls back to an <img> + object URL, revoking it on both outcomes.
+ *
+ * @param {Blob} blob
+ * @returns {Promise<CanvasImageSource>}
+ */
+export async function decodeImageSource(blob) {
+  if (typeof createImageBitmap === 'function') return createImageBitmap(blob);
+  if (typeof Image === 'undefined' || typeof URL === 'undefined') {
+    throw new Error('Image processing is only available in the browser.');
+  }
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Could not read that image.')); };
+    img.src = url;
+  });
+}
+
+/**
  * Build the whole ladder from ONE square source.
  *
  * `encodeRung` is injected so the pure orchestration — which rungs exist, in

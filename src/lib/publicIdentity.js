@@ -83,8 +83,18 @@ export function avatarRungUrl(masterUrl, rung) {
  * @returns {{ src: string, srcSet: string, sizes: string } | null} null when there is no image
  */
 export function avatarSources(masterUrl, rung) {
-  const micro = avatarRungUrl(masterUrl, 'micro');
-  const standard = avatarRungUrl(masterUrl, 'standard');
+  // ⚠️ THE SCHEME GUARD LIVES HERE, not only in publicIdentityOf, and that is
+  // deliberate defense in depth. publicIdentityOf sanitizes the URL it reads
+  // from a profile row — but a caller can hand-assemble an identity object
+  // (the account page's own self-view legitimately does, because its optedIn
+  // semantics differ from a public surface's), and such a caller would
+  // otherwise route an unsanitized string straight into an <img src>. This
+  // function is the ONE place a rendered source is produced, so refusing a
+  // non-http(s) scheme here makes the guarantee hold for every consumer,
+  // including the ones written later by someone who never read §6.
+  const safe = safeHttpUrl(masterUrl);
+  const micro = avatarRungUrl(safe, 'micro');
+  const standard = avatarRungUrl(safe, 'standard');
   if (!micro || !standard) return null;
   if (rung === 'micro') {
     return {
@@ -93,7 +103,7 @@ export function avatarSources(masterUrl, rung) {
       sizes: `${AVATAR_RUNGS.micro}px`,
     };
   }
-  const master = avatarRungUrl(masterUrl, 'master');
+  const master = avatarRungUrl(safe, 'master');
   return {
     src: standard,
     srcSet: `${standard} ${AVATAR_RUNGS.standard}w, ${master} ${AVATAR_RUNGS.master}w`,

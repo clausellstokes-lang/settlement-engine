@@ -1,10 +1,18 @@
 /**
  * AccountProfileSection.jsx — Profile / identity section of the Account page.
  *
- * Extracted verbatim from AccountPage.jsx during decomposition. Purely
- * presentational: all state, handlers, and store access stay in AccountPage
+ * Extracted verbatim from AccountPage.jsx during decomposition. Presentational:
+ * the name/model-preference state, handlers and store access stay in AccountPage
  * and arrive via props. The RoleBadge helper moved here with it (it was only
  * used by this section).
+ *
+ * THE ONE EXCEPTION, and the reason it is one: the profile-image block
+ * (AccountIdentitySection) is SELF-CONTAINED rather than prop-driven, following
+ * the FounderCreditToggle / FounderChairBio precedent two blocks below. Its
+ * column and bucket ship with a dark migration, so it has to feature-detect and
+ * hide itself; threading that dormancy up through this component's props and
+ * AccountPage's state would spread a temporary schema condition across three
+ * files for no gain.
  */
 import { User, Shield, Check, X, Edit3, Bot, } from 'lucide-react';
 import { AI_MODEL_OPTIONS } from '../../config/pricing.js';
@@ -14,6 +22,8 @@ import FounderBadge from '../primitives/FounderBadge.jsx';
 import FounderCreditToggle from './FounderCreditToggle.jsx';
 import FounderChairBio from './FounderChairBio.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import PublicAvatar from '../primitives/PublicAvatar.jsx';
+import AccountIdentitySection from './AccountIdentitySection.jsx';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, swatch } from '../theme.js';
 import Section from './AccountSection.jsx';
 
@@ -37,35 +47,8 @@ function RoleBadge({ role }) {
   );
 }
 
-/**
- * Build a CSS background-image declaration for an avatar URL, but only for
- * http(s) URLs we can trust — never javascript:/data:/other schemes — and with
- * the value CSS-escaped so it cannot break out of the url() literal into
- * arbitrary CSS (ported master fix). Returns null when the URL is empty or not
- * a safe http(s) URL, so callers fall back to the initial-letter gradient.
- * @param {string} url
- * @returns {string | null}
- */
-function avatarBackground(url) {
-  if (!url) return null;
-  let parsed;
-  try {
-    // Parse WITHOUT a base so only absolute URLs qualify — a bare string like
-    // `");background:red;//` won't be silently resolved to a same-origin URL.
-    parsed = new URL(url);
-  } catch {
-    return null;
-  }
-  if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null;
-  const escaped = typeof CSS !== 'undefined' && CSS.escape
-    ? CSS.escape(parsed.href)
-    : parsed.href.replace(/["\\]/g, '\\$&');
-  return `center / cover no-repeat url("${escaped}")`;
-}
-
 export default function AccountProfileSection({
   auth,
-  avatarInput, setAvatarInput,
   modelPreference, setModelPreference,
   editingName, setEditingName,
   nameInput, setNameInput,
@@ -76,16 +59,24 @@ export default function AccountProfileSection({
   return (
     <Section title="Profile" icon={User}>
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: SP.lg }}>
-        {/* Avatar */}
-        <div style={{
-          width: 56, height: 56, borderRadius: '50%', flexShrink: 0,
-          background: avatarBackground(avatarInput)
-            || `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          color: swatch.white, fontWeight: 700, fontSize: FS['22'], fontFamily: serif_,
-        }}>
-          {!avatarBackground(avatarInput) && (auth.displayName || auth.user.email || '?')[0].toUpperCase()}
-        </div>
+        {/* The account's own identity, rendered through THE SAME component every
+            public surface uses (§6). Not a lookalike: a second hand-rolled avatar
+            here is how the letter-circle's size, hue and fallback rules quietly
+            drift apart from the ones the gallery shows, and how a consent bug
+            gets to hide behind "well, the account page looked right".
+            optedIn is true because this is the user looking at themselves — the
+            consent switch governs PUBLIC surfaces, not this preview. */}
+        <PublicAvatar
+          identity={{
+            displayName: auth.displayName || auth.user.email || '',
+            imageUrl: auth.avatarUrl || '',
+            optedIn: true,
+          }}
+          rung="standard"
+          size={56}
+          ring="none"
+          eager
+        />
 
         <div style={{ flex: 1 }}>
           {/* Display name */}
@@ -151,17 +142,16 @@ export default function AccountProfileSection({
             {profileError}
           </div>
         )}
-        <label htmlFor="account-avatar-url" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
-          Avatar URL
-          <input
-            id="account-avatar-url"
-            aria-label="Avatar URL"
-            value={avatarInput}
-            onChange={e => setAvatarInput(e.target.value)}
-            placeholder="https://..."
-            style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, color: INK }}
-          />
-        </label>
+        {/* THE PROFILE IMAGE (DESIGN_PROFILE_IMAGE.md §3/§4).
+            This REPLACES the old free-text "Avatar URL" box, deliberately and
+            with a behavior change worth naming: pasting a remote URL hotlinked
+            an image this product did not host, could not moderate, could not
+            sweep, and whose EXIF it never touched. The upload pipeline owns all
+            four. It is also now the SINGLE WRITER of profiles.avatar_url — the
+            old box wrote the same column from the Save-profile button below, and
+            a stale draft string there would have clobbered a freshly uploaded
+            image on the next save. */}
+        <AccountIdentitySection />
         <label htmlFor="account-model-preference" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Bot size={14} color={GOLD} /> AI model preference</span>
           <select

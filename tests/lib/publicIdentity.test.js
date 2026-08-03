@@ -102,6 +102,20 @@ describe('the size ladder', () => {
     expect(avatarRungUrl('https://h.example.com/a/b', 'micro')).toBe('https://h.example.com/a/b-32');
   });
 
+  test('DEFENSE IN DEPTH — a hostile scheme is refused even by a hand-assembled identity', () => {
+    // Regression pin. A caller that builds an identity object by hand rather
+    // than through publicIdentityOf — which the account page's own self-view
+    // legitimately does, because its consent semantics differ — would otherwise
+    // hand an unsanitized string straight to an <img src>. That bug was real and
+    // shipped for the length of one test run; this is the pin that caught it.
+    for (const hostile of ['javascript:alert(1)', 'data:image/svg+xml,<svg onload=alert(1)>', '");background:red;//']) {
+      expect(avatarSources(hostile, 'standard')).toBe(null);
+      expect(avatarSources(hostile, 'micro')).toBe(null);
+    }
+    // Non-vacuity: the safe case still produces sources.
+    expect(avatarSources(MASTER, 'standard')).not.toBe(null);
+  });
+
   test('no image yields no sources (the caller falls to the letter-circle)', () => {
     expect(avatarSources('', 'micro')).toBe(null);
     expect(avatarSources(null, 'standard')).toBe(null);

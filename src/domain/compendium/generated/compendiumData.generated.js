@@ -86,12 +86,12 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"magic-legality","concept":"Magic Legality","blurb":"Where magic exists, its standing in law runs from forbidden to celebrated. Only a major god can shift a realm's legality (see the deity axes above). A world with no magic reads as absent.","tab":"arcane","anchor":"magic","levels":[{"name":"Forbidden","reading":"Magic is outlawed; practicing it is a crime."},{"name":"Restricted","reading":"Magic is tightly controlled, permitted only in narrow licensed forms."},{"name":"Regulated","reading":"Magic is legal but overseen, with rules on who may practice and how."},{"name":"Tolerated","reading":"Magic is accepted as an ordinary part of life."},{"name":"Celebrated","reading":"Magic is embraced and openly honored."}]}
   ],
   "operations": {
-    "count": 164,
+    "count": 165,
     "exemptCount": 68,
     "byKlass": {
       "canon": 6,
       "macro": 48,
-      "mechanical": 110
+      "mechanical": 111
     },
     "scopes": ["campaign","global","save"],
     "entries": [
@@ -207,6 +207,7 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"opType":"hydrateAiFromSave","label":"Load AI content from a save","description":"Restores stored AI content from a saved settlement.","klass":"mechanical","slice":"aiSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"setAuth","label":"Set the auth session","description":"Stores the current sign-in session. It can be cleared with Clear the auth session.","klass":"mechanical","slice":"authSlice","targetScope":"global","receiptRef":null,"undoToken":"clearAuth"},
       {"opType":"clearAuth","label":"Clear the auth session","description":"Signs the user out locally by clearing the sign-in session.","klass":"mechanical","slice":"authSlice","targetScope":"global","receiptRef":null,"undoToken":"setAuth"},
+      {"opType":"setAvatarUrl","label":"Set the profile image","description":"Points the account at a newly uploaded profile image, or clears it back to the letter circle.","klass":"mechanical","slice":"authSlice","targetScope":"global","receiptRef":null,"undoToken":null},
       {"opType":"clearDossierEntitlements","label":"Clear dossier entitlements","description":"Removes all stored dossier entitlements.","klass":"mechanical","slice":"authSlice","targetScope":"global","receiptRef":null,"undoToken":null},
       {"opType":"refreshDossierEntitlement","label":"Refresh a dossier entitlement","description":"Re-reads a dossier entitlement's current state.","klass":"mechanical","slice":"authSlice","targetScope":"global","receiptRef":null,"undoToken":null},
       {"opType":"initAuth","label":"Initialize sign-in","description":"Sets up the sign-in session on startup from any stored session.","klass":"mechanical","slice":"authSlice","targetScope":"global","receiptRef":null,"undoToken":"clearAuth"},
