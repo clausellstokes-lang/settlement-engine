@@ -225,7 +225,9 @@ function parseAnnex(src, headerRe, label) {
       continue;
     }
     if (/^\*\*ARMS[:.]\*\*/.test(line)) {
-      block.arms = [...line.matchAll(/`([a-z_]+)`/g)].map((m) => m[1]);
+      // Hyphens are lawful in an arm name (`broker-town`); an underscore-only class
+      // silently dropped that arm and orphaned the two variants tagged with it.
+      block.arms = [...line.matchAll(/`([a-z][a-z0-9_-]*)`/g)].map((m) => m[1]);
       continue;
     }
 

@@ -1204,7 +1204,8 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
       "faith"
     ],
     "arms": [
-      "principled"
+      "principled",
+      "objected-to"
     ],
     "slots": [
       "settlement",
@@ -2377,7 +2378,8 @@ export const DOSSIER_CAUSAL_PROSE = /* #__PURE__ */ Object.freeze({
       "faith"
     ],
     "arms": [
-      "party"
+      "party",
+      "broker-town"
     ],
     "slots": [
       "settlement",
