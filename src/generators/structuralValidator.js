@@ -20,6 +20,7 @@ import {
 import { TIER_ORDER } from '../data/constants.js';
 import { deriveIsolationSupport } from './isolationSupport.js';
 import { institutionLadderEvicts } from '../data/institutionLadders.js';
+import { magicLedger } from '../domain/magicLedger.js';
 
 // RELATION_TYPES re-exported as alias so existing importers don't break.
 export { SPECIAL_RESOURCES as RELATION_TYPES } from '../data/resourceData.js';
@@ -374,15 +375,24 @@ export const checkStructuralValidity = (institutions, config = {}) => {
     tier           = 'town',
     tradeRouteAccess: route = 'road',
     magicLevel,
+    magicExists,
     monsterThreat:  threat = 'frontier',
     priorityMagic:  magicPriority,
     priorityMilitary: milPriority,
   } = config;
 
-  // Resolve effective magic level
-  const effectiveMagicLevel = magicPriority !== undefined
-    ? (magicPriority <= 25 ? 'low' : magicPriority >= 66 ? 'high' : 'medium')
-    : (magicLevel || 'medium');
+  // Resolve effective magic level.
+  //
+  // MG-3e (leak L6): this used to be a THIRD, divergent spelling of the band ladder
+  // (`magicPriority <= 25 ? 'low' : ...`), which had no 'none' rung at all and never
+  // read magicExists. That is why the dead-magic world with a legacy teleportation
+  // circle drew no warning — the very case the register named. It now reads the ONE
+  // canonical accessor, so a zero dial bands as 'none' and legacy vocabulary folds
+  // through canonBand instead of falling through raw. Every other input bands
+  // identically to the old ladder (verified across the 0/25/26/65/66/100 boundaries),
+  // so no existing warning moves.
+  const magicLaw = magicLedger({ config: { magicExists, magicLevel, priorityMagic: magicPriority } });
+  const effectiveMagicLevel = magicLaw.present ? magicLaw.magicLevel : (magicLevel || 'medium');
 
   // ── GATE_FEATURES checks ─────────────────────────────────────────────────
   Object.entries(GATE_FEATURES).forEach(([instName, gate]) => {
@@ -484,16 +494,25 @@ export const checkStructuralValidity = (institutions, config = {}) => {
     'Magic item consignment', 'Enchanting quarter', 'High magic district',
     'Extradimensional vault',
   ];
-  if (effectiveMagicLevel === 'low') {
+  // MG-3e (leak L6): the arm fired at 'low' and stopped there, so the STRANGEST case of
+  // all — a high-magic institution standing in a world where magic does not function, or
+  // in a town whose magic dial is zero — passed in silence. It WARNS, it never erases:
+  // MG-LAW-4 makes an authored premise sovereign, and one strange glowing tower in a
+  // mundane realm is a deliberate act the DM is entitled to. The validator's job is to
+  // say so out loud, in the DM's language, and leave the choice standing.
+  const deadMagic = magicExists === false;
+  if (deadMagic || effectiveMagicLevel === 'none' || effectiveMagicLevel === 'low') {
+    const strangeness = deadMagic
+      ? instName => `Magic does not function in this world — ${instName} cannot work as written, and stands here as a ruin, a fraud, or a mystery the table must answer for.`
+      : effectiveMagicLevel === 'none'
+        ? instName => `No magic is practised here — ${instName} has no local craft to draw on, and would be an authored oddity rather than a working institution.`
+        : instName => `Magic level is set to Low — ${instName} would be exceptionally rare and likely controversial in this setting.`;
     HIGH_MAGIC_INSTITUTIONS.forEach(instName => {
       if (expandedSet.includes(instName)) {
         violations.push({
           type:        'context_warning',
           institution: instName,
-          reason:      authoredReason(
-            instName,
-            `Magic level is set to Low — ${instName} would be exceptionally rare and likely controversial in this setting.`,
-          ),
+          reason:      authoredReason(instName, strangeness(instName)),
           severity:    authoredSeverity(instName, 'warning'),
         });
       }
