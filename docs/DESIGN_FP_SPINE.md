@@ -417,13 +417,21 @@ authored here so "SP-N landed" resolves corpus-wide.]
   register; the exclusivity ruling's true boundary was always the truth
   register, not the Herald building). The truth law and the
   contamination fence extend to dossier causal prose identically
-  (truth-side sources only, same pins). THE STATE-ANCHORED ANGLE: every
-  join family gains one mold angle in the dossier's tense — the Herald
-  narrates WHAT HAPPENED; the dossier explains WHY IT IS SO ("The
-  granary stands half-empty — the bill of the tribute year, still being
-  paid") — same families, same entailment, the standing condition
-  anchored to its causal ancestry. Frequency floors and the repetition
-  envelope cover the state-anchored forms at the family grain.
+  (truth-side sources only, same pins). **THE DOSSIER-NATIVE REGISTER
+  [refined per owner 2026-08-03]:** the dossier does NOT borrow the
+  Herald's chronicle voice — every join family gains a FOURTH register
+  in the causal annex, written in the dossier's OWN idiom: present-tense,
+  descriptive, woven INTO the page's existing prose sections as the
+  settlement explaining its own condition ("The market runs thin; the
+  routes turned east after the war and have not come back" — the
+  economy paragraph's own sentence, not a headline between panels).
+  The registers are now: HEADLINE + SUBHEADER + TELLING (the Herald's)
+  and DOSSIER-NATIVE (the town page's) — one causal truth, two house
+  voices, each native to its surface. Same families, same per-link
+  entailment, same fence; frequency floors and the repetition envelope
+  cover the dossier-native forms at the family grain, per-settlement
+  windowed (a town should not explain itself in the same words as its
+  neighbour).
 - **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion + the
   mode-speed table (J-D11(b)) landed as spine infrastructure ahead of all six.
 - **SP-8 THE AGE LAYER [CORRECTED 2026-08-02 (fp-audit) — new, per the
