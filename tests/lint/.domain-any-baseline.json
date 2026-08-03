@@ -1,6 +1,6 @@
 {
-  "total": 2270,
-  "totalAny": 2232,
+  "total": 2275,
+  "totalAny": 2237,
   "totalSuppress": 38,
   "files": {
     "src/domain/activeConditions.js": {
@@ -56,7 +56,7 @@
       "suppress": 0
     },
     "src/domain/counterfactual.js": {
-      "any": 1,
+      "any": 6,
       "suppress": 0
     },
     "src/domain/crisisLifecycle.js": {

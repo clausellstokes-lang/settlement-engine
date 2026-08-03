@@ -108,11 +108,19 @@ function buildEventFor(type, id, action) {
 // ── Manual clone-and-modify (factions / chains / replace) ────────────────
 
 /**
- * @param {SimSettlement} settlement
+ * NOTE ON `settlement`: this stays `any` rather than becoming SimSettlement.
+ * The composer below hands this function's RESULT to explainEntity /
+ * compareCausalState, and those declare their own settlement shapes
+ * (ExplainSettlement, which embeds CanonicalSettlement's REQUIRED _seed /
+ * generatorVersion / identity; CausalState). A SimSettlement in, SimSettlement
+ * out would surface five strict errors on a file whose strict allowance is
+ * zero. Threading SimSettlement is only free where the callee takes `any` —
+ * see the lane note in the commit message.
+ *
+ * @param {any} settlement
  * @param {string} type
  * @param {string} id
  * @param {string} action
- * @returns {SimSettlement}
  */
 function manualMutate(settlement, type, id, action) {
   // Pure clone strategy: spread the relevant paths so consumers
@@ -122,7 +130,7 @@ function manualMutate(settlement, type, id, action) {
   if (type === 'faction') {
     const factionId = String(id || '');
     const slug = factionId.startsWith('faction.') ? factionId.slice('faction.'.length) : factionId;
-    const factions = (settlement.powerStructure?.factions || []).map((f) => {
+    const factions = (settlement.powerStructure?.factions || []).map((/** @type {any} */ f) => {
       const fSlug = (f?.faction || f?.name || '').toLowerCase().replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '');
       const matched = f?.id === factionId || fSlug === slug;
       if (!matched) return f;
@@ -142,7 +150,7 @@ function manualMutate(settlement, type, id, action) {
 
   if (type === 'chain') {
     const chainId = String(id || '');
-    const activeChains = (settlement.economicState?.activeChains || []).map((c) => {
+    const activeChains = (settlement.economicState?.activeChains || []).map((/** @type {any} */ c) => {
       const candidateId = `chain.${(c?.needKey || '').toLowerCase()}.${(c?.chainId || '').toLowerCase()}`;
       if (chainId === candidateId || c?.id === chainId) {
         const nextStatus =
@@ -170,7 +178,10 @@ function manualMutate(settlement, type, id, action) {
  * Project the consequences of removing / weakening / strengthening an
  * entity. Pure: never mutates the input settlement.
  *
- * @param {SimSettlement|null|undefined} settlement
+ * @param {any} settlement
+ *   Stays `any`: the derivations this composes (explainEntity, deriveSystemState,
+ *   deriveDailyLife) each declare a different settlement typedef, and none of
+ *   them accepts SimSettlement.
  * @param {CounterfactualRef|null|undefined} ref
  *   `{ type, id, action }` — action defaults to 'remove'.
  * @returns {Object} CounterfactualResult
@@ -220,6 +231,10 @@ export function counterfactual(settlement, ref) {
 
   // 3. Re-derive AFTER state.
   const afterSystemState = pipelineResult?.afterSystemState || deriveSystemState(nextSettlement);
+  // Load-bearing: the pipeline's afterCausalState is typed `Object`, and
+  // compareCausalState wants a CausalState. Without this the file gains a
+  // strict error, and its strict allowance is zero.
+  /** @type {any} */
   const afterCausalState = pipelineResult?.afterCausalState || deriveCausalState(nextSettlement);
   const afterCapacities  = deriveAllCapacities(nextSettlement);
   const afterDailyLife   = deriveDailyLife(nextSettlement);
