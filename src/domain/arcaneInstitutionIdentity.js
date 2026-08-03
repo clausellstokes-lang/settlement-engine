@@ -90,9 +90,26 @@ export function institutionCatalogArcaneTag(name) {
  * arcaneIdentity can run it as its CERTAIN tier. DERIVED from the list, never re-typed —
  * a keyword added there is honoured here with no second edit, which is the whole point of
  * reusing the estate's existing vocabulary instead of spelling a fifth one.
+ *
+ * ⚠️ ONE DELIBERATE DIVERGENCE: each keyword is anchored at a WORD BOUNDARY here, and
+ * magicFilter's own `isArcaneInst` uses bare `includes()`. The reason is 'mage' inside
+ * 'PILGRIMAGE'. MG-4's realm-scope census caught it live: a mundane metropolis's
+ * "Pilgrimage destination" and "Pilgrimage services" — a CATHEDRAL's services — read as
+ * arcane content. magicFilter never trips on it because both of its callers key strictly
+ * on catalog INSTITUTION names, and no catalog institution name contains the substring
+ * (verified by scan; only two DESCRIPTIONS do). This detector is also asked about free
+ * text, where the substring is reachable, so it anchors. `archmage` is restored
+ * explicitly, since a leading boundary would otherwise lose it.
+ *
+ * The residual — magicFilter's own unanchored list, latent for the catalog and live for
+ * any future caller that passes it free text — is recorded in DESIGN_REALM_MAGIC_TOGGLE.md
+ * (MG-4 block) rather than fixed here: changing it moves filterCatalogForMagic and
+ * filterServicesForMagic, which is a live behaviour change outside this ruling's four sites.
  */
 const ARCANE_INSTITUTION_CERTAIN = new RegExp(
-  ARCANE_INST_KW.map((kw) => kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'),
+  ['archmage', ...ARCANE_INST_KW]
+    .map((kw) => `\\b${kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`)
+    .join('|'),
   'i',
 );
 

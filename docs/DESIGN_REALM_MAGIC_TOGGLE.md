@@ -467,6 +467,55 @@ magic_practitioner / magic_regime_* events (the four pulse magic kinds,
 grep-censused). (4) A mutant control per pin (un-gate one closure, prove the
 pin reds).
 
+#### ✅ MG-4 BUILT AND LANDED 2026-08-03 — tests/lib/instantWorld/mundaneRealmAcceptance.test.js
+
+20 pins, seed `mg4-acceptance`, small/realistic_regional/highIsland, 5 members.
+
+**MEASURED.** The mundane realm: every `world_law_magic` certification row green (5/5);
+zero arcane institutions, factions and services by the canonical MG-3h census; zero
+magical/wild_magic history events; zero teleport edges *even with a legacy circle planted
+in two members* (the L1 reproduction raised to realm scope); `magicProfile` all-absent on
+every axis for every member. The same-seed MAGICAL twin carries 4 arcane institutions,
+1 arcane faction, 8 arcane services and 2 magical history events — so every absence above
+is a measurement of the world and not of an empty generator.
+
+**THE TWIN-WORLD ENVELOPE (MG-LAW-3) HOLDS, AND HOLDS WELL.** members 5 vs 5 (1.000),
+institutions 156 vs 158 (0.987), factions 23 vs 23 (1.000). A mundane realm is not a
+thinner realm — suppression rides the substitution arms exactly as the law requires.
+⚠️ **THE BANDS IN THE FILE ARE PENDING, NOT OWNER-SIGNED** (§6 puts them on the soak).
+They are deliberately generous collapse-catchers so the harness stands and measures before
+the soak runs; one seed cannot answer a seed-FAMILY question. Replace `PENDING_BANDS` and
+delete its note when the owner signs.
+
+**THE PULSE PIN DISCRIMINATES SHARPLY.** Eight ticks over the mundane realm: zero magic_*
+stressor births. The magical twin, same seed and same harness: **40 `magic_deadzone`
+births**, with `magical_instability` also in its candidate space. The census matches on the
+`magic` PREFIX rather than a hand list — the first draft used this document's own four-kind
+list and missed `magical_instability` entirely.
+
+**⚠️ THE HARNESS CAUGHT ITSELF TWICE; both are recorded in the file.** (a) The first pulse
+draft passed bare settlements as `byId` values where the kernel expects
+`{ settlement, causal }` wrappers, so BOTH arms silently returned zero — a vacuous pin that
+only the twin-realm control exposed. (b) The census flagged a mundane metropolis's cathedral
+services as arcane: **'mage' matches inside 'PILGRIMAGE'**. `ARCANE_INST_KW` is unanchored;
+the detector's derived fallback now anchors at word boundaries (with `archmage` restored
+explicitly). ⚠️ **magicFilter's own list is still unanchored** — latent, not live, because
+both of its callers key strictly on catalog institution names and no catalog institution
+NAME carries the substring (verified by scan; two DESCRIPTIONS do). Recorded, not fixed:
+anchoring it moves `filterCatalogForMagic` and `filterServicesForMagic`, a live change
+outside R-BLD-5's four sites. Chair to schedule.
+
+**MUTANT CONTROLS, each reverted individually in source.** Projection stamp deleted →
+**9 of 20 red**; the projection's WORLD-FACT half dropped → **9 red**; MG-3a's teleport
+world-law gate un-gated → **1 red**; magicProfile's dead-magic envelope un-gated →
+**1 red**. Three mutants do NOT red, each for a stated reason rather than a coverage hole,
+and the file's header carries all three: the projection's DIAL half is derivable from the
+world fact (resolveConfig.js:79) so dropping it is inert and its coupling is MG-2's pin;
+magicFilter's strip and institutionProbability's dial-zero are two INDEPENDENT
+suppressions, so removing either alone still yields a mundane realm; and MG-3h's L11 gate
+is a pinned no-op on the resolved path, which is precisely why it moves no golden — its
+catching power lives in the unresolved-config pin in tests/domain/arcaneIdentity.test.js.
+
 ## §5 WHAT IS DELIBERATELY NOT BUILT
 
 No third "low magic" realm option in v1 (the binary maps to the existing
