@@ -24,10 +24,13 @@
  * mistaking human prose for an authored template.
  *
  * WHY THE TEMPLATES ARE SPELLED OUT HERE rather than derived by importing the
- * pools: this module is a ZERO-IMPORT LEAF. Every consumer of the vocabulary is
- * a dossier/display-side reader (src/domain/dossier/**), and reaching from there
- * into src/data/npcData.js would pull the whole NPC data table across a chunk
- * boundary it does not otherwise cross. The duplication is not unguarded —
+ * pools: this module is a ZERO-IMPORT LEAF. Its dossier-side consumers
+ * (src/domain/dossier/**) would, by reaching into src/data/npcData.js, pull the
+ * whole NPC data table across a chunk boundary they do not otherwise cross.
+ * (HK-3 added a generator-side consumer too — hookVariety.js takes UNTYPED for
+ * its draw registry — and the leaf property is what keeps that import free:
+ * importing this module drags nothing behind it, in either direction.) The
+ * duplication is not unguarded —
  * tests/lint/hookThemeTotality.walker.test.js asserts EXACT set equality in both
  * directions against the live pools, so an added, edited, or deleted template
  * reds the gate on the same commit that moves it. (Recorded per §3's

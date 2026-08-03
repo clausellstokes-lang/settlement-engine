@@ -307,6 +307,23 @@ describe('HK-2 retention — the seam is DARK by default (J-HK-5 convergence)', 
     const settlement = gen({ settType: 'city', tradeRouteAccess: 'random_trade', terrainOverride: 'auto', monsterThreat: 'random_threat', culture: 'random_culture' }, 'hk2-structured');
     const bare = deriveAllStructuredHooks(settlement);
     expect(JSON.stringify(deriveAllStructuredHooks(settlement, {}))).toBe(JSON.stringify(bare));
-    expect(deriveAllStructuredHooks(settlement, { retention: true }).length).toBeLessThan(bare.length);
+
+    // "Lighting it changes something" is a claim about the LAYER, not about one
+    // lucky seed — and wave HK-3 proved the difference by breaking this pin. HK-3
+    // cures theme repeats at the DRAW, and it cured seed 'hk2-structured' so
+    // completely that this city now has no above-K overflow left for retention to
+    // take: the old single-seed assertion read 29 < 29 and failed a layer that is
+    // working exactly as designed. Measured over the family below at HK-3: 4 of 6
+    // cities still drop, none gains. So the pin now asserts the layer's two real
+    // properties — retention NEVER adds a hook anywhere, and it still bites
+    // SOMEWHERE — which no single seed's luck can make vacuous or false.
+    const family = Array.from({ length: 6 }, (_, i) => gen({ settType: 'city', tradeRouteAccess: 'random_trade', terrainOverride: 'auto', monsterThreat: 'random_threat', culture: 'random_culture' }, `hk2-structured-${i}`));
+    const pairs = family.map((s) => [deriveAllStructuredHooks(s).length, deriveAllStructuredHooks(s, { retention: true }).length]);
+    expect(pairs.every(([, lit]) => lit > 0), 'retention emptied a structured list').toBe(true);
+    expect(pairs.every(([dark, lit]) => lit <= dark), 'retention ADDED a hook — it may only drop').toBe(true);
+    expect(
+      pairs.filter(([dark, lit]) => lit < dark).length,
+      `retention dropped nothing anywhere in the family (${JSON.stringify(pairs)}) — the layer is inert, not merely dark`,
+    ).toBeGreaterThan(0);
   });
 });

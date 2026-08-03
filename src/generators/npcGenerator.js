@@ -14,6 +14,7 @@ import { nativeSemanticName, nativeSemanticNames } from '../domain/content/custo
 import { getUpgradeOpportunities } from './economicGenerator.js';
 import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';
 import { drawUnique } from './hookVariety.js';
+import { themeOfText } from './hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js';
@@ -70,10 +71,16 @@ const generateNPCGoal = role => {
 };
 
 // generateSingleNPC
-// `usedTitles` — the settlement-scoped anti-repetition registry, created once per
-// generateNPCs() call and threaded to every NPC so no two NPCs emit the same
-// loyalty hook. title1 and title2 are drawn against the SAME registry (title2 is
-// therefore always distinct from title1 without the old guard needing to prove it).
+// `hookRegistry` — the settlement-scoped anti-repetition registry, created once
+// per generateNPCs() call and threaded to every NPC. `.titles` is the family Set
+// that stops two NPCs emitting the same loyalty STRING (wave E batch E2);
+// `.themes` is HK-3's second Set, which stops them telling the same BEAT in two
+// different strings. title1 and title2 are drawn against the SAME registry
+// (title2 is therefore always distinct from title1 without the old guard needing
+// to prove it). ONE object rather than two positional Sets on purpose: a call
+// site that forgets to thread it hits `used.has is not a function` at the first
+// draw, where two loose Sets would have silently degraded to naive picks and
+// regressed the repeat rate with every gate still green.
 const generateSingleNPC = (
   role,
   namingTier,
@@ -82,7 +89,7 @@ const generateSingleNPC = (
   tier,
   config = {},
   institutions = [],
-  usedTitles,
+  hookRegistry,
   generationContext = null,
 ) => {
   const gender = _rng() > 0.5 ? 'male' : 'female';
@@ -105,8 +112,8 @@ const generateSingleNPC = (
     institutions,
     worldLaw,
   );
-  const title1 = generateCharacterTitle(category, config, usedTitles);
-  const title2 = _rng() > 0.5 ? generateCharacterTitle(category, config, usedTitles) : null;
+  const title1 = generateCharacterTitle(category, config, hookRegistry);
+  const title2 = _rng() > 0.5 ? generateCharacterTitle(category, config, hookRegistry) : null;
   const plotHooks = title2 && title2 !== title1 ? [title1, title2] : [title1];
   const powerLevel = generateNPCGoal(role);
   return {
@@ -255,7 +262,7 @@ const filterByGuild = (
   culture,
   tier,
   config = {},
-  usedTitles,
+  hookRegistry,
   generationContext = null,
 ) => {
   const guildInsts = institutions.filter(isCommerceGuild);
@@ -270,7 +277,7 @@ const filterByGuild = (
     tier,
     config,
     institutions,
-    usedTitles,
+    hookRegistry,
     generationContext,
   );
   npc.title = `${pickLast(culture, 'guild_master')} of ${guildName}`;
@@ -596,22 +603,30 @@ const generateNPCRelType = (role, category = 'other', config = {}) => {
   return pickFromArray(NPC_SECRETS[category] || NPC_SECRETS.other);
 };
 
+// drawLoyalty — the ONE spelling of a themed loyalty draw (wave HK-3).
+// `.titles` is the family registry (wave E batch E2); `.themes` is HK-3's beat
+// registry and `themeOfText` its closed-vocabulary classifier, so a settlement
+// prefers a template whose BEAT it has not told yet before it settles for one
+// whose beat it has. Both registries are settlement-scoped and transient — the
+// draw NEVER persists a theme, which is why HK-2's projection layer and this one
+// can disagree about nothing. drawUnique spends exactly one roll in every arm
+// (HK-LAW-6), so the surrounding stream is unmoved; only WHICH template a given
+// roll lands on changes, and that is HK-3's disclosed same-seed shift.
+const drawLoyalty = (pool, reg) => drawUnique(pool, reg?.titles, undefined, reg?.themes, themeOfText);
+
 // generateCharacterTitle
-// `usedTitles` is the settlement-scoped anti-repetition draw registry (a Set of
-// hook strings already emitted by any NPC in this population). Each authored
-// loyalty string is its own family, so the string itself is the family id: the
-// final pool draw goes through drawUnique(pool, usedTitles) instead of a naive
-// pick, which prefers a not-yet-emitted variant. Each branch still consumes the
-// SAME number of RNG rolls it always did (drawUnique spends one roll, exactly
-// like the pick it replaces), so title2 / power / downstream draws are unmoved.
-const generateCharacterTitle = (category = 'other', config = {}, usedTitles) => {
+// `hookRegistry` is the settlement-scoped anti-repetition draw registry threaded
+// from generateNPCs. Each authored loyalty string is its own family, so the
+// string itself is the family id, and the final pool draw goes through
+// drawLoyalty instead of a naive pick. Each branch still consumes the SAME
+// number of RNG rolls it always did (drawUnique spends one roll, exactly like
+// the pick it replaces), so title2 / power / downstream draws are unmoved.
+const generateCharacterTitle = (category = 'other', config = {}, hookRegistry) => {
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
   const tier = config.tier || config.settType;
 
   // Small settlements: high chance of generic community loyalty description
-  if (['thorp', 'hamlet'].includes(tier) && _rng() < 0.45) {
-    return drawUnique(NPC_FACTION_LOYALTY.small_settlement || NPC_FACTION_LOYALTY.other, usedTitles);
-  }
+  if (['thorp', 'hamlet'].includes(tier) && _rng() < 0.45) return drawLoyalty(NPC_FACTION_LOYALTY.small_settlement || NPC_FACTION_LOYALTY.other, hookRegistry);
 
   // Stress-driven category bias
   if (stresses.length > 0 && _rng() < 0.4) {
@@ -635,11 +650,11 @@ const generateCharacterTitle = (category = 'other', config = {}, usedTitles) => 
     const biasedCategories = [...new Set(stresses.map(s => STRESS_TO_CATEGORY[s]).filter(Boolean))];
     if (biasedCategories.length > 0) {
       const biasedCat = pickFromArray(biasedCategories);
-      if (NPC_FACTION_LOYALTY[biasedCat]) return drawUnique(NPC_FACTION_LOYALTY[biasedCat], usedTitles);
+      if (NPC_FACTION_LOYALTY[biasedCat]) return drawLoyalty(NPC_FACTION_LOYALTY[biasedCat], hookRegistry);
     }
   }
 
-  return drawUnique(NPC_FACTION_LOYALTY[category] || NPC_FACTION_LOYALTY.other, usedTitles);
+  return drawLoyalty(NPC_FACTION_LOYALTY[category] || NPC_FACTION_LOYALTY.other, hookRegistry);
 };
 
 // pickTitle
@@ -1403,10 +1418,11 @@ export const generateNPCs = (
   const targetCount = Math.max(randInt(min, max), Number(config?._minNpcCount) || 0);
   const npcs = [];
   // Settlement-scoped anti-repetition draw registry: shared across EVERY NPC in
-  // this population so the same loyalty hook is never emitted twice (drawUnique
-  // prefers an unused pool variant). This is the machinery behind the hook
-  // repeat-rate envelope; see hookVariety.js.
-  const usedTitles = new Set();
+  // this population, so the same loyalty STRING is never emitted twice (`titles`,
+  // wave E batch E2) and the same BEAT is not retold in a different string while
+  // an untold one is still available (`themes`, wave HK-3). This is the machinery
+  // behind the hook repeat-rate and theme-repeat envelopes; see hookVariety.js.
+  const hookRegistry = { titles: new Set(), themes: new Set() };
   const candidates = getUpgradeOpportunities(institutions, tier, weights)
     .filter(worldLaw.allowsRole);
 
@@ -1513,7 +1529,7 @@ export const generateNPCs = (
         tier,
         npcConfig,
         institutions,
-        usedTitles,
+        hookRegistry,
         worldLaw,
       ));
     }
@@ -1526,7 +1542,7 @@ export const generateNPCs = (
       culture,
       tier,
       npcConfig,
-      usedTitles,
+      hookRegistry,
       worldLaw,
     );
     if (guildNPC) npcs.push(guildNPC);
@@ -1558,7 +1574,7 @@ export const generateNPCs = (
       tier,
       npcConfig,
       institutions,
-      usedTitles,
+      hookRegistry,
       worldLaw,
     ));
     usedRoles.add(chosen.role);

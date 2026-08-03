@@ -1767,3 +1767,84 @@ substring matching, key order, current values, and non-edge behavior while
 making the same measurement `1,169 → 2,393` (`2.047×`) under the existing
 `2.6×` ceiling, with zero fallback scans. The Roads and performance verification
 set passed 163/163.
+
+## 2026-08-03 — HK-3 theme-aware loyalty draws (RULED shift, re-recorded in-commit)
+
+**The ruling that authorises this re-record** is `docs/DESIGN_HOOK_NONREDUNDANCY.md`
+§3 HK-3, "SAME-SEED DISCLOSURE" — architected under full owner delegation
+2026-08-02, which names the golden re-record as part of the HK-3 commit under the
+war volume's §10.4 discipline, field-level diff quoted. No golden moved
+unexpectedly; the one that moved is the one the ruling said would.
+
+**What changed in the engine.** `drawUnique` (src/generators/hookVariety.js) gained
+an optional second registry. It already refused to emit the same authored STRING
+twice per settlement; it now also prefers a template whose THEME the settlement has
+not spoken yet, using HK-1's closed vocabulary. Candidate preference, stopping at
+the first non-empty tier: (1) unused family AND unused theme, (2) unused family,
+(3) the whole pool. The three `NPC_FACTION_LOYALTY` draw sites in
+`generateCharacterTitle` pass a settlement-scoped `{ titles, themes }` registry
+created once per `generateNPCs` call.
+
+**The roll budget did not move (HK-LAW-6).** Every arm spends exactly ONE `_rng()`
+call, so the RNG stream length is unchanged and no downstream draw shifted. Pinned
+per-arm and over a whole draw sequence in
+`tests/generators/hookThemeDraws.test.js`, with a guard-the-guard proving the two
+sequences genuinely diverge.
+
+**FIELD-LEVEL DIFF.** Four settlements (town/city/metropolis/hamlet, seed
+`golden-master-v3`) were generated in this tree and in a detached worktree at the
+pre-HK-3 base `1a820e8c`, then compared path by path. The ENTIRE diff:
+
+```
+  17  /metropolis/npcs[]/plotHooks[]        17  /metropolis/factions[]/members[]/plotHooks[]
+  11  /city/npcs[]/plotHooks[]              11  /city/factions[]/members[]/plotHooks[]
+   7  /town/npcs[]/plotHooks[]               7  /town/factions[]/members[]/plotHooks[]
+   1  /hamlet/npcs[]/plotHooks[]             1  /hamlet/factions[]/members[]/plotHooks[]
+```
+
+No other path differs. No array changed LENGTH, no key was added or removed, no
+type changed. The `factions[].members[]` column is the same objects seen through
+the JSON alias, not a second shift. Two representative substitutions — each a
+different template from the SAME authored, context-scoped pool, which is why a
+redraw is plausible by construction (HK-LAW-1: drop or redraw, never rewrite):
+
+```
+town/npcs[].plotHooks[]
+  BEFORE  Someone is paying their soldiers more than their salary. The soldiers aren't saying who.   [corruption]
+  AFTER   A spy they turned is now being turned back, and feeding information in both directions.    [betrayal]
+
+city/npcs[].plotHooks[]
+  BEFORE  They know something small that connects to something much larger. They haven't realised the connection. Yet.  [forbidden_knowledge]
+  AFTER   Someone they trust completely has started behaving in ways that don't add up.                                 [betrayal]
+```
+
+**THE MANIFEST.** `tests/fixtures/generator-golden-master.json` re-recorded with
+`UPDATE_GOLDEN=1`: **525 of 525 keys changed value; the key SET is unchanged
+(525 → 525, identical membership, 0 added, 0 removed) and all 525 hashes remain
+unique.** Every key moving is expected rather than alarming — each key hashes a
+WHOLE settlement, and every settlement has NPCs carrying loyalty hooks, so a
+prose-selection change anywhere flips the hash everywhere. The manifest was proven
+GREEN at base `1a820e8c` before re-recording, so 100% of the drift is this wave's.
+
+**MEASURED EFFECT** — 60 settlements (5 tiers × 12 seeds), both trees:
+
+| census (persisted NPC hook arrays) | base 1a820e8c | HK-3 | |
+|---|---|---|---|
+| total hooks | 855 | 855 | unchanged — HK-3 drops nothing |
+| exact duplicates | 28 | 28 | unchanged — the pool-exhaustion residual |
+| above-K beat repeats | 187 | 85 | **−54.5%, the source cure** |
+
+At the display aggregator's wider view (`collectPlotHooks`, which also carries
+relationship tensions and five sources HK-3 does not draw) the same corpus moves
+848 → 771 above-K repeats (−9.08%) over an unchanged 2535 collected hooks. The
+dilution is the honest reading: HK-3 cures the pool draws, and the remaining
+projection-side overflow is HK-2's to take once the owner signs its K table.
+
+**ONE PIN REPAIRED, NOT WEAKENED.** `hookRetention.test.js`'s
+"deriveAllStructuredHooks — same helper, same dark default" asserted `lit < dark`
+on the single seed `hk2-structured`. HK-3 cured that city so completely that
+retention now has no above-K overflow left to take there, and the assertion read
+`29 < 29`. The claim it was making is about the LAYER, not one seed's luck, so it
+now runs a six-city family and asserts retention never ADDS a hook anywhere and
+still drops somewhere (measured: 4 of 6 still drop). Strictly stronger, and no
+longer hostage to a lucky seed.
