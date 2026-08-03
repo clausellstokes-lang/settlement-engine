@@ -140,8 +140,59 @@ bible mandates the swap.)*
 
 ---
 
+## ⭐ LD LADDER — BUILD STATE, MEASURED 2026-08-03 (Lane F; CHECK-GIT-FIRST receipts)
+> Every row below was checked against the tree at `d6c5af8e`, not inferred from
+> this document. SOL_QUEUE §2 item 21 asks for exactly this and deliberately
+> claimed nothing; these are the receipts. **Read this block before dispatching
+> any LD item** — one lane was already dispatched greenfield against an
+> already-complete surface (operator messages), and the ladder now has three
+> different kinds of "open".
+>
+> | item | state | receipt |
+> |---|---|---|
+> | LD-1 | ⛔ **OPEN, BLOCKED** | no `landingSettlementFixture.js`, no `MiniatureFrame`; see the STOP note in LD-1 below |
+> | LD-2 | ✅ **BUILT** @ `cf7243ab` | `components/nav/NavDivider.jsx` + `NavRibbon.jsx`; `navDividers.test.jsx` 9/9 |
+> | LD-3 | ✅ **BUILT** @ `5a6d7aef` | `components/footer/LegalRibbonRow.jsx`, route-scoped suppression; `landingFooterMigration.test.jsx` 6/6 |
+> | LD-3b | 🔶 **OPEN** — LD-3's successor, not its duplicate | the row LD-3b reuses now exists and is eager; see the STOP note in LD-3b |
+> | LD-4 | ⛔ OPEN, blocked by LD-1 | shares LD-1's frame contract and its blocker |
+> | LD-5 | 🔶 OPEN (chrome only) | the Account deep-links (`?section=`) and all three About routes are LANDED by other lanes — LD-5's remaining work is the MENU LAYER, nothing else. ⚠️ the Messages amendment binds |
+> | LD-6 | ⛔ OPEN, **OWNER-GATED** | no `annual` anywhere in `config/pricing.js` or `services/stripe.js`; W-1's annual credit CADENCE is routed to the owner (`cca61099`) and item 7 says the toggle does not ship until it is ruled |
+> | LD-7 | 🔶 OPEN | no moment-scope registry exists; `PricingMomentCard` still mounts at App level (`App.jsx:74`) off a flag no route change clears — the reported bug is live |
+> | LD-8 | 🔶 OPEN | orders 1+2 are deletions (`GenerateWizard.jsx:518` top `PipelineRail`, `:484` `LockControls`); order 3 is the `scroll-padding-top`/`scroll-margin-top` cure from `CHROME` |
+> | LD-9 | ✅ BUILT (Lane C) | the About split landed; §4 (the dropdown) belongs to LD-5 |
+> | LD-10 | 🔶 OPEN | `PrivacySettings.jsx:187` still reads "Off by default." and the market toggle is still opt-IN |
+> | LD-11 | 🔶 OPEN | no reset map on the route registry; no `resetSection` anywhere in `src/` |
+>
+> **⚠️ THE LADDER'S REAL GATE IS THE SIZE RATCHET, and it is not in any LD spec.**
+> `src/App.jsx` and `src/components/OutputContainer.jsx` both sit at a
+> TOLERANCE-0 ceiling (App.jsx at its frozen `scripts/.size-baseline.json`
+> number; OutputContainer at **exactly 600**, its layer ceiling, unbaselined).
+> Any LD item that adds a line to either file reds `sizeBaseline` AND eslint.
+> LD-2 and LD-3 each paid for themselves by extracting a leaf and ratcheting the
+> number DOWN (720 → 693 → 659), which is the pattern the remaining items must
+> follow — budget the extraction into the item, do not discover it at the gate.
+
+---
+
 ## LD-1 — THE LIVING MINIATURE (owner-ordered 2026-08-01; implementation-ready spec;
 ## assigned to the external implementer)
+
+> ⛔ **STOP-AND-REPORT, Lane F 2026-08-03 — a substrate blocker the binding spec
+> does not name.** DESIGN_LIVING_MINIATURE.md §3's DEMO MOUNT CONTRACT (work
+> item LM-2b) requires threading a `demoMode` prop through
+> `src/components/OutputContainer.jsx`. That file measures **exactly 600
+> effective lines — precisely its layer ceiling** (measured with eslint's own
+> Linter, the enforcer's rule). It carries no `.size-baseline.json` entry
+> because it has never exceeded the ceiling, so **one added effective line makes
+> it a NEW offender**: `tests/lint/sizeBaseline.test.js`'s exact-set arm reds and
+> the `max-lines` layer rule errors. LD-1 therefore cannot land as specced
+> without either net-zero surgery inside OutputContainer or a decomposition —
+> and OutputContainer is not on THE DECOMPOSITION WAVE's list, so nobody is
+> currently rowing toward it. **Budget that work INTO LD-1, or rule the
+> decomposition first.** (The rest of LD-1 is unstarted: no
+> `landingSettlementFixture.js`, no `MiniatureFrame.jsx`, and the fixture
+> full-emission mode is not in `scripts/generate-landing-fixture.mjs`. Nothing
+> here is a fault in the design — the ceiling simply moved under it.)
 
 > **SUPERSEDED — docs/DESIGN_LIVING_MINIATURE.md is the binding spec** (fully
 > architected 2026-08-01; self-audit corrections folded 2026-08-02). The sketch
@@ -208,6 +259,25 @@ explicitly waives legibility at miniature scale; exactness is the goal.
 ## LD-2 — NAV DIVIDERS: LINES FOR SECTIONS, CHEVRONS FOR THE JOURNEY (owner-ordered
 ## 2026-08-01; implementation = the external implementer)
 
+> ✅ **BUILT 2026-08-03 (Lane F) @ `cf7243ab`.** `components/nav/NavDivider.jsx`
+> (inline SVG, `preserveAspectRatio="none"` + `vector-effect: non-scaling-stroke`
+> so one viewBox serves every bar height at a matched hairline weight) and
+> `components/nav/NavRibbon.jsx` (the ribbon lifted verbatim out of App.jsx —
+> the shell was at its frozen ceiling, so the extraction paid for the feature and
+> ratcheted 720 → 693). Placement is DERIVED via `dividerKind` → `flowsInto` →
+> NAV_FLOW, never a boundary map, and `navDividers.test.jsx` (9 tests) censuses
+> the DOM against that derivation rather than against a frozen list. The desktop
+> ribbon stopped mounting `NavFlowArrow`; the MOBILE bar keeps it, and
+> `navFlowArrows.test.jsx`'s desktop half became an absence pin WITH a positive
+> control so it can never pass on a ribbon that simply lost the mark. Three
+> negative controls executed. **STILL OPEN, unchanged:** the ⚠️ TASTE CALL on the
+> trio's OUTER boundaries (WELCOME|CREATE, REALM|COMPENDIUM) — the specced
+> default (plain lines) SHIPPED, and flipping it is still a one-line predicate
+> change in `dividerKind`, not a map edit. **DEFERRED, recorded:** the apex-
+> clearance measurement is geometry, so it was satisfied by construction (16px
+> label padding + a 7px mark in a gap-0 seam) rather than pinned — jsdom has no
+> layout engine, and a fake geometry pin is worse than a recorded deferral.
+
 **The order (owner, on the header nav):** items separated by vertical lines extending
 top-to-bottom of the bar — EXCEPT within the Create → Library → Realm trio, whose
 dividers become full-height ARROWS: two strokes from the bar's top and bottom edges
@@ -266,6 +336,25 @@ App.jsx:816); the placement map was a hardcoded second truth routes.js forbids;
 
 ## LD-3 — THE PAGE ENDS ON THE PAINTING (owner-ordered 2026-08-01; implementation =
 ## the external implementer)
+
+> ✅ **BUILT 2026-08-03 (Lane F) @ `5a6d7aef`.** `components/footer/
+> LegalRibbonRow.jsx` is the one row module; App.jsx mounts it inside the global
+> footer on every non-landing route and `LandingBelowFold`'s band mounts it on
+> the landing, so the copy cannot fork. Suppression is route-scoped
+> (`view !== 'home'`). Pricing, Terms, Privacy, Feedback, © and the anti-AI line
+> all migrated; the mobile clearance is
+> `bottomClearance(CHROME.footerPadMobile)` on the landing mount only, pinned in
+> BOTH directions so the migration cannot double-pad. The eager/downward import
+> discipline holds by construction (App.jsx imports it statically; the lazy
+> landing chunk imports it from there). App.jsx ratcheted 693 → 659.
+> `landingFooterMigration.test.jsx` 6/6, driving the REAL landing through the
+> shell with the lazy chunk awaited — the reachability pin is not vacuous — plus
+> three negative controls. **DEFERRED, recorded not dropped:** the rect-above-
+> the-bar pin (the Terms link's bounding rect sitting above the mobile nav) is
+> layout and belongs to the `e2e/` harness; jsdom would make it vacuous. The
+> `:461` "sits flush against the global app footer" comment and the document-end
+> `scrollHeight` pin belong to LD-3b's model and were not written against the
+> superseded one.
 
 **The order (owner, at the landing bottom):** the landing page currently stacks TWO
 footers — its own §06 artwork-band footer (the painted create scene + brand row),
@@ -382,6 +471,29 @@ the voice is fixed at the SOURCE, never faked on the landing.
 
 ## LD-3b — THE TWO RIBBONS (owner amendment 2026-08-01 to LD-3; supersedes LD-3's
 ## document-end model with a stronger one)
+
+> 🔶 **OPEN — LD-3 landed first ON PURPOSE, and made this cheaper (Lane F,
+> 2026-08-03).** LD-3b reuses "LD-3's migrated line" as its ribbon content; that
+> row now EXISTS as an eager module (`components/footer/LegalRibbonRow.jsx`), so
+> constraint 4's "its OWN tiny component rendered EAGERLY, NEVER inside the lazy
+> below-fold chunk" is already satisfied — the conversion is a MOUNT MOVE (band →
+> fixed chrome beside the header at the App.jsx mount) plus the hero/scrim work,
+> not a new component. Three substrate notes for whoever takes it:
+> 1. `computeScrollProgress` lives at **`src/components/loadingJourney/
+>    useScrollJourney.js:40`** with the playhead hardcoded at
+>    `scrollY + viewportH * 0.5` (constraint 2 names the function but not the
+>    path); its pin is `tests/components/scrollJourney.test.js`.
+> 2. `src/index.css:329`'s `.sf-landing-hero { min-height: 86vh }` and its
+>    `background-attachment: fixed` are both still exactly as the 2026-08-02
+>    self-audit described — the correction stands unamended.
+> 3. ⚠️ **App.jsx is again the gate.** It is at its frozen number (659 after
+>    LD-3), TOLERANCE-0, so mounting the ribbon there must be net-zero or pay for
+>    itself with another extraction. Budget it into the item.
+>
+> Constraint 7's scrim-terminus pin ("the COMPUTED GRADIENT TERMINUS, not just
+> the element's bounding box", at two viewport heights) is a real-browser
+> assertion: it belongs in `e2e/`, and writing it in jsdom would produce exactly
+> the vacuous pass the constraint's own wording warns about.
 
 **The owner's observation + solution:** at scroll-top, the hero shader visibly fails
 to reach the viewport bottom (a floating seam mid-artwork). Rather than retune the
