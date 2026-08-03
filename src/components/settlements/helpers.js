@@ -6,13 +6,11 @@ import {
 } from '../../domain/factionRename.js';
 
 // ── Save migration ─────────────────────────────────────────────────────────
-export function migrateConfig(config) {
-  if (!config) return {};
-  const c = { ...config };
-  if (c.magicExists === undefined) c.magicExists = (c.priorityMagic ?? 50) > 0;
-  if (!c.nearbyResourcesState) c.nearbyResourcesState = {};
-  return c;
-}
+// MG-3f (leak L8): the magicExists inference used to be spelled here, in
+// SettlementDetail.jsx and in FoundingWorlds.jsx — three homes for the single most
+// load-bearing bit in a legacy save. It now lives in ONE dependency-free leaf; this
+// module keeps the `migrateConfig` spelling every existing importer already reaches for.
+export { migrateSettlementConfig as migrateConfig } from '../../lib/settlementConfigMigration.js';
 
 // buildInterSettlementNPCs (shared with the canonical save flow) is imported
 // from domain/relationships/neighbourBackLink.js. The manual-link and

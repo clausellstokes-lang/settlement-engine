@@ -25,18 +25,13 @@ import { useStore } from '../../store/index.js';
 import { anonAtCap } from '../../lib/anonGenCounter.js';
 import { SAMPLE_SETTLEMENTS, forkSeedFor } from '../../data/sampleSettlements.js';
 
-// The Library's fork normalizes the config through settlements/helpers.migrateConfig.
-// That module carries the whole saves-panel helper set; importing it here dragged it
-// into this lazy create-surface chunk and rebalanced the shared graph (+bytes toward
-// the first-paint closure — the recorded shared-chunk hazard). migrateConfig is a
-// two-field default-fill, so it is inlined verbatim to keep the fork byte-identical
-// without the cross-chunk import.
-function normalizeConfig(config) {
-  const c = { ...config };
-  if (c.magicExists === undefined) c.magicExists = (c.priorityMagic ?? 50) > 0;
-  if (!c.nearbyResourcesState) c.nearbyResourcesState = {};
-  return c;
-}
+// MG-3f (leak L8): this file used to INLINE the Library's migrateConfig verbatim, for a
+// real reason it recorded — importing settlements/helpers.js dragged the whole saves-panel
+// helper set into this lazy create-surface chunk and pushed bytes toward the first-paint
+// closure (the recorded shared-chunk hazard). The rule now lives in a dependency-free leaf
+// that carries NOTHING else, so the import costs two statements instead of a helper set
+// and the fork's justification is dissolved rather than tolerated.
+import { migrateSettlementConfig as normalizeConfig } from '../../lib/settlementConfigMigration.js';
 
 export default function FoundingWorlds({ onNavigate }) {
   const generate = useStore((s) => s.generateSettlement);

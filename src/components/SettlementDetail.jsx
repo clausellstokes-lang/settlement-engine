@@ -84,19 +84,9 @@ const REL_COLORS = {
   hostile:'#8b1a1a', neutral:'#6b5340',
 };
 
-// ── Save migration ─────────────────────────────────────────────────────────
-// Upgrades old save format to current schema. Safe to call on any save.
-function _migrateConfig(config) {
-  if (!config) return {};
-  const c = { ...config };
-  // Add magicExists if missing (infer from priorityMagic)
-  if (c.magicExists === undefined) {
-    c.magicExists = (c.priorityMagic ?? 50) > 0;
-  }
-  // Ensure nearbyResourcesState exists
-  if (!c.nearbyResourcesState) c.nearbyResourcesState = {};
-  return c;
-}
+// MG-3f (leak L8): a zero-caller copy of the saved-config migration lived here and had
+// already rotted into dead code. The rule has ONE home now —
+// src/lib/settlementConfigMigration.js — and the dead-code guard keeps this one buried.
 
 // ── NPC pairing categories by relationship type ───────────────────────────────
 const NPC_PAIR_CATS = {
