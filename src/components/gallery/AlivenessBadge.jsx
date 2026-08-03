@@ -9,7 +9,6 @@
  * Used on the gallery card meta row, the public dossier meta line, and the
  * Campaigns-tab card.
  */
-import { Activity } from 'lucide-react';
 import { clampAliveness } from '../../lib/galleryAliveness.js';
 import { BORDER2, CARD_ALT, GREEN, INK, sans, FS } from '../theme.js';
 
@@ -37,7 +36,6 @@ export default function AlivenessBadge({ score, size = 'sm' }) {
         whiteSpace: 'nowrap',
       }}
     >
-      <Activity size={compact ? 11 : 13} aria-hidden="true" />
       Living world {value}
     </span>
   );

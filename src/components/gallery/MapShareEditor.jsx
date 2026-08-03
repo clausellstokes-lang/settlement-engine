@@ -19,7 +19,6 @@
  */
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Globe, Copy, Check, Image as ImageIcon, Save } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { shareMap, unshareMap, updateMapGalleryMetadata, fetchCampaignGalleryFields } from '../../lib/gallery.js';
 import { serializeWorldSnapshotPublic } from '../../domain/display/worldSnapshotPublic.js';
@@ -475,7 +474,6 @@ export default function MapShareEditor({
         <Button
           variant="gold"
           size="sm"
-          icon={<Save size={12} />}
           onClick={handleSaveDetails}
           busy={busy}
           style={{ justifySelf: 'start' }}
@@ -498,10 +496,10 @@ export default function MapShareEditor({
         }}>
           Public
         </span>
-        <Button variant="gold" size="sm" onClick={handleCopy} title="Copy public URL" icon={copied ? <Check size={12} /> : <Copy size={12} />}>
+        <Button variant="gold" size="sm" onClick={handleCopy} title="Copy public URL">
           {copied ? 'Copied' : 'Copy link'}
         </Button>
-        <Button variant="ghost" size="sm" onClick={() => setDetailsOpen(open => !open)} icon={<ImageIcon size={12} />}>
+        <Button variant="ghost" size="sm" onClick={() => setDetailsOpen(open => !open)}>
           Gallery details
         </Button>
         <Button variant="ghost" size="sm" onClick={handleUnshare} busy={busy}>
@@ -526,11 +524,10 @@ export default function MapShareEditor({
         onClick={handlePublish}
         busy={busy}
         title="Make this map readable to anyone with the link"
-        icon={<Globe size={12} />}
       >
         {busy ? 'Publishing…' : 'Share to gallery'}
       </Button>
-      <Button variant="ghost" size="sm" onClick={() => setDetailsOpen(open => !open)} icon={<ImageIcon size={12} />}>
+      <Button variant="ghost" size="sm" onClick={() => setDetailsOpen(open => !open)}>
         Details
       </Button>
       {error && (

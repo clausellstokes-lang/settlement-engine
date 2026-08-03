@@ -20,20 +20,25 @@
  * the primitive cannot re-introduce the tooltip-census offender either.
  */
 import Button from './Button.jsx';
-import { INK, BODY, MUTED, GOLD, BORDER, CARD, FS, SP, sans } from '../theme.js';
+import { INK, BODY, BORDER, CARD, FS, SP, sans } from '../theme.js';
 
 /**
  * @param {object}   props
- * @param {React.ComponentType<{size?: number, color?: string}>} [props.Icon]  optional leading glyph (map-context surfaces only)
  * @param {string}    props.heading  the short invitation headline (also the accessible name)
  * @param {React.ReactNode} [props.body]  one calm line of what will appear and how
  * @param {{ label: string, onClick: () => void, Icon?: React.ComponentType, variant?: string }} [props.action]  optional single CTA
  * @param {'center'|'start'} [props.align='start']  text/box alignment
- * @param {boolean} [props.accent=false]  render the leading glyph in the gold
- *   accent (the gallery "designed room" treatment) rather than muted ink, so the
- *   three gallery tabs' empty states read as one polished invitation.
+ *
+ * NO LEADING-GLYPH CHANNEL (lane LU-2). This primitive used to take an `Icon`
+ * and render it UNGATED — the doc said "map-context surfaces only", but nothing
+ * enforced that, and all four call sites in the app were gallery surfaces, i.e.
+ * outside the map Provider, rendering lucide straight through the icons-off
+ * redesign. `accent` existed solely to colour that glyph gold. Both are gone
+ * with the call sites; an empty state's channels are its heading, its body and
+ * its one CTA. Re-adding a glyph here would need a lucide import at the call
+ * site, which tests/lint/lucideTotality.test.js reds as a new offender.
  */
-export default function EmptyState({ Icon, heading, body, action, align = 'start', accent = false }) {
+export default function EmptyState({ heading, body, action, align = 'start' }) {
   const items = align === 'center' ? 'center' : 'flex-start';
   return (
     <div
@@ -45,7 +50,6 @@ export default function EmptyState({ Icon, heading, body, action, align = 'start
         background: CARD, border: `1px solid ${BORDER}`,
       }}
     >
-      {Icon && <Icon size={accent ? 24 : 20} color={accent ? GOLD : MUTED} aria-hidden="true" />}
       {heading && (
         <div style={{ color: INK, fontFamily: sans, fontSize: FS.md, fontWeight: 800, lineHeight: 1.4 }}>
           {heading}

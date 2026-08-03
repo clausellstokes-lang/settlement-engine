@@ -1,4 +1,3 @@
-import { Check } from 'lucide-react';
 import { useId } from 'react';
 
 import { TIER_LABELS } from '../new/design.js';
@@ -28,7 +27,6 @@ function FilterChips({ options, value = [], onToggle }) {
             size="sm"
             onClick={() => onToggle(option)}
             aria-pressed={isOn}
-            icon={isOn ? <Check size={12} /> : undefined}
             style={{ textTransform: 'capitalize' }}
           >
             {human(TIER_LABELS[option] || option)}

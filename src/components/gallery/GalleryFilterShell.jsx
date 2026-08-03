@@ -1,4 +1,3 @@
-import { SlidersHorizontal, X } from 'lucide-react';
 
 import useIsMobile from '../../hooks/useIsMobile.js';
 import BottomSheet from '../primitives/BottomSheet.jsx';
@@ -85,7 +84,6 @@ export default function GalleryFilterShell({ activeCount = 0, onClear, children 
             {activeCount > 0 && (
               <Button
                 variant="ghost"
-                icon={<X size={12} />}
                 onClick={onClear}
                 aria-label={`Clear all ${activeCount} active filters`}
                 style={{ justifySelf: 'start', color: GOLD }}
@@ -110,7 +108,6 @@ export default function GalleryFilterShell({ activeCount = 0, onClear, children 
       background: CARD_ALT,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <SlidersHorizontal size={15} color={GOLD} />
         <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 950 }}>
           Filters
         </h2>
@@ -118,7 +115,6 @@ export default function GalleryFilterShell({ activeCount = 0, onClear, children 
           <Button
             variant="ghost"
             size="sm"
-            icon={<X size={12} />}
             onClick={onClear}
             style={{ marginLeft: 'auto', color: GOLD }}
           >

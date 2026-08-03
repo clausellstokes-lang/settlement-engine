@@ -23,7 +23,6 @@
  * future surface inherits this one's ring decision.
  */
 import { useEffect, useRef, useState } from 'react';
-import { RotateCcw, Check, X } from 'lucide-react';
 
 import {
   clampOffset, centeredOffset, cropRectFromTransform, outputSize, } from './cropGeometry.js';
@@ -235,7 +234,6 @@ export default function ImageCropper({
           style={{ flex: 1, accentColor: GOLD, cursor: 'pointer' }}
         />
         <IconButton
-          Icon={RotateCcw}
           glyph="↺"
           label="Reset zoom and position"
           onClick={reset}
@@ -248,7 +246,6 @@ export default function ImageCropper({
         <Button
           variant="ghost"
           size="sm"
-          icon={<X size={13} />}
           onClick={onCancel}
           disabled={busy}
         >
@@ -257,7 +254,6 @@ export default function ImageCropper({
         <Button
           variant="gold"
           size="sm"
-          icon={<Check size={13} />}
           onClick={commit}
           busy={busy}
           disabled={!natural}

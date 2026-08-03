@@ -1,5 +1,4 @@
 import React from 'react';
-import { Check, ChevronLeft, Download, Eye, MessageCircle, Share2, Sparkles } from 'lucide-react';
 
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
@@ -108,7 +107,7 @@ export default function GalleryDetail({
   if (error || !dossier) {
     return (
       <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: SP.xl, display: 'grid', gap: SP.md }}>
-        <Button variant="ghost" onClick={onBack} icon={<ChevronLeft size={14} />} style={{ justifySelf: 'start' }}>
+        <Button variant="ghost" onClick={onBack} style={{ justifySelf: 'start' }}>
           {t('gallery.backToList')}
         </Button>
         <div style={{ border: `1px solid ${BORDER}`, background: CARD, color: BODY, padding: SP.xl, textAlign: 'center' }}>
@@ -142,7 +141,7 @@ export default function GalleryDetail({
   return (
     <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px`, display: 'grid', gap: SP.lg }}>
       <style>{GALLERY_RESPONSIVE_CSS}</style>
-      <Button variant="ghost" onClick={onBack} icon={<ChevronLeft size={14} />} style={{ justifySelf: 'start' }}>
+      <Button variant="ghost" onClick={onBack} style={{ justifySelf: 'start' }}>
         {t('gallery.backToList')}
       </Button>
       {actionError && <StatusMessage tone="danger">{actionError}</StatusMessage>}
@@ -230,7 +229,6 @@ export default function GalleryDetail({
                   busy={importBusy}
                   disabled={imported || importBusy}
                   title={imported ? 'Imported to your library' : 'Clone the public-safe version into your library'}
-                  icon={imported ? <Check size={13} /> : <Download size={13} />}
                 >
                   {imported ? 'Imported' : 'Import'}
                 </Button>
@@ -239,7 +237,6 @@ export default function GalleryDetail({
                   variant="primary"
                   size="md"
                   onClick={() => onNavigate?.('pricing')}
-                  icon={<Download size={13} />}
                   title="Importing a settlement into your library is a Cartographer feature"
                 >
                   Import (premium)
@@ -252,7 +249,6 @@ export default function GalleryDetail({
                   variant="primary"
                   size="md"
                   onClick={() => onNavigate?.('generate')}
-                  icon={<Sparkles size={13} />}
                   title="Forge a settlement of your own"
                 >
                   {t('gallery.forgeYourOwn')}
@@ -265,17 +261,16 @@ export default function GalleryDetail({
                 onClick={() => onVote(dossier)}
               />
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
-                <Eye size={13} /> {formatNumber(dossier.viewCount)} views
+                {formatNumber(dossier.viewCount)} views
               </span>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
-                <MessageCircle size={13} /> {formatNumber(dossier.commentCount)} comments
+                {formatNumber(dossier.commentCount)} comments
               </span>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={onShare}
                 title="Share this dossier"
-                icon={shared ? <Check size={13} /> : <Share2 size={13} />}
                 style={shared ? { color: GREEN } : undefined}
               >
                 {shared ? 'Link copied' : 'Share'}

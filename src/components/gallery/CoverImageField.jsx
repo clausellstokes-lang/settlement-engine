@@ -19,7 +19,6 @@
  * save path); an orphaned object is harmless (see imageUpload.js).
  */
 import { useEffect, useRef, useState } from 'react';
-import { ImagePlus, Trash2 } from 'lucide-react';
 
 import ImageCropper from './ImageCropper.jsx';
 import Button from '../primitives/Button.jsx';
@@ -114,10 +113,10 @@ export default function CoverImageField({ value = '', onChange, ownerId, settlem
           <img src={value} alt={alt || 'Gallery cover'} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
         </div>
         <div style={{ display: 'flex', gap: SP.sm }}>
-          <Button variant="ghost" size="sm" icon={<ImagePlus size={13} />} onClick={() => inputRef.current?.click()}>
+          <Button variant="ghost" size="sm" onClick={() => inputRef.current?.click()}>
             Replace
           </Button>
-          <Button variant="ghost" size="sm" icon={<Trash2 size={13} />} onClick={onRemove} style={{ color: MUTED }}>
+          <Button variant="ghost" size="sm" onClick={onRemove} style={{ color: MUTED }}>
             Remove
           </Button>
         </div>

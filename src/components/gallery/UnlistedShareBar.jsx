@@ -5,7 +5,6 @@
  * sharing. House voice + a11y (button titles); state + handlers live in the
  * parent.
  */
-import { Link2, Copy, Check, RefreshCw, AlertCircle } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 import { BODY, BORDER2, MUTED, RED, sans, SP, FS } from '../theme.js';
 
@@ -29,13 +28,12 @@ export default function UnlistedShareBar({ copied = false, busy = false, error =
         fontSize: FS.xs, fontWeight: 700,
         textTransform: 'uppercase', letterSpacing: '0.05em',
       }}>
-        <Link2 size={11} /> Unlisted
+        Unlisted
       </span>
       <Button
         variant="gold"
         size="sm"
         onClick={onCopy}
-        icon={copied ? <Check size={12} /> : <Copy size={12} />}
       >
         {copied ? 'Copied' : 'Copy party link'}
       </Button>
@@ -44,7 +42,6 @@ export default function UnlistedShareBar({ copied = false, busy = false, error =
         size="sm"
         onClick={onRotate}
         busy={busy}
-        icon={<RefreshCw size={12} />}
       >
         Rotate link
       </Button>
@@ -53,7 +50,7 @@ export default function UnlistedShareBar({ copied = false, busy = false, error =
       </Button>
       {error && (
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, color: RED }}>
-          <AlertCircle size={11} /> {error}
+          {error}
         </span>
       )}
       <span style={{ flexBasis: '100%', fontSize: FS.xs, color: MUTED, fontStyle: 'italic' }}>

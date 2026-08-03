@@ -21,7 +21,6 @@
  * actions, never rendering); importing creates a campaign and stays premium.
  */
 import { useState, useEffect, useCallback } from 'react';
-import { Castle, Image as ImageIcon, Swords, Users } from 'lucide-react';
 import { useStore } from '../../store';
 import { navigate } from '../../hooks/useRoute.js';
 import { t } from '../../copy/index.js';
@@ -55,7 +54,7 @@ function WorldAgeChip({ band }) {
       fontSize: FS.pico, fontWeight: 700, color: SECOND,
       background: PARCH, border: `1px solid ${BORDER}`, padding: '1px 6px',
     }}>
-      <Castle size={10} aria-hidden="true" /> World {label}
+      World {label}
     </span>
   );
 }
@@ -262,8 +261,6 @@ export default function GalleryCampaigns({ onNavigate }) {
           {!loading && !error && items.length === 0 && (
             isFiltered ? (
               <EmptyState
-                Icon={ImageIcon}
-                accent
                 align="center"
                 heading="No campaigns match those filters."
                 body="Loosen a facet, or clear them all to see every shared campaign."
@@ -271,8 +268,6 @@ export default function GalleryCampaigns({ onNavigate }) {
               />
             ) : (
               <EmptyState
-                Icon={ImageIcon}
-                accent
                 align="center"
                 heading="No shared campaigns yet."
                 body="Premium DMs can publish a map together with its living campaign, and it appears here for others to read and adopt."
@@ -293,7 +288,7 @@ export default function GalleryCampaigns({ onNavigate }) {
                 )}
                 {m.at_war === true && (
                   <span aria-label="This realm is at war" style={{ position: 'absolute', top: 6, right: 6, display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: FS.pico, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.4, color: RED, background: CARD_HDR, border: `1px solid ${BORDER}`, padding: '1px 5px' }}>
-                    <Swords size={10} aria-hidden="true" /> At war
+                    At war
                   </span>
                 )}
               </div>
@@ -307,7 +302,7 @@ export default function GalleryCampaigns({ onNavigate }) {
                   <WorldAgeChip band={m.world_age} />
                   {Number(m.member_count) > 0 && (
                     <span aria-label={`${m.member_count} settlements`} style={{ display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: FS.pico, fontWeight: 700, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, padding: '1px 6px' }}>
-                      <Users size={10} aria-hidden="true" /> {m.member_count} settlement{m.member_count === 1 ? '' : 's'}
+                      {m.member_count} settlement{m.member_count === 1 ? '' : 's'}
                     </span>
                   )}
                   <AlivenessBadge score={m.aliveness} />

@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Check, ExternalLink, RefreshCw, XCircle } from 'lucide-react';
 
 import { fetchGalleryReports, resolveGalleryReport } from '../../lib/gallery.js';
 import { supabase } from '../../lib/supabase.js';
@@ -97,7 +96,7 @@ function UnifiedReportQueue() {
         <h3 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
           Reported content (all kinds)
         </h3>
-        <Button variant="secondary" size="sm" icon={<RefreshCw size={12} />} onClick={load}>Refresh</Button>
+        <Button variant="secondary" size="sm" onClick={load}>Refresh</Button>
       </div>
       {error && (
         <div role="alert" style={{ borderLeft: '2px solid var(--oc-rubric)', paddingLeft: SP.md, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, lineHeight: 1.5 }}>{error}</div>
@@ -206,7 +205,6 @@ export default function GalleryModerationPanel() {
           variant="secondary"
           size="sm"
           busy={loading}
-          icon={<RefreshCw size={12} />}
           onClick={loadReports}
         >
           Refresh
@@ -262,7 +260,6 @@ export default function GalleryModerationPanel() {
                   size="sm"
                   disabled={!report.slug}
                   title="Open public dossier"
-                  icon={<ExternalLink size={12} />}
                   onClick={() => report.slug && navigate('gallery', { params: { slug: report.slug } })}
                 >
                   Open
@@ -283,7 +280,6 @@ export default function GalleryModerationPanel() {
                   <ActionButton
                     tone="success"
                     busy={busyId === report.id}
-                    icon={<Check size={12} />}
                     onClick={() => updateReport(report.id, 'resolved')}
                   >
                     Resolve
@@ -293,7 +289,6 @@ export default function GalleryModerationPanel() {
                   <ActionButton
                     tone="danger"
                     busy={busyId === report.id}
-                    icon={<XCircle size={12} />}
                     onClick={() => updateReport(report.id, 'dismissed')}
                   >
                     Dismiss

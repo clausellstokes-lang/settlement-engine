@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Image as ImageIcon, Sparkles, X } from 'lucide-react';
 
 import { t } from '../../copy/index.js';
 import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
@@ -9,7 +8,6 @@ import {
   BORDER,
   CARD,
   FS,
-  GOLD,
   GREEN,
   INK,
   MUTED,
@@ -126,13 +124,12 @@ export default function GalleryList({
                   offers a "clear filters" recovery; a genuinely empty gallery
                   offers the forge next-step. Branch both copy and action on the
                   filter state. */}
-              <ImageIcon size={26} color={GOLD} style={{ justifySelf: 'center' }} />
               {(isFiltered || invited) && (
                 <p style={{ margin: 0, fontFamily: serif_, fontSize: FS.lg, fontStyle: 'italic', display: 'flex', alignItems: 'flex-start', gap: 6, justifyContent: 'center' }}>
                   <span>{isFiltered ? t('gallery.emptyFilteredBody') : t('gallery.emptyBody')}</span>
                   {!isFiltered && (
                     <Button
-                      variant="ghost" size="sm" icon={<X size={11} />}
+                      variant="ghost" size="sm"
                       aria-label="Dismiss the gallery invitation"
                       onClick={() => { markGuidanceDismissed('gallery_empty_invitation'); setInvited(false); }}
                     />
@@ -142,7 +139,6 @@ export default function GalleryList({
               {isFiltered ? (
                 <Button
                   variant="secondary"
-                  icon={<X size={14} />}
                   onClick={() => { clearFilters(); setSearch(''); }}
                   style={{ justifySelf: 'center' }}
                 >
@@ -151,7 +147,6 @@ export default function GalleryList({
               ) : (
                 <Button
                   variant="primary"
-                  icon={<Sparkles size={14} />}
                   onClick={() => onNavigate?.('generate')}
                   style={{ justifySelf: 'center' }}
                 >

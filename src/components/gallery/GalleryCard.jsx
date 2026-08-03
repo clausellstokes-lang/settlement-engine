@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { Check, Eye, Link2, MessageCircle, Share2, Sparkles, ThumbsUp } from 'lucide-react';
 
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
@@ -96,7 +95,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
               fontSize: FS.xxs,
               fontWeight: 950,
             }}>
-              <ThumbsUp size={11} /> {Math.max(0, item.netVotes || 0)}
+              {Math.max(0, item.netVotes || 0)} votes
             </span>
             {item.curated && (
               <span style={{
@@ -112,7 +111,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
                 fontSize: FS.xxs,
                 fontWeight: 950,
               }}>
-                <Sparkles size={10} /> Curated
+                Curated
               </span>
             )}
             {item.unlisted && (
@@ -129,7 +128,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
                 fontSize: FS.xxs,
                 fontWeight: 950,
               }}>
-                <Link2 size={10} /> Unlisted
+                Unlisted
               </span>
             )}
           </div>
@@ -207,17 +206,16 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexWrap: 'wrap', marginTop: 2 }}>
           <VoteButton count={item.netVotes} voted={item.voted} disabled={voting} onClick={() => onVote(item)} />
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
-            <Eye size={12} /> {formatNumber(item.viewCount)}
+            {formatNumber(item.viewCount)} views
           </span>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
-            <MessageCircle size={12} /> {formatNumber(item.commentCount)}
+            {formatNumber(item.commentCount)} comments
           </span>
           <Button
             variant="ghost"
             size="sm"
             onClick={onShare}
             title="Share this dossier"
-            icon={shared ? <Check size={12} /> : <Share2 size={12} />}
           >
             {shared ? 'Copied' : 'Share'}
           </Button>

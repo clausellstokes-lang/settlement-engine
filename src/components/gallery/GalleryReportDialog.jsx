@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react';
-import { Flag, X } from 'lucide-react';
 
 import {
   BODY,
@@ -69,7 +68,6 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport,
         onClick={requestOpen}
         disabled={disabled}
         title={`Report ${label}`}
-        icon={<Flag size={13} />}
       >
         Report
       </Button>
@@ -118,7 +116,6 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport,
                 Report {label}
               </h2>
               <IconButton
-                Icon={X}
                 glyph="×"
                 label="Close"
                 tone="ghost"
