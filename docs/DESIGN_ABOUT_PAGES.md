@@ -89,3 +89,81 @@
 Rides the LD family (landing/nav program) — after LD-5's dropdown machinery
 exists; independent of the Hall's own §2/§2c amendments (the Hall doc owns
 those). No engine surface, no flags, no goldens anywhere near this.
+
+---
+
+## PROGRESS — ✅ BUILT 2026-08-03 (Lane C, the Fable chair)
+
+> **§1 · §2 · §3 · §5 LANDED. §4 DEFERRED (blocked on LD-5) with reason.**
+> Built in the minifold worktree on `claude/composite-r4`, dark, pathspec-committed.
+>
+> **WHAT LANDED**
+> - **§1 THE TWO PAGES.** `about-what-this-is` → `/about/what-this-is` (the nav
+>   parent's destination) and `about-guide` → `/about/guide`, both real path
+>   routes in `src/lib/routes.js`, both prerendered + sitemap-listed with their
+>   own hand-written descriptions. The bare `/about` resolves and forwards to
+>   What this Is.
+> - **THE MAPPING IS DATA, NOT A COMMENT.** `src/lib/aboutMapping.js` carries all
+>   twelve units of the pre-split page with their destination page + anchor, and
+>   is the SINGLE writer read by (a) `routes.js redirectForView`, (b) both page
+>   components' section ids, (c) the pins. The design asked for a comment block
+>   or doc appendix; a data manifest is strictly better — it is machine-checkable
+>   and cannot drift from the rendered anchors. *(Chair call, vetoable.)*
+> - **§2 THE HEADER LAW — VERIFY-AT-BUILD RESOLVED.** A shared component ALREADY
+>   EXISTED: `primitives/PageHeader.jsx`, consumed by Compendium, Gallery,
+>   Library, Pricing, Account, Admin and the legal pages. No extraction was
+>   needed; both new pages consume it verbatim, and a source-scan pin forbids
+>   lookalike header markup on any About file.
+> - **§3 DE-COLLAPSING.** `Disclosure` and the tab strip are gone from the About
+>   family. Sections render flat in the old expanded order under a clean
+>   h1 → h2 → h3 tree (the manifesto's hero `<h1>` was promoted into the page
+>   header, so each page has exactly one). "How We Compare" moved to What this Is
+>   as the positioning ladder — the one cross-half assignment.
+> - **ANCHOR SURVIVAL HAS A SCROLL HALF.** `history.replaceState` performs no
+>   fragment navigation and `navigate()` then scrolls to top, and a cold load of
+>   `/about/guide#faq` looks for the anchor before React renders — so without
+>   `components/about/useAboutHashScroll.js` a translated deep link would land on
+>   the right page at the WRONG PLACE. The hook lands it on its section (instant,
+>   not smooth — the motion law); an unknown fragment is a no-op.
+> - **§5 PINS** — `tests/components/aboutSplit.test.jsx`, 25 tests: mapping
+>   totality (against an INDEPENDENT census of the pre-split page), anchor
+>   survival in both halves (published-anchor contract ⟷ manifest ⟷ real DOM ids,
+>   the no-leak direction, and the arrival scroll), header parity, heading-tree
+>   sanity. Four negative controls executed — a corrupted anchor, a dropped
+>   section, a second h1, and an unwired scroll hook each red the suite. The FIRST
+>   version of the anchor pin was VACUOUS (the pages derive their ids from the
+>   manifest, so a corrupted anchor stayed green); the published-anchor literal
+>   table is the independent second truth that fixed it.
+>
+> **⚠️ SUBSTRATE CORRECTION (the doc's VERIFY-AT-BUILD, answered).** §1's
+> "every old collapsible's deep-link anchor id" did not exist. The old
+> collapsibles were `primitives/Disclosure` panels whose only ids came from
+> React's `useId()` — regenerated every mount, never addressable. The page's REAL
+> deep-link grammar was `/how-to?tab=<id>`, read once at mount. That param set is
+> what the split carries forward, and every one of the six now redirects to a
+> stable hand-authored `#anchor` (a strict upgrade: the anchors survive reload).
+> Likewise "the old `/about` route" never existed — the old route was `/how-to`.
+> Both are handled; `/about` now exists as the forwarding parent.
+>
+> **⛔ §4 NAV INTEGRATION — DEFERRED, DOCUMENTED, NOT A BUG TO RE-FIND.**
+> §6 sequences §4 after LD-5's dropdown machinery, and at this commit that
+> machinery does not exist: App's desktop ribbon renders one flat `<button>` per
+> NAV cell with no menu layer anywhere. Building a one-off About menu would fork
+> the grammar LD-5 exists to create. What landed instead: the About nav cell
+> keeps its label and order-70 slot and now points at `/about/what-this-is`, and
+> all three future dropdown targets (What this Is · Practical Guide · Founders)
+> are real routes today — pinned. `docs/FIRST_CONTACT_BACKLOG.md`'s LD-5 block is
+> AMENDED with the corrected targets, so LD-5 cannot be built against the stale
+> `/how-to?tab=guide` spelling.
+>
+> **DISCLOSED BEHAVIOUR CHANGES** (ordered, not drift): the About nav cell's
+> destination view id changed (`howto` → `about-what-this-is`); `/how-to` and
+> `/compare*` became redirects; `/how-to` left the sitemap and the two new pages
+> entered it; the guide's tab strip and both card collapsibles were deleted, and
+> the tests pinning them were rewritten to pin the flat pages instead.
+>
+> **NOT DONE / OUT OF SCOPE.** §3's voice-workstream ride-along ("purple button",
+> `Narrative AI Prompt` renames) was NOT performed: the split moved that copy
+> byte-identically rather than editing it, so the residual-AI cluster still owns
+> those sentences and can rename them in one place without racing this commit.
+> Deliberately deferred.

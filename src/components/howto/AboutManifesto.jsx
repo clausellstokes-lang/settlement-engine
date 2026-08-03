@@ -1,5 +1,16 @@
 /**
- * howto/AboutManifesto.jsx — THE ABOUT PAGE (#19), the trust page.
+ * howto/AboutManifesto.jsx — the BODY of /about/what-this-is, the trust page.
+ *
+ * THE ABOUT SPLIT (docs/DESIGN_ABOUT_PAGES.md, 2026-08-03) made this the body of a
+ * real page rather than the contents of a collapsible. Two consequences live here:
+ *
+ *   - NO h1. The hero band's headline was promoted into the page's standard
+ *     PageHeader (components/about/AboutWhatThisIs.jsx), so this subtree starts at
+ *     h2 and the page has exactly one h1 — the a11y floor the accordion's
+ *     card-local heading semantics never allowed (design §3).
+ *   - STABLE SECTION IDS. Each band carries the anchor aboutMapping.js assigns it,
+ *     so a deep link survives. Ids come from that one mapping writer, never typed
+ *     here, or the redirect grammar and the rendered anchors could drift apart.
  *
  * A linear manifesto in six bands (THE DOCUMENTATION WAVE §1): hero + the whole-loop
  * schematic → the philosophy ladder (concrete before abstract) → THE COVENANT (each
@@ -28,13 +39,14 @@ import { WholeLoopSchematic, TickDiagram } from './aboutSchematics.jsx';
 import ForgeExactDemo from './ForgeExactDemo.jsx';
 import FoundersRoll from './FoundersRoll.jsx';
 import HouseColophon from '../organic/HouseColophon.jsx';
+import { anchorFor } from '../../lib/aboutMapping.js';
 
 // ── Presentational helpers ───────────────────────────────────────────────────
 const PROSE = { fontSize: FS.md, color: SEC, lineHeight: 1.75, fontFamily: sans };
 
-function Band({ eyebrow, title, children, first = false }) {
+function Band({ id, eyebrow, title, children, first = false }) {
   return (
-    <section style={{ maxWidth: PROSE_MAX, margin: '0 auto', padding: first ? '4px 0 0' : '40px 0 0' }}>
+    <section id={id} style={{ maxWidth: PROSE_MAX, margin: '0 auto', padding: first ? '4px 0 0' : '40px 0 0' }}>
       {eyebrow && (
         <div style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.14em',
           textTransform: 'uppercase', color: GOLD_TXT, marginBottom: 6 }}>{eyebrow}</div>
@@ -87,17 +99,14 @@ const A = ({ href, children }) => (
 export default function AboutManifesto() {
   return (
     <div style={{ padding: '8px 0 8px' }}>
-      {/* ── BAND 1 · HERO ──────────────────────────────────────────────────── */}
-      <Band first>
+      {/* ── BAND 1 · HERO ──────────────────────────────────────────────────────
+          The headline that used to live here is now the PAGE header's title
+          (AboutWhatThisIs.jsx) — one h1 per page, per design §3. What remains is
+          the seal and the lead paragraph. */}
+      <Band id={anchorFor('hero')} first>
         {/* The seal moment — the large house device + the motto caption in type
             (owner placement: the About page opens under the maker's seal). */}
         <div style={{ marginBottom: 18 }}><HouseColophon size={56} /></div>
-        <div style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.14em',
-          textTransform: 'uppercase', color: GOLD_TXT, marginBottom: 8 }}>What this is</div>
-        <h1 style={{ fontFamily: serif_, fontSize: FS.h1, fontWeight: 700, color: INK,
-          margin: '0 0 12px', lineHeight: 1.15 }}>
-          A settlement that remembers what your players did to it.
-        </h1>
         <p style={{ ...PROSE, margin: '0 0 24px' }}>
           SettlementForge is a deterministic world simulator. You set the conditions (terrain,
           trade, the pressures a region is under) and the engine derives the only coherent
@@ -116,7 +125,7 @@ export default function AboutManifesto() {
       </div>
 
       {/* ── BAND 2 · THE PHILOSOPHY LADDER ─────────────────────────────────── */}
-      <Band eyebrow="The premise" title="What if the town remembered?">
+      <Band id={anchorFor('premise')} eyebrow="The premise" title="What if the town remembered?">
         <p style={{ ...PROSE, margin: '0 0 14px' }}>
           Ask a table what happened after they burned the granary. In most worlds, nothing:
           the fire was a scene, and the scene is over. Here, the mill has no grain to turn, so
@@ -171,7 +180,7 @@ export default function AboutManifesto() {
       </Band>
 
       {/* ── BAND 3 · THE COVENANT ──────────────────────────────────────────── */}
-      <Band eyebrow="Structural promises" title="The covenant">
+      <Band id={anchorFor('covenant')} eyebrow="Structural promises" title="The covenant">
         <p style={{ ...PROSE, margin: '0 0 18px' }}>
           These are not intentions. They are things the architecture cannot do, each with the
           mechanism that forbids it and a receipt you can open. Where a promise is structural, no
@@ -214,7 +223,7 @@ export default function AboutManifesto() {
       </Band>
 
       {/* ── BAND 4 · THE MECHANISM (tick diagram BEFORE the text) ──────────── */}
-      <Band eyebrow="How it works" title="One tick, in dependency order">
+      <Band id={anchorFor('mechanism')} eyebrow="How it works" title="One tick, in dependency order">
         <div style={{ margin: '4px auto 6px', maxWidth: 780 }}>
           <TickDiagram />
           <Caption>
@@ -293,7 +302,7 @@ export default function AboutManifesto() {
       </Band>
 
       {/* ── BAND 5 · THE AI SECTION ────────────────────────────────────────── */}
-      <Band eyebrow="Where the AI fits" title="Caged by mechanism, not by promise">
+      <Band id={anchorFor('ai')} eyebrow="Where the AI fits" title="Caged by mechanism, not by promise">
         <p style={{ ...PROSE, margin: '0 0 14px' }}>
           This hobby&rsquo;s distrust of generative AI is earned. Players have watched policies about AI
           get written and then quietly reversed, and the objection was never really about capability.
@@ -325,7 +334,7 @@ export default function AboutManifesto() {
       </Band>
 
       {/* ── BAND 6 · THE CLOSE ─────────────────────────────────────────────── */}
-      <Band eyebrow="The invitation" title="Examine it thoroughly">
+      <Band id={anchorFor('close')} eyebrow="The invitation" title="Examine it thoroughly">
         <p style={{ ...PROSE, margin: '0 0 16px' }}>
           This is a tool built by one person for people who take their worlds seriously, and it is
           built to be inspected. Open the <A href="/compendium">Compendium</A> and read the catalogs

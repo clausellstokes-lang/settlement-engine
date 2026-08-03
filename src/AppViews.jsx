@@ -28,6 +28,9 @@ const GenerateWizard  = lazy(() => import('./components/GenerateWizard.jsx'));
 const SettlementsPanel = lazy(() => import('./components/SettlementsPanel'));
 const CompendiumPanel = lazy(() => import('./components/CompendiumPanel'));
 const HowToUse        = lazy(() => import('./components/HowToUse'));
+// THE ABOUT SPLIT (docs/DESIGN_ABOUT_PAGES.md): the conceptual page. The
+// operational half is HowToUse above, now /about/guide.
+const AboutWhatThisIs = lazy(() => import('./components/about/AboutWhatThisIs.jsx'));
 const WorldMap         = lazy(() => import('./components/WorldMap.jsx'));
 const AccountPage      = lazy(() => import('./components/AccountPage.jsx'));
 const AdminPanel       = lazy(() => import('./components/AdminPanel.jsx'));
@@ -106,7 +109,12 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
         <IconsContext.Provider value={true}><WorldMap onNavigate={setView} /></IconsContext.Provider>
       )}
       {view === 'compendium'  && <CompendiumPanel standalone routeEntry={params.entry} />}
-      {view === 'howto'       && <HowToUse standalone />}
+      {/* THE ABOUT FAMILY. `howto`, `about` and the compare* views are retired
+          redirect surfaces (App's redirect effect bounces them here with the
+          right anchor), so they render nothing — one frame of blank beats one
+          frame of the page they are leaving. */}
+      {view === 'about-what-this-is' && <AboutWhatThisIs />}
+      {view === 'about-guide' && <HowToUse />}
       {/* Guarded views: render only once authorized. The guard effect
           redirects unauthorized visitors; until the session resolves we
           show the loader rather than flash (or crash on) gated content. */}

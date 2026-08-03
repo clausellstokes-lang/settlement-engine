@@ -3,7 +3,7 @@
 User-agent: *
 Allow: /
 
-# Public content (home, create, compendium, how-to, pricing, gallery, compare)
+# Public content (home, create, compendium, about, pricing, gallery, compare)
 # is crawlable. Keep crawl budget OFF the app surfaces, the private library, the
 # auth/account flows, the checkout return, and build artifacts.
 Disallow: /api/

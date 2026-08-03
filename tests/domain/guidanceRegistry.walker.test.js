@@ -295,7 +295,13 @@ describe('title= ratchet — native OS tooltips are a shrink-only census', () =>
   // exposed that this local presentation API still looked like native tooltip
   // syntax to the census; migrating the complete internal API keeps the source
   // distinction honest instead of exempting one new title. 494 → 487.
-  const TITLE_BASELINE = 487;
+  //
+  // THE ABOUT SPLIT: the de-collapsed Practical Guide's five section headings,
+  // its Reference sub-sections, and the migrated CompareSection's Insight cards
+  // all use `heading` rather than `title` — the new page could have added five
+  // tooltip-shaped props, so the same migration was applied at authoring time
+  // instead of after the ratchet reddened. Nine local props moved. 487 → 482.
+  const TITLE_BASELINE = 482;
 
   function countTitles() {
     let n = 0;

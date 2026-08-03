@@ -542,12 +542,25 @@ respecced against the tree]:**
    `/compendium/custom` resolves as a compendium ENTRY page (routes.js:131);
    `/gallery/maps` and `/gallery/mine` are swallowed by the dossier-slug
    catch-all (routes.js:134) and would permanently shadow user-derived slugs;
-   `/about/guide` cannot resolve (`/about` does not exist — About is view
-   `howto` at `/how-to`, routes.js:55, so it falls to notFound → /create);
-   `/account/security` likewise. THE CORRECTED TARGETS:
+   `/about/guide` could not resolve when this was written (`/about` did not
+   exist — About was view `howto` at `/how-to`) — **THE ABOUT SPLIT HAS SINCE
+   BUILT IT; see the amendment below**; `/account/security` likewise. THE
+   CORRECTED TARGETS:
    - Compendium ▾ Built-in Catalog → `/compendium`; Custom Content →
      `/compendium?mode=custom` (shipped today).
-   - About ▾ What this Is → `/how-to`; Practical Guide → `/how-to?tab=guide`.
+   - About ▾ — **[AMENDED 2026-08-03 — Lane C, THE ABOUT SPLIT. The old targets
+     `/how-to` and `/how-to?tab=guide` are now WRONG: `/how-to` is a RETIRED
+     redirect surface and `?tab=guide` never existed. Building this bullet
+     verbatim would point the menu at a redirect.]** The About family is now
+     three real path routes, all landed and pinned
+     (`tests/components/aboutSplit.test.jsx`):
+     **What this Is → `/about/what-this-is`** · **Practical Guide →
+     `/about/guide`** · **Founders → `/founders`** (the owner's third item, per
+     `docs/DESIGN_ABOUT_PAGES.md` §0.4/§4 — the Hall's nav home is the About
+     family). The parent "About" is a link to `/about/what-this-is`, and
+     `/about` itself resolves and forwards there, so the parent-stays-a-link law
+     needs no special case. LD-5's remaining About work is PURE CHROME: the menu
+     layer. Every target already exists.
    - Gallery ▾ Settlements → `/gallery`; Maps → `/gallery?tab=maps`;
      Campaigns → `/gallery?tab=campaigns`; My Saves → `/gallery?tab=mine`
      (auth-gated). NEW WORK: GalleryPage's tab is local `useState` — the tab

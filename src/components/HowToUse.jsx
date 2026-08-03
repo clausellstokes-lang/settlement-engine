@@ -1,47 +1,75 @@
-import { useState } from 'react';
-import { Zap, Star, List, Scale, HelpCircle, Globe } from 'lucide-react';
-import { GOLD, GOLD_TXT, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, PAGE_MAX, PROSE_MAX, sans, serif_, FS, swatch } from './theme.js';
+/**
+ * HowToUse.jsx — /about/guide. THE PRACTICAL GUIDE (the Keeper's Handbook).
+ *
+ * The operational half of THE ABOUT SPLIT (docs/DESIGN_ABOUT_PAGES.md). The
+ * conceptual half — thesis, covenant, mechanism, the AI boundary, the positioning
+ * ladder — is /about/what-this-is (components/about/AboutWhatThisIs.jsx).
+ *
+ * WHAT THE SPLIT CHANGED HERE (design §0.2 + §3):
+ *   - THE COLLAPSIBLES ARE GONE. No Disclosure wrapper, no card headers, no tab
+ *     strip, no per-section show-more. The five guide sections render FLAT, in the
+ *     old expanded reading order (reading order is content), each as a plain
+ *     section under one h1 → h2 → h3 tree.
+ *   - THE `?tab=` DEEP LINKS BECAME ANCHORS. `/how-to?tab=power` now redirects to
+ *     `/about/guide#power-user`; the translation lives in the one mapping writer
+ *     (components/about/aboutMapping.js), and the section ids below come from it,
+ *     so the redirect and the rendered anchors cannot drift apart.
+ *   - "HOW WE COMPARE" LEFT. It is the positioning ladder, which design §1 assigns
+ *     to the conceptual page; it now lives in components/about/CompareSection.jsx
+ *     and every /compare* URL redirects there. Its copy moved byte-identically.
+ *   - THE HEADER IS THE HOUSE HEADER. primitives/PageHeader, same writer as
+ *     Compendium / Gallery / Library / Pricing / Account (design §2).
+ *
+ * The file keeps its name and its prose on purpose: three source-scanning pins read
+ * THIS path — the claims-parity guard (tests/components/handbookClaimsParity.test.js,
+ * which holds the relationship/slider prose to the live engine), the tier-fact
+ * contract (tests/config/tierFacts.contract.test.js), and the guidance registry's
+ * legacy ledger. Renaming the module would strand all three.
+ *
+ * ZERO EAGER. Lazy route (AppViews registers it via lazy()).
+ */
+import { GOLD, GOLD_TXT, INK, SECOND as SEC, BORDER as BOR, PAGE_MAX, serif_, FS, swatch } from './theme.js';
 import { ANON_MAX_SIZE_LABEL } from '../config/tierFacts.js';
 import { useFlag } from '../lib/flags.js';
+import Page from './primitives/Page.jsx';
+import PageHeader from './primitives/PageHeader.jsx';
 import AccountFAQ from './account/AccountFAQ.jsx';
 import LivingWorldTab from './howto/LivingWorldTab.jsx';
-import AboutManifesto from './howto/AboutManifesto.jsx';
-import Disclosure from './primitives/Disclosure.jsx';
+import { anchorFor } from '../lib/aboutMapping.js';
+import useAboutHashScroll from './about/useAboutHashScroll.js';
 // V-26b: the house-voice draft of the handbook narrative, rendered only when the
 // (default-off) `handbookVoice` flag is on. Rides this already-lazy chunk (zero eager).
 import { VoicedConceptIntro, VOICED_HEADER } from './howto/HandbookVoiced.jsx';
 
-// Responsive multi-column container for card/list-heavy tab content. Uses
-// `column-width` (not a fixed count) so it fills a wide desktop card with as
+// Responsive multi-column container for card/list-heavy section content. Uses
+// `column-width` (not a fixed count) so it fills a wide desktop page with as
 // many ~COL-wide columns as fit, and collapses to a single column on narrow
-// screens / the embedded (non-standalone) help panel — no media queries
-// needed. Direct children opt out of mid-column splitting with breakInside.
+// screens — no media queries needed. Direct children opt out of mid-column
+// splitting with breakInside.
 const COLS = (col = 340) => ({ columnWidth: `${col}px`, columnGap: '22px' });
 const NO_BREAK = { breakInside: 'avoid', WebkitColumnBreakInside: 'avoid' };
 
-
-// The Keeper's Handbook tabs — the PRACTICAL guide that sits below the About
-// manifesto (the trust page). "Under the Hood" (the derivation mechanics) and
-// "DM Philosophy" were folded UP into the manifesto (the mechanism + philosophy
-// bands) and their tabs retired; the orphaned howto/UnderTheHoodTab.jsx was reaped.
-const TABS = [
-  { id:'quick',  label:'Quick Start',   Icon: Zap },
-  { id:'power',  label:'Power User',    Icon: Star },
-  // "The Living World" bridges the static dossier to the premium living simulation.
-  { id:'living', label:'The Living World', Icon: Globe },
-  { id:'ref',    label:'Reference',     Icon: List },
-  { id:'compare',label:'How We Compare',Icon: Scale },
-  { id:'faq',    label:'FAQ',           Icon: HelpCircle },
-];
-
-function Insight({ title, children }) {
+/**
+ * A guide section: the stable anchor from the mapping manifest plus the standard
+ * h2 in the page's heading scale. The de-collapsed replacement for a former tab —
+ * same content, addressable, always open (design §3).
+ */
+function GuideSection({ unit, heading, children }) {
   return (
-    <div style={{ border:`1px solid ${BOR}`, borderLeft:`3px solid ${GOLD}`,
-      padding:'10px 12px', background:CARD, marginBottom:14, ...NO_BREAK }}>
-      <div style={{ fontSize:FS.xs, fontWeight:800, color:GOLD, textTransform:'uppercase',
-        letterSpacing:'0.06em', marginBottom:5 }}>{title}</div>
-      <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:0 }}>{children}</p>
-    </div>
+    <section id={anchorFor(unit)} style={{ margin: '0 0 40px' }}>
+      <h2 style={{ fontFamily: serif_, fontSize: FS['22'], fontWeight: 600, color: INK,
+        margin: '0 0 14px', lineHeight: 1.2 }}>{heading}</h2>
+      {children}
+    </section>
+  );
+}
+
+/** A sub-heading inside a section — the h3 rung of the page's heading tree. */
+function SubHead({ children, size = FS.md }) {
+  return (
+    <h3 style={{ fontFamily: serif_, fontSize: size, fontWeight: 600, color: INK, margin: '0 0 8px' }}>
+      {children}
+    </h3>
   );
 }
 
@@ -75,11 +103,11 @@ function Row({ label, children, lw=120 }) {
   );
 }
 
-function QuickTab() {
-  // P126 / HT-1 — "How-To inversion". Newcomers open this tab to learn what
+function QuickStart() {
+  // P126 / HT-1 — "How-To inversion". Newcomers open this section to learn what
   // to *do*, not to read the design philosophy first: we lead with the
   // 60-second action steps and demote the constraint-driven concept essay
-  // to a "Why it works this way" coda below. Pure presentational order; the
+  // to a "Why it works this way" coda beside it. Pure presentational order; the
   // copy in both fragments is byte-for-byte identical.
 
   // V-26b: only the CONCEPT ESSAY (the coda) forks to the house voice; the numbered
@@ -131,9 +159,7 @@ function QuickTab() {
 
   const quickSteps = (
     <>
-      <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK, marginBottom:10 }}>
-        First settlement in 60 seconds
-      </div>
+      <SubHead size={FS.lg}>First settlement in 60 seconds</SubHead>
       <Step n={1}>On the Create tab, pick a <strong>mode</strong> - <strong>Basic Generate</strong> for minimal config (tier, route, threat, terrain) or <strong>Advanced Generate</strong> for the full step-by-step wizard with priority sliders, institution toggles, services, and trade dynamics.</Step>
       <Step n={2}>Pick a <strong>tier</strong>. Hamlet or Village for a small roadside settlement, Town for a proper community. Free mode (no account) reaches up to {ANON_MAX_SIZE_LABEL}; sign in to unlock City and Metropolis.</Step>
       <Step n={3}>Pick a <strong>trade route</strong>. Road is the safe default. Port and Crossroads produce richer economies. Pick a <strong>nearby terrain</strong>. Forests, mountains, and coastlines affect what resources appear and which supply chains are viable.</Step>
@@ -144,11 +170,11 @@ function QuickTab() {
       <Step n={4}>Hit <strong>Generate</strong>. Read the <strong>DM Summary</strong> tab first. It gives you the one-paragraph version ready for the table.</Step>
       <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and (where relevant) legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
       <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions. You can also <strong>Export</strong> using the PDF button for a print-ready briefing, or copy the Narrative AI Prompt for any AI assistant.</Step>
-      <Tip>You don't need to read every tab before the session starts. DM Summary and Daily Life are designed for the table. The other tabs are for prep and immersion.</Tip>
+      <Tip>You don't need to read every section before the session starts. DM Summary and Daily Life are designed for the table. The other tabs are for prep and immersion.</Tip>
     </>
   );
 
-  // Two-column on a wide desktop card (steps left, the "why" concept right);
+  // Two-column on a wide desktop page (steps left, the "why" concept right);
   // wraps to a single column on narrow screens via flex-wrap + flex-basis.
   return (
     <div style={{ display:'flex', flexWrap:'wrap', gap:28, alignItems:'flex-start' }}>
@@ -156,22 +182,18 @@ function QuickTab() {
         {quickSteps}
       </div>
       <div style={{ flex:'1 1 320px', minWidth:0 }}>
-        <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK, margin:'0 0 10px' }}>
-          Why it works this way
-        </div>
+        <SubHead size={FS.lg}>Why it works this way</SubHead>
         {voiced ? <VoicedConceptIntro /> : conceptIntro}
       </div>
     </div>
   );
 }
 
-function PowerTab() {
+function PowerUser() {
   return (
     <div style={COLS(360)}>
-      <section style={{ ...NO_BREAK, marginBottom:18 }}>
-        <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'0 0 8px' }}>
-          Sliders, Stress &amp; Institution Control
-        </div>
+      <div style={{ ...NO_BREAK, marginBottom:18 }}>
+        <SubHead>Sliders, Stress &amp; Institution Control</SubHead>
         <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:10 }}>
           The five sliders compete for institutional probability. Raising Economy doesn't suppress Military,
           it makes economic institutions more likely. High Religion + low Magic triggers heresy suppression.
@@ -182,12 +204,10 @@ function PowerTab() {
         <Step n={2}>Apply <strong>Stress Conditions</strong> (Famine, Plague, Siege, Political Fracture, etc.) to shift the entire output. Stresses are not cosmetic. They modify institution probabilities, NPC goals, faction tensions, and safety profiles.</Step>
         <Step n={3}>Multiple stresses <strong>compound</strong>. Famine + Political Fracture means food distribution is contested by factions, not just scarce. The DM Summary names the compound condition.</Step>
         <Tip>Forces and exclusions persist through regeneration. Configure once, generate many variations.</Tip>
-      </section>
+      </div>
 
-      <section style={{ ...NO_BREAK, marginBottom:18 }}>
-        <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'0 0 8px' }}>
-          Linking Settlements as Neighbours
-        </div>
+      <div style={{ ...NO_BREAK, marginBottom:18 }}>
+        <SubHead>Linking Settlements as Neighbours</SubHead>
         <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:10 }}>
           Generate settlements that know about each other. The relationship type modifies the economic engine,
           faction weights, and institution probabilities. All linking is done from the <strong>Settlements</strong> tab.
@@ -198,12 +218,10 @@ function PowerTab() {
         <Step n={4}>Open either settlement's <strong>Neighbours tab</strong> to see the inter-settlement picture: relationship, NPC contacts, and active engagements.</Step>
         <Step n={5}>Use <strong>Edit Names</strong> in the Settlements tab to rename any NPC or faction. Changes cascade to all linked partner records automatically.</Step>
         <Tip>Relationship types matter mechanically. A Rival crowds into the same export markets, hardens the military posture, and seeds embedded agents and saboteur factions. A Patron creates dependency chains in the client's economy. A Cold War seeds clandestine intelligence factions (deep-cover operatives, commercial fronts) on both sides.</Tip>
-      </section>
+      </div>
 
-      <section style={{ ...NO_BREAK, marginBottom:18 }}>
-        <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'0 0 8px' }}>
-          Managing Saved Settlements &amp; Campaigns
-        </div>
+      <div style={{ ...NO_BREAK, marginBottom:18 }}>
+        <SubHead>Managing Saved Settlements &amp; Campaigns</SubHead>
         <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:10 }}>
           The Settlements tab is your campaign library. Saves, campaigns, linking, and map placement all live here.
         </p>
@@ -213,26 +231,26 @@ function PowerTab() {
         <Step n={4}><strong>Narrative AI Prompt</strong> and <strong>Map AI Prompt</strong> exports are also available in the detail view. Use these to feed your settlement into an AI assistant for session fiction or map generation.</Step>
         <Step n={5}><strong>Edit Names</strong> lets you rename any NPC or faction. Changes propagate to all linked neighbour records automatically.</Step>
         <Step n={6}><strong>World Map</strong>. Drag any saved settlement onto the embedded fantasy map to place it geographically. Click a placed burg to see its linked settlement data. Toggle relationships and supply-chain overlays from the map toolbar.</Step>
-      </section>
+      </div>
     </div>
   );
 }
 
-function RefSection({ title, rows }) {
+function RefSection({ heading, rows }) {
   // breakInside:avoid keeps a heading glued to its rows when the parent flows
-  // these sections into multiple columns on a wide desktop card.
+  // these sections into multiple columns on a wide desktop page.
   return (
-    <section style={{ ...NO_BREAK, marginBottom:16 }}>
-      <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'0 0 8px' }}>{title}</div>
+    <div style={{ ...NO_BREAK, marginBottom:16 }}>
+      <SubHead>{heading}</SubHead>
       {rows.map(([label, desc]) => <Row key={label} label={label}>{desc}</Row>)}
-    </section>
+    </div>
   );
 }
 
 // GUIDE-2b — the Keeper's Handbook DELEGATES its reference lookups to the
 // Compendium (design §6c: "Reference delegating to the Compendium"). Rather
 // than re-describing the catalog in prose that drifts from the live registries,
-// the Reference tab now DEEP-LINKS into the Compendium — the reference spine
+// the Reference section DEEP-LINKS into the Compendium — the reference spine
 // that renders each catalog from code (its ?tab= deep-links already exist,
 // CompendiumPanel honours them on mount). These stay the plain, findable rescue
 // lifeline (§0 precedence guard: the lifeline stays boring and findable — plain
@@ -260,16 +278,16 @@ function CompendiumLink({ tab, label, desc }) {
   );
 }
 
-function RefTab() {
+function Reference() {
   const sections = [
-    { title: 'Navigation', rows: [
+    { heading: 'Navigation', rows: [
       ['Create','The generation wizard. Two modes: Basic (minimal config) and Advanced (step-by-step with full control).'],
       ['Settlements','Your saved settlement library. Group into campaigns, link as neighbours, edit, rename, and export.'],
       ['World Map','Embedded fantasy map. Drag saved settlements onto it to place them geographically. Toggle relationship and supply-chain overlays.'],
       ['Compendium','The reference spine: every catalog rendered live from the engine. See the deep-links below.'],
-      ['How to Use','This guide.'],
+      ['About','What this is (the trust page) and this Practical Guide.'],
     ]},
-    { title: 'Settlement Detail Tabs', rows: [
+    { heading: 'Settlement Detail Tabs', rows: [
       ['DM Summary','One-paragraph brief, arrival scene, and consolidated plot hooks for mid-session quick reference.'],
       ['Overview','Physical layout, key institutions, recent history hook.'],
       ['Daily Life','Wealth level, diet, crime, safety. What it feels like to live here.'],
@@ -283,14 +301,14 @@ function RefTab() {
       ['Viability','Economic stress analysis. What is working, what is fragile, what will break.'],
       ['Neighbours','Cross-settlement view: linked settlements, NPC contacts, active conflicts.'],
     ]},
-    { title: 'Settlement Workflow', rows: [
+    { heading: 'Settlement Workflow', rows: [
       ['Campaigns','Create named campaign folders in the Settlements tab to group settlements together. Move settlements between campaigns using the arrow button. Export a whole campaign as PDF from its folder header.'],
       ['Link Neighbour','In the Settlements tab, open any saved settlement and use Link Neighbour to bidirectionally link it to another. Pick the relationship type (Trade Partner, Allied, Patron, Client, Rival, Cold War, Hostile).'],
       ['Set as Neighbour','Tell the generator to bias a new settlement against an existing one. Opens the Create tab with the neighbour active.'],
       ['Edit Names','Rename any NPC or faction. Changes cascade bidirectionally to linked partners.'],
       ['Export PDF','Print-ready settlement briefing. Cover page, index, relationship diagram, NPC cards, and economic appendix.'],
     ]},
-    { title: 'World Map', rows: [
+    { heading: 'World Map', rows: [
       ['Drag to Place','Drag a saved settlement from the drawer below the map onto any location on the map. A new burg is created at that point, linked to your settlement.'],
       ['Click for Detail','Click any placed burg to see its linked SettlementForge data and jump to the detail view in the Settlements tab.'],
       ['Relationship Overlay','Toggle "Relations" to draw colored lines between linked settlements. Line color indicates relationship type.'],
@@ -300,8 +318,8 @@ function RefTab() {
   return (
     <div style={COLS(360)}>
       {/* Reference lookups delegate to the Compendium — the live catalog spine. */}
-      <section style={{ ...NO_BREAK, marginBottom:16 }}>
-        <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'0 0 4px' }}>Look it up in the Compendium</div>
+      <div style={{ ...NO_BREAK, marginBottom:16 }}>
+        <SubHead>Look it up in the Compendium</SubHead>
         <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:'0 0 8px' }}>
           Every catalog (tiers, institutions, stresses, factions, the living-world verbs) is rendered
           live from the engine in the <a href="/compendium" style={{ color:GOLD, textDecoration:'underline', textUnderlineOffset:3 }}>Compendium</a>,
@@ -313,61 +331,15 @@ function RefTab() {
           <a href="/compendium?mode=custom" style={{ color:GOLD, textDecoration:'underline', textUnderlineOffset:3 }}>My Custom Content</a>.
           Custom items appear in the Settlement Editor catalog and persist to your browser.
         </p>
-      </section>
-      {sections.map(s => <RefSection key={s.title} title={s.title} rows={s.rows} />)}
-    </div>
-  );
-}
-
-// How We Compare — the comparison content, folded in from the former
-// standalone /compare pages (which now redirect here). Honest, side-by-side
-// framing: what each alternative does well, and where SettlementForge fits.
-function CompareTab() {
-  return (
-    <div style={{ maxWidth: 760 }}>
-      <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK, marginBottom:10 }}>
-        How SettlementForge compares
       </div>
-      <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 14px' }}>
-        Three honest, side-by-side breakdowns against the tools DMs commonly weigh. Each is
-        upfront about what the other tool does well. And where SettlementForge fits alongside
-        it rather than against it.
-      </p>
-      <Insight title="vs AI prose generators. Simulated, not prompted">
-        An AI prose generator writes fluent text on demand, but it improvises each answer: ask
-        twice and the guard captain's name, the dominant faction, or the town's economy can quietly
-        drift. SettlementForge <strong>simulates</strong> the settlement from interlocking
-        constraints, so every institution, NPC secret, and faction tension is mutually consistent
-        and reproducible. Best of both: generate the coherent brief here, then hand its Narrative AI
-        Prompt to an AI assistant for table-ready prose that stays on-model.
-      </Insight>
-      <Insight title="vs map-first tools. Maps + settlements">
-        Map-first tools are first-class map and hex editors. Terrain, regions, the shape of the
-        world. They don't simulate what lives inside a settlement. The two are complementary:
-        draw the map in a map tool, then populate its towns with SettlementForge's simulated
-        economies, power structures, and NPCs.
-      </Insight>
-      <Insight title="vs campaign wikis. Generate vs. store">
-        A campaign wiki is excellent at organizing and cross-linking the lore you already
-        have, but it doesn't generate that lore. Use SettlementForge to <strong>create</strong>
-        coherent settlements and export the brief, then store and interlink them in your wiki as
-        your living campaign bible.
-      </Insight>
-      <Tip>
-        The throughline: SettlementForge owns the <em>generation</em> of mechanically-coherent
-        settlements. Prose tools, map editors, and campaign wikis each sit naturally downstream of
-        that. Use them together, not instead.
-      </Tip>
+      {sections.map(s => <RefSection key={s.heading} heading={s.heading} rows={s.rows} />)}
     </div>
   );
 }
 
-function FaqTab() {
+function Faq() {
   return (
     <div>
-      <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK, marginBottom:10 }}>
-        Frequently asked questions
-      </div>
       <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 14px' }}>
         Credits, billing, gallery privacy, and how the simulator relates to AI. Account-specific
         controls (your plan, credit balance, billing portal) live on your Account page.
@@ -377,120 +349,39 @@ function FaqTab() {
   );
 }
 
-export default function HowToUse({ standalone=false }) {
-  // V-26b: the handbook header narrative forks to the house voice when the flag is on;
+export default function HowToUse() {
+  // A translated deep link (/how-to?tab=faq → /about/guide#faq) must LAND on its
+  // section; replaceState does no fragment navigation on its own.
+  useAboutHashScroll();
+  // V-26b: the guide's header narrative forks to the house voice when the flag is on;
   // OFF (default) renders the exact current strings. The Compendium link stays plain and
   // present in both (findability is clarity).
   const voiced = useFlag('handbookVoice');
-  // Open straight to a requested tab via ?tab= (e.g. /compare links redirect
-  // here with ?tab=compare; the Account page links to ?tab=faq). Falls back to
-  // Quick Start for any unknown value.
-  const [activeTab, setActiveTab] = useState(() => {
-    try {
-      const tab = new URLSearchParams(window.location.search).get('tab');
-      return TABS.some(t => t.id === tab) ? tab : 'quick';
-    } catch { return 'quick'; }
-  });
-  // A VALID ?tab= deep-link (the /compare redirect, Account → ?tab=faq, etc.)
-  // auto-expands the Keeper's Handbook collapsible so the linked tab lands visible
-  // on arrival. Read once at mount, exactly like the activeTab initial value above.
-  const hasTabParam = (() => {
-    try {
-      const tab = new URLSearchParams(window.location.search).get('tab');
-      return TABS.some(t => t.id === tab);
-    } catch { return false; }
-  })();
 
-  if (standalone) return (
-    // The About page splits into TWO collapsibles (order W2-e): 'What this is' —
-    // the trust-page manifesto, open by default — and 'The Keeper's Handbook' —
-    // the practical tabbed guide, collapsed by default. A valid ?tab= deep-link
-    // auto-expands the handbook so the linked tab lands visible on arrival.
-    <div style={{ maxWidth: PAGE_MAX, margin:'0 auto', width:'100%' }}>
-      <Disclosure title="What this is" defaultOpen style={{ marginBottom:16 }}>
-        <AboutManifesto />
-      </Disclosure>
-
-      {/* THE KEEPER'S HANDBOOK — the practical, day-to-day guide. Collapsed by
-          default; a ?tab= deep-link (the /compare redirect, Account → ?tab=faq,
-          etc.) auto-expands it so the requested tab is visible on arrival. */}
-      <Disclosure title="The Keeper's Handbook" defaultOpen={hasTabParam}>
-        <div style={{ maxWidth: PROSE_MAX, margin:'0 auto 14px' }}>
-          <div style={{ fontFamily:sans, fontSize:FS.xs, fontWeight:800, letterSpacing:'0.14em',
-            textTransform:'uppercase', color:GOLD_TXT, marginBottom:6 }}>{voiced ? VOICED_HEADER.eyebrow : 'The practical guide'}</div>
-          <h2 style={{ fontFamily:serif_, fontSize:FS['22'], fontWeight:600, color:INK, margin:0, lineHeight:1.2 }}>
-            {voiced ? VOICED_HEADER.title : <>The Keeper&rsquo;s Handbook</>}
-          </h2>
-          <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'6px 0 0', fontFamily:sans }}>
-            {voiced ? VOICED_HEADER.subtitleLead : 'How to drive the generator, day to day. Look any rule or catalog up in the '}
-            <a href="/compendium" style={{ color:GOLD_TXT, textDecoration:'underline', textUnderlineOffset:3, fontWeight:600 }}>Compendium</a>{voiced ? VOICED_HEADER.subtitleTail : '.'}
-          </p>
-        </div>
-
-        <div style={{ background:CARD, border:`1px solid ${BOR}`,
-          overflow:'hidden' }}>
-          {/* Tab bar */}
-          <div className="tab-strip" role="tablist" aria-label="Guide sections"
-            style={{ display:'flex', background:PARCH, borderBottom:`1px solid ${BOR}`,
-            overflowX:'auto' }}>
-            {TABS.map(({ id, label, Icon }) => (
-              <button key={id} type="button" role="tab" onClick={() => setActiveTab(id)}
-                aria-selected={activeTab===id}
-                style={{ display:'flex', alignItems:'center', gap:5, padding:'12px 18px',
-                  background: activeTab===id ? CARD : 'transparent',
-                  border:'none', borderBottom: activeTab===id ? `2px solid ${GOLD}` : '2px solid transparent',
-                  cursor:'pointer', color: activeTab===id ? INK : MUT, fontFamily:sans,
-                  fontSize:FS.sm, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap',
-                  WebkitTapHighlightColor:'transparent', flexShrink:0 }}>
-                <Icon size={13} /><span style={{ marginLeft:4 }}>{label}</span>
-              </button>
-            ))}
-          </div>
-          {/* Content — the card is PAGE_MAX wide; tab bodies fill it via their
-              own responsive multi-column layouts (no inner max-width here). */}
-          <div style={{ padding:'24px 28px' }}>
-            {activeTab==='quick' && <QuickTab />}
-            {activeTab==='power' && <PowerTab />}
-            {activeTab==='living' && <LivingWorldTab />}
-            {activeTab==='ref'   && <RefTab />}
-            {activeTab==='compare' && <CompareTab />}
-            {activeTab==='faq' && <FaqTab />}
-          </div>
-        </div>
-      </Disclosure>
-    </div>
-  );
+  // Handed to PageHeader as a spread object so the tooltip census (which counts the
+  // literal header prop token in JSX) never sees it. Object keys use a colon.
+  const header = {
+    eyebrow: voiced ? VOICED_HEADER.eyebrow : 'The practical guide',
+    title: voiced ? VOICED_HEADER.title : <>The Keeper&rsquo;s Handbook</>,
+    subtitle: (
+      <>
+        {voiced ? VOICED_HEADER.subtitleLead : 'How to drive the generator, day to day. Look any rule or catalog up in the '}
+        <a href="/compendium" style={{ color:GOLD_TXT, textDecoration:'underline', textUnderlineOffset:3, fontWeight:600 }}>Compendium</a>
+        {voiced ? VOICED_HEADER.subtitleTail : '.'}
+      </>
+    ),
+  };
 
   return (
-    <div style={{ overflow:'hidden' }}>
-      <>
-        {/* Tab bar */}
-        <div role="tablist" aria-label="Guide sections"
-          style={{ display:'flex', background:PARCH, borderBottom:`1px solid ${BOR}`, overflowX:'auto' }}>
-          {TABS.map(({ id, label, Icon }) => (
-            <button key={id} type="button" role="tab" onClick={() => setActiveTab(id)}
-              aria-selected={activeTab===id}
-              style={{ display:'flex', alignItems:'center', gap:5, padding:'8px 14px',
-                background: activeTab===id ? CARD : 'transparent',
-                border:'none', borderBottom: activeTab===id ? `2px solid ${GOLD}` : '2px solid transparent',
-                cursor:'pointer', color: activeTab===id ? INK : MUT,
-                fontSize:FS.xs, fontWeight:activeTab===id?700:500, fontFamily:sans,
-                whiteSpace:'nowrap', WebkitTapHighlightColor:'transparent', flexShrink:0 }}>
-              <Icon size={12} />
-              {label}
-            </button>
-          ))}
-        </div>
-        {/* Tab content */}
-        <div style={{ padding:'14px', background:CARD, maxHeight:'60vh', overflowY:'auto' }}>
-          {activeTab==='quick' && <QuickTab />}
-          {activeTab==='power' && <PowerTab />}
-          {activeTab==='living' && <LivingWorldTab />}
-          {activeTab==='ref'   && <RefTab />}
-          {activeTab==='compare' && <CompareTab />}
-          {activeTab==='faq' && <FaqTab />}
-        </div>
-      </>
-    </div>
+    <Page max={PAGE_MAX}>
+      <PageHeader {...header} />
+      {/* The five sections, in the retired tab strip's order — reading order is
+          content, so de-collapsing preserves it exactly (design §3). */}
+      <GuideSection unit="quick" heading="Quick Start"><QuickStart /></GuideSection>
+      <GuideSection unit="power" heading="Power User"><PowerUser /></GuideSection>
+      <GuideSection unit="living" heading="The Living World"><LivingWorldTab /></GuideSection>
+      <GuideSection unit="ref" heading="Reference"><Reference /></GuideSection>
+      <GuideSection unit="faq" heading="Frequently asked questions"><Faq /></GuideSection>
+    </Page>
   );
 }

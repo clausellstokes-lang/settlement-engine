@@ -21,6 +21,10 @@
  *   5. Unknown path → default view, notFound:true (hook rewrites to /create).
  */
 
+import {
+  ABOUT_WHAT_VIEW, destinationForLegacyTab, destinationForLegacySearch,
+} from './aboutMapping.js';
+
 const SITE_NAME = 'SettlementForge';
 const DEFAULT_VIEW = 'generate';
 
@@ -52,7 +56,19 @@ export const ROUTES = Object.freeze([
   { view: 'realm',                 path: '/realm',                 title: 'Realm',                         nav: { label: 'Realm',      order: 40 } },
   { view: 'map',                   path: '/map',                   title: 'World Map' },
   { view: 'compendium',            path: '/compendium',            title: 'Compendium',                    nav: { label: 'Compendium', order: 50 } },
-  { view: 'howto',                 path: '/how-to',                title: 'About',                         nav: { label: 'About',      order: 70 } },
+  // ── THE ABOUT FAMILY (docs/DESIGN_ABOUT_PAGES.md) ─────────────────────────
+  // The old single About page (`howto` at /how-to, an accordion of two
+  // collapsibles) SPLIT into the two pages its dropdown always named. The
+  // parent `/about` and the whole legacy `/how-to[?tab=…]` grammar stay
+  // resolvable and bounce to the right new page + anchor (`redirectForView`
+  // below, reading lib/aboutMapping.js — the one mapping writer), so no link
+  // already in the world 404s or lands on the wrong half.
+  { view: 'about',                 path: '/about',                 title: 'About' },
+  { view: 'about-what-this-is',    path: '/about/what-this-is',    title: 'What this Is',                  nav: { label: 'About',      order: 70 } },
+  { view: 'about-guide',           path: '/about/guide',           title: 'Practical Guide' },
+  // Retired: the pre-split About page. Kept so old links resolve; the redirect
+  // effect forwards it (with its ?tab= deep link translated to an anchor).
+  { view: 'howto',                 path: '/how-to',                title: 'About' },
   { view: 'workshop',              path: '/workshop',              title: 'Workshop' },
   { view: 'account',               path: '/account',               title: 'Account',                       guard: 'auth' },
   { view: 'admin',                 path: '/admin',                 title: 'Admin',                         guard: 'elevated' },
@@ -95,11 +111,13 @@ export const ROUTES = Object.freeze([
   // (in NOINDEX_VIEWS: seo.js + generate-sitemap.mjs), no guard.
   { view: 'screen',                path: '/screen',                title: 'The DM Screen' },
   // The dedicated competitor pages were deleted; App's redirect effect bounces
-  // every `compare*` view to /how-to?tab=compare (the competitor-agnostic "How
-  // We Compare" tab). The path entries stay so old/SEO links still resolve
-  // instead of 404ing, but the titles are retired to the destination ('About')
-  // so the one-frame pre-redirect document.title matches where the GM lands —
-  // no flash of a named-competitor title for a page that no longer exists.
+  // every `compare*` view to the "How We Compare" section of What this Is
+  // (`/about/what-this-is#how-we-compare` — the About split moved the
+  // positioning ladder to the conceptual page; see aboutMapping.js). The path
+  // entries stay so old/SEO links still resolve instead of 404ing, but the
+  // titles are retired to the destination ('About') so the one-frame
+  // pre-redirect document.title matches where the GM lands — no flash of a
+  // named-competitor title for a page that no longer exists.
   { view: 'compare',               path: '/compare',               title: 'About' },
   { view: 'compare-chatgpt',       path: '/compare/chatgpt',       title: 'About' },
   { view: 'compare-worldographer', path: '/compare/worldographer', title: 'About' },
@@ -313,6 +331,39 @@ export function guardForView(view) {
  */
 export function allowsFloatingFeedback(view) {
   return VIEW_TO_ROUTE[view]?.feedback !== false;
+}
+
+/**
+ * DEMOTED DESTINATIONS — where a retired view forwards.
+ *
+ * The route entries for these stay in ROUTES so their URLs still resolve (old
+ * links, SEO, already-sent email) instead of 404ing; this function is the one
+ * place that says where each one now lands, and App's redirect effect performs
+ * it. Keeping the decision here rather than in the shell means the routing table
+ * and the forwarding rules read as one thing.
+ *
+ *   - workshop  → the Workshop was removed; its work happens on Create.
+ *   - map       → the World Map moved INTO the Realm hub.
+ *   - about     → the parent path lands on the split's default page (design §4).
+ *   - howto     → the pre-split About page. Its ONLY real deep-link grammar was
+ *                 `?tab=<id>`, so the tab is translated to the anchor of whichever
+ *                 section absorbed it (lib/aboutMapping.js is the single writer —
+ *                 the rendered section ids come from the same manifest, so the
+ *                 redirect and the anchors cannot drift apart).
+ *   - compare*  → the retired competitor pages; the positioning ladder now lives
+ *                 in the What this Is page's "How We Compare" section.
+ *
+ * @param {string} view              the resolved view id
+ * @param {string} [search]          the current location.search (for `howto`)
+ * @returns {{ view: string, hash: string }|null}  null when nothing to do
+ */
+export function redirectForView(view, search = '') {
+  if (view === 'workshop') return { view: DEFAULT_VIEW, hash: '' };
+  if (view === 'map') return { view: 'realm', hash: '' };
+  if (view === 'about') return { view: ABOUT_WHAT_VIEW, hash: '' };
+  if (view === 'howto') return destinationForLegacySearch(search);
+  if (view.startsWith('compare')) return destinationForLegacyTab('compare');
+  return null;
 }
 
 /**

@@ -46,7 +46,10 @@ describe('routes NAV is the single source of truth (finding #4)', () => {
       { id: 'realm',       label: 'Realm' },
       { id: 'compendium',  label: 'Compendium' },
       { id: 'gallery',     label: 'Gallery' },
-      { id: 'howto',       label: 'About' },
+      // THE ABOUT SPLIT (docs/DESIGN_ABOUT_PAGES.md): the cell keeps its label
+      // and its order-70 slot; only its destination moved, from the retired
+      // one-page `howto` to the split's default page.
+      { id: 'about-what-this-is', label: 'About' },
     ]);
   });
 

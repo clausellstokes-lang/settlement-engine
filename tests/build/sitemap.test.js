@@ -57,15 +57,20 @@ describe('public/sitemap.xml', () => {
   });
 
   it('excludes noindex, guarded, and retired routes', () => {
-    const locs = staticUrls().map((u) => u.loc).join('\n');
+    // EXACT-PATH comparison, never a substring scan of the joined blob. A
+    // retired path can be a PREFIX of a live one — THE ABOUT SPLIT retired
+    // `/about` (the redirecting parent) while publishing `/about/what-this-is`
+    // and `/about/guide` — and a substring check reads the live children as a
+    // leak of the retired parent. The exclusion claim is about whole URLs.
+    const paths = new Set(staticUrls().map((u) => new URL(u.loc).pathname));
     for (const view of [...NOINDEX_VIEWS, ...RETIRED_VIEWS]) {
       const route = ROUTES.find((r) => r.view === view);
       if (!route?.path) continue;
-      expect(locs, `noindex/retired route ${view} leaked into sitemap`).not.toContain(`${route.path}`);
+      expect(paths.has(route.path), `noindex/retired route ${view} (${route.path}) leaked into sitemap`).toBe(false);
     }
     // Guarded routes too.
-    expect(locs).not.toContain('/account');
-    expect(locs).not.toContain('/admin');
+    expect(paths.has('/account')).toBe(false);
+    expect(paths.has('/admin')).toBe(false);
   });
 
   it('canonicalizes home to / and fans the compendium out to its 14 sections', () => {

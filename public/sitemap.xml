@@ -98,7 +98,12 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/how-to</loc>
+    <loc>https://settlementforge.com/about/what-this-is</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/about/guide</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1063,6 +1068,11 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://settlementforge.com/compendium/op-setrealmmagicchoice</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://settlementforge.com/compendium/op-setadvanceautoresolve</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -1334,6 +1344,11 @@
   </url>
   <url>
     <loc>https://settlementforge.com/compendium/op-clearauth</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/op-setavatarurl</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>

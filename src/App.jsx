@@ -11,7 +11,9 @@
  *   settlements — Saved settlements library
  *   realm       — The Realm hub (World Map + Pulse / Chronicle / Pantheon)
  *   compendium  — Rules & data compendium
- *   howto       — About page (how-to guide + comparisons)
+ *   about-what-this-is — About: the trust page (thesis, covenant, positioning)
+ *   about-guide — About: the Practical Guide (quick start → reference → FAQ)
+ *   howto       — retired pre-split About page; redirects into the two above
  *   gallery     — Community gallery
  *   terms/privacy/refunds — Legal / trust pages
  *   account     — Full account page (post-auth)
@@ -26,7 +28,7 @@ import { useStore } from './store/index.js';
 import { initOutbox } from './store/campaignSliceShared.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
-import { allowsFloatingFeedback, guardForView, viewToPath, NAV } from './lib/routes.js';
+import { allowsFloatingFeedback, guardForView, redirectForView, viewToPath, NAV } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
 // The eager shell reads ONLY footer.* copy — copy/footer.js carries that one
 // namespace with an identical t(). Importing copy/index.js here would drag the
@@ -80,7 +82,7 @@ const FloatingAffordances = lazy(() => import('./components/FloatingAffordances.
 // falls past the slice. The Realm is omitted (the map workspace is too
 // constrained for small screens; it stays in the desktop nav and its routes
 // still resolve). Welcome/home is reached via the mobile brand button.
-const MOBILE_NAV_PRIORITY = ['generate', 'settlements', 'gallery', 'compendium', 'howto'];
+const MOBILE_NAV_PRIORITY = ['generate', 'settlements', 'gallery', 'compendium', 'about-what-this-is'];
 
 // Is there a persisted Supabase session token on this device? A member returning
 // to the bare root should wait for their session to restore (so they aren't
@@ -360,17 +362,15 @@ export default function App() {
   }, [view, authTier, isElevated, authLoading]);
 
   // ── Demoted destinations → redirect to their new homes ─────────────────────
-  // The Workshop was removed; /compare* is now a section in About; the World Map
-  // moved INTO the Realm hub. The route entries stay (so the URLs still resolve
-  // and old links / SEO keep working), but we bounce them to the new surface.
+  // The Workshop, the standalone World Map, and (since THE ABOUT SPLIT) the
+  // whole pre-split About family keep their route entries so old links and SEO
+  // still resolve, then bounce here. WHERE each one lands — including the
+  // `/how-to?tab=` → section-anchor translation that keeps every old deep link
+  // pointing at the content that absorbed it — is decided by routes.js's
+  // `redirectForView`, beside the routing table it belongs to.
   useEffect(() => {
-    if (view === 'workshop') {
-      navigate('generate', { replace: true });
-    } else if (view === 'map') {
-      navigate('realm', { replace: true });
-    } else if (view.startsWith('compare')) {
-      navigate('howto', { replace: true, search: '?tab=compare' });
-    }
+    const to = redirectForView(view, typeof window !== 'undefined' ? window.location.search : '');
+    if (to) navigate(to.view, { replace: true, hash: to.hash });
   }, [view]);
 
   // ── Canonical-URL upgrade ──────────────────────────────────────────────────

@@ -46,9 +46,15 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 export { NOINDEX_VIEWS };
 
 // Retired redirect surfaces (kept in ROUTES so old links still resolve, but they
-// forward to /how-to and carry no unique content — never indexed).
+// forward into the About family and carry no unique content — never indexed).
+//
+// THE ABOUT SPLIT (docs/DESIGN_ABOUT_PAGES.md) added two of these: `howto`, the
+// pre-split About page (its content now lives on the two new pages, so indexing
+// /how-to would index a duplicate AND a redirect), and `about`, the bare parent
+// path that lands on /about/what-this-is.
 export const RETIRED_VIEWS = new Set([
   'compare', 'compare-chatgpt', 'compare-worldographer', 'compare-kanka',
+  'howto', 'about',
 ]);
 
 // Per-view sitemap hints. Views absent here fall back to DEFAULT_HINT.
@@ -59,7 +65,8 @@ const HINTS = {
   pricing:    { changefreq: 'monthly', priority: '0.9' },
   gallery:    { changefreq: 'daily',   priority: '0.8' },
   compendium: { changefreq: 'monthly', priority: '0.7' },
-  howto:      { changefreq: 'monthly', priority: '0.6' },
+  'about-what-this-is': { changefreq: 'monthly', priority: '0.6' },
+  'about-guide':        { changefreq: 'monthly', priority: '0.6' },
   terms:      { changefreq: 'yearly',  priority: '0.3' },
   privacy:    { changefreq: 'yearly',  priority: '0.3' },
 };

@@ -108,6 +108,15 @@ volumes corrected @ 36862650 + fdf43790):
       Messages and, built verbatim, would delete it. Both `FIRST_CONTACT_BACKLOG.md`
       (LD-5) and `DESIGN_OPERATOR_MESSAGES.md` §2 now carry the binding
       amendment; read either before touching `AccountMenu.jsx`.
+    - ✅ **THE ABOUT SPLIT IS BUILT** (2026-08-03, Lane C) — §1/§2/§3/§5 landed;
+      see the PROGRESS blockquote in `docs/DESIGN_ABOUT_PAGES.md` for the receipt
+      set and the substrate corrections. **§4 (the About ▾ dropdown) is the ONLY
+      remaining piece and it belongs to LD-5**, which is why it was not built
+      here. ⚠️ **LD-5's About ▾ block was AMENDED in `FIRST_CONTACT_BACKLOG.md`:
+      its old targets `/how-to` and `/how-to?tab=guide` are now WRONG** —
+      `/how-to` is a retired redirect and `?tab=guide` never existed. The three
+      real targets are `/about/what-this-is`, `/about/guide`, `/founders`. Read
+      that amendment before building LD-5, exactly as with the Messages seam.
 22. **THE RECEIPT-POOL ANNEXES ARE PRE-AUTHORED (2026-08-02)** — docs/content/
     RECEIPT_POOLS_{WAR,TRADE,FAITH,POPULATIONS,INFORMATION,GRAMMAR,INTERIOR,
     COUPLINGS}.md: 676 phrased kinds, ~3,000 angle-distinct variants, authored

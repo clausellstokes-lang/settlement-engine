@@ -105,7 +105,7 @@ const NAV_LINKS = [
   ['/compendium', 'Compendium'],
   ['/pricing', 'Pricing'],
   ['/gallery', 'Gallery'],
-  ['/how-to', 'About'],
+  ['/about/what-this-is', 'About'],
 ];
 
 /** A <noscript> body summary: heading + description + the crawl-graph nav. */

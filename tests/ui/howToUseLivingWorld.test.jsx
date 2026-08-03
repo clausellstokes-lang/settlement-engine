@@ -4,34 +4,25 @@
  * tests/ui/howToUseLivingWorld.test.jsx — UX Phase 9 About surfaces.
  *
  * Covers:
- *   - HowToUse renders the new "The Living World" tab + the split "Under the
- *     Hood" (Generation + Simulation) without throwing.
+ *   - The Practical Guide (components/HowToUse.jsx, /about/guide) renders "The
+ *     Living World" section and keeps the folded-up tabs retired.
  *   - RegionWakeReplay (the anon "Watch a region wake up" teaser) mounts for an
  *     anon visitor, scrubs deterministically, and renders the scripted arcs.
  *   - PricingPage A/B: the simulation-led copy is selectable behind the flag.
+ *
+ * THE ABOUT SPLIT (docs/DESIGN_ABOUT_PAGES.md) removed the collapsibles and the tab
+ * strip by owner order: the guide's sections now render FLAT and always-open, and the
+ * manifesto moved to its own page. The tab-clicking and expand-the-handbook helpers
+ * these tests used are therefore gone — the behaviour they pinned was deliberately
+ * deleted, not silently lost. The split's own structural pins (mapping totality,
+ * anchor survival, header parity, heading tree) live in
+ * tests/components/aboutSplit.test.jsx.
  */
 
 import { describe, it, expect, afterEach, vi } from 'vitest';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 
 afterEach(cleanup);
-
-/** Click a HowToUse tab by its label, disambiguating the tab BUTTON from any
- *  body text that mentions the same phrase. */
-function clickTab(container, label) {
-  const btn = [...container.querySelectorAll('button[role="tab"]')]
-    .find(b => b.textContent.trim() === label);
-  if (!btn) throw new Error(`tab button not found: ${label}`);
-  fireEvent.click(btn);
-}
-
-/** Order W2-e — the About page splits into two collapsibles; the Keeper's Handbook
- *  (the tabbed guide) is COLLAPSED by default. Open it so its tabs/content render. */
-function expandHandbook(container) {
-  const btn = [...container.querySelectorAll('button[aria-expanded]')]
-    .find(b => /Keeper/i.test(b.textContent));
-  if (btn && btn.getAttribute('aria-expanded') === 'false') fireEvent.click(btn);
-}
 
 // Analytics is fire-and-forget — stub so the mount path stays quiet.
 vi.mock('../../src/lib/analytics.js', () => ({
@@ -55,27 +46,36 @@ vi.mock('../../src/store/index.js', () => {
   return { useStore };
 });
 
-describe('HowToUse — the About manifesto + the Keeper\'s Handbook tabs', () => {
-  it('mounts, keeps The Living World tab, and retires the folded-up tabs', async () => {
+describe('The Practical Guide — the de-collapsed Keeper\'s Handbook (/about/guide)', () => {
+  it('mounts flat: every section is present at once, and the folded-up tabs stay retired', async () => {
     const HowToUse = (await import('../../src/components/HowToUse.jsx')).default;
-    const { container } = render(<HowToUse standalone />);
+    const { container } = render(<HowToUse />);
     expect(container.firstChild).not.toBeNull();
-    expandHandbook(container); // the handbook is collapsed by default (order W2-e)
-    const labels = [...container.querySelectorAll('button[role="tab"]')].map(b => b.textContent.trim());
-    // The practical handbook keeps The Living World tab.
-    expect(labels).toContain('The Living World');
+    const headings = [...container.querySelectorAll('h2')].map(h => h.textContent.trim());
+    // The guide keeps The Living World, now as a section rather than a tab.
+    expect(headings).toContain('The Living World');
     // DOC WAVE 2/2: "Under the Hood" (derivation mechanics) and "DM Philosophy"
     // were folded UP into the About manifesto (the mechanism + philosophy bands),
-    // and the orphaned howto/UnderTheHoodTab.jsx was reaped. Their tabs are gone.
-    expect(labels).not.toContain('Under the Hood');
-    expect(labels).not.toContain('DM Philosophy');
+    // and the orphaned howto/UnderTheHoodTab.jsx was reaped. They stay gone.
+    expect(headings).not.toContain('Under the Hood');
+    expect(headings).not.toContain('DM Philosophy');
+    // §0.2 — the page's OWN chrome carries no collapse/expand state: the two
+    // card collapsibles and the tab strip are gone.
+    expect(container.querySelectorAll('button[role="tab"]').length).toBe(0);
+    // SCOPE NOTE (chair call, vetoable): the FAQ's per-QUESTION disclosures are
+    // NOT "the collapsing cards" §0.2 removed. They belong to the shared
+    // AccountFAQ component, which the Account page renders too; flattening a
+    // long Q&A list here would fork that component and hurt the surface it was
+    // built for. What §0.2 removed — the About page's own card chrome — is
+    // pinned by source scan in tests/components/aboutSplit.test.jsx.
+    const ownDisclosures = [...container.querySelectorAll('button[aria-expanded]')]
+      .filter(b => [...container.querySelectorAll('h2')].some(h => h.textContent.trim() === b.textContent.trim()));
+    expect(ownDisclosures.length, 'a guide SECTION must never be collapsible').toBe(0);
   });
 
-  it('clicking The Living World renders the thesis + the value ladder', async () => {
+  it('The Living World content renders WITHOUT a click (it is no longer behind a tab)', async () => {
     const HowToUse = (await import('../../src/components/HowToUse.jsx')).default;
-    const { getAllByText, container } = render(<HowToUse standalone />);
-    expandHandbook(container); // the handbook is collapsed by default (order W2-e)
-    clickTab(container, 'The Living World');
+    const { getAllByText, container } = render(<HowToUse />);
     // The thesis line.
     expect(container.textContent.toLowerCase()).toContain('runs the region for years');
     // The value ladder rungs.
@@ -84,44 +84,28 @@ describe('HowToUse — the About manifesto + the Keeper\'s Handbook tabs', () =>
     expect(container.textContent).toContain('Advance Time');
   });
 
-  it('the About manifesto renders the derivation mechanics (folded up, always visible)', async () => {
+  it('the operational claims prose survived the split intact', async () => {
     const HowToUse = (await import('../../src/components/HowToUse.jsx')).default;
-    const { container } = render(<HowToUse standalone />);
-    // The manifesto is a linear trust page — the mechanism band renders on mount,
-    // not behind a tab click.
+    const { container } = render(<HowToUse />);
     const text = container.textContent.toLowerCase();
-    expect(text).toContain('resolves constraints');
-    expect(text).toContain('constraint-driven worldbuilding');
-    expect(text).toContain('sliders shift probability');
-    expect(text).toContain('causal variables');
+    // The Power User section's slider + neighbour claims (the ones
+    // handbookClaimsParity holds to the live engine) stayed on the guide.
+    expect(text).toContain('the five sliders compete for institutional probability');
+    expect(text).toContain('cold war seeds clandestine intelligence factions');
   });
 });
 
-describe('HowToUse — About split into two collapsibles (order W2-e)', () => {
-  it('"What this is" is open by default; the Keeper\'s Handbook is collapsed until opened', async () => {
-    const HowToUse = (await import('../../src/components/HowToUse.jsx')).default;
-    const { container } = render(<HowToUse standalone />);
-    // 'What this is' (the manifesto) is expanded on mount — its mechanism prose shows.
-    expect(container.textContent.toLowerCase()).toContain('resolves constraints');
-    // 'The Keeper's Handbook' is collapsed — its tab strip is not rendered yet.
-    expect(container.querySelectorAll('button[role="tab"]').length).toBe(0);
-    // Opening it reveals the tabbed guide.
-    expandHandbook(container);
-    expect(container.querySelectorAll('button[role="tab"]').length).toBeGreaterThan(0);
-  });
-
-  it('a valid ?tab= deep-link auto-expands the Keeper\'s Handbook on arrival', async () => {
-    const HowToUse = (await import('../../src/components/HowToUse.jsx')).default;
-    const orig = window.location.pathname + window.location.search;
-    window.history.replaceState({}, '', '/how-to?tab=living');
-    try {
-      const { container } = render(<HowToUse standalone />);
-      // Deep-link → handbook open without any click → its tabs are present.
-      const labels = [...container.querySelectorAll('button[role="tab"]')].map(b => b.textContent.trim());
-      expect(labels).toContain('The Living World');
-    } finally {
-      window.history.replaceState({}, '', orig);
-    }
+describe('What this Is — the trust page the manifesto moved to', () => {
+  it('renders the derivation mechanics linearly, with no collapse state at all', async () => {
+    const AboutPage = (await import('../../src/components/about/AboutWhatThisIs.jsx')).default;
+    const { container } = render(<AboutPage />);
+    const text = container.textContent.toLowerCase();
+    expect(text).toContain('resolves constraints');
+    expect(text).toContain('constraint-driven worldbuilding');
+    expect(text).toContain('causal variables');
+    // The mechanism band's slider line moved WITH the manifesto, not with the guide.
+    expect(text).toContain('sliders shift probability');
+    expect(container.querySelectorAll('button[aria-expanded]').length).toBe(0);
   });
 });
 

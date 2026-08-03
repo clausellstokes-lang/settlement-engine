@@ -248,7 +248,10 @@ describe('routes — wave 4 IA (home / realm / nav / legal)', () => {
 
   it('exposes NAV derived from the nav metadata, sorted by order', () => {
     const ids = NAV.map(n => n.id);
-    expect(ids).toEqual(['home', 'generate', 'settlements', 'realm', 'compendium', 'gallery', 'howto']);
+    // THE ABOUT SPLIT: the About nav cell now points at the split's default
+    // page (`about-what-this-is` at /about/what-this-is), not the retired
+    // pre-split `howto`. Ordered behaviour change, not drift.
+    expect(ids).toEqual(['home', 'generate', 'settlements', 'realm', 'compendium', 'gallery', 'about-what-this-is']);
     const orders = NAV.map(n => n.order);
     expect([...orders].sort((a, b) => a - b)).toEqual(orders);
     for (const n of NAV) {

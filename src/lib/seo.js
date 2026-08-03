@@ -69,6 +69,11 @@ export const VIEW_DESCRIPTIONS = {
   // closure budget has only a few hundred bytes of headroom. Trim, never pad.
   compendium: 'The SettlementForge compendium: settlement tiers, trade, power and faction archetypes, religion, stress, and the institution catalog.',
   pricing:    'SettlementForge pricing. Generate and save settlements for free, or unlock the Realm, AI narration, and cross-settlement simulation.',
+  // THE ABOUT SPLIT: the trust page keeps the old /how-to description (it kept
+  // the content); the Practical Guide gets its own, task-shaped one. `howto`
+  // stays keyed for the retired route's one pre-redirect frame.
+  'about-what-this-is': 'Why SettlementForge can be trusted: a deterministic world simulator built by one person, with the AI caged by mechanism.',
+  'about-guide': 'The Keeper’s Handbook: how to drive SettlementForge day to day — quick start, power use, the living world, and the reference spine.',
   howto:      'Why SettlementForge can be trusted: a deterministic world simulator built by one person, with the AI caged by mechanism.',
   gallery:    'Browse settlements and realms shared by the SettlementForge community.',
   // The Hall is an invitation, never an offer — the description must not read as
