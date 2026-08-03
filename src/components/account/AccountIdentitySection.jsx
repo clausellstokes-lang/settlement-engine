@@ -103,10 +103,27 @@ export default function AccountIdentitySection() {
     setEditUrl(null);
   }, []);
 
-  const acceptFile = useCallback((file) => {
+  const acceptFile = useCallback(async (file) => {
     setError(null);
     const check = validateAvatarFile(file);
     if (!check.ok) { setError(check.error); return; }
+
+    // ⚠️ THE DIMENSION FLOOR IS CHECKED ON THE *SOURCE*, BEFORE CROPPING, and it
+    // has to be. The cropper's output is always 512x512 by construction, so
+    // measuring it would be measuring our own canvas — a 64x64 photo would sail
+    // through, get upscaled into a blurry face, and the §3.1 floor would be a
+    // comment rather than a rule. Decoding here costs one image decode and is the
+    // only moment the user's real pixel dimensions exist.
+    let decoded;
+    try {
+      decoded = await decodeImageSource(file);
+    } catch {
+      setError('Could not read that image.');
+      return;
+    }
+    const dims = validateAvatarDimensions({ width: decoded.width, height: decoded.height });
+    if (!dims.ok) { setError(dims.error); return; }
+
     if (objectUrlRef.current) URL.revokeObjectURL(objectUrlRef.current);
     const url = URL.createObjectURL(file);
     objectUrlRef.current = url;
@@ -115,7 +132,9 @@ export default function AccountIdentitySection() {
 
   const onPick = (e) => {
     const file = e.target.files?.[0];
-    if (file) acceptFile(file);
+    // acceptFile is async (it decodes to measure the source); catch so a decode
+    // failure becomes a sentence rather than an unhandled rejection.
+    if (file) acceptFile(file).catch(() => setError('Could not read that image.'));
     e.target.value = ''; // allow re-picking the same file
   };
 
@@ -134,13 +153,10 @@ export default function AccountIdentitySection() {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error('You must be signed in to upload a profile image.');
 
+      // No dimension check here: this blob is our own 512 square crop, so
+      // measuring it would measure our canvas rather than the user's photo. The
+      // floor is enforced on the SOURCE in acceptFile, before cropping.
       const source = await decodeImageSource(squarePngBlob);
-      const dims = validateAvatarDimensions({
-        width: source.width || AVATAR_RUNGS.master,
-        height: source.height || AVATAR_RUNGS.master,
-      });
-      if (!dims.ok) { setError(dims.error); return; }
-
       const ladder = await buildAvatarLadder(source);
       const { url } = await uploadAvatarLadder(ladder, { userId: user.id });
 
