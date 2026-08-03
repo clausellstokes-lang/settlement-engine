@@ -342,6 +342,34 @@ authored here so "SP-N landed" resolves corpus-wide.]
   panels link to "their headlines"; every headline's entities link back
   to their panels — the dossier round-trip extended to the newspaper).
   Display-side, derived, no engine state.
+  **[AMENDED 2026-08-03 (owner law) — THE TRUTH LAW + THE CONTAMINATION
+  FENCE:]** THE HERALD IS THE DM'S PAPER AND IT ALWAYS TELLS THE TRUTH.
+  Its register is GROUND TRUTH: (a) events print as they happened; no
+  belief ever prints as a ground fact and no lie ever prints as an
+  event — where a cause was a belief or a lie, the Herald reports the
+  believing or the planting AS THE TRUE EVENT it is ("Karsh marched on
+  a misjudgment"; "the tale was planted, and it took root" —
+  commissioner named, behind the DM gate); (b) Law One survives
+  truthfulness — even the DM's truth never confirms a god: the temple's
+  CALLING is the fact the paper carries; (c) covert truth is the
+  Herald's native register (the DM's world is the DM's to see); every
+  player/free-facing view is a FAIL-CLOSED PROJECTION DOWN from the one
+  truthful paper — never a second paper that could drift. THE
+  CONTAMINATION FENCE (structural, K3 INVERTED): no manipulation at the
+  rumor or local level ever permeates the Herald — the Herald's
+  composers may never read a rumor ledger, a belief map, or a disinfo
+  record AS A CONTENT SOURCE; their inputs are truth-side events and
+  receipts only, enforced by the same structural idiom that fences
+  negotiation from truth (pinned import lists, source-token scans, the
+  guard-the-guard positive control proving the scan bites). THE PAIRING
+  LAW: the rumor mill is the world's BELIEVED word — wrong, worn,
+  human — and its upward link to the truthful headline is the DM's
+  fog-of-war instrument: what the town believes, one click from what
+  happened. All four tiers and the index inherit the truth register;
+  the pools' belief-attribution phrasings ("men said") remain lawful in
+  RUMOR-MILL and in-world voices, while Herald tiers attribute minds
+  only as reported fact — the believing marked as believing, which is
+  the truth.
 - **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion + the
   mode-speed table (J-D11(b)) landed as spine infrastructure ahead of all six.
 - **SP-8 THE AGE LAYER [CORRECTED 2026-08-02 (fp-audit) — new, per the
