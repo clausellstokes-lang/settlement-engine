@@ -578,3 +578,58 @@ seven volumes); band FAMILIES (spine-shared, SP-6's table) keep the owner's
 signature surface tractable, and SP-6's reconciliation walker keeps the
 volume tables honest; the tuning pass grows accordingly and that is the
 priced cost of the ambition.
+
+## §6 PROGRESS
+
+> **LANE H — THE HERALD CAUSAL-VOICE SURFACE (SOL_QUEUE item 24): the DISPLAY
+> SLICE IS BUILT AND DARK, 2026-08-03.** Five commits on
+> `claude/composite-r4` in the minifold worktree, nothing pushed, everything
+> behind `simulationRules.heraldCausalVoiceEnabled` — dark renders the surface
+> that shipped, byte for byte.
+>
+> | Commit | What landed |
+> |---|---|
+> | `6eb6c445` | **THE TWO REGISTERS.** `heraldCausalGrammar.js` — §0c's eight typed edges, §3.1's sixteen connective pools, §3.2's two terminals, §0d's six-band time family in four print positions, drawn through `avalanche32(fnv1a32(seed))`. `heraldCausalVoice.js` — HEADLINE (exactly one link, so a cascade is structurally unreachable), SUBHEADER (the recorded summary, composed from nothing), TELLING (the whole chain, one direction held). |
+> | `3637c4ec` | **THE PORTABLE POPUP + THE DISCLOSURE.** `PortablePopup.jsx` (no acknowledge-control prop exists ⇒ outside-click closes, structurally), `CausalityPopup.jsx` (the four tiers), `heraldIntegrity.js` (§4's five states). `causeWalk.js` gains two additive read-only hop atoms so the disclosure can reach the truth it already holds. |
+> | `47102e4e` | **THE FENCE + THE INDEX.** `heraldContaminationFence.test.js` (K3 inverted: transitive reachability + token scan + guard-the-guard, negative control executed). `heraldIndex.js` (typed facets; refs only, audience fail-closed). |
+> | `a1f633eb` | **THE UPWARD LINK.** `rumorHeraldLink.js` — the rumor mill cites the paper; truthfully unlinked below the pacing floor. |
+> | this row | The progress record. |
+>
+> **RECEIPTS.** 162/162 across the composed lane matrix (13 files, `gate-tail`
+> exit 0), covering the four new domain modules, the popup, the fence, and the
+> landed cause-walk and Herald consumers that the additive hop fields touch.
+> The fence's negative control is CONFIRMED: one forbidden import reds four
+> pins, and the probe was reverted from a file copy with `git status` proving
+> the file identical to its committed state.
+>
+> **PER-LINK ENTAILMENT, AS BUILT.** The provenance ledger records a parent
+> link and the child's structural type — it does NOT record a relation. So an
+> edge stronger than plain succession must be positively warranted by a field
+> the receipt carries, and everything unwarranted draws `followed`, which
+> asserts succession and refuses causation. Nothing ever falls back to
+> `caused`. Six warrants are wired today (`planted` · `exposed` · `refused` ·
+> `breached` · `dissolved` · `caused`).
+>
+> **WHAT THIS SLICE DELIBERATELY DID NOT DO** — recorded so no one re-finds it
+> as a bug:
+>
+> 1. **§1's 78 JOIN MOLDS ARE NOT WIRED.** The registers compose from §3's
+>    connectives over the cause walk's own byte-verbatim receipt headlines,
+>    which satisfies per-link entailment exactly ("the cause walk wearing
+>    prose"). The 78 families × 3-4 registers and §2's 175 clause forms are a
+>    content-transcription wave of their own, with their own golden plan. The
+>    substrate they wire INTO is built and pinned.
+> 2. **FIVE INDEX FACETS ARE PENDING, WIRED, AND DARK** — institution, good,
+>    service, route, treaty/war/arc. Their readers exist and a pin feeds each
+>    one a typed ref to prove it lights; they wait on the MINT-TIME typed
+>    entity-ref slots, which are the war lane's territory. `facetAvailability`
+>    reports declared status beside measured population so the UI dims rather
+>    than promises.
+> 3. **THE UPWARD LINK IS DM-ONLY TODAY.** The join key `eventRef` lives only
+>    in a rumor projection's DM `truth` block. Correct twice over — the
+>    fog-of-war instrument is the DM's, and a player surface must never gain a
+>    path to the truthful paper — and reported through `joinable` rather than
+>    collapsed into an empty answer.
+> 4. **THE DOSSIER-NATIVE REGISTER IS NOT THIS LANE'S.** SP-6's fourth
+>    register belongs to the dossier lane, which is live on
+>    `src/domain/display/stateProse/` in the same tree.
