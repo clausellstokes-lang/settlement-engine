@@ -408,6 +408,22 @@ authored here so "SP-N landed" resolves corpus-wide.]
   neither pure wear nor post-plant drift may confabulate or inherit a
   culprit); the popup renders identically from all summoning surfaces
   (one component, source-scan pinned).
+  **[AMENDED 2026-08-03 (owner order) — THE DOSSIER EXTENSION:]** the
+  causal voice's consumer set is ALL DM-TRUTH SURFACES — the Herald's
+  four tiers, the SETTLEMENT DOSSIER's cause-walks (CW-2 lives on the
+  town page by its own spec; the voice is the prose its walks were
+  missing), and the portable popup wherever summoned — and NEVER the
+  in-world believed voices (the rumor mill keeps its worn human
+  register; the exclusivity ruling's true boundary was always the truth
+  register, not the Herald building). The truth law and the
+  contamination fence extend to dossier causal prose identically
+  (truth-side sources only, same pins). THE STATE-ANCHORED ANGLE: every
+  join family gains one mold angle in the dossier's tense — the Herald
+  narrates WHAT HAPPENED; the dossier explains WHY IT IS SO ("The
+  granary stands half-empty — the bill of the tribute year, still being
+  paid") — same families, same entailment, the standing condition
+  anchored to its causal ancestry. Frequency floors and the repetition
+  envelope cover the state-anchored forms at the family grain.
 - **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion + the
   mode-speed table (J-D11(b)) landed as spine infrastructure ahead of all six.
 - **SP-8 THE AGE LAYER [CORRECTED 2026-08-02 (fp-audit) — new, per the
