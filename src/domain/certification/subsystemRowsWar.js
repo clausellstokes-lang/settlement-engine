@@ -26,7 +26,9 @@
  * nowhere except inside the war layer. THE TWO EXCEPTIONS, stated so nobody infers
  * a gate that is not there: navalActive (navalKernel.js:78) is armyTransitActive AND
  * navalEnabled, with NO warLayerEnabled term, and allyIntelSharingEnabled rides
- * beliefsActive through pulseKernel.js:1838. So a receipt with the war layer dark
+ * beliefsActive through
+ * pulseKernel.js `allyIntel: simulationRules.allyIntelSharingEnabled === true ?`.
+ * So a receipt with the war layer dark
  * grades the nested rows DORMANT_BY_CONFIG rather than SILENT even when their own
  * key reads true, while the two exceptions keep answering for themselves. Each row
  * states its own gate in `other` so the reading is recorded rather than inferred.
@@ -282,7 +284,9 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
       moverFamilies: Object.freeze([]),
       // A TOP-LEVEL worldState container that exists ONLY under this flag:
       // warDeployment.js:1291 allocates it at the flag read and returns null
-      // otherwise, and pulseKernel.js:883 writes it back only when non-null. That
+      // otherwise, and pulseKernel.js
+      // `worldState = { ...worldState, defenderSiegeLedger: war.defenderSiegeLedger };`
+      // writes it back only when non-null. That
       // makes it a genuinely dispositive channel, readable from a v5 census.
       stateKeys: Object.freeze(['defenderSiegeLedger']),
       other: 'Nested under warLayerEnabled (read at warDeployment.js:1280). The ledger seeds from the target\'s fresh homeDefense on the first besieged tick, wears down through applyAttritionToRecord with isAttacker false, feeds the siege verdict as defenderStrengthOverride, and is RETIRED the moment the siege ends, with a final prune at warDeployment.js:2133 dropping every target that is no longer besieged. So a census year with no live siege legitimately reads zero: maxEntries over the span is the aliveness signal and finalEntries is not. The completed release receipts are envelope v4 and carry no subsystems census at all, which is why this row reports an INSTRUMENT GAP rather than a silence; a v5 rerun of the same cases reads it for free.',
@@ -432,7 +436,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
       eventTypes: Object.freeze([]),
       moverFamilies: Object.freeze([]),
       stateKeys: Object.freeze([]),
-      other: 'Wired at pulseKernel.js:1838, which passes an allyIntel closure only when the key reads true, into advanceBeliefMaps. The pass shares high-confidence beliefs across FRIENDLY_LABELS edges, styles them by the sharer\'s derived alignment (lawful relays faithfully, chaotic garbles, evil feeds false intel), and leaks the sharer\'s own footing to a real enemy through a presumed ally that has turned. EVERY ONE of those effects lands as a record INSIDE spatialLedgers.beliefMaps, which materializes whenever beliefsActive is true, so the container proves the belief layer ran and never proves this pass ran. censusWorldStateKeys counts a ledger\'s entries and never their provenance. TO OBSERVE: a provenance census over beliefMaps records, counting entries that carry the ally-share styling or the ALLY_INTEL_TUNING.LEAK_CONFIDENCE 0.9 marker, which would also give the knowledge mover family the source split it currently lacks. This is DISTINCT from intelTradeEnabled (spatial/intelActs.js), the bounded sell and gift twin, which certifies separately.',
+      other: 'Wired at pulseKernel.js `allyIntel: simulationRules.allyIntelSharingEnabled === true ?`, which passes an allyIntel closure only when the key reads true, into advanceBeliefMaps. The pass shares high-confidence beliefs across FRIENDLY_LABELS edges, styles them by the sharer\'s derived alignment (lawful relays faithfully, chaotic garbles, evil feeds false intel), and leaks the sharer\'s own footing to a real enemy through a presumed ally that has turned. EVERY ONE of those effects lands as a record INSIDE spatialLedgers.beliefMaps, which materializes whenever beliefsActive is true, so the container proves the belief layer ran and never proves this pass ran. censusWorldStateKeys counts a ledger\'s entries and never their provenance. TO OBSERVE: a provenance census over beliefMaps records, counting entries that carry the ally-share styling or the ALLY_INTEL_TUNING.LEAK_CONFIDENCE 0.9 marker, which would also give the knowledge mover family the source split it currently lacks. This is DISTINCT from intelTradeEnabled (spatial/intelActs.js), the bounded sell and gift twin, which certifies separately.',
     }),
     // The sharing pass runs for every believed-ally pair on every tick the belief
     // layer advances, so a healthy realm shares continuously rather than in bursts.

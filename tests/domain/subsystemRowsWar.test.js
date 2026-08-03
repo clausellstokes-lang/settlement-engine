@@ -278,7 +278,16 @@ describe('war-stack rows — shape and partition', () => {
       'spatial-canon marker',
       'the naval row names its real gate rather than an inherited one',
     );
-    expect(rowFor('allyIntelSharingEnabled').aliveness.other).toContain('pulseKernel.js:1838');
+    // CONTENT-ANCHORED, not line-keyed (LANE KR, 2026-08-03). This pin used to quote a
+    // hand-keyed kernel line number that had already rotted ~107 lines out of true
+    // (the allyIntel block sits at line 1945 today) while staying GREEN, because a
+    // doc-text-to-doc-text comparison cannot see the source it names. The
+    // anchor is now the kernel's own expression, and the second assertion proves that
+    // expression still EXISTS in pulseKernel.js — so a rename reds here instead of
+    // rotting silently. Repo-wide enforcement: tests/lint/pulseKernelLineAddress.walker.test.js.
+    const ALLY_INTEL_ANCHOR = 'allyIntel: simulationRules.allyIntelSharingEnabled === true';
+    expect(rowFor('allyIntelSharingEnabled').aliveness.other).toContain(`pulseKernel.js \`${ALLY_INTEL_ANCHOR}`);
+    expect(sourceOf('src/domain/worldPulse/pulseKernel.js')).toContain(ALLY_INTEL_ANCHOR);
   });
 
   test('the eleven vocabulary-less rows admit the gap and name the observation that closes it', () => {

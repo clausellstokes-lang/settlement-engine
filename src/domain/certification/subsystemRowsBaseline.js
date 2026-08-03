@@ -116,9 +116,10 @@ export const BASELINE_SUBSYSTEM_ROWS = Object.freeze([
       // event types above are the dispositive channel.
       moverFamilies: Object.freeze(['people']),
       // DELIBERATELY EMPTY. worldState.npcStates looks like the obvious ledger and
-      // is NOT a faithful gate: pulseKernel calls pruneNpcStates and
-      // advanceNpcCorruption unconditionally (pulseKernel.js:302 and :327), so the
-      // container is written even with npcAgencyEnabled false. Declaring it would
+      // is NOT a faithful gate: both calls are unconditional —
+      // pulseKernel.js `worldState = pruneNpcStates(worldState, snapshot, { tick: worldState.tick });`
+      // and pulseKernel.js `const corruption = advanceNpcCorruption(worldState, snapshot, rng.fork('corruption')`
+      // — so the container is written even with npcAgencyEnabled false. Declaring it would
       // grade this row ALIVE in a world where the chooser never ran.
       stateKeys: Object.freeze([]),
       other: 'The gate is a single seam: candidateEvents.js:507 admits evaluateNpcRules only when rules.npcAgencyEnabled is true, so every event type above is unreachable when the flag is dark. A repeated automatic non-targeted action carries recordMode state_only (npcAgency.js:904) and is therefore counted as a mechanical outcome rather than a public event, so a low event count in a quiet realm is expected and is not by itself a silence diagnosis.',

@@ -43,9 +43,10 @@
  *     (wizardNews.js capEntries). Cross-substrate parity therefore runs through
  *     the everSeen minted ledger (exact), never through window intersection.
  * E-3 DIGEST CAP: impactDigest is the top-18-by-score compaction of the APPLY
- *     step's news (pulseKernel.js:1615), and post-record kernels (realm arcs,
- *     infowar, army transit, naval, pestilence, calamity, generosity, tempo …)
- *     mint feed entries AFTER the record is cut (pulseKernel.js:1763+). So
+ *     step's news (pulseKernel.js `impactDigest: compactImpactDigest(applied.newsEntries)`),
+ *     and post-record kernels (realm arcs, infowar, army transit, naval,
+ *     pestilence, calamity, generosity, tempo …) mint feed entries AFTER the
+ *     record is cut at pulseKernel.js `const pulseRecord = {`. So
  *     feed→digest containment is a measured coverage floor, not equality.
  * E-4 DEPTH: selectedOutcomes ('outcome' chronicle nodes) are the chronicle's
  *     deeper altitude with no per-id feed counterpart by design; they are outside

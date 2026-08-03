@@ -1732,6 +1732,10 @@
    "kind": "mutation",
    "label": "identity/undeclared avatar reader planted"
   },
+  "tests/lint/pulseKernelLineAddress.walker.test.js": {
+   "kind": "rationale",
+   "rationale": "LANE KR (2026-08-03) habitat walker for the HAND-KEYED LINE-ADDRESS class: no `pulseKernel.js:<digits>` literal may exist under src/ or tests/ (frozen at ZERO, no allowlist), and every replacement content anchor — the estate's `pulseKernel.js` + backticked-source-token spelling — must be literally contained in src/domain/worldPulse/pulseKernel.js. A standing sweep plant is refused for the same reason as configMigrationSingleWriter and namedPersonTransitTotality: its subject is the WHOLE src/ + tests/ tree, so MUTATED_FILES would have to name src/**, which cannot be reconciled with a live shared tree carrying several lanes' untracked work. BOTH DIRECTIONS ARE PROVED BY EXECUTED CONTROLS INSTEAD — inline on every run, and once by hand at authoring time. Inline: the guard-the-guard cases build the banned literal by CONCATENATION (it never appears verbatim in the walker's own bytes, so the self-exemption is not a hole) and assert the detector fires on it and on two addresses in one line, while staying silent on the content anchor, on another module's address and on a bare module mention; the containment check is discriminated against a plausible fiction (`simulationRules.seasonsDisabled === true`) that must NOT be contained. By hand: a transient mutant re-introducing a `pulseKernel.js:1855` address into src/domain/certification/subsystemRowsRegen.js reddened RULE 1 naming the file and line (2 failed / 3 passed), and a second mutant rotting one anchor token reddened RULE 2 naming the missing source (1 failed / 4 passed); both were restored from a cp backup and the walker returned 5/5 green. Promote to kind:mutation once src/ is quiescent."
+  },
   "tests/security/publicPayloadVeilTotality.test.js": {
    "kind": "mutation",
    "label": "civility-veil/public payload boundary unveiled"

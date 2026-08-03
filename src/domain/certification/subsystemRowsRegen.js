@@ -52,9 +52,10 @@ export const REGEN_SUBSYSTEM_ROWS = Object.freeze([
       moverFamilies: Object.freeze([]),
       // DELIBERATELY EMPTY. spatialLedgers.beliefMaps is the obvious container and
       // is NOT a faithful gate: the belief advance writes it on every active tick
-      // whether or not the surcharge applied (pulseKernel.js:1855, reached through
-      // beliefsActive alone). Declaring it would certify a world in which every
-      // hop delay evaluated to zero.
+      // whether or not the surcharge applied — the write is
+      // pulseKernel.js `setSpatialLedger(memoryState, 'beliefMaps', beliefs.next)`,
+      // reached through beliefsActive alone. Declaring it would certify a world in
+      // which every hop delay evaluated to zero.
       stateKeys: Object.freeze([]),
       other: 'THE HONEST GAP. distancePricedNewsActive (beliefMap.js:282) is an AND of beliefsActive (a spatialCanonVersion marker AND infoMode other than omniscient) and the virtual flag, so the flag alone never proves the lane ran. The surcharge then changes only the RATE at which a belief converges on ground truth, and no receipt field observed that rate until 2026-07-31. What would close the gap is a PAIRED run, not a richer single receipt: two soaks on one seed, one with the flag lit and one dark, compared over the new per-year beliefDivergence series (BELIEF_DIVERGENCE_RECEIPT_PATH). The lit arm must show belief lagging ground truth by more at equal distance. Half of that instrument now exists; the differential harness does not, so this row reads UNOBSERVED and says why, rather than borrowing evidence from the belief engine it merely modifies.',
     }),

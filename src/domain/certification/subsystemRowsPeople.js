@@ -75,7 +75,8 @@ const STRESSOR_TYPES = Object.freeze([
  * the exact source expressions: `stressor_birth_${type}` (stressors.js:422),
  * `stressor_escalate_${stressor.type}` (:639) and `stressor_spread_${stressor.type}`
  * (:675), plus the wander residual (:138) and the two coup verdicts, which
- * pulseKernel.js:392 gates on this same flag.
+ * pulseKernel.js `const coupOutcomes = simulationRules.stressorsEnabled` gates on
+ * this same flag.
  * @type {ReadonlyArray<string>}
  */
 const STRESSOR_EVENT_TYPES = Object.freeze([
@@ -180,12 +181,13 @@ export const PEOPLE_SUBSYSTEM_ROWS = Object.freeze([
       // cannot carry ALIVE; the 66 literals above are the dispositive channel.
       moverFamilies: Object.freeze(['pressure']),
       // DELIBERATELY EMPTY. worldState.stressors looks like the obvious ledger and
-      // is NOT a faithful gate: pulseKernel.js:377 falls back to worldState.stressors
+      // is NOT a faithful gate: pulseKernel.js `const agedStressors = simulationRules.stressorsEnabled`
+      // falls back to worldState.stressors
       // verbatim when the flag is dark, so a legacy or DM-authored stressor keeps the
       // container populated in a world where the rules never ran. Declaring it would
       // grade this row ALIVE off state nobody wrote this run.
       stateKeys: Object.freeze([]),
-      other: 'The gate is a single seam: candidateEvents.js:442 admits evaluateStressorRules only when rules.stressorsEnabled is true, and pulseKernel.js:377 and :392 gate the aging pass and the coup verdicts on the same flag, so every literal above is unreachable when it is dark. TWO EXPECTED ZEROES, neither a silence. stressor_spread_disease_outbreak is suppressed at candidateEvents.js:477 whenever the spatial-canon marker is set, because the epidemic front materializes that same stressor hop by hop post-apply; and stressor_birth_slave_revolt cannot fire at all, because the catalog marks the type deprecated and stressors.js:386 filters deprecated types out of the birth gate. MEASURED 2026-07-31: 30 of 30 years in both 30-year 12-settlement cases (431 and 584 events), but only 2 of 100 years in the 100-year 4-settlement case (15 events). A century that quiet is what the tempo floor exists to surface.',
+      other: 'The gate is a single seam: candidateEvents.js:442 admits evaluateStressorRules only when rules.stressorsEnabled is true, and pulseKernel.js `const agedStressors = simulationRules.stressorsEnabled` and pulseKernel.js `const coupOutcomes = simulationRules.stressorsEnabled` gate the aging pass and the coup verdicts on the same flag, so every literal above is unreachable when it is dark. TWO EXPECTED ZEROES, neither a silence. stressor_spread_disease_outbreak is suppressed at candidateEvents.js:477 whenever the spatial-canon marker is set, because the epidemic front materializes that same stressor hop by hop post-apply; and stressor_birth_slave_revolt cannot fire at all, because the catalog marks the type deprecated and stressors.js:386 filters deprecated types out of the birth gate. MEASURED 2026-07-31: 30 of 30 years in both 30-year 12-settlement cases (431 and 584 events), but only 2 of 100 years in the 100-year 4-settlement case (15 events). A century that quiet is what the tempo floor exists to surface.',
     }),
     // Births are pressure-gated rather than guaranteed, so a quiet year is legal;
     // a realm that carries pressures at all should still birth, escalate or resolve
@@ -226,8 +228,10 @@ export const PEOPLE_SUBSYSTEM_ROWS = Object.freeze([
       // single family would be false in both directions.
       moverFamilies: Object.freeze([]),
       // DELIBERATELY EMPTY. worldState.relationshipStates is the obvious ledger and
-      // is NOT a faithful gate: pulseKernel calls ensureAllRelationshipStates
-      // (pulseKernel.js:290) and relaxRelationshipStates (:309) unconditionally, so
+      // is NOT a faithful gate: both calls are unconditional —
+      // pulseKernel.js `worldState = ensureAllRelationshipStates(worldState, snapshot);` and
+      // pulseKernel.js `worldState = relaxRelationshipStates(worldState, buildMemoryHorizonResolver(snapshot));`
+      // — so
       // every edge carries a state even in a world where the rules never ran. This is
       // the npcStates precedent from the npcAgency exemplar, one layer out.
       stateKeys: Object.freeze([]),
@@ -315,8 +319,8 @@ export const PEOPLE_SUBSYSTEM_ROWS = Object.freeze([
       moverFamilies: Object.freeze([]),
       // DELIBERATELY EMPTY. spatialLedgers.migration (the in-transit refugee column
       // ledger) looks like the obvious sidecar and is NOT a faithful gate:
-      // pulseKernel.js:2045 dispatches into it whenever migrationActive (the
-      // spatial-canon marker) holds, over every realized emigration outcome including
+      // pulseKernel.js `if (migrationActive(memoryState)) {` dispatches into it whenever
+      // that spatial-canon marker holds, over every realized emigration outcome including
       // calamityKernel's exodus, which this flag does not gate at all.
       stateKeys: Object.freeze([]),
       other: 'THE HEADLINE SILENCE OF THIS LANE. MEASURED 2026-07-31: flow_migration appears ZERO times in all seven completed release cases, across 163 observed years including a full century, while the shared population family moved in four of them. Both conjuncts of the emission gate are worth inspecting: flows.js:62 requires a displacement stressor (famine, siege, plague, disease_outbreak, occupation, wartime, mass_migration, monster_raider_pressure, insurgency) at severity at least 0.6, and flows.js:73 requires an active channel of type migration_pressure, trade_route or political_authority out of the afflicted settlement. ONE KEY, TWO LANES. This flag ALSO admits the mass-emigration transfer inside populationDynamics.js:335, and that second lane is NOT separately observable: population_emigration fires with or without it, and only transferMode and the paired destination credits change. What would close the gap: a receipt field recording the emigration outcomes metadata.transferMode, which would separate a distributed emigration from a void one. Until then a SILENT verdict here reports the refugee-candidate lane only, and the row says so rather than implying the whole flag is dead.',

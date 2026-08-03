@@ -66,10 +66,12 @@ export const KNOWLEDGE_LANE_EVENT_TYPES = Object.freeze(['belief_misjudgment']);
  * form (`spatialLedgers.<sub>`; every one is written through the literal-key
  * setSpatialLedger idiom, so the spatialLedgerCoverage walker sees them):
  *
- *   beliefMaps    pulseKernel.js:1855 (the belief advance), plus
- *                 generosityKernel.js:1225 and informationStatecraft.js:1308.
- *   rumorLedgers  pulseKernel.js:1789 (the rumor network advance) and
- *                 roadsKernel.js:1123.
+ *   beliefMaps    the belief advance —
+ *                 pulseKernel.js `setSpatialLedger(memoryState, 'beliefMaps', beliefs.next)`
+ *                 — plus generosityKernel.js:1225 and informationStatecraft.js:1308.
+ *   rumorLedgers  the rumor network advance —
+ *                 pulseKernel.js `setSpatialLedger(memoryState, 'rumorLedgers', rumors.next)`
+ *                 — and roadsKernel.js:1123.
  *   credibility   informationStatecraft.js:347 (the source-credibility stock).
  *   disinfo       informationStatecraft.js:1316 (the lie lifecycle ledger).
  *

@@ -78,10 +78,12 @@ export const GROWTH_SUBSYSTEM_ROWS = Object.freeze([
       // the season clock, urban fabric and the settlement lifecycle all feed. Claiming it
       // would let this row grade ALIVE off six other subsystems.
       moverFamilies: Object.freeze([]),
-      // The ONE worldState container this flag gates. pulseKernel.js:1498 enters the
-      // tolerance pass only when the flag is lit or a ledger already exists, and the
-      // second arm is a RELAX-ONLY path for a lingering ledger (:1505 deletes the key
-      // when nothing drifts), so for any run observed from genesis the key cannot appear
+      // The ONE worldState container this flag gates. The gate is
+      // pulseKernel.js `if (simulationRules.institutionLifecycleEnabled || memoryState.institutionTolerance !== undefined) {`,
+      // which enters the tolerance pass only when the flag is lit or a ledger already
+      // exists, and the second arm is a RELAX-ONLY path for a lingering ledger
+      // (pulseKernel.js `const rest = { ...memoryState }; delete rest.institutionTolerance;`
+      // drops the key when nothing drifts), so for any run observed from genesis the key cannot appear
       // behind a dark flag. settlementTickStates is deliberately NOT claimed: the tier
       // lane writes it unconditionally every tick, which is the npcStates trap, and the
       // census cannot see a nested per-settlement bag in any case.
@@ -166,7 +168,7 @@ export const GROWTH_SUBSYSTEM_ROWS = Object.freeze([
     aliveness: Object.freeze({
       // DELIBERATELY EMPTY, and traced rather than assumed. The mover contains no
       // `candidateType` literal at all: it is a POST-APPLY lane that runs at the
-      // advanceGenerosity seam (pulseKernel.js:2250), writes its arcs onto
+      // advanceGenerosity seam (pulseKernel.js `const generosity = advanceGenerosity({`), writes its arcs onto
       // settlementUpdates and emits wizard news. eventTypeCounts observes result.selected
       // only, so nothing this subsystem does can reach it, however far the realm climbs.
       eventTypes: Object.freeze([]),
