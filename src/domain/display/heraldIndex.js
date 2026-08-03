@@ -221,7 +221,7 @@ function proseHaystack(entry, nameById) {
     const name = nameById?.get?.(String(id));
     if (name) hay.push(String(name));
   }
-  return hay.join('  ').toLowerCase();
+  return hay.join(' \u0001 ').toLowerCase();
 }
 
 /**
@@ -284,7 +284,7 @@ export function searchHerald({
   for (const entry of results) {
     const desk = HERALD_FACET_BY_ID.desk.refsOf(entry)[0] || 'events';
     const band = HERALD_FACET_BY_ID.timeBand.refsOf(entry, ctx)[0] || 'this_season';
-    const key = `${desk} ${band}`;
+    const key = `${desk}\u0000${band}`;
     if (!grouped.has(key)) grouped.set(key, { desk, timeBand: band, items: [] });
     grouped.get(key).items.push(entry);
   }
