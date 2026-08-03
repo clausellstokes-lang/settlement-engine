@@ -73,7 +73,11 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
   // DM sovereignty); everything else is via-snapshot (protected by the gate, no edit). A NEW
   // reader added here must be dispositioned before this pin is updated.
   const EXPECTED = [
-    'src/domain/worldPulse/applyWorldPulse.js',
+    // THE DECOMPOSITION WAVE (war tranche, file 4) moved seedBetrayalTraitor — the one
+    // `.npcs` read the apply pass owned — verbatim out of applyWorldPulse.js into this
+    // leaf. Same reader, same disposition (via-snapshot, protected by the gate, no edit);
+    // only the address changed, so the row moved rather than a new reader appearing.
+    'src/domain/worldPulse/applyWorldPulseBetrayal.js',
     // V-K THE ASSIZE (dark): a RAW roster read (the roadsKernel/partyImpact idiom), gated by
     // assizeEnabled — scans the full roster for a corrupt un-ousted seat-holder (captured-bench
     // detection) and for the masses. Dormant by default (no flag in DEFAULT_SIMULATION_RULES);

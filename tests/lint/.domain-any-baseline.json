@@ -304,7 +304,27 @@
       "suppress": 0
     },
     "src/domain/worldPulse/applyWorldPulse.js": {
-      "any": 58,
+      "any": 27,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/applyWorldPulseBetrayal.js": {
+      "any": 3,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/applyWorldPulseOccupationAuthority.js": {
+      "any": 5,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/applyWorldPulsePrimitives.js": {
+      "any": 6,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/applyWorldPulseRelationshipGraph.js": {
+      "any": 12,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/applyWorldPulseStressorMerge.js": {
+      "any": 5,
       "suppress": 0
     },
     "src/domain/worldPulse/attrition.js": {

@@ -77,7 +77,10 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // ── name-lookup / target-selection: resolves ONE institution, not a provider sum ─
   'src/domain/worldPulse/entrepotKernel.js': 'name-lookup + write — founds/looks up one institution',
   'src/domain/worldPulse/supplyKernel.js': 'name-lookup + mutation — resolves one consuming institution; stamps impairments',
-  'src/domain/worldPulse/applyWorldPulse.js': 'name-lookup + mutation — finds one named institution to impair',
+  // THE DECOMPOSITION WAVE (war tranche, file 4) moved applyFactionPayloadEffect — the one
+  // `.institutions` reader the apply pass owned — verbatim out of applyWorldPulse.js into
+  // this leaf. Same read, same exemption; only the address changed.
+  'src/domain/worldPulse/applyWorldPulseFactionRoster.js': 'name-lookup + mutation — finds one named institution to impair',
   'src/domain/dailyLife.js': 'name-lookup/display — first temple/market/inn for gathering-place flavour',
   'src/domain/npcProfile.js': 'name-lookup/display — NPC→institution links + category/power name lists',
   'src/domain/explanation.js': 'name-lookup/display — single-institution explain + entity catalog',
