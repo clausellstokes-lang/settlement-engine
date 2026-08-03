@@ -48,7 +48,46 @@ import { legibilityRung } from './legibilityRung.js';
  * reader that depends on it can be read beside it.
  * @type {import('./stateProseKernel.js').StateProseCorpus}
  */
-const CORPUS = /** @type {any} */ (DOSSIER_STATE_PROSE_ECONOMY);
+const CORPUS = /** @type {import('./stateProseKernel.js').StateProseCorpus} */ (
+  /** @type {unknown} */ (DOSSIER_STATE_PROSE_ECONOMY)
+);
+
+/**
+ * The narrow slice of a settlement this desk reads. Declared rather than cast: the
+ * any-cast ratchet is right that a desk which types its input `any` has given up the
+ * one check that would catch a renamed field, and every field below is a real read.
+ * @typedef {object} FoodSecurityView
+ * @property {string} [label]
+ * @property {{blockaded?: unknown, blockadeBypass?: unknown}|null} [stockpile]
+ */
+/**
+ * @typedef {object} EconomicStateView
+ * @property {string|{tier?: string}} [prosperity]
+ * @property {string} [tradeAccess]
+ * @property {string} [economicComplexity]
+ * @property {FoodSecurityView|null} [foodSecurity]
+ */
+/**
+ * @typedef {object} EconomyDeskSettlement
+ * @property {string} [name]
+ * @property {EconomicStateView|null} [economicState]
+ * @property {{metrics?: {tradeAccess?: string}|null}|null} [economicViability]
+ */
+/**
+ * The two canonical derived readings, as the view model returns them.
+ * @typedef {object} FoodBalanceView
+ * @property {unknown} [available]
+ * @property {unknown} [deficit]
+ * @property {unknown} [surplus]
+ * @property {string} [display]
+ * @property {string} [detail]
+ */
+/**
+ * @typedef {object} GranaryOutlookView
+ * @property {unknown} [available]
+ * @property {string|null} [band]
+ * @property {string|null} [season]
+ */
 
 /**
  * `tradeAccess` → the `{access}` fill, in the prose form §0c specifies.
@@ -157,22 +196,20 @@ export function granaryPoolKey(granaryOutlook) {
  * THE DESK. Returns one legibility rung per surface, or null where the surface itself
  * does not render.
  *
- * @param {object} settlement
- * @param {object} [readings] the canonical derived readings the Economics tab already has
- * @param {object} [readings.foodBalance] from deriveFoodBalance
- * @param {object} [readings.granaryOutlook] from deriveGranaryOutlook
+ * @param {EconomyDeskSettlement|null|undefined} settlement
+ * @param {{foodBalance?: FoodBalanceView|null, granaryOutlook?: GranaryOutlookView|null}} [readings]
  * @param {{seed?: string, audience?: string}} [options]
  * @returns {Readonly<{prosperityHeader: object|null, prosperityRung: object|null, foodTile: object|null, granaryTile: object|null, foodSecurity: object|null}>}
  */
 export function economyStateProse(settlement, readings = {}, options = {}) {
-  const eco = /** @type {any} */ (settlement)?.economicState || {};
-  const name = text(/** @type {any} */ (settlement)?.name);
+  const eco = settlement?.economicState || {};
+  const name = text(settlement?.name);
   const prosperity = typeof eco.prosperity === 'string' ? eco.prosperity : text(eco.prosperity?.tier);
   // The CANONICAL ladder reader, never a hand-rolled band match: a second spelling of
   // the rung ladder in this file is exactly the fork that drifts.
   const rank = prosperityRank(eco.prosperity);
   const access = text(eco.tradeAccess)
-    || text(/** @type {any} */ (settlement)?.economicViability?.metrics?.tradeAccess);
+    || text(settlement?.economicViability?.metrics?.tradeAccess);
   const granary = readings.granaryOutlook;
   const foodBalance = readings.foodBalance;
 
@@ -181,7 +218,7 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
     // `isolated` deliberately contributes no fill — see ACCESS_PROSE.
     access: ACCESS_PROSE[access],
     complexity: text(eco.economicComplexity),
-    season: text(/** @type {any} */ (granary)?.season),
+    season: text(granary?.season),
   };
 
   /** @param {string} blockId @param {string|null} poolKey */
@@ -201,7 +238,7 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
   const headerKey = prosperityHeaderPoolKey(rank, access);
   const foodKey = foodTilePoolKey(foodBalance);
   const granaryKey = granaryPoolKey(granary);
-  const securityKey = foodSecurityPoolKey(/** @type {any} */ (eco.foodSecurity)?.label, /** @type {any} */ (eco.foodSecurity)?.stockpile);
+  const securityKey = foodSecurityPoolKey(eco.foodSecurity?.label, eco.foodSecurity?.stockpile);
 
   return Object.freeze({
     prosperityHeader: headerKey
@@ -211,16 +248,15 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
       ? legibilityRung(prosperity, line('DS-ECO-8', prosperity.toUpperCase()), [])
       : null,
     foodTile: foodKey
-      ? legibilityRung(text(/** @type {any} */ (foodBalance)?.display),
-        line('DS-ECO-2', foodKey),
-        [{ label: 'Produced against need', value: text(/** @type {any} */ (foodBalance)?.detail) }])
+      ? legibilityRung(text(foodBalance?.display), line('DS-ECO-2', foodKey),
+        [{ label: 'Produced against need', value: text(foodBalance?.detail) }])
       : null,
     granaryTile: granaryKey
-      ? legibilityRung(text(/** @type {any} */ (granary)?.band), line('DS-ECO-2', granaryKey),
+      ? legibilityRung(text(granary?.band), line('DS-ECO-2', granaryKey),
         [{ label: 'Season', value: slots.season }])
       : null,
     foodSecurity: securityKey
-      ? legibilityRung(text(/** @type {any} */ (eco.foodSecurity)?.label) || securityKey,
+      ? legibilityRung(text(eco.foodSecurity?.label) || securityKey,
         line('DS-ECO-9', securityKey), [])
       : null,
   });
