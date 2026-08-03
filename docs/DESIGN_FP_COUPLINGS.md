@@ -1107,6 +1107,9 @@ named-cast never-resolve line — a held hostage is WR-7b's foreign-guest
 hold, a war mechanism, not a peacetime term); no serfdom/population-
 transfer term (people are never the PAYMENT — grain, rights, and access
 are; the sovereignty market trades EDGES, not souls).
+[OWNER-OVERRIDE 2026-08-02: `tribute_population` is ruled INTO the catalog
+by owner order — the levy is anonymous-population columns only;
+DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md TB-3 carries the spec]
 
 ### CPL-18 — POP × INTERIOR (the Peasants' Revolt: the levy refused, the petition marched)
 **EXISTS, pop→interior (DARK) [CORRECTED 2026-08-02 (fp-audit): directional
