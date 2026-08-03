@@ -58,6 +58,7 @@ MUTATED_FILES=(
   src/App.jsx
   scripts/mutation-coverage-manifest.json
   src/domain/display/chroniclersLetter.js
+  src/domain/simulationSpine.js
   src/design/townGlyphs/medieval.js
   src/lib/flagRegistry.js
   tests/copy/.composed-prose-seams-baseline.json
@@ -632,6 +633,18 @@ check_caught_planted "identity/undeclared avatar reader planted" \
 #     the plain occurrence, not merely on the missing mark.
 perl -0pi -e 's/return veilPublicPayload\(\{\n    format: WORLD_EXPORT_FORMAT/return \(\{\n    format: WORLD_EXPORT_FORMAT/' src/lib/worldExport.js
 check_caught "civility-veil/public payload boundary unveiled" src/lib/worldExport.js "npx vitest run tests/security/publicPayloadVeilTotality.test.js --no-file-parallelism"
+
+# ── The first-contact prose seams (lane PS) ─────────────────────────────────
+
+# 64. Spine frame doubling — put the frame word back INSIDE the deriver, which
+#     is the exact shape that shipped "It is currently strained by / Strained by
+#     under Siege, infiltrated." to every first-run user. The frame belongs to
+#     SPINE_RUNGS and to nothing else; the moment a deriver authors one too, the
+#     rail prints it twice. The render pin reads the <dt>/<dd> pair out of the
+#     DOM, so it is the assertion that can see the doubling at all — a test of
+#     the deriver's return value alone cannot, which is why the defect shipped.
+perl -0pi -e 's/  if \(joined\) return joined;/  if (joined) return `Strained by \${joined}`;/' src/domain/simulationSpine.js
+check_caught "prose/spine frame word doubled into the body" src/domain/simulationSpine.js "npx vitest run tests/components/pipelineRailSpineProse.test.jsx --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

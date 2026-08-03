@@ -219,10 +219,6 @@
   "em": 2,
   "bang": 0
  },
- "src/domain/simulationSpine.js": {
-  "em": 4,
-  "bang": 0
- },
  "src/domain/spatial/dispatchEV.js": {
   "em": 1,
   "bang": 0

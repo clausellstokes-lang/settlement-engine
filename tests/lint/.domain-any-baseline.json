@@ -1,6 +1,6 @@
 {
-  "total": 2226,
-  "totalAny": 2188,
+  "total": 2224,
+  "totalAny": 2186,
   "totalSuppress": 38,
   "files": {
     "src/domain/activeConditions.js": {
@@ -264,7 +264,7 @@
       "suppress": 0
     },
     "src/domain/simulationSpine.js": {
-      "any": 11,
+      "any": 9,
       "suppress": 0
     },
     "src/domain/stressorPicker.js": {

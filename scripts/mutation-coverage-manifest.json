@@ -94,6 +94,11 @@
   "tests/components/mapOverlayThumbContract.test.jsx": {
    "kind": "uncovered"
   },
+  "tests/components/pipelineRailSpineProse.test.jsx": {
+   "kind": "mutation",
+   "label": "prose/spine frame word doubled into the body",
+   "what": "Standing plant restores the frame word INSIDE deriveStrainedBy, which is the exact shape that shipped \"It is currently strained by / Strained by under Siege, infiltrated.\" to every first-run user. The frame belongs to SPINE_RUNGS and to nothing else; a deriver that authors one too makes the rail print it twice. Only a RENDER assertion can see the doubling, because it lives in the juncture between the component's <dt> and the deriver's <dd> and each half is well-formed alone. Mutation target src/domain/simulationSpine.js is tracked and clean as of lane PS's commit."
+  },
   "tests/components/privacyPolicyParity.test.js": {
    "kind": "uncovered"
   },
