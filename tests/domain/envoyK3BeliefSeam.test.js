@@ -24,7 +24,7 @@
  *
  * @enforced-by this file
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, expect, test } from 'vitest';
@@ -196,7 +196,70 @@ const NEGOTIATION_MODULES = Object.freeze({
 
 const TRUTH_READER = 'src/domain/worldPulse/warDeployment.js';
 
+/**
+ * THE DISCOVERY GUARD (cycle-8 verifier, Finding C).
+ *
+ * Every row above is hand-written, so the manifest closes the reach of the files
+ * it NAMES and says nothing at all about a file it does not. That was tolerable
+ * while `envoyErrand.js` was one module; THE DECOMPOSITION WAVE made it a family
+ * of ten, and the family is still being worked. An eleventh leaf — split out of
+ * the head next week, importing a truth reader for one "small" lookup — would
+ * simply not appear in `Object.entries(NEGOTIATION_MODULES)`, so both the import
+ * pin and the token scan would iterate straight past it and the suite would stay
+ * green. The pin would have been quietly narrowed by an edit that never touched
+ * this file, which is the exact shape of failure the K3 amendment exists to make
+ * impossible.
+ *
+ * So membership is DISCOVERED from the filesystem, not declared: every
+ * `src/domain/worldPulse/envoyErrand*.js` must be a pinned row. A new leaf reds
+ * here until it is reviewed and given a closed import list.
+ *
+ * SCOPED TO THE ERRAND FAMILY ON PURPOSE. The wider `envoy*.js` glob is NOT the
+ * discovery signature and must not become one: `envoyDiplomacy.js`,
+ * `envoyPulse.js`, `envoyNews.js` and `envoyInterceptionStage.js` are the
+ * orchestration and reader layers that legitimately read true settlement state,
+ * and sweeping them in would either red permanently or force the token list to be
+ * weakened until it proved nothing. The errand family is the belief-sourced
+ * writer set, and it is the set whose filenames share a prefix by construction.
+ */
+const ERRAND_FAMILY_DIR = 'src/domain/worldPulse';
+const ERRAND_FAMILY_RE = /^envoyErrand.*\.js$/;
+
+function discoverErrandFamily() {
+  return readdirSync(join(ROOT, ERRAND_FAMILY_DIR))
+    .filter((name) => ERRAND_FAMILY_RE.test(name) && !/\.test\./.test(name))
+    .map((name) => `${ERRAND_FAMILY_DIR}/${name}`)
+    .sort();
+}
+
 describe('WR-7b K3 — nobody is ever current', () => {
+  test('DISCOVERY: every errand-family leaf on disk is a pinned negotiation module', () => {
+    const family = discoverErrandFamily();
+    // Anti-vacuity: a broken readdir or a rotted pattern would pass the exact-set
+    // assertion below over an empty list. The wave landed a head plus nine leaves.
+    expect(family.length, 'the errand family read empty — the discovery pattern rotted').toBeGreaterThanOrEqual(10);
+    expect(family).toContain('src/domain/worldPulse/envoyErrand.js');
+
+    const pinned = new Set(Object.keys(NEGOTIATION_MODULES));
+    expect(
+      family.filter((rel) => !pinned.has(rel)),
+      '\nAn envoyErrand family leaf exists on disk with NO row in NEGOTIATION_MODULES. Every '
+      + 'member is pinned, not just the head, because a family can smuggle truth in through a '
+      + 'leaf the head never names — and an unpinned leaf is invisible to BOTH the import pin '
+      + 'and the true-state token scan, so the suite stays green while the seam is gone. Give '
+      + 'it a reviewed closed import list above.\n',
+    ).toEqual([]);
+  });
+
+  test('MUTANT: dropping a family leaf from the manifest reds the discovery guard', () => {
+    // The guard is only worth having if it fires. Withdraw one real leaf from the
+    // pinned set and the discovery must name exactly that file.
+    const dropped = 'src/domain/worldPulse/envoyErrandParlay.js';
+    expect(Object.keys(NEGOTIATION_MODULES)).toContain(dropped);
+    const mutantPinned = new Set(Object.keys(NEGOTIATION_MODULES).filter((rel) => rel !== dropped));
+    expect(discoverErrandFamily().filter((rel) => !mutantPinned.has(rel))).toEqual([dropped]);
+  });
+
   test('every negotiation module reaches only its reviewed closed import set', () => {
     for (const [rel, expected] of Object.entries(NEGOTIATION_MODULES)) {
       const source = code(rel);
