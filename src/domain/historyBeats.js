@@ -31,6 +31,63 @@
  * No imports from src/lib — domain tsconfig include stays self-contained.
  */
 
+// ── The read shape ──────────────────────────────────────────────────────
+// These derivations are READERS: they never construct history, they only
+// interrogate it. The typedefs below are the fields this file actually
+// touches, gathered from the accesses in the derivations themselves. Every
+// field is optional because tolerance of missing history is the contract
+// stated at the top of this file, not an accident.
+
+/**
+ * One entry of `settlement.history.historicalEvents[]`.
+ * @typedef {{
+ *   name?: string,
+ *   type?: string,
+ *   description?: string,
+ *   yearsAgo?: number,
+ *   severity?: string,
+ *   lastingEffects?: Array<string|{ type?: string }>
+ * }} HistoricalEvent
+ */
+
+/**
+ * One entry of `settlement.history.legacyAnnotations[]` — the generator's own
+ * structured commentary on what an event left behind.
+ * @typedef {{ annotation?: string, eventName?: string, yearsAgo?: number }} LegacyAnnotation
+ */
+
+/**
+ * One entry of `settlement.history.currentTensions[]`. The generator emits
+ * bare strings from one path and objects from another; both are handled.
+ * @typedef {string|{ text?: string, description?: string, name?: string, label?: string }} CurrentTension
+ */
+
+/**
+ * `settlement.history.founding` — the founding arc.
+ * @typedef {{
+ *   age?: number|string,
+ *   reason?: string,
+ *   foundedBy?: string,
+ *   initialChallenge?: string,
+ *   overcoming?: string
+ * }} FoundingRecord
+ */
+
+/**
+ * The slice of a settlement the beat derivations read.
+ * @typedef {{
+ *   history?: {
+ *     founding?: FoundingRecord,
+ *     historicalEvents?: HistoricalEvent[],
+ *     currentTensions?: CurrentTension[],
+ *     legacyAnnotations?: LegacyAnnotation[]
+ *   },
+ *   economicState?: { topExport?: string, primaryExport?: string },
+ *   economy?: { topExport?: string, primaryExport?: string },
+ *   powerStructure?: { stability?: unknown }
+ * }} HistoryBeatSource
+ */
+
 // ── Helpers ─────────────────────────────────────────────────────────────
 
 /**
@@ -61,9 +118,10 @@ function severityScore(s) {
 }
 
 /**
- * @param {any[]} arr
- * @param {(item: any) => number} scoreFn
- * @returns {any}
+ * @template T
+ * @param {T[]} arr
+ * @param {(item: T) => number} scoreFn
+ * @returns {T|null}
  */
 function _topBy(arr, scoreFn) {
   if (!Array.isArray(arr) || !arr.length) return null;
@@ -81,7 +139,7 @@ function _topBy(arr, scoreFn) {
 
 // ── Per-beat derivations ────────────────────────────────────────────────
 
-/** @param {any} settlement */
+/** @param {HistoryBeatSource} settlement */
 function deriveFoundingCause(settlement) {
   const founding = settlement?.history?.founding;
   if (!founding) return null;
@@ -110,7 +168,7 @@ function deriveFoundingCause(settlement) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {HistoryBeatSource} settlement */
 function deriveFirstProsperitySource(settlement) {
   // Strongest signal today: the topExport on the economic state — that's
   // what the settlement currently trades on. We hedge with the founding
@@ -136,7 +194,7 @@ function deriveFirstProsperitySource(settlement) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {HistoryBeatSource} settlement */
 function deriveDefiningCrisis(settlement) {
   // The defining crisis is the most severe historical event. Among
   // events of equal severity, prefer the older one — those leave deeper
@@ -170,12 +228,12 @@ function deriveDefiningCrisis(settlement) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {HistoryBeatSource} settlement */
 function deriveInstitutionalLegacy(settlement) {
   // Events whose lastingEffects mention 'institution' or that have an
   // institutional effect listed in some form. These are the events that
   // built the present-day structural character.
-  const events = /** @type {any[]} */ (settlement?.history?.historicalEvents || []);
+  const events = (settlement?.history?.historicalEvents || []);
   const carriers = events.filter(e => {
     const effects = e?.lastingEffects;
     if (!Array.isArray(effects) || !effects.length) return false;
@@ -221,7 +279,20 @@ function deriveInstitutionalLegacy(settlement) {
   };
 }
 
-/** @param {any} settlement */
+/**
+ * The one deriver that stays untyped, for two reasons the checker cannot see
+ * past and this lane may not fix with a runtime edit:
+ *   1. `Number.isFinite(e.yearsAgo) ? e.yearsAgo : Infinity` — Number.isFinite
+ *      is not a type predicate, so with `yearsAgo?: number` the ternary is
+ *      still `number|undefined` and the `<= 30` reds (TS2532);
+ *   2. the legacyAnnotations fallback returns `recentAnn.annotation` straight
+ *      into a beat's `text`, and `annotation` is optional — typing it honestly
+ *      makes the beat `text: string|undefined`, which HistoryBeat refuses.
+ * (2) is a latent hole worth a look on its own: a beat with an undefined text
+ * would render blank. Recorded, not fixed here — this lane changes types only.
+ *
+ * @param {any} settlement
+ */
 function deriveRecentDisruption(settlement) {
   // Most recent significant disruption — within the last 30 years AND
   // severity ≥ major. Falls back to legacyAnnotations[0] if no recent
@@ -267,7 +338,7 @@ function deriveRecentDisruption(settlement) {
   return null;
 }
 
-/** @param {any} settlement */
+/** @param {HistoryBeatSource} settlement */
 function deriveUnresolvedWound(settlement) {
   // Pulled from currentTensions. The generator produces tensions as
   // strings OR objects depending on the source — handle both.
@@ -289,7 +360,7 @@ function deriveUnresolvedWound(settlement) {
   };
 }
 
-/** @param {any} settlement */
+/** @param {HistoryBeatSource} settlement */
 function deriveLikelyFuture(settlement) {
   // Pull from history.currentTensions trajectory if available, else
   // power-structure stability. Mirrors the simulationSpine logic so the
@@ -384,7 +455,7 @@ export function deriveHistoryBeats(settlement) {
  * ready for the rail or PDF. Skips null beats so the consumer never
  * sees a hole.
  * @param {unknown} settlement
- * @returns {Array<Array<any>>}
+ * @returns {string[][]}
  */
 export function historyBeatRows(settlement) {
   const beats = deriveHistoryBeats(settlement);
@@ -397,7 +468,7 @@ export function historyBeatRows(settlement) {
     'unresolvedWound',
     'likelyFuture',
   ];
-  /** @type {Array<Array<any>>} */
+  /** @type {string[][]} */
   const rows = [];
   for (const k of order) {
     const b = beats[k];

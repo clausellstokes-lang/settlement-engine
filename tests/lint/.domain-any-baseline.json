@@ -1,6 +1,6 @@
 {
-  "total": 2275,
-  "totalAny": 2237,
+  "total": 2263,
+  "totalAny": 2225,
   "totalSuppress": 38,
   "files": {
     "src/domain/activeConditions.js": {
@@ -192,7 +192,7 @@
       "suppress": 0
     },
     "src/domain/historyBeats.js": {
-      "any": 15,
+      "any": 3,
       "suppress": 0
     },
     "src/domain/hookEscalation.js": {
