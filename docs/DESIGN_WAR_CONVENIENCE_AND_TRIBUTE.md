@@ -96,6 +96,44 @@ floor) bind throughout.
   CPL-5's law): concealment is the loser's lane (the hidden vein, the
   under-reported harvest, the smugglers' road out the back gate), monitoring
   reach is the victor's, and the whole contest rides believed-vs-true.
+- **TB-LAW-7 — THE HEALING LATTICE + THE SATURATION BAND (owner addendum,
+  2026-08-02).** Resentment has FIVE standing REDUCERS, each on its own
+  clock, each riding built or specced machinery: MUTUALLY BENEFICIAL TRADE
+  — and only that: the healing read requires BOTH sides' own-picture
+  valuations positive (the two-picture discipline applied to commerce), and
+  the BUILT drift ladder neutral→trade_partner→allied
+  (relationshipEvolution.js:38-50, session-verified) drifts upward only on
+  mutual gain — a TRIBUTE flow in any basis is not trade and never heals,
+  and coerced exclusivity or dependency past the fear band reads through
+  dependency_fear and can INFLAME on the same flow evidence: the grain that
+  feeds both mends; the grain that feeds one reminds; CO-BELLIGERENCE —
+  allying in a NEW war against a common enemy: honored obligations write
+  the bright lane (obligation_discharged, debt_forgiven), shared blood is
+  the strongest single reducer on the fastest clock — and it is HOW allies
+  of convenience become something more, the CV machinery's own redemption
+  arc (with its own risk: the same web prices betrayal, and a defaulted
+  co-belligerence wounds DEEPER than distance ever did — the healing lane
+  and the betrayal market read the same record); MIGRATION (kin ties — departure
+  memory's bright lane, kinship_bond, assimilation converting ties into
+  belonging); SIMILAR FAITH (common_rite — the quadrant table's bright
+  pole — and the shared_rite communion term); and ALIGNMENT AFFINITY
+  (near-quadrant pairs heal faster — the same derived axes, read-side).
+  BUT healing is SATURATION-GATED: the healing rate scales INVERSELY with
+  the standing resentment band. Below the saturation band, contact heals —
+  the grain road quietly mends what the war broke. AT OR ABOVE it, ambient
+  healing SUSPENDS and contact can even inflame (trading with the hated
+  enemy reads as collaboration to the commons; the conscience machinery
+  prices it) — a saturated wound is reachable ONLY by the slow generational
+  clocks and by DELIBERATE, PRICED acts: the burial (INT-6), remission
+  (TB-3), honest debt settlement (debt_forgiven). The saturation band
+  carries hysteresis (a width, never a point) and is NEVER permanent —
+  reversal pinned: every saturated pair on a fixture must be healable
+  through the deliberate lane. This is the two-timescale echo applied to
+  the heart: contact heals quickly what runs shallow, and only time and
+  choice heal what runs deep. TB-4's strain arithmetic gains the healing
+  terms and two envelopes: reconciliation REACHABLE (a healed pair on a
+  real fixture — the counterforce audit's row) and saturation
+  RARE-BUT-REACHABLE, both with mutant controls.
 - **Requirement 13 (alignment): ENGAGED, read-side both axes.** malice01 and
   lawfulness01 (the derived settlement read — beliefMap.js:915,
   session-verified) enter as WEIGHTS in CV-3 and TB-2. No writer, no stored
