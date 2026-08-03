@@ -620,7 +620,7 @@ ALSO LIVE: whatPhrase subject "a town rebuilding" · condition label "Reconstruc
 2. By the year {year} {settlement} has finished its rebuilding, the damage mended by its own labour and its allies' aid.{built}{graft} `[live, verbatim — {year} is DEFECT-8]`
 3. {settlement} has closed its wounds at last, the rebuilding done in the year {year} by its own hands and its allies'.{built}{graft} `[live, verbatim — {year} is DEFECT-8]`
 4. The rebuilding of {settlement} is complete in the year {year}. Its own people and its allies together have made it whole.{built}{graft} `[live, verbatim — {year} is DEFECT-8]`
-5. {settlement} has finished its rebuilding, the damage closed by its own labour and by the aid its allies returned.{built}{graft}
+5. {settlement} is whole again and the rebuilding account is closed. The repair was carried by the town's own labour, with what its allies advanced set against it.{built}{graft}
 6. The scaffolds are down in {settlement}. What the calamity took has been put back by the town's own hands and its allies' repaid stake.{built}{graft}
 
 ### npc_goal_culmination — R3 news summary — significance: notable — desk: events
@@ -723,7 +723,7 @@ CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 1. a foreign hand at work `[live, verbatim]`
 2. outside men in the square who answer to nobody local
 3. a patron's writ arriving before his soldiers
-4. a quarrel that has stopped being local
+4. a local dispute with a distant court's interest in it
 5. help nobody here asked for
 6. word on the road of a patron taking sides
 
@@ -1067,7 +1067,7 @@ LAW ONE: a seizure empties a seat; it never resolves a person.
 3. a seat changed hands without a vote
 4. orders arriving under a different seal
 5. the same offices, answering to somebody else
-6. travellers finding a different name at the gate
+6. travellers hailed at the gate by men who were not there last season
 
 ### coup_suppressed — R1 subject phrase — significance: notable — desk: events
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
@@ -1143,7 +1143,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 1. aid turned away `[live, verbatim]`
 2. carts sent back the way they came
-3. a request entered and declined
+3. aid asked for, entered, and not granted
 4. a neighbour who will remember this
 5. a very reasonable refusal
 6. travellers told there is nothing to spare here
@@ -1154,7 +1154,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 1. aid sent to the stricken `[live, verbatim]`
 2. wagons going out to somewhere worse off
-3. a relief entered against the town's own stores
+3. stores signed away that the town may want back
 4. a stock given away that may be wanted here
 5. help sent before it was asked for
 6. travellers passing a laden column headed the wrong way for trade
@@ -1207,7 +1207,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 3. a temper the record has begun to note
 4. what the next hard decision will be made by
 5. the same person, weathered
-6. travellers finding a different reception than last year
+6. travellers greeted by the same name in a different humour
 7. a habit at council that was not there before
 8. a season that left its mark on somebody who matters
 
@@ -1226,7 +1226,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 1. a cause bound to a patron's `[live, verbatim]`
 2. one name standing behind another's work
-3. a patronage entered against both
+3. a sponsorship the record ties to two names
 4. a design that now has money behind it
 5. a cause that has acquired a bill
 6. travellers told whose interest it really is
@@ -1334,7 +1334,7 @@ ALSO LIVE: condition label "Alliance burden" + gloss [J-LEG-1]
 1. alliance burden `[fallback, live — byte-identity anchor]`
 2. a friendship that costs more than it returns
 3. relief columns going out and nothing coming back
-4. an aid entered against the town's own stores
+4. a debit the town's own books carry for a friend's sake
 5. carts sent to an ally while the market here goes short
 6. help given so often it has become an expectation
 7. travellers passing this town's grain on somebody else's road
@@ -1368,7 +1368,7 @@ CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 3. a grievance put in writing at last
 4. what a court says before it calls a levy
 5. an old quarrel given a date
-6. travellers carrying word that a cause has been named
+6. travellers repeating a reason for war they heard read out
 
 ### cold_war — R1 subject phrase — significance: routine — desk: war
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
@@ -1399,7 +1399,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 2. a neighbour's suppliers being leaned on
 3. contracts entered and then quietly not renewed
 4. the roads to one town's workshops going quiet
-5. a strangling done at arm's length
+5. a pressure applied where nobody can point to the hand
 6. factors told which house they may not deal with
 7. travellers noticing which wagons no longer run
 8. a season in which the pinch was arranged, not suffered
@@ -1446,7 +1446,7 @@ BELIEF ATTRIBUTION: the target column is BELIEVED; no variant asserts it is on t
 4. men waiting on a road for something they have been told about
 5. a strike made on word rather than on sight
 6. an ambush laid where the rumour says
-7. travellers turned off the road by armed men
+7. travellers sent the long way round by men who will not say why
 8. a season's soldiering spent on a guess
 
 ### intervention_ordered — R1 subject phrase — significance: routine — desk: war
@@ -1464,7 +1464,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 1. military protection `[fallback, live — byte-identity anchor]`
 2. a garrison kept for somebody else's walls
-3. a protection entered on both towns' books
+3. an obligation to defend, written down and dated
 4. soldiers here who are not from here
 5. safety bought at a standing price
 6. a shield held over a town that cannot hold its own
@@ -1563,7 +1563,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 1. realm verb declare blockade `[fallback, live — byte-identity anchor]`
 2. a decree closing a harbour
-3. a blockade ordered from the realm's own seat
+3. a port closed in writing before it is closed by hulls
 4. an order that will be felt on every quay
 5. a decision taken far from the water it closes
 6. shipmasters learning at the roads that the port is shut
@@ -1582,7 +1582,7 @@ CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 BELIEF ATTRIBUTION: the column is BELIEVED.
 1. realm verb intercept `[fallback, live — byte-identity anchor]`
 2. a decree sending men against a believed column
-3. an interception ordered from the realm's seat
+3. a road watched on instructions carried from far off
 4. an order given on word rather than on sight
 5. a strike arranged before anybody has seen the target
 6. travellers turned off the road by men acting under a decree
@@ -1591,7 +1591,7 @@ BELIEF ATTRIBUTION: the column is BELIEVED.
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 1. realm verb order convoy `[fallback, live — byte-identity anchor]`
 2. a decree putting escorts on the sea lanes
-3. a convoy ordered from above
+3. sailings arranged by a court that owns no cargo
 4. warships assigned to merchant hulls
 5. protection made a matter of decree rather than of price
 6. shipmasters told when they may sail and with whom
@@ -1600,7 +1600,7 @@ CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 1. realm verb order intervention `[fallback, live — byte-identity anchor]`
 2. a decree sending men into another town's quarrel
-3. an intervention ordered from the realm's seat
+3. a fight entered into on another town's behalf
 4. a distant decision arriving with soldiers behind it
 5. a local matter taken out of local hands
 6. travellers passing columns that answer to no town on this road
@@ -1618,7 +1618,7 @@ CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 1. realm verb reinforce `[fallback, live — byte-identity anchor]`
 2. a decree sending a relief column to a treaty-ally
-3. a reinforcement ordered from the realm's seat
+3. muster rolls drawn against somebody else's promise
 4. a compact honoured by decree
 5. men committed to a siege they did not choose
 6. travellers giving way to a column marching under a distant seal
@@ -1686,7 +1686,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ALSO LIVE: relationship label "Critical supplier" [J-LEG-1]
 1. critical supplier `[fallback, live — byte-identity anchor]`
 2. the one source the town cannot do without
-3. a supply entered as critical on both books
+3. a supply the market book marks before all others
 4. a tie that would hurt to lose
 5. everything resting on a single road
 6. a dependence nobody planned and everybody uses
@@ -1721,7 +1721,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ALSO LIVE: relationship label "Embargo" [J-LEG-1]
 1. embargo `[fallback, live — byte-identity anchor]`
 2. a town barred from another's markets
-3. a prohibition entered on both books
+3. a prohibition the clerks copy forward each year
 4. goods that may not lawfully move
 5. a quarrel conducted through the customs house
 6. a road open to feet and closed to cargo
@@ -1849,8 +1849,8 @@ ALSO LIVE: relationship label "Patron" [J-LEG-1]
 ### population_decline — R1 subject phrase — significance: routine — desk: trade
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 1. population decline `[fallback, live — byte-identity anchor]`
-2. a town smaller this year than last
-3. fewer names on the roll each time it is taken
+2. a town with fewer in it than the last reckoning found
+3. a roll that comes back shorter than the clerk expects
 4. lanes with houses standing empty
 5. work that will not get done for want of people
 6. a settlement quietly getting older
@@ -1885,7 +1885,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 ALSO LIVE: relationship label "Proxy conflict" [J-LEG-1]
 1. proxy `[fallback, live — byte-identity anchor]`
 2. courts fighting through other people's towns
-3. a proxy quarrel entered on both books
+3. a quarrel recorded under two names and owned by neither
 4. soldiers paid by one court and sworn to another
 5. a war conducted at a polite distance
 6. somebody else's men doing somebody else's fighting
@@ -1915,16 +1915,16 @@ ALSO LIVE: compound signature label "The Calling of Debts" + summary [J-LEG-1]
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 1. realm verb declare trade embargo `[fallback, live — byte-identity anchor]`
 2. a decree barring a neighbour's goods
-3. an embargo declared from the realm's seat
-4. a quarrel handed to the customs house
-5. an order that will be felt in every stall
+3. a market closed by a court that does not buy in it
+4. a bar on trade the realm will not have to enforce itself
+5. a ruling the stallholders feel before they read it
 6. carters turned back by a decree made far away
 
 ### realm_verb_force_resettle — R1 subject phrase — significance: notable — desk: trade
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 1. realm verb force resettle `[fallback, live — byte-identity anchor]`
 2. a decree moving a settlement's people
-3. a resettlement ordered from above
+3. a village emptied into a place chosen for it
 4. households told where they will live next
 5. a map redrawn by writ
 6. travellers passing a column moving under orders
@@ -1933,8 +1933,8 @@ CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 1. realm verb repudiate treaty `[fallback, live — byte-identity anchor]`
 2. a decree tearing up an accord
-3. a treaty repudiated from the realm's seat
-4. terms struck from the book by order
+3. a signature made worthless from a long way off
+4. terms struck out by a hand that never signed them
 5. an oath ended by decree rather than by breach
 6. travellers finding a crossing closed that was open last season
 
@@ -2004,7 +2004,7 @@ BELIEF ATTRIBUTION governs this whole section: every variant is a FORECAST — w
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 1. crime pressure `[fallback, live — byte-identity anchor]`
 2. what the watch expects before it happens
-3. a lawlessness the record has begun to trend
+3. a drift toward lawlessness the record keeps confirming
 4. conditions that usually end in a crime wave
 5. a town that feels less safe than the tally says
 6. more locks bought than incidents reported
@@ -2015,7 +2015,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 1. disease pressure `[fallback, live — byte-identity anchor]`
 2. conditions that sickness usually follows
-3. a health reading the record shows worsening
+3. a health mark the record keeps moving the wrong way
 4. crowding, hunger, and bad water in one place
 5. what the healers are quietly preparing for
 6. a town one bad season from an outbreak
@@ -2038,7 +2038,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 1. legitimacy pressure `[fallback, live — byte-identity anchor]`
 2. a seat being obeyed a little less each season
 3. a standing the record shows slipping
-4. what usually comes before a challenge
+4. orders that men are said to be waiting out rather than obeying
 5. men beginning to ask who decided that
 6. a council that has started explaining itself
 7. travellers hearing the seat spoken of without much respect
@@ -2048,7 +2048,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 1. regional pressure `[fallback, live — byte-identity anchor]`
 2. trouble building somewhere up the road
-3. a regional reading the record shows rising
+3. a reading taken from the whole district and not this town
 4. what the neighbours are carrying that will arrive here
 5. a strain that is not local yet and will be
 6. news from three directions saying the same thing
@@ -2144,7 +2144,7 @@ CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 ALSO LIVE: condition label "Crisis" + gloss [J-LEG-1]
 1. custom crisis `[fallback, live — byte-identity anchor]`
 2. an authored trouble gripping the town
-3. a crisis entered by the chronicler's own hand
+3. an affliction set down in the book before it was felt in the street
 4. a matter that has taken over everything else
 5. a town with one problem and no room for others
 6. travellers finding the place turned to a single question
@@ -2185,7 +2185,7 @@ LAW ONE: OUT OF THE SEAT — never a resolved fate.
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 1. institution capture `[fallback, live — byte-identity anchor · ⚠️ MUTILATED, DEFECT-2 — this is the de-underscored spelling of the DISTINCT kind institution_capture, which itself renders only "capture"]`
 2. an interest taking a hall for its own
-3. a capture entered against the institution's roll
+3. an entry on the roll naming the interest the hall now answers to
 4. an office whose decisions now have an owner
 5. a public thing quietly become a private one
 6. business that goes one way whoever brings it
@@ -2201,7 +2201,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 5. a rival's foothold taken away rather than taken over
 6. doors shut by people who do not own them
 7. travellers sent away from a hall that is open in name
-8. a quiet dismantling nobody has announced
+8. a dismantling done in a faction's name and entered in no minute book
 
 ### faction_law_preference_push — R1 subject phrase — significance: routine — desk: events
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
@@ -2220,7 +2220,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 2. weight moving from one interest to another
 3. a shift entered on the faction rolls
 4. rooms that used to be full emptying into other rooms
-5. who has to be consulted, changed
+5. the list of people worth persuading, rewritten
 6. an old balance that no longer holds
 7. travellers directed to a different house than last year
 8. a turn that took a season and will take a generation to undo
@@ -2229,7 +2229,7 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 1. service bolster `[fallback, live — byte-identity anchor · ⚠️ MUTILATED, DEFECT-2]`
 2. an interest paying to keep a service standing
-3. a bolster entered against the faction's own account
+3. a payment entered where a levy would normally stand
 4. a hall kept open by somebody's money
 5. help given where a debt will be remembered
 6. a public good with a private sponsor
@@ -2251,7 +2251,7 @@ CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 1. government change `[fallback, live — byte-identity anchor]`
 2. a seat passing to different hands
 3. a change of rule entered and dated
-4. new orders under a new seal
+4. a new seal on business the old one had already settled
 5. the same offices with different masters
 6. travellers finding a different name at the council door
 
@@ -2279,7 +2279,7 @@ CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 1. information flow `[fallback, live — byte-identity anchor]`
 2. word moving along a road as reliably as cargo
-3. a channel entered as informational on both books
+3. a channel the clerks record as they would a road
 4. news that arrives here before it arrives anywhere else
 5. a town that knows things early
 6. riders whose arrival the market watches for
@@ -2301,11 +2301,11 @@ CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 CADENCE: chronic → floor 8 · live 1 · +7 · AUDIENCE: public
 1. suppression `[fallback, live — byte-identity anchor · ⚠️⚠️ MUTILATED, DEFECT-2]`
 2. a hall prevented from working
-3. a suppression entered against the institution's roll
+3. a body entered as prevented rather than as failed
 4. an office kept from doing what it is for
 5. doors closed by people with no right to close them
 6. a service that exists on paper only
-7. travellers sent away from somewhere that is open in name
+7. travellers carrying business the hall will no longer take
 8. a dismantling nobody has announced
 
 ### insurgency — R1 subject phrase — significance: notable — desk: events
@@ -2323,7 +2323,7 @@ CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 ALSO LIVE: realm label "The Great Silence" [J-LEG-1]
 1. magic deadzone `[fallback, live — byte-identity anchor]`
 2. a place where the workings will not work
-3. a silence entered against the settlement's own record
+3. an absence the ward rolls now have to account for
 4. wards that stopped holding and cannot be renewed
 5. practitioners here who have become ordinary
 6. travellers finding their charms useless within the bounds
@@ -2398,7 +2398,7 @@ ALSO LIVE: stressor catalog label "Political fracture" [J-LEG-1] · realm label 
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 1. realm verb force abandon `[fallback, live — byte-identity anchor]`
 2. a decree emptying a settlement
-3. an abandonment ordered from the realm's seat
+3. a town closed the way an office is closed
 4. people told to leave somewhere that still stands
 5. a place ended by writ rather than by ruin
 6. travellers passing a town being walked out of
@@ -2407,16 +2407,16 @@ CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 1. realm verb force calamity `[fallback, live — byte-identity anchor]`
 2. a decree bringing a disaster down
-3. a calamity ordered from the realm's seat
+3. harm set down in advance the way a market day is
 4. ruin arriving because it was written
-5. a blow the record says was decided on
+5. a catastrophe somebody put their name to
 6. travellers finding a town undone on somebody's word
 
 ### realm_verb_force_found_steading — R1 subject phrase — significance: notable — desk: events
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 1. realm verb force found steading `[fallback, live — byte-identity anchor]`
 2. a decree founding a steading
-3. a new settlement ordered from the realm's seat
+3. a name given to a place before anybody lives in it
 4. ground broken because a writ said so
 5. a place that begins with an order rather than a choice
 6. travellers finding a new palisade where the map showed nothing
@@ -2425,7 +2425,7 @@ CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 CADENCE: notable → floor 6 · live 1 · +5 · AUDIENCE: public
 1. realm verb force reconsideration `[fallback, live — byte-identity anchor]`
 2. a decree making a court think again
-3. a reconsideration ordered from above
+3. a verdict sent back to the table it came from
 4. a settled course reopened by writ
 5. a decision taken back out of the book
 6. travellers finding a settled matter reopened by writ

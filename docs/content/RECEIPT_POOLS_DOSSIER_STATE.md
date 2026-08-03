@@ -2683,7 +2683,7 @@ magical bypass channels (`teleport` / `airship`) are live-world state.
 
 **`Legal Infrastructure: Court only`**
 1. `[ledger]` {settlement} tries and cannot hold. The sentences available are fines and exile, and both of them favour whoever can pay or leave.
-2. `[unfolding]` The town's courts keep producing judgments the town cannot enforce, and each unenforced judgment costs the next one a little of its weight.
+2. `[unfolding]` The gap at {settlement} between what a court can decide and what the town can carry out has widened, and it widens a little more each time somebody walks away from a ruling.
 3. `[street]` The town at {settlement} fines what it cannot hold and exiles what it cannot fine, and both fall hardest on people who have nowhere to go.
 
 **`Legal Infrastructure: Prison only`**
@@ -2953,7 +2953,7 @@ rows — the arm and the town. Both stand; **one per page, never both.**
 
 **badge `WEAK` (any arm)**
 1. `[ledger]` {settlement} is thinly covered here. Something is in place, and a real instance of this would strain it past where it holds.
-2. `[unfolding]` The margin on this at {settlement} has been narrowing rather than widening, and nothing in hand is set against it.
+2. `[unfolding]` What {settlement} keeps against this arm has been falling behind what the arm is asked to meet, and no decision taken here has changed that direction.
 3. `[threshold]` The arrangement at {settlement} holds against the small instance of this and not the large one, and there is nothing in it that distinguishes the two until the large one arrives.
 
 **badge `CRITICAL` (any arm)**
@@ -3609,7 +3609,7 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 
 **aftermath `trade_realignment`**
 1. `[ledger]` The routes out of {settlement} are not the routes that were; the war moved where things go, and where things go has not moved back.
-2. `[street]` The market runs thin at {settlement}; the roads turned elsewhere when the fighting started, and they have found they do not need to come back.
+2. `[street]` The stalls at {settlement} are quieter than the town remembers them being, and the carters who used to fill them have somewhere else to be now.
 3. `[elder]` {settlement} trades with different towns than it did {timeband_since}, and the change was not chosen by anybody here.
 
 ---
@@ -5481,7 +5481,7 @@ unchanged.
 
 **`viable: true` — the arithmetic closes**
 1. `[ledger]` {settlement} holds together as a settlement: what it needs it can get, what it makes it can move, and the pieces of it explain each other.
-2. `[visitor]` There is no obvious reason {settlement} should not be where it is, which is a plainer compliment than it sounds.
+2. `[visitor]` A stranger at {settlement} does not have to be told why the town is where it is; the reason is legible from the road, and nothing about the place argues with it.
 3. `[street]` The town works, and works for the reasons a town of this kind usually works.
 4. `[counterforce]` {settlement} carries real difficulties and none of them undermines the case for the place; the town's problems are problems inside a working arrangement.
 
@@ -5492,10 +5492,10 @@ unchanged.
 4. `[street]` The town makes sense in most respects. The respects in which it does not are the ones people here decline to discuss with outsiders.
 
 **`viable: false` — the arithmetic does not close**
-1. `[ledger]` What {settlement} requires exceeds what its ground and its trade together supply, and the record does not close the gap.
-2. `[visitor]` {settlement} is held here by something other than its own economy, and a stranger with an eye for it starts wondering what.
-3. `[street]` The town goes on, and the going on is not explained by the books.
-4. `[threshold]` {settlement} does not close its own arithmetic and stands anyway, which means something outside the books is paying, and the page cannot say what.
+1. `[ledger]` {settlement}'s outgoings stand above everything its land and its custom bring in, and nothing on the record accounts for the difference.
+2. `[visitor]` A stranger who prices {settlement} against what a town of this size costs to keep finds the two do not meet, and a careful eye goes looking for a patron before it goes looking for an error in the sums.
+3. `[street]` Nobody in {settlement} treats the gap as a mystery and nobody in {settlement} can close it either; the town's own account of how it manages is that it manages.
+4. `[threshold]` {settlement} sits on the wrong side of its own accounting and is a settlement regardless, so the question the record leaves open is not whether the town is being carried but by whom.
 
 **`criticalIssueCount` — critical contradictions on the record**
 1. `[ledger]` {band} of the contradictions in {settlement}'s record are the serious kind: not a rough edge, a thing that cannot be true alongside the thing beside it.

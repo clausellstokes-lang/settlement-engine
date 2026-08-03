@@ -361,7 +361,7 @@ carry.
 **HEADLINE**
 1. `[gate]` {settlement} has cause enough against {counterpart} and will not act on it: too much of what {settlement} eats comes down that road.
 2. `[answer]` The {good} lane changed hands at the crossing and {settlement} answered with soldiers — {reason}; what was a matter of tolls is a matter of banners now.
-3. `[charge]` {settlement}'s embargo has cost {settlement} {band} of its own custom, and the hall is being asked to say why it was worth it.
+3. `[charge]` The houses that stayed away from {settlement}'s gate this season are the bill for its embargo — {band} of the town's own custom, charged to the hall that voted it.
 4. `[belief]` {settlement} holds that {counterpart} means to take the {good} trade whole, and is arming on the holding; {house}'s books say otherwise.
 
 **TELLING**
@@ -496,7 +496,7 @@ carry.
 4. `[belief]` `[dm-only]` {npc} sold {settlement} a weakness that was never at {counterpart}, and {settlement} has bought it with soldiers.
 
 **TELLING**
-5. `[origination → belief → answer]` The word that reached {settlement} was shaped before it left {counterpart}'s court; {settlement}'s whole picture of the affront was built on it; and the war now entered against {counterpart} rests on a fact that was never in anyone's record.
+5. `[origination → belief → answer]` A sentence left {counterpart}'s court shorter than it had been written; {settlement} read the version that arrived and could see no reading of it but an insult; and the war entered against {counterpart} since stands in the record with a cause no clerk at either end can produce.
 6. `[belief → succession → charge]` {settlement} chose its target off a believed weakness at {counterpart}; the column found the ground held; and what {settlement} has to show for the season is a fresh grievance on the other side and a story it can no longer disown.
 
 **SUBHEADER**
@@ -625,7 +625,7 @@ carry.
 
 **TELLING**
 6. `[origination → answer → gate]` {temple}'s conviction at {settlement} entered {counterpart}'s house as an abhorrence; the trade between them fell to what conscience would bear; and it did not fall to nothing, because nothing was never on the table.
-7. `[answer → succession → charge]` {settlement}'s embargo pushed the {good} onto the smugglers' lanes; the seizures at the gates rose with it; and the houses that used to carry it honestly are carrying something else now.
+7. `[answer → succession → charge]` {settlement}'s embargo pushed the {good} onto the smugglers' lanes; the seizures at the gates rose with it; and the trade that stayed lawful is a different trade in different hands.
 
 **SUBHEADER**
 8. `[plain]` {settlement} reduced trade with {counterpart} over an institution at {counterpart}; the {good} trade between them has fallen.
@@ -1839,7 +1839,7 @@ which is the angle its own subtitle promises and no other mold in it covers.
 **HEADLINE**
 1. `[instrument]` {house} lent to the seat of {settlement} and asked for the {route} in the terms; the debt is a grievance now, and the {route} with it.
 2. `[answer]` {counterpart} took the wagons and sent nothing back — the next bargain out of {settlement} will be dearer for it.
-3. `[charge]` {house}'s word is worth {band} less at the {settlement} wharf than it was, and the entry that did it will outlive the debt.
+3. `[charge]` {house} has settled the debt and not the entry; the {settlement} wharf still prices the name {band} below what it took before.
 4. `[gate]` A merchant's broken word buys no march: {settlement} holds its grievance against {counterpart} and has nothing in the war book to set beside it.
 
 **TELLING**
@@ -1886,7 +1886,7 @@ which is the angle its own subtitle promises and no other mold in it covers.
 
 **HEADLINE**
 1. `[origination]` The render at {settlement} outran the piety that paid it, and the temple it paid for keeps two congregations now.
-2. `[charge]` {temple}'s take is up and its congregation is down, which the ledger noticed a good while before the pulpit did.
+2. `[charge]` {temple}'s render came in whole while the benches thinned under it, and the two facts sat a season apart in the same book.
 3. `[succession]` The tithe dispute went to {counterpart} for arbitration and came back a schism {timeband_since}.
 4. `[gate]` {settlement} had no room for a second rite: the weaker congregation was evicted, and the split closed as fast as it opened because the slots were never there for it.
 
@@ -1918,9 +1918,9 @@ they are, and it is not a stylistic choice.
 
 **HEADLINE**
 1. `[succession]` {creed} was put down at {settlement}, and the undercroft gave it back {timeband_since}.
-2. `[answer]` {settlement}'s seat made an example of {creed}, and {settlement} took the example the other way.
+2. `[answer]` {settlement}'s seat made {creed}'s punishment public and gave {reason} for it, and the crowd that came to watch is what {creed} has grown by since.
 3. `[belief]` The register held {creed} extinct at {settlement}; the doors of {temple} opened {timeband_since} and what walked out was not strangers.
-4. `[gate]` *[dm-only]* Tolerance did at {settlement} what the constables could not: nobody stopped them keeping the rite, and so fewer and fewer did.
+4. `[gate]` *[dm-only]* Tolerance did at {settlement} what the constables could not: the rite was left alone until there was nobody left who thought it worth keeping.
 
 **TELLING**
 5. `[origination → succession]` *[dm-only]* The suppression did not scatter them. A share of {creed}'s faithful went to the cellars and took the vessels with them; {npc} keeps a list of who still comes and keeps it where it will not be found; the words are said over a table and a handful answer them; the keeper who could not stay took the {route} out, and the wanderers' register carries that name now. The public record shows {creed} extinguished at {settlement}. {band} know better, and have known since the doors were barred.
@@ -1965,8 +1965,8 @@ they are, and it is not a stylistic choice.
 **SLOTS:** `{settlement}` `{counterpart}` `{npc}` `{faction}` `{house}` `{good}` `{route}` `{band}` `{timeband_since}`
 
 **HEADLINE**
-1. `[belief]` They say the streets of {counterpart} want for hands and pay in {good}, and the {route} has been full of feet since the thaw.
-2. `[carriage]` Letters came back from {counterpart} and they did not speak of {good}; the {route} runs quiet {timeband_since}.
+1. `[belief]` The word out of {counterpart} promised wages for any hand that came, and {settlement} believed it enough to empty its own lanes.
+2. `[carriage]` Every cart back from {counterpart} has carried somebody home {timeband_since}, and not one of them repeats the word that sent them out.
 3. `[gate]` The column out of {settlement} reached {counterpart} and found no room: the stores were counted at the gate, the count refused it, and {band} took the {route} back the way they had come.
 4. `[charge]` {settlement} sent {band} down the {route} in the spring and fed them through the winter regardless.
 
@@ -1989,7 +1989,7 @@ they are, and it is not a stylistic choice.
 
 **HEADLINE**
 1. `[succession]` {settlement} petitioned its seat over {reason} in the spring, and the square filled when the answer did not come.
-2. `[origination]` The streets of {settlement} rose over {reason} — the seat had been petitioned before the stones came up.
+2. `[origination]` The streets of {settlement} rose over {reason}, and nothing in the rising was new to the hall.
 3. `[charge]` {settlement} is counting what that night cost {timeband_since}, and the paper that asked first cost nothing at all.
 4. `[gate]` {settlement}'s seat answered at the first rung, and the grievance closed in the hall, which is where it should have closed.
 
@@ -2011,10 +2011,10 @@ they are, and it is not a stylistic choice.
 **SLOTS:** `{settlement}` `{counterpart}` `{house}` `{temple}` `{route}` `{band}` `{timeband_span}` `{timeband_since}` `{timeband_age}`
 
 **HEADLINE**
-1. `[succession]` {settlement} mourns the ones who went to {counterpart} as though it had buried them, and {timeband_since} their grandsons are on the road back.
+1. `[succession]` The names {settlement} lost to {counterpart} were never struck from its rolls, and {timeband_since} the grandsons of that departure are walking back down the {route}.
 2. `[origination]` The tie {settlement} kept with {counterpart} is {timeband_age}, and it filled a road again this spring.
 3. `[gate]` The names stopped being said at the turning of the season, the band crossed to none, and the road that would have carried the grandsons carried nobody.
-4. `[charge]` {settlement} says it sent them to {counterpart} and says it with its chin up; it expects something back, and one year it will ask.
+4. `[charge]` {settlement} keeps the going to {counterpart} as an errand it ordered rather than a loss it took; there is a return expected on it, and the town has not forgotten to expect it.
 
 **TELLING**
 5. `[origination → succession → carriage]` The departure has a grammar and {settlement} chose one: they left because they had to, and the town has never quite forgiven them for it. The {temple} still reads the roll of the ones who took the {route} at the turning of the season; a house that lost its people to {counterpart} will not lend to {counterpart}; and the band that all of that keeps alive is the same band the road runs back along.
@@ -2042,10 +2042,10 @@ exposure receipt exists on the chain. The public molds below (3, 4, 6, 7) are
 all downstream of an exposure and entailed by it.
 
 **HEADLINE**
-1. `[belief]` *[dm-only]* They marched on a weakness that was bought for them.
-2. `[origination]` *[dm-only]* {faction}'s column is on the {route} road to {counterpart}, moving on a muster count {house} sold it {timeband_since}.
-3. `[gate]` The story broke before the march did: what {house} sold of {counterpart} is contradicted at every quay, and the muster has stood down.
-4. `[charge]` {faction} got its war and a name fastened to it, in {counterpart}'s own hand.
+1. `[belief]` *[dm-only]* The weakness {faction} marched on was true in one ledger only, and that ledger had been paid for.
+2. `[origination]` *[dm-only]* {faction} bought its picture of {counterpart}'s strength from {house} {timeband_since}, and put a column on the {route} road without ever seeking a second reading.
+3. `[gate]` The muster has stood down at {settlement}: what {house} sold about {counterpart} did not survive the second road it was checked against.
+4. `[charge]` The war {faction} wanted is running, and so is the account of who paid to start it, kept at {counterpart} and kept carefully.
 
 **TELLING**
 5. `[origination → belief → succession]` *[dm-only]* Coin crossed a table at {settlement} and a telling about {counterpart} went out under {house}'s seal. It arrived slowly, the way true things do, and was taken for one; {timeband_since} it was quoted in {faction}'s council as common knowledge, with nobody able to recall who had brought it in. The commission is discharged in full — the mark bought the story, and then bought a war with it.
@@ -2066,9 +2066,9 @@ all downstream of an exposure and entailed by it.
 
 **HEADLINE**
 1. `[gate]` Two tellings out of {house} cannot both be true; {counterpart}'s factors have said so at every quay, and the stamp is worth {band} less this season.
-2. `[charge]` The market that sold the story now wears it: {settlement} keeps the coin and loses the custom.
-3. `[origination]` The story {faction} bought against {counterpart} came home named, and the grievance is {faction}'s to answer now.
-4. `[succession]` It was a good story, sold too often and to the wrong court; {house}'s word is priced accordingly {timeband_since}.
+2. `[charge]` {house} at {settlement} was paid for the telling and is paying for it yet — the coin was counted once, and the custom has not stopped leaving.
+3. `[origination]` {faction} paid for a weapon against {counterpart} and made a claim against itself instead: the telling came back with a buyer's name attached, and {counterpart} is the party holding it.
+4. `[succession]` The telling is still quoted and {house}'s stamp is not; {timeband_since} the two have travelled separately.
 
 **TELLING**
 5. `[origination → gate → charge]` The commission was cheap — less than a season's tolls to have {counterpart} told a thing that never happened. It took, and it was quoted, and then it was checked: the telling did not match what the roads were bringing, {reason} was written beside {house}'s stamp in every counting-house that keeps one, and {faction}'s buying is on the record now. The record travels better than the story did.
@@ -2096,7 +2096,7 @@ not. No public mold below names the detour, and none gestures at one.
 1. `[origination]` *[dm-only]* {faction} has a courier it trusts and {house} has a courier it owns, and they are the same man.
 2. `[belief]` Two accounts of one parlay reached {settlement} by two roads, and the seat has begun asking which road it paid for.
 3. `[answer]` {npc} was taken up at the gate of {settlement} as treason, on a divergence nobody has yet explained.
-4. `[gate]` The word clearing {npc} reached {settlement} after the seat had ruled, and both entries are in the record, in the order they arrived.
+4. `[gate]` The exoneration of {npc} is filed under {settlement}'s ruling rather than over it, because that is the order the roads delivered them in.
 
 **TELLING**
 5. `[carriage → belief → answer]` *[dm-only]* The channel was theirs before the errand was. {npc} carried {faction}'s cargo off the {route} road to {house} first and to {counterpart} after, and the second telling was not the first; the detour cost a leg and the leg shows, because the packet arrived late and altered. When the seat sent two and read them together, the divergence sat exactly where the detour had been — and the name that came out of that reading was {npc}'s.
@@ -2118,8 +2118,8 @@ not. No public mold below names the detour, and none gestures at one.
 **SLOTS:** `{settlement}` `{counterpart}` `{term}` `{route}` `{timeband}` `{timeband_span}` `{timeband_age}`
 
 **HEADLINE**
-1. `[succession]` The peace of {settlement} and {counterpart} reached its date and the clerks struck it; the book is the only place it was mourned.
-2. `[instrument]` The {term} between {settlement} and {counterpart} is {timeband_age}, and no hand that signed it still holds a seat.
+1. `[succession]` The {term} between {settlement} and {counterpart} ran to its last season and stopped there, and neither court marked the day.
+2. `[instrument]` The {term} binding {settlement} and {counterpart} is {timeband_age}, and it is kept now by clerks who inherited it rather than by anyone who chose it.
 3. `[charge]` Nothing was repudiated between {settlement} and {counterpart} — {timeband} short wagons, and then somebody weighed them.
 4. `[gate]` A mediator sat the two courts down over a pact neither had broken, and the {term} was re-cut rather than let go.
 
@@ -2144,7 +2144,7 @@ not. No public mold below names the detour, and none gestures at one.
 1. `[succession]` The old seat swore it; {npc} sits where the oath was given and has not said whether the oath is his.
 2. `[answer]` {npc} will keep the word the old seat gave, and {counterpart} has stood its captains down.
 3. `[origination]` {npc} has torn up the treaty his predecessor swore, and every term under it is broken from this week.
-4. `[instrument]` No word came from the new seat and the date passed; the clerks entered the treaty as standing, which is what the law reads silence as.
+4. `[instrument]` The new seat let the date go by without answering it, and the {term} stands on that silence alone, which is all the law requires of it.
 
 **TELLING**
 5. `[succession → answer → charge]` The seat changed, and {band} oaths another hand had sworn became questions in the same week; {counterpart} sent no envoys until it heard. The answer came aloud and it was no. The parchment is kept only as evidence now, the terms defaulted from the day of the saying, and the courts have started pricing what a promise out of {settlement} is worth.
@@ -2178,9 +2178,9 @@ states the cost itself.
 
 **HEADLINE**
 1. `[belief]` {settlement}'s hall has charged the tribute of {counterpart} to its own seat; the book records both and joins neither.
-2. `[charge]` {npc} paid the tribute of {counterpart} on time, every time, and it cost {npc} the seat.
+2. `[charge]` Not one payment to {counterpart} left {settlement} late, and the hall took the seat from {npc} for exactly that.
 3. `[gate]` The terms were sealed in {settlement} and never read out, and what the town could not read, the town supplied.
-4. `[succession]` The men who would have moved against the seat of {settlement} are at the muster instead, and the hall has gone quiet with them.
+4. `[succession]` The grievance in {settlement}'s hall emptied into the muster field, and the hall has been quiet since it did.
 
 **TELLING**
 5. `[belief → succession → charge]` The terms were sealed and the town believed the worst of them, which is customary. Season by season the installments left on time; season by season the standing of the seat that sent them fell; {burden} stood on {settlement} the whole while and the hall grew short. Nothing in the book joins those two columns. Everyone in the hall joined them, and at the verdict the book was what they read out.
@@ -2200,10 +2200,10 @@ states the cost itself.
 **SLOTS:** `{settlement}` `{counterpart}` `{third_party}` `{npc}` `{faction}` `{temple}` `{wound}` `{good}` `{band}` `{timeband}`
 
 **HEADLINE**
-1. `[answer]` By decree of the seat the grudge with {counterpart} is buried, and the price was paid in grain and in pride.
+1. `[answer]` {settlement}'s seat ordered the {wound} with {counterpart} closed, and set the price of the closing in the same decree.
 2. `[succession]` The decree outlasted {timeband} patience: {faction} has waited in the open since it was read, and has asked the seat to unbury it.
 3. `[gate]` {settlement} buried its grudge with {counterpart}; {counterpart} has buried nothing, and a decree binds only the hall that made it.
-4. `[charge]` They dug up what their fathers buried, and the old wound bled new.
+4. `[charge]` {settlement} bought the closing of the quarrel at a price its own clerks entered, and a later hall has given the closing back and kept the bill.
 
 **TELLING**
 5. `[answer → gate → charge]` {npc} named the {wound}, named its price, and had both read out in the square of {settlement} before witnesses who will outlive the seat that swore it. The rows stayed in the book and stopped being counted when the hall counted {counterpart}: the war party could read them and could not cite them, and the standing grievance read {band} lighter for it. It held past the doubting season. Then a later hall cited them anyway, word for word, and {counterpart}'s book gained the old {wound} back and a new one for the revoking.
@@ -2652,7 +2652,7 @@ N1. the new seat's repudiation of the war
 #### WAR/successor_escalates_war (WR-5)
 F1. {npc} came to the seat and widened the war the predecessor could not end
 F2. the same ledgers, a different character, and a new front
-N1. the new seat's widening of the war
+N1. a wider war chosen by the successor
 
 #### WAR/war_dissolved_by_verdict (WR-5)
 F1. the officeholder whose rot opened the war was removed
@@ -3118,7 +3118,7 @@ N1. the rising in the streets of {settlement}
 #### POP/commons_refusal (POP-2)
 F1. the commons of {settlement} would not answer the seat's call
 F2. no one came to the muster field, and no one had to be told not to
-N1. the call the commons would not answer
+N1. the commons' silence at the muster field
 
 #### POP/commons_answered (POP-2)
 F1. the commons of {settlement} petitioned their seat, and were heard
@@ -3230,7 +3230,7 @@ N1. the hall taken by the war party
 #### INTERIOR/overturned_peace_party (INT-3)
 F1. {faction} took the hall, and {decision} ended with the seat instead
 F2. the peace party holds the chair, and its first business is {counterpart}
-N1. the hall taken by the peace party
+N1. the chair passing to the peace party
 
 #### INTERIOR/demand_betrayed (INT-3)
 F1. {faction} seated {npc} and has been waiting since

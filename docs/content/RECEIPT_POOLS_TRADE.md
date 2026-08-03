@@ -376,7 +376,7 @@ AUDIENCE: dm-only
 ### cc.severance_crossing (TR-1) — Herald, headline — significance: major
 SLOTS: {settlement} {counterpart} {reason} {good}
 AUDIENCE: public
-1. Trade between {settlement} and {counterpart} is severed, and the reason entered in the book is {reason}.
+1. The tie between {settlement} and {counterpart} is cut, and the book gives {reason} for it.
 2. The bridge road stands empty of carts, and both towns have stopped blaming the weather.
 3. The licence registers at {settlement} were closed against {counterpart} this week, name by name.
 4. With the tie cut, {settlement} must find its {good} elsewhere, and elsewhere is further.
@@ -824,7 +824,7 @@ SLOTS: {settlement} {counterpart} {good} {reason}
 AUDIENCE: public
 1. {settlement} has proposed a compact to {counterpart}: {good} by the year, against the standing of the road.
 2. The court sent its offer, and the wharf heard about it the same day.
-3. The proposal stands in the court book — {good}, by the year — with the reason entered as {reason}.
+3. {settlement} has put {good} by the year on the table and {reason} beside it, and the court book carries both.
 4. If {counterpart} agrees, {settlement} has bought its bread for a decade; if not, it has shown its hunger.
 5. {settlement} asked politely, and asked from a position it would rather not have explained.
 6. The offer went out in fair copy, with the seal set twice because the first impression was poor.
@@ -1057,7 +1057,7 @@ SLOTS: {settlement} {house} {good}
 AUDIENCE: public
 1. There is one seller of {good} in {settlement}, and there has been for years.
 2. The stalls quote {house}'s terms because there are no other terms to quote.
-3. The sale book at {settlement} names the same supplier in every entry of the season.
+3. Turn the sale book of {settlement} to any page and the same hand has signed for the {good}.
 4. Nothing is scarce and nothing is cheap; {house} takes its toll quietly.
 5. It is not a corner. Nobody else has come, and nobody else comes.
 6. The stallholders at {settlement} complain about the terms and buy at them, as they have for years.
@@ -1097,7 +1097,7 @@ AUDIENCE: public
 5. {good}: {band}; sole supplier {house}, standing these many years.
 6. {good}: {band} — {house} buys everything soft on every road, and has for a season.
 7. {good}: {band} — sold out of {house}'s book a week before the wagons came.
-8. {good}: {band}; the seat bought {house}'s stock at the forced band rather than go without.
+8. {good}: {band}; on the shelves only because the seat met {house}'s asking, and the town knows what that cost.
 9. {good}: {band} — a second house keeps books here now, and the terms are argued again.
 10. {good}: {band}; the stock came in by no road on any map, and the stalls asked nothing.
 
@@ -1312,7 +1312,7 @@ AUDIENCE: public
 3. Factor {npc} — at home in {settlement}; no errand standing.
 4. Factor {npc} — held by {faction} on the {route}; ransom under discussion.
 5. Factor {npc} — returned from the circuit; the house's bands are fresh.
-6. Factor {npc} — ransomed home out of {faction}'s hold; no errand standing.
+6. Factor {npc} — home; the ransom to {faction} is paid and entered.
 7. Factor {npc} — on the circuit; expected back at {settlement} by the frosts.
 8. Factor {npc} — at {counterpart}, treating for the seat of {settlement}.
 9. Factor {npc} — turned back on the {route}; the errand stands open.

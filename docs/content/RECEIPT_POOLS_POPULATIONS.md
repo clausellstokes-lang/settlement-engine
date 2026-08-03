@@ -361,7 +361,7 @@ AUDIENCE: public
 2. The grievance of {settlement} closed at the first rung, and the ledger shows the drain.
 3. It ended in the hall of {settlement}, which is where it should have ended.
 4. {settlement} learned that asking works — a thing a seat may live to regret.
-5. Nothing happened in {settlement}, and that was the whole of the achievement.
+5. No crowd formed at {settlement}, no order went out, and the ledger for the season is a single answered petition.
 6. The square of {settlement} emptied in the time it takes to walk home from it.
 7. It was done before the season turned, which is faster than such things are done.
 8. Travellers heard of it in the next town before {settlement} had finished talking of it.
@@ -579,7 +579,7 @@ AUDIENCE: public
 4. {settlement} will give {npc} whatever {npc} asks for, for about a year.
 5. {npc} was not thanked at the time; there was nobody at leisure to do it.
 6. The lanes of {settlement} carried what they could to the sickhouse door and left it there without knocking.
-7. The seat of {settlement} entered the sickhouse under {npc}'s name, having nobody else to enter it under.
+7. The sickhouse of {settlement} has {npc}'s name on it in the register, which is the only name anybody could have put there.
 8. {npc} kept the door through the whole of that winter, and opened it in the spring out of habit.
 9. {npc} has not been able to smell vinegar since without going quiet.
 

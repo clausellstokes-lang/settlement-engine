@@ -111,7 +111,7 @@ AUDIENCE: dm-only
 SLOTS: {settlement}, {counterpart}, {house}, {faction}, {reason}, {band}
 AUDIENCE: public
 1. The word out of {house} at {settlement} is broken; what it sold of {counterpart} does not match what the roads bring.
-2. Two tellings out of {house} cannot both be true, and {counterpart}'s factors have said so at every quay.
+2. {house}'s stamp now needs a second road behind it before {counterpart}'s quays will take it, and everyone working those quays can say why.
 3. {house}'s stamp is worth {band} less this season than last; {reason} is written beside it in every counting-house.
 4. The market that sold the story now wears it — {settlement} keeps the coin and loses the custom.
 5. It was a good story. It was sold too often, and to the wrong court.
@@ -386,7 +386,7 @@ AUDIENCE: public
 SLOTS: {settlement}, {counterpart}, {house}, {faction}
 AUDIENCE: public
 1. {faction} marched on a bought weakness and learned the price after the fact; the grievance names {house} at {settlement} and the buyer both.
-2. {counterpart}'s ledger of grievances opens with a forgery, and the forger's patron is written beneath it.
+2. The first page of {counterpart}'s case is not the march but the paper that arranged it, and {house} is named on that page.
 3. The war stands; the cause does not — and both courts can read who paid for it.
 4. They got their war. They also got a name fastened to it, in {counterpart}'s hand.
 5. The bought march is a debt now, and {faction} will pay it in {counterpart}'s courts for a generation.
@@ -445,7 +445,7 @@ AUDIENCE: public
 ### sweep_catch (IN-3 endings `catch`; the town's side of the burning) — Herald knowledge desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {faction}, {npc}
 AUDIENCE: public
-1. Paid eyes found among us.
+1. {settlement} has learned which of its own were being paid to listen.
 2. {settlement}'s watch turned up a retainer of {counterpart}'s keeping the gate rolls in a private hand.
 3. The purse came from {faction}, and the town has the purse; {npc} will not be trusted at that gate again.
 4. They had been watched a year; the watcher is named now, and a named watcher is no use to anyone.
@@ -687,7 +687,7 @@ SLOTS: {counterpart}, {npc}, {house}, {faction}
 AUDIENCE: dm-only
 1. {npc} carried {faction}'s cargo to {house} first and to {counterpart} after, and the second telling was not the first.
 2. The detour cost a leg, and the leg shows: the packet arrives late, and altered.
-3. {faction} has a courier it trusts and {house} has a courier it owns. They are the same man.
+3. {house} pays {npc} for the same journey {faction} pays for, and neither patron is being short-changed on the legs.
 4. He delivered everything he was asked to. He delivered it twice.
 5. The legs are in the book and the book is honest; it is the cargo that changed between them.
 6. Everything {faction} has had by that hand must be read again, and there is a great deal of it.

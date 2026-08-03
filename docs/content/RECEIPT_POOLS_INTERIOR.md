@@ -312,7 +312,7 @@ AUDIENCE: public
 6. {faction}: for {decision} against {counterpart}; weight in the hall: {band} and falling.
 7. {faction}: against {decision}; heeded {band} past, and holding the seat to it.
 8. {faction}: formed on {counterpart}; it is said to have no other business.
-9. {faction}: counsels {decision}; the seat has entered the opposite, and the book keeps both.
+9. {faction}: counsels {decision}; not carried, and not withdrawn either.
 
 ---
 
@@ -647,7 +647,7 @@ SLOTS: {settlement}, {counterpart}, {npc}, {good}
 AUDIENCE: public
 1. {npc} paid, and kept the hall; the tribute of {counterpart} goes out still.
 2. {settlement} pays and mutters, and pays again at the turn of the season.
-3. The seat of {settlement} was tested over the tribute and answered for.
+3. The tribute was put to {settlement}'s hall as a charge against {npc}, and the hall declined to make it one.
 4. Nothing was forgiven in {settlement}, and nothing was overturned either.
 5. The town got used to it, which is the cheapest outcome there is.
 6. The carts go out of {settlement} at the same gate on the same day, and the town has stopped coming to watch.

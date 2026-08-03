@@ -111,7 +111,7 @@ carry `significance: n/a (dossier line)`.
 SLOTS: {settlement} {counterpart} {band} {term}
 AUDIENCE: public
 1. The peace of {settlement} and {counterpart} has run its course — {band} years, and no hand that signed it still holds a seat. `[exemplar, slotted + Law One]`
-2. The {term} between {settlement} and {counterpart} reached its date; the clerks struck it from the book, and the book is the only place it was mourned.
+2. The {term} {settlement} and {counterpart} kept between them came to its last day and was filed as closed; neither court sent word, and the clerks who closed it were the only ones who marked it.
 3. In {settlement} the market kept its hours as always; the pact with {counterpart} ended that week, and the carters heard of it after the clerks.
 4. {settlement} and {counterpart} are bound by nothing now — the {term} ran out, and neither court asked for another.
 5. It was written for {band} years and it kept every one of them; both courts let it go without a word.
@@ -593,7 +593,7 @@ AUDIENCE: public
 SLOTS: {settlement} {counterpart} {npc} {band}
 AUDIENCE: public
 1. The old seat swore it; the new seat must choose. `[exemplar, slotted]`
-2. {npc} of {settlement} sits where the oath was given, and has not said whether the oath is his.
+2. {npc} has taken the seat at {settlement} without taking the oath that stands with it, and the parchment has been left where the old seat left it.
 3. The court of {counterpart} is waiting on one word from {settlement}, and the market is trading on which word it will be.
 4. Every treaty {npc} did not sign is a question this week, and there are {band} of them.
 5. Nothing has been broken. Nothing has been confirmed either.
