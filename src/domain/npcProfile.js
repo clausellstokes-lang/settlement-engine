@@ -53,7 +53,7 @@ const CATEGORY_TO_ARCHETYPE = Object.freeze({
 });
 
 /**
- * @param {any} category
+ * @param {unknown} category
  * @returns {import('./settlement.schema.js').FactionArchetype}
  */
 function archetypeFromCategory(category) {
@@ -110,7 +110,7 @@ const NPC_TEMPLATES = Object.freeze({
   },
 });
 
-/** @param {any} archetype */
+/** @param {import('./settlement.schema.js').FactionArchetype} archetype */
 function templateForArchetype(archetype) {
   const t = NPC_TEMPLATES[archetype] || NPC_TEMPLATES.other;
   return {
@@ -278,8 +278,8 @@ export function normalizeNpcRank(rank) {
 }
 
 /**
- * @param {any} archetype
- * @param {any} rank
+ * @param {import('./settlement.schema.js').FactionArchetype} archetype
+ * @param {unknown} rank
  */
 function consequencesForRemoval(archetype, rank) {
   const archetypeMap = REMOVAL_CONSEQUENCES[archetype] || REMOVAL_CONSEQUENCES.other;
@@ -291,7 +291,7 @@ function consequencesForRemoval(archetype, rank) {
 
 // ── Helpers ─────────────────────────────────────────────────────────────
 
-/** @param {...any} candidates */
+/** @param {...unknown} candidates */
 function firstNonEmpty(...candidates) {
   for (const c of candidates) {
     if (typeof c === 'string' && c.trim()) return c.trim();
@@ -299,7 +299,7 @@ function firstNonEmpty(...candidates) {
   return null;
 }
 
-/** @param {any} s */
+/** @param {unknown} s */
 function snakeCase(s) {
   return String(s)
     .replace(/[^a-zA-Z0-9]+/g, '_')
@@ -307,7 +307,7 @@ function snakeCase(s) {
     .toLowerCase();
 }
 
-/** @param {any} name */
+/** @param {unknown} name */
 function factionIdFromName(name) {
   if (!name) return null;
   return `faction.${snakeCase(name)}`;
@@ -334,8 +334,8 @@ const CATEGORY_INSTITUTION_HINTS = Object.freeze({
 });
 
 /**
- * @param {any} npc
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimNpc} npc
+ * @param {import('./settlement.schema.js').SimSettlement|undefined} settlement
  */
 function inferInstitutionLink(npc, settlement) {
   if (!npc || !settlement) return null;
@@ -345,7 +345,7 @@ function inferInstitutionLink(npc, settlement) {
   const hint = CATEGORY_INSTITUTION_HINTS[archetypeFromCategory(npc.category)];
   if (!hint) return null;
 
-  const match = institutions.find((/** @type {any} */ inst) =>
+  const match = institutions.find((inst) =>
     inst && typeof inst.name === 'string' && hint.test(inst.name)
   );
   return match ? `institution.${snakeCase(match.name)}` : null;
@@ -487,20 +487,20 @@ export function institutionsForPower(faction, settlement) {
 // follow-up — the data is there, but the surface needs careful UX.
 
 /**
- * @param {any} npc
- * @param {any} settlement
+ * @param {import('./settlement.schema.js').SimNpc} npc
+ * @param {import('./settlement.schema.js').SimSettlement|undefined} settlement
  */
 function inferPrimaryRelationship(npc, settlement) {
   const rels = Array.isArray(settlement?.relationships) ? settlement.relationships : [];
   if (!npc?.id || rels.length === 0) return null;
 
   // Find any relationship involving this NPC.
-  const candidates = rels.filter((/** @type {any} */ r) => r.npc1Id === npc.id || r.npc2Id === npc.id);
+  const candidates = rels.filter((r) => r.npc1Id === npc.id || r.npc2Id === npc.id);
   if (candidates.length === 0) return null;
 
   // Prefer relationships with explicit tension over plain alliances —
   // these are the more campaign-actionable connections.
-  const withTension = candidates.find((/** @type {any} */ r) => typeof r.tension === 'string' && r.tension);
+  const withTension = candidates.find((r) => typeof r.tension === 'string' && r.tension);
   const chosen = withTension || candidates[0];
 
   const otherId = chosen.npc1Id === npc.id ? chosen.npc2Id : chosen.npc1Id;
@@ -526,8 +526,15 @@ function inferPrimaryRelationship(npc, settlement) {
  * Pure; idempotent; lossless on legacy fields (id, name, role,
  * personality, etc. are preserved on the returned object).
  *
- * @param {any} npc       The legacy NPC entry.
- * @param {any} [settlement] Optional context for institution-link +
+ * @param {any} npc       The legacy NPC entry. Stays `any`: SimNpc types
+ *   `influence` as (string|number) while this function's own return type,
+ *   NpcProfile, types it `string|null`. The two schema typedefs contradict
+ *   each other and reconciling them is a schema decision, not a typing chore.
+ * @param {any} [settlement] Optional context — also stays `any`: explanation.js
+ *   calls this with its OWN ExplainSettlement typedef, which is not assignable
+ *   to SimSettlement, so tightening here reds a CONSUMER at allowance zero.
+ *   (The private helpers below DO take SimSettlement; they are only ever called
+ *   from inside this file.) Optional context for institution-link +
  *                              relationship-triangle derivation.
  * @returns {import('./settlement.schema.js').NpcProfile|null}
  */
@@ -628,7 +635,7 @@ export function deriveAllNpcProfiles(/** @type {any} */ settlement) {
  * Count NPCs by archetype. Useful for distribution tests + future
  * faction-roster surfaces.
  */
-export function npcArchetypeBreakdown(/** @type {any} */ settlement) {
+export function npcArchetypeBreakdown(/** @type {import('./settlement.schema.js').SimSettlement} */ settlement) {
   /** @type {Record<string, number>} */
   const out = {
     government: 0, military: 0, religious: 0, merchant: 0,
@@ -645,7 +652,7 @@ export function npcArchetypeBreakdown(/** @type {any} */ settlement) {
  * Returns a flat list of consequences — useful for the future
  * "If the players burn through the leadership" forecasting UI.
  */
-export function dominantNpcRemovalImpact(/** @type {any} */ settlement) {
+export function dominantNpcRemovalImpact(/** @type {import('./settlement.schema.js').SimSettlement} */ settlement) {
   const dominant = deriveAllNpcProfiles(settlement)
     .filter((/** @type {any} */ p) => p.rank === 'dominant');
   const out = [];
