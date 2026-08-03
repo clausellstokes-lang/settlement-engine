@@ -549,6 +549,169 @@ export const WHAT_PHRASE_POOLS = Object.freeze({
     'a proclamation still on the door with nothing behind it',
     'a decision unmade before the season turned',
   ]),
+
+  // ── THE ECONOMY / TRADE DESK (RECEIPT_POOLS_LEGACY.md §3c) ──────────────────────────
+  // The remaining thirteen kinds of §3c — the desk whose first four (the demographic
+  // ones) were the retrofit's opening slice, now completed. Trade is the desk where a
+  // single voice does the most damage to LEGIBILITY: 'goods grown scarce', 'lost
+  // markets' and 'the lean season' are three different engine facts that a reader,
+  // seeing each of them repeated flat for a decade, learns to skim as one mood. These
+  // pools are written to keep the CAUSE audible — what is not arriving, what is no
+  // longer being bought, and what the season simply has not grown yet.
+
+  // diplomacy — doc variants 2..6; variant 1 ('envoys at parley') is the WHAT_PHRASES row.
+  //   CADENCE notable → floor 6 · live 1 · +5.
+  diplomacy: Object.freeze([
+    "legates lodged at the town's expense",
+    'terms being read across a table',
+    'an accord being copied fair for both seals',
+    'what happens instead of a muster',
+    "travellers passing a legate's escort on the road",
+  ]),
+
+  // export_market_loss — doc variants 2..8; variant 1 ('lost markets') is the WHAT_PHRASES row.
+  //   CADENCE chronic → floor 8 · live 1 · +7.
+  export_market_loss: Object.freeze([
+    'buyers who used to come and do not',
+    'a market tie struck from the book',
+    'goods stacking up with nowhere to go',
+    'a staple that trades in its own town only',
+    'carters told there is nothing to carry this way',
+    'a warehouse that fills instead of empties',
+    "a season's making with no season's buying behind it",
+  ]),
+
+  // flow_trade_scarcity — doc variants 2..8; variant 1 ('goods grown scarce') is the
+  //   WHAT_PHRASES row. CADENCE chronic → floor 8 · live 1 · +7.
+  flow_trade_scarcity: Object.freeze([
+    'stalls with gaps where the goods should be',
+    'a staple listed short in the market book',
+    'prices climbing because there is nothing to buy',
+    'plenty of coin and little to spend it on',
+    'carters arriving light and leaving lighter',
+    'a shop keeping its shutters half up',
+    'a lean run in a season that is usually easy',
+  ]),
+
+  // generosity_credit_default — doc variants 2..8; variant 1 ('a debt gone unpaid') is the
+  //   WHAT_PHRASES row. CADENCE chronic → floor 8 · live 1 · +7.
+  generosity_credit_default: Object.freeze([
+    'a creditor at the door with a writ',
+    'an obligation left open in both books',
+    'credit that will cost more here from now on',
+    'a promise kept only in the writing',
+    'factors comparing notes about who pays',
+    'a tally stick nobody wants to split',
+    'a term that came due and went past',
+  ]),
+
+  // generosity_purchase — doc variants 2..8; variant 1 ('a great purchase made') is the
+  //   WHAT_PHRASES row. CADENCE chronic → floor 8 · live 1 · +7.
+  generosity_purchase: Object.freeze([
+    'a bargain the whole market stopped to watch',
+    'a sale entered against a name everybody knows',
+    "coin leaving one town's coffers for another's",
+    'more paid than the thing is worth, and paid gladly',
+    'carters hired for a load that will take all week',
+    "word on the road of a court buying up a season's stock",
+    'a purchase made before the price could move again',
+  ]),
+
+  // generosity_trade_overture — doc variants 2..8; variant 1 ('an offer of trade') is the
+  //   WHAT_PHRASES row. CADENCE chronic → floor 8 · live 1 · +7.
+  generosity_trade_overture: Object.freeze([
+    'a factor sent with terms and no army',
+    'an offer entered in the book before it is answered',
+    'a door held open toward a town that may not want it',
+    'an offer, which is cheaper than a quarrel',
+    "a legate's cart on the road carrying samples",
+    'terms proposed at the turn of the trading season',
+    'word that the neighbours are ready to deal',
+  ]),
+
+  // harvest — doc variants 2..8; variant 1 ('the harvest') is the WHAT_PHRASES row. CADENCE
+  //   chronic → floor 8 · live 1 · +7.
+  harvest: Object.freeze([
+    'the fields coming in',
+    'the tithe barn filling',
+    'every hand in the town out in the rows',
+    'what the whole year will be judged on',
+    'carts on every lane between dawn and dark',
+    'the one stretch of the year nobody argues about the weather',
+    "the reeve counting sheaves against last year's",
+  ]),
+
+  // hungry_gap — doc variants 2..8; variant 1 ('the lean season') is the WHAT_PHRASES row.
+  //   CADENCE chronic → floor 8 · live 1 · +7.
+  hungry_gap: Object.freeze([
+    'the last of the stores set against the first of the growing',
+    'a granary measured more often than it is opened',
+    'thin soup and short tempers',
+    'the weeks nobody names and everybody counts',
+    'travellers advised to carry their own bread through here',
+    'seed grain looked at longer than it should be',
+    'a season that decides how many are here at the next one',
+  ]),
+
+  // import_shortage — doc variants 2..8; variant 1 ('a shortage of goods') is the WHAT_PHRASES
+  //   row. CADENCE chronic → floor 8 · live 1 · +7.
+  import_shortage: Object.freeze([
+    'a market with more sellers than stock',
+    'a supply line entered short in the ledger',
+    'craftsmen idle for want of material',
+    'a town discovering what it does not make itself',
+    'carters arriving empty from the usual direction',
+    'a smith rationing his own charcoal',
+    'a shortfall that came with the season and has outstayed it',
+  ]),
+
+  // institution_build — doc variants 2..8; variant 1 ('a great work underway') is the
+  //   WHAT_PHRASES row. CADENCE chronic → floor 8 · live 1 · +7.
+  institution_build: Object.freeze([
+    'scaffolds up over a new roofline',
+    "a work entered against the town's own account",
+    'masons wanted, and paid',
+    'something the town will still have in a generation',
+    'travellers marking the new stone from the road',
+    'a summer of carting and cutting',
+    'a hole in the ground that everybody has an opinion about',
+  ]),
+
+  // institution_closure — doc variants 2..8; variant 1 ('a hall shuttered') is the WHAT_PHRASES
+  //   row. CADENCE chronic → floor 8 · live 1 · +7.
+  institution_closure: Object.freeze([
+    'a door locked that used to stand open',
+    "an office struck off the town's rolls",
+    'business that has to go somewhere else now',
+    'a building that is still there and no longer anything',
+    'travellers sent on to the next town for it',
+    'a clerk carrying his own box out',
+    'a hall that did not open again after the winter',
+  ]),
+
+  // institution_founding — doc variants 2..8; variant 1 ('something new founded') is the
+  //   WHAT_PHRASES row. CADENCE chronic → floor 8 · live 1 · +7.
+  institution_founding: Object.freeze([
+    'a charter read out in the square',
+    "a new office entered on the town's rolls",
+    "work that will be somebody's living for a generation",
+    'a sign going up over a door',
+    'travellers told there is somewhere to go for it now',
+    'a beginning the clerks will date from this year',
+    'one more roof for the town to keep on',
+  ]),
+
+  // intel_transfer — doc variants 2..8; variant 1 ('word passing quietly between courts') is
+  //   the WHAT_PHRASES row. CADENCE chronic → floor 8 · live 1 · +7.
+  intel_transfer: Object.freeze([
+    'a rider arriving after dark and gone before light',
+    'an obligation entered where no goods moved',
+    'one court knowing what another meant it not to know',
+    'a gift that weighs nothing and costs a great deal',
+    'travellers who turn out to have been carrying more than letters',
+    'a favour that will be called in later',
+    'word going where the roads say it should not',
+  ]),
 });
 
 /*
@@ -626,6 +789,26 @@ export const EVENTS_DESK_KINDS = Object.freeze([
 ]);
 
 /**
+ * §3c — the economy/trade desk (its demographic kinds are POPULATION_DESK_KINDS above).
+ * @type {ReadonlyArray<string>}
+ */
+export const TRADE_DESK_KINDS = Object.freeze([
+  'diplomacy',
+  'export_market_loss',
+  'flow_trade_scarcity',
+  'generosity_credit_default',
+  'generosity_purchase',
+  'generosity_trade_overture',
+  'harvest',
+  'hungry_gap',
+  'import_shortage',
+  'institution_build',
+  'institution_closure',
+  'institution_founding',
+  'intel_transfer',
+]);
+
+/**
  * Every kind this retrofit has wired so far, desk by desk in wiring order. The blast
  * radius of the disclosed same-seed prose shift is exactly this list — a kind that is not
  * here reads today exactly as it read before the retrofit began.
@@ -635,4 +818,5 @@ export const WIRED_DESK_KINDS = Object.freeze([
   ...POPULATION_DESK_KINDS,
   ...WAR_DESK_KINDS,
   ...EVENTS_DESK_KINDS,
+  ...TRADE_DESK_KINDS,
 ]);

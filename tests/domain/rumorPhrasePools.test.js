@@ -5,8 +5,9 @@
  * frequency-scaled floor to the LIVE ROUTED TOKENS, whose pools are pre-authored in
  * docs/content/RECEIPT_POOLS_LEGACY.md. This file governs every desk wired so far:
  * §3c's population/demographics kinds (slice 1), §3a's war kinds and §3d's events kinds
- * (slice 2). The desk rosters live in the source leaf and this file reads them, so a desk
- * cannot be wired without arriving here.
+ * (slice 2), and the rest of §3c — the economy/trade kinds (slice 3). The desk rosters
+ * live in the source leaf and this file reads them, so a desk cannot be wired without
+ * arriving here.
  *
  * FIVE THINGS ARE PINNED, and the order is the order the retrofit disclosure demands.
  *
@@ -51,6 +52,7 @@ import {
 import {
   EVENTS_DESK_KINDS,
   POPULATION_DESK_KINDS,
+  TRADE_DESK_KINDS,
   WAR_DESK_KINDS,
   WHAT_PHRASE_POOLS,
   WIRED_DESK_KINDS,
@@ -68,6 +70,7 @@ const DESKS = Object.freeze([
   ['the population desk (§3c)', POPULATION_DESK_KINDS],
   ['the war desk (§3a)', WAR_DESK_KINDS],
   ['the events desk (§3d)', EVENTS_DESK_KINDS],
+  ['the economy/trade desk (§3c)', TRADE_DESK_KINDS],
 ]);
 
 /**
@@ -286,7 +289,7 @@ describe.each(DESKS)('THE REPETITION ENVELOPE — %s', (_deskName, kinds) => {
     // Expressed in units of the uniform share (1/poolLength) so a floor-4 pool and a
     // floor-8 pool are held to the same SHAPE. The band is deliberately wide: this pins
     // that the fold SPREADS, not that it is a uniform RNG. Measured worst cases over the
-    // 44 wired kinds at the time of writing: max 1.52x uniform, min 0.66x uniform.
+    // 57 wired kinds at the time of writing: max 1.52x uniform, min 0.66x uniform.
     const normalized = [...counts.values()].map((n) => (n / SAMPLE) * pool.length);
     expect(Math.max(...normalized), `${kind}: one member is dominating the pool`).toBeLessThan(2);
     expect(Math.min(...normalized), `${kind}: one member is nearly unreachable`).toBeGreaterThan(0.4);
@@ -415,6 +418,7 @@ const LIVE_PATH_KINDS = Object.freeze([
   ['the population desk', 'migration_flight'],
   ['the war desk', 'field_battle'],
   ['the events desk', 'authority_instability'],
+  ['the economy/trade desk', 'import_shortage'],
 ]);
 
 describe.each(LIVE_PATH_KINDS)('THE LIVE PATH — %s hears the widened pool', (_desk, kind) => {

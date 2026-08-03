@@ -374,3 +374,23 @@ unscheduled.
   `// anchored:` reason naming the two positive assertions that keep it live (the
   pool's length pinned against its cadence floor, and the variant asserted truthy).
   No frozen row was added — the walker's roster may not grow.
+
+## THE LEGACY RETROFIT — WIRING SLICE 3 (Fable chair, 2026-08-03; vetoable)
+
+§3c is now complete: the **economy/trade desk**'s remaining thirteen kinds join the four
+demographic ones slice 1 wired. 57 of §3's 63 kinds are wired; the six that remain are
+the faith desk (§3b, five kinds) and the divination desk (§3e, one). Two rulings.
+
+- **J-LEG-WIRE-10 — §3c IS SPLIT ACROSS TWO ROSTERS ON PURPOSE, AND THE SPLIT IS
+  RECORDED RATHER THAN HEALED.** `POPULATION_DESK_KINDS` and `TRADE_DESK_KINDS` are both
+  §3c. Merging them into one §3c roster would have been tidier and was rejected: the
+  rosters are the LEDGER OF WHAT SHIPPED WHEN, and the four demographic kinds shipped a
+  commit earlier with their own measured golden plan. A roster that no longer says which
+  slice disclosed which kind cannot be audited against the commit that disclosed it. The
+  union `WIRED_DESK_KINDS` is the blast radius; the per-desk rosters are its provenance.
+- **J-LEG-WIRE-11 — THE UNWIRED CONTROL SURVIVES THIS SLICE UNCHANGED.**
+  `pantheon_ascendancy` is still registered, still authored, still unwired, and the
+  exhaustive census now proves the same of the whole faith and divination remainder: six
+  kinds carry authored corpus pools that the code does not yet read. That is the next
+  desk, and it is deliberately deferred rather than swept in — documented here, not a bug
+  to re-find.
