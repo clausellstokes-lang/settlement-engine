@@ -40,6 +40,7 @@ import {
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
 import NavFlowArrow from './components/nav/NavFlowArrow.jsx';
+import NavRibbon from './components/nav/NavRibbon.jsx';
 import FeatureErrorBoundary from './components/FeatureErrorBoundary.jsx';
 import Button from './components/primitives/Button.jsx';
 import IconButton from './components/primitives/IconButton.jsx';
@@ -567,42 +568,10 @@ export default function App() {
               </button>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
-              <nav style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
-                {NAV.map(({ id, label }, i) => {
-                  const active = view === id;
-                  return (
-                    <button
-                      key={id}
-                      type="button"
-                      onClick={() => handleNavClick(id)}
-                      aria-current={active ? 'page' : undefined}
-                      style={{
-                        // Active tab is a wayfinding marker, not a CTA: a gold
-                        // underline + weight, not a filled cartouche, so the Sign
-                        // In chip stays the region's single filled-gold focal point.
-                        // `relative` is the positioning context for the flow chevron.
-                        display: 'flex', alignItems: 'center', gap: SP.xs,
-                        padding: `${SP.sm}px ${SP.lg}px`,
-                        background: 'transparent',
-                        border: 'none',
-                        borderBottom: active ? `2px solid ${GOLD}` : '2px solid transparent',
-                        borderRadius: 0, cursor: 'pointer', position: 'relative',
-                        color: active ? GOLD : PARCH_100,
-                        fontSize: FS.sm, fontWeight: active ? 700 : 500,
-                        fontFamily: sans,
-                        letterSpacing: '0.14em', textTransform: 'uppercase',
-                        transition: 'all 0.2s',
-                      }}
-                    >
-                      {label}
-                      {/* Flow chevron — drawn only when the NEXT TAB RENDERED HERE is
-                          this tab's declared flow successor (routes.js NAV_FLOW). */}
-                      <NavFlowArrow from={id} to={NAV[i + 1]?.id} active={active} />
-                    </button>
-                  );
-                })}
-              </nav>
+            {/* alignSelf:stretch — the cluster spans the header row so the ribbon,
+                and through it LD-2's dividers, can reach the bar's full height. */}
+            <div style={{ display: 'flex', alignItems: 'center', alignSelf: 'stretch', gap: SP.md }}>
+              <NavRibbon view={view} onNavClick={handleNavClick} />
 
               {/* Admin button (developer/admin only) */}
               {isElevated && (

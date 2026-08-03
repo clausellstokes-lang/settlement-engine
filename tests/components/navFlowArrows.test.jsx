@@ -7,15 +7,26 @@
  * FEEDS its neighbour draws a chevron into it (routes.js NAV_FLOW +
  * components/nav/NavFlowArrow.jsx). The guard that makes the chevron honest is
  * that it renders ONLY when the declared successor is the tab actually rendered
- * next ON THAT SURFACE — the two nav surfaces do NOT carry the same tab set:
+ * next ON THAT SURFACE.
  *
- *   • desktop ribbon      Welcome · Create · Library · Realm · …   → BOTH chevrons
+ * ⚠️ SURFACE CHANGE, 2026-08-03 (LD-2, owner-ordered): the DESKTOP ribbon no
+ * longer mounts NavFlowArrow. Its journey mark is now the bar-height chevron
+ * DIVIDER between cells (components/nav/NavDivider.jsx, censused by
+ * tests/components/navDividers.test.jsx) — the same NAV_FLOW derivation drawn
+ * at the seam instead of inside the tab. The MOBILE bottom nav keeps
+ * NavFlowArrow untouched: its cells sit in a fixed bar with no seam to carry a
+ * divider, and the Create → Library chevron draws there today. So this file's
+ * desktop half is now the ABSENCE pin (the mark moved, and must not be drawn
+ * twice) while the mobile half stays the live behavioural pin:
+ *
+ *   • desktop ribbon      Welcome · Create · Library · Realm · …   → NO arrows
  *   • mobile bottom nav   Create · Library · Gallery · …           → Create's only
  *
  * The mobile bar omits Realm by design (App.jsx MOBILE_NAV_PRIORITY), so a
  * Library chevron there would point at Gallery and teach a false lesson about
- * where a saved settlement goes. Pinning both surfaces in one file is the point:
- * a future NAV/priority reorder that breaks the pairing reds here.
+ * where a saved settlement goes. Pinning both surfaces in one file is still the
+ * point: a future NAV/priority reorder that breaks the pairing reds here, and a
+ * desktop re-mount of the arrow reds as a double-drawn journey mark.
  *
  * App.jsx is a pure layout shell over the Zustand store + path router, so the
  * store, the route hook, the breakpoint hook and the routed view are stubbed —
@@ -27,6 +38,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 
 import { NAV, NAV_FLOW } from '../../src/lib/routes.js';
+import NavFlowArrow from '../../src/components/nav/NavFlowArrow.jsx';
 
 const H = vi.hoisted(() => ({
   route: { view: 'generate', params: {}, legacy: false, notFound: false },
@@ -141,33 +153,43 @@ describe('the flow declaration is nav metadata, owned by routes.js', () => {
   });
 });
 
-describe('desktop ribbon — both chevrons draw (the successors ARE adjacent)', () => {
-  test('Create and Library each carry a chevron into their rendered successor', () => {
+describe('desktop ribbon — the journey mark MOVED to the seam (LD-2)', () => {
+  test('the ribbon draws the tabs but mounts no in-tab flow arrow', () => {
     const { container } = render(<App />);
 
     // Positive control first: the ribbon really did render the adjacencies the
-    // arrows claim, so their presence is about the guard and not about luck.
+    // arrows USED to claim, so the absence below is about the move and not
+    // about a ribbon that failed to render at all.
     const labels = [...container.querySelectorAll('header nav button')].map((b) => b.textContent.trim());
     expect(labels.slice(0, 4)).toEqual(['Welcome', 'Create', 'Library', 'Realm']);
 
-    expect(screen.getByTestId('nav-flow-generate-settlements')).toBeTruthy();
-    expect(screen.getByTestId('nav-flow-settlements-realm')).toBeTruthy();
-    // Exactly two — no chevron leaks onto Welcome, Realm, Compendium, Gallery or About.
-    expect(arrows(container).map((a) => a.dataset.testid)).toEqual([
-      'nav-flow-generate-settlements',
-      'nav-flow-settlements-realm',
+    // Second control: the journey mark EXISTS on this surface — as the chevron
+    // divider at the two flow boundaries. Without this the absence assertion
+    // would pass just as happily on a ribbon that had lost the mark entirely.
+    expect([...container.querySelectorAll('header nav [data-divider-kind="chevron"]')]
+      .map((d) => d.dataset.testid)).toEqual([
+      'nav-divider-chevron-generate-settlements',
+      'nav-divider-chevron-settlements-realm',
     ]);
-  });
 
-  test('each chevron hangs off the tab that FEEDS, not the tab that receives', () => {
+    // The mark is drawn ONCE: no NavFlowArrow survives inside any desktop tab.
+    expect(arrows(container)).toEqual([]);
+  });
+});
+
+describe('mobile bottom nav — a surface WITHOUT Realm draws no Library chevron', () => {
+  beforeEach(() => { H.isMobile = true; });
+
+  test('the surviving chevron hangs off the tab that FEEDS, not the one that receives', () => {
     render(<App />);
     expect(screen.getByTestId('nav-flow-generate-settlements').closest('button').textContent.trim()).toBe('Create');
-    expect(screen.getByTestId('nav-flow-settlements-realm').closest('button').textContent.trim()).toBe('Library');
   });
 
   test('the chevron is decorative — aria-hidden, no focus stop, no pointer surface', () => {
     const { container } = render(<App />);
-    for (const arrow of arrows(container)) {
+    const drawn = arrows(container);
+    expect(drawn.length).toBeGreaterThan(0); // not a vacuous loop
+    for (const arrow of drawn) {
       expect(arrow.getAttribute('aria-hidden')).toBe('true');
       expect(arrow.tagName).toBe('SPAN');
       expect(arrow.hasAttribute('tabindex')).toBe(false);
@@ -178,19 +200,21 @@ describe('desktop ribbon — both chevrons draw (the successors ARE adjacent)', 
   });
 
   test('the chevron takes the active tab’s gold and the quiet border register elsewhere', () => {
-    // /create is the active view, so Create's chevron is the gold one and
-    // Library's is the quiet one — the two must not paint identically.
-    render(<App />);
-    const onActive = screen.getByTestId('nav-flow-generate-settlements').style.borderTopColor;
-    const onResting = screen.getByTestId('nav-flow-settlements-realm').style.borderTopColor;
+    // Rendered as a leaf so both registers are observable on ONE surface: the
+    // mobile bar draws a single arrow, so the App-level A/B the desktop ribbon
+    // used to provide no longer exists there.
+    const { container } = render(
+      <>
+        <NavFlowArrow from="generate" to="settlements" active />
+        <NavFlowArrow from="settlements" to="realm" active={false} />
+      </>,
+    );
+    const [onActive, onResting] = [...container.querySelectorAll('[data-testid^="nav-flow-"]')]
+      .map((a) => a.style.borderTopColor);
     expect(onActive).toBeTruthy();
     expect(onResting).toBeTruthy();
     expect(onActive).not.toBe(onResting);
   });
-});
-
-describe('mobile bottom nav — a surface WITHOUT Realm draws no Library chevron', () => {
-  beforeEach(() => { H.isMobile = true; });
 
   test('Library’s successor is not its rendered neighbour there, so it draws nothing', () => {
     const { container } = render(<App />);

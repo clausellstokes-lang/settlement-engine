@@ -20,6 +20,7 @@
   "src/components/gallery/GalleryMoreByCreator.jsx",
   "src/components/generate/ModeSelector.jsx",
   "src/components/map/SimulationRulesDialog.jsx",
+  "src/components/nav/NavRibbon.jsx",
   "src/components/new/NarrativeNote.jsx",
   "src/components/new/SummaryTab.jsx",
   "src/components/new/neighbourComponents.jsx",
