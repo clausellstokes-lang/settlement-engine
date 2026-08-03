@@ -25,6 +25,11 @@ import {
   FS, SP, R, ELEV, sans, serif_,
 } from '../theme.js';
 import { tl } from '../../copy/landing.js';
+// THE MIGRATED LEGAL/COMMERCIAL ROW (LD-3). App.jsx suppresses the global
+// footer on this route, so the band carries the one shared row instead — an
+// EAGER module imported DOWNWARD from the lazy landing chunk (importing it the
+// other way would re-parent this closure into the entry chunk).
+import LegalRibbonRow from '../footer/LegalRibbonRow.jsx';
 // Config-sourced tier facts (brief §4 / ruling #6): the closer tier strip
 // interpolates these instead of hand-typing the numbers, so a catalog change
 // (anon size ceiling, free save cap) can never drift from what the strip shows.
@@ -276,7 +281,7 @@ function TierStrip() {
   );
 }
 
-function LandingFooter({ onNavigate }) {
+function LandingFooter({ onNavigate, isMobile }) {
   const links = tl('footer.links') || [];
   const route = { Compendium: 'compendium', Pricing: 'pricing', Account: 'account' };
   return (
@@ -299,6 +304,16 @@ function LandingFooter({ onNavigate }) {
           </Button>
         ))}
       </span>
+      {/* The page ends on the painting (LD-3): Pricing · Feedback & support ·
+          Terms · Privacy · © · "Simulated, not AI-generated." MIGRATE, never
+          delete — the global strip is suppressed on this route, and /pricing has
+          no `nav:` block, so this row is the landing's only path to it. */}
+      <LegalRibbonRow
+        isMobile={isMobile}
+        onNavigate={onNavigate}
+        clearMobileNav
+        style={{ width: '100%', marginTop: SP.xl, color: 'rgba(244,234,208,0.72)' }}
+      />
     </div>
   );
 }
@@ -487,7 +502,7 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
             {tl('closer.fullPricing')}
           </Button>
         </div>
-        <LandingFooter onNavigate={onNavigate} />
+        <LandingFooter onNavigate={onNavigate} isMobile={isMobile} />
       </section>
       </div>
     </>

@@ -30,10 +30,6 @@ import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
 import { allowsFloatingFeedback, guardForView, redirectForView, viewToPath, NAV } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
-// The eager shell reads ONLY footer.* copy — copy/footer.js carries that one
-// namespace with an identical t(). Importing copy/index.js here would drag the
-// whole en.js registry into the first-paint entry closure (byte budget).
-import { t } from './copy/footer.js';
 import {
   GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, SLATE, SLATE_BG, sans, serif_, SP, R, FS, swatch, CHROME, bottomClearance,
 } from './components/theme.js';
@@ -41,6 +37,7 @@ import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
 import NavFlowArrow from './components/nav/NavFlowArrow.jsx';
 import NavRibbon from './components/nav/NavRibbon.jsx';
+import LegalRibbonRow from './components/footer/LegalRibbonRow.jsx';
 import FeatureErrorBoundary from './components/FeatureErrorBoundary.jsx';
 import Button from './components/primitives/Button.jsx';
 import IconButton from './components/primitives/IconButton.jsx';
@@ -694,54 +691,22 @@ export default function App() {
         </main>
 
         {/* ── Footer ──────────────────────────────────────────────
-            Pricing | Feedback & support | Terms | Privacy above the copyright. Refunds
-            is no longer its own link — the refund policy now lives in the Terms
-            "Refunds and cancellation" section (the /refunds URL still resolves).
-            Feedback & support OPENS the feedback panel (W2-a-REVISED) via an app-wide
-            'sf:open-feedback' event; the mailto: support dependency was removed. */}
-        <footer style={{
-          background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
-          borderTop: '1px solid rgba(160,118,42,0.25)',
-          padding: isMobile ? `${SP.lg}px ${SP.xl}px 88px` : `${SP.lg}px ${SP.xxl}px`,
-          textAlign: 'center', fontFamily: sans, fontSize: FS.sm,
-          color: PARCH_100, letterSpacing: '0.04em', userSelect: 'none',
-          display: 'flex', flexDirection: 'column', gap: SP.sm,
-          alignItems: 'center',
-        }}>
-          <nav aria-label="Footer" style={{
-            display: 'flex', justifyContent: 'center', alignItems: 'center',
-            gap: SP.md, flexWrap: 'wrap',
+            THE LANDING ROUTE IS EXEMPT (LD-3, owner-ordered): the welcome page
+            ends on its own artwork band, so the global strip would be a second
+            footer stacked under the painting. This is a ROUTE-SCOPED suppression,
+            never a deletion — every other view keeps the strip — and the row's
+            content is not lost: LandingBelowFold mounts the very same
+            LegalRibbonRow inside its band, so Pricing, Terms, Privacy and
+            Feedback stay reachable from the landing document. */}
+        {view !== 'home' && (
+          <footer style={{
+            background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
+            borderTop: '1px solid rgba(160,118,42,0.25)',
+            padding: isMobile ? `${SP.lg}px ${SP.xl}px 88px` : `${SP.lg}px ${SP.xxl}px`,
           }}>
-            <Button variant="ghost" size="sm" onClick={() => setView('pricing')}
-              style={{ color: PARCH_100, fontFamily: sans, fontSize: FS.sm, fontWeight: 500, letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined }}>
-              {t('footer.pricing')}
-            </Button>
-            <span aria-hidden="true" style={{ color: 'rgba(244,234,208,0.4)' }}>|</span>
-            <Button
-              variant="ghost"
-              size="sm"
-              aria-haspopup="dialog"
-              onClick={() => window.dispatchEvent(new CustomEvent('sf:open-feedback'))}
-              style={{ color: PARCH_100, fontFamily: sans, fontSize: FS.sm, fontWeight: 500, letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined }}
-            >{t('footer.contact')}</Button>
-            <span aria-hidden="true" style={{ color: 'rgba(244,234,208,0.4)' }}>|</span>
-            <Button variant="ghost" size="sm" onClick={() => setView('terms')}
-              style={{ color: PARCH_100, fontFamily: sans, fontSize: FS.sm, fontWeight: 500, letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined }}>
-              {t('footer.terms')}
-            </Button>
-            <span aria-hidden="true" style={{ color: 'rgba(244,234,208,0.4)' }}>|</span>
-            <Button variant="ghost" size="sm" onClick={() => setView('privacy')}
-              style={{ color: PARCH_100, fontFamily: sans, fontSize: FS.sm, fontWeight: 500, letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined }}>
-              {t('footer.privacy')}
-            </Button>
-          </nav>
-          <Button variant="ghost" size="sm" onClick={() => setView('home')} aria-label="SettlementForge home" style={{ minHeight: isMobile ? 44 : undefined }}><HouseDevice size={20} /></Button>
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
-            <span>{t('footer.copyright', { year: 2026 })}</span>
-            <span aria-hidden="true" style={{ color: 'rgba(244,234,208,0.4)' }}>·</span>
-            <span style={{ fontStyle: 'italic' }}>{t('footer.antiAi')}</span>
-          </div>
-        </footer>
+            <LegalRibbonRow isMobile={isMobile} onNavigate={setView} showHome />
+          </footer>
+        )}
 
         {/* ── Mobile bottom nav ───────────────────────────────── */}
         {isMobile && (
