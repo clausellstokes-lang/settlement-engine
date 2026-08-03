@@ -370,6 +370,29 @@ authored here so "SP-N landed" resolves corpus-wide.]
   RUMOR-MILL and in-world voices, while Herald tiers attribute minds
   only as reported fact — the believing marked as believing, which is
   the truth.
+  **[AMENDED 2026-08-03 (owner order) — THE PORTABLE POPUP + THE
+  MANIPULATION DISCLOSURE:]** the causality popup is ONE component,
+  summoned from ANY surface carrying a headline id-link — the realm
+  Herald, the dossier's rumor mill, an entity panel's headline list —
+  and it renders OVER the DM's current context (the dossier stays
+  beneath; outside-click closes per the convention; zero navigation —
+  the truth visits the DM, never the reverse). A sub-floor rumor stays
+  truthfully unlinked and summons nothing. THE MANIPULATION DISCLOSURE:
+  within the popup, every chain link carries its information-integrity
+  register, THREE states, honestly distinguished by the records the
+  engine already holds: CLEAN (the receipt as it happened) · WORN IN
+  THE TELLING (organic hop-drift/exaggeration — authorless; "the tale
+  grew in the carrying") · PLANTED (intentional manipulation: BY WHOM
+  and FOR WHAT PURPOSE, from the disinfo record's commissioner and the
+  covert seam's recorded true purpose — "planted by {house}, to
+  {purpose}"; DM-register, per the truth law). The disclosure derives
+  from persisted provenance only — no new state; a link the records
+  cannot classify renders UNKNOWN, never guessed (R-28 at the audit
+  grain). Pins: the three states reachable on one fixture; a planted
+  link names commissioner + purpose or reds; the organic case never
+  names an author (the hardest negative — wear must not confabulate a
+  culprit); the popup renders identically from all summoning surfaces
+  (one component, source-scan pinned).
 - **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion + the
   mode-speed table (J-D11(b)) landed as spine infrastructure ahead of all six.
 - **SP-8 THE AGE LAYER [CORRECTED 2026-08-02 (fp-audit) — new, per the
