@@ -22,6 +22,13 @@
  * legitimately builds truth internally, and it may never sit on both sides of
  * its own guard — so warDeployment.js is the positive control.
  *
+ * EXTENDED AGAIN (lane WF, F7): the two WR-7c/7d PULSE STAGES are now pinned
+ * members with closed import lists, and every `envoy*Stage.js` on disk must be
+ * pinned or explicitly exempt. They had been outside this file's reach purely
+ * because the errand discovery regex does not match their names — an accident of
+ * spelling, not a decision — so K3 staying green neither vindicated nor indicted
+ * them. Membership is now a ruling on the record either way.
+ *
  * @enforced-by this file
  */
 import { readFileSync, readdirSync } from 'node:fs';
@@ -192,6 +199,27 @@ const NEGOTIATION_MODULES = Object.freeze({
   'src/domain/worldPulse/sendTwoDivergence.js': [
     './envoyTestimony.js',
   ],
+  // THE TWO PULSE STAGES (WR-7c/7d), pinned by explicit ruling rather than by a
+  // filename accident. The cycle-16 verifier's F7 is the reason this block
+  // exists: `envoyRatificationStage.js` and `envoyRansomStage.js` sat OUTSIDE
+  // this file's reach because the discovery regex below is scoped to
+  // `envoyErrand*`, so K3 staying green said nothing about them in either
+  // direction — it neither vindicated nor indicted the new leaves. It says
+  // something now. Both are pure reads that compose already-pinned modules:
+  // the vote reaches the terms math only through `coalitionRatification`, and
+  // the price reaches the claim shape only through `ransomClaim`, both of which
+  // are pinned above and both of which bottom out at the empty list.
+  'src/domain/worldPulse/envoyRatificationStage.js': [
+    './coalitionRatification.js',
+    './compromiseRound.js',
+    './envoyErrand.js',
+    './envoyTestimony.js',
+  ],
+  'src/domain/worldPulse/envoyRansomStage.js': [
+    './envoyErrand.js',
+    './foreignGuestHold.js',
+    './ransomClaim.js',
+  ],
 });
 
 const TRUTH_READER = 'src/domain/worldPulse/warDeployment.js';
@@ -232,6 +260,39 @@ function discoverErrandFamily() {
     .sort();
 }
 
+/**
+ * THE SECOND DISCOVERY, over the PULSE STAGES (cycle-16 verifier, F7).
+ *
+ * Adding two explicit rows above closes those two files and nothing else — the
+ * same hand-written gap the errand discovery was built to close, one shelf over.
+ * A third stage, split out next week and importing a truth reader for one small
+ * lookup, would again be invisible to both the import pin and the token scan.
+ *
+ * So every `envoy*Stage.js` on disk must be either PINNED or EXPLICITLY EXEMPT.
+ * The exemption is a declaration with a reason, not a silence: a new stage reds
+ * here until someone decides which it is.
+ */
+const STAGE_FAMILY_RE = /^envoy.*Stage\.js$/;
+
+/**
+ * `envoyInterceptionStage.js` is the ORCHESTRATION stage and legitimately reads
+ * true world state: it reaches `relationshipState.js`, `warSeatBooks.js`,
+ * `npcLedger.js` and the army transit ledger, none of which is a belief module.
+ * It is exempt for the same reason `envoyPulse.js` and `envoyDiplomacy.js` are
+ * outside this file — sweeping them in would either red permanently or force the
+ * token list to be weakened until it proved nothing.
+ */
+const REVIEWED_STAGE_EXEMPTIONS = Object.freeze([
+  'src/domain/worldPulse/envoyInterceptionStage.js',
+]);
+
+function discoverStageFamily() {
+  return readdirSync(join(ROOT, ERRAND_FAMILY_DIR))
+    .filter((name) => STAGE_FAMILY_RE.test(name) && !/\.test\./.test(name))
+    .map((name) => `${ERRAND_FAMILY_DIR}/${name}`)
+    .sort();
+}
+
 describe('WR-7b K3 — nobody is ever current', () => {
   test('DISCOVERY: every errand-family leaf on disk is a pinned negotiation module', () => {
     const family = discoverErrandFamily();
@@ -258,6 +319,42 @@ describe('WR-7b K3 — nobody is ever current', () => {
     expect(Object.keys(NEGOTIATION_MODULES)).toContain(dropped);
     const mutantPinned = new Set(Object.keys(NEGOTIATION_MODULES).filter((rel) => rel !== dropped));
     expect(discoverErrandFamily().filter((rel) => !mutantPinned.has(rel))).toEqual([dropped]);
+  });
+
+  test('DISCOVERY: every pulse stage on disk is pinned or explicitly exempt', () => {
+    const stages = discoverStageFamily();
+    // Anti-vacuity: a rotted pattern would pass the exact-set assertion below over
+    // an empty list. Three stages exist — interception, ratification, ransom.
+    expect(stages.length, 'the stage family read empty — the pattern rotted').toBeGreaterThanOrEqual(3);
+    expect(stages).toContain('src/domain/worldPulse/envoyRatificationStage.js');
+    expect(stages).toContain('src/domain/worldPulse/envoyRansomStage.js');
+
+    const accounted = new Set([
+      ...Object.keys(NEGOTIATION_MODULES),
+      ...REVIEWED_STAGE_EXEMPTIONS,
+    ]);
+    expect(
+      stages.filter((rel) => !accounted.has(rel)),
+      '\nA pulse stage exists on disk that is neither pinned in NEGOTIATION_MODULES nor '
+      + 'listed in REVIEWED_STAGE_EXEMPTIONS. K3 says nothing about a file it does not name, '
+      + 'so a stage that is merely absent is a stage nobody checked. Decide which it is and '
+      + 'say so here: a closed import list if it is belief-sourced, an exemption WITH A '
+      + 'REASON if it legitimately reads truth.\n',
+    ).toEqual([]);
+    // And the exemption list may not rot into a name that no longer exists.
+    for (const rel of REVIEWED_STAGE_EXEMPTIONS) {
+      expect(stages, `${rel} is exempted but not on disk`).toContain(rel);
+    }
+  });
+
+  test('MUTANT: dropping a pinned stage from the manifest reds the stage discovery', () => {
+    const dropped = 'src/domain/worldPulse/envoyRatificationStage.js';
+    expect(Object.keys(NEGOTIATION_MODULES)).toContain(dropped);
+    const accounted = new Set([
+      ...Object.keys(NEGOTIATION_MODULES).filter((rel) => rel !== dropped),
+      ...REVIEWED_STAGE_EXEMPTIONS,
+    ]);
+    expect(discoverStageFamily().filter((rel) => !accounted.has(rel))).toEqual([dropped]);
   });
 
   test('every negotiation module reaches only its reviewed closed import set', () => {

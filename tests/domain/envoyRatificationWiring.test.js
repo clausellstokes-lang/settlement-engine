@@ -27,6 +27,9 @@
  * pictures the same rows, the draft carries real clauses, and both directions
  * are reachable through the live pulse.
  */
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
@@ -643,11 +646,47 @@ describe('CR-WIRE-A — the power band is derived from the picture and nothing e
     evidenceIds: [],
   });
 
-  it('takes exactly ONE argument, so no world state can reach the weight', () => {
-    // The signature IS the enforcement. A second parameter is the only way truth
-    // could ever enter this derivation, and there is not one.
-    expect(ratificationPowerBandFromPicture.length).toBe(1);
-    expect(ratificationDrainBandFromPicture.length).toBe(1);
+  /**
+   * The stage's own source, comments stripped. A claim about what a function
+   * CANNOT take must read the code, never the prose: this module's header
+   * describes at length the world state it refuses, and a raw scan would count
+   * the refusal as the offence.
+   */
+  const stageSource = () => readFileSync(
+    join(dirname(fileURLToPath(import.meta.url)), '../../src/domain/worldPulse/envoyRatificationStage.js'),
+    'utf8',
+  ).replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+
+  /** The exact declared parameter list of one exported derivation. */
+  const declaredParams = (source, name) => {
+    const match = source.match(new RegExp(`export function ${name}\\(([^)]*)\\)`));
+    return match ? match[1].trim() : null;
+  };
+
+  it('declares exactly ONE named parameter — proved on the SOURCE, not Function.length', () => {
+    // WHY NOT `.length`. It counts only the parameters BEFORE the first default or
+    // rest parameter, so `f(picture, worldState = null)` and `f(picture, ...rest)`
+    // both report 1. The old pin therefore permitted the exact world-truth channel
+    // CR-WIRE-A exists to forbid: a later hand could add the second parameter and
+    // the suite would stay green. The scan below reads the declaration itself.
+    const source = stageSource();
+    expect(source.length, 'the stage read empty').toBeGreaterThan(1000);
+    for (const name of [
+      'ratificationPowerBandFromPicture',
+      'ratificationDesiredOutcomeFromPicture',
+      'ratificationDrainBandFromPicture',
+    ]) {
+      expect(declaredParams(source, name), `${name} must take the picture and nothing else`)
+        .toBe('picture');
+    }
+    // GUARD-THE-GUARD, executed rather than asserted: the same scan SEES a second
+    // parameter when there is one, in both spellings `.length` was blind to.
+    expect(declaredParams('export function f(picture, worldState = null) {}', 'f'))
+      .toBe('picture, worldState = null');
+    expect(declaredParams('export function f(picture, ...rest) {}', 'f'))
+      .toBe('picture, ...rest');
+    // And it returns null rather than silently passing when the name is absent.
+    expect(declaredParams(source, 'ratificationPowerBandFromWorld')).toBeNull();
   });
 
   it('moves with the picture across the whole closed strength vocabulary', () => {
