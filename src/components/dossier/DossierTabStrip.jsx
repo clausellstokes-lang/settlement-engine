@@ -1,5 +1,4 @@
 import { FS, swatch } from '../theme.js';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Dossier tab strip — extracted verbatim from OutputContainer's render.
 // Presentational only: scroll, the scroll-container ref, the resolved `tabs`
@@ -14,7 +13,7 @@ export default function DossierTabStrip({
 }) {
   return (
         <div style={{ position: 'relative', borderBottom: '1px solid #e0d0b0', background: swatch['#F7F0E4'] }}>
-          <button type="button" onClick={() => scroll(-1)} aria-label="Scroll tabs left" style={{ position: 'absolute', left: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to right, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: swatch.mutedBrown, padding: '0 8px' }}><ChevronLeft size={14} /></button>
+          <button type="button" onClick={() => scroll(-1)} aria-label="Scroll tabs left" style={{ position: 'absolute', left: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to right, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: swatch.mutedBrown, padding: '0 8px' }}><span aria-hidden="true">‹</span></button>
           {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus -- roving tabIndex lives on the child tabs (WAI-ARIA tabs pattern); the tablist container forwards arrow keys but is not itself a focus stop */}
           <div
             ref={scrollRef}
@@ -74,7 +73,7 @@ export default function DossierTabStrip({
               );
             })}
           </div>
-          <button type="button" onClick={() => scroll(1)} aria-label="Scroll tabs right" style={{ position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to left, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: swatch.mutedBrown, padding: '0 8px' }}><ChevronRight size={14} /></button>
+          <button type="button" onClick={() => scroll(1)} aria-label="Scroll tabs right" style={{ position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 2, background: 'linear-gradient(to left, #f7f0e4 60%, transparent)', border: 'none', cursor: 'pointer', color: swatch.mutedBrown, padding: '0 8px' }}><span aria-hidden="true">›</span></button>
         </div>
   );
 }

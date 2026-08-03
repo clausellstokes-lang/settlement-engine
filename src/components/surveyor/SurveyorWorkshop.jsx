@@ -16,7 +16,6 @@
  */
 
 import { lazy, Suspense, useState } from 'react';
-import { X } from 'lucide-react';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { INK, MUTED, BORDER, CARD, BODY, sans, SP, FS } from '../theme.js';
 import IconButton from '../primitives/IconButton.jsx';
@@ -72,7 +71,7 @@ export default function SurveyorWorkshop({ open = false, onClose, initialStage =
         <span style={{ fontFamily: sans, fontSize: FS.md, fontWeight: 700, color: INK }}>Surveyor's workshop</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
           <EarlyAccessBadge />
-          <IconButton Icon={X} label="Close the workshop" size="sm" onClick={onClose} />
+          <IconButton glyph="×" label="Close the workshop" size="sm" onClick={onClose} />
         </div>
       </div>
 

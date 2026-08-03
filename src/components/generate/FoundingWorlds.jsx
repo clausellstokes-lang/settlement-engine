@@ -18,8 +18,7 @@
  * stays tolerance-0.
  */
 import { useState } from 'react';
-import { Sparkles } from 'lucide-react';
-import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, sans, serif_, FS, SP } from '../theme.js';
+import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, sans, serif_, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { useStore } from '../../store/index.js';
 import { anonAtCap } from '../../lib/anonGenCounter.js';
@@ -66,7 +65,6 @@ export default function FoundingWorlds({ onNavigate }) {
     <section aria-label="Founding worlds"
       style={{ maxWidth: 960, margin: '0 auto', width: '100%', padding: `${SP.lg}px ${SP.md}px` }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginBottom: SP.xs }}>
-        <Sparkles size={16} color={GOLD} aria-hidden="true" />
         <h2 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS.lg, fontWeight: 900 }}>Founding Worlds</h2>
       </div>
       <p style={{ margin: `0 0 ${SP.md}px`, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5 }}>

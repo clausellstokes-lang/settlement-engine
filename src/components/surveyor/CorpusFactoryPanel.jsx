@@ -10,7 +10,6 @@
  * gate. Rides the FloatingAffordances lazy chunk (React.lazy'd by SurveyorWorkshop).
  */
 import { useState, useMemo, useCallback } from 'react';
-import { Check, X, Trash2 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { getSurveyorAiCost } from '../../config/pricing.js';
 import { serializeApprovedCorpus, CORPUS_KINDS } from '../../domain/compendium/corpusStaging.js';
@@ -170,9 +169,9 @@ export default function CorpusFactoryPanel({ initialPrompt = '' }) {
                 <span style={{ color: INK }}>{KIND_LABEL[c.kind] || c.kind}</span>
                 {c.target && <span>· {c.target}</span>}
                 <span style={{ flex: 1 }} />
-                <IconButton Icon={Check} label="Approve" size="sm" tone={c.status === 'approved' ? 'active' : 'default'} pressed={c.status === 'approved'} onClick={() => review(c.id, 'approved')} />
-                <IconButton Icon={X} label="Reject" size="sm" tone={c.status === 'rejected' ? 'active' : 'default'} pressed={c.status === 'rejected'} onClick={() => review(c.id, 'rejected')} />
-                <IconButton Icon={Trash2} label="Remove" size="sm" onClick={() => removeCorpusCandidate(c.id)} />
+                <IconButton glyph="✓" label="Approve" size="sm" tone={c.status === 'approved' ? 'active' : 'default'} pressed={c.status === 'approved'} onClick={() => review(c.id, 'approved')} />
+                <IconButton glyph="×" label="Reject" size="sm" tone={c.status === 'rejected' ? 'active' : 'default'} pressed={c.status === 'rejected'} onClick={() => review(c.id, 'rejected')} />
+                <IconButton glyph="−" label="Remove" size="sm" onClick={() => removeCorpusCandidate(c.id)} />
               </div>
               <p style={{ margin: 0, fontSize: FS.sm, color: BODY, lineHeight: 1.4 }}>{c.text}</p>
               <span style={{ fontSize: FS.xs, color: MUTED }}>

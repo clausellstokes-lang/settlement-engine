@@ -13,7 +13,6 @@ import { t } from '../../copy/index.js';
 import { writeDraft, clearDraft } from '../../lib/pendingSaveDraft.js';
 import { useStore } from '../../store';
 import { sans, FS, SP, swatch } from '../theme.js';
-import { Save } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 
 // isMobile is part of the public prop contract (callers still pass it); the
@@ -123,7 +122,6 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
         <Button
           variant="gold"
           size="lg"
-          icon={<Save size={15} />}
           onClick={handleSignupSave}
           disabled={saving}
           busy={saving}
@@ -145,7 +143,6 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
       <Button
         variant="success"
         size="lg"
-        icon={<Save size={15} />}
         onClick={handleSave}
         disabled={saving || saved}
       >

@@ -1,5 +1,4 @@
 import { lazy, Suspense, useState } from 'react';
-import { Link2 } from 'lucide-react';
 import { RELATIONSHIP_SELECTIONS } from '../../domain/relationships/canonicalRelationship.js';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from '../theme';
 import Button from '../primitives/Button.jsx';
@@ -31,7 +30,7 @@ export default function LinkNeighbourCard({currentSave, allSaves, onLink}){
     </Suspense>}
     {mode==='road'?null:<>
     <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8,display:'flex',alignItems:'center',gap:6}}>
-      <Link2 size={12}/> Link as Neighbour
+      Link as Neighbour
     </div>
     <div style={{display:'flex',flexDirection:'column',gap:6,marginBottom:8}}>
       {others.map(s=><button type="button" key={s.id} aria-pressed={selected?.id===s.id} onClick={()=>setSelected(selected?.id===s.id?null:s)} style={{display:'flex',alignItems:'center',gap:8,padding:'7px 10px',border:`1px solid ${selected?.id===s.id?'#2a3a7a':BORDER}`,background:selected?.id===s.id?'#e8eeff':CARD,cursor:'pointer',textAlign:'left',fontFamily:sans}}>

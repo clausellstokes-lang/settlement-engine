@@ -21,7 +21,6 @@
  */
 
 import { lazy, Suspense, useState, useEffect, useRef } from 'react';
-import { ArrowLeft } from 'lucide-react';
 import { GOLD, INK, INK_DEEP, MUTED, serif_, SP, FS, CHROME } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
@@ -152,7 +151,6 @@ export function WizardOutputToolbar({
       <Button
         variant="secondary"
         size="md"
-        icon={<ArrowLeft size={14} />}
         onClick={handleBack}
         title="Back to configuration"
       >

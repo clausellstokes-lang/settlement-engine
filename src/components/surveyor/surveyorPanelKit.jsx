@@ -8,7 +8,6 @@
  * chunks — never eager (nothing here is statically imported by a first-paint module).
  */
 
-import { Sparkles } from 'lucide-react';
 import { t } from '../../copy/index.js';
 import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, RED, GREEN, SLATE_DEEP, sans, serif_, SP, FS } from '../theme.js';
 import Badge from '../primitives/Badge.jsx';
@@ -77,7 +76,6 @@ export function MoneyLine({ cost, creditBalance, busy, disabled, onSubmit, submi
         <Button
           variant="aiSolid"
           size="sm"
-          icon={<Sparkles size={14} />}
           busy={busy}
           disabled={disabled}
           onClick={onSubmit}

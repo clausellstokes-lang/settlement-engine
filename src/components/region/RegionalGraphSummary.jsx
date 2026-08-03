@@ -1,4 +1,3 @@
-import { Check, CheckCheck, CircleSlash, FastForward, RefreshCw } from 'lucide-react';
 import { useState } from 'react';
 
 import { ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
@@ -95,7 +94,7 @@ export default function RegionalGraphSummary({
         {availableImpacts.length > 1 && (
           <>
             <IconButton
-              Icon={CheckCheck}
+              glyph="✓✓"
               label="Apply all queued regional impacts"
               onClick={() => onApplyAllImpacts?.(campaign.id)}
               tone="primary"
@@ -103,7 +102,7 @@ export default function RegionalGraphSummary({
               style={{ marginLeft: 'auto' }}
             />
             <IconButton
-              Icon={CircleSlash}
+              glyph="⊘"
               label="Ignore all queued regional impacts"
               onClick={() => onIgnoreAllImpacts?.(campaign.id)}
               tone="default"
@@ -116,7 +115,6 @@ export default function RegionalGraphSummary({
             <Button
               variant="secondary"
               size="sm"
-              icon={<FastForward size={11} />}
               onClick={() => onAdvanceImpacts?.(campaign.id, 1)}
               title="Advance regional impacts 1 tick"
               style={{ marginLeft: availableImpacts.length > 1 ? 0 : 'auto' }}
@@ -126,7 +124,6 @@ export default function RegionalGraphSummary({
             <Button
               variant="secondary"
               size="sm"
-              icon={<FastForward size={11} />}
               onClick={() => onAdvanceImpacts?.(campaign.id, 3)}
               title="Advance regional impacts 3 ticks"
             >
@@ -137,7 +134,6 @@ export default function RegionalGraphSummary({
         <Button
           variant="secondary"
           size="sm"
-          icon={<RefreshCw size={11} />}
           onClick={() => {
             // True toggle: an open suggestions section closes on the next press;
             // a closed one runs discovery and opens (owner order 2026-07-22).
@@ -182,7 +178,7 @@ export default function RegionalGraphSummary({
                 </div>
               </div>
               <IconButton
-                Icon={Check}
+                glyph="✓"
                 label="Confirm channel"
                 onClick={() => onConfirmChannel?.(campaign.id, channel.id)}
                 tone="primary"
@@ -224,7 +220,7 @@ export default function RegionalGraphSummary({
                 </div>
               </div>
               <IconButton
-                Icon={Check}
+                glyph="✓"
                 label={available
                   ? 'Apply regional impact'
                   : delayTicks > 0
@@ -236,7 +232,7 @@ export default function RegionalGraphSummary({
                 size="md"
               />
               <IconButton
-                Icon={CircleSlash}
+                glyph="⊘"
                 label="Ignore regional impact"
                 onClick={() => onIgnoreImpact?.(campaign.id, impact.id)}
                 tone="default"

@@ -11,7 +11,6 @@
  * every value and handler arrives via props; state stays in the parent wizard.
  */
 
-import { X } from 'lucide-react';
 import { ClerkNote, ClerkNoteStrong } from './ClerkNote.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 
@@ -27,7 +26,7 @@ export function WizardLoadedBanners({
         <ClerkNote
           rubric="Config loaded"
           actions={
-            <IconButton Icon={X} glyph="×" label="Clear loaded config" tone="ghost" size="md" onClick={clearLoadedFromSave} />
+            <IconButton glyph="×" label="Clear loaded config" tone="ghost" size="md" onClick={clearLoadedFromSave} />
           }
         >
           <ClerkNoteStrong>{loadedFromSave.name}</ClerkNoteStrong>
@@ -39,7 +38,7 @@ export function WizardLoadedBanners({
         <ClerkNote
           rubric="Neighbour active"
           actions={
-            <IconButton Icon={X} glyph="×" label="Clear neighbour" tone="ghost" size="md" onClick={clearNeighbour} />
+            <IconButton glyph="×" label="Clear neighbour" tone="ghost" size="md" onClick={clearNeighbour} />
           }
         >
           <ClerkNoteStrong>{importedNeighbour.name}</ClerkNoteStrong>

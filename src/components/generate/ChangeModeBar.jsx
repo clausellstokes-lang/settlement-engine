@@ -9,7 +9,6 @@
  * instead of a round-trip through the mode picker.
  */
 
-import { ChevronLeft } from 'lucide-react';
 import { INK, MUTED, SECOND, BORDER, CARD_HDR, SP, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import Segmented from '../primitives/Segmented.jsx';
@@ -39,7 +38,6 @@ export function ChangeModeBar({ mode, onChangeMode }) {
       <Button
         variant="ghost"
         size="md"
-        icon={<ChevronLeft size={14} />}
         onClick={() => onChangeMode(null)}
         aria-label="Create, change generation mode"
         style={{ padding: 0, color: INK, fontWeight: 600 }}

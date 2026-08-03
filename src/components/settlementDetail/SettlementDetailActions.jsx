@@ -1,4 +1,3 @@
-import { Edit3, Lock, Drama, FileText, Image as ImageIcon, Share2 } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 import BuyThisDossier from '../BuyThisDossier.jsx';
 import { t } from '../../copy/index.js';
@@ -33,7 +32,6 @@ export default function SettlementDetailActions({
       <Button
         variant={!canEdit ? 'secondary' : 'ai'}
         size="sm"
-        icon={!canEdit ? <Lock size={12}/> : <Edit3 size={12}/>}
         onClick={() => { if (canEdit) { toggleEditMode(); } else if (setPurchaseModalOpen) { setPurchaseModalOpen(true); } }}
         title={canEdit
           ? (editMode
@@ -47,7 +45,6 @@ export default function SettlementDetailActions({
         <Button
           variant="gold"
           size="sm"
-          icon={<Drama size={12}/>}
           onClick={onOpenSession}
           title="A distraction-free run-of-play view for the table: tonight's beats, key NPCs, hooks, and the live world state."
         >
@@ -59,7 +56,6 @@ export default function SettlementDetailActions({
           variant="danger"
           size="sm"
           busy={exporting}
-          icon={<FileText size={12}/>}
           onClick={onOpenExportSheet}
           title="Choose Draft Brief / Canon Dossier / Timeline Packet."
         >
@@ -74,7 +70,6 @@ export default function SettlementDetailActions({
         variant="secondary"
         size="sm"
         busy={imageExporting}
-        icon={<ImageIcon size={12}/>}
         onClick={onExportImage}
         title={t('export.imageTitle')}
       >
@@ -84,7 +79,6 @@ export default function SettlementDetailActions({
         <Button
           variant="info"
           size="sm"
-          icon={<Share2 size={13}/>}
           aria-pressed={shareOpen}
           onClick={onToggleShare}
           title="Publish this dossier to the public gallery, or manage its listing."

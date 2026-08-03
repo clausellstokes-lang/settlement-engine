@@ -1,5 +1,4 @@
 import { FS } from '../theme.js';
-import { Eye, EyeOff, RefreshCw } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 
 // ── Button group state ─────────────────────────────────────────────────────
@@ -97,7 +96,6 @@ export default function DossierNarrativeButtons({
           title={inNarrativeView
             ? 'Switch to the raw generated data (no AI polish). No credits used.'
             : 'Switch to the AI-refined view. No credits used.'}
-          icon={inNarrativeView ? <EyeOff size={12} /> : <Eye size={12} />}
         >
           {inNarrativeView ? 'View Raw Simulation' : 'View Narrative'}
         </Button>
@@ -111,7 +109,6 @@ export default function DossierNarrativeButtons({
           disabled={regenerating}
           busy={regenerating}
           title={`Regenerate the Narrative Layer from the simulator output. Spends ${getCost('narrative')} credits.`}
-          icon={<RefreshCw size={12} />}
         >
           {regenerating ? (displayProgress || 'Regenerating\u2026') : `Regenerate${costLabel}`}
         </Button>

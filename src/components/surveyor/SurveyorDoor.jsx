@@ -33,7 +33,6 @@
  */
 
 import { useState } from 'react';
-import { X } from 'lucide-react';
 import { t } from '../../copy/index.js';
 import { CARD, SLATE, SLATE_DEEP, MUTED, sans, SP, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
@@ -127,7 +126,7 @@ export default function SurveyorDoor({ visible = true }) {
             <span className="sf-smallcap" style={{ fontSize: FS.sm, fontWeight: 700, color: SLATE_DEEP }}>
               {t('surveyorDoor.heading')}
             </span>
-            <IconButton Icon={X} label={t('surveyorDoor.close')} size="sm" onClick={() => setPromptOpen(false)} />
+            <IconButton glyph="×" label={t('surveyorDoor.close')} size="sm" onClick={() => setPromptOpen(false)} />
           </div>
 
           {/* CONTEXT-FIRST made visible: the Surveyor reads what the page shows. */}

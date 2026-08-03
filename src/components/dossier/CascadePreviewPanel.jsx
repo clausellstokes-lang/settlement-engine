@@ -28,7 +28,6 @@ import { INK as OINK } from '../../design/organic/ink.js';
 import { RUBRIC } from '../../design/organic/rubrication.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import { X } from 'lucide-react';
 import useDialogFocusTrap from '../primitives/useDialogFocusTrap.js';
 
 // THE PREVIEW INSTRUMENT PLATE (Deep Craft — the dossier's instrument register):
@@ -183,7 +182,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
             Cascade preview
           </h2>
           <IconButton
-            Icon={X}
+            glyph="×"
             label="Close"
             onClick={onClose}
             tone="ghost"

@@ -13,7 +13,6 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Route } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { validateUserRoute } from '../../domain/roads/userRoutes.js';
 import { activeSpatialDigest } from '../../domain/spatial/distanceRead.js';
@@ -115,7 +114,7 @@ export default function CharterRoadCard({ currentSave, allSaves }) {
         letterSpacing: '0.06em', display: 'flex', alignItems: 'center', gap: 6,
       }}
       >
-        <Route size={12} aria-hidden="true" /> Charter a road
+        Charter a road
       </div>
       <label
         htmlFor="charter-road-endpoint"

@@ -1,4 +1,3 @@
-import { Check, ChevronDown, ChevronRight, CircleSlash, Undo2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 import { conditionFromRegionalImpact, ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
@@ -150,7 +149,7 @@ export default function RegionalCausalChainViewer({
                 {row.impact.status === 'queued' && (
                   <>
                     <IconButton
-                      Icon={Check}
+                      glyph="✓"
                       label={available ? 'Apply regional impact' : 'Impact is delayed'}
                       tone="primary"
                       size="sm"
@@ -158,7 +157,7 @@ export default function RegionalCausalChainViewer({
                       onClick={() => onApplyImpact?.(campaign.id, row.impact.id)}
                     />
                     <IconButton
-                      Icon={CircleSlash}
+                      glyph="⊘"
                       label="Ignore regional impact"
                       size="sm"
                       onClick={() => onIgnoreImpact?.(campaign.id, row.impact.id)}
@@ -167,14 +166,14 @@ export default function RegionalCausalChainViewer({
                 )}
                 {row.impact.status === 'applied' && (
                   <IconButton
-                    Icon={Undo2}
+                    glyph="↶"
                     label="Resolve applied regional impact"
                     size="sm"
                     onClick={() => onResolveImpact?.(campaign.id, row.impact.id)}
                   />
                 )}
                 <IconButton
-                  Icon={expandedImpactId === row.impact.id ? ChevronDown : ChevronRight}
+                  glyph={expandedImpactId === row.impact.id ? '⌄' : '›'}
                   label={expandedImpactId === row.impact.id ? 'Hide causal details' : 'Show causal details'}
                   size="sm"
                   pressed={expandedImpactId === row.impact.id}

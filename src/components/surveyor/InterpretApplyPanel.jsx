@@ -11,7 +11,6 @@
  */
 
 import { useState, useCallback, useMemo } from 'react';
-import { Check, Pencil, RefreshCw, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { operationLabel } from '../../store/operationRegistry.js';
 import { getSurveyorAiCost } from '../../config/pricing.js';
@@ -141,11 +140,11 @@ function OpCard({ op, index, decision, onDecide }) {
         {op.label && <Badge tone={OP_LABEL_TONE[op.label] || 'muted'} size="sm">{op.label}</Badge>}
         {isProtected && <Badge tone="danger" size="sm">protected</Badge>}
         <span style={{ flex: 1 }} />
-        <IconButton Icon={Check} label="Approve this op" size="sm" tone={action === 'approve' ? 'active' : 'default'}
+        <IconButton glyph="✓" label="Approve this op" size="sm" tone={action === 'approve' ? 'active' : 'default'}
           pressed={action === 'approve'} onClick={() => onDecide(index, { ...decision, action: 'approve' })} />
-        <IconButton Icon={Pencil} label="Edit this op" size="sm" tone={action === 'edit' ? 'active' : 'default'}
+        <IconButton glyph="✎" label="Edit this op" size="sm" tone={action === 'edit' ? 'active' : 'default'}
           pressed={action === 'edit'} onClick={() => onDecide(index, { ...decision, action: 'edit' })} />
-        <IconButton Icon={X} label="Reject this op" size="sm" tone={action === 'reject' ? 'active' : 'default'}
+        <IconButton glyph="×" label="Reject this op" size="sm" tone={action === 'reject' ? 'active' : 'default'}
           pressed={action === 'reject'} onClick={() => onDecide(index, { ...decision, action: 'reject' })} />
       </div>
 
@@ -474,7 +473,6 @@ export default function InterpretApplyPanel({ initialPrompt = '' }) {
                       <Button
                         variant="secondary"
                         size="sm"
-                        icon={<RefreshCw size={12} />}
                         busy={recoveringCommandId === item.commandId}
                         disabled={Boolean(recoveringCommandId)}
                         onClick={() => reconcileCanonCommand(item)}

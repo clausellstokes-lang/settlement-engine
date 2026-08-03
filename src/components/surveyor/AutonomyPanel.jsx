@@ -17,7 +17,6 @@
  */
 
 import { useMemo, useState, useCallback } from 'react';
-import { Check, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { getSurveyorAiCost } from '../../config/pricing.js';
 import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, SLATE, sans, SP, FS } from '../theme.js';
@@ -90,7 +89,7 @@ function TestRow({ row, index, settlements, onChange, onRemove }) {
           <option value="false">false</option>
         </select>
       )}
-      <IconButton Icon={X} label="Remove this test" size="sm" onClick={() => onRemove(index)} />
+      <IconButton glyph="×" label="Remove this test" size="sm" onClick={() => onRemove(index)} />
     </div>
   );
 }
@@ -291,8 +290,8 @@ export default function AutonomyPanel({ initialPrompt = '' }) {
               {nudgeDecisions[i] === 'approve' && <Badge tone="gold" size="sm">injected</Badge>}
               {!nudgeDecisions[i] && (
                 <>
-                  <IconButton Icon={Check} label="Approve this nudge" size="sm" onClick={() => decideNudge(i, 'approve', n)} />
-                  <IconButton Icon={X} label="Discard this nudge" size="sm" onClick={() => decideNudge(i, 'discard', n)} />
+                  <IconButton glyph="✓" label="Approve this nudge" size="sm" onClick={() => decideNudge(i, 'approve', n)} />
+                  <IconButton glyph="×" label="Discard this nudge" size="sm" onClick={() => decideNudge(i, 'discard', n)} />
                 </>
               )}
             </div>
