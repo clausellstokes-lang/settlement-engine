@@ -1,6 +1,6 @@
 {
-  "total": 2232,
-  "totalAny": 2194,
+  "total": 2226,
+  "totalAny": 2188,
   "totalSuppress": 38,
   "files": {
     "src/domain/activeConditions.js": {
@@ -236,7 +236,7 @@
       "suppress": 0
     },
     "src/domain/region/graph.js": {
-      "any": 20,
+      "any": 14,
       "suppress": 0
     },
     "src/domain/region/propagation.js": {

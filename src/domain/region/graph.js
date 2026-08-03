@@ -246,7 +246,7 @@ export function normalizeChannel(channel, now = null) {
 
 /** @param {unknown} value */
 
-/** @param {any[]} [items] */
+/** @param {Array<{ id?: string }|null|undefined>} [items] */
 function dedupeById(items) {
   const map = new Map();
   for (const item of items || []) {
@@ -347,7 +347,7 @@ export function ensureRegionalGraphOnce(graph = {}, options = {}) {
 }
 
 /**
- * @param {any} save
+ * @param {import('./deriveRegionalState.js').RegionInput|null|undefined} save
  * @param {string | null} [now]
  */
 function nodeFromSave(save, now = null) {
@@ -362,7 +362,7 @@ function nodeFromSave(save, now = null) {
   });
 }
 
-/** @param {any} save */
+/** @param {import('./deriveRegionalState.js').RegionInput|null|undefined} save */
 function neighbourLinksFor(save) {
   const settlement = /** @type {any} */ (settlementFromSave(save));
   return settlement?.neighbourNetwork
@@ -372,7 +372,7 @@ function neighbourLinksFor(save) {
 }
 
 /**
- * @param {any} link
+ * @param {{ id?: string, targetId?: string, settlementId?: string, neighbourName?: string, name?: string }|null|undefined} link
  * @param {any[]} saves
  */
 function findTargetSave(link, saves) {
@@ -404,7 +404,7 @@ export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, o
   const edges = [...existing.edges];
   const nodeIds = new Set(nodes.map(n => n.id));
   const edgesById = new Map(edges.map(e => [e.id, e]));
-  const pairKeyFor = (/** @type {any} */ a, /** @type {any} */ b) => [String(a), String(b)].sort().join('::');
+  const pairKeyFor = (/** @type {unknown} */ a, /** @type {unknown} */ b) => [String(a), String(b)].sort().join('::');
   const edgesByPair = new Map();
   for (const e of edges) {
     const key = pairKeyFor(e.from, e.to);
