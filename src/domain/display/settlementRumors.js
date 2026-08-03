@@ -114,6 +114,17 @@ export const WHAT_PHRASES = Object.freeze({
   casus_lineage_claim_child: 'a daughter settlement claiming the elder seat',
   mirror_kinship_bond: 'kinship holding two settlements from war',
   lineage_claim_suppressed: 'a lineage claim refused by its own wagon books',
+  // WR-4 COMPARATIVE COSTS + THE HOME FRONT — reader words for all nine
+  // governed kinds, including the private misread visible only to a DM view.
+  war_trajectory_winning: 'a court believing the war is turning its way',
+  war_trajectory_losing: 'a court believing the war is going against it',
+  home_front_roads: 'the roads going to ruts during war',
+  home_front_stores: 'the granaries running lean during war',
+  home_front_hands: 'the muster emptying fields and workshops',
+  home_front_institutions: 'the courts and temples thinning under war',
+  home_front_markets: 'a wartime market closing',
+  winning_abroad_losing_at_home: 'victory abroad and hardship at home',
+  trajectory_misread: 'a court misreading the course of war',
   // The INDIRECT war and the war of words. These nine are keyed on `kind` rather than
   // `impactKind`, because their authors (momentum.js, supplyWebWarfare.js,
   // informationStatecraft.js) mint no impactKind. That is exactly why the impactKind

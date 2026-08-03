@@ -485,6 +485,43 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
       // prior stamp. CONDITIONALLY MATERIALIZED: a prize that was never coerced
       // carries no lastCoercionTick key ⇒ its tradeWarState entry stays byte-identical.
       const nextCoercionTick = coercionEmitted ? tick : (Number.isFinite(priorEntry.lastCoercionTick) ? priorEntry.lastCoercionTick : null);
+      // Preserve every supplier that actually HELD this prize and remains
+      // displaced, together with ITS OWN loss tick. A single `incumbentId` is
+      // only the most recent loser; a global lastFlipTick would falsely re-date
+      // older losses whenever a third supplier later took the crown.
+      /** @type {Record<string, number>} */
+      const lostSupplierSinceTick = {};
+      for (const [id, lostTick] of Object.entries(priorEntry.lostSupplierSinceTick || {})) {
+        if (id && Number.isFinite(lostTick) && lostTick >= 0) {
+          lostSupplierSinceTick[String(id)] = Number(lostTick);
+        }
+      }
+      // Adopt the short-lived WR-4 draft shape, if one arrived through an
+      // in-flight save, using the only clock that shape carried.
+      if (Number.isFinite(priorEntry.lastFlipTick)) {
+        for (const id of Array.isArray(priorEntry.lostSupplierIds)
+          ? priorEntry.lostSupplierIds
+          : []) {
+          if (id && !Object.hasOwn(lostSupplierSinceTick, String(id))) {
+            lostSupplierSinceTick[String(id)] = Number(priorEntry.lastFlipTick);
+          }
+        }
+        // A pre-WR-4 flip row already distinguishes its winner from the
+        // displaced incumbent. Migrate that still-readable fact on adoption.
+        if (priorEntry.incumbentId
+          && priorEntry.winnerId
+          && priorEntry.incumbentId !== priorEntry.winnerId
+          && !Object.hasOwn(lostSupplierSinceTick, String(priorEntry.incumbentId))) {
+          lostSupplierSinceTick[String(priorEntry.incumbentId)] = Number(priorEntry.lastFlipTick);
+        }
+      }
+      if (result.changed && result.incumbentId && result.incumbentId !== result.winnerId) {
+        lostSupplierSinceTick[String(result.incumbentId)] = tick;
+      }
+      delete lostSupplierSinceTick[String(result.winnerId || '')];
+      const orderedLostSupplierSinceTick = Object.fromEntries(
+        Object.entries(lostSupplierSinceTick).sort(([a], [b]) => codepoint(a, b)),
+      );
       tradeWarState[prizeId] = {
         winnerId: result.winnerId,
         incumbentId: result.incumbentId,
@@ -492,6 +529,9 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
         commodityId: String(commodityId),
         lastFlipTick: result.changed ? tick : (Number.isFinite(priorEntry.lastFlipTick) ? priorEntry.lastFlipTick : null),
         updatedTick: tick,
+        ...(Object.keys(orderedLostSupplierSinceTick).length
+          ? { lostSupplierSinceTick: orderedLostSupplierSinceTick }
+          : {}),
         ...(nextCoercionTick != null ? { lastCoercionTick: nextCoercionTick } : {}),
       };
 

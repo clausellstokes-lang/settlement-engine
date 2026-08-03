@@ -474,6 +474,70 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     }
   });
 
+  test('the one termination row owns WR-4 receipt evidence without borrowing aliveness', () => {
+    const rows = SUBSYSTEM_CERTIFICATION_REGISTRY
+      .filter((candidate) => candidate.rule === 'warTerminationEnabled');
+    expect(rows).toHaveLength(1);
+    const [row] = rows;
+    expect(row.title).toBe('War termination and comparative-cost read');
+    expect(row.aliveness.eventTypes).toEqual([]);
+    expect(row.aliveness.moverFamilies).toEqual([]);
+    expect(row.aliveness.stateKeys).toEqual([]);
+    expect(row.soakEvidence).toBe('unobserved');
+    expect(row.expectedTempo).toBe('per_tick');
+    expect(row.module.split(',')).toEqual(expect.arrayContaining([
+      'src/domain/certification/couplingRegistry.js',
+      'src/domain/worldPulse/warCosts.js',
+      'src/domain/worldPulse/warCostsNews.js',
+      'src/domain/worldPulse/warTermination.js',
+      'src/domain/worldPulse/eventProse.js',
+    ]));
+
+    for (const token of [
+      'pulseRecord.warTerminationReads',
+      'believedBalanceBand',
+      'truthBalanceBand',
+      'trajectoryMisread',
+      'homeFrontBand',
+      'homeFrontComponents',
+      'stateRead',
+      'roads',
+      'stores',
+      'hands',
+      'institutions',
+      'markets',
+      'lostSupplierSinceTick',
+      'decidingTerm',
+      'familyId',
+      'NO EXCLUSIVE ALIVENESS CHANNEL',
+    ]) {
+      expect(row.aliveness.other, `missing WR-4 evidence token ${token}`).toContain(token);
+    }
+    for (const kind of [
+      'war_trajectory_winning',
+      'war_trajectory_losing',
+      'home_front_roads',
+      'home_front_stores',
+      'home_front_hands',
+      'home_front_institutions',
+      'home_front_markets',
+      'winning_abroad_losing_at_home',
+      'trajectory_misread',
+    ]) {
+      expect(row.aliveness.other).toContain(kind);
+    }
+    expect(row.aliveness.other).toContain('institution degradation is an events receipt');
+    expect(row.aliveness.other).not.toContain('institution degradation is an adjudication');
+    expect(row.invariants.map((invariant) => invariant.name)).toEqual(expect.arrayContaining([
+      'one_read_per_valid_surviving_deployment',
+      'termination_receipts_are_not_state',
+      'belief_drives_trajectory_truth_only_diagnoses',
+      'home_front_reuses_existing_degradation',
+      'duration_never_invents_home_front_cost',
+      'war_cost_news_is_transition_only',
+    ]));
+  });
+
   test('the lineage row stays unobserved instead of borrowing shared reason ledgers or reader prose', () => {
     const row = rowFor('lineageClaimEnabled');
     expect(row.aliveness.eventTypes).toEqual([]);

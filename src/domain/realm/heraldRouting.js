@@ -97,6 +97,8 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   disposition_martial_crossed: 'war', war_culture_suppressed: 'war',
   casus_lineage_claim_parent: 'war', casus_lineage_claim_child: 'war',
   lineage_claim_suppressed: 'war',
+  war_trajectory_winning: 'war', war_trajectory_losing: 'war',
+  winning_abroad_losing_at_home: 'war', trajectory_misread: 'war',
   // THE INDIRECT WAR + THE WAR OF WORDS. These nine route on `kind`, not `impactKind`
   // (their authors mint none), which is exactly why the automatic discovery scan above
   // never surfaced them: it reads `impactKind:` and `candidateType:` literals only. They
@@ -127,6 +129,7 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   // ── TRADE — goods, money, roads, resources, institutions, non-war relations ───
   flow_trade_scarcity: 'trade', flow_migration: 'trade', trade_embargo_collapse: 'trade',
   disposition_mercantile_crossed: 'trade',
+  home_front_roads: 'trade', home_front_markets: 'trade',
   trade_embargo: 'trade', trade_embargo_declared: 'trade', trade_realignment: 'trade',
   vassal_trade_coercion: 'trade', vassal_tribute_extraction: 'trade', vassal_extraction: 'trade',
   resource_discovery: 'trade', resource_depletion: 'trade', resource_recovery: 'trade',
@@ -199,6 +202,7 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   npc_growth: 'events', npc_ladder: 'events', npc_contest: 'events', npc_support: 'events',
   disposition_diplomatic_crossed: 'events', disposition_insular_crossed: 'events',
   disposition_reversal: 'events', lineage_edge_recorded: 'events', mirror_kinship_bond: 'events',
+  home_front_stores: 'events', home_front_hands: 'events', home_front_institutions: 'events',
   // traditions / custom / values (KIND_SECTION `traditions` custom-half → events)
   tradition: 'events', tradition_change: 'events', moral_reckoning: 'events', cause_lifecycle: 'events',
   // mercy (KIND_SECTION `mercy` → events)

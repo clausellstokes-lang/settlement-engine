@@ -10,6 +10,14 @@ export const WIZARD_NEWS_SIGNIFICANCE = Object.freeze({
   ROUTINE: 'routine',
 });
 
+// The governed section vocabulary mirrors the Herald's six desks without
+// importing the reader-only routing module into the regional engine graph.
+// Unknown persisted values fail closed to absence; every valid supplied desk
+// survives normalization unchanged.
+const WIZARD_NEWS_SECTIONS = new Set([
+  'war', 'faith', 'trade', 'events', 'divination', 'adjudication',
+]);
+
 const MAX_ENTRIES = 240;
 
 // ── Types ──────────────────────────────────────────────────────────────────
@@ -585,7 +593,7 @@ function normalizeEntry(entry, options = {}) {
     ...(entry.audience === 'public' || entry.audience === 'dm-only'
       ? { audience: entry.audience }
       : {}),
-    ...(entry.section === 'war' || entry.section === 'events'
+    ...(WIZARD_NEWS_SECTIONS.has(entry.section)
       ? { section: entry.section }
       : {}),
   };

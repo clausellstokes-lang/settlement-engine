@@ -463,11 +463,23 @@ describe('WR-1 four-term disagreement and receipt envelope', () => {
     const read = readWarTerminations({ worldState: state, tick: 9 });
     const receipt = read.receipts[0];
     expect(Object.keys(receipt).sort()).toEqual([
-      'attackerId', 'causeBand', 'causeState', 'costToContinueBand',
-      'costToStopBand', 'decidingTerm', 'id', 'kind', 'momentumBand',
-      'reason', 'settlementIds', 'targetId', 'tick',
+      'attackerId', 'believedBalanceBand', 'causeBand', 'causeState',
+      'costToContinueBand', 'costToStopBand', 'decidingTerm', 'homeFrontBand',
+      'homeFrontComponents', 'homeFrontDurationBand', 'id', 'kind',
+      'momentumBand', 'reason', 'settlementIds', 'targetId', 'tick',
+      'trajectory', 'trajectoryMisread', 'truthBalanceBand',
     ]);
     expect(Object.values(receipt).filter((value) => typeof value === 'number')).toEqual([9]);
+    const numericLeaves = [];
+    const visit = (value, key = '') => {
+      if (typeof value === 'number') numericLeaves.push([key, value]);
+      else if (Array.isArray(value)) value.forEach((item, index) => visit(item, `${key}[${index}]`));
+      else if (value && typeof value === 'object') {
+        Object.entries(value).forEach(([childKey, child]) => visit(child, childKey));
+      }
+    };
+    visit(receipt);
+    expect(numericLeaves).toEqual([['tick', 9]]);
     expect(typeof read.byAttacker.get('raw-attacker-id')?.suePressure01).toBe('number');
     expect(receipt.reason).toMatch(/[A-Za-z]/);
     expect(receipt.reason.match(/\d/)).toBeNull();

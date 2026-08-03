@@ -418,6 +418,14 @@
 >   (P1/P1a), economy regimes demoting and institutions shelling (K1/K2), trade
 >   partners lost. The war's cost at home is the sum of what the other engines
 >   already register, not a number invented for war.
+>   ── IMPLEMENTATION CORRECTION (2026-08-02): P1/P1a records conserved aggregate
+>   population movement and the decline floor; it does not record which named
+>   people served or fell. WR-4 therefore reads the attacker's own conscript share
+>   (`deployedPopulation` minus `leviedPopulationBySource`) for its home hands stream;
+>   allied and vassal levies remain a cost of their actual homes. Every `{npc}`
+>   receipt family stays ineligible. A named roster member
+>   may appear here only after a real deployment/casualty source exists; a current
+>   roster guess is not evidence.
 >   ── ⭐ THEREFORE A REALM CAN BE WINNING ABROAD AND LOSING AT HOME, and that must be
 >   reachable, legible and narratable: victories on the field while the granaries
 >   empty and the roads go to grass. It is one of the most historically common shapes

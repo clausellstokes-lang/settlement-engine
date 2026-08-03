@@ -394,6 +394,73 @@ export const WAR_RECEIPTS = Object.freeze({
     'Sustained provisioning stands in the ledger where the grievance would go.',
     'Nothing was minted, so nothing decays; this claim waits on a change in the wagon books, not a change of heart.',
   ],
+  // WR-4 COMPARATIVE COSTS + THE HOME FRONT. These nine governed kinds are
+  // copied verbatim from the receipt annex. warCostReceipt resolves only
+  // families whose named truths are present; it never invents a route, good,
+  // house, NPC, temple, settlement, counterpart, or authored world-word band.
+  war_trajectory_winning: [
+    (x) => `The court of ${x.settlement} believes the war is turning its way, and prices every offer accordingly.`,
+    'The word from the field is good, and the word is all the hall has.',
+    'Terms that would have been signed in the spring are refused by the harvest, on no better evidence.',
+    'Believing you are winning is expensive; the court has begun to pay for it.',
+    (x) => `It is said the enemy is spent ${x.band}. The couriers who say so have been a fortnight on the road.`,
+  ],
+  war_trajectory_losing: [
+    (x) => `${x.settlement}'s court believes the war is going against it, and the belief moves faster than the news.`,
+    'The hall has begun to ask what peace costs, which is the first honest question of the war.',
+    'Every report is read for the worst line in it.',
+    (x) => `They may be wrong. They are certainly frightened, and the ${x.term} they draft will show it.`,
+    'A court that believes it is losing will sign what a court that is losing would not.',
+  ],
+  home_front_roads: [
+    (x) => `${x.route} has gone to ruts while the levies were away, and the tolls have gone with it.`,
+    'Nobody has cut the causeway brush in a season; the drovers take the long way and charge for it.',
+    'While the war continues, the road-work goes undone.',
+    'The bridge at the ford held through the war and has not held since.',
+    (x) => `One of ${x.settlement}'s wartime roads has worsened; the loss is ${x.band} harder to ignore.`,
+  ],
+  home_front_stores: [
+    (x) => `The granaries of ${x.settlement} hold ${x.band}, and there is another season of war in front of them.`,
+    (x) => `The reeve has begun measuring the seed ${x.good}, which is the last measure before hunger.`,
+    'The war eats first and the town eats after; that order is written in the stores.',
+    'The campaign continues while the stores remain low.',
+    'There is bread enough for the season, and the season is not the question.',
+  ],
+  home_front_hands: [
+    (x) => `${x.settlement} has sent ${x.band} of its hands to the field, and the work at home has noticed.`,
+    'The harvest was got in by the old and the young, and got in late.',
+    'The muster took the smiths first, which the town will feel for a generation.',
+    (x) => `Names that ran the market are on the roll instead of the ledger, ${x.npc} among them.`,
+    'A town can survive a war; it cannot keep sending its working hands away without paying for it at home.',
+  ],
+  home_front_institutions: [
+    (x) => `The assize at ${x.settlement} sits with a clerk and no justice; the court has been hollowed by the war's bill.`,
+    (x) => `The ${x.temple} keeps its doors and has stopped keeping its school.`,
+    'Institutions need not fall to thin, and thin, and one day fail at the thing they are for.',
+    'What was a working court is a room with a register in it.',
+    'The buildings remain. Their offices cannot do the work they were built to do.',
+  ],
+  home_front_markets: [
+    (x) => `The factors of ${x.house} no longer come to ${x.settlement}'s staple, and the wharf shows it.`,
+    'The wharf hands stand about by the middle of the morning, and have done so since the levies went out.',
+    (x) => `${x.good} that moved through this town moves around it now.`,
+    'A recorded market tie has closed while the war continues.',
+    'The tolls are what they were and there is nothing to toll.',
+  ],
+  winning_abroad_losing_at_home: [
+    (x) => `${x.settlement}'s banners stand on ${x.counterpart}'s walls and its own granaries hold ${x.band}.`,
+    'The couriers bring victories and the reeve brings the accounts; only one of them is believed in the market.',
+    'The victory dispatch is read out in the market square, where the price of bread answers it.',
+    'Every field taken has been paid for with a road, a craftsman, and a market.',
+    'The gains abroad are real. So is the strain at home, and home is nearer.',
+  ],
+  trajectory_misread: [
+    'The court believed the war was turning; the field says otherwise, and the receipt carries both readings.',
+    (x) => `What ${x.settlement}'s hall knows and what is true have parted company, and the distance is on the record.`,
+    'The belief is honest and wrong, which is the most expensive combination there is.',
+    'The terms about to be drafted rest on a report the world has already overtaken.',
+    'Nobody in that hall is wrong on purpose, which will be no comfort to anyone afterward.',
+  ],
   // fear_of_dominance — authored in hegemonyFear.js (see HEGEMONY_RECEIPTS below).
 });
 
@@ -740,6 +807,111 @@ const WAR_LINEAGE_KIND_BY_ID = new Map(
  */
 export function lineageReceipt(kind, seed, interp = {}) {
   const row = WAR_LINEAGE_KIND_BY_ID.get(String(kind));
+  if (!row) return null;
+  const eligible = row.pool
+    .map((_, templateIndex) => templateIndex)
+    .filter((templateIndex) => row.requiredSlots[templateIndex].every((slot) => (
+      typeof interp[slot] === 'string' && String(interp[slot]).trim().length > 0
+    )));
+  if (eligible.length === 0) return null;
+  const namespacedSeed = seed ? `${seed}#${row.kind}` : '';
+  const templateIndex = namespacedSeed ? eligible[fnv1a32(namespacedSeed) % eligible.length] : eligible[0];
+  const variant = row.pool[templateIndex];
+  const line = typeof variant === 'function' ? String(variant(interp)) : String(variant);
+  return {
+    kind: row.kind,
+    line,
+    familyId: `${row.kind}.${templateIndex + 1}`,
+    templateIndex,
+    significance: row.significance,
+    audience: row.audience,
+    section: row.section,
+  };
+}
+
+/**
+ * The WR-4 governed phrased-kind registry. Comparative-cost and home-front
+ * receipts are presentation evidence for the pure evaluator; registering their
+ * authored families and proving behavioral reachability remain separate duties.
+ */
+/** @typedef {'war_trajectory_winning'|'war_trajectory_losing'|'home_front_roads'|
+ * 'home_front_stores'|'home_front_hands'|'home_front_institutions'|
+ * 'home_front_markets'|'winning_abroad_losing_at_home'|'trajectory_misread'} WarCostReceiptKind */
+/** @typedef {{kind:WarCostReceiptKind,significance:'major'|'notable'|'routine',
+ * audience:'public'|'dm-only',section:'war'|'trade'|'events',pool:readonly ProseVariant[],
+ * requiredSlots:ReadonlyArray<readonly string[]>}} WarCostReceiptRegistryEntry */
+
+/**
+ * @param {WarCostReceiptKind} kind
+ * @param {'major'|'notable'|'routine'} significance
+ * @param {'public'|'dm-only'} audience
+ * @param {'war'|'trade'|'events'} section
+ * @param {ReadonlyArray<readonly string[]>} requiredSlots
+ * @returns {Readonly<WarCostReceiptRegistryEntry>}
+ */
+function warCostKindRow(kind, significance, audience, section, requiredSlots) {
+  return Object.freeze({
+    kind,
+    significance,
+    audience,
+    section,
+    pool: /** @type {readonly ProseVariant[]} */ (WAR_RECEIPTS[kind]),
+    requiredSlots: Object.freeze(
+      requiredSlots.map((slots) => Object.freeze([...slots])),
+    ),
+  });
+}
+
+/** @type {ReadonlyArray<Readonly<WarCostReceiptRegistryEntry>>} */
+export const WAR_COST_KIND_REGISTRY = Object.freeze([
+  warCostKindRow('war_trajectory_winning', 'notable', 'public', 'war',
+    [['settlement'], ['fieldReport'], ['offerHistory'], [], ['fieldReport', 'band', 'courierDelay']]),
+  warCostKindRow('war_trajectory_losing', 'notable', 'public', 'war',
+    [['settlement', 'newsLag'], [], ['fieldReport'], ['term'], []]),
+  warCostKindRow('home_front_roads', 'notable', 'public', 'trade',
+    [['route', 'tollLoss'], ['causewayNeglect'], [], ['bridgeDamage'], ['settlement', 'band']]),
+  warCostKindRow('home_front_stores', 'notable', 'public', 'events',
+    [['settlement', 'band', 'granary'], ['seedGood'], [], [], ['breadSupply']]),
+  warCostKindRow('home_front_hands', 'notable', 'public', 'events',
+    [['settlement', 'band'], ['harvestLabor'], ['smithMuster'], ['npc'], []]),
+  // WR-4 routing correction: institution degradation is structural news on
+  // the events desk, not a judicial act on the adjudication desk.
+  warCostKindRow('home_front_institutions', 'notable', 'public', 'events',
+    [['settlement', 'courtOffice'], ['temple', 'school'], [], ['courtOffice'], []]),
+  warCostKindRow('home_front_markets', 'notable', 'public', 'trade',
+    [['house', 'settlement'], ['wharfLabor'], ['good'], [], ['tollLoss']]),
+  warCostKindRow('winning_abroad_losing_at_home', 'major', 'public', 'war',
+    [['settlement', 'counterpart', 'band', 'storesEvidence', 'occupation'], ['marketAccount'], ['breadPrice'], ['compoundLoss'], []]),
+  warCostKindRow('trajectory_misread', 'routine', 'dm-only', 'war',
+    [['fieldReport'], ['settlement'], [], ['draftedTerms'], ['intentEvidence']]),
+]);
+
+/** The exact WR-4 reader-kind set, shared by future emitters and walkers. */
+export const WAR_COST_KINDS = Object.freeze(
+  WAR_COST_KIND_REGISTRY.map((row) => row.kind),
+);
+
+/** @type {ReadonlyMap<string, Readonly<WarCostReceiptRegistryEntry>>} */
+const WAR_COST_KIND_BY_ID = new Map(
+  /** @type {Array<[string, Readonly<WarCostReceiptRegistryEntry>]>} */ (
+    WAR_COST_KIND_REGISTRY.map((row) => [row.kind, row])
+  ),
+);
+
+/**
+ * Resolve one WR-4 receipt plus its stable family and governed presentation
+ * metadata. Missing truths remove only the families that name them; a receipt
+ * never fabricates a route, good, house, NPC, temple, settlement, counterpart,
+ * term, or world-word band. Pure and deterministic.
+ *
+ * @param {string} kind
+ * @param {string|null|undefined} seed
+ * @param {Record<string, unknown>} [interp]
+ * @returns {{kind:string,line:string,familyId:string,templateIndex:number,
+ *   significance:string,audience:string,section:string} | null}
+ */
+export function warCostReceipt(kind, seed, interp = {}) {
+  const row = WAR_COST_KIND_BY_ID.get(String(kind));
   if (!row) return null;
   const eligible = row.pool
     .map((_, templateIndex) => templateIndex)

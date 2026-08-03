@@ -80,6 +80,8 @@ import { advanceSettlementPolitics } from './settlementPolitics.js';
 import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons, peaceReasonsFor } from './peaceReasons.js';
 import { readWarTerminations } from './warTermination.js';
+import { priorWarCostReceipt } from './warCosts.js';
+import { warCostTransitionNewsEntries } from './warCostsNews.js';
 import { momentumActive, commitmentDepositsFor, advanceCommitments, entityThreshold, makeCommitmentDiscountFn, advanceMomentumCracks, MOMENTUM_TUNING } from './momentum.js';
 import { advanceIntervention, interventionActive } from './convergence.js';
 import { advanceNaval, navalActive } from './navalKernel.js';
@@ -1148,6 +1150,22 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const warOutcomes = [...mobilizationOutcomes, ...war.outcomes, ...warReturnOutcomes, ...tradeWarOutcomes, ...occupationOutcomes, ...religiousOutcomes];
   const pressures = deriveSettlementPressures(postTimeSnapshot); const pIndex = pressureIndex(pressures);
   const warTermination = simulationRules.warLayerEnabled === true && simulationRules.warTerminationEnabled === true ? readWarTerminations({ worldState, snapshot: postTimeSnapshot, pIndex, tick: worldState.tick }) : null;
+  const warCostNewsEntries = warTermination?.receipts.flatMap((receipt) => (
+    warCostTransitionNewsEntries({
+      current: receipt,
+      previous: priorWarCostReceipt(
+        worldState,
+        receipt.attackerId,
+        receipt.targetId,
+        receipt.tick,
+        Number.isFinite(worldState?.deployments?.[receipt.attackerId]?.sinceTick)
+          ? worldState.deployments[receipt.attackerId].sinceTick
+          : receipt.tick,
+      ),
+      snapshot: postTimeSnapshot,
+      now,
+    })
+  )) || [];
   const tierResource = evaluateTierResourceDynamics(worldState, postTimeSnapshot, pIndex, {
     tick: worldState.tick,
     interval: tickInterval,
@@ -1731,7 +1749,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const tempoReceiptNews = (tempoContext.active && tempoDeferred.length)
     ? tempoReceiptEntries(tempoDeferred, worldState.tick)
     : [];
-  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...causeLifecycleNews, ...beliefMisjudgmentNews, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries, ...thawEntries, ...tempoReceiptNews];
+  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...causeLifecycleNews, ...beliefMisjudgmentNews, ...warCostNewsEntries, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries, ...thawEntries, ...tempoReceiptNews];
   // Thread the pinned `now` (same as applyWorldPulse's regional-news append) so the
   // feed's `updatedAt` stamps the deterministic tick time, not the wall clock. Without
   // it, any tick that surfaces kernel-side news (realm arcs, aftermath, captures,

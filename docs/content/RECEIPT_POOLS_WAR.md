@@ -428,36 +428,36 @@ SLOTS: {settlement}, {route}, {band}
 AUDIENCE: public
 1. {route} has gone to ruts while the levies were away, and the tolls have gone with it.
 2. Nobody has cut the causeway brush in a season; the drovers take the long way and charge for it.
-3. The war is being paid for in road-work not done.
+3. While the war continues, the road-work goes undone.
 4. The bridge at the ford held through the war and has not held since.
-5. What the army did not spend, the mud has, and {settlement} is {band} poorer for it.
+5. One of {settlement}'s wartime roads has worsened; the loss is {band} harder to ignore.
 
 ### home_front_stores (WR-4) — warCosts receipt, events desk — significance: notable
 SLOTS: {settlement}, {band}, {good}
 AUDIENCE: public
 1. The granaries of {settlement} hold {band}, and there is another season of war in front of them.
 2. The reeve has begun measuring the seed {good}, which is the last measure before hunger.
-3. The war eats first and the town eats after; the order has not changed since spring.
-4. Stores that would have carried the winter will carry the campaign.
+3. The war eats first and the town eats after; that order is written in the stores.
+4. The campaign continues while the stores remain low.
 5. There is bread enough for the season, and the season is not the question.
 
 ### home_front_hands (WR-4) — warCosts receipt, events desk — significance: notable
 SLOTS: {settlement}, {band}, {npc}
 AUDIENCE: public
-1. {settlement} has sent {band} of its hands to the field, and the fields have noticed.
+1. {settlement} has sent {band} of its hands to the field, and the work at home has noticed.
 2. The harvest was got in by the old and the young, and got in late.
 3. The muster took the smiths first, which the town will feel for a generation.
 4. Names that ran the market are on the roll instead of the ledger, {npc} among them.
-5. A town can lose a war and survive; it cannot lose its craftsmen and survive.
+5. A town can survive a war; it cannot keep sending its working hands away without paying for it at home.
 
-### home_front_institutions (WR-4) — warCosts receipt, adjudication desk — significance: notable
+### home_front_institutions (WR-4) — warCosts receipt, events desk — significance: notable
 SLOTS: {settlement}, {temple}
 AUDIENCE: public
 1. The assize at {settlement} sits with a clerk and no justice; the court has been hollowed by the war's bill.
 2. The {temple} keeps its doors and has stopped keeping its school.
-3. Institutions do not fall in a war — they thin, and thin, and one day cannot do the thing they are for.
+3. Institutions need not fall to thin, and thin, and one day fail at the thing they are for.
 4. What was a working court is a room with a register in it.
-5. The war spared the buildings and took the offices.
+5. The buildings remain. Their offices cannot do the work they were built to do.
 
 ### home_front_markets (WR-4) — warCosts receipt, trade desk — significance: notable
 SLOTS: {settlement}, {counterpart}, {good}, {house}
@@ -465,7 +465,7 @@ AUDIENCE: public
 1. The factors of {house} no longer come to {settlement}'s staple, and the wharf shows it.
 2. The wharf hands stand about by the middle of the morning, and have done so since the levies went out.
 3. {good} that moved through this town moves around it now.
-4. The war closed a market it took a generation to open.
+4. A recorded market tie has closed while the war continues.
 5. The tolls are what they were and there is nothing to toll.
 
 ### winning_abroad_losing_at_home (WR-4) — warCosts receipt, war desk — significance: major
@@ -475,7 +475,7 @@ AUDIENCE: public
 2. The couriers bring victories and the reeve brings the accounts; only one of them is believed in the market.
 3. The victory dispatch is read out in the market square, where the price of bread answers it.
 4. Every field taken has been paid for with a road, a craftsman, and a market.
-5. The victory is real. So is the hunger, and the hunger is nearer.
+5. The gains abroad are real. So is the strain at home, and home is nearer.
 
 ### trajectory_misread (WR-4) — warCosts receipt, war desk — significance: routine
 SLOTS: {settlement}, {counterpart}

@@ -528,18 +528,18 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
   }),
   Object.freeze({
     rule: 'warTerminationEnabled',
-    title: 'War termination read',
-    module: 'src/domain/worldPulse/warTermination.js',
+    title: 'War termination and comparative-cost read',
+    module: 'src/domain/certification/couplingRegistry.js,src/domain/worldPulse/warCosts.js,src/domain/worldPulse/warCostsNews.js,src/domain/worldPulse/warTermination.js,src/domain/worldPulse/eventProse.js',
     aliveness: Object.freeze({
-      // DELIBERATELY EMPTY. The read emits one pulse-record receipt for each valid
-      // surviving deployment and stores no parallel termination ledger. Its
-      // pulseRecord.warTerminationReads projection is outside the current soak's
-      // event, mover-family and state-key censuses, so claiming any sibling war
-      // channel here would manufacture aliveness.
+      // DELIBERATELY EMPTY. WR-1 and WR-4 share one pulse-record receipt for each
+      // valid surviving deployment and store no parallel termination/cost ledger.
+      // The receipt and its transition-only news are outside the current soak's
+      // event, mover-family and state-key censuses, so neither may masquerade as
+      // behavioral aliveness before WR-9 instruments their exact vocabulary.
       eventTypes: Object.freeze([]),
       moverFamilies: Object.freeze([]),
       stateKeys: Object.freeze([]),
-      other: 'Nested under warLayerEnabled through a strict two-flag gate: both warLayerEnabled and warTerminationEnabled must be exactly true before the pure reader runs. Each surviving deployment receives one attacker-centric four-term read per pulse, but pulseRecord.warTerminationReads is pulse evidence and is neither a selected candidate nor a dedicated worldState container. NO EXCLUSIVE ALIVENESS CHANNEL therefore exists in the current certification envelope. TO OBSERVE: WR-9 must fold the termination receipt decidingTerm vocabulary into its behavioral story-mix fields; only that fold can distinguish a live cause, continuing cost, stopping cost or momentum decision without falsely borrowing traffic from the parent war lane. Until a post-WR-9 receipt executes that fold, DORMANT_BY_CONFIG while this declared flag is false and UNOBSERVED when lit are the only honest verdicts.',
+      other: 'Nested under warLayerEnabled through a strict two-flag gate: both warLayerEnabled and warTerminationEnabled must be exactly true before the pure reader runs. Each surviving deployment receives one attacker-centric four-term read per pulse. WR-4 extends that same read rather than adding another feature row or dedicated state owner: warCosts.js compares the newest current-episode receipt\'s believedBalanceBand with the current believedBalanceBand carried by pulseRecord.warTerminationReads, yielding winning, losing or an explicitly decision-silent even trajectory; truthBalanceBand can only support the private trajectoryMisread diagnostic. The homeFrontComponents receipt carries roads, stores, hands, institutions and markets as qualitative band plus stateRead evidence from existing ledgers, with duration scaling only degradation that is already present; the existing tradeWarState prize row retains each displaced holder\'s own lostSupplierSinceTick so a later flip cannot re-date its loss. warCostsNews.js projects only onset or upward crossings through war_trajectory_winning, war_trajectory_losing, home_front_roads, home_front_stores, home_front_hands, home_front_institutions, home_front_markets, winning_abroad_losing_at_home and the DM-only trajectory_misread family; the combined public victory requires both believed and true winning trajectories, so a mistaken court cannot manufacture a real victory, and institution degradation is an events receipt rather than an adjudication act. pulseRecord.warTerminationReads remains pulse evidence, never a selected candidate or dedicated worldState container, and the governed Wizard News families are presentation evidence rather than eventTypes. NO EXCLUSIVE ALIVENESS CHANNEL therefore exists in the current certification envelope. TO OBSERVE: WR-9 must fold decidingTerm, believedBalanceBand, truthBalanceBand, trajectory, trajectoryMisread, homeFrontBand, each homeFrontComponents.*.{band,stateRead}, and the nine war-cost familyId values into behavioral story-mix fields. Only that fold can distinguish a live cause, comparative cost, continuing/stopping decision or home-front reading without borrowing traffic from the parent war lane. Until a post-WR-9 receipt executes that fold, DORMANT_BY_CONFIG while this declared flag is false and UNOBSERVED when lit are the only honest verdicts.',
     }),
     // The reader evaluates every active deployment on every pulse. A quiet realm
     // has no read to emit, but an active war must not sample its exit sporadically.
@@ -552,8 +552,28 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
       }),
       Object.freeze({
         name: 'termination_receipts_are_not_state',
-        description: 'The four-term answer is pulse evidence, not a second war ledger, so pulse-history retention never creates a dedicated state twin.',
-        check: 'A v5 stateKeys census must never acquire a terminationRead or warTerminationReads key; WR-9 observes the pulse-record decidingTerm fold instead of adding persisted state.',
+        description: 'The four-term and comparative-cost answer is pulse evidence, not a second war ledger, so pulse-history retention never creates a dedicated state twin.',
+        check: 'A v5 stateKeys census must never acquire a terminationRead, warTerminationReads, warCosts or homeFrontCosts key; WR-9 observes the existing pulse-record fold instead of adding persisted state.',
+      }),
+      Object.freeze({
+        name: 'belief_drives_trajectory_truth_only_diagnoses',
+        description: 'Winning and losing follow consecutive believed balance bands; the parallel truth bands may reveal a misread but can never alter the behavioral comparison, and an even result is decision-silent.',
+        check: 'WR-9 must reject a non-even trajectory without two believed bands, reject a trajectory decision term on an even row, and show through the separate diagnostic API that changing only its truth-band arguments changes trajectoryMisread but not the belief evaluator output.',
+      }),
+      Object.freeze({
+        name: 'home_front_reuses_existing_degradation',
+        description: 'Roads, stores, hands, institutions and markets are qualitative reads of existing state, never a new war-tax stock or a second count of attrition, exhaustion or economy pressure.',
+        check: 'Every non-quiet homeFrontComponents member must carry its own stateRead and closed band; a source-absent fixture stays quiet, and no component stateRead may name attrition, warExhaustion or the existing economy-pressure term.',
+      }),
+      Object.freeze({
+        name: 'duration_never_invents_home_front_cost',
+        description: 'Deployment duration accelerates degradation that exists but supplies no evidence by itself.',
+        check: 'WR-9 must compare opening and protracted receipts with every component quiet and require homeFrontBand quiet in both, while a matched non-quiet source may harden monotonically with duration.',
+      }),
+      Object.freeze({
+        name: 'war_cost_news_is_transition_only',
+        description: 'Reader receipts speak only on trajectory onset/change, a home-front upward crossing, the first winning-abroad contradiction, or the first belief/truth misread.',
+        check: 'WR-9 story-mix evidence must show no repeated familyId for an unchanged attacker-target receipt; trajectory_misread is DM-only and home_front_institutions files under events rather than adjudication.',
       }),
     ]),
     soakEvidence: 'unobserved',

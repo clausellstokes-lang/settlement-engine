@@ -30,9 +30,17 @@ import {
 } from './patronCounterforce.js';
 import { liveStrengthContradictsOpportunism } from './opportunism.js';
 import {
+  believedAdvantage,
   resolveVictor,
   termBudgetFor,
 } from './peaceTerms.js';
+import {
+  compareWarCostTrajectoryTruth,
+  evaluateWarCostTrajectory,
+  priorWarCostReceipt,
+  readWarHomeFront,
+  warCostBalanceBand,
+} from './warCosts.js';
 import {
   cliffStockFor,
   climbDownConsequence,
@@ -150,6 +158,12 @@ export const WAR_TERMINATION_TUNING = Object.freeze({
   SUE_CONTINUE_W: 0.65,
   HOLD_STOP_W: 0.55,
   HOLD_MOMENTUM_W: 0.45,
+  /** WR-4: independent degradation can fill only this share of remaining
+   * continuation pressure. Duration is already applied once inside warCosts. */
+  HOME_FRONT_CONTINUE_W: 0.35,
+  /** WR-4: one qualitative movement is narrower than a two-or-more-band move. */
+  TRAJECTORY_NARROW_W: 0.16,
+  TRAJECTORY_CLEAR_W: 0.3,
   DECIDING_MARGIN: 0.08,
 });
 
@@ -390,8 +404,34 @@ function decidingTermOf(terms) {
   return decidingTerm;
 }
 
-/** Authored decision sentence; raw scores, multipliers, and engine tokens stay out. @param {{attackerName:string, decidingTerm:string, causeState:string, dissolvedCauseTypes:string[]}} args @returns {string} */
-function terminationReason({ attackerName, decidingTerm, causeState, dissolvedCauseTypes }) {
+/** Combine independent bounded pressure without double-counting the full base. */
+function addPressure01(base, pressure) {
+  const current = finite01(base);
+  return clamp01(current + (1 - current) * finite01(pressure));
+}
+
+/** @param {unknown} marginBand @returns {number} */
+function trajectoryPressure01(marginBand) {
+  if (marginBand === 'clear') return WAR_TERMINATION_TUNING.TRAJECTORY_CLEAR_W;
+  if (marginBand === 'narrow') return WAR_TERMINATION_TUNING.TRAJECTORY_NARROW_W;
+  return 0;
+}
+
+/** Authored decision sentence; raw scores, multipliers, and engine tokens stay out.
+ * @param {{attackerName:string, decidingTerm:string, causeState:string,
+ *   dissolvedCauseTypes:string[], trajectory?:string, homeFrontBand?:string,
+ *   trajectoryContributed?:boolean,homeFrontContributed?:boolean}} args
+ * @returns {string} */
+function terminationReason({
+  attackerName,
+  decidingTerm,
+  causeState,
+  dissolvedCauseTypes,
+  trajectory = 'even',
+  homeFrontBand = 'quiet',
+  trajectoryContributed = false,
+  homeFrontContributed = false,
+}) {
   const subject = `${attackerName}'s council`;
   const dissolvedCase = dissolvedCauseTypes.map((type) => DISSOLVED_CAUSE_PROSE[type]).filter(Boolean).join('; ');
   if (causeState === 'dissolved' && decidingTerm === 'cost_to_stop') {
@@ -407,9 +447,24 @@ function terminationReason({ attackerName, decidingTerm, causeState, dissolvedCa
     return `Part of the founding case has fallen away: ${dissolvedCase}. ${subject} still weighs the remaining cause against the price of peace.`;
   }
   if (decidingTerm === 'cost_to_continue') {
+    const homeFrontPresses = homeFrontContributed
+      && (homeFrontBand === 'pressing' || homeFrontBand === 'decisive');
+    const trajectoryPresses = trajectoryContributed && trajectory === 'losing';
+    if (trajectoryPresses && homeFrontPresses) {
+      return `${subject} believes later peace will cost more, while strain behind the army adds to the price of another campaign.`;
+    }
+    if (trajectoryPresses) {
+      return `${subject} believes later peace will cost more than peace now; that worsening expectation adds to the price of continuing.`;
+    }
+    if (homeFrontPresses) {
+      return `The strain behind the army adds to what another campaign would cost ${subject}.`;
+    }
     return `The realm can no longer bear the fighting; another campaign is pressing ${subject} toward peace.`;
   }
   if (decidingTerm === 'cost_to_stop') {
+    if (trajectoryContributed && trajectory === 'winning') {
+      return `${subject} believes later terms will cost less than peace now; that expectation adds to the price of stopping.`;
+    }
     return `${subject} believes peace would exact more than another campaign, so the war holds.`;
   }
   if (decidingTerm === 'momentum') {
@@ -489,7 +544,7 @@ export function readWarTerminations({
     const exhaustion01 = finite01(asObject(state.warExhaustion)[attackerId]);
     const attrition01 = currentAttrition01(deployment);
     const T = WAR_TERMINATION_TUNING;
-    const continue01 = clamp01(
+    const baseContinue01 = clamp01(
       economy01 * T.CONTINUE_ECONOMY_W
       + exhaustion01 * T.CONTINUE_EXHAUSTION_W
       + attrition01 * T.CONTINUE_ATTRITION_W,
@@ -500,6 +555,52 @@ export function readWarTerminations({
       return item ? settlementStrength(item, buildPressureSummary(pIndex, id)) : 0;
     };
     const victor = resolveVictor(attackerId, targetId, state, strengthFor);
+    const currentBelievedBand = warCostBalanceBand(
+      believedAdvantage(attackerId, targetId, state, strengthFor),
+    );
+    const currentTruthBand = warCostBalanceBand(
+      strengthFor(attackerId) - strengthFor(targetId),
+    );
+    const deploymentSinceTick = typeof deployment.sinceTick === 'number'
+      && Number.isFinite(deployment.sinceTick)
+      ? deployment.sinceTick
+      // A malformed imported deployment may not borrow an older war's read.
+      : now;
+    const priorWarCost = priorWarCostReceipt(
+      state,
+      attackerId,
+      targetId,
+      now,
+      deploymentSinceTick,
+    );
+    const trajectoryRead = evaluateWarCostTrajectory({
+      priorBelievedBand: priorWarCost?.believedBalanceBand,
+      currentBelievedBand,
+    });
+    const truthDiagnostic = compareWarCostTrajectoryTruth({
+      believedTrajectory: trajectoryRead.trajectory,
+      priorTruthBand: priorWarCost?.truthBalanceBand,
+      currentTruthBand,
+    });
+    const homeFront = readWarHomeFront({
+      actorId: attackerId,
+      deployment,
+      worldState: state,
+      snapshot,
+    });
+    const continueAfterHome = addPressure01(
+      baseContinue01,
+      homeFront.score01 * T.HOME_FRONT_CONTINUE_W,
+    );
+    const homeFrontContributed = continueAfterHome > baseContinue01;
+    let continue01 = continueAfterHome;
+    const trajectoryPressure = trajectoryPressure01(trajectoryRead.trajectoryMarginBand);
+    let trajectoryContributed = false;
+    if (trajectoryRead.trajectory === 'losing') {
+      const beforeTrajectory = continue01;
+      continue01 = addPressure01(beforeTrajectory, trajectoryPressure);
+      trajectoryContributed = continue01 > beforeTrajectory;
+    }
     const concession01 = victor.loserId === attackerId
       ? termBudgetFor(victor.believedMargin).margin01
       : 0;
@@ -519,11 +620,16 @@ export function readWarTerminations({
     const sunk01 = Number.isFinite(Number(injectedSunk))
       ? finite01(injectedSunk)
       : fallbackSunk01;
-    const stop01 = clamp01(
+    let stop01 = clamp01(
       concession01 * T.STOP_CONCESSION_W
       + face01 * T.STOP_FACE_W
       + sunk01 * T.STOP_SUNK_W,
     );
+    if (trajectoryRead.trajectory === 'winning') {
+      const beforeTrajectory = stop01;
+      stop01 = addPressure01(beforeTrajectory, trajectoryPressure);
+      trajectoryContributed = stop01 > beforeTrajectory;
+    }
 
     let momentum01 = 0;
     if (momentumActive(state)) {
@@ -587,6 +693,10 @@ export function readWarTerminations({
       decidingTerm,
       causeState: cause.causeState,
       dissolvedCauseTypes: cause.dissolvedCauseTypes,
+      trajectory: trajectoryRead.trajectory,
+      homeFrontBand: homeFront.band,
+      trajectoryContributed,
+      homeFrontContributed,
     });
     const receipt = {
       id: `war-termination.${stablePart(attackerId)}.${stablePart(targetId)}.${now}`,
@@ -599,6 +709,19 @@ export function readWarTerminations({
       costToContinueBand: bands.cost_to_continue,
       costToStopBand: bands.cost_to_stop,
       momentumBand: bands.momentum,
+      believedBalanceBand: currentBelievedBand,
+      truthBalanceBand: currentTruthBand,
+      trajectory: trajectoryRead.trajectory,
+      ...(trajectoryRead.trajectoryMarginBand
+        ? { trajectoryMarginBand: trajectoryRead.trajectoryMarginBand }
+        : {}),
+      ...(truthDiagnostic.truthTrajectory != null
+        ? { truthTrajectory: truthDiagnostic.truthTrajectory }
+        : {}),
+      trajectoryMisread: truthDiagnostic.misread,
+      homeFrontBand: homeFront.band,
+      homeFrontDurationBand: homeFront.durationBand,
+      homeFrontComponents: homeFront.receiptComponents,
       decidingTerm,
       causeState: cause.causeState,
       reason,
@@ -612,6 +735,10 @@ export function readWarTerminations({
       dissolvedCauseTypes: cause.dissolvedCauseTypes,
       decidingTerm,
       bands,
+      trajectory: trajectoryRead.trajectory,
+      trajectoryMarginBand: trajectoryRead.trajectoryMarginBand,
+      trajectoryMisread: truthDiagnostic.misread,
+      homeFrontBand: homeFront.band,
       receipt,
     });
   }

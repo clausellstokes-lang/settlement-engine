@@ -570,21 +570,47 @@ round-trip it with the settlement.
 ### WR-4 — COMPARATIVE COSTS + THE HOME FRONT (amendment F; rides
 `warTerminationEnabled` — same flag, second slice)
 - **New pure evaluator `warCosts.js`:** BELIEVED trajectory (three-way:
-  losing/winning/even) from the belief-ratio TREND the peace engine already
-  computes; forward-looking comparison (end-now vs end-later under the trajectory);
-  the EVEN case returns a null comparison so every other force decides (F's stated
-  feature — pin it: even ⇒ the deciding-term receipt never names trajectory).
+  losing/winning/even) from consecutive closed believed-advantage bands carried by
+  the EXISTING `pulseHistory[].warTerminationReads` receipt lane. The live peace
+  engine computes only a point-in-time believed margin; it does **not** retain the
+  temporal ratio trend the first architecture draft claimed. WR-4 therefore closes
+  each current actor-side margin into a receipt-safe band and compares it with the
+  newest prior receipt for the same attacker/target. First observation, missing
+  history, or an unchanged band is EVEN. The forward-looking comparison remains
+  end-now vs end-later under that real temporal movement; EVEN returns a null
+  comparison so every other force decides (F's stated feature — pin it: even ⇒ the
+  deciding-term receipt never names trajectory). A parallel truth band rides the
+  same private pulse receipt only for a post-hoc DM diagnostic and is structurally
+  absent from the behavioral evaluator.
 - **The home front is a THIRD STREAM, READ never invented (F's critical rule):
-  derived entirely from existing degradation — route decay (J), stores drawdown
-  (foodStockpile), population/named-cast cost (P1/P1a), regime demotions +
-  institution shells (K1/K2), trade partners lost. NO new war-tax parameter
-  anywhere.** The stream must ACCELERATE with duration (amendment L force #1) —
-  measured at the soak, not asserted.
+  derived entirely from existing degradation — downward route grade steps since
+  the deployment began (J), current deployed granary strain (foodStockpile), the
+  attacker's own conscript share of the conserved aggregate deployment bank
+  (`deployedPopulation` minus `leviedPopulationBySource`), shell records formed during
+  the war (K1/K2 where that optional ledger exists), and lost trade ties/markets.
+  There is NO named-NPC deployment or casualty ledger in P1/P1a; P1a is the
+  demographic decline-floor repair. Accordingly the `{npc}` home-front family is
+  ineligible until a later truthful named-person source exists, never filled by a
+  roster guess. J and K remain sparse until their own lifecycle wiring exists, and
+  absence contributes zero rather than fabricated degradation. NO new war-tax
+  parameter anywhere.** The stream must ACCELERATE with duration (amendment L
+  force #1), but duration multiplies only degradation actually read and can never
+  create cost by itself — measured at the soak, not asserted.
 - **Pins:** winning-abroad-losing-at-home reachable and receipted (F's explicit
-  demand); mistaken-court reachable (believed trajectory wrong vs truth, and the
-  receipt can say so post hoc); the even-case silence.
-**Lifecycle paths (added 2026-08-02):** this wave adds NO persisted state —
-warCosts.js is a pure evaluator; receipts only, nothing to regen or undo.
+  demand), but its public victory clause requires the parallel true trajectory to
+  be winning too — a mistaken court may emit the private misread, never a
+  fabricated public victory; mistaken-court reachable (believed trajectory wrong
+  vs truth, and the receipt can say so post hoc); the even-case silence.
+**Lifecycle paths (added 2026-08-02; corrected after the live census):** this wave
+adds NO dedicated persisted state — `warCosts.js` is a pure evaluator and its
+trajectory anchors are qualitative fields on the already-permitted termination
+pulse receipts, bounded to the current deployment's `sinceTick`. The existing
+`tradeWarState` prize row gains a conditional, codepoint-ordered
+`lostSupplierSinceTick` map so each actually displaced holder remains attributable
+until it regains the prize; each supplier keeps its own loss clock so a later
+third-party flip cannot re-date an older loss into a new war. Generic world-state
+clone/import already preserves that nested row. There is no deployment twin,
+standalone ledger, regen path, or separate undo verb.
 **Bands:** trajectory margin bands, home-front acceleration curve.
 
 ### WR-5 — THE TWO BOOKS + THE POLITICAL LOOP (amendments G, G2, H, D; rides
@@ -1098,14 +1124,20 @@ legitimacy start, plan-trigger thresholds.
   structurally-unreachable cause).
 - **J-WR-13 (the census STOP rule — REWRITTEN 2026-08-02, self-audit; the first
   issue claimed the §2 rows were already corrected while the table stood
-  unamended, and undercounted the corrections):** THREE census overstatements are
-  KNOWN and now corrected in place in §2: (1) "jailed applies to any named soul" —
+  unamended, and undercounted the corrections):** SIX census overstatements are
+  KNOWN and now corrected in place or by a pre-build ruling: (1) "jailed applies to any named soul" —
   false; jailed is the corruption-exposure path only, and the foreign-guest hold
   is named NEW WORK in WR-7b; (2) the disposition row — the tree already carries
   the single-channel dispositionStats substrate, so WR-2 extends, never duplicates
-  (J-WR-11); (3) "14 peace mirrors" — 13, verified by enumeration. STANDING RULE:
-  any implementer finding a FOURTH census overstatement — anything beyond the
-  three named above — STOPS and reports rather than building on it.
+  (J-WR-11); (3) "14 peace mirrors" — 13, verified by enumeration; (4) WR-3's
+  three named satellite paths did not mint campaign members, corrected by its
+  owner-delegated graduation ruling; (5) WR-4's claimed existing temporal
+  belief-ratio trend does not exist, corrected to consecutive qualitative pulse
+  receipts; (6) P1/P1a does not account named people spent by war, so WR-4 reads
+  only the attacker's own conscript share of the conserved aggregate deployment
+  bank (net of allied/vassal source levies) and skips `{npc}` prose. STANDING
+  RULE: any implementer finding another census overstatement STOPS and reports
+  before correcting or building on it.
 - **J-WR-14 (the atrocity pair, added 2026-08-02):** the atrocity-coalition casus
   lands as `atrocity_answer` ↔ `atrocity_atoned`, minted from BELIEVED razings per
   J-WR-7's news-speed discipline. Names vetoable; the structural need (walker

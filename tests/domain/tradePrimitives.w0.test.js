@@ -264,6 +264,44 @@ describe('tradeWar — same seed ⇒ same flip (the deterministic contest pin)',
     expect(prize.buyerId).toBe('buyer');
     expect(prize.commodityId).toBe('grain');
     expect(prize.incumbentId).toBe('inc');
+    expect(prize.lostSupplierSinceTick).toEqual({ inc: 5 });
+  });
+
+  test('a held crown retains the complete active displaced-supplier set', () => {
+    const first = runContest('pin-seed');
+    const { campaign, saves } = contestFixture();
+    const snap = snapshotFor(campaign, saves);
+    const held = evaluateTradeWar({
+      snapshot: snap,
+      worldState: { ...snap.worldState, tradeWarState: first.tradeWarState },
+      rng: createPRNG('pin-seed'),
+      tick: 6,
+      now: NOW,
+      rules: { warLayerEnabled: true },
+    });
+    expect(held.tradeWarState['buyer:grain'].winnerId)
+      .toBe(first.tradeWarState['buyer:grain'].winnerId);
+    expect(held.tradeWarState['buyer:grain'].lostSupplierSinceTick).toEqual({ inc: 5 });
+  });
+
+  test('the first held evaluation migrates a readable pre-WR-4 displaced incumbent', () => {
+    const first = runContest('pin-seed');
+    const legacyPrize = { ...first.tradeWarState['buyer:grain'] };
+    delete legacyPrize.lostSupplierSinceTick;
+    const { campaign, saves } = contestFixture();
+    const snap = snapshotFor(campaign, saves);
+    const adopted = evaluateTradeWar({
+      snapshot: snap,
+      worldState: {
+        ...snap.worldState,
+        tradeWarState: { 'buyer:grain': legacyPrize },
+      },
+      rng: createPRNG('pin-seed'),
+      tick: 6,
+      now: NOW,
+      rules: { warLayerEnabled: true },
+    });
+    expect(adopted.tradeWarState['buyer:grain'].lostSupplierSinceTick).toEqual({ inc: 5 });
   });
 
   test('the seed is LOAD-BEARING: across a seed sweep the near-tied contest crowns more than one winner', () => {
