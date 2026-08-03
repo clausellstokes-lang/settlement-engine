@@ -250,6 +250,22 @@ authored here so "SP-N landed" resolves corpus-wide.]
   soak, never assumed — and the authoring bill this creates for Sol is
   priced, deliberate, and small per kind (three more sentences than the
   exemplar, in the house voice, at the register floor).
+  **[AMENDED 2026-08-03 (owner: "I want more sentences") — THE
+  FREQUENCY-SCALED FLOOR:]** the flat ≥4 floor is the MINIMUM for
+  rare/major kinds only; variant depth scales with FIRING CADENCE, read
+  from each kind's own Clock/significance entries and then MEASURED:
+  chronic/routine kinds (weekly-to-seasonal cadence) carry ≥8–12
+  angle-distinct variants; notable ≥6; major/rare ≥4. The soak's
+  phrase-repetition envelope is the empirical arbiter — any kind whose
+  pool measurably exhausts inside a season window at its observed firing
+  rate is BELOW ITS FLOOR regardless of count, and deepening it is
+  maintenance, not new design. THE LEGACY CLAUSE: the floor extends to
+  the ~269 LIVE routed tokens (today largely single-voiced) — their
+  pools are pre-authored in the content annexes and wired under the
+  lit-kind prose discipline (a disclosed same-seed prose shift per
+  J-POP-12/J-INT-13's recorded-ruling pattern; this amendment is that
+  recorded ruling's design half — the per-kind golden plan still lands
+  at wiring).
 - **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion + the
   mode-speed table (J-D11(b)) landed as spine infrastructure ahead of all six.
 - **SP-8 THE AGE LAYER [CORRECTED 2026-08-02 (fp-audit) — new, per the
