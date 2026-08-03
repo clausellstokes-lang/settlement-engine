@@ -1846,5 +1846,9 @@ on the single seed `hk2-structured`. HK-3 cured that city so completely that
 retention now has no above-K overflow left to take there, and the assertion read
 `29 < 29`. The claim it was making is about the LAYER, not one seed's luck, so it
 now runs a six-city family and asserts retention never ADDS a hook anywhere and
-still drops somewhere (measured: 4 of 6 still drop). Strictly stronger, and no
-longer hostage to a lucky seed.
+still drops somewhere (measured: 1 of 6 still drops — CORRECTED 2026-08-03 by
+the cycle-7 adversarial verifier, four deterministic re-runs [dark,lit] =
+[22,22],[30,30],[25,25],[22,22],[26,21],[27,27]; the originally recorded
+"4 of 6" was false. At the pre-HK-3 base all six drop, so the assertion's
+reachability is thinner than first recorded but real). Strictly stronger, and
+no longer hostage to a lucky seed.

@@ -463,7 +463,7 @@ export function chooseAmongCompetingOffers({ tallies, closeBand01 } = {}) {
     const cast = Array.isArray(row.ballots) ? row.ballots : [];
     for (const entry of cast) {
       const ballot = recordOf(entry);
-      edges.add(`${strictText(ballot.sideId)} ${strictText(ballot.counterpartId)}`);
+      edges.add(`${strictText(ballot.sideId)}\u0000${strictText(ballot.counterpartId)}`);
     }
   }
   if (edges.size > 1) return refusal('side_mismatch');

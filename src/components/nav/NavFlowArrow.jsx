@@ -9,11 +9,11 @@
  *
  * THE ADJACENCY GUARD: the chevron renders only when `to` — the tab actually
  * rendered next ON THIS SURFACE — is the flow successor lib/routes.js declares
- * in NAV_FLOW. The desktop ribbon runs Welcome · Create · Library · Realm, so
- * both chevrons draw; the mobile bottom nav omits Realm (Gallery follows
- * Library there), so Library draws none. An arrow pointing at the wrong
- * neighbour would teach a false lesson about where the work goes, which is
- * worse than no arrow at all.
+ * in NAV_FLOW. The mobile bottom nav is the ONLY mount (LD-2 retired the
+ * desktop ribbon's chevrons); it omits Realm (Gallery follows Library there),
+ * so Library draws none. An arrow pointing at the wrong neighbour would teach
+ * a false lesson about where the work goes, which is worse than no arrow at
+ * all.
  *
  * Harmony: the chevron takes GOLD on the active tab and the quieter BORDER
  * elsewhere, matching the tab's own resting/active register, and carries the
@@ -40,8 +40,8 @@ export default function NavFlowArrow({ from, to, active = false }) {
       aria-hidden="true"
       data-testid={`nav-flow-${from}-${to}`}
       style={{
-        // Sits on the seam between the two tabs (the desktop ribbon's 4px gap;
-        // the mobile bar's column boundary) so it reads as the right edge of
+        // Sits on the seam between the two tabs (the mobile bar's column
+        // boundary — the only live mount since LD-2) so it reads as the right edge of
         // this tab opening into the next, not as a mark belonging to either.
         position: 'absolute', right: -3, top: '50%',
         width: 6, height: 6, marginTop: -3,

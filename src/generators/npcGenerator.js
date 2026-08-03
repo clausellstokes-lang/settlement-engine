@@ -77,10 +77,12 @@ const generateNPCGoal = role => {
 // `.themes` is HK-3's second Set, which stops them telling the same BEAT in two
 // different strings. title1 and title2 are drawn against the SAME registry
 // (title2 is therefore always distinct from title1 without the old guard needing
-// to prove it). ONE object rather than two positional Sets on purpose: a call
-// site that forgets to thread it hits `used.has is not a function` at the first
-// draw, where two loose Sets would have silently degraded to naive picks and
-// regressed the repeat rate with every gate still green.
+// to prove it). ONE object rather than two positional Sets on purpose: the two
+// Sets travel together or not at all, so no call site can thread half a
+// registry. NOTE (corrected 2026-08-03): the draw sites reach it via `reg?.`,
+// so a call site that forgets to thread it degrades SILENTLY to naive picks —
+// it does not throw. The real guards are the pipeline-level roll-budget and
+// theme-repeat pins, which red on exactly that regression.
 const generateSingleNPC = (
   role,
   namingTier,

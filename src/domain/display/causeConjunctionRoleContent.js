@@ -32,8 +32,6 @@
  * This head keeps the contract above, the assembly order, and the single shallow
  * Object.freeze the read surface has always had. Behaviour-identical: the
  * assembled object is deep-equal, key-order-equal, to the pre-split table.
- *
- * @type {Readonly<Record<string, Record<string, Record<string, ReadonlyArray<string>>>>>}
  */
 import { MILITARY_ROLE_CONTENT } from './causeConjunctionRole/military.js';
 import { RULER_ROLE_CONTENT } from './causeConjunctionRole/ruler.js';
@@ -48,6 +46,7 @@ import { LABOR_RESOURCE_ROLE_CONTENT } from './causeConjunctionRole/laborResourc
 import { DIPLOMAT_OUTSIDER_ROLE_CONTENT } from './causeConjunctionRole/diplomatOutsider.js';
 import { DISSIDENT_ROLE_CONTENT } from './causeConjunctionRole/dissident.js';
 
+/** @type {Readonly<Record<string, Record<string, Record<string, ReadonlyArray<string>>>>>} */
 export const ROLE_CONTENT = Object.freeze({
   military: MILITARY_ROLE_CONTENT,
   ruler: RULER_ROLE_CONTENT,

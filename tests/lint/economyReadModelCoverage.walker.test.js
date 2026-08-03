@@ -105,6 +105,7 @@ const PRINT_DEFERRED = [
   'src/pdf/lib/headlines.js',
   'src/pdf/lib/liveWorld.js',
   'src/pdf/lib/viewModel.js',
+  'src/pdf/lib/viewModelBodySlices.js',
   'src/pdf/sections/Cover.jsx',
   'src/pdf/sections/EconomicsTrade.jsx',
   'src/pdf/sections/IdentityDailyLife.jsx',
