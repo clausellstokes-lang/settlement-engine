@@ -14,7 +14,7 @@
   "new invariant with no entry REDS; stale entry REDS; label claims match the",
   "sweep script bidirectionally; uncovered count matches the baseline exactly."
  ],
- "uncoveredBaseline": 199,
+ "uncoveredBaseline": 198,
  "rationales": {
   "pglite-executed": "Executed-SQL boundary test: it loads the real migration SQL into pglite and asserts behavior by EXECUTION \u2014 the stronger form of proof this sweep approximates for source-scan invariants. Its mutation target is committed migration SQL; transiently mutating shared migration files risks discarding parallel-session work, and each pglite boot is heavy, so standing family-level mutation proof lives in the sweep areas security/runIf migration renumber, security/verify_jwt platform gate loosened, and security/public table without RLS. Per-suite mutation proofs were executed at build time (each suite\u2019s Done-when in docs/A_PLUS_ROADMAP.md).",
   "postgres-concurrency-executed": "Executed two-backend PostgreSQL concurrency contract: CI provisions a real PostgreSQL service and the test coordinates independent client sessions to observe the owner-lock wait before exercising the shared command row. That live wait-for graph and the explicit 40P01 failure assertion are stronger than a source-scan mutation. Transiently rewriting shared migration SQL inside the mutation sweep would risk parallel work and still could not reproduce the required concurrent backend schedule more faithfully.",
@@ -435,7 +435,9 @@
    "kind": "uncovered"
   },
   "tests/domain/simulationSpine.test.js": {
-   "kind": "uncovered"
+   "kind": "mutation",
+   "label": "prose/spine splice guard sentence-break check deleted",
+   "what": "Standing plant deletes the mid-sentence-terminator refusal from nounPhrase(), the chokepoint every noun slot in the spine draws through. That refusal is what keeps a narrative body out of a one-line slot, and its absence is the shape that shipped \"People fear a return of the settlement is under active siege. Every resource decision is a military decision. ...\" to first-run users. The guard has TWO independent refusals (this one and the MAX_PHRASE_CHARS cap) and the suite used to prove only their CONJUNCTION: deleting either -- or both -- left every assertion green, because the live vignette that motivated the guard trips both at once. The pins this entry claims use fixtures that trip EXACTLY ONE refusal each (an over-long but terminator-free label; a short two-sentence label), so each deletion is caught alone, at two different rungs, with a specificity control proving a clean phrase still gets through. Mutation target src/domain/simulationSpine.js is tracked and clean as of this lane's commit."
   },
   "tests/domain/trace.coverage.test.js": {
    "kind": "uncovered"

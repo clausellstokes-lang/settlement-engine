@@ -154,6 +154,99 @@ describe('the spine mold', () => {
   });
 });
 
+// ── The splice guard, one arm at a time ────────────────────────────────────
+
+describe('the splice guard has TWO refusals, and each is load-bearing alone', () => {
+  /**
+   * `nounPhrase()` refuses a candidate for either of two independent reasons:
+   *
+   *   1. it is LONGER than MAX_PHRASE_CHARS — no slot was written for it;
+   *   2. it carries a sentence terminator followed by whitespace — a body
+   *      wearing a phrase's clothes.
+   *
+   * Neither refusal implies the other, and the suite used to prove only their
+   * CONJUNCTION: the live vignette that motivated the guard is both long AND
+   * multi-sentence, so deleting either check — or, in fact, both — left every
+   * assertion green. Two guards proved by one fixture is one guard's worth of
+   * proof and a free pass for whichever half is deleted first.
+   *
+   * Each fixture below therefore trips EXACTLY ONE refusal and is clean under
+   * the other, so the deletion mutants can only be caught one at a time.
+   */
+
+  /** Long, and deliberately terminator-free: only the length cap can refuse it. */
+  const OVERLONG_LABEL =
+    'a caravan levy dispute between the salt factors and the river wardens'
+    + ' that has run for three seasons';
+
+  /** Short, and deliberately multi-sentence: only the terminator check refuses it. */
+  const MID_SENTENCE_LABEL = 'The mill burned down. No one rebuilt it';
+
+  it('the fixtures really do isolate one guard each', () => {
+    // The control on the controls. If a fixture ever drifts across the other
+    // guard's threshold, its mutant stops proving what it claims to prove and
+    // this pin says so before the silence does.
+    expect(OVERLONG_LABEL.length, 'the overlong fixture must exceed the cap')
+      .toBeGreaterThan(80);
+    expect(OVERLONG_LABEL, 'the overlong fixture must carry NO sentence break')
+      .not.toMatch(/[.!?]\s/);
+    expect(MID_SENTENCE_LABEL.length, 'the mid-sentence fixture must sit UNDER the cap')
+      .toBeLessThanOrEqual(80);
+    expect(MID_SENTENCE_LABEL, 'the mid-sentence fixture must carry a sentence break')
+      .toMatch(/[.!?]\s/);
+  });
+
+  it('GUARD 1 — the LENGTH cap alone refuses an over-long phrase', () => {
+    const spine = deriveSimulationSpine({
+      name: 'Guardtown', stressors: [{ label: OVERLONG_LABEL }],
+    });
+    // Refused, so the arm declines and the fallback answers.
+    expect(spine.strainedBy)
+      .toBe('It is currently strained by nothing it cannot carry at the moment.');
+    // Anchored on the fallback pinned above: a drift that empties the line
+    // cannot pass this vacuously.
+    expect(spine.strainedBy).not.toContain('caravan levy dispute');
+  });
+
+  it('GUARD 2 — the SENTENCE-BREAK check alone refuses a short two-sentence phrase', () => {
+    const spine = deriveSimulationSpine({
+      name: 'Guardtown', stressors: [{ label: MID_SENTENCE_LABEL }],
+    });
+    expect(spine.strainedBy)
+      .toBe('It is currently strained by nothing it cannot carry at the moment.');
+    expect(spine.strainedBy).not.toContain('The mill burned down');
+    expect(spine.strainedBy).not.toContain('No one rebuilt it');
+  });
+
+  it('the guard is SPECIFIC: a phrase clean on both counts still gets through', () => {
+    // The negative control for both mutants. Without this, deleting nothing
+    // and refusing everything would satisfy the two pins above perfectly.
+    const spine = deriveSimulationSpine({
+      name: 'Guardtown', stressors: [{ label: 'Salt Blight' }],
+    });
+    expect(spine.strainedBy).toBe('It is currently strained by salt blight.');
+  });
+
+  it('both refusals hold on the FEAR rung too, not only the strain rung', () => {
+    // `nounPhrase` is a shared chokepoint, so the guards must be provable at a
+    // second slot: a per-rung fix would satisfy the strain pins and leave this
+    // one red.
+    for (const label of [OVERLONG_LABEL, MID_SENTENCE_LABEL]) {
+      const spine = deriveSimulationSpine({
+        name: 'Guardtown', defenseProfile: { threats: [{ label }] },
+      });
+      expect(spine.peopleFear, `threat "${label.slice(0, 24)}…" reached the fear slot`)
+        .toBe('Its people fear nothing they will say out loud.');
+    }
+    // Specificity control at the same slot.
+    expect(
+      deriveSimulationSpine({
+        name: 'Guardtown', defenseProfile: { threats: [{ label: 'Bandit Raids' }] },
+      }).peopleFear,
+    ).toBe('Its people fear bandit raids.');
+  });
+});
+
 // ── The two defects the chair read on the live site ────────────────────────
 
 describe('the first-contact prose defects', () => {

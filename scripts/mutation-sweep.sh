@@ -660,6 +660,19 @@ check_caught "prose/spine frame word doubled into the body" src/domain/simulatio
 perl -0pi -e "s/if \(config && typeof config === 'object' && 'seed' in config\)/if (false)/" src/generators/generateSettlementPipeline.js
 check_caught "generation/pipeline seed-slot guard removed" src/generators/generateSettlementPipeline.js "npx vitest run tests/generators/pipelineSeedSlotContract.test.js --no-file-parallelism"
 
+# 66. The splice guard's SENTENCE-BREAK refusal deleted — nounPhrase() is the one
+#     chokepoint every noun slot in the spine draws through, and this is the
+#     refusal that keeps a narrative body out of a one-line slot. Its absence is
+#     the shape that shipped "People fear a return of the settlement is under
+#     active siege. Every resource decision is a military decision. ..." to
+#     first-run users. The guard has TWO independent refusals (this and the
+#     MAX_PHRASE_CHARS cap), and the suite used to prove only their CONJUNCTION:
+#     deleting either, or both, left every assertion green, because the vignette
+#     that motivated the guard trips both at once. The claiming pins use fixtures
+#     that trip EXACTLY ONE refusal each, so each deletion is caught alone.
+perl -0pi -e "s/  if \(\/\[\.!\?\]\\\\s\/\.test\(trimmed\)\) return null;\n//" src/domain/simulationSpine.js
+check_caught "prose/spine splice guard sentence-break check deleted" src/domain/simulationSpine.js "npx vitest run tests/domain/simulationSpine.test.js --no-file-parallelism"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done
