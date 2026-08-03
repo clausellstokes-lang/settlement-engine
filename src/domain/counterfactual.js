@@ -55,6 +55,22 @@ import { deriveDailyLife, compareDailyLife } from './dailyLife.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
 
+/** @typedef {import('./settlement.schema.js').SimSettlement} SimSettlement */
+
+/**
+ * The ref a caller names a counterfactual target with. `action` defaults to
+ * 'remove' when absent; `type`/`id` are required for a non-empty projection.
+ *
+ * @typedef {{ type?: string, id?: string, action?: string }} CounterfactualRef
+ */
+
+/**
+ * A diagnostic emitted by the projection (mirrors the event pipeline's
+ * PipelineWarning shape, which is what gets spread into this list).
+ *
+ * @typedef {{ severity: string, message: string }} CounterfactualWarning
+ */
+
 // ── Action vocabulary ────────────────────────────────────────────────────
 
 export const COUNTERFACTUAL_ACTIONS = Object.freeze([
@@ -64,9 +80,10 @@ export const COUNTERFACTUAL_ACTIONS = Object.freeze([
 // ── Action → event mapping for the event-pipeline path ───────────────────
 
 /**
- * @param {any} type
- * @param {any} id
- * @param {any} action
+ * @param {string} type    entity kind ('institution' | 'faction' | 'npc' | 'chain')
+ * @param {string} id      stable entity id
+ * @param {string} action  one of COUNTERFACTUAL_ACTIONS
+ * @returns {{ type: string, targetId: string, payload?: { severity: number }, cause: string }|null}
  */
 function buildEventFor(type, id, action) {
   // Bare-id institution targets (e.g. 'institution.granary'): the
@@ -91,10 +108,11 @@ function buildEventFor(type, id, action) {
 // ── Manual clone-and-modify (factions / chains / replace) ────────────────
 
 /**
- * @param {any} settlement
- * @param {any} type
- * @param {any} id
- * @param {any} action
+ * @param {SimSettlement} settlement
+ * @param {string} type
+ * @param {string} id
+ * @param {string} action
+ * @returns {SimSettlement}
  */
 function manualMutate(settlement, type, id, action) {
   // Pure clone strategy: spread the relevant paths so consumers
@@ -104,7 +122,7 @@ function manualMutate(settlement, type, id, action) {
   if (type === 'faction') {
     const factionId = String(id || '');
     const slug = factionId.startsWith('faction.') ? factionId.slice('faction.'.length) : factionId;
-    const factions = (settlement.powerStructure?.factions || []).map((/** @type {any} */ f) => {
+    const factions = (settlement.powerStructure?.factions || []).map((f) => {
       const fSlug = (f?.faction || f?.name || '').toLowerCase().replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '');
       const matched = f?.id === factionId || fSlug === slug;
       if (!matched) return f;
@@ -124,7 +142,7 @@ function manualMutate(settlement, type, id, action) {
 
   if (type === 'chain') {
     const chainId = String(id || '');
-    const activeChains = (settlement.economicState?.activeChains || []).map((/** @type {any} */ c) => {
+    const activeChains = (settlement.economicState?.activeChains || []).map((c) => {
       const candidateId = `chain.${(c?.needKey || '').toLowerCase()}.${(c?.chainId || '').toLowerCase()}`;
       if (chainId === candidateId || c?.id === chainId) {
         const nextStatus =
@@ -152,11 +170,9 @@ function manualMutate(settlement, type, id, action) {
  * Project the consequences of removing / weakening / strengthening an
  * entity. Pure: never mutates the input settlement.
  *
- * @param {any} settlement
- * @param {Object} ref
- * @param {string} ref.type    'institution' | 'faction' | 'npc' | 'chain'
- * @param {string} ref.id      Stable id of the entity.
- * @param {string} ref.action  'remove' | 'weaken' | 'strengthen' | 'replace'
+ * @param {SimSettlement|null|undefined} settlement
+ * @param {CounterfactualRef|null|undefined} ref
+ *   `{ type, id, action }` — action defaults to 'remove'.
  * @returns {Object} CounterfactualResult
  */
 export function counterfactual(settlement, ref) {
@@ -204,7 +220,6 @@ export function counterfactual(settlement, ref) {
 
   // 3. Re-derive AFTER state.
   const afterSystemState = pipelineResult?.afterSystemState || deriveSystemState(nextSettlement);
-  /** @type {any} */
   const afterCausalState = pipelineResult?.afterCausalState || deriveCausalState(nextSettlement);
   const afterCapacities  = deriveAllCapacities(nextSettlement);
   const afterDailyLife   = deriveDailyLife(nextSettlement);
@@ -265,7 +280,7 @@ export function counterfactual(settlement, ref) {
  * Enumerate every entity on the settlement that the counterfactual
  * tool can act on. Useful for the UI's "pick a target" surface.
  */
-/** @param {any} settlement */
+/** @param {SimSettlement|null|undefined} settlement */
 export function counterfactualCandidates(settlement) {
   if (!settlement) return [];
   const out = [];
@@ -307,7 +322,7 @@ export function supportedCounterfactualActions() {
  * Summarize a counterfactual result as a flat array of lines. Same
  * pattern as summarizeEventResult / summarizeForecast.
  */
-/** @param {any} result */
+/** @param {{ summary?: string[] }|null|undefined} result */
 export function summarizeCounterfactual(result) {
   if (!result || !Array.isArray(result.summary)) return [];
   return [...result.summary];
@@ -316,8 +331,8 @@ export function summarizeCounterfactual(result) {
 // ── Helpers ──────────────────────────────────────────────────────────────
 
 /**
- * @param {any} ref
- * @param {any[]} messages
+ * @param {CounterfactualRef|null|undefined} ref
+ * @param {Array<string|CounterfactualWarning>} messages
  */
 function makeEmptyResult(ref, messages) {
   return {
@@ -338,13 +353,13 @@ function makeEmptyResult(ref, messages) {
   };
 }
 
-/** @param {any} s */
+/** @param {unknown} s */
 function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
 /**
- * @param {any} s
+ * @param {unknown} s
  * @param {number} n
  */
 function truncateText(s, n) {
