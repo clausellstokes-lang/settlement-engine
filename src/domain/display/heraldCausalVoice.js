@@ -95,6 +95,28 @@ export const HEADLINE_MAX_GESTURES = 1;
 export const HEADLINE_MAX_CHARS = 160;
 
 /**
+ * THE PLANT MARKER — the prefix the plant writers stamp on the SYNTHETIC lineage
+ * id they mint (`disinfo:{liarId}:{audienceId}:{seededTick}`).
+ *
+ * WHY A PREFIX AND NOT PRESENCE. `lineageIds` is the ORDINARY telling lineage:
+ * `rumorNetwork.js` writes `[eventRef, originTelling]` on EVERY arrival and
+ * appends a relay id on every hop, so "carries a lineage" describes every
+ * receipt that ever travelled and marks nothing. Warranting on presence made the
+ * paper call an ordinary carried report PLANTED while the integrity register,
+ * reading the same hop, called it clean — one popup, two answers, and the
+ * grander one was the false one. The marker is the spelling, and only the
+ * spelling.
+ *
+ * THE FENCE HOLDS: this is STRING DISCIPLINE over an id the walk already
+ * resolved onto the hop. The composer does not read the disinfo ledger, cannot
+ * reach it, and learns nothing about who planted what — that stays the audit
+ * register's, on the other side of the fence, where it belongs. The one
+ * occurrence of the token here is a REVIEWED exemption in
+ * tests/lint/heraldContaminationFence.test.js, pinned verbatim so it cannot grow.
+ */
+export const PLANTED_LINEAGE_PREFIX = 'disinfo:';
+
+/**
  * EDGE WARRANTS — the receipt fields that license an edge stronger than plain
  * succession. Each row names the field the engine actually records; a link with
  * none of them is `followed`.
@@ -104,10 +126,16 @@ export const HEADLINE_MAX_CHARS = 160;
  * @type {ReadonlyArray<{ pool: string, warrant: (link: Record<string, unknown>) => boolean }>}
  */
 const EDGE_WARRANTS = Object.freeze([
-  // The DM arm: the child telling carries a synthetic disinfo lineage. The pool
-  // itself degrades to `believed` for a player audience inside connectiveFor —
-  // this module never learns the planter's name.
-  { pool: 'planted', warrant: (l) => Array.isArray(l.lineageIds) && l.lineageIds.length > 0 },
+  // The DM arm: the hop's lineage carries a SYNTHETIC id, marked by the plant
+  // writers' own prefix. Presence of a lineage marks nothing — every carried
+  // telling has one — so the warrant is the SPELLING (see
+  // PLANTED_LINEAGE_PREFIX). The pool degrades to `believed` for a player
+  // audience; this module never learns the planter's name either way.
+  {
+    pool: 'planted',
+    warrant: (l) => Array.isArray(l.lineageIds)
+      && l.lineageIds.some((id) => String(id).startsWith(PLANTED_LINEAGE_PREFIX)),
+  },
   // A covert prior surfaced: the receipt for the SURFACING is what is new.
   { pool: 'exposed', warrant: (l) => /_exposed$|_unmasked$/.test(String(l.type || '')) },
   // The non-act edge — a named refusal is the cause. The counterforce's home.

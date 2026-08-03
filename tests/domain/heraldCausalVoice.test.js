@@ -53,6 +53,7 @@ import {
 } from '../../src/domain/display/heraldJoinMolds.js';
 import {
   HEADLINE_MAX_GESTURES,
+  PLANTED_LINEAGE_PREFIX,
   heraldEntryProse,
   heraldHeadlineRegister,
   heraldSubheaderRegister,
@@ -152,6 +153,24 @@ describe('PER-LINK ENTAILMENT — the edge licenses the connective', () => {
     expect(poolForLink({ type: 'treaty_default_detected' })).toBe('breached');
     expect(poolForLink({ type: 'war_cause_dissolved' })).toBe('dissolved');
     expect(poolForLink({ lineageIds: ['disinfo:a:b:3'] })).toBe('planted');
+  });
+
+  test('THE PLANT WARRANT IS THE SPELLING, NOT THE PRESENCE (F2)', () => {
+    // `rumorNetwork` writes [eventRef, originTelling] on EVERY arrival and appends
+    // a relay id per hop. Warranting on presence called every carried report a
+    // plant; the marker is the synthetic prefix and nothing else.
+    expect(PLANTED_LINEAGE_PREFIX).toBe('disinfo:');
+    expect(poolForLink({ lineageIds: ['evt-77'] })).toBe('followed');
+    expect(poolForLink({ lineageIds: ['evt-77', 'telling:karsh:12'] })).toBe('followed');
+    expect(poolForLink({ lineageIds: ['evt-77', 'telling:karsh:12', 'relay:elmspur:19'] })).toBe('followed');
+    // …and a lineage that merely CONTAINS the word is not the marker either.
+    expect(poolForLink({ lineageIds: ['telling-about-disinfo:karsh'] })).toBe('followed');
+    // The real spelling, anywhere in the lineage, still lands.
+    expect(poolForLink({ lineageIds: [`${PLANTED_LINEAGE_PREFIX}karsh:elmspur:10`] })).toBe('planted');
+    expect(poolForLink({ lineageIds: ['evt-77', `${PLANTED_LINEAGE_PREFIX}karsh:elmspur:10`] })).toBe('planted');
+    // A more specific warrant still wins over the default, so the fix cannot
+    // have quietly demoted an ordinary lineage-bearing refusal.
+    expect(poolForLink({ type: 'peace_refused', lineageIds: ['evt-77'] })).toBe('refused');
   });
 
   test('the `planted` arm degrades to `believed` for a player audience', () => {

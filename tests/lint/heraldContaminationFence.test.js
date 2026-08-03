@@ -120,6 +120,31 @@ const BELIEF_SOURCE_TOKENS = Object.freeze([
 ]);
 
 /**
+ * THE REVIEWED TOKEN EXEMPTIONS — the ONLY occurrences of a banned spelling
+ * inside the composer set, quoted verbatim so the exemption cannot grow past the
+ * line it was granted for.
+ *
+ * The one granted so far is the PLANT MARKER: `poolForLink` must distinguish a
+ * planted telling from an ordinary carried one, and the distinguishing fact is
+ * the PREFIX of a synthetic lineage id the walk already resolved onto the hop.
+ * That is string discipline over data in hand — no ledger, no import, no reach —
+ * and the alternative (warranting on lineage PRESENCE) made the Herald call
+ * every carried report planted while the audit register called the same hop
+ * clean. The pins below hold the exemption to exactly that shape: a bare
+ * string-literal declaration, present verbatim, and load-bearing.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+const REVIEWED_TOKEN_EXEMPTIONS = Object.freeze({
+  'src/domain/display/heraldCausalVoice.js': Object.freeze([
+    "export const PLANTED_LINEAGE_PREFIX = 'disinfo:';",
+  ]),
+});
+
+/** A composer's source with its reviewed exemption lines removed. */
+const scannable = (rel) => (REVIEWED_TOKEN_EXEMPTIONS[rel] || [])
+  .reduce((source, line) => source.split(line).join(''), code(rel));
+
+/**
  * THE POSITIVE CONTROLS — modules that legitimately read the believed world.
  * `heraldIntegrity.js` is here BY RULING: the audit register reads the disinfo
  * record precisely so the composer never has to.
@@ -149,12 +174,32 @@ describe('REACHABILITY — the composer closure is closed and reviewed', () => {
 });
 
 describe('TOKEN SCAN — no belief spelling appears in the composer set', () => {
-  test('every composer is clean of every token', () => {
+  test('every composer is clean of every token, outside its reviewed exemptions', () => {
     for (const rel of REVIEWED_CLOSURE) {
-      const source = code(rel);
+      const source = scannable(rel);
       for (const token of BELIEF_SOURCE_TOKENS) {
         expect(source.includes(token), `${rel} spends the belief token "${token}"`).toBe(false);
       }
+    }
+  });
+
+  test('every exemption is present VERBATIM, is a bare literal declaration, and is load-bearing', () => {
+    for (const [rel, lines] of Object.entries(REVIEWED_TOKEN_EXEMPTIONS)) {
+      expect(REVIEWED_CLOSURE, `${rel} is exempted but is not in the closure`).toContain(rel);
+      const source = code(rel);
+      for (const line of lines) {
+        // A stale exemption is a licence nobody is using and a hole nobody is
+        // watching: it reds rather than quietly widening the scan.
+        expect(source.includes(line), `${rel}: exemption no longer appears verbatim — "${line}"`).toBe(true);
+        // The shape is the guarantee: a const bound to a string literal cannot be
+        // a ledger read, an import, or a call, whatever the token inside it says.
+        expect(line, rel).toMatch(/^export const [A-Z][A-Z0-9_]* = '[^']*';$/);
+        expect(source.split(line), `${rel}: exemption granted more than once`).toHaveLength(2);
+      }
+      // LOAD-BEARING: without the exemption the file really would trip the scan,
+      // so the carve-out is measuring something rather than decorating.
+      const tripped = BELIEF_SOURCE_TOKENS.filter((token) => source.includes(token));
+      expect(tripped.length, `${rel}: the exemption protects nothing — the scan does not trip without it`).toBeGreaterThan(0);
     }
   });
 });

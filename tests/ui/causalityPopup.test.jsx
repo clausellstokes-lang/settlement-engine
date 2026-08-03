@@ -28,6 +28,7 @@ afterEach(cleanup);
 
 import CausalityPopup from '../../src/components/map/CausalityPopup.jsx';
 import HeraldHeadline from '../../src/components/map/HeraldHeadline.jsx';
+import { CONNECTIVE_POOLS } from '../../src/domain/display/heraldCausalGrammar.js';
 
 const LINEAGE = 'disinfo:karsh:elmspur:10';
 
@@ -173,6 +174,35 @@ describe('THE MANIPULATION DISCLOSURE', () => {
     const planted = screen.getAllByTestId('causality-disclosure-row')
       .find((r) => r.getAttribute('data-integrity') === 'planted_worn');
     expect(planted.textContent).toMatch(/never wrote|nobody's design|finished by accident|wear has no author/);
+  });
+
+  test('THE DIVERGENCE PIN: an ORGANIC lineage reads the same on both surfaces (F2)', () => {
+    // `rumorNetwork` stamps [eventRef, originTelling, …relays] on every arrival,
+    // so a lineage-bearing hop is the ORDINARY case. Before the prefix warrant,
+    // the composer called this hop PLANTED in the telling while the integrity
+    // register — reading the same hop, against the same ledger — called it clean.
+    // One popup may never carry both answers, and the grander one was the lie.
+    const world = makeWorld();
+    world.pulseHistory[0].selectedOutcomes[1].lineageIds = ['evt-b', 'telling:elmspur:41'];
+    render(<CausalityPopup open onClose={() => {}} item={ITEM} worldState={world} nameById={NAMES} seesSecrets />);
+
+    const states = screen.getAllByTestId('causality-disclosure-row').map((r) => r.getAttribute('data-integrity'));
+    expect(states).toContain('clean');
+    expect(states).not.toContain('planted');
+    expect(states).not.toContain('planted_worn');
+
+    // …and the TELLING beside it spends no connective from the `planted` pool.
+    const telling = screen.getByTestId('causality-telling').textContent;
+    for (const line of CONNECTIVE_POOLS.planted) {
+      expect(telling, `the telling says "${line.text}" where the register says clean`).not.toContain(line.text);
+    }
+    // GUARD-THE-GUARD: the same fixture wearing the SYNTHETIC prefix does reach
+    // `planted` on the disclosure side, so the pin above measures the spelling.
+    cleanup();
+    const planted = makeWorld();
+    planted.pulseHistory[0].selectedOutcomes[1].lineageIds = [LINEAGE];
+    render(<CausalityPopup open onClose={() => {}} item={ITEM} worldState={planted} nameById={NAMES} seesSecrets />);
+    expect(screen.getAllByTestId('causality-disclosure-row').map((r) => r.getAttribute('data-integrity'))).toContain('planted');
   });
 
   test('a player audience sees NO disclosure block at all — not a stub, not a hole', () => {
