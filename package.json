@@ -45,6 +45,7 @@
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:report": "playwright show-report",
     "verify:dist": "VERIFY_DIST=1 vitest run tests/build/",
+    "smoke:boot": "node --max-old-space-size=6144 scripts/boot-smoke.mjs",
     "check": "npm run validate:data && npm run validate:custom-content-manifest && npm run validate:migration-head && npm run validate:edge && npm run validate:map && npm run validate:tuning-bands && npm run validate:foundry-module && npm run validate:mcp-server && npm run typecheck && npm run typecheck:domain:strict && npm run lint && npm run test && npm run build && npm run verify:dist",
     "check:quick": "npm run lint && npm run test",
     "check:tail": "sh scripts/gate-tail.sh npm run check",

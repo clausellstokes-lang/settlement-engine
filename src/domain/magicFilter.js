@@ -2,21 +2,15 @@
 // When magic is absent, arcane institutions and their derived goods/services
 // are hidden from both generated output and user-facing catalogs.
 
-export const ARCANE_INST_TAGS = ['arcane', 'planar', 'alchemy', 'enchanting'];
-export const ARCANE_INST_KW   = [
-  'wizard', 'mage', 'alchemist', 'enchant', 'spell', 'arcane',
-  'scroll scribe', 'scroll', 'rune',
-  'teleportation', 'planar', 'dream parlor', 'airship',
-  'message network', 'academy of magic',
-  "mages' guild", "mages' district", 'alchemist quarter', 'enchanter',
-  'druid circle', 'elder grove council', 'elder grove',
-  'hedge wizard', 'traveling hedge wizard', 'warden',
-  'healer (divine', 'wandering healer', 'divine healer',
-  'alchemist shop', 'teleportation circle', 'planar embassy', 'great library',
-  'golem', 'undead labor', 'undead', 'skeletal',
-  'dragon resident', 'dragon',
-  'scrying',
-];
+// The two arcane vocabularies now live in a zero-import leaf and are RE-EXPORTED
+// here, so every existing `from './magicFilter.js'` importer keeps its spelling.
+// The move exists because this module is routed to the LAZY generation bundle while
+// arcaneInstitutionIdentity.js — one of its readers — sits in EAGER engine-core: that
+// one edge closed a chunk-level cycle and made the shipped bundle un-bootable.
+// The full account is in domain/arcaneInstitutionVocabulary.js's header.
+import { ARCANE_INST_KW, ARCANE_INST_TAGS } from './arcaneInstitutionVocabulary.js';
+
+export { ARCANE_INST_KW, ARCANE_INST_TAGS };
 
 const ARCANE_GOODS = [
   'Magical services', 'Enchanted items', 'Spell components', 'Arcane supplies',

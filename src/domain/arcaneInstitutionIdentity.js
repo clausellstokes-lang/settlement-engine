@@ -21,7 +21,12 @@
  */
 
 import { institutionalCatalog } from '../data/institutionalCatalog.js';
-import { ARCANE_INST_KW, ARCANE_INST_TAGS } from './magicFilter.js';
+// The VOCABULARY leaf, not magicFilter.js itself. Same two lists (magicFilter
+// re-exports them), but magicFilter is routed to the LAZY generation bundle while this
+// adapter sits in EAGER engine-core — importing it from here pointed an eager chunk at a
+// lazy one and closed the chunk cycle that made dist un-bootable (lane BT, 2026-08-03).
+// See domain/arcaneInstitutionVocabulary.js's header for the whole account.
+import { ARCANE_INST_KW, ARCANE_INST_TAGS } from './arcaneInstitutionVocabulary.js';
 import { ARCANE_IDENTITY, arcaneNameFallback } from './arcaneIdentity.js';
 
 /** @param {unknown} value @returns {string} */
