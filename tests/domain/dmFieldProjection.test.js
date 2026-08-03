@@ -24,6 +24,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
+  DM_EDITABLE_PROSE_PATHS_BY_KIND,
   DM_EDITABLE_SETTLEMENT_PROSE_PATHS,
   DM_FIELD_FRAMED_BY_BLOCK,
   isDmEditableProsePath,
@@ -38,13 +39,40 @@ import { DOSSIER_STATE_PROSE_GENERAL } from '../../src/data/dossierStateProse/ge
 const ROOT = resolve(import.meta.dirname, '../..');
 const FAMILY_DIR = join(ROOT, 'src/domain/display/stateProse');
 
+/**
+ * Every DM-editable LEAF across every entity arm, and who owns it. The scan searches
+ * for leaves rather than dotted paths because a writer never spells the whole path —
+ * it holds the parent object and assigns the last segment. Deriving from ALL arms is
+ * the lane-PT repair: `faction.desc` and `institution.desc` are queue-wired too, so a
+ * settlement-only derivation left `.desc =` unwatched.
+ */
+const DM_EDITABLE_LEAVES = [...new Set(
+  Object.values(DM_EDITABLE_PROSE_PATHS_BY_KIND).flatMap((paths) => paths)
+    .map((path) => path.split('.').pop()),
+)];
+
+/** leaf → the `kind.path` spellings it stands for, so an offender names the real field. */
+const LEAF_OWNERS = new Map(DM_EDITABLE_LEAVES.map((leaf) => [
+  leaf,
+  Object.entries(DM_EDITABLE_PROSE_PATHS_BY_KIND)
+    .flatMap(([kind, paths]) => paths.filter((p) => p.split('.').pop() === leaf).map((p) => `${kind}.${p}`)),
+]));
+
 describe('the DM-editable path register', () => {
-  it('is in exact lockstep with the queue-wired prose paths', () => {
+  it('is in exact lockstep with the queue-wired prose paths, ARM FOR ARM', () => {
     // The editor's list is canonical. A path added there and forgotten here would let a
     // composer write into a field the DM can edit, which is the whole failure this rule
     // exists to prevent.
-    expect([...DM_EDITABLE_SETTLEMENT_PROSE_PATHS])
-      .toEqual([...QUEUE_WIRED_PROSE_PATHS.settlement]);
+    //
+    // The WHOLE object, not the settlement arm alone (lane PT): comparing one arm left
+    // `faction.desc` and `institution.desc` outside the register, and therefore outside
+    // the no-writer scan below, which derives its search from the register. A new ENTITY
+    // KIND wired into the queue must red here, not just a new path on a known kind.
+    expect(structuredClone(DM_EDITABLE_PROSE_PATHS_BY_KIND))
+      .toEqual(structuredClone(QUEUE_WIRED_PROSE_PATHS));
+    // The settlement arm is derived, never re-listed — proven, not assumed.
+    expect(DM_EDITABLE_SETTLEMENT_PROSE_PATHS)
+      .toBe(DM_EDITABLE_PROSE_PATHS_BY_KIND.settlement);
   });
 
   it('names a real editable path for every block the corpus frames onto one', () => {
@@ -129,19 +157,35 @@ describe('THE RULE, structurally: the family holds no writer', () => {
     expect(familySources().length).toBeGreaterThanOrEqual(2);
   });
 
-  it('contains no assignment into any DM-editable prose path', () => {
+  it('scans a leaf from EVERY entity arm — a settlement-only scan is half a scan', () => {
+    // Guard-the-guard. `desc` enters the search only through the faction/institution
+    // arms; if the derivation silently narrows back to the settlement, this reds before
+    // the scan below goes quietly blind on two thirds of the register.
+    expect(DM_EDITABLE_LEAVES).toContain('desc');
+    expect(DM_EDITABLE_LEAVES).toContain('arrivalScene');
+    expect(new Set(Object.keys(DM_EDITABLE_PROSE_PATHS_BY_KIND)))
+      .toEqual(new Set(['faction', 'institution', 'settlement']));
+  });
+
+  it('contains no assignment into any DM-editable prose path, on any entity kind', () => {
     const offenders = [];
     for (const file of familySources()) {
       const source = readFileSync(file, 'utf8');
-      for (const path of DM_EDITABLE_SETTLEMENT_PROSE_PATHS) {
-        const leaf = path.split('.').pop();
+      for (const leaf of DM_EDITABLE_LEAVES) {
         // `x.arrivalScene =`, `x['arrivalScene'] =`, and the object-literal spelling
         // `arrivalScene:` that a rebuild-the-settlement composer would use. `==` and
-        // `=>` are excluded so a comparison or an arrow is not read as a write.
+        // `=>` are excluded so a comparison or an arrow is not read as a write; `:` is
+        // excluded after the literal form so a TYPE annotation is not read as one.
         const assignment = new RegExp(
-          `(\\.${leaf}\\s*=(?![=>])|\\['${leaf}'\\]\\s*=(?![=>])|\\["${leaf}"\\]\\s*=(?![=>]))`,
+          `(\\.${leaf}\\s*=(?![=>])`
+          + `|\\['${leaf}'\\]\\s*=(?![=>])`
+          + `|\\["${leaf}"\\]\\s*=(?![=>])`
+          + `|(?:^|[{,]\\s*)${leaf}\\s*:(?!:))`,
+          'm',
         );
-        if (assignment.test(source)) offenders.push(`${file.slice(ROOT.length + 1)} writes ${path}`);
+        if (assignment.test(source)) {
+          offenders.push(`${file.slice(ROOT.length + 1)} writes ${LEAF_OWNERS.get(leaf).join(' / ')}`);
+        }
       }
     }
     expect(offenders).toEqual([]);

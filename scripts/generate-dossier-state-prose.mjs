@@ -33,6 +33,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import url from 'node:url';
+import { ECONOMY_FRESHNESS_SENTENCES } from '../src/domain/display/economyFreshness.js';
 
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
 const checkOnly = process.argv.includes('--check');
@@ -57,6 +58,111 @@ const DESKS = [
   { file: 'stressors', constant: 'DOSSIER_STATE_PROSE_STRESSORS', prefixes: ['DS-STR-', 'DS-CND-'], title: 'THE STRESSOR + CONDITION DESK' },
   { file: 'general', constant: 'DOSSIER_STATE_PROSE_GENERAL', prefixes: ['DS-GEN-', 'DS-REL-', 'DS-POP-', 'DS-HK-'], title: 'THE OVERVIEW / RELATIONS / POPULATION / HOOKS DESK' },
 ];
+
+/**
+ * THE LIVE-STRING BINDINGS — the ONE-HOME rule, enforced at the projection.
+ *
+ * A handful of the annexes' `0. *(frozen, canonical)*` rows are not corpus prose at
+ * all: they are a byte-copy of a string the ENGINE already owns and ships, recorded in
+ * the doc so the chair can read the variants against the real sentence. Projecting such
+ * a row as a JSON literal MINTS A SECOND HOME for that string, which is precisely the
+ * hand-copy drift class the freshness walker
+ * (tests/lint/economyReadModelCoverage.walker.test.js, "the freshness sentence is
+ * minted only in the detector module") exists to forbid — and it re-appears on every
+ * regeneration, so curing the leaf by hand would last exactly until the next run.
+ *
+ * So the projection BINDS instead of inlining: the generator imports the live constant,
+ * finds its exact quoted form in the emitted JSON, and replaces it with a reference to
+ * the constant, hoisting the import into the leaf. The runtime shape is unchanged (the
+ * same string arrives at the same key); the SOURCE has one home again.
+ *
+ * `module` is repo-relative — the specifier is computed per output file, so a desk that
+ * moves depth does not silently emit a broken import.
+ *
+ * FAIL-CLOSED BOTH WAYS (assertLiveStringsBound below):
+ *   - a member that binds NOWHERE throws (the doc reworded the canonical row, or the
+ *     engine reworded the sentence, and the binding quietly became decoration);
+ *   - a raw literal surviving anywhere in the emitted text throws (the substitution
+ *     missed an occurrence and a second home shipped).
+ */
+const LIVE_STRING_BINDINGS = [
+  {
+    symbol: 'ECONOMY_FRESHNESS_SENTENCES',
+    module: 'src/domain/display/economyFreshness.js',
+    members: ECONOMY_FRESHNESS_SENTENCES,
+  },
+];
+
+/** Every member across every binding, as `symbol.member` → the live string. */
+const BOUND_LITERALS = LIVE_STRING_BINDINGS.flatMap(({ symbol, members }) =>
+  Object.entries(members).map(([member, literal]) => ({
+    ref: `${symbol}.${member}`, literal, quoted: JSON.stringify(literal),
+  })));
+
+/** Which `symbol.member` refs actually landed, accumulated across every emitted file. */
+const boundRefs = new Set();
+
+/**
+ * The ESM specifier for `module` as seen from `outPath`.
+ * @param {string} outPath absolute path of the file being emitted
+ * @param {string} moduleRel repo-relative path of the imported module
+ * @returns {string}
+ */
+function specifierFor(outPath, moduleRel) {
+  const rel = path.relative(path.dirname(outPath), path.join(ROOT, moduleRel)).split(path.sep).join('/');
+  return rel.startsWith('.') ? rel : `./${rel}`;
+}
+
+/**
+ * Replace every bound live string in an emitted JSON body with a reference to its
+ * constant, and report which imports the leaf now needs.
+ * @param {string} body the `JSON.stringify` output
+ * @param {string} outPath absolute path of the file being emitted
+ * @returns {{body: string, imports: string[]}}
+ */
+function bindLiveStrings(body, outPath) {
+  let out = body;
+  const used = new Set();
+  for (const { ref, quoted } of BOUND_LITERALS) {
+    if (!out.includes(quoted)) continue;
+    // The quoted form carries its own delimiters, so this can only match a WHOLE JSON
+    // string token — never a substring of a longer variant.
+    out = out.split(quoted).join(ref);
+    boundRefs.add(ref);
+    used.add(ref.split('.')[0]);
+  }
+  const imports = LIVE_STRING_BINDINGS
+    .filter(({ symbol }) => used.has(symbol))
+    .map(({ symbol, module }) => `import { ${symbol} } from '${specifierFor(outPath, module)}';\n`);
+  return { body: out, imports };
+}
+
+/**
+ * The generator-side pin: a regeneration can never re-inline a bound string, and can
+ * never carry a binding that no longer binds anything.
+ * @param {Array<{path: string, text: string}>} files
+ */
+function assertLiveStringsBound(files) {
+  const dead = BOUND_LITERALS.filter(({ ref }) => !boundRefs.has(ref));
+  if (dead.length) {
+    throw new Error(
+      `live-string binding(s) matched NOTHING: ${dead.map((d) => d.ref).join(', ')}.`
+      + ' The annex\'s canonical row and the engine constant have drifted apart —'
+      + ' re-sync the `0. *(frozen, canonical)*` row with the live string, or drop the'
+      + ' binding from LIVE_STRING_BINDINGS deliberately.',
+    );
+  }
+  for (const file of files) {
+    for (const { ref, quoted } of BOUND_LITERALS) {
+      if (file.text.includes(quoted)) {
+        throw new Error(
+          `${path.relative(ROOT, file.path)} still INLINES the live string bound to ${ref}`
+          + ' — a second home for it would ship. The substitution missed an occurrence.',
+        );
+      }
+    }
+  }
+}
 
 /**
  * A variant line: `1. \`[street · dm-only]\` The market runs thin...`
@@ -356,13 +462,18 @@ function projectBlocks(blocks) {
   return out;
 }
 
-/** @param {string} name @param {string} script @param {object} data @param {string} note */
-function emit(name, data, note) {
+/** @param {string} name @param {object} data @param {string} note @param {string} outPath */
+function emit(name, data, note, outPath) {
+  const { body, imports } = bindLiveStrings(JSON.stringify(data, null, 2), outPath);
   return `// GENERATED by scripts/generate-dossier-state-prose.mjs. Do not edit by hand.\n`
     + `// ${note}\n`
-    + `// Regenerate with \`npm run gen:dossier-prose\`; the gate runs it with --check.\n\n`
+    + `// Regenerate with \`npm run gen:dossier-prose\`; the gate runs it with --check.\n`
+    + (imports.length
+      ? `// A canonical row that IS a live engine string is IMPORTED, never inlined —`
+        + ` see LIVE_STRING_BINDINGS in the generator.\n\n${imports.join('')}\n`
+      : '\n')
     + `/** @type {Readonly<Record<string, object>>} */\n`
-    + `export const ${name} = /* #__PURE__ */ Object.freeze(${JSON.stringify(data, null, 2)});\n`;
+    + `export const ${name} = /* #__PURE__ */ Object.freeze(${body});\n`;
 }
 
 const stateSrc = await readFile(STATE_DOC, 'utf8');
@@ -389,12 +500,14 @@ for (const desk of DESKS) {
   const variants = Object.values(slice)
     .reduce((n, b) => n + Object.values(b.pools).reduce((m, p) => m + p.length, 0), 0);
   if (Object.keys(slice).length === 0) throw new Error(`desk ${desk.file} matched no blocks`);
+  const outPath = path.join(STATE_OUT_DIR, `${desk.file}.generated.js`);
   emitted.push({
-    path: path.join(STATE_OUT_DIR, `${desk.file}.generated.js`),
+    path: outPath,
     text: emit(
       desk.constant, slice,
       `${desk.title} — projected from docs/content/RECEIPT_POOLS_DOSSIER_STATE.md`
       + ` (${desk.prefixes.join(' + ')}): ${Object.keys(slice).length} blocks, ${variants} variants.`,
+      outPath,
     ),
     blocks: Object.keys(slice).length,
     variants,
@@ -411,10 +524,14 @@ emitted.push({
     'DOSSIER_CAUSAL_PROSE', causalData,
     `Projected from docs/content/RECEIPT_POOLS_CAUSAL_DOSSIER.md —`
     + ` ${Object.keys(causalData).length} join families, ${causalCount} variants.`,
+    CAUSAL_OUT,
   ),
   blocks: Object.keys(causalData).length,
   variants: causalCount,
 });
+
+// Every bound live string landed as a reference, and none survived as a literal.
+assertLiveStringsBound(emitted);
 
 if (checkOnly) {
   for (const e of emitted) {

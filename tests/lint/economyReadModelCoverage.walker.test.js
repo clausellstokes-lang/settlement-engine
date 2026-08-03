@@ -38,6 +38,20 @@
  * "fourth hand-copied string" that R-3 refused to write cannot be written by
  * anyone later either.
  *
+ * THE GENERATED SECOND HOME (lane PT, 2026-08-03). The authored dossier-state
+ * annex records the freshness sentence as a `0. *(frozen, canonical)*` row so
+ * the chair can read its candidate variants against the real string — and the
+ * corpus projection then emitted that row as a JSON literal, minting a second
+ * home on every regeneration. Hand-editing the leaf would have lasted until the
+ * next `npm run gen:dossier-prose`, so the cure is at the GENERATOR:
+ * scripts/generate-dossier-state-prose.mjs imports the live constant and BINDS
+ * the row to it (LIVE_STRING_BINDINGS), emitting
+ * `ECONOMY_FRESHNESS_SENTENCES.tallies` where the literal used to sit. The
+ * generator throws if a binding stops matching or if a literal survives; this
+ * file holds the other half — the corpus leaf is an ALLOWED consumer of the
+ * SENTENCE and a forbidden consumer of the DETECTOR, and it must still carry
+ * the reference.
+ *
  * KNOWN BLIND SPOTS (deliberate, so nobody re-discovers them as findings):
  *   - The scan is textual, so a COMMENT naming a read-model classifies its
  *     file. That over-classifies, never under-classifies; fail-closed is the
@@ -61,6 +75,27 @@ const SCAN_ROOTS = ['src/components', 'src/pdf'];
 
 const NOTE_LEAF = 'src/components/new/EconomyFreshnessNote.jsx';
 const DETECTOR = 'src/domain/display/economyFreshness.js';
+/** The projected corpus leaf whose canonical row is BOUND to the sentence. */
+const CORPUS_LEAF = 'src/data/dossierStateProse/economy.generated.js';
+
+/**
+ * The DETECTOR half of the module: the functions that decide whether the note
+ * appears. Importing any of these is claiming the paragraph, which only the one
+ * rendering home may do. `ECONOMY_FRESHNESS_SENTENCES` is deliberately NOT here
+ * — it is the frozen copy unit, and a file may legitimately need the string
+ * without owning the decision to show it.
+ */
+const DETECTOR_SYMBOLS = ['economyFreshnessNote', 'economyShiftSinceSurvey', 'eventTypeShiftsEconomy'];
+
+/**
+ * WHO MAY IMPORT THE ONE HOME, AND FOR WHAT. An exact frozen map, not a file
+ * list: the old list-only pin would have accepted the corpus leaf reaching for
+ * `economyShiftSinceSurvey` as readily as for the sentence.
+ */
+const ALLOWED_FRESHNESS_CONSUMERS = {
+  [NOTE_LEAF]: ['economyFreshnessNote'],
+  [CORPUS_LEAF]: ['ECONOMY_FRESHNESS_SENTENCES'],
+};
 
 /**
  * What counts as reading a derived economy read-model. `prosperity` needs a
@@ -162,6 +197,39 @@ function censusEconomyReaders() {
     }
   }
   return found;
+}
+
+/**
+ * Every file under src that imports the freshness module, mapped to the exact
+ * symbols it takes. A default or namespace import is recorded VERBATIM (`* as
+ * fresh`) rather than expanded, so it can never satisfy the frozen map — taking
+ * the whole module is taking the detector.
+ * @returns {Record<string, string[]>} rel path → sorted imported symbols
+ */
+function freshnessConsumers() {
+  /** @type {Record<string, string[]>} */
+  const out = {};
+  for (const abs of walk(join(ROOT, 'src'))) {
+    const rel = relative(ROOT, abs).replace(/\\/g, '/');
+    if (rel === DETECTOR) continue;
+    const src = readFileSync(abs, 'utf8');
+    const symbols = [];
+    // `[^;]` keeps the clause inside ONE statement: a greedier body swallowed the
+    // preceding import line and turned the note leaf's clause into unparseable soup.
+    for (const m of src.matchAll(
+      /import\s+([^;]*?)\s+from\s+['"][^'"]*display\/economyFreshness\.js['"]/g,
+    )) {
+      const clause = m[1].trim();
+      const braced = clause.match(/^\{([\s\S]*)\}$/);
+      if (!braced) { symbols.push(clause); continue; }
+      for (const part of braced[1].split(',')) {
+        const name = part.trim().split(/\s+as\s+/)[0].trim();
+        if (name) symbols.push(name);
+      }
+    }
+    if (symbols.length) out[rel] = [...new Set(symbols)].sort();
+  }
+  return out;
 }
 
 const census = censusEconomyReaders();
@@ -287,17 +355,47 @@ describe('the sentence and the paragraph each have exactly ONE home', () => {
     ).toEqual([DETECTOR]);
   });
 
-  test('the detector is consumed only by the one note leaf', () => {
-    const consumers = walk(join(ROOT, 'src'))
-      .map((abs) => relative(ROOT, abs).replace(/\\/g, '/'))
-      .filter((rel) => rel !== DETECTOR)
-      .filter((rel) => /from\s+['"][^'"]*display\/economyFreshness\.js['"]/.test(read(rel)));
+  test('the detector module has exactly the consumers it is allowed, symbol for symbol', () => {
+    const consumers = freshnessConsumers();
+    // Fail-closed BOTH ways: a new consumer reds, and a consumer that quietly
+    // widens its import (the sentence-taker reaching for the detector) reds too.
     expect(
       consumers,
-      '\nOnly the shared note leaf may consume the freshness detector — a surface that calls '
-      + 'economyShiftSinceSurvey directly is hand-rolling the paragraph again:\n'
-      + `${consumers.join('\n')}\n`,
-    ).toEqual([NOTE_LEAF]);
+      '\nThe freshness module\'s consumers are frozen, symbol for symbol. A NEW file here is '
+      + 'either hand-rolling the paragraph (take the note leaf instead) or minting a second '
+      + 'home for the sentence (bind it in the generator, see LIVE_STRING_BINDINGS). A WIDER '
+      + 'symbol list on an existing consumer is the same failure arriving sideways.\n'
+      + `Found:\n${JSON.stringify(consumers, null, 2)}\n`,
+    ).toEqual(ALLOWED_FRESHNESS_CONSUMERS);
+  });
+
+  test('only the note leaf reaches the DETECTOR half; the corpus takes the sentence alone', () => {
+    for (const [rel, symbols] of Object.entries(freshnessConsumers())) {
+      const detectorUse = symbols.filter((s) => DETECTOR_SYMBOLS.includes(s));
+      if (rel === NOTE_LEAF) {
+        expect(detectorUse.length, `${rel} must still call the detector`).toBeGreaterThan(0);
+        continue;
+      }
+      expect(
+        detectorUse,
+        `${rel} calls the detector directly — that is hand-rolling the paragraph again. `
+        + 'Render <EconomyFreshnessNote> instead.',
+      ).toEqual([]);
+    }
+  });
+
+  test('the corpus leaf still REFERENCES the sentence rather than re-inlining it', () => {
+    // The positive half of the one-home pin. The "minted only in the detector" test above
+    // catches a raw copy; this catches the quieter regression where a regeneration drops
+    // the binding entirely and the canonical row goes missing instead of literal.
+    const src = read(CORPUS_LEAF);
+    for (const member of ['tallies', 'catalog']) {
+      expect(
+        src.includes(`ECONOMY_FRESHNESS_SENTENCES.${member}`),
+        `${CORPUS_LEAF} no longer binds ECONOMY_FRESHNESS_SENTENCES.${member} — `
+        + 'regenerate with `npm run gen:dossier-prose`.',
+      ).toBe(true);
+    }
   });
 
   test('the note leaf renders the sentence conditionally, never as ambient chrome', () => {

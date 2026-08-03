@@ -172,6 +172,16 @@ export function economyShiftSinceSurvey(settlement) {
  *
  * VOICE: no em dash, no exclamation, "may" not "will" — the detector proves an
  * economy-touching event landed, never that a specific figure is now wrong.
+ *
+ * THE SECOND LAWFUL CONSUMER (lane PT, 2026-08-03). The authored dossier-state annex
+ * records both sentences as `0. *(frozen, canonical)*` rows of DS-ECO-7 so the chair
+ * can read its candidate variants against the real string. The corpus projection does
+ * NOT copy them: scripts/generate-dossier-state-prose.mjs imports this constant and
+ * emits `ECONOMY_FRESHNESS_SENTENCES.tallies` / `.catalog` into
+ * src/data/dossierStateProse/economy.generated.js, so the annex's canonical rows still
+ * resolve to THESE bytes and re-wording here re-words them everywhere. That leaf may
+ * take the SENTENCES and nothing else; the detector functions below stay the note
+ * leaf's alone, pinned symbol-for-symbol by the census walker.
  * @type {Readonly<Record<'tallies'|'catalog', string>>}
  */
 export const ECONOMY_FRESHNESS_SENTENCES = Object.freeze({

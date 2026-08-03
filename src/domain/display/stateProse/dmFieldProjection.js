@@ -31,26 +31,48 @@
  */
 
 /**
- * Every settlement prose path a DM can edit. A machine sentence may render BESIDE any
- * of these and INTO none of them.
+ * EVERY prose path a DM can edit, BY ENTITY KIND — the whole register, mirroring all
+ * three arms of QUEUE_WIRED_PROSE_PATHS. A machine sentence may render BESIDE any of
+ * these and INTO none of them.
+ *
+ * WHY ALL THREE ARMS AND NOT JUST THE SETTLEMENT (lane PT, 2026-08-03). The register
+ * started settlement-only because every SECTION-TARGET the corpus frames lands on a
+ * settlement field. But the queue also wires `faction.desc` and `institution.desc`, and
+ * the structural no-writer scan derives its search from THIS constant: with the two
+ * `desc` arms missing, a composer that rebuilt a faction blurb or an institution
+ * description would have written straight through the DM's pen with nothing red. The
+ * scan is the reason the register must be total, so the register is total.
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const DM_EDITABLE_PROSE_PATHS_BY_KIND = Object.freeze({
+  faction: Object.freeze(['desc']),
+  institution: Object.freeze(['desc']),
+  settlement: Object.freeze([
+    'arrivalScene',
+    'pressureSentence',
+    'settlementReason',
+    'prominentRelationship.phrasing',
+    'history.historicalCharacter',
+    'history.founding.reason',
+    'history.founding.initialChallenge',
+    'history.founding.overcoming',
+    'history.founding.stressNote',
+    'history.founding.foundedBy',
+    'economicViability.summary',
+    'economicState.safetyProfile.safetyDesc',
+    'economicState.safetyProfile.guardEffectivenessDesc',
+    'economicState.safetyProfile.economicDragDesc',
+  ]),
+});
+
+/**
+ * The settlement arm, DERIVED rather than re-listed — the two spellings of this list
+ * cannot drift because there is only one list. Kept as its own export because every
+ * caller of the projection holds a settlement, and `DM_FIELD_FRAMED_BY_BLOCK` maps
+ * blocks onto settlement paths exclusively.
  * @type {ReadonlyArray<string>}
  */
-export const DM_EDITABLE_SETTLEMENT_PROSE_PATHS = Object.freeze([
-  'arrivalScene',
-  'pressureSentence',
-  'settlementReason',
-  'prominentRelationship.phrasing',
-  'history.historicalCharacter',
-  'history.founding.reason',
-  'history.founding.initialChallenge',
-  'history.founding.overcoming',
-  'history.founding.stressNote',
-  'history.founding.foundedBy',
-  'economicViability.summary',
-  'economicState.safetyProfile.safetyDesc',
-  'economicState.safetyProfile.guardEffectivenessDesc',
-  'economicState.safetyProfile.economicDragDesc',
-]);
+export const DM_EDITABLE_SETTLEMENT_PROSE_PATHS = DM_EDITABLE_PROSE_PATHS_BY_KIND.settlement;
 
 /**
  * Which corpus block frames which DM-editable field. A block in this map is one whose
@@ -71,7 +93,13 @@ export const DM_FIELD_FRAMED_BY_BLOCK = Object.freeze({
   'DS-ECO-6': 'economicState.safetyProfile.economicDragDesc',
 });
 
-/** @param {string} path @returns {boolean} */
+/**
+ * Settlement-scoped by design: the only caller is the block→field map above, whose
+ * every value is a settlement path. A faction or institution `desc` is DM-editable but
+ * is not a SECTION-TARGET the corpus frames, so admitting it here would make the
+ * predicate answer a question nobody asks and blur which arm a path came from.
+ * @param {string} path @returns {boolean}
+ */
 export function isDmEditableProsePath(path) {
   return DM_EDITABLE_SETTLEMENT_PROSE_PATHS.includes(path);
 }

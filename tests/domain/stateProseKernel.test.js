@@ -32,34 +32,76 @@ import {
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
 import { DOSSIER_CAUSAL_PROSE } from '../../src/data/dossierCausalProse.generated.js';
+import { PROSPERITY_TIERS } from '../../src/data/constants.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
-/** A shipped pool every variant of which names {settlement} and nothing else. */
-const PROSPERITY = { block: 'DS-ECO-8', pool: 'SUBSISTENCE' };
+/**
+ * DS-ECO-8's rungs, SPLIT BY REACHABILITY (lane PT, 2026-08-03).
+ *
+ * The kernel's liveness laws used to be proven on `SUBSISTENCE` alone, and no live
+ * settlement can ever reach that pool. `Subsistence` is rung 0 of PROSPERITY_TIERS,
+ * but the generator does not emit it: `deriveProsperityLabel` returns out of
+ * `LABELS = ['Struggling', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy']`
+ * (src/generators/economy/prosperity.js), and constants.js records the same fact in
+ * its own words — Subsistence "is an internal base label remapped to Struggling/Poor
+ * before emission; it is kept here for tolerance toward legacy or hand-written saves."
+ *
+ * A law proven only on unreachable prose is a law proven on nothing a reader will ever
+ * see, so both rungs are pinned. STRUGGLING is the band that ships; SUBSISTENCE stays
+ * because legacy and hand-written saves still render it, and is labelled as exactly
+ * that so nobody later mistakes it for the representative case.
+ *
+ * Both pools carry at least one `{settlement}`-anchored line and at least one slot-free
+ * line, which is what makes the anchored-liveness negative below non-vacuous.
+ */
+const REACHABLE_RUNG = {
+  block: 'DS-ECO-8', pool: 'STRUGGLING',
+  why: 'REACHABLE — the generator\'s lowest emitted rung',
+};
+const LEGACY_RUNG = {
+  block: 'DS-ECO-8', pool: 'SUBSISTENCE',
+  why: 'LEGACY TOLERANCE — never emitted; legacy and hand-written saves only',
+};
+const PROSPERITY_RUNGS = [REACHABLE_RUNG, LEGACY_RUNG];
 
 describe('the state-prose reader — anchored liveness', () => {
-  it('offers the settlement-naming rung only while the town has a name', () => {
-    const pool = DOSSIER_STATE_PROSE_ECONOMY[PROSPERITY.block].pools[PROSPERITY.pool];
-    const named = eligibleVariants(pool, { slots: { settlement: 'Thornwall' }, audience: AUDIENCE_DM })
-      .map((v) => v.text);
-    const unnamed = eligibleVariants(pool, { slots: {}, audience: AUDIENCE_DM }).map((v) => v.text);
-
-    const slotted = named.find((t) => t.includes('{settlement}'));
-    expect(slotted, 'the rung must carry at least one settlement-anchored line').toBeTruthy();
-    expectPresentThenAbsent(named, unnamed, slotted, 'settlement anchor removed');
-    // The pool DEGRADES rather than going dark: the rung's slot-free variants still
-    // speak. That is the anchor keeping this negative honest.
-    expect(unnamed.length).toBeGreaterThan(0);
+  it('pins the rungs the ladder actually names, reachable one first', () => {
+    // Guard-the-guard: if the vocabulary is re-ordered or a rung renamed, these pins
+    // would silently start proving the laws on a different band than their prose claims.
+    expect(PROSPERITY_TIERS[0]).toBe('Subsistence');
+    expect(PROSPERITY_TIERS[1]).toBe('Struggling');
+    for (const rung of PROSPERITY_RUNGS) {
+      expect(
+        DOSSIER_STATE_PROSE_ECONOMY[rung.block].pools[rung.pool],
+        `${rung.pool} (${rung.why}) is not in the shipped corpus`,
+      ).toBeTruthy();
+    }
   });
 
-  it('substitutes the fill and leaves no placeholder behind', () => {
-    const line = readStateProse(
-      DOSSIER_STATE_PROSE_ECONOMY, PROSPERITY.block, PROSPERITY.pool,
-      { slots: { settlement: 'Thornwall' }, seed: 'save-1::eco-8', audience: AUDIENCE_DM },
-    );
-    expect(line?.text).toBeTruthy();
-    expect(line?.text).not.toMatch(/\{[a-z_]+\}/i);
-  });
+  for (const rung of PROSPERITY_RUNGS) {
+    it(`offers the settlement-naming rung only while the town has a name — ${rung.pool} [${rung.why}]`, () => {
+      const pool = DOSSIER_STATE_PROSE_ECONOMY[rung.block].pools[rung.pool];
+      const named = eligibleVariants(pool, { slots: { settlement: 'Thornwall' }, audience: AUDIENCE_DM })
+        .map((v) => v.text);
+      const unnamed = eligibleVariants(pool, { slots: {}, audience: AUDIENCE_DM }).map((v) => v.text);
+
+      const slotted = named.find((t) => t.includes('{settlement}'));
+      expect(slotted, 'the rung must carry at least one settlement-anchored line').toBeTruthy();
+      expectPresentThenAbsent(named, unnamed, slotted, 'settlement anchor removed');
+      // The pool DEGRADES rather than going dark: the rung's slot-free variants still
+      // speak. That is the anchor keeping this negative honest.
+      expect(unnamed.length).toBeGreaterThan(0);
+    });
+
+    it(`substitutes the fill and leaves no placeholder behind — ${rung.pool} [${rung.why}]`, () => {
+      const line = readStateProse(
+        DOSSIER_STATE_PROSE_ECONOMY, rung.block, rung.pool,
+        { slots: { settlement: 'Thornwall' }, seed: 'save-1::eco-8', audience: AUDIENCE_DM },
+      );
+      expect(line?.text).toBeTruthy();
+      expect(line?.text).not.toMatch(/\{[a-z_]+\}/i);
+    });
+  }
 
   it('drops exactly the variants whose anchor state is missing, keeping the rest', () => {
     // A causal family whose variants split across two slot demands: with {counterpart}
@@ -176,17 +218,22 @@ describe('the state-prose reader — the avalanche draw', () => {
 });
 
 describe('the state-prose reader — THE PROMISE', () => {
-  it('draws the same sentence for the same seed and the same state, every time', () => {
-    const args = [DOSSIER_STATE_PROSE_ECONOMY, PROSPERITY.block, PROSPERITY.pool,
-      { slots: { settlement: 'Thornwall' }, seed: 'world-7::DS-ECO-8', audience: AUDIENCE_DM }];
-    const first = readStateProse(...args);
-    for (let i = 0; i < 20; i++) expect(readStateProse(...args)).toEqual(first);
-  });
+  // Both rungs again: same-seed stability and canonical-at-zero are the two laws a
+  // reader would notice breaking, and proving them only on the unreachable band would
+  // leave the band every real settlement renders unproven.
+  for (const rung of PROSPERITY_RUNGS) {
+    it(`draws the same sentence for the same seed and the same state, every time — ${rung.pool} [${rung.why}]`, () => {
+      const args = [DOSSIER_STATE_PROSE_ECONOMY, rung.block, rung.pool,
+        { slots: { settlement: 'Thornwall' }, seed: 'world-7::DS-ECO-8', audience: AUDIENCE_DM }];
+      const first = readStateProse(...args);
+      for (let i = 0; i < 20; i++) expect(readStateProse(...args)).toEqual(first);
+    });
 
-  it('reads canonical-at-zero when there is no seed', () => {
-    const pool = DOSSIER_STATE_PROSE_ECONOMY[PROSPERITY.block].pools[PROSPERITY.pool];
-    const seedless = readStateProse(DOSSIER_STATE_PROSE_ECONOMY, PROSPERITY.block, PROSPERITY.pool,
-      { slots: { settlement: 'Thornwall' } });
-    expect(seedless?.text).toBe(pool[0].text.replace('{settlement}', 'Thornwall'));
-  });
+    it(`reads canonical-at-zero when there is no seed — ${rung.pool} [${rung.why}]`, () => {
+      const pool = DOSSIER_STATE_PROSE_ECONOMY[rung.block].pools[rung.pool];
+      const seedless = readStateProse(DOSSIER_STATE_PROSE_ECONOMY, rung.block, rung.pool,
+        { slots: { settlement: 'Thornwall' } });
+      expect(seedless?.text).toBe(pool[0].text.replace('{settlement}', 'Thornwall'));
+    });
+  }
 });
