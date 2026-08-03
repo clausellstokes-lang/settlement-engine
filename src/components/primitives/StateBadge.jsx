@@ -13,11 +13,23 @@
  *
  * ICONS-OFF (lane LU): this primitive is one of the five IconsContext.js NAMED
  * as consulting the gate that in fact never did — every StateBadge in the app
- * has been rendering its lucide glyph straight through the ratified icons-off
- * redesign. It consults the gate now. Nothing is lost when the icon goes: the
- * two channels IconsContext documents as surviving — the kind's COLOR and the
- * uppercase TEXT label (P7) — are both still here, and the label is what the
- * pins and assistive tech already read.
+ * had been rendering its lucide glyph straight through the ratified icons-off
+ * redesign.
+ *
+ * ⚠️ IT DOES NOT CONSULT THE GATE. It has no gate to consult: the icon channel
+ * was DELETED, not gated. LU-1 removed the `Icon:` field from all seven KINDS
+ * rows, the glyph at the badge head, and the literal space beside it, and this
+ * file left lucide altogether — because none of its call sites is inside the map
+ * Provider, so an icons-ON branch would have been unreachable code pretending to
+ * be a feature. (An earlier version of this note claimed "it consults the gate
+ * now", which would have sent the next reader looking for a useIconsOn call that
+ * is not here and never was.) The absence is pinned: StateBadge is a row in
+ * tests/lint/lucideTotality.test.js's NO_ICON_CHANNEL, held at zero lucide
+ * imports, and roster C of IconsContext.js names it for the same reason.
+ *
+ * Nothing is lost when the icon goes: the two channels IconsContext documents as
+ * surviving — the kind's COLOR and the uppercase TEXT label (P7) — are both
+ * still here, and the label is what the pins and assistive tech already read.
  */
 
 import { tx } from '../../copy/index.js';

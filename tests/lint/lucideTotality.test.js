@@ -8,16 +8,26 @@
  *
  * WHY IT NEEDED A GUARD RATHER THAN A COMMENT. The gate was documented and
  * unenforced, and both halves of it had quietly become fiction:
- *   1. IconsContext.js NAMED seven primitives as consulting the gate. Four of
- *      them — IconButton, StateBadge, CanonBadge, PhaseBadge — never called
- *      useIconsOn at all, so every state badge in the product rendered its
- *      lucide glyph straight through the redesign that had banned it.
+ *   1. IconsContext.js NAMED seven primitives as consulting the gate. FIVE of
+ *      them — IconButton, StateBadge, CanonBadge, PhaseBadge and Disclosure —
+ *      never called useIconsOn at all, so every state badge in the product
+ *      rendered its lucide glyph straight through the redesign that had banned
+ *      it. (This paragraph said FOUR until lane VT recounted it against
+ *      423270de^: Disclosure was the fifth, and it gained the gate in the same
+ *      LU-1 commit that deleted the badges' channels. A miscount inside the
+ *      finding "the count was fiction" is that same defect one level up, so it
+ *      is corrected rather than quietly left — and this is why the roster is
+ *      now parsed instead of read.)
  *   2. 184 files imported lucide-react directly and rendered around the gate
  *      entirely, which no test could see because nothing counted them.
  * A prose contract that nobody can execute drifts silently for as long as it
  * exists. This file makes both halves executable.
  *
- * THE THREE POPULATIONS, and the only legal moves for each.
+ * THE FOUR POPULATIONS, and the only legal moves for each. (It was three until
+ * lane VT: IconsContext.js named TWELVE consulting primitives and this file
+ * pinned NINE, because the ninth list's membership proof requires a lucide
+ * import and three consumers take their glyph as a PROP instead. Three of the
+ * estate's own named gate consumers were therefore covered by nothing at all.)
  *
  *   MAP_SUBTREE — the Realm map. The chair ruled (2026-08-03) that the map
  *     exception SURVIVES: "the map is a diagram, its icons encode data
@@ -42,6 +52,14 @@
  *     PROVES each one actually calls useIconsOn. That single assertion is the
  *     structural cure for defect (1) above — a primitive can never again be
  *     listed as consulting the gate while not consulting it.
+ *
+ *   PROP_ICON_CONSUMERS — primitives that consult the gate and import NO lucide,
+ *     because the glyph arrives as a prop (IconButton, Pill, Segmented, Stat).
+ *     The source scan is blind to them by construction, so they are pinned by
+ *     name and proved to call useIconsOn — and a TOTALITY test asserts that
+ *     these two consumer lists together are EXACTLY the set of files in src/
+ *     that consult the gate, which is what makes "covered by nothing" a state
+ *     the guard can no longer be in.
  *
  *   FROZEN_DIRECT_IMPORTERS — the surviving offenders. Every file here still
  *     imports lucide-react outside the map and outside the gate. The set is
@@ -312,7 +330,71 @@ const NO_ICON_CHANNEL = Object.freeze([
   'src/components/settlement/PhaseBadge.jsx',
 ]);
 
+/**
+ * THE FOURTH POPULATION — primitives that consult the gate and import NO lucide,
+ * because their glyph arrives as a PROP (`icon={Sword}`, `options=[{ Icon }]`).
+ *
+ * WHY THEY NEED THEIR OWN LIST AND CANNOT JOIN GATE_PRIMITIVES. That list's
+ * honesty test requires a lucide import — a row without one is reported as stale
+ * and told to delete itself — so filing Pill/Segmented/Stat there would red the
+ * guard for doing the right thing. But leaving them nowhere was the hole lane VT
+ * found: IconsContext.js NAMED twelve consulting primitives and this file pinned
+ * NINE, so three of the estate's own named gate consumers were covered by
+ * nothing at all. A prop-fed primitive that quietly stopped calling useIconsOn
+ * would render its caller's glyph on every surface, and the source scan — which
+ * looks for a lucide IMPORT — is blind to it by construction. That is the same
+ * blindness LU-2a recorded for IconButton, and the same cure: pin it by name.
+ *
+ * IconButton belongs here too, as of LU-2a's `glyph` twin. Its four render arms
+ * are additionally pinned behaviourally in
+ * tests/components/iconButtonGlyphChannel.test.jsx — the stronger proof — but
+ * the row is kept because the TOTALITY test below is only total if every gate
+ * consumer is named in exactly one place.
+ */
+const PROP_ICON_CONSUMERS = Object.freeze([
+  'src/components/primitives/IconButton.jsx',
+  'src/components/primitives/Pill.jsx',
+  'src/components/primitives/Segmented.jsx',
+  'src/components/primitives/Stat.jsx',
+]);
+
+/**
+ * The gate's own declaration. It is not a consumer, and it is excluded from the
+ * totality census by NAME rather than by luck: `CONSULTS_GATE` is a source match,
+ * so it sees the hook's own definition line and — as lane VT proved on itself —
+ * any COMMENT that spells the call with its parentheses. This file is the one
+ * place whose prose must discuss that call, so it is named here instead of the
+ * detector being weakened for everyone.
+ */
+const GATE_DECLARATION = 'src/components/primitives/IconsContext.js';
+
 const ALLOWED = new Set([...MAP_SUBTREE, ...GATE_PRIMITIVES, ...FROZEN_DIRECT_IMPORTERS]);
+
+/**
+ * THE ROSTER PARSE (lane VT). IconsContext.js publishes its consumers as three
+ * lettered rosters in a fixed shape — `ROSTER <letter>`, a colon closing the
+ * description, then comma-separated names until the blank comment line. Reading
+ * them here is what turns that comment from documentation into a contract: the
+ * tests below assert each roster equals the set this file pins from the source,
+ * so the prose and the code cannot disagree in either direction.
+ */
+function rosterNames(letter) {
+  const doc = readFileSync(join(SRC, 'components/primitives/IconsContext.js'), 'utf8');
+  const seg = doc.split(new RegExp(`ROSTER ${letter}\\b`))[1] || '';
+  // The roster ends at the first blank comment line (` *` with nothing after it),
+  // and the names begin after the LAST colon inside it — the descriptions carry
+  // colons of their own, and taking the first one ate a name on the first run.
+  const block = seg.split(/\n\s*\*\s*\n/)[0] || '';
+  return block.slice(block.lastIndexOf(':') + 1)
+    .replace(/^\s*\*/gm, ' ')
+    .split(',')
+    .map((s) => s.trim())
+    .filter((s) => /^[A-Z][A-Za-z]+$/.test(s))
+    .sort();
+}
+
+/** `src/components/primitives/Pill.jsx` -> `Pill`. */
+const basenames = (files) => files.map((f) => f.split('/').pop().replace(/\.jsx?$/, '')).sort();
 
 /** Ratchet kindness: the failure message IS this guard's documentation. */
 function newOffenderMessage(file) {
@@ -400,6 +482,75 @@ describe('lucide totality — the icons-off gate is enforced, not merely documen
     expect(liars).toEqual([]);
   });
 
+  test('THE THREE UNCOVERED CONSUMERS: a prop-fed primitive really calls useIconsOn', () => {
+    // The companion to the test above, for the primitives the source scan cannot
+    // reach. Each must exist, must consult the gate, and must NOT import lucide —
+    // that last one is not decoration, it is the discriminator that says this file
+    // belongs in THIS list rather than in GATE_PRIMITIVES.
+    const liars = [];
+    for (const file of PROP_ICON_CONSUMERS) {
+      if (!FILES.includes(file)) {
+        liars.push(file + ': gone or moved — delete its row from PROP_ICON_CONSUMERS.');
+        continue;
+      }
+      if (!consultsGate(file)) {
+        liars.push([
+          file + ': listed as gating its prop-fed glyph, but it never calls useIconsOn().',
+          'It therefore renders whatever glyph its CALLER passes on every surface,',
+          'including the ones the redesign suppresses — and no lucide import exists',
+          'here for the source scan to catch, which is the whole reason this row is',
+          'pinned by name. Either call useIconsOn() and gate the render, or say in',
+          'IconsContext.js that this primitive is not a gate consumer.',
+        ].join('\n  '));
+      }
+      if (importsLucide(file)) {
+        liars.push([
+          file + ': imports lucide-react now, so it is no longer a PROP-fed consumer.',
+          'Move its row to GATE_PRIMITIVES, where the honesty test requires the import.',
+        ].join('\n  '));
+      }
+    }
+    expect(liars).toEqual([]);
+  });
+
+  test('TOTALITY: every gate consumer in src/ is in one of the two consumer lists', () => {
+    // The hole lane VT found was not a wrong row, it was a MISSING population:
+    // IconsContext named twelve consulting primitives and this file pinned nine,
+    // so three were covered by nothing. An exact set equality closes it in both
+    // directions — a new consumer nobody listed reds, and a listed file that
+    // stopped consulting reds too.
+    const declared = [...GATE_PRIMITIVES, ...PROP_ICON_CONSUMERS].sort();
+    const actual = FILES.filter(consultsGate).filter((f) => f !== GATE_DECLARATION).sort();
+    expect(actual.length).toBeGreaterThan(8); // not a vacuous walk
+    expect(actual).toEqual(declared);
+    // The one exclusion is named, exists, and is not a consumer of its own hook.
+    // Whether it TRIPS the detector depends on how its own prose is worded — this
+    // lane made it trip by writing `useIconsOn()` with parentheses in a roster
+    // heading, and un-tripped it by dropping them — which is precisely why the
+    // exclusion is by NAME and not by a cleverer regex.
+    expect(FILES).toContain(GATE_DECLARATION);
+    expect(declared).not.toContain(GATE_DECLARATION);
+  });
+
+  test('THE ROSTER IS PARSED, NOT READ: IconsContext.js names exactly these files', () => {
+    // The defect that started this lane was a comment nobody could execute. The
+    // comment is now executed: each lettered roster is compared to the set pinned
+    // above, so prose and code cannot drift apart in either direction.
+    expect(rosterNames('A')).toEqual(basenames([...GATE_PRIMITIVES]));
+    expect(rosterNames('B')).toEqual(basenames([...PROP_ICON_CONSUMERS]));
+    expect(rosterNames('C')).toEqual(basenames([...NO_ICON_CHANNEL]));
+    // NON-VACUITY: a parse that silently returned nothing would pass an empty
+    // list against an empty list forever. Each roster is really populated, and
+    // the letters really select different blocks.
+    expect(rosterNames('A').length).toBe(9);
+    expect(rosterNames('B').length).toBe(4);
+    expect(rosterNames('C').length).toBe(3);
+    expect(rosterNames('A')).not.toEqual(rosterNames('B'));
+    // …and a letter that does not exist parses to nothing rather than to
+    // everything, which is what makes the three assertions above discriminating.
+    expect(rosterNames('Z')).toEqual([]);
+  });
+
   test('the primitives whose icon channel was deleted stay deleted', () => {
     const regressions = [];
     for (const file of NO_ICON_CHANNEL) {
@@ -441,8 +592,10 @@ describe('lucide totality — the icons-off gate is enforced, not merely documen
     expect(ALLOWED.has(FROZEN_DIRECT_IMPORTERS[0])).toBe(true);
   });
 
-  test('the three lists are disjoint and carry no duplicate rows', () => {
-    const all = [...MAP_SUBTREE, ...GATE_PRIMITIVES, ...FROZEN_DIRECT_IMPORTERS];
+  test('the lists are disjoint and carry no duplicate rows', () => {
+    const all = [
+      ...MAP_SUBTREE, ...GATE_PRIMITIVES, ...FROZEN_DIRECT_IMPORTERS, ...PROP_ICON_CONSUMERS,
+    ];
     expect(all.length).toBe(new Set(all).size);
   });
 });
