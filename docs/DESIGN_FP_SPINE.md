@@ -304,6 +304,25 @@ authored here so "SP-N landed" resolves corpus-wide.]
   The causal annex labels every mold HEADLINE or TELLING; every join
   family carries both registers; the pacing governor reads headlines
   only (the telling is pull, never push).
+  **[AMENDED 2026-08-03 (owner clarification) — SCOPE + THE SURFACE
+  CONTRACT:]** the causal voice is EXCLUSIVELY THE HERALD'S — the
+  settlement rumor mill keeps its own local register and REFERENCES
+  upward: every rumor whose event reached the Herald carries a LINK to
+  its headline (the id join the address law already mandates); a rumor
+  whose event stayed below the pacing floor carries NO link — truthfully
+  unlinked, never dead-linked. THE HERALD ENTRY IS FOUR TIERS: (1) the
+  HEADLINE (the hook — the causal gesture lives here, R-28-entailed);
+  (2) the SUBHEADER — one plain, unembellished sentence of what
+  happened, clarity only, no voice (the visible honesty anchor: the
+  headline may sing because the subheader states); (3) THE CAUSALITY
+  POPUP on click — the telling register renders the chain; (4) the
+  cause-walk table beneath/within for the ledger truth. THE POPUP
+  CONVENTION (product-wide UI law, all surfaces): any popup WITHOUT an
+  explicit acknowledge control closes on outside-click; a popup WITH one
+  ("got it" / "continue" / "don't show again") requires the deliberate
+  dismissal. The causal annex gains the SUBHEADER register (one plain
+  form per kind — clarity prose, distinct from both headline and
+  telling); the annex header states Herald exclusivity.
 - **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion + the
   mode-speed table (J-D11(b)) landed as spine infrastructure ahead of all six.
 - **SP-8 THE AGE LAYER [CORRECTED 2026-08-02 (fp-audit) — new, per the
