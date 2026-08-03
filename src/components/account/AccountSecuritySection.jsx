@@ -17,8 +17,6 @@
  *     ready structure; not implemented.
  */
 import { useEffect, useState } from 'react';
-import {
-  KeyRound, Link2, Unlink, Check, } from 'lucide-react';
 import { auth as authService } from '../../lib/auth.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
@@ -260,7 +258,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
                 autoComplete="new-password" style={fieldStyle()}
               />
               <div style={{ display: 'flex', gap: SP.sm }}>
-                <Button variant="primary" size="md" busy={pwBusy} onClick={handleChangePassword} icon={<Check size={14} />}>
+                <Button variant="primary" size="md" busy={pwBusy} onClick={handleChangePassword}>
                   Update password
                 </Button>
                 <Button variant="ghost" size="md" disabled={pwBusy} onClick={() => { setPwOpen(false); setPwError(null); setCurrentPw(''); setNewPw(''); setConfirmPw(''); }}>
@@ -303,14 +301,13 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
                           variant="ghost" size="md" busy={busy}
                           disabled={onlyOneIdentity}
                           title={onlyOneIdentity ? 'You must keep at least one method connected' : undefined}
-                          icon={<Unlink size={13} />}
-                          onClick={() => handleUnlink(linked)}
+                                  onClick={() => handleUnlink(linked)}
                         >
                           Unlink
                         </Button>
                       </>
                     ) : (
-                      <Button variant="secondary" size="md" busy={busy} icon={<Link2 size={13} />} onClick={() => handleLink(provider)}>
+                      <Button variant="secondary" size="md" busy={busy} onClick={() => handleLink(provider)}>
                         Link
                       </Button>
                     )}
@@ -360,7 +357,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
                 signs this one out. Lost a device? Sign out everywhere to revoke every session.
               </div>
             </div>
-            <Button variant="secondary" size="md" busy={globalBusy} icon={<KeyRound size={13} />} onClick={handleSignOutEverywhere}>
+            <Button variant="secondary" size="md" busy={globalBusy} onClick={handleSignOutEverywhere}>
               Sign out all
             </Button>
           </div>

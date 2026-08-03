@@ -19,7 +19,6 @@
  * no new raw colors, so the raw-color ratchet is untouched.
  */
 import { useEffect, useState } from 'react';
-import { Check } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { securityQuestionText } from '../../data/securityQuestions.js';
 import { t } from '../../copy/index.js';
@@ -184,7 +183,7 @@ export default function AccountRecoveryQuestionsSection() {
               setQ1={chooseQ1} setA1={setA1} setQ2={setQ2} setA2={setA2}
             />
             <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap' }}>
-              <Button variant="primary" size="md" busy={busy} disabled={!complete} onClick={handleSave} icon={<Check size={14} />}>
+              <Button variant="primary" size="md" busy={busy} disabled={!complete} onClick={handleSave}>
                 {busy ? t('auth.security.account.saving') : t('auth.security.account.save')}
               </Button>
               <Button variant="ghost" size="md" disabled={busy} onClick={handleCancel}>

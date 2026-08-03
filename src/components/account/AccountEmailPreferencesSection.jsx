@@ -12,7 +12,6 @@
  * Styling uses this tree's theme vocabulary — no new raw colors.
  */
 import { useEffect, useRef, useState } from 'react';
-import { Mail } from 'lucide-react';
 import { GOLD, INK, BODY, MUTED, BORDER, SP, FS, swatch } from '../theme.js';
 import { EMAIL_CATEGORIES, getMyEmailPreferences, setMyEmailPreference } from '../../lib/emailPreferences.js';
 import { authSessionIdentity, captureAuthSessionFence, isAuthSessionFenceCurrent } from '../../lib/authSessionFence.js';
@@ -145,7 +144,7 @@ export default function AccountEmailPreferencesSection() {
   };
 
   return (
-    <Section title="Email preferences" icon={Mail}>
+    <Section title="Email preferences">
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md }}>
         <p style={{ fontSize: FS.sm, color: BODY, margin: 0, lineHeight: 1.5 }}>
           Choose which non-essential emails you receive. Changes save as you make them.

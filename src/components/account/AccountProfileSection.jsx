@@ -14,7 +14,6 @@
  * AccountPage's state would spread a temporary schema condition across three
  * files for no gain.
  */
-import { User, Shield, Check, X, Edit3, Bot, } from 'lucide-react';
 import { AI_MODEL_OPTIONS } from '../../config/pricing.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
@@ -42,7 +41,7 @@ function RoleBadge({ role }) {
       fontSize: FS.xs, fontWeight: 700,
       textTransform: 'uppercase', letterSpacing: '0.04em',
     }}>
-      <Shield size={11} /> {c.label}
+      {c.label}
     </span>
   );
 }
@@ -57,7 +56,7 @@ export default function AccountProfileSection({
   handleSaveProfilePreferences,
 }) {
   return (
-    <Section title="Profile" icon={User}>
+    <Section title="Profile">
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: SP.lg }}>
         {/* The account's own identity, rendered through THE SAME component every
             public surface uses (§6). Not a lookalike: a second hand-rolled avatar
@@ -98,7 +97,7 @@ export default function AccountProfileSection({
                   autoFocus
                 />
                 <IconButton
-                  Icon={Check}
+                  glyph="✓"
                   label="Save name"
                   onClick={handleSaveName}
                   disabled={nameSaving}
@@ -106,7 +105,7 @@ export default function AccountProfileSection({
                   size="lg"
                 />
                 <IconButton
-                  Icon={X}
+                  glyph="×"
                   label="Cancel editing"
                   onClick={() => setEditingName(false)}
                   tone="danger"
@@ -119,7 +118,7 @@ export default function AccountProfileSection({
                   {auth.displayName || t('account.setDisplayName')}
                 </span>
                 <IconButton
-                  Icon={Edit3}
+                  glyph="✎"
                   label="Edit name"
                   onClick={() => { setNameInput(auth.displayName || ''); setEditingName(true); }}
                   tone="ghost"
@@ -163,7 +162,7 @@ export default function AccountProfileSection({
             image on the next save. */}
         <AccountIdentitySection />
         <label htmlFor="account-model-preference" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Bot size={14} color={GOLD} /> AI model preference</span>
+          <span>AI model preference</span>
           <select
             id="account-model-preference"
             value={modelPreference}
@@ -188,7 +187,7 @@ export default function AccountProfileSection({
           size="md"
           onClick={handleSaveProfilePreferences}
           busy={profileSaving}
-          icon={<Check size={14} />}
+         
           style={{ alignSelf: 'flex-start' }}
         >
           {profileSaving ? 'Saving...' : profileSaved ? 'Saved' : 'Save profile'}

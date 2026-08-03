@@ -20,7 +20,6 @@
  * withheld from sign-up so account creation stays short).
  */
 import { useState } from 'react';
-import { Mail } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { GOLD, SECOND, MUTED, BORDER, sans, SP, FS } from '../theme.js';
 import { isConfigured } from '../../lib/supabase.js';
@@ -186,7 +185,6 @@ export default function AuthPanel({
   if (magicSent) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, textAlign: 'center' }}>
-        <Mail size={40} color={GOLD} style={{ margin: '0 auto' }} />
         <Alert type="success">
           {t('auth.magic.sent', { email: email.trim() })}
         </Alert>
@@ -206,7 +204,6 @@ export default function AuthPanel({
   if (mode === 'verify') {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, textAlign: 'center' }}>
-        <Mail size={40} color={GOLD} style={{ margin: '0 auto' }} />
         <Alert type="success">
           We sent a confirmation link to <strong>{email}</strong>. Check your inbox and click the link to activate your account.
         </Alert>

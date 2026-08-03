@@ -24,7 +24,6 @@
  * back-end, not stubbed).
  */
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Download, AlertTriangle, Upload } from 'lucide-react';
 import { downloadAccountExport, requestAccountDeletion } from '../../lib/accountData.js';
 import { getMyOperatorServiceExport } from '../../lib/operatorMessageExport.js';
 import { saves as savesService } from '../../lib/saves.js';
@@ -415,7 +414,6 @@ export default function AccountDataPrivacySection({
                   click + Enter to its nested input, so there's no raw button
                   element and no second interactive element — the input IS the control. */}
               <label htmlFor="account-import-file" style={IMPORT_TRIGGER_STYLE(canSave)}>
-                <Upload size={14} aria-hidden="true" />
                 Choose export file
                 <input
                   id="account-import-file"
@@ -548,7 +546,7 @@ export default function AccountDataPrivacySection({
               {exportError}
             </div>
           )}
-          <Button variant="secondary" size="md" icon={<Download size={14} />} busy={exportBusy} onClick={handleExport}>
+          <Button variant="secondary" size="md" busy={exportBusy} onClick={handleExport}>
             {exported ? 'Downloaded' : 'Download JSON'}
           </Button>
         </div>
@@ -609,7 +607,7 @@ export default function AccountDataPrivacySection({
                 This requests permanent deletion of your account and all associated data. There is a short grace
                 window during which you can contact support to cancel.
               </p>
-              <Button variant="ghost" size="md" icon={<AlertTriangle size={14} />} onClick={() => { setDeleteOpen(true); setDeleteError(null); }}>
+              <Button variant="ghost" size="md" onClick={() => { setDeleteOpen(true); setDeleteError(null); }}>
                 Request account deletion
               </Button>
             </>

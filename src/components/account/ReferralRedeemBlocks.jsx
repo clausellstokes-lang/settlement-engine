@@ -19,7 +19,6 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { Copy, Check, ArrowRight } from 'lucide-react';
 import { t } from '../../copy/index.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { auth as authService } from '../../lib/auth.js';
@@ -97,8 +96,7 @@ export function ReferralCard({ auth }) {
             <Button
               variant="secondary"
               size="md"
-              icon={copied ? <Check size={14} /> : <Copy size={14} />}
-              onClick={copyId}
+                  onClick={copyId}
               aria-label={t('account.referralCopy')}
               style={{ minHeight: 44 }}
             >
@@ -219,7 +217,6 @@ export function RedeemBlock({ onNavigatePricing }) {
           <Button
             variant="secondary"
             size="md"
-            trailingIcon={<ArrowRight size={14} />}
             onClick={onNavigatePricing}
             style={{ alignSelf: 'flex-start', minHeight: 44 }}
           >

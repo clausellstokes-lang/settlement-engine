@@ -7,7 +7,6 @@
  * alerts, the OAuth button + brand glyphs, and the page shell chrome.
  */
 import { useState, useId } from 'react';
-import { AlertCircle, CheckCircle, Mail, Shield, Map as MapIcon, Eye, EyeOff } from 'lucide-react';
 import {
   GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER_STRONG, CARD, sans, serif_,
   SP, FS, swatch, SLATE, SLATE_BG, FORM_MAX,
@@ -156,7 +155,7 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown, 
       {field}
       <div style={{ position: 'absolute', top: '50%', right: SP.xs, transform: 'translateY(-50%)' }}>
         <IconButton
-          Icon={reveal ? EyeOff : Eye}
+          glyph={reveal ? '◉' : '◎'}
           label={reveal ? t('auth.password.hide') : t('auth.password.show')}
           tone="ghost"
           size="xl"
@@ -259,9 +258,9 @@ export function Button({ onClick, children, variant = 'primary', disabled, style
 
 export function Alert({ type, children }) {
   const colors = {
-    error:   { bg: '#fdf4f4', border: '#e8b0b0', text: '#8b1a1a', Icon: AlertCircle },
-    success: { bg: '#f0faf2', border: '#a8d8b0', text: '#1a4a20', Icon: CheckCircle },
-    info:    { bg: '#fef9ee', border: GOLD, text: SECOND, Icon: Mail },
+    error:   { bg: '#fdf4f4', border: '#e8b0b0', text: '#8b1a1a' },
+    success: { bg: '#f0faf2', border: '#a8d8b0', text: '#1a4a20' },
+    info:    { bg: '#fef9ee', border: GOLD, text: SECOND },
   };
   const c = colors[type] || colors.info;
   // A+ design-a11y.4 — conditionally-rendered errors are the textbook live-region
@@ -280,7 +279,6 @@ export function Alert({ type, children }) {
         borderLeft: `3px solid ${c.text}`,
         fontSize: FS.sm, color: c.text, lineHeight: 1.5,
       }}>
-      <c.Icon size={16} style={{ flexShrink: 0, marginTop: 1 }} />
       <span>{children}</span>
     </div>
   );
@@ -290,8 +288,8 @@ export function Alert({ type, children }) {
 export function RoleBadge({ role }) {
   if (role === 'user') return null;
   const cfg = {
-    developer: { color: '#7c3aed', bg: 'rgba(124,58,237,0.12)', label: 'Developer', Icon: Shield },
-    admin:     { color: '#dc2626', bg: 'rgba(220,38,38,0.12)', label: 'Admin', Icon: Shield },
+    developer: { color: '#7c3aed', bg: 'rgba(124,58,237,0.12)', label: 'Developer' },
+    admin:     { color: '#dc2626', bg: 'rgba(220,38,38,0.12)', label: 'Admin' },
   };
   const c = cfg[role] || cfg.admin;
   return (
@@ -302,7 +300,7 @@ export function RoleBadge({ role }) {
       fontSize: FS.xxs, fontWeight: 700,
       textTransform: 'uppercase', letterSpacing: '0.04em',
     }}>
-      <c.Icon size={10} /> {c.label}
+      {c.label}
     </span>
   );
 }
@@ -344,7 +342,6 @@ export function AuthPageShell({ title, subtitle, children, footer }) {
             textDecoration: 'none',
           }}
         >
-          <MapIcon size={22} color={GOLD} />
           <span style={{
             fontSize: FS.xl, fontWeight: 700, color: GOLD, fontFamily: serif_,
             letterSpacing: '0.02em', textTransform: 'lowercase',

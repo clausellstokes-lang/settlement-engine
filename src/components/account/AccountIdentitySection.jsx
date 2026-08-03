@@ -39,7 +39,6 @@
  * happens.
  */
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
-import { ImagePlus, Trash2 } from 'lucide-react';
 
 import ImageCropper from '../gallery/ImageCropper.jsx';
 import Button from '../primitives/Button.jsx';
@@ -259,14 +258,14 @@ export default function AccountIdentitySection() {
         </div>
         <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap' }}>
           <Button
-            variant="ghost" size="sm" icon={<ImagePlus size={13} />}
+            variant="ghost" size="sm"
             disabled={busy} onClick={() => inputRef.current?.click()}
           >
             {avatarUrl ? 'Replace' : 'Upload an image'}
           </Button>
           {avatarUrl && (
             <Button
-              variant="ghost" size="sm" icon={<Trash2 size={13} />}
+              variant="ghost" size="sm"
               disabled={busy} onClick={onRemove} style={{ color: MUTED }}
             >
               Remove

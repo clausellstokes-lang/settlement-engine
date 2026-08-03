@@ -17,7 +17,6 @@
  * thread payload simply doesn't contain them.
  */
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Plus, ChevronLeft, RefreshCw, Send, CircleDot, CheckCircle2 } from 'lucide-react';
 import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
 import Pill from '../primitives/Pill.jsx';
@@ -57,9 +56,6 @@ function StatusPill({ status }) {
     <Pill
       bg={open ? swatch['#FBF5E6'] : swatch['#E0D0B0']}
       color={open ? GOLD_TXT : BODY}
-      icon={open
-        ? <CircleDot size={11} aria-hidden="true" />
-        : <CheckCircle2 size={11} aria-hidden="true" />}
       style={{}}
     >
       {STATUS_LABEL[status] || status}
@@ -194,7 +190,7 @@ export default function AccountTickets({ operatorMessage = null }) {
         </span>
         {view === 'list' && (
           <>
-            <Button variant="ghost" size="sm" onClick={loadTickets} icon={<RefreshCw size={12} />}>
+            <Button variant="ghost" size="sm" onClick={loadTickets}>
               Refresh
             </Button>
             <Button variant="gold" size="sm" onClick={() => {
@@ -202,14 +198,14 @@ export default function AccountTickets({ operatorMessage = null }) {
               setSubject(''); setMessage(''); setCategory('general'); setPriority('normal'); setSettlementId('');
               setView('create');
             }}
-              icon={<Plus size={12} />}>
+             >
               New ticket
             </Button>
           </>
         )}
         {view !== 'list' && (
           <Button variant="ghost" size="sm" onClick={() => { setError(null); setView('list'); }}
-            icon={<ChevronLeft size={12} />}>
+           >
             Back to tickets
           </Button>
         )}
@@ -341,7 +337,7 @@ export default function AccountTickets({ operatorMessage = null }) {
               value={replyBody} onChange={(e) => setReplyBody(e.target.value)} rows={2}
               style={{ ...inputStyle, resize: 'vertical', flex: 1 }} />
             <Button variant="gold" size="md" busy={replying} fullWidth={isMobile}
-              onClick={submitReply} disabled={replying || !replyBody.trim()} icon={<Send size={13} />}>
+              onClick={submitReply} disabled={replying || !replyBody.trim()}>
               Reply
             </Button>
           </div>

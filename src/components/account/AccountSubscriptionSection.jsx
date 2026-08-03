@@ -8,7 +8,6 @@
  * and arrive via props.
  */
 import { lazy as _lazy, Suspense as _Suspense } from 'react';
-import { Crown, TrendingDown, CreditCard, ArrowRight } from 'lucide-react';
 import { getTierDisplayName, getActivePacks } from '../../config/pricing.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { t } from '../../copy/index.js';
@@ -148,8 +147,6 @@ export default function AccountSubscriptionSection({
           <Button
             variant={founderTileShowing ? 'secondary' : 'primary'}
             size="lg"
-            icon={<Crown size={16} />}
-            trailingIcon={<ArrowRight size={16} />}
             onClick={onNavigatePricing}
           >
             See Cartographer
@@ -162,7 +159,6 @@ export default function AccountSubscriptionSection({
           <Button
             variant="secondary"
             size="md"
-            icon={<CreditCard size={15} />}
             onClick={handleManageBilling}
             disabled={portalBusy || !isConfigured}
           >
@@ -179,7 +175,7 @@ export default function AccountSubscriptionSection({
             fontSize: FS.xs, fontWeight: 700, color: SECOND,
             textTransform: 'uppercase', letterSpacing: '0.06em',
           }}>
-            <TrendingDown size={14} /> {t('account.purchaseCreditsLabel')}
+            {t('account.purchaseCreditsLabel')}
           </div>
 
           {purchaseError && (

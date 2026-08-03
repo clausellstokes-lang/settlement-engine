@@ -26,10 +26,9 @@
  * @param {() => void} [props.onNavigateAdmin]   admin-panel navigator
  */
 import { useMemo } from 'react';
-import { Shield, ChevronRight } from 'lucide-react';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import {
-  INK, SECOND, MUTED, BORDER, GOLD_TXT, GOLD_SOFT, FS, SP, sans } from '../theme.js';
+  INK, SECOND, BORDER, GOLD_TXT, GOLD_SOFT, FS, SP, sans } from '../theme.js';
 import { space } from '../../design/tokens.js';
 import Button from '../primitives/Button.jsx';
 import MobileTabStrip from '../primitives/MobileTabStrip.jsx';
@@ -130,8 +129,6 @@ export default function AccountNav({
             size="md"
             fullWidth
             onClick={onNavigateAdmin}
-            icon={<Shield size={16} color={SECOND} />}
-            trailingIcon={<ChevronRight size={16} color={MUTED} style={{ marginLeft: 'auto' }} />}
             style={{ justifyContent: 'flex-start', fontFamily: sans, textAlign: 'left' }}
           >
             <span style={{ flex: 1, textAlign: 'left' }}>
