@@ -41,6 +41,7 @@ import {
   resolveStartInterceptions,
 } from './envoyInterceptionStage.js';
 import { envoyNewsEntries } from './envoyNews.js';
+import { openRansomClaims } from './envoyRansomStage.js';
 import { ratifyCarriedSheets } from './envoyRatificationStage.js';
 import { npcLedgerOf } from './npcLedger.js';
 
@@ -130,6 +131,8 @@ export function advanceEnvoyDiplomacyPulse({
       autoApplied: [],
       newsEntries: [],
       ratifications: [],
+      ransomClaims: [],
+      ransomSkipped: [],
       commissionedPlants,
     };
   }
@@ -232,6 +235,13 @@ export function advanceEnvoyDiplomacyPulse({
     newsEntries.push(...transitionNews);
   }
 
+  // WR-7d — THE RANSOM STAGE, read from the post-custody world. It runs AFTER
+  // the WR-7b stages because the hold this tick opened is a hold this tick can
+  // price, and BEFORE the home mouth because a man in a cell is not coming
+  // home. Nothing is persisted: a ransom claim is new persistent state and its
+  // ledger shape is owner-gated, so the arc is computed and handed back.
+  const ransom = openRansomClaims({ worldState: state, tick });
+
   // WR-7c — THE RATIFICATION STAGE, decided BEFORE the mouth sees anything.
   // Every terms-bearing return in this pulse is voted on together, because two
   // envoys of one side home on the same tick are rival offers and a side that
@@ -333,6 +343,11 @@ export function advanceEnvoyDiplomacyPulse({
     // ratification is not an errand transition, and the news/belief adapters
     // read `evidence` by a closed transition vocabulary they own.
     ratifications: ratified.ratifications,
+    // WR-7d's priced claims and its receipted refusals, likewise handed back
+    // rather than written: the dwell that has not matured is the ordinary case
+    // and must not read as a failure.
+    ransomClaims: ransom.claims,
+    ransomSkipped: ransom.skipped,
     commissionedPlants: planted.commissionedPlants,
   };
 }

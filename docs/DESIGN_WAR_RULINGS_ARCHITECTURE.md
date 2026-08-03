@@ -982,12 +982,47 @@ congress, no multilateral table, ever.
 > at build time as the judgment block requires. IN-3's SEND-TWO verb CONSUMES
 > this reader; it does not fork a second one.
 >
-> ⚠️ **DEFERRED, NOT DROPPED — the live pulse wiring.** A ransom must re-mint
-> errands through `envoyErrand.js` (2,638) and land its claim at the
-> `applyWorldPulse.js` (1,395) mouth, both still at EXACTLY their R-BLD-6
-> baseline with zero headroom. The wiring is owed to THE DECOMPOSITION WAVE
-> alongside WR-7c's, in the slice that brings `envoyErrand.js` under its
-> ceiling. Nothing in this wave is lit, no golden moved, no soak ran.
+> ✅ **THE PULSE WIRING LANDED 2026-08-03 (LANE W), alongside WR-7c's.** The
+> deferral below rested on the same retired premise; no mouth was touched and no
+> baseline was raised. `openRansomClaims` in the new leaf `envoyRansomStage.js`
+> runs AFTER the WR-7b stages — the hold this tick opened is a hold this tick can
+> price — and BEFORE the home mouth, because a man in a cell is not coming home.
+>
+> **THE ARC, EXECUTED THROUGH THE LIVE PULSE.** A real envoy is dispatched
+> through the ordinary auto mouth, a third-party column with a singular
+> `imprison` goal takes him on his own node, WR-7b's hold ledger opens with
+> `cause: 'private_imprisonment'` — and on that tick NOTHING is priced
+> (`dwell_too_short`, dwellTicks 0). Two ticks later the same pulse mints the
+> claim: `coalition_reimbursement` with a `person` subject, claimant the captor,
+> **debtor the man's OWN home** (never the enemy — the realm that sent him is the
+> only party who can buy him back), and BOTH message legs priced as a pair
+> through the one named-person transit kernel, with the answer leg departing
+> exactly when the demand arrives. THE DWELL IS THE NEGATIVE CONTROL: a stage
+> that priced on capture alone would make the two ticks agree.
+>
+> **A REAL BUG THE PIN CAUGHT, recorded because it is a class.**
+> `foreignGuestHoldsOf` returns a normalized ARRAY of rows, not a map keyed by
+> person. The first draft read it with `Object.values(asObject(...))`, which
+> yields `{}` for an array — an EMPTY CENSUS that would have greened every
+> absence pin while pricing nothing, forever. The reachability pin asserts a
+> minted claim before it asserts any absence, which is why it died loudly
+> instead of passing quietly.
+>
+> **WORTH IS THE CAPTOR'S BELIEF, from the errand and nothing else.**
+> `ransomWorthBandFromErrand` takes one argument, and a terms-bearing captive
+> prices PRINCIPAL (K.5's richer target), a full embassy NOTABLE, anyone else
+> COMMON. Same enforcement as CR-WIRE-A: no world-state parameter exists through
+> which a real importance could enter.
+>
+> ⛔ **OWNER-GATED, AND THEREFORE NOT DONE — PERSISTENCE.** The stage RETURNS its
+> claims and priced legs (`ransomClaims` / `ransomSkipped`) and writes nothing.
+> A ransom claim is NEW PERSISTENT STATE, and persistence shape is owner-gated in
+> this estate, so the ledger key and its full lifecycle — regen, undo, import,
+> the JSON-round-trip alias trap, and the death path that must close an open
+> claim rather than ghost it — land in a slice under an explicit owner ruling.
+> Computing the arc, receipting it and proving it reachable is inside this lane's
+> authority; minting a new save-shape is not. Nothing is lit, no golden moved, no
+> soak ran, and THE DORMANCY LAW holds: the same three dark hashes as WR-7c's row.
 
 **Lifecycle paths (WR-7 family, added 2026-08-02):** `envoyErrands` and
 `foreignGuestHolds` persist — JSON-round-trip (the alias trap), regen/undo/import
