@@ -194,7 +194,15 @@ ledger — never from a session digest.
 >   tuning/pushes) reassigned to the Fable chair by owner order; THE REALM MAGIC TOGGLE specced
 >   @ 16231a72 (projection not gate; twelve-leak register reproduce-first; magic ≠ faith ruled
 >   vetoable). Sol banked SOL-BANK-1 (nav-flow teardown flake class) per owner order for the
->   consolidated adversarial pass.
+>   consolidated adversarial pass. THE WAR AMENDMENTS architected from the owner's design
+>   dialogue @ minifold d9050aa5 + 4bbf847c (DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md, SOL_QUEUE
+>   23a): CV-1..4 — the exit vocabulary {settled, defaulted, cold} + the cold edge, the
+>   turncoat's receipted shape (healthy-tie switch unreachable), alignment weights (req. 13
+>   paid for war), the betrayal market feeding shared-threat; TB-1..4 — the tribute family
+>   (five banded bases incl. the prosperity INDEX and population-as-columns, three-goal demand
+>   doctrine Herald-named, justice-scaled strain, remission, no clamps) + TB-LAW-7 THE HEALING
+>   LATTICE (five reducers — mutual-gain trade, co-belligerence, kin, common rite, affinity —
+>   saturation-gated with hysteresis). J-CT-1..10 vetoable.
 > - 2026-08-02 (~04:30, THE NIGHT CLOSES WHOLE). CORRECTION PASS COMPLETE: 134 corrections
 >   across 11 docs by 7 agents (six correctors + the coherence sweeper), 20+3 unresolved
 >   forks all chair-ruled (2 routed to owner: annual credit cadence · WR-9 gate reading);
