@@ -325,3 +325,52 @@ phrase with seeded per-telling selection. Four rulings and one finding.
   not asked to touch. Real event refs use their varying token once and are not
   currently degenerate, so this is latent, not live. CHAIR TO SCHEDULE as its own
   disclosed wave; do not let it ride inside a content slice.
+
+## THE LEGACY RETROFIT — WIRING SLICE 2 (Fable chair, 2026-08-03; vetoable)
+
+The **war desk** (§3a, twelve kinds) and the **events desk** (§3d, twenty-eight kinds)
+join the population desk on the live subject-phrase path — forty kinds, 268 pool
+members of which 228 are newly voiced, taking the retrofit from 4 of §3's 63 kinds to
+44. Five rulings and one housekeeping row; no new finding, and LEG-F1 still stands
+unscheduled.
+
+- **J-LEG-WIRE-5 — THE BLAST RADIUS IS AN AUTHORED ROSTER PER DESK, AND IT IS NOW
+  PINNED EXHAUSTIVELY.** Slice 1's `POPULATION_DESK_KINDS` generalises to one roster
+  per desk plus `WIRED_DESK_KINDS`, still authored rather than `Object.keys(...)` so
+  the census keeps an independent denominator. The blast-radius control is no longer a
+  single sample kind: every registered kind NOT on a roster is now driven with a seed
+  and proven to return its exact `WHAT_PHRASES` row, over the whole registry. A kind
+  that starts moving without being declared reds, whichever direction the drift came
+  from.
+- **J-LEG-WIRE-6 — THE CADENCE FLOOR IS JOINED FROM THE DOC, NOT ASSUMED.** The corpus
+  parser now reads each kind's `CADENCE: … → floor N` line and the wired pool is
+  asserted to meet it. SP-6 prices the floor by how often a kind FIRES (chronic 8,
+  notable 6, major/rare 4); a pool wired one variant short is a half-discharged
+  amendment, and before this it would only have been noticed by a reader.
+- **J-LEG-WIRE-7 — THE REPETITION ENVELOPE IS NORMALISED TO 1/poolLength.** Slice 1's
+  band (`max < 0.25`, `min > 0.04`) was written against eight-member pools and is
+  arithmetically impossible for the floor-4 pools this slice introduces — uniform on
+  four members IS 0.25. The band is now expressed in units of the uniform share, so a
+  floor-4 and a floor-8 pool are held to the same SHAPE: `max < 2×` uniform,
+  `min > 0.4×`. Measured over all 44 wired kinds at 400 draws: worst max 1.52×, worst
+  min 0.66×, zero unreachable members under either the real or the parity-degenerate
+  seed family.
+- **J-LEG-WIRE-8 — THE UNWIRED NEGATIVE CONTROL MOVES TO THE FAITH DESK.** Slice 1
+  used `conquest` as the "registered but unwired" control; this slice wires it. The
+  control is now `pantheon_ascendancy` (§3b), chosen because the faith desk is
+  AUTHORED IN THE CORPUS AND DELIBERATELY NOT YET WIRED — so the control is a real
+  kind on the real path rather than a synthetic one, and it will have to be moved
+  again, deliberately, on the day the faith desk lands.
+- **J-LEG-WIRE-9 — NO TWO WIRED KINDS MAY BORROW ONE SENTENCE.** Cross-kind variant
+  uniqueness is pinned over every wired pool. Variant 1 is exempt by construction: the
+  live rows are the engine's inheritance, and two kinds sharing one today
+  (`flow_migration` / `migration_pressure`, 'people on the move') is precisely the
+  defect the widening exists to cure.
+- **HOUSEKEEPING — THE FIVE GUARD ROWS ARE ANCHORED, NOT FROZEN.** The cycle-4
+  verifier found slice 1's test file carrying five un-anchored `not.toMatch` sites
+  against `negativeAssertionAnchor.walker`'s frozen-0 ceiling. They are cured at the
+  source rather than banked: the five R1 shape laws became one table
+  (`R1_FORBIDDEN`), collapsing five assertion sites into one, and that one carries an
+  `// anchored:` reason naming the two positive assertions that keep it live (the
+  pool's length pinned against its cadence floor, and the variant asserted truthy).
+  No frozen row was added — the walker's roster may not grow.
