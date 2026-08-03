@@ -460,13 +460,27 @@ describe('settlementSlice — resetSettlementIdentity chokepoint (state-lifecycl
 });
 
 describe('settlementSlice — resetSettlementIdentity is the single writer (structural prevention)', () => {
-  const src = readFileSync(new URL('../../src/store/settlementSlice.js', import.meta.url), 'utf8');
+  // The chokepoint's DEFINITION and its CALL SITES no longer live in one file:
+  // THE DECOMPOSITION WAVE (lane D) moved the definition to
+  // settlementLifecycleHelpers.js while the four callers stayed on the slice.
+  // So this pin reads a MODULE SET for the definition and the slice for the
+  // callers. Anchoring the definition search on a single filename would have
+  // gone VACUOUS on that relocation — the regex would match zero times and the
+  // "exactly one definition" claim would silently become "none, and nobody
+  // noticed". The set is asserted non-empty below for the same reason.
+  const readStore = (f) => readFileSync(new URL(`../../src/store/${f}`, import.meta.url), 'utf8');
+  const DEFINING_MODULES = ['settlementSlice.js', 'settlementLifecycleHelpers.js'];
+  const sources = DEFINING_MODULES.map(readStore);
+  const src = readStore('settlementSlice.js');            // the CALL-SITE surface
+  const defSrc = sources.find((t) => t.includes('function resetSettlementIdentity')) || '';
 
   test('the chokepoint resets the FULL residue field list', () => {
-    const body = src.slice(
-      src.indexOf('function resetSettlementIdentity'),
-      src.indexOf('export const createSettlementSlice'),
-    );
+    const from = defSrc.indexOf('function resetSettlementIdentity');
+    expect(from, 'no module in the set defines resetSettlementIdentity').toBeGreaterThanOrEqual(0);
+    const rest = defSrc.slice(from);
+    // Bound the body at the next top-level declaration, or EOF when it is last.
+    const nextDecl = rest.slice(1).search(/\nexport (?:const|function) /);
+    const body = nextDecl === -1 ? rest : rest.slice(0, nextDecl + 1);
     for (const field of [
       'pendingEditsQueue', 'pendingEditsClock', 'pendingSuccession', 'draftVersionHistory',
       'generationId', 'pipelineHistory', 'pipelineRevealActive', 'lastRegenerationDelta', 'pendingPreview',
@@ -480,7 +494,10 @@ describe('settlementSlice — resetSettlementIdentity is the single writer (stru
     // would NOT bump this count; a new path that correctly routes through the chokepoint
     // makes it 5 and trips this pin, forcing a deliberate update. Hydration is
     // the one call allowed to preserve save-owned pending work across navigation.
-    expect((src.match(/function resetSettlementIdentity/g) || []).length).toBe(1);
+    const defCount = sources.reduce(
+      (n, t) => n + ((t.match(/function resetSettlementIdentity/g) || []).length), 0,
+    );
+    expect(defCount, 'exactly one module in the set may define the chokepoint').toBe(1);
     const calls = src.match(
       /resetSettlementIdentity\(state(?:,\s*\{\s*preservePendingEdits:\s*true\s*\})?\);/g,
     ) || [];

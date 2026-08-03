@@ -589,6 +589,21 @@ describe('R-4 advertised-undo invariant — the map annotation ring, BOTH direct
 
 describe('R-4 advertised-undo invariant — records and the session tombstone', () => {
   const settlement = storeSource.get('settlementSlice.js') || '';
+  // THE DECOMPOSITION WAVE (lane D) moved recordSnapshot's + revertToSnapshot's
+  // bodies out of settlementSlice.js into settlementVersionHistoryActions.js, and
+  // the identity/ripple helpers into settlementLifecycleHelpers.js. The
+  // versionHistory probe below asks whether the record is really WRITTEN on this
+  // path — not whether one filename happens to contain a substring — so it reads
+  // the slice's whole module family. Left anchored on the single filename it would
+  // have gone vacuous on a pure relocation: green, guarding nothing. The tombstone
+  // probe keeps the narrower slice-only source on purpose; its writes are still
+  // there.
+  const SETTLEMENT_FAMILY = [
+    'settlementSlice.js',
+    'settlementLifecycleHelpers.js',
+    'settlementVersionHistoryActions.js',
+  ];
+  const settlementFamily = SETTLEMENT_FAMILY.map((f) => storeSource.get(f) || '').join('\n');
 
   test('the eventLog record kind: the reader exists and its refusal is typed', () => {
     for (const [name, arming] of Object.entries(ARMING)) {
@@ -617,7 +632,12 @@ describe('R-4 advertised-undo invariant — records and the session tombstone', 
       .map(([name]) => name);
     expect(writers.sort()).toEqual(['commitPendingEdits', 'recordSnapshot']);
     // The record the recovery verb reads must actually be written on this path.
-    expect(/versionHistory/.test(settlement)).toBe(true);
+    // The family must resolve — a renamed/removed module would otherwise make the
+    // containment probe below trivially true-by-absence-of-check.
+    for (const f of SETTLEMENT_FAMILY) {
+      expect(storeSource.get(f), `${f} must exist in the store source map`).toBeTruthy();
+    }
+    expect(/versionHistory/.test(settlementFamily)).toBe(true);
     expect(OPERATIONS.revertToSnapshot.undoState).toBe('external:auto-pre-revert-snapshot');
   });
 

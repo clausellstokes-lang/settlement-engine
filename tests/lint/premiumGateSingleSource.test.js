@@ -158,7 +158,10 @@ const EXEMPTIONS = {
   'src/store/campaignWorldPulseSlice.js': 'quota-or-limit',
   'src/store/galleryImportMap.js': 'campaign-or-import-entitlement',
   'src/store/galleryImportSettlement.js': 'campaign-or-import-entitlement',
-  'src/store/settlementSlice.js': 'content-visibility',
+  // W-F6's activateFaithIfEntitled — the raw comparison this exemption covers —
+  // moved here from settlementSlice.js under THE DECOMPOSITION WAVE (lane D),
+  // byte-identical. The exemption follows the CODE, not the filename.
+  'src/store/settlementLifecycleHelpers.js': 'content-visibility',
 };
 
 /** Strip block + line comments so a signature named in prose is not a hit. */
