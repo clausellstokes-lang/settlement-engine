@@ -266,6 +266,28 @@ authored here so "SP-N landed" resolves corpus-wide.]
   J-POP-12/J-INT-13's recorded-ruling pattern; this amendment is that
   recorded ruling's design half — the per-kind golden plan still lands
   at wiring).
+  **[AMENDED 2026-08-03 (owner order) — THE CAUSAL GRAMMAR:]** the
+  narration kit gains the CAUSAL VOICE — authored prose for the JOINS, so
+  the Herald can tell a chain as one sentence ("X declares vengeance on
+  its weakened neighbour — a generation's grudge will be met"; "Thorp Y
+  was wiped out by the flood that followed the famine year; trade
+  withered, and the routes turned elsewhere"). Three content unit classes,
+  all in a dedicated causal annex: (1) JOIN MOLDS keyed by the coupling
+  taxonomy — the 42 CPL directions plus the named within-layer chains
+  (~60-80 families), 4-8 angle-distinct molds each, for the high-drama
+  pairs; (2) CLAUSE FORMS — a compressed one-clause variant per major
+  kind, composable by the braid; (3) CONNECTIVE POOLS keyed by provenance
+  edge TYPE ("following", "born of", "in answer to", "the bill for").
+  Three laws bind it: PER-LINK ENTAILMENT (every clause entailed by its
+  own receipt, every connective by the actual provenance edge — a chain
+  sentence is the cause walk wearing prose, never an invention); TIME
+  BANDS (durations render through the closed time-band vocabulary derived
+  from sinceTick against INTERVAL_WEEKS — "a generation's grudge", never
+  a digit); and COMPOSITION LIVES DISPLAY-SIDE (CW-1's braid and the arc
+  composers assemble; no engine state, no new writers — the chain is
+  already persisted, the voice only reads it). The frequency-scaled floor
+  applies per join FAMILY; the phrase-repetition envelope covers composed
+  sentences at the family grain.
 - **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion + the
   mode-speed table (J-D11(b)) landed as spine infrastructure ahead of all six.
 - **SP-8 THE AGE LAYER [CORRECTED 2026-08-02 (fp-audit) — new, per the
