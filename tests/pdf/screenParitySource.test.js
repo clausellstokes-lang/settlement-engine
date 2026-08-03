@@ -24,14 +24,30 @@
  * documented, not a bug to re-find).
  */
 import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const read = (p) => readFileSync(resolve(process.cwd(), p), 'utf-8');
 
+// The PDF side is a MODULE SET, not one file. THE DECOMPOSITION WAVE (lane D)
+// moved the food and defense derivations out of viewModel.js into
+// viewModelPrimitives.js / viewModelBodySlices.js; a pin anchored on the single
+// old filename would have failed on a pure relocation, and — worse — a later
+// relocation could have left it green while guarding nothing. Globbing every
+// src/pdf/lib/viewModel*.js keeps the pin attached to the CODE.
+const VM_DIR = 'src/pdf/lib/';
+const viewModelFiles = readdirSync(resolve(process.cwd(), VM_DIR))
+  .filter((f) => /^viewModel.*\.js$/.test(f))
+  .sort();
+const readViewModelSet = () => viewModelFiles.map((f) => read(VM_DIR + f)).join('\n');
+
 describe('PDF↔screen parity — shared derivation source is pinned on BOTH sides', () => {
+  it('the view-model module set is non-empty (the glob cannot go vacuous)', () => {
+    expect(viewModelFiles).toContain('viewModel.js');
+  });
+
   it('the PDF view-model sources food + defense from the shared display helpers', () => {
-    const vm = read('src/pdf/lib/viewModel.js');
+    const vm = readViewModelSet();
     expect(vm, 'PDF view-model must derive food via deriveFoodBalance').toContain('deriveFoodBalance');
     expect(vm, 'PDF view-model must derive defense via deriveDefenseReadiness').toContain('deriveDefenseReadiness');
   });

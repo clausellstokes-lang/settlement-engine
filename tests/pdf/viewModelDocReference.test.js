@@ -10,16 +10,26 @@
  * test pins that the cited module + symbol actually resolve.
  */
 import { describe, test, expect } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { PARITY_EXEMPT } from '../../src/domain/display/parityContract.js';
 
-const viewModelSrc = readFileSync(
-  fileURLToPath(new URL('../../src/pdf/lib/viewModel.js', import.meta.url)),
-  'utf8',
-);
+// Read the whole view-model MODULE SET, not one filename. THE DECOMPOSITION WAVE
+// (lane D) moved normalizeIncomeSources — and with it this note — out of
+// viewModel.js into viewModelBodySlices.js; a pin anchored on the single old
+// filename would have gone vacuous on a pure relocation. Globbing every
+// src/pdf/lib/viewModel*.js keeps the pin attached to the CODE, so the next split
+// cannot silently un-guard it either.
+const VM_DIR = fileURLToPath(new URL('../../src/pdf/lib/', import.meta.url));
+const viewModelFiles = readdirSync(VM_DIR).filter((f) => /^viewModel.*\.js$/.test(f)).sort();
+const viewModelSrc = viewModelFiles.map((f) => readFileSync(VM_DIR + f, 'utf8')).join('\n');
 
 describe('viewModel income-source note cites a real parity contract', () => {
+  test('the view-model module set is non-empty (the glob cannot go vacuous)', () => {
+    expect(viewModelFiles).toContain('viewModel.js');
+    expect(viewModelFiles.length).toBeGreaterThanOrEqual(1);
+  });
+
   test('the note names the actual parityContract module, not a phantom path', () => {
     expect(viewModelSrc).toContain('domain/display/parityContract.js');
     // The dead reference must be gone.
