@@ -4,7 +4,7 @@
  *
  * The strict-typecheck burn-down reached 0 errors partly by SUPPRESSION: the
  * domain kernel carries hundreds of `@type {any}`-style casts and a handful of
- * `@ts-ignore` / `@ts-expect-error` directives. A "strict-0" gate says nothing
+ * `@ts-ignore` / `@ts-expect-error` directives. A strict gate says nothing
  * about that debt — a fresh `@type {any}` cast keeps the gate green while
  * silently regrowing the very holes the burn-down was meant to close. This
  * counter makes the debt a first-class, MONOTONE-DOWN number so it can only

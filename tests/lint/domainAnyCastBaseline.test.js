@@ -1,8 +1,9 @@
 /**
  * domainAnyCastBaseline.test.js — the domain any-cast + ts-suppression ratchet.
  *
- * The strict burn-down (domainStrictBaseline.test.js) holds src/domain at ZERO
- * strict errors — but part of that zero was bought with suppression: hundreds
+ * The strict ratchet (domainStrictBaseline.test.js) holds src/domain to a
+ * shrink-only per-file strict-error census — but part of the original zero was
+ * bought with suppression: hundreds
  * of `@type {any}`-style JSDoc casts and a handful of `@ts-ignore` /
  * `@ts-expect-error` directives. A "strict-0" gate is blind to that debt: a
  * fresh `@type {any}` keeps the gate green while silently regrowing the holes
@@ -60,7 +61,31 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // war/pulse files adopt the shapes — the mechanism is now in place for the next
 // wave to keep burning down factionCompetition/npcAgency/institutionLifecycle/
 // etc. Ceiling lowered to the measured total. Monotone-down; never raise.)
-const CEILING = 2252;
+//
+// (2026-08-03 — CHAIR RULING R-BLD-9, ONE-TIME re-baseline to MEASURED TRUTH,
+// 2252 → 2287. The banked-debt-ledger repair, identical in kind to the size
+// ratchet (R-BLD-6) and the domain-strict ratchet re-freeze in this same
+// commit. The war waves landed a new lineage of envoy/coalition/peace-terms
+// modules on top of a baseline frozen before them, so 19 files read as
+// permanent regressions against a census that no longer described the tree.
+// A ratchet everyone has to ignore to commit is not a ratchet. Re-freeze at the
+// measurement, keep the law, owe the burn-down.
+//
+// What survives unchanged — and is what makes this safe rather than a widening:
+//   - per-file shrink-only (a file may never exceed its own entry);
+//   - NEW files enter at ZERO (`baseline.files[file] ?? { any: 0, suppress: 0 }`
+//     in the regression pin below), so nothing written from here on gets a free
+//     allowance out of the banked total;
+//   - the exact-set governance below (no file below its baseline, no stale
+//     entries, baseline === tree) is untouched, so the banked number can only
+//     ever be ratcheted DOWN by `--update`.
+// Measured on a CLEAN worktree at HEAD 23d118eb (committed bytes only) —
+// three untracked Lane-P files were live in the shared tree at measurement
+// time and are deliberately NOT banked; in-flight work does not get banked.
+//
+// Burn-down owed at THE STRICT BURN-DOWN WAVE, queued first-class alongside the
+// 1,329 strict errors. Monotone-DOWN hereafter; never raise past 2287.)
+const CEILING = 2287;
 
 const baseline = JSON.parse(readFileSync(join(ROOT, 'tests/lint/.domain-any-baseline.json'), 'utf8'));
 const current = countDomain();
