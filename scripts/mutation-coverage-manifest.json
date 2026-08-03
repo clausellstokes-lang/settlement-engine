@@ -26,7 +26,11 @@
   "discourse-parity-variant": "Cross-surface lit-decade variant (tranche 3c) driving the discourse realizer over a real recorded DAG to prove its connected prose introduces zero unrecorded claims and zero contradictions vs the chronicle. The realizer's PRODUCT correctness is mutation-covered by tests/lint/discourseLexiconCoverage.test.js (the planted 'discourse/lexicon relation-type coverage gap' regression) plus the clause-provenance composition pin in tests/domain/discourseKernel.test.js; a second planted mutation here would duplicate that at the cost of a full sim drive per sweep. Its distinct value is the real-drive claims/direction/spell-break census, which a synthetic source mutation cannot target beyond the coverage the totality walker already proves.",
   "live-constant-coupling": "Executed coupling pin: the test imports BOTH sides of the contract live \u2014 the cap constant (e.g. MAX_EVENT_NARRATIVE_SNAPSHOTS) and the copy table \u2014 and asserts the user-facing disclosure string contains the constant's current value. Each mutation direction (changing the constant without the copy, or dropping/weakening the disclosure sentence) reds the assertion by construction on every ordinary suite run; a planted sed of either side would re-execute that identical check at sweep cost, adding no catching power.",
   "arcane-census-executed-2026-08-03": "Executed discovery proof at authoring time (MG-3h, chair ruling R-BLD-5). The census's catching power was demonstrated BEFORE any baseline existed: run against unmutated src/ it surfaced EIGHT previously unrecorded arcane/ambiguous classifiers in seven files (districtProfile, npcProfile x2, stressorDynamics, tierOutcomeApply, factionRoles, isolationGenerator, contradictions) that the leak register had never seen \u2014 a walker that finds real unknown members of its class on first run is not vacuous. It also self-proves on every run: the KNOWN_UNCONVERTED shrink-only check reds if any recorded site stops matching, and the not-vacuous check reds if the glob stops finding source. The mutation target is the WHOLE shared src/ tree, which carries three other lanes' dirty and untracked files, so a standing perl plant is exactly the case the sweep's dirty-tree guard exists to refuse. Promote to kind:mutation once src/ is quiescent. \u2b50 SECOND EXECUTED PROOF, 2026-08-03 (the per-alternation allowlist): a mixed alternation `/mage|tower|academy/i` was planted inside an ALLOWLISTED file (src/domain/magicLedger.js, verified tracked-and-clean first, reverted by pathspec checkout in the same shell) and the census was run twice \u2014 the HEAD version with its file-scoped skip passed 5/5 blind, the rebuilt version reported the site by path, line, token split and literal. That A/B is the receipt that the file-scoped exemption was a real hole and that it is now closed. Two further controls executed the same way: a `covers` signature altered by one character reds BOTH the census arm and the stale-exemption arm, and a `why` shortened below the reason floor reds the liveness arm. Still kind:rationale rather than kind:mutation because a STANDING sweep plant would have to live in the shared src/ tree, which remains dirty across three lanes; the controls above were transient and self-reverting, which the sweep's dirty-tree guard cannot be.",
-  "negative-control-executed-2026-07-30": "Executed negative-control proof at authoring time (2026-07-30 verified-fix wave): each of these pins was proven non-vacuous by REVERTING the fix it guards (the exact mutation the sweep would plant), observing the suite red on the reverted defect, restoring, and re-running green \u2014 receipts quoted in the wave record. The mutation targets sit in files the sweep's dirty-tree guard protects (store slice helpers, edge-function sources), so a standing perl plant adds churn risk without adding proof strength beyond the executed control. Promote to kind:mutation if a standing sweep area later covers these targets."
+  "negative-control-executed-2026-07-30": "Executed negative-control proof at authoring time (2026-07-30 verified-fix wave): each of these pins was proven non-vacuous by REVERTING the fix it guards (the exact mutation the sweep would plant), observing the suite red on the reverted defect, restoring, and re-running green \u2014 receipts quoted in the wave record. The mutation targets sit in files the sweep's dirty-tree guard protects (store slice helpers, edge-function sources), so a standing perl plant adds churn risk without adding proof strength beyond the executed control. Promote to kind:mutation if a standing sweep area later covers these targets.",
+  "narration-kit-exact-census-2026-08-03": "SP-6 narration-kit phrased-kind walkers (WR-2..WR-7). Each holds a FROZEN LITERAL census table against the live registry export from src/domain/worldPulse/eventProse.js and re-derives every reader join from live imports: the exact kind list, the significance vocabulary, the audience, the Herald desk via SECTION_OF, the WHAT_PHRASES registration, the pool-width floor, and the authored annex lines read off docs/content/RECEIPT_POOLS_*.md. Both sides of every one of those contracts is imported live, so any registry edit reds by construction on an ordinary suite run and a planted sed would re-execute the identical comparison. EXECUTED CONTROL, 2026-08-03, one representative member of the family: retagging a single kind's Herald desk in WAR_RULING_KIND_REGISTRY (peace_refused, 'adjudication' -> 'war') via perl -0pi reddened FOUR tests in tests/lint/warRulingKindPools.walker.test.js (4 failed / 40 passed) - the census arm, the desk join and the annex-line comparison all bit at once. eventProse.js was restored from a cp backup and hash-verified byte-identical (9f33b924dc837a9f8e3cdf35879fcb0a1b5900ae411227f632f9c83a99ef53ca) and the attribution control re-run. The other five members are the same shape over the same module and the same idiom. NON-VACUITY IS ALSO PROVEN OPERATIONALLY AND UNPLEASANTLY: three of these six are RED AT HEAD right now because the one-kind-one-pool merge (2026-08-03) moved their pools out of RECEIPT_POOLS_WAR.md into RECEIPT_POOLS_LEGACY.md and left a forwarding stub the annexLines reader does not follow - a walker that catches a real corpus refactor it was never told about is not a pin that could pass on nothing. A standing sweep plant would have to add src/domain/worldPulse/eventProse.js to MUTATED_FILES; that module is the shared registry six walkers and the whole war-wave tranche read, and check_caught's `git checkout --` revert would discard any concurrent lane's uncommitted work in it. Promote to kind:mutation when the war tranche folds and the annex forward is repaired.",
+  "herald-truth-laws-executed-2026-08-03": "SP-6's two truth-side disclosure laws (2026-08-03). tests/lint/heraldContaminationFence.test.js is SELF-PROVING in the strict sense: alongside the transitive-import closure and the belief/rumor/disinfo token scan it runs a GUARD-THE-GUARD describe block asserting the same scan FINDS every one of those tokens in modules that legitimately read them, so a scan that silently stopped matching cannot pass as compliance - the mutation is in the test body and executes on every run. tests/domain/heraldIntegrity.test.js is a five-state behavior pin over classifyLinkIntegrity/disclosureFor whose load-bearing assertions are hard NEGATIVES (organic wear may never name an author even atop a plant; an unclassifiable link is UNKNOWN and never guessed; a player audience gets nothing, not a redacted stub). EXECUTED CONTROL, 2026-08-03: collapsing the compound state (`state: worn ? 'planted_worn' : 'planted'` -> `state: 'planted'`) in src/domain/display/heraldIntegrity.js reddened exactly the two compound-state pins (2 failed / 16 passed); the file was restored from a cp backup and hash-verified byte-identical (174b6a188f8b9745b80e2c9dd79bbdd9cc320d9dac720890b63f34e6ff7d0162) and the attribution control returned 18/18 green. A standing plant is deferred rather than skipped: heraldIntegrity.js and the composer set are the herald lane's live subjects in this shared tree (the raw-NUL incident of 2026-08-03 was authored into src/domain/display/heraldIndex.js hours earlier), and the E-A amendment b0fc33e1 says a plant must not target a moving surface. Upgrade to kind:mutation at the herald lane's close.",
+  "src-scan-totality-inline-controls-2026-08-03": "Fail-closed src/-wide discovery scans whose subject is THE WHOLE TREE rather than one file, which is exactly the target class the sweep's dirty-tree guard exists to refuse. tests/lint/configMigrationSingleWriter.walker.test.js (MG-3f leak L8) requires that exactly ONE file spells the magicExists-from-priorityMagic inference, and carries its own never-satisfied-by-deletion guard so the exact set cannot pass by matching nothing. EXECUTED CONTROL, 2026-08-03: a transient fourth fork planted at src/__laneMProbeConfigFork.js reddened the exact-set assertion naming the probe by path (1 failed / 1 passed); the probe was deleted in the same shell and the attribution control returned 2/2 green. tests/lint/namedPersonTransitTotality.walker.test.js (WR-7a law M) discovers every route-leg physics site by executable timing/delegation signature and requires each to be in the closed manifest, both directions. ITS CATCHING POWER IS AN OPERATIONAL RECEIPT, not a synthetic one: it went RED for real when WR-7d @ dea59c23 landed ransomClaim.js pricing a demand's road with the shared kernel without registering it, and stayed red across several waves until THE DECOMPOSITION WAVE registered it @ 42299b07 - it found a real unregistered member of its class that no author had told it about. A standing sweep plant for either would have to name src/** in MUTATED_FILES, which cannot be reconciled with a live shared tree carrying several lanes' untracked work. Promote to kind:mutation once src/ is quiescent.",
+  "generator-check-round-trip": "Projection contract whose mutation is EXECUTED on every ordinary run rather than planted: the test shells out to the real projector (`node scripts/generate-dossier-state-prose.mjs --check` via execFileSync) which re-derives every generated leaf from the authored annexes and BYTE-COMPARES, so a stale projection or a variant the parser silently dropped reds here without any sweep involvement - the generator itself throws on any tagged pool line it fails to consume. On top of that round-trip the test asserts the MEASURED shape of what landed (per-desk block and variant inventories, shrink-only) rather than trusting the annexes' own arithmetic, which the merge notes record as disagreeing with the measurement by a handful. A planted source mutation would have to edit either the authored markdown corpus or a .generated.js leaf; both are regenerable artifacts the sweep's `git checkout --` revert would restore into a state the generator disagrees with, and neither adds catching power over the executed --check."
  },
  "invariants": {
   "tests/generators/effectReachability.coverage.test.js": {
@@ -1735,6 +1739,54 @@
   "tests/security/civilityGuard.pglite.test.js": {
    "kind": "rationale",
    "ref": "pglite-executed"
+  },
+  "tests/lint/envoyKindPools.walker.test.js": {
+   "kind": "rationale",
+   "ref": "narration-kit-exact-census-2026-08-03"
+  },
+  "tests/lint/lineageKindPools.walker.test.js": {
+   "kind": "rationale",
+   "ref": "narration-kit-exact-census-2026-08-03"
+  },
+  "tests/lint/phrasedKindPools.walker.test.js": {
+   "kind": "rationale",
+   "ref": "narration-kit-exact-census-2026-08-03"
+  },
+  "tests/lint/warCoalitionKindPools.walker.test.js": {
+   "kind": "rationale",
+   "ref": "narration-kit-exact-census-2026-08-03"
+  },
+  "tests/lint/warCostKindPools.walker.test.js": {
+   "kind": "rationale",
+   "ref": "narration-kit-exact-census-2026-08-03"
+  },
+  "tests/lint/warRulingKindPools.walker.test.js": {
+   "kind": "rationale",
+   "ref": "narration-kit-exact-census-2026-08-03"
+  },
+  "tests/lint/heraldContaminationFence.test.js": {
+   "kind": "rationale",
+   "ref": "herald-truth-laws-executed-2026-08-03"
+  },
+  "tests/domain/heraldIntegrity.test.js": {
+   "kind": "rationale",
+   "ref": "herald-truth-laws-executed-2026-08-03"
+  },
+  "tests/lint/configMigrationSingleWriter.walker.test.js": {
+   "kind": "rationale",
+   "ref": "src-scan-totality-inline-controls-2026-08-03"
+  },
+  "tests/lint/namedPersonTransitTotality.walker.test.js": {
+   "kind": "rationale",
+   "ref": "src-scan-totality-inline-controls-2026-08-03"
+  },
+  "tests/data/dossierStateProseProjection.contract.test.js": {
+   "kind": "rationale",
+   "ref": "generator-check-round-trip"
+  },
+  "tests/property/dispositionChannelsDormancyGolden.test.js": {
+   "kind": "rationale",
+   "ref": "golden-byte-pin"
   }
  },
  "meta": {
