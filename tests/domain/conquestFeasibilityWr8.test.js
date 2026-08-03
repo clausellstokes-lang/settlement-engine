@@ -29,13 +29,13 @@
  */
 import { describe, expect, test } from 'vitest';
 
+import * as feasibilityModule from '../../src/domain/worldPulse/conquestFeasibility.js';
 import {
   CONQUEST_FEASIBILITY_TUNING,
   collapseSeatBooksUnderThreat,
   conquestMarchAdvised,
   conquestMotivePressure01,
   conquestTermsRange,
-  conquestVoteWeight01,
   mistakenFeasibilityReceipt,
   readConquestFeasibility,
   termsRangesOverlap,
@@ -43,14 +43,20 @@ import {
 import {
   conquestBeliefBandsFor,
   conquestDoctrineActive,
+  conquestJoinLift01,
+  conquestMarchAdvisedFor,
   conquestMarchOrder,
+  openWarFrontCount,
   ownExhaustionWord,
   ownStoresWord,
+  ownStrengthBandIndex,
   readConquestFeasibilityFor,
   readConquestIntentFor,
   CONQUEST_REQUIRED_RULES,
+  CONQUEST_STAGE_TUNING,
 } from '../../src/domain/worldPulse/conquestDoctrineStage.js';
 import { hostileTargetsOf } from '../../src/domain/worldPulse/warIntent.js';
+import { readCoalitionJoinDecisions } from '../../src/domain/worldPulse/warCoalitionDecision.js';
 
 /** A court that believes itself far the stronger of the pair. */
 const CONFIDENT = Object.freeze({
@@ -217,20 +223,31 @@ describe('WR-8 N2 — the feasibility belief composite', () => {
     expect(ground.receipt).toContain('the war grinds on');
   });
 
-  test('the K.6 vote weight is belief-sourced, and says so', () => {
-    const strong = conquestVoteWeight01(readConquestFeasibility(CONFIDENT));
-    const weak = conquestVoteWeight01(readConquestFeasibility(DOOMED));
-    expect(strong).toBeGreaterThan(Number(weak));
-    expect(Number(weak)).toBeGreaterThanOrEqual(CONQUEST_FEASIBILITY_TUNING.VOTE_FLOOR);
-    expect(conquestVoteWeight01(readConquestFeasibility({ ...CONFIDENT, rivalStrengthBand: 'unknown' }))).toBeNull();
-    // THE FORK, RECORDED IN A PIN: a member that believes itself strong votes as
-    // though it were. Two members with IDENTICAL true state and different
-    // pictures must weigh differently, or the vote has quietly gone back to
-    // reading truth.
-    const flattered = conquestVoteWeight01(readConquestFeasibility({
-      ...DOOMED, ownStrengthBand: 'dominant',
-    }));
-    expect(flattered).toBeGreaterThan(Number(weak));
+  test('THE K.6 VOTE HAS EXACTLY ONE DERIVATION, AND IT IS NOT HERE (F4)', () => {
+    // Lane W8-C deleted `conquestVoteWeight01`. It was a SECOND answer to the
+    // question chair ruling CR-WIRE-A had already closed: the ratification vote's
+    // power band comes from the member's own frozen negotiation picture, through
+    // envoyRatificationStage's single one-argument derivation, whose signature is
+    // source-scanned precisely so no second channel can appear. This pin is what
+    // keeps the fork from growing back — it is an ABSENCE pin, so it asserts the
+    // module still exports its live surface first, or an empty module would pass.
+    expect(typeof feasibilityModule.readConquestFeasibility).toBe('function');
+    expect(typeof feasibilityModule.conquestMarchAdvised).toBe('function');
+    expect(feasibilityModule.conquestVoteWeight01).toBeUndefined();
+    expect(Object.keys(feasibilityModule)).not.toContain('conquestVoteWeight01');
+    // VOTE_FLOOR stays: it is the ruling's own record of where the floor sat.
+    expect(CONQUEST_FEASIBILITY_TUNING.VOTE_FLOOR).toBeGreaterThan(0);
+  });
+
+  test('THE UNWIRED LEDGER IS TRUE (F5) — every deferred read is still exported', () => {
+    // The module header names four exports as deliberately-deferred-with-a-consumer
+    // rather than dead. If a later sweep deletes one, this reds and points at the
+    // ledger, so "documented, not a bug to re-find" stays a fact rather than a
+    // comment. Each is exercised for real above; this pin owns the LIST.
+    for (const name of ['conquestMotivePressure01', 'conquestTermsRange',
+      'termsRangesOverlap', 'collapseSeatBooksUnderThreat']) {
+      expect(typeof feasibilityModule[name], `${name} is in the unwired ledger`).toBe('function');
+    }
   });
 });
 
@@ -517,9 +534,294 @@ describe('WR-8 N2 — the movement wiring', () => {
     expect(ownStoresWord({ settlement: { economicState: { foodSecurity: { storageMonths: 99 } } } })).toBe('deep');
     expect(ownStoresWord({ settlement: {} })).toBe('unknown');
     expect(ownStoresWord(null)).toBe('unknown');
-    // One open front is the ordinary case and reads quiet; four is decisive.
-    expect(ownExhaustionWord(1)).toBe('quiet');
-    expect(ownExhaustionWord(2)).toBe('present');
-    expect(ownExhaustionWord(5)).toBe('decisive');
+    // F3: the ladder now maps FRONTS, not candidates-minus-one. A realm at peace
+    // is quiet; the first live war is `present`; four fronts is decisive.
+    expect(ownExhaustionWord(0)).toBe('quiet');
+    expect(ownExhaustionWord(1)).toBe('present');
+    expect(ownExhaustionWord(3)).toBe('pressing');
+    expect(ownExhaustionWord(4)).toBe('decisive');
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LANE W8-C — THE VERIFIER'S FINDINGS, EACH PINNED BY THE THING THAT WAS WRONG.
+// ─────────────────────────────────────────────────────────────────────────────
+
+describe('W8-C F3 — openFronts counts fronts, and the name matches the number', () => {
+  /** A graph carrying real war-layer fronts plus one decoy hostile-relationship front. */
+  const frontGraph = {
+    channels: [
+      { type: 'war_front', from: 'ironhold', to: 'zeta', status: 'confirmed', evidence: [{ source: 'war_layer_deploy' }] },
+      { type: 'war_front', from: 'thornwall', to: 'ironhold', status: 'confirmed', evidence: [{ source: 'war_layer_deploy' }] },
+      // THE DECOY. A bare hostile-RELATIONSHIP bundle is not a war. If the census
+      // counted it, a realm at peace with two sour neighbours would read weary.
+      { type: 'war_front', from: 'ironhold', to: 'everdeep', status: 'confirmed', evidence: [{ source: 'relationship_label' }] },
+    ],
+  };
+
+  test('both directions count, the relationship decoy does not, and duplicates collapse', () => {
+    expect(openWarFrontCount({ regionalGraph: frontGraph }, 'ironhold')).toBe(2);
+    expect(openWarFrontCount({ regionalGraph: frontGraph }, 'zeta')).toBe(1);
+    // A settlement in nobody's war. Reading 0 here is what makes the band's floor
+    // reachable — under the old candidate-count wiring it never was.
+    expect(openWarFrontCount({ regionalGraph: frontGraph }, 'nowhere')).toBe(0);
+    expect(openWarFrontCount({}, 'ironhold')).toBe(0);
+    expect(openWarFrontCount(null, 'ironhold')).toBe(0);
+    // Two channels between the SAME pair are ONE front.
+    expect(openWarFrontCount({
+      regionalGraph: {
+        channels: [
+          { type: 'war_front', from: 'a', to: 'b', status: 'confirmed', evidence: [{ source: 'war_layer_deploy' }] },
+          { type: 'war_front', from: 'b', to: 'a', status: 'confirmed', evidence: [{ source: 'war_layer_deploy' }] },
+        ],
+      },
+    }, 'a')).toBe(1);
+  });
+
+  test('THE SEMANTIC REPAIR IS OBSERVABLE: candidates no longer move the band', () => {
+    // The defect in one assertion. The court's hostile-candidate list and its
+    // actual wars are now independent: with the SAME two candidates, adding real
+    // fronts to the graph moves the exhaustion band, and it did not before.
+    const lit = beliefWorld(LIT_RULES);
+    const quiet = snapshotFor(lit);
+    const atWar = { ...snapshotFor(lit), regionalGraph: { ...quiet.regionalGraph, channels: frontGraph.channels } };
+    const bandOf = (snap) => conquestBeliefBandsFor({
+      worldState: lit, snapshot: snap, observerId: 'ironhold', rivalId: 'zeta',
+      openFronts: openWarFrontCount(snap, 'ironhold'),
+    }).ownWarExhaustionBand;
+    expect(bandOf(quiet)).toBe('quiet');
+    // Two real fronts (the third channel is the relationship decoy) ⇒ `pressing`.
+    expect(bandOf(atWar)).toBe('pressing');
+  });
+});
+
+describe('W8-C F2 — the own-strength leg is alive, and the constant is dead', () => {
+  test('THE BAND VARIES ACROSS COURTS in a world with no self-records at all', () => {
+    const lit = beliefWorld(LIT_RULES);
+    // The production shape: NOTHING seeds a self-record, because advanceBeliefMaps
+    // only ever writes an observer's NEIGHBOURS. This is the state every generated
+    // world is in, and it is the state in which the old leg returned the literal
+    // middle band for every court in every world.
+    delete lit.spatialLedgers.beliefMaps.ironhold.seat.ironhold;
+    const snapshot = snapshotFor(lit);
+    // ⚠️ ASSERTED THROUGH THE ASSEMBLER, NOT THROUGH THE READER. An earlier draft
+    // of this pin called `ownStrengthBandIndex` directly and a mutant that put the
+    // literal constant BACK into `conquestBeliefBandsFor` left it green — the
+    // producer still varied, the consumer had stopped asking. The spread is
+    // therefore read off the ROW the composite actually eats.
+    const wordFor = (id) => conquestBeliefBandsFor({
+      worldState: lit, snapshot, observerId: id, rivalId: id === 'zeta' ? 'thornwall' : 'zeta',
+    })?.ownStrengthBand;
+    // Each court needs a belief about the rival it is measured against, or the row
+    // is silence for the honest reason and this pin proves nothing.
+    lit.spatialLedgers.beliefMaps.thornwall = { seat: { zeta: { strengthBand: 2, allianceLabel: 'hostile', confidence01: 1 } } };
+    lit.spatialLedgers.beliefMaps.zeta = { seat: { thornwall: { strengthBand: 2, allianceLabel: 'hostile', confidence01: 1 } } };
+    const words = ['ironhold', 'thornwall', 'zeta'].map(wordFor);
+    for (const word of words) expect(typeof word, JSON.stringify(words)).toBe('string');
+    // THE PIN THE CHAIR ASKED FOR: a real spread. A 45,000-soul city, a 3,000-soul
+    // town and a 400-soul village cannot all be the same band, and under the old
+    // code they were — every court in every world read the literal `ready`.
+    expect(new Set(words).size, JSON.stringify(words)).toBeGreaterThan(1);
+    const ladder = ['spent', 'strained', 'ready', 'strong', 'dominant'];
+    expect(ladder.indexOf(words[0])).toBeGreaterThan(ladder.indexOf(words[2]));
+    // …and the direct reader agrees with the assembled row, so the two are one leg.
+    expect(words[0]).toBe(ladder[Number(ownStrengthBandIndex(snapshot, 'ironhold'))]);
+  });
+
+  test('the assembled row uses the self-read, and it reaches the composite', () => {
+    const lit = beliefWorld(LIT_RULES);
+    delete lit.spatialLedgers.beliefMaps.ironhold.seat.ironhold;
+    const snapshot = snapshotFor(lit);
+    const row = conquestBeliefBandsFor({
+      worldState: lit, snapshot, observerId: 'ironhold', rivalId: 'zeta',
+    });
+    // The row is readable with NO self-record present — which is the whole repair.
+    expect(row).not.toBeNull();
+    const expectedWord = ['spent', 'strained', 'ready', 'strong', 'dominant'][
+      Number(ownStrengthBandIndex(snapshot, 'ironhold'))
+    ];
+    expect(row.ownStrengthBand).toBe(expectedWord);
+  });
+
+  test('SILENCE, NEVER A FLATTERING DEFAULT: an unreadable own strength is null', () => {
+    const lit = beliefWorld(LIT_RULES);
+    const snapshot = snapshotFor(lit);
+    // A court the snapshot does not carry cannot price itself. Null, not `ready`.
+    expect(ownStrengthBandIndex(snapshot, 'nobody')).toBeNull();
+    expect(conquestBeliefBandsFor({
+      worldState: lit, snapshot, observerId: 'nobody', rivalId: 'zeta',
+    })).toBeNull();
+  });
+
+  test('the self-read stays a SELF read — the rival band is still belief-sourced', () => {
+    // K3's fence in one assertion: move only what the court BELIEVES about zeta and
+    // the row moves; the truth about zeta never entered the rival leg.
+    const lit = beliefWorld(LIT_RULES);
+    const snapshot = snapshotFor(lit);
+    const before = conquestBeliefBandsFor({
+      worldState: lit, snapshot, observerId: 'ironhold', rivalId: 'zeta',
+    });
+    expect(before.rivalStrengthBand).toBe('spent');
+    lit.spatialLedgers.beliefMaps.ironhold.seat.zeta.strengthBand = 4;
+    const after = conquestBeliefBandsFor({
+      worldState: lit, snapshot, observerId: 'ironhold', rivalId: 'zeta',
+    });
+    // Identical snapshot, identical truth, different belief ⇒ different row.
+    expect(after.rivalStrengthBand).toBe('dominant');
+    expect(after.ownStrengthBand).toBe(before.ownStrengthBand);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// W8-C F1 — BOTH war-opening consumers reach the belief, through ONE derivation.
+// The shipped claim said `hostileTargetsOf` was the chokepoint both pass through.
+// It was not: the opener's coalition arm short-circuits to an empty target list
+// and never calls it. These pins hold BOTH arms' reachability, so the corrected
+// claim is a fact rather than a second sentence.
+// ─────────────────────────────────────────────────────────────────────────────
+
+describe('W8-C F1 — the coalition consumer reaches the same derivation', () => {
+  // THE DORMANCY CONTROL IS ONE FLAG. The dark world is the LIT world with
+  // `conquestDoctrineEnabled` removed and NOTHING else changed — WR-6's own four
+  // flags stay lit in both, so the coalition census itself is identical and the
+  // only thing that can differ is WR-8's term.
+  const COALITION_DARK_RULES = Object.freeze(Object.fromEntries(
+    CONQUEST_REQUIRED_RULES.filter((key) => key !== 'conquestDoctrineEnabled').map((key) => [key, true]),
+  ));
+
+  const COALITION_EDGES = Object.freeze([
+    { id: 'everdeep|ironhold', from: 'everdeep', to: 'ironhold', relationshipType: 'allied' },
+    { id: 'everdeep|zeta', from: 'everdeep', to: 'zeta', relationshipType: 'hostile' },
+    { id: 'ironhold|zeta', from: 'ironhold', to: 'zeta', relationshipType: 'hostile' },
+    { id: 'ironhold|thornwall', from: 'ironhold', to: 'thornwall', relationshipType: 'hostile' },
+  ]);
+
+  /** A world where `everdeep` is at war with `zeta` and calls its ally `ironhold`. */
+  function coalitionWorld(rules) {
+    const world = beliefWorld(rules);
+    world.tick = 5;
+    world.deployments = {
+      everdeep: {
+        targetId: 'zeta',
+        sinceTick: 2,
+        casusReasons: [{ type: 'grievance', score: 0.8, atTick: 2 }],
+      },
+    };
+    world.relationshipStates = {
+      'everdeep|ironhold': { relationshipType: 'allied', pactStrength: 0.9, trust: 0.9, dependency: 0.6 },
+      'everdeep|zeta': { relationshipType: 'hostile' },
+      'ironhold|zeta': { relationshipType: 'hostile' },
+      'ironhold|thornwall': { relationshipType: 'hostile' },
+    };
+    world.spatialLedgers.warReasons = {
+      'everdeep>zeta': {
+        reasons: { grievance: { type: 'grievance', score: 0.8, sinceTick: 2, tick: 5 } },
+        updatedTick: 5,
+      },
+    };
+    return world;
+  }
+
+  function coalitionSnapshot(world) {
+    const snapshot = snapshotFor(world);
+    snapshot.byId.set('everdeep', {
+      id: 'everdeep',
+      settlement: { name: 'Everdeep', tier: 'town', population: 5000, powerStructure: { factions: [] } },
+    });
+    snapshot.settlements = [...snapshot.byId.values()];
+    snapshot.regionalGraph = { edges: [...COALITION_EDGES] };
+    snapshot.worldState = world;
+    return snapshot;
+  }
+
+  test('THE MEASUREMENT THAT PROVES THE OLD CLAIM FALSE', () => {
+    // `hostileTargetsOf` is where the shipped wiring put the belief. The coalition
+    // decision never calls it — it is handed one named enemy. So the two arms
+    // cannot share that seam, whatever the docstring said; what they share is the
+    // derivation, and that is what these pins assert.
+    const lit = coalitionWorld(LIT_RULES);
+    const snapshot = coalitionSnapshot(lit);
+    // ARM 1 (strategy chooser): reached through the ordering seam.
+    expect(hostileTargetsOf(snapshot, 'ironhold', 4)).toEqual(['zeta', 'thornwall']);
+    // ARM 2 (coalition): reached through its own seam, SAME derivation, non-zero.
+    expect(conquestJoinLift01({
+      worldState: lit, snapshot, observerId: 'ironhold', rivalId: 'zeta',
+    })).toBe(CONQUEST_STAGE_TUNING.COALITION_JOIN_LIFT01);
+    // …and BOTH arms agree, because both call `conquestMarchAdvisedFor`.
+    expect(conquestMarchAdvisedFor({
+      worldState: lit, snapshot, observerId: 'ironhold', rivalId: 'zeta',
+    })).toBe(true);
+    expect(conquestMarchAdvisedFor({
+      worldState: lit, snapshot, observerId: 'ironhold', rivalId: 'thornwall',
+    })).toBe(false);
+  });
+
+  test('LIT: the lift reaches the live join decision and is receipted on it', () => {
+    const lit = coalitionWorld(LIT_RULES);
+    const snapshot = coalitionSnapshot(lit);
+    const decisions = readCoalitionJoinDecisions({
+      snapshot, worldState: lit, tick: 4, strengthFor: () => 0.5,
+    });
+    const ironhold = decisions.find((d) => d.partyId === 'ironhold' && d.enemyId === 'zeta');
+    expect(ironhold).toBeTruthy();
+    // The receipt is on the decision itself, so the term is inspectable rather
+    // than merely folded into a float.
+    expect(ironhold.conquestLift01).toBe(CONQUEST_STAGE_TUNING.COALITION_JOIN_LIFT01);
+  });
+
+  test('DARK: the same decision carries a lift of EXACTLY zero, and the same score', () => {
+    // The dormancy fence for arm 2, and it is not vacuous: the lit run above found
+    // the same decision with a non-zero lift on the same fixture.
+    const dark = coalitionWorld(COALITION_DARK_RULES);
+    const snapshot = coalitionSnapshot(dark);
+    const decisions = readCoalitionJoinDecisions({
+      snapshot, worldState: dark, tick: 4, strengthFor: () => 0.5,
+    });
+    const ironhold = decisions.find((d) => d.partyId === 'ironhold' && d.enemyId === 'zeta');
+    expect(ironhold).toBeTruthy();
+    expect(ironhold.conquestLift01).toBe(0);
+
+    // THE TWO GATES, SEPARATED — and this assertion exists because mutation said
+    // it had to. The coalition arm's dormancy is held by TWO checks (the assembly
+    // gate in `conquestBeliefBandsFor` and the hot-loop short-circuit in
+    // `conquestMarchAdvisedFor`), and each alone kept the zero-lift pin above
+    // green while the other stood. That is defence in depth, not a hole, but it
+    // means the pin above proves neither gate is live. This one is owned by the
+    // ASSEMBLY gate alone: dark ⇒ the assembler refuses outright…
+    expect(conquestBeliefBandsFor({
+      worldState: dark, snapshot, observerId: 'ironhold', rivalId: 'zeta',
+    })).toBeNull();
+    // …and lit, on the same fixture, it produces a real row, so the null is a
+    // live refusal rather than an assembler that never produces anything.
+    expect(conquestBeliefBandsFor({
+      worldState: coalitionWorld(LIT_RULES), snapshot, observerId: 'ironhold', rivalId: 'zeta',
+    })).not.toBeNull();
+
+    // …and the score is the pre-wire float: identical to the lit run MINUS the
+    // lift, which is what "lift-only, nothing else moved" means.
+    const lit = coalitionWorld(LIT_RULES);
+    const litDecision = readCoalitionJoinDecisions({
+      snapshot: coalitionSnapshot(lit), worldState: lit, tick: 4, strengthFor: () => 0.5,
+    }).find((d) => d.partyId === 'ironhold' && d.enemyId === 'zeta');
+    expect(litDecision.score01).toBeCloseTo(
+      ironhold.score01 + CONQUEST_STAGE_TUNING.COALITION_JOIN_LIFT01, 10,
+    );
+  });
+
+  test('THE CENSUS IS UNTOUCHED: the lift creates no candidate it did not have', () => {
+    // The hardest thing to get wrong quietly. A weight that also ADMITS would let
+    // conquest appetite step over a pact or invent an alliance call. Lit and dark
+    // must offer the SAME parties the SAME calls — only the scores may differ.
+    const dark = coalitionWorld(COALITION_DARK_RULES);
+    const lit = coalitionWorld(LIT_RULES);
+    const key = (d) => `${d.partyId}->${d.enemyId}@${d.callId}`;
+    const darkKeys = readCoalitionJoinDecisions({
+      snapshot: coalitionSnapshot(dark), worldState: dark, tick: 4, strengthFor: () => 0.5,
+    }).map(key);
+    const litKeys = readCoalitionJoinDecisions({
+      snapshot: coalitionSnapshot(lit), worldState: lit, tick: 4, strengthFor: () => 0.5,
+    }).map(key);
+    expect(litKeys).toEqual(darkKeys);
+    expect(darkKeys.length).toBeGreaterThan(0);
   });
 });

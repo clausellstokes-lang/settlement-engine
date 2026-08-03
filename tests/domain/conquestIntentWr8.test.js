@@ -15,8 +15,14 @@
  *   THE I4 DECEPTION ROAD REACHES CONQUEST AND STOPS. A plant that moves the
  *   believed nature flips a righteous court into a war it would otherwise have
  *   refused — and an EXHAUSTIVE WALK of the whole intent table proves the
- *   punitive intent is unreachable from every one of the 768 input rows, which
- *   is R2's scoping ruling held as machinery rather than as prose.
+ *   punitive intent is unreachable from every one of the 2,000 input rows, which
+ *   is R2's scoping ruling held as machinery rather than as prose. (CORRECTED by
+ *   lane W8-C, finding F6: this line said 768, which is the product of the four
+ *   ladders WITHOUT their `unknown` members — the walk below has always iterated
+ *   the exported ladders, every one of which carries `unknown`, and asserts the
+ *   product itself: 5 martial × 5 history × 4 nature × 5 patron × 4 believed
+ *   nature = 2,000. The test was right and its own docstring was not, which is
+ *   the failure mode a walk asserting its own row count exists to make visible.)
  *
  *   MERCY IS PUBLISHED. A court that could have taken everything and did not
  *   says so, and a court that merely lacked the appetite does not get the line.

@@ -36,11 +36,22 @@ import {
   readConquestFeasibility,
 } from './conquestFeasibility.js';
 import { readConquestIntent } from './conquestIntent.js';
-import { beliefRecord, beliefsActive } from './beliefMap.js';
+import { beliefRecord, beliefsActive, strengthBandOf } from './beliefMap.js';
 import { readDispositionChannel } from './dispositionLedger.js';
 import { evil01 } from './deityAxes.js';
 import { storageCapacityMonths } from './foodStockpile.js';
 import { settlementAlignment } from './settlementAlignment.js';
+// THE OWN-STRENGTH SELF-READ (F2) and THE OPEN-FRONT CENSUS (F3). Both are
+// SELF-READS through readers that already exist: `settlementStrength` is the
+// same confidence input the belief layer's own cold-start seeds a strengthBand
+// from, and `warFrontReads` is the provenance-gated war ledger. Neither widens
+// K3, which fences a court from OTHERS' truth and has always taken a court's
+// knowledge of ITSELF as ground (the §IV.4 carve-out this file already cites for
+// the granary).
+import { settlementStrength } from './relationshipRuleHelpers.js';
+import { buildPressureSummary } from './relationshipEvolution.js';
+import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
+import { warFrontsFrom, warFrontsInto } from './warFrontReads.js';
 
 /**
  * THE LIGHTING ORDER, spelled out. The flag-dependency ruling says WR-8 lights
@@ -181,16 +192,105 @@ export function ownStoresWord(item) {
 }
 
 /**
- * The court's OWN weariness, read off how many fronts it is holding open right
- * now. Also a self-read, and deliberately derived from the CANDIDATE LIST the
- * caller already computed rather than from a second census — a court fighting on
- * four axes is wearier than one fighting on one, and no new state is invented to
- * say so.
+ * The court's OWN weariness, read off how many war fronts it is holding open
+ * right now. Also a self-read.
+ *
+ * REPAIRED (lane W8-C, finding F3). This used to be handed the CANDIDATE count —
+ * the length of the list of wars the court MIGHT open — and then subtract one, so
+ * a peaceful realm with four hostile neighbours read as war-weary and a realm
+ * grinding four live sieges against one neighbour read as fresh. The name said
+ * `openFronts` and the number said something else. It now counts what it says:
+ * actual open fronts, off the provenance-gated war ledger, both directions (a
+ * front pointed AT you ties down exactly as much force as one you pointed).
+ * Zero fronts is `quiet` and the ladder rises from there — no offset, because
+ * there is no longer a prospective war folded into the count.
  * @param {unknown} openFronts @returns {string}
  */
 export function ownExhaustionWord(openFronts) {
-  return pressureWordForCount(Math.max(0, Number(openFronts) || 0) - 1);
+  return pressureWordForCount(Math.max(0, Number(openFronts) || 0));
 }
+
+/**
+ * THE OPEN-FRONT CENSUS. How many live war fronts a settlement is party to right
+ * now, in either direction, counted off the EXISTING war ledger through the
+ * provenance gate (`warFrontReads`), so a bare hostile RELATIONSHIP edge — no
+ * army behind it, never through the mobilization gates — is not miscounted as a
+ * war. Distinct counterparts, so two channels between the same pair are one
+ * front. Pure read of the pre-tick graph.
+ * @param {unknown} snapshot @param {string} settlementId @returns {number}
+ */
+export function openWarFrontCount(snapshot, settlementId) {
+  const graph = asObject(snapshot).regionalGraph;
+  const id = String(settlementId || '');
+  if (!id) return 0;
+  return new Set([
+    ...warFrontsFrom(graph, id),
+    ...warFrontsInto(graph, id),
+  ]).size;
+}
+
+/**
+ * THE OWN-STRENGTH SELF-READ (lane W8-C, finding F2), AND THE PATH TAKEN.
+ *
+ * This leg used to read `beliefRecord(observer, observer)` and fall back to the
+ * literal middle band. The verifier proved the fallback was not a fallback but
+ * THE path: `advanceBeliefMaps` seeds and reconciles an observer's map over its
+ * relationship NEIGHBOURHOOD, which never contains the observer, so no generated
+ * world has ever written a self-record and every court in every world read
+ * `ready`. A constant leg is a dead leg, and a dead leg in the believed-relative-
+ * strength composite is the whole composite tilted.
+ *
+ * THE FORK, AND WHICH ARM WAS TAKEN. Writing self-records into `beliefMaps` would
+ * make the belief substrate carry the answer — but that is a change to the SHAPE
+ * of a persisted ledger, on a writer no flag of WR-8's gates, so every fogged
+ * world's belief goldens move whether or not the conquest doctrine is ever lit.
+ * That is an owner-gated class and it is not taken here. The other arm is taken
+ * instead, and the amendment already licenses it: K3 fences a court from OTHERS'
+ * truth, and this file's own granary and open-front legs are already self-reads
+ * under the §IV.4 carve-out. So the court's own strength is a TRUTH read, through
+ * `settlementStrength` — the very function the belief layer's cold start bands
+ * into a `strengthBand` — and `strengthBandOf`, the very function that bands it.
+ * The own band and the rival band therefore sit on the SAME ladder, measured by
+ * the SAME instrument, which the old constant could not promise.
+ *
+ * SILENCE, NEVER A FLATTERING DEFAULT. An unreadable own strength returns null
+ * and the whole row goes unreadable, in this file's established idiom — the
+ * constant is not replaced by a smaller constant.
+ *
+ * The pressure index the strength reader needs is a whole-snapshot derivation, so
+ * it is memoized per snapshot OBJECT in a module-local WeakMap — the same
+ * WeakMap-per-pass idiom `tickIndices.edgeAdjacencyIndex` already holds. The
+ * function stays PURE over its arguments (same snapshot ⇒ same number; the cache
+ * changes only who pays for the pass), and it is never reached while the doctrine
+ * is dark.
+ *
+ * @param {unknown} snapshot @param {string} settlementId @returns {number | null}
+ */
+export function ownStrengthBandIndex(snapshot, settlementId) {
+  const snap = asObject(snapshot);
+  const byId = snap.byId;
+  const item = byId instanceof Map ? byId.get(String(settlementId)) : null;
+  if (!item) return null;
+  let index = PRESSURE_INDEX_CACHE.get(/** @type {object} */ (snapshot));
+  if (index === undefined) {
+    try {
+      index = pressureIndex(deriveSettlementPressures(
+        /** @type {Parameters<typeof deriveSettlementPressures>[0]} */ (snapshot),
+      ));
+    } catch {
+      // A snapshot too thin to derive pressures from cannot price its own
+      // strength honestly. Null propagates to an unreadable row.
+      index = null;
+    }
+    PRESSURE_INDEX_CACHE.set(/** @type {object} */ (snapshot), index);
+  }
+  if (index == null) return null;
+  const strength = settlementStrength(item, buildPressureSummary(index, String(settlementId)));
+  return Number.isFinite(strength) ? strengthBandOf(strength) : null;
+}
+
+/** Per-snapshot memo for the pressure index the own-strength self-read needs. */
+const PRESSURE_INDEX_CACHE = new WeakMap();
 
 /**
  * Assemble the closed banded row `readConquestFeasibility` eats, for one court
@@ -213,17 +313,13 @@ export function conquestBeliefBandsFor({
   const rivalBelief = beliefRecord(
     /** @type {Parameters<typeof beliefRecord>[0]} */ (worldState), observer, rival,
   );
-  const selfBelief = beliefRecord(
-    /** @type {Parameters<typeof beliefRecord>[0]} */ (worldState), observer, observer,
-  );
   if (!rivalBelief) return null;
   const rivalIndex = Number(asObject(rivalBelief).strengthBand);
   if (!Number.isInteger(rivalIndex)) return null;
-  // The court's own strength is a self-read too: it appears in its own map only
-  // in worlds that seeded one, so the fallback is the belief layer's own neutral
-  // band rather than an invented number.
-  const ownIndexRaw = Number(asObject(selfBelief).strengthBand);
-  const ownIndex = Number.isInteger(ownIndexRaw) ? ownIndexRaw : 2;
+  // The court's own strength is a SELF-READ, banded on the same ladder the rival
+  // band uses (see `ownStrengthBandIndex`). Unreadable ⇒ the whole row is silence.
+  const ownIndex = ownStrengthBandIndex(snapshot, observer);
+  if (ownIndex == null) return null;
   const census = coalitionCensusFor(worldState, observer, rival);
   const byId = asObject(snapshot).byId;
   const item = byId instanceof Map ? byId.get(observer) : null;
@@ -391,20 +487,60 @@ export function readConquestIntentFor({
 }
 
 /**
- * THE MOVEMENT CONSUMER, WIRED. The candidate list a settlement may open a war
- * on, re-ordered so the targets its court BELIEVES a conquest is in reach of
- * come first. Ordering, never admission: nothing is added, nothing is removed,
- * and every hard gate downstream — the one-army constraint, the posture gate,
- * `classifyFeasibility` itself — still runs exactly as before. A hopeless war
- * still does not open; it merely stops being an alphabetical accident which of
- * the plausible ones does.
+ * ⭐ THE ONE DERIVATION (lane W8-C, finding F1). Does this court both BELIEVE a
+ * conquest of this rival is in reach AND MEAN to take it?
  *
- * BOTH HALVES MUST AGREE (N3). A target is advanced only where the court both
- * BELIEVES a conquest in reach AND MEANS to take it. Capability alone advances
- * nothing: a realm that could take its neighbour and has no appetite for it
- * leaves the list exactly as the treaty filter handed it over, which is the
+ * BOTH HALVES MUST AGREE (N3). Capability alone answers false: a realm that could
+ * take its neighbour and has no appetite for it is not marching, which is the
  * whole content of "capability never implies intent" at the seam where it would
- * otherwise leak.
+ * otherwise leak. The feasibility half is asked FIRST and the intent half is only
+ * reached when it passes, so the intent read is never paid for a hopeless war.
+ *
+ * WHY THIS FUNCTION EXISTS RATHER THAN TWO CALL SITES SPELLING IT OUT. WR-8's
+ * movement consumer has TWO war-opening readers — the strategy chooser's target
+ * loop and the coalition join decision — and they have different SHAPES: one is
+ * handed a list to order, the other is handed a single named enemy to price. A
+ * shape difference is exactly the pressure that grows two derivations that drift.
+ * Both call THIS, so there is one belief, one intent, one conjunction, and one
+ * place a future amendment has to change.
+ *
+ * @param {{ worldState?: unknown, snapshot?: unknown, observerId?: unknown,
+ *   rivalId?: unknown }} args
+ * @returns {boolean}
+ */
+export function conquestMarchAdvisedFor({
+  worldState = null, snapshot = null, observerId = '', rivalId = '',
+} = {}) {
+  // A SHORT-CIRCUIT, NOT THE GATE — measured by mutation, and labelled as what it
+  // is, exactly as `conquestMarchOrder`'s twin is. Delete this line and every
+  // dormancy pin stays green, because dormancy is OWNED by the assembly gate in
+  // `conquestBeliefBandsFor`: the assembler still refuses to produce a read, so
+  // nothing is ever advised and no lift is ever paid. What this line buys is the
+  // hot loop — without it a dark world pays a belief-map lookup per pair per tick
+  // to be told what the flags already said.
+  if (!conquestDoctrineActive(worldState)) return false;
+  const read = readConquestFeasibilityFor({
+    worldState,
+    snapshot,
+    observerId,
+    rivalId: String(rivalId),
+    openFronts: openWarFrontCount(snapshot, String(observerId)),
+  });
+  if (!read || !conquestMarchAdvised(read)) return false;
+  const intent = readConquestIntentFor({
+    worldState, snapshot, observerId, rivalId: String(rivalId),
+  });
+  return !!intent && intent.intent === 'conquer';
+}
+
+/**
+ * CONSUMER 2a — THE STRATEGY CHOOSER'S MOVEMENT. The candidate list a settlement
+ * may open a war on, re-ordered so the targets its court BELIEVES a conquest is
+ * in reach of come first. Ordering, never admission: nothing is added, nothing is
+ * removed, and every hard gate downstream — the one-army constraint, the posture
+ * gate, `classifyFeasibility` itself — still runs exactly as before. A hopeless
+ * war still does not open; it merely stops being an alphabetical accident which
+ * of the plausible ones does.
  *
  * BYTE-IDENTICAL WHEN DORMANT: the INPUT ARRAY REFERENCE comes back untouched
  * when the doctrine is dark, when fewer than two targets are offered, or when no
@@ -431,15 +567,52 @@ export function conquestMarchOrder({ worldState = null, snapshot = null, fromId 
   /** @type {string[]} */
   const rest = [];
   for (const target of targets) {
-    const read = readConquestFeasibilityFor({
-      worldState, snapshot, observerId: fromId, rivalId: String(target), openFronts: targets.length,
-    });
-    const intent = read && conquestMarchAdvised(read)
-      ? readConquestIntentFor({ worldState, snapshot, observerId: fromId, rivalId: String(target) })
-      : null;
-    if (intent && intent.intent === 'conquer') advised.push(target);
+    if (conquestMarchAdvisedFor({ worldState, snapshot, observerId: fromId, rivalId: target })) advised.push(target);
     else rest.push(target);
   }
   if (advised.length === 0 || rest.length === 0) return targets;
   return [...advised, ...rest];
 }
+
+/**
+ * CONSUMER 2b — THE COALITION DECISION'S MOVEMENT, and the repair of a wiring
+ * claim that was false (lane W8-C, finding F1).
+ *
+ * THE CLAIM THAT WAS WRONG, SAID PLAINLY, because the wrong sentence is still in
+ * the ledger: `hostileTargetsOf` was recorded as "the ONE chokepoint both
+ * war-opening consumers already pass through". It is not. The coalition arm of
+ * the opener short-circuits to an EMPTY target list (`coalitionDecision ? [] :
+ * …`) and takes its enemy straight off the decision, so it never calls
+ * `hostileTargetsOf` at all. What the two consumers genuinely share is the leaf
+ * INSIDE it — `treatyEligibleWarTargets` — and sharing a treaty filter is not
+ * sharing a belief. Half the movement consumer was unwired and the receipt said
+ * otherwise.
+ *
+ * WHY THIS ARM IS A WEIGHT AND NOT AN ORDER. There is nothing to order: an
+ * alliance call names exactly one enemy. The honest analogue of "armies that see
+ * conquest within reach march on settlements" is that a court asked to join a war
+ * it privately means to CONQUER answers more readily than one asked to join a war
+ * it has no design on. So the belief moves the WILLINGNESS — a bounded, LIFT-ONLY
+ * term on the score the decision already computes, compared against the very same
+ * threshold. The call CENSUS is untouched: no candidate is created, no treaty
+ * filter is loosened, no pact is stepped over, and a court the alliance rows never
+ * offered the call is never offered it by this.
+ *
+ * Returns 0 — exactly, not approximately — when the doctrine is dark, so a
+ * dormant world's every score is the pre-wire float.
+ *
+ * @param {{ worldState?: unknown, snapshot?: unknown, observerId?: unknown,
+ *   rivalId?: unknown }} args
+ * @returns {number}
+ */
+export function conquestJoinLift01(args) {
+  return conquestMarchAdvisedFor(args) ? CONQUEST_STAGE_TUNING.COALITION_JOIN_LIFT01 : 0;
+}
+
+export const CONQUEST_STAGE_TUNING = Object.freeze({
+  // Small on purpose. It must be able to carry a court that is already close to
+  // its own threshold over it, and must NOT be able to drag an unwilling ally
+  // into a war on appetite alone — the obligation/books/risk blend still decides
+  // most of the answer, which is WR-6's law and WR-8 does not get to repeal it.
+  COALITION_JOIN_LIFT01: 0.08,
+});

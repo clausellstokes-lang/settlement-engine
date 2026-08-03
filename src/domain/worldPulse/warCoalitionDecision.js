@@ -21,6 +21,12 @@ import {
   warCoalitionActive,
 } from './warCoalitionLedger.js';
 import { treatyEligibleWarTargets } from './warIntent.js';
+// WR-8 (N2) — the coalition arm of the movement consumer. `conquestJoinLift01`
+// returns EXACTLY 0 unless the whole conquest chain is lit AND this court both
+// believes the conquest in reach and means to take it, so a dormant world's
+// scores are the pre-wire floats. It is the SAME derivation the strategy
+// chooser's arm uses; see conquestDoctrineStage.conquestMarchAdvisedFor.
+import { conquestJoinLift01 } from './conquestDoctrineStage.js';
 
 const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
 function codepoint(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
@@ -103,10 +109,18 @@ export function readCoalitionJoinDecisions({ snapshot, worldState, tick, strengt
           + clamp01(relation.trust) * 0.3
           + clamp01(relation.dependency) * 0.2,
         );
+        // WR-8: a court asked to join a war it privately means to CONQUER answers
+        // more readily. LIFT-ONLY and bounded — it moves the willingness, never the
+        // census: the candidate already exists, the treaty filter above already
+        // cleared it, and the same `threshold01` below still decides.
+        const conquestLift01 = conquestJoinLift01({
+          worldState, snapshot, observerId: partyId, rivalId: episode.enemyId,
+        });
         const score01 = clamp01(
           obligation01 * 0.55
           + clamp01(books.continueBias01) * 0.3
-          + (1 - risk.risk01) * 0.15,
+          + (1 - risk.risk01) * 0.15
+          + conquestLift01,
         );
         // Persisted WR-2 history is inert while its own flag is dark. WR-6 still
         // reads the already-authored WR-5 books above under its exact four-flag
@@ -139,6 +153,10 @@ export function readCoalitionJoinDecisions({ snapshot, worldState, tick, strengt
           riskBand: risk.band,
           score01,
           threshold01,
+          // The receipt for the WR-8 term, carried on the decision itself so the
+          // lift is inspectable rather than merely folded into a float. 0 in every
+          // dormant world; the archive/evidence row shapes are untouched.
+          conquestLift01,
           accepted: score01 >= threshold01,
           books,
         });

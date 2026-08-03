@@ -390,11 +390,18 @@ export function hostileTargetsOf(snapshot, fromId, tick = null) {
   }
   const sorted = [...out].sort(codepoint);
   const eligible = treatyEligibleWarTargets(snapshot?.worldState, fromId, sorted, tick);
-  // WR-8 (N2) — THE MOVEMENT CONSUMER OF THE FEASIBILITY BELIEF. This is the ONE
-  // chokepoint both war-opening consumers already pass through (the strategy
-  // chooser and the coalition decision), so wiring the conquest read here reaches
-  // both without touching either — which matters, since both of those files sit
-  // at their size ceiling.
+  // WR-8 (N2) — THE MOVEMENT CONSUMER OF THE FEASIBILITY BELIEF, on the STRATEGY
+  // CHOOSER's arm of the opener.
+  //
+  // ⚠️ CORRECTED (lane W8-C, finding F1). This comment used to claim that this
+  // function is "the ONE chokepoint both war-opening consumers already pass
+  // through". IT IS NOT, and the claim was load-bearing enough that half the
+  // consumer shipped unwired behind it: the opener's coalition arm short-circuits
+  // to an empty target list and reads its enemy off the join decision, so it never
+  // reaches this line. What both arms genuinely share is `treatyEligibleWarTargets`
+  // above — a treaty filter, not a belief. The coalition arm is now wired on its
+  // own seam, through the SAME derivation (`conquestMarchAdvisedFor`), inside
+  // `warCoalitionDecision.readCoalitionJoinDecisions`.
   //
   // ORDERING, NEVER ADMISSION. The stage may only move a target forward; the set
   // is what this function already decided it was. Every hard gate downstream

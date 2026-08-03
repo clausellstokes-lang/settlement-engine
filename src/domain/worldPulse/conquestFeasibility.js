@@ -36,6 +36,35 @@
  *
  * PURE: no rng, no wall-clock, no mutation, no state. Deterministic over its
  * arguments. Strict-clean. No React/Zustand imports, and no imports at all.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * ⚠️ THE UNWIRED LEDGER (lane W8-C, findings F4/F5) — DELIBERATELY DEFERRED,
+ * DOCUMENTED, NOT A BUG TO RE-FIND. Four exports below have no production
+ * consumer yet. They are recorded here BY NAME with the consumer each is owed,
+ * so a later dead-code sweep reads a deferral rather than rediscovering rot:
+ *
+ *   `conquestMotivePressure01`  → CONSUMER 1 (motive). Owed to the sue-for-peace
+ *       / war-continuation weighting: "a realm that believes it could take
+ *       everything has little reason to settle for less."
+ *   `conquestTermsRange` + `termsRangesOverlap` → CONSUMER 3 (the bargaining
+ *       range). Owed to the peace-terms path. THE GRIND — two courts whose
+ *       independently-built ranges do not overlap, receipted rather than errored —
+ *       is the amendment's sharpest framing and is already written and pinned
+ *       both ways; it is waiting for its seam, not for its design.
+ *   `collapseSeatBooksUnderThreat` → the war-seat books. This is the subject of
+ *       one of the THREE pins the amendment requested BY HAND (the books-collapse
+ *       fixture), which is why it is kept rather than swept.
+ *
+ * ONE EXPORT WAS DELETED RATHER THAN DEFERRED, and the distinction is the whole
+ * point: `conquestVoteWeight01` (CONSUMER 4, the K.6 vote) is GONE. It was not
+ * merely unwired — it was a SECOND ANSWER to a question chair ruling CR-WIRE-A
+ * had already closed in the other direction. The live ratification vote derives
+ * its power band from the member's own frozen negotiation PICTURE, enforced by a
+ * source scan over all three derivations, and a same-named second derivation
+ * sitting here unwired is exactly the fork that gets picked up by the next hand
+ * and quietly re-opens a settled ruling. A deferral is a thing waiting for its
+ * consumer; a fork is a thing whose consumer already exists and chose otherwise.
+ * ─────────────────────────────────────────────────────────────────────────────
  */
 
 /**
@@ -431,30 +460,18 @@ export function termsRangesOverlap(left, right) {
   };
 }
 
-/**
- * CONSUMER 4 — THE K.6 VOTE. A coalition member's weight in the two-level
- * authority vote, derived from THE MEMBER'S OWN FROZEN BELIEF and nothing else.
- *
- * This is the deliberate answer to the fork the wiring lane raised: the vote's
- * power band could have come from the coalition ledger or a settlement tier, and
- * either would have been a truth read inside a negotiation path with K3 naming
- * THE VOTE explicitly. It comes from belief instead. The cost is stated plainly:
- * COALITION LEGITIMACY IS A BELIEF. A member who believes itself the strongest
- * arm of the alliance votes as though it were, and is wrong exactly as often as
- * its picture is.
- * @param {ConquestFeasibilityRead|null|undefined} read @returns {number|null}
- */
-export function conquestVoteWeight01(read) {
-  const row = recordOf(read);
-  if (row.known !== true || typeof row.believedRelativeStrength01 !== 'number') return null;
-  const T = CONQUEST_FEASIBILITY_TUNING;
-  const coalition = typeof row.believedCoalitionReach01 === 'number' ? row.believedCoalitionReach01 : 0;
-  return round4(clamp(
-    T.VOTE_FLOOR + (1 - T.VOTE_FLOOR) * (0.7 * row.believedRelativeStrength01 + 0.3 * coalition),
-    T.VOTE_FLOOR,
-    1,
-  ));
-}
+// ── CONSUMER 4 (THE K.6 VOTE) IS NOT HERE, AND THAT IS THE RULING ────────────
+//
+// `conquestVoteWeight01` stood here and was DELETED by lane W8-C under chair
+// ruling CR-WIRE-A, which had already answered this exact question in the other
+// direction BEFORE this function was written: a coalition member's weight in the
+// ratification vote is derived from the member's OWN FROZEN NEGOTIATION PICTURE,
+// through `envoyRatificationStage`'s single derivation, and that derivation's
+// one-argument signature is enforced by a source scan precisely so no second
+// channel can appear. This function was that second channel. See the UNWIRED
+// LEDGER in the module header for why the other unwired reads were KEPT and this
+// one was not: they await a consumer, this one had a consumer that chose
+// otherwise. `VOTE_FLOOR` stays in the tuning block as the ruling's own record.
 
 // ── THE TWO CHARACTERFUL READS ───────────────────────────────────────────────
 
