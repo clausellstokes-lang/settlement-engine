@@ -306,9 +306,21 @@ describe('peace-causal movers — lit-path anti-vacuity (§14: motive is state, 
     const a = attackers[0];
     const t = String(deployments[a].targetId);
     const brief = warCausalBrief(ws, a, t);
-    expect(brief.line).toMatch(/^\d of 13 peace reasons now present/);
-    expect(brief.peace.length).toBe(13);
-    expect(brief.war.length).toBe(13);
+    // THE TAXONOMY GREW 13 -> 15, AND THE DORMANCY GOLDEN DID NOT MOVE. Two war
+    // reasons and their two mirrors landed after this pin was written:
+    // `lineage_claim` <-> `kinship_bond` @ 526c5e31 (WR-3 LINEAGE CLAIM) and
+    // `alliance_obligation` <-> `obligation_discharged` @ b243d349 (WR-6 COALITION
+    // GRAPH), both in src/domain/worldPulse/warReasonTaxonomy.js. That is a LIT-PATH
+    // widening only: the denominator this line renders is PEACE_REASON_TYPES.length,
+    // read live, so the brief said "3 of 15" while the literal still said 13.
+    // The dormant manifest above reproduces UNCHANGED across all three configs, which
+    // is the fact worth recording -- the growth added zero keys and zero decision
+    // drift behind the gate, so no golden was re-recorded here.
+    // `\d+`, not `\d`: the numerator is a count that may legitimately reach 10 now
+    // that the taxonomy has 15 members. Only the denominator is being pinned.
+    expect(brief.line).toMatch(/^\d+ of 15 peace reasons now present/);
+    expect(brief.peace.length).toBe(15);
+    expect(brief.war.length).toBe(15);
     expect(brief.peacePresent).toBeGreaterThan(0);
   }, 120_000);
 
