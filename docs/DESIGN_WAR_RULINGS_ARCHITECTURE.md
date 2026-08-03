@@ -970,6 +970,23 @@ congress, no multilateral table, ever.
 > drives `advanceEnvoyDiplomacyPulse` with a really-refusing verdict, and the
 > stripped call is asserted to return a whole outcome BEFORE the absence is read.
 >
+> ⚠️ **CORRECTION — CR-WIRE-C's PINS MEASURED NOTHING, AND ITS EXEMPTION IS
+> LATENT (F4).** Both pins survived a full revert to the pre-ruling errand count.
+> The cause was mundane and worth naming: their `mintFor` passed a THREE-field
+> departure snapshot where `normalizeEnvoyDepartureSnapshot` demands five, so
+> every call returned `invalid_departure` and `not.toBe('origin_capacity')` could
+> never fire; the second pin never called the mint head at all. Replaced with two
+> that discriminate — the exact revert now reds both — over the one ledger shape
+> the two laws disagree about: ONE origin, ONE episode, TWO active errands on it,
+> where the old count refuses a genuinely new negotiation and CR-WIRE-C mints it.
+> AND A MEASURED FACT THE RULING DID NOT KNOW: `envoyErrandForOffer` refuses any
+> offer whose episode already has an ACTIVE errand (`duplicate_episode`) and runs
+> BEFORE the capacity band, so the exemption arm `activeEpisodesAtOrigin.has(...)`
+> is UNREACHABLE through the mint head as it stands. CR-WIRE-C is therefore
+> correct-and-latent rather than wrong: it becomes live the moment the compromise
+> round's RE-MINT (still deferred, above) starts presenting that offer. Pinned as
+> such, so nobody builds on an exemption that has never once run.
+>
 > Nothing is lit, no golden moved, no soak ran. Dormancy re-proved after the fix:
 > with the conjunction dark the ten-tick output hash is
 > `98547883fd92b2274e2e44163211dc22` both at HEAD and after, and the same

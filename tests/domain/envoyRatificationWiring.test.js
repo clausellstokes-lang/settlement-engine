@@ -42,7 +42,9 @@ import {
   envoyErrandsOf,
   envoyOfferEpisodeKey,
   mintEnvoyErrand,
+  normalizeEnvoyPeaceOffer,
 } from '../../src/domain/worldPulse/envoyErrand.js';
+import { envoyAttemptIdForOffer } from '../../src/domain/worldPulse/envoyErrandOffer.js';
 import {
   ratificationDrainBandFromPicture,
   ratificationPowerBandFromPicture,
@@ -667,51 +669,155 @@ describe('CR-WIRE-A — the power band is derived from the picture and nothing e
 });
 
 describe('CR-WIRE-C — capacity counts EPISODES, not errands', () => {
-  function mintFor(worldState, outcomeId, tick, npcId) {
+  // WHAT THE EARLIER PAIR OF PINS ACTUALLY MEASURED: nothing. Their `mintFor`
+  // passed a three-field departure snapshot where the normalizer demands five,
+  // so EVERY mint returned `invalid_departure` and `not.toBe('origin_capacity')`
+  // could never fire; the second pin never called the mint head at all. Reverting
+  // envoyErrand.js to the pre-ruling errand count left 25/25 green. The helper
+  // below is the real one — a five-band departure picture, the LIVE acceptance
+  // the dispatch itself minted (re-pointed at the new offer id), and a route plan
+  // that clears MIN_LEG_TICKS.
+
+  /** A departure picture in the exact five closed bands the normalizer demands. */
+  const DEPARTURE = Object.freeze({
+    storesBand: 'stocked',
+    strengthBand: 'ready',
+    moraleExhaustionBand: 'present',
+    foundingCauseStatus: 'live',
+    believedRatioBand: 'matched',
+  });
+
+  /** A distinct EPISODE off the same edge: the front's own start tick is the key. */
+  function episodeOffer(frontSinceTick, id) {
     const row = offer();
+    return {
+      ...row,
+      id,
+      proposalPayload: { ...row.proposalPayload, peaceFrontSinceTick: frontSinceTick },
+    };
+  }
+
+  function mintFor(worldState, acceptance, row, tick, npcId) {
     return mintEnvoyErrand({
       worldState,
-      outcome: { ...row, id: outcomeId },
-      acceptance: { accepted: true, receipt: { decidedTick: tick, reason: 'accepted' } },
+      outcome: row,
+      acceptance: { ...acceptance, receipt: { ...acceptance.receipt, offerId: String(row.id) } },
       npcId,
-      snapshot: { strengthBand: 'ready', storesBand: 'stocked', pictureDirection: 'steady' },
+      snapshot: DEPARTURE,
       purpose: 'sue',
       routePlan: {
-        legs: [{ fromId: 'offerer', toId: 'target', journey: 'outbound', departTick: tick, arrivalTick: tick + 1 }],
-        positionRef: { fromId: 'offerer', toId: 'target', departTick: tick, arrivalTick: tick + 1 },
-        expectedReturnTick: tick + 4,
+        legs: [{
+          fromId: 'offerer', toId: 'target', journey: 'outbound',
+          departTick: tick, arrivalTick: tick + 3,
+        }],
+        expectedReturnTick: tick + 9,
       },
       tick,
     });
   }
 
-  it('exempts a continuation re-mint on an episode the origin is already running', () => {
+  /**
+   * A CONTINUATION ROW: a second ACTIVE errand on an episode the origin already
+   * runs, carrying the attempt-id spelling `envoyAttemptIdForOffer` mints. The
+   * frozen pictures are dropped because they are carrier-bound to the first
+   * errand's id, and the record normalizer is right to refuse a picture that
+   * names another traveller.
+   */
+  function continuationRow(base) {
+    const retryOffer = normalizeEnvoyPeaceOffer({
+      ...offer(), id: 'candidate.strategy.sue_for_peace.offerer.retry',
+    });
+    const row = {
+      ...base,
+      id: envoyAttemptIdForOffer(retryOffer),
+      npcId: 'npc.second',
+      offer: retryOffer,
+      acceptance: {
+        ...base.acceptance,
+        receipt: { ...base.acceptance.receipt, offerId: String(retryOffer.id) },
+      },
+    };
+    delete row.negotiationPicture;
+    delete row.targetCourtPicture;
+    return row;
+  }
+
+  it('MINTS a new negotiation the old errand count would have refused', () => {
+    // THE ONE LEDGER SHAPE THE TWO LAWS DISAGREE ABOUT: one origin, ONE episode,
+    // TWO active errands on it. Revert envoyErrand.js to
+    // `errands.filter(from === from && isActive).length >= MAX_CONCURRENT_ENVOYS`
+    // and this pin reds with `origin_capacity`, because the old law counted the
+    // continuation as a second seat.
     const { worldState } = dispatchedAndCollided();
-    const before = envoyErrandsOf(worldState);
-    expect(before, 'a real errand must already occupy the origin').toHaveLength(1);
-    const episode = envoyOfferEpisodeKey(before[0].offer);
-    // A SECOND attempt on the SAME episode. Under the old errand count this was
-    // one of the two seats; under CR-WIRE-C it is the same negotiation.
-    const again = mintFor(worldState, 'candidate.strategy.sue_for_peace.offerer.retry', 13, 'npc.second');
-    expect(again.reason, 'a continuation must not be refused for capacity').not.toBe('origin_capacity');
-    if (again.errand) {
-      expect(envoyOfferEpisodeKey(again.errand.offer)).toBe(episode);
-    }
+    const base = envoyErrandsOf(worldState)[0];
+    expect(base, 'a real errand must already occupy the origin').toBeTruthy();
+    const continued = {
+      ...worldState,
+      envoyErrands: [...envoyErrandsOf(worldState), continuationRow(base)],
+    };
+    const rows = envoyErrandsOf(continued);
+    const active = rows.filter((row) => row.from === 'offerer'
+      && !['home', 'lost'].includes(String(row.state)));
+    expect(active, 'the ledger must really hold TWO active errands here').toHaveLength(2);
+    expect(
+      new Set(rows.map((row) => envoyOfferEpisodeKey(row.offer))).size,
+      'and they must really be ONE negotiation',
+    ).toBe(1);
+
+    const fresh = episodeOffer(5, 'candidate.strategy.sue_for_peace.offerer.B');
+    expect(
+      envoyOfferEpisodeKey(fresh),
+      'the second negotiation must really be a different episode',
+    ).not.toBe(envoyOfferEpisodeKey(base.offer));
+    const minted = mintFor(continued, base.acceptance, fresh, 14, 'npc.beren');
+    expect(minted.reason, 'a court running ONE negotiation has a seat free').toBe('minted');
+    expect(minted.errand, 'and it really minted').toBeTruthy();
   });
 
-  it('still refuses a NEW mission once the origin is at capacity', () => {
-    // Two DISTINCT episodes already running from one origin is the capacity, and
-    // a third distinct episode is the case the band exists to refuse. Proven on
-    // the module's own arithmetic: the exemption is keyed on episode identity,
-    // so an episode the origin is NOT running cannot borrow another's seat.
+  it('STILL REFUSES a genuinely new mission once two negotiations are running', () => {
+    // The band still bites, and this arm is the positive control for the one
+    // above: the same helper, the same ledger, one episode further.
     const { worldState } = dispatchedAndCollided();
-    const running = envoyErrandsOf(worldState);
-    const episodes = new Set(running.map((row) => envoyOfferEpisodeKey(row.offer)));
-    expect(episodes.size).toBe(1);
-    const foreign = { ...offer(), id: 'candidate.other' };
-    foreign.proposalPayload = { ...foreign.proposalPayload, peaceFrontSinceTick: 99 };
-    expect(envoyOfferEpisodeKey(foreign), 'the foreign episode must really differ')
-      .not.toBe([...episodes][0]);
+    const base = envoyErrandsOf(worldState)[0];
+    const continued = {
+      ...worldState,
+      envoyErrands: [...envoyErrandsOf(worldState), continuationRow(base)],
+    };
+    const second = mintFor(
+      continued, base.acceptance,
+      episodeOffer(5, 'candidate.strategy.sue_for_peace.offerer.B'), 14, 'npc.beren',
+    );
+    expect(second.reason).toBe('minted');
+    const atCapacity = second.worldState;
+    expect(
+      new Set(envoyErrandsOf(atCapacity).map((row) => envoyOfferEpisodeKey(row.offer))).size,
+      'the origin now runs TWO distinct negotiations',
+    ).toBe(2);
+
+    const third = episodeOffer(7, 'candidate.strategy.sue_for_peace.offerer.C');
+    expect(
+      mintFor(atCapacity, base.acceptance, third, 15, 'npc.cass').reason,
+      'a THIRD negotiation cannot borrow another episode\'s seat',
+    ).toBe('origin_capacity');
+  });
+
+  it('records that the exemption arm is LATENT: the mint head refuses first', () => {
+    // MEASURED, AND WORTH KNOWING BEFORE SOMEONE BUILDS ON IT. `envoyErrandForOffer`
+    // refuses any offer whose episode already has an ACTIVE errand — `duplicate_episode`
+    // — and it runs BEFORE the capacity band. So a re-mint on a running episode never
+    // reaches the `activeEpisodesAtOrigin.has(episodeKey)` exemption at all: through
+    // the mint head as it stands, CR-WIRE-C's exemption is unreachable and the ruling
+    // is observable only in the arithmetic the two pins above exercise. It becomes
+    // live the moment the compromise round's RE-MINT lands (deferred, recorded in
+    // DESIGN_WAR_RULINGS_ARCHITECTURE.md) and starts presenting exactly that offer.
+    const { worldState } = dispatchedAndCollided();
+    const base = envoyErrandsOf(worldState)[0];
+    const again = mintFor(
+      worldState, base.acceptance,
+      { ...offer(), id: 'candidate.strategy.sue_for_peace.offerer.retry' }, 13, 'npc.second',
+    );
+    expect(again.reason, 'the upstream episode guard answers before capacity does')
+      .toBe('duplicate_episode');
   });
 });
 
