@@ -86,6 +86,21 @@ describe('the DM-editable path register', () => {
 describe('THE RULE: machine prose renders beside the pen, never into it', () => {
   const EDITED = 'The gate is watched by a man who remembers my players burning it down.';
 
+  /**
+   * THE FIELD THE PIN NEEDED (lane PR, 2026-08-03). `EDITED` is a tidy sentence: it
+   * survives `.trim()`, `.replace(/\s+/g, ' ')` and `.normalize('NFKC')` unchanged, so a
+   * projection that quietly did any of those still returned an identical string and the
+   * byte-identity pin stayed green. The module's own docstring already forbids exactly
+   * these — "not trimmed, not normalised, not re-cased" — so the fixture now carries one
+   * of each hazard: leading and trailing spaces, an internal double space, a ligature
+   * (U+FB01) that NFKC expands to `fi`, and a no-break space (U+00A0) NFKC folds to a
+   * plain one. A DM's pasted text looks like this far more often than EDITED does.
+   */
+  // Written with \u escapes on purpose: the exotic codepoints ARE the fixture, and a
+  // raw paste of them is how an agent edit smuggles an unreviewable byte into a source
+  // file (the authored-NUL class). Assembled once, compared everywhere.
+  const UNTIDY = '  The \uFB01rst gate is  watched by a man\u00A0who remembers.  ';
+
   it('returns the DM string by identity when a machine line is offered', () => {
     const projected = projectBesideDmField(EDITED, 'The approach is ordinary and the town is used to it.');
     expect(projected.field).toBe(EDITED);
@@ -106,6 +121,31 @@ describe('THE RULE: machine prose renders beside the pen, never into it', () => 
     // beside the field where a reader would infer withheld content.
     expect(blank.beside).toBeNull();
     expect(undefinedLine.beside).toBeNull();
+  });
+
+  it('keeps an UNTIDY field byte-for-byte — no trim, no collapse, no normalisation', () => {
+    // Guard-the-guard FIRST: if the fixture ever loses a hazard, these three reds say so
+    // before the pin below quietly stops proving anything.
+    expect(UNTIDY, 'the fixture must not survive a trim').not.toBe(UNTIDY.trim());
+    expect(UNTIDY, 'the fixture must not survive a whitespace collapse')
+      .not.toBe(UNTIDY.replace(/\s+/g, ' '));
+    expect(UNTIDY, 'the fixture must not survive NFKC').not.toBe(UNTIDY.normalize('NFKC'));
+
+    for (const machineLine of [null, undefined, '   ', 'A machine sentence.']) {
+      const projected = projectBesideDmField(UNTIDY, machineLine);
+      expect(projected.field).toBe(UNTIDY);
+      // Codepoint-for-codepoint, not just ===: this is the assertion a future refactor
+      // that returned a "clean" copy would have to defeat deliberately.
+      expect([...String(projected.field)].map((c) => c.codePointAt(0)))
+        .toEqual([...UNTIDY].map((c) => c.codePointAt(0)));
+      expect(projected.hasField).toBe(true);
+    }
+
+    // The same through the settlement-and-path door, which is the one composers use.
+    const settlement = { economicViability: { summary: UNTIDY } };
+    const viaPath = projectBesideSettlementField(settlement, 'economicViability.summary', 'A machine sentence.');
+    expect(viaPath.field).toBe(UNTIDY);
+    expect(settlement.economicViability.summary).toBe(UNTIDY);
   });
 
   it('does not swallow a DM field that happens to equal the machine sentence', () => {
@@ -145,6 +185,74 @@ describe('THE RULE: machine prose renders beside the pen, never into it', () => 
   });
 });
 
+/**
+ * Blank out every comment, preserving line and column geometry so the `^`/`m` anchors
+ * below still mean what they say.
+ *
+ * WHY THE SCAN STOPS READING COMMENTS (lane PR, 2026-08-03). The object-literal arm of
+ * the pattern matches `{ desc:` — which is exactly how a JSDoc `@example` block SHOWS
+ * the shape of a record it does not write. The old comment beside the pattern claimed
+ * `(?!:)` excluded that case ("a TYPE annotation is not read as one"); it does no such
+ * thing — `(?!:)` excludes a DOUBLE colon and nothing else. Rather than leave a guard
+ * whose only defence against documenting the shape was that nobody had documented it,
+ * the scan now reads code alone, and the two fixtures below pin both directions.
+ * @param {string} source
+ * @returns {string}
+ */
+function stripComments(source) {
+  return source
+    .replace(/\/\*[\s\S]*?\*\//g, (block) => block.replace(/[^\n]/g, ' '))
+    .replace(/^([ \t]*)\/\/.*$/gm, '$1');
+}
+
+/**
+ * The writer pattern for one DM-editable leaf: `x.leaf =`, `x['leaf'] =`, `x["leaf"] =`,
+ * and the object-literal spelling `leaf:` a rebuild-the-settlement composer would use.
+ * `==` and `=>` are excluded so a comparison or an arrow is not read as a write; `(?!:)`
+ * after the literal form excludes the DOUBLE-colon spelling only.
+ * @param {string} leaf
+ * @returns {RegExp}
+ */
+function writerPattern(leaf) {
+  return new RegExp(
+    `(\\.${leaf}\\s*=(?![=>])`
+    + `|\\['${leaf}'\\]\\s*=(?![=>])`
+    + `|\\["${leaf}"\\]\\s*=(?![=>])`
+    + `|(?:^|[{,]\\s*)${leaf}\\s*:(?!:))`,
+    'm',
+  );
+}
+
+/** Does this SOURCE (comments excluded) write this leaf? */
+function writesLeaf(source, leaf) {
+  return writerPattern(leaf).test(stripComments(source));
+}
+
+/**
+ * The fixture the cycle-11 verifier planted: a module that only DOCUMENTS the shape.
+ * A scan that reads comments calls this a writer, which is a false offender nobody can
+ * clear without deleting the documentation.
+ */
+const __mutantJsdoc = [
+  '/**',
+  ' * A reader that shows the record it reads.',
+  ' * @example',
+  ' * { desc: \'the faction blurb\' }',
+  ' * @property {string} desc the blurb',
+  ' */',
+  '// arrivalScene: the DM writes this one, we never do',
+  'export function readBlurb(faction) { return faction.desc; }',
+  'export const same = (a, b) => a.desc === b.desc;',
+].join('\n');
+
+/** The real thing, so stripping comments cannot be mistaken for stripping teeth. */
+const __mutantWriter = [
+  '/** Rebuilds a faction record. */',
+  'export function rebuild(faction, line) {',
+  '  return { ...faction, desc: line };',
+  '}',
+].join('\n');
+
 describe('THE RULE, structurally: the family holds no writer', () => {
   /** Every source file of the state-prose family. */
   function familySources() {
@@ -167,23 +275,30 @@ describe('THE RULE, structurally: the family holds no writer', () => {
       .toEqual(new Set(['faction', 'institution', 'settlement']));
   });
 
+  it('reads code and not comments — the guard says what it does, and does it', () => {
+    // The verifier's __mutantJsdoc fixture, promoted to a pin. Documenting the shape of
+    // a DM-editable record must not be an offence; writing it must.
+    for (const leaf of ['desc', 'arrivalScene']) {
+      expect(
+        writesLeaf(__mutantJsdoc, leaf),
+        `a JSDoc block that only SHOWS ${leaf} is read as a writer`,
+      ).toBe(false);
+    }
+    expect(writesLeaf(__mutantWriter, 'desc'), 'a real object-literal write went unseen').toBe(true);
+    expect(writesLeaf('faction.desc = line;', 'desc')).toBe(true);
+    expect(writesLeaf("faction['desc'] = line;", 'desc')).toBe(true);
+    expect(writesLeaf('if (faction.desc === other.desc) return;', 'desc')).toBe(false);
+    // Stripping must preserve line geometry, or the `^` arm silently stops anchoring.
+    expect(stripComments(__mutantJsdoc).split('\n').length).toBe(__mutantJsdoc.split('\n').length);
+    expect(writesLeaf('/* desc: shown */\nconst x = { desc: line };', 'desc')).toBe(true);
+  });
+
   it('contains no assignment into any DM-editable prose path, on any entity kind', () => {
     const offenders = [];
     for (const file of familySources()) {
       const source = readFileSync(file, 'utf8');
       for (const leaf of DM_EDITABLE_LEAVES) {
-        // `x.arrivalScene =`, `x['arrivalScene'] =`, and the object-literal spelling
-        // `arrivalScene:` that a rebuild-the-settlement composer would use. `==` and
-        // `=>` are excluded so a comparison or an arrow is not read as a write; `:` is
-        // excluded after the literal form so a TYPE annotation is not read as one.
-        const assignment = new RegExp(
-          `(\\.${leaf}\\s*=(?![=>])`
-          + `|\\['${leaf}'\\]\\s*=(?![=>])`
-          + `|\\["${leaf}"\\]\\s*=(?![=>])`
-          + `|(?:^|[{,]\\s*)${leaf}\\s*:(?!:))`,
-          'm',
-        );
-        if (assignment.test(source)) {
+        if (writesLeaf(source, leaf)) {
           offenders.push(`${file.slice(ROOT.length + 1)} writes ${LEAF_OWNERS.get(leaf).join(' / ')}`);
         }
       }

@@ -776,3 +776,43 @@ priced cost of the ambition.
 >    SLOTS line. The reader treats an undeclared slot exactly as a declared one,
 >    so this is corpus hygiene rather than a runtime hazard; the contract test
 >    ratchets the count downward only.
+
+> **LANE PR — THE DOSSIER RESIDUALS: FOUR PINS THAT PROVED LESS THAN THEY SAID,
+> AND ONE RECEIPT THAT SAID MORE THAN IT DID, 2026-08-03.** The cycle-11 PT
+> verifier's four residual findings, each of which it had already confirmed with
+> a mutant, closed in one commit on `claude/composite-r4` in the minifold
+> worktree. Nothing pushed. **No `src/` file changed** — every repair is in the
+> test estate, so the size, strict and any-cast ratchets are untouched by
+> construction.
+>
+> | Finding | The repair, and the mutant it now reds under |
+> |---|---|
+> | **R1 — reachability was PROSE.** Lane PT wrote "STRUGGLING is reachable, SUBSISTENCE is not" into a comment. Prose cannot red. | `stateProseKernel.test.js` now EXECUTES `deriveProsperityLabel` over a fifteen-cell sweep (five bases × three stress columns, RNG arm deliberately unreachable because no cell passes the `'Subsistence'` input) and asserts the emitted label set EQUALS DS-ECO-8's pool keys minus the legacy rung, both directions. NC: deleting `'Struggling'` from the ladder's `LABELS` reds 2 of 21. |
+> | **R2 — the consumer needle was PATH-SHAPED.** It matched the substring `display/economyFreshness.js`, which every importer OUTSIDE `src/domain/display` spells and none inside it ever can. | `economyReadModelCoverage.walker` now RESOLVES a relative specifier against the importing file (`specifierIsDetector`), and the census runs over an explicit source list so a synthetic `__probe` rides the same code path. NC, both halves: a real `src/domain/display/stateProse/__probe.js` taking `economyShiftSinceSurvey` via `'../economyFreshness.js'` reds 3 tests today, and reds **only the synthetic probe pin** under the old needle — the frozen consumer map and the detector-monopoly pin both stayed green, which is the finding. |
+> | **R3 — the byte-identity fixture was TIDY.** `EDITED` survives `trim`, whitespace-collapse and NFKC unchanged, so all three mutants of the projection returned an identical string. | `dmFieldProjection.test.js` gains `UNTIDY` — leading + trailing spaces, an internal double space, U+FB01 and U+00A0 — written with `\u` escapes so the exotic codepoints stay reviewable, asserted codepoint-for-codepoint through both doors. NC: a `.trim()` mutant and a `.normalize('NFKC')` mutant each red it. |
+> | **R4 — the guard's comment was FALSE.** It claimed `(?!:)` excluded a type annotation; `(?!:)` excludes a double colon and nothing else, so a JSDoc `@example` showing `{ desc: … }` read as a writer. | The scan now blanks comments first (`stripComments`, line geometry preserved so the `^` arm still anchors), the comment states what the lookahead actually does, and the verifier's `__mutantJsdoc` fixture is a committed pin alongside a real-writer fixture. NC: neutering `stripComments` to the identity reds the JSDoc arm. |
+>
+> **RECEIPT CORRECTION (R5).** Commit `91e5be4c`'s message records
+> `stateProseKernel 12 → 18`. The true delta is **13 → 18 (+5)**: the pre-lane
+> file ran 6 + 3 + 2 + 2 = 13 tests (`git show 91e5be4c^:tests/domain/
+> stateProseKernel.test.js`). The commit message cannot be amended, so the
+> correction lives here. After lane PR the same file runs **21**.
+>
+> **RECEIPTS.** `npx vitest run` over the three lane files → 3 files, **50
+> passed** (stateProseKernel 18 → 21 · dmFieldProjection 12 → 14 ·
+> economyReadModelCoverage 14 → 15); eslint over the three files exit 0. Five
+> negative controls EXECUTED and restored from `cp` backups, never `git
+> checkout` (the uncommitted-work hazard).
+>
+> **WHAT THIS LANE DELIBERATELY DID NOT DO** — recorded so no one re-finds it as
+> a bug:
+>
+> 1. **THE CENSUS STILL READS `import` ONLY.** A re-export
+>    (`export { x } from './economyFreshness.js'`) would carry the detector past
+>    the frozen map. Measured: zero such re-exports exist in `src` today. Left
+>    for the same needle to grow an arm when one does, rather than widened
+>    speculatively inside a repair lane.
+> 2. **`stripComments` IS TEXTUAL, NOT A PARSER.** A `/* … */` sequence inside a
+>    string literal would blank text that is really code. No file in the
+>    stateProse family contains one, and the direction of the error is a MISSED
+>    offender, which is why the real-writer fixture sits beside the JSDoc one.

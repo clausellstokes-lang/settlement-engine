@@ -64,7 +64,7 @@
 
 import { describe, expect, test } from 'vitest';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { dirname, join, relative } from 'node:path';
+import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -200,36 +200,92 @@ function censusEconomyReaders() {
 }
 
 /**
- * Every file under src that imports the freshness module, mapped to the exact
- * symbols it takes. A default or namespace import is recorded VERBATIM (`* as
- * fresh`) rather than expanded, so it can never satisfy the frozen map — taking
- * the whole module is taking the detector.
+ * Every import of a module whose specifier ENDS in `economyFreshness.js`, whatever
+ * shape the specifier takes. `[^;]` keeps the clause inside ONE statement: a greedier
+ * body swallowed the preceding import line and turned the note leaf's clause into
+ * unparseable soup.
+ */
+const FRESHNESS_IMPORT = /import\s+([^;]*?)\s+from\s+['"]([^'"]*economyFreshness\.js)['"]/g;
+
+/**
+ * Does this specifier, written in THIS file, name the detector module?
+ *
+ * THE NEEDLE WAS PATH-SHAPED (lane PR, 2026-08-03). The old test matched the literal
+ * substring `display/economyFreshness.js` inside the specifier, which every importer
+ * OUTSIDE src/domain/display happens to spell — and no importer INSIDE it ever can. A
+ * sibling leaf writing `'./economyFreshness.js'`, or a `stateProse/` leaf writing
+ * `'../economyFreshness.js'`, was invisible to the frozen-consumer map: it could have
+ * taken `economyShiftSinceSurvey` and hand-rolled the paragraph with nothing red. The
+ * needle now RESOLVES a relative specifier against the importing file and compares the
+ * repo-relative result, so where the importer sits stops deciding whether it is seen.
+ *
+ * A non-relative specifier (an alias, a bare path) keeps the old suffix reading — it
+ * cannot be resolved without the bundler's map, and suffix-matching it is the
+ * fail-closed direction.
+ * @param {string} spec the import specifier as written
+ * @param {string} importerRel the importing file, repo-relative, forward slashes
+ * @returns {boolean}
+ */
+function specifierIsDetector(spec, importerRel) {
+  if (spec.startsWith('.')) {
+    const abs = resolve(join(ROOT, dirname(importerRel)), spec);
+    return relative(ROOT, abs).replace(/\\/g, '/') === DETECTOR;
+  }
+  return spec.endsWith('display/economyFreshness.js');
+}
+
+/**
+ * The symbols one import clause takes. A default or namespace import is recorded
+ * VERBATIM (`* as fresh`) rather than expanded, so it can never satisfy the frozen map
+ * — taking the whole module is taking the detector.
+ * @param {string} clause the text between `import` and `from`
+ * @returns {string[]}
+ */
+function importedSymbols(clause) {
+  const trimmed = clause.trim();
+  const braced = trimmed.match(/^\{([\s\S]*)\}$/);
+  if (!braced) return [trimmed];
+  return braced[1].split(',')
+    .map((part) => part.trim().split(/\s+as\s+/)[0].trim())
+    .filter(Boolean);
+}
+
+/**
+ * The census, over an explicit list of sources rather than the filesystem, so a
+ * synthetic probe can be pushed through the SAME code path the real scan uses.
+ * @param {Array<{rel: string, src: string}>} sources
  * @returns {Record<string, string[]>} rel path → sorted imported symbols
  */
-function freshnessConsumers() {
+function consumersOf(sources) {
   /** @type {Record<string, string[]>} */
   const out = {};
-  for (const abs of walk(join(ROOT, 'src'))) {
-    const rel = relative(ROOT, abs).replace(/\\/g, '/');
+  for (const { rel, src } of sources) {
     if (rel === DETECTOR) continue;
-    const src = readFileSync(abs, 'utf8');
     const symbols = [];
-    // `[^;]` keeps the clause inside ONE statement: a greedier body swallowed the
-    // preceding import line and turned the note leaf's clause into unparseable soup.
-    for (const m of src.matchAll(
-      /import\s+([^;]*?)\s+from\s+['"][^'"]*display\/economyFreshness\.js['"]/g,
-    )) {
-      const clause = m[1].trim();
-      const braced = clause.match(/^\{([\s\S]*)\}$/);
-      if (!braced) { symbols.push(clause); continue; }
-      for (const part of braced[1].split(',')) {
-        const name = part.trim().split(/\s+as\s+/)[0].trim();
-        if (name) symbols.push(name);
-      }
+    for (const m of src.matchAll(FRESHNESS_IMPORT)) {
+      if (!specifierIsDetector(m[2], rel)) continue;
+      symbols.push(...importedSymbols(m[1]));
     }
     if (symbols.length) out[rel] = [...new Set(symbols)].sort();
   }
   return out;
+}
+
+/** Every file under src, as the census reads them. */
+function srcSources() {
+  return walk(join(ROOT, 'src')).map((abs) => ({
+    rel: relative(ROOT, abs).replace(/\\/g, '/'),
+    src: readFileSync(abs, 'utf8'),
+  }));
+}
+
+/**
+ * Every file under src that imports the freshness module, mapped to the exact
+ * symbols it takes.
+ * @returns {Record<string, string[]>} rel path → sorted imported symbols
+ */
+function freshnessConsumers() {
+  return consumersOf(srcSources());
 }
 
 const census = censusEconomyReaders();
@@ -353,6 +409,31 @@ describe('the sentence and the paragraph each have exactly ONE home', () => {
       + `(${DETECTOR}). A second copy is the hand-copy drift class Wave R-4 removed; `
       + `import ECONOMY_FRESHNESS_SENTENCES instead:\n${minting.join('\n')}\n`,
     ).toEqual([DETECTOR]);
+  });
+
+  test('the consumer needle SEES an importer inside src/domain/display (the __probe)', () => {
+    // Guard-the-guard, and the lane-PR repair's own pin. Every real consumer today sits
+    // outside src/domain/display and therefore spells `display/economyFreshness.js` in
+    // full; the census could have been matching that substring and nobody would know.
+    // These two probes are exactly the specifiers a leaf INSIDE the module's own
+    // directory would write, and both were invisible before the needle resolved paths.
+    const probes = [
+      { rel: 'src/domain/display/__probe.js', src: "import { economyShiftSinceSurvey } from './economyFreshness.js';" },
+      { rel: 'src/domain/display/stateProse/__probe.js', src: "import { ECONOMY_FRESHNESS_SENTENCES } from '../economyFreshness.js';" },
+    ];
+    expect(consumersOf(probes)).toEqual({
+      'src/domain/display/__probe.js': ['economyShiftSinceSurvey'],
+      'src/domain/display/stateProse/__probe.js': ['ECONOMY_FRESHNESS_SENTENCES'],
+    });
+    // ...and the needle must not become a rubber stamp in the other direction: a
+    // same-named module in a DIFFERENT tree is not this module.
+    expect(consumersOf([
+      { rel: 'src/domain/other/__probe.js', src: "import { x } from './economyFreshness.js';" },
+      { rel: 'src/components/__probe.jsx', src: "import { y } from '../lib/economyStaleness.js';" },
+    ])).toEqual({});
+    // The real consumers still resolve through the same path, relative spellings and all.
+    expect(Object.keys(freshnessConsumers()).sort())
+      .toEqual(Object.keys(ALLOWED_FRESHNESS_CONSUMERS).sort());
   });
 
   test('the detector module has exactly the consumers it is allowed, symbol for symbol', () => {

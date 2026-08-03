@@ -33,6 +33,7 @@ import {
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
 import { DOSSIER_CAUSAL_PROSE } from '../../src/data/dossierCausalProse.generated.js';
 import { PROSPERITY_TIERS } from '../../src/data/constants.js';
+import { deriveProsperityLabel } from '../../src/generators/economy/prosperity.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 /**
@@ -63,6 +64,82 @@ const LEGACY_RUNG = {
   why: 'LEGACY TOLERANCE — never emitted; legacy and hand-written saves only',
 };
 const PROSPERITY_RUNGS = [REACHABLE_RUNG, LEGACY_RUNG];
+
+/**
+ * THE LADDER, EXECUTED (lane PR, 2026-08-03).
+ *
+ * The two rungs above are a JUDGMENT written into prose: STRUGGLING is reachable,
+ * SUBSISTENCE is not. Prose cannot red. Until this block existed, deleting a rung from
+ * `deriveProsperityLabel`'s own `LABELS` ladder — the exact mutant the cycle-11 verifier
+ * ran — left every pin in this file green while the corpus kept a pool no live
+ * settlement could ever reach. Reachability is now MEASURED: the real generator function
+ * is called, and the set of labels it can emit is compared, both directions, against the
+ * set of pool keys DS-ECO-8 actually carries.
+ *
+ * THE SWEEP IS DELIBERATELY RNG-FREE. `deriveProsperityLabel` touches `_rng()` on
+ * exactly one arm — the `'Subsistence'` INPUT, which rolls its own remap — so no sweep
+ * cell passes that input. Every cell below is a pure function of its arguments, which is
+ * what lets the emitted set be asserted as an exact equality rather than a containment.
+ *
+ * The stress column is what reaches rung 0: `under_siege` clamps the index to 0 from any
+ * base, and `indebted` decrements it, so the sweep walks the whole ladder from five
+ * bases without ever needing the RNG arm.
+ */
+const LADDER_SWEEP_BASES = ['Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy'];
+const LADDER_SWEEP_STRESSES = [[], ['under_siege'], ['indebted']];
+
+/** Every label the shipped ladder can actually put on a settlement. */
+function emittedProsperityLabels() {
+  const emitted = new Set();
+  for (const base of LADDER_SWEEP_BASES) {
+    for (const stressTypes of LADDER_SWEEP_STRESSES) {
+      emitted.add(deriveProsperityLabel(base, { stressTypes }, []));
+    }
+  }
+  return emitted;
+}
+
+describe('the state-prose reader — the corpus keys on bands the ladder can reach', () => {
+  it('sweeps the real ladder deterministically, with no RNG arm touched', () => {
+    // Guard-the-guard twice over. If the sweep ever became seed-dependent, the exact
+    // set equality below would flake instead of failing honestly; and if the sweep
+    // stopped calling the real function, it would compare a hard-coded list to itself.
+    const first = [...emittedProsperityLabels()].sort();
+    const second = [...emittedProsperityLabels()].sort();
+    expect(first).toEqual(second);
+    expect(deriveProsperityLabel('Moderate', { stressTypes: [] }, [])).toBe('Moderate');
+    expect(deriveProsperityLabel('Poor', { stressTypes: ['under_siege'] }, [])).toBe('Struggling');
+    expect(LADDER_SWEEP_BASES).not.toContain('Subsistence');
+  });
+
+  it('emits EXACTLY the bands DS-ECO-8 pools on, minus the legacy rung', () => {
+    // The pin the LABELS-ladder mutant must red: delete 'Struggling' from
+    // deriveProsperityLabel's LABELS and the emitted set loses the band the corpus
+    // still carries a pool for, so this equality fails.
+    const emitted = [...emittedProsperityLabels()].map((label) => String(label).toUpperCase()).sort();
+    const pooled = Object.keys(DOSSIER_STATE_PROSE_ECONOMY[REACHABLE_RUNG.block].pools)
+      .filter((key) => key !== LEGACY_RUNG.pool)
+      .sort();
+    expect(
+      emitted,
+      'the prosperity ladder and DS-ECO-8\'s pools have drifted apart: either the corpus '
+      + 'keys on a band no settlement can reach, or the ladder emits a band with no prose',
+    ).toEqual(pooled);
+  });
+
+  it('proves SUBSISTENCE is the legacy rung it is labelled as, rather than asserting it', () => {
+    // The other half of the same claim. LEGACY TOLERANCE is only honest while the
+    // generator genuinely cannot emit the rung; if a future ladder starts emitting it,
+    // the label above becomes a lie and this reds.
+    const emitted = [...emittedProsperityLabels()];
+    // Compared in BOTH spellings on purpose: the pool key is upper-case and the label is
+    // title-case, and a case-blind comparison here would pass whatever the ladder did.
+    expect(emitted.map((label) => String(label).toUpperCase())).not.toContain(LEGACY_RUNG.pool);
+    expect(emitted).not.toContain(PROSPERITY_TIERS[0]);
+    expect(PROSPERITY_TIERS[0]).toBe('Subsistence');
+    expect(LEGACY_RUNG.pool).toBe(PROSPERITY_TIERS[0].toUpperCase());
+  });
+});
 
 describe('the state-prose reader — anchored liveness', () => {
   it('pins the rungs the ladder actually names, reachable one first', () => {
