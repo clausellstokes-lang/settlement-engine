@@ -619,6 +619,18 @@ priced cost of the ambition.
 >    prose"). The 78 families × 3-4 registers and §2's 175 clause forms are a
 >    content-transcription wave of their own, with their own golden plan. The
 >    substrate they wire INTO is built and pinned.
+>    **[AMENDED 2026-08-03 — LANE HG: THIS DEFERRAL WAS MIS-CLASSIFIED, AND IS
+>    NOW DISCHARGED.]** It was recorded as richness postponed. It was a LIGHTING
+>    BLOCKER: without the molds, §3's argument tags had no supply, so the
+>    composer interpolated a finite clause into every slot and ~89% of
+>    back-direction draws printed ungrammatical prose ("against the refusal of
+>    the eastern road was cut"). §2's own contract had already said so — "a
+>    phrase-taking connective in front of a finite clause is ungrammatical, and
+>    a display-side composer with no engine state has no repair for it" — and
+>    that sentence is the definition of a blocker, not of polish. Lane HG wires
+>    the molds AS ARGUMENT FORMS (see its own record below). What remains
+>    deferred is narrower and correctly named: §1's mold SENTENCES and §2's 175
+>    clause forms, which are content transcription.
 > 2. **FIVE INDEX FACETS ARE PENDING, WIRED, AND DARK** — institution, good,
 >    service, route, treaty/war/arc. Their readers exist and a pin feeds each
 >    one a typed ref to prove it lights; they wait on the MINT-TIME typed
@@ -633,6 +645,81 @@ priced cost of the ambition.
 > 4. **THE DOSSIER-NATIVE REGISTER IS NOT THIS LANE'S.** SP-6's fourth
 >    register belongs to the dossier lane, which is live on
 >    `src/domain/display/stateProse/` in the same tree.
+
+> **LANE HG — THE HERALD GRAMMAR WAVE: THE JOINS BECOME SENTENCES, 2026-08-03.**
+> Three commits on `claude/composite-r4` in the minifold worktree, nothing
+> pushed, everything still behind `simulationRules.heraldCausalVoiceEnabled` —
+> dark renders the surface that shipped, byte for byte.
+>
+> | Commit | What landed |
+> |---|---|
+> | `ac22447b` | **THE JOIN MOLDS.** `heraldJoinMolds.js` — per §3.1 pool, the FORM each argument type takes, with the receipt's own clause carried through inside it. `heraldCausalVoice.js` dispatches on `connective.arg` in BOTH registers, computes the DRAWABLE subset before the draw, and gained the `fwd` half it never had. |
+> | `1e96a0fa` | **THE PLANT WARRANT IS THE SPELLING** (F2) — the `disinfo:` marker prefix, not lineage presence; the fence gains a quoted, pinned, load-bearing exemption rather than a hole; the popup divergence pin. |
+> | `a0355434` | **ONE WRITER FOR THE UNRECEIPTED HOP** (F3) — `UNRECEIPTED_HOP` exported beside `REDACTED_HOP`, the popup's bare duplicate killed, drift and copy mutants both executed. |
+> | `<this row>` | The progress record (F4 + F5). |
+>
+> **THE DEFECT, NAMED PRECISELY.** The grammar module authored four argument
+> tags; the composer read `arg` exactly once. 49 of the 71 back-direction
+> connectives declare a NOUN-PHRASE slot and were handed a finite clause. The
+> molds are the supply those tags were written to receive.
+>
+> **THE PINS ARE PARSES.** `conformsToMold` re-derives the argument from the
+> pool's licensed forms and the hop's own clause and demands equality, so the
+> law is checkable at the SHAPE grain rather than by substring. A totality pin
+> asserts molded ∪ declared-unsupplied covers every (pool, arg) the connective
+> corpus spends — a new connective cannot land un-molded and unnoticed. Six
+> mutants were EXECUTED across the three commits, each restored from a file copy
+> with `diff` proving the file identical.
+>
+> **THE SEVEN DECLARED HOLES**, all one failure: the connective's argument is an
+> ENTITY the parent's clause is not — the PLANTER (`planted::N`), the judging
+> party (`judged::N`), the ancestor (`inherited::N`/`::F`), the decree
+> (`buried::N`), the carrier (`carried::N`) — plus `refused::V`, a bare verb
+> phrase, which §2 never authored for any kind because no receipt carries its own
+> act de-tensed. Of the seven, only `planted::N` sits on a wired warrant, and its
+> pool still speaks: the one `F` line ("believing exactly what …") molds through a
+> free relative that names no hand. The other six sit on pools no warrant reaches
+> today, so nothing wired is mute.
+>
+> **THE READER CONSEQUENCE, MEASURED RATHER THAN ASSUMED (F5).** Drop-never-
+> relabel was expected to make a headline's causal gesture appear and disappear
+> by seed as `A` lines came up. The cure removed that: `A` lines are filtered
+> out BEFORE the draw, so every wired warrant composes a gesture at every seed
+> (pinned). The seed-dependence moved rather than vanished — it now lives in the
+> 160-character headline cap, because molds differ in length. Measured over 200
+> seeds: at a combined event+parent length of 115 characters the gesture always
+> composes; at 123 it drops on 14/200 seeds, at 131 on 99/200, at 139 on
+> 186/200, and at 159 always. THIS IS DESIGNED BEHAVIOUR — the cap is the
+> headline register's honesty, and a gesture that will not fit is dropped rather
+> than shortened into a claim the receipt does not carry. The item still renders
+> its recorded headline exactly as it does today. One pool-level drop is
+> permanent and deterministic rather than seeded: `dissolved` in the `fwd`
+> direction is all-`A`, so a forward telling of a dissolution names the link and
+> asserts no relation.
+>
+> **WHAT THIS WAVE DELIBERATELY DID NOT DO** — recorded so no one re-finds it as
+> a bug:
+>
+> 1. **§1's MOLD SENTENCES AND §2's 175 CLAUSE FORMS REMAIN A CONTENT WAVE.**
+>    They spend `{settlement}`/`{good}`/`{route}` fills no display-side reader
+>    holds and assert facts beyond the hop's own receipt, which per-link
+>    entailment forbids. What lane HG wired is the argument FORM, filled with the
+>    receipt's own words. The clause forms wire in behind a kind→clause map that
+>    does not exist yet.
+> 2. **THE MOLD KEY IS THE SIXTEEN POOLS, NOT THE EIGHT EDGES** (chair call,
+>    veto open). R-CAU-I makes the sixteen the eight's named inflections; the
+>    licence has to be per pool because `exposed` and `followed` share the
+>    `succession` tag and not the same lawful nominalisation. `POOL_PARENT` still
+>    maps every mold back to its edge, so law 1 is checked where it always was.
+> 3. **THREE TEST FILES KEEP THEIR OWN COPY of the unreceipted-hop literal**
+>    (discourseParity, narrativeParity, discourseKernel). They belong to other
+>    lanes and a test-side copy cannot mis-classify a link — only make a parity
+>    assertion stale. The single-writer scan is scoped to `src/**` deliberately.
+> 4. **THE CHAIN IS STILL TREATED AS A SEQUENCE.** `buildCauseWalk` returns a
+>    BFS over a DAG, so two parents of one receipt arrive as consecutive hops and
+>    both registers read them as a line. That predates this wave and is unchanged
+>    by it; the `fwd` composition inherits the same assumption and guards only the
+>    gap a DROPPED hop would leave.
 
 > **LANE P — THE DOSSIER-NATIVE STATE-PROSE PROJECTION: THE READER IS BUILT AND
 > DARK, 2026-08-03.** Five commits on `claude/composite-r4` in the minifold
