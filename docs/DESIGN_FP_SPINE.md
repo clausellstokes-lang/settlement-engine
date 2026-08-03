@@ -454,6 +454,16 @@ authored here so "SP-N landed" resolves corpus-wide.]
   corpus is the annex RECEIPT_POOLS_DOSSIER_STATE.md; hook CONTENT
   stays the HK program's; coverage is walker-measured against the
   census denominator.
+  **[AMENDED 2026-08-03 (from the corpus's own critical find) — THE
+  DM-FIELD PROJECTION RULE:]** SECTION-TARGET is a READING position,
+  never a write target: several dossier sections render from
+  DM-EDITABLE prose fields (the queue-wired owner-editable surfaces),
+  and causal machine prose must PROJECT BESIDE such fields — rendered
+  adjacent, never persisted into them; a DM-edited field always wins
+  its position whole (the DM's-pen law, dossier edition). Pin: a
+  DM-edited field renders byte-identical with the state-prose corpus
+  fully wired (the hardest negative — machine prose must be provably
+  incapable of touching the pen's ground).
 - **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion + the
   mode-speed table (J-D11(b)) landed as spine infrastructure ahead of all six.
 - **SP-8 THE AGE LAYER [CORRECTED 2026-08-02 (fp-audit) — new, per the

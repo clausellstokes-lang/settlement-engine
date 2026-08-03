@@ -1755,6 +1755,7 @@ which is the angle its own subtitle promises and no other mold in it covers.
 
 **SUBHEADER**
 7. `[plain]` {settlement} recorded grievances against {counterpart} and then opened war on them; {counterpart}'s recorded strength had fallen, and the reasons pinned at the opening are on the record.
+8. `[charge]` *(HEADLINE — appended at the completion pass, 2026-08-03, per the frequency-scaled floor; numbering append-only)* The ledger against {counterpart} was long before it was loud — the {settlement} market could recite it before the council read it out.
 
 ---
 
@@ -4027,3 +4028,55 @@ about the RECORD — which is why the composer may not choose it for rhythm.
 | New tokens minted | 0 |
 | Reconciliations against the §0 header | 3, recorded above |
 | Edges flagged for the chair against §0c's eight | 0 — all assigned by R-CAU-I; reversible in one read of §3.1's group table |
+
+---
+
+## §4 THE INTEGRITY-DISCLOSURE LINES (appended at the completion pass,
+## 2026-08-03, per SP-6's MANIPULATION DISCLOSURE + MUTATED PLANT laws —
+## the causality popup's per-link integrity register, DM-facing; states
+## are lineage-aware, never guessed; the organic case NEVER names an
+## author, including the wear atop a plant)
+
+**SLOTS:** `{house}` `{npc}` `{settlement}` `{purpose}` `{timeband_since}`
+**AUDIENCE:** dm-only (the popup is the DM's; player projections strip the
+disclosure whole)
+
+**CLEAN**
+1. The record carries this as it happened.
+2. No hand touched this on the road; it arrived as it left.
+3. What was said is what was so.
+
+**WORN IN THE TELLING** *(authorless — the road did it)*
+4. The tale grew in the carrying; nobody grew it on purpose.
+5. Worn in the telling — each mouth added a little, and no mouth owned it.
+6. What left as a report arrived as a story; the road charges no one.
+7. The drift here is the ordinary kind: distance, seasons, and retelling.
+
+**PLANTED** *(the commissioner and the purpose, always)*
+8. Planted by {house}, to {purpose}. The record holds the sowing.
+9. This did not spring up; it was set — {house}'s hand, {timeband_since},
+   and the purpose is entered: {purpose}.
+10. A bought tale: {npc} carried it, {house} paid for it, and what it was
+    for is on the record — {purpose}.
+11. The seed is signed. {house} planted this at {settlement} to {purpose},
+    and the ledger has held the receipt since.
+
+**PLANTED, THEN WORN** *(the seed-not-growth law: the sowing is charged;
+the growth is the road's)*
+12. Planted by {house} to {purpose} — and grown in the carrying into
+    something its planter never wrote. The record charges the sowing; the
+    rest is the road's.
+13. The seed was {house}'s; the harvest is nobody's design. What was set
+    as a whisper walks now as a tale twice its size.
+14. Begun on purpose, finished by accident: {house} set it, {timeband_since},
+    and every mouth since has made it stranger.
+15. The intent is on the record — {house}, to {purpose}. What the tale
+    became after is wear, and wear has no author.
+
+**UNKNOWN** *(the honest terminal — never guessed)*
+16. The record cannot say where this began; it is old, and its first
+    carrier is not entered.
+17. Provenance ends here. What stands before this link was never
+    receipted, and the paper will not invent it.
+18. Unknown — and marked so, because a guessed culprit would be a second
+    manipulation.
