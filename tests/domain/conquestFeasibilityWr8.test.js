@@ -47,6 +47,7 @@ import {
   ownExhaustionWord,
   ownStoresWord,
   readConquestFeasibilityFor,
+  readConquestIntentFor,
   CONQUEST_REQUIRED_RULES,
 } from '../../src/domain/worldPulse/conquestDoctrineStage.js';
 import { hostileTargetsOf } from '../../src/domain/worldPulse/warIntent.js';
@@ -337,6 +338,10 @@ function beliefWorld(rules) {
     // read. A fogged world is the only world in which this stage does anything.
     simulationRules: { ...rules, infoMode: 'unreliable' },
     spatialCanonVersion: 1,
+    // WR-2's ledger gives the court its temper. Without it the INTENT half is
+    // unreadable and nothing is ever advised, which is the N3 negative case
+    // pinned separately below.
+    dispositionStats: { ironhold: { channels: { martial: { stock01: 0.9 } } } },
     relationshipStates: {},
     spatialLedgers: {
       beliefMaps: {
@@ -345,7 +350,9 @@ function beliefWorld(rules) {
             // The court believes the far-off `zeta` is spent and thornwall strong,
             // so a conquest of `zeta` is what it believes is in reach — and `zeta`
             // sorts LAST codepoint-wise, which is what makes the reorder visible.
-            zeta: { strengthBand: 0, allianceLabel: 'hostile', confidence01: 1 },
+            // `faithLabel` is the I4 road's landing site: the court believes
+            // zeta kneels at an evil altar, which is what licenses the war.
+            zeta: { strengthBand: 0, allianceLabel: 'hostile', faithLabel: 'The Iron Maw', confidence01: 1 },
             thornwall: { strengthBand: 4, allianceLabel: 'hostile', confidence01: 1 },
             ironhold: { strengthBand: 4, allianceLabel: 'self', confidence01: 1 },
             everdeep: { strengthBand: 3, allianceLabel: 'allied', confidence01: 1 },
@@ -364,12 +371,23 @@ function snapshotFor(worldState) {
       tier: 'city',
       population: 45000,
       economicState: { foodSecurity: { storageMonths: 9, resilienceScore: 70 } },
+      config: { primaryDeitySnapshot: { name: 'The Hammer', alignmentAxis: 'evil' } },
     },
   };
   const byId = new Map([
     ['ironhold', stocked],
     ['thornwall', { id: 'thornwall', settlement: { name: 'Thornwall', tier: 'town', population: 3000 } }],
-    ['zeta', { id: 'zeta', settlement: { name: 'Zeta', tier: 'village', population: 400 } }],
+    ['zeta', {
+      id: 'zeta',
+      settlement: {
+        name: 'Zeta',
+        tier: 'village',
+        population: 400,
+        // The world's own record of who The Iron Maw is. The court's BELIEF
+        // names the god; the god's character is public.
+        config: { primaryDeitySnapshot: { name: 'The Iron Maw', alignmentAxis: 'evil' } },
+      },
+    }],
   ]);
   return {
     settlements: [...byId.values()],
@@ -442,6 +460,43 @@ describe('WR-8 N2 — the movement wiring', () => {
       worldState: lit, snapshot, observerId: 'ironhold', rivalId: 'thornwall', openFronts: 2,
     });
     expect(hard && conquestMarchAdvised(hard)).toBe(false);
+  });
+
+  test('N3 AT THE SEAM: capability without intent advances nothing', () => {
+    // The court still believes zeta is easy prey — the feasibility half is
+    // untouched and is asserted below. What is removed is its TEMPER: with no
+    // WR-2 disposition on record the intent is unreadable, and an unreadable
+    // intent is not a permissive one. This is the negative case the whole N3
+    // amendment exists for, held at the exact seam where capability would
+    // otherwise leak into movement.
+    const lit = beliefWorld(LIT_RULES);
+    delete lit.dispositionStats;
+    const snapshot = snapshotFor(lit);
+    const read = readConquestFeasibilityFor({
+      worldState: lit, snapshot, observerId: 'ironhold', rivalId: 'zeta', openFronts: 2,
+    });
+    expect(read && conquestMarchAdvised(read)).toBe(true);
+    const intent = readConquestIntentFor({
+      worldState: lit, snapshot, observerId: 'ironhold', rivalId: 'zeta',
+    });
+    expect(intent && intent.known).toBe(false);
+    expect(intent && intent.intent).toBe('none');
+    expect(hostileTargetsOf(snapshot, 'ironhold', 4)).toEqual(['thornwall', 'zeta']);
+  });
+
+  test('N3 AT THE SEAM: a court that believes the target decent refuses the march', () => {
+    // Capability identical, temper identical. The court is simply told the
+    // truth about whom zeta worships — a good god — and a conquest it was about
+    // to open stops being one it will open. The I4 road runs the other way from
+    // here.
+    const lit = beliefWorld(LIT_RULES);
+    const snapshot = snapshotFor(lit);
+    snapshot.byId.get('zeta').settlement.config.primaryDeitySnapshot.alignmentAxis = 'good';
+    const intent = readConquestIntentFor({
+      worldState: lit, snapshot, observerId: 'ironhold', rivalId: 'zeta',
+    });
+    expect(intent && intent.known).toBe(true);
+    expect(hostileTargetsOf(snapshot, 'ironhold', 4)).toEqual(['thornwall', 'zeta']);
   });
 
   test('LIT but blind: no belief about the rival leaves the order untouched', () => {

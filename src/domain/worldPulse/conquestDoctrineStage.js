@@ -35,8 +35,12 @@ import {
   conquestMarchAdvised,
   readConquestFeasibility,
 } from './conquestFeasibility.js';
+import { readConquestIntent } from './conquestIntent.js';
 import { beliefRecord, beliefsActive } from './beliefMap.js';
+import { readDispositionChannel } from './dispositionLedger.js';
+import { evil01 } from './deityAxes.js';
 import { storageCapacityMonths } from './foodStockpile.js';
+import { settlementAlignment } from './settlementAlignment.js';
 
 /**
  * THE LIGHTING ORDER, spelled out. The flag-dependency ruling says WR-8 lights
@@ -246,6 +250,146 @@ export function readConquestFeasibilityFor(args) {
   return bands ? readConquestFeasibility(bands) : null;
 }
 
+// ── WR-8 (N3) — ASSEMBLING THE INTENT BANDS ──────────────────────────────────
+
+/**
+ * The court's martial disposition, banded. WR-2's ledger is the authority and
+ * `readDispositionChannel` is its own tolerant reader; an absent ledger is
+ * `unknown`, which makes the intent unreadable rather than peaceful — a realm
+ * whose temper nobody has recorded has not been recorded as mild.
+ * @param {unknown} worldState @param {string} settlementId @returns {string}
+ */
+export function martialBandFor(worldState, settlementId) {
+  const stats = asObject(asObject(worldState).dispositionStats);
+  const entry = stats[settlementId];
+  if (!entry) return 'unknown';
+  const stock = Number(asObject(readDispositionChannel(entry, 'martial')).stock01);
+  if (!Number.isFinite(stock)) return 'unknown';
+  const index = stock >= 0.75 ? 3 : stock >= 0.5 ? 2 : stock >= 0.25 ? 1 : 0;
+  return PRESSURE_WORDS[index];
+}
+
+/**
+ * How often this realm has taken and held a town before, read off the EXISTING
+ * occupation ledger rather than a new one. An ABSENT ledger reads `never`, not
+ * `unknown`, and the distinction is deliberate: a world with no occupation
+ * records is a world in which nobody has conquered anything, which is a fact,
+ * whereas a missing belief is a silence.
+ * @param {unknown} worldState @param {string} settlementId @returns {string}
+ */
+export function conquestHistoryBandFor(worldState, settlementId) {
+  const occupations = asObject(asObject(worldState).occupations);
+  let held = 0;
+  for (const occupiedId of Object.keys(occupations).sort()) {
+    const record = asObject(occupations[occupiedId]);
+    if (String(record.occupierId || '') === settlementId) held += 1;
+  }
+  if (held <= 0) return 'never';
+  if (held === 1) return 'once';
+  return held <= 3 ? 'repeated' : 'habitual';
+}
+
+/** A 0..1 malice reading, folded onto the closed moral ladder.
+ *  @param {number} malice01 @returns {string} */
+function natureWordFor(malice01) {
+  if (!Number.isFinite(malice01)) return 'unknown';
+  return malice01 >= 0.67 ? 'malicious' : malice01 <= 0.33 ? 'benevolent' : 'balanced';
+}
+
+/**
+ * The court's OWN nature, through the existing derived-alignment read. A
+ * self-read again: a realm knows what it is.
+ * @param {unknown} item @param {unknown} worldState @returns {string}
+ */
+export function ownNatureBandFor(item, worldState) {
+  if (!item) return 'unknown';
+  const alignment = settlementAlignment(
+    /** @type {Parameters<typeof settlementAlignment>[0]} */ (item),
+    /** @type {Parameters<typeof settlementAlignment>[1]} */ (worldState),
+  );
+  return natureWordFor(Number(alignment.malice01));
+}
+
+/**
+ * The patron deity's nature, or `none` where there is no patron. `none` is a
+ * real member: a godless court carries its own conscience undiluted, which the
+ * intent leaf handles explicitly.
+ * @param {unknown} item @returns {string}
+ */
+export function patronNatureBandFor(item) {
+  const row = asObject(item);
+  const settlement = Object.keys(asObject(row.settlement)).length
+    ? asObject(row.settlement)
+    : row;
+  const patron = asObject(asObject(settlement.config).primaryDeitySnapshot);
+  if (!Object.keys(patron).length) return 'none';
+  return natureWordFor(Number(evil01(/** @type {Parameters<typeof evil01>[0]} */ (patron))));
+}
+
+/**
+ * THE MORAL DISCRIMINATOR'S ONE BELIEVED INPUT, AND THE I4 ROAD'S LANDING SITE.
+ *
+ * What the court believes the rival to BE is read from what it believes the
+ * rival WORSHIPS — `faithLabel`, the belief record's public-deity name, resolved
+ * to a nature through the world's own deities. That is the honest shape of the
+ * question in this engine: a god's character is public, and what is uncertain
+ * (and therefore plantable) is whose altar the neighbour actually kneels at.
+ *
+ * A court with no faith reading has not formed a view, which reads `unknown` and
+ * makes the intent unreadable — the amendment's refusal to let silence become a
+ * verdict, one level up.
+ * @param {unknown} worldState @param {unknown} snapshot
+ * @param {string} observerId @param {string} rivalId @returns {string}
+ */
+export function believedEnemyNatureBandFor(worldState, snapshot, observerId, rivalId) {
+  const record = beliefRecord(
+    /** @type {Parameters<typeof beliefRecord>[0]} */ (worldState), observerId, rivalId,
+  );
+  const faith = String(asObject(record).faithLabel || '').trim();
+  if (!faith) return 'unknown';
+  const byId = asObject(snapshot).byId;
+  const rows = byId instanceof Map ? [...byId.values()] : [];
+  for (const row of rows) {
+    const item = asObject(row);
+    const settlement = Object.keys(asObject(item.settlement)).length
+      ? asObject(item.settlement)
+      : item;
+    const patron = asObject(asObject(settlement.config).primaryDeitySnapshot);
+    if (String(patron.name || '').trim() !== faith) continue;
+    return natureWordFor(Number(evil01(/** @type {Parameters<typeof evil01>[0]} */ (patron))));
+  }
+  // The court names a god the world cannot identify. That is a view, and it is
+  // not a moral one, so it reads `unknown` rather than a flattering `balanced`.
+  return 'unknown';
+}
+
+/**
+ * The intent read for one court against one rival, or null when dark. Note what
+ * is NOT passed: no feasibility, no capability, nothing about who would win.
+ * @param {{ worldState?: unknown, snapshot?: unknown, observerId?: unknown,
+ *   rivalId?: unknown }} args
+ * @returns {ReturnType<typeof readConquestIntent> | null}
+ */
+export function readConquestIntentFor({
+  worldState = null, snapshot = null, observerId = '', rivalId = '',
+} = {}) {
+  if (!conquestDoctrineActive(worldState)) return null;
+  const observer = String(observerId || '');
+  const rival = String(rivalId || '');
+  if (!observer || !rival || observer === rival) return null;
+  const byId = asObject(snapshot).byId;
+  const item = byId instanceof Map ? byId.get(observer) : null;
+  return readConquestIntent({
+    partyId: observer,
+    counterpartId: rival,
+    martialBand: martialBandFor(worldState, observer),
+    conquestHistoryBand: conquestHistoryBandFor(worldState, observer),
+    ownNatureBand: ownNatureBandFor(item, worldState),
+    patronNatureBand: patronNatureBandFor(item),
+    believedEnemyNatureBand: believedEnemyNatureBandFor(worldState, snapshot, observer, rival),
+  });
+}
+
 /**
  * THE MOVEMENT CONSUMER, WIRED. The candidate list a settlement may open a war
  * on, re-ordered so the targets its court BELIEVES a conquest is in reach of
@@ -254,6 +398,13 @@ export function readConquestFeasibilityFor(args) {
  * `classifyFeasibility` itself — still runs exactly as before. A hopeless war
  * still does not open; it merely stops being an alphabetical accident which of
  * the plausible ones does.
+ *
+ * BOTH HALVES MUST AGREE (N3). A target is advanced only where the court both
+ * BELIEVES a conquest in reach AND MEANS to take it. Capability alone advances
+ * nothing: a realm that could take its neighbour and has no appetite for it
+ * leaves the list exactly as the treaty filter handed it over, which is the
+ * whole content of "capability never implies intent" at the seam where it would
+ * otherwise leak.
  *
  * BYTE-IDENTICAL WHEN DORMANT: the INPUT ARRAY REFERENCE comes back untouched
  * when the doctrine is dark, when fewer than two targets are offered, or when no
@@ -283,7 +434,10 @@ export function conquestMarchOrder({ worldState = null, snapshot = null, fromId 
     const read = readConquestFeasibilityFor({
       worldState, snapshot, observerId: fromId, rivalId: String(target), openFronts: targets.length,
     });
-    if (read && conquestMarchAdvised(read)) advised.push(target);
+    const intent = read && conquestMarchAdvised(read)
+      ? readConquestIntentFor({ worldState, snapshot, observerId: fromId, rivalId: String(target) })
+      : null;
+    if (intent && intent.intent === 'conquer') advised.push(target);
     else rest.push(target);
   }
   if (advised.length === 0 || rest.length === 0) return targets;

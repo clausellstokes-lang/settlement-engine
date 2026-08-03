@@ -230,6 +230,14 @@ const NEGOTIATION_MODULES = Object.freeze({
   // belief machinery already produced; assembling those words is
   // `conquestDoctrineStage.js`'s job, and that stage is declared exempt below.
   'src/domain/worldPulse/conquestFeasibility.js': [],
+  // WR-8 (N3). The intent read is a belief path for the same reason the
+  // feasibility read is — its moral discriminator turns on the ENEMY'S BELIEVED
+  // NATURE, which is precisely the field an I4 plant moves — so it is pinned at
+  // ZERO IMPORTS too. It is worth naming what the empty list buys here
+  // specifically: this module decides whether a realm goes to war over what it
+  // thinks its neighbour is, and a single import of a truth reader would turn
+  // that from a belief into a fact and quietly delete the deception road.
+  'src/domain/worldPulse/conquestIntent.js': [],
 });
 
 const TRUTH_READER = 'src/domain/worldPulse/warDeployment.js';
