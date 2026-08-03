@@ -30,7 +30,7 @@
 
 import { useMemo } from 'react';
 
-import { buildCauseWalk } from '../../domain/display/causeWalk.js';
+import { UNRECEIPTED_HOP, buildCauseWalk } from '../../domain/display/causeWalk.js';
 import { heraldEntryProse } from '../../domain/display/heraldCausalVoice.js';
 import { classifyLinkIntegrity, disclosureFor } from '../../domain/display/heraldIntegrity.js';
 import { BODY, BORDER2, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans } from '../theme.js';
@@ -92,7 +92,13 @@ export default function CausalityPopup({
       const integrity = classifyLinkIntegrity({
         worldState,
         link: {
-          resolved: hop.redacted !== true && hop.headline !== 'an earlier cause',
+          // RESOLVED means a receipt was FOUND. The walk's own two non-receipt
+          // lines are imported, never re-spelled here: a copy that drifted from
+          // the walk's wording would silently mark an unreceipted hop resolved,
+          // and the register would then read it CLEAN — vouching for a link
+          // whose receipt it never found, which is exactly the assumption from
+          // silence the disclosure forbids.
+          resolved: hop.redacted !== true && hop.headline !== UNRECEIPTED_HOP,
           lineageIds: Array.isArray(hop.lineageIds) ? hop.lineageIds : [],
           accuracy01: Number.isFinite(hop.accuracy01) ? hop.accuracy01 : 1,
           hopCount: hop.hopCount,

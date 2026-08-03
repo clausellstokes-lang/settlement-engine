@@ -34,6 +34,20 @@ export const NO_DEEPER_MEMORY = 'The ledger holds no deeper memory of this.';
 export const LEDGER_DARK_LINE = 'This world keeps no recorded ledger of causes.';
 /** What a covert hop reads as to a viewer who does not see DM secrets. */
 export const REDACTED_HOP = 'a cause the ledger keeps hidden';
+/**
+ * What an UNRECEIPTED hop reads as: the ledger names a parent that no
+ * pulseHistory record resolves — a root `sourceEventId`, or a receipt aged out
+ * of retention. Honest, and deliberately not prose the walk invented.
+ *
+ * EXPORTED BECAUSE IT IS A CLASSIFICATION KEY, NOT DECORATION. The causality
+ * popup decides a link's integrity `resolved` flag by comparing against it, and
+ * `heraldIntegrity` reads `clean` as EVIDENCED — a receipt that exists and
+ * carries no manipulation marker — never as assumed from silence. A second copy
+ * of this string in the consumer would drift the day the wording changes, and
+ * the drift's shape is precisely an unreceipted hop reading CLEAN: the paper
+ * would vouch for a link whose receipt it never found.
+ */
+export const UNRECEIPTED_HOP = 'an earlier cause';
 
 /**
  * Whether a raw receipt carries a covert marker. The durable receipt drops the
@@ -175,9 +189,9 @@ function resolveReceipt(id, index, ledger, seesSecrets) {
   }
   if (found) return { ...found, redacted: false };
   // A parent not in pulseHistory (e.g. a root sourceEventId): fall back to the
-  // ledger's structural type — an honest "an earlier cause", never invented prose.
+  // ledger's structural type — the honest UNRECEIPTED_HOP line, never invented prose.
   return {
-    headline: 'an earlier cause',
+    headline: UNRECEIPTED_HOP,
     tick: ledgerEntry && Number.isFinite(ledgerEntry.tick) ? Number(ledgerEntry.tick) : null,
     type: ledgerEntry?.type || 'event',
     settlementIds: [],

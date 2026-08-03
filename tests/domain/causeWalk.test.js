@@ -8,10 +8,13 @@
  * The lit DAG mirrors tests/domain/chronicleRecordedEdges.test.js: A (a decree) →
  * B → C, DISJOINT entity keys, so ONLY recorded edges link them.
  */
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { describe, it, expect } from 'vitest';
 import { buildRecordedEdges, recordedAncestors } from '../../src/domain/display/chronicleGraph.js';
 import {
-  buildCauseWalk, receiptIsCovert, NO_DEEPER_MEMORY, LEDGER_DARK_LINE, REDACTED_HOP,
+  buildCauseWalk, receiptIsCovert, NO_DEEPER_MEMORY, LEDGER_DARK_LINE, REDACTED_HOP, UNRECEIPTED_HOP,
 } from '../../src/domain/display/causeWalk.js';
 import { compactOutcomeForHistory } from '../../src/domain/worldPulse/pulseHelpers.js';
 
@@ -128,5 +131,40 @@ describe('V-4 — the secrets seam (no covert leak)', () => {
     expect(walk.chain).toEqual([]);
     expect(walk.root.headline).toBe(REDACTED_HOP);
     expect(JSON.stringify(walk)).not.toContain('B happened');
+  });
+});
+
+describe('THE UNRECEIPTED HOP has ONE writer (lane HG, F3)', () => {
+  it('a parent the ledger names but no record resolves reads the exported line', () => {
+    const world = {
+      pulseHistory: [{ tick: 300, selectedOutcomes: baseOutcomes, impactDigest: [] }],
+      spatialLedgers: { provenance: { ...provenance, A: { parents: ['GHOST'], type: 'condition', tick: 200 } } },
+    };
+    const walk = buildCauseWalk({ worldState: world, rootId: 'C', seesSecrets: true });
+    const ghost = walk.chain.find((h) => h.id === 'GHOST');
+    expect(ghost).toBeTruthy();
+    expect(ghost.headline).toBe(UNRECEIPTED_HOP);
+    // It is NOT redacted — nothing was hidden; the record simply does not reach.
+    expect(ghost.redacted).toBe(false);
+    // …and it is distinguishable from the covert line, which is the whole point
+    // of keeping two constants rather than one "we cannot show you this".
+    expect(UNRECEIPTED_HOP).not.toBe(REDACTED_HOP);
+  });
+
+  it('SINGLE WRITER: no other module in src/** spells the literal', () => {
+    const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+    const OWNER = 'src/domain/display/causeWalk.js';
+    /** @param {string} dir @returns {string[]} */
+    const walkDir = (dir) => readdirSync(join(ROOT, dir)).flatMap((entry) => {
+      const rel = `${dir}/${entry}`;
+      return statSync(join(ROOT, rel)).isDirectory() ? walkDir(rel) : [rel];
+    });
+    const offenders = walkDir('src')
+      .filter((rel) => /\.(js|jsx|mjs)$/.test(rel) && rel !== OWNER)
+      .filter((rel) => readFileSync(join(ROOT, rel), 'utf8').includes(`'${UNRECEIPTED_HOP}'`));
+    // A second copy drifts the day the wording changes, and the drift's shape is
+    // an unreceipted hop classifying CLEAN — the paper vouching for a receipt it
+    // never found. Import the constant instead.
+    expect(offenders, 'these modules re-spell UNRECEIPTED_HOP instead of importing it').toEqual([]);
   });
 });

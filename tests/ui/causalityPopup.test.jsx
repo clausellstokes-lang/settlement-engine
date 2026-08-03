@@ -29,6 +29,7 @@ afterEach(cleanup);
 import CausalityPopup from '../../src/components/map/CausalityPopup.jsx';
 import HeraldHeadline from '../../src/components/map/HeraldHeadline.jsx';
 import { CONNECTIVE_POOLS } from '../../src/domain/display/heraldCausalGrammar.js';
+import { UNRECEIPTED_HOP } from '../../src/domain/display/causeWalk.js';
 
 const LINEAGE = 'disinfo:karsh:elmspur:10';
 
@@ -203,6 +204,30 @@ describe('THE MANIPULATION DISCLOSURE', () => {
     planted.pulseHistory[0].selectedOutcomes[1].lineageIds = [LINEAGE];
     render(<CausalityPopup open onClose={() => {}} item={ITEM} worldState={planted} nameById={NAMES} seesSecrets />);
     expect(screen.getAllByTestId('causality-disclosure-row').map((r) => r.getAttribute('data-integrity'))).toContain('planted');
+  });
+
+  test('AN UNRECEIPTED HOP IS UNKNOWN, NEVER CLEAN (lane HG, F3)', () => {
+    // The ledger names a parent that no pulseHistory record resolves. `clean` is
+    // EVIDENCED — a receipt exists and carries no manipulation marker — so a hop
+    // with no receipt at all may only read UNKNOWN. The popup decides that by
+    // comparing the walk's own exported line; the drift this pin catches is a
+    // second copy of that string going stale, which would mark the hop resolved
+    // and have the paper vouch for a receipt it never found.
+    const world = makeWorld();
+    world.spatialLedgers.provenance['evt-b'] = { parents: ['evt-ghost'], type: 'condition', tick: 40 };
+    render(<CausalityPopup open onClose={() => {}} item={ITEM} worldState={world} nameById={NAMES} seesSecrets />);
+    const rows = screen.getAllByTestId('causality-disclosure-row');
+    const states = rows.map((r) => r.getAttribute('data-integrity'));
+    expect(states).toContain('unknown');
+    // The unknown row names no culprit and invents no provenance.
+    const unknown = rows.find((r) => r.getAttribute('data-integrity') === 'unknown');
+    expect(unknown.textContent).toContain(UNRECEIPTED_HOP);
+    expect(unknown.textContent).not.toContain('House Vell');
+    expect(unknown.textContent).not.toContain('Sown as:');
+    // GUARD-THE-GUARD: the RECEIPTED hops in the same popup do read clean, so the
+    // pin is measuring the missing receipt and not a popup that says unknown to
+    // everything.
+    expect(states).toContain('clean');
   });
 
   test('a player audience sees NO disclosure block at all — not a stub, not a hole', () => {
