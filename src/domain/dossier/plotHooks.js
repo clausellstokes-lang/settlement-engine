@@ -1,6 +1,8 @@
 import { compareCodepoint } from '../deterministicSort.js';
 import { traditionHook } from '../traditions/prose.js';
 import { normalizePlotHook } from '../../lib/proseSeams.js';
+import { themeOfText, themeOfRelArchetype, UNTYPED } from '../../generators/hookThemes.js';
+import { retainHooks, retentionKey, editedHookTextKeys } from './hookRetention.js';
 
 const TENSION_LABELS = Object.freeze({
   crime_wave: 'Crime Wave',
@@ -87,13 +89,13 @@ const ECHO_PREFIXES = [
 ];
 
 /** Exact-text key: identical prose, modulo case/whitespace/edge punctuation.
+ *  Delegates to the estate's ONE fold (hookThemes.hookThemeKey, re-exported here
+ *  as hookRetention.retentionKey) — byte-identical to the local spelling it
+ *  replaces, and now impossible to drift away from the theme lookup and the
+ *  protected-key sets that must agree with it about what "the same hook" means.
  *  @param {unknown} text @returns {string} */
 function normHookText(text) {
-  return String(text || '')
-    .toLowerCase()
-    .replace(/\s+/g, ' ')
-    .replace(/^["'\s]+|["'\s.!?]+$/g, '')
-    .trim();
+  return retentionKey(text);
 }
 
 /** Family key: the exact-text key with known reframing prefixes stripped, so
@@ -207,11 +209,21 @@ function push(out, hook) {
 
 /**
  * @param {PlotHookSettlement} [settlement]
+ * @param {{ retention?: boolean }} [options] `retention: true` engages the HK-2
+ *   theme-retention layer (src/domain/dossier/hookRetention.js). It is OFF by
+ *   default and every existing caller leaves it off, so this function's output
+ *   is byte-identical to its pre-HK-2 output — see the seam note at the tail.
  * @returns {PlotHook[]}
  */
-export function collectPlotHooks(settlement = {}) {
+export function collectPlotHooks(settlement = {}, options = {}) {
   /** @type {PlotHook[]} */
   const hooks = [];
+  // Relationship tension prose is rendered by name-interpolating closures, so it
+  // can never match an exact-text theme key. Its theme is carried by the
+  // relationship's own `archetypeKey` instead, captured here at the one place
+  // that still holds the relationship beside its rendered prose.
+  /** @type {Map<string, string>} */
+  const relationshipThemes = new Map();
 
   (settlement.npcs || []).forEach((npc) => {
     (npc.plotHooks || []).forEach((hook) => push(hooks, {
@@ -258,6 +270,8 @@ export function collectPlotHooks(settlement = {}) {
 
   (settlement.relationships || []).forEach((rel) => {
     if (!rel.tension) return;
+    const relTheme = themeOfRelArchetype(/** @type {{ archetypeKey?: unknown }} */ (rel).archetypeKey);
+    if (relTheme !== UNTYPED) relationshipThemes.set(retentionKey(rel.tension), relTheme);
     push(hooks, {
       text: rel.tension,
       source: `${rel.npc1Name || 'NPC'} & ${rel.npc2Name || 'NPC'}`,
@@ -327,7 +341,30 @@ export function collectPlotHooks(settlement = {}) {
   // Sort by priority (then category, for a stable tiebreak), THEN dedupe so the
   // kept instance of any repeated hook is always the highest-priority one.
   const sorted = hooks.sort((a, b) => b.priority - a.priority || compareCodepoint(a.category, b.category));
-  return dedupeHooks(sorted);
+  const deduped = dedupeHooks(sorted);
+
+  // ── HK-2 SEAM (dark by default) ────────────────────────────────────────────
+  // Layer 3 — theme retention — runs only when a caller asks for it. It is off
+  // by default and no caller in the tree turns it on yet, so the line above is
+  // still this function's answer and every consumer (the three tabs, the PDF
+  // view model, the briefs, the quick guide, tonight-at-the-table) is
+  // byte-unmoved. The measurement behind that caution is in the HK-2 report:
+  // at the §5 K defaults this layer drops 15% of a hamlet's hooks and 40% of a
+  // metropolis's, because K caps typed survivors at K × |HOOK_THEMES| rather
+  // than at a share of the settlement. Lighting it is an owner-signed K away,
+  // not a rewrite — everything below is built, tested, and waiting.
+  if (!options.retention) return deduped;
+  return /** @type {PlotHook[]} */ (retainHooks(deduped, {
+    themeOf: (hook) => relationshipThemes.get(retentionKey(hook.text)) || themeOfText(hook.text),
+    editedTextKeys: editedHookTextKeys(/** @type {import('../userEdits.js').EditableEntity} */ (settlement)),
+    // HK-LAW-4's set is EMPTY here, and deliberately so: no hook in this estate
+    // anchors an escalation clock. deriveEscalationClocks derives every clock
+    // from supply-chain state and faction profiles — it never references a hook
+    // — so there is no join to read, and inventing one by keyword-matching hook
+    // prose to clock stages is exactly the fuzzy classification HK-LAW-3 bans.
+    // Reported, not papered over; retainHooks honours the set the day one exists.
+    scaleBand: /** @type {{ tier?: unknown }} */ (settlement).tier,
+  }));
 }
 
 /**

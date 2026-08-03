@@ -135,10 +135,6 @@
   "em": 3,
   "bang": 0
  },
- "src/domain/dossier/plotHooks.js": {
-  "em": 4,
-  "bang": 5
- },
  "src/domain/entities/npcs.js": {
   "em": 1,
   "bang": 0

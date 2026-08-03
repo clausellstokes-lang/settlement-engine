@@ -29,6 +29,8 @@
 
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
+import { retainHooks, retentionKey, editedHookTextKeys } from './dossier/hookRetention.js';
+import { themeOfText } from '../generators/hookThemes.js';
 
 // ── Hook collection ─────────────────────────────────────────────────────
 // Walks every location the generator might have planted hooks and
@@ -318,15 +320,43 @@ export function deriveStructuredHook(rawWrapper, settlement) {
 }
 
 /** Convert every hook on the settlement into a structured form.
+ *
+ * J-HK-5 — THE TWO COLLECTORS CONVERGE. This surface adopts the SAME retention
+ * helper the display aggregator uses (src/domain/dossier/hookRetention.js), so
+ * the estate has one visible story set rather than a deduped dossier beside a
+ * raw structured list. The layer is dark by default here for the same reason it
+ * is dark there: `retention: true` is opt-in, so today's output is byte-
+ * identical and every existing caller is unmoved.
+ *
+ * The DM's-pen protection is LIVE on this surface in a way it is not on the
+ * display one — `collectAllHooks` walks `settlement.plotHooks`, which is exactly
+ * where userEdits seats its editable 'hook'/'plotHook' entities, so an edited
+ * hook here is a real key in a real set rather than a vacuous guard.
+ *
  * @param {Record<string, any>} settlement
+ * @param {{ retention?: boolean }} [options] `retention: true` engages HK-2
  * @returns {Array<Record<string, any>>}
  */
-export function deriveAllStructuredHooks(settlement) {
+export function deriveAllStructuredHooks(settlement, options = {}) {
   if (!settlement) return [];
-  return /** @type {Array<Record<string, any>>} */ (collectAllHooks(settlement)
+  const structured = /** @type {Array<Record<string, any>>} */ (collectAllHooks(settlement)
     .map(wrapper => deriveStructuredHook(wrapper, settlement))
     .filter(Boolean));
+  if (!options.retention) return structured;
+  return retainHooks(structured, {
+    // The structured surface carries no relationship rows (collectAllHooks does
+    // not walk `relationships`), so the exact-text classifier is the whole story
+    // here — no archetype arm is needed or possible.
+    themeOf: (hook) => themeOfText(hook.text),
+    editedTextKeys: editedHookTextKeys(settlement),
+    scaleBand: settlement.tier,
+  });
 }
+
+/** Retention-key helper kept beside the adopter so a caller wanting to build its
+ *  own protected-key set uses the same fold both collectors use.
+ *  @param {unknown} text @returns {string} */
+export const structuredHookKey = (text) => retentionKey(text);
 
 // ── Escalation clocks ──────────────────────────────────────────────────
 // Multi-stage trajectories derived from current simulation state. The
