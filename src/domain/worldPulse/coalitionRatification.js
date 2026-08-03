@@ -390,6 +390,20 @@ export function ratifyTermSheet({ ballots, closeBand01 } = {}) {
  *     an episode it never belonged to. `chosenTermSheetId` is what the caller
  *     acts on, so an id that no ballot mentions is a peace nobody voted for.
  *
+ * RULING R-BLD-8e — AND THE THIRD OF THE TALLY'S LAWS: K4. Two ballots may never
+ * name one picture (`shared_picture`, once more the tally's own spelling). This
+ * is the law this FILE'S HEADER opens with — every member votes on its own
+ * picture, and there is no shape that could hold a merged estimate — and it was
+ * enforced one level down and nowhere here. Executed on the unfixed module: a
+ * coalition of six in which `ash` (ordinary, 2) echoed `reed`'s picture rather
+ * than holding its own ratified `ts.echo` at `unionMargin01: 0.6667`, while
+ * `ratifyTermSheet` over those very ballots answers `shared_picture`. The echo
+ * was DECISIVE, not decorative: the same coalition with `ash` reading the war
+ * through its own picture returns `close` and chooses nothing. One envoy's
+ * reading was being counted as two independent judgments, and it carried a peace.
+ * Scoped PER OFFER for the same reason `duplicate_member` is: a member holds one
+ * picture of the pair and legitimately weighs each rival sheet through it.
+ *
  * @param {Array<Record<string, unknown>>} rows
  * @returns {{weight:number, reason:string}}
  */
@@ -403,6 +417,8 @@ function unionCoalitionWeight(rows) {
     const offerEpisodeKey = strictText(row.episodeKey);
     /** R-BLD-8d: per offer, because a member legitimately votes on each rival. */
     const offerMembers = new Set();
+    /** R-BLD-8e: K4, per offer — same scoping, same reason. */
+    const offerPictures = new Set();
     let acceptWeight = 0;
     for (const entry of cast) {
       const ballot = normalizeRatificationBallot(entry);
@@ -418,6 +434,14 @@ function unionCoalitionWeight(rows) {
       // own word for the failure.
       if (offerMembers.has(memberId)) return { weight: 0, reason: 'duplicate_member' };
       offerMembers.add(memberId);
+      // R-BLD-8e: K4 IS STRUCTURAL, AND IT IS STRUCTURAL HERE TOO. Two ballots
+      // may never name one picture, because two courts reading one envoy's
+      // picture are one judgment counted twice — the merged estimate this file's
+      // header says there is no shape to hold. `ratifyTermSheet` refuses such a
+      // tally on its own law; this walk was summing it.
+      const pictureId = String(ballot.pictureId);
+      if (offerPictures.has(pictureId)) return { weight: 0, reason: 'shared_picture' };
+      offerPictures.add(pictureId);
       const weight = ratificationPowerWeight(ballot.powerBand);
       if (weight <= 0) return { weight: 0, reason: 'invalid_power_band' };
       const seen = byMember.get(memberId);
@@ -478,6 +502,28 @@ function unionCoalitionWeight(rows) {
  * that offer's own sheet and episode (`sheet_mismatch`). Both refusals reuse
  * `ratifyTermSheet`'s spellings, because they are the same two facts.
  *
+ * RULING R-BLD-8e — THE OFFER ROW SPEAKS IN ONE DENOMINATOR. Every number on an
+ * offer row that DECIDES anything is this function's own union arithmetic:
+ * `unionMargin01` and `holds` are counted here. `verdict` alone was carried off
+ * the tally, where it had been measured against that sheet's own sub-tally — so
+ * the row published `verdict: 'ratified'` beside `holds: false`, one field
+ * asserting a sheet carried the coalition and the next denying it. Executed on
+ * the unfixed module, and note the input is entirely HONEST: two REAL tallies
+ * from `ratifyTermSheet`, where sheet A's own two voters (5 weight) accept
+ * unanimously and the coalition's other 7 weight refuse on sheet B, produced
+ * `offers[0] = { verdict: 'ratified', unionMargin01: -0.1667, holds: false }`
+ * inside a record whose top-level verdict is `close`.
+ *
+ * THE CURE IS RECOUNT, NOT REFUSAL, AND THAT FORK IS RECORDED FOR VETO. Refusing
+ * the read on a carried-vs-derived mismatch was the alternative, and the
+ * counterexample above is exactly why it is wrong: a sheet that carries its own
+ * sub-tally while failing the whole coalition IS the case R-BLD-7 exists to
+ * decide — three weight voting yes among thirty — so a mismatch refusal would
+ * fail closed on the module's own reason for being. The row's `verdict` is
+ * therefore DERIVED by the same three-way test everything else on the row uses,
+ * and nothing is lost: `margin01` and `totalWeight` still carry the sub-tally's
+ * own figures, from which its own verdict is recoverable at the shared band.
+ *
  * @param {{tallies?:unknown, closeBand01?:unknown}} args
  * @returns {Record<string, unknown>}
  */
@@ -525,28 +571,32 @@ export function chooseAmongCompetingOffers({ tallies, closeBand01 } = {}) {
       const acceptWeight = Number(row.acceptWeight || 0);
       // Surplus of yes over the whole coalition's no, as a share of the whole.
       const unionMargin01 = round4((2 * acceptWeight - union.weight) / union.weight);
+      const holds = unionMargin01 > band;
       return {
         termSheetId: String(row.termSheetId),
-        verdict: String(row.verdict || ''),
+        // R-BLD-8e: RECOUNTED, NEVER CARRIED. The row's other union figures are
+        // this function's own arithmetic, so a `verdict` copied off the tally was
+        // the one field on the row still measured against a different
+        // denominator — and it published `ratified` beside `holds:false`.
+        verdict: holds ? 'ratified' : unionMargin01 < -band ? 'refused' : 'close',
         acceptWeight,
         totalWeight: Number(row.totalWeight || 0),
         margin01: Number(row.margin01 || 0),
         unionMargin01,
-        holds: unionMargin01 > band,
+        holds,
       };
     });
   // A single offer is not a contest. R-BLD-8b: the verdict is DERIVED from this
   // function's own union arithmetic — the same three-way test the tally ran —
   // so `verdict` and `holds` cannot disagree, whatever the carried verdict says.
+  // R-BLD-8e folds the two derivations into ONE: the row's verdict IS that test,
+  // so the arm reads it rather than re-running it, and they cannot drift apart.
   if (offers.length === 1) {
     const sole = offers[0];
-    const verdict = sole.holds
-      ? 'ratified'
-      : sole.unionMargin01 < -band ? 'refused' : 'close';
     return {
-      verdict,
+      verdict: sole.verdict,
       reason: 'sole_offer',
-      chosenTermSheetId: verdict === 'ratified' ? sole.termSheetId : null,
+      chosenTermSheetId: sole.verdict === 'ratified' ? sole.termSheetId : null,
       offers,
       unionWeight: union.weight,
       closeBand01: band,

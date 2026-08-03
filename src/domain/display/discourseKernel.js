@@ -28,6 +28,25 @@
  *   4. TENSE / PACING — tick-distance banding (deep / near / pivot connective
  *      register) with tickCalendarLabel for the spoken opening time.
  *
+ * ── THE CLAUSE FLOOR (cycle-12 finding F2) ───────────────────────────────────
+ * Not every headline the walk hands over is a clause. `UNRECEIPTED_HOP` ("an
+ * earlier cause") is what `causeWalk` prints when the provenance ledger names a
+ * parent no pulseHistory record resolves, and `chronicleGraph`'s two pulse
+ * fallbacks are what a durable record with no headline reads as. All three are
+ * NOUN PHRASES carrying `redacted:false`, so nothing structural marks them, and
+ * this realizer composed its connectives straight over them: "In turn: an earlier
+ * cause." — a causal relation asserted to a receipt nobody found.
+ *
+ * Such a node composes as a BARE TERMINAL SENTENCE (`connective:''`,
+ * `relation:'unreceipted'`) and is TRANSPARENT to the discourse: it neither takes
+ * a connective nor becomes the antecedent one, so the clause after it relates to
+ * the last receipt that really exists. The predicate is IMPORTED from
+ * `receiptClauseFloor.js` — the same one `heraldCausalVoice` binds to, never a
+ * private copy, because a copy keeps composing the day a wording moves.
+ * `REDACTED_HOP` is deliberately NOT on this floor: a covert hop is a different
+ * truth (something was hidden from you, rather than the record does not reach)
+ * and it carries a structural boolean; its register is a wave of its own.
+ *
  * PURITY (the determinism bans): a PURE LEAF. No store access, no Date, no random,
  * no localeCompare. Ordering is (tick asc, depth desc, id codepoint asc). Variant
  * choice is the conjunction ladder's PURE-HASH idiom (fnv1a32 of seedId + key), no
@@ -54,6 +73,7 @@
  */
 
 import { tickCalendarLabel } from './humanizeEngineTokens.js';
+import { isPlaceholderClause } from './receiptClauseFloor.js';
 
 /**
  * FNV-1a 32-bit — the pure variant-selection hash (no rng, no Date). A LOCAL copy
@@ -231,7 +251,7 @@ const byStr = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? -1 
  * @property {string} receiptKey    the recorded receipt id this clause realizes
  * @property {string} connective    the authored connective ('' for the opener when timeless)
  * @property {string} recorded      the byte-verbatim recorded headline
- * @property {'causal'|'parallel'|'adversative'|'anticipatory'|'open'} relation
+ * @property {'causal'|'parallel'|'adversative'|'anticipatory'|'open'|'unreceipted'} relation
  * @property {boolean} redacted
  * @property {string|null} anticipatedBy  the elided prediction id licensing an anticipatory clause
  */
@@ -400,12 +420,45 @@ export function realizeCauseWalk(walk, opts = {}) {
 
   /** @type {DiscourseClause[]} */
   const clauses = [];
-  /** @type {WalkNode|null} */
+  /** @type {WalkNode|null} the last RELATABLE node — never a placeholder (below). */
   let prev = null;
+  /** The last EMITTED clause's recorded text. Identical to `prev.headline` for every
+   *  relatable node, and additionally covers a run of identical placeholders, which
+   *  do not become `prev` and would otherwise escape the C2 dedup. */
+  let lastRecorded = null;
   for (const node of nodes) {
     if (elided.has(node.id)) continue;                       // rule 1/2: drop the forecast clause
     // AGGREGATION (C2 dedup): coalesce an adjacent identical recorded shape.
-    if (prev && node.headline === prev.headline) { prev = node; continue; }
+    if (lastRecorded !== null && node.headline === lastRecorded) {
+      if (!isPlaceholderClause(node.headline)) prev = node;
+      continue;
+    }
+    // ── THE CLAUSE FLOOR, ONE REGISTER OVER (cycle-12 finding F2) ────────────
+    // A node whose headline is a PLACEHOLDER carries no clause of its own: the
+    // provenance ledger named a parent no record resolves, or a durable record
+    // recorded no headline at all. Composed under this kernel's connectives it
+    // read "In turn: an earlier cause." — a causal relation asserted to a receipt
+    // nobody found, `redacted:false`, on the panel behind `discourseProseEnabled`.
+    //
+    // Such a node composes as a BARE TERMINAL SENTENCE and is TRANSPARENT to the
+    // discourse: it takes no connective, and it does not become `prev`, so the
+    // next node relates to the last receipt that really exists rather than
+    // reaching across the hole. That is `heraldCausalVoice`'s `clauseless` law in
+    // this register — one shared predicate, never a private copy, because a copy
+    // would keep composing over the placeholder the day a wording moved.
+    if (isPlaceholderClause(node.headline)) {
+      clauses.push({
+        text: node.headline,
+        receiptKey: node.id,
+        connective: '',
+        recorded: node.headline,
+        relation: 'unreceipted',
+        redacted: node.redacted,
+        anticipatedBy: null,
+      });
+      lastRecorded = node.headline;
+      continue;
+    }
     const opening = prev === null;
     const anticip = anticipatedBy.get(node.id) || null;
     /** @type {DiscourseClause['relation']} */
@@ -424,6 +477,7 @@ export function realizeCauseWalk(walk, opts = {}) {
     const recorded = node.headline;
     const text = connective ? `${connective} ${recorded}` : recorded;
     clauses.push({ text, receiptKey: node.id, connective, recorded, relation, redacted: node.redacted, anticipatedBy: anticip });
+    lastRecorded = recorded;
     prev = node;
   }
 

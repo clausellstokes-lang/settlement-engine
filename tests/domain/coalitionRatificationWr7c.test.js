@@ -519,10 +519,25 @@ describe('WR-7c — competing offers, and failure to choose', () => {
       verdict: 'close', reason: 'no_sheet_holds_a_majority', chosenTermSheetId: null,
       unionWeight: 30,
     });
+    // R-BLD-8e, A DISCLOSED PIN SHIFT. This row used to read
+    // `['term_sheet.a', 'ratified', false]` — the sub-tally's own verdict riding
+    // onto a row whose every other number is the UNION's, next to a `holds:false`
+    // denying it. The trap this test names ("a peace three weight signed for")
+    // was still in the published record, one field over. The verdict is now
+    // recounted from the union like everything else on the row: (2*3 - 30)/30 =
+    // -0.8, below the negated band, so against the coalition sheet A is REFUSED.
+    // Nothing is hidden — `alone.verdict` above still proves the sub-tally
+    // ratified itself, which is the whole trap, and `margin01`/`totalWeight` on
+    // the row still carry the sub-tally's own figures.
     expect(chosen.offers.map((row) => [row.termSheetId, row.verdict, row.holds])).toEqual([
-      ['term_sheet.a', 'ratified', false],
+      ['term_sheet.a', 'refused', false],
       ['term_sheet.b', 'refused', false],
     ]);
+    // And the sub-tally's own figures survive on the row, so its own verdict is
+    // recoverable at the shared band — the recount adds a law, it loses no fact.
+    const sheetA = chosen.offers.find((row) => row.termSheetId === 'term_sheet.a');
+    expect({ acceptWeight: sheetA.acceptWeight, totalWeight: sheetA.totalWeight, margin01: sheetA.margin01 })
+      .toEqual({ acceptWeight: 3, totalWeight: 3, margin01: 1 });
   });
 
   it('reads the union from the ballots, and fails closed when it cannot', () => {
@@ -759,6 +774,118 @@ describe('WR-7c — competing offers, and failure to choose', () => {
     expect(chooseAmongCompetingOffers({ tallies: [carried] })).toMatchObject({
       verdict: 'ratified', reason: 'sole_offer', chosenTermSheetId: 'term_sheet.a',
     });
+  });
+
+  it('R-BLD-8e: refuses two courts reading one picture, which is a merged estimate wearing a coalition', () => {
+    // THE CYCLE-10 VERIFIER'S FORGED-TALLY COUNTEREXAMPLE. K4 is the law this
+    // FILE'S HEADER opens with: every member votes on ITS OWN picture, two
+    // ballots may never name the same one, and there is no shape here that could
+    // hold a merged estimate. `ratifyTermSheet` enforces it. The union walk did
+    // not — so one envoy's reading, echoed by a second court, was summed as two
+    // independent judgments.
+    const honest = tallyOf('term_sheet.a', coalition(['accept', 'refuse', 'refuse']));
+    expect({ verdict: honest.verdict, accept: honest.acceptWeight }).toEqual({
+      verdict: 'close', accept: 3,
+    });
+    // `ash` (ordinary, 2) stops holding its own picture and echoes `reed`'s,
+    // and votes with it. Nothing else about the coalition changes: same three
+    // members, same weights, same sheet, same episode, same band.
+    const shared = honest.ballots.find((row) => row.memberId === 'reed').pictureId;
+    const echoed = {
+      ...honest,
+      acceptWeight: 5,
+      ballots: honest.ballots.map((row) => (row.memberId === 'ash'
+        ? { ...row, pictureId: shared, decision: 'accept', realmDecision: 'accept' }
+        : row)),
+    };
+    expect(echoed.ballots.map((row) => row.pictureId).filter((id) => id === shared)).toHaveLength(2);
+    // The echo is DECISIVE, not decorative: (2·5 − 6)/6 = 0.6667, clear of the
+    // 0.15 band, where the honest coalition above only reaches `close`.
+    expect(Math.round(((2 * 5 - 6) / 6) * 10000) / 10000).toBeGreaterThan(0.15);
+    expect(chooseAmongCompetingOffers({ tallies: [echoed] })).toMatchObject({
+      verdict: '', reason: 'shared_picture', chosenTermSheetId: null, unionWeight: 0,
+    });
+    // Same spelling the tally itself uses one level down, so the fact has one word.
+    expect(ratifyTermSheet({ ballots: echoed.ballots }).reason).toBe('shared_picture');
+    // LIVENESS: the same coalition with `ash` holding its own picture still
+    // decides, so the refusal is caused by the echo and by nothing else here.
+    expect(chooseAmongCompetingOffers({ tallies: [honest] })).toMatchObject({
+      verdict: 'close', reason: 'sole_offer',
+    });
+    // AND A MEMBER MAY STILL WEIGH EVERY RIVAL THROUGH ITS ONE PICTURE — the
+    // check is per offer, exactly like `duplicate_member`, because a court holds
+    // one picture of the pair and reads each sheet through it. Here `reed` votes
+    // on both sheets carrying the SAME picture id, and the contest still decides.
+    const [sheetA, sheetB] = ['term_sheet.a', 'term_sheet.b'].map((id, index) => {
+      const tally = tallyOf(id, coalition(index === 0 ? ['accept', 'accept', 'refuse'] : ['refuse', 'refuse', 'refuse']));
+      return {
+        ...tally,
+        ballots: tally.ballots.map((row) => ({ ...row, pictureId: `picture.${row.memberId}` })),
+      };
+    });
+    expect(sheetA.ballots[0].pictureId).toBe(sheetB.ballots[0].pictureId);
+    expect(chooseAmongCompetingOffers({ tallies: [sheetA, sheetB] })).toMatchObject({
+      verdict: 'ratified', reason: 'one_sheet_holds', chosenTermSheetId: 'term_sheet.a',
+      unionWeight: 6,
+    });
+  });
+
+  it('R-BLD-8e: an offer row never publishes a verdict measured against a denominator it does not carry', () => {
+    // EVERY NUMBER ON AN OFFER ROW THAT DECIDES ANYTHING IS THE UNION'S.
+    // `unionMargin01` and `holds` are counted by this function; `verdict` alone
+    // used to be copied off the tally, where it had been measured against that
+    // sheet's own sub-tally. So the row could say `ratified` next to
+    // `holds:false` — one field asserting a sheet carried the coalition and the
+    // next denying it.
+    //
+    // THE INPUT HERE IS ENTIRELY HONEST, WHICH IS THE POINT: both tallies come
+    // out of the real `ratifyTermSheet`. Sheet A's two voters (5 weight) accept
+    // unanimously; the coalition's other 7 weight refuse on sheet B.
+    const a = tallyOf('term_sheet.a', [
+      { memberId: 'reed', powerBand: 'principal', decision: 'accept' },
+      { memberId: 'ash', powerBand: 'ordinary', decision: 'accept' },
+    ]);
+    const b = tallyOf('term_sheet.b', [
+      { memberId: 'thorn', powerBand: 'minor', decision: 'refuse' },
+      { memberId: 'birch', powerBand: 'principal', decision: 'refuse' },
+      { memberId: 'oak', powerBand: 'principal', decision: 'refuse' },
+    ]);
+    expect([a.verdict, b.verdict]).toEqual(['ratified', 'refused']);
+    const chosen = chooseAmongCompetingOffers({ tallies: [a, b] });
+    // Failure to choose is unchanged — this ruling touches the ROW, not the
+    // contest's own answer.
+    expect(chosen).toMatchObject({
+      verdict: 'close', reason: 'no_sheet_holds_a_majority', chosenTermSheetId: null,
+      unionWeight: 12,
+    });
+    // (2·5 − 12)/12 = −0.1667, below the negated band: against the coalition,
+    // sheet A is refused, and the row now says so instead of echoing `ratified`.
+    expect(chosen.offers.map((row) => [row.termSheetId, row.verdict, row.unionMargin01, row.holds]))
+      .toEqual([
+        ['term_sheet.a', 'refused', -0.1667, false],
+        ['term_sheet.b', 'refused', -1, false],
+      ]);
+    // THE INVARIANT, WALKED RATHER THAN SPOT-CHECKED: no row may ever pair a
+    // `ratified` verdict with `holds:false`, or a non-`ratified` verdict with
+    // `holds:true`, on any of these shapes.
+    const contests = [
+      [a, b],
+      [tallyOf('term_sheet.a', coalition(['accept', 'accept', 'refuse'])),
+        tallyOf('term_sheet.b', coalition(['refuse', 'refuse', 'refuse']))],
+      [tallyOf('term_sheet.a', coalition(['accept', 'accept', 'accept']))],
+      [tallyOf('term_sheet.a', coalition(['refuse', 'refuse', 'refuse']))],
+      [tallyOf('term_sheet.a', coalition(['accept', 'refuse', 'refuse']))],
+    ];
+    for (const tallies of contests) {
+      const read = chooseAmongCompetingOffers({ tallies });
+      for (const row of read.offers) {
+        expect((row.verdict === 'ratified'), `${row.termSheetId}: verdict must agree with holds`)
+          .toBe(row.holds);
+        expect(RATIFICATION_VERDICTS, `${row.termSheetId}: closed vocabulary`).toContain(row.verdict);
+      }
+      // And the sole arm's own answer IS the row's, not a second derivation.
+      if (read.reason === 'sole_offer') expect(read.verdict).toBe(read.offers[0].verdict);
+    }
   });
 
   it('never averages two offers into a third that nobody signed', () => {

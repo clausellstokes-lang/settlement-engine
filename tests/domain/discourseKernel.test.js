@@ -15,6 +15,8 @@
 import { describe, it, expect } from 'vitest';
 import { buildCauseWalk, REDACTED_HOP, NO_DEEPER_MEMORY, LEDGER_DARK_LINE } from '../../src/domain/display/causeWalk.js';
 import { nodesFromRecord } from '../../src/domain/display/chronicleGraph.js';
+import { UNRECEIPTED_HOP, isPlaceholderClause } from '../../src/domain/display/receiptClauseFloor.js';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import {
   realizeCauseWalk, discourseProseActive, ALL_CONNECTIVES, KNOWN_RELATION_TYPES, RELATION_FOR_TYPE,
   CONNECTIVE_LEXICON, realizationCandidateId,
@@ -281,6 +283,140 @@ describe('3c discourse kernel — PREDICTION ELISION (owner amendment; typed, DA
         }
         if (c.relation === 'anticipatory') expect(hasAnticipatory(c)).toBe(true); // and vice-versa
       }
+    }
+  });
+});
+
+// ── CYCLE-12 F2 — THE SECOND HABITAT OF THE CLAUSE FLOOR ────────────────────
+// `heraldCausalVoice` floors placeholder clauses; this realizer builds its own
+// node list from the same walk and composed causal connectives straight over
+// them. The executed counterexample was "In turn: an earlier cause." — relation
+// `causal`, `redacted:false` — rendered by CauseWalkPanel behind
+// `discourseProseEnabled`. The fixture runs the SHIPPED path (a real
+// `buildCauseWalk` over a real ledger) so it cannot assert a guard the producer
+// stopped exercising.
+
+describe('3c discourse kernel — THE CLAUSE FLOOR (F2): a placeholder is a bare sentence', () => {
+  /** A lit two-hop ledger whose DEEPEST parent no pulseHistory record resolves. */
+  const ghostWorld = () => ({
+    rngSeed: 'discourse-seed',
+    pulseHistory: [{
+      tick: 300,
+      selectedOutcomes: [
+        { id: 'B', type: 'condition', targetSaveId: 'sB', headline: 'B happened', severity: 0.5 },
+        { id: 'C', type: 'condition', targetSaveId: 'sC', headline: 'C happened', severity: 0.4 },
+      ],
+      impactDigest: [],
+    }],
+    spatialLedgers: {
+      provenance: {
+        C: { parents: ['B'], type: 'condition', tick: 300 },
+        // GHOST is named as a parent and recorded nowhere: the shipped
+        // UNRECEIPTED_HOP producer, `redacted:false`. Its own ledger row DATES it
+        // earlier, so it sorts to the head of the passage — the position where the
+        // hole would otherwise take the scene-setting opener.
+        B: { parents: ['GHOST'], type: 'condition', tick: 300 },
+        GHOST: { parents: [], type: 'condition', tick: 280 },
+      },
+    },
+  });
+
+  /** The same ledger with GHOST receipted — the control the floor is measured against. */
+  const voicedWorld = () => {
+    const world = ghostWorld();
+    world.pulseHistory[0].selectedOutcomes.unshift({
+      id: 'GHOST', type: 'condition', targetSaveId: 'sG', headline: 'A happened first', severity: 0.3,
+    });
+    return world;
+  };
+
+  const walkOf = (world) => buildCauseWalk({ worldState: world, rootId: 'C', seesSecrets: true });
+
+  it('the SHIPPED PATH really hands this realizer a placeholder node', () => {
+    const walk = walkOf(ghostWorld());
+    const ghost = walk.chain.find((h) => h.id === 'GHOST');
+    expect(ghost, 'the ledger names GHOST but the walk dropped the hop').toBeTruthy();
+    expect(ghost.headline).toBe(UNRECEIPTED_HOP);
+    expect(isPlaceholderClause(ghost.headline)).toBe(true);
+    // NOT redacted — nothing was hidden, which is exactly why no boolean can carry
+    // this case and the realizer has to read the exported vocabulary.
+    expect(ghost.redacted).toBe(false);
+    // …and the control fixture resolves the same id to a real recorded headline.
+    expect(walkOf(voicedWorld()).chain.find((h) => h.id === 'GHOST').headline).toBe('A happened first');
+  });
+
+  it('composes the placeholder BARE — no connective, and never the causal register', () => {
+    const out = realizeCauseWalk(walkOf(ghostWorld()), { seedId: 'discourse-seed' });
+    const ghost = out.clauses.find((c) => c.receiptKey === 'GHOST');
+    expect(ghost, 'the placeholder node produced no clause at all').toBeTruthy();
+    expect(ghost.connective).toBe('');
+    expect(ghost.text).toBe(UNRECEIPTED_HOP);
+    expect(ghost.recorded).toBe(UNRECEIPTED_HOP);
+    expect(ghost.relation).toBe('unreceipted');
+    expect(ghost.anticipatedBy).toBeNull();
+    // The recorded beats around it are untouched — the floor drops a connective,
+    // never a receipt.
+    expect(out.clauses.map((c) => c.receiptKey)).toEqual(['GHOST', 'B', 'C']);
+  });
+
+  it('THE REMOVAL, measured: the same node RECEIPTED does take a connective', () => {
+    const before = realizeCauseWalk(walkOf(voicedWorld()), { seedId: 'discourse-seed' });
+    const after = realizeCauseWalk(walkOf(ghostWorld()), { seedId: 'discourse-seed' });
+    const beforeGhost = before.clauses.find((c) => c.receiptKey === 'GHOST');
+    // THE LIVENESS ANCHOR: with a recorded headline the very same node composes a
+    // connective, so "no connective afterwards" measures the floor rather than a
+    // realizer that stopped composing for this fixture.
+    expect(beforeGhost.connective, 'the receipted node composed no connective — the negative would be vacuous').toBeTruthy();
+    // Compared PER RECEIPT rather than as bare strings: the opener the receipted
+    // GHOST spends is the same wording B inherits once GHOST goes bare, so a
+    // connective-only projection would report the removal as a survival.
+    const byReceipt = (out) => out.clauses.map((c) => `${c.receiptKey}|${c.connective}`);
+    expectPresentThenAbsent(
+      byReceipt(before),
+      byReceipt(after),
+      `GHOST|${beforeGhost.connective}`,
+      'the placeholder loses the connective the recorded headline earns',
+    );
+  });
+
+  it('the executed counterexample is gone: no connective in the lexicon ever precedes a placeholder', () => {
+    for (const seedId of ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8']) {
+      const out = realizeCauseWalk(walkOf(ghostWorld()), { seedId });
+      let composed = 0;
+      for (const c of out.clauses) {
+        if (c.connective) composed += 1;
+        if (!isPlaceholderClause(c.recorded)) continue;
+        expect(c.connective, `${seedId}: "${c.text}"`).toBe('');
+        expect(ALL_CONNECTIVES.has(c.connective), seedId).toBe(false);
+      }
+      // anchored: `composed` is asserted non-zero on the next line, so the passage
+      // provably still carries authored connectives over its RECEIPTED clauses
+      expect(out.text, seedId).not.toContain(`In turn: ${UNRECEIPTED_HOP}`);
+      expect(composed, `${seedId}: the passage composed no connective at all — the negative is vacuous`).toBeGreaterThan(0);
+    }
+  });
+
+  it('a placeholder is TRANSPARENT: the clause after it relates to the last REAL receipt', () => {
+    // The other half of the floor. If the placeholder became `prev`, the next
+    // clause's connective would assert a relation ACROSS the hole; instead the
+    // hole opens nothing and B still carries the passage's scene-setting opener.
+    const out = realizeCauseWalk(walkOf(ghostWorld()), { seedId: 'discourse-seed' });
+    const b = out.clauses.find((c) => c.receiptKey === 'B');
+    expect(b.relation).toBe('open');
+    expect(b.connective).toMatch(OPENER);
+    // …and the clause after THAT relates to B, a receipt that really exists.
+    const c = out.clauses.find((cl) => cl.receiptKey === 'C');
+    expect(c.relation).toBe('causal');
+    expect(ALL_CONNECTIVES.has(c.connective)).toBe(true);
+  });
+
+  it('the clause-provenance law still holds over the floored passage', () => {
+    const out = realizeCauseWalk(walkOf(ghostWorld()), { seedId: 'discourse-seed' });
+    const truth = recordedHeadlines(ghostWorld());
+    for (const c of out.clauses) {
+      expect(truth.has(c.recorded), `unbacked clause: "${c.recorded}"`).toBe(true);
+      expect(legalConnective(c.connective), `illegal connective: "${c.connective}"`).toBe(true);
+      expect(c.text).toBe(c.connective ? `${c.connective} ${c.recorded}` : c.recorded);
     }
   });
 });
