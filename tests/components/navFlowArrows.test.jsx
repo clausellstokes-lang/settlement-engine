@@ -10,7 +10,7 @@
  * next ON THAT SURFACE.
  *
  * ⚠️ SURFACE CHANGE, 2026-08-03 (LD-2, owner-ordered): the DESKTOP ribbon no
- * longer mounts NavFlowArrow. Its journey mark is now the bar-height chevron
+ * longer mounts NavFlowArrow. Its journey mark is now the bar-height seam
  * DIVIDER between cells (components/nav/NavDivider.jsx, censused by
  * tests/components/navDividers.test.jsx) — the same NAV_FLOW derivation drawn
  * at the seam instead of inside the tab. The MOBILE bottom nav keeps
@@ -19,8 +19,16 @@
  * desktop half is now the ABSENCE pin (the mark moved, and must not be drawn
  * twice) while the mobile half stays the live behavioural pin:
  *
- *   • desktop ribbon      Welcome · Create · Library · Realm · …   → NO arrows
+ *   • desktop ribbon      Create · Library · Realm · …             → NO arrows
  *   • mobile bottom nav   Create · Library · Gallery · …           → Create's only
+ *
+ * ⚠️ TWICE-CHANGED, SAME DAY (THE FLETCHED RIBBON, owner directive 2026-08-03).
+ * Two further facts moved under this file and are asserted below rather than
+ * left to rot: Welcome LEFT the desktop ribbon (the wordmark is the home button
+ * now, so the ribbon opens on Create), and the desktop seam mark's kind is
+ * spelled `fletch` — a single straight angled stroke — where it was `chevron`.
+ * `flowsInto` itself is unchanged and is now read by THREE surfaces: this arrow,
+ * the seam kind, and the fletched band's very membership.
  *
  * The mobile bar omits Realm by design (App.jsx MOBILE_NAV_PRIORITY), so a
  * Library chevron there would point at Gallery and teach a false lesson about
@@ -71,6 +79,18 @@ vi.mock('../../src/hooks/useIsMobile', () => ({ default: () => H.isMobile }));
 vi.mock('../../src/lib/stripe.js', () => ({
   checkCheckoutResult: () => null,
   fetchCreditBalance: () => Promise.resolve(0),
+}));
+
+// ⚠️ INHERITED RED, REPAIRED HERE (measured at base 83b18609: this file exited 1
+// with FIVE `EnvironmentTeardownError: Cannot load '/src/lib/creditLedger.js'`
+// unhandled rejections while every test passed). The stripe mock above severs
+// stripe's own EXPORTS but a lazily-mounted pricing chunk still resolves the real
+// stripe module graph, whose line-17 import of creditLedger.js lands after the
+// jsdom environment is gone. Mocking the leaf ends the race at its source; the
+// sibling suites already mock it or never reach it, which is why only this file
+// was red.
+vi.mock('../../src/lib/creditLedger.js', () => ({
+  fetchCreditBalanceFromLedger: () => Promise.resolve(0),
 }));
 
 // The routed view is irrelevant to the nav chrome; a bare marker keeps the
@@ -159,21 +179,39 @@ describe('desktop ribbon — the journey mark MOVED to the seam (LD-2)', () => {
 
     // Positive control first: the ribbon really did render the adjacencies the
     // arrows USED to claim, so the absence below is about the move and not
-    // about a ribbon that failed to render at all.
+    // about a ribbon that failed to render at all. The ribbon now OPENS on
+    // Create — Welcome's nav block was retired on 2026-08-03 and the wordmark
+    // carries home instead.
     const labels = [...container.querySelectorAll('header nav button')].map((b) => b.textContent.trim());
-    expect(labels.slice(0, 4)).toEqual(['Welcome', 'Create', 'Library', 'Realm']);
+    expect(labels.slice(0, 3)).toEqual(['Create', 'Library', 'Realm']);
+    expect(labels).not.toContain('Welcome');
 
-    // Second control: the journey mark EXISTS on this surface — as the chevron
-    // divider at the two flow boundaries. Without this the absence assertion
-    // would pass just as happily on a ribbon that had lost the mark entirely.
-    expect([...container.querySelectorAll('header nav [data-divider-kind="chevron"]')]
+    // Second control: the journey mark EXISTS on this surface — as the fletch
+    // seam at the two flow boundaries. Without this the absence assertion would
+    // pass just as happily on a ribbon that had lost the mark entirely.
+    expect([...container.querySelectorAll('header nav [data-divider-kind="fletch"]')]
       .map((d) => d.dataset.testid)).toEqual([
-      'nav-divider-chevron-generate-settlements',
-      'nav-divider-chevron-settlements-realm',
+      'nav-divider-fletch-generate-settlements',
+      'nav-divider-fletch-settlements-realm',
     ]);
+    // The retired spelling is gone from the surface, not merely unreferenced.
+    expect(container.querySelectorAll('[data-divider-kind="chevron"]').length).toBe(0);
 
     // The mark is drawn ONCE: no NavFlowArrow survives inside any desktop tab.
     expect(arrows(container)).toEqual([]);
+  });
+
+  test('the wordmark is the desktop home button now that Welcome left the ribbon', () => {
+    // The retirement is only sound because home stayed REACHABLE. Pinning the
+    // door here — beside the tab that used to be it — means a future edit that
+    // removes the wordmark button strands /home behind a bare URL.
+    const { container } = render(<App />);
+    const home = [...container.querySelectorAll('header button')]
+      .filter((b) => /home/i.test(b.getAttribute('aria-label') ?? ''));
+    expect(home.length).toBe(1);
+    expect(home[0].getAttribute('aria-label')).toBe('SettlementForge home');
+    // It is the BRAND block, outside the ribbon — not a seventh nav cell.
+    expect(home[0].closest('nav')).toBeNull();
   });
 });
 

@@ -13,7 +13,8 @@
 import { describe, expect, test } from 'vitest';
 
 import {
-  AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, BODY, BORDER_STRONG, CARD, GOLD, GOLD_DEEP, GOLD_SOFT,
+  AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, BODY, BORDER_STRONG, CARD, FLETCH_BROWN, FLETCH_BROWN_LIFT,
+  GOLD, GOLD_DEEP, GOLD_SOFT,
   GOLD_TXT, GREEN, GREEN_BG, GREEN_DEEP, INK, MUTED, PARCH, PARCH_100, RED, RED_BG, SLATE, SLATE_BG, SLATE_DEEP,
   swatch,
 } from '../../src/components/theme.js';
@@ -482,5 +483,60 @@ describe('Illustrated ground-dress legibility (WCAG 1.4.11 — 3:1 graphics on t
     const cats = [...new Set((model.districts || []).map((d) => d.category))];
     const full = { season: 'winter', severity: 'hard_winter', state: { besieged: true, scarLevel: 1, rebuiltCategories: cats } };
     expect(groundDressOps(model, 'accessible', full)).toEqual([]);
+  });
+});
+
+// ── THE FLETCHED RIBBON (owner directive, 2026-08-03; lane FL) ────────────────
+// The desktop ribbon's Create · Library · Realm band is a leather-brown fill
+// carrying LABEL TEXT, so its floor is AA 4.5:1 — not the 3:1 graphics floor. The
+// theme records these exact ratios in prose beside the tokens; this block is what
+// makes that prose a measurement rather than a claim, recomputed from the token
+// values themselves so a palette edit that darkens the parchment or lightens the
+// brown reds here instead of shipping an illegible ribbon.
+//
+// The one sub-3:1 pair is asserted AS SUCH, deliberately: the active feather's
+// gold bottom edge against its OWN lifted fill is 2.59:1. It is a REDUNDANT
+// channel and never a state carrier — the active feather is already told by the
+// lifted fill, the brighter label, weight 700 and aria-current="page" (pinned in
+// tests/components/navFletching.test.jsx) — so recording it honestly is the point.
+// If a future edit made it PASS, that would be a real improvement and this
+// assertion is written to red so the note gets updated rather than rotting.
+describe('THE FLETCHED RIBBON — the leather band carries text, so it owes AA', () => {
+  test('both feather labels clear AA on both band tones', () => {
+    // Resting label on the band, and on the active lift it can sit over.
+    expect(ratio(PARCH_100, FLETCH_BROWN)).toBeGreaterThanOrEqual(AA_TEXT);
+    expect(ratio(PARCH_100, FLETCH_BROWN_LIFT)).toBeGreaterThanOrEqual(AA_TEXT);
+    // The active label's own brighter parchment, on the lift it actually sits on.
+    expect(ratio(PARCH, FLETCH_BROWN_LIFT)).toBeGreaterThanOrEqual(AA_TEXT);
+    expect(ratio(PARCH, FLETCH_BROWN)).toBeGreaterThanOrEqual(AA_TEXT);
+  });
+
+  test('the recorded ratios in theme.js are the MEASURED ones, to 2dp', () => {
+    // The theme's prose table, re-derived. A token edit that moves any of these
+    // reds here and the note is corrected in the same commit.
+    expect(ratio(PARCH_100, FLETCH_BROWN).toFixed(2)).toBe('6.24');
+    expect(ratio(PARCH, FLETCH_BROWN_LIFT).toFixed(2)).toBe('5.71');
+    expect(ratio(PARCH_100, FLETCH_BROWN_LIFT).toFixed(2)).toBe('5.18');
+    expect(ratio(GOLD, FLETCH_BROWN).toFixed(2)).toBe('3.12');
+    expect(ratio(GOLD, FLETCH_BROWN_LIFT).toFixed(2)).toBe('2.59');
+  });
+
+  test('the fletch seam stroke clears the 3:1 UI-boundary floor on the band', () => {
+    // NavDivider draws the angled seam in GOLD, cut into the brown band — a
+    // non-text boundary, so SC 1.4.11 governs it.
+    expect(ratio(GOLD, FLETCH_BROWN)).toBeGreaterThanOrEqual(AA_UI);
+  });
+
+  test('the active feather’s gold edge is BELOW 3:1 — recorded, and redundant by design', () => {
+    expect(ratio(GOLD, FLETCH_BROWN_LIFT)).toBeLessThan(AA_UI);
+  });
+
+  test('the band is DERIVED from the gold family, not invented beside it', () => {
+    // FLETCH_BROWN is the theme's own gold-800 (GOLD_TXT), so a palette edit
+    // moves the fletching with it rather than leaving a stranded hex.
+    expect(FLETCH_BROWN).toBe(GOLD_TXT);
+    // And the lift is a genuine step LIGHTER than the band — otherwise "active
+    // brightens" would be a lie the eye could not see.
+    expect(ratio(FLETCH_BROWN_LIFT, '#000000')).toBeGreaterThan(ratio(FLETCH_BROWN, '#000000'));
   });
 });

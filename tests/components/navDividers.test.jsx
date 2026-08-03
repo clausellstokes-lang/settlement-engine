@@ -1,22 +1,29 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/components/navDividers.test.jsx — THE DERIVATION CENSUS (LD-2).
+ * tests/components/navDividers.test.jsx — THE DERIVATION CENSUS (LD-2, refitted
+ * for THE FLETCHED RIBBON under the owner directive of 2026-08-03).
  *
- * The owner's order: the desktop ribbon separates every nav item with a
- * vertical line, EXCEPT inside the Create → Library → Realm journey, whose
- * seams are chevrons. The order names two boundaries; the implementation must
- * NOT. LD-2's binding clause is that the divider kind is COMPUTED from the
- * single source routes.js already declares (NAV order + NAV_FLOW) — so this
- * census asserts the rendered ribbon against THAT DERIVATION, never against a
- * frozen boundary list. A future nav insertion or reorder then files its own
- * divider automatically instead of redding a stale map.
+ * The original order: the desktop ribbon separates every nav item with a
+ * vertical line, EXCEPT inside the Create → Library → Realm journey, whose seams
+ * were CHEVRONS. ⚠️ THE CURVED-CHEVRON READING IS RETIRED ON DESKTOP: the trio
+ * now sits in a single leather-brown fletched band, and the seams between its
+ * feathers are SHARP STRAIGHT ANGLED STROKES cut at exactly the angle the
+ * feathers lean (kind `fletch`, was `chevron`). The order names two boundaries;
+ * the implementation must NOT. LD-2's binding clause survives the refit intact —
+ * the divider kind is COMPUTED from the single source routes.js already declares
+ * (NAV order + NAV_FLOW) — so this census asserts the rendered ribbon against
+ * THAT DERIVATION, never against a frozen boundary list. A future nav insertion
+ * or reorder then files its own divider automatically instead of redding a stale
+ * map. Only the ANSWER's spelling changed; the derivation did not.
  *
  * The suite is deliberately paired with tests/components/navFlowArrows.test.jsx:
  * the flow chevron the desktop ribbon used to draw INSIDE each tab moved to the
  * bar-height divider here, while the MOBILE bottom nav keeps NavFlowArrow (its
  * cells have no seam to carry a divider). That file's mobile half is the live
- * negative control for this move; neither surface lost its journey mark.
+ * negative control for this move; neither surface lost its journey mark. The
+ * BAND itself — its membership, its paint-not-layout overhang and its focus-ring
+ * survival — is pinned next door in tests/components/navFletching.test.jsx.
  *
  * App.jsx is a pure layout shell over the Zustand store + path router, so the
  * store, the route hook, the breakpoint hook and the routed view are stubbed —
@@ -30,6 +37,8 @@ import { cleanup, render } from '@testing-library/react';
 
 import { NAV, NAV_FLOW } from '../../src/lib/routes.js';
 import { dividerKind } from '../../src/components/nav/NavDivider.jsx';
+import NavRibbon from '../../src/components/nav/NavRibbon.jsx';
+import { FLETCH } from '../../src/components/theme.js';
 
 const H = vi.hoisted(() => ({
   route: { view: 'generate', params: {}, legacy: false, notFound: false },
@@ -136,20 +145,26 @@ afterEach(() => {
 describe('the kind is derived from routes.js, not restated anywhere', () => {
   test('dividerKind answers the flow declaration and nothing else', () => {
     for (const [from, to] of Object.entries(NAV_FLOW)) {
-      expect(dividerKind(from, to)).toBe('chevron');
+      expect(dividerKind(from, to)).toBe('fletch');
     }
     // A pair the flow does NOT declare is a plain rule, in both directions.
     expect(dividerKind('settlements', 'generate')).toBe('line');
+    // 'home' left NAV entirely under the 2026-08-03 directive; a retired id can
+    // never earn a fletch stroke, in either position.
     expect(dividerKind('home', 'generate')).toBe('line');
+    expect(dividerKind('generate', 'home')).toBe('line');
   });
 
-  test('the derivation yields the owner’s two chevrons today — derived, not typed in', () => {
+  test('the derivation yields the owner’s two fletch seams today — derived, not typed in', () => {
     // Anchoring the CURRENT answer proves the derivation is not vacuous, while
     // the census below binds the DOM to the derivation rather than to this list.
     const boundaries = NAV.slice(0, -1).map((n, i) => `${n.id}|${NAV[i + 1].id}`);
-    const chevrons = boundaries.filter((_, i) => derivedKinds()[i] === 'chevron');
-    expect(chevrons).toEqual(['generate|settlements', 'settlements|realm']);
+    const fletches = boundaries.filter((_, i) => derivedKinds()[i] === 'fletch');
+    expect(fletches).toEqual(['generate|settlements', 'settlements|realm']);
     expect(derivedKinds().filter((k) => k === 'line').length).toBe(boundaries.length - 2);
+    // The retired kind is GONE, not merely unused — a stray 'chevron' anywhere in
+    // the derivation would mean two vocabularies for one seam.
+    expect(derivedKinds()).not.toContain('chevron');
   });
 });
 
@@ -179,22 +194,59 @@ describe('desktop ribbon — the rendered seam matches the derivation exactly', 
     const { container } = render(<App />);
     for (const d of dividers(container)) {
       expect(d.closest('button')).toBeNull();
-      expect(d.previousElementSibling?.tagName).toBe('BUTTON');
-      expect(d.nextElementSibling?.tagName).toBe('BUTTON');
+      // A seam INSIDE the band sits between two feather buttons; the seam at the
+      // band's own outer boundary sits between the band wrapper and a plain tab.
+      // Either way it is a SIBLING of what it separates, never a child of it.
+      const flanks = [d.previousElementSibling, d.nextElementSibling];
+      for (const flank of flanks) {
+        expect(flank).toBeTruthy();
+        const isCell = flank.tagName === 'BUTTON';
+        const isBand = flank.dataset?.testid === 'nav-fletch-band';
+        expect(isCell || isBand, `unexpected flank <${flank.tagName}>`).toBe(true);
+      }
     }
   });
 
-  test('the chevron draws two strokes and the line draws one — matched weights', () => {
+  test('the fletch draws ONE straight angled stroke and the line one vertical — matched weights', () => {
     const { container } = render(<App />);
     for (const d of dividers(container)) {
       const strokes = [...d.querySelectorAll('line')];
-      expect(strokes.length).toBe(d.dataset.dividerKind === 'chevron' ? 2 : 1);
+      // The retired chevron drew TWO strokes converging on an apex. The fletch
+      // draws exactly one, because a fletching's seam is a single sharp cut.
+      expect(strokes.length).toBe(1);
       for (const s of strokes) {
         expect(s.getAttribute('stroke-width')).toBe('1');
         // Non-scaling stroke is what holds the two kinds to one hairline weight
         // once preserveAspectRatio="none" stretches the mark to bar height.
         expect(s.getAttribute('vector-effect')).toBe('non-scaling-stroke');
       }
+    }
+  });
+
+  test('the fletch stroke leans FORWARD at exactly the vanes’ own angle', () => {
+    // THE PARALLELISM IS BY CONSTRUCTION, AND THIS IS THE PIN THAT SAYS SO. The
+    // feather's clipped edge runs FLETCH.slant px horizontally over the band's
+    // full height; the stroke's box is FLETCH.slant wide and it is drawn corner
+    // to corner, bottom-left → top-right, so it traverses the same run over the
+    // same height. A second angle authored anywhere would red here.
+    const { container } = render(<App />);
+    const fletches = dividers(container).filter((d) => d.dataset.dividerKind === 'fletch');
+    expect(fletches.length).toBe(2); // not a vacuous loop
+    for (const d of fletches) {
+      const svg = d.querySelector('svg');
+      expect(svg.getAttribute('viewBox')).toBe(`0 0 ${FLETCH.slant} 100`);
+      const line = d.querySelector('line');
+      // Bottom-left (0, 100) → top-right (slant, 0): forward, toward Realm.
+      expect(line.getAttribute('x1')).toBe('0');
+      expect(line.getAttribute('y1')).toBe('100');
+      expect(line.getAttribute('x2')).toBe(String(FLETCH.slant));
+      expect(line.getAttribute('y2')).toBe('0');
+      expect(d.style.flex).toBe(`0 0 ${FLETCH.slant}px`);
+    }
+    // The plain rule is still vertical and still 7px, untouched by the refit.
+    for (const d of dividers(container).filter((x) => x.dataset.dividerKind === 'line')) {
+      const line = d.querySelector('line');
+      expect(line.getAttribute('x1')).toBe(line.getAttribute('x2'));
     }
   });
 
@@ -212,15 +264,30 @@ describe('desktop ribbon — the rendered seam matches the derivation exactly', 
     }
   });
 
-  test('the active tab’s underline is untouched by the stretch chain', () => {
-    // /create is active: its cell keeps the gold bottom border, and the cells
-    // stay centred (not stretched) so the underline sits at label height.
-    const { container } = render(<App />);
-    const cells = [...container.querySelectorAll('header nav button')];
-    const activeIdx = NAV.findIndex((n) => n.id === 'generate');
-    expect(cells[activeIdx].getAttribute('aria-current')).toBe('page');
-    expect(cells[activeIdx].style.borderBottom).toContain('2px solid');
-    expect(container.querySelector('header nav').style.alignItems).toBe('center');
+  test('the PLAIN reference tab’s underline register is untouched by the refit', () => {
+    // ⚠️ THIS TEST CHANGED SUBJECT, DELIBERATELY. It used to read the underline
+    // off /create, which is now a FEATHER — feathers carry their gold on the
+    // clipped vane instead (pinned in navFletching.test.jsx). The claim worth
+    // keeping is that the REFERENCE tabs kept the original register exactly, so
+    // it is asserted where it still lives: on a plain tab, rendered as a leaf so
+    // no lazy view has to mount just to make one of them active.
+    const { container } = render(<NavRibbon view="compendium" onNavClick={() => {}} />);
+    const cells = [...container.querySelectorAll('button')];
+    const byLabel = Object.fromEntries(cells.map((b) => [b.textContent.trim(), b]));
+
+    const active = byLabel.Compendium;
+    expect(active.getAttribute('aria-current')).toBe('page');
+    expect(active.dataset.navCell).toBe('plain');
+    expect(active.style.borderBottom).toContain('2px solid');
+    expect(active.style.fontWeight).toBe('700');
+
+    // A resting plain tab still reserves the same 2px so nothing shifts on hover
+    // or navigation — the original register, unchanged.
+    expect(byLabel.Gallery.style.borderBottom).toBe('2px solid transparent');
+
+    // And the cells still sit CENTRED in the bar, so the underline stays at
+    // label height rather than being dragged to bar height by the stretch chain.
+    expect(container.querySelector('nav').style.alignItems).toBe('center');
   });
 });
 

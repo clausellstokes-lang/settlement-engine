@@ -15,6 +15,11 @@
  * a false lesson about where the work goes, which is worse than no arrow at
  * all.
  *
+ * `flowsInto` OUTLIVED ITS OWN CHEVRON on desktop and is now the flow's shared
+ * predicate: NavDivider derives its seam kind from it, and NavRibbon derives the
+ * FLETCHED BAND's very membership from it (owner directive 2026-08-03). Keep it
+ * pure and keep it here — it is the one place that reads NAV_FLOW.
+ *
  * Harmony: the chevron takes GOLD on the active tab and the quieter BORDER
  * elsewhere, matching the tab's own resting/active register, and carries the
  * same 0.2s transition the tab uses so the two settle together.

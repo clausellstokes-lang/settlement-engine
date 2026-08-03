@@ -79,6 +79,56 @@ export const PARCH_100 = L.PARCH_100;
 // off the first-paint closure budget. See design/tokens.js.
 export { GOLD_TXT, GOLD_SOFT, BORDER_STRONG } from '../design/tokens.js';
 
+// ── THE FLETCHED RIBBON (owner directive, 2026-08-03) ────────────────────────
+// The desktop ribbon's Create · Library · Realm trio reads as the back half of an
+// arrow in flight: ONE continuous leather-brown band carrying three forward-leaning
+// feathers. These are that band's only colour and geometry source — NavRibbon.jsx
+// and NavDivider.jsx read them and spell no hex and no pixel of their own.
+//
+// FLETCH_BROWN is the theme's OWN gold-800 — the deepest brown in the gold family,
+// already carried as GOLD_TXT — so the band is DERIVED from the palette rather than
+// invented beside it, and a palette edit moves the fletching with it.
+// FLETCH_BROWN_LIFT is the one authored step between gold-800 (#6A511F) and gold-700
+// (#8C6F32): the ACTIVE feather's lift, chosen as the LIGHTEST value that still
+// clears WCAG AA for the ribbon's 12px label.
+//
+// MEASURED (tests/design/contrast.test.js recomputes every ratio below; WCAG 2.2
+// AA = 4.5:1 for normal text, SC 1.4.11 = 3:1 for a UI boundary):
+//   PARCH_100 on FLETCH_BROWN ......... 6.24:1  resting feather label        AA ✓
+//   PARCH     on FLETCH_BROWN_LIFT .... 5.71:1  active feather label         AA ✓
+//   PARCH_100 on FLETCH_BROWN_LIFT .... 5.18:1  the label register's floor   AA ✓
+//   GOLD      on FLETCH_BROWN ......... 3.12:1  fletch stroke + active edge, against
+//                                               the band it is cut into      1.4.11 ✓
+//   GOLD      on FLETCH_BROWN_LIFT .... 2.59:1  RECORDED, NOT HIDDEN: the active
+//       feather's gold edge against its OWN lifted fill is under 3:1. It is a
+//       REDUNDANT channel, not a state carrier — the active feather is already told
+//       by the lifted fill, the brighter PARCH label, weight 700, and aria-current
+//       ="page" — so nothing about the state depends on reading that edge.
+export const FLETCH_BROWN = L.GOLD_TXT;
+export const FLETCH_BROWN_LIFT = '#7A5C23';
+
+/**
+ * FLETCH — the fletching's GEOMETRY, deliberately kept apart from CHROME: none of
+ * it may enter the header's layout box.
+ *
+ * `slant` is the horizontal run of every feather edge AND of the angled stroke
+ * between feathers. ONE number for both is what makes the strokes exactly parallel
+ * to the vanes: each traverses `slant` px over the same band height.
+ *
+ * `overhang` is how far the band's PAINT extends below the ribbon. It is drawn as a
+ * drop-shadow of the band's own clipped silhouette — pure paint, contributing no
+ * height, margin, border or out-of-flow offset to any box — so the ribbon adds NO
+ * layout height, which is what keeps ANCHOR_OFFSET (and with it every About /
+ * guide / Compendium anchor landing) describing the same bar it described before.
+ *
+ * MEASURED in a real browser at 1440×900, base 83b18609 vs the fletched tree served
+ * side by side: header 124px / nav 100px in BOTH. Note the number: CHROME.headerDesktop
+ * is 60 and the live desktop header is 124 — a pre-existing divergence lane FL-2
+ * reported and deliberately did not touch, because moving ANCHOR_OFFSET relocates
+ * every anchor landing in the estate.
+ */
+export const FLETCH = Object.freeze({ slant: 10, overhang: 4 });
+
 // swatch — exact-value migration swatchbook (see design/tokens.js). Routes the
 // long tail of raw inline hex colors through the token system with zero visual
 // change so no-raw-color can go to error.

@@ -251,7 +251,16 @@ describe('routes — wave 4 IA (home / realm / nav / legal)', () => {
     // THE ABOUT SPLIT: the About nav cell now points at the split's default
     // page (`about-what-this-is` at /about/what-this-is), not the retired
     // pre-split `howto`. Ordered behaviour change, not drift.
-    expect(ids).toEqual(['home', 'generate', 'settlements', 'realm', 'compendium', 'gallery', 'about-what-this-is']);
+    //
+    // ⚠️ OWNER-DIRECTED SPEC CHANGE, 2026-08-03 (THE FLETCHED RIBBON, lane FL):
+    // `'home'` LEFT this list. The ribbon became the back half of an arrow and the
+    // wordmark became the home button, so the Welcome ROUTE keeps its path, title
+    // and '/'-canonicalization — proved by the round-trip test at the top of this
+    // describe — while its `nav` block is retired, which is what removes it from
+    // NAV and from every surface derived from NAV. Ordered behaviour change, not
+    // drift. tests/store/appNavSsot.test.js pins the retirement's exact SHAPE (a
+    // live route with no nav metadata), so a deletion cannot pass as a retirement.
+    expect(ids).toEqual(['generate', 'settlements', 'realm', 'compendium', 'gallery', 'about-what-this-is']);
     const orders = NAV.map(n => n.order);
     expect([...orders].sort((a, b) => a - b)).toEqual(orders);
     for (const n of NAV) {

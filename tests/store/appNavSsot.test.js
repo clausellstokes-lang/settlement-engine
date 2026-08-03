@@ -39,8 +39,16 @@ describe('routes NAV is the single source of truth (finding #4)', () => {
   test('the desktop nav order + labels match the shipped IA', () => {
     // The exact tab set + order App renders. Locking it here means a routes.js
     // edit that reorders/relabels a tab is a conscious change, not a silent one.
+    //
+    // ⚠️ OWNER-DIRECTED SPEC CHANGE, 2026-08-03 (THE FLETCHED RIBBON, lane FL):
+    // `{ id: 'home', label: 'Welcome' }` LEFT this list. The ribbon became the
+    // back half of an arrow and the wordmark became the home button, so the
+    // Welcome ROUTE keeps its path, title and '/'-canonicalization while its
+    // `nav` block is retired in routes.js — which is what removes it from NAV and
+    // from every surface derived from NAV. This is the whole mechanism of the
+    // retirement, so if a future edit puts Welcome back in the ribbon it must red
+    // HERE first. See the directive note on the `home` ROUTES entry.
     expect(NAV.map(n => ({ id: n.id, label: n.label }))).toEqual([
-      { id: 'home',        label: 'Welcome' },
       { id: 'generate',    label: 'Create' },
       { id: 'settlements', label: 'Library' },
       { id: 'realm',       label: 'Realm' },
@@ -51,6 +59,21 @@ describe('routes NAV is the single source of truth (finding #4)', () => {
       // one-page `howto` to the split's default page.
       { id: 'about-what-this-is', label: 'About' },
     ]);
+  });
+
+  test('Welcome kept its ROUTE and lost only its nav block (owner directive 2026-08-03)', () => {
+    // The retirement must be exactly this shape: a live route with no top-nav
+    // metadata. Asserting only "home is absent from NAV" would pass just as
+    // happily on a DELETED route, which would 404 /home and break the '/'
+    // canonicalization the landing page depends on — so the survival half is
+    // pinned first and the absence second.
+    const home = ROUTES.find(r => r.view === 'home');
+    expect(home, '/home must still be a declared route').toBeTruthy();
+    expect(home.path).toBe('/home');
+    expect(home.title).toBe('Welcome');
+    expect(isKnownView('home')).toBe(true);
+    expect(home.nav, 'the nav block is what the directive retired').toBeUndefined();
+    expect(NAV.some(n => n.id === 'home')).toBe(false);
   });
 
   test('NAV items keep the { id, label } shape App and the mobile cap rely on', () => {

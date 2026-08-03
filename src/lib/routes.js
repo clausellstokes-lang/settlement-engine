@@ -42,10 +42,23 @@ const DEFAULT_VIEW = 'generate';
 export const ROUTES = Object.freeze([
   { view: 'generate',              path: '/create',                title: 'Create a Settlement',           nav: { label: 'Create',     order: 20 } },
   // The Welcome front door: a hero over the same generation flow as /create.
-  // Leftmost nav tab. A bare root visit ('/') canonicalizes here for logged-out
-  // visitors (the marketing CTAs); signed-in members are sent to /create — via
-  // App's front-door effect (it rewrites only '/', not deep links).
-  { view: 'home',                  path: '/home',                  title: 'Welcome',                       nav: { label: 'Welcome',    order: 10 } },
+  // A bare root visit ('/') canonicalizes here for logged-out visitors (the
+  // marketing CTAs); signed-in members are sent to /create — via App's front-door
+  // effect (it rewrites only '/', not deep links).
+  //
+  // NO `nav` BLOCK — OWNER DIRECTIVE, 2026-08-03 (THE FLETCHED RIBBON, lane FL).
+  // Welcome was the ribbon's leftmost tab until the ribbon became the back half of
+  // an arrow: the WORDMARK is the home button on both surfaces now (App.jsx's brand
+  // block, accessible name "SettlementForge home"), so a Welcome tab would be a
+  // second door to the same room standing where the fletching goes. The ROUTE is
+  // untouched — /home still resolves, still titles, still canonicalizes from '/' —
+  // only its top-nav metadata is retired, which is what removes it from NAV and so
+  // from every surface that derives from NAV. The mobile bottom nav never carried it
+  // (App.jsx MOBILE_NAV_PRIORITY names five ids, none of them 'home'), so this is a
+  // desktop-only change by construction rather than by a second exclusion list. One
+  // consequence is deliberate: on the landing page NO nav cell is active, because no
+  // cell claims that view.
+  { view: 'home',                  path: '/home',                  title: 'Welcome' },
   // UX Phase 4 — `settlements` keeps its view id + /settlements path (back-compat),
   // but the nav LABEL becomes "Library" (via the nav.label below).
   { view: 'settlements',           path: '/settlements',           title: 'Your Library',                  nav: { label: 'Library',    order: 30 } },
@@ -200,12 +213,16 @@ export const NAV = Object.freeze(
  * the sequence, every surface reads it.
  *
  * THE ADJACENCY GUARD (why this is a relation, not an ordering): the chrome
- * draws a flow chevron ONLY when the successor named here is the tab actually
- * rendered next ON THAT SURFACE. The desktop ribbon runs Welcome · Create ·
- * Library · Realm, so both chevrons draw; the mobile bottom nav omits Realm
- * (Gallery follows Library there), so Library draws none. An arrow pointing at
- * the wrong neighbour teaches a false lesson about where the work goes.
- * See components/nav/NavFlowArrow.jsx.
+ * draws its flow mark ONLY when the successor named here is the tab actually
+ * rendered next ON THAT SURFACE. The desktop ribbon runs Create · Library ·
+ * Realm, so both marks draw; the mobile bottom nav omits Realm (Gallery follows
+ * Library there), so Library draws none. An arrow pointing at the wrong
+ * neighbour teaches a false lesson about where the work goes.
+ *
+ * THE FLETCHING READS THIS TOO (owner directive 2026-08-03). The desktop ribbon's
+ * leather-brown band is the maximal NAV run whose consecutive pairs are declared
+ * here — so the band's membership is DERIVED from the flow, never listed in the
+ * chrome. See components/nav/NavRibbon.jsx and components/nav/NavFlowArrow.jsx.
  * @type {Readonly<Record<string, string>>}
  */
 export const NAV_FLOW = Object.freeze({
