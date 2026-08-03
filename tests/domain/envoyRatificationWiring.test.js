@@ -8,24 +8,36 @@
  * really decides whether one clause of it binds.
  *
  * EVERY ARM ASSERTS A POSITIVE FACT FIRST, so no pin can pass for want of an
- * errand. The gate's own negative control is the BOUND/UNBOUND PAIR run through
- * `envoyHomeOutcome` — the exact transform `envoyPulse.js` applies — so a gate
- * that stopped stripping would make the pair stop differing.
+ * errand.
  *
- * NOT YET CHARACTERISED, and recorded rather than hidden: which belief a court
- * must hold to REFUSE a sheet its own envoy carried home. A picture asserting
- * the court spent and its foe dominant still ratifies, so the refusal arm is
- * pinned on `coalitionRatification.js`'s own suite and not through the pulse.
- * The vote's two directions ARE both exercised here through the weight — a
- * strong court votes principal (3), a spent one minor (1).
+ * THE GATE'S NEGATIVE CONTROL RUNS THROUGH THE PULSE, not beside it. An earlier
+ * shape of this suite computed the bound/unbound pair by calling
+ * `envoyHomeOutcome` directly, which is the producer `envoyPulse.js` happens to
+ * call and not the pulse's USE of it — neutering `bound` to an unconditional
+ * `true` left every pin green. The refusal arc below drives
+ * `advanceEnvoyDiplomacyPulse` itself, so the neuter reds.
+ *
+ * THE REFUSAL BELIEF IS NOW CHARACTERISED (CR-WIRE-D). A court refuses when the
+ * sheet its envoy agreed costs more than its OWN frozen picture now believes it
+ * must pay, through the believed-advantage arithmetic that already decides every
+ * parlay. The earlier note here — "a picture asserting the court spent and its
+ * foe dominant still ratifies" — was true of the wrong sheet: the old fixture's
+ * two pictures disagreed, so the field draft collapsed to a WHITE PEACE, and a
+ * white peace has no clause to refuse. `pressedDispatch` gives both frozen
+ * pictures the same rows, the draft carries real clauses, and both directions
+ * are reachable through the live pulse.
  */
 import { describe, expect, it } from 'vitest';
 
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { advanceEnvoyDiplomacyPulse } from '../../src/domain/worldPulse/envoyPulse.js';
 import { applyWorldPulseOutcomes } from '../../src/domain/worldPulse/applyWorldPulse.js';
-import { createNegotiationPicture } from '../../src/domain/worldPulse/negotiationPictures.js';
+import {
+  createNegotiationPicture,
+  mutateNegotiationPicture,
+} from '../../src/domain/worldPulse/negotiationPictures.js';
 import { envoyHomeOutcome } from '../../src/domain/worldPulse/envoyDiplomacy.js';
+import { npcLedgerOf } from '../../src/domain/worldPulse/npcLedger.js';
 import {
   envoyErrandsOf,
   envoyOfferEpisodeKey,
@@ -279,6 +291,133 @@ function walkHome() {
   return { f, state, result: last, tick: null };
 }
 
+// ── CR-WIRE-D — THE PRESSED EPISODE, where a sheet has clauses to refuse ──────
+//
+// The arc above produces a WHITE PEACE: its two frozen pictures disagree about
+// who is winning, the field draft therefore spends nothing, and a sheet with
+// zero clauses is accepted by every reader on earth (`white_peace`). To reach a
+// refusal at all, the sheet must first cost something — so both pictures here
+// carry the SAME rows and both believe the besieged court spent. The column
+// drafts against that belief, the court's own picture bounds the draft, and the
+// sheet lands with real clauses and a real budget.
+
+/** The one pair of subject rows BOTH frozen pictures carry. */
+function pressedRows(offererStrength) {
+  return [
+    subject('target', 'dominant', 'deep', {
+      governingArchetype: 'merchant', alignmentPressBand: 'hard',
+    }),
+    subject('offerer', offererStrength, 'thin', { exports: ['Silver'] }),
+  ];
+}
+
+/** The intercepting column, pressing an advantage its own picture believes in. */
+function pressingColumn({ node, departTick, capturedTick }) {
+  return {
+    ...column({ node, departTick, capturedTick }),
+    commandPicture: createNegotiationPicture({
+      id: 'army-picture.army.vale',
+      carrier: { kind: 'army', id: 'army.vale' },
+      partyId: 'target',
+      counterpartId: 'offerer',
+      relationshipKey: KEY,
+      episodeKey: envoyOfferEpisodeKey(offer()),
+      frontOwnerId: 'offerer',
+      frontSinceTick: 3,
+      capturedTick,
+      causeStatus: 'live',
+      subjects: pressedRows('spent'),
+      evidenceIds: [],
+    }),
+  };
+}
+
+/**
+ * The same live dispatch as `dispatchedAndCollided`, with the home court's own
+ * frozen picture replaced IN PLACE — same id, same carrier, same episode, moved
+ * bands — so the errand ledger still owns it and the parlay compares a matched
+ * pair.
+ */
+function pressedDispatch() {
+  const { f, worldState, arrival } = dispatchedAndCollided();
+  const errands = envoyErrandsOf(worldState);
+  const court = createNegotiationPicture({
+    ...errands[0].negotiationPicture,
+    subjects: pressedRows('spent'),
+    causeStatus: 'live',
+  });
+  expect(court, 'the pressed court picture must normalize').toBeTruthy();
+  const pressed = {
+    ...worldState,
+    envoyErrands: errands.map((row) => ({ ...row, negotiationPicture: court })),
+    spatialLedgers: {
+      ...worldState.spatialLedgers,
+      armyTransit: {
+        'army.vale': pressingColumn({ node: 'target', departTick: arrival, capturedTick: arrival }),
+      },
+    },
+  };
+  expect(
+    envoyErrandsOf(pressed)[0]?.negotiationPicture?.id,
+    'the ledger must still carry the errand with its moved picture',
+  ).toBe(String(errands[0].negotiationPicture.id));
+  return { f, worldState: pressed, arrival };
+}
+
+/** Walk the pressed arc to the doorstep: the envoy is `returning`, sheet in hand. */
+function pressedToDoorstep() {
+  const { f, worldState, arrival } = pressedDispatch();
+  let state = worldState;
+  for (let tick = arrival; tick <= arrival + 3; tick += 1) state = pulse(f, state, tick).worldState;
+  const errand = envoyErrandsOf(state)[0];
+  expect(errand?.state, 'the pressed envoy must be on the road home').toBe('returning');
+  expect(
+    errand.termSheet?.clauses?.length,
+    'the pressed parlay must produce a sheet with something to refuse',
+  ).toBeGreaterThan(0);
+  return { f, state, homeTick: arrival + 4, errand };
+}
+
+/** The band the home court's own picture currently gives ITSELF. */
+function ownStrengthBand(state) {
+  return String((envoyErrandsOf(state)[0]?.negotiationPicture?.subjects || [])
+    .find((row) => String(row.settlementId) === 'offerer')?.strengthBand || '');
+}
+
+/**
+ * THE NEWS THAT OUTRUNS THE ENVOY. While he walks home the court's own picture
+ * of ITSELF rises, one authored rung at a time, through the real mutation API —
+ * no hand-built picture, no second estimator. Nothing about the world moved; the
+ * court's belief did, which is the whole point.
+ */
+function raisedByNews(state, rungs, tick) {
+  const ladder = ['spent', 'strained', 'ready', 'strong', 'dominant'];
+  return {
+    ...state,
+    envoyErrands: envoyErrandsOf(state).map((row) => {
+      let picture = row.negotiationPicture;
+      for (let index = 0; index < rungs; index += 1) {
+        const moved = mutateNegotiationPicture(picture, {
+          id: `picture_mutation:the_front_holds.${index}`,
+          pictureId: String(picture.id),
+          episodeKey: String(picture.episodeKey),
+          sourceId: `evidence.the_front_holds.${index}`,
+          kind: 'battle',
+          tick,
+          subjectId: 'offerer',
+          field: 'strengthBand',
+          fromBand: ladder[index],
+          toBand: ladder[index + 1],
+          direction: 'rise',
+        });
+        expect(moved.changed, `rung ${index} must be a real authored mutation`).toBe(true);
+        picture = moved.picture;
+      }
+      return { ...row, negotiationPicture: picture };
+    }),
+  };
+}
+
 describe('WR-7c ratification reaches the mouth through advanceEnvoyDiplomacyPulse', () => {
   it('agrees a real sheet, carries it home, and RATIFIES it through the sole-offer arm', () => {
     const { state, result, tick } = walkHome();
@@ -338,9 +477,15 @@ describe('WR-7c ratification reaches the mouth through advanceEnvoyDiplomacyPuls
       bound: false, reason: 'unreadable_member', verdict: '', chosenTermSheetId: null,
     });
 
-    // AND THE GATE ITSELF, on the mouth's own producer: the exact transform the
-    // pulse applies to an unbound delivery must carry no sheet, while the bound
-    // one does. Neuter the gate in `envoyPulse.js` and this pair stops differing.
+    // AND THE MOUTH'S OWN PRODUCER, on the exact transform the pulse applies.
+    // This is a SUPPLEMENT to the gate's real control (the live-pulse refusal
+    // arc further down), not a substitute for it: it says only that stripping
+    // the sheet strips the clause, never that the pulse strips anything.
+    //
+    // THE STRIPPED CALL MUST RETURN A REAL OUTCOME. `?.metadata?.carriedTermSheet`
+    // collapses a null outcome and a sheet-less outcome to the same `undefined`,
+    // and "no outcome produced at all" is precisely the failure this suite is
+    // here to catch — so the object is asserted FIRST and the absence second.
     const delivery = {
       errandId: String(errand.id),
       npcId: String(errand.npcId),
@@ -352,10 +497,128 @@ describe('WR-7c ratification reaches the mouth through advanceEnvoyDiplomacyPuls
     };
     expect(envoyHomeOutcome(delivery)?.metadata?.carriedTermSheet, 'a bound sheet travels')
       .toBeTruthy();
+    const stripped = envoyHomeOutcome({ ...delivery, termSheet: null });
+    expect(stripped, 'stripping the sheet must still produce a whole outcome').toBeTruthy();
+    expect(String(stripped.id), 'and it must be the same errand\'s outcome').toBeTruthy();
     expect(
-      envoyHomeOutcome({ ...delivery, termSheet: null })?.metadata?.carriedTermSheet,
+      stripped.metadata?.carriedTermSheet,
       'an unratified sheet must NEVER reach the outcome mouth',
     ).toBeUndefined();
+  });
+});
+
+describe('CR-WIRE-D — the refusal belief is the picture\'s own appraisal', () => {
+  it('RATIFIES while the court still believes those terms are its price', () => {
+    const { f, state, homeTick } = pressedToDoorstep();
+    expect(ownStrengthBand(state), 'the court still believes itself spent').toBe('spent');
+
+    const result = pulse(f, state, homeTick);
+    expect(result.ratifications, 'the pressed sheet must actually be voted on').toHaveLength(1);
+    expect(result.ratifications[0]).toMatchObject({
+      bound: true, verdict: 'ratified', reason: 'sole_offer',
+    });
+    const carried = result.autoApplied
+      .map((row) => row?.metadata?.carriedTermSheet)
+      .filter(Boolean);
+    expect(carried, 'a ratified sheet reaches applyWorldPulseOutcomes').toHaveLength(1);
+    expect(envoyErrandsOf(result.worldState)[0].state).toBe('home');
+  });
+
+  it('REFUSES once its own picture has risen above what the sheet costs', () => {
+    const { f, state, homeTick } = pressedToDoorstep();
+    // TWO RUNGS of authored news, and nothing else changes: the same sheet, the
+    // same envoy, the same road. `spent` and `strained` both still ratify; at
+    // `ready` the court's believed budget falls under what its envoy spent.
+    const risen = raisedByNews(state, 2, homeTick);
+    expect(ownStrengthBand(risen), 'the belief really moved').toBe('ready');
+    expect(
+      envoyErrandsOf(risen)[0].termSheet?.id,
+      'and it is the SAME sheet being weighed',
+    ).toBe(String(envoyErrandsOf(state)[0].termSheet.id));
+
+    const result = pulse(f, risen, homeTick);
+    expect(result.ratifications, 'the refusal is RECORDED, never merely enforced')
+      .toHaveLength(1);
+    expect(result.ratifications[0]).toMatchObject({
+      bound: false, verdict: 'refused', reason: 'sole_offer',
+    });
+    expect(result.ratifications[0].chosenTermSheetId).toBeNull();
+  });
+
+  it('moves the vote with the belief across the whole ladder, both directions', () => {
+    const { f, state, homeTick } = pressedToDoorstep();
+    const votes = [0, 1, 2, 3, 4].map((rungs) => {
+      const result = pulse(f, raisedByNews(state, rungs, homeTick), homeTick);
+      return result.ratifications[0]?.bound;
+    });
+    // The believed floor is a LADDER, not a switch: the flip happens at exactly
+    // one rung, and both sides of it are populated. A derivation that ignored the
+    // picture would return one constant here.
+    expect(votes).toEqual([true, true, false, false, false]);
+  });
+});
+
+describe('THE REFUSED SHEET — the man comes home, the clauses do not', () => {
+  /** The refusal arc, run once: the pressed episode with the risen belief. */
+  function refused() {
+    const { f, state, homeTick } = pressedToDoorstep();
+    const risen = raisedByNews(state, 2, homeTick);
+    const result = pulse(f, risen, homeTick);
+    expect(result.ratifications[0], 'the arc must really refuse').toMatchObject({ bound: false });
+    return { f, result, homeTick };
+  }
+
+  it('LETS NO SHEET PAST THE MOUTH — the gate\'s own live negative control', () => {
+    const { result } = refused();
+    // THE NEUTER: replace `const bound = !carriesSheet || verdict?.bound === true`
+    // in envoyPulse.js with an unconditional `true` and this pin reds, because the
+    // refused sheet then reaches applyWorldPulseOutcomes exactly as a ratified one
+    // does. The earlier control could not see that, because it never ran the pulse.
+    const carried = result.autoApplied
+      .map((row) => row?.metadata?.carriedTermSheet)
+      .filter(Boolean);
+    expect(carried, 'a refused sheet must reach the mouth NOWHERE').toHaveLength(0);
+    expect(result.autoApplied, 'and nothing of it may be auto-applied').toHaveLength(0);
+  });
+
+  it('CLOSES THE ERRAND ANYWAY — the refusal is not a life sentence on the road', () => {
+    const { result } = refused();
+    const errand = envoyErrandsOf(result.worldState)[0];
+    expect(errand, 'the errand must survive its own refusal').toBeTruthy();
+    expect(errand.state, 'the man still comes home').toBe('home');
+    // AND HIS HOMECOMING IS RECEIPTED, not silently swallowed.
+    expect(
+      result.evidence.map((row) => String(row.kind)),
+      'the homecoming receipt must be published',
+    ).toContain('envoy_home');
+  });
+
+  it('LANDS H1 — the envoy is placed at his own court, out of transit', () => {
+    const { result } = refused();
+    const npcId = String(envoyErrandsOf(result.worldState)[0].npcId);
+    expect(npcId, 'the errand must name a real traveller').toBeTruthy();
+    const ledger = npcLedgerOf(result.worldState);
+    expect(Object.prototype.hasOwnProperty.call(ledger.roamers, npcId)).toBe(false);
+    const placed = ledger.placed[npcId];
+    expect(placed, 'the envoy must be placed somewhere').toBeTruthy();
+    expect(String(placed.originRef?.rosterId), 'and it is the court\'s own chancellor')
+      .toBe('npc.mara');
+    expect(String(placed.hostSettlementId), 'and that somewhere is home').toBe('offerer');
+    expect(Object.keys(placed.transit || {}), 'with no transit left on him').toHaveLength(0);
+  });
+
+  it('DOES NOT RE-VOTE FOREVER — the tick after a refusal decides nothing', () => {
+    const { f, result, homeTick } = refused();
+    // The defect this pin exists for: before the fix, a refused delivery bailed
+    // out before `state = tentativeState`, so the errand stayed `returning` and
+    // every later pulse re-ran the vote and re-emitted a fresh refusal record —
+    // measured to 40 ticks and still going.
+    const after = pulse(f, result.worldState, homeTick + 1);
+    expect(after.ratifications, 'a closed errand has nothing left to ratify').toHaveLength(0);
+    expect(envoyErrandsOf(after.worldState)[0].state).toBe('home');
+    const later = pulse(f, after.worldState, homeTick + 2);
+    expect(later.ratifications).toHaveLength(0);
+    expect(envoyErrandsOf(later.worldState)[0].state).toBe('home');
   });
 });
 

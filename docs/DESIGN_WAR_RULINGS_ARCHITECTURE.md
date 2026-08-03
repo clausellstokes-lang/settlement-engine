@@ -921,13 +921,60 @@ congress, no multilateral table, ever.
 > builds no account corpus to choose from. Wiring one today would mean inventing
 > the ruler's judgment. The seat arm stays unit-proven in `coalitionRatification.js`.
 >
-> ⚠️ **OPEN QUESTION FOR THE CHAIR, recorded rather than hidden.** Which belief a
-> court must hold to REFUSE a sheet its own envoy carried home is NOT
-> characterised: a picture asserting the court spent and its foe dominant still
-> ratifies. Both vote directions are exercised through the WEIGHT (strong ⇒ 3,
-> spent ⇒ 1) and the refusal arm is pinned on the law's own suite, but the
-> pulse-level refusal is an unpinned arm until the belief that produces it is
-> found. Nothing is lit, no golden moved, no soak ran.
+> ✅ **CR-WIRE-D — THE REFUSAL BELIEF IS THE PICTURE'S OWN APPRAISAL (2026-08-03,
+> LANE WF; VETOABLE).** The open question below is answered, and the earlier
+> observation that produced it was measuring the wrong sheet. A member votes
+> REFUSE when the sheet its envoy agreed costs MORE THAN ITS OWN FROZEN PICTURE
+> NOW BELIEVES IT MUST PAY — derived through the believed-advantage arithmetic
+> that already decides every parlay (`evaluateNegotiationPicture` →
+> `compareOfferToResponderDraft`, the `peaceTermsAppraisal` leaf), reached by
+> `castRatificationBallot`. NO NEW ESTIMATOR EXISTS OR MAY EXIST: K3 stays closed
+> because the derivation is the parlay's own, and K4 stays per-party because the
+> ballot still names exactly one picture.
+>
+> WHY "A SPENT COURT STILL RATIFIES" WAS TRUE AND MEANINGLESS. The wiring
+> fixture's two frozen pictures disagreed about who was winning, so the field
+> draft collapsed to a WHITE PEACE — zero clauses, zero budget — and
+> `compareOfferToResponderDraft` accepts a white peace unconditionally, because a
+> sheet that asks for nothing has nothing to refuse. Give both pictures the same
+> rows and the draft carries real clauses; then the refusal is not only reachable
+> but GRADED. Executed live, one authored rung at a time on the court's own
+> picture of ITSELF while the envoy walks home (`spent` → `strained` → `ready`,
+> through the real `mutateNegotiationPicture` API, nothing about the world moved):
+> `spent` ⇒ ratified, `strained` ⇒ ratified, `ready` ⇒ REFUSED `budget_refused`,
+> `strong` ⇒ refused, `dominant` ⇒ refused `orientation_refused`. The believed
+> floor is a ladder with a single flip, both sides populated, and the pulse-level
+> refusal arm is now pinned in both directions.
+>
+> ⚠️ **CORRECTION — THE REFUSAL BRANCH DID NOT DO WHAT THIS DOC SAID (F1, HIGH).**
+> "The man comes home, the errand closes, the silence inference clears and H1
+> lands" was FALSE as shipped. A stripped delivery's outcome LAPSES at the mouth
+> (there is nothing left in it to apply), the lapse hit the atomic-commit bail,
+> and `tentativeState` — the only place `markEnvoyHome`,
+> `clearEnvoySilenceInference` and `syncEnvoyNpcTransit` had been applied — was
+> discarded. The envoy stayed `returning` forever and the pulse re-voted and
+> re-published a refusal every tick. FIXED in `envoyPulse.js`: the atomic-commit
+> law still governs a delivery whose politics COULD still land (a stale world,
+> repaired later, commits atomically — pinned in `envoyDiplomacy.test.js`), but a
+> REFUSED delivery has no repair to wait for, so its homecoming commits on the
+> lapse. Three mutants bracket it: neutering the gate reds the mouth pin, removing
+> the refusal exception reds the three homecoming pins, and removing the
+> `bound` guard reds the two atomic-commit pins.
+>
+> ⚠️ **CORRECTION — THE GATE WAS UNPINNED (F2/F3, HIGH/MEDIUM).** The claimed
+> negative control called `envoyHomeOutcome` directly, which is the producer the
+> pulse happens to call and not the pulse's USE of it, so neutering `bound` to an
+> unconditional `true` left all eight pins green; and it was additionally
+> shape-blind, `?.metadata?.carriedTermSheet` collapsing "sheet stripped" and "no
+> outcome at all" to the same `undefined`. Both closed: the gate's control now
+> drives `advanceEnvoyDiplomacyPulse` with a really-refusing verdict, and the
+> stripped call is asserted to return a whole outcome BEFORE the absence is read.
+>
+> Nothing is lit, no golden moved, no soak ran. Dormancy re-proved after the fix:
+> with the conjunction dark the ten-tick output hash is
+> `98547883fd92b2274e2e44163211dc22` both at HEAD and after, and the same
+> conjunction LIT hashes `c58f6e339080e0740b7c410c11e72eed`, so the fence is not
+> measuring a rock.
 
 **WR-7d — RANSOM + THE COMPROMISED ENVOY (O, Q).**
 - **Captivity → ransom (O):** dwell-gated (band; the dwell read is WR-7b's hold

@@ -310,14 +310,37 @@ export function advanceEnvoyDiplomacyPulse({
       });
       const landed = applied.autoApplied.some((row) => String(row?.id || '') === String(outcome.id))
         && !(applied.lapsedOutcomeIds || []).includes(String(outcome.id));
-      if (!landed) continue;
-      state = applied.worldState;
-      graph = applied.regionalGraph;
-      feed = applied.wizardNews;
-      updates = applied.settlementUpdates;
-      autoApplied.push(...applied.autoApplied);
-      newsEntries.push(...applied.newsEntries);
-      if (Array.isArray(applied.envoyEvidence)) evidence.push(...applied.envoyEvidence);
+      if (!landed) {
+        // THE ATOMIC-COMMIT LAW, AND THE ONE CASE IT WAS NEVER ABOUT.
+        //
+        // Ordinarily a home delivery whose outcome does not land commits
+        // NOTHING. The envoy stands at his own gate — `returning`, `arrived`,
+        // no receipt — and the next pulse tries the whole delivery again,
+        // because a lapse there means the world moved under the offer (the front
+        // changed, the label already turned) and the homecoming must land with
+        // its politics or not at all. That law stands and is pinned in
+        // `envoyDiplomacy.test.js`.
+        //
+        // A REFUSED SHEET IS NOT THAT CASE. Its outcome lapses because the gate
+        // above stripped the only thing in it, and no repair can make the world
+        // coherent again — the coalition will refuse the same sheet on every
+        // tick that follows. Waiting for that repair left the man on the road
+        // forever: the errand never closed, the silence inference never cleared,
+        // H1 never landed, and the pulse re-ran the vote and re-published a
+        // fresh refusal every tick, unboundedly. The sheet not binding is the
+        // whole punishment; the errand still closes through its ordinary
+        // homecoming.
+        if (bound) continue;
+        state = tentativeState;
+      } else {
+        state = applied.worldState;
+        graph = applied.regionalGraph;
+        feed = applied.wizardNews;
+        updates = applied.settlementUpdates;
+        autoApplied.push(...applied.autoApplied);
+        newsEntries.push(...applied.newsEntries);
+        if (Array.isArray(applied.envoyEvidence)) evidence.push(...applied.envoyEvidence);
+      }
     }
     evidence.push(...marked.evidence);
     const homeNews = envoyNewsEntries({
