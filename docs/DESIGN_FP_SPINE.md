@@ -388,9 +388,24 @@ authored here so "SP-N landed" resolves corpus-wide.]
   {purpose}"; DM-register, per the truth law). The disclosure derives
   from persisted provenance only — no new state; a link the records
   cannot classify renders UNKNOWN, never guessed (R-28 at the audit
-  grain). Pins: the three states reachable on one fixture; a planted
-  link names commissioner + purpose or reds; the organic case never
-  names an author (the hardest negative — wear must not confabulate a
+  grain).
+  **[AMENDED 2026-08-03 (owner refinement) — THE MUTATED PLANT:]** the
+  integrity states are LINEAGE-AWARE, not exclusive — a planted idea may
+  mutate further in the carrying, and the disclosure shows BOTH halves:
+  the ORIGINAL INTENT always (commissioner, purpose, and the PLANTED
+  ASSERTION as seeded — the disinfo record holds it), plus the
+  post-planting wear where the tale drifted ("planted by {house} as a
+  whisper of weak walls, to bait the corner — grown in the carrying
+  into tales of an emptied garrison"). THE SEED-NOT-GROWTH LAW: the
+  planter owns the seed, never the growth — mutations are never
+  re-attributed to the commissioner; the wear atop a plant stays
+  authorless (the world may judge the planter for the harvest; the
+  RECORD charges them only for the sowing). Pins: the three base states
+  AND the compound state (planted-then-worn) reachable on one fixture
+  with both halves rendered; a planted link names commissioner +
+  purpose + the seeded assertion or reds; the organic case never names
+  an author, INCLUDING the wear atop a plant (the hardest negative —
+  neither pure wear nor post-plant drift may confabulate or inherit a
   culprit); the popup renders identically from all summoning surfaces
   (one component, source-scan pinned).
 - **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion + the
