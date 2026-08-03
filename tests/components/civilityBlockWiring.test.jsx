@@ -57,6 +57,10 @@ describe('a comment is AUTHORED-PUBLIC text — the gate is the entry', () => {
     expect(alert.textContent).toMatch(/Feedback & support/);
     // No moralising, no lecture, and above all no echo of the term. The term is
     // structurally unavailable: checkCivility never returns it.
+    // The two assertions directly above pin the alert's ACTUAL content — the refusal
+    // sentence and the support path — so if the alert stopped rendering they red first
+    // and this line never runs. The liveness is structural, not incidental.
+    // anchored: the preceding toContain/toMatch on the same element supply the liveness
     expect(alert.textContent.toLowerCase()).not.toContain('shit');
   });
 

@@ -1719,6 +1719,18 @@
   "tests/store/pinnedNpcRegenRemap.test.js": {
    "kind": "rationale",
    "ref": "negative-control-executed-2026-07-30"
+  },
+  "tests/lint/publicIdentitySingleRender.walker.test.js": {
+   "kind": "mutation",
+   "label": "identity/undeclared avatar reader planted"
+  },
+  "tests/security/publicPayloadVeilTotality.test.js": {
+   "kind": "mutation",
+   "label": "civility-veil/public payload boundary unveiled"
+  },
+  "tests/security/civilityGuard.pglite.test.js": {
+   "kind": "rationale",
+   "ref": "pglite-executed"
   }
  },
  "meta": {

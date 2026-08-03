@@ -46,6 +46,9 @@ import Button from '../primitives/Button.jsx';
 import PublicAvatar from '../primitives/PublicAvatar.jsx';
 import { supabase } from '../../lib/supabase.js';
 import { useStore } from '../../store/index.js';
+// Every user-facing failure below speaks through the copy register, not through a
+// literal, so the app keeps one voice and the i18n door stays open.
+import { t } from '../../copy/index.js';
 import {
   buildAvatarLadder, decodeImageSource, sweepAvatarLadder, uploadAvatarLadder,
   validateAvatarDimensions, validateAvatarFile,
@@ -118,7 +121,7 @@ export default function AccountIdentitySection() {
     try {
       decoded = await decodeImageSource(file);
     } catch {
-      setError('Could not read that image.');
+      setError(t('errors.avatarReadFail'));
       return;
     }
     const dims = validateAvatarDimensions({ width: decoded.width, height: decoded.height });
@@ -134,7 +137,7 @@ export default function AccountIdentitySection() {
     const file = e.target.files?.[0];
     // acceptFile is async (it decodes to measure the source); catch so a decode
     // failure becomes a sentence rather than an unhandled rejection.
-    if (file) acceptFile(file).catch(() => setError('Could not read that image.'));
+    if (file) acceptFile(file).catch(() => setError(t('errors.avatarReadFail')));
     e.target.value = ''; // allow re-picking the same file
   };
 
@@ -151,7 +154,7 @@ export default function AccountIdentitySection() {
     const previous = avatarUrl;
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('You must be signed in to upload a profile image.');
+      if (!user) throw new Error(t('errors.avatarUploadSignIn'));
 
       // No dimension check here: this blob is our own 512 square crop, so
       // measuring it would measure our canvas rather than the user's photo. The
@@ -162,7 +165,7 @@ export default function AccountIdentitySection() {
 
       const { error: writeError } = await supabase
         .from('profiles').update({ avatar_url: url }).eq('id', user.id);
-      if (writeError) throw new Error(writeError.message || 'Could not save your profile image.');
+      if (writeError) throw new Error(writeError.message || t('errors.avatarSaveFail'));
 
       setAvatarUrl(url);
       closeCropper();
@@ -170,7 +173,7 @@ export default function AccountIdentitySection() {
       // Persisted — now, and only now, the old ladder is genuinely superseded.
       if (previous && previous !== url) await sweepAvatarLadder(previous);
     } catch (e) {
-      setError(e?.message || 'Upload failed.');
+      setError(e?.message || t('errors.avatarUploadFail'));
     } finally {
       setBusy(false);
     }
@@ -186,14 +189,14 @@ export default function AccountIdentitySection() {
     const previous = avatarUrl;
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('You must be signed in to change your profile image.');
+      if (!user) throw new Error(t('errors.avatarRemoveSignIn'));
       const { error: writeError } = await supabase
         .from('profiles').update({ avatar_url: null }).eq('id', user.id);
-      if (writeError) throw new Error(writeError.message || 'Could not remove your profile image.');
+      if (writeError) throw new Error(writeError.message || t('errors.avatarRemoveFail'));
       setAvatarUrl(null);
       if (previous) await sweepAvatarLadder(previous);
     } catch (e) {
-      setError(e?.message || 'Could not remove your profile image.');
+      setError(e?.message || t('errors.avatarRemoveFail'));
     } finally {
       setBusy(false);
     }
@@ -273,7 +276,11 @@ export default function AccountIdentitySection() {
       </div>
 
       <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
-        PNG, JPEG, or WebP, at least {AVATAR_RUNGS.standard}×{AVATAR_RUNGS.standard} pixels.
+        {/* "512 pixels square" rather than "512×512": the × form reads as a MULTIPLIER
+            in prose, which is the exact shape the prose-numerics ratchet refuses, and
+            the humanized sentence carries the same requirement in plainer words. The
+            number still comes off AVATAR_RUNGS so it cannot drift from the ladder. */}
+        PNG, JPEG, or WebP, at least {AVATAR_RUNGS.standard} pixels square.
         You’ll crop it to a circle. Cropping happens on your device — the original
         file, and anything your camera recorded in it, never leaves this browser.
       </span>

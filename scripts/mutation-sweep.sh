@@ -87,6 +87,7 @@ MUTATED_FILES=(
   tests/security/aiSpendSafety.pglite.test.js
   tests/security/systemConfigPublicRead.pglite.test.js
   supabase/migrations/087_review_money_hardening.sql
+  src/lib/worldExport.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -611,6 +612,26 @@ check_caught_planted "deity-doctrine/premade deity pool module reintroduced" \
   src/generators/data/_mutsweepDeityPool.js \
   "export const DEITY_POOL = Object.freeze([]);" \
   "npx vitest run tests/lint/noPremadeDeityPool.walker.test.js --no-file-parallelism"
+
+# ── The public display identity + the civility veil (lane C) ─────────────────
+
+# 62. Public display identity — land a SECOND file that reads the avatar pointer.
+#     §1's guarantee is that a name and an image are one identity under one
+#     consent; the census of avatar readers must therefore refuse an undeclared
+#     one, because a surface that composes name and image itself is the surface
+#     that keeps showing a face after consent is withdrawn.
+check_caught_planted "identity/undeclared avatar reader planted" \
+  src/lib/_mutsweepAvatarReader.js \
+  "export const avatarPointer = (row) => row.avatar_url;" \
+  "npx vitest run tests/lint/publicIdentitySingleRender.walker.test.js --no-file-parallelism"
+
+# 63. The public-payload veil seam — take the veil off the world export's payload
+#     BOUNDARY, restoring the exact defect shape VH-1 closed: a veiled dossier
+#     with a raw hoisted name beside it, so one payload carries the same string
+#     masked in one field and plain in its sibling. The totality pin must red on
+#     the plain occurrence, not merely on the missing mark.
+perl -0pi -e 's/return veilPublicPayload\(\{\n    format: WORLD_EXPORT_FORMAT/return \(\{\n    format: WORLD_EXPORT_FORMAT/' src/lib/worldExport.js
+check_caught "civility-veil/public payload boundary unveiled" src/lib/worldExport.js "npx vitest run tests/security/publicPayloadVeilTotality.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

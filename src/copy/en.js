@@ -1000,6 +1000,17 @@ export const en = Object.freeze({
     civilityName:        'That name can’t be used here. Think this is wrong? Feedback & support.',
     civilityComment:     'That comment can’t be posted. Think this is wrong? Feedback & support.',
     civilityShareText:   'Some of that wording can’t be published. Think this is wrong? Feedback & support.',
+    // THE PROFILE-IMAGE PIPELINE (DESIGN_PROFILE_IMAGE.md §3). Registered as a
+    // burn-down correction: the identity section shipped its own failures as raw
+    // literals and reddened the error-copy ratchet. The WORDING here is the
+    // wording that shipped, character for character — this is a plumbing move
+    // onto t(), deliberately NOT a copy revision, so nothing a user reads shifts.
+    avatarReadFail:      'Could not read that image.',
+    avatarUploadSignIn:  'You must be signed in to upload a profile image.',
+    avatarSaveFail:      'Could not save your profile image.',
+    avatarUploadFail:    'Upload failed.',
+    avatarRemoveSignIn:  'You must be signed in to change your profile image.',
+    avatarRemoveFail:    'Could not remove your profile image.',
     notesSaveFail:       'Those notes could not be saved. Your text is still here. Try again.',
     snapshotRestoreUnavailable: 'Snapshot restore is unavailable.',
     snapshotRestoreFail: 'Snapshot could not be restored.',
