@@ -1,5 +1,8 @@
 {
-  "wr2-a|2|one_week": "9b71598111989e65880182051efe3e00b1dab90b62961bd3367f570872f6953c",
-  "wr2-b|5|one_month": "118c60c875063e85d092f8b0ddb737f959378459a5e172e01beaa6cf5c62d659",
-  "wr2-c|7|one_week": "b13fff7fb3cb3c2eb83768d8d8031cd5cc628dd950337566a021842e629f8ffd"
+  "scope": "wr2-owned-surface-v2",
+  "rows": {
+    "wr2-a|2|one_week": "a64c652573521a41abf66d0b72ba1bf52f62ff72f72fe4d031296dd93ad3dbbe",
+    "wr2-b|5|one_month": "996f3f92d26a26594d15bcef940380d61c4f00ab67e367bc5c1159f64adcceb6",
+    "wr2-c|7|one_week": "d7dd8a2bf0c2a4630fe8dacf2f0487dbefbb18b5c27004e22f89470e6c35a6bc"
+  }
 }

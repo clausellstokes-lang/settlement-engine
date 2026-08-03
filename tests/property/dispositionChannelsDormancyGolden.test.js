@@ -1,36 +1,120 @@
 /**
- * dispositionChannelsDormancyGolden.test.js — WR-2's PRE-WIRING dormancy fence.
+ * dispositionChannelsDormancyGolden.test.js — WR-2's dormancy fence, RE-SCOPED.
  *
- * This manifest is captured before dispositionChannelsEnabled is wired anywhere.
- * The fixture is intentionally non-trivial: it starts with populated LEGACY
- * dispositionStats ({wins, losses, score}), a live siege, a two-supplier trade
- * contest, a long-lived treaty, the settlement strategy chooser, and WR-1's
- * termination reader. If WR-2 later leaks while dark, the full mechanical,
- * decision, news, strategy, or termination trace below changes.
+ * ─── WHY THIS FILE WAS RE-SCOPED (chair ruling, LANE DG, vetoable) ────────────
+ * The cycle-22 OV verifier found this golden's three `wr2-*` rows red and ruled:
  *
- * Two dark configurations are constitutional equivalents:
- *   - dispositionChannelsEnabled ABSENT
- *   - dispositionChannelsEnabled explicitly false
+ *   "cycle-22's OV verifier CONFIRMED tests/property/dispositionChannelsDormancy
+ *    Golden.test.js's three red wr2-* rows are a MIS-SCOPED GOLDEN, not a WR-2
+ *    dormancy leak — the fixture was captured once @ 7796954e and never re-recorded,
+ *    and the flag's dormancy is genuinely clean. RULED: re-scope the golden lawfully."
  *
- * Their projections are compared through the shared structural dormancy oracle.
- * The flag itself is removed from the projected rules (configuration spelling is
- * not behavior); every other world byte is retained. Dark runs must also preserve
- * the legacy disposition entry shape and emit none of WR-2's eight receipt kinds.
+ * THE MIS-SCOPING MECHANISM. The original manifest froze a sha256 over the ENTIRE
+ * evolved world of a dark run — every byte of worldState, regionalGraph, wizardNews,
+ * saves, and the full per-tick trace. That projection is moved by ANY war-engine
+ * change whatsoever, so the pin could never distinguish "WR-2 leaked while dark"
+ * from "WR-3..WR-8 shipped". It was a whole-engine snapshot wearing a flag-dormancy
+ * name, and after 162 commits it had become a pure false-positive generator.
  *
- * Capture (once, before production wiring):
+ * THE RE-DERIVATION (executed, not assumed). The capture-era tree @ 7796954e was
+ * checked out and driven through a byte-identical copy of this harness; it
+ * reproduced all three stored hashes EXACTLY, proving the manifest was honestly
+ * captured and the drift is engine evolution. A path-level diff of the two
+ * projections then showed, for all three rows:
+ *
+ *   - 578 differing leaves (389 changed / 175 added / 14 removed), of which
+ *     ZERO lie on a disposition-named path;
+ *   - `worldState.dispositionStats` BYTE-IDENTICAL capture-era vs HEAD, still
+ *     exactly {losses, score, wins} — no channel extension, no decoration;
+ *   - none of WR-2's eight receipt kinds present in either tree.
+ *
+ * The drift is WR-4/WR-5 and the news desk: `warTerminationReads` gained
+ * trajectory/books/homeFront/ruler bands, and pulse news gained beats such as
+ * `war_trajectory_losing`. All are ungated by `dispositionChannelsEnabled`.
+ *
+ * ─── THE CORRECTED SCOPE ──────────────────────────────────────────────────────
+ * Dormancy is a claim about the DIFFERENCE the flag makes, not about the absolute
+ * state of a world 162 commits ago. This file now fences it four ways, and only
+ * the first stores a fixture:
+ *
+ *   1. STATE GOLDEN, narrowed to WR-2's OWN footprint — the dispositionStats
+ *      ledger (its only persisted state) plus any WR-2-kind news. Unrelated
+ *      engine evolution cannot move it (measured: byte-identical across the 162
+ *      commits above); a channel extension, migration, or value drift while dark
+ *      moves it immediately.
+ *   2. DIFFERENTIAL byte-identity — ABSENT vs explicit-false over the WHOLE
+ *      projection. No fixture, so it never rots.
+ *   3. CODE-PATH DORMANCY — WR-2's cross-module entry points are proven not to
+ *      fire while dark. This replaces the one thing the frozen whole-world hash
+ *      uniquely covered (a feature that runs regardless of its flag) with a fence
+ *      that unrelated engine evolution cannot move.
+ *   4. GATE-POLARITY CENSUS — every production read of the flag is the strict
+ *      `=== true` form, so ABSENT and FALSE are identical BY CONSTRUCTION at the
+ *      decision sites (strategy, deployment, termination, coalition, treaty) that
+ *      no state pin can reach.
+ *
+ * Re-record (scope change only — see the ruling above):
  *   UPDATE_GOLDEN=1 npx vitest run tests/property/dispositionChannelsDormancyGolden.test.js
  */
 
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
-import { describe, expect, it } from 'vitest';
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
+import { describe, expect, it, vi } from 'vitest';
 
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
 import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
 
+/**
+ * Fence 3's recorder. Hoisted because `vi.mock` factories are hoisted above the
+ * imports; every wrapper below is a strict pass-through (rest-args in, original
+ * out), so instrumenting the modules cannot perturb a single byte of the runs the
+ * other fences measure.
+ */
+const wr2Calls = vi.hoisted(() => ({ litLedgerAdvances: 0, channelDeltaCollections: 0, transitionNewsWithWork: 0 }));
+
+vi.mock('../../src/domain/worldPulse/dispositionLedger.js', async (importOriginal) => {
+  const actual = /** @type {Record<string, any>} */ (await importOriginal());
+  return {
+    ...actual,
+    advanceDispositionChannels: (/** @type {any[]} */ ...args) => {
+      if (args[2]?.enabled === true) wr2Calls.litLedgerAdvances += 1;
+      return actual.advanceDispositionChannels(...args);
+    },
+  };
+});
+
+vi.mock('../../src/domain/worldPulse/dispositionDeltas.js', async (importOriginal) => {
+  const actual = /** @type {Record<string, any>} */ (await importOriginal());
+  return {
+    ...actual,
+    collectDispositionChannelDeltas: (/** @type {any[]} */ ...args) => {
+      wr2Calls.channelDeltaCollections += 1;
+      return actual.collectDispositionChannelDeltas(...args);
+    },
+  };
+});
+
+vi.mock('../../src/domain/worldPulse/dispositionNews.js', async (importOriginal) => {
+  const actual = /** @type {Record<string, any>} */ (await importOriginal());
+  return {
+    ...actual,
+    dispositionTransitionNewsEntries: (/** @type {any[]} */ ...args) => {
+      // realmVerbExecution calls this composer unconditionally and relies on an
+      // EMPTY transition list for its dormancy, so "never called" would be false.
+      // The true invariant is that it is never handed WR-2 work while dark.
+      if (Array.isArray(args[0]?.transitions) && args[0].transitions.length > 0) {
+        wr2Calls.transitionNewsWithWork += 1;
+      }
+      return actual.dispositionTransitionNewsEntries(...args);
+    },
+  };
+});
+
 const MANIFEST = resolve(process.cwd(), 'tests', 'fixtures', 'disposition-channels-dormancy-golden.json');
+const SRC_ROOT = resolve(process.cwd(), 'src');
+const SCOPE = 'wr2-owned-surface-v2';
 const NOW = '2026-01-01T00:00:00.000Z';
 const GRAIN = 'Bulk grain and foodstuffs';
 const IDS = ['iron', 'weak', 'granary', 'river', 'market'];
@@ -153,8 +237,8 @@ function liveTreaty() {
 }
 
 /**
- * A pre-WR2 world that exercises every legacy seam WR2 will later touch:
- * war outcome memory, strategy, WR1 termination, trade competition, and treaty state.
+ * A world that exercises every legacy seam WR2 touches: war outcome memory,
+ * strategy, WR1 termination, trade competition, and treaty state.
  * @param {string} seed
  * @param {'absent'|'false'} flagMode
  */
@@ -320,15 +404,37 @@ function driveTicks(seed, flagMode, ticks, interval) {
   return { campaign, saves, traces };
 }
 
+/**
+ * FENCE 2's projection: the whole evolved world, minus only the spelling of the
+ * flag under test. Correct for a DIFFERENTIAL comparison (both sides run on the
+ * same engine); it is precisely what must NOT be frozen into a fixture.
+ */
 function projectionFor(run) {
   const worldState = run.campaign.worldState || {};
   return normalizeForDormancy({
-    // Keep the whole evolved state, excluding only the spelling of the flag under test.
     worldState: { ...worldState, simulationRules: withoutWR2Flag(worldState.simulationRules) },
     regionalGraph: run.campaign.regionalGraph,
     wizardNews: run.campaign.wizardNews,
     saves: run.saves,
     traces: run.traces,
+  });
+}
+
+const isWR2Kind = (entry) => WR2_RECEIPT_KINDS.includes(entry?.kind) || WR2_RECEIPT_KINDS.includes(entry?.impactKind);
+
+/**
+ * FENCE 1's projection: WR-2's OWN footprint and nothing else — the dispositionStats
+ * ledger it is the sole writer of, and any news carrying one of its receipt kinds.
+ * Deliberately excludes the war engine's own evolving output, which is what made the
+ * superseded whole-world manifest unmaintainable.
+ */
+function wr2SurfaceProjection(run) {
+  const news = [];
+  for (const trace of run.traces) for (const entry of trace.news || []) if (isWR2Kind(entry)) news.push(entry);
+  for (const entry of run.campaign.wizardNews?.entries || []) if (isWR2Kind(entry)) news.push(entry);
+  return normalizeForDormancy({
+    dispositionStats: run.campaign.worldState?.dispositionStats || {},
+    wr2News: news,
   });
 }
 
@@ -343,7 +449,7 @@ function corpus() {
 }
 
 const keyOf = (row) => [row.seed, row.ticks, row.interval].join('|');
-const absentProjectionFor = (row) => projectionFor(driveTicks(row.seed, 'absent', row.ticks, row.interval));
+const darkRun = (row, flagMode = 'absent') => driveTicks(row.seed, flagMode, row.ticks, row.interval);
 
 function collectKindStrings(value, out = new Set()) {
   if (Array.isArray(value)) {
@@ -370,43 +476,99 @@ function assertLegacyDispositionShape(run) {
   }
 }
 
-describe('WR-2 disposition channels — pre-wiring dormancy golden', () => {
+// ── FENCE 4 — gate-polarity census over the real source tree ──────────────────
+
+/**
+ * Strip comments and string literals so an identifier inside PROSE — or inside an
+ * inline `/** @type *\/` cast, which is how treatyDisposition.js legitimately names
+ * the flag one line above its real gate — is not read as a gate.
+ */
+function codeResidue(line) {
+  const trimmed = line.trim();
+  if (trimmed.startsWith('*') || trimmed.startsWith('//') || trimmed.startsWith('/*')) return '';
+  return line
+    .replace(/\/\*[\s\S]*?\*\//g, ' ')
+    .replace(/'(?:[^'\\]|\\.)*'/g, "''")
+    .replace(/"(?:[^"\\]|\\.)*"/g, '""')
+    .replace(/`(?:[^`\\]|\\.)*`/g, '``')
+    .replace(/\/\/.*$/, '');
+}
+
+const FLAG = 'dispositionChannelsEnabled';
+const STRICT_READ = new RegExp(`${FLAG}\\s*===\\s*true`);
+const DECLARATION = new RegExp(`${FLAG}\\s*:\\s*(false|boolean)`);
+
+/** @returns {{strictReads:number, files:Set<string>, violations:string[]}} */
+function censusFlagGates(root, relativeTo) {
+  const out = { strictReads: 0, files: new Set(), violations: [] };
+  const walk = (dir) => {
+    for (const name of readdirSync(dir).sort()) {
+      const full = join(dir, name);
+      if (statSync(full).isDirectory()) { walk(full); continue; }
+      if (!/\.jsx?$/.test(name)) continue;
+      const text = readFileSync(full, 'utf8');
+      if (!text.includes(FLAG)) continue;
+      const rel = full.slice(relativeTo.length + 1);
+      text.split('\n').forEach((line, index) => {
+        const residue = codeResidue(line);
+        if (!residue.includes(FLAG)) return;
+        if (STRICT_READ.test(residue)) {
+          out.strictReads += 1;
+          out.files.add(rel);
+          return;
+        }
+        if (DECLARATION.test(residue)) return;
+        out.violations.push(`${rel}:${index + 1}: ${line.trim()}`);
+      });
+    }
+  };
+  walk(root);
+  return out;
+}
+
+describe('WR-2 disposition channels — dormancy fence (re-scoped, LANE DG)', () => {
   const rows = corpus();
 
   if (process.env.UPDATE_GOLDEN === '1') {
-    it('captures the pre-WR2 manifest from the current engine', () => {
-      const manifest = {};
-      for (const row of rows) manifest[keyOf(row)] = hashOf(absentProjectionFor(row));
+    it('re-records the WR-2-owned surface manifest from the current engine', () => {
+      const manifestRows = {};
+      for (const row of rows) manifestRows[keyOf(row)] = hashOf(wr2SurfaceProjection(darkRun(row)));
       if (!existsSync(dirname(MANIFEST))) mkdirSync(dirname(MANIFEST), { recursive: true });
-      writeFileSync(MANIFEST, `${JSON.stringify(manifest, Object.keys(manifest).sort(), 2)}\n`);
-      expect(Object.keys(manifest)).toHaveLength(rows.length);
+      const payload = { scope: SCOPE, rows: manifestRows };
+      writeFileSync(MANIFEST, `${JSON.stringify(payload, null, 2)}\n`);
+      expect(Object.keys(manifestRows)).toHaveLength(rows.length);
     }, 120_000);
     return;
   }
 
-  it('the pre-wiring manifest exists', () => {
-    expect(existsSync(MANIFEST), 'run the documented UPDATE_GOLDEN capture before WR2 wiring').toBe(true);
-  });
-
   const manifest = existsSync(MANIFEST) ? JSON.parse(readFileSync(MANIFEST, 'utf8')) : {};
 
-  it('covers the complete seed/tick/interval corpus', () => {
-    expect(Object.keys(manifest).sort()).toEqual(rows.map(keyOf).sort());
+  it('the WR-2-surface manifest exists at the re-scoped version', () => {
+    expect(existsSync(MANIFEST), 'run the documented UPDATE_GOLDEN re-record').toBe(true);
+    expect(manifest.scope, 'a manifest at the superseded whole-world scope must be re-recorded, not compared')
+      .toBe(SCOPE);
   });
 
-  it('reproduces every pre-wiring mechanical, decision, news, strategy, and termination trace', () => {
+  it('covers the complete seed/tick/interval corpus', () => {
+    expect(Object.keys(manifest.rows || {}).sort()).toEqual(rows.map(keyOf).sort());
+  });
+
+  // ── FENCE 1 ────────────────────────────────────────────────────────────────
+  it('reproduces the WR-2-owned surface: the ledger stays legacy and no WR-2 news is minted', () => {
     const drift = [];
     for (const row of rows) {
-      if (manifest[keyOf(row)] !== hashOf(absentProjectionFor(row))) drift.push(keyOf(row));
+      if (manifest.rows?.[keyOf(row)] !== hashOf(wr2SurfaceProjection(darkRun(row)))) drift.push(keyOf(row));
     }
     expect(drift).toEqual([]);
   }, 120_000);
 
-  it('ABSENT and explicit false are oracle-normalized exact equivalents across the corpus', () => {
+  // ── FENCE 2 ────────────────────────────────────────────────────────────────
+  it('ABSENT and explicit false are byte-identical across the whole projected world', () => {
     for (const row of rows) {
-      const absent = absentProjectionFor(row);
-      const explicitFalse = projectionFor(driveTicks(row.seed, 'false', row.ticks, row.interval));
+      const absent = projectionFor(darkRun(row, 'absent'));
+      const explicitFalse = projectionFor(darkRun(row, 'false'));
       expect(explicitFalse, keyOf(row)).toEqual(absent);
+      expect(hashOf(explicitFalse), `${keyOf(row)} canonical-form byte identity`).toBe(hashOf(absent));
     }
   }, 120_000);
 
@@ -422,4 +584,42 @@ describe('WR-2 disposition channels — pre-wiring dormancy golden', () => {
         `${flagMode}: the live treaty substrate survives the drive`).toBeTruthy();
     }
   }, 120_000);
+
+  // ── FENCE 3 ────────────────────────────────────────────────────────────────
+  it('code-path dormancy: no WR-2 channel entry point fires during a dark drive', () => {
+    wr2Calls.litLedgerAdvances = 0;
+    wr2Calls.channelDeltaCollections = 0;
+    wr2Calls.transitionNewsWithWork = 0;
+    for (const flagMode of ['absent', 'false']) {
+      for (const row of rows) darkRun(row, /** @type {'absent'|'false'} */ (flagMode));
+    }
+    expect(wr2Calls.litLedgerAdvances, 'dispositionLedger was advanced in LIT mode while the flag is dark').toBe(0);
+    expect(wr2Calls.channelDeltaCollections, 'the typed channel collector ran while the flag is dark').toBe(0);
+    expect(wr2Calls.transitionNewsWithWork, 'the transition news composer was handed WR-2 work while dark').toBe(0);
+  }, 120_000);
+
+  // ── FENCE 4 ────────────────────────────────────────────────────────────────
+  it('gate-polarity census: every production read of the flag is strict `=== true`', () => {
+    const census = censusFlagGates(SRC_ROOT, SRC_ROOT);
+    expect(census.violations, 'a non-strict gate makes ABSENT and FALSE diverge').toEqual([]);
+    // Non-vacuity: the census must actually be looking at the wired gates.
+    expect(census.strictReads).toBeGreaterThanOrEqual(10);
+    expect(census.files.size).toBeGreaterThanOrEqual(5);
+  });
+
+  it('the gate census is not vacuous: a loose gate is rejected', () => {
+    const loose = ['if (rules.dispositionChannelsEnabled) { lit(); }', `x = a.${FLAG} !== false;`];
+    for (const line of loose) {
+      const residue = codeResidue(line);
+      expect(residue.includes(FLAG) && !STRICT_READ.test(residue) && !DECLARATION.test(residue), line).toBe(true);
+    }
+    // …and the three NON-gate idioms are correctly not read as gates: docstring
+    // prose, a quoted rule name, and an inline JSDoc type cast.
+    expect(codeResidue(` * while ${FLAG} is active, the war threshold moves`).includes(FLAG)).toBe(false);
+    expect(codeResidue(`  rule: '${FLAG}',`).includes(FLAG)).toBe(false);
+    expect(codeResidue(`  const rules = /** @type {{${FLAG}?:unknown}} */ (ws?.simulationRules || {});`)
+      .includes(FLAG)).toBe(false);
+    // The real gate on the very next line still counts.
+    expect(STRICT_READ.test(codeResidue(`  return rules.${FLAG} === true;`))).toBe(true);
+  });
 });
