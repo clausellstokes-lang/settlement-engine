@@ -308,9 +308,11 @@ describe('warCausalBrief — the dramatic-irony read-model', () => {
     const brief = warCausalBrief(r.worldState, 'a', 'b');
     expect(brief.peacePresent).toBeGreaterThanOrEqual(REASON_TUNING.IRONY_DYING_AT);
     expect(brief.line).toBe(`${brief.peacePresent} of ${PEACE_REASON_TYPES.length} peace reasons now present; this war is dying`);
-    // Fifteen: WR-6 adds alliance_obligation↔obligation_discharged.
-    expect(brief.peace.length).toBe(15);
-    expect(brief.war.length).toBe(15);
+    // Sixteen: WR-6 added alliance_obligation↔obligation_discharged; WR-8's
+    // CR-WR8-C added atrocity_answer↔atrocity_atoned. The brief renders EVERY
+    // taxonomy member, present or absent, so this length is the catalog's.
+    expect(brief.peace.length).toBe(16);
+    expect(brief.war.length).toBe(16);
     // Present rows carry their receipts + birth ticks; absent rows read empty.
     const present = brief.peace.find((row) => row.type === 'exhaustion');
     expect(present.present).toBe(true);
@@ -331,7 +333,7 @@ describe('warCausalBrief — the dramatic-irony read-model', () => {
     expect(brief.peacePresent).toBeLessThan(REASON_TUNING.IRONY_DYING_AT);
     expect(brief.line).not.toMatch(/dying/);
     const dark = warCausalBrief({ simulationRules: {} }, 'a', 'b');
-    expect(dark.line).toBe('0 of 15 peace reasons now present');
+    expect(dark.line).toBe('0 of 16 peace reasons now present');
     expect(dark.peacePresent).toBe(0);
     expect(dark.warPresent).toBe(0);
   });

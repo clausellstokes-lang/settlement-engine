@@ -18,11 +18,10 @@ import { clamp01 } from '../../kernel/math.js';
 import { stablePart } from './stablePart.js';
 import { buildPressureSummary, settlementStrength } from './relationshipEvolution.js';
 import { aggregateReasons01, topReasons, warReasonFactor, warReasonsFor, REASON_TUNING } from './warReasons.js';
-import {
-  PEACE_REASON_TYPES,
-  WAR_REASON_TYPES,
-  isWarReasonType,
-} from './warReasonTaxonomy.js';
+// PEACE_REASON_TYPES / WAR_REASON_TYPES left with the three cause tables and their
+// module-load totality assertions (warTerminationCauseTables.js); this file's own
+// remaining need for the taxonomy is the persisted-type guard.
+import { isWarReasonType } from './warReasonTaxonomy.js';
 import { patronRefOf } from './sacredClaim.js';
 import {
   buildPatronCounterforceIndex,
@@ -80,66 +79,19 @@ function codepointCompare(a, b) {
   return a < b ? -1 : a > b ? 1 : 0;
 }
 
-/**
- * Every shipped cause has an explicit dissolution read.  Most are state-derived:
- * their absence from the current directed reason fold is their death condition.
- * The two exceptions add the amendments' stronger, named tests.
- */
-export const WAR_CAUSE_DISSOLUTION = Object.freeze({
-  grievance: 'live_reason_absent',
-  revanchism: 'live_reason_absent',
-  resource_pressure: 'live_reason_absent',
-  treaty_default: 'live_reason_absent',
-  encirclement: 'live_reason_absent',
-  legitimacy_hunger: 'live_reason_absent',
-  corruption_exposed: 'live_reason_absent',
-  foreign_clash: 'live_reason_absent',
-  fear_of_dominance: 'live_reason_absent',
-  ingratitude_debt: 'live_reason_absent',
-  dependency_by_design: 'live_reason_absent',
-  opportunism: 'weakness_or_patron_changed',
-  sacred_claim: 'patron_anchor_changed',
-  lineage_claim: 'lineage_edge_or_living_child_changed',
-  alliance_obligation: 'alliance_or_origin_episode_changed',
-});
-
-/** Closed reader-language clauses for a casus that no longer survives its live read. @type {Readonly<Record<string, string>>} */
-const DISSOLVED_CAUSE_PROSE = Object.freeze({
-  grievance: 'the court no longer recognizes the grievance that raised its banners',
-  revanchism: 'the lost-land claim no longer commands the court',
-  resource_pressure: 'the quarrel over scarce stores no longer commands the court',
-  treaty_default: 'the broken-pact charge no longer commands the court',
-  encirclement: 'the fear of encirclement no longer commands the court',
-  legitimacy_hunger: 'the throne no longer needs a foreign enemy to steady its seat',
-  corruption_exposed: 'the demanded reckoning for a rotten court has lost its force',
-  foreign_clash: 'the proxy quarrel no longer commands the court',
-  fear_of_dominance: 'the feared rival no longer threatens the balance',
-  ingratitude_debt: 'the remembered debt of aid no longer binds the court',
-  dependency_by_design: 'the market leash that raised the banners has broken',
-  opportunism: 'the court no longer sees an undefended prize',
-  sacred_claim: 'a god named when the banners rose is no longer worshipped from the same throne',
-  lineage_claim: 'the living family edge that raised the banners no longer supports the claim',
-  alliance_obligation: 'the sworn call or the original quarrel that raised these banners has ended',
-});
-
-/** Closed, number-free peace clauses for the WR-1 reader surface. */
-const TERMINATION_PEACE_PROSE = Object.freeze({
-  exhaustion: 'War-weariness is drawing the court toward a settlement.',
-  belief_convergence: 'The rival courts are beginning to read the conflict through the same account.',
-  economic_strangulation: 'The war is choking the roads and stores that sustain it.',
-  coalition_fracture: 'The coalition is thinning as allies leave the field.',
-  mediation: 'A neighbouring court is carrying terms both sides may hear.',
-  harvest_pressure: 'The needs of the coming harvest are drawing soldiers back toward their fields.',
-  realignment: 'A common danger is turning former enemies toward the same horizon.',
-  spheres_understanding: 'The rival sponsors are finding room to step back from the same quarrel.',
-  balance_restored: 'The feared imbalance has eased, taking urgency out of the war.',
-  debt_forgiven: 'An old debt of aid is being remembered as a gift again.',
-  bonds_of_commerce: 'Shared markets bind both courts to a peace neither can cheaply break.',
-  hopelessness: 'The court no longer believes victory lies down this road.',
-  common_rite: 'A shared rite offers both courts ground on which to stand.',
-  kinship_bond: 'The surviving family bond gives both courts a reason to step back.',
-  obligation_discharged: 'The alliance call has been discharged, leaving no sworn cause to continue the war.',
-});
+// ── THE CLOSED CAUSE TABLES (moved out; re-exported verbatim) ───────────────
+// WAR_CAUSE_DISSOLUTION, DISSOLVED_CAUSE_PROSE and TERMINATION_PEACE_PROSE now
+// live in warTerminationCauseTables.js together with the three module-load
+// totality assertions that guard them, because this file is FROZEN at its
+// baselined size and the sixteenth casus (CR-WR8-C) needed three rows it had no
+// room for. The public import surface is unchanged: WAR_CAUSE_DISSOLUTION is
+// re-exported here, exactly as tierResourceDynamics re-exports the tier applier
+// it lost to the same pressure.
+import {
+  DISSOLVED_CAUSE_PROSE,
+  TERMINATION_PEACE_PROSE,
+} from './warTerminationCauseTables.js';
+export { WAR_CAUSE_DISSOLUTION } from './warTerminationCauseTables.js';
 
 /** Closed qualitative projection used by every persisted term. */
 export const WAR_TERMINATION_BANDS = Object.freeze([
@@ -1091,17 +1043,3 @@ export function readWarTerminationForParty({
   return read.byAttacker.get(actor) || null;
 }
 
-// Executable totality assertion: adding a taxonomy member without a dissolution
-// mode is a module-load failure, not a silent perpetual war.
-if (Object.keys(WAR_CAUSE_DISSOLUTION).sort(codepointCompare).join('\u0000')
-  !== [...WAR_REASON_TYPES].sort(codepointCompare).join('\u0000')) {
-  throw new Error('WAR_CAUSE_DISSOLUTION must cover every war reason exactly once.');
-}
-if (Object.keys(DISSOLVED_CAUSE_PROSE).sort(codepointCompare).join('\u0000')
-  !== [...WAR_REASON_TYPES].sort(codepointCompare).join('\u0000')) {
-  throw new Error('DISSOLVED_CAUSE_PROSE must cover every war reason exactly once.');
-}
-if (Object.keys(TERMINATION_PEACE_PROSE).sort(codepointCompare).join('\u0000')
-  !== [...PEACE_REASON_TYPES].sort(codepointCompare).join('\u0000')) {
-  throw new Error('TERMINATION_PEACE_PROSE must cover every peace reason exactly once.');
-}

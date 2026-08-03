@@ -149,6 +149,12 @@ export const REASON_TUNING = Object.freeze({
    *  over this many ticks (max-merged with the organic score each tick), so `force ≡ organic`
    *  holds by construction — the decree lasts, decays visibly, and is never immortal. */
   DECREE_RAMP_TICKS: 8,
+  /** WR-8 / R2 THE ATROCITY-CASUS DECAY BAND (the volume's own named band). A razing
+   *  is a fixed fact about the past, so unlike every other cause here its fuel cannot
+   *  fade on its own — what fades is the outrage. Generational rather than seasonal:
+   *  the grandchildren of the burned city still have a cause, their grandchildren do
+   *  not. Nothing else reads this number. */
+  ATROCITY_DECAY_TICKS: 260,
 });
 
 // ── The typed catalogs + the §14.3 mirror table ─────────────────────────────
@@ -392,6 +398,69 @@ export function scoreAllianceObligation({ active = false } = {}) {
   return active
     ? { score: 1, receipt: 'A sworn ally remains in the field under the same living cause.' }
     : { score: 0, receipt: '' };
+}
+
+/**
+ * THE ATROCITY-COALITION CASUS (WR-8, amendment R2; CR-WR8-C) — "someone must
+ * stop them". The moral-outrage cause a RAZING raises in the courts that hear
+ * about it, and the cause R2's vengeance-license machinery is hung off.
+ *
+ * TWO DISCIPLINES ARE STRUCTURAL HERE, not commentary.
+ *
+ * (1) IT MINTS ON THE BELIEVED FACT, NEVER THE TRUE ONE (J-WR-7's
+ * mint-on-the-public-fact rule, and K3's spirit). The argument is a list of
+ * razings THE OBSERVER BELIEVES happened — belief arriving at news speed — so a
+ * court on the far side of the map does not acquire outrage the same tick the
+ * fire is lit, and a court that was lied to acquires it anyway. The scorer never
+ * consults world state; the caller hands it the observer's picture.
+ *
+ * (2) IT DECAYS ON ITS OWN BAND, which is the one thing this casus cannot
+ * inherit. Every other cause here is state-derived and decays because its
+ * underlying state fades; a razing is a FIXED FACT ABOUT THE PAST and would
+ * otherwise burn at full heat forever. What actually fades is the outrage, so
+ * the decay is explicit and banded — ATROCITY_DECAY_TICKS, the WR-8 band the
+ * volume names — and the score is the freshest believed razing's remaining heat.
+ * An atrocity older than the band scores zero and the record drops itself, which
+ * is how "the world moved on" is expressed without a second writer.
+ *
+ * THE FED-LATER SEAM, declared in the same idiom as `treaty_default` and
+ * `corruption_exposed` above: R's razing writer is the producer, and it does not
+ * exist yet. Until it lands the kernel passes no razings ⇒ 0 ⇒ no record ⇒
+ * byte-identical. The scorer is registered FIRST because the taxonomy is
+ * walker-enforced for totality and will not accept a member without one.
+ *
+ * @param {{
+ *   razings?: Array<{ razerId?: unknown, victimName?: unknown, tick?: unknown }>,
+ *   razerId?: unknown, tick?: unknown,
+ * }} args  razings the OBSERVER BELIEVES occurred; razerId the court being judged
+ * @returns {{ score: number, receipt: string }}
+ */
+export function scoreAtrocityAnswer({ razings, razerId, tick } = {}) {
+  if (!Array.isArray(razings) || razings.length === 0) return { score: 0, receipt: '' };
+  const now = Number(tick);
+  if (!Number.isFinite(now)) return { score: 0, receipt: '' };
+  const accused = String(razerId ?? '');
+  if (!accused) return { score: 0, receipt: '' };
+  let best = 0;
+  let victim = '';
+  for (const razing of razings) {
+    if (String(razing?.razerId ?? '') !== accused) continue;
+    const at = Number(razing?.tick);
+    if (!Number.isFinite(at)) continue;
+    const age = now - at;
+    if (age < 0) continue; // a razing the observer believes is still in the future is not news
+    const heat = clamp01(1 - age / REASON_TUNING.ATROCITY_DECAY_TICKS);
+    if (heat <= best) continue;
+    best = heat;
+    victim = String(razing?.victimName ?? '').trim();
+  }
+  if (best <= 0) return { score: 0, receipt: '' };
+  return {
+    score: clamp01(best),
+    receipt: victim
+      ? `${victim} was burned to the ground and its people killed in it. Someone must stop them.`
+      : 'A settlement was burned to the ground and its people killed in it. Someone must stop them.',
+  };
 }
 
 /**

@@ -153,7 +153,7 @@ describe('WR-1 opening pins and total dissolution table', () => {
 
   it('covers the taxonomy exactly and projects only the closed four bands', () => {
     expect(Object.keys(WAR_CAUSE_DISSOLUTION).sort()).toEqual([...WAR_REASON_TYPES].sort());
-    expect(Object.keys(WAR_CAUSE_DISSOLUTION)).toHaveLength(15);
+    expect(Object.keys(WAR_CAUSE_DISSOLUTION)).toHaveLength(16);
     expect(WAR_TERMINATION_BANDS).toEqual(['quiet', 'present', 'pressing', 'decisive']);
     expect([0, 0.2, 0.45, 0.7].map(warTerminationBand))
       .toEqual(['quiet', 'present', 'pressing', 'decisive']);

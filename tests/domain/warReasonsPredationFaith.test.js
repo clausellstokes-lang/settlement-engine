@@ -21,14 +21,14 @@ import {
   advanceWarReasons, warReasonsFor,
   scoreGrievance, scoreRevanchism, scoreResourcePressure, scoreTreatyDefault,
   scoreEncirclement, scoreLegitimacyHunger, scoreCorruptionExposed, scoreForeignClash,
-  scoreIngratitudeDebt, scoreDependencyByDesign, scoreAllianceObligation,
+  scoreIngratitudeDebt, scoreDependencyByDesign, scoreAllianceObligation, scoreAtrocityAnswer,
 } from '../../src/domain/worldPulse/warReasons.js';
 import {
   advancePeaceReasons, peaceReasonsFor,
   scoreExhaustion, scoreBeliefConvergence, scoreEconomicStrangulation,
   scoreCoalitionFracture, scoreMediation, scoreHarvestPressure, scoreRealignment,
   scoreSpheresUnderstanding, scoreDebtForgiven, scoreBondsOfCommerce,
-  scoreObligationDischarged,
+  scoreObligationDischarged, scoreAtrocityAtoned,
 } from '../../src/domain/worldPulse/peaceReasons.js';
 import {
   scoreOpportunism, scoreHopelessness, vulnerabilityTruthOf, perceivedVulnerabilityOf,
@@ -564,6 +564,13 @@ const WAR_WITNESSES = {
   sacred_claim: () => scoreSacredClaim({ standing: SCHISM_STANDING }).score,
   lineage_claim: () => scoreLineageClaim({ standing: LINEAGE_CLAIM_STANDING }).score,
   alliance_obligation: () => scoreAllianceObligation({ active: true }).score,
+  // WR-8 / CR-WR8-C. The witness hands the scorer a razing the observer BELIEVES
+  // happened THIS tick, which is the only shape that can make it fire: the decay
+  // band is the whole mechanism, so a witness dated at the band's far edge would
+  // score ~0 and this walker would call a live casus decoration.
+  atrocity_answer: () => scoreAtrocityAnswer({
+    razings: [{ razerId: 'b', victimName: 'Thornwall', tick: 40 }], razerId: 'b', tick: 40,
+  }).score,
 };
 
 /** @type {Record<string, () => number>} */
@@ -585,6 +592,7 @@ const PEACE_WITNESSES = {
   common_rite: () => scoreCommonRite({ standing: BROTHERS_STANDING }).score,
   kinship_bond: () => scoreKinshipBond({ standing: LINEAGE_BOND_STANDING }).score,
   obligation_discharged: () => scoreObligationDischarged({ discharged: true }).score,
+  atrocity_atoned: () => scoreAtrocityAtoned({ answered: true }).score,
 };
 
 describe('THE DIVERSITY WALKER — every reason CAN win, or this reds', () => {

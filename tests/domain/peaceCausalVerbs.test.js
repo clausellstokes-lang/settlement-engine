@@ -109,7 +109,7 @@ describe('DECLARE_CASUS — the war-side forceable verb', () => {
       const r = declareCasus(litWorld(), { fromId: 'a', toId: 'b', type, severity01: 0.5, tick: 1 });
       expect(r.ok, `${type} is decree-able`).toBe(true);
     }
-    expect(DECLARABLE_WAR_REASON_TYPES).toHaveLength(WAR_REASON_TYPES.length - 2);
+    expect(DECLARABLE_WAR_REASON_TYPES).toHaveLength(WAR_REASON_TYPES.length - 3);
   });
 });
 

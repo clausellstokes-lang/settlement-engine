@@ -12,7 +12,7 @@
   "src/domain/worldPulse/roadsKernel.js": 838,
   "src/domain/worldPulse/settlementStrategy.js": 812,
   "src/domain/worldPulse/warDeployment.js": 1412,
-  "src/domain/worldPulse/warTermination.js": 880,
+  "src/domain/worldPulse/warTermination.js": 818,
   "src/generators/npcGenerator.js": 1350,
   "src/store/settlementSlice.js": 994
 }

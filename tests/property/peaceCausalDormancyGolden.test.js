@@ -306,21 +306,27 @@ describe('peace-causal movers — lit-path anti-vacuity (§14: motive is state, 
     const a = attackers[0];
     const t = String(deployments[a].targetId);
     const brief = warCausalBrief(ws, a, t);
-    // THE TAXONOMY GREW 13 -> 15, AND THE DORMANCY GOLDEN DID NOT MOVE. Two war
-    // reasons and their two mirrors landed after this pin was written:
-    // `lineage_claim` <-> `kinship_bond` @ 526c5e31 (WR-3 LINEAGE CLAIM) and
+    // THE TAXONOMY GREW 13 -> 15 -> 16, AND THE DORMANCY GOLDEN HAS NEVER MOVED.
+    // Three war reasons and their three mirrors landed after this pin was written:
+    // `lineage_claim` <-> `kinship_bond` @ 526c5e31 (WR-3 LINEAGE CLAIM),
     // `alliance_obligation` <-> `obligation_discharged` @ b243d349 (WR-6 COALITION
-    // GRAPH), both in src/domain/worldPulse/warReasonTaxonomy.js. That is a LIT-PATH
-    // widening only: the denominator this line renders is PEACE_REASON_TYPES.length,
-    // read live, so the brief said "3 of 15" while the literal still said 13.
-    // The dormant manifest above reproduces UNCHANGED across all three configs, which
-    // is the fact worth recording -- the growth added zero keys and zero decision
-    // drift behind the gate, so no golden was re-recorded here.
+    // GRAPH), and `atrocity_answer` <-> `atrocity_atoned` (WR-8 / CR-WR8-C, THE
+    // ATROCITY-COALITION CASUS), all three in warReasonTaxonomy.js. Each is a
+    // LIT-PATH widening only: the denominator this line renders is
+    // PEACE_REASON_TYPES.length, read live, so the brief moved 15 -> 16 the moment
+    // the sixteenth pair registered. THE LITERAL BELOW IS DELIBERATELY A LITERAL --
+    // it is the one place the catalog's SIZE is pinned against the read model, and
+    // reading it from PEACE_REASON_TYPES would make the assertion prove that the
+    // list equals itself (the self-referential-pin class). So it is updated by hand,
+    // with the cause named, exactly as the two growths before it were.
+    // THE DORMANT MANIFEST ABOVE REPRODUCES UNCHANGED across all three configs, which
+    // is the fact worth recording -- the sixteenth pair added zero keys and zero
+    // decision drift behind the gate, and NO GOLDEN WAS RE-RECORDED HERE.
     // `\d+`, not `\d`: the numerator is a count that may legitimately reach 10 now
-    // that the taxonomy has 15 members. Only the denominator is being pinned.
-    expect(brief.line).toMatch(/^\d+ of 15 peace reasons now present/);
-    expect(brief.peace.length).toBe(15);
-    expect(brief.war.length).toBe(15);
+    // that the taxonomy has 16 members. Only the denominator is being pinned.
+    expect(brief.line).toMatch(/^\d+ of 16 peace reasons now present/);
+    expect(brief.peace.length).toBe(16);
+    expect(brief.war.length).toBe(16);
     expect(brief.peacePresent).toBeGreaterThan(0);
   }, 120_000);
 

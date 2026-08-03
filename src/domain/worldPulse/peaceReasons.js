@@ -106,6 +106,46 @@ export function scoreObligationDischarged({ discharged = false } = {}) {
 }
 
 /**
+ * THE ATROCITY ATONED (WR-8, amendment R2; CR-WR8-C) — the sixteenth mirror, and
+ * the half that makes R2's closed loop a CAUSE rather than a silence.
+ *
+ * WHY IT KEEPS THE ATROCITY AS ITS SUBJECT. The pair is `atrocity_answer` ↔
+ * `atrocity_atoned`, not "outrage" ↔ "satisfaction": what the record must be able
+ * to say is that THE ATROCITY was answered, because that is the fact the world
+ * reasons from afterwards. A court that merely stopped being angry has not atoned
+ * for anything, and the Herald would have no sentence to write.
+ *
+ * THE TWO ROADS IN, and R2 names both. `answered` is the JUST RAZING — the
+ * license was collected and the atrocity's answer executed, which is exactly why
+ * R2 forbids that razing from minting a fresh atrocity casus against the avenger
+ * (the closed loop: vengeance is a settlement, not a chain reaction). `razerGone`
+ * is the other road the amendment allows: the license is extinguished if the
+ * razer is destroyed by ANY other means, and a cause that cannot be prosecuted
+ * against anyone is discharged rather than left standing forever.
+ *
+ * FED LATER, like its war half: R's razing writer and R2's license ledger are the
+ * producers. Absent ⇒ 0 ⇒ no record ⇒ byte-identical.
+ *
+ * @param {{ answered?: unknown, razerGone?: unknown }} args
+ * @returns {{ score: number, receipt: string }}
+ */
+export function scoreAtrocityAtoned({ answered = false, razerGone = false } = {}) {
+  if (answered === true) {
+    return {
+      score: 1,
+      receipt: 'The burning has been answered in kind, and the cause it raised is discharged.',
+    };
+  }
+  if (razerGone === true) {
+    return {
+      score: 1,
+      receipt: 'The court that burned the city no longer stands; there is no one left to answer for it.',
+    };
+  }
+  return { score: 0, receipt: '' };
+}
+
+/**
  * BELIEF CONVERGENCE — THE BLAINEY READ (§1/§14.2 informational). marginSelf =
  * believed(self) − believed(foe), composed per side from readBeliefStrength.
  * Both-believe-winning ⇒ the margins share a sign ⇒ |sum| large ⇒ divergence
