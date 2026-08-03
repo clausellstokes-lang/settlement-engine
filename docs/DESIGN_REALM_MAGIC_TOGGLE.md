@@ -239,6 +239,42 @@ its ceiling, L3 is those two lines plus the withheld integration pins** (a munda
 realm's deployment record mints magicSupport 0; its magical and axis-less twins are
 byte-identical), which ran green before being withheld.
 
+#### ⛔ MG-3h L10–L12 — RECORDED STOP + PROPOSED DESIGN (2026-08-03, Fable; not a bug to re-find)
+
+L1–L9 are closed. **L10–L12 are NOT attempted**, and the reason is a substrate fact the
+register could not see when it ranked them "lowest load": L10's gate is a change to the
+signature of a CANONICAL DETECTOR, not a local edit.
+
+- **L10 (factionArchetypes.js:60 + power/factionCategories.js:62).** The arcane
+  name-regex mixes UNAMBIGUOUS tokens (`mage|arcane|wizard|sorcer|warlock|magister`)
+  with AMBIGUOUS ones (`tower|academy|college|sage`) — the second set is arcane only
+  where magic functions; a tower is masonry and a college is scholars. But
+  `factionArchetype(faction)` takes ONE argument and has 10+ consumers spanning
+  src/domain (factionProfile, rulingPower, rulingPowerCoup, dossier/powerStrata,
+  dossier/powerSupport, worldPulse/migrationKernel, worldPulse/supplyKernel) and
+  src/generators (factionRoles). Most receive a faction row with no settlement in scope,
+  so the world law is not reachable at those call sites without threading it through
+  every one. An OPT-IN second parameter would leave the leak half-closed at whichever
+  sites were not converted — the N−1 sweep that reads as a fix and is not one.
+- **PROPOSED (chair to rule):** split `NAME_RULES`' arcane entry into `ARCANE_CERTAIN`
+  and `ARCANE_AMBIGUOUS`; give `factionArchetype` an options bag defaulting to
+  magic-functioning; run a FULL consumer census of the 10+ sites in one wave, threading
+  the settlement's `magicLedger` where it exists and recording an explicit
+  exempt-with-reason for any site where it genuinely does not. MG-LAW-4 keeps the
+  certain tokens ungated — a faction literally named "Mages' Guild" in a mundane realm
+  is an authored oddity and the classifier is right to call it arcane.
+- **L11 (institutionProbability.js:90-95,174)** and **L12 (customContent.js:268-273)**
+  are genuinely small and were left with L10 only to keep the classifier wave whole —
+  all three are the same "a second spelling of the magic gate" class, and splitting them
+  across two waves is how the spellings drift apart again.
+
+WHY STOPPED RATHER THAN TAKEN: war volume §10.6 — a deviation an implementer believes
+necessary is proposed, never taken — and a 10-site contract change to a canonical
+detector is not a lane decision. It also could not be verified to this program's own
+standard right now: the working tree does not build (another lane's untracked
+`envoyInterceptionStage.js` imports a `targetCommissionedPlant` that exists nowhere), so
+no chunk- or build-side evidence is available for a change of that reach.
+
 ### MG-4 — THE MEASURE (realm-scope acceptance)
 
 The dead-magic discipline promoted to realm scope, all soak/gate-side:

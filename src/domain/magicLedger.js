@@ -31,6 +31,8 @@ export const ARCANE_INSTITUTION_PATTERN = /(tower|sanctum|college|conclave|circl
  * @property {'none'|'low'|'medium'|'high'} magicLevel  band canonicalized from the dial / legacy vocabulary
  * @property {boolean} magicExists   false in a world where magic does not function
  * @property {boolean} present       true once a real priorityMagic dial or magicLevel band backed it
+ * @property {{ token:string, assumed:string, reason:string }} [unknownBand]  MG-3g: present ONLY when a
+ *   band token was not recognised and had to be guessed — the receipt that ends the silent fold.
  */
 
 /** @type {MagicLedger} */
@@ -41,18 +43,44 @@ const NEUTRAL = Object.freeze({
   present: false,
 });
 
+/**
+ * THE CLOSED BAND VOCABULARY (finite-semantics law) — every token this ledger knows how
+ * to fold, canonical and legacy alike. Exported so a consumer or a walker can census it
+ * rather than re-deriving the list from the switch below and drifting.
+ */
+export const KNOWN_MAGIC_BAND_TOKENS = Object.freeze([
+  'none', 'low', 'medium', 'high',            // the canonical set getMagicLevel emits
+  'rare', 'moderate', 'common', 'pervasive',  // the legacy lens vocabulary, folded
+]);
+
+/** The value an unrecognised token folds to. Named because MG-3g made it observable. */
+export const UNKNOWN_BAND_FALLBACK = /** @type {'medium'} */ ('medium');
+
 // Fold the stale lens vocabulary (and any legacy saves) into getMagicLevel's canonical set.
 /**
+ * MG-3g (leak L9): the default arm swallowed ANY unrecognised token into 'medium' —
+ * SILENTLY. That silence has already cost this project once: the medium/moderate
+ * zero-supply incident this module's own header documents, where a whole band matched
+ * nothing and contributed zero for as long as nobody thought to look. A misspelling, a
+ * new authored vocabulary, or an import from another tool lands in the WIDEST band with
+ * nothing anywhere saying so, and 'medium' is the worst possible guess when the token
+ * actually meant 'none' — a dead-magic world reading as moderately magical.
+ *
+ * The fold itself is UNCHANGED (altering the fallback would be a live-behaviour change
+ * with an unmeasured blast radius, and is not this slice's business). What changes is
+ * that the guess is now RECEIPTED: the caller learns the token was not recognised and
+ * what was assumed, and can surface or certify it. Silence was the defect, not the value.
+ *
  * @param {string | undefined} level  raw band word from config/legacy save (callers guard non-empty; undefined folds to the default)
- * @returns {'none'|'low'|'medium'|'high'}
+ * @returns {{ band:'none'|'low'|'medium'|'high', unknownToken: string|null }}
  */
 function canonBand(level) {
   switch (level) {
-    case 'pervasive':            return 'high';
-    case 'common': case 'moderate': return 'medium';
-    case 'rare':                 return 'low';
-    case 'none': case 'low': case 'medium': case 'high': return level;
-    default:                     return 'medium'; // unknown non-empty band -> neutral midpoint
+    case 'pervasive':            return { band: 'high', unknownToken: null };
+    case 'common': case 'moderate': return { band: 'medium', unknownToken: null };
+    case 'rare':                 return { band: 'low', unknownToken: null };
+    case 'none': case 'low': case 'medium': case 'high': return { band: level, unknownToken: null };
+    default:                     return { band: UNKNOWN_BAND_FALLBACK, unknownToken: String(level) };
   }
 }
 
@@ -82,6 +110,19 @@ export function magicLedger(settlement) {
   // `hasPriority` (isNum predicate over cfg?.priorityMagic) guarantees a finite number here; TS cannot track the aliased optional-chain predicate.
   const priorityMagic = hasPriority ? (magicExists ? /** @type {any} */ (cfg).priorityMagic : 0) : (magicExists ? 50 : 0);
   // Prefer the granular dial (canonical vocabulary guaranteed); else fold a legacy band.
-  const magicLevel = hasPriority ? getMagicLevel(priorityMagic) : canonBand(rawBand);
-  return { priorityMagic, magicLevel, magicExists, present: true };
+  /** @type {{ band: 'none'|'low'|'medium'|'high', unknownToken: string|null }} */
+  const folded = hasPriority ? { band: getMagicLevel(priorityMagic), unknownToken: null } : canonBand(rawBand);
+  // MG-3g (leak L9): the unrecognised-token receipt rides as a CONDITIONAL key — present
+  // only when a fold actually guessed. Every well-formed settlement in the estate returns
+  // the exact same four-key object it always did, so no golden, snapshot or deep-equal
+  // moves; only a save carrying a band nobody taught this ledger gains the fifth key.
+  return folded.unknownToken === null
+    ? { priorityMagic, magicLevel: folded.band, magicExists, present: true }
+    : {
+      priorityMagic,
+      magicLevel: folded.band,
+      magicExists,
+      present: true,
+      unknownBand: { token: folded.unknownToken, assumed: folded.band, reason: 'unrecognised magic band token folded to the neutral midpoint' },
+    };
 }
