@@ -323,6 +323,25 @@ authored here so "SP-N landed" resolves corpus-wide.]
   dismissal. The causal annex gains the SUBHEADER register (one plain
   form per kind — clarity prose, distinct from both headline and
   telling); the annex header states Herald exclusivity.
+  **[AMENDED 2026-08-03 (owner order) — THE HERALD INDEX:]** headlines
+  are SEARCHABLE by typed facet: settlement (the address chain), NPC,
+  faction/house, institution, good, service, route, treaty/war/arc,
+  desk/kind, and time band. THE INDEX LAW: the index derives from TYPED
+  ENTITY REFS recorded at mint — the SAME slot fills that render the
+  prose ({settlement},{npc},{house},{good}...) are recorded as ids on
+  the entry, so the sentence and its searchability are ONE record that
+  cannot drift; free-text search matches rendered prose, faceted search
+  matches refs ONLY (finite semantics — never name-regex entity
+  inference). This closes the recorded wizard-news id gap as LAW: every
+  kind's mint declares its entity-ref slots or the registration walker
+  reds. THE AUDIENCE LAW BINDS THE INDEX: covert/DM-only entries never
+  appear in a projection's search the projection could not read
+  (includeCovert discipline; search is a view, never a leak — the
+  fail-closed pin is the hardest). Organization: results grouped by desk
+  and time band, entity pages deep-link both ways (the dossier's entity
+  panels link to "their headlines"; every headline's entities link back
+  to their panels — the dossier round-trip extended to the newspaper).
+  Display-side, derived, no engine state.
 - **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion + the
   mode-speed table (J-D11(b)) landed as spine infrastructure ahead of all six.
 - **SP-8 THE AGE LAYER [CORRECTED 2026-08-02 (fp-audit) — new, per the

@@ -120,6 +120,15 @@ volumes corrected @ 36862650 + fdf43790):
     J-GR-15 instrument, COUPLINGS CPL-12 scoping) are recorded in its §10 —
     build on none by assumption. J-CT-1..34 vetoable; the story canon + the
     history shelf are fixture/pool obligations at build.
+24. **THE HERALD CAUSAL VOICE + SURFACE + INDEX** (SP-6's 2026-08-03
+    amendment block: the causal grammar, two registers + subheader, the
+    four-tier entry, rumor links upward, the popup convention, the search
+    index) — with the causal annex (RECEIPT_POOLS_CAUSAL.md) + the
+    deepened/legacy annexes when their runs land. Herald-exclusive; the
+    index's typed-ref law closes the recorded wizard-news id gap
+    (entity-ref slots at every mint, walker-gated); audience projection
+    binds search fail-closed. Wiring rides CW-1 (the braid) + the Herald
+    composers; lit-kind prose shifts under the recorded-ruling pattern.
 23. **THE REALM MAGIC TOGGLE** (DESIGN_REALM_MAGIC_TOGGLE.md, 2026-08-02) —
     MG-1 the pre-generation modal + fourth realm knob → MG-2 the projection
     into every member's config at mint (the core: one spread, whole-lifecycle
