@@ -12,6 +12,7 @@ import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import FounderBadge from '../primitives/FounderBadge.jsx';
 import FounderCreditToggle from './FounderCreditToggle.jsx';
+import FounderChairBio from './FounderChairBio.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, swatch } from '../theme.js';
 import Section from './AccountSection.jsx';
@@ -177,6 +178,11 @@ export default function AccountProfileSection({
         {/* Founder-only: opt in to the public credits roll (170). Self-gates +
             hides itself when the migration is undeployed. */}
         <FounderCreditToggle />
+        {/* Chair-holders only: the founder's own line on their plate in the
+            Founders' Hall. Same self-gating discipline as the toggle above — it
+            EXISTS only for an account that holds a chair (the presence law), and
+            hides itself while the chair schema is undeployed. */}
+        <FounderChairBio />
         <Button
           variant="primary"
           size="md"
