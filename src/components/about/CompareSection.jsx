@@ -14,7 +14,7 @@
  * The copy is byte-identical to the retired tab — the split moved it, never
  * rewrote it.
  */
-import { GOLD, INK, SECOND as SEC, BORDER as BOR, CARD, serif_, FS } from '../theme.js';
+import { GOLD, INK, SECOND as SEC, BORDER as BOR, CARD, serif_, FS, ANCHOR_OFFSET } from '../theme.js';
 import { anchorFor } from '../../lib/aboutMapping.js';
 
 function Insight({ heading, children }) {
@@ -39,7 +39,12 @@ function Tip({ children }) {
 
 export default function CompareSection() {
   return (
-    <section id={anchorFor('compare')} style={{ maxWidth: 760, margin: '40px auto 0' }}>
+    // scrollMarginTop (theme.js ANCHOR_OFFSET, 84): #how-we-compare is the busiest
+    // inbound anchor on this page — every /compare, /compare-chatgpt,
+    // /compare-worldographer and /compare-kanka URL in the world redirects onto it —
+    // so a landing that parks the heading under the sticky ribbon is exactly the
+    // link equity the redirect was built to keep.
+    <section id={anchorFor('compare')} style={{ maxWidth: 760, margin: '40px auto 0', scrollMarginTop: ANCHOR_OFFSET }}>
       <h2 style={{ fontFamily:serif_, fontSize:FS['22'], fontWeight:600, color:INK,
         margin:'0 0 14px', lineHeight:1.2 }}>
         How SettlementForge compares

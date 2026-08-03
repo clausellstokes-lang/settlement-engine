@@ -31,7 +31,7 @@
 
 import {
   GOLD, GOLD_TXT, INK, SECOND as SEC, MUTED as MUT, BORDER as BOR, CARD,
-  serif_, sans, FS, SLATE, SLATE_DEEP, PROSE_MAX,
+  serif_, sans, FS, SLATE, SLATE_DEEP, PROSE_MAX, ANCHOR_OFFSET,
 } from '../theme.js';
 import { COMPENDIUM_DATA as CD } from '../../domain/compendium/generated/compendiumData.generated.js';
 import { RETENTION_MONTHS } from '../../config/entitlementLadder.js';
@@ -44,9 +44,17 @@ import { anchorFor } from '../../lib/aboutMapping.js';
 // ── Presentational helpers ───────────────────────────────────────────────────
 const PROSE = { fontSize: FS.md, color: SEC, lineHeight: 1.75, fontFamily: sans };
 
+// THE ANCHOR LANDING OFFSET (theme.js ANCHOR_OFFSET, 84). Every band carries a
+// PUBLISHED `#anchor`: the six manifesto fragments are live URLs, and /how-to?tab=
+// and /compare* deep links are translated onto them. The desktop ribbon is sticky at
+// top:0, so without a scroll margin each of those landings parks its <h2> UNDERNEATH
+// the chrome — the reader arrives at a URL that names the section and a viewport that
+// hides its heading. The guide page answered this at the split; this page did not,
+// and all seven of its anchors were landing blind until the repair tail.
 function Band({ id, eyebrow, title, children, first = false }) {
   return (
-    <section id={id} style={{ maxWidth: PROSE_MAX, margin: '0 auto', padding: first ? '4px 0 0' : '40px 0 0' }}>
+    <section id={id} style={{ maxWidth: PROSE_MAX, margin: '0 auto', scrollMarginTop: ANCHOR_OFFSET,
+      padding: first ? '4px 0 0' : '40px 0 0' }}>
       {eyebrow && (
         <div style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.14em',
           textTransform: 'uppercase', color: GOLD_TXT, marginBottom: 6 }}>{eyebrow}</div>

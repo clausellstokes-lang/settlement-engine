@@ -33,6 +33,10 @@ import {
   anchorFor, destinationForLegacyTab, destinationForLegacySearch, unitsForView,
 } from '../../src/lib/aboutMapping.js';
 import { ROUTES, NAV, isKnownView, viewToPath, redirectForView } from '../../src/lib/routes.js';
+// The guide's hand-keyed nav blurb table. Imported (rather than DOM-sniffed) because
+// the pin below has to see its KEY SET, which no rendered subtitle can show: a missing
+// key renders an empty string, not a hole a DOM assertion can name.
+import { SECTION_BLURBS } from '../../src/components/HowToUse.jsx';
 
 const read = (p) => readFileSync(resolve(process.cwd(), p), 'utf-8');
 
@@ -421,17 +425,120 @@ describe('About split — §3 the in-page section nav (the MAY, ruled BUILD)', (
     }
   });
 
+  /**
+   * THE SENTENCE RUNG IS A TOTALITY — the hand-keyed-side-table hole.
+   *
+   * The nav card's second line is `SECTION_BLURBS[u.id]`, where `u` comes from the
+   * manifest but the TABLE does not: it is hand-keyed in HowToUse.jsx with nothing
+   * binding the two key sets. A missing key is therefore not a throw and not even a
+   * visible break — React renders `undefined` as nothing, so the card keeps its
+   * heading and silently loses its sentence, which is the legibility law's middle
+   * rung (glance → sentence → table) going dark on one section.
+   *
+   * This is not hypothetical: an executed negative control deleted the `ref` line and
+   * ALL 29 pins in this file stayed green while the Reference card rendered an empty
+   * subtitle. Both directions are asserted — a missing key is a dark card, an EXTRA
+   * key is a blurb written for a section this page does not render (the state a
+   * renamed or re-homed unit leaves behind).
+   */
+  it('the blurb table is keyed EXACTLY by the guide\'s manifest units (both directions)', () => {
+    const expected = unitsForView(ABOUT_GUIDE_VIEW).map((u) => u.id);
+    expect([...Object.keys(SECTION_BLURBS)].sort(), 'SECTION_BLURBS key set').toEqual([...expected].sort());
+    for (const id of expected) {
+      expect(SECTION_BLURBS[id], `blurb for "${id}" must be real prose`).toMatch(/\S/);
+    }
+  });
+
+  it('every nav card RENDERS its sentence rung, and it is the one the table holds', async () => {
+    // The DOM half of the pin above: the table can be complete and still not reach
+    // the card (a dropped prop, a re-keyed lookup). navLinks() proves the cards exist
+    // before any of this is asked of them.
+    const { container } = await renderGuide();
+    const byAnchor = new Map(unitsForView(ABOUT_GUIDE_VIEW).map((u) => [u.anchor, u]));
+    for (const a of navLinks(container)) {
+      const anchor = a.getAttribute('href').slice(1);
+      const unit = byAnchor.get(anchor);
+      expect(unit, `nav card #${anchor} is not a manifest unit`).toBeTruthy();
+      // children[1] is the card's subtitle line (children[0] is the serif label).
+      const sentence = a.children[1];
+      expect(sentence, `#${anchor} card has no second line to carry a sentence`).toBeTruthy();
+      expect(sentence.textContent, `#${anchor} renders an EMPTY sentence rung`).toMatch(/\S/);
+      expect(sentence.textContent, `#${anchor} sentence`).toBe(SECTION_BLURBS[unit.id]);
+    }
+  });
+
   it('the nav lands its target CLEAR of the sticky header, the way the Compendium does', async () => {
     // App's ribbon is `position:'sticky', top:0` (App.jsx), so a bare fragment jump
     // parks the section heading UNDERNEATH it. The Compendium answers this with
-    // scroll-margin-top (its ANCHOR_SCROLL_MARGIN, 84). The guide derives the same
-    // 84 from the chrome token it measures — CHROME.headerDesktop (60) + SP.xxl
-    // (24) — so the two surfaces cannot drift apart through a copied magic number.
+    // scroll-margin-top (its ANCHOR_SCROLL_MARGIN, 84). Both About pages read the
+    // same 84 from theme.js's ANCHOR_OFFSET, itself derived from the chrome token it
+    // measures — CHROME.headerDesktop (60) + SP.xxl (24) — so the surfaces cannot
+    // drift apart through a copied magic number.
     const { container } = await renderGuide();
     for (const u of unitsForView(ABOUT_GUIDE_VIEW)) {
       const el = container.querySelector(`#${u.anchor}`);
       expect(el.style.scrollMarginTop, `#${u.anchor} scroll margin`).toBe('84px');
     }
+  });
+});
+
+describe('About split — the anchor landing, on the OTHER page', () => {
+  /**
+   * THE SAME DEFECT, THE PAGE THE GUIDE'S PIN COULD NOT SEE.
+   *
+   * /about/what-this-is publishes SEVEN anchors and none of them carried a scroll
+   * margin: six manifesto bands (howto/AboutManifesto.jsx) plus the positioning
+   * ladder (about/CompareSection.jsx). Every one is a landing the product actively
+   * sends readers to — the six are live URL fragments, and the whole /compare* family
+   * redirects onto #how-we-compare — so each was arriving with its <h2> under the
+   * sticky ribbon: the right page, the right scroll position, an invisible heading.
+   *
+   * The guide's pin above could never have caught it: it iterates that page's units
+   * only. This pin is its twin, and it names the OWNING COMPONENT of each anchor so a
+   * failure says which file lost its margin rather than only which URL broke.
+   */
+  const OWNER = Object.freeze({
+    'what-this-is': 'howto/AboutManifesto.jsx',
+    'the-premise': 'howto/AboutManifesto.jsx',
+    'the-covenant': 'howto/AboutManifesto.jsx',
+    'how-it-works': 'howto/AboutManifesto.jsx',
+    'where-the-ai-fits': 'howto/AboutManifesto.jsx',
+    'examine-it': 'howto/AboutManifesto.jsx',
+    'how-we-compare': 'about/CompareSection.jsx',
+  });
+
+  it('every What this Is anchor lands CLEAR of the sticky header', async () => {
+    const units = unitsForView(ABOUT_WHAT_VIEW);
+    // LIVENESS: the loop below is vacuous over an empty unit list, and the OWNER
+    // table is a second truth about which components render these anchors — bind
+    // both to the manifest before asking anything of the DOM.
+    expect(units.map((u) => u.anchor).sort(), 'the page\'s anchor set').toEqual(Object.keys(OWNER).sort());
+    const { container } = await renderWhatThisIs();
+    for (const u of units) {
+      const el = container.querySelector(`#${u.anchor}`);
+      expect(el, `#${u.anchor} is not rendered at all`).toBeTruthy();
+      expect(
+        el.style.scrollMarginTop,
+        `#${u.anchor} (rendered by ${OWNER[u.anchor]}) has no anchor scroll margin —`
+        + ` a deep link to it parks the heading under the sticky ribbon`,
+      ).toBe('84px');
+    }
+  });
+
+  it('both pages land on the SAME measurement (one token, not two spellings)', async () => {
+    // The two pages are three components deep between them; the only thing keeping
+    // their landings equal is that they read one exported token. Assert the equality
+    // itself, so a future edit that hardcodes 84 on one side reds here even while
+    // both per-page pins above stay green.
+    const guide = (await renderGuide()).container;
+    const guideMargins = unitsForView(ABOUT_GUIDE_VIEW)
+      .map((u) => guide.querySelector(`#${u.anchor}`).style.scrollMarginTop);
+    cleanup();
+    const what = (await renderWhatThisIs()).container;
+    const whatMargins = unitsForView(ABOUT_WHAT_VIEW)
+      .map((u) => what.querySelector(`#${u.anchor}`).style.scrollMarginTop);
+    expect(new Set([...guideMargins, ...whatMargins]), 'one measurement across both pages')
+      .toEqual(new Set(['84px']));
   });
 });
 

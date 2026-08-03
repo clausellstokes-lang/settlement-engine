@@ -34,7 +34,7 @@
  *
  * ZERO EAGER. Lazy route (AppViews registers it via lazy()).
  */
-import { GOLD, GOLD_TXT, INK, SECOND as SEC, BORDER as BOR, PAGE_MAX, CHROME, SP, serif_, FS, swatch } from './theme.js';
+import { GOLD, GOLD_TXT, INK, SECOND as SEC, BORDER as BOR, PAGE_MAX, ANCHOR_OFFSET, serif_, FS, swatch } from './theme.js';
 import { ANON_MAX_SIZE_LABEL } from '../config/tierFacts.js';
 import { useFlag } from '../lib/flags.js';
 import Page from './primitives/Page.jsx';
@@ -55,15 +55,15 @@ import { VoicedConceptIntro, VOICED_HEADER } from './howto/HandbookVoiced.jsx';
 const COLS = (col = 340) => ({ columnWidth: `${col}px`, columnGap: '22px' });
 const NO_BREAK = { breakInside: 'avoid', WebkitColumnBreakInside: 'avoid' };
 
-// THE ANCHOR LANDING OFFSET. The desktop ribbon is `position:'sticky', top:0`
-// (its module is moving under the LD nav program, so this names the ribbon rather
-// than a file), so a fragment jump — a SectionNav click, a translated `?tab=` deep link, or
-// useAboutHashScroll's scrollIntoView — parks the section heading UNDERNEATH the
-// chrome unless the target carries a scroll margin. DERIVED from the chrome token
-// rather than copied: 60 + 24 = 84, byte-equal to the Compendium's own
-// ANCHOR_SCROLL_MARGIN, so the two anchor surfaces share a measurement instead of
-// a magic number that can drift on one side only.
-const ANCHOR_OFFSET = CHROME.headerDesktop + SP.xxl;
+// THE ANCHOR LANDING OFFSET is theme.js's ANCHOR_OFFSET (imported above). The
+// desktop ribbon is `position:'sticky', top:0` (its module is moving under the LD
+// nav program, so this names the ribbon rather than a file), so a fragment jump — a
+// SectionNav click, a translated `?tab=` deep link, or useAboutHashScroll's
+// scrollIntoView — parks the section heading UNDERNEATH the chrome unless the target
+// carries a scroll margin. The derivation moved to theme.js (beside CHROME, the
+// measurement it comes from) when the SAME defect was found on /about/what-this-is:
+// three pages re-deriving one sum is three chances to drift, and the second page's
+// sections carried no margin at all.
 
 /**
  * A guide section: the stable anchor from the mapping manifest plus the standard
@@ -84,7 +84,15 @@ function GuideSection({ unit, heading, children }) {
 // law (glance → sentence → table), keyed by mapping-manifest unit id. Every line
 // restates copy the section itself already makes; the nav makes no claim of its
 // own, so it can never drift from the engine the way a summary would.
-const SECTION_BLURBS = Object.freeze({
+//
+// EXPORTED FOR ITS TOTALITY PIN. This is a HAND-KEYED SIDE TABLE beside the mapping
+// manifest: the nav reads `SECTION_BLURBS[u.id]` for a `u` that comes from the
+// manifest, so a missing key renders an EMPTY subtitle rather than throwing — a
+// silent hole no DOM assertion over the nav noticed (an executed negative control
+// deleted the `ref` line and all 29 About-split pins stayed green). The pin in
+// tests/components/aboutSplit.test.jsx binds these keys to unitsForView(
+// ABOUT_GUIDE_VIEW) in BOTH directions, which is why the table is exported at all.
+export const SECTION_BLURBS = Object.freeze({
   quick: 'The sixty-second path to a first settlement, and the idea underneath it.',
   power: 'Sliders, stress conditions, neighbour links, and the campaign library.',
   living: 'The premium layer: how a whole region keeps moving between sessions.',

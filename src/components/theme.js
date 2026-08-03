@@ -153,6 +153,26 @@ export const CHROME = Object.freeze({
 });
 
 /**
+ * ANCHOR_OFFSET — the scroll-margin-top an in-page `#anchor` target must carry.
+ *
+ * The desktop ribbon is `position:'sticky', top:0`, so a fragment jump (a link
+ * click, a translated deep link, or a programmatic `scrollIntoView`) parks the
+ * target heading UNDERNEATH the chrome unless the target names a scroll margin.
+ * DERIVED from the chrome token rather than copied — 60 + 24 = 84 — so raising
+ * the header height moves every anchor landing with it.
+ *
+ * It lives here, beside the measurement it is derived from, because more than one
+ * page family needs it: the About family's two pages (the guide's five sections,
+ * the manifesto's six bands, the positioning ladder) all read this one export
+ * instead of each re-deriving the same sum. DEFERRED, DOCUMENTED, NOT A BUG TO
+ * RE-FIND: compendium/registrySlug.js still carries its own `ANCHOR_SCROLL_MARGIN
+ * = 84` literal for the Compendium's anchors. It is byte-equal by construction and
+ * pinned at 84 on both sides, but it is a second spelling; folding the Compendium
+ * onto this token is a separate lane (it touches four compendium components).
+ */
+export const ANCHOR_OFFSET = CHROME.headerDesktop + SP.xxl;
+
+/**
  * bottomClearance — safe-area-aware bottom offset for fixed/sticky mobile
  * overlays. Adds the device home-indicator inset to a base px clearance so a
  * FAB, nudge, footer, or scroll control always sits clear of BOTH the bottom
