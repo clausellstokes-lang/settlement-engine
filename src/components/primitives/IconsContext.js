@@ -25,13 +25,25 @@ import { createContext, useContext } from 'react';
  *   carry NO icon channel at all (color + uppercase text label only) —
  *     StateBadge, PhaseBadge, CanonBadge
  *
- * THE ONE PRIMITIVE THIS GATE CANNOT CLOSE — IconButton. Its entire child is
- * `<Icon size={s.icon} />`: it is icon-ONLY by construction, so suppressing the
- * glyph leaves an empty labelled box, not a quieter control. Its ~70 call sites
- * therefore still render lucide, and every one of them is a frozen row in the
- * lucideTotality ratchet. Closing it needs a UX shape the chair has not picked
- * (unicode text twin per call site vs. relaxing the fixed box and rendering the
- * required `label` as text) — see the lane LU commit body's STOP report.
+ * ICONBUTTON — CLOSED (lane LU-2), and the reason is recorded here because the
+ * previous version of this comment declared it unclosable. It WAS icon-only by
+ * construction: its entire child was `<Icon />`, so suppressing the glyph left
+ * an empty labelled box rather than a quieter control, and each of its ~70 call
+ * sites imported lucide directly to feed it.
+ *
+ * The chair picked the unicode text twin (2026-08-03), i.e. the shape Dialog,
+ * Badge and BottomSheet already use for their close affordance rather than the
+ * competing "render the required label as text", which would have varied the
+ * fixed box width and reflowed every toolbar in the product. IconButton now
+ * takes `glyph` alongside `Icon`; a call site passing `glyph` drops its lucide
+ * import and keeps its box, tone, focus ring, `title` and required
+ * `aria-label`. A call site that has not been converted passes no `glyph` and
+ * behaves exactly as before, so the sweep is incremental rather than a big bang.
+ *
+ * NOTE THAT ICONBUTTON IS NOT IN lucideTotality's GATE_PRIMITIVES: that list
+ * means "imports lucide but renders it only through the gate", and IconButton
+ * imports no lucide at all — it receives `Icon` as a prop. Its gate consultation
+ * is pinned separately by tests/components/iconButtonGlyphChannel.test.jsx.
  */
 export const IconsContext = createContext(false);
 

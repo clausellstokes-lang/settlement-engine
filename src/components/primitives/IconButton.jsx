@@ -12,8 +12,34 @@
  *
  * Tones map to the existing palette but are bounded so callers can't
  * style themselves out of accessibility (no "ghost on ghost" combos).
+ *
+ * THE ICONS-OFF CHANNEL (lane LU-2). This primitive used to be the ONE the
+ * icons-off gate could not close: its whole child was `<Icon />`, so
+ * suppressing the glyph left an empty labelled box rather than a quieter
+ * control, and its ~70 call sites each had to import lucide directly — every
+ * one of them a frozen row in tests/lint/lucideTotality.test.js.
+ *
+ * The cure is the shape Dialog/Badge/BottomSheet already use for their close
+ * affordance: a unicode TEXT twin, which IconsContext rules "not icons and
+ * unaffected by this gate". A caller passes `glyph` INSTEAD of `Icon` and
+ * drops its lucide import; the control keeps its box, its tone, its focus
+ * ring, its `title`, and its required `aria-label`, and renders a text mark
+ * where the glyph used to be. The affordance survives; only the artwork goes.
+ *
+ * THE RENDER RULE IS DELIBERATELY INCREMENTAL — read it before changing it:
+ *   - `glyph` supplied and icons are OFF  -> the text twin (the redesign's
+ *     state on every surface except the Realm map).
+ *   - `glyph` supplied and NO `Icon`      -> the text twin even inside the map
+ *     Provider. Fail-safe: a converted call site can never render an empty
+ *     box, whatever subtree it is mounted in.
+ *   - otherwise                           -> `Icon`, exactly as before.
+ * The last arm is why this change is safe to land ahead of the sweep: a call
+ * site that has NOT yet been converted passes no `glyph` and behaves
+ * byte-identically to the pre-LU-2 primitive. Conversion is per-call-site and
+ * reversible, never a big bang.
  */
 
+import { useIconsOn } from './IconsContext.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 
 const TONES = {
@@ -43,7 +69,11 @@ const SIZES = {
 
 /**
  * @param {Object} props
- * @param {React.ComponentType<{size?:number}>} props.Icon  lucide-react icon component
+ * @param {React.ComponentType<{size?:number}>} [props.Icon]  lucide-react icon
+ *   component. Optional since LU-2: pass `glyph` instead to render icons-off.
+ * @param {string} [props.glyph]              unicode TEXT twin (× + − ‹ › ⌄ ...)
+ *   rendered in place of `Icon` when icons are suppressed. Supplying it is what
+ *   lets a call site drop its lucide import.
  * @param {string} props.label                aria-label / tooltip — REQUIRED
  * @param {() => void} [props.onClick]
  * @param {keyof typeof TONES} [props.tone='default']
@@ -53,7 +83,7 @@ const SIZES = {
  * @param {string} [props.type='button']
  */
 export default function IconButton({
-  Icon, label, onClick,
+  Icon, glyph, label, onClick,
   tone = 'default', size = 'md',
   disabled, pressed, type = 'button',
   className = '',
@@ -66,6 +96,14 @@ export default function IconButton({
       throw new Error('IconButton: `label` (aria-label) is required.');
     }
   }
+  if (!Icon && !glyph) {
+    // An IconButton with neither channel is an empty labelled box — the exact
+    // failure that kept this primitive outside the icons-off gate. Surface it
+    // at the call site in development rather than shipping a blank control.
+    if (process.env.NODE_ENV !== 'production') {
+      throw new Error('IconButton: pass `Icon` or `glyph` (a unicode text twin).');
+    }
+  }
   const t = TONES[tone] || TONES.default;
   const s = SIZES[size] || SIZES.md;
   // Mobile-only 44px tap floor. Icon-only controls need BOTH dimensions at the
@@ -75,6 +113,12 @@ export default function IconButton({
   // Reads the ONE shared reactive flag (updates on resize + rotate).
   const isMobile = useIsMobile();
   const mobileFloor = isMobile ? Math.max(s.box, 44) : null;
+  // THE ICONS-OFF CHANNEL. The text twin wins wherever the glyph is suppressed,
+  // and also wherever no `Icon` was given at all (so a converted call site can
+  // never render an empty box, even mounted inside the map's Provider). With no
+  // `glyph`, this is false and the render below is the pre-LU-2 behaviour.
+  const iconsOn = useIconsOn();
+  const useTwin = !!glyph && (!iconsOn || !Icon);
   return (
     <button
       type={type}
@@ -108,7 +152,9 @@ export default function IconButton({
       }}
       {...rest}
     >
-      <Icon size={s.icon} aria-hidden="true" />
+      {useTwin
+        ? <span aria-hidden="true" style={{ fontSize: s.icon + 2, lineHeight: 1, fontWeight: 700 }}>{glyph}</span>
+        : <Icon size={s.icon} aria-hidden="true" />}
     </button>
   );
 }

@@ -678,6 +678,10 @@
    "kind": "mutation",
    "label": "determinism/Math.random in pdf export"
   },
+  "tests/lint/lucideTotality.test.js": {
+   "kind": "rationale",
+   "rationale": "The icons-off ratchet (lane LU-W, bc224ce2), registered at lane LU-2 which found it unregistered and RED. Its catching power is three exact-set assertions plus a self-contained MUTANT test and a NEGATIVE CONTROL that already prove the detector fires on an invented importer and does not fire on lucide-react-native \u2014 i.e. the plant this manifest would ask for is authored INSIDE the file. A standing plant in mutation-sweep.sh is deferred under the E-A amendment (b0fc33e1) for the reason that amendment names: FROZEN_DIRECT_IMPORTERS is a 127-row census that lane LU-2 is actively shrinking commit by commit, so any planted row would be a moving target proving nothing durable, and would itself have to be edited by every burn-down commit. Upgrade to kind:mutation when the burn-down closes and the census stops moving."
+  },
   "tests/lint/mapPaletteSingleSource.test.js": {
    "kind": "uncovered"
   },
