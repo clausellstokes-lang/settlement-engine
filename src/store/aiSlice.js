@@ -34,8 +34,8 @@ import { settlementFingerprint } from '../lib/settlementFingerprint.js';
 import { getAiCostForModel, isFastModelPreference } from '../config/pricing.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
-import { CHRONICLE_LIMITS, createChronicleEntry, appendChronicleEntry } from '../lib/chronicle.js';
-import { isCanonSave } from '../domain/campaign/canon.js';
+// The chronicle limits / entry constructors and the canon gate moved with
+// _appendChronicleEntry's body into ./aiChronicleAppend.js.
 import {
   canonPhaseOf,
   durationBand,
@@ -45,6 +45,13 @@ import {
   runOverlayVerifier,
 } from './aiOverlayLifecycle.js';
 import { buildAiDataBlob } from './aiPersistenceEnvelope.js';
+import {
+  updateDossierNotesAction,
+  pinNpcAction,
+  unpinNpcAction,
+  isNpcPinnedSelector,
+} from './aiDossierPinActions.js';
+import { appendChronicleEntryAction } from './aiChronicleAppend.js';
 import {
   aiRequestDisposition,
   DAILY_LIFE_FIELD_LABELS,
@@ -994,137 +1001,16 @@ export const createAiSlice = (set, get) => ({
    * @param {object|null} [opts.aiSettlement] - this run's own aiSettlement prose; preferred over the live store view so a mid-generation settlement switch can't bleed another save's prose into this entry
    * @param {object|null} [opts.aiDailyLife] - this run's own aiDailyLife prose; same mid-switch guard as aiSettlement
    */
-  _appendChronicleEntry: async (
-    saveId,
-    { reason, triggeredBy = null, mode = 'full', aiSettlement, aiDailyLife },
-  ) => {
-    if (!saveId) return;
-    const state = get();
-    const entry = state.savedSettlements.find(s => s.id === saveId);
-    if (!entry) return;
+  // The chronicle append + tier rotation lane lives in ./aiChronicleAppend.js;
+  // the key stays here because three call sites reach it as get()._appendChronicleEntry.
+  _appendChronicleEntry: async (saveId, opts) => appendChronicleEntryAction(get, saveId, opts),
 
-    // Canon gate — regenerations only start chronicling after the save is
-    // canonized. canonize() persists campaignState to the save immediately
-    // (persistActiveSaveLifecycle), so the entry read above is never stale.
-    if (reason === 'regenerate' && !isCanonSave(entry)) return;
-
-    const limit = state.isElevated?.() ? CHRONICLE_LIMITS.elevated
-                : state.isPremium?.()  ? CHRONICLE_LIMITS.premium
-                : CHRONICLE_LIMITS.free;
-
-    // Prefer the run's OWN prose (threaded by the caller). Only fall back to the
-    // live store view when this save is the one on screen — otherwise a
-    // mid-generation switch would snapshot another settlement's prose under this
-    // save's chronicle. (Ported master fix.)
-    const sourceProvided = aiSettlement !== undefined || aiDailyLife !== undefined;
-    const liveIsThisSave = state.activeSaveId == null || state.activeSaveId === saveId;
-    const snapshotSettlement = sourceProvided
-      ? (aiSettlement ?? null)
-      : (liveIsThisSave ? state.aiSettlement : null);
-    const snapshotDailyLife = sourceProvided
-      ? (aiDailyLife ?? null)
-      : (liveIsThisSave ? state.aiDailyLife : null);
-
-    const newEntry = createChronicleEntry({
-      reason,
-      aiSettlement: snapshotSettlement,
-      aiDailyLife:  snapshotDailyLife,
-      triggeredBy,
-      mode,
-    });
-
-    const nextChronicle = appendChronicleEntry(
-      Array.isArray(entry.aiData?.chronicle) ? entry.aiData.chronicle : [],
-      newEntry,
-      { limit },
-    );
-
-    const nextAiData = { ...(entry.aiData || {}), chronicle: nextChronicle };
-    get().updateSavedSettlement(saveId, { aiData: nextAiData });
-    // Non-fatal by contract: a first-attempt failure is reported by the outbox
-    // runner (console warn + campaignSyncError) and the op retries on its own.
-    await persistSaveUpdate(saveId, { aiData: nextAiData });
-  },
-
-  updateDossierNotes: async (saveId, notes = {}) => {
-    if (!saveId) return null;
-    const entry = get().savedSettlements.find(s => s.id === saveId);
-    if (!entry) return null;
-    const dossierNotes = {
-      dmNotes: typeof notes.dmNotes === 'string' ? notes.dmNotes : '',
-      aiGuidance: typeof notes.aiGuidance === 'string' ? notes.aiGuidance : '',
-      updatedAt: new Date().toISOString(),
-    };
-    const nextAiData = buildAiDataBlob(entry.aiData, { dossierNotes });
-    get().updateSavedSettlement(saveId, { aiData: nextAiData });
-    // The ONE ai_data writer that rejects: NotesTab shows a retry affordance off
-    // this rejection (its catch is load-bearing). The outbox still holds the
-    // write and retries it, so the rejection now means "not landed yet", not
-    // "lost" — the local draft text and the queued op both survive.
-    if (!(await persistSaveUpdate(saveId, { aiData: nextAiData }))) {
-      throw new Error('Dossier notes did not reach the cloud on this attempt; the write is queued for retry.');
-    }
-    return dossierNotes;
-  },
-
-  // ── Pinned NPCs (AI-4a) ───────────────────────────────────────────────────
-  //
-  // The DM can pin specific NPCs on a save; pinned ids ride along with every
-  // narrative and (future) progression request, and the `npcs` refinement pass
-  // filters them out before building its payload. Net effect: pinned NPCs are
-  // byte-identical across regenerations. Persistence is through ai_data so the
-  // pin survives reload and is scoped per-save.
-  //
-  // Storage: `savedSettlements[].aiData.pinnedNpcs: Array<string|number>`
-  // (normalized to strings at call sites — the edge function coerces).
-  //
-  // No in-session mirror — the save entry is the single source of truth,
-  // read live via `useStore(s => s.savedSettlements.find(...))` in components.
-
-  /**
-   * Pin an NPC on a save so regenerations don't rewrite it. No-op if already
-   * pinned. Persists through the ai_data outbox lane; a failed first attempt
-   * leaves the in-memory pin in place and retries (same policy as cosmetic rename).
-   */
-  pinNpc: async (saveId, npcId) => {
-    if (!saveId || npcId == null) return;
-    const key = String(npcId);
-    const entry = get().savedSettlements.find(s => s.id === saveId);
-    if (!entry) return;
-    const current = Array.isArray(entry.aiData?.pinnedNpcs) ? entry.aiData.pinnedNpcs : [];
-    if (current.some(x => String(x) === key)) return; // already pinned
-    const nextAiData = { ...(entry.aiData || {}), pinnedNpcs: [...current, key] };
-    get().updateSavedSettlement(saveId, { aiData: nextAiData });
-    await persistSaveUpdate(saveId, { aiData: nextAiData });
-  },
-
-  /**
-   * Unpin an NPC. No-op if not pinned. Mirror of pinNpc.
-   */
-  unpinNpc: async (saveId, npcId) => {
-    if (!saveId || npcId == null) return;
-    const key = String(npcId);
-    const entry = get().savedSettlements.find(s => s.id === saveId);
-    if (!entry) return;
-    const current = Array.isArray(entry.aiData?.pinnedNpcs) ? entry.aiData.pinnedNpcs : [];
-    const next = current.filter(x => String(x) !== key);
-    if (next.length === current.length) return; // not pinned; nothing to do
-    const nextAiData = { ...(entry.aiData || {}), pinnedNpcs: next };
-    get().updateSavedSettlement(saveId, { aiData: nextAiData });
-    await persistSaveUpdate(saveId, { aiData: nextAiData });
-  },
-
-  /**
-   * Selector: is this NPC currently pinned on this save? Reads from live
-   * savedSettlements state; safe to call in render.
-   */
-  isNpcPinned: (saveId, npcId) => {
-    if (!saveId || npcId == null) return false;
-    const key = String(npcId);
-    const entry = get().savedSettlements.find(s => s.id === saveId);
-    const pinned = Array.isArray(entry?.aiData?.pinnedNpcs) ? entry.aiData.pinnedNpcs : [];
-    return pinned.some(x => String(x) === key);
-  },
+  // The dossier-notes + pinned-NPC lane lives in ./aiDossierPinActions.js; the
+  // keys stay here so the slice literal remains the census surface.
+  updateDossierNotes: async (saveId, notes = {}) => updateDossierNotesAction(get, saveId, notes),
+  pinNpc: async (saveId, npcId) => pinNpcAction(get, saveId, npcId),
+  unpinNpc: async (saveId, npcId) => unpinNpcAction(get, saveId, npcId),
+  isNpcPinned: (saveId, npcId) => isNpcPinnedSelector(get, saveId, npcId),
 
   /**
    * Hydrate the AI session state from a saved entry's ai_data blob.
