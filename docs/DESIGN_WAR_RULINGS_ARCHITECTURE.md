@@ -905,6 +905,43 @@ congress, no multilateral table, ever.
   signature, caught by the corroboration ladder); exposure runs the covert→
   revealed seam ⇒ treason verdict (H2), terms-repudiation question (its own casus
   against a knowing buyer), G's third-party books applied to an envoy.
+
+> **Progress — WR-7d's EVALUATORS landed 2026-08-03; its PULSE WIRING is owed,
+> for the same reason WR-7c's is.** Three more pure leaves ship dark and whole.
+> `ransomClaim.js` gates on WR-7b's hold ledger (`heldSinceTick` is the only
+> clock, dwell is derived on every read, and an unreadable hold shuts the gate
+> rather than guessing it open), mints the claim on I2's reparations shape with
+> a PERSON subject and no new claim vocabulary, prices BOTH the demand and the
+> answer through the one named-person transit kernel as a PAIR under law M, and
+> decides K.7's three shapes arithmetically — `silence_misread`,
+> `demand_corrects_inference`, `demand_lost_misreading_stands`, all three
+> reachable and pinned. `ransomChoices.js` runs both ends through character and
+> books, and holds the distinction the amendment turns on: REFUSE is a price
+> rejected, ABANDON is a person written off, and a destitute realm is refusing —
+> poverty is not betrayal, and the abandonment grievance is minted only where a
+> court could have paid and chose not to. The grievance's holder is the MAN, on
+> his own durable id, named against the seat that left him (H's coalition
+> against a seat starts there). `sendTwoDivergence.js` is the counter-
+> intelligence reader: it asks the corroboration ladder the one question the
+> ladder does not ask itself — were these accounts of the SAME parlay — and
+> reports a divergence WITHOUT naming a traitor, because which of two men lied
+> is the ruler's act through `selectBelievedAccount`. A send-two that came home
+> as a send-one is `not_a_send_two`, so a court cannot convict the unlucky.
+> The vetting's HURRIED arm is as real as its CAREFUL one, because Q's whole
+> betrayal depends on a court that had no time to look.
+>
+> **J-INF-15 IS DISCHARGED HERE.** WR-7d built before INFO lit, so the shared
+> corroboration-divergence reader's ONE home is `sendTwoDivergence.js`, declared
+> at build time as the judgment block requires. IN-3's SEND-TWO verb CONSUMES
+> this reader; it does not fork a second one.
+>
+> ⚠️ **DEFERRED, NOT DROPPED — the live pulse wiring.** A ransom must re-mint
+> errands through `envoyErrand.js` (2,638) and land its claim at the
+> `applyWorldPulse.js` (1,395) mouth, both still at EXACTLY their R-BLD-6
+> baseline with zero headroom. The wiring is owed to THE DECOMPOSITION WAVE
+> alongside WR-7c's, in the slice that brings `envoyErrand.js` under its
+> ceiling. Nothing in this wave is lit, no golden moved, no soak ran.
+
 **Lifecycle paths (WR-7 family, added 2026-08-02):** `envoyErrands` and
 `foreignGuestHolds` persist — JSON-round-trip (the alias trap), regen/undo/import
 round-trip both ledgers with any term-sheet in transit riding the errand record; a

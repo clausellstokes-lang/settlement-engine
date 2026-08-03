@@ -101,6 +101,19 @@ const NEGOTIATION_MODULES = Object.freeze({
   ],
   'src/domain/worldPulse/envoyTestimony.js': [],
   'src/domain/worldPulse/compromiseRound.js': [],
+  // WR-7d. The ransom leaves are negotiation paths too: a price on a person is
+  // a demand a court believes, and it must be believed on the same terms as
+  // every other. `ransomClaim` reaches ONLY the shared transit kernel — the
+  // same reach WR-7a's errand writer already has — and re-declares the I2 claim
+  // kind rather than importing `warCoalitionExpenditure`, which reads truth.
+  // `sendTwoDivergence` reaches the ladder leaf, which reaches nothing.
+  'src/domain/worldPulse/ransomClaim.js': [
+    './namedPersonTransit.js',
+  ],
+  'src/domain/worldPulse/ransomChoices.js': [],
+  'src/domain/worldPulse/sendTwoDivergence.js': [
+    './envoyTestimony.js',
+  ],
 });
 
 const TRUTH_READER = 'src/domain/worldPulse/warDeployment.js';
