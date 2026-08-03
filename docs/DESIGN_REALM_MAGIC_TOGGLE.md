@@ -217,6 +217,28 @@ with the surveyor's named reproduction (e.g., L1: roster with 'Teleportation
 circle' + magicExists:false ⇒ assert edges form TODAY, then close), per
 adversarial-verify's reproduce-then-clear.
 
+#### ⛔ MG-3b L3 — RECORDED BLOCK (2026-08-03, Fable; deliberately deferred, NOT a bug to re-find)
+
+L2 is CLOSED and landed. **L3 is reproduced, written, proven green in the working
+tree, and CANNOT BE COMMITTED.** The closure is one line at warDeployment.js's
+magicSupport mint — `magicSupport: facets.magicFunctions === false ? 0 :
+norm(facets.materiel, 0.5)` — plus the one-line stamp at buildCapacityLookup
+(`facets: stampWarMagicLaw(model.facets, item)`) and its import. At HEAD
+warDeployment.js measures **1412 effective lines against a frozen ceiling of 1106**
+(scripts/.size-baseline.json), so the pre-commit lint-staged gate rejects ANY staged
+change to that file from ANY lane — the identical wall that holds WR-7b. Raising the
+frozen number is forbidden by the ratchet's own shrink-only law and is not a lane
+decision; decomposing a war orchestrator mid-flight belongs to the war lane, not this
+one, so MG-3b STOPPED rather than deviate (war volume §10.6).
+
+The WRITER half shipped and is fully pinned: `src/domain/worldPulse/warMagicGate.js`
+holds the law once (`warMagicFunctions` / `stampWarMagicLaw` / `pairMagicFunctions`),
+`feasibilityGate` already reads it, and `tests/domain/warMagicGate.test.js` covers the
+present-guard and the identity/copy contract. **When warDeployment is decomposed under
+its ceiling, L3 is those two lines plus the withheld integration pins** (a mundane
+realm's deployment record mints magicSupport 0; its magical and axis-less twins are
+byte-identical), which ran green before being withheld.
+
 ### MG-4 — THE MEASURE (realm-scope acceptance)
 
 The dead-magic discipline promoted to realm scope, all soak/gate-side:
