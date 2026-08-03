@@ -432,6 +432,28 @@ authored here so "SP-N landed" resolves corpus-wide.]
   cover the dossier-native forms at the family grain, per-settlement
   windowed (a town should not explain itself in the same words as its
   neighbour).
+  **[AMENDED 2026-08-03 (owner order) — THE STATE-PROSE CORPUS + THE
+  FOREIGN DESK OF THE TOWN:]** the dossier-native register covers not
+  only causal JOINS but EVERY ASPECT OF STANDING STATE — economy,
+  supply-chain links and breaks, power dynamics, hooks framing, defense,
+  stressors and conditions, faith, war footing, population, relations:
+  per state-shape (the closed bands/statuses driving each rendered
+  surface — finite semantics makes the census total), 3-5 native-voice
+  explanatory variants, the causal clause present ONLY where the state
+  carries provenance (a stateless band gets plain description, never
+  invented history — the entailment law's hardest form), and the GOOD
+  states get prose as rich as the broken ones (a thriving market is not
+  the absence of a sentence). AND THE FOREIGN DESK OF THE TOWN: in a
+  campaign, the settlement's FOREIGN POLICY situation narrates at the
+  LOCAL level, from the town's own vantage — its treaties as lived
+  obligations ("The tribute cart leaves at each quarter-day; the town
+  watches it go"), its wars as the road watched and the levy feared,
+  its partnerships as the market's accent, its grudges as the family
+  stories — never realm-abstraction prose transplanted downward; the FP
+  corpus's mechanisms land HERE as what they mean to THIS town. The
+  corpus is the annex RECEIPT_POOLS_DOSSIER_STATE.md; hook CONTENT
+  stays the HK program's; coverage is walker-measured against the
+  census denominator.
 - **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion + the
   mode-speed table (J-D11(b)) landed as spine infrastructure ahead of all six.
 - **SP-8 THE AGE LAYER [CORRECTED 2026-08-02 (fp-audit) — new, per the
