@@ -36,7 +36,7 @@ import {
 } from '../../src/domain/simulationSpine.js';
 import { STRESSOR_SPINE_PHRASES } from '../../src/data/stressorSpinePhrases.js';
 import { STRESS_TYPE_META } from '../../src/data/stressTypesMeta.js';
-import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { gen } from '../simulation/simHelpers.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /**
@@ -479,20 +479,85 @@ describe('tolerance', () => {
 // ── The pin the old suite could not have: real generated settlements ───────
 
 describe('over REAL generated settlements', () => {
-  /** @type {Array<Record<string, any>>} */
-  const generated = ['spine-pin-a', 'spine-pin-b', 'spine-pin-c'].map(seed =>
-    generateSettlementPipeline({ seed, tier: 'town' }));
+  /**
+   * THE SEED FAMILY. Every generation below goes through `gen(config, seed)` —
+   * `generateSettlementPipeline(config, null, { seed, customContent: {} })`.
+   *
+   * ── WHY THE SPELLING IS LOAD-BEARING ─────────────────────────────────────
+   *
+   * This block used to call `generateSettlementPipeline({ seed, tier: 'town' })`
+   * — seed and tier in the CONFIG slot. The pipeline reads
+   * `options.seed || config._seed || generateSeed()`, so a config-level `seed`
+   * key is NOT a seed: every run generated a different random world and these
+   * pins were flaky by construction, passing or failing on the draw. `tier` is
+   * not the config key either (`settType` is), so the "town" corpus was in fact
+   * a corpus of default-tier villages. Both were silent: the pipeline's
+   * fail-closed guard only catches an options bag misplaced into the
+   * importedNeighbour slot, not a seed misplaced into the config slot.
+   *
+   * ── WHY A FAMILY, NOT ONE SEED ───────────────────────────────────────────
+   *
+   * A single-seed pin is vacuous against anything that varies by draw: it pins
+   * one world and calls it the contract. The family spans the ROUTE arms
+   * deliberately, because the origin and survival rungs are keyed on route, so
+   * a one-route family would leave most arms unpinned.
+   */
+  const SPINE_FAMILY = Object.freeze([
+    { seed: 'spine-pin-a', config: { settType: 'town',    tradeRouteAccess: 'crossroads' } },
+    { seed: 'spine-pin-b', config: { settType: 'village', tradeRouteAccess: 'river' } },
+    { seed: 'spine-pin-c', config: { settType: 'city',    tradeRouteAccess: 'port' } },
+    { seed: 'spine-pin-d', config: { settType: 'town',    tradeRouteAccess: 'isolated' } },
+    { seed: 'spine-pin-e', config: { settType: 'hamlet' } },
+  ]);
 
   /** @type {Array<Record<string, any>>} */
-  const besieged = ['spine-pin-siege'].map(seed =>
-    generateSettlementPipeline({ seed, tier: 'town', stressTypes: ['under_siege', 'infiltrated'] }));
+  const generated = SPINE_FAMILY.map(({ config, seed }) => gen(config, seed));
 
-  it('the fixture corpus really did generate', () => {
-    // Positive control for every anti-fallback assertion below.
-    for (const settlement of [...generated, ...besieged]) {
+  const BESIEGED_CONFIG = { settType: 'town', stressTypes: ['under_siege', 'infiltrated'] };
+  /** @type {Array<Record<string, any>>} */
+  const besieged = ['spine-pin-siege', 'spine-pin-siege-2'].map(seed => gen(BESIEGED_CONFIG, seed));
+
+  it('the fixture corpus really did generate, AT THE SEED AND TIER ASKED FOR', () => {
+    // Positive control for every anti-fallback assertion below — and the pin on
+    // the defect above: if the seed or the tier is dropped on the floor again,
+    // `_seed` stops matching and `tier` reverts to the default village.
+    for (const [i, settlement] of [...generated].entries()) {
+      expect(settlement.name).toBeTruthy();
+      expect(settlement.powerStructure).toBeTruthy();
+      expect(settlement._seed, 'the seed reached the pipeline').toBe(SPINE_FAMILY[i].seed);
+      expect(settlement.tier, 'the requested tier reached the pipeline')
+        .toBe(SPINE_FAMILY[i].config.settType);
+    }
+    for (const settlement of besieged) {
       expect(settlement.name).toBeTruthy();
       expect(settlement.powerStructure).toBeTruthy();
     }
+  });
+
+  it('the same seed renders byte-identical spine prose, twice running', () => {
+    // The determinism assertion the unseeded pins could not make. THE PROMISE
+    // ("a seed is a world, forever") is what this asserts at the spine's own
+    // surface: same seed, same config, same seven lines.
+    for (const { config, seed } of SPINE_FAMILY) {
+      const first  = deriveSimulationSpine(gen(config, seed));
+      const second = deriveSimulationSpine(gen(config, seed));
+      expect(second, `seed "${seed}" did not reproduce its spine`).toEqual(first);
+      expect(simulationSpineRows(gen(config, seed)))
+        .toEqual(simulationSpineRows(gen(config, seed)));
+    }
+  });
+
+  it('DIFFERENT seeds really do produce different worlds', () => {
+    // The negative control for the determinism pin above: without this, a
+    // derivation that returned a constant would satisfy "same seed, same
+    // output" perfectly. At least one rung must differ across the family.
+    const spines = generated.map(s => deriveSimulationSpine(s));
+    const distinctNames = new Set(generated.map(s => s.name));
+    expect(distinctNames.size, 'the family collapsed to one world').toBeGreaterThan(1);
+    const varyingRungs = SPINE_RUNGS.filter(rung =>
+      new Set(spines.map(spine => spine[rung.key])).size > 1);
+    expect(varyingRungs.length, 'every rung printed the same line on every seed')
+      .toBeGreaterThan(0);
   });
 
   it('the PRIMARY arm fires on every rung; no rung prints its fallback', () => {

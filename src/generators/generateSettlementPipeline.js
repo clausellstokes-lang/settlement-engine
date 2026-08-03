@@ -94,6 +94,29 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
       + '— otherwise the seed is silently ignored and the run is not reproducible.',
     );
   }
+  // The SAME failure, one slot to the left: a caller that writes
+  // generateSettlementPipeline({ seed, settType }) has put its seed in the
+  // CONFIG bag. `seed` is not a config key — the seed is read from
+  // `options.seed` or from a replayed settlement's `config._seed` — so it is
+  // silently dropped and generation falls through to generateSeed(). The call
+  // site believes it is seeded and is not: every run is a different world, and
+  // any pin written over it is flaky by construction rather than by accident.
+  //
+  // This guard exists because that is exactly what happened. The spine's
+  // real-generation pins ran unseeded for their whole life while asserting
+  // seed-stable prose; nothing failed, because nothing could see the
+  // difference between "this seed produces this world" and "some world
+  // produced something acceptable". `config._seed` remains legitimate and is
+  // deliberately NOT rejected: it is how a saved settlement replays itself.
+  if (config && typeof config === 'object' && 'seed' in config) {
+    throw new Error(
+      '[generateSettlementPipeline] the first argument is the generation config, '
+      + 'and it carries a `seed` key. The config bag has no `seed` — the seed is '
+      + 'read from options.seed (or config._seed when replaying a saved settlement). '
+      + 'Pass it third: generateSettlementPipeline(config, null, { seed, ... }) '
+      + '— otherwise the seed is silently ignored and the run is not reproducible.',
+    );
+  }
   const effectiveConfig = resolveConfigWithUserContentTunables(config, options);
   const seed = options.seed || config._seed || generateSeed();
   const rng = createPRNG(seed);

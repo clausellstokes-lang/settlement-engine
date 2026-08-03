@@ -25,7 +25,12 @@ import React from 'react';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
 
-import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+// `gen` is the estate's one spelling of a headless seeded generation:
+// generateSettlementPipeline(config, null, { seed, customContent: {} }). Calling
+// the pipeline directly here is how this file previously put its seed in the
+// CONFIG slot, where nothing reads it — see the seed-family note in
+// tests/domain/simulationSpine.test.js.
+import { gen } from '../simulation/simHelpers.js';
 
 const H = vi.hoisted(() => ({ state: null }));
 
@@ -65,9 +70,11 @@ function spineRowsOnScreen(settlement) {
 
 describe('the spine card as rendered', () => {
   test('a besieged settlement reads grammatically, label and body together', () => {
-    const settlement = generateSettlementPipeline({
-      seed: 'rail-spine-siege', tier: 'town', stressTypes: ['under_siege', 'infiltrated'],
-    });
+    const settlement = gen(
+      { settType: 'town', stressTypes: ['under_siege', 'infiltrated'] },
+      'rail-spine-siege',
+    );
+    expect(settlement._seed, 'the seed must reach the pipeline').toBe('rail-spine-siege');
     const rows = spineRowsOnScreen(settlement);
 
     // Positive control: the card really rendered all its rungs.
@@ -91,8 +98,14 @@ describe('the spine card as rendered', () => {
   });
 
   test('no rendered row repeats its own label, on any settlement', () => {
-    for (const seed of ['rail-spine-a', 'rail-spine-b', 'rail-spine-c']) {
-      const rows = spineRowsOnScreen(generateSettlementPipeline({ seed, tier: 'town' }));
+    for (const [seed, config] of [
+      ['rail-spine-a', { settType: 'town',    tradeRouteAccess: 'crossroads' }],
+      ['rail-spine-b', { settType: 'village', tradeRouteAccess: 'river' }],
+      ['rail-spine-c', { settType: 'city',    tradeRouteAccess: 'port' }],
+    ]) {
+      const settlement = gen(config, seed);
+      expect(settlement._seed, 'the seed must reach the pipeline').toBe(seed);
+      const rows = spineRowsOnScreen(settlement);
       expect(rows.length).toBeGreaterThanOrEqual(6);
       for (const { label, body } of rows) {
         const keyWord = label.split(/\s+/).pop().toLowerCase();

@@ -574,6 +574,11 @@
   "tests/generators/pipelineContract.test.js": {
    "kind": "uncovered"
   },
+  "tests/generators/pipelineSeedSlotContract.test.js": {
+   "kind": "mutation",
+   "label": "generation/pipeline seed-slot guard removed",
+   "what": "Standing plant deletes the CONFIG-SLOT seed guard from generateSettlementPipeline, restoring the shape that let `generateSettlementPipeline({ seed, settType })` discard its seed in silence. That spelling shipped: the simulation spine's real-generation pins and its jsdom render pin both ran unseeded for their entire life while asserting seed-stable prose, passing or failing on the draw, and no assertion could tell 'this seed produces this world' from 'some world produced something acceptable'. The guard is the habitat removal and this pin is what keeps it standing. The file's negative controls (options.seed honoured, config._seed replay untouched, different seeds diverge) prove the guard is specific rather than a blanket throw, so the plant cannot be satisfied by breaking generation outright. Mutation target src/generators/generateSettlementPipeline.js is tracked and clean as of this lane's commit."
+  },
   "tests/helpers/sourceContract.test.js": {
    "kind": "rationale",
    "ref": "self-proving-meta"

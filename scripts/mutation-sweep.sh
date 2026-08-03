@@ -59,6 +59,7 @@ MUTATED_FILES=(
   scripts/mutation-coverage-manifest.json
   src/domain/display/chroniclersLetter.js
   src/domain/simulationSpine.js
+  src/generators/generateSettlementPipeline.js
   src/design/townGlyphs/medieval.js
   src/lib/flagRegistry.js
   tests/copy/.composed-prose-seams-baseline.json
@@ -645,6 +646,19 @@ check_caught "civility-veil/public payload boundary unveiled" src/lib/worldExpor
 #     the deriver's return value alone cannot, which is why the defect shipped.
 perl -0pi -e 's/  if \(joined\) return joined;/  if (joined) return `Strained by \${joined}`;/' src/domain/simulationSpine.js
 check_caught "prose/spine frame word doubled into the body" src/domain/simulationSpine.js "npx vitest run tests/components/pipelineRailSpineProse.test.jsx --no-file-parallelism"
+
+# 65. The seed-slot guard removed — restore the shape that let a caller write
+#     generateSettlementPipeline({ seed, settType }) and have the seed silently
+#     dropped, because `seed` is not a config key. This is not hypothetical: it
+#     is how the spine's real-generation pins and its jsdom render pin were
+#     spelled, so both ran unseeded for their whole life while asserting
+#     seed-stable prose. Nothing could red, because no assertion can tell "this
+#     seed produces this world" from "some world produced something acceptable"
+#     when the seed never arrives. The contract pin's negative controls
+#     (options.seed honoured, config._seed replay untouched, distinct seeds
+#     diverge) mean this plant cannot be satisfied by breaking generation.
+perl -0pi -e "s/if \(config && typeof config === 'object' && 'seed' in config\)/if (false)/" src/generators/generateSettlementPipeline.js
+check_caught "generation/pipeline seed-slot guard removed" src/generators/generateSettlementPipeline.js "npx vitest run tests/generators/pipelineSeedSlotContract.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
