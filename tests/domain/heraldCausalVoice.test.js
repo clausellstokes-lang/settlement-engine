@@ -26,6 +26,16 @@
  */
 import { describe, expect, test } from 'vitest';
 
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { buildCauseWalk } from '../../src/domain/display/causeWalk.js';
+import {
+  PLACEHOLDER_CLAUSES,
+  PULSE_IMPACT_FALLBACK,
+  PULSE_OUTCOME_FALLBACK,
+  UNRECEIPTED_HOP,
+  isPlaceholderClause,
+} from '../../src/domain/display/receiptClauseFloor.js';
 import {
   CHAIN_END_BANNED,
   CONNECTIVE_POOLS,
@@ -535,5 +545,175 @@ describe('THE JOIN MOLDS — the argument supply §3’s tags were written to re
     }
     const dm = heraldTellingRegister({ worldState: LIT, walk, seed: 's1', seesSecrets: true });
     expect(dm.links[0].pool).toBe('planted');
+  });
+});
+
+// ── LANE HR — THE CLAUSE FLOOR ──────────────────────────────────────────────
+// The cycle-11 lighting blocker: not everything the walk hands over is a clause.
+// A parent the provenance ledger names but no pulseHistory record resolves comes
+// back as `UNRECEIPTED_HOP` — a NOUN PHRASE, `redacted:false`, so nothing
+// structural marked it — and a durable record with no headline comes back as one
+// of chronicleGraph's two pulse fallbacks. Fed to a §1 mold they composed
+// "— in the wake of the day an earlier cause": a connective asserting a relation
+// to a receipt nobody found. These pins run the SHIPPED PATH — the real
+// `buildCauseWalk` over a real provenance ledger — because a hand-built walk
+// fixture could assert the guard while the producer stopped producing the case.
+
+/** The shipped path: a two-hop ledger whose DEEPEST parent no record resolves. */
+const rootSourceEventWorld = () => ({
+  simulationRules: { heraldCausalVoiceEnabled: true },
+  spatialLedgers: {
+    provenance: {
+      'evt-root': { parents: ['evt-a'], type: 'war_declared', tick: 70 },
+      // `evt-origin` is a root sourceEventId: named as a parent, recorded nowhere.
+      'evt-a': { parents: ['evt-origin'], type: 'levy_shortfall', tick: 60 },
+    },
+  },
+  pulseHistory: [{
+    tick: 70,
+    selectedOutcomes: [
+      { id: 'evt-root', headline: 'Karsh declares war on Elmspur', type: 'war_declared' },
+      { id: 'evt-a', headline: 'the grain levy failed at Karsh', type: 'levy_shortfall' },
+    ],
+  }],
+});
+
+/** The shipped path: the NEAREST parent has aged past MAX_HISTORY and is gone. */
+const agedOutParentWorld = () => ({
+  simulationRules: { heraldCausalVoiceEnabled: true },
+  spatialLedgers: {
+    provenance: { 'evt-root': { parents: ['evt-aged'], type: 'war_declared', tick: 70 } },
+  },
+  pulseHistory: [{
+    tick: 70,
+    selectedOutcomes: [{ id: 'evt-root', headline: 'Karsh declares war on Elmspur', type: 'war_declared' }],
+  }],
+});
+
+/** The shipped path: the parent IS recorded, but recorded no headline at all. */
+const headlinelessRecordWorld = () => ({
+  simulationRules: { heraldCausalVoiceEnabled: true },
+  spatialLedgers: {
+    provenance: { 'evt-root': { parents: ['evt-mute'], type: 'war_declared', tick: 70 } },
+  },
+  pulseHistory: [{
+    tick: 70,
+    selectedOutcomes: [
+      { id: 'evt-root', headline: 'Karsh declares war on Elmspur', type: 'war_declared' },
+      { id: 'evt-mute', type: 'levy_shortfall' },
+    ],
+  }],
+});
+
+const walkOf = (world, rootId = 'evt-root') => buildCauseWalk({ worldState: world, rootId, seesSecrets: true });
+
+describe('THE CLAUSE FLOOR — a placeholder is TERMINAL, never an argument', () => {
+  test('the SHIPPED PATH really produces each placeholder (without this the guards below are vacuous)', () => {
+    const rootWalk = walkOf(rootSourceEventWorld());
+    const deepest = rootWalk.chain.find((hop) => hop.id === 'evt-origin');
+    expect(deepest, 'the ledger names a root sourceEventId but the walk dropped the hop').toBeTruthy();
+    expect(deepest.headline).toBe(UNRECEIPTED_HOP);
+    // NOT redacted: nothing was hidden. That is exactly why a boolean cannot carry
+    // this case and the guard has to read the exported line.
+    expect(deepest.redacted).toBe(false);
+
+    const agedWalk = walkOf(agedOutParentWorld());
+    expect(agedWalk.chain[0].headline).toBe(UNRECEIPTED_HOP);
+    expect(agedWalk.chain[0].depth).toBe(1);
+
+    const muteWalk = walkOf(headlinelessRecordWorld());
+    expect(muteWalk.chain[0].headline).toBe(PULSE_OUTCOME_FALLBACK);
+    expect(PLACEHOLDER_CLAUSES).toContain(PULSE_IMPACT_FALLBACK);
+  });
+
+  test('THE HEADLINE REGISTER never gestures at a placeholder, at any seed', () => {
+    const failures = collectSeedFailures(SEEDS, (seed) => {
+      for (const world of [agedOutParentWorld(), headlinelessRecordWorld()]) {
+        const walk = walkOf(world);
+        expect(heraldHeadlineRegister({
+          worldState: world, item: ITEM, walk, seed, seesSecrets: true,
+        })).toBeNull();
+      }
+      // GUARD-THE-GUARD: the same register over a RECEIPTED nearest parent does
+      // compose, so the nulls above measure the placeholder rather than a register
+      // that returns null to everything.
+      const live = walkOf(rootSourceEventWorld());
+      expect(heraldHeadlineRegister({
+        worldState: rootSourceEventWorld(), item: ITEM, walk: live, seed, seesSecrets: true,
+      })).not.toBeNull();
+    });
+    expectNoSeedFailures(failures, 'a placeholder nearest hop yields no headline gesture');
+  });
+
+  test('THE TELLING REGISTER draws no connective over a placeholder, in either direction', () => {
+    let composedArguments = 0;
+    let clauselessSeen = 0;
+    const cases = [];
+    for (const world of [rootSourceEventWorld, agedOutParentWorld, headlinelessRecordWorld]) {
+      for (const direction of /** @type {const} */ (['back', 'fwd'])) {
+        for (const seed of SEEDS) cases.push({ world, direction, seed });
+      }
+    }
+    const failures = collectSeedFailures(cases, ({ world, direction, seed }) => {
+      const built = world();
+      const out = heraldTellingRegister({
+        worldState: built, walk: walkOf(built), seed, seesSecrets: true, direction,
+      });
+      for (const link of out.links) {
+        if (PLACEHOLDER_CLAUSES.includes(link.clause)) {
+          clauselessSeen += 1;
+          expect(link.clauseless, `${link.clause} was not marked clauseless`).toBe(true);
+          expect(link.connective).toBeNull();
+          expect(link.argText).toBeNull();
+          expect(link.pool).toBeNull();
+        }
+        if (link.argText) composedArguments += 1;
+        for (const placeholder of PLACEHOLDER_CLAUSES) {
+          // anchored: `composedArguments` and `clauselessSeen` are asserted non-zero
+          // below, so this sweep provably ran over live molded arguments AND over
+          // live placeholder hops rather than an empty link list.
+          expect(String(link.argText ?? ''), `${direction} @ ${seed}`).not.toContain(placeholder);
+        }
+      }
+      // The terminal is the honest thing the walk says instead: a truncation may
+      // never reach `horizon`, whose family claims retention.
+      expect(TERMINALS.chain_end).toContain(out.terminal);
+    });
+    expectNoSeedFailures(failures, 'no connective is ever composed over a placeholder clause');
+    expect(clauselessSeen, 'the sweep never met a placeholder hop — the guard is vacuous').toBeGreaterThan(0);
+    expect(composedArguments, 'the sweep composed no argument at all — the negative is vacuous').toBeGreaterThan(0);
+  });
+
+  test('THE REMOVAL, measured: the same fixture with a RECORDED headline does compose the link', () => {
+    // The before/after that turns "no connective" into evidence. One fixture, one
+    // field changed: the parent gains the headline it was missing.
+    const mute = headlinelessRecordWorld();
+    const voiced = headlinelessRecordWorld();
+    voiced.pulseHistory[0].selectedOutcomes[1].headline = 'the grain levy failed at Karsh';
+
+    const before = heraldTellingRegister({ worldState: voiced, walk: walkOf(voiced), seed: 'floor-1', seesSecrets: true });
+    const after = heraldTellingRegister({ worldState: mute, walk: walkOf(mute), seed: 'floor-1', seesSecrets: true });
+    expectPresentThenAbsent(
+      before.links.map((l) => String(l.connective)),
+      after.links.map((l) => String(l.connective)),
+      String(before.links[0].connective),
+      'the placeholder loses the connective the recorded clause earns',
+    );
+    expect(before.links[0].clauseless).toBe(false);
+    expect(after.links[0].clauseless).toBe(true);
+  });
+
+  test('the guard reads the EXPORTED vocabulary, and the vocabulary is the closed set', () => {
+    for (const placeholder of PLACEHOLDER_CLAUSES) expect(isPlaceholderClause(placeholder)).toBe(true);
+    expect(isPlaceholderClause(`  ${UNRECEIPTED_HOP}  `), 'trimmed before the compare').toBe(true);
+    // A real recorded headline is never swallowed, including one that merely
+    // CONTAINS a placeholder phrase — the compare is exact, not a substring.
+    expect(isPlaceholderClause('the grain levy failed at Karsh')).toBe(false);
+    expect(isPlaceholderClause(`the scribes wrote ${UNRECEIPTED_HOP} in the margin`)).toBe(false);
+    expect(isPlaceholderClause('')).toBe(false);
+    expect(isPlaceholderClause(null)).toBe(false);
+    // REDACTED_HOP is deliberately NOT in this set: a covert hop carries a
+    // structural `redacted` flag, and the composer reads the boolean.
+    expect(PLACEHOLDER_CLAUSES).toHaveLength(3);
   });
 });

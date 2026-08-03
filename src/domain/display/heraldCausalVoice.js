@@ -55,6 +55,21 @@
  * never drawn, and a pool with no drawable line in the held direction DROPS the
  * link rather than re-labelling it into a pool whose edge would fit the prose.
  *
+ * ── THE CLAUSE FLOOR (lane HR) ──────────────────────────────────────────────
+ * Not everything the walk hands over is a clause. A hop the provenance ledger
+ * names but no pulseHistory record resolves arrives as `UNRECEIPTED_HOP` — "an
+ * earlier cause", a NOUN PHRASE with `redacted:false` — and a durable record with
+ * no headline arrives as one of chronicleGraph's two pulse fallbacks. Fed to a
+ * slot they compose "— in the wake of the day an earlier cause": a connective
+ * asserting a relation to a receipt nobody found.
+ *
+ * Such a hop is TERMINAL, treated exactly as a REDACTED one: the causal clause is
+ * DROPPED, the edge is never re-labelled to make the prose fit, and §3.2's
+ * terminal carries the honesty instead — `chain_end`, whose whole family says the
+ * record does not reach further back. The guard binds to
+ * `receiptClauseFloor.isPlaceholderClause`, never to a literal, because a private
+ * copy would keep composing over the placeholder the day a wording moved.
+ *
  * ── DORMANCY ────────────────────────────────────────────────────────────────
  * Dark unless `simulationRules.heraldCausalVoiceEnabled === true`. Every entry
  * point returns null when dark, so the feed is byte-identical to a world that
@@ -76,6 +91,7 @@ import {
   timeBandWord,
 } from './heraldCausalGrammar.js';
 import { argIsMolded, moldFormFor } from './heraldJoinMolds.js';
+import { isPlaceholderClause } from './receiptClauseFloor.js';
 
 /** The virtual dormancy flag (the discourseProseActive idiom). */
 export function heraldCausalVoiceActive(worldState) {
@@ -272,6 +288,11 @@ export function heraldHeadlineRegister({ worldState, item, walk, seed, seesSecre
   if (nearest.redacted === true) return null;
   const parentClause = String(nearest.headline || '').trim();
   if (!parentClause) return null;
+  // …and neither does it gesture at a PLACEHOLDER. An unreceipted hop and a
+  // headline-less pulse record both arrive as noun phrases, not as the parent's
+  // own words; a gesture drawn over one would assert a relation to a receipt the
+  // walk never found. The item stands alone instead (lane HR).
+  if (isPlaceholderClause(parentClause)) return null;
 
   // The gesture is the connective AND the argument its slot demands, molded from
   // this hop's own clause. `A` lines are not drawable at all (they carry their
@@ -329,6 +350,8 @@ export function heraldSubheaderRegister({ worldState, item }) {
  * @property {string|null} pool
  * @property {string|null} edge
  * @property {boolean} redacted
+ * @property {boolean} clauseless  true when the hop carried a PLACEHOLDER rather
+ *   than a clause of its own (an unreceipted parent, or a record with no headline)
  * @property {string} childId
  * @property {string} childClause
  * @property {boolean} childKept
@@ -344,7 +367,10 @@ export function heraldSubheaderRegister({ worldState, item }) {
  *
  * Redacted hops keep their place in the SHAPE but contribute no connective: the
  * walk already replaced their content, and a connective drawn over a placeholder
- * would assert a relation to something the viewer cannot see.
+ * would assert a relation to something the viewer cannot see. CLAUSELESS hops —
+ * an unreceipted parent, a record that carried no headline — are treated exactly
+ * the same way and for the neighbouring reason: there is nothing to relate to,
+ * rather than nothing you may see (lane HR).
  *
  * THE ARGUMENT IS THE OTHER END OF THE LINK. `back` puts the connective after the
  * CHILD pointing at the PARENT, so the argument is the hop's own clause; `fwd`
@@ -391,9 +417,22 @@ export function heraldTellingRegister({
     const hopId = String(hop?.id ?? '');
     if (!clause) { childId = hopId; childClause = clause; childKept = false; continue; }
     const redacted = hop?.redacted === true;
-    if (redacted) {
-      links.push({ id: hopId, clause, connective: null, arg: null, argText: null, pool: null, edge: null, redacted: true, childId, childClause, childKept });
-      childId = hopId; childClause = clause; childKept = true;
+    // A hop that carries no clause OF ITS OWN — an unreceipted parent, or a
+    // durable record that recorded no headline. Terminal in the same sense a
+    // redacted hop is: it keeps its place in the SHAPE and contributes no
+    // connective, in either direction.
+    const clauseless = !redacted && isPlaceholderClause(clause);
+    if (redacted || clauseless) {
+      // A covert hop's id may never seed the terminal (it would leak the seam
+      // through variant selection); a clauseless one is not a secret, and its
+      // placeholder does print, so it counts as visible.
+      if (clauseless) visibleIds.push(hopId);
+      links.push({ id: hopId, clause, connective: null, arg: null, argText: null, pool: null, edge: null, redacted, clauseless, childId, childClause, childKept });
+      // `childKept:false` is the OTHER half of the guard, and it is what stops the
+      // defect one link deeper: in `fwd` the connective's argument is the CHILD's
+      // clause, so a placeholder left "kept" would be molded into the next link's
+      // slot instead of this one's.
+      childId = hopId; childClause = clause; childKept = false;
       continue;
     }
     visibleIds.push(hopId);
@@ -421,6 +460,7 @@ export function heraldTellingRegister({
       pool: drawn ? drawn.pool : null,
       edge: drawn ? drawn.edge : null,
       redacted: false,
+      clauseless: false,
       childId,
       childClause,
       childKept,
@@ -432,7 +472,11 @@ export function heraldTellingRegister({
     terminal,
     // VISIBLE CHAIN ONLY.
     seed: `${seed}::visible::${visibleIds.join('|')}`,
-    covertTruncation: links.some((l) => l.redacted),
+    // BOTH truncations forbid `horizon`. A covert seam because naming retention
+    // there would be a tell; a clauseless hop because the walk cannot tell a root
+    // `sourceEventId` from a receipt aged past MAX_HISTORY, so "the trail runs
+    // past living memory" would be a coin-flip claim. `chain_end` is true of both.
+    truncated: links.some((l) => l.redacted || l.clauseless),
   });
 
   const text = `${composeSentences({ links, rootClause, held }).join('; ')} — ${terminalText}.`;

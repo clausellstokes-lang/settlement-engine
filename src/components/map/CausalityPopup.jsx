@@ -30,7 +30,8 @@
 
 import { useMemo } from 'react';
 
-import { UNRECEIPTED_HOP, buildCauseWalk } from '../../domain/display/causeWalk.js';
+import { buildCauseWalk } from '../../domain/display/causeWalk.js';
+import { UNRECEIPTED_HOP } from '../../domain/display/receiptClauseFloor.js';
 import { heraldEntryProse } from '../../domain/display/heraldCausalVoice.js';
 import { classifyLinkIntegrity, disclosureFor } from '../../domain/display/heraldIntegrity.js';
 import { BODY, BORDER2, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans } from '../theme.js';

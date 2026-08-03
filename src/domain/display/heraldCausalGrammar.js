@@ -410,16 +410,25 @@ export function connectiveFor({ pool, seed, direction = 'back', seesSecrets = fa
 }
 
 /**
- * Draw a terminal line. `covertTruncation` forces `chain_end`: `horizon` may never
- * render at a covert seam, because it distinguishes the covert case from the
- * genuine end — which is exactly what `chain_end` exists to prevent.
+ * Draw a terminal line. `truncated` forces `chain_end`, and it names the two cuts
+ * the terminal may not describe:
+ *
+ *   A COVERT SEAM — `horizon` would distinguish the covert case from the genuine
+ *   end, which is exactly what `chain_end` exists to prevent. Both a lie and a
+ *   tell.
+ *   A CLAUSELESS HOP (lane HR) — the walk cannot tell a root `sourceEventId` from
+ *   a receipt aged past MAX_HISTORY, so "the trail runs past living memory" is a
+ *   claim about retention that is false half the time it would be drawn.
+ *
+ * `chain_end` is true of both, and of the genuine origin, which is why one pool
+ * serves all three.
  * @param {Object} args
  * @param {'chain_end'|'horizon'} args.terminal
  * @param {string} args.seed
- * @param {boolean} [args.covertTruncation]
+ * @param {boolean} [args.truncated]
  * @returns {string}
  */
-export function terminalLine({ terminal, seed, covertTruncation = false }) {
-  const key = covertTruncation ? 'chain_end' : (terminal === 'horizon' ? 'horizon' : 'chain_end');
+export function terminalLine({ terminal, seed, truncated = false }) {
+  const key = truncated ? 'chain_end' : (terminal === 'horizon' ? 'horizon' : 'chain_end');
   return pickCausal(TERMINALS[key], `${seed}::terminal::${key}`) || TERMINALS.chain_end[0];
 }

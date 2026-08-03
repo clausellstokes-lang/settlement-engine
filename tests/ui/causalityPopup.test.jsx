@@ -29,7 +29,7 @@ afterEach(cleanup);
 import CausalityPopup from '../../src/components/map/CausalityPopup.jsx';
 import HeraldHeadline from '../../src/components/map/HeraldHeadline.jsx';
 import { CONNECTIVE_POOLS } from '../../src/domain/display/heraldCausalGrammar.js';
-import { UNRECEIPTED_HOP } from '../../src/domain/display/causeWalk.js';
+import { UNRECEIPTED_HOP } from '../../src/domain/display/receiptClauseFloor.js';
 
 const LINEAGE = 'disinfo:karsh:elmspur:10';
 

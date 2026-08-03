@@ -14,8 +14,9 @@ import { dirname, join } from 'node:path';
 import { describe, it, expect } from 'vitest';
 import { buildRecordedEdges, recordedAncestors } from '../../src/domain/display/chronicleGraph.js';
 import {
-  buildCauseWalk, receiptIsCovert, NO_DEEPER_MEMORY, LEDGER_DARK_LINE, REDACTED_HOP, UNRECEIPTED_HOP,
+  buildCauseWalk, receiptIsCovert, NO_DEEPER_MEMORY, LEDGER_DARK_LINE, REDACTED_HOP,
 } from '../../src/domain/display/causeWalk.js';
+import { UNRECEIPTED_HOP } from '../../src/domain/display/receiptClauseFloor.js';
 import { compactOutcomeForHistory } from '../../src/domain/worldPulse/pulseHelpers.js';
 
 const baseOutcomes = [
@@ -153,7 +154,10 @@ describe('THE UNRECEIPTED HOP has ONE writer (lane HG, F3)', () => {
 
   it('SINGLE WRITER: no other module in src/** spells the literal', () => {
     const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
-    const OWNER = 'src/domain/display/causeWalk.js';
+    // THE OWNER MOVED (lane HR): the line lives in `receiptClauseFloor.js` with
+    // the other placeholder clauses, so the Herald composer's guard can bind to it
+    // without importing this read model through the contamination fence.
+    const OWNER = 'src/domain/display/receiptClauseFloor.js';
     /** @param {string} dir @returns {string[]} */
     const walkDir = (dir) => readdirSync(join(ROOT, dir)).flatMap((entry) => {
       const rel = `${dir}/${entry}`;

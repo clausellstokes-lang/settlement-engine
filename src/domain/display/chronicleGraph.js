@@ -30,6 +30,8 @@
  *   bounded threads + no-wizardNews structural source scan)
  */
 
+import { PULSE_IMPACT_FALLBACK, PULSE_OUTCOME_FALLBACK } from './receiptClauseFloor.js';
+
 /**
  * The eight drama classes, in the codepoint-deterministic priority order that
  * types a thread by its DOMINANT (highest-priority) member. This mirrors the
@@ -262,7 +264,11 @@ export function nodesFromRecord(record) {
       keys: entityKeysOf(o),
       decree: isDecreeNode(o),
       severity: Number.isFinite(o?.severity) ? Number(o.severity) : null,
-      headline: o?.headline || 'World pulse outcome',
+      // A node with no recorded headline gets a PLACEHOLDER, not a clause. The
+      // constant is shared with the composer's guard so the two can never drift
+      // into a state where a placeholder is composed as if it were a receipt's
+      // own words (lane HR).
+      headline: o?.headline || PULSE_OUTCOME_FALLBACK,
       summary: o?.summary || '',
       reasons: Array.isArray(o?.reasons) ? o.reasons : [],
       settlementIds: entityKeysOf(o),
@@ -277,7 +283,7 @@ export function nodesFromRecord(record) {
       keys: entityKeysOf(d),
       decree: false,
       severity: Number.isFinite(d?.severity) ? Number(d.severity) : null,
-      headline: d?.headline || 'World pulse impact',
+      headline: d?.headline || PULSE_IMPACT_FALLBACK,
       summary: d?.summary || '',
       reasons: Array.isArray(d?.reasons) ? d.reasons : [],
       settlementIds: entityKeysOf(d),

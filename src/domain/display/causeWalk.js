@@ -27,27 +27,22 @@
  */
 
 import { buildRecordedEdges, nodesFromRecord } from './chronicleGraph.js';
+import { UNRECEIPTED_HOP } from './receiptClauseFloor.js';
 
 /** The graceful line at a root cause AND at an absent ledger (the spec's phrasing). */
 export const NO_DEEPER_MEMORY = 'The ledger holds no deeper memory of this.';
 /** The distinct honest line when the world recorded no causality ledger at all. */
 export const LEDGER_DARK_LINE = 'This world keeps no recorded ledger of causes.';
-/** What a covert hop reads as to a viewer who does not see DM secrets. */
-export const REDACTED_HOP = 'a cause the ledger keeps hidden';
 /**
- * What an UNRECEIPTED hop reads as: the ledger names a parent that no
- * pulseHistory record resolves — a root `sourceEventId`, or a receipt aged out
- * of retention. Honest, and deliberately not prose the walk invented.
- *
- * EXPORTED BECAUSE IT IS A CLASSIFICATION KEY, NOT DECORATION. The causality
- * popup decides a link's integrity `resolved` flag by comparing against it, and
- * `heraldIntegrity` reads `clean` as EVIDENCED — a receipt that exists and
- * carries no manipulation marker — never as assumed from silence. A second copy
- * of this string in the consumer would drift the day the wording changes, and
- * the drift's shape is precisely an unreceipted hop reading CLEAN: the paper
- * would vouch for a link whose receipt it never found.
+ * What a covert hop reads as to a viewer who does not see DM secrets. This one
+ * stays HERE, beside the redaction that produces it, because a covert hop is
+ * additionally marked STRUCTURALLY (`redacted:true`) and every consumer reads the
+ * boolean. The UNRECEIPTED line has no such marker — nothing but the string says
+ * "no receipt was found" — so it lives in `receiptClauseFloor.js` with the other
+ * placeholder clauses, where the composer's guard can bind to it without reaching
+ * through this read model.
  */
-export const UNRECEIPTED_HOP = 'an earlier cause';
+export const REDACTED_HOP = 'a cause the ledger keeps hidden';
 
 /**
  * Whether a raw receipt carries a covert marker. The durable receipt drops the

@@ -100,6 +100,14 @@ const REVIEWED_CLOSURE = Object.freeze([
   // nothing, and its whole charter is to assert nothing the edge does not carry.
   'src/domain/display/heraldJoinMolds.js',
   'src/domain/display/humanizeEngineTokens.js',
+  // THE CLAUSE FLOOR (lane HR): the three PLACEHOLDER strings a hop can arrive
+  // carrying instead of a clause, plus the predicate that recognises them.
+  // Reviewed onto the closure deliberately — it is three frozen string constants
+  // and an `includes`, reads nothing, imports nothing, and exists precisely so the
+  // composer can refuse to compose over a receipt nobody found WITHOUT reaching
+  // into `causeWalk`/`chronicleGraph` (which would pull two read models across the
+  // fence to learn one fact).
+  'src/domain/display/receiptClauseFloor.js',
   'src/domain/display/newsBody.js',
   'src/domain/formatNumber.js',
   'src/domain/realm/heraldRouting.js',
