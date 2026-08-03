@@ -22,7 +22,13 @@
 /**
  * @param {any} r A settlement object (reads `defenseProfile`, `economicState`,
  *   and `config`; tolerant of missing fields via optional chaining).
- * @returns {{icon: string, label: string, color: string, assess: string}[]}
+ * @returns {{label: string, color: string, assess: string}[]}
+ *
+ * NO ICON FIELD (owner icon-sweep directive, 2026-08-03). Each row previously
+ * carried an empty-string icon slot — residue of an earlier emoji strip — which
+ * the DefenseTab rendered as an empty span that still consumed its flex gap. The
+ * label carries the meaning; the slot and its phantom spacing are both gone.
+ * Do not reintroduce the slot: tests/lint/copyCorruption.test.js SIG 1 bans it.
  */
 export function buildThreatAssessment(r) {
   const d = r?.defenseProfile || {};
@@ -93,7 +99,6 @@ export function buildThreatAssessment(r) {
     }
   }
   result.push({
-    icon: '',
     label: 'Beasts & Monsters',
     color: monColor,
     assess: mon,
@@ -120,7 +125,6 @@ export function buildThreatAssessment(r) {
     mil = 'No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.';
   }
   result.push({
-    icon: '',
     label: 'Invasion & War',
     color: milColor,
     assess: mil,
@@ -147,7 +151,6 @@ export function buildThreatAssessment(r) {
     intA += 'No legal infrastructure — order relies on force alone.';
   }
   result.push({
-    icon: '',
     label: 'Internal Security',
     color: intColor,
     assess: intA,
@@ -170,7 +173,6 @@ export function buildThreatAssessment(r) {
     econA = 'Economic base cannot support crisis response. Any sustained threat quickly overwhelms the capacity to respond.';
   }
   result.push({
-    icon: '',
     label: 'Economic Survival',
     color: econColor,
     assess: econA,
@@ -185,7 +187,6 @@ export function buildThreatAssessment(r) {
         ? ' Parish clergy provide basic wound care — better than nothing, worse than a hospital.'
         : ' No medical infrastructure. Plague spreads until it burns out.');
   result.push({
-    icon: '',
     label: 'Disasters & Famine',
     color: '#1a4a5a',
     assess: disA,

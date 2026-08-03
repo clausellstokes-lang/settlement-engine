@@ -36,7 +36,7 @@ export function ApplyControls({
             {/* Wave R-1 (atlas queue #4): the recovery claim names the ACTUAL model —
                 undo from the Timeline, latest entry only — instead of the vague
                 "deliberate action". One string, vetoable. */}
-            ⚠ This destroys {settlement?.name || 'the settlement'}. Services go dark, institutions are impaired, and partner relationships sour. Recoverable only by Undo on the Timeline, and only while this remains the latest event.
+            This destroys {settlement?.name || 'the settlement'}. Services go dark, institutions are impaired, and partner relationships sour. Recoverable only by Undo on the Timeline, and only while this remains the latest event.
           </div>
           <input
             value={destroyConfirm}

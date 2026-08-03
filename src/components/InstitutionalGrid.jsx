@@ -203,7 +203,7 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
   // uppercase EXCLUDED text label, not strikethrough + opacity alone, mirroring
   // the Forced chip so colour is never the sole carrier of state.
   const labelText = reqOverridden                  ? '✕ Overridden'
-    : def.required && !reqOverridden               ? '✦ Required'
+    : def.required && !reqOverridden               ? 'Required'
     : req && isOutOfTier                           ? 'Cross-tier'
     : req                                          ? 'Forced'
     : isExcluded                                   ? 'Excluded'

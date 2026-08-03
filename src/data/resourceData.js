@@ -14,7 +14,6 @@ import { TAG } from './entityTags.js';
 export const RESOURCE_DATA = {
   fishing_grounds: {
     label: "Fishing Grounds",
-    icon: "",
     desc: "Deep-water or reef fishing close to shore; reliable fish and seafood supply",
     commodities: ["fish", "salt"],
     instBoosts: { dock: 1.6, fishm: 2.0, salt: 1.5, fisher: 1.8, fish: 1.6 },
@@ -26,7 +25,6 @@ export const RESOURCE_DATA = {
   },
   salt_flats: {
     label: "Salt Flats",
-    icon: "",
     desc: "Coastal evaporation pans or inland salt deposits; the settlement produces its own salt",
     commodities: ["salt"],
     instBoosts: { salt: 2.5, merchant: 1.2 },
@@ -38,7 +36,6 @@ export const RESOURCE_DATA = {
   },
   deep_harbour: {
     label: "Deep Natural Harbour",
-    icon: "",
     desc: "A sheltered deepwater anchorage capable of hosting large vessels",
     commodities: ["maritime_access"],
     instBoosts: { port: 1.8, dock: 1.8, shipyard: 2.2, warehouse: 1.4 },
@@ -50,7 +47,6 @@ export const RESOURCE_DATA = {
   },
   shipbuilding_timber: {
     label: "Coastal Timber",
-    icon: "",
     desc: "Dense timber stands near the coast suitable for shipbuilding and construction",
     commodities: ["timber"],
     instBoosts: { shipyard: 2.0, carpenter: 1.4, sawmill: 1.5 },
@@ -62,7 +58,6 @@ export const RESOURCE_DATA = {
   },
   river_mills: {
     label: "Mill Sites",
-    icon: "️",
     desc: "Fast-flowing sections ideal for water-powered mills; grain and textile processing",
     commodities: ["flour", "processed_textiles"],
     instBoosts: { mill: 2.2, weaver: 1.5, tanner: 1.4, fuller: 1.6 },
@@ -74,7 +69,6 @@ export const RESOURCE_DATA = {
   },
   river_clay: {
     label: "Clay Deposits",
-    icon: "",
     desc: "Rich riverbank clay deposits suitable for brickmaking and pottery",
     // Clay feeds ceramics and brickmaking; it is not quarried building stone.
     // The resource-analysis catalog has its own clay chain, so this no longer
@@ -89,7 +83,6 @@ export const RESOURCE_DATA = {
   },
   fertile_floodplain: {
     label: "Fertile Floodplain",
-    icon: "",
     desc: "Annual flooding renews soil nutrients; exceptionally productive farmland",
     commodities: ["grain", "livestock"],
     instBoosts: { farm: 1.8, granar: 1.6, mill: 1.4, market: 1.2 },
@@ -101,7 +94,6 @@ export const RESOURCE_DATA = {
   },
   river_fish: {
     label: "River Fisheries",
-    icon: "",
     desc: "Salmon runs, freshwater fish, and fishing weirs in the river",
     commodities: ["fish", "salt"],
     instBoosts: { fishm: 1.6, dock: 1.2 },
@@ -113,7 +105,6 @@ export const RESOURCE_DATA = {
   },
   hunting_grounds: {
     label: "Hunting Grounds",
-    icon: "",
     desc: "Dense forest with abundant deer, boar, and smaller game; furs and meat available",
     // Wild game is not livestock. Keeping those vocabularies distinct prevents
     // a hunting ground from satisfying herd, dairy, and caravan-animal chains.
@@ -126,7 +117,6 @@ export const RESOURCE_DATA = {
   },
   managed_forest: {
     label: "Managed Woodland",
-    icon: "",
     desc: "Sustainably harvested timber stands; reliable lumber and charcoal supply",
     commodities: ["timber"],
     instBoosts: { sawmill: 1.8, carpenter: 1.6, charcoal: 1.5, smelter: 1.15 },
@@ -137,7 +127,6 @@ export const RESOURCE_DATA = {
   },
   foraging_areas: {
     label: "Wild Foraging Areas",
-    icon: "",
     desc: "Mushrooms, berries, medicinal herbs, and wild plants; supports herbalists and alchemists",
     commodities: ["honey", "medicinal_herbs"],
     instBoosts: { apoth: 2.2, alchemist: 1.5, healer: 1.3 },
@@ -148,7 +137,6 @@ export const RESOURCE_DATA = {
   },
   ancient_grove: {
     label: "Ancient Grove",
-    icon: "",
     desc: "Old-growth forest with religious or mystical significance; attracts druids and pilgrims",
     commodities: ["medicinal_herbs", "honey"],
     instBoosts: { druid: 2, church: 1.3, shrine: 1.6, magic: 1.2 },
@@ -159,7 +147,6 @@ export const RESOURCE_DATA = {
   },
   grain_fields: {
     label: "Extensive Grain Fields",
-    icon: "",
     desc: "Wide open farmland producing wheat, barley, and oats well beyond local needs",
     commodities: ["grain", "flour"],
     instBoosts: { granar: 1.8, mill: 1.6, market: 1.3, farm: 1.5 },
@@ -170,7 +157,6 @@ export const RESOURCE_DATA = {
   },
   grazing_land: {
     label: "Open Grazing Land",
-    icon: "",
     desc: "Extensive pasture for cattle, sheep, and horses; wool, leather, and dairy production",
     commodities: ["livestock", "wool", "dairy", "animal hides"],
     instBoosts: { weaver: 1.5, tanner: 1.5, market: 1.3, butcher: 1.4, dairy: 1.6 },
@@ -181,7 +167,6 @@ export const RESOURCE_DATA = {
   },
   crossroads_position: {
     label: "Strategic Crossroads",
-    icon: "️",
     desc: "Intersection of multiple trade routes; every caravan must pass through here",
     commodities: ["trade_access"],
     instBoosts: { inn: 1.6, market: 1.8, guild: 1.3, warehouse: 1.5, stable: 1.6 },
@@ -192,7 +177,6 @@ export const RESOURCE_DATA = {
   },
   iron_deposits: {
     label: "Iron Ore Deposits",
-    icon: "️",
     desc: "Accessible iron ore veins; enables metalworking and weapon production locally",
     commodities: ["iron", "metalwork"],
     instBoosts: { smith: 1.8, smelter: 2.2, mine: 2.5, specialized: 1.8 },
@@ -203,7 +187,6 @@ export const RESOURCE_DATA = {
   },
   stone_quarry: {
     label: "Stone quarry",
-    icon: "",
     desc: "Accessible limestone, granite, or sandstone; reduces construction costs significantly",
     commodities: ["stone"],
     instBoosts: { mason: 1.8, quarry: 2.5, stonemason: 1.6 },
@@ -214,7 +197,6 @@ export const RESOURCE_DATA = {
   },
   precious_metals: {
     label: "Precious Metal Veins",
-    icon: "",
     desc: "Silver, gold, or copper deposits; attracts merchants and banking infrastructure",
     commodities: ["luxury", "gems"],
     instBoosts: { jewel: 2, mint: 2.5, bank: 1.5, guild: 1.3, merchant: 1.4 },
@@ -225,7 +207,6 @@ export const RESOURCE_DATA = {
   },
   gemstone_deposits: {
     label: "Gemstone Deposits",
-    icon: "",
     desc: "Crystals, semiprecious stones, or gems in the surrounding rock",
     commodities: ["luxury"],
     instBoosts: { jewel: 2, merchant: 1.3, guild: 1.2, magic: 1.2 },
@@ -236,7 +217,6 @@ export const RESOURCE_DATA = {
   },
   coal_deposits: {
     label: "Coal or Peat Deposits",
-    icon: "",
     desc: "Surface-accessible fuel for forges, kilns, and domestic heating",
     // data-tables-5: coal deposits emit 'coal' (→ fuel category), not the stray 'timber'
     // token that made every coal settlement read as a timber producer. 'peat' is already
@@ -250,7 +230,6 @@ export const RESOURCE_DATA = {
   },
   ancient_ruins: {
     label: "Ancient Ruins",
-    icon: "️",
     desc: "Ruins of a prior civilization; scholars, treasure-hunters, and curious adventurers arrive regularly",
     commodities: ["trade_access"],
     instBoosts: { sage: 1.8, library: 1.5, guild: 1.2, adventurer: 1.8, magic: 1.3 },
@@ -261,7 +240,6 @@ export const RESOURCE_DATA = {
   },
   hot_springs: {
     label: "Hot Springs / Healing Waters",
-    icon: "️",
     desc: "Natural thermal springs with reputed healing properties; attracts pilgrims and the infirm",
     commodities: ["medicinal_herbs"],
     instBoosts: { healer: 2.0, church: 1.4, inn: 1.8 },
@@ -272,7 +250,6 @@ export const RESOURCE_DATA = {
   },
   magical_node: {
     label: "Magical Ley Line Node",
-    icon: "",
     desc: "Intersection of magical energy; draws practitioners and makes ritual work easier",
     commodities: ["medicinal_herbs"],
     instBoosts: { wizard: 1.8, mage: 1.8, alchemist: 1.5, academy: 1.5, magic: 1.6, scroll: 1.4 },
@@ -283,7 +260,6 @@ export const RESOURCE_DATA = {
   },
   defended_pass: {
     label: "Mountain Pass",
-    icon: "️",
     desc: "The only viable route through surrounding terrain; all overland traffic must pass here",
     commodities: ["trade_access"],
     instBoosts: { garrison: 1.6, inn: 1.5, stable: 1.4, merchant: 1.3 },
@@ -294,7 +270,6 @@ export const RESOURCE_DATA = {
   },
   marshlands: {
     label: "Marshlands",
-    icon: "",
     desc: "Wetlands providing reeds, peat, waterfowl, and unusual plant materials; impassable to armies",
     commodities: ["peat", "honey", "medicinal_herbs"],
     instBoosts: { thatcher: 1.5, apoth: 1.5, peat: 1.5 },
@@ -306,7 +281,6 @@ export const RESOURCE_DATA = {
   oasis_water: {
     terrain: "desert",
     label: "Oasis and Water Rights",
-    icon: "",
     desc: "Rare water access determines settlement survival and trade leverage. Controls caravan routes.",
     commodities: ["water", "dates"],
     instBoosts: { market: 1.6, caravanserai: 2.8, merchant: 1.5, inn: 1.8 },
@@ -318,7 +292,6 @@ export const RESOURCE_DATA = {
   date_palms: {
     terrain: "desert",
     label: "Date Palms and Orchards",
-    icon: "",
     desc: "Productive desert agriculture: dates, figs, and drought-resistant crops in sufficient quantity to trade.",
     commodities: ["grain", "dates"],
     instBoosts: { market: 1.4, farm: 1.6, granary: 1.5 },
@@ -330,7 +303,6 @@ export const RESOURCE_DATA = {
   glass_sand: {
     terrain: "desert",
     label: "Fine Glass Sand",
-    icon: "️",
     desc: "High-purity silica sand deposits ideal for glassblowing and fine ceramics.",
     commodities: ["glass"],
     instBoosts: { glassblower: 2.5, craft: 1.3 },
@@ -342,7 +314,6 @@ export const RESOURCE_DATA = {
   desert_salt: {
     terrain: "desert",
     label: "Salt Pans",
-    icon: "",
     desc: "Extensive salt deposits from ancient dried seabeds: major trade commodity across all desert routes.",
     commodities: ["salt"],
     instBoosts: { market: 1.6, merchant: 1.5 },
@@ -354,7 +325,6 @@ export const RESOURCE_DATA = {
   camel_herds: {
     terrain: "desert",
     label: "Camel Herds",
-    icon: "",
     desc: "Essential for desert trade and transport. Camel milk, leather, and wool also traded locally.",
     commodities: ["livestock", "dairy", "wool", "animal hides"],
     instBoosts: { market: 1.5, caravanserai: 2.5, stable: 1.8, inn: 1.6 },
@@ -366,7 +336,6 @@ export const RESOURCE_DATA = {
   alpine_pasture: {
     terrain: "mountain",
     label: "Alpine Pastures",
-    icon: "️",
     desc: "High summer pasture for sheep and goats: wool, cheese, and live animals traded at seasonal markets.",
     commodities: ["wool", "livestock", "dairy", "animal hides"],
     instBoosts: { market: 1.4, weaver: 1.5, farm: 1.3 },
@@ -378,7 +347,6 @@ export const RESOURCE_DATA = {
   mountain_timber: {
     terrain: "mountain",
     label: "Mountain Timber",
-    icon: "",
     desc: "Dense evergreen forests at elevation: structural timber, fuel wood, and charcoal production.",
     commodities: ["timber"],
     instBoosts: { sawmill: 2.0, carpenter: 1.7, charcoal: 1.8 },
@@ -390,7 +358,6 @@ export const RESOURCE_DATA = {
   hot_springs_mineral: {
     terrain: "mountain",
     label: "Mineral Hot Springs",
-    icon: "️",
     desc: "Medicinal thermal waters drawing pilgrims and wealthy travelers. Alum and sulfur deposits nearby.",
     commodities: ["medicinal_herbs"],
     instBoosts: { alchemist: 1.8, apoth: 1.8, inn: 1.5 },

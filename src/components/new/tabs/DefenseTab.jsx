@@ -152,7 +152,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
         <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Threat Assessment</div>
         <div style={{fontSize:FS.xxs,color:MUTED,marginBottom:8,fontStyle:'italic'}}>Bars show the settlement&apos;s defense readiness against each threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. Higher is better.</div>
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
-          {threats.map(({icon,label,color,assess},i)=>{
+          {threats.map(({label,color,assess},i)=>{
             const sc = threatScores[label]||0;
             const badge = scoreBand(sc);
             const badgeColor = scoreColor(sc);
@@ -162,7 +162,6 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
                 onClick={()=>setExpandedThreat(isExp?null:i)}
                 onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedThreat(isExp?null:i);}}}>
                 <div style={{display:'flex',alignItems:'center',gap:8,padding:'8px 12px',flexWrap:isMobile?'wrap':undefined}}>
-                  <span style={{fontSize: FS['14'],flexShrink:0,lineHeight:1}}>{icon}</span>
                   <span style={isMobile
                     ? {fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,flex:'1 1 auto',minWidth:0,lineHeight:1.3}
                     : {fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,width:130,flexShrink:0,lineHeight:1.3}}>{label}</span>
@@ -332,7 +331,6 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {caps.map((cap,i)=>(
             <div key={i} style={{display:'flex',gap:12,alignItems:'flex-start',background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${cap.color}`,padding:'8px 12px'}}>
-              <span style={{fontSize: FS['14'],flexShrink:0,marginTop:1}}>{cap.icon}</span>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:2}}>
                   <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag2}}>{cap.label}</span>

@@ -44,7 +44,7 @@ export function PreviewPanel({ preview, stale = false, queued = false }) {
           background: PARTY_BG, color: PARTY, border: `1px solid ${PARTY}`,
           fontSize: FS.xxs, fontFamily: sans, fontWeight: 800, letterSpacing: '0.04em',
         }}>
-          ⚔ Party-caused
+          Party-caused
         </div>
       )}
       <div style={{ fontSize: FS.sm, fontFamily: sans, color: INK, fontWeight: 700, marginBottom: 4 }}>

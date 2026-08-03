@@ -134,7 +134,7 @@ export default function FounderTile() {
           margin: `${SP.sm}px 0 0`, fontFamily: serif_, fontWeight: 600,
           fontSize: FS['22'], color: GOLD_500, letterSpacing: '-0.005em',
         }}>
-          👑 Founder Lifetime
+          Founder Lifetime
         </h2>
         {typeof seatsRemaining === 'number' && (
           <div style={{ marginTop: 6, display: 'flex', flexDirection: 'column', gap: 4 }}>

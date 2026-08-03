@@ -182,7 +182,7 @@ export default function AdminSimTuningPanel() {
             <div style={{ fontFamily: sans, fontSize: FS.sm, color: data.dormancy.ok ? GREEN : RED, fontWeight: 800 }}>
               {data.dormancy.warOff
                 ? (data.dormancy.ok ? '✓ War layer off and no live war ledger (byte-identical off-state holds).' : '✗ War layer off but a war ledger is present. Dormancy is violated.')
-                : '⚙ War layer on. War ledgers are expected.'}
+                : 'War layer on. War ledgers are expected.'}
             </div>
           </Card>
 

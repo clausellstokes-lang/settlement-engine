@@ -179,7 +179,7 @@ export default function WelcomeCreditCard({ saveId = null, onVisibilityChange })
           <div style={{ fontWeight: 700, color: SLATE }}>This one: free</div>
         </div>
         <Button variant="ai" size="md" onClick={onNarrate}>
-          ✦ Narrate this town
+          Narrate this town
         </Button>
         <Button variant="ghost" size="sm" onClick={onLater}>
           Maybe later

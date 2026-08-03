@@ -101,7 +101,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                 </span>
                 {event.at&&<span style={{fontSize:FS.micro,color:MUTED,fontWeight:700}}>{formatRecentDate(event.at)}</span>}
                 {event.partyCaused
-                  ? <span title="Caused by the party" style={{fontSize:FS.micro,color:PARTY,background:PARTY_BG,border:`1px solid ${PARTY}`,padding:'0 5px',fontWeight:800}}>⚔ PARTY</span>
+                  ? <span title="Caused by the party" style={{fontSize:FS.micro,color:PARTY,background:PARTY_BG,border:`1px solid ${PARTY}`,padding:'0 5px',fontWeight:800}}>PARTY</span>
                   : event.source==='manual'
                     ? <span title="A change you authored" style={{fontSize:FS.micro,color:SRC_EDIT,background:SRC_EDIT_BG,padding:'0 5px',fontWeight:800}}>EDIT</span>
                     : <span title="The world engine produced this" style={{fontSize:FS.micro,color:swatch.info,background:swatch['#F4F6FD'],padding:'0 5px',fontWeight:800}}>WORLD</span>}

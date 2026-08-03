@@ -602,7 +602,7 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
       entrepot: false,
       upstreamMissing: importObjs.map((i) => i.label),
       upstreamNote: importObjs.length ? `Imported inputs: ${importObjs.map((i) => i.label).join(', ')}` : '',
-      needLabel: 'Custom', needIcon: '⚙', needColor: '#a0762a',
+      needLabel: 'Custom', needIcon: '', needColor: '#a0762a',
       // ── discovery / verification metadata (renderer ignores) ──
       discovered: {
         nodes: chainNodes.map((n) => ({

@@ -125,7 +125,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                   {searchResults.map((r,i)=>(
                     <div key={i} style={{marginBottom:6}}>
                       <ServiceItem svc={r.svc} accent={Ts[r.cat]?.accent||'#1a5a28'} isCriminal={r.cat==='criminal'} tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} settlement={settlement} chainDepth={serviceChainDepth.get((typeof r.svc==='string'?r.svc:r.svc?.institution||'').toLowerCase())}/>
-                      <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:20,display:'block',marginTop:1}}>{Ts[r.cat]?.icon} {Ts[r.cat]?.label}</span>
+                      <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:20,display:'block',marginTop:1}}>{Ts[r.cat]?.label}</span>
                     </div>
                   ))}
                 </div>
@@ -142,7 +142,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8}}>Category Status</div>
             <div style={{display:'grid',gridTemplateColumns:mobile?'repeat(2,1fr)':'repeat(3,1fr)',gap:6}}>
               {catOrder.map(cat => {
-                const meta = Ts[cat] || {label:cat,accent:'#6b5340',icon:'•'};
+                const meta = Ts[cat] || {label:cat,accent:'#6b5340'};
                 const cs = catStats[cat] || {total:0,imp:0,deg:0,vul:0};
                 const hasImp = cs.imp > 0;
                 const hasDeg = cs.deg > 0 && !hasImp;
@@ -162,7 +162,6 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                       }
                     }}>
                     <div style={{display:'flex',alignItems:'center',gap:5}}>
-                      <span style={{fontSize:FS.md}}>{meta.icon}</span>
                       <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag,flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{meta.label}</span>
                       <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{cs.total}</span>
                     </div>
@@ -173,11 +172,10 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                 );
               })}
               {missing.map(cat => {
-                const meta = Ts[cat] || {label:cat,accent:'#6b5340',icon:'•'};
+                const meta = Ts[cat] || {label:cat,accent:'#6b5340'};
                 return (
                   <div key={'missing-'+cat} style={{background:swatch['#F0E4C0'],border:'1px solid #e0c080',borderLeft:'3px solid #b8860b',padding:'6px 10px',opacity:0.8}}>
                     <div style={{display:'flex',alignItems:'center',gap:5}}>
-                      <span style={{fontSize:FS.md}}>{meta.icon}</span>
                       <span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#5A3A10'],flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{meta.label}</span>
                     </div>
                     <div style={{marginTop:3,fontSize:FS.xxs,fontWeight:700,color:swatch['#7A5010']}}>not available</div>
@@ -200,7 +198,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
           {catOrder.map(cat => {
             const list = services[cat];
             if (!list?.length) return null;
-            const meta = Ts[cat] || {label:cat,accent:'#6b5340',icon:'•'};
+            const meta = Ts[cat] || {label:cat,accent:'#6b5340'};
             const cs = catStats[cat];
             const isCriminal = cat === 'criminal';
             const open = isOpen(cat);
@@ -216,7 +214,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                 overflow:'hidden'
               }}>
                 {/* Category toggle — bespoke: full-width header row with left-aligned
-                    icon/label/count, conditional impairment badges, an auto-pushed
+                    label/count, conditional impairment badges, an auto-pushed
                     chevron, and an open-state-dependent bottom border. The Button
                     primitive centers content and can't express this layout, so it
                     stays raw (this file remains in the raw-button baseline). */}
@@ -226,7 +224,6 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                   borderBottom:open?`1px solid ${isCriminal?'#3a1a1a':`${meta.accent}20`}`:'none',
                   cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'
                 }}>
-                  <span style={{fontSize: FS['14']}}>{meta.icon}</span>
                   <span style={{fontSize:FS.sm,fontWeight:800,color:isCriminal?'#c06060':accentColor,textTransform:'uppercase',letterSpacing:'0.06em'}}>{meta.label}</span>
                   <span style={{fontSize:FS.xs,color:isCriminal?'#8a5050':'#9c8068'}}>({cs.total})</span>
                   {hasImp&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#F4DEDE'],border:'1px solid #d8c8a8',padding:'1px 5px',marginLeft:2}}>{cs.imp} impaired</span>}
@@ -259,7 +256,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
         </div>
 
         <p style={{fontSize:FS.xs,color:MUTED,marginTop:12,fontStyle:'italic',textAlign:'right'}}>
-          {totalCount} services · {catOrder.length} categories{totalImpaired>0?` · ${totalImpaired} impaired`:''}{hasCustom?' · ✦ custom':''}
+          {totalCount} services · {catOrder.length} categories{totalImpaired>0?` · ${totalImpaired} impaired`:''}{hasCustom?' · custom':''}
         </p>
       </>}
     </div>

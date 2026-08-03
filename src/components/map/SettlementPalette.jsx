@@ -381,7 +381,7 @@ function SettlementCard({ save, placed, onSelect, onHover }) {
                   textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                 }}
               >
-                ⚠ {stressLabel}
+                {stressLabel}
               </span>
             )}
           </div>

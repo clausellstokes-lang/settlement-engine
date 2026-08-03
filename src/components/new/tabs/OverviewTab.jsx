@@ -153,7 +153,6 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
       {stresses.length>0&&<div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:14}}>
         {stresses.map((v,i)=>(
           <div key={i} style={{display:'flex',gap:12,alignItems:'flex-start',background:`${v.colour}0e`,border:`2px solid ${v.colour}`,padding:'10px 14px'}}>
-            <span style={{fontSize: FS['18'],flexShrink:0}}>{v.icon}</span>
             <div style={{flex:1,minWidth:0}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4}}>
                 <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:v.colour}}>{v.label}</span>

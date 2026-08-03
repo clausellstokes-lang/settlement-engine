@@ -145,7 +145,10 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 10px',
         background: st.bg, borderLeft: `3px solid ${st.border}`}}>
-        <span style={{ fontSize: FS.sm }}>{chain.resourceIcon || ''}</span>
+        {/* Icon sweep 2026-08-03: the built-in corpus authors no resourceIcon, so
+            this slot renders ONLY for custom/AI-authored chains that carry one.
+            An unguarded span emitted an empty box that still ate the flex gap. */}
+        {chain.resourceIcon && <span style={{ fontSize: FS.sm }}>{chain.resourceIcon}</span>}
         <span style={{ fontSize: FS.sm, fontWeight: 700, color: st.color, flex: 1 }}>{chain.label}</span>
         {hasExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success, background: swatch['#E8F5EC'], border: '1px solid #a8d8b0', padding: '1px 5px' }}>EXPORT</span>}
         {missing.length > 0 && <span style={{ fontSize: FS.micro, color: swatch.info, background: swatch['#FAF8F4'], border: '1px solid #a0b0d8', padding: '1px 5px' }}>imported</span>}
@@ -231,7 +234,7 @@ function CategoryGroup({ needKey, needLabel, needIcon, needColor, chains, instNa
           textAlign: 'left', fontWeight: 'inherit',
         }}
       >
-        <span style={{ fontSize: FS['14'] }}>{needIcon || ''}</span>
+        {needIcon && <span style={{ fontSize: FS['14'] }}>{needIcon}</span>}
         <span style={{ fontSize: FS.sm, fontWeight: 800, color: needColor || '#1c1409', flex: 1,
           textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           {needLabel || needKey}

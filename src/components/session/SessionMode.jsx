@@ -358,7 +358,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
 
           {entries.length > 0 && (
             <section id="sf-session-tonight" aria-label="Tonight at the table">
-              <SectionTitle>🕯 Tonight at the table</SectionTitle>
+              <SectionTitle>Tonight at the table</SectionTitle>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {entries.map((row, i) => (
                   <Card key={i} accent={KIND_ACCENT[row.kind] || GOLD_ACCENT}>
@@ -406,7 +406,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
 
           {war && (
             <section id="sf-session-war" aria-label="Live war state">
-              <SectionTitle>⚔ The war right now</SectionTitle>
+              <SectionTitle>The war right now</SectionTitle>
               <WarPanel war={war} />
             </section>
           )}

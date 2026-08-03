@@ -1345,7 +1345,7 @@ export const en = Object.freeze({
       world:    'Where this town sits in the campaign',
       hooks:    'What I can run next session',
     },
-    howThisWasBuilt: '⚙ How this was simulated',
+    howThisWasBuilt: 'How this was simulated',
     backToList:      'Back to settlements',
     editModeOn:      'Edit mode',
     editModeOff:     'View mode',

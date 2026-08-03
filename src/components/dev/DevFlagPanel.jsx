@@ -100,7 +100,7 @@ export default function DevFlagPanel() {
           boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
         }}
       >
-        ⚑ flags
+        flags
       </Button>
     );
   }
@@ -125,7 +125,7 @@ export default function DevFlagPanel() {
         borderBottom: '1px solid #1c1409',
       }}>
         <span style={{ fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: FS.xs }}>
-          ⚑ Feature flags (DEV)
+          Feature flags (DEV)
         </span>
         <IconButton
           Icon={X}

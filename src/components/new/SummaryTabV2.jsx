@@ -212,7 +212,6 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
             display: 'flex', alignItems: 'center', gap: 6,
             marginBottom: 2,
           }}>
-            <span style={{ fontSize: FS.xs, color: AMBER }}>🕯</span>
             <span style={{
               fontSize: FS.micro, fontWeight: 800,
               letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -317,7 +316,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
               onClick={onOpenTableView}
               style={{ marginTop: 6 }}
             >
-              📱 Open in Table View
+              Open in Table View
             </Button>
           )}
         </aside>

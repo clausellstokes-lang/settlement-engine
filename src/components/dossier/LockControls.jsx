@@ -74,7 +74,6 @@ const rowStyle = { display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wra
 function LockRow({ note, cta, on, onToggle }) {
   return (
     <div style={rowStyle}>
-      <span aria-hidden="true" style={{ fontSize: FS.xs, opacity: on ? 1 : 0.4 }}>{on ? '🔒' : '🔓'}</span>
       <p style={noteStyle}>{note}</p>
       <Button variant="secondary" size="sm" onClick={onToggle} aria-pressed={on} style={{ flexShrink: 0 }}>
         {cta}

@@ -920,55 +920,55 @@ const INSTITUTIONAL_SERVICE_MAP = [
   // Banking & Finance
   { patterns:['banking house','banking district','money changer'],
     output:'Financial services', exportLabel:'Financial services (letters of credit)',
-    incomeLabel:'Banking & Finance', exportable:true, icon:'', color:'#2a3a7a' },
+    incomeLabel:'Banking & Finance', exportable:true, color:'#2a3a7a' },
   // Legal
   { patterns:['courthouse','multiple courthouse','court building'],
     output:'Legal services', exportLabel:'Legal services (contracts, notarial)',
-    incomeLabel:'Legal Services', exportable:true, icon:'️', color:'#3a3a3a' },
+    incomeLabel:'Legal Services', exportable:true, color:'#3a3a3a' },
   // Religious / Pilgrimage
   { patterns:['cathedral','major monaster','monastery','pilgrim'],
     output:'Religious services', exportLabel:'Pilgrimage & religious tourism',
-    incomeLabel:'Religious Revenue', exportable:true, icon:'', color:'#5a3a1a' },
+    incomeLabel:'Religious Revenue', exportable:true, color:'#5a3a1a' },
   // Education
   { patterns:['university','academy of magic','academy'],
     output:'Higher education', exportLabel:'Educational services (degrees, training)',
-    incomeLabel:'Education & Scholarship', exportable:true, icon:'', color:'#1a3a7a' },
+    incomeLabel:'Education & Scholarship', exportable:true, color:'#1a3a7a' },
   // Military / Mercenary — requires substantial military infrastructure (city+)
   { patterns:['mercenary quarter','multiple garrison','professional city watch'],
     output:'Armed escort & mercenary hire', exportLabel:'Military contract services',
-    incomeLabel:'Military Contracts', exportable:true, icon:'', color:'#8b1a1a' },
+    incomeLabel:'Military Contracts', exportable:true, color:'#8b1a1a' },
   // Arcane
   { patterns:['mages\' guild','mages district','academy of magic','spellcasting service'],
     output:'Arcane & spellcasting services', exportLabel:'Arcane services (identification, enchanting)',
-    incomeLabel:'Arcane Services', exportable:true, icon:'', color:'#5a2a8a' },
+    incomeLabel:'Arcane Services', exportable:true, color:'#5a2a8a' },
   // Medical
   { patterns:['major hospital','hospital network','small hospital'],
     output:'Medical & surgical services', exportLabel:null,
-    incomeLabel:'Medical Services', exportable:false, icon:'️', color:'#8b1a1a' },
+    incomeLabel:'Medical Services', exportable:false, color:'#8b1a1a' },
   // Entertainment / Culture
   { patterns:['colosseum','arena','bardic college','opera house','multiple theater'],
     output:'Entertainment & cultural tourism', exportLabel:'Cultural tourism revenue',
-    incomeLabel:'Entertainment & Culture', exportable:true, icon:'', color:'#7a3a1a' },
+    incomeLabel:'Entertainment & Culture', exportable:true, color:'#7a3a1a' },
   // Waterborne trade. A dock is valid on a river and therefore cannot, by
   // itself, prove ocean-going commerce. The projection below promotes this to
   // maritime wording only when an explicitly maritime institution survives
   // the canonical world-law filter.
   { patterns:['docks/port','major port','navy','shipyard'],
     output:'Waterborne freight services', exportLabel:'Waterborne freight services (cargo, pilotage)',
-    incomeLabel:'Port Revenue', exportable:true, icon:'', color:'#1a4a6a',
+    incomeLabel:'Port Revenue', exportable:true, color:'#1a4a6a',
     waterborne:true },
   // Library / Knowledge
   { patterns:['great library','sage'],
     output:'Research & scholarly services', exportLabel:'Scholarly services (research access, rare texts)',
-    incomeLabel:'Scholarly Revenue', exportable:true, icon:'', color:'#2a4a2a' },
+    incomeLabel:'Scholarly Revenue', exportable:true, color:'#2a4a2a' },
   // Alchemy
   { patterns:['alchemist quarter','alchemist shop'],
     output:'Alchemical products & services', exportLabel:'Alchemical trade (potions, reagents)',
-    incomeLabel:'Alchemical Trade', exportable:true, icon:'️', color:'#5a2a8a' },
+    incomeLabel:'Alchemical Trade', exportable:true, color:'#5a2a8a' },
   // Planar
   { patterns:['planar trader','planar embassy'],
     output:'Extraplanar goods & services', exportLabel:'Planar trade access',
-    incomeLabel:'Planar Commerce', exportable:true, icon:'', color:'#1a1a5a' },
+    incomeLabel:'Planar Commerce', exportable:true, color:'#1a1a5a' },
 ];
 
 /**

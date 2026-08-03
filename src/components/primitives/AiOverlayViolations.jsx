@@ -98,7 +98,7 @@ export function AiOverlayViolations({ violations, onDismiss }) {
           fontSize: FS.xs, fontWeight: 800, color: COLORS.hardText,
           textTransform: 'uppercase', letterSpacing: '0.06em',
         }}>
-          ⚠ AI overlay drift detected
+          AI overlay drift detected
         </span>
         <span style={{ fontSize: FS.xs, color: COLORS.muted, flex: 1 }}>
           {totalCount} issue{totalCount === 1 ? '' : 's'}

@@ -173,7 +173,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
         <div style={{background:swatch['#F8F0FF'],border:'1px solid #c0a0e0',borderLeft:'4px solid #7a3a9a',
           padding:'10px 14px',marginBottom:12}}>
           <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.magic,marginBottom:4}}>
-            ✦ Magic Dependency · First Survey
+            Magic Dependency · First Survey
           </div>
           <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.5}}>
             This settlement's resilience relies on active magical infrastructure. One or more supply
@@ -184,14 +184,14 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
           {(s.economicState?.activeChains||[]).filter(c=>c.magicNote).map((c,i)=>(
             <div key={i} style={{fontSize:FS.xxs,color:swatch['#7A4AAA'],marginTop:6,paddingLeft:8,
               borderLeft:'2px solid #c0a0e0',fontStyle:'italic'}}>
-              ✦ {c.label}: {c.magicNote}
+              {c.label}: {c.magicNote}
             </div>
           ))}
         </div>
       )}
 
       {/* ── BY-DESIGN CONTRADICTIONS ────────────────────────────────────── */}
-      {byDesignIssues.length>0&&<Section title={`✦ By-Design Contradictions (${byDesignIssues.length})`} collapsible defaultOpen={false} accent='#8a3010'>
+      {byDesignIssues.length>0&&<Section title={`By-Design Contradictions (${byDesignIssues.length})`} collapsible defaultOpen={false} accent='#8a3010'>
         <div style={{fontSize: FS['11.5'],color:swatch.inkMag3,marginBottom:8,lineHeight:1.5,fontStyle:'italic'}}>
           These contradictions are intentional overrides. The settlement has institutions or combinations outside its normal tier. Use these as plot seeds, not problems to fix.
         </div>
@@ -265,7 +265,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
       </Section>}
 
       {/* ── WARNINGS ─────────────────────────────────────────────────────── */}
-      {stressConsequences.length>0&&<Section title={`⚡ Active Stress Effects (${stressConsequences.length})`} collapsible defaultOpen={true} accent='#6b4c2a'>
+      {stressConsequences.length>0&&<Section title={`Active Stress Effects (${stressConsequences.length})`} collapsible defaultOpen={true} accent='#6b4c2a'>
         <p style={{fontSize:FS.sm,color:swatch['#5A3E28'],lineHeight:1.5,margin:'0 0 10px',fontStyle:'italic'}}>
           These are expected consequences of active stress conditions. Not structural flaws. A settlement under siege losing supply chain access is working as intended.
         </p>

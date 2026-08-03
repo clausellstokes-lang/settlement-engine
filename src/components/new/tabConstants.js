@@ -35,18 +35,23 @@ export const REL_STYLES = {
   family:         {color:'#6a3a1a',bg:'#faf4ee',border:'#d8b898'},
 };
 export const relStyle = t => REL_STYLES[t] || {color:'#6b5340',bg:'#faf8f4',border:'#e0d0b0'};
+// Service categories. NO ICON FIELD (owner icon-sweep directive, 2026-08-03):
+// the eleven emoji pictograms that used to dress these rows are gone — the label
+// and the accent colour carry the category. Do not reintroduce an icon slot;
+// tests/lint/copyCorruption.test.js SIG 1 bans the empty-string form outright,
+// and tests/components/serviceCategoryIcons.test.jsx pins the absence of glyphs.
 export const Ts = {
-  lodging:     { label:'Lodging',           accent:'#2a3a7a', icon:'🏠' },
-  food:        { label:'Food & Drink',      accent:'#1a5a28', icon:'🍺' },
-  equipment:   { label:'Equipment',         accent:'#a0762a', icon:'⚔️' },
-  magic:       { label:'Magical Services',  accent:'#5a2a8a', icon:'✨' },
-  information: { label:'Information',       accent:'#1a5a6a', icon:'📜' },
-  healing:     { label:'Healing',           accent:'#8b1a1a', icon:'⚕️' },
-  transport:   { label:'Transportation',    accent:'#2a4a7a', icon:'🐎' },
-  legal:       { label:'Legal & Financial', accent:'#3a3a3a', icon:'⚖️' },
-  entertainment:{ label:'Entertainment',    accent:'#7a3a1a', icon:'🎭' },
-  employment:  { label:'Employment',        accent:'#1a4a2a', icon:'📋' },
-  criminal:    { label:'Criminal Services', accent:'#3a1a1a', icon:'🗡️', note:'Available if you know where to look' },
+  lodging:     { label:'Lodging',           accent:'#2a3a7a' },
+  food:        { label:'Food & Drink',      accent:'#1a5a28' },
+  equipment:   { label:'Equipment',         accent:'#a0762a' },
+  magic:       { label:'Magical Services',  accent:'#5a2a8a' },
+  information: { label:'Information',       accent:'#1a5a6a' },
+  healing:     { label:'Healing',           accent:'#8b1a1a' },
+  transport:   { label:'Transportation',    accent:'#2a4a7a' },
+  legal:       { label:'Legal & Financial', accent:'#3a3a3a' },
+  entertainment:{ label:'Entertainment',    accent:'#7a3a1a' },
+  employment:  { label:'Employment',        accent:'#1a4a2a' },
+  criminal:    { label:'Criminal Services', accent:'#3a1a1a', note:'Available if you know where to look' },
 };
 
 

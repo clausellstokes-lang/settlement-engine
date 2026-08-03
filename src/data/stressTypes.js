@@ -10,7 +10,6 @@
 export const STRESS_TYPE_MAP = {
   under_siege: {
     label: "Under Siege",
-    icon: "",
     colour: "#8b1a1a",
     probability: 0.025,
     requiresTier: null,
@@ -22,7 +21,6 @@ export const STRESS_TYPE_MAP = {
   },
   famine: {
     label: "Famine",
-    icon: "",
     colour: "#8b5a1a",
     probability: 0.027,
     requiresTier: null,
@@ -33,7 +31,6 @@ export const STRESS_TYPE_MAP = {
   },
   occupied: {
     label: "Under Occupation",
-    icon: "",
     colour: "#4a3a6b",
     probability: 0.021,
     requiresTier: null,
@@ -44,7 +41,6 @@ export const STRESS_TYPE_MAP = {
   },
   politically_fractured: {
     label: "Politically Fractured",
-    icon: "",
     colour: "#5a4a1a",
     probability: 0.034,
     requiresTier: null,
@@ -56,7 +52,6 @@ export const STRESS_TYPE_MAP = {
   },
   indebted: {
     label: "Indebted to Outside Power",
-    icon: "",
     colour: "#1a4a5a",
     probability: 0.036,
     requiresTier: null,
@@ -68,7 +63,6 @@ export const STRESS_TYPE_MAP = {
   },
   recently_betrayed: {
     label: "Recently Betrayed",
-    icon: "",
     colour: "#6b1a2a",
     probability: 0.027,
     requiresTier: null,
@@ -79,7 +73,6 @@ export const STRESS_TYPE_MAP = {
   },
   infiltrated: {
     label: "Infiltrated",
-    icon: "",
     colour: "#1a3a4a",
     probability: 0.023,
     requiresTier: null,
@@ -90,7 +83,6 @@ export const STRESS_TYPE_MAP = {
   },
   plague_onset: {
     label: "Disease Outbreak",
-    icon: "",
     colour: "#2a5a2a",
     probability: 0.027,
     requiresTier: null,
@@ -101,7 +93,6 @@ export const STRESS_TYPE_MAP = {
   },
   succession_void: {
     label: "Succession Void",
-    icon: "",
     colour: "#5a3a1a",
     probability: 0.03,
     requiresTier: null,
@@ -112,7 +103,6 @@ export const STRESS_TYPE_MAP = {
   },
   monster_pressure: {
     label: "Beast & Raider Threat",
-    icon: "",
     colour: "#3a1a1a",
     probability: 0.03,
     requiresTier: null,
@@ -124,7 +114,6 @@ export const STRESS_TYPE_MAP = {
   },
   insurgency: {
     label: "Insurgency",
-    icon: "",
     colour: "#6b1a3a",
     probability: 0.029,
     requiresTier: null,
@@ -136,7 +125,6 @@ export const STRESS_TYPE_MAP = {
   },
   religious_conversion: {
     label: "Religious Conversion",
-    icon: "",
     colour: "#3a1a5a",
     probability: 0.023,
     requiresTier: null,
@@ -148,7 +136,6 @@ export const STRESS_TYPE_MAP = {
   },
   slave_revolt: {
     label: "Slave Revolt",
-    icon: "",
     colour: "#6b1a1a",
     probability: 0.012,
     requiresTier: "town",
@@ -160,7 +147,6 @@ export const STRESS_TYPE_MAP = {
   },
   wartime: {
     label: "Wartime",
-    icon: "",
     colour: "#5a2a0a",
     probability: 0.026,
     requiresTier: null,
@@ -172,7 +158,6 @@ export const STRESS_TYPE_MAP = {
   },
   mass_migration: {
     label: "Mass Migration",
-    icon: "",
     colour: "#2a4a6b",
     probability: 0.025,
     requiresTier: null,

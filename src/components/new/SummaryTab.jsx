@@ -183,7 +183,6 @@ function SummaryTab({ settlement:r }) {
         {stresses.map((v,i)=>(
           <div key={i} style={{border:`2px solid ${v.colour}`,padding:'14px 16px',background:`${v.colour}10`}}>
             <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:8}}>
-              <span style={{fontSize: FS['22'],lineHeight:1}}>{v.icon}</span>
               <span style={{...serif,fontSize: FS['18'],fontWeight:700,color:v.colour}}>{v.label}</span>
               <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.white,background:v.colour,padding:'2px 7px',letterSpacing:'0.07em'}}>ACTIVE CRISIS</span>
             </div>
@@ -228,7 +227,7 @@ function SummaryTab({ settlement:r }) {
       <div style={{background:swatch['#F4F6FD'],border:'1px solid #b8c8e8',borderLeft:'3px solid #2a3a7a',padding:'12px 14px',marginBottom:12}}>
         <div style={{fontSize:FS.xxs,fontWeight:800,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:10}}>Power & Conflict</div>
         <FactionBar factions={allFactions.slice(0,5)}/>
-        {ps?.recentConflict&&<p style={{fontSize:FS.xs,color:swatch.danger,marginTop:8,lineHeight:1.4}}>⚠ {ps.recentConflict}</p>}
+        {ps?.recentConflict&&<p style={{fontSize:FS.xs,color:swatch.danger,marginTop:8,lineHeight:1.4}}>{ps.recentConflict}</p>}
         {allConflicts.length>0&&<>
           <div style={{height:1,background:swatch['#C0CCE8'],margin:'10px 0'}}/>
           <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:6}}>Active Conflicts</div>

@@ -244,7 +244,7 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
               {isExp && expandable && (
                 <div id={`roster-faction-${i}-detail`} style={{ padding: '4px 12px 8px 26px', background: swatch['#FAF8F4'] }}>
                   {f.desc && <p style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.6, margin: '0 0 4px' }}>{f.desc}</p>}
-                  {f.crisisNote && <p style={{ fontSize: FS['11.5'], color: swatch.danger, fontStyle: 'italic', margin: '6px 0 0', lineHeight: 1.4 }}>{'⚠'} {f.crisisNote}</p>}
+                  {f.crisisNote && <p style={{ fontSize: FS['11.5'], color: swatch.danger, fontStyle: 'italic', margin: '6px 0 0', lineHeight: 1.4 }}>{f.crisisNote}</p>}
                 </div>
               )}
             </div>

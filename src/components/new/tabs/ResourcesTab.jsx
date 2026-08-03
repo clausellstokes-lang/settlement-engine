@@ -132,7 +132,7 @@ export function ResourcesTab({settlement:r, narrativeNote}) {
               </div>
             </div>}
             {abundant.length>0&&<div style={{marginBottom:res.availableResources?.length>0?8:0}}>
-              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,letterSpacing:'0.06em',marginBottom:4}}>✦ ABUNDANT. Full export potential</div>
+              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,letterSpacing:'0.06em',marginBottom:4}}>ABUNDANT. Full export potential</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {abundant.map((rk,i)=>customSet.has(rk)
                   ? <span key={i} style={{fontSize:FS.xs,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'2px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>

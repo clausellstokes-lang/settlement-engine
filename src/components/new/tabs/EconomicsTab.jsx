@@ -142,9 +142,9 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
             }}>
               {/* Header row */}
               <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4,flexWrap:'wrap'}}>
-                <span style={{fontSize:FS.md}}>{chain.resourceIcon}</span>
+                {chain.resourceIcon && <span style={{fontSize:FS.md}}>{chain.resourceIcon}</span>}
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{chain.label}</span>
-                <span style={{fontSize:FS.micro,color:chain.needColor,background:`${chain.needColor}15`,padding:'0 5px',fontWeight:700}}>{chain.needIcon} {chain.needLabel}</span>
+                <span style={{fontSize:FS.micro,color:chain.needColor,background:`${chain.needColor}15`,padding:'0 5px',fontWeight:700}}>{chain.needLabel}</span>
                 <span style={{fontSize:FS.micro,fontWeight:800,color:st.color,background:`${st.color}15`,padding:'0 5px',marginLeft:'auto'}}>{st.label}</span>
               </div>
 
@@ -181,7 +181,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               {chain.magicNote && (
                 <div style={{fontSize:FS.xxs,color:swatch.magic,background:swatch['#F8F0FF'],
                   padding:'4px 8px',marginTop:4,borderLeft:'3px solid #c0a0e0',lineHeight:1.4}}>
-                  ✦ <em>{chain.magicNote}</em>
+                  <em>{chain.magicNote}</em>
                   {chain.magicRecovery && <span style={{marginLeft:6,fontSize:FS.micro,color:swatch['#7A4AAA'],fontWeight:700}}>
                     {Math.round(chain.magicRecovery * 100)}% recovery
                   </span>}
@@ -210,7 +210,6 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               padding:'7px 12px',
               display:'flex',alignItems:'flex-start',gap:8,
             }}>
-              <span style={{fontSize: FS['16'],flexShrink:0}}>{svc.icon}</span>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:2,flexWrap:'wrap'}}>
                   <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{svc.label}</span>

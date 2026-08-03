@@ -101,7 +101,7 @@ export function NearbyResourcesPanel({config,updateConfig}){
   // Four-state cycle: off (unselected) → allow → abundant → depleted → off
   // 'off' has no label — just looks bland, like a stress that wasn't selected
   const _RESOURCE_STATES = ['off','allow','abundant','depleted'];
-  const STATE_LABELS  = {allow:'○ Allow',abundant:'✦ Abundant',depleted:'◐ Depleted'};
+  const STATE_LABELS  = {allow:'Allow',abundant:'Abundant',depleted:'Depleted'};
   const STATE_COLORS  = {allow:'#9c8068',abundant:'#1a5a28',depleted:'#c05000'};
   const STATE_BG      = {allow:'transparent',abundant:'#f0faf2',depleted:'#fff7f0'};
   const STATE_BORDER  = {allow:'#c8b89a',abundant:'#88c880',depleted:'#e08040'};
@@ -242,7 +242,7 @@ export function NearbyResourcesPanel({config,updateConfig}){
               <span style={{fontSize:FS.xxs,color:SECOND}}>Click each resource to cycle:</span>
               <span style={{fontSize:FS.xxs,color:MUTED,border:'1px solid #d0c0a8',padding:'1px 6px',opacity:0.7}}>Off</span>
               <span style={{fontSize:FS.xxs,color:GOLD,background:`${GOLD}10`,border:`1px solid ${GOLD}70`,padding:'1px 6px'}}>Allow (availability resolved)</span>
-              <span style={{fontSize:FS.xxs,color:STATE_COLORS.abundant,background:STATE_BG.abundant,border:`1px solid ${STATE_BORDER.abundant}`,padding:'1px 6px'}}>✦ Abundant</span>
+              <span style={{fontSize:FS.xxs,color:STATE_COLORS.abundant,background:STATE_BG.abundant,border:`1px solid ${STATE_BORDER.abundant}`,padding:'1px 6px'}}>Abundant</span>
               <span style={{fontSize:FS.xxs,color:STATE_COLORS.depleted,background:STATE_BG.depleted,border:`1px solid ${STATE_BORDER.depleted}`,padding:'1px 6px'}}>Depleted</span>
             </>
         }
@@ -284,7 +284,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
         return (
           <label htmlFor="useCustomContent" style={{display:'flex',alignItems:'center',gap:8,cursor:'pointer',padding:'8px 10px',marginBottom:12,border:`1px solid ${on?swatch.magic:BORDER2}`,background:on?'rgba(124,58,237,0.06)':CARD}}>
             <input id="useCustomContent" aria-label="Use my custom content" type="checkbox" checked={on} onChange={e=>updateConfig({useCustomContent:e.target.checked})} style={{accentColor:swatch.magic,width:15,height:15,flexShrink:0}}/>
-            <span style={{fontSize:FS.sm,fontWeight:700,color:on?swatch.magic:SECOND,fontFamily:sans}}>✦ Use my custom content</span>
+            <span style={{fontSize:FS.sm,fontWeight:700,color:on?swatch.magic:SECOND,fontFamily:sans}}>Use my custom content</span>
             <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:'auto',textAlign:'right',lineHeight:1.3}}>{customCount} item{customCount===1?'':'s'} · institutions, services, resources, trade, factions, stressors &amp; chains</span>
           </label>
         );
@@ -453,7 +453,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
                 ...(noMagicNow ? {priorityMagic:0} : {priorityMagic: Math.max(5, config.priorityMagic||50)}),
               });
             }}>
-            <option value="yes">✦ Yes. Magic exists</option>
+            <option value="yes">Yes. Magic exists</option>
             <option value="no">○ No. Historical mode</option>
           </Sel>
           {realmIsMundane && (

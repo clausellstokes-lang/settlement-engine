@@ -11,7 +11,6 @@ export const SUPPLY_CHAIN_NEEDS = {
   // ── FOOD SECURITY ───────────────────────────────────────────────────────────
   food_security: {
     label: 'Food Security',
-    icon: '',
     color: '#1a5a28',
     desc: 'What the settlement eats, how it stores food, and what it can export',
     chains: [
@@ -198,7 +197,6 @@ export const SUPPLY_CHAIN_NEEDS = {
   // ── FUEL & MATERIALS ─────────────────────────────────────────────────────────
   raw_extraction: {
     label: 'Raw Materials & Fuel',
-    icon: '️',
     color: '#7a5010',
     desc: 'What the earth, forest, and water provide for construction and industry',
     chains: [
@@ -228,7 +226,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'iron',
         label: 'Iron & Metalwork',
         resource: 'Iron ore deposits',
-        resourceIcon: '️',
         rawInputs: ['Iron ore', 'Basic metalwork'],
         processingInstitutions: ['Mine (open cast)', 'Resident smith (part-time)', 'Blacksmiths (3-10)'],
         intermediateGoods: ['Iron ore', 'Basic metalwork'],
@@ -337,7 +334,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'precious_metals_mining',
         label: 'Mining & Coinage',
         resource: 'Precious metal veins',
-        resourceIcon: '️',
         rawInputs: ['Precious metals', 'Raw ore'],
         processingInstitutions: ['Specialized metalworkers', 'Jeweller'],
         intermediateGoods: ['Refined ingots', 'Coin blanks', 'Assay certificates'],
@@ -362,7 +358,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'petty_mining',
         label: 'Mining & Quarrying',
         resource: 'Iron ore deposits',
-        resourceIcon: '️',
         rawInputs: ['Iron ore', 'Quarried stone', 'Coal'],
         processingInstitutions: ['Mine (open cast)', 'Stone quarry'],
         intermediateGoods: ['Rough ore', 'Dressed stone', 'Quarry rubble'],
@@ -412,7 +407,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'river_milling',
         label: 'River Mill Industry',
         resource: 'Mill Sites',
-        resourceIcon: '️',
         rawInputs: ['Grain for milling', 'Water power'],
         processingInstitutions: ['Mills (2-5)', 'Mill', 'Sawmill'],
         intermediateGoods: ['Milled flour', 'Sawn timber'],
@@ -499,7 +493,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'desert_glasswork',
         label: 'Desert Glass and Sand',
         resource: 'Fine Glass Sand',
-        resourceIcon: '️',
         rawInputs: ['Fine glass sand', 'Desert silica'],
         processingInstitutions: ['Glassblower', 'Glassmakers'],
         intermediateGoods: ['Raw glass', 'Glass blanks'],
@@ -514,7 +507,6 @@ export const SUPPLY_CHAIN_NEEDS = {
   // ── MANUFACTURING ─────────────────────────────────────────────────────────────
   manufacturing: {
     label: 'Manufacturing & Crafts',
-    icon: '️',
     color: '#2a3a7a',
     desc: 'What craftsmen and guilds produce from raw inputs',
     chains: [
@@ -713,7 +705,6 @@ export const SUPPLY_CHAIN_NEEDS = {
   // ── TRADE & ENTREPÔT ──────────────────────────────────────────────────────────
   trade_entrepot: {
     label: 'Trade & Entrepôt',
-    icon: '️',
     color: '#a0762a',
     desc: 'Goods that flow through for redistribution: the wealth of crossroads, ports, and river hubs',
     chains: [
@@ -856,7 +847,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'crossroads_trade',
         label: 'Strategic Crossroads Toll',
         resource: 'Strategic Crossroads',
-        resourceIcon: '️',
         rawInputs: ['Trade traffic', 'Toll revenue'],
         processingInstitutions: ['Toll bridge', "Caravaneer's post", 'Coaching inn', 'Customs house'],
         intermediateGoods: ['Toll revenue', 'Transit fees'],
@@ -884,7 +874,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'mountain_pass_trade',
         label: 'Mountain Pass Control',
         resource: 'Mountain Pass',
-        resourceIcon: '️',
         rawInputs: ['Pass control', 'Strategic chokepoint'],
         processingInstitutions: ['Toll bridge', 'Garrison', 'Customs house'],
         intermediateGoods: ['Pass fees', 'Military revenue'],
@@ -899,7 +888,6 @@ export const SUPPLY_CHAIN_NEEDS = {
   // ── DEFENSE & SECURITY ────────────────────────────────────────────────────────
   defense_security: {
     label: 'Defense & Security',
-    icon: '️',
     color: '#8b1a1a',
     desc: 'What protects the settlement from external threats and internal disorder',
     chains: [
@@ -949,7 +937,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'mercenary',
         label: 'Mercenary Forces',
         resource: null,
-        resourceIcon: '️',
         rawInputs: [],
         processingInstitutions: ['Mercenary quarter', 'Free company hall'],
         intermediateGoods: [],
@@ -963,7 +950,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'adventuring_escort',
         label: 'Adventuring & Escort',
         resource: null,
-        resourceIcon: '️',
         rawInputs: [],
         processingInstitutions: [
           "Adventurers' charter hall",
@@ -984,7 +970,6 @@ export const SUPPLY_CHAIN_NEEDS = {
   // ── HEALING & MEDICINE ────────────────────────────────────────────────────────
   healing_medicine: {
     label: 'Healing & Medicine',
-    icon: '️',
     color: '#8b1a1a',
     desc: 'What keeps the population alive and attracts pilgrims and the infirm',
     chains: [
@@ -1064,7 +1049,6 @@ export const SUPPLY_CHAIN_NEEDS = {
   // ── KNOWLEDGE & INFORMATION ───────────────────────────────────────────────────
   knowledge_information: {
     label: 'Knowledge & Information',
-    icon: '',
     color: '#2a3a7a',
     desc: 'What the settlement knows, records, teaches, and sells as intelligence',
     chains: [
@@ -1072,7 +1056,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'cartography',
         label: 'Maps & Cartography',
         resource: null,
-        resourceIcon: '️',
         rawInputs: [],
         processingInstitutions: ['Great library', "Cartographer's guild", 'Message Network'],
         intermediateGoods: [],
@@ -1101,7 +1084,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         upstreamChains: ['cartography'],
         label: 'Intelligence & Communications',
         resource: null,
-        resourceIcon: '️',
         rawInputs: [],
         // "Sage's quarter" first generates at city — a dead town gate. 'Post
         // relay station' (town) carries the long-distance-messages output at
@@ -1134,7 +1116,6 @@ export const SUPPLY_CHAIN_NEEDS = {
   // ── ARCANE & MAGICAL ──────────────────────────────────────────────────────────
   arcane_magical: {
     label: 'Arcane & Magical',
-    icon: '',
     color: '#5a2a8a',
     desc: 'What the settlement can offer in magical services, goods, and infrastructure',
     chains: [
@@ -1142,7 +1123,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'alchemy',
         label: 'Alchemy & Reagents',
         resource: 'Magical ley line node',
-        resourceIcon: '️',
         rawInputs: ['Arcane reagents', 'Medicinal herbs', 'Monster components'],
         // Catalog spelling is "Wizard's tower" — the processor match is a substring
         // over real institution names, so the apostrophe form is required.
@@ -1179,7 +1159,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'magical_goods',
         label: 'Magical Items & Enchanting',
         resource: 'Magical ley line node',
-        resourceIcon: '️',
         rawInputs: ['Arcane reagents', 'Extraplanar goods'],
         // Was [] — an empty processor list means computeActiveChains can
         // never activate the chain (it returns early with no match). The first
@@ -1234,7 +1213,6 @@ export const SUPPLY_CHAIN_NEEDS = {
   // ── RELIGION & CIVIC ──────────────────────────────────────────────────────────
   religion_civic: {
     label: 'Religion & Civic',
-    icon: '',
     color: '#5a3a1a',
     desc: 'What holds the settlement together: faith, law, administration, and social order',
     chains: [
@@ -1244,7 +1222,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         // No resource gate: faith is institution-borne. (ancient_grove still flags this
         // chain 'running' via RESOURCE_TO_CHAINS where a grove is present.)
         resource: null,
-        resourceIcon: '️',
         rawInputs: ['Ritual components', 'Pilgrim donations'],
         // The chain belongs to the churches; almshouse/foundling home are the church-run
         // poor-relief co-processors. 'Parish church' also matches the tier variants
@@ -1278,7 +1255,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'law_governance',
         label: 'Law & Governance',
         resource: null,
-        resourceIcon: '️',
         rawInputs: [],
         // Law is produced by courts and civic halls (catalog: 'Courthouse'/'Town hall' at
         // town, 'City hall'/'Multiple courthouses' at city, 'Multiple court buildings' at
@@ -1303,7 +1279,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'pilgrimage',
         label: 'Pilgrimage & Holy Sites',
         resource: 'Hot springs',
-        resourceIcon: '️',
         rawInputs: ['Healing waters (bottled)', 'Pilgrim donations'],
         // Pilgrims travel to the holy houses; the almshouse is the hostel co-processor.
         processingInstitutions: [
@@ -1328,7 +1303,6 @@ export const SUPPLY_CHAIN_NEEDS = {
   // ── ENTERTAINMENT & CULTURE ───────────────────────────────────────────────────
   entertainment_culture: {
     label: 'Entertainment & Culture',
-    icon: '',
     color: '#7a3a1a',
     desc: 'What the settlement does for pleasure, culture, and social release',
     chains: [
@@ -1395,7 +1369,6 @@ export const SUPPLY_CHAIN_NEEDS = {
   // ── CRIMINAL ECONOMY ──────────────────────────────────────────────────────────
   criminal_economy: {
     label: 'Criminal Economy',
-    icon: '️',
     color: '#4a1a4a',
     desc: 'The shadow economy: what moves without documentation and who profits',
     chains: [
@@ -1429,7 +1402,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'black_market',
         label: 'Black market',
         resource: null,
-        resourceIcon: '️',
         rawInputs: [],
         // The powerful guild first generates at city — a dead thorp gate. The
         // fencing ladder runs the market below it: 'Local fence' (thorp) →
@@ -1453,7 +1425,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'guild_crime',
         label: 'Organised Crime',
         resource: null,
-        resourceIcon: '️',
         rawInputs: [],
         // The powerful guild first generates at city, one tier above this town
         // chain. 'Street gang' (town) is organised crime's entry rung; the

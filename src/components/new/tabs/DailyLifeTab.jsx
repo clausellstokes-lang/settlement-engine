@@ -135,7 +135,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   // Button label logic — first-time generate vs regenerate. Both spend credits;
   // we name the action plainly so users know.
   const buttonLabel = (() => {
-    if (!dailyLifeEnabled) return '✦ Save settlement to enable Daily Life narrative';
+    if (!dailyLifeEnabled) return 'Save settlement to enable Daily Life narrative';
     if (loading) {
       return (isConfigured ? storeAiProgress : loadMsg) || (hasContent ? 'Regenerating…' : 'Generating…');
     }
@@ -145,8 +145,8 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
         : '↺ Regenerate Daily Life: Narrative refinement';
     }
     return isConfigured
-      ? `✦ Generate Daily Life (${getCost('dailyLife')} credits)`
-      : '✦ Generate Daily Life: Narrative refinement';
+      ? `Generate Daily Life (${getCost('dailyLife')} credits)`
+      : 'Generate Daily Life: Narrative refinement';
   })();
 
   return (
@@ -196,7 +196,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
             fontFamily: sans,
           }}
         >
-          <strong style={{ color: swatch['#7A5A1A'] }}>✦ Save this settlement</strong>
+          <strong style={{ color: swatch['#7A5A1A'] }}>Save this settlement</strong>
           {' '}to refine Daily Life into narrative. Five paragraphs of evocative prose grounded in this town's specific stressors, trade, and cast. Anchor facts above remain available either way.
         </div>
       ) : (

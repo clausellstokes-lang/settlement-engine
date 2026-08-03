@@ -52,7 +52,17 @@ import { dirname, join, relative } from 'node:path';
 import { describe, it, expect } from 'vitest';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const SCAN_DIRS = ['src/components', 'src/copy'];
+
+// THE SCAN IS THE WHOLE OF src/ (icon sweep, 2026-08-03). It used to be
+// ['src/components', 'src/copy'], and that narrowness made the guard a liar:
+// the emoji-strip residue it exists to catch had SURVIVED, untouched, in every
+// directory the walk never entered — 24 empty `icon` fields in
+// src/data/resourceData.js, 15 in src/data/stressTypes.js, 5 in
+// src/domain/display/threatAssessment.js, 9 in src/generators/computeActiveChains.js,
+// and 27 orphan U+FE0F selectors across src/data. All were removed in the same
+// commit as this widening; the scan is total so the class cannot simply relocate
+// one directory sideways and go quiet again.
+const SCAN_DIRS = ['src'];
 
 // Each signature: a per-line regex + a human label. All must stay at 0 hits.
 const SIGNATURES = [
@@ -89,7 +99,20 @@ function findViolations() {
 }
 
 describe('copy-corruption pin (R1 — em-dash / emoji-strip residue)', () => {
-  it('no empty-icon / \', \' fallback / orphan U+FE0F / comma-em-dash residue in src/components or src/copy', () => {
+  // NON-VACUITY: a zero-hit result only means something if the walk actually
+  // read files. A bad path, a renamed directory, or a broken extension filter
+  // would otherwise turn this pin permanently, silently green — the exact way
+  // the old src/components-only scan hid the residue it was written to catch.
+  it('the scan actually reaches the source tree', () => {
+    const files = SCAN_DIRS.flatMap((d) => walk(join(ROOT, d)));
+    expect(files.length).toBeGreaterThan(500);
+    expect(files.some((f) => f.replace(/\\/g, '/').includes('/src/data/'))).toBe(true);
+    expect(files.some((f) => f.replace(/\\/g, '/').includes('/src/domain/'))).toBe(true);
+    expect(files.some((f) => f.replace(/\\/g, '/').includes('/src/generators/'))).toBe(true);
+    expect(files.some((f) => f.replace(/\\/g, '/').includes('/src/components/'))).toBe(true);
+  });
+
+  it('no empty-icon / \', \' fallback / orphan U+FE0F / comma-em-dash residue anywhere in src/', () => {
     const hits = findViolations();
     expect(
       hits,

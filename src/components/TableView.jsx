@@ -261,7 +261,7 @@ export default function TableView({ settlement, onClose }) {
               letterSpacing: '0.14em', textTransform: 'uppercase',
               color: LAMP_ACCENTS.HOOK, marginBottom: 8,
             }}>
-              🕯 Tonight at the table
+              Tonight at the table
             </div>
 
             {entries.length === 0 ? (
