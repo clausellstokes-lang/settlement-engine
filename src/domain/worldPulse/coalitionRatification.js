@@ -363,6 +363,33 @@ export function ratifyTermSheet({ ballots, closeBand01 } = {}) {
  * `refuseWeight`, `totalWeight` and `margin01` are carried onto the offer row
  * for the receipt and decide nothing (deliberate scope, not an oversight).
  *
+ * RULING R-BLD-8d — THE TALLY'S OWN LAWS BIND ONE LEVEL UP. 8c made this walk
+ * the record of record, and a record of record must be held to the same two
+ * laws `ratifyTermSheet` already enforces inside one tally, because a caller
+ * may hand this function any object whose `reason` reads `tallied`:
+ *
+ *   ONE MEMBER, ONE BALLOT, PER OFFER (`duplicate_member` — the tally's own
+ *     spelling, one fact one word). `byMember` is a map, so a duplicated ballot
+ *     counts ONCE in the denominator while the accept recount counts it TWICE.
+ *     Executed: a coalition of six where a principal of three accepts and the
+ *     other three weight refuse — a minority the tally itself called `close` —
+ *     ratified at `unionMargin01: 1` with its sheet named, purely because one
+ *     ballot appeared twice. Both the recount and the forged summary agree on
+ *     the doubled figure, so 8c cannot see it: 8c asks whether the summary
+ *     matches the ballots, and here it does. The duplicate must be refused on
+ *     its own law. Duplication is checked PER OFFER, because one member voting
+ *     on each of two rival sheets is the ordinary case this whole function
+ *     exists for.
+ *
+ *   THE BALLOTS MUST BE THIS SHEET'S BALLOTS (`sheet_mismatch` — again the
+ *     tally's own spelling). Nothing tied `row.termSheetId` to the ballots the
+ *     weight was summed from, so an offer row relabelled to a sheet the
+ *     coalition never saw carried a real coalition's votes: executed, an offer
+ *     labelled `ts.zzz` whose every ballot named `ts.a` was chosen by id, and a
+ *     ballot set grafted from a different `episodeKey` summed into the union of
+ *     an episode it never belonged to. `chosenTermSheetId` is what the caller
+ *     acts on, so an id that no ballot mentions is a peace nobody voted for.
+ *
  * @param {Array<Record<string, unknown>>} rows
  * @returns {{weight:number, reason:string}}
  */
@@ -372,11 +399,25 @@ function unionCoalitionWeight(rows) {
   for (const row of rows) {
     const cast = Array.isArray(row.ballots) ? row.ballots : null;
     if (!cast || cast.length === 0) return { weight: 0, reason: 'offer_without_ballots' };
+    const offerSheetId = strictText(row.termSheetId);
+    const offerEpisodeKey = strictText(row.episodeKey);
+    /** R-BLD-8d: per offer, because a member legitimately votes on each rival. */
+    const offerMembers = new Set();
     let acceptWeight = 0;
     for (const entry of cast) {
       const ballot = normalizeRatificationBallot(entry);
       if (!ballot) return { weight: 0, reason: 'invalid_offer' };
+      // R-BLD-8d: the votes summed here must be votes ON THIS SHEET, in THIS
+      // episode. An id no ballot names is a sheet the coalition never weighed.
+      if (String(ballot.termSheetId) !== offerSheetId
+        || String(ballot.episodeKey) !== offerEpisodeKey) {
+        return { weight: 0, reason: 'sheet_mismatch' };
+      }
       const memberId = String(ballot.memberId);
+      // R-BLD-8d: one member, one ballot — `ratifyTermSheet`'s own law, and its
+      // own word for the failure.
+      if (offerMembers.has(memberId)) return { weight: 0, reason: 'duplicate_member' };
+      offerMembers.add(memberId);
       const weight = ratificationPowerWeight(ballot.powerBand);
       if (weight <= 0) return { weight: 0, reason: 'invalid_power_band' };
       const seen = byMember.get(memberId);
@@ -430,6 +471,12 @@ function unionCoalitionWeight(rows) {
  * offers must agree on `sideId` AND `counterpartId` down to the ballot, or the
  * read refuses closed (`side_mismatch`) — the same law `ratifyTermSheet`
  * already enforces inside one tally, enforced one level up.
+ *
+ * RULING R-BLD-8d — TWO MORE OF THE TALLY'S LAWS, ENFORCED ONE LEVEL UP, in
+ * `unionCoalitionWeight` where the weight is actually summed: one member casts
+ * one ballot per offer (`duplicate_member`), and an offer's ballots must name
+ * that offer's own sheet and episode (`sheet_mismatch`). Both refusals reuse
+ * `ratifyTermSheet`'s spellings, because they are the same two facts.
  *
  * @param {{tallies?:unknown, closeBand01?:unknown}} args
  * @returns {Record<string, unknown>}

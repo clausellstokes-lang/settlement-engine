@@ -677,6 +677,90 @@ describe('WR-7c — competing offers, and failure to choose', () => {
       .toBe('no_sheet_holds_a_majority');
   });
 
+  it('R-BLD-8d: refuses a duplicated ballot rather than letting one court vote twice', () => {
+    // THE CYCLE-6R VERIFIER'S EXECUTED COUNTEREXAMPLE (probe2). `byMember` is a
+    // MAP, so a repeated ballot lands in the denominator once — but the accept
+    // recount adds its weight every time it appears. `reed` alone accepts, 3 of
+    // the coalition's 6, and the tally itself calls that `close`. Repeat reed's
+    // ballot and the numerator becomes 6 against a denominator of 6:
+    // (2·6 − 6)/6 = 1.0, a perfect mandate for a minority.
+    const honest = tallyOf('term_sheet.a', coalition(['accept', 'refuse', 'refuse']));
+    expect({ verdict: honest.verdict, accept: honest.acceptWeight, total: honest.totalWeight })
+      .toEqual({ verdict: 'close', accept: 3, total: 6 });
+    const twice = honest.ballots.find((row) => row.memberId === 'reed');
+    const duplicated = {
+      ...honest,
+      // The forged summary AGREES with the doubled recount, which is precisely
+      // why R-BLD-8c cannot see this one: 8c asks whether the summary matches
+      // the ballots, and here it does. The duplicate needs its own law.
+      acceptWeight: 6,
+      ballots: [twice, ...honest.ballots],
+    };
+    expect(duplicated.ballots.map((row) => row.memberId))
+      .toEqual(['reed', 'ash', 'reed', 'thorn']);
+    expect(Math.round(((2 * 6 - 6) / 6) * 10000) / 10000).toBe(1);
+    expect(chooseAmongCompetingOffers({ tallies: [duplicated] })).toMatchObject({
+      verdict: '', reason: 'duplicate_member', chosenTermSheetId: null, unionWeight: 0,
+    });
+    // Same spelling the tally itself uses one level down, so the fact has one word.
+    expect(ratifyTermSheet({ ballots: [twice, twice] }).reason).toBe('duplicate_member');
+    // LIVENESS: the unduplicated offer still decides, so the refusal is caused
+    // by the repeat and by nothing else about this fixture.
+    expect(chooseAmongCompetingOffers({ tallies: [honest] })).toMatchObject({
+      verdict: 'close', reason: 'sole_offer',
+    });
+    // AND ONE MEMBER MAY STILL VOTE ON EVERY RIVAL — the check is per offer, not
+    // across the contest, because voting on both sheets is the ordinary case.
+    expect(chooseAmongCompetingOffers({
+      tallies: [
+        tallyOf('term_sheet.a', coalition(['accept', 'accept', 'refuse'])),
+        tallyOf('term_sheet.b', coalition(['refuse', 'refuse', 'refuse'])),
+      ],
+    })).toMatchObject({ verdict: 'ratified', reason: 'one_sheet_holds', unionWeight: 6 });
+  });
+
+  it('R-BLD-8d: refuses an offer whose ballots were cast on some other sheet', () => {
+    // THE CYCLE-6R VERIFIER'S SECOND COUNTEREXAMPLE (probe2). Nothing tied an
+    // offer's `termSheetId` to the ballots its weight was summed from, so an
+    // offer row relabelled `term_sheet.zzz` carried a real coalition's votes for
+    // `term_sheet.a` — and `chosenTermSheetId`, the one field the caller acts
+    // on, named a sheet no ballot in the record ever mentions.
+    const carried = tallyOf('term_sheet.a', coalition(['accept', 'accept', 'refuse']));
+    expect({ sheet: carried.termSheetId, verdict: carried.verdict }).toEqual({
+      sheet: 'term_sheet.a', verdict: 'ratified',
+    });
+    const relabelled = { ...carried, termSheetId: 'term_sheet.zzz' };
+    expect([...new Set(relabelled.ballots.map((row) => row.termSheetId))]).toEqual(['term_sheet.a']);
+    expect(chooseAmongCompetingOffers({ tallies: [relabelled] })).toMatchObject({
+      verdict: '', reason: 'sheet_mismatch', chosenTermSheetId: null, unionWeight: 0,
+    });
+    // THE EPISODE IS HALF THE IDENTITY. Ballots grafted from another war sum a
+    // coalition that was never asked about this one; the chooser's own
+    // episode check never sees them, because it reads the offer row's summary.
+    const foreign = tallyOfSide('term_sheet.a', 'reed', 'iron', [
+      { memberId: 'reed', powerBand: 'principal', decision: 'accept' },
+      { memberId: 'ash', powerBand: 'ordinary', decision: 'accept' },
+    ]);
+    const grafted = {
+      ...carried,
+      acceptWeight: 5,
+      ballots: foreign.ballots.map((row) => ({ ...row, episodeKey: 'war.other.9' })),
+    };
+    expect(grafted.episodeKey).toBe('war.iron.reed.4');
+    expect(chooseAmongCompetingOffers({ tallies: [grafted] })).toMatchObject({
+      verdict: '', reason: 'sheet_mismatch', chosenTermSheetId: null, unionWeight: 0,
+    });
+    // Same spelling the tally uses for the same fact one level down.
+    expect(ratifyTermSheet({
+      ballots: [carried.ballots[0], { ...carried.ballots[1], termSheetId: 'term_sheet.zzz' }],
+    }).reason).toBe('sheet_mismatch');
+    // LIVENESS: the honestly-labelled offer still decides and still names its
+    // own sheet, so the refusal is caused by the relabelling alone.
+    expect(chooseAmongCompetingOffers({ tallies: [carried] })).toMatchObject({
+      verdict: 'ratified', reason: 'sole_offer', chosenTermSheetId: 'term_sheet.a',
+    });
+  });
+
   it('never averages two offers into a third that nobody signed', () => {
     const source = readFileSync(join(ROOT, 'src/domain/worldPulse/coalitionRatification.js'), 'utf8')
       .replace(/\/\*[\s\S]*?\*\//g, '')
