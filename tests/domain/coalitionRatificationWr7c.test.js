@@ -422,11 +422,11 @@ describe('WR-7c — competing offers, and failure to choose', () => {
    * between are artifacts `ratifyTermSheet` really produces — including their
    * `ballots`, which is where the union coalition's weight is read from.
    */
-  const tallyOf = (termSheetId, rows, closeBand01 = 0.15) => {
+  const tallyOfSide = (termSheetId, sideId, counterpartId, rows, closeBand01 = 0.15) => {
     const ballots = rows.map(({ memberId, powerBand, decision }) => normalizeRatificationBallot({
       memberId,
-      sideId: 'reed',
-      counterpartId: 'iron',
+      sideId,
+      counterpartId,
       episodeKey: 'war.iron.reed.4',
       termSheetId,
       pictureId: `picture.${termSheetId}.${memberId}`,
@@ -443,6 +443,10 @@ describe('WR-7c — competing offers, and failure to choose', () => {
     expect(tally.reason, termSheetId).toBe('tallied');
     return tally;
   };
+
+  const tallyOf = (termSheetId, rows, closeBand01 = 0.15) => (
+    tallyOfSide(termSheetId, 'reed', 'iron', rows, closeBand01)
+  );
 
   /** The whole coalition: 3 + 2 + 1 = 6 weight, and it never changes below. */
   const coalition = (decisions) => [
@@ -538,10 +542,12 @@ describe('WR-7c — competing offers, and failure to choose', () => {
       .toBe('member_band_mismatch');
   });
 
-  it('answers a sole offer with its own verdict, which is the same union test', () => {
-    // With one tally the union IS that tally, so `holds` and a `ratified`
-    // verdict cannot disagree — asserted here rather than assumed, across a
-    // ratified, a refused and a close sole offer.
+  it('answers a sole offer from its own union math, and lands on the tally\'s verdict', () => {
+    // R-BLD-8b: the sole verdict is DERIVED from the signed union margin, not
+    // copied off the carried tally. With one tally the union IS that tally, so
+    // the derived answer must equal the carried one — that equality is the
+    // proof the derivation is the same law, and it is asserted here across a
+    // ratified, a refused and a close sole offer rather than assumed.
     const cases = [
       [coalition(['accept', 'accept', 'accept']), 'ratified', 'term_sheet.a'],
       [coalition(['refuse', 'refuse', 'refuse']), 'refused', null],
@@ -554,6 +560,121 @@ describe('WR-7c — competing offers, and failure to choose', () => {
       expect(chosen).toMatchObject({ verdict, reason: 'sole_offer', chosenTermSheetId });
       expect(chosen.offers[0].holds, verdict).toBe(verdict === 'ratified');
     }
+  });
+
+  it('R-BLD-8a: refuses a union built from two OPPOSITE sides of the same war', () => {
+    // THE VERIFIER'S EXECUTED COUNTEREXAMPLE. Two tallies, one episode, and the
+    // enemy on the other end of each: `reed`'s coalition weighed sheet A, and
+    // `iron`'s coalition weighed sheet B. Nothing in the old read looked at the
+    // side, so the union summed BOTH bodies into a nine-weight "coalition" that
+    // never met, and sheet A cleared the band against a denominator that
+    // included the very courts it was being imposed on.
+    const ours = tallyOfSide('term_sheet.a', 'reed', 'iron', [
+      { memberId: 'reed', powerBand: 'principal', decision: 'accept' },
+      { memberId: 'ash', powerBand: 'principal', decision: 'accept' },
+    ]);
+    const theirs = tallyOfSide('term_sheet.b', 'iron', 'reed', [
+      { memberId: 'flint', powerBand: 'principal', decision: 'refuse' },
+    ]);
+    // Both tallies are individually honest — that is what makes the trap a trap.
+    expect([ours.verdict, ours.acceptWeight]).toEqual(['ratified', 6]);
+    expect([theirs.verdict, theirs.acceptWeight]).toEqual(['refused', 0]);
+    // Nine weight, six of it ours: (2·6 − 9)/9 = 0.3333, clear of the 0.15
+    // band. The old arm would have answered `ratified` on `term_sheet.a`.
+    expect(Math.round(((2 * 6 - 9) / 9) * 10000) / 10000).toBeGreaterThan(0.15);
+    const chosen = chooseAmongCompetingOffers({ tallies: [ours, theirs] });
+    expect(chosen).toMatchObject({
+      verdict: '', reason: 'side_mismatch', chosenTermSheetId: null, unionWeight: 0,
+    });
+    // And the same two sheets on ONE side still decide normally — the refusal
+    // is caused by the crossed edge and by nothing else about this fixture.
+    const rival = tallyOfSide('term_sheet.b', 'reed', 'iron', [
+      { memberId: 'flint', powerBand: 'principal', decision: 'refuse' },
+    ]);
+    expect(chooseAmongCompetingOffers({ tallies: [ours, rival] })).toMatchObject({
+      verdict: 'ratified', reason: 'one_sheet_holds', chosenTermSheetId: 'term_sheet.a',
+      unionWeight: 9,
+    });
+  });
+
+  it('R-BLD-8b: refuses a band the tallies were not decided at, rather than contradicting itself', () => {
+    // THE VERIFIER'S EXECUTED COUNTEREXAMPLE. The tally ratified at the 0.15
+    // band; the chooser was called at 0.9. The offer's `holds` was recomputed
+    // against 0.9 and came out false, while the arm copied the carried verdict
+    // and answered `ratified` with a chosen sheet — a record that says a sheet
+    // was ratified and, one field away, that it carries nobody.
+    const tally = tallyOf('term_sheet.a', coalition(['accept', 'accept', 'refuse']), 0.15);
+    expect([tally.verdict, tally.closeBand01]).toEqual(['ratified', 0.15]);
+    const chosen = chooseAmongCompetingOffers({ tallies: [tally], closeBand01: 0.9 });
+    expect(chosen).toMatchObject({
+      verdict: '', reason: 'band_mismatch', chosenTermSheetId: null, closeBand01: 0.9,
+    });
+    // The cure for a widening round is to re-tally at the new band, not to
+    // re-decide a stale verdict: the members' own votes move with the band too.
+    const retallied = tallyOf('term_sheet.a', coalition(['accept', 'accept', 'refuse']), 0.9);
+    expect(retallied.verdict).toBe('close');
+    expect(chooseAmongCompetingOffers({ tallies: [retallied], closeBand01: 0.9 }))
+      .toMatchObject({ verdict: 'close', reason: 'sole_offer', chosenTermSheetId: null });
+  });
+
+  it('R-BLD-8b: a sole offer can never say ratified while its own offer row does not hold', () => {
+    // THE INVARIANT THE DERIVATION BUYS, walked rather than argued: over every
+    // composition of the three courts at three bands, `verdict === 'ratified'`
+    // and `offers[0].holds` are the SAME bit, and a chosen sheet exists exactly
+    // when it holds. No forged input is needed — the arm is now incapable of
+    // the contradiction by construction.
+    let ratifiedSeen = 0;
+    for (const band of [0, 0.15, 0.34]) {
+      for (const a of BALLOT_DECISIONS) {
+        for (const b of BALLOT_DECISIONS) {
+          for (const c of BALLOT_DECISIONS) {
+            const tally = tallyOf('term_sheet.a', coalition([a, b, c]), band);
+            const chosen = chooseAmongCompetingOffers({ tallies: [tally], closeBand01: band });
+            const label = `${band}:${a}${b}${c}`;
+            expect(chosen.reason, label).toBe('sole_offer');
+            expect(chosen.verdict === 'ratified', label).toBe(chosen.offers[0].holds);
+            expect(chosen.chosenTermSheetId != null, label).toBe(chosen.offers[0].holds);
+            // And the derivation still lands on the tally's own verdict.
+            expect(chosen.verdict, label).toBe(tally.verdict);
+            if (chosen.verdict === 'ratified') ratifiedSeen += 1;
+          }
+        }
+      }
+    }
+    // The loop is not vacuous: ratified is genuinely reached inside it.
+    expect(ratifiedSeen).toBeGreaterThan(0);
+
+    // AND THE DERIVATION IS PROVED INDEPENDENT OF THE CARRIED VERDICT. Every
+    // other field of this tally is honest — the ballots refuse, the accept
+    // weight is the ballots' own 0, the band is the caller's — and only the
+    // `verdict` string lies. A copied verdict would ratify it and name a chosen
+    // sheet; a verdict read off the union margin cannot.
+    const refused = tallyOf('term_sheet.a', coalition(['refuse', 'refuse', 'refuse']));
+    expect(refused.verdict).toBe('refused');
+    expect(chooseAmongCompetingOffers({ tallies: [{ ...refused, verdict: 'ratified' }] }))
+      .toMatchObject({ verdict: 'refused', reason: 'sole_offer', chosenTermSheetId: null });
+  });
+
+  it('R-BLD-8c: recounts each offer\'s accept weight from the ballots and refuses a forged one', () => {
+    // THE VERIFIER'S EXECUTED COUNTEREXAMPLE. `unionMargin01` divided a summary
+    // field by a denominator the module counted itself, so a single forged
+    // number outvoted the ballots: 999 against a union of 6 gives a margin of
+    // 332, and the sheet the coalition actually refused would have been chosen.
+    const honest = tallyOf('term_sheet.a', coalition(['accept', 'refuse', 'refuse']));
+    const rival = tallyOf('term_sheet.b', coalition(['refuse', 'refuse', 'refuse']));
+    expect(honest.acceptWeight).toBe(3);
+    const forged = { ...honest, acceptWeight: 999 };
+    expect(Math.round(((2 * 999 - 6) / 6) * 10000) / 10000).toBeGreaterThan(0.15);
+    expect(chooseAmongCompetingOffers({ tallies: [forged, rival] })).toMatchObject({
+      verdict: '', reason: 'accept_weight_mismatch', chosenTermSheetId: null, unionWeight: 0,
+    });
+    // Understating it is refused on the same law — the ballots are the record,
+    // and the check is an equality, not a ceiling.
+    expect(chooseAmongCompetingOffers({ tallies: [{ ...honest, acceptWeight: 0 }, rival] }).reason)
+      .toBe('accept_weight_mismatch');
+    // The unforged pair still decides, so the refusal is caused by the forgery.
+    expect(chooseAmongCompetingOffers({ tallies: [honest, rival] }).reason)
+      .toBe('no_sheet_holds_a_majority');
   });
 
   it('never averages two offers into a third that nobody signed', () => {

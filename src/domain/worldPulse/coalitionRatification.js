@@ -353,6 +353,16 @@ export function ratifyTermSheet({ ballots, closeBand01 } = {}) {
  * A member whose power band differs between two tallies is a coalition that
  * cannot be summed, so the read fails closed rather than picking a weight.
  *
+ * RULING R-BLD-8c — THE SUMMARY IS NOT EVIDENCE. `unionMargin01` divides a
+ * tally's own `acceptWeight` by a denominator this function counted itself from
+ * the ballots. Trusting the numerator while recounting the denominator lets a
+ * forged summary field ratify a sheet nobody voted for, so the same ballots
+ * that produce the union also re-produce each offer's accept weight, and a
+ * disagreement fails the whole read closed (`accept_weight_mismatch`). Only
+ * `acceptWeight` is recounted here because only `acceptWeight` is load-bearing:
+ * `refuseWeight`, `totalWeight` and `margin01` are carried onto the offer row
+ * for the receipt and decide nothing (deliberate scope, not an oversight).
+ *
  * @param {Array<Record<string, unknown>>} rows
  * @returns {{weight:number, reason:string}}
  */
@@ -362,6 +372,7 @@ function unionCoalitionWeight(rows) {
   for (const row of rows) {
     const cast = Array.isArray(row.ballots) ? row.ballots : null;
     if (!cast || cast.length === 0) return { weight: 0, reason: 'offer_without_ballots' };
+    let acceptWeight = 0;
     for (const entry of cast) {
       const ballot = normalizeRatificationBallot(entry);
       if (!ballot) return { weight: 0, reason: 'invalid_offer' };
@@ -371,6 +382,11 @@ function unionCoalitionWeight(rows) {
       const seen = byMember.get(memberId);
       if (seen != null && seen !== weight) return { weight: 0, reason: 'member_band_mismatch' };
       byMember.set(memberId, weight);
+      if (ballot.decision === 'accept') acceptWeight += weight;
+    }
+    // R-BLD-8c: the ballots are the record; the summary must match them.
+    if (Number(row.acceptWeight) !== acceptWeight) {
+      return { weight: 0, reason: 'accept_weight_mismatch' };
     }
   }
   let weight = 0;
@@ -390,9 +406,30 @@ function unionCoalitionWeight(rows) {
  * thirty is a sub-tally, not a mandate, however unanimous that three was.
  *
  * ONE offer is not a contest. With a single tally the union IS that tally, so
- * `unionMargin01` and the tally's own margin are the same number and its own
- * verdict already answers this law — with the one thing the contest arm cannot
- * say, which is the difference between a REFUSAL and a stalemate.
+ * `unionMargin01` and the tally's own margin are the same number. RULING
+ * R-BLD-8b makes the arm say so BY CONSTRUCTION rather than by trusting the
+ * carried verdict: the sole verdict is read off the SIGNED union margin —
+ * above the band ratified, below the negated band refused, otherwise close —
+ * which is the identical three-way test `ratifyTermSheet` ran, re-run on this
+ * function's own arithmetic. So the record can never say `ratified` while
+ * `offers[0].holds` is false, and the arm still says the one thing the contest
+ * arm cannot, which is the difference between a REFUSAL and a stalemate.
+ *
+ * RULING R-BLD-8b, SECOND HALF — ONE BAND OR NO ANSWER. Every offer row carries
+ * the band its own tally was decided at. If the caller hands this function a
+ * different band, the offers' verdicts and the offers' `holds` were computed
+ * against two different laws, and any answer built from both is a contradiction
+ * wearing a receipt. That refuses closed (`band_mismatch`). A widening round
+ * does not re-decide stale verdicts at a new band — it re-runs `ratifyTermSheet`
+ * over the ballots at the new band, because the members' verdicts move too.
+ *
+ * RULING R-BLD-8a — ONE COALITION, ONE SIDE. Rival offers are rivals only if
+ * one body is choosing between them. Two tallies from OPPOSITE sides of the
+ * same episode are two coalitions, and unioning them mints a body that never
+ * met: the enemy's weight would count toward the majority that binds us. The
+ * offers must agree on `sideId` AND `counterpartId` down to the ballot, or the
+ * read refuses closed (`side_mismatch`) — the same law `ratifyTermSheet`
+ * already enforces inside one tally, enforced one level up.
  *
  * @param {{tallies?:unknown, closeBand01?:unknown}} args
  * @returns {Record<string, unknown>}
@@ -417,6 +454,21 @@ export function chooseAmongCompetingOffers({ tallies, closeBand01 } = {}) {
   }
   const sheetIds = rows.map((row) => String(row.termSheetId));
   if (new Set(sheetIds).size !== sheetIds.length) return refusal('duplicate_offer');
+  // R-BLD-8a. Read the edge off the ballots themselves rather than a summary
+  // field: `ratifyTermSheet` publishes no side, and the ballots are what the
+  // union is actually summed from. An offer with no ballots at all adds no
+  // spelling here and falls to `offer_without_ballots` below, where it belongs.
+  const edges = new Set();
+  for (const row of rows) {
+    const cast = Array.isArray(row.ballots) ? row.ballots : [];
+    for (const entry of cast) {
+      const ballot = recordOf(entry);
+      edges.add(`${strictText(ballot.sideId)} ${strictText(ballot.counterpartId)}`);
+    }
+  }
+  if (edges.size > 1) return refusal('side_mismatch');
+  // R-BLD-8b, second half: one band, or no answer.
+  if (rows.some((row) => Number(row.closeBand01) !== band)) return refusal('band_mismatch');
   const union = unionCoalitionWeight(rows);
   if (union.weight <= 0) return refusal(union.reason);
 
@@ -436,13 +488,18 @@ export function chooseAmongCompetingOffers({ tallies, closeBand01 } = {}) {
         holds: unionMargin01 > band,
       };
     });
-  // A single offer is not a contest; its own tally already decided it, and that
-  // verdict is provably the same test — see the docstring.
+  // A single offer is not a contest. R-BLD-8b: the verdict is DERIVED from this
+  // function's own union arithmetic — the same three-way test the tally ran —
+  // so `verdict` and `holds` cannot disagree, whatever the carried verdict says.
   if (offers.length === 1) {
+    const sole = offers[0];
+    const verdict = sole.holds
+      ? 'ratified'
+      : sole.unionMargin01 < -band ? 'refused' : 'close';
     return {
-      verdict: offers[0].verdict,
+      verdict,
       reason: 'sole_offer',
-      chosenTermSheetId: offers[0].verdict === 'ratified' ? offers[0].termSheetId : null,
+      chosenTermSheetId: verdict === 'ratified' ? sole.termSheetId : null,
       offers,
       unionWeight: union.weight,
       closeBand01: band,
