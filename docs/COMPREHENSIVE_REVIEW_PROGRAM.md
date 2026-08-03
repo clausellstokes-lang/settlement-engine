@@ -214,6 +214,18 @@ ledger — never from a session digest.
 >   remission-before-alms, the per-observer inequity read, rapprochement as the ONE new
 >   trigger token. CPL-17 carries the owner-override line; three cross-volume amendment
 >   requests recorded unassumed. SOL_QUEUE 23a final.
+> - 2026-08-03 (THE CONTENT NIGHT CLOSES — the Herald + dossier voice program complete). Laws:
+>   the frequency-scaled floor + legacy clause (88b6a042), THE CAUSAL GRAMMAR (c41855cd), two
+>   registers (af81ae32), the Herald surface contract incl. subheader + rumor links + popup
+>   convention (fcf6c4e0), THE HERALD INDEX (657ff3ab), THE TRUTH LAW + contamination fence
+>   (b8cde654), the portable popup + manipulation disclosure (f2cd6ba0) + THE MUTATED PLANT
+>   (1916de8a), the dossier extension (4dccad24) + THE DOSSIER-NATIVE REGISTER (c2f048e1) +
+>   the state-prose corpus + foreign desk (c2628351) + THE DM-FIELD PROJECTION RULE (06afec27).
+>   Corpora: chronic deepening +2,462 (1e8bf8a8) · the causal voice 78 families x 3 registers
+>   (7fc778b5) · the dossier-native register 78x6 (6e5615b7) · the state-prose corpus 77/77
+>   surfaces, 2,149 variants (9a9094a3) · the completion pass (06afec27). ~10,600 authored,
+>   adversarially verified sentences across 12 annex files; SOL_QUEUE item 24 gathers the
+>   wiring. Every verifier PASS; every chair/writer ruling recorded vetoable in-file.
 > - 2026-08-02 (~04:30, THE NIGHT CLOSES WHOLE). CORRECTION PASS COMPLETE: 134 corrections
 >   across 11 docs by 7 agents (six correctors + the coherence sweeper), 20+3 unresolved
 >   forks all chair-ruled (2 routed to owner: annual credit cadence · WR-9 gate reading);
