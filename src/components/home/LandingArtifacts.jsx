@@ -21,13 +21,16 @@
  * store/gallery/fixture imports here never touch first paint.
  */
 
-// NOTE: only icons ALREADY in the first-paint vendor-icons chunk may be used
-// here (ArrowRight/Sparkles are). manualChunks routes every non-map lucide
-// icon into the eager vendor-icons chunk regardless of importer laziness, so a
-// new icon on this lazy surface would still grow first paint (measured: the
-// forge button's Hammer cost +324 B against a sub-100 B budget margin).
+// NOTE: this surface now carries NO lucide at all (lane LU-2 — the icons-off
+// law suppressed its ArrowRight/Sparkles anyway, so the imports were pure first-
+// paint cost for glyphs nobody could see). The old rule here was "only icons
+// ALREADY in the vendor-icons chunk may be used", because manualChunks routes
+// every non-map lucide icon into the EAGER vendor-icons chunk regardless of
+// importer laziness — a new icon on this lazy surface still grows first paint
+// (measured: the forge button's Hammer cost +324 B against a sub-100 B margin).
+// That rule still holds for anyone tempted to add one; the icons-off gate is
+// now the first reason not to, and this cost is the second.
 import { useState } from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 import StateBadge from '../primitives/StateBadge.jsx';
 import Badge from '../primitives/Badge.jsx';
@@ -248,7 +251,7 @@ export function VoiceCards() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: SP.sm, marginBottom: SP.md }}>
           <StateBadge kind="narrated" />
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: MONO, fontSize: FS.xs, color: SLATE_DEEP }}>
-            <Sparkles size={11} aria-hidden="true" />{tl('voice.credit')}
+            {tl('voice.credit')}
           </span>
         </div>
         <p style={{ margin: 0, fontFamily: serif_, fontStyle: 'italic', fontSize: FS['16'], lineHeight: 1.7, color: BODY }}>
@@ -275,7 +278,6 @@ export function WhyTraceCard() {
               <span style={{ fontFamily: sans, fontSize: FS['12.5'], fontWeight: 800, color: SECOND }}>{d.axis}</span>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                 <Chip tone="neutral">{d.from}</Chip>
-                <ArrowRight size={11} color={MUTED} aria-hidden="true" />
                 <Chip tone={d.tone}>{d.to}</Chip>
               </span>
             </div>

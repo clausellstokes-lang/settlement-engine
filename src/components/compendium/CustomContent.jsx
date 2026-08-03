@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { INK, BODY, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, serif_, FS, SP, swatch } from '../theme.js';
-import { Plus, Edit3, Trash2, Copy, Wand2, X } from 'lucide-react';
 import { deityTemper } from '../../domain/worldPulse/deityAxes.js';
 import PantheonActivationStrip from './PantheonActivationStrip.jsx';
 import FactionEventBanner from './FactionEventBanner.jsx';
@@ -448,7 +447,7 @@ export function CustomContentManager({ search, initialCat }) {
               return (
                 <button key={c.key} type="button" aria-pressed={activeCat===c.key} onClick={() => { setActiveCat(c.key); resetDraft(); }}
                   style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', minHeight:44, fontSize:FS.xs, fontWeight:activeCat===c.key?700:500, cursor:'pointer', border:`1px solid ${activeCat===c.key?c.color:BOR}`, background:activeCat===c.key?`${c.color}14`:'transparent', color:activeCat===c.key?c.color:SEC }}>
-                  <c.Icon size={11}/> {c.label}
+                  {c.label}
                   {count > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:`${c.color}20`, color:c.color, padding:'0 4px', marginLeft:2 }}>{count}</span>}
                 </button>
               );
@@ -469,16 +468,16 @@ export function CustomContentManager({ search, initialCat }) {
       {/* Add / Start-from-a-built-in / Test-in-a-generation affordances. */}
       {activeCat !== 'supplyChains' && !addingNew && !editingId && (
         <div style={{ display:'flex', alignItems:'center', gap:6, flexWrap:'wrap', marginBottom:10 }}>
-          <Button variant="ai" size="sm" icon={<Plus size={12}/>} onClick={() => { setAddingNew(true); setDraft({}); setShowSeeds(false); setJustSaved(null); }}>
+          <Button variant="ai" size="sm" onClick={() => { setAddingNew(true); setDraft({}); setShowSeeds(false); setJustSaved(null); }}>
             Add Custom {singular}
           </Button>
           {SEEDABLE.has(activeCat) && (
-            <Button variant="secondary" size="sm" icon={<Copy size={12}/>} onClick={() => setShowSeeds(s => !s)} aria-pressed={showSeeds}>
+            <Button variant="secondary" size="sm" onClick={() => setShowSeeds(s => !s)} aria-pressed={showSeeds}>
               Start from a built-in
             </Button>
           )}
           {/* The forward exit from authoring, set apart as a distinct next step. */}
-          <Button variant="secondary" size="sm" icon={<Wand2 size={12}/>} onClick={() => navigate('generate')} title="Run a generation that draws on your custom content." style={{ marginLeft:'auto' }}>
+          <Button variant="secondary" size="sm" onClick={() => navigate('generate')} title="Run a generation that draws on your custom content." style={{ marginLeft:'auto' }}>
             Test in a generation
           </Button>
         </div>
@@ -534,10 +533,10 @@ export function CustomContentManager({ search, initialCat }) {
           <span style={{ flex:1, minWidth:160, fontSize:FS.sm, color:BODY, lineHeight:1.45 }}>
             <strong>{justSaved}</strong> saved as an immutable revision. See it shape a world.
           </span>
-          <Button variant="ai" size="sm" icon={<Wand2 size={12}/>} onClick={() => navigate('generate')}>
+          <Button variant="ai" size="sm" onClick={() => navigate('generate')}>
             Test in a generation
           </Button>
-          <IconButton Icon={X} glyph="×" label="Dismiss" tone="ghost" size="sm" onClick={() => setJustSaved(null)} />
+          <IconButton glyph="×" label="Dismiss" tone="ghost" size="sm" onClick={() => setJustSaved(null)} />
         </div>
       )}
 
@@ -564,7 +563,7 @@ export function CustomContentManager({ search, initialCat }) {
               No custom {catDef.label.toLowerCase()} yet. Use the Add button above to create one.
             </div>
             {SEEDABLE.has(activeCat) && (
-              <Button variant="secondary" size="sm" icon={<Copy size={12}/>} onClick={() => setShowSeeds(true)}>
+              <Button variant="secondary" size="sm" onClick={() => setShowSeeds(true)}>
                 Start from a built-in {singular.toLowerCase()}
               </Button>
             )}
@@ -578,8 +577,8 @@ export function CustomContentManager({ search, initialCat }) {
                 <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:700, color:INK, flex:1 }}>{item.name}</span>
                 <Tag label="Custom" color='#7c3aed'/>
                 {item.category && <Tag label={item.category} color={catDef.color}/>}
-                <IconButton Icon={Edit3} label="Edit item" tone="ghost" size="sm" onClick={() => handleEdit(item)} />
-                <IconButton Icon={Trash2} label="Archive item" tone="danger" size="sm" onClick={() => setDeleteId(deleteId===item.id?null:item.id)} />
+                <IconButton glyph="✎" label="Edit item" tone="ghost" size="sm" onClick={() => handleEdit(item)} />
+                <IconButton glyph="−" label="Archive item" tone="danger" size="sm" onClick={() => setDeleteId(deleteId===item.id?null:item.id)} />
               </div>
               {(item.description || item.portfolio) && <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.4, marginTop:4 }}>{item.description || item.portfolio}</div>}
               <CustomItemAttributes item={item} bucket={activeCat} />

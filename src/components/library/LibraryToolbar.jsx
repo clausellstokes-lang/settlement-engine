@@ -20,7 +20,6 @@
  */
 
 import { useState } from 'react';
-import { X, SlidersHorizontal } from 'lucide-react';
 import { sans, FS, SP, R, swatch, BORDER, PARCH, INK, MUTED, BODY } from '../theme.js';
 import { isCanonSave, savePhase } from '../../domain/campaign/canon.js';
 import { settlementSignals, needsAttention, healthPip } from '../settlements/livingWorldSignals.js';
@@ -221,7 +220,7 @@ export default function LibraryToolbar({
           same slice. The `filters.campaignId` plumbing (applyLibraryFilters) is
           kept intact for deep links. OWNER-VETOABLE control removal. */}
       {activeFilterCount > 0 && (
-        <Button size="sm" variant="ghost" icon={<X size={12} />} onClick={() => setFilters({})}>Clear filters</Button>
+        <Button size="sm" variant="ghost" onClick={() => setFilters({})}>Clear filters</Button>
       )}
     </>
   );
@@ -253,7 +252,7 @@ export default function LibraryToolbar({
             style={{ flex: 1, minWidth: 0, border: 'none', outline: 'none', background: 'transparent', fontFamily: sans, fontSize: FS.sm, color: INK }}
           />
           {query && (
-            <IconButton Icon={X} label="Clear search" tone="ghost" size="sm" onClick={() => setQuery('')} />
+            <IconButton glyph="×" label="Clear search" tone="ghost" size="sm" onClick={() => setQuery('')} />
           )}
         </div>
       </div>
@@ -295,7 +294,7 @@ export default function LibraryToolbar({
             style={{ flex: 1, minWidth: 0, border: 'none', outline: 'none', background: 'transparent', fontFamily: sans, fontSize: FS.sm, color: INK }}
           />
           {query && (
-            <IconButton Icon={X} label="Clear search" tone="ghost" size="sm" onClick={() => setQuery('')} />
+            <IconButton glyph="×" label="Clear search" tone="ghost" size="sm" onClick={() => setQuery('')} />
           )}
         </div>
 
@@ -407,7 +406,7 @@ export default function LibraryToolbar({
         />
         {query && (
           <IconButton
-            Icon={X}
+            glyph="×"
             label="Clear search"
             tone="ghost"
             size="sm"
@@ -469,7 +468,6 @@ export default function LibraryToolbar({
         aria-expanded={filtersOpen}
         aria-controls="library-filter-panel"
         onClick={() => setFiltersOpen(o => !o)}
-        icon={<SlidersHorizontal size={12} />}
       >
         Filters{activeFilterCount > 0 ? ` (${activeFilterCount})` : ''} {filtersOpen ? '▴' : '▾'}
       </Button>

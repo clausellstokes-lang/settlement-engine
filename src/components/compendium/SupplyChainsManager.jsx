@@ -12,7 +12,6 @@
  * blocked, or outside its tier before any trade endpoint is promoted.
  */
 import { useMemo, useState } from 'react';
-import { Check, X, Trash2 } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { inferSupplyChains } from '../../domain/inferSupplyChains.js';
@@ -123,7 +122,6 @@ export default function SupplyChainsManager() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    icon={<Trash2 size={12} />}
                     onClick={() => removeReviewedSupplyChain(
                       chain.definitionId || chain.id,
                     )}
@@ -177,7 +175,7 @@ export default function SupplyChainsManager() {
                   placeholder={`Name this chain (e.g. ${chain.label})`}
                   style={{ flex: '1 1 220px', minWidth: 180, padding: '5px 8px', border: `1px solid ${BORDER}`, fontSize: FS.xs, fontFamily: sans, color: INK, background: swatch.white, outline: 'none' }}
                 />
-                <Button variant="success" size="sm" icon={<Check size={12} />} onClick={() => confirm(chain)}>
+                <Button variant="success" size="sm" onClick={() => confirm(chain)}>
                   {confirmed.some(item => item.chainId === chain.chainId)
                     ? 'Review again'
                     : 'Confirm'}
@@ -186,7 +184,7 @@ export default function SupplyChainsManager() {
                     suggestion, it isn't the loud primary. Demoted off the danger
                     fill to a ghost button and pushed apart from Confirm so the
                     accept action stays the one obvious move. */}
-                <Button variant="ghost" size="sm" icon={<X size={12} />} onClick={() => reject(chain.chainId)} style={{ marginLeft: 'auto', color: swatch.danger }}>
+                <Button variant="ghost" size="sm" onClick={() => reject(chain.chainId)} style={{ marginLeft: 'auto', color: swatch.danger }}>
                   Reject
                 </Button>
               </div>

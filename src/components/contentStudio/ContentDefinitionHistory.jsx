@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { History } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
@@ -272,7 +271,6 @@ export default function ContentDefinitionHistory({ category, item }) {
       <Button
         variant="ghost"
         size="sm"
-        icon={<History size={12} />}
         aria-expanded={open}
         aria-controls={panelId}
         onClick={toggleHistory}

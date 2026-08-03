@@ -17,7 +17,6 @@
  */
 
 import { useState, useSyncExternalStore } from 'react';
-import { X } from 'lucide-react';
 import { FS, swatch, GOLD, PARCH, SLATE, SLATE_BG, BODY, CHROME, bottomClearance } from '../theme.js';
 import { FLAGS, flag, setFlagOverride } from '../../lib/flags.js';
 import Button from '../primitives/Button.jsx';
@@ -128,7 +127,7 @@ export default function DevFlagPanel() {
           Feature flags (DEV)
         </span>
         <IconButton
-          Icon={X}
+          glyph="×"
           label="Close flag panel"
           tone="ghost"
           size="sm"

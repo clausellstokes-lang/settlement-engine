@@ -22,7 +22,6 @@
  * @enforced-by tests/ui/causalityPopup.test.jsx
  */
 
-import { X } from 'lucide-react';
 
 import { BORDER, BORDER2, CARD, CARD_ALT, FS, INK, SECOND, SP, sans } from '../theme.js';
 import IconButton from './IconButton.jsx';
@@ -99,7 +98,7 @@ export default function PortablePopup({ open, title, onClose, children, testId =
           {/* A CLOSE affordance, never an ACKNOWLEDGE one: it dismisses the popup
               and records nothing. The label says close, and the convention above
               already lets an outside click do the same. */}
-          <IconButton Icon={X} label={`Close ${title}`} onClick={onClose} size="sm" />
+          <IconButton glyph="×" label={`Close ${title}`} onClick={onClose} size="sm" />
         </header>
         <div style={{ padding: SP.md, color: INK, fontFamily: sans, fontSize: FS.xxs }}>
           {children}

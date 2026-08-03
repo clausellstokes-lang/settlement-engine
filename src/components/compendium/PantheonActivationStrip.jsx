@@ -22,7 +22,6 @@
  * only). Pure presentational over store state.
  */
 
-import { ArrowRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { navigate } from '../../hooks/useRoute.js';
 import { td } from '../../copy/deityAuthoring.js';
@@ -100,7 +99,6 @@ export default function PantheonActivationStrip() {
     <Button
       variant="secondary"
       size="sm"
-      icon={<ArrowRight size={11} />}
       onClick={onClick}
       style={{ flexShrink: 0, padding: '2px 8px', minHeight: 0, fontSize: FS.xxs, fontWeight: 800, color: DEITY_ACCENT }}
     >

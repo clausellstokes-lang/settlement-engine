@@ -83,7 +83,7 @@ export default function ReadOnlyCustomContentList({ search, initialCat }) {
                 color: activeCat === candidate.key ? candidate.color : SEC,
               }}
             >
-              <candidate.Icon size={11} /> {candidate.label}
+              {candidate.label}
               <span style={{
                 fontSize: FS.micro,
                 fontWeight: 700,

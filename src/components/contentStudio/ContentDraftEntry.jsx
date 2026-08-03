@@ -4,7 +4,6 @@
  */
 
 import { useId } from 'react';
-import { Check, Pencil, X } from 'lucide-react';
 import {
   getCustomContentCategory,
   getCustomContentField,
@@ -203,7 +202,7 @@ export default function ContentDraftEntry({
         <span style={{ flex: 1 }} />
         <div role="radiogroup" aria-label={`Decision for ${baseEntry.name || `entry ${index + 1}`}`} style={{ display: 'flex', gap: 2 }}>
           <IconButton
-            Icon={Check}
+            glyph="✓"
             label="Approve this entry"
             size="sm"
             tone={action === 'approve' ? 'active' : 'default'}
@@ -211,7 +210,7 @@ export default function ContentDraftEntry({
             onClick={() => onDecide(index, { action: 'approve' })}
           />
           <IconButton
-            Icon={Pencil}
+            glyph="✎"
             label="Edit this entry"
             size="sm"
             tone={action === 'edit' ? 'active' : 'default'}
@@ -219,7 +218,7 @@ export default function ContentDraftEntry({
             onClick={() => onDecide(index, { action: 'edit', editedFields: edited })}
           />
           <IconButton
-            Icon={X}
+            glyph="×"
             label="Reject this entry"
             size="sm"
             tone={action === 'reject' ? 'active' : 'default'}

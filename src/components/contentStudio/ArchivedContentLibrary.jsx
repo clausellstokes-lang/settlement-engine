@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { ArchiveRestore } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
@@ -267,7 +266,6 @@ export default function ArchivedContentLibrary() {
       <Button
         variant="ghost"
         size="sm"
-        icon={<ArchiveRestore size={12} />}
         aria-expanded={open}
         aria-controls={panelId}
         onClick={toggleArchived}

@@ -14,7 +14,6 @@
  */
 
 import { useState, useRef, useEffect, useMemo } from 'react';
-import { X } from 'lucide-react';
 import IconButton from '../primitives/IconButton.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { GOLD, INK, BODY, BORDER as BOR, CARD, PARCH, sans, FS, swatch } from '../theme.js';
@@ -138,7 +137,6 @@ export default function CompendiumGlobalSearch({ onSelect }) {
         />
         {query && (
           <IconButton
-            Icon={X}
             glyph="×"
             label="Clear search"
             tone="ghost"
@@ -207,7 +205,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
             No matches for &ldquo;{q}&rdquo;. Try a tier, archetype, institution, neighbour, route, or stress name.
           </span>
           {/* Recovery CTA at the point of failure, not just the X up in the input. */}
-          <IconButton Icon={X} glyph="×" label="Clear search" tone="ghost" size="sm" onClick={() => { setQuery(''); setActive(0); setOpen(false); }} />
+          <IconButton glyph="×" label="Clear search" tone="ghost" size="sm" onClick={() => { setQuery(''); setActive(0); setOpen(false); }} />
         </div>
       )}
     </div>

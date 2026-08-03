@@ -14,7 +14,6 @@
  */
 
 import { useRef, useState } from 'react';
-import { Download, Upload } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import {
   buildContentPack, parseContentPack, prepareImport, PACK_BUCKETS,
@@ -319,13 +318,13 @@ export default function ContentPackBar() {
         Content packs
       </span>
       <Button
-        variant="secondary" size="sm" icon={<Download size={12} />}
+        variant="secondary" size="sm"
         onClick={handleExport} disabled={totalAuthored === 0}
       >
         Export
       </Button>
       <Button
-        variant="secondary" size="sm" icon={<Upload size={12} />}
+        variant="secondary" size="sm"
         onClick={() => fileRef.current?.click()}
       >
         Import

@@ -24,7 +24,6 @@ import { HALL, RING_TONE, RING_LABEL, numeralStyle, covenantProseStyle, quietLin
 import { chairNumeral, seatedLabel } from '../../lib/foundersHall.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import { X } from 'lucide-react';
 import { SP, FS, serif_, sans } from '../theme.js';
 
 /**
@@ -102,7 +101,7 @@ export default function ChairDrawer({ chair, onClose }) {
             )}
             {seated && <span style={quietLineStyle}>{seated}</span>}
           </div>
-          <IconButton Icon={X} label="Close" onClick={onClose} tone="ghost" size="lg" />
+          <IconButton glyph="×" label="Close" onClick={onClose} tone="ghost" size="lg" />
         </div>
 
         <hr style={{ border: 0, borderTop: `1px solid ${HALL.rule}`, margin: 0, width: '100%' }} />

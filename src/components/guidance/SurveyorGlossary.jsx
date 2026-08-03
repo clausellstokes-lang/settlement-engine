@@ -21,7 +21,6 @@
  */
 
 import { useState } from 'react';
-import { X } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
@@ -75,7 +74,7 @@ function GlossaryCard({ open, entry, onClose }) {
               {entry.term}
             </h2>
           </div>
-          <IconButton Icon={X} label="Close" tone="ghost" size="sm" onClick={onClose} />
+          <IconButton glyph="×" label="Close" tone="ghost" size="sm" onClick={onClose} />
         </header>
         <div style={{ padding: SP.lg, display: 'grid', gap: SP.md }}>
           <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5 }}>

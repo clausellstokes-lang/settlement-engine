@@ -19,7 +19,6 @@
  */
 
 import { useMemo, useState } from 'react';
-import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react';
 import { FS, PARCH, INK_DEEP, INK, GOLD, GOLD_B, MUTED, BORDER, sans, serif_, swatch } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
@@ -199,7 +198,6 @@ export default function RegionWakeReplay({ onUpgrade, compact = false }) {
           onClick={() => setStep(s => Math.max(0, s - 1))}
           disabled={step === 0}
           aria-label={t('replay.prev')}
-          icon={<ChevronLeft size={14} />}
           // minWidth too: the short "Back" label + chevron only filled ~43px
           // wide, 1px under the 44px touch-target floor the height already met.
           style={{ minHeight: 44, minWidth: 44 }}
@@ -211,7 +209,6 @@ export default function RegionWakeReplay({ onUpgrade, compact = false }) {
             variant="secondary"
             size="sm"
             onClick={() => setStep(0)}
-            icon={<RotateCcw size={13} />}
             style={{ marginLeft: 'auto', minHeight: 44 }}
           >
             {t('replay.restart')}
@@ -221,7 +218,6 @@ export default function RegionWakeReplay({ onUpgrade, compact = false }) {
             variant="secondary"
             size="sm"
             onClick={() => setStep(s => Math.min(last, s + 1))}
-            trailingIcon={<ChevronRight size={14} />}
             style={{ marginLeft: 'auto', minHeight: 44 }}
           >
             {t('replay.next')}

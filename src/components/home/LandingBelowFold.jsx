@@ -15,12 +15,11 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { ChevronDown, ArrowRight, Sparkles, Map as MapIcon } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 import WelcomeJourneyBackdrop from './WelcomeJourneyBackdrop.jsx';
 import { fontFamily, radius } from '../../design/tokens.js';
 import {
-  INK, SECOND, BODY, MUTED, GOLD, GOLD_DEEP, GOLD_TXT, GOLD_BG,
+  INK, SECOND, BODY, MUTED, GOLD, GOLD_TXT, GOLD_BG,
   PARCH, PARCH_100, BORDER, CARD,
   FS, SP, R, ELEV, sans, serif_,
 } from '../theme.js';
@@ -289,7 +288,6 @@ function LandingFooter({ onNavigate, isMobile }) {
       maxWidth: CONTENT_MAX, margin: `${SP.xxl * 2}px auto 0`, borderTop: '1px solid rgba(244,234,208,0.2)',
       paddingTop: SP.xl, display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap',
     }}>
-      <MapIcon size={15} color={GOLD} aria-hidden="true" />
       <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: GOLD }}>{tl('footer.brand')}</span>
       <span style={{ marginLeft: 'auto', display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
         {links.map((label) => (
@@ -406,13 +404,12 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
           </div>
           <VoiceCards />
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: SP.md, marginTop: SP.xl, flexWrap: 'wrap' }}>
-            <Button variant="ai" onClick={() => onNavigate('generate')} icon={<Sparkles size={14} />}>{tl('voice.cta')}</Button>
+            <Button variant="ai" onClick={() => onNavigate('generate')}>{tl('voice.cta')}</Button>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => onNavigate('pricing')}
               style={{ ...capsLink }}
-              trailingIcon={<ChevronDown size={14} />}
             >
               {tl('voice.pricingLink')}
             </Button>
@@ -497,7 +494,6 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
             size="sm"
             onClick={() => onNavigate('pricing')}
             style={{ ...capsLink, color: 'rgba(224,192,128,1)' }}
-            trailingIcon={<ArrowRight size={14} />}
           >
             {tl('closer.fullPricing')}
           </Button>

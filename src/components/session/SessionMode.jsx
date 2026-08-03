@@ -28,7 +28,6 @@
  */
 
 import { useMemo } from 'react';
-import { X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { FS, ELEV, swatch } from '../theme.js';
 import { formatCount } from '../../domain/formatNumber.js';
@@ -258,7 +257,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
             {phase === 'canon' && <> · CANON</>}
           </div>
         </div>
-        <IconButton Icon={X} label="Close session mode" onClick={onClose} tone="ghost" size="lg" />
+        <IconButton glyph="×" label="Close session mode" onClick={onClose} tone="ghost" size="lg" />
       </header>
 
       {/* Body: quick-nav rail + content column */}

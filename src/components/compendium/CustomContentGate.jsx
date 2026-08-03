@@ -6,7 +6,6 @@
  * CustomContent.jsx so existing import sites keep working.
  */
 import { GOLD, INK, MUTED as MUT, SECOND as SEC, serif_, FS } from '../theme.js';
-import { Sparkles } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import Button from '../primitives/Button.jsx';
 
@@ -24,7 +23,6 @@ export function CustomContentUpsell({ existingCount, isAnon }) {
         width: 56, height: 56, borderRadius: '50%',
         background: 'rgba(124,58,237,0.12)', marginBottom: 12,
       }}>
-        <Sparkles size={26} color="#7c3aed" />
       </div>
       <div style={{
         fontSize: FS['18'], fontWeight: 700, fontFamily: serif_, color: INK, marginBottom: 4,

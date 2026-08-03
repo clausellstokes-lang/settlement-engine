@@ -15,7 +15,6 @@
  */
 
 import { useState } from 'react';
-import { X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { useReturnVisit } from '../../hooks/useReturnVisit.js';
@@ -68,7 +67,7 @@ export default function WelcomeBackCard({ onOpen, onForge }) {
     }}>
       <div style={{ padding: SP.lg, position: 'relative' }}>
         <Button
-          variant="ghost" size="sm" icon={<X size={12} />}
+          variant="ghost" size="sm"
           aria-label="Dismiss the welcome-back card"
           onClick={() => { markGuidanceDismissed(WHISPER_ID); setDismissed(true); }}
           style={{ position: 'absolute', top: SP.sm, right: SP.sm }}
