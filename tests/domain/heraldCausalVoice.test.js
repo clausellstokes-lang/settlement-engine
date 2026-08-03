@@ -1092,3 +1092,157 @@ describe('THE CLAUSE FLOOR — the ROOT is on it too (F1)', () => {
     }
   });
 });
+
+// ── CYCLE-12 F4 — THE TYPE WARRANTS REACH THE LIVE PATH (CR-HR-F4) ──────────
+// `poolForLink` tested its four type warrants against a hop's `type`, and a hop's
+// `type` is the CHRONICLE DISPLAY CLASS (`dramaClass || kind`), never the
+// receipt's own edge/reason type: `dramaClassForNode` reads `stressor.type`,
+// `candidateType` and `ruleFamily` and nothing else, so a real `plant_exposed`
+// outcome resolves as `'outcome'`. exposed / refused / breached / dissolved were
+// therefore live code no shipped hop could reach, and the direction-safety rule
+// guarding them guarded nothing. Under the ruling a resolved hop additionally
+// carries `recordedType` — a DERIVED read of the receipt's own ledger row — and
+// `edgeTypeOf` prefers it. These pins run the SHIPPED PATH.
+
+/**
+ * THE F4 FIXTURE: the parent IS an exposure, and the ledger says so in its own
+ * row. `evt-exposure` has a parent of its own (`evt-plant`), which is what gives
+ * it a ledger row at all — a root cause is named only as its children's parent
+ * and so carries no recorded type, which the pins below also measure.
+ */
+const exposureLedgerWorld = () => ({
+  simulationRules: { heraldCausalVoiceEnabled: true },
+  spatialLedgers: {
+    provenance: {
+      'evt-root': { parents: ['evt-exposure'], type: 'war_declared', tick: 70 },
+      'evt-exposure': { parents: ['evt-plant'], type: 'plant_exposed', tick: 68 },
+    },
+  },
+  pulseHistory: [{
+    tick: 70,
+    selectedOutcomes: [
+      { id: 'evt-root', headline: 'Karsh declares war on Elmspur', type: 'war_declared' },
+      { id: 'evt-exposure', headline: 'the forged writ was unmasked at Karsh', type: 'plant_exposed' },
+      { id: 'evt-plant', headline: 'a forged writ entered the Karsh archive', type: 'disinfo_planted' },
+    ],
+  }],
+});
+
+/** The same fixture with the LEDGER ROW's type made unwarranted — one field. */
+const unwarrantedLedgerWorld = () => {
+  const world = exposureLedgerWorld();
+  world.spatialLedgers.provenance['evt-exposure'].type = 'levy_shortfall';
+  return world;
+};
+
+const hopOf = (walk, id) => walk.chain.find((hop) => hop.id === id);
+
+describe('THE TYPE WARRANTS ON THE LIVE PATH (F4)', () => {
+  test('THE DEFECT, MEASURED: a hop\'s `type` is the display class and could never license the pool', () => {
+    const walk = walkOf(exposureLedgerWorld());
+    const hop = hopOf(walk, 'evt-exposure');
+    expect(hop, 'the ledger names the exposure as the root\'s parent but the walk dropped it').toBeTruthy();
+    // The display class the chronicle computed. It is NOT the receipt's own type,
+    // and no regex over the four warranted families can ever match it — which is
+    // exactly why the pools were unreachable.
+    expect(hop.type).toBe('outcome');
+    // The receipt's own recorded edge type, read off its ledger row.
+    expect(hop.recordedType).toBe('plant_exposed');
+    // A root cause has no ledger row of its own, so it honestly reports nothing
+    // rather than borrowing the display class as if it were an edge type.
+    expect(hopOf(walk, 'evt-plant').recordedType).toBeNull();
+  });
+
+  test('the exposure voice reaches a REAL hop in `back` — the first live-path draw', () => {
+    const walk = walkOf(exposureLedgerWorld());
+    const hop = hopOf(walk, 'evt-exposure');
+    expect(poolForLink(hop, 'back')).toBe('exposed');
+    const failures = collectSeedFailures(SEEDS, (seed) => {
+      const world = exposureLedgerWorld();
+      const back = heraldTellingRegister({
+        worldState: world, walk: walkOf(world), seed, seesSecrets: true, direction: 'back',
+      });
+      const exposure = back.links.find((l) => l.id === 'evt-exposure');
+      expect(exposure, `${seed}: the exposure hop left the telling entirely`).toBeTruthy();
+      expect(exposure.pool, `${seed}: the exposure hop drew ${exposure.pool}`).toBe('exposed');
+      expect(exposure.argText, `${seed}: the exposure drew a connective with no argument`).toBeTruthy();
+    });
+    expectNoSeedFailures(failures, 'a recorded exposure hop composes the exposure voice');
+  });
+
+  test('THE REMOVAL, measured: an unwarranted LEDGER TYPE loses the pool the exposure earns', () => {
+    // One field between the two worlds: the ledger row's own `type`. The before
+    // side is the liveness anchor — it proves the register really can compose an
+    // `exposed` link on this fixture, so the after side measures the warrant.
+    const before = heraldTellingRegister({
+      worldState: exposureLedgerWorld(), walk: walkOf(exposureLedgerWorld()), seed: 'f4-1', seesSecrets: true,
+    });
+    const after = heraldTellingRegister({
+      worldState: unwarrantedLedgerWorld(), walk: walkOf(unwarrantedLedgerWorld()), seed: 'f4-1', seesSecrets: true,
+    });
+    expectPresentThenAbsent(
+      before.links.map((l) => String(l.pool)),
+      after.links.map((l) => String(l.pool)),
+      'exposed',
+      'the ledger type is what licenses the exposure pool',
+    );
+    // …and the link is not DROPPED, it is demoted: succession is still asserted.
+    expect(after.links.find((l) => l.id === 'evt-exposure').pool).toBe('followed');
+  });
+
+  test('THE CLOSED VOCABULARY: a recorded type wins, and an unknown one draws `followed`', () => {
+    // The preference, stated as three cases on hand-built links so the rule is
+    // readable independently of any fixture.
+    expect(poolForLink({ type: 'plant_exposed', recordedType: 'peace_refused' })).toBe('refused');
+    // An unrecognised recorded type does NOT fall back to the display class: the
+    // display class was never an edge type, and a second bite at it would re-open
+    // the same category error one level down.
+    expect(poolForLink({ type: 'plant_exposed', recordedType: 'outcome' })).toBe('followed');
+    // Absent/blank recordedType ⇒ the legacy `type` reading, which is what every
+    // hand-built link in this file relies on.
+    expect(poolForLink({ type: 'plant_exposed', recordedType: null })).toBe('exposed');
+    expect(poolForLink({ type: 'plant_exposed', recordedType: '   ' })).toBe('exposed');
+    // The two non-type warrants are untouched by the preference.
+    expect(poolForLink({ recordedType: 'outcome', causedByParent: true })).toBe('caused');
+    expect(poolForLink({ recordedType: 'outcome', lineageIds: [`${PLANTED_LINEAGE_PREFIX}a:b:3`] })).toBe('planted');
+  });
+
+  test('THE FWD RESTRICTION STILL HOLDS on the very same live fixture', () => {
+    const walk = walkOf(exposureLedgerWorld());
+    expect(poolForLink(hopOf(walk, 'evt-exposure'), 'fwd')).toBe('followed');
+    const failures = collectSeedFailures(SEEDS, (seed) => {
+      const world = exposureLedgerWorld();
+      const fwd = heraldTellingRegister({
+        worldState: world, walk: walkOf(world), seed, seesSecrets: true, direction: 'fwd',
+      });
+      let drawn = 0;
+      for (const link of fwd.links) {
+        if (!link.connective) continue;
+        drawn += 1;
+        expect(['followed', 'caused'], `${seed}: ${link.pool}`).toContain(link.pool);
+      }
+      expect(drawn, `${seed}: the fwd telling drew nothing — the pin is vacuous`).toBeGreaterThan(0);
+      // The false claim the exposure corpus would compose about the wrong end.
+      // anchored: `drawn` is asserted non-zero above, so this ran over a composed chain
+      expect(fwd.text, seed).not.toContain('and what came out was');
+    });
+    expectNoSeedFailures(failures, 'a live exposure hop never composes an exposure connective forward');
+  });
+
+  test('A REDACTED HOP CARRIES NO RECORDED TYPE — the ledger type is content too', () => {
+    // `plant_exposed` names what the hidden receipt WAS. A player who can read the
+    // kind of the thing has been told part of it, so redaction strips it with the
+    // headline and the lineage.
+    const covertWorld = exposureLedgerWorld();
+    covertWorld.pulseHistory[0].selectedOutcomes[1].metadata = { covert: true };
+    const dm = hopOf(buildCauseWalk({ worldState: covertWorld, rootId: 'evt-root', seesSecrets: true }), 'evt-exposure');
+    const player = hopOf(buildCauseWalk({ worldState: covertWorld, rootId: 'evt-root', seesSecrets: false }), 'evt-exposure');
+    // THE LIVENESS ANCHOR: the DM read of the SAME fixture does carry it, so the
+    // null below measures redaction rather than a fixture that never had one.
+    expect(dm.recordedType, 'the DM read lost the recorded type — the pin would be vacuous').toBe('plant_exposed');
+    expect(player.redacted).toBe(true);
+    expect(player.recordedType).toBeNull();
+    // …and the pool falls all the way back to succession for that viewer.
+    expect(poolForLink(player, 'back')).toBe('followed');
+  });
+});

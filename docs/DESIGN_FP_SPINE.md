@@ -770,7 +770,10 @@ priced cost of the ambition.
 > than left to a comment.
 >
 > **DIRECTION SAFETY, AND IT RE-OPENS PER POOL.** A TYPE warrant is read off the
-> PARENT's `type`, so `exposed` / `refused` / `breached` are true in `back`, where
+> PARENT's `type` *(CORRECTED 2026-08-03, lane CF: off the parent's RECORDED edge
+> type — a hop's `type` is the chronicle's drama class and never matched any of
+> these families, so the whole rule was unreachable until CR-HR-F4 below)*, so
+> `exposed` / `refused` / `breached` are true in `back`, where
 > the connective points at that parent, and FALSE in `fwd`, where the same corpus
 > lines say "and what came out was the truth that <child>". In `fwd` those three
 > now fall back to the direction-neutral families — `caused` when the origination
@@ -882,3 +885,95 @@ priced cost of the ambition.
 >    string literal would blank text that is really code. No file in the
 >    stateProse family contains one, and the direction of the error is a MISSED
 >    offender, which is why the real-writer fixture sits beside the JSDoc one.
+
+> **LANE CF — THE CLAUSE FLOOR CLOSES: THE CYCLE-12 FINDINGS, 2026-08-03.** Five
+> commits on `claude/composite-r4` in the minifold worktree, nothing pushed,
+> everything still behind `simulationRules.heraldCausalVoiceEnabled` — dark
+> renders the surface that shipped, byte for byte.
+>
+> | Commit | What landed |
+> |---|---|
+> | `7385dba3` | **THE ROOT JOINS THE FLOOR** (F1). The clause floor read the CHAIN and left `walk.root.headline` bare, yet in `fwd` the root IS the nearest link's `childClause` — the argument that link's connective molds. `rootClause` is floored by the same predicate, the root's `childKept` starts false, and a clauseless root counts toward the truncation that forbids `horizon`. |
+> | `824c22fc` | **THE SECOND HABITAT** (F2). `realizeCauseWalk` built its own node list off the same walk with no floor at all, so the three placeholder clauses reached the discourse kernel's connective slots untouched. One import of `receiptClauseFloor.js`; a placeholder node composes as a bare terminal sentence and is TRANSPARENT to the discourse. |
+> | `83b18609` | **THE SWEEP STOPS ASKING THE VOCABULARY** (F3). The telling sweep selected which links to inspect with the live placeholder list, so a vocabulary drift made it select nothing and green on the empty set. De-self-referenced against a hand-written frozen copy. |
+> | `5a3fe844` | **THE ANCHOR DEBT** (F5). Five un-anchored negatives in `stateProseKernel.test.js` against a ceiling of zero; two were genuinely vacuous, measured with a mutant rather than argued. |
+> | `<this row>` | **THE TYPE WARRANTS REACH THE LIVE PATH** (F4, chair ruling CR-HR-F4). |
+>
+> **CR-HR-F4 — THE FOUR TYPE-WARRANTED POOLS WERE UNREACHABLE FROM THE SHIPPED
+> WALK (chair ruling, vetoable).** `poolForLink` tested `exposed` / `refused` /
+> `breached` / `dissolved` against a link's `type`. A cause-walk hop's `type` is
+> `dramaClass || kind` — the CHRONICLE's eight-class display taxonomy, computed by
+> `chronicleGraph.dramaClassForNode` from `stressor.type` / `candidateType` /
+> `ruleFamily`, which never reads the receipt's own `type` at all. MEASURED on the
+> shipped path: a `plant_exposed` outcome resolves as `'outcome'`. So four pools,
+> their whole §3 corpora, and the direction-safety rule guarding three of them were
+> live, correct, and consulted by nothing. The synthetic pins passed because they
+> hand-build links carrying `type:'plant_exposed'` directly — the recorded
+> self-referential shape one register over.
+>
+> **RULED AND IMPLEMENTED:** a resolved hop additionally carries `recordedType` —
+> the receipt's OWN edge/reason type, read verbatim off its provenance-ledger row
+> (`{ parents, type, tick }`, written by `provenanceKernel.typeOf` as
+> `type ?? candidateType ?? impactKind`). It is a DERIVED READ-MODEL FIELD: no
+> persisted shape, no writer, no migration. `edgeTypeOf` prefers it over `type`,
+> and THE VOCABULARY IS CLOSED — when a hop carries a recorded type, that type is
+> the answer, and an unrecognised one draws `followed` rather than falling back to
+> the display class, because a second bite at the display class would re-open the
+> same category error one level down. The `type` fallback survives for links with
+> no recorded type at all: a root cause named only as its children's parent, and
+> every hand-built link in the pins.
+>
+> **REDACTION TAKES THE RECORDED TYPE WITH IT.** `plant_exposed` names what the
+> hidden receipt WAS; a non-DM viewer who can read the kind of the thing has been
+> told part of it. So a redacted hop reports `recordedType:null` beside its
+> `type:'hidden'`, exactly as it already does for `lineageIds`.
+>
+> **THE PIN IS THE FIRST LIVE-PATH DRAW OF THE EXPOSURE VOICE.** A real
+> `buildCauseWalk` over a real ledger whose parent row carries `plant_exposed`
+> composes the `exposed` pool in `back` at every seed, and the `fwd` restriction
+> still holds on that same fixture (`followed`/`caused` only, and the false claim
+> "and what came out was" never appears). The removal is measured against the same
+> fixture with one field changed — the ledger row's own `type` — which demotes the
+> link to `followed` rather than dropping it. The synthetic pins are KEPT as
+> supplements: they read the fallback arm, which is still live.
+>
+> **RECEIPTS.** `heraldCausalVoice.test.js` 52 → 58 passed; the five consumer
+> suites (causeWalk, discourseKernel, both CauseWalkPanel files) 103 passed;
+> spellBreakCensus / discourseLexiconCoverage / discourseParity / narrativeParity
+> / provenanceLedger / chronicleGraph 50 passed; the size, domain-strict and
+> domain-any-cast ratchets and the contamination fence 32 passed; eslint exit 0.
+> **TWO NEGATIVE CONTROLS EXECUTED**, each restored from a `cp` backup: reverting
+> `edgeTypeOf` to `String(l.type || '')` reds 3 of the 6 new tests, and dropping
+> `recordedType` from the chain push reds 4 of them (the two sets overlap on the
+> two that need both halves).
+>
+> **F5 — THE ANCHOR DEBT (`5a3fe844`).** `tests/domain/stateProseKernel.test.js`
+> carried five un-anchored negative assertions against a frozen ceiling of ZERO, so
+> the epistemic-prevention walker named the file. Two were genuinely VACUOUS rather
+> than merely un-annotated, MEASURED with a mutant: short-circuiting
+> `emittedProsperityLabels` to an empty Set leaves the pre-cure file at 20 passed /
+> 1 failed — the exclusion pin passes over an empty collection. Those two now go
+> through `expectAbsentWithAnchor` on `Struggling`, the rung the ladder DOES emit
+> by the same `under_siege` clamp, and the same mutant reds them. The
+> unknown-audience negative is anchored on an open sibling that must SURVIVE the
+> restrictive read. The remaining three carry `// anchored:` with the structural
+> reason. The walker stops naming the file.
+>
+> **WHAT THIS LANE DELIBERATELY DID NOT DO** — recorded so no one re-finds it as
+> a bug:
+>
+> 1. **`discourseKernel` DOES NOT CARRY `recordedType` THROUGH.** `realizeCauseWalk`
+>    rebuilds nodes with `type: hop.type || 'event'` and classifies them against its
+>    OWN `ADVERSATIVE_TYPES` vocabulary, which is not the edge-warrant vocabulary.
+>    Nothing there reads `poolForLink`, so no false claim can be composed from the
+>    omission; whether that register should also prefer the ledger's type is a
+>    design question for the discourse lane, not a repair.
+> 2. **THE WALKER IS RED ESTATE-WIDE AND STAYS THAT WAY.** 44 test files exceed
+>    their frozen un-anchored ceilings at HEAD. This lane closes exactly one of
+>    them — the one it owed. The rest is the EP burn-down worklist and is not
+>    CF-2's to spend.
+> 3. **`refused` / `breached` / `dissolved` STILL HAVE NO LIVE-PATH PIN.** Only
+>    `exposed` is pinned end-to-end. The other three now travel the identical code
+>    path through `edgeTypeOf`, so the fix is proven for the class; a per-pool
+>    fixture each would pin the REGEX rather than the plumbing, and the regexes are
+>    already pinned synthetically.

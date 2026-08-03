@@ -34,13 +34,19 @@
  * ── PER-LINK ENTAILMENT ─────────────────────────────────────────────────────
  * Every clause asserts only its OWN receipt's facts, byte-verbatim, and every
  * connective is licensed by the ACTUAL provenance edge between the two receipts.
- * The recorded ledger stores a PARENT LINK and the child's structural type — it
+ * The recorded ledger stores a PARENT LINK and each receipt's structural type — it
  * does not store a relation — so an edge stronger than plain succession must be
  * POSITIVELY WARRANTED by a field the receipt carries (EDGE_WARRANTS below).
  * Unwarranted links draw from `followed`, which asserts temporal succession and
  * nothing more; they NEVER fall back to `caused`. A composer that reached for
  * `caused` when `followed` did not fit would manufacture exactly the causality
  * the corpus promises never to manufacture.
+ *
+ * THE WARRANT READS THE LEDGER'S TYPE, NOT THE DISPLAY CLASS (cycle-12 finding
+ * F4, chair ruling CR-HR-F4). A hop's `type` is the chronicle's drama class; the
+ * receipt's own recorded edge/reason type rides beside it as `recordedType`, and
+ * `edgeTypeOf` prefers it. Before that preference existed the four type-warranted
+ * pools were live code no shipped hop could ever reach.
  *
  * ── THE ARGUMENT FORM (§3's four tags, dispatched) ──────────────────────────
  * Every connective declares what its slot takes — `N` a noun phrase, `F` a
@@ -145,6 +151,37 @@ export const HEADLINE_MAX_CHARS = 160;
 export const PLANTED_LINEAGE_PREFIX = 'disinfo:';
 
 /**
+ * THE EDGE TYPE A TYPE WARRANT READS (chair ruling CR-HR-F4, cycle-12 finding F4).
+ *
+ * `recordedType` FIRST, `type` only in its absence. The two are different things
+ * wearing similar names: a cause-walk hop's `type` is the CHRONICLE's eight-class
+ * display taxonomy (`dramaClass || kind`), computed by `dramaClassForNode` from
+ * `stressor.type` / `candidateType` / `ruleFamily` — which never reads the
+ * receipt's own `type`. `recordedType` is that own type, read verbatim off the
+ * provenance ledger row (`causeWalk.recordedTypeOf`).
+ *
+ * WHAT THIS FIXES. Every type-warranted pool below — exposed, refused, breached,
+ * dissolved — was tested against the display class, so a real `plant_exposed`
+ * receipt arrived as `'outcome'` and matched nothing. Four pools, their whole
+ * §3 corpora, and both direction rules were UNREACHABLE from the shipped walk:
+ * live and correct and never once consulted. The synthetic pins passed because
+ * they hand-built links carrying `type:'plant_exposed'` directly.
+ *
+ * THE VOCABULARY IS CLOSED. When a hop DOES carry a recorded type, that type is
+ * the answer — an unrecognised one draws `followed` rather than falling back to
+ * the display class, because the display class was never an edge type and a
+ * second bite at it would re-open the same category error one level down. The
+ * fallback to `type` exists for links that carry no recorded type at all: a root
+ * cause with no ledger row of its own, and every hand-built link in the pins.
+ * @param {Record<string, unknown>} link
+ * @returns {string}
+ */
+function edgeTypeOf(link) {
+  const recorded = typeof link.recordedType === 'string' ? link.recordedType.trim() : '';
+  return recorded || String(link.type || '');
+}
+
+/**
  * EDGE WARRANTS — the receipt fields that license an edge stronger than plain
  * succession. Each row names the field the engine actually records; a link with
  * none of them is `followed`.
@@ -165,13 +202,13 @@ const EDGE_WARRANTS = Object.freeze([
       && l.lineageIds.some((id) => String(id).startsWith(PLANTED_LINEAGE_PREFIX)),
   },
   // A covert prior surfaced: the receipt for the SURFACING is what is new.
-  { pool: 'exposed', warrant: (l) => /_exposed$|_unmasked$/.test(String(l.type || '')) },
+  { pool: 'exposed', warrant: (l) => /_exposed$|_unmasked$/.test(edgeTypeOf(l)) },
   // The non-act edge — a named refusal is the cause. The counterforce's home.
-  { pool: 'refused', warrant: (l) => /_refused$|_refusal$|^declined_/.test(String(l.type || '')) },
+  { pool: 'refused', warrant: (l) => /_refused$|_refusal$|^declined_/.test(edgeTypeOf(l)) },
   // An obligation defaulted or a term broken.
-  { pool: 'breached', warrant: (l) => /_default$|_default_detected$|_breached$|_unpaid$/.test(String(l.type || '')) },
+  { pool: 'breached', warrant: (l) => /_default$|_default_detected$|_breached$|_unpaid$/.test(edgeTypeOf(l)) },
   // The parent condition ceased to hold and the effect ended with it.
-  { pool: 'dissolved', warrant: (l) => /_dissolved$|_lapsed$|_resolved$/.test(String(l.type || '')) },
+  { pool: 'dissolved', warrant: (l) => /_dissolved$|_lapsed$|_resolved$/.test(edgeTypeOf(l)) },
   // The strict causal parent: a `causes[]` entry naming the prior, or a
   // `sourceEventId` pointing at the producing event. THE ONLY edge licensed to
   // render as causation without qualification.
@@ -183,9 +220,10 @@ const EDGE_WARRANTS = Object.freeze([
  * lines presuppose that the CHILD is the warranted thing, and so compose a false
  * claim when pointed at it.
  *
- * A type warrant is read off the PARENT's own `type`: `plant_exposed` says the
- * PARENT was the surfacing, `peace_refused` that the PARENT was the refusal,
- * `treaty_default_detected` that the PARENT was the breach. In `back` the
+ * A type warrant is read off the PARENT's own recorded edge type (`edgeTypeOf`):
+ * `plant_exposed` says the PARENT was the surfacing, `peace_refused` that the
+ * PARENT was the refusal, `treaty_default_detected` that the PARENT was the
+ * breach — the ledger's own words about that receipt. In `back` the
  * connective sits after the child and points at that parent, so every line is
  * true. In `fwd` it sits after the parent and points at the child, and the same
  * lines say "and what came out was the truth that <child>", "and the refusal

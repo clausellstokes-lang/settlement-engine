@@ -92,6 +92,33 @@ function provenanceOf(worldState) {
  */
 
 /**
+ * THE RECORDED EDGE TYPE of one receipt — its OWN structural type, read verbatim
+ * off the provenance ledger row keyed by its id (`{ parents, type, tick }`).
+ *
+ * WHY THIS IS A SEPARATE FIELD FROM `type` (chair ruling CR-HR-F4). A resolved
+ * hop's `type` is `dramaClass || kind` — the CHRONICLE's eight-class display
+ * taxonomy, computed by `dramaClassForNode` from `stressor.type` / `candidateType`
+ * / `ruleFamily`, which never reads the receipt's own `type` at all. So a
+ * `plant_exposed` outcome resolves as `'outcome'`, and every consumer reading a
+ * hop's `type` as an EDGE type was reading a display class instead. The Herald's
+ * type-warranted connective pools (exposed / refused / breached / dissolved) were
+ * therefore unreachable from the shipped walk: the vocabulary existed, the corpus
+ * shipped, and no live hop could ever license it.
+ *
+ * The ledger already holds the honest answer — `provenanceKernel.typeOf` records
+ * the outcome's `type ?? candidateType ?? impactKind` — so this is a DERIVED READ,
+ * never a new persisted shape and never a writer. A receipt with no ledger row of
+ * its own (a root cause, named only as its children's parent) has no recorded type
+ * and reads `null`, which is honest: the walk genuinely does not know.
+ * @param {{ type?: string }|undefined} ledgerEntry
+ * @returns {string|null}
+ */
+function recordedTypeOf(ledgerEntry) {
+  const t = ledgerEntry && typeof ledgerEntry.type === 'string' ? ledgerEntry.type.trim() : '';
+  return t || null;
+}
+
+/**
  * THE INTEGRITY ATOMS a receipt already carries — read, never derived. The
  * causality popup's manipulation disclosure classifies a link from these two
  * persisted fields plus the disinfo ledger; without them every link would fall
@@ -146,7 +173,10 @@ function buildReceiptIndex(worldState) {
  * @property {number} depth          1 = a direct parent of the root, 2 = its parent, …
  * @property {string} headline
  * @property {number|null} tick
- * @property {string} type
+ * @property {string} type          the CHRONICLE display class (`dramaClass || kind`)
+ * @property {string|null} recordedType  the receipt's OWN recorded edge/reason type
+ *   off its provenance-ledger row, or null when the ledger holds no row for it
+ *   (a root cause) or the hop is redacted. See `recordedTypeOf`.
  * @property {string[]} settlementIds
  * @property {string[]} lineageIds   the telling lineages the receipt carries (empty when redacted)
  * @property {number} accuracy01     the drift the record measured (1 when none)
@@ -170,7 +200,7 @@ function buildReceiptIndex(worldState) {
  * @param {Map<string, ResolvedReceipt>} index
  * @param {Record<string, { type?: string, tick?: number }>|undefined} ledger
  * @param {boolean} seesSecrets
- * @returns {ResolvedReceipt & { redacted: boolean }}
+ * @returns {ResolvedReceipt & { redacted: boolean, recordedType: string|null }}
  */
 function resolveReceipt(id, index, ledger, seesSecrets) {
   const found = index.get(id);
@@ -179,16 +209,20 @@ function resolveReceipt(id, index, ledger, seesSecrets) {
   if (covert && !seesSecrets) {
     // A covert hop's LINEAGE is content too: it names the telling a planter
     // seeded. Redaction strips it with the rest, so a non-DM viewer cannot infer
-    // a plant from a field the headline no longer carries.
-    return { headline: REDACTED_HOP, tick: found ? found.tick : (ledgerEntry?.tick ?? null), type: 'hidden', settlementIds: [], covert: true, lineageIds: [], accuracy01: 1, redacted: true };
+    // a plant from a field the headline no longer carries. The RECORDED TYPE goes
+    // with it for the same reason: `plant_exposed` names what the hidden receipt
+    // WAS, and a reader who can infer the kind of the thing has been told part of
+    // it. `type:'hidden'` is the whole answer a non-DM viewer gets.
+    return { headline: REDACTED_HOP, tick: found ? found.tick : (ledgerEntry?.tick ?? null), type: 'hidden', recordedType: null, settlementIds: [], covert: true, lineageIds: [], accuracy01: 1, redacted: true };
   }
-  if (found) return { ...found, redacted: false };
+  if (found) return { ...found, recordedType: recordedTypeOf(ledgerEntry), redacted: false };
   // A parent not in pulseHistory (e.g. a root sourceEventId): fall back to the
   // ledger's structural type — the honest UNRECEIPTED_HOP line, never invented prose.
   return {
     headline: UNRECEIPTED_HOP,
     tick: ledgerEntry && Number.isFinite(ledgerEntry.tick) ? Number(ledgerEntry.tick) : null,
     type: ledgerEntry?.type || 'event',
+    recordedType: recordedTypeOf(ledgerEntry),
     settlementIds: [],
     covert: false,
     lineageIds: [],
@@ -253,7 +287,7 @@ export function buildCauseWalk({ worldState, rootId, seesSecrets = false }) {
     nextParents.sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
     for (const pid of nextParents) {
       const r = resolveReceipt(pid, index, provenance, seesSecrets);
-      chain.push({ id: pid, depth, headline: r.headline, tick: r.tick, type: r.type, settlementIds: r.settlementIds, lineageIds: r.lineageIds, accuracy01: r.accuracy01, redacted: r.redacted });
+      chain.push({ id: pid, depth, headline: r.headline, tick: r.tick, type: r.type, recordedType: r.recordedType, settlementIds: r.settlementIds, lineageIds: r.lineageIds, accuracy01: r.accuracy01, redacted: r.redacted });
     }
     frontier = nextParents;
     depth += 1;
