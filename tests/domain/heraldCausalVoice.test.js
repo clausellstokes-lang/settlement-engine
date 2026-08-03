@@ -800,6 +800,32 @@ const voicedRootWorld = () => {
 
 const walkOf = (world, rootId = 'evt-root') => buildCauseWalk({ worldState: world, rootId, seesSecrets: true });
 
+/**
+ * THE FROZEN COPY (cycle-12 finding F3). The telling sweep below used to decide
+ * WHICH links to inspect with `PLACEHOLDER_CLAUSES.includes(link.clause)` — the
+ * recorded self-referential-pin shape. Under a vocabulary-drift mutant the list
+ * and the composer move together, so the sweep simply stops finding placeholder
+ * hops and greens on an empty selection: list == list, proving nothing.
+ *
+ * These three strings are written out BY HAND, on purpose, and are the only
+ * literal copy of the vocabulary in this file. They are compared to the live
+ * export in a pin of their own, so a drift is a LOUD failure naming the string
+ * that moved rather than a silent narrowing of what the sweep looks for. This is
+ * the one place a second copy is correct: a guard whose subject is the drift.
+ * @type {ReadonlyArray<string>}
+ */
+const FROZEN_PLACEHOLDER_CLAUSES = Object.freeze([
+  'an earlier cause',
+  'World pulse outcome',
+  'World pulse impact',
+]);
+
+/** Everything the sweeps look for: the union, so a SHRINKING vocabulary cannot
+ *  shrink the negative. */
+const SWEPT_PLACEHOLDERS = Object.freeze([
+  ...new Set([...PLACEHOLDER_CLAUSES, ...FROZEN_PLACEHOLDER_CLAUSES]),
+]);
+
 describe('THE CLAUSE FLOOR — a placeholder is TERMINAL, never an argument', () => {
   test('the SHIPPED PATH really produces each placeholder (without this the guards below are vacuous)', () => {
     const rootWalk = walkOf(rootSourceEventWorld());
@@ -853,15 +879,25 @@ describe('THE CLAUSE FLOOR — a placeholder is TERMINAL, never an argument', ()
         worldState: built, walk: walkOf(built), seed, seesSecrets: true, direction,
       });
       for (const link of out.links) {
-        if (PLACEHOLDER_CLAUSES.includes(link.clause)) {
+        // DE-SELF-REFERENCED (F3). The sweep no longer USES the vocabulary to pick
+        // which links to look at — it asserts the STRUCTURAL EQUIVALENCE on every
+        // link, so a drifted vocabulary reds here instead of quietly selecting
+        // nothing. `clauseless` is `!redacted && isPlaceholderClause(clause)`, and
+        // this fixture family carries no covert hop, which the line below pins so
+        // the two-term identity is the one-term identity here.
+        expect(link.redacted, `${direction} @ ${seed}: this fixture family carries no covert hop`).toBe(false);
+        expect(
+          link.clauseless,
+          `${direction} @ ${seed}: clauseless disagreed with the predicate for "${link.clause}"`,
+        ).toBe(isPlaceholderClause(link.clause));
+        if (link.clauseless) {
           clauselessSeen += 1;
-          expect(link.clauseless, `${link.clause} was not marked clauseless`).toBe(true);
           expect(link.connective).toBeNull();
           expect(link.argText).toBeNull();
           expect(link.pool).toBeNull();
         }
         if (link.argText) composedArguments += 1;
-        for (const placeholder of PLACEHOLDER_CLAUSES) {
+        for (const placeholder of SWEPT_PLACEHOLDERS) {
           // `composedArguments` and `clauselessSeen` are both asserted non-zero
           // below, so this sweep provably ran over live molded arguments AND over
           // live placeholder hops rather than over an empty link list.
@@ -895,6 +931,35 @@ describe('THE CLAUSE FLOOR — a placeholder is TERMINAL, never an argument', ()
     );
     expect(before.links[0].clauseless).toBe(false);
     expect(after.links[0].clauseless).toBe(true);
+  });
+
+  test('THE VOCABULARY HAS NOT DRIFTED from the frozen copy the sweeps also read (F3)', () => {
+    // The sweeps above no longer take the live list as gospel — they read the union
+    // of the live export and a hand-written copy, so a wording change cannot narrow
+    // what they look for. That only works while a drift is LOUD, which is this pin:
+    // it names the string that moved, in the direction it moved.
+    const live = [...PLACEHOLDER_CLAUSES];
+    const frozen = [...FROZEN_PLACEHOLDER_CLAUSES];
+    const added = live.filter((s) => !frozen.includes(s));
+    const removed = frozen.filter((s) => !live.includes(s));
+    expect(
+      { added, removed },
+      'THE PLACEHOLDER VOCABULARY MOVED. Every guard in this file that reads the live'
+      + ' export narrowed or widened with it, silently. Review the change, then update'
+      + ' FROZEN_PLACEHOLDER_CLAUSES in this file BY HAND so the next drift is loud too.'
+      + ` added: ${JSON.stringify(added)} · removed: ${JSON.stringify(removed)}`,
+    ).toEqual({ added: [], removed: [] });
+    // …and in the same ORDER, so a re-ordering that changes nothing semantically is
+    // still surfaced rather than absorbed.
+    expect(live).toEqual(frozen);
+    // The three named constants are pinned to their own frozen slots, so a rename
+    // that swapped two spellings between constants would red even though the SET
+    // is unchanged.
+    expect(UNRECEIPTED_HOP).toBe(FROZEN_PLACEHOLDER_CLAUSES[0]);
+    expect(PULSE_OUTCOME_FALLBACK).toBe(FROZEN_PLACEHOLDER_CLAUSES[1]);
+    expect(PULSE_IMPACT_FALLBACK).toBe(FROZEN_PLACEHOLDER_CLAUSES[2]);
+    // The union the sweeps read is therefore exactly the vocabulary, today.
+    expect(SWEPT_PLACEHOLDERS).toEqual(frozen);
   });
 
   test('the guard reads the EXPORTED vocabulary, and the vocabulary is the closed set', () => {
