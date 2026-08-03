@@ -64,6 +64,7 @@ import {
 } from './relationshipEvolution.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { treatyBlocksWar } from './treatyEnforcement.js';
+import { conquestMarchOrder } from './conquestDoctrineStage.js';
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -388,7 +389,25 @@ export function hostileTargetsOf(snapshot, fromId, tick = null) {
     else if (b === String(fromId) && snapshot?.byId?.has?.(a)) out.add(a);
   }
   const sorted = [...out].sort(codepoint);
-  return treatyEligibleWarTargets(snapshot?.worldState, fromId, sorted, tick);
+  const eligible = treatyEligibleWarTargets(snapshot?.worldState, fromId, sorted, tick);
+  // WR-8 (N2) — THE MOVEMENT CONSUMER OF THE FEASIBILITY BELIEF. This is the ONE
+  // chokepoint both war-opening consumers already pass through (the strategy
+  // chooser and the coalition decision), so wiring the conquest read here reaches
+  // both without touching either — which matters, since both of those files sit
+  // at their size ceiling.
+  //
+  // ORDERING, NEVER ADMISSION. The stage may only move a target forward; the set
+  // is what this function already decided it was. Every hard gate downstream
+  // still runs, `classifyFeasibility` included, so a hopeless war still does not
+  // open. Dark — and `conquestDoctrineEnabled` is dark by default and lights last
+  // in the whole WR chain — the stage returns THIS EXACT ARRAY REFERENCE, so the
+  // dormant path is byte-identical rather than merely equal.
+  return conquestMarchOrder({
+    worldState: snapshot?.worldState,
+    snapshot,
+    fromId,
+    targets: eligible,
+  });
 }
 
 export const WAR_INTENT_TUNING = Object.freeze({ WAR_INTENT_TTL_TICKS });

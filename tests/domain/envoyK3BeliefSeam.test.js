@@ -220,6 +220,16 @@ const NEGOTIATION_MODULES = Object.freeze({
     './foreignGuestHold.js',
     './ransomClaim.js',
   ],
+  // WR-8 (N2). The amendment's own list of paths that may never read true world
+  // state names FEASIBILITY explicitly, and the architecture volume names "WR-8's
+  // feasibility composite" as a member of this pin set module by module. It is
+  // pinned at the strongest available setting — ZERO IMPORTS — for the same
+  // reason `envoyTestimony` and `compromiseRound` are: a module that reaches
+  // nothing cannot reach truth, and the first import is a reviewed event rather
+  // than a refactor detail. Everything it eats is a closed banded word that some
+  // belief machinery already produced; assembling those words is
+  // `conquestDoctrineStage.js`'s job, and that stage is declared exempt below.
+  'src/domain/worldPulse/conquestFeasibility.js': [],
 });
 
 const TRUTH_READER = 'src/domain/worldPulse/warDeployment.js';
@@ -271,8 +281,14 @@ function discoverErrandFamily() {
  * So every `envoy*Stage.js` on disk must be either PINNED or EXPLICITLY EXEMPT.
  * The exemption is a declaration with a reason, not a silence: a new stage reds
  * here until someone decides which it is.
+ *
+ * WIDENED FOR WR-8 (lane W8-A): the pattern now covers `conquest*Stage.js` too.
+ * Scoping it to `envoy*` would have made the new conquest stage invisible here by
+ * the identical filename accident F7 was raised about — the discovery would have
+ * iterated straight past it and this file would have stayed green while saying
+ * nothing about it in either direction. A stage is a stage.
  */
-const STAGE_FAMILY_RE = /^envoy.*Stage\.js$/;
+const STAGE_FAMILY_RE = /^(?:envoy|conquest).*Stage\.js$/;
 
 /**
  * `envoyInterceptionStage.js` is the ORCHESTRATION stage and legitimately reads
@@ -284,6 +300,15 @@ const STAGE_FAMILY_RE = /^envoy.*Stage\.js$/;
  */
 const REVIEWED_STAGE_EXEMPTIONS = Object.freeze([
   'src/domain/worldPulse/envoyInterceptionStage.js',
+  // WR-8's stage, exempt for the identical reason and with the identical
+  // consequence. `conquestDoctrineStage.js` is the ASSEMBLY layer: it reads the
+  // court's belief map for everything about the rival and takes the §IV.4
+  // self-read carve-out for the court's own granary, which means it legitimately
+  // touches `economicState.foodSecurity` and would red the token scan forever.
+  // What keeps the seam real is that the module it feeds — `conquestFeasibility.js`,
+  // pinned above at ZERO imports — cannot reach any of it. The belief composite
+  // is closed; the stage that fills its plate is declared, not silent.
+  'src/domain/worldPulse/conquestDoctrineStage.js',
 ]);
 
 function discoverStageFamily() {
