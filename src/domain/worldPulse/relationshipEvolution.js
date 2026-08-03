@@ -371,21 +371,30 @@ export function mintMemoryWeaveIncident(worldState, { relationshipKey, incidentT
  * The relationship incident transports an already-validated WR-7b sheet; it
  * does not validate or invent one. Require the exact engine-only home marker,
  * pair, errand, and relationship address before copying the detached artifact.
- * @param {any} outcome
+ *
+ * The parameter is typed STRUCTURALLY rather than as `any`, deliberately. The
+ * domain any-cast ratchet (tests/lint/domainAnyCastBaseline.test.js) is
+ * shrink-only, and a fresh any-cast on a new function is precisely the silent
+ * regrowth it exists to catch. (Do not name that cast literally in this comment
+ * either — scripts/count-domain-any.mjs reads a JSDoc tag followed by a brace
+ * wherever it appears, prose included, and counts what it finds.) Every field
+ * read below therefore lands on
+ * `unknown` and is narrowed at its own use site through `recordOf`.
+ * @param {{ metadata?: unknown, proposalPayload?: unknown, relationshipKey?: unknown }} outcome
  * @returns {{ present:boolean, sheet:Record<string,unknown>|null }}
  */
 function carriedTermSheetForIncident(outcome) {
-  const metadata = outcome?.metadata && typeof outcome.metadata === 'object'
-    && !Array.isArray(outcome.metadata) ? outcome.metadata : {};
+  /** @param {unknown} value @returns {Record<string, unknown>} */
+  const recordOf = (value) => (value && typeof value === 'object' && !Array.isArray(value)
+    ? /** @type {Record<string, unknown>} */ (value)
+    : {});
+  const metadata = recordOf(outcome?.metadata);
   if (!Object.prototype.hasOwnProperty.call(metadata, 'carriedTermSheet')) {
     return { present: false, sheet: null };
   }
-  const marker = metadata.envoyTransportReturn && typeof metadata.envoyTransportReturn === 'object'
-    && !Array.isArray(metadata.envoyTransportReturn) ? metadata.envoyTransportReturn : {};
-  const sheet = metadata.carriedTermSheet && typeof metadata.carriedTermSheet === 'object'
-    && !Array.isArray(metadata.carriedTermSheet) ? metadata.carriedTermSheet : {};
-  const payload = outcome?.proposalPayload && typeof outcome.proposalPayload === 'object'
-    && !Array.isArray(outcome.proposalPayload) ? outcome.proposalPayload : {};
+  const marker = recordOf(metadata.envoyTransportReturn);
+  const sheet = recordOf(metadata.carriedTermSheet);
+  const payload = recordOf(outcome?.proposalPayload);
   const offererId = String(payload.offererId || '');
   const targetId = String(payload.targetId || '');
   const parties = [offererId, targetId].sort();
