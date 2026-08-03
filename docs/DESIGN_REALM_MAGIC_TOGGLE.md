@@ -469,7 +469,7 @@ pin reds).
 
 #### ✅ MG-4 BUILT AND LANDED 2026-08-03 — tests/lib/instantWorld/mundaneRealmAcceptance.test.js
 
-20 pins, seed `mg4-acceptance`, small/realistic_regional/highIsland, 5 members.
+21 pins, seed `mg4-acceptance`, small/realistic_regional/highIsland, 5 members.
 
 **MEASURED.** The mundane realm: every `world_law_magic` certification row green (5/5);
 zero arcane institutions, factions and services by the canonical MG-3h census; zero
@@ -479,9 +479,23 @@ every axis for every member. The same-seed MAGICAL twin carries 4 arcane institu
 1 arcane faction, 8 arcane services and 2 magical history events — so every absence above
 is a measurement of the world and not of an empty generator.
 
-**THE TWIN-WORLD ENVELOPE (MG-LAW-3) HOLDS, AND HOLDS WELL.** members 5 vs 5 (1.000),
-institutions 156 vs 158 (0.987), factions 23 vs 23 (1.000). A mundane realm is not a
-thinner realm — suppression rides the substitution arms exactly as the law requires.
+**THE TWIN-WORLD ENVELOPE (MG-LAW-3) HOLDS, AND HOLDS WELL.** All five compared axes,
+mundane vs magical: members 5 vs 5 (1.000), institutions 134 vs 133 (1.008), factions
+22 vs 24 (0.917), services 193 vs 189 (1.021), history events 24 vs 25 (0.960). A mundane
+realm is not a thinner realm — it is at or above parity on three of the five axes, and
+suppression rides the substitution arms exactly as the law requires.
+
+⚠️ **THESE FIGURES WERE CORRECTED 2026-08-03, AND THE RECORD IS NOW MACHINE-CHECKED.**
+This block, and the test file's own header, previously recorded `institutions 156 vs 158,
+factions 23 vs 23` and omitted services and history events altogether. The harness produces
+neither institution count, and it has always measured five axes rather than three: the
+record was hand-carried and had drifted from the thing it described. A quoted number that
+nobody re-derives is a number that quietly stops being true, so MG-4.2 now carries a pin —
+*the recorded census figures are the ones the harness actually produces* — that parses the
+`RECORDED-CENSUS:` line out of the test file's header and asserts it equals the live
+five-axis census. It reds on any drift and names both places to update. That pin was
+written against the OLD figures first and observed to red, so its catching power is
+measured rather than assumed.
 ⚠️ **THE BANDS IN THE FILE ARE PENDING, NOT OWNER-SIGNED** (§6 puts them on the soak).
 They are deliberately generous collapse-catchers so the harness stands and measures before
 the soak runs; one seed cannot answer a seed-FAMILY question. Replace `PENDING_BANDS` and

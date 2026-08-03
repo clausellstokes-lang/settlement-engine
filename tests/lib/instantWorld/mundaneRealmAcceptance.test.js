@@ -50,6 +50,8 @@
  */
 
 import { describe, test, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 import { composeInstantWorld } from '../../../src/lib/instantWorld/composeInstantWorld.js';
 import { buildGenerationCoherenceReceipt } from '../../../src/generators/generationCoherence.js';
@@ -269,8 +271,17 @@ describe('MG-4.1 — the mundane realm, measured across every member', () => {
  * so the harness is standing and measuring before the soak runs, and so that a change that
  * genuinely thins a mundane realm cannot land unnoticed in the meantime.
  *
- * MEASURED AT AUTHORING (seed 'mg4-acceptance', small/realistic_regional/highIsland):
- *   members 5 vs 5 (1.000) · institutions 156 vs 158 (0.987) · factions 23 vs 23 (1.000)
+ * MEASURED (seed 'mg4-acceptance', small/realistic_regional/highIsland). ALL FIVE AXES the
+ * envelope compares, mundane vs magical, machine-checked by the last pin in MG-4.2 against
+ * this very line — see THE RECORD IS CHECKED below:
+ *   RECORDED-CENSUS: members 5 vs 5 · institutions 134 vs 133 · factions 22 vs 24 · services 193 vs 189 · historyEvents 24 vs 25
+ * Ratios: members 1.000 · institutions 1.008 · factions 0.917 · services 1.021 ·
+ * historyEvents 0.960 — the mundane realm is at or above parity on three of five axes.
+ * ⚠️ CORRECTED 2026-08-03: this block previously recorded `institutions 156 vs 158 ·
+ * factions 23 vs 23` and omitted services and historyEvents entirely. No harness run
+ * reproduces those institution counts; they were a hand-carried record that had drifted
+ * from what the file measures. That is why the pin below now re-derives this line rather
+ * than trusting it.
  * The real distribution is a seed-FAMILY question, and one seed cannot answer it — which
  * is exactly why the bands are owner-signed at the soak and not frozen here. When they are
  * signed, replace PENDING_BANDS and delete this note.
@@ -313,6 +324,50 @@ describe('MG-4.2 — the twin-world envelope: a mundane realm is not a thinner r
       expect(pair.magical, `${axis} must be produced by the magical twin at all`).toBeGreaterThan(0);
     }
     expect(Object.keys(measured)).toEqual(Object.keys(PENDING_BANDS));
+  });
+
+  /**
+   * THE RECORD IS CHECKED. The header's MEASURED block and DESIGN_REALM_MAGIC_TOGGLE.md's
+   * MG-4 block quote these figures to the soak and to the owner-signing step; a quoted
+   * number nobody re-derives is a number that quietly stops being true. This one had:
+   * the authored record said institutions 156 vs 158 and omitted services and history
+   * events entirely, while the harness has always produced a five-axis census. So the
+   * record now READS ITSELF — every axis, both twins, parsed out of the header line.
+   *
+   * WHEN THIS REDS, IT IS NOT ASKING FOR A BAND CHANGE. It is asking you to (1) confirm
+   * the generation shift was intended, and (2) carry the new figures into BOTH places:
+   * the RECORDED-CENSUS line above and DESIGN_REALM_MAGIC_TOGGLE.md's MG-4 landed block.
+   * The tolerance question stays with PENDING_BANDS, which is the owner's to sign.
+   */
+  test('the recorded census figures are the ones the harness actually produces', () => {
+    const header = readFileSync(fileURLToPath(import.meta.url), 'utf8');
+    const line = header.match(/RECORDED-CENSUS:(.+)/)?.[1];
+    expect(line, 'the header must carry a RECORDED-CENSUS line for the record to be checkable')
+      .toBeTruthy();
+
+    /** @type {Record<string, { mundane: number, magical: number }>} */
+    const recorded = {};
+    for (const clause of line.split('·')) {
+      const m = clause.trim().match(/^(\w+)\s+(\d+)\s+vs\s+(\d+)$/);
+      if (m) recorded[m[1]] = { mundane: Number(m[2]), magical: Number(m[3]) };
+    }
+
+    const live = Object.fromEntries(Object.keys(PENDING_BANDS).map((axis) => [
+      axis,
+      { mundane: mundane[axis], magical: magical[axis] },
+    ]));
+    const render = (/** @type {any} */ t) => Object.entries(t)
+      .map(([axis, p]) => `${axis} ${p.mundane} vs ${p.magical}`).join(' · ');
+
+    expect(
+      recorded,
+      'THE RECORDED TWIN-CENSUS HAS DRIFTED FROM THE HARNESS.\n'
+      + `  recorded: ${render(recorded)}\n`
+      + `  measured: ${render(live)}\n`
+      + 'Every axis the envelope compares must be recorded, mundane first. Update the\n'
+      + 'RECORDED-CENSUS line in this file\'s header AND the MG-4 landed block in\n'
+      + 'docs/DESIGN_REALM_MAGIC_TOGGLE.md — the soak reads the second one.\n',
+    ).toEqual(live);
   });
 });
 
