@@ -43,7 +43,7 @@
  * @enforced-by tests/lib/worldExport.test.js
  */
 
-import { toPublicSafe } from '../domain/display/publicSafe.js';
+import { toPublicSafe, veilPublicPayload } from '../domain/display/publicSafe.js';
 import { serializeWorldSnapshotPublic } from '../domain/display/worldSnapshotPublic.js';
 import { slugify } from '../kernel/slugify.js';
 
@@ -149,14 +149,24 @@ export function buildWorldExport(world, options = {}) {
   // player export never carries it (mirrors the gallery seed-posture strip).
   if (full && w.seed != null && String(w.seed)) realm.seed = String(w.seed);
 
-  return {
+  // THE PUBLIC-PAYLOAD VEIL SEAM (§9, VH-1). The per-settlement dossier is already
+  // veiled inside toPublicSafe, but this function HOISTS two strings that never
+  // touched that projection — `settlements[].name` (built from the raw member/dossier
+  // above) and `realm.name` (raw `w.name`) — so an export carried the same term
+  // veiled in one field and plain in its sibling. The cure is the payload BOUNDARY,
+  // not the two fields: everything this exporter assembles leaves through one call,
+  // so a future hoisted field is covered without anyone remembering to cover it.
+  // Applying it to the WHOLE payload also keeps the export's joins intact — the
+  // settlement keys and the snapshot's affectedSettlementIds are masked by the same
+  // deterministic transform, so both sides of a join still match.
+  return veilPublicPayload({
     format: WORLD_EXPORT_FORMAT,
     formatVersion: WORLD_EXPORT_FORMAT_VERSION,
     variant,
     generatedAt,
     realm,
     settlements,
-  };
+  });
 }
 
 export default buildWorldExport;

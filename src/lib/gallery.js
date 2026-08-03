@@ -14,7 +14,7 @@
  */
 
 import { supabase, isConfigured } from './supabase.js';
-import { toPublicSafe } from '../domain/display/publicSafe.js';
+import { toPublicSafe, veilPublicPayload } from '../domain/display/publicSafe.js';
 import { sanitizeGalleryHtml } from './sanitizeGalleryHtml.js';
 import { getDeviceToken } from './deviceToken.js';
 import { track, EVENTS } from './analytics.js';
@@ -96,7 +96,12 @@ export async function fetchDossierForImport(slug) {
   if (error) throw new Error(error.message || 'Import fetch failed');
   const row = Array.isArray(data) ? data[0] : data;
   if (!row) return null;
-  return { id: row.id, name: row.name, tier: row.tier, settlement: stripImportConfidential(row.data) };
+  // §9 names the IMPORT PAYLOAD explicitly — the mask applies "in the public VIEW and
+  // in the SHARED/IMPORT PAYLOAD identically" — and this builder hoists `row.name`
+  // exactly as the dossier read did, so it leaves through the same seam. The storage
+  // law is not violated: the AUTHOR's stored text is untouched; what the importer
+  // saves is the projection, which is what left privacy.
+  return veilPublicPayload({ id: row.id, name: row.name, tier: row.tier, settlement: stripImportConfidential(row.data) });
 }
 
 /**
@@ -673,9 +678,16 @@ function readGovernmentType(data) {
     || '';
 }
 
+// THE PUBLIC-PAYLOAD VEIL SEAM (§9, VH-1) — see publicSafe.js `veilPublicPayload`.
+// Every builder below RETURNS through it. `row.name` is the raw DB display name and
+// the one the gallery page actually renders (GalleryDetail's
+// `{dossier.name || dossier.settlement?.name}` — the toPublicSafe-veiled copy is only
+// the FALLBACK), so before this seam the veil was outrun by the field beside it.
+// Veiling at the boundary rather than per-field means a new hoisted column is covered
+// on arrival. Cheap: veilDeep returns the SAME references when nothing is flagged.
 function sanitizeTile(row) {
   const data = row.data || {};
-  return {
+  return veilPublicPayload({
     id:           row.id,
     slug:         row.public_slug,
     name:         row.name,
@@ -723,7 +735,7 @@ function sanitizeTile(row) {
     // aliveness: the publish-time snapshot (0–100 int; null = shared before the
     // score existed — the owner re-shares to stamp it).
     aliveness:    sanitizeAliveness(row.aliveness),
-  };
+  });
 }
 
 // Read-path aliveness clamp = THE shared null-safe clamp (galleryAliveness.js;
@@ -778,7 +790,7 @@ function sanitizeChronicle(entries) {
 }
 
 function sanitizeDossier(row) {
-  return {
+  return veilPublicPayload({
     id:           row.id,
     slug:         row.public_slug,
     name:         row.name,
@@ -821,9 +833,14 @@ function sanitizeDossier(row) {
     // null for rows shared before the score existed).
     aliveness:    sanitizeAliveness(row.aliveness),
     moreByCreator: Array.isArray(row.moreByCreator) ? row.moreByCreator.map(sanitizeTile) : [],
-  };
+  });
 }
 
+// NOT veiled, deliberately: the ADMIN report queue. A moderator reviewing a report
+// must read the reported name and body VERBATIM — masking them would blind the very
+// backstop lane the civility guard's own header names as its second layer. This
+// projection is admin-gated (fetchGalleryReports → an admin-only RPC) and never
+// reaches a public surface. Exemption, recorded, not an oversight.
 function sanitizeReport(row) {
   return {
     id: row.report_id,

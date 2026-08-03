@@ -379,11 +379,16 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
   //      wrote FOR the public (a display name, a comment, a gallery description)
   //      is a different mode entirely and is gated at ITS entry, not here.
   //
-  //   2. ONE TRANSFORM, BOTH FORMS. §9 requires the mask to apply "in the public
-  //      VIEW and in the SHARED/IMPORT PAYLOAD identically". Both already flow
-  //      through this one function — the gallery dossier read (lib/gallery.js)
-  //      and the world export payload (lib/worldExport.js) — so veiling here
-  //      covers both by construction instead of by remembering to.
+  //   2. ONE TRANSFORM, EVERY FORM. §9 requires the mask to apply "in the public
+  //      VIEW and in the SHARED/IMPORT PAYLOAD identically". ⚠️ CORRECTED (VH-1):
+  //      this comment used to claim the gallery dossier read and the world export
+  //      "both already flow through this one function", and that was WRONG — only
+  //      the settlement SUB-OBJECT flows through here. Each of those payloads
+  //      HOISTS a raw display name beside the projection (gallery.js's `row.name`,
+  //      worldExport's member name and realm name), and those hoists rode out
+  //      unveiled, so the veiled copy was only ever a fallback. The seam is
+  //      therefore not "inside toPublicSafe" but "the boundary of every public
+  //      payload builder", and it is spelled ONCE as `veilPublicPayload` below.
   //
   //   3. THE STORAGE LAW. This is a projection that never writes. The author's
   //      stored note is untouched and survives every share, unshare and reimport
@@ -400,5 +405,56 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
   // mirror; masking inside JSON prose in SQL is recorded as deferred). Until then
   // the veil is defense-in-depth on every path that renders through this module,
   // which is every path this client serves.
-  return veilDeep(result);
+  return veilPublicPayload(result);
+}
+
+/**
+ * THE PUBLIC-PAYLOAD VEIL SEAM — the ONE call every public payload ends in
+ * (DESIGN_PROFILE_IMAGE.md §9, VEIL mode; the one-resolver law).
+ *
+ * WHY THIS EXISTS AS A NAMED EXPORT rather than a bare `veilDeep` at four call
+ * sites. The veil hole this closes was not a missing transform — `veilDeep` was
+ * already applied inside `toPublicSafe`. It was a MISPLACED SEAM: the veil sat
+ * inside one sub-object while each payload builder hoisted a raw display name
+ * beside it, and the raw sibling is the one the page actually rendered
+ * (`{dossier.name || dossier.settlement?.name}` — the veiled copy was the
+ * FALLBACK). A per-field cure would have to be remembered again by the next
+ * field; moving the seam to the payload BOUNDARY cures the class, because a
+ * payload cannot be assembled without passing its own boundary.
+ *
+ * THE LAW, in one line: a value that leaves privacy leaves through this call.
+ * Every builder of a public/anonymous/shared/exported payload — `toPublicSafe`
+ * itself, gallery.js's tile / dossier / import projections, and worldExport's
+ * realm payload — RETURNS the result of this function. The invariant is pinned
+ * by tests/security/publicPayloadVeilTotality.test.js, which stamps a vector
+ * term into every input field of every builder and asserts the serialized
+ * payload carries ZERO plain occurrences — so a NEW hoisted raw field reds the
+ * pin instead of shipping.
+ *
+ * IDENTIFIERS ARE NOT EXEMPT, and that is deliberate rather than an oversight.
+ * Masking is applied to ids and keys too, so a join between two veiled sides
+ * still matches: `veilText` is deterministic, so the same raw id veils to the
+ * same string wherever it appears in the payload. This is only safe because the
+ * two identifiers that must round-trip to the SERVER verbatim cannot carry a
+ * flaggable token by construction — `public_slug` is 12 hex characters from
+ * `_make_public_slug()` (migration 008) and the row `id` is a uuid, neither of
+ * which contains a word. Should a NAME-DERIVED slug ever become a server-facing
+ * identifier, this rule needs an explicit round-trip exemption; recorded here so
+ * the next reader does not have to rediscover why it is currently unnecessary.
+ *
+ * NOT APPLIED to the admin report projection (gallery.js `sanitizeReport`): a
+ * moderator reviewing a report must see the reported text VERBATIM, and masking
+ * it would defeat the backstop lane the guard's own header names as layer two.
+ * That surface is admin-gated, never public. Deliberate exemption, not a gap.
+ *
+ * Delegates to the one validator (lib/civility.js `veilDeep`) — no masking logic
+ * is invented here, and the structural-sharing property means a clean payload
+ * comes back by identity, so this costs no allocation on the common path.
+ *
+ * @template T
+ * @param {T} payload
+ * @returns {T}
+ */
+export function veilPublicPayload(payload) {
+  return veilDeep(payload);
 }

@@ -25,11 +25,13 @@
  * anywhere near a write path — the author's private text is never modified,
  * because their world is theirs, including its language. `veilDeep` builds a new
  * value and returns it; the original survives every share, unshare and reimport
- * byte-intact. The pins assert both halves (tests/lib/civility.veil.test.js).
+ * byte-intact. The pins assert both halves (tests/domain/display/publicSafeVeil.test.js
+ * for the projection + storage law, tests/lib/civility.test.js for this validator, and
+ * tests/security/publicPayloadVeilTotality.test.js for the payload-boundary seam).
  *
  * ── ONE VALIDATOR, TWO MIRRORS
  * This module is the CLIENT mirror. The SERVER mirror (supabase/migrations/
- * 195_civility_guard.sql: `public.civility_blocked(text)`) re-validates every
+ * 195_civility_guard_and_public_identity.sql: `public.civility_blocked(text)`) re-validates every
  * save/post, because client checks are courtesy and server checks are law. The
  * two mirrors share ONE test-vector file — tests/fixtures/civilityVectors.js —
  * so they cannot drift (the writer/reader-drift hazard applied to validation).
