@@ -282,3 +282,46 @@ you best judgment fable" — each vetoable):
   and its AI surface as TYPED PROPOSAL driving the same verb (the AI is a
   bucketing clerk, never a writer); verb-less state is a recorded engine-only
   decision. Same scope ruling: the law now, per-wave rows at build.
+
+## THE LEGACY RETROFIT — WIRING SLICE 1 (Fable chair, 2026-08-03; vetoable)
+
+The first slice of `RECEIPT_POOLS_LEGACY.md` reaches live code: the
+**population/demographics desk** (§3c `flow_migration`, `migration_flight`,
+`migration_pressure`, `population_emigration`), wired into `whatPhrase`'s subject
+phrase with seeded per-telling selection. Four rulings and one finding.
+
+- **J-LEG-WIRE-1 — THE CANONICAL IS NOT COPIED INTO THE POOL, IT IS PREPENDED.**
+  The annex's rule 2 says variant 1 must byte-equal the live string. Rather than
+  copy that string into the pool leaf and check the copy, the leaf holds ONLY
+  variants 2..N and the selector prepends the live `WHAT_PHRASES` row. Index 0 is
+  therefore the live row *by construction* — it cannot drift from what it anchors,
+  because it is the same string. The doc-to-code join is pinned anyway, parsing the
+  corpus at test time, so a hand-edit on either side reds.
+- **J-LEG-WIRE-2 — THE CORPUS LIVES IN ITS OWN DATA LEAF.** New file
+  `src/domain/display/rumorPhrasePools.js`, following R-BLD-4 and the exact
+  precedent `warReceiptPools.js` sets for `eventProse.js`: the mechanism file stays
+  reviewable while the corpus grows on its own budget. §3 alone carries 63 kinds at
+  eight variants each; inlining this slice would have to be undone at the second desk.
+- **J-LEG-WIRE-3 — `WHAT_PHRASES` KEEPS ITS STRING SHAPE.** Six walkers across three
+  concurrent lanes assert `WHAT_PHRASES[kind]` is a truthy string that does not match
+  `/_/`. Widening the map's values to arrays would have broken all six for no gain;
+  the sibling-map design leaves every existing consumer contract untouched.
+- **J-LEG-WIRE-4 — THE SEEDLESS PATH IS THE DARK PATH, AND IT IS PROVEN.**
+  `whatPhrase(kind)` with no seed returns the canonical row for EVERY registered
+  kind, pinned over the whole map — so walkers, the glossary check and the impactKind
+  census read exactly what they read before. Only the live read-model passes a seed.
+
+- **⚠️ FINDING LEG-F1 — FNV-1a's LOW BIT IS A PARITY, AND THE FRAME POOLS ARE
+  EXPOSED (CONFIRMED; cured for the phrase fold, RECORDED for the frames).**
+  `fnv1a32` bit 0 is the XOR of bit 0 of every input character, so a seed family
+  whose varying token appears an even number of times holds it constant — and
+  `% poolLength` on a power-of-two pool reads exactly those bits. Measured over
+  `wizard_news.${i}.applied.evt${i}`: a `% 8` selection reached residues {1,3,5,7}
+  ONLY, four of eight variants dead. The phrase fold now runs murmur3's `fmix32`
+  finalizer and reaches all eight at shares 0.105-0.142.
+  **`frameHeadline` carries the identical exposure and was deliberately NOT changed**
+  (the same family reaches 2 of its 4 frames). Curing it moves the headline FRAMES on
+  every existing seed — a second disclosed prose shift on a surface this slice was
+  not asked to touch. Real event refs use their varying token once and are not
+  currently degenerate, so this is latent, not live. CHAIR TO SCHEDULE as its own
+  disclosed wave; do not let it ride inside a content slice.

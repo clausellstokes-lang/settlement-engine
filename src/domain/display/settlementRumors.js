@@ -40,6 +40,7 @@ import { compareCodepoint } from '../deterministicSort.js';
 import { getSpatialLedger, activeSpatialDigest } from '../spatial/distanceRead.js';
 import { routeAwareHopDelayTicks } from '../worldPulse/distancePricedNews.js';
 import { embattlementLevel } from '../spatial/embattlement.js';
+import { WHAT_PHRASE_POOLS } from './rumorPhrasePools.js';
 
 /** @typedef {import('../spatial/rumorNetwork.js').RumorArrivalRecord} RumorArrivalRecord */
 
@@ -64,6 +65,38 @@ function fnv1a32(str) {
     h = Math.imul(h, 0x01000193) >>> 0;
   }
   return h >>> 0;
+}
+
+/**
+ * THE AVALANCHE FINALIZER (murmur3's fmix32) — and why the phrase fold has one.
+ *
+ * FNV-1a's LOW BIT is not a hash, it is a parity: bit 0 of the digest is the XOR of bit 0
+ * of every input character (the prime is odd, so the multiply cannot carry into it). Any
+ * seed family whose VARYING token appears an even number of times therefore holds bit 0
+ * CONSTANT — and `% poolLength` on a power-of-two pool reads exactly those low bits, so
+ * half the pool becomes unreachable. Measured, not theorised: over the family
+ * `wizard_news.${i}.applied.evt${i}` (the index twice, so its parity cancels), a
+ * `% 8` selection reached residues {1,3,5,7} ONLY — four of eight variants dead. The
+ * same family reached all eight with this finalizer applied, at shares 0.105-0.142.
+ *
+ * This is the stride-aliasing class the FP work already knows: a selector that looks
+ * uniform on the seeds you happened to try, and is half-dead on the ones you did not.
+ *
+ * ⚠️ DELIBERATELY NOT APPLIED TO `frameHeadline`. Its fold is the same shape and carries
+ * the same exposure (measured: the degenerate family reaches only 2 of its 4 frames), but
+ * changing it moves the headline FRAMES on every existing seed — a second disclosed prose
+ * shift, on a surface this slice was not asked to touch. Recorded for the chair rather
+ * than ridden in silently.
+ * @param {number} h
+ */
+function avalanche32(h) {
+  let x = h >>> 0;
+  x ^= x >>> 16;
+  x = Math.imul(x, 0x85ebca6b);
+  x ^= x >>> 13;
+  x = Math.imul(x, 0xc2b2ae35);
+  x ^= x >>> 16;
+  return x >>> 0;
 }
 
 // ── The what-token → in-world PHRASE vocabulary (content-immersion-1) ─────────
@@ -320,13 +353,30 @@ const WHAT_STRIP_PREFIX = /^(npc_|stressor_birth_|stressor_|party_|flow_|faction
  * subject. Known tokens map explicitly; bare lifecycle kinds neutralize to
  * 'unrest'; any other unknown token strips its engine prefix and de-underscores
  * (readable, never a raw slug), falling to 'unrest' if nothing usable remains.
+ *
+ * THE WIDENED POOLS (SP-6's legacy clause, RECEIPT_POOLS_LEGACY.md §3). A kind
+ * registered in WHAT_PHRASE_POOLS draws from `[its WHAT_PHRASES row, ...variants]`
+ * by the same FNV-1a fold the headline frames use. Two properties hold by
+ * construction rather than by inspection:
+ *   • CANONICAL AT ZERO — index 0 IS the live WHAT_PHRASES row, not a copy of it,
+ *     so the byte-identity anchor cannot drift from the string it anchors.
+ *   • SEEDLESS IS BYTE-IDENTICAL — no seed means index 0, so every caller that
+ *     asks for a phrase without a telling to key on (walkers, glossary checks,
+ *     the impactKind census) reads exactly what it read before this wiring.
  * @param {unknown} value
+ * @param {string} [seed] the telling's stable ref; absent ⇒ the canonical row
  * @returns {string}
  */
-export function whatPhrase(value) {
+export function whatPhrase(value, seed = '') {
   const key = String(value || '').trim().toLowerCase();
   if (!key) return 'unrest';
-  if (WHAT_PHRASES[key]) return WHAT_PHRASES[key];
+  const canonical = WHAT_PHRASES[key];
+  if (canonical) {
+    const widened = WHAT_PHRASE_POOLS[key];
+    if (!seed || !widened || widened.length === 0) return canonical;
+    const pool = [canonical, ...widened];
+    return pool[avalanche32(fnv1a32(`${seed}::what::${key}`)) % pool.length];
+  }
   if (TRANSITION_KINDS.has(key)) return 'unrest';
   const stripped = key.replace(WHAT_STRIP_PREFIX, '').replace(/_/g, ' ').trim();
   return stripped || 'unrest';
@@ -460,7 +510,11 @@ function frameHeadline(band, seed, { what, where }) {
  */
 function renderFiction(record, { nameFor, deityName, seed = '' }) {
   const completeness = clamp01(record.completeness01);
-  const what = whatPhrase(record.content?.what);
+  // The SAME stable seed the headline frame rides. One telling therefore draws one
+  // subject phrase at every settlement that hears it, and two different tellings of
+  // the same kind in one tab generally read differently — which is the whole point of
+  // the widened pools. Seedless callers keep the canonical row (see whatPhrase).
+  const what = whatPhrase(record.content?.what, seed);
   const where = nameOf(record.content?.whereId, nameFor);
   const firsthand = finiteNumber(record.hopCount, 0) === 0;
   const band = firsthand ? 'firsthand'
