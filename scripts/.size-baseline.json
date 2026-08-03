@@ -5,7 +5,6 @@
   "src/App.jsx": 659,
   "src/domain/explanation.js": 827,
   "src/domain/worldPulse/applyWorldPulse.js": 1395,
-  "src/domain/worldPulse/envoyErrand.js": 2638,
   "src/domain/worldPulse/npcAgency.js": 833,
   "src/domain/worldPulse/peaceTerms.js": 1680,
   "src/domain/worldPulse/pulseKernel.js": 1580,

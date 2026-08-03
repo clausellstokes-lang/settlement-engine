@@ -41,7 +41,16 @@ const code = (rel) => readFileSync(join(ROOT, rel), 'utf8')
   .replace(/\/\*[\s\S]*?\*\//g, '')
   .replace(/^\s*\/\/.*$/gm, '');
 
-const importsOf = (source) => [...source.matchAll(/from '([^']+)'/g)].map((m) => m[1]).sort();
+/**
+ * The module's REACHABLE SET, deduplicated. A family head both imports a leaf's values
+ * and re-exports its public names, so the same specifier legitimately appears twice in
+ * one file. What this pin claims — and what §1b requires — is that the set of modules a
+ * negotiation can REACH is closed and reviewed; a specifier's multiplicity is a spelling
+ * detail that cannot widen that reach. Deduping states the claim the docstring makes.
+ */
+const importsOf = (source) => [
+  ...new Set([...source.matchAll(/from '([^']+)'/g)].map((m) => m[1])),
+].sort();
 
 /**
  * The spellings by which real settlement state enters a scorer in this engine.
@@ -82,8 +91,77 @@ const TRUE_STATE_TOKENS = Object.freeze([
  * empty-list pin is therefore now load-bearing for two modules, not one.
  */
 const NEGOTIATION_MODULES = Object.freeze({
+  // THE DECOMPOSITION WAVE (war tranche, ruling R-BLD-4). `envoyErrand.js` became a WRITER
+  // FAMILY: a head plus nine leaves. That is a reviewed event for this pin precisely
+  // because a family could smuggle truth in through a leaf the head never names — so
+  // EVERY member is pinned here, not just the head, and the reach is closed TRANSITIVELY.
+  // Read the rows below as a DAG that bottoms out at the vocabulary's empty list: the only
+  // non-family specifiers any member may name are `negotiationPictures.js` (the picture
+  // machinery this seam is built on) and `namedPersonTransit.js` (leg physics, reachable
+  // from exactly ONE leaf). Neither can return a settlement's strength, stock or pressure,
+  // which the token scan below proves for every row independently.
   'src/domain/worldPulse/envoyErrand.js': [
+    './envoyErrandEncounterWriter.js',
+    './envoyErrandEvidence.js',
+    './envoyErrandLedger.js',
+    './envoyErrandOffer.js',
+    './envoyErrandParlay.js',
+    './envoyErrandProjection.js',
+    './envoyErrandRecords.js',
+    './envoyErrandTransit.js',
+    './envoyErrandVocabulary.js',
+    './negotiationPictures.js',
+  ],
+  // The family floor: zero imports. A module that reaches nothing cannot pass truth along,
+  // and every other member sits above this one, so the whole family inherits the guard.
+  'src/domain/worldPulse/envoyErrandVocabulary.js': [],
+  // The ONE leaf that may reach leg physics (WR-7a law M). Isolating it here is what lets
+  // the head be a declared INJECTED-PLAN validator in the movement-site manifest.
+  'src/domain/worldPulse/envoyErrandTransit.js': [
+    './envoyErrandVocabulary.js',
     './namedPersonTransit.js',
+  ],
+  'src/domain/worldPulse/envoyErrandOffer.js': [
+    './envoyErrandVocabulary.js',
+  ],
+  'src/domain/worldPulse/envoyErrandRecords.js': [
+    './envoyErrandOffer.js',
+    './envoyErrandTransit.js',
+    './envoyErrandVocabulary.js',
+    './negotiationPictures.js',
+  ],
+  'src/domain/worldPulse/envoyErrandLedger.js': [
+    './envoyErrandOffer.js',
+    './envoyErrandRecords.js',
+    './envoyErrandVocabulary.js',
+  ],
+  'src/domain/worldPulse/envoyErrandEvidence.js': [
+    './envoyErrandRecords.js',
+    './envoyErrandTransit.js',
+    './envoyErrandVocabulary.js',
+  ],
+  'src/domain/worldPulse/envoyErrandProjection.js': [
+    './envoyErrandLedger.js',
+    './envoyErrandOffer.js',
+    './envoyErrandRecords.js',
+    './envoyErrandTransit.js',
+    './envoyErrandVocabulary.js',
+  ],
+  'src/domain/worldPulse/envoyErrandParlay.js': [
+    './envoyErrandOffer.js',
+    './envoyErrandRecords.js',
+    './envoyErrandTransit.js',
+    './envoyErrandVocabulary.js',
+    './negotiationPictures.js',
+  ],
+  'src/domain/worldPulse/envoyErrandEncounterWriter.js': [
+    './envoyErrandEvidence.js',
+    './envoyErrandLedger.js',
+    './envoyErrandOffer.js',
+    './envoyErrandParlay.js',
+    './envoyErrandProjection.js',
+    './envoyErrandRecords.js',
+    './envoyErrandVocabulary.js',
     './negotiationPictures.js',
   ],
   'src/domain/worldPulse/negotiationPictures.js': [

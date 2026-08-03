@@ -31,11 +31,23 @@ const SHARED_IMPORT_RE = /from\s+['"][^'"]*namedPersonTransit\.js['"]/;
 const MOVEMENT_SITES = Object.freeze({
   'src/domain/roads/seaRoads.js': { route: 'direct', token: 'namedPersonPathPosition' },
   'src/domain/roads/state.js': { route: 'direct', token: 'namedPersonArrivalTick' },
-  'src/domain/worldPulse/envoyErrand.js': { route: 'direct', token: 'namedPersonLegPosition' },
+  // THE DECOMPOSITION WAVE (war tranche, ruling R-BLD-4). The errand module became a
+  // writer FAMILY, and the split moved leg physics to one leaf on purpose: the head and
+  // the parlay leaf now VALIDATE an injected plan without being able to reach the kernel
+  // that would make a local speed floor look legitimate, while `envoyErrandTransit.js` is
+  // the family's single direct physics owner. That is a strictly stronger arrangement than
+  // the one file it replaced, and these three rows are what hold it in place.
+  'src/domain/worldPulse/envoyErrand.js': { route: 'injected', token: 'normalizeRoutePlan' },
+  'src/domain/worldPulse/envoyErrandParlay.js': { route: 'injected', token: 'normalizeRoutePlan' },
+  'src/domain/worldPulse/envoyErrandTransit.js': { route: 'direct', token: 'namedPersonLegPosition' },
   'src/domain/worldPulse/npcCirculationTransit.js': { route: 'direct', token: 'openNamedPersonLeg' },
   'src/domain/worldPulse/npcDmVerbs.js': { route: 'delegate', token: 'advanceLivedTraveller' },
   'src/domain/worldPulse/npcResidency.js': { route: 'delegate', token: 'advanceWanderer' },
   'src/domain/worldPulse/pulseKernel.js': { route: 'delegate', token: 'advanceAssignedNpcTransits' },
+  // WR-7d's ransom leaf priced a demand's road with the shared kernel but was never added
+  // here, so this walker had been RED since dea59c23 — the exact failure this manifest
+  // exists to produce. It is a direct owner: it reads both the leg clock and the arrival.
+  'src/domain/worldPulse/ransomClaim.js': { route: 'direct', token: 'namedPersonArrivalTick' },
   'src/domain/worldPulse/roadsKernel.js': { route: 'direct', token: 'namedPersonPathPosition' },
   'src/domain/worldPulse/routeNetworkConsumersRace.js': { route: 'delegate', token: 'walkLivedJourney' },
   'src/domain/worldPulse/routeNetworkConsumersTransit.js': { route: 'direct', token: 'namedPersonLegTicks' },
