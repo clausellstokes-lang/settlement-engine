@@ -1852,3 +1852,106 @@ the cycle-7 adversarial verifier, four deterministic re-runs [dark,lit] =
 "4 of 6" was false. At the pre-HK-3 base all six drop, so the assertion's
 reachability is thinner than first recorded but real). Strictly stronger, and
 no longer hostage to a lucky seed.
+
+---
+
+## PT2-5 — THE ORIGIN RUNG IS THIN, AND WIDENING IT IS OWNER-GATED (2026-08-03)
+
+**STATUS: NOT BUILT. Measured, designed, and stopped at the gate.** Lane PT2 was
+asked to widen the spine's origin rung ("Why it is here"). The measurement says
+the finding is real; the gate says the cure is not the chair's to land. Nothing
+in this section is implemented — this is the record so the next session does not
+re-measure it.
+
+### The finding, corrected
+
+The reported symptom was "rung 1 printed ONE distinct body across 140
+generations." That is true and it is not the whole truth: the origin corpus is
+**draw-free**, a pure function of route × terrain × food-deficit × magic, so
+holding the config constant necessarily yields one body no matter how many seeds
+are drawn. Measured both ways:
+
+| corpus | generations | distinct origin bodies |
+|---|---|---|
+| config held at DEFAULT, 60 seeds varying | 60 | **1** |
+| tier × route × terrain × magic, seeds varying | 576 | **9** |
+
+Nine authored variants, and **every arm is reachable** — there is no dead arm to
+repair. `generateSettlementReason` (src/generators/narrativeGenerator.js:750) is
+simply thin, and lopsided:
+
+```
+[ 192/576 ]  Established along a road route — trade flows in, goods flow out, people pass through.
+[  96/576 ]  Positioned at a major crossroads — …
+[  96/576 ]  Built along the river — …
+[  72/576 ]  A port settlement whose wharves and navigable water define its trade.
+[  46/576 ]  Isolated … magical transport, sanctioned caravans, seasonal access, or patronage …
+[  45/576 ]  Isolated … sanctioned caravans, seasonal access, patronage, or emergency rationing …
+[  12/576 ]  A river port built around navigable inland water; …
+[  12/576 ]  A coastal seaport whose existence is inseparable from the sea.
+[   5/576 ]  Isolated from major trade routes. Self-sufficiency is not an aspiration here; …
+```
+
+The `road` arm — the DEFAULT, and a third of all generations — has exactly one
+sentence. Two settlements sharing a route and terrain have the identical origin
+line forever, and the rung carries no per-settlement identity at all. Tier does
+not enter: the tier sentence is `lines[1]`, and the spine reads `lines[0]`.
+
+**A measurement trap worth recording:** `terrain` and `terrainType` are NOT
+config keys. Only `terrainOverride` resolves terrain, so a census that varies
+`terrain` silently measures ONE terrain and undercounts. That is why a first
+pass here read 5 bodies rather than 9, and why the port sub-arms looked dead
+when they are not.
+
+### The designed cure (not built)
+
+Give each arm authored variants selected **draw-free** from the settlement seed
+— the estate's established idiom for widening authored prose without touching
+the RNG stream (`historyGenerator.js:239` "CONTENT-GT-FINAL (Charge 1):
+draw-free variant pick"; `assembleInstitutions.js:710` "CONTENT-GT-DOSSIER:
+draw-free institution-description variety"). Draw-free means no draw is
+consumed, so no stream theft and no downstream perturbation, and the choice is
+stable per seed.
+
+Two constraints the implementation must respect:
+
+- **The FNV-1a low-bit parity hazard.** A `fnv1a32(seed) % 2^k` selector kills
+  half the pool. Use the recorded cure (as `whatPhrase` does), and pin per-arm
+  reachability so a silently-halved pool reds.
+- **The DM-edit boundary.** `settlementReason` is DM-editable
+  (`src/domain/userEdits.js:91`, `display/stateProse/dmFieldProjection.js:53`).
+  The variant selection must sit on the GENERATOR side, before the DM's
+  override — which the draw-free design does — and no causal/machine prose may
+  be wired into the field itself.
+
+### THE GATE — why this is owner-signed, proven not assumed
+
+1. **It re-records the ENTIRE golden master.**
+   `tests/property/generatorGoldenMaster.test.js` hashes
+   `sha256(JSON.stringify(settlement))` over 523 configs, and `settlementReason`
+   is a top-level settlement field. Proven by experiment, not inference: a
+   ONE-WORD change to the road arm ("goods flow out, **and** people pass
+   through") was planted and the golden went red with drift, then reverted.
+   Any widening at all re-records all 523 keys.
+
+2. **THE PROMISE.** "A seed is a world, forever" is constitutional. Widening the
+   corpus changes the origin prose of every world every existing seed has ever
+   produced. Even seed-stable-going-forward is still a one-time break of what
+   yesterday's seed said, and tuning is owner-SIGNED versioned.
+
+3. **Five surfaces, not one.** `settlementReason` feeds the journal page ("Why
+   this place exists"), the PDF chapter, the dossier Origin note, the AI
+   grounding payload, and the spine. This is not a spine-local decision.
+
+**Rejected alternative, recorded so it is not re-proposed:** widening inside the
+spine's `deriveExistsBecause` instead. It dodges the golden but is
+architecturally wrong — the spine's origin rung is a STATEMENT rung whose whole
+contract is to print the authored founding prose WHOLE, so a spine-local variant
+would make "Why it is here" disagree with the dossier's Origin note for the same
+settlement. That is precisely the two-authors-of-one-string drift lane PS was
+built to retire.
+
+**What the owner is being asked for:** permission to widen
+`generateSettlementReason` with per-arm draw-free variants, accepting a
+one-time 523-key golden re-record and a one-time origin-prose shift on every
+existing seed.

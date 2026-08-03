@@ -774,10 +774,14 @@ describe('over REAL generated settlements', () => {
     let examined = 0;
     for (const settType of ['thorp', 'village', 'town', 'city', 'metropolis']) {
       for (const tradeRouteAccess of ['crossroads', 'port', 'river', 'isolated']) {
-        for (const terrain of ['coastal', 'riverside', 'plains', 'forest', 'mountain']) {
+        for (const terrainOverride of ['coastal', 'riverside', 'plains', 'forest', 'mountain']) {
+          // `terrainOverride` is the config key that actually resolves terrain.
+          // `terrain` is NOT one: passing it silently yields the default, which
+          // would narrow this corpus to a single terrain while the loop claimed
+          // five.
           const settlement = gen(
-            { settType, tradeRouteAccess, terrain },
-            `conj-${settType}-${tradeRouteAccess}-${terrain}`,
+            { settType, tradeRouteAccess, terrainOverride },
+            `conj-${settType}-${tradeRouteAccess}-${terrainOverride}`,
           );
           const top = (settlement.economicState?.primaryExports || []).slice(0, 2);
           if (top.length < 2 || !top.some(name => / and /i.test(String(name)))) continue;
