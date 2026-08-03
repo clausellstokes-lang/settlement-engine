@@ -19,7 +19,7 @@ import {
   applyEnvoyInterceptionDecision,
   projectArmiesForEnvoyEncounters,
 } from './armyTransitKernel.js';
-import { targetCommissionedPlant } from './brokerageServicesPlant.js';
+import { attachEnvoyPictureTarget } from './brokerageServicesPlant.js';
 import {
   buildEnvoyRoutePlan,
   syncEnvoyNpcTransit,
@@ -270,7 +270,7 @@ export function prepareEnvoyPlantTargets({ worldState, tick, commissionedPlants 
       commissionerId: text(receipt.patronId),
       purpose: 'intercepted_envoy_appraisal',
     };
-    const targeted = targetCommissionedPlant(row.plant, target);
+    const targeted = attachEnvoyPictureTarget(row.plant, target);
     const expected = asObject(armyTransitLedger(state))[text(chosen.army.armyId)];
     if (!targeted || !expected) continue;
     const intent = {
