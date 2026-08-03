@@ -255,12 +255,26 @@ $$;
 -- ── 4. THE TWO ORDERED SURFACES CONSULT THE GUARD ───────────────────────────
 -- Both bodies are forked VERBATIM from their NET-CURRENT definitions with the
 -- guard clause added and NOTHING else changed:
---   • update_display_name  — net-current is 009 (no later redefinition exists).
---     ⚠️ NOTE FOR THE OWNER: 131 repinned every other definer's search_path to
---     `public, pg_temp` but did NOT include this function. That pre-existing gap
---     is carried forward UNCHANGED here rather than silently closed, because
---     changing a security-definer search_path is a security-posture change and
---     therefore the owner's call, not this lane's. Recorded, not fixed.
+--   • update_display_name  — net-current was 009; this migration is now its
+--     net-current definition, and it is pinned `public, pg_temp` (VH-3).
+--     ⚠️ THE GAP THIS CLOSES, recorded because the reasoning is the point.
+--     Migration 131 repinned every other post-111 definer's search_path to
+--     `public, pg_temp` and simply MISSED this one; 009 remained its net-current
+--     with the bare `set search_path = public`, which leaves pg_temp implicitly
+--     FIRST — the CVE-2018-1058 search-path-hijack shape 094/111/131 exist to
+--     close. An earlier draft of this migration carried the gap forward unchanged
+--     on the grounds that a definer search_path is a security-posture call; the
+--     owner's pre-approval settles that, and the fix is byte-neutral to behaviour
+--     (appending pg_temp LAST changes no resolution this body performs).
+--     It is also not a change to anything running: this whole migration is DARK
+--     and undeployed, so the pin lands before the function ever ships rather than
+--     altering a live object.
+--     ⚠️ AND THE REASON NOTHING CAUGHT IT: tests/lint/migrationSearchPathPin only
+--     flagged NEW NAMES. `public.update_display_name` was already in the frozen
+--     baseline from 009, so this migration could RE-CREATE it bare and the ratchet
+--     stayed green — a baselined name is invisible forever, however many times a
+--     later migration rewrites it. That hole is closed in the same commit by the
+--     post-convention ledger in that test; see its header.
 --   • add_gallery_comment  — net-current is 131 (search_path public, pg_temp).
 --
 -- The refusal messages are the design's copy: polite, non-accusatory, no echo of
@@ -270,7 +284,7 @@ create or replace function public.update_display_name(new_name text)
 returns text
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, pg_temp
 as $$
 declare
   trimmed_name text;

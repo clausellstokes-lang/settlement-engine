@@ -62,7 +62,6 @@
   "public.set_curated": "011_gallery_curation.sql",
   "public.set_ticket_status": "055_support_tickets.sql",
   "public.unpublish_settlement": "059_enforce_account_status_rls.sql",
-  "public.update_display_name": "009_profile_security.sql",
   "public.update_external_name": "075_account_identity_columns.sql",
   "public.update_profile_names": "075_account_identity_columns.sql",
   "public.verify_recovery_answer": "066_security_questions_and_recovery.sql",

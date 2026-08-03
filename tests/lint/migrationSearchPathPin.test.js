@@ -37,6 +37,24 @@
  * │   125_action_velocity_guards.sql — toggle_gallery_vote, add_gallery_comment   │
  * │ The 76 remaining (pre-094) entries are a larger, lower-stakes cleanup batch.   │
  * └──────────────────────────────────────────────────────────────────────────────┘
+ *
+ * ┌─ THE HOLE THIS RATCHET HAD, AND THE LEDGER THAT CLOSES IT (VH-3) ────────────┐
+ * │ Everything above keys on the function NAME. That makes a baselined name       │
+ * │ INVISIBLE FOREVER: a later migration could `create or replace` it bare and    │
+ * │ this file stayed green, because the name was already excused. That is not     │
+ * │ hypothetical — migration 195 recreated `public.update_display_name` with a    │
+ * │ bare `set search_path = public`, inheriting 009's gap into a brand-new        │
+ * │ definition, and no guard here said a word. The audit found it by reading.     │
+ * │                                                                              │
+ * │ The frozen baseline is the right instrument for pre-convention DEBT, so it    │
+ * │ stays. What it cannot express is the property that actually matters: a        │
+ * │ function whose NET-CURRENT definition was authored AFTER the convention       │
+ * │ landed has no excuse, whatever its name's history. POST_CONVENTION_BARE below │
+ * │ is that second, much smaller ledger — every violator whose net-current lives  │
+ * │ in a migration numbered ≥ 131 — and it is exact-match, shrink-only. A future  │
+ * │ migration that recreates ANY definer without the pin now reds here on         │
+ * │ arrival, baselined name or not.                                              │
+ * └──────────────────────────────────────────────────────────────────────────────┘
  */
 
 import { describe, it, expect } from 'vitest';
@@ -60,7 +78,42 @@ const REPINNED_POST_111 = [
   'public.refund_credits',
   'public.toggle_gallery_vote',
   'public.add_gallery_comment',
+  // VH-3 — 131's repin sweep MISSED this one, so 009's bare pin stayed net-current
+  // until migration 195 recreated the function (bare again) to add the civility
+  // guard. 195 now pins it `public, pg_temp`, and it joins this list so the win is
+  // held: a later recreate that drops the pin reds on the first assertion below,
+  // and a stray re-baseline reds on the second.
+  'public.update_display_name',
 ];
+
+/**
+ * THE POST-CONVENTION LEDGER — every SECURITY DEFINER function whose NET-CURRENT
+ * definition lives in a migration numbered ≥ 131 (when the repin convention landed)
+ * and is STILL bare. Exact-match and shrink-only, for the reason in the header: the
+ * frozen name-keyed baseline cannot see a baselined name being recreated bare by a
+ * NEW migration, which is precisely how update_display_name's gap survived.
+ *
+ * These five are migration 147's gallery read functions — pre-existing debt in
+ * another lane's surface, frozen here rather than fixed, because pinning a definer
+ * is a security-posture change and each needs its own owner-gated ruling. They are
+ * recorded so they are not re-found as a discovery, and so the ledger they sit in
+ * is the thing that refuses the SIXTH arrival.
+ *
+ * TO COMPLY when this reds:
+ *   - a NEW row → add `set search_path = public, pg_temp` (pg_temp LAST) to that
+ *     function's net-current definition. Do NOT add it here.
+ *   - a row that vanished (someone pinned it) → delete the row, banking the win.
+ */
+const POST_CONVENTION_BARE = Object.freeze({
+  'public._gallery_public_tile_rows': '147_gallery_tile_chain_aliveness_title_reactions.sql',
+  'public.list_gallery_dossiers': '147_gallery_tile_chain_aliveness_title_reactions.sql',
+  'public.list_gallery_more_by_creator': '147_gallery_tile_chain_aliveness_title_reactions.sql',
+  'public.get_gallery_dossier': '147_gallery_tile_chain_aliveness_title_reactions.sql',
+  'public.list_my_gallery_dossiers': '147_gallery_tile_chain_aliveness_title_reactions.sql',
+});
+
+/** The migration number at which the pg_temp-LAST convention became binding. */
+const CONVENTION_MIGRATION = 131;
 
 // ⚠ ANCHORED AT LINE START (`^` + m) — the unanchored form can invent a PHANTOM
 // function from a comment that wraps the statement mid-identifier (098's
@@ -153,6 +206,44 @@ describe('SECURITY DEFINER search_path pin — structural ratchet (backend-3)', 
       `Re-pinned by 131 but still in the baseline — remove them from `
         + `tests/lint/.migration-searchpath-baseline.json:\n  ${stillBaselined.join('\n  ')}`,
     ).toEqual([]);
+  });
+
+  it('no definer authored AFTER the convention is bare, beyond the frozen ledger', () => {
+    // THE CLASS-KILLER (VH-3). The name-keyed baseline above excuses a name forever;
+    // this excuses a SITE. Anything recreated at or after migration 131 without the
+    // pin shows up here on arrival, even if its name has been baselined since 009 —
+    // the exact blindness that let migration 195 inherit 009's bare pin unnoticed.
+    const postConvention = {};
+    for (const [name, file] of Object.entries(current)) {
+      if (Number.parseInt(file, 10) >= CONVENTION_MIGRATION) postConvention[name] = file;
+    }
+
+    const arrived = Object.keys(postConvention).filter(name => !(name in POST_CONVENTION_BARE));
+    expect(
+      arrived,
+      arrived.length
+        ? `A SECURITY DEFINER function was authored/recreated at or after migration `
+          + `${CONVENTION_MIGRATION} without a pg_temp-LAST pin. Add `
+          + `\`set search_path = public, pg_temp\` to its net-current definition; do NOT `
+          + `add it to POST_CONVENTION_BARE:\n  `
+          + arrived.map(n => `${n} (${postConvention[n]})`).join('\n  ')
+        : '',
+    ).toEqual([]);
+
+    const banked = Object.keys(POST_CONVENTION_BARE).filter(name => !(name in postConvention));
+    expect(
+      banked,
+      banked.length
+        ? `These ledger rows are no longer bare (pinned, renamed or dropped). The ledger only `
+          + `shrinks — delete them from POST_CONVENTION_BARE:\n  ${banked.join('\n  ')}`
+        : '',
+    ).toEqual([]);
+
+    // Provenance too, not just membership: a row whose net-current MOVED to a different
+    // migration is a recreate nobody reviewed, which is the event this ledger exists for.
+    for (const [name, file] of Object.entries(POST_CONVENTION_BARE)) {
+      expect(postConvention[name], `${name} is now net-current in a different migration`).toBe(file);
+    }
   });
 
   it('parses a plausible number of migration functions (sanity — the walker is not silently empty)', () => {
