@@ -169,17 +169,29 @@ export function ChoiceDialog({
   title,
   body,
   choices = [],
+  // Optional: which choice takes focus when the dialog opens. Without it the
+  // shared focus trap falls back to the first focusable, which is the header's
+  // Close button — fine for a warning, wrong for a question whose recommended
+  // answer should be one Enter away. Default null keeps every existing call site
+  // rendering byte-identically (no autofocus attribute emitted).
+  defaultChoiceId = null,
   cancelLabel = 'Cancel',
+  // 'warning' is the shipped default (a fork the DM is being warned about);
+  // 'default' is for a plain question that carries no hazard, e.g. the realm's
+  // magic stance. Passed through to Shell's icon tone only.
+  tone = 'warning',
   onChoose,
   onCancel,
 }) {
   return (
-    <Shell open={open} title={title} body={body} tone="warning" onCancel={onCancel}>
+    <Shell open={open} title={title} body={body} tone={tone} onCancel={onCancel}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
         {choices.map(choice => (
           <button
             key={choice.id}
             type="button"
+            // eslint-disable-next-line jsx-a11y/no-autofocus -- intentional: the recommended answer takes focus when the question opens
+            autoFocus={defaultChoiceId != null && choice.id === defaultChoiceId}
             onClick={() => onChoose?.(choice.id)}
             style={{
               display: 'block',

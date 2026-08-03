@@ -1019,10 +1019,11 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       goodsToggles: { grain: true }, servicesToggles: { svc_smith: true },
       // A CURRENT-shape blob carries every display preference, in DEFAULT_DISPLAY_PREFS
       // key order (the merge spreads the defaults first, and this assertion is
-      // byte-exact). `mapSubTab` joined the bag with TC-0 (DESIGN_TOWN_CARTOGRAPHY §12);
-      // the ABSENCE direction is covered by the legacy-blob tests below, which is why
-      // extending the bag is safe rather than a cohort fork.
-      displayPrefs: { sceneQualityMode: 'low', mapSubTab: 'plan' },
+      // byte-exact). `mapSubTab` joined the bag with TC-0 (DESIGN_TOWN_CARTOGRAPHY §12)
+      // and `realmMagicChoice` with MG-1 (DESIGN_REALM_MAGIC_TOGGLE §4); the ABSENCE
+      // direction is covered by the legacy-blob tests below, which is why extending
+      // the bag is safe rather than a cohort fork.
+      displayPrefs: { sceneQualityMode: 'low', mapSubTab: 'plan', realmMagicChoice: 'yes' },
       advanceAutoResolve: true,
     };
     const merged = mergePersistedState(JSON.parse(JSON.stringify(blob)), currentStub());
@@ -1068,9 +1069,10 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     store.getState().setSceneQualityMode('low');
     // The persist hop, exactly as the store performs it: partialize → JSON → merge.
     const blob = JSON.parse(JSON.stringify(partializeOf(store.getState())));
-    // The whole bag rides the partialize, so the sibling preference travels with the
-    // ceiling (TC-0 added `mapSubTab`); the ceiling itself is the subject below.
-    expect(blob.displayPrefs).toEqual({ sceneQualityMode: 'low', mapSubTab: 'plan' });
+    // The whole bag rides the partialize, so the sibling preferences travel with the
+    // ceiling (TC-0 added `mapSubTab`, MG-1 added `realmMagicChoice`); the ceiling
+    // itself is the subject below.
+    expect(blob.displayPrefs).toEqual({ sceneQualityMode: 'low', mapSubTab: 'plan', realmMagicChoice: 'yes' });
     const merged = mergePersistedState(blob, currentStub());
     expect(merged.displayPrefs.sceneQualityMode).toBe('low');
   });

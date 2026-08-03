@@ -14,8 +14,10 @@ export const createInstantWorldSlice = (set, get) => ({
   instantWorldBusy: false,
 
   /**
-   * Compose a staged realm from the three basic knobs and land the user in it.
-   * @param {{ realmSize?:string, tone?:string, mapKind?:string }} [basicConfig]
+   * Compose a staged realm from the four basic knobs and land the user in it.
+   * `magic` ('yes' | 'no', MG-1) is the pre-generation question's answer; it is
+   * projected into every member's config at mint, never consulted afterwards.
+   * @param {{ realmSize?:string, tone?:string, mapKind?:string, magic?:string }} [basicConfig]
    * @param {{ seed?:string, name?:string }} [options]
    * @returns {Promise<{ ok:boolean, reason?:string, campaignId?:string, seed?:string, settlementCount?:number }>}
    */

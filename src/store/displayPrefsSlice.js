@@ -35,6 +35,21 @@
  *     consumer (MapTabShell) normalizes it against the sub-tabs that are actually
  *     PRESENT on read, so an unknown, retired, or gated-off value opens the plan
  *     rather than an empty panel.
+ *   realmMagicChoice — which answer the Instant World's "Does magic exist in
+ *     these lands?" modal PRE-SELECTS on this machine (MG-1,
+ *     docs/DESIGN_REALM_MAGIC_TOGGLE §4). The vocabulary ('yes' | 'no') is owned
+ *     by domain/instantWorld/worldPlan.js MAGIC_CHOICES and deliberately NOT
+ *     re-spelled here, for the SAME reason the two keys above are not: that
+ *     module is reached only behind the composer's dynamic import and this slice
+ *     is eager. The store holds an opaque string; the modal clamps on read.
+ *
+ *     WHY THIS IS STILL NOT GENERATOR INPUT, despite naming a generation knob.
+ *     The persisted value never reaches a generator on its own: the modal is
+ *     MANDATORY before every instant realm (Esc cancels the generation rather
+ *     than defaulting), so what reaches the composer is always an answer the DM
+ *     confirmed for THAT realm. This key only decides which button starts
+ *     focused — a preference about the machine, exactly like the two above. It
+ *     is absent from `config` and no domain module reads it.
  *
  * LIFECYCLE (all six hops, because this is persisted state):
  *   create     — DEFAULT_DISPLAY_PREFS below.
@@ -58,6 +73,10 @@ export const DEFAULT_DISPLAY_PREFS = Object.freeze({
   // The canonical 2D plan is first and default (§1, §12) — the permanent
   // precision/accessibility/export surface every other presentation falls back to.
   mapSubTab: 'plan',
+  // A world of magic is the shipped default (§4) — it is what every realm built
+  // before this knob existed was, so a returning user's first modal pre-selects
+  // the world they already know.
+  realmMagicChoice: 'yes',
 });
 
 // The `(set, get)` signature is the store's slice convention AND the anchor the
@@ -102,5 +121,20 @@ export const createDisplayPrefsSlice = (set, get) => ({
       state.displayPrefs.mapSubTab = typeof id === 'string' && id
         ? id
         : DEFAULT_DISPLAY_PREFS.mapSubTab;
+    }),
+
+  /**
+   * Remember which answer the Instant World's magic question pre-selects on this
+   * machine. Shape-guarded, not vocabulary-guarded — the same split the two
+   * setters above use and for the same reason (see the header): the vocabulary
+   * lives behind the composer's lazy import, and the modal clamps on read.
+   *
+   * @param {unknown} choice one of worldPlan.js MAGIC_CHOICES ('yes' | 'no')
+   */
+  setRealmMagicChoice: (choice) =>
+    set(state => {
+      state.displayPrefs.realmMagicChoice = typeof choice === 'string' && choice
+        ? choice
+        : DEFAULT_DISPLAY_PREFS.realmMagicChoice;
     }),
 });

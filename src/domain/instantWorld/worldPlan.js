@@ -90,6 +90,35 @@ export const MAP_KINDS = Object.freeze([
   Object.freeze({ id: 'sfArchipelago', label: 'Island Chain' }),
 ]);
 export const DEFAULT_MAP_KIND = '';
+
+// ── Magic → the realm's arcane stance (MG-1, DESIGN_REALM_MAGIC_TOGGLE §4) ───
+// THE FOURTH KNOB, and the only one asked as a QUESTION rather than a chip: the
+// pre-generation modal puts it to the DM before the realm exists, because it is
+// the one answer that cannot be nudged afterwards without regenerating (every
+// member is minted under it — see composeInstantWorld's projection).
+//
+// It is a BINARY by design (§5): 'yes' maps to today's behavior verbatim, 'no'
+// stamps `magicExists:false` + `priorityMagic:0` into every member's config at
+// mint. There is deliberately no third "low magic" rung in v1 — the graded realm
+// would need the dead genre/magicBias axis revived, which is an owner call.
+//
+// MAGIC IS NOT FAITH (MG-LAW-2): this knob gates the ARCANE axis and functioning
+// supernatural effects. Deities, temples, patrons, and belief are untouched — a
+// mundane realm still prays; its prayers move belief, never physics. The modal
+// copy says so plainly so the DM is never surprised by a temple.
+export const MAGIC_CHOICES = Object.freeze([
+  Object.freeze({
+    id: 'yes',
+    label: 'A world of magic',
+    blurb: 'Mages, arcane orders, enchanted trade, and magical events all belong here.',
+  }),
+  Object.freeze({
+    id: 'no',
+    label: 'A mundane world',
+    blurb: 'No working magic anywhere in the realm. Gods and temples remain.',
+  }),
+]);
+export const DEFAULT_MAGIC = 'yes';
 // The pool a "Random island" resolves within (mirrors SF_TEMPLATES' randomizable
 // members — everything except the probability-0 sfArchipelago and the '' sentinel).
 const RANDOMIZABLE_MAP_KINDS = Object.freeze(['highIsland', 'lowIsland', 'volcano', 'peninsula', 'pangea', 'atoll']);
@@ -110,29 +139,35 @@ export function isRealmSize(v) { return typeof v === 'string' && Object.prototyp
 export function isTone(v) { return TONES.some(t => t.id === v); }
 /** @param {unknown} v */
 export function isMapKind(v) { return MAP_KINDS.some(k => k.id === v); }
+/** @param {unknown} v */
+export function isMagicChoice(v) { return MAGIC_CHOICES.some(m => m.id === v); }
 
 /**
- * Normalize loose basic-config input to the three resolved knobs. Unknown /
+ * Normalize loose basic-config input to the four resolved knobs. Unknown /
  * missing values fall back to the deterministic defaults, so a partial config
- * (or none) still yields a valid, replayable plan.
- * @param {{ realmSize?: string, tone?: string, mapKind?: string }} [basicConfig]
+ * (or none) still yields a valid, replayable plan — and in particular a caller
+ * that predates the magic knob (a stored basicConfig, a soak harness, a test)
+ * resolves to 'yes', which is today's behavior verbatim.
+ * @param {{ realmSize?: string, tone?: string, mapKind?: string, magic?: string }} [basicConfig]
  */
 export function normalizeBasicConfig(basicConfig = {}) {
   return {
     realmSize: isRealmSize(basicConfig.realmSize) ? String(basicConfig.realmSize) : DEFAULT_REALM_SIZE,
     tone: isTone(basicConfig.tone) ? String(basicConfig.tone) : DEFAULT_TONE,
     mapKind: isMapKind(basicConfig.mapKind) ? String(basicConfig.mapKind) : DEFAULT_MAP_KIND,
+    magic: isMagicChoice(basicConfig.magic) ? String(basicConfig.magic) : DEFAULT_MAGIC,
   };
 }
 
 /**
  * Derive the full, deterministic plan from the outer seed + basic knobs.
  *
- * @param {{ seed?: string, basicConfig?: { realmSize?: string, tone?: string, mapKind?: string } }} [args]
+ * @param {{ seed?: string, basicConfig?: { realmSize?: string, tone?: string, mapKind?: string, magic?: string } }} [args]
  * @returns {{
  *   seed: string,
  *   realmSize: string,
  *   tonePresetId: string,
+ *   magic: string,              // 'yes' | 'no' — the realm's arcane stance
  *   mapSeed: string,
  *   mapKind: string,            // resolved concrete template (never '')
  *   requestedMapKind: string,   // the knob as given ('' = random)
@@ -176,6 +211,11 @@ export function deriveWorldPlan({ seed, basicConfig } = {}) {
     seed: outerSeed,
     realmSize: knobs.realmSize,
     tonePresetId: knobs.tone,
+    // The arcane stance rides BESIDE the tone preset, and for the same reason:
+    // both are answers the composer STAMPS (tone → the campaign's rules, magic →
+    // every member's config), never gates it consults later. It draws no rng, so
+    // adding it cannot shift a single seeded roll above.
+    magic: knobs.magic,
     mapSeed: `${outerSeed}::map`,
     mapKind: resolvedMapKind,
     requestedMapKind: knobs.mapKind,

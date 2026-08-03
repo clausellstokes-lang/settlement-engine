@@ -4,8 +4,15 @@
  *
  * ONE CLICK + BASIC CONFIG → a coherent staged realm. This component is the
  * INTERFACE GATE (the only gate): a non-premium reach fires the pricing moment
- * and opens the purchase modal; a premium reach expands the three-knob config
- * card and calls the tier-blind store action. Tier never reaches the composer.
+ * and opens the purchase modal; a premium reach expands the config card and
+ * calls the tier-blind store action. Tier never reaches the composer.
+ *
+ * THE ONE QUESTION (MG-1, docs/DESIGN_REALM_MAGIC_TOGGLE §4). Three knobs are
+ * chips in the card; the fourth — does magic exist in these lands? — is a modal
+ * interposed between the Generate CTA and the store action. It is asked rather
+ * than defaulted because it is the only knob that cannot be nudged after the
+ * fact: every member is minted under it. Dismissing the question cancels the
+ * generation; the last answer is remembered per device and echoed in the card.
  *
  * Lazy-loaded by WizardEmptyState (never in first paint); the heavy composer +
  * generator load only when the user actually presses Generate (the store
@@ -15,13 +22,17 @@ import { useState } from 'react';
 import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
-import { REALM_SIZES, TONES, MAP_KINDS, DEFAULT_REALM_SIZE, DEFAULT_TONE, DEFAULT_MAP_KIND } from '../../domain/instantWorld/worldPlan.js';
+import { REALM_SIZES, TONES, MAP_KINDS, MAGIC_CHOICES, DEFAULT_REALM_SIZE, DEFAULT_TONE, DEFAULT_MAP_KIND, DEFAULT_MAGIC, isMagicChoice } from '../../domain/instantWorld/worldPlan.js';
 import Button from '../primitives/Button.jsx';
 import Segmented from '../primitives/Segmented.jsx';
+import { ChoiceDialog } from '../primitives/Dialog.jsx';
 import { INK, BODY, MUTED, BORDER, BORDER2, CARD, CARD_HDR, GOLD, sans, serif_, FS, SP, swatch } from '../theme.js';
 
 const REALM_OPTIONS = Object.values(REALM_SIZES).map(s => ({ id: s.id, label: s.label }));
 const TONE_OPTIONS = TONES.map(t => ({ id: t.id, label: t.label }));
+// The modal's choice rows (MG-1). Authored from the knob vocabulary so the
+// question and the plan can never disagree about what the answers are.
+const MAGIC_OPTIONS = MAGIC_CHOICES.map(m => ({ id: m.id, label: m.label, description: m.blurb }));
 
 /** A short, human-typeable random seed for the "surprise me" default + reroll. */
 function freshSeed() {
@@ -35,6 +46,13 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
   const busy = useStore(s => s.instantWorldBusy);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const setActivePricingMoment = useStore(s => s.setActivePricingMoment);
+  // The remembered answer to the magic question (device-scoped, MG-1). Clamped
+  // HERE rather than in the slice: the vocabulary lives in the lazy composer
+  // lane, so the store holds an opaque string and this reader owns the clamp.
+  const rememberedMagic = useStore(s => (isMagicChoice(s.displayPrefs?.realmMagicChoice)
+    ? s.displayPrefs.realmMagicChoice
+    : DEFAULT_MAGIC));
+  const setRealmMagicChoice = useStore(s => s.setRealmMagicChoice);
 
   const canGenerate = tier === 'premium' || isElevated;
 
@@ -44,6 +62,10 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
   const [mapKind, setMapKind] = useState(DEFAULT_MAP_KIND);
   const [seed, setSeed] = useState(freshSeed);
   const [error, setError] = useState(null);
+  // The pre-generation question (MG-1). Interposed between the Generate CTA and
+  // the store action: the realm's magic stance is the one knob that cannot be
+  // nudged after the fact, so it is ASKED rather than defaulted, every time.
+  const [askMagic, setAskMagic] = useState(false);
 
   const handleLockedReach = () => {
     triggerPricingMoment('map_realm_teaser', setActivePricingMoment, { tier });
@@ -55,11 +77,23 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
     setOpen(o => !o);
   };
 
-  const handleGenerate = async () => {
+  // The CTA no longer generates: it asks. Nothing is composed until the DM has
+  // answered the magic question for THIS realm (Esc / dismiss cancels outright —
+  // never a silent default, MG-1).
+  const handleGenerate = () => {
     if (!canGenerate) { handleLockedReach(); return; }
     if (busy) return;
     setError(null);
-    const result = await instantWorld?.({ realmSize, tone, mapKind }, { seed });
+    setAskMagic(true);
+  };
+
+  const handleMagicAnswer = async (magic) => {
+    setAskMagic(false);
+    if (!isMagicChoice(magic)) return;
+    // Remember the answer for this machine BEFORE the long compose, so a
+    // navigation away mid-build still pre-selects what the DM last chose.
+    setRealmMagicChoice?.(magic);
+    const result = await instantWorld?.({ realmSize, tone, mapKind, magic }, { seed });
     if (result?.ok) {
       // Land the user in the freshly staged realm (canonize is their next act).
       onNavigate?.('realm');
@@ -144,6 +178,22 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
             </div>
           </Knob>
 
+          {/* The magic question is asked in a modal at Generate, not answered
+              here — but the remembered answer is shown so the modal never
+              surprises (MG-1: "a read-only echo chip of the remembered choice"). */}
+          <Knob label="Magic" hint="Asked once before the realm is built. It shapes every settlement in it.">
+            <span
+              data-testid="instant-world-magic-echo"
+              style={{
+                justifySelf: 'start', fontFamily: sans, fontSize: FS.xs, fontWeight: 700,
+                color: BODY, background: CARD_HDR, border: `1px solid ${BORDER2}`,
+                padding: `${SP.xs}px ${SP.sm}px`,
+              }}
+            >
+              {MAGIC_CHOICES.find(m => m.id === rememberedMagic)?.label}
+            </span>
+          </Knob>
+
           {error && (
             <div role="alert" style={{ fontFamily: sans, fontSize: FS.sm, color: swatch.danger }}>{error}</div>
           )}
@@ -168,6 +218,19 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
           </p>
         </div>
       )}
+
+      {/* ── The one question asked before the world exists (MG-1) ────────── */}
+      <ChoiceDialog
+        open={askMagic}
+        tone="default"
+        title="Does magic exist in these lands?"
+        body="This shapes every settlement in the realm: its mages and arcane orders, its magical events, its enchanted trade. Gods and temples remain either way — belief is not a spell."
+        choices={MAGIC_OPTIONS}
+        defaultChoiceId={rememberedMagic}
+        cancelLabel="Not yet"
+        onChoose={handleMagicAnswer}
+        onCancel={() => setAskMagic(false)}
+      />
     </div>
   );
 }

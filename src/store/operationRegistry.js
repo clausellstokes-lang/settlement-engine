@@ -261,6 +261,14 @@ export const OPERATIONS = Object.freeze({
   // undoState 'not-applicable' because re-picking a map view IS the inverse and
   // the value is outside canon entirely.
   setMapSubTab: { opType:'setMapSubTab', label:"Set the default map view", description:"Chooses which view of a settlement's map opens first: the plan, the panorama, the 3D portrait, or the player view. Views the settlement or this machine cannot show are never offered, and the choice is remembered for this browser.", klass:'mechanical', slice:'displayPrefsSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'not-applicable' },
+  // MG-1 (DESIGN_REALM_MAGIC_TOGGLE §4): REGISTERED, not EXEMPT, for the SAME
+  // reason as the two setters above — it is persisted (displayPrefs rides the
+  // partialize allowlist). It changes NO world: the realm's magic stance is the
+  // answer the DM confirms in the modal for that realm, and this only decides
+  // which answer starts selected. targetScope 'global' because the preference
+  // belongs to the device; undoState 'not-applicable' because re-answering the
+  // question IS the inverse and the value is outside canon entirely.
+  setRealmMagicChoice: { opType:'setRealmMagicChoice', label:"Remember the realm magic answer", description:"Remembers which answer the Instant World's magic question starts on for this browser: a world of magic, or a mundane one. The question is still asked before every realm, and the realm follows the answer given then.", klass:'mechanical', slice:'displayPrefsSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   // Realm directive 7 (J-D7): REGISTERED, not EXEMPT, for the SAME reason as
   // setSceneQualityMode above. It was exempt while it was session-only chrome; the
   // full auto-resolve wave made it a PERSISTED play mode (it rides the store/index.js
