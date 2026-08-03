@@ -12,8 +12,14 @@
  *     section under one h1 → h2 → h3 tree.
  *   - THE `?tab=` DEEP LINKS BECAME ANCHORS. `/how-to?tab=power` now redirects to
  *     `/about/guide#power-user`; the translation lives in the one mapping writer
- *     (components/about/aboutMapping.js), and the section ids below come from it,
- *     so the redirect and the rendered anchors cannot drift apart.
+ *     `src/lib/aboutMapping.js`, and the section ids below come from it, so the
+ *     redirect and the rendered anchors cannot drift apart. THE `lib/` PLACEMENT
+ *     IS LOAD-BEARING, not filing: `lib/routes.js` reads that manifest to perform
+ *     the redirect, and the routing table must not import a component module —
+ *     under `components/about/` the mapping would drag page chrome into routing
+ *     (and into every consumer of it). The manifest is pure data either way.
+ *   - THE SECTIONS CARRY AN IN-PAGE NAV (design §3's MAY, ruled BUILD). See
+ *     SectionNav below.
  *   - "HOW WE COMPARE" LEFT. It is the positioning ladder, which design §1 assigns
  *     to the conceptual page; it now lives in components/about/CompareSection.jsx
  *     and every /compare* URL redirects there. Its copy moved byte-identically.
@@ -28,14 +34,14 @@
  *
  * ZERO EAGER. Lazy route (AppViews registers it via lazy()).
  */
-import { GOLD, GOLD_TXT, INK, SECOND as SEC, BORDER as BOR, PAGE_MAX, serif_, FS, swatch } from './theme.js';
+import { GOLD, GOLD_TXT, INK, SECOND as SEC, BORDER as BOR, PAGE_MAX, CHROME, SP, serif_, FS, swatch } from './theme.js';
 import { ANON_MAX_SIZE_LABEL } from '../config/tierFacts.js';
 import { useFlag } from '../lib/flags.js';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 import AccountFAQ from './account/AccountFAQ.jsx';
 import LivingWorldTab from './howto/LivingWorldTab.jsx';
-import { anchorFor } from '../lib/aboutMapping.js';
+import { anchorFor, unitsForView, ABOUT_GUIDE_VIEW } from '../lib/aboutMapping.js';
 import useAboutHashScroll from './about/useAboutHashScroll.js';
 // V-26b: the house-voice draft of the handbook narrative, rendered only when the
 // (default-off) `handbookVoice` flag is on. Rides this already-lazy chunk (zero eager).
@@ -49,6 +55,16 @@ import { VoicedConceptIntro, VOICED_HEADER } from './howto/HandbookVoiced.jsx';
 const COLS = (col = 340) => ({ columnWidth: `${col}px`, columnGap: '22px' });
 const NO_BREAK = { breakInside: 'avoid', WebkitColumnBreakInside: 'avoid' };
 
+// THE ANCHOR LANDING OFFSET. The desktop ribbon is `position:'sticky', top:0`
+// (its module is moving under the LD nav program, so this names the ribbon rather
+// than a file), so a fragment jump — a SectionNav click, a translated `?tab=` deep link, or
+// useAboutHashScroll's scrollIntoView — parks the section heading UNDERNEATH the
+// chrome unless the target carries a scroll margin. DERIVED from the chrome token
+// rather than copied: 60 + 24 = 84, byte-equal to the Compendium's own
+// ANCHOR_SCROLL_MARGIN, so the two anchor surfaces share a measurement instead of
+// a magic number that can drift on one side only.
+const ANCHOR_OFFSET = CHROME.headerDesktop + SP.xxl;
+
 /**
  * A guide section: the stable anchor from the mapping manifest plus the standard
  * h2 in the page's heading scale. The de-collapsed replacement for a former tab —
@@ -56,11 +72,64 @@ const NO_BREAK = { breakInside: 'avoid', WebkitColumnBreakInside: 'avoid' };
  */
 function GuideSection({ unit, heading, children }) {
   return (
-    <section id={anchorFor(unit)} style={{ margin: '0 0 40px' }}>
+    <section id={anchorFor(unit)} style={{ margin: '0 0 40px', scrollMarginTop: ANCHOR_OFFSET }}>
       <h2 style={{ fontFamily: serif_, fontSize: FS['22'], fontWeight: 600, color: INK,
         margin: '0 0 14px', lineHeight: 1.2 }}>{heading}</h2>
       {children}
     </section>
+  );
+}
+
+// One line per section for the nav below — the "sentence" rung of the legibility
+// law (glance → sentence → table), keyed by mapping-manifest unit id. Every line
+// restates copy the section itself already makes; the nav makes no claim of its
+// own, so it can never drift from the engine the way a summary would.
+const SECTION_BLURBS = Object.freeze({
+  quick: 'The sixty-second path to a first settlement, and the idea underneath it.',
+  power: 'Sliders, stress conditions, neighbour links, and the campaign library.',
+  living: 'The premium layer: how a whole region keeps moving between sessions.',
+  ref: 'Navigation, the detail tabs, the workflow, and deep links to the Compendium.',
+  faq: 'Credits, billing, gallery privacy, and how the simulator relates to AI.',
+});
+
+/**
+ * THE IN-PAGE SECTION NAV — design §3's MAY, ruled BUILD.
+ *
+ * §3 permits a table of contents "IF the Compendium pattern has one (match, never
+ * invent)". It has one: compendium/CompendiumDashboard.jsx renders its hubs as a
+ * grid of REAL hrefs carrying the destination anchor — crawlable, shareable, and
+ * openable in a new tab, with the click itself doing in-page navigation. This is
+ * that pattern at the same measurements (auto-fill 220px columns, gold left rule,
+ * serif label over a small secondary line).
+ *
+ * TWO DELIBERATE DIFFERENCES, both forced by the surface rather than invented:
+ *   - NO COUNT. The Compendium card's third element is a catalog count. A guide
+ *     section has no such number, and faking one would be the invention §3 bars.
+ *   - THE HREF IS A BARE FRAGMENT. The Compendium spells its hub links out in
+ *     full because the destination is a DIFFERENT tab; here every target is on
+ *     this page, so `#anchor` IS the real, crawlable URL — and being same-document
+ *     by construction it can never cost a reload, so the pattern's preventDefault
+ *     + programmatic-scroll half has nothing left to do.
+ *
+ * The rows come from the SAME manifest the sections' ids come from, so the nav
+ * cannot list a section this page does not render, nor miss one it does.
+ */
+function SectionNav() {
+  return (
+    <nav aria-label="Sections of this guide" style={{ margin: '0 0 34px' }}>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(220px,1fr))', gap:10 }}>
+        {unitsForView(ABOUT_GUIDE_VIEW).map((u) => (
+          <a key={u.id} href={`#${u.anchor}`}
+            style={{ display:'block', textDecoration:'none', border:`1px solid ${BOR}`,
+              borderLeft:`3px solid ${GOLD}`, padding:'12px 14px' }}>
+            <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:700, color:INK, marginBottom:4 }}>
+              {u.heading}
+            </div>
+            <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.5 }}>{SECTION_BLURBS[u.id]}</div>
+          </a>
+        ))}
+      </div>
+    </nav>
   );
 }
 
@@ -375,6 +444,7 @@ export default function HowToUse() {
   return (
     <Page max={PAGE_MAX}>
       <PageHeader {...header} />
+      <SectionNav />
       {/* The five sections, in the retired tab strip's order — reading order is
           content, so de-collapsing preserves it exactly (design §3). */}
       <GuideSection unit="quick" heading="Quick Start"><QuickStart /></GuideSection>

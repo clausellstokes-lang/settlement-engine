@@ -287,13 +287,43 @@ describe('About split — pin 3: header parity (ONE header writer)', () => {
     }
   });
 
+  // THE LIVENESS ANCHOR for every source scan below (the vacuous-negative class).
+  // A source-scan negative is TRUE for two reasons — the file really is free of
+  // the forbidden markup, or `read(f)` drifted out from under the test (the file
+  // was renamed, moved, or emptied) and the scan now searches nothing. The second
+  // reading survives forever and silently. Each file therefore names a POSITIVE
+  // token it is SUPPOSED to contain, asserted first: the token is JSX in the same
+  // module, so it travels exactly the path a stray <h1> or <Disclosure> would and
+  // vanishes under the same drift. A hardcoded constant the renderer never emits
+  // would re-introduce the vacuity one level up, so each anchor is real markup.
+  const LIVE_ANCHOR = Object.freeze({
+    'src/components/about/AboutWhatThisIs.jsx': /<PageHeader\b/,
+    'src/components/HowToUse.jsx': /<PageHeader\b/,
+    'src/components/about/CompareSection.jsx': /<h2[\s>]/,
+    'src/components/howto/AboutManifesto.jsx': /<h2[\s>]/,
+  });
+
+  /** Read a scanned source, proving it is LIVE before any negative is asked of it. */
+  const readLive = (f) => {
+    const src = read(f);
+    expect(
+      src,
+      `LIVENESS ANCHOR: ${f} does not contain the markup it is supposed to render`
+      + ` (${LIVE_ANCHOR[f]}). Every negative below would pass vacuously against an`
+      + ` empty or drifted read — fix the path or the component, never the assertion.`,
+    ).toMatch(LIVE_ANCHOR[f]);
+    return src;
+  };
+
   it('the About pages roll NO lookalike header markup of their own', () => {
     // The projection-as-second-truth class applied to chrome: a hand-rolled <h1>
     // beside the shared header is how a "shared" idiom quietly forks. The pages
     // may render section h2/h3; the h1 belongs to PageHeader alone.
     for (const f of ['src/components/about/AboutWhatThisIs.jsx', 'src/components/HowToUse.jsx',
       'src/components/about/CompareSection.jsx', 'src/components/howto/AboutManifesto.jsx']) {
-      expect(read(f), `${f} must not hand-roll an <h1>`).not.toMatch(/<h1[\s>]/);
+      const src = readLive(f);
+      // anchored: readLive() just proved this source renders its own PageHeader/h2 markup, so an absent <h1> is a real exclusion and not an empty read.
+      expect(src, `${f} must not hand-roll an <h1>`).not.toMatch(/<h1[\s>]/);
     }
   });
 
@@ -303,9 +333,12 @@ describe('About split — pin 3: header parity (ONE header writer)', () => {
     // that EXPLAINS the removal must not read as the thing it removed (the
     // unanchored-extractor class: the prose gets matched instead of the code).
     for (const f of ['src/components/HowToUse.jsx', 'src/components/about/AboutWhatThisIs.jsx']) {
-      const src = read(f);
+      const src = readLive(f);
+      // anchored: readLive() proved the source is live markup, so "no Disclosure import" measures REMOVAL rather than a read() that found nothing to search.
       expect(src, `${f} still imports Disclosure`).not.toMatch(/^import .*Disclosure\.jsx';$/m);
+      // anchored: same readLive() liveness anchor — a drifted or empty source reds there, never silently here.
       expect(src, `${f} still renders <Disclosure`).not.toMatch(/<Disclosure\b/);
+      // anchored: same readLive() liveness anchor — a drifted or empty source reds there, never silently here.
       expect(src, `${f} still renders a tab strip`).not.toMatch(/role="tab"/);
     }
   });
@@ -331,13 +364,89 @@ describe('About split — pin 4: heading-tree sanity (the a11y floor)', () => {
   }
 });
 
+describe('About split — §3 the in-page section nav (the MAY, ruled BUILD)', () => {
+  // Design §3: "each page MAY carry the standard in-page section nav IF the
+  // Compendium pattern has one (match, never invent)". It has one — the hub-card
+  // grid of real, anchor-carrying hrefs in compendium/CompendiumDashboard.jsx —
+  // and the Practical Guide is a long flat page, so the glance layer is built.
+  //
+  // What this Is deliberately has NO nav: it is three components deep and renders
+  // two sections, so a table of contents longer than the page it indexes would be
+  // furniture, not legibility. Recorded, not forgotten.
+
+  it('the guide lists EVERY one of its sections, in reading order, and no others', async () => {
+    const { container } = await renderGuide();
+    const hrefs = [...container.querySelectorAll('nav a')].map((a) => a.getAttribute('href'));
+    expect(hrefs).toEqual(unitsForView(ABOUT_GUIDE_VIEW).map((u) => `#${u.anchor}`));
+  });
+
+  /**
+   * The nav's links, with the COUNT asserted first.
+   *
+   * A `for (const a of querySelectorAll('nav a'))` body proves nothing when the
+   * selector matches nothing: delete the nav and every per-link assertion below
+   * passes on zero iterations. (This is not hypothetical — an executed negative
+   * control caught exactly that shape here before this guard existed.) The
+   * expected count comes from the manifest, which is the independent side.
+   */
+  const navLinks = (container) => {
+    const links = [...container.querySelectorAll('nav a')];
+    expect(
+      links.length,
+      'LIVENESS ANCHOR: the guide rendered no section-nav links at all, so every'
+      + ' per-link assertion below would pass over an empty list.',
+    ).toBe(unitsForView(ABOUT_GUIDE_VIEW).length);
+    return links;
+  };
+
+  it('every nav link targets a section the page really renders', async () => {
+    // The nav and the sections both read the manifest, so this is the DOM-side
+    // check that the manifest's promise is kept in both directions at once.
+    const { container } = await renderGuide();
+    for (const a of navLinks(container)) {
+      const id = a.getAttribute('href').slice(1);
+      expect(container.querySelector(`#${id}`), `nav links #${id}, which no section renders`).toBeTruthy();
+    }
+  });
+
+  it('each nav label is the heading of the section it points at (no second truth)', async () => {
+    // The nav introduces a SECOND place the section's name is written. Bind the two
+    // so a renamed heading cannot leave a stale label in the table of contents.
+    const { container } = await renderGuide();
+    for (const a of navLinks(container)) {
+      const id = a.getAttribute('href').slice(1);
+      const heading = container.querySelector(`#${id}`).querySelector('h2');
+      expect(heading, `#${id} has no h2 to label`).toBeTruthy();
+      expect(a.textContent, `nav label for #${id}`).toContain(heading.textContent);
+    }
+  });
+
+  it('the nav lands its target CLEAR of the sticky header, the way the Compendium does', async () => {
+    // App's ribbon is `position:'sticky', top:0` (App.jsx), so a bare fragment jump
+    // parks the section heading UNDERNEATH it. The Compendium answers this with
+    // scroll-margin-top (its ANCHOR_SCROLL_MARGIN, 84). The guide derives the same
+    // 84 from the chrome token it measures — CHROME.headerDesktop (60) + SP.xxl
+    // (24) — so the two surfaces cannot drift apart through a copied magic number.
+    const { container } = await renderGuide();
+    for (const u of unitsForView(ABOUT_GUIDE_VIEW)) {
+      const el = container.querySelector(`#${u.anchor}`);
+      expect(el.style.scrollMarginTop, `#${u.anchor} scroll margin`).toBe('84px');
+    }
+  });
+});
+
 describe('About split — pin 5: the About ▾ dropdown (DEFERRED, with reason)', () => {
   // DEFERRED — DOCUMENTED, NOT A BUG TO RE-FIND. Design §4/§5's fifth pin asserts
   // the dropdown's three items (What this Is · Practical Guide · Founders) are
   // present, ordered and routed. §6 sequences that work AFTER LD-5's dropdown
-  // machinery exists, and at this commit it does NOT: App's desktop ribbon renders
-  // one flat <button> per NAV cell with no menu layer at all. Building a
-  // one-off About menu here would fork the grammar LD-5 exists to create.
+  // machinery exists, and at this commit it does NOT: the desktop ribbon renders
+  // one flat <button> per NAV cell, and NO NAV-RIBBON DROPDOWN EXISTS.
+  // (Precisely that, not "no menu layer at all" — the estate does have real menus,
+  // e.g. components/AccountMenu.jsx and townMap/SettlementMapExportMenu.jsx. What
+  // is missing is the RIBBON dropdown grammar, which is exactly LD-5's subject.
+  // The ribbon's own file is moving under LD-2, so the claim is deliberately made
+  // about the ribbon rather than about whichever module currently holds it.)
+  // Building a one-off About menu here would fork the grammar LD-5 exists to create.
   //
   // What CAN be pinned today is that every item LD-5 will hang off About is
   // already a real, routable destination — so LD-5 becomes pure chrome work.

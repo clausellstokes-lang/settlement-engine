@@ -125,7 +125,8 @@ those). No engine surface, no flags, no goldens anywhere near this.
 >   `components/about/useAboutHashScroll.js` a translated deep link would land on
 >   the right page at the WRONG PLACE. The hook lands it on its section (instant,
 >   not smooth — the motion law); an unknown fragment is a no-op.
-> - **§5 PINS** — `tests/components/aboutSplit.test.jsx`, 25 tests: mapping
+> - **§5 PINS** — `tests/components/aboutSplit.test.jsx`, 29 tests (25 at the
+>   original landing; +4 for the §3 section nav ruled in below): mapping
 >   totality (against an INDEPENDENT census of the pre-split page), anchor
 >   survival in both halves (published-anchor contract ⟷ manifest ⟷ real DOM ids,
 >   the no-leak direction, and the arrival scroll), header parity, heading-tree
@@ -134,6 +135,44 @@ those). No engine surface, no flags, no goldens anywhere near this.
 >   version of the anchor pin was VACUOUS (the pages derive their ids from the
 >   manifest, so a corrupted anchor stayed green); the published-anchor literal
 >   table is the independent second truth that fixed it.
+>
+> **§3 THE IN-PAGE SECTION NAV — THE THIRD VERIFY-AT-BUILD, ANSWERED: THE
+> PATTERN EXISTS, SO THE `MAY` IS BUILT.** *(Chair ruling 2026-08-03, vetoable.)*
+> §3 permits a table of contents "IF the Compendium pattern has one (match, never
+> invent)". **It has one:** `src/components/compendium/CompendiumDashboard.jsx`
+> renders its catalogs as a grid of REAL, anchor-carrying hrefs — crawlable and
+> openable in a new tab, with the click doing in-page navigation (the pattern is
+> stated in that file's own comment at the `hubHref` helper). The Practical Guide
+> is a 387-line flat page carrying five sections, so the legibility law's glance
+> rung is exactly what it is missing. `HowToUse.jsx` now renders `SectionNav`
+> above its sections, at the Compendium's own measurements (auto-fill 220px
+> columns, gold left rule, serif label over a small secondary line), with its rows
+> derived from `aboutMapping.js` — the same manifest the section ids come from, so
+> the nav cannot list a section the page does not render nor miss one it does.
+> Two differences are forced by the surface rather than invented, and both are
+> recorded in the component's docstring: there is **no count** (a guide section has
+> no catalog number, and faking one is the invention §3 bars), and the **href is a
+> bare `#anchor`** (every target is on this page, so the fragment IS the real
+> crawlable URL, and being same-document by construction it cannot cost a reload —
+> which leaves the Compendium's preventDefault half nothing to do).
+>
+> **`AboutWhatThisIs` GETS NO NAV, AND THE REASON IS LENGTH, NOT SYMMETRY.** The
+> ruling asked for the same call there if its flat length were comparable. It is
+> not: the file is 53 lines and renders exactly TWO sections (`AboutManifesto`,
+> `CompareSection`). A table of contents longer than the page it indexes is
+> furniture, not legibility, so it is deliberately omitted — recorded here so the
+> asymmetry is not re-found as an oversight.
+>
+> **⊕ A REAL DEFECT THE NAV EXPOSED, FIXED IN THE SAME SLICE (disclosed, not
+> drift).** The desktop ribbon is `position:'sticky', top:0`, so ANY fragment
+> landing on these pages — a nav click, a translated `?tab=` deep link, or
+> `useAboutHashScroll`'s `scrollIntoView` — parked the section heading UNDERNEATH
+> the chrome. The shipped anchor-survival work had this latent already; the nav
+> would merely have made it obvious. The Compendium answers it with
+> `scroll-margin-top` (its `ANCHOR_SCROLL_MARGIN`, 84). `GuideSection` now carries
+> the same 84 **derived from the chrome token rather than copied** —
+> `CHROME.headerDesktop` (60) + `SP.xxl` (24) — so the two anchor surfaces share a
+> measurement instead of a magic number that could drift on one side only. Pinned.
 >
 > **⚠️ SUBSTRATE CORRECTION (the doc's VERIFY-AT-BUILD, answered).** §1's
 > "every old collapsible's deep-link anchor id" did not exist. The old
@@ -147,8 +186,17 @@ those). No engine surface, no flags, no goldens anywhere near this.
 >
 > **⛔ §4 NAV INTEGRATION — DEFERRED, DOCUMENTED, NOT A BUG TO RE-FIND.**
 > §6 sequences §4 after LD-5's dropdown machinery, and at this commit that
-> machinery does not exist: App's desktop ribbon renders one flat `<button>` per
-> NAV cell with no menu layer anywhere. Building a one-off About menu would fork
+> machinery does not exist: the desktop ribbon renders one flat `<button>` per
+> NAV cell, and **no NAV-RIBBON DROPDOWN exists** — which is LD-5's grammar.
+> *(CORRECTED 2026-08-03: this sentence originally read "with no menu layer
+> anywhere", which is false and would mislead LD-5's implementer into thinking
+> it must invent menu behaviour from nothing. The estate has real menus —
+> `src/components/AccountMenu.jsx` and `src/components/townMap/SettlementMapExportMenu.jsx`
+> are both live, and either may be worth reading for triple-mode/dismiss
+> behaviour. What is absent is specifically a dropdown IN THE NAV RIBBON. The
+> claim is made about the ribbon rather than about `App.jsx`, because LD-2 is
+> concurrently lifting the ribbon into `src/components/nav/NavRibbon.jsx`.)*
+> Building a one-off About menu would fork
 > the grammar LD-5 exists to create. What landed instead: the About nav cell
 > keeps its label and order-70 slot and now points at `/about/what-this-is`, and
 > all three future dropdown targets (What this Is · Practical Guide · Founders)

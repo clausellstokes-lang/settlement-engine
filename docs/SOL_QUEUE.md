@@ -139,7 +139,8 @@ volumes corrected @ 36862650 + fdf43790):
       `FABLE_VALIDATION_QUEUE.md`.
     - ⛔ **WHAT REMAINS IN THAT ANNEX IS §1 + §2 (30 pools) AND IT IS A
       DIFFERENT BUILD.** §1's 24 receipt-sentence pools are consumed by the five
-      registry-backed receipt functions in `eventProse.js`, each carrying a
+      registry-backed receipt functions in `src/domain/worldPulse/eventProse.js`
+      (NOT `src/domain/display/` — that tree holds the §3/§4 phrase pools), each carrying a
       PARALLEL `requiredSlots` array — **a pool grown without its parallel row
       THROWS at the new index** — so wiring note LEG-3's walker
       (`pool.length === requiredSlots.length`, every registry-backed kind) is a

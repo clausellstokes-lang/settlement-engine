@@ -170,7 +170,13 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/build/injectGalleryMeta.test.js': 7,
   'tests/build/metaShell.test.js': 5,
   'tests/build/ogImageRaster.test.js': 2,
-  'tests/build/sitemap.test.js': 5,
+  // LOWERED 5 → 2 (2026-08-03, the About-split repair tail). This walker's own
+  // inventory-honesty scan now measures 2 un-anchored sites here against a frozen
+  // ceiling of 5, so three were anchored by earlier work; the row is lowered on
+  // that measurement, not on a story about which commit did it. Banking the win is
+  // mandatory rather than optional — the roster is exact-equality, so leaving a
+  // stale ceiling reds the inventory-honesty test until someone lowers it.
+  'tests/build/sitemap.test.js': 2,
   'tests/build/statusPageSelfContained.test.js': 5,
   'tests/build/surveyorPanelsLazy.test.js': 2,
   'tests/build/townScene3dLazy.test.js': 3,

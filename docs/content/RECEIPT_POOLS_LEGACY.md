@@ -47,7 +47,8 @@ cannot drift into different selection behavior. Enforced by
 
 **WHY §1 AND §2 ARE A DIFFERENT LANE, NOT AN OVERSIGHT.** §3/§4 are read by ONE pure
 selector that takes no slots. §1's pools are consumed by the five registry-backed receipt
-functions in `eventProse.js`, each carrying a PARALLEL `requiredSlots` array — *a pool
+functions in `src/domain/worldPulse/eventProse.js`, each carrying a PARALLEL
+`requiredSlots` array — *a pool
 grown without its parallel row throws at the new index* (retrofit disclosure §4) — and
 wiring note LEG-3 additionally requires a new walker asserting
 `pool.length === requiredSlots.length`. §2's are `{headline, summary, reasons}` triples
@@ -98,7 +99,8 @@ and the difference is the whole of this section.
    later index. Append; never insert, never re-sort.
 4. **`requiredSlots` IS PARALLEL AND MUST GROW WITH THE POOL.** The §1a/§1b/§1d/§1e/§1f
    pools are consumed by `warCoalitionReceipt` / `warRulingReceipt` /
-   `dispositionReceipt` / `lineageReceipt` / `warCostReceipt` (`eventProse.js`), each
+   `dispositionReceipt` / `lineageReceipt` / `warCostReceipt`
+   (`src/domain/worldPulse/eventProse.js`), each
    of which indexes a parallel `requiredSlots` array by template index and filters to
    templates whose slots the caller actually holds (the NO-FABRICATION rule). **Every
    variant added to a registry-backed pool below carries its own `requiredSlots`
@@ -122,7 +124,7 @@ and only two of them are under the floor.
 
 | Axis | Where it lives | Register | Under the floor? |
 |---|---|---|---|
-| **THE TELLING — receipt sentence** | `WAR_RECEIPTS` and friends (`eventProse.js`), the `summary` pools of `UPSWING_NEWS` / `NPC_GOAL_NEWS` | one to two clauses, chronicle voice | **YES** (§1, §2) |
+| **THE TELLING — receipt sentence** | `WAR_RECEIPTS` and friends (`src/domain/worldPulse/eventProse.js`), the `summary` pools of `UPSWING_NEWS` / `NPC_GOAL_NEWS` | one to two clauses, chronicle voice | **YES** (§1, §2) |
 | **THE TELLING — subject phrase** | `WHAT_PHRASES` / `whatPhrase()` (`settlementRumors.js`) | a lowercase NOUN PHRASE, no terminal stop | **YES** (§3, §4) |
 | **THE NAME — label / gloss** | `CONDITION_ARCHETYPE_TEMPLATES[k].label` and `.description` (`activeConditions.js`), `STRESSOR_CATALOG[k].label`, `SECONDARY_RELATIONSHIP_STATUSES[k].label` | a Title-case chip name; a one-sentence explainer | **NO — see J-LEG-1** |
 
@@ -183,7 +185,7 @@ without the phrase carrying a name. R2 and R3 pools carry the corpus slots.
 interpolate a single `x` object. The transformation is exactly one substitution in
 each direction and nothing else:
 
-| This file | `eventProse.js` | This file | `eventProse.js` |
+| This file | `src/domain/worldPulse/eventProse.js` | This file | `src/domain/worldPulse/eventProse.js` |
 |---|---|---|---|
 | `{settlement}` | `${x.settlement}` (in §2: `${x.name}`) | `{band}` | `${x.band}` |
 | `{counterpart}` | `${x.counterpart}` | `{good}` | `${x.good}` |

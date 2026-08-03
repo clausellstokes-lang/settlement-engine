@@ -410,7 +410,8 @@ closed and are ruled out of this lane below. Six rulings.
 - **J-LEG-WIRE-12 — THE LANE CLOSES R1, NOT "THE RETROFIT", AND THE BOUNDARY IS THE
   CONSUMER.** The brief said the legacy retrofit closes. It closes for §3 and §4, which
   share one pure selector (`whatPhrase`), take no slots, and are proved by one harness.
-  §1 is consumed by five REGISTRY-BACKED receipt functions in `eventProse.js`, each
+  §1 is consumed by five REGISTRY-BACKED receipt functions in
+  `src/domain/worldPulse/eventProse.js`, each
   indexing a PARALLEL `requiredSlots` array — the annex's own retrofit disclosure §4 says
   a pool grown without its parallel row THROWS at the new index — and wiring note LEG-3
   demands a new walker for that invariant before any of it lights. §2 is
