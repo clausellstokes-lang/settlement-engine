@@ -1239,3 +1239,108 @@ is the correct 35 + 30.
 
 Recorded here rather than left to be re-found, because a stale number inside an acceptance
 record is the same class this lane was built to correct.
+
+---
+
+## WR-9d — THE COLLECTOR (the instrument finally counts a real war)
+
+**Landed:** `scripts/audit/war-convergence-collector.mjs` (NEW), `scripts/audit/whole-world-soak.mjs`,
+`src/domain/certification/warConvergenceContract.js`,
+`src/domain/certification/behavioralContract.js` (net **+1** effective line, 795 -> 796, budget
+was +4), `tests/ops/warConvergenceCollector.test.js` (NEW),
+`tests/ops/storyMixDivergence.test.js`, `tests/domain/behavioralCertificationContract.test.js`.
+
+WR-9 had a classifier, five envelopes and six force cells, and every one of them read
+`createEmptyWarConvergenceObservation()`. Two facts measured at `cb1ea74f` say how dark it was:
+`foldWarEndings` had **no production consumer at all** (its only callers were its own test), and
+`UNCLASSIFIED_MAX_SHARE` appeared **exactly once in the whole repository** — its own declaration.
+Both are now live.
+
+### ⚠️⚠️ THE CHAIR'S CENSUS DESIGN WAS BUILT, MEASURED WRONG, AND REPLACED (J-WR9D-2, VETOABLE)
+
+The brief's collector walks the year result and calls a war closed when its deployment key
+disappears from the year-boundary ledger. That was built first. **On the soak's own fixture it
+reports an empty world:** the year-end ledger is empty in every one of ten years while the run
+selects fifteen `strategy_deploy` outcomes, because these wars open and close INSIDE a single
+year (measured opens/closes at ticks 7->9, 10->13, 21->24). A year-boundary census is blind
+precisely to SHORT wars — the population the "most wars short" envelope is entirely about.
+
+The census therefore reads the OUTCOME STREAM, which `advanceInterval` already accumulates
+across every interior tick. Durations became tick-exact rather than year-rounded, and the
+`--years 4 --settlements 4 --seed w0-soak` cell went from **0 counted wars to 3**. The mutant
+that reverts the census to the ledger reds 6 of 16 pins.
+
+Pairs are recovered by **re-minting the id prefix for each known ordered pair**, never by
+splitting on `.` — settlement ids may contain dots, and splitting a published id is the
+mis-attribution hazard `warEndingClassifier`'s own header forbids. `stablePart` is lossy, so a
+realm whose settlements collapse onto one stable part is reported AMBIGUOUS and counted with an
+unmeasured duration rather than attributed to a guess.
+
+### OBSERVATION v4 -> v5, under the module's own exact-bump law (vetoable)
+
+- `endingsUnclassified` — the closed-reason histogram. Without it the endings envelope cannot
+  tell "no war closed" from "every close was unreadable", which is the WR-9r blindness one
+  dimension over. A new cell, `war_convergence.endings_classified`, grades it and is the
+  endings-side twin of `duration_measured`; it is what makes `UNCLASSIFIED_MAX_SHARE` live.
+- `decidingTermSampling` — the declared 1-in-52 sample, carried IN THE RECEIPT as the ruling
+  requires. The validator refuses a receipt that counted deciding terms while naming no sample.
+
+Orphan census re-measured, not asserted: `git ls-files artifacts` is EMPTY and
+`grep -l warConvergence -r artifacts/` returns NOTHING, so no on-disk observation was orphaned.
+
+### RULINGS DISCHARGED
+
+- **N3 (both halves, mutant-proven).** Every counted war lands in exactly one duration cell and
+  every closed war in exactly one ending cell or one unclassified reason. Both identities are
+  published as booleans the soak asserts. M-1 (skip unreadable closes) reds the duration pin;
+  M-2 (drop the unclassified tally) reds the endings pin plus the razing-road diagnosis.
+- **CR-WR9-C.** `evaluateWarConvergenceInstrumentation` now grades every INSTRUMENTED horizon —
+  release AND research — via a third argument, because `behavioralContract` owns
+  `CERTIFICATION_HORIZONS` and importing it back would close a module cycle. The horizon wall is
+  keyed per case at COLLECTION time: a war is unresolved only if it is still alive in the last
+  year THAT case ran, so a 100-year and a 300-year case each answer against their own clock with
+  no horizon constant in the grader.
+- The two `storyMixDivergence` source pins were repaired IN THE SAME EDIT, and widened: both the
+  per-year observer and the fold are pinned, plus a `not.toContain` on the old empty-observation
+  call, so a soak that imported the collector without driving it now reds.
+
+### THE VERIFICATION CELL, QUOTED (`--years 4 --settlements 4 --seed w0-soak`)
+
+```
+counted wars 3 = closed 3 + alive at horizon 0
+duration histogram {"short":3,"long":0,"generational":0,"unresolved":0,"unmeasured":0} (sum 3)
+endings mix   {all eight keys 0}
+endings unclassified {"no_terminal_evidence":3} (3 of 3 closes)
+deciding terms {all four 0} — 0 samples, 1-in-52
+PASS every counted war lands in exactly one duration band — sum 3 === counted 3
+PASS every closed war lands in exactly one ending or one unclassified reason — 0 + 3 === 3
+```
+
+**THE MIX IS HONESTLY EMPTY AND THAT IS THE FINDING, NOT A DEFECT.** At HEAD's flag state the
+engine closes wars by feasibility collapse (`siege_abandoned`), which is a war ending
+PHYSICALLY, not on any of WR-9's eight roads. Mapping it onto `exhaustion` was refused: that key
+requires the `exhaustion` PEACE REASON, and inventing it would plant exactly the false receipt
+`warEndingClassifier`'s header exists to prevent. Deciding terms are 0 because
+`warTerminationEnabled` is false in `full_simulation`. Five of the eight ending keys are
+reachable only through channels no shipped preset lights, and `CHANNEL_COVERAGE` names each one
+with its reason rather than letting an unmeasurable zero read as a measurement.
+
+### OWNER-HELD / DEFERRED — DOCUMENTED, NOT DROPPED
+
+- The acceptance VERDICT itself, the soak redo, and the `conquestDoctrineEnabled` cert-row arm.
+  The flag certification rows are deliberately left unknown/UNOBSERVED — that arm is owner-held
+  and was not this wave's — so the oracle still honestly refuses the flag-coverage claim.
+- `forceEvidence` is NOT filled; the six force cells keep answering UNOBSERVED/`no_evidence_carried`,
+  which is the honest answer WR-9c designed. The substrate was MEASURED so the next wave starts
+  from a fact rather than a search: the war-termination receipt already carries
+  `homeFrontDurationBand` and `homeFrontComponents` (force 1's exact address), but it rides the
+  same flag-gated 1-in-52 pulse-record sample.
+- The deciding-term sampling stays declared rather than cured; curing it needs an engine surface
+  this wave may not add.
+
+### PRE-EXISTING REDS, ATTRIBUTED AND NOT THIS LANE'S
+
+`tests/ops/migrationRehearsal.test.js` fails with "the wave manifest ends at 194, but the
+repository head is 195". Migration 195 is on disk, `git status -- supabase/` is EMPTY for this
+lane, and the file imports none of this lane's seven files (grep count 0). Same family as the
+`deployRunbookFreshness` / `migrationRollbackDiscipline` reds WR-9c already recorded.
