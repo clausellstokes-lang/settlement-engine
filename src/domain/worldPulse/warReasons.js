@@ -72,6 +72,10 @@ import { makeSacredClaimRead } from './sacredClaim.js';
 // WR-3 lineage_claim + kinship_bond: one durable founding-edge read, projected
 // in both directions. Exact-dark unless lineageClaimEnabled === true.
 import { makeLineageClaimRead } from './lineageClaim.js';
+// WR-8 R2: the atrocity casus's PRODUCER, at last. The reader assembles what each
+// court BELIEVES it has heard about razings off the public feed at news speed; it
+// writes nothing and persists nothing. Absent feed ⇒ a frozen empty ⇒ score 0.
+import { makeBelievedRazings } from './believedRazings.js';
 import { lineageWarTransitionNewsEntries } from './lineageNews.js';
 // D7 THE REFRAME LAYER (DESIGN_SIM_DEPTH_R2 §D7): the reframe interpretation mover runs at the
 // TOP of advanceWarReasons behind its OWN gate (reframeActive), and its dark-aid read feeds the
@@ -429,8 +433,13 @@ export function scoreAllianceObligation({ active = false } = {}) {
  * byte-identical. The scorer is registered FIRST because the taxonomy is
  * walker-enforced for totality and will not accept a member without one.
  *
+ * The list is typed READONLY because this scorer only ever reads it: the producer
+ * (believedRazings.js) hands back frozen arrays so "nothing is believed" can be
+ * byte-neutral by identity, and a mutable parameter type would have forced that
+ * producer to copy a frozen empty on every one of N² pair reads.
+ *
  * @param {{
- *   razings?: Array<{ razerId?: unknown, victimName?: unknown, tick?: unknown }>,
+ *   razings?: ReadonlyArray<{ razerId?: unknown, victimName?: unknown, tick?: unknown }>,
  *   razerId?: unknown, tick?: unknown,
  * }} args  razings the OBSERVER BELIEVES occurred; razerId the court being judged
  * @returns {{ score: number, receipt: string }}
@@ -718,10 +727,13 @@ export function warReasonsFor(worldState, fromId, toId) {
  *           worldState: Record<string, unknown>,
  *           graph?: { edges?: Array<Record<string, unknown>> } | null,
  *           pIndex?: Record<string, unknown> | null,
- *           tick: number }} args
+ *           tick: number,
+ *           wizardNews?: unknown }} args  wizardNews is the PUBLIC feed, read
+ *   only — the believed-razing model's whole substrate. Absent ⇒ no razing is
+ *   believed anywhere ⇒ the atrocity casus scores 0 ⇒ byte-identical.
  * @returns {WarReasonsAdvanceResult}
  */
-export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, tick }) {
+export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, tick, wizardNews = null }) {
   // ── D7 THE REFRAME LAYER runs FIRST, behind its OWN gate (reframeActive), independent of the
   // peace engine: its deterministic transition mover folds the interpretation ledger, and the
   // reframe casus scorers below read THIS tick's fresh reads (facts frozen, meaning derived).
@@ -774,6 +786,10 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
   // The predation + faith contexts, built ONCE per pass (both memoize their per-settlement
   // truth reads inside; both are cheap no-ops when their own substrate is dark).
   const opportunismRead = makeOpportunismRead({ snapshot, worldState: ws });
+  // WR-8 R2: what each court believes it has heard about razings, built ONCE per
+  // pass off the public feed (the makeHegemonyFear idiom). A world with no razing
+  // entry hands back the same frozen empty for every pair ⇒ byte-identical.
+  const believedRazings = makeBelievedRazings({ worldState: ws, snapshot, wizardNews, tick });
   const sacredClaimRead = makeSacredClaimRead({ snapshot, worldState: ws });
   const lineageClaimRead = makeLineageClaimRead({ snapshot, worldState: ws, graph });
 
@@ -902,6 +918,14 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
       // anchor.  The cause lives only while that exact caller/root episode and
       // alliance contract survive; no membership object is consulted.
       { type: 'alliance_obligation', ...allianceObligationReason(ws, snapshot, fromId, toId) },
+      // WR-8 R2 / CR-WR8-C — THE ATROCITY CASUS, PRODUCED AT LAST. fromId is the
+      // OBSERVER and toId is the ACCUSED: "what have I heard that this court did?"
+      // The list is what fromId believes, arriving at news speed; the scorer never
+      // consults world state. 0 in every world that has not burned a town.
+      {
+        type: 'atrocity_answer',
+        ...scoreAtrocityAnswer({ razings: believedRazings.believedFor(fromId, toId), razerId: toId, tick }),
+      },
     ];
 
     const previousSuppressionSinceTick = prevLedger?.[key]?.memo?.lineageSuppressionSinceTick;

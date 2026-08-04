@@ -100,6 +100,7 @@ import {
   razedInstitutions,
   razingDeparture,
   razingSpoils,
+  razingOutcomeIdFor,
 } from './razing.js';
 // THE BELIEF STAGE, READ-ONLY (CR-WR8-G). Readers only, and the arrow never
 // reverses — see the direction law above.
@@ -1020,7 +1021,16 @@ export function razingSiegeEmission({
   if (!plan) return null;
   const name = text(razerName) || razer;
   const victimLabel = text(victimName) || victim;
-  const outcomeId = causeRef.replace(/^razing\./, 'world_outcome.razing.');
+  // ⚠️ THE ID CARRIES THE ROAD, AND IT IS SPELLED BY THE LAW LEAF (WR-8 R2). The
+  // observer's believed-razing read model re-mints this exact string from its own
+  // candidate and compares for EQUALITY — so mint and reconstruction share ONE
+  // function rather than a format string copied into a reader. `causeRef` keeps
+  // its own (road-free) spelling: it addresses the institution stamps and edge
+  // flips, which are facts about the town rather than about who is accused.
+  const outcomeId = razingOutcomeIdFor({ road: plan.road, razerId: razer, victimId: victim, tick });
+  // An emission whose event cannot be named cannot be attributed, and an
+  // unattributable atrocity is worse than none: it is one nobody can be tried for.
+  if (!outcomeId) return null;
   // THE LEDGER WRITE, AS A PATCH THE KERNEL SPREADS (see razingLicensePatch).
   // The MINT reads the accumulating ledger (so a second burning on the same
   // tick composes rather than replaces); every DECISION above read the tick's

@@ -2610,7 +2610,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       worldState: memoryState,
       graph: applied.regionalGraph,
       pIndex,
-      tick: worldState.tick,
+      tick: worldState.tick, wizardNews,
     });
     if (warCausal.changed) memoryState = warCausal.worldState;
     if (warCausal.newsEntries.length) {

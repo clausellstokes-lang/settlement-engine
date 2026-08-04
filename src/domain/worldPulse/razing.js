@@ -151,6 +151,43 @@
 export const RAZING_ROADS = Object.freeze(['initiation', 'vengeance']);
 
 /**
+ * THE RAZING OUTCOME ID, SPELLED ONCE (WR-8 amendment R2, the believed-razing
+ * casus). The emission MINTS this id and the observer's read model RECONSTRUCTS
+ * it — and both call this function, because the alternative is a format string
+ * hand-copied into a reader, which is the writer/reader payload-spelling class
+ * this codebase has already been bitten by. One spelling cannot drift from
+ * itself.
+ *
+ * ⚠️⚠️ ATTRIBUTION IS BY PROOF, NOT BY PARSING, AND THE SHAPE IS WHY. Settlement
+ * ids may contain dots, so splitting this id on `.` cannot reliably recover the
+ * razer — a reader that tried would mis-attribute an atrocity, which through R2's
+ * license machinery is a warrant to burn a city. The reader instead RE-MINTS the
+ * id from a candidate (accused, victim, tick, road) and compares for EQUALITY.
+ * A candidate that does not reconstruct exactly is not the razer, whatever its
+ * id contains.
+ *
+ * ⚠️ THE ROAD RIDES IN THE ID, and that is the whole reason it was added. The
+ * JUST razing — a vengeance answer executed under a license R2 already granted —
+ * must NOT raise a fresh atrocity casus against the avenger, or the world's moral
+ * ledger becomes a perpetual-motion machine: every answer manufactures the next
+ * grievance. Carrying the road makes that polarity decidable BY RECONSTRUCTION
+ * over the closed `RAZING_ROADS` vocabulary, with no second surface to persist
+ * and nothing for a reader to look up.
+ *
+ * @param {{ road?: unknown, razerId?: unknown, victimId?: unknown, tick?: unknown }} args
+ * @returns {string} the id, or '' when the road is not one of RAZING_ROADS or an
+ *   endpoint is missing — an unspellable id is never guessed at.
+ */
+export function razingOutcomeIdFor({ road, razerId, victimId, tick } = {}) {
+  const lane = String(road ?? '');
+  if (!RAZING_ROADS.includes(lane)) return '';
+  const razer = String(razerId ?? '');
+  const victim = String(victimId ?? '');
+  if (!razer || !victim) return '';
+  return `world_outcome.razing.${lane}.${razer}.${victim}.${Math.trunc(Number(tick) || 0)}`;
+}
+
+/**
  * Why a razing did not happen, as a closed vocabulary. Every refusal below names
  * exactly one of these, so a pin can assert the REASON and not merely the
  * refusal — a gate that refuses for the wrong reason is a gate that will open
