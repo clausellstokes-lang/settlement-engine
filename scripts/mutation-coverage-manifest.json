@@ -220,6 +220,10 @@
    "kind": "rationale",
    "rationale": "Closed declarative design substrate: exact-key, exact-value, deep-freeze, contrast, live-owner, and cross-module identity assertions import both authorities directly. The report walker carries executed hostile fixtures separately; a transient mutation of the shared token source would repeat these exact equalities while risking concurrent visual work."
   },
+  "tests/design/compositedBarAA.test.js": {
+   "kind": "rationale",
+   "rationale": "Lane PB piece 4. The invariant is measured, not asserted: the file rasterises the real grain tile, takes the strongest alpha anywhere in it, composites that over SHAFT_BODY and requires every rider on the header bar to clear its own WCAG floor. A planted regression in the sweep script would have to be a change to the AUTHORED texture, which is the very thing under measurement, so the plant and the target are the same edit. Executed hostile mutants were run in-lane instead and their results are recorded in the commit that landed this file: GRAIN_AMP doubled 0.24 -> 0.5 reds 2 of 6; the color-interpolation-filters declaration removed reds 1 of 6; the feColorMatrix re-typed so it bypasses GRAIN_AMP reds 1 of 6; baseline 6 of 6 green after each restore. The file also carries its own non-vacuity controls: the raster must be non-empty, the wash must be non-zero, and the composited floor must be strictly BELOW SHAFT_BODY, which is what stops it degenerating into a restatement of contrast.test.js."
+  },
   "tests/design/contrast.test.js": {
    "kind": "uncovered"
   },
@@ -228,6 +232,10 @@
   },
   "tests/design/deepCraftKillList.test.js": {
    "kind": "uncovered"
+  },
+  "tests/design/makerPlate.test.jsx": {
+   "kind": "rationale",
+   "rationale": "Lane PB piece 3. A closed declarative brand substrate plus a rendered-structure walk: the rule-of-tincture palette split, the bevel/device geometric disjointness, the containing-block ancestor walk, the feTurbulence degenerate-seed derivation and the seal's counter-is-a-hole claim all read the authored tokens and the rendered DOM directly. Its mutation targets are the brand components themselves, which are the subject of the assertions, so a sweep plant would be indistinguishable from editing the thing being proved. Executed hostile mutants were run in-lane and recorded in the commit that landed this file: the seal returned to BESIDE the glyph, a relief tone made to carry contrast, a degenerate seed, the grit amplitude uncapped, the filter colour space undeclared, the counter's even-odd fill removed, and the wax lightened to the mid red that fails as text — each reds the pin that owns it, baseline 24 of 24 green after each restore. The file carries its own negative controls inline (five known-degenerate seeds must be reported degenerate; a module that does not inline the device must not contain its paths)."
   },
   "tests/design/elevation.test.js": {
    "kind": "uncovered"
