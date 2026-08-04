@@ -530,3 +530,158 @@ describe('war layer — mutual-siege numeric convergence', () => {
     expect(firstResolution([...saves].reverse())).toEqual(firstResolution(saves));
   });
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// WR-8 AMENDMENT R — THE THIRD INTENT, AT ITS ONE MOUTH (lane WZ-2).
+//
+// Two slices of WR-8 shipped DARK because `warDeployment.js` had no room for the
+// fork. It has room now, and this is the fork executed: the SAME fixture that
+// conquers above burns instead, and the razing REPLACES the power transfer
+// rather than riding beside it. Every assertion here is driven through the real
+// `evaluateWarLayer`, because the whole claim is about what the war layer emits.
+// ─────────────────────────────────────────────────────────────────────────────
+describe('WR-8 R — the razing fork at the conquest power-transfer site', () => {
+  /** Every prerequisite flag WR-8 lights behind, spelled where the fixture reads it. */
+  const DOCTRINE_LIT = Object.freeze({
+    warLayerEnabled: true,
+    warTerminationEnabled: true,
+    peaceEngineEnabled: true,
+    dispositionChannelsEnabled: true,
+    coalitionLedgerEnabled: true,
+    envoyDiplomacyEnabled: true,
+    demographicsEnabled: true,
+    conquestDoctrineEnabled: true,
+  });
+
+  /**
+   * The conquering fixture, plus everything the razing law requires and nothing
+   * it does not: an openly hostile border with the resentment above hostility's
+   * own floor, ONE maxed live grievance (CR-WR8-B-CLARIFIED), and a besieger
+   * whose derived alignment is malicious (an evil patron and a war-scarred
+   * ledger — the razer's nature is READ, never handed in).
+   */
+  function razingFixture() {
+    const strong = attacker('strong', 'Ironhold');
+    strong.settlement.config.primaryDeitySnapshot = { name: 'The Iron Maw', alignmentAxis: 'evil' };
+    strong.settlement.institutions = [];
+    const weak = victim('weak', 'Thornmere');
+    weak.settlement.institutions = [
+      { id: 'temple', name: 'Temple of the Quiet Road' },
+      { id: 'granary', name: 'The Granary', protectedFromSack: true },
+    ];
+    const edges = {
+      settlementIds: ['strong', 'weak'],
+      edges: [{ id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' }],
+      relationshipStates: {
+        'edge.strong.weak': { relationshipType: 'hostile', resentment: 0.95, trust: 0.02, fear: 0.5 },
+      },
+    };
+    return {
+      saves: [strong, weak],
+      edges,
+      channels: [{ type: 'war_front', from: 'strong', to: 'weak', status: 'confirmed' }],
+      extraState: {
+        deployments: { strong: { targetId: 'weak', sinceTick: 1, role: 'siege' } },
+        // The scar that makes the court malicious through the real alignment read.
+        warExhaustion: { strong: 1 },
+        spatialLedgers: {
+          warReasons: {
+            'strong>weak': {
+              reasons: {
+                grievance: {
+                  type: 'grievance', score: 1, tick: 4,
+                  receipt: 'Thornmere burned Ironhold’s daughter-village and never answered for it',
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+  }
+
+  /** Drive the real war layer until the siege resolves; return that outcome. */
+  function firstSiegeResolution(rulesPatch) {
+    const { saves, edges, channels, extraState } = razingFixture();
+    for (let tick = 5; tick < 60; tick += 1) {
+      const campaign = warCampaign(rulesPatch, { edges, channels, extraState });
+      const snap = snapshotFor(campaign, saves);
+      const war = evaluateWarLayer({
+        snapshot: snap, worldState: snap.worldState, rng: createPRNG('war-seed'),
+        tick, now: NOW, rules: { warLayerEnabled: true },
+      });
+      const resolution = war.outcomes.find(
+        (o) => o.candidateType === 'conquest' || o.candidateType === 'razing',
+      );
+      if (resolution) return { resolution, war, tick };
+    }
+    return null;
+  }
+
+  test('THE FORK — a wicked victor at the extreme BURNS, and mints no power transfer', () => {
+    const found = firstSiegeResolution(DOCTRINE_LIT);
+    expect(found).not.toBeNull();
+    const { resolution, war } = /** @type {{ resolution: any, war: any }} */ (found);
+    expect(resolution.candidateType).toBe('razing');
+    // LAW 6 — the signature. No occupation, and therefore no power transfer.
+    expect(resolution.type).toBe('condition');
+    expect(resolution.powerTransfer).toBeUndefined();
+    expect(resolution.razing.departure.occupation).toBeNull();
+    expect(resolution.razing.departure.garrison).toBeNull();
+    expect(resolution.razing.departure.terms).toBeNull();
+    expect(resolution.summary).toContain('rode home');
+    // The road is the WICKED one: no license was minted or spent.
+    expect(resolution.razing.road).toBe('initiation');
+    expect(resolution.razing.licenseId).toBeNull();
+    // The conserved sack rides the outcome, and takes people from the victim ONLY —
+    // a razing carries no captives home.
+    expect(resolution.populationDeltas).toHaveLength(1);
+    expect(resolution.populationDeltas[0].saveId).toBe('weak');
+    expect(resolution.populationDeltas[0].delta).toBeLessThan(0);
+    // The institution stamps ride it too, and the protected one is reported unstamped.
+    const byId = Object.fromEntries(resolution.razing.institutions.map((i) => [i.id, i]));
+    expect(byId.temple.impairment.type).toBe('capacity');
+    expect(byId.granary.impairment).toBeNull();
+    expect(byId.granary.protected).toBe(true);
+    // The siege still RESOLVED: the army came home and the front retired.
+    expect(war.deployments.strong).toBeUndefined();
+    expect(war.resolvedDeployments.map((r) => r.outcome)).toEqual(['razing']);
+    expect(war.retiredChannels.length).toBeGreaterThan(0);
+  });
+
+  test('NEGATIVE CONTROL — the SAME fixture with the doctrine DARK conquers exactly as it always did', () => {
+    // The dormancy proof that matters: not "nothing happened", but "the OLD
+    // thing happened, unchanged". Every campaign that has ever run is this one.
+    const found = firstSiegeResolution({});
+    expect(found).not.toBeNull();
+    const { resolution, war } = /** @type {{ resolution: any, war: any }} */ (found);
+    expect(resolution.candidateType).toBe('conquest');
+    expect(resolution.type).toBe('power_transfer');
+    expect(resolution.powerTransfer.toPowerName).toBe('Ironhold occupation authority');
+    expect(resolution.razing).toBeUndefined();
+    expect(war.resolvedDeployments.map((r) => r.outcome)).toEqual(['conquest']);
+  });
+
+  test('NEGATIVE CONTROL — lit, but the quarrel is merely bad: the victor holds the walls', () => {
+    // The gate the amendment says must pin hardest. Same lit world, same wicked
+    // court, one conjunct removed (the border is a rivalry rather than open
+    // hostility) — and the acquisition ladder is back.
+    const { saves, edges, channels, extraState } = razingFixture();
+    edges.edges[0].relationshipType = 'rival';
+    edges.relationshipStates['edge.strong.weak'].relationshipType = 'rival';
+    let resolution = null;
+    for (let tick = 5; tick < 60 && !resolution; tick += 1) {
+      const campaign = warCampaign(DOCTRINE_LIT, { edges, channels, extraState });
+      const snap = snapshotFor(campaign, saves);
+      const war = evaluateWarLayer({
+        snapshot: snap, worldState: snap.worldState, rng: createPRNG('war-seed'),
+        tick, now: NOW, rules: { warLayerEnabled: true },
+      });
+      resolution = war.outcomes.find(
+        (o) => o.candidateType === 'conquest' || o.candidateType === 'razing',
+      ) || null;
+    }
+    expect(resolution).not.toBeNull();
+    expect(/** @type {any} */ (resolution).candidateType).toBe('conquest');
+  });
+});

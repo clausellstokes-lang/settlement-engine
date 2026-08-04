@@ -55,6 +55,10 @@ import { applyHomeWarCosts } from './warHomeCosts.js';
 // The fourth leaf: WR-6's refusal aftermath. It BUILDS the coalition_refused outcome
 // and cannot push one — the head owns every push.
 import { buildCoalitionRefusalOutcome } from './warCoalitionRefusal.js';
+// WR-8 amendment R — THE THIRD INTENT. The razing's ONE mouth is the conquest
+// power-transfer site below; this is the only import of it anywhere in `src`,
+// which is what makes "the razing has one mouth" a fact rather than a rule.
+import { razingSiegeEmission } from './razingExecution.js';
 // The fifth leaf: the stateful army RECORD at its two creation points, and the
 // conserved sack arithmetic. Builds records and returns numbers; mints nothing.
 import { seedDeploymentState, ensureStatefulRecord, computeSackTransfer } from './warArmyRecord.js';
@@ -700,20 +704,51 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     const losers = besiegers.filter(id => id !== occupierId).map(id => settlementNameFor(id));
     const coalitionStrength01 = clamp01(verdict.coalitionCurrent / 100);
 
+    const conqueredSettlement = snapshot?.byId?.get?.(targetId)?.settlement;
+    const victorSettlement = snapshot?.byId?.get?.(occupierId)?.settlement;
+
+    // ── WR-8 AMENDMENT R — THE THIRD INTENT, AND THE ONE PLACE IT CAN BE ASKED.
+    // N3 named two goals a victor can hold: TAKE IT or PRICE IT. R adds PUNISH
+    // IT, and the only moment the question is answerable is the one below: the
+    // siege has just fallen and nothing has been minted yet.
+    //
+    // ⚠️ THE RAZING REPLACES THE CONQUEST; IT DOES NOT RIDE IT. LAW 6 is the
+    // amendment's signature — "no occupation record, no garrison, no vassal
+    // ledger, no terms" — so a razed town must not ALSO mint the power transfer
+    // that hands it to an occupation authority. One or the other, per siege.
+    //
+    // ⚠️ DORMANCY IS STRUCTURAL, NOT A FLAG READ HERE. `razingSiegeEmission`
+    // returns null unless all eight conquest-doctrine flags are lit (none of
+    // which has a DEFAULT_SIMULATION_RULES entry), and null again in any lit
+    // world whose law refused. Every campaign that has ever run takes the
+    // `else` arm below, byte-identically.
+    const razed = razingSiegeEmission({
+      worldState,
+      snapshot,
+      razerId: occupierId,
+      victimId: targetId,
+      razerName: occupierName,
+      victimName: targetName,
+      tick,
+      population: conqueredSettlement?.population,
+      namedCastCount: (conqueredSettlement?.npcs || []).length,
+      institutions: conqueredSettlement?.institutions || [],
+      movableWealth: Number(conqueredSettlement?.economicState?.wealthIndex) || 0,
+    });
+
     // P3 sack & forage: a stormed town is pillaged. The deltas RIDE the conquest outcome
     // (not a separate emission) so a dismissed / deferred conquest — "the takeover didn't
     // stick; the armies disperse" — withholds the sack atomically, leaving no phantom
     // population loss. Flag-off ⇒ sack is null ⇒ NO populationDeltas key is added (the
     // conquest outcome is byte-identical). The transfer is conserved with a war-dead sink.
-    const sack = warForageEnabled
+    // A RAZED town is not sacked twice: the razing carries its own conserved sack.
+    const sack = warForageEnabled && !razed
       ? computeSackTransfer(snapshot?.byId?.get?.(targetId)?.settlement?.population)
       : null;
     // Granary loot: the same sack empties the conquered stores into the victor's, a
     // conserved storageMonths transfer (see computeSackFoodTransfer). Rides the conquest
     // outcome like the population sack ⇒ atomic with defer/dismiss; null ⇒ no key added.
-    const conqueredSettlement = snapshot?.byId?.get?.(targetId)?.settlement;
-    const victorSettlement = snapshot?.byId?.get?.(occupierId)?.settlement;
-    const foodSack = warForageEnabled && conqueredSettlement && victorSettlement
+    const foodSack = warForageEnabled && !razed && conqueredSettlement && victorSettlement
       ? computeSackFoodTransfer({
         conqueredStorageMonths: conqueredSettlement?.economicState?.foodSecurity?.storageMonths,
         conqueredPopulation: conqueredSettlement?.population,
@@ -723,7 +758,8 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       })
       : null;
 
-    outcomes.push({
+    // THE FORK. A razed town mints no power transfer — the victor rode home.
+    outcomes.push(razed ? razed.outcome : {
       id: `world_outcome.conquest.${stablePart(targetId)}.${tick}`,
       type: 'power_transfer',
       candidateType: 'conquest',
@@ -781,7 +817,14 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // conquests at once or already carried an unrelated win this tick. sourceConquestId is
     // additive metadata: applyDispositionDeltas reads only {id, outcome, magnitude}, so a
     // committed (un-dismissed) delta carries it harmlessly.
-    const conquestId = `world_outcome.conquest.${stablePart(targetId)}.${tick}`;
+    // A RAZING IS ALSO A WIN AND A LOSS, and the deltas are tagged with the
+    // outcome that actually landed. The tag's consumer (pulseKernel's dismissed-
+    // conquest residue strip) filters on `candidateType === 'conquest'`, so a
+    // razing's deltas are never stripped — which is correct and not a gap: the
+    // razing is a MINOR (J-WZ2-1) and there is no dismissal to strip for.
+    const conquestId = razed
+      ? String(razed.outcome.id)
+      : `world_outcome.conquest.${stablePart(targetId)}.${tick}`;
     dispositionDeltas.push({ id: String(occupierId), outcome: 'win', magnitude: 1, sourceConquestId: conquestId });
     dispositionDeltas.push({ id: String(targetId), outcome: 'loss', magnitude: 1, sourceConquestId: conquestId });
 
@@ -789,7 +832,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // deployments; deploymentReturn turns each return into a contextual outcome.
     for (const attackerId of besiegers) {
       if (deployments[attackerId]) {
-        resolvedDeployments.push({ attackerId, deployment: deployments[attackerId], targetId, outcome: 'conquest' });
+        resolvedDeployments.push({ attackerId, deployment: deployments[attackerId], targetId, outcome: razed ? 'razing' : 'conquest' });
         delete deployments[attackerId];
         clearedAttackers.add(attackerId);
       }

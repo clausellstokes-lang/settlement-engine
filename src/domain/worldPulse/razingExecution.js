@@ -570,6 +570,193 @@ export function razingPlanFor({
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// THE MOUTH'S ONE CALL (WZ-2). Everything above is assembly; this is the single
+// entry `evaluateWarLayer` reaches at the siege-verdict site.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * THE SEVERITY OF THIS PARTICULAR QUARREL, read off the world rather than passed
+ * in. `razingSeverityFrom` takes the magnitudes because the extremity composite
+ * reports only which conjuncts were met; this reads those magnitudes from the
+ * same two places the composite read them, so the mouth cannot hand the severity
+ * function a number the extremity never saw.
+ *
+ * @param {unknown} worldState @param {unknown} snapshot
+ * @param {string} razerId @param {string} victimId
+ * @param {ExtremityRead|null} extremity
+ * @returns {{ severity01: number, receipt: string }}
+ */
+export function razingSeverityForPair(worldState, snapshot, razerId, victimId, extremity) {
+  const pair = razingPairRelationship(snapshot, worldState, razerId, victimId);
+  return razingSeverityFrom(extremity, {
+    resentment01: pair ? pair.relState.resentment : 0,
+    grievance01: strongestLiveGrievance01(worldState, razerId, victimId),
+  });
+}
+
+/**
+ * THE EDGES LAW 5 MAY RE-TYPE, ASSEMBLED FROM THE SUBSTRATE.
+ *
+ * `razingEdgeFlips` takes a list of edges the razer ALREADY SHARES with someone
+ * and each holder's adequacy to the VICTIM; it mints nothing and it cannot reach
+ * the graph. This is the reach, and it is deliberately narrow: it walks only the
+ * regional-graph edges INCIDENT TO THE RAZER, so a court the razer has never
+ * bordered can never appear — CR-WR8-A's "a razing mints no edge to strangers"
+ * enforced by what this function can see rather than by a rule it remembers.
+ *
+ * ⚠️ ADEQUACY IS `trust`, AND THAT IS A JUDGMENT (J-WZ2-2, vetoable). The
+ * license mint asks for "allies, close friends, patrons", and the relationship
+ * substrate's authored axes are trust / resentment / fear. Trust is the only one
+ * of the three that means "was close to them"; resentment and fear both measure
+ * the opposite pole of a different question. No new axis is minted, and no new
+ * band: the floor stays the ONE `LICENSE_ADEQUACY_01`.
+ *
+ * @param {unknown} worldState @param {unknown} snapshot
+ * @param {string} razerId @param {string} victimId
+ * @returns {Array<{ holderId: string, edgeType: string, adequacyToVictim01: number }>}
+ *   codepoint-sorted by holder id
+ */
+export function razingHolderEdgesFor(worldState, snapshot, razerId, victimId) {
+  const graph = recordOf(recordOf(snapshot).regionalGraph);
+  const razer = String(razerId || '');
+  const victim = String(victimId || '');
+  /** @type {Array<{ holderId: string, edgeType: string, adequacyToVictim01: number }>} */
+  const out = [];
+  if (!razer || !victim) return out;
+  const states = recordOf(recordOf(worldState).relationshipStates);
+  for (const rawEdge of arrayOf(graph.edges)) {
+    const edge = normalizeRelationshipEdge(rawEdge);
+    const ends = getRelationshipSettlements(edge);
+    const from = String(ends.from || '');
+    const to = String(ends.to || '');
+    if (from !== razer && to !== razer) continue;
+    const holderId = from === razer ? to : from;
+    // The victim is not its own avenger, and neither is the razer.
+    if (!holderId || holderId === razer || holderId === victim) continue;
+    const relState = recordOf(ensureRelationshipState(edge, states[relationshipKeyFromEdge(rawEdge)]));
+    const toVictim = razingPairRelationship(snapshot, worldState, holderId, victim);
+    out.push({
+      holderId,
+      edgeType: text(relState.relationshipType),
+      adequacyToVictim01: toVictim ? clamp01(toVictim.relState.trust) : 0,
+    });
+  }
+  return out.sort((a, b) => compareCodepoint(a.holderId, b.holderId));
+}
+
+/**
+ * ⚠️⚠️ THE RAZING'S ONE EMISSION, AND IT REPLACES THE CONQUEST RATHER THAN
+ * RIDING IT. LAW 6 is the amendment's signature — "no occupation record, no
+ * garrison, no vassal ledger, no terms" — so a razed town CANNOT also mint the
+ * conquest power-transfer that hands it to an occupation authority. The mouth
+ * therefore branches: this outcome or that one, never both.
+ *
+ * ⚠️ THE OUTCOME IS A MINOR, AND THAT IS A JUDGMENT RATHER THAN AN OVERSIGHT
+ * (J-WZ2-1, vetoable). `candidateType: 'razing'` is deliberately NOT registered
+ * in `CAMPAIGN_ALTERING_CANDIDATE_TYPES`, and the outcome carries no
+ * `powerTransfer`, so `deriveDecisionTier` grades it `minor` and it auto-applies.
+ * Registering it a MAJOR would make it DM-dismissable — and a dismissed razing
+ * would have to strip its own out-of-band residue (the sacked population, the
+ * institution stamps, the flipped edges) exactly as a dismissed conquest strips
+ * the occupation seed. That strip lives in `pulseKernel.js`, which chair ruling
+ * R-BLD-10 banks permanently at 1580 effective with tolerance zero. A
+ * half-registered major — dismissable, with its residue left standing — is
+ * strictly worse than an honest minor: the town would stay burned for a burning
+ * that "did not happen". So v1 is a minor, and the major is a named follow-up.
+ *
+ * WHY THIS LIVES HERE AND NOT AT THE MOUTH. `warDeployment.js` measures 658
+ * effective against an 800 ceiling; the whole razing fork has 142 lines to live
+ * in, and the decision + the plan + this shape do not fit in them. The mouth
+ * keeps the BRANCH (which it owns, because it owns the siege) and this file
+ * keeps the assembly (which it already owns).
+ *
+ * @param {{ worldState?: unknown, snapshot?: unknown, razerId?: unknown,
+ *   victimId?: unknown, razerName?: unknown, victimName?: unknown,
+ *   tick?: unknown, population?: unknown, namedCastCount?: unknown,
+ *   institutions?: unknown, movableWealth?: unknown, holderEdges?: unknown }} args
+ * @returns {{ decision: RazingDecision, plan: RazingPlan, outcome: Record<string, unknown> }|null}
+ *   null when the doctrine is dark or the law refused — and the caller then does
+ *   exactly what it did before this file existed.
+ */
+export function razingSiegeEmission({
+  worldState = null, snapshot = null, razerId = '', victimId = '',
+  razerName = '', victimName = '', tick = 0, population = null,
+  namedCastCount = 0, institutions = [], movableWealth = 0, holderEdges = [],
+} = {}) {
+  const razer = String(razerId || '');
+  const victim = String(victimId || '');
+  const decision = razingDecisionFor({
+    worldState, snapshot, razerId: razer, victimId: victim, tick, siegeWon: true,
+  });
+  if (!decision.active || decision.verdict.permitted !== true) return null;
+  const heat = razingSeverityForPair(worldState, snapshot, razer, victim, decision.extremity);
+  const causeRef = `razing.${razer}.${victim}.${Math.trunc(Number(tick) || 0)}`;
+  // The caller may hand its own edge list (the tests do, to walk the three
+  // dispositions); absent one, the substrate is walked here. Either way
+  // `razingEdgeFlips` decides, and it still mints nothing.
+  const edges = arrayOf(holderEdges).length
+    ? holderEdges
+    : razingHolderEdgesFor(worldState, snapshot, razer, victim);
+  const plan = razingPlanFor({
+    verdict: decision.verdict, severity01: heat.severity01, population,
+    namedCastCount, institutions, movableWealth,
+    razerName, victimName, holderEdges: edges, causeRef, tick,
+  });
+  if (!plan) return null;
+  const name = text(razerName) || razer;
+  const victimLabel = text(victimName) || victim;
+  return {
+    decision,
+    plan,
+    outcome: {
+      id: causeRef.replace(/^razing\./, 'world_outcome.razing.'),
+      type: 'condition',
+      candidateType: 'razing',
+      ruleId: 'war_layer_razing',
+      ruleFamily: 'stressor',
+      applyMode: 'auto',
+      probability: 1,
+      targetSaveId: victim,
+      severity: plan.severity01,
+      headline: `${name} burns ${victimLabel}`,
+      summary: `${name}'s army took ${victimLabel} and put it to the torch.`
+        + ` ${plan.departure.receipt}`,
+      reasons: [decision.verdict.receipt, heat.receipt, plan.sack.receipt],
+      // THE SACK IS ONE DELTA AND ONLY ONE. A conquest carries captives home; a
+      // razing does not — "they burned it and rode home" — so nobody gains.
+      ...(plan.sack.known && plan.sack.losses > 0 ? {
+        populationDeltas: [{
+          saveId: victim,
+          delta: -plan.sack.losses,
+          reason: `${name}'s army burns ${victimLabel}.`,
+        }],
+      } : {}),
+      condition: {
+        archetype: 'war_pressure',
+        severity: plan.severity01,
+        triggeredAt: { tick, sourceEventType: 'WAR_LAYER_RAZING', sourceEventTargetId: victim },
+        causes: [{
+          source: razer,
+          effect: 'war_pressure',
+          reason: `${name} razed ${victimLabel}.`,
+        }],
+      },
+      // The mechanisms the downstream estates consume, carried on the outcome so
+      // they ride the razing atomically the way the conquest's sack rides it.
+      razing: {
+        road: plan.road,
+        severity01: plan.severity01,
+        licenseId: decision.licenseId,
+        institutions: plan.institutions,
+        edges: plan.edges,
+        departure: plan.departure,
+        spoils: plan.spoils,
+      },
+    },
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // THE TWO BELIEF RECEIPTS (CR-WR8-G's whole reason for existing).
 // ─────────────────────────────────────────────────────────────────────────────
 

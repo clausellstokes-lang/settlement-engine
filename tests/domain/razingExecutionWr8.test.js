@@ -39,9 +39,10 @@ import {
   razingPairRelationship,
   razingPlanFor,
   razingSeverityFrom,
+  razingHolderEdgesFor,
   strongestLiveGrievance01,
 } from '../../src/domain/worldPulse/razingExecution.js';
-import { RAZING_TUNING, razingGate, readRelationshipExtremity } from '../../src/domain/worldPulse/razing.js';
+import { RAZING_TUNING, razingEdgeFlips, razingGate, readRelationshipExtremity } from '../../src/domain/worldPulse/razing.js';
 import {
   INSTITUTION_STATUS_TUNING,
   deriveInstitutionStatus,
@@ -823,5 +824,60 @@ describe('LAW 5, EXECUTED — the edge flips are driven with real holder edges',
     expect(named).toHaveLength(3);
     // anchored: the length assertion one line up proves the census is populated, so this measures the mint refusal
     expect(named).not.toContain('Nowhere');
+  });
+});
+
+describe('LAW 5\'s reach — the holder edges are WALKED off the graph, and strangers are unreachable', () => {
+  /** A razer with three neighbours, only one of whom was close to the victim. */
+  function neighbourhood() {
+    const worldState = {
+      simulationRules: { ...LIT_RULES },
+      relationshipStates: {
+        'rel.Karrow.Thornwall': { relationshipType: 'hostile', resentment: 0.9, trust: 0.02 },
+        'rel.Karrow.Everdeep': { relationshipType: 'cordial', resentment: 0.1, trust: 0.4 },
+        'rel.Everdeep.Thornwall': { relationshipType: 'allied', resentment: 0.05, trust: 0.95 },
+        'rel.Karrow.Marrowfen': { relationshipType: 'hostile', resentment: 0.8, trust: 0.05 },
+        'rel.Marrowfen.Thornwall': { relationshipType: 'rival', resentment: 0.6, trust: 0.1 },
+      },
+    };
+    const snapshot = {
+      regionalGraph: {
+        edges: [
+          { id: 'rel.Karrow.Thornwall', from: 'Karrow', to: 'Thornwall', relationshipType: 'hostile' },
+          { id: 'rel.Karrow.Everdeep', from: 'Karrow', to: 'Everdeep', relationshipType: 'cordial' },
+          { id: 'rel.Everdeep.Thornwall', from: 'Everdeep', to: 'Thornwall', relationshipType: 'allied' },
+          { id: 'rel.Karrow.Marrowfen', from: 'Karrow', to: 'Marrowfen', relationshipType: 'hostile' },
+          { id: 'rel.Marrowfen.Thornwall', from: 'Marrowfen', to: 'Thornwall', relationshipType: 'rival' },
+        ],
+      },
+    };
+    return { worldState, snapshot };
+  }
+
+  test('only the razer\'s OWN neighbours appear, and adequacy is their trust in the victim', () => {
+    const { worldState, snapshot } = neighbourhood();
+    const rows = razingHolderEdgesFor(worldState, snapshot, 'Karrow', 'Thornwall');
+    // Everdeep and Marrowfen border Karrow; Thornwall is the victim and is skipped.
+    expect(rows.map((r) => r.holderId)).toEqual(['Everdeep', 'Marrowfen']);
+    expect(rows[0]).toEqual({ holderId: 'Everdeep', edgeType: 'cordial', adequacyToVictim01: 0.95 });
+    expect(rows[1]).toEqual({ holderId: 'Marrowfen', edgeType: 'hostile', adequacyToVictim01: 0.1 });
+  });
+
+  test('CR-WR8-A — the walk drives the flips, and only the ADEQUATE neighbour is re-typed', () => {
+    const { worldState, snapshot } = neighbourhood();
+    const { flipped, unchanged } = razingEdgeFlips(razingHolderEdgesFor(worldState, snapshot, 'Karrow', 'Thornwall'));
+    expect(flipped).toEqual([{ holderId: 'Everdeep', fromType: 'cordial', toType: 'hostile' }]);
+    expect(unchanged).toEqual([{ holderId: 'Marrowfen', type: 'hostile', why: 'not_victim_adequate' }]);
+  });
+
+  test('NEGATIVE CONTROL — a court with NO edge to the razer is not in the census at any adequacy', () => {
+    const { worldState, snapshot } = neighbourhood();
+    // A stranger who adored the victim, and whom the razer has never bordered.
+    worldState.relationshipStates['rel.Nowhere.Thornwall'] = { relationshipType: 'allied', trust: 1 };
+    snapshot.regionalGraph.edges.push({ id: 'rel.Nowhere.Thornwall', from: 'Nowhere', to: 'Thornwall', relationshipType: 'allied' });
+    const ids = razingHolderEdgesFor(worldState, snapshot, 'Karrow', 'Thornwall').map((r) => r.holderId);
+    // ANCHORED: the census is still populated by the two real neighbours, so the
+    // absence measures the mint refusal and not an emptied walk.
+    expect(ids).toEqual(['Everdeep', 'Marrowfen']);
   });
 });
