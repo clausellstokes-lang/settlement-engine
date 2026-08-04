@@ -16,7 +16,7 @@
  */
 import { useState, useRef, useEffect } from 'react';
 import { User, ChevronDown, Settings, CreditCard, MessageSquare } from 'lucide-react';
-import { GOLD, GOLD_BG, INK, BORDER, FS, SP, SHAFT_GREEN, SHAFT_SLATE, swatch } from './theme.js';
+import { GOLD, GOLD_BG, INK, BORDER, FS, SP, SHAFT_SAGE, SHAFT_STEEL, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
 import UnreadMessageBadge, { unreadMessagesLabel } from './account/UnreadMessageBadge.jsx';
 import { useOperatorMessages } from './account/OperatorMessagesProvider.jsx';
@@ -119,15 +119,23 @@ export default function AccountMenu({
   //                    to 2.18:1 and GREEN_DEEP to 2.93:1, so the rule no longer
   //                    clears the BOUNDARY floor at either step and the label no
   //                    longer clears AA at all. There is no honest two-step left to
-  //                    keep, so it collapses: rule and label both take SHAFT_GREEN /
-  //                    SHAFT_SLATE, the palette's on-wood status steps (4.87:1 and
-  //                    4.96:1), which clear text AA and 1.4.11 together.
+  //                    keep, so it collapses: rule and label both take one DARK
+  //                    on-wood status step.
+  //   V4  cedar wood → ⚠️⚠️ THE COLLAPSED STEP FLIPS REGISTER. On cedar the V3 dark
+  //                    tones measure 1.36:1 and 1.38:1 — a dark chip on dark wood —
+  //                    and the whole bar has moved to the parchment register with the
+  //                    same arithmetic behind it (theme.js's dead-band note). So the
+  //                    chip takes PALE status tints: SHAFT_SAGE and SHAFT_STEEL, the
+  //                    most saturated tints that still clear 4.5:1 on the chip's OWN
+  //                    lightest ground (4.63:1 each). The status HUE survives
+  //                    all three moves; only its brightness follows the ground, every
+  //                    time, in the direction the ground went.
   // Every ratio here is recomputed in tests/design/contrast.test.js, with GREEN,
-  // GREEN_DEEP and SLATE_DEEP all pinned as negative controls so putting any of the
-  // older tones back reds with the reason attached.
+  // GREEN_DEEP, SLATE_DEEP and now the V3 dark steps all pinned as negative controls
+  // so putting any of the older tones back reds with the reason attached.
   const chipBg = 'transparent';
-  const chipBorder = isElevated ? SHAFT_SLATE : SHAFT_GREEN;
-  const chipColor = isElevated ? SHAFT_SLATE : SHAFT_GREEN;
+  const chipBorder = isElevated ? SHAFT_STEEL : SHAFT_SAGE;
+  const chipColor = isElevated ? SHAFT_STEEL : SHAFT_SAGE;
 
   return (
     <div ref={ref} style={{ position: 'relative', marginLeft: compact ? 0 : SP.xs }}>

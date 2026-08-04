@@ -104,65 +104,90 @@ export { GOLD_TXT, GOLD_SOFT, BORDER_STRONG } from '../design/tokens.js';
 // (4.28 → 3.53). All three moved in this commit; all three are pinned as negative
 // controls in tests/design/contrast.test.js so "just put the old colour back" reds
 // with the reason attached instead of shipping an unreadable header.
+//
+// ⚠️⚠️⚠️ RIBBON V4 (owner directive, 2026-08-03 night) — THE WAR ARROW REPAINT, AND
+// IT MOVES THE GROUND A THIRD TIME, PAST THE POINT OF NO RETURN FOR THE INK REGISTER.
+//
+// The owner's correction: the shaft is a CEDAR/MAHOGANY WAR SHAFT — red/dark brown,
+// not honey — and the feather base is the BOTTOM-BORDER DARK INK FAMILY. Both halves
+// of the composition therefore go dark, and the whole bar flips register: EVERY DARK
+// INK RIDER BECOMES A PARCHMENT ONE. That is not a palette preference, it is forced,
+// and the forcing is arithmetic:
+//
+//   THE MID-RUSSET DEAD BAND. A wood body whose relative luminance falls between
+//   ~0.145 and ~0.252 clears NEITHER register. PARCH_100 (L 0.826) needs a ground at
+//   or below L 0.1447 to reach 4.5:1; INK_DEEP (L 0.0163) needs one at or above
+//   L 0.2521. Between those two numbers there is no legible label of either colour,
+//   at any hue. Measured on a grey ramp: at L 0.18 the pale label reads 3.79:1 and
+//   the dark label 3.44:1 — BOTH FAIL, and nothing about the failure is visible in a
+//   screenshot. So the single most important DON'T in this file is: DO NOT SHIP THE
+//   MIDDLE OF THE WOOD RANGE. SHAFT_BODY IS COMMITTED TO L ≤ 0.13, and the pin that
+//   makes that a law rather than a note is in tests/design/contrast.test.js.
+//
+// WHAT V4 RETIRED, so nobody re-finds it: the honey-tan barrel; the ink label
+// register on the bar (INK_DEEP / BODY / SECOND as header foregrounds); GOLD_TXT as
+// the plain tab's underline; the DARK account-chip tones; and the MAKER'S PLATE as a
+// header element — the Device survives as the favicon and the PDF seal, and the
+// wordmark itself becomes the mounted, gilded artifact (see the GILT ladder below).
 
 /**
- * THE SHAFT — honey-tan wood from the owner's reference photo, modelled as the
+ * THE SHAFT — CEDAR/MAHOGANY war shaft (owner's V4 correction), modelled as the
  * near half of a CYLINDER.
  *
  * Five steps down the barrel, lit from above. SHAFT_SHEEN is the satin highlight
  * along the visible centreline at the very top; SHAFT is the body; SHAFT_BODY is
- * THE LABEL FLOOR (see SHAFT_STOPS); SHAFT_EDGE and SHAFT_RIM are the falloff into
- * the silhouette at the bottom, which is what makes the bar read as a round shaft
- * rather than a flat plank. The modelling range top-to-bottom is 2.67:1.
+ * THE BODY TONE the whole register is committed against; SHAFT_EDGE and SHAFT_RIM
+ * are the falloff into the silhouette at the bottom, which is what makes the bar read
+ * as a round shaft rather than a flat plank. The modelling range top-to-bottom is
+ * 2.76:1 — a real barrel, and still one piece of wood.
  *
- * ⚠️ SHAFT_BODY, NOT SHAFT_RIM, IS THE REFERENCE GROUND FOR TEXT — and unlike V2's
- * "darkest streak anywhere", that is a GEOMETRIC claim, not a hopeful one. The
- * cylinder's dark falloff is confined BELOW the label band by SHAFT_STOPS.body, and
- * tests pin that the stop clears the vertically-centred label box on both header
- * heights. Measuring against SHAFT_RIM instead would be over-strict by a factor no
- * glyph ever touches (it would force every label to near-black); measuring against
- * SHAFT_SHEEN would be a lie.
+ * ⚠️⚠️ THE POLARITY INVERTED, AND EVERY CLAIM IN THIS FILE INVERTED WITH IT. On the
+ * honey barrel the labels were DARK, so the worst ground was the DARKEST tone under
+ * their ink and SHAFT_STOPS.body was the guarantee that mattered. On cedar the labels
+ * are PALE, so the worst ground is the LIGHTEST tone under their ink and the
+ * guarantee that matters is SHAFT_STOPS.lit — the stop below which the satin sheen is
+ * confined. It is 0.09; the SHALLOWEST ink any rider puts on this bar is the
+ * wordmark's, at fraction 0.1995 (HEADER_RIDERS). So the lightest ground a letterform
+ * can touch is cylinderToneAt(0.1995) = rgb(147,84,51), L 0.1268 — under the L 0.1447
+ * ceiling PARCH_100 needs for 4.5:1, with room to spare. SHAFT_SHEEN itself is
+ * L 0.1467 and would NOT clear it; it never has to, because no ink reaches it.
+ * That confinement is the whole AA structure of the bar and it is pinned as a
+ * relationship (`min(ink[0]/bar) > SHAFT_STOPS.lit`), never as a promise.
  *
- * ⚠️⚠️ BUT SHAFT_BODY IS THE CYLINDER'S FLOOR, NOT THE BAR'S — THE GRAIN GOES LOWER.
- * The bar a user actually reads is a COMPOSITE: the grain data-URI painted OVER
- * SHAFT_CYLINDER over the base colour. The grain is a dark-brown wash at an alpha
- * derived from its own noise, so the darkest COMPOSITED pixel inside the label band
- * is below SHAFT_BODY — measured on the live bar at 1440x900, Chrome, lane PB:
+ * ⚠️⚠️ AND THE GRAIN NOW HELPS INSTEAD OF HURTING. The bar a user reads is a
+ * COMPOSITE: the grain data-URI painted OVER SHAFT_CYLINDER over the base colour. The
+ * grain is a DARK wash, so on the honey barrel it pushed the ground down toward the
+ * dark labels' floor and its alpha was a live accessibility lever. Against a PALE
+ * register a darkening wash can only ever improve the ratio — which is why GRAIN_AMP's
+ * budget is re-derived in V4 from an AA ceiling into a DIRECTION proof (see GRAIN_AMP).
  *
- *   darkest composited wood in the label band .... rgb(197,165,112)  L 0.3995
- *   the same strip with the grain layer removed .. rgb(204,170,115)  L 0.4282
- *   SHAFT_BODY .................................... rgb(204,169,114)  L 0.4243
- *
- * The second line is the control and it is what makes the attribution certain: strip
- * the grain and the floor returns to SHAFT_BODY exactly. So every ratio below has TWO
- * numbers — the TOKEN ratio (what contrast.test.js computes, and what a designer
- * reasons with) and the COMPOSITE ratio (what a reader actually gets). Every one of
- * them still clears its floor, but the margin on the 4.5 rows is about a tenth, so
- * the grain's alpha is now a live accessibility lever and not a decoration knob.
- *
- * (WCAG 2.2 AA = 4.5:1 for text, SC 1.4.11 = 3:1 for a UI boundary. TOKEN column
- * recomputed by tests/design/contrast.test.js; COMPOSITE column measured as above.)
- *                                          TOKEN    COMPOSITE
- *   INK_DEEP    wordmark + active tab ..... 7.06  →  6.69   AA ✓
- *   BODY        resting reference tab ..... 4.89  →  4.63   AA ✓
- *   SECOND      the ghost-button register . 7.06  →  6.69   AA ✓
- *   SHAFT_GREEN the signed-in account chip  4.87  →  4.62   AA ✓
- *   SHAFT_SLATE the developer account chip  4.96  →  4.70   AA ✓
- *   GOLD_TXT    the active tab's underline  3.38  →  3.20   1.4.11 ✓ (a BOUNDARY
- *                                                            beside an ink label)
- *   FLETCH_VANE the "this is a fletch" edge 4.46  →  4.23   1.4.11 ✓
+ * (WCAG 2.2 AA = 4.5:1 for text, SC 1.4.11 = 3:1 for a UI boundary. The PALE column is
+ * each rider measured on ITS OWN lightest ground — riderFloorTone's `pale` polarity —
+ * which is what tests/design/compositedBarAA.test.js computes.)
+ *                                                        PALE FLOOR
+ *   PARCH_100  resting reference tab ....................   5.73  AA ✓
+ *   PARCH      active reference tab .....................   6.31  AA ✓
+ *   PARCH_100  the ghost register (Upgrade) .............   5.27  AA ✓
+ *   SHAFT_SAGE the signed-in account chip ................  4.63  AA ✓
+ *   SHAFT_STEEL the developer account chip ...............  4.63  AA ✓
+ *   GILT       the active tab's underline ................  3.74  1.4.11 ✓
+ *   GILT_LIGHT the quill-line indicator, on the sheen ....  3.34  1.4.11 ✓
  *
  * ⚠️ THE ACCOUNT CHIP IS IN THIS TABLE BECAUSE IT HAS NO GROUND OF ITS OWN.
- * AccountMenu's chip is `background: transparent`, so SHAFT_GREEN / SHAFT_SLATE are
- * read against whatever the bar paints beneath them — this composite, in this band.
- * It renders only when signed in, which the census page cannot reach, so it is
- * covered by measuring the GROUND rather than the chip.
+ * AccountMenu's chip is `background: transparent`, so SHAFT_SAGE / SHAFT_STEEL are
+ * read against whatever the bar paints beneath them. It renders only when signed in,
+ * which the census page cannot reach, so it is covered by measuring the GROUND rather
+ * than the chip.
+ *
+ * ⚠️ CHROMA STAYS RATIONED. The wood is LOW-chroma earth; saturation is the seal's
+ * alone; gold is metal. The cedar's own red is a wood red, not a signal red — which is
+ * what lets the oxblood wraps and the deep wax still read as the two saturated moments.
  */
-export const SHAFT_SHEEN = '#E8CE9E';
-export const SHAFT = '#D2B27E';
-export const SHAFT_BODY = '#CCA972';
-export const SHAFT_EDGE = '#BE9760';
-export const SHAFT_RIM = '#A0763F';
+export const SHAFT_SHEEN = '#9C5A38';
+export const SHAFT = '#83492C';
+export const SHAFT_BODY = '#7A422A';
+export const SHAFT_EDGE = '#5E3220';
+export const SHAFT_RIM = '#3F2013';
 
 /**
  * SHAFT_STOPS — where each cylinder step sits, as a FRACTION of the bar's height.
@@ -198,8 +223,8 @@ export const SHAFT_RIM = '#A0763F';
  * VISUAL SHIFT. The barrel's dark falloff now lives in the last 5% of the bar (1.9px
  * of 38) instead of the last 20% (7.6px), which is both what the riders need and a
  * better cylinder: a real barrel seen this near edge-on holds its body tone almost to
- * the silhouette and then drops fast. The four real shortfalls it repairs, measured on
- * the composited raster and quoted in tests/design/compositedBarAA.test.js:
+ * the silhouette and then drops fast. The four real shortfalls it repaired, measured
+ * on the composited raster of the HONEY barrel:
  *   INK_DEEP on the wordmark's descender  4.15 -> 5.59  (AA 4.5 — was FAILING)
  *   SEAL_WAX, the `o` of Forge            4.48 -> 4.80  (AA 4.5 — was FAILING)
  *   GOLD_TXT, the plain tab's underline   2.29 -> 3.15  (1.4.11 3:1 — was FAILING)
@@ -207,11 +232,26 @@ export const SHAFT_RIM = '#A0763F';
  * None of these was visible to the old pin, because the old pin measured one floor —
  * grain over SHAFT_BODY — for every rider, and no rider's real ground was that floor.
  *
- * ⚠️ THE COUPLING TO WATCH IS UNCHANGED IN KIND. These are FRACTIONS, so a shorter bar
- * pushes every stop UP in absolute pixels while the riders' ink stays the same number
- * of px — the clearance gets tighter as the bar gets thinner, and it is the SMALLEST
- * bar that governs. Anyone thinning this bar again must re-measure HEADER_RIDERS and
- * move these numbers with it; the pin now says so per rider, with the rider named.
+ * ⚠️⚠️ AND THEN V4 INVERTED WHICH STOP IS LOAD-BEARING, WITHOUT MOVING ONE NUMBER.
+ * The four rows above are HISTORY: their riders are gone (INK_DEEP, GOLD_TXT and BODY
+ * are no longer header foregrounds, and the seal now sits inside a gold annulus on a
+ * bole bed). On cedar the register is PALE, so a pale label fails at its ground's
+ * LIGHTEST point and the guarantee that carries the bar is `lit`, not `body`:
+ *
+ *   SHAFT_STOPS.lit = 0.09   confines the satin sheen (L 0.1467, which would NOT
+ *                            clear PARCH_100's L 0.1447 ceiling) ABOVE every rider.
+ *   min(ink[0]/bar) = 0.1995 the wordmark's own top of ink — the shallowest on the bar.
+ *
+ * The stops are UNCHANGED because they were already right for both polarities; what
+ * changed is which end of the ladder the argument leans on, and that is stated here
+ * so a future edit does not "free up" the lit stop thinking it costs nothing.
+ *
+ * ⚠️ THE COUPLING TO WATCH IS UNCHANGED IN KIND, AND NOW RUNS THE OTHER WAY. These are
+ * FRACTIONS, so a shorter bar pushes every stop UP in absolute pixels while the riders'
+ * ink stays the same number of px — which now brings the SHEEN down toward the
+ * shallowest ink rather than the rim up toward the deepest. It is still the SMALLEST
+ * bar that governs, and anyone thinning this bar again must re-measure HEADER_RIDERS
+ * and move these numbers with it; the pin says so per rider, with the rider named.
  */
 
 /**
@@ -231,6 +271,26 @@ export const SHAFT_RIM = '#A0763F';
  * the narrowest common phone. A taller wrap keeps the last row at the same relative
  * depth, so this stays the governing mobile case.
  *
+ * ⚠️⚠️ `polarity` IS THE V4 ADDITION AND IT IS WHAT KEEPS THE DERIVATION PIN HONEST.
+ * A floor is only a floor with respect to a DIRECTION of failure, and the V4 register
+ * flip means the bar now carries both directions at once:
+ *
+ *   'dark'  dark ink on the bar → fails toward the DARKEST composited tone under its
+ *           ink: the BOTTOM of its extent, with the grain wash at full strength.
+ *   'pale'  pale ink on the bar → fails toward the LIGHTEST tone under its ink: the
+ *           TOP of its extent, with NO grain at all (a darkening wash cannot make a
+ *           pale label's ground lighter, so its worst case is the bare cylinder).
+ *   'bed'   the mark paints its OWN opaque ground, so the bar is not its ground: the
+ *           gilded wordmark on its bole bed, and the seal inside its gold annulus.
+ *           Its floor is asserted against that bed by the pin that owns the bed.
+ *
+ * ⚠️ WITHOUT THIS FIELD THE PIN GOES VACUOUSLY GREEN. `riderFloorTone` used to take
+ * `ink[1]` unconditionally, which is the DARKEST end. Point it at a pale label and it
+ * hands back the friendliest ground on the bar and reports a comfortable pass while the
+ * real worst case — the sheen at the top of the same extent — is never measured. That
+ * is the same shape of defect as the single hand-keyed floor this table replaced, one
+ * level deeper, so the polarity is stored beside the measurement rather than inferred.
+ *
  * Receipts: Chrome, this lane, 2026-08-03. Desktop 1440x900 (header 38px), mobile
  * 390x844 (header 80.84px). tests/design/compositedBarAA.test.js computes each rider's
  * own composited floor from this table; tests/components/navFletching.test.jsx asserts
@@ -238,27 +298,31 @@ export const SHAFT_RIM = '#A0763F';
  */
 export const HEADER_RIDERS = Object.freeze({
   // the wordmark: FS.h1 serif with its two capitals at 1.32em. The tallest rider AND
-  // the deepest — the `g` of "Forge" is what sets the floor.
-  wordmark: Object.freeze({ ink: [7.58, 37.08], bar: 38, box: 34.84 }),
-  // the wax seal standing in for one `o`: a graphic, but it owes TEXT contrast.
-  seal: Object.freeze({ ink: [15.82, 31.66], bar: 38, box: 15.84 }),
-  // the plain reference tabs' labels: FS.sm in a padded, ruled box.
-  tab: Object.freeze({ ink: [13.25, 24.25], bar: 38, box: 34 }),
+  // the deepest — the `g` of "Forge" is what sets the extent the BOLE BED must cover.
+  // ⚠️ 'bed': since V4 the wordmark is gold leaf on an opaque Armenian-bole field, so
+  // its ground is BOLE and never the barrel. The extent survives because the bole's
+  // own containment pin is derived from it (bole ⊇ ink + BOLE_PAD).
+  wordmark: Object.freeze({ ink: [7.58, 37.08], bar: 38, box: 34.84, polarity: 'bed' }),
+  // the wax seal standing in for one `o`: a graphic, but it owes TEXT contrast. Since
+  // V4 its ground is the gold annulus that is the `o`'s stroke, not the wood.
+  seal: Object.freeze({ ink: [15.82, 31.66], bar: 38, box: 15.84, polarity: 'bed' }),
+  // the plain reference tabs' labels: FS.sm in a padded, ruled box. PALE since V4.
+  tab: Object.freeze({ ink: [13.25, 24.25], bar: 38, box: 34, polarity: 'pale' }),
   // that box's 2px underline, which is the ACTIVE state's boundary and sits far lower
   // than the label it belongs to — the rider the old single-floor model hid completely.
-  tabRule: Object.freeze({ ink: [34, 36], bar: 38, box: 34 }),
-  // Sign In. ⚠️ It paints its own opaque ground, so measuring it against the bar is
-  // deliberately OVER-strict — kept that way rather than exempted, in the one direction
-  // a safety pin should err.
-  signIn: Object.freeze({ ink: [10, 21.5], bar: 38, box: 34 }),
+  // GILT since V4: gold is a pale mark, so it fails toward the light like the label.
+  tabRule: Object.freeze({ ink: [34, 36], bar: 38, box: 34, polarity: 'pale' }),
+  // the GHOST register on the bar (Upgrade), and Sign In beside it. ⚠️ Sign In paints
+  // its own opaque gold ground, so measuring this extent against the bar is deliberately
+  // OVER-strict — kept that way rather than exempted, in the one direction a safety pin
+  // should err. The ghost button genuinely has no ground and is the real subject.
+  signIn: Object.freeze({ ink: [10, 21.5], bar: 38, box: 34, polarity: 'pale' }),
   // the signed-in account chip: `background: transparent`, so it genuinely reads
   // against the bar. It cannot render on the census page, which is why it is measured
   // by its GROUND rather than by itself.
-  chip: Object.freeze({ ink: [10, 25.25], bar: 38, box: 34 }),
-  // the maker's plate: its keyline is what separates the object from the wood.
-  plate: Object.freeze({ ink: [6, 32], bar: 38, box: 26 }),
+  chip: Object.freeze({ ink: [10, 25.25], bar: 38, box: 34, polarity: 'pale' }),
   // the wrapped MOBILE bar's second row of labels — the deepest ink on that bar.
-  mobileTab: Object.freeze({ ink: [58.28, 70.1], bar: 80.84, box: 34 }),
+  mobileTab: Object.freeze({ ink: [58.28, 70.1], bar: 80.84, box: 34, polarity: 'pale' }),
 });
 
 /**
@@ -336,18 +400,50 @@ export function cylinderToneAt(fraction) {
 }
 
 /**
- * The DARKEST tone one rider's ink can land on — its own floor, before the grain.
+ * THE WORST TONE ONE RIDER'S INK CAN LAND ON, IN ITS OWN DIRECTION OF FAILURE —
+ * its floor before the grain, and since V4 the direction is READ, never assumed.
  *
- * The cylinder only darkens downward, so the worst point of any extent is its BOTTOM.
+ * The cylinder only darkens downward, so the extremes of any extent are its two ends:
+ * the BOTTOM is the darkest tone it touches and the TOP is the lightest. Which of the
+ * two is the "floor" depends entirely on the ink:
+ *
+ *   'dark' ink → the bottom. A dark label fails where its ground is darkest.
+ *   'pale' ink → the TOP. A pale label fails where its ground is lightest, which is
+ *                the exact inverse, and is why V4 needs this at all.
+ *   'bed'      → the rider paints its own opaque ground; the barrel is not its ground.
+ *                Returning the bar's tone for one of these would be answering a
+ *                question nobody asked, so it throws instead of guessing.
+ *
  * ⚠️ `vaneEdge` IS NOT IN HEADER_RIDERS AND CANNOT BE: the fletch band's boundary runs
  * the whole bar and then hangs below it, so its extent is not a measurement of a
  * letterform but a scoping decision — it is passed explicitly by the pin that makes
  * that decision, with its residual quoted there rather than buried here.
  *
- * @param {{ ink: number[], bar: number }} rider a HEADER_RIDERS row
- * @returns {[number, number, number]} the 0-255 sRGB triple under its deepest ink
+ * @param {{ ink: number[], bar: number, polarity: string }} rider a HEADER_RIDERS row
+ * @returns {[number, number, number]} the 0-255 sRGB triple under its worst ink
  */
-export const riderFloorTone = (rider) => cylinderToneAt(rider.ink[1] / rider.bar);
+export const riderFloorTone = (rider) => {
+  if (rider.polarity === 'bed') {
+    throw new Error('riderFloorTone: a `bed` rider has no barrel ground — measure it against its own bed');
+  }
+  return cylinderToneAt(rider.ink[rider.polarity === 'dark' ? 1 : 0] / rider.bar);
+};
+
+/**
+ * HOW MUCH OF THE GRAIN'S PEAK WASH A RIDER'S FLOOR CARRIES — the other half of the
+ * polarity, and it is a SHARE rather than a boolean so the pin composites one formula.
+ *
+ * The grain is a dark wash. Over a dark label's ground it deepens the ground and costs
+ * contrast, so a dark rider's floor carries the wash at its strongest. Over a PALE
+ * label's ground the same wash can only ever darken — which raises the ratio — so the
+ * pale rider's worst case is the wash at its WEAKEST, which is zero: the bare cylinder
+ * showing through a gap in the grain. Compositing the peak wash under a pale label
+ * would be measuring its BEST case and calling it a floor.
+ *
+ * @param {{ polarity: string }} rider a HEADER_RIDERS row
+ * @returns {number} 1 when the peak wash is the worst case, 0 when its absence is
+ */
+export const riderGrainShare = (rider) => (rider.polarity === 'dark' ? 1 : 0);
 
 /**
  * SHAFT_GRAIN_TEXTURE — the fine LONGITUDINAL wood grain, as a deterministic inline
@@ -387,17 +483,35 @@ export const riderFloorTone = (rider) => cylinderToneAt(rider.ink[1] / rider.bar
  * GRAIN_AMP — HOW HARD THE GRAIN IS ALLOWED TO PRESS ON THE WOOD, and it is an
  * ACCESSIBILITY NUMBER wearing a texture's name.
  *
- * ⚠️⚠️ THE GRAIN IS THE LAYER THAT DECIDES THE BAR'S CONTRAST FLOOR. Every AA ratio
- * in this file is quoted against SHAFT_BODY, and the cylinder never goes darker than
- * SHAFT_BODY inside the label band (SHAFT_STOPS.body guarantees it). The grain does:
- * it is a dark-brown wash painted OVER the cylinder, so the darkest tone a letterform
- * actually lands on is SHAFT_BODY composited with this wash at its own strongest
- * point. Turn this number up and every ratio on the bar falls together.
+ * ⚠️⚠️ ON THE HONEY BARREL THIS WAS THE LAYER THAT DECIDED THE BAR'S CONTRAST FLOOR.
+ * Every AA ratio was quoted against SHAFT_BODY, the cylinder never went darker than
+ * SHAFT_BODY inside the label band, and the grain did: a dark-brown wash painted OVER
+ * the cylinder, so the darkest tone a DARK letterform landed on was SHAFT_BODY
+ * composited with this wash at its strongest point. Turn the number up and every ratio
+ * on that bar fell together. THE BUDGET WAS DERIVED FROM THAT: BODY (the resting
+ * reference tab) at 4.5:1 needed a ground of at least L 0.3865 against SHAFT_BODY's
+ * L 0.4243, so the wash could spend at most 0.038 of luminance — about a 7% alpha at
+ * its peak — and GRAIN_AMP 0.24 held it there.
  *
- * THE BUDGET, DERIVED RATHER THAN CHOSEN: the tightest claim on the bar is BODY (the
- * resting reference tab) at 4.5:1, which needs a ground of at least L 0.3865.
- * SHAFT_BODY is L 0.4243. So the wash may spend at most 0.038 of luminance — about a
- * 7% alpha at its peak — and this scale is what holds it there.
+ * ⚠️⚠️ V4 RE-DERIVED IT, AND THE DERIVATION CHANGED KIND RATHER THAN VALUE. On cedar
+ * the register is PALE, and a darkening wash under a pale label can only ever RAISE
+ * its ratio. So the AA budget above does not bind any more, and the honest replacement
+ * is a DIRECTION proof rather than a ceiling:
+ *
+ *   THE LAW: the grain's own tone must be darker than the lightest ground any rider's
+ *   ink can touch, so that no alpha, at any strength, can lighten a pale label's
+ *   ground. GRAIN tone = SHAFT_EDGE, L 0.0477. Lightest rider ground =
+ *   cylinderToneAt(0.1995), L 0.1268. 0.0477 < 0.1268, at every alpha, by construction.
+ *
+ * ⚠️ SO WHAT SETS THE NUMBER NOW IS THE MATERIAL, AND IT IS STILL DERIVED. The wood is
+ * about five times darker than the honey barrel, so the OLD alpha would have been
+ * nearly invisible on it. The target is the one thing that should not change across a
+ * repaint: the wash costs the same SHARE of the wood's own luminance it cost before —
+ * 7.5% at its peak (0.4243 → 0.3924 then; 0.0820 → 0.0759 now). Solving the sRGB
+ * composite of SHAFT_EDGE over SHAFT_BODY for that share gives a peak alpha of 0.1579,
+ * and the tile's measured peak alpha is 0.2451 · GRAIN_AMP, so GRAIN_AMP = 0.644 → the
+ * authored 0.64 (peak alpha 0.1569, a 7.45% drop). A DELIBERATE ONE-TIME VISUAL SHIFT:
+ * the grain is materially stronger in absolute alpha and identical in read.
  *
  * The alpha the filter computes is GRAIN_AMP * (0.20*(R+G+B) - 0.22): the SHAPE of
  * the wash (where it appears and where it clamps to nothing) is unchanged, only its
@@ -406,12 +520,35 @@ export const riderFloorTone = (rider) => cylinderToneAt(rider.ink[1] / rider.bar
  *
  * ⚠️ IT WAS 1.0 AND THE BAR DID NOT CLEAR AA OFF-CHROMIUM. See the colour-space note
  * below: with linearRGB left to the engines, Chrome rendered the wash at about 6%
- * and librsvg at 17%, and at 17% the resting tab measures 4.09:1. Declaring sRGB made
- * the engines agree — at the DARKER number — so this scale is what actually pays for
- * the AA claim rather than Chrome's leniency paying for it.
+ * and librsvg at 17%, and at 17% the resting tab measured 4.09:1. Declaring sRGB made
+ * the engines agree — at the DARKER number. That argument is history in the same way
+ * the budget is: the space is still declared, and for the same reason (a deterministic
+ * seed only buys a deterministic FIELD; the space is what makes it a deterministic
+ * PICTURE), but the reader it protects is now the material rather than the ratio.
  * tests/design/compositedBarAA.test.js rasterises the real tile and enforces it.
  */
-export const GRAIN_AMP = 0.24;
+export const GRAIN_AMP = 0.64;
+
+/**
+ * THE GRAIN'S OWN TONE, DERIVED FROM THE BARREL RATHER THAN HAND-KEYED — the V4 cure
+ * for a side table that had already outlived one repaint.
+ *
+ * It used to be three loose decimals (0.36 0.26 0.13) sitting in the middle of the
+ * matrix string: a hand-keyed brown that happened to suit honey wood and would have
+ * kept suiting it after the wood went cedar, silently, because nothing read it. Grain
+ * is not a colour laid ON the wood, it is the wood's own darker latewood — so it takes
+ * SHAFT_EDGE, the barrel's own falloff step, and moves whenever the ladder does.
+ *
+ * ⚠️ IT ALSO CARRIES THE DIRECTION PROOF above: SHAFT_EDGE is darker than every tone
+ * the cylinder reaches inside any rider's ink, so this wash can only darken, at any
+ * alpha, forever. Choosing a tone LIGHTER than SHAFT_EDGE would quietly turn the grain
+ * back into a contrast lever — hence the pin beside it.
+ */
+const GRAIN_TONE = SHAFT_EDGE;
+const GRAIN_UNIT = ((h) => {
+  const n = parseInt(h.slice(1, 7), 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => Number((v / 255).toFixed(4)));
+})(GRAIN_TONE);
 
 const GRAIN_SVG = [
   "<svg xmlns='http://www.w3.org/2000/svg' width='320' height='64'>",
@@ -420,7 +557,7 @@ const GRAIN_SVG = [
   "<feTurbulence type='fractalNoise' baseFrequency='0.008 0.42' numOctaves='3'",
   " seed='7' stitchTiles='stitch' result='noise'/>",
   "<feColorMatrix in='noise' type='matrix' values='",
-  `0 0 0 0 0.36 0 0 0 0 0.26 0 0 0 0 0.13 ${0.20 * GRAIN_AMP} ${0.20 * GRAIN_AMP} ${0.20 * GRAIN_AMP} 0 ${-0.22 * GRAIN_AMP}'/>`,
+  `0 0 0 0 ${GRAIN_UNIT[0]} 0 0 0 0 ${GRAIN_UNIT[1]} 0 0 0 0 ${GRAIN_UNIT[2]} ${0.20 * GRAIN_AMP} ${0.20 * GRAIN_AMP} ${0.20 * GRAIN_AMP} 0 ${-0.22 * GRAIN_AMP}'/>`,
   '</filter>',
   "<rect x='0' y='0' width='320' height='64' filter='url(#grain)'/>",
   '</svg>',
@@ -443,26 +580,36 @@ export const SHAFT_GRAIN_TEXTURE = `url("data:image/svg+xml,${GRAIN_SVG
 export const SHAFT_GRAIN_LAYERS = [SHAFT_GRAIN_TEXTURE, SHAFT_CYLINDER].join(', ');
 
 // SHAFT_RULE — the seam between two REFERENCE tabs, read as a groove cut in the
-// barrel. Retoned for the honey wood: V2's #A39062 was chosen against cream and
-// measures 1.29:1 on this ground, which is invisible. This is 2.14:1 — a decorative
-// divider carries no WCAG floor (nothing about reaching Compendium depends on seeing
-// it), so the number is chosen by eye: present, quiet, and deliberately weaker than
-// the fletch silhouettes, because the hierarchy between "the journey" and "the shelf"
-// is the point.
-export const SHAFT_RULE = '#8C6E42';
+// barrel.
+// ⚠️⚠️ A GROOVE IS A SHADOW, NEVER A HIGHLIGHT, AND V4 IS WHERE THAT STOPPED BEING
+// A TASTE AND BECAME THE DERIVATION. On honey wood this was #8C6E42 at 2.14:1, chosen
+// by eye, and the pin beside it read "quieter than the fletching, louder than BORDER".
+// On cedar that second half inverts: BORDER (#C8B89A) is LIGHTER than the wood, so it
+// would measure 4.08:1 and be the loudest mark on the bar — it fails now for the
+// opposite reason it failed before. So the rule is derived instead of measured against
+// a moving neighbour: it must be DARKER than the wood (a cut in a surface removes
+// light) and quieter than the boundary that says "fletch" (1.41:1 against the vane's
+// 1.73:1), which keeps the hierarchy between "the journey" and "the shelf" that is the
+// whole point. A decorative divider carries no WCAG floor either way.
+export const SHAFT_RULE = '#5A3020';
 
-// SHAFT_GREEN / SHAFT_SLATE — the account chip's status tones FOR TEXT RIDING THE
+// SHAFT_SAGE / SHAFT_STEEL — the account chip's status tones FOR TEXT RIDING THE
 // WOOD, and they exist because the chip's background is `transparent`, so its label
 // is read against whatever the header paints.
-// ⚠️ THE TWO-STEP COLLAPSED, DELIBERATELY. V2 could keep a brighter RULE (GREEN) and
-// a deeper LABEL (GREEN_DEEP) because the cream ground let the rule clear 1.4.11 at
-// 3.91:1. On honey-tan, GREEN falls to 2.18:1 and GREEN_DEEP to 2.93:1 — the rule no
-// longer clears the boundary floor at EITHER step, so there is no honest two-step
-// left to keep. Rule and label both take these tones (4.87:1 / 4.96:1), which clears
-// text AA and the boundary floor at once. The status hue is preserved; only its
-// brightness moved, and it moved because the ground did.
-export const SHAFT_GREEN = '#2A4420';
-export const SHAFT_SLATE = '#303E4A';
+// ⚠️ THE TWO-STEP COLLAPSED IN V3, AND V4 FLIPPED WHAT IS LEFT. V2 could keep a
+// brighter RULE (GREEN) and a deeper LABEL (GREEN_DEEP) because the cream ground let
+// the rule clear 1.4.11 at 3.91:1; on honey-tan neither step cleared the boundary
+// floor, so rule and label collapsed onto one DARK tone. On cedar a dark chip is
+// invisible — the old SHAFT_GREEN measures 1.36:1 on SHAFT_BODY — so the collapsed
+// step flips register with everything else and becomes a PALE retone. These are the
+// most saturated tints that still clear 4.5:1 on the chip's OWN lightest ground
+// (cylinderToneAt(10/38) = rgb(141,80,49)): 4.63:1 each. The status hue is
+// preserved through all three moves; only its brightness follows the ground.
+// ⚠️ THE NAMES CHANGED WITH THE TONES on purpose. SHAFT_GREEN/SHAFT_SLATE named a
+// DARK green and a DARK slate; keeping those names on pale tints is how a palette
+// starts lying about itself.
+export const SHAFT_SAGE = '#D2E2C0';
+export const SHAFT_STEEL = '#CFDFEA';
 
 /**
  * THE GREY-GOOSE VANE — the English war-arrow feather, in profile.
@@ -482,40 +629,66 @@ export const SHAFT_SLATE = '#303E4A';
  * FLETCH_SHEEN_LIFT, the active fletch's brightened sheen — and every pale label in
  * both registers is measured against THAT, never against the vane body.
  *
+ * ⚠️⚠️ V4 MOVED THE WHOLE LADDER DOWN A REGISTER, ON THE OWNER'S CORRECTION: the
+ * feather base is the BOTTOM-BORDER DARK INK FAMILY. That is not a mood — it is what
+ * makes the fletching read as the SAME OBJECT as the page's own ink furniture rather
+ * than as a grey applique on red wood. It also costs the vane its old 4.46:1 boundary
+ * against the barrel, which is a real trade and is re-scoped explicitly (see below,
+ * and tests/design/contrast.test.js's identification block).
+ *
  * MEASURED (tests/design/contrast.test.js):
- *   PARCH_100 on FLETCH_SHEEN_LIFT .... 4.84:1  the label register's FLOOR    AA ✓
- *   PARCH     on FLETCH_SHEEN_LIFT .... 5.33:1  the active label on it        AA ✓
- *   PARCH_100 on FLETCH_SHEEN ......... 5.49:1  resting label, resting sheen  AA ✓
- *   PARCH_100 on FLETCH_LEAD .......... 6.30:1  on the paler leading edge     AA ✓
- *   PARCH_100 on FLETCH_VANE .......... 8.24:1  on the vane body              AA ✓
- *   PARCH_100 on FLETCH_BARB .......... 8.60:1  on a barb striation           AA ✓
- *   GOLD      on FLETCH_VANE .......... 4.12:1  the active gold underline, on the
- *       LIGHTEST ground it can touch — the sheen bands stop short of the vane's
- *       lower edge on purpose (GooseFletch SHEEN_FLOOR) so the underline's ground is
- *       the vertical gradient alone, which only darkens downward.  1.4.11 ✓
+ *   PARCH_100 on FLETCH_SHEEN_LIFT .... 6.60:1  the label register's FLOOR    AA ✓
+ *   PARCH     on FLETCH_SHEEN_LIFT .... 7.27:1  the active label on it        AA ✓
+ *   PARCH_100 on FLETCH_SHEEN ......... 7.86:1  resting label, resting sheen  AA ✓
+ *   PARCH_100 on FLETCH_LEAD .......... 8.92:1  on the paler leading edge     AA ✓
+ *   PARCH_100 on FLETCH_VANE ......... 11.50:1  on the vane body              AA ✓
+ *   PARCH_100 on FLETCH_BARB ......... 11.82:1  on a barb striation           AA ✓
+ *
+ * ⚠️⚠️ THE VANE-vs-WOOD BOUNDARY IS RE-SCOPED, NOT QUIETLY DROPPED. FLETCH_VANE on
+ * SHAFT_BODY is 1.73:1, under SC 1.4.11's 3:1, and no honest retune fixes it: the
+ * directive puts a dark feather on dark wood, and any tone that opened that gap would
+ * either drag the vane up into the parchment register's way or drag the wood up into
+ * the dead band. So the CLAIM MOVES TO WHAT ACTUALLY IDENTIFIES A FLETCH:
+ *
+ *   1. THE LABEL. Each cell carries its own name at 6.60:1 or better — a component
+ *      whose name is legible on it is identified by the strongest means WCAG knows.
+ *   2. THE INDICATOR. The active lane is marked by the GILT_LIGHT quill line at
+ *      3.34:1 on the sheen zone, which is the state channel and does clear 3:1.
+ *   3. THE SILHOUETTE, which survives as SHAPE rather than as tone: the sheen bands,
+ *      the hang (the lower half of every vane sits on the ~11:1 parchment page, not
+ *      on wood at all), and the leading edge-light.
+ *
+ * That is the scoping decision, made in the open, with the number quoted rather than
+ * buried — and it is the reason the indicator had to leave the house GOLD family.
  */
-export const FLETCH_LEAD = '#5C5347';
-export const FLETCH_VANE = '#4A4238';
-export const FLETCH_TIP = '#3B352D';
-export const FLETCH_BARB = '#454035';
-export const FLETCH_SHEEN = '#655C4E';
-export const FLETCH_SHEEN_LIFT = '#6E6456';
-export const FLETCH_RACHIS = '#6E6456';
+export const FLETCH_LEAD = '#453D31';
+export const FLETCH_VANE = '#332C22';
+export const FLETCH_TIP = '#211C15';
+export const FLETCH_BARB = '#312A20';
+export const FLETCH_SHEEN = '#4E4537';
+export const FLETCH_SHEEN_LIFT = '#5A5040';
+export const FLETCH_RACHIS = '#5A5040';
 // The seam where two fletches overlap: a quill SHADOW, not a gilt hairline. It is
 // 1.23:1 against the vane and that is exactly right — feather-on-feather shadows are
-// nearly tonal, and the boundary a user actually needs is the vane against the wood
-// (4.46:1). Recorded, not hidden.
-export const FLETCH_SEAM = '#3B352D';
+// nearly tonal. ⚠️ It is the TIP tone by construction, so the two can never drift.
+export const FLETCH_SEAM = FLETCH_TIP;
 
-// THE WRAPS — two narrow glossy red-brown thread bands riding the shaft, framing the
-// fletching cluster: the silk/linen whipping from the reference photo. WRAP is the
-// thread, WRAP_GLOSS its specular highlight (measured against WRAP, not the wood —
-// it is a highlight INSIDE the binding), WRAP_EDGE the shadowed lower turn.
-// WRAP on SHAFT_BODY is 3.16:1, so the binding clears 1.4.11 as a boundary even
-// though nothing depends on perceiving it.
-export const WRAP = '#8A4630';
-export const WRAP_GLOSS = '#A85E45';
-export const WRAP_EDGE = '#67321F';
+// THE WRAPS — two narrow OXBLOOD silk thread bands riding the shaft, framing the
+// fletching cluster: the whipping from the reference photo. WRAP is the thread,
+// WRAP_GLOSS its satin crest, WRAP_EDGE the shadowed inter-turn valley.
+// ⚠️⚠️ THEY DEEPENED TO OXBLOOD BECAUSE THE WOOD IS NOW THE SAME HUE. On honey wood a
+// mid red-brown was a third of the way to the label register and read as a binding at
+// 3.16:1. On cedar the same tone would be a slightly-different-red smudge on red, so
+// the wrap goes DEEPER instead of brighter — WRAP is 1.69:1 against SHAFT_BODY and
+// WRAP_EDGE 2.22:1, and the binding is identified by its own WOUND STRUCTURE (a
+// 2.6px turn period whose crest-to-valley ladder is 2.12:1) rather than by a single
+// flat step against the wood. That is what a thread lying on a same-hue shaft really
+// looks like, and it is a legitimate scoping: the wrap carries no state, no label
+// rides it, and nothing about reaching Create depends on perceiving it. Recorded and
+// pinned as a measured relationship, never as a 3:1 claim it cannot make.
+export const WRAP = '#521F12';
+export const WRAP_GLOSS = '#7E3A24';
+export const WRAP_EDGE = '#2E0F08';
 
 // FLETCH_SHADOW — the soft drop shadow that seats a feather on the wood. Authored as
 // an 8-DIGIT HEX rather than the translucent-colour function on purpose: that
@@ -526,72 +699,117 @@ export const WRAP_EDGE = '#67321F';
 export const FLETCH_SHADOW = '#2A251E59';
 
 /**
- * ── THE MAKER'S PLATE + THE WAX SEAL (owner task #78, research-locked spec) ──
+ * ── THE GILDED WORDMARK + THE GILDED SEAL (owner directive, ribbon V4) ──
  *
- * The brand lockup on the shaft: an aged-BRONZE MAKER'S PLATE carrying the house
- * device, and beside it the wordmark, whose `o` in "Forge" is a blob of DEEP-RED
- * SEALING WAX with the letter's counter STAMPED THROUGH it.
+ * ⚠️⚠️ THE PLATE RETIRED, AND THE WORDMARK ITSELF BECAME THE MOUNTED ARTIFACT.
+ * The owner's V4 correction, in his own words: the WORDMARK is the gilded object, with
+ * no plate. Two things forced it and both are arithmetic rather than taste:
  *
- * ⚠️⚠️ THE RULE OF TINCTURE, AS A CODE-LEVEL PALETTE CONSTRAINT. Heraldry's oldest
- * legibility law: never metal on metal, never colour on colour. Here that is not
- * decoration advice, it is the whole AA structure of the plate — THE DEVICE'S FILL
- * CARRIES 100% OF THE CONTRAST AND THE RELIEF CARRIES 0%. The device is a METAL
- * (PLATE_DEVICE, pale parchment-gold) on a COLOUR (the bronze face), and it must
- * clear AA on every tone of that face by itself, with the emboss switched off. The
- * bevels, the keyline and the grit are CHARACTER ONLY: near-tonal to the face,
- * carrying no part of any legibility claim, so a browser that renders them badly (or
- * a user with reduced transparency) loses nothing but texture.
+ *   1. THE PLATE COULD NOT SURVIVE THE GROUND. The plate's whole legibility structure
+ *      was a PALE METAL DEVICE on a MID-TONE BRONZE FACE (the rule of tincture, as
+ *      code), separated from the wood by a near-black keyline. On cedar that keyline
+ *      measures 2.86:1 against the lightest ground it touches — under 1.4.11's 3:1 —
+ *      and the bronze face sits squarely in the mid-russet DEAD BAND. A dark object on
+ *      dark wood behind a dark keyline is not a plate, it is a smudge.
+ *   2. TWO OBJECTS WERE ALWAYS ONE TOO MANY. A plate BESIDE a name is two marks
+ *      competing at 26px; a gilded name is one.
  *
- * ⚠️ THE FACE IS MID-TONE, AND THAT IS ALSO A LEGIBILITY DECISION, NOT A MOOD. An
- * engraved plate needs headroom in BOTH directions — a highlight above the face and a
- * shadow below it. On a near-black face there is no room below, the shadow half of
- * every bevel disappears, and the relief flattens into a flat dark shape with a light
- * scratch on it. PLATE_LIT sits at L 0.109: dark enough to carry a pale device at
- * 5.05:1, light enough that PLATE_BEVEL_SHADE still reads as a shadow.
+ * So the plate's tokens are gone — deleted, not deprecated, with their consumer
+ * removed in the same commit. THE DEVICE ITSELF SURVIVES: it is the favicon, the PDF
+ * seal, the footer and the error boundary (components/brand/HouseDevice.jsx), which is
+ * where a house device belongs. PLATE_KEYLINE is the ONE token kept, because the
+ * gilded letterform still owes a keyline and re-authoring the same near-black under a
+ * new name would be a second spelling of one tone.
  *
- * ⚠️ THE BEVEL IS CONFINED TO THE PLATE'S MARGIN, AND THAT IS WHAT MAKES THE AA
- * CLAIM GEOMETRIC RATHER THAN HOPEFUL — the same move SHAFT_STOPS.body makes for the
- * barrel. PLATE_BEVEL_LIGHT is lighter than the face, so a device sitting ON it would
- * measure 4.28:1 and fail. It cannot: the bevel lives in the outer PLATE_MARGIN
- * fraction of the plate and the device lives inside that box. MakerPlate's pin
- * asserts the confinement, not the good intentions.
+ * ⚠️⚠️ THE THREE LAYERS, AND WHY THERE ARE EXACTLY THREE.
  *
- * ONE LIGHT, ONE AZIMUTH. Every relief on this bar — the plate's bevel, the device's
- * emboss, the plate's mounting shadow — is lit from PLATE_LIGHT_DEG, and so is the
- * barrel it is mounted on (SHAFT_STOPS puts the barrel's highlight along its top).
- * Two light directions in one composition is the single fastest way to make a set of
- * carefully-rendered materials look like stickers.
+ *   1. THE BOLE BED. Armenian bole — the dark red-brown clay a gilder lays under gold
+ *      leaf — as a scorched, branded-in patch of shaft behind the whole wordmark run.
+ *      IT IS NOT DECORATION: it is the gilding's CONTRAST BED, and without it there is
+ *      no gold at all. The bar's lit sheen tops out at L 0.1467, and NO gold a reader
+ *      would call gold clears 4.5:1 on that (the house GOLD manages 2.23:1). On BOLE
+ *      at L 0.0168 the leaf measures 7.50:1. The bed is what buys the metal.
+ *   2. THE LEAF. Gold-FILLED letters: the FILL carries 100% of the contrast, and every
+ *      stop of its gradient is at or above L 0.44 so the claim holds at every point of
+ *      every glyph. Modelling lives in the keyline and the bed, NEVER in a dark gold
+ *      stop — a shaded gold is how a gilded letter quietly loses its floor mid-stroke.
+ *   3. THE KEYLINE. A 0.75px near-black outline per glyph, painted OUTSIDE the fill
+ *      (paint-order), character only, zero contrast claim. NO bevel and NO emboss: at
+ *      a 20px x-height a bevel is one grey pixel pretending to be a light source.
+ *
+ * ⚠️ THE SEAL BECAME A GILDED LETTER WHOSE BOWL HOLDS THE WAX, AND IT HAD TO. Bare wax
+ * on cedar is 1.40:1 — a red letterform on red wood, invisible, and it stands in for a
+ * glyph so it owes TEXT contrast. The `o`'s STROKE is now a gold annulus off this same
+ * ladder, SEAL_WAX fills between the ring and the counter (5.34:1 against the ring),
+ * and the counter stays a TRUE HOLE showing the bole through it (7.50:1 against the
+ * ring). Three separated tones, all by luminance, none by hue.
+ * ⚠️⚠️ IT IS THE LANE'S OWNER-VETO CANDIDATE: it is a real semantic shift (the seal
+ * becomes a gilded letter rather than a blob of wax), and the named fallback if the
+ * owner vetoes it is WAX ON A GOLD FOIL ROSETTE — the wax kept whole and a gold foil
+ * disc set behind it. Recorded in the queue row, not decided here.
+ *
+ * ONE LIGHT, ONE AZIMUTH. Every relief on this bar — the bole's cast, the seal's
+ * glint, the band's shadows — is lit from PLATE_LIGHT_DEG, and so is the barrel it is
+ * mounted on. Two light directions in one composition is the single fastest way to
+ * make a set of carefully-rendered materials look like stickers.
  */
-export const PLATE_LIT = '#6E5A33';
-export const PLATE_FACE = '#5A4928';
-export const PLATE_DEEP = '#43351B';
-export const PLATE_BEVEL_LIGHT = '#7A6539';
-export const PLATE_BEVEL_SHADE = '#382C15';
 export const PLATE_KEYLINE = '#241B0C';
-export const PLATE_DEVICE = '#F0E0B4';
-export const PLATE_RIVET = '#8C7444';
-// The mounting stack's three shadows, as one authored tone (see MakerPlate).
-export const PLATE_SHADOW = '#241B0C';
 
 /**
- * PLATE — the plate's GEOMETRY, in its own 5:6 coordinate space.
+ * THE GILT LADDER — ONE GOLD FAMILY FOR THE GILDING AND FOR THE INDICATOR, and that
+ * unification is a finding rather than a tidy-up.
  *
- * `ratio` is the HEATER SHIELD's 5:6, the proportion an English heater actually is.
- * (The 9:10 figure the open web repeats is a single-source AI-aggregator echo with no
- * primary behind it; it was checked and rejected during the research pass.)
+ * The house GOLD (#C9A24C) measures 2.23:1 against the barrel's sheen zone, so it
+ * cannot carry the active-lane indicator on cedar; and a second gold invented for the
+ * indicator alone would put two metals in one 38px composition. GILT_LIGHT clears 3:1
+ * there (3.34:1) and is the leaf's own light stop, so the bar has exactly one metal.
  *
- * ⚠️ `margin` IS THE BEVEL'S TERRITORY AND THE DEVICE'S FORBIDDEN ZONE — see the
- * tincture note above. It is a FRACTION of the plate, so the confinement survives
- * every size the plate is drawn at, including the 32px favicon redraw.
- *
- * ⚠️ `gritAmp` IS AN ACCESSIBILITY NUMBER WEARING A TEXTURE'S NAME. It is the
- * maximum per-channel deviation the grit may add, in 0-255 units. GRIT, NOT GLOSS:
- * a specular highlight would put a near-white pixel on the face and the device's
- * contrast floor would move with it. At 8 the wash is visible as age and cannot shift
- * any ratio by a hundredth.
+ * ⚠️ EVERY STOP IS AT OR ABOVE L 0.44, AND THAT IS THE WHOLE FILL CLAIM. GILT is
+ * L 0.4509 and GILT_LIGHT L 0.6068. A third, darker stop "for modelling" would put a
+ * sub-floor tone inside a letterform, which is exactly the failure a gradient fill
+ * invites; the modelling is the keyline's and the bed's job.
+ * ⚠️ GILT_LIGHT ALSO CLEARS L 0.58, which is the separate floor the INDICATOR owes:
+ * it is drawn on the shaft's sheen zone, not on the bole, and that is a much lighter
+ * ground than any letterform touches.
  */
-export const PLATE = Object.freeze({
-  ratio: 5 / 6, margin: 0.14, bevel: 0.035, keyline: 1, gritAmp: 8, seed: 19,
+export const GILT = '#D4AF45';
+export const GILT_LIGHT = '#E6CB6F';
+
+/**
+ * THE BOLE — the gilding's bed, and the seal's.
+ *
+ * BOLE is the opaque core; BOLE_DEEP is the scorch at its edge, where the brand bit
+ * deepest. ⚠️ BOTH ARE AT OR BELOW L 0.06, which is the pinned law: the core is the
+ * ground every gilt claim in this file is quoted against, so a future retune that
+ * lightened it would move every one of those ratios at once, invisibly.
+ * BOLE_PAD is how far the opaque core must extend past the wordmark's MEASURED ink
+ * extents (HEADER_RIDERS.wordmark) — 3px, so no glyph edge, and no antialiased pixel
+ * of one, ever lands on bare wood.
+ */
+export const BOLE = '#3A1A10';
+export const BOLE_DEEP = '#2A1008';
+export const BOLE_PAD = 3;
+
+/**
+ * GILD — the gilded wordmark's GEOMETRY, in px of the bar it is mounted on.
+ *
+ * `pad` is BOLE_PAD restated in this object so a reader building the bed has one place
+ * to look; `keyline` is the near-black outline's width; `seed` is the bole's
+ * turbulence seed and `edgeAmp` how far that turbulence may displace the bed's EDGE.
+ *
+ * ⚠️ `edgeAmp` DISPLACES THE EDGE AND NOTHING ELSE, and that is what keeps the AA
+ * claim geometric rather than hopeful — the same move SHAFT_STOPS made for the barrel.
+ * The bed's OPAQUE CORE is the rectangle the wordmark's ink extents plus `pad` define;
+ * the turbulence only ever eats outward from that core, so no displacement, at any
+ * amplitude, can uncover a glyph. A filter that displaced the whole shape would put
+ * bare cedar under a letter at some seed, and no screenshot would show which one.
+ *
+ * ⚠️ `seed` IS VETTED against SVG's own feTurbulence PRNG — see isDegenerateSeed in
+ * components/brand/GildedWordmark.jsx, which re-runs the spec's lattice construction
+ * rather than carrying a blocklist that rots.
+ */
+export const GILD = Object.freeze({
+  pad: BOLE_PAD, keyline: 0.75, seed: 17, edgeAmp: 5,
 });
 
 /**
@@ -617,16 +835,22 @@ export const PLATE = Object.freeze({
  * left. A cast shadow therefore lands at the NEGATION of it, down and to the right,
  * which is what the plate already did and what the band now does.
  *
- * ⚠️ WHAT IS DERIVED AND WHAT IS NOT. Every OFFSET — the plate's three mounting
- * shadows, its bevel pair, the device's inverted emboss, the seal's glint arc, the
- * band's cast shadow and its edge-light — reads this constant now, so moving it moves
- * the whole composition together and a wrong sign is a red rather than a screenshot.
- * GRADIENT VECTORS are deliberately NOT derived: a 45° screen direction is not a 45°
- * objectBoundingBox vector unless the box is square, so deriving them means carrying
- * each element's aspect ratio into its own gradient and is a larger change than this
- * lane is scoped for. The three that exist (the plate's face, the vane's fall, the
- * barrel's cylinder) already agree with this azimuth qualitatively; converting them to
- * derived vectors is deliberately deferred — documented, not a bug to re-find.
+ * ⚠️ WHAT IS DERIVED AND WHAT IS NOT. Every OFFSET — the bole bed's cast shadow and
+ * its lit edge, the seal's glint arc, the band's cast shadow and its edge-light —
+ * reads this constant, so moving it moves the whole composition together and a wrong
+ * sign is a red rather than a screenshot. GRADIENT VECTORS are deliberately NOT
+ * derived: a 45° screen direction is not a 45° objectBoundingBox vector unless the box
+ * is square, so deriving them means carrying each element's aspect ratio into its own
+ * gradient and is a larger change than this lane is scoped for. The three that exist
+ * (the leaf's fall, the vane's fall, the barrel's cylinder) already agree with this
+ * azimuth qualitatively; converting them to derived vectors is deliberately deferred —
+ * documented, not a bug to re-find.
+ *
+ * ⚠️ THE PLATE'S NAME SURVIVES THE PLATE. This token is called PLATE_LIGHT_DEG because
+ * it was born with the maker's plate, and the plate retired in V4. Renaming it would
+ * touch every consumer for nothing and break the one property that matters — that
+ * there is exactly ONE of it — so the name is kept and the reason is written down
+ * rather than left as an oddity for the next reader to "fix".
  */
 export const PLATE_LIGHT_DEG = 225;
 
@@ -688,7 +912,7 @@ export const contactShadow = (blur, color) => `drop-shadow(0px 0px ${blur}px ${c
  * four remembered coordinates.
  *
  * ⚠️ IT LIVES HERE AND NOT IN WaxSeal.jsx FOR A REASON THAT IS ALREADY PINNED.
- * tests/design/makerPlate.test.jsx forbids `Math.sin|cos|tan|exp|log|pow` in every
+ * tests/design/brandLockup.test.jsx forbids `Math.sin|cos|tan|exp|log|pow` in every
  * brand module, because a transcendental is not required by IEEE-754 to be correctly
  * rounded and engines differ in the last ulp — which would make a mark that must be
  * byte-identical everywhere, forever, into a cross-engine hazard. The trig therefore
@@ -727,17 +951,26 @@ export const lightArc = (cx, cy, r, halfDeg) => {
  * than as two unrelated accents.
  *
  * ⚠️⚠️ SEAL_WAX IS DEEP BECAUSE IT IS A LETTERFORM, NOT AN ORNAMENT. It stands in for
- * the `o` of "Forge" inside the wordmark, so it owes TEXT contrast against the bar it
- * rides — and the bar is honey-tan wood. A mid sealing-wax red (#8C2F2A) measures
- * 3.52:1 on the composited barrel and fails; this measures 4.80:1 and passes. The
- * word has to be readable before the seal is allowed to be pretty.
+ * the `o` of "Forge" inside the wordmark, so it owes TEXT contrast — and on the V3
+ * honey barrel it carried that claim itself, at 4.80:1, which is why it was authored
+ * this deep in the first place.
  *
- * ⚠️⚠️ THE IMPRESSION IS THE COUNTER, AND THE COUNTER IS A HOLE. The `o`'s bowl is
- * not painted a darker red — it is genuinely open, so the barrel shows through it.
- * That is what makes the seal survive being shrunk: at 16px it is an annulus with a
- * dimple, and at any size the counter is separated from the wax by a LUMINANCE step
- * of about 4.8:1 rather than by hue, which is what the grayscale test asks for. A
- * darker-red counter measured 1.39:1 against the wax and merged into a blob by 20px.
+ * ⚠️⚠️ ON CEDAR IT CANNOT CARRY THAT CLAIM AT ALL, AND THAT IS WHY THE `o` IS GILDED.
+ * A deep red letterform on dark red wood measures 1.40:1 — the reddest possible way to
+ * be invisible. The tone does NOT get lightened to fix it: a bright sealing wax is not
+ * sealing wax, and lightening it would walk the one saturated hue in the lockup toward
+ * the dead band. Instead the `o`'s STROKE becomes a gold annulus off the GILT ladder
+ * and the wax fills between that ring and the counter, where it measures 5.34:1
+ * against the ring. The wax keeps its colour and its meaning and stops being asked to
+ * do a job its colour forbids.
+ *
+ * ⚠️⚠️ THE IMPRESSION IS THE COUNTER, AND THE COUNTER IS STILL A TRUE HOLE. The `o`'s
+ * bowl is not painted a darker red — it is genuinely open, so the BOLE shows through
+ * it at 7.50:1 against the gold ring. That is what makes the seal survive being
+ * shrunk: at 16px it is a gold annulus with a wax fill and a dimple, and at every size
+ * all three separations are LUMINANCE steps rather than hue steps, which is what the
+ * grayscale test asks for. A darker-red counter measured 1.39:1 against the wax and
+ * merged into a blob by 20px.
  */
 export const SEAL_WAX = '#6E1F1B';
 export const SEAL_RIM = '#4A1310';

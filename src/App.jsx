@@ -629,10 +629,14 @@ export default function App() {
                   size="md"
                   icon={<Zap size={13} />}
                   onClick={() => setView('pricing')}
-                  // No colour override any more: PARCH_100 was the pale register
-                  // for the ink bar and is unreadable on wood. Ghost's own fg
-                  // (SECOND) is 12.04:1 against the grain's darkest streak.
-                  style={{ letterSpacing: '0.04em', textTransform: 'uppercase' }}
+                  // ⚠️ THE OVERRIDE IS BACK, AND THE ROUND TRIP IS THE POINT. On the
+                  // V2 ink bar this was PARCH_100; on the V3 honey barrel the pale
+                  // register was unreadable and ghost's own fg (SECOND) measured
+                  // 12.04:1, so the override came off. On V4's cedar shaft SECOND is
+                  // 1.97:1 — a ghost button has no ground of its own, so it reads
+                  // against the wood — and the whole bar is in the parchment register
+                  // again (theme.js's dead-band note). PARCH_100 is 5.28:1 here.
+                  style={{ color: PARCH_100, letterSpacing: '0.04em', textTransform: 'uppercase' }}
                 >
                   Upgrade
                 </Button>

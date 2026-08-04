@@ -96,8 +96,8 @@ import { flowsInto } from '../../src/components/nav/NavFlowArrow.jsx';
 import {
   ANCHOR_OFFSET, BODY, CHROME, FLETCH, FLETCH_BARB, FLETCH_BARB_DEG, FLETCH_HANG,
   FLETCH_LEAD, FLETCH_RACHIS, FLETCH_SHEEN, FLETCH_SHEEN_LIFT, FLETCH_TIP,
-  FLETCH_VANE, FS, GOLD, GOLD_TXT, HEADER_RIDERS, INK_DEEP, LABEL_BOX, LIGHT_UNIT,
-  PARCH, PARCH_100,
+  FLETCH_VANE, FS, GILT, GOLD, GOLD_TXT, HEADER_RIDERS, INK_DEEP, LABEL_BOX,
+  LIGHT_UNIT, PARCH, PARCH_100,
   PLATE_LIGHT_DEG, SHAFT, SHAFT_BODY, SHAFT_CYLINDER, SHAFT_EDGE, SHAFT_GRAIN_LAYERS,
   SHAFT_GRAIN_TEXTURE, SHAFT_RIM, SHAFT_SHEEN, SHAFT_STOPS, SP, WRAP,
   contactShadow, lightOffset, shadowOffset,
@@ -515,9 +515,14 @@ describe('2 — ⚠️⚠️ THE SHINGLE: three parallelograms, ascending into R
     // its own numbers is the exact shape of this estate's side-table hazard.
     const strip = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '')
       .replace(/\{\/\*[\s\S]*?\*\/\}/g, '');
+    // ⚠️ THE MAP MOVED WITH THE MODULES IN V4: the maker's plate retired from the
+    // header and the gilded wordmark took its place, so the row that named
+    // MakerPlate.jsx now names GildedWordmark.jsx. The CLAIM is unchanged — every
+    // module that draws relief on this bar computes from the azimuth — and it is the
+    // map, not the file list, that is the pin.
     const consumers = {
       'components/nav/FletchBand.jsx': /contactShadow|dropShadow/,
-      'components/brand/MakerPlate.jsx': /lightOffset|shadowOffset|dropShadow/,
+      'components/brand/GildedWordmark.jsx': /lightOffset\(/,
       'components/brand/WaxSeal.jsx': /lightArc\(/,
     };
     for (const [rel, want] of Object.entries(consumers)) {
@@ -920,8 +925,11 @@ describe('5 — THE CYLINDER: the bar is a shaft seen in profile, not a plank', 
     // All five really are in the painted gradient — a ladder nobody paints is a lie.
     for (const tone of ladder) expect(SHAFT_CYLINDER).toContain(tone);
     expect(SHAFT_CYLINDER).toContain('180deg');
-    // The modelling range: a real barrel, and still one piece of wood.
-    expect(ratio(SHAFT_SHEEN, SHAFT_RIM)).toBeCloseTo(2.67, 2);
+    // The modelling range: a real barrel, and still one piece of wood. ⚠️ The RANGE is
+    // what is pinned, not the tones: V4 re-authored all five for the cedar shaft and
+    // deliberately preserved the modelling, so this number moved only in its last digit
+    // while every colour in it changed.
+    expect(ratio(SHAFT_SHEEN, SHAFT_RIM)).toBeCloseTo(2.76, 2);
   });
 
   test('the falloff ACCELERATES toward the rim — that is what makes it round', () => {
@@ -1266,19 +1274,28 @@ describe('8 — ⚠️ the clip never touches a focusable element, so the focus 
       //     component may re-colour it and may never switch it off.
       expect(b.style.outline).toBeFalsy();
     }
-    // THE CONTRAST THAT MADE THE COLOUR NECESSARY, quoted both ways. The house bronze
-    // was failing the 3:1 a focus indicator owes on this ground whether or not you
-    // could see its top edge.
+    // THE CONTRAST THAT MADE THE COLOUR NECESSARY, quoted both ways.
+    // ⚠️⚠️ AND V4 CORRECTED WHICH GROUND THE CLAIM IS AGAINST, WHICH MATTERS BECAUSE THE
+    // OLD GROUND WOULD NOW LET THE BRONZE BACK IN. On the V3 vane the house bronze
+    // measured 2.41:1 and failed on the vane body alone. The V4 feather is darker, so
+    // the bronze clears 3:1 there (3.36:1) — and a pin written against the VANE would
+    // now happily green-light restoring it. The honest ground was always the LIGHTEST
+    // band a fletch cell can show, because a focus ring is drawn across the whole cell
+    // including its brightened sheen, and THERE the bronze still fails at 2.71:1.
     const HOUSE_RING = (a11y.match(/--sf-focus:\s*(#[0-9A-Fa-f]{6})/) || [])[1];
     expect(HOUSE_RING).toBe('#a0762a');
-    expect(ratio(HOUSE_RING, FLETCH_VANE), 'the house ring reads on the vane after all')
+    expect(ratio(HOUSE_RING, FLETCH_SHEEN_LIFT), 'the house ring reads on the lit cell after all')
       .toBeLessThan(3);
-    expect(ratio(HOUSE_RING, FLETCH_VANE).toFixed(2)).toBe('2.41');
+    expect(ratio(HOUSE_RING, FLETCH_SHEEN_LIFT).toFixed(2)).toBe('1.93');
+    // …recorded beside the number that would have hidden it, so the trap is written down.
+    expect(ratio(HOUSE_RING, FLETCH_VANE)).toBeGreaterThanOrEqual(3);
+    expect(ratio(HOUSE_RING, FLETCH_VANE).toFixed(2)).toBe('3.36');
+    // THE OVERRIDE'S OWN TONE clears on BOTH, which is why it is the right answer at
+    // either reading.
     expect(ratio(PARCH, FLETCH_VANE)).toBeGreaterThanOrEqual(3);
-    expect(ratio(PARCH, FLETCH_VANE).toFixed(2)).toBe('9.07');
-    // …and on the LIGHTEST band a fletch cell can show, which is what a ring drawn
-    // across a brightened active vane really lands on.
+    expect(ratio(PARCH, FLETCH_VANE).toFixed(2)).toBe('12.67');
     expect(ratio(PARCH, FLETCH_SHEEN_LIFT)).toBeGreaterThanOrEqual(3);
+    expect(ratio(PARCH, FLETCH_SHEEN_LIFT).toFixed(2)).toBe('7.27');
 
     // 4 — THE GEOMETRY THAT MAKES AN OUTSET RING IMPOSSIBLE HERE, as arithmetic.
     //     A fletch cell is `alignSelf: stretch` inside a header stuck at top 0, so its
@@ -1449,8 +1466,8 @@ describe('10 — ⚠️⚠️ AA against the LIGHTEST tonal band, and the ratios
   test('every label register clears AA on the lightest band — quoted to 2dp', () => {
     expect(ratio(PARCH_100, FLETCH_SHEEN_LIFT)).toBeGreaterThanOrEqual(4.5);
     expect(ratio(PARCH, FLETCH_SHEEN_LIFT)).toBeGreaterThanOrEqual(4.5);
-    expect(ratio(PARCH_100, FLETCH_SHEEN_LIFT).toFixed(2)).toBe('4.84');
-    expect(ratio(PARCH, FLETCH_SHEEN_LIFT).toFixed(2)).toBe('5.33');
+    expect(ratio(PARCH_100, FLETCH_SHEEN_LIFT).toFixed(2)).toBe('6.60');
+    expect(ratio(PARCH, FLETCH_SHEEN_LIFT).toFixed(2)).toBe('7.27');
     // …and on every other band too, so the "lightest governs" argument is not the
     // only thing holding the register up.
     for (const [name, tone] of Object.entries(LADDER)) {
@@ -1472,34 +1489,62 @@ describe('10 — ⚠️⚠️ AA against the LIGHTEST tonal band, and the ratios
   });
 
   test('the vane is the boundary that says "fletch"; nothing else has to be', () => {
-    // What tells a user where a fletch is, is the DARK VANE against the honey wood —
-    // comfortably past SC 1.4.11's 3:1. The contact shadows and the edge-light are
-    // depth cues inside an already-legible shape and carry no floor of their own.
-    expect(ratio(FLETCH_VANE, SHAFT_BODY)).toBeGreaterThanOrEqual(3);
-    expect(ratio(FLETCH_VANE, SHAFT_BODY).toFixed(2)).toBe('4.46');
-    // The gold edge is a STATE carrier, so it owes the boundary floor on the
-    // lightest ground it can touch — which the SHEEN_FLOOR geometry above keeps at
-    // the vane gradient rather than at a sheen band.
+    // ⚠️⚠️ WHAT TELLS A USER WHERE A FLETCH IS CHANGED IN V4, AND THE TRADE IS RECORDED
+    // RATHER THAN QUIETLY KEPT. On the honey barrel it was the DARK VANE against the
+    // wood at 4.46:1. The owner's V4 correction puts a dark-ink feather on a dark cedar
+    // shaft, so that boundary is 1.73:1 and no retune recovers it — lifting the vane
+    // walks it into the label register, lifting the wood walks it into the dead band
+    // (theme.js). The claim moves to the three channels that DO carry it, and each is
+    // asserted here rather than described.
+    expect(ratio(FLETCH_VANE, SHAFT_BODY)).toBeLessThan(3);
+    expect(ratio(FLETCH_VANE, SHAFT_BODY).toFixed(2)).toBe('1.73');
+    // 1 — THE LABEL. A component whose own name is legible on it is identified by the
+    //     strongest means WCAG knows, and the label clears AA on every band.
+    expect(ratio(PARCH_100, FLETCH_SHEEN_LIFT)).toBeGreaterThanOrEqual(4.5);
+    // 2 — THE ACTIVE INDICATOR. Still a state carrier, so it still owes 1.4.11 on the
+    //     lightest ground it can touch — which the SHEEN_FLOOR geometry above keeps at
+    //     the vane gradient rather than at a sheen band.
     expect(ratio(GOLD, FLETCH_VANE)).toBeGreaterThanOrEqual(3);
-    expect(ratio(GOLD, FLETCH_VANE).toFixed(2)).toBe('4.12');
-    expect(ratio(GOLD, FLETCH_SHEEN_LIFT)).toBeLessThan(3); // why the bands stop short
+    expect(ratio(GOLD, FLETCH_VANE).toFixed(2)).toBe('5.74');
+    // ⚠️ AND THE OLD REASON THE BANDS STOP SHORT NO LONGER HOLDS, which is recorded
+    // rather than left as a stale comment: on the V3 ladder the gold measured 2.42:1 on
+    // a brightened sheen and the SHEEN_FLOOR geometry was LOAD-BEARING for the state
+    // claim. On the V4 ladder it clears there too (3.30:1), so the geometry survives as
+    // FEATHER ANATOMY — a real fletch's sheen does stop short of the cut — with a
+    // recorded margin instead of a necessity.
+    expect(ratio(GOLD, FLETCH_SHEEN_LIFT)).toBeGreaterThanOrEqual(3);
+    expect(ratio(GOLD, FLETCH_SHEEN_LIFT).toFixed(2)).toBe('3.30');
+    // 3 — THE HANG. The lower half of every vane sits on the parchment PAGE, where the
+    //     same silhouette is unmissable.
+    expect(ratio(FLETCH_VANE, PARCH)).toBeGreaterThanOrEqual(4.5);
   });
 
-  test('the plain register is RE-INKED for the honey barrel, with its negative control', () => {
+  test('⚠️⚠️ THE PLAIN REGISTER FLIPPED TO PARCHMENT, with its negative controls', () => {
+    // THE SHELF JOINS THE JOURNEY. On the honey barrel these labels were INK and their
+    // underline was GOLD_TXT. On cedar the ink register does not exist at any tone, so
+    // the reference tabs take the same parchment register the fletch labels have had
+    // since V1, and the underline takes GILT — the same metal as the wordmark's leaf
+    // and the quill-line indicator, rather than a fourth gold.
     const { container } = render(<NavRibbon view="compendium" onNavClick={() => {}} />);
     const active = plains(container).find((b) => label(b) === 'Compendium');
     const resting = plains(container).find((b) => label(b) === 'Gallery');
-    expect(active.style.color).toBe(rgb(INK_DEEP));
-    expect(resting.style.color).toBe(rgb(BODY));
-    expect(active.style.borderBottom).toBe(`2px solid ${rgb(GOLD_TXT)}`);
-    // The measurements that forced the move, quoted. GOLD_TXT was V2's ACTIVE LABEL
-    // at 5.75:1 on cream; on this barrel it is 3.38:1, which fails AA as text and is
-    // why it survives only as the UNDERLINE, where 1.4.11's 3:1 is the floor.
-    expect(ratio(INK_DEEP, SHAFT_BODY).toFixed(2)).toBe('7.06');
-    expect(ratio(BODY, SHAFT_BODY).toFixed(2)).toBe('4.89');
-    expect(ratio(GOLD_TXT, SHAFT_BODY).toFixed(2)).toBe('3.38');
-    expect(ratio(GOLD_TXT, SHAFT_BODY)).toBeLessThan(4.5);      // FAILS as text
-    expect(ratio(GOLD_TXT, SHAFT_BODY)).toBeGreaterThanOrEqual(3); // clears as a boundary
+    expect(active.style.color).toBe(rgb(PARCH));
+    expect(resting.style.color).toBe(rgb(PARCH_100));
+    expect(active.style.borderBottom).toBe(`2px solid ${rgb(GILT)}`);
+    // ⚠️ NEGATIVE CONTROLS — every tone this replaced, pinned as a failure so "just put
+    // the old colour back" reds with the reason attached. All three were CORRECT on the
+    // honey barrel; this is a list of tones whose ground moved, not of mistakes.
+    expect(ratio(INK_DEEP, SHAFT_BODY)).toBeLessThan(4.5);
+    expect(ratio(INK_DEEP, SHAFT_BODY).toFixed(2)).toBe('1.97');   // was 7.06 on honey
+    expect(ratio(BODY, SHAFT_BODY).toFixed(2)).toBe('1.36');       // was 4.89 on honey
+    expect(ratio(GOLD_TXT, SHAFT_BODY)).toBeLessThan(3);           // fails even as a boundary
+    expect(ratio(GOLD_TXT, SHAFT_BODY).toFixed(2)).toBe('1.06');   // was 3.38 on honey
+    // …and the replacements really are better, or the swap bought nothing. (Quoted
+    // against SHAFT_BODY here, which is the token every version of this pin has used;
+    // the per-rider PALE floors live in tests/design/compositedBarAA.test.js.)
+    expect(ratio(PARCH_100, SHAFT_BODY)).toBeGreaterThanOrEqual(4.5);
+    expect(ratio(GILT, SHAFT_BODY)).toBeGreaterThanOrEqual(3);
+    expect(ratio(GILT, SHAFT_BODY).toFixed(2)).toBe('3.79');
   });
 });
 

@@ -17,8 +17,10 @@ import {
   FLETCH_BARB, FLETCH_LEAD, FLETCH_RACHIS, FLETCH_SEAM, FLETCH_SHEEN, FLETCH_SHEEN_LIFT,
   FLETCH_TIP, FLETCH_VANE, GOLD, GOLD_DEEP, GOLD_SOFT,
   GOLD_TXT, GREEN, GREEN_BG, GREEN_DEEP, INK, INK_DEEP, MUTED, PARCH, PARCH_100, RED, RED_BG,
-  SECOND, SHAFT, SHAFT_BODY, SHAFT_EDGE, SHAFT_GREEN, SHAFT_RIM, SHAFT_RULE, SHAFT_SHEEN,
-  SHAFT_SLATE, SLATE, SLATE_BG, SLATE_DEEP, WRAP,
+  SECOND, SHAFT, SHAFT_BODY, SHAFT_EDGE, SHAFT_RIM, SHAFT_RULE, SHAFT_SHEEN,
+  SHAFT_SAGE, SHAFT_STEEL, SLATE, SLATE_BG, SLATE_DEEP, WRAP, WRAP_EDGE, WRAP_GLOSS,
+  BOLE, BOLE_DEEP, GILT, GILT_LIGHT, HEADER_RIDERS, SHAFT_STOPS,
+  SEAL_WAX, cylinderToneAt, riderFloorTone, riderGrainShare,
   swatch,
 } from '../../src/components/theme.js';
 // THE LIVING BACKDROP wash strength — imported (not hard-coded) so raising the
@@ -74,6 +76,17 @@ function ratio(a, b) {
   const hi = Math.max(l1, l2);
   const lo = Math.min(l1, l2);
   return (hi + 0.05) / (lo + 0.05);
+}
+
+/**
+ * An sRGB triple back to the 6-digit hex `luminance` above insists on.
+ *
+ * ⚠️ IT ROUNDS, AND THAT IS THE HONEST DIRECTION. cylinderToneAt interpolates in
+ * floats; a real raster quantises to 8 bits per channel, so rounding here measures the
+ * tone a reader's screen actually shows rather than one no display can produce.
+ */
+function hexOf(rgb) {
+  return `#${rgb.map((v) => Math.round(v).toString(16).padStart(2, '0')).join('')}`;
 }
 
 const AA_TEXT = 4.5; // normal-size text
@@ -489,11 +502,12 @@ describe('Illustrated ground-dress legibility (WCAG 1.4.11 — 3:1 graphics on t
   });
 });
 
-// ── THE HALF-SEEN WAR ARROW (ribbon v3, owner directive 2026-08-03 evening) ───
+// ── THE WAR ARROW, REPAINTED (ribbon V4, owner directive 2026-08-03 night) ────
 //
-// Two grounds, two registers, and the whole point of this section is that a tone is
+// Two grounds, ONE register, and the whole point of this section is that a tone is
 // only ever correct WITH RESPECT TO THE GROUND IT LANDS ON. The ribbon has now moved
-// ground twice, and both moves broke foregrounds that had been fine the day before:
+// ground three times, and every move broke foregrounds that had been fine the day
+// before:
 //
 //   V1  a dark ink bar    → pale labels, gold wordmark.
 //   V2  a cream plank     → PARCH_100 and GOLD both collapsed on light wood; the
@@ -501,19 +515,147 @@ describe('Illustrated ground-dress legibility (WCAG 1.4.11 — 3:1 graphics on t
 //   V3  a honey-tan shaft → the barrel is much darker than the cream, and GOLD_TXT
 //                           (5.75 → 3.38), GREEN_DEEP (5.00 → 2.93) and SLATE_DEEP
 //                           (4.28 → 3.53) ALL fell below AA in turn.
+//   V4  a CEDAR war shaft → the ink register itself becomes impossible. INK_DEEP
+//                           measures 1.97:1, BODY 1.36:1, GOLD_TXT 1.06:1 — and the
+//                           feather went dark with the wood, so the vane lost its
+//                           4.46:1 boundary against the barrel as well.
 //
-// Each of those three is pinned below as a NEGATIVE CONTROL, so "just put the old
-// colour back" reds here with the reason attached rather than shipping a header
-// that screenshots fine and is unreadable in the app. That is the only defence
-// against this class: nothing else in the suite notices, because the cells still
-// render, still navigate and still carry aria-current.
+// Every one of those is pinned below as a NEGATIVE CONTROL, so "just put the old
+// colour back" reds here with the reason attached rather than shipping a header that
+// screenshots fine and is unreadable in the app. That is the only defence against this
+// class: nothing else in the suite notices, because the cells still render, still
+// navigate and still carry aria-current.
 
-describe('THE GREY-GOOSE VANE — a pale label on a dark feather owes AA at the LIGHT points', () => {
-  // ⚠️⚠️ THE LIGHTEST BAND GOVERNS, NOT THE VANE. This is the inverse of the shaft
-  // block below and it is the mistake that is easy to make: a dark-on-light label
-  // fails at the ground's darkest point, a light-on-dark label fails at its
+describe('⚠️⚠️ THE MID-RUSSET DEAD BAND — the one law this palette cannot break', () => {
+  // THE SINGLE MOST IMPORTANT DON'T IN THE FILE, as arithmetic rather than as advice.
+  // A wood body whose relative luminance lands between the two numbers below clears
+  // NEITHER register at any hue, and NOTHING about that failure is visible in a
+  // screenshot: the labels still render, in a colour that looks deliberate.
+  const paleCeiling = (luminance(PARCH_100) + 0.05) / AA_TEXT - 0.05;
+  const darkFloor = AA_TEXT * (luminance(INK_DEEP) + 0.05) - 0.05;
+
+  test('the band is real: between the two floors, BOTH registers fail', () => {
+    expect(paleCeiling).toBeCloseTo(0.1447, 4);
+    expect(darkFloor).toBeCloseTo(0.2523, 4);
+    expect(paleCeiling).toBeLessThan(darkFloor); // …or there would be no band at all
+    // A grey at the middle of the band, measured both ways. Neither reaches 4.5.
+    const mid = (paleCeiling + darkFloor) / 2;
+    const at = (L) => (Math.max(L, luminance(PARCH_100)) + 0.05) / (Math.min(L, luminance(PARCH_100)) + 0.05);
+    const atDark = (L) => (Math.max(L, luminance(INK_DEEP)) + 0.05) / (Math.min(L, luminance(INK_DEEP)) + 0.05);
+    expect(at(mid)).toBeLessThan(AA_TEXT);
+    expect(atDark(mid)).toBeLessThan(AA_TEXT);
+  });
+
+  test('⚠️⚠️ SHAFT_BODY IS COMMITTED BELOW THE BAND — L ≤ 0.13, and it is a LAW', () => {
+    // The owner's directive is a dark cedar shaft, and the only safe side of the band
+    // is the DARK one. This is the pin that stops a future "warm it up a little" from
+    // walking the whole bar into a place where no label of any colour is legible.
+    expect(luminance(SHAFT_BODY)).toBeLessThanOrEqual(0.13);
+    expect(luminance(SHAFT_BODY)).toBeLessThan(paleCeiling);
+    // Today's value, in its own assertion so a retune edits an obvious record.
+    expect(luminance(SHAFT_BODY).toFixed(4)).toBe('0.0820');
+    // …and EVERY step of the barrel is out of the band, not just the body one.
+    for (const [name, tone] of Object.entries({ SHAFT_SHEEN, SHAFT, SHAFT_BODY, SHAFT_EDGE, SHAFT_RIM })) {
+      expect(luminance(tone), `${name} is inside the dead band`).toBeLessThan(darkFloor);
+    }
+  });
+});
+
+describe('⚠️⚠️ THE PALE REGISTER — the polarity flip, measured per rider', () => {
+  // THE INVERSION, STATED ONCE. A dark-on-light label fails at its ground's DARKEST
+  // point; a light-on-dark label fails at its LIGHTEST. Every floor below is the
+  // rider's own top-of-ink tone, which is what riderFloorTone now returns for a pale
+  // rider — and the grain, a darkening wash, is deliberately absent from it.
+  const paleFloor = (key) => luminance(hexOf(riderFloorTone(HEADER_RIDERS[key])));
+  const onFloor = (ink, key) => {
+    const l = paleFloor(key);
+    const li = luminance(ink);
+    return (Math.max(l, li) + 0.05) / (Math.min(l, li) + 0.05);
+  };
+
+  test('the sheen is CONFINED ABOVE EVERY RIDER — the geometric guarantee', () => {
+    // The V4 analogue of SHAFT_STOPS.body, and the claim the whole register rests on.
+    // SHAFT_SHEEN itself (L 0.1467) does NOT clear PARCH_100's 4.5:1 ceiling; it never
+    // has to, because no rider's ink reaches it. Asserted as a relationship, so a
+    // future edit that lowers a rider or raises the stop reds here.
+    const shallowest = Math.min(...Object.values(HEADER_RIDERS).map((r) => r.ink[0] / r.bar));
+    expect(shallowest).toBeGreaterThan(SHAFT_STOPS.lit);
+    expect(shallowest).toBeCloseTo(0.1995, 4);        // the wordmark's own top of ink
+    expect(luminance(SHAFT_SHEEN)).toBeGreaterThan((luminance(PARCH_100) + 0.05) / AA_TEXT - 0.05);
+    // …and the lightest ground a rider actually touches DOES clear it.
+    expect(luminance(hexOf(cylinderToneAt(shallowest)))).toBeLessThan(
+      (luminance(PARCH_100) + 0.05) / AA_TEXT - 0.05,
+    );
+  });
+
+  test('every PALE rider clears AA on its own lightest ground', () => {
+    for (const key of ['tab', 'signIn', 'chip', 'mobileTab']) {
+      expect(onFloor(PARCH_100, key), `PARCH_100 on ${key}`).toBeGreaterThanOrEqual(AA_TEXT);
+      expect(onFloor(PARCH, key), `PARCH on ${key}`).toBeGreaterThanOrEqual(AA_TEXT);
+    }
+    // the chip's own status tints, on the chip's own ground
+    expect(onFloor(SHAFT_SAGE, 'chip')).toBeGreaterThanOrEqual(AA_TEXT);
+    expect(onFloor(SHAFT_STEEL, 'chip')).toBeGreaterThanOrEqual(AA_TEXT);
+    // the active plain tab's underline is a BOUNDARY beside a legible label
+    expect(onFloor(GILT, 'tabRule')).toBeGreaterThanOrEqual(AA_UI);
+  });
+
+  test('the recorded pale ratios are the MEASURED ones, to 2dp', () => {
+    expect(onFloor(PARCH_100, 'tab').toFixed(2)).toBe('5.73');
+    expect(onFloor(PARCH, 'tab').toFixed(2)).toBe('6.31');
+    expect(onFloor(PARCH_100, 'signIn').toFixed(2)).toBe('5.27');
+    expect(onFloor(SHAFT_SAGE, 'chip').toFixed(2)).toBe('4.63');
+    expect(onFloor(SHAFT_STEEL, 'chip').toFixed(2)).toBe('4.63');
+    expect(onFloor(GILT, 'tabRule').toFixed(2)).toBe('3.74');
+    expect(onFloor(PARCH_100, 'mobileTab').toFixed(2)).toBe('6.32');
+  });
+
+  test('⚠️ POLARITY IS READ, NOT ASSUMED — the pin that would go vacuous without it', () => {
+    // riderFloorTone used to take ink[1] unconditionally. Pointed at a pale rider that
+    // hands back the FRIENDLIEST ground on the bar and reports a comfortable pass while
+    // the real worst case is never measured. So the non-vacuity is asserted directly:
+    // for every pale rider the floor really is its TOP of ink, and the top really is
+    // lighter than the bottom.
+    for (const [key, r] of Object.entries(HEADER_RIDERS)) {
+      if (r.polarity === 'bed') continue;
+      expect(r.polarity).toBe('pale');
+      expect(riderFloorTone(r)).toEqual(cylinderToneAt(r.ink[0] / r.bar));
+      expect(luminance(hexOf(cylinderToneAt(r.ink[0] / r.bar))))
+        .toBeGreaterThan(luminance(hexOf(cylinderToneAt(r.ink[1] / r.bar))));
+      // …and a pale rider's floor carries NO grain, because a darkening wash is its
+      // best case rather than its worst.
+      expect(riderGrainShare(r)).toBe(0);
+    }
+    // A 'bed' rider has no barrel ground at all, and says so rather than guessing.
+    expect(HEADER_RIDERS.wordmark.polarity).toBe('bed');
+    expect(HEADER_RIDERS.seal.polarity).toBe('bed');
+    expect(() => riderFloorTone(HEADER_RIDERS.wordmark)).toThrow(/no barrel ground/);
+  });
+
+  test('⚠️⚠️ NEGATIVE CONTROLS: every V3 ink tone FAILS on cedar', () => {
+    // These are the exact substitutions V4 was forced into, pinned as failures. Every
+    // one was CORRECT on the honey barrel — this is not a list of mistakes, it is a
+    // list of tones whose ground moved out from under them, for the third time.
+    for (const [name, tone] of Object.entries({ INK_DEEP, BODY, SECOND, GOLD_TXT })) {
+      expect(onFloor(tone, 'tab'), `${name} still reads on cedar`).toBeLessThan(AA_TEXT);
+    }
+    // …including as a BOUNDARY, which is the weaker claim GOLD_TXT survived V3 on.
+    expect(onFloor(GOLD_TXT, 'tabRule')).toBeLessThan(AA_UI);
+    // …and the V3 DARK chip steps, which is why the chip flipped to pale tints.
+    expect(ratio('#2A4420', SHAFT_BODY)).toBeLessThan(AA_TEXT);   // the V3 SHAFT_GREEN
+    expect(ratio('#303E4A', SHAFT_BODY)).toBeLessThan(AA_TEXT);   // the V3 SHAFT_SLATE
+    // …and the replacements really are better, or the swap bought nothing.
+    expect(onFloor(SHAFT_SAGE, 'chip')).toBeGreaterThan(onFloor('#2A4420', 'chip'));
+    expect(onFloor(SHAFT_STEEL, 'chip')).toBeGreaterThan(onFloor('#303E4A', 'chip'));
+  });
+});
+
+describe('THE DARK-INK VANE — a pale label on a dark feather owes AA at the LIGHT points', () => {
+  // ⚠️⚠️ THE LIGHTEST BAND GOVERNS, NOT THE VANE. This is the same inversion the shaft
+  // block above makes, and it is the mistake that is easy to make: a dark-on-light
+  // label fails at the ground's darkest point, a light-on-dark label fails at its
   // LIGHTEST. So the reference is FLETCH_SHEEN_LIFT — the active fletch's brightened
-  // sheen — and every tone in the goose ladder is authored OPAQUE precisely so that
+  // sheen — and every tone in the ladder is authored OPAQUE precisely so that
   // reference is a value this file can name instead of a hand-wave.
   const LADDER = Object.freeze({
     FLETCH_TIP, FLETCH_BARB, FLETCH_VANE, FLETCH_LEAD, FLETCH_SHEEN,
@@ -521,10 +663,6 @@ describe('THE GREY-GOOSE VANE — a pale label on a dark feather owes AA at the 
   });
 
   test('FLETCH_SHEEN_LIFT really IS the lightest band — the reference is not assumed', () => {
-    // Non-vacuity for everything below: if some other tone in the ladder were
-    // lighter, every ratio here would be measuring the wrong ground while staying
-    // green. Pinned as a maximum over the ladder, so a new tone joins the guard
-    // automatically instead of slipping past it.
     for (const [name, tone] of Object.entries(LADDER)) {
       expect(luminance(tone), `${name} is lighter than the reference band`)
         .toBeLessThanOrEqual(luminance(FLETCH_SHEEN_LIFT));
@@ -541,174 +679,169 @@ describe('THE GREY-GOOSE VANE — a pale label on a dark feather owes AA at the 
   });
 
   test('the recorded vane ratios in theme.js are the MEASURED ones, to 2dp', () => {
-    expect(ratio(PARCH_100, FLETCH_SHEEN_LIFT).toFixed(2)).toBe('4.84');
-    expect(ratio(PARCH, FLETCH_SHEEN_LIFT).toFixed(2)).toBe('5.33');
-    expect(ratio(PARCH_100, FLETCH_SHEEN).toFixed(2)).toBe('5.49');
-    expect(ratio(PARCH_100, FLETCH_LEAD).toFixed(2)).toBe('6.30');
-    expect(ratio(PARCH_100, FLETCH_VANE).toFixed(2)).toBe('8.24');
-    expect(ratio(PARCH_100, FLETCH_BARB).toFixed(2)).toBe('8.60');
+    expect(ratio(PARCH_100, FLETCH_SHEEN_LIFT).toFixed(2)).toBe('6.60');
+    expect(ratio(PARCH, FLETCH_SHEEN_LIFT).toFixed(2)).toBe('7.27');
+    expect(ratio(PARCH_100, FLETCH_SHEEN).toFixed(2)).toBe('7.86');
+    expect(ratio(PARCH_100, FLETCH_LEAD).toFixed(2)).toBe('8.92');
+    expect(ratio(PARCH_100, FLETCH_VANE).toFixed(2)).toBe('11.50');
+    expect(ratio(PARCH_100, FLETCH_BARB).toFixed(2)).toBe('11.82');
   });
 
   test('⚠️ THE SPECIES PIN — goose barbs are a comb, turkey barring is a stripe', () => {
     // The owner corrected the species, and this is that correction as a number. A
     // turkey primary is boldly barred; a goose primary is not. V2's texture dropped
-    // ~27% of its vane's luminance, which is barring. This is 7.96%, which is a
-    // comb. If a future edit deepens the barbs back toward the turkey reading, it
-    // reds here with the reason attached instead of quietly changing the bird.
+    // ~27% of its vane's luminance, which is barring. ⚠️ THE LADDER MOVED IN V4 AND
+    // THIS NUMBER MOVED WITH IT — 7.96% → 7.92% — because both tones were re-authored
+    // one register down. The INVARIANT (4 < drop < 12) is what defends the species;
+    // the quoted value is a record and is expected to move whenever the ladder does.
     const drop = (luminance(FLETCH_VANE) - luminance(FLETCH_BARB)) / luminance(FLETCH_VANE) * 100;
-    expect(drop).toBeCloseTo(7.96, 1);
+    expect(drop).toBeCloseTo(7.92, 1);
     expect(drop).toBeGreaterThan(4);  // a striation you can actually see
     expect(drop).toBeLessThan(12);    // and never a bar
   });
 
   test('the ladder is ORDERED, so "paler leading edge, darker tip" is true', () => {
-    // The gradient tells a tonal story: pale at the leading edge, darkening toward
-    // the trailing tip and the lower edge. If the ladder ever inverted, the fletch
-    // would light from the wrong side and nothing else would catch it.
     expect(luminance(FLETCH_TIP)).toBeLessThan(luminance(FLETCH_VANE));
     expect(luminance(FLETCH_VANE)).toBeLessThan(luminance(FLETCH_LEAD));
     expect(luminance(FLETCH_LEAD)).toBeLessThan(luminance(FLETCH_SHEEN));
     expect(luminance(FLETCH_SHEEN)).toBeLessThan(luminance(FLETCH_SHEEN_LIFT));
   });
 
-  test('the active gold edge clears 3:1 — and the sheen bands are why it can', () => {
-    // The gold underline CARRIES STATE, so unlike a decorative edge it owes SC
-    // 1.4.11's 3:1 on the lightest ground it can touch. GooseFletch's SHEEN_FLOOR
-    // ends the sheen bands above the vane's lower edge precisely so that ground is
-    // the vane gradient (4.12:1) and never a sheen band (2.42:1). Both are pinned:
-    // the pass, and the fail it would become without the geometry.
-    expect(ratio(GOLD, FLETCH_VANE)).toBeGreaterThanOrEqual(AA_UI);
-    expect(ratio(GOLD, FLETCH_VANE).toFixed(2)).toBe('4.12');
-    expect(ratio(GOLD, FLETCH_SHEEN_LIFT)).toBeLessThan(AA_UI);
-    expect(ratio(GOLD, FLETCH_SHEEN_LIFT).toFixed(2)).toBe('2.42');
+  test('⚠️⚠️ THE VANE-vs-WOOD BOUNDARY IS RE-SCOPED, AND THE NUMBER IS QUOTED', () => {
+    // THE TRADE V4 MAKES, IN THE OPEN. The owner's directive puts a DARK INK feather on
+    // a DARK CEDAR shaft, so the boundary that used to say "fletch" at 4.46:1 now
+    // measures 1.73:1 and no honest retune recovers it: lifting the vane walks it into
+    // the label register's way, lifting the wood walks it into the dead band.
+    expect(ratio(FLETCH_VANE, SHAFT_BODY)).toBeLessThan(AA_UI);
+    expect(ratio(FLETCH_VANE, SHAFT_BODY).toFixed(2)).toBe('1.73');
+    // SO THE IDENTIFICATION MOVES, AND EACH REPLACEMENT IS ASSERTED RATHER THAN
+    // CLAIMED. SC 1.4.11 asks whether a component is IDENTIFIABLE, and three separate
+    // channels answer that here, none of them this boundary:
+    //   1. THE LABEL — each cell carries its own name, well past AA on every band.
+    expect(ratio(PARCH_100, FLETCH_SHEEN_LIFT)).toBeGreaterThanOrEqual(AA_TEXT);
+    //   2. THE INDICATOR — the active lane's gold, which DOES clear 3:1 on the sheen
+    //      zone it is drawn in, and is why the indicator had to leave the house GOLD.
+    expect(ratio(GILT_LIGHT, SHAFT_SHEEN)).toBeGreaterThanOrEqual(AA_UI);
+    expect(ratio(GILT_LIGHT, SHAFT_SHEEN).toFixed(2)).toBe('3.34');
+    expect(ratio(GOLD, SHAFT_SHEEN)).toBeLessThan(AA_UI);          // the house gold cannot
+    expect(ratio(GOLD, SHAFT_SHEEN).toFixed(2)).toBe('2.23');
+    //   3. THE HANG — the lower half of every vane sits on the parchment PAGE, not on
+    //      wood at all, where the same silhouette is unmissable.
+    expect(ratio(FLETCH_VANE, PARCH)).toBeGreaterThanOrEqual(AA_TEXT);
   });
 
   test('the quill seam is nearly tonal, and that is RECORDED, not hidden', () => {
-    // V2 cut its seams in GILT and they read as ornament. Real fletching has no
-    // metal in it: where two vanes meet you see one feather's shadow on the next.
-    // 1.23:1 is what that looks like, and it is legitimate because the boundary a
-    // user must perceive is the vane against the wood, asserted in the next block.
+    // V2 cut its seams in GILT and they read as ornament. Real fletching has no metal
+    // in it: where two vanes meet you see one feather's shadow on the next. ⚠️ The seam
+    // is now the TIP tone BY CONSTRUCTION rather than by a matching literal, so the two
+    // can never drift apart the way two hand-keyed copies of one tone do.
+    expect(FLETCH_SEAM).toBe(FLETCH_TIP);
     expect(ratio(FLETCH_SEAM, FLETCH_VANE)).toBeLessThan(AA_UI);
     expect(ratio(FLETCH_SEAM, FLETCH_VANE).toFixed(2)).toBe('1.23');
   });
 });
 
-/**
- * THE HONEY-TAN SHAFT (ribbon v3 directive) — every label that rides the barrel,
- * measured against SHAFT_BODY.
- *
- * ⚠️ THE REFERENCE GROUND IS SHAFT_BODY, AND IT IS A GEOMETRIC CLAIM. The bar is not
- * one flat colour: it is a cylinder, lit along the centreline at the top and falling
- * off to a dark silhouette at the bottom edge. A label's worst case is therefore the
- * darkest tone that occurs INSIDE THE LABEL BAND — not the darkest tone on the bar.
- * Measuring against SHAFT_RIM would be over-strict by a margin no glyph ever touches
- * (it would force every label to near-black and destroy the palette); measuring
- * against SHAFT would be a lie. SHAFT_BODY is the honest answer, and what makes it
- * honest is SHAFT_STOPS.body — the stop below which the falloff is confined — which
- * tests/components/navFletching.test.jsx pins to clear the vertically-centred label
- * box on BOTH header heights. Without that pin this reference would rot the first
- * time someone retuned the gradient.
- */
-describe('THE HONEY-TAN SHAFT — the barrel carries text, so it owes AA in the label band', () => {
-  const GROUND = SHAFT_BODY;
+describe('THE GILT LADDER + THE BOLE BED — the wordmark brings its own ground', () => {
+  test('⚠️⚠️ THE BED IS THE REASON THERE CAN BE GOLD AT ALL', () => {
+    // No gold a reader would call gold clears AA on the barrel's lit sheen: that is the
+    // whole argument for the bed, and it is asserted rather than asserted-about.
+    expect(ratio(GILT, SHAFT_SHEEN)).toBeLessThan(AA_TEXT);
+    expect(ratio(GILT_LIGHT, SHAFT_SHEEN)).toBeLessThan(AA_TEXT);
+    // …and on the bole it clears with room. 4.8:1 is the spec's own floor, above AA.
+    expect(ratio(GILT, BOLE)).toBeGreaterThanOrEqual(4.8);
+    expect(ratio(GILT, BOLE).toFixed(2)).toBe('7.50');
+    expect(ratio(GILT_LIGHT, BOLE).toFixed(2)).toBe('9.84');
+  });
 
+  test('EVERY GILT STOP IS AT OR ABOVE L 0.44 — the fill carries 100% of the claim', () => {
+    // A gradient fill is only as legible as its darkest stop, and a "modelling" stop
+    // below the floor is invisible to any token-vs-token pin. There are exactly two
+    // stops and both are above it.
+    for (const [name, tone] of Object.entries({ GILT, GILT_LIGHT })) {
+      expect(luminance(tone), `${name} is below the leaf's fill floor`).toBeGreaterThanOrEqual(0.44);
+    }
+    expect(luminance(GILT).toFixed(4)).toBe('0.4509');
+    // …and the light stop clears the SEPARATE, higher floor the indicator owes,
+    // because it is drawn on the shaft's sheen zone rather than on the bole.
+    expect(luminance(GILT_LIGHT)).toBeGreaterThanOrEqual(0.58);
+    expect(luminance(GILT_LIGHT).toFixed(4)).toBe('0.6068');
+  });
+
+  test('⚠️ THE BOLE’S CORE IS AT OR BELOW L 0.06 — the ground every gilt ratio uses', () => {
+    // If the bed were allowed to drift lighter, every ratio above would fall together
+    // and nothing else in the suite would notice.
+    expect(luminance(BOLE)).toBeLessThanOrEqual(0.06);
+    expect(luminance(BOLE_DEEP)).toBeLessThanOrEqual(0.06);
+    expect(luminance(BOLE_DEEP)).toBeLessThan(luminance(BOLE)); // the scorch is deeper
+    expect(luminance(BOLE).toFixed(4)).toBe('0.0168');
+  });
+
+  test('THE GILDED SEAL: three tones, three LUMINANCE steps, no hue doing any work', () => {
+    // ⚠️ THE OWNER-VETO CANDIDATE, measured. The `o` is a gold annulus; the wax fills
+    // between ring and counter; the counter is a true hole showing the bole.
+    expect(ratio(SEAL_WAX, GILT)).toBeGreaterThanOrEqual(AA_UI);
+    expect(ratio(SEAL_WAX, GILT).toFixed(2)).toBe('5.34');
+    expect(ratio(BOLE, GILT).toFixed(2)).toBe('7.50');
+    // AND THE NEGATIVE CONTROL THAT FORCED IT: bare wax on cedar is unreadable, which
+    // is why the seal could not simply keep riding the wood.
+    expect(ratio(SEAL_WAX, SHAFT_BODY)).toBeLessThan(AA_UI);
+    expect(ratio(SEAL_WAX, SHAFT_BODY).toFixed(2)).toBe('1.41');
+    // …and lightening the wax is not the escape hatch: a wax bright enough to clear
+    // 4.5:1 on cedar would have to land inside the dead band's own lower half.
+    expect(luminance(SEAL_WAX)).toBeLessThan(0.13);
+  });
+});
+
+describe('THE CEDAR SHAFT — the barrel, the wraps, and the groove cut in it', () => {
   test('the cylinder ladder is ORDERED — lighter above, darker toward the silhouette', () => {
-    // The read the whole composition rests on. Inverted, the bar would look like a
-    // lit shelf rather than a round shaft, and SHAFT_BODY would stop being the
-    // label band's floor without a single ratio changing.
     const ladder = [SHAFT_SHEEN, SHAFT, SHAFT_BODY, SHAFT_EDGE, SHAFT_RIM];
     for (let i = 1; i < ladder.length; i += 1) {
       expect(luminance(ladder[i])).toBeLessThan(luminance(ladder[i - 1]));
     }
-    // A real barrel: 2.67:1 top to bottom. V3's first cut modelled only 1.89:1
-    // and read as a flat tan bar with a gradient — the sheen and the rim were
-    // opened up, and SHAFT_BODY deliberately was NOT moved, so every text ratio
-    // measured against it is untouched by the change.
-    expect(ratio(SHAFT_SHEEN, SHAFT_RIM).toFixed(2)).toBe('2.67');
+    // A real barrel: 2.76:1 top to bottom. V3's first cut modelled only 1.89:1 and read
+    // as a flat tan bar with a gradient; the modelling range is deliberately preserved
+    // across the repaint even though every tone in it moved.
+    expect(ratio(SHAFT_SHEEN, SHAFT_RIM).toFixed(2)).toBe('2.76');
   });
 
-  test('⚠️ THE PLANK BECAME A MATERIAL — a deliberate, recorded shift from V2', () => {
-    // V2 pinned SHAFT vs PARCH between 1.1 and 1.4 ("separates without becoming a
-    // dark bar") and measured 1.15. V3 measures 1.85, and that is the DIRECTIVE, not
-    // a regression: the owner asked for honey-tan wood from a reference photo, which
-    // is a different material from cream paper and must read as one. Recorded here
-    // rather than left to be re-found as a mystery, with the old band written out so
-    // nobody restores it thinking they are fixing something.
-    expect(ratio(SHAFT, PARCH).toFixed(2)).toBe('1.85');
+  test('⚠️ THE PLANK BECAME A MATERIAL, AND THEN A WEAPON — both shifts recorded', () => {
+    // V2 pinned SHAFT vs PARCH between 1.1 and 1.4 ("separates without becoming a dark
+    // bar") and measured 1.15; V3 measured 1.85 and recorded honey-tan wood as the
+    // directive. V4 is a CEDAR WAR SHAFT and measures far past both — it IS a dark bar
+    // now, deliberately, because the owner's arrow is made of dark wood. Recorded here
+    // rather than left to be re-found as a mystery.
     expect(luminance(SHAFT)).toBeLessThan(luminance(PARCH));
-    // Still wood, not chrome: nowhere near a boundary that would make the header
-    // read as a dark bar bolted onto the page.
-    expect(ratio(SHAFT, PARCH)).toBeLessThan(2.5);
+    expect(ratio(SHAFT, PARCH)).toBeGreaterThan(2.5);   // the V3 band, deliberately broken
+    expect(ratio(SHAFT, PARCH).toFixed(2)).toBe('6.53');
   });
 
-  test('every label on the shaft clears AA against the label band’s floor', () => {
-    const riders = [
-      ['wordmark + active reference tab', INK_DEEP],
-      ['resting reference tab',           BODY],
-      ['ghost buttons (Upgrade)',         SECOND],
-      ['signed-in account chip',          SHAFT_GREEN],
-      ['developer account chip',          SHAFT_SLATE],
-    ];
-    for (const [who, fg] of riders) {
-      expect(ratio(fg, GROUND), `${who}: ${fg} on ${GROUND}`).toBeGreaterThanOrEqual(AA_TEXT);
-    }
+  test('⚠️ THE WRAP IS IDENTIFIED BY ITS OWN STRUCTURE — the scoping, with numbers', () => {
+    // On honey wood the whipping cleared 1.4.11 at 3.16:1 against the barrel. On cedar
+    // the wood is the SAME HUE, so a wrap bright enough to clear 3:1 would be a
+    // different red rather than a deeper one — and the spec deepens it to oxblood. The
+    // claim therefore moves from "a step against the wood" to "a wound structure", and
+    // both halves are pinned so neither can quietly disappear.
+    expect(ratio(WRAP, SHAFT_BODY)).toBeLessThan(AA_UI);
+    expect(ratio(WRAP, SHAFT_BODY).toFixed(2)).toBe('1.69');
+    // 1 — it IS still a darker band than the wood, at both of its dark steps.
+    expect(luminance(WRAP)).toBeLessThan(luminance(SHAFT_BODY));
+    expect(ratio(WRAP_EDGE, SHAFT_BODY).toFixed(2)).toBe('2.22');
+    // 2 — and its own crest-to-valley ladder is what makes it read as thread.
+    expect(ratio(WRAP_GLOSS, WRAP_EDGE)).toBeGreaterThan(2);
+    expect(ratio(WRAP_GLOSS, WRAP_EDGE).toFixed(2)).toBe('2.12');
+    expect(luminance(WRAP_EDGE)).toBeLessThan(luminance(WRAP));
+    expect(luminance(WRAP)).toBeLessThan(luminance(WRAP_GLOSS));
   });
 
-  test('⚠️⚠️ NEGATIVE CONTROLS: the three V2 tones that FAIL on honey wood', () => {
-    // These are the exact substitutions ribbon v3 was forced into, pinned as
-    // failures. Every one of them was CORRECT on V2's cream plank — this is not a
-    // list of mistakes, it is a list of tones whose ground moved out from under them.
-    expect(ratio(GOLD_TXT, GROUND)).toBeLessThan(AA_TEXT);     // the V2 wordmark tone
-    expect(ratio(GREEN_DEEP, GROUND)).toBeLessThan(AA_TEXT);   // the V2 account-chip label
-    expect(ratio(SLATE_DEEP, GROUND)).toBeLessThan(AA_TEXT);   // the V2 developer-chip label
-    // …and the replacements really are better, or the swap bought nothing.
-    expect(ratio(INK_DEEP, GROUND)).toBeGreaterThan(ratio(GOLD_TXT, GROUND));
-    expect(ratio(SHAFT_GREEN, GROUND)).toBeGreaterThan(ratio(GREEN_DEEP, GROUND));
-    expect(ratio(SHAFT_SLATE, GROUND)).toBeGreaterThan(ratio(SLATE_DEEP, GROUND));
-  });
-
-  test('the account chip’s TWO-STEP collapsed, and the numbers are why', () => {
-    // V2 could keep a brighter RULE and a deeper LABEL because the cream ground let
-    // the rule clear 1.4.11 at 3.91:1. On this barrel GREEN falls to 2.18:1 and
-    // GREEN_DEEP to 2.93:1 — neither clears the boundary floor — so there is no
-    // honest two-step left and rule and label take one tone that clears BOTH floors.
-    expect(ratio(GREEN, GROUND)).toBeLessThan(AA_UI);
-    expect(ratio(GREEN_DEEP, GROUND)).toBeLessThan(AA_UI);
-    expect(ratio(SHAFT_GREEN, GROUND)).toBeGreaterThanOrEqual(AA_TEXT);
-    expect(ratio(SHAFT_SLATE, GROUND)).toBeGreaterThanOrEqual(AA_TEXT);
-  });
-
-  test('the recorded shaft ratios in theme.js are the MEASURED ones, to 2dp', () => {
-    expect(ratio(INK_DEEP, GROUND).toFixed(2)).toBe('7.06');
-    expect(ratio(BODY, GROUND).toFixed(2)).toBe('4.89');
-    expect(ratio(SECOND, GROUND).toFixed(2)).toBe('7.06');
-    expect(ratio(SHAFT_GREEN, GROUND).toFixed(2)).toBe('4.87');
-    expect(ratio(SHAFT_SLATE, GROUND).toFixed(2)).toBe('4.96');
-    expect(ratio(GOLD_TXT, GROUND).toFixed(2)).toBe('3.38');
-  });
-
-  test('the fletch is the boundary that says "fletch"; the gold underline is a boundary too', () => {
-    // What tells a user where a fletch is, is the DARK VANE against the honey wood.
-    expect(ratio(FLETCH_VANE, GROUND)).toBeGreaterThanOrEqual(AA_UI);
-    expect(ratio(FLETCH_VANE, GROUND).toFixed(2)).toBe('4.46');
-    // The active reference tab's underline survives as GOLD_TXT precisely because
-    // 1.4.11's floor is 3:1 and it clears it — it sits beside an already-ink label,
-    // so it is a boundary and never the thing carrying the state alone.
-    expect(ratio(GOLD_TXT, GROUND)).toBeGreaterThanOrEqual(AA_UI);
-    // The silk whipping reads as a real binding rather than a smudge.
-    expect(ratio(WRAP, GROUND)).toBeGreaterThanOrEqual(AA_UI);
-    expect(ratio(WRAP, GROUND).toFixed(2)).toBe('3.16');
-  });
-
-  test('the reference-tab groove is present and quieter than the fletching — the hierarchy', () => {
-    // Both seams are decorative dividers with no WCAG floor, so what is pinned is
-    // the RELATIONSHIP the design depends on: the shelf's groove must not out-shout
-    // the journey's fletching. It must also actually be visible, unlike the BORDER
-    // it replaced and unlike V2's own groove tone, which was picked against cream
-    // and collapses to 1.29:1 on this ground.
-    expect(ratio(SHAFT_RULE, GROUND).toFixed(2)).toBe('2.14');
-    expect(ratio(SHAFT_RULE, GROUND)).toBeGreaterThan(ratio(BORDER, GROUND));
-    expect(ratio(SHAFT_RULE, GROUND)).toBeLessThan(ratio(FLETCH_VANE, GROUND));
-    expect(ratio(BORDER, GROUND)).toBeLessThan(1.3); // why BORDER could never serve here
+  test('the reference-tab groove is a SHADOW, and quieter than the fletching', () => {
+    // Both seams are decorative dividers with no WCAG floor, so what is pinned is the
+    // RELATIONSHIP the design depends on. ⚠️ THE OLD SECOND HALF INVERTED: the pin used
+    // to read "louder than BORDER", and on cedar BORDER is LIGHTER than the wood, so it
+    // would be the loudest mark on the bar. It fails now for the opposite reason, and
+    // the pin says which.
+    expect(luminance(SHAFT_RULE)).toBeLessThan(luminance(SHAFT_BODY));   // a cut, not a highlight
+    expect(ratio(SHAFT_RULE, SHAFT_BODY).toFixed(2)).toBe('1.41');
+    expect(ratio(SHAFT_RULE, SHAFT_BODY)).toBeLessThan(ratio(FLETCH_VANE, SHAFT_BODY));
+    expect(luminance(BORDER)).toBeGreaterThan(luminance(SHAFT_BODY)); // why BORDER cannot serve
   });
 });

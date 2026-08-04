@@ -1,6 +1,15 @@
 /**
- * Lockup.jsx — THE BRAND LOCKUP: the maker's plate, then the wordmark with its
- * wax-seal `o`.
+ * Lockup.jsx — THE BRAND LOCKUP: the GILDED WORDMARK, with its gilded wax-seal `o`.
+ *
+ * ⚠️⚠️ THE MAKER'S PLATE LEFT THIS FILE IN RIBBON V4, and it is the owner's own
+ * correction: the WORDMARK ITSELF is the mounted, gilded artifact, and there is no
+ * plate. Two objects were always one too many at 26px — a plate BESIDE a name is two
+ * marks competing, a gilded name is one — and on the V4 cedar shaft the plate could
+ * not have survived anyway: its near-black keyline measures 2.86:1 on that wood and
+ * its bronze face sits inside theme.js's mid-russet dead band. The reasoning and the
+ * three layers that replace it live in components/brand/GildedWordmark.jsx; the HOUSE
+ * DEVICE is untouched and still ships as the favicon, the PDF seal, the footer mark
+ * and the error boundary's.
  *
  * Owner task #78. It exists as its own module rather than as JSX inside App.jsx for
  * two reasons, and the second is the real one:
@@ -26,8 +35,8 @@
  * 1.32em on the desktop wordmark, 1.28em on the smaller mobile one. A single ratio
  * looks correct at one size only — the larger the type, the more the eye tolerates.
  */
-import { FS, INK_DEEP, serif_ } from '../theme.js';
-import MakerPlate from './MakerPlate.jsx';
+import { FS, GILT, serif_ } from '../theme.js';
+import GildedWordmark from './GildedWordmark.jsx';
 import WaxSeal from './WaxSeal.jsx';
 
 /**
@@ -54,15 +63,24 @@ export default function Lockup({ compact = false }) {
     margin: 0,
     fontSize: compact ? FS.lg : FS.h1,
     fontWeight: 800,
-    // THE WORDMARK IS DARK INK, and it has moved twice with the ground beneath it —
-    // both times forced, never stylistic. GOLD was right on V1's ink bar and 1.85:1
-    // on wood; GOLD_TXT was right on V2's cream plank at 5.75:1 and is 3.38:1 on the
-    // honey-tan barrel, which fails AA as text. INK_DEEP measures 7.06:1 against
-    // SHAFT_BODY and 6.69:1 against the composited bar, and is what the directive asks
-    // for in its own words. Both bars take it: they paint the same barrel.
-    color: INK_DEEP,
+    // THE WORDMARK'S INK HAS MOVED THREE TIMES WITH THE GROUND BENEATH IT, and every
+    // move was forced rather than stylistic. GOLD was right on V1's ink bar and 1.85:1
+    // on wood; GOLD_TXT was right on V2's cream plank at 5.75:1 and 3.38:1 on the
+    // honey-tan barrel; INK_DEEP was right on the honey barrel at 7.06:1 and is 1.97:1
+    // on V4's cedar. ⚠️ THE FOURTH MOVE IS DIFFERENT IN KIND: no flat tone clears on
+    // this ground in either register at the weight a wordmark wants, so the mark stops
+    // borrowing a ground and BRINGS ITS OWN — the bole bed — and the ink becomes gold
+    // leaf at 7.50:1 on it. `color` here is only the CLIP'S FALLBACK, and it is a GILT
+    // ladder member on purpose: if `background-clip: text` does not take, the wordmark
+    // renders solid gold rather than transparent. GildedWordmark.jsx owns the rest.
+    color: GILT,
     fontFamily: serif_,
     letterSpacing: '0.01em',
+    // `relative` is what the bole bed hangs off: the bed fills this box plus its
+    // derived reach, absolutely, so it costs no height. ⚠️ It must not cost one —
+    // theme.js derives ANCHOR_OFFSET from CHROME.headerDesktop and every in-page
+    // anchor in the estate lands on that number.
+    position: 'relative',
     ...(compact ? {} : { lineHeight: 1.1 }),
   };
   // ⚠️ EXACTLY ONE GLYPH BECOMES A GRAPHIC. The `o` of "Forge" — not the `o` of
@@ -86,16 +104,12 @@ export default function Lockup({ compact = false }) {
       <WaxSeal /><span style={COPY_ONLY}>o</span><span>rge</span>
     </>
   );
-  return (
-    <>
-      {/* The plate scales to the bar it is mounted on: the shaft is thin, so the
-          plate is small. It is a half-step quieter than the fletch band by
-          construction — the band is the loudest thing on this bar and the maker's
-          plate is not competing with it for the eye. */}
-      <MakerPlate size={compact ? 22 : 26} style={compact ? { flexShrink: 0 } : { marginRight: 8, flexShrink: 0 }} />
-      {compact
-        ? <span aria-hidden="true" data-testid="brand-wordmark" style={type}>{word}</span>
-        : <h1 aria-hidden="true" data-testid="brand-wordmark" style={type}>{word}</h1>}
-    </>
-  );
+  // ⚠️ THE GILDING WRAPS THE RUN RATHER THAN REPLACING IT. The bed is painted behind
+  // the same live type the lockup has always used, so the two capitals still track the
+  // font, the seal still sits on the text baseline, and the name is still selectable
+  // and copyable. Only the BED is drawn; see GildedWordmark.jsx's note on why.
+  const gilded = <GildedWordmark id={compact ? 'gild-m' : 'gild-d'}>{word}</GildedWordmark>;
+  return compact
+    ? <span aria-hidden="true" data-testid="brand-wordmark" style={type}>{gilded}</span>
+    : <h1 aria-hidden="true" data-testid="brand-wordmark" style={type}>{gilded}</h1>;
 }

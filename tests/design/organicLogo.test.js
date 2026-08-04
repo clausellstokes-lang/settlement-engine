@@ -12,7 +12,7 @@
  * byte-equal to the canonical paths so the two sources can never drift.
  */
 import { describe, expect, it } from 'vitest';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 import {
@@ -123,16 +123,25 @@ describe('the shipped public assets (format contracts, not byte-goldens)', () =>
 
 describe('every eager module that INLINES the device pins to the canonical paths', () => {
   // ⚠️ A SET, NOT A FILE. This pin used to name HouseDevice.jsx alone, and the moment
-  // a second eager module inlined the same silhouette (MakerPlate, which strikes it
-  // into the bronze plate and therefore needs the raw geometry three times over) the
+  // a second eager module inlined the same silhouette (MakerPlate, which struck it
+  // into the bronze plate and therefore needed the raw geometry three times over) the
   // pin was guarding one of two copies while reading perfectly correct. A one-file
   // containment pin also goes VACUOUS on a pure relocation: the file moves, the read
   // throws or the constant stops appearing, and nobody notices which. So: a declared
   // set, a non-empty assertion over it, and a negative control.
-  const INLINERS = ['HouseDevice.jsx', 'MakerPlate.jsx'];
+  //
+  // ⚠️⚠️ THE SET IS BACK TO ONE MEMBER IN RIBBON V4, AND THAT IS A RETIREMENT RATHER
+  // THAN A REGRESSION. The maker's plate left the header entirely (the wordmark itself
+  // is the gilded artifact now — components/brand/GildedWordmark.jsx), so its module is
+  // deleted and with it the second inlined copy. The SET SHAPE IS KEPT DELIBERATELY:
+  // the lesson was that a one-FILE pin cannot see a second copy arriving, and that is
+  // true whether the set currently holds one member or two. The membership assertion is
+  // therefore ">= 1" plus a live census that no OTHER brand module has quietly grown a
+  // copy — which is the guard the old ">1" could never be.
+  const INLINERS = ['HouseDevice.jsx'];
 
   it('the inliner set is non-empty and every member really exists', () => {
-    expect(INLINERS.length).toBeGreaterThan(1);
+    expect(INLINERS.length).toBeGreaterThanOrEqual(1);
     for (const f of INLINERS) {
       expect(existsSync(resolve(process.cwd(), 'src', 'components', 'brand', f)), `${f} is listed but missing`).toBe(true);
     }
@@ -153,5 +162,18 @@ describe('every eager module that INLINES the device pins to the canonical paths
     const seal = readFileSync(resolve(process.cwd(), 'src', 'components', 'brand', 'WaxSeal.jsx'), 'utf-8');
     expect(seal).not.toContain(DEVICE_PATHS.ring);
     expect(INLINERS).not.toContain('WaxSeal.jsx');
+  });
+
+  it('⚠️ THE SET IS TOTAL — no brand module inlines the device without being listed', () => {
+    // THE GUARD THE MEMBERSHIP COUNT WAS STANDING IN FOR. Listing two files proved
+    // nothing about a third; this censuses the whole directory and requires every
+    // module carrying the canonical ring path to be a declared member. It is what makes
+    // the set shrinking to one member safe.
+    const dir = resolve(process.cwd(), 'src', 'components', 'brand');
+    const found = readdirSync(dir)
+      .filter((f) => f.endsWith('.jsx'))
+      .filter((f) => readFileSync(resolve(dir, f), 'utf-8').includes(DEVICE_PATHS.ring));
+    expect(found.length, 'the census found nothing — it is vacuous').toBeGreaterThan(0);
+    expect([...found].sort()).toEqual([...INLINERS].sort());
   });
 });

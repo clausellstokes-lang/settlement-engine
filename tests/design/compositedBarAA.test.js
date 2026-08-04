@@ -48,9 +48,10 @@ import { createRequire } from 'node:module';
 import { describe, expect, test } from 'vitest';
 
 import {
-  BODY, GOLD_TXT, GRAIN_AMP, HEADER_RIDERS, INK_DEEP, LABEL_BOX, SECOND, SEAL_WAX,
-  SHAFT, SHAFT_BODY, SHAFT_GRAIN_TEXTURE, SHAFT_GREEN, SHAFT_RIM, SHAFT_SLATE,
-  SHAFT_STOPS, FLETCH_VANE, PLATE_KEYLINE, cylinderToneAt, riderFloorTone,
+  BODY, GILT, GOLD_TXT, GRAIN_AMP, HEADER_RIDERS, INK_DEEP, LABEL_BOX, PARCH,
+  PARCH_100, SEAL_WAX, SHAFT, SHAFT_BODY, SHAFT_EDGE, SHAFT_GRAIN_TEXTURE, SHAFT_RIM,
+  SHAFT_SAGE, SHAFT_STEEL, SHAFT_STOPS, FLETCH_VANE, cylinderToneAt, riderFloorTone,
+  riderGrainShare,
 } from '../../src/components/theme.js';
 
 const require_ = createRequire(import.meta.url);
@@ -129,45 +130,49 @@ function grainRgbFromSource() {
 }
 
 /**
- * ⚠️⚠️ THE RIDERS, EACH WITH ITS OWN GROUND — the repair for the verifier's F2, and
- * the reason this table changed shape rather than gaining a row.
+ * ⚠️⚠️ THE RIDERS, EACH WITH ITS OWN GROUND *AND ITS OWN DIRECTION OF FAILURE* — the
+ * V4 shape of the repair the verifier's F2 forced, one level deeper.
  *
  * F2, quoted: "the composited-AA pin's own base premise is falsified by the tallest
- * rider... the tallest rider is the wordmark, whose box is 34.84px, 74% larger than
- * 20. Its ink rows run 7..35 of a 38px bar; row 35 is 0.921, PAST SHAFT_STOPS.edge
- * (0.92). Measured on real pixels, the worst ground under wordmark ink is L=0.3043 —
- * BELOW the pin's own 0.392 floor... LABEL_BOX=20 is a hand-keyed side table standing
- * in for 'every rider's box' — the exact hazard class this estate has been bitten by.
- * Cure: derive LABEL_BOX as the max over the measured riders and make the lane's own
- * SEAT pin cover the same set."
+ * rider... LABEL_BOX=20 is a hand-keyed side table standing in for 'every rider's box'
+ * — the exact hazard class this estate has been bitten by. Cure: derive LABEL_BOX as
+ * the max over the measured riders and make the lane's own SEAT pin cover the same
+ * set." That cure gave every rider its own GROUND. V4 needed the other half.
  *
- * ⚠️ RE-MEASURED, AND IT IS WORSE THAN THE FINDING SAID. Rasterising each run at its
- * own font puts the deepest ink at 37.08px of 38 (fraction 0.9758), not 35 — the `g`
- * of "Forge". theme.js HEADER_RIDERS carries the measurement; every floor below is
- * computed from it through `cylinderToneAt`, so no rider is measured against a ground
- * it does not actually land on and no ground is hand-keyed here.
+ * ⚠️⚠️ ONE DIRECTION FOR ALL RIDERS WAS THE NEXT DEFECT IN THE SAME FAMILY. The old
+ * table measured every rider at `ink[1]` — the DARKEST end of its extent — with the
+ * grain's peak wash composited on top. That is exactly right for DARK ink on light
+ * wood and exactly backwards for PALE ink on dark wood, which is the whole V4 bar:
  *
- * ⚠️ ONE FLOOR FOR ALL RIDERS WAS THE DEFECT, NOT A SIMPLIFICATION. The old table
- * measured everything against grain-over-SHAFT_BODY. That was too LENIENT for the
- * wordmark and the tab's underline (whose ink reaches far below the body stop) and too
- * STRICT for Sign In — and both errors were invisible, because a single number cannot
- * be wrong in two directions at once where anyone can see it.
+ *   · a pale label fails at its ground's LIGHTEST point, so the floor is `ink[0]`;
+ *   · and the grain is a DARKENING wash, so its peak is that label's BEST case.
+ *     Compositing it under a pale rider reports a comfortable pass and never measures
+ *     the real worst case at all.
  *
- * Text owes WCAG 2.2 AA's 4.5:1; a boundary owes SC 1.4.11's 3:1. ⚠️ SEAL_WAX IS IN
- * THE TEXT GROUP because it stands in for a letter of the wordmark — that is the whole
- * reason it is authored as deep as it is.
+ * A polarity-blind pin here would therefore have gone VACUOUSLY GREEN across the whole
+ * repaint — every ratio comfortable, every ratio measured on the wrong pixel. So the
+ * direction is stored beside the measurement (theme.js HEADER_RIDERS `polarity`), read
+ * through `riderFloorTone` + `riderGrainShare`, and the non-vacuity of BOTH is asserted
+ * below rather than assumed.
+ *
+ * ⚠️ TWO RIDERS LEFT THE BAR ENTIRELY, AND THEIR ABSENCE IS A CLAIM. The wordmark and
+ * the seal are `polarity: 'bed'` in V4 — the gilded wordmark brings its own opaque
+ * Armenian-bole ground and the seal sits inside a gold annulus — so the barrel is not
+ * their ground and measuring them against it would answer a question nobody asked.
+ * Their floors are pinned against their own beds in tests/design/contrast.test.js, and
+ * `riderFloorTone` THROWS on them rather than quietly returning a barrel tone.
+ * The maker's PLATE row is gone because the plate is gone (theme.js's retirement note).
+ *
+ * Text owes WCAG 2.2 AA's 4.5:1; a boundary owes SC 1.4.11's 3:1.
  */
 const RIDERS = [
-  ['INK_DEEP    the wordmark', INK_DEEP, 4.5, 'wordmark'],
-  ['INK_DEEP    the active reference tab', INK_DEEP, 4.5, 'tab'],
-  ['BODY        resting reference tab', BODY, 4.5, 'tab'],
-  ['BODY        the WRAPPED MOBILE bar', BODY, 4.5, 'mobileTab'],
-  ['SECOND      ghost-button register', SECOND, 4.5, 'signIn'],
-  ['SHAFT_GREEN signed-in account chip', SHAFT_GREEN, 4.5, 'chip'],
-  ['SHAFT_SLATE developer account chip', SHAFT_SLATE, 4.5, 'chip'],
-  ['SEAL_WAX    the `o` of Forge', SEAL_WAX, 4.5, 'seal'],
-  ['GOLD_TXT    the active tab underline', GOLD_TXT, 3, 'tabRule'],
-  ['PLATE_KEYLINE the maker plate’s edge', PLATE_KEYLINE, 3, 'plate'],
+  ['PARCH_100  resting reference tab', PARCH_100, 4.5, 'tab'],
+  ['PARCH      active reference tab', PARCH, 4.5, 'tab'],
+  ['PARCH_100  the ghost register (Upgrade)', PARCH_100, 4.5, 'signIn'],
+  ['SHAFT_SAGE signed-in account chip', SHAFT_SAGE, 4.5, 'chip'],
+  ['SHAFT_STEEL developer account chip', SHAFT_STEEL, 4.5, 'chip'],
+  ['PARCH_100  the WRAPPED MOBILE bar', PARCH_100, 4.5, 'mobileTab'],
+  ['GILT       the active tab underline', GILT, 3, 'tabRule'],
 ];
 
 describe('the COMPOSITED bar — the ground a letterform really lands on', () => {
@@ -198,15 +203,50 @@ describe('the COMPOSITED bar — the ground a letterform really lands on', () =>
     // legible than here.
     for (const [, , , key] of RIDERS) {
       expect(HEADER_RIDERS[key], `RIDERS names a rider theme.js does not carry: ${key}`).toBeTruthy();
+      expect(HEADER_RIDERS[key].polarity, `${key} has no polarity`).toBeTruthy();
+      expect(HEADER_RIDERS[key].polarity, `${key} is a bed rider and cannot be measured here`)
+        .not.toBe('bed');
     }
 
     const failures = [];
     for (const [name, ink, owed, key] of RIDERS) {
-      const floor = compositedL(worst, grainRgb, riderFloorTone(HEADER_RIDERS[key]));
+      const rider = HEADER_RIDERS[key];
+      // ⚠️ THE WASH IS APPLIED AT THE RIDER'S OWN SHARE, not unconditionally: a pale
+      // label's worst case is the BARE cylinder showing through a gap in the grain,
+      // because a darkening wash can only raise its ratio.
+      const floor = compositedL(worst * riderGrainShare(rider), grainRgb, riderFloorTone(rider));
       const got = ratioL(hexL(ink), floor);
       if (got < owed) failures.push(`${name} [${key}]: ${got.toFixed(2)} < ${owed} (floor L=${floor.toFixed(4)})`);
     }
     expect(failures, `grain alpha ${worst.toFixed(4)}`).toEqual([]);
+  });
+
+  test('⚠️⚠️ THE POLARITY IS NON-VACUOUS — the pin that would have gone green anyway', async () => {
+    // THE SKEPTIC'S PIN. Everything above passes comfortably; the question is whether
+    // it would ALSO have passed with the polarity ignored, which is what "vacuously
+    // green" means. So the old, direction-blind model is reconstructed here and
+    // required to disagree — to be MORE LENIENT — on every pale rider.
+    const { alpha } = await grainAlpha();
+    const grainRgb = grainRgbFromSource();
+    const worst = Math.max(...alpha);
+    const blind = (key) => compositedL(  // the pre-V4 model: deepest ink, peak wash
+      worst, grainRgb, cylinderToneAt(HEADER_RIDERS[key].ink[1] / HEADER_RIDERS[key].bar),
+    );
+    const aware = (key) => compositedL(
+      worst * riderGrainShare(HEADER_RIDERS[key]), grainRgb, riderFloorTone(HEADER_RIDERS[key]),
+    );
+    for (const [, ink, , key] of RIDERS) {
+      // The blind floor is DARKER, so for a PALE ink it reports a HIGHER ratio: the
+      // old model would have flattered every one of these riders.
+      expect(blind(key), `${key}: the two models agree, so the polarity buys nothing`)
+        .toBeLessThan(aware(key));
+      expect(ratioL(hexL(ink), blind(key)), `${key}: the blind model is not more lenient`)
+        .toBeGreaterThan(ratioL(hexL(ink), aware(key)));
+    }
+    // …and the gap is material rather than a rounding artefact: at least a tenth of a
+    // contrast point on the tightest row.
+    expect(ratioL(hexL(SHAFT_SAGE), blind('chip')) - ratioL(hexL(SHAFT_SAGE), aware('chip')))
+      .toBeGreaterThan(0.1);
   });
 
   test('⚠️ THE FLETCH BAND’S EDGE, and its residual quoted rather than buried', async () => {
@@ -214,49 +254,87 @@ describe('the COMPOSITED bar — the ground a letterform really lands on', () =>
     // a boundary that runs the WHOLE bar and then hangs below it. So its extent is a
     // scoping decision and it is made here, in the open.
     //
-    // THE CLAIM: over the depth at which the barrel holds its body tone — the top 95%,
-    // 36.1px of 38 — the vane/wood boundary clears SC 1.4.11's 3:1 comfortably. THE
-    // RESIDUAL: in the last 1.9px the barrel's own silhouette darkens past the vane and
-    // the boundary fades to 2.32:1. That is stated, not hidden, and it is defensible:
-    // 1.4.11 asks whether a component is IDENTIFIABLE, the same boundary runs 36px
-    // above the residual and continues below the bar against the page at far higher
-    // contrast, and no state is carried by that last two pixels.
+    // ⚠️⚠️ THE CLAIM ITSELF MOVED IN V4, AND THAT IS THE HONEST THING TO RECORD.
+    // On the honey barrel the vane cleared 1.4.11 at 4.16:1 over the top 95% of the bar
+    // and faded to 2.32:1 in the last 1.9px, and that residual was the whole scope. The
+    // owner's V4 correction puts a DARK INK feather on a DARK CEDAR shaft, so the
+    // boundary is BELOW 3:1 AT EVERY DEPTH — 1.7:1 at the body tone. No retune recovers
+    // it (lifting the vane walks it into the label register, lifting the wood walks it
+    // into theme.js's dead band), so the identification claim is RE-SCOPED rather than
+    // quietly kept: the label, the gold indicator and the hang carry it, and each of
+    // those is asserted in tests/design/contrast.test.js's identification block.
+    //
+    // WHAT SURVIVES HERE is the part this file can actually measure — that the residual
+    // is UNIFORM rather than a cliff somewhere. A boundary that is quietly weak
+    // everywhere is a scoping decision; one that collapses at one depth is a bug, and
+    // the two are indistinguishable without measuring the whole range.
     const { alpha } = await grainAlpha();
     const grainRgb = grainRgbFromSource();
     const at = (f) => ratioL(hexL(FLETCH_VANE), compositedL(Math.max(...alpha), grainRgb, cylinderToneAt(f)));
-    expect(at(SHAFT_STOPS.body), 'the fletch edge is no longer identifiable').toBeGreaterThanOrEqual(3);
-    expect(at(SHAFT_STOPS.body).toFixed(2)).toBe('4.16');
-    // The residual, and a BUDGET on it so it cannot quietly grow: the strip where the
-    // boundary is under 3:1 must stay under a fifteenth of the bar.
-    expect(at(1).toFixed(2)).toBe('2.32');
-    expect((1 - SHAFT_STOPS.body), 'the sub-3:1 strip has grown').toBeLessThanOrEqual(0.07);
+    expect(at(SHAFT_STOPS.body), 'the fletch edge is no longer under-3:1').toBeLessThan(3);
+    expect(at(SHAFT_STOPS.body).toFixed(2)).toBe('1.65');
+    // 1 — NO CLIFF. Across the whole bar the boundary FADES; it does not collapse at
+    //     one depth while reading fine at the next.
+    const samples = [...Array(41)].map((_, i) => at(i / 40));
+    expect(Math.max(...samples) - Math.min(...samples), 'the residual is a cliff, not a fade')
+      .toBeLessThan(1.5);
+    expect(Math.max(...samples).toFixed(2)).toBe('2.33');   // at the lit sheen, the best case
+    // 2 — THE VANE IS DARKER THAN THE WOOD DOWN TO THE BODY STOP, which is what keeps
+    //     the silhouette a silhouette across the whole label band.
+    for (let f = 0; f <= SHAFT_STOPS.body + 1e-9; f += 0.05) {
+      expect(relLuminance(...cylinderToneAt(f)), `the wood is darker than the vane at ${f.toFixed(2)}`)
+        .toBeGreaterThan(hexL(FLETCH_VANE));
+    }
+    // 3 — AND BELOW IT THE BOUNDARY INVERTS, which is recorded rather than hidden: the
+    //     barrel's own silhouette darkens PAST the vane in its last stretch, so the
+    //     edge briefly reads as the wood being darker than the feather. The budget is
+    //     that the crossing lives inside the bar's last tenth, where nothing is read.
+    let crossing = 1;
+    for (let f = SHAFT_STOPS.body; f <= 1; f += 0.001) {
+      if (relLuminance(...cylinderToneAt(f)) <= hexL(FLETCH_VANE)) { crossing = f; break; }
+    }
+    expect(crossing, 'the vane/wood inversion has climbed into the label band')
+      .toBeGreaterThan(0.9);
+    expect(crossing.toFixed(3)).toBe('0.996');
   });
 
   test('the measured floors and the margins they leave, quoted PER RIDER', async () => {
     const { alpha } = await grainAlpha();
     const grainRgb = grainRgbFromSource();
-    const floorOf = (key) => compositedL(Math.max(...alpha), grainRgb, riderFloorTone(HEADER_RIDERS[key]));
+    const floorOf = (key) => compositedL(
+      Math.max(...alpha) * riderGrainShare(HEADER_RIDERS[key]),
+      grainRgb,
+      riderFloorTone(HEADER_RIDERS[key]),
+    );
     const at = (ink, key) => ratioL(hexL(ink), floorOf(key)).toFixed(2);
     // Today's values, in their own assertion so a future retune edits an obvious
     // record and never the invariant above.
-    // ⚠️ THE FOUR ROWS MARKED (was …) WERE REAL SHIPPED SHORTFALLS, invisible to the
-    // single-floor model this file used to run. They are repaired by the SHAFT_STOPS
-    // retune recorded in theme.js — a deliberate one-time visual shift, not a
-    // re-recording of a golden.
-    expect(at(INK_DEEP, 'wordmark')).toBe('5.59');      // (was 4.15 — FAILED AA)
-    expect(at(SEAL_WAX, 'seal')).toBe('4.80');          // (was 4.48 — FAILED AA)
-    expect(at(GOLD_TXT, 'tabRule')).toBe('3.15');       // (was 2.29 — FAILED 1.4.11)
-    expect(at(BODY, 'mobileTab')).toBe('4.62');         // (was 4.24 — FAILED AA)
-    expect(at(BODY, 'tab')).toBe('4.79');               // the tightest desktop text row
-    expect(at(SHAFT_GREEN, 'chip')).toBe('4.75');
-    expect(at(SECOND, 'signIn')).toBe('6.99');
-    expect(at(PLATE_KEYLINE, 'plate')).toBe('7.27');
-    // The floor under the deepest ink on the bar, and the floor the old pin used, side
-    // by side — the comparison that is the whole point of this file.
-    expect(floorOf('wordmark').toFixed(3)).toBe('0.326');
-    expect(compositedFloorL(Math.max(...alpha), grainRgb).toFixed(3)).toBe('0.392');
-    // And the token-only number the estate has always quoted.
-    expect(ratioL(hexL(BODY), hexL(SHAFT_BODY)).toFixed(2)).toBe('4.89');
+    // ⚠️ THESE RUN ~0.02 HIGHER THAN THE SAME ROWS IN tests/design/contrast.test.js,
+    // and the difference is real rather than a discrepancy: this file interpolates the
+    // gradient in FLOAT, as a browser's compositor does, while the sibling quantises
+    // each ground to an 8-bit hex, as a screenshot does. Both are true of the same bar;
+    // the quantised one is very slightly stricter, which is the safe direction for it.
+    expect(at(PARCH_100, 'tab')).toBe('5.75');          // the tightest desktop text row
+    expect(at(PARCH, 'tab')).toBe('6.33');
+    expect(at(PARCH_100, 'signIn')).toBe('5.28');
+    expect(at(SHAFT_SAGE, 'chip')).toBe('4.63');
+    expect(at(SHAFT_STEEL, 'chip')).toBe('4.64');
+    expect(at(PARCH_100, 'mobileTab')).toBe('6.34');
+    expect(at(GILT, 'tabRule')).toBe('3.75');
+    // ⚠️ THE NUMBERS ABOVE ARE THE GRAIN-FREE ONES, AND THAT IS THE POLARITY. Every
+    // rider on the V4 bar is pale, so `floorOf` composites the wash at share ZERO and
+    // the floors are the bare cylinder — which is what a pale label's worst case is.
+    for (const [, , , key] of RIDERS) expect(riderGrainShare(HEADER_RIDERS[key])).toBe(0);
+    // …so the old single-floor number is kept ONLY as the A/B that shows the wash still
+    // exists and still darkens, which is the direction proof GRAIN_AMP now rests on.
+    expect(compositedFloorL(Math.max(...alpha), grainRgb)).toBeLessThan(hexL(SHAFT_BODY));
+    expect(compositedFloorL(Math.max(...alpha), grainRgb).toFixed(4)).toBe('0.0760');
+    // And the token-only numbers the estate quotes for the V3 riders, kept as the
+    // NEGATIVE CONTROLS that record why they left the bar.
+    expect(ratioL(hexL(BODY), hexL(SHAFT_BODY)).toFixed(2)).toBe('1.36');
+    expect(ratioL(hexL(INK_DEEP), hexL(SHAFT_BODY)).toFixed(2)).toBe('1.97');
+    expect(ratioL(hexL(GOLD_TXT), hexL(SHAFT_BODY)).toFixed(2)).toBe('1.06');
+    expect(ratioL(hexL(SEAL_WAX), hexL(SHAFT_BODY)).toFixed(2)).toBe('1.41');
   });
 
   test('⚠️ cylinderToneAt IS THE SINGLE WRITER, and it really tracks the painted ramp', () => {
@@ -273,9 +351,15 @@ describe('the COMPOSITED bar — the ground a letterform really lands on', () =>
     expect(cylinderToneAt(SHAFT_STOPS.body)).toEqual(rgbOf(SHAFT_BODY));
     expect(cylinderToneAt(1)).toEqual(rgbOf(SHAFT_RIM));
     // …and it really varies across the riders' range: the deepest rider's ground is
-    // materially darker than the shallowest's.
+    // materially darker than the shallowest's. ⚠️ THE MARGIN IS A FIFTH OF WHAT IT WAS,
+    // and deliberately: the whole cedar ladder lives inside L 0.02–0.15 where the honey
+    // one spanned 0.26–0.83, so an absolute-difference pin tuned to the old range would
+    // silently become unsatisfiable rather than strict.
     expect(l(HEADER_RIDERS.wordmark.ink[1] / HEADER_RIDERS.wordmark.bar))
-      .toBeLessThan(l(HEADER_RIDERS.signIn.ink[1] / HEADER_RIDERS.signIn.bar) - 0.05);
+      .toBeLessThan(l(HEADER_RIDERS.signIn.ink[1] / HEADER_RIDERS.signIn.bar) - 0.01);
+    // …and it lands on the grain's own tone at the edge stop, which is what makes
+    // GRAIN_TONE = SHAFT_EDGE a derivation rather than a coincidence.
+    expect(cylinderToneAt(SHAFT_STOPS.edge)).toEqual(rgbOf(SHAFT_EDGE));
     // The derived label box really is the tallest rider's, not a hand-keyed 20.
     expect(LABEL_BOX).toBe(34.84);
     expect(LABEL_BOX).toBe(HEADER_RIDERS.wordmark.box);

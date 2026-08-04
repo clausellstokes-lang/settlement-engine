@@ -84,7 +84,8 @@
  * ladder, which is why the AA floor did not move: the lightest thing a label can land
  * on is still FLETCH_SHEEN_LIFT. Weight is deliberately not a channel: every fletch
  * label is 600 under the BALANCE LAW. The plain reference tabs keep the underline
- * register, re-inked for the honey barrel.
+ * register, and in V4 they join the fletches in the PARCHMENT one — on cedar there is
+ * no ink register left to keep them apart from it (see the cell's own note).
  *
  * THE FLOW MARK MOVED, IT DID NOT DIE. NavFlowArrow no longer renders here; it still
  * draws on the MOBILE bottom nav, where cells have no seam to carry a divider. Both
@@ -104,7 +105,7 @@ import NavDivider from './NavDivider.jsx';
 import { flowsInto } from './NavFlowArrow.jsx';
 import FletchBand from './FletchBand.jsx';
 import ShaftWrap from './ShaftWrap.jsx';
-import { BODY, GOLD_TXT, INK_DEEP, PARCH, PARCH_100, SP, FS, sans } from '../theme.js';
+import { GILT, PARCH, PARCH_100, SP, FS, sans } from '../theme.js';
 
 /**
  * Group NAV into consecutive runs, marking each run fletched or plain. A cell is
@@ -210,14 +211,21 @@ export default function NavRibbon({ view, onNavClick }) {
               '--sf-focus-ring-offset': `-${FOCUS_RING_PX}px`,
             }
             : {
-              // The plain register, RE-INKED for the honey barrel. These labels sit
-              // on bare wood, and the wood went from cream to honey-tan — GOLD_TXT
-              // was the V2 active tone at 5.75:1 on cream and is 3.38:1 here, which
-              // fails AA as text. So the label takes INK_DEEP and GOLD_TXT stays only
-              // as the UNDERLINE, where 1.4.11's 3:1 is the floor for a boundary
-              // sitting beside an already-legible ink label.
-              borderBottom: active ? `2px solid ${GOLD_TXT}` : '2px solid transparent',
-              color: active ? INK_DEEP : BODY,
+              // ⚠️⚠️ THE PLAIN REGISTER FLIPPED WHOLESALE IN V4, AND IT IS THE SAME
+              // MOVE THE FLETCH LABELS MADE THREE VERSIONS AGO. These labels sit on
+              // BARE WOOD, and the wood is now cedar: INK_DEEP measures 1.97:1 on it
+              // and BODY 1.36:1, so the ink register is not retunable, it is gone. The
+              // shelf joins the journey in the parchment register — resting PARCH_100
+              // (5.75:1 on the tab's own lightest ground), active PARCH (6.33:1).
+              //
+              // ⚠️ AND THE UNDERLINE LEFT THE HOUSE GOLD FAMILY WITH IT. GOLD_TXT is
+              // 1.06:1 on cedar — a dark gold on dark wood is the same failure the
+              // labels had. The active rule takes GILT, the leaf's own body stop, at
+              // 3.75:1: still a BOUNDARY beside an already-legible label, never the
+              // thing carrying the state alone, and now the same metal as the wordmark
+              // and the quill-line indicator rather than a fourth gold.
+              borderBottom: active ? `2px solid ${GILT}` : '2px solid transparent',
+              color: active ? PARCH : PARCH_100,
               fontWeight: active ? 700 : 500,
             }),
         }}

@@ -96,9 +96,14 @@ export default function NavDivider({ from, to }) {
         // out of flow is what stops the viewBox from becoming a layout height.
         style={{ position: 'absolute', inset: 0, display: 'block', overflow: 'visible' }}
       >
-        {/* A groove cut in the barrel. SHAFT_RULE is retoned for the honey wood:
-            V2's #A39062 was picked against cream and measures 1.29:1 here, i.e.
-            invisible. */}
+        {/* A groove cut in the barrel, and it has been retoned once per ground. V2's
+            #A39062 was picked against cream and measured 1.29:1 on honey; V3's
+            #8C6E42 measured 2.14:1 on honey and measures 1.68:1 on V4's cedar — and,
+            worse, would now be LIGHTER than the wood in the label band, which is a
+            highlight rather than a cut. ⚠️ A GROOVE IS A SHADOW: SHAFT_RULE is now
+            derived as "darker than the wood, quieter than the fletch boundary"
+            (1.41:1 against the vane's 1.73:1), which keeps the shelf under the
+            journey without depending on a neighbour token that moved. */}
         <line
           x1={W / 2} y1="0" x2={W / 2} y2={H}
           stroke={SHAFT_RULE} strokeWidth="1" vectorEffect="non-scaling-stroke"
