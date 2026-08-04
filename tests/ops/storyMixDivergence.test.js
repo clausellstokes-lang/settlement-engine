@@ -133,6 +133,9 @@ describe('story-mix divergence instrument', () => {
     // actually driven per year rather than merely imported.
     expect(source).toContain('warConvergence: warConvergenceCollected.observation,');
     expect(source).toContain('yearlyWarConvergence.push(observeWarConvergenceYear({');
+    // The ten positive toContain pins above prove `source` is the real soak file,
+    // so this negative cannot go vacuous on an empty read.
+    // anchored: the soak must never regress to the empty-observation write WR-9d retired
     expect(source).not.toContain('createEmptyWarConvergenceObservation()');
   });
 });
