@@ -1928,11 +1928,26 @@ Two constraints the implementation must respect:
 
 1. **It re-records the ENTIRE golden master.**
    `tests/property/generatorGoldenMaster.test.js` hashes
-   `sha256(JSON.stringify(settlement))` over 523 configs, and `settlementReason`
+   `sha256(JSON.stringify(settlement))` over 525 configs, and `settlementReason`
    is a top-level settlement field. Proven by experiment, not inference: a
    ONE-WORD change to the road arm ("goods flow out, **and** people pass
    through") was planted and the golden went red with drift, then reverted.
-   Any widening at all re-records all 523 keys.
+   Any widening at all re-records all 525 keys.
+
+   **FIGURE CORRECTED 2026-08-03 (lane RT, cycle-25 verifier finding 3): this
+   section first said 523, and so does commit `0ab5e03e`'s message, which is
+   immutable and stands uncorrected.** 523 is the PRE-HK-3 corpus size, true up
+   to the "HK-3 — THEME-AWARE HOOK DRAWS" entry above, which records the
+   corpus at **525 of 525 keys** re-recorded. The corpus grew because
+   `generatorGoldenMaster`'s own `corpus()` gained the `mountain_pass`-on-
+   mountain row and the `random_trade`-with-`terrainOverride:'mountain'`
+   variants. Counted TWO independent ways at correction time, both 525:
+   `Object.keys(tests/fixtures/generator-golden-master.json).length` = **525**,
+   and the arithmetic over `corpus()` — grid 6 tiers x 12 cultures x 7 terrains
+   = 504, plus the 7-row trade sweep, the 1 mountain-pass row, the 4-row threat
+   sweep, the 8 random_trade rows and the 3 extra base seeds = 527, minus the
+   2 keys the trade and threat sweeps duplicate against the base grid row =
+   **525**. Any re-record ask that cites this section must cite 525.
 
 2. **THE PROMISE.** "A seed is a world, forever" is constitutional. Widening the
    corpus changes the origin prose of every world every existing seed has ever
@@ -1953,5 +1968,5 @@ built to retire.
 
 **What the owner is being asked for:** permission to widen
 `generateSettlementReason` with per-arm draw-free variants, accepting a
-one-time 523-key golden re-record and a one-time origin-prose shift on every
+one-time 525-key golden re-record and a one-time origin-prose shift on every
 existing seed.
