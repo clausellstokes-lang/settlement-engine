@@ -2,20 +2,29 @@
  * @vitest-environment jsdom
  *
  * tests/components/navDividers.test.jsx — THE DERIVATION CENSUS (LD-2, refitted
- * for THE FLETCHED RIBBON under the owner directive of 2026-08-03).
+ * twice: for THE FLETCHED RIBBON under the owner directive of 2026-08-03, and again
+ * for THE SHINGLED BAND under the owner's mockup refinement the same night).
  *
- * The original order: the desktop ribbon separates every nav item with a
- * vertical line, EXCEPT inside the Create → Library → Realm journey, whose seams
- * were CHEVRONS. ⚠️ THE CURVED-CHEVRON READING IS RETIRED ON DESKTOP: the trio
- * now sits in a single leather-brown fletched band, and the seams between its
- * feathers are SHARP STRAIGHT ANGLED STROKES cut at exactly the angle the
- * feathers lean (kind `fletch`, was `chevron`). The order names two boundaries;
- * the implementation must NOT. LD-2's binding clause survives the refit intact —
- * the divider kind is COMPUTED from the single source routes.js already declares
- * (NAV order + NAV_FLOW) — so this census asserts the rendered ribbon against
- * THAT DERIVATION, never against a frozen boundary list. A future nav insertion
- * or reorder then files its own divider automatically instead of redding a stale
- * map. Only the ANSWER's spelling changed; the derivation did not.
+ * The original order: the desktop ribbon separates every nav item with a vertical
+ * line, EXCEPT inside the Create → Library → Realm journey, whose seams were
+ * something else — chevrons under LD-2, one angled fletch stroke under V3.
+ *
+ * ⚠️⚠️ THE SEAM INSIDE THE BAND IS RETIRED, AND THAT IS WHAT THIS FILE NOW PINS.
+ * The trio is one continuous band of three SHINGLED goose vanes, each lying over the
+ * next with a contact shadow at the lap (FletchBand.jsx). The laps ARE the seams; a
+ * drawn line between two overlapping feathers is a mark nobody has ever seen on an
+ * arrow. It was also doing active harm — the seam box was 10px wide while the vanes'
+ * lap resolved to about two screen pixels, so the mark was WIDER than the overlap it
+ * decorated and the band rendered as three separate tabs with bare wood between them.
+ *
+ * LD-2's binding clause survives both refits intact: WHICH cells belong to the band
+ * is COMPUTED from the single source routes.js already declares (NAV order +
+ * NAV_FLOW), never listed. So this census asserts the rendered ribbon against THAT
+ * DERIVATION — a rule at every boundary the band does not swallow, and none inside
+ * it — rather than against a frozen boundary list. A future nav insertion or reorder
+ * then re-files its own seams automatically instead of redding a stale map.
+ * `dividerKind` went with the seam: a function whose only remaining answer was
+ * 'line' would have been a second truth pretending to be a choice.
  *
  * The suite is deliberately paired with tests/components/navFlowArrows.test.jsx:
  * the flow chevron the desktop ribbon used to draw INSIDE each tab moved to the
@@ -36,9 +45,8 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
 
 import { NAV, NAV_FLOW } from '../../src/lib/routes.js';
-import { dividerKind } from '../../src/components/nav/NavDivider.jsx';
+import { flowsInto } from '../../src/components/nav/NavFlowArrow.jsx';
 import NavRibbon from '../../src/components/nav/NavRibbon.jsx';
-import { FLETCH } from '../../src/components/theme.js';
 
 const H = vi.hoisted(() => ({
   route: { view: 'generate', params: {}, legacy: false, notFound: false },
@@ -125,9 +133,26 @@ import App from '../../src/App.jsx';
 /** Every rendered divider in the desktop ribbon, in document order. */
 const dividers = (container) => [...container.querySelectorAll('header nav [data-divider-kind]')];
 
-/** The kind sequence the DERIVATION demands for the ribbon's rendered order. */
-function derivedKinds() {
-  return NAV.slice(0, -1).map((n, i) => dividerKind(n.id, NAV[i + 1].id));
+/**
+ * The band's membership, computed the long way round from the SAME predicate the
+ * ribbon uses: a cell is fletched when the declared flow enters or leaves it at its
+ * rendered neighbour.
+ */
+const bandIds = () => NAV
+  .filter((n, i) => flowsInto(n.id, NAV[i + 1]?.id) || flowsInto(NAV[i - 1]?.id, n.id))
+  .map((n) => n.id);
+
+/**
+ * The boundaries the DERIVATION says still carry a rule: every adjacent pair EXCEPT
+ * the ones the band swallows (both cells inside it).
+ * @returns {string[]} `from|to` for each expected divider, in rendered order
+ */
+function derivedBoundaries() {
+  const band = new Set(bandIds());
+  return NAV.slice(0, -1)
+    .map((n, i) => [n.id, NAV[i + 1].id])
+    .filter(([from, to]) => !(band.has(from) && band.has(to)))
+    .map(([from, to]) => `${from}|${to}`);
 }
 
 beforeEach(() => {
@@ -142,34 +167,33 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-describe('the kind is derived from routes.js, not restated anywhere', () => {
-  test('dividerKind answers the flow declaration and nothing else', () => {
-    for (const [from, to] of Object.entries(NAV_FLOW)) {
-      expect(dividerKind(from, to)).toBe('fletch');
+describe('which boundaries carry a rule is derived from routes.js, never restated', () => {
+  test('the band swallows exactly the declared flow pairs, and nothing else', () => {
+    // The membership is the flow declaration's own union — asserted here the long
+    // way round so the census below can bind the DOM to a derivation rather than to
+    // a list somebody typed.
+    expect(new Set(bandIds())).toEqual(new Set(Object.entries(NAV_FLOW).flat()));
+    // A pair the flow does NOT declare cannot be swallowed, in either direction.
+    for (const id of ['compendium', 'gallery', 'about-what-this-is', 'home']) {
+      expect(bandIds()).not.toContain(id);
     }
-    // A pair the flow does NOT declare is a plain rule, in both directions.
-    expect(dividerKind('settlements', 'generate')).toBe('line');
-    // 'home' left NAV entirely under the 2026-08-03 directive; a retired id can
-    // never earn a fletch stroke, in either position.
-    expect(dividerKind('home', 'generate')).toBe('line');
-    expect(dividerKind('generate', 'home')).toBe('line');
   });
 
-  test('the derivation yields the owner’s two fletch seams today — derived, not typed in', () => {
-    // Anchoring the CURRENT answer proves the derivation is not vacuous, while
-    // the census below binds the DOM to the derivation rather than to this list.
-    const boundaries = NAV.slice(0, -1).map((n, i) => `${n.id}|${NAV[i + 1].id}`);
-    const fletches = boundaries.filter((_, i) => derivedKinds()[i] === 'fletch');
-    expect(fletches).toEqual(['generate|settlements', 'settlements|realm']);
-    expect(derivedKinds().filter((k) => k === 'line').length).toBe(boundaries.length - 2);
-    // The retired kind is GONE, not merely unused — a stray 'chevron' anywhere in
-    // the derivation would mean two vocabularies for one seam.
-    expect(derivedKinds()).not.toContain('chevron');
+  test('today’s answer, anchored: two boundaries lost their rule, three keep it', () => {
+    // Anchoring the CURRENT answer proves the derivation is not vacuous. The two
+    // that vanished are exactly the two the shingled band now laps across.
+    const all = NAV.slice(0, -1).map((n, i) => `${n.id}|${NAV[i + 1].id}`);
+    expect(all.length).toBe(5);
+    expect(derivedBoundaries()).toEqual([
+      'realm|compendium', 'compendium|gallery', 'gallery|about-what-this-is',
+    ]);
+    const swallowed = all.filter((b) => !derivedBoundaries().includes(b));
+    expect(swallowed).toEqual(['generate|settlements', 'settlements|realm']);
   });
 });
 
 describe('desktop ribbon — the rendered seam matches the derivation exactly', () => {
-  test('one divider per adjacent pair, in NAV order, with the derived kinds', () => {
+  test('one rule per boundary the band does NOT swallow, in NAV order', () => {
     const { container } = render(<App />);
 
     // Positive control first: the ribbon really did render the cells whose
@@ -178,15 +202,37 @@ describe('desktop ribbon — the rendered seam matches the derivation exactly', 
     expect(labels).toEqual(NAV.map((n) => n.label));
 
     const rendered = dividers(container);
-    // Exactly one seam per adjacent pair — never a trailing mark before Sign In.
-    expect(rendered.length).toBe(NAV.length - 1);
-    expect(rendered.map((d) => d.dataset.dividerKind)).toEqual(derivedKinds());
+    expect(rendered.length).toBe(derivedBoundaries().length);
+    // …and every one of them is the plain groove. There is exactly ONE seam
+    // vocabulary on this bar now.
+    expect(new Set(rendered.map((d) => d.dataset.dividerKind))).toEqual(new Set(['line']));
+  });
+
+  test('⚠️ NO seam is drawn INSIDE the band — the laps are the seams', () => {
+    // THE PIN THE REFINEMENT EXISTS FOR. A 10px seam box between two vanes whose
+    // overlap resolved to two screen pixels is what made the shipped band read as
+    // three separate tabs. Absence is the assertion, and it is non-vacuous because
+    // the census above proves rules are still drawn where they belong.
+    const { container } = render(<App />);
+    const band = container.querySelector('[data-testid="nav-fletch-band"]');
+    expect(band).toBeTruthy();
+    expect(band.querySelectorAll('[data-divider-kind]').length).toBe(0);
+    // Nor may the retired vocabulary come back under any spelling.
+    for (const kind of ['fletch', 'chevron']) {
+      expect(container.querySelectorAll(`[data-divider-kind="${kind}"]`).length).toBe(0);
+    }
+    // The three fletch cells really are adjacent siblings with nothing between them.
+    const cells = [...band.querySelectorAll('[data-nav-cell="feather"]')];
+    expect(cells.length).toBe(3);
+    for (let i = 1; i < cells.length; i += 1) {
+      expect(cells[i - 1].nextElementSibling).toBe(cells[i]);
+    }
   });
 
   test('every divider names the pair it sits between, in rendered order', () => {
     const { container } = render(<App />);
     expect(dividers(container).map((d) => d.dataset.testid)).toEqual(
-      NAV.slice(0, -1).map((n, i) => `nav-divider-${derivedKinds()[i]}-${n.id}-${NAV[i + 1].id}`),
+      derivedBoundaries().map((b) => `nav-divider-line-${b.replace('|', '-')}`),
     );
   });
 
@@ -207,46 +253,24 @@ describe('desktop ribbon — the rendered seam matches the derivation exactly', 
     }
   });
 
-  test('the fletch draws ONE straight angled stroke and the line one vertical — matched weights', () => {
+  test('the rule draws ONE vertical hairline, at one weight, and nothing else', () => {
     const { container } = render(<App />);
+    expect(dividers(container).length).toBeGreaterThan(0); // not a vacuous loop
     for (const d of dividers(container)) {
       const strokes = [...d.querySelectorAll('line')];
-      // The retired chevron drew TWO strokes converging on an apex. The fletch
-      // draws exactly one, because a fletching's seam is a single sharp cut.
+      // The retired chevron drew TWO strokes converging on an apex; the retired
+      // fletch seam drew one ANGLED stroke. The groove draws one VERTICAL stroke.
       expect(strokes.length).toBe(1);
-      for (const s of strokes) {
-        expect(s.getAttribute('stroke-width')).toBe('1');
-        // Non-scaling stroke is what holds the two kinds to one hairline weight
-        // once preserveAspectRatio="none" stretches the mark to bar height.
-        expect(s.getAttribute('vector-effect')).toBe('non-scaling-stroke');
-      }
-    }
-  });
-
-  test('the fletch stroke leans FORWARD at exactly the vanes’ own angle', () => {
-    // THE PARALLELISM IS BY CONSTRUCTION, AND THIS IS THE PIN THAT SAYS SO. The
-    // feather's clipped edge runs FLETCH.slant px horizontally over the band's
-    // full height; the stroke's box is FLETCH.slant wide and it is drawn corner
-    // to corner, bottom-left → top-right, so it traverses the same run over the
-    // same height. A second angle authored anywhere would red here.
-    const { container } = render(<App />);
-    const fletches = dividers(container).filter((d) => d.dataset.dividerKind === 'fletch');
-    expect(fletches.length).toBe(2); // not a vacuous loop
-    for (const d of fletches) {
-      const svg = d.querySelector('svg');
-      expect(svg.getAttribute('viewBox')).toBe(`0 0 ${FLETCH.slant} 100`);
-      const line = d.querySelector('line');
-      // Bottom-left (0, 100) → top-right (slant, 0): forward, toward Realm.
-      expect(line.getAttribute('x1')).toBe('0');
-      expect(line.getAttribute('y1')).toBe('100');
-      expect(line.getAttribute('x2')).toBe(String(FLETCH.slant));
-      expect(line.getAttribute('y2')).toBe('0');
-      expect(d.style.flex).toBe(`0 0 ${FLETCH.slant}px`);
-    }
-    // The plain rule is still vertical and still 7px, untouched by the refit.
-    for (const d of dividers(container).filter((x) => x.dataset.dividerKind === 'line')) {
-      const line = d.querySelector('line');
+      const line = strokes[0];
       expect(line.getAttribute('x1')).toBe(line.getAttribute('x2'));
+      expect(line.getAttribute('stroke-width')).toBe('1');
+      // Non-scaling stroke is what holds the hairline to one device pixel once
+      // preserveAspectRatio="none" stretches the mark to bar height.
+      expect(line.getAttribute('vector-effect')).toBe('non-scaling-stroke');
+      // 7px wide, unchanged since LD-2: the divider IS the seam, not an addition
+      // to it, so each label keeps its own SP.lg padding and the rule sits 3.5px
+      // further out.
+      expect(d.style.flex).toBe('0 0 7px');
     }
   });
 

@@ -1,78 +1,80 @@
 /**
  * NavRibbon.jsx — the desktop header's primary destination ribbon.
  *
- * THE HALF-SEEN WAR ARROW (owner directive, 2026-08-03 evening; RIBBON V3, from a
- * reference photo plus two live clarifications). The bar is HALF OF AN ARROW IN
- * PROFILE. The arrow lies along the top screen edge and the viewport shows this
- * side's half: the whole header is the SHAFT'S VISIBLE HALF — one honey-tan barrel
- * running the full width, wordmark included, shaded as a cylinder (App.jsx paints
- * it; theme.js SHAFT* owns it) — and Create · Library · Realm are the NEAR SIDE'S
- * THREE FLETCHES rooted on that barrel, quill bases at the shaft line, vanes
- * sweeping toward Realm. Two red-brown silk wraps frame the cluster. ONE object.
+ * THE HALF-SEEN WAR ARROW (owner directive, 2026-08-03 evening; refined the same
+ * night from the owner's mockup). The bar is HALF OF AN ARROW IN PROFILE. The arrow
+ * lies along the top screen edge and the viewport shows this side's half: the whole
+ * header is the SHAFT'S VISIBLE HALF — one honey-tan barrel running the full width,
+ * wordmark included, shaded as a cylinder (App.jsx paints it; theme.js SHAFT* owns
+ * it) — and Create · Library · Realm are the NEAR SIDE'S FLETCHING rooted on that
+ * barrel. Two red-brown silk wraps bracket the band's two ends. ONE object.
  *
- * WHAT CHANGED FROM V2, and it is more than a repaint. V2 drew three GILT-EDGED
- * PARALLELOGRAMS on a cream plank: a band with one silhouette, a gold hairline
- * around it, a gold bloom, and a shared clip. All of that is retired. The vanes are
- * now shield-cut goose primaries with their own paths, their own gradients and their
- * own shadows (GooseFletch.jsx), the plank became a modelled cylinder, and the
- * fletching is bound down by whipping (ShaftWrap.jsx) instead of edged in gold.
- * The owner also corrected the SPECIES — turkey → grey goose, the English war-arrow
- * feather — which is why the vane is cooler, more uniform and far more quietly
- * marked than V2's; that quiet is what lets three labels ride three feathers.
+ * WHAT THE REFINEMENT CHANGED, and it is more than a repaint. V3 gave each of the
+ * three cells its OWN fletch SVG and cut a seam between them. The shipped bar read
+ * as three separate dark tabs with bare honey wood between each pair — the exact
+ * "feathers on a plank" failure the directive exists to avoid — because the lap was
+ * authored per-cell in each cell's own stretched coordinate space and came out at
+ * about two screen pixels while the seam between them was ten. There is now ONE
+ * continuous band (FletchBand.jsx): one SVG over the whole cluster, three vanes
+ * SHINGLED in one coordinate space, each lying over the next with a soft contact
+ * shadow at every lap, and NO internal seams at all. The laps ARE the seams. The
+ * repeated exposed slanted edges step rightward, and that cascade is what says
+ * Create → Library → Realm.
+ *
+ * ⚠️ THE THREE FLETCH CELLS ARE EQUAL-WIDTH, AND THAT IS GEOMETRY, NOT TIDINESS.
+ * The band's vanes live at fixed thirds of one coordinate space, so a label whose
+ * cell is wider or narrower than a third would sit off its own feather's calm zone —
+ * and the lap boundaries would land inside labels instead of between them. `flex: 1
+ * 1 0` on the three makes every lane exactly a third of whatever the band measures,
+ * at every font and every zoom, which is what keeps the drawn band and the laid-out
+ * labels describing the same object. (It also costs nothing: the band's total width
+ * is unchanged, because the two 10px seams it replaced were exactly the slack the
+ * two narrower labels take up.)
  *
  * ⚠️ THE BALANCE LAW SURVIVES THE REPAINT (V2 directive §4, still binding). Several
  * emphasis devices stack on the same three cells — the vane's dark fill against the
- * wood, the comb texture, the sheen bands, the shadow, and the label weight. Each is
- * deliberately dialled to about HALF what it would be carrying the hierarchy alone:
- * the barbs are a hairline at a ~6.6% tonal drop, the sheen is blurred, the weight is
- * 600 rather than 700. V3 actually SPENT one device to buy the goose reading — the
- * gilt hairline is gone entirely — and did not replace it with a louder one. If a
- * future edit strengthens one of these, it must weaken another.
+ * wood, the comb texture, the sheen bands, the contact shadows, the edge-light and
+ * the label weight. Each is deliberately dialled to about HALF what it would be
+ * carrying the hierarchy alone: the barbs are a hairline at a ~8% tonal drop, the
+ * sheen is blurred, the edge-light is a half-opacity whisper, the weight is 600
+ * rather than 700. V3 spent one device to buy the goose reading — the gilt hairline
+ * is gone entirely — and the refinement spent another: the internal seams. Neither
+ * was replaced with a louder one. If a future edit strengthens one of these, it must
+ * weaken another.
  *
- * THE BAND'S MEMBERSHIP IS DERIVED, NOT LISTED — unchanged from V1, and the one
+ * THE BAND'S MEMBERSHIP IS DERIVED, NOT LISTED — unchanged since V1, and the one
  * piece of this file that has survived every repaint. `fletchedRuns` groups NAV by
  * the flow predicate NavFlowArrow owns (routes.js NAV_FLOW): a cell is fletched when
  * it feeds, or is fed by, its rendered neighbour. The band is therefore the maximal
  * declared run, and a future nav insertion or reorder re-files the band
- * automatically instead of leaving a hardcoded trio pointing at the wrong tabs. The
- * same derivation answers the seam marks (NavDivider.dividerKind), so the band and
- * its internal seams cannot disagree about where the flow is.
+ * automatically instead of leaving a hardcoded trio pointing at the wrong tabs.
  *
- * ⚠️⚠️ THE OVERHANG IS PAINT, NEVER LAYOUT. The vanes' lower edges peek
- * FLETCH.overhang px below the ribbon's bottom border. The header is sticky and
- * theme.js derives ANCHOR_OFFSET from CHROME.headerDesktop, so every About / guide /
- * Compendium / dossier in-page anchor in the estate lands on a number this bar must
- * not move. GooseFletch buys the peek with `overflow: visible` on a zero-inset
- * absolute box and geometry drawn past the bottom — costing no height, no margin, no
- * border and no offset. tests/components/navFletching.test.jsx pins both halves: the
- * mechanism, and the ABSENCE of any box that spends the overhang. There is no TOP
- * overhang: the header is sticky at top:0 and it would clip.
- *
- * ⚠️ MEASURED, NOT ASSUMED — CHROME.headerDesktop IS THE LIVE HEIGHT. V1 recorded
- * the constant at 60 while the bar measured 124 and left it alone. V2 found the
- * mechanism: NavDivider's decorative SVG was in flow asking for `height="100%"`
- * against an indefinite parent, fell back to its own viewBox height of 100, and THAT
- * set the header's flex line. The SVG is out of flow now, the header spends
- * CHROME.headerDesktop as its own min-height, and the bar measures exactly 48 — so
- * ANCHOR_OFFSET's derivation is true rather than merely tidy. Do not reintroduce an
- * in-flow percentage-height decoration.
+ * ⚠️⚠️ THE HANG IS PAINT, NEVER LAYOUT. The vanes reach FLETCH_HANG px below the
+ * ribbon's bottom edge. The header is sticky and theme.js derives ANCHOR_OFFSET from
+ * CHROME.headerDesktop, so every About / guide / Compendium / dossier in-page anchor
+ * in the estate lands on a number this bar must not move. FletchBand buys the hang
+ * with `overflow: visible` on a zero-inset absolute box and geometry drawn past the
+ * bottom — costing no height, no margin, no border and no offset.
+ * tests/components/navFletching.test.jsx pins both halves: the mechanism, and the
+ * ABSENCE of any box that spends it. There is no TOP hang: the header is sticky at
+ * top:0 and it would clip.
  *
  * ⚠️ NOTHING CLIPPED IS EVER FOCUSABLE. `clip-path` clips an element's whole
  * rendering INCLUDING its outline, and a11y.css draws the global focus ring outside
  * the border box, so clipping a cell's own control would silently swallow the
  * keyboard ring while leaving every visual test green. All clipping lives inside
- * GooseFletch's aria-hidden SVG; no control and no ancestor of one is clipped, and
- * no ancestor may introduce `overflow: hidden` either. The pin asserts the chain.
+ * FletchBand's aria-hidden SVG, which is now a SIBLING of the three controls rather
+ * than a child of each — so there is not even an ancestor relationship left to get
+ * wrong. No ancestor may introduce `overflow: hidden` either. The pin asserts the
+ * chain.
  *
- * ACTIVE STATE. The old affordance was a gold underline at label height; it has now
- * been translated three times and never replaced. The active fletch LIGHTENS — its
- * sheen bands brighten to FLETCH_SHEEN_LIFT — brightens its label to PARCH, and
- * takes the gold stroked along the vane's OWN lower silhouette, so the gold follows
- * the rounded war-fletch back instead of drawing a rectangle across it. That is
- * three visual channels plus aria-current="page", none of them colour alone. Weight
- * is deliberately NOT among them: V2 fixed every fletch label at 600 under the
- * BALANCE LAW and V3 keeps it there. The plain reference tabs keep the underline
- * register, re-inked for the honey barrel.
+ * ACTIVE STATE. The old affordance was a gold underline at label height; it has been
+ * translated three times and never replaced. The active fletch LIGHTENS — its sheen
+ * bands brighten to FLETCH_SHEEN_LIFT — brightens its label to PARCH, and takes the
+ * gold stroked along the vane's OWN lower silhouette. That is three visual channels
+ * plus aria-current="page", none of them colour alone. Weight is deliberately NOT
+ * among them: every fletch label is 600 under the BALANCE LAW. The plain reference
+ * tabs keep the underline register, re-inked for the honey barrel.
  *
  * THE FLOW MARK MOVED, IT DID NOT DIE. NavFlowArrow no longer renders here; it still
  * draws on the MOBILE bottom nav, where cells have no seam to carry a divider. Both
@@ -80,17 +82,17 @@
  * as its live half, tests/components/navDividers.test.jsx censuses this one.
  *
  * STRETCH CHAIN. `alignSelf: stretch` here (and on the header cluster that holds it)
- * is what lets the fletches and the wraps span the bar top-to-bottom;
+ * is what lets the band and the wraps span the bar top-to-bottom;
  * `alignItems: center` keeps the PLAIN cells at their natural height so their gold
  * underline stays exactly where it has always sat, while the band's own
- * `alignItems: stretch` fills the fletches to bar height — which is what makes the
- * three read as one fletching rather than three chips.
+ * `alignItems: stretch` fills the fletch cells to bar height — which is what makes
+ * the three read as one fletching rather than three chips.
  */
 import { Fragment } from 'react';
 import { NAV } from '../../lib/routes.js';
-import NavDivider, { dividerKind } from './NavDivider.jsx';
+import NavDivider from './NavDivider.jsx';
 import { flowsInto } from './NavFlowArrow.jsx';
-import GooseFletch from './GooseFletch.jsx';
+import FletchBand from './FletchBand.jsx';
 import ShaftWrap from './ShaftWrap.jsx';
 import { BODY, GOLD_TXT, INK_DEEP, PARCH, PARCH_100, SP, FS, sans } from '../theme.js';
 
@@ -125,7 +127,7 @@ const CELL_BASE = {
 };
 
 export default function NavRibbon({ view, onNavClick }) {
-  /** One nav cell — a fletch on the shaft, or a plain reference tab. */
+  /** One nav cell — a fletch riding the band, or a plain reference tab. */
   const cell = ({ id, label }, fletchedCell) => {
     const active = view === id;
     return (
@@ -137,8 +139,7 @@ export default function NavRibbon({ view, onNavClick }) {
         data-nav-cell={fletchedCell ? 'feather' : 'plain'}
         style={{
           ...CELL_BASE,
-          // `relative` is the vane's positioning context; z-index lifts the label
-          // above the fletch that paints behind it.
+          // `relative` + z-index lifts the label above the band that paints behind it.
           position: 'relative', zIndex: 1,
           ...(fletchedCell
             // A fletch label rides the DARK GOOSE VANE, so it stays in the pale
@@ -147,67 +148,69 @@ export default function NavRibbon({ view, onNavClick }) {
             // fletching from the shelf (600 vs the reference tabs' 500) and says
             // nothing about active-ness, which the brightened sheen, the gold edge,
             // the brighter label and aria-current already carry between them.
-            ? { alignSelf: 'stretch', color: active ? PARCH : PARCH_100, fontWeight: 600 }
+            // The equal-lane law — see the header note. ⚠️ AUTHORED AS LONGHANDS,
+            // not as the `flex` shorthand: jsdom's cssstyle does not implement the
+            // shorthand and drops it SILENTLY, so the shorthand renders correctly in
+            // a browser while every jsdom pin on it reads back the empty string and
+            // has to be weakened to nothing. Longhands are legible to both.
+            ? {
+              alignSelf: 'stretch', justifyContent: 'center',
+              flexGrow: 1, flexShrink: 1, flexBasis: 0,
+              color: active ? PARCH : PARCH_100, fontWeight: 600,
+            }
             : {
               // The plain register, RE-INKED for the honey barrel. These labels sit
               // on bare wood, and the wood went from cream to honey-tan — GOLD_TXT
               // was the V2 active tone at 5.75:1 on cream and is 3.38:1 here, which
-              // fails AA as text. So the label takes INK_DEEP (7.06:1) and GOLD_TXT
-              // stays only as the UNDERLINE, where 3.38:1 clears SC 1.4.11's 3:1
-              // floor for a boundary sitting beside an already-legible ink label.
+              // fails AA as text. So the label takes INK_DEEP and GOLD_TXT stays only
+              // as the UNDERLINE, where 1.4.11's 3:1 is the floor for a boundary
+              // sitting beside an already-legible ink label.
               borderBottom: active ? `2px solid ${GOLD_TXT}` : '2px solid transparent',
               color: active ? INK_DEEP : BODY,
               fontWeight: active ? 700 : 500,
             }),
         }}
       >
-        {fletchedCell && <GooseFletch id={id} active={active} />}
         <span style={{ position: 'relative', zIndex: 1 }}>{label}</span>
       </button>
     );
   };
 
-  /** A run's cells with the derived seam mark between each adjacent pair. */
-  const withSeams = (items, fletchedRun) => items.map((item, i) => {
-    const next = items[i + 1];
-    return (
-      <Fragment key={item.id}>
-        {cell(item, fletchedRun)}
-        {next && <NavDivider kind={dividerKind(item.id, next.id)} from={item.id} to={next.id} />}
-      </Fragment>
-    );
-  });
-
   const runs = fletchedRuns();
   return (
-    // gap:0 — the divider IS the seam (see NavDivider's width/clearance note).
+    // gap:0 — outside the band the divider IS the seam (see NavDivider's width note);
+    // inside it there are no seams at all, because the laps are the seams.
     <nav style={{ display: 'flex', gap: 0, alignItems: 'center', alignSelf: 'stretch' }}>
       {runs.map((run, ri) => {
-        const tail = run.items[run.items.length - 1];
         const nextHead = runs[ri + 1]?.items[0];
-        const body = withSeams(run.items, run.fletched);
+        const activeLane = run.items.findIndex((it) => it.id === view);
         return (
           <Fragment key={run.items[0].id}>
             {run.fletched ? (
               <span
                 data-testid="nav-fletch-band"
                 style={{
-                  // `relative` is what the two wraps hang off: they position
-                  // OUTSIDE this box, on bare barrel, framing the cluster.
+                  // `relative` is what the band paint and the two wraps hang off: the
+                  // SVG fills this box exactly, and the wraps position OUTSIDE it, on
+                  // bare barrel, bracketing the cluster.
                   position: 'relative', display: 'flex', gap: 0,
                   // stretch on BOTH axes of the chain: the cluster fills the bar,
-                  // and its fletches fill the cluster.
+                  // and its fletch cells fill the cluster.
                   alignItems: 'stretch', alignSelf: 'stretch',
                 }}
               >
                 <ShaftWrap side="lead" />
-                {body}
+                <FletchBand id={`fletch-${run.items[0].id}`} activeLane={activeLane} />
+                {run.items.map((item) => cell(item, true))}
                 <ShaftWrap side="trail" />
               </span>
-            ) : body}
-            {nextHead && (
-              <NavDivider kind={dividerKind(tail.id, nextHead.id)} from={tail.id} to={nextHead.id} />
-            )}
+            ) : run.items.map((item, i) => (
+              <Fragment key={item.id}>
+                {i > 0 && <NavDivider from={run.items[i - 1].id} to={item.id} />}
+                {cell(item, false)}
+              </Fragment>
+            ))}
+            {nextHead && <NavDivider from={run.items[run.items.length - 1].id} to={nextHead.id} />}
           </Fragment>
         );
       })}

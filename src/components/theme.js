@@ -308,26 +308,48 @@ export const FLETCH_SHADOW = '#2A251E59';
  * FLETCH — the fletching's GEOMETRY, deliberately kept apart from CHROME: none of
  * it may enter the header's layout box.
  *
- * `overhang` is how far the vanes' lower edges PEEK below the ribbon (the directive's
- * ~6px). ⚠️ IT IS PAINT AND NEVER LAYOUT — see GooseFletch.jsx's overflow note. It
- * contributes no height, margin, border or offset to any box, which is what keeps
- * ANCHOR_OFFSET (and with it every About / guide / Compendium anchor landing)
- * describing the bar the ribbon actually is.
+ * ⚠️⚠️ EVERY NUMBER HERE IS PAINT AND NEVER LAYOUT — see FletchBand.jsx's overflow
+ * note. None of it contributes a height, a margin, a border or an offset to any box,
+ * which is what keeps ANCHOR_OFFSET (and with it every About / guide / Compendium
+ * anchor landing) describing the bar the ribbon actually is.
  *
- * `barbRun` / `barbGap` are the barb striations' sweep and spacing in the fletch's
- * own coordinate space; FLETCH_BARB_DEG below is derived from `barbRun` so the comb
- * angle can never drift from the geometry that produced it.
+ * ⚠️ `band` IS THE FLETCHING'S OWN DEPTH, AND IT IS INDEPENDENT OF THE BAR
+ * (owner refinement, 2026-08-03 night). The shaft is a thin stick; the fletching
+ * riding it is roughly twice as deep, top-aligned at the quill line, and the part
+ * that does not fit HANGS below the bar's bottom edge. So this number is chosen for
+ * the FEATHERS (deep enough to seat a label in the vane's calm zone with the rake
+ * still reading), never for the chrome — and as the bar thins the hang grows, which
+ * is the composition's whole point rather than a side effect. FLETCH_HANG below
+ * derives the peek from this and CHROME.headerDesktop; nothing authors it twice.
  *
- * `slant` survives V2 with a NARROWER JOB. It is no longer a feather edge — the
- * vanes are shield-cut paths now, not parallelograms — it is the seam box's width
- * and lean, kept because NavDivider still traverses `slant` px over the bar's height
- * and the quill shadow should lean with the comb.
+ * `lane` is one fletch's width in the band's own coordinate space and `lap` is how
+ * far each vane lies OVER the next one — the shingle. ⚠️ BOTH LIVE IN ONE
+ * COORDINATE SPACE ON PURPOSE. V3 drew three separate SVGs, one per cell, each
+ * stretched by `preserveAspectRatio="none"` to its own cell width; the lap was
+ * authored in each cell's local units and came out at a DIFFERENT number of screen
+ * pixels per cell, small enough that the 10px seam between cells outran it and the
+ * band read as three separate tabs with bare wood between them. The band is now ONE
+ * SVG over the whole cluster, so `lap` is a fixed fraction of `lane` and the shingle
+ * is exact by construction at every width.
  *
- * `wrap` is each whipping band's width; `seam` the gap that lets two adjacent
- * silhouettes read as two feathers rather than one smear.
+ * `back` is how far a vane's leading tip pokes past its own lane (so the tip is a
+ * point on the quill, not a butt joint) and `tipIn` how far below the quill line
+ * that point sits.
+ *
+ * `barbRun` / `barbGap` are the barb striations' sweep and spacing in the band's
+ * coordinate space; FLETCH_BARB_DEG below is derived from `barbRun` so the comb
+ * angle can never drift from the geometry that produced it. `barbJitter` is the
+ * fraction by which the deterministic comb jitter may widen or narrow one gap —
+ * see FletchBand's jitter note; a perfectly regular comb reads as machine hatching.
+ *
+ * `wrap` is each whipping band's width. `slant` survives as the PLAIN rule's own
+ * lean and nothing else: the fletch-seam divider it used to size is retired (the
+ * band has no internal seams any more — the laps are the seams).
  */
 export const FLETCH = Object.freeze({
-  slant: 10, overhang: 6, barbRun: 26, barbGap: 3.4, wrap: 7, seam: 1,
+  band: 70, lane: 100, lap: 44, back: 6, tipIn: 3,
+  barbRun: 37, barbGap: 4.1, barbJitter: 0.34,
+  slant: 10, wrap: 7,
 });
 
 // swatch — exact-value migration swatchbook (see design/tokens.js). Routes the
@@ -447,17 +469,41 @@ export const ANCHOR_OFFSET = CHROME.headerDesktop + SP.xxl;
  * with them, the sheen bands they catch the light in) lean. DERIVED, never spelled.
  *
  * A barb leaves the rachis and sweeps toward the trailing tip, running FLETCH.barbRun
- * across the fletch over exactly CHROME.headerDesktop of depth. So the angle is
- * atan(barbRun / headerDesktop) and it re-derives the moment either number moves.
- * At barbRun 26 over a 48px shaft that is 28° — a comb, not a rake.
+ * across the vane over exactly FLETCH.band of depth. So the angle is
+ * atan(barbRun / band) and it re-derives the moment either number moves.
+ * At barbRun 37 over a 70-deep vane that is 28° — a comb, not a rake.
  *
- * ⚠️ IT IS SHARED, WHICH IS THE POINT. GooseFletch draws the barbs, the sheen bands
+ * ⚠️ IT DERIVES FROM THE FEATHER, NOT FROM THE CHROME, and that changed with the
+ * shingled band. V3 ran the sweep over CHROME.headerDesktop, which was true only
+ * while the vane was exactly as deep as the bar. The vane now hangs well below the
+ * bar, and — worse — the shaft is about to get thinner: a comb pinned to the chrome
+ * would have swung from 28° to 34° the moment the bar slimmed, changing every
+ * feather in the band as a side effect of a layout edit nobody thought was visual.
+ * The comb is a property of the FEATHER, so it is measured across the feather.
+ * (barbRun moved 26 → 37 in the same edit purely to hold 28° across the new depth.)
+ *
+ * ⚠️ IT IS SHARED, WHICH IS THE POINT. FletchBand draws the barbs, the sheen bands
  * AND the rachis taper off this one number; three angles maintained separately is
  * how a feather stops looking like one feather. It is also deliberately far from the
  * shaft grain's own direction (the grain runs LENGTHWISE, along the shaft), so vane
  * and wood never read as one interference pattern where a fletch meets bare barrel.
  */
-export const FLETCH_BARB_DEG = Math.round((Math.atan2(FLETCH.barbRun, CHROME.headerDesktop) * 180) / Math.PI);
+export const FLETCH_BARB_DEG = Math.round((Math.atan2(FLETCH.barbRun, FLETCH.band) * 180) / Math.PI);
+
+/**
+ * FLETCH_HANG — how far the fletching's lower edges PEEK below the bar, in px.
+ *
+ * ⚠️⚠️ DERIVED, AND PAINT, AND NEITHER OF THOSE IS OPTIONAL. It is the difference
+ * between the feather's own depth and the bar's, so thinning the shaft deepens the
+ * hang without anyone editing a second number — which is exactly the composition the
+ * owner asked for ("the band's height is independent; it hangs deeper as the bar
+ * thins"). And it is bought with `overflow: visible` on a zero-inset box, never with
+ * a height, a margin, a border or a negative offset: theme.js derives ANCHOR_OFFSET
+ * from CHROME.headerDesktop and every in-page anchor in the estate lands on it, so a
+ * hang that cost one pixel of box would move every anchor in the product.
+ * tests/components/navFletching.test.jsx pins the mechanism AND the absence.
+ */
+export const FLETCH_HANG = FLETCH.band - CHROME.headerDesktop;
 
 /**
  * bottomClearance — safe-area-aware bottom offset for fixed/sticky mobile

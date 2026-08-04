@@ -186,16 +186,26 @@ describe('desktop ribbon — the journey mark MOVED to the seam (LD-2)', () => {
     expect(labels.slice(0, 3)).toEqual(['Create', 'Library', 'Realm']);
     expect(labels).not.toContain('Welcome');
 
-    // Second control: the journey mark EXISTS on this surface — as the fletch
-    // seam at the two flow boundaries. Without this the absence assertion would
-    // pass just as happily on a ribbon that had lost the mark entirely.
-    expect([...container.querySelectorAll('header nav [data-divider-kind="fletch"]')]
-      .map((d) => d.dataset.testid)).toEqual([
-      'nav-divider-fletch-generate-settlements',
-      'nav-divider-fletch-settlements-realm',
-    ]);
-    // The retired spelling is gone from the surface, not merely unreferenced.
-    expect(container.querySelectorAll('[data-divider-kind="chevron"]').length).toBe(0);
+    // Second control: the journey mark EXISTS on this surface. ⚠️ IT HAS MOVED
+    // TWICE NOW. LD-2 took it out of the tabs and into a full-height chevron seam;
+    // V3 made that seam an angled fletch stroke; the owner's mockup refinement
+    // RETIRED the internal seam altogether and the mark became the SHINGLE — three
+    // goose vanes each lying over the next, their exposed slanted edges stepping
+    // rightward. Without this control the absence assertion below would pass just as
+    // happily on a ribbon that had lost the journey mark entirely.
+    const band = container.querySelector('[data-testid="nav-fletch-band"]');
+    expect(band).toBeTruthy();
+    const paint = band.querySelector('[data-testid="nav-fletch-band-paint"]');
+    expect(paint).toBeTruthy();
+    // The cascade is the mark: three vanes, painted trailing-first so each earlier
+    // one laps the next (see navFletching.test.jsx block 2 for the geometry).
+    expect([...paint.querySelectorAll('[data-testid^="nav-fletch-vane-"]')]
+      .map((g) => g.dataset.testid))
+      .toEqual(['nav-fletch-vane-2', 'nav-fletch-vane-1', 'nav-fletch-vane-0']);
+    // Both retired spellings are gone from the surface, not merely unreferenced.
+    for (const kind of ['fletch', 'chevron']) {
+      expect(container.querySelectorAll(`[data-divider-kind="${kind}"]`).length).toBe(0);
+    }
 
     // The mark is drawn ONCE: no NavFlowArrow survives inside any desktop tab.
     expect(arrows(container)).toEqual([]);
