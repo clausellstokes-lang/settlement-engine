@@ -90,6 +90,7 @@ MUTATED_FILES=(
   tests/security/systemConfigPublicRead.pglite.test.js
   supabase/migrations/087_review_money_hardening.sql
   src/lib/worldExport.js
+  src/generators/narrative/settlementOriginProse.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -693,6 +694,26 @@ check_caught "prose/spine splice guard sentence-break check deleted" src/domain/
 #     already spent on area 66 — see scripts/mutation-coverage-manifest.json.
 perl -0pi -e "s/  if \(trimmed\.length > MAX_PHRASE_CHARS\) return null;\n//" src/domain/simulationSpine.js
 check_caught "prose/spine splice guard LENGTH cap deleted" src/domain/simulationSpine.js "npx vitest run tests/domain/simulationSpine.test.js tests/domain/historyBeats.test.js --no-file-parallelism"
+
+# 68. The origin corpus SHRINKS — delete two variants from the crossroads arm,
+#     taking it 5 -> 3. Lane RR's shift record NARRATED the corpus size (eight
+#     arms of five) and nothing asserted it; the narration was itself wrong (it
+#     said 45 for 8 x 5 = 40), which is how a reader discovers that a narrated
+#     count is not a guard. The three sibling pins are all structurally blind to
+#     this: `pin:no-power-of-two-pool` asks only "n > 1 and not a power of two",
+#     and THREE satisfies both; `pin:variant-reachability` is satisfied because
+#     the three survivors are all still reachable; `pin:channels-token` counts
+#     token-carrying variants per pool, not variants. Only the ROAD arm had an
+#     independent size witness (pin:corpus-diversity's exact toBe(5)), which is
+#     why this plant shrinks CROSSROADS — an arm with no other guard, so the red
+#     is attributable to `pin:corpus-size-totality` alone.
+#     Measured before landing: crossroads 5 -> 3, EXACTLY 1 red (19 passed).
+#     MANIFEST NOTE: this label is claimed by the meta entry
+#     `meta:origin-corpus-size-totality`. tests/generators/settlementOriginProse.test.js
+#     is not an enumerated invariant file under the naming rule (its basename
+#     carries none of the tokens), so it takes no test-file entry of its own.
+perl -0pi -e 's/\n[^\n]*Founded at a junction on the oldest logic[^\n]*\n[^\n]*It exists because travellers had to stop somewhere[^\n]*//' src/generators/narrative/settlementOriginProse.js
+check_caught "prose/origin corpus pool shrinks below five" src/generators/narrative/settlementOriginProse.js "npx vitest run tests/generators/settlementOriginProse.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

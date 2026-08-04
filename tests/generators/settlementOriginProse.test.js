@@ -139,6 +139,41 @@ describe('RR law 3 — every variant of every pool is reachable', () => {
     }
   });
 
+  test('pin:corpus-size-totality — EIGHT arms, FIVE variants each, exactly', () => {
+    // THE SHAPE THE RECORD ASSERTED IN PROSE AND NOTHING ASSERTED IN CODE.
+    // The lane RR shift record narrated the corpus size (and got it wrong: it
+    // said 45 for 8 x 5). A narrated count decays; this is its structural heir.
+    //
+    // WHY THE SIBLING PIN ABOVE CANNOT DO THIS JOB: `pin:no-power-of-two-pool`
+    // asks only `n > 1 && n is not a power of two`. THREE satisfies both. A
+    // pool quietly shrinking 5 -> 3 — an author trimming variants they thought
+    // weak, a bad merge dropping two lines — passes it, passes
+    // `pin:variant-reachability` (all three remaining members are reachable),
+    // and passes `pin:channels-token`. Only the ROAD arm has an independent
+    // witness, in `pin:corpus-diversity`'s exact `toBe(5)`; the other seven
+    // arms had no size guard at all.
+    //
+    // EXACT EQUALITY BOTH WAYS, deliberately: this is a corpus contract, not a
+    // floor. Adding a ninth arm or a sixth variant is a widening of authored
+    // content that moves the golden, so it must arrive with a re-record and a
+    // shift-record row — and reading this red is how an author learns that.
+    expect(ORIGIN_ARMS.length, 'the arm count left 8').toBe(8);
+    expect(Object.keys(ORIGIN_POOLS).length, 'ORIGIN_ARMS and ORIGIN_POOLS disagree').toBe(8);
+    const sizes = Object.fromEntries(ORIGIN_ARMS.map((arm) => [arm, ORIGIN_POOLS[arm].length]));
+    const offSize = Object.entries(sizes).filter(([, n]) => n !== 5);
+    expect(
+      offSize,
+      `every arm must hold exactly five variants; these do not: ${JSON.stringify(offSize)}`,
+    ).toEqual([]);
+    // …and the total is the product, stated so the ledger's arithmetic is
+    // checkable at a glance rather than trusted.
+    const bodies = Object.values(ORIGIN_POOLS).flat();
+    expect(bodies.length, '8 arms x 5 variants = 40 authored bodies').toBe(40);
+    // NON-INFLATION: 40 SLOTS is not 40 BODIES if two arms share a sentence.
+    // The recorded corpus size is a claim about distinct authored prose.
+    expect(new Set(bodies).size, 'two arms ship the same authored body').toBe(40);
+  });
+
   test('pin:variant-reachability — the seed family reaches EVERY member of EVERY pool', () => {
     for (const arm of ORIGIN_ARMS) {
       const seen = new Set();

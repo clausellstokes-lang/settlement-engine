@@ -24,7 +24,10 @@
  *     (A) THE ORIGIN-RUNG WIDENING. `generateSettlementReason` held ONE sentence
  *         per arm (PT2-5: nine bodies over the whole config space, the DEFAULT
  *         road arm carrying exactly one). Each of the eight arms now holds five
- *         authored variants — 45 bodies — selected DRAW-FREE via
+ *         authored variants — 8 x 5 = 40 bodies (arithmetic corrected
+ *         2026-08-03; the lane wrote 45, and commit 21bf1041's own subject line
+ *         says "forty-five", which is immutable and stands uncorrected) —
+ *         selected DRAW-FREE via
  *         kernel/proseHash.pickVariant from a key folding route, resolved
  *         terrain, the food-deficit flag, the special-resource endowment and the
  *         pipeline seed. Zero PRNG draws are consumed, which is why this is

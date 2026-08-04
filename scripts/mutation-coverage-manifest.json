@@ -1828,6 +1828,11 @@
    "label": "data-purity/src/data->generators import",
    "what": "eslint no-restricted-imports purity wall on src/data (eslint.config.js)"
   },
+  "meta:origin-corpus-size-totality": {
+   "kind": "mutation",
+   "label": "prose/origin corpus pool shrinks below five",
+   "what": "Standing plant deletes TWO authored variants from the crossroads arm of ORIGIN_POOLS in src/generators/narrative/settlementOriginProse.js, taking that pool 5 -> 3. Lane RR NARRATED the origin corpus's shape (eight arms of five) in its shift record and in the golden docstring, and nothing in code asserted it -- so the narration was free to be wrong, and it was: both said 45 bodies where 8 x 5 = 40. Lane MD corrected the arithmetic and gave the claim a structural heir, pin:corpus-size-totality, which asserts arms === 8 and every pool length === 5 by exact equality (plus a distinctness check, because 40 slots is not 40 bodies if two arms share a sentence). WHY THE SIBLING PINS CANNOT DO THIS: pin:no-power-of-two-pool asks only n > 1 and n not a power of two, and THREE satisfies both; pin:variant-reachability stays green because the three survivors are each still reachable over the 400-seed family; pin:channels-token counts token-carrying variants per pool rather than pool size. Only the ROAD arm carried an independent size witness (pin:corpus-diversity's exact toBe(5)), which is why the plant shrinks CROSSROADS -- an arm with no other guard -- so the red is attributable to the new pin alone. WHY THIS LIVES IN 'meta' RATHER THAN UNDER A TEST FILE: tests/generators/settlementOriginProse.test.js is NOT an enumerated invariant file (its basename carries none of the NAME_PATTERN tokens and it sits outside the seven enforcer dirs), so it has no manifest slot of its own; the invariant is real regardless and the sweep proves it directly. Measured before landing: crossroads 5 -> 3 => EXACTLY 1 red, 19 passed; restored => 20 passed. Mutation target src/generators/narrative/settlementOriginProse.js is tracked and clean as of lane MD's commit."
+  },
   "meta:spine-max-phrase-chars-cap": {
    "kind": "mutation",
    "label": "prose/spine splice guard LENGTH cap deleted",

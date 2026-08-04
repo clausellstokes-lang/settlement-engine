@@ -31,11 +31,34 @@
  *     form; it banned exactly ONE spelling. The measured cost: 56 residual
  *     `resourceIcon: ''` fields survived in src/data/supplyChainData.js and put
  *     4,462 dead `economicState.activeChains[*].resourceIcon: ""` slots into
- *     live generated output, with this pin green the entire time. The regex is
- *     now `[A-Za-z]*[Ii]con`, and the signature test below carries positive
- *     controls for the compound spellings so the blind spot cannot reopen.
+ *     live generated output, with this pin green the entire time.
  *     GENERAL LESSON, worth more than this instance: a `\b<word>` source scan
  *     guards ONE SPELLING, never a concept.
+ *
+ *     ⚠️ …AND THE WIDENING OVERSHOT (anchored by lane MD, 2026-08-03). The cure
+ *     was `[A-Za-z]*[Ii]con`, which reads "any identifier ENDING in icon" — and
+ *     English is full of those. `lexicon: ''` matches. So does `favicon: ''`,
+ *     `silicon: ''`, `axicon: ''`. Both words are already live in this tree
+ *     (discourseKernel.js and three components discuss a "lexicon"; logo.js
+ *     discusses the "favicon"), and this scan reads COMMENTS as well as code,
+ *     so the first author to write `lexicon: ''` anywhere under src/ would have
+ *     reddened a guard about stripped emoji. It had not fired yet — a latent
+ *     false positive, found by inspection rather than by a failure.
+ *
+ *     The anchor is now a real Icon BOUNDARY: `[A-Za-z]+Icon` (a camelCase
+ *     compound, capital I — the estate's own spelling in `resourceIcon`,
+ *     `needIcon`, `menuIcon`, `tierIcon`) OR the bare word `[Ii]con`. That is
+ *     the CONCEPT, without swallowing every noun that happens to end in the
+ *     same five letters. Proven behaviour-preserving on the current tree: both
+ *     regexes were run over all of src/ and returned the IDENTICAL hit set.
+ *     Both false-positive words carry negative fixtures below, beside the
+ *     positive controls, so neither direction can drift.
+ *
+ *     DELIBERATELY OUT OF THE SET, recorded rather than left to be re-found: an
+ *     ALL-LOWERCASE compound (`needicon: ''`). No such spelling exists in this
+ *     codebase or its conventions, and admitting it is exactly what re-opens
+ *     the `lexicon` false positive. If one ever appears, add its exact field
+ *     name to the alternation — not a wildcard.
  *
  *   SIG 2 — ', ' EMPTY-VALUE FALLBACK:  `x || ', '`  |  `return ', '`
  *     The corrupted empty-value placeholder. The sanctioned replacement is
@@ -99,9 +122,12 @@ const isAllowedSig1 = (rel, line) => SIG1_ALLOWED.some(
 
 // Each signature: a per-line regex + a human label. All must stay at 0 hits.
 const SIGNATURES = [
-  // `[A-Za-z]*[Ii]con` — the concept, not one spelling. See THE CAMELCASE BLIND
-  // SPOT in this file's header: `\bicon` could never see `resourceIcon`/`needIcon`.
-  { id: 'empty-icon-prop',       re: /\b[A-Za-z]*[Ii]con\s*[:=]\s*(?:""|'')/, why: "empty icon prop/field (renders a stray leading space in `{icon} {label}`); remove the icon slot" },
+  // A camelCase compound (capital-I `Icon` suffix) OR the bare word. The
+  // concept, not one spelling — and not every English noun ending in "icon"
+  // either. See THE CAMELCASE BLIND SPOT and …AND THE WIDENING OVERSHOT in this
+  // file's header: `\bicon` could never see `resourceIcon`; `[A-Za-z]*[Ii]con`
+  // could not help seeing `lexicon`.
+  { id: 'empty-icon-prop',       re: /\b(?:[A-Za-z]+Icon|[Ii]con)\s*[:=]\s*(?:""|'')/, why: "empty icon prop/field (renders a stray leading space in `{icon} {label}`); remove the icon slot" },
   { id: 'comma-empty-fallback',  re: /(?:\|\|\s*|return\s+)', '/,        why: "', ' empty-value fallback; use EMPTY_VALUE from theme.js" },
   { id: 'orphan-variation-sel',  re: /[>'"\s]️/,                    why: "orphan U+FE0F variation selector (base emoji was stripped); remove it or restore a full glyph" },
   { id: 'comma-em-dash-holder',  re: /(?:"|\}\})>,\s/,                   why: "corrupted em-dash placeholder (`\">,` / `}}>,`); restore '—'" },
@@ -182,6 +208,21 @@ describe('copy-corruption pin (R1 — em-dash / emoji-strip residue)', () => {
     expect(byId['comma-em-dash-holder'].test('<em>Healing</em>, <em>Curse</em>')).toBe(false); // inline list comma
     expect(byId['empty-icon-prop'].test('icon="⚔️"')).toBe(false); // non-empty icon
     expect(byId['empty-icon-prop'].test("resourceIcon: '⛏️'")).toBe(false); // non-empty compound
+
+    // ── THE FALSE-POSITIVE FIXTURES (lane MD) ────────────────────────────────
+    // `[A-Za-z]*[Ii]con` read "any identifier ending in icon", and English
+    // supplies plenty. Both of these words are ALREADY in this tree — the scan
+    // reads comments too — so the widened form was one authored line away from
+    // reddening a stripped-emoji guard over a word-list and a browser tab icon.
+    expect(byId['empty-icon-prop'].test("lexicon: ''")).toBe(false);
+    expect(byId['empty-icon-prop'].test('const lexicon = { entries: "" };')).toBe(false);
+    expect(byId['empty-icon-prop'].test('favicon: ""')).toBe(false);
+    expect(byId['empty-icon-prop'].test("silicon: ''")).toBe(false);
+    // …and the anchoring did NOT cost the real catch. Paired with each false
+    // positive so a future narrowing cannot quietly take the true one with it.
+    expect(byId['empty-icon-prop'].test("resourceIcon: ''")).toBe(true);
+    expect(byId['empty-icon-prop'].test('favIcon: ""')).toBe(true); // camelCase compound, capital I
+    expect(byId['empty-icon-prop'].test("icon: ''")).toBe(true);
     expect(byId['comma-empty-fallback'].test("names.join(', ')")).toBe(false); // join separator
   });
 

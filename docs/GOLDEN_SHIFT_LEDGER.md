@@ -1994,10 +1994,26 @@ revert.
 
 Eight arms — the pre-RR branch structure exactly (route, the two port terrain
 sub-arms, the isolated deficit split) — each now holding **five authored
-variants**, 45 bodies where there were 9. Selection is `pickVariant`
+variants**, **8 × 5 = 40 bodies** where there were 9. Selection is `pickVariant`
 (`src/kernel/proseHash.js`): **zero PRNG draws**, so no downstream roll moved.
 Pools in `src/generators/narrative/settlementOriginProse.js`; the branch logic
 stays in `generateSettlementReason`, which remains the field's single writer.
+
+> **ARITHMETIC CORRECTION (2026-08-03, lane MD).** This section and the golden
+> docstring both said **45 bodies**; the corpus is **40** — eight arms of five,
+> and 8 × 5 = 40. Machine-counted at correction time three ways, all 40:
+> `ORIGIN_ARMS.length` = 8; every `ORIGIN_POOLS[arm].length` = 5;
+> `new Set(Object.values(ORIGIN_POOLS).flat()).size` = 40 distinct strings (so
+> the count is not inflated by a duplicate either). Commit `21bf1041`'s subject
+> line says "forty-five" and is immutable; it stands uncorrected, as `0ab5e03e`
+> does for the 523 figure. The 45 was never load-bearing — no pin, gate or
+> census consumed it — but a shift record whose arithmetic is wrong is a record
+> a reader cannot check the rest of against. THE STRUCTURAL HEIR: the count is
+> now MACHINE-ASSERTED rather than narrated, by
+> `pin:corpus-size-totality` in tests/generators/settlementOriginProse.test.js,
+> which reds if the arm count leaves 8 or ANY pool leaves 5. The old
+> `pin:no-power-of-two-pool` could not do this job: 3 is not a power of two, so
+> a pool silently shrinking 5 → 3 passed it.
 
 Measured, same probes PT2-5 used:
 
