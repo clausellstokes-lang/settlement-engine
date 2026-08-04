@@ -9,8 +9,11 @@
   "                     disproportionate (ref resolves in 'rationales' below);",
   "  kind:'uncovered' \u2014 a known gap, counted against uncoveredBaseline (shrink-only,",
   "                     exact-equality: drive toward 0 by upgrading entries).",
-  "The 'meta' section carries non-test-file invariants (eslint config bans) the",
-  "sweep proves directly. tests/lint/mutationCoverageManifest.test.js enforces:",
+  "The 'meta' section carries invariants that are NOT one-to-one with a test file",
+  "and that the sweep proves directly: eslint config bans, and a SECOND independent",
+  "invariant living inside a file whose single entry above is already spent on a",
+  "different plant (the schema allows one label per entry, so the second needs its",
+  "own key). tests/lint/mutationCoverageManifest.test.js enforces:",
   "new invariant with no entry REDS; stale entry REDS; label claims match the",
   "sweep script bidirectionally; uncovered count matches the baseline exactly."
  ],
@@ -1824,6 +1827,11 @@
    "kind": "mutation",
    "label": "data-purity/src/data->generators import",
    "what": "eslint no-restricted-imports purity wall on src/data (eslint.config.js)"
+  },
+  "meta:spine-max-phrase-chars-cap": {
+   "kind": "mutation",
+   "label": "prose/spine splice guard LENGTH cap deleted",
+   "what": "Standing plant deletes the MAX_PHRASE_CHARS cap from nounPhrase() in src/domain/simulationSpine.js -- the SECOND of that guard's two independent refusals, and the one that had a pin but no standing plant, so every previous run of this sweep would have survived its deletion. The cap refuses a body that is long but grammatically ONE sentence: an authored tension label running past 80 characters carries no terminator for the sibling refusal to catch, so without the cap the whole paragraph lands in a one-line slot. WHY THIS LIVES IN 'meta' RATHER THAN UNDER A TEST FILE: the invariant's assertions live in tests/domain/simulationSpine.test.js (GUARD 1, whose fixture is over-long and deliberately terminator-free) and, since lane RT-1, in tests/domain/historyBeats.test.js's refused-label mirror pin -- but the manifest allows ONE label per entry and simulationSpine.test.js's entry is already spent on the sentence-break plant, while historyBeats.test.js is not an enumerated invariant file under the naming rule. Both files are run by the plant's gate command. Measured before landing: cap deleted => 2 red in the spine suite, 1 red in the beats suite; restored => both green. Mutation target src/domain/simulationSpine.js is tracked and clean as of lane RT's commit."
   }
  }
 }

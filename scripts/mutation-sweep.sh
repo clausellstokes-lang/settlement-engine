@@ -673,6 +673,27 @@ check_caught "generation/pipeline seed-slot guard removed" src/generators/genera
 perl -0pi -e "s/  if \(\/\[\.!\?\]\\\\s\/\.test\(trimmed\)\) return null;\n//" src/domain/simulationSpine.js
 check_caught "prose/spine splice guard sentence-break check deleted" src/domain/simulationSpine.js "npx vitest run tests/domain/simulationSpine.test.js --no-file-parallelism"
 
+# 67. The splice guard's LENGTH cap deleted — the OTHER half of nounPhrase()'s
+#     refusal, and the half that had a pin but no standing plant. Area 66 above
+#     proves only the sentence-break refusal; a deletion of MAX_PHRASE_CHARS
+#     survived every run of this sweep because nothing here had ever removed it.
+#     The cap is what refuses a body that is long but grammatically ONE sentence
+#     — an authored tension label running to 100 characters carries no terminator
+#     to catch, so the sibling refusal cannot see it and the whole paragraph
+#     lands in a one-line slot.
+#     The gate runs BOTH claiming files: simulationSpine.test.js's GUARD 1
+#     fixture (over-long, deliberately terminator-free) and, since lane RT-1,
+#     historyBeats.test.js's refused-label mirror pin — the beat imports this
+#     very function, so deleting the cap makes the mirror name the label where
+#     it should name the type. Measured before landing: 2 red in the spine
+#     suite, 1 red in the beats suite.
+#     MANIFEST NOTE: this label is claimed by the meta entry
+#     `meta:spine-max-phrase-chars-cap`, not by a test-file entry. The invariant
+#     is a SECOND independent rule inside a file whose single manifest slot is
+#     already spent on area 66 — see scripts/mutation-coverage-manifest.json.
+perl -0pi -e "s/  if \(trimmed\.length > MAX_PHRASE_CHARS\) return null;\n//" src/domain/simulationSpine.js
+check_caught "prose/spine splice guard LENGTH cap deleted" src/domain/simulationSpine.js "npx vitest run tests/domain/simulationSpine.test.js tests/domain/historyBeats.test.js --no-file-parallelism"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done
