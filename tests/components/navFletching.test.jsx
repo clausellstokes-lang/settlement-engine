@@ -96,16 +96,17 @@ import { flowsInto } from '../../src/components/nav/NavFlowArrow.jsx';
 import {
   ANCHOR_OFFSET, BODY, CHROME, FLETCH, FLETCH_BARB, FLETCH_BARB_DEG, FLETCH_HANG,
   FLETCH_LEAD, FLETCH_RACHIS, FLETCH_SHEEN, FLETCH_SHEEN_LIFT, FLETCH_TIP,
-  FLETCH_VANE, FS, GILT, GILT_LIGHT, GOLD, GOLD_TXT, HEADER_RIDERS, INK_DEEP, LABEL_BOX,
-  LIGHT_UNIT, PARCH, PARCH_100,
+  FLETCH_SPLIT_LIT, FLETCH_VANE, FS, GILT, GILT_LIGHT, GOLD, GOLD_TXT, HEADER_RIDERS,
+  INK_DEEP, LABEL_BOX, LIGHT_UNIT, PARCH, PARCH_100,
   PLATE_LIGHT_DEG, SHAFT, SHAFT_BODY, SHAFT_CYLINDER, SHAFT_EDGE, SHAFT_GRAIN_LAYERS,
   SHAFT_GRAIN_TEXTURE, SHAFT_RIM, SHAFT_SHEEN, SHAFT_STOPS, SP, WRAP,
   contactShadow, lightOffset, shadowOffset,
 } from '../../src/components/theme.js';
 import {
-  BAND, BAND_PX_PER_UNIT, BAND_W, BARB, DRIFT, LANE, QUILLS, QUILL_H, REACH, RUN, SEAT,
-  SHEENS, SHEEN_FLOOR, SHEEN_PEEK, VANES, barbBuckets, combCoverage, frayHairs, laneGap,
-  lean, quill, rachis, unitHash,
+  BAND, BAND_PX_PER_UNIT, BAND_W, BARB, BOW, CALM_PAD_Y, DRIFT, LABEL_INK, LANE, QUILLS,
+  QUILL_H, REACH, RUN, SEAT, SHEENS, SHEEN_FLOOR, SHEEN_PEEK, SPLIT, SPLITS, VANES,
+  barbBuckets, calmZone, combCoverage, frayHairs, laneGap, lean, quill, rachis,
+  splitClears, unitHash,
 } from '../../src/components/nav/FletchBand.jsx';
 
 const H = vi.hoisted(() => ({
@@ -207,6 +208,12 @@ function relLuminance(hex) {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
 
+/**
+ * One barb, as authored since the one-curve law: `M head 0 Q cx cy endX BAND`.
+ * Groups: 1 head x · 2 control x · 3 control y · 4 end x · 5 end y.
+ */
+const BARB_SEG = /M (-?[\d.]+) 0 Q (-?[\d.]+) (-?[\d.]+) (-?[\d.]+) (-?[\d.]+)/g;
+
 /** WCAG contrast ratio between two authored hexes. */
 function ratio(a, b) {
   const [hi, lo] = [relLuminance(a), relLuminance(b)].sort((x, y) => y - x);
@@ -230,9 +237,15 @@ function pathYs(d) {
  * it). Every `M`/`L` endpoint and the LAST pair of every `C`. Geometry pins ask
  * about the shape, and a control point is not part of the shape.
  */
+// ⚠️ `Q` JOINED THE COMMAND CLASS WITH THE ONE-CURVE LAW. A quadratic's LAST two
+// numbers are its on-curve endpoint and the pair before them is the control, so the
+// same "take the last two" rule that served M/L/C serves it — but only if Q both
+// STARTS a segment and TERMINATES the previous one. Left out of the class, a `Q` was
+// swallowed into the preceding `M`, whose start point then vanished from the result
+// and took every barb's origin with it.
 function ONCURVE(d) {
   const out = [];
-  for (const seg of d.match(/[MLC][^MLCZ]*/g) || []) {
+  for (const seg of d.match(/[MLQC][^MLQCZ]*/g) || []) {
     const n = (seg.match(/-?\d+(?:\.\d+)?/g) || []).map(Number);
     if (n.length >= 2) out.push({ x: n[n.length - 2], y: n[n.length - 1] });
   }
@@ -372,12 +385,9 @@ describe('2 — ⚠️⚠️ THE SHINGLE: three parallelograms, ascending into R
     for (const lane of [0, 1, 2]) {
       const [tl, , , bl] = ONCURVE(VANES[lane].closed);
       expect(bl.x - tl.x, `cell ${lane}'s quad did not mirror`).toBe(DRIFT);
-      for (const d of barbBuckets(lane)) {
-        for (const seg of d.match(/M (-?[\d.]+) 0 L (-?[\d.]+) [\d.]+/g) || []) {
-          const [, a, b] = seg.match(/M (-?[\d.]+) 0 L (-?[\d.]+) [\d.]+/);
-          expect(Number(b) - Number(a), `lane ${lane}'s comb did not mirror`)
-            .toBeCloseTo(DRIFT, 0);
-        }
+      for (const seg of barbBuckets(lane).join(' ').matchAll(BARB_SEG)) {
+        expect(Number(seg[4]) - Number(seg[1]), `lane ${lane}'s comb did not mirror`)
+          .toBeCloseTo(DRIFT, 0);
       }
       for (const d of SHEENS[lane]) {
         const pts = ONCURVE(d);
@@ -971,11 +981,14 @@ describe('3 — THE COMB: fine barb striations, at the derived angle, jittered',
       const [tl, , , bl] = ONCURVE(VANES[lane].closed);
       const edgeRun = bl.x - tl.x;
       for (const d of barbBuckets(lane)) {
-        const segs = d.match(/M (-?[\d.]+) 0 L (-?[\d.]+) ([\d.]+)/g) || [];
+        const segs = [...d.matchAll(BARB_SEG)];
         expect(segs.length, `lane ${lane} bucket has no barbs`).toBeGreaterThan(0);
-        for (const seg of segs) {
-          const [, x0, x1, y1] = seg.match(/M (-?[\d.]+) 0 L (-?[\d.]+) ([\d.]+)/);
+        for (const [, x0, , , x1, y1] of segs) {
           expect(Number(y1), 'a barb does not span the vane’s full depth').toBe(BAND);
+          // ⚠️ THE CHORD, AND THAT IS THE POINT OF PUTTING THE BOW IN THE CONTROL POINT
+          // RATHER THAN IN THE ENDPOINTS. A barb is a curve now, but it still STARTS and
+          // ENDS where a straight one did, so "the comb runs with the cut" survives the
+          // one-curve law as an EXACT equality instead of degrading to a tolerance.
           expect(Number(x1) - Number(x0), 'a barb crosses the cut instead of running with it')
             .toBeCloseTo(edgeRun, 6);
         }
@@ -983,14 +996,205 @@ describe('3 — THE COMB: fine barb striations, at the derived angle, jittered',
       // …and a sheen band leans by the same number over ITS depth, so the light runs
       // with the barbs it is catching.
       for (const d of SHEENS[lane]) {
-        const pts = ONCURVE(d);
-        const top = pts.filter((q) => q.y === 0).sort((a, b) => a.x - b.x);
-        const low = pts.filter((q) => q.y === SHEEN_FLOOR).sort((a, b) => a.x - b.x);
+        // ⚠️ DEDUPED, because the bowed band CLOSES back onto its own first point: the
+        // return flank's `Q` ends where the opening `M` began, so the raw on-curve list
+        // carries that corner twice. Deduping is the honest read of "the corners of this
+        // shape"; taking the first two would silently depend on authoring order.
+        const uniq = (ys) => [...new Map(ONCURVE(d).filter((q) => q.y === ys)
+          .map((q) => [`${q.x},${q.y}`, q])).values()].sort((a, b) => a.x - b.x);
+        const top = uniq(0);
+        const low = uniq(SHEEN_FLOOR);
         expect(top.length).toBe(2);
         expect(low.length).toBe(2);
         expect(low[0].x - top[0].x).toBeCloseTo(lean(SHEEN_FLOOR), 6);
       }
     }
+  });
+
+  test('⚠️⚠️ THE ONE-CURVE LAW: one bow, shared, capped by what the straight cuts allow', () => {
+    // Ribbon V4 part 2 §1. A barb leaves the rachis steeply and flattens toward the cut;
+    // a straight barb reads as hatching. The bow is TWO FRACTIONS and every curved mark
+    // on the band takes them over its own depth — the comb, both flanks of every split
+    // sliver, and the sheen bands' side edges.
+    expect(BOW.x).toBe(0.28);
+    expect(BOW.y).toBe(0.62);
+    // 1 — EVERY BARB'S CONTROL POINT IS THE SHARED BOW, derived from its own head.
+    for (const lane of [0, 1, 2]) {
+      const segs = [...barbBuckets(lane).join(' ').matchAll(BARB_SEG)];
+      expect(segs.length, `lane ${lane} has no barbs`).toBeGreaterThan(0);
+      for (const [, hx, cx, cy] of segs) {
+        expect(Number(cx), 'a barb bows off the shared curve')
+          .toBeCloseTo(Number(hx) + BOW.x * DRIFT, 1);
+        expect(Number(cy)).toBeCloseTo(BOW.y * BAND, 1);
+      }
+      // 2 — THE SHEEN TAKES THE SAME BOW over ITS shorter depth, which is what makes
+      //     the curvature self-similar rather than two curves that merely look alike.
+      for (const d of SHEENS[lane]) {
+        const ctrl = [...d.matchAll(/Q (-?[\d.]+) (-?[\d.]+)/g)].map((m) => Number(m[2]));
+        expect(ctrl.length).toBe(2);
+        for (const cy of ctrl) expect(cy).toBeCloseTo(BOW.y * SHEEN_FLOOR, 1);
+      }
+    }
+    // 3 — THE CAP. The cell edges are DEAD STRAIGHT (owner's shapes-locked correction),
+    //     so a barb that bowed hard would visibly cross its own cut. The maximum
+    //     horizontal departure of a quadratic from its chord is |P1 - (P0+P2)/2| / 2,
+    //     which for this bow is |(1 - 2*BOW.x)*DRIFT| / 4 — DERIVED here rather than
+    //     quoted, and required to stay inside a twentieth of the vane's depth.
+    const sagitta = Math.abs((1 - 2 * BOW.x) * DRIFT) / 4;
+    expect(sagitta).toBeCloseTo(4.07, 2);
+    expect(sagitta / BAND).toBeLessThan(0.06);
+    expect(sagitta * BAND_PX_PER_UNIT).toBeCloseTo(3.59, 1);   // CSS px at 1440x900
+    // …and it is a REAL bow, not a straight line dressed as a curve.
+    expect(sagitta).toBeGreaterThan(2);
+    // 4 — NON-VACUITY: a straight barb would put its control on the chord's midpoint,
+    //     and the shared bow provably does not.
+    expect(BOW.x).not.toBeCloseTo(0.5, 2);
+    expect(BOW.y).not.toBeCloseTo(0.5, 2);
+  });
+
+  test('⚠️⚠️ THE SPLITS: exposed edges, bowed flanks, and OUT of every calm zone', () => {
+    // Ribbon V4 part 2 §1. Two filled slivers per cell plus one retina-only lip, opening
+    // where the vane is actually exposed. ⚠️ THE LIT LIP IS THE ONLY TONE ON THIS BAND
+    // LIGHTER THAN FLETCH_SHEEN_LIFT, which is the ground the whole parchment register's
+    // 6.60:1 floor is quoted against — so its exclusion from every label's calm zone is
+    // an ACCESSIBILITY pin wearing a texture's name, and it is asserted on the authored
+    // paths rather than trusted to the placement code.
+    expect(relLuminance(FLETCH_SPLIT_LIT)).toBeGreaterThan(relLuminance(FLETCH_SHEEN_LIFT));
+    expect(ratio(PARCH_100, FLETCH_SPLIT_LIT)).toBeLessThan(6.6);   // it WOULD cost the floor
+    const zones = [0, 1, 2].map(calmZone);
+    for (const lane of [0, 1, 2]) {
+      const { slivers, lips } = SPLITS[lane];
+      expect(slivers.length, `lane ${lane} lost its filled splits`).toBe(2);
+      // THREE lit lips for TWO filled seams: the third split is hairline-only and exists
+      // solely at 2x, where a fourth filled sliver would read as damage (spec §1).
+      expect(lips.length, `lane ${lane} lost its retina lip`).toBe(3);
+      for (const d of slivers) {
+        const pts = ONCURVE(d);
+        // FOUR on-curve points: a mouth pair and a near-point tip. Never a triangle,
+        // because a zero-width tip gives the rasteriser nothing to antialias.
+        expect(pts.length, `a sliver in lane ${lane} is not a four-point quad`).toBe(4);
+        // ⚠️ AND THE TIP IS A NEAR-POINT, NOT A POINT — the two tip corners must be
+        // DISTINCT. A mutant that collapsed SPLIT.tip to zero survived the count above,
+        // because two coincident points still parse as two: a triangle wearing a quad's
+        // arithmetic, with nothing for the rasteriser to antialias at the taper.
+        // (authoring order: mouth, tip, tip, mouth — the sliver opens, tapers across
+        // its near-point, and returns down the other flank)
+        const [m0, t0, t1, m1] = pts;
+        expect(t0.y).toBe(t1.y);
+        expect(m0.y).toBe(m1.y);
+        expect(Math.abs(t1.x - t0.x), `lane ${lane}'s sliver tapers to a true point`)
+          .toBeGreaterThan(0);
+        expect(Math.abs(t1.x - t0.x)).toBeLessThan(1);   // …and still a NEAR-point
+        // BOWED FLANKS, both of them, on the shared law — a split runs with the comb
+        // it interrupts.
+        expect((d.match(/Q /g) || []).length).toBe(2);
+      }
+      // ⚠️ THE LIT LIP IS ONE FLANK, NOT THE OUTLINE, and the first cut of this stroked
+      // the closed sliver — which put the band's only above-floor tone on BOTH sides of
+      // every split and read at 200% as an outlined scratch rather than as one raised
+      // barb catching the light. Two on-curve points and one bow: an open flank.
+      for (const d of lips) {
+        expect(ONCURVE(d).length, `lane ${lane}'s lit lip is not an open flank`).toBe(2);
+        expect((d.match(/Q /g) || []).length).toBe(1);
+        expect(d.trim().endsWith('Z')).toBe(false);
+      }
+      // ⚠️ EVERY POINT OF EVERY SPLIT CLEARS EVERY LANE'S CALM ZONE — all three, not
+      // just its own. A split falls with the lean and can travel most of a lane before
+      // it tapers out, so a per-lane test would let Realm's rim split cross Library's
+      // label. Asserted on the SEAMS and the LIPS alike: the seam is dark and would not
+      // cost the floor, but a dark sliver crossing a letterform is still a defect.
+      for (const d of [...slivers, ...lips]) {
+        for (const p of ONCURVE(d)) {
+          for (const [z, calm] of zones.entries()) {
+            const inside = p.x > calm.x0 && p.x < calm.x1 && p.y > calm.y0 && p.y < calm.y1;
+            expect(inside, `lane ${lane}'s split enters lane ${z}'s calm zone at ${p.x},${p.y}`)
+              .toBe(false);
+          }
+        }
+      }
+      // NON-VACUITY OF THE ZONE ITSELF: it really covers the label, with the spec's pad,
+      // and it is derived from the same table the composited-AA pin reads.
+      const calm = zones[lane];
+      expect(calm.y0).toBe(HEADER_RIDERS.tab.ink[0] - CALM_PAD_Y);
+      expect(calm.y1).toBe(HEADER_RIDERS.tab.ink[1] + CALM_PAD_Y);
+      expect(calm.x0).toBeLessThan(lane * LANE + LABEL_INK[0] * LANE);
+      expect(calm.x1).toBeGreaterThan(lane * LANE + LABEL_INK[1] * LANE);
+      expect(calm.x1 - calm.x0).toBeGreaterThan(LANE * 0.7);   // a real zone, not a sliver
+    }
+    // ⚠️⚠️ THE GUARD ITSELF, DRIVEN DIRECTLY — AND THIS IS THE PIN A SURVIVING MUTANT
+    // FORCED. Deleting the whole calm-zone test from `splits` left all 61 tests green,
+    // because at today's metrics no candidate placement has ever collided: the cut
+    // splits open at the vane's full depth and the rim splits are placed below the label
+    // band. The exclusion above is therefore a claim about the OUTPUT and says nothing
+    // about the guard that is supposed to produce it — a vacuous absence pin, the exact
+    // class this estate keeps being bitten by. So the predicate is driven with synthetic
+    // boxes here, both arms, and the guard is proved against the day a font change or a
+    // retuned split range makes it live.
+    const zone = zones[1];
+    const inside = {
+      x0: zone.x0 + 1, x1: zone.x1 - 1, y0: zone.y0 + 1, y1: zone.y1 - 1,
+    };
+    const clearOfAll = { x0: -50, x1: -40, y0: BAND + 5, y1: BAND + 9 };
+    expect(splitClears(inside, zones), 'a sliver inside a label passes the guard').toBe(false);
+    expect(splitClears(clearOfAll, zones), 'a sliver in open vane fails the guard').toBe(true);
+    // …and a box that clears its OWN lane while sitting in a NEIGHBOUR's must fail,
+    // which is the half a per-lane test would have missed.
+    expect(splitClears(inside, [zones[1]])).toBe(false);
+    expect(splitClears(inside, [zones[0]]), 'the guard cannot see a neighbour zone')
+      .toBe(true);
+    expect(splitClears(inside, zones)).toBe(false);
+    // Edge-touching counts as clear on purpose — the zone already carries the spec's
+    // 6px/3px pad, so a sliver exactly at its boundary is 6px from any ink.
+    expect(splitClears({ x0: zone.x1, x1: zone.x1 + 1, y0: zone.y0, y1: zone.y1 }, zones))
+      .toBe(false);
+    // ⚠️⚠️ AND THE CALL SITE, BY SOURCE SCAN — the F3 idiom, for the same reason F3
+    // needed it. Driving the predicate proves the PREDICATE; it cannot prove that
+    // `splits` still consults it, because with the guard's input currently benign,
+    // deleting the call changes no output and reds nothing. Two mutants demonstrated
+    // exactly that (`if (false) continue;` and a per-lane zone list both stayed green).
+    // A behavioural pin is unavailable without a synthetic label, so the reachability
+    // claim is made where it can be: on the comment-stripped source.
+    const code = SRC('components/nav/FletchBand.jsx')
+      .replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+    expect(code, 'the split walk stopped consulting the calm-zone guard')
+      .toMatch(/if\s*\(!splitClears\(box,\s*zones\)\)\s*continue;/);
+    expect(code, 'the calm-zone list stopped covering every lane')
+      .toMatch(/const zones = \[0, 1, 2\]\.map\(calmZone\);/);
+    // ⚠️ THE RE-ROLL IS BOUNDED AND THE BOUND IS REACHABLE — a walk with no cap is a
+    // hang waiting for a font change, and one with a cap of 1 is not a walk.
+    expect(SPLIT.tries).toBeGreaterThan(3);
+    expect(SPLIT.tries).toBeLessThan(64);
+    // …and the three cells' splits are all different, or the texture is a repeat.
+    expect(new Set([0, 1, 2].map((l) => SPLITS[l].lips.join(""))).size).toBe(3);
+  });
+
+  test('⚠️ THE FRAY SHOWS ONLY WHERE THE CUT IS EXPOSED — never under a lap', () => {
+    // Ribbon V4 part 2 §1: "exposed edges only; lapped-under edges show none". Every
+    // cell reaches FLETCH.lap PAST its own lane division and the next cell covers
+    // exactly that overhang — but the fray is drawn OUTSIDE every clip by construction
+    // (an escaped tip is outside the cut by definition), so hairs along the lapped span
+    // came out BELOW the covering cell rather than under it: a row of stray hairs
+    // hanging in open space with no feather above them, on each of the two inner laps.
+    for (const lane of [0, 1]) {
+      const heads = [...frayHairs(lane).matchAll(/M (-?[\d.]+) /g)].map((m) => Number(m[1]));
+      expect(heads.length).toBeGreaterThan(0);
+      // The lap boundary at the cut's own depth: where the NEXT cell's leading edge
+      // crosses the bottom edge. Nothing may fray past it.
+      const lapAtCut = (lane + 1) * LANE - SEAT + DRIFT;
+      expect(Math.max(...heads), `lane ${lane} frays under its own lap`)
+        .toBeLessThanOrEqual(lapAtCut);
+      // NON-VACUITY: the cell really does extend past that boundary, so the restriction
+      // is removing something rather than describing a cell that ends there anyway.
+      const [, x1] = ONCURVE(VANES[lane].closed).filter((p) => p.y === BAND)
+        .map((p) => p.x).sort((a, b) => a - b);
+      expect(x1).toBeGreaterThan(lapAtCut + FLETCH.lap * 0.9);
+    }
+    // Realm has no successor, so its own trailing edge IS the exposed end and its fray
+    // runs the whole cut — stated so the rule reads as "exposed", not as "shortened".
+    const realmHeads = [...frayHairs(2).matchAll(/M (-?[\d.]+) /g)].map((m) => Number(m[1]));
+    const [, realmEnd] = ONCURVE(VANES[2].closed).filter((p) => p.y === BAND)
+      .map((p) => p.x).sort((a, b) => a - b);
+    expect(Math.max(...realmHeads)).toBeGreaterThan(realmEnd - FLETCH.barbGap * 2);
   });
 
   test('the comb angle is DERIVED from the FEATHER, never from the chrome', () => {

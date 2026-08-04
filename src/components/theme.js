@@ -668,6 +668,25 @@ export const FLETCH_BARB = '#312A20';
 export const FLETCH_SHEEN = '#4E4537';
 export const FLETCH_SHEEN_LIFT = '#5A5040';
 export const FLETCH_RACHIS = '#5A5040';
+/**
+ * FLETCH_SPLIT_LIT — the lit lip of a barb split, and it is THE ONE TONE ON THIS BAND
+ * THAT BREAKS THE LABEL FLOOR.
+ *
+ * A real split in a feather's vane shows two things: a dark seam where the barbs have
+ * parted, and a bright lip where the light catches the raised edge of one of them. The
+ * seam is FLETCH_TIP, already the darkest rung of the ladder and free. The LIP is not:
+ * at L 0.0985 it is LIGHTER than FLETCH_SHEEN_LIFT (L 0.0796), which is the tone the
+ * whole parchment register's 6.60:1 floor is quoted against.
+ *
+ * ⚠️⚠️ SO IT IS THE ONLY MARK ON THIS BAND CONFINED BY GEOMETRY RATHER THAN BY TONE.
+ * It may never be painted inside a label's CALM ZONE, and the pin asserts the exclusion
+ * on the authored paths rather than trusting the placement code — because the failure it
+ * prevents is invisible: a split hairline crossing a letterform lifts that letterform's
+ * ground by a fraction of a percent of area, which no screenshot shows and no ratio
+ * quoted against SHEEN_LIFT would catch. It is also RETINA-ONLY (0.4px at low opacity,
+ * under 2% effective ink), so at 1x it integrates into the vane as tone.
+ */
+export const FLETCH_SPLIT_LIT = '#6A5F4E';
 // The seam where two fletches overlap: a quill SHADOW, not a gilt hairline. It is
 // 1.23:1 against the vane and that is exactly right — feather-on-feather shadows are
 // nearly tonal. ⚠️ It is the TIP tone by construction, so the two can never drift.

@@ -184,8 +184,8 @@
  */
 import {
   CHROME, FLETCH, FLETCH_BARB, FLETCH_HANG, FLETCH_LEAD, FLETCH_RACHIS,
-  FLETCH_SHADOW, FLETCH_SHEEN, FLETCH_SHEEN_LIFT, FLETCH_TIP, FLETCH_VANE,
-  GILT_LIGHT, contactShadow, dropShadow,
+  FLETCH_SHADOW, FLETCH_SHEEN, FLETCH_SHEEN_LIFT, FLETCH_SPLIT_LIT, FLETCH_TIP,
+  FLETCH_VANE, GILT_LIGHT, HEADER_RIDERS, contactShadow, dropShadow, lightOffset,
 } from '../theme.js';
 
 /** One fletch's lane, and the band's own width: three lanes side by side. */
@@ -211,6 +211,68 @@ const SHEEN_FLOOR = BAND * 0.72;
  */
 const SHEEN_PEEK = 0.5;
 const QUILL_H = 2.5;
+
+/** Every authored coordinate goes through one rounder, so the paths are byte-stable. */
+const round = (n) => +n.toFixed(2);
+
+/**
+ * ⚠️⚠️ THE ONE-CURVE LAW (ribbon V4 part 2 §1) — TWO FRACTIONS, AND EVERY CURVED MARK
+ * ON THIS BAND IS BUILT FROM THEM.
+ *
+ * A barb is not a straight line. It leaves the rachis steeply, then flattens as it runs
+ * out toward the cut, which is why a real vane reads as swept rather than as hatched.
+ * So every barb is a single quadratic from (x, 0) to (x + DRIFT, BAND) with its control
+ * at (x + BOW.x·DRIFT, BOW.y·BAND) — the endpoints are unchanged, so the barb's CHORD
+ * still runs exactly the composition's one lean and every parallelism claim in this file
+ * survives the curve.
+ *
+ * ⚠️ ONE BOW, SHARED, FOR THE SAME REASON THERE IS ONE LEAN. The comb, both flanks of
+ * every split sliver and the sheen bands' side edges all take these two fractions over
+ * their OWN depth, so the curvature is self-similar at every scale and the marks stay
+ * parallel to one another everywhere. Two bows maintained separately is how a feather
+ * stops looking like one feather — the same argument `lean` makes, one derivative up.
+ *
+ * ⚠️ AND THE CURVATURE IS CAPPED BY WHAT THE STRAIGHT EDGES CAN TOLERATE. The cell
+ * edges are DEAD STRAIGHT (shapes locked, owner's correction), so a barb that bowed hard
+ * would visibly cross its own cut. At these fractions the maximum horizontal departure
+ * from the chord is |(1 − 2·BOW.x)·DRIFT| / 4 — about 4.07 band units, 3.6 CSS px, 5.4%
+ * of the vane's depth. tests/components/navFletching.test.jsx derives that number rather
+ * than quoting it, and pins the tangent divergence at both ends of the curve.
+ */
+const BOW = Object.freeze({ x: 0.28, y: 0.62 });
+
+/**
+ * THE SPLIT'S OWN NUMBERS. `mouth` is its opening in CSS px (converted to band units at
+ * the measured scale, because a split is a physical width and not a share of the band);
+ * `reach` is how far it tapers, as a fraction of the vane's depth; `tip` is the width it
+ * tapers TO, deliberately not zero so the shape stays a quad the rasteriser can
+ * antialias; `tries` bounds the calm-zone re-roll.
+ */
+const SPLIT = Object.freeze({
+  mouth: Object.freeze([1.6, 2.2]), reach: Object.freeze([0.35, 0.6]), tip: 0.12, tries: 8,
+});
+
+/**
+ * THE LABEL'S OWN INK, as a share of its cell — the widest of the three measured runs
+ * (Library, 62.70px of an 88.19px cell, Chrome 1440x900, this lane), used for all three
+ * because a calm zone should err wide. ⚠️ A SHARE AND NOT A PIXEL COUNT: the band is
+ * stretched by `preserveAspectRatio="none"`, so a px extent describes the label at
+ * exactly one viewport width and lies at every other.
+ */
+const LABEL_INK = Object.freeze([0.1446, 0.8556]);
+/** The spec's calm-zone pad: 6px in x, 3px in y, around the label's ink. */
+const CALM_PAD_PX = 6;
+const CALM_PAD_Y = 3;
+
+/**
+ * A bowed run from (x, 0) down to (x + lean(depth), depth), as an SVG quadratic segment
+ * WITHOUT its leading move — the caller owns where the pen already is.
+ * @param {number} x the run's x at the quill line
+ * @param {number} depth how deep it runs
+ * @returns {string} a `Q cx cy x1 y1` segment
+ */
+const bow = (x, depth) => `Q ${round(x + BOW.x * lean(depth))} ${round(BOW.y * depth)}`
+  + ` ${round(x + lean(depth))} ${round(depth)}`;
 
 /**
  * ⚠️⚠️ THE LEAN, AND IT IS MIRRORED ON X (owner directive, ribbon V4 §c). It is the
@@ -416,6 +478,17 @@ function quill(lane) {
 }
 
 const QUILLS = [0, 1, 2].map(quill);
+const SPLITS = [0, 1, 2].map((lane) => splits(lane));
+
+/**
+ * How far a split's lit lip is pushed toward the light — half a CSS pixel, on the
+ * composition's one azimuth. ⚠️ THE X IS DIVIDED BY THE BAND'S MEASURED SCALE and the y
+ * is not: `preserveAspectRatio="none"` stretches this viewBox horizontally only, so a
+ * translate authored in raw units would come out as a different physical distance on
+ * each axis and the lip would drift off its own seam diagonally.
+ */
+const LIP_SHIFT = (({ dx, dy }) =>
+  `translate(${round(dx / BAND_PX_PER_UNIT)} ${round(dy)})`)(lightOffset(0.5));
 
 /**
  * ⚠️ THE DETERMINISTIC JITTER — INTEGER ARITHMETIC, NEVER `Math.sin`.
@@ -497,7 +570,7 @@ function barbBuckets(lane) {
     // makes it parallel EXACTLY, which is what lets the pin assert equality instead of
     // a tolerance — and a tolerance is where a real half-mirrored comb would hide.
     const head = +x.toFixed(1);
-    buckets[bucket].push(`M ${head} 0 L ${(head + DRIFT).toFixed(1)} ${BAND}`);
+    buckets[bucket].push(`M ${head} 0 ${bow(head, BAND)}`);
     // The gap wobbles within +/-barbJitter/2 of THIS LANE's nominal value, and never
     // to zero.
     x += gap * (1 - FLETCH.barbJitter / 2 + FLETCH.barbJitter * unitHash(k + lane * 911));
@@ -519,11 +592,23 @@ function barbBuckets(lane) {
  * definition outside it — and they lean by the same RUN as everything else, so they
  * read as continuations of the comb rather than as fringe.
  *
+ * ⚠️⚠️ EXPOSED EDGES ONLY (ribbon V4 part 2 §1), AND THIS WAS A REAL DEFECT RATHER THAN
+ * A REFINEMENT. Every cell reaches `FLETCH.lap` PAST its own lane division and the next
+ * cell covers exactly that overhang — so the last 44 units of cells 0 and 1 are hidden
+ * material, and the fray was drawing escaped barb tips along it. Those hairs came out
+ * BELOW the covering cell rather than under it (they are outside every clip, by
+ * construction), so each of the two inner laps carried a row of stray hairs hanging in
+ * open space with no feather above them. A real fletch frays where it is cut and shows
+ * nothing at all where it is lapped, so the run now stops at the lap boundary.
+ *
  * @param {number} lane which fletch
  * @returns {string} one path string, all of that cell's escaped tips
  */
 function frayHairs(lane) {
-  const [x0, x1] = edges(lane);
+  const [x0] = edges(lane);
+  // The VISIBLE end of this cell's cut: where the next cell's leading edge crosses it.
+  // For Realm that is its own trailing edge, because nothing laps over Realm.
+  const x1 = (lane + 1) * LANE - SEAT;
   const out = [];
   let x = x0 + 4;
   for (let k = 0; x < x1; k += 1) {
@@ -542,16 +627,217 @@ function frayHairs(lane) {
 }
 
 /**
- * A sheen band: a broad parallelogram leaning at the comb angle, from the rachis down
- * to SHEEN_FLOOR. Three per vane — real goose primaries show two or three soft tonal
- * runs, never an even set.
+ * ⚠️⚠️ THE CALM ZONE — the one region of this band where the split's lit lip may not go,
+ * and it is DERIVED from the same measurement table the AA pins read.
+ *
+ * A split's bright lip (FLETCH_SPLIT_LIT) is the only tone on the band lighter than
+ * FLETCH_SHEEN_LIFT, which is the ground the whole parchment register's 6.60:1 floor is
+ * quoted against. A hairline of it crossing a letterform would lift that letterform's
+ * ground by a fraction of a percent of area — invisible in a screenshot, invisible to
+ * any ratio quoted against SHEEN_LIFT, and a genuine AA regression. So the lip is
+ * confined by GEOMETRY, and the zone it must clear is the label's ink extent plus the
+ * spec's pad: 6px in x, 3px in y.
+ *
+ * ⚠️ THE X EXTENT IS A SHARE OF THE LANE, NOT A PIXEL COUNT, because the band is
+ * stretched by `preserveAspectRatio="none"` — a px extent would describe the label only
+ * at 1440. The share is the WIDEST of the three measured labels (Library, 62.70px of an
+ * 88.19px cell in Chrome at 1440x900), used for all three lanes, which errs in the one
+ * direction a safety zone should err. The Y extent is HEADER_RIDERS.tab's own ink, so
+ * the zone tracks the same table the composited-AA pin does rather than a second copy.
+ *
+ * @param {number} lane which fletch
+ * @returns {{ x0: number, x1: number, y0: number, y1: number }} in band coordinates
+ */
+function calmZone(lane) {
+  const padX = CALM_PAD_PX / BAND_PX_PER_UNIT;
+  const [inkTop, inkLow] = HEADER_RIDERS.tab.ink;
+  return {
+    // ⚠️ NO SEAT TERM, AND ITS ABSENCE IS THE POINT. `SEAT` shifts the band's PAINT; the
+    // labels are DOM cells laid out as equal thirds of the band's BOX and do not move
+    // with it. Subtracting the seat here would put the calm zone next to the label
+    // rather than on it, and the pin would go green while the lip crossed the type.
+    x0: lane * LANE + LABEL_INK[0] * LANE - padX,
+    x1: lane * LANE + LABEL_INK[1] * LANE + padX,
+    y0: inkTop - CALM_PAD_Y,
+    y1: inkLow + CALM_PAD_Y,
+  };
+}
+
+/**
+ * ⚠️⚠️ DOES THIS SLIVER MISS EVERY LABEL? — the calm-zone walk's whole decision, pulled
+ * out as a NAMED PREDICATE because otherwise it is unprovable.
+ *
+ * It is a GUARD THAT DOES NOT CURRENTLY FIRE, and that is by design rather than by luck:
+ * the cut splits open at the vane's full depth and the rim splits are placed below the
+ * label band, so at today's metrics no candidate has ever collided. A hostile mutant
+ * that deleted the whole test therefore left every pin in the suite green — the exact
+ * vacuous-guard shape this estate has been bitten by, and the reason the branch is
+ * pulled out here rather than left inline. tests/components/navFletching.test.jsx drives
+ * BOTH ARMS of this function directly with synthetic boxes, so the guard is proved to
+ * work against the day a font change, a longer label or a retuned split range makes it
+ * live. It is not dead code; it is code whose input is currently benign.
+ *
+ * @param {{ x0: number, x1: number, y0: number, y1: number }} box the sliver's extent
+ * @param {ReadonlyArray<{ x0: number, x1: number, y0: number, y1: number }>} zones every
+ *   lane's calm zone — ALL of them, never only the split's own; see `splits`.
+ * @returns {boolean} true when the sliver touches no label's calm zone at all
+ */
+function splitClears(box, zones) {
+  return zones.every((calm) => box.x1 < calm.x0 || box.x0 > calm.x1
+    || box.y1 < calm.y0 || box.y0 > calm.y1);
+}
+
+/**
+ * ⚠️⚠️ THE SPLITS (ribbon V4 part 2 §1) — WHERE THE BARBS HAVE PARTED, AND THE ONE
+ * MARK ON THIS BAND PLACED BY A BOUNDED SEARCH RATHER THAN BY A HASH ALONE.
+ *
+ * A real vane is not continuous: barbs unzip from one another and leave narrow slivers
+ * open along the exposed edges. Two per cell, and EXPOSED EDGES ONLY — one opening at
+ * the lower cut and one at the leading rim, never on an edge that is lapped under the
+ * next cell, for the same reason the fray shows none there.
+ *
+ * Each sliver is a FILLED four-point polygon whose two flanks take the shared BOW over
+ * the sliver's own depth, so a split runs with the comb it interrupts. It opens at a
+ * mouth of 1.6-2.2px and tapers to a near-point (0.12 units, deliberately not zero, so
+ * the shape stays a quad and the rasteriser has a width to antialias) over 35-60% of the
+ * vane's depth.
+ *
+ * ⚠️ THE RE-ROLL IS A BOUNDED HASH WALK, AND IT MUST TERMINATE VISIBLY. Placement comes
+ * from `unitHash(seed + k)`; if the resulting sliver would enter a label's calm zone, k
+ * advances and the placement is drawn again, up to `SPLIT.tries`. If every try collides
+ * the split is DROPPED rather than nudged, because a nudged split lands exactly at the
+ * calm zone's edge on every cell and the eye reads three identical marks in a row. A
+ * dropped split is one fewer texture mark; a nudged one is a pattern.
+ *
+ * @param {number} lane which fletch
+ * @returns {{ slivers: string[], lips: string[] }} two filled seams, and THREE retina
+ *   lit lips — the third belongs to the hairline-only split that exists solely at 2x,
+ *   where a fourth filled sliver would read as damage.
+ */
+function splits(lane) {
+  const [x0] = edges(lane);
+  const cut = (lane + 1) * LANE - SEAT;   // the visible end of this cell's lower cut
+  // ⚠️ EVERY LANE'S CALM ZONE, NOT JUST THIS ONE'S, AND THE REASON IS THE MIRROR. A
+  // split falls with the lean, so a sliver that opens inside its own cell can travel
+  // most of a lane leftward before it tapers out — Realm's rim split reaches x≈178 from
+  // a mouth at x≈196, which is Library's half of the bar. Testing only the owning lane's
+  // zone would have let a lit lip cross a NEIGHBOUR's label with the pin green.
+  const zones = [0, 1, 2].map(calmZone);
+  const slivers = [];
+  const lips = [];
+  // Each split is one ROLE — the lower cut, the leading rim, the retina-only lip — and
+  // each rolls in its own hash stream so a collision on one cannot shift the others.
+  for (const [role, seed] of [['cut', 211], ['rim', 307], ['ghost', 419]]) {
+    for (let k = 0; k < SPLIT.tries; k += 1) {
+      const u = unitHash(lane * 1009 + seed + k * 31);
+      const v = unitHash(lane * 1301 + seed + k * 17);
+      const mouth = (SPLIT.mouth[0] + u * (SPLIT.mouth[1] - SPLIT.mouth[0])) / BAND_PX_PER_UNIT;
+      const reach = BAND * (SPLIT.reach[0] + v * (SPLIT.reach[1] - SPLIT.reach[0]));
+      // WHERE IT OPENS. A cut split opens on the bottom edge and runs UP the barb it
+      // parted; a rim split opens on the leading edge, at a depth in the vane's upper
+      // half, and runs DOWN. The ghost opens on the cut like the first, offset.
+      const onCut = role !== 'rim';
+      // ⚠️ THE RIM SPLIT OPENS BELOW THE LABEL BAND, NOT INSIDE IT, and that is a
+      // placement law rather than a lucky roll. A rim split rolled into the label's own
+      // depth is rejected by the calm-zone walk on every try and the split is simply
+      // dropped — so the cell loses a texture mark to a search that never had a
+      // candidate. Opening it under the labels means the walk only ever has to resolve
+      // x, which it can, and the mark survives.
+      const depth = onCut ? BAND : BAND * (0.4 + u * 0.18);
+      const span = onCut ? cut - x0 - 12 : 0;
+      const at = onCut
+        ? x0 + 6 + v * span + (role === 'ghost' ? span * 0.33 : 0)
+        : x0 + lean(depth);
+      const head = at > cut ? at - span * 0.5 : at;
+      // THE BOX THE SLIVER OCCUPIES, and it is what the calm zone is tested against.
+      const tipDepth = onCut ? depth - reach : depth + reach;
+      const box = {
+        x0: Math.min(head, head - lean(reach) * (onCut ? 1 : -1)) - mouth,
+        x1: Math.max(head, head - lean(reach) * (onCut ? 1 : -1)) + mouth,
+        y0: Math.min(depth, tipDepth),
+        y1: Math.max(depth, tipDepth),
+      };
+      if (!splitClears(box, zones)) continue;
+      const sliver = onCut ? sliverUp(head, mouth, reach) : sliverDown(head, depth, mouth, reach);
+      // ⚠️ THE GHOST CONTRIBUTES A LIP AND NO SEAM. Spec part 2 §1: "a third
+      // hairline-only split per cell exists solely for 2x." A fourth filled sliver at
+      // this size reads as damage; a fourth lit hairline resolves as one more parted
+      // barb on a retina screen and integrates as tone on a 1x one.
+      if (role !== 'ghost') slivers.push(sliver.seam);
+      lips.push(sliver.lip);
+      break;
+    }
+  }
+  return { slivers, lips };
+}
+
+/**
+ * A sliver flank that FALLS from `y` to `y + reach`, taking the shared bow over its own
+ * depth. @returns {string} a `Q` segment
+ */
+function fallFlank(fromX, toX, y, reach) {
+  return `Q ${round(fromX + BOW.x * lean(reach))}`
+    + ` ${round(y + BOW.y * reach)} ${round(toX)} ${round(y + reach)}`;
+}
+
+/**
+ * The same flank CLIMBED — from `y` up to `y - reach`. A quadratic traversed backwards
+ * keeps its control point, so the two are one curve read in two directions, which is
+ * what keeps a sliver's flanks parallel to the comb whichever way it opens.
+ * @returns {string} a `Q` segment
+ */
+function climbFlank(fromX, toX, y, reach) {
+  return `Q ${round(fromX - (1 - BOW.x) * lean(reach))}`
+    + ` ${round(y - (1 - BOW.y) * reach)} ${round(toX)} ${round(y - reach)}`;
+}
+
+/**
+ * One sliver opening at the lower cut and tapering UP the barb it parted.
+ * @returns {{ seam: string, lip: string }} the filled sliver, and the ONE flank the
+ *   light catches — never the whole outline; see the render note.
+ */
+function sliverUp(head, mouth, reach) {
+  const tipY = BAND - reach;
+  const tipX = head + mouth / 2 - lean(reach);
+  const lip = `M ${round(head)} ${BAND} ${climbFlank(head, tipX - SPLIT.tip / 2, BAND, reach)}`;
+  return {
+    seam: `${lip} L ${round(tipX + SPLIT.tip / 2)} ${round(tipY)}`
+      + ` ${fallFlank(tipX + SPLIT.tip / 2, head + mouth, tipY, reach)} Z`,
+    lip,
+  };
+}
+
+/**
+ * One sliver opening at the leading rim and tapering DOWN into the vane.
+ * @returns {{ seam: string, lip: string }}
+ */
+function sliverDown(head, depth, mouth, reach) {
+  const tipY = depth + reach;
+  const tipX = head + mouth / 2 + lean(reach);
+  const lip = `M ${round(head)} ${round(depth)} ${fallFlank(head, tipX - SPLIT.tip / 2, depth, reach)}`;
+  return {
+    seam: `${lip} L ${round(tipX + SPLIT.tip / 2)} ${round(tipY)}`
+      + ` ${climbFlank(tipX + SPLIT.tip / 2, head + mouth, tipY, reach)} Z`,
+    lip,
+  };
+}
+
+/**
+ * A sheen band: a broad bowed strip leaning at the comb angle, from the rachis down to
+ * SHEEN_FLOOR. Three per vane — real goose primaries show two or three soft tonal runs,
+ * never an even set. ⚠️ ITS SIDE EDGES TAKE THE BOW, under the one-curve law: a straight
+ * sheen running across a bowed comb is a printed stripe, not light on barbs.
  * @param {number} x the band's leading x at the rachis
  * @param {number} w its width there
  * @returns {string} an SVG path
  */
 const sheenBand = (x, w) => {
   const drift = lean(SHEEN_FLOOR);
-  return `M ${x} 0 L ${x + w} 0 L ${x + w + drift} ${SHEEN_FLOOR} L ${x + drift} ${SHEEN_FLOOR} Z`;
+  const cy = round(BOW.y * SHEEN_FLOOR);
+  return `M ${round(x)} 0 L ${round(x + w)} 0`
+    + ` Q ${round(x + w + BOW.x * drift)} ${cy} ${round(x + w + drift)} ${SHEEN_FLOOR}`
+    + ` L ${round(x + drift)} ${SHEEN_FLOOR}`
+    + ` Q ${round(x + BOW.x * drift)} ${cy} ${round(x)} 0 Z`;
 };
 
 /**
@@ -770,6 +1056,38 @@ export default function FletchBand({ id, activeLane }) {
                     <path key={d} d={d} fill={active ? FLETCH_SHEEN_LIFT : FLETCH_SHEEN} />
                   ))}
                 </g>
+                {/* ⚠️ THE SPLITS SIT UNDER THE COMB, ABOVE THE SHEEN. A split is a
+                    parting in the barbs, so the barbs must run OVER it — painted on top
+                    it would read as a scratch on the surface rather than a gap in the
+                    material. The lit lips are RETINA-ONLY (0.4px at 0.5) and confined
+                    out of every label's calm zone by construction; see `splits`. */}
+                <g data-testid={`nav-fletch-splits-${lane}`}>
+                  {SPLITS[lane].slivers.map((d) => (
+                    <path key={d} d={d} fill={FLETCH_TIP} fillOpacity="0.55" />
+                  ))}
+                  {/* ⚠️ THE LIT LIP IS ONE FLANK, PUSHED TOWARD THE LIGHT — NOT THE
+                      SLIVER'S OUTLINE. Stroking the closed shape put the bright tone on
+                      BOTH sides of every split, which reads as an outlined scratch on
+                      the surface rather than as one raised barb catching the light; the
+                      first cut of this did exactly that and the 200% screenshot showed
+                      it. The offset is `lightOffset`, so the lips move with
+                      PLATE_LIGHT_DEG like every other relief on this bar — and its x is
+                      divided by the band's measured scale because a `translate` in
+                      viewBox units is stretched horizontally and not vertically. */}
+                  <g transform={LIP_SHIFT} data-testid={`nav-fletch-split-lips-${lane}`}>
+                    {SPLITS[lane].lips.map((d) => (
+                      <path
+                        key={d}
+                        d={d}
+                        fill="none"
+                        stroke={FLETCH_SPLIT_LIT}
+                        strokeOpacity="0.5"
+                        strokeWidth="0.4"
+                        vectorEffect="non-scaling-stroke"
+                      />
+                    ))}
+                  </g>
+                </g>
                 <g mask={`url(#${id}-comb-mask)`} data-testid={`nav-fletch-comb-${lane}`}>
                   {barbBuckets(lane).map((d, bucket) => (
                     <path
@@ -849,7 +1167,8 @@ export default function FletchBand({ id, activeLane }) {
 }
 
 export {
-  BAND, BAND_PX_PER_UNIT, BAND_W, BARB, D, DRIFT, LANE, QUILLS, QUILL_H, REACH, RUN,
-  SEAT, SHEENS, SHEEN_FLOOR, SHEEN_PEEK, VANES, barbBuckets, combCoverage, frayHairs,
-  laneGap, lean, quill, rachis, unitHash, vane, FLETCH_HANG,
+  BAND, BAND_PX_PER_UNIT, BAND_W, BARB, BOW, CALM_PAD_PX, CALM_PAD_Y, D, DRIFT, LABEL_INK,
+  LANE, QUILLS, QUILL_H, REACH, RUN, SEAT, SHEENS, SHEEN_FLOOR, SHEEN_PEEK, SPLIT, SPLITS,
+  VANES, barbBuckets, bow, calmZone, combCoverage, frayHairs, laneGap, lean, quill, rachis,
+  splitClears, splits, unitHash, vane, FLETCH_HANG,
 };
