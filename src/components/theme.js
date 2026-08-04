@@ -807,14 +807,33 @@ export const SHAFT_PORE_TEXTURE = woodTile(
  * `background-color`), never as the whole `background` shorthand with no base — every
  * layer here is transparent in its gaps and the page would show through the shaft.
  *
- * ⚠️⚠️ EVERY LAYER DARKENS AND NONE MAY LIGHTEN — THE DEAD-BAND LAW, spec part 2 §2's
- * "all darkening-direction only; pale latewood streaks BANNED". A pale streak is not a
- * taste failure: the bar's whole AA structure is that a PALE label's ground never rises
- * above L 0.1447 (see SHAFT_STOPS), and a lightening layer at any alpha walks that
- * ground toward the mid-russet dead band where NEITHER register is legible. The three
- * tones here are SHAFT_EDGE (L 0.0477) and SHAFT_RIM (L 0.0223) twice, all far below
- * the L 0.1268 lightest ground any rider's ink can touch, so the direction holds at
- * every alpha by construction. tests/design/compositedBarAA.test.js asserts it per layer.
+ * ⚠️⚠️ NO LAYER MAY LIFT A RIDER'S GROUND — THE DEAD-BAND LAW, spec part 2 §2's "all
+ * darkening-direction only; pale latewood streaks BANNED". A pale streak is not a taste
+ * failure: the bar's whole AA structure is that a PALE label's ground never rises above
+ * L 0.1447 (see SHAFT_STOPS), and a layer that walked that ground up toward the
+ * mid-russet dead band would put it where NEITHER register is legible. The three tones
+ * here are SHAFT_EDGE (L 0.0477) and SHAFT_RIM (L 0.0214) twice, all far below the
+ * L 0.1268 lightest ground any rider's ink can touch, so no alpha of any of them can
+ * reach it. THAT is the invariant, and tests/design/compositedBarAA.test.js asserts
+ * exactly it, per layer, against that measured ceiling.
+ *
+ * ⚠️⚠️ AND IT IS A FLOOR CLAIM, NOT "EVERY LAYER DARKENS EVERY PIXEL" — this note used to
+ * say the second, and the second is measurably false at the silhouette. A wash darkens
+ * only where its own tone is darker than what it lands on, and the CYLINDER falls PAST
+ * SHAFT_EDGE in the bar's last 2% on its way to SHAFT_RIM. So in the bar's bottom device
+ * row the GRAIN layer — whose tone IS SHAFT_EDGE — paints over ground that has already
+ * gone darker than it, and lightens it. Measured on the live Chrome raster at 1440x900
+ * dsf2, device row 75 of 76 (depth 0.9934, bare cylinder #492617 at L 0.0287): 478 of
+ * 500 bare-cedar columns come out LIGHTER than the bare cylinder, by a median of
+ * +0.0010 and at most +0.0022 of luminance. One row up, where the cylinder is still at
+ * SHAFT_EDGE itself, the effect vanishes into dither (207/500, max +0.0010).
+ *
+ * IT IS NOT A DEFECT AND NOTHING IS RETUNED FOR IT. The lightest ground that lightening
+ * produces anywhere is L 0.0308 against the L 0.1268 ceiling — a 4.1× margin — and it
+ * happens in the barrel's own silhouette, a row no rider's ink reaches (the shallowest
+ * is the wordmark's at depth 0.1995). What is corrected is the CLAIM: "by construction"
+ * was doing work the construction does not do, and a law stated one notch stronger than
+ * its proof is how a future edit inherits a guarantee nobody ever checked.
  */
 export const SHAFT_GRAIN_LAYERS = [
   SHAFT_PORE_TEXTURE, SHAFT_GROWTH_TEXTURE, SHAFT_GRAIN_TEXTURE, SHAFT_CYLINDER,
@@ -940,23 +959,38 @@ export const FLETCH_SEAM = FLETCH_TIP;
 // mid red-brown was a third of the way to the label register and read as a binding at
 // 3.16:1. On cedar the same tone would be a slightly-different-red smudge on red, so
 // the wrap goes DEEPER instead of brighter — WRAP is 1.69:1 against SHAFT_BODY and
-// WRAP_EDGE 2.22:1, and the binding is identified by its own WOUND STRUCTURE (a
-// 2.6px turn period whose crest-to-valley ladder is 2.12:1) rather than by a single
-// flat step against the wood. That is what a thread lying on a same-hue shaft really
-// looks like, and it is a legitimate scoping: the wrap carries no state, no label
-// rides it, and nothing about reaching Create depends on perceiving it. Recorded and
-// pinned as a measured relationship, never as a 3:1 claim it cannot make.
+// WRAP_EDGE 2.22:1, and the binding is identified by its own WOUND STRUCTURE (a 2.6px
+// turn period whose crest-to-valley ladder MEASURES 1.81:1 ON THE RENDERED RASTER —
+// crest #6A311E..#6B311F, valley #270D07) rather than by a single flat step against the
+// wood. That is what a thread lying on a same-hue shaft really looks like, and it is a
+// legitimate scoping: the wrap carries no state, no label rides it, and nothing about
+// reaching Create depends on perceiving it. Recorded and pinned as a measured
+// relationship, never as a 3:1 claim it cannot make.
+// ⚠️⚠️ THE NUMBER IN THAT SENTENCE USED TO BE 2.12:1, AND IT WAS NEVER TRUE OF A PIXEL —
+// kept here as HISTORY because the mistake is instructive and the correction has to live
+// in the sentence rather than beside it. 2.12 is the contrast ratio of WRAP_GLOSS against
+// WRAP_EDGE AS AUTHORED: arithmetic about two hexes, neither of which reached a screen in
+// that state, because the turns were painted over the barrel gradient and only the
+// inter-turn shadow was opaque (V4C's swap, WRAP_BARREL below). The shipped ladder was
+// 1.316:1 — worse than the claim, and the "crest" was the BODY tone. V4C's own
+// measurement mid-bar was 1.806:1 at crest #6A311E; V4D re-measured a device row of the
+// live Chrome raster across the lead wrap's full 10px width and reads 1.817:1, crest
+// #6B311F, valley #270D07 — one 8-bit level and 0.011 of ratio apart, which is the
+// rasteriser's dithering across a hard gradient stop rather than a disagreement. The
+// executed ladder is pinned in tests/components/navFletching.test.jsx (R5).
 export const WRAP = '#521F12';
 export const WRAP_GLOSS = '#7E3A24';
 export const WRAP_EDGE = '#2E0F08';
 
 /**
- * ⚠️⚠️ THE WHIPPING'S TURN PERIOD, AND THE LADDER IT REALLY RENDERS — spec part 2 §3,
- * and the claim above it was FALSE IN THE SHIPPED PIXELS until this token existed.
+ * ⚠️⚠️ THE WHIPPING'S TURN PERIOD, AND THE LADDER IT REALLY RENDERS — spec part 2 §3.
+ * This is the DERIVATION behind the measured ladder the note above now states; until
+ * this token existed that note carried an arithmetic figure instead, and both halves of
+ * it were false in the shipped pixels.
  *
- * The note above says the binding is identified "by its own WOUND STRUCTURE (a 2.6px
- * turn period whose crest-to-valley ladder is 2.12:1)". Measured on the real Chrome
- * raster at device-pixel resolution, both halves were wrong:
+ * The note above used to say the binding is identified "by its own WOUND STRUCTURE (a
+ * 2.6px turn period whose crest-to-valley ladder is 2.12:1)". Measured on the real
+ * Chrome raster at device-pixel resolution, both halves were wrong:
  *
  *   PERIOD    2.0px, not 2.6 — at 1x that renders as one lit pixel alternating with one
  *             dark one, the whole width of the wrap. A barcode, not silk.

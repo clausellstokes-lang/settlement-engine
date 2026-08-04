@@ -422,15 +422,26 @@ describe('the COMPOSITED bar — the ground a letterform really lands on', () =>
     expect(same).toBe(a.alpha.length);
   });
 
-  test('⚠️⚠️ THE WOOD FINISHES: three layers, and EVERY ONE OF THEM DARKENS', async () => {
+  test('⚠️⚠️ THE WOOD FINISHES: three layers, and NONE OF THEM CAN LIFT A GROUND', async () => {
     // ⚠️⚠️ THE DEAD-BAND LAW, AS A PER-LAYER PROOF (spec part 2 §2, "all
     // darkening-direction only; pale latewood streaks BANNED"). It is not a taste rule.
     // Every rider on this bar is PALE, so its worst ground is the LIGHTEST tone under
     // its ink — cylinderToneAt(0.1995), L 0.1268 — and a layer whose tone were LIGHTER
     // than that could raise a label's ground at some alpha, walking it toward the
     // mid-russet dead band where NEITHER register clears 4.5:1. A screenshot shows none
-    // of that. So the direction is asserted for each layer's own tone, which makes it
-    // hold at every alpha by construction rather than at today's alpha by luck.
+    // of that. So each layer's own tone is asserted below that ceiling, which holds at
+    // every alpha rather than at today's alpha by luck.
+    //
+    // ⚠️⚠️ AND THE CLAIM IS THE CEILING, NOT "EVERY LAYER DARKENS EVERY PIXEL" — this
+    // test was NAMED for the second until V4D, and the second is measurably false at the
+    // silhouette. The cylinder falls PAST SHAFT_EDGE in the bar's last 2%, so in the
+    // bottom device row the GRAIN layer (tone: SHAFT_EDGE) lands on ground already
+    // darker than itself and LIGHTENS it — 478 of 500 bare-cedar columns, median +0.0010
+    // and at most +0.0022 of luminance, measured on the live Chrome raster at 1440x900
+    // dsf2. The lightest ground that produces is L 0.0308 against this ceiling's 0.1268,
+    // a 4.1× margin, in a row no rider's ink reaches. The assertions below were always
+    // the ceiling claim and are unchanged; only the name over-claimed. theme.js's
+    // SHAFT_GRAIN_LAYERS note carries the same correction at the source.
     const lightestGround = relLuminance(...cylinderToneAt(
       HEADER_RIDERS.wordmark.ink[0] / HEADER_RIDERS.wordmark.bar,
     ));
