@@ -928,3 +928,134 @@ vocabulary, or narrowing the materializer — changes bytes on a path THE PROMIS
 a seed is a world, forever. **Recording it makes it a decision rather than something the
 next audit re-finds as a fresh bug.** PRE-EXISTING: it predates WZ-5 and is not that
 lane's regression.
+
+---
+
+## WR-9r — THE VERIFICATION REPAIR (lane WR-9r, 2026-08-04) @ `06c58f69`. The adversarial
+## verifier CONFIRMED WR-9a's architecture, all seven mutants, the same-seed law and the
+## ledger, and REJECTED on three defects "of RECORD and DEFAULT, not of architecture".
+## All three are closed here; the lane stands.
+
+**WHAT WAS WRONG, EXECUTED BEFORE IT WAS REPAIRED.** `warDurationBandFor` answered `short`
+for undefined, null, NaN, the empty string, a non-numeric string, a NEGATIVE number AND
+`Infinity`, and `durationResolved` summed every band except `unresolved` — so a defaulted
+short COUNTED AS RESOLVED. The executed repro: forty closed wars whose durations were
+entirely lost produced `warDurationHistogram {short: 40, long: 0, generational: 0,
+unresolved: 0}` and passed **ALL FIVE** WR-9 checks — `duration_envelope` and `non_vacuous`
+included — on a short share of 1.0 against a `DURATION_SHORT_MIN_SHARE` of 0.4, with a
+healthy endings mix and all-ALIVE flag rows. `Infinity` specifically INVERTED the
+no-infinity criterion: the one input that names an endless war scored as the shortest kind
+of war there is. The docstring then at `:141-143` claimed the `non_vacuous` wall would
+refuse a corpus that measured nothing; that claim was executed and found **FALSE**, because
+that wall reads `durationResolved > 0` and forty defaulted shorts satisfy it.
+
+### CR-WR9-A (chair ruling, VETOABLE) — UNMEASURABLE IS ITS OWN DIAGNOSIS.
+
+The duration histogram gains an `unmeasured` counter, with the vocabulary, the totality
+validator, the aggregation and the order pins all updated together.
+
+- **ROUTING.** undefined / null / NaN / non-numeric / negative (and `-Infinity`, and any
+  non-number) route to `unmeasured`. `Infinity` routes to `unresolved`, because an infinite
+  duration IS the alive-at-horizon war rather than a lost measurement.
+- **A NEW GRADED WALL,** `war_convergence.duration_measured`, FAILS on any unmeasured > 0.
+  **STRICT BY DESIGN,** and the tuning entry's own docstring says why: zero is there because
+  an instrument that has never been run has no evidence entitling it to a tolerance. It
+  becomes **revisitable WITH EVIDENCE at the tuning wave**, owner-signed like every band.
+- `duration_envelope`'s shares now compute over MEASURED bands only, so neither failure cell
+  can launder itself into the tail.
+- The `:141-143` docstring is corrected IN PLACE to describe the wall that actually holds.
+- **⚠ THE `:561-562` PIN WAS REWRITTEN BECAUSE EXECUTION REFUTED THE DESIGN IT PINNED.** It
+  asserted `warDurationBandFor(Number.NaN) === 'short'` and the same for `undefined`, on the
+  stated rationale disproved above. Those expectations were pinning the defect, so they are
+  REPLACED rather than extended, and the commit body at `06c58f69` discloses the change as a
+  refuted design rather than leaving it as unexplained churn.
+
+### CR-WR9-B (chair ruling, VETOABLE) — DOCSTRING TRUTH IN PLACE.
+
+- **THE FORCES SENTENCE.** `warConvergenceContract.js:346-349` asserted in the PRESENT TENSE
+  that the six force cells "live in warConvergenceForces.js and are composed beside these".
+  **The file does not exist.** Measured at `d7a6a16b`: the ONLY occurrence of the name
+  anywhere in the tree was that docstring line itself. It now reads as future/owed — the
+  cells WILL live there, **OWED at WR-9c, unbuilt** — and names its own former over-claim.
+- **THE RECEIPT-CORPUS SENTENCE.** `warConvergenceContract.js:33-36` claimed "all eight
+  committed case receipts are envelope v4 with no `warConvergence` key". It now states the
+  measurement: **nine local gitignored receipts under `artifacts/soak/` — eight envelope v4,
+  one v3 (`smoke.cases/smoke-1y-30s-seed1.json`) — none carrying a `warConvergence` key.**
+- **⚠ `fd222269`'S COMMIT BODY CARRIES THE STALE SENTENCE, AND COMMIT MESSAGES ARE
+  IMMUTABLE.** THE LEDGER IS THE CORRECTION SURFACE, and this row is that correction. The
+  load-bearing CONCLUSION survives intact — `warConvergence` is absent from all NINE, so the
+  v1-to-v2 bump orphaned nothing — but the RECORDED EVIDENCE behind it did not, and a future
+  reader must take these numbers and not that commit body's.
+
+### CR-WR9-C (chair ruling, VETOABLE) — RECORDED FOR WR-9d, NOT IMPLEMENTED HERE.
+
+The no-infinity criterion binds at the owner-ordered soak redo's **FULL HORIZON**. When the
+collector lands, the evaluator feeds **ALL** instrumented cases — release AND research — with
+the unresolved wall keyed to **each case's own horizon**. This cures STOP #2's contradiction:
+`behavioralContract.js:1051-1054` feeds only `releaseCases` (100 years) while the criterion
+names year-300. **NO CODE WAS WRITTEN FOR THIS ROW.** The one piece that could not wait is
+recorded where it will be found: `warDurationBandFor` is a pure bander that is never handed a
+horizon, so today only `Infinity` reaches `unresolved` from it, and its docstring says the
+horizon-relative arm is owed at WR-9d.
+
+### JUDGMENTS THIS LANE MADE (vetoable, mine not the chair's).
+
+- **J-WR9R-1 — THE BANDER STAYS THE SINGLE WRITER OF THE WHOLE VOCABULARY.** `unmeasured` is
+  appended LAST so every pre-existing cell keeps its position, and `WAR_DURATION_LENGTH_BANDS`
+  is exported separately as the envelope's denominator — an INDEPENDENT census rather than a
+  filter over the full vocabulary, so the share arithmetic is not a statement about its own
+  map. The alternative — a separate `warDurationUnmeasured()` predicate the census must call
+  FIRST — was rejected: two functions whose call ORDER is a defect no type can see.
+- **J-WR9R-2 — OBSERVATION SCHEMA 2 -> 3.** The module's own declared law is that "the bump
+  is EXACT rather than tolerant on purpose", and it applies verbatim to the new cell: a v2
+  observation has no address for a lost duration. Refusing to bump would have contradicted
+  the paragraph doing the refusing. **NOTHING IS ORPHANED, MEASURED NOT ASSERTED:** none of
+  the nine on-disk receipts carries a `warConvergence` key of ANY version.
+- **J-WR9R-3 — `warEndingClassifier.test.js` WAS NOT TOUCHED, DELIBERATELY.** The brief
+  allowed the pins to land in either suite. All four belong with the DURATION vocabulary,
+  which lives in `warConvergenceContract.js`, whose suite is
+  `behavioralCertificationContract.test.js`. The classifier owns ENDINGS and reads no
+  duration, so a pin planted there would have been a pin in the wrong module's file.
+
+**PINS (+4, EVERY ONE PROVEN TO BITE).** P1 the lost-corpus repro promoted from a one-off
+probe to a permanent pin, whose control half FIRST proves the same corpus passes every WR-9
+cell once the forty durations are readable, so it cannot go vacuous; P2 `Infinity` routes to
+`unresolved` and one endless war reds the no-infinity wall, with `duration_measured` asserted
+still GREEN so the red is specific; P3 the routing table over twelve unmeasurable input
+classes, driven off the REAL boundary constants rather than copies of them; P4 the totality
+validator rejects a histogram with no `unmeasured` address, plus the updated order pin.
+
+**MUTANTS — ALL THREE EXECUTED, cp-backed, restored `cmp`-exact (md5 `765ba99f…` before and
+after every one).** **M-A** re-routing unmeasured to `short` reds **P1 AND P3** (2 of 34).
+**M-B** deleting the `duration_measured` cell from the returned array reds **P1** (and P2's
+specificity assertion, which is what that assertion is for). **M-C** re-routing `Infinity` to
+`unmeasured` reds **P2 and nothing else** (1 of 34).
+
+**GATES (every number executed this lane).** Focused battery **10 files / 145 tests green**,
+against **141 at base** — the delta is exactly the four new pins. **tests/lint failure-set
+diff vs base EMPTY**: 32 failed / 699 passed / 731 total across 11 files at base AND after,
+the same set line for line (pre-existing program debt, captured BEFORE the first edit).
+`[domain-strict] ✓ no strict-type regressions (1313 errors, ceiling 1313)` — honestly met and
+left met. **Any-cast findings byte-identical to base**, the sole offender the inherited
+`src/domain/worldPulse/warDeployment.js: 17 any-holes (baseline 16)`;
+`warConvergenceContract.js` appears in ZERO findings. eslint clean on both authored files.
+`npm run build` green (built in 17.43s) + prerender **314 static route documents** +
+`smoke:boot` **PASS (473/473 chunks)**. Size: `warConvergenceContract.js` 560 -> **657**
+lines, under its 800 ceiling. Byte-scan: **zero control bytes** in both authored files.
+
+**SAME-SEED NOT RUN, AND THE DIFF RECEIPT IS WHY.** `git diff --name-only` was exactly two
+files; `git diff --name-only -- src/domain/worldPulse/` was **EMPTY (0 files)**;
+`behavioralContract.js` is byte-identical to HEAD (md5 `14ce04f1…` on both sides) and remains
+untouched at **795 of its 800 wall** — the new cell composes INSIDE the array
+`evaluateWarConvergenceInstrumentation` already returns and `behavioralContract` already
+spreads; and `WAR_TERMINATION_DECIDING_TERM_KEYS` is character-identical at HEAD and in the
+worktree. No engine path was touched, so no seed can have moved.
+
+**⚠ A FALSE RECEIPT WAS CAUGHT AND DISCARDED MID-LANE, RECORDED SO IT IS NOT REPEATED.** The
+first attempt to prove `WAR_TERMINATION_DECIDING_TERM_KEYS` unchanged used
+`diff <(git show HEAD:… | sed -n '/…(…)/,/…/p') <(sed …)`. BSD `sed` failed on the
+unbalanced parenthesis in the pattern, **both sides came back EMPTY, and `diff` exited 0** —
+printing an "IDENTICAL" that proved nothing at all. The same shape bit the failure-set diff:
+BSD `sed` does not support `\+`, so the first normalization left millisecond timings in and
+reported a difference that was pure noise. **A diff of two empty streams is a green light
+with no traffic behind it; assert both sides are non-empty before believing one.**
