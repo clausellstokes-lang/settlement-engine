@@ -7,6 +7,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 
+import { receiptAnnexPool, WAR_ANNEX_URL } from '../helpers/receiptAnnex.js';
 import { WHAT_PHRASES } from '../../src/domain/display/settlementRumors.js';
 import { heraldSectionOfRecord, SECTION_OF } from '../../src/domain/realm/heraldRouting.js';
 import { ENVOY_EVIDENCE_KINDS } from '../../src/domain/worldPulse/envoyErrand.js';
@@ -64,20 +65,24 @@ const CORRECTED_SELF_PARLAY = Object.freeze([
   'One court sent its own legate because an alliance can open a war without deciding how long it lasts.',
 ]);
 
+// The annex read is the shared, fail-closed one. No WR-7a kind took the one-kind-one-pool
+// forward, so this site is here for the OTHER half of the cure: `indexOf('## WR-7a')` and
+// `indexOf('### ${kind} ')` are unanchored first-match searches \u2014 a second heading anywhere
+// in the volume, or a longer kind name sharing this one's prefix, retargets the slice with
+// no red. The shared reader anchors to line start, requires exactly one match, and throws
+// rather than returning the empty array that made this class invisible elsewhere (D-W1).
+function annexPool(kind) {
+  return receiptAnnexPool(kind, {
+    source: readFileSync(WAR_ANNEX_URL, 'utf8'),
+    section: '## WR-7a',
+    until: '## WR-7c',
+    interp: INTERP,
+    strip: (line) => line.replace(/\s+\*\(\u00a78\)\*$/, ''),
+  });
+}
+
 function annexLines(kind) {
-  const source = readFileSync(new URL('../../docs/content/RECEIPT_POOLS_WAR.md', import.meta.url), 'utf8');
-  const wr7a = source.slice(source.indexOf('## WR-7a'), source.indexOf('## WR-7c'));
-  const heading = `### ${kind} `;
-  const start = wr7a.indexOf(heading);
-  expect(start, `${kind}: missing WR-7a annex heading`).toBeGreaterThanOrEqual(0);
-  const rest = wr7a.slice(start + heading.length);
-  const next = rest.indexOf('\n### ');
-  const block = next >= 0 ? rest.slice(0, next) : rest;
-  return [...block.matchAll(/^\d+\. (.+)$/gm)].map((match) => (
-    match[1]
-      .replace(/\s+\*\(\u00a78\)\*$/, '')
-      .replace(/\{(\w+)\}/g, (_, slot) => String(INTERP[slot]))
-  ));
+  return annexPool(kind).lines;
 }
 
 describe('SP-6 phrased-kind registry — WR-7 envoy errands and parlays', () => {
@@ -182,6 +187,16 @@ describe('SP-6 phrased-kind registry — WR-7 envoy errands and parlays', () => 
       }
     },
   );
+
+  test('the annex address of each pool is the one the corpus actually holds', () => {
+    // The census, not a bare absence pin: every one of the sixteen kinds must RESOLVE (the
+    // shared reader throws on a rotted or duplicated heading), and every resolution must land
+    // in the war volume. If a later merge forwards a WR-7a pool to the legacy annex, this
+    // reddens instead of the pool silently reading as five stale sentences.
+    const address = ENVOY_KINDS.map((kind) => annexPool(kind).from);
+    expect(address).toHaveLength(16);
+    expect([...new Set(address)]).toEqual(['war']);
+  });
 
   test('unknown kinds stay closed and every immediate WR-7b fact remains DM-only', () => {
     expect(envoyReceipt('envoy_unknown', 'seed', INTERP)).toBeNull();

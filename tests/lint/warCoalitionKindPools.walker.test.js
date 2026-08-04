@@ -5,6 +5,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 
+import { receiptAnnexPool, WAR_ANNEX_URL } from '../helpers/receiptAnnex.js';
 import { WHAT_PHRASES } from '../../src/domain/display/settlementRumors.js';
 import { heraldSectionOfRecord, SECTION_OF } from '../../src/domain/realm/heraldRouting.js';
 import {
@@ -37,20 +38,23 @@ const INTERP = Object.freeze({
   good: 'grain',
 });
 
+// The annex read is the shared, fail-closed one. Note the hazard this replaces: the WR-6
+// terminator was `indexOf('# WR-7')`, and `'# WR-7'` is a SUBSTRING of `## WR-7a` — the slice
+// stayed correct only because the volume happens to spell `# WR-7` first. The shared reader
+// anchors headings to line start and asserts each occurs exactly once, and it follows the
+// one-kind-one-pool forward into RECEIPT_POOLS_LEGACY.md that six of these twelve kinds took.
+function annexPool(kind) {
+  return receiptAnnexPool(kind, {
+    source: readFileSync(WAR_ANNEX_URL, 'utf8'),
+    section: '# WR-6',
+    until: '# WR-7',
+    interp: INTERP,
+    strip: (line) => line.replace(/\s+\*\(§8\)\*$/, ''),
+  });
+}
+
 function annexLines(kind) {
-  const source = readFileSync(new URL('../../docs/content/RECEIPT_POOLS_WAR.md', import.meta.url), 'utf8');
-  const wr6 = source.slice(source.indexOf('# WR-6'), source.indexOf('# WR-7'));
-  const heading = `### ${kind} `;
-  const start = wr6.indexOf(heading);
-  expect(start, `${kind}: missing WR-6 annex heading`).toBeGreaterThanOrEqual(0);
-  const rest = wr6.slice(start + heading.length);
-  const next = rest.indexOf('\n### ');
-  const block = next >= 0 ? rest.slice(0, next) : rest;
-  return [...block.matchAll(/^\d+\. (.+)$/gm)].map((match) => (
-    match[1]
-      .replace(/\s+\*\(§8\)\*$/, '')
-      .replace(/\{(\w+)\}/g, (_, slot) => String(INTERP[slot]))
-  ));
+  return annexPool(kind).lines;
 }
 
 describe('SP-6 phrased-kind registry — WR-6 coalition graph', () => {
@@ -81,7 +85,12 @@ describe('SP-6 phrased-kind registry — WR-6 coalition graph', () => {
       const rendered = row.pool.map((variant) => (
         typeof variant === 'function' ? String(variant(INTERP)) : String(variant)
       ));
-      expect(rendered).toEqual(annexLines(row.kind));
+      const annex = annexPool(row.kind);
+      expect(rendered).toEqual(annex.lines);
+      // A relocated pool is selected out of a 7–9 row legacy block by its `[live, verbatim]`
+      // tags; the annex's own per-row requiredSlots is the orthogonal witness that the
+      // filter took the right five rows in the right order.
+      if (annex.requiredSlots) expect(annex.requiredSlots).toEqual(row.requiredSlots);
       expect(new Set(rendered).size).toBe(5);
       for (const line of rendered) {
         expect(line).toBe(line.trim());
@@ -121,6 +130,21 @@ describe('SP-6 phrased-kind registry — WR-6 coalition graph', () => {
       }
     },
   );
+
+  test('the annex address of each pool is the one the corpus actually holds', () => {
+    // Pins the document address itself: without it the requiredSlots cross-check above
+    // could go dark for all twelve kinds (a broken forward yields no legacy rows, so the
+    // conditional simply stops running) and nothing would red.
+    const relocated = WAR_COALITION_KINDS.filter((kind) => annexPool(kind).from === 'legacy');
+    expect(relocated).toEqual([
+      'coalition_entry_priced',
+      'casus_alliance_obligation',
+      'mirror_obligation_discharged',
+      'coalition_expenditure_read',
+      'coalition_stayed',
+      'coalition_debt_paid',
+    ]);
+  });
 
   test('unknown kinds stay closed and every coalition row is public', () => {
     expect(warCoalitionReceipt('coalition_unknown', 'seed', INTERP)).toBeNull();

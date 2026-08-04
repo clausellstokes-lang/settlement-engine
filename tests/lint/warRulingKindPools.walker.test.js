@@ -5,6 +5,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 
+import { receiptAnnexPool, WAR_ANNEX_URL } from '../helpers/receiptAnnex.js';
 import { WHAT_PHRASES } from '../../src/domain/display/settlementRumors.js';
 import {
   heraldSectionOfRecord,
@@ -44,20 +45,21 @@ const INTERP = Object.freeze({
   band: 'deeply',
 });
 
+// The annex read is the shared, fail-closed one: line-anchored headings asserted to occur
+// exactly once, and the one-kind-one-pool forward into RECEIPT_POOLS_LEGACY.md followed
+// rather than read as an empty block. Two of these fourteen kinds live there (D-W1).
+function annexPool(kind) {
+  return receiptAnnexPool(kind, {
+    source: readFileSync(WAR_ANNEX_URL, 'utf8'),
+    section: '# WR-5',
+    until: '# WR-6',
+    interp: INTERP,
+    strip: (line) => line.replace(/\s+\*\(§8\)\*$/, ''),
+  });
+}
+
 function annexLines(kind) {
-  const source = readFileSync(new URL('../../docs/content/RECEIPT_POOLS_WAR.md', import.meta.url), 'utf8');
-  const wr5 = source.slice(source.indexOf('# WR-5'), source.indexOf('# WR-6'));
-  const heading = `### ${kind} `;
-  const start = wr5.indexOf(heading);
-  expect(start, `${kind}: missing WR-5 annex heading`).toBeGreaterThanOrEqual(0);
-  const rest = wr5.slice(start + heading.length);
-  const next = rest.indexOf('\n### ');
-  const block = next >= 0 ? rest.slice(0, next) : rest;
-  return [...block.matchAll(/^\d+\. (.+)$/gm)].map((match) => (
-    match[1]
-      .replace(/\s+\*\(§8\)\*$/, '')
-      .replace(/\{(\w+)\}/g, (_, slot) => String(INTERP[slot]))
-  ));
+  return annexPool(kind).lines;
 }
 
 describe('SP-6 phrased-kind registry — WR-5 war rulings', () => {
@@ -89,7 +91,12 @@ describe('SP-6 phrased-kind registry — WR-5 war rulings', () => {
       const rendered = row.pool.map((variant) => (
         typeof variant === 'function' ? String(variant(INTERP)) : String(variant)
       ));
-      expect(rendered).toEqual(annexLines(row.kind));
+      const annex = annexPool(row.kind);
+      expect(rendered).toEqual(annex.lines);
+      // A relocated pool is selected out of a seven-row legacy block by its
+      // `[live, verbatim]` tags; the annex's own per-row requiredSlots is the orthogonal
+      // witness that the filter took the right five rows in the right order.
+      if (annex.requiredSlots) expect(annex.requiredSlots).toEqual(row.requiredSlots);
       expect(new Set(rendered).size).toBe(5);
       for (const line of rendered) {
         expect(line).toBe(line.trim());
@@ -129,6 +136,14 @@ describe('SP-6 phrased-kind registry — WR-5 war rulings', () => {
       }
     },
   );
+
+  test('the annex address of each pool is the one the corpus actually holds', () => {
+    // Pins the document address itself: without it the requiredSlots cross-check above
+    // could go dark for all fourteen kinds (a broken forward yields no legacy rows, so the
+    // conditional simply stops running) and nothing would red.
+    const relocated = WAR_RULING_KINDS.filter((kind) => annexPool(kind).from === 'legacy');
+    expect(relocated).toEqual(['refusal_cost_legitimacy', 'refusal_cost_ally_patience']);
+  });
 
   test('unknown kinds stay closed and the sole private row is exact', () => {
     expect(warRulingReceipt('war_ruling_unknown', 'seed', INTERP)).toBeNull();

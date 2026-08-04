@@ -9,6 +9,7 @@ import { readFileSync } from 'node:fs';
 
 import { describe, expect, test } from 'vitest';
 
+import { receiptAnnexPool, WAR_ANNEX_URL } from '../helpers/receiptAnnex.js';
 import { WHAT_PHRASES } from '../../src/domain/display/settlementRumors.js';
 import { HERALD_SECTIONS, SECTION_OF } from '../../src/domain/realm/heraldRouting.js';
 import { ensureWizardNewsFeed } from '../../src/domain/region/wizardNews.js';
@@ -97,18 +98,17 @@ function renderedPool(row, interp = INTERP) {
   ));
 }
 
+// The annex read is the shared, fail-closed one: line-anchored headings asserted to occur
+// exactly once (an `indexOf` slice retargets silently on a second heading), and the
+// one-kind-one-pool forward into RECEIPT_POOLS_LEGACY.md followed rather than read as an
+// empty block. Five of these nine kinds live in the legacy annex (D-W1).
+function annexPool(kind) {
+  const source = readFileSync(WAR_ANNEX_URL, 'utf8');
+  return receiptAnnexPool(kind, { source, section: '# WR-4', until: '# WR-5', interp: INTERP });
+}
+
 function annexLines(kind) {
-  const source = readFileSync(new URL('../../docs/content/RECEIPT_POOLS_WAR.md', import.meta.url), 'utf8');
-  const wr4 = source.slice(source.indexOf('# WR-4'), source.indexOf('# WR-5'));
-  const heading = `### ${kind} `;
-  const start = wr4.indexOf(heading);
-  expect(start, `${kind}: missing WR-4 annex heading`).toBeGreaterThanOrEqual(0);
-  const rest = wr4.slice(start + heading.length);
-  const next = rest.indexOf('\n### ');
-  const block = next >= 0 ? rest.slice(0, next) : rest;
-  return [...block.matchAll(/^\d+\. (.+)$/gm)].map((match) => (
-    match[1].replace(/\{(\w+)\}/g, (_, slot) => String(INTERP[slot]))
-  ));
+  return annexPool(kind).lines;
 }
 
 describe('SP-6 phrased-kind registry — WR-4 war costs', () => {
@@ -127,6 +127,24 @@ describe('SP-6 phrased-kind registry — WR-4 war costs', () => {
       expect(WHAT_PHRASES[row.kind]).not.toMatch(/_/);
       expect(SECTION_OF(row.kind), `${row.kind}: wrong Herald desk`).toBe(row.section);
     }
+  });
+
+  test('the annex address of each pool is the one the corpus actually holds', () => {
+    // The document address is itself pinned: without this census the requiredSlots
+    // cross-check above could go dark for all nine kinds (a broken forward returns no
+    // legacy rows, so the conditional would simply stop running) and nothing would red.
+    const address = Object.fromEntries(WAR_COST_KINDS.map((kind) => [kind, annexPool(kind).from]));
+    expect(address).toEqual({
+      war_trajectory_winning: 'war',
+      war_trajectory_losing: 'war',
+      home_front_roads: 'legacy',
+      home_front_stores: 'legacy',
+      home_front_hands: 'legacy',
+      home_front_institutions: 'legacy',
+      home_front_markets: 'legacy',
+      winning_abroad_losing_at_home: 'war',
+      trajectory_misread: 'war',
+    });
   });
 
   test('Wizard News preserves every valid supplied desk and rejects unknown values', () => {
@@ -172,7 +190,13 @@ describe('SP-6 phrased-kind registry — WR-4 war costs', () => {
     '$kind retains the five receipt-annex families verbatim',
     (row) => {
       const rendered = renderedPool(row);
-      expect(rendered).toEqual(annexLines(row.kind));
+      const annex = annexPool(row.kind);
+      expect(rendered).toEqual(annex.lines);
+      // A relocated pool is selected out of a 7–9 row legacy block by its `[live, verbatim]`
+      // tags. The annex declares each row's own requiredSlots, so pinning the registry's
+      // parallel array against it is an ORTHOGONAL witness that the filter took the right
+      // five rows in the right order — five plausible sentences alone would not prove that.
+      if (annex.requiredSlots) expect(annex.requiredSlots).toEqual(EXPECTED_SLOTS[row.kind]);
       expect(new Set(rendered).size).toBe(5);
       for (const line of rendered) {
         expect(line).toBe(line.trim());
