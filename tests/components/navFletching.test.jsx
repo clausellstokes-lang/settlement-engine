@@ -1567,7 +1567,10 @@ describe('4 — THE WRAPS: two glossy bands riding the shaft, bracketing the clu
     // cedar and the loudest object on the bar. Nothing in tests/ matched the string
     // `backgroundBlendMode` at all. An arithmetic proof of a composite is a proof about
     // the tokens; only the ELEMENT can say whether the composite is asked for.
-    const { container } = render(<App />);
+    // ⚠️ THE SUBJECT IS THE RIBBON, NOT THE SHELL. The wraps are NavRibbon's; rendering
+    // the whole App here would pull the checkout module graph into a paint pin for
+    // nothing, and leave its async imports resolving after the environment tears down.
+    const { container } = render(<NavRibbon view="home" onNavClick={() => {}} />);
     const wraps = [...container.querySelectorAll('[data-testid^="nav-shaft-wrap-"]')];
     expect(wraps.length, 'the wraps are not rendered — the census is vacuous').toBe(2);
     // Split a CSS layer list on its TOP-LEVEL commas: every layer here is a gradient and
@@ -1615,7 +1618,7 @@ describe('4 — THE WRAPS: two glossy bands riding the shaft, bracketing the clu
     // spends elsewhere. The conditional cannot live in an inline style, so the component
     // hands the tones to the sheet through a custom property and the sheet holds only the
     // `@supports` switch. Both halves are asserted, and against each other.
-    const { container } = render(<App />);
+    const { container } = render(<NavRibbon view="home" onNavClick={() => {}} />);
     const lead = container.querySelector('[data-testid="nav-shaft-wrap-lead"]');
     const cls = lead.getAttribute('class');
     expect(cls, 'the wrap carries no class for the @supports arm to reach').toBeTruthy();
