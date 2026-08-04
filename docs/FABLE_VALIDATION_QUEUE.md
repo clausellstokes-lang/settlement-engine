@@ -603,3 +603,129 @@ discharges the PT2-5 section's NOT-BUILT status. **Nothing pushed.**
   function body. Both corrected and the corpus regenerated; the generated diff is
   ONE title string. Included rather than deferred because a stale receipt in the
   dossier-prose annex is the exact class the corpus generator exists to prevent.
+
+
+## ⭐⭐ LANE WZ-5r — THE WZ-5 ROW IS CORRECTED: "WR-8 CLOSES" WAS PREMATURE, AND WHAT
+## CLOSES IT NOW (Opus implementer under chair rulings CR-WZ5-A / CR-WZ5-B, 2026-08-04;
+## every row vetoable. The WZ-5 row above is NOT rewritten — protocol step 2 — this
+## section is the correction that rides beside it.)
+
+**THE CORRECTION.** The row dated 2026-08-04 declaring **"⭐⭐ LANE WZ-5 — WR-8 CLOSES"**
+(commits `19dd07e2`, `db779d5e`; queue row `e36588c7`) was written BEFORE adversarial
+verification finished, and verification **REJECTED the close on 2026-08-04** with two
+executed blocking findings, both in piece 2. The mechanics of piece 1 (the believed-
+razing casus) were verified WHOLE and are untouched by this lane. The declaration is
+therefore withdrawn as of that row and **WR-8 re-declares CLOSED at this lane's repair
+commit `1b7c1eac` plus this row**, with the two chair rulings below discharged and
+re-verified. (The lane's gates ran across a live-tree drift from `5ddd0d08` to
+`358a8956` — two Lane V4D branding commits landing underneath it — and were re-run at
+the newer HEAD before the commit; V4D touched no domain module and no pin file, proven
+by `git diff --name-only`.)
+
+- **FINDING 1 — THE VOCABULARY LEAK (the blocking one).** The graph plane and the
+  relationship plane do not share a type vocabulary. `ensureRegionalGraph` mints
+  `relationshipType: 'channel_inferred'` for every inferred channel
+  (`src/domain/region/graph.js:310`) and `normalizeEdge` falls back to `'other'` for an
+  edge that declares no type; neither is a `RELATIONSHIP_DEFAULTS` key, and
+  `normalizeRelationshipType` passes an unknown token straight through. Pre-cure an
+  absent record resolved to `neutral`; post-cure the edge SPOKE and the raw graph token
+  was PERSISTED as the relationship's type while every axis fell back to neutral's
+  numbers — the label and the numbers disagreed, and the token reached DM-facing
+  headlines ("channel inferred may become rival"). **Re-measured independently by this
+  lane**, not taken on report: at `5ddd0d08` the same-seed whole-pipeline harness
+  (3 rule sets × 2 seeds × 24 ticks, clock keys stripped) moved in **2 of 6 cells**
+  against base `19dd07e2` — `wz3-alpha war+peace+coalition+doctrine`
+  (`b5155b40…` → `6d9f2f7e…`) and `wz3-alpha war-only` (`dae87bec…` → `fb8dbc2e…`).
+  A provenance probe located the exact leak: on tick 5 the drive mints two inferred
+  edges and materializes their records, and base persisted **`edge.far.iron` /
+  `edge.far.weak` = `neutral`** where the lane persisted **`channel_inferred`**.
+  Violates THE PROMISE, the LEGIBILITY/GAME-GRADE law, and the lane's own STOP
+  condition. ⚠ WZ-5's fixtures all HAND-AUTHOR their edges, so not one of them ever
+  minted an inferred channel: **its byte-identity claim was true of the paths it walked
+  and VACUOUS for the path that moved.**
+- **FINDING 2 — STRICT WAS RED AT HEAD.** `npm run typecheck:domain:strict` on a clean
+  tree at `e36588c7`: `razingExecution.js` 1 (baseline 0), `relationshipEvolution.js` 6
+  (baseline 5), `warPeaceRefusal.js` 12 (baseline 11) — all the same new **TS2345**, an
+  edge typed `unknown` handed into the newly-typed fourth parameter, at
+  `razingExecution.js(932,13)`, `relationshipEvolution.js(366,11)`,
+  `warPeaceRefusal.js(198,13)`. The lane ALSO tightened the ceiling 1317 → 1313, **a
+  number its own code did not meet** (actual total 1316).
+
+**CR-WZ5-A — VOCABULARY CLOSURE AT THE WRITER BOUNDARY (chair ruling, vetoable).** The
+edge may speak only in the relationship plane's OWN vocabulary: `applyRelationshipPatch`
+resolves the edge's declared type and passes the edge to `ensureRelationshipState` ONLY
+when that type has a `RELATIONSHIP_DEFAULTS` row, otherwise an empty edge — which is
+exactly the pre-cure baseline, so the whole change becomes byte-identical again on a
+world that mints inferred channels. *Rationale: a cure that lets one plane's token be
+persisted as another plane's type has moved the lie rather than removed it, and
+membership-in-the-vocabulary is the only form of the rule that also closes the tokens
+nobody has minted yet.* **REJECTED ALTERNATIVE:** aliasing `channel_inferred → neutral`
+inside `normalizeRelationshipType` — that imports a graph-plane token into the
+relationship plane's alias table and buys cross-plane coupling to fix a boundary bug.
+
+**CR-WZ5-B — THE STRICT FIX LANDS AT THE CALLERS (chair ruling, vetoable).** The three
+TS2345s are repaired by typing the CALLERS' edge values structurally, never by widening
+the writer's contract back toward `unknown`/`any`. *Rationale: the writer's typed fourth
+parameter is the cure's load-bearing surface, and re-opening it to satisfy a caller
+would delete the type safety the lane was built to gain; a `@param {any}` restating an
+inline cast is a fresh hole the domain any-cast ratchet is right to refuse.*
+
+**WHAT THIS LANE CHANGED.** (i) `applyRelationshipPatch` derives `edgeType` and hands
+`typedEdge` (the edge, or `{}` when out of vocabulary) to `ensureRelationshipState`.
+(ii) `razingPairRelationship`'s returned `edge` is typed `Record<string, unknown>` and
+NARROWED with the module's existing `recordOf` (same object for every edge the loop
+reaches). (iii) `warPeaceRefusal`'s ally rows narrow the raw graph row with the module's
+existing `asObject` at the one place it enters the function. (iv) The
+`relationshipPatchEdgeCarry` walker's source anchor is re-pointed from the old
+`ensureRelationshipState(edge || {}` spelling to the new one AND to the closure itself,
+so deleting the closure reds instead of passing silently. (v) Four new pins inside the
+existing `relationshipPatchGhostWrite.test.js`.
+
+- **J-WZ5R-1 (vetoable) — THE GUARD READS THE SAME FIELD CHAIN ITS CONSUMER READS.**
+  CR-WZ5-A's executed spelling inspected `edge.relationshipType` alone;
+  `normalizeRelationshipEdge` resolves `relationshipType || type || relation`. A guard
+  measuring a different field than the code it guards is the recorded vacuity class, so
+  the implemented guard reads all three. It is a STRICT SUPERSET of the ruled cure —
+  identical on every edge the ruled version handles, and closed on the two spellings the
+  ruled version would still have leaked. Byte-identity is unaffected (proven below).
+- **J-WZ5R-2 (vetoable) — THE PIPELINE PIN'S TOTALITY IS SCOPED TO THE DRIVE, AND THE
+  BRIEF'S LITERAL WORDING COULD NOT BE HONOURED.** The brief asked the pin to assert
+  that EVERY `relationshipStates[*].relationshipType` is a `RELATIONSHIP_DEFAULTS` key.
+  **Measurement says that is FALSE AT BASE and must stay false**: from tick 8 of the same
+  drive, `ensureAllRelationshipStates` materializes a posture row for every edge in the
+  tick's OPENING graph — including an inferred one — and that row legitimately carries
+  `channel_inferred` at base `19dd07e2` exactly as it does after the cure. It is a
+  DIFFERENT population from the writer's, it is base-identical, and
+  `tests/domain/tradeWar.test.js:484` already pins it
+  (`expect(pairStates['edge.inc.chal']?.relationshipType).toBe('channel_inferred')`).
+  Making the brief's sentence true would require changing the MATERIALIZER, which would
+  move the same-seed hashes and break that pin — i.e. it would trip this lane's own STOP
+  condition. The pin therefore drives six ticks (through the mint at tick 5), asserts
+  the totality over that whole drive where it IS true, and records the bound and its
+  reason in the test. Reported rather than improvised.
+
+**EVIDENCE (every number executed this lane; base = a temp worktree at `19dd07e2`).**
+**SAME-SEED, THE STOP CONDITION:** all **6 of 6 cells BYTE-IDENTICAL to base** after the
+cure — `b5155b40…` / `ce7776c4…` / `dae87bec…` / `27cc1d3d…` / `9238ac10…` / `710cfe39…` —
+on a fixture PROVEN to mint `channel_inferred` (the probe names the tick and the two
+edge ids). Base run TWICE under THE CLOCK LAW, `cmp`-identical.
+⚠ **THE `25be40a6…` COMBINED HASH QUOTED IN THE WZ-5 ROW COULD NOT BE REPRODUCED** — it
+matches none of the concatenation forms of this harness's six cells at base
+(`de251c75…` concat-of-hashes, `916ae6ee…` newline-joined, `3edf8c0f…` whole-output). The
+per-cell equalities above are the stronger claim and are what this lane gates on; the
+combined constant should be treated as unverified.
+**STRICT, WITH THE ARITHMETIC:** `[domain-strict] ✓ no strict-type regressions (1313
+errors, ceiling 1313)`. At `5ddd0d08` the checker named exactly three files at +1 each
+and no others, so the total was **1316 → 1313** — the three TS2345s were the entire
+delta and **the committed ceiling of 1313 is now honestly met, so no re-baselining was
+needed.** Per-file: `razingExecution` 1 → 0, `relationshipEvolution` 6 → 5,
+`warPeaceRefusal` 12 → 11; zero regressions anywhere else.
+**MUTANTS, all three red then restored `cmp`-clean in a SEPARATE worktree (the live tree
+was never mutated):** M1 reverting `typedEdge` → `edge` kills **5 of the 13 pins** and the
+pipeline pin fails with the leak itself
+(`edge.far.weak=channel_inferred, edge.far.iron=channel_inferred` at tick 5), and reds
+the walker anchor; M2 re-opening the empty-edge baseline reds **7 tests across 3 suites**
+(WZ-5's expected 6, plus this lane's new membership pin); M3 dropping the razing caller's
+fourth argument reds the census NAMING `src/domain/worldPulse/razingExecution.js:906`.
+**⚠ THE `warDeployment.js` 17-vs-16 ANY-CAST RED IS PRE-EXISTING AND PROVEN SO** —
+`git diff` against HEAD for that file is EMPTY; it is inherited, not this lane's.
