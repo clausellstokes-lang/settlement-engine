@@ -66,7 +66,18 @@
 import { clamp01 } from '../../kernel/math.js';
 import { POPULATION_RANGES, TIER_ORDER, PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { NAMING_DATA } from '../../data/namingData.js';
-import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, activeSpatialDigest } from '../spatial/distanceRead.js';
+import { activeSpatialDigest } from '../spatial/distanceRead.js';
+// THE STEADING PEN'S LEDGER HALF (chair ruling CR-WR10-I). The ledger reads, the
+// conveyance row-move and the ONE fold live in a dependency-free leaf so the WR-10
+// market stage can mount in this file without closing an import cycle: the measured
+// path sovereigntyIntent → peaceReasons → peaceTerms → sovereigntyTransfer ran back
+// HERE, for the single symbol `conveySteading`, and that was the only edge from the
+// worldPulse cycle family into this kernel. The RECORD is still authored here
+// (`mintSteading`); what moved is where the ledger is written. All three names are
+// re-exported below, so no consumer's import path changed.
+import {
+  satellitesLedgerOf, satellitesOf, conveySteading, foldSatellitesLedger,
+} from './satellitesLedger.js';
 import { withActiveCondition, withoutActiveCondition } from '../activeConditions.js';
 import { stablePart } from './stablePart.js';
 import { advanceDemographics } from './demographicsKernel.js';
@@ -111,40 +122,12 @@ import {
 /** @typedef {{ saveId?: (string|number), settlement?: LcSettlement }} LcUpdate */
 /** @typedef {{ get?: (id: string, kind: string) => ({ score?: number } | undefined) }} LcPressureIdx */
 /** @typedef {{ fork?: (k: string) => { random: () => number } }} LcRng */
-/**
- * One satellite steading record (SUB-SETTLEMENT — never a digest member, never a
- * mover-loop member, no npc roster).
- * @typedef {Object} SatelliteRecord
- * @property {string} id            deterministic (`steading.<parent>.<tick>`)
- * @property {string} name          seeded from NAMING_DATA on the satellite fork
- * @property {string} parentId
- * @property {'thorp'|'hamlet'} tier the in-orbit ladder (village ⇒ CHARTER-PENDING)
- * @property {number} population    integer; every head debited from the parent
- * @property {number} foundedTick
- * @property {'growth'|'resource_strike'|'resettlement'|'forced'} provenance
- * @property {string} [resourceKey] the struck vein a mining-camp exists for
- * @property {{ cell: number, landform: string, cost: number, source: 'gate_terrain'|'cost_band' }} [site]
- *   W-E: the sampled ground. Present ONLY when a frozen spatial digest was active
- *   at the founding; the cell is a READ key into the frozen rasters and is never
- *   written back to them (a satellite is never a digest member).
- * @property {string[]} [resources] W-E: starting resources derived from `site`
- *   through the existing RESOURCE_DATA vocabulary (closed; absent when aspatial)
- * @property {number} orbit         cosmetic orbit slot (deterministic, unique per parent)
- * @property {{ fromId: string, tick: number }} [conveyed] WR-10: SALE PROVENANCE.
- *   Present ONLY on a steading that changed hands through a sovereignty transfer;
- *   drop-when-absent, so every steading that was never sold is byte-identical to
- *   pre-WR-10. A satellite has no relationship object, no seat and no legitimacy
- *   score, so "the sold settlement has an opinion" is structurally empty for it until
- *   graduation — this field is how the grievance survives the gap: at the charter it
- *   folds into `parentRef` and matures through the WR-3 seam.
- * @property {number} inflow        cumulative in-migration tally (people moved in)
- * @property {number} backing01     last computed backing read (display/receipt)
- * @property {number} [starvingSince] tick stamp — the decline dwell (catch-up-safe)
- * @property {boolean} [charterPending] village scale reached; awaits the V2 charter
- * @property {number} [charterPendingSince]
- * @property {string[]} history     bounded chronicle lines (slice cap)
- */
-/** @typedef {{ seedAcc?: number, lastSeedTick?: number, steadings: Record<string, SatelliteRecord> }} ParentSatellites */
+/** THE STEADING RECORD SHAPES live with the ledger that holds them (CR-WR10-I).
+ *  Re-declared here as aliases so `import('./settlementLifecycleKernel.js').SatelliteRecord`
+ *  — the spelling `realmVerbExecution.js` and `lineageMemberBirth.js` both use — keeps
+ *  resolving: THE TYPE SURFACE IS PUBLIC SURFACE, and an extraction may not move it. */
+/** @typedef {import('./satellitesLedger.js').SatelliteRecord} SatelliteRecord */
+/** @typedef {import('./satellitesLedger.js').ParentSatellites} ParentSatellites */
 
 /** @param {unknown} v @param {number} fallback @returns {number} */
 function num(v, fallback) {
@@ -272,25 +255,13 @@ const T = SETTLEMENT_LIFECYCLE_TUNING;
 // The fixed id of a parent's tributary lift condition (idempotent upsert).
 export const STEADING_TRIBUTARY_ARCHETYPE = 'steading_tributary';
 
-// ── Ledger reads ───────────────────────────────────────────────────────────────
-/** The satellites ledger (`spatialLedgers.satellites`), or null when absent.
- *  @param {Record<string, unknown>|null|undefined} worldState
- *  @returns {Record<string, ParentSatellites>|null} */
-export function satellitesLedgerOf(worldState) {
-  const led = getSpatialLedger(/** @type {Record<string, unknown>} */ (worldState || {}), 'satellites');
-  return led && typeof led === 'object' && !Array.isArray(led)
-    ? /** @type {Record<string, ParentSatellites>} */ (led)
-    : null;
-}
-
-/** Every satellite of one parent, codepoint-ordered by id (deterministic iteration).
- *  @param {Record<string, ParentSatellites>|null} ledger @param {string} parentId
- *  @returns {SatelliteRecord[]} */
-export function satellitesOf(ledger, parentId) {
-  const entry = ledger ? ledger[parentId] : null;
-  const steadings = entry && entry.steadings && typeof entry.steadings === 'object' ? entry.steadings : {};
-  return Object.keys(steadings).sort(codepoint).map((k) => steadings[k]).filter(Boolean);
-}
+// ── Ledger reads (re-exported from the pen's ledger leaf — CR-WR10-I) ────────
+// `satellitesLedgerOf` / `satellitesOf` / `conveySteading` moved to satellitesLedger.js
+// and are re-exported HERE under their historic names, so every consumer that has ever
+// imported them from this path — realmVerbExecution.js, sovereigntyAssets.js and five
+// test batteries — keeps its import site. The extraction's reason is the measured
+// import cycle recorded in that leaf's header.
+export { satellitesLedgerOf, satellitesOf, conveySteading };
 
 /** The parent's bounded tributary read: satellite population share, saturating at
  *  TRIBUTARY_POP_SHARE_CAP (the boundedness pin derives from the live tuning).
@@ -482,63 +453,6 @@ export function mintSteading({ parent, parentId, sats, tick, draw, nameOverride 
     ],
   };
   return { record, debit };
-}
-
-// ── THE CONVEYANCE ROW-MOVE (WR-10 amendment S — the steading pen stays here) ──
-/**
- * Move ONE steading from its seller's cell to its buyer's, inside the existing
- * satellites ledger. It lives beside `mintSteading` for the same reason the mint is
- * shared: every fact about how a steading row is shaped — its orbit rule, its parent
- * key, its cell's drop-when-empty law — is authored in this file, and a second
- * satellites writer elsewhere would be free to disagree with all three. WW-A's
- * source-scan pin freezes the `setSpatialLedger(…, 'satellites', …)` call-site set to
- * its current two files precisely so that a future conveyance cannot quietly become a
- * third; that is why this helper PERSISTS rather than returning a bare ledger.
- *
- * ORBIT IS RE-DERIVED AT THE DESTINATION, and that is the whole reason a row-move is
- * not a key-move. `orbit` is unique per PARENT by mint-time search, and B3's
- * convergence scan folds pairs whose orbits differ by at most one — so a naive move
- * that carried the seller's slot across would collide with a steading the buyer
- * already holds and then mis-drive adjacency, merging two settlements that were never
- * neighbours. The search here is `mintSteading`'s, verbatim.
- *
- * The seller's cell is dropped only when it holds NOTHING — no steadings AND no
- * seeding integrator state. B5's fold keeps a cell alive for a live cooldown or a warm
- * accumulator, and deleting it here would hand the seller a free re-founding as a side
- * effect of a sale.
- *
- * Never written: the steading's population (people do not move because a deed did),
- * its founding tick, its history, or anything at all outside this ledger.
- *
- * @param {Record<string, unknown>} worldState
- * @param {string} assetId the steading's record id
- * @param {string} fromParentId @param {string} toParentId @param {number} tick
- * @returns {{ worldState: Record<string, unknown>, record: SatelliteRecord } | null}
- *   null when the row is not where the caller said it was, or the parents are the same.
- */
-export function conveySteading(worldState, assetId, fromParentId, toParentId, tick) {
-  const ledger = satellitesLedgerOf(worldState);
-  const source = ledger ? ledger[fromParentId] : null;
-  const prior = source?.steadings?.[assetId];
-  if (!ledger || !prior || !toParentId || fromParentId === toParentId) return null;
-  const usedOrbits = new Set(satellitesOf(ledger, toParentId).map((r) => num(r.orbit, 0)));
-  let orbit = 0;
-  while (usedOrbits.has(orbit)) orbit += 1;
-  const record = /** @type {SatelliteRecord} */ ({
-    ...prior, parentId: toParentId, orbit, conveyed: { fromId: fromParentId, tick },
-  });
-  const sellerSteadings = { ...(source.steadings || {}) };
-  delete sellerSteadings[assetId];
-  const next = { ...ledger, [toParentId]: {
-    ...(ledger[toParentId] || { steadings: {} }),
-    steadings: { ...(ledger[toParentId]?.steadings || {}), [assetId]: record },
-  } };
-  // Drop the seller's cell only when it holds NOTHING (B5's own law: a live cooldown
-  // or a warm accumulator keeps a cell alive even with no steadings left).
-  if (Object.keys(sellerSteadings).length || source.seedAcc !== undefined || source.lastSeedTick !== undefined) {
-    next[fromParentId] = { ...source, steadings: sellerSteadings };
-  } else delete next[fromParentId];
-  return { worldState: setSpatialLedger(worldState, 'satellites', next), record };
 }
 
 // ── News (house voice, AGGREGATE) ──────────────────────────────────────────────
@@ -1183,9 +1097,7 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
   // held still, or applyPulseMover would drop its settlementUpdates on the floor.
   let changed = cloned || demo.changed;
   if (ledgerChanged) {
-    nextWorldState = Object.keys(nextLedger).length
-      ? setSpatialLedger(nextWorldState, 'satellites', nextLedger)
-      : dropSpatialLedger(nextWorldState, 'satellites');
+    nextWorldState = foldSatellitesLedger(nextWorldState, nextLedger);
     changed = true;
   }
 

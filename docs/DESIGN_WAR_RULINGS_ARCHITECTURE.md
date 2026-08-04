@@ -307,8 +307,21 @@ sovereignty transfers (WR-10 wiring)        — NO new top-level key, NO new led
   // sovereignty is stream:false and transfers once, not per installment):
   //   • satellite asset: the row moves between parents INSIDE the existing
   //     spatialLedgers.satellites ledger (orbit re-derived at the destination;
-  //     the row-move helper lives with mintSteading in
-  //     settlementLifecycleKernel.js so the steading pen stays in one file);
+  //     the row-move helper lives in satellitesLedger.js, the steading pen's
+  //     LEDGER half — AMENDED 2026-08-04 under chair ruling CR-WR10-I, which
+  //     moved satellitesLedgerOf/satellitesOf/conveySteading and a new single
+  //     fold out of settlementLifecycleKernel.js. The clause first said the
+  //     helper lived WITH mintSteading; the wiring wave measured why it could
+  //     not: sovereigntyIntent → peaceReasons → peaceTerms →
+  //     sovereigntyTransfer → settlementLifecycleKernel was the ONLY edge from
+  //     the worldPulse cycle family back into that kernel, and it existed for
+  //     `conveySteading` alone, so mounting the market stage in the kernel
+  //     would have pulled the lifecycle and demographic layer into a 35-module
+  //     cycle — the dist chunk-cycle TDZ class. The RECORD's shape is still
+  //     mintSteading's, in the kernel; only the LEDGER moved, and the
+  //     shrink-only satellites-writer census RATCHETED DOWN from two writing
+  //     authorities to one because both former call sites now route through
+  //     the leaf's single fold);
   //   • vassal asset: worldState.occupations[assetId].occupierId rewrites IN
   //     PLACE with the `vassalized` rung PRESERVED — deliberately NOT
   //     createOccupationRecord, whose overwrite path resets to `contested`;

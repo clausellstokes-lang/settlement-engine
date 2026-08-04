@@ -51,7 +51,13 @@
  */
 import { clamp01 } from '../../kernel/math.js';
 import { readSovereigntyAsset, sovereigntyTradeActive } from './sovereigntyAssets.js';
-import { conveySteading } from './settlementLifecycleKernel.js';
+// THE ROW-MOVE, REACHED AT THE LEDGER LEAF (chair ruling CR-WR10-I). This import used
+// to name settlementLifecycleKernel.js, and it was the ONLY edge from this module's
+// 35-file cycle family back into that kernel — measured, not assumed. Left there, the
+// WR-10 market stage mounting inside the kernel would have pulled the whole lifecycle
+// and demographic layer into the cycle, which is the dist chunk-cycle TDZ class. The
+// helper itself is unchanged and still the steading pen's; only its file moved.
+import { conveySteading } from './satellitesLedger.js';
 import { conveyOccupationRecord } from './occupation.js';
 // THE SANCTIONED RELATIONSHIP APPLICATOR, reached DIRECTLY rather than through
 // peaceTermsOverlay.js — which owns the PEACE ENGINE's five overlay writes and would
@@ -236,7 +242,7 @@ export function executeSovereigntyTransfer({
   if (asset.kind === 'satellite') {
     // ── 2a. THE SATELLITE ARM: a row-move inside the existing ledger, orbit
     // re-derived at the destination. The steading pen owns the move (see
-    // settlementLifecycleKernel.conveySteading) so this file never becomes a second
+    // satellitesLedger.conveySteading) so this file never becomes a second
     // satellites writer. A steading has no relationship object, no seat and no
     // legitimacy score, so its grievance is the `conveyed` provenance the move stamps:
     // it folds into `parentRef` at graduation and matures through the WR-3 seam.

@@ -48,7 +48,8 @@ import {
 import { advanceCredibility } from './informationStatecraft.js';
 import { forceCalamityStrike, buildExodusOutcome, applyExodusToUpdates } from './calamityKernel.js';
 import { collectRealizedEmigrationEvents, dispatchMigrations } from './migrationKernel.js';
-import { settlementLifecycleActive, forceFoundSteading, satellitesOf } from './settlementLifecycleKernel.js';
+import { settlementLifecycleActive, forceFoundSteading } from './settlementLifecycleKernel.js';
+import { satellitesOf, foldSatellitesLedger } from './satellitesLedger.js';
 import { forceAbandonSettlement, forceResettleSettlement } from './settlementLifecycleFirstClass.js';
 import { calamityEnabled } from '../spatial/calamity.js';
 import { realmVerbFor, realmVetoProse } from '../events/realmManifest.js';
@@ -757,7 +758,13 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
         steadings: { ...asObject(parentCell.steadings), [String(minted.record.id)]: minted.record },
         lastSeedTick: nowTick,
       };
-      const ws = setSpatialLedger(state, 'satellites', { ...satLedger, [parentId]: nextCell });
+      // THE ONE SATELLITES WRITE (chair ruling CR-WR10-I). This line used to spell the
+      // fold itself, which made this verb a SECOND authority on the ledger the shrink-only
+      // writer census exists to keep singular. Routing it through the pen's own fold
+      // ratchets that census DOWN to one member, and the bytes are identical: the ledger
+      // it hands over always carries the cell just minted, so the drop-when-empty branch
+      // inside cannot fire here.
+      const ws = foldSatellitesLedger(state, { ...satLedger, [parentId]: nextCell });
       // The parent debit through the kernel's shiftPopulation contract:
       // population decrement + a receipted populationHistory entry.
       const parent = asObject(entry.settlement);

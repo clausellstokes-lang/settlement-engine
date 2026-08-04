@@ -30,7 +30,11 @@
  * PURE READ: no mutation, no rng, no wall-clock. It answers questions about a
  * worldState and writes nothing to it.
  */
-import { satellitesLedgerOf, satellitesOf } from './settlementLifecycleKernel.js';
+// THE LEDGER LEAF, NOT THE KERNEL (chair ruling CR-WR10-I). These two reads used to be
+// imported from settlementLifecycleKernel.js; reaching the kernel from here would put
+// the market's eligibility read on the far side of an import cycle from its own host,
+// because the WR-10 stage mounts INSIDE that kernel. The leaf is dependency-free.
+import { satellitesLedgerOf, satellitesOf } from './satellitesLedger.js';
 import { ENVOY_REQUIRED_RULES } from './envoyErrandVocabulary.js';
 
 /**
