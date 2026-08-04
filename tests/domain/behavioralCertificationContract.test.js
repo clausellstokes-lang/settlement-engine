@@ -15,6 +15,16 @@ import {
   validateHumanChronicleReview,
   validateWarConvergenceObservation,
 } from '../../src/domain/certification/behavioralContract.js';
+// Imported from the contract module directly rather than through
+// behavioralContract's re-export block: that file sits at 795 effective lines
+// against an 800 ceiling and is NOT in scripts/.size-baseline.json, so three
+// convenience re-exports would make it a new offender the size walker demands be
+// decomposed. The vocabulary's own module is its home anyway.
+import {
+  WAR_CONVERGENCE_TUNING,
+  WAR_DURATION_BANDS,
+  warDurationBandFor,
+} from '../../src/domain/certification/warConvergenceContract.js';
 
 const SOURCE_COMMIT = 'a'.repeat(40);
 const CRITERIA = {
@@ -120,6 +130,12 @@ function behavioralReceipt(years, settlements, seed, { controls = false } = {}) 
       schemaVersion: WAR_CONVERGENCE_OBSERVATION_VERSION,
       kind: 'war_convergence_observation',
       endingsMix: Object.fromEntries(WAR_ENDING_KEYS.map((key) => [key, 1])),
+      // WR-9's duration envelope: a TAIL and no infinity. Every resolved band is
+      // exercised (a flat one-each histogram would leave `generational` unproven),
+      // the short share clears its floor at 8/12, the generational share sits just
+      // under its 0.1 ceiling at 1/12, and `unresolved` is zero because a war still
+      // burning at the horizon is the no-infinity failure, not a long war.
+      warDurationHistogram: { short: 8, long: 3, generational: 1, unresolved: 0 },
       terminationDecidingTermHistogram: Object.fromEntries(
         WAR_TERMINATION_DECIDING_TERM_KEYS.map((key) => [key, 1]),
       ),
@@ -491,5 +507,186 @@ describe('human Chronicle review evidence', () => {
     });
     expect(result.ok).toBe(false);
     expect(result.errors.join(' ')).toMatch(/blockingNotes/);
+  });
+});
+
+/**
+ * WR-9's two envelopes, each driven by MUTANT NEGATIVE CONTROLS (§10.5: "every
+ * envelope carries a mutant negative control"). A band asserted only on a
+ * passing fixture is a number nobody has ever seen fail; each case below moves
+ * exactly ONE property out of its envelope and requires that specific check —
+ * and no neighbouring check — to red.
+ */
+describe('WR-9 convergence envelopes', () => {
+  /** Set the same duration histogram on every receipt and return the graded check. */
+  function gradeDurations(histogram) {
+    const input = passingInput();
+    for (const receipt of input.receipts) {
+      receipt.warConvergence.warDurationHistogram = histogram;
+    }
+    const result = evaluateBehavioralCertification(input);
+    return result.checks.find((check) => check.id === 'war_convergence.duration_envelope');
+  }
+
+  /** Set the same endings mix on every receipt and return the graded check. */
+  function gradeEndings(mix) {
+    const input = passingInput();
+    for (const receipt of input.receipts) {
+      receipt.warConvergence.endingsMix = {
+        ...Object.fromEntries(WAR_ENDING_KEYS.map((key) => [key, 0])),
+        ...mix,
+      };
+    }
+    const result = evaluateBehavioralCertification(input);
+    return result.checks.find((check) => check.id === 'war_convergence.endings_envelope');
+  }
+
+  it('keeps the duration vocabulary closed, and unresolved is a cell not a length', () => {
+    expect([...WAR_DURATION_BANDS]).toEqual(['short', 'long', 'generational', 'unresolved']);
+    expect(Object.keys(createEmptyWarConvergenceObservation().warDurationHistogram).sort())
+      .toEqual([...WAR_DURATION_BANDS].sort());
+    expect(WAR_CONVERGENCE_OBSERVATION_VERSION).toBe(2);
+  });
+
+  it('bands a duration at each boundary of the declared table', () => {
+    const shortMax = WAR_CONVERGENCE_TUNING.DURATION_SHORT_MAX_YEARS;
+    const genMin = WAR_CONVERGENCE_TUNING.DURATION_GENERATIONAL_MIN_YEARS;
+    expect(warDurationBandFor(0)).toBe('short');
+    expect(warDurationBandFor(shortMax - 0.01)).toBe('short');
+    expect(warDurationBandFor(shortMax)).toBe('long');
+    expect(warDurationBandFor(genMin - 0.01)).toBe('long');
+    expect(warDurationBandFor(genMin)).toBe('generational');
+    // Total on garbage rather than throwing: a census that lost a tick must
+    // still produce an addressable histogram; non-vacuity is a separate wall.
+    expect(warDurationBandFor(Number.NaN)).toBe('short');
+    expect(warDurationBandFor(undefined)).toBe('short');
+    // `unresolved` is a horizon fact, never a length — the bander cannot mint it.
+    const banded = [0, 1, 10, 100, 1e6].map((y) => warDurationBandFor(y));
+    expect(banded.includes('unresolved')).toBe(false);
+  });
+
+  it('passes the duration envelope on the tail-shaped fixture', () => {
+    const check = gradeDurations({ short: 8, long: 3, generational: 1, unresolved: 0 });
+    expect(check.passed).toBe(true);
+    expect(check.observed.durationResolved).toBe(24);
+    expect(check.threshold.ratified).toBe(false);
+  });
+
+  it('MUTANT — a single war alive at the horizon reds the no-infinity criterion', () => {
+    const check = gradeDurations({ short: 8, long: 3, generational: 1, unresolved: 1 });
+    expect(check.passed).toBe(false);
+    expect(check.observed.unresolvedAtHorizon).toBe(2);
+    expect(check.threshold.maxUnresolvedAtHorizon).toBe(0);
+  });
+
+  it('MUTANT — a body of long wars with no short tail reds the tail floor', () => {
+    const check = gradeDurations({ short: 1, long: 11, generational: 0, unresolved: 0 });
+    expect(check.passed).toBe(false);
+    expect(check.observed.shortShare).toBeLessThan(
+      WAR_CONVERGENCE_TUNING.DURATION_SHORT_MIN_SHARE,
+    );
+  });
+
+  it('MUTANT — generational wars as a body rather than a tail reds the ceiling', () => {
+    const check = gradeDurations({ short: 8, long: 0, generational: 4, unresolved: 0 });
+    expect(check.passed).toBe(false);
+    expect(check.observed.generationalShare).toBeGreaterThan(
+      WAR_CONVERGENCE_TUNING.DURATION_GENERATIONAL_MAX_SHARE,
+    );
+  });
+
+  it('MUTANT — a corpus that measured no duration at all reds instead of passing empty', () => {
+    const check = gradeDurations({ short: 0, long: 0, generational: 0, unresolved: 0 });
+    expect(check.passed).toBe(false);
+    expect(check.observed.durationResolved).toBe(0);
+  });
+
+  it('passes the endings envelope when every road is live and none dominates', () => {
+    const check = gradeEndings(Object.fromEntries(WAR_ENDING_KEYS.map((key) => [key, 1])));
+    expect(check.passed).toBe(true);
+    expect(check.observed.distinctEndingKeys).toBe(8);
+    expect(check.observed.vengeanceShareOfSacks).toBe(0.5);
+  });
+
+  it('MUTANT — one path carrying nearly all endings reds the dominance ceiling', () => {
+    const check = gradeEndings({
+      ...Object.fromEntries(WAR_ENDING_KEYS.map((key) => [key, 1])),
+      terms: 20,
+    });
+    expect(check.passed).toBe(false);
+    expect(check.observed.dominantShare).toBeGreaterThan(
+      WAR_CONVERGENCE_TUNING.ENDING_DOMINANCE_MAX_SHARE,
+    );
+    // The mutant must be SPECIFIC: distinctness is still satisfied here, so this
+    // red is the dominance ceiling and nothing else.
+    expect(check.observed.distinctEndingKeys).toBe(8);
+  });
+
+  it('MUTANT — too few reachable endings reds even when no single path dominates', () => {
+    const check = gradeEndings({ terms: 2, exhaustion: 2, conquest: 2 });
+    expect(check.passed).toBe(false);
+    expect(check.observed.distinctEndingKeys).toBe(3);
+    expect(check.observed.dominantShare).toBeLessThanOrEqual(
+      WAR_CONVERGENCE_TUNING.ENDING_DOMINANCE_MAX_SHARE,
+    );
+  });
+
+  it('MUTANT — a licence economy collapsed onto one sack road reds, both directions', () => {
+    const initiationOnly = gradeEndings({
+      ...Object.fromEntries(WAR_ENDING_KEYS.map((key) => [key, 1])),
+      punitive_sack_vengeance: 0,
+    });
+    expect(initiationOnly.passed).toBe(false);
+    expect(initiationOnly.observed.vengeanceShareOfSacks).toBe(0);
+
+    const vengeanceOnly = gradeEndings({
+      ...Object.fromEntries(WAR_ENDING_KEYS.map((key) => [key, 1])),
+      punitive_sack_initiation: 0,
+    });
+    expect(vengeanceOnly.passed).toBe(false);
+    expect(vengeanceOnly.observed.vengeanceShareOfSacks).toBe(1);
+  });
+
+  it('does not read a vacuous sack ratio as a healthy one', () => {
+    // No burnings at all: the ratio has nothing to grade, so the sack band must
+    // abstain and let the other cells decide. Six keys keeps distinctness met.
+    const check = gradeEndings({
+      terms: 2, exhaustion: 2, conquest: 2, annihilation: 2, ruler_change: 2, fragmentation: 2,
+    });
+    expect(check.observed.sacksObserved).toBe(0);
+    expect(check.passed).toBe(true);
+  });
+
+  it('polices the duration histogram address by address, exactly as the other two', () => {
+    const missing = createEmptyWarConvergenceObservation();
+    delete missing.warDurationHistogram.generational;
+    expect(validateWarConvergenceObservation(missing).ok).toBe(false);
+    expect(validateWarConvergenceObservation(missing).errors.join(' '))
+      .toMatch(/warDurationHistogram is missing generational/);
+
+    const unknown = createEmptyWarConvergenceObservation();
+    unknown.warDurationHistogram.eternal = 1;
+    expect(validateWarConvergenceObservation(unknown).errors.join(' '))
+      .toMatch(/warDurationHistogram has unknown key eternal/);
+
+    const negative = createEmptyWarConvergenceObservation();
+    negative.warDurationHistogram.short = -1;
+    expect(validateWarConvergenceObservation(negative).errors.join(' '))
+      .toMatch(/warDurationHistogram\.short must be a non-negative integer/);
+
+    const fractional = createEmptyWarConvergenceObservation();
+    fractional.warDurationHistogram.long = 1.5;
+    expect(validateWarConvergenceObservation(fractional).errors.join(' '))
+      .toMatch(/warDurationHistogram\.long must be a non-negative integer/);
+  });
+
+  it('rejects a stale v1 observation rather than reinterpreting it', () => {
+    const stale = createEmptyWarConvergenceObservation();
+    stale.schemaVersion = 1;
+    delete stale.warDurationHistogram;
+    const validation = validateWarConvergenceObservation(stale);
+    expect(validation.ok).toBe(false);
+    expect(validation.errors.join(' ')).toMatch(/schemaVersion must be 2/);
+    expect(validation.errors.join(' ')).toMatch(/warDurationHistogram must be an object/);
   });
 });

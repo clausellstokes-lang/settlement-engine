@@ -2,16 +2,40 @@
  * WR-9's additive v5 receipt section.
  *
  * This module owns the closed spellings used by the collector and the behavioral
- * oracle. It validates address totality only; share envelopes and the six-force
- * acceptance bands belong to the later WR-9 tuning wave. Keeping that boundary
- * explicit prevents a structurally complete but unobserved section from earning
- * a behavioral claim.
+ * oracle, and — since the WR-9 build wave — the DURATION vocabulary and the
+ * declared envelope table those spellings are graded against. Keeping the
+ * address wall and the envelope wall in one module is deliberate: an envelope
+ * that could be authored against a key the totality validator does not know
+ * would be an acceptance band nobody could ever fill.
+ *
+ * ⛔ NOTHING HERE IS RATIFIED. §7 of the war-rulings architecture names "WR-9
+ * envelope shapes" as an owner-signed tuning row, and THE PROMISE binds: bands
+ * are owner-SIGNED and versioned. Every number in `WAR_CONVERGENCE_TUNING` is
+ * RAW-AUTHORED and UNSOAKED, in the same idiom as WR-7c's `RATIFICATION_TUNING`
+ * and `COMPROMISE_ROUND_TUNING`. They deliberately do NOT live in
+ * src/domain/tuning/proposedSoakBands.js, whose gate (scripts/check-tuning-bands.mjs)
+ * requires status EXACTLY 'RATIFIED' — putting them there would forge a
+ * signature this wave has no authority to give.
+ *
+ * ⛔ NO PERSISTED WORLD STATE. WR-9's lifecycle clause allows envelopes,
+ * certification rows and receipt fields ONLY. This module imports no world
+ * state, and the observation it describes lives exclusively inside the soak
+ * receipt JSON.
  */
 
 /** @typedef {Record<string, unknown>} UnknownRecord */
 
-/** The additive WR-9 observation carried by a v5 soak receipt. */
-export const WAR_CONVERGENCE_OBSERVATION_VERSION = 1;
+/**
+ * The additive WR-9 observation carried by a v5 soak receipt.
+ *
+ * v2 (the WR-9 build wave) adds `warDurationHistogram`. The bump is EXACT rather
+ * than tolerant on purpose: a v1 observation has no duration address at all, and
+ * silently accepting one would let the duration envelope grade a corpus that
+ * never measured a duration. No on-disk receipt carries a v1 observation — all
+ * eight committed case receipts are envelope v4 with no `warConvergence` key
+ * whatsoever — so the bump orphans nothing.
+ */
+export const WAR_CONVERGENCE_OBSERVATION_VERSION = 2;
 
 /**
  * Closed war-ending vocabulary from WR-9. The two punitive-sack paths stay
@@ -37,6 +61,102 @@ export const WAR_TERMINATION_DECIDING_TERM_KEYS = Object.freeze([
   'cost_to_stop',
   'momentum',
 ]);
+
+/**
+ * THE WAR-DURATION VOCABULARY (WR-9 obligation 1: "tail and no infinity").
+ *
+ * The three lengths are the amendment's own three words — "most wars short, some
+ * long, a few generational" — kept verbatim so a reader can trace each band back
+ * to the sentence that authorized it. `unresolved` is the FOURTH cell and it is
+ * not a length: it counts wars still alive when the horizon ended, which is the
+ * no-infinity criterion ("a single year-300 war reds exactly as the trillion-
+ * person settlement did"). Keeping it inside the histogram rather than beside it
+ * means the totality validator polices it for free.
+ *
+ * DENOMINATED IN 52-WEEK YEARS. WR-0c item (4) landed on 2026-08-02: current
+ * treaties persist `treatyTicksPerYear: 52`, identity-pinned to
+ * `INTERVAL_WEEKS.one_year`, and persisted legacy treaties keep their explicit
+ * twelve-tick provenance marker rather than being silently rescaled. That ruling
+ * is what unblocked these envelopes; the calendar named here is the canonical
+ * one, never the legacy cadence.
+ * @type {ReadonlyArray<string>}
+ */
+export const WAR_DURATION_BANDS = Object.freeze([
+  'short',
+  'long',
+  'generational',
+  'unresolved',
+]);
+
+/**
+ * ⛔ RAW-AUTHORED, UNSOAKED, UNRATIFIED — the WR-9 envelope table (§7 tuning row).
+ * One table per wave is the house idiom. Every number below is a first authored
+ * guess at the SHAPE the amendment describes, not a measurement: no soak has run
+ * against them, and the owner has signed none of them. They exist so the
+ * envelope is a number somebody can argue with rather than a sentence nobody can
+ * execute.
+ */
+export const WAR_CONVERGENCE_TUNING = Object.freeze({
+  /** A war shorter than this many 52-week years is `short`. */
+  DURATION_SHORT_MAX_YEARS: 3,
+  /** A war at least this many 52-week years old is `generational` (a human span). */
+  DURATION_GENERATIONAL_MIN_YEARS: 25,
+  /** The tail: `short` must carry at least this share of resolved wars. */
+  DURATION_SHORT_MIN_SHARE: 0.4,
+  /** …and `generational` at most this share — a tail, never the body. */
+  DURATION_GENERATIONAL_MAX_SHARE: 0.1,
+  /**
+   * NO INFINITY. Wars still alive at the horizon, as an absolute count. Zero is
+   * not a tuning choice — it is the amendment's own criterion — but it is
+   * carried here so the envelope reads from one table rather than a literal.
+   */
+  UNRESOLVED_AT_HORIZON_MAX: 0,
+  /**
+   * "One path carrying nearly all endings means the others are decoration"
+   * (L's own criterion): no single ending key may exceed this share.
+   */
+  ENDING_DOMINANCE_MAX_SHARE: 0.6,
+  /** …and at least this many of the eight keys must be observed at all. */
+  ENDING_MIN_DISTINCT_KEYS: 4,
+  /**
+   * R2's licence economy is graded by the initiation-vs-vengeance RATIO, not by
+   * either count alone. The band is wide because it is unmeasured; it exists to
+   * catch a degenerate economy (all initiations, or all vengeance) rather than
+   * to tune one.
+   */
+  SACK_VENGEANCE_MIN_SHARE_OF_SACKS: 0.15,
+  SACK_VENGEANCE_MAX_SHARE_OF_SACKS: 0.85,
+  /**
+   * An instrument whose unclassified closes outnumber this share of all closes
+   * is not measuring the world, it is failing to read it — and a histogram that
+   * passed under that condition would be the greenwash this wave exists to
+   * prevent.
+   */
+  UNCLASSIFIED_MAX_SHARE: 0.1,
+});
+
+/**
+ * The duration band for a war of `years` 52-week years. Total: a non-finite or
+ * negative input lands in `short` rather than throwing, because a census that
+ * lost a tick must still produce an addressable histogram — and the
+ * `war_convergence.non_vacuous` wall, not this function, is what refuses a
+ * corpus that measured nothing.
+ *
+ * `unresolved` is never returned here: it is a fact about the HORIZON, not about
+ * a length, and only the census knows whether a war was still alive when the run
+ * ended.
+ *
+ * @param {unknown} years
+ * @returns {string} one of WAR_DURATION_BANDS, excluding 'unresolved'
+ */
+export function warDurationBandFor(years) {
+  const value = Number(years);
+  if (!Number.isFinite(value) || value < WAR_CONVERGENCE_TUNING.DURATION_SHORT_MAX_YEARS) {
+    return 'short';
+  }
+  if (value >= WAR_CONVERGENCE_TUNING.DURATION_GENERATIONAL_MIN_YEARS) return 'generational';
+  return 'long';
+}
 
 /**
  * Every feature flag introduced by the compiled WR program. WR-4/5 ride earlier
@@ -85,6 +205,7 @@ export function createEmptyWarConvergenceObservation() {
     schemaVersion: WAR_CONVERGENCE_OBSERVATION_VERSION,
     kind: 'war_convergence_observation',
     endingsMix: zeroCountMap(WAR_ENDING_KEYS),
+    warDurationHistogram: zeroCountMap(WAR_DURATION_BANDS),
     terminationDecidingTermHistogram: zeroCountMap(
       WAR_TERMINATION_DECIDING_TERM_KEYS,
     ),
@@ -153,6 +274,7 @@ export function validateWarConvergenceObservation(raw) {
   };
 
   validateHistogram('endingsMix', WAR_ENDING_KEYS);
+  validateHistogram('warDurationHistogram', WAR_DURATION_BANDS);
   validateHistogram(
     'terminationDecidingTermHistogram',
     WAR_TERMINATION_DECIDING_TERM_KEYS,
@@ -220,9 +342,17 @@ const sumCounts = (counts) => Object.values(counts)
   .reduce((total, count) => total + count, 0);
 
 /**
- * Grade WR-9 instrumentation across the release corpus. Share envelopes and the
- * six force-specific acceptance bands land in WR-9 itself; this wall claims
- * instrumentation only, never tuning.
+ * Grade WR-9 instrumentation across the release corpus: the address wall, the
+ * non-vacuity wall, the flag-coverage wall, and — since the WR-9 build wave —
+ * the duration and endings ENVELOPES. The six force-specific cells live in
+ * warConvergenceForces.js and are composed beside these by the behavioral
+ * oracle, so neither module has to know the other exists.
+ *
+ * ⛔ THE ENVELOPES ARE UNRATIFIED and both will honestly FAIL at HEAD: the soak
+ * runs `full_simulation`, in which every declared WR flag is false, so a rerun
+ * today produces an all-zero mix and an all-zero duration histogram. That
+ * failure is CORRECT EVIDENCE of the sequencing state, not a defect to engineer
+ * around, and no check here may be weakened to make it reachable.
  *
  * @param {unknown[]} rawReceipts
  * @param {number} expectedEnvelopeSchemaVersion
@@ -254,6 +384,7 @@ export function evaluateWarConvergenceInstrumentation(
     }));
   const shapePassed = receipts.length > 0 && invalidCases.length === 0;
   const endingTotals = emptyTotals(WAR_ENDING_KEYS);
+  const durationTotals = emptyTotals(WAR_DURATION_BANDS);
   const decidingTermTotals = emptyTotals(WAR_TERMINATION_DECIDING_TERM_KEYS);
   /** @type {Record<string, { on: number, alive: number, silent: number, unobserved: number }>} */
   const flagTotals = Object.fromEntries(WAR_RULINGS_FLAG_KEYS.map((rule) => [
@@ -266,6 +397,9 @@ export function evaluateWarConvergenceInstrumentation(
       const observation = /** @type {UnknownRecord} */ (validation.observation);
       for (const key of WAR_ENDING_KEYS) {
         endingTotals[key] += Number(asRecord(observation.endingsMix)[key]);
+      }
+      for (const key of WAR_DURATION_BANDS) {
+        durationTotals[key] += Number(asRecord(observation.warDurationHistogram)[key]);
       }
       for (const key of WAR_TERMINATION_DECIDING_TERM_KEYS) {
         decidingTermTotals[key] += Number(
@@ -288,6 +422,49 @@ export function evaluateWarConvergenceInstrumentation(
 
   const endingsObserved = sumCounts(endingTotals);
   const decidingTermsObserved = sumCounts(decidingTermTotals);
+  // The duration envelope grades RESOLVED wars against the tail shape, and
+  // counts unresolved ones separately — a war still burning at the horizon is
+  // not a long war, it is the no-infinity failure, and averaging it into the
+  // tail would hide exactly the thing the criterion names.
+  const durationResolved = WAR_DURATION_BANDS
+    .filter((band) => band !== 'unresolved')
+    .reduce((total, band) => total + durationTotals[band], 0);
+  const shortShare = durationResolved > 0
+    ? durationTotals.short / durationResolved
+    : 0;
+  const generationalShare = durationResolved > 0
+    ? durationTotals.generational / durationResolved
+    : 0;
+  const durationEnvelopePassed = shapePassed
+    && durationResolved > 0
+    && durationTotals.unresolved <= WAR_CONVERGENCE_TUNING.UNRESOLVED_AT_HORIZON_MAX
+    && shortShare >= WAR_CONVERGENCE_TUNING.DURATION_SHORT_MIN_SHARE
+    && generationalShare <= WAR_CONVERGENCE_TUNING.DURATION_GENERATIONAL_MAX_SHARE;
+  // The endings envelope answers L's own criterion — "one path carrying nearly
+  // all endings means the others are decoration" — and, separately, whether R2's
+  // licence economy runs on both roads or has collapsed onto one.
+  const distinctEndingKeys = WAR_ENDING_KEYS
+    .filter((key) => endingTotals[key] > 0).length;
+  const dominantShare = endingsObserved > 0
+    ? Math.max(...WAR_ENDING_KEYS.map((key) => endingTotals[key])) / endingsObserved
+    : 1;
+  const sacksObserved = endingTotals.punitive_sack_initiation
+    + endingTotals.punitive_sack_vengeance;
+  const vengeanceShareOfSacks = sacksObserved > 0
+    ? endingTotals.punitive_sack_vengeance / sacksObserved
+    : 0;
+  // A world that burned nothing has no licence economy to grade, and a vacuous
+  // ratio must not be read as a healthy one: the sack band applies only where
+  // sacks were actually observed, and the non-vacuity wall is what refuses a
+  // corpus with no endings at all.
+  const sackRatioPassed = sacksObserved === 0
+    || (vengeanceShareOfSacks >= WAR_CONVERGENCE_TUNING.SACK_VENGEANCE_MIN_SHARE_OF_SACKS
+      && vengeanceShareOfSacks <= WAR_CONVERGENCE_TUNING.SACK_VENGEANCE_MAX_SHARE_OF_SACKS);
+  const endingsEnvelopePassed = shapePassed
+    && endingsObserved > 0
+    && distinctEndingKeys >= WAR_CONVERGENCE_TUNING.ENDING_MIN_DISTINCT_KEYS
+    && dominantShare <= WAR_CONVERGENCE_TUNING.ENDING_DOMINANCE_MAX_SHARE
+    && sackRatioPassed;
   const flagCoveragePassed = shapePassed && WAR_RULINGS_FLAG_KEYS.every((rule) => {
     const totals = flagTotals[rule];
     return totals.alive > 0
@@ -303,21 +480,71 @@ export function evaluateWarConvergenceInstrumentation(
         envelopeSchemaVersion: expectedEnvelopeSchemaVersion,
         observationSchemaVersion: WAR_CONVERGENCE_OBSERVATION_VERSION,
         requiredEndings: WAR_ENDING_KEYS,
+        requiredDurationBands: WAR_DURATION_BANDS,
         requiredDecidingTerms: WAR_TERMINATION_DECIDING_TERM_KEYS,
         requiredFlagRows: WAR_RULINGS_FLAG_KEYS,
       },
     },
     {
+      id: 'war_convergence.duration_envelope',
+      label: 'war durations form a tail with no infinity — mostly short, generational rare, none alive at the horizon',
+      passed: durationEnvelopePassed,
+      observed: {
+        durationTotals,
+        durationResolved,
+        shortShare,
+        generationalShare,
+        unresolvedAtHorizon: durationTotals.unresolved,
+      },
+      threshold: {
+        minResolvedWars: 1,
+        maxUnresolvedAtHorizon: WAR_CONVERGENCE_TUNING.UNRESOLVED_AT_HORIZON_MAX,
+        minShortShare: WAR_CONVERGENCE_TUNING.DURATION_SHORT_MIN_SHARE,
+        maxGenerationalShare: WAR_CONVERGENCE_TUNING.DURATION_GENERATIONAL_MAX_SHARE,
+        calendar: '52-week years (WR-0c item 4: current treaties, never the legacy twelve-tick cadence)',
+        ratified: false,
+      },
+    },
+    {
+      id: 'war_convergence.endings_envelope',
+      label: 'no single ending carries the mix, enough endings are reachable, and both sack roads stay live',
+      passed: endingsEnvelopePassed,
+      observed: {
+        endingTotals,
+        endingsObserved,
+        distinctEndingKeys,
+        dominantShare,
+        sacksObserved,
+        vengeanceShareOfSacks,
+      },
+      threshold: {
+        minDistinctEndingKeys: WAR_CONVERGENCE_TUNING.ENDING_MIN_DISTINCT_KEYS,
+        maxDominantShare: WAR_CONVERGENCE_TUNING.ENDING_DOMINANCE_MAX_SHARE,
+        minVengeanceShareOfSacks: WAR_CONVERGENCE_TUNING.SACK_VENGEANCE_MIN_SHARE_OF_SACKS,
+        maxVengeanceShareOfSacks: WAR_CONVERGENCE_TUNING.SACK_VENGEANCE_MAX_SHARE_OF_SACKS,
+        ratified: false,
+      },
+    },
+    {
       id: 'war_convergence.non_vacuous',
-      label: 'the endings mix and deciding-term histogram both contain measured war evidence',
-      passed: shapePassed && endingsObserved > 0 && decidingTermsObserved > 0,
+      label: 'the endings mix, duration histogram and deciding-term histogram all contain measured war evidence',
+      passed: shapePassed
+        && endingsObserved > 0
+        && durationResolved > 0
+        && decidingTermsObserved > 0,
       observed: {
         endingsObserved,
         endingTotals,
+        durationResolved,
+        durationTotals,
         decidingTermsObserved,
         decidingTermTotals,
       },
-      threshold: { minEndingsObserved: 1, minDecidingTermsObserved: 1 },
+      threshold: {
+        minEndingsObserved: 1,
+        minResolvedDurations: 1,
+        minDecidingTermsObserved: 1,
+      },
     },
     {
       id: 'war_convergence.flag_coverage',
