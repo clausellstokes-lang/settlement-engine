@@ -52,16 +52,22 @@
  * bug, it is the message "a new term family landed; re-read this degradation note,
  * widen the bundle, and delete the arm".
  *
- * ── THE PEACE COMPONENT, AND A DIVERGENCE REPORTED RATHER THAN RULED ─────────────
+ * ── THE PEACE COMPONENT, AND A DIVERGENCE THAT HAS NOW BEEN RULED ────────────────
  *
  * `peace` is a component here and it is NOT a TERM_CATALOG family — the cession rider
  * is the trade being carried IN an envoy term-sheet, which is why WR-10 sequences
  * after WR-7 at all. The war volume's degradation note lists "streams/stores/allyship/
- * settlements/peace"; FP-TRADE §3 Seam One lists the same set WITHOUT `peace`. The two
- * are declared twins and are not twins. This module follows its OWN volume (peace is
- * WR-10's named rider) and the divergence is reported to the validation chair rather
- * than silently resolved; if the chair rules the other way, delete the one member of
- * `SOVEREIGNTY_NON_CATALOG_COMPONENTS` below and the pin that names it will say so.
+ * settlements/peace"; FP-TRADE §3 Seam One listed the same set WITHOUT `peace`, and the
+ * two called themselves twins while not being twins. This module followed its OWN
+ * volume and reported the divergence rather than resolving it silently.
+ *
+ * RULED 2026-08-04 (chair ruling CR-WR10-B): THE WAR VOLUME IS CORRECT. `peace` stays,
+ * and FP-TRADE §3 Seam One is amended to carry it, marked as a chair reconciliation.
+ * Nothing in this module changed — the report was the right move and the answer went
+ * the way it was built. PIN 6 in `sovereigntyBundleWr10.test.js` correspondingly
+ * tightens from a recorded-divergence pin to a plain equality between the two volumes,
+ * and gains a uniqueness guard so a second degradation sentence in either volume
+ * cannot silently retarget it.
  *
  * PURE: no rng, no wall-clock, no mutation, no state. K3/K4 safe — it reaches only the
  * term vocabulary and the appraisal leaf, neither of which can return true world

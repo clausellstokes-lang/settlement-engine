@@ -175,6 +175,31 @@ BUILD ORDER; a flag lit out of order is an invalid config the WR-9 certification
 walker reds. A degraded dark-predecessor read exists only where a wave names one
 explicitly (WR-1's sunk-cost fallback); silence means the precondition is hard.
 
+**WR-10's SECOND, CROSS-PROGRAM LIT-PRECONDITION — GR-3 / TR-5 (added 2026-08-04,
+chair ruling CR-WR10-B; this is the amendment row `DESIGN_FP_COUPLINGS.md`:1875-1881
+ordered and that was never landed — the §5 degradation note reached this volume
+through the cohesion agent while the §3 dependency row did not, and WR-10's lane
+MEASURED the absence at HEAD and reported it rather than writing it itself):** WR-10's
+bundle also depends on two waves in ANOTHER program — FP-GRAMMAR's **GR-3** must mint
+the trade-rights catalog rows (exclusivity / market access / toll exemption, spelling
+CANONICAL IN GRAMMAR §4 per chair ruling R3) and FP-TRADE's **TR-5** must land their
+executors — before the bundle can stack them as consideration. It sits in this table
+rather than beside it because it gates the same thing the flags do: what WR-10 can
+actually compose when lit.
+
+IT IS THE ONE SOFT PRECONDITION THIS TABLE CARRIES BESIDES WR-1's SUNK-COST FALLBACK,
+and the reason is a real difference in kind rather than an exemption. A dark FLAG makes
+a built mechanism silent; an unbuilt TERM FAMILY makes a component **unnameable**. So
+WR-10 does not wait on GR-3/TR-5 — it DEGRADES, per the note in §5 (which states the
+degraded component list once, and is the single canonical statement of it in this
+volume), and the degradation is mechanical rather than promised: `sovereigntyBundle.js`
+derives its component set from `TERM_FAMILIES` at call time and spells no trade-rights
+literal anywhere (a comment-stripped source scan pins that in both directions), so a
+family that does not exist cannot be named and one that lands is composable the same
+day without an edit. `catalogGrewSinceWr10()` is the tripwire: the moment the catalog
+grows past WR-10's landing set the pin asserting otherwise goes RED, and that red is the
+instruction to re-read §5's note, widen the bundle, and DELETE this row.
+
 **THE SEAM RULING (binding; the largest architectural decision in this document):**
 the envoy program does NOT fork the peace engine — it replaces its TRANSPORT, never its
 MATH. `peaceTerms.js` remains the single writer for offer/acceptance/budget/appraisal/

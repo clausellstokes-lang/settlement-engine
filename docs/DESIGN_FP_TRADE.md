@@ -307,7 +307,23 @@ picture. One evaluator, two transports. CROSS-PROGRAM NOTE (report-worthy, not
 vetoable here): WR-10's bundle names trade rights (exclusivity/market access/toll
 exemption) as composable components; those terms DO NOT EXIST (survey-verified) and
 land in TR-5 — until TR-5 lands, WR-10's bundle composes streams/stores/allyship/
-settlements only. Neither program forks the other's writer.
+settlements/peace only. Neither program forks the other's writer.
+
+**[RECONCILED 2026-08-04 — chair ruling CR-WR10-B. `peace` was MISSING from the
+sentence above and PRESENT in the war volume's twin
+(`DESIGN_WAR_RULINGS_ARCHITECTURE.md` §5). Both notes called themselves twins of each
+other and were not twins, and WR-10's implementer built around the gap rather than
+resolving it — correctly, under §10.6 report-don't-rule. THE WAR VOLUME IS THE
+CORRECT ONE and this sentence is amended to match it: the peace itself (amendment S's
+cession rider, carried proactively in an envoy term-sheet) IS a bundle component, and
+it is load-bearing rather than decorative — the cession rider is the whole reason
+WR-10 sequences after WR-7 in the §9 build order. It is also the one component that
+is NOT a `TERM_CATALOG` family, which is why it survives the derivation
+`sovereigntyBundle.js` performs at call time and has to be named separately in
+`SOVEREIGNTY_NON_CATALOG_COMPONENTS`. PIN 6 of `sovereigntyBundleWr10.test.js`,
+written to record the divergence as EXACTLY `{peace}` while it stood, tightens to a
+plain equality on this date, and gains a uniqueness guard so that neither volume can
+grow a SECOND degradation sentence the pin would silently read instead.]**
 
 **SEAM RULING TWO — THE GRANARY SEAM (TR-4's architecture) [CORRECTED 2026-08-02
 (fp-audit) — re-derived against foodStockpile.js's real arithmetic; the prior

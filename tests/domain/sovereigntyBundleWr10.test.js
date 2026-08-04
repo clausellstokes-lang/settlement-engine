@@ -388,25 +388,37 @@ describe('WR-10c — TR-5 graceful degradation, pinned in both directions', () =
     expect(catalogGrewSinceWr10()).toBe(false);
   });
 
-  it('PIN 6 — the two volumes\' degradation notes diverge by EXACTLY `peace`, and by nothing else', () => {
-    // THE STRUCTURAL CURE for a class that has bitten once. The volumes call these
-    // notes twins; they are not twins. This pin records the KNOWN divergence exactly
-    // and catches any NEW one — and when the chair reconciles the two sentences it
-    // tightens to a plain equality.
+  it('PIN 6 — the two volumes\' degradation notes are now TWINS (chair ruling CR-WR10-B)', () => {
+    // TIGHTENED 2026-08-04. This pin was born recording a KNOWN divergence: the war
+    // volume's degraded list carried `peace` and FP-TRADE §3 Seam One's did not, while
+    // both sentences called themselves twins of each other. The chair ruled the WAR
+    // volume correct — the cession rider is a component, and it is why WR-10 sequences
+    // after WR-7 — and amended FP-TRADE to match. So the pin drops its
+    // known-divergence allowance and becomes what it was always meant to become: a
+    // plain equality, which reds on ANY future drift in EITHER direction.
     const flat = (rel) => readFileSync(join(ROOT, rel), 'utf8').replace(/\s+/g, ' ');
+    const DEGRADED_RE = () => /bundle composes ([a-z/ ]+?) only/g;
     const listOf = (rel) => {
       const m = /bundle composes ([a-z/ ]+?) only/.exec(flat(rel));
       return m ? m[1].replace(/\s+/g, '').split('/').filter(Boolean) : [];
     };
+    // UNIQUENESS FIRST, and it is not decoration. `exec` returns the FIRST match, so a
+    // volume that grew a SECOND degradation sentence — an amendment row restating the
+    // list, say — would silently retarget this pin onto the new one and keep saying
+    // "twins" about two sentences nobody compared. Each volume states the list ONCE.
+    const occurrences = (rel) => [...flat(rel).matchAll(DEGRADED_RE())].length;
+    expect(occurrences('docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md'), 'the war volume states it exactly once').toBe(1);
+    expect(occurrences('docs/DESIGN_FP_TRADE.md'), 'the trade volume states it exactly once').toBe(1);
+
     const war = listOf('docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md');
     const trade = listOf('docs/DESIGN_FP_TRADE.md');
     expect(war.length, 'the war volume states a degraded list').toBeGreaterThan(0);
     expect(trade.length, 'the trade volume states a degraded list').toBeGreaterThan(0);
-    expect(war).toEqual(['streams', 'stores', 'allyship', 'settlements', 'peace']);
-    expect(trade).toEqual(['streams', 'stores', 'allyship', 'settlements']);
-    expect(war.filter((x) => !trade.includes(x)), 'the ONLY divergence').toEqual(['peace']);
-    expect(trade.filter((x) => !war.includes(x)), 'and nothing runs the other way').toEqual([]);
-    // This module follows its OWN volume, so `peace` is a component here.
+    const RECONCILED = ['streams', 'stores', 'allyship', 'settlements', 'peace'];
+    expect(war).toEqual(RECONCILED);
+    expect(trade).toEqual(RECONCILED);
+    expect(war).toEqual(trade); // the plain equality the ruling bought
+    // ...and the module still follows that list: `peace` is a component here.
     expect([...SOVEREIGNTY_NON_CATALOG_COMPONENTS]).toEqual(['peace']);
     expect(bundleComponentFamilies()).toContain('peace');
   });
