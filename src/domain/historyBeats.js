@@ -31,9 +31,11 @@
  * No imports from src/lib — domain tsconfig include stays self-contained.
  */
 
-// The ONE import this reader takes, and it takes it deliberately: the splice
-// guard the spine refuses tension labels with. See `tensionName` below.
-import { nounPhrase } from './simulationSpine.js';
+// The ONE import this reader takes, and it takes it deliberately: the spine's
+// likely-future DERIVATION, whole. This file does not re-derive that answer and
+// must never start again — see `deriveLikelyFuture` below for the four
+// divergences that habit produced.
+import { likelyFutureFacts } from './simulationSpine.js';
 
 // ── The read shape ──────────────────────────────────────────────────────
 // These derivations are READERS: they never construct history, they only
@@ -370,108 +372,65 @@ function deriveUnresolvedWound(settlement) {
 }
 
 /**
- * The humanized name of a tension, read the way the generator actually writes
- * one. THIS IS THE MIRRORED RULE — `deriveLikelyFuture` in simulationSpine.js
- * reads a tension by the same three-step ladder, and the lockstep pin in
- * tests/domain/historyBeats.test.js reds if the two ever disagree about which
- * tension a settlement is bound to.
- *
- * The ladder exists because a tension arrives in three shapes and only one of
- * them is common. Generated tensions carry `.type` (a snake_case token) and
- * `.description` (a whole sentence) and NOTHING ELSE — the keys are
- * type/description/severity/factions/plotHooks. `.label` and `.name` are
- * authored-import shapes, kept for tolerance.
- *
- * The `.description` is deliberately NOT a rung here: it is a full sentence,
- * and "Tensions point toward The population changed faster than the settlement
- * could absorb.." is the splice defect the spine was rebuilt to retire.
- *
- * THE REFUSAL IS THE SPINE'S, IMPORTED. Reading `.label` bare was a second,
- * quieter way back to the same splice: the spine puts every candidate through
- * `nounPhrase`, which refuses an over-long label and refuses one carrying a
- * sentence break, and then FALLS THROUGH TO THE TYPE TOKEN. A mirror that
- * accepted the refused label named a DIFFERENT tension than the spine did —
- * the arms agreed, the tension did not — and printed the defect the guard
- * exists to stop. Both rungs now draw through the shared guard.
- *
- * REACHABILITY, stated so no one mistakes this for a live-generation repair:
- * a GENERATED tension carries `.type` + `.description` and neither `.label`
- * nor `.name`, so both refusal arms are reachable only through AUTHORED or
- * IMPORTED content (custom-content packs, hand-written fixtures, save data
- * from an external tool). That is exactly the content the guard was written
- * for, and exactly the content no generator invariant covers.
- *
- * KNOWN NON-MIRRORED EDGE: the spine reads its label through `firstText`,
- * which also flattens an ARRAY of strings; this reads a string only. Tension
- * labels are typed `string` here and no producer emits an array, so the shape
- * is out of the mirrored set rather than a silent divergence.
- *
- * @param {CurrentTension|undefined} tension
- * @returns {string|null}
+ * This beat's ONLY authored property: a standalone sentence per trajectory.
+ * The spine spells the same three trajectories as COMPLEMENTS, because its
+ * frame word ("Its likely future is") is prepended by SPINE_RUNGS while a beat
+ * stands alone. That difference in VOICE is genuine and is the only thing this
+ * file still owns about the likely future. The keys are pinned TOTAL against
+ * `LIKELY_FUTURE_ARCS`, so a trajectory added to the shared ladder cannot land
+ * here as an undefined `text`.
+ * @type {Readonly<Record<string, string>>}
  */
-function tensionName(tension) {
-  if (typeof tension === 'string') return nounPhrase(tension);
-  const labelled = nounPhrase(firstNonEmpty(tension?.label, tension?.name));
-  if (labelled) return labelled;
-  const type = firstNonEmpty(tension?.type);
-  return type ? type.replace(/_/g, ' ') : null;
-}
+export const LIKELY_FUTURE_BEAT_TEXT = Object.freeze({
+  crisis:     'A crisis is imminent if no one intervenes.',
+  test:       'The next year will test whoever holds the chair.',
+  continuity: 'Continuity, with the usual slow erosion of any settlement.',
+});
 
-/** @param {HistoryBeatSource} settlement */
+/**
+ * Where this is going. THIS FILE NO LONGER DERIVES THAT — it CONSUMES the
+ * spine's `likelyFutureFacts` and composes a beat around the answer.
+ *
+ * IT USED TO MIRROR, AND A MIRROR IS A FORK. The docstring here promised for
+ * years that this "mirrors the simulationSpine logic so the two derivations
+ * stay consistent". A promise is not an invariant, and the two drifted FOUR
+ * times: the dead `.label`/`.name` key (the arm fired zero times on real
+ * settlements), the bare label read that skipped the spine's splice refusal and
+ * named a DIFFERENT tension, a `toLowerCase()` that flattened "grain owed to
+ * House Merrow" the spine's `lowerLabel` deliberately preserves, and a
+ * `tensions[0]` read that gave up when the first entry named nothing while the
+ * spine went on to the first entry it COULD name.
+ *
+ * The first two were repaired by importing one STEP of the spine's ladder. They
+ * came back as the second two because a shared step still leaves both sides
+ * owning the rest. So the shared unit is the WHOLE derivation now, and the only
+ * thing composed here is this file's own voice. Do not reintroduce a local
+ * tension read, a local casing rule, or a local stability ladder: each one is a
+ * fork, and this rung has already proved it.
+ *
+ * @param {HistoryBeatSource} settlement
+ */
 function deriveLikelyFuture(settlement) {
-  // Pull from history.currentTensions trajectory if available, else
-  // power-structure stability. Mirrors the simulationSpine logic so the
-  // two derivations stay consistent — but produces a structured beat.
-  //
-  // THE MIRROR HAD DIVERGED. This read was `firstNonEmpty(first?.label,
-  // first?.name)`, and a generated tension carries neither: it carries `.type`
-  // and `.description`. So the tension arm was DEAD — measured over six real
-  // settlements that between them carried eleven tensions, it fired zero
-  // times, and all six printed the same fallback line ("Continuity, with the
-  // usual slow erosion of any settlement.") while the spine beside them named
-  // the actual tension. The docstring above claimed a mirror the code had
-  // stopped being; `tensionName` is now the shared rule, spelled once here and
-  // pinned in lockstep against the spine's.
-  const tensions = settlement?.history?.currentTensions;
-  if (Array.isArray(tensions) && tensions.length) {
-    const text = tensionName(tensions[0]);
-    if (text) {
-      return {
-        key: 'likelyFuture',
-        label: 'Likely future',
-        text: `Tensions point toward ${text.toLowerCase()}.`,
-        source: 'history.currentTensions',
-      };
-    }
+  const facts = likelyFutureFacts(settlement);
+
+  if (facts.arm === 'tensions') {
+    return {
+      key: 'likelyFuture',
+      label: 'Likely future',
+      // Already humanized, refused-where-refusable and cased by the shared
+      // derivation. Re-casing it here is exactly divergence (3).
+      text: `Tensions point toward ${facts.tensions[0]}.`,
+      source: 'history.currentTensions',
+    };
   }
 
-  const stability = settlement?.powerStructure?.stability;
-  if (typeof stability === 'string' && stability) {
-    const lower = stability.toLowerCase();
-    if (lower.includes('critical') || lower.includes('desperate') || lower.includes('siege')) {
-      return {
-        key: 'likelyFuture',
-        label: 'Likely future',
-        text: 'A crisis is imminent if no one intervenes.',
-        source: 'powerStructure.stability',
-      };
-    }
-    if (lower.includes('unstable') || lower.includes('volatile')) {
-      return {
-        key: 'likelyFuture',
-        label: 'Likely future',
-        text: 'The next year will test whoever holds the chair.',
-        source: 'powerStructure.stability',
-      };
-    }
-    if (lower.includes('stable')) {
-      return {
-        key: 'likelyFuture',
-        label: 'Likely future',
-        text: 'Continuity, with the usual slow erosion of any settlement.',
-        source: 'powerStructure.stability',
-      };
-    }
+  if (facts.arm === 'stability') {
+    return {
+      key: 'likelyFuture',
+      label: 'Likely future',
+      text: LIKELY_FUTURE_BEAT_TEXT[/** @type {string} */ (facts.arc)],
+      source: 'powerStructure.stability',
+    };
   }
 
   return null;

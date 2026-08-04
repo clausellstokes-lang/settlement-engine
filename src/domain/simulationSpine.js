@@ -183,18 +183,17 @@ function asList(value) {
  * punctuation in the MIDDLE — that is the signature of a description body —
  * nor a length no slot could absorb.
  *
- * EXPORTED BECAUSE IT IS SHARED, NOT BECAUSE IT IS PUBLIC. `historyBeats.js`
- * derives the same "which tension is this settlement bound to" answer for its
- * own `likelyFuture` beat, and its docstring has always claimed to mirror this
- * file. A second spelling of the refusal is a fork that drifts, and it drifted
- * once already (the `.label`/`.name`-only read that made the mirror's tension
- * arm dead). One rule, spelled here, imported there, pinned in lockstep by
- * tests/domain/historyBeats.test.js.
+ * MODULE-PRIVATE ON PURPOSE. It used to be exported so `historyBeats.js` could
+ * re-spell the tension ladder with the same refusal — and sharing one STEP of a
+ * derivation while both sides kept their own copy of the rest is precisely how
+ * that mirror produced four divergences in a row. The shared unit is now the
+ * whole derivation (`likelyFutureFacts` below), so this guard has exactly one
+ * caller tree again and needs no export to stay honest.
  *
  * @param {unknown} candidate
  * @returns {string|null}
  */
-export function nounPhrase(candidate) {
+function nounPhrase(candidate) {
   const text = firstNonEmpty(candidate);
   if (!text) return null;
   const trimmed = text.replace(/[.\s]+$/, '');
@@ -562,38 +561,147 @@ function derivePeopleFear(s) {
   return 'nothing they will say out loud';
 }
 
-/** @param {Record<string, any>} s @returns {string} */
-function deriveLikelyFuture(s) {
-  // Tension entries carry `.type` (a snake_case token) and `.description` (a
-  // whole sentence). The token humanizes into a noun phrase; the description
-  // never enters the slot.
+// ── THE LIKELY-FUTURE DERIVATION (shared; historyBeats CONSUMES it) ────────
+//
+// THE MIRROR IS DEAD. `historyBeats.js` used to RE-DERIVE this answer for its
+// own `likelyFuture` beat under a docstring promising it "mirrors the
+// simulationSpine logic". Two spellings of one derivation is a fork, and this
+// one drifted FOUR separate times before the class was retired structurally:
+//
+//   1. DEAD KEY      the mirror read `.label`/`.name` only, and a generated
+//                    tension carries neither, so its tension arm fired zero
+//                    times over six real settlements (lane PT2-3).
+//   2. LABEL REFUSAL the mirror read `.label` bare while the spine drew it
+//                    through `nounPhrase`, so a refused label made the two name
+//                    DIFFERENT tensions while both still answered "tensions"
+//                    (lane RT-1).
+//   3. CASING        the mirror flattened its answer with `toLowerCase()` while
+//                    the spine used `lowerLabel`, so "grain owed to House
+//                    Merrow" reached the beat as "…house merrow".
+//   4. FIRST-NULL    the spine drops unnameable entries and answers from the
+//                    first tension it CAN name; the mirror read `tensions[0]`
+//                    and gave up when that one named nothing — so a settlement
+//                    whose first tension carried only a `.description` had the
+//                    spine bound to its wharf dispute while the beat reported
+//                    placid continuity from the stability fallback.
+//
+// (1) and (2) were repaired by sharing one STEP. They came back as (3) and (4)
+// because sharing a step leaves both sides owning the rest of the derivation.
+// So the shared unit is now the WHOLE derivation: `likelyFutureFacts` answers
+// "which arm, which tensions, which trajectory" ONCE, and each side composes
+// only its own surface from those facts. Neither casing nor first-null can
+// diverge, because neither side chooses a tension any more. The identity is
+// pinned byte-for-byte by tests/domain/historyBeats.test.js.
+
+/**
+ * The humanized name of ONE tension entry, or null when the entry names
+ * nothing a one-line slot can carry.
+ *
+ * A tension arrives in three shapes and only one is common. GENERATED tensions
+ * carry `.type` (a snake_case token) and `.description` (a whole sentence) and
+ * nothing else; `.label`/`.name` are authored-import spellings kept for
+ * tolerance. The `.description` is deliberately NOT a rung: it is a full
+ * sentence, and "bound to the unresolved The population changed faster than the
+ * settlement could absorb." is the splice defect this file was rebuilt to
+ * retire. A label is drawn through `nounPhrase`, whose two refusals (over-long;
+ * a sentence break inside) both fall through to the type token.
+ *
+ * @param {unknown} tension
+ * @returns {string|null}
+ */
+function tensionName(tension) {
+  if (typeof tension === 'string') return nounPhrase(tension);
+  const labelled = nounPhrase(labelOf(tension));
+  if (labelled) return labelled;
+  const type = firstNonEmpty(typeTokenOf(tension));
+  return type ? type.replace(/_/g, ' ') : null;
+}
+
+/**
+ * The stability trajectory, as an ORDERED ladder. Order is load-bearing:
+ * 'unstable' CONTAINS 'stable', so the test rung must be read before the
+ * continuity rung or every unstable settlement reports continuity. Spelled once
+ * here rather than twice in two files, which is how the ordering stayed correct
+ * in both copies only by luck.
+ * @type {ReadonlyArray<[LikelyFutureArc, RegExp]>}
+ */
+const STABILITY_ARC = Object.freeze([
+  ['crisis',     /critical|desperate|siege/],
+  ['test',       /unstable|volatile/],
+  ['continuity', /stable/],
+]);
+
+/**
+ * @typedef {'crisis'|'test'|'continuity'} LikelyFutureArc
+ * @typedef {{ arm: 'tensions'|'stability'|'none',
+ *             tensions: string[],
+ *             arc: LikelyFutureArc|null }} LikelyFutureFacts
+ */
+
+/** Every trajectory key, so a consumer's surface table can be pinned TOTAL. */
+export const LIKELY_FUTURE_ARCS = Object.freeze(
+  STABILITY_ARC.map(([key]) => key),
+);
+
+/**
+ * THE ONE DERIVATION of where a settlement is going. Returns FACTS, never
+ * prose: which arm answered, the tensions it named (already humanized and
+ * cased), and the trajectory key. Every consumer composes its own sentence from
+ * these — the spine a complement for its frame, historyBeats a standalone beat —
+ * so the two can differ in VOICE while being structurally incapable of
+ * differing about the settlement.
+ *
+ * @param {unknown} settlement
+ * @returns {LikelyFutureFacts}
+ */
+export function likelyFutureFacts(settlement) {
+  const s = /** @type {Record<string, any>} */ (
+    settlement && typeof settlement === 'object' ? settlement : {}
+  );
+
   const tensions = asList(s.history?.currentTensions)
-    .map(tension => {
-      if (typeof tension === 'string') return nounPhrase(tension);
-      const labelled = nounPhrase(labelOf(tension));
-      if (labelled) return labelled;
-      const type = firstNonEmpty(typeTokenOf(tension));
-      return type ? type.replace(/_/g, ' ') : null;
-    })
+    .map(tensionName)
     .filter(Boolean)
     .map(tension => lowerLabel(/** @type {string} */ (tension)));
-  const named = joinPhrases(tensions, 2);
-  if (named) return `bound to the unresolved ${named}`;
+  if (tensions.length) return { arm: 'tensions', tensions, arc: null };
 
   const stability = firstText(s.powerStructure?.stability);
   if (stability) {
     const normalized = stability.toLowerCase();
-    if (normalized.includes('critical') || normalized.includes('desperate') || normalized.includes('siege')) {
-      return 'a crisis, unless someone intervenes';
-    }
-    if (normalized.includes('unstable') || normalized.includes('volatile')) {
-      return 'a test of whoever holds the chair';
-    }
-    if (normalized.includes('stable')) {
-      return 'continuity, with the usual slow erosion of any settlement';
-    }
+    const matched = STABILITY_ARC.find(([, pattern]) => pattern.test(normalized));
+    if (matched) return { arm: 'stability', tensions: [], arc: matched[0] };
   }
 
+  return { arm: 'none', tensions: [], arc: null };
+}
+
+/**
+ * The spine's surface for each trajectory: a COMPLEMENT, because "Its likely
+ * future is" is prepended by SPINE_RUNGS. historyBeats keeps its own table of
+ * standalone sentences — the two frames genuinely differ, and that difference
+ * is the only thing either side still owns.
+ * @type {Readonly<Record<LikelyFutureArc, string>>}
+ */
+const SPINE_ARC_COMPLEMENT = Object.freeze({
+  crisis:     'a crisis, unless someone intervenes',
+  test:       'a test of whoever holds the chair',
+  continuity: 'continuity, with the usual slow erosion of any settlement',
+});
+
+// `unknown`, not `Record<string, any>`: this deriver reads NOTHING off the
+// settlement itself any more — it only composes the shared facts — so it needs
+// no any-hole to do its job. (The any-cast ratchet counts these; the one this
+// rung still owns lives in `likelyFutureFacts`, where the untyped save-data
+// read actually happens.)
+/** @param {unknown} s @returns {string} */
+function deriveLikelyFuture(s) {
+  const facts = likelyFutureFacts(s);
+  if (facts.arm === 'tensions') {
+    return `bound to the unresolved ${joinPhrases(facts.tensions, 2)}`;
+  }
+  if (facts.arm === 'stability') {
+    return SPINE_ARC_COMPLEMENT[/** @type {LikelyFutureArc} */ (facts.arc)];
+  }
   return 'whatever the table decides to make it';
 }
 

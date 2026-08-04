@@ -13,8 +13,13 @@ import {
   deriveHistoryBeats,
   historyBeatRows,
   historyBeatPresence,
+  LIKELY_FUTURE_BEAT_TEXT,
 } from '../../src/domain/historyBeats.js';
-import { deriveSimulationSpine } from '../../src/domain/simulationSpine.js';
+import {
+  deriveSimulationSpine,
+  likelyFutureFacts,
+  LIKELY_FUTURE_ARCS,
+} from '../../src/domain/simulationSpine.js';
 import { gen } from '../simulation/simHelpers.js';
 
 // ── Sample settlements ──────────────────────────────────────────────────
@@ -306,23 +311,44 @@ describe('historyBeatPresence()', () => {
   });
 });
 
-// ── The lockstep the docstring promises ────────────────────────────────
+// ── The identity, now that the mirror is dead ──────────────────────────
 
 /**
- * `deriveLikelyFuture` in historyBeats.js says, in its own comment, that it
- * "Mirrors the simulationSpine logic so the two derivations stay consistent."
- * That sentence was false for as long as it has existed: the mirror read a
- * tension by `.label`/`.name`, and a GENERATED tension carries neither — it
- * carries `.type` (a snake_case token) and `.description` (a sentence).
+ * THE MIRROR IS DEAD; THIS IS AN IDENTITY CHECK.
  *
- * Measured over six real settlements carrying eleven tensions between them,
- * the mirror's tension arm fired ZERO times. All six printed the identical
- * fallback, "Continuity, with the usual slow erosion of any settlement.",
- * while the spine beside them named the actual tension. A docstring is not an
- * invariant; this block is the one that stops the two from drifting again, and
- * it names the side that moved.
+ * `deriveLikelyFuture` in historyBeats.js used to RE-DERIVE where a settlement
+ * was going, under a docstring promising it "mirrors the simulationSpine logic
+ * so the two derivations stay consistent". A promise is not an invariant, and
+ * the two spellings drifted FOUR separate times:
+ *
+ *   1. DEAD KEY      the mirror read `.label`/`.name` only; a GENERATED tension
+ *                    carries neither (it carries `.type` + `.description`), so
+ *                    over six real settlements holding eleven tensions the
+ *                    mirror's tension arm fired ZERO times and all six printed
+ *                    "Continuity, with the usual slow erosion of any
+ *                    settlement." beside a spine naming the real tension.
+ *   2. LABEL REFUSAL the mirror read `.label` bare while the spine drew it
+ *                    through `nounPhrase`; a refused label made the two name
+ *                    DIFFERENT tensions while both still answered "tensions",
+ *                    so the ARM pin agreed and the splice shipped anyway.
+ *   3. CASING        the mirror flattened with `toLowerCase()` where the spine
+ *                    used `lowerLabel`, so "grain owed to House Merrow" reached
+ *                    the beat as "grain owed to house merrow".
+ *   4. FIRST-NULL    the mirror read `tensions[0]` and gave up when that entry
+ *                    named nothing; the spine drops unnameable entries and
+ *                    answers from the first it CAN name. A settlement whose
+ *                    first tension carried only a `.description` had the spine
+ *                    bound to its wharf dispute while the beat reported placid
+ *                    continuity — or reported nothing at all.
+ *
+ * (1) and (2) were repaired by sharing one STEP of the ladder, and (3) and (4)
+ * are what a shared step buys you: both sides still owned the rest. So the
+ * shared unit is now the WHOLE derivation — `likelyFutureFacts` — and this
+ * block no longer asks whether two derivations AGREE. It asks whether there is
+ * still only one, byte for byte, with no case folding anywhere to launder a
+ * disagreement into a pass.
  */
-describe('the likely-future mirror moves in lockstep with the spine', () => {
+describe('the likely-future beat CONSUMES the spine derivation (one writer)', () => {
   /**
    * THE SECOND, QUIETER WAY BACK TO THE SPLICE. The mirror read `.label` bare
    * while the spine put every candidate through `nounPhrase`, whose TWO
@@ -380,6 +406,36 @@ describe('the likely-future mirror moves in lockstep with the spine', () => {
     ['an authored label REFUSED for a sentence break, with a type behind it', {
       history: { currentTensions: [{ label: MID_SENTENCE_LABEL, type: 'granary_arrears' }] },
     }],
+    // ── The two forks a shared STEP could not stop (3) and (4) ──────────────
+    ['a label carrying a PROPER NAME — the CASING fork', {
+      history: { currentTensions: [{ label: 'grain owed to House Merrow', type: 'granary_arrears' }] },
+    }],
+    ['a first tension naming NOTHING, a nameable one behind it — the FIRST-NULL fork', {
+      history: { currentTensions: [
+        { description: 'A dispute over terms that names nothing.' },
+        { type: 'wharf_precedence', description: 'Two guilds, one wharf.' },
+      ] },
+      // Stability is present ON PURPOSE: the old beat fell through to it here
+      // and reported continuity while the spine named the wharf dispute.
+      powerStructure: { stability: 'Stable' },
+    }],
+    ['a first tension naming nothing and NO stability behind it', {
+      history: { currentTensions: [
+        { description: 'Names nothing at all.' },
+        { type: 'harbour_dues' },
+      ] },
+    }],
+    ['an ARRAY-shaped label — the edge the old docstring called non-mirrored', {
+      // The spine read its label through `firstText`, which flattens an array;
+      // the mirror read a string only, so the two named different tensions. The
+      // old docstring recorded this as "out of the mirrored set". It is not out
+      // of anything now — there is one reader.
+      history: { currentTensions: [{ label: ['harbour dues dispute'], type: 'wharf_precedence' }] },
+    }],
+    ['tensions that ALL name nothing — both must fall to stability', {
+      history: { currentTensions: [{ description: 'Names nothing.' }] },
+      powerStructure: { stability: 'Critical' },
+    }],
     ['no tensions, critical stability', {
       history: { currentTensions: [] }, powerStructure: { stability: 'Critical (active siege)' },
     }],
@@ -397,27 +453,82 @@ describe('the likely-future mirror moves in lockstep with the spine', () => {
     const beatArm = beatArmOf(deriveHistoryBeats(settlement).likelyFuture);
     expect(
       beatArm,
-      `THE MIRROR DRIFTED — historyBeats answered from "${beatArm}" while`
-      + ` simulationSpine answered from "${spineArm}". historyBeats.js`
-      + ` deriveLikelyFuture is the side that must follow the spine.`,
+      `THE ONE WRITER SPLIT — historyBeats answered from "${beatArm}" while`
+      + ` simulationSpine answered from "${spineArm}". Both compose from`
+      + ' likelyFutureFacts(); if they disagree about the ARM, one of them has'
+      + ' grown a derivation of its own again.',
     ).toBe(spineArm);
   });
 
-  it('agrees on WHICH TENSION, not merely that there was one', () => {
+  it('THE CASING FORK, named: a proper name keeps its capitals in the beat', () => {
+    // Divergence (3), pinned on its own so its repair cannot be quietly undone
+    // by a `toLowerCase()` that looks like tidy sentence-casing. `lowerLabel`
+    // lowers a title-cased DISPLAY label whole and leaves a PROPER NAME exactly
+    // as authored; "House Merrow" is a house, not a common noun.
+    const settlement = {
+      history: { currentTensions: [{ label: 'grain owed to House Merrow', type: 'granary_arrears' }] },
+    };
+    expect(deriveHistoryBeats(settlement).likelyFuture.text)
+      .toBe('Tensions point toward grain owed to House Merrow.');
+    expect(deriveSimulationSpine(settlement).likelyFuture)
+      .toBe('Its likely future is bound to the unresolved grain owed to House Merrow.');
+    // SPECIFICITY: the rule is not "never change case". A title-cased display
+    // label still lowers whole, which is what keeps "Guild Rivalry" from
+    // shouting mid-sentence.
+    const titled = { history: { currentTensions: [{ label: 'Guild Rivalry' }] } };
+    expect(deriveHistoryBeats(titled).likelyFuture.text).toBe('Tensions point toward guild rivalry.');
+  });
+
+  it('THE FIRST-NULL FORK, named: an unnameable first tension is skipped, not surrendered to', () => {
+    // Divergence (4). The old beat read `tensions[0]`, got null from an entry
+    // carrying only a `.description`, and fell through to the stability
+    // fallback — reporting placid continuity for a settlement the spine had
+    // bound to its wharf dispute.
+    const settlement = {
+      history: { currentTensions: [
+        { description: 'A dispute over terms that names nothing.' },
+        { type: 'wharf_precedence', description: 'Two guilds, one wharf.' },
+      ] },
+      powerStructure: { stability: 'Stable' },
+    };
+    const beat = deriveHistoryBeats(settlement).likelyFuture;
+    expect(beat.source, 'the beat surrendered to the stability fallback again').toBe('history.currentTensions');
+    expect(beat.text).toBe('Tensions point toward wharf precedence.');
+    expect(deriveSimulationSpine(settlement).likelyFuture)
+      .toBe('Its likely future is bound to the unresolved wharf precedence.');
+    // SPECIFICITY: when NO tension names anything, falling to stability is
+    // correct — the skip must not become "always claim a tension".
+    const allUnnameable = {
+      history: { currentTensions: [{ description: 'Names nothing.' }] },
+      powerStructure: { stability: 'Stable' },
+    };
+    expect(deriveHistoryBeats(allUnnameable).likelyFuture.source).toBe('powerStructure.stability');
+  });
+
+  it('names the SAME TENSION, BYTE FOR BYTE — no case folding', () => {
     // The arm check alone would pass if both read a tension and disagreed
     // about which. The spine names up to two; the beat names the first, and
-    // the spine's line must contain it.
+    // the spine's line must contain it EXACTLY.
+    //
+    // ⚠️ THIS COMPARISON USED TO LAUNDER. It read
+    //     spine.likelyFuture.toLowerCase() ... toContain(named.toLowerCase())
+    // and that `toLowerCase()` on both sides is precisely what let divergence
+    // (3) live: the beat flattened "grain owed to House Merrow" to "…house
+    // merrow", the spine preserved the proper name, and folding both to
+    // lowercase made the two strings match. A comparison that normalises away
+    // the difference it is looking for is not a comparison. Both sides are
+    // compared RAW now, and the CASING fixture above is what makes that bite.
     //
     // THE MINIMUM-HIT COUNTER. This loop `continue`s past every fixture that
     // did not answer from tensions, so a regression that silently stopped the
     // tension arm from firing AT ALL would leave it asserting nothing and
     // passing in perfect silence — the exact vacuity shape this suite exists
-    // to refuse. The floor is the number of tension-carrying fixtures above
-    // (five: the generated shape, .label, .name, bare strings, and the two
-    // refused-label rows, which fall through to their type token and so still
-    // answer from tensions — six in total). It TIGHTENS toward reality and is
-    // never lowered to admit a regression.
-    const TENSION_FIXTURES = 6;
+    // to refuse. The floor is the number of tension-answering fixtures above:
+    // the generated shape, .label, .name, bare strings, the two refused-label
+    // rows (which fall through to their type token), the casing row, the two
+    // first-null rows, and the array-label row — ten. It TIGHTENS toward
+    // reality and is never lowered to admit a regression.
+    const TENSION_FIXTURES = 10;
     let checked = 0;
     for (const [label, settlement] of FIXTURES) {
       const beat = deriveHistoryBeats(settlement).likelyFuture;
@@ -425,10 +536,18 @@ describe('the likely-future mirror moves in lockstep with the spine', () => {
       checked++;
       const named = beat.text.replace(/^Tensions point toward /, '').replace(/\.$/, '');
       expect(
-        deriveSimulationSpine(settlement).likelyFuture.toLowerCase(),
-        `THE MIRROR DRIFTED on "${label}" — historyBeats bound the future to`
-        + ` "${named}", which the spine's line does not name.`,
-      ).toContain(named.toLowerCase());
+        deriveSimulationSpine(settlement).likelyFuture,
+        `THE ONE WRITER SPLIT on "${label}" — historyBeats bound the future to`
+        + ` "${named}", which the spine's line does not name (or names with`
+        + ' different capitals).',
+      ).toContain(named);
+      // …and it is the SHARED derivation's answer, not a second one that
+      // happens to agree on these fixtures. This is the pin that would red if
+      // historyBeats ever grew its own tension read back.
+      expect(
+        named,
+        `"${label}": the beat named a tension the shared derivation did not choose`,
+      ).toBe(likelyFutureFacts(settlement).tensions[0]);
     }
     expect(
       checked,
@@ -436,6 +555,36 @@ describe('the likely-future mirror moves in lockstep with the spine', () => {
       + ` ${TENSION_FIXTURES} — the tension arm stopped firing and this pin was`
       + ' asserting nothing.',
     ).toBe(TENSION_FIXTURES);
+  });
+
+  it('the STABILITY arm is total: every trajectory the ladder can return renders', () => {
+    // The two surfaces differ in VOICE by contract (the spine returns a
+    // complement its frame completes; the beat returns a standalone sentence),
+    // and that is the only thing either side still owns. A trajectory added to
+    // the shared ladder with no row in the beat's table would render `undefined`
+    // as a beat's text — a blank line in the rail, and the exact latent hole
+    // this file's own docstring records for the legacyAnnotations fallback.
+    expect(Object.keys(LIKELY_FUTURE_BEAT_TEXT).sort()).toEqual([...LIKELY_FUTURE_ARCS].sort());
+    for (const arc of LIKELY_FUTURE_ARCS) {
+      expect(typeof LIKELY_FUTURE_BEAT_TEXT[arc], `${arc} has no beat sentence`).toBe('string');
+      expect(LIKELY_FUTURE_BEAT_TEXT[arc].length).toBeGreaterThan(0);
+    }
+    // Guard-the-guard: the ladder must not be empty, or the totality above is
+    // a comparison of two empty sets.
+    expect(LIKELY_FUTURE_ARCS.length).toBe(3);
+  });
+
+  it('the ORDER of the stability ladder survives: "unstable" is not "stable"', () => {
+    // 'unstable'.includes('stable') is TRUE. Both files used to spell this
+    // ladder themselves and both happened to order it correctly; one shared,
+    // ordered ladder is why that is no longer luck. Read through BOTH surfaces
+    // so a reordering cannot hide on either side.
+    const at = (stability) => ({ powerStructure: { stability } });
+    expect(likelyFutureFacts(at('Unstable')).arc).toBe('test');
+    expect(likelyFutureFacts(at('Stable')).arc).toBe('continuity');
+    expect(deriveHistoryBeats(at('Unstable')).likelyFuture.text).toBe(LIKELY_FUTURE_BEAT_TEXT.test);
+    expect(deriveSimulationSpine(at('Unstable')).likelyFuture)
+      .toBe('Its likely future is a test of whoever holds the chair.');
   });
 
   it('the refusal fixtures really do isolate one guard each', () => {
