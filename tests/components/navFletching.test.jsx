@@ -146,9 +146,29 @@ vi.mock('../../src/lib/stripe.js', () => ({
   fetchCreditBalance: () => Promise.resolve(0),
 }));
 
-// Sever the pricing surface's lazy stripe->creditLedger chain at the component
-// boundary — this suite tests the nav ribbon, not pricing internals, and the chain's
-// dynamic import races environment teardown under gate load.
+// ⚠️⚠️ MOCKING stripe's EXPORTS DOES NOT SEVER stripe's MODULE GRAPH, and this file
+// is the second suite to learn it (navFlowArrows.test.jsx:84 records the first).
+// MEASURED HERE, 2026-08-04: App.jsx's mount effect calls `import('./lib/stripe.js')`
+// on EVERY render, and that dynamic import does NOT resolve through the factory
+// above — instrumenting the factory's two functions showed ZERO calls while the real
+// module was fetched anyway, its line-17 `import ... from './creditLedger.js'`
+// landing after jsdom is gone. The count was exact and is the tell: 27 render(<App/>)
+// call sites produced 27 `EnvironmentTeardownError`s, one apiece, with all 413 tests
+// passing. Mocking the LEAF ends the race at its source, because a factory mock is
+// served from the registry and needs no post-teardown fetch at all.
+//
+// ⚠️ The gate exited 1 on 6 of 8 runs before this line, and — contrary to the
+// hazard's write-up — running this file ALONE was red too (2 of 3). "It passes on
+// its own" was luck, not isolation.
+vi.mock('../../src/lib/creditLedger.js', () => ({
+  fetchCreditBalanceFromLedger: () => Promise.resolve(0),
+}));
+
+// Keep the pricing surface out of the render: this suite tests the nav ribbon, not
+// pricing internals. ⚠️ This mock is NOT what severs the stripe->creditLedger chain
+// — the measurement above found App.jsx importing stripe directly, so the component
+// boundary was never the only route in. It is kept for the narrower reason it also
+// earns: the lazily-mounted card has nothing to say about the fletching.
 vi.mock('../../src/components/pricing/PricingMomentCard.jsx', () => ({
   default: () => null,
 }));
