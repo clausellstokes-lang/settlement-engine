@@ -632,7 +632,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/warDeployment.js": {
-      "any": 37,
+      "any": 23,
       "suppress": 0
     },
     "src/domain/worldPulse/warFrontReads.js": {
@@ -653,6 +653,10 @@
     },
     "src/domain/worldPulse/warSeatBooks.js": {
       "any": 2,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/warSiegeVerdict.js": {
+      "any": 14,
       "suppress": 0
     },
     "src/domain/worldPulse/worldSnapshot.js": {
