@@ -26,8 +26,12 @@
 import { describe, it, expect } from 'vitest';
 
 import {
-  SOVEREIGNTY_MARKET_TUNING, advanceSovereigntyMarket, beliefLegsOf,
+  SOVEREIGNTY_MARKET_TUNING, advanceSovereigntyMarket, beliefLegsOf, offerWeightOf, raceOrder,
 } from '../../src/domain/worldPulse/sovereigntyMarketStage.js';
+import { readSovereigntySaleIntent } from '../../src/domain/worldPulse/sovereigntyIntent.js';
+import { REASON_MIRRORS } from '../../src/domain/worldPulse/warReasonTaxonomy.js';
+import { reasonPairKey } from '../../src/domain/worldPulse/warReasons.js';
+import { hash01 } from '../../src/domain/region/contestMath.js';
 import { mintSovereigntySaleTreaties, considerationTypeFor } from '../../src/domain/worldPulse/peaceTermsSale.js';
 import { SOVEREIGNTY_REQUIRED_RULES } from '../../src/domain/worldPulse/sovereigntyAssets.js';
 import { SOVEREIGNTY_TRAJECTORY_BANDS } from '../../src/domain/worldPulse/sovereigntyAppraisal.js';
@@ -106,22 +110,47 @@ const SNAPSHOT = {
 };
 
 /** A lit world holding ONE vassalized holding of `assetId` by `seller`, with the plan
- *  ledger's band cell carrying the PRIOR band (the crossing read). */
-function marketWorld({ priorBand = 'easy', treaties = null, assetId = 'holding' } = {}) {
+ *  ledger's band cell carrying the PRIOR band (the crossing read). `assetIds` takes the
+ *  place of `assetId` when a fixture needs a seller holding more than one town. */
+function marketWorld({
+  priorBand = 'easy', treaties = null, assetId = 'holding', assetIds = null, peaceReasons = null,
+} = {}) {
+  /** @type {Record<string, unknown>} */
+  const occupations = {};
+  for (const id of assetIds || [assetId]) {
+    occupations[id] = {
+      ...createOccupationRecord('seller', 3), state: 'vassalized', stateHeld: 9, resistance: 0.05,
+    };
+  }
   return {
     tick: 40,
     rngSeed: 'seed-wr10w',
     simulationRules: { ...LIT },
     calendar: { season: 'summer' },
-    occupations: {
-      [assetId]: {
-        ...createOccupationRecord('seller', 3), state: 'vassalized', stateHeld: 9, resistance: 0.05,
-      },
-    },
+    occupations,
     relationshipStates: {},
     spatialLedgers: {
       demographicPlans: { seller: { band: priorBand } },
       ...(treaties ? { treaties } : {}),
+      ...(peaceReasons ? { peaceReasons } : {}),
+    },
+  };
+}
+
+/** A LIVE KINSHIP BOND on the seller's own picture of the buyer — the one suppression
+ *  road §1b-B has today. The mirror is named through `REASON_MIRRORS.lineage_claim`
+ *  rather than as the string `kinship_bond`, so the fixture is bound to WR-3's taxonomy
+ *  and cannot drift into a bond the scorer no longer reads. */
+function kinshipBond(sellerId, buyerId) {
+  return {
+    [reasonPairKey(sellerId, buyerId)]: {
+      reasons: {
+        [REASON_MIRRORS.lineage_claim]: {
+          score: 0.62,
+          sinceTick: 3,
+          receipt: 'a surviving founding edge binds the two courts.',
+        },
+      },
     },
   };
 }
@@ -144,6 +173,30 @@ function run(worldState, overrides = {}) {
 /** The stage with the reach honoured but every other input identical — used only to prove
  *  the geographic bound really does empty the candidate set. */
 const NO_REACH = { beliefLegsFor: legsAlways };
+
+/** A snapshot over an arbitrary court list, built from the SAME pressed factory the
+ *  three-court fixture uses, so a race fixture and the contract fixture differ only in
+ *  who is standing there. */
+function snapshotOf(ids) {
+  const items = ids.map((id) => (id === 'seller' ? pressed(id) : pressed(id, 900)));
+  return {
+    settlements: items,
+    byId: new Map(items.map((i) => [String(i.id), i])),
+    regionalGraph: { edges: [{ id: 'edge.seller.buyer', from: 'seller', to: 'buyer', relationshipType: 'neutral' }] },
+  };
+}
+
+/** The composer over a named snapshot, reach open, everything else as `run`. */
+function runOn(snapshot, worldState, overrides = {}) {
+  return advanceSovereigntyMarket({
+    snapshot, worldState, settlementUpdates: [], tick: Number(worldState.tick), now: null,
+    beliefLegsFor: legsAlways, reachFor: ({ assetIds }) => [...assetIds], ...overrides,
+  });
+}
+
+/** EVERY COURT BUT THE SELLER PRICES THE TOWN AS A BUYER — the asymmetry that lets more
+ *  than one candidate clear, which is what a race needs in order to be observable. */
+const legsEveryBuyer = ({ courtId }) => ({ ...(courtId === 'seller' ? SELLER_LEGS : BUYER_LEGS) });
 
 // ═══════════════════════════════════════════════════════════════════════════════
 describe('WW-B — the gate', () => {
@@ -356,6 +409,80 @@ describe('WW-B — the character gate is consulted (§1b-B suppression)', () => 
     // a suppression receipt here measures an UNBOUND pair rather than a dead composer.
     expect(control.receipts.some((r) => r.kind === 'sovereignty_sale_suppressed')).toBe(false);
   });
+
+  it('THE SUPPRESSED SALE NEVER REACHES THE CLEARING: a live kinship bond stops it dead', () => {
+    // THE ONE PRODUCTION SUPPRESSION ROAD, DRIVEN END TO END. The bond is written where
+    // the world writes it — the seller's own peace-reason picture of the buyer — and the
+    // composer is given the identical everything else that clears in the control above.
+    // Without this pin the whole §1b-B branch could be deleted (`if (false && …)`) and
+    // every other assertion in this file would stay green, because an unsuppressed pair
+    // is unsuppressed either way: the branch is only observable on a pair that HAS a bond.
+    const world = marketWorld({ peaceReasons: kinshipBond('seller', 'buyer') });
+    const out = run(world);
+
+    const suppressed = out.receipts.filter((r) => r.kind === 'sovereignty_sale_suppressed');
+    expect(suppressed.length, 'the refusal is receipted, not silent').toBe(1);
+    expect(suppressed[0].buyerId).toBe('buyer');
+    expect(suppressed[0].suppressionKind, 'and it names WHICH reading contradicted the sale')
+      .toBe(REASON_MIRRORS.lineage_claim);
+    expect(String(suppressed[0].receipt), 'in the world\'s own words').toContain('will not sell holding to buyer');
+
+    // IT NEVER REACHED THE CLEARING. The control on the identical fixture (the test above)
+    // clears and mints, so each absence below is the gate holding rather than a dead world.
+    // `run(marketWorld())` one test above produces a cleared receipt on this exact
+    // anchored: fixture minus the bond, so this emptiness is the suppression itself.
+    expect(out.receipts.map((r) => r.kind)).not.toContain('sovereignty_sale_cleared');
+    // Same live control — a no-trade would mean the pair was PRICED and then refused,
+    // anchored: which is a different road entirely, and the gate must come first.
+    expect(out.receipts.map((r) => r.kind)).not.toContain('sovereignty_no_trade');
+    expect(out.changed, 'not one byte moved').toBe(false);
+    expect(out.worldState, 'and the world came back by reference').toBe(world);
+    expect(getSpatialLedger(out.worldState, 'treaties')).toBeUndefined();
+
+    // AND THE HERALD HEARS THE REFUSAL — the `kinship_opposes_the_sale` beat, end to end.
+    expect(out.newsEntries.length, 'the refusal reaches a real registered kind').toBeGreaterThan(0);
+  });
+
+  it('THE SECOND ARM IS LIVE TOO: a zero-scored intent takes the same road, unsuppressed', () => {
+    // The gate reads `suppressed || score01 <= 0`, and the production reader FLOORS an
+    // unsuppressed score at UNSUPPRESSED_FLOOR01 — so the second arm cannot be reached
+    // from outside and would be an unproven branch forever. The injected reader is how it
+    // is proven live rather than deleted as decoration: a court that sets no price at all
+    // is refused with the same receipt, and its `suppressionKind` is honestly null.
+    const zeroScored = ({ sellerId, buyerId, assetId }) => ({
+      sellerId, buyerId, assetId, score01: 0, suppressed: false, suppressionKind: null,
+      interestKind: 'realm', booksDiverge: false, securityBand: 'unseated',
+      receipt: `${sellerId} sets no price at all on ${assetId} for ${buyerId}.`,
+      evidence: {},
+    });
+    const out = run(marketWorld(), { intentFor: zeroScored });
+    const suppressed = out.receipts.filter((r) => r.kind === 'sovereignty_sale_suppressed');
+    expect(suppressed.length, 'a zero score is refused and receipted').toBe(1);
+    expect(suppressed[0].suppressionKind, 'with no contradicting reading to name').toBeNull();
+    expect(String(suppressed[0].receipt)).toContain('sets no price at all');
+    // The identical call with the PRODUCTION reader clears (the control test above),
+    // anchored: so this absence measures the score arm and not an inert fixture.
+    expect(out.receipts.map((r) => r.kind)).not.toContain('sovereignty_sale_cleared');
+    expect(out.changed).toBe(false);
+  });
+
+  it('THE GATE MAY BE HOISTED ABOVE THE ASSETS — measured on the real reader, not assumed', () => {
+    // The composer reads the intent ONCE per (seller, buyer) for the gate and again per
+    // ASSET for the receipt that rides the document. That split is only legitimate if
+    // suppression and score really are asset-independent, which is a property of the
+    // reader, not a hope — so it is measured here on the production reader.
+    const world = marketWorld({ assetIds: ['holding', 'holdtwo'] });
+    const snapshot = snapshotOf(['seller', 'buyer', 'holding', 'holdtwo']);
+    const one = readSovereigntySaleIntent({ worldState: world, snapshot, sellerId: 'seller', buyerId: 'buyer', assetId: 'holding' });
+    const two = readSovereigntySaleIntent({ worldState: world, snapshot, sellerId: 'seller', buyerId: 'buyer', assetId: 'holdtwo' });
+    expect(two.score01, 'the score does not move with the asset').toBe(one.score01);
+    expect(two.suppressed, 'and neither does suppression').toBe(one.suppressed);
+    expect(one.score01, 'both are live reads, not zeros').toBeGreaterThan(0);
+    // …AND THE RECEIPT DOES MOVE, which is exactly why it may not be hoisted with them.
+    expect(one.receipt).toContain('holding');
+    expect(two.receipt).toContain('holdtwo');
+    expect(two.receipt).not.toBe(one.receipt);
+  });
 });
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -437,6 +564,121 @@ describe('WW-B — the geographic bound shapes the set', () => {
     // anchored: the stubbed-reach run in the contract fixture above clears on the identical
     // world, so this emptiness measures the bound rather than a composer that never ran.
     expect(out.receipts.some((r) => r.kind === 'sovereignty_sale_cleared')).toBe(false);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+describe('WW-B — the race is a RACE, and its band is alive', () => {
+  const KEY = (buyerId, assetId, episode) => `sovereignty.offer.seed-wr10w.seller.${buyerId}.${assetId}.${episode}`;
+
+  it('THE BAR IS LIVE ON BOTH SIDES: flipping the offer weight flips the winner', () => {
+    // THE DEAD-BAND LAW, APPLIED TO THIS BAND. A weight that multiplied every candidate
+    // alike would cancel out of an ordering and could never change an outcome — a number
+    // in a tuning table that no owner signature could ever move. So the bar is the FLOOR
+    // each candidate stands on and intent lifts it: at 1 every candidate weighs the same
+    // and the race is intent-blind; at 0 the weight IS the intent. Two candidates, one
+    // strong draw with a weak appetite and one weak draw with a full appetite — and the
+    // winner changes with the band, which is what makes the band real.
+    const episode = '40:overflowing';
+    const strongDraw = { buyerId: 'birch', assetId: 'holding', key: KEY('birch', 'holding', episode) };
+    const weakDraw = { buyerId: 'alder', assetId: 'holding', key: KEY('alder', 'holding', episode) };
+    // THE PREMISE, MEASURED rather than assumed — these two keys really do draw apart.
+    expect(hash01(strongDraw.key)).toBeGreaterThan(hash01(weakDraw.key) + 0.25);
+
+    const winnerAt = (base) => raceOrder([
+      { ...strongDraw, weight: offerWeightOf(0.1, base) },
+      { ...weakDraw, weight: offerWeightOf(1, base) },
+    ])[0].buyerId;
+    expect(winnerAt(1), 'intent-blind: the biggest draw takes it').toBe('birch');
+    expect(winnerAt(0), 'intent alone: the eager court takes it').toBe('alder');
+    expect(winnerAt(T.BASE_OFFER_WEIGHT), 'and the tuned band today sits on the draw side').toBe('birch');
+
+    // THE WEIGHT ITSELF, at both ends: a bar of 1 erases the colour, a bar of 0 IS it.
+    expect(offerWeightOf(0.1, 1)).toBe(offerWeightOf(1, 1));
+    expect(offerWeightOf(0.4, 0)).toBe(0.4);
+    expect(offerWeightOf(0, T.BASE_OFFER_WEIGHT), 'and no candidate ever falls below the bar')
+      .toBe(T.BASE_OFFER_WEIGHT);
+  });
+
+  it('the order is TOTAL: an exact tie breaks on the key, never on argument order', () => {
+    const tied = raceOrder([
+      { buyerId: 'zephyr', assetId: 'holding', key: 'z', weight: 0 },
+      { buyerId: 'alder', assetId: 'holding', key: 'a', weight: 0 },
+    ]);
+    expect(tied.map((c) => c.key), 'zero-weight draws tie, and codepoint decides').toEqual(['a', 'z']);
+    expect(tied.every((c) => c.draw === 0), 'the tie really is exact').toBe(true);
+  });
+
+  it('THE COMPOSER SELLS TO THE DRAW, NOT TO THE ALPHABET', () => {
+    // Two courts that would BOTH clear on the identical picture. A composer that offered
+    // in enumeration order would always sell to `alder`; this one sells to `birch`,
+    // because `birch` drew higher. The control below is what makes that a discrimination
+    // rather than a coincidence: with `birch` out of the world, `alder` clears.
+    const buyers = snapshotOf(['seller', 'alder', 'birch', 'holding']);
+    const out = runOn(buyers, marketWorld(), { beliefLegsFor: legsEveryBuyer });
+    const cleared = out.receipts.filter((r) => r.kind === 'sovereignty_sale_cleared');
+    expect(cleared.length, 'exactly one sale closes the episode').toBe(1);
+    expect(cleared[0].buyerId).toBe('birch');
+    expect('alder' < 'birch', 'and the loser is the one enumeration would have reached first').toBe(true);
+    // THE DRAWS, computed straight from `hash01` rather than from the ordering under test.
+    const episode = String(cleared[0].episode);
+    expect(hash01(KEY('birch', 'holding', episode)))
+      .toBeGreaterThan(hash01(KEY('alder', 'holding', episode)));
+
+    // THE CONTROL: `alder` was a live candidate all along, and takes the town when the
+    // court that outdrew it is not standing there.
+    const alone = runOn(snapshotOf(['seller', 'alder', 'holding']), marketWorld(), { beliefLegsFor: legsEveryBuyer });
+    expect(alone.receipts.filter((r) => r.kind === 'sovereignty_sale_cleared').map((r) => r.buyerId))
+      .toEqual(['alder']);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+describe('WW-B — a court is never a buyer for its own seat', () => {
+  const TWO_ASSET_SNAPSHOT = snapshotOf(['seller', 'buyer', 'holding', 'holdtwo']);
+
+  it('NO RECEIPT EVER NAMES A COURT PRICING ITSELF', () => {
+    // A settlement is both a party and a holding in this world, so the buyer enumeration
+    // hands `holding` its own id as an asset unless the pair is excluded at assembly. The
+    // appraisal leaf then refuses (a court cannot price itself) and the refusal travels to
+    // the Herald as an honest no-trade about a sale nobody proposed. The production belief
+    // reader is used deliberately: nothing clears, so EVERY candidate is receipted and the
+    // stream below is the whole field rather than the field up to the first sale.
+    const out = advanceSovereigntyMarket({
+      snapshot: TWO_ASSET_SNAPSHOT, worldState: marketWorld({ assetIds: ['holding', 'holdtwo'] }),
+      settlementUpdates: [], tick: 40, reachFor: ({ assetIds }) => [...assetIds],
+    });
+    const pairs = out.receipts.map((r) => `${r.buyerId}/${r.assetId}`);
+    expect(pairs.length, 'the field really was enumerated').toBeGreaterThan(2);
+    // THE ANCHOR: `holding` IS enumerated as a buyer — it simply never buys itself.
+    expect(pairs, 'a court still buys its neighbours').toContain('holding/holdtwo');
+    // The live `holding/holdtwo` row one line above proves this court reached the
+    // anchored: receipt road, so the absence below is the exclusion and not silence.
+    expect(pairs).not.toContain('holding/holding');
+    // anchored: same live field, same reason — the mirror pair is excluded too.
+    expect(pairs).not.toContain('holdtwo/holdtwo');
+    expect(out.receipts.every((r) => r.assetId !== r.buyerId), 'and no self-pair anywhere').toBe(true);
+  });
+
+  it('THE RECEIPT ON THE DOCUMENT NAMES THE ASSET ACTUALLY SOLD (§1b-B travels per asset)', () => {
+    // A seller holding TWO towns. The race picks `holdtwo`; the intent receipt that rides
+    // the deed must be the one for `holdtwo`. Read once for the first-listed asset and
+    // carried onto whichever asset happened to clear, it would quote the court's reasons
+    // about a town that never changed hands — a lie in the artifact's own voice, and one
+    // no reader could catch, because the sentence is perfectly well-formed prose.
+    const out = runOn(TWO_ASSET_SNAPSHOT, marketWorld({ assetIds: ['holding', 'holdtwo'] }));
+    const cleared = out.receipts.filter((r) => r.kind === 'sovereignty_sale_cleared');
+    expect(cleared.length).toBe(1);
+    expect(cleared[0].assetId, 'the race took the second-listed town').toBe('holdtwo');
+    expect('holding' < 'holdtwo', 'and the first-listed one is the OTHER town').toBe(true);
+
+    const receipts = getSpatialLedger(out.worldState, 'treaties')[treatyPairKey('buyer', 'seller')].receipts.join(' ');
+    expect(receipts, "the intent's receipt names the town that moved").toContain('weighs selling holdtwo to buyer');
+    // The live sentence above is the same reader's output on the same pair, so this
+    // anchored: absence measures WHICH asset was read, not a receipt list that vanished.
+    expect(receipts).not.toContain('weighs selling holding to buyer');
+    expect(out.worldState.occupations.holdtwo.occupierId, 'and the town that moved is the one sold').toBe('buyer');
+    expect(out.worldState.occupations.holding.occupierId, 'the other stayed home').toBe('seller');
   });
 });
 

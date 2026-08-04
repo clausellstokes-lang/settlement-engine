@@ -28,6 +28,18 @@
  * forbids. The kernel's fork sites and their call order are untouched in BOTH
  * configurations, so stream identity is preserved by construction rather than by fencing.
  *
+ * ── THE RACE IS A RACE, AND ITS BAND IS ALIVE ───────────────────────────────────
+ * Every (buyer, asset) candidate a seller's episode assembles draws `w * hash01(key)`
+ * and the HIGHEST draw wins; exact ties break on the codepoint order of the key. The
+ * first candidate that clears closes the episode, so the winner is decided by the draw
+ * rather than by enumeration order — which is the whole difference between a market and
+ * a queue. `BASE_OFFER_WEIGHT` is the BAR under every candidate's weight and intent's
+ * score is what lifts it (`offerWeightOf`): a weight that merely multiplied every
+ * candidate alike would cancel out of an ordering entirely and the band would be dead —
+ * a constant nobody could retune into a different world, which is the shape of tuning
+ * surface this estate has watched go quietly dead twice. Both sides of the band are
+ * reachable and pinned: at 1 the race is intent-blind, at 0 it is intent alone.
+ *
  * ── K3, AND THE HONEST NO-TRADE (chair ruling CR-WR10-H) ────────────────────────
  * The appraisal leaf is pinned at ZERO IMPORTS and takes already-banded words; assembling
  * those words from a court's belief map is the CALLER's job, which is this file. So this
@@ -54,15 +66,20 @@
  * lit-with-legs contract fixture drives synthetic banded legs through this composer to
  * prove the whole clearing works end to end the moment they arrive.
  *
- * ── TWO INJECTED READERS, AND WHY THEY ARE READERS RATHER THAN HOLES ────────────
- * `beliefLegsFor` and `reachFor` default to the production reads and exist as arguments
- * for the reason `sovereigntyIntent`'s believed-razing reader does: each is a READ whose
- * own correctness is pinned in its own battery (`sovereigntyMarketReadsWr10` proves the
- * three-legged geographic bound on a REAL digest, both arms), and standing a frozen
- * spatial digest plus a lived route network plus a goods-flow ledger up inside every
- * composer pin would turn this file into a geography fixture measuring geography. Neither
- * seam widens what the composer may reach: the default IS the production reader, and the
- * K3 import row pins the module's whole reach either way.
+ * ── THREE INJECTED READERS, AND WHY THEY ARE READERS RATHER THAN HOLES ──────────
+ * `beliefLegsFor`, `reachFor` and `intentFor` default to the production reads and exist
+ * as arguments for the reason `sovereigntyIntent`'s believed-razing reader does: each is
+ * a READ whose own correctness is pinned in its own battery (`sovereigntyMarketReadsWr10`
+ * proves the three-legged geographic bound on a REAL digest, both arms;
+ * `sovereigntyIntentWr10` proves the §1b-B scorer), and standing a frozen spatial digest
+ * plus a lived route network plus a goods-flow ledger up inside every composer pin would
+ * turn this file into a geography fixture measuring geography. `intentFor` carries one
+ * more reason: the character gate below refuses on `suppressed` OR on a score of zero,
+ * and the production reader FLOORS an unsuppressed score at `UNSUPPRESSED_FLOOR01`, so
+ * the second arm is unreachable from outside and would be an unproven branch forever —
+ * the seam is how the pin proves it is live. No seam widens what the composer may reach:
+ * the default IS the production reader, and the K3 import row pins the module's whole
+ * reach either way.
  *
  * DARK ⇒ A COMPLETE NO-OP: the same worldState and settlementUpdates REFERENCES, zero
  * reads below the gate, zero receipts, zero draws.
@@ -98,7 +115,13 @@ export const SOVEREIGNTY_MARKET_TUNING = Object.freeze({
    *  generation ago is not. Read off the treaty, never stored. */
   RESALE_COOLDOWN_TICKS: 52,
   /** The offer weight a candidate carries into the keyed race, before intent colours it.
-   *  A bar, never a selector (E3): it scales the draw, it does not pick the buyer. */
+   *  A BAR, never a selector (E3): every candidate stands on it and intent's score lifts
+   *  it toward 1 (`offerWeightOf`), so the band decides HOW MUCH the seller's appetite is
+   *  allowed to reorder the field — at 1 the race is intent-blind, at 0 it is intent
+   *  alone — and it still cannot pick a buyer, because it moves every candidate's floor
+   *  by the same amount. It is deliberately NOT a common multiplier: a factor shared by
+   *  every candidate cancels out of an ordering and leaves a band that no retuning could
+   *  ever change (the dead-band law — both sides reachable, proven). */
   BASE_OFFER_WEIGHT: 0.5,
   /** How much of the bundle a pressed seller asks for per available family. The bundle
    *  stacker prices it through each court's OWN needs; this is only how much is offered. */
@@ -217,6 +240,39 @@ function stackUntilItClears({ assetId, sellerId, buyerId, sellerAppraisal, buyer
   return { clearing, components };
 }
 
+/**
+ * THE WEIGHT ONE CANDIDATE CARRIES INTO THE RACE — the bar, lifted by intent.
+ *
+ * `base` is the floor every candidate stands on and `score01` lifts it the rest of the
+ * way to 1. Exported with the base as an ARGUMENT so both sides of the band can be
+ * driven in a pin without mutating a frozen constant: at `base` 1 every candidate weighs
+ * the same and the race is intent-blind; at 0 the weight IS the intent. The production
+ * call passes the tuned band and nothing else.
+ *
+ * @param {number} score01 @param {number} [base] @returns {number}
+ */
+export function offerWeightOf(score01, base = T.BASE_OFFER_WEIGHT) {
+  const bar = Math.min(1, Math.max(0, Number(base) || 0));
+  const colour = Math.min(1, Math.max(0, Number(score01) || 0));
+  return bar + (1 - bar) * colour;
+}
+
+/**
+ * THE KEYED RACE (spec §3.2): every candidate draws `w * hash01(key)` and the field is
+ * ordered by that draw, highest first. `w * u` multiplication, never `u ** (1/w)` — THE
+ * PROMISE's correctly-rounded law. An exact tie breaks on the codepoint order of the
+ * key, so the ordering is total and reproducible rather than dependent on the sort's
+ * stability. Pure: it reads nothing, writes nothing, and takes no stream.
+ *
+ * @param {ReadonlyArray<{ buyerId: string, assetId: string, key: string, weight: number }>} candidates
+ * @returns {Array<{ buyerId: string, assetId: string, key: string, weight: number, draw: number }>}
+ */
+export function raceOrder(candidates) {
+  return candidates
+    .map((candidate) => ({ ...candidate, draw: candidate.weight * hash01(candidate.key) }))
+    .sort((a, b) => (b.draw - a.draw) || codepoint(a.key, b.key));
+}
+
 /** This tick's pressure band for one settlement, through the SHARED ladder and the SHARED
  *  bound readers (never a rival).
  *  @param {Record<string, unknown>} settlement @param {Record<string, unknown>} worldState
@@ -246,12 +302,14 @@ function bandOf(settlement, worldState, settlementId) {
  *   settlementUpdates?: Array<Record<string, unknown>>, edges?: ReadonlyArray<Record<string, unknown>>,
  *   digest?: unknown, season?: unknown, tick: number, now?: unknown,
  *   beliefLegsFor?: (input: { worldState: unknown, courtId: string, assetId: string }) => Record<string, unknown>,
- *   reachFor?: (input: Record<string, unknown>) => ReadonlyArray<string> }} args
+ *   reachFor?: (input: Record<string, unknown>) => ReadonlyArray<string>,
+ *   intentFor?: (input: Record<string, unknown>) => ReturnType<typeof readSovereigntySaleIntent> }} args
  * @returns {MarketAdvanceResult}
  */
 export function advanceSovereigntyMarket({
   snapshot, worldState, settlementUpdates = [], edges = [], digest = null,
   season = null, tick, now = null, beliefLegsFor = beliefLegsOf, reachFor = reachableAssetsFor,
+  intentFor = readSovereigntySaleIntent,
 }) {
   const inert = {
     worldState, settlementUpdates, changed: false, newsEntries: [], receipts: [],
@@ -299,95 +357,121 @@ export function advanceSovereigntyMarket({
     if (assets.length === 0) continue;
     const episode = `${tick}:${band}`;
 
+    // ── 3+4. THE CANDIDATE FIELD, ASSEMBLED BEFORE ANYTHING IS PRICED. ──
+    /** @type {Array<{ buyerId: string, assetId: string, key: string, weight: number }>} */
+    const field = [];
     for (const buyerId of ids) {
       if (buyerId === sellerId) continue;
-      // ── 3. THE GEOGRAPHIC BOUND SHAPES THE SET: what cannot be held is ABSENT. ──
+      // THE GEOGRAPHIC BOUND SHAPES THE SET: what cannot be held is ABSENT — and so is
+      // A COURT'S OWN SEAT. A settlement is both a party and a holding in this world, so
+      // the buyer loop hands `X` its own id as an asset unless it is excluded here; the
+      // appraisal leaf then refuses to price it (a court cannot price itself) and the
+      // refusal travels all the way to the Herald as an honest no-trade about a sale
+      // nobody ever proposed. Absent at assembly, exactly as the unreachable buyer is.
       const reachable = reachFor({
         worldState: state, digest, buyerId, assetIds: assets, season,
-      });
+      }).filter((assetId) => assetId !== buyerId);
       if (reachable.length === 0) continue;
-      // ── 4. THE CHARACTER GATE (§1b-B): a suppressed sale scores 0 and SAYS WHY. ──
-      const intent = readSovereigntySaleIntent({
+      // THE CHARACTER GATE (§1b-B): a suppressed sale scores 0 and SAYS WHY. It is
+      // HOISTED above the assets deliberately and by measurement, not by assumption:
+      // `readSovereigntySaleIntent` resolves suppression and score from the PAIR and the
+      // seller's own memory, and the asset enters only the receipt sentence. The receipt
+      // that rides a document is re-read per asset at the clearing below.
+      const gate = intentFor({
         worldState: state, snapshot, sellerId, buyerId, assetId: reachable[0],
       });
-      if (intent.suppressed || intent.score01 <= 0) {
+      if (gate.suppressed || gate.score01 <= 0) {
         receipts.push({
           kind: 'sovereignty_sale_suppressed', tick, episode, sellerId, buyerId,
-          assetId: reachable[0], suppressionKind: intent.suppressionKind, receipt: intent.receipt,
+          assetId: reachable[0], suppressionKind: gate.suppressionKind, receipt: gate.receipt,
         });
         evidence.push({
           kind: 'kinship_opposes_the_sale', tick, assetId: reachable[0],
-          fromId: sellerId, toId: buyerId, reasons: [intent.receipt],
+          fromId: sellerId, toId: buyerId, reasons: [gate.receipt],
         });
         continue;
       }
-      // ── 5. THE RACE, keyed hash01 and `w * u` (never u ** (1/w)). ──
+      const weight = offerWeightOf(gate.score01);
       for (const assetId of reachable) {
-        const u = hash01(`sovereignty.offer.${realmId}.${sellerId}.${buyerId}.${assetId}.${episode}`);
-        if (T.BASE_OFFER_WEIGHT * intent.score01 * u <= 0) continue;
-
-        // ── 6. THE CLEARING. Two appraisals, two bundle valuations, never merged (K4),
-        // and the bundle SEARCHED rather than fixed (see stackUntilItClears). ──
-        const sellerAppraisal = appraiseSettlementAsset({
-          assetId, appraiserId: sellerId, ...beliefLegsFor({ worldState: state, courtId: sellerId, assetId }),
+        field.push({
+          buyerId,
+          assetId,
+          key: `sovereignty.offer.${realmId}.${sellerId}.${buyerId}.${assetId}.${episode}`,
+          weight,
         });
-        const buyerAppraisal = appraiseSettlementAsset({
-          assetId, appraiserId: buyerId, ...beliefLegsFor({ worldState: state, courtId: buyerId, assetId }),
-        });
-        const { clearing, components } = stackUntilItClears({
-          assetId, sellerId, buyerId, sellerAppraisal, buyerAppraisal,
-        });
-        if (!clearing.cleared) {
-          // THE HONEST NO-TRADE. `unpriced` is the belief-legs road; the other two are a
-          // court that will not sell that cheap and a court that will not pay that much.
-          receipts.push({
-            kind: 'sovereignty_no_trade', tick, episode, sellerId, buyerId, assetId,
-            verdict: clearing.verdict, receipt: clearing.receipt,
-            // HOW FAR THE SEARCH GOT before it stopped. The "whichever comes FIRST" rule
-            // is only observable as a COUNT — a search that kept stacking past the buyer's
-            // ceiling reaches the same verdict by a different road, and the difference
-            // between a court that offered three families and one that emptied its whole
-            // catalogue into a refusal is the difference between a bargain and a farce.
-            componentsOffered: components.length,
-            componentsAvailable: /** @type {ReadonlyArray<string>} */ (clearing.componentsAvailable).length,
-            sellerReceipt: sellerAppraisal.receipt, buyerReceipt: buyerAppraisal.receipt,
-          });
-          evidence.push({
-            kind: 'sovereignty_no_trade', tick, assetId, fromId: sellerId, toId: buyerId,
-            reasons: [clearing.receipt],
-          });
-          continue;
-        }
-        // ── 7. THE DOCUMENT. peaceTerms' family mints it; this composer never assembles
-        // a treaty by hand, and WW-A's conveyance writer executes it at the signing. ──
-        const mint = mintSovereigntySaleTreaties({
-          sales: [{
-            assetId, sellerId, buyerId, components, reasons: [String(clearing.receipt), intent.receipt],
-          }],
-          worldState: state, settlementUpdates: updates, edges: graphEdges, tick, now,
-        });
-        if (!mint.minted) {
-          // A REFUSED MINT IS RECEIPTED, never silent. The clearing said yes and the
-          // instrument said no — a pair already bound by a live document, or a clause the
-          // catalog cannot represent — and a reader who is told the trade cleared and then
-          // sees no deed has been lied to by omission.
-          receipts.push({
-            kind: 'sovereignty_no_trade', tick, episode, sellerId, buyerId, assetId,
-            verdict: mint.refusal, receipt: `${sellerId} and ${buyerId} agreed on ${assetId},`
-              + ` and the instrument refused: ${String(mint.refusal).replace(/_/g, ' ')}.`,
-            sellerReceipt: sellerAppraisal.receipt, buyerReceipt: buyerAppraisal.receipt,
-          });
-          continue;
-        }
-        state = mint.worldState;
-        updates = mint.settlementUpdates;
-        evidence.push(...mint.newsSeeds, ...mint.beats);
-        receipts.push({
-          kind: 'sovereignty_sale_cleared', tick, episode, sellerId, buyerId, assetId,
-          receipt: clearing.receipt,
-        });
-        break;                                    // a cleared sale closes the episode
       }
+    }
+
+    // ── 5. THE RACE, keyed hash01 and `w * u` (never u ** (1/w)). The field is tried in
+    // DRAW ORDER, so the buyer who wins is the one the draw favoured rather than the one
+    // whose id sorts first — the difference between a market and a queue. ──
+    for (const { buyerId, assetId } of raceOrder(field)) {
+      // ── 6. THE CLEARING. Two appraisals, two bundle valuations, never merged (K4),
+      // and the bundle SEARCHED rather than fixed (see stackUntilItClears). ──
+      const sellerAppraisal = appraiseSettlementAsset({
+        assetId, appraiserId: sellerId, ...beliefLegsFor({ worldState: state, courtId: sellerId, assetId }),
+      });
+      const buyerAppraisal = appraiseSettlementAsset({
+        assetId, appraiserId: buyerId, ...beliefLegsFor({ worldState: state, courtId: buyerId, assetId }),
+      });
+      const { clearing, components } = stackUntilItClears({
+        assetId, sellerId, buyerId, sellerAppraisal, buyerAppraisal,
+      });
+      if (!clearing.cleared) {
+        // THE HONEST NO-TRADE. `unpriced` is the belief-legs road; the other two are a
+        // court that will not sell that cheap and a court that will not pay that much.
+        receipts.push({
+          kind: 'sovereignty_no_trade', tick, episode, sellerId, buyerId, assetId,
+          verdict: clearing.verdict, receipt: clearing.receipt,
+          // HOW FAR THE SEARCH GOT before it stopped. The "whichever comes FIRST" rule
+          // is only observable as a COUNT — a search that kept stacking past the buyer's
+          // ceiling reaches the same verdict by a different road, and the difference
+          // between a court that offered three families and one that emptied its whole
+          // catalogue into a refusal is the difference between a bargain and a farce.
+          componentsOffered: components.length,
+          componentsAvailable: /** @type {ReadonlyArray<string>} */ (clearing.componentsAvailable).length,
+          sellerReceipt: sellerAppraisal.receipt, buyerReceipt: buyerAppraisal.receipt,
+        });
+        evidence.push({
+          kind: 'sovereignty_no_trade', tick, assetId, fromId: sellerId, toId: buyerId,
+          reasons: [clearing.receipt],
+        });
+        continue;
+      }
+      // ── 7. THE DOCUMENT. peaceTerms' family mints it; this composer never assembles
+      // a treaty by hand, and WW-A's conveyance writer executes it at the signing.
+      // THE INTENT IS RE-READ FOR THE ASSET ACTUALLY SOLD: the gate above is hoisted
+      // because suppression and score do not move with the asset, but the receipt does —
+      // it names the holding in words — and a document that quoted the reason a court
+      // weighed selling its OTHER town would be a lie in the artifact's own voice. ──
+      const intent = intentFor({ worldState: state, snapshot, sellerId, buyerId, assetId });
+      const mint = mintSovereigntySaleTreaties({
+        sales: [{
+          assetId, sellerId, buyerId, components, reasons: [String(clearing.receipt), intent.receipt],
+        }],
+        worldState: state, settlementUpdates: updates, edges: graphEdges, tick, now,
+      });
+      if (!mint.minted) {
+        // A REFUSED MINT IS RECEIPTED, never silent. The clearing said yes and the
+        // instrument said no — a pair already bound by a live document, or a clause the
+        // catalog cannot represent — and a reader who is told the trade cleared and then
+        // sees no deed has been lied to by omission.
+        receipts.push({
+          kind: 'sovereignty_no_trade', tick, episode, sellerId, buyerId, assetId,
+          verdict: mint.refusal, receipt: `${sellerId} and ${buyerId} agreed on ${assetId},`
+            + ` and the instrument refused: ${String(mint.refusal).replace(/_/g, ' ')}.`,
+          sellerReceipt: sellerAppraisal.receipt, buyerReceipt: buyerAppraisal.receipt,
+        });
+        continue;
+      }
+      state = mint.worldState;
+      updates = mint.settlementUpdates;
+      evidence.push(...mint.newsSeeds, ...mint.beats);
+      receipts.push({
+        kind: 'sovereignty_sale_cleared', tick, episode, sellerId, buyerId, assetId,
+        receipt: clearing.receipt,
+      });
+      break;                                      // a cleared sale closes the episode
     }
   }
 
