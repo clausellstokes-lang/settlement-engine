@@ -215,7 +215,14 @@ describe('settlement politics — differential strain → revanchism', () => {
       { faction: 'Noble House', power: 45, isGoverning: true },
       { faction: 'Merchant League', power: 40 },
     ];
-    const treaties = { 'S1>S2': { loserId: 'S1', terms: [{ type: 'tribute', burden01: 0.9 }] } };
+    // THE RECORD CARRIES BOTH HALVES OF ITS PAIR, as every mint writes it (peaceTerms'
+    // treaty builder sets `victorId` and `loserId` together). The fixture named only the
+    // loser until 2026-08-04; the burden read now resolves the bound party through
+    // `treatyOrientationOf` (CR-WR10-G), and a half-named record is deliberately
+    // UNRESOLVED there — `unknown` is a real verdict, not a shrug — so an incomplete
+    // fixture would have been proving the burden road on a document the engine never
+    // mints.
+    const treaties = { 'S1>S2': { victorId: 'S2', loserId: 'S1', terms: [{ type: 'tribute', burden01: 0.9 }] } };
     const { worldState, snapshot } = world({ factions, rosterFactions, treaties });
     // Form the bloc, then let strain accrue under the burden.
     const { worldState: ws } = drive(worldState, snapshot, 25, 0.01);
@@ -223,6 +230,36 @@ describe('settlement politics — differential strain → revanchism', () => {
     expect(blocs.length).toBe(1);
     expect(blocs[0].strain).toBeGreaterThan(0.2); // the burden climbed the strain.
     expect(factionRevanchism01(ws, 'S1', 'Merchant League')).toBeGreaterThan(0.2);
+  });
+
+  it('A SALE BURDENS ITS BUYER, and the seller it pays walks free (CR-WR10-G)', () => {
+    // THE SAME LADDER, THE OTHER INSTRUMENT. A WR-10 sale treaty carries no victor and no
+    // loser; the party its terms bind is the BUYER, which is what makes the consideration
+    // a price rather than a confiscation. Read off `loserId` — the spelling this file's
+    // war fixture uses, and the one the burden read carried until 2026-08-04 — a bought
+    // court's tribute produced the empty string and the strain never accrued: a silence,
+    // not an error, and the exact shape of defect CR-WR10-G exists to end.
+    const factions = [
+      fac('S1', 'Noble House', 'noble', 'S1:npc_1', 'Alda'),
+      fac('S1', 'Merchant League', 'merchant', 'S1:npc_2', 'Boro'),
+    ];
+    const rosterFactions = [
+      { faction: 'Noble House', power: 45, isGoverning: true },
+      { faction: 'Merchant League', power: 40 },
+    ];
+    const sale = { 'S1>S2': { sellerId: 'S2', buyerId: 'S1', terms: [{ type: 'tribute', burden01: 0.9 }] } };
+    const bought = world({ factions, rosterFactions, treaties: sale });
+    const { worldState: ws } = drive(bought.worldState, bought.snapshot, 25, 0.01);
+    expect(settlementBlocs(ws, 'S1')[0].strain, 'the buyer bears what it agreed to pay').toBeGreaterThan(0.2);
+
+    // THE MIRROR, on the identical fixture: with S1 as the SELLER it is owed the tribute
+    // rather than bound by it, so no strain accrues. Same terms, same factions, same
+    // ticks — only the orientation moves, which is what makes the pin above a direction
+    // and not a wealth measurement.
+    const owed = { 'S1>S2': { sellerId: 'S1', buyerId: 'S2', terms: [{ type: 'tribute', burden01: 0.9 }] } };
+    const paid = world({ factions, rosterFactions, treaties: owed });
+    const { worldState: ws2 } = drive(paid.worldState, paid.snapshot, 25, 0.01);
+    expect(settlementBlocs(ws2, 'S1')[0].strain, 'the seller bears none of it').toBeLessThanOrEqual(0.2);
   });
 });
 

@@ -42,6 +42,7 @@
 import { clamp, clamp01 } from '../../kernel/math.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { stablePart } from './stablePart.js';
+import { treatyOrientationOf } from './treatyOrientation.js';
 import { faithAlignmentQuadrant, rulingPowerFromArchetype } from '../spatial/cohesionWeave.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { mobilizationSeverity } from './mobilization.js';
@@ -636,9 +637,16 @@ export function factionRevanchism01(worldState, cid, factionName) {
 
 // ── §4 DIFFERENTIAL PEACE-TERM BURDEN (the revanchism input) ──────────────────────
 /**
- * The differential peace-term burden a settlement bears as a treaty LOSER (0..1) — the
- * max burden01 across the terms landed on it in the treaties ledger. 0 when the peace
- * layer is dark or the settlement bears no term (byte-neutral). Pure.
+ * The differential peace-term burden a settlement bears as THE PARTY A TREATY BINDS
+ * (0..1) — the max burden01 across the terms landed on it in the treaties ledger. 0 when
+ * the peace layer is dark or the settlement bears no term (byte-neutral). Pure.
+ *
+ * THE OBLIGOR IS READ THROUGH THE ONE ORIENTATION READER (CR-WR10-G), never off
+ * `loserId`: revanchism is a story about bearing terms, and on a WR-10 sale the party
+ * bearing them is the BUYER that is still paying for the town. The raw spelling read a
+ * victor-free sale as the string "undefined", so a bought court's burden never reached
+ * the strain ladder at all — a silence, not an error.
+ *
  * @param {Record<string, unknown> | null | undefined} worldState
  * @param {string} cid
  * @returns {number}
@@ -649,7 +657,7 @@ function treatyBurdenFor(worldState, cid) {
   let burden = 0;
   for (const k of Object.keys(treaties).sort(compareCodepoint)) {
     const t = asObject(treaties[k]);
-    if (String(t.loserId ?? '') !== String(cid)) continue;
+    if (treatyOrientationOf(t).obligorId !== String(cid)) continue;
     const terms = Array.isArray(t.terms) ? t.terms : [];
     for (const term of terms) {
       const b = Number(asObject(term).burden01);

@@ -31,6 +31,9 @@
  * fixture mirrors the deriver: the treaty records are hand-built in the shape the real
  * mints produce, and every read under test is the production one.
  */
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join, relative } from 'node:path';
 import { describe, it, expect } from 'vitest';
 
 import {
@@ -43,6 +46,7 @@ import {
   advanceTreaties, demilitarizationCapFor, occupationHoldFor, treatyDocument,
   treatyPairKey, TERM_CATALOG,
 } from '../../src/domain/worldPulse/peaceTerms.js';
+import { hegemonyRead } from '../../src/domain/worldPulse/hegemony.js';
 import { executeTreatyConveyances } from '../../src/domain/worldPulse/sovereigntyTransfer.js';
 import { SOVEREIGNTY_REQUIRED_RULES } from '../../src/domain/worldPulse/sovereigntyAssets.js';
 import { createOccupationRecord } from '../../src/domain/worldPulse/occupation.js';
@@ -381,6 +385,36 @@ describe('CR-WR10-G — the display surface renders no "undefined"', () => {
     expect(strings.some((s) => s.includes('undefined'))).toBe(false);
   });
 
+  it('a SALE ties a sphere and strains its buyer — the two consumers the totality claim missed', () => {
+    // CR-WR10-G's claim is that EVERY consumer asks the reader. Two did not: the hegemony
+    // sphere census and the revanchism burden read both spelled `treaty.victorId` /
+    // `treaty.loserId` off a ledger row. Neither crashed on a victor-free sale — they read
+    // the empty string and dropped the document — so the defect was a SILENCE: a court
+    // that had just mortgaged itself to buy a town appeared in no sphere and bore no
+    // strain. Both now ask the reader, and this pin is the behaviour that proves it, on a
+    // sale document whose subordinating term really does bind the buyer.
+    const key = treatyPairKey('buyer', 'seller');
+    const sphereOf = (treaty) => hegemonyRead({
+      worldState: ledgerWorld(treaty, key), settlements: PARTIES, minTies: 1,
+    });
+
+    const sale = sphereOf(saleTreaty([term('tribute', { magnitude: 0.9, burden01: 0.8 })]));
+    expect(sale.hasHegemony, 'a sale tie is a subordinate tie like any other').toBe(true);
+    expect(sale.spheres.length).toBe(1);
+    expect(sale.spheres[0].centerId, 'the SELLER is owed, so the seller holds the tie').toBe('seller');
+    expect(sale.spheres[0].members.map((m) => m.id), 'and the buyer is the subordinate').toEqual(['buyer']);
+
+    // THE WAR CONTROL, same two names, same term: the direction REVERSES, so the read
+    // above measures the orientation rather than which id sorts first.
+    const war = sphereOf(warTreaty([term('tribute', { magnitude: 0.9, burden01: 0.8 })]));
+    expect(war.spheres[0].centerId, 'the victor holds the wartime tie').toBe('buyer');
+    expect(war.spheres[0].members.map((m) => m.id)).toEqual(['seller']);
+
+    // The revanchism burden read is the second converted consumer; its direction is
+    // pinned where its fixtures live (settlementPoliticsPins — "A SALE BURDENS ITS
+    // BUYER"), and its membership in this ruling is held by the census below.
+  });
+
   it('the historic war document is byte-identical in every field this ruling touched', () => {
     const key = treatyPairKey('buyer', 'seller');
     const doc = treatyDocument(ledgerWorld(warTreaty([term('tribute')]), key), key);
@@ -393,5 +427,111 @@ describe('CR-WR10-G — the display surface renders no "undefined"', () => {
     // A term with no assetId gains NO key — the drop-when-absent discipline, so every
     // treaty minted before WR-10 reads exactly as it always did.
     expect(Object.prototype.hasOwnProperty.call(doc.terms[0], 'assetId')).toBe(false);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// THE CONSUMER CENSUS. CR-WR10-G's header makes a TOTALITY claim — "the orientation is
+// read once, here, and every consumer asks this module instead of spelling the fields
+// itself" — and a totality claim that nothing measures is a sentence, not a law. The
+// first round-2 verification found it short by two: `hegemony.js` and
+// `settlementPolitics.js` both spelled `treaty.victorId` / `treaty.loserId` straight off
+// a ledger row. Neither threw on a victor-free sale; each read the empty string and
+// dropped the document, so the gap was invisible to every existing test in the tree.
+//
+// The walk is TWO-WAY on purpose, because one-way coverage is how the last census went
+// blind (R19): the DECLARED consumers must each import the reader, AND the discovered
+// set of ledger-reading modules that still spell the war pair in code must be exactly the
+// declared WRITER set. A new consumer that reads a treaty's parties by hand reds here on
+// the day it lands, and a declared consumer that quietly stops asking reds too.
+// ═══════════════════════════════════════════════════════════════════════════════
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+
+/** Every module that resolves a treaty's parties, and why it must ask the reader. */
+const ORIENTATION_CONSUMERS = Object.freeze([
+  ['worldPulse/peaceTerms.js', "PASS 2's obligor drives the granary, the monitor reach, the strain accrual and the defaultedBy write"],
+  ['worldPulse/peaceTermsDocument.js', 'the historic victor/loser slots four display surfaces read are RESOLVED, not copied'],
+  ['worldPulse/treatyEnforcement.js', 'the cap and the occupation hold bind the party the terms bind'],
+  ['worldPulse/sovereigntyTransfer.js', 'the conveyance runs giver → receiver, which is the OTHER axis'],
+  ['worldPulse/sovereigntyMarketStage.js', 'the resale cooldown silences a holding\'s GIVER, war or sale alike'],
+  ['worldPulse/hegemony.js', 'a sphere is a pattern in the obligation axis: the obligee holds the tie'],
+  ['worldPulse/settlementPolitics.js', 'revanchism accrues on the party a treaty BINDS'],
+]);
+
+/** The ONE module allowed to spell the war pair in code: it WRITES those fields onto the
+ *  record it mints, and reads them back off a carried term sheet — neither of which is a
+ *  ledger row whose orientation is in question. */
+const WAR_PAIR_WRITERS = Object.freeze(['worldPulse/peaceTerms.js']);
+
+/** A module reads the treaty ledger when it names it. */
+const READS_LEDGER_RE = /treatyLedgerOf\s*\(|['"`]treaties['"`]|\.treaties\b/;
+/** A raw war-pair field access — the spelling this ruling replaced. */
+const RAW_PAIR_RE = /\.(?:victorId|loserId)\b/;
+/** Comments carry the OLD spelling on purpose (they explain what was cured), so the scan
+ *  reads code only. A crude strip is correct here: a false positive costs a red, never a
+ *  miss, and the negative control below proves the stripper does not swallow live code. */
+const stripComments = (code) => code.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/\/\/[^\n]*/g, ' ');
+
+function walkJs(dir, out = []) {
+  for (const entry of readdirSync(dir)) {
+    const p = join(dir, entry);
+    if (statSync(p).isDirectory()) walkJs(p, out);
+    else if (p.endsWith('.js')) out.push(p);
+  }
+  return out;
+}
+
+/** Every src/domain module that reads the treaty ledger, with what it spells. */
+function ledgerReaders() {
+  return walkJs(join(ROOT, 'src/domain')).map((p) => {
+    const source = readFileSync(p, 'utf8');
+    const code = stripComments(source);
+    return {
+      rel: relative(join(ROOT, 'src'), p).replace(/\\/g, '/'),
+      readsLedger: READS_LEDGER_RE.test(code),
+      spellsRawPair: RAW_PAIR_RE.test(code),
+      asksTheReader: /from '\.\/treatyOrientation\.js'|from '\.\.\/worldPulse\/treatyOrientation\.js'/.test(source),
+    };
+  });
+}
+
+describe('CR-WR10-G — the consumer census (the totality claim, measured)', () => {
+  it('EVERY DECLARED CONSUMER ASKS THE READER', () => {
+    const byRel = new Map(ledgerReaders().map((row) => [row.rel, row]));
+    const silent = [];
+    for (const [rel] of ORIENTATION_CONSUMERS) {
+      const row = byRel.get(`domain/${rel}`);
+      expect(row, `${rel} is in the tree at the address this census names`).toBeTruthy();
+      if (!row.asksTheReader) silent.push(rel);
+    }
+    expect(silent, 'these modules resolve a treaty\'s parties without asking').toEqual([]);
+    expect(ORIENTATION_CONSUMERS.length, 'and the census is not an empty list').toBeGreaterThan(6);
+  });
+
+  it('NO LEDGER READER SPELLS THE WAR PAIR BY HAND — except the writer that mints it', () => {
+    const offenders = ledgerReaders()
+      .filter((row) => row.readsLedger && row.spellsRawPair)
+      .map((row) => row.rel.replace(/^domain\//, ''))
+      .sort();
+    expect(offenders, 'the raw spelling survives only where the fields are WRITTEN')
+      .toEqual([...WAR_PAIR_WRITERS].sort());
+
+    // THE WALK IS LIVE, not an empty directory scan: the ledger-reading population is
+    // real, and the two modules this round converted are inside it.
+    const readers = ledgerReaders().filter((row) => row.readsLedger).map((row) => row.rel);
+    expect(readers.length, 'the ledger really is read across the tree').toBeGreaterThan(8);
+    expect(readers).toContain('domain/worldPulse/hegemony.js');
+    expect(readers).toContain('domain/worldPulse/settlementPolitics.js');
+  });
+
+  it('THE DETECTOR ITSELF: it sees a raw read, and is not fooled by a comment', () => {
+    // A census whose scanner has quietly stopped matching passes forever. Both halves are
+    // exercised on synthetic sources, so the assertions above measure the tree rather
+    // than a regex that no longer fires.
+    const live = 'const centerId = String(treaty.victorId ?? "");';
+    const commented = '// this used to read String(treaty.victorId) and it lied.';
+    expect(RAW_PAIR_RE.test(stripComments(live)), 'a live read is seen').toBe(true);
+    expect(RAW_PAIR_RE.test(stripComments(commented)), 'a comment about it is not').toBe(false);
+    expect(READS_LEDGER_RE.test("getSpatialLedger(ws, 'treaties')"), 'and a ledger read is seen').toBe(true);
   });
 });

@@ -30,6 +30,7 @@
 
 import { compareCodepoint } from '../deterministicSort.js';
 import { getSpatialLedger } from '../spatial/distanceRead.js';
+import { treatyOrientationOf } from './treatyOrientation.js';
 
 /** Tuning — exported so the D4 reason half reads the SAME threshold. */
 export const HEGEMONY_TUNING = Object.freeze({
@@ -72,7 +73,10 @@ function num(v, d = 0) { return Number.isFinite(Number(v)) ? Number(v) : d; }
 function rankCompliance(s) { return s === 'defaulted' ? 2 : s === 'strained' ? 1 : 0; }
 const COMPLIANCE_WORD = Object.freeze(['honored', 'strained', 'defaulted']);
 
-/** @typedef {{ victorId?: unknown, loserId?: unknown, parties?: unknown, terms?: unknown }} TreatyShape */
+/** A ledger row carries EITHER the war pair or the sale pair (drop-when-absent, T4) —
+ *  `treatyOrientationOf` is what resolves either into the two roles this leaf needs.
+ *  @typedef {{ victorId?: unknown, loserId?: unknown, sellerId?: unknown, buyerId?: unknown,
+ *    parties?: unknown, terms?: unknown }} TreatyShape */
 /** @typedef {{ id?: unknown, name?: unknown, settlement?: { name?: unknown } | null }} NameItem */
 
 /** @param {unknown} worldState @returns {Record<string, TreatyShape> | null} */
@@ -159,8 +163,16 @@ export function hegemonyRead({
   for (const key of Object.keys(ledger).sort(compareCodepoint)) {
     const treaty = ledger[key];
     if (!treaty || typeof treaty !== 'object') continue;
-    const centerId = String(treaty.victorId ?? '');
-    const subId = String(treaty.loserId ?? '');
+    // WHO HOLDS THE TIE — THROUGH THE ONE ORIENTATION READER (CR-WR10-G). A sphere is a
+    // pattern in the OBLIGATION axis: the center is the party the subordinating terms are
+    // owed to, the sub is the party they bind. On a war settlement that is the victor over
+    // the loser, exactly as the two raw fields spelled it here for years. On a WR-10 sale
+    // it is the SELLER over the buyer that is still paying for the town — and the raw
+    // spelling read that document as the string "undefined" on both sides, so a bought
+    // court's real subordination never entered a sphere at all.
+    const orientation = treatyOrientationOf(treaty);
+    const centerId = orientation.obligeeId;
+    const subId = orientation.obligorId;
     for (const p of Array.isArray(treaty.parties) ? treaty.parties : []) knownIds.add(String(p));
     if (centerId) knownIds.add(centerId);
     if (subId) knownIds.add(subId);
