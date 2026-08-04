@@ -298,6 +298,49 @@ ransom claims                               — WR-7d: ride the I2 reparations-c
 
 feasibility, comparative costs, home front  — NEVER STORED. Pure belief-side
                                             // evaluators (WR-4/WR-8); receipts only.
+
+sovereignty transfers (WR-10 wiring)        — NO new top-level key, NO new ledger.
+  // (Added 2026-08-04, chair-landed under the owner's recorded grant; closes the
+  // WR-10 row's STOP item 3.) A conveyance REWRITES EXISTING records through ONE
+  // new writer leaf, sovereigntyTransfer.js, invoked one-shot at treaty MINT (the
+  // compelled_alliance mint-time-execution precedent in peaceTerms.js —
+  // sovereignty is stream:false and transfers once, not per installment):
+  //   • satellite asset: the row moves between parents INSIDE the existing
+  //     spatialLedgers.satellites ledger (orbit re-derived at the destination;
+  //     the row-move helper lives with mintSteading in
+  //     settlementLifecycleKernel.js so the steading pen stays in one file);
+  //   • vassal asset: worldState.occupations[assetId].occupierId rewrites IN
+  //     PLACE with the `vassalized` rung PRESERVED — deliberately NOT
+  //     createOccupationRecord, whose overwrite path resets to `contested`;
+  //   • settlement.parentRef is NEVER touched, and the regionalGraph lineage
+  //     edge is NEVER severed (settlementParentRef.js: "an import, sale, or
+  //     severance must never infer an edge" — the receipt is history, the edge
+  //     is political force, and the sale rewrites NEITHER; WR-3's reclaim and
+  //     independence claims keep reading both, which is amendment S's
+  //     "the market and the lineage cause compose for free").
+  // The treaty IS the artifact (amendment S: one instrument, one ledger):
+  //   TermRecord gains ONE conditional field —
+  //     assetId?: string             // the conveyed settlement (the `good`
+  //                                  // precedent; only on sovereignty_transfer
+  //                                  // terms; a conveyance without its object
+  //                                  // is unrepresentable)
+  //   SatelliteRecord gains ONE conditional field —
+  //     conveyed?: { fromId, tick }  // sale provenance, drop-when-absent; at
+  //                                  // graduation it folds into parentRef so
+  //                                  // the sold steading's grievance matures
+  //                                  // through the WR-3 seam (a satellite has
+  //                                  // no relationship object to resent with
+  //                                  // until it is a campaign member)
+  // The grievance is FUEL, not a record: the sold vassal's resentment accrues
+  // on the existing relationship edge (the accrueStrainResentment §12.3
+  // precedent) and the reasons layer's existing `grievance` scorer carries it
+  // decay-inherently — no grievance ledger, no decree (the 8-tick decree ramp
+  // is the wrong clock for a sale).
+  // The fragility is the occupation record's OWN resistance field (raised at
+  // conveyance; regen-safe, campaign-level state). The publicLegitimacy delta
+  // rides the existing applyLegitimacyDelta writer and is DECLARED
+  // regen-volatile (powerStructure.publicLegitimacy is a generated field) —
+  // the durable fragility is the ledger's, the score is the display echo.
 ```
 
 **What is deliberately NOT modeled:** no treaty congress object, no negotiation
@@ -1352,6 +1395,42 @@ builds after WR-7 — cession-for-peace rides the envoy term-sheet)
   geographic bound's negative case (an unreachable buyer never appears in the
   candidate set); swap symmetry; JSON-round-trip + regen/undo lifecycle on the
   rewritten edges (the alias + lifecycle hazards); dormancy golden.
+
+**Lifecycle paths (added 2026-08-04, the wiring declaration):** the transfer writer
+adds NO persisted top-level key and NO new ledger; it rewrites existing records
+through their existing homes, plus two conditional fields (TermRecord.assetId on
+sovereignty_transfer terms only; SatelliteRecord.conveyed on sold steadings only —
+both drop-when-absent) and one new write path (an occupierId rewrite on
+worldState.occupations[assetId] that PRESERVES the vassalized rung; occupations has
+no load-time normalizer, so the writer's shape discipline is pinned at the writer).
+CREATE: one-shot at treaty mint through the mint-time execution closure
+(peaceTerms.js stays the single terms writer; sovereigntyTransfer.js is the single
+conveyance writer; the DM verb routes through the SAME writer). The writer re-reads
+eligibility against live truth at execution and LAPSES receipted when the world has
+moved since drafting — K3 forbids reality-checking the NEGOTIATION, not the writer;
+a writer is truth-side by definition. parentRef and the lineage edge are never
+written. READ: eligibility/appraisal/reach/clearing stay the landed pure leaves;
+WR-3's claims read the untouched receipt + live edge. PERSIST: every touched record
+already rides ensureWorldState's conditional-ledger clone (spatialLedgers.satellites,
+spatialLedgers.treaties, spatialLedgers.warReasons, worldState.occupations) or the
+settlement record; JSON-round-trip pinned on each rewritten shape. REGENERATE (THE
+PROMISE): the wiring consumes ZERO PRNG streams dark AND lit (keyed hash01 only, the
+plan-lane discipline), so a same-seed replay re-executes every transfer identically
+and the kernel's fork order never moves; a single-settlement REGENERATION recomputes
+generated fields — the legitimacy score echo is declared volatile there, while the
+conveyance's durable state (ledgers, treaty, resistance, conveyed provenance,
+parentRef via preserveSettlementParentRef) survives by existing law. UNDO: the
+pulse undo ring restores preWorldState wholesale and every touched home rides it;
+the DM verb rides the proposal lane's registered undo semantics. MIGRATE/IMPORT:
+account import deliberately starts a fresh world for campaign worldState (ledgers
+and treaties do not cross), and settlement import re-addresses parentRef.parentId
+only when the parent landed in-batch (the orphan-history law) — the sale changes
+nothing here because it writes no new importable surface; the known pre-existing
+liveEdgeId re-address gap is recorded, not widened. VEIL: no new public payload
+builder; Herald kinds ride the governed projector with audience projection
+(dm-only ⇒ covert, the ruler_books_compromised discipline for the books-divergence
+kind), and actor-id keys spread in only when non-empty (the T4 byte-neutrality law).
+
 **Bands:** adequacy of the three geographic reads, trajectory-band weights in the
 appraisal, reserve/ceiling derivation, firesale discount, grievance magnitude,
 legitimacy start, plan-trigger thresholds.
@@ -1457,6 +1536,13 @@ current `52 == INTERVAL_WEEKS.one_year`, persisted legacy `12`, selected per tre
 the original "whichever arm" fork is closed]) · the map km-scale for the transit kernel's mode
 table (J-D11(b); does not exist in the tree — owner-signed when the mode table
 lands).
+Added 2026-08-04 (the wiring declaration, chair-landed): WR-10 geographic-read
+adequacy (incl. MAX_REINFORCEMENT_WEEKS, which must stay inside the measured
+hopWeeks spectrum — the dead-band law) + trajectory weights + reserve/ceiling
+derivation + firesale discount + grievance magnitude + legitimacy start +
+plan-trigger thresholds + RESISTANCE_START + sale-cooldown band — authored raw,
+deliberately NOT in proposedSoakBands.js (status-RATIFIED gate), owner-signed at
+the soak redo.
 
 ## §8 HERALD + LEGIBILITY CONTRACT (the sentences this program must be able to say)
 The legibility law is an acceptance criterion, not decoration. Each wave's receipts
