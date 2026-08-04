@@ -1223,3 +1223,19 @@ no seed can have moved.
   an owner-gated persistence-shape decision AND is forbidden outright by WR-9's lifecycle
   clause. Until then the acceptance harness reports amendment L's obligation as unmet, which
   is the correct answer.
+
+### ⚠ CORRECTION TO THE ROW ABOVE, AND TO `7a3c51ef`'S COMMIT BODY (immutable).
+
+Both record the focused battery as **"5 files / 97 tests green"**. That figure was captured
+BEFORE the last pin of the lane — the force-address wiring case
+(`polices the WR-9c force address through the SAME wall as the histograms`) — was added, and
+was not re-read afterwards. **THE EXECUTED FIGURE AT `c0ae5eb7` IS 5 files / 98 tests green.**
+
+The measured pin delta is unchanged and was already right: `behavioralCertificationContract.test.js`
+goes **34 -> 35** cases (`git show 43b3195b:…` counted against the worktree) and
+`warConvergenceForces.test.js` lands **30**, so **+31** is the true total. Every mutant receipt
+above is also unaffected: all five ran against the post-pin pair and their denominator, **65**,
+is the correct 35 + 30.
+
+Recorded here rather than left to be re-found, because a stale number inside an acceptance
+record is the same class this lane was built to correct.
