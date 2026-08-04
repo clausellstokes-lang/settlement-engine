@@ -155,6 +155,41 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
 });
 
 /**
+ * ENGINE-GATED VIRTUAL RULE KEYS (chair ruling CR-WR10-C, 2026-08-04).
+ *
+ * A VIRTUAL key is one the engine strictly gates on (`rules.<key> === true`) while
+ * appearing in NEITHER `DEFAULT_SIMULATION_RULES` NOR any preset override spread —
+ * the deep-couplings law-1 idiom, whose whole point is that a dark layer costs a
+ * campaign zero persisted bytes. The certification census
+ * (`subsystemCertification.simulationRuleKeys`) reads exactly those two surfaces,
+ * so a virtual key was invisible to it and its subsystem could never be certified.
+ *
+ * The WR-9a fork offered two cures: declare each key `false` in the
+ * `full_simulation` spread (+32 serialized bytes per key on every NEW campaign, a
+ * moved new-campaign state hash) or teach the census to enumerate the keys the
+ * engine actually gates on (zero bytes on every path). CR-WR10-C ruled the second.
+ * This list is that enumeration: it is UNIONED INTO THE CENSUS ONLY. Nothing here
+ * is written into a rules object, spread into a preset, or persisted — declaring a
+ * key here moves no world byte in any campaign, installed or new.
+ *
+ * MEMBERSHIP IS NOT A JUDGMENT CALL: a key belongs here when `src/` gates on it
+ * with the strict idiom and neither surface above declares it.
+ * `tests/lint/engineGatedRuleKeys.walker.test.js` source-scans the tree and proves
+ * the list BOTH ways — every member is really gated, and every gated-but-undeclared
+ * key is really accounted for — so this cannot drift into fiction in either
+ * direction. A member also owes a certification row (or a declared pending entry);
+ * the totality walker demands it the moment the census grows.
+ *
+ * @type {ReadonlyArray<string>}
+ */
+export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
+  'beliefAxesEnabled',
+  'conquestDoctrineEnabled',
+  'infoStatecraftEnabled',
+  'migrationRumorsEnabled',
+]);
+
+/**
  * Compact preset constructor — every preset spreads DEFAULT_SIMULATION_RULES so
  * new flags inherit their defaults and presetId stays stable (guarded by
  * simulationRulesPreset.stability.test). NOTE the catalog carries NO summary

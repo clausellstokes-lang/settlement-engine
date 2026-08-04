@@ -59,12 +59,17 @@
  *   tests/domain/subsystemCertification.test.js
  */
 
-import { DEFAULT_SIMULATION_RULES, SIMULATION_RULE_PRESETS } from '../worldPulse/simulationRules.js';
+import {
+  DEFAULT_SIMULATION_RULES,
+  ENGINE_GATED_VIRTUAL_RULE_KEYS,
+  SIMULATION_RULE_PRESETS,
+} from '../worldPulse/simulationRules.js';
 import { BASELINE_PENDING_RULE_KEYS, BASELINE_SUBSYSTEM_ROWS } from './subsystemRowsBaseline.js';
 import { GROWTH_PENDING_RULE_KEYS, GROWTH_SUBSYSTEM_ROWS } from './subsystemRowsGrowth.js';
 import { PEOPLE_PENDING_RULE_KEYS, PEOPLE_SUBSYSTEM_ROWS } from './subsystemRowsPeople.js';
 import { PLACE_PENDING_RULE_KEYS, PLACE_SUBSYSTEM_ROWS } from './subsystemRowsPlace.js';
 import { REGEN_PENDING_RULE_KEYS, REGEN_SUBSYSTEM_ROWS } from './subsystemRowsRegen.js';
+import { VIRTUAL_PENDING_RULE_KEYS, VIRTUAL_SUBSYSTEM_ROWS } from './subsystemRowsVirtual.js';
 import { WAR_PENDING_RULE_KEYS, WAR_SUBSYSTEM_ROWS } from './subsystemRowsWar.js';
 import { WAVE_PENDING_RULE_KEYS, WAVE_SUBSYSTEM_ROWS } from './subsystemRowsWaves.js';
 
@@ -144,6 +149,7 @@ export const SUBSYSTEM_CERTIFICATION_REGISTRY = Object.freeze([
   ...WAR_SUBSYSTEM_ROWS,
   ...REGEN_SUBSYSTEM_ROWS,
   ...GROWTH_SUBSYSTEM_ROWS,
+  ...VIRTUAL_SUBSYSTEM_ROWS,
 ]);
 
 /**
@@ -160,6 +166,7 @@ export const SUBSYSTEM_CERTIFICATION_PENDING_KEYS = Object.freeze([
   ...WAR_PENDING_RULE_KEYS,
   ...REGEN_PENDING_RULE_KEYS,
   ...GROWTH_PENDING_RULE_KEYS,
+  ...VIRTUAL_PENDING_RULE_KEYS,
 ]);
 
 /** @param {unknown} value @returns {Record<string, unknown>} */
@@ -187,9 +194,21 @@ function byName(left, right) {
 }
 
 /**
- * Every boolean rule key the engine can present, from the default surface and
- * from every named preset's override spread (the virtual WAVES / ONE_REGEN /
- * opt-in keys live only in the spreads, so the defaults alone are not the census).
+ * Every boolean rule key the engine can present, from the default surface, from
+ * every named preset's override spread (the virtual WAVES / ONE_REGEN / opt-in
+ * keys live only in the spreads, so the defaults alone are not the census), and
+ * from the ENGINE-GATED VIRTUAL manifest.
+ *
+ * THE THIRD SOURCE IS CR-WR10-C (2026-08-04). A key can be gated by the engine
+ * with the strict `rules.<key> === true` idiom while appearing in NEITHER of the
+ * first two surfaces — that is the deep-couplings law-1 dormancy idiom, and it is
+ * exactly why the census used to be blind to a whole class of dark subsystem. The
+ * alternative cure was to declare each key false in the full_simulation spread,
+ * which costs every NEW campaign 32 serialized bytes per key and moves its state
+ * hash; this one costs nothing on any world path, because the manifest is read
+ * HERE and nowhere else. `tests/lint/engineGatedRuleKeys.walker.test.js` keeps the
+ * manifest honest against the tree in both directions.
+ *
  * @returns {string[]} sorted
  */
 export function simulationRuleKeys() {
@@ -203,6 +222,7 @@ export function simulationRuleKeys() {
       if (typeof value === 'boolean') keys.add(key);
     }
   }
+  for (const key of ENGINE_GATED_VIRTUAL_RULE_KEYS) keys.add(key);
   return [...keys].sort(byName);
 }
 
