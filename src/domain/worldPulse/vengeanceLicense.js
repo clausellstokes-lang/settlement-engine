@@ -189,6 +189,14 @@ export function validateVengeanceLicense(raw) {
   }
   const consumedBy = row.consumedBy;
   if (consumedBy !== null && !text(consumedBy)) return false;
+  // W8-D F1 — THE CONSUMER MUST BE A HOLDER. A license is a CAPABILITY, and a
+  // capability is spent by whoever holds it or by nobody. Without this line a record
+  // could name any court as its consumer, so "executed ONCE" was enforced against the
+  // wrong party: the writer refused a second spend, but the first spend needed no
+  // entitlement at all, and a stranger — or the razer's own friend — could burn the
+  // avengers' right without ever having been minted it. The story has to be as
+  // coherent as the shape.
+  if (consumedBy !== null && !row.holders.includes(consumedBy)) return false;
   if (!isTickOrNull(row.consumedAtTick)) return false;
   // ALL-OR-NOTHING: both, or neither.
   if ((consumedBy === null) !== (row.consumedAtTick === null)) return false;
@@ -383,11 +391,20 @@ export function mintVengeanceLicenses(input) {
 // ── CONSUME, EXTINGUISH, PRUNE ───────────────────────────────────────────────
 
 /**
- * CONSUME: one coalition, once. "The license is CONSUMED on use."
+ * CONSUME: one HOLDER coalition, once. "The license is CONSUMED on use."
  *
  * A second attempt — by the same coalition or any other — returns the world state
  * UNCHANGED, which is what "ONE PER COALITION prosecuting it, executed ONCE"
  * means when it is a fact about a writer rather than a convention.
+ *
+ * W8-D F1 — AND THE CONSUMER MUST HOLD IT. The one-shot was enforced against the
+ * wrong party: any coalition id at all could spend the license, so a court that was
+ * never minted the right could burn it and every real avenger would find it dead.
+ * A capability is spent by its holder or by nobody. This gate and the matching
+ * coherence line in validateVengeanceLicense MUST move together — the validator
+ * refuses a non-holder consumption on READ, so a writer that still minted one would
+ * produce a record the next validating read silently DROPS, taking the license out
+ * of the world entirely and reopening the gate it was supposed to have closed.
  *
  * @param {{ worldState?: unknown, licenseId?: unknown, coalitionId?: unknown,
  *   tick?: unknown }} input
@@ -403,6 +420,7 @@ export function consumeVengeanceLicense(input) {
   const licenses = readVengeanceLicenses(worldState);
   const license = licenses[licenseId];
   if (!license) return worldState;
+  if (!license.holders.includes(coalitionId)) return worldState; // not yours to spend
   if (licenseDeadReason(license, tick) !== null) return worldState;
   if (tick < license.heldSince) return worldState;
 

@@ -354,25 +354,68 @@ describe('WR-8 R — the sack is conserved to the person', () => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// THE MATERIAL SELF-LIMITS (LAW 7) — both of them.
+// THE MATERIAL SELF-LIMITS (LAW 7) — two of them, and they are NOT the same KIND.
+// W8-D F2: the earlier version of this block claimed both were structural and proved
+// the first with ONE hand-picked (rate, horizon) pair. That is an over-claim: burning
+// is dearer than holding only ABOVE A CROSSOVER, and below it burning is the RICHER
+// road. The grid below WALKS the comparison instead of sampling it, so the crossover
+// is a pinned, visible design fact rather than an accident of two chosen numbers.
 // ─────────────────────────────────────────────────────────────────────────────
 
 describe('WR-8 R — what self-limits it, with no pacifism term anywhere', () => {
-  test('ASH PAYS NO TRIBUTE: the razing yields once, and holding yields for years', () => {
+  test('THE STREAM IS A HARD ZERO: a razing yields once and never again', () => {
     const spoils = razingSpoils({ movableWealth: 1000, population: 5000 });
     expect(spoils.plunder).toBeGreaterThan(0);
-    // The stream is a hard zero, not a small number. The departure took it.
+    // Zero, not a small number. The departure took the stream with it.
     expect(spoils.tributePerYear).toBe(0);
+  });
 
-    const cmp = compareSpoils({
-      plunderOnce: spoils.plunder,
-      // What the same place would have paid as a held tributary, from the same
-      // wealth: a modest annual draw, over a modest horizon.
-      tributePerYear: 1000 * 0.15,
-      years: 12,
-    });
-    expect(cmp.razingIsPoorer).toBe(true);
-    expect(cmp.holdingTotal).toBeGreaterThan(cmp.razingTotal);
+  test('ASH PAYS NO TRIBUTE IS A CROSSOVER, NOT AN ABSOLUTE — walked, both sides', () => {
+    const spoils = razingSpoils({ movableWealth: 1000, population: 5000 });
+    const WEALTH = 1000;
+    const RATES = [0.01, 0.02, 0.05, 0.10, 0.15, 0.25, 0.40];
+    const YEARS = [1, 2, 3, 5, 8, 12, 20, 30];
+    const poorerAt = (rate, years) => compareSpoils({
+      plunderOnce: spoils.plunder, tributePerYear: WEALTH * rate, years,
+    }).razingIsPoorer;
+
+    // BOTH SIDES EXIST. If either of these ever emptied, this test would be
+    // asserting a one-sided fact while reading like a comparison.
+    const grid = RATES.flatMap((rate) => YEARS.map((years) => ({ rate, years, poorer: poorerAt(rate, years) })));
+    expect(grid.filter((c) => c.poorer).length, 'holding never out-earns burning anywhere on the grid').toBeGreaterThan(0);
+    expect(grid.filter((c) => !c.poorer).length, 'burning never out-earns holding anywhere on the grid').toBeGreaterThan(0);
+
+    // MONOTONE IN BOTH AXES: a richer tributary and a longer hold can only ever
+    // make holding MORE attractive, never less. This is the property that makes
+    // "crossover" the right word — a single frontier, not scattered islands.
+    for (const rate of RATES) {
+      let seenPoorer = false;
+      for (const years of YEARS) {
+        const poorer = poorerAt(rate, years);
+        if (poorer) seenPoorer = true;
+        expect(!(seenPoorer && !poorer), `rate ${rate} flipped back to richer at ${years}y`).toBe(true);
+      }
+    }
+    for (const years of YEARS) {
+      let seenPoorer = false;
+      for (const rate of RATES) {
+        const poorer = poorerAt(rate, years);
+        if (poorer) seenPoorer = true;
+        expect(!(seenPoorer && !poorer), `${years}y flipped back to richer at rate ${rate}`).toBe(true);
+      }
+    }
+
+    // THE FRONTIER, PINNED AT THE SHIPPED PLUNDER_SHARE. These are the design
+    // facts the prose now states, and a tuning change that moves them reds here.
+    expect(RAZING_TUNING.PLUNDER_SHARE).toBe(0.6);
+    // A tributary paying 15% a year: burning wins under four years, holding wins
+    // from five. That is the realm that expects the peace to hold vs the one that does not.
+    expect(poorerAt(0.15, 3)).toBe(false);
+    expect(poorerAt(0.15, 5)).toBe(true);
+    // And against a near-worthless tributary (1% a year) burning is richer across
+    // a full thirty years — this law is NOT a rule against burning, and there is
+    // no pacifism term anywhere in the module that would make it one.
+    expect(poorerAt(0.01, 30)).toBe(false);
   });
 
   test('RAZING THE SAME REMNANT TWICE YIELDS NOTHING, structurally', () => {

@@ -121,12 +121,27 @@
  * the moral ledger, which is exactly why R2 exists.
  *
  * ── LAW 7: WHAT SELF-LIMITS IT, WITH NO PACIFISM TERM ANYWHERE ──────────────
- * Ash pays no tribute. A sack yields one-time plunder against conquest's
- * territory and terms' streams of years, so the material logic already prices
- * punishment as the expensive luxury it is. And razing the same remnant twice
- * yields NOTHING — which this file makes STRUCTURAL rather than tuned: a
- * settlement already at or under the skeleton floor loses nobody and yields no
- * plunder, because both quantities are computed from the room above the floor.
+ * TWO self-limits, and they are NOT the same KIND of limit. Saying so is the
+ * point: the earlier reading of this law claimed both were structural, and only
+ * one of them is.
+ *
+ *   (1) ASH PAYS NO TRIBUTE — a PRICE, and a CONDITIONAL one. A sack yields
+ *       one-time plunder against terms' streams of years, so holding out-earns
+ *       burning ONLY ABOVE A CROSSOVER in (annual draw x horizon). Measured at
+ *       the shipped PLUNDER_SHARE 0.6: against a tributary paying 15% a year,
+ *       razing is materially RICHER for any horizon under about four years, and
+ *       against one paying 1% it is richer across thirty. So this limit prices
+ *       punishment as a luxury for a realm that expects to HOLD what it takes,
+ *       and prices it as a BARGAIN for one that expects the peace to collapse
+ *       anyway — which is a design fact worth owning rather than a bug, because
+ *       "the war was going to end badly regardless" is exactly the state a realm
+ *       burns a town from. It is NOT a rule against burning, and this file has
+ *       no pacifism term. The crossover is walked and pinned in razingWr8.test.js.
+ *
+ *   (2) RAZING THE SAME REMNANT TWICE YIELDS NOTHING — STRUCTURAL, and absolute.
+ *       A settlement already at or under the skeleton floor loses nobody and
+ *       yields no plunder, because both quantities are computed from the room
+ *       above the floor. No tuning reaches it and no rule states it.
  *
  * PURE: no rng, no wall-clock, no mutation, no state, NO IMPORTS. Deterministic
  * over its arguments. Strict-clean.
@@ -715,12 +730,19 @@ export function razingDeparture(input) {
 /**
  * WHAT A RAZING YIELDS: one-time plunder, and no stream at all, ever.
  *
- * BOTH SELF-LIMITS LIVE IN THE SAME TWO LINES, which is the point. Plunder is
- * computed from the ROOM ABOVE THE SKELETON FLOOR — the same room the sack's
- * losses are capped by — so a remnant already at the floor yields exactly zero
- * however rich it once was, and the second razing of the same place is
- * materially pointless without any rule that says "no second razing". And
- * `tributePerYear` is a hard 0: the departure took the stream with it.
+ * THE STRUCTURAL SELF-LIMIT LIVES IN THESE TWO LINES. Plunder is computed from
+ * the ROOM ABOVE THE SKELETON FLOOR — the same room the sack's losses are capped
+ * by — so a remnant already at the floor yields exactly zero however rich it once
+ * was, and the second razing of the same place is materially pointless without
+ * any rule that says "no second razing". And `tributePerYear` is a hard 0: the
+ * departure took the stream with it.
+ *
+ * THE OTHER SELF-LIMIT IS NOT HERE, and this docstring used to claim it was.
+ * Whether burning is dearer than holding is a comparison against a tribute
+ * stream this function never sees, it turns on the horizon and the draw the
+ * comparison assumes, and below the crossover burning is the RICHER road (see
+ * the module header's LAW 7 note, and the walked grid in razingWr8.test.js).
+ * `compareSpoils` is where that comparison lives; nothing here decides it.
  *
  * @param {{ movableWealth?: unknown, population?: unknown }} input
  * @returns {{ plunder: number, tributePerYear: number, nothingLeft: boolean, receipt: string }}

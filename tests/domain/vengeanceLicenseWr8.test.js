@@ -225,17 +225,20 @@ describe('WR-8 R2 — the coupling, end to end through the real gate', () => {
 // ─────────────────────────────────────────────────────────────────────────────
 
 describe('WR-8 R2 — one per coalition, executed once', () => {
-  test('the first coalition consumes it and every later attempt changes nothing', () => {
+  test('the first HOLDER consumes it and every later attempt changes nothing', () => {
     const world = worldWithLicense();
+    // W8-D F1: the consumer is one of the MINTED HOLDERS. It used to be an arbitrary
+    // id ('the-answer'), which is how the hole below went unseen — the one-shot was
+    // real but nobody had to hold the license to fire it.
     const consumed = consumeVengeanceLicense({
-      worldState: world, licenseId: LICENSE_ID, coalitionId: 'the-answer', tick: 150,
+      worldState: world, licenseId: LICENSE_ID, coalitionId: 'greyford', tick: 150,
     });
     expect(consumed).not.toBe(world);
-    expect(readVengeanceLicenses(consumed)[LICENSE_ID].consumedBy).toBe('the-answer');
+    expect(readVengeanceLicenses(consumed)[LICENSE_ID].consumedBy).toBe('greyford');
     expect(readVengeanceLicenses(consumed)[LICENSE_ID].consumedAtTick).toBe(150);
 
-    // The SAME coalition again, and a DIFFERENT one: both no-ops, by reference.
-    for (const coalitionId of ['the-answer', 'somebody-else']) {
+    // The SAME holder again, the OTHER holder, and a stranger: all no-ops, by reference.
+    for (const coalitionId of ['greyford', 'ashmoor', 'somebody-else']) {
       expect(consumeVengeanceLicense({
         worldState: consumed, licenseId: LICENSE_ID, coalitionId, tick: 160,
       })).toBe(consumed);
@@ -245,6 +248,42 @@ describe('WR-8 R2 — one per coalition, executed once', () => {
       expect(heldLicense(consumed, { holderId, razerId: 'karrow', tick: 160 })).toBeNull();
     }
     expect(licenseDeadReason(readVengeanceLicenses(consumed)[LICENSE_ID], 160)).toBe('consumed');
+  });
+
+  test('W8-D F1 — A NON-HOLDER CANNOT SPEND IT, at the writer AND at the read', () => {
+    // A license is a CAPABILITY. Before this, ANY coalition id could consume one:
+    // the one-shot was enforced against the wrong party, so a stranger — or a court
+    // friendly to the razer — could burn the avengers' right and every real holder
+    // would find it dead. Both halves are asserted, because they must move together.
+    const world = worldWithLicense();
+    const holders = readVengeanceLicenses(world)[LICENSE_ID].holders;
+    expect(holders).toEqual(['ashmoor', 'greyford']);
+
+    // (1) THE WRITER refuses, by reference — nothing about the world changes.
+    for (const stranger of ['the-answer', 'karrow', 'thornwall', 'far-harbour']) {
+      expect(holders).not.toContain(stranger);
+      expect(consumeVengeanceLicense({
+        worldState: world, licenseId: LICENSE_ID, coalitionId: stranger, tick: 150,
+      })).toBe(world);
+    }
+    // And the license is still LIVE for the courts that actually hold it.
+    for (const holderId of holders) {
+      expect(heldLicense(world, { holderId, razerId: 'karrow', tick: 150 })).not.toBeNull();
+    }
+
+    // (2) THE READ refuses a HAND-FORGED non-holder consumption. This is why the
+    // validator line and the writer gate are one change: if only the writer were
+    // gated, a record like this would still validate and read as legitimately spent.
+    const forged = {
+      ...readVengeanceLicenses(world)[LICENSE_ID],
+      consumedBy: 'the-answer',
+      consumedAtTick: 150,
+    };
+    expect(validateVengeanceLicense(forged)).toBe(false);
+    // ANCHOR (the negative control's own control): the SAME record with a real
+    // holder as its consumer validates, so the refusal above is about entitlement
+    // and not about some unrelated field this fixture happens to get wrong.
+    expect(validateVengeanceLicense({ ...forged, consumedBy: 'greyford' })).toBe(true);
   });
 
   test('the debt dies with the debtor: a razer destroyed by another road extinguishes it', () => {
@@ -286,7 +325,9 @@ describe('WR-8 R2 — one per coalition, executed once', () => {
   test('every dead reason this ledger can emit is in the closed vocabulary', () => {
     const world = worldWithLicense(100);
     const consumed = consumeVengeanceLicense({
-      worldState: world, licenseId: LICENSE_ID, coalitionId: 'c', tick: 150,
+      // W8-D F1: 'c' held nothing, so it can no longer spend the license. The
+      // consumer here is a real minted holder.
+      worldState: world, licenseId: LICENSE_ID, coalitionId: 'greyford', tick: 150,
     });
     const extinguished = extinguishLicensesAgainst({ worldState: world, razerId: 'karrow', tick: 150 });
     const seen = [
@@ -381,7 +422,7 @@ describe('WR-8 R2 / CR-WR8-E — the five lifecycle paths the volume specified',
     expect(pruneVengeanceLicenses({ worldState: world, tick: 120 })).toBe(world);
 
     const consumed = consumeVengeanceLicense({
-      worldState: world, licenseId: LICENSE_ID, coalitionId: 'the-answer', tick: 150,
+      worldState: world, licenseId: LICENSE_ID, coalitionId: 'greyford', tick: 150,
     });
     const pruned = pruneVengeanceLicenses({ worldState: consumed, tick: 160 });
     // The WHOLE sub-ledger goes, not just the record — dormancy at the end of
