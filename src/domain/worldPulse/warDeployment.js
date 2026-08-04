@@ -52,6 +52,9 @@ import { resolveSiegeVerdict, pickOccupier } from './warSiegeVerdict.js';
 // that invert those costs for a DM-dismissed siege — accrual and inverse kept in one
 // file because they are two halves of one conserved quantity.
 import { applyHomeWarCosts } from './warHomeCosts.js';
+// The fourth leaf: WR-6's refusal aftermath. It BUILDS the coalition_refused outcome
+// and cannot push one — the head owns every push.
+import { buildCoalitionRefusalOutcome } from './warCoalitionRefusal.js';
 import { clamp01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
 import { classifyFeasibility, verdictPermitsSiege } from './feasibilityGate.js';
@@ -119,13 +122,10 @@ import {
   coalitionDecisionEvidence,
   readCoalitionJoinDecisions,
 } from './warCoalitionDecision.js';
-import { COALITION_REFUSAL_CAUSES } from './warCoalitionEvidence.js';
 import {
   joinAnchorOf,
   warCoalitionActive,
 } from './warCoalitionLedger.js';
-import { thresholdFactorOf } from './dispositionProfile.js';
-import { readWarSeatBooks } from './warSeatBooks.js';
 
 /**
  * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js) — named,
@@ -151,6 +151,7 @@ import { readWarSeatBooks } from './warSeatBooks.js';
 export { computeAllyRelief, coalitionJoinFeasibility, ARMY_DEPLOYED_CAPACITY_PENALTY } from './warCapacityReads.js';
 export { resolveSiegeVerdict, composeDefenderWillScore, WILL_CAPITULATE_FLOOR, SIEGE_MAX_AGE } from './warSiegeVerdict.js';
 export { computeLevySources, revertSuppressedDeployExhaustion, stripSuppressedDeployResidue } from './warHomeCosts.js';
+export { COALITION_REFUSAL_TUNING } from './warCoalitionRefusal.js';
 
 // ── Tunables (calibration is load-bearing — see GEOPOLITICAL_WAR_LAYER §2.4/§6) ──
 // HOSTILE_CONFIDENCE gates whether a settlement is strong enough to open a war at
@@ -163,88 +164,9 @@ export { computeLevySources, revertSuppressedDeployExhaustion, stripSuppressedDe
 const HOSTILE_CONFIDENCE = 0.42;
 const CONQUEST_MARGIN = 0.12;
 
-// WR-6 refusal aftermath.  The refusal is one earned relationship fact; the
-// calling court's own books plus WR-2 history colour how heavily that fact lands.  The
-// bounded multiplier cannot erase the consequence or override the compact.
-export const COALITION_REFUSAL_TUNING = Object.freeze({
-  TRUST_HIT: 0.08,
-  RESENTMENT_GAIN: 0.12,
-  OBLIGATION_FATIGUE_GAIN: 0.1,
-  MIN_CHARACTER_MULT: 0.8,
-  MAX_CHARACTER_MULT: 1.2,
-  QUIET_MAX: 0.9,
-  PRESSING_MIN: 1.1,
-});
-const COALITION_REFUSAL_CAUSE_SET = new Set(COALITION_REFUSAL_CAUSES);
-const COALITION_REFUSAL_CAUSE_REASON = Object.freeze({
-  army_committed: 'The court cannot answer while its only field army is committed elsewhere.',
-  army_returned: 'The returning army cannot be committed to another campaign at once.',
-  home_threatened: 'The court keeps its army at home while its own walls are threatened.',
-  occupied: 'An occupying power prevents the court from marching into a different war.',
-  front_infeasible: 'The court cannot field a force capable of opening this separate front.',
-});
+// WR-6 refusal aftermath (tunables, closed cause vocabulary, the calling court's
+// character read) moved to ./warCoalitionRefusal.js.
 
-/** Keep persisted relationship costs byte-tidy across floating arithmetic. */
-const round4 = (value) => Math.round(value * 10_000) / 10_000;
-
-/**
- * The caller's bounded reading of one real refusal.  Martial confidence makes
- * a failed call weigh more; diplomatic confidence and an inward-looking court
- * make room for prudence.  This is an aftermath bar only: it cannot select an
- * enemy, invent a refusal, remove its base cost, or change the relationship.
- */
-function coalitionRefusalCharacterRead(worldState, rules, snapshot, callerId, refusingId) {
-  const books = readWarSeatBooks({
-    worldState,
-    snapshot,
-    actorId: String(callerId),
-    opponentId: String(refusingId),
-  });
-  const continueBias = clamp01(Number(books.continueBias01));
-  const peaceBias = clamp01(Number(books.peaceBias01));
-  const T = COALITION_REFUSAL_TUNING;
-  const authored = Math.max(T.MIN_CHARACTER_MULT, Math.min(
-    T.MAX_CHARACTER_MULT,
-    1 + (continueBias - peaceBias) * 0.4,
-  ));
-  let learned = 1;
-  if (rules?.dispositionChannelsEnabled === true) {
-    const entry = worldState?.dispositionStats?.[String(callerId)] || null;
-    const martial = thresholdFactorOf(entry, 'martial');
-    const diplomatic = thresholdFactorOf(entry, 'diplomatic');
-    const insular = thresholdFactorOf(entry, 'insular');
-    // A high learned stock produces factor < 1.  Invert martial because confidence
-    // in force hardens the expected obligation; keep diplomatic/insular in their
-    // published direction because confidence in parley and inwardness soften it.
-    learned = ((2 - martial.factor) + diplomatic.factor + insular.factor) / 3;
-  }
-  const multiplier = round4(Math.max(T.MIN_CHARACTER_MULT, Math.min(
-    T.MAX_CHARACTER_MULT,
-    rules?.dispositionChannelsEnabled === true ? (authored + learned) / 2 : authored,
-  )));
-  const characterSource = rules?.dispositionChannelsEnabled === true
-    ? 'own books and history'
-    : 'own books';
-  if (multiplier >= T.PRESSING_MIN) {
-    return {
-      multiplier,
-      costBand: 'pressing',
-      receipt: `The calling court's ${characterSource} make the broken expectation weigh heavily against the compact.`,
-    };
-  }
-  if (multiplier <= T.QUIET_MAX) {
-    return {
-      multiplier,
-      costBand: 'quiet',
-      receipt: `The calling court's ${characterSource} leave room to read the refusal as prudence rather than betrayal.`,
-    };
-  }
-  return {
-    multiplier,
-    costBand: 'present',
-    receipt: 'The calling court records the refusal as a breach of allied expectation.',
-  };
-}
 
 // The war-exhaustion SCAR tunables moved to ./warHomeCosts.js, beside both the
 // ratchet that accrues them and the strip that reverts them.
@@ -1064,64 +986,14 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     const name = item?.name || item?.settlement?.name;
     return typeof name === 'string' && name.trim() ? name.trim() : fallback;
   };
+  // WR-6's refusal aftermath — the tunables, the closed cause vocabulary, the calling
+  // court's bounded character read and the outcome that carries them — moved to
+  // ./warCoalitionRefusal.js. It BUILDS the outcome and cannot push one; this closure
+  // is the only thing that pushes, so all six refusal sites below are unchanged.
   const pushCoalitionRefusal = (decision, refusalCause = 'strategic') => {
-    const partyName = coalitionNameFor(decision.partyId, 'The allied court');
-    const callerName = coalitionNameFor(decision.callerId, 'the calling ally');
-    const enemyName = coalitionNameFor(decision.enemyId, 'the opposing court');
-    const relation = decision.relationshipState || {};
-    const callerReading = coalitionRefusalCharacterRead(
-      worldState,
-      rules,
-      snapshot,
-      decision.callerId,
-      decision.partyId,
-    );
-    const refusalTuning = COALITION_REFUSAL_TUNING;
-    const retaliationReason = decision.riskBand === 'decisive' || decision.riskBand === 'pressing'
-      ? `The court believes answering ${callerName} would expose the realm to retaliation beyond the present war.`
-      : `The court weighed the wider retaliation that a march against ${enemyName} could awaken.`;
-    const closedRefusalCause = COALITION_REFUSAL_CAUSE_SET.has(refusalCause)
-      ? refusalCause
-      : 'strategic';
-    const refusalReason = COALITION_REFUSAL_CAUSE_REASON[closedRefusalCause]
-      || retaliationReason;
-    outcomes.push({
-      id: `world_outcome.coalition_refused.${stablePart(decision.callId)}.${tick}`,
-      type: 'relationship_shift',
-      candidateType: 'coalition_refused',
-      ruleId: 'war_coalition_refusal',
-      ruleFamily: 'relationship',
-      applyMode: 'auto',
-      probability: 1,
-      targetSaveId: decision.partyId,
-      sourceEventTargetId: decision.callerId,
-      severity: 0.5,
-      headline: `${partyName} refuses ${callerName}'s call`,
-      summary: `${partyName} will not send its army against ${enemyName}; the refusal now stands between the allied courts.`,
-      reasons: [
-        refusalReason,
-        callerReading.receipt,
-      ],
-      relationshipKey: decision.relationshipKey,
-      relationshipPatch: {
-        trust: round4(clamp01((Number(relation.trust) || 0)
-          - refusalTuning.TRUST_HIT * callerReading.multiplier)),
-        resentment: round4(clamp01((Number(relation.resentment) || 0)
-          + refusalTuning.RESENTMENT_GAIN * callerReading.multiplier)),
-        obligationFatigue: round4(clamp01((Number(relation.obligationFatigue) || 0)
-          + refusalTuning.OBLIGATION_FATIGUE_GAIN * callerReading.multiplier)),
-      },
-      metadata: {
-        incidentType: 'coalition_refused',
-        allianceCall: coalitionCallArchiveRow(decision, 'refused', tick),
-        refusalCostBand: callerReading.costBand,
-        coalitionEvidence: coalitionDecisionEvidence(decision, false, tick).map((row) => (
-          row.kind === 'coalition_refused'
-            ? { ...row, costBand: callerReading.costBand, refusalCause: closedRefusalCause }
-            : row
-        )),
-      },
-    });
+    outcomes.push(buildCoalitionRefusalOutcome({
+      worldState, rules, snapshot, decision, refusalCause, tick, coalitionNameFor,
+    }));
   };
 
   for (const fromId of candidateIds) {
