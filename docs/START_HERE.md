@@ -23,6 +23,52 @@ classes are owner-only (push→already authorized as backup; PR-merge, deploys,
    + THE_BASE_RESTORATION_LEDGER.md (Phase-D gate: zero PENDING rows),
    DESIGN_DEEP_CRAFT_PAGES.md, C1FIN_CONTROL_CENSUS.md (briefs/).
 
+## 3d. ⭐⭐ SNAPSHOT REFRESH 2026-08-04 (~00:45 EDT — THE BUILD ERA HANDOFF; supersedes §3c/§3b/§3; git wins)
+Written for an ACCOUNT SWITCH: the owner may resume from a different Anthropic
+account. Same machine ⇒ the memory dir in §6 survives and its index is current;
+different machine ⇒ THIS FILE + the two queue docs are sufficient alone.
+- **WHERE THE BUILD LIVES**: minifold worktree
+  (.claude/worktrees/minifold, branch claude/composite-r4, ~260 commits ahead
+  of origin, NOTHING PUSHED — pushes are owner-confirmed, terminal phase).
+  The ledger (this branch) takes "Ledger:" rows only.
+- **THE ERA**: Fable chaired cycles 6-37 (2026-08-03→04) under total
+  delegation: Opus implements+verifies, chair rules vetoably into
+  docs/FABLE_VALIDATION_QUEUE.md (the CR-*/R-BLD-* registry lives there).
+  Zero reverts. Every landing adversarially verified.
+- **STATE AT WRITE TIME (verify with git log first — lanes may have landed
+  after this line was written):** WR-1..7 COMPLETE+WIRED. WR-8: slices 1-6
+  built+verified; the razing WIRED at the warDeployment mouth; the license
+  ledger built and ONE LINE short (the pulseKernel:916 spread, blocked only
+  by a chair-ruled lint pair — CR-PK-1); lane WZ-3 (wf_7fb11f8c) was IN
+  FLIGHT closing it + observer-axis/deterrence/casus + the WD lit-coverage
+  debt. Its verifier says "WR-8 IS CLOSED" only if everything holds — read
+  its queue row. THEN: WR-9 (instrumentation) → WR-10 (certification) →
+  the war-file strict burn-down → Herald mint-index → FP engine waves.
+- **THE RIBBON/IDENTITY PROGRAM**: docs/DESIGN_RIBBON_V4_SPEC.md (minifold)
+  is THE LAW — the war-arrow header (cedar shaft, gilded wordmark on a bole
+  bed, seal-o carrying the site device on a size ladder, four mirrored
+  parallel feather slashes, quill-line indicator, texture-complete-at-part-2).
+  Lane V4 (wf_80bd2b67) was IN FLIGHT executing it; V4.1 (task #105,
+  OWNER-APPROVED counsel integrations incl. the nock build-and-show)
+  dispatches when V4 lands. The bottom underline is RETIRED, not duplicated.
+- **IN-FLIGHT LANES AT WRITE TIME** (if dead on resume: SURVEY PARTIAL EDITS
+  FIRST — killed agents leave partial work; never sweep, never stash):
+  wf_7fb11f8c (WZ-3, worldPulse), wf_80bd2b67 (V4, nav/brand/theme).
+- **OWNER-GATED, PARKED (never silently build)**: K1 severity carry, seat
+  ransom decisions, ransom persistence, compromise counterpart re-mint,
+  razing-as-MINOR (J-WZ2-1, vetoable), the gilded-seal treatment (vetoable,
+  rosette fallback), the nock (build-and-show, owner's glance decides),
+  XW-7 scorched earth, K-cap signing, all §6b picks.
+- **LAWS LEARNED THIS ERA (each bit; all in memory + queue rows)**: the
+  STAGED-SET law (verify git diff --cached before EVERY commit; commit with
+  pathspec); NUL bytes 5× (python byte-scan every write; grep/tail blind);
+  per-file tsc --strict is VACUOUS; shared ratchets need git-diff-before-
+  staging; the edge bundles are BUILT ARTIFACTS (freshness reds are never
+  "inherited"; rebuild = repair, deploy = owner); lint-staged lints only
+  staged files; parallel-load test reds are fake (ps aux first); the
+  registration walkers in tests/domain are part of every decomposition gate;
+  substring pins cannot see grammar; hand-keyed line addresses rot.
+
 ## 3c. ⭐⭐ SNAPSHOT REFRESH 2026-07-26 (~17:00 EDT — supersedes §3b and §3; git wins)
 - **THE BANKING FOLD**: claude/composite-r4 @ 7a6603de now carries EVERYTHING the
   2026-07-20→26 era built — 12 lane commits (b503fe05..7a6603de, ~175k insertions):
