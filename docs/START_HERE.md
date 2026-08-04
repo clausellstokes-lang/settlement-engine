@@ -38,11 +38,15 @@ different machine ⇒ THIS FILE + the two queue docs are sufficient alone.
 - **STATE AT WRITE TIME (verify with git log first — lanes may have landed
   after this line was written):** WR-1..7 COMPLETE+WIRED. WR-8: slices 1-6
   built+verified; the razing WIRED at the warDeployment mouth; the license
-  ledger built and ONE LINE short (the pulseKernel:916 spread, blocked only
-  by a chair-ruled lint pair — CR-PK-1); lane WZ-3 (wf_7fb11f8c) was IN
-  FLIGHT closing it + observer-axis/deterrence/casus + the WD lit-coverage
-  debt. Its verifier says "WR-8 IS CLOSED" only if everything holds — read
-  its queue row. THEN: WR-9 (instrumentation) → WR-10 (certification) →
+  SPREAD LANDED net-zero (WZ-3 @ b43986b5 — CR-PK-1's premise was FALSE,
+  disproven by espree, the safe restructure taken; a multi-razing
+  accumulator leak found+fixed in the same commit); the WD E-H debt closed
+  (35→30); CR-WR8-H answered (believed razings = news ledger + hop-delay
+  arrival, NO new persisted surface). Lane WZ-4 (wf_f902672d) was IN FLIGHT
+  on the last three quarters: observer-axis hits, deterrence consuming
+  readAllianceWebRisk (census: exactly ONE consumer today, must become
+  exactly TWO), the casus wired. Its verifier says "WR-8 IS CLOSED" only if
+  everything holds — read its queue row. THEN: WR-9 (instrumentation) → WR-10 (certification) →
   the war-file strict burn-down → Herald mint-index → FP engine waves.
 - **THE RIBBON/IDENTITY PROGRAM**: docs/DESIGN_RIBBON_V4_SPEC.md (minifold)
   is THE LAW — the war-arrow header (cedar shaft, gilded wordmark on a bole
