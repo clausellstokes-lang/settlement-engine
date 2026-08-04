@@ -58,7 +58,7 @@ import { buildCoalitionRefusalOutcome } from './warCoalitionRefusal.js';
 // WR-8 amendment R — THE THIRD INTENT. The razing's ONE mouth is the conquest
 // power-transfer site below; this is the only import of it anywhere in `src`,
 // which is what makes "the razing has one mouth" a fact rather than a rule.
-import { razingSiegeEmission } from './razingExecution.js';
+import { EMPTY_PATCH, razingSiegeEmission } from './razingExecution.js';
 // The fifth leaf: the stateful army RECORD at its two creation points, and the
 // conserved sack arithmetic. Builds records and returns numbers; mints nothing.
 import { seedDeploymentState, ensureStatefulRecord, computeSackTransfer } from './warArmyRecord.js';
@@ -226,7 +226,7 @@ const HARASSMENT_SEVERITY = 0.22;
  * @param {number} args.tick
  * @param {string|null} [args.now]
  * @param {{ warLayerEnabled?: boolean, warTerminationEnabled?: boolean, defenderAttritionEnabled?: boolean, warSupplyQualityEnabled?: boolean }} args.rules
- * @returns {{ outcomes: PulseOutcome[], deployments: Record<string, DeploymentRecord>, graphChannels: any[], retiredChannels: string[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number, sourceConquestId?:string}>, warExhaustion: Record<string, number>, defenderSiegeLedger?: (Record<string, any>|null) }}
+ * @returns {{ outcomes: PulseOutcome[], deployments: Record<string, DeploymentRecord>, graphChannels: any[], retiredChannels: string[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number, sourceConquestId?:string}>, warExhaustion: Record<string, number>, defenderSiegeLedger?: (Record<string, any>|null), worldStatePatch: Readonly<Record<string, any>> }}
  *   - outcomes: probability-1 condition / power_transfer outcomes for applyWorldPulseOutcomes
  *   - deployments: the UPDATED one-army ledger to persist onto worldState
  *   - graphChannels: war_front directed channels to upsert into the regional graph
@@ -243,7 +243,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   if (!rules?.warLayerEnabled) {
     const deployedIds = Object.keys(existing);
     if (!deployedIds.length) {
-      return { outcomes: [], deployments: existing, graphChannels: [], retiredChannels: [], resolvedDeployments: [], dispositionDeltas: [], warExhaustion: worldState?.warExhaustion || {}, defenderSiegeLedger: null };
+      return { outcomes: [], deployments: existing, graphChannels: [], retiredChannels: [], resolvedDeployments: [], dispositionDeltas: [], warExhaustion: worldState?.warExhaustion || {}, defenderSiegeLedger: null, worldStatePatch: EMPTY_PATCH };
     }
     // WIND-DOWN: the layer was turned OFF while armies were afield (a mid-campaign
     // toggle — directly, or cascaded by relationship drift turning off). Freezing
@@ -268,9 +268,15 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       retiredChannels: [...new Set(windDownChannels)].sort(codepoint),
       resolvedDeployments, dispositionDeltas: [],
       warExhaustion: worldState?.warExhaustion || {}, defenderSiegeLedger: null,
+      worldStatePatch: EMPTY_PATCH,
     };
   }
 
+  // WR-8 R2 — THE LICENSE LEDGER'S ONE ROAD OUT OF THIS LAYER. `evaluateWarLayer`
+  // returns a bag and cannot mutate worldState, so a razing's mint/consume rides
+  // home as a PATCH the kernel spreads into the single line it already writes.
+  // Frozen-empty in every world that did not burn a town, by reference.
+  let worldStatePatch = EMPTY_PATCH;
   const graph = snapshot?.regionalGraph || {}; const openerCasusFor = makeCurrentWarCasusRead({ snapshot, worldState, graph, rules });
   // M5: SIEGE-AS-STARVATION gate. On the spatial path (marker present) the siege
   // verdict resolves by supply interdiction × time (not the capacity roll). false off
@@ -735,6 +741,12 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       institutions: conqueredSettlement?.institutions || [],
       movableWealth: Number(conqueredSettlement?.economicState?.wealthIndex) || 0,
     });
+    // R2's CLOSED LOOP, carried out of the layer. An `initiation` razing MINTS
+    // the victim's friends their one right of retribution; a `vengeance` razing
+    // SPENDS the license it was permitted by and mints nothing at all — the
+    // refusal lives in `mintVengeanceLicenses`, at the only door that can create
+    // one, so the eye-for-an-eye cascade cannot start rather than being damped.
+    if (razed && razed.worldStatePatch !== EMPTY_PATCH) worldStatePatch = razed.worldStatePatch;
 
     // P3 sack & forage: a stormed town is pillaged. The deltas RIDE the conquest outcome
     // (not a separate emission) so a dismissed / deferred conquest — "the takeover didn't
@@ -1251,5 +1263,5 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       if (!ongoingSieges.has(id)) delete defenderSiegeLedger[id];
     }
   }
-  return { outcomes, deployments, graphChannels, retiredChannels: retiredChannelsOut, resolvedDeployments, dispositionDeltas, warExhaustion, defenderSiegeLedger };
+  return { outcomes, deployments, graphChannels, retiredChannels: retiredChannelsOut, resolvedDeployments, dispositionDeltas, warExhaustion, defenderSiegeLedger, worldStatePatch };
 }

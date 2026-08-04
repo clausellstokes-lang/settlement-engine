@@ -112,7 +112,12 @@ import {
 } from './conquestDoctrineStage.js';
 import { conquestMercyReceipt } from './conquestIntent.js';
 import { mistakenFeasibilityReceipt } from './conquestFeasibility.js';
-import { heldLicense, vengeanceLicensesActive } from './vengeanceLicense.js';
+import {
+  consumeVengeanceLicense,
+  heldLicense,
+  mintVengeanceLicenses,
+  vengeanceLicensesActive,
+} from './vengeanceLicense.js';
 // The grievance conjunct of the extremity composite. The magnitudes are the war
 // layer's OWN, already banded by the machinery that owns causes; this file
 // neither derives nor decays them (razing.js's own note). Which of them the
@@ -143,6 +148,13 @@ import { INSTITUTION_STATUS_TUNING } from './institutionStatusModel.js';
  * lands on the cause K1 actually tests can name the same string once.
  */
 export const RAZING_IMPAIRMENT_TYPE = 'capacity';
+
+/**
+ * THE ONE FROZEN EMPTY. Every dormant answer returns THIS OBJECT rather than a
+ * fresh `{}`, so "byte-identical when dark" is a reference identity a pin can
+ * assert with `toBe` instead of a deep-equality a drift could satisfy.
+ */
+export const EMPTY_PATCH = Object.freeze({});
 
 export const RAZING_EXECUTION_TUNING = Object.freeze({
   // ── R-WZ-3: THE SEVERITY DERIVATION ──────────────────────────────────────
@@ -645,6 +657,64 @@ export function razingHolderEdgesFor(worldState, snapshot, razerId, victimId) {
 }
 
 /**
+ * THE ONE PATCH THE RAZING ASKS THE KERNEL TO PERSIST, AND IT IS FROZEN-EMPTY
+ * IN EVERY WORLD THAT DID NOT BURN A TOWN.
+ *
+ * ⚠️⚠️ WHY A PATCH AND NOT A WRITE. `evaluateWarLayer` returns a bag; it cannot
+ * mutate `worldState`, and the two files that CAN — `pulseKernel.js` at 1580 and
+ * `applyWorldPulse.js` at 941 — are both frozen at their exact ceilings with
+ * tolerance zero. So the license ledger travels as a patch on the bag and the
+ * kernel spreads it into the ONE line it already writes, changing that line's
+ * shape and adding none. When nothing is minted or consumed this returns the
+ * SAME FROZEN OBJECT, so the spread is byte-neutral rather than merely equal.
+ *
+ * ⛔ THE UNWIRED LEDGER (the conquestFeasibility idiom — a deferral written down
+ * where a dead-code sweep will find it, not rot). This patch is BUILT, RETURNED
+ * on `evaluateWarLayer`'s bag, and NOT YET SPREAD. `pulseKernel.js:916` is the
+ * one line that must spread it, the edit is net-zero on the size ratchet's own
+ * metric (1580 effective before and after), and it is STOPPED on a gate that is
+ * not size: staging `pulseKernel.js` surfaces its two PRE-EXISTING, CHAIR-UNRULED
+ * `no-useless-assignment` errors to lint-staged, and the obvious repair is not
+ * safe (`reasonCoalitionEvidence`'s reassignment sits inside the peace-engine
+ * conditional, so dropping its `= []` hands `undefined` to
+ * `mergeWarCoalitionEvidence` on the peace-dark path). Consumer owed: that one
+ * line. Until it lands, a razing's licenses are computed and discarded — which
+ * is inert, because nothing else reads them.
+ *
+ * ⚠️ THE CLOSED LOOP IS NOT RE-IMPLEMENTED HERE. `mintVengeanceLicenses` refuses
+ * the `vengeance` road at the only door that can create a license, so the
+ * eye-for-an-eye cascade is structurally impossible; this function does not
+ * repeat that check, because a second spelling of a closed loop is how a closed
+ * loop opens.
+ *
+ * @param {{ worldState?: unknown, decision?: RazingDecision|null, plan?: RazingPlan|null,
+ *   razerId?: unknown, victimId?: unknown, tick?: unknown, candidates?: unknown }} args
+ * @returns {Readonly<Record<string, unknown>>}
+ */
+export function razingLicensePatch({
+  worldState = null, decision = null, plan = null,
+  razerId = '', victimId = '', tick = 0, candidates = [],
+} = {}) {
+  const before = recordOf(worldState);
+  if (!plan || !decision || !vengeanceLicensesActive(before)) return EMPTY_PATCH;
+  const razer = String(razerId || '');
+  const victim = String(victimId || '');
+  let next = /** @type {Record<string, unknown>} */ (before);
+  next = mintVengeanceLicenses({
+    worldState: next, razerId: razer, victimId: victim, tick, road: plan.road, candidates,
+  });
+  // AND THE AVENGER SPENDS WHAT IT CAME TO SPEND. "The license is CONSUMED on
+  // use" — by its HOLDER, which on this road is the razer itself.
+  if (plan.road === 'vengeance' && decision.licenseId) {
+    next = consumeVengeanceLicense({
+      worldState: next, licenseId: decision.licenseId, coalitionId: razer, tick,
+    });
+  }
+  if (next === before) return EMPTY_PATCH;
+  return Object.freeze({ spatialLedgers: next.spatialLedgers });
+}
+
+/**
  * ⚠️⚠️ THE RAZING'S ONE EMISSION, AND IT REPLACES THE CONQUEST RATHER THAN
  * RIDING IT. LAW 6 is the amendment's signature — "no occupation record, no
  * garrison, no vassal ledger, no terms" — so a razed town CANNOT also mint the
@@ -674,7 +744,8 @@ export function razingHolderEdgesFor(worldState, snapshot, razerId, victimId) {
  *   victimId?: unknown, razerName?: unknown, victimName?: unknown,
  *   tick?: unknown, population?: unknown, namedCastCount?: unknown,
  *   institutions?: unknown, movableWealth?: unknown, holderEdges?: unknown }} args
- * @returns {{ decision: RazingDecision, plan: RazingPlan, outcome: Record<string, unknown> }|null}
+ * @returns {{ decision: RazingDecision, plan: RazingPlan,
+ *   worldStatePatch: Readonly<Record<string, unknown>>, outcome: Record<string, unknown> }|null}
  *   null when the doctrine is dark or the law refused — and the caller then does
  *   exactly what it did before this file existed.
  */
@@ -708,6 +779,18 @@ export function razingSiegeEmission({
   return {
     decision,
     plan,
+    // THE LEDGER WRITE, AS A PATCH THE KERNEL SPREADS (see razingLicensePatch).
+    worldStatePatch: razingLicensePatch({
+      worldState, decision, plan, razerId: razer, victimId: victim, tick,
+      candidates: arrayOf(edges).map((raw) => ({
+        holderId: recordOf(raw).holderId,
+        adequacyToVictim01: recordOf(raw).adequacyToVictim01,
+        // Every row of the walk is an edge the razer ALREADY SHARES — that is
+        // the walk's entire selection criterion — so the mint's second filter
+        // is satisfied by construction rather than by a flag somebody set.
+        sharesEdgeWithRazer: true,
+      })),
+    }),
     outcome: {
       id: causeRef.replace(/^razing\./, 'world_outcome.razing.'),
       type: 'condition',

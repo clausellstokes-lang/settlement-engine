@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 
 import { previewCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
@@ -683,5 +684,131 @@ describe('WR-8 R — the razing fork at the conquest power-transfer site', () =>
     }
     expect(resolution).not.toBeNull();
     expect(/** @type {any} */ (resolution).candidateType).toBe('conquest');
+  });
+});
+
+describe('WR-8 R2 — the license patch\'s one road into the world', () => {
+  const KERNEL = readFileSync(new URL('../../src/domain/worldPulse/pulseKernel.js', import.meta.url), 'utf8');
+
+  test('⛔ STOPPED — the kernel route is MEASURED, and the wrong line is forbidden', () => {
+    // ⚠️⚠️ THE LINE OCCURS TWICE AND ONLY ONE OF THEM IS THE RIGHT ONE. The
+    // war-exhaustion re-seat is written once inside `if (simulationRules
+    // .warLayerEnabled)` — where `evaluateWarLayer` resolved a siege and a town
+    // could have burned — and once inside the WAR-OFF WIND-DOWN branch, where
+    // every deployment was resolved as a WITHDRAWAL. A razing needs a WON siege,
+    // which the wind-down branch cannot produce, so patching THAT line would let
+    // a ledger ride out of a branch incapable of minting one.
+    //
+    // ⛔ THE PATCH IS NOT SPREAD YET, AND THE BLOCKER IS NOT SIZE. The edit is
+    // net-zero on the ratchet's own metric (pulseKernel is 1580 effective before
+    // and after; the added lines are `//` comments, which max-lines skips). It is
+    // the PRE-COMMIT HOOK: lint-staged lints only STAGED files, and staging
+    // `pulseKernel.js` at all surfaces its two PRE-EXISTING, CHAIR-UNRULED
+    // `no-useless-assignment` errors. The obvious repair is NOT safe —
+    // `reasonCoalitionEvidence`'s reassignment sits INSIDE the peace-engine
+    // conditional, so dropping the `= []` initializer hands `undefined` to
+    // `mergeWarCoalitionEvidence` on the peace-dark path. Chair call, not a lane
+    // call.
+    //
+    // THIS PIN IS STABLE IN BOTH WORLDS. It permits zero or one spread and
+    // forbids the wind-down line forever, so it guards the mistake rather than
+    // freezing the stop.
+    const lines = KERNEL.split('\n');
+    const reseats = lines.filter(
+      (l) => l.includes('deployments: war.deployments, warExhaustion: war.warExhaustion'),
+    );
+    expect(reseats).toHaveLength(2); // the anchor: both re-seats exist
+    const patched = lines.filter((l) => l.includes('...war.worldStatePatch'));
+    expect(patched.length).toBeLessThanOrEqual(1);
+    // THE FORBIDDEN LINE, identified by the branch it lives in. The wind-down
+    // re-seat is the one preceded by the WAR-OFF wind-down comment block.
+    const windDownIndex = lines.findIndex((l) => l.includes('WAR-OFF WIND-DOWN'));
+    expect(windDownIndex).toBeGreaterThan(-1); // the anchor: the branch is findable
+    const windDownReseat = lines.findIndex(
+      (l, i) => i > windDownIndex
+        && l.includes('deployments: war.deployments, warExhaustion: war.warExhaustion'),
+    );
+    expect(windDownReseat).toBeGreaterThan(windDownIndex);
+    expect(lines[windDownReseat]).not.toContain('...war.worldStatePatch');
+  });
+
+  test('⚠️ THE PATCH ACTUALLY LEAVES THE LAYER — a razing tick carries the minted license home', () => {
+    // THIS PIN EXISTS BECAUSE ITS ABSENCE WAS MEASURED. A mutant that deleted
+    // the ONE line carrying `razed.worldStatePatch` onto the bag left every
+    // other suite GREEN: the emission's own pins prove the patch is BUILT, and
+    // nothing proved it is RETURNED. The road out of the layer needs its own
+    // proof, and this is it.
+    const strong = attacker('strong', 'Ironhold');
+    strong.settlement.config.primaryDeitySnapshot = { name: 'The Iron Maw', alignmentAxis: 'evil' };
+    const weak = victim('weak', 'Thornmere');
+    // The mourner: bordered by the razer, and close to the town that burns.
+    const ally = save('ally', 'Everdeep');
+    const edges = {
+      settlementIds: ['strong', 'weak', 'ally'],
+      edges: [
+        { id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' },
+        { id: 'edge.strong.ally', from: 'strong', to: 'ally', relationshipType: 'cordial' },
+        { id: 'edge.ally.weak', from: 'ally', to: 'weak', relationshipType: 'allied' },
+      ],
+      relationshipStates: {
+        'edge.strong.weak': { relationshipType: 'hostile', resentment: 0.95, trust: 0.02, fear: 0.5 },
+        'edge.strong.ally': { relationshipType: 'cordial', resentment: 0.1, trust: 0.4 },
+        'edge.ally.weak': { relationshipType: 'allied', resentment: 0.02, trust: 0.95 },
+      },
+    };
+    const extraState = {
+      deployments: { strong: { targetId: 'weak', sinceTick: 1, role: 'siege' } },
+      warExhaustion: { strong: 1 },
+      spatialLedgers: {
+        warReasons: {
+          'strong>weak': {
+            reasons: { grievance: { type: 'grievance', score: 1, tick: 4, receipt: 'blood is owed' } },
+          },
+        },
+      },
+    };
+    const channels = [{ type: 'war_front', from: 'strong', to: 'weak', status: 'confirmed' }];
+    const saves = [strong, weak, ally];
+    let patch = null;
+    for (let tick = 5; tick < 60 && !patch; tick += 1) {
+      const campaign = warCampaign({
+        warLayerEnabled: true, warTerminationEnabled: true, peaceEngineEnabled: true,
+        dispositionChannelsEnabled: true, coalitionLedgerEnabled: true,
+        envoyDiplomacyEnabled: true, demographicsEnabled: true, conquestDoctrineEnabled: true,
+      }, { edges, channels, extraState });
+      const snap = snapshotFor(campaign, saves);
+      const war = evaluateWarLayer({
+        snapshot: snap, worldState: snap.worldState, rng: createPRNG('war-seed'),
+        tick, now: NOW, rules: { warLayerEnabled: true },
+      });
+      if (war.outcomes.some((o) => o.candidateType === 'razing')) patch = war.worldStatePatch;
+    }
+    expect(patch).not.toBeNull();
+    const licenses = /** @type {any} */ (patch).spatialLedgers.vengeanceLicenses;
+    const [id] = Object.keys(licenses);
+    expect(id).toMatch(/^vengeance_license\.strong\.weak\./);
+    expect(licenses[id].holders).toEqual(['ally']);
+    expect(licenses[id].consumedBy).toBeNull();
+  });
+
+  test('the evaluator always answers with a patch — every return, including both dark ones', () => {
+    // TOTALITY, because `{...undefined}` is legal JS and a missing key would be
+    // an invisible hole rather than a crash.
+    const saves = [attacker('strong', 'Ironhold'), victim('weak', 'Thornmere')];
+    const edges = {
+      settlementIds: ['strong', 'weak'],
+      edges: [{ id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' }],
+      relationshipStates: { 'edge.strong.weak': { relationshipType: 'hostile' } },
+    };
+    for (const rules of [{ warLayerEnabled: false }, { warLayerEnabled: true }]) {
+      const campaign = warCampaign(rules, { edges });
+      const snap = snapshotFor(campaign, saves);
+      const war = evaluateWarLayer({
+        snapshot: snap, worldState: snap.worldState, rng: createPRNG('war-seed'),
+        tick: 6, now: NOW, rules,
+      });
+      expect(war.worldStatePatch).toEqual({});
+      expect(Object.isFrozen(war.worldStatePatch)).toBe(true);
+    }
   });
 });

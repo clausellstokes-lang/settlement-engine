@@ -40,7 +40,9 @@ import {
   razingPlanFor,
   razingSeverityFrom,
   razingHolderEdgesFor,
+  razingSiegeEmission,
   strongestLiveGrievance01,
+  EMPTY_PATCH,
 } from '../../src/domain/worldPulse/razingExecution.js';
 import { RAZING_TUNING, razingEdgeFlips, razingGate, readRelationshipExtremity } from '../../src/domain/worldPulse/razing.js';
 import {
@@ -879,5 +881,84 @@ describe('LAW 5\'s reach — the holder edges are WALKED off the graph, and stra
     // ANCHORED: the census is still populated by the two real neighbours, so the
     // absence measures the mint refusal and not an emptied walk.
     expect(ids).toEqual(['Everdeep', 'Marrowfen']);
+  });
+});
+
+describe('R2 THE CLOSED LOOP, WIRED — the ledger travels as a patch, and the cascade cannot start', () => {
+  /**
+   * The lit razer, plus one neighbour who loved the victim. `litRazingWorld`'s
+   * two-settlement world has nobody to mint a license TO, so the holder is added
+   * here — which is also the point: a friendless settlement is cheap to burn.
+   */
+  function withMourner(over = {}) {
+    const { worldState, snapshot } = litRazingWorld(over);
+    worldState.relationshipStates['rel.Karrow.Everdeep'] = { relationshipType: 'cordial', resentment: 0.1, trust: 0.4 };
+    worldState.relationshipStates['rel.Everdeep.Thornwall'] = { relationshipType: 'allied', resentment: 0.02, trust: 0.95 };
+    snapshot.regionalGraph.edges.push(
+      { id: 'rel.Karrow.Everdeep', from: 'Karrow', to: 'Everdeep', relationshipType: 'cordial' },
+      { id: 'rel.Everdeep.Thornwall', from: 'Everdeep', to: 'Thornwall', relationshipType: 'allied' },
+    );
+    return { worldState, snapshot };
+  }
+
+  const EMISSION = (worldState, snapshot) => razingSiegeEmission({
+    worldState, snapshot, razerId: 'Karrow', victimId: 'Thornwall',
+    razerName: 'Karrow', victimName: 'Thornwall', tick: 40,
+    population: 1200, namedCastCount: 3, institutions: [{ id: 'temple' }], movableWealth: 900,
+  });
+
+  test('AN INITIATION RAZING MINTS the victim\'s friend a license, and the patch carries it', () => {
+    const { worldState, snapshot } = withMourner({ warExhaustion: { Karrow: 1 } });
+    const emission = EMISSION(worldState, snapshot);
+    expect(emission?.plan.road).toBe('initiation');
+    const minted = emission?.worldStatePatch.spatialLedgers?.vengeanceLicenses;
+    expect(Object.keys(minted || {})).toEqual(['vengeance_license.Karrow.Thornwall.40']);
+    const license = minted['vengeance_license.Karrow.Thornwall.40'];
+    expect(license.razerId).toBe('Karrow');
+    expect(license.victimId).toBe('Thornwall');
+    expect(license.holders).toEqual(['Everdeep']); // the mourner, and nobody else
+    expect(license.consumedBy).toBeNull();
+    // AND THE WORLD ITSELF WAS NOT TOUCHED. The layer returns a bag; the patch is
+    // the only road out, and this file writes nothing.
+    expect(worldState.spatialLedgers.vengeanceLicenses).toBeUndefined();
+  });
+
+  test('⚠️ THE CASCADE CANNOT START — a VENGEANCE razing mints nothing and SPENDS what it held', () => {
+    const { worldState, snapshot } = withMourner({
+      patron: 'good',
+      licenses: {
+        'vengeance_license.Thornwall.Marrowfen.12': {
+          id: 'vengeance_license.Thornwall.Marrowfen.12',
+          razerId: 'Thornwall', victimId: 'Marrowfen', heldSince: 12,
+          holders: ['Karrow'], consumedBy: null, consumedAtTick: null, extinguishedAtTick: null,
+        },
+      },
+    });
+    const emission = EMISSION(worldState, snapshot);
+    expect(emission?.plan.road).toBe('vengeance');
+    const ledger = emission?.worldStatePatch.spatialLedgers?.vengeanceLicenses || {};
+    // NOTHING NEW. Everdeep mourned Thornwall and is armed with nothing, because
+    // the answer to an atrocity is not itself an atrocity anyone may answer.
+    expect(Object.keys(ledger)).toEqual(['vengeance_license.Thornwall.Marrowfen.12']);
+    // AND THE OLD ONE IS SPENT, by its holder, at this tick.
+    expect(ledger['vengeance_license.Thornwall.Marrowfen.12'].consumedBy).toBe('Karrow');
+    expect(ledger['vengeance_license.Thornwall.Marrowfen.12'].consumedAtTick).toBe(40);
+  });
+
+  test('NEGATIVE CONTROL — a razing with NOBODY who loved the victim moves the ledger not at all', () => {
+    // The two-settlement world: no mourner, no mint, and the patch is the ONE
+    // frozen empty object by REFERENCE, so the kernel's spread is byte-neutral
+    // rather than merely deep-equal.
+    const { worldState, snapshot } = litRazingWorld({ warExhaustion: { Karrow: 1 } });
+    const emission = EMISSION(worldState, snapshot);
+    expect(emission?.plan.road).toBe('initiation'); // the anchor: a razing DID happen
+    expect(emission?.worldStatePatch).toBe(EMPTY_PATCH);
+  });
+
+  test('NEGATIVE CONTROL — a DARK world emits nothing at all, so there is no patch to spread', () => {
+    expect(razingSiegeEmission({
+      worldState: {}, snapshot: {}, razerId: 'Karrow', victimId: 'Thornwall',
+      tick: 40, population: 1200,
+    })).toBeNull();
   });
 });
