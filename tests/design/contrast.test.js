@@ -829,13 +829,16 @@ describe('THE CEDAR SHAFT — the barrel, the wraps, and the groove cut in it', 
     expect(ratio(WRAP_EDGE, SHAFT_BODY).toFixed(2)).toBe('2.22');
     // 2 — 2.12 is the AUTHORED-TOKEN ratio, and pinning it guards exactly one thing: that
     // the hex pair keeps its separation and cannot quietly collapse in a repaint.
-    // ⚠️⚠️ IT IS NOT WHY THE WRAP READS AS THREAD — this line used to say it was, and no
-    // reader has ever seen 2.12. The compositor multiplies WRAP_BARREL's luminance
-    // modulator over the turns, so the authored gloss never reaches the screen undimmed
-    // and the RENDERED crest-to-valley ladder measures 1.81:1 (crest #6A311E..#6B311F,
-    // valley #270D07). That executed ladder is the wound structure the eye actually reads,
-    // and it is pinned on the composited pixel in tests/components/navFletching.test.jsx
-    // (R5); theme.js's WRAPS note carries the correction in full.
+    // ⚠️⚠️ IT IS NOT WHY THE WRAP READS AS THREAD — this line used to say it was. What a
+    // reader sees is the COMPOSITED pixel: WRAP_BARREL multiplies its luminance modulator
+    // over the turns, and that modulator is WHITE — identity — from the top of the bar down
+    // to SHAFT_STOPS.lit, so 2.12 is the true pixel ladder across the top 9% and ONLY
+    // there. Below the lit stop both tones dim together and the ladder falls (1.82 mid-bar,
+    // 1.37 at the edge stop, 1.23 in the silhouette), so it is never the ratio anywhere in
+    // the readable BODY of the bar — which is the whole span the thread has to read as
+    // thread across. theme.js's WRAPS note carries the rendered figure, 1.81:1 at crest
+    // #6A311E..#6B311F over valley #270D07; tests/components/navFletching.test.jsx (R5)
+    // performs the compositor's multiply and pins the analytic mid-bar ladder at 1.82.
     expect(ratio(WRAP_GLOSS, WRAP_EDGE)).toBeGreaterThan(2);
     expect(ratio(WRAP_GLOSS, WRAP_EDGE).toFixed(2)).toBe('2.12');
     expect(luminance(WRAP_EDGE)).toBeLessThan(luminance(WRAP));
