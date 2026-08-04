@@ -125,6 +125,17 @@ function fletchedRuns() {
   return runs;
 }
 
+/**
+ * THE GLOBAL FOCUS RING'S WIDTH, in px — a11y.css draws `outline: 3px solid
+ * var(--sf-focus)`, and the fletch cells inset the ring by exactly that so the whole
+ *3px lands inside their own box (see the cell's own note). ⚠️ IF a11y.css EVER
+ * RE-WEIGHTS THE RING THIS MUST FOLLOW IT: a smaller inset than the ring's width would
+ * put part of it back outside the box and above the viewport, which is the defect.
+ * tests/components/navFletching.test.jsx reads the stylesheet and pins the two
+ * together rather than trusting this comment.
+ */
+const FOCUS_RING_PX = 3;
+
 /** Everything both cell registers share: metrics, type, and the settle. */
 const CELL_BASE = {
   display: 'flex', alignItems: 'center', gap: SP.xs,
@@ -167,6 +178,36 @@ export default function NavRibbon({ view, onNavClick }) {
               alignSelf: 'stretch', justifyContent: 'center',
               flexGrow: 1, flexShrink: 1, flexBasis: 0,
               color: active ? PARCH : PARCH_100, fontWeight: 600,
+              // ⚠️⚠️ THE FOCUS RING GOES INSIDE THIS CELL, AND BOTH HALVES OF THAT ARE
+              // REPAIRS. The PB verifier's F5, quoted: "the fletch cells take `outline:
+              // rgb(244,234,208) solid 3px` at outline-offset 0 on a box spanning
+              // y=0..38 inside a sticky top:0 header, so the ring's top 3px is drawn at
+              // y=-3..0 and is off-viewport... The lapped cell's ring is visible on
+              // three sides only."
+              //
+              // 1 — THE OFFSET. A fletch cell is `alignSelf: stretch`, so its box IS the
+              // bar: top 0, bottom 38, inside a header stuck at top 0. An OUTSET ring
+              // has nowhere to go — it is drawn above the viewport's own top edge and
+              // simply does not exist. Every other cure spends something the ribbon
+              // cannot spend: padding the header moves ANCHOR_OFFSET and every in-page
+              // anchor in the estate, and a ring layer inside the band would put a
+              // focus indicator inside the aria-hidden decoration. A NEGATIVE offset
+              // costs nothing and is drawn in full. The label is untouched: its ink runs
+              // 14.35..25.25px of the 38px bar and the ring occupies 0..3 and 35..38.
+              //
+              // 2 — THE COLOUR, and it was failing SC 1.4.11 whether or not you could
+              // see the top edge. The house ring is `--sf-focus` #a0762a, a bronze
+              // chosen for parchment; on the dark goose vane it measures 2.41:1, under
+              // the 3:1 a focus indicator owes. PARCH measures 8.9:1 on the same ground.
+              //
+              // ⚠️ BOTH ARE SET THROUGH a11y.css's OWN VARIABLES, which is the sanctioned
+              // mechanism and not a workaround: that file's rule is "components must NOT
+              // override this with `outline: none`; if the design needs a different ring
+              // colour, override --sf-focus only". Nothing here suppresses the ring, adds
+              // a second one, or touches the global rule — the cell states its ground and
+              // the global rule keeps drawing the ring.
+              '--sf-focus': PARCH,
+              '--sf-focus-ring-offset': `-${FOCUS_RING_PX}px`,
             }
             : {
               // The plain register, RE-INKED for the honey barrel. These labels sit

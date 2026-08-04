@@ -1229,6 +1229,75 @@ describe('8 — ⚠️ the clip never touches a focusable element, so the focus 
     }
   });
 
+  test('⚠️⚠️ THE FLETCH CELL’S RING IS DRAWN IN FULL, AND IT IS LEGIBLE — F5’s cure', () => {
+    // The verifier's F5, quoted: "THE FLETCH CELLS' FOCUS RING LOSES ITS TOP EDGE. Real
+    // Tab traversal gives skip-link -> SettlementForge -> Create -> Library -> Realm ->
+    // ... and NO focusable control has a clipping ancestor... so the lane's central
+    // a11y claim holds. But the fletch cells take `outline: rgb(244,234,208) solid 3px`
+    // at outline-offset 0 on a box spanning y=0..38 inside a sticky top:0 header, so
+    // the ring's top 3px is drawn at y=-3..0 and is off-viewport... The lapped cell's
+    // ring is visible on three sides only."
+    //
+    // ⚠️ THE BLOCK ABOVE ALREADY PROVED NOTHING CLIPS THE RING. That was the whole of
+    // the old claim, and it was TRUE and INSUFFICIENT: a ring can be unclipped by every
+    // ancestor and still be painted where no viewport reaches. This pin is the missing
+    // half — the ring must land INSIDE the box it belongs to.
+    const a11y = readFileSync(join(HERE, '../../src/styles/a11y.css'), 'utf8');
+    const ring = a11y.match(/outline:\s*(\d+(?:\.\d+)?)px\s+solid\s+var\(--sf-focus\)/);
+    expect(ring, 'a11y.css no longer draws the ring this pin is derived from').toBeTruthy();
+    const ringPx = Number(ring[1]);
+    expect(a11y, 'a11y.css no longer reads the offset variable this cell sets')
+      .toContain('outline-offset: var(--sf-focus-ring-offset)');
+
+    const { container } = render(<App />);
+    const drawn = feathers(container);
+    expect(drawn.length).toBe(3); // not a vacuous loop
+    for (const b of drawn) {
+      // 1 — THE OFFSET IS INSET BY AT LEAST THE RING'S OWN WIDTH, so the whole ring is
+      //     drawn inside a box whose top edge is the sticky header's top edge.
+      const offset = b.style.getPropertyValue('--sf-focus-ring-offset');
+      expect(offset, `${label(b)} has no inset ring`).toBeTruthy();
+      expect(Number(offset.replace('px', '')), `${label(b)}'s ring still reaches outside its box`)
+        .toBeLessThanOrEqual(-ringPx);
+      // 2 — THE COLOUR IS THE ONE SANCTIONED OVERRIDE, and it is set to a tone that
+      //     clears SC 1.4.11 on the ground the ring is actually drawn on.
+      expect(b.style.getPropertyValue('--sf-focus')).toBe(PARCH);
+      // 3 — AND NOTHING SUPPRESSES THE RING. a11y.css's standing rule is that a
+      //     component may re-colour it and may never switch it off.
+      expect(b.style.outline).toBeFalsy();
+    }
+    // THE CONTRAST THAT MADE THE COLOUR NECESSARY, quoted both ways. The house bronze
+    // was failing the 3:1 a focus indicator owes on this ground whether or not you
+    // could see its top edge.
+    const HOUSE_RING = (a11y.match(/--sf-focus:\s*(#[0-9A-Fa-f]{6})/) || [])[1];
+    expect(HOUSE_RING).toBe('#a0762a');
+    expect(ratio(HOUSE_RING, FLETCH_VANE), 'the house ring reads on the vane after all')
+      .toBeLessThan(3);
+    expect(ratio(HOUSE_RING, FLETCH_VANE).toFixed(2)).toBe('2.41');
+    expect(ratio(PARCH, FLETCH_VANE)).toBeGreaterThanOrEqual(3);
+    expect(ratio(PARCH, FLETCH_VANE).toFixed(2)).toBe('9.07');
+    // …and on the LIGHTEST band a fletch cell can show, which is what a ring drawn
+    // across a brightened active vane really lands on.
+    expect(ratio(PARCH, FLETCH_SHEEN_LIFT)).toBeGreaterThanOrEqual(3);
+
+    // 4 — THE GEOMETRY THAT MAKES AN OUTSET RING IMPOSSIBLE HERE, as arithmetic.
+    //     A fletch cell is `alignSelf: stretch` inside a header stuck at top 0, so its
+    //     box top IS the viewport's top edge and an outset ring is drawn at negative y.
+    //     (Measured in Chrome this lane: fletch cell box top 0, height 38; the plain
+    //     tabs sit at top 2 and lose their top edge too — reported separately.)
+    for (const b of drawn) expect(b.style.alignSelf).toBe('stretch');
+    expect(0 - Number(a11y.match(/--sf-focus-ring-offset:\s*(\d+)px/)[1]) - ringPx)
+      .toBeLessThan(0); // an outset ring's top edge lands above the viewport
+
+    // 5 — NEGATIVE CONTROL: the plain reference tabs do NOT take the override. The
+    //     inset is a considered answer to the fletch cell's own geometry and its own
+    //     dark ground, not a blanket suppression of the house ring.
+    for (const p of plains(container)) {
+      expect(p.style.getPropertyValue('--sf-focus-ring-offset')).toBe('');
+      expect(p.style.getPropertyValue('--sf-focus')).toBe('');
+    }
+  });
+
   test('the fletches are in the TAB ORDER, in reading order, and take focus', () => {
     const { container } = render(<App />);
     // The tab order jsdom can prove: every nav control is a native button with no
