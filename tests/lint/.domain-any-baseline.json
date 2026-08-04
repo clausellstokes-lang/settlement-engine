@@ -632,11 +632,15 @@
       "suppress": 0
     },
     "src/domain/worldPulse/warDeployment.js": {
-      "any": 23,
+      "any": 18,
       "suppress": 0
     },
     "src/domain/worldPulse/warFrontReads.js": {
       "any": 8,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/warHomeCosts.js": {
+      "any": 5,
       "suppress": 0
     },
     "src/domain/worldPulse/warMagicGate.js": {
