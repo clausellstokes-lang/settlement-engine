@@ -446,6 +446,9 @@ describe('the COMPOSITED bar — the ground a letterform really lands on', () =>
       // …and each really declares its colour space, or "deterministic" buys nothing.
       expect(tileSvg(uri), `${name} does not declare sRGB`)
         .toContain("color-interpolation-filters='sRGB'");
+      // The sRGB toContain above and the stitchTiles one below both read the same
+      // decoded string, so an empty or re-shaped URI reds there rather than here.
+      // anchored: the two toContain assertions bracketing this one are the liveness proof
       expect(uri, `${name} is double-escaped`).not.toContain('%2523');
       expect(tileSvg(uri)).toContain("stitchTiles='stitch'");
     }

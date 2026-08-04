@@ -100,10 +100,12 @@ import {
   INK_DEEP, LABEL_BOX, LIGHT_UNIT, PARCH, PARCH_100,
   PLATE_LIGHT_DEG, SHAFT, SHAFT_BODY, SHAFT_CYLINDER, SHAFT_EDGE, SHAFT_GRAIN_LAYERS,
   SHAFT_GRAIN_TEXTURE, SHAFT_GROWTH_TEXTURE, SHAFT_PORE_TEXTURE, SHAFT_RIM, SHAFT_SHEEN,
-  SHAFT_STOPS, SP, WRAP,
+  SHAFT_STOPS, SP, WRAP, WRAP_BARREL, WRAP_EDGE, WRAP_GLOSS, WRAP_TURN,
   contactShadow, lightOffset, shadowOffset,
 } from '../../src/components/theme.js';
 import { isDegenerateSeed } from '../../src/components/brand/GildedWordmark.jsx';
+import { GLOSS_END, SHADOW_END, TURNS, tieOff } from '../../src/components/nav/ShaftWrap.jsx';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import {
   BAND, BAND_PX_PER_UNIT, BAND_W, BARB, BOW, CALM_PAD_Y, DRIFT, LABEL_INK, LANE, QUILLS,
   QUILL_H, REACH, RUN, SEAT, SHEENS, SHEEN_FLOOR, SHEEN_PEEK, SPLIT, SPLITS, VANES,
@@ -1302,6 +1304,202 @@ describe('4 — THE WRAPS: two glossy bands riding the shaft, bracketing the clu
     expect(lead.style.backgroundImage).toContain(`${SHAFT_STOPS.lit * 100}%`);
     expect(lead.style.backgroundImage).toContain(`${SHAFT_STOPS.mid * 100}%`);
   });
+
+  test('⚠️⚠️ THE TURN IS THREE BANDS SUMMING TO ITS OWN PERIOD — spec part 2 §3', () => {
+    // A turn of silk shows shadow → crest → body across its width under an upper-LEFT
+    // light, which is what puts the crest on the LEFT of each turn. The three widths
+    // MUST sum to the period: authored as four independent literals, the gradient's last
+    // stop and its repeat boundary disagree and the field walks a fraction of a pixel per
+    // turn — invisible in review, a visible drift across a 10px wrap.
+    expect(WRAP_TURN.shadow + WRAP_TURN.gloss + WRAP_TURN.body).toBeCloseTo(WRAP_TURN.period, 9);
+    expect(WRAP_TURN.period).toBe(2.6);
+    // …and the stops really are the running sum, not re-spelled numbers.
+    expect(SHADOW_END).toBe(WRAP_TURN.shadow);
+    expect(GLOSS_END).toBe(WRAP_TURN.shadow + WRAP_TURN.gloss);
+    for (const s of [`${SHADOW_END}px`, `${GLOSS_END}px`, `${WRAP_TURN.period}px`]) {
+      expect(TURNS, `the turn gradient is missing the stop at ${s}`).toContain(s);
+    }
+    // ORDER, which is the whole "crest on the LEFT" claim: shadow first, then gloss.
+    expect(TURNS.indexOf(WRAP_EDGE)).toBeLessThan(TURNS.indexOf(WRAP_GLOSS));
+    expect(TURNS.indexOf(WRAP_GLOSS)).toBeLessThan(TURNS.lastIndexOf(WRAP));
+    // ⚠️ THE TURNS ARE THE OPAQUE LAYER NOW. Every stop is a colour; a `transparent`
+    // anywhere in here is the old arrangement returning, and with it the defect below.
+    // The three stop assertions above prove TURNS is the live gradient string, so a
+    // drift that emptied it reds there rather than passing this absence.
+    // anchored: the toContain stops above are the liveness proof
+    expect(TURNS).not.toContain('transparent');
+  });
+
+  test('⚠️⚠️ R5 — THE WHIPPING EXISTS AT 1x: the RENDERED crest, not the authored hex', () => {
+    // ⚠️⚠️ THE DEFECT THIS PIN EXISTS FOR. theme.js claimed the binding was identified
+    // "by its own WOUND STRUCTURE (a 2.6px turn period whose crest-to-valley ladder is
+    // 2.12:1)". Both halves were false in the shipped pixels, and no token-vs-token
+    // assertion could see it: 2.12:1 is the ladder of WRAP_GLOSS against WRAP_EDGE as
+    // AUTHORED, and the satin crest never reached the screen. The turns were painted OVER
+    // the barrel gradient and their only opaque tone was the inter-turn shadow, so the
+    // lit band existed only where the barrel itself was at its lit stop — the top 9% of
+    // the bar. Measured on the real Chrome raster at device-pixel resolution, mid-bar:
+    // TWO tones, #521F12 alternating with #2E0F08 every device pixel, ladder 1.316:1.
+    //
+    // So the claim is now made about the COMPOSITED pixel. The compositor multiplies
+    // WRAP_BARREL over the turns, so the test performs that same multiply from the
+    // tokens rather than trusting either hex on its own.
+    const barrel = [...WRAP_BARREL.matchAll(/#([0-9A-F]{6}) ([\d.]+)%/g)]
+      .map((m) => [Number(m[2]) / 100, parseInt(m[1].slice(0, 2), 16) / 255]);
+    expect(barrel.length, 'WRAP_BARREL no longer parses as stop pairs').toBe(6);
+    /** The barrel's multiply factor at a depth, interpolated as the compositor does. */
+    const factorAt = (f) => {
+      for (let i = 1; i < barrel.length; i += 1) {
+        const [p0, v0] = barrel[i - 1];
+        const [p1, v1] = barrel[i];
+        if (f <= p1) return v0 + (v1 - v0) * (p1 === p0 ? 0 : (f - p0) / (p1 - p0));
+      }
+      return barrel[barrel.length - 1][1];
+    };
+    const multiplied = (hex, f) => {
+      const n = parseInt(hex.slice(1, 7), 16);
+      const k = factorAt(f);
+      return [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => Math.round(v * k));
+    };
+    const lum = ([r, g, b]) => {
+      const t = (v) => { const c = v / 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+      return 0.2126 * t(r) + 0.7152 * t(g) + 0.0722 * t(b);
+    };
+    const ladderAt = (f) => {
+      const [hi, lo] = [lum(multiplied(WRAP_GLOSS, f)), lum(multiplied(WRAP_EDGE, f))];
+      return (hi + 0.05) / (lo + 0.05);
+    };
+    // 1 — THE CREST SURVIVES THE WHOLE READABLE BAR. Checked at every twentieth of the
+    //     depth down to SHAFT_STOPS.edge, because the failure it replaces was exactly
+    //     depth-dependent: fine at the top, gone everywhere a reader looks.
+    for (let f = 0; f <= SHAFT_STOPS.edge + 1e-9; f += 0.05) {
+      expect(ladderAt(f), `the wound structure collapses at depth ${f.toFixed(2)}`)
+        .toBeGreaterThan(1.5);
+    }
+    // ⚠️ AND THE RESIDUAL BELOW IT IS QUOTED RATHER THAN HIDDEN. In the bar's last 2% —
+    // the barrel's own silhouette, where the cylinder drops fast into SHAFT_RIM — the
+    // multiply reaches 0.427 and the ladder fades to 1.23:1. That is the shaft's
+    // shading doing its job, not the whipping failing: nothing is read there, and a
+    // binding that stayed bright into the silhouette would be the sticker read the
+    // one-light law exists to prevent. It is a FADE, not a cliff, which the loop above
+    // proves by holding everywhere else.
+    expect(ladderAt(1).toFixed(2)).toBe('1.23');
+    expect(ladderAt(1)).toBeLessThan(ladderAt(SHAFT_STOPS.edge));
+    // 2 — AND THE CREST IS THE GLOSS FAMILY, not the body tone wearing its name. This is
+    //     the exact substitution the old arrangement made.
+    const mid = 0.5;
+    expect(lum(multiplied(WRAP_GLOSS, mid)))
+      .toBeGreaterThan(lum(multiplied(WRAP, mid)) * 1.4);
+    // 3 — THE MEASURED RECEIPTS, quoted so the derivation above is checked against the
+    //     real compositor rather than believed. Chrome 1440x900, this lane, mid-bar, at
+    //     DEVICE-pixel resolution across the full 10px width of both wraps:
+    //       BEFORE  2 tones · crest #521F12 (the BODY) · ladder 1.316:1 · period 2.0px
+    //       AFTER   3 tones · crest #6A311E (GLOSS × barrel) · ladder 1.806:1 · 2.6px
+    //     The analytic crest below lands within one 8-bit level of the measured #6A311E,
+    //     and the analytic ladder (1.82) within 0.02 of the measured 1.806 — the gap is
+    //     the rasteriser's own dithering across a hard gradient stop, not a disagreement.
+    expect(multiplied(WRAP_GLOSS, mid).map((v) => v.toString(16).padStart(2, '0')).join(''))
+      .toBe('6b311f');
+    expect(ladderAt(mid).toFixed(2)).toBe('1.82');
+    // 4 — NEGATIVE CONTROL: the arrangement this replaces really does fail, and the
+    //     control is RECONSTRUCTED rather than remembered. In the old layering the turns
+    //     were painted OVER the barrel with no multiply anywhere, so the two tones that
+    //     reached the screen at mid-bar were the barrel's own body stop — WRAP — against
+    //     the turn shadow, undimmed. That reconstruction reproduces the 1.32:1 measured
+    //     on the shipped bar, which is what makes it a control rather than an anecdote.
+    const rawLadder = (hi, lo) => {
+      const raw = (h) => { const n = parseInt(h.slice(1, 7), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
+      return (lum(raw(hi)) + 0.05) / (lum(raw(lo)) + 0.05);
+    };
+    expect(rawLadder(WRAP, WRAP_EDGE).toFixed(2)).toBe('1.32');
+    expect(rawLadder(WRAP, WRAP_EDGE), 'the old crest was not weaker — the pin proves nothing')
+      .toBeLessThan(ladderAt(mid));
+    // …and the substitution the old layering made is named: its "crest" was the BODY.
+    expect(rawLadder(WRAP, WRAP_EDGE)).toBeLessThan(rawLadder(WRAP_GLOSS, WRAP_EDGE));
+  });
+
+  test('⚠️⚠️ THE TIE-OFF: one authored diagonal per wrap, at the band’s own lean', () => {
+    // A field of identical turns says "pattern"; one diagonal across it says "somebody
+    // tied this". It is the only non-periodic mark on the whipping and it carries the
+    // whole "wound and locked" read (spec part 2 §3).
+    const { container } = render(<App />);
+    for (const side of ['lead', 'trail']) {
+      const svg = container.querySelector(`[data-testid="nav-shaft-tie-${side}"]`);
+      expect(svg, `the ${side} wrap has no tie-off`).toBeTruthy();
+      expect(svg.getAttribute('aria-hidden')).toBe('true');
+      // ⚠️ IT CLIPS ITSELF. `overflow: visible` here would let the pass and its nub hang
+      // on bare wood beyond the binding, which is a scratch rather than a thread.
+      expect(svg.style.overflow).toBeFalsy();
+      const pass = container.querySelector(`[data-testid="nav-shaft-tie-pass-${side}"]`);
+      const edge = container.querySelector(`[data-testid="nav-shaft-tie-edge-${side}"]`);
+      expect(pass.getAttribute('stroke')).toBe(WRAP_GLOSS);
+      expect(Number(pass.getAttribute('stroke-opacity'))).toBe(0.5);
+      expect(Number(pass.getAttribute('stroke-width'))).toBe(WRAP_TURN.period);
+      // The border hairlines are the SAME path one shadow-width wider on each side, so
+      // the 0.4px of WRAP_EDGE either side is exact rather than two drifting copies.
+      expect(edge.getAttribute('stroke')).toBe(WRAP_EDGE);
+      expect(Number(edge.getAttribute('stroke-width')) - Number(pass.getAttribute('stroke-width')))
+        .toBeCloseTo(WRAP_TURN.shadow * 2, 9);
+      expect(edge.getAttribute('d')).toBe(pass.getAttribute('d'));
+      // …and the shadow is painted UNDER the crest, or there is no border at all.
+      expect([...svg.querySelectorAll('path')][0]).toBe(edge);
+    }
+    // ⚠️ THE LEAN IS THE COMPOSITION'S, taken from FletchBand rather than re-spelled, so
+    // a future re-mirror moves the tie-off with every other slanted mark on the bar.
+    for (const side of ['lead', 'trail']) {
+      const { pass } = tieOff(side);
+      const [, x0, y0, x1, y1] = pass.match(/^M (-?[\d.]+) (-?[\d.]+) L (-?[\d.]+) (-?[\d.]+)$/).map(Number);
+      // The drift the lean would make over the pass's own drop must BE the pass's drift.
+      // ⚠️ TO THE PATH'S OWN 2dp ROUNDING, never tighter: every authored coordinate on
+      // this bar goes through one rounder so the paths are byte-stable, and a tolerance
+      // finer than that rounding would pin the rounder rather than the lean.
+      expect(lean(Number(y1) - Number(y0))).toBeCloseTo(Number(x1) - Number(x0), 1);
+      // It runs DOWN AND LEFT, like every other slanted mark since the mirror.
+      expect(Number(x1)).toBeLessThan(Number(x0));
+      expect(Number(y1)).toBeGreaterThan(Number(y0));
+      // It reaches PAST both edges, so both ends are cut by the wrap rather than
+      // stopping in mid-air inside their own binding.
+      expect(Number(x0)).toBeGreaterThan(FLETCH.wrap);
+      expect(Number(x1)).toBeLessThan(0);
+    }
+    // ⚠️ THE TWO WRAPS ARE NOT THE SAME MARK TWICE. The lead ties across its LOWER third
+    // and the trail across its UPPER third, each hash-jittered — two identical tie-offs
+    // at the same height is the periodicity failure the sheen bands were re-drawn to
+    // escape, one object smaller.
+    const seatOf = (side) => Number(tieOff(side).pass.match(/^M -?[\d.]+ (-?[\d.]+)/)[1]);
+    expect(seatOf('lead')).toBeGreaterThan(CHROME.headerDesktop * 0.5);
+    expect(seatOf('trail')).toBeLessThan(CHROME.headerDesktop * 0.35);
+    // NON-VACUITY of the jitter: it really displaces, and by no more than the ±2px the
+    // spec allows. (0.62 and 0.16 of the bar are the unjittered seats.)
+    for (const [side, base] of [['lead', 0.62], ['trail', 0.16]]) {
+      const off = seatOf(side) - CHROME.headerDesktop * base;
+      expect(Math.abs(off), `${side}: jitter ${off} is outside ±2px`).toBeLessThanOrEqual(2);
+      expect(Math.abs(off), `${side}: the jitter is a decorative zero`).toBeGreaterThan(0.05);
+    }
+    // …and it is DETERMINISTIC integer arithmetic, like every other placement here.
+    // ⚠️ THE SCAN STRIPS COMMENTS FIRST, AND THE FIRST CUT OF IT DID NOT — it red on the
+    // docstring three lines above, which says "never `Math.random` and never `Math.sin`".
+    // A prose-counting detector that cannot tell code from the prose explaining the code
+    // is the estate's recorded third bite of this class; the strip is the cure.
+    const code = SRC('components/nav/ShaftWrap.jsx')
+      .replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+    // The two toContain assertions below prove the strip left real code behind, so an
+    // empty `code` cannot satisfy this negative.
+    // anchored: the two toContain assertions below are the liveness proof
+    expect(code).not.toMatch(/Math\.(random|sin|cos|tan)/);
+    expect(code).toContain('repeating-linear-gradient');
+    expect(code).toContain('unitHash');
+    // THE NUB: the working end's cut tail, and it leans the same way as the pass.
+    for (const side of ['lead', 'trail']) {
+      const { nub } = tieOff(side);
+      const [, dx, dy] = nub.match(/l (-?[\d.]+) (-?[\d.]+)$/).map(Number);
+      // ⚠️ TO THE PATH'S OWN 2dp ROUNDING, for the same reason the pass's lean is.
+      expect(Math.hypot(dx, dy), 'the nub is not 1.5px of thread').toBeCloseTo(
+        Math.hypot(lean(1.5), 1.5), 2,
+      );
+      expect(dy).toBeLessThan(0);   // turned back on itself, up the pass it finishes
+    }
+  });
 });
 
 describe('5 — THE CYLINDER: the bar is a shaft seen in profile, not a plank', () => {
@@ -1429,10 +1627,14 @@ describe('6 — THE TEXTURE IS DETERMINISTIC: a fixed seed, and no random source
     // woodTile exists. Two more hand-authored copies is two more places for the order
     // to go wrong, and the failure renders as an untextured bar, not as an error.
     for (const uri of [SHAFT_GROWTH_TEXTURE, SHAFT_PORE_TEXTURE]) {
+      // The toMatch proves the URI is live AND that its filter reference survived
+      // escaping, so an empty or re-shaped URI reds there rather than on the three
+      // absences under it.
       expect(uri).toMatch(/%23(growth|pore)/);
-      expect(uri).not.toContain('%2523');
-      expect(uri).not.toContain('<');
-      expect(uri).not.toContain('>');
+      // anchored: the toMatch above is the liveness proof for all three
+      expect(uri).not.toContain('%2523');   // anchored: ditto
+      expect(uri).not.toContain('<');       // anchored: ditto
+      expect(uri).not.toContain('>');       // anchored: ditto
     }
   });
 
@@ -1449,7 +1651,15 @@ describe('6 — THE TEXTURE IS DETERMINISTIC: a fixed seed, and no random source
     const seedOf = (uri) => Number(uri.match(/seed='(\d+)'/)[1]);
     const seeds = [SHAFT_GRAIN_TEXTURE, SHAFT_GROWTH_TEXTURE, SHAFT_PORE_TEXTURE].map(seedOf);
     expect(seeds, 'the three wood layers no longer declare three seeds').toEqual([7, 11, 13]);
-    for (const s of seeds) expect(isDegenerateSeed(s), `wood seed ${s} is degenerate`).toBe(false);
+    // ⚠️ COLLECTED, NOT INLINE: a bare loop stops at the FIRST degenerate seed, so a
+    // repaint that broke two of the three would report one and the third would never
+    // be run at all. The count in the failure has to be the true count.
+    expectNoSeedFailures(
+      collectSeedFailures(seeds, (s) => {
+        expect(isDegenerateSeed(s), `wood seed ${s} is degenerate`).toBe(false);
+      }),
+      'every wood turbulence seed clears feTurbulence’s own degenerate-lattice test',
+    );
     // …and the three are DISTINCT, or two layers would carry the identical noise field
     // and the second would be a darker copy of the first rather than a new texture.
     expect(new Set(seeds).size).toBe(3);

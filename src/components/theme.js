@@ -885,6 +885,56 @@ export const WRAP = '#521F12';
 export const WRAP_GLOSS = '#7E3A24';
 export const WRAP_EDGE = '#2E0F08';
 
+/**
+ * ⚠️⚠️ THE WHIPPING'S TURN PERIOD, AND THE LADDER IT REALLY RENDERS — spec part 2 §3,
+ * and the claim above it was FALSE IN THE SHIPPED PIXELS until this token existed.
+ *
+ * The note above says the binding is identified "by its own WOUND STRUCTURE (a 2.6px
+ * turn period whose crest-to-valley ladder is 2.12:1)". Measured on the real Chrome
+ * raster at device-pixel resolution, both halves were wrong:
+ *
+ *   PERIOD    2.0px, not 2.6 — at 1x that renders as one lit pixel alternating with one
+ *             dark one, the whole width of the wrap. A barcode, not silk.
+ *   LADDER    1.316:1, not 2.12 — the "crest" was #521F12, the thread's BODY tone. The
+ *             satin crest WRAP_GLOSS did not appear anywhere below the top 9% of the
+ *             bar, because the turns were painted OVER the barrel gradient and the
+ *             turns' only opaque tone was the inter-turn shadow. 2.12:1 is the ladder
+ *             of the AUTHORED HEXES, and no reader ever saw it.
+ *
+ * ⚠️ SO THE TURNS BECOME THE OPAQUE LAYER AND THE BARREL BECOMES A MODULATOR. The turn
+ * gradient now carries all three tones — shadow, crest, body — and this is the barrel's
+ * shading multiplied over it, so "both cylinders share the light" (spec §3) is what the
+ * compositor actually does rather than what two colour ramps agree to imply.
+ *
+ * ⚠️⚠️ AND IT IS NEUTRAL GREY ON PURPOSE, WHICH IS THE WHOLE OF R5's LESSON. The
+ * obvious spelling is a second oxblood ramp multiplied over the first — and multiply is
+ * a product, so oxblood × oxblood is near-black: #521F12 × #2E0F08 lands at rgb(15,2,1),
+ * which crushes the wound structure to nothing at the bottom of the bar. That is exactly
+ * the failure the counsel measured. A LUMINANCE modulator applies the cylinder's light
+ * and leaves the hue alone, so the crest stays a crest at every depth.
+ *
+ * The stops are SHAFT_STOPS', so the thread is lit by the barrel's own light: no
+ * darkening at all through the sheen zone, then the same accelerating falloff into the
+ * silhouette. ⚠️ THE GREYS LIVE HERE rather than in ShaftWrap because this is a token
+ * DEFINITION file (exempt from no-raw-color) and because the argument they encode —
+ * "one light, and the wrap borrows the shaft's" — belongs beside SHAFT_STOPS.
+ */
+export const WRAP_BARREL =
+  `linear-gradient(180deg, #FFFFFF 0%, #FFFFFF ${SHAFT_STOPS.lit * 100}%,`
+  + ` #E2E2E2 ${SHAFT_STOPS.mid * 100}%, #B4B4B4 ${SHAFT_STOPS.body * 100}%,`
+  + ` #8E8E8E ${SHAFT_STOPS.edge * 100}%, #6E6E6E 100%)`;
+
+/**
+ * THE TURN PERIOD IN CSS PIXELS, and it is a MEASUREMENT of the object rather than a
+ * pleasing number. Spec part 2 §3: at this bar the shaft reads about 9.5mm across, and
+ * the silk used to whip a war arrow lays about 2.6px per turn at that scale — four turns
+ * per 10px wrap. ⚠️ IT IS px AND NOT A SHARE OF THE WRAP, because a thread's diameter is
+ * a physical width: a wrap that grew wider would carry MORE turns, never fatter ones.
+ */
+export const WRAP_TURN = Object.freeze({
+  period: 2.6, shadow: 0.4, gloss: 1.0, body: 1.2,
+});
+
 // FLETCH_SHADOW — the soft drop shadow that seats a feather on the wood. Authored as
 // an 8-DIGIT HEX rather than the translucent-colour function on purpose: that
 // function's occurrences are a burn-down ratchet trending to zero
