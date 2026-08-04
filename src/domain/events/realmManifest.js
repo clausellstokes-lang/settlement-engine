@@ -41,6 +41,7 @@ import { settlementLifecycleActive, forceFoundSteadingEntry } from '../worldPuls
 import { forceAbandonEntry, forceResettleEntry } from '../worldPulse/settlementLifecycleFirstClass.js';
 import { activeSpatialDigest } from '../spatial/distanceRead.js';
 import { repudiableTreatyPairs } from '../worldPulse/treatyBreach.js';
+import { sovereigntyTradeActive, tradeableAssetsOf } from '../worldPulse/sovereigntyAssets.js';
 
 /** The schema-owned loose record alias (the affordanceManifest Mut idiom —
  * the looseness is declared and any-census-counted where it is OWNED,
@@ -97,6 +98,16 @@ const darkCalamity = () => no(
   ['The calamity layer is not active in this campaign.'],
   ['Pick the Dramatic Campaign or Full Simulation preset — the calamity mover rides those presets.'],
 );
+// WR-10: the sovereignty market names NO settings path, deliberately. Every other
+// dark refusal above can point at a preset or a toggle because the layer it names is
+// reachable from the dialog today; this one is not — `sovereigntyTradeEnabled` is in
+// no preset and no surface offers it (CR-WR10-C's whole subject). Inventing a path
+// here would be the unlock's first lie, so the refusal says what is true and names
+// the prerequisites instead.
+const darkSovereignty = () => no(
+  ['The sovereignty market is not active in this campaign.'],
+  ['It rides the envoy layer, the demographic layer, and its own rule; no preset lights it yet.'],
+);
 
 // ── Shared target readers (each wraps ONE sim read — never re-derives) ───────
 /** Campaign members as {id, name} options. @param {RealmCtx} ctx */
@@ -134,6 +145,31 @@ export function repudiableTreatyPartyOptions(worldState, ctx) {
     ids.add(pair.fromId); ids.add(pair.toId);
   }
   return campaignSettlementOptions(ctx).filter(option => ids.has(option.id));
+}
+
+/** Every holding a campaign court could convey — TRANSFER_SOVEREIGNTY's asset dial.
+ *
+ * THE SOVEREIGN-HAND LAW IS THIS READ, and that is why the dial is backed by
+ * `tradeableAssetsOf` rather than by the member list. A steading is a row in the
+ * satellites ledger and a vassal is a rung on the occupation ladder; neither is
+ * reachable by filtering campaign members, and a settlement no ledger names is `free`
+ * — which includes every settlement a DM ever placed. So the option list is built by
+ * walking the ledgers each member holds, never by starting from the roster and
+ * subtracting. The verb's apply arm re-runs the SAME read against the then-current
+ * world, so the dial and the wall are one function.
+ * @param {Mut} worldState @param {RealmCtx} ctx */
+export function conveyableAssetOptions(worldState, ctx) {
+  const out = [];
+  const seen = new Set();
+  for (const holder of campaignSettlementOptions(ctx)) {
+    for (const asset of tradeableAssetsOf(worldState, holder.id)) {
+      const id = String(asset.assetId || '');
+      if (!id || seen.has(id)) continue;
+      seen.add(id);
+      out.push({ id, name: `${nameFor(ctx, id)} — held by ${holder.name}` });
+    }
+  }
+  return out.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
 }
 
 /** The contested settlements of live coup contests — ORDER_INTERVENTION's legal
@@ -264,6 +300,39 @@ export const REALM_MANIFEST = Object.freeze({
       !peaceCausalActive(ws) ? darkWar()
         : gate(repudiableTreatyPairs(ws, Number(ctx?.tick) || 0).length > 0,
           'No live non-aggression pact remains to repudiate.'),
+  }),
+
+  // ── The conveyance verb (WR-10, amendment S) ───────────────────────────
+  // TWO DIALS, NOT THREE, AND NO SELLER DIAL. The wiring spec sketched a third
+  // "bundle-composition" dial, and building it would have been a lie: the DM road
+  // routes through executeSovereigntyTransfer with NO treaty, so a consideration
+  // dial would name a payment nothing in this lane ever moves. The priced sale is
+  // the market composer's road (one treaty writer, one clearing) — this verb is a
+  // DECREE of conveyance and says only that. And the SELLER is never a dial at all:
+  // the ledgers already name who holds the asset, so asking would invite a wrong
+  // answer where a read gives the right one. It is derived at mint and re-derived
+  // at apply from the same eligibility read.
+  TRANSFER_SOVEREIGNTY: Object.freeze({
+    verb: 'TRANSFER_SOVEREIGNTY', label: 'Convey a holding', family: 'War',
+    scope: 'realm', lane: 'proposal', module: 'sovereigntyTransfer.js',
+    candidateType: 'sovereignty_conveyed', authority: 'sovereignty_conveyed',
+    dials: [
+      settlementTargetDial('assetId', 'The holding conveyed'),
+      settlementTargetDial('buyerId', 'The acquiring court'),
+    ],
+    targetsFrom: 'campaignSettlements',
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => conveyableAssetOptions(ws, ctx),
+    // TWO CODES, NOT FOUR. `sovereignty_unreachable` and `sovereignty_unpriced` are
+    // NOT claimed: this verb runs no reach read (measured — a steading has no spatial
+    // digest cell, so a reach wall would refuse every satellite conveyance forever)
+    // and moves no consideration (the priced clearing is the market composer's road).
+    // A covered code the arm can never emit is dead prose wearing a guard's clothes.
+    coversVetoCodes: ['sovereignty_gate_dark', 'sovereignty_ineligible'],
+    predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
+      !sovereigntyTradeActive(ws) ? darkSovereignty()
+        : gate(conveyableAssetOptions(ws, ctx).length > 0,
+          'No court in this campaign holds anything it could convey.',
+          'A conveyance needs a holding the ledgers already name — a steading, or an occupation that has climbed to vassalage.'),
   }),
 
   // ── The supply-web doctrine pair (W-DOCTRINE-1) ────────────────────────
@@ -473,6 +542,8 @@ const REALM_VETO_PROSE_LOCAL = {
   treaty_breach_gate_dark: () => `The causal reasons layer is not active in this campaign. Pick the Dramatic Campaign or Full Simulation preset, or light War and “Causes of war and peace” under ${WAVES_PATH}.`,
   treaty_breach_invalid: () => 'A treaty repudiation needs two different named signatories.',
   treaty_breach_no_live_nap: () => 'No live non-aggression pact binds those courts; there is no oath left to repudiate.',
+  sovereignty_gate_dark: () => 'The sovereignty market is not active in this campaign. It rides the envoy layer, the demographic layer, and its own rule; no preset lights it yet.',
+  sovereignty_ineligible: d => d || 'The ledgers do not say that holding may be conveyed — a free settlement answers to no one, and its sovereignty is not a commodity.',
   intervention_gate_dark: () => `The intervention layer is not active in this campaign. Pick the Dramatic Campaign or Full Simulation preset, or light War and “Intervention” under ${WAVES_PATH}.`,
   intervention_no_contest: d => `No coup contest is live at ${d || 'that settlement'} — an intervention needs a brewing coup to join.`,
   intervention_busy: d => `${d || 'That court'} already has an army committed elsewhere (the one-army law).`,

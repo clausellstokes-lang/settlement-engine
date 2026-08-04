@@ -51,6 +51,10 @@ const CAMPAIGN_ALTERING_CANDIDATE_TYPES = new Set([
   // WR-0c: an actor openly tears up a live non-aggression pact, lifting every
   // restraint and furnishing the other court with a full treaty-default casus.
   'treaty_breached',
+  // WR-10 (amendment S): a settlement is CONVEYED — a steading or a settled vassalage
+  // changes hands by deed rather than by siege. Sovereignty moves, which is the same
+  // structural shape as a conquest reached by another road.
+  'sovereignty_conveyed',
   // W-LIFECYCLE: a settlement's TERMINAL DEATH — the map itself changes (the entity
   // keeps its digest cell as a remnant, but the living roster shrinks). The DM sees
   // it coming (the extended terminal dwell) and can force or veto.

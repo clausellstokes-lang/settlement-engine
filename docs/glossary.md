@@ -6,7 +6,7 @@
 
 # The Guidance-Layer Glossary
 
-_68 terms, generated from the code registries — "how to interpret everything."_
+_69 terms, generated from the code registries — "how to interpret everything."_
 
 > Scope note: institution **facets** and the continuous **credibility** stock are
 > intentionally absent — the facet vocabulary is un-exported in the spatial engine,
