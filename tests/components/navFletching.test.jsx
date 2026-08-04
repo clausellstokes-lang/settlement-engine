@@ -96,9 +96,10 @@ import { flowsInto } from '../../src/components/nav/NavFlowArrow.jsx';
 import {
   ANCHOR_OFFSET, BODY, CHROME, FLETCH, FLETCH_BARB, FLETCH_BARB_DEG, FLETCH_HANG,
   FLETCH_LEAD, FLETCH_RACHIS, FLETCH_SHEEN, FLETCH_SHEEN_LIFT, FLETCH_TIP,
-  FLETCH_VANE, FS, GOLD, GOLD_TXT, INK_DEEP, LABEL_BOX, PARCH, PARCH_100, SHAFT,
-  SHAFT_BODY, SHAFT_CYLINDER, SHAFT_EDGE, SHAFT_GRAIN_LAYERS, SHAFT_GRAIN_TEXTURE,
-  SHAFT_RIM, SHAFT_SHEEN, SHAFT_STOPS, SP, WRAP,
+  FLETCH_VANE, FS, GOLD, GOLD_TXT, INK_DEEP, LABEL_BOX, LIGHT_UNIT, PARCH, PARCH_100,
+  PLATE_LIGHT_DEG, SHAFT, SHAFT_BODY, SHAFT_CYLINDER, SHAFT_EDGE, SHAFT_GRAIN_LAYERS,
+  SHAFT_GRAIN_TEXTURE, SHAFT_RIM, SHAFT_SHEEN, SHAFT_STOPS, SP, WRAP,
+  contactShadow, lightOffset, shadowOffset,
 } from '../../src/components/theme.js';
 import {
   BAND, BAND_PX_PER_UNIT, BAND_W, BARB, LANE, REACH, RUN, SEAT, SHEENS, SHEEN_FLOOR,
@@ -448,23 +449,40 @@ describe('2 — ⚠️⚠️ THE SHINGLE: three parallelograms, ascending into R
     expect(Math.max(...ONCURVE(VANES[2].closed).map((p) => p.x))).toBeGreaterThan(BAND_W);
   });
 
-  test('the two depth cues are both present, and the shadow falls on the cell BENEATH', () => {
+  test('⚠️⚠️ the two depth cues obey the COMPOSITION’S ONE LIGHT — F4’s cure', () => {
     // These are the cues that make a lap read as one feather lying on another rather
-    // than as two flat shapes sharing a border. ⚠️ THE DIRECTION IS THE CLAIM, and it
-    // flipped with the owner's correction: the stack now ascends into Realm, so the
-    // cell a shadow must fall on lies to the LEADING side and every offset is
-    // NEGATIVE in x. Painted the old way the shadows would fall on the cells that are
-    // already on top of them and be invisible at every lap.
+    // than as two flat shapes sharing a border, and their DIRECTION was the finding.
+    //
+    // The verifier's F4, quoted: "The band's contact shadows are (-1.6,+0.6) and
+    // (-5,+3) — down and LEFT, i.e. light from the upper RIGHT. Two elements 700px
+    // apart in one 38px composition are lit from opposite sides. The band's negative-x
+    // is load-bearing (the shadow must fall on the cell beneath, which lies to the
+    // leading side), so this cannot be fixed by flipping the band; the chair has to
+    // choose which element moves."
+    //
+    // ⚠️ THE CHAIR CHOSE THE BAND, AND THE TWO SHADOWS THEREFORE SPLIT BY KIND, NOT BY
+    // OFFSET. Under an upper-left light a shingle that ascends rightward casts its
+    // shadow onto the cell ON TOP of it — invisible — so the seam's contact cue is
+    // AMBIENT OCCLUSION, which has no azimuth at all, and the cast shadow is the wide
+    // one, on the composition's real ray. A future edit that "restores" a negative dx
+    // here puts two suns back in one 38px bar, so the pin asserts the sign.
     const { container } = render(<App />);
     const groups = [...paint(container).querySelectorAll('[data-testid^="nav-fletch-vane-"]')];
     expect(groups.length).toBe(3);
+    const cast = shadowOffset(5.8);
     for (const g of groups) {
       // TWO shadows, tight + soft: one filter can be one or the other, not both,
       // and a single soft shadow between two nearly-tonal feathers is a smudge.
-      const offsets = [...g.style.filter.matchAll(/drop-shadow\((-?[\d.]+)px/g)]
-        .map((m) => Number(m[1]));
-      expect(offsets.length).toBe(2);
-      for (const dx of offsets) expect(dx, 'a shadow points away from the cell it laps').toBeLessThan(0);
+      const offs = [...g.style.filter.matchAll(/drop-shadow\((-?[\d.]+)px\s+(-?[\d.]+)px/g)]
+        .map((m) => ({ dx: Number(m[1]), dy: Number(m[2]) }));
+      expect(offs.length, 'a shadow offset lost its unit, or there are not two').toBe(2);
+      // 1 — the CONTACT is occlusion: no azimuth, because a crevice has no source.
+      expect(offs[0]).toEqual({ dx: 0, dy: 0 });
+      // 2 — the CAST shadow is on the one light, down and to the RIGHT, and it is the
+      // derived vector rather than a number that merely looks like it.
+      expect(offs[1]).toEqual({ dx: cast.dx, dy: cast.dy });
+      expect(offs[1].dx, 'the band is lit from the wrong side').toBeGreaterThan(0);
+      expect(offs[1].dy).toBeGreaterThan(0);
       // The edge-light rides OUTSIDE the clip — it is this cell's own lit rim, so
       // half of it must fall on whatever lies behind.
       const rims = [...g.children].filter((c) => c.tagName === 'path'
@@ -475,7 +493,54 @@ describe('2 — ⚠️⚠️ THE SHINGLE: three parallelograms, ascending into R
         expect(Number(r.getAttribute('stroke-opacity'))).toBeGreaterThan(0);
         expect(r.getAttribute('fill')).toBe('none');
       }
+      // …and the LEADING rim carries more than the trailing one, because it is what
+      // the light strikes and what now marks the seam.
+      expect(Number(rims[0].getAttribute('stroke-opacity')))
+        .toBeGreaterThan(Number(rims[1].getAttribute('stroke-opacity')));
     }
+  });
+
+  test('⚠️⚠️ PLATE_LIGHT_DEG IS NOT A DEAD TOKEN — F3’s cure, asserted as reachability', () => {
+    // The verifier's F3, quoted: "PLATE_LIGHT_DEG IS A DEAD TOKEN. It is exported from
+    // theme.js under a docstring calling it 'the composition's ONE light direction',
+    // and it is referenced exactly once in the entire tree: inside a JSX *comment* at
+    // src/components/brand/MakerPlate.jsx:178. No code computes from it; `grep -rn
+    // PLATE_LIGHT_DEG src/ tests/` finds no consumer and no pin. Changing 225 to any
+    // other value moves nothing and reds nothing."
+    //
+    // ⚠️ SO THE PIN IS THE ONE THAT WOULD HAVE CAUGHT IT: it reads the SOURCE of every
+    // module that draws relief on this bar, strips comments, and requires a real
+    // reference. A docstring claiming a single writer while every consumer hand-keys
+    // its own numbers is the exact shape of this estate's side-table hazard.
+    const strip = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '')
+      .replace(/\{\/\*[\s\S]*?\*\/\}/g, '');
+    const consumers = {
+      'components/nav/FletchBand.jsx': /contactShadow|dropShadow/,
+      'components/brand/MakerPlate.jsx': /lightOffset|shadowOffset|dropShadow/,
+      'components/brand/WaxSeal.jsx': /lightArc\(/,
+    };
+    for (const [rel, want] of Object.entries(consumers)) {
+      const code = strip(SRC(rel));
+      expect(code, `${rel} lost the module it was stripped by`).toContain('import');
+      expect(code, `${rel} no longer computes from the one light`).toMatch(want);
+      // NEGATIVE CONTROL: no hand-keyed drop-shadow offsets left in the file. A
+      // literal `drop-shadow(-1.6px ...)` is exactly what F4 was.
+      expect(code, `${rel} hand-keys a shadow offset again`).not.toMatch(/drop-shadow\(\s*-?[\d.]+px/);
+    }
+    // The azimuth really does point up and to the LEFT, and the cast shadow really is
+    // its negation — the frame the whole derivation rests on, stated once.
+    expect(LIGHT_UNIT.x).toBeLessThan(0);
+    expect(LIGHT_UNIT.y).toBeLessThan(0);
+    // (compared with a tolerance, not by identity: the offsets round to 3dp and the
+    // unit vector to 4, and pinning the rounding would not be pinning the direction)
+    expect(shadowOffset(1).dx).toBeCloseTo(-LIGHT_UNIT.x, 3);
+    expect(shadowOffset(1).dy).toBeCloseTo(-LIGHT_UNIT.y, 3);
+    expect(lightOffset(1).dx).toBeCloseTo(LIGHT_UNIT.x, 3);
+    expect(lightOffset(1).dy).toBeCloseTo(LIGHT_UNIT.y, 3);
+    // NON-VACUITY: moving the constant really moves the offsets it is supposed to own.
+    expect(PLATE_LIGHT_DEG).toBe(225);
+    expect(LIGHT_UNIT.x).toBeCloseTo(-0.7071, 4);
+    expect(contactShadow(2, '#000')).toBe('drop-shadow(0px 0px 2px #000)');
   });
 
   test('every cell still COVERS ITS LABEL — the trap any silhouette edit invites', () => {

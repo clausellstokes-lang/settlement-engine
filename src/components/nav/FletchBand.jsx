@@ -154,6 +154,7 @@
 import {
   CHROME, FLETCH, FLETCH_BARB, FLETCH_HANG, FLETCH_LEAD, FLETCH_RACHIS,
   FLETCH_SHADOW, FLETCH_SHEEN, FLETCH_SHEEN_LIFT, FLETCH_TIP, FLETCH_VANE, GOLD,
+  contactShadow, dropShadow,
 } from '../theme.js';
 
 /** One fletch's lane, and the band's own width: three lanes side by side. */
@@ -610,23 +611,40 @@ export default function FletchBand({ id, activeLane }) {
               key={lane}
               data-testid={`nav-fletch-vane-${lane}`}
               data-fletch-state={active ? 'active' : 'resting'}
-              // ⚠️ THE CONTACT SHADOW — the cue that sells depth, and the reason the
-              // laps read as feathers lying on feathers instead of as flat overlapping
-              // parallelograms. Because the paint order ascends into Realm, THIS cell's
-              // shadow falls on the cell it laps, which lies to its LEADING side — so
-              // the offset is NEGATIVE in x. That is not a taste: the barrel is lit from
-              // above (SHAFT_STOPS puts the highlight on the top centreline), so a
-              // raised leading edge throws its shadow down and back.
+              // ⚠️⚠️ TWO SHADOWS, AND SINCE LANE FS THEY OBEY THE COMPOSITION'S ONE
+              // LIGHT — which took working out, because the naive fix is wrong.
               //
-              // TWO shadows, not one, and they are doing different jobs: a TIGHT dark
-              // one right at the edge (the contact — where the two vanes actually touch,
-              // light cannot get in at all) and a WIDE soft one further out (the ambient
-              // occlusion that says the upper feather stands off the lower). One shadow
-              // can be tight or soft; it cannot be both, and a single soft shadow between
-              // two nearly-tonal feathers reads as a smudge rather than as contact.
+              // The verifier's F4, quoted: "The band's contact shadows are (-1.6,+0.6)
+              // and (-5,+3) — down and LEFT, i.e. light from the upper RIGHT... The
+              // band's negative-x is load-bearing (the shadow must fall on the cell
+              // beneath, which lies to the leading side), so this cannot be fixed by
+              // flipping the band; the chair has to choose which element moves."
+              //
+              // THE CHAIR CHOSE THE BAND, AND THE PHYSICS THEN CHOSE THE MECHANISM. With
+              // light from the upper LEFT and a shingle whose z ASCENDS to the right, a
+              // cell's cast shadow falls down-and-RIGHT — onto the cell painted after it,
+              // therefore over it, therefore invisible. That is not a bug in the fix; it
+              // is what an overlapping row lit from the direction it faces actually looks
+              // like: the raised rims CATCH the light instead of throwing shadow across
+              // the seam. So the two shadows split by KIND rather than by offset:
+              //
+              //   · the TIGHT one becomes AMBIENT OCCLUSION — `contactShadow`, offset
+              //     ZERO. Occlusion in a crevice has no azimuth (see theme.js), so it
+              //     shows all round the silhouette including at the leading seam, where
+              //     it is the contact cue the cast shadow can no longer supply.
+              //   · the WIDE one is the real CAST shadow on the composition's azimuth,
+              //     down and to the right. It shows where a cast shadow can show: below
+              //     every hanging vane, and to the right of Realm's trailing edge on bare
+              //     shaft, which is exactly where the band should look like it stands off
+              //     the wood.
+              //
+              // The seam's third cue is the leading edge-light below, lifted 0.50 → 0.62
+              // because under this light the raised leading rims are what the light
+              // actually strikes. ⚠️ THAT LIFT IS PAID FOR under the BALANCE LAW by the
+              // comb's own collapse from ~35% areal coverage to 7.2% in piece 1 — one
+              // device strengthened, another weakened in the same lane.
               style={{
-                filter: `drop-shadow(-1.6px 0.6px 0.9px ${FLETCH_SHADOW})`
-                  + ` drop-shadow(-5px 3px 5px ${FLETCH_SHADOW})`,
+                filter: `${contactShadow(1.1, FLETCH_SHADOW)} ${dropShadow(5.8, 5, FLETCH_SHADOW)}`,
               }}
             >
               <path d={v.closed} fill={`url(#${id}-vane${active ? '-lit' : ''})`} />
@@ -695,8 +713,12 @@ export default function FletchBand({ id, activeLane }) {
                   "this cell is on top of that one" — and the trailing one only ever shows
                   on Realm, where it resolves the band's own end. Any heavier and the
                   cells read as outlined shapes, which is the badge failure this band was
-                  cut out of. */}
-              <path d={v.lead} fill="none" stroke={FLETCH_RACHIS} strokeOpacity="0.5" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+                  cut out of.
+                  ⚠️ THE LEADING RIM CARRIES MORE SINCE LANE FS (0.50 → 0.62) because the
+                  light now comes from the upper LEFT and a raised leading edge is what it
+                  strikes; the cast shadow that used to mark this seam cannot, so the lit
+                  rim takes the job. Paid for by the comb — see the shadow note above. */}
+              <path d={v.lead} fill="none" stroke={FLETCH_RACHIS} strokeOpacity="0.62" strokeWidth="1" vectorEffect="non-scaling-stroke" />
               <path d={v.trail} fill="none" stroke={FLETCH_RACHIS} strokeOpacity="0.38" strokeWidth="1" vectorEffect="non-scaling-stroke" />
             </g>
           );

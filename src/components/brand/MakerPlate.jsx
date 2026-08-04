@@ -44,12 +44,44 @@
 import {
   PLATE, PLATE_BEVEL_LIGHT, PLATE_BEVEL_SHADE, PLATE_DEEP, PLATE_DEVICE, PLATE_FACE,
   PLATE_KEYLINE, PLATE_LIT, PLATE_RIVET, PLATE_SHADOW,
+  dropShadow, lightOffset, shadowOffset,
 } from '../theme.js';
 
 /** The plate's own coordinate space: 5 wide by 6 tall, at 100 units of width. */
 const W = 100;
 const H = Math.round(W / PLATE.ratio);          // 120 — the heater's 5:6
 const M = W * PLATE.margin;                     // the bevel's territory
+
+/**
+ * ⚠️ THE RELIEF'S GEOMETRY, DERIVED FROM PLATE_LIGHT_DEG — the fix for the verifier's
+ * F3, quoted: "PLATE_LIGHT_DEG IS A DEAD TOKEN. It is exported from theme.js under a
+ * docstring calling it 'the composition's ONE light direction', and it is referenced
+ * exactly once in the entire tree: inside a JSX *comment* at
+ * src/components/brand/MakerPlate.jsx:178. No code computes from it... Changing 225 to
+ * any other value moves nothing and reds nothing."
+ *
+ * Every offset in this file now reads the azimuth. The BEVEL pair and the DEVICE's
+ * emboss come out at the exact numbers they were hand-authored at — which is the
+ * point: they were already ON the light, and are now on it BY CONSTRUCTION rather than
+ * by coincidence, so moving PLATE_LIGHT_DEG moves them. The three MOUNTING shadows do
+ * move; see the shift note on the filter itself.
+ *
+ * `DIAG` converts a hand-authored PER-AXIS offset into the DISTANCE that reproduces
+ * it at this 45° azimuth: n in each axis is a distance of n·√2.
+ */
+const DIAG = Math.SQRT2;
+/** The bevel's inset strokes step this far along the light's line, each way. */
+const BEVEL_STEP = W * PLATE.bevel * 0.4 * DIAG;
+const BEVEL_LIT = lightOffset(BEVEL_STEP);
+const BEVEL_DARK = shadowOffset(BEVEL_STEP);
+/**
+ * The device is SUNK into the face, so its two emboss copies are INVERTED relative to
+ * the plate's own bevel: the shadow copy is pushed AWAY from the light and the light
+ * copy TOWARD it. Getting this backwards is what makes an engraving look like a
+ * sticker of an engraving.
+ */
+const EMBOSS_SHADE = shadowOffset(1.6 * DIAG);
+const EMBOSS_LIGHT = lightOffset(1.4 * DIAG);
 
 /**
  * THE HEATER SILHOUETTE — flat top, straight sides for the upper two thirds, then
@@ -168,15 +200,30 @@ export default function MakerPlate({ size = 26, style }) {
         // off by, and a wide faint one for the light the room throws back. The filter
         // is on the SVG itself — a leaf — never on an ancestor (the containing-block
         // trap; see the header note).
-        filter: `drop-shadow(0px 0.5px 0.5px ${PLATE_SHADOW}) `
-          + `drop-shadow(0.5px 1px 1.5px ${PLATE_SHADOW}) `
-          + `drop-shadow(1px 2px 4px ${PLATE_SHADOW})`,
+        //
+        // ⚠️ A DELIBERATE ONE-TIME SHIFT (lane FS). These were hand-authored at
+        // (0,+0.5), (+0.5,+1) and (+1,+2) — a stack that drifted RIGHTWARD as it
+        // widened rather than falling along one line, which is what a single source
+        // cannot do. Derived from PLATE_LIGHT_DEG at distances 0.7 / 1.4 / 2.8 they
+        // become (+0.495,+0.495), (+0.99,+0.99) and (+1.98,+1.98): the same three
+        // softnesses on ONE ray. The umbra moves half a pixel right and the ambient
+        // a pixel left; nothing else on the plate moves, and no contrast ratio does.
+        filter: [
+          dropShadow(0.7, 0.5, PLATE_SHADOW),
+          dropShadow(1.4, 1.5, PLATE_SHADOW),
+          dropShadow(2.8, 4, PLATE_SHADOW),
+        ].join(' '),
         ...style,
       }}
     >
       <defs>
         {/* The face, lit from PLATE_LIGHT_DEG: brightest at the top-left corner the
-            light comes from, deepest at the point. */}
+            light comes from, deepest at the point. ⚠️ THE GRADIENT'S VECTOR IS NOT
+            DERIVED and that is recorded rather than hidden: a 45° screen direction is
+            not a 45° objectBoundingBox vector unless the box is square, and this one
+            is 5:6. It AGREES with the azimuth; converting it (and the vane's and the
+            barrel's) to aspect-corrected derived vectors is deliberately deferred —
+            documented in theme.js beside PLATE_LIGHT_DEG, not a bug to re-find. */}
         <linearGradient id={`${id}-face`} x1="0" y1="0" x2="0.35" y2="1">
           <stop offset="0" stopColor={PLATE_LIT} />
           <stop offset="0.45" stopColor={PLATE_FACE} />
@@ -207,7 +254,7 @@ export default function MakerPlate({ size = 26, style }) {
           fill="none"
           stroke={PLATE_BEVEL_LIGHT}
           strokeWidth={W * PLATE.bevel}
-          transform={`translate(-${W * PLATE.bevel * 0.4} -${W * PLATE.bevel * 0.4})`}
+          transform={`translate(${BEVEL_LIT.dx} ${BEVEL_LIT.dy})`}
         />
         <path
           d={SHIELD}
@@ -215,7 +262,7 @@ export default function MakerPlate({ size = 26, style }) {
           fill="none"
           stroke={PLATE_BEVEL_SHADE}
           strokeWidth={W * PLATE.bevel}
-          transform={`translate(${W * PLATE.bevel * 0.4} ${W * PLATE.bevel * 0.4})`}
+          transform={`translate(${BEVEL_DARK.dx} ${BEVEL_DARK.dy})`}
         />
 
         {/* 3 — THE DEVICE, STRUCK INTO THE FACE. The silhouette is drawn three times
@@ -229,8 +276,8 @@ export default function MakerPlate({ size = 26, style }) {
             the plate's highlight is on. Getting this backwards is what makes an
             engraving look like a sticker of an engraving. */}
         <g data-testid="maker-plate-device" transform={`translate(${FIELD.x} ${FIELD.y}) scale(${FIELD.w / 64} ${FIELD.h / 64})`}>
-          <g transform="translate(1.6 1.6)"><Device fill={PLATE_BEVEL_LIGHT} /></g>
-          <g transform="translate(-1.4 -1.4)"><Device fill={PLATE_BEVEL_SHADE} /></g>
+          <g transform={`translate(${EMBOSS_SHADE.dx} ${EMBOSS_SHADE.dy})`}><Device fill={PLATE_BEVEL_LIGHT} /></g>
+          <g transform={`translate(${EMBOSS_LIGHT.dx} ${EMBOSS_LIGHT.dy})`}><Device fill={PLATE_BEVEL_SHADE} /></g>
           <Device fill={PLATE_DEVICE} />
         </g>
 

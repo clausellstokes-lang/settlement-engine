@@ -451,11 +451,129 @@ export const PLATE = Object.freeze({
 });
 
 /**
- * PLATE_LIGHT_DEG — the composition's ONE light direction, in SVG/CSS degrees
- * measured clockwise from "shadow falls straight down" (azimuth ~225° in the
- * designer's compass: light from the upper left).
+ * PLATE_LIGHT_DEG — THE COMPOSITION'S ONE LIGHT DIRECTION, AND SINCE LANE FS IT IS
+ * THE SINGLE WRITER FOR EVERY SHADOW AND GLINT OFFSET ON THE BAR RATHER THAN A
+ * DOCSTRING'S OPINION ABOUT ONE.
+ *
+ * ⚠️⚠️ IT WAS A DEAD TOKEN, AND THE CLAIM ABOVE IT WAS FALSE. The PB verifier found
+ * both halves. F3: "It is exported from theme.js under a docstring calling it 'the
+ * composition's ONE light direction', and it is referenced exactly once in the entire
+ * tree: inside a JSX *comment* at src/components/brand/MakerPlate.jsx:178. No code
+ * computes from it; changing 225 to any other value moves nothing and reds nothing."
+ * F4: "The plate's mounting shadows are (0,+0.5), (+0.5,+1), (+1,+2) — down and RIGHT,
+ * i.e. light from the upper LEFT, and the seal's glint arc agrees (upper-left). The
+ * band's contact shadows are (-1.6,+0.6) and (-5,+3) — down and LEFT, i.e. light from
+ * the upper RIGHT. Two elements 700px apart in one 38px composition are lit from
+ * opposite sides."
+ *
+ * ⚠️ THE ANGLE'S FRAME, SPELLED OUT, because the old docstring's "clockwise from
+ * shadow falls straight down" did not survive being used. `(cos θ, sin θ)` in SVG/CSS
+ * coordinates — x to the RIGHT, y DOWN — is the unit vector pointing FROM the lit
+ * surface TOWARD the light. At 225° that is (-0.7071, -0.7071): left and up, the upper
+ * left. A cast shadow therefore lands at the NEGATION of it, down and to the right,
+ * which is what the plate already did and what the band now does.
+ *
+ * ⚠️ WHAT IS DERIVED AND WHAT IS NOT. Every OFFSET — the plate's three mounting
+ * shadows, its bevel pair, the device's inverted emboss, the seal's glint arc, the
+ * band's cast shadow and its edge-light — reads this constant now, so moving it moves
+ * the whole composition together and a wrong sign is a red rather than a screenshot.
+ * GRADIENT VECTORS are deliberately NOT derived: a 45° screen direction is not a 45°
+ * objectBoundingBox vector unless the box is square, so deriving them means carrying
+ * each element's aspect ratio into its own gradient and is a larger change than this
+ * lane is scoped for. The three that exist (the plate's face, the vane's fall, the
+ * barrel's cylinder) already agree with this azimuth qualitatively; converting them to
+ * derived vectors is deliberately deferred — documented, not a bug to re-find.
  */
 export const PLATE_LIGHT_DEG = 225;
+
+const LIGHT_RAD = (PLATE_LIGHT_DEG * Math.PI) / 180;
+
+/**
+ * The unit vector from a lit surface TOWARD the light, in SVG/CSS coordinates.
+ * ⚠️ ROUNDED TO 4dp ON PURPOSE. `Math.cos` is not required by IEEE-754 to be correctly
+ * rounded and engines differ in the last ulp; a shadow offset that differs in the 17th
+ * digit is invisible, but a token that differs at all is a cross-engine golden hazard
+ * the moment anything pins it. Four decimals is finer than a device pixel at any zoom
+ * this bar is drawn at and is stable everywhere.
+ */
+export const LIGHT_UNIT = Object.freeze({
+  x: Number(Math.cos(LIGHT_RAD).toFixed(4)),
+  y: Number(Math.sin(LIGHT_RAD).toFixed(4)),
+});
+
+/** How far, and which way, a mark moves when it is pushed TOWARD the light. */
+export const lightOffset = (distance) => Object.freeze({
+  dx: Number((LIGHT_UNIT.x * distance).toFixed(3)),
+  dy: Number((LIGHT_UNIT.y * distance).toFixed(3)),
+});
+
+/** How far, and which way, a CAST SHADOW falls: directly away from the light. */
+export const shadowOffset = (distance) => Object.freeze({
+  dx: Number((-LIGHT_UNIT.x * distance).toFixed(3)),
+  dy: Number((-LIGHT_UNIT.y * distance).toFixed(3)),
+});
+
+/**
+ * One CSS `drop-shadow()` cast by the composition's light.
+ * @param {number} distance how far the caster stands off the surface
+ * @param {number} blur the shadow's softness in px
+ * @param {string} color the shadow tone
+ */
+export const dropShadow = (distance, blur, color) => {
+  const { dx, dy } = shadowOffset(distance);
+  return `drop-shadow(${dx}px ${dy}px ${blur}px ${color})`;
+};
+
+/**
+ * A CONTACT SHADOW — ambient occlusion, and it deliberately has NO offset.
+ *
+ * ⚠️ THIS IS NOT AN EXCEPTION TO THE ONE-LIGHT LAW, IT IS THE OTHER HALF OF IT. A cast
+ * shadow has an azimuth because a source throws it; occlusion in a crevice has none,
+ * because what is missing there is the AMBIENT — the light the room throws back from
+ * every direction at once. Offsetting it would be claiming a second source. It is what
+ * lets a lap seam read as contact under a light that cannot cast a visible shadow
+ * across it (see FletchBand's shingle note).
+ *
+ * @param {number} blur how tight the contact is, in px
+ * @param {string} color the shadow tone
+ */
+export const contactShadow = (blur, color) => `drop-shadow(0px 0px ${blur}px ${color})`;
+
+/**
+ * A HIGHLIGHT ARC aimed at the light — the seal's glint, as geometry rather than as
+ * four remembered coordinates.
+ *
+ * ⚠️ IT LIVES HERE AND NOT IN WaxSeal.jsx FOR A REASON THAT IS ALREADY PINNED.
+ * tests/design/makerPlate.test.jsx forbids `Math.sin|cos|tan|exp|log|pow` in every
+ * brand module, because a transcendental is not required by IEEE-754 to be correctly
+ * rounded and engines differ in the last ulp — which would make a mark that must be
+ * byte-identical everywhere, forever, into a cross-engine hazard. The trig therefore
+ * happens ONCE, here, beside the constant it derives from, and every result is rounded
+ * to 2dp so the authored path is the same string on every engine. That is the same
+ * argument LIGHT_UNIT makes, applied to a path instead of an offset.
+ *
+ * The curve is the standard single-quadratic arc approximation: both ends and the
+ * midpoint lie on the circle, with the control point pushed out by 1/cos(half-angle).
+ *
+ * @param {number} cx centre x, in the caller's own coordinate space
+ * @param {number} cy centre y
+ * @param {number} r the arc's radius
+ * @param {number} halfDeg how far the arc reaches either side of the light's bearing
+ * @returns {string} an SVG path
+ */
+export const lightArc = (cx, cy, r, halfDeg) => {
+  const at = (deg, radius) => {
+    const t = (deg * Math.PI) / 180;
+    return [
+      Number((cx + Math.cos(t) * radius).toFixed(2)),
+      Number((cy + Math.sin(t) * radius).toFixed(2)),
+    ];
+  };
+  const [ax, ay] = at(PLATE_LIGHT_DEG - halfDeg, r);
+  const [bx, by] = at(PLATE_LIGHT_DEG + halfDeg, r);
+  const [kx, ky] = at(PLATE_LIGHT_DEG, r / Math.cos((halfDeg * Math.PI) / 180));
+  return `M ${ax} ${ay} Q ${kx} ${ky} ${bx} ${by}`;
+};
 
 /**
  * THE SEALING WAX — the ONE saturated hue in the whole lockup, and it MEANS

@@ -40,10 +40,27 @@
  * caption, the PDF byline) uses the same plain string. The mark is never allowed to
  * become the way the product's name is spelled.
  */
-import { SEAL_GLINT, SEAL_RIM, SEAL_WAX } from '../theme.js';
+import { SEAL_GLINT, SEAL_RIM, SEAL_WAX, lightArc } from '../theme.js';
 
 /** The seal's own space. The wax's outer edge is deliberately not a perfect circle. */
 const S = 100;
+
+/**
+ * ⚠️ THE GLINT IS AIMED BY PLATE_LIGHT_DEG — the seal's half of the verifier's F3
+ * ("PLATE_LIGHT_DEG IS A DEAD TOKEN... No code computes from it").
+ *
+ * The arc used to be four hand-authored coordinates that HAPPENED to sit on the upper
+ * left, and that is precisely the failure the finding is about: a composition whose
+ * one-light claim is carried by four separate people's memory of where the light was.
+ * It is now an arc centred on the light's OWN bearing, so moving the azimuth swings
+ * the highlight around the wax instead of leaving it stranded on the wrong side.
+ *
+ * ⚠️ THE TRIG LIVES IN theme.js, NOT HERE, and that is a pinned law rather than a
+ * preference: tests/design/makerPlate.test.jsx forbids transcendentals in every brand
+ * module because engines differ in the last ulp and this mark must be byte-identical
+ * everywhere, forever. `lightArc` computes once, beside the constant, and rounds.
+ */
+const GLINT = lightArc(S / 2, S / 2, 35, 32);
 
 /**
  * THE WAX'S OUTER EDGE — a circle a hand pressed. The four control points are pulled
@@ -116,7 +133,7 @@ export default function WaxSeal({ size = '0.66em', style }) {
         specular dot, which would read as plastic and would put a near-white pixel
         inside a letterform.
       */}
-      <path d="M 22 34 C 28 22, 40 14, 52 12" fill="none" stroke={SEAL_GLINT} strokeWidth="7" strokeLinecap="round" strokeOpacity="0.75" data-testid="wax-seal-glint" />
+      <path d={GLINT} fill="none" stroke={SEAL_GLINT} strokeWidth="7" strokeLinecap="round" strokeOpacity="0.75" data-testid="wax-seal-glint" />
     </svg>
   );
 }
