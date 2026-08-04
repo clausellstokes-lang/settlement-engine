@@ -1611,7 +1611,26 @@ AUDIENCE: public
 
 ### sale_books_diverged (WR-10) — the two books, adjudication desk — significance: major
 SLOTS: {settlement}, {counterpart}, {npc}
-AUDIENCE: public
+AUDIENCE: dm-only
+
+**[RECONCILED 2026-08-04 — chair ruling CR-WR10-K. This line was authored `public`; it is
+amended to `dm-only`, and this kind is the war volume's SOLE covert row. The volume's §5
+Lifecycle-paths clause is the ratified law and names this exact case: Herald kinds ride
+the governed projector with audience projection, "dm-only ⇒ covert, the
+ruler_books_compromised discipline for the books-divergence kind". This is that kind —
+WR-10's twin of WR-5's `ruler_books_compromised` — so the volume decides it, under this
+annex's own conflict rule at the head of the file: where this file conflicts with the
+volume or the spine, they win and the conflict is a bug to report (§10-6). The landed
+code was already built to the law rather than to this line: `sovereigntyNews.js`
+registers the row `dm-only`, refuses it fail-closed UPSTREAM when the books reading does
+not positively name the seat as the interest served (a redaction still admits the fact
+existed), and `sovereigntyKindPools.walker.test.js` pins it as the only covert row of the
+fifteen. WR-10's implementer DISCLOSED the divergence in that module's header instead of
+quietly resolving it, correctly, under §10-6 report-don't-rule; this ruling is what
+discharges that report. Following the CR-WR10-B precedent, the correction is made ONCE,
+in the volume's own bracketed idiom, so no second sentence about this kind's audience
+exists for a first-match document pin to retarget onto.]**
+
 1. {npc} sold {settlement} to save the seat; the town's books and the seat's books wanted opposite things, and the seat signed.
 2. The family silver went out the door on a bad afternoon and bought a quiet council.
 3. The realm lost a satellite and the ruler kept a hall, and the record is plain about which of the two was being served.

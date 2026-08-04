@@ -23,6 +23,11 @@
  *     same state homes as the engine's. Order → approve → save/load → undo is executed
  *     end to end, with the §4 regen split asserted on BOTH sides — the durable
  *     fragility in the occupation record, the legitimacy echo on the generated field.
+ *     Its immutability half is a STRUCTURAL CLONE of the world the approval is handed,
+ *     deep-compared afterwards (CR-WR10-J): the mint copies the occupations map, so an
+ *     in-place write inside the writer never reaches the campaign's own object and
+ *     cannot be caught by reading that object — only by comparing the graph that was
+ *     actually passed in. Identity proves nothing here in either direction.
  *
  * Every negative is anchored. No fixture mirrors the deriver: the ledgers are built in
  * the shape the real writers produce, and every read under test is the production one.
@@ -352,6 +357,7 @@ describe('WW-D — requirement 14\'s lifecycle clause: order → approve → sav
       wizardNews: { entries: [], currentTick: 9 },
     };
     const preApply = campaign.worldState;
+    const preApplyClone = structuredClone(preApply);
 
     // ORDER — the DM stages it through the one realm-verb mint.
     const minted = mintRealmVerbProposal({
@@ -360,14 +366,37 @@ describe('WW-D — requirement 14\'s lifecycle clause: order → approve → sav
       now: '2026-01-01T00:00:00.000Z',
     });
     expect(minted.ok).toBe(true);
-    const pending = minted.result.worldState.proposals.find((/** @type {any} */ p) => p.id === minted.proposalId);
+    const queued = minted.result.worldState;
+    const pending = queued.proposals.find((/** @type {any} */ p) => p.id === minted.proposalId);
     expect(pending.status).toBe('pending');
     // QUEUE, NOT COMMIT: the ledgers are untouched while the order waits.
-    expect(minted.result.worldState.occupations.greenhollow.occupierId).toBe('saltmarch');
+    expect(queued.occupations.greenhollow.occupierId).toBe('saltmarch');
+
+    /* THE PRE-STATE, CLONED BEFORE THE ORDER EXECUTES — CR-WR10-J.
+     *
+     * This pin used to claim the alias trap by asserting `preApply` still named the
+     * seller after the apply, and that claim was VACUOUS, for a reason that had to be
+     * measured rather than reasoned: `mintRealmVerbProposal` hands the approval a world
+     * whose `occupations` map AND whose greenhollow record are FRESH OBJECTS (identity
+     * measured false on all three of worldState / occupations / the record). So a writer
+     * that abandoned its immutable rebuild and wrote `occupations[assetId] = next`
+     * straight into the map it was given would land that write on the mint's private
+     * copy, leave the campaign's own object pristine, and pass here — which is exactly
+     * what the round-1 Mutant E did.
+     *
+     * The graph that must be proven untouched is therefore the one the approval is
+     * actually HANDED, and the proof is a structural clone taken before it runs and a
+     * DEEP COMPARE afterwards. Identity is no proof in either direction: a legitimate
+     * immutable rebuild returns a different reference, and an in-place write returns the
+     * same one, so only the values can say which happened. The campaign's own worldState
+     * is cloned and compared too — weaker, because the mint's copy stands between it and
+     * the writer, but it is what the undo ring actually holds. */
+    const queuedClone = structuredClone(queued);
+    expect(queuedClone.occupations.greenhollow).toMatchObject({ occupierId: 'saltmarch', state: 'vassalized' });
 
     // APPROVE — through the standard proposal applier, no realm-verb side door.
     const applied = applyWorldPulseProposal({
-      campaign: { ...campaign, worldState: minted.result.worldState }, saves: SAVES,
+      campaign: { ...campaign, worldState: queued }, saves: SAVES,
       proposalId: minted.proposalId, now: '2026-01-02T00:00:00.000Z',
     });
     expect(applied.worldState.proposals.find((/** @type {any} */ p) => p.id === minted.proposalId).status).toBe('applied');
@@ -377,6 +406,22 @@ describe('WW-D — requirement 14\'s lifecycle clause: order → approve → sav
     const conveyedSave = applied.settlementUpdates.find((/** @type {any} */ u) => u.saveId === 'greenhollow');
     expect(conveyedSave.settlement.powerStructure.publicLegitimacy.score)
       .toBe(60 + SOVEREIGNTY_TRANSFER_TUNING.LEGITIMACY_DELTA);
+
+    // THE ORIGINAL GRAPH WAS NEVER MUTATED. The two assertions above prove the write
+    // really landed on this same call, so the comparison below runs over a conveyance
+    // that happened rather than passing for free on an apply that did nothing.
+    expect(queued).toEqual(queuedClone);
+    expect(JSON.stringify(queued)).toBe(JSON.stringify(queuedClone));
+    expect(preApply).toEqual(preApplyClone);
+    // The rebuild is a NEW graph rather than the old one edited — read against the deep
+    // equality above, which is what makes this an immutability claim instead of a
+    // reference-counting one.
+    // anchored: `queued` is pinned deep-equal to its pre-order clone two lines above, so
+    // this cannot pass on an apply that returned an unwritten world.
+    expect(applied.worldState).not.toBe(queued);
+    // anchored: same deep equality, and the rebuilt map is pinned to carry the new holder
+    // by the toMatchObject above, so neither side of this comparison is an empty world.
+    expect(applied.worldState.occupations).not.toBe(queued.occupations);
 
     // SAVE / LOAD — the durable halves ride the conditional-ledger clone and a JSON
     // round trip (the alias trap: a shared reference would survive a clone and lie).
