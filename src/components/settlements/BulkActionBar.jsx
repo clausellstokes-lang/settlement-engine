@@ -12,7 +12,7 @@
 import { useState } from 'react';
 import { FolderOpen, BookMarked, Download, Trash2, X } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
-import { GOLD, INK, BODY, BORDER, CARD, RED, RED_BG, FS, SP, sans, swatch } from '../theme.js';
+import { GOLD, INK, BODY, BORDER_STRONG, CARD, RED, RED_BG, FS, SP, sans, swatch } from '../theme.js';
 import DeleteConfirmation from '../DeleteConfirmation';
 import useIsMobile from '../../hooks/useIsMobile.js';
 
@@ -98,8 +98,11 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
                 onClick={() => setMoveOpen(o => !o)}>
                 Add to campaign
               </Button>
+              {/* Floating chrome separates by its STRONG RULE, not a lift — the
+                  MoreMenu popover's ruled treatment (WorldMapToolbar, C5-a·iii).
+                  Print has no z-axis; the drop shadow and its rgba went with it. */}
               {moveOpen && !disabled && (
-                <div role="menu" style={{ position: 'absolute', left: 0, top: '100%', marginTop: 4, zIndex: 20, background: CARD, border: `1px solid ${BORDER}`, boxShadow: '0 4px 16px rgba(0,0,0,0.15)', minWidth: 160, padding: 4 }}>
+                <div role="menu" style={{ position: 'absolute', left: 0, top: '100%', marginTop: 4, zIndex: 20, background: CARD, border: `1px solid ${BORDER_STRONG}`, minWidth: 160, padding: 4 }}>
                   {campaigns.length === 0 && <div style={{ padding: '5px 8px', fontSize: FS.xs, color: BODY }}>No campaigns yet</div>}
                   {campaigns.map(c => (
                     // No minHeight override: menu items inherit Button's sm floor so

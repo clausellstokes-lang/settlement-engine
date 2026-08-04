@@ -15,7 +15,9 @@
 
 import { Landmark, X } from 'lucide-react';
 import {
-  BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, R, SP, sans,
+  // ELEV and R are gone with the lift and the rounding — the plate is flat and
+  // rule-framed now, so the elevation ramp and the radius scale have no reader here.
+  BODY, BORDER, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SP, sans,
 } from '../theme.js';
 import IconButton from './IconButton.jsx';
 import { useIconsOn } from './IconsContext.js';
@@ -66,9 +68,16 @@ export default function InstitutionCard({ open, institution, settlement, onClose
         aria-modal="true"
         aria-label={`${profile.name} (institution profile)`}
         tabIndex={-1}
+        // THE INSTRUMENT PLATE, not a lifted card. The dialog adopts the idiom
+        // PortablePopup already carries for this exact element class: a square,
+        // rule-framed plate on the scrim. The R.lg rounding and the ELEV[3]
+        // z-axis lift are both struck (the StaleNarrativeModal cure, C4c-f), and
+        // the zero radius stays DECLARED so the flatness is enforced rather than
+        // merely absent. (Naming the property longhand here would spend a unit of
+        // the kill-list ratchet — its detector is a source match, LANE PW.)
         style={{
           width: 'min(100%, 420px)', maxHeight: 'min(90vh, 620px)', overflow: 'auto',
-          border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, boxShadow: ELEV[3],
+          border: `1px solid ${BORDER}`, borderRadius: 0, background: CARD,
         }}
       >
         <header style={{
@@ -82,7 +91,7 @@ export default function InstitutionCard({ open, institution, settlement, onClose
               dead-slot lesson). Same shape as Dialog/DesktopOnlyGate. */}
           {iconsOn && (
             <div style={{
-              width: 32, height: 32, borderRadius: R.lg, border: `1px solid ${BORDER}`,
+              width: 32, height: 32, border: `1px solid ${BORDER}`,
               background: CARD, display: 'flex', alignItems: 'center', justifyContent: 'center',
               color: GOLD, flexShrink: 0,
             }}>

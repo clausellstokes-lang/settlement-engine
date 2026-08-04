@@ -96,7 +96,10 @@ export default function GalleryDetail({
     // height) inside the page container, with the polite announce on the wrapper.
     return (
       <div role="status" aria-live="polite" style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px`, display: 'grid', gap: SP.lg }}>
-        <div aria-hidden="true" style={{ border: `1px solid ${BORDER}`, background: CARD, minHeight: 310, boxShadow: '0 4px 14px rgba(27,20,8,0.08)' }} />
+        {/* The loading plate is a rule-framed block, not a lifted card — depth is
+            ink, never elevation. The z-axis shadow and its rgba are struck; the
+            1px rule already tells the eye where the plate ends. */}
+        <div aria-hidden="true" style={{ border: `1px solid ${BORDER}`, background: CARD, minHeight: 310 }} />
         <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.sm, textAlign: 'center' }}>
           Opening settlement...
         </div>

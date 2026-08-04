@@ -221,7 +221,9 @@ export default function LivingWorldTab() {
           src="/backgrounds/settlement-progression.jpg"
           alt="Settlement Progression across the six tiers. A thorpe is a few huts and farmsteads with no formal defenses; a hamlet adds basic services and a local trade and farming focus; a village has densely clustered homes, a church or chapel, a market, and some defenses; a town is walled with diverse districts, markets and guilds, and a regional trade hub; a city has strong fortifications, many districts, extensive services, and major trade and industry; a metropolis has grand fortifications, advanced infrastructure, international trade, and complex governance. Each settlement grows through population, security, infrastructure, governance, and economy."
           loading="lazy"
-          style={{ width: '100%', height: 'auto', display: 'block', border: `1px solid ${BORDER}`, boxShadow: '0 4px 14px rgba(27,20,8,0.10)' }}
+          // The plate is FRAMED, not floated: the diagram sits on the page behind
+          // its own 1px rule. The z-axis drop shadow and its rgba are struck.
+          style={{ width: '100%', height: 'auto', display: 'block', border: `1px solid ${BORDER}` }}
         />
       </figure>
 

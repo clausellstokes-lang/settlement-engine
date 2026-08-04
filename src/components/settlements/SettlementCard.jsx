@@ -11,7 +11,7 @@ const DestroySettlementControl = lazy(() => import('./DestroySettlementControl.j
 const generateSettlementPDF = (...args) =>
   import('../../utils/generateSettlementPDF.js').then(m => m.generateSettlementPDF(...args));
 import { EFFECT_CATEGORIES, fmtMod } from '../../lib/relationshipGraph.js';
-import { GOLD, GOLD_BG, GOLD_TXT, INK, MUTED, BODY, SECOND, BORDER, CARD, FS, SP, swatch, sans, serif_ } from '../theme.js';
+import { GOLD, GOLD_BG, GOLD_TXT, INK, MUTED, BODY, SECOND, BORDER, BORDER_STRONG, CARD, FS, SP, swatch, sans, serif_ } from '../theme.js';
 import { isPlanInactiveSave, isSaveActive } from '../../lib/saveAccess.js';
 import { canonPhaseOf } from './helpers.js';
 import { settlementSignals, healthPip } from './livingWorldSignals.js';
@@ -421,8 +421,11 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                     pressed={menuOpen}
                     onClick={() => setMenuOpen(o => !o)}
                   />
+                  {/* Floating chrome separates by its STRONG RULE, not a lift — the
+                      MoreMenu popover's ruled treatment (WorldMapToolbar, C5-a·iii).
+                      Print has no z-axis; the drop shadow and its rgba went with it. */}
                   {menuOpen && (
-                    <div role="menu" style={{ position:'absolute', right:0, top:'100%', marginTop:4, zIndex:20, background:CARD, border:`1px solid ${BORDER}`, boxShadow:'0 4px 16px rgba(0,0,0,0.15)', minWidth:200, padding:4, display:'flex', flexDirection:'column', gap:1, textAlign:'left' }}>
+                    <div role="menu" style={{ position:'absolute', right:0, top:'100%', marginTop:4, zIndex:20, background:CARD, border:`1px solid ${BORDER_STRONG}`, minWidth:200, padding:4, display:'flex', flexDirection:'column', gap:1, textAlign:'left' }}>
                       {/* Canonize (draft → canon) or a static Canon marker. */}
                       {!isCanon ? (
                         <Button variant="ghost" fullWidth onClick={() => { onCanonize?.(s); setMenuOpen(false); }}

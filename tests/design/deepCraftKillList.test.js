@@ -221,12 +221,42 @@ const CEILINGS = Object.freeze({
   // widget was deleted when the Cnocby sample card took its §01 slot — its three
   // rounded chips (borderRadius 103→100) and two GOLD_BG fills (tintedCallouts
   // 165→163) fell with it. Shrink-only lock-the-win.
+  // LANE PW (2026-08-03) — THE BURN-DOWN, NOT A RAISE. Three rows had drifted
+  // ABOVE their ceilings on landed lanes (borderRadius 87, boxShadow 74, rgba
+  // 171). Every one was brought back by STRIKING structure, never by moving a
+  // number, and the whole cure is one sentence: depth is a rule, not a lift.
+  //   · The two library dropdown menus (SettlementCard's per-card menu and
+  //     BulkActionBar's move-to-campaign menu) each dropped an identical
+  //     '0 4px 16px rgba(0,0,0,0.15)' z-axis shadow and took the MoreMenu
+  //     popover's ruled treatment instead — BORDER promoted to BORDER_STRONG, so
+  //     the floating chrome still separates, by its rule (WorldMapToolbar,
+  //     C5-a·iii). −2 boxShadow, −2 rgba.
+  //   · GalleryDetail's loading plate and LivingWorldTab's progression diagram
+  //     each dropped a '0 4px 14px rgba(27,20,8,0.0x)' lift; both already sat
+  //     behind their own 1px rule, which is what the eye was reading anyway.
+  //     −2 boxShadow, −2 rgba.
+  //   · InstitutionCard's dialog stopped being a rounded, lifted card and became
+  //     the flat instrument plate PortablePopup already is for this exact element
+  //     class — R.lg → a DECLARED zero (the flat-enforcing spelling, still
+  //     exempt) and ELEV[3] struck, the StaleNarrativeModal cure (C4c-f); its
+  //     32px medallion box de-rounded to a flat stamp. Both retired imports went
+  //     with them. −2 borderRadius, −1 boxShadow.
+  // borderRadius and rgba land EXACTLY on their standing ceilings, so those two
+  // numbers do not move. boxShadow overshoots to 69 and the ceiling follows it
+  // down — lock the win. Nothing was raised; tintedCallouts is untouched at 163.
+  // NOTHING WAS LOAD-BEARING among the struck lines: every one of the five
+  // surfaces keeps a 1px rule or a scrim doing the separation work the shadow was
+  // doubling. The genuinely load-bearing radii found in the same census — the
+  // circular avatar (PublicAvatar) and the circular-crop previews (ImageCropper),
+  // where '50%' IS the feature — were left alone and reported to the chair.
   borderRadius: 85,     // the rounded-card tell — plates are rule-framed, not rounded
                         // (100->86 on the 2026-07-22 zero-exemption refinement: 15
                         // flat-enforcing zero lines left the count; 86->85 at the
                         // walk-completions fold: order-14 collapsed two gallery
                         // section badges into one, striking one radius; win locked)
-  boxShadow: 72,        // print has no z-axis — depth is ink, never elevation
+  boxShadow: 69,        // print has no z-axis — depth is ink, never elevation
+                        // (72->69 at LANE PW's burn-down: five z-axis lifts struck,
+                        // four of them carrying an rgba that fell with them)
   rgbaLiterals: 167,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 163,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
