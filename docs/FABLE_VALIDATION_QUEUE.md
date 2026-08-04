@@ -1344,3 +1344,356 @@ with its reason rather than letting an unmeasurable zero read as a measurement.
 repository head is 195". Migration 195 is on disk, `git status -- supabase/` is EMPTY for this
 lane, and the file imports none of this lane's seven files (grep count 0). Same family as the
 `deployRunbookFreshness` / `migrationRollbackDiscipline` reds WR-9c already recorded.
+
+---
+
+## ⭐⭐ LANE V4D R-3b/R-3c — THE 2.12 OVER-CLAIM'S LAST SITES, AND A CORRECTION THAT
+## OVER-CORRECTED TWICE BEFORE IT HELD (lane V4D, 2026-08-04) @ `76ea345c` + `ca46705b` +
+## `9409d016`. The FIRST V4-family row this queue has received: the ribbon program's
+## judgments have lived only in immutable commit bodies (`358a8956` and `98edbc9f` each
+## carry a "JUDGMENT (vetoable)" block, `76ea345c` a "JUDGMENT CALL, RECORDED FOR VETO"),
+## and no ribbon plan doc or Progress blockquote exists anywhere in `docs/` to carry them.
+
+**Landed:** `tests/design/contrast.test.js` (`76ea345c` +11/-2, `ca46705b` +10/-7),
+`src/components/theme.js` and `src/components/nav/ShaftWrap.jsx` (`9409d016`, +16/-7 across
+both). PROSE-ONLY throughout: no token VALUE moved, no rendered pixel moved, no golden
+shifted. The `2.12` assertions are byte-identical across all three commits and their parent,
+proven rather than asserted — comment-stripped extracts of `cb1ea74f` and `76ea345c` are 599
+lines each with `diff` exit 0, no `+`/`-` line in any of the three diffs contains `expect`,
+and `expect(` counts 173 at `cb1ea74f`, `76ea345c` and `ca46705b` alike.
+
+### ⚠️⚠️ A CORRECT ASSERTION WAS CARRYING A FALSE SENTENCE, WHICH IS WHY NO PIN
+### COULD SEE IT (J-V4D-1, VETOABLE)
+
+- **J-V4D-1 — THE NUMBER STAYS PINNED AND THE SENTENCE ABOVE IT IS REWRITTEN, BECAUSE THE
+  DEFECT WAS NEVER IN THE ARITHMETIC.** `ratio(WRAP_GLOSS, WRAP_EDGE) === 2.12` is exactly
+  true — recomputed independently in Python from the authored hexes, importing nothing from
+  the repo: `lum #7E3A24 = 0.07589107`, `lum #2E0F08 = 0.00940022`, ratio `2.119371`. What was
+  false was the comment above it, "its own crest-to-valley ladder is what makes it read as
+  thread", which made a two-hex arithmetic fact the REASON a rendered thread reads as thread.
+  The pin is kept and RELABELLED as what it actually guards — token-pair separation, so a
+  repaint cannot quietly collapse `WRAP_GLOSS` toward `WRAP_EDGE`. THE REJECTED ALTERNATIVE
+  was deleting the assertion as meaningless: it is not meaningless, it is merely not evidence
+  about pixels, and deleting it would leave the token pair unguarded to buy honesty it can
+  have for free.
+- Corrected IN PLACE, under `98edbc9f`'s stated convention: "A false number with a correction
+  living ten lines below it is still a false number: a reader who quotes the sentence never
+  reaches the annotation, and the next lane inherits the claim rather than the caveat." The
+  nearest doctrinal neighbour already in this queue is **CR-WR9-B** ("DOCSTRING TRUTH IN
+  PLACE", line 973), which rules the same way for `warConvergenceContract.js`.
+
+### ⚠️⚠️ AND THEN THE CORRECTION OVER-CORRECTED. VERIFICATION CAUGHT IT;
+### NO READER AND NO PIN WOULD HAVE.
+
+`76ea345c`'s replacement prose asserted two things that are FALSE, and a nine-agent
+adversarial pass caught both before they calcified:
+
+```
+"the authored gloss never reaches the screen undimmed"
+"no reader has ever seen 2.12"
+```
+
+`WRAP_BARREL` (`theme.js:1021-1024`) is
+`#FFFFFF 0%, #FFFFFF 9%, #E2E2E2 38%, #B4B4B4 95%, #8E8E8E 98%, #6E6E6E 100%` — its stops are
+`SHAFT_STOPS`' (`theme.js:403`: `lit 0.09 / mid 0.38 / body 0.95 / edge 0.98`) and it modulates
+`WRAP_GLOSS = '#7E3A24'` / `WRAP_EDGE = '#2E0F08'` (`theme.js:982-983`). Its first two stops are
+BOTH WHITE, and **multiply by white is the IDENTITY** — so across the top 9% the turns render
+UNMODULATED, the composited crest is byte-identical to authored `WRAP_GLOSS`, and the composited
+ladder is exactly 2.12. COMPUTED — not measured on a raster — by reproducing R5's own
+`factorAt`/`multiplied`/`lum` arithmetic independently:
+
+```
+depth   factor   crest    valley   ladder
+0.0000  1.0000   7e3a24   2e0f08   2.1194
+0.0900  1.0000   7e3a24   2e0f08   2.1194
+0.5000  0.8483   6b311f   270d07   1.8173
+0.9800  0.5569   462014   1a0804   1.3672
+1.0000  0.4314   361910   140603   1.2330
+```
+
+⚠️ THAT IS AN ANALYTIC RESULT OVER TOKENS, WHICH IS THE ONE THING THIS SURFACE HAS ALREADY BEEN
+BITTEN BY. R-2's whole existence is that arithmetic over tokens cannot see the composite:
+deleting a single `backgroundBlendMode` line left 398 assertions green and rendered both wraps
+flat grey. No device row of the top 9% was read here, and `theme.js` itself records
+analytic-vs-raster disagreement of one 8-bit level mid-bar (analytic 1.82 vs measured 1.817,
+rasteriser dithering). So "byte-identical" is an analytic claim; the DIRECTION of the finding —
+2.12 renders at the top of the bar and nowhere a thread is read — does not depend on that last
+level, but a raster confirmation of the top 9% is owed if anyone wants the byte claim itself.
+
+The corrected comment now states the real shape: the modulator is white down to
+`SHAFT_STOPS.lit`, so 2.12 is the true pixel ladder across the top 9% — and, because 8-bit
+quantisation carries the byte-identical crest a little past the stop, still rounds to 2.12 out
+to ~depth 0.100. Below that both tones dim together and the ladder falls (1.82 mid-bar, 1.37 at
+the edge stop, 1.23 in the silhouette), so it is never the ratio anywhere in the readable BODY
+of the bar — which is the whole span the thread has to read as thread across.
+
+**THE IRONY IS RECORDED BECAUSE IT EXPLAINS BOTH ERRORS.** The chair's brief gave the mechanism
+as "WRAP_GLOSS never reaches the screen below the top 9% of the bar". `76ea345c` refused that
+clause as V4C history, and was RIGHT to: in V4C's layering the top 9% was the only place the
+gloss appeared at all (turns painted OVER the barrel, only the inter-turn shadow opaque, ladder
+1.316:1). But the same 9% band is load-bearing in the SHIPPED arrangement for the opposite
+reason — it is where the gloss appears UNDIMMED. The number was right and the claim attached to
+it was wrong, in both directions. A refusal that had kept the band and dropped only the claim
+would have landed correct on the first pass.
+
+### ⚠️⚠️ THE CLASS WAS NOT CLOSED WHEN `76ea345c` SAID IT WAS — CENSUS RECORDED,
+### THREE OF FOUR SITES NOW REPAIRED
+
+`76ea345c`'s body claimed `contrast.test.js` was "the last place that still argued from 2.12".
+That was asserted from a grep, not from a census, and it was wrong. Measured at `ca46705b` (the
+figure is anchored to that commit because this lane's own repairs then moved it to 14):
+`git grep -c '2\.12' ca46705b -- src tests` returns **11 hits in four files** — `theme.js` 5,
+`nav/ShaftWrap.jsx` 1, `contrast.test.js` 3, `navFletching.test.jsx` 2 — and three of those
+hits still carried the very absolute this lane had just retracted. `tests/design/compositedBarAA.test.js` is CLEAN of the class — its only nearby figure,
+"the bar's last 2%" at line 437, correctly names the `SHAFT_EDGE`→`SHAFT_RIM` silhouette segment.
+
+REPAIRED IN `9409d016`, each scoped rather than deleted, because the claim each was reaching for
+IS true once bounded:
+
+- `theme.js:969` "AND IT WAS NEVER TRUE OF A PIXEL" -> qualified to "ANYWHERE THE THREAD IS
+  ACTUALLY READ", plus the white-stop mechanism stated in the sentence.
+- `theme.js:1001` "and no reader ever saw it" -> "BELOW THAT 9%", which is consistent with the
+  line three above it that already says the crest appeared in the top 9%.
+- `ShaftWrap.jsx:66` "no reader ever saw it" -> "BELOW THE LIT STOP". That docstring already made
+  exactly this qualification eleven lines higher ("Everywhere a reader actually looks, the
+  'crest' was the thread's BODY tone"), so the fix aligns the file with itself.
+
+⚠️ THE FOURTH SITE IS DELIBERATELY LEFT: `navFletching.test.jsx:1497` ("the satin crest never
+reached the screen"). See the deferral tail for why, and for the fact that it is a discipline
+call rather than a textual conflict.
+
+### ⚠️⚠️ A PIN THAT PASSES ONLY BECAUSE ITS STEP SIZE CANNOT REACH ITS OWN STATED
+### ENDPOINT — FOUND HERE, DELIBERATELY NOT TOUCHED
+
+R5's depth loop (`navFletching.test.jsx:1514` at HEAD) reads
+`for (let f = 0; f <= SHAFT_STOPS.edge + 1e-9; f += 0.05)`, and its comment at 1511-1513 claims
+it checks "every twentieth of the depth down to SHAFT_STOPS.edge". It does not. Executed on the
+same IEEE doubles: the loop runs **20 iterations and ends at `0.9500000000000003`**, the next
+value is `1.0000000000000002`, and **the loop never evaluates 0.98**. Its tightest iterate is
+f=0.95 at ladder 1.5792 — a margin of 0.079 over its own `> 1.5` floor — while
+`ladderAt(0.98) = 1.3672` would FAIL that floor. The pin passing is itself the proof it never
+reaches its stated endpoint.
+
+**THE MISS IS THE STEP SIZE, NOT FLOAT DRIFT, AND THAT CHANGES WHAT A REPAIR LOOKS LIKE.**
+`0.98 / 0.05 = 19.599999999999998` — 0.98 is not a multiple of 0.05, so NO 0.05 walk from 0 can
+land on it, in floats or in exact arithmetic (`19 * 0.05 = 0.95`, `20 * 0.05 = 1.0`). All three
+"obvious tidy-ups" were executed and ALL THREE STAY GREEN at n=20: the loop as written, integer
+stepping (`f = i * 0.05`, last iterate `0.9500000000000001`), and dropping the `1e-9` slack.
+**That is the trap** — a maintainer who "fixes the float" will read the unchanged green as
+vindication, and the `+ 1e-9` is dead code defending a drift at a bound the loop never
+approaches. The ONLY change that reds R5 is ADDING the endpoint (e.g. iterating
+`[...grid, SHAFT_STOPS.edge]`), which fails at 0.98 — so whoever honours the comment must also
+move the floor or re-scope the claim, and must know **the red is the pin telling the truth for
+the first time, not a regression they caused.**
+
+Two precision notes so the finding is not dismissed on inspection. R5 DOES touch the edge stop,
+one line below the loop: `1526`'s `expect(ladderAt(1)).toBeLessThan(ladderAt(SHAFT_STOPS.edge))`
+reads `ladderAt(0.98) = 1.3672` and passes precisely because 1.2330 is lower — the `> 1.5` floor
+is simply never applied there. And the ladder crosses 1.5 at depth **0.960291** (1.5064 at
+0.9600, 1.4982 by 0.9603; 8-bit quantisation makes it a step rather than a point), so the
+sub-floor band is the last ~4% of the bar and begins BEFORE the edge stop.
+
+**AND THE POINTER THIS LANE ADDED IS STILL SOUND**, which is worth stating explicitly since the
+corrected comment now sends readers to R5. `contrast.test.js` cites R5 for "the analytic mid-bar
+ladder at 1.82" — `ladderAt(0.5) = 1.8173`, which R5 pins and which the loop's truncation does
+not touch. The defective claim is a different one in the same test. The lane is not handing
+readers a guard it knows to be over-claiming.
+
+### GATES AND RECEIPTS
+
+**GATES (every number executed this lane).**
+
+- `npx vitest run tests/design/contrast.test.js` -> **Test Files 1 passed (1) / Tests 95 passed
+  (95)**. Run at `76ea345c`'s bytes, again on the committed bytes after the hook, again after
+  `ca46705b`, and again after `9409d016`. Green on the first run every time.
+- `npx vitest run tests/components/navFletching.test.jsx` -> **70 passed (70)**, and the filtered
+  `-t "THE WHIPPING EXISTS"` -> **1 passed | 69 skipped (70)**. Run because the corrected comment
+  now POINTS readers at R5; a pointer to a red or absent pin is a new defect, so the pointer was
+  executed rather than assumed. ⚠️ BYTES DISCLOSED: this file was foreign-dirty for the whole
+  lane, so these runs were against WORKING-TREE bytes (HEAD plus a parallel session's 23-insertion
+  hunk at `@@ -149,3 +149,23 @@`, a `creditLedger` leaf mock that changes the suite's module
+  graph). A re-validator reproducing this at clean HEAD is running a slightly different suite.
+  The historical ~50%-of-runs exit-1 flake in this suite did NOT fire.
+- `npx eslint src/components/theme.js src/components/nav/ShaftWrap.jsx tests/design/contrast.test.js`
+  -> **exit 0, no output.** Recorded because `98edbc9f`'s sibling commit recorded it and
+  `76ea345c` did not.
+- Dependent-surface coverage, not sampling: `grep -rln "WRAP_GLOSS\|WRAP_BARREL\|ShaftWrap" tests/`
+  returns exactly `navFletching.test.jsx` and `contrast.test.js` — both run.
+- Byte scans: `contrast.test.js` 49637 -> 50416 -> 50722; `theme.js` 103612; `ShaftWrap.jsx`
+  18573. 0 NUL, 0 control bytes, 0 CR, utf-8 OK on every one. (The authored-NUL class has bitten
+  this repo five times.)
+- Size ratchet: `scripts/.size-baseline.json` holds 10 entries, all under
+  `src/domain`/`src/store`/`src/generators`/`src/App.jsx`. None of the three edited files is
+  ceilinged, so prose growth trips nothing. Checked, not assumed.
+- Edge bundles: none of the three files is an edge-bundle input (`grep` over `scripts/*edge*`,
+  `scripts/build*`, `supabase/` returns nothing), so no same-commit rebuild is owed.
+- **NOT RUN, AND WHY — NO FULL GATE, NO BUILD, NO SOAK.** Three prose-only commits touching two
+  docstrings and one test comment cannot move a golden, a bundle or a dist chunk; the full suite
+  exceeds the harness cap.
+
+### ⚠️⚠️ A CLAIM THIS LANE RETRACTS: THE PRE-COMMIT HOOK WAS BLAMED FOR A REVERT
+### THE MECHANISM DOES NOT SUPPORT
+
+**WHERE THE CLAIM LIVED, WHICH DECIDES WHAT THIS RETRACTION IS.** It reached NO durable surface:
+no commit body on this branch attributes anything to the hook, and `grep -n 17518dd0 docs/`
+returns only this section. It was asserted in this lane's in-session report to the chair, and the
+adversarial pass caught it before it was written down anywhere permanent. **So this is a RECORDED
+NEAR-MISS, not a correction of the record** — nothing needs un-saying elsewhere, and a
+re-validator should not go hunting for a corrupted surface. It is written here because a
+near-miss whose lesson is unrecorded is a defect waiting to recur.
+
+WHAT THIS LANE OBSERVED, AND WHAT OF IT A LATER READER CAN RE-CHECK.
+
+- RE-DERIVABLE FROM THE TREE: `17518dd0` is a dangling commit dated 09:06:16 — the same second as
+  `76ea345c` — with the default subject `WIP on claude/composite-r4:`; its parents are `cb1ea74f`
+  plus index commit `1375aab7`; that index commit differs from `cb1ea74f` in `contrast.test.js`
+  ALONE; `contrast.test.js` is blob `9f664dc6` in both the stash's worktree tree and its index
+  tree; the stash carried five WR-9d files beside it; and `git diff 17518dd0 a70c9284` over the
+  two certification modules is EMPTY, so the captured WIP landed byte-identical. **NOTHING WAS
+  LOST.**
+- NOT RE-DERIVABLE, and rests on this lane's own commands at the time: that at 09:06:21 both
+  certification modules were byte-identical to HEAD and absent from `git status`, and that at
+  09:07:42 they were modified again. ⚠️ Even that is softer than it was first reported: git's stat
+  cache can report a path clean when size and mtime match the index entry, so "dropped out of
+  `git status`" is weaker evidence than the `git hash-object` comparison run beside it.
+
+WHY THE HOOK IS THE WRONG SUSPECT — and note the first leg is NOT the one first offered:
+
+- **MECHANISM, AND THE STASH SUBJECT DOES NOT EXONERATE ANYTHING.** lint-staged took its backup
+  via `git stash create` + `git stash store`, which is why `17518dd0` carries the default
+  `WIP on …` subject rather than `lint-staged automatic backup` (that message belongs to the
+  `git stash push --keep-index` path, used only under `--hide-unstaged`/`--hide-all`). ⚠️ THE
+  INFERENCE FIRST DRAWN FROM THAT SUBJECT RAN BACKWARDS: `state.js` forces
+  `shouldHidePartiallyStaged = false` in exactly the hide-unstaged/hide-all modes, so the
+  `WIP on …` path is the ONLY mode in which `hidePartiallyStagedChanges` can run at all. The
+  subject therefore places us in the mode where a worktree revert is possible, not outside it.
+- **THE REVERT PATH IS RULED OUT ON ITS GATE, NOT ON THE SUBJECT.**
+  `hidePartiallyStagedChanges`'s `git restore --worktree` (`gitWorkflow.js:259`) and the
+  `git apply` that undoes it (`:351`) are gated on files with BOTH index and worktree deltas.
+  The stash's index commit shows only `contrast.test.js` had index changes, and that file had no
+  worktree-vs-index delta (same blob `9f664dc6` in both) — so ZERO files qualified and the path
+  never ran.
+- **THE ONE PATH WHOSE SIGNATURE ACTUALLY MATCHES IS NAMED AND EXCLUDED SEPARATELY.** lint-staged
+  has five worktree-mutating calls, not one: `stash push --keep-index` (`:230`),
+  `restore --worktree` (`:259`), `apply <patch>` (`:351`/`:358`), `restore --source <hash>^3`
+  (`:386`), and `reset --hard HEAD` + `stash apply --index` (`:413-414`). Only the last writes
+  HEAD content into the worktree and then returns it — precisely what was observed. It lives in
+  `restoreOriginalState`, which `state.js:87-92` reaches only on `FailOnChangesError`,
+  `TaskError` or `RestoreUnstagedChangesError`; `76ea345c` committed successfully. And it resets
+  the WHOLE tree, so it would have taken all five foreign files, not two.
+- **ASYMMETRY.** The lane had five dirty files; exactly the two `src/domain/certification/`
+  SOURCE modules went clean while its script and two test files did not. Neither hook path
+  produces "exactly these two": the per-file revert selects only partially-staged files (neither
+  module was one — both were worktree-only ` M`), and the whole-tree revert would have taken
+  everything.
+- **ONE NON-REPRODUCTION, WHICH IS NOT A CONTROL.** `ca46705b` went through the same hook with
+  foreign dirty files present and nothing was reverted. Consistent with the hook being innocent;
+  NOT probative, because neither the staging state nor the concurrent lane's activity was
+  matched — the same objection this row raises against the diff below.
+- **AND THE EVIDENCE FIRST OFFERED WAS NON-PROBATIVE.** `git diff 76ea345c 17518dd0 -- <paths>`
+  showing modifications proves nothing: a pathspec commit necessarily lacks unstaged lane work
+  whether a revert happened or not. `17518dd0` being dangling is likewise the NORMAL lint-staged
+  lifecycle, not a failure signature.
+
+WHAT REPLACED IT IS A HYPOTHESIS, LABELLED AS ONE. The shape — two chosen source modules to HEAD
+and back — fits a **HEAD-reverting negative control** in the WR-9d lane. ⚠️ IT DOES NOT FIT THE
+MUTANT CYCLE, and the receipt first cited for it was the wrong row's: "MUTANTS — FIVE EXECUTED,
+cp-backed, restored `cmp`-exact" is **WR-9c's** (line 1176, @ `7a3c51ef`), its five mutants were
+on `warConvergenceForces.js` and `warConvergenceContract.js`, and `warConvergenceForces.js` was
+not even dirty at 09:06. A cp-backed mutant restores the lane's OWN WIP, which never passes
+through HEAD content, so mutation cannot produce the observation. WR-9d does record mutants
+(lines 1270, 1293) but none names `behavioralContract.js` — which WR-9c's row separately records
+as byte-identical and untouched. **So the alternative has a matching shape and no receipt. It is
+offered as the most likely explanation, not as a finding.**
+
+**THE DURABLE LESSON, which is the half of line 177 that was already earned:** a foreign file at
+HEAD content mid-session is a VANISH, and a vanish is not a destruction — preserve recovery
+material, label the cause INFERRED, and look again. This retraction restores agreement with the
+PRECEDENT this queue set on two earlier and unrelated incidents: line 173 (`42299b07`, "the
+post-commit check confirmed every foreign file survived the hook's stash cycle") and line 177
+(a concurrent lane's `applyWorldPulse` split — "its own `lint-staged` stash cycle, not a loss,
+which is worth recording because the vanish is indistinguishable from destruction at a glance").
+Neither is evidence about THIS event. ⚠️ AND LINE 177 IS ITSELF AN UNPROVEN ATTRIBUTION BY THIS
+ROW'S OWN STANDARD — it names the stash cycle as that vanish's cause without showing a mechanism.
+What the incident DOES support is narrower and still worth keeping: a `<  M` line in a post-commit
+baseline diff that no commit explains deserves the same alarm as `< ??`, the recovery path (the
+`WIP on <branch>` stash stamped with your own commit's second) works, and **the guard before the
+restore is the load-bearing habit** — asserting `git hash-object` still equals `HEAD:<path>`
+before writing is what stopped this lane clobbering a live session's own repair.
+
+### WHAT FABLE SHOULD RE-EXAMINE (protocol step 2 — the fifth column this prose form drops)
+
+- **J-V4D-1 itself:** confirm that keeping `ratio(WRAP_GLOSS, WRAP_EDGE) === 2.12` as a
+  TOKEN-STABILITY pin is right, rather than replacing it with a pin on the composited crest at a
+  stated depth. The kept pin guards the authored pair and cannot see a blend-mode deletion
+  (`98edbc9f`'s grey-stripe hazard); a depth-stated composited pin would guard the pixel but
+  duplicate R5. The lane judged a cheap token pin plus R5 better than one pin trying to be both.
+- **The scoping style of the three `9409d016` repairs:** each bounds an absolute rather than
+  deleting it, on the view that the bounded claim is the true and useful one. A stricter reading
+  would delete the sentences as unsalvageable history.
+- **Whether the analytic top-9% result wants a raster confirmation** before "byte-identical" is
+  allowed to stand in a docstring, given R-2's lesson about analytic pins.
+
+### OWNER-HELD / DEFERRED — DOCUMENTED, NOT DROPPED
+
+- **THE R5 LOOP REPAIR — FULLY SPECIFIED SO IT NEED NOT BE RE-DERIVED.** Addresses at HEAD
+  `9409d016` (add +20 for the current dirty worktree, whose foreign hunk sits at lines 149-171):
+  the loop is `navFletching.test.jsx:1514`, its range claim 1511-1513, the residual note
+  1518-1524, and 1526 already evaluates `ladderAt(SHAFT_STOPS.edge)` while asserting nothing
+  about the 1.5 floor there. MEASURED: last and tightest iterate f=0.95 at ladder 1.5792;
+  crossing at depth 0.960291; `ladderAt(0.98) = 1.3672`. THREE MUTUALLY EXCLUSIVE REPAIRS, and
+  the lane deliberately does not choose for the chair — (a) add the endpoint and LOWER the floor
+  to ~1.35, which keeps the stated range and admits the real number; (b) add the endpoint and
+  RE-SCOPE the comment to `SHAFT_STOPS.body` (0.95), which is what the loop actually proves;
+  (c) keep the loop and delete the "down to SHAFT_STOPS.edge" clause. (b) is the smallest true
+  statement; (a) is the most informative. Whichever is taken, the `+ 1e-9` should go — it is dead.
+- **THREE PROSE FIGURES BESIDE IT, and one of them is the load-bearing one.** (i) the residual
+  note's "the multiply reaches 0.427" is wrong: `factorAt(1.0)` is `0x6E/255 = 0.4314` (0.427 is
+  109/255, one 8-bit level low). (ii) its "the bar's last 2%" is RIGHT and must NOT be renumbered
+  — 0.98→1.0 is exactly the `SHAFT_EDGE`→`SHAFT_RIM` silhouette where the multiply bottoms out and
+  the ladder reads 1.23; what is MISSING is the separate sub-floor span (the ladder is already
+  under 1.5 from ~0.960, the last ~4%). Both spans belong in the note; neither replaces the other.
+  (iii) THE ONE THAT MATTERS MOST: the note's closing inference — "It is a FADE, not a cliff,
+  which the loop above proves by holding everywhere else" (1523) — is exactly what the loop's
+  truncation invalidates, since the loop stops before the fall. A fixer who repairs only the
+  numbers leaves the false inference standing.
+- **WHY IT WAS DEFERRED, PINNED TO A TIME AND A HUNK.** At 2026-08-04 ~10:05 the dirty set was
+  this row plus `navFletching.test.jsx`, foreign under a parallel session; earlier in the lane
+  `appShellResilience.test.jsx`, `navDividers.test.jsx` and `landingFooterMigration.test.jsx` were
+  also dirty and have since been committed by that session. The foreign edit to
+  `navFletching.test.jsx` is ONE hunk at `@@ -149,3 +149,23 @@`, roughly 1,350 lines above the R5
+  loop, **so the R5 region is at HEAD content and the repair would not have conflicted
+  textually.** The deferral is therefore a discipline call — do not edit a file another session
+  holds open — and not a technical impossibility. A successor who finds the file clean should
+  simply do it.
+- **THE R-LABEL IS THIS LANE'S INFERENCE, NOT THE CHAIR'S.** `76ea345c` carries no R-label;
+  `ca46705b` and `9409d016` stamp `V4D R-3b` and `R-3c` in their own subjects, but that is this
+  same lane inferring, not independent authority. V4D's taken labels are R-1 (`a2dbdd36`), R-2
+  (`358a8956`), R-2a (`273ffbba`), R-3 (`98edbc9f`); R-3b/R-3c follow the lane's own R-2a
+  precedent ("a follow-up disclosed as its own commit because it is a change of SUBJECT rather
+  than of claim"), which fits — same claim, new sites. **R-4** is the alternative if the chair
+  prefers fresh items. The register these numbers were drawn from exists in no repo file.
+- **J-V4D-1 IS THE FIRST V4D JUDGMENT GIVEN AN ID, NOT THE FIRST THE LANE MADE.** `358a8956`
+  ("the pre-V4C TURN layer is deliberately NOT restored alongside it") and `98edbc9f` ("that test
+  file is touched for prose only") carry vetoable judgments still unlabelled in their commit
+  bodies. Numbering them retroactively would make this row's own ID wrong, so they stay addressed
+  by hash.
+- **A CHECKED-AND-WITHDRAWN FLAG, recorded so nobody re-raises it.** This lane suspected
+  `a2dbdd36` of deviating from `DESIGN_RIBBON_V4_SPEC.md` §(a)1 by re-basing the bole's VERTICAL
+  reach on the bar rather than "the wordmark's measured ink extents". **On the evidence it is NOT
+  a deviation.** §(a)1 states a CONTAINMENT — "bole ⊇ ink+3px" — and R-1 kept both halves:
+  `brandLockup.test.jsx:209-210` still pins the band at exactly `ink ± BOLE_PAD` (= 3,
+  `theme.js:1135`) and :272 adds a strict SUPERSET pin on the field. What R-1 retired was a
+  vertical TIGHTNESS bound a PRIOR lane had added, not a spec clause. Separately, the protocol's
+  row-on-deviation rule (lines 18-19, "building from them needs no row; deviating does") is scoped
+  to "the six DESIGN_* docs" — a set enumerated nowhere in the repo, against ~61 `DESIGN_*` files
+  on disk — and the ribbon spec landed 2026-08-04, four days after the 2026-07-31 freeze, so it is
+  probably not one of the six. Two reasons the flag fails; recorded rather than dropped.
+- **THE VANISH/HOOK LESSON HAS NO SURFACE THAT CARRIES IT.** `docs/START_HERE.md` does not exist
+  on this branch (memory places it on the ledger branch), and `docs/RISK_REGISTER.md` disclaims
+  itself as historical while pointing at `docs/PHASE55_EXECUTION_PLAYBOOK.md` §0.0.2 ("STANDING
+  AMENDMENTS + RULINGS — things a successor must not re-litigate") as the live surface. That
+  playbook section is the obvious first candidate and this lane did not evaluate it. Shared-tree
+  git discipline is otherwise scattered per-brief: `grep -rl 'shared tree\|shared-tree\|pathspec
+  commit\|lint-staged' docs/*.md` returns 9 files, 8 of them not this queue. Whether to give the
+  class one home is an owner placement call, not a lookup.
