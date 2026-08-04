@@ -524,3 +524,77 @@ carrier reaches frames × phrases. That second pin surfaced a real property wort
 **the `thin` band does not widen at all**, because its frames carry no `{what}` slot — a
 rumor that degraded is only "trouble near {where}". Pinned as `band === 'thin' ? 1 : pool`,
 so a subject leaking into the vaguest band would red.
+
+---
+
+## LANE RR — THE COMBINED RE-RECORD (Opus implementer under the chair's lane-RR ruling, 2026-08-03; every row vetoable)
+
+Source `21bf1041`, re-record `c4de968a`. Full record in
+`docs/GOLDEN_SHIFT_LEDGER.md` under "LANE RR — THE COMBINED RE-RECORD", which
+discharges the PT2-5 section's NOT-BUILT status. **Nothing pushed.**
+
+- **⛔ J-RR-0 — THE OWNER GATE, NAMED RATHER THAN ASSUMED.** PT2-5 recorded the
+  origin widening as OWNER-SIGNED, not the chair's: it re-records all 525 golden
+  keys and it is a one-time break, against THE PROMISE, of the origin line every
+  existing seed has printed. The chair's lane-RR ruling reopened it and paired it
+  with the owed icon closure so the estate pays ONE re-record instead of two.
+  This row exists so the gate is visible rather than buried in a commit message.
+  **The veto is cheap and exact: revert `c4de968a` then `21bf1041`.**
+
+- **J-RR-1 — TERRAIN ENTERS AS A SELECTION KEY, NOT AS NEW ARMS.** The ruling
+  asked the origin to draw on "route × the settlement's actual founding state".
+  Chosen: keep the eight pre-RR arms and let terrain, the deficit flag and the
+  special-resource endowment steer WHICH variant an arm yields. Rejected: a
+  terrain × arm prose cross-product (7 terrains × 8 arms), which would have meant
+  ~200 authored sentences, an unpinnable reachability surface, and real risk of
+  a variant contradicting its terrain. Within an arm the variants state the same
+  fact in different voices, which is what keeps the rung safe for the AI
+  grounding payload. **Say "veto" to take the cross-product instead.**
+
+- **J-RR-2 — FIVE VARIANTS PER POOL, AND THE POWER-OF-TWO BAN IS STRUCTURAL.**
+  `pickVariant` is `fnv1a32(key) % pool.length`, and the recorded parity-aliasing
+  class kills half a pool at a power-of-two modulus. Chosen: forbid power-of-two
+  pool lengths outright and pin it, rather than adopt the `avalanche32` cure —
+  because that cure lives in `settlementRumors.js` and importing or duplicating
+  it would either couple generators to a display module or fork a hash. Five
+  everywhere, every member pinned reachable, degenerate-family negative control.
+
+- **J-RR-3 — THE TWO `inferSupplyChains` SLOTS ARE KEPT, AGAINST THE BRIEF.** The
+  ruling, the memory and the old shift record all called them dead. They are not:
+  `admitReviewedSupplyChain` rejects a discovered chain missing `resourceIcon` or
+  `needIcon` ("unsupported shape. Missing: resourceIcon"), and
+  `confirmCustomSupplyChainReview` spreads the chain through unchanged, so
+  deleting them breaks custom-content review at the confirm step. Proved by
+  probe, not by reading. Kept under a narrow file+field allowlist in
+  `copyCorruption.test.js` whose justification is itself pinned — if the schema is
+  ever relaxed the allowlist reds and must be deleted with the slots. Relaxing
+  the schema instead would be an owner-gated persistence-shape change and was
+  not attempted.
+
+- **J-RR-4 — DEFERRED, DOCUMENTED, NOT A BUG TO RE-FIND: the two producer
+  pass-throughs in `computeActiveChains.js`.** `resourceIcon: chain.resourceIcon`
+  and `needIcon: need.icon` can now only ever be `undefined` — `activeChains` is
+  built solely from `SUPPLY_CHAIN_NEEDS`, and no custom chain reaches it
+  (measured: 998 of 998 chains in the 60-settlement corpus still carry both KEYS
+  in memory, with no value). Nothing ships: `JSON.stringify` drops undefined, so
+  the serialized surface — saves, the golden, every payload — is clean, which is
+  exactly the 4,462 removals the census counts. Left alone deliberately: the
+  edit is cosmetic, provably serialization-neutral, and making it AFTER the
+  census was banked and green is the edit-after-the-green-run hazard. A later
+  lane may delete both lines with no re-record.
+
+- **J-RR-5 — DEFERRED, OWNER-GATED: the golden corpus has no port × riverside
+  row.** Its riverside rows take the `river` route and its port rows take coastal
+  terrain, so the inland-river-port arm is invisible to the 525-key golden. This
+  is not theoretical — a world-law violation in that arm's authored prose passed
+  the golden in this very lane and was caught only by
+  `generationWorldLaw.test.js`. Adding a row is a golden ADDITION and therefore
+  owner-signed (precedent `aa33eba5`). Written into the golden docstring and the
+  arm's own pin so it is not re-found as a bug.
+
+- **J-RR-6 — THE DS-GEN-6 ANNEX RECEIPT WAS REPAIRED IN THE SOURCE COMMIT.** Its
+  title omitted terrain (already wrong before this lane — the port sub-arms read
+  `_config.terrainType` at HEAD) and its line references pointed at the pre-RR
+  function body. Both corrected and the corpus regenerated; the generated diff is
+  ONE title string. Included rather than deferred because a stale receipt in the
+  dossier-prose annex is the exact class the corpus generator exists to prevent.
