@@ -545,39 +545,215 @@ export const GRAIN_AMP = 0.64;
  * back into a contrast lever — hence the pin beside it.
  */
 const GRAIN_TONE = SHAFT_EDGE;
-const GRAIN_UNIT = ((h) => {
-  const n = parseInt(h.slice(1, 7), 16);
-  return [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => Number((v / 255).toFixed(4)));
-})(GRAIN_TONE);
 
-const GRAIN_SVG = [
-  "<svg xmlns='http://www.w3.org/2000/svg' width='320' height='64'>",
-  "<filter id='grain' filterUnits='userSpaceOnUse' x='0' y='0' width='320' height='64'",
-  " color-interpolation-filters='sRGB'>",
-  "<feTurbulence type='fractalNoise' baseFrequency='0.008 0.42' numOctaves='3'",
-  " seed='7' stitchTiles='stitch' result='noise'/>",
-  "<feColorMatrix in='noise' type='matrix' values='",
-  `0 0 0 0 ${GRAIN_UNIT[0]} 0 0 0 0 ${GRAIN_UNIT[1]} 0 0 0 0 ${GRAIN_UNIT[2]} ${0.20 * GRAIN_AMP} ${0.20 * GRAIN_AMP} ${0.20 * GRAIN_AMP} 0 ${-0.22 * GRAIN_AMP}'/>`,
-  '</filter>',
-  "<rect x='0' y='0' width='320' height='64' filter='url(#grain)'/>",
-  '</svg>',
-].join('');
-export const SHAFT_GRAIN_TEXTURE = `url("data:image/svg+xml,${GRAIN_SVG
-  .replace(/%/g, '%25').replace(/#/g, '%23').replace(/</g, '%3C').replace(/>/g, '%3E')}")`;
+/**
+ * ⚠️⚠️ THE WOOD'S TEXTURE TILES ARE BUILT BY ONE WRITER — spec part 2 §2's three
+ * layers, and the reason they share a builder is the reason the grain needed a colour
+ * space declared in the first place.
+ *
+ * A wood texture on this bar is always the same four decisions: a fixed feTurbulence
+ * seed, an anisotropic baseFrequency, a feColorMatrix that paints ONE fixed tone at an
+ * alpha DERIVED from the noise, and the escaping that survives becoming a data URI.
+ * Three hand-authored copies of that is three places for `color-interpolation-filters`
+ * to go missing, three places for the escape ORDER to be got wrong, and three tile
+ * sizes to drift apart so the layers stop tiling in step.
+ *
+ * ⚠️ THE ESCAPE ORDER IS THE TRAP AND IT IS WHY THIS IS A FUNCTION. `%` must be
+ * escaped BEFORE `#`, `<` and `>`, or the `%23` this very function emits is re-escaped
+ * into `%2523` and the filter reference stops resolving — a texture that silently
+ * renders as nothing. The SVG is authored with single-quoted attributes and explicit
+ * userSpaceOnUse numbers (never `100%`) precisely to keep the character set this small.
+ *
+ * ⚠️ `gain` AND `bias` ARE PASSED ALREADY SCALED, not as an amplitude the builder
+ * multiplies. Each layer's amplitude constant is its own accessibility/material
+ * argument (see GRAIN_AMP, GROWTH_AMP, PORE_AMP), and the arithmetic that spends it
+ * belongs beside that argument at the call site rather than hidden in here.
+ *
+ * ⚠️⚠️ `ceiling` IS THE SECOND MATRIX, AND IT IS WHAT MAKES A THRESHOLDED LAYER
+ * VISIBLE AT ALL — the defect the first cut of the wood finishes shipped past.
+ * `gain·(R+G+B) − bias` clamps at ZERO below the cut, which is the thresholding; it also
+ * clamps at ONE above it, and that is the half that matters. With a gentle gain the
+ * surviving band is a shallow triangle whose typical alpha is a fraction of its peak, so
+ * a layer authored "at 9%" renders at about 2% almost everywhere and reads as nothing.
+ * Screenshotted at 3x against bare wood, the first growth pass was indistinguishable
+ * from the bare cylinder. With a STEEP gain the same band saturates to a broad PLATEAU
+ * at alpha 1, and the second matrix then scales that plateau down to the authored
+ * ceiling — so the layer is a few broad strokes AT its budget rather than a wide smear
+ * an order of magnitude under it. The budget is spent, not merely declared.
+ *
+ * A layer that wants the raw ramp (the grain, whose whole character is that it never
+ * saturates) passes no ceiling and gets no second matrix — its bytes are untouched.
+ *
+ * @param {string} id the filter's document-local id — one per layer, for legibility
+ * @param {number} seed the feTurbulence seed (vetted non-degenerate; see the seed pin)
+ * @param {string} baseFrequency the anisotropic `x y` pair
+ * @param {number} gain the alpha the matrix takes from each of R, G and B
+ * @param {number} bias the constant added to that sum — NEGATIVE, so the wash clamps
+ *   to nothing in the gaps and the layer is a texture rather than a flat tint
+ * @param {string} tone the fixed colour the matrix paints
+ * @param {number} [ceiling] the peak alpha the saturated plateau is scaled down to;
+ *   omitted for an unsaturated ramp
+ * @returns {string} a CSS `url("data:image/svg+xml,…")`
+ */
+function woodTile(id, seed, baseFrequency, gain, bias, tone, ceiling) {
+  const unit = ((h) => {
+    const n = parseInt(h.slice(1, 7), 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => Number((v / 255).toFixed(4)));
+  })(tone);
+  const svg = [
+    `<svg xmlns='http://www.w3.org/2000/svg' width='${WOOD_TILE.w}' height='${WOOD_TILE.h}'>`,
+    `<filter id='${id}' filterUnits='userSpaceOnUse' x='0' y='0'`,
+    ` width='${WOOD_TILE.w}' height='${WOOD_TILE.h}' color-interpolation-filters='sRGB'>`,
+    `<feTurbulence type='fractalNoise' baseFrequency='${baseFrequency}' numOctaves='3'`,
+    ` seed='${seed}' stitchTiles='stitch' result='noise'/>`,
+    "<feColorMatrix in='noise' type='matrix' values='",
+    `0 0 0 0 ${unit[0]} 0 0 0 0 ${unit[1]} 0 0 0 0 ${unit[2]} ${gain} ${gain} ${gain} 0 ${bias}'`,
+    ceiling === undefined ? '/>' : " result='cut'/>",
+    ceiling === undefined ? ''
+      : `<feColorMatrix in='cut' type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 ${ceiling} 0'/>`,
+    '</filter>',
+    `<rect x='0' y='0' width='${WOOD_TILE.w}' height='${WOOD_TILE.h}' filter='url(#${id})'/>`,
+    '</svg>',
+  ].join('');
+  return `url("data:image/svg+xml,${svg
+    .replace(/%/g, '%25').replace(/#/g, '%23').replace(/</g, '%3C').replace(/>/g, '%3E')}")`;
+}
+
+/**
+ * THE TILE EVERY WOOD LAYER SHARES. ⚠️ ONE SIZE, NOT THREE, AND IT IS LOAD-BEARING:
+ * `stitchTiles='stitch'` makes each layer seamless at its OWN period, so three
+ * different periods would beat against one another and the plank would grow a visible
+ * moiré at some viewport widths and not others. Every claim about "per 320px tile"
+ * below is a claim about this rectangle.
+ */
+const WOOD_TILE = Object.freeze({ w: 320, h: 64 });
+
+export const SHAFT_GRAIN_TEXTURE = woodTile(
+  'grain', 7, '0.008 0.42', 0.20 * GRAIN_AMP, -0.22 * GRAIN_AMP, GRAIN_TONE,
+);
+
+/**
+ * ⚠️⚠️ THE GROWTH LINES (spec part 2 §2) — THE SECOND TURBULENCE PASS, AND IT IS THE
+ * LAYER THAT MAKES THE BARREL READ AS A PIECE OF WOOD RATHER THAN AS A SHADED TUBE.
+ *
+ * The grain (seed 7) is FINE: hundreds of hairline streaks that integrate into a matte
+ * surface. Real turned cedar also carries a handful of BROAD tonal runs — the growth
+ * rings the shaft was cut across — and their absence is why the V4 bar reads slightly
+ * synthetic at a glance even with the grain on it. So this pass is deliberately the
+ * opposite shape: very few, very broad, very quiet.
+ *
+ * ⚠️ THE NUMBERS ARE MEASURED, NOT ASSERTED, AND ONE OF THEM IS A CORRECTED SPEC VALUE.
+ * The spec asks for "seed 11, baseFrequency 0.004 0.55, matrix-thresholded to 2-3 broad
+ * wavering streaks per 320px tile, RIM-tone wash <=9% alpha". Rasterised, `0.004 0.55`
+ * cannot produce that picture at ANY threshold: a y-frequency of 0.55 is a 1.8px period,
+ * FINER than the grain's own 0.42, so the field is banded into a dozen-plus thin lines
+ * across the tile's 64px and thresholding it harder makes the survivors thinner rather
+ * than fewer. Measured on the real tile: 0.55 gives 12-17 streak crossings per column at
+ * every gain/bias pair tried, against the spec's own "2-3".
+ *
+ *   JUDGMENT (vetoable): the SHAPE the spec describes in words is kept and the
+ *   y-frequency is corrected to the value that produces it — 0.05, a ~20px period, which
+ *   measures 2 and 3 streak crossings on two independent columns of the tile. The x
+ *   frequency (0.004, the "wavering slowly ALONG the shaft" half) and the seed (11) are
+ *   the spec's own. Alternative rejected: honour `0.55` literally and drop the "2-3
+ *   broad" language — that ships a second fine grain over the first, which is the
+ *   corrugated-metal failure the band was already rebuilt once to escape.
+ *
+ * THE WASH IS RIM-TONE, and that is both the spec's letter and the direction law: the
+ * darkest step on the ladder can only ever darken (see GRAIN_AMP's direction proof).
+ *
+ * ⚠️ GROWTH_AMP IS A CEILING, NOT A SCALE, and the difference is the layer's whole
+ * visibility. See woodTile's `ceiling` note: the threshold is applied with a STEEP gain
+ * so the surviving band saturates into a broad plateau, and this number is what that
+ * plateau is scaled down to. Measured on the real tile: peak alpha 0.0902 — the ceiling,
+ * reached — across 25.7% of the tile at a mean-over-inked of 3.95%, and a mean run count
+ * of 1.99 streak crossings per column with a maximum of 4. The first cut spent a gentle
+ * gain instead and measured a 2.85% mean at the same nominal budget: a layer that was
+ * authored at 9% and rendered as nothing.
+ */
+export const GROWTH_AMP = 0.09;
+/**
+ * THE THRESHOLD'S TWO NUMBERS. `GROWTH_CUT` is where it cuts, as the sum of the noise's
+ * three channels; `GROWTH_GAIN` is how steeply it climbs past the cut, which is what
+ * decides whether the survivors are a shallow smear or a plateau at the ceiling.
+ *
+ * ⚠️ THEY ARE SEPARATE FROM THE AMPLITUDE because they answer different questions — the
+ * cut decides HOW MANY streaks, the gain how BROAD each one is at full strength, and the
+ * amplitude how dark full strength is. The grain's single-knob spelling (0.20/0.22, one
+ * fixed ratio) can express none of that, which is why it is not reused here.
+ */
+const GROWTH_CUT = 1.53;
+const GROWTH_GAIN = 3.0;
+export const SHAFT_GROWTH_TEXTURE = woodTile(
+  'growth', 11, '0.004 0.05', GROWTH_GAIN, -GROWTH_GAIN * GROWTH_CUT, SHAFT_RIM, GROWTH_AMP,
+);
+
+/**
+ * ⚠️ THE PORE FLECKING (spec part 2 §2) — RETINA-ONLY, AND "RETINA-ONLY" HERE MEANS
+ * ALWAYS PAINTED AND ONLY EVER RESOLVED AT 2x, exactly as the comb and the fray are.
+ *
+ * Spec part 2 §4's threshold table puts pore flecks in the same class as the band's
+ * comb: "≤0.6px, each <2% effective ink so 1x integrates as tone — the corrugated-metal
+ * law inverted". So there is no media query and no second code path; there is one layer
+ * whose ink is small enough that a 1x rasteriser integrates it into a matte surface and
+ * a 2x one resolves it into pores. Measured: 4.38% areal coverage at a 0.0588 peak alpha
+ * — the spec's "~4% coverage at 6% alpha" — for a MEAN alpha of 0.0011 over the whole
+ * tile, 0.11% effective ink, an order and a half under the 2% ceiling.
+ *
+ * ⚠️⚠️ THE SPEC'S TWO FREQUENCIES ARE TRANSPOSED AND THEY ARE SWAPPED HERE, RECORDED
+ * RATHER THAN SILENTLY FOLLOWED. The spec reads "baseFrequency 0.35 0.08 (flecks
+ * elongated along the shaft)" — and in SVG the pair is `x y`, where a HIGHER frequency
+ * means FASTER variation and therefore SMALLER features on that axis. `0.35 0.08` is
+ * fast in x and slow in y, which makes features tall and narrow: flecks elongated
+ * ACROSS the shaft, the exact opposite of the parenthetical in the same sentence. The
+ * repo's own grain settles which half is the intent: it has run `0.008 0.42` — slow in
+ * x, fast in y — since V3 and is described everywhere as "grain running WITH the shaft".
+ *
+ *   JUDGMENT (vetoable): the two numbers are the spec's, in the order that produces the
+ *   shape the spec's own words ask for. Alternative rejected: `0.35 0.08` verbatim,
+ *   which would put a cross-grain fleck field on a longitudinally-grained shaft — the
+ *   one texture pairing that reads as printed paper rather than as turned wood.
+ */
+export const PORE_AMP = 0.06;
+/**
+ * The pores' threshold — see GROWTH_CUT/GROWTH_GAIN. The cut is HIGHER (far fewer
+ * pixels survive: 4.4% of the tile against the growth lines' 25.7%) and the gain steeper
+ * still, because a pore is a small hard mark rather than a broad soft run: a fleck that
+ * fades out over its own width is a smudge, and a smudge at 2x is worse than no pore.
+ */
+const PORE_CUT = 1.87;
+const PORE_GAIN = 4.0;
+export const SHAFT_PORE_TEXTURE = woodTile(
+  'pore', 13, '0.08 0.35', PORE_GAIN, -PORE_GAIN * PORE_CUT, SHAFT_RIM, PORE_AMP,
+);
 
 /**
  * SHAFT_GRAIN_LAYERS — the finished plank, as ONE CSS background-image string both
  * headers share, so the mobile and desktop bars are the same piece of wood.
  *
- * Order is paint order: the grain rides ON TOP of the cylinder shading, because
- * grain is a property of the surface and the shading is the light falling on it.
- * Reversed, the barrel would wash over the grain and the wood would go flat.
+ * ⚠️⚠️ THE LIST IS IN CSS PAINT ORDER, WHICH IS THE REVERSE OF READING ORDER, and spec
+ * part 2 §5 names the reading order: base → cylinder → grain(7) → growth(11) →
+ * flecks(13). A CSS `background-image` list paints its FIRST layer TOPMOST, so the list
+ * is that sequence reversed. Getting it backwards would put the barrel's shading over
+ * the wood's own surface and the plank would go flat — the same failure the two-layer
+ * version already recorded, now with two more layers able to make it.
  *
  * ⚠️ Consumers must paint this OVER the SHAFT base colour (`background-image` +
- * `background-color`), never as the whole `background` shorthand with no base — the
- * grain is transparent in its gaps and the page would show through the shaft.
+ * `background-color`), never as the whole `background` shorthand with no base — every
+ * layer here is transparent in its gaps and the page would show through the shaft.
+ *
+ * ⚠️⚠️ EVERY LAYER DARKENS AND NONE MAY LIGHTEN — THE DEAD-BAND LAW, spec part 2 §2's
+ * "all darkening-direction only; pale latewood streaks BANNED". A pale streak is not a
+ * taste failure: the bar's whole AA structure is that a PALE label's ground never rises
+ * above L 0.1447 (see SHAFT_STOPS), and a lightening layer at any alpha walks that
+ * ground toward the mid-russet dead band where NEITHER register is legible. The three
+ * tones here are SHAFT_EDGE (L 0.0477) and SHAFT_RIM (L 0.0223) twice, all far below
+ * the L 0.1268 lightest ground any rider's ink can touch, so the direction holds at
+ * every alpha by construction. tests/design/compositedBarAA.test.js asserts it per layer.
  */
-export const SHAFT_GRAIN_LAYERS = [SHAFT_GRAIN_TEXTURE, SHAFT_CYLINDER].join(', ');
+export const SHAFT_GRAIN_LAYERS = [
+  SHAFT_PORE_TEXTURE, SHAFT_GROWTH_TEXTURE, SHAFT_GRAIN_TEXTURE, SHAFT_CYLINDER,
+].join(', ');
 
 // SHAFT_RULE — the seam between two REFERENCE tabs, read as a groove cut in the
 // barrel.

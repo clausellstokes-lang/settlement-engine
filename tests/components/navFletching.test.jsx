@@ -99,9 +99,11 @@ import {
   FLETCH_SPLIT_LIT, FLETCH_VANE, FS, GILT, GILT_LIGHT, GOLD, GOLD_TXT, HEADER_RIDERS,
   INK_DEEP, LABEL_BOX, LIGHT_UNIT, PARCH, PARCH_100,
   PLATE_LIGHT_DEG, SHAFT, SHAFT_BODY, SHAFT_CYLINDER, SHAFT_EDGE, SHAFT_GRAIN_LAYERS,
-  SHAFT_GRAIN_TEXTURE, SHAFT_RIM, SHAFT_SHEEN, SHAFT_STOPS, SP, WRAP,
+  SHAFT_GRAIN_TEXTURE, SHAFT_GROWTH_TEXTURE, SHAFT_PORE_TEXTURE, SHAFT_RIM, SHAFT_SHEEN,
+  SHAFT_STOPS, SP, WRAP,
   contactShadow, lightOffset, shadowOffset,
 } from '../../src/components/theme.js';
+import { isDegenerateSeed } from '../../src/components/brand/GildedWordmark.jsx';
 import {
   BAND, BAND_PX_PER_UNIT, BAND_W, BARB, BOW, CALM_PAD_Y, DRIFT, LABEL_INK, LANE, QUILLS,
   QUILL_H, REACH, RUN, SEAT, SHEENS, SHEEN_FLOOR, SHEEN_PEEK, SPLIT, SPLITS, VANES,
@@ -1423,6 +1425,36 @@ describe('6 — THE TEXTURE IS DETERMINISTIC: a fixed seed, and no random source
     expect(SHAFT_GRAIN_TEXTURE).not.toContain('%2523');
     expect(SHAFT_GRAIN_TEXTURE).not.toContain('<');
     expect(SHAFT_GRAIN_TEXTURE).not.toContain('>');
+    // ⚠️ THE ESCAPING IS THE BUILDER'S, SO EVERY LAYER GETS IT — the whole reason
+    // woodTile exists. Two more hand-authored copies is two more places for the order
+    // to go wrong, and the failure renders as an untextured bar, not as an error.
+    for (const uri of [SHAFT_GROWTH_TEXTURE, SHAFT_PORE_TEXTURE]) {
+      expect(uri).toMatch(/%23(growth|pore)/);
+      expect(uri).not.toContain('%2523');
+      expect(uri).not.toContain('<');
+      expect(uri).not.toContain('>');
+    }
+  });
+
+  test('⚠️⚠️ EVERY WOOD SEED IS VETTED AGAINST feTurbulence’s OWN PRNG', () => {
+    // Spec part 2 §5: "all turbulence fixed-seed, sRGB declared". A fixed seed only buys
+    // determinism if the seed is not one of the DEGENERATE ones — initial lattices where
+    // a gradient vector comes out exactly (0,0), which engines then handle differently.
+    // The plate's file carried this check for the bole alone; the wood finishes add two
+    // more seeds, and an unvetted seed is precisely the kind of thing that ships and is
+    // only ever seen on somebody else's browser.
+    //
+    // ⚠️ IT IS THE SPEC'S OWN LATTICE CONSTRUCTION RE-RUN, not a blocklist that rots, so
+    // ANY seed a future edit picks is really checked.
+    const seedOf = (uri) => Number(uri.match(/seed='(\d+)'/)[1]);
+    const seeds = [SHAFT_GRAIN_TEXTURE, SHAFT_GROWTH_TEXTURE, SHAFT_PORE_TEXTURE].map(seedOf);
+    expect(seeds, 'the three wood layers no longer declare three seeds').toEqual([7, 11, 13]);
+    for (const s of seeds) expect(isDegenerateSeed(s), `wood seed ${s} is degenerate`).toBe(false);
+    // …and the three are DISTINCT, or two layers would carry the identical noise field
+    // and the second would be a darker copy of the first rather than a new texture.
+    expect(new Set(seeds).size).toBe(3);
+    // NON-VACUITY: the vetter must actually reject something in this range.
+    expect([...Array(2000)].map((_, i) => i).filter(isDegenerateSeed).length).toBeGreaterThan(0);
   });
 });
 

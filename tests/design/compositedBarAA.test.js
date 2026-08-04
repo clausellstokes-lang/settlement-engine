@@ -48,10 +48,10 @@ import { createRequire } from 'node:module';
 import { describe, expect, test } from 'vitest';
 
 import {
-  BODY, GILT, GOLD_TXT, GRAIN_AMP, HEADER_RIDERS, INK_DEEP, LABEL_BOX, PARCH,
-  PARCH_100, SEAL_WAX, SHAFT, SHAFT_BODY, SHAFT_EDGE, SHAFT_GRAIN_TEXTURE, SHAFT_RIM,
-  SHAFT_SAGE, SHAFT_STEEL, SHAFT_STOPS, FLETCH_VANE, cylinderToneAt, riderFloorTone,
-  riderGrainShare,
+  BODY, GILT, GOLD_TXT, GRAIN_AMP, GROWTH_AMP, HEADER_RIDERS, INK_DEEP, LABEL_BOX, PARCH,
+  PARCH_100, PORE_AMP, SEAL_WAX, SHAFT, SHAFT_BODY, SHAFT_CYLINDER, SHAFT_EDGE, SHAFT_GRAIN_LAYERS,
+  SHAFT_GRAIN_TEXTURE, SHAFT_GROWTH_TEXTURE, SHAFT_PORE_TEXTURE, SHAFT_RIM, SHAFT_SAGE,
+  SHAFT_STEEL, SHAFT_STOPS, FLETCH_VANE, cylinderToneAt, riderFloorTone, riderGrainShare,
 } from '../../src/components/theme.js';
 
 const require_ = createRequire(import.meta.url);
@@ -81,30 +81,58 @@ const rgbOf = (hex) => {
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
 };
 
-/** The authored SVG, recovered from the data URI the app actually paints. */
-function grainSvg() {
-  const inner = SHAFT_GRAIN_TEXTURE.replace(/^url\("data:image\/svg\+xml,/, '').replace(/"\)$/, '');
+/** The authored SVG of any wood layer, recovered from the data URI the app paints. */
+function tileSvg(uri) {
+  const inner = uri.replace(/^url\("data:image\/svg\+xml,/, '').replace(/"\)$/, '');
   return decodeURIComponent(inner);
+}
+/** The grain's, which is the layer this file's AA argument is built on. */
+function grainSvg() {
+  return tileSvg(SHAFT_GRAIN_TEXTURE);
 }
 
 /**
- * Rasterise the grain tile and return its per-pixel alpha field.
+ * Rasterise ONE wood tile and return its per-pixel alpha field.
  * ⚠️ If this ever throws, the pin is NOT passing — it is unable to run, which is a
  * different thing, and the message says so rather than letting a silent skip stand in
  * for a green.
  */
-async function grainAlpha() {
-  const svg = grainSvg();
+async function tileAlpha(uri, name) {
+  const svg = tileSvg(uri);
   let raster;
   try {
     raster = await sharp(Buffer.from(svg)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
   } catch (e) {
-    throw new Error(`the grain tile could not be rasterised, so the composited AA floor is UNMEASURED (not clean): ${e.message}`, { cause: e });
+    throw new Error(`the ${name} tile could not be rasterised, so its budget is UNMEASURED (not clean): ${e.message}`, { cause: e });
   }
   const { data, info } = raster;
   const alpha = [];
   for (let i = 0; i < info.width * info.height; i += 1) alpha.push(data[i * info.channels + 3] / 255);
   return { alpha, width: info.width, height: info.height };
+}
+
+async function grainAlpha() {
+  return tileAlpha(SHAFT_GRAIN_TEXTURE, 'grain');
+}
+
+/**
+ * HOW MANY DISTINCT INKED RUNS ONE COLUMN OF A TILE CROSSES — the growth lines' "2-3
+ * broad streaks per 320px tile" as a number rather than as an adjective.
+ *
+ * ⚠️ TWO COLUMNS, NEVER ONE. A single column can land in a gap and report zero on a
+ * field that is covered everywhere else, which would make the pin a coin flip on the
+ * seed rather than a measurement of the layer.
+ */
+function streakRuns({ alpha, width, height }, atFraction) {
+  const x = Math.floor(width * atFraction);
+  let runs = 0;
+  let on = false;
+  for (let y = 0; y < height; y += 1) {
+    const inked = alpha[y * width + x] > 0.004;
+    if (inked && !on) runs += 1;
+    on = inked;
+  }
+  return runs;
 }
 
 /** Any barrel tone with the grain's own dark-brown laid over it at `a`. */
@@ -392,6 +420,129 @@ describe('the COMPOSITED bar — the ground a letterform really lands on', () =>
     let same = 0;
     for (let i = 0; i < a.alpha.length; i += 1) if (a.alpha[i] === b.alpha[i]) same += 1;
     expect(same).toBe(a.alpha.length);
+  });
+
+  test('⚠️⚠️ THE WOOD FINISHES: three layers, and EVERY ONE OF THEM DARKENS', async () => {
+    // ⚠️⚠️ THE DEAD-BAND LAW, AS A PER-LAYER PROOF (spec part 2 §2, "all
+    // darkening-direction only; pale latewood streaks BANNED"). It is not a taste rule.
+    // Every rider on this bar is PALE, so its worst ground is the LIGHTEST tone under
+    // its ink — cylinderToneAt(0.1995), L 0.1268 — and a layer whose tone were LIGHTER
+    // than that could raise a label's ground at some alpha, walking it toward the
+    // mid-russet dead band where NEITHER register clears 4.5:1. A screenshot shows none
+    // of that. So the direction is asserted for each layer's own tone, which makes it
+    // hold at every alpha by construction rather than at today's alpha by luck.
+    const lightestGround = relLuminance(...cylinderToneAt(
+      HEADER_RIDERS.wordmark.ink[0] / HEADER_RIDERS.wordmark.bar,
+    ));
+    expect(lightestGround.toFixed(4)).toBe('0.1268');
+    const LAYERS = [
+      ['grain', SHAFT_GRAIN_TEXTURE, SHAFT_EDGE],
+      ['growth', SHAFT_GROWTH_TEXTURE, SHAFT_RIM],
+      ['pore', SHAFT_PORE_TEXTURE, SHAFT_RIM],
+    ];
+    for (const [name, uri, tone] of LAYERS) {
+      expect(hexL(tone), `${name} could LIGHTEN a pale rider's ground`)
+        .toBeLessThan(lightestGround);
+      // …and each really declares its colour space, or "deterministic" buys nothing.
+      expect(tileSvg(uri), `${name} does not declare sRGB`)
+        .toContain("color-interpolation-filters='sRGB'");
+      expect(uri, `${name} is double-escaped`).not.toContain('%2523');
+      expect(tileSvg(uri)).toContain("stitchTiles='stitch'");
+    }
+    // NEGATIVE CONTROL: a pale latewood streak — the banned tone — really would fail
+    // this, so the loop above is a live constraint and not three tautologies.
+    expect(hexL('#C8A07A')).toBeGreaterThan(lightestGround);
+
+    // ⚠️ AND THE LIST IS IN CSS PAINT ORDER, WHICH IS READING ORDER REVERSED. Spec part
+    // 2 §5: base → cylinder → grain → growth → flecks. A `background-image` list paints
+    // its FIRST entry topmost, so the reading order is read off backwards here.
+    const at = (uri) => SHAFT_GRAIN_LAYERS.indexOf(uri);
+    expect(at(SHAFT_PORE_TEXTURE)).toBeLessThan(at(SHAFT_GROWTH_TEXTURE));
+    expect(at(SHAFT_GROWTH_TEXTURE)).toBeLessThan(at(SHAFT_GRAIN_TEXTURE));
+    expect(at(SHAFT_GRAIN_TEXTURE)).toBeLessThan(SHAFT_GRAIN_LAYERS.indexOf(SHAFT_CYLINDER));
+  });
+
+  test('⚠️ THE GROWTH LINES ARE FEW AND BROAD — measured, not asserted', async () => {
+    // The spec asks for "2-3 broad wavering streaks per 320px tile, RIM-tone wash <=9%
+    // alpha". Both halves are measurable and both are measured, because the number that
+    // makes this layer work is the STREAK COUNT and nothing in the authored constants
+    // shows it: a y-frequency one step finer turns the same tile into a dozen thin
+    // lines, which is the corrugated-metal failure the band was rebuilt to escape.
+    const field = await tileAlpha(SHAFT_GROWTH_TEXTURE, 'growth');
+    expect(field.width).toBe(320);
+    expect(field.height).toBe(64);
+    // ⚠️ THE STREAK COUNT IS A DISTRIBUTION, NOT THREE SAMPLES. Three hand-picked
+    // columns would make this pin a coin flip on the seed: a wavering streak dips in and
+    // out of any one column, and a column that happens to sit in a gap reports 1 on a
+    // field that reads as 3 everywhere else. So every column of the tile is counted and
+    // the CENTRAL TENDENCY is what "2-3 broad streaks per 320px tile" is asserted about.
+    const runs = [...Array(field.width).keys()].map((x) => streakRuns(field, x / field.width));
+    const meanRuns = runs.reduce((a, b) => a + b, 0) / runs.length;
+    expect(meanRuns, `mean ${meanRuns.toFixed(2)} streaks/column is not 2-3`).toBeGreaterThan(1.5);
+    expect(meanRuns, `mean ${meanRuns.toFixed(2)} streaks/column is not 2-3`).toBeLessThan(3.0);
+    expect(meanRuns.toFixed(2)).toBe('1.99');
+    // …and no column is a comb: 12+ crossings is the fine-grain failure this layer must
+    // not become, and the spec's own `0.55` y-frequency produced exactly that.
+    expect(Math.max(...runs), 'a column carries a comb, not growth lines').toBeLessThanOrEqual(4);
+    // …and it is not one lonely streak either: most columns really carry two or more.
+    expect(runs.filter((v) => v >= 2).length / runs.length).toBeGreaterThan(0.6);
+    const peak = Math.max(...field.alpha);
+    expect(peak, 'the growth wash rasterised to nothing').toBeGreaterThan(0.01);
+    expect(peak, 'the growth wash exceeds the 9% ceiling').toBeLessThanOrEqual(0.0902);
+    expect(peak.toFixed(4)).toBe('0.0902');
+    // ⚠️ AND THE BUDGET IS SPENT RATHER THAN DECLARED — the defect the first cut shipped
+    // past. A gentle gain leaves the surviving band a shallow triangle whose typical
+    // alpha is a fraction of its peak, so a layer authored at 9% renders at ~2% and is
+    // invisible against bare wood at 3x. The steep gain saturates it into a plateau that
+    // the ceiling then scales, so the MEAN OVER INKED PIXELS is a real share of the peak.
+    const inked = field.alpha.filter((v) => v > 0.004);
+    const meanInk = inked.reduce((a, b) => a + b, 0) / inked.length;
+    expect(meanInk / peak, 'the streaks only graze their own ceiling').toBeGreaterThan(0.35);
+    expect((meanInk * 100).toFixed(2)).toBe('3.95');
+    // …and it is a THRESHOLDED field rather than a flat tint: most of the tile is bare.
+    const cover = inked.length / field.alpha.length;
+    expect(cover, 'the growth layer covers the whole tile — it is a tint, not streaks')
+      .toBeLessThan(0.4);
+    expect((cover * 100).toFixed(2)).toBe('25.65');
+    // THE SINGLE KNOB: the authored ceiling really is what caps it, and it IS the spec's.
+    expect(GROWTH_AMP).toBe(0.09);
+    expect(readFileSync(join(HERE, '../../src/components/theme.js'), 'utf8'))
+      .toContain('-GROWTH_GAIN * GROWTH_CUT, SHAFT_RIM, GROWTH_AMP');
+  });
+
+  test('⚠️ THE PORE FLECKS ARE RETINA-ONLY — under 2% effective ink at 1x', async () => {
+    // Spec part 2 §4's threshold table: pore flecks sit with the comb and the fray in
+    // the RETINA-ONLY class — "each <2% effective ink so 1x integrates as tone". That
+    // is a claim about MEAN alpha (tone × area), which is what the eye integrates at
+    // arm's length, and it is the same law the band's comb was retuned under after the
+    // corrugated-metal verdict. Areal coverage alone would pass a layer that was 4% of
+    // the tile at full opacity, which is a rash.
+    const field = await tileAlpha(SHAFT_PORE_TEXTURE, 'pore');
+    const mean = field.alpha.reduce((a, b) => a + b, 0) / field.alpha.length;
+    expect(mean, 'the pore layer is over the 2% effective-ink ceiling').toBeLessThan(0.02);
+    expect((mean * 100).toFixed(3)).toBe('0.111');
+    // NON-VACUITY: it must actually exist, or "under 2%" is satisfied by nothing at all.
+    const cover = field.alpha.filter((v) => v > 0.004).length / field.alpha.length;
+    expect(cover, 'the pore layer rasterised to nothing').toBeGreaterThan(0.01);
+    // The spec's "~4% coverage at 6% alpha", both halves, measured on the real tile.
+    expect((cover * 100).toFixed(2)).toBe('4.38');
+    expect(Math.max(...field.alpha).toFixed(4)).toBe('0.0588');
+    expect(PORE_AMP).toBe(0.06);
+    // ⚠️⚠️ THE FLECKS RUN ALONG THE SHAFT, AND THIS IS THE PIN THAT HOLDS THE CORRECTED
+    // SPEC VALUE. The spec's "baseFrequency 0.35 0.08 (flecks elongated along the
+    // shaft)" is self-contradictory — in SVG the pair is `x y` and a HIGHER frequency
+    // means SMALLER features, so 0.35 in x makes flecks narrow across and tall along,
+    // i.e. elongated ACROSS the shaft. theme.js swaps them and says so. The pin asserts
+    // the SHAPE rather than the literal, so it survives a future retune and still reds
+    // if anyone "restores" the transposition.
+    const bf = tileSvg(SHAFT_PORE_TEXTURE).match(/baseFrequency='([\d.]+) ([\d.]+)'/);
+    expect(bf, 'the pore layer must declare a two-axis baseFrequency').toBeTruthy();
+    expect(Number(bf[2]), 'the pore flecks run ACROSS the shaft, not along it')
+      .toBeGreaterThan(Number(bf[1]));
+    // …the same anisotropy DIRECTION the grain has carried since V3, which is what keeps
+    // the three layers one material instead of a weave.
+    const gbf = grainSvg().match(/baseFrequency='([\d.]+) ([\d.]+)'/);
+    expect(Number(gbf[2])).toBeGreaterThan(Number(gbf[1]));
   });
 
   test('the base colour under the grain is the one the header actually paints', () => {
