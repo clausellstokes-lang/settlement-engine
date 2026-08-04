@@ -38,6 +38,37 @@ describe('WR-6 pulse evidence admission', () => {
     ]);
   });
 
+  test('⚠️ A MISSING GROUP IS AN EMPTY GROUP — the invariant CR-PK-1 rests on', () => {
+    // THIS PIN EXISTS BECAUSE A LANE STOPPED ON ITS NEGATION. WZ-2 recorded the
+    // pulse kernel's two `no-useless-assignment` errors as unfixable, reasoning
+    // that dropping `let reasonCoalitionEvidence = []` would "hand `undefined`
+    // to mergeWarCoalitionEvidence on the peace-dark path". The kernel's two
+    // reassignments turned out to be unconditional (a bare lexical block is not
+    // an `if`), so that path does not exist — but the deeper answer is that it
+    // would not have mattered, because this function reads every group through
+    // `Array.isArray(group) ? group : []`.
+    //
+    // So the guarantee is pinned HERE, at the consumer, rather than left as a
+    // fact about one caller's control flow. Any future edit that DOES make a
+    // kernel assignment conditional is safe by this contract, and an edit that
+    // breaks the contract reds here instead of silently changing a merge.
+    const rows = [stayed(5), expenditure(5)];
+    const withEmpties = mergeWarCoalitionEvidence([], rows, [], []);
+    const withUndefineds = mergeWarCoalitionEvidence(undefined, rows, undefined, undefined);
+    const withNulls = mergeWarCoalitionEvidence(null, rows, null, null);
+    // Non-vacuity: the shared group is REAL, so this is not four empty lists
+    // agreeing with each other (the self-referential-pin class).
+    expect(withEmpties.map((row) => row.kind)).toEqual([
+      'coalition_expenditure_read',
+      'coalition_stayed',
+    ]);
+    expect(withUndefineds).toEqual(withEmpties);
+    expect(withNulls).toEqual(withEmpties);
+    // And the degenerate case both spellings share: no groups at all.
+    expect(mergeWarCoalitionEvidence(undefined, undefined)).toEqual([]);
+    expect(mergeWarCoalitionEvidence()).toEqual([]);
+  });
+
   test('cost speaks first above quiet and only when its band worsens', () => {
     const worldState = {
       pulseHistory: [{

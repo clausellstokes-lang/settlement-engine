@@ -1422,9 +1422,42 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   });
   let envoyEvidence = Array.isArray(applied.envoyEvidence) ? [...applied.envoyEvidence] : [];
   let lateEnvoyApplied = [];
-  /** Direct evidence returned by late movers rather than generic outcomes. */
-  let treatyCoalitionEvidence = [];
-  let reasonCoalitionEvidence = [];
+  /**
+   * Direct evidence returned by late movers rather than generic outcomes.
+   *
+   * ⚠️⚠️ THESE TWO CARRY NO `= []` INITIALIZER, AND THE ABSENCE IS THE RULING
+   * (chair CR-PK-1, 2026-08-04, vetoable). Both were declared `= []`, both were
+   * flagged by `no-useless-assignment`, and lane WZ-2 recorded the repair as
+   * UNSAFE — "`reasonCoalitionEvidence`'s reassignment sits INSIDE the
+   * peace-engine conditional, so dropping the `= []` hands `undefined` to
+   * `mergeWarCoalitionEvidence` on the peace-dark path". THAT ANALYSIS IS FALSE
+   * ON BOTH LEGS, and the correction belongs in the source and not only in the
+   * record:
+   *
+   *   1. THE REASSIGNMENT IS NOT INSIDE A CONDITIONAL. Its enclosing chain,
+   *      read off the parse tree rather than off the indentation, is
+   *      FunctionDeclaration > BlockStatement(the body) > BlockStatement — a
+   *      BARE lexical block whose only job is to scope `peaceCausal`. There is
+   *      no `if` anywhere above it, and the treaty assignment sits at body
+   *      level with no block at all. Both run on every path that reaches the
+   *      merge below, which is precisely why eslint could prove the two
+   *      initializers dead in the first place.
+   *
+   *   2. AND EVEN IF ONE WERE CONDITIONAL, `undefined` AND `[]` ARE THE SAME
+   *      ARGUMENT AT THIS CONSUMER. `mergeWarCoalitionEvidence(...groups)`
+   *      iterates `Array.isArray(group) ? group : []`, so a missing group
+   *      contributes exactly nothing — identical to an empty one BY
+   *      CONSTRUCTION, not by luck. The named hazard could not have fired.
+   *
+   * So preference (a) of the ruling applies and preference (b) — a disable
+   * comment — is not reached: the declarations keep their line count and lose a
+   * default that was never read and that described a dataflow which does not
+   * exist. A same-seed WHOLE-PIPELINE hash over three rule sets × two seeds is
+   * byte-identical across this change, and a negative control proves the
+   * harness can see this merge.
+   */
+  let treatyCoalitionEvidence;
+  let reasonCoalitionEvidence;
   // applied.worldState already carries this tick's posture/memory stamp:
   // applyWorldPulseOutcomes refreshes ONCE after outcomes land (the same
   // inputs this duplicate call used to re-derive byte-identically).
