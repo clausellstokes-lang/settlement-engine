@@ -386,8 +386,13 @@ export function conquestHistoryBandFor(worldState, settlementId) {
 }
 
 /** A 0..1 malice reading, folded onto the closed moral ladder.
+ *
+ *  EXPORTED for WR-10's observer-axis judgment (`sovereigntyIntent.js`): J-WR-10
+ *  forbids a second spelling of an existing concept, and this is the estate's one
+ *  moral ladder. Nothing else about the export changes — the three call sites below
+ *  are untouched and the word set is unchanged.
  *  @param {number} malice01 @returns {string} */
-function natureWordFor(malice01) {
+export function natureWordFor(malice01) {
   if (!Number.isFinite(malice01)) return 'unknown';
   return malice01 >= 0.67 ? 'malicious' : malice01 <= 0.33 ? 'benevolent' : 'balanced';
 }
