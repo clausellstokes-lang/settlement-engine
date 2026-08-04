@@ -1808,3 +1808,290 @@ land inside an already-red walker. `warDeployment.js` / `warSiegeVerdict.js` /
 **THE WAR LANE'S BUILD OBLIGATIONS ARE NOW COMPLETE** pending: the four STOP items above,
 the seven parked bands, the flag lighting, the cert row behind WR-8's +32-byte fork, and
 WR-10's wiring behind a §4 lifecycle declaration.
+
+---
+
+## ⭐⭐ WR-10r — THE RATCHET-ATTRIBUTION REPAIR, AND THE WR-10 ROW'S OWED
+## AMENDMENTS (lane WR-10r, 2026-08-04) @ `e3d98512` + `454967e0`. The WR-10 row
+## above is NOT rewritten — protocol step 2, the WZ-5r precedent — this section is
+## the correction that rides beside it. The adversarial verifier CONFIRMED WR-10's
+## architecture, its per-cell byte-identity, all nine mutants and the TR-5
+## degradation contract, then REJECTED on three ratchet defects and two unrecorded
+## obligations. All five are closed here; the lane stands.
+
+**HOW ATTRIBUTION WAS DONE, because the defect being repaired IS an attribution
+defect.** Every claim below is a violation-ROW comparison against the pre-WR-10 base
+`fc9534a4` (= `f9a7ddea^`), extracted with `git archive` into a scratchpad tree so the
+working copy was never touched. Naming a walker "red" or "green" says nothing in this
+tree — all three walkers were ALREADY red at base from other lanes' debt, and two of
+them still are. What a wave owes is that its OWN rows are zero, and that is what is
+measured.
+
+### THE THREE RATCHET DEFECTS — CLOSED
+
+**DEFECT 1 — `proseNumerics`, five rows, all `floatInterpolation`.** WR-10's receipts
+interpolated raw 0..1 scalars (`sovereigntyAppraisal.js:342`,
+`sovereigntyBundle.js:244/:341/:344/:346`). The baseline sat AT its reviewed ceiling and
+was NOT regenerated; the receipts learned to speak instead. Every scalar in a sentence
+is now its BAND, through `sovereigntyValueBand` — the ladder the read already carried.
+
+| measurement (the walker's own scanner over `src/`) | rows |
+| --- | --- |
+| pre-WR-10 base `fc9534a4` | 410 |
+| WR-10 at `ac377738` | 415 |
+| after `e3d98512`, INCLUDING the four WR-10 leaves | 410 |
+| after `e3d98512`, EXCLUDING the four WR-10 leaves | 410 |
+
+The two post-repair hit lists are ELEMENT-WISE identical to the base's 410 (md5
+`14220c06755a76652828026fcadf2835` on both dumps), so the lane contributes zero rows
+AND moved no legacy row's line address. **The 9 rows by which the base itself exceeds
+the committed 401-row baseline are OTHER LANES' and are left alone** — as is the
+`occupation.js:852 is no longer a source line` identity failure, which is pre-existing
+(the file is md5-identical at base and at HEAD and has not been touched since).
+
+⚠ **BANDING IS LOSSY, AND ONE CLAUSE SHAPE HAD TO CHANGE BECAUSE OF IT.** Naming BOTH
+bands in the `ceiling_reached` sentence would have produced *"prices the town great but
+the bundle would cost it great"* on a perfectly correct verdict — two numbers either
+side of a threshold routinely share a band. Each clause now names ONE band and states
+the comparison in words. This is a general hazard for any later lane translating a
+comparison into bands, and it is recorded as a class, not an incident.
+
+No existing pin asserted an old receipt string, so none needed updating. **Two NEW
+behavioural pins were added instead**, because the prose-numerics ratchet is a source
+SCAN and cannot see what a composer says at runtime: one per module, running every
+verdict road and every rung of the ladder, asserting the output carries no decimal —
+guard-the-guard both ways (the replaced sentence IS caught; honest whole counts are NOT
+banned).
+
+**DEFECT 2 — `clampPrimitiveBaseline`, two unregistered local clamps. CHAIR RULING
+CR-WR10-A, executed as written.**
+
+- **(a)** `sovereigntyBundle.js` DROPPED its hand-rolled `clamp01` for the kernel
+  primitive. Byte-neutral by construction: the two policies differ ONLY on a non-finite
+  argument and neither call site can produce one (`num01` guards with
+  `Number.isFinite`; the total is a sum of finite `round4` products). Its K3 row in
+  `envoyK3BeliefSeam.test.js` gained `../../kernel/math.js` and nothing else, disclosed
+  in the row's own comment because a K3 widening is a reviewed event by construction.
+- **(b)** `sovereigntyAppraisal.js` KEPT its local clamp and took a baseline row; the
+  ceiling widened 61 → 62 with the structural reason written into BOTH files — the
+  module is pinned at ZERO IMPORTS in `envoyK3BeliefSeam.test.js` and cannot import the
+  kernel without deleting the belief pin that makes the seam real.
+
+| measurement (files defining a local clamp but absent from the baseline) | rows |
+| --- | --- |
+| pre-WR-10 base | 11 |
+| WR-10 at `ac377738` | 13 |
+| after `e3d98512` | 11 |
+
+The two 11-sets are IDENTICAL — same eleven files, same order.
+
+⛔ **STOP-AND-REPORT: CR-WR10-A's PREMISE IS TRUE BUT INCOMPLETE, and the gate bar it
+implies is unreachable by a WR-10-scoped repair.** "Registering both would breach the
+61/61 ceiling" is correct. What the ruling did not know is that the walker's SET-EQUALITY
+test was **already red at base with eleven foreign unregistered rows** —
+`conquestDoctrineStage`, `conquestExecution`, `conquestFeasibility`, `conquestIntent`,
+`dispositionLedger`, `dispositionProfile`, `razing`, `razingExecution`, `razingWitness`,
+`warAllianceRisk`, `warCoalitionDecision`, all landed by WR-8 and the razing/disposition
+waves before WR-10 existed. So the ceiling test is now GREEN (62 ≤ 62) and the set-equality
+test remains RED with a violation set byte-identical to the base's. **JUDGMENT (vetoable):
+those eleven were NOT registered here.** Registering them would turn the walker green and
+silently move three other lanes' debt onto WR-10's ledger — the same attribution failure
+this repair exists to correct. **Chair item: the eleven belong to a WR-8/WZ sweep, and
+that sweep is not this lane's to run.**
+
+**DEFECT 3 — `mechanismLitCoverage`'s `hegemony` registry entry.**
+`sovereigntyTransferTerm.test.js:37` imports `SUBORDINATING_TERM_TYPES` from
+`worldPulse/hegemony.js` directly, so the module earned AUTO lit credit and the walker's
+own minimality assertion fired on its own instruction ("now has direct-import lit
+coverage — strike its registry entry"). Struck. The module is no less covered; it is
+covered by a stronger road.
+
+| measurement (`tests/property/mechanismLitCoverage.test.js`) | failures |
+| --- | --- |
+| pre-WR-10 base | 2 (modules ratchet, 30 rows · flags ratchet, `warEconomyEnabled`) |
+| WR-10 at `ac377738` | 3 (+ the `hegemony` registry assertion) |
+| after `e3d98512` | 2 (modules ratchet, 28 rows · flags ratchet, `warEconomyEnabled`) |
+
+Neither surviving failure names a WR-10 surface, and **the modules gap SHRANK by two**
+— WR-10's own suites gave two previously-uncovered modules direct-import credit.
+
+**RE-EXECUTED MUTANTS after the banding** (each applied to live source, run, then
+restored from a cp backup and proved md5-exact):
+
+- THE CLEARING MUTANT — the two-sided conjunction becomes a disjunction. **REDS 4**:
+  `ceiling_reached`, `reserve_unmet`, the value-matching example, and the new receipt
+  pin's non-vacuity check.
+- THE CEILING_REACHED MUTANT — arm (ii) deleted, back to the pre-correction
+  seller-reserve-only rule. **REDS 2**, first among them *"expected 'cleared' to be
+  'ceiling_reached'"*.
+- THE PROSE-NUMERIC REGRESSION MUTANT — `${value01}` put back into the appraisal
+  receipt. The new pin reds and quotes the offending sentence verbatim, and the
+  independent source scan reports the row. **The banding cost the conjunction pins
+  nothing and added a second detector.**
+
+### THE TWO UNRECORDED OBLIGATIONS — CLOSED
+
+**OBLIGATION 1 — SPINE REQUIREMENTS 13 + 14 (`SOL_QUEUE.md` §0), absent from every
+WR-10 commit and from the row above.**
+
+**ALIGNMENT LINE (requirement 13) — ENGAGED, on the MALICE axis, READ-side only, and
+UNBUILT.** Amendment S names the engagement itself: *"the world judges on the observer's
+axis (selling to a known razer is damnable)"*. That is not an alignment-empty wave — a
+sale's moral reading turns on the OBSERVER's own `malice01`, so the same buyer is
+condemned by one court and shrugged at by another, which is the identical shape WR-8's
+intent gate already uses. **WRITE-side: NONE, correctly** — this wave stores no alignment
+anywhere and gains no writer, satisfying never-store-a-derivable by construction (every
+module is a pure read). **Its consumers are listed among the RECORDED DEFERRALS below**,
+because the judging read is part of the Character-and-judgment clause that is unbuilt.
+⚠ Accuracy note for whoever builds it: the spine cites `alignmentOf(id)` at
+`beliefMap.js:915` / `informationStatecraft.js:584` and **those addresses have rotted** —
+`alignmentOf` exists only as an INJECTED callback (a `pulseKernel.js` closure threaded
+into `beliefMap.applyAllyIntelSharing`), and the exported read in worldPulse is
+`settlementAlignment(item, worldState)`. The band vocabulary to reuse rather than mint is
+`conquestDoctrineStage.js`'s `natureWordFor(malice01)` — `malicious` / `balanced` /
+`benevolent`.
+
+**EDIT-VERB STORY (requirement 14) — a RECORDED ENGINE-ONLY DECISION, for now.** This
+wave publishes **no player/DM-visible state at all**: five pure modules, zero wiring,
+zero persisted keys, nothing rendered, nothing in a save. Requirement 14 attaches to
+state, and there is none, so the honest answer is "engine-only, because the wave stores
+nothing" rather than a verb nobody can call. **DEFERRED TO THE WIRING WAVE, and owed
+there in full:** the moment the transfer WRITER lands (the edge rewrite, the grievance
+mint, the low-legitimacy start), it ships (a) a DM verb through the `operationRegistry`
+store-action lane with `gen:compendium-data` regenerated and approval-routing on the
+REPUDIATE_TREATY twin discipline, (b) edits-delta lifecycle survival round-trip pinned
+across regen/undo/import, and (c) a TYPED-PROPOSAL AI surface driving that same verb.
+This is a deferral with a name and a trigger, not silence.
+
+**OBLIGATION 2 — AMENDMENT S's CHARACTER-AND-JUDGMENT CLAUSE (war volume :1316-1323) IS
+UNBUILT AND WAS MISSING FROM THE DEFERRAL LIST — a dropped thread under this lane's own
+law.** It is moved INTO the recorded-deferral list now. The clause has four limbs; ONE
+landed:
+
+- ✅ **LANDED — the wartime firesale.** *"wartime firesales legal, discounted through
+  the buyer's belief of the seller's trajectory"* is built and pinned:
+  `SOVEREIGNTY_SELLER_TRAJECTORY_BANDS` (borrowed VERBATIM from `WAR_COST_TRAJECTORIES`,
+  `unknown` prefixed) and `FIRESALE_LOSING_MULT`, applied only on `losing` — `even` and
+  `winning` are not discounts in the other direction, because a desperate BUYER is a
+  different mechanism amendment S does not name.
+- ⛔ **DEFERRED — seller/buyer intent through WR-2 dispositions.** No disposition read
+  exists in any of the five modules.
+- ⛔ **DEFERRED — amendment-B coherence**, specifically `kinship_bond` OPPOSES the sale
+  while `mercantile` REACHES for it. Nothing consults either.
+- ⛔ **DEFERRED — G's books divergence** ("selling the family silver to save the seat,
+  receipted as whose books"). No `warSeatBooks` read exists here.
+- ⛔ **DEFERRED — the observer-axis judgment** ("selling to a known razer is damnable"),
+  which is also requirement 13's engaged consumer above.
+
+All four deferrals ride with the transfer WRITER in the wiring wave, behind the same §4
+lifecycle declaration item 3 of the row above already blocks on. **Deliberately deferred
+— documented, not a bug to re-find.**
+
+### CORRECTIONS TO THE WR-10 ROW ABOVE
+
+**TWO OFF-BY-ONE SIZE FIGURES.** The row states "eligibility (95/800) and the geographic
+bound (105/800)". Re-measured with the enforcer's OWN `eslint` `Linter` under
+`max-lines({ skipBlankLines: true, skipComments: true })` — the identical measurement
+`tests/lint/sizeBaseline.test.js` performs, so the enforcer and the census cannot
+disagree:
+
+| module | row said | MEASURED |
+| --- | --- | --- |
+| `sovereigntyAppraisal.js` | 157/800 | **157** ✅ |
+| `sovereigntyBundle.js` | 165/800 | **165** ✅ |
+| `sovereigntyAssets.js` | 95/800 | **94** |
+| `sovereigntyReach.js` | 105/800 | **104** |
+
+(Neither file changed in this lane; the two figures were simply off by one when written.
+None of the four is near its 800 ceiling and none carries a size-baseline entry.)
+
+**A THIRD CORRECTION, THIS ONE TO AN IMMUTABLE COMMIT BODY.** `454967e0`'s subject line
+says the CPL-ordered amendment row was "ordered eleven days ago". It was ordered on
+**2026-08-02**, i.e. TWO days before it landed — `DESIGN_FP_COUPLINGS.md`'s R4 block
+carries that date. The commit message cannot be rewritten, so the correction lives here,
+which is what this ledger is for.
+
+**A SIGNATURE DEVIATION FROM THE VOLUME, DISCLOSED (vetoable).** The war volume's
+§5 spec writes `appraiseSettlementAsset(assetId, appraiserId)` — TWO POSITIONALS. The
+built function takes **ONE OPTIONS OBJECT** with `assetId` / `appraiserId` fields
+alongside the five band fields. It is defensible and was defensible when written: the
+read needs SEVEN inputs, five of which are optional banded words, and a seven-positional
+call is unreadable and re-orderable at every call site. It also makes the K4 rule visible
+at the seam — two courts are two calls with two DIFFERENT objects, and nothing about the
+shape invites a merged third. **But it was never disclosed, and a spec signature is a
+contract.** Recorded here for veto; if the chair prefers the volume's spelling, the fix is
+a one-line wrapper, not a rewrite.
+
+### CHAIR RULINGS RECORDED
+
+**CR-WR10-A (2026-08-04) — THE CLAMP FORK.** (a) `sovereigntyBundle.js` migrates to the
+kernel clamp and its K3 import list amends by exactly that one entry, disclosed. (b)
+`sovereigntyAppraisal.js` keeps its local clamp, gains its baseline row, and the ceiling
+widens 61 → 62 with an in-file rationale naming the K3 zero-import pin as the structural
+reason. Shrink-only spirit preserved: one justified row, documented in both the source
+and the ratchet. **Executed at `e3d98512`.** See the STOP above for the part of its
+premise that measurement corrected.
+
+**CR-WR10-B (2026-08-04) — THE TWIN NOTES RECONCILED.** The WAR volume's degraded-bundle
+component list (streams/stores/allyship/settlements/**peace**) is CORRECT; `peace` is
+load-bearing, because the cession rider is why WR-10 sequences after WR-7 at all.
+`docs/DESIGN_FP_TRADE.md` Seam One is amended to carry it, marked as a chair
+reconciliation with the date. PIN 6 of `sovereigntyBundleWr10.test.js` correspondingly
+TIGHTENS from a recorded-divergence pin to a plain equality. The same ruling covers the
+CPL-ordered war-volume §3 row (`DESIGN_FP_COUPLINGS.md`:1875-1881) that was never landed:
+it is authored now under §3's flag-dependency ruling as WR-10's SECOND, CROSS-PROGRAM
+lit-precondition (GR-3 mints the trade-rights rows, TR-5 lands their executors), and the
+row states why it is the table's one SOFT precondition besides WR-1's sunk-cost
+fallback — a dark FLAG makes a mechanism silent, an unbuilt TERM FAMILY makes a component
+UNNAMEABLE. **Executed at `454967e0`.**
+
+⚠⚠ **A HAZARD CAUGHT WHILE WRITING THAT PIN, and it is a class.** PIN 6 reads each volume
+with `exec`, which returns the FIRST match. A volume that grew a SECOND degradation
+sentence — an amendment row restating the list, which is EXACTLY what the §3 row above
+was first drafted to do — would have silently RETARGETED the pin onto the new sentence
+and gone on asserting "twins" about two sentences nobody compared. The pin now asserts
+each volume states the list **exactly once**, the §3 row points at §5's note instead of
+repeating it, and the guard is mutant-proven (*"the war volume states it exactly once:
+expected 2 to be 1"*). **Any first-match document pin in this estate has this hole.**
+
+### GATES (all executed at `454967e0` unless noted)
+
+`sovereigntyAppraisalWr10` · `sovereigntyBundleWr10` · `sovereigntyMarketReadsWr10` ·
+`sovereigntyTransferTerm` · `envoyK3BeliefSeam` — **GREEN**, 67 tests over the four
+re-run files with zero failures (88 over seven files including the walkers at
+`e3d98512`). `clampPrimitiveBaseline` ceiling test GREEN at 62. `typecheck:domain:strict`
+**1313 of ceiling 1313** (met, unchanged). Any-cast baseline unchanged (its two reds are
+pre-existing and name no sovereignty surface). `eslint` clean on all twelve authored
+files. `npm run build` exit 0 → postbuild prerender wrote **314** static route documents
+→ `npm run smoke:boot` **PASS at 473/473 chunks**. `verify:dist` 15 pre-existing reds,
+**zero** naming a sovereignty surface. `python3` byte-scan clean on every authored file
+(no NUL, no control bytes, no CR, trailing newline present).
+
+**THE `tests/lint` VIOLATION-ROW DIFF.** 32 failures across 11 files at HEAD. Across the
+entire failure log the token `sovereignty` appears **exactly once**, and that occurrence
+is the `clampPrimitiveBaseline` row for `sovereigntyAppraisal.js` appearing as CONTEXT on
+both sides of the diff — i.e. the CR-WR10-A(b) registration doing its job, not a
+violation. **WR-10 contributes zero rows to every walker in `tests/lint`.** Of particular
+note, `negativeAssertionAnchor.walker.test.js` carries 67 un-anchored rows and names no
+sovereignty file: the new negative assertions added by this lane all carry `// anchored:`
+and are correctly credited.
+
+### AN INCIDENT, RECORDED RATHER THAN SMOOTHED
+
+While restoring the SECOND-degradation-sentence mutant, the implementer used
+`git checkout-index -f --` on the single path instead of the cp backup the §10 protocol
+requires. It discarded the §3 amendment paragraph along with the mutant, because that
+paragraph was uncommitted. **Nothing foreign was touched** — the pathspec named one file,
+that file carried no WIP but this lane's, and it landed exactly on HEAD content — and the
+paragraph was re-authored and re-verified before the commit. The lesson is the protocol's
+own, and it is why the rule is written as an absolute: **a checkout-family command cannot
+tell a mutant from real work.**
+
+### WHAT THIS LANE DID NOT TOUCH
+
+The four STOP items in the WR-10 row above stand as written, **except** item 1 (the twin
+notes), which CR-WR10-B closes, and item 2 (the CPL-ordered amendment row), which
+CR-WR10-B lands. Items 3 (no §4 canonical-model entry / no Lifecycle-paths clause) and 4
+(the cert row behind WR-8's +32-byte fork) are UNCHANGED and still owner/chair-held. The
+seven parked bands, the flag lighting, and WR-10's wiring are untouched. No golden moved,
+no flag was lit, no band was ratified, nothing was pushed.
