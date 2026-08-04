@@ -1059,3 +1059,167 @@ printing an "IDENTICAL" that proved nothing at all. The same shape bit the failu
 BSD `sed` does not support `\+`, so the first normalization left millisecond timings in and
 reported a difference that was pure noise. **A diff of two empty streams is a green light
 with no traffic behind it; assert both sides are non-empty before believing one.**
+
+---
+
+## WR-9c — THE SIX FORCES (lane WR-9c, 2026-08-04) @ `7a3c51ef`. Amendment L's
+## "six forces audited" stops being a sentence and becomes six graded cells —
+## `src/domain/certification/warConvergenceForces.js`, composed INSIDE the array
+## `evaluateWarConvergenceInstrumentation` already returns.
+## `behavioralContract.js` is BYTE-IDENTICAL (md5 `14ce04f1…`, still 795 of 800).
+
+**THREE VERDICT STATES, BECAUSE TWO WERE NOT ENOUGH.** A force answers PASS, FAIL or
+**UNOBSERVED**, and `passed` is exactly `state === 'PASS'`, so a consumer reading only the
+boolean still gets the honest answer. UNOBSERVED carries a CLOSED reason:
+`no_substrate_in_tree` (nothing in the engine can produce the reading),
+`no_evidence_carried` (the address exists, no receipt filled it), `insufficient_spread`
+(evidence arrived that cannot express the claim), `vocabulary_drift` (a graded key had no
+address). "The world did not do this" and "nothing could ever have measured this" are
+opposite repairs and never share a bucket — `warEndingClassifier.js`'s own law, applied one
+level up.
+
+### ⚠️⚠️ CR-WR9-D (chair ruling OWED — THE BRIEF'S FORCE-2 PREMISE WAS FALSE).
+
+The WR-9c brief recorded that force 2's "P4 capability floor" **"returned ZERO greps under
+`cannotCampaign` / `capabilityCollapse` / `campaignFloor` / `CAMPAIGN_FLOOR` and may not
+exist as a declared floor"**, and ruled that the cell must **state that absence as its
+finding** ("that absence is ITSELF the finding the acceptance harness must surface").
+
+**RE-MEASURED AT `43b3195b`, THE FLOOR EXISTS.**
+`src/domain/worldPulse/demographicsWar.js` — whose docstring line one reads
+"WAVE P4 (THE WORLD'S HAND)" — declares `WAR_DEMOGRAPHIC_TUNING.CAPABILITY_FLOOR`,
+`warCapabilityOf` clamps `capability01` to it, and `warCapabilityClause` speaks the collapse
+sentence ("this realm cannot feed a season in the field") within 0.05 of it. **The brief's
+grep set simply did not contain the constant's real spelling** — `CAMPAIGN_FLOOR` was
+searched, `CAPABILITY_FLOOR` was not.
+
+**WHAT WAS BUILT INSTEAD, AND WHY.** Authoring "no declared floor exists" into the
+acceptance harness would have planted a FALSE receipt in the one instrument whose whole job
+is to be believed. Force 2 therefore **grades reachability** — the collapse state must be
+reached at least once and must not be the ordinary condition — and a pin imports the real
+constant so the correction cannot be re-lost. **This is the WZ-3 class again** (a chair
+ruling built on a measurement the tree disproves), and it is recorded here rather than left
+in a transcript. ⛔ **VETOABLE:** if the chair wants the absence-claim cell anyway, it is one
+edit — but it would be an assertion the tree contradicts.
+
+### THE SAME RE-MEASUREMENT MOVED FORCE 5 AND CONFIRMED FORCE 3.
+
+- **FORCE 5 has substrate, not a hole.** `peaceTermsCoalition.js` mints the typed
+  `coalition_separate_peace` fact and `peaceTerms.js` emits it from THREE sites (`:386`,
+  `:922`, `:1057`); `coalition_fracture` is a first-class peace reason. What the tree has
+  never had is the COUNT — a collector obligation, not a substrate absence — so this cell
+  gets an address and answers `no_evidence_carried` until WR-9d fills it.
+- **FORCE 3 IS THE ONE TRUE ABSENCE.** A normalized seat-transition row
+  (`npcLadderState.js:694-732`) carries `{id, fromRulerId, toRulerId, cause, tick}` plus
+  optional faction and `warDemand` fields. **NOT ONE of them names a war, its age, or its
+  opening tick**, so no census can pair a transition with a duration. The cell deliberately
+  has **no address at all** — an address is a promise a collector could fill it.
+
+### ⚠️⚠️ THE CERTIFICATE CANNOT PASS WHILE FORCE 3 IS UNOBSERVED, AND THAT IS THE FINDING.
+
+These ids carry the `war_convergence.` prefix, which is what puts them in the group that
+earns `war_convergence_instrumented` (`behavioralContract.js` `CHECK_GROUP_PROPERTIES`), and
+UNOBSERVED is non-passing. **The property is therefore unearnable until the ENGINE grows the
+substrate.** A REAL, DISCLOSED VERDICT SHIFT: the shipped release fixture used to earn the
+whole certificate (`automatedPassed true`, `failures []`) and now reports **exactly one
+failure**, and `claimBoundary` moves from "eligible for an operator-reviewed manifest entry"
+to "not eligible". The pin keeps its teeth by asserting the failure set **EXACTLY** rather
+than skipping the cell, so a second failure lands as loudly as the old `toEqual([])` did.
+Closing force 3 needs a new field on a **PERSISTED** record — owner-gated, and forbidden to
+this wave by WR-9's own lifecycle clause ("this wave adds NO persisted world state").
+
+### OBSERVATION SCHEMA 3 -> 4, under the module's own exact-bump law.
+
+`forceEvidence` is the address the fillable cells grade: home-front samples by duration
+band, capability readings vs collapses, the compromise widening SERIES, and the
+fragmentation/pairwise-peace pair. A v3 observation has no address for any force reading, and
+this module refuses to grade a shape it cannot read. **NOTHING IS ORPHANED, RE-MEASURED NOT
+ASSERTED:** `git ls-files artifacts` is EMPTY and `grep -l warConvergence -r artifacts/`
+returns NOTHING, so no observation of any version exists on disk.
+
+### JUDGMENTS THIS LANE MADE (vetoable, mine not the chair's).
+
+- **J-WR9C-1 — ZERO ENGINE IMPORTS IN THE LEAF, COUPLING ENFORCED IN THE SUITE.** The forces
+  module declares its own copies of two engine vocabularies rather than importing worldPulse
+  into the behavioral oracle's bundle — a certification module dragging the demographics
+  chain in is how the dist chunk-cycle TDZ class starts. The coupling is enforced in
+  `tests/domain/warConvergenceForces.test.js` against the REAL modules, so a rename in
+  `warCosts.js` or a retune in `demographicsWar.js` reds there instead of silently splitting
+  one vocabulary into two.
+- **J-WR9C-2 — THE ADDRESS AND ITS WALL LIVE IN THE FORCES LEAF.** `createEmptyWarForceEvidence`
+  and `validateWarForceEvidence` ship with the cells that grade them, and
+  `warConvergenceContract.js` calls both. The module's "address wall and envelope wall in one
+  module" doctrine is satisfied — that module is just the one that grades it — and the
+  contract file stays at 398 effective lines.
+- **J-WR9C-3 — N1 IS REPAIRED BY DELETING THE COUNT, NOT BY CORRECTING IT.** The ruling asked
+  that the forces-module name's tree-occurrence count be corrected from one to TWO. Landing
+  the module makes any such count wrong again immediately (file + import + tests + this row),
+  so the sentence is restored to the PRESENT tense and the occurrence-counting clause is
+  removed. A count of mentions is a claim that rots on the next import.
+- **J-WR9C-4 — THE SHIPPED FIXTURE'S ENDINGS MIX IS RESHAPED, NOT ITS PINS.** The flat
+  one-each mix put HALF the corpus on a terminal road and could never satisfy force 6's
+  "rare but present"; a fixture nobody can pass is not a passing fixture. The new counts keep
+  every earlier assertion true (eight distinct keys, no dominant road, both sack roads live
+  at 1:1) and put the terminal share at 4/22.
+
+**PINS (+31 across two files, EVERY STATE OF EVERY CELL).** Totality: exactly six rows in
+declared order, every `state` in the closed vocabulary, `passed` never disagreeing with
+`state`. Per force: PASS, FAIL and UNOBSERVED all reached and all distinct. Coupling: force
+1's bands character-identical to `WAR_HOME_FRONT_DURATION_BANDS`, force 6's terminal keys a
+strict subset of `WAR_ENDING_KEYS`, force 2's threshold naming the real `CAPABILITY_FLOOR`.
+Wiring: a malformed force address travels the OBSERVATION validator into
+`war_convergence.receipt_shape`. N2: `duration_measured` now says in place that a green there
+does NOT mean the instrument ran. N4: the STRING spelling `'Infinity'` routes to `unresolved`
+and `'-Infinity'` to `unmeasured` — `JSON.stringify(Infinity)` is `null`, so the WORD is the
+only spelling that survives a receipt round trip, and WR-9r pinned only the numeric arm.
+
+**MUTANTS — FIVE EXECUTED, cp-backed, restored `cmp`-exact** (md5 `adc8c179…` on
+`warConvergenceForces.js` and `84d8e2a2…` on `warConvergenceContract.js` before and after
+every one). **M-1** neutering force 4's narrowing detector reds ONLY the narrowing mutant pin
+(1 of 65). **M-2** force 3 claiming PASS reds 6. **M-3** force 6 swallowing a missing terminal
+key reds ONLY the drift pin (1 of 65). **M-4** letting UNOBSERVED read as a pass reds 6.
+**M-5** removing the force-address wall from the observation validator reds ONLY the wiring
+pin (1 of 65).
+
+**GATES (every number executed this lane).** Focused battery **5 files / 97 tests green**.
+**tests/lint failure-set diff vs base EMPTY** — 32 failed / 699 passed / 731 total across 11
+files at base AND after, **64 normalized failure lines on BOTH sides**, both sides asserted
+non-empty before the diff was believed. `sizeBaseline`, `mutationCoverageManifest`,
+`controlBytes`, `copyCorruption` and `contractTestAntiVacuity` green (5 files / 29 tests).
+`[domain-strict] ✓ no strict-type regressions (1313 errors, ceiling 1313)` — honestly met and
+left met. Any-cast: `warConvergenceForces.js` appears in **ZERO** findings. eslint clean on
+all four authored files. `npm run build` green (built in 17.35s) + prerender **314 static
+route documents**; `smoke:boot` **PASS (473/473 chunks)**. Size: `warConvergenceForces.js`
+**365** effective, `warConvergenceContract.js` **398** effective, both far under 800.
+Byte-scan: **zero control bytes** in all four authored files.
+
+**SAME-SEED NOT RUN, AND THE DIFF RECEIPT IS WHY, WITH BOTH SIDES SHOWN.**
+`git diff --name-only` listed exactly two tracked files plus two untracked new ones;
+`git diff --name-only -- src/domain/worldPulse/` was **EMPTY (0 files)** and
+`git status --porcelain src/domain/worldPulse/` was **EMPTY (0 files)**. The non-empty side is
+quoted so this is not the empty-vs-empty green that bit WR-9r. No engine path was touched, so
+no seed can have moved.
+
+### WHAT REMAINS, AND WHO HOLDS IT.
+
+- **WR-9d — THE COLLECTOR (owed, not started here).** `whole-world-soak.mjs:632` still writes
+  `createEmptyWarConvergenceObservation()`. Its obligations: **N3 collector totality** (every
+  counted close in EXACTLY ONE duration cell, sum of five cells === the close count, with the
+  skip-an-unreadable-close mutant); **CR-WR9-C** (feed ALL instrumented cases, release AND
+  research, with the unresolved wall keyed to each case's OWN horizon —
+  `behavioralContract.js:1051-1054` still feeds `releaseCases` only, and the SIZE LAW allows
+  it net +4 lines there); the **DECLARED-SAMPLE** disclosure (deciding-term reads ride the
+  pulse RECORD at `pulseKernel.js:1790`, so the histogram is a **1-in-52 sample** and must say
+  so in the receipt); and filling the four `forceEvidence` slots this lane opened. The two
+  source-string pins at `tests/ops/storyMixDivergence.test.js:120` and `:127` name the exact
+  lines that edit will replace and must be repaired in the SAME edit.
+- **OWNER-HELD, untouched by this lane:** the acceptance VERDICT itself; the soak redo; the
+  `conquestDoctrineEnabled` cert-row arm; the deciding-term sampling as a declared limitation;
+  every band in `WAR_CONVERGENCE_FORCE_TUNING` (RAW-AUTHORED, UNSOAKED, UNRATIFIED, and none
+  of them lives in `proposedSoakBands.js` because that gate demands a signature this wave
+  cannot forge).
+- **DELIBERATELY DEFERRED — DOCUMENTED, NOT A BUG TO RE-FIND:** force 3's substrate. Building
+  it means adding a war identity or a war age to a PERSISTED seat-transition record, which is
+  an owner-gated persistence-shape decision AND is forbidden outright by WR-9's lifecycle
+  clause. Until then the acceptance harness reports amendment L's obligation as unmet, which
+  is the correct answer.
