@@ -2,10 +2,20 @@
  * ShaftWrap.jsx — one turn of silk whipping on the shaft.
  *
  * From the owner's reference photo: two narrow glossy RED-BROWN thread bands ride
- * the shaft, one ahead of the fletching cluster and one behind it, framing it. On a
- * real arrow they are what actually holds the fletching down, which is why they must
- * sit on BARE BARREL immediately outside the feathers rather than on top of them —
- * a wrap painted over a vane would be binding nothing.
+ * the shaft, one ahead of the fletching cluster and one behind it, bracketing it. On a
+ * real arrow they are what actually holds the fletching down, which is why they sit on
+ * BARE BARREL immediately outside the band's box rather than across the feathers —
+ * a wrap painted over the vanes would be binding nothing.
+ *
+ * ⚠️ BUT IT MUST PAINT OVER THE CORNER IT BINDS, AND THAT IS WHY IT CARRIES A
+ * z-index. The band's cells are parallelograms seated so their seams cross the lane
+ * divisions at the LABEL's height, which leaves the leading corner of the first cell
+ * (and the trailing corner of the last) poking a few px outside the band's box at the
+ * quill line. A whipping that passed UNDER those corners would show the feather
+ * sticking out past its own binding. `zIndex: 1` lifts both wraps over the band's
+ * paint layer (`zIndex: 0`) so the thread crosses the corner exactly as it does on a
+ * real arrow. It cannot touch the labels: they sit inside the band's box and the wraps
+ * sit entirely outside it.
  *
  * ⚠️ IT IS OUT-OF-FLOW PAINT, LIKE EVERYTHING ELSE ON THIS BAR. The wrap is
  * absolutely positioned OUTSIDE the fletching band's box (a negative horizontal
@@ -57,7 +67,8 @@ export default function ShaftWrap({ side }) {
         backgroundColor: WRAP,
         backgroundImage: [TURNS, THREAD].join(', '),
         pointerEvents: 'none',
-        zIndex: 0,
+        // Over the band's paint (zIndex 0), never under it — see the binding note.
+        zIndex: 1,
       }}
     />
   );

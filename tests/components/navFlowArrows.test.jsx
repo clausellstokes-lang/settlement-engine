@@ -187,21 +187,26 @@ describe('desktop ribbon — the journey mark MOVED to the seam (LD-2)', () => {
     expect(labels).not.toContain('Welcome');
 
     // Second control: the journey mark EXISTS on this surface. ⚠️ IT HAS MOVED
-    // TWICE NOW. LD-2 took it out of the tabs and into a full-height chevron seam;
-    // V3 made that seam an angled fletch stroke; the owner's mockup refinement
-    // RETIRED the internal seam altogether and the mark became the SHINGLE — three
-    // goose vanes each lying over the next, their exposed slanted edges stepping
-    // rightward. Without this control the absence assertion below would pass just as
-    // happily on a ribbon that had lost the journey mark entirely.
+    // THREE TIMES NOW. LD-2 took it out of the tabs and into a full-height chevron
+    // seam; V3 made that seam an angled fletch stroke; the owner's mockup refinement
+    // RETIRED the internal seam altogether and the mark became the SHINGLE; and the
+    // owner's FINAL correction reversed that shingle's direction. Without this control
+    // the absence assertion below would pass just as happily on a ribbon that had lost
+    // the journey mark entirely.
     const band = container.querySelector('[data-testid="nav-fletch-band"]');
     expect(band).toBeTruthy();
     const paint = band.querySelector('[data-testid="nav-fletch-band-paint"]');
     expect(paint).toBeTruthy();
-    // The cascade is the mark: three vanes, painted trailing-first so each earlier
-    // one laps the next (see navFletching.test.jsx block 2 for the geometry).
+    // ⚠️ THE CASCADE IS THE MARK, AND ITS DIRECTION IS THE DECLARATION. The three
+    // cells are painted in READING ORDER, so the z-order ASCENDS INTO REALM: Library's
+    // leading edge lies over Create's trailing edge and Realm's over Library's. That
+    // is what makes each tab read as FEEDING INTO the next, which is exactly what the
+    // retired arrows used to say. Painted the other way (as the cut before this one
+    // did) the stack still shingles and the flow points backwards, so the ORDER is
+    // pinned here and not merely the presence of three vanes.
     expect([...paint.querySelectorAll('[data-testid^="nav-fletch-vane-"]')]
       .map((g) => g.dataset.testid))
-      .toEqual(['nav-fletch-vane-2', 'nav-fletch-vane-1', 'nav-fletch-vane-0']);
+      .toEqual(['nav-fletch-vane-0', 'nav-fletch-vane-1', 'nav-fletch-vane-2']);
     // Both retired spellings are gone from the surface, not merely unreferenced.
     for (const kind of ['fletch', 'chevron']) {
       expect(container.querySelectorAll(`[data-divider-kind="${kind}"]`).length).toBe(0);

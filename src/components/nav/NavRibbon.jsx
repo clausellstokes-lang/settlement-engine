@@ -15,11 +15,18 @@
  * "feathers on a plank" failure the directive exists to avoid — because the lap was
  * authored per-cell in each cell's own stretched coordinate space and came out at
  * about two screen pixels while the seam between them was ten. There is now ONE
- * continuous band (FletchBand.jsx): one SVG over the whole cluster, three vanes
- * SHINGLED in one coordinate space, each lying over the next with a soft contact
- * shadow at every lap, and NO internal seams at all. The laps ARE the seams. The
- * repeated exposed slanted edges step rightward, and that cascade is what says
- * Create → Library → Realm.
+ * continuous band (FletchBand.jsx): one SVG over the whole cluster, three cells
+ * SHINGLED in one coordinate space, with a soft contact shadow at every lap and NO
+ * internal seams at all. The laps ARE the seams.
+ *
+ * ⚠️⚠️ AND THEN THE OWNER CORRECTED THE DIRECTION AND THE SHAPE (final, 2026-08-03
+ * night). The Z-ORDER ASCENDS INTO REALM: Library's leading edge lies OVER Create's
+ * trailing edge and Realm's over Library's, so Realm is topmost, Create bottommost,
+ * and every tab reads as FEEDING INTO the next — Create → Library → Realm. The cut
+ * before this one stacked them the other way and the cascade pointed BACK at Create.
+ * The cells are also SIMPLE SLANTED QUADS now, filled edge to edge with the goose
+ * treatment; the tapered points and curved backs that preceded them read as three
+ * torn tabs. FletchBand.jsx owns both corrections and the reasoning behind them.
  *
  * ⚠️ THE THREE FLETCH CELLS ARE EQUAL-WIDTH, AND THAT IS GEOMETRY, NOT TIDINESS.
  * The band's vanes live at fixed thirds of one coordinate space, so a label whose
@@ -68,13 +75,16 @@
  * wrong. No ancestor may introduce `overflow: hidden` either. The pin asserts the
  * chain.
  *
- * ACTIVE STATE. The old affordance was a gold underline at label height; it has been
- * translated three times and never replaced. The active fletch LIGHTENS — its sheen
- * bands brighten to FLETCH_SHEEN_LIFT — brightens its label to PARCH, and takes the
- * gold stroked along the vane's OWN lower silhouette. That is three visual channels
- * plus aria-current="page", none of them colour alone. Weight is deliberately NOT
- * among them: every fletch label is 600 under the BALANCE LAW. The plain reference
- * tabs keep the underline register, re-inked for the honey barrel.
+ * ACTIVE STATE, in the owner's own words: a BRIGHTENED CELL plus a GOLD UNDERLINE.
+ * The whole quad's fill steps one rung up the goose ladder and its sheen bands lift
+ * with it, the label brightens to PARCH, and the gold is stroked along the cell's OWN
+ * lower edge — so it hangs below the bar with the feather it belongs to instead of
+ * ruling across the tab. That is three visual channels plus aria-current="page", none
+ * of them colour alone. ⚠️ The brightening is built ENTIRELY from tones already in the
+ * ladder, which is why the AA floor did not move: the lightest thing a label can land
+ * on is still FLETCH_SHEEN_LIFT. Weight is deliberately not a channel: every fletch
+ * label is 600 under the BALANCE LAW. The plain reference tabs keep the underline
+ * register, re-inked for the honey barrel.
  *
  * THE FLOW MARK MOVED, IT DID NOT DIE. NavFlowArrow no longer renders here; it still
  * draws on the MOBILE bottom nav, where cells have no seam to carry a divider. Both

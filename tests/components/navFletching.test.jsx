@@ -101,7 +101,8 @@ import {
   SHAFT_RIM, SHAFT_SHEEN, SHAFT_STOPS, SP, WRAP,
 } from '../../src/components/theme.js';
 import {
-  BAND, BAND_W, LANE, REACH, SHEENS, SHEEN_FLOOR, VANES, barbBuckets, unitHash,
+  BAND, BAND_W, LANE, REACH, RUN, SEAT, SHEENS, SHEEN_FLOOR, VANES, barbBuckets,
+  lean, unitHash,
 } from '../../src/components/nav/FletchBand.jsx';
 
 const H = vi.hoisted(() => ({
@@ -303,8 +304,8 @@ describe('1 — the fletching’s membership is DERIVED from the flow, never lis
   });
 });
 
-describe('2 — ⚠️⚠️ THE SHINGLE: each vane really LAPS the next, in one space', () => {
-  test('three vanes are drawn, from one geometry, in one coordinate space', () => {
+describe('2 — ⚠️⚠️ THE SHINGLE: three parallelograms, ascending into Realm', () => {
+  test('three cells are drawn, from one geometry, in one coordinate space', () => {
     const { container } = render(<App />);
     const svg = paint(container);
     expect(svg.tagName.toLowerCase()).toBe('svg');
@@ -314,60 +315,161 @@ describe('2 — ⚠️⚠️ THE SHINGLE: each vane really LAPS the next, in one
     expect(svg.getAttribute('preserveAspectRatio')).toBe('none');
     const groups = [...svg.querySelectorAll('[data-testid^="nav-fletch-vane-"]')];
     expect(groups.length).toBe(3);
-    // Every vane silhouette the module authored really is painted.
+    // Every cell silhouette the module authored really is painted.
     const drawn = [...svg.querySelectorAll('path')].map((p) => p.getAttribute('d'));
     for (const v of VANES) expect(drawn).toContain(v.closed);
   });
 
-  test('⚠️ EVERY VANE REACHES INTO THE NEXT LANE — the pin V3 did not have', () => {
-    // THE FAILURE THIS EXISTS FOR. V3's lap was authored per-cell in a stretched
-    // local space and resolved to ~2 screen px against a 10px seam, so the band
-    // rendered as three tabs. Here the whole band is one space, so "does Create's
-    // vane actually cross into Library's lane?" is a question about numbers this
-    // file can read — and the answer must be a substantial fraction of a lane, not
-    // a rounding error.
-    expect(FLETCH.lap).toBeGreaterThan(0);
-    for (const lane of [0, 1]) {
-      const pts = ONCURVE(VANES[lane].closed);
-      const reach = Math.max(...pts.map((p) => p.x)) - (lane + 1) * LANE;
-      expect(reach, `vane ${lane} reaches only ${reach} into lane ${lane + 1}`)
-        .toBeGreaterThanOrEqual(FLETCH.lap);
-      // …and the lap is a real shingle, not a hairline: at least a fifth of a lane.
-      expect(reach / LANE).toBeGreaterThan(0.2);
+  test('⚠️ EACH CELL IS A FULL PARALLELOGRAM — a simple slanted quad, no curves', () => {
+    // THE OWNER'S SECOND CORRECTION, AS GEOMETRY. The cut before this one drew
+    // complex feather silhouettes — a tapered leading point, a curved belly, a
+    // rounded trailing back — and the shipped bar read as three torn dark tabs with
+    // honey wood showing in the notches between them. A parallelogram cannot grow a
+    // notch. jsdom cannot see "that looks like a torn tab"; it CAN see a cubic
+    // segment in a path that is supposed to have none, so that is what is pinned.
+    for (const [lane, v] of VANES.entries()) {
+      // NO CURVE COMMANDS AT ALL. This is the pin that forbids the whole retired
+      // family of silhouettes in one line.
+      expect(v.closed, `cell ${lane} is not a straight-edged quad`).not.toMatch(/[CcQqSsTtAa]/);
+      const pts = ONCURVE(v.closed);
+      expect(pts.length).toBe(4);
+      const [tl, tr, br, bl] = pts;
+      // The top edge lies on the quill line, where the binding is; the bottom edge
+      // at the vane's full depth, well below the bar.
+      expect([tl.y, tr.y]).toEqual([0, 0]);
+      expect([br.y, bl.y]).toEqual([BAND, BAND]);
+      // BOTH slanted edges lean by exactly the same run — that is what makes it a
+      // parallelogram rather than a trapezoid, and it is why the gap between two
+      // adjacent cells is the same at every depth (see the next test).
+      expect(bl.x - tl.x).toBe(RUN);
+      expect(br.x - tr.x).toBe(RUN);
+      expect(tr.x - tl.x).toBe(br.x - bl.x);
+      // …and the lean is the COMB's own run, so a lap boundary is a barb line and
+      // never a cut across the grain.
+      expect(RUN).toBe(FLETCH.barbRun);
     }
-    // THE LAST VANE LAPS NOTHING — the band resolves at its own end rather than
-    // running off under the trail wrap.
-    expect(REACH(2)).toBe(0);
-    expect(Math.max(...ONCURVE(VANES[2].closed).map((p) => p.x))).toBe(BAND_W);
   });
 
-  test('⚠️ THE PAINT ORDER IS REVERSED, which is what makes the cascade point right', () => {
-    // Create's trailing region must lie OVER Library's leading edge, and Library's
-    // over Realm's. In SVG that is document order, so the vanes are painted 2, 1, 0
-    // and the LAST one in the DOM is lane 0. Painted in reading order the shingle
-    // would face the other way and the cascade would point back at Create.
+  test('⚠️⚠️ THE PAINT ORDER ASCENDS INTO REALM — the owner’s first correction', () => {
+    // Library's leading edge must lie OVER Create's trailing edge, and Realm's over
+    // Library's, so Realm is topmost and Create bottommost and every tab reads as
+    // FEEDING INTO the next. In SVG that is document order, so the cells are painted
+    // 0, 1, 2 and the LAST one in the DOM is Realm. The previous cut painted 2, 1, 0
+    // — every structural pin stayed green and the cascade pointed back at Create.
     const { container } = render(<App />);
     const lanes = [...paint(container).querySelectorAll('[data-testid^="nav-fletch-vane-"]')]
       .map((g) => Number(g.dataset.testid.split('-').pop()));
-    expect(lanes).toEqual([2, 1, 0]);
+    expect(lanes).toEqual([0, 1, 2]);
+    // Stated the other way round too, so a reader cannot mistake which end is on top.
+    expect(lanes[lanes.length - 1]).toBe(2);          // Realm paints last  → topmost
+    expect(lanes[0]).toBe(0);                          // Create paints first → bottommost
   });
 
-  test('the two depth cues are both present on every vane: contact shadow + edge-light', () => {
-    // These are the cues that make a lap read as one feather lying on another
-    // rather than as two flat shapes sharing a border. Neither is decoration: the
-    // shadow says "they touch", the edge-light says "this one is on top".
+  test('⚠️ EVERY CELL REACHES UNDER THE NEXT, and the gap cannot open at ANY depth', () => {
+    // THE FAILURE THIS EXISTS FOR. V3's lap was authored per-cell in a stretched
+    // local space and resolved to ~2 screen px against a 10px seam, so the band
+    // rendered as three tabs. Here the whole band is one space AND both edges of
+    // every quad lean by the same run, so the horizontal separation between cell i's
+    // trailing edge and cell i+1's leading edge is a CONSTANT — measured at the quill
+    // line and again at full depth, and required to be the same number both times.
+    expect(FLETCH.lap).toBeGreaterThan(0);
+    for (const lane of [0, 1]) {
+      const [, tr, br] = ONCURVE(VANES[lane].closed);
+      const [ntl, , , nbl] = ONCURVE(VANES[lane + 1].closed);
+      const atQuill = tr.x - ntl.x;
+      const atDepth = br.x - nbl.x;
+      // ⚠️ toBeCloseTo, not toBe: SEAT is a derived float, so the corner x's carry
+      // one ulp of noise. The CLAIM is the lap and its constancy, never the bit
+      // pattern — a strict-equality pin here would red on an unrelated retune of the
+      // comb and teach the next reader to weaken the pin instead of the tolerance.
+      expect(atQuill, `cell ${lane} does not reach under cell ${lane + 1}`)
+        .toBeCloseTo(FLETCH.lap, 9);
+      expect(atDepth, `cell ${lane}'s lap narrows with depth`).toBeCloseTo(atQuill, 9);
+      // …and it is a real shingle, not a hairline: at least a fifth of a lane.
+      expect(atQuill / LANE).toBeGreaterThan(0.2);
+    }
+    // THE LAST CELL REACHES UNDER NOTHING — Realm is topmost and has no successor.
+    expect(REACH(2)).toBe(0);
+  });
+
+  test('⚠️⚠️ THE SEAT: every seam crosses its lane division AT THE LABEL’S HEIGHT', () => {
+    // The pin that makes "each label centred in its cell's calm zone" true rather
+    // than hopeful. The seams are slanted, so "where is the boundary between Create
+    // and Library" has a different answer at every depth; the labels are laid out as
+    // equal thirds and read at ONE depth — the bar's vertical middle. Without the
+    // seat the seam sits lean(D/2) to the right of the lane division there, and at
+    // today's metrics that is more than the slack a cell has around its label, so the
+    // label would sit half on the cell beneath it at a different z.
+    const mid = CHROME.headerDesktop / 2;
+    for (const lane of [1, 2]) {
+      const [tl, , , bl] = ONCURVE(VANES[lane].closed);
+      // The leading edge, interpolated to the label's own depth.
+      const atLabel = tl.x + ((bl.x - tl.x) * mid) / BAND;
+      expect(atLabel, `cell ${lane}'s seam misses its lane division at label height`)
+        .toBeCloseTo(lane * LANE, 6);
+    }
+    // NON-VACUITY: the seat is a real, substantial shift — not zero dressed up as a
+    // derivation. Drawn without it every seam would land this far right of its lane.
+    expect(SEAT).toBe(lean(mid));
+    expect(SEAT).toBeGreaterThan(LANE * 0.05);
+  });
+
+  test('⚠️ THE FRAME squares the band’s two ends, and clips X ONLY', () => {
+    // A slanted OUTER edge cannot end a band cleanly: at one depth it falls short of
+    // the band's box and bare honey wood shows through in a triangle — a wood gap
+    // inside the band, the exact thing the directive forbids — and at the opposite
+    // depth it overshoots and the feather pokes out past its own whipping. The first
+    // cut of this file shipped both, about 10px each. The outer cells are therefore
+    // drawn LONGER than their lanes and the band is clipped to its own box.
+    const { container } = render(<App />);
+    const frame = paint(container).querySelector('[data-testid="nav-fletch-frame"]');
+    expect(frame).toBeTruthy();
+    // The reference really resolves to a clipPath in this SVG's own defs — an id
+    // typo here would silently disable the clip and the wedges would be back with
+    // every other pin green.
+    const clipId = frame.getAttribute('clip-path').replace(/^url\(#|\)$/g, '');
+    const framePath = [...paint(container).querySelectorAll('clipPath')]
+      .find((c) => c.id === clipId)?.querySelector('path');
+    expect(framePath, `clip-path url(#${clipId}) resolves to nothing`).toBeTruthy();
+    const pts = ONCURVE(framePath.getAttribute('d'));
+    const xs = pts.map((p) => p.x);
+    const ys = pts.map((p) => p.y);
+    // X: exactly the band's box, so the two ends come out square against the wraps.
+    expect(Math.min(...xs)).toBe(0);
+    expect(Math.max(...xs)).toBe(BAND_W);
+    // ⚠️ Y: OPEN. Clipping y here would undo the whole `overflow: visible` hang
+    // mechanism in one attribute — the vanes must hang free and the contact shadows
+    // must not be sheared off at the bottom.
+    expect(Math.min(...ys)).toBeLessThan(0);
+    expect(Math.max(...ys)).toBeGreaterThan(BAND);
+    // NON-VACUITY: the outer cells really do reach past the frame, else the clip
+    // would be cutting nothing and the wedges would be back.
+    expect(Math.min(...ONCURVE(VANES[0].closed).map((p) => p.x))).toBeLessThan(0);
+    expect(Math.max(...ONCURVE(VANES[2].closed).map((p) => p.x))).toBeGreaterThan(BAND_W);
+  });
+
+  test('the two depth cues are both present, and the shadow falls on the cell BENEATH', () => {
+    // These are the cues that make a lap read as one feather lying on another rather
+    // than as two flat shapes sharing a border. ⚠️ THE DIRECTION IS THE CLAIM, and it
+    // flipped with the owner's correction: the stack now ascends into Realm, so the
+    // cell a shadow must fall on lies to the LEADING side and every offset is
+    // NEGATIVE in x. Painted the old way the shadows would fall on the cells that are
+    // already on top of them and be invisible at every lap.
     const { container } = render(<App />);
     const groups = [...paint(container).querySelectorAll('[data-testid^="nav-fletch-vane-"]')];
     expect(groups.length).toBe(3);
     for (const g of groups) {
       // TWO shadows, tight + soft: one filter can be one or the other, not both,
       // and a single soft shadow between two nearly-tonal feathers is a smudge.
-      expect((g.style.filter.match(/drop-shadow/g) || []).length).toBe(2);
-      // The edge-light rides OUTSIDE the clip — it is this feather's own lit rim,
-      // so half of it must fall on whatever lies behind.
+      const offsets = [...g.style.filter.matchAll(/drop-shadow\((-?[\d.]+)px/g)]
+        .map((m) => Number(m[1]));
+      expect(offsets.length).toBe(2);
+      for (const dx of offsets) expect(dx, 'a shadow points away from the cell it laps').toBeLessThan(0);
+      // The edge-light rides OUTSIDE the clip — it is this cell's own lit rim, so
+      // half of it must fall on whatever lies behind.
       const rims = [...g.children].filter((c) => c.tagName === 'path'
         && c.getAttribute('stroke') === FLETCH_RACHIS);
-      expect(rims.length).toBe(2); // the leading cut and the trailing back
+      expect(rims.length).toBe(2); // the leading edge and the trailing one
       for (const r of rims) {
         expect(Number(r.getAttribute('stroke-opacity'))).toBeLessThan(1); // a whisper
         expect(Number(r.getAttribute('stroke-opacity'))).toBeGreaterThan(0);
@@ -376,69 +478,42 @@ describe('2 — ⚠️⚠️ THE SHINGLE: each vane really LAPS the next, in one
     }
   });
 
-  test('⚠️ the silhouette RAKES toward Realm — a fletch, never a shield or a tab', () => {
-    // ⚠️⚠️ THE PIN THIS LANE DID NOT HAVE AND NEEDED — THREE TIMES. Earlier cuts drew
-    // a symmetric shield, then squared the leading end off at the quill, then ran the
-    // trailing end almost straight down. Every structural pin passed each time, and
-    // the bar rendered three escutcheons, then three dark tabs, then one dark blob.
-    // jsdom cannot see "that looks like a badge"; it CAN see the geometry that makes
-    // it one, so the geometry is what is pinned, parsed from the path.
-    for (const [lane, v] of VANES.entries()) {
-      const pts = ONCURVE(v.closed);
-      expect(pts.length).toBeGreaterThanOrEqual(4); // not a vacuous parse
-
-      // 1. THE LEADING END IS A POINT ON THE QUILL, not a corner at depth. This is
-      //    the difference between a feather entering a binding and a rectangle.
-      const leadTip = pts.reduce((a, p) => (p.x < a.x ? p : a));
-      expect(leadTip.x).toBe(lane * LANE - FLETCH.back);
-      expect(leadTip.y).toBe(FLETCH.tipIn);
-      expect(leadTip.y).toBeLessThan(BAND * 0.1);
-
-      // 2. THE RAKE — deepest at the TRAILING end. That asymmetry IS the sweep
-      //    toward Realm, and a shield, being symmetric, cannot have it.
-      const deepest = pts.reduce((a, p) => (p.y > a.y ? p : a));
-      expect(deepest.y).toBe(BAND);
-      expect(deepest.x).toBeGreaterThan(lane * LANE + LANE / 2);
-
-      // 3. BOTH ENDS ARE CUT ALONG THE BARBS, at exactly FLETCH.barbRun of run over
-      //    the vane's depth — the same number the comb leans by. That shared angle
-      //    is what turns each lap into a long diagonal instead of a vertical crease,
-      //    and it is why the cascade reads at all.
-      const quillEnd = pts.reduce((a, p) => (p.y <= FLETCH.tipIn && p.x > a.x ? p : a), leadTip);
-      expect(deepest.x - quillEnd.x).toBe(FLETCH.barbRun);
+  test('every cell still COVERS ITS LABEL — the trap any silhouette edit invites', () => {
+    // A pale label that slipped off its cell would sit on bare honey wood at 1.85:1
+    // and be unreadable. Each label is centred in its own equal-width lane and read
+    // at the bar's vertical middle, so the claim is: at that depth, the cell's own
+    // painted span brackets the whole label box with room to spare.
+    const mid = CHROME.headerDesktop / 2;
+    // The widest label the band carries, in band units: the cells are equal thirds of
+    // the cluster, so a lane is worth LANE units of whatever the band measures.
+    const halfLabel = LANE * 0.42;
+    for (const lane of [0, 1, 2]) {
+      const [tl, tr, br, bl] = ONCURVE(VANES[lane].closed);
+      const at = (a, b) => a.x + ((b.x - a.x) * mid) / BAND;
+      const leadAt = at(tl, bl);
+      const trailAt = at(tr, br);
+      const centre = lane * LANE + LANE / 2;
+      expect(leadAt, `cell ${lane}'s leading edge crosses its label`)
+        .toBeLessThanOrEqual(centre - halfLabel);
+      expect(trailAt, `cell ${lane}'s trailing edge crosses its label`)
+        .toBeGreaterThanOrEqual(centre + halfLabel);
     }
   });
 
-  test('every vane still COVERS ITS LABEL — the trap a prettier silhouette invites', () => {
-    // A pale label that slipped off its vane would sit on bare honey wood at 1.85:1
-    // and be unreadable. Each label is centred in its own equal-width lane, so the
-    // claim is: over the middle of every lane, the vane is deeper than the bottom of
-    // the label box.
-    const labelBottom = (CHROME.headerDesktop + LABEL_BOX) / 2;
-    for (const [lane, v] of VANES.entries()) {
-      const mid = lane * LANE + LANE / 2;
-      // ⚠️ The LOWER silhouette only. The closed path's quill line runs along y=0
-      // straight over the label, so asking the whole outline "how deep are you here"
-      // answers 0 at every top vertex and the pin would be unsatisfiable.
-      const over = ONCURVE(v.lower).filter((p) => p.y > 0 && Math.abs(p.x - mid) < LANE * 0.45);
-      expect(over.length, `no lower-edge vertex over lane ${lane}'s label`).toBeGreaterThan(0);
-      for (const p of over) {
-        expect(p.y, `vane ${lane} is only ${p.y} deep at x=${p.x}`)
-          .toBeGreaterThan(labelBottom);
-      }
-    }
-  });
-
-  test('the gold edge traces the LOWER silhouette only — a highlight, not a border', () => {
-    // The first cut stroked the whole closed path, so the gold ran up the leading cut
-    // and along the quill and read as "this badge is selected". The open lower path is
-    // the fix, pinned as a containment relationship rather than a literal so
-    // retouching the curve cannot silently re-close it.
+  test('the gold traces the LOWER EDGE only — a highlight, not a border', () => {
+    // The first cut stroked the whole closed path, so the gold ran up both slants and
+    // along the quill and read as "this badge is selected". The open lower path is the
+    // fix, pinned as a containment relationship rather than a literal so retouching
+    // the quad cannot silently re-close it.
     for (const v of VANES) {
       expect(v.lower.trim().endsWith('Z')).toBe(false);
-      expect(v.closed).toContain(v.lower.slice(v.lower.indexOf('C ')));
-      // …and the leading cut is in the CLOSED path but NOT in the stroked one.
-      expect(v.lower).not.toContain(v.lead.slice(v.lead.indexOf('C ')));
+      // It really is the bottom edge: both its points sit at the vane's full depth.
+      const pts = ONCURVE(v.lower);
+      expect(pts.length).toBe(2);
+      for (const p of pts) expect(p.y).toBe(BAND);
+      // …and the two slanted edges are NOT in it.
+      expect(v.lower).not.toContain(v.lead.slice(2));
+      expect(v.lower).not.toContain(v.trail.slice(2));
     }
   });
 });
@@ -507,6 +582,39 @@ describe('3 — THE COMB: fine barb striations, at the derived angle, jittered',
     }
   });
 
+  test('⚠️ THE COMB RUNS PARALLEL TO THE CELLS’ OWN EDGES — one lean, not two', () => {
+    // The claim the simplified geometry rests on. Every slanted mark on this band —
+    // each barb, each sheen band, and BOTH edges of every cell (hence every lap
+    // boundary) — leans by the SAME run over the SAME depth. That is what makes a lap
+    // read as a barb line rather than as a cut across the grain, and it is why one
+    // constant buys the comb, the shingle and the sweep. Two leans maintained
+    // separately is how a feather stops looking like one feather.
+    for (const lane of [0, 1, 2]) {
+      const [tl, , , bl] = ONCURVE(VANES[lane].closed);
+      const edgeRun = bl.x - tl.x;
+      for (const d of barbBuckets(lane)) {
+        const segs = d.match(/M (-?[\d.]+) 0 L (-?[\d.]+) ([\d.]+)/g) || [];
+        expect(segs.length, `lane ${lane} bucket has no barbs`).toBeGreaterThan(0);
+        for (const seg of segs) {
+          const [, x0, x1, y1] = seg.match(/M (-?[\d.]+) 0 L (-?[\d.]+) ([\d.]+)/);
+          expect(Number(y1), 'a barb does not span the vane’s full depth').toBe(BAND);
+          expect(Number(x1) - Number(x0), 'a barb crosses the cut instead of running with it')
+            .toBeCloseTo(edgeRun, 6);
+        }
+      }
+      // …and a sheen band leans by the same number over ITS depth, so the light runs
+      // with the barbs it is catching.
+      for (const d of SHEENS[lane]) {
+        const pts = ONCURVE(d);
+        const top = pts.filter((q) => q.y === 0).sort((a, b) => a.x - b.x);
+        const low = pts.filter((q) => q.y === SHEEN_FLOOR).sort((a, b) => a.x - b.x);
+        expect(top.length).toBe(2);
+        expect(low.length).toBe(2);
+        expect(low[0].x - top[0].x).toBeCloseTo(lean(SHEEN_FLOOR), 6);
+      }
+    }
+  });
+
   test('the comb angle is DERIVED from the FEATHER, never from the chrome', () => {
     // A barb leaves the rachis and runs FLETCH.barbRun across the vane over exactly
     // the vane's own depth. ⚠️ IT USED TO DERIVE FROM CHROME.headerDesktop, which was
@@ -515,7 +623,7 @@ describe('3 — THE COMB: fine barb striations, at the derived angle, jittered',
     expect(FLETCH_BARB_DEG).toBe(
       Math.round((Math.atan2(FLETCH.barbRun, FLETCH.band) * 180) / Math.PI),
     );
-    expect(FLETCH_BARB_DEG).toBe(28); // today's value — a comb, not a rake
+    expect(FLETCH_BARB_DEG).toBe(26); // today's value — a comb, not a rake
     // NEGATIVE CONTROL: the comb must not run with the wood. The shaft's grain is
     // LONGITUDINAL (the turbulence is stretched along the shaft), so a vertical or
     // horizontal comb would read as one interference pattern where vane meets barrel.
@@ -873,14 +981,18 @@ describe('9 — the active fletch LIGHTENS, and takes the gold along its own edg
     expect(svg.dataset.activeLane).toBe('1');
     const vane = svg.querySelector('[data-testid="nav-fletch-vane-1"]');
     expect(vane.dataset.fletchState).toBe('active');
-    // 3 — THE SHEEN BANDS BRIGHTEN. This is the directive's own words for what
-    // "active" looks like on a feather, and it is the channel that replaced V2's
-    // whole-fill lift.
+    // 3 — THE WHOLE CELL BRIGHTENS. The owner's active grammar is a BRIGHTENED CELL
+    // plus a gold underline, so the fill itself steps one rung up the ladder and the
+    // sheen bands riding it lift with it. Pinned as a DIFFERENT gradient reference
+    // from the resting one, because a fill that merely looked lighter in review and
+    // resolved to the same url() would be the whole state channel silently gone.
+    const fill = vane.querySelector('path').getAttribute('fill');
+    expect(fill).toContain('-vane-lit');
     const bands = [...svg.querySelectorAll('[data-testid="nav-fletch-sheen-1"] path')];
     expect(bands.length).toBe(3);
     for (const b of bands) expect(b.getAttribute('fill')).toBe(FLETCH_SHEEN_LIFT);
-    // 4 — the gold, stroked along the vane's OWN lower silhouette so it follows the
-    // rounded back instead of drawing a rectangle across the cell.
+    // 4 — the gold underline, stroked along the cell's OWN lower edge so it hangs
+    // below the bar with the feather it belongs to instead of ruling across the cell.
     const edge = svg.querySelector('[data-testid="nav-fletch-edge-1"]');
     expect(edge).toBeTruthy();
     expect(edge.getAttribute('d')).toBe(VANES[1].lower);
@@ -897,7 +1009,13 @@ describe('9 — the active fletch LIGHTENS, and takes the gold along its own edg
 
     expect(resting.getAttribute('aria-current')).toBeNull();
     expect(resting.style.color).toBe(rgb(PARCH_100));
-    expect(svg.querySelector('[data-testid="nav-fletch-vane-2"]').dataset.fletchState).toBe('resting');
+    const restingVane = svg.querySelector('[data-testid="nav-fletch-vane-2"]');
+    expect(restingVane.dataset.fletchState).toBe('resting');
+    // The A/B on the fill itself: the resting cell takes the plain ladder, and the
+    // absence is stated positively so "both cells look the same" cannot pass.
+    const restFill = restingVane.querySelector('path').getAttribute('fill');
+    expect(restFill).not.toContain('-vane-lit');
+    expect(restFill).toContain('-vane');
     for (const b of svg.querySelectorAll('[data-testid="nav-fletch-sheen-2"] path')) {
       expect(b.getAttribute('fill')).toBe(FLETCH_SHEEN);
     }

@@ -313,43 +313,56 @@ export const FLETCH_SHADOW = '#2A251E59';
  * which is what keeps ANCHOR_OFFSET (and with it every About / guide / Compendium
  * anchor landing) describing the bar the ribbon actually is.
  *
- * ⚠️ `band` IS THE FLETCHING'S OWN DEPTH, AND IT IS INDEPENDENT OF THE BAR
- * (owner refinement, 2026-08-03 night). The shaft is a thin stick; the fletching
- * riding it is roughly twice as deep, top-aligned at the quill line, and the part
- * that does not fit HANGS below the bar's bottom edge. So this number is chosen for
- * the FEATHERS (deep enough to seat a label in the vane's calm zone with the rake
- * still reading), never for the chrome — and as the bar thins the hang grows, which
- * is the composition's whole point rather than a side effect. FLETCH_HANG below
- * derives the peek from this and CHROME.headerDesktop; nothing authors it twice.
+ * ⚠️⚠️ `band` IS THE FLETCHING'S OWN DEPTH, AND IT IS INDEPENDENT OF THE BAR
+ * (owner directive, 2026-08-03 night, restated in the final correction). The shaft is
+ * a THIN STICK; the fletching riding it is ROUGHLY TWICE AS DEEP, top-aligned at the
+ * quill line, and the ~half that does not fit HANGS below the bar's bottom edge. So
+ * this number is chosen for the FEATHERS, never for the chrome — and as the bar thins
+ * the hang grows, which is the composition's whole point rather than a side effect.
+ * 76 is about twice the bar this shaft is being thinned toward (the measured floor
+ * that still seats the wordmark is in the high thirties); FLETCH_HANG below derives
+ * the peek from this and CHROME.headerDesktop, and nothing authors it twice.
  *
- * `lane` is one fletch's width in the band's own coordinate space and `lap` is how
- * far each vane lies OVER the next one — the shingle. ⚠️ BOTH LIVE IN ONE
- * COORDINATE SPACE ON PURPOSE. V3 drew three separate SVGs, one per cell, each
- * stretched by `preserveAspectRatio="none"` to its own cell width; the lap was
- * authored in each cell's local units and came out at a DIFFERENT number of screen
- * pixels per cell, small enough that the 10px seam between cells outran it and the
- * band read as three separate tabs with bare wood between them. The band is now ONE
- * SVG over the whole cluster, so `lap` is a fixed fraction of `lane` and the shingle
- * is exact by construction at every width.
+ * ⚠️ IT MUST NOT BECOME A MULTIPLE OF THE CHROME. Writing `band: CHROME.headerDesktop
+ * * 2` would read as tidier and would destroy the directive: the hang would then be a
+ * fixed FRACTION of the bar and could never deepen as the bar thins, which is exactly
+ * the behaviour the owner asked for. The relationship is a design intention checked by
+ * eye, not an equation — so it is recorded here rather than computed.
  *
- * `back` is how far a vane's leading tip pokes past its own lane (so the tip is a
- * point on the quill, not a butt joint) and `tipIn` how far below the quill line
- * that point sits.
+ * `lane` is one fletch's width in the band's own coordinate space and `lap` is how far
+ * each cell reaches UNDER the next one — the shingle. ⚠️ BOTH LIVE IN ONE COORDINATE
+ * SPACE ON PURPOSE. V3 drew three separate SVGs, one per cell, each stretched by
+ * `preserveAspectRatio="none"` to its own cell width; the lap was authored in each
+ * cell's local units and came out at a DIFFERENT number of screen pixels per cell,
+ * small enough that the 10px seam between cells outran it and the band read as three
+ * separate tabs with bare wood between them. The band is now ONE SVG over the whole
+ * cluster, so `lap` is a fixed fraction of `lane` and the shingle is exact by
+ * construction at every width.
  *
- * `barbRun` / `barbGap` are the barb striations' sweep and spacing in the band's
- * coordinate space; FLETCH_BARB_DEG below is derived from `barbRun` so the comb
- * angle can never drift from the geometry that produced it. `barbJitter` is the
- * fraction by which the deterministic comb jitter may widen or narrow one gap —
- * see FletchBand's jitter note; a perfectly regular comb reads as machine hatching.
+ * `barbRun` is the horizontal run a slanted mark makes over the vane's full depth, and
+ * it is THE lean of this composition: the barb comb, the two slanted edges of every
+ * cell (hence every lap boundary), and the sheen bands all use it, so the comb never
+ * crosses the cut. FLETCH_BARB_DEG below is derived from it so the angle can never
+ * drift from the geometry that produced it. `barbGap` is the comb's spacing;
+ * `barbJitter` the fraction by which the deterministic jitter may widen or narrow one
+ * gap — see FletchBand's jitter note; a perfectly regular comb reads as machine
+ * hatching.
  *
- * `wrap` is each whipping band's width. `slant` survives as the PLAIN rule's own
- * lean and nothing else: the fletch-seam divider it used to size is retired (the
- * band has no internal seams any more — the laps are the seams).
+ * `wrap` is each whipping band's width. ⚠️ IT IS SIZED BY THE BAND'S LEAN, not by
+ * taste: the parallelograms are seated so their seams cross the lane divisions at the
+ * label's own height, which leaves the leading corner poking about `lean(headerDesktop
+ * / 2)` px outside the band's box at the quill line. The wrap is wide enough to bind
+ * that corner, which is what a whipping does. Narrower and the feather's tip would
+ * stick out past its own binding.
+ *
+ * `slant` survives as the PLAIN rule's own lean and nothing else: the fletch-seam
+ * divider it used to size is retired (the band has no internal seams any more — the
+ * laps are the seams).
  */
 export const FLETCH = Object.freeze({
-  band: 70, lane: 100, lap: 44, back: 6, tipIn: 3,
+  band: 76, lane: 100, lap: 44,
   barbRun: 37, barbGap: 4.1, barbJitter: 0.34,
-  slant: 10, wrap: 7,
+  slant: 10, wrap: 10,
 });
 
 // swatch — exact-value migration swatchbook (see design/tokens.js). Routes the
@@ -471,7 +484,7 @@ export const ANCHOR_OFFSET = CHROME.headerDesktop + SP.xxl;
  * A barb leaves the rachis and sweeps toward the trailing tip, running FLETCH.barbRun
  * across the vane over exactly FLETCH.band of depth. So the angle is
  * atan(barbRun / band) and it re-derives the moment either number moves.
- * At barbRun 37 over a 70-deep vane that is 28° — a comb, not a rake.
+ * At barbRun 37 over a 76-deep vane that is 26° — a comb, not a rake.
  *
  * ⚠️ IT DERIVES FROM THE FEATHER, NOT FROM THE CHROME, and that changed with the
  * shingled band. V3 ran the sweep over CHROME.headerDesktop, which was true only
@@ -482,9 +495,10 @@ export const ANCHOR_OFFSET = CHROME.headerDesktop + SP.xxl;
  * The comb is a property of the FEATHER, so it is measured across the feather.
  * (barbRun moved 26 → 37 in the same edit purely to hold 28° across the new depth.)
  *
- * ⚠️ IT IS SHARED, WHICH IS THE POINT. FletchBand draws the barbs, the sheen bands
- * AND the rachis taper off this one number; three angles maintained separately is
- * how a feather stops looking like one feather. It is also deliberately far from the
+ * ⚠️ IT IS SHARED, WHICH IS THE POINT — and the final correction made it MORE so.
+ * FletchBand draws the barbs, the sheen bands AND both slanted edges of every cell off
+ * this one number, so a lap boundary is a barb line rather than a cut across the
+ * grain; angles maintained separately is how a feather stops looking like one feather. It is also deliberately far from the
  * shaft grain's own direction (the grain runs LENGTHWISE, along the shaft), so vane
  * and wood never read as one interference pattern where a fletch meets bare barrel.
  */
