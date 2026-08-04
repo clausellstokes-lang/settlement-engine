@@ -742,6 +742,10 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // read still uses `worldState` above (the tick's opening picture), so a
       // license minted by the first burning can never arm the second.
       licenseState: razingLicenseState,
+      // The relationship estate's writer stamps `updatedAt` from the pulse's
+      // threaded clock; absent it falls back to the world's own stamp. No
+      // wall-clock is ever read (the determinism contract at the head).
+      now,
       snapshot,
       razerId: occupierId,
       victimId: targetId,

@@ -129,6 +129,15 @@ import {
   getRelationshipSettlements,
   relationshipKeyFromEdge,
 } from './relationshipState.js';
+// THE RELATIONSHIP ESTATE'S ONE SANCTIONED WRITER. The observer-axis judgment
+// (amendment R, "THE WORLD JUDGES ON THE OBSERVER'S AXIS") rides it exactly as
+// the peace overlay's five writes do; the razing mints no second writer, and the
+// law that decides the magnitudes holds no imports at all (razingWitness.js).
+import { applyRelationshipPatch } from './relationshipEvolution.js';
+import {
+  razingWitnessHits,
+  razingWitnessTrustAdd,
+} from './razingWitness.js';
 // R-WZ-1: the severities are K1's own, imported rather than re-declared. A leaf
 // that must not acquire reach re-declares a constant and pins the two equal;
 // this is an assembly layer that already imports the estate's neighbours, so the
@@ -715,6 +724,114 @@ export function razingLicensePatch({
 }
 
 /**
+ * THE WORLD'S JUDGMENT, WRITTEN THROUGH THE ESTATE'S OWN WRITER (amendment R).
+ *
+ * ⚠️ ONE WRITER, AND IT IS NOT THIS FUNCTION. Every axis move below lands via
+ * `applyRelationshipPatch` on a REAL existing edge — the same door the peace
+ * overlay, the corruption web and the info-statecraft exposure lane all use. This
+ * function assembles and folds; it does not write, and a missing edge is a
+ * byte-safe skip rather than a synthesized key.
+ *
+ * ⚠️ WHO THE OBSERVERS ARE IS CR-WR8-A, ENFORCED BY REACH. The census is
+ * `razingHolderEdgesFor` — the regional-graph edges INCIDENT TO THE RAZER, razer
+ * and victim already excluded — so a court the razer has never bordered cannot
+ * be judged into a relationship it does not have. "A razing mints no edge to
+ * strangers" is a fact about what this walk can see.
+ *
+ * ⚠️⚠️ THE licenseState SPLIT IS OBEYED EXACTLY AS THE MINT OBEYS IT (WZ-3). The
+ * DECISION reads — who the observers are, how close each stood to the victim,
+ * and what each court's own nature is — all read `worldState`, the tick's opening
+ * picture. The read-MODIFY-write of each axis reads the ACCUMULATOR, because two
+ * sieges falling on one tick would otherwise have the second burning's judgment
+ * replace the first's outright. The two roles are never collapsed: a court's
+ * character cannot be changed by the first fire and then re-read for the second.
+ *
+ * @param {{ worldState?: unknown, licenseState?: unknown, snapshot?: unknown,
+ *   razerId?: unknown, victimId?: unknown, razerName?: unknown,
+ *   victimName?: unknown, road?: unknown, severity01?: unknown,
+ *   outcomeId?: unknown, holderEdges?: unknown, now?: unknown }} args
+ * @returns {Readonly<Record<string, unknown>>|null} a `relationshipStates` patch,
+ *   or null when no court judged (dark alignment reads, no incident edges, or a
+ *   world with nobody bordering the razer) — the caller keeps its frozen empty.
+ */
+export function razingWitnessPatch({
+  worldState = null, licenseState = null, snapshot = null,
+  razerId = '', victimId = '', razerName = '', victimName = '',
+  road = '', severity01 = 0, outcomeId = '', holderEdges = [], now = null,
+} = {}) {
+  const razer = String(razerId || '');
+  const victim = String(victimId || '');
+  if (!razer || !victim || razer === victim) return null;
+  const byId = recordOf(snapshot).byId;
+  const edges = arrayOf(holderEdges).length
+    ? holderEdges
+    : razingHolderEdgesFor(worldState, snapshot, razer, victim);
+  const observers = arrayOf(edges).map((raw) => {
+    const row = recordOf(raw);
+    const observerId = String(row.holderId ?? '');
+    return {
+      observerId,
+      // A SELF-READ off the tick's opening picture: a realm knows what it is,
+      // and what it is cannot have been changed by the fire it is judging.
+      alignmentBand: ownNatureBandFor(
+        byId instanceof Map ? byId.get(observerId) : null, worldState,
+      ),
+      adequacyToVictim01: row.adequacyToVictim01,
+    };
+  });
+  const hits = razingWitnessHits({
+    observers, road, severity01, victimName, razerName,
+  });
+  if (!hits.length) return null;
+  const base = licenseState || worldState;
+  let next = /** @type {Record<string, unknown>} */ (recordOf(base));
+  for (const hit of hits) {
+    // The accumulator's picture of THIS edge — the read half of the read-modify-
+    // write, and the only read in this function that is not the tick's opening one.
+    const pair = razingPairRelationship(snapshot, next, hit.observerId, razer);
+    if (!pair) continue;
+    const current = recordOf(pair.relState);
+    next = /** @type {Record<string, unknown>} */ (applyRelationshipPatch(next, {
+      // The event id makes the write idempotent-auditable: one razing writes at
+      // most one incident per observer, and the row names which burning it was.
+      id: `${text(outcomeId) || `razing.${razer}.${victim}`}:razing_witnessed:${hit.observerId}`,
+      relationshipKey: pair.key,
+      relationshipPatch: {
+        // ⚠️⚠️ THE FIVE CARRIED AXES ARE A GHOST-MATERIALIZATION GUARD, NOT
+        // PADDING. `applyRelationshipPatch` rebuilds its baseline with
+        // `ensureRelationshipState({}, existing)` — an EMPTY edge — so for an
+        // edge whose state record has never been written the writer's own
+        // baseline resolves the type to `neutral` and every axis to NEUTRAL's
+        // defaults, and the write would silently RE-TYPE an authored hostile or
+        // allied edge as neutral on its way past. `pair.relState` is the
+        // EDGE-DERIVED state (ensureRelationshipState with the real edge), so
+        // carrying these makes the write faithful whether or not the record
+        // already existed: identical values when it did, the edge's own truth
+        // when it did not. A razing materializes no relationship it did not
+        // find, which is CR-WR8-A's discipline one estate over.
+        relationshipType: current.relationshipType,
+        dependency: clamp01(current.dependency),
+        leverage: clamp01(current.leverage),
+        tradeBalance: clamp01(current.tradeBalance),
+        pactStrength: clamp01(current.pactStrength),
+        trust: clamp01(clamp01(current.trust) * hit.trustFactor + razingWitnessTrustAdd(hit)),
+        resentment: clamp01(clamp01(current.resentment) + hit.resentmentAdd01),
+        fear: clamp01(clamp01(current.fear) + hit.fearAdd01),
+      },
+      severity: hit.scale01,
+      // A NEW typed incident, and deliberately NOT one the §5 revanchism clock
+      // reads. Revanchism counts wounds the counterpart did to YOU; an atrocity
+      // witnessed elsewhere is the ATROCITY CASUS's business (R2 / CR-WR8-C), and
+      // feeding it to both would be one event scored twice under two names.
+      metadata: { incidentType: 'razing_witnessed' },
+      proposalPayload: null,
+    }, now));
+  }
+  if (next === recordOf(base)) return null;
+  return Object.freeze({ relationshipStates: next.relationshipStates });
+}
+
+/**
  * ⚠️⚠️ THE RAZING'S ONE EMISSION, AND IT REPLACES THE CONQUEST RATHER THAN
  * RIDING IT. LAW 6 is the amendment's signature — "no occupation record, no
  * garrison, no vassal ledger, no terms" — so a razed town CANNOT also mint the
@@ -760,7 +877,7 @@ export function razingLicensePatch({
  *   victimId?: unknown, razerName?: unknown, victimName?: unknown,
  *   tick?: unknown, population?: unknown, namedCastCount?: unknown,
  *   institutions?: unknown, movableWealth?: unknown, holderEdges?: unknown,
- *   licenseState?: unknown }} args
+ *   licenseState?: unknown, now?: unknown }} args
  * @returns {{ decision: RazingDecision, plan: RazingPlan,
  *   worldStatePatch: Readonly<Record<string, unknown>>, outcome: Record<string, unknown> }|null}
  *   null when the doctrine is dark or the law refused — and the caller then does
@@ -770,7 +887,7 @@ export function razingSiegeEmission({
   worldState = null, snapshot = null, razerId = '', victimId = '',
   razerName = '', victimName = '', tick = 0, population = null,
   namedCastCount = 0, institutions = [], movableWealth = 0, holderEdges = [],
-  licenseState = null,
+  licenseState = null, now = null,
 } = {}) {
   const razer = String(razerId || '');
   const victim = String(victimId || '');
@@ -794,27 +911,42 @@ export function razingSiegeEmission({
   if (!plan) return null;
   const name = text(razerName) || razer;
   const victimLabel = text(victimName) || victim;
+  const outcomeId = causeRef.replace(/^razing\./, 'world_outcome.razing.');
+  // THE LEDGER WRITE, AS A PATCH THE KERNEL SPREADS (see razingLicensePatch).
+  // The MINT reads the accumulating ledger (so a second burning on the same
+  // tick composes rather than replaces); every DECISION above read the tick's
+  // original picture. See the licenseState note in this function's contract.
+  const licensePatch = razingLicensePatch({
+    worldState: licenseState || worldState,
+    decision, plan, razerId: razer, victimId: victim, tick,
+    candidates: arrayOf(edges).map((raw) => ({
+      holderId: recordOf(raw).holderId,
+      adequacyToVictim01: recordOf(raw).adequacyToVictim01,
+      // Every row of the walk is an edge the razer ALREADY SHARES — that is
+      // the walk's entire selection criterion — so the mint's second filter
+      // is satisfied by construction rather than by a flag somebody set.
+      sharesEdgeWithRazer: true,
+    })),
+  });
+  // AND THE WORLD'S JUDGMENT RIDES THE SAME PATCH. The two touch DISJOINT keys —
+  // the mint writes `spatialLedgers`, the judgment writes `relationshipStates` —
+  // so the compose below can never have one silently overwrite the other, and
+  // when neither wrote anything the frozen empty is returned BY REFERENCE.
+  const witnessPatch = razingWitnessPatch({
+    worldState,
+    licenseState: licenseState || worldState,
+    snapshot, razerId: razer, victimId: victim, razerName, victimName,
+    road: plan.road, severity01: plan.severity01, outcomeId,
+    holderEdges: edges, now,
+  });
   return {
     decision,
     plan,
-    // THE LEDGER WRITE, AS A PATCH THE KERNEL SPREADS (see razingLicensePatch).
-    // The MINT reads the accumulating ledger (so a second burning on the same
-    // tick composes rather than replaces); every DECISION above read the tick's
-    // original picture. See the licenseState note in this function's contract.
-    worldStatePatch: razingLicensePatch({
-      worldState: licenseState || worldState,
-      decision, plan, razerId: razer, victimId: victim, tick,
-      candidates: arrayOf(edges).map((raw) => ({
-        holderId: recordOf(raw).holderId,
-        adequacyToVictim01: recordOf(raw).adequacyToVictim01,
-        // Every row of the walk is an edge the razer ALREADY SHARES — that is
-        // the walk's entire selection criterion — so the mint's second filter
-        // is satisfied by construction rather than by a flag somebody set.
-        sharesEdgeWithRazer: true,
-      })),
-    }),
+    worldStatePatch: witnessPatch
+      ? Object.freeze({ ...licensePatch, ...witnessPatch })
+      : licensePatch,
     outcome: {
-      id: causeRef.replace(/^razing\./, 'world_outcome.razing.'),
+      id: outcomeId,
       type: 'condition',
       candidateType: 'razing',
       ruleId: 'war_layer_razing',
