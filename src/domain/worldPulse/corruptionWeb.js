@@ -71,7 +71,7 @@ import { darkReframe01 } from './reframeKernel.js';
 // pair key), imported ONLY by this already-lazy module ⇒ ZERO first-paint bytes. None
 // of them imports corruptionWeb/npcAgency/causeLifecycle, so the graph stays acyclic.
 import { applyRelationshipPatch } from './relationshipEvolution.js';
-import { relationshipKeyFromEdge } from './relationshipState.js';
+import { relationshipKeyFromEdge, edgeBetween } from './relationshipState.js';
 import { advanceCredibility } from './informationStatecraft.js';
 // W-DOCTRINE-4 CROSS-SEAM (§3): the overt-politics consolidation read the recruitment
 // weight degrades on ("a consolidated coalition raises the patron's price"). A lazy
@@ -849,19 +849,6 @@ export function foreignEndpointLive(leash, snapshot, occupations) {
  *  NONSTANDING_STATUS + the destroyed fate). */
 const DEAD_ENDPOINT_STATUS = Object.freeze(new Set(['destroyed', 'ruined', 'removed', 'abandoned', 'defunct']));
 
-/** The real relationship-edge key between two settlements (relationshipStates is keyed by
- *  the edge's own id — a synthesized key would orphan the overlay). Mirrors
- *  informationStatecraft.edgeKeyBetween / peaceTerms.edgeKeyBetween. Pure.
- *  @param {Array<Record<string, unknown>>} edges @param {string} a @param {string} b @returns {string | null} */
-function edgeKeyBetween(edges, a, b) {
-  for (const edge of (Array.isArray(edges) ? edges : [])) {
-    const f = edge?.from != null ? String(edge.from) : '';
-    const t = edge?.to != null ? String(edge.to) : '';
-    if ((f === a && t === b) || (f === b && t === a)) return relationshipKeyFromEdge(edge);
-  }
-  return null;
-}
-
 /** Codepoint-sort a ledger's keys for a byte-stable serialization (drop-when-empty). */
 /** @param {Record<string, unknown>} ledger @returns {Record<string, unknown>} */
 function sortLedgerKeys(ledger) {
@@ -940,7 +927,8 @@ export function applyForeignExposureBlowback({ worldState, snapshot, exposures, 
     nextLedger[key] = { magnitude01: round4(Math.max(prior, fx.magnitude01)), tick: nowTick };
 
     // (2) The people-held grievance on the shared (corrupted↔patron) edge.
-    const edgeKey = edgeKeyBetween(edges, fx.corruptedId, fx.patronId);
+    const grievanceEdge = edgeBetween(edges, fx.corruptedId, fx.patronId);
+    const edgeKey = grievanceEdge ? relationshipKeyFromEdge(grievanceEdge) : null;
     if (edgeKey) {
       const cur = asObject(asObject(/** @type {{ relationshipStates?: unknown }} */ (ws).relationshipStates)[edgeKey]);
       const resentment = clamp01(finiteNumber(cur.resentment, 0) + T.EXPOSURE_GRIEVANCE_W * fx.magnitude01);
@@ -950,7 +938,7 @@ export function applyForeignExposureBlowback({ worldState, snapshot, exposures, 
         metadata: { incidentType: 'foreign_corruption_exposed' },
         severity: clamp01(fx.magnitude01),
         proposalPayload: null,
-      }, now));
+      }, now, grievanceEdge));
       changed = true;
     }
 

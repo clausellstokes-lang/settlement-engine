@@ -379,6 +379,7 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
         Number(peaceIncident.tick),
         now,
         coalitionContext,
+        rawEdge,
       );
       workingState = marked.worldState;
       coalitionExitFirst = marked.first;

@@ -13,7 +13,11 @@
  * file 2 of 4).
  */
 import { clamp01 } from '../../kernel/math.js';
-import { relationshipKeyFromEdge } from './relationshipState.js';
+import { relationshipKeyFromEdge, edgeBetween } from './relationshipState.js';
+
+// The shared edge resolver, re-exported here so the overlay's writes can reach it
+// through the graph leaf they already import rather than growing a second door.
+export { edgeBetween };
 import { faithAlignmentQuadrant, crossPressureMediation } from '../spatial/cohesionWeave.js';
 // The pair's faith×alignment proximity read — owned by sacredClaim.js (a pure leaf) so the
 // war side can read it too without closing a cycle back through this module.
@@ -41,12 +45,8 @@ export function buildAdjacency(edges) {
  *  overlay is keyed by the edge's own id, so a synthesized key would orphan).
  *  @param {Array<Record<string, unknown>>} edges @param {string} a @param {string} b @returns {string | null} */
 export function edgeKeyBetween(edges, a, b) {
-  for (const edge of edges) {
-    const f = edge?.from != null ? String(edge.from) : '';
-    const t = edge?.to != null ? String(edge.to) : '';
-    if ((f === a && t === b) || (f === b && t === a)) return relationshipKeyFromEdge(edge);
-  }
-  return null;
+  const edge = edgeBetween(edges, a, b);
+  return edge ? relationshipKeyFromEdge(edge) : null;
 }
 
 /** The pinned updatedAt for an overlay write — `now` when threaded, else the

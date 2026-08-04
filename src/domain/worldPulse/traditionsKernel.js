@@ -71,7 +71,8 @@ import { advanceNpcGrowthWithFabricAndConsequenceAndLadder } from './npcLadderKe
 import { advancePolitics, routedLegitimacyHit } from '../traditions/politics.js';
 import { advanceRelations } from '../traditions/relations.js';
 import { traditionBeatProse } from '../traditions/prose.js';
-import { memoryWeaveActive, mintMemoryWeaveIncident, edgeKeyBetween, MEMORY_WEAVE_INCIDENT_TYPES } from './relationshipEvolution.js';
+import { memoryWeaveActive, mintMemoryWeaveIncident, edgeBetween, MEMORY_WEAVE_INCIDENT_TYPES } from './relationshipEvolution.js';
+import { relationshipKeyFromEdge } from './relationshipState.js';
 import { clamp01 } from '../../kernel/math.js';
 import { beliefAxesActive, observanceFromTraditions } from './beliefAxes.js';
 import { pilgrimageDraw } from '../traditions/pilgrimage.js';
@@ -838,8 +839,9 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
   if (riteImpositions.length && memoryWeaveActive(worldState)) {
     const edges = /** @type {any} */ (asObject(asObject(snapshot).regionalGraph).edges);
     for (const { overlordId, sid } of riteImpositions) {
-      const key = edgeKeyBetween(edges, String(overlordId), String(sid));
-      if (!key) continue;
+      const edge = edgeBetween(edges, String(overlordId), String(sid));
+      if (!edge) continue;
+      const key = relationshipKeyFromEdge(edge);
       const current = asObject(asObject(nextWorldState).relationshipStates)[key];
       const resentment = clamp01(num(asObject(current).resentment, 0) + RITE_IMPOSED_RESENTMENT_W);
       nextWorldState = mintMemoryWeaveIncident(nextWorldState, {
@@ -848,6 +850,7 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
         patch: { resentment },
         severity: 0.35,
         id: `tradition_rite_imposed.${sid}.${overlordId}.${now2}`,
+        edge,
       }, now);
       changed = true;
     }

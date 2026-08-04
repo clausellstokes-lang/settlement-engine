@@ -23,6 +23,7 @@ import {
   getRelationshipSettlements,
   normalizeRelationshipEdge,
   ensureRelationshipState,
+  edgeBetween,
 } from './relationshipState.js';
 import { pressureFor, strongestPressure, EMPTY_DISPOSITION, EMPTY_TRADE_SALIENCE, buildRelationshipIndex, sharedEnemyAllianceCandidate } from './relationshipRuleHelpers.js';
 import { RULE_EVALUATORS, tradeLeverageCandidate } from './relationshipRulesAdversarial.js';
@@ -32,7 +33,7 @@ import { coalitionClosureWitness, joinAnchorOf, warCoalitionActive } from './war
 
 export {
   RELATIONSHIP_TYPE_ALIASES, normalizeRelationshipType,
-  relationshipKeyFromEdge, getRelationshipSettlements, relationshipRoles,
+  relationshipKeyFromEdge, getRelationshipSettlements, relationshipRoles, edgeBetween,
   normalizeRelationshipEdge, ensureRelationshipState,
   appendRelationshipTurningPoint, RELATIONSHIP_TURNING_POINT_CAP,
   appendRelationshipAllianceCall, RELATIONSHIP_ALLIANCE_CALL_CAP, normalizeAllianceCalls,
@@ -335,12 +336,8 @@ export const MEMORY_WEAVE_INCIDENT_TYPES = Object.freeze({
  * @param {string} a @param {string} b @returns {string|null}
  */
 export function edgeKeyBetween(edges, a, b) {
-  for (const edge of Array.isArray(edges) ? edges : []) {
-    const f = edge?.from != null ? String(edge.from) : '';
-    const t = edge?.to != null ? String(edge.to) : '';
-    if ((f === a && t === b) || (f === b && t === a)) return relationshipKeyFromEdge(edge);
-  }
-  return null;
+  const edge = edgeBetween(edges, a, b);
+  return edge ? relationshipKeyFromEdge(edge) : null;
 }
 
 /**
@@ -351,11 +348,13 @@ export function edgeKeyBetween(edges, a, b) {
  * chokepoint every ghost wiring and the elite bleed pass through — no hand-editing
  * of relationshipStates anywhere. No key / no patch ⇒ a byte-safe no-op.
  * @param {any} worldState
- * @param {{ relationshipKey: string|null, incidentType: string, patch: Record<string, number>, severity?: number, id?: string|null }} spec
+ * @param {{ relationshipKey: string|null, incidentType: string, patch: Record<string, number>, severity?: number, id?: string|null, edge?: unknown }} spec
+ *   `edge` is the graph edge the key addresses — carried so the ghost cure in
+ *   `applyRelationshipPatch` can see it through this chokepoint too.
  * @param {any} now
  * @returns {any}
  */
-export function mintMemoryWeaveIncident(worldState, { relationshipKey, incidentType, patch, severity, id }, now) {
+export function mintMemoryWeaveIncident(worldState, { relationshipKey, incidentType, patch, severity, id, edge = null }, now) {
   if (!relationshipKey || !patch || typeof patch !== 'object') return worldState;
   return applyRelationshipPatch(worldState, {
     relationshipKey,
@@ -364,7 +363,7 @@ export function mintMemoryWeaveIncident(worldState, { relationshipKey, incidentT
     severity: Number.isFinite(severity) ? severity : 0.3,
     id: id || null,
     proposalPayload: null,
-  }, now);
+  }, now, edge);
 }
 
 /**
@@ -414,9 +413,45 @@ function carriedTermSheetForIncident(outcome) {
   return { present: true, sheet: valid ? deepClone(sheet) : null };
 }
 
-export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type {any} */ outcome, /** @type {any} */ now) {
+/**
+ * THE RELATIONSHIP PLANE'S ONE WRITER.
+ *
+ * ⚠️⚠️ THE FOURTH ARGUMENT IS THE GHOST-MATERIALIZATION CURE, AND IT IS A CURE
+ * RATHER THAN A CONVENIENCE. This function rebuilt its baseline with
+ * `ensureRelationshipState({}, existing)` — an EMPTY edge — so for an edge whose
+ * state record had never been written, the baseline resolved the type to
+ * `neutral` and every axis to NEUTRAL's defaults, and the write silently RE-TYPED
+ * an authored hostile or allied edge on its way past. WZ-4 closed that at ONE call
+ * site by having the razing carry the truth across; the class stayed open at every
+ * other door, and it is not theoretical — a probe over the domain suite and the
+ * same-seed harness measured 36 absent-record writes across SEVEN writer sites,
+ * including the mainline `applyWorldPulseOutcomes` reached through the real kernel.
+ *
+ * So the baseline is now derived from THE EDGE, and the edge travels as a plain
+ * fourth argument rather than as a field on the outcome — outcomes are persisted
+ * into pulse history, and a graph edge has no business riding into a save record.
+ *
+ * ⚠️ IT IS A NO-OP FOR EVERY MATERIALIZED RECORD, BY CONSTRUCTION.
+ * `ensureRelationshipState` resolves the type as `existing.relationshipType ||
+ * edge.relationshipType`, and every axis as `existing.x ?? defaults[type].x` — so
+ * when the record exists (which, inside a pulse, is every graph edge, because
+ * `ensureAllRelationshipStates` materializes them all at the top of the tick) the
+ * existing values win at every field and the edge changes nothing. It speaks only
+ * where the record is silent, which is exactly where the old baseline was lying.
+ *
+ * Omitting the edge is still legal and still means "no edge to consult" — the
+ * pre-cure behaviour, kept so a caller that genuinely holds no edge degrades to
+ * what it did before rather than to a throw. `relationshipPatchEdgeCarry.walker`
+ * censuses the call sites so the omission has to be declared instead of forgotten.
+ *
+ * The parameter types live on the parameters themselves (the inline casts this
+ * module has always used); duplicating them here would be four more unchecked
+ * holes for no additional information, which the any-cast ratchet correctly
+ * refuses. `edge` is the regional-graph edge `outcome.relationshipKey` addresses.
+ */
+export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type {any} */ outcome, /** @type {any} */ now, /** @type {{ from?: unknown, to?: unknown, id?: unknown }|null} */ edge = null) {
   if (!outcome.relationshipKey || !outcome.relationshipPatch) return worldState;
-  const current = ensureRelationshipState({}, worldState.relationshipStates?.[outcome.relationshipKey]);
+  const current = ensureRelationshipState(edge || {}, worldState.relationshipStates?.[outcome.relationshipKey]);
   // WR-6 exact-once: an applied approval can be replayed, but the same alliance
   // call may never erode the relationship twice or duplicate its durable fact.
   const allianceCall = outcome.metadata?.allianceCall;

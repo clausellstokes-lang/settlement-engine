@@ -764,7 +764,7 @@ export function applyWorldPulseOutcomes({
       const beforeEdge = relationshipEdgeForOutcome(graph, outcome);
       const beforeType = beforeEdge ? String(beforeEdge.relationshipType || beforeEdge.type || '') : null;
       const beforeRelationshipWrite = state;
-      state = applyRelationshipPatch(state, outcome, now);
+      state = applyRelationshipPatch(state, outcome, now, beforeEdge);
       if (state !== beforeRelationshipWrite && outcome.metadata?.coalitionEnemyRelationship) {
         const coalitionWarEdge = openCoalitionEnemyRelationship({
           worldState: state,

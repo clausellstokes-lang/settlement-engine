@@ -903,23 +903,21 @@ export function razingWitnessPatch({
       id: `${text(outcomeId) || `razing.${razer}.${victim}`}:razing_witnessed:${hit.observerId}`,
       relationshipKey: pair.key,
       relationshipPatch: {
-        // ⚠️⚠️ THE FIVE CARRIED AXES ARE A GHOST-MATERIALIZATION GUARD, NOT
-        // PADDING. `applyRelationshipPatch` rebuilds its baseline with
-        // `ensureRelationshipState({}, existing)` — an EMPTY edge — so for an
-        // edge whose state record has never been written the writer's own
-        // baseline resolves the type to `neutral` and every axis to NEUTRAL's
-        // defaults, and the write would silently RE-TYPE an authored hostile or
-        // allied edge as neutral on its way past. `pair.relState` is the
-        // EDGE-DERIVED state (ensureRelationshipState with the real edge), so
-        // carrying these makes the write faithful whether or not the record
-        // already existed: identical values when it did, the edge's own truth
-        // when it did not. A razing materializes no relationship it did not
-        // find, which is CR-WR8-A's discipline one estate over.
-        relationshipType: current.relationshipType,
-        dependency: clamp01(current.dependency),
-        leverage: clamp01(current.leverage),
-        tradeBalance: clamp01(current.tradeBalance),
-        pactStrength: clamp01(current.pactStrength),
+        // ✅ THE FIVE CARRIED AXES ARE GONE, AND THAT IS THE POINT (WZ-5). WZ-4
+        // carried `relationshipType` + four untouched scalars here because
+        // `applyRelationshipPatch` rebuilt its baseline from an EMPTY edge, and a
+        // write to an edge whose state record had never been written would
+        // silently RE-TYPE an authored hostile or allied edge as `neutral`. That
+        // guard was correct and it was LOCAL: a probe measured the same class live
+        // at six OTHER writer sites, including the mainline pulse. So the cure
+        // moved to the writer — it now takes the edge and derives the baseline
+        // from it — and this call site hands over `pair.edge` instead of
+        // re-deriving the truth by hand. The behaviour is identical by
+        // construction: `pair.relState` WAS `ensureRelationshipState(edge, ...)`,
+        // which is exactly what the writer now computes for itself. The
+        // ghost-materialization pins in razingWitnessWr8.test.js are unchanged and
+        // still green, which is what makes this a simplification rather than a
+        // removal of a guard.
         trust: clamp01(clamp01(current.trust) * hit.trustFactor + razingWitnessTrustAdd(hit)),
         resentment: clamp01(clamp01(current.resentment) + hit.resentmentAdd01),
         fear: clamp01(clamp01(current.fear) + hit.fearAdd01),
@@ -931,7 +929,7 @@ export function razingWitnessPatch({
       // feeding it to both would be one event scored twice under two names.
       metadata: { incidentType: 'razing_witnessed' },
       proposalPayload: null,
-    }, now));
+    }, now, pair.edge));
   }
   if (next === recordOf(base)) return null;
   return Object.freeze({ relationshipStates: next.relationshipStates });

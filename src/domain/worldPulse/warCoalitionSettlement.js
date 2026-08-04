@@ -366,18 +366,25 @@ function hasRealGranary(settlement) {
     && Number(row.population) > 0;
 }
 
-/** @param {unknown} snapshot @param {string} relationshipKey @param {string} a @param {string} b */
-function relationshipPairExists(snapshot, relationshipKey, a, b) {
+/** The graph edge this pair's relationship key addresses, or null.
+ *
+ *  ⚠️ IT RETURNS THE EDGE NOW, AND THE EXISTENCE GUARD IS DERIVED FROM IT. This
+ *  module already refused to archive against a pair it could not find in the
+ *  graph — it simply kept the boolean and threw the edge away, which left the
+ *  relationship plane's writer unable to type an unmaterialized record. One walk
+ *  now yields both the proof and the truth to write with.
+ *  @param {unknown} snapshot @param {string} relationshipKey @param {string} a @param {string} b */
+function relationshipPairEdge(snapshot, relationshipKey, a, b) {
   const graph = asObject(asObject(snapshot).regionalGraph);
   const edges = Array.isArray(graph.edges)
     ? /** @type {Array<Record<string, unknown>>} */ (graph.edges)
     : [];
-  return edges.some((edge) => {
+  return edges.find((edge) => {
     if (relationshipKeyFromEdge(edge) !== relationshipKey) return false;
     const from = explicitId(edge.from || edge.source || edge.a);
     const to = explicitId(edge.to || edge.target || edge.b);
     return (from === a && to === b) || (from === b && to === a);
-  });
+  }) || null;
 }
 
 /** @param {Record<string, unknown>} worldState @param {string} relationshipKey @param {string} actionId */
@@ -386,8 +393,16 @@ function actionAlreadyRecorded(worldState, relationshipKey, actionId) {
   return coalitionSettlementActionWasRecorded(asObject(state), actionId);
 }
 
-/** Land one action through the relationship plane's exact-once writer. */
-function archiveSettlementAction(worldState, row, incidentType, severity) {
+/** @param {unknown} snapshot @param {string} relationshipKey @param {string} a @param {string} b */
+function relationshipPairExists(snapshot, relationshipKey, a, b) {
+  return relationshipPairEdge(snapshot, relationshipKey, a, b) != null;
+}
+
+/** Land one action through the relationship plane's exact-once writer.
+ *  @param {Record<string, unknown>} worldState @param {unknown} row
+ *  @param {string} incidentType @param {number} severity
+ *  @param {{ from?: unknown, to?: unknown, id?: unknown }|null} [edge] the graph edge the action's key addresses */
+function archiveSettlementAction(worldState, row, incidentType, severity, edge = null) {
   const action = asObject(row);
   const relationshipKey = explicitId(action.relationshipKey);
   const actionId = explicitId(action.actionId);
@@ -400,7 +415,7 @@ function archiveSettlementAction(worldState, row, incidentType, severity) {
     metadata: { coalitionSettlement: action, incidentType },
     severity: clamp01(Number(severity) || 0),
     proposalPayload: null,
-  }, Number(action.tick));
+  }, Number(action.tick), edge);
   return next !== worldState && actionAlreadyRecorded(next, relationshipKey, actionId)
     ? next
     : null;
@@ -536,6 +551,7 @@ export function applyCoalitionSettlement({
       action,
       action.status === 'paid' ? 'coalition_settlement_paid' : 'coalition_settlement_unpaid',
       action.status === 'paid' ? 0.45 : 0.7,
+      relationshipPairEdge(snapshot, explicitId(action.relationshipKey), explicitId(action.fromId), explicitId(action.toId)),
     );
     // The archive and material deltas are one atomic returned value. A bad or
     // replayed row aborts before any settlement update can leave this helper.
@@ -705,6 +721,7 @@ export function applyCoalitionReimbursement({
     settlementAction,
     paid ? 'coalition_reimbursement_paid' : 'coalition_reimbursement_unpaid',
     paid ? adequacy01 : unpaid01,
+    relationshipPairEdge(snapshot, relationshipKey, caller, member),
   );
   if (!archivedState) return unchanged;
   let nextState = archivedState;
@@ -820,6 +837,7 @@ export function forgiveCoalitionReimbursement({
     settlementAction,
     'coalition_reimbursement_forgiven',
     liveMagnitude,
+    relationshipPairEdge(snapshot, pairKey, caller, member),
   );
   if (!archivedState) return unchanged;
   const nextState = next

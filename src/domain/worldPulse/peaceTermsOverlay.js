@@ -18,7 +18,8 @@ import { applyRelationshipPatch } from './relationshipEvolution.js';
 import { treatyTicksPerYearOf } from './treatyClock.js';
 import { PEACE_TERMS_TUNING } from './peaceTermsCatalog.js';
 import { recordOf, explicitText } from './peaceTermsPrimitives.js';
-import { edgeKeyBetween, overlayStamp } from './peaceTermsGraph.js';
+import { edgeBetween, overlayStamp } from './peaceTermsGraph.js';
+import { relationshipKeyFromEdge } from './relationshipState.js';
 import { coalitionBetrayalCharacterRead } from './peaceTermsCoalition.js';
 
 /** @typedef {import('./peaceTermsCatalog.js').TreatyRecord} TreatyRecord */
@@ -33,8 +34,9 @@ import { coalitionBetrayalCharacterRead } from './peaceTermsCoalition.js';
  * @returns {Record<string, unknown>}
  */
 export function nudgeCompelledAlliance(worldState, edges, loserId, victorId, magnitude, now) {
-  const key = edgeKeyBetween(edges, loserId, victorId);
-  if (!key) return worldState;
+  const edge = edgeBetween(edges, loserId, victorId);
+  if (!edge) return worldState;
+  const key = relationshipKeyFromEdge(edge);
   const current = /** @type {{ relationshipStates?: Record<string, { trust?: number, resentment?: number }> }} */ (worldState).relationshipStates?.[key];
   const m = clamp01(magnitude);
   const trust = clamp01((Number(current?.trust) || 0) + 0.15 * m);
@@ -44,7 +46,7 @@ export function nudgeCompelledAlliance(worldState, edges, loserId, victorId, mag
     relationshipPatch: { trust, resentment },
     metadata: { incidentType: 'compelled_alliance' },
     proposalPayload: null,
-  }, overlayStamp(worldState, now));
+  }, overlayStamp(worldState, now), edge);
 }
 
 /**
@@ -58,8 +60,9 @@ export function nudgeCompelledAlliance(worldState, edges, loserId, victorId, mag
  * @returns {Record<string, unknown>}
  */
 export function accrueStrainResentment(worldState, edges, loserId, victorId, burden01, now, treaty) {
-  const key = edgeKeyBetween(edges, loserId, victorId);
-  if (!key) return worldState;
+  const edge = edgeBetween(edges, loserId, victorId);
+  if (!edge) return worldState;
+  const key = relationshipKeyFromEdge(edge);
   const current = /** @type {{ relationshipStates?: Record<string, { resentment?: number }> }} */ (worldState).relationshipStates?.[key];
   const resentment = clamp01((Number(current?.resentment) || 0) + (PEACE_TERMS_TUNING.STRAIN_RESENTMENT_PER_YEAR / treatyTicksPerYearOf(treaty)) * clamp01(burden01));
   return applyRelationshipPatch(worldState, {
@@ -67,7 +70,7 @@ export function accrueStrainResentment(worldState, edges, loserId, victorId, bur
     relationshipPatch: { resentment },
     metadata: { incidentType: 'tribute_strain' },
     proposalPayload: null,
-  }, overlayStamp(worldState, now));
+  }, overlayStamp(worldState, now), edge);
 }
 
 /**
@@ -81,8 +84,9 @@ export function accrueStrainResentment(worldState, edges, loserId, victorId, bur
 export function accrueMediationTrust(worldState, edges, mediatorId, victorId, loserId, now) {
   let state = worldState;
   for (const otherId of [victorId, loserId]) {
-    const key = edgeKeyBetween(edges, mediatorId, otherId);
-    if (!key) continue;
+    const edge = edgeBetween(edges, mediatorId, otherId);
+    if (!edge) continue;
+    const key = relationshipKeyFromEdge(edge);
     const current = /** @type {{ relationshipStates?: Record<string, { trust?: number }> }} */ (state).relationshipStates?.[key];
     const trust = clamp01((Number(current?.trust) || 0) + PEACE_TERMS_TUNING.MEDIATION_TRUST_W);
     state = applyRelationshipPatch(state, {
@@ -90,7 +94,7 @@ export function accrueMediationTrust(worldState, edges, mediatorId, victorId, lo
       relationshipPatch: { trust },
       metadata: { incidentType: 'mediation' },
       proposalPayload: null,
-    }, overlayStamp(state, now));
+    }, overlayStamp(state, now), edge);
   }
   return state;
 }
@@ -121,8 +125,9 @@ export function accrueBetrayal(
 ) {
   let state = worldState;
   for (const allyId of abandoned) {
-    const key = edgeKeyBetween(edges, allyId, deserterId);
-    if (!key) continue;
+    const edge = edgeBetween(edges, allyId, deserterId);
+    if (!edge) continue;
+    const key = relationshipKeyFromEdge(edge);
     const current = /** @type {{ relationshipStates?: Record<string, { resentment?: number, trust?: number, recentIncidents?:Array<{outcomeId?:unknown}> }> }} */ (state).relationshipStates?.[key];
     const eventId = explicitText(sourceOutcomeId)
       ? `${sourceOutcomeId}:coalition_betrayal:${deserterId}:${allyId}`
@@ -144,13 +149,13 @@ export function accrueBetrayal(
       relationshipPatch: { resentment, trust },
       metadata: { incidentType: 'coalition_betrayal' },
       proposalPayload: null,
-    }, overlayStamp(state, now));
+    }, overlayStamp(state, now), edge);
   }
   return state;
 }
 
 /** Persist the public exit fact before emitting it so a mint-window replay is silent. */
-export function markCoalitionSeparatePeace(worldState, relationshipKey, peaceOutcomeId, tick, now, context) {
+export function markCoalitionSeparatePeace(worldState, relationshipKey, peaceOutcomeId, tick, now, context, /** @type {{ from?: unknown, to?: unknown, id?: unknown }|null} */ edge = null) {
   const sourceId = explicitText(peaceOutcomeId);
   const key = explicitText(relationshipKey);
   const departingId = explicitText(recordOf(context).departingId);
@@ -185,7 +190,7 @@ export function markCoalitionSeparatePeace(worldState, relationshipKey, peaceOut
     },
     severity: 0.55,
     proposalPayload: null,
-  }, overlayStamp(worldState, now));
+  }, overlayStamp(worldState, now), edge);
   const next = recordOf(recordOf(nextState.relationshipStates)[key]);
   const recorded = Array.isArray(next.coalitionSettlements)
     && next.coalitionSettlements.some((row) => explicitText(recordOf(row).actionId) === actionId);

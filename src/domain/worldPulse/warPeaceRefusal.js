@@ -145,7 +145,7 @@ export function applyWarPeaceRefusal({
     ),
     metadata: { incidentType: 'peace_refused' },
     severity: 0.62,
-  }, now);
+  }, now, relationshipEdge);
 
   const beforeUpdates = settlementUpdates;
   const nextUpdates = applyLegitimacyHits(
@@ -195,7 +195,7 @@ export function applyWarPeaceRefusal({
       relationshipPatch: refusalPatch(state, key, edge, T.ALLY_TRUST_HIT, T.ALLY_RESENTMENT_GAIN),
       metadata: { incidentType: 'peace_refused' },
       severity: 0.46,
-    }, now);
+    }, now, edge);
     allyIds.push(allyId);
   }
 

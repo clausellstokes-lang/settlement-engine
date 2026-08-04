@@ -44,6 +44,7 @@ import {
   razingWitnessPatch,
   EMPTY_PATCH,
 } from '../../src/domain/worldPulse/razingExecution.js';
+import { applyRelationshipPatch } from '../../src/domain/worldPulse/relationshipEvolution.js';
 import { RAZING_ALIGNMENT_BANDS } from '../../src/domain/worldPulse/razing.js';
 import { ownNatureBandFor, CONQUEST_REQUIRED_RULES } from '../../src/domain/worldPulse/conquestDoctrineStage.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -459,28 +460,30 @@ describe('⚠️⚠️ the ghost-materialization guard', () => {
     expect(states['rel.Karrow.Vaskar'].relationshipType).toBe('neutral');
   });
 
-  test('NEGATIVE CONTROL — the guard is what carries the type, not the writer', () => {
-    // Drive the estate writer the way it would be driven WITHOUT the guard, and
-    // prove the failure this pin exists to catch is real rather than theoretical.
-    const { worldState, snapshot } = witnessWorld({ materializeObserverStates: false });
-    const patch = razingWitnessPatch({
-      worldState,
-      licenseState: worldState,
-      snapshot,
-      razerId: 'Karrow',
-      victimId: 'Thornwall',
-      razerName: 'Karrow',
-      victimName: 'Thornwall',
-      road: 'initiation',
-      severity01: 0.8,
-      outcomeId: 'world_outcome.razing.Karrow.Thornwall.40',
-      now: '2026-08-04T00:00:00.000Z',
-    });
-    expect(patch).not.toBeNull();
-    expect(patch.relationshipStates['rel.Karrow.Mereth'].relationshipType).toBe('allied');
-    // The source carries the guard explicitly — a future edit that drops the
-    // carried type reds here as well as behaviourally.
-    expect(CODE(EXECUTION_SOURCE)).toContain('relationshipType: current.relationshipType');
+  test('NEGATIVE CONTROL — the cure is in THE WRITER now, and the failure it prevents is real', () => {
+    // ⚠️ THIS PIN MOVED WITH THE CURE (WZ-5). It used to assert the razing carried
+    // `relationshipType` in its own patch, because the writer could not type an
+    // unmaterialized edge. The writer takes the edge now, so the guard lives there
+    // — and this control drives the WRITER directly, in both polarities, which is
+    // a strictly stronger proof than reading the old call site's source.
+    const authoredEdge = { id: 'rel.Karrow.Mereth', from: 'Karrow', to: 'Mereth', relationshipType: 'allied' };
+    const bare = { relationshipStates: {}, tick: 40 };
+    const incident = {
+      id: 'ghost-control',
+      relationshipKey: 'rel.Karrow.Mereth',
+      relationshipPatch: { fear: 0.5 },
+      metadata: { incidentType: 'razing_witnessed' },
+      proposalPayload: null,
+    };
+    // WITHOUT the edge: the old behaviour, and the defect is real rather than
+    // theoretical — an authored ALLIED edge is written back as `neutral`.
+    const blind = applyRelationshipPatch(bare, incident, null);
+    expect(blind.relationshipStates['rel.Karrow.Mereth'].relationshipType).toBe('neutral');
+    // WITH the edge: the authored type survives a write to a record that never existed.
+    const cured = applyRelationshipPatch(bare, incident, null, authoredEdge);
+    expect(cured.relationshipStates['rel.Karrow.Mereth'].relationshipType).toBe('allied');
+    // And the razing hands its edge over rather than re-deriving the truth by hand.
+    expect(CODE(EXECUTION_SOURCE)).toContain('}, now, pair.edge)');
   });
 });
 
@@ -511,11 +514,18 @@ describe('the single writer, and the law leaf that cannot reach anything', () =>
 
   test('the razing estate never writes an axis the judgment does not name', () => {
     const code = CODE(EXECUTION_SOURCE);
-    // The patch's key set is the contract: five carried + three moved. A new
-    // axis appearing here is a design change that must be argued, not absorbed.
+    // The patch's key set is the contract: THE THREE THE JUDGMENT MOVES, and only
+    // those. A new axis appearing here is a design change that must be argued, not
+    // absorbed. The five formerly CARRIED axes are deliberately absent now — the
+    // writer derives them from the edge (WZ-5), so re-listing them here would be a
+    // second, drifting copy of a baseline that has one owner.
     const patchBody = code.slice(code.indexOf('relationshipPatch: {'));
-    for (const axis of ['relationshipType', 'dependency', 'leverage', 'tradeBalance', 'pactStrength', 'trust', 'resentment', 'fear']) {
-      expect(patchBody).toContain(`${axis}:`);
+    const patchKeys = patchBody.slice(0, patchBody.indexOf('},'));
+    for (const axis of ['trust', 'resentment', 'fear']) {
+      expect(patchKeys).toContain(`${axis}:`);
+    }
+    for (const carried of ['relationshipType', 'dependency', 'leverage', 'tradeBalance', 'pactStrength']) {
+      expect(patchKeys).not.toContain(`${carried}:`);
     }
     for (const forbidden of ['militaryBurden', 'aidBurden', 'obligationFatigue']) {
       expect(patchBody.slice(0, patchBody.indexOf('},'))).not.toContain(forbidden);

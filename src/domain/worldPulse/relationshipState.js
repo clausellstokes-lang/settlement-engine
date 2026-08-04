@@ -306,6 +306,35 @@ export function relationshipKeyFromEdge(edge) {
   return `rel.${from}.${to}`;
 }
 
+/**
+ * THE REAL GRAPH EDGE between two settlements, or null when none connects them.
+ *
+ * ⚠️ WHY THIS EXISTS, AND WHY IT RETURNS THE EDGE RATHER THAN THE KEY. Four
+ * modules had each hand-rolled a private `edgeKeyBetween` over this exact walk
+ * (peaceTermsGraph, relationshipEvolution, corruptionWeb, informationStatecraft),
+ * and every one of them threw the EDGE away and kept only its key. That discard is
+ * what made the ghost-materialization class possible: the relationship plane's one
+ * writer was handed a key with no way to learn what the edge IS, so an edge whose
+ * state record had never been written got re-typed `neutral` on its way past. The
+ * four keyed helpers now delegate here and the writer is handed the edge itself.
+ *
+ * Matches on `from`/`to` exactly as all four forks did — deliberately NOT through
+ * `getRelationshipSettlements`, whose wider alias set would match edges the
+ * previous behaviour did not and move worlds that have nothing to do with this fix.
+ *
+ * @param {ReadonlyArray<{ from?: unknown, to?: unknown, id?: unknown }>|null|undefined} edges
+ * @param {string} a @param {string} b
+ * @returns {{ from?: unknown, to?: unknown, id?: unknown }|null}
+ */
+export function edgeBetween(edges, a, b) {
+  for (const edge of Array.isArray(edges) ? edges : []) {
+    const f = edge?.from != null ? String(edge.from) : '';
+    const t = edge?.to != null ? String(edge.to) : '';
+    if ((f === a && t === b) || (f === b && t === a)) return edge;
+  }
+  return null;
+}
+
 /** @param {any} edge */
 export function getRelationshipSettlements(edge) {
   return {

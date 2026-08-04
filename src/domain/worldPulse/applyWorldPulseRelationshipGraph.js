@@ -90,7 +90,7 @@ export function openCoalitionEnemyRelationship({
       reason: 'An allied court answered a live call and opened its own bilateral war edge.',
     },
   };
-  const nextState = applyRelationshipPatch(worldState, labelOutcome, now);
+  const nextState = applyRelationshipPatch(worldState, labelOutcome, now, rawEdge);
   graph = applyRelationshipLabelToGraph(graph, labelOutcome, now);
   const nextEdge = relationshipEdgeForOutcome(graph, labelOutcome);
   if (nextEdge) {

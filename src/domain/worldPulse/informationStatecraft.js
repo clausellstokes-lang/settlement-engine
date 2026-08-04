@@ -56,7 +56,7 @@ import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, hasSpatialLedger
 import { beliefsActive, GOVERNING_SEAT_KEY, strengthBandOf, governingCoalition } from './beliefMap.js';
 import { intelTradeActive, intelInjectionBelief, resolveIntelSale, INTEL_TRANSFERS_LEDGER } from '../spatial/intelActs.js';
 import { applyRelationshipPatch } from './relationshipEvolution.js';
-import { relationshipKeyFromEdge } from './relationshipState.js';
+import { relationshipKeyFromEdge, edgeBetween } from './relationshipState.js';
 import { npcId } from './npcAgency.js';
 import { importanceWeight } from '../entities/npcs.js';
 import {
@@ -1144,18 +1144,6 @@ function bluffExposureNpcDeltas(worldState, tick) {
 }
 
 // ── The grievance-edge writer (SEE/LIE exposure → the E1 incident machinery) ─────
-/** The REAL graph edge key between two settlements (relationshipStates is keyed by the edge's
- *  own id, so a synthesized key would orphan the overlay). Mirrors peaceTerms.edgeKeyBetween.
- *  @param {Array<Record<string, unknown>>} edges @param {string} a @param {string} b @returns {string | null} */
-function edgeKeyBetween(edges, a, b) {
-  for (const edge of (Array.isArray(edges) ? edges : [])) {
-    const f = edge?.from != null ? String(edge.from) : '';
-    const t = edge?.to != null ? String(edge.to) : '';
-    if ((f === a && t === b) || (f === b && t === a)) return relationshipKeyFromEdge(edge);
-  }
-  return null;
-}
-
 /**
  * Apply this tick's exposure grievances through the E1 incident machinery (applyRelationshipPatch):
  * bump the shared (a↔b) edge's resentment + stamp a typed incident — so it feeds warReasons'
@@ -1170,8 +1158,9 @@ function applyExposureGrievances(worldState, edges, grievances, now) {
     .slice()
     .sort((x, y) => compareCodepoint(`${x.a}|${x.b}`, `${y.a}|${y.b}`) || (finiteNumber(x.magnitude01, 0) - finiteNumber(y.magnitude01, 0)));
   for (const g of list) {
-    const key = edgeKeyBetween(edges, String(g.a), String(g.b));
-    if (!key) continue;
+    const edge = edgeBetween(edges, String(g.a), String(g.b));
+    if (!edge) continue;
+    const key = relationshipKeyFromEdge(edge);
     const cur = asObject(asObject(/** @type {{ relationshipStates?: unknown }} */ (ws).relationshipStates)[key]);
     const resentment = clamp01(finiteNumber(cur.resentment, 0) + finiteNumber(g.magnitude01, 0));
     ws = /** @type {Record<string, unknown>} */ (applyRelationshipPatch(ws, {
@@ -1180,7 +1169,7 @@ function applyExposureGrievances(worldState, edges, grievances, now) {
       metadata: { incidentType: g.incidentType || 'deception_betrayal' },
       severity: clamp01(finiteNumber(g.magnitude01, 0)),
       proposalPayload: null,
-    }, now));
+    }, now, edge));
   }
   return ws;
 }
