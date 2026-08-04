@@ -735,8 +735,17 @@ describe('P4.6 DORMANCY — object identity, not deep equality', () => {
     // The demographic lane is gated by ITS flag, so its Herald lines must survive the
     // settlement-lifecycle switch being off. A dark demographic lane still forwards the
     // empty array this path always returned.
-    expect(read('src/domain/worldPulse/settlementLifecycleKernel.js'))
-      .toContain('newsEntries: demo.newsEntries,');
+    //
+    // RE-ADDRESSED 2026-08-04 (WR-10 lane WW-B): the host's dark-path return now folds the
+    // sovereignty market's beats beside the demographic ones, for the identical reason and
+    // under the identical law — that lane too is gated by its OWN flag and must not inherit
+    // this module's switch. The pin's CLAIM is unchanged, so it is re-addressed rather than
+    // deleted: `demo.newsEntries` must still be spread into the return the dormancy gate
+    // takes. A host that dropped it would red here exactly as before.
+    const source = read('src/domain/worldPulse/settlementLifecycleKernel.js');
+    expect(source).toContain('...demo.newsEntries]');
+    expect(source, 'and the market lane rides the same gate for the same reason')
+      .toContain('...market.newsEntries,');
   });
 
   test('no transcendental or Math.pow reaches any P4 seeded path', () => {

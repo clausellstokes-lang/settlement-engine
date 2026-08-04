@@ -81,6 +81,13 @@ import {
 import { withActiveCondition, withoutActiveCondition } from '../activeConditions.js';
 import { stablePart } from './stablePart.js';
 import { advanceDemographics } from './demographicsKernel.js';
+// WR-10 THE SOVEREIGNTY MARKET (amendment S). A plan-lane SIBLING, mounted here for
+// the demographics precedent's reason: it is gated by its OWN flag conjunction and
+// must not inherit this module's switch. It runs BEFORE advanceDemographics because
+// its episode gate reads the demographic plan ledger's `band` cell as the PRIOR band —
+// after that call the cell already holds this tick's, and every crossing would read as
+// a non-crossing forever. Dark ⇒ both input references come straight back.
+import { advanceSovereigntyMarket } from './sovereigntyMarketStage.js';
 import { lineageReceipt, pickLine, LIFECYCLE_NEWS } from './eventProse.js';
 import { chooseSteadingSite, deriveSteadingResources, landformPlaceName, resourcePhrase } from './steadingTopography.js';
 import {
@@ -527,10 +534,16 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
   // keeps "which parents may seed" a single authored fact.
   const demoDigest = /** @type {import('./demographicsLand.js').LandDigest|null} */ (
     /** @type {unknown} */ (activeSpatialDigest(/** @type {never} */ (hostWorldState))));
+  const market = advanceSovereigntyMarket({
+    snapshot, worldState: hostWorldState, digest: demoDigest, tick, now,
+    settlementUpdates: /** @type {Array<Record<string, unknown>>} */ (/** @type {unknown} */ (settlementUpdates)),
+    season: typeof asObject(asObject(hostWorldState).calendar).season === 'string'
+      ? String(asObject(asObject(hostWorldState).calendar).season) : null,
+  });
   const demo = advanceDemographics({
     snapshot: /** @type {import('./demographicsKernel.js').DemoSnapshot} */ (/** @type {unknown} */ (snapshot)),
-    worldState: hostWorldState,
-    settlementUpdates: /** @type {import('./demographicsKernel.js').DemoUpdate[]} */ (/** @type {unknown} */ (settlementUpdates)),
+    worldState: market.worldState,
+    settlementUpdates: /** @type {import('./demographicsKernel.js').DemoUpdate[]} */ (/** @type {unknown} */ (market.settlementUpdates)),
     rng, tick,
     pIndex: /** @type {import('./demographicsKernel.js').DemoPressureIndex|null} */ (
       /** @type {unknown} */ (pIndex || null)),
@@ -552,8 +565,9 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
       // WAVE P4: the demographic lane's Herald lines are ITS news, gated by ITS flag, so
       // they must survive this module's own dormancy gate. Dark demographics returns an
       // empty array here, which is the same [] this path always returned.
-      newsEntries: demo.newsEntries,
+      newsEntries: [...market.newsEntries, ...demo.newsEntries],
       receipts: [
+        ...market.receipts,
         .../** @type {Array<Record<string, unknown>>} */ (/** @type {unknown} */ (demo.receipts)),
         ...demo.migrationReceipts,
         ...demo.planReceipts,
@@ -592,9 +606,12 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
   }
 
   /** @type {Array<Record<string, unknown>>} */
-  const newsEntries = [];
+  // WR-10's beats and receipts are ITS flag's, so they survive this module's own gate on
+  // both paths — the same law wave P4's demographic lines already obey here.
+  const newsEntries = [...market.newsEntries];
   /** @type {Array<Record<string, unknown>>} */
   const receipts = [
+    ...market.receipts,
     .../** @type {Array<Record<string, unknown>>} */ (/** @type {unknown} */ (demo.receipts)),
     ...demo.migrationReceipts,
     ...demo.planReceipts,
@@ -1095,7 +1112,7 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
   let nextWorldState = worldState;
   // The demographic step's own write counts as change even when the satellite lane
   // held still, or applyPulseMover would drop its settlementUpdates on the floor.
-  let changed = cloned || demo.changed;
+  let changed = cloned || demo.changed || market.changed;
   if (ledgerChanged) {
     nextWorldState = foldSatellitesLedger(nextWorldState, nextLedger);
     changed = true;

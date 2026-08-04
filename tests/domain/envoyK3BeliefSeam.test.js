@@ -266,6 +266,47 @@ const NEGOTIATION_MODULES = Object.freeze({
     './peaceTermsCatalog.js',
     './sovereigntyAppraisal.js',
   ],
+  // WR-10 THE MARKET COMPOSER (lane WW-B, chair ruling CR-WR10-H). This stage is
+  // deliberately OUTSIDE the zero-import set and pinned by its own reach instead, which is
+  // the P4 no-hidden-governor pattern: the appraisal leaf above cannot assemble the banded
+  // words it eats, so SOMETHING has to, and the honest place to put that job is a module
+  // whose every reach is written down. The list below is the whole of it, and it bottoms
+  // out where it must:
+  //   • `./beliefMap.js` is THE BELIEF SURFACE — the only place a court's picture of
+  //     another settlement lives. Reading it is what makes this a belief path rather than
+  //     a truth one; it is the seam, not a hole in it.
+  //   • `./demographicsRates.js` + `./demographicsResponses.js` + `./demographicsPlans.js`
+  //     are the ONE pressure ladder and its bound readers. The composer reads a SELLER'S
+  //     OWN pressure — the §IV.4 self-read carve-out the doctrine stage already cites for a
+  //     court's own granary — and reads the plan ledger's band cell for the crossing.
+  //     Reusing them is what J-WR-10-B demands; minting a rival ladder would be the
+  //     violation.
+  //   • the four sovereignty leaves + `./sovereigntyIntent.js` are this program's own
+  //     belief-side reads, each pinned in its own file.
+  //   • `./peaceTermsSale.js` is the terms VOCABULARY's writer family — the mint, not a
+  //     reader — and `./treatyEnforcement.js` / `./treatyOrientation.js` read the treaty
+  //     ledger, which is a PUBLIC instrument both parties signed and nobody's secret.
+  //   • `./sovereigntyNews.js` is the projector and `../region/contestMath.js` is the
+  //     determinism primitive (`hash01`), the same shelf `prng` sits on.
+  // What is NOT here is the point: no `warDeployment`, no capacity read, no pressure model,
+  // no settlement record reached for a COUNTERPART'S legs. A missing leg stays missing and
+  // the trade is refused with a receipt — never backfilled from truth.
+  'src/domain/worldPulse/sovereigntyMarketStage.js': [
+    '../region/contestMath.js',
+    './beliefMap.js',
+    './demographicsPlans.js',
+    './demographicsRates.js',
+    './demographicsResponses.js',
+    './peaceTermsSale.js',
+    './sovereigntyAppraisal.js',
+    './sovereigntyAssets.js',
+    './sovereigntyBundle.js',
+    './sovereigntyIntent.js',
+    './sovereigntyNews.js',
+    './sovereigntyReach.js',
+    './treatyEnforcement.js',
+    './treatyOrientation.js',
+  ],
 });
 
 // THE POSITIVE CONTROL. The absence pins above are only worth anything if the same
@@ -332,13 +373,20 @@ function discoverErrandFamily() {
  * The exemption is a declaration with a reason, not a silence: a new stage reds
  * here until someone decides which it is.
  *
+ * WIDENED FOR WR-10 (lane WW-B): and now `sovereignty*Stage.js`. The market composer is a
+ * stage that assembles banded words for the appraisal exactly as the doctrine stage does
+ * for the feasibility composite, so leaving the pattern at two prefixes would have made
+ * the third family invisible here by the identical filename accident — and this file would
+ * have stayed green while saying nothing about the one stage in the tree whose whole job is
+ * deciding what a court is allowed to know about a town it might buy.
+ *
  * WIDENED FOR WR-8 (lane W8-A): the pattern now covers `conquest*Stage.js` too.
  * Scoping it to `envoy*` would have made the new conquest stage invisible here by
  * the identical filename accident F7 was raised about — the discovery would have
  * iterated straight past it and this file would have stayed green while saying
  * nothing about it in either direction. A stage is a stage.
  */
-const STAGE_FAMILY_RE = /^(?:envoy|conquest).*Stage\.js$/;
+const STAGE_FAMILY_RE = /^(?:envoy|conquest|sovereignty).*Stage\.js$/;
 
 /**
  * `envoyInterceptionStage.js` is the ORCHESTRATION stage and legitimately reads

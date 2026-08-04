@@ -1614,6 +1614,22 @@ their flags are NOT in the standing lighting batch — they light at the owner-s
 soak redo, in build order, after `demographicsEnabled` is lit (§3's flag-dependency
 ruling).
 
+**THE WR-10 LIGHTING PRECONDITION (added 2026-08-04, chair ruling CR-WR10-H — closing a
+dead-lighting trap in writing):** `sovereigntyTradeEnabled` lights only AFTER the belief
+surfaces carry the appraisal's four legs — believed tier, believed stores, believed route
+position and the believed demographic trajectory. Measured at the wiring wave, exactly ONE
+of the four exists for an arbitrary (court, holding) pair: `beliefRecord`'s
+`populationTrendBand` (present only when `beliefAxesEnabled`, and mapping exactly onto the
+trajectory ladder). The negotiation picture's `storesBand` lives inside an ERRAND, so it
+exists only while two courts are already negotiating; believed tier and believed route
+position have no surface at all. Three legs missing ⇒ `appraiseSettlementAsset` returns
+`known: false` ⇒ the market clears NOTHING and emits an honest receipted no-trade. Lighting
+the flag before the belief-legs wave (queued) would therefore light a market that can never
+trade — a subsystem that is dark by arithmetic while its flag says lit, which is worse than
+a flag that is off. The composer's `beliefLegsFor` seam is injectable so that wave supplies
+the legs without touching the stage, and the lit-with-legs contract fixture already proves
+the clearing runs end to end the moment they arrive.
+
 1. WR-0 lands FIRST (it settles the tree; nothing builds over a dirty tree).
 2. WR-1 → WR-2 → WR-3 → WR-4 → WR-5 in order (each consumes the last).
 3. WR-6 after WR-5; WR-7 after WR-6 (votes need books; ransom needs errands).

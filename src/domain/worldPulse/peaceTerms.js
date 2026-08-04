@@ -35,6 +35,19 @@
  *   peaceTermsCoalition    §7 who besieged whom, the congress, the peel read
  *   peaceTermsOverlay      every E1b/E1c relationship write, and only these
  *   peaceTermsDocument     §13 the treaty as a legible document + the ledger reads
+ *   peaceTermsSale         WR-10 THE VICTOR-FREE MINT — the third transport into this
+ *                          instrument, for a treaty with no war in it. It is the ONLY
+ *                          family member NOT re-exported from this head, and that is
+ *                          deliberate rather than an omission: a re-export would draw it
+ *                          into this file's 35-module import cycle, and the market
+ *                          composer that calls it must stay outside that cycle (the
+ *                          measured reason is recorded in satellitesLedger.js's header).
+ *                          Its own header carries the CR-WR10-E measurement: the mint
+ *                          FUNCTIONS here are already victor-free, but their only road is
+ *                          PASS 1's sue_for_peace loop, which a peacetime sale can never
+ *                          enter. Forking a second terms writer was the named defect, so
+ *                          the sale mint composes THIS family's catalog, primitives and
+ *                          clock, and nothing else authors a sale treaty.
  * The public surface is UNCHANGED: every name this module has ever exported is
  * still exported here, so no consumer import path moved.
  *
