@@ -136,6 +136,26 @@ const REACH = boleReach();
 const SCORCH_OUT = GILD.edgeAmp * 2;
 
 /**
+ * HOW FAR THE SINGE HALO REACHES BEYOND THE SCORCH — the outermost of the three
+ * layers, and the one that stops the brand having an edge at all.
+ *
+ * ⚠️ IT IS A MULTIPLE OF THE SCORCH'S OWN REACH so the three layers stay in
+ * proportion when `edgeAmp` moves; a px constant here would make the halo a hairline
+ * at a large amplitude and a smear at a small one.
+ */
+const SINGE_OUT = SCORCH_OUT * 2.2;
+
+/**
+ * THE BURN'S OWN ANISOTROPY — slow across the shaft, fast along its short axis, which
+ * makes the displaced edge run in long horizontal TONGUES the way a brand bites along
+ * wood fibre. ⚠️ IT IS THE SAME DIRECTION THE GRAIN RUNS (theme.js's `0.008 0.42`), one
+ * octave broader, so the burn and the wood it is burned into agree about which way the
+ * material goes. The first cut ran `0.035 0.09` — fast ACROSS and slow ALONG, i.e. a
+ * cross-grain wobble on a longitudinally-grained shaft.
+ */
+const BURN_FREQ = '0.012 0.16';
+
+/**
  * THE LEAF + THE KEYLINE, as the style one text run wears.
  *
  * ⚠️ ONE VERTICAL TWO-STOP GRADIENT, AND NO THIRD STOP EVER. The temptation on a
@@ -174,14 +194,14 @@ export const LEAF = Object.freeze({
 /**
  * THE BOLE BED — a scorched, branded-in patch of shaft behind the whole wordmark run.
  *
- * ⚠️⚠️ THE CORE IS THE BED AND THE SCORCH LIVES ENTIRELY OUTSIDE IT — and the
+ * ⚠️⚠️ THE CORE IS THE BED AND EVERY OTHER LAYER LIVES ENTIRELY OUTSIDE IT — and the
  * INEQUALITY between them is what makes the containment geometric rather than hopeful.
  *
- * Two layers. The opaque BOLE core is exactly the bed's own box, which is exactly
- * `ink ± BOLE_PAD` (see boleReach), undisplaced. The BOLE_DEEP scorch is a LARGER rect
- * — inset by −2·edgeAmp on every side — run through a displacement map of amplitude
- * edgeAmp, so its edge can wander anywhere in [bed + 1·edgeAmp, bed + 3·edgeAmp] and
- * NEVER inside the core. So no seed, at any amplitude, can uncover a glyph.
+ * Three layers. The opaque BOLE core is exactly the bed's own box, which is exactly
+ * `ink ± BOLE_PAD` (see boleReach), undisplaced. The scorch is a LARGER rect — inset by
+ * −2·edgeAmp on every side — run through a displacement map of amplitude edgeAmp, so its
+ * edge can wander anywhere in [bed + 1·edgeAmp, bed + 3·edgeAmp] and NEVER inside the
+ * core. The singe halo is larger still. So no seed, at any amplitude, can uncover a glyph.
  *
  * ⚠️ THE FIRST CUT INSET THE CORE BY THE AMPLITUDE INSTEAD, AND IT COST THE WHOLE
  * EFFECT. That construction is also sound, and it couples the two numbers backwards:
@@ -191,6 +211,29 @@ export const LEAF = Object.freeze({
  * the scorch OUTWARD instead decouples them completely: the amplitude is free, the
  * ragged edge is the silhouette the eye actually gets, and the AA claim is untouched
  * because the core never moved.
+ *
+ * ⚠️⚠️ AND IT STILL READ AS A PLAQUE — R1, AND THE CAUSE WAS AN INTERNAL EDGE NOBODY
+ * WAS LOOKING FOR. The reach repair made the bed hug `ink ± 3px` and the plaque read
+ * survived it. Probed at device-pixel resolution down a column of the real bar, the
+ * cause is unambiguous: the SCORCH was BOLE_DEEP and the CORE was BOLE, so the core's
+ * own undisplaced rectangle drew a DEAD-STRAIGHT horizontal step from L 0.0088 to
+ * L 0.0168 across the whole run — a hard rectangle edge inside the burn. The bed's
+ * OUTER edge was already ragged and already bled past the bar's top; what a reader was
+ * seeing was the rectangle drawn INSIDE it.
+ *
+ * SO THE THREE LAYERS ARE RE-TONED RATHER THAN RE-SHAPED, and the cure is that the
+ * scorch takes the CORE'S OWN TONE. Core and scorch are then one continuous BOLE field
+ * with a single ragged outline and no internal edge anywhere, and the deep tone moves
+ * OUTWARD to where a brand actually chars — the SINGE HALO, blurred, fading into the
+ * wood so the burn has no hard boundary on any side. That is also what the tokens
+ * already claimed: "BOLE is the opaque core; BOLE_DEEP is the scorch at its EDGE, where
+ * the brand bit deepest".
+ *
+ * ⚠️ THE DISPLACEMENT IS NOW ANISOTROPIC ALONG THE GRAIN. A brand bites INTO wood, and
+ * wood splits along its fibres, so the burn's edge runs in long horizontal tongues
+ * rather than in an even wobble. `0.012 0.16` is slow across the shaft and fast along
+ * its short axis — the same direction the grain itself has run since V3 (`0.008 0.42`),
+ * one octave broader. An isotropic edge reads as a torn sticker.
  *
  * ⚠️ `color-interpolation-filters="sRGB"` IS SPELLED OUT AND IS NOT OPTIONAL — the
  * SVG default for a filter chain is linearRGB, engines disagree about it, and the
@@ -221,31 +264,63 @@ function BoleBed({ id }) {
       <defs>
         <filter
           id={`${id}-scorch`}
-          x="-20%"
-          y="-40%"
-          width="140%"
-          height="180%"
+          x="-40%"
+          y="-60%"
+          width="180%"
+          height="220%"
           colorInterpolationFilters="sRGB"
         >
-          <feTurbulence type="fractalNoise" baseFrequency="0.035 0.09" numOctaves="3" seed={GILD.seed} result="n" />
+          <feTurbulence type="fractalNoise" baseFrequency={BURN_FREQ} numOctaves="3" seed={GILD.seed} result="n" />
           <feDisplacementMap in="SourceGraphic" in2="n" scale={GILD.edgeAmp} xChannelSelector="R" yChannelSelector="G" />
         </filter>
+        {/* The halo's own chain: the SAME field at the same seed, displaced the same
+            way, then blurred. ⚠️ THE BLUR IS ANISOTROPIC TOO (`3 1.4`) — a round blur
+            would put an even glow all round the brand, which is a shadow, not a singe.
+            Heat travels along the fibre. */}
+        <filter
+          id={`${id}-singe`}
+          x="-40%"
+          y="-60%"
+          width="180%"
+          height="220%"
+          colorInterpolationFilters="sRGB"
+        >
+          <feTurbulence type="fractalNoise" baseFrequency={BURN_FREQ} numOctaves="3" seed={GILD.seed} result="n" />
+          <feDisplacementMap in="SourceGraphic" in2="n" scale={GILD.edgeAmp} xChannelSelector="R" yChannelSelector="G" result="d" />
+          <feGaussianBlur in="d" stdDeviation="3 1.4" />
+        </filter>
       </defs>
-      {/* 1 — the scorch: the outer field, edge-displaced, deepest where the brand bit.
-             ⚠️ It starts TWO amplitudes outside the core, so a displacement of ONE
-             amplitude leaves its nearest possible edge a full amplitude clear of the
+      {/* 1 — THE SINGE HALO: the char at the burn's rim, blurred out into bare wood so
+             the brand has no hard boundary on any side. It is the outermost layer and
+             the only one a reader ever sees END. */}
+      <rect
+        data-testid="bole-singe"
+        x={-SINGE_OUT}
+        y={-SINGE_OUT}
+        width={BW + SINGE_OUT * 2}
+        height={BH + SINGE_OUT * 2}
+        fill={BOLE_DEEP}
+        fillOpacity="0.85"
+        filter={`url(#${id}-singe)`}
+      />
+      {/* 2 — the scorch: the burn's own ragged silhouette, edge-displaced along the
+             grain. ⚠️ It starts TWO amplitudes outside the core, so a displacement of
+             ONE amplitude leaves its nearest possible edge a full amplitude clear of the
              core on every side — the ragged outline is the silhouette, and it can
-             never be the thing under a letter. */}
+             never be the thing under a letter.
+             ⚠️⚠️ IT IS THE CORE'S OWN TONE. That is R1's cure: two tones here draw a
+             hard rectangle inside the burn (see the note above), and one tone draws
+             nothing at all. */}
       <rect
         data-testid="bole-scorch"
         x={-SCORCH_OUT}
         y={-SCORCH_OUT}
         width={BW + SCORCH_OUT * 2}
         height={BH + SCORCH_OUT * 2}
-        fill={BOLE_DEEP}
+        fill={BOLE}
         filter={`url(#${id}-scorch)`}
       />
-      {/* 2 — THE OPAQUE CORE, and it IS the bed: exactly `ink ± BOLE_PAD`, undisplaced,
+      {/* 3 — THE OPAQUE CORE, and it IS the bed: exactly `ink ± BOLE_PAD`, undisplaced,
               carrying the whole AA claim by itself. */}
       <rect
         data-testid="bole-core"
@@ -276,4 +351,4 @@ export default function GildedWordmark({ children, id = 'gild' }) {
   );
 }
 
-export { BH, BW, REACH, SCORCH_OUT };
+export { BH, BW, BURN_FREQ, REACH, SCORCH_OUT, SINGE_OUT };

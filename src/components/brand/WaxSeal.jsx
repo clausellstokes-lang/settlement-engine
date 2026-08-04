@@ -57,7 +57,11 @@
  * caption, the PDF byline) uses the same plain string. The mark is never allowed to
  * become the way the product's name is spelled.
  */
-import { GILT, GILT_LIGHT, SEAL_GLINT, SEAL_RIM, SEAL_WAX, lightArc } from '../theme.js';
+import {
+  GILT, GILT_LIGHT, SEAL_FIT, SEAL_GLINT, SEAL_RIM, SEAL_WAX,
+  lightArc, sealRegister, sealSidebearingEm,
+} from '../theme.js';
+import SealImpression from './SealImpression.jsx';
 
 /** The seal's own space. The wax's outer edge is deliberately not a perfect circle. */
 const S = 100;
@@ -129,16 +133,22 @@ const INNER_COUNTER = preDivide(COUNTER, 1 - RING, (S / 2) * RING);
  * The wax seal that stands in for one `o`.
  *
  * @param {Object} props
- * @param {string} [props.size='0.66em'] the seal's box, in the wordmark's own em so it
- *   tracks the type at every breakpoint rather than being re-tuned per header.
+ * @param {string} [props.size] the seal's box, in the wordmark's own em so it tracks
+ *   the type at every breakpoint rather than being re-tuned per header. DERIVED from
+ *   SEAL_FIT rather than spelled, so the size and the sidebearing that pays for it can
+ *   never drift apart.
  *   ⚠️ SIZED AGAINST THE X-HEIGHT, NOT THE EM. This serif's x-height is about 0.47em,
  *   so 0.66em makes the wax about 1.4x the height of the letters beside it — a blob
  *   pressed onto the line, which is what wax is, rather than a glyph that happens to
  *   be round. The first cut at 0.78em rose to cap height and read as a mis-set letter
  *   in the wrong point size.
+ * @param {number} [props.px] the seal's RENDERED box in px, when the caller knows it.
+ *   It selects the size ladder's register (theme.js SEAL_LADDER / sealRegister), and
+ *   its absence means the DIMPLE — the ribbon's register, and the safe default.
  * @param {React.CSSProperties} [props.style]
  */
-export default function WaxSeal({ size = '0.66em', style }) {
+export default function WaxSeal({ size = `${SEAL_FIT.sizeEm}em`, px, style }) {
+  const register = sealRegister(px);
   return (
     <svg
       viewBox={`0 0 ${S} ${S}`}
@@ -147,13 +157,21 @@ export default function WaxSeal({ size = '0.66em', style }) {
       aria-hidden="true"
       focusable="false"
       data-testid="wax-seal"
+      data-seal-register={register}
       style={{
         // ⚠️ INLINE-BLOCK ON THE TEXT BASELINE, NOT A FLOATED DECORATION. The seal
         // occupies the `o`'s place in the line box, so the word's spacing, its
         // selection rectangle and its line breaking are the type's, not the SVG's.
         display: 'inline-block',
         verticalAlign: '-0.045em',
-        margin: '0 0.015em',
+        // ⚠️⚠️ A NEGATIVE SIDEBEARING, DERIVED — counsel R2's kerning check made
+        // structural. The blob is 0.66em wide and the `o` it replaces advances only
+        // 0.5762em, so before this the whole name after the seal sat 2.72px to the
+        // right of where it sets in plain type. The mark keeps its size and gives the
+        // overrun back as margin, the way an oversized initial overhangs its advance:
+        // `r`, `g` and `e` return to their true positions and the wax simply reaches
+        // into their sidebearings. theme.js SEAL_FIT owns the measurement.
+        margin: `0 ${sealSidebearingEm().toFixed(5)}em`,
         ...style,
       }}
     >
@@ -187,6 +205,16 @@ export default function WaxSeal({ size = '0.66em', style }) {
         luminance step between the gold ring and the bole showing through.
       */}
       <path d={COUNTER} fill="none" stroke={SEAL_RIM} strokeWidth="5" data-testid="wax-seal-dimple" />
+      {/*
+        3b — THE IMPRESSION, and ONLY on the size ladder's upper rung. Owner-confirmed
+        2026-08-04: the seal integrates the house device as its wax impression, with a
+        tonal dimple at the ribbon's ~16px and the full impressed device at >=28px. At
+        the ribbon this renders NOTHING — the owner's clarification is explicit that the
+        bar must show the dimple and never a bright mini-logo — so the default register
+        is the quiet one and a caller has to ask for the loud one by declaring its size.
+        components/brand/SealImpression.jsx owns the deboss and why it is a deboss.
+      */}
+      {register === 'device' && <SealImpression />}
       {/*
         4 — THE GLINT — one short arc on the side the light comes from (the same light
         the bed and the barrel use). Matte wax, not gloss: an arc at low opacity, never

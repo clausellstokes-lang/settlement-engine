@@ -138,7 +138,17 @@ describe('every eager module that INLINES the device pins to the canonical paths
   // true whether the set currently holds one member or two. The membership assertion is
   // therefore ">= 1" plus a live census that no OTHER brand module has quietly grown a
   // copy — which is the guard the old ">1" could never be.
-  const INLINERS = ['HouseDevice.jsx'];
+  // ⚠️⚠️ AND IT IS BACK TO TWO IN V4.1, WHICH IS THE SET SHAPE EARNING ITS KEEP. The
+  // owner's seal clarification (2026-08-04) puts the house device INSIDE the wax as an
+  // impression above 28px, so a second eager module carries the silhouette again —
+  // SealImpression.jsx. The census below CAUGHT its arrival on the first run rather
+  // than being told about it, which is precisely the guard a one-file pin could not be.
+  //
+  // ⚠️ IT IS ALSO WHY THE IMPRESSION IS ITS OWN MODULE RATHER THAN LIVING IN WaxSeal.
+  // WaxSeal is this block's NEGATIVE CONTROL — the sibling proving the containment
+  // check can fail — so inlining the device there would have destroyed the only
+  // assertion that keeps the rest of the block honest, silently.
+  const INLINERS = ['HouseDevice.jsx', 'SealImpression.jsx'];
 
   it('the inliner set is non-empty and every member really exists', () => {
     expect(INLINERS.length).toBeGreaterThanOrEqual(1);

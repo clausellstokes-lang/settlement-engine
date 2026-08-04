@@ -107,10 +107,10 @@ import { isDegenerateSeed } from '../../src/components/brand/GildedWordmark.jsx'
 import { GLOSS_END, SHADOW_END, TURNS, tieOff } from '../../src/components/nav/ShaftWrap.jsx';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import {
-  BAND, BAND_PX_PER_UNIT, BAND_W, BARB, BOW, CALM_PAD_Y, DRIFT, LABEL_INK, LANE, QUILLS,
-  QUILL_H, REACH, RUN, SEAT, SHEENS, SHEEN_FLOOR, SHEEN_PEEK, SPLIT, SPLITS, VANES,
-  barbBuckets, calmZone, combCoverage, frayHairs, laneGap, lean, quill, rachis,
-  splitClears, unitHash,
+  BAND, BAND_PX_PER_UNIT, BAND_W, BARB, BOW, CALM_PAD_Y, DRIFT, LABEL_INK, LANE,
+  LOWER_CUTS, LOWER_CUT_INK, QUILLS, QUILL_H, REACH, RUN, SEAT, SHEENS, SHEEN_FLOOR,
+  SHEEN_PEEK, SPLIT, SPLITS, VANES, barbBuckets, calmZone, combCoverage, frayHairs,
+  laneGap, lean, quill, rachis, splitClears, unitHash,
 } from '../../src/components/nav/FletchBand.jsx';
 
 const H = vi.hoisted(() => ({
@@ -582,8 +582,16 @@ describe('2 — ⚠️⚠️ THE SHINGLE: three parallelograms, ascending into R
       expect(offs[1].dy).toBeGreaterThan(0);
       // The edge-light rides OUTSIDE the clip — it is this cell's own lit rim, so
       // half of it must fall on whatever lies behind.
-      const rims = [...g.children].filter((c) => c.tagName === 'path'
+      // ⚠️ THREE MARKS IN THIS TONE NOW, NOT TWO, AND THE THIRD IS NOT A RIM. Counsel
+      // R4 adds a whisper rachis along the band's LOWER CUT — the cut end of the quill,
+      // which is what keeps the hang from dissolving on a dark hero (FletchBand's
+      // `lowerCut`). It is excluded here by its own testid rather than by position,
+      // because this block is about the two SLANTED rims and their light; the lower
+      // cut is horizontal, carries no azimuth claim, and has its own pin.
+      const inRachisTone = [...g.children].filter((c) => c.tagName === 'path'
         && c.getAttribute('stroke') === FLETCH_RACHIS);
+      expect(inRachisTone.length).toBe(3);
+      const rims = inRachisTone.filter((c) => !/lower-cut/.test(c.dataset.testid || ''));
       expect(rims.length).toBe(2); // the leading edge and the trailing one
       for (const r of rims) {
         expect(Number(r.getAttribute('stroke-opacity'))).toBeLessThan(1); // a whisper
@@ -721,6 +729,89 @@ describe('2 — ⚠️⚠️ THE SHINGLE: three parallelograms, ascending into R
     // NON-VACUITY: the retired mark really did live below the vane, so this is a
     // relocation and not a claim about a mark that was never there.
     expect(SHEEN_PEEK + QUILL_H).toBeLessThan(BAND * 0.05);
+  });
+
+  test('⚠️ R3 — THE QUILL LINE STAYS 2.5px, AND THE GLANCE TEST IS THE RECORD', () => {
+    // ⚠️ THIS PIN EXISTS TO HOLD A DECISION, not to discover one. The counsel's R3 asked
+    // whether the indicator reads as a PROGRESS BAR rather than as metal on a shaft, and
+    // made the cure conditional on a 100% glance: keep 2.5px if it reads as metal, go to
+    // 3px plus a keyline if it does not.
+    //
+    // THE GLANCE, taken at 1440x900 on /create with Create lit, at 100% and 200%:
+    // the mark reads as a gold rule LYING ON the shaft, with the barrel's satin sheen
+    // visible above it. It does not read as a progress bar, and the reason is
+    // geometric rather than tonal — a progress bar starts at its container's left edge
+    // and stops partway; this one begins two thirds of the way across the viewport,
+    // spans EXACTLY one lane between its lap boundaries, and is bounded by the same
+    // parallels as the cell under it. At 200% it reads unambiguously as metal.
+    //
+    //   JUDGMENT (vetoable): 2.5px, no keyline. Say "veto" for 3px + a keyline.
+    //
+    // What the pin holds is the two numbers that carry that verdict, so a later retune
+    // has to come back to this note rather than move them quietly.
+    expect(QUILL_H).toBe(2.5);
+    expect(SHEEN_PEEK).toBe(0.5);
+    // …and the half-pixel of lit wood above it, which is what puts the metal ON the
+    // shaft rather than on the browser's own top edge. Without it the progress-bar read
+    // is not a matter of taste — the mark would be flush with the viewport.
+    expect(SHEEN_PEEK).toBeGreaterThan(0);
+    expect(QUILL_H / CHROME.headerDesktop, 'the indicator is a band, not a rule')
+      .toBeLessThan(0.08);
+    // NO KEYLINE: the alternative is recorded as absent, not merely unmentioned.
+    const { container } = render(<NavRibbon view="generate" onNavClick={() => {}} />);
+    const quill = container.querySelector('[data-testid="nav-fletch-quill-0"]');
+    expect(quill.getAttribute('stroke'), 'the quill line grew a keyline').toBeNull();
+    expect(quill.getAttribute('fill')).toBe(GILT_LIGHT);
+  });
+
+  test('⚠️⚠️ R4 — THE WHISPER RACHIS ON THE LOWER CUT, and it is NOT a state channel', () => {
+    // WHY IT EXISTS. V4 re-scoped the vane/wood boundary from 1.4.11 to three other
+    // channels, and the third is THE HANG — "the lower half of every vane sits on the
+    // ~11:1 parchment page, not on wood at all". That is an assumption about what is
+    // BEHIND the bar, and it is false on the one surface where the composition is most
+    // exposed: a dark hero. There the hanging half has no ground to contrast against and
+    // the fletching's lower silhouette stops existing.
+    //
+    // The cure is material rather than tonal: a hairline of the band's own pale RACHIS
+    // along the cut — the cut end of the quill, which is what a bound fletch shows there.
+    const { container } = render(<NavRibbon view="generate" onNavClick={() => {}} />);
+    const cuts = [0, 1, 2].map((l) => container.querySelector(`[data-testid="nav-fletch-lower-cut-${l}"]`));
+    for (const c of cuts) expect(c, 'a cell has no lower-cut whisper').toBeTruthy();
+    // 1 — A WHISPER. Under the BALANCE LAW it is a third of the leading rim's own ink,
+    //     which is the quietest spend that still gives the hang an outline.
+    for (const c of cuts) {
+      expect(Number(c.getAttribute('stroke-opacity'))).toBe(LOWER_CUT_INK);
+      expect(LOWER_CUT_INK).toBeLessThan(0.5);
+      expect(Number(c.getAttribute('stroke-width'))).toBeLessThanOrEqual(0.6);
+      expect(c.getAttribute('fill')).toBe('none');
+      expect(c.getAttribute('vector-effect')).toBe('non-scaling-stroke');
+    }
+    // 2 — ⚠️⚠️ IT IS NOT A STATE CHANNEL, which is the addendum's whole concern about
+    //     anything painted below the vane. Identical tone and identical opacity on the
+    //     lit cell and the two resting ones — so it cannot be read as active-ness — and
+    //     in a FLETCH ladder tone rather than a gilt one, so the gilt census above still
+    //     finds exactly one metal mark on the band.
+    const inks = cuts.map((c) => `${c.getAttribute('stroke')}@${c.getAttribute('stroke-opacity')}`);
+    expect(new Set(inks).size, 'the lower cut differs by state — it is an indicator').toBe(1);
+    expect(cuts[0].getAttribute('stroke')).toBe(FLETCH_RACHIS);
+    expect([GILT, GILT_LIGHT, GOLD]).not.toContain(cuts[0].getAttribute('stroke')); // anchored: the toBe above proves the tone is live
+    // 3 — EXPOSED EDGES ONLY, exactly like the fray: the run stops at the lap boundary,
+    //     because the last FLETCH.lap of cells 0 and 1 is hidden under the next cell and
+    //     a quill-end drawn there would hang in open space below a covering feather.
+    for (const lane of [0, 1]) {
+      const xs = ONCURVE(LOWER_CUTS[lane]).map((p) => p.x);
+      expect(Math.max(...xs)).toBeCloseTo((lane + 1) * LANE - SEAT + DRIFT, 1);
+      // …strictly short of where the cell's own quad ends, which is REACH further on.
+      expect(Math.max(...xs)).toBeLessThan(ONCURVE(VANES[lane].closed)[2].x - 1);
+    }
+    // Realm has no successor, so its cut runs to its own trailing edge — the one lane
+    // where "visible end" and "quad end" are the same place.
+    expect(Math.max(...ONCURVE(LOWER_CUTS[2]).map((p) => p.x)))
+      .toBeCloseTo(ONCURVE(VANES[2].closed)[2].x, 1);
+    // 4 — IT LIES ON THE CUT, not near it: y is exactly the vane's full depth.
+    for (const lane of [0, 1, 2]) {
+      for (const p of ONCURVE(LOWER_CUTS[lane])) expect(p.y).toBe(BAND);
+    }
   });
 });
 

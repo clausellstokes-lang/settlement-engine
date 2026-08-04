@@ -212,6 +212,14 @@ const SHEEN_FLOOR = BAND * 0.72;
 const SHEEN_PEEK = 0.5;
 const QUILL_H = 2.5;
 
+/**
+ * HOW LOUD THE LOWER CUT'S WHISPER RACHIS IS (counsel R4). A third of the leading
+ * rim's own 0.5 — the BALANCE LAW's bookkeeping, spent in the quietest direction the
+ * cure allows: enough to give the hang an outline on a dark hero, far too little to
+ * read as an outlined shape or as a state.
+ */
+const LOWER_CUT_INK = 0.34;
+
 /** Every authored coordinate goes through one rounder, so the paths are byte-stable. */
 const round = (n) => +n.toFixed(2);
 
@@ -444,6 +452,48 @@ function vane(lane) {
 }
 
 const VANES = [0, 1, 2].map(vane);
+
+/**
+ * ⚠️⚠️ THE WHISPER RACHIS ON THE LOWER CUT (counsel R4) — THE BAND'S ONLY DEFENCE
+ * AGAINST DISSOLVING INTO A DARK PAGE, AND IT CARRIES NO WCAG CLAIM AT ALL.
+ *
+ * THE PROBLEM IT ANSWERS. V4's own re-scoping is explicit that the vane/wood boundary
+ * is 1.73:1 and that identification moves to three other channels: the 6.60:1 labels,
+ * the GILT_LIGHT indicator, and THE HANG — "the lower half of every vane sits on the
+ * ~11:1 parchment page, not on wood at all". The third of those is an assumption about
+ * what is behind the bar, and it is false on exactly the surface where the composition
+ * is most exposed: a DARK HERO. On the landing's own dark map plate the hanging half of
+ * the band has no ground to contrast against, so the fletching's lower silhouette
+ * simply stops existing and the bar reads as a wood strip with three labels on it.
+ *
+ * ⚠️ SO THE CURE IS MATERIAL, LIKE THE FRAY, AND NOT A TONE LIFT. A hairline of the
+ * band's own pale RACHIS tone along the cut — the cut end of the quill, which is what a
+ * bound fletch actually shows there — gives the lower edge an outline of its own that
+ * survives any ground. It is a WHISPER: 0.6px at a third opacity, which is under the
+ * BALANCE LAW's own ceiling and far too faint to read as an outlined shape.
+ *
+ * ⚠️⚠️ IT IS NOT AN ACTIVE CHANNEL AND MUST NEVER BECOME ONE. The cumulative-audit
+ * addendum retires the gold underline and pins that "no active-state paint exists below
+ * the vane"; this mark is drawn IDENTICALLY on all three cells whatever the view, in a
+ * FLETCH ladder tone rather than a gilt one, so it cannot be read as state. The pin
+ * asserts both halves — same tone, same opacity, resting and active alike.
+ *
+ * ⚠️ EXPOSED EDGES ONLY, exactly like `frayHairs`: the run stops at the lap boundary,
+ * because the last FLETCH.lap of cells 0 and 1 is hidden under the next cell and a
+ * quill-end drawn there would hang in open space below a feather that covers it.
+ *
+ * @param {number} lane which fletch
+ * @returns {string} the cut's visible run, as an SVG path
+ */
+function lowerCut(lane) {
+  const [x0] = edges(lane);
+  // The VISIBLE end of this cell's cut — where the next cell's leading edge crosses it,
+  // and for Realm its own trailing edge, since nothing laps over Realm.
+  const x1 = (lane + 1) * LANE - SEAT;
+  return `M ${round(x0 + DRIFT)} ${BAND} L ${round(x1 + DRIFT)} ${BAND}`;
+}
+
+const LOWER_CUTS = [0, 1, 2].map(lowerCut);
 
 /**
  * ⚠️⚠️ THE QUILL LINE — THE ACTIVE INDICATOR, AND IT REPLACES THE GOLD UNDERLINE
@@ -1158,6 +1208,21 @@ export default function FletchBand({ id, activeLane }) {
                   needing it. The LEADING > TRAILING relationship survives untouched. */}
               <path d={v.lead} fill="none" stroke={FLETCH_RACHIS} strokeOpacity="0.5" strokeWidth="1" vectorEffect="non-scaling-stroke" />
               <path d={v.trail} fill="none" stroke={FLETCH_RACHIS} strokeOpacity="0.38" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+              {/* ⚠️ THE WHISPER RACHIS ON THE LOWER CUT — counsel R4. It is the cut end
+                  of the quill, and it is what stops the hanging half of the band
+                  dissolving on a dark hero, where the "the hang sits on the ~11:1
+                  parchment page" half of V4's identification argument is simply false.
+                  It carries NO contrast claim and it is NOT a state channel: identical
+                  on every cell, in every view, in a FLETCH ladder tone. See `lowerCut`. */}
+              <path
+                d={LOWER_CUTS[lane]}
+                data-testid={`nav-fletch-lower-cut-${lane}`}
+                fill="none"
+                stroke={FLETCH_RACHIS}
+                strokeOpacity={LOWER_CUT_INK}
+                strokeWidth="0.6"
+                vectorEffect="non-scaling-stroke"
+              />
             </g>
           );
         })}
@@ -1168,7 +1233,7 @@ export default function FletchBand({ id, activeLane }) {
 
 export {
   BAND, BAND_PX_PER_UNIT, BAND_W, BARB, BOW, CALM_PAD_PX, CALM_PAD_Y, D, DRIFT, LABEL_INK,
-  LANE, QUILLS, QUILL_H, REACH, RUN, SEAT, SHEENS, SHEEN_FLOOR, SHEEN_PEEK, SPLIT, SPLITS,
-  VANES, barbBuckets, bow, calmZone, combCoverage, frayHairs, laneGap, lean, quill, rachis,
-  splitClears, splits, unitHash, vane, FLETCH_HANG,
+  LANE, LOWER_CUTS, LOWER_CUT_INK, QUILLS, QUILL_H, REACH, RUN, SEAT, SHEENS, SHEEN_FLOOR,
+  SHEEN_PEEK, SPLIT, SPLITS, VANES, barbBuckets, bow, calmZone, combCoverage, frayHairs,
+  laneGap, lean, lowerCut, quill, rachis, splitClears, splits, unitHash, vane, FLETCH_HANG,
 };

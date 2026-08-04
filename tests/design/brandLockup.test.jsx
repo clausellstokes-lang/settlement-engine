@@ -62,12 +62,12 @@ import { cleanup, render } from '@testing-library/react';
 
 import Lockup from '../../src/components/brand/Lockup.jsx';
 import GildedWordmark, {
-  BH, BW, LEAF, SCORCH_OUT, boleReach, isDegenerateSeed,
+  BH, BURN_FREQ, BW, LEAF, SCORCH_OUT, SINGE_OUT, boleReach, isDegenerateSeed,
 } from '../../src/components/brand/GildedWordmark.jsx';
 import WaxSeal, { BLOB, COUNTER, INNER_COUNTER, RING } from '../../src/components/brand/WaxSeal.jsx';
 import {
   BOLE, BOLE_DEEP, BOLE_PAD, GILD, GILT, GILT_LIGHT, HEADER_RIDERS, PLATE_KEYLINE,
-  SEAL_GLINT, SEAL_RIM, SEAL_WAX, SHAFT_BODY, WRAP, cylinderToneAt,
+  SEAL_GLINT, SEAL_RIM, SEAL_WAX, SHAFT_BODY, SHAFT_GRAIN_TEXTURE, WRAP, cylinderToneAt,
 } from '../../src/components/theme.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -208,10 +208,11 @@ describe('2 — ⚠️⚠️ THE BED CONTAINS THE INK, AND THE CONTAINMENT IS DE
     const { container } = render(<GildedWordmark id="t">x</GildedWordmark>);
     const core = container.querySelector('[data-testid="bole-core"]');
     const scorch = container.querySelector('[data-testid="bole-scorch"]');
+    const singe = container.querySelector('[data-testid="bole-singe"]');
     expect(core.getAttribute('filter'), 'the opaque core is displaced').toBeNull();
     expect(scorch.getAttribute('filter')).toMatch(/scorch/);
+    expect(singe.getAttribute('filter')).toMatch(/singe/);
     expect(core.getAttribute('fill')).toBe(BOLE);
-    expect(scorch.getAttribute('fill')).toBe(BOLE_DEEP);
     // 1 — the core IS the bed: exactly ink ± pad, undisplaced, carrying the AA claim.
     expect(Number(core.getAttribute('x'))).toBe(0);
     expect(Number(core.getAttribute('y'))).toBe(0);
@@ -226,10 +227,72 @@ describe('2 — ⚠️⚠️ THE BED CONTAINS THE INK, AND THE CONTAINMENT IS DE
     expect(Number(scorch.getAttribute('y'))).toBe(-SCORCH_OUT);
     expect(Number(scorch.getAttribute('width'))).toBe(BW + SCORCH_OUT * 2);
     expect(Number(scorch.getAttribute('height'))).toBe(BH + SCORCH_OUT * 2);
+    // …and the halo starts strictly outside the scorch, for the same reason again.
+    expect(SINGE_OUT).toBeGreaterThan(SCORCH_OUT + amp);
+    expect(Number(singe.getAttribute('x'))).toBe(-SINGE_OUT);
+    expect(Number(singe.getAttribute('width'))).toBe(BW + SINGE_OUT * 2);
     // 3 — NON-VACUITY: the raggedness is a real amplitude, not a decorative zero, and
     //     it is a visible fraction of the bed rather than a sub-pixel wobble.
     expect(amp).toBeGreaterThan(0);
     expect(amp / BH).toBeGreaterThan(0.05);
+  });
+
+  test('⚠️⚠️ R1 — THE BURN HAS NO INTERNAL EDGE, which is what made it a plaque', () => {
+    // ⚠️⚠️ THE DEFECT, PROBED RATHER THAN GUESSED. After the reach repair made the bed
+    // hug `ink ± 3px`, the 100% screenshot STILL read as a dark rectangular plaque with
+    // gold type on it. Scanned at device-pixel resolution down a column of the real
+    // Chrome bar at x=120, the cause was visible in eleven numbers:
+    //
+    //   y 0.0 .. 4.5  #2A1008  (BOLE_DEEP — the scorch, already bleeding past the bar)
+    //   y 5.0 .. 20.0 #3A1A10  (BOLE — the core)
+    //
+    // A DEAD-STRAIGHT horizontal step from L 0.0088 to L 0.0168, drawn by the core's own
+    // undisplaced rectangle INSIDE a burn whose outer edge was already ragged. The
+    // rectangle a reader was seeing was never the bed's silhouette — it was the boundary
+    // between two tones that had no business differing.
+    //
+    // THE CURE IS TONAL, NOT GEOMETRIC: the scorch takes the core's own tone, so the two
+    // are one continuous field with a single ragged outline, and the deep tone moves
+    // OUTWARD to the singe halo where a brand actually chars.
+    const { container } = render(<GildedWordmark id="t">x</GildedWordmark>);
+    const core = container.querySelector('[data-testid="bole-core"]');
+    const scorch = container.querySelector('[data-testid="bole-scorch"]');
+    const singe = container.querySelector('[data-testid="bole-singe"]');
+    expect(scorch.getAttribute('fill'), 'the burn carries an internal tonal edge again')
+      .toBe(core.getAttribute('fill'));
+    // …and the deep tone is spent OUTSIDE, on the halo, which is the layer that fades.
+    expect(singe.getAttribute('fill')).toBe(BOLE_DEEP);
+    expect(relLuminance(BOLE_DEEP)).toBeLessThan(relLuminance(BOLE));
+    // THE HALO REALLY FADES: a hard-edged halo is a second rectangle one ring out.
+    const blur = container.querySelector(`#t-singe feGaussianBlur`);
+    expect(blur, 'the singe halo has no blur — it is a slab, not a singe').toBeTruthy();
+    const [bx, by] = blur.getAttribute('stdDeviation').split(/\s+/).map(Number);
+    expect(bx).toBeGreaterThan(0);
+    // ⚠️ ANISOTROPIC, because heat travels along the fibre. A round blur is a drop
+    // shadow, and a drop shadow under a wordmark is the plaque read returning by a
+    // different door.
+    expect(bx, 'the singe blur is round — that is a shadow, not a burn').toBeGreaterThan(by);
+    // ⚠️⚠️ AND THE DISPLACEMENT RUNS ALONG THE GRAIN, the same direction the wood's own
+    // texture has run since V3. The first cut ran `0.035 0.09` — fast ACROSS the shaft
+    // and slow along it, a cross-grain wobble on a longitudinally-grained barrel.
+    const [fx, fy] = BURN_FREQ.split(/\s+/).map(Number);
+    expect(fy, 'the burn wobbles across the grain instead of along it').toBeGreaterThan(fx);
+    const [gx, gy] = SHAFT_GRAIN_TEXTURE.match(/baseFrequency='([\d.]+) ([\d.]+)'/).slice(1).map(Number);
+    expect(gy).toBeGreaterThan(gx);   // the grain's own direction, for the comparison
+    for (const t of container.querySelectorAll('feTurbulence')) {
+      expect(t.getAttribute('baseFrequency')).toBe(BURN_FREQ);
+      expect(Number(t.getAttribute('seed'))).toBe(GILD.seed);
+    }
+    // ⚠️ THE BURN BLEEDS OFF THE BAR, so it has no horizontal boundary a reader can see.
+    // The bed's own box already runs from `ink[0] − pad` to `ink[1] + pad`; the scorch
+    // starts SCORCH_OUT bed-units outside that, which in px is more than the clearance
+    // at either end. Derived here rather than eyeballed off the screenshot.
+    const r = HEADER_RIDERS.wordmark;
+    const pxPerUnit = ((r.ink[1] + BOLE_PAD) - (r.ink[0] - BOLE_PAD)) / BH;
+    expect(SCORCH_OUT * pxPerUnit, 'the burn stops inside the bar at the top')
+      .toBeGreaterThan(r.ink[0] - BOLE_PAD);
+    expect((r.ink[1] + BOLE_PAD) + SCORCH_OUT * pxPerUnit, 'the burn stops inside the bar at the foot')
+      .toBeGreaterThan(r.bar);
   });
 
   test('⚠️ THE BED IS PAINT, NEVER LAYOUT — it spends no height', () => {

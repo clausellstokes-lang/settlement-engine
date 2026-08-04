@@ -83,6 +83,7 @@ MUTATED_FILES=(
   tests/fixtures/distribution-envelopes.manifest.json
   src/domain/display/discourseKernel.js
   src/domain/townMap/arch/params.js
+  src/components/nav/FletchBand.jsx
   src/domain/townMap/arch/kit.js
   src/domain/townMap/arch/conditionParams.js
   src/domain/dossier/realmEntityWeb.js
@@ -362,6 +363,16 @@ check_caught "discourse/lexicon relation-type coverage gap" src/domain/display/d
 #     generic shape for a new institution. The M-0 silhouette walker must red.
 perl -0pi -e "s/  'house-a': cottage\(\),\n/  'house-a': cottage(),\n  zzz_mutsweep_orphan: cottage(),\n/" src/design/townGlyphs/medieval.js
 check_caught "massing/silhouette totality unmapped kind" src/design/townGlyphs/medieval.js "npx vitest run tests/lint/townMapMassingSilhouette.walker.test.js"
+
+# 28b. RIBBON RETINA-TEXTURE BUDGET (V4.1, counsel R6 — the texture-complete law).
+#      The comb's opacities are lifted from a whisper back toward the weights that
+#      produced the "corrugated metal" verdict on the V3 band. Every retina cue on
+#      this bar owes UNDER 2% EFFECTIVE INK (tone x area, which is what the eye
+#      integrates); the coverage ratchet must red on the comb specifically, because
+#      a budget expressed in opacity alone is exactly the budget that could not see
+#      its own failure the first time.
+perl -0pi -e "s/  opacities: Object\.freeze\(\[0\.13, 0\.2, 0\.27\]\),/  opacities: Object.freeze([0.5, 0.6, 0.7]),/" src/components/nav/FletchBand.jsx
+check_caught "ribbon/retina texture budget blown" src/components/nav/FletchBand.jsx "npx vitest run tests/design/textureBudget.test.js"
 
 # 29. K-1 kernel LOD-ladder totality — a NEW arch grammar ruleset lands under
 #     arch/rulesets/ with no LOD-ladder + mesh-budget walker coverage. Every

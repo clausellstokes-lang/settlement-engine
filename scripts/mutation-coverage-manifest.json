@@ -790,6 +790,11 @@
    "kind": "mutation",
    "label": "massing/silhouette totality unmapped kind"
   },
+  "tests/design/textureBudget.test.js": {
+   "kind": "mutation",
+   "label": "ribbon/retina texture budget blown",
+   "what": "The comb's per-bucket opacities are lifted back toward the weights that produced the corrugated-metal verdict on the V3 band, so its effective ink (width/gap x opacity) crosses the 2% retina ceiling of ribbon spec part 2 section 4. Proves the coverage ratchet measures TONE x AREA rather than tone alone, which is the exact blindness that let the V3 comb honour its budget in opacity while covering a third of the vane. Target src/components/nav/FletchBand.jsx is tracked and clean, so the E-A attribution control applies."
+  },
   "tests/lint/transcendentalMathBaseline.test.js": {
    "kind": "mutation",
    "label": "determinism/transcendental Math.pow in domain"

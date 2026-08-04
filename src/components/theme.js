@@ -131,6 +131,71 @@ export { GOLD_TXT, GOLD_SOFT, BORDER_STRONG } from '../design/tokens.js';
 // wordmark itself becomes the mounted, gilded artifact (see the GILT ladder below).
 
 /**
+ * ⚠️⚠️⚠️ THE TEXTURE-COMPLETE LAW (counsel R6, ribbon V4.1) — THE RIBBON'S MATERIAL
+ * PROGRAM IS CLOSED, AND THESE THRESHOLDS GOVERN EVERY LATER EDIT TO IT.
+ *
+ * THE LAW, in one sentence: **the war arrow is texture-complete at ribbon V4 spec part
+ * 2. No new texture layer may be added to this bar; an existing one may be retuned only
+ * inside the two budgets below.** A composition finished by accretion is finished by
+ * nobody — every version of this bar so far has been rescued from one more device
+ * layered on the last, and the corrugated-metal verdict was what a third of the vane's
+ * AREA in near-tonal ink looks like at arm's length. The cure for a bar that reads
+ * wrong is never one more layer.
+ *
+ * THE TWO BUDGETS, promoted here from spec part 2 §4 (which is a design document and
+ * cannot enforce anything) to governing law, with tests/design/textureBudget.test.js
+ * as the ratchet that makes them real:
+ *
+ *   1. TONE-STRUCTURE AT 1x — a mark at or above 1.2px, or an areal tone. These are
+ *      allowed to be SEEN at 100%: the vane gradient, the bowed sheen, the quills, the
+ *      split seams, the growth lines, the winding turns, the tie-off, the bole, the
+ *      gilt fill, the indicator.
+ *   2. RETINA-ONLY — a mark at or under 0.6px, EACH UNDER 2% EFFECTIVE INK, so a 1x
+ *      rasteriser integrates it as tone and a 2x one resolves it as detail: the comb,
+ *      the fray, the split lit-hairlines, the pore flecks, the inter-turn shadows, the
+ *      lower cut's whisper rachis.
+ *
+ * ⚠️ EFFECTIVE INK IS TONE × AREA, WHICH IS WHAT THE EYE INTEGRATES, and measuring one
+ * without the other is exactly how the comb honoured the BALANCE LAW in tone while
+ * covering a third of the vane. The ratchet computes coverage × opacity per cue and
+ * requires every one of them under 2%, and it is a TOTALITY check: a new retina cue
+ * that is not in its roster reds, so the law cannot be evaded by not declaring.
+ *
+ * ⚠️ AND THE DEAD-BAND LAW SITS ABOVE BOTH: every wood layer darkens, none lightens,
+ * at any alpha (see SHAFT_GRAIN_LAYERS). A retune that respected both budgets and broke
+ * that one would be legible in a screenshot and illegible in the arithmetic.
+ */
+
+/**
+ * ⚠️⚠️ THE IDENTITY-EXTENSION LAW (counsel R8, ribbon V4.1) — WHAT MAY BE TAKEN FROM
+ * THIS BAR AND USED ELSEWHERE IN THE PRODUCT, AND WHAT MAY NOT.
+ *
+ * The war arrow is now the product's strongest piece of identity, and the failure mode
+ * of a strong identity is that it gets quoted badly: a fletch shrunk into a 14px badge,
+ * a band squeezed to fit a sidebar, a second gold invented for a different active
+ * state. Three rules, recorded here because theme.js is what every surface reads:
+ *
+ *   1. THE QUILL LINE IS THE APP-WIDE ACTIVE MARK. A GILT_LIGHT bar lying on the top
+ *      edge of the active thing, ends slant-cut at the composition's lean. Any surface
+ *      that needs to say "this one is current" uses it. ⚠️ ONE METAL: the indicator and
+ *      the gilding are the SAME gold family (see the GILT ladder), and a fourth gold
+ *      invented for a new surface is how a palette starts lying about itself.
+ *   2. A SINGLE FLETCH SLASH MAY BE QUOTED AT 24px OR LARGER, NEVER SMALLER. Below that
+ *      the barb comb, the sheen bands and the lap all fall under a pixel and the mark
+ *      degrades into a dark parallelogram — which reads as a UI chip, not as a feather.
+ *      A context with less than 24px uses the HOUSE DEVICE, which was drawn for it.
+ *   3. THE BAND NEVER SHRINKS. FLETCH.band is the FEATHER'S own depth and is
+ *      deliberately independent of the bar (see FLETCH); thinning the shaft DEEPENS the
+ *      hang, which is the composition. A surface that cannot afford the hang does not
+ *      get the band — it gets bare shaft, or nothing.
+ */
+export const IDENTITY_EXTENSION = Object.freeze({
+  activeMark: 'quill-line',
+  minFletchSlashPx: 24,
+  bandMayShrink: false,
+});
+
+/**
  * THE SHAFT — CEDAR/MAHOGANY war shaft (owner's V4 correction), modelled as the
  * near half of a CYLINDER.
  *
@@ -1220,6 +1285,75 @@ export const lightArc = (cx, cy, r, halfDeg) => {
 export const SEAL_WAX = '#6E1F1B';
 export const SEAL_RIM = '#4A1310';
 export const SEAL_GLINT = '#8E322B';
+
+/**
+ * ⚠️⚠️ SEAL_FIT — THE SEAL'S TYPOGRAPHIC FIT, AS A MEASUREMENT (counsel R2, the
+ * "build-time kerning check"). It is the same KIND of table as HEADER_RIDERS: numbers
+ * read off a real raster, stored beside the claim that reads them, because jsdom has no
+ * layout and cannot re-derive any of it.
+ *
+ * ⚠️ WHY IT HAD TO EXIST. The seal stands in for one `o`, and until this token it was
+ * simply 0.66em wide with 0.015em of margin either side — a total ADVANCE of 0.6895em
+ * against the `o`'s own 0.5762em. Measured in Chrome at 1440x900 on the desktop
+ * wordmark (serif_, 24px, weight 800): the `o` advances 13.828px and the seal advanced
+ * 16.548px, so the mark was **2.72px wider than the letter it replaces** and every
+ * glyph after it — `r`, `g`, `e` — sat 2.72px to the right of where the name would set
+ * in plain type. Nothing reds on that; the word simply is not the word's own width.
+ *
+ * ⚠️⚠️ THE CURE IS A NEGATIVE SIDEBEARING, NOT A SMALLER SEAL, and that is the whole
+ * judgment. Shrinking the box to 0.5762em would fit by making the wax a normal letter —
+ * and WaxSeal's own note explains why the size is what it is: at 0.66em the blob stands
+ * about 1.4x the x-height, which is what makes it read as something PRESSED onto the
+ * line rather than as a mis-set round glyph. So the mark keeps its size and gives back
+ * its overrun as margin, exactly the way a swash or an oversized initial overhangs its
+ * advance: the letters either side return to their true positions and the blob simply
+ * reaches into their sidebearings.
+ *
+ * `oAdvanceEm` is the `o`'s advance in the wordmark's own font, so it is a property of
+ * the TYPEFACE and holds at every size — which is why the compact mobile draw needs no
+ * second row. ⚠️ IT MUST BE RE-MEASURED IF THE SERIF CHANGES; the pin says so and
+ * derives the margin rather than reading a hand-keyed one.
+ * Receipts: Chrome, this lane, 2026-08-04, `Foorge` minus `Forge` at the live font.
+ */
+export const SEAL_FIT = Object.freeze({ sizeEm: 0.66, oAdvanceEm: 0.5762 });
+
+/**
+ * THE SIDEBEARING THE SEAL GIVES BACK, per side, in em — DERIVED, never authored.
+ * Negative by construction while the blob is wider than the letter it replaces.
+ */
+export const sealSidebearingEm = () => (SEAL_FIT.oAdvanceEm - SEAL_FIT.sizeEm) / 2;
+
+/**
+ * ⚠️⚠️ THE SEAL'S SIZE LADDER (owner-confirmed 2026-08-04, task #105 metadata) — the
+ * `o`-in-Forge seal INTEGRATES THE HOUSE DEVICE as its wax impression, and WHICH of it
+ * a reader sees is a function of how large the seal is drawn.
+ *
+ *   RIBBON, ~16px   a tonal DIMPLE and nothing more. At this size a struck device is
+ *                   four grey pixels pretending to be a building, and the owner's
+ *                   confirmation is explicit that the ribbon must never show a bright
+ *                   mini-logo. The seal is a gold annulus, a bowl of wax, and a dimple.
+ *   >= 28px         the FULL IMPRESSED DEVICE — the ring, the roofline and the station
+ *                   triangle pressed into the wax, recognisable as the house mark.
+ *                   PDF cover, About, any zoomed header.
+ *   FAVICON         the device ALONE, and it is untouched by any of this.
+ *
+ * ⚠️ 28 IS A THRESHOLD ON THE RENDERED BOX, so it is passed as a NUMBER and cannot be
+ * inferred: the seal's `size` prop is an em string precisely so it tracks the type, and
+ * an em string does not know what it will measure. A caller that wants the device
+ * register says so. The DEFAULT IS THE DIMPLE, which is the safe direction: a context
+ * that forgets to declare its size renders the ribbon's mark, never the loud one.
+ */
+export const SEAL_LADDER = Object.freeze({ devicePx: 28 });
+
+/**
+ * WHICH REGISTER A SEAL OF `px` DRAWS IN — the ladder's SINGLE WRITER, so the threshold
+ * cannot be re-spelled at a second call site with a different number.
+ * @param {number} [px] the seal's rendered box, in px; absent means "unknown"
+ * @returns {'dimple'|'device'}
+ */
+export const sealRegister = (px) => (
+  typeof px === 'number' && px >= SEAL_LADDER.devicePx ? 'device' : 'dimple'
+);
 
 /**
  * FLETCH — the fletching's GEOMETRY, deliberately kept apart from CHROME: none of
