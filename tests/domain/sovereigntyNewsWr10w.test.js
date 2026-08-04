@@ -75,7 +75,14 @@ describe('WR-10 sovereignty news — the address chain', () => {
     expect(entry.tags).toEqual(['world_pulse', 'sovereignty', 'trade']);
     expect(entry.reasons.length).toBeGreaterThan(0);
     expect(entry.familyId).toMatch(/^sovereignty_sale_cleared\.\d+$/);
-    // The reader surfaces never carry engine vocabulary or figures.
+    // The reader surfaces never carry engine vocabulary or figures. Both surfaces are
+    // pinned to their exact authored text first, so the exclusion below is read against a
+    // string that is known to be present and correct rather than against a hole.
+    expect(entry.headline).toBe('Ashford passes from Irontown to Westmere');
+    expect(entry.summary.length).toBeGreaterThan(0);
+    // The pattern itself matches `undefined`, so a surface that drifted away renders the
+    // word and reds here instead of passing because there was nothing left to scan.
+    // anchored: headline pinned verbatim and summary pinned non-empty two lines above.
     expect(`${entry.headline} ${entry.summary}`).not.toMatch(/\d|_|\$\{|\bundefined\b|\bNaN\b/);
   });
 

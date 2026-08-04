@@ -99,6 +99,9 @@ describe('SP-6 phrased-kind registry — WR-10 the sovereignty market', () => {
       // is absent still has an honest authored sentence instead of a fabricated name.
       expect(row.requiredSlots.some((slots) => slots.length === 0)).toBe(true);
       expect(WHAT_PHRASES[kind], `${kind}: missing WHAT_PHRASES`).toBeTruthy();
+      // The exclusion below is read against a phrase already proven to exist, so the only
+      // way to satisfy both is a real phrase carrying no de-underscored engine token.
+      // anchored: the toBeTruthy on the line above pins the entry present and non-empty.
       expect(WHAT_PHRASES[kind]).not.toMatch(/_/);
     }
   });
@@ -155,7 +158,14 @@ describe('SP-6 phrased-kind registry — WR-10 the sovereignty market', () => {
       expect(new Set(rendered).size).toBe(row.pool.length);
       for (const line of rendered) {
         expect(line).toBe(line.trim());
+        expect(line.length).toBeGreaterThan(0);
+        // `rendered` is pinned EQUAL to the annex lines and to the authored depth above,
+        // and each line is pinned non-empty, so this loop always runs over real sentences:
+        // an emptied pool reds at the equality rather than passing these for free. The
+        // pattern also matches `undefined`, so a lost slot renders the word and reds.
+        // anchored: annex-equality, authored depth, and per-line non-emptiness above.
         expect(line).not.toMatch(/\d|%|×|_|\$\{|\bundefined\b|\bNaN\b/);
+        // anchored: same liveness — the rendered set is annex-equal and non-empty above.
         expect(line).not.toMatch(/\b(?:rng|roll|score|ratio|tick|chance|probability|threshold|multiplier|schema|json|stateRead|flag)\b/i);
       }
     },
@@ -235,6 +245,14 @@ describe('SP-6 phrased-kind registry — WR-10 the sovereignty market', () => {
         const fallback = sovereigntyReceipt(row.kind, seed, partial);
         expect(fallback).toBeTruthy();
         expect(fallback.familyId).not.toBe(familyId);
+        // The degraded receipt is a REAL authored sentence from this kind's own pool, not
+        // a blank — which is the whole point of keeping slotless siblings — and the family
+        // it fell back to asks only for evidence the caller still holds.
+        expect(fallback.line.length).toBeGreaterThan(0);
+        expect(row.requiredSlots[fallback.templateIndex].every((slot) => partial[slot])).toBe(true);
+        // Read against a sentence known to exist: an empty or absent line reds at the
+        // non-emptiness pin above rather than satisfying this exclusion for free.
+        // anchored: fallback line pinned non-empty and its family satisfiable above.
         expect(fallback.line).not.toMatch(/\bundefined\b|\bNaN\b/);
       }
     },
