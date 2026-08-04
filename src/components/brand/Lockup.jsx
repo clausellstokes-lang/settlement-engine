@@ -35,7 +35,7 @@
  * 1.32em on the desktop wordmark, 1.28em on the smaller mobile one. A single ratio
  * looks correct at one size only — the larger the type, the more the eye tolerates.
  */
-import { FS, GILT, serif_ } from '../theme.js';
+import { CHROME, FS, GILT, serif_ } from '../theme.js';
 import GildedWordmark from './GildedWordmark.jsx';
 import WaxSeal from './WaxSeal.jsx';
 
@@ -108,7 +108,22 @@ export default function Lockup({ compact = false }) {
   // the same live type the lockup has always used, so the two capitals still track the
   // font, the seal still sits on the text baseline, and the name is still selectable
   // and copyable. Only the BED is drawn; see GildedWordmark.jsx's note on why.
-  const gilded = <GildedWordmark id={compact ? 'gild-m' : 'gild-d'}>{word}</GildedWordmark>;
+  //
+  // ⚠️⚠️ AND THE BAR IS PASSED, WHICH IS THE ONE THING THE MARK CANNOT MEASURE ABOUT ITS
+  // OWN MOUNTING. The burn has to bleed off the bar's two long edges or it reads as a
+  // PLAQUE (GildedWordmark's BOLE_BLEED), and these two bars are not a scale of each
+  // other: the desktop bar is 38px because the WORDMARK is 24px, and the mobile bar is
+  // ~60px because a TAP TARGET is 44px — the type shrinks while the bar grows. So this
+  // component, which is the one place that knows which draw it is making, tells the bed
+  // which plank it is being branded into, from CHROME rather than from a literal.
+  const gilded = (
+    <GildedWordmark
+      id={compact ? 'gild-m' : 'gild-d'}
+      bar={compact ? CHROME.headerMobile : CHROME.headerDesktop}
+    >
+      {word}
+    </GildedWordmark>
+  );
   return compact
     ? <span aria-hidden="true" data-testid="brand-wordmark" style={type}>{gilded}</span>
     : <h1 aria-hidden="true" data-testid="brand-wordmark" style={type}>{gilded}</h1>;

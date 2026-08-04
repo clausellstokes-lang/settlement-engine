@@ -40,12 +40,16 @@
  * be fine" is exactly how a wordmark ships invisible.
  */
 import {
-  BOLE, BOLE_DEEP, GILD, GILT, GILT_LIGHT, HEADER_RIDERS, PLATE_KEYLINE, lightOffset,
+  BOLE, BOLE_DEEP, CHROME, GILD, GILT, GILT_LIGHT, HEADER_RIDERS, PLATE_KEYLINE, lightOffset,
 } from '../theme.js';
 
-/** The bed's own coordinate space. Stretched to the run, so it is a proportion. */
+/**
+ * The bed's own HORIZONTAL coordinate space. Stretched to the run, so it is a
+ * proportion — the burn around a word is as wide as the word. ⚠️ THERE IS NO MATCHING
+ * VERTICAL CONSTANT any more: since R-1 the vertical axis is the BAR's and its extent is
+ * computed per bar (BOLE_BLEED, boleField, BOLE_UNIT).
+ */
 const BW = 200;
-const BH = 48;
 
 /**
  * ⚠️ THE SEED IS VETTED, AND THE VETTING IS A DERIVATION — moved here verbatim from
@@ -109,6 +113,12 @@ export function isDegenerateSeed(seed) {
  * still asserted; what changed is that the bed no longer claims territory it does not
  * need, and territory is what made it read as an object rather than as a scorch.
  *
+ * ⚠️⚠️ AND SINCE R-1 IT SIZES ONE AXIS RATHER THAN TWO. `left`/`right` are still the
+ * bed's own horizontal reach and are spent as insets; `top`/`bottom` now LOCATE the ink
+ * band inside the wordmark's box rather than bounding the bed, because the bed's
+ * vertical extent became the BAR's business (see BOLE_BLEED). The derivation is
+ * unchanged and still the containment reference — what changed is who reads which half.
+ *
  * @param {{ ink: number[], bar: number, box: number }} [rider] the wordmark's row
  * @param {number} [pad] BOLE_PAD, the opaque core's reach past the ink
  * @returns {{ top: number, right: number, bottom: number, left: number }} px, signed
@@ -124,6 +134,71 @@ export function boleReach(rider = HEADER_RIDERS.wordmark, pad = GILD.pad) {
 }
 
 const REACH = boleReach();
+
+/**
+ * BOLE_BLEED — HOW FAR THE BURN'S FIELD OVERSHOOTS THE BAR'S TWO LONG EDGES, in px.
+ *
+ * ⚠️⚠️ THIS IS R-1's REPAIR, AND THE DEFECT IT CLOSES SURVIVED EVERY PIN IN THE SUITE.
+ * R1's cure — the burn bleeding off the bar's long edges so it has no horizontal
+ * boundary a reader can see — was measured on the 38px DESKTOP bar and was FALSE on the
+ * 60px mobile one. Probed in Chrome at 390x844 dsf2: the burn's top edge sat DEAD
+ * STRAIGHT at y≈10.7 and its foot at y≈56, with ~11px of bare cedar above it and ~4px
+ * below. A dark rectangle floating on the plank — the PLAQUE the whole V4 correction
+ * retires, shipping on every phone while the desktop screenshot looked right.
+ *
+ * ⚠️⚠️ THE CAUSE WAS A FRAME-OF-REFERENCE ERROR, WHICH IS WHY NO px CONSTANT FIXED IT.
+ * The bed hugged the WORDMARK's ink extents ± BOLE_PAD and the burn reached a fixed
+ * distance past that — so the field's height was set by the TYPE, while the thing it had
+ * to bleed off was the BAR. Those two move independently and, between these two
+ * breakpoints, they move OPPOSITE ways: the mobile lockup is FS.lg on a bar sized by a
+ * 44px TAP TARGET, so the type shrank 24 → 15px while the bar grew 38 → 60. Two scale
+ * errors in the same direction, compounding.
+ *
+ * SO THE AXES SPLIT, AND THAT SPLIT IS THE ARCHITECTURE: the bed's HORIZONTAL reach is
+ * still the INK's business (± BOLE_PAD, unchanged, because a burn around a WORD is as
+ * wide as the word), and its VERTICAL reach is now the BAR's (because a burn ACROSS a
+ * plank is as deep as the plank). The field runs from the wordmark's own centre out to
+ * half the bar plus this bleed, so both long edges are outside the bar BY CONSTRUCTION
+ * at every breakpoint rather than by measurement on one screenshot.
+ *
+ * ⚠️ AND THE BLEED IS DERIVED, NOT PICKED. It is exactly how far the DESKTOP ink band
+ * already overshot the desktop bar at the foot — `ink[1] + BOLE_PAD − bar` = 2.08px —
+ * i.e. the accident of one bar's metrics that made V4C's burn bleed at all. Promoting it
+ * to the law at both edges of both bars is also what leaves the desktop render alone:
+ * the field's foot lands on the very px it already did.
+ */
+export const BOLE_BLEED = (HEADER_RIDERS.wordmark.ink[1] + GILD.pad) - HEADER_RIDERS.wordmark.bar;
+
+/**
+ * THE FIELD'S HALF-HEIGHT on a bar of `bar` px, measured from the wordmark's own centre.
+ *
+ * ⚠️ IT IS MEASURED FROM THE CENTRE, AND THAT IS WHAT LETS CSS DO THE REST. Both bars
+ * centre the lockup vertically (`alignItems: center`), so `top: calc(50% − half)` on a
+ * box absolutely positioned inside the wordmark resolves the 50% against the WORDMARK's
+ * own height — whatever the font makes it — and lands the field on the bar's own edges
+ * without this module ever knowing how tall the type came out.
+ *
+ * @param {number} bar the bar's height in px: CHROME.headerDesktop or CHROME.headerMobile
+ * @returns {number} px from the wordmark's vertical centre to the field's edge
+ */
+export function boleField(bar) {
+  return bar / 2 + BOLE_BLEED;
+}
+
+/**
+ * BOLE_UNIT — HOW MANY PX OF BAR ONE UNIT OF THE BED'S VERTICAL AXIS IS WORTH.
+ *
+ * ⚠️⚠️ IT IS V4C's OWN SCALE, HELD FIXED, AND THAT IS WHAT MAKES R-1 A REPAIR RATHER
+ * THAN A REDRAW. Every number that shapes this burn lives in these units — BURN_FREQ's
+ * two frequencies, GILD.edgeAmp's displacement, the singe's blur — so an axis that
+ * re-scaled with the bar would quietly re-texture the desktop bar as a side effect of a
+ * fix aimed at the phone. The V4C bed drew the ink band (`ink ± BOLE_PAD`, 35.5px) in 48
+ * units; one unit was 0.7396px of bar then and is 0.7396px of bar now, on every bar.
+ * ⚠️ WHAT MOVES WITH THE BAR IS HOW MANY UNITS THE FIELD IS, NEVER HOW BIG ONE IS.
+ */
+const INK_UNITS = 48;
+export const BOLE_UNIT = ((HEADER_RIDERS.wordmark.ink[1] + GILD.pad)
+  - (HEADER_RIDERS.wordmark.ink[0] - GILD.pad)) / INK_UNITS;
 
 /**
  * HOW FAR THE SCORCH FIELD STARTS OUTSIDE THE CORE, in the bed's own units.
@@ -197,11 +272,13 @@ export const LEAF = Object.freeze({
  * ⚠️⚠️ THE CORE IS THE BED AND EVERY OTHER LAYER LIVES ENTIRELY OUTSIDE IT — and the
  * INEQUALITY between them is what makes the containment geometric rather than hopeful.
  *
- * Three layers. The opaque BOLE core is exactly the bed's own box, which is exactly
- * `ink ± BOLE_PAD` (see boleReach), undisplaced. The scorch is a LARGER rect — inset by
- * −2·edgeAmp on every side — run through a displacement map of amplitude edgeAmp, so its
- * edge can wander anywhere in [bed + 1·edgeAmp, bed + 3·edgeAmp] and NEVER inside the
- * core. The singe halo is larger still. So no seed, at any amplitude, can uncover a glyph.
+ * Three layers. The opaque BOLE core is exactly the bed's own box — the wordmark's ink
+ * ± BOLE_PAD across, and the BAR ± BOLE_BLEED down (R-1) — undisplaced, so it is a
+ * strict SUPERSET of `ink ± BOLE_PAD` on both axes. The scorch is a LARGER rect — inset
+ * by −2·edgeAmp on every side — run through a displacement map of amplitude edgeAmp, so
+ * its edge can wander anywhere in [bed + 1·edgeAmp, bed + 3·edgeAmp] and NEVER inside
+ * the core. The singe halo is larger still. So no seed, at any amplitude, can uncover a
+ * glyph.
  *
  * ⚠️ THE FIRST CUT INSET THE CORE BY THE AMPLITUDE INSTEAD, AND IT COST THE WHOLE
  * EFFECT. That construction is also sound, and it couples the two numbers backwards:
@@ -238,23 +315,51 @@ export const LEAF = Object.freeze({
  * ⚠️ `color-interpolation-filters="sRGB"` IS SPELLED OUT AND IS NOT OPTIONAL — the
  * SVG default for a filter chain is linearRGB, engines disagree about it, and the
  * whole point of a fixed seed is that the same bytes produce the same picture.
+ *
+ * ⚠️⚠️ AND IT READ AS A PLAQUE ON THE PHONE — R-1, one breakpoint later, and the cause
+ * this time was the FRAME OF REFERENCE rather than a tone. R1's cure held on the 38px
+ * desktop bar and was false on the 60px mobile one, because the field's height was the
+ * TYPE's and the edges it had to clear were the BAR's. BOLE_BLEED owns that argument;
+ * what it costs HERE is three computed numbers instead of two constants — the field's
+ * height in units, and the viewBox ORIGIN that keeps the noise anchored to the ink.
+ *
+ * @param {{ id: string, bar: number }} props the filter-id scope, and the bar's height
+ *   in px (CHROME.headerDesktop or CHROME.headerMobile) the burn must bleed off.
  */
-function BoleBed({ id }) {
+function BoleBed({ id, bar }) {
+  // The field, in the bed's own units. ⚠️ ONLY THE COUNT MOVES WITH THE BAR — BOLE_UNIT
+  // does not — so a taller bar buys more burn rather than a re-scaled one.
+  const half = boleField(bar);
+  const field = (half * 2) / BOLE_UNIT;
+  // ⚠️⚠️ AND USER y=0 STAYS ON THE INK BAND'S TOP EDGE, which is exactly where V4C's
+  // viewBox put it. feTurbulence samples the noise at a point's own user-space
+  // coordinates, so an origin that moved with the field would hand every bar a different
+  // (equally valid, entirely gratuitous) ragged edge — including the desktop bar this
+  // repair is not about. Anchored here, the burn is one field the wordmark is stamped
+  // into and a taller bar EXTENDS it rather than re-drawing it.
+  const y0 = -(half - (HEADER_RIDERS.wordmark.box / 2) - REACH.top) / BOLE_UNIT;
+  const u = (n) => +n.toFixed(4);
   return (
     <svg
       aria-hidden="true"
       focusable="false"
       data-testid="bole-bed"
-      viewBox={`0 0 ${BW} ${BH}`}
+      viewBox={`0 ${u(y0)} ${BW} ${u(field)}`}
       preserveAspectRatio="none"
       style={{
         position: 'absolute',
-        top: -REACH.top, right: -REACH.right, bottom: -REACH.bottom, left: -REACH.left,
+        // ⚠️ THE 50% IS THE WHOLE TRICK, and it resolves against the WORDMARK's own
+        // height — whatever the font made it — so the field lands on the bar's edges
+        // without this module knowing the type's metrics. `top` + `height` and no
+        // `bottom`/`right`: an over-constrained inset is a declaration the engine throws
+        // away, which is how a geometry starts lying about itself.
+        top: `calc(50% - ${u(half)}px)`,
+        height: `${u(half * 2)}px`,
+        left: -REACH.left,
         width: `calc(100% + ${REACH.left + REACH.right}px)`,
-        height: `calc(100% + ${REACH.top + REACH.bottom}px)`,
-        // Paint, never layout: the bed reaches below the wordmark's box and must cost
-        // no height, or ANCHOR_OFFSET moves and every in-page anchor in the estate
-        // lands worse. Absolute + overflow-visible buys the reach for free.
+        // Paint, never layout: the bed reaches past the wordmark's box on every side and
+        // must cost no height, or ANCHOR_OFFSET moves and every in-page anchor in the
+        // estate lands worse. Absolute + overflow-visible buys the reach for free.
         overflow: 'visible',
         display: 'block',
         pointerEvents: 'none',
@@ -296,9 +401,9 @@ function BoleBed({ id }) {
       <rect
         data-testid="bole-singe"
         x={-SINGE_OUT}
-        y={-SINGE_OUT}
+        y={u(y0 - SINGE_OUT)}
         width={BW + SINGE_OUT * 2}
-        height={BH + SINGE_OUT * 2}
+        height={u(field + SINGE_OUT * 2)}
         fill={BOLE_DEEP}
         fillOpacity="0.85"
         filter={`url(#${id}-singe)`}
@@ -314,20 +419,23 @@ function BoleBed({ id }) {
       <rect
         data-testid="bole-scorch"
         x={-SCORCH_OUT}
-        y={-SCORCH_OUT}
+        y={u(y0 - SCORCH_OUT)}
         width={BW + SCORCH_OUT * 2}
-        height={BH + SCORCH_OUT * 2}
+        height={u(field + SCORCH_OUT * 2)}
         fill={BOLE}
         filter={`url(#${id}-scorch)`}
       />
-      {/* 3 — THE OPAQUE CORE, and it IS the bed: exactly `ink ± BOLE_PAD`, undisplaced,
-              carrying the whole AA claim by itself. */}
+      {/* 3 — THE OPAQUE CORE, and it IS the bed: `ink ± BOLE_PAD` across and the BAR ±
+              BOLE_BLEED down, undisplaced, carrying the whole AA claim by itself. ⚠️ ITS
+              TWO LONG EDGES ARE OUTSIDE THE BAR BY CONSTRUCTION (R-1), so the only
+              straight edges a reader can reach are the two short ones — and those are
+              buried a full SCORCH_OUT inside the ragged silhouette. */}
       <rect
         data-testid="bole-core"
         x="0"
-        y="0"
+        y={u(y0)}
         width={BW}
-        height={BH}
+        height={u(field)}
         fill={BOLE}
       />
     </svg>
@@ -341,14 +449,20 @@ function BoleBed({ id }) {
  * @param {React.ReactNode} props.children the wordmark's own text run
  * @param {string} [props.id] scopes the SVG-local filter id so two lockups on one page
  *   (the desktop bar and a mobile one under a breakpoint change) cannot collide.
+ * @param {number} [props.bar] the height in px of the bar this lockup is mounted on —
+ *   CHROME.headerDesktop or CHROME.headerMobile. ⚠️ IT IS A REQUIRED FACT WEARING A
+ *   DEFAULT: the burn has to bleed off the bar's two long edges (BOLE_BLEED), and the
+ *   bar is the one thing about its own mounting the wordmark cannot measure. The default
+ *   is the desktop bar because that is the draw a caller who forgets is most likely to
+ *   be making; the caller that matters — the phone — passes it, and the pin checks both.
  */
-export default function GildedWordmark({ children, id = 'gild' }) {
+export default function GildedWordmark({ children, id = 'gild', bar = CHROME.headerDesktop }) {
   return (
     <>
-      <BoleBed id={id} />
+      <BoleBed id={id} bar={bar} />
       <span data-testid="gilded-leaf" style={LEAF}>{children}</span>
     </>
   );
 }
 
-export { BH, BW, BURN_FREQ, REACH, SCORCH_OUT, SINGE_OUT };
+export { BW, BURN_FREQ, REACH, SCORCH_OUT, SINGE_OUT };

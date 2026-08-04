@@ -62,11 +62,11 @@ import { cleanup, render } from '@testing-library/react';
 
 import Lockup from '../../src/components/brand/Lockup.jsx';
 import GildedWordmark, {
-  BH, BURN_FREQ, BW, LEAF, SCORCH_OUT, SINGE_OUT, boleReach, isDegenerateSeed,
+  BOLE_UNIT, BURN_FREQ, BW, LEAF, SCORCH_OUT, SINGE_OUT, boleReach, isDegenerateSeed,
 } from '../../src/components/brand/GildedWordmark.jsx';
 import WaxSeal, { BLOB, COUNTER, INNER_COUNTER, RING } from '../../src/components/brand/WaxSeal.jsx';
 import {
-  BOLE, BOLE_DEEP, BOLE_PAD, GILD, GILT, GILT_LIGHT, HEADER_RIDERS, PLATE_KEYLINE,
+  BOLE, BOLE_DEEP, BOLE_PAD, CHROME, GILD, GILT, GILT_LIGHT, HEADER_RIDERS, PLATE_KEYLINE,
   SEAL_GLINT, SEAL_RIM, SEAL_WAX, SHAFT_BODY, SHAFT_GRAIN_TEXTURE, WRAP, cylinderToneAt,
 } from '../../src/components/theme.js';
 
@@ -147,38 +147,143 @@ describe('1 — ⚠️⚠️ THE FILL CARRIES THE CONTRAST, THE RELIEF CARRIES N
   });
 });
 
+/**
+ * THE BED'S GEOMETRY AS THE COMPONENT RENDERS IT, in px of the bar it is mounted on and
+ * measured from the WORDMARK'S OWN VERTICAL CENTRE (which is where the CSS anchors it).
+ *
+ * ⚠️⚠️ EVERY NUMBER HERE IS READ BACK OFF THE RENDER. The viewBox the bed draws in, the
+ * three rects it draws, the inline style it carries, and the module's own BOLE_UNIT —
+ * nothing re-derives `boleField` beside the module. That distinction is the whole reason
+ * R-1's defect existed: V4C's containment pin re-computed the bed's reach from the same
+ * table the module used, so it agreed with the module about a geometry that was wrong on
+ * the phone. A pin that mirrors its subject's arithmetic can only ever prove the
+ * arithmetic was copied correctly.
+ */
+function bedGeometry(compact) {
+  cleanup();
+  const { container } = render(<Lockup compact={compact} />);
+  const bed = container.querySelector('[data-testid="bole-bed"]');
+  const box = (id) => {
+    const el = container.querySelector(`[data-testid="${id}"]`);
+    return { y: Number(el.getAttribute('y')), h: Number(el.getAttribute('height')) };
+  };
+  const [, , , vh] = bed.getAttribute('viewBox').split(/\s+/).map(Number);
+  const core = box('bole-core');
+  const scorch = box('bole-scorch');
+  const singe = box('bole-singe');
+  return {
+    bed,
+    // The opaque core IS the field's box, so half of it is the field's own reach.
+    corePx: (vh / 2) * BOLE_UNIT,
+    scorchPx: (vh / 2 + (core.y - scorch.y)) * BOLE_UNIT,
+    singePx: (vh / 2 + (core.y - singe.y)) * BOLE_UNIT,
+    // The rects' own vertical inequality, in the units they are drawn in.
+    scorchOut: core.y - scorch.y,
+    singeOut: core.y - singe.y,
+    vh,
+  };
+}
+
 describe('2 — ⚠️⚠️ THE BED CONTAINS THE INK, AND THE CONTAINMENT IS DERIVED', () => {
-  test('the opaque core reaches BOLE_PAD past the wordmark’s MEASURED ink', () => {
+  test('the ink band is `ink ± BOLE_PAD`, derived from the MEASURED ink not the box', () => {
     // ⚠️ FROM INK, NOT FROM THE BOX, AND THAT IS THE WHOLE PIN. The wordmark's laid-out
     // box spans 1.58..36.42 of a 38px bar while its INK runs 7.58..37.08 — the `g` of
-    // "Forge" overflows its own box by 0.66px. A bed inset from the BOX by 3px would
+    // "Forge" overflows its own box by 0.66px. A band inset from the BOX by 3px would
     // fall short at exactly the one place a descender needs it and every screenshot
     // would look correct. So the reach is re-derived here, independently, and compared.
+    //
+    // ⚠️⚠️ WHAT THIS PIN NO LONGER CLAIMS, AND WHY. Until R-1 the ink band WAS the bed's
+    // box, and this test asserted the box hugged it on all four sides — a TIGHTNESS
+    // bound, added because a bed clamped to the wordmark's whole box read as a PLAQUE.
+    // That law was true of the desktop bar and false of the phone, where the type is
+    // smaller and the bar is taller: hugging the ink put a dark rectangle in the middle
+    // of a 60px plank with bare cedar above and below it, which is the very plaque the
+    // tightness bound existed to prevent. So the axes split — horizontal reach is the
+    // ink's, vertical reach is the bar's — and the vertical claim moved to the field pin
+    // below. This pin keeps the half that is still the ink's business.
     const r = HEADER_RIDERS.wordmark;
     const reach = boleReach();
     const boxTop = (r.bar - r.box) / 2;
-    const bedTop = boxTop - reach.top;
-    const bedBottom = boxTop + r.box + reach.bottom;
-    expect(bedTop, 'the bed starts below ink − pad').toBeLessThanOrEqual(r.ink[0] - BOLE_PAD);
-    expect(bedBottom, 'the bed ends above ink + pad').toBeGreaterThanOrEqual(r.ink[1] + BOLE_PAD);
+    const bandTop = boxTop - reach.top;
+    const bandBottom = boxTop + r.box + reach.bottom;
+    expect(bandTop.toFixed(2)).toBe((r.ink[0] - BOLE_PAD).toFixed(2));
+    expect(bandBottom.toFixed(2)).toBe((r.ink[1] + BOLE_PAD).toFixed(2));
     // NON-VACUITY: the bottom reach is a REAL number, not zero dressed as a derivation,
     // and it is bigger than the pad alone because of the 0.66px of ink overflow.
     expect(reach.bottom).toBeGreaterThan(BOLE_PAD);
     expect(reach.bottom.toFixed(2)).toBe('3.66');
+    // THE HORIZONTAL REACH IS STILL EXACTLY THE PAD, and it is still asserted as a
+    // TIGHTNESS bound: a burn around a WORD is as wide as the word, and a bed that
+    // claimed more horizontal territory than the ink needs would read as a label again.
     expect(reach.left).toBe(BOLE_PAD);
     expect(reach.right).toBe(BOLE_PAD);
-    // ⚠️⚠️ AND THE BED CLAIMS NO TERRITORY IT DOES NOT NEED, which is the other half of
-    // the containment and the half a clamped-at-zero reach silently gave away. The first
-    // cut clamped `top` at 0, so the bed ran the wordmark's whole box — six px above its
-    // own ink — and read at 250% as a hard-edged black PLAQUE: the exact object V4
-    // retires, with a gilded name sitting on it. The reach is SIGNED now, so the bed
-    // hugs `ink ± pad` and stops. Asserted as a TIGHTNESS bound, because containment
-    // alone cannot see this defect: a bed the size of the whole bar would pass it.
-    expect(reach.top, 'the bed reaches above ink − pad again').toBeLessThan(0);
-    expect(bedTop.toFixed(2)).toBe((r.ink[0] - BOLE_PAD).toFixed(2));
-    expect(bedBottom.toFixed(2)).toBe((r.ink[1] + BOLE_PAD).toFixed(2));
-    // …and the whole bed is meaningfully SHORTER than the bar it is branded into.
-    expect(bedBottom - bedTop).toBeLessThan(r.bar);
+    expect(reach.top, 'the ink band starts at the wordmark’s box again').toBeLessThan(0);
+  });
+
+  test('⚠️⚠️ R-1 — THE BURN BLEEDS OFF BOTH LONG EDGES, ON BOTH BARS', () => {
+    // ⚠️⚠️ THE DEFECT THIS PIN EXISTS FOR SHIPPED, GREEN, ON EVERY PHONE. R1 cured the
+    // plaque read by making the burn bleed off the bar's two long edges — and that was
+    // measured on the 38px desktop bar only. Probed in Chrome at 390x844 dsf2 on the
+    // 60px mobile bar, the burn's top edge sat DEAD STRAIGHT at y≈10.7 and its foot at
+    // y≈56, with ~11px of bare cedar above and ~4px below: a dark rectangle floating on
+    // the plank. Every pin in this file was green, because every one of them was written
+    // about the desktop rider's numbers.
+    //
+    // SO THE CLAIM IS PER-BREAKPOINT AND THE GEOMETRY IS READ OFF THE RENDER. The field
+    // is centred on the wordmark (`top: calc(50% − half)`, which resolves against the
+    // wordmark's own height, whatever the font makes it), and both bars centre the
+    // lockup — so "clears the bar" is "reaches more than half the bar from the centre".
+    // ⚠️ BOTH BARS ARE MEASURED BEFORE ANYTHING IS ASSERTED. A per-bar `expect` throws
+    // on the first one and reports the phone as "not run" whenever the desktop is also
+    // wrong — which is exactly the reporting failure that let a one-bar claim stand.
+    const failures = [];
+    for (const [name, compact, bar] of [
+      ['desktop', false, CHROME.headerDesktop],
+      ['mobile', true, CHROME.headerMobile],
+    ]) {
+      const g = bedGeometry(compact);
+      const halfBar = bar / 2;
+      const say = (m) => failures.push(`${name} (${bar}px bar): ${m}`);
+      // 1 — THE OPAQUE CORE ITSELF clears both long edges. Asserted on the CORE rather
+      //     than on the ragged scorch, because the core is the layer that cannot wander:
+      //     if IT clears the bar, no displacement of anything can put a straight edge
+      //     back inside the bar at any seed.
+      if (!(g.corePx > halfBar)) say(`the burn's core reaches ${g.corePx.toFixed(2)}px, short of ${halfBar}`);
+      // 2 — and the ragged silhouette and its halo are further out still, so what a
+      //     reader actually sees at the bar's edge is burn running off it.
+      if (!(g.scorchPx > halfBar)) say(`the scorch reaches ${g.scorchPx.toFixed(2)}px, short of ${halfBar}`);
+      if (!(g.singePx > halfBar)) say(`the singe halo reaches ${g.singePx.toFixed(2)}px, short of ${halfBar}`);
+      if (!(g.scorchPx > g.corePx)) say('the scorch does not reach past the core');
+      if (!(g.singePx > g.scorchPx)) say('the halo does not reach past the scorch');
+      // 3 — NON-VACUITY: the bleed is a REAL margin, not a rounding win, and it is more
+      //     than the displacement can ever pull back in (GILD.edgeAmp is in the same
+      //     units the rects are drawn in).
+      if (!(g.corePx - halfBar > 1)) say(`the bleed is ${(g.corePx - halfBar).toFixed(2)}px — a rounding artefact`);
+      if (!(g.scorchOut > GILD.edgeAmp)) say(`the scorch can be displaced INTO the core (${g.scorchOut} <= ${GILD.edgeAmp})`);
+    }
+    expect(failures).toEqual([]);
+    // TODAY'S NUMBERS, quoted so a reader knows the margins without running it. The
+    // desktop core's foot lands on the very px V4C's did (ink[1] + BOLE_PAD = 40.08 on a
+    // 38px bar), which is what makes R-1 a repair rather than a redraw.
+    expect(bedGeometry(false).corePx.toFixed(2)).toBe('21.08');
+    expect(bedGeometry(true).corePx.toFixed(2)).toBe('31.58');
+  });
+
+  test('⚠️ THE FIELD IS A SUPERSET OF `ink ± BOLE_PAD` — the AA calm zone survives R-1', () => {
+    // The gilt ratios in block 1 are all quoted against BOLE, so every glyph pixel and
+    // every antialiased pixel around it must land on the opaque core. Widening the field
+    // to the bar can only help — but "can only help" is exactly the reasoning that ships
+    // an off-by-one, so the containment is asserted against the same ink table it always
+    // was, now on the RENDERED field rather than on a re-derived box.
+    const r = HEADER_RIDERS.wordmark;
+    const centre = r.bar / 2;
+    const need = Math.max(centre - (r.ink[0] - BOLE_PAD), (r.ink[1] + BOLE_PAD) - centre);
+    const g = bedGeometry(false);
+    expect(g.corePx, 'the opaque core no longer covers ink ± BOLE_PAD').toBeGreaterThanOrEqual(need);
+    // NON-VACUITY: `need` is a real distance, and the descender's 0.66px of overflow is
+    // what makes the FOOT the governing side rather than the head.
+    expect(need.toFixed(2)).toBe('21.08');
+    expect((r.ink[1] + BOLE_PAD) - centre).toBeGreaterThan(centre - (r.ink[0] - BOLE_PAD));
   });
 
   test('EVERY core pixel is at or below L 0.06 — the ground every gilt ratio uses', () => {
@@ -213,28 +318,36 @@ describe('2 — ⚠️⚠️ THE BED CONTAINS THE INK, AND THE CONTAINMENT IS DE
     expect(scorch.getAttribute('filter')).toMatch(/scorch/);
     expect(singe.getAttribute('filter')).toMatch(/singe/);
     expect(core.getAttribute('fill')).toBe(BOLE);
-    // 1 — the core IS the bed: exactly ink ± pad, undisplaced, carrying the AA claim.
+    // 1 — the core IS the bed: the whole field box, undisplaced, carrying the AA claim.
+    //     ⚠️ Its y is the viewBox's own origin since R-1 (the field is anchored so user
+    //     y = 0 stays on the ink band's top edge), so the two are compared rather than
+    //     matched against a constant.
+    const [, vy, , vh] = container.querySelector('[data-testid="bole-bed"]')
+      .getAttribute('viewBox').split(/\s+/).map(Number);
     expect(Number(core.getAttribute('x'))).toBe(0);
-    expect(Number(core.getAttribute('y'))).toBe(0);
+    expect(Number(core.getAttribute('y'))).toBe(vy);
     expect(Number(core.getAttribute('width'))).toBe(BW);
-    expect(Number(core.getAttribute('height'))).toBe(BH);
+    expect(Number(core.getAttribute('height'))).toBe(vh);
     // 2 — the scorch starts strictly further out than the displacement can pull it in.
     const displace = container.querySelector('feDisplacementMap');
     const amp = Number(displace.getAttribute('scale'));
     expect(amp).toBe(GILD.edgeAmp);
     expect(SCORCH_OUT, 'the scorch can be displaced INTO the core').toBeGreaterThan(amp);
     expect(Number(scorch.getAttribute('x'))).toBe(-SCORCH_OUT);
-    expect(Number(scorch.getAttribute('y'))).toBe(-SCORCH_OUT);
+    expect(Number(scorch.getAttribute('y'))).toBe(vy - SCORCH_OUT);
     expect(Number(scorch.getAttribute('width'))).toBe(BW + SCORCH_OUT * 2);
-    expect(Number(scorch.getAttribute('height'))).toBe(BH + SCORCH_OUT * 2);
+    expect(Number(scorch.getAttribute('height'))).toBe(vh + SCORCH_OUT * 2);
     // …and the halo starts strictly outside the scorch, for the same reason again.
     expect(SINGE_OUT).toBeGreaterThan(SCORCH_OUT + amp);
     expect(Number(singe.getAttribute('x'))).toBe(-SINGE_OUT);
     expect(Number(singe.getAttribute('width'))).toBe(BW + SINGE_OUT * 2);
     // 3 — NON-VACUITY: the raggedness is a real amplitude, not a decorative zero, and
-    //     it is a visible fraction of the bed rather than a sub-pixel wobble.
+    //     it is a visible fraction of the INK BAND rather than a sub-pixel wobble. ⚠️ It
+    //     is measured against the ink band and not against the field, because the field
+    //     grew with the bar in R-1 and a ratio against it would have quietly relaxed.
     expect(amp).toBeGreaterThan(0);
-    expect(amp / BH).toBeGreaterThan(0.05);
+    expect((amp * BOLE_UNIT) / (HEADER_RIDERS.wordmark.ink[1] - HEADER_RIDERS.wordmark.ink[0]))
+      .toBeGreaterThan(0.05);
   });
 
   test('⚠️⚠️ R1 — THE BURN HAS NO INTERNAL EDGE, which is what made it a plaque', () => {
@@ -284,15 +397,13 @@ describe('2 — ⚠️⚠️ THE BED CONTAINS THE INK, AND THE CONTAINMENT IS DE
       expect(Number(t.getAttribute('seed'))).toBe(GILD.seed);
     }
     // ⚠️ THE BURN BLEEDS OFF THE BAR, so it has no horizontal boundary a reader can see.
-    // The bed's own box already runs from `ink[0] − pad` to `ink[1] + pad`; the scorch
-    // starts SCORCH_OUT bed-units outside that, which in px is more than the clearance
-    // at either end. Derived here rather than eyeballed off the screenshot.
-    const r = HEADER_RIDERS.wordmark;
-    const pxPerUnit = ((r.ink[1] + BOLE_PAD) - (r.ink[0] - BOLE_PAD)) / BH;
-    expect(SCORCH_OUT * pxPerUnit, 'the burn stops inside the bar at the top')
-      .toBeGreaterThan(r.ink[0] - BOLE_PAD);
-    expect((r.ink[1] + BOLE_PAD) + SCORCH_OUT * pxPerUnit, 'the burn stops inside the bar at the foot')
-      .toBeGreaterThan(r.bar);
+    // ⚠️⚠️ THE ONE-BAR VERSION OF THIS CLAIM IS WHAT R-1 CAUGHT. It used to be asserted
+    // here, from the desktop rider's own numbers, and it was true of exactly the bar it
+    // was written about. The claim now lives in the per-breakpoint field pin above and is
+    // read off the render at BOTH bars; what stays here is the tone argument this test
+    // owns. Cross-referenced rather than duplicated, so there is one place it can rot.
+    expect(SCORCH_OUT * BOLE_UNIT, 'the burn no longer reaches past the bed at all')
+      .toBeGreaterThan(0);
   });
 
   test('⚠️ THE BED IS PAINT, NEVER LAYOUT — it spends no height', () => {
@@ -306,9 +417,18 @@ describe('2 — ⚠️⚠️ THE BED CONTAINS THE INK, AND THE CONTAINMENT IS DE
     expect(bed.style.overflow).toBe('visible');
     expect(bed.getAttribute('aria-hidden')).toBe('true');
     expect(bed.style.pointerEvents).toBe('none');
-    // …and the reach really is spent on INSETS rather than on a height.
-    expect(bed.style.bottom.startsWith('-')).toBe(true);
+    // …and the reach really is spent on an OUT-OF-FLOW box rather than on flow height:
+    // an absolute box whose own height is the field, offset off the wordmark's centre.
+    // ⚠️ THE `50%` IS LOAD-BEARING and is asserted as such — it resolves against the
+    // WORDMARK's height, which is the only reason one px constant can land the field on
+    // the bar's edges at two breakpoints whose type sizes differ.
+    expect(bed.style.top).toMatch(/^calc\(50% - [\d.]+px\)$/);
+    expect(bed.style.height).toMatch(/^[\d.]+px$/);
     expect(bed.style.marginBottom).toBeFalsy();
+    expect(bed.style.marginTop).toBeFalsy();
+    // ⚠️ AND NO OVER-CONSTRAINED INSET: `top` + `height` + `bottom` is a declaration the
+    // engine throws away, which is how a geometry starts lying about itself in review.
+    expect(bed.style.bottom, 'the bed over-constrains its vertical insets').toBeFalsy();
   });
 
   test('⚠️ THE BOLE’S SEED IS NON-DEGENERATE, checked against the spec’s own lattice', () => {
