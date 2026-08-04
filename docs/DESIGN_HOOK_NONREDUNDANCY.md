@@ -190,7 +190,9 @@ the redraw stays inside the same authored, context-scoped pool.
 - SAME-SEED DISCLOSURE: HK-3 changes which template a given roll selects —
   a disclosed generation shift, owner-ordered 2026-08-02 (this document is the
   recorded ruling; the golden re-record for affected generation goldens —
-  including the 523-row corpus where it pins hook text — happens in the HK-3
+  including the 525-row corpus where it pins hook text (recount 2026-08-03 —
+  523 was the PRE-HK-3 figure, and this line describes the HK-3 re-record
+  itself) — happens in the HK-3
   commit under war §10.4's discipline, field-level diff quoted). HK-2 alone
   moves NO persisted bytes; sequencing HK-2 first ships the visible cure with
   zero golden motion while HK-3's re-record is prepared.

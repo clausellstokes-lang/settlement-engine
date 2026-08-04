@@ -208,9 +208,12 @@ describe('generator golden master (cross-build output stability)', () => {
   const rows = corpus();
 
   if (process.env.UPDATE_GOLDEN) {
-    // 523 full-pipeline generations overrun the root 20s testTimeout on
+    // 525 full-pipeline generations overrun the root 20s testTimeout on
     // slow/parallel runners — a wall-clock false positive, not drift. Precedent:
     // worldMapMobileGate + pglite override blocks.
+    // (recount 2026-08-03 — 523 was the PRE-HK-3 corpus size. This comment is
+    // the one a re-recorder reads AT THE MOMENT OF RE-RECORDING, so a stale
+    // figure here is the figure that ends up in the next shift record.)
     it('captures the golden manifest', () => {
       const out = {};
       for (const c of rows) out[keyOf(c)] = hashFor(c);

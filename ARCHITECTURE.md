@@ -125,8 +125,9 @@ structuralValidationPass → generatePopulation → corruptionPass →
 generateNarratives → assembleSettlement`.
 <!-- @enforced-by tests/docs/architectureFreshness.test.js (derived from steps/index.js) -->
 
-Determinism matters: same seed ⇒ same settlement — pinned by a 523-config
-golden-master hash manifest and enforced by construction (seeded per-step PRNG
+Determinism matters: same seed ⇒ same settlement — pinned by a 525-config
+golden-master hash manifest (recount 2026-08-03 — 523 was the PRE-HK-3 figure)
+and enforced by construction (seeded per-step PRNG
 forks; Math.random/Date/localeCompare banned by lint in the engine + domain).
 The **Strangler-Fig** migration is COMPLETE: legacy `generateSettlement.js` is
 deleted; `generateSettlementPipeline.js` is the only entry point. The three
