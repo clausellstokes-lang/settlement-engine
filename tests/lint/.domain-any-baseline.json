@@ -619,6 +619,10 @@
       "any": 1,
       "suppress": 0
     },
+    "src/domain/worldPulse/warArmyRecord.js": {
+      "any": 2,
+      "suppress": 0
+    },
     "src/domain/worldPulse/warCapacityReads.js": {
       "any": 16,
       "suppress": 0
@@ -632,7 +636,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/warDeployment.js": {
-      "any": 18,
+      "any": 16,
       "suppress": 0
     },
     "src/domain/worldPulse/warFrontReads.js": {

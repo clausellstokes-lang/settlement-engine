@@ -237,7 +237,7 @@ describe('mounted-everywhere-it-should-be guarantee', () => {
       'src/domain/worldPulse/militaryStrength.js',       // the model
       'tests/domain/militaryStrength.test.js',           // its own test
       'tests/domain/ruinFilter.probe.test.js',           // ruin-filter lane — proves a ruined garrison fields no martial force
-      'src/domain/worldPulse/warDeployment.js',          // B1/B2 — deployment strength envelope
+      'src/domain/worldPulse/warCapacityReads.js',       // B1/B2 — the deployment strength envelope. THE DECOMPOSITION WAVE (R-BLD-4) moved buildCapacityLookup out of warDeployment.js into this pure-read leaf, so the model's ONE engine-side importer moved with it. This is a RELOCATION of an existing allowlist row, not a new consumer: warDeployment.js no longer imports the model at all, and its row below is gone. The couplings this walker guards against are unchanged in number and in kind.
       'src/domain/worldPulse/occupation.js',             // B3 — occupied-settlement usefulness
       'src/domain/worldPulse/tradeSalience.js',          // B4 — materiel-gap salience
       'src/domain/worldPulse/religiousContest.js',       // religion rework — occupation→conversion force-scaling (occupying-force size)

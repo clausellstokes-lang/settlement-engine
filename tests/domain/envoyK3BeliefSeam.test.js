@@ -240,7 +240,21 @@ const NEGOTIATION_MODULES = Object.freeze({
   'src/domain/worldPulse/conquestIntent.js': [],
 });
 
-const TRUTH_READER = 'src/domain/worldPulse/warDeployment.js';
+// THE POSITIVE CONTROL. The absence pins above are only worth anything if the same
+// scan can FIND these tokens where truth really is read, so the control names a file
+// set that genuinely reads it. THE DECOMPOSITION WAVE (R-BLD-4) split warDeployment.js
+// into a head plus five leaves, and the six tokens now land in different members —
+// deriveMilitaryCapacity and the pressure model in the capacity-read leaf, economicState
+// and foodSecurity at the head's conquest sack. A control anchored on ONE filename would
+// have gone quietly vacuous the moment a token moved out of it, so the control is the
+// SET: every member must be non-empty, and every token must be found in at least one.
+const TRUTH_READERS = Object.freeze([
+  'src/domain/worldPulse/warDeployment.js',
+  'src/domain/worldPulse/warCapacityReads.js',
+  'src/domain/worldPulse/warSiegeVerdict.js',
+  'src/domain/worldPulse/warHomeCosts.js',
+  'src/domain/worldPulse/warArmyRecord.js',
+]);
 
 /**
  * THE DISCOVERY GUARD (cycle-8 verifier, Finding C).
@@ -471,12 +485,16 @@ describe('WR-7b K3 — nobody is ever current', () => {
   });
 
   test('GUARD-THE-GUARD: the same scan finds those tokens where truth is read', () => {
-    const source = code(TRUTH_READER);
-    expect(source.length, 'the positive control read empty').toBeGreaterThan(1000);
+    const sources = TRUTH_READERS.map((rel) => {
+      const text = code(rel);
+      expect(text.length, `the positive control member ${rel} read empty`).toBeGreaterThan(1000);
+      return text;
+    });
+    const joined = sources.join('\n');
     // If this stops matching, the token list has rotted and the absences above
     // are proving nothing — the guard fails loudly instead of silently passing.
     for (const token of TRUE_STATE_TOKENS) {
-      expect(source, `${TRUTH_READER} should read ${token}`).toContain(token);
+      expect(joined, `no war-layer truth reader reads ${token}`).toContain(token);
     }
   });
 });

@@ -108,7 +108,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
   Object.freeze({
     rule: 'warLayerEnabled',
     title: 'War layer',
-    module: 'src/domain/worldPulse/warDeployment.js,src/domain/worldPulse/occupation.js,src/domain/worldPulse/deploymentReturn.js,src/domain/worldPulse/mobilizationEffects.js,src/domain/worldPulse/mobilizationReactions.js,src/domain/worldPulse/warIntent.js,src/domain/spatial/armyTransit.js',
+    module: 'src/domain/worldPulse/warDeployment.js,src/domain/worldPulse/warCapacityReads.js,src/domain/worldPulse/warSiegeVerdict.js,src/domain/worldPulse/warHomeCosts.js,src/domain/worldPulse/warCoalitionRefusal.js,src/domain/worldPulse/warArmyRecord.js,src/domain/worldPulse/occupation.js,src/domain/worldPulse/deploymentReturn.js,src/domain/worldPulse/mobilizationEffects.js,src/domain/worldPulse/mobilizationReactions.js,src/domain/worldPulse/warIntent.js,src/domain/spatial/armyTransit.js',
     aliveness: Object.freeze({
       eventTypes: WAR_LAYER_EVENT_TYPES,
       // DELIBERATELY EMPTY, and NOT for the usual shared-family reason. MEASURED
@@ -157,7 +157,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
   Object.freeze({
     rule: 'warEconomyDrainEnabled',
     title: 'War economy population drain',
-    module: 'src/domain/worldPulse/warDeployment.js',
+    module: 'src/domain/worldPulse/warHomeCosts.js',
     aliveness: Object.freeze({
       // warDeployment.js:1877. The only emitter of this literal in the estate.
       eventTypes: Object.freeze(['war_conscription']),
@@ -190,7 +190,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
   Object.freeze({
     rule: 'warLevyEnabled',
     title: 'War levy',
-    module: 'src/domain/worldPulse/warDeployment.js',
+    module: 'src/domain/worldPulse/warHomeCosts.js',
     aliveness: Object.freeze({
       // warDeployment.js:1970. The only emitter of this literal in the estate.
       eventTypes: Object.freeze(['war_levy']),
@@ -222,7 +222,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
   Object.freeze({
     rule: 'warForageEnabled',
     title: 'Sack and forage',
-    module: 'src/domain/worldPulse/warDeployment.js',
+    module: 'src/domain/worldPulse/warArmyRecord.js,src/domain/worldPulse/warDeployment.js',
     aliveness: Object.freeze({
       // DELIBERATELY EMPTY, all three channels. The sack has no vocabulary: it
       // rides the EXISTING conquest outcome as extra populationDeltas
@@ -254,7 +254,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
   Object.freeze({
     rule: 'warSupplyQualityEnabled',
     title: 'Supply-gap deployed quality',
-    module: 'src/domain/worldPulse/supplyQuality.js,src/domain/worldPulse/warDeployment.js',
+    module: 'src/domain/worldPulse/supplyQuality.js,src/domain/worldPulse/warDeployment.js,src/domain/worldPulse/warArmyRecord.js',
     aliveness: Object.freeze({
       // DELIBERATELY EMPTY, all three channels. deployedQualityMult is a pure
       // multiplier over deployed strength and attrition kit (warDeployment.js:1286);
@@ -310,7 +310,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
   Object.freeze({
     rule: 'defenderResolveEnabled',
     title: 'Two-track defender resolve',
-    module: 'src/domain/worldPulse/warDeployment.js',
+    module: 'src/domain/worldPulse/warSiegeVerdict.js',
     aliveness: Object.freeze({
       // DELIBERATELY EMPTY, all three channels. The will score biases the siege
       // log-odds and, at the floor, returns a capitulation verdict; neither the
@@ -339,7 +339,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
   Object.freeze({
     rule: 'allyDefenseEnabled',
     title: 'Ally defense relief',
-    module: 'src/domain/worldPulse/warDeployment.js',
+    module: 'src/domain/worldPulse/warCapacityReads.js,src/domain/worldPulse/warSiegeVerdict.js',
     aliveness: Object.freeze({
       // DELIBERATELY EMPTY, all three channels. computeAllyRelief returns a number
       // that enters the siege verdict as defenderReliefBonus and is never recorded.

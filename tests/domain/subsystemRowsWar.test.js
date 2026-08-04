@@ -45,6 +45,31 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const sourceOf = (rel) => readFileSync(join(ROOT, rel), 'utf8');
 
+// THE WAR-LAYER WRITER FAMILY. THE DECOMPOSITION WAVE (R-BLD-4) split warDeployment.js
+// into a head plus five pure leaves. Several pins below assert "the war layer's source
+// still contains X" — and a pin anchored on ONE FILENAME breaks on a pure relocation and
+// then, once repointed, guards only whatever happens to remain in that file. The cure is
+// the recorded one: read the whole MODULE SET, assert the set is non-empty and every
+// member exists, so a symbol moving BETWEEN leaves cannot break the pin and cannot
+// silently vacate it either. A member deleted or renamed reds here immediately.
+const WAR_LAYER_FAMILY = Object.freeze([
+  'src/domain/worldPulse/warDeployment.js',       // the head — the writer/entry
+  'src/domain/worldPulse/warCapacityReads.js',    // pure snapshot reads
+  'src/domain/worldPulse/warSiegeVerdict.js',     // the siege contest
+  'src/domain/worldPulse/warHomeCosts.js',        // what the war costs the home
+  'src/domain/worldPulse/warCoalitionRefusal.js', // WR-6 refusal aftermath
+  'src/domain/worldPulse/warArmyRecord.js',       // the army record + the sack core
+]);
+/** The family's concatenated source. Non-empty per member, or this throws. */
+function warLayerSource() {
+  const parts = WAR_LAYER_FAMILY.map((rel) => {
+    const text = sourceOf(rel);
+    if (!text || text.length < 200) throw new Error(`war-layer family member is missing or empty: ${rel}`);
+    return text;
+  });
+  return parts.join('\n');
+}
+
 const PARENT = 'warLayerEnabled';
 /** The seventeen rules this lane authors, in registry order. */
 const WAR_RULES = Object.freeze([
@@ -310,6 +335,10 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     const row = rowFor(PARENT);
     const sources = [
       ...row.module.split(',').map((path) => sourceOf(path.trim())),
+      // The war-layer writer family in full: the row's module list names it, but the
+      // shared archetypes reach the receipt from whichever leaf now mints them, and a
+      // census that could only see one file would red on a pure relocation.
+      warLayerSource(),
       // warRecordMode is the shared condition-outcome leaf the declared modules
       // call rather than a war module in its own right, so it is not row provenance
       // but it IS where two of the literals are minted.
@@ -353,10 +382,13 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     for (const module of [
       'src/domain/worldPulse/candidateEvents.js',
       'src/domain/worldPulse/tradeWar.js',
-      'src/domain/worldPulse/warDeployment.js',
     ]) {
       expect(sourceOf(module), `${module} no longer emits war_pressure`).toContain("'war_pressure'");
     }
+    // The war layer's own two mints (harassment, and the conquest condition) are read
+    // off the FAMILY rather than off warDeployment.js by name, so a later split cannot
+    // break this pin or leave it guarding a file the mint has moved out of.
+    expect(warLayerSource(), 'the war-layer family no longer emits war_pressure').toContain("'war_pressure'");
     expectAbsentWithAnchor(
       [...rowFor(PARENT).aliveness.eventTypes],
       'war_pressure',
@@ -366,7 +398,7 @@ describe('war-stack rows — the source trace behind every declared literal', ()
   });
 
   test('the two conserved war-economy literals each have exactly one emitter', () => {
-    const warDeployment = sourceOf('src/domain/worldPulse/warDeployment.js');
+    const warDeployment = warLayerSource();
     expect(warDeployment).toContain("candidateType: 'war_conscription'");
     expect(warDeployment).toContain("candidateType: 'war_levy'");
     expect(rowFor('warEconomyDrainEnabled').aliveness.eventTypes).toEqual(['war_conscription']);
@@ -387,7 +419,7 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     expect(rowFor(PARENT).aliveness.eventTypes).toContain('war_spoils');
     expect(rowFor('warForageEnabled').aliveness.eventTypes).toEqual([]);
     // And the sack really is delta-only: it rides the conquest outcome's arrays.
-    const warDeployment = sourceOf('src/domain/worldPulse/warDeployment.js');
+    const warDeployment = warLayerSource();
     expect(warDeployment).toContain('export function computeSackTransfer');
     expect(warDeployment).toContain('SACK_POP_FLOOR = 150');
     expect(rowFor('warForageEnabled').invariants.map((i) => i.check).join(' ')).toContain('150');
