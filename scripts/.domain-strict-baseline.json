@@ -1,5 +1,5 @@
 {
-  "total": 1328,
+  "total": 1324,
   "files": {
     "src/domain/display/heraldCausalGrammar.js": 2,
     "src/domain/display/heraldCausalVoice.js": 3,
@@ -70,7 +70,7 @@
     "src/domain/worldPulse/warCoalitionSettlement.js": 31,
     "src/domain/worldPulse/warCosts.js": 8,
     "src/domain/worldPulse/warCostsNews.js": 24,
-    "src/domain/worldPulse/warDeployment.js": 16,
+    "src/domain/worldPulse/warDeployment.js": 12,
     "src/domain/worldPulse/warPeaceDecision.js": 25,
     "src/domain/worldPulse/warPeaceRefusal.js": 11,
     "src/domain/worldPulse/warPoliticalLoop.js": 4,
