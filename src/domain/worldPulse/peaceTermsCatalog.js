@@ -157,6 +157,27 @@ export const TERM_CATALOG = Object.freeze({
   // executor:'seam' — recorded-not-enforced this wave (no non_intervention asset producer
   // yet ⇒ never drafted ⇒ byte-identical; the demand-side wire lands with the composer).
   non_intervention: Object.freeze({ family: 'sovereignty', weight: 0.5, baseYears: 6, maxYears: 15, baseMag: 1.0, stream: false, executor: 'seam' }),
+  // WR-10 (amendment S, THE SOVEREIGNTY MARKET): a settlement trade IS a treaty, and this
+  // is the asset side of it — a satellite or vassal edge changing hands. ITS OWN FAMILY,
+  // and that is FORCED rather than chosen: amendment S puts "the asset on one side, ANY
+  // composition of EXISTING term families on the other", so a sovereignty_transfer sharing
+  // a family with any existing term would make itself mutually exclusive with the very
+  // consideration it is being exchanged for under §13 one-per-family stacking. Sharing
+  // 'sovereignty' with non_intervention (and with TB-4's planned route_restriction) would
+  // have been that bug, silently.
+  // baseMag 1.0 because sovereignty does not come in fractions — a town changes hands or
+  // it does not; weight 2.0 as the catalog's heaviest ask (puppet_seat's 1.5 was the prior
+  // ceiling, and a seat installed is less than a town conveyed); 10/25 years as its most
+  // DURABLE (non_aggression's 8/20 was the prior longest) because a cession's warranty
+  // outlives every extraction. ⚠ ALL FOUR ARE UNSOAKED BANDS — §7 THE TUNING SURFACE owns
+  // them and the owner signs them at the soak redo; they are inert until then (below).
+  // executor:'seam' + NO CLASS_TERM ENTRY (the non_intervention precedent verbatim): no
+  // asset class drafts it ⇒ peaceTermsAppraisal's `CLASS_TERM[assetClass]` never names it
+  // ⇒ draftTerms' `if (!spec) continue` is never even reached for it ⇒ registration is
+  // BYTE-IDENTICAL. Deliberately NOT a SUBORDINATING_TERM_TYPE (hegemony.js): a sold
+  // satellite is PROPERTY changing owner, not a polity bending its knee, and hegemony's
+  // own docstring already excludes satellites/steadings from subordinate-tie counting.
+  sovereignty_transfer: Object.freeze({ family: 'sovereignty_transfer', weight: 2.0, baseYears: 10, maxYears: 25, baseMag: 1.0, stream: false, executor: 'seam' }),
 });
 
 /** The typed term-type taxonomy (catalog keys, codepoint-frozen for the walker). */
@@ -197,6 +218,7 @@ export function termLabel(type) {
     case 'occupation_continuation': return 'occupation';
     case 'puppet_seat': return 'installed seat';
     case 'disclosure': return 'disclosure clause';
+    case 'sovereignty_transfer': return 'cession of sovereignty';
     default: return String(type).replace(/_/g, ' ');
   }
 }

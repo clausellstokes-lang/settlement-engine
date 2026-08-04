@@ -68,6 +68,15 @@ export const TREATY_COMPLIANCE_VOICE = Object.freeze({
     strained: 'Foreign coin stirs beneath the other\'s contests again; the non-intervention pledge frays at its edges.',
     defaulted: 'An army crosses into the other\'s internal quarrel; the pledge of non-intervention lies broken.',
   }),
+  // WR-10 (amendment S). The conveyance's own family, so it gets its own voice rather
+  // than the floor — a town changing hands is the loudest thing a treaty can say, and the
+  // strain register is the sold settlement's, not the signatories': the people did not
+  // move, only the banner over them, and that is exactly where this term frays.
+  sovereignty_transfer: Object.freeze({
+    honored: 'The conveyed town answers to its new banner; the old lord\'s writ has withdrawn as the deed required.',
+    strained: 'The conveyed town answers its new banner slowly, and the seller\'s old stewards have not all gone home.',
+    defaulted: 'The conveyed town has thrown off the banner it was sold under, and the deed is waste parchment.',
+  }),
 });
 
 /** A generic register floor for any future family the table does not name (keeps
