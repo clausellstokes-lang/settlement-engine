@@ -108,6 +108,7 @@ import NavDivider from './NavDivider.jsx';
 import { flowsInto } from './NavFlowArrow.jsx';
 import FletchBand from './FletchBand.jsx';
 import ShaftWrap from './ShaftWrap.jsx';
+import ShaftNock from './ShaftNock.jsx';
 import { GILT, PARCH, PARCH_100, SP, FS, sans } from '../theme.js';
 
 /**
@@ -243,6 +244,17 @@ export default function NavRibbon({ view, onNavClick }) {
     // gap:0 — outside the band the divider IS the seam (see NavDivider's width note);
     // inside it there are no seams at all, because the laps are the seams.
     <nav style={{ display: 'flex', gap: 0, alignItems: 'center', alignSelf: 'stretch' }}>
+      {/* ⚠️⚠️ THE HORN CROSS-NOCK MOUNTS HERE AND NOT IN App.jsx, AND THE REASON IS THE
+          SIZE RATCHET RATHER THAN THE ARCHITECTURE. App.jsx sits at EXACTLY its frozen
+          650-line ceiling, and a JSX comment is an expression container that eslint's
+          max-lines COUNTS — so mounting a build-and-show there costs an extraction, and
+          an extraction inside a revert-ready commit is exactly what makes it stop being
+          revert-ready. This nav is `position: static` inside a `position: sticky`
+          header, so an absolutely-positioned child resolves against the HEADER, which
+          is the box the nock actually belongs to. See ShaftNock.jsx.
+          ⚠️ REVERTING R7 IS: delete components/nav/ShaftNock.jsx, this element, and the
+          import above. Nothing else in the tree reads either. */}
+      <ShaftNock />
       {runs.map((run, ri) => {
         const nextHead = runs[ri + 1]?.items[0];
         const activeLane = run.items.findIndex((it) => it.id === view);

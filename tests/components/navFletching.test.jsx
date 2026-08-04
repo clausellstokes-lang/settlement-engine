@@ -1387,6 +1387,54 @@ describe('4 — THE WRAPS: two glossy bands riding the shaft, bracketing the clu
     }
   });
 
+  test('⚠️ R7 — THE HORN CROSS-NOCK IS PAINT, CARRIES NO STATE, AND REVERTS ALONE', () => {
+    // ⚠️ THIS IS A BUILD-AND-SHOW. The counsel proposed the nock, the chair could not
+    // settle it in prose, and the owner's glance decides. What the pin holds is not
+    // whether it is a good mark — it is that shipping it for that glance costs the
+    // estate NOTHING it cannot take back:
+    //
+    //   1. IT SPENDS NO LAYOUT. theme.js derives ANCHOR_OFFSET from
+    //      CHROME.headerDesktop and every in-page anchor in the product lands on it, so
+    //      a decoration that grew the bar by one pixel would move every one of them.
+    //   2. IT CARRIES NO STATE AND NO CONTRAST CLAIM — it is not a channel for anything.
+    //   3. ITS SURFACE IS ONE MODULE AND ONE ELEMENT, so the revert is a deletion.
+    const { container } = render(<App />);
+    const nock = container.querySelector('[data-testid="nav-shaft-nock"]');
+    expect(nock, 'the nock is not rendered').toBeTruthy();
+    // 1 — PAINT, NEVER LAYOUT.
+    expect(nock.style.position).toBe('absolute');
+    expect(nock.style.pointerEvents).toBe('none');
+    expect(nock.getAttribute('aria-hidden')).toBe('true');
+    for (const prop of ['height', 'minHeight', 'marginTop', 'marginBottom', 'paddingTop', 'paddingBottom', 'top', 'bottom']) {
+      const v = nock.style[prop];
+      // `top`/`bottom` are the zero insets that stretch it; anything else is a spend.
+      const allowedZeroInset = (prop === 'top' || prop === 'bottom') && (v === '0px' || v === '0');
+      expect(!v || allowedZeroInset, `the nock spends ${prop}: ${v}`).toBe(true);
+    }
+    // …and the header it rides is still exactly the bar, which is the number that
+    // matters. The anchor derivation is asserted elsewhere; this is the local half.
+    expect(container.querySelector('header').style.minHeight).toBe(`${CHROME.headerDesktop}px`);
+    // 2 — NO STATE. It is identical on every view, so it cannot encode one.
+    cleanup();
+    const marks = ['home', 'generate', 'realm'].map((v) => {
+      const { container: c } = render(<NavRibbon view={v} onNavClick={() => {}} />);
+      const html = c.querySelector('[data-testid="nav-shaft-nock-paint"]').outerHTML;
+      cleanup();
+      return html;
+    });
+    expect(new Set(marks).size, 'the nock differs by view — it has become an indicator').toBe(1);
+    // …and it spends NO metal, so the band's one-gold census is untouched by it.
+    expect(marks[0]).not.toContain(GILT);        // anchored: the Set assertion above proves the markup is live
+    expect(marks[0]).not.toContain(GILT_LIGHT);  // anchored: ditto
+    // 3 — ONE MODULE, ONE ELEMENT. The revert instruction in NavRibbon's own comment
+    // has to stay TRUE, so the census is executed rather than trusted: nothing else in
+    // src reads ShaftNock.
+    const consumers = ['App.jsx', 'components/nav/NavRibbon.jsx', 'components/nav/NavFlowArrow.jsx']
+      .filter((f) => SRC(f).includes('ShaftNock'));
+    expect(consumers, 'the nock has grown a second consumer — the revert is no longer one deletion')
+      .toEqual(['components/nav/NavRibbon.jsx']);
+  });
+
   test('the wrap is lit by the SAME light as the barrel it rides', () => {
     // A wrap with its own highlight position reads as a sticker on a shaft. Sharing
     // SHAFT_STOPS is what makes the two cylinders one object.
