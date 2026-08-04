@@ -966,11 +966,16 @@ export const FLETCH_SEAM = FLETCH_TIP;
 // legitimate scoping: the wrap carries no state, no label rides it, and nothing about
 // reaching Create depends on perceiving it. Recorded and pinned as a measured
 // relationship, never as a 3:1 claim it cannot make.
-// ⚠️⚠️ THE NUMBER IN THAT SENTENCE USED TO BE 2.12:1, AND IT WAS NEVER TRUE OF A PIXEL —
-// kept here as HISTORY because the mistake is instructive and the correction has to live
-// in the sentence rather than beside it. 2.12 is the contrast ratio of WRAP_GLOSS against
-// WRAP_EDGE AS AUTHORED: arithmetic about two hexes, neither of which reached a screen in
-// that state, because the turns were painted over the barrel gradient and only the
+// ⚠️⚠️ THE NUMBER IN THAT SENTENCE USED TO BE 2.12:1, AND IT WAS NEVER TRUE OF A PIXEL
+// ANYWHERE THE THREAD IS ACTUALLY READ — kept here as HISTORY because the mistake is
+// instructive and the correction has to live in the sentence rather than beside it. 2.12 is
+// the contrast ratio of WRAP_GLOSS against WRAP_EDGE AS AUTHORED. ⚠️ IT IS NOT, HOWEVER,
+// UNRENDERABLE, and saying so was this note's own second error: WRAP_BARREL's first two
+// stops are BOTH #FFFFFF and multiply by white is the identity, so across the top 9% the
+// composited ladder IS exactly 2.12 (crest byte-identical to WRAP_GLOSS out to ~depth
+// 0.10). It simply never holds again below the lit stop — 1.82 mid-bar, 1.37 at the edge
+// stop, 1.23 in the silhouette — and that falloff is the whole readable BODY of the bar.
+// In V4C the turns were painted over the barrel gradient and only the
 // inter-turn shadow was opaque (V4C's swap, WRAP_BARREL below). The shipped ladder was
 // 1.316:1 — worse than the claim, and the "crest" was the BODY tone. V4C's own
 // measurement mid-bar was 1.806:1 at crest #6A311E; V4D re-measured a device row of the
@@ -998,7 +1003,9 @@ export const WRAP_EDGE = '#2E0F08';
  *             satin crest WRAP_GLOSS did not appear anywhere below the top 9% of the
  *             bar, because the turns were painted OVER the barrel gradient and the
  *             turns' only opaque tone was the inter-turn shadow. 2.12:1 is the ladder
- *             of the AUTHORED HEXES, and no reader ever saw it.
+ *             of the AUTHORED HEXES, and no reader ever saw it BELOW THAT 9% — which is
+ *             everywhere the thread is read, and is the only sense in which the sentence
+ *             above is true. Inside the top 9% the multiply is identity and 2.12 renders.
  *
  * ⚠️ SO THE TURNS BECOME THE OPAQUE LAYER AND THE BARREL BECOMES A MODULATOR. The turn
  * gradient now carries all three tones — shadow, crest, body — and this is the barrel's

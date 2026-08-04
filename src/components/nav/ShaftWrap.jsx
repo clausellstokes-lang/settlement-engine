@@ -64,7 +64,9 @@
  *           the whole 10px width, a crest-to-valley ladder of 1.316:1 on a 2.0px period.
  *           A barcode. The file claimed "a 2.6px turn period whose crest-to-valley
  *           ladder is 2.12:1"; 2.12 is the ladder of the authored HEXES and no reader
- *           ever saw it.
+ *           ever saw it BELOW THE LIT STOP — the same 9% qualifier this docstring already
+ *           makes above, and it belongs here too: the multiply is identity in that band,
+ *           so 2.12 does render there. It is unreachable everywhere a reader reads.
  * So the layers swap roles: the TURN gradient becomes the opaque one and carries all
  * three tones at the spec's own widths, and the barrel becomes a neutral luminance
  * MULTIPLY over it (theme.js WRAP_BARREL, which owns why it must be neutral). One
