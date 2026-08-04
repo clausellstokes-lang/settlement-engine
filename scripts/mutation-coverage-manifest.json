@@ -1805,6 +1805,10 @@
    "kind": "rationale",
    "ref": "narration-kit-exact-census-2026-08-03"
   },
+  "tests/lint/sovereigntyKindPools.walker.test.js": {
+   "kind": "rationale",
+   "ref": "narration-kit-exact-census-2026-08-03"
+  },
   "tests/lint/lineageKindPools.walker.test.js": {
    "kind": "rationale",
    "ref": "narration-kit-exact-census-2026-08-03"
