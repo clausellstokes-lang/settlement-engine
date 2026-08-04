@@ -36,20 +36,45 @@ import {
  *
  * v2 (the WR-9 build wave) adds `warDurationHistogram`. v3 (WR-9r) adds the
  * `unmeasured` duration cell. v4 (WR-9c) adds `forceEvidence`, the address the six
- * force cells grade. Every bump is EXACT rather than tolerant on the same
- * principle: a v1 observation has no duration address at all, a v2 one has no
- * address for a LOST duration, and a v3 one has no address for any force reading,
- * so silently accepting one would let an envelope grade a corpus it could not
- * actually read. Each bump is the version arm of the repair that motivated it, and
- * refusing to bump would have contradicted this paragraph's own law.
+ * force cells grade. v5 (WR-9d) adds `endingsUnclassified` and
+ * `decidingTermSampling`, the two addresses the collector's own honesty needs.
+ * Every bump is EXACT rather than tolerant on the same principle: a v1 observation
+ * has no duration address at all, a v2 one has no address for a LOST duration, a v3
+ * one has no address for any force reading, and a v4 one has no address for a close
+ * the classifier COULD NOT READ, so silently accepting one would let an envelope
+ * grade a corpus it could not actually read. Each bump is the version arm of the
+ * repair that motivated it, and refusing to bump would have contradicted this
+ * paragraph's own law.
+ *
+ * WHY v5 EXISTS, MEASURED. Before WR-9d, `foldWarEndings` had NO production
+ * consumer (only its own test) and `UNCLASSIFIED_MAX_SHARE` below appeared EXACTLY
+ * ONCE in the whole repository — its own declaration. The collector produces
+ * unclassified closes on every real corpus, and with nowhere to put them the
+ * endings envelope could not tell "no war closed" from "every close was unreadable"
+ * — precisely the WR-9r blindness, one dimension over.
  *
  * NOTHING IS ORPHANED, MEASURED RATHER THAN ASSERTED. Re-measured on 2026-08-04 at
- * `43b3195b`: the local receipt corpus under `artifacts/soak/` is gitignored
+ * `cb1ea74f`: the local receipt corpus under `artifacts/soak/` is gitignored
  * (`git ls-files artifacts` is EMPTY, so none of it is committed), and
  * `grep -l warConvergence -r artifacts/` returns NOTHING — no observation of any
- * version exists on disk to orphan, at v1, v2 or v3.
+ * version exists on disk to orphan, at v1, v2, v3 or v4.
  */
-export const WAR_CONVERGENCE_OBSERVATION_VERSION = 4;
+export const WAR_CONVERGENCE_OBSERVATION_VERSION = 5;
+
+/**
+ * The closed reasons a war close may fail to classify, declared HERE because this
+ * module owns the address wall. It is a deliberate second spelling of
+ * warEndingClassifier's own vocabulary rather than an import: that module imports
+ * `WAR_ENDING_KEYS` from this one, so importing back would close a module cycle —
+ * the shape that produced the dist chunk-cycle TDZ class. The two lists are pinned
+ * identical in the test against the real module (WR-9c's J-WR9C-1 idiom).
+ * @type {ReadonlyArray<string>}
+ */
+export const WAR_ENDING_UNCLASSIFIED_KEYS = Object.freeze([
+  'not_a_closed_war',
+  'no_terminal_evidence',
+  'razing_road_unreconstructable',
+]);
 
 /**
  * Closed war-ending vocabulary from WR-9. The two punitive-sack paths stay
@@ -289,10 +314,16 @@ export function createEmptyWarConvergenceObservation() {
     schemaVersion: WAR_CONVERGENCE_OBSERVATION_VERSION,
     kind: 'war_convergence_observation',
     endingsMix: zeroCountMap(WAR_ENDING_KEYS),
+    // v5: the closes the classifier could NOT read. An endings mix without this
+    // beside it is a histogram that reports its own blindness as an empty world.
+    endingsUnclassified: zeroCountMap(WAR_ENDING_UNCLASSIFIED_KEYS),
     warDurationHistogram: zeroCountMap(WAR_DURATION_BANDS),
     terminationDecidingTermHistogram: zeroCountMap(
       WAR_TERMINATION_DECIDING_TERM_KEYS,
     ),
+    // v5: the deciding-term histogram's declared resolution. `samples` 0 with an
+    // empty declaration is the honest empty state — a collector replaces it.
+    decidingTermSampling: { decidingTermSample: '', samples: 0 },
     flagCertificationRows: WAR_RULINGS_FLAG_KEYS.map((rule) => ({
       rule,
       ruleState: 'unknown',
@@ -362,11 +393,35 @@ export function validateWarConvergenceObservation(raw) {
   };
 
   validateHistogram('endingsMix', WAR_ENDING_KEYS);
+  validateHistogram('endingsUnclassified', WAR_ENDING_UNCLASSIFIED_KEYS);
   validateHistogram('warDurationHistogram', WAR_DURATION_BANDS);
   validateHistogram(
     'terminationDecidingTermHistogram',
     WAR_TERMINATION_DECIDING_TERM_KEYS,
   );
+
+  // The sampling declaration is a SHAPE wall, not a value wall: this module has no
+  // business ruling on what resolution a collector achieved, only on whether it
+  // said. A receipt that carries deciding terms while declaring no sample at all is
+  // the one combination refused outright — that is an instrument quoting a
+  // precision it never claimed.
+  const sampling = observation.decidingTermSampling;
+  if (!sampling || typeof sampling !== 'object' || Array.isArray(sampling)) {
+    errors.push('warConvergence.decidingTermSampling must be an object.');
+  } else {
+    const declared = asRecord(sampling);
+    if (typeof declared.decidingTermSample !== 'string') {
+      errors.push('warConvergence.decidingTermSampling.decidingTermSample must be a string.');
+    }
+    if (!Number.isInteger(declared.samples) || Number(declared.samples) < 0) {
+      errors.push('warConvergence.decidingTermSampling.samples must be a non-negative integer.');
+    }
+    if (Number(declared.samples) > 0 && String(declared.decidingTermSample) === '') {
+      errors.push(
+        'warConvergence.decidingTermSampling must name its sample once any deciding term is counted.',
+      );
+    }
+  }
 
   if (!Array.isArray(observation.flagCertificationRows)) {
     errors.push('warConvergence.flagCertificationRows must be an array.');
@@ -457,8 +512,25 @@ const sumCounts = (counts) => Object.values(counts)
  * harness reporting an unmet obligation of amendment L, not a defect of this
  * module; the forces leaf's header states the measurement.
  *
+ * ⚠️ CR-WR9-C, THE INSTRUMENTED-CASE WIDENING (WR-9d). This used to be handed
+ * `releaseCases` only. It is now handed every receipt at an INSTRUMENTED HORIZON —
+ * release AND research — because a 300-year research case measures exactly the war
+ * convergence this instrument exists to read, and dropping it discarded evidence
+ * the corpus had already paid for. The horizon years arrive as an argument rather
+ * than being imported: `behavioralContract.js` owns `CERTIFICATION_HORIZONS` and
+ * imports THIS module, so reading them back would close a module cycle.
+ *
+ * The ruling's other half — "the unresolved-at-horizon wall keyed to each case's
+ * OWN horizon" — is discharged at COLLECTION time, not here. The collector marks a
+ * war unresolved when it is still alive in the last year THAT case ran, so a
+ * 100-year case and a 300-year case each report against their own clock and this
+ * sum needs no horizon constant at all.
+ *
  * @param {unknown[]} rawReceipts
  * @param {number} expectedEnvelopeSchemaVersion
+ * @param {ReadonlyArray<number>|null} [instrumentedHorizonYears] the case horizons
+ *   this corpus grades. Null or omitted ⇒ every receipt is graded, which is what a
+ *   caller that has already selected its cases wants.
  * @returns {Array<{
  *   id: string,
  *   label: string,
@@ -467,15 +539,27 @@ const sumCounts = (counts) => Object.values(counts)
  *   threshold: unknown,
  *   state?: string,
  *   unobservedReason?: string,
- * }>} the four envelope cells, the two wall cells, then the six force cells. The
+ * }>} the envelope cells, the three wall cells (`duration_measured`,
+ *   `endings_classified`, `non_vacuous`), then the six force cells. The
  *   last two fields are carried only by the force cells, whose third verdict state
  *   (UNOBSERVED) a boolean cannot express.
  */
 export function evaluateWarConvergenceInstrumentation(
   rawReceipts,
   expectedEnvelopeSchemaVersion,
+  instrumentedHorizonYears = null,
 ) {
-  const receipts = Array.isArray(rawReceipts) ? rawReceipts.map(asRecord) : [];
+  const allReceipts = Array.isArray(rawReceipts) ? rawReceipts.map(asRecord) : [];
+  // The selection is by HORIZON, never by "carries an observation": a case that
+  // reached an instrumented horizon and carries no WR-9 section is exactly the
+  // failure `war_convergence.receipt_shape` exists to name, and filtering it out
+  // here would let it escape the wall by being invisible to it.
+  const horizons = Array.isArray(instrumentedHorizonYears)
+    ? instrumentedHorizonYears.map((years) => Number(years))
+    : null;
+  const receipts = horizons
+    ? allReceipts.filter((receipt) => horizons.includes(Number(receipt.years)))
+    : allReceipts;
   const parsed = receipts.map((receipt) => ({
     receipt,
     validation: validateWarConvergenceObservation(receipt.warConvergence),
@@ -491,6 +575,7 @@ export function evaluateWarConvergenceInstrumentation(
     }));
   const shapePassed = receipts.length > 0 && invalidCases.length === 0;
   const endingTotals = emptyTotals(WAR_ENDING_KEYS);
+  const unclassifiedTotals = emptyTotals(WAR_ENDING_UNCLASSIFIED_KEYS);
   const durationTotals = emptyTotals(WAR_DURATION_BANDS);
   const decidingTermTotals = emptyTotals(WAR_TERMINATION_DECIDING_TERM_KEYS);
   /** @type {Record<string, { on: number, alive: number, silent: number, unobserved: number }>} */
@@ -507,6 +592,9 @@ export function evaluateWarConvergenceInstrumentation(
       forceEvidences.push(observation.forceEvidence);
       for (const key of WAR_ENDING_KEYS) {
         endingTotals[key] += Number(asRecord(observation.endingsMix)[key]);
+      }
+      for (const key of WAR_ENDING_UNCLASSIFIED_KEYS) {
+        unclassifiedTotals[key] += Number(asRecord(observation.endingsUnclassified)[key]);
       }
       for (const key of WAR_DURATION_BANDS) {
         durationTotals[key] += Number(asRecord(observation.warDurationHistogram)[key]);
@@ -578,6 +666,17 @@ export function evaluateWarConvergenceInstrumentation(
     && distinctEndingKeys >= WAR_CONVERGENCE_TUNING.ENDING_MIN_DISTINCT_KEYS
     && dominantShare <= WAR_CONVERGENCE_TUNING.ENDING_DOMINANCE_MAX_SHARE
     && sackRatioPassed;
+  // THE ENDINGS-SIDE TWIN OF `duration_measured` (WR-9d). Its denominator is every
+  // COUNTED CLOSE — classified plus unclassified — because the share that matters is
+  // "of the wars that ended, how many could this instrument actually read", and
+  // dividing by the classified ones alone would be the self-referential denominator
+  // that always answers 1.0.
+  const closesCounted = endingsObserved + sumCounts(unclassifiedTotals);
+  const unclassifiedShare = closesCounted > 0
+    ? sumCounts(unclassifiedTotals) / closesCounted
+    : 0;
+  const endingsClassifiedPassed = shapePassed
+    && unclassifiedShare <= WAR_CONVERGENCE_TUNING.UNCLASSIFIED_MAX_SHARE;
   const flagCoveragePassed = shapePassed && WAR_RULINGS_FLAG_KEYS.every((rule) => {
     const totals = flagTotals[rule];
     return totals.alive > 0
@@ -593,6 +692,7 @@ export function evaluateWarConvergenceInstrumentation(
         envelopeSchemaVersion: expectedEnvelopeSchemaVersion,
         observationSchemaVersion: WAR_CONVERGENCE_OBSERVATION_VERSION,
         requiredEndings: WAR_ENDING_KEYS,
+        requiredUnclassifiedReasons: WAR_ENDING_UNCLASSIFIED_KEYS,
         requiredDurationBands: WAR_DURATION_BANDS,
         requiredDecidingTerms: WAR_TERMINATION_DECIDING_TERM_KEYS,
         requiredFlagRows: WAR_RULINGS_FLAG_KEYS,
@@ -651,6 +751,27 @@ export function evaluateWarConvergenceInstrumentation(
         maxDominantShare: WAR_CONVERGENCE_TUNING.ENDING_DOMINANCE_MAX_SHARE,
         minVengeanceShareOfSacks: WAR_CONVERGENCE_TUNING.SACK_VENGEANCE_MIN_SHARE_OF_SACKS,
         maxVengeanceShareOfSacks: WAR_CONVERGENCE_TUNING.SACK_VENGEANCE_MAX_SHARE_OF_SACKS,
+        ratified: false,
+      },
+    },
+    // ⚠ A GREEN HERE DOES NOT MEAN THE INSTRUMENT RAN, on the same principle as
+    // `duration_measured` above: it says only that the closes which WERE counted
+    // were readable. A corpus that closed no war at all satisfies it vacuously and
+    // `war_convergence.non_vacuous` is the wall that refuses that corpus.
+    {
+      id: 'war_convergence.endings_classified',
+      label: 'every closed war handed the endings mix a road the classifier could actually read',
+      passed: endingsClassifiedPassed,
+      observed: {
+        closesCounted,
+        classified: endingsObserved,
+        unclassified: sumCounts(unclassifiedTotals),
+        unclassifiedShare,
+        unclassifiedTotals,
+      },
+      threshold: {
+        maxUnclassifiedShare: WAR_CONVERGENCE_TUNING.UNCLASSIFIED_MAX_SHARE,
+        reasonsAreDistinctDiagnoses: WAR_ENDING_UNCLASSIFIED_KEYS,
         ratified: false,
       },
     },

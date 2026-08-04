@@ -24,6 +24,13 @@
  *      diversity, arc polarity, state motion, succession, causal composition,
  *      attention, and a bounded Chronicle sample are recorded for the
  *      predeclared realm-scale oracle. This cell does not choose its own bands.
+ *   5b. WAR CONVERGENCE (WR-9d) — the deployment ledger is walked year over year
+ *      as a war census, every close is classified through warEndingClassifier and
+ *      banded through warDurationBandFor, and the result fills the WR-9 observation
+ *      on the receipt. Only the instrument's own ARITHMETIC is asserted here (every
+ *      counted war in exactly one duration cell, every close in exactly one ending
+ *      cell); the envelopes themselves are unratified and are graded by the
+ *      behavioral oracle, where they honestly fail at HEAD's flag state.
  *   6. ISOLATED WORKER EXECUTION — one real Node worker_threads isolate imports
  *      the product Web Worker module, advances the same initial realm through
  *      the same domain entry, and must return the same output hash as run A.
@@ -61,8 +68,12 @@ import {
 } from './behavioral-observation.mjs';
 import {
   SOAK_RECEIPT_SCHEMA_VERSION,
-  createEmptyWarConvergenceObservation,
 } from '../../src/domain/certification/behavioralContract.js';
+import {
+  WAR_CONVERGENCE_SAMPLING,
+  buildWarConvergenceObservation,
+  observeWarConvergenceYear,
+} from './war-convergence-collector.mjs';
 import { buildWholeWorldSoakSpatialCanon } from './whole-world-soak-spatial-fixture.mjs';
 import {
   buildStoryMixDivergenceEvidence,
@@ -268,6 +279,10 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
   // sidecars) leaves no candidate in `selected`, so without this census its
   // certification row could only ever read UNOBSERVED.
   const yearlyStateKeyCensus = [];
+  // WR-9d: the war census, one record per year. The collector reads the composed
+  // year result advanceInterval already returns — no engine surface changes and no
+  // persisted state, which WR-9's lifecycle clause forbids.
+  const yearlyWarConvergence = [];
   let firstResultSha256 = null;
   let peakHeapUsedBytes = process.memoryUsage().heapUsed;
   const t0 = Date.now();
@@ -314,6 +329,12 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
       rawWizardNewsEntries: [...rawWizardNewsById.values()],
     }));
     yearlyStateKeyCensus.push(censusWorldStateKeys(result.worldState));
+    yearlyWarConvergence.push(observeWarConvergenceYear({
+      year,
+      tick: result.worldState?.tick,
+      result,
+      saves: runningSaves,
+    }));
 
     // 1. NaN/Infinity scan — fail fast with paths.
     const bad = findBadNumber({
@@ -375,6 +396,7 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
     startPopulations: fixture.saves.map((s) => Number(s.settlement?.population) || 0),
     yearlyBehavior,
     yearlyStateKeyCensus,
+    yearlyWarConvergence,
     // The EFFECTIVE rules this run carried (the preset spread plus any --seasons
     // override), recorded so the receipt states its configuration instead of
     // leaving a reader to infer it from the script.
@@ -599,6 +621,29 @@ REGION.forEach((r, i) => {
   console.log(`  ${r.id} (${r.settType}): ${runA.startPopulations[i]} → ${series[series.length - 1]} (min ${Math.min(...series)}, max ${Math.max(...series)})`);
 });
 
+// ── 6. WR-9 war convergence — the collector folds the per-year census into the
+//    observation the behavioral oracle grades. The ENVELOPES are not asserted here
+//    (they are unratified and honestly fail at HEAD's flag state); what IS asserted
+//    is the instrument's own arithmetic: ruling N3 says every counted war lands in
+//    exactly one duration cell and every closed war in exactly one ending cell, so
+//    a collector that quietly dropped a war it could not read would red right here.
+const warConvergenceCollected = buildWarConvergenceObservation({
+  yearly: runA.yearlyWarConvergence,
+});
+const warCensus = warConvergenceCollected.census;
+console.log('\n## war convergence (WR-9 instrument — envelopes graded by the behavioral oracle, not here)');
+console.log(`  counted wars ${warCensus.countedWars} = closed ${warCensus.closedWars} + alive at horizon ${warCensus.aliveAtHorizonWars}`);
+console.log(`  duration histogram ${JSON.stringify(warConvergenceCollected.observation.warDurationHistogram)} (sum ${warCensus.histogramSum})`);
+console.log(`  endings mix ${JSON.stringify(warConvergenceCollected.observation.endingsMix)}`);
+console.log(`  endings unclassified ${JSON.stringify(warCensus.unclassifiedReasons)} (${warCensus.unclassifiedEndings} of ${warCensus.closedWars} closes)`);
+console.log(`  deciding terms ${JSON.stringify(warConvergenceCollected.observation.terminationDecidingTermHistogram)} — ${warCensus.decidingTermSamples} samples, ${WAR_CONVERGENCE_SAMPLING.decidingTermSample}`);
+console.log(`  declared resolution: close ticks are ${WAR_CONVERGENCE_SAMPLING.closeTickResolution}-resolved from the ${WAR_CONVERGENCE_SAMPLING.censusSource}`);
+console.log(`  wars ended by a road this collector does not observe: ${warCensus.unmeasuredFromUnobservedRoad} (counted, duration ${WAR_CONVERGENCE_SAMPLING.unobservedRoadDurationsAre}); ambiguous pairings: ${warCensus.unmeasuredFromAmbiguousPair}`);
+check(warCensus.durationTotalityHolds, 'every counted war lands in exactly one duration band',
+  `sum ${warCensus.histogramSum} === counted ${warCensus.countedWars}`);
+check(warCensus.endingsTotalityHolds, 'every closed war lands in exactly one ending or one unclassified reason',
+  `classified ${warCensus.classifiedEndings} + unclassified ${warCensus.unclassifiedEndings} === closes ${warCensus.closedWars}`);
+
 const receipt = {
   // Envelope v5 ADDS the `subsystems` section below. Every v4 field keeps its
   // exact v4 meaning; consumers accept both versions
@@ -625,11 +670,14 @@ const receipt = {
   // is retained here only to diagnose whether state also diverged; the verdict
   // comes exclusively from the selected-event distribution instrument above.
   seedDivergence,
-  // WR-9's address-complete v5 section lands before the WR program that can
-  // populate it. Zero histograms plus unknown/UNOBSERVED flag rows are honest
-  // evidence of that sequencing state: the behavioral oracle accepts the shape
-  // and refuses both the non-vacuity and flag-coverage claims.
-  warConvergence: createEmptyWarConvergenceObservation(),
+  // WR-9's address-complete section, now MEASURED (WR-9d). The flag certification
+  // rows stay unknown/UNOBSERVED — that arm is owner-held and is not this wave's —
+  // so the oracle still honestly refuses the flag-coverage claim. The census beside
+  // it publishes the instrument's own resolution and its two totality identities,
+  // because a reading whose sampling nobody stated will be quoted at a precision it
+  // does not have.
+  warConvergence: warConvergenceCollected.observation,
+  warConvergenceCensus: warCensus,
   finalHash: runA.yearlyHashes[runA.yearlyHashes.length - 1],
   directFirstResultSha256: runA.firstResultSha256,
   stressorCounts: counts,

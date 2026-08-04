@@ -1048,9 +1048,17 @@ export function evaluateBehavioralCertification(input) {
         ...checkAttention(releaseCases),
         ...checkDarkControls(observedReceipts),
         ...checkInteractions(rows, settlementYears),
+        // CR-WR9-C: the war cells grade every INSTRUMENTED horizon — release AND
+        // research — not release alone. A 300-year case measures exactly the war
+        // convergence this instrument exists to read, and dropping it discarded
+        // evidence the corpus had already paid for. The ruling's other half (the
+        // unresolved-at-horizon wall keyed to each case's OWN horizon) is
+        // discharged by the collector, which marks a war unresolved only when it
+        // is still alive in the last year THAT case ran.
         ...evaluateWarConvergenceInstrumentation(
-          /** @type {unknown[]} */ (releaseCases),
+          /** @type {unknown[]} */ (receipts),
           SOAK_RECEIPT_SCHEMA_VERSION,
+          [CERTIFICATION_HORIZONS.release.years, CERTIFICATION_HORIZONS.research.years],
         ),
       ]
     : [];

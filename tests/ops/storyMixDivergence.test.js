@@ -117,13 +117,22 @@ describe('story-mix divergence instrument', () => {
 
     expect(source).toContain('buildStoryMixDivergenceEvidence,');
     expect(source).toContain('compareStoryMixDistributions,');
-    expect(source).toContain('createEmptyWarConvergenceObservation,');
+    // WR-9d replaced the empty-observation import with the real collector. Both
+    // halves are pinned — the per-year observer AND the fold — because a soak that
+    // imported only one of them would still parse and would silently ship a
+    // receipt whose war section never saw a war.
+    expect(source).toContain('observeWarConvergenceYear,');
+    expect(source).toContain('buildWarConvergenceObservation,');
     expect(source).toMatch(/check\(\s*storyMixDivergence\.passed,\s*'different seeds produce a divergent event-type mix'/);
     expect(source).toMatch(/const hashDiverged = [^;]+;/);
     expect(source).toContain("composite hash ${hashDiverged ? 'also differed' : 'did not differ'}");
     expect(source).toMatch(/const seedDivergence = buildStoryMixDivergenceEvidence\(\{/);
     expect(source).toContain('comparison: storyMixDivergence,');
     expect(source).toContain('seedDivergence,');
-    expect(source).toContain('warConvergence: createEmptyWarConvergenceObservation(),');
+    // The receipt now carries the MEASURED observation, and the collector is
+    // actually driven per year rather than merely imported.
+    expect(source).toContain('warConvergence: warConvergenceCollected.observation,');
+    expect(source).toContain('yearlyWarConvergence.push(observeWarConvergenceYear({');
+    expect(source).not.toContain('createEmptyWarConvergenceObservation()');
   });
 });

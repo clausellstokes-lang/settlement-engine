@@ -166,9 +166,20 @@ function behavioralReceipt(years, settlements, seed, { controls = false } = {}) 
       warDurationHistogram: {
         short: 8, long: 3, generational: 1, unresolved: 0, unmeasured: 0,
       },
+      // WR-9d's v5 address. Zero across the board is the SHAPE of a corpus whose
+      // every close was readable — which is what this fixture claims by giving
+      // every ending a road — and it is what `war_convergence.endings_classified`
+      // grades. A fixture that omitted the address would be graded on a blindness
+      // it never declared.
+      endingsUnclassified: {
+        not_a_closed_war: 0, no_terminal_evidence: 0, razing_road_unreconstructable: 0,
+      },
       terminationDecidingTermHistogram: Object.fromEntries(
         WAR_TERMINATION_DECIDING_TERM_KEYS.map((key) => [key, 1]),
       ),
+      // WR-9d: the deciding-term histogram's declared resolution. It rides the
+      // pulse record, and the interval collapse keeps only the year-final tick.
+      decidingTermSampling: { decidingTermSample: '1-in-52', samples: 4 },
       flagCertificationRows: WAR_RULINGS_FLAG_KEYS.map((rule) => ({
         rule,
         ruleState: 'on',
@@ -640,6 +651,80 @@ describe('WR-9 convergence envelopes', () => {
     return result.checks.find((check) => check.id === 'war_convergence.endings_envelope');
   }
 
+  /** Set the same unclassified tally on every receipt and return the graded check. */
+  function gradeUnclassified(unclassified) {
+    const input = passingInput();
+    for (const receipt of input.receipts) {
+      receipt.warConvergence.endingsUnclassified = {
+        not_a_closed_war: 0, no_terminal_evidence: 0, razing_road_unreconstructable: 0,
+        ...unclassified,
+      };
+    }
+    return evaluateBehavioralCertification(input).checks
+      .find((check) => check.id === 'war_convergence.endings_classified');
+  }
+
+  it('WR-9d — the endings-classified wall passes when every close was readable', () => {
+    const check = gradeUnclassified({});
+    expect(check.passed).toBe(true);
+    // The denominator is every COUNTED close, classified plus unclassified — not
+    // the classified ones alone, which would be a self-referential denominator that
+    // always answers 1.0. The fixture's 22 endings × 2 release cases = 44.
+    expect(check.observed.closesCounted).toBe(check.observed.classified);
+    expect(check.observed.unclassified).toBe(0);
+    expect(check.observed.unclassifiedShare).toBe(0);
+    expect(check.threshold.ratified).toBe(false);
+  });
+
+  it('WR-9d MUTANT — closes the classifier could not read red the endings-classified wall', () => {
+    // UNCLASSIFIED_MAX_SHARE is 0.1. Before WR-9d that constant appeared EXACTLY
+    // ONCE in the whole tree — its own declaration — because no observation carried
+    // an address for an unreadable close. This is the cell that made it live.
+    const check = gradeUnclassified({ no_terminal_evidence: 20 });
+    expect(check.passed).toBe(false);
+    expect(check.observed.unclassified).toBe(40);
+    expect(check.observed.unclassifiedShare).toBeGreaterThan(0.1);
+    expect(check.threshold.maxUnclassifiedShare).toBe(0.1);
+    // The three reasons stay DISTINCT diagnoses in the receipt: "we saw nothing"
+    // and "we saw a razing we could not attribute" call for opposite repairs.
+    expect(check.observed.unclassifiedTotals.no_terminal_evidence).toBe(40);
+    expect(check.observed.unclassifiedTotals.razing_road_unreconstructable).toBe(0);
+  });
+
+  it('WR-9d — a handful of unreadable closes stays inside the tolerance', () => {
+    // Bracketing the wall from BOTH sides: a cell that only ever reds is not a
+    // graded band, it is a constant.
+    const check = gradeUnclassified({ razing_road_unreconstructable: 1 });
+    expect(check.observed.unclassified).toBe(2);
+    expect(check.observed.unclassifiedShare).toBeLessThan(0.1);
+    expect(check.passed).toBe(true);
+  });
+
+  it('CR-WR9-C — the war cells grade research cases too, not release alone', () => {
+    const input = passingInput();
+    // A RESEARCH-horizon case (300y) carrying a malformed observation. Before the
+    // widening this receipt was invisible to the war cells; the shape wall must now
+    // see it and refuse it.
+    const research = JSON.parse(JSON.stringify(input.receipts[0]));
+    research.caseId = 'research-300y';
+    research.years = CERTIFICATION_HORIZONS.research.years;
+    delete research.warConvergence.warDurationHistogram;
+    input.receipts = [...input.receipts, research];
+    const shape = evaluateBehavioralCertification(input).checks
+      .find((check) => check.id === 'war_convergence.receipt_shape');
+    expect(shape.passed).toBe(false);
+    expect(shape.observed.invalidCases.map((entry) => entry.caseId)).toContain('research-300y');
+    // …and a case at NO certification horizon is still none of these cells' business.
+    const offHorizon = JSON.parse(JSON.stringify(research));
+    offHorizon.caseId = 'useful-30y';
+    offHorizon.years = CERTIFICATION_HORIZONS.useful.years;
+    const withUseful = passingInput();
+    withUseful.receipts = [...withUseful.receipts, offHorizon];
+    const stillClean = evaluateBehavioralCertification(withUseful).checks
+      .find((check) => check.id === 'war_convergence.receipt_shape');
+    expect(stillClean.passed).toBe(true);
+  });
+
   it('keeps the duration vocabulary closed — three lengths, then two distinct diagnoses', () => {
     // P4 (ORDER). `unmeasured` is appended LAST so the WR-9r addition is purely
     // additive and every pre-existing cell keeps its position.
@@ -651,9 +736,11 @@ describe('WR-9 convergence envelopes', () => {
       .toEqual([...WAR_DURATION_BANDS].sort());
     // Each bump is the version arm of the repair that motivated it: a v2
     // observation has no address for a lost duration, a v3 one has no address for
-    // any force reading, and this module refuses to grade a shape it cannot read
-    // rather than reinterpreting it. v3 -> v4 is WR-9c's `forceEvidence`.
-    expect(WAR_CONVERGENCE_OBSERVATION_VERSION).toBe(4);
+    // any force reading, a v4 one has no address for a close the classifier COULD
+    // NOT READ, and this module refuses to grade a shape it cannot read rather than
+    // reinterpreting it. v3 -> v4 is WR-9c's `forceEvidence`; v4 -> v5 is WR-9d's
+    // `endingsUnclassified` + `decidingTermSampling`.
+    expect(WAR_CONVERGENCE_OBSERVATION_VERSION).toBe(5);
   });
 
   it('P4 — the totality validator rejects a histogram with no `unmeasured` address', () => {
@@ -947,7 +1034,12 @@ describe('WR-9 convergence envelopes', () => {
     delete stale.warDurationHistogram;
     const validation = validateWarConvergenceObservation(stale);
     expect(validation.ok).toBe(false);
-    expect(validation.errors.join(' ')).toMatch(/schemaVersion must be 4/);
+    // Driven off the CONSTANT rather than a hand-keyed digit: this line said
+    // "must be 4" and went stale the moment WR-9d bumped the version, which is the
+    // hand-keyed-address rot class. The version itself is pinned to its exact
+    // number in its own test above, so nothing is lost by reading it here.
+    expect(validation.errors.join(' '))
+      .toMatch(new RegExp(`schemaVersion must be ${WAR_CONVERGENCE_OBSERVATION_VERSION}`));
     expect(validation.errors.join(' ')).toMatch(/warDurationHistogram must be an object/);
   });
 });
