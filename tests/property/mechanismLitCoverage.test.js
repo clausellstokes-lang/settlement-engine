@@ -141,11 +141,15 @@ const LIT_COVERED_BY = {
     evidence: 'ANTI-VACUITY',
     note: 'the golden’s lit half drives commonsVoiceEnabled:true and asserts a petition mints',
   },
-  hegemony: {
-    file: 'tests/domain/hegemonyRead.test.js',
-    evidence: 'hegemonyRead',
-    note: 'src/domain/display/hegemonyRead.js re-exports from worldPulse/hegemony.js; the test drives all four exports',
-  },
+  // `hegemony` HAD A ROW HERE AND NO LONGER NEEDS ONE (struck 2026-08-04, lane WR-10r).
+  // Its registry entry named `tests/domain/hegemonyRead.test.js`, which drives the module
+  // through the `src/domain/display/hegemonyRead.js` re-export — real coverage, but the
+  // INDIRECT kind this registry exists for. WR-10's `tests/domain/sovereigntyTransferTerm.
+  // test.js` now imports `SUBORDINATING_TERM_TYPES` from `worldPulse/hegemony.js`
+  // DIRECTLY, so the module earns AUTO credit and the minimality assertion above
+  // ("`${mech}` now has direct-import lit coverage — strike its registry entry") fires on
+  // its own instruction. Striking the row is that instruction obeyed: the module is no
+  // less covered than it was, it is covered by a stronger road.
   reconcile: {
     file: 'tests/domain/chronicleAndReconcile.test.js',
     evidence: 'preserveWorldConditions',

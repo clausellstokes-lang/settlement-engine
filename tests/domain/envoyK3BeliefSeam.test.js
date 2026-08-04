@@ -247,13 +247,22 @@ const NEGOTIATION_MODULES = Object.freeze({
   // differently is not noise here, it is the mechanism.
   'src/domain/worldPulse/sovereigntyAppraisal.js': [],
   // The bundle stacker is a negotiation path too — it decides whether a deal exists —
-  // so it is pinned rather than left silent. Its reach is TWO modules and both bottom
-  // out safely: `sovereigntyAppraisal.js` is pinned directly above at zero imports, and
+  // so it is pinned rather than left silent. Its reach is THREE modules and all three
+  // bottom out safely: `sovereigntyAppraisal.js` is pinned directly above at zero imports;
   // `peaceTermsCatalog.js` is the term VOCABULARY (the same reach `negotiationPictures`
   // already has one shelf up), which reaches only the treaty clock and cannot return a
-  // settlement's strength, stores or pressures. The token scan below proves that for
+  // settlement's strength, stores or pressures; and `../../kernel/math.js` is the
+  // determinism-primitive layer — `clamp`/`clamp01` over numbers, no engine state of any
+  // kind, the same shelf `prng`/`rngContext` sit on. The token scan below proves that for
   // this row independently rather than taking the reasoning on trust.
+  //
+  // AMENDED BY EXACTLY ONE ENTRY, 2026-08-04, under chair ruling CR-WR10-A(a): the module
+  // dropped its hand-rolled `clamp01` (a new row on the shrink-only clamp ratchet) for the
+  // sanctioned kernel primitive. A widening of a K3 import list is a reviewed event by
+  // construction, so it is disclosed here rather than absorbed: the reach grew by a pure
+  // math module and by nothing else.
   'src/domain/worldPulse/sovereigntyBundle.js': [
+    '../../kernel/math.js',
     './peaceTermsCatalog.js',
     './sovereigntyAppraisal.js',
   ],

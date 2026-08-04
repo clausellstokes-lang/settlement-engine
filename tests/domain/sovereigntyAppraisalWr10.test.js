@@ -28,6 +28,14 @@ import { ROUTE_FLOW_BANDS } from '../../src/domain/worldPulse/routeNetworkFlows.
 import { WAR_COST_TRAJECTORIES } from '../../src/domain/worldPulse/warCosts.js';
 import { NEGOTIATION_SUBJECT_BANDS } from '../../src/domain/worldPulse/negotiationPictures.js';
 
+/**
+ * A DECIMAL IN A SENTENCE — the engine's own notation, which addendum A-1 forbids in
+ * reader prose. Deliberately NOT "any digit": a receipt may name honest whole counts
+ * (`1 offered component(s)`, `9 component families`), and banning those would have made
+ * the guard prove a rule nobody holds. Both halves are executed below.
+ */
+const DECIMAL_IN_PROSE = /\d*\.\d+/;
+
 /** A fully-heard picture. Individual tests blank ONE leg at a time. */
 const heard = (over = {}) => ({
   assetId: 'greenhollow',
@@ -156,6 +164,35 @@ describe('WR-10b — the appraisal reads one court\'s own picture', () => {
     const b = appraiseSettlementAsset(input);
     expect(a).toEqual(b);
     expect(input).toEqual(frozenCopy);
+  });
+
+  it('THE RECEIPT SPEAKS BANDS, NEVER THE ENGINE\'S SCALAR (addendum A-1, both ways)', () => {
+    // WR-10r's structural half. The prose-numerics ratchet is a source SCAN, so it sees
+    // only the template that exists today; nothing stopped a later edit from putting
+    // `${value01}` back into a sentence and adding a fresh row to a shrink-only baseline.
+    // This pin is the behavioural guard the scan cannot be: it runs the real composer
+    // over reads spread across the whole ladder and asserts the OUTPUT is band-shaped.
+    const reads = [
+      appraiseSettlementAsset(heard()),
+      appraiseSettlementAsset(heard({ sellerTrajectoryBand: 'losing' })),
+      appraiseSettlementAsset(heard({ tierBand: 'metropolis', storesBand: 'deep', routeBand: 'established', trajectoryBand: 'swelling' })),
+      appraiseSettlementAsset(heard({ tierBand: 'thorp', storesBand: 'bare', routeBand: 'none', trajectoryBand: 'emptying' })),
+      appraiseSettlementAsset(heard({ trajectoryBand: 'unknown' })), // the unknown road too
+    ];
+    expect(new Set(reads.map((r) => r.valueBand)).size, 'the fixtures must span the ladder').toBeGreaterThan(2);
+    for (const read of reads) {
+      expect(read.receipt.length, 'a receipt must be a real sentence').toBeGreaterThan(30);
+      // anchored: the receipt is asserted to be a non-trivial sentence on the line above,
+      // so this absence cannot pass by the composer returning an empty string.
+      expect(DECIMAL_IN_PROSE.test(read.receipt), read.receipt).toBe(false);
+      if (read.known) expect(read.receipt).toContain(read.valueBand.replace(/_/g, ' '));
+    }
+    // GUARD-THE-GUARD (executed mutant): the identical predicate MUST catch the sentence
+    // this wave replaced, or a green here would mean the detector rotted rather than the
+    // prose improved.
+    expect(DECIMAL_IN_PROSE.test('ironvale prices greenhollow at 0.6382 (great) from a town seat.')).toBe(true);
+    // ...and it must not ban honest whole counts, which reader prose is allowed to name.
+    expect(DECIMAL_IN_PROSE.test('the court weighed 3 offers over 2 years.')).toBe(false);
   });
 
   it('sovereigntyValueBand shares the appraisal\'s ladder and says `unknown` for no read', () => {

@@ -37,7 +37,17 @@ import { describe, expect, test } from 'vitest';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const KERNEL_HOME = 'src/kernel/math.js'; // the sanctioned definition site — exempt
-const BASELINE_CEILING = 61; // committed max — lower it as copies migrate; never raise it
+// THE ONE RAISE THIS CEILING HAS EVER TAKEN, and it is a ruling rather than a slip:
+// chair ruling CR-WR10-A(b) (2026-08-04) widened 61 → 62 for
+// `src/domain/worldPulse/sovereigntyAppraisal.js`, which is pinned at ZERO IMPORTS in
+// `tests/domain/envoyK3BeliefSeam.test.js` (WR-10 amendment S names the appraisal among
+// the paths that may never read true world state) and therefore CANNOT import the kernel
+// primitive without deleting the belief pin. Its sibling `sovereigntyBundle.js`, which
+// carries no such pin, migrated to the kernel clamp under CR-WR10-A(a) instead of taking
+// a row — so the wave's net effect on this ratchet is ONE justified, documented row.
+// The shrink-only rule is otherwise untouched: lower this as copies migrate, and never
+// raise it again without a ruling of the same kind recorded in the file that needs it.
+const BASELINE_CEILING = 62; // committed max — lower it as copies migrate; never raise it
 
 // A local clamp/clamp01 DEFINITION: a declaration keyword immediately followed by
 // the name `clamp` or `clamp01` (word-bounded, so `clampedValue` / `clamp01Helper`

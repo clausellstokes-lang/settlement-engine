@@ -24,7 +24,7 @@ import {
   SOVEREIGNTY_NON_CATALOG_COMPONENTS, WR10_FAMILIES_AT_LANDING,
 } from '../../src/domain/worldPulse/sovereigntyBundle.js';
 import { TERM_FAMILIES } from '../../src/domain/worldPulse/peaceTermsCatalog.js';
-import { appraiseSettlementAsset } from '../../src/domain/worldPulse/sovereigntyAppraisal.js';
+import { appraiseSettlementAsset, sovereigntyValueBand } from '../../src/domain/worldPulse/sovereigntyAppraisal.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -61,6 +61,14 @@ const DEGRADED_BUNDLE = Object.freeze([
   { family: 'relational', magnitude01: 0.3 },
   { family: 'peace', magnitude01: 0.2 },
 ]);
+
+/**
+ * A DECIMAL IN A SENTENCE — the engine's 0..1 notation, which addendum A-1 forbids in
+ * reader prose. Deliberately NOT "any digit": these receipts legitimately name whole
+ * counts (`1 offered component(s)`, `of 9 component families`), and both halves of that
+ * distinction are executed in the pin below.
+ */
+const DECIMAL_IN_PROSE = /\d*\.\d+/;
 
 const trade = ({ components, sellerNeeds, buyerNeeds, seller = sellerSees(), buyer = buyerSees() }) =>
   clearSovereigntyTrade({
@@ -129,6 +137,64 @@ describe('WR-10c — the reconciled two-sided conjunction', () => {
     ];
     expect(new Set(cases.map((c) => c.verdict)).size).toBeGreaterThan(1); // non-vacuity
     for (const c of cases) expect(SOVEREIGNTY_TRADE_VERDICTS).toContain(c.verdict);
+  });
+
+  it('EVERY VERDICT\'S RECEIPT SPEAKS BANDS, and the whole counts survive (addendum A-1)', () => {
+    // WR-10r's structural half, the behavioural twin of the prose-numerics source scan:
+    // the scan sees only the template that exists today, this sees what the composer
+    // actually says. All four verdict roads plus a valuation are run, because a leak
+    // reintroduced on the branch nobody exercised is exactly how the class returns.
+    const cleared = trade({
+      components: DEGRADED_BUNDLE,
+      sellerNeeds: { economic: 0.9, relational: 0.3, peace: 0.5 },
+      buyerNeeds: { economic: 0.5, relational: 0.6, peace: 0.4 },
+    });
+    const ceiling = trade({
+      components: [
+        { family: 'economic', magnitude01: 0.9 },
+        { family: 'relational', magnitude01: 0.8 },
+        { family: 'peace', magnitude01: 0.7 },
+      ],
+      sellerNeeds: { economic: 0.9, relational: 0.9, peace: 0.9 },
+      buyerNeeds: { economic: 0.95, relational: 0.9, peace: 0.9 },
+    });
+    const unmet = trade({
+      components: [{ family: 'economic', magnitude01: 0.1 }],
+      sellerNeeds: { economic: 0.9 }, buyerNeeds: { economic: 0.5 },
+    });
+    const unpriced = trade({
+      components: DEGRADED_BUNDLE, sellerNeeds: {}, buyerNeeds: {},
+      seller: sellerSees({ trajectoryBand: 'unknown' }),
+    });
+    const valuation = valueBundleThroughNeeds({
+      partyId: 'ironvale',
+      components: [{ family: 'economic', magnitude01: 0.5 }, { family: 'a_family_that_does_not_exist', magnitude01: 1 }],
+      needs: { economic: 0.8 },
+    });
+    // Non-vacuity: all four verdict roads really were taken, so the loop is not four
+    // copies of one sentence.
+    expect(new Set([cleared, ceiling, unmet, unpriced].map((c) => c.verdict)).size).toBe(4);
+
+    for (const read of [cleared, ceiling, unmet, unpriced, valuation]) {
+      expect(read.receipt.length, 'a receipt must be a real sentence').toBeGreaterThan(30);
+      // anchored: the receipt is asserted to be a non-trivial sentence on the line above,
+      // so this absence cannot pass by the composer returning an empty string.
+      expect(DECIMAL_IN_PROSE.test(read.receipt), read.receipt).toBe(false);
+    }
+    // THE COUNTS ARE STILL THERE — the rule bans the engine's notation, not arithmetic
+    // the reader can hold up on their fingers.
+    expect(valuation.receipt).toContain('could not weigh 1 offered component');
+    expect(cleared.receipt).toContain(`of ${cleared.componentsAvailable.length} component families`);
+    // GUARD-THE-GUARD (executed mutant): the identical predicate MUST catch the sentence
+    // this wave replaced.
+    expect(DECIMAL_IN_PROSE.test('ironvale values the bundle at 0.3487 against a reserve of 0.2915.')).toBe(true);
+
+    // AND THE TRANSLATION IS NOT A DELETION: the bands the sentences now carry are the
+    // SAME ladder the numeric fields band to, so the prose and the arithmetic agree.
+    expect(cleared.receipt).toContain(sovereigntyValueBand(cleared.reserve01).replace(/_/g, ' '));
+    expect(ceiling.receipt).toContain(sovereigntyValueBand(ceiling.ceiling01).replace(/_/g, ' '));
+    expect(unmet.receipt).toContain(sovereigntyValueBand(unmet.reserve01).replace(/_/g, ' '));
+    expect(valuation.receipt).toContain(sovereigntyValueBand(valuation.total01).replace(/_/g, ' '));
   });
 
   it('an UNPRICED side yields no trade and no invented numbers', () => {

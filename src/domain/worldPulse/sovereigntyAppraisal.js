@@ -148,6 +148,24 @@ export const SOVEREIGNTY_APPRAISAL_TUNING = Object.freeze({
 });
 
 // ── Local primitives (zero imports — the K3 pin's price, paid deliberately) ──
+//
+// ⚠ THIS FILE IS A REGISTERED EXCEPTION TO THE ONE-CLAMP RULE (chair ruling
+// CR-WR10-A(b), 2026-08-04). `scripts/.clamp-primitive-baseline.json` carries a row
+// for this module and `tests/lint/clampPrimitiveBaseline.test.js`'s ceiling widened
+// 61 → 62 to admit it — the ONE justified widening of a shrink-only ratchet in this
+// wave, documented rather than smuggled. THE STRUCTURAL REASON IS THE K3 PIN: this
+// module is pinned at ZERO IMPORTS in `tests/domain/envoyK3BeliefSeam.test.js`
+// (amendment S names the appraisal among the paths that may never read true world
+// state), so it CANNOT import `src/kernel/math.js` without deleting the very pin that
+// makes the belief seam real. The sibling that could migrate did: `sovereigntyBundle.js`
+// dropped its local copy for the kernel primitive under CR-WR10-A(a).
+//
+// The local copy is the PASSTHROUGH variant (a non-finite value rides through) rather
+// than the kernel's ISFINITE policy. No caller can reach it with one — every argument
+// below is either an integer index or a sum of table lookups — but the divergence is
+// named here rather than left to be rediscovered, because the baseline's own rule is
+// that a copy with divergent non-finite semantics stays frozen until its migration is
+// separately proven byte-neutral.
 
 /** @param {number} value @param {number} lo @param {number} hi @returns {number} */
 function clamp(value, lo, hi) {
@@ -332,6 +350,13 @@ export function appraiseSettlementAsset(input) {
   const firesaleClause = firesale
     ? `, discounted because it believes the holder is losing its war`
     : '';
+  // THE RECEIPT NAMES THE BAND, NEVER THE SCALAR (addendum A-1's prose-numerics law
+  // and the GAME-GRADE TRANSLATE doctrine, which agree here): `value01` is the
+  // engine's own notation and a reader has no use for `0.6382`. The number is not
+  // hidden — it is on the read as `value01`, next to the `evidence` record — so LAW B's
+  // traceability is intact; what changes is that the SENTENCE speaks the world's
+  // vocabulary. The band comes from `valueBand`, which was already computed above from
+  // this same `value01`, so the prose and the field can never disagree.
   return {
     assetId,
     appraiserId,
@@ -339,10 +364,23 @@ export function appraiseSettlementAsset(input) {
     value01,
     valueBand,
     evidence,
-    receipt: `${appraiserId} prices ${assetId} at ${value01} (${valueBand})`
+    receipt: `${appraiserId} prices ${assetId} as a ${sovereigntyBandPhrase(valueBand)} holding`
       + ` from a ${tierWord} seat with ${storesWord} stores on ${routeWord} roads,`
       + ` ${trajectoryWord}${firesaleClause}.`,
   };
+}
+
+/**
+ * A LADDER WORD SPELLED AS READER PROSE. The ladders are closed snake_case tokens
+ * because a vocabulary must be exact; a receipt is a sentence, and the GAME-GRADE law
+ * forbids showing a reader the token (`crown_jewel` is the only member this currently
+ * touches). Exported rather than re-declared in `sovereigntyBundle.js` for the reason
+ * `sovereigntyValueBand` is: one spelling of one thing, so the two modules' receipts
+ * cannot drift apart. It is a pure spelling — it never re-derives the band it is given.
+ * @param {string} band @returns {string}
+ */
+export function sovereigntyBandPhrase(band) {
+  return String(band).replace(/_/g, ' ');
 }
 
 /**

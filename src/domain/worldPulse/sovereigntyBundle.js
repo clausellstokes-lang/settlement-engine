@@ -67,8 +67,9 @@
  * term vocabulary and the appraisal leaf, neither of which can return true world
  * state, and it never merges two courts' numbers into a third.
  */
+import { clamp01 } from '../../kernel/math.js';
 import { TERM_FAMILIES } from './peaceTermsCatalog.js';
-import { sovereigntyValueBand } from './sovereigntyAppraisal.js';
+import { sovereigntyBandPhrase, sovereigntyValueBand } from './sovereigntyAppraisal.js';
 
 /**
  * Components a bundle may carry that are NOT term families. Exactly one today: the
@@ -100,10 +101,16 @@ export const SOVEREIGNTY_BUNDLE_TUNING = Object.freeze({
   UNSTATED_NEED: 0.25,
 });
 
-/** @param {number} value @returns {number} */
-function clamp01(value) {
-  return value < 0 ? 0 : value > 1 ? 1 : value;
-}
+// THE CLAMP IS THE KERNEL'S (chair ruling CR-WR10-A(a), 2026-08-04). This module used
+// to hand-roll the PASSTHROUGH variant, which made it a new row on a shrink-only
+// ratchet. The swap is byte-neutral by construction, not by hope: the kernel's policy
+// differs from the passthrough one ONLY on a non-finite argument, and neither call site
+// can produce one — `num01` guards with `Number.isFinite` before it clamps, and the
+// bundle total is a sum of already-finite `round4` products. Unlike its sibling
+// `sovereigntyAppraisal.js`, this module is NOT pinned at zero imports, so it can pay
+// the honest price of the one primitive; the K3 row in `envoyK3BeliefSeam.test.js`
+// gains `../../kernel/math.js` and nothing else, and the kernel is a determinism
+// primitive that reaches no settlement state.
 
 /** @param {number} value @returns {number} */
 function round4(value) {
@@ -228,20 +235,26 @@ export function valueBundleThroughNeeds(input) {
   }
 
   const total01 = round4(clamp01(offered.reduce((sum, line) => sum + line.value01, 0)));
+  const valueBand = sovereigntyValueBand(total01);
   const dropped = unknownFamilies.length
     ? ` It could not weigh ${unknownFamilies.length} offered component(s) whose family the catalog does not carry.`
     : '';
+  // THE RECEIPT SPEAKS BANDS, THE FIELDS CARRY THE SCALARS (addendum A-1). The count of
+  // dropped components stays a WHOLE COUNT — that is a thing a court can hold up on its
+  // fingers, not the engine's notation — while every 0..1 weight is spoken as its band.
+  // `line.value01` survives untouched on each offered line, so a consumer that needs the
+  // arithmetic still has it; what is gone is the reader being handed `0.1875`.
   const named = offered.length
-    ? offered.map((line) => `${line.family} at ${line.value01}`).join(', ')
+    ? offered.map((line) => `${line.family} weighing ${sovereigntyBandPhrase(sovereigntyValueBand(line.value01))}`).join(', ')
     : 'nothing at all';
   return {
     partyId,
     known: true,
     total01,
-    valueBand: sovereigntyValueBand(total01),
+    valueBand,
     offered: Object.freeze(offered),
     available,
-    receipt: `${partyId} weighs the bundle at ${total01} through its own needs: ${named}.${dropped}`,
+    receipt: `${partyId} weighs the bundle as ${sovereigntyBandPhrase(valueBand)} through its own needs: ${named}.${dropped}`,
   };
 }
 
@@ -337,13 +350,21 @@ export function clearSovereigntyTrade(input) {
     : (!withinCeiling ? 'ceiling_reached' : 'reserve_unmet');
 
   const had = componentsHad.length ? componentsHad.join(', ') : 'nothing';
+  // EACH CLAUSE NAMES **ONE** BAND AND STATES THE COMPARISON IN WORDS, and that shape is
+  // load-bearing rather than stylistic. Banding is lossy: two numbers on either side of a
+  // threshold routinely land in the SAME band, so the naive translation of the old
+  // sentence — "prices the town great but the bundle would cost it great" — would read as
+  // a self-contradiction on a perfectly correct verdict. Naming one band and saying which
+  // way the other fell is both honest and never contradictory. The four scalars remain on
+  // the returned read (`reserve01` / `ceiling01` / `sellerSees01` / `buyerSpends01`), so
+  // nothing that needs the arithmetic has lost it.
   const reason = verdict === 'cleared'
-    ? `${sellerId} values the bundle at ${sellerSees01} against a reserve of ${reserve01},`
-      + ` and ${buyerId} prices the town at ${ceiling01} against a cost of ${buyerSpends01}`
+    ? `the bundle meets ${sellerId}'s ${sovereigntyBandPhrase(sovereigntyValueBand(reserve01))} reserve,`
+      + ` and ${buyerId} prices the town ${sovereigntyBandPhrase(sovereigntyValueBand(ceiling01))} and spends under that`
     : verdict === 'ceiling_reached'
-      ? `${buyerId} prices the town at ${ceiling01} but the bundle would cost it ${buyerSpends01}:`
+      ? `${buyerId} prices the town ${sovereigntyBandPhrase(sovereigntyValueBand(ceiling01))} and the bundle asks more than that:`
         + ' the ceiling was reached before the reserve was met'
-      : `${sellerId} values the bundle at ${sellerSees01} against a reserve of ${reserve01}:`
+      : `${sellerId} holds a ${sovereigntyBandPhrase(sovereigntyValueBand(reserve01))} reserve the bundle does not reach:`
         + ' the offer does not reach what the town is worth to the court that holds it';
   return {
     assetId,
