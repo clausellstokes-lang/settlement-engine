@@ -51,12 +51,30 @@
  * would let the reopen path launder a razing as a funding lapse.
  *
  * What amendment R actually describes by "shell" is stated in its own words:
- * "the building remembers what it was and does nothing". In K1's vocabulary that
- * is capacity01 === 0, and K1 reaches it through SEVERITY — its own tuning calls
- * severity 1 "a full suspension… temporarily zero". So the razing's shell band
- * stamps a capacity impairment at K1's MAX_SEVERITY and the institution grades
- * `impaired` with capacity01 0. The razing NEVER sets `_worldPulseEconomyClosed`,
- * and a negative control asserts that it never does.
+ * "the building remembers what it was and does nothing".
+ *
+ * ⚠️⚠️ R-WZ-2-REVISED (chair, 2026-08-03, vetoable) — AND THE FIRST VERSION OF
+ * THIS RULING WAS FALSE ABOUT THE SEAM. WZ-1 stamped K1's MAX_SEVERITY on the
+ * shell band and recorded that "the institution grades impaired with capacity01
+ * 0". IT DOES NOT, AND IT CANNOT. K1's `damage` cause fires on a TYPE — the
+ * signal is literally `impairmentTypes.has('capacity')` — and the severity it
+ * then grades is its OWN engine default for that cause, unless a PERSISTED
+ * status annotation carries a `dmSeverity` override. So the number this writer
+ * puts in the stamp reaches K1's grading through no path at all: a razing's
+ * severity could only be carried by writing `dmSeverity` onto the institution-
+ * status record, which is a change to the SHAPE of a persisted ledger and
+ * therefore OWNER-GATED. It is NOT taken here, and it is NOT silently dropped —
+ * it is recorded as an owner decision for later.
+ *
+ * SO v1 SHIPS SHELL-AS-STRONGEST-DAMAGE. Both bands stamp the SAME thing K1
+ * reads, at K1's OWN default for the cause, and K1 grades them identically —
+ * which is now stated honestly instead of being claimed away. THE DISTINCTION
+ * LIVES IN THE RECEIPT: the razing's own descriptor still says `shell` and the
+ * impairment prose says the building burned to a shell, so the Herald keeps the
+ * word the amendment asked for while the mechanism keeps the truth.
+ *
+ * The razing NEVER sets `_worldPulseEconomyClosed`, and a negative control
+ * asserts that it never does.
  *
  * ── R-WZ-3: SEVERITY IS DERIVED FROM THE QUARREL, AND FORKS NO STREAM ────────
  * How hard a town burns is not a roll. The war layer's determinism contract
@@ -95,10 +113,11 @@ import {
 import { conquestMercyReceipt } from './conquestIntent.js';
 import { mistakenFeasibilityReceipt } from './conquestFeasibility.js';
 import { heldLicense, vengeanceLicensesActive } from './vengeanceLicense.js';
-// The grievance conjunct of the extremity composite. `aggregateReasons01` is the
-// war layer's OWN cause magnitude, already banded by the machinery that owns
-// causes; this file neither derives nor decays it (razing.js's own note).
-import { warReasonsFor, aggregateReasons01 } from './warReasons.js';
+// The grievance conjunct of the extremity composite. The magnitudes are the war
+// layer's OWN, already banded by the machinery that owns causes; this file
+// neither derives nor decays them (razing.js's own note). Which of them the
+// conjunct reads is CR-WR8-B-CLARIFIED's ruling — see `strongestLiveGrievance01`.
+import { warReasonsFor, topReasons, REASON_TUNING } from './warReasons.js';
 import {
   ensureRelationshipState,
   normalizeRelationshipEdge,
@@ -173,6 +192,41 @@ function arrayOf(value) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// THE GRIEVANCE CONJUNCT (chair ruling CR-WR8-B-CLARIFIED, 2026-08-03, vetoable)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * THE STRONGEST SINGLE LIVE CAUSE this party holds against that counterpart.
+ *
+ * ⚠️ THIS IS A CORRECTION, AND THE THING IT CORRECTS SHIPPED. WZ-1 read the
+ * conjunct through `aggregateReasons01`, which is Σ(scores) / AGGREGATE_SATURATION
+ * 2.5 against an adequacy band of 0.6 — so ONE cause at its absolute maximum
+ * aggregated to 0.4 and could not clear the band however monstrous it was, and a
+ * razing silently required at least TWO strong live causes. That floor was a
+ * side effect of a divisor, not a ruling: CR-WR8-B's own text says "a LIVE
+ * grievance", singular, and one razing is historically enough to license the
+ * answer to it. The two-strong-causes floor is RETIRED.
+ *
+ * THE UBIQUITY BRAKE SURVIVES, AND IT IS THE HONEST ONE. It is now about how bad
+ * the worst thing is rather than how many things there are: a pile of small
+ * quarrels no longer sums its way onto the extreme, because the maximum of a set
+ * of weak causes is still weak. `topReasons` is the war layer's own score-desc
+ * ordering — no second spelling of "which cause is worst" is minted here — and
+ * a cause under the layer's own MIN_SCORE is not live at all.
+ *
+ * @param {unknown} worldState @param {string} partyId @param {string} counterpartId
+ * @returns {number} 0..1
+ */
+export function strongestLiveGrievance01(worldState, partyId, counterpartId) {
+  const entry = warReasonsFor(
+    /** @type {Parameters<typeof warReasonsFor>[0]} */ (worldState), partyId, counterpartId,
+  );
+  const [top] = topReasons(/** @type {Parameters<typeof topReasons>[0]} */ (entry), 1);
+  const score = clamp01(recordOf(top).score);
+  return score >= REASON_TUNING.MIN_SCORE ? score : 0;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // THE PAIR READ — the one place this file touches the relationship substrate.
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -238,13 +292,10 @@ export function razingExtremityFor({
   const party = String(partyId || '');
   const counterpart = String(counterpartId || '');
   const pair = razingPairRelationship(snapshot, worldState, party, counterpart);
-  const grievance = aggregateReasons01(
-    /** @type {Parameters<typeof aggregateReasons01>[0]} */ (
-      warReasonsFor(
-        /** @type {Parameters<typeof warReasonsFor>[0]} */ (worldState), party, counterpart,
-      )
-    ),
-  );
+  // CR-WR8-B-CLARIFIED: the STRONGEST SINGLE LIVE CAUSE, not the saturated
+  // aggregate. See `strongestLiveGrievance01` for why the divisor's floor was a
+  // side effect rather than a ruling.
+  const grievance = strongestLiveGrievance01(worldState, party, counterpart);
   return readRelationshipExtremity({
     partyId: party,
     counterpartId: counterpart,
@@ -374,12 +425,19 @@ export function razingSeverityFrom(extremity, measured = {}) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * R-WZ-1/R-WZ-2 — THE INSTITUTION DAMAGE STAMPS.
+ * R-WZ-1/R-WZ-2-REVISED — THE INSTITUTION DAMAGE STAMPS.
  *
- * One `capacity` impairment per non-protected institution, at K1's own severity
- * for the mechanism: the `damage` default below the shell band, and MAX_SEVERITY
- * (a full suspension — "temporarily zero") at or above it. K1's next advance
- * reads the stamps as its `damage` cause and grades the institution itself.
+ * One `capacity` impairment per non-protected institution, at K1's OWN default
+ * severity for the `damage` cause — ONE number, both bands, because that is the
+ * only number K1 will ever grade this stamp at (see R-WZ-2-REVISED in the module
+ * header: the cause signal reads the TYPE, and the severity comes from K1's own
+ * table unless a persisted `dmSeverity` override says otherwise, which is an
+ * owner-gated persistence-shape change and is not taken).
+ *
+ * THE SHELL BAND THEREFORE LIVES IN THE RECEIPT, NOT IN THE NUMBER. Each row
+ * carries the law leaf's own status word AND a sentence saying what the fire
+ * did, so a razed institution reads as a shell to the Herald and as a damaged
+ * one to K1 — which is exactly what is true.
  *
  * PROTECTED INSTITUTIONS GET NO STAMP AND ARE STILL REPORTED, on the law leaf's
  * own reasoning: a caller that has to infer "untouched" from an omission is a
@@ -394,6 +452,7 @@ export function razingSeverityFrom(extremity, measured = {}) {
  * @param {unknown} severity01
  * @param {{ causeRef?: unknown, sinceTick?: unknown }} [stamp]
  * @returns {Array<{ id: string, name: string, status: string, protected: boolean,
+ *   receipt: string,
  *   impairment: { type: string, severity: number, causeEventId: string, sinceTick: number }|null }>}
  */
 export function razingInstitutionStamps(institutions, severity01, stamp = {}) {
@@ -417,24 +476,37 @@ export function razingInstitutionStamps(institutions, severity01, stamp = {}) {
     severity,
   );
   const byId = new Map(described.map((d) => [d.id, d.status]));
-  const stampSeverity = severity > RAZING_EXECUTION_TUNING.SHELL_BAND
-    ? INSTITUTION_STATUS_TUNING.MAX_SEVERITY
-    : INSTITUTION_STATUS_TUNING.defaultSeverity.damage;
+  // R-WZ-2-REVISED: ONE severity, both bands. K1 grades this stamp at its own
+  // default for the `damage` cause whatever number sits here, so writing a
+  // second number would be a field that looks load-bearing and carries nothing —
+  // the ghost-write class wearing a tuning constant's clothes.
+  const stampSeverity = INSTITUTION_STATUS_TUNING.defaultSeverity.damage;
   return rows
     .slice()
     .sort((a, b) => compareCodepoint(a.id, b.id))
-    .map((inst) => ({
-      id: inst.id,
-      name: inst.name,
-      status: String(byId.get(inst.id) || 'intact'),
-      protected: inst.protectedFromSack,
-      impairment: inst.protectedFromSack ? null : {
-        type: RAZING_IMPAIRMENT_TYPE,
-        severity: stampSeverity,
-        causeEventId,
-        sinceTick,
-      },
-    }));
+    .map((inst) => {
+      const status = String(byId.get(inst.id) || 'intact');
+      return {
+        id: inst.id,
+        name: inst.name,
+        status,
+        protected: inst.protectedFromSack,
+        // THE SHELL LIVES HERE. The word the amendment asked for is said by the
+        // receipt, on the same row, in the same census — never by a severity K1
+        // would not have read.
+        receipt: inst.protectedFromSack
+          ? `${inst.name} was spared the fire and still stands.`
+          : status === 'shell'
+            ? `${inst.name} burned to a shell: it remembers what it was and does nothing.`
+            : `${inst.name} came out of the fire damaged and working badly.`,
+        impairment: inst.protectedFromSack ? null : {
+          type: RAZING_IMPAIRMENT_TYPE,
+          severity: stampSeverity,
+          causeEventId,
+          sinceTick,
+        },
+      };
+    });
 }
 
 /**

@@ -39,6 +39,7 @@ import {
   razingPairRelationship,
   razingPlanFor,
   razingSeverityFrom,
+  strongestLiveGrievance01,
 } from '../../src/domain/worldPulse/razingExecution.js';
 import { RAZING_TUNING, razingGate, readRelationshipExtremity } from '../../src/domain/worldPulse/razing.js';
 import {
@@ -84,12 +85,12 @@ function extremeWorld(over = {}) {
     spatialLedgers: {
       warReasons: {
         'Karrow>Thornwall': {
-          // ⚠️ TWO CAUSES, NOT ONE, AND THAT IS A MEASURED FACT ABOUT THE BAND
-          // rather than a fixture convenience — see the reachability-floor pin
-          // below. `aggregateReasons01` divides by AGGREGATE_SATURATION 2.5, so
-          // one maximal cause aggregates to 0.4 and CANNOT clear the 0.6
-          // adequacy band. A razing needs a quarrel with more than one live
-          // grievance behind it.
+          // TWO CAUSES, and under CR-WR8-B-CLARIFIED that is now a fixture
+          // choice rather than a requirement: the conjunct reads the STRONGEST
+          // SINGLE LIVE cause, so either of these clears the band alone. The
+          // pair is kept because a real quarrel usually has more than one thing
+          // wrong with it, and the single-cause reachability is pinned
+          // separately below.
           reasons: {
             grievance: { type: 'grievance', score: grievance, tick: 40, receipt: 'blood is owed' },
             revanchism: { type: 'revanchism', score: grievance, tick: 40, receipt: 'and owed a long time' },
@@ -101,6 +102,89 @@ function extremeWorld(over = {}) {
   const snapshot = {
     regionalGraph: {
       edges: [{ id: 'rel.Karrow.Thornwall', from: 'Karrow', to: 'Thornwall', relationshipType }],
+    },
+  };
+  return { worldState, snapshot };
+}
+
+/**
+ * ⚠️⚠️ A FULLY LIT WORLD — the fixture WZ-1 did not have, and whose absence left
+ * three whole paths of this module unexecuted.
+ *
+ * `extremeWorld` above is enough to assemble an extremity, but not enough to
+ * reach `razingDecisionFor`'s ACTIVE branch (which needs a real snapshot member
+ * to read a nature off) or `razingBeliefReceipts`' body (which needs a fogged
+ * world with a real belief record and a derivable pressure index). Every pin in
+ * this file before this one exercised the DARK arm, so mutants living past the
+ * dormancy gate survived. This fixture is the cure, and it is built out of the
+ * same parts the belief estate's own tests use — a real `byId` Map, a real
+ * regional graph, a real belief seat — because a hand-rolled belief row would
+ * prove nothing about the pipeline.
+ *
+ * `infoMode: 'unreliable'` is load-bearing: the belief layer is dormant by
+ * design in an omniscient world, so a fogged world is the only world in which
+ * the receipts have anything to read.
+ *
+ * @param {{ patron?: string, warExhaustion?: Record<string, number>,
+ *   licenses?: Record<string, unknown>, rivalFaith?: string }} [over]
+ */
+function litRazingWorld(over = {}) {
+  const patron = over.patron ?? 'evil';
+  const rivalFaith = over.rivalFaith ?? 'The Iron Maw';
+  const worldState = {
+    simulationRules: { ...LIT_RULES, infoMode: 'unreliable' },
+    spatialCanonVersion: 1,
+    tick: 40,
+    warExhaustion: over.warExhaustion ?? {},
+    // WR-2's ledger gives the court its temper; without it the INTENT half is
+    // unreadable and the mercy receipt can never be reached either way.
+    dispositionStats: { Karrow: { channels: { martial: { stock01: 0.9 } } } },
+    relationshipStates: {
+      'rel.Karrow.Thornwall': { relationshipType: 'hostile', resentment: 0.9, trust: 0.05, fear: 0.4 },
+    },
+    spatialLedgers: {
+      warReasons: {
+        'Karrow>Thornwall': {
+          reasons: {
+            grievance: { type: 'grievance', score: 0.9, tick: 40, receipt: 'blood is owed' },
+            revanchism: { type: 'revanchism', score: 0.9, tick: 40, receipt: 'and owed a long time' },
+          },
+        },
+      },
+      beliefMaps: {
+        Karrow: {
+          seat: {
+            Thornwall: { strengthBand: 0, allianceLabel: 'hostile', faithLabel: rivalFaith, confidence01: 1 },
+            Karrow: { strengthBand: 4, allianceLabel: 'self', confidence01: 1 },
+          },
+        },
+      },
+      ...(over.licenses ? { vengeanceLicenses: over.licenses } : {}),
+    },
+  };
+  const byId = new Map([
+    ['Karrow', {
+      id: 'Karrow',
+      settlement: {
+        name: 'Karrow', tier: 'city', population: 45000,
+        economicState: { foodSecurity: { storageMonths: 9, resilienceScore: 70 } },
+        config: { primaryDeitySnapshot: { name: patron === 'evil' ? 'The Iron Maw' : 'The Open Hand', alignmentAxis: patron } },
+      },
+    }],
+    ['Thornwall', {
+      id: 'Thornwall',
+      settlement: {
+        name: 'Thornwall', tier: 'village', population: 1200,
+        config: { primaryDeitySnapshot: { name: rivalFaith, alignmentAxis: rivalFaith === 'The Iron Maw' ? 'evil' : 'good' } },
+      },
+    }],
+  ]);
+  const snapshot = {
+    settlements: [...byId.values()],
+    byId,
+    worldState,
+    regionalGraph: {
+      edges: [{ id: 'rel.Karrow.Thornwall', from: 'Karrow', to: 'Thornwall', relationshipType: 'hostile', type: 'hostile' }],
     },
   };
   return { worldState, snapshot };
@@ -200,36 +284,74 @@ describe('the extremity composite, assembled from real substrate', () => {
     }
   });
 
-  test('THE GRIEVANCE FLOOR IS TWO CAUSES, MEASURED — the ubiquity brake CR-WR8-B wanted', () => {
-    // A LOAD-BEARING ARITHMETIC FACT, discovered by this pin failing on its
-    // first run and recorded rather than tuned away. `aggregateReasons01` is
-    // sum(scores) / AGGREGATE_SATURATION 2.5, and the extremity composite's
-    // live-grievance conjunct is the LICENSE_ADEQUACY band 0.6. So a single
-    // cause at its MAXIMUM aggregates to 0.4 and cannot clear the band, however
-    // hot it is: a razing requires a quarrel with at least two strong live
-    // causes stacked behind it. That is exactly the brake CR-WR8-B named ("the
-    // live-grievance conjunct breaks ubiquity"), and it is stronger than the
-    // ruling's own text promised. Nothing here is tuned to make the fixture
-    // pass — the fixture was corrected to the world.
+  test('CR-WR8-B-CLARIFIED — ONE maxed cause reaches the band, and the retired floor is proved retired', () => {
+    // ⚠️ THIS PIN REPLACES ITS OWN PREDECESSOR, AND THE PREDECESSOR WAS RIGHT
+    // ABOUT THE ARITHMETIC AND WRONG ABOUT THE LAW. WZ-1 measured that
+    // `aggregateReasons01` is Σ(scores) / AGGREGATE_SATURATION 2.5 against an
+    // adequacy band of 0.6, so ONE cause at its maximum aggregated to 0.4 and a
+    // razing silently needed TWO strong live causes — and pinned that floor as
+    // if it were the ruling. CR-WR8-B's own text says "a LIVE grievance",
+    // singular. The floor was a divisor's side effect; the chair retired it.
+    //
+    // THE OLD ARITHMETIC IS ASSERTED HERE ON PURPOSE, as the negative control
+    // for the change: if the composite ever went back to the aggregate, the
+    // single-cause world below would stop clearing the band and this reds.
     expect(REASON_TUNING.AGGREGATE_SATURATION).toBe(2.5);
     expect(RAZING_TUNING.LICENSE_ADEQUACY_01).toBe(0.6);
-    const oneMaxedCause = aggregateReasons01({
-      reasons: { grievance: { type: 'grievance', score: 1 } },
-    });
-    expect(oneMaxedCause).toBeLessThan(RAZING_TUNING.LICENSE_ADEQUACY_01);
-    const twoMaxedCauses = aggregateReasons01({
-      reasons: { grievance: { type: 'grievance', score: 1 }, revanchism: { type: 'revanchism', score: 1 } },
-    });
-    expect(twoMaxedCauses).toBeGreaterThanOrEqual(RAZING_TUNING.LICENSE_ADEQUACY_01);
-    // And the composite agrees, end to end, on a world built each way.
+    expect(aggregateReasons01({ reasons: { grievance: { type: 'grievance', score: 1 } } }))
+      .toBeLessThan(RAZING_TUNING.LICENSE_ADEQUACY_01);
+
+    // ONE maxed cause, and the composite now reaches the extreme on it.
     const single = extremeWorld();
     single.worldState.spatialLedgers.warReasons['Karrow>Thornwall'] = {
-      reasons: { grievance: { type: 'grievance', score: 1 } },
+      reasons: { grievance: { type: 'grievance', score: 1, tick: 40, receipt: 'they burned Marrowfen' } },
     };
-    expect(razingExtremityFor({
+    const reached = razingExtremityFor({
       worldState: single.worldState, snapshot: single.snapshot,
       partyId: 'Karrow', counterpartId: 'Thornwall',
-    }).grievanceMet).toBe(false);
+    });
+    expect(strongestLiveGrievance01(single.worldState, 'Karrow', 'Thornwall')).toBe(1);
+    expect(reached.grievanceMet).toBe(true);
+    expect(reached.extreme).toBe(true);
+  });
+
+  test('NEGATIVE CONTROL — the ubiquity brake survives: a PILE of weak causes never sums onto the extreme', () => {
+    // The brake is now about how bad the worst thing is, not how many things
+    // there are. Six live causes whose aggregate would clear the old band
+    // COMFORTABLY still leave the conjunct unmet, because the maximum of a set
+    // of weak causes is weak. This is the arm that keeps a razing rare.
+    const weak = extremeWorld();
+    /** @type {Record<string, { type: string, score: number, tick: number }>} */
+    const reasons = {};
+    for (const [i, type] of ['grievance', 'revanchism', 'resource_envy', 'legitimacy_hunger', 'containment', 'succession'].entries()) {
+      reasons[type] = { type, score: 0.5, tick: 40 + i };
+    }
+    weak.worldState.spatialLedgers.warReasons['Karrow>Thornwall'] = { reasons };
+    // The aggregate the RETIRED reading would have used clears the band easily…
+    expect(aggregateReasons01({ reasons })).toBeGreaterThanOrEqual(RAZING_TUNING.LICENSE_ADEQUACY_01);
+    // …and the shipped reading still refuses, because no single cause is strong.
+    expect(strongestLiveGrievance01(weak.worldState, 'Karrow', 'Thornwall')).toBe(0.5);
+    const read = razingExtremityFor({
+      worldState: weak.worldState, snapshot: weak.snapshot,
+      partyId: 'Karrow', counterpartId: 'Thornwall',
+    });
+    expect(read.grievanceMet).toBe(false);
+    expect(read.missing).toContain('live_grievance');
+  });
+
+  test('NEGATIVE CONTROL — a cause under the war layer\'s OWN liveness floor is not a grievance at all', () => {
+    const dead = extremeWorld();
+    dead.worldState.spatialLedgers.warReasons['Karrow>Thornwall'] = {
+      reasons: { grievance: { type: 'grievance', score: REASON_TUNING.MIN_SCORE - 0.01, tick: 40 } },
+    };
+    expect(strongestLiveGrievance01(dead.worldState, 'Karrow', 'Thornwall')).toBe(0);
+    // ANCHORED BY ITS OWN TWIN: the same reader on the same world returns the
+    // real score when the cause IS live, so "zero" measures the liveness floor
+    // rather than a reader that stopped reading.
+    dead.worldState.spatialLedgers.warReasons['Karrow>Thornwall'] = {
+      reasons: { grievance: { type: 'grievance', score: REASON_TUNING.MIN_SCORE, tick: 40 } },
+    };
+    expect(strongestLiveGrievance01(dead.worldState, 'Karrow', 'Thornwall')).toBe(REASON_TUNING.MIN_SCORE);
   });
 
   test('CR-WR8-A — a stranger has no edge, so no razing can mint one to reach', () => {
@@ -358,21 +480,52 @@ describe('R-WZ-1 — the institution status FOLLOWS THE TRUTH (K1 grades what th
   });
 });
 
-describe('R-WZ-2 — the razing\'s shell is capacity-zero, NOT K1\'s unfunded shell', () => {
-  test('above the shell band K1 grades capacity01 EXACTLY zero, through severity alone', () => {
-    const severity = RAZING_EXECUTION_TUNING.SHELL_BAND + 0.05;
-    const [stamped] = razingInstitutionStamps([{ id: 'temple' }], severity, { sinceTick: 40 });
-    expect(stamped.status).toBe('shell');
-    expect(stamped.impairment?.severity).toBe(INSTITUTION_STATUS_TUNING.MAX_SEVERITY);
+describe('R-WZ-2-REVISED — shell-as-strongest-damage: the word lives in the receipt, not in a number K1 never reads', () => {
+  test('⚠️ THE SEAM, EXECUTED — K1 grades BOTH bands identically, and the shell distinction is the receipt', () => {
+    // WZ-1 recorded that the shell band "stamps K1's MAX_SEVERITY and the
+    // institution grades impaired with capacity01 0". THAT WAS FALSE, and this
+    // pin is the correction executed rather than asserted. K1's `damage` cause
+    // fires on a TYPE (`impairmentTypes.has('capacity')`) and then grades at its
+    // OWN default for the cause; the number this writer puts in the stamp
+    // reaches that grading through no path at all. Carrying a razing's severity
+    // would mean writing `dmSeverity` onto a PERSISTED status record — an
+    // owner-gated persistence-shape change, recorded and not taken.
+    const shellSeverity = RAZING_EXECUTION_TUNING.SHELL_BAND + 0.05;
+    const [shell] = razingInstitutionStamps([{ id: 'temple' }], shellSeverity, { sinceTick: 40 });
+    const [impaired] = razingInstitutionStamps([{ id: 'temple' }], RAZING_EXECUTION_TUNING.SHELL_BAND, { sinceTick: 40 });
+    // The law leaf still says the two words…
+    expect(shell.status).toBe('shell');
+    expect(impaired.status).toBe('impaired');
+    // …and the MECHANISM is one mechanism, at K1's own number, both bands.
+    expect(shell.impairment?.severity).toBe(INSTITUTION_STATUS_TUNING.defaultSeverity.damage);
+    expect(impaired.impairment?.severity).toBe(shell.impairment?.severity);
+    expect(shell.impairment?.type).toBe(impaired.impairment?.type);
+    // THE DISTINCTION THE AMENDMENT ASKED FOR, in the receipt, on the row.
+    expect(shell.receipt).toContain('burned to a shell');
+    // The impaired row gets its OWN liveness anchor rather than borrowing the
+    // shell row's: they are different objects, and an anchor on a sibling proves
+    // nothing about a producer that started returning an empty receipt here.
+    expect(impaired.receipt).toContain('damaged');
+    // anchored: the line above proves this row carries a real receipt
+    expect(impaired.receipt).not.toContain('shell');
+  });
+
+  test('K1\'s OWN grading of the stamp, run through K1 — impaired, and never K1\'s unfunded shell', () => {
     const verdict = deriveInstitutionStatus({
       institution: { name: 'temple', status: 'active' },
       record: { impairments: { damage: { cause: 'damage', causeRef: 'razing', sinceTick: 40 } } },
     });
-    // K1's own grading of a full-severity damage cause: impaired, and producing
-    // nothing. The word `shell` in K1 means the money stopped, and this is not
-    // that — which is the whole of R-WZ-2.
+    // The word `shell` in K1 means the money stopped, and this is not that —
+    // which is the whole of R-WZ-2, and survives the revision unchanged.
     expect(verdict?.shell).toBe(false);
     expect(verdict?.status).toBe('impaired');
+    expect(verdict?.capacity01).toBeGreaterThan(0);
+  });
+
+  test('NEGATIVE CONTROL — capacity01 0 is reachable ONLY through the owner-gated dmSeverity path', () => {
+    // The arm NOT taken, executed so the owner decision is priced rather than
+    // described: K1 does reach "temporarily zero", and the only door is a
+    // persisted `dmSeverity` override on the status record.
     const full = deriveInstitutionStatus({
       institution: { name: 'temple', status: 'active' },
       record: {
@@ -385,6 +538,15 @@ describe('R-WZ-2 — the razing\'s shell is capacity-zero, NOT K1\'s unfunded sh
       },
     });
     expect(full?.capacity01).toBe(0);
+    // And the razing writes no such field anywhere. ⚠️ OVER CODE, NOT SOURCE:
+    // the module header now EXPLAINS the owner-gated `dmSeverity` path in prose,
+    // and a scan over raw source reds on the explanation. The same trap the
+    // determinism scan above records, bitten a second time and cured the same
+    // way — a scan reads what the code does.
+    expectAbsentWithAnchor(
+      CODE(EXECUTION_SOURCE), 'dmSeverity', 'razingInstitutionStamps',
+      'the razing writes a DM severity override onto a persisted status record',
+    );
   });
 
   test('NEGATIVE CONTROL — the razing NEVER sets K1\'s economic-close flag', () => {
@@ -399,10 +561,13 @@ describe('R-WZ-2 — the razing\'s shell is capacity-zero, NOT K1\'s unfunded sh
     expectAbsentWithAnchor(SOURCE(EXECUTION_SOURCE), '_worldPulseEconomyClosed: ', 'razingInstitutionStamps', 'the writer sets the economic-close flag');
   });
 
-  test('below the shell band the stamp is K1\'s OWN damage default, not a number this file picked', () => {
-    const [stamped] = razingInstitutionStamps([{ id: 'temple' }], RAZING_EXECUTION_TUNING.SHELL_BAND, {});
-    expect(stamped.status).toBe('impaired');
-    expect(stamped.impairment?.severity).toBe(INSTITUTION_STATUS_TUNING.defaultSeverity.damage);
+  test('the stamp severity is K1\'s OWN damage default at EVERY severity, not a number this file picked', () => {
+    // Walked rather than sampled, because "one number, both bands" is exactly
+    // the kind of claim a single-point pin lets a future fork slip past.
+    for (const severity of [0, 0.35, RAZING_EXECUTION_TUNING.SHELL_BAND, RAZING_EXECUTION_TUNING.SHELL_BAND + 0.01, 0.9, 1]) {
+      const [stamped] = razingInstitutionStamps([{ id: 'temple' }], severity, {});
+      expect(stamped.impairment?.severity).toBe(INSTITUTION_STATUS_TUNING.defaultSeverity.damage);
+    }
   });
 });
 
@@ -483,5 +648,180 @@ describe('the plan — conserved, occupation-free, tier-free', () => {
     expect(plan.sack.losses).toBe(0);
     expect(plan.sack.nothingLeft).toBe(true);
     expect(plan.spoils.plunder).toBe(0);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// THE THREE PATHS WZ-1 LEFT UNEXECUTED. Every pin above this line drove the
+// DARK arm or a hand-built argument list, so three whole stretches of this
+// module were reachable only in principle: the decision's ACTIVE branch, the
+// belief receipts' body, and the edge-flip call with anything in it. Each is
+// driven here through the real substrate, and each carries the mutant that
+// proves it is now covered.
+// ─────────────────────────────────────────────────────────────────────────────
+
+describe('THE ACTIVE DECISION PATH — the law is reached through the real gate, on both roads', () => {
+  test('INITIATION — a wicked court at the extreme, with its nature read off the world', () => {
+    const { worldState, snapshot } = litRazingWorld({ warExhaustion: { Karrow: 1 } });
+    const decision = razingDecisionFor({
+      worldState, snapshot, razerId: 'Karrow', victimId: 'Thornwall', tick: 40, siegeWon: true,
+    });
+    expect(decision.active).toBe(true);
+    // ⚠️ THE BAND IS DERIVED, NOT HANDED IN. `ownNatureBandFor` runs the real
+    // alignment read over the real snapshot member, so this asserts the wiring
+    // and not a literal — a mutant that pinned the band to a constant reds here.
+    expect(decision.alignmentBand).toBe('malicious');
+    expect(decision.verdict.permitted).toBe(true);
+    expect(decision.verdict.road).toBe('initiation');
+    expect(decision.verdict.refusal).toBeNull();
+    expect(decision.extremity.extreme).toBe(true);
+    // An evil court takes the initiation road even where a license exists — R2's
+    // moral economy counts the two separately (razing.js's own note).
+    expect(decision.licenseHeld).toBe(false);
+    expect(decision.licenseId).toBeNull();
+  });
+
+  test('VENGEANCE — a BALANCED court burns because it holds a live license, read through the validator', () => {
+    const { worldState, snapshot } = litRazingWorld({
+      patron: 'good',
+      licenses: {
+        'vengeance_license.Thornwall.Marrowfen.12': {
+          id: 'vengeance_license.Thornwall.Marrowfen.12',
+          razerId: 'Thornwall', victimId: 'Marrowfen', heldSince: 12,
+          holders: ['Karrow'],
+          consumedBy: null, consumedAtTick: null, extinguishedAtTick: null,
+        },
+      },
+    });
+    const decision = razingDecisionFor({
+      worldState, snapshot, razerId: 'Karrow', victimId: 'Thornwall', tick: 40, siegeWon: true,
+    });
+    expect(decision.active).toBe(true);
+    expect(decision.alignmentBand).toBe('balanced'); // NOT malicious — the license is doing the work
+    expect(decision.verdict.road).toBe('vengeance');
+    expect(decision.licenseHeld).toBe(true);
+    expect(decision.licenseId).toBe('vengeance_license.Thornwall.Marrowfen.12');
+  });
+
+  test('NEGATIVE CONTROL — a FORGED license arms nobody, and the same court is refused', () => {
+    // The validator is the gate, and this proves the ACTIVE path consults it:
+    // the razer is named as its own holder, which `validateVengeanceLicense`
+    // refuses ("a razer cannot hold the right of vengeance for its own
+    // atrocity"), so the read returns null and the balanced court is refused.
+    const { worldState, snapshot } = litRazingWorld({
+      patron: 'good',
+      licenses: {
+        'vengeance_license.Thornwall.Marrowfen.12': {
+          id: 'vengeance_license.Thornwall.Marrowfen.12',
+          razerId: 'Thornwall', victimId: 'Marrowfen', heldSince: 12,
+          holders: ['Thornwall'],
+          consumedBy: null, consumedAtTick: null, extinguishedAtTick: null,
+        },
+      },
+    });
+    const decision = razingDecisionFor({
+      worldState, snapshot, razerId: 'Karrow', victimId: 'Thornwall', tick: 40, siegeWon: true,
+    });
+    expect(decision.active).toBe(true);
+    expect(decision.licenseHeld).toBe(false);
+    expect(decision.verdict.permitted).toBe(false);
+    expect(decision.verdict.refusal).toBe('alignment_forbids_initiation');
+  });
+
+  test('NEGATIVE CONTROL — the same lit world, no won siege: the ACTIVE path still refuses first on the siege', () => {
+    const { worldState, snapshot } = litRazingWorld({ warExhaustion: { Karrow: 1 } });
+    const decision = razingDecisionFor({
+      worldState, snapshot, razerId: 'Karrow', victimId: 'Thornwall', tick: 40, siegeWon: false,
+    });
+    // active TRUE and permitted FALSE is the pair that distinguishes "the world
+    // is lit and the law said no" from "the world is dark and nobody asked".
+    expect(decision.active).toBe(true);
+    expect(decision.verdict.refusal).toBe('no_siege');
+  });
+});
+
+describe('CR-WR8-G, EXECUTED — the belief receipts are produced, not merely permitted', () => {
+  test('THE MISTAKEN-FEASIBILITY ARC — a court that believed a conquest in reach, and was wrong', () => {
+    const { worldState, snapshot } = litRazingWorld({ warExhaustion: { Karrow: 1 } });
+    const receipts = razingBeliefReceipts({
+      worldState, snapshot, observerId: 'Karrow', rivalId: 'Thornwall',
+      conquestSucceeded: false, wasConquered: false,
+    });
+    // The two READS are real reads off the belief stage — the whole point of the
+    // direction ruling, and until now nothing executed them.
+    expect(receipts.feasibility?.known).toBe(true);
+    expect(receipts.feasibility?.conquestReachBand).toBe('within_reach');
+    expect(receipts.intent?.known).toBe(true);
+    expect(receipts.mistaken?.mistaken).toBe(true);
+    expect(receipts.mistaken?.direction).toBe('overreached');
+    // A victor that razed is not merciful, and the receipt says so by absence.
+    expect(receipts.mercy).toBeNull();
+  });
+
+  test('NEGATIVE CONTROL — the SAME belief, a conquest that DID land: no mistake to report', () => {
+    const { worldState, snapshot } = litRazingWorld({ warExhaustion: { Karrow: 1 } });
+    const receipts = razingBeliefReceipts({
+      worldState, snapshot, observerId: 'Karrow', rivalId: 'Thornwall',
+      conquestSucceeded: true, wasConquered: false,
+    });
+    expect(receipts.feasibility?.known).toBe(true); // the anchor: the read still works
+    expect(receipts.mistaken?.mistaken).toBe(false);
+    expect(receipts.mistaken?.direction).toBe('none');
+  });
+
+  test('THE MERCY ARC — a good court that could have taken everything and did not', () => {
+    // The other half of CR-WR8-G's justification, and the half a razing pin
+    // could never reach from a razer's own fixture: mercy is the CONQUEST's
+    // opposite, so it needs a court whose conscience refuses the decent.
+    const { worldState, snapshot } = litRazingWorld({ patron: 'good', rivalFaith: 'The Open Hand' });
+    const receipts = razingBeliefReceipts({
+      worldState, snapshot, observerId: 'Karrow', rivalId: 'Thornwall',
+      conquestSucceeded: false, wasConquered: false,
+    });
+    expect(receipts.feasibility?.conquestReachBand).toBe('within_reach');
+    expect(receipts.intent?.intent).toBe('terms');
+    expect(receipts.intent?.moralVerdict).toBe('refused_the_decent');
+    expect(receipts.mercy?.merciful).toBe(true);
+    expect(receipts.mercy?.receipt).toContain('could have taken everything');
+  });
+});
+
+describe('LAW 5, EXECUTED — the edge flips are driven with real holder edges', () => {
+  const PERMITTED_PLAN = () => razingPlanFor({
+    verdict: razingGate({
+      siegeWon: true,
+      extremity: readRelationshipExtremity({ edgeType: 'hostile', resentment01: 0.9, grievance01: 0.8 }),
+      alignmentBand: 'malicious', actorId: 'Karrow', victimId: 'Thornwall',
+    }),
+    severity01: 0.7, population: 1200, namedCastCount: 3,
+    institutions: [{ id: 'temple' }], movableWealth: 900,
+    razerName: 'Karrow', victimName: 'Thornwall', tick: 40,
+    holderEdges: [
+      { holderId: 'Everdeep', edgeType: 'cordial', adequacyToVictim01: 0.9 },
+      { holderId: 'Marrowfen', edgeType: 'hostile', adequacyToVictim01: 0.8 },
+      { holderId: 'Stranger', edgeType: 'cordial', adequacyToVictim01: 0.1 },
+    ],
+  });
+
+  test('all three dispositions are reached at once — flipped, already hostile, and not victim-adequate', () => {
+    // ⚠️ EVERY PIN BEFORE THIS ONE PASSED AN EMPTY `holderEdges`, so the whole
+    // call returned `{ flipped: [], unchanged: [] }` and any mutant inside it
+    // survived. Three edges, three outcomes, one call.
+    const { edges } = PERMITTED_PLAN();
+    expect(edges.flipped).toEqual([{ holderId: 'Everdeep', fromType: 'cordial', toType: 'hostile' }]);
+    expect(edges.unchanged).toEqual([
+      { holderId: 'Marrowfen', type: 'hostile', why: 'already_hostile' },
+      { holderId: 'Stranger', type: 'cordial', why: 'not_victim_adequate' },
+    ]);
+  });
+
+  test('CR-WR8-A — the plan mints NO edge to a holder the razer never shared one with', () => {
+    const { edges } = PERMITTED_PLAN();
+    const named = [...edges.flipped.map((e) => e.holderId), ...edges.unchanged.map((e) => e.holderId)];
+    // THE ANCHOR: the call really did produce a populated census, so the absence
+    // below measures the mint refusal rather than an empty subject.
+    expect(named).toHaveLength(3);
+    // anchored: the length assertion one line up proves the census is populated, so this measures the mint refusal
+    expect(named).not.toContain('Nowhere');
   });
 });
