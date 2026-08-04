@@ -536,9 +536,32 @@ export const SEAL_GLINT = '#8E322B';
  * divider it used to size is retired (the band has no internal seams any more — the
  * laps are the seams).
  */
+/**
+ * ⚠️⚠️ `barbGap` AND `barbJitter` WERE RETUNED BECAUSE THE BAND READ AS CORRUGATED
+ * METAL, AND THE NUMBER THAT MATTERS IS NOT THE GAP — IT IS THE COVERAGE.
+ *
+ * The PB verifier's eye verdict (2026-08-03 night, finding (g) cause 1, quoted): "The
+ * comb is stripes, not texture: barbGap 4.1 viewBox units = 3.6 CSS px with strokes at
+ * 0.7/1.0/1.25px non-scaling → up to ~35% areal coverage; the docstring's 'hairline at
+ * a ~8% tonal drop' describes the TONE, not the resulting coverage."
+ *
+ * That is the whole defect in one sentence. The BALANCE LAW was written about tonal
+ * depth and the comb honoured it — FLETCH_BARB really is only ~8% darker than
+ * FLETCH_VANE — while a third of the vane's AREA was ink. Tone × area is what the eye
+ * integrates at arm's length, and a third of the area at any tone is a slatted shutter.
+ *
+ * The reference settles it: a goose primary held at arm's length shows almost NO
+ * individual barbs. It reads as a smooth dark vane with soft tonal bands and a satin
+ * sheen, and the barbs are a whisper you only see up close. So the comb stops being the
+ * material and becomes a near-subliminal layer over it: the gap widens to 6.6 units
+ * (5.8 CSS px on the measured band) and FletchBand's own BARB weights drop to
+ * 0.3/0.4/0.5px at 0.11/0.17/0.24 opacity — about 6.9% areal coverage and about 1.2%
+ * effective ink. The jitter widens with it (0.34 → 0.42) because a sparser comb needs a
+ * looser wobble to stay off the eye's grid.
+ */
 export const FLETCH = Object.freeze({
   band: 76, lane: 100, lap: 44,
-  barbRun: 37, barbGap: 4.1, barbJitter: 0.34,
+  barbRun: 37, barbGap: 6.6, barbJitter: 0.42,
   slant: 10, wrap: 10,
 });
 

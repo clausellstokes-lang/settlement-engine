@@ -101,8 +101,8 @@ import {
   SHAFT_RIM, SHAFT_SHEEN, SHAFT_STOPS, SP, WRAP,
 } from '../../src/components/theme.js';
 import {
-  BAND, BAND_W, LANE, REACH, RUN, SEAT, SHEENS, SHEEN_FLOOR, VANES, barbBuckets,
-  lean, unitHash,
+  BAND, BAND_PX_PER_UNIT, BAND_W, BARB, LANE, REACH, RUN, SEAT, SHEENS, SHEEN_FLOOR,
+  VANES, barbBuckets, combCoverage, frayHairs, laneGap, lean, rachis, unitHash,
 } from '../../src/components/nav/FletchBand.jsx';
 
 const H = vi.hoisted(() => ({
@@ -519,6 +519,39 @@ describe('2 — ⚠️⚠️ THE SHINGLE: three parallelograms, ascending into R
 });
 
 describe('3 — THE COMB: fine barb striations, at the derived angle, jittered', () => {
+  test('⚠️⚠️ THE COMB IS A WHISPER — the AREAL COVERAGE budget, cause (1)’s cure', () => {
+    // THE PIN THIS BLOCK EXISTS FOR NOW, and the one the previous cut did not have.
+    // The verifier's finding, quoted: "The comb is stripes, not texture: barbGap 4.1
+    // viewBox units = 3.6 CSS px with strokes at 0.7/1.0/1.25px non-scaling → up to
+    // ~35% areal coverage; the docstring's 'hairline at a ~8% tonal drop' describes
+    // the TONE, not the resulting coverage."
+    //
+    // ⚠️ THAT IS THE WHOLE LESSON: the old species pin (further down, "the barbs are
+    // FINE, not barring") measures the TONAL drop between FLETCH_VANE and FLETCH_BARB
+    // and was green throughout, because tone was never the defect. The eye integrates
+    // tone × AREA, and a third of the vane's area at any tone is a slatted shutter.
+    // So the budget is on area, computed from the same three numbers that draw it.
+    const { areal, ink } = combCoverage();
+    expect(areal, 'the comb has grown back into stripes').toBeLessThan(0.08);
+    expect(ink, 'the comb is no longer a whisper').toBeLessThan(0.025);
+    // NON-VACUITY, THE OTHER WAY: it must still EXIST. A comb budgeted to nothing is
+    // a vane with no barbs at all, which fails the reference just as surely.
+    expect(areal).toBeGreaterThan(0.02);
+    for (const o of BARB.opacities) expect(o).toBeGreaterThan(0);
+    // Today's values, quoted, in their own assertion so a retune edits an obvious
+    // record rather than the invariant above.
+    expect((areal * 100).toFixed(1)).toBe('7.2');
+    expect((ink * 100).toFixed(1)).toBe('1.4');
+    // ⚠️ AND THE NARROW CASE IS QUOTED TOO, not hidden. Barb strokes are CSS px
+    // (non-scaling); the gap is viewBox units and compresses with the band, so a
+    // NARROWER viewport raises coverage. At the 640px desktop breakpoint the cluster
+    // measures about 200px against a 300-unit viewBox.
+    expect(combCoverage(200 / 300).areal).toBeLessThan(0.12);
+    // The measured scale this is all quoted at, recorded as a receipt (jsdom has no
+    // layout and cannot re-derive it).
+    expect(BAND_PX_PER_UNIT).toBeCloseTo(264.53 / 300, 4);
+  });
+
   test('the barbs are present, fine, and split across brightness buckets', () => {
     const { container } = render(<App />);
     const svg = paint(container);
@@ -526,8 +559,12 @@ describe('3 — THE COMB: fine barb striations, at the derived angle, jittered',
       const paths = [...svg.querySelectorAll(`[data-testid^="nav-fletch-barbs-${lane}-"]`)];
       expect(paths.length, `lane ${lane} has no barbs`).toBe(3);
       const strokes = paths.reduce((n, p) => n + (p.getAttribute('d').match(/M /g) || []).length, 0);
-      // Genuinely dense: a "fine parallel striation" is dozens of marks, not four.
-      expect(strokes).toBeGreaterThan(30);
+      // Still a real comb — dozens of marks, not four. ⚠️ THE FLOOR CAME DOWN FROM 30
+      // WITH THE COVERAGE CURE, and deliberately: the gap widened from 4.1 to 6.6
+      // units, so the same cell now carries about 22-26 barbs instead of about 40.
+      // Density is the wrong axis to defend the species on — the coverage pin above
+      // is the one that would have caught the shutter.
+      expect(strokes).toBeGreaterThan(16);
       // Every bucket carries some — a bucket that never fills is a jitter that is
       // not jittering.
       for (const p of paths) {
@@ -571,15 +608,130 @@ describe('3 — THE COMB: fine barb striations, at the derived angle, jittered',
     }
     // Non-vacuity: it really varies, and the comb really is uneven as a result.
     expect(new Set([...Array(40)].map((_, i) => unitHash(i))).size).toBeGreaterThan(20);
-    const xs = (barbBuckets(0).join(' ').match(/M (-?[\d.]+) 0/g) || [])
-      .map((m) => Number(m.slice(2, -2))).sort((a, b) => a - b);
-    const gaps = xs.slice(1).map((x, i) => +(x - xs[i]).toFixed(3));
-    expect(new Set(gaps).size).toBeGreaterThan(3); // a wobble, not a ruler
-    // …and every gap stays inside the authored jitter envelope, never to zero.
-    for (const g of gaps) {
-      expect(g).toBeGreaterThan(FLETCH.barbGap * (1 - FLETCH.barbJitter));
-      expect(g).toBeLessThan(FLETCH.barbGap * (1 + FLETCH.barbJitter));
+    // ⚠️ MEASURED AGAINST `laneGap(lane)`, NOT `FLETCH.barbGap`. The nominal gap is
+    // now scaled per lane (cause 2's cure at the quietest channel), so a pin against
+    // the raw token would have to be loosened to a tolerance that no longer describes
+    // the jitter — which is how an envelope pin becomes a formality.
+    for (const lane of [0, 1, 2]) {
+      const xs = (barbBuckets(lane).join(' ').match(/M (-?[\d.]+) 0/g) || [])
+        .map((m) => Number(m.slice(2, -2))).sort((a, b) => a - b);
+      const gaps = xs.slice(1).map((x, i) => +(x - xs[i]).toFixed(3));
+      expect(new Set(gaps).size, `lane ${lane} combs like a ruler`).toBeGreaterThan(3);
+      for (const g of gaps) {
+        expect(g).toBeGreaterThan(laneGap(lane) * (1 - FLETCH.barbJitter));
+        expect(g).toBeLessThan(laneGap(lane) * (1 + FLETCH.barbJitter));
+      }
     }
+  });
+
+  test('⚠️⚠️ NO TWO CELLS REPEAT — cause (2), the PERIODICITY that made it a shutter', () => {
+    // The verifier's finding, quoted: "SHEENS are authored at IDENTICAL offsets in
+    // every lane (x0+6 w20, x0+42 w28, x0+80 w15), so all three cells carry the same
+    // three bright blobs in the same places; the barb hash varies per lane but the
+    // sheen — the loud channel — does not, and combined with one constant 26° angle
+    // and one gap across the whole band the eye reads a repeating machine pattern."
+    //
+    // So the pin is on the two channels that were repeating, stated as a NEGATIVE:
+    // no lane may carry another lane's pattern translated by its own lane offset.
+    const rel = (lane) => SHEENS[lane].map((d) => ONCURVE(d)
+      .filter((p) => p.y === 0)
+      .map((p) => +(p.x - (lane * LANE - SEAT)).toFixed(2)).join(','));
+    expect(rel(0)).not.toEqual(rel(1));
+    expect(rel(1)).not.toEqual(rel(2));
+    expect(rel(0)).not.toEqual(rel(2));
+    // The comb's nominal spacing differs per lane too, so the three cells cannot beat
+    // against one another — and it stays inside a tenth of the token, which is what
+    // keeps the envelope pin above a real constraint.
+    const gaps = [0, 1, 2].map(laneGap);
+    expect(new Set(gaps.map((g) => g.toFixed(4))).size).toBe(3);
+    for (const g of gaps) expect(Math.abs(g / FLETCH.barbGap - 1)).toBeLessThanOrEqual(0.1);
+    // ⚠️ THE ANGLE IS DELIBERATELY *NOT* VARIED, and this asserts the refusal so a
+    // future reader does not "finish" cause (2) by breaking the one-lean law: the
+    // comb, both cuts and the sheen all lean by ONE number, which is what makes a lap
+    // read as a barb line rather than as a cut across the grain.
+    for (const lane of [0, 1, 2]) {
+      const [tl, , , bl] = ONCURVE(VANES[lane].closed);
+      expect(bl.x - tl.x).toBe(RUN);
+    }
+  });
+
+  test('⚠️ THE LOWER EDGE IS NOT A RULER — cause (3), free barb tips past the cut', () => {
+    // The verifier's finding, quoted: "all three cells terminate at y=76, so the
+    // composited band is an exact rectangle with a ruler-straight bottom — a
+    // fletching's most recognisable feature is its ragged lower edge and there is
+    // none."
+    //
+    // ⚠️ THE CURE IS MATERIAL, NOT SILHOUETTE, AND THAT IS THE OWNER'S CALL STANDING.
+    // The final correction forbids torn or complex cell shapes, so the quad stays a
+    // quad — the block above still pins four on-curve points and no curve command —
+    // and the ruler line is broken by escaped barb tips instead. Both halves are
+    // pinned together here so nobody "improves" one by discarding the other.
+    const { container } = render(<App />);
+    const svg = paint(container);
+    for (const lane of [0, 1, 2]) {
+      const el = svg.querySelector(`[data-testid="nav-fletch-fray-${lane}"]`);
+      expect(el, `lane ${lane} has no frayed edge`).toBeTruthy();
+      const d = el.getAttribute('d');
+      const hairs = (d.match(/M /g) || []).length;
+      // A DENSITY, never a handful: the first cut ran one hair every 2.4-4.6 gaps and
+      // they read as stray whiskers at 400%, which is a worse artefact than the ruler.
+      expect(hairs, `lane ${lane}'s fray is too sparse to read as an edge`).toBeGreaterThan(10);
+      const ys = pathYs(d);
+      // Every hair STARTS on the cut and ENDS below it — that is what makes it an
+      // escaped tip rather than a fringe drawn under the band.
+      expect(Math.min(...ys)).toBe(BAND);
+      expect(Math.max(...ys)).toBeGreaterThan(BAND);
+      // …and no tip reaches so far that it becomes a second silhouette.
+      expect(Math.max(...ys) - BAND).toBeLessThan(BAND * 0.07);
+      // The tips lean by the ONE number too, so they continue the comb.
+      for (const seg of d.match(/M (-?[\d.]+) [\d.]+ L (-?[\d.]+) ([\d.]+)/g) || []) {
+        const [, x0, x1, y1] = seg.match(/M (-?[\d.]+) [\d.]+ L (-?[\d.]+) ([\d.]+)/);
+        // ⚠️ PRECISION 0, and it is the path's own rounding that sets it: the tips'
+        // x's are authored to one decimal, so two of them can each be 0.05 out and
+        // the difference 0.1 — a tighter tolerance would pin the rounding, not the
+        // lean. The claim is "these hairs run with the comb", not "to 2dp".
+        expect(Number(x1) - Number(x0)).toBeCloseTo(lean(Number(y1) - BAND), 0);
+      }
+    }
+    // The three cells' fray patterns are distinct, or the ruler comes back as a
+    // repeating fringe — the same defect one layer down.
+    expect(new Set([0, 1, 2].map(frayHairs)).size).toBe(3);
+    // NON-VACUITY: the quad itself really is still flat-bottomed, so the fray is the
+    // only thing doing this job and cannot be silently replaced by a torn silhouette.
+    for (const v of VANES) expect(ONCURVE(v.closed).filter((p) => p.y === BAND).length).toBe(2);
+  });
+
+  test('⚠️ THREE QUILLS, NOT ONE RAIL — cause (4), the rachis stops at its own lane', () => {
+    // The verifier's finding, quoted: "the rachis renders as one continuous pale rail
+    // across the top of the whole band rather than three quills."
+    //
+    // The previous cut ran each quill across its whole quad INCLUDING the lap, so
+    // consecutive quills abutted and the band carried a single pale rule along its
+    // top — the one mark most likely to say "machined panel". Each quill now starts
+    // inside its own lane and stops short of the next division.
+    const span = (lane) => {
+      const xs = ONCURVE(rachis(lane)).map((p) => p.x);
+      return [Math.min(...xs), Math.max(...xs)];
+    };
+    for (const lane of [0, 1]) {
+      const [, end] = span(lane);
+      const [nextStart] = span(lane + 1);
+      expect(nextStart, `quill ${lane} runs straight into quill ${lane + 1}`)
+        .toBeGreaterThan(end);
+      // A break the eye can see, not a hairline: at least 5 band units.
+      expect(nextStart - end).toBeGreaterThanOrEqual(5);
+    }
+    // Each quill really tapers — thick at the quill line, thin at the trailing end —
+    // and each sits at its own height, so the three do not line up into a rule.
+    const tops = [];
+    for (const lane of [0, 1, 2]) {
+      const pts = ONCURVE(rachis(lane));
+      expect(pts.length).toBe(4);
+      const [a, b, c, dd] = pts;
+      expect(dd.y - a.y, `quill ${lane} does not taper`).toBeGreaterThan(c.y - b.y);
+      tops.push(a.y);
+    }
+    expect(new Set(tops.map((y) => y.toFixed(2))).size, 'the three quills share one height').toBe(3);
   });
 
   test('⚠️ THE COMB RUNS PARALLEL TO THE CELLS’ OWN EDGES — one lean, not two', () => {
