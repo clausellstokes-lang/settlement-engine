@@ -135,8 +135,8 @@ describe('the satellites ledger has exactly two writing authorities (shrink-only
     // still does not write it.
     const writers = writersOf('satellites');
     expect(writers, 'the pen is an authority').toContain('src/domain/worldPulse/settlementLifecycleKernel.js');
-    // anchored: the line above proves the measured set is live and correctly keyed, so
-    // this exclusion measures the conveyance staying out of it.
+    // The line above proves the measured set is live and correctly keyed, so
+    // anchored: this exclusion measures the conveyance staying out of a real set.
     expect(writers).not.toContain('src/domain/worldPulse/sovereigntyTransfer.js');
   });
 });

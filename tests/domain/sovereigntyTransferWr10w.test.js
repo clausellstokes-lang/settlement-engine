@@ -59,6 +59,7 @@ import { buildLineageMemberBirth } from '../../src/domain/worldPulse/lineageMemb
 import { preserveSettlementParentRef } from '../../src/domain/settlementParentRef.js';
 import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const T = SOVEREIGNTY_TRANSFER_TUNING;
 
@@ -421,8 +422,13 @@ describe('WW-A — what is NEVER written: history, the lineage edge, the people'
       worldState: world, term: term('child'), sellerId: 'seller', buyerId: 'buyer', tick: 70,
     });
     expect(out.executed).toBe(true);
-    expect(JSON.stringify(out.worldState), 'no parentRef spelling anywhere in the write')
-      .not.toContain('parentRef');
+    // The buyer's own spelling is the liveness anchor: it reaches the serialized world
+    // by the SAME road the lineage spelling would have taken, so a writer that stopped
+    // writing (or a worldState that came back empty) reds here instead of passing the
+    // "no parentRef" question by having nothing to say at all.
+    expectAbsentWithAnchor(
+      JSON.stringify(out.worldState), 'parentRef', 'buyer', 'the conveyance write',
+    );
     // And the estate's own carry-across still returns the ORIGINAL receipt afterwards.
     const regenerated = preserveSettlementParentRef({ id: 'child', name: 'Child' }, settlement);
     expect(regenerated.parentRef).toBe(parentRef);
@@ -454,8 +460,8 @@ describe('WW-A — what is NEVER written: history, the lineage edge, the people'
       satellite: steading('steading.parent.1', 'parent', 0),
       tick: 80, now: null,
     });
-    // anchored: the assertion above proves the field IS produced for a sold steading on
-    // the same code path, so this absence measures drop-when-absent, not a dead builder.
+    // The `sold` assertion above proves this same builder DOES emit the field, so:
+    // anchored: this measures drop-when-absent, not a builder that stopped emitting.
     expect(never.save.settlement.parentRef).not.toHaveProperty('conveyed');
     expect(never.save.settlement.parentRef.parentId, 'the rest of the receipt is unchanged').toBe('parent');
   });
@@ -636,12 +642,15 @@ describe('WW-A — the mint-time fold (the treaty IS the artifact)', () => {
       settlementUpdates: [], edges: [], tick: 40,
     });
     expect(out.newsSeeds.length).toBeGreaterThan(0);
-    for (const seed of out.newsSeeds) {
+    // Collected, not looped: a bare loop dies on the first malformed seed and reports
+    // "1" however many are broken, and the seeds after the casualty never run at all.
+    const failures = collectSeedFailures(out.newsSeeds, (seed) => {
       expect(typeof seed.kind, `${seed.kind} is a typed kind`).toBe('string');
       expect(seed.settlementIds.length, 'every seed is addressed').toBeGreaterThan(0);
       expect(seed.reasons.length, 'and carries its reason').toBeGreaterThan(0);
       expect(seed.tick).toBe(40);
-    }
+    });
+    expectNoSeedFailures(failures, 'every conveyance news seed carries a full address chain');
     expect(out.newsSeeds.map((s) => s.kind)).toContain('sovereignty_sale_cleared');
   });
 });

@@ -44,6 +44,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { CURRENT_TREATY_TICKS_PER_YEAR } from '../../src/domain/worldPulse/treatyClock.js';
 import { SOVEREIGNTY_REQUIRED_RULES } from '../../src/domain/worldPulse/sovereigntyAssets.js';
 import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 /**
  * FENCE 3's recorder. Hoisted because `vi.mock` factories hoist above the imports. Every
@@ -393,19 +394,24 @@ describe('WR-10 sovereignty trade — the four-fence dormancy set', () => {
     // The honest dark outcome, stated so it cannot be mistaken for a leak later: the
     // envoy's sheet really did carry a cession, so the minted treaty really does hold
     // the clause — and its receipts say nothing about a conveyance, because none ran.
+    /** @type {Record<string, string>} */
+    const darkReceipts = {};
     for (const mode of ['absent', 'false']) {
       const { out } = drive(/** @type {'absent'|'false'} */ (mode));
       const doc = documentFootprint(out.worldState);
       const key = Object.keys(doc)[0];
       expect(doc[key].assetIds, `${mode}: the clause survived the sheet road`).toEqual([ASSET]);
-      expect(doc[key].receipts.join(' '), `${mode}: but the document claims no conveyance`)
-        .not.toContain('passed from');
+      darkReceipts[mode] = doc[key].receipts.join(' ');
     }
-    // anchored: the lit run's receipts DO carry the line, so the negative above measures
-    // the flag holding rather than a receipt vocabulary that never says anything.
+    // The lit run is the LIVENESS ANCHOR, and it is driven AFTER the dark runs so the
+    // conveying configuration can never seed the fixtures the dark runs read. The
+    // phrase has to be producible on this very world before its absence means anything.
     const lit = drive('lit');
     const litDoc = documentFootprint(lit.out.worldState);
-    expect(litDoc[Object.keys(litDoc)[0]].receipts.join(' ')).toContain('passed from');
+    const litReceipts = litDoc[Object.keys(litDoc)[0]].receipts.join(' ');
+    for (const mode of ['absent', 'false']) {
+      expectPresentThenAbsent(litReceipts, darkReceipts[mode], 'passed from', `${mode}: the document claims no conveyance`);
+    }
   });
 
   it('FENCE 1c — no WR-10 receipt kind escapes while dark', () => {
