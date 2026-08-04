@@ -23,28 +23,33 @@
  * receipt JSON.
  */
 
+import {
+  createEmptyWarForceEvidence,
+  evaluateWarConvergenceForces,
+  validateWarForceEvidence,
+} from './warConvergenceForces.js';
+
 /** @typedef {Record<string, unknown>} UnknownRecord */
 
 /**
  * The additive WR-9 observation carried by a v5 soak receipt.
  *
  * v2 (the WR-9 build wave) adds `warDurationHistogram`. v3 (WR-9r) adds the
- * `unmeasured` duration cell. Both bumps are EXACT rather than tolerant on the
- * same principle: a v1 observation has no duration address at all, and a v2 one
- * has no address for a LOST duration, so silently accepting either would let the
- * duration envelope grade a corpus it could not actually read. The v2 → v3 bump
- * is the version arm of the same repair as the `unmeasured` cell itself, and
+ * `unmeasured` duration cell. v4 (WR-9c) adds `forceEvidence`, the address the six
+ * force cells grade. Every bump is EXACT rather than tolerant on the same
+ * principle: a v1 observation has no duration address at all, a v2 one has no
+ * address for a LOST duration, and a v3 one has no address for any force reading,
+ * so silently accepting one would let an envelope grade a corpus it could not
+ * actually read. Each bump is the version arm of the repair that motivated it, and
  * refusing to bump would have contradicted this paragraph's own law.
  *
- * NOTHING IS ORPHANED, MEASURED RATHER THAN ASSERTED. On 2026-08-04 the local
- * receipt corpus was NINE gitignored files under `artifacts/soak/` (`/artifacts/`
- * is ignored, and `git ls-files artifacts` is empty, so none of them is
- * committed): eight envelope v4 and one envelope v3
- * (`smoke.cases/smoke-1y-30s-seed1.json`). NOT ONE of the nine carries a
- * `warConvergence` key at all, so no observation of any version exists on disk to
- * orphan.
+ * NOTHING IS ORPHANED, MEASURED RATHER THAN ASSERTED. Re-measured on 2026-08-04 at
+ * `43b3195b`: the local receipt corpus under `artifacts/soak/` is gitignored
+ * (`git ls-files artifacts` is EMPTY, so none of it is committed), and
+ * `grep -l warConvergence -r artifacts/` returns NOTHING — no observation of any
+ * version exists on disk to orphan, at v1, v2 or v3.
  */
-export const WAR_CONVERGENCE_OBSERVATION_VERSION = 3;
+export const WAR_CONVERGENCE_OBSERVATION_VERSION = 4;
 
 /**
  * Closed war-ending vocabulary from WR-9. The two punitive-sack paths stay
@@ -293,6 +298,10 @@ export function createEmptyWarConvergenceObservation() {
       ruleState: 'unknown',
       verdict: 'UNOBSERVED',
     })),
+    // WR-9c's force address. The forces leaf owns its own vocabulary, builder and
+    // totality wall, so the address wall and the envelope wall still sit in one
+    // module — that module is just the one that grades it.
+    forceEvidence: createEmptyWarForceEvidence(),
   };
 }
 
@@ -410,6 +419,10 @@ export function validateWarConvergenceObservation(raw) {
     }
   }
 
+  // The force address is policed by the module that grades it, and its errors
+  // arrive already carrying their receipt path so this wall stays one list.
+  errors.push(...validateWarForceEvidence(observation.forceEvidence));
+
   return { ok: errors.length === 0, errors, observation };
 }
 
@@ -423,18 +436,26 @@ const sumCounts = (counts) => Object.values(counts)
 /**
  * Grade WR-9 instrumentation across the release corpus: the address wall, the
  * non-vacuity wall, the flag-coverage wall, and — since the WR-9 build wave —
- * the duration and endings ENVELOPES. The six force-specific cells WILL live in
- * warConvergenceForces.js and be composed beside these by the behavioral oracle,
- * so neither module has to know the other exists — but that module is OWED at
- * WR-9c and IS NOT BUILT. Nothing in the tree carries the name today except this
- * sentence, which until WR-9r asserted the file's existence in the present
- * tense.
+ * the duration and endings ENVELOPES — and, since WR-9c, the six force cells,
+ * which live in warConvergenceForces.js and are composed into the array returned
+ * below. THE PRESENT TENSE IS NOW EARNED: WR-9r corrected this sentence to
+ * future-tense because the file did not exist and its own name appeared nowhere
+ * else in the tree; WR-9c built it, so the claim is restored to the present and
+ * the occurrence-counting clause is deleted rather than re-counted — a count of
+ * mentions goes stale the moment anything imports the module.
  *
  * ⛔ THE ENVELOPES ARE UNRATIFIED and both will honestly FAIL at HEAD: the soak
  * runs `full_simulation`, in which every declared WR flag is false, so a rerun
  * today produces an all-zero mix and an all-zero duration histogram. That
  * failure is CORRECT EVIDENCE of the sequencing state, not a defect to engineer
  * around, and no check here may be weakened to make it reachable.
+ *
+ * ⚠️⚠️ FORCE 3 IS UNOBSERVED AT HEAD AND THE WHOLE CERTIFICATE FALLS WITH IT.
+ * `war_convergence.force_3_ruler_change_rises_with_duration` has no substrate to
+ * read and cannot be filled by any corpus, so the `war_convergence_instrumented`
+ * property is unearnable until the engine grows one. That is the acceptance
+ * harness reporting an unmet obligation of amendment L, not a defect of this
+ * module; the forces leaf's header states the measurement.
  *
  * @param {unknown[]} rawReceipts
  * @param {number} expectedEnvelopeSchemaVersion
@@ -444,7 +465,11 @@ const sumCounts = (counts) => Object.values(counts)
  *   passed: boolean,
  *   observed: unknown,
  *   threshold: unknown,
- * }>}
+ *   state?: string,
+ *   unobservedReason?: string,
+ * }>} the four envelope cells, the two wall cells, then the six force cells. The
+ *   last two fields are carried only by the force cells, whose third verdict state
+ *   (UNOBSERVED) a boolean cannot express.
  */
 export function evaluateWarConvergenceInstrumentation(
   rawReceipts,
@@ -473,10 +498,13 @@ export function evaluateWarConvergenceInstrumentation(
     rule,
     { on: 0, alive: 0, silent: 0, unobserved: 0 },
   ]));
+  /** @type {unknown[]} */
+  const forceEvidences = [];
 
   if (shapePassed) {
     for (const { validation } of parsed) {
       const observation = /** @type {UnknownRecord} */ (validation.observation);
+      forceEvidences.push(observation.forceEvidence);
       for (const key of WAR_ENDING_KEYS) {
         endingTotals[key] += Number(asRecord(observation.endingsMix)[key]);
       }
@@ -570,6 +598,10 @@ export function evaluateWarConvergenceInstrumentation(
         requiredFlagRows: WAR_RULINGS_FLAG_KEYS,
       },
     },
+    // ⚠ A GREEN HERE DOES NOT MEAN THE INSTRUMENT RAN (WR-9c, ruling N2). This cell
+    // says only that nothing which WAS counted came back unreadable; a corpus that
+    // counted no wars at all satisfies it vacuously, and `war_convergence.non_vacuous`
+    // is the wall that refuses that corpus. Read the two together or read neither.
     {
       id: 'war_convergence.duration_measured',
       label: 'every closed war handed the histogram a duration it could actually read',
@@ -653,5 +685,15 @@ export function evaluateWarConvergenceInstrumentation(
         maxUnobservedCasesPerFlag: 0,
       },
     },
+    // The six force cells, composed INSIDE this array so the behavioral oracle
+    // needs no second call and neither module has to know the other exists. Force 6
+    // is handed the endings totals THIS function already computed rather than
+    // recomputing them, so the two readings can never disagree.
+    ...evaluateWarConvergenceForces({
+      shapePassed,
+      forceEvidences,
+      endingTotals,
+      endingsObserved,
+    }),
   ];
 }

@@ -26,6 +26,15 @@ import {
   WAR_DURATION_LENGTH_BANDS,
   warDurationBandFor,
 } from '../../src/domain/certification/warConvergenceContract.js';
+import { WAR_CONVERGENCE_FORCE_IDS } from '../../src/domain/certification/warConvergenceForces.js';
+
+/**
+ * WR-9c: the one force with NO substrate anywhere in the tree. It is UNOBSERVED on
+ * every corpus, so it is the certificate's permanent, disclosed failure until the
+ * engine can pair a seat transition with a war duration. Named from the exported id
+ * rather than copied, so a rename moves this with it.
+ */
+const STRUCTURALLY_UNOBSERVED = [WAR_CONVERGENCE_FORCE_IDS[2]];
 
 const SOURCE_COMMIT = 'a'.repeat(40);
 const CRITERIA = {
@@ -130,7 +139,23 @@ function behavioralReceipt(years, settlements, seed, { controls = false } = {}) 
     warConvergence: {
       schemaVersion: WAR_CONVERGENCE_OBSERVATION_VERSION,
       kind: 'war_convergence_observation',
-      endingsMix: Object.fromEntries(WAR_ENDING_KEYS.map((key) => [key, 1])),
+      // A SHAPED mix rather than a flat one-each row (WR-9c). The flat mix made
+      // every one of the eight endings equally common, which puts HALF the corpus
+      // on a terminal road and cannot satisfy force 6's "rare but present" — a
+      // fixture nobody could ever pass is not a passing fixture. These counts keep
+      // every earlier assertion true (eight distinct keys, no dominant road, both
+      // sack roads live at a 1:1 ratio) and put the terminal share under its
+      // ceiling where a plausible world would put it.
+      endingsMix: {
+        terms: 8,
+        exhaustion: 4,
+        ruler_change: 3,
+        fragmentation: 3,
+        annihilation: 1,
+        conquest: 1,
+        punitive_sack_initiation: 1,
+        punitive_sack_vengeance: 1,
+      },
       // WR-9's duration envelope: a TAIL, no infinity, and nothing unread. Every
       // measured band is exercised (a flat one-each histogram would leave
       // `generational` unproven), the short share clears its floor at 8/12, the
@@ -149,6 +174,22 @@ function behavioralReceipt(years, settlements, seed, { controls = false } = {}) 
         ruleState: 'on',
         verdict: 'ALIVE',
       })),
+      // WR-9c's force address, filled so the five FILLABLE force cells can be seen
+      // passing. Force 3 has no address here because it has none anywhere: nothing
+      // in the engine pairs a seat transition with a war duration, so no fixture
+      // can make that cell pass and this one does not pretend to.
+      forceEvidence: {
+        // Means 0.20 / 0.40 / 0.70 — pressure rising as the war lengthens, which is
+        // the whole of force 1's claim.
+        homeFrontByDurationBand: {
+          opening: { samples: 4, scoreTotal: 0.8 },
+          sustained: { samples: 3, scoreTotal: 1.2 },
+          protracted: { samples: 2, scoreTotal: 1.4 },
+        },
+        capabilityReadings: { readings: 20, atCollapse: 3 },
+        compromiseWideningSequences: [[0.06, 0.13, 0.21], [0.06, 0.06, 0.18]],
+        coalitionFragmentation: { fragmentations: 2, pairwisePeaces: 5 },
+      },
     },
   };
 }
@@ -220,14 +261,36 @@ describe('behavioral certification contract', () => {
     });
   });
 
-  it('passes only when every automated group and the human Chronicle sample pass', () => {
+  /**
+   * ⚠️⚠️ A DELIBERATE, DISCLOSED VERDICT SHIFT (WR-9c). Before the six force cells
+   * landed, this fixture earned the whole certificate. It cannot any more, and the
+   * reason is the finding rather than a regression: amendment L obliges SIX forces
+   * to be audited, and force 3 ("ruler-change frequency rising with war duration")
+   * has no substrate at all — a seat-transition row names no war and carries no war
+   * age, so no corpus can fill it. Its cell answers UNOBSERVED, UNOBSERVED is
+   * non-passing, and the acceptance harness therefore reports an unmet obligation
+   * instead of certifying around its own blind spot.
+   *
+   * THE PIN KEEPS ITS TEETH by asserting the failure set EXACTLY: every other
+   * automated group, including the five fillable force cells, must still pass, so
+   * any new failure lands here as loudly as the old `toEqual([])` did.
+   */
+  it('reports exactly the one force that has no substrate, and passes everything else', () => {
     const result = evaluateBehavioralCertification(passingInput());
     expect(result.schemaVersion).toBe(BEHAVIORAL_CONTRACT_VERSION);
     expect(result.observationsComplete).toBe(true);
-    expect(result.automatedPassed).toBe(true);
     expect(result.humanChronicleReview.passed).toBe(true);
-    expect(result.passed).toBe(true);
-    expect(result.failures).toEqual([]);
+    expect(result.failures).toEqual(STRUCTURALLY_UNOBSERVED);
+    expect(result.automatedPassed).toBe(false);
+    expect(result.passed).toBe(false);
+    // The cell says UNOBSERVED with its reason, never a bare FAIL: "the world did
+    // not do this" and "nothing could have measured this" are opposite repairs.
+    const force3 = result.checks.find((check) => check.id === STRUCTURALLY_UNOBSERVED[0]);
+    expect(force3).toMatchObject({
+      passed: false,
+      state: 'UNOBSERVED',
+      unobservedReason: 'no_substrate_in_tree',
+    });
     expect(result.propertiesEarned).toEqual(expect.arrayContaining([
       'mover_activity',
       'event_tempo_diversity',
@@ -238,12 +301,20 @@ describe('behavioral certification contract', () => {
       'attention_fairness',
       'dark_controls',
       'interaction_bounded',
-      'war_convergence_instrumented',
       'stressor_rhythm',
       'no_stasis',
       'chronicle_human_reviewed',
     ]));
-    expect(result.claimBoundary).toMatch(/does not write or publish/);
+    expectAbsentWithAnchor(
+      result.propertiesEarned,
+      'war_convergence_instrumented',
+      'event_tempo_diversity',
+      'one unauditable force withholds the WR-9 property from an otherwise clean matrix',
+    );
+    // THE BOUNDARY SENTENCE MOVES WITH THE VERDICT, and that is the honest half of
+    // the shift: a release-profile matrix with an unauditable force is not eligible,
+    // and the claim boundary says so instead of offering a manifest entry.
+    expect(result.claimBoundary).toMatch(/Not eligible for product certification/);
   });
 
   it('fails closed instead of reinterpreting a pre-v4 observation receipt', () => {
@@ -312,7 +383,12 @@ describe('behavioral certification contract', () => {
         unobserved: 0,
       });
     }
-    expect(result.propertiesEarned).toContain('war_convergence_instrumented');
+    // Distributed coverage adds NO failure of its own: the only cell still down is
+    // the force with no substrate. (Before WR-9c this line read
+    // `propertiesEarned toContain war_convergence_instrumented`; that property is
+    // now withheld by force 3 for every corpus, so the claim is made at the
+    // failure-set level where it still has teeth.)
+    expect(result.failures).toEqual(STRUCTURALLY_UNOBSERVED);
   });
 
   it('rejects one unobserved release case even when the same flag is alive elsewhere', () => {
@@ -573,10 +649,11 @@ describe('WR-9 convergence envelopes', () => {
     ]);
     expect(Object.keys(createEmptyWarConvergenceObservation().warDurationHistogram).sort())
       .toEqual([...WAR_DURATION_BANDS].sort());
-    // The v2 -> v3 bump is the version arm of the `unmeasured` repair: a v2
-    // observation has no address for a lost duration, and this module refuses to
-    // grade a shape it cannot read rather than reinterpreting it.
-    expect(WAR_CONVERGENCE_OBSERVATION_VERSION).toBe(3);
+    // Each bump is the version arm of the repair that motivated it: a v2
+    // observation has no address for a lost duration, a v3 one has no address for
+    // any force reading, and this module refuses to grade a shape it cannot read
+    // rather than reinterpreting it. v3 -> v4 is WR-9c's `forceEvidence`.
+    expect(WAR_CONVERGENCE_OBSERVATION_VERSION).toBe(4);
   });
 
   it('P4 — the totality validator rejects a histogram with no `unmeasured` address', () => {
@@ -639,6 +716,15 @@ describe('WR-9 convergence envelopes', () => {
     expect(warDurationBandFor(Number.POSITIVE_INFINITY)).toBe('unresolved');
     expect(warDurationBandFor(Infinity)).not.toBe('unmeasured');
     expect(warDurationBandFor(Infinity)).not.toBe('short');
+    // N4 (WR-9c) — THE STRING ARM, WHICH IS THE ONE A RECEIPT ACTUALLY TRAVELS ON.
+    // `JSON.stringify(Infinity)` is `null`, so a collector that wants to say "this
+    // war never ended" through a JSON receipt has to write the WORD. The numeric
+    // arm was pinned at WR-9r and the string arm was not, leaving the only spelling
+    // that survives serialization unguarded.
+    expect(warDurationBandFor('Infinity')).toBe('unresolved');
+    // ...and its mirror stays a lost reading rather than an endless war: a negative
+    // duration is nonsense, not a horizon fact.
+    expect(warDurationBandFor('-Infinity')).toBe('unmeasured');
 
     // One Infinity war, banded by the real router, reds the no-infinity wall.
     const band = warDurationBandFor(Number.POSITIVE_INFINITY);
@@ -677,13 +763,16 @@ describe('WR-9 convergence envelopes', () => {
     // cases), so twenty lost durations per case is the verifier's forty wars.
     const LOST_PER_RELEASE_CASE = 20;
 
-    // THE CONTROL: the same forty wars with durations that CAN be read. Every
-    // WR-9 cell passes, so the red below is the lost measurements and nothing
-    // else about the fixture.
+    // THE CONTROL: the same forty wars with durations that CAN be read. Every WR-9
+    // cell passes EXCEPT the one force that has no substrate on any corpus, so the
+    // red below is the lost measurements and nothing else about the fixture. The
+    // exception is asserted as an exact set rather than skipped, so a second cell
+    // going dark cannot hide inside it.
     const control = warConvergenceVerdicts({
       short: 16, long: 4, generational: 0, unresolved: 0, unmeasured: 0,
     });
-    expect(Object.values(control).every(Boolean)).toBe(true);
+    expect(Object.entries(control).filter(([, passed]) => !passed).map(([id]) => id))
+      .toEqual(STRUCTURALLY_UNOBSERVED);
 
     // THE REPRO: the same forty wars, durations lost.
     const repro = warConvergenceVerdicts({
@@ -831,13 +920,34 @@ describe('WR-9 convergence envelopes', () => {
       .toMatch(/warDurationHistogram\.long must be a non-negative integer/);
   });
 
+  it('polices the WR-9c force address through the SAME wall as the histograms', () => {
+    // THE WIRING IS THE CLAIM HERE, not the force validator (which has its own
+    // suite): a malformed force address must travel the observation validator and
+    // land in `war_convergence.receipt_shape`, so an unpoliced address cannot ride
+    // in behind a well-formed histogram.
+    const malformed = createEmptyWarConvergenceObservation();
+    malformed.forceEvidence.capabilityReadings = { readings: 2, atCollapse: 9 };
+    const validation = validateWarConvergenceObservation(malformed);
+    expect(validation.ok).toBe(false);
+    expect(validation.errors.join(' ')).toMatch(/forceEvidence\.capabilityReadings\.atCollapse cannot exceed readings/);
+
+    const input = passingInput();
+    for (const receipt of input.receipts) {
+      delete receipt.warConvergence.forceEvidence;
+    }
+    const result = evaluateBehavioralCertification(input);
+    expect(result.failures).toContain('war_convergence.receipt_shape');
+    const shape = result.checks.find((check) => check.id === 'war_convergence.receipt_shape');
+    expect(JSON.stringify(shape.observed)).toMatch(/forceEvidence must be an object/);
+  });
+
   it('rejects a stale v1 observation rather than reinterpreting it', () => {
     const stale = createEmptyWarConvergenceObservation();
     stale.schemaVersion = 1;
     delete stale.warDurationHistogram;
     const validation = validateWarConvergenceObservation(stale);
     expect(validation.ok).toBe(false);
-    expect(validation.errors.join(' ')).toMatch(/schemaVersion must be 3/);
+    expect(validation.errors.join(' ')).toMatch(/schemaVersion must be 4/);
     expect(validation.errors.join(' ')).toMatch(/warDurationHistogram must be an object/);
   });
 });
