@@ -28,14 +28,23 @@
 /**
  * The additive WR-9 observation carried by a v5 soak receipt.
  *
- * v2 (the WR-9 build wave) adds `warDurationHistogram`. The bump is EXACT rather
- * than tolerant on purpose: a v1 observation has no duration address at all, and
- * silently accepting one would let the duration envelope grade a corpus that
- * never measured a duration. No on-disk receipt carries a v1 observation — all
- * eight committed case receipts are envelope v4 with no `warConvergence` key
- * whatsoever — so the bump orphans nothing.
+ * v2 (the WR-9 build wave) adds `warDurationHistogram`. v3 (WR-9r) adds the
+ * `unmeasured` duration cell. Both bumps are EXACT rather than tolerant on the
+ * same principle: a v1 observation has no duration address at all, and a v2 one
+ * has no address for a LOST duration, so silently accepting either would let the
+ * duration envelope grade a corpus it could not actually read. The v2 → v3 bump
+ * is the version arm of the same repair as the `unmeasured` cell itself, and
+ * refusing to bump would have contradicted this paragraph's own law.
+ *
+ * NOTHING IS ORPHANED, MEASURED RATHER THAN ASSERTED. On 2026-08-04 the local
+ * receipt corpus was NINE gitignored files under `artifacts/soak/` (`/artifacts/`
+ * is ignored, and `git ls-files artifacts` is empty, so none of them is
+ * committed): eight envelope v4 and one envelope v3
+ * (`smoke.cases/smoke-1y-30s-seed1.json`). NOT ONE of the nine carries a
+ * `warConvergence` key at all, so no observation of any version exists on disk to
+ * orphan.
  */
-export const WAR_CONVERGENCE_OBSERVATION_VERSION = 2;
+export const WAR_CONVERGENCE_OBSERVATION_VERSION = 3;
 
 /**
  * Closed war-ending vocabulary from WR-9. The two punitive-sack paths stay
@@ -67,11 +76,30 @@ export const WAR_TERMINATION_DECIDING_TERM_KEYS = Object.freeze([
  *
  * The three lengths are the amendment's own three words — "most wars short, some
  * long, a few generational" — kept verbatim so a reader can trace each band back
- * to the sentence that authorized it. `unresolved` is the FOURTH cell and it is
- * not a length: it counts wars still alive when the horizon ended, which is the
- * no-infinity criterion ("a single year-300 war reds exactly as the trillion-
- * person settlement did"). Keeping it inside the histogram rather than beside it
- * means the totality validator polices it for free.
+ * to the sentence that authorized it. They are exported SEPARATELY as
+ * `WAR_DURATION_LENGTH_BANDS` because the envelope's shares are denominated in
+ * measured lengths, and deriving that denominator from an independent list
+ * rather than by filtering the full vocabulary keeps the share arithmetic from
+ * being a statement about its own map.
+ *
+ * THE OTHER TWO CELLS ARE DIAGNOSES, NOT LENGTHS, AND THEY ARE DIFFERENT
+ * DIAGNOSES (CR-WR9-A, vetoable — UNMEASURABLE IS ITS OWN DIAGNOSIS):
+ *
+ *   `unresolved` counts wars still alive when the horizon ended — the
+ *   no-infinity criterion ("a single year-300 war reds exactly as the trillion-
+ *   person settlement did"). An INFINITE duration belongs here and not in
+ *   `unmeasured`, because a war with no end is not a lost reading: it IS the
+ *   alive-at-horizon war, stated in the only number that can state it.
+ *
+ *   `unmeasured` counts closes whose duration could not be read at all —
+ *   absent, null, NaN, non-numeric or negative. WR-9r added it because without
+ *   it the bander defaulted every one of those to `short`, `short` counted as
+ *   RESOLVED, and a corpus of forty wars whose durations were entirely lost
+ *   passed all five WR-9 checks with a short share of 1.0. A histogram that
+ *   cannot say "I could not read this" will always say "short" instead.
+ *
+ * Keeping both inside the histogram rather than beside it means the totality
+ * validator polices them for free.
  *
  * DENOMINATED IN 52-WEEK YEARS. WR-0c item (4) landed on 2026-08-02: current
  * treaties persist `treatyTicksPerYear: 52`, identity-pinned to
@@ -81,11 +109,23 @@ export const WAR_TERMINATION_DECIDING_TERM_KEYS = Object.freeze([
  * one, never the legacy cadence.
  * @type {ReadonlyArray<string>}
  */
-export const WAR_DURATION_BANDS = Object.freeze([
+export const WAR_DURATION_LENGTH_BANDS = Object.freeze([
   'short',
   'long',
   'generational',
+]);
+
+/**
+ * The full duration vocabulary: the three measured lengths, then the two
+ * diagnoses. `unmeasured` is appended LAST so the addition is purely additive —
+ * every pre-existing index keeps its meaning — and so a reader meets the three
+ * words of the amendment before either failure cell.
+ * @type {ReadonlyArray<string>}
+ */
+export const WAR_DURATION_BANDS = Object.freeze([
+  ...WAR_DURATION_LENGTH_BANDS,
   'unresolved',
+  'unmeasured',
 ]);
 
 /**
@@ -112,6 +152,21 @@ export const WAR_CONVERGENCE_TUNING = Object.freeze({
    */
   UNRESOLVED_AT_HORIZON_MAX: 0,
   /**
+   * NO LOST MEASUREMENTS. Closes whose duration could not be read at all, as an
+   * absolute count. STRICT BY DESIGN and — unlike the number above it — this one
+   * IS a tuning choice rather than an amendment criterion: it is zero because an
+   * instrument that has never been run has no evidence entitling it to a
+   * tolerance, not because a real corpus was measured and found perfect.
+   *
+   * ⛔ REVISITABLE WITH EVIDENCE AT THE TUNING WAVE. When the collector lands and
+   * a full-horizon soak reports a real unmeasured rate, this threshold is the
+   * correct place to argue about it — with the measurement in hand, owner-signed
+   * like every other band. Until then a single lost duration must red, because
+   * the alternative is a histogram that quietly reports its own blindness as a
+   * short war.
+   */
+  UNMEASURED_DURATIONS_MAX: 0,
+  /**
    * "One path carrying nearly all endings means the others are decoration"
    * (L's own criterion): no single ending key may exceed this share.
    */
@@ -136,24 +191,48 @@ export const WAR_CONVERGENCE_TUNING = Object.freeze({
 });
 
 /**
- * The duration band for a war of `years` 52-week years. Total: a non-finite or
- * negative input lands in `short` rather than throwing, because a census that
- * lost a tick must still produce an addressable histogram — and the
- * `war_convergence.non_vacuous` wall, not this function, is what refuses a
- * corpus that measured nothing.
+ * The duration band for a war of `years` 52-week years. TOTAL over every input:
+ * this is the single writer of the duration vocabulary, and every return names a
+ * cell in `WAR_DURATION_BANDS`.
  *
- * `unresolved` is never returned here: it is a fact about the HORIZON, not about
- * a length, and only the census knows whether a war was still alive when the run
- * ended.
+ * ⚠️⚠️ THE ROUTING IS THE REPAIR (WR-9r). This function used to answer `short`
+ * for undefined, null, NaN, '', a non-numeric string, a negative number AND
+ * Infinity, and the aggregation counted `short` as RESOLVED — so a corpus of
+ * forty wars whose durations were entirely lost passed the duration envelope
+ * with a short share of 1.0, and an INFINITE duration inverted the very
+ * no-infinity criterion it should have tripped. The docstring that stood here
+ * claimed the `non_vacuous` wall would refuse such a corpus; that claim was
+ * executed and found FALSE, which is why the wall named below now exists.
+ *
+ *   - unreadable (undefined, null, NaN, '', a non-numeric string, negative,
+ *     -Infinity, or any non-number) → `unmeasured`, refused by
+ *     `war_convergence.duration_measured`.
+ *   - `Infinity` → `unresolved`, refused by the no-infinity criterion inside
+ *     `war_convergence.duration_envelope`. An endless war is a HORIZON fact
+ *     stated as a number, not a lost reading.
+ *   - anything finite and non-negative → its length band.
+ *
+ * ⚠️ THE HORIZON-RELATIVE ARM IS OWED, NOT BUILT (CR-WR9-C). The ruling also
+ * routes "any duration exceeding the case horizon" to `unresolved`. That needs
+ * each case's own horizon, which this pure bander is not given, and it lands with
+ * the collector at WR-9d. Today only `Infinity` reaches `unresolved` from here;
+ * a census that knows a war outlived its horizon must hand this function
+ * `Infinity` to say so.
  *
  * @param {unknown} years
- * @returns {string} one of WAR_DURATION_BANDS, excluding 'unresolved'
+ * @returns {string} one of WAR_DURATION_BANDS
  */
 export function warDurationBandFor(years) {
-  const value = Number(years);
-  if (!Number.isFinite(value) || value < WAR_CONVERGENCE_TUNING.DURATION_SHORT_MAX_YEARS) {
-    return 'short';
-  }
+  // `Number(null)`, `Number('')` and `Number(false)` are all 0 — a coercion that
+  // would hand the shortest possible war to the least possible evidence. Only a
+  // real number, or a string with something in it, is allowed to become one.
+  const value = typeof years === 'number'
+    ? years
+    : (typeof years === 'string' && years.trim() !== '' ? Number(years) : Number.NaN);
+  if (Number.isNaN(value)) return 'unmeasured';
+  if (value === Number.POSITIVE_INFINITY) return 'unresolved';
+  if (value < 0) return 'unmeasured';
+  if (value < WAR_CONVERGENCE_TUNING.DURATION_SHORT_MAX_YEARS) return 'short';
   if (value >= WAR_CONVERGENCE_TUNING.DURATION_GENERATIONAL_MIN_YEARS) return 'generational';
   return 'long';
 }
@@ -344,9 +423,12 @@ const sumCounts = (counts) => Object.values(counts)
 /**
  * Grade WR-9 instrumentation across the release corpus: the address wall, the
  * non-vacuity wall, the flag-coverage wall, and — since the WR-9 build wave —
- * the duration and endings ENVELOPES. The six force-specific cells live in
- * warConvergenceForces.js and are composed beside these by the behavioral
- * oracle, so neither module has to know the other exists.
+ * the duration and endings ENVELOPES. The six force-specific cells WILL live in
+ * warConvergenceForces.js and be composed beside these by the behavioral oracle,
+ * so neither module has to know the other exists — but that module is OWED at
+ * WR-9c and IS NOT BUILT. Nothing in the tree carries the name today except this
+ * sentence, which until WR-9r asserted the file's existence in the present
+ * tense.
  *
  * ⛔ THE ENVELOPES ARE UNRATIFIED and both will honestly FAIL at HEAD: the soak
  * runs `full_simulation`, in which every declared WR flag is false, so a rerun
@@ -422,13 +504,16 @@ export function evaluateWarConvergenceInstrumentation(
 
   const endingsObserved = sumCounts(endingTotals);
   const decidingTermsObserved = sumCounts(decidingTermTotals);
-  // The duration envelope grades RESOLVED wars against the tail shape, and
-  // counts unresolved ones separately — a war still burning at the horizon is
-  // not a long war, it is the no-infinity failure, and averaging it into the
-  // tail would hide exactly the thing the criterion names.
-  const durationResolved = WAR_DURATION_BANDS
-    .filter((band) => band !== 'unresolved')
+  // The duration envelope grades MEASURED wars against the tail shape, and keeps
+  // both failure cells out of the denominator. A war still burning at the
+  // horizon is not a long war, it is the no-infinity failure; a war whose
+  // duration was never read is not a short war, it is a blind instrument. Either
+  // one averaged into the tail would hide exactly the thing it is evidence of.
+  const durationResolved = WAR_DURATION_LENGTH_BANDS
     .reduce((total, band) => total + durationTotals[band], 0);
+  const durationUnmeasured = durationTotals.unmeasured;
+  const durationMeasuredPassed = shapePassed
+    && durationUnmeasured <= WAR_CONVERGENCE_TUNING.UNMEASURED_DURATIONS_MAX;
   const shortShare = durationResolved > 0
     ? durationTotals.short / durationResolved
     : 0;
@@ -483,6 +568,18 @@ export function evaluateWarConvergenceInstrumentation(
         requiredDurationBands: WAR_DURATION_BANDS,
         requiredDecidingTerms: WAR_TERMINATION_DECIDING_TERM_KEYS,
         requiredFlagRows: WAR_RULINGS_FLAG_KEYS,
+      },
+    },
+    {
+      id: 'war_convergence.duration_measured',
+      label: 'every closed war handed the histogram a duration it could actually read',
+      passed: durationMeasuredPassed,
+      observed: { durationUnmeasured, durationTotals },
+      threshold: {
+        maxUnmeasuredDurations: WAR_CONVERGENCE_TUNING.UNMEASURED_DURATIONS_MAX,
+        strictByDesign: true,
+        revisitableWithEvidenceAtTuningWave: true,
+        ratified: false,
       },
     },
     {

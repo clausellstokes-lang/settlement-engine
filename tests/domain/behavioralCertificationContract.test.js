@@ -23,6 +23,7 @@ import {
 import {
   WAR_CONVERGENCE_TUNING,
   WAR_DURATION_BANDS,
+  WAR_DURATION_LENGTH_BANDS,
   warDurationBandFor,
 } from '../../src/domain/certification/warConvergenceContract.js';
 
@@ -130,12 +131,16 @@ function behavioralReceipt(years, settlements, seed, { controls = false } = {}) 
       schemaVersion: WAR_CONVERGENCE_OBSERVATION_VERSION,
       kind: 'war_convergence_observation',
       endingsMix: Object.fromEntries(WAR_ENDING_KEYS.map((key) => [key, 1])),
-      // WR-9's duration envelope: a TAIL and no infinity. Every resolved band is
-      // exercised (a flat one-each histogram would leave `generational` unproven),
-      // the short share clears its floor at 8/12, the generational share sits just
-      // under its 0.1 ceiling at 1/12, and `unresolved` is zero because a war still
-      // burning at the horizon is the no-infinity failure, not a long war.
-      warDurationHistogram: { short: 8, long: 3, generational: 1, unresolved: 0 },
+      // WR-9's duration envelope: a TAIL, no infinity, and nothing unread. Every
+      // measured band is exercised (a flat one-each histogram would leave
+      // `generational` unproven), the short share clears its floor at 8/12, the
+      // generational share sits just under its 0.1 ceiling at 1/12, `unresolved` is
+      // zero because a war still burning at the horizon is the no-infinity failure
+      // rather than a long war, and `unmeasured` is zero because a duration nobody
+      // could read is not a short war either (WR-9r).
+      warDurationHistogram: {
+        short: 8, long: 3, generational: 1, unresolved: 0, unmeasured: 0,
+      },
       terminationDecidingTermHistogram: Object.fromEntries(
         WAR_TERMINATION_DECIDING_TERM_KEYS.map((key) => [key, 1]),
       ),
@@ -518,14 +523,32 @@ describe('human Chronicle review evidence', () => {
  * and no neighbouring check — to red.
  */
 describe('WR-9 convergence envelopes', () => {
-  /** Set the same duration histogram on every receipt and return the graded check. */
-  function gradeDurations(histogram) {
+  /**
+   * Set the same duration histogram on every receipt and return the WHOLE
+   * evaluation, so a case can assert which checks red and — just as importantly
+   * — which ones stayed green.
+   */
+  function gradeCorpusWithDurations(histogram) {
     const input = passingInput();
     for (const receipt of input.receipts) {
       receipt.warConvergence.warDurationHistogram = histogram;
     }
-    const result = evaluateBehavioralCertification(input);
-    return result.checks.find((check) => check.id === 'war_convergence.duration_envelope');
+    return evaluateBehavioralCertification(input);
+  }
+
+  /** The WR-9 cells only, id -> passed, for a corpus carrying `histogram`. */
+  function warConvergenceVerdicts(histogram) {
+    return Object.fromEntries(
+      gradeCorpusWithDurations(histogram).checks
+        .filter((check) => check.id.startsWith('war_convergence.'))
+        .map((check) => [check.id, check.passed]),
+    );
+  }
+
+  /** Set the same duration histogram on every receipt and return the graded check. */
+  function gradeDurations(histogram) {
+    return gradeCorpusWithDurations(histogram).checks
+      .find((check) => check.id === 'war_convergence.duration_envelope');
   }
 
   /** Set the same endings mix on every receipt and return the graded check. */
@@ -541,46 +564,174 @@ describe('WR-9 convergence envelopes', () => {
     return result.checks.find((check) => check.id === 'war_convergence.endings_envelope');
   }
 
-  it('keeps the duration vocabulary closed, and unresolved is a cell not a length', () => {
-    expect([...WAR_DURATION_BANDS]).toEqual(['short', 'long', 'generational', 'unresolved']);
+  it('keeps the duration vocabulary closed — three lengths, then two distinct diagnoses', () => {
+    // P4 (ORDER). `unmeasured` is appended LAST so the WR-9r addition is purely
+    // additive and every pre-existing cell keeps its position.
+    expect([...WAR_DURATION_LENGTH_BANDS]).toEqual(['short', 'long', 'generational']);
+    expect([...WAR_DURATION_BANDS]).toEqual([
+      'short', 'long', 'generational', 'unresolved', 'unmeasured',
+    ]);
     expect(Object.keys(createEmptyWarConvergenceObservation().warDurationHistogram).sort())
       .toEqual([...WAR_DURATION_BANDS].sort());
-    expect(WAR_CONVERGENCE_OBSERVATION_VERSION).toBe(2);
+    // The v2 -> v3 bump is the version arm of the `unmeasured` repair: a v2
+    // observation has no address for a lost duration, and this module refuses to
+    // grade a shape it cannot read rather than reinterpreting it.
+    expect(WAR_CONVERGENCE_OBSERVATION_VERSION).toBe(3);
+  });
+
+  it('P4 — the totality validator rejects a histogram with no `unmeasured` address', () => {
+    const missing = createEmptyWarConvergenceObservation();
+    delete missing.warDurationHistogram.unmeasured;
+    const result = validateWarConvergenceObservation(missing);
+    expect(result.ok).toBe(false);
+    expect(result.errors.join(' ')).toMatch(/warDurationHistogram is missing unmeasured/);
   });
 
   it('bands a duration at each boundary of the declared table', () => {
     const shortMax = WAR_CONVERGENCE_TUNING.DURATION_SHORT_MAX_YEARS;
     const genMin = WAR_CONVERGENCE_TUNING.DURATION_GENERATIONAL_MIN_YEARS;
+    // P3 (MEASURED HALF), driven off the REAL boundary constants rather than
+    // copies of them, so a retuned table moves the fixture with it.
     expect(warDurationBandFor(0)).toBe('short');
     expect(warDurationBandFor(shortMax - 0.01)).toBe('short');
     expect(warDurationBandFor(shortMax)).toBe('long');
     expect(warDurationBandFor(genMin - 0.01)).toBe('long');
     expect(warDurationBandFor(genMin)).toBe('generational');
-    // Total on garbage rather than throwing: a census that lost a tick must
-    // still produce an addressable histogram; non-vacuity is a separate wall.
-    expect(warDurationBandFor(Number.NaN)).toBe('short');
-    expect(warDurationBandFor(undefined)).toBe('short');
-    // `unresolved` is a horizon fact, never a length — the bander cannot mint it.
-    const banded = [0, 1, 10, 100, 1e6].map((y) => warDurationBandFor(y));
-    expect(banded.includes('unresolved')).toBe(false);
+    expect(warDurationBandFor(genMin * 1_000)).toBe('generational');
+    // Every measured length lands in a LENGTH band and never in a diagnosis.
+    for (const years of [0, shortMax - 0.01, shortMax, genMin - 0.01, genMin, 1e6]) {
+      expect(WAR_DURATION_LENGTH_BANDS).toContain(warDurationBandFor(years));
+    }
+  });
+
+  /**
+   * P3 (UNMEASURABLE HALF) — THE ROUTING TABLE, REWRITTEN BECAUSE EXECUTION
+   * REFUTED THE DESIGN IT USED TO PIN.
+   *
+   * This case previously asserted `warDurationBandFor(Number.NaN) === 'short'`
+   * and `warDurationBandFor(undefined) === 'short'`, on the stated rationale that
+   * the `war_convergence.non_vacuous` wall would refuse a corpus that measured
+   * nothing. That rationale was executed and found FALSE: `short` counted as
+   * RESOLVED, so forty wars with entirely lost durations passed all five WR-9
+   * checks with a short share of 1.0 (see the LOST-CORPUS pin below). The old
+   * expectations were pinning the defect, so they are replaced rather than
+   * extended — CR-WR9-A, vetoable.
+   */
+  it('P3 — every unmeasurable input class lands in `unmeasured`, and Infinity does not', () => {
+    for (const lost of [undefined, null, Number.NaN, '', '   ', 'x', -5, -0.5, Number.NEGATIVE_INFINITY, true, {}, []]) {
+      expect(warDurationBandFor(lost)).toBe('unmeasured');
+    }
+    // ⚠ `Number(null)`, `Number('')` and `Number(false)` are all 0. A router that
+    // coerced first would hand the SHORTEST possible war to the LEAST possible
+    // evidence, which is the exact inversion this case exists to forbid.
+    expect(Number(null)).toBe(0);
+    expect(Number('')).toBe(0);
+    expect(warDurationBandFor(null)).not.toBe('short');
+    expect(warDurationBandFor('')).not.toBe('short');
+    // A numeric STRING is a measurement, not a loss.
+    expect(warDurationBandFor('1')).toBe('short');
+    expect(warDurationBandFor('40')).toBe('generational');
+  });
+
+  it('P2 — Infinity is UNRESOLVED, and one endless war reds the no-infinity wall', () => {
+    // An endless war is a HORIZON fact stated as a number, not a lost reading:
+    // routing it to `unmeasured` would let it escape the criterion it defines.
+    expect(warDurationBandFor(Number.POSITIVE_INFINITY)).toBe('unresolved');
+    expect(warDurationBandFor(Infinity)).not.toBe('unmeasured');
+    expect(warDurationBandFor(Infinity)).not.toBe('short');
+
+    // One Infinity war, banded by the real router, reds the no-infinity wall.
+    const band = warDurationBandFor(Number.POSITIVE_INFINITY);
+    const histogram = {
+      short: 8, long: 3, generational: 1, unresolved: 0, unmeasured: 0,
+    };
+    histogram[band] += 1;
+    const verdicts = warConvergenceVerdicts(histogram);
+    expect(verdicts['war_convergence.duration_envelope']).toBe(false);
+    // SPECIFIC: it is the horizon wall that caught it, not the measured wall.
+    expect(verdicts['war_convergence.duration_measured']).toBe(true);
+    expect(WAR_CONVERGENCE_TUNING.UNRESOLVED_AT_HORIZON_MAX).toBe(0);
+  });
+
+  /**
+   * P1 — THE LOST-CORPUS REPRO, PROMOTED FROM A ONE-OFF PROBE TO A PERMANENT PIN.
+   *
+   * This is the executed repro that rejected WR-9a: forty closed wars whose
+   * durations were entirely lost, a healthy endings mix, and all-ALIVE flag rows.
+   * Before WR-9r every one of those forty banded to `short`, `short` counted as
+   * RESOLVED, and the corpus passed ALL FIVE checks — `duration_envelope`
+   * included — on a short share of 1.0.
+   *
+   * NON-VACUITY IS PROVEN IN THE PIN ITSELF: the control half shows the very same
+   * corpus passing once those forty durations are readable, so the red below can
+   * only be the lost measurements and never some unrelated defect in the fixture.
+   */
+  it('P1 — forty wars with lost durations red the measured wall instead of passing as short', () => {
+    // Band the lost durations through the REAL router rather than asserting a
+    // cell name, so a re-routing regression lands here and not just in P3.
+    const LOST_INPUT_CLASSES = [undefined, null, Number.NaN, '', 'x', -5];
+    const lostBands = LOST_INPUT_CLASSES.map((years) => warDurationBandFor(years));
+    expect(new Set(lostBands)).toEqual(new Set(['unmeasured']));
+
+    // Only the TWO 100-year cases are graded (the 30-year ones are not release
+    // cases), so twenty lost durations per case is the verifier's forty wars.
+    const LOST_PER_RELEASE_CASE = 20;
+
+    // THE CONTROL: the same forty wars with durations that CAN be read. Every
+    // WR-9 cell passes, so the red below is the lost measurements and nothing
+    // else about the fixture.
+    const control = warConvergenceVerdicts({
+      short: 16, long: 4, generational: 0, unresolved: 0, unmeasured: 0,
+    });
+    expect(Object.values(control).every(Boolean)).toBe(true);
+
+    // THE REPRO: the same forty wars, durations lost.
+    const repro = warConvergenceVerdicts({
+      short: 0, long: 0, generational: 0, unresolved: 0, unmeasured: LOST_PER_RELEASE_CASE,
+    });
+    expect(repro['war_convergence.duration_measured']).toBe(false);
+    expect(repro['war_convergence.receipt_shape']).toBe(true);
+    expect(repro['war_convergence.endings_envelope']).toBe(true);
+    expect(repro['war_convergence.flag_coverage']).toBe(true);
+
+    // The lost wars are NOT laundered into the resolved denominator, which is the
+    // arithmetic the old default depended on.
+    const result = gradeCorpusWithDurations({
+      short: 0, long: 0, generational: 0, unresolved: 0, unmeasured: LOST_PER_RELEASE_CASE,
+    });
+    const measured = result.checks.find((c) => c.id === 'war_convergence.duration_measured');
+    const envelope = result.checks.find((c) => c.id === 'war_convergence.duration_envelope');
+    expect(measured.observed.durationUnmeasured).toBe(40);
+    expect(measured.threshold.maxUnmeasuredDurations).toBe(0);
+    expect(envelope.observed.durationResolved).toBe(0);
+    expect(envelope.observed.shortShare).toBe(0);
+    // The whole certificate falls, and the WR-9 property is not earned.
+    expect(result.automatedPassed).toBe(false);
+    expect(result.failures).toContain('war_convergence.duration_measured');
+    expectAbsentWithAnchor(
+      result.propertiesEarned,
+      'war_convergence_instrumented',
+      'event_tempo_diversity',
+      'a corpus that measured no duration cannot earn the WR-9 property',
+    );
   });
 
   it('passes the duration envelope on the tail-shaped fixture', () => {
-    const check = gradeDurations({ short: 8, long: 3, generational: 1, unresolved: 0 });
+    const check = gradeDurations({ short: 8, long: 3, generational: 1, unresolved: 0, unmeasured: 0 });
     expect(check.passed).toBe(true);
     expect(check.observed.durationResolved).toBe(24);
     expect(check.threshold.ratified).toBe(false);
   });
 
   it('MUTANT — a single war alive at the horizon reds the no-infinity criterion', () => {
-    const check = gradeDurations({ short: 8, long: 3, generational: 1, unresolved: 1 });
+    const check = gradeDurations({ short: 8, long: 3, generational: 1, unresolved: 1, unmeasured: 0 });
     expect(check.passed).toBe(false);
     expect(check.observed.unresolvedAtHorizon).toBe(2);
     expect(check.threshold.maxUnresolvedAtHorizon).toBe(0);
   });
 
   it('MUTANT — a body of long wars with no short tail reds the tail floor', () => {
-    const check = gradeDurations({ short: 1, long: 11, generational: 0, unresolved: 0 });
+    const check = gradeDurations({ short: 1, long: 11, generational: 0, unresolved: 0, unmeasured: 0 });
     expect(check.passed).toBe(false);
     expect(check.observed.shortShare).toBeLessThan(
       WAR_CONVERGENCE_TUNING.DURATION_SHORT_MIN_SHARE,
@@ -588,7 +739,7 @@ describe('WR-9 convergence envelopes', () => {
   });
 
   it('MUTANT — generational wars as a body rather than a tail reds the ceiling', () => {
-    const check = gradeDurations({ short: 8, long: 0, generational: 4, unresolved: 0 });
+    const check = gradeDurations({ short: 8, long: 0, generational: 4, unresolved: 0, unmeasured: 0 });
     expect(check.passed).toBe(false);
     expect(check.observed.generationalShare).toBeGreaterThan(
       WAR_CONVERGENCE_TUNING.DURATION_GENERATIONAL_MAX_SHARE,
@@ -596,7 +747,7 @@ describe('WR-9 convergence envelopes', () => {
   });
 
   it('MUTANT — a corpus that measured no duration at all reds instead of passing empty', () => {
-    const check = gradeDurations({ short: 0, long: 0, generational: 0, unresolved: 0 });
+    const check = gradeDurations({ short: 0, long: 0, generational: 0, unresolved: 0, unmeasured: 0 });
     expect(check.passed).toBe(false);
     expect(check.observed.durationResolved).toBe(0);
   });
@@ -686,7 +837,7 @@ describe('WR-9 convergence envelopes', () => {
     delete stale.warDurationHistogram;
     const validation = validateWarConvergenceObservation(stale);
     expect(validation.ok).toBe(false);
-    expect(validation.errors.join(' ')).toMatch(/schemaVersion must be 2/);
+    expect(validation.errors.join(' ')).toMatch(/schemaVersion must be 3/);
     expect(validation.errors.join(' ')).toMatch(/warDurationHistogram must be an object/);
   });
 });
