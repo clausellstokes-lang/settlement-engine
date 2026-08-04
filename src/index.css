@@ -574,3 +574,35 @@ button {
   font-variant-caps: small-caps;
   letter-spacing: 0.06em;
 }
+
+/* ─────────────────────────────────────────────────────────────────────
+   THE WHIPPING'S BLEND FALL-BACK (ribbon V4D, R-2).
+
+   The nav ribbon's two silk wraps (src/components/nav/ShaftWrap.jsx) are painted
+   as WRAP_BARREL — a NEUTRAL luminance ramp — MULTIPLIED over the opaque oxblood
+   turn gradient. That single `background-blend-mode` declaration is the whole
+   reason the bands read as thread: without it the topmost layer is the neutral
+   modulator itself, and both wraps render as a flat #D7D7D7 light-grey stripe at
+   ~9:1 against the cedar — the loudest object on the bar, and a mark that says
+   nothing.
+
+   So an engine without the property gets the PRE-V4C oxblood ramp instead, which
+   is the same claim one step flatter: the thread's own shading, lit by the shaft's
+   own light. The tones live in theme.js and reach here through a custom property
+   the component sets, because a second spelling of an authored colour in a
+   stylesheet is how two sources of one tone start drifting.
+
+   ⚠️ THIS IS THE ONE THING AN INLINE STYLE CANNOT SAY. Everything else about these
+   elements is inline; the sheet holds only the conditional. An engine that never
+   loads this file gets the blended paint, which is the correct one — the fallback
+   is the degraded arm, never the default.
+
+   Pinned by tests/components/navFletching.test.jsx, which asserts the rendered
+   element declares the blend, that its blend list and image list are the same
+   length, and that this rule exists and consumes the component's custom property.
+   ───────────────────────────────────────────────────────────────────── */
+@supports not (background-blend-mode: multiply) {
+  .sf-shaft-wrap {
+    background-image: var(--sf-wrap-flat);
+  }
+}

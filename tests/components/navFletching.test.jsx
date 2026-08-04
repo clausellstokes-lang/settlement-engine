@@ -1557,6 +1557,103 @@ describe('4 — THE WRAPS: two glossy bands riding the shaft, bracketing the clu
     expect(rawLadder(WRAP, WRAP_EDGE)).toBeLessThan(rawLadder(WRAP_GLOSS, WRAP_EDGE));
   });
 
+  test('⚠️⚠️ R-2 — THE BLEND IS DECLARED ON THE ELEMENT, AND ITS LIST MATCHES THE PAINT', () => {
+    // ⚠️⚠️ THE DEFECT THIS PIN EXISTS FOR, AND IT IS THE PIN ABOVE. R5 proves the
+    // whipping's wound structure by performing the multiply ARITHMETICALLY from
+    // WRAP_BARREL and WRAP_GLOSS — and never asks whether the component declares it.
+    // Deleting the single `backgroundBlendMode` line from ShaftWrap.jsx left all 398
+    // design + nav assertions green and rendered both wraps as a flat #D7D7D7 LIGHT-GREY
+    // stripe: WRAP_BARREL's own neutral modulator, unmultiplied, at ~9:1 against the
+    // cedar and the loudest object on the bar. Nothing in tests/ matched the string
+    // `backgroundBlendMode` at all. An arithmetic proof of a composite is a proof about
+    // the tokens; only the ELEMENT can say whether the composite is asked for.
+    const { container } = render(<App />);
+    const wraps = [...container.querySelectorAll('[data-testid^="nav-shaft-wrap-"]')];
+    expect(wraps.length, 'the wraps are not rendered — the census is vacuous').toBe(2);
+    // Split a CSS layer list on its TOP-LEVEL commas: every layer here is a gradient and
+    // carries commas of its own, so `String.split(',')` would shred them.
+    const layers = (value) => {
+      const out = [];
+      let depth = 0;
+      let start = 0;
+      for (let i = 0; i < value.length; i += 1) {
+        if (value[i] === '(') depth += 1;
+        else if (value[i] === ')') depth -= 1;
+        else if (value[i] === ',' && depth === 0) { out.push(value.slice(start, i).trim()); start = i + 1; }
+      }
+      out.push(value.slice(start).trim());
+      return out.filter(Boolean);
+    };
+    for (const w of wraps) {
+      const side = w.getAttribute('data-wrap-side');
+      expect(w.style.backgroundBlendMode, `${side}: the wrap declares no blend — it renders GREY`)
+        .toBe('multiply, normal');
+      const images = layers(w.style.backgroundImage);
+      const blends = layers(w.style.backgroundBlendMode);
+      // ⚠️⚠️ THE INVISIBLE CONTRACT, MADE VISIBLE. The Nth blend mode belongs to the Nth
+      // background image, and CSS REPEATS a short blend list to fill a longer image list
+      // rather than complaining — so a third layer added to the paint alone would
+      // silently inherit `multiply` and take the whole wrap to near-black. Nothing in
+      // the language checks that; this does.
+      expect(blends.length, `${side}: ${images.length} paint layers against ${blends.length} blend modes`)
+        .toBe(images.length);
+      expect(images.length, `${side}: the paint is no longer two layers`).toBe(2);
+      // …and the two roles are the right way round: the MODULATOR multiplies, the
+      // MATERIAL does not. Reversed, the turns would be multiplied by the background
+      // colour and the wrap would crush — which is the failure the `normal` exists for.
+      expect(images[0], `${side}: the modulator is not the barrel ramp`).toMatch(/^linear-gradient\(/);
+      expect(blends[0]).toBe('multiply');
+      expect(images[1], `${side}: the material is not the turn gradient`).toMatch(/^repeating-linear-gradient\(/);
+      expect(blends[1]).toBe('normal');
+    }
+  });
+
+  test('⚠️ R-2 — AN ENGINE WITHOUT THE BLEND GETS OXBLOOD, NEVER GREY', () => {
+    // The blend's fail-safe. `background-blend-mode` has been shipping since 2014, so
+    // this arm is a belt on braces — but the failure it covers is not "flatter", it is a
+    // light-grey stripe at ~9:1 on the wood, which is worse than any degradation the bar
+    // spends elsewhere. The conditional cannot live in an inline style, so the component
+    // hands the tones to the sheet through a custom property and the sheet holds only the
+    // `@supports` switch. Both halves are asserted, and against each other.
+    const { container } = render(<App />);
+    const lead = container.querySelector('[data-testid="nav-shaft-wrap-lead"]');
+    const cls = lead.getAttribute('class');
+    expect(cls, 'the wrap carries no class for the @supports arm to reach').toBeTruthy();
+    const flat = lead.style.getPropertyValue('--sf-wrap-flat');
+    expect(flat, 'the wrap declares no fallback ramp').toBeTruthy();
+    // 1 — IT IS THE THREAD'S OWN OXBLOOD, recovered from the pre-V4C paint, and it is
+    //     lit by the shaft's own light like everything else on this bar.
+    for (const tone of [WRAP_GLOSS, WRAP, WRAP_EDGE]) {
+      expect(flat, `the fallback ramp has lost ${tone}`).toContain(tone);
+    }
+    expect(flat).toContain(`${SHAFT_STOPS.lit * 100}%`);
+    // 2 — AND IT IS NEVER GREY, asserted structurally rather than by listing the greys:
+    //     every stop in the fallback must carry chroma, so a future edit that reached for
+    //     the neutral modulator by mistake reds here.
+    const stops = flat.match(/#[0-9A-Fa-f]{6}/g) || [];
+    expect(stops.length, 'the fallback ramp has no stops to check').toBeGreaterThan(2);
+    for (const hex of stops) {
+      const n = parseInt(hex.slice(1), 16);
+      const ch = [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+      expect(Math.max(...ch) - Math.min(...ch), `${hex} is a NEUTRAL stop in the oxblood fallback`)
+        .toBeGreaterThan(8);
+    }
+    // 3 — THE SHEET REALLY CARRIES THE SWITCH, and it reaches THIS element's class and
+    //     THIS element's property. An @supports arm nobody selects is decoration.
+    const css = SRC('index.css');
+    const arm = css.slice(css.indexOf('@supports not (background-blend-mode: multiply)'));
+    expect(arm, 'src/index.css has no @supports fallback for the blend').toBeTruthy();
+    expect(arm.indexOf('@supports')).toBe(0);
+    const block = arm.slice(0, arm.indexOf('}', arm.indexOf('}') + 1) + 1);
+    expect(block, 'the fallback arm does not select the wrap').toContain(`.${cls}`);
+    expect(block, 'the fallback arm does not consume the wrap’s own ramp')
+      .toContain('var(--sf-wrap-flat)');
+    // NON-VACUITY of the slice: the block really is the @supports rule and really does
+    // set the paint, rather than an empty match at the end of the file.
+    expect(block).toContain('background-image');
+    expect(block.length).toBeLessThan(400);
+  });
+
   test('⚠️⚠️ THE TIE-OFF: one authored diagonal per wrap, at the band’s own lean', () => {
     // A field of identical turns says "pattern"; one diagonal across it says "somebody
     // tied this". It is the only non-periodic mark on the whipping and it carries the

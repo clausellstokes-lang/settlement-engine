@@ -69,9 +69,20 @@
  * three tones at the spec's own widths, and the barrel becomes a neutral luminance
  * MULTIPLY over it (theme.js WRAP_BARREL, which owns why it must be neutral). One
  * light, two cylinders, and the crest survives to the bottom of the bar.
+ *
+ * ⚠️⚠️ AND THE MULTIPLY IS THE WHOLE PAINT, WHICH IS WHY IT NOW HAS A FALL-BACK AND A
+ * PIN. `backgroundBlendMode` is the ONE declaration making these bands oxblood: delete
+ * it and both wraps render as a flat #D7D7D7 LIGHT-GREY stripe — WRAP_BARREL's own
+ * neutral, unmultiplied — at ~9:1 against the cedar, which is the loudest object on the
+ * bar by a distance. All 398 design + nav assertions stayed green through that deletion,
+ * because the R5 pin performs the multiply ARITHMETICALLY from WRAP_BARREL and
+ * WRAP_GLOSS and never asks whether the component declares it. So V4D adds both halves
+ * a fail-safe owes: a pin on the RENDERED element (tests/components/navFletching), and
+ * an `@supports not (background-blend-mode: multiply)` arm (src/index.css) that hands an
+ * engine without the blend the PRE-V4C oxblood ramp instead of the modulator alone.
  */
 import {
-  CHROME, FLETCH, WRAP, WRAP_BARREL, WRAP_EDGE, WRAP_GLOSS, WRAP_TURN,
+  CHROME, FLETCH, SHAFT_STOPS, WRAP, WRAP_BARREL, WRAP_EDGE, WRAP_GLOSS, WRAP_TURN,
 } from '../theme.js';
 import { BAND, BAND_W, RUN, SEAT, lean, unitHash } from './FletchBand.jsx';
 
@@ -119,6 +130,56 @@ const TURNS = 'repeating-linear-gradient(90deg,'
   + ` ${WRAP_EDGE} 0, ${WRAP_EDGE} ${SHADOW_END}px,`
   + ` ${WRAP_GLOSS} ${SHADOW_END}px, ${WRAP_GLOSS} ${GLOSS_END}px,`
   + ` ${WRAP} ${GLOSS_END}px, ${WRAP} ${WRAP_TURN.period}px)`;
+
+/**
+ * ⚠️⚠️ THE PAINT AND ITS BLEND ARE ONE OBJECT, BECAUSE THEY ARE ONE CONTRACT SPELLED IN
+ * TWO PROPERTIES. `background-blend-mode`'s Nth mode belongs to `background-image`'s Nth
+ * layer, and CSS REPEATS a short blend list to fill a longer image list rather than
+ * complaining — so a third layer added to the images alone would silently inherit
+ * `multiply` and take the whole wrap to near-black. Written as two literals that list
+ * is an invisible coupling maintained by memory; written as one table it is a coupling
+ * the language enforces, and the pin asserts the two lists the ELEMENT carries are the
+ * same length so the table cannot be bypassed by an inline edit either.
+ */
+const LAYERS = Object.freeze([
+  // The barrel's light, MULTIPLIED over the opaque turns.
+  Object.freeze([WRAP_BARREL, 'multiply']),
+  // ⚠️ AND THE SECOND MODE IS `normal` DELIBERATELY: a single `multiply` would apply to
+  // this last layer too, multiplying the turns by the background colour and crushing the
+  // whole wrap.
+  Object.freeze([TURNS, 'normal']),
+]);
+const PAINT = LAYERS.map(([image]) => image).join(', ');
+const BLEND = LAYERS.map(([, mode]) => mode).join(', ');
+
+/**
+ * THE PRE-V4C THREAD RAMP — the fail-safe an engine without `background-blend-mode`
+ * gets, and it is RECOVERED rather than re-invented (ShaftWrap.jsx @ dd86e5f9^, where
+ * it was the wrap's whole paint under the name THREAD).
+ *
+ * ⚠️⚠️ WITHOUT IT THE FAILURE MODE IS NOT "FLATTER", IT IS GREY. The layer the blend
+ * modulates is WRAP_BARREL, a NEUTRAL luminance ramp — that neutrality is R5's whole
+ * lesson (oxblood × oxblood is near-black) and it is exactly what makes the unblended
+ * paint a #D7D7D7 light-grey stripe at ~9:1 on the cedar. A binding that loses its
+ * blend must lose a dimension of modelling, never its material; so the fallback is the
+ * thread's own oxblood shading, sharing SHAFT_STOPS with the wood exactly as it did
+ * before V4C, which is the same claim one step flatter.
+ *
+ * ⚠️ THE PRE-V4C TURN LAYER IS DELIBERATELY NOT RESTORED WITH IT. That gradient is the
+ * defect V4C measured and retired — two tones alternating every device pixel, a barcode
+ * — and a fail-safe should degrade to the last known-GOOD tone rather than to the last
+ * shipped composition including its recorded fault.
+ */
+const THREAD = `linear-gradient(180deg, ${WRAP_GLOSS} 0%, ${WRAP_GLOSS} ${SHAFT_STOPS.lit * 100}%,`
+  + ` ${WRAP} ${SHAFT_STOPS.mid * 100}%, ${WRAP} ${SHAFT_STOPS.body * 100}%, ${WRAP_EDGE} 100%)`;
+
+/**
+ * The class the `@supports` arm hangs off (src/index.css). ⚠️ IT CARRIES NO STYLE OF ITS
+ * OWN — every declaration on this element is still inline, and the stylesheet's only job
+ * is the ONE thing an inline style cannot express: a conditional. An engine that never
+ * loads the sheet gets the blended paint, which is the correct one.
+ */
+const WRAP_CLASS = 'sf-shaft-wrap';
 
 /** The wrap's own box, in the units its tie-off is drawn in: px, and the bar's height. */
 const W = FLETCH.wrap;
@@ -188,6 +249,7 @@ export default function ShaftWrap({ side }) {
   return (
     <span
       aria-hidden="true"
+      className={WRAP_CLASS}
       data-testid={`nav-shaft-wrap-${side}`}
       data-wrap-side={side}
       style={{
@@ -197,15 +259,20 @@ export default function ShaftWrap({ side }) {
         // no row width. See the corner note above for why it is not exactly 100%.
         ...outward,
         width: FLETCH.wrap,
-        // ⚠️ THE BASE COLOUR IS THE FAIL-SAFE, not the paint. An engine that drops the
-        // gradients renders a flat oxblood band, which is a binding one step flatter —
-        // never a gap in the shaft.
+        // ⚠️ THE BASE COLOUR IS THE FIRST FAIL-SAFE, not the paint. An engine that drops
+        // the gradients renders a flat oxblood band, which is a binding one step flatter
+        // — never a gap in the shaft.
         backgroundColor: WRAP,
-        // The barrel's light, MULTIPLIED over the opaque turns. ⚠️ THE SECOND MODE IS
-        // `normal` DELIBERATELY: a single `multiply` would apply to the LAST layer too,
-        // multiplying the turns by the background colour and crushing the whole wrap.
-        backgroundImage: [WRAP_BARREL, TURNS].join(', '),
-        backgroundBlendMode: 'multiply, normal',
+        // The paint and its blend, from the one table that owns both (LAYERS).
+        backgroundImage: PAINT,
+        backgroundBlendMode: BLEND,
+        // ⚠️⚠️ AND THE SECOND FAIL-SAFE IS THE ONE THE FIRST CANNOT MAKE. The base colour
+        // only covers an engine that drops the GRADIENTS; an engine that keeps them and
+        // drops the BLEND paints WRAP_BARREL's neutral grey right over it. This hands the
+        // `@supports` arm in src/index.css the oxblood ramp to swap in, as a custom
+        // property so the tones stay in theme.js and the stylesheet holds only the
+        // conditional.
+        '--sf-wrap-flat': THREAD,
         pointerEvents: 'none',
         // Over the band's paint (zIndex 0), never under it — see the binding note.
         zIndex: 1,
