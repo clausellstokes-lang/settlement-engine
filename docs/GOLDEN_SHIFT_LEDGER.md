@@ -2102,3 +2102,74 @@ seed-stable — "a seed is a world, forever" holds from here. Five surfaces carr
 the field: the journal page, the PDF chapter, the dossier Origin note, the AI
 grounding payload, and the spine. All five now read wider prose; none reads a
 different KIND of prose.
+
+### AMENDMENT — ONE AUTHORED BODY, DISCLOSED INSIDE THIS WINDOW (2026-08-03, lane MD)
+
+**STATUS: BUILT.** The prose change and its pin are one commit; the re-record is
+its own, exactly as this window's parts 1 and 2 were. Chair-ruled as a
+one-body amendment to the still-open RR window rather than a new window, so the
+estate takes ONE more re-recorded row rather than a second disclosure event.
+
+**The defect.** `isolated.deficit` variant #1 continued past the `{channels}`
+splice with a bare comma. `{channels}` is a LIST, so the continuation was
+absorbed into it. What shipped, verbatim, from the one golden row that draws it:
+
+> Isolated from major trade routes, and short of what it eats. The gap is closed
+> through magical transport, sanctioned caravans, seasonal access, or patronage,
+> **, at a price the settlement feels.**
+
+— reading as a fifth channel called "at a price". The list's end was invisible.
+Repaired with an em-dash, the same device index 0 already uses on both sides of
+its own splice.
+
+**Why an em-dash and not a comma ban.** Variant #4 also continues with a comma
+("…or patronage, **and the arrangement is renegotiated every season**") and is
+CORRECT: an independent clause cannot be misread as a list item, a noun phrase
+can. The rule is PHRASE vs CLAUSE, and it is now machine-enforced by
+`pin:channels-close` in tests/generators/settlementOriginProse.test.js — an
+allowlist of em-dash, terminator, or clause-opening conjunction — carrying a
+negative control that asserts the exact shipped sentence FAILS it, and a
+specificity control that variant #4's form still passes. Variant #4 is
+deliberately **not** touched: the chair authorised ONE body, and #4 is not
+defective.
+
+**THE CENSUS — the whole of what moved.** Regenerated as OBJECTS from
+**committed bytes on both sides**, deep-diffed field by field with array indices
+collapsed to `[*]`, same method and same script shape as this window's main
+census:
+
+```
+changed      1 occurrence  / 1 row     $.settlementReason[*]
+```
+
+Zero `removed`, zero `added`, zero array-length moves, zero key-order moves. ONE
+path-template and no others. The single row is
+`town|germanic|plains|isolated|civilized|golden-master-v3` — predicted BEFORE the
+edit by classifying all 525 rows' origin bodies by arm and variant index
+(isolated.deficit#1: exactly 1 row; isolated.deficit#2: 72 rows; the other six
+variants of that arm: 0), and then confirmed by the golden going red on that key
+and no other.
+
+**CROSS-CHECK:** the fixture was re-recorded in the clean detached worktree,
+never from the shared dirty tree, and matches an INDEPENDENTLY computed manifest
+(built by the census script's own hashing, not by the vitest UPDATE_GOLDEN path)
+with 0 mismatches. The committed fixture diff is  — one line changed, zero
+added, zero deleted.
+
+**TOTALITY:** the parent-side regeneration reproduced the CURRENT manifest on all
+525 rows, 0 mismatches — which licenses the word "only", and additionally proves
+that everything committed between the RR re-record (`c4de968a`) and this
+amendment's parent moved no generator output, lane MD's own pieces 1–3 included.
+Key set unchanged: 0 rows added, 0 deleted.
+
+**Canonical-at-zero is untouched.** The amendment edits index **1**. Index 0 of
+every pool is still the exact pre-widening sentence, so every seedless caller —
+`settlementReason.test.js`, `narrativeArrival.test.js`, and anything else passing
+a bare `{}` — remains byte-identical, and `pin:index-0` / `pin:seedless` are green
+without modification.
+
+**The one-time shift, stated plainly.** ONE seed family's origin line changes
+once more: an isolated, food-deficit settlement whose variant key selects #1.
+Everything else is byte-identical. This is a copy repair, not a widening — no
+variant was added, removed, or re-pointed, and the pool is still eight arms of
+five.

@@ -18,6 +18,42 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-08-03 — LANE MD, A ONE-BODY AMENDMENT INSIDE LANE RR'S WINDOW (1 row of
+ *   525 moved). Chair-ruled as an amendment to the still-open RR window rather
+ *   than a new disclosure event, and executed under that window's own recipe.
+ *   Source commit 5dcad538; this is the re-record, its own commit as RR's was.
+ *     THE CAUSE. `isolated.deficit` variant #1 continued past the `{channels}`
+ *     splice with a bare COMMA, and `{channels}` is a LIST, so the continuation
+ *     was swallowed by it: "…seasonal access, or patronage, at a price the
+ *     settlement feels." reads as a fifth channel called "at a price". Closed
+ *     with an em-dash. Variant #4's "…or patronage, and the arrangement is
+ *     renegotiated…" was deliberately LEFT ALONE — a clause cannot be misread as
+ *     a list item, only a phrase can, and touching it would have been a second
+ *     unauthorised row. The rule is now `pin:channels-close` in
+ *     tests/generators/settlementOriginProse.test.js, with a negative control
+ *     asserting the exact shipped sentence fails it.
+ *   PROVEN TO BE EXACTLY THAT ONE BODY BEFORE RE-RECORDING. All 525 settlements
+ *   were regenerated as OBJECTS from COMMITTED BYTES on both sides — detached
+ *   worktrees at 5ebc7b11 (the parent) and 5dcad538 — and deep-diffed field by
+ *   field with array indices collapsed to [*]. The complete census of differing
+ *   path-templates is ONE:
+ *     $.settlementReason[*]                            1 change / 1 row
+ *   Zero removed, zero added, zero array-length moves, zero key-order moves.
+ *   The single row is town|germanic|plains|isolated|civilized|golden-master-v3,
+ *   PREDICTED BEFORE THE EDIT by classifying all 525 rows' origin bodies by arm
+ *   and variant index (isolated.deficit#1: 1 row; #2: 72 rows; the arm's other
+ *   six variants: 0 rows), then confirmed by the golden reddening on that key
+ *   and no other. TOTALITY: the parent-side regeneration reproduced the OLD
+ *   manifest on all 525 rows (0 mismatches), which licenses the word "only" and
+ *   additionally proves that nothing committed between c4de968a and 5ebc7b11 —
+ *   lane MD's own pieces 1-3 included — moved generator output. The re-recorded
+ *   fixture was produced in a clean detached worktree, never from the shared
+ *   dirty tree, and cross-checks against an independently computed manifest with
+ *   0 mismatches. Key set unchanged: 0 rows added, 0 deleted.
+ *   ⚠️ CANONICAL-AT-ZERO IS UNTOUCHED: the amendment edits index 1, so every
+ *   seedless caller stays byte-identical and pin:index-0 / pin:seedless are
+ *   green without modification. This is a copy repair, not a widening — the pool
+ *   is still eight arms of five.
  * 2026-08-03 — LANE RR, THE COMBINED RE-RECORD (all 525 rows moved). TWO causes
  *   ride one disclosed window under the chair's lane-RR ruling, so the estate
  *   takes ONE re-record instead of two. Source commit 21bf1041.
