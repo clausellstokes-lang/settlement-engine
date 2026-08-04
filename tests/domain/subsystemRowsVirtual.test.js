@@ -1,5 +1,5 @@
 /**
- * subsystemRowsVirtual.test.js — the four ENGINE-GATED VIRTUAL certification rows
+ * subsystemRowsVirtual.test.js — the ENGINE-GATED VIRTUAL certification rows
  * (CR-WR10-C), and the source claims they make.
  *
  * A certification row is a CLAIM ABOUT SOURCE: "this module gates on this key, owns
@@ -8,7 +8,7 @@
  * and a fictional row grades UNOBSERVED forever while reading like diligence. So this
  * file does three jobs, on the subsystemRowsEpistemics model:
  *
- *   1. SHAPE    the four rows are authored (not pending), sit in the census because
+ *   1. SHAPE    the rows are authored (not pending), sit in the census because
  *               the manifest put them there, and conform to the registry contract.
  *   2. TRACE    every declared channel — and every DELIBERATELY UNdeclared one — is
  *               re-derived from the live source. The single-writer claims behind the
@@ -48,7 +48,13 @@ const AXES = 'beliefAxesEnabled';
 const CONQUEST = 'conquestDoctrineEnabled';
 const STATECRAFT = 'infoStatecraftEnabled';
 const RUMORS = 'migrationRumorsEnabled';
-const VIRTUAL_RULES = Object.freeze([AXES, CONQUEST, STATECRAFT, RUMORS]);
+// Joined 2026-08-04 by lane WW-A: the WR-10 conveyance landed its first gate read, and
+// CR-WR10-C item 4 binds the manifest entry and the certification row to that same
+// commit. The lane's fifth row is the ZERO-KEY case — every other row here declares at
+// least the shape of a container, while a conveyance rewrites three containers it does
+// not own and adds none, which is why its aliveness channels are empty on purpose.
+const SOVEREIGNTY = 'sovereigntyTradeEnabled';
+const VIRTUAL_RULES = Object.freeze([AXES, CONQUEST, STATECRAFT, RUMORS, SOVEREIGNTY]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
 
@@ -64,6 +70,13 @@ const LANE_LEAVES = Object.freeze({
   [CONQUEST]: ['src/domain/worldPulse/vengeanceLicense.js', 'src/domain/worldPulse/conquestDoctrineStage.js'],
   [STATECRAFT]: ['src/domain/worldPulse/informationStatecraft.js', 'src/domain/worldPulse/brokerageStamps.js'],
   [RUMORS]: ['src/domain/spatial/migrationRumors.js'],
+  // The conveyance's own leaves: the writer that performs it and the read that gates
+  // it. The wider `module` list names the four pure market reads a caller needs, which
+  // are appraisal and reach leaves that mint nothing at all.
+  [SOVEREIGNTY]: [
+    'src/domain/worldPulse/sovereigntyTransfer.js',
+    'src/domain/worldPulse/sovereigntyAssets.js',
+  ],
 });
 
 function walk(dir, out = []) {
@@ -152,7 +165,7 @@ function litRules(overrides = {}) {
 }
 
 describe('engine-gated virtual rows — shape and partition', () => {
-  test('all four rules are authored here, in the census, and manifested', () => {
+  test('every lane rule is authored here, in the census, and manifested', () => {
     expect(VIRTUAL_SUBSYSTEM_ROWS.map((row) => row.rule)).toEqual(VIRTUAL_RULES);
     expect(VIRTUAL_PENDING_RULE_KEYS).toEqual([]);
     // The manifest is WHY these keys are censusable at all: neither

@@ -31,6 +31,55 @@
  * worldState and writes nothing to it.
  */
 import { satellitesLedgerOf, satellitesOf } from './settlementLifecycleKernel.js';
+import { ENVOY_REQUIRED_RULES } from './envoyErrandVocabulary.js';
+
+/**
+ * THE ACTIVATION CONJUNCTION for the sovereignty market (WR-10 wiring).
+ *
+ * It lives here, beside the eligibility read, because every road into the market
+ * already imports this module to ask what may be conveyed — the writer, the market
+ * composer, and the DM verb all do — so the gate costs no new file and no consumer
+ * gains an import it did not already have. It is a pure read about a worldState,
+ * which is exactly what this leaf is for.
+ *
+ * The market INHERITS the envoy layer's six prerequisites (§3's flag-dependency
+ * ruling: WR-10 rides WR-7's transport), adds the demographic precondition the plan
+ * lane is triggered from, and finally its own flag. Missing rules read as DARK, never
+ * as permissive — the conjunction is over strict `=== true`, so ABSENT and explicit
+ * FALSE are identical BY CONSTRUCTION at every decision site.
+ */
+export const SOVEREIGNTY_REQUIRED_RULES = Object.freeze([
+  ...ENVOY_REQUIRED_RULES,
+  'demographicsEnabled',
+  'sovereigntyTradeEnabled',
+]);
+
+/**
+ * Exact activation: every prerequisite law must be explicitly true. Accepts either a
+ * worldState or a bare rules record (the `envoyDiplomacyActive` idiom, verbatim).
+ *
+ * ⚠ THE MARKET'S OWN FLAG IS READ BY NAME, ON ITS OWN LINE, AND THAT IS NOT REDUNDANCY.
+ * The list comprehension below already covers it, so the named read changes no behaviour
+ * whatsoever — what it changes is VISIBILITY. Every gate scanner in this estate, the
+ * subsystem-certification walker included, matches the dot-access idiom
+ * `rules.<key> === true`; a conjunction over a frozen list reads `rules[key]` with a
+ * computed member, which no such scanner can attribute to any key. Gated exclusively
+ * that way, `sovereigntyTradeEnabled` would have been a fully-wired engine gate that
+ * certification could not see — arriving at exactly the blindness CR-WR10-C exists to
+ * end, by a technicality rather than by an omission. The named line is how this flag
+ * declares itself to the machinery that audits flags.
+ *
+ * @param {unknown} worldStateOrRules
+ * @returns {boolean}
+ */
+export function sovereigntyTradeActive(worldStateOrRules) {
+  const root = recordOf(worldStateOrRules);
+  const rules = Object.prototype.hasOwnProperty.call(root, 'simulationRules')
+    ? recordOf(root.simulationRules)
+    : root;
+  const ownFlagLit = rules.sovereigntyTradeEnabled === true;
+  return ownFlagLit && SOVEREIGNTY_REQUIRED_RULES.every((key) => rules[key] === true);
+}
 
 /** The closed eligibility vocabulary. Every answer, including every way of being
  *  ineligible, has a word — and `free` is a VERDICT, not a fallback. */

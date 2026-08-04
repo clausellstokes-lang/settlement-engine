@@ -67,7 +67,9 @@ import {
   ENGINE_GATED_VIRTUAL_RULE_KEYS,
   SIMULATION_RULE_PRESETS,
 } from '../../src/domain/worldPulse/simulationRules.js';
-import { simulationRuleKeys } from '../../src/domain/certification/subsystemCertification.js';
+import {
+  SUBSYSTEM_CERTIFICATION_REGISTRY, simulationRuleKeys,
+} from '../../src/domain/certification/subsystemCertification.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -125,14 +127,28 @@ const BACKLOG_RULE_KEYS = Object.freeze({
 });
 
 /**
- * CR-WR10-C item 4: `sovereigntyTradeEnabled` joins the manifest IN THE SAME COMMIT
- * as its first real gate read (the WR-10 wiring wave's stage gate), so certification
- * tracks reality instead of preceding it. Until then it is read NOWHERE in src/, and
- * that is the recorded next step rather than a red — asserted below as ZERO reads,
- * which is what makes the atomicity structural: the wiring lane's first gate read
- * REDS this walker until the same commit moves the key into the manifest.
+ * CR-WR10-C item 4's pending list — a key that will earn a manifest entry the moment
+ * a gate read for it lands, asserted below as ZERO reads so the atomicity is
+ * STRUCTURAL: the first gate read REDS this walker until the same commit moves the
+ * key into the manifest with its certification row.
+ *
+ * EMPTIED 2026-08-04 by lane WW-A, which is the mechanism working exactly as designed.
+ * `sovereigntyTradeEnabled` was the sole entry; the wiring wave landed its gate, this
+ * walker went red with all three of its own failure modes naming the key, and the same
+ * commit moved it into ENGINE_GATED_VIRTUAL_RULE_KEYS and authored its row in
+ * subsystemRowsVirtual.js.
+ *
+ * ⚠ A HOLE THIS EPISODE EXPOSED, RECORDED HERE BECAUSE THE NEXT LANE WILL MEET IT.
+ * The wiring lane first spelled its gate as a conjunction over a frozen rule list —
+ * `REQUIRED_RULES.every((key) => rules[key] === true)` — which is a COMPUTED member
+ * access. GATE_RE below matches only the dot-access idiom, so that spelling attributes
+ * to no key at all: the flag was fully wired, genuinely engine-gated, and invisible to
+ * this walker, which stayed green. The lane cured it locally by also reading its own
+ * flag by name, but the CLASS is open — any future virtual key gated only through a
+ * list conjunction hides from this census the same way. Widening GATE_RE to resolve
+ * frozen-list membership is a chair decision, not a lane one, and is queued as such.
  */
-const PENDING_MANIFEST_KEYS = Object.freeze(['sovereigntyTradeEnabled']);
+const PENDING_MANIFEST_KEYS = Object.freeze([]);
 
 /**
  * Blank out comments AND string/template contents while preserving every offset, so
@@ -453,6 +469,17 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
         `${key} is in the manifest but nothing gates on it yet — the manifest entry rides the gate read, not the other way round`,
       ).toBe(false);
     }
-    expect(PENDING_MANIFEST_KEYS).toEqual(['sovereigntyTradeEnabled']);
+    // SHRINK-ONLY, AND NOW EMPTY — the list's single entry was banked by lane WW-A.
+    // That makes the loop above vacuous by construction, so the burn-down is asserted
+    // POSITIVELY instead of by an emptiness that could equally mean the list was
+    // quietly cleared: the key that left this list is really gated, really in the
+    // manifest, and really carries a certification row.
+    expect(PENDING_MANIFEST_KEYS).toEqual([]);
+    expect(readKeys, 'the banked key is genuinely gated in src/').toContain('sovereigntyTradeEnabled');
+    expect(ENGINE_GATED_VIRTUAL_RULE_KEYS, 'and it is manifested').toContain('sovereigntyTradeEnabled');
+    expect(
+      SUBSYSTEM_CERTIFICATION_REGISTRY.some((row) => row.rule === 'sovereigntyTradeEnabled'),
+      'and it carries its certification row (CR-WR10-C item 3: the row lands with the census growth)',
+    ).toBe(true);
   });
 });

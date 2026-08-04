@@ -144,6 +144,14 @@ export function buildLineageMemberBirth({ campaignId, parentId, parent, satellit
     provenance: satellite.provenance,
     ...(satellite.site ? { site: cloneJson(satellite.site) } : {}),
     ...(Array.isArray(satellite.resources) ? { resources: [...satellite.resources] } : {}),
+    // WR-10 — THE SALE SURVIVES THE CHARTER. A steading that changed hands carries
+    // `conveyed` provenance; a satellite has no relationship object, no seat and no
+    // legitimacy to resent with, so until this moment the grievance has nowhere to
+    // live. Graduation is where it acquires all three, and folding the provenance into
+    // the immutable receipt is what lets WR-3's claims read "this town was sold by the
+    // line that founded it" instead of losing the fact at the charter. Conditional and
+    // drop-when-absent: a steading that was never sold graduates byte-identically.
+    ...(satellite.conveyed ? { conveyed: cloneJson(satellite.conveyed) } : {}),
     ...(evidenceIds.length ? {
       provisioningRecord: {
         id: `lineage.provisioning.${saveId}`,

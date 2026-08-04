@@ -49,6 +49,10 @@ export function carriedClauseFromDraft(term) {
   };
   if (term.good) clause.good = String(term.good);
   if (term.seam === true) clause.seam = true;
+  // WR-10: the conveyed settlement travels WITH the clause. A cession whose object is
+  // dropped in transit would come home as a promise to hand over nothing in
+  // particular, and the validator below refuses exactly that.
+  if (term.assetId) clause.assetId = String(term.assetId);
   return normalizeCarriedClause(clause);
 }
 
@@ -132,7 +136,7 @@ function normalizeCarriedClause(value) {
   const clause = recordOf(value);
   const keys = Object.keys(clause).sort();
   const baseKeys = ['burden01', 'durationTicks', 'family', 'magnitude', 'type', 'weightSpent'];
-  const optionalKeys = ['good', 'seam'];
+  const optionalKeys = ['good', 'seam', 'assetId'];
   if (keys.some((key) => !baseKeys.includes(key) && !optionalKeys.includes(key))
     || baseKeys.some((key) => !keys.includes(key))) return null;
   const type = strictText(clause.type);
@@ -150,10 +154,19 @@ function normalizeCarriedClause(value) {
   if ((type === 'resource_share') !== !!good) return null;
   const seam = 'seam' in clause ? clause.seam : undefined;
   if ((spec.executor === 'seam') !== (seam === true)) return null;
+  // WR-10 — THE OBJECT OF A CONVEYANCE IS NOT OPTIONAL. The biconditional is the
+  // `good`/`resource_share` rule verbatim, and it fails CLOSED in both directions: a
+  // `sovereignty_transfer` without a non-empty `assetId` is a deed with no property on
+  // it, and an `assetId` on any other clause is a term claiming to convey a settlement
+  // that no executor will ever read. Either is a malformed artifact, and the exact
+  // historical bargain is consumed whole or refused whole.
+  const assetId = 'assetId' in clause ? strictText(clause.assetId) : '';
+  if ((type === 'sovereignty_transfer') !== !!assetId) return null;
   return {
     type, family, magnitude, durationTicks, weightSpent, burden01,
     ...(good ? { good } : {}),
     ...(seam === true ? { seam: true } : {}),
+    ...(assetId ? { assetId } : {}),
   };
 }
 

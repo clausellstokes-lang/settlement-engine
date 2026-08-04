@@ -82,6 +82,13 @@ import { thresholdFactorOf } from './dispositionProfile.js';
 // through the conserved sink-only primitive, applied by the existing single
 // food applicator. See treatyTransfer.js for why grain is the honest denomination.
 import { computeTreatyGrainDraw, applyTreatyFoodDeltas, freshestSettlement } from './treatyTransfer.js';
+// WR-10 — THE CONVEYANCE EXECUTOR. A sovereignty_transfer is `stream:false`, so it
+// fires ONCE at mint (the compelled_alliance precedent) rather than in the per-tick
+// walk. It is invoked from the mint LOOP rather than from inside applyMintEffects,
+// deliberately: that closure is defined TWICE — once per mint road — and an arm added
+// inside it would be two spellings of one law, with the carried-sheet road free to
+// drift from the live-appraisal one. The loop is where both roads meet.
+import { executeTreatyConveyances } from './sovereigntyTransfer.js';
 import { stablePart } from './stablePart.js';
 import { buildPressureSummary, settlementStrength } from './relationshipEvolution.js';
 import { readBeliefRelationship } from './beliefMap.js';
@@ -188,6 +195,11 @@ export function materializeCarriedTermSheet({ termSheet, homeTick }) {
     };
     if (clause.good) term.good = String(clause.good);
     if (clause.seam === true) term.seam = true;
+    // WR-10: the conveyed settlement survives materialization. Dropping it here would
+    // mint a treaty whose cession clause named no property — the writer would refuse
+    // it, and the refusal would look like the world having moved rather than like the
+    // boundary having eaten the object.
+    if (clause.assetId) term.assetId = String(clause.assetId);
     if (spec.stream) { term.deliveredToVictor = 0; term.extractedFromLoser = 0; }
     return term;
   });
@@ -505,6 +517,18 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
       now,
       coalitionExitFirst,
     );
+    // ── WR-10 THE CONVEYANCE, EXECUTED AT THE SIGNING (amendment S: the treaty IS the
+    // artifact). Both mint roads pass through this one point, so the wartime cession an
+    // envoy carried home and the peacetime sale a market cleared execute through ONE
+    // writer. The victor RECEIVES and the loser GIVES — the orientation every other
+    // term in this file already uses. Dark, or on a treaty carrying no cession clause,
+    // it returns both references unchanged.
+    const conveyed = executeTreatyConveyances({
+      treaty: mint.treaty, worldState: workingState,
+      settlementUpdates: workingSettlementUpdates, edges, tick, now,
+    });
+    workingState = conveyed.worldState;
+    workingSettlementUpdates = conveyed.settlementUpdates;
     newsEntries.push(mint.signingBeat);
     if (mint.treaty.mediator) {
       // A mediation that actually lands is a resolved diplomatic outcome for the

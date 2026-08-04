@@ -212,6 +212,11 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {Record<string, unknown>} [site]
  * @property {string[]} [resources]
  * @property {{id:string, kind:'founding_support', fromId:string, evidenceIds:string[]}} [provisioningRecord]
+ * @property {{fromId:string, tick:number}} [conveyed]
+ *   WR-10 sale provenance, folded in at graduation from the steading record. Present
+ *   only on a member whose steading changed hands before it was chartered. Like every
+ *   field here it is HISTORY: it records that the founding line sold this place, never
+ *   that a live bond exists — the regional lineage edge remains the only live bond.
  */
 
 /**

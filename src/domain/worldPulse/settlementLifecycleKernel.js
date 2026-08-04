@@ -130,6 +130,13 @@ import {
  * @property {string[]} [resources] W-E: starting resources derived from `site`
  *   through the existing RESOURCE_DATA vocabulary (closed; absent when aspatial)
  * @property {number} orbit         cosmetic orbit slot (deterministic, unique per parent)
+ * @property {{ fromId: string, tick: number }} [conveyed] WR-10: SALE PROVENANCE.
+ *   Present ONLY on a steading that changed hands through a sovereignty transfer;
+ *   drop-when-absent, so every steading that was never sold is byte-identical to
+ *   pre-WR-10. A satellite has no relationship object, no seat and no legitimacy
+ *   score, so "the sold settlement has an opinion" is structurally empty for it until
+ *   graduation — this field is how the grievance survives the gap: at the charter it
+ *   folds into `parentRef` and matures through the WR-3 seam.
  * @property {number} inflow        cumulative in-migration tally (people moved in)
  * @property {number} backing01     last computed backing read (display/receipt)
  * @property {number} [starvingSince] tick stamp — the decline dwell (catch-up-safe)
@@ -475,6 +482,63 @@ export function mintSteading({ parent, parentId, sats, tick, draw, nameOverride 
     ],
   };
   return { record, debit };
+}
+
+// ── THE CONVEYANCE ROW-MOVE (WR-10 amendment S — the steading pen stays here) ──
+/**
+ * Move ONE steading from its seller's cell to its buyer's, inside the existing
+ * satellites ledger. It lives beside `mintSteading` for the same reason the mint is
+ * shared: every fact about how a steading row is shaped — its orbit rule, its parent
+ * key, its cell's drop-when-empty law — is authored in this file, and a second
+ * satellites writer elsewhere would be free to disagree with all three. WW-A's
+ * source-scan pin freezes the `setSpatialLedger(…, 'satellites', …)` call-site set to
+ * its current two files precisely so that a future conveyance cannot quietly become a
+ * third; that is why this helper PERSISTS rather than returning a bare ledger.
+ *
+ * ORBIT IS RE-DERIVED AT THE DESTINATION, and that is the whole reason a row-move is
+ * not a key-move. `orbit` is unique per PARENT by mint-time search, and B3's
+ * convergence scan folds pairs whose orbits differ by at most one — so a naive move
+ * that carried the seller's slot across would collide with a steading the buyer
+ * already holds and then mis-drive adjacency, merging two settlements that were never
+ * neighbours. The search here is `mintSteading`'s, verbatim.
+ *
+ * The seller's cell is dropped only when it holds NOTHING — no steadings AND no
+ * seeding integrator state. B5's fold keeps a cell alive for a live cooldown or a warm
+ * accumulator, and deleting it here would hand the seller a free re-founding as a side
+ * effect of a sale.
+ *
+ * Never written: the steading's population (people do not move because a deed did),
+ * its founding tick, its history, or anything at all outside this ledger.
+ *
+ * @param {Record<string, unknown>} worldState
+ * @param {string} assetId the steading's record id
+ * @param {string} fromParentId @param {string} toParentId @param {number} tick
+ * @returns {{ worldState: Record<string, unknown>, record: SatelliteRecord } | null}
+ *   null when the row is not where the caller said it was, or the parents are the same.
+ */
+export function conveySteading(worldState, assetId, fromParentId, toParentId, tick) {
+  const ledger = satellitesLedgerOf(worldState);
+  const source = ledger ? ledger[fromParentId] : null;
+  const prior = source?.steadings?.[assetId];
+  if (!ledger || !prior || !toParentId || fromParentId === toParentId) return null;
+  const usedOrbits = new Set(satellitesOf(ledger, toParentId).map((r) => num(r.orbit, 0)));
+  let orbit = 0;
+  while (usedOrbits.has(orbit)) orbit += 1;
+  const record = /** @type {SatelliteRecord} */ ({
+    ...prior, parentId: toParentId, orbit, conveyed: { fromId: fromParentId, tick },
+  });
+  const sellerSteadings = { ...(source.steadings || {}) };
+  delete sellerSteadings[assetId];
+  const next = { ...ledger, [toParentId]: {
+    ...(ledger[toParentId] || { steadings: {} }),
+    steadings: { ...(ledger[toParentId]?.steadings || {}), [assetId]: record },
+  } };
+  // Drop the seller's cell only when it holds NOTHING (B5's own law: a live cooldown
+  // or a warm accumulator keeps a cell alive even with no steadings left).
+  if (Object.keys(sellerSteadings).length || source.seedAcc !== undefined || source.lastSeedTick !== undefined) {
+    next[fromParentId] = { ...source, steadings: sellerSteadings };
+  } else delete next[fromParentId];
+  return { worldState: setSpatialLedger(worldState, 'satellites', next), record };
 }
 
 // ── News (house voice, AGGREGATE) ──────────────────────────────────────────────

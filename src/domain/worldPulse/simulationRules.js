@@ -187,6 +187,10 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   'conquestDoctrineEnabled',
   'infoStatecraftEnabled',
   'migrationRumorsEnabled',
+  // Joined 2026-08-04 by lane WW-A under CR-WR10-C item 4, in the SAME commit as its
+  // first real gate read (sovereigntyAssets.sovereigntyTradeActive) and its
+  // certification row — certification tracking reality instead of preceding it.
+  'sovereigntyTradeEnabled',
 ]);
 
 /**

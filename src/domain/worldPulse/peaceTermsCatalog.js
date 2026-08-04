@@ -124,6 +124,11 @@ export const COALITION_BETRAYAL_CHARACTER_TUNING = Object.freeze({
  * @property {number} burden01      the compliant party's differential burden (W-DOCTRINE-4 seam)
  * @property {string} receipt
  * @property {string} [good]        the named export (resource_share)
+ * @property {string} [assetId]     WR-10: the CONVEYED SETTLEMENT (sovereignty_transfer
+ *   only — the `good` precedent). Conditional and drop-when-absent, so every term the
+ *   engine has ever minted stays byte-identical. A conveyance without its object is
+ *   deliberately unrepresentable: peaceTermsCarriedSheet's validator refuses the clause
+ *   in BOTH directions, and the writer refuses to execute a term that carries none.
  * @property {number} [deliveredToVictor]  cumulative conserved credit (stream terms)
  * @property {number} [extractedFromLoser] cumulative conserved debit (== delivered; tribute never mints)
  * @property {boolean} [seam]       true ⇒ a typed registration seam (executor unlanded)

@@ -238,6 +238,51 @@ export function createOccupationRecord(occupierId, tick) {
 }
 
 /**
+ * THE CONVEYANCE REWRITE (WR-10 amendment S) — one overlord replaces another on an
+ * EXISTING vassalage, and the rung survives the sale.
+ *
+ * This is deliberately NOT createOccupationRecord. That path mints a FRESH conquest at
+ * `contested` with resistance 0.35, and routing a sale through it would silently undo
+ * every tick of stabilization the seller paid for — the buyer would receive a fight
+ * instead of the holding it bought, and `readSovereigntyAsset` would stop calling the
+ * settlement conveyable the instant the ink dried. Only `vassalized` is conveyable
+ * (sovereigntyAssets.js), so `state` is carried across UNCHANGED and the ladder's own
+ * machinery keeps running from where the seller left it.
+ *
+ * WHAT DOES change is the clock and the consent. `sinceTick` restarts because the new
+ * overlordship is a new tenure; `stateHeld` returns to zero so the buyer must re-earn
+ * any transition through the ordinary hysteresis dwell; and `resistance` is RAISED to a
+ * floor — a town that learns it was sold is less governable than one that merely lost a
+ * war, and that fragility is the durable half of the sale (the score echo on
+ * publicLegitimacy is generated and declared regen-volatile; this field is campaign
+ * state and survives). The floor is a FLOOR, never a set: an already-restive vassal is
+ * left where it is rather than calmed by being sold. Pulling the value the rest of the
+ * way toward the occupied settlement's own `resistanceTarget` is deliberately left to
+ * `advanceResistance`, which already owns that law — a second pull here would be a
+ * second spelling of one rule.
+ *
+ * PURE: returns a new record; no rng, no wall-clock, no mutation of the input.
+ *
+ * @param {{ occupierId?: unknown, state?: unknown, resistance?: unknown }} record the LIVE occupation
+ * @param {string} buyerId the acquiring overlord
+ * @param {number} tick
+ * @param {number} resistanceStart the fragility FLOOR (0..1) — an unsoaked §7 band
+ * @returns {Record<string, unknown>}
+ */
+export function conveyOccupationRecord(record, buyerId, tick, resistanceStart) {
+  const t = Math.max(0, Math.floor(num(tick)));
+  return {
+    ...record,
+    occupierId: String(buyerId),
+    state: String(record?.state ?? ''),
+    sinceTick: t,
+    stateHeld: 0,
+    resistance: Math.max(clamp01(num(record?.resistance)), clamp01(num(resistanceStart))),
+    lastTick: t,
+  };
+}
+
+/**
  * The numeric rung of a state label. Unknown labels resolve to the `contested` floor.
  * @param {string} state
  * @returns {number}

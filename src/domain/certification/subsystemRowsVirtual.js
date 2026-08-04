@@ -244,6 +244,60 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // No channel at all, so the row can never be ALIVE and says so.
     soakEvidence: 'unobserved',
   }),
+  // ── THE SOVEREIGNTY MARKET (WR-10 amendment S, the conveyance) ─────────────
+  Object.freeze({
+    rule: 'sovereigntyTradeEnabled',
+    title: 'The sovereignty market (settlement conveyance)',
+    module: 'src/domain/worldPulse/sovereigntyTransfer.js,src/domain/worldPulse/sovereigntyAssets.js,src/domain/worldPulse/sovereigntyAppraisal.js,src/domain/worldPulse/sovereigntyBundle.js,src/domain/worldPulse/sovereigntyReach.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY per the evidence law: the conveyance mints no candidate.
+      // It executes inside the treaty mint, which is the peace engine's own event,
+      // and there is no `candidateType` literal anywhere in the sovereignty lane.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY. The war annex authors FIFTEEN Herald kinds for this
+      // market and not one of them exists in code yet; the writer returns typed
+      // news SEEDS that no registry can render. Declaring a mover family before the
+      // rows exist would be the row asserting a channel the engine cannot fill.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, AND THIS ONE IS THE ROW'S WHOLE POINT rather than a gap.
+      // A conveyance adds NO persisted key: it rewrites records inside containers
+      // that already exist and that other subsystems fill — the satellites ledger
+      // (the settlement-lifecycle layer writes it every tick), the occupations
+      // ledger (the war layer's), and the treaties ledger (the peace engine's).
+      // Declaring any of them would grade this row ALIVE off another subsystem's
+      // presence, exactly the false reading the belief-axes row above refuses, and
+      // it would be worse here: those three containers are populated in worlds where
+      // this flag has never been true. The census counts ENTRIES, and a conveyance
+      // changes FIELDS INSIDE entries without changing their number, so no census
+      // reading could separate the two worlds even in principle.
+      stateKeys: Object.freeze([]),
+      other: 'A ZERO-KEY SUBSYSTEM, WHICH IS WHY THE CENSUS CANNOT SEE IT AND WHY THAT IS CORRECT. ONE GATE: sovereigntyTradeActive (sovereigntyAssets.js) reads the market own flag by name and then the whole SOVEREIGNTY_REQUIRED_RULES conjunction — WR-7 six envoy prerequisites plus demographics plus this key — so a receipt that lit this key alone would still read zero, and that is a correct reading of an absent precondition rather than a dead lane. WHAT IT DOES: a settlement changes hands. Only two things are conveyable, and eligibility is derived from LEDGER MEMBERSHIP rather than from any user-placed marker (there is no such field in the tree, so a deny-list would have made every DM-placed settlement a commodity): a steading named by the satellites ledger, and an occupation that has climbed to the vassalized rung. The conveyance executes ONE-SHOT at treaty mint, because sovereignty is stream:false and transfers once; the wartime cession an envoy carries home and the peacetime sale a market clears reach the same mint and the same single writer. WHAT IT REWRITES: a steading row moves between parent cells with its orbit re-derived at the destination, or an occupation occupierId is rewritten IN PLACE with the vassalized rung preserved and its resistance raised to a fragility floor. WHAT IT NEVER WRITES: settlement.parentRef, the regional lineage edge, population, and any new key. THE OBSERVATION NEEDED to close this gap is a per-record provenance census in the soak receipt — a count of satellite rows carrying `conveyed` and of occupations whose sinceTick post-dates their state — which no receipt schema carries today because censusWorldStateKeys stops one level into spatialLedgers and counts entries. Until then the lane is pinned where its bodies are readable: tests/domain/sovereigntyTransferWr10w.test.js and tests/property/sovereigntyTradeDormancyFence.test.js.',
+    }),
+    // A treaty carrying a cession is the rarest document the war layer produces, and
+    // the conveyance fires only from one. `rare` has no tempo floor beyond a single
+    // firing anywhere in the span, which is the honest expectation here.
+    expectedTempo: 'rare',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'zero_new_persisted_keys',
+        description: 'A conveyance adds no top-level key and no ledger. It rewrites existing records in their existing homes, plus two conditional drop-when-absent fields (TermRecord.assetId on a cession clause, SatelliteRecord.conveyed on a sold steading), so a world that never traded is byte-identical to the pre-WR-10 engine.',
+        check: 'NOT expressible from a receipt: the containers it rewrites are filled by three other subsystems in worlds where this flag was never true. Pinned in tests/property/sovereigntyTradeDormancyFence.test.js, where the flag own footprint is compared against its own input across a drive that DOES convey when lit.',
+      }),
+      Object.freeze({
+        name: 'the_rung_survives_the_sale',
+        description: 'A vassalage changes overlord without changing rung. The only pre-existing occupier-change writer resets the ladder to contested at resistance 0.35, which would hand a buyer a fight instead of the holding it bought and would make the settlement immediately unconveyable again. The sale restarts the tenure clock and raises resistance; it never demotes.',
+        check: 'NOT expressible from a receipt: the census counts occupation ENTRIES, never their rungs. Pinned in tests/domain/sovereigntyTransferWr10w.test.js, where the same predicate is run against the reset path as an executed mutant and must catch it.',
+      }),
+      Object.freeze({
+        name: 'history_and_the_lineage_edge_are_never_rewritten',
+        description: 'settlement.parentRef is the immutable founding receipt and the regional lineage edge is the live political bond; a sale rewrites NEITHER. So the market cause and the WR-3 lineage cause compose rather than overwrite: after a conveyance the world can still say both who holds this town now and which line founded it.',
+        check: 'NOT expressible from a receipt: parentRef lives on the settlement save, outside every worldState census. Pinned in tests/domain/sovereigntyTransferWr10w.test.js, where the conveyance write is scanned for the field and the lineage question is asked both ways on the same fixture afterwards.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so. Like the belief
+    // axes above, it declares nothing rather than declaring a channel it cannot own.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**
