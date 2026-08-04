@@ -323,6 +323,31 @@ describe('historyBeatPresence()', () => {
  * it names the side that moved.
  */
 describe('the likely-future mirror moves in lockstep with the spine', () => {
+  /**
+   * THE SECOND, QUIETER WAY BACK TO THE SPLICE. The mirror read `.label` bare
+   * while the spine put every candidate through `nounPhrase`, whose TWO
+   * independent refusals (over-long; sentence break inside) both fall through
+   * to the type token. So a tension carrying a refused label AND a type made
+   * the two name DIFFERENT tensions — the ARM pin above still agreed, because
+   * both answered "tensions", and the beat printed the narrative body the
+   * guard exists to keep out of a one-line slot.
+   *
+   * Both fixtures carry a `.type`, which is what makes them discriminating:
+   * the shared rule must land on the TYPE, not on the label and not on the
+   * stability fallback. Each trips EXACTLY ONE refusal, so deleting either
+   * guard is caught alone.
+   *
+   * These arms are reachable through AUTHORED/IMPORTED content only — a
+   * generated tension carries `.type` + `.description` and no label at all.
+   */
+  /** Long, deliberately terminator-free: only the length cap can refuse it. */
+  const OVERLONG_LABEL =
+    'a caravan levy dispute between the salt factors and the river wardens'
+    + ' that has run for three seasons';
+
+  /** Short, deliberately multi-sentence: only the terminator check refuses it. */
+  const MID_SENTENCE_LABEL = 'The mill burned down. No one rebuilt it';
+
   /** The two arms, read off each derivation's OBSERVABLE output. */
   const spineArmOf = (spine) =>
     spine.likelyFuture.includes('bound to the unresolved') ? 'tensions'
@@ -348,6 +373,12 @@ describe('the likely-future mirror moves in lockstep with the spine', () => {
     }],
     ['bare strings', {
       history: { currentTensions: ['water rights'] },
+    }],
+    ['an authored label REFUSED for length, with a type behind it', {
+      history: { currentTensions: [{ label: OVERLONG_LABEL, type: 'wharf_precedence' }] },
+    }],
+    ['an authored label REFUSED for a sentence break, with a type behind it', {
+      history: { currentTensions: [{ label: MID_SENTENCE_LABEL, type: 'granary_arrears' }] },
     }],
     ['no tensions, critical stability', {
       history: { currentTensions: [] }, powerStructure: { stability: 'Critical (active siege)' },
@@ -376,9 +407,22 @@ describe('the likely-future mirror moves in lockstep with the spine', () => {
     // The arm check alone would pass if both read a tension and disagreed
     // about which. The spine names up to two; the beat names the first, and
     // the spine's line must contain it.
+    //
+    // THE MINIMUM-HIT COUNTER. This loop `continue`s past every fixture that
+    // did not answer from tensions, so a regression that silently stopped the
+    // tension arm from firing AT ALL would leave it asserting nothing and
+    // passing in perfect silence — the exact vacuity shape this suite exists
+    // to refuse. The floor is the number of tension-carrying fixtures above
+    // (five: the generated shape, .label, .name, bare strings, and the two
+    // refused-label rows, which fall through to their type token and so still
+    // answer from tensions — six in total). It TIGHTENS toward reality and is
+    // never lowered to admit a regression.
+    const TENSION_FIXTURES = 6;
+    let checked = 0;
     for (const [label, settlement] of FIXTURES) {
       const beat = deriveHistoryBeats(settlement).likelyFuture;
       if (beat?.source !== 'history.currentTensions') continue;
+      checked++;
       const named = beat.text.replace(/^Tensions point toward /, '').replace(/\.$/, '');
       expect(
         deriveSimulationSpine(settlement).likelyFuture.toLowerCase(),
@@ -386,6 +430,63 @@ describe('the likely-future mirror moves in lockstep with the spine', () => {
         + ` "${named}", which the spine's line does not name.`,
       ).toContain(named.toLowerCase());
     }
+    expect(
+      checked,
+      `the WHICH-TENSION comparison ran on ${checked} fixture(s), not`
+      + ` ${TENSION_FIXTURES} — the tension arm stopped firing and this pin was`
+      + ' asserting nothing.',
+    ).toBe(TENSION_FIXTURES);
+  });
+
+  it('the refusal fixtures really do isolate one guard each', () => {
+    // The control on the controls, mirroring simulationSpine.test.js's. If a
+    // fixture drifts across the other guard's threshold, its arm stops
+    // proving what it claims and this says so before the silence does.
+    expect(OVERLONG_LABEL.length, 'the overlong fixture must exceed the 80-char cap')
+      .toBeGreaterThan(80);
+    expect(OVERLONG_LABEL, 'the overlong fixture must carry NO sentence break')
+      .not.toMatch(/[.!?]\s/);
+    expect(MID_SENTENCE_LABEL.length, 'the mid-sentence fixture must sit UNDER the cap')
+      .toBeLessThanOrEqual(80);
+    expect(MID_SENTENCE_LABEL, 'the mid-sentence fixture must carry a sentence break')
+      .toMatch(/[.!?]\s/);
+  });
+
+  it('a REFUSED label falls through to the type token on BOTH sides', () => {
+    // The pin on the divergence itself. Before the mirror imported the
+    // spine's guard, the beat named the refused label while the spine named
+    // the type — the ARM pin agreed ("tensions" both) and the beat printed
+    // the splice defect anyway. One row per refusal, so each guard's deletion
+    // is caught alone rather than by their conjunction.
+    const arms = [
+      ['LENGTH', OVERLONG_LABEL, 'wharf_precedence', 'wharf precedence', 'caravan levy dispute'],
+      ['SENTENCE BREAK', MID_SENTENCE_LABEL, 'granary_arrears', 'granary arrears', 'burned down'],
+    ];
+    for (const [guard, label, type, humanized, labelFragment] of arms) {
+      const settlement = { history: { currentTensions: [{ label, type }] } };
+      const beat = deriveHistoryBeats(settlement).likelyFuture;
+      const spine = deriveSimulationSpine(settlement);
+      expect(beat?.source, `${guard}: the beat abandoned the tension arm entirely`)
+        .toBe('history.currentTensions');
+      expect(beat.text, `${guard} guard: the beat named the REFUSED label, not the type`)
+        .toBe(`Tensions point toward ${humanized}.`);
+      expect(beat.text, `${guard} guard: the refused label reached the beat`)
+        .not.toContain(labelFragment);
+      expect(spine.likelyFuture, `${guard} guard: the spine named the REFUSED label`)
+        .toBe(`Its likely future is bound to the unresolved ${humanized}.`);
+    }
+  });
+
+  it('the guard is SPECIFIC: a label clean on both counts still names the LABEL', () => {
+    // The negative control for both arms above. Without it, refusing every
+    // label and always falling to the type would satisfy them perfectly.
+    const settlement = {
+      history: { currentTensions: [{ label: 'Guild Rivalry', type: 'wharf_precedence' }] },
+    };
+    const beat = deriveHistoryBeats(settlement).likelyFuture;
+    expect(beat.text).toBe('Tensions point toward guild rivalry.');
+    expect(deriveSimulationSpine(settlement).likelyFuture)
+      .toBe('Its likely future is bound to the unresolved guild rivalry.');
   });
 
   it('over REAL generated settlements, the tension arm is REACHABLE on both sides', () => {

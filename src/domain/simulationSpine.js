@@ -183,10 +183,18 @@ function asList(value) {
  * punctuation in the MIDDLE — that is the signature of a description body —
  * nor a length no slot could absorb.
  *
+ * EXPORTED BECAUSE IT IS SHARED, NOT BECAUSE IT IS PUBLIC. `historyBeats.js`
+ * derives the same "which tension is this settlement bound to" answer for its
+ * own `likelyFuture` beat, and its docstring has always claimed to mirror this
+ * file. A second spelling of the refusal is a fork that drifts, and it drifted
+ * once already (the `.label`/`.name`-only read that made the mirror's tension
+ * arm dead). One rule, spelled here, imported there, pinned in lockstep by
+ * tests/domain/historyBeats.test.js.
+ *
  * @param {unknown} candidate
  * @returns {string|null}
  */
-function nounPhrase(candidate) {
+export function nounPhrase(candidate) {
   const text = firstNonEmpty(candidate);
   if (!text) return null;
   const trimmed = text.replace(/[.\s]+$/, '');
@@ -352,7 +360,13 @@ function stressorEntries(settlement) {
   }
   return asList(raw)
     .map(entry => (typeof entry === 'string' ? { label: entry } : entry))
-    .filter(entry => entry && typeof entry === 'object');
+    // The predicate is spelled as a TYPE GUARD, not a bare boolean: `asList`
+    // hands back `unknown[]`, and a boolean filter narrows nothing, so the
+    // declared `Array<Record<string, unknown>>` return was a strict error the
+    // ratchet was carrying at 1-over-baseline. Runtime behaviour is identical.
+    .filter(/** @type {(entry: unknown) => entry is Record<string, unknown>} */ (
+      entry => !!entry && typeof entry === 'object'
+    ));
 }
 
 /** @param {Record<string, unknown>} entry @returns {string|null} */

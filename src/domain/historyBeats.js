@@ -31,6 +31,10 @@
  * No imports from src/lib — domain tsconfig include stays self-contained.
  */
 
+// The ONE import this reader takes, and it takes it deliberately: the splice
+// guard the spine refuses tension labels with. See `tensionName` below.
+import { nounPhrase } from './simulationSpine.js';
+
 // ── The read shape ──────────────────────────────────────────────────────
 // These derivations are READERS: they never construct history, they only
 // interrogate it. The typedefs below are the fields this file actually
@@ -382,12 +386,32 @@ function deriveUnresolvedWound(settlement) {
  * and "Tensions point toward The population changed faster than the settlement
  * could absorb.." is the splice defect the spine was rebuilt to retire.
  *
+ * THE REFUSAL IS THE SPINE'S, IMPORTED. Reading `.label` bare was a second,
+ * quieter way back to the same splice: the spine puts every candidate through
+ * `nounPhrase`, which refuses an over-long label and refuses one carrying a
+ * sentence break, and then FALLS THROUGH TO THE TYPE TOKEN. A mirror that
+ * accepted the refused label named a DIFFERENT tension than the spine did —
+ * the arms agreed, the tension did not — and printed the defect the guard
+ * exists to stop. Both rungs now draw through the shared guard.
+ *
+ * REACHABILITY, stated so no one mistakes this for a live-generation repair:
+ * a GENERATED tension carries `.type` + `.description` and neither `.label`
+ * nor `.name`, so both refusal arms are reachable only through AUTHORED or
+ * IMPORTED content (custom-content packs, hand-written fixtures, save data
+ * from an external tool). That is exactly the content the guard was written
+ * for, and exactly the content no generator invariant covers.
+ *
+ * KNOWN NON-MIRRORED EDGE: the spine reads its label through `firstText`,
+ * which also flattens an ARRAY of strings; this reads a string only. Tension
+ * labels are typed `string` here and no producer emits an array, so the shape
+ * is out of the mirrored set rather than a silent divergence.
+ *
  * @param {CurrentTension|undefined} tension
  * @returns {string|null}
  */
 function tensionName(tension) {
-  if (typeof tension === 'string') return firstNonEmpty(tension);
-  const labelled = firstNonEmpty(tension?.label, tension?.name);
+  if (typeof tension === 'string') return nounPhrase(tension);
+  const labelled = nounPhrase(firstNonEmpty(tension?.label, tension?.name));
   if (labelled) return labelled;
   const type = firstNonEmpty(tension?.type);
   return type ? type.replace(/_/g, ' ') : null;
