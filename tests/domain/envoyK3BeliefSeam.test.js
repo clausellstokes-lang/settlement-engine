@@ -238,6 +238,25 @@ const NEGOTIATION_MODULES = Object.freeze({
   // thinks its neighbour is, and a single import of a truth reader would turn
   // that from a belief into a fact and quietly delete the deception road.
   'src/domain/worldPulse/conquestIntent.js': [],
+  // WR-10 (amendment S). "Valuation (K3 governs)" names `appraiseSettlementAsset` by
+  // hand, and the architecture volume's §3 SEAM MECHANICS block lists it in THIS pin
+  // set by name. It is pinned at ZERO IMPORTS for the reason the feasibility composite
+  // is: a court's price for a town is exactly the kind of number that would be
+  // "improved" by one true-state lookup, and the improvement would delete the belief
+  // gap the whole sovereignty market is built on — two courts pricing one town
+  // differently is not noise here, it is the mechanism.
+  'src/domain/worldPulse/sovereigntyAppraisal.js': [],
+  // The bundle stacker is a negotiation path too — it decides whether a deal exists —
+  // so it is pinned rather than left silent. Its reach is TWO modules and both bottom
+  // out safely: `sovereigntyAppraisal.js` is pinned directly above at zero imports, and
+  // `peaceTermsCatalog.js` is the term VOCABULARY (the same reach `negotiationPictures`
+  // already has one shelf up), which reaches only the treaty clock and cannot return a
+  // settlement's strength, stores or pressures. The token scan below proves that for
+  // this row independently rather than taking the reasoning on trust.
+  'src/domain/worldPulse/sovereigntyBundle.js': [
+    './peaceTermsCatalog.js',
+    './sovereigntyAppraisal.js',
+  ],
 });
 
 // THE POSITIVE CONTROL. The absence pins above are only worth anything if the same
