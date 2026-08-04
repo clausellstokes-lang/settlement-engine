@@ -820,13 +820,22 @@ describe('THE CEDAR SHAFT — the barrel, the wraps, and the groove cut in it', 
     // the wood is the SAME HUE, so a wrap bright enough to clear 3:1 would be a
     // different red rather than a deeper one — and the spec deepens it to oxblood. The
     // claim therefore moves from "a step against the wood" to "a wound structure", and
-    // both halves are pinned so neither can quietly disappear.
+    // both halves are pinned — the step here, the rendered structure in navFletching's
+    // R5 — so neither can quietly disappear.
     expect(ratio(WRAP, SHAFT_BODY)).toBeLessThan(AA_UI);
     expect(ratio(WRAP, SHAFT_BODY).toFixed(2)).toBe('1.69');
     // 1 — it IS still a darker band than the wood, at both of its dark steps.
     expect(luminance(WRAP)).toBeLessThan(luminance(SHAFT_BODY));
     expect(ratio(WRAP_EDGE, SHAFT_BODY).toFixed(2)).toBe('2.22');
-    // 2 — and its own crest-to-valley ladder is what makes it read as thread.
+    // 2 — 2.12 is the AUTHORED-TOKEN ratio, and pinning it guards exactly one thing: that
+    // the hex pair keeps its separation and cannot quietly collapse in a repaint.
+    // ⚠️⚠️ IT IS NOT WHY THE WRAP READS AS THREAD — this line used to say it was, and no
+    // reader has ever seen 2.12. The compositor multiplies WRAP_BARREL's luminance
+    // modulator over the turns, so the authored gloss never reaches the screen undimmed
+    // and the RENDERED crest-to-valley ladder measures 1.81:1 (crest #6A311E..#6B311F,
+    // valley #270D07). That executed ladder is the wound structure the eye actually reads,
+    // and it is pinned on the composited pixel in tests/components/navFletching.test.jsx
+    // (R5); theme.js's WRAPS note carries the correction in full.
     expect(ratio(WRAP_GLOSS, WRAP_EDGE)).toBeGreaterThan(2);
     expect(ratio(WRAP_GLOSS, WRAP_EDGE).toFixed(2)).toBe('2.12');
     expect(luminance(WRAP_EDGE)).toBeLessThan(luminance(WRAP));
