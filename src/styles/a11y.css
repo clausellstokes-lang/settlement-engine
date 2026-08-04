@@ -40,6 +40,42 @@
   border-radius: 3px;
 }
 
+/* THE STICKY BAR DRAWS ITS RING INSIDE ITS OWN BOX.
+ *
+ * The app header is `position: sticky; top: 0`, so a control in it sits flush
+ * against the viewport's top edge and an OUTSET ring has nowhere to go: it is
+ * painted at a negative y and simply never reaches a pixel anyone can see. The
+ * ring was not clipped by an ancestor — no clip-path, no overflow:hidden on the
+ * chain — it was drawn where no viewport reaches, which is why "nothing clips
+ * it" kept coming back true while the top edge stayed missing. Measured on this
+ * tree at 1440x900, FIVE of the bar's eight controls lost the whole 3px band:
+ * the lockup (box top 1.58 -> ring at y=-3.42..-0.42), the three plain tabs and
+ * the account control (box top 2 -> ring at y=-3..0).
+ *
+ * Flipping the offset to a full negative ring-width puts the entire ring inside
+ * the control's own box, where it is always on screen. This is the SAME cure the
+ * fletch cells already carry inline (NavRibbon.jsx) — those cells keep their own
+ * declaration, which is identical to this one and simply wins by being inline;
+ * the rule generalises their answer to every sibling in the bar instead of
+ * leaving four of them to be found one at a time.
+ *
+ * ⚠️ THE VALUE IS THE RING'S OWN WIDTH, negated. It is spelled longhand because
+ * the width above must stay a literal — tests/components/navFletching.test.jsx
+ * reads `outline: 3px solid var(--sf-focus)` out of this file by regex to derive
+ * its inset pin. If that width is ever re-weighted, BOTH numbers move together;
+ * an inset smaller than the ring's width would push part of the band back over
+ * the viewport edge, which is the defect itself.
+ *
+ * Nothing here suppresses a ring, adds a second one, or changes its colour or
+ * weight: only which side of its own edge it is drawn on. The selector is exact
+ * — `.parchment-bg` has a single application site (App.jsx's shell) and the two
+ * app bars, mobile and desktop, are its only direct `header` children, so the
+ * estate's other 45 `<header>` elements (dialog and section heads, none of them
+ * stuck to the viewport) keep the outset ring unchanged. */
+.parchment-bg > header {
+  --sf-focus-ring-offset: -3px;
+}
+
 /* WCAG 2.2 SC 2.5.8 — Target Size (Minimum). 24x24 CSS px is the
  * floor; anything smaller fails. We still allow the rule to be
  * overridden per-element when the larger target is supplied via
