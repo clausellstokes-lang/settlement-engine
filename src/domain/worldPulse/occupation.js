@@ -794,7 +794,7 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
    *  half is entitled to (belief decides the march; the world decides whether it
    *  worked). Reuses the same model `occupiedUsefulness` already runs on. */
   const capacityCache = new Map();
-  const capacityOf = (/** @type {any} */ id) => {
+  const capacityOf = (/** @type {string} */ id) => {
     const key = String(id);
     if (capacityCache.has(key)) return capacityCache.get(key);
     const item = itemFor(key);
