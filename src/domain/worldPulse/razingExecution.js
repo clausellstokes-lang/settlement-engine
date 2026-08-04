@@ -668,18 +668,18 @@ export function razingHolderEdgesFor(worldState, snapshot, razerId, victimId) {
  * shape and adding none. When nothing is minted or consumed this returns the
  * SAME FROZEN OBJECT, so the spread is byte-neutral rather than merely equal.
  *
- * ⛔ THE UNWIRED LEDGER (the conquestFeasibility idiom — a deferral written down
- * where a dead-code sweep will find it, not rot). This patch is BUILT, RETURNED
- * on `evaluateWarLayer`'s bag, and NOT YET SPREAD. `pulseKernel.js:916` is the
- * one line that must spread it, the edit is net-zero on the size ratchet's own
- * metric (1580 effective before and after), and it is STOPPED on a gate that is
- * not size: staging `pulseKernel.js` surfaces its two PRE-EXISTING, CHAIR-UNRULED
- * `no-useless-assignment` errors to lint-staged, and the obvious repair is not
- * safe (`reasonCoalitionEvidence`'s reassignment sits inside the peace-engine
- * conditional, so dropping its `= []` hands `undefined` to
- * `mergeWarCoalitionEvidence` on the peace-dark path). Consumer owed: that one
- * line. Until it lands, a razing's licenses are computed and discarded — which
- * is inert, because nothing else reads them.
+ * ✅ THE UNWIRED LEDGER IS RETIRED (lane WZ-3, under chair ruling CR-PK-1). It
+ * stood here through lane WZ-2 because the consumer it named could not be
+ * staged: the kernel carried two `no-useless-assignment` errors and the repair
+ * had been recorded as unsafe. That analysis turned out to be false on both
+ * legs — the flagged reassignment is not inside a conditional at all, and the
+ * merge it feeds reads every group through `Array.isArray(group) ? group : []`,
+ * so `undefined` and `[]` were never distinguishable there. The kernel now
+ * spreads this patch at pulseKernel.js `...war.worldStatePatch, deployments:
+ * war.deployments` — the ON-path re-seat inside `if (simulationRules.warLayerEnabled)`,
+ * never the war-off wind-down twin, which `warDeployment.test.js` forbids
+ * forever. The line's shape changed and its count did not: 1580 effective
+ * before and after. A razing's licenses are now MINTED, CARRIED and PERSISTED.
  *
  * ⚠️ THE CLOSED LOOP IS NOT RE-IMPLEMENTED HERE. `mintVengeanceLicenses` refuses
  * the `vengeance` road at the only door that can create a license, so the
@@ -740,10 +740,27 @@ export function razingLicensePatch({
  * keeps the BRANCH (which it owns, because it owns the siege) and this file
  * keeps the assembly (which it already owns).
  *
+ * ⚠️⚠️ `licenseState` IS THE ACCUMULATOR SEAM, AND IT EXISTS BECAUSE A TICK CAN
+ * BURN TWO TOWNS. The mouth's razing branch lives inside the per-target siege
+ * loop, so two sieges resolving on the same tick call this function twice. Each
+ * call derives its patch from the worldState it is HANDED — so if both were
+ * handed the same untouched one, the second patch would REPLACE the first and
+ * the first razing's minted licenses would be silently lost the moment the
+ * kernel spreads the last patch. The caller therefore threads the accumulating
+ * ledger through `licenseState` while `worldState` stays the tick's ORIGINAL
+ * picture. THE SPLIT IS THE POINT and it is not an accident of convenience:
+ * every DECISION read (doctrine, beliefs, held licenses, the extremity walk)
+ * must see the tick's opening state, or a license minted by the first burning
+ * could arm the second one in the same tick — the eye-for-an-eye cascade,
+ * re-entering through the accumulator door that was opened to prevent a leak.
+ * Absent (`null`) it falls back to `worldState`, so a single-razing tick and
+ * every existing caller are byte-identical.
+ *
  * @param {{ worldState?: unknown, snapshot?: unknown, razerId?: unknown,
  *   victimId?: unknown, razerName?: unknown, victimName?: unknown,
  *   tick?: unknown, population?: unknown, namedCastCount?: unknown,
- *   institutions?: unknown, movableWealth?: unknown, holderEdges?: unknown }} args
+ *   institutions?: unknown, movableWealth?: unknown, holderEdges?: unknown,
+ *   licenseState?: unknown }} args
  * @returns {{ decision: RazingDecision, plan: RazingPlan,
  *   worldStatePatch: Readonly<Record<string, unknown>>, outcome: Record<string, unknown> }|null}
  *   null when the doctrine is dark or the law refused — and the caller then does
@@ -753,6 +770,7 @@ export function razingSiegeEmission({
   worldState = null, snapshot = null, razerId = '', victimId = '',
   razerName = '', victimName = '', tick = 0, population = null,
   namedCastCount = 0, institutions = [], movableWealth = 0, holderEdges = [],
+  licenseState = null,
 } = {}) {
   const razer = String(razerId || '');
   const victim = String(victimId || '');
@@ -780,8 +798,12 @@ export function razingSiegeEmission({
     decision,
     plan,
     // THE LEDGER WRITE, AS A PATCH THE KERNEL SPREADS (see razingLicensePatch).
+    // The MINT reads the accumulating ledger (so a second burning on the same
+    // tick composes rather than replaces); every DECISION above read the tick's
+    // original picture. See the licenseState note in this function's contract.
     worldStatePatch: razingLicensePatch({
-      worldState, decision, plan, razerId: razer, victimId: victim, tick,
+      worldState: licenseState || worldState,
+      decision, plan, razerId: razer, victimId: victim, tick,
       candidates: arrayOf(edges).map((raw) => ({
         holderId: recordOf(raw).holderId,
         adequacyToVictim01: recordOf(raw).adequacyToVictim01,

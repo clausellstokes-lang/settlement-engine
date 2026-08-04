@@ -911,7 +911,25 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // Persist the updated one-army ledger so it survives to the next tick. The
     // war-exhaustion scar ledger rides alongside it (non-reverting; ratcheted by the
     // evaluator, decayed slowly when armies come home) — read-last/write-next.
-    worldState = { ...worldState, deployments: war.deployments, warExhaustion: war.warExhaustion };
+    // WR-8 R2 — THE RAZING'S LICENSE LEDGER COMES HOME HERE, and this is the one
+    // line that lands it. `evaluateWarLayer` returns a BAG and cannot mutate
+    // worldState, so a razing's mint/consume rides back as a FROZEN patch and the
+    // kernel spreads it into the single re-seat it already writes: the shape of
+    // this line changes, its count does not (R-BLD-10 banks this file at 1580
+    // effective with tolerance zero, and comments are skipped by max-lines).
+    //
+    // ORDER IS DELIBERATE. The patch spreads AFTER the whole prior worldState (so
+    // the ledger it carries is authoritative — it was DERIVED from that same
+    // worldState this tick) and BEFORE the two keys this line has always written,
+    // so it can never overwrite the deployment / exhaustion re-seat.
+    //
+    // BYTE-NEUTRAL BY REFERENCE, not merely by equality: in every world that
+    // burned no town the layer returns the SAME frozen EMPTY_PATCH object, and
+    // spreading an empty object adds no key at all. Every existing campaign is
+    // untouched. THE WIND-DOWN RE-SEAT BELOW MUST NEVER GAIN THIS SPREAD — that
+    // branch resolves every deployment as a WITHDRAWAL, where no siege can be won
+    // and therefore no town can burn; `warDeployment.test.js` forbids it forever.
+    worldState = { ...worldState, ...war.worldStatePatch, deployments: war.deployments, warExhaustion: war.warExhaustion };
     // Defender-attrition SPIKE (flag-gated): persist the per-target defender siege
     // ledger only when the flag produced one. Null on the default path ⇒ the key is
     // never added, so worldState stays byte-identical for every existing campaign.

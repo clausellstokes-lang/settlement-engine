@@ -277,6 +277,11 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   // home as a PATCH the kernel spreads into the single line it already writes.
   // Frozen-empty in every world that did not burn a town, by reference.
   let worldStatePatch = EMPTY_PATCH;
+  // The MINT's running picture (see razingSiegeEmission's licenseState contract):
+  // starts as this tick's worldState and folds each razing's patch forward, so a
+  // tick that burns two towns keeps both sets of licenses. Never read by any
+  // decision — only by the ledger write.
+  let razingLicenseState = worldState;
   const graph = snapshot?.regionalGraph || {}; const openerCasusFor = makeCurrentWarCasusRead({ snapshot, worldState, graph, rules });
   // M5: SIEGE-AS-STARVATION gate. On the spatial path (marker present) the siege
   // verdict resolves by supply interdiction × time (not the capacity roll). false off
@@ -730,6 +735,13 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // `else` arm below, byte-identically.
     const razed = razingSiegeEmission({
       worldState,
+      // THE ACCUMULATOR, not a second copy of worldState. Two sieges can fall on
+      // one tick, and each mint derives from the state it is handed — so without
+      // this the second razing's patch would REPLACE the first's and one town's
+      // mourners would silently lose their right of retribution. Every DECISION
+      // read still uses `worldState` above (the tick's opening picture), so a
+      // license minted by the first burning can never arm the second.
+      licenseState: razingLicenseState,
       snapshot,
       razerId: occupierId,
       victimId: targetId,
@@ -746,7 +758,13 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // SPENDS the license it was permitted by and mints nothing at all — the
     // refusal lives in `mintVengeanceLicenses`, at the only door that can create
     // one, so the eye-for-an-eye cascade cannot start rather than being damped.
-    if (razed && razed.worldStatePatch !== EMPTY_PATCH) worldStatePatch = razed.worldStatePatch;
+    if (razed && razed.worldStatePatch !== EMPTY_PATCH) {
+      worldStatePatch = razed.worldStatePatch;
+      // Fold it forward so a SECOND razing this tick mints on top of this one
+      // instead of over it. The bag still carries exactly one patch — the last,
+      // which by this fold contains every earlier one.
+      razingLicenseState = { ...razingLicenseState, ...razed.worldStatePatch };
+    }
 
     // P3 sack & forage: a stormed town is pillaged. The deltas RIDE the conquest outcome
     // (not a separate emission) so a dismissed / deferred conquest — "the takeover didn't

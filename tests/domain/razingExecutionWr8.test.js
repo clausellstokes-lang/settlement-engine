@@ -945,6 +945,72 @@ describe('R2 THE CLOSED LOOP, WIRED — the ledger travels as a patch, and the c
     expect(ledger['vengeance_license.Thornwall.Marrowfen.12'].consumedAtTick).toBe(40);
   });
 
+  test('⚠️⚠️ A TICK THAT BURNS TWO TOWNS KEEPS BOTH LEDGERS — the accumulator seam', () => {
+    // WHY THIS PIN EXISTS. The mouth's razing branch lives inside the per-target
+    // siege loop, so two sieges falling on the same tick call the emission twice.
+    // Each call derives its patch from the state it is HANDED, and the layer
+    // carries exactly ONE patch home — so if both calls were handed the same
+    // untouched worldState, the second patch would REPLACE the first and one
+    // town's mourners would silently lose their right of retribution the moment
+    // the kernel spread the last one. `licenseState` is the cure, and the
+    // counterfactual below is measured rather than asserted.
+    const { worldState, snapshot } = withMourner({ warExhaustion: { Karrow: 1 } });
+    // A SECOND victim of the same razer, with its own mourner in Everdeep.
+    worldState.relationshipStates['rel.Karrow.Marrowfen'] = { relationshipType: 'hostile', resentment: 0.9, trust: 0.05, fear: 0.4 };
+    worldState.relationshipStates['rel.Everdeep.Marrowfen'] = { relationshipType: 'allied', resentment: 0.02, trust: 0.95 };
+    worldState.spatialLedgers.warReasons['Karrow>Marrowfen'] = {
+      reasons: {
+        grievance: { type: 'grievance', score: 0.9, tick: 40, receipt: 'blood is owed here too' },
+        revanchism: { type: 'revanchism', score: 0.9, tick: 40, receipt: 'and owed as long' },
+      },
+    };
+    worldState.spatialLedgers.beliefMaps.Karrow.seat.Marrowfen = {
+      strengthBand: 0, allianceLabel: 'hostile', faithLabel: 'The Iron Maw', confidence01: 1,
+    };
+    snapshot.byId.set('Marrowfen', {
+      id: 'Marrowfen',
+      settlement: {
+        name: 'Marrowfen', tier: 'village', population: 900,
+        config: { primaryDeitySnapshot: { name: 'The Iron Maw', alignmentAxis: 'evil' } },
+      },
+    });
+    snapshot.settlements = [...snapshot.byId.values()];
+    snapshot.regionalGraph.edges.push(
+      { id: 'rel.Karrow.Marrowfen', from: 'Karrow', to: 'Marrowfen', relationshipType: 'hostile', type: 'hostile' },
+      { id: 'rel.Everdeep.Marrowfen', from: 'Everdeep', to: 'Marrowfen', relationshipType: 'allied' },
+    );
+
+    const first = EMISSION(worldState, snapshot); // Thornwall burns
+    const burnMarrowfen = (licenseState) => razingSiegeEmission({
+      worldState, snapshot, licenseState, razerId: 'Karrow', victimId: 'Marrowfen',
+      razerName: 'Karrow', victimName: 'Marrowfen', tick: 40,
+      population: 900, namedCastCount: 2, institutions: [{ id: 'shrine' }], movableWealth: 400,
+    });
+
+    const FIRST_ID = 'vengeance_license.Karrow.Thornwall.40';
+    const SECOND_ID = 'vengeance_license.Karrow.Marrowfen.40';
+    expect(Object.keys(first?.worldStatePatch.spatialLedgers?.vengeanceLicenses || {})).toEqual([FIRST_ID]);
+
+    // THE COUNTERFACTUAL, MEASURED. Hand the second burning the untouched world —
+    // exactly what the mouth did before this seam existed — and Thornwall's
+    // license is gone from the patch that would have been persisted.
+    const unthreaded = burnMarrowfen(null);
+    expect(Object.keys(unthreaded?.worldStatePatch.spatialLedgers?.vengeanceLicenses || {})).toEqual([SECOND_ID]);
+
+    // THE CURE. Thread the accumulating ledger and both survive, in one patch.
+    const threaded = burnMarrowfen({ ...worldState, ...first?.worldStatePatch });
+    const both = threaded?.worldStatePatch.spatialLedgers?.vengeanceLicenses || {};
+    expect(Object.keys(both).sort()).toEqual([SECOND_ID, FIRST_ID].sort());
+    expect(both[FIRST_ID].holders).toEqual(['Everdeep']);
+    expect(both[SECOND_ID].holders).toEqual(['Everdeep']);
+    expect(both[FIRST_ID].consumedBy).toBeNull();
+    expect(both[SECOND_ID].consumedBy).toBeNull();
+    // AND THE DECISION STILL READ THE TICK'S OPENING PICTURE, which is the whole
+    // reason `worldState` and `licenseState` are two arguments: a license minted
+    // by the first burning must never arm the second one on the same tick.
+    expect(threaded?.plan.road).toBe('initiation');
+  });
+
   test('NEGATIVE CONTROL — a razing with NOBODY who loved the victim moves the ledger not at all', () => {
     // The two-settlement world: no mourner, no mint, and the patch is the ONE
     // frozen empty object by REFERENCE, so the kernel's spread is byte-neutral

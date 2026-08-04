@@ -690,7 +690,7 @@ describe('WR-8 R — the razing fork at the conquest power-transfer site', () =>
 describe('WR-8 R2 — the license patch\'s one road into the world', () => {
   const KERNEL = readFileSync(new URL('../../src/domain/worldPulse/pulseKernel.js', import.meta.url), 'utf8');
 
-  test('⛔ STOPPED — the kernel route is MEASURED, and the wrong line is forbidden', () => {
+  test('✅ LANDED — the kernel spreads the patch on the war-ON re-seat, and never on the other one', () => {
     // ⚠️⚠️ THE LINE OCCURS TWICE AND ONLY ONE OF THEM IS THE RIGHT ONE. The
     // war-exhaustion re-seat is written once inside `if (simulationRules
     // .warLayerEnabled)` — where `evaluateWarLayer` resolved a siege and a town
@@ -699,27 +699,25 @@ describe('WR-8 R2 — the license patch\'s one road into the world', () => {
     // which the wind-down branch cannot produce, so patching THAT line would let
     // a ledger ride out of a branch incapable of minting one.
     //
-    // ⛔ THE PATCH IS NOT SPREAD YET, AND THE BLOCKER IS NOT SIZE. The edit is
-    // net-zero on the ratchet's own metric (pulseKernel is 1580 effective before
-    // and after; the added lines are `//` comments, which max-lines skips). It is
-    // the PRE-COMMIT HOOK: lint-staged lints only STAGED files, and staging
-    // `pulseKernel.js` at all surfaces its two PRE-EXISTING, CHAIR-UNRULED
-    // `no-useless-assignment` errors. The obvious repair is NOT safe —
-    // `reasonCoalitionEvidence`'s reassignment sits INSIDE the peace-engine
-    // conditional, so dropping the `= []` initializer hands `undefined` to
-    // `mergeWarCoalitionEvidence` on the peace-dark path. Chair call, not a lane
-    // call.
-    //
-    // THIS PIN IS STABLE IN BOTH WORLDS. It permits zero or one spread and
-    // forbids the wind-down line forever, so it guards the mistake rather than
-    // freezing the stop.
+    // ✅ AND THE PATCH IS NOW SPREAD (lane WZ-3, chair ruling CR-PK-1). This pin
+    // was written while the edit was STOPPED, and it deliberately permitted zero
+    // or one spread so it would guard the mistake rather than freeze the stop.
+    // The stop is over: the blocker was the pre-commit hook refusing a file whose
+    // two `no-useless-assignment` errors had been recorded as unfixable, and that
+    // record was false on both legs (the flagged reassignment is not inside any
+    // conditional, and the merge it feeds cannot tell `undefined` from `[]`). So
+    // the count is now EXACTLY ONE: permitting zero would leave a hole exactly
+    // where the ledger's only road runs. The kernel edit was net-zero on the size
+    // ratchet's own metric — 1580 effective before and after.
     const lines = KERNEL.split('\n');
     const reseats = lines.filter(
       (l) => l.includes('deployments: war.deployments, warExhaustion: war.warExhaustion'),
     );
     expect(reseats).toHaveLength(2); // the anchor: both re-seats exist
     const patched = lines.filter((l) => l.includes('...war.worldStatePatch'));
-    expect(patched.length).toBeLessThanOrEqual(1);
+    expect(patched).toHaveLength(1);
+    // …and it is the war-ON one: the single patched line is also a re-seat line.
+    expect(patched[0]).toContain('deployments: war.deployments');
     // THE FORBIDDEN LINE, identified by the branch it lives in. The wind-down
     // re-seat is the one preceded by the WAR-OFF wind-down comment block.
     const windDownIndex = lines.findIndex((l) => l.includes('WAR-OFF WIND-DOWN'));
@@ -730,6 +728,39 @@ describe('WR-8 R2 — the license patch\'s one road into the world', () => {
     );
     expect(windDownReseat).toBeGreaterThan(windDownIndex);
     expect(lines[windDownReseat]).not.toContain('...war.worldStatePatch');
+  });
+
+  test('⚠️ THE MOUTH FOLDS THE LEDGER FORWARD — a second burning may not erase the first', () => {
+    // ⚠️⚠️ THIS PIN IS STRUCTURAL AND SAYS SO, because the behavioural version is
+    // not affordable here and a silent structural pin is how a lane pretends.
+    // The leaf seam is proved BEHAVIOURALLY in razingExecutionWr8.test.js ("A TICK
+    // THAT BURNS TWO TOWNS KEEPS BOTH LEDGERS"), with the counterfactual measured:
+    // hand the second burning the untouched world and the first town's license is
+    // gone. What that pin cannot reach is whether THE MOUTH does the threading,
+    // and a mutant deleting the fold survived every suite — so this exists.
+    // A behavioural mouth-level proof needs a fixture where TWO sieges are won on
+    // ONE tick, which is a seed search rather than a fixture; DELIBERATELY
+    // DEFERRED, documented here, not a bug to re-find.
+    const SRC = readFileSync(new URL('../../src/domain/worldPulse/warDeployment.js', import.meta.url), 'utf8');
+    // Non-vacuity floor: the module is real and the razing branch is findable, so
+    // a relocation or a rename reds here instead of quietly proving nothing.
+    expect(SRC.length).toBeGreaterThan(10000);
+    expect(SRC).toContain('razingSiegeEmission({');
+    const lines = SRC.split('\n');
+    const callIndex = lines.findIndex((l) => l.includes('razingSiegeEmission({'));
+    expect(callIndex).toBeGreaterThan(-1);
+    // 1. The accumulator is DECLARED before the siege loop and seeded from the
+    //    tick's own worldState.
+    const seedIndex = lines.findIndex((l) => l.includes('let razingLicenseState = worldState;'));
+    expect(seedIndex).toBeGreaterThan(-1);
+    expect(seedIndex).toBeLessThan(callIndex);
+    // 2. The emission is HANDED it (and not the raw worldState twice over).
+    const handed = lines.findIndex((l, i) => i > callIndex && i < callIndex + 20 && l.includes('licenseState: razingLicenseState,'));
+    expect(handed).toBeGreaterThan(callIndex);
+    // 3. And the patch is FOLDED BACK IN after each razing, below the call.
+    const folded = lines.findIndex((l, i) => i > callIndex
+      && l.includes('razingLicenseState = { ...razingLicenseState, ...razed.worldStatePatch };'));
+    expect(folded).toBeGreaterThan(handed);
   });
 
   test('⚠️ THE PATCH ACTUALLY LEAVES THE LAYER — a razing tick carries the minted license home', () => {
