@@ -1697,3 +1697,114 @@ before writing is what stopped this lane clobbering a live session's own repair.
   git discipline is otherwise scattered per-brief: `grep -rl 'shared tree\|shared-tree\|pathspec
   commit\|lint-staged' docs/*.md` returns 9 files, 8 of them not this queue. Whether to give the
   class one home is an owner placement call, not a lookup.
+
+---
+
+## ⭐⭐ WR-10 — THE SOVEREIGNTY MARKET, BUILT DARK AS AN INSTRUMENT (lane WR-10,
+## 2026-08-04) @ `f9a7ddea` + `32f4708f` + `03b8ecde`. The last war wave per
+## `docs/SOL_QUEUE.md` §1 A1 item 10. Every evaluator amendment S names is now in the
+## tree, pure and unwired; nothing is lit, nothing persists, no golden moved. The war
+## lane's BUILD obligations are complete pending the owner-held items listed at the end.
+
+**WHAT LANDED.** Five modules, four commits, 74 new tests, nine executed mutants.
+
+- **`f9a7ddea` — the catalog row.** `sovereignty_transfer` joins `TERM_CATALOG` on the
+  `non_intervention` precedent (`executor:'seam'`, NO `CLASS_TERM` entry) plus its
+  `termLabel` case and an authored `TREATY_COMPLIANCE_VOICE` row. Byte-identity is
+  EXECUTED, not argued: the only road a term takes to a treaty is
+  `peaceTermsAppraisal`'s `CLASS_TERM[assetClass]` lookup, and the pin states that road
+  as a predicate run BOTH ways — the live map cannot reach the term, a mutant map that
+  names it IS caught.
+- **`32f4708f` — the appraisal (157/800) and the bundle (165/800).**
+  `appraiseSettlementAsset` is pinned in `envoyK3BeliefSeam` at ZERO IMPORTS;
+  `sovereigntyBundle` is pinned with a two-module closed list. The clearing rule is the
+  RECONCILED two-sided conjunction, and `ceiling_reached` is a named receipted outcome.
+- **`03b8ecde` — eligibility (95/800) and the geographic bound (105/800).**
+
+**FOUR STOP-AND-REPORT ITEMS (§10.6, report don't rule).**
+
+1. **THE TWIN NOTES ARE NOT TWINS, and `peace` is the difference.** The war volume
+   (:1268) says the degraded bundle composes "streams/stores/allyship/settlements/peace
+   only"; `DESIGN_FP_TRADE.md` §3 Seam One (:309-310) says the same list WITHOUT `peace`.
+   Both call themselves twins of each other. `peace` is load-bearing — the cession rider
+   is why WR-10 sequences after WR-7 at all. **BUILT AROUND WITH A RECORDED ASSUMPTION:**
+   this lane followed its OWN volume, so `peace` is a component, and PIN 6 in
+   `sovereigntyBundleWr10.test.js` records the divergence as EXACTLY `{peace}` and
+   nothing else — a NEW divergence reds, the known one is documented, and the chair's
+   reconciliation tightens that pin to a plain equality. **Chair item: which sentence is
+   wrong.**
+2. **A CHAIR-ORDERED AMENDMENT ROW WAS NEVER LANDED.** `DESIGN_FP_COUPLINGS.md`:1875-1881
+   ordered a war-volume §3 amendment giving WR-10's bundle a GR-3/TR-5 lit-precondition.
+   MEASURED at HEAD: the war volume's §3 ruling (:167-176) still names only
+   `demographicsEnabled` + WR-7's flag. The ordered row is ABSENT; only the degradation
+   note landed. **Chair edit to the volume, not an implementer's.**
+3. **WR-10 HAS NO §4 CANONICAL-MODEL ENTRY AND NO "Lifecycle paths" CLAUSE.** WR-9 got
+   one ("this wave adds NO persisted world state"); WR-10 did not, although the spec's
+   transfer semantics demonstrably write world state. **This lane's own build adds no
+   persisted surface at all** — every module is a pure read — so the gap is not yet
+   load-bearing, but the transfer writer cannot be built until the volume declares its
+   persistence story.
+4. **THE CERT ROW IS BLOCKED ON WR-8'S UNRESOLVED FORK.** `sovereigntyTradeEnabled` is
+   declared in `WAR_RULINGS_FLAG_KEYS` (`warConvergenceContract.js:283` — NOT the `:54`
+   this lane's brief cited; the file grew through the WR-9 waves and every hand-keyed
+   address into it has rotted) and `war_convergence.flag_coverage` already REQUIRES it,
+   but it has no preset row, so `simulationRuleKeys()` cannot census it and
+   `subsystemRowsWar.js` cannot carry a row. Declaring a preset row moves the
+   new-campaign state hash by a measured +32 bytes — the same two-arm fork WR-8's
+   identical row is already blocked on, recorded earlier in this queue. **NOT FORCED.
+   Gap recorded; no cert row this wave.**
+
+**J-WR-10-A (vetoable) — THE FAMILY WAS FORCED, AND THE SCOUT FILED IT AS OPEN.** The
+brief carried the `sovereignty` family collision (with `non_intervention`, and with
+TB-4's planned `route_restriction`) as a chair item. It is not one. Amendment S says
+"the asset on one side, ANY composition of EXISTING term families on the other", and
+§13 one-per-family stacking means a conveyance sharing a family with any existing term
+is mutually exclusive with the very consideration it is exchanged for. Its own family is
+structurally required, not preferred. The pin asserts the family is UNSHARED, which is
+the property amendment S depends on.
+
+**J-WR-10-B (vetoable) — ONE LADDER WAS MINTED.** Three input ladders are borrowed
+VERBATIM (tier ← `TIER_ORDER`, stores ← the negotiation picture's `storesBand`, route ←
+`ROUTE_FLOW_BANDS`) and the firesale reads `WAR_COST_TRAJECTORIES`, each pinned equal to
+its source. The DEMOGRAPHIC growth/decline DIRECTION was minted: no direction ladder
+exists to borrow (`OVERFLOW_BANDS` is a pressure LEVEL). J-WR-10 forbids a SECOND
+spelling of an existing concept; minting a synonym for `OVERFLOW_BANDS` would have been
+the violation.
+
+**⚠⚠ A DEAD BAND CAUGHT BY MEASUREMENT, and it is a class not an incident.**
+`MAX_REINFORCEMENT_WEEKS` was first set to 12, reasoning from
+`ARMY_TRANSIT_TUNING.MAX_MARCH_WEEKS` (52). It was UNREACHABLE. `hopWeeks` does not
+return a distance — it returns one through the digest's own `weeksPerCost` CALIBRATION,
+which normalizes each realm to a bounded span. Measured over every ordered pair of a
+20-seat realm the ENTIRE WORLD spans five rungs — **2w:54 3w:58 5w:47 6w:26 8w:5** — so a
+band of 12 admits every pair in every realm and refuses nothing, forever. A bigger map
+does not help: calibration means a bigger world has longer weeks, not more of them. The
+band is now 5, and a pin sweeps every pair of a real digest asserting BOTH sides
+non-empty. **This is the same class as the recorded `theoreticalCapacity` ratio bands
+above 1.50.** A related fixture trap is recorded in the test file: a digest's calibration
+comes from the placements it was BUILT with, so a three-settlement digest normalizes
+those three to be neighbours and moving them to opposite corners produces a SHORTER
+march.
+
+**PARKED, NOT OWED.** All seven WR-10 bands (§7 THE TUNING SURFACE, owner-signed at the
+soak redo): the three geographic reads' adequacy, trajectory weights, reserve/ceiling
+derivation, firesale discount, grievance magnitude, legitimacy start, plan-trigger
+thresholds. Authored raw and deliberately NOT filed in `proposedSoakBands.js` — that gate
+requires status exactly `RATIFIED` and filing them there would forge a signature this
+wave has no authority to give. Lighting `sovereigntyTradeEnabled` (§9.5, in build order,
+after `demographicsEnabled` and WR-7's flag). GR-3 and TR-5 — this wave mints no
+trade-rights row and spells no trade-rights literal, pinned by a comment-stripped source
+scan with guard-the-guard both ways, so R3's canonical-spelling ruling is not pre-empted.
+
+**NOT BUILT, AND WHY.** The transfer WRITER (the edge rewrite, the grievance mint, the
+low-legitimacy start), the plan-lane trigger and the Herald kinds are the wave's WIRING,
+and they are deferred on the WR-8 precedent (slices built dark, wiring chair-gated) for
+three measured reasons: item 3 above leaves WR-10's persistence story undeclared; the
+write path needs a pulse stage while `pulseKernel.js` is EXACT at 1580 and BANKED under
+R-BLD-10; and the three SP-6 war kind-pool walkers are already RED at base, so new kinds
+land inside an already-red walker. `warDeployment.js` / `warSiegeVerdict.js` /
+`pulseKernel.js` are also shared with the LIVE razing lane (WZ-2/WZ-3 pending).
+
+**THE WAR LANE'S BUILD OBLIGATIONS ARE NOW COMPLETE** pending: the four STOP items above,
+the seven parked bands, the flag lighting, the cert row behind WR-8's +32-byte fork, and
+WR-10's wiring behind a §4 lifecycle declaration.
