@@ -32,6 +32,16 @@ import { mintSovereigntySaleTreaties, considerationTypeFor } from '../../src/dom
 import { SOVEREIGNTY_REQUIRED_RULES } from '../../src/domain/worldPulse/sovereigntyAssets.js';
 import { SOVEREIGNTY_TRAJECTORY_BANDS } from '../../src/domain/worldPulse/sovereigntyAppraisal.js';
 import { createOccupationRecord } from '../../src/domain/worldPulse/occupation.js';
+import {
+  conveySteading as leafConveySteading,
+  satellitesLedgerOf as leafSatellitesLedgerOf,
+  satellitesOf as leafSatellitesOf,
+} from '../../src/domain/worldPulse/satellitesLedger.js';
+import {
+  conveySteading as kernelConveySteading,
+  satellitesLedgerOf as kernelSatellitesLedgerOf,
+  satellitesOf as kernelSatellitesOf,
+} from '../../src/domain/worldPulse/settlementLifecycleKernel.js';
 import { treatyPairKey } from '../../src/domain/worldPulse/peaceTerms.js';
 import { treatyOrientationOf } from '../../src/domain/worldPulse/treatyOrientation.js';
 import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
@@ -427,5 +437,25 @@ describe('WW-B — the geographic bound shapes the set', () => {
     // anchored: the stubbed-reach run in the contract fixture above clears on the identical
     // world, so this emptiness measures the bound rather than a composer that never ran.
     expect(out.receipts.some((r) => r.kind === 'sovereignty_sale_cleared')).toBe(false);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+describe('WW-B — CR-WR10-I: the kernel re-export is the SAME function, not a second one', () => {
+  it('every re-exported ledger name is object-identical to the leaf that owns it', () => {
+    // THE EXTRACTION'S OWN CLAIM, ASSERTED RATHER THAN ASSUMED. CR-WR10-I moved the
+    // satellites ledger out of settlementLifecycleKernel.js and re-exported all three
+    // names from it so no consumer's import path moved. A re-export that had quietly
+    // become a WRAPPER — or worse, a second copy of the row-move — would satisfy every
+    // existing test in the tree while making the "one authority" claim false, because a
+    // copy can drift from the orbit rule the leaf owns. Identity is the only assertion
+    // that can tell the difference.
+    expect(kernelConveySteading).toBe(leafConveySteading);
+    expect(kernelSatellitesLedgerOf).toBe(leafSatellitesLedgerOf);
+    expect(kernelSatellitesOf).toBe(leafSatellitesOf);
+    // …and they are live functions, so the identities above are not three undefineds.
+    expect(typeof leafConveySteading).toBe('function');
+    expect(leafSatellitesLedgerOf({})).toBeNull();
+    expect(leafSatellitesOf(null, 'nobody')).toEqual([]);
   });
 });
