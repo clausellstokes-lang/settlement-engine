@@ -18,6 +18,51 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-08-03 — LANE RR, THE COMBINED RE-RECORD (all 525 rows moved). TWO causes
+ *   ride one disclosed window under the chair's lane-RR ruling, so the estate
+ *   takes ONE re-record instead of two. Source commit 21bf1041.
+ *     (A) THE ORIGIN-RUNG WIDENING. `generateSettlementReason` held ONE sentence
+ *         per arm (PT2-5: nine bodies over the whole config space, the DEFAULT
+ *         road arm carrying exactly one). Each of the eight arms now holds five
+ *         authored variants — 45 bodies — selected DRAW-FREE via
+ *         kernel/proseHash.pickVariant from a key folding route, resolved
+ *         terrain, the food-deficit flag, the special-resource endowment and the
+ *         pipeline seed. Zero PRNG draws are consumed, which is why this is
+ *         prose selection and not a stream fork. Pools live in
+ *         src/generators/narrative/settlementOriginProse.js.
+ *     (B) THE resourceIcon CAMELCASE CLOSURE. The second icon re-record this
+ *         docstring predicted below. 56 dead `resourceIcon: ''` fields removed
+ *         from src/data/supplyChainData.js; copyCorruption SIG 1 widened from
+ *         `\bicon` (which is case-sensitive and could never see the camelCase
+ *         compounds) to `[A-Za-z]*[Ii]con`.
+ *   PROVEN TO BE EXACTLY THOSE TWO CLASSES BEFORE RE-RECORDING. All 525
+ *   settlements were regenerated as OBJECTS from COMMITTED BYTES on both sides —
+ *   detached worktrees at 32e25808 (the parent) and 21bf1041 — and deep-diffed
+ *   field by field with array indices collapsed to [*]. The complete census of
+ *   differing path-templates is TWO:
+ *     $.economicState.activeChains[*].resourceIcon   4,462 removals / 477 rows
+ *     $.settlementReason[*]                            412 changes  / 412 rows
+ *   Zero `added`, zero array-length moves, zero key-order moves: no name, count,
+ *   id, or rng draw moved. The 412 changes are ONE element per row — index 0,
+ *   the origin body; the tier sentence at index 1 never moved, and the array
+ *   lengths are unchanged (336 rows of 2, 189 rows of 1). No row ships a raw
+ *   `{channels}` splice token. TOTALITY: the parent-side regeneration reproduced
+ *   the OLD manifest on all 525 rows (0 mismatches), which proves these two are
+ *   the ONLY sources of drift and that the four lanes that landed between
+ *   0ab5e03e and 32e25808 moved no generator output. The re-recorded fixture was
+ *   produced in a clean detached worktree at 21bf1041, never from the shared
+ *   dirty tree, and cross-checks against an independently computed manifest with
+ *   0 mismatches. Key set unchanged: 0 rows added, 0 deleted.
+ *   ⚠️ THE PROMISE. This is a one-time, owner-disclosed break of the origin line
+ *   every existing seed used to print. Going forward the choice is seed-stable.
+ *   ⚠️ A GAP THIS CORPUS HAS, deliberately recorded rather than closed here:
+ *   there is NO port × riverside row. The riverside rows take the `river` route
+ *   and the port rows take coastal terrain, so the inland-river-port arm is
+ *   invisible to this golden — and a world-law violation in that arm's authored
+ *   prose passed this test and was caught only by generationWorldLaw.test.js.
+ *   Adding a row is a golden ADDITION and therefore owner-signed (precedent
+ *   aa33eba5); tests/generators/settlementOriginProse.test.js covers the arm in
+ *   the meantime.
  * 2026-08-03 — THE ICON SWEEP (all 525 rows moved). Cause: d9a1ea5a, the owner's
  *   icon-sweep directive of 2026-08-03 ("remove ALL icons of any kind that are
  *   not logos"), which deleted 94 dead `icon: ""` slots from the src/data files
@@ -38,8 +83,16 @@
  *   sweep is the ONLY cause of the drift and that nothing else had crept in.
  *   Old values removed were "" and the orphan U+FE0F variation selector — dead
  *   strings an earlier emoji strip had left behind, rendering nothing.
- *   EXPECT A SECOND ICON RE-RECORD (deliberately deferred here, not a bug to
- *   re-find): the sweep removed only the slots whose value was the orphan
+ *   EXPECT A SECOND ICON RE-RECORD — ⭐ TAKEN, by lane RR above, 2026-08-03.
+ *   (Left as written so the prediction and its discharge sit together.) One
+ *   correction the lane had to make to this paragraph's claim: of the residual
+ *   slots it names, the TWO in src/domain/inferSupplyChains.js are NOT dead.
+ *   They are required keys of the reviewed supply-chain persistence shape —
+ *   admitReviewedSupplyChain rejects a chain missing either — so they were kept
+ *   under a narrow, machine-checked allowlist in copyCorruption.test.js rather
+ *   than swept. The 56 in src/data/supplyChainData.js were genuinely dead and
+ *   are gone. Original text follows:
+ *   the sweep removed only the slots whose value was the orphan
  *   U+FE0F, so 4,462 `activeChains[*].resourceIcon: ""` slots STILL ship in
  *   generated output, sourced from 56 residual `resourceIcon: ''` fields in
  *   src/data/supplyChainData.js (plus 2 `needIcon: ''` in

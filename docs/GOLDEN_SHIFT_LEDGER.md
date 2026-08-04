@@ -1970,3 +1970,119 @@ built to retire.
 `generateSettlementReason` with per-arm draw-free variants, accepting a
 one-time 525-key golden re-record and a one-time origin-prose shift on every
 existing seed.
+
+---
+
+## LANE RR — THE COMBINED RE-RECORD: PT2-5's WIDENING IS BUILT, AND THE SECOND ICON CLASS IS CLOSED (2026-08-03)
+
+**STATUS: BUILT.** Source `21bf1041`; re-record its own commit, next. This
+section DISCHARGES the "NOT BUILT / stopped at the gate" status of the PT2-5
+section above — read the two together: PT2-5 holds the measurement and the
+design, this one holds what shipped and what it cost.
+
+### The gate, and who opened it
+
+PT2-5 stopped because the widening (i) re-records every golden key and (ii) is a
+one-time break, against THE PROMISE, of the origin line every existing seed has
+ever printed — an owner-signed class, not the chair's. The chair's lane-RR
+ruling reopened it deliberately and paired it with the owed `resourceIcon`
+closure **so the estate takes ONE re-record instead of two**. Nothing is pushed.
+A veto reverts two commits cleanly and this section is the record of what to
+revert.
+
+### What shipped
+
+Eight arms — the pre-RR branch structure exactly (route, the two port terrain
+sub-arms, the isolated deficit split) — each now holding **five authored
+variants**, 45 bodies where there were 9. Selection is `pickVariant`
+(`src/kernel/proseHash.js`): **zero PRNG draws**, so no downstream roll moved.
+Pools in `src/generators/narrative/settlementOriginProse.js`; the branch logic
+stays in `generateSettlementReason`, which remains the field's single writer.
+
+Measured, same probes PT2-5 used:
+
+| corpus | generations | bodies before | bodies after |
+|---|---|---|---|
+| config held at DEFAULT, 60 seeds varying | 60 | **1** | **5** |
+| tier × route × terrain × magic, seeds varying | 250 | **9** | **41** |
+
+The selection key folds route, the resolved terrain, the food-deficit flag, the
+special-resource endowment and the pipeline seed, each token appearing ONCE.
+`effectiveConfig` carries no `_seed`, so `generateNarratives` stamps `ctx._seed`
+on exactly as it already did for `generateHistory`. Realm sites carry per-site
+seeds, so two settlements in one realm on the same route and terrain now differ —
+the defect PT2-5 named.
+
+The two hazards PT2-5 said the implementation must respect, both honoured:
+**FNV-1a low-bit parity** — every pool is FIVE, never a power of two, the ban is
+structural and pinned, and every variant of every pool is pinned reachable over a
+400-seed family with a degenerate-family negative control; **the DM-edit
+boundary** — selection sits on the generator side, before the override, and no
+causal or machine prose enters the field.
+
+### ⚠️ THE FINDING THIS LANE ADDS, which PT2-5 could not have known
+
+**Authored prose is content, and content is bound by the generation world law.**
+Two first-draft `port.riverside` variants said "sea traffic" and "instead of a
+tide". An inland river port has no maritime capability, so
+`generationCoherence` raised *"Maritime claim without coastal or ocean-going
+capability."* and the entire dossier fell to `needs_review`. Two more carried no
+river-port token and would have reddened the same audit's `/river port|barges/i`
+assertion. All four withdrawn; the class is now closed by a pin that runs every
+variant of every arm through the REAL `createGenerationWorldLaw` predicate for
+that arm's own config, plus a 96-generation real-pipeline coherence sweep.
+
+**And the golden could not have caught it.** The 525-key corpus has **no
+port × riverside row** — its riverside rows take the `river` route, its port rows
+take coastal terrain. Adding one is a golden ADDITION and therefore owner-signed
+(precedent `aa33eba5`), so it is **DELIBERATELY DEFERRED — documented, not a bug
+to re-find**, and written into both the golden docstring and the arm's own pin.
+
+### The second cause riding the window
+
+The `resourceIcon` camelCase closure the icon-sweep shift record predicted. 56
+dead `resourceIcon: ''` fields removed from `src/data/supplyChainData.js`;
+`copyCorruption` SIG 1 widened from `\bicon` (case-sensitive, structurally blind
+to the compounds) to `[A-Za-z]*[Ii]con`. Machine-checked on the pre-RR bytes: the
+old regex found **0** hits in that file, the new one finds **56**.
+
+**A correction to what the memory and the old shift record both asserted:** the
+two slots in `src/domain/inferSupplyChains.js` are **NOT dead**. They are
+required keys of the reviewed supply-chain persistence shape —
+`admitReviewedSupplyChain` rejects a chain missing either — so deleting them
+would have broken custom-content review at the confirm step. Kept, reasoned at
+the line, and held by a narrow file+field allowlist whose justification is itself
+pinned: if the schema is ever relaxed, the allowlist reds and must be deleted
+with the slots.
+
+### THE CENSUS — the whole of what moved
+
+Regenerated as OBJECTS from **committed bytes on both sides** (detached worktrees
+at `32e25808`, the parent, and `21bf1041`), deep-diffed field by field with array
+indices collapsed to `[*]`:
+
+```
+removed   4462 occurrences / 477 rows   $.economicState.activeChains[*].resourceIcon
+changed    412 occurrences / 412 rows   $.settlementReason[*]
+```
+
+Zero `added`, zero array-length moves, zero key-order moves; two differing
+path-templates and no others. The 412 changes are one element per row — index 0,
+the origin body — with the tier sentence at index 1 untouched and array lengths
+unchanged (336 rows of 2, 189 of 1). No row ships a raw `{channels}` token.
+
+**TOTALITY:** the parent-side regeneration reproduced the OLD manifest on all 525
+rows, 0 mismatches — which is what licenses the word "only", and additionally
+proves the four lanes that landed between `0ab5e03e` and `32e25808` moved no
+generator output. The re-recorded fixture was produced in a clean detached
+worktree, never from the shared dirty tree, and cross-checks against an
+independently computed manifest with 0 mismatches. Key set unchanged: 0 rows
+added, 0 deleted.
+
+### The one-time shift, stated plainly
+
+Every existing seed's origin line changes once. Going forward the choice is
+seed-stable — "a seed is a world, forever" holds from here. Five surfaces carry
+the field: the journal page, the PDF chapter, the dossier Origin note, the AI
+grounding payload, and the spine. All five now read wider prose; none reads a
+different KIND of prose.
