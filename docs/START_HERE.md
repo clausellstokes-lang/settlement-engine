@@ -23,7 +23,88 @@ classes are owner-only (push→already authorized as backup; PR-merge, deploys,
    + THE_BASE_RESTORATION_LEDGER.md (Phase-D gate: zero PENDING rows),
    DESIGN_DEEP_CRAFT_PAGES.md, C1FIN_CONTROL_CENSUS.md (briefs/).
 
-## 3d. ⭐⭐ SNAPSHOT REFRESH 2026-08-04 (~00:45 EDT — THE BUILD ERA HANDOFF; supersedes §3c/§3b/§3; git wins)
+## 3e. ⭐⭐ SNAPSHOT REFRESH 2026-08-04 (~13:00 EDT — THE PAUSED HANDOFF; supersedes §3d and everything below; git wins)
+Written at an ACCOUNT SWITCH with EVERYTHING DELIBERATELY PAUSED by owner order
+("pause everything for now"). Same machine ⇒ the §6 memory dir survives and its
+index is CURRENT (read it second, after this section). NOTHING is running.
+- **WHERE THE BUILD LIVES**: minifold worktree (.claude/worktrees/minifold,
+  branch claude/composite-r4, ~380 commits ahead, NOTHING PUSHED). This ledger
+  branch takes "Ledger:" rows only. Rulings registry =
+  minifold docs/FABLE_VALIDATION_QUEUE.md (through WR-10's row + WR-9's).
+- **THE WAR LANE (Lane A1) IS BUILD-COMPLETE except one paused repair.**
+  WR-1..8 CLOSED — WR-8 via the era's FIRST rejected-then-repaired close
+  (@ 1b7c1eac + 39ba6590; the channel_inferred vocabulary leak + a strict red
+  were caught by verification, cured by membership-after-normalization,
+  CR-WZ5-A/B). WR-9 COMPLETE AS AN INSTRUMENT (@ fd222269, 06c58f69, 7a3c51ef,
+  a70c9284 + the chair's anchor repair d91e3ea0): endings classifier, duration
+  envelopes with an `unmeasured` cell, six force cells (force 3 permanently
+  UNOBSERVED, owner-gated), the collector counting real wars via the OUTCOME
+  STREAM (the briefed year-boundary census was measured BLIND to within-year
+  wars and replaced — J-WR9D-2). The acceptance VERDICT stays owner-held.
+  WR-10's INSTRUMENT is BUILT (@ f9a7ddea, 32f4708f, 03b8ecde, a5647976:
+  sovereignty_transfer term row, K3 zero-import appraisal, the two-sided
+  bundle conjunction with `ceiling_reached` receipted, ledger-membership
+  eligibility, the three-read geographic bound, the TR-5 degradation contract
+  pinned) — its verifier CONFIRMED architecture/byte-identity/9 mutants and
+  REJECTED on 3 small ratchet-attribution defects. **WR-10r (the repair) was
+  DISPATCHED THEN PAUSED seconds later, zero commits — resume:**
+  `Workflow({scriptPath: '<session-dir>/workflows/scripts/build-cycle-49-wr10r-ratchet-repairs-wf_8cc3d233-668.js', resumeFromRunId: 'wf_8cc3d233-668'})`
+  (full path in memory: wr10-sovereignty-market-state.md; the brief carries
+  CR-WR10-A clamp fork + CR-WR10-B twin-note reconciliation, complete).
+  WR-10's WIRING (transfer writer, plan trigger, Herald kinds) is
+  DEFERRED-RECORDED on measured reasons incl. the volume's missing §4
+  persistence story (chair/owner item).
+- **THE IDENTITY PROGRAM**: V4 is CLOSED (V4C 653be592..5ddd0d08 + V4D
+  a2dbdd36..98edbc9f + chip cures 456271ea/ca46705b/76ea345c) — mobile plaque
+  cured, blend contract pinned, docstrings measured-true. **V5 is the LIVE
+  DIRECTION** (memory: ribbon-v5-direction.md): FOUR owner directives — organic
+  asymmetric hanging vanes with per-feather thread bindings; the cartographer's
+  CARTOUCHE wordmark with the wax seal AS the O, prominent; THE HALF-ARROW
+  DEPTH LAW (the header is the BOTTOM HALF of a cylinder, axis at the top
+  edge; shadows systematic; the FONT CURVES with the barrel, subtly, legibility
+  outranks); burned-into-wood reference tabs. **The counsel pass (spec +
+  mockups, ZERO src changes) was amended with all four then PAUSED — resume:**
+  `Workflow({scriptPath: '<session-dir>/workflows/scripts/design-cycle-48-ribbon-v5-counsel-wf_98216244-174.js', resumeFromRunId: 'wf_046c88e2-739'})`.
+  The owner generated a Nano Banana Pro reference set; the chair's binding
+  curation is at Desktop **"Settlement Forge template review"/
+  V5-NANO-BANANA-REFERENCES.md** (owner still owes the PNGs into that folder;
+  the doc stands alone meanwhile). Key verdicts: burned-frame cartouche at
+  header scale, torn-leaf silhouette at large registers, seal-in-O oversized,
+  spiral lengthwise binding added, ⚠ the PENDANT PROBLEM (vanes must read as
+  fletching at rest, never hanging charms).
+- **OWNER-GATED, PARKED (never silently build)**: the WR-8/WR-10 cert-row
+  preset fork (+32 bytes on new-campaign saves — measured, reverted, two arms
+  in the ledger); force 3's substrate (war identity on a persisted
+  seat-transition record); F1 raw "channel inferred" in DM prose (materializer
+  population, closing = signed golden shift); K1 severity carry; seat ransom +
+  persistence; counterpart re-mint; XW-7 scorched earth; K-cap; §6b picks.
+  The V4-era nock/whole-arrow glance items are SUPERSEDED by V5.
+- **PROGRAM-LEVEL DEBT the terminal phase must clear first**: tests/lint is
+  RED AT BASE (32 tests / 11 files — stale ratchets, warDeployment 16→17,
+  three SP-6 kind-pool walkers) + mechanismLitCoverage 2. No full `npm run
+  check` can green until dispositioned. Chair owes the owner a disposition-wave
+  proposal.
+- **LAWS LEARNED SINCE §3d (each bit; all in memory + queue rows)**: attribute
+  lint by VIOLATION ROWS, never failing-file names (count growth inside an
+  already-red walker is invisible by name — bit TWICE); a negative control
+  must restore EVERY file class the walker scans (src-only restore is blind to
+  a test-file cause); byte-identity claims need PROVENANCE-COVERING fixtures +
+  an EXECUTED non-vacuity count, acceptance = PER-CELL equality (combined
+  cross-harness hashes are unverifiable BY CONSTRUCTION); membership tests on
+  vocabularies come AFTER normalization (before kills the aliases); TWO
+  populations persist relationshipStates and only the WRITER was the bug;
+  a year-boundary census is blind to within-year wars — read the outcome
+  stream; the SPATIAL CANON exists only in the soak fixture (probes without it
+  confirm broken designs); an ANALYTIC pin computing a composite from tokens
+  cannot see a missing declaration — pin the RENDERED element; a geometry
+  proven on one breakpoint is a claim about one breakpoint; `// anchored:`
+  counts only on the assertion line or the line immediately above; an
+  empty-vs-empty diff exits 0 (assert both sides non-empty AND untruncated —
+  gate-tail truncates); declaring a VIRTUAL preset key moves new-campaign
+  saves; queue rows are SPECS not open work — re-measure every premise with
+  multi-spelling greps (the chair's own force-2 grep missed CAPABILITY_FLOOR).
+
+## 3d. ⭐⭐ SNAPSHOT REFRESH 2026-08-04 (~00:45 EDT — THE BUILD ERA HANDOFF; superseded by §3e; git wins)
 Written for an ACCOUNT SWITCH: the owner may resume from a different Anthropic
 account. Same machine ⇒ the memory dir in §6 survives and its index is current;
 different machine ⇒ THIS FILE + the two queue docs are sufficient alone.
