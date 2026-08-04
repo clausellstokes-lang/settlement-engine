@@ -2095,3 +2095,45 @@ CR-WR10-B lands. Items 3 (no §4 canonical-model entry / no Lifecycle-paths clau
 (the cert row behind WR-8's +32-byte fork) are UNCHANGED and still owner/chair-held. The
 seven parked bands, the flag lighting, and WR-10's wiring are untouched. No golden moved,
 no flag was lit, no band was ratified, nothing was pushed.
+
+---
+
+## WR-10r ERRATUM — the size-correction table's own two checkmarks were stale (chair, 2026-08-04)
+
+The verifier's one REJECT item, affirmed by the chair's own re-measurement and
+repaired here, append-only, since the row above is otherwise immutable. The
+table at the WR-10r row's size-correction section published `sovereigntyAppraisal.js`
+**157** ✅ and `sovereigntyBundle.js` **165** ✅ as "MEASURED" — those are the
+PRE-REPAIR values, measured at `ac377738` before this lane's own edits moved
+them: `e3d98512` added the exported `sovereigntyBandPhrase` (+3 effective lines
+to the appraisal) and traded the bundle's local clamp01 for the kernel import
+(−1). Measured at HEAD (`01ec1409`) with the enforcer's own Linter under
+`max-lines({ skipBlankLines: true, skipComments: true })` — executed
+independently by the verifier AND by the chair, same numbers both times:
+
+| module | stale ✅ said | TRUE AT HEAD |
+| --- | --- | --- |
+| `sovereigntyAppraisal.js` | 157 | **160** |
+| `sovereigntyBundle.js` | 165 | **164** |
+
+The two ✗-corrections in that table (`sovereigntyAssets.js` 95→**94**,
+`sovereigntyReach.js` 105→**104**) remain correct — those files were untouched
+by the repair, and the parenthetical "(Neither file changed in this lane…)"
+is true only of those two. All four remain far below the 800 ceiling; none
+carries a size-baseline entry; `sizeBaseline.test.js` is green. Lesson, same
+class the section itself corrects: a size figure is measured AT the commit
+that publishes it, never inherited from the tree the lane started on.
+
+With this erratum the WR-10r verification verdict converts to **PASS — WR-10
+STANDS AS BUILT; THE WAR LANE'S BUILD OBLIGATIONS ARE COMPLETE** (wiring +
+owner-held items recorded in the rows above). Chair rulings on the lane's
+stop reports: (1) the eleven foreign unregistered clamps stay UNREGISTERED —
+the lane's refusal to launder other waves' debt is AFFIRMED; they join the
+chair's tests/lint disposition-wave proposal, with the 9 foreign proseNumerics
+rows and the `occupation.js:852` stale baseline row. (2) The
+`appraiseSettlementAsset` options-object signature is AFFIRMED as built
+(disclosed deviation from the volume's two-positional spelling; a one-line
+wrapper restores it on owner veto). (3) The first-match document-pin class is
+accepted as a NEW HAZARD CLASS; the estate-wide sweep of exec-based document
+pins is chair-scoped recon, queued. (4) The checkout-index incident stands
+recorded as written; the cp-backup rule remains absolute.
