@@ -64,6 +64,31 @@ vi.mock('../../src/lib/stripe.js', () => ({
   fetchCreditBalance: () => Promise.resolve(0),
 }));
 
+// ⚠️ THE MOCK ABOVE IS NOT LOAD-BEARING FOR THE TEARDOWN RACE, and that is why this
+// leaf mock exists beside it. Mocking a module's EXPORTS does not sever its MODULE
+// GRAPH: App.jsx's mount effect calls `import('./lib/stripe.js')` directly, and a
+// dynamic import inside a source module does NOT resolve through a test's `vi.mock`
+// factory — the real stripe.js is fetched anyway, and its line-17
+// `import { fetchCreditBalanceFromLedger } from './creditLedger.js'` can land after
+// jsdom is torn down, producing one unhandled `EnvironmentTeardownError` per
+// `render(<App />)` and a non-zero exit while every test still passes.
+//
+// PREVENTIVE, not a repair: measured 2026-08-04 at HEAD 1453676b, this file was green
+// on 9 of 9 solo runs. Its two shell renders are the exposure, and three sibling
+// suites have already been bitten (navFlowArrows, navFletching, navDividers — the last
+// red on 2 of 9 runs with 9 errors against 9 renders). The exposure here is worse than
+// two renders suggests: the landing pin deliberately does NOT stub HomeLanding, so the
+// real below-fold chunk resolves under an 8s findByText, widening the window in which
+// teardown can win the race.
+//
+// This voids no pin. Under the supabase stub above (`isConfigured: false`) the REAL
+// `fetchCreditBalanceFromLedger` returns 0 at its first line without touching the
+// network, so the mock's resolved value is what the real module already produced here,
+// and nothing in this file asserts on the credit balance.
+vi.mock('../../src/lib/creditLedger.js', () => ({
+  fetchCreditBalanceFromLedger: () => Promise.resolve(0),
+}));
+
 vi.mock('../../src/components/pricing/PricingMomentCard.jsx', () => ({
   default: () => null,
 }));

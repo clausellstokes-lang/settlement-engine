@@ -81,9 +81,32 @@ vi.mock('../../src/lib/stripe.js', () => ({
   fetchCreditBalance: () => Promise.resolve(0),
 }));
 
-// Sever the pricing surface's lazy stripe->creditLedger chain at the component
-// boundary — this suite tests the nav ribbon, not pricing internals, and the
-// chain's dynamic import races environment teardown under gate load.
+// ⚠️⚠️ MEASURED RED HERE, 2026-08-04 — this file was the THIRD suite bitten by the
+// dynamic import that walks past its own mock (navFlowArrows.test.jsx:84 records the
+// first, navFletching.test.jsx the second). Solo baseline at HEAD 1453676b: EXIT 1 on
+// 2 of 9 runs, with all 12 tests passing every time. The count is the diagnosis and it
+// was exact — 9 `EnvironmentTeardownError`s against this file's 9 `render(<App />)`
+// sites, one apiece, callstack navDividers → App.jsx → stripe.js → creditLedger.js.
+//
+// The stripe mock ABOVE does not prevent it. Mocking a module's EXPORTS does not sever
+// its MODULE GRAPH: App.jsx's mount effect calls `import('./lib/stripe.js')` directly,
+// and that dynamic import does not resolve through a test's `vi.mock` factory, so the
+// real stripe.js is fetched anyway and its line-17 `import ... from './creditLedger.js'`
+// lands after jsdom is gone. Mocking the LEAF ends the race at its source, because a
+// factory mock is served from the registry and needs no post-teardown fetch at all.
+//
+// This voids no pin. Under the supabase stub above (`isConfigured: false`) the REAL
+// `fetchCreditBalanceFromLedger` returns 0 at its first line without touching the
+// network, so the mock's resolved value is what the real module already produced here.
+vi.mock('../../src/lib/creditLedger.js', () => ({
+  fetchCreditBalanceFromLedger: () => Promise.resolve(0),
+}));
+
+// Keep the pricing surface out of the render: this suite tests the nav ribbon, not
+// pricing internals. ⚠️ This mock is NOT what severs the stripe->creditLedger chain —
+// the measurement above found App.jsx importing stripe directly, so the component
+// boundary was never the only route in. It is kept for the narrower reason it earns:
+// the lazily-mounted card has nothing to say about the dividers.
 vi.mock('../../src/components/pricing/PricingMomentCard.jsx', () => ({
   default: () => null,
 }));
