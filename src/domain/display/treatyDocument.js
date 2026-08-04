@@ -152,6 +152,16 @@ export function renderAllTreaties(worldState) {
   return out;
 }
 
+/** The holding a conveyance document conveys, or '' when it conveys none. Reads the
+ *  term view's own drop-when-absent `assetId` — the crier never invents a place name,
+ *  and a sale whose clause somehow lost its object says "a holding" rather than a lie
+ *  (the InstitutionCard honesty gate, applied to WR-10's instrument).
+ *  @param {import('../worldPulse/peaceTerms.js').TreatyDocument} doc @returns {string} */
+function conveyedHoldingOf(doc) {
+  const term = (doc.terms || []).find((t) => typeof t.assetId === 'string' && t.assetId.length > 0);
+  return term && term.assetId ? String(term.assetId) : '';
+}
+
 /** Dress one structured document in the house voice. @param {import('../worldPulse/peaceTerms.js').TreatyDocument} doc */
 function decorate(doc) {
   /** @type {TreatyTermLine[]} */
@@ -182,7 +192,14 @@ function decorate(doc) {
       : null);
   return {
     ...doc,
-    title: `The Peace of ${doc.loserName}`,
+    // THE TITLE FOLLOWS THE INSTRUMENT (chair ruling CR-WR10-G). "The Peace of X" is the
+    // right sentence for a war settlement and a false one for a purchase, and WR-10 mints
+    // treaties that are purchases. The read-model tells us which; the crier says so. The
+    // parties are still whatever the orientation resolved, so neither branch can render
+    // the string "undefined" the way `String(treaty.loserId)` once could.
+    title: doc.orientationKind === 'sale'
+      ? `The Conveyance of ${conveyedHoldingOf(doc) || 'a holding'} — ${doc.loserName} to ${doc.victorName}`
+      : `The Peace of ${doc.loserName}`,
     termLines,
     frayingLine,
     mediatorLine,

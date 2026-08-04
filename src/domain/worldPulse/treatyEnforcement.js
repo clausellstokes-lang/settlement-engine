@@ -31,6 +31,12 @@
 import { getSpatialLedger } from '../spatial/distanceRead.js';
 import { clamp01 } from '../../kernel/math.js';
 import { CURRENT_TREATY_TICKS_PER_YEAR, treatyTicksPerYearOf } from './treatyClock.js';
+// WHO BEARS THE TERM (chair ruling CR-WR10-G). The two enforcement reads below used to
+// spell `String(t?.loserId || '')` and mean "the party this term binds" — true while
+// every treaty ended a war, and silently false the moment WR-10's market mints one with
+// a seller and a buyer instead. The orientation leaf is zero-import, so consulting it
+// keeps this module's own dependency-free property intact.
+import { treatyOrientationOf } from './treatyOrientation.js';
 
 export const TREATY_ENFORCEMENT_TUNING = Object.freeze({
   /** Installments a newly minted stream term pays per nominal year. The value is
@@ -87,7 +93,10 @@ export function demilitarizationCapFor(worldState, settlementId, tick) {
   let cap = null;
   for (const key of Object.keys(ledger).sort()) {
     const t = ledger[key];
-    if (String(t?.loserId || '') !== id) continue;
+    // THE OBLIGOR, not the loser (CR-WR10-G). On a war settlement they are the same
+    // party; on a sale the obligor is the BUYER, because the buyer is the one who
+    // promised something. An unresolved orientation yields '' and binds nobody.
+    if (treatyOrientationOf(t).obligorId !== id) continue;
     for (const term of liveTermsOf(t, tick)) {
       if (term.type !== 'demilitarization') continue;
       const ceiling = clamp01(1 - clamp01(Number(term.magnitude) || 0));
@@ -134,7 +143,11 @@ export function occupationHoldFor(worldState, occupiedId, occupierId, tick) {
   const occupied = String(occupiedId); const occupier = String(occupierId);
   for (const key of Object.keys(ledger).sort()) {
     const t = ledger[key];
-    if (String(t?.loserId || '') !== occupied || String(t?.victorId || '') !== occupier) continue;
+    // Directional through the ONE orientation reader (CR-WR10-G): the right runs from
+    // the OBLIGOR (wartime loser · sale buyer) to the OBLIGEE, so a treaty pointing the
+    // other way still grants nothing and an unresolved one grants nothing at all.
+    const orientation = treatyOrientationOf(t);
+    if (orientation.obligorId !== occupied || orientation.obligeeId !== occupier) continue;
     if (liveTermsOf(t, tick).some((term) => term.type === 'occupation_continuation')) return true;
   }
   return false;

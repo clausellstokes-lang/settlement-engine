@@ -116,7 +116,14 @@ function TreatyBlock({ treaties, sid }) {
         {treaties.length === 1 ? 'Treaty' : 'Treaties'}
       </div>
       {treaties.map((doc) => {
-        const role = doc.victorId === sid ? 'as victor' : doc.loserId === sid ? 'as the bound party' : 'as a party';
+        // THE ROLE WORD COMES FROM THE LEDGER'S OWN ORIENTATION (chair ruling
+        // CR-WR10-G). This read used to spell 'as victor' / 'as the bound party', which
+        // are the right words for a war settlement and the wrong ones for a WR-10 sale —
+        // the read-model now carries the closed word for each side of whichever
+        // instrument this is, and falls back to the old spelling for any document
+        // minted before it did.
+        const role = doc.victorId === sid ? `as ${doc.receiverRole || 'victor'}`
+          : doc.loserId === sid ? `as ${doc.giverRole || 'the bound party'}` : 'as a party';
         return (
           <div key={doc.pairKey} style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '10px 12px', marginBottom: 8 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap', marginBottom: 6 }}>

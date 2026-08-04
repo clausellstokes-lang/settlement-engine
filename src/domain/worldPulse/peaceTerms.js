@@ -76,6 +76,10 @@ import {
   streamInstallmentFraction,
 } from './treatyEnforcement.js';
 import { CURRENT_TREATY_TICKS_PER_YEAR } from './treatyClock.js';
+// THE ONE ORIENTATION READER (chair ruling CR-WR10-G) — who gives, who receives, and
+// separately who OWES. WR-10 mints treaties with a seller and a buyer and no war in
+// them, so "the loser" stopped being a field this file may read directly.
+import { treatyOrientationOf } from './treatyOrientation.js';
 import { dispositionTreatyLearningActive, treatyDispositionDeltas, withTreatyDispositionDeltas } from './treatyDisposition.js';
 import { thresholdFactorOf } from './dispositionProfile.js';
 // THE MATERIAL EXECUTOR: a stream term's installment moves REAL granary months
@@ -574,8 +578,17 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
   for (const key of Object.keys(nextLedger).sort()) {
     const treaty = nextLedger[key];
     const previousCompliance = String(prevLedger?.[key]?.complianceState || treaty.complianceState || 'honored');
-    const victorId = String(treaty.victorId);
-    const loserId = String(treaty.loserId);
+    // ── WHO OWES WHOM, THROUGH THE ONE ORIENTATION READER (chair ruling CR-WR10-G).
+    // These two lines used to be `String(treaty.victorId)` / `String(treaty.loserId)`,
+    // which on WR-10's victor-free sale treaty produce the four-character string
+    // "undefined" — and this pass then WRITES one of them: `treaty.defaultedBy` below
+    // would have persisted a court by that name into the ledger forever, and
+    // scoreTreatyDefault would have minted a casus belli against it. The obligor is the
+    // party that owes: the wartime LOSER, or on a sale the BUYER, because the
+    // consideration flows to the seller. The names are kept for the receipts.
+    const orientation = treatyOrientationOf(treaty);
+    const victorId = orientation.obligeeId;
+    const loserId = orientation.obligorId;
     const terms = /** @type {TermRecord[]} */ (Array.isArray(treaty.terms) ? treaty.terms : []);
 
     // WR-0c — a deliberate repudiation is already a resolved compliance verdict,
@@ -660,8 +673,13 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
     }
     treaty.terms = liveTerms;
     treaty.complianceState = worstObserved;
-    if (defaultSeverity01 > 0) {
-      treaty.defaultedBy = loserId;                 // the loser is the oathbreaker (feeds scoreTreatyDefault)
+    // DROP-WHEN-ABSENT AT THE WRITE (CR-WR10-G's needs-guard). An unresolved orientation
+    // yields the empty string, and a treaty that cannot say who owes it cannot name an
+    // oathbreaker — writing the key anyway would put a nameless accusation in the ledger
+    // and feed it to scoreTreatyDefault. No obligor ⇒ no default record, and the branch
+    // below prunes any stale one exactly as it always did.
+    if (defaultSeverity01 > 0 && loserId) {
+      treaty.defaultedBy = loserId;                 // the obligor is the oathbreaker (feeds scoreTreatyDefault)
       treaty.defaultSeverity01 = defaultSeverity01;
       // Learn the breach once on the observed transition, never once per tick of
       // an already-defaulted treaty. The other party does not receive a synthetic
@@ -673,7 +691,7 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
 
     // §12.3 STRAIN → the E1b resentment seam: the paying loser resents its burden;
     // that resentment is the §5 revanchism fuel a future war reads.
-    if (anyStrainThisTick) {
+    if (anyStrainThisTick && orientation.resolved) {
       workingState = accrueStrainResentment(workingState, /** @type {Array<Record<string, unknown>>} */ (edges), loserId, victorId, loserBurden01, now, treaty);
     }
   }

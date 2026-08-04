@@ -78,9 +78,16 @@ function TreatyCard({ doc, nameById, worldState }) {
     <article style={{ border: `1px solid ${BORDER}`, background: CARD_ALT, padding: SP.sm, display: 'flex', flexDirection: 'column', gap: 8 }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
         <ScrollText size={14} color={INK} />
-        <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>The Peace of {loser}</span>
+        {/* THE TITLE AND THE SUBTITLE FOLLOW THE INSTRUMENT (chair ruling CR-WR10-G):
+            a WR-10 conveyance is not a peace, and calling its buyer a victor would be a
+            sentence the ledger cannot support. `doc.title` is already orientation-aware
+            in the display read-model; the role word beside it comes from the same
+            reader, with the historic spelling as the fallback. */}
+        <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
+          {doc.orientationKind === 'sale' ? doc.title : `The Peace of ${loser}`}
+        </span>
         <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.pico, fontWeight: 700 }}>
-          under {victor}'s terms
+          {doc.orientationKind === 'sale' ? `${victor} holds it now` : `under ${victor}'s terms`}
         </span>
         <span style={{ marginLeft: 'auto' }}><StateChip state={doc.complianceState} /></span>
       </div>

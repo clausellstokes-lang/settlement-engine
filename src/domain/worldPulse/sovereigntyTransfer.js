@@ -51,6 +51,7 @@
  */
 import { clamp01 } from '../../kernel/math.js';
 import { readSovereigntyAsset, sovereigntyTradeActive } from './sovereigntyAssets.js';
+import { treatyOrientationOf } from './treatyOrientation.js';
 // THE ROW-MOVE, REACHED AT THE LEDGER LEAF (chair ruling CR-WR10-I). This import used
 // to name settlementLifecycleKernel.js, and it was the ONLY edge from this module's
 // 35-file cycle family back into that kernel — measured, not assumed. Left there, the
@@ -342,7 +343,9 @@ export function executeSovereigntyTransfer({
  * that the news seeds wait for their registry rows — is WR-10's knowledge, not the
  * peace engine's, and the DM-verb road will want the same fold with no treaty at all.
  *
- * The victor RECEIVES and the loser GIVES: the orientation every other term uses.
+ * WHO GIVES AND WHO RECEIVES IS READ, NOT ASSUMED (chair ruling CR-WR10-G): the wartime
+ * cession's loser and victor and the peacetime sale's seller and buyer are the SAME two
+ * roles under two spellings, and `treatyOrientationOf` is the one place that knows it.
  *
  * @param {Object} args
  * @param {Record<string, unknown>} args.treaty the freshly minted document (mutated only
@@ -363,9 +366,16 @@ export function executeTreatyConveyances({ treaty, worldState, settlementUpdates
   const newsSeeds = [];
   for (const term of terms) {
     if (text(recordOf(term).type) !== 'sovereignty_transfer') continue;
+    // THE ORIENTATION IS READ, NEVER SPELLED (chair ruling CR-WR10-G). This used to be
+    // `treaty.loserId` / `treaty.victorId` — correct for the wartime cession and blind
+    // to the peacetime sale, whose document names a seller and a buyer instead. The
+    // conveyance axis is the one that matters here: the GIVER hands the holding over,
+    // the RECEIVER acquires it, and on a war settlement those are still the loser and
+    // the victor. An unresolved orientation yields empty ids and the writer refuses.
+    const orientation = treatyOrientationOf(treaty);
     const done = executeSovereigntyTransfer({
       worldState: state, term, treaty,
-      sellerId: text(recordOf(treaty).loserId), buyerId: text(recordOf(treaty).victorId),
+      sellerId: orientation.giverId, buyerId: orientation.receiverId,
       tick, edges, now,
     });
     state = done.worldState;

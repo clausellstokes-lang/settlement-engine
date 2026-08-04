@@ -19,6 +19,12 @@ import { treatyLedgerOf } from './treatyEnforcement.js';
 import { treatyYearsRemaining } from './treatyClock.js';
 import { PEACE_TERMS_TUNING, termLabel } from './peaceTermsCatalog.js';
 import { round4, complianceRank, treatyPairKey } from './peaceTermsPrimitives.js';
+// THE ONE ORIENTATION READER (chair ruling CR-WR10-G). This read-model is the SOURCE of
+// every party id and party name the panels, the dossier tab and the PDF render, so a
+// bare `String(treaty.victorId)` here is where a victor-free sale treaty would have put
+// the literal string "undefined" on a reader's screen. Nothing downstream had to change
+// its field names: the historic four slots are still here, now RESOLVED.
+import { treatyOrientationOf, treatyRoleWord } from './treatyOrientation.js';
 
 /** @typedef {import('./peaceTermsCatalog.js').TermRecord} TermRecord */
 /** @typedef {import('./peaceTermsCatalog.js').TreatyRecord} TreatyRecord */
@@ -99,13 +105,18 @@ export function fracturesAbandoning(worldState, partyId, tick) {
  * @property {number} burden01
  * @property {boolean} fraying   whether this is the seam nearest default
  * @property {string} [good]
+ * @property {string} [assetId]  WR-10: the conveyed holding, on sovereignty_transfer only
  */
 
 /**
  * @typedef {Object} TreatyDocument
  * @property {string} pairKey
  * @property {string} victorId @property {string} loserId
+ *   THE RECEIVER and the GIVER (CR-WR10-G). Still the victor and the loser on a war
+ *   settlement; the buyer and the seller on a WR-10 sale. Never `"undefined"`.
  * @property {string} victorName @property {string} loserName
+ * @property {string} orientationKind a TREATY_ORIENTATION_KINDS member
+ * @property {string} receiverRole @property {string} giverRole  closed role words
  * @property {number} signedTick
  * @property {number} believedMarginAtSignature
  * @property {number} budgetGranted @property {number} budgetSpent
@@ -190,8 +201,14 @@ export function treatyDocument(worldState, pairKey) {
   const treaty = findTreatyByKey(ledger, String(pairKey));
   if (!treaty) return null;
   const tick = Number(/** @type {{ tick?: unknown }} */ (worldState || {}).tick) || 0;
-  const victorId = String(treaty.victorId);
-  const loserId = String(treaty.loserId);
+  // THE HISTORIC SLOTS, RESOLVED (CR-WR10-G). `victorId`/`loserId` keep their names and
+  // their meaning for every war settlement; on a sale they carry the RECEIVER and the
+  // GIVER, which is the same pair of roles the four consumers of this read-model have
+  // always displayed. `orientationKind` and the role-neutral ids below are what let a
+  // display stop calling a buyer a victor — see `treatyRoleWord`.
+  const orientation = treatyOrientationOf(treaty);
+  const victorId = orientation.receiverId;
+  const loserId = orientation.giverId;
   const terms = /** @type {TermRecord[]} */ (Array.isArray(treaty.terms) ? treaty.terms : []);
   const fray = frayingTermOf(terms, tick, treaty);
   const frayingType = fray ? String(fray.type) : null;
@@ -209,6 +226,10 @@ export function treatyDocument(worldState, pairKey) {
       fraying: !!fray && t === fray,
     };
     if (t.good) v.good = String(t.good);
+    // THE CONVEYED HOLDING, on the one term family that carries it (CR-WR10-G). Same
+    // drop-when-absent discipline as `good` above: a term without an assetId gains no
+    // key, so every treaty minted before WR-10 is byte-identical through this read.
+    if (t.assetId) v.assetId = String(t.assetId);
     return v;
   });
   const fr = /** @type {{ deserter?: unknown, abandoned?: unknown[], coalitionSize?: unknown, credibilityHit?: unknown, receipt?: unknown }} */ (
@@ -217,8 +238,14 @@ export function treatyDocument(worldState, pairKey) {
     pairKey: treatyPairKey(victorId, loserId),
     victorId,
     loserId,
-    victorName: String(treaty.victorName || victorId),
-    loserName: String(treaty.loserName || loserId),
+    victorName: orientation.receiverName,
+    loserName: orientation.giverName,
+    // THE ORIENTATION, CARRIED FORWARD so a reader is told what kind of instrument this
+    // is rather than being handed war vocabulary for a purchase. `receiverRole` /
+    // `giverRole` are the four closed words TREATY_ROLE_WORDS knows.
+    orientationKind: orientation.kind,
+    receiverRole: treatyRoleWord(orientation, victorId),
+    giverRole: treatyRoleWord(orientation, loserId),
     signedTick: Number(treaty.mintedTick) || 0,
     believedMarginAtSignature: round4(Number(treaty.believedMarginAtSignature) || 0),
     budgetGranted: round4(Number(treaty.budgetGranted) || 0),

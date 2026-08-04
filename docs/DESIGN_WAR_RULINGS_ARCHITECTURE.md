@@ -337,6 +337,31 @@ sovereignty transfers (WR-10 wiring)        — NO new top-level key, NO new led
   //                                  // precedent; only on sovereignty_transfer
   //                                  // terms; a conveyance without its object
   //                                  // is unrepresentable)
+  //   TreatyRecord gains TWO conditional fields (ADDED 2026-08-04, chair ruling
+  //   CR-WR10-G — the orientation pair) —
+  //     sellerId?: string            // the conveying court
+  //     buyerId?: string             // the acquiring court
+  //                                  // Present TOGETHER, on a peacetime sale
+  //                                  // ONLY, and drop-when-absent — never null
+  //                                  // (T4: a key set to null is still a key and
+  //                                  // still a byte). A sale carries NEITHER
+  //                                  // victorId nor loserId, because naming a
+  //                                  // buyer a victor is a lie the ledger would
+  //                                  // then carry forever. Their display echoes
+  //                                  // sellerName/buyerName follow victorName/
+  //                                  // loserName's existing id-fallback pattern.
+  //   ONE READER OWNS BOTH SPELLINGS: treatyOrientation.js. Every consumer asks
+  //   it who GIVES the holding and who RECEIVES it, and — separately — who OWES
+  //   the terms. The two axes are NOT the same axis: on a war settlement the
+  //   loser both gives and pays, but on a sale the seller gives and the BUYER
+  //   pays, because the consideration is what makes it a sale rather than a
+  //   confiscation. Collapsing them makes a sale's stream terms draw grain out of
+  //   the party that was owed it. The measured consequence of NOT reading through
+  //   the leaf, executed on the wiring wave's fixtures: a sale's whole
+  //   consideration goes silently inert — String(treaty.loserId) is the
+  //   four-character string "undefined", and the granary read, the monitor reach,
+  //   the strain accrual and the defaultedBy write all address a court nobody can
+  //   find. Every id and name the reader returns is a real id or the EMPTY string.
   //   SatelliteRecord gains ONE conditional field —
   //     conveyed?: { fromId, tick }  // sale provenance, drop-when-absent; at
   //                                  // graduation it folds into parentRef so
