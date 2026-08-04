@@ -2137,3 +2137,72 @@ wrapper restores it on owner veto). (3) The first-match document-pin class is
 accepted as a NEW HAZARD CLASS; the estate-wide sweep of exec-based document
 pins is chair-scoped recon, queued. (4) The checkout-index incident stands
 recorded as written; the cp-backup rule remains absolute.
+
+---
+
+## WR-10w — THE WIRING WAVE CLOSES; THE SOVEREIGNTY MARKET IS WIRED DARK; WR-10 IS FINISHED (chair, 2026-08-04 evening)
+
+**Span:** `106df58e` (the §4 amendment) .. `71e78fe9` (the manifest close row) — 18
+commits on claude/composite-r4, minifold. Owner grant of record (verbatim): "finish
+WR-10. anything that needs my permission i give it and I also leave things to your
+best judgement." Everything below is dark behind `sovereigntyTradeEnabled`; nothing
+lit, no band ratified, nothing pushed.
+
+**The lanes and their commits:** WW-G kind-pool address repair `398f26bc` (D-W1 of
+the disposition proposal, executed early as this wave's rider; Class B four rows
+remain, by scope fence) · WW-E consumer clauses `aa16d05f` · WW-F cert census
+`a128b254` (the 51-key walker + shrink-only BACKLOG_RULE_KEYS superseding the
+ruling's five-key estimate — certification tracking reality) · WW-A the conveyance
+writer `5f7e7cd5` + anchor repair `4263d472` · WW-C fifteen Herald kinds
+`a66e0d00` + `60c455ea` · WW-D the sixteenth realm verb `8c739719` · WW-R the two
+ruled repairs `8c1694e4` · WW-B round 2: CR-WR10-I extraction `dd4449a1` (satellites
+census RATCHETED 2→1), CR-WR10-G orientation `08ad856e`, the market composer
+`f94bd221`, self-repair `3ec2bef9` · WW-B-r2 five-finding repair `a57488ef` +
+consumer conversions `e564e135` · the wave-close proofs `3754c6f3` (the integrated
+three-roads fixture 10/10 + the 110-tick multi-year dormancy proof 5/5, authored by
+the close verifier itself) · the manifest row `71e78fe9`.
+
+**Verification record:** THREE reject gates fired and every one was real — round 1
+(three measured STOPs: no victor-free mint entry; three of four appraisal belief
+legs exist nowhere; the host mount would have closed the tree's first kernel import
+cycle), round 2 (five localized findings incl. a dead tuning band caught by
+400,000-sample measurement), round 3 PASS, wave-close REJECT on exactly one
+wave-introduced red (this walker row) — converted to PASS at `71e78fe9` on the
+verifier's own named receipt (mutationCoverageManifest 8/8, executed). Mouths
+untouched across the whole wave (empty diff, pulseKernel + applyWorldPulse).
+tests/lint at close: 20 failed / 779 passed vs base 32/699 — thirteen Class-A
+kind-pool rows CURED, one row added then closed, zero foreign movement (violation
+rows, archived base, node_modules symlinked).
+
+**Rulings in force (all vetoable):** CR-WR10-C (cert census, manifest + two-way
+walker; the walker's own 51-key measurement supersedes the ruling's five-key
+estimate, absorbed via the exact shrink-only backlog) · CR-WR10-D (a swap = TWO
+atomically-minted treaties on a shared swapId) · CR-WR10-E (STOP semantics —
+superseded by F once measurement answered) · CR-WR10-F (the victor-free THIRD
+transport into the ONE mint; peaceTermsSale.js is that transport; sale treaties
+carry victor fields ABSENT-never-null) · CR-WR10-G (drop-when-absent
+buyerId/sellerId + treatyOrientation.js as the single orientation reader; totality
+made TRUE by converting the last two readers rather than softening the claim) ·
+CR-WR10-H (composer builds to the appraisal CONTRACT; the missing belief legs are a
+RECORDED LIGHTING PRECONDITION in the volume §9; the belief-legs wave is QUEUED and
+is expected to land inside FP's Spine program) · CR-WR10-I (satellitesLedger.js
+dependency-free leaf; census ratcheted down; one-symbol extension affirmed) ·
+CR-WR10-J (the round-trip alias-trap arm repaired, Mutant E now bites) · CR-WR10-K
+(sale_books_diverged stays dm-only covert; the annex amended to match the books
+law).
+
+**Deferred-and-recorded (not dropped):** the belief-legs wave (three of four
+appraisal legs — tier, route, trajectory — have no belief surface; lighting is
+gated on it, §9) · the conjunction-gate GATE_RE widening (computed-member gates;
+8 sites measured currently hiding nothing; consolidated pass) · proseNumerics'
+NEWLY-UNMASKED stale baseline row (`peaceTerms.js:483` frozen snippet relocated by
+pre-wave insertions — joins `occupation.js:852` in D-W2 of the disposition
+proposal) · the spec's operationRegistry premise for realm verbs was WRONG (no
+realm verb is an OPERATIONS row; REPUDIATE_TREATY grep count 0 — requirement 14
+discharged through the realm-verb surfaces themselves; recorded as a spec
+correction, not debt) · the parked owner arms unchanged.
+
+**THE WAR LANE IS COMPLETE IN FULL** — instrument, repair, persistence story,
+wiring, Herald voice, DM verb, certification, and the two whole-wave proofs. What
+remains for WR-10 is exactly one thing and it is owner-signed: the lighting, at the
+soak redo, behind the belief-legs precondition.
