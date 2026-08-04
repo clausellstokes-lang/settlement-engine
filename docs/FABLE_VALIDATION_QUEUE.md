@@ -703,6 +703,12 @@ existing `relationshipPatchGhostWrite.test.js`.
   condition. The pin therefore drives six ticks (through the mint at tick 5), asserts
   the totality over that whole drive where it IS true, and records the bound and its
   reason in the test. Reported rather than improvised.
+  **CLARIFICATION APPENDED 2026-08-04 (lane WR-9).** The materializer population this
+  entry correctly calls LEGITIMATE does not stay inside the engine: it reaches DM-FACING
+  PROSE through the F1 sites recorded below, where `channel_inferred` renders as the bare
+  words "channel inferred". The PERSISTENCE is legitimate and this ruling stands
+  unchanged; the RENDERING is a separate, owner-gated exposure, and closing it would move
+  the same-seed hashes for the same reason this entry already gives.
 
 **EVIDENCE (every number executed this lane; base = a temp worktree at `19dd07e2`).**
 **SAME-SEED, THE STOP CONDITION:** all **6 of 6 cells BYTE-IDENTICAL to base** after the
@@ -729,3 +735,196 @@ the walker anchor; M2 re-opening the empty-edge baseline reds **7 tests across 3
 fourth argument reds the census NAMING `src/domain/worldPulse/razingExecution.js:906`.
 **⚠ THE `warDeployment.js` 17-vs-16 ANY-CAST RED IS PRE-EXISTING AND PROVEN SO** —
 `git diff` against HEAD for that file is EMPTY; it is inherited, not this lane's.
+
+---
+
+## WR-9 — CONVERGENCE INSTRUMENTATION (lane WR-9, 2026-08-04). PARTIAL: the vocabulary
+## and the envelopes LANDED; the certification-row repair STOPPED on a measured
+## persistence-shape shift; the collector remains owed.
+
+**WHAT LANDED — WR-9a @ `fd222269`.** The endings CLASSIFIER
+(`src/domain/certification/warEndingClassifier.js`), the DURATION vocabulary and the
+declared envelope table (`warConvergenceContract.js`), and two graded envelope checks
+(`war_convergence.duration_envelope`, `war_convergence.endings_envelope`) composed by the
+existing `evaluateWarConvergenceInstrumentation`, so `behavioralContract.js` — which sits
+at 795 effective against an 800 ceiling and is NOT in the size baseline — needed ZERO new
+lines. Observation schema 1 → 2, exactly rather than tolerantly.
+
+**THE FINDING THAT MADE THE CLASSIFIER NECESSARY, measured token by token.** FIVE of the
+eight `WAR_ENDING_KEYS` exist NOWHERE in `src/` as emitted engine tokens: `ruler_change`,
+`fragmentation`, `annihilation`, `punitive_sack_initiation`, `punitive_sack_vengeance`.
+`terms` exists only as a conquest INTENT (`conquestIntent.js` `CONQUEST_INTENTS`) and
+`exhaustion` only as a peace REASON (`peaceReasons.js`) — different concepts wearing the
+same word. A collector that merely COUNTED tokens would have scored seven of eight keys at
+zero forever and reported that as evidence. WR-9 owed a classifier, not a counter.
+
+**JUDGMENTS (vetoable).**
+- **J-WR9-1 — THE ENVELOPE TABLE IS NOT A RATIFIED BAND, AND THAT IS STRUCTURAL.**
+  `WAR_CONVERGENCE_TUNING` lives in `warConvergenceContract.js`, raw-authored and
+  unsoaked, in the `RATIFICATION_TUNING` / `COMPROMISE_ROUND_TUNING` idiom §7 already
+  names. It is deliberately NOT in `src/domain/tuning/proposedSoakBands.js`, whose gate
+  (`scripts/check-tuning-bands.mjs`) requires status EXACTLY `'RATIFIED'` — putting the
+  numbers there would forge an owner signature this wave has no authority to give. Every
+  threshold ships with `ratified: false` on the check's own `threshold` object.
+- **J-WR9-2 — THE TWO SACK ROADS COME FIRST IN THE ENDING PRECEDENCE.** A single close can
+  satisfy more than one key's evidence, so `WAR_ENDING_PRECEDENCE` is declared and pinned
+  rather than left to statement order. The sacks lead because their RATIO is R2's
+  licence-economy health metric: any rule that let a co-occurring conquest or death mask a
+  burning would zero the exact number WR-9 exists to read. `terms` is LAST and is never a
+  fallback — it requires its own positive evidence.
+- **J-WR9-3 — AN UNCLASSIFIABLE CLOSE RETURNS NULL WITH A NAMED REASON, NEVER `terms`.**
+  Defaulting would let the dominance envelope pass on a corpus whose endings were never
+  read. Three closed reasons, and `razing_road_unreconstructable` is deliberately distinct
+  from `no_terminal_evidence` because they call for opposite repairs.
+
+**⛔ STOP-AND-REPORT #1 — THE CERTIFICATION-ROW REPAIR MOVES A PERSISTED SHAPE. BUILT,
+MEASURED, THEN REVERTED UNSHIPPED.** Of the seven `WAR_RULINGS_FLAG_KEYS`, only FIVE are
+declared in any preset. `conquestDoctrineEnabled` (WR-8, closed and verified at `1b7c1eac`
++ `39ba6590`) is a virtual key present in NO preset, so `simulationRuleKeys()` — which
+enumerates only `DEFAULT_SIMULATION_RULES` plus preset override spreads — never demands a
+row for it, and `subsystemRowsWar.js` declares `WAR_PENDING_RULE_KEYS = Object.freeze([])`.
+**The tree therefore reports full subsystem totality while WR-8's entire lane is
+uncertified, and the machine that exists to find exactly that hole cannot see it.**
+
+The repair was built in full — the preset declaration, the authored row (five invariants,
+the razing's minor-grading gap, the `vengeanceLicenses` census exemption, the news-cap
+forgetting), and the three test-list updates. Every focused gate passed: 12 files / 155
+tests, the totality walker green, strict 1313/1313, all six preset-stability suites green,
+`tests/property` failure set unchanged. **Then the same-seed measurement refused it.**
+
+Two provenance-covering cells through `scripts/audit/whole-world-soak.mjs`, which runs the
+`full_simulation` preset this edit touches, at pinned `now`, base = `fd222269`:
+
+| cell | seed | shape | finalHash base→HEAD | world equal? |
+|---|---|---|---|---|
+| A | `wr9-cellA` | 2y × 4 settlements | `5b40c225…` → `0f182f78…` **MOVED** | yes |
+| B | `wr9-cellB` | 2y × 6 settlements | `4332d09e…` → `c1429367…` **MOVED** | yes |
+
+**AND THE WORLD DID NOT MOVE — four independent instruments compare EQUAL in both cells:**
+`finalPopulations`, `stressorCounts`, the whole `seedDivergence` object (the event-type
+total-variation instrument), and the ENTIRE `behavioral` observation — every per-year event
+type count, mover count, arc count, motion figure, attention count, succession row, causal
+pair and state vector. **NON-VACUITY, EXECUTED:** cell A sampled 391 / 443 events across
+46 / 54 distinct types over 47 state keys; cell B 639 / 689 events across 58 / 63 types
+over 55 state keys.
+
+**THE DELTA IS EXACTLY +32 SERIALIZED BYTES PER YEAR, IN BOTH CELLS, IN BOTH
+`yearlyBytes` AND `yearlyRealmBytes`** — and `len(',"conquestDoctrineEnabled":false')`
+is exactly 32. The persisted `simulationRules` blob inside `worldState` gains one declared
+key; nothing else in the world changes.
+
+**WHY IT WAS NOT SHIPPED.** The lane's stop condition is that a moved same-seed cell is
+the definition of failure for a dark build, and persistence SHAPE is an owner-gated class
+in its own right. The measurement also CORRECTS an inherited belief worth recording: the
+rationale comments on the five sibling WR keys say declaring a virtual key false "makes the
+slice visible to certification without migrating a single installed save," and that is
+TRUE — `normalizeSimulationRules` spreads `DEFAULT_SIMULATION_RULES` plus the input, and
+this key is in neither, so no installed save ever gains it. **But it does not mean the
+state hash is unchanged: a NEWLY CREATED `full_simulation` campaign carries the key, and
+each of those five declarations moved the new-campaign hash by the same mechanism when it
+landed.** Preset IDENTITY is genuinely safe and was proven so by mechanism, not by
+inheritance: `RULE_COMPARISON_KEYS = [propagationMode, intensity, migrationMode,
+...BOOLEAN_KEYS]` and `BOOLEAN_KEYS` is derived from `DEFAULT_SIMULATION_RULES` ALONE, so a
+preset-only key can never enter the comparison — `presetId` read `full_simulation` in both
+cells, before and after.
+
+**THE FORK FOR THE CHAIR (report, don't rule — §10.6).** (i) ACCEPT the 32-byte
+new-campaign shift as the price of certifying WR-8's flag, on the precedent that five
+sibling keys already paid it; or (ii) TEACH `simulationRuleKeys()` to enumerate VIRTUAL
+keys the engine actually gates on — `conquestDoctrineEnabled` is read at
+`vengeanceLicense.js:139` and in `CONQUEST_REQUIRED_RULES` (`conquestDoctrineStage.js:70`),
+while `sovereigntyTradeEnabled` is read nowhere in `src/`, so that rule picks up exactly
+the key that needs a row and correctly leaves WR-10's alone. Arm (ii) touches no world path
+and moves zero world bytes, but it changes what the walker demands tree-wide and its blast
+radius is unmeasured. **Nothing was taken; the authored row and its prose are reproducible
+from this record.**
+
+**⛔ STOP-AND-REPORT #2 — THE HORIZON CONTRADICTS ITSELF, UNCHANGED FROM THE SCOUT.**
+`behavioralContract.js:1051-1054` feeds `releaseCases` — and only `releaseCases` — to
+`evaluateWarConvergenceInstrumentation`, and those are the 100-year `productGate: true`
+cases. The amendment's own no-infinity sentence names a "year-300 war", which is the
+`research` horizon (`productGate: false`). The acceptance cell has no input path into the
+property meant to carry it. The `unresolved` cell is BUILT and graded so the criterion is
+executable the moment the chair rules which horizon feeds it; nothing here presumes the
+answer.
+
+**⛔ STOP-AND-REPORT #3 — THE TREE'S LINT GATE IS RED AT BASE, AND IT IS NOT THIS LANE'S.**
+`tests/lint` at `98edbc9f` fails **32 tests across 11 files**, captured before the first
+edit and byte-identical after: `clampPrimitiveBaseline`, `deepCloneHotPath`,
+`domainAnyCastBaseline`, `negativeAssertionAnchor.walker`, `proseNumerics`,
+`ruinFilterRoster.walker`, `seedLoopTotality.walker`, `transcendentalMathBaseline`, and the
+three SP-6 war kind-pool walkers (`warCoalition`, `warCost`, `warRuling` — 17 of the 32).
+Four are stale shrink-only ratchets. `tests/property/mechanismLitCoverage` adds two more
+(`warEconomyEnabled` uncovered against an empty baseline), earned empirically with every
+WR-9a change reverted to HEAD content. **No full `npm run check` can go green until these
+are dispositioned, which is a program-level fact the WR-9 acceptance harness cannot fix.**
+
+**WHAT WR-9 STILL OWES, and the one premise the scout got wrong.**
+- **THE COLLECTOR.** The scout reported there is NO per-tick data path. **That is FALSE at
+  HEAD and the correction opens the wave.** `advanceInterval.js:508-514` accumulates
+  `candidates`, `selected`, `rollExplanations`, `autoApplied`, `proposals`,
+  `resolvedStressors` and `majors` across EVERY interior tick, and returns them all on the
+  composed year result (`:607-613`). Only `pulseHistory` is collapsed
+  (`collapseIntervalHistory`, which already preserves `envoyEvidence` and
+  `mechanicalRumorSeeds` across the collapse by explicit exception). So a harness-side
+  endings-and-duration census IS reachable from `result` with ZERO engine surface change
+  and no persisted state — the forbidden `warEndings` ledger is not needed. The sparse
+  channel is the DECIDING-TERM histogram alone: `warTerminationReads` ride the pulse RECORD
+  (`pulseKernel.js:1790`), so only the year-final tick's receipts survive, a 1-in-52 sample
+  that must be declared rather than hidden.
+- **THE SIX FORCES.** Unbuilt. Forces 1 (`warCosts.js` `durationGain`), 4
+  (`compromiseRound.js`, monotone widening) and 6 (`candidateType` conquest/razing) have
+  live substrate; force 2's "P4 capability floor" returned ZERO greps under every spelling
+  and may not exist as a declared floor at all; force 3 needs seat-transition frequency
+  correlated to duration, which nothing currently computes. Each cell must report
+  UNOBSERVED-with-reason rather than be omitted.
+- **THE ACCEPTANCE VERDICT.** Not this lane's and never was. The soak runs
+  `full_simulation` with every declared WR flag false, so the instrument will honestly FAIL
+  `non_vacuous`, `flag_coverage` and both new envelopes at HEAD — correct evidence of the
+  sequencing state. `flag_coverage` additionally requires `sovereigntyTradeEnabled`, which
+  belongs to unbuilt WR-10. **The WR-9 gate reading routed to the owner above remains
+  UNANSWERED, and this lane changed that posture in neither direction.**
+
+**SPINE REQUIREMENT 13 — ALIGNMENT: DECLARED EMPTY, with reason.** WR-9 is measurement and
+judges nothing on an observer axis. The razing's observer-axis judgments are WR-8's; this
+wave COUNTS them and never re-judges them.
+
+**SPINE REQUIREMENT 14 — EDIT VERB: RECORDED ENGINE-ONLY.** A DM never edits a soak
+envelope. The observation is machine evidence with no DM verb, no edits-delta and no
+typed-proposal surface, and wiring causal prose into a DM-editable field is forbidden by
+standing law.
+
+---
+
+## F1 (OWNER-GATED, recorded 2026-08-04 by lane WR-9) — DM-FACING PROSE RENDERS THE RAW
+## TOKEN "channel inferred". PRE-EXISTING, A LEGIBILITY / GAME-GRADE VIOLATION, AND
+## CLOSING IT MOVES THE SAME-SEED HASHES.
+
+**THE SITES, verified at HEAD `98edbc9f`.**
+- `src/domain/worldPulse/relationshipRuleHelpers.js:180-182` — the `headline:` key is
+  :180 and its two arms are :181 and :182, each rendering
+  `relState.relationshipType.replace(/_/g, " ")`, so a `channel_inferred` posture speaks
+  the sentence **"channel inferred may become rival"** straight at the DM.
+- `src/domain/worldPulse/relationshipMemory.js:308` —
+  `` out.push(`${titleForType(type)} relationship is currently quiet.`) ``, where
+  `titleForType` (:72-74) is a bare `String(type || 'neutral').replace(/_/g, ' ')`.
+  **⚠ SCOPE CORRECTION — the exposure is WIDER than one line.** `titleForType` has FIVE
+  call sites in that file, not one: :137 (the summary fallback), :141 (`label:`), :308,
+  :365 (posture-restored prose) and :416 (`POSTURE_LABELS[posture] || titleForType(posture)`).
+  A cure that repaired only :308 would leave four live mouths.
+
+**WHERE THE TOKEN COMES FROM, and why the persistence is not the bug.** The population is
+the MATERIALIZER's — `ensureAllRelationshipStates` writes a posture row for every edge in
+the tick's opening graph, and an inferred edge legitimately persists `channel_inferred`.
+That is base-identical, ruled legitimate under J-WZ5R-2 above, and pinned at
+`tests/domain/tradeWar.test.js:484`
+(`expect(pairStates['edge.inc.chal']?.relationshipType).toBe('channel_inferred')`).
+Measured at HEAD: **hundreds of occurrences per 24-tick drive in 4 of 6 harness cells.**
+
+**WHY IT IS OWNER-GATED RATHER THAN A REPAIR.** The legibility law says glance → sentence
+→ table, and the game-grade doctrine says TRANSLATE the machinery; "channel inferred" does
+neither. But every candidate cure — renaming the token, teaching the renderers a display
+vocabulary, or narrowing the materializer — changes bytes on a path THE PROMISE protects:
+a seed is a world, forever. **Recording it makes it a decision rather than something the
+next audit re-finds as a fresh bug.** PRE-EXISTING: it predates WZ-5 and is not that
+lane's regression.
