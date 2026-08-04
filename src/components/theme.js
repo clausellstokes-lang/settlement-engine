@@ -1022,10 +1022,17 @@ export const SEAL_GLINT = '#8E322B';
  *
  * `wrap` is each whipping band's width. ⚠️ IT IS SIZED BY THE BAND'S LEAN, not by
  * taste: the parallelograms are seated so their seams cross the lane divisions at the
- * label's own height, which leaves the leading corner poking about `lean(headerDesktop
- * / 2)` px outside the band's box at the quill line. The wrap is wide enough to bind
- * that corner, which is what a whipping does. Narrower and the feather's tip would
- * stick out past its own binding.
+ * label's own height, which displaces the band's two outer quill-line corners from its
+ * box by about `|lean(headerDesktop / 2)|` px. The wrap is wide enough to bind that
+ * corner, which is what a whipping does. Narrower and the feather's tip would stick out
+ * past its own binding.
+ * ⚠️⚠️ SINCE THE V4 MIRROR THE WRAP MUST ALSO BE *PLACED* ON THAT CORNER, and this is
+ * the note that says so because the width alone no longer gets there. While the band's
+ * two outer ends were SQUARE (the retired FRAME clip), "flush against the box" and
+ * "flush against the feather" were the same place; the directive makes both ends slashes
+ * and the two places move `|SEAT|` apart in OPPOSITE directions — the lead corner falls
+ * inside the box and the trail corner outside it. ShaftWrap.jsx derives that offset from
+ * the band's own seat; nothing here may re-spell it.
  *
  * `slant` survives as the PLAIN rule's own lean and nothing else: the fletch-seam
  * divider it used to size is retired (the band has no internal seams any more — the

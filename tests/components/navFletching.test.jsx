@@ -96,15 +96,16 @@ import { flowsInto } from '../../src/components/nav/NavFlowArrow.jsx';
 import {
   ANCHOR_OFFSET, BODY, CHROME, FLETCH, FLETCH_BARB, FLETCH_BARB_DEG, FLETCH_HANG,
   FLETCH_LEAD, FLETCH_RACHIS, FLETCH_SHEEN, FLETCH_SHEEN_LIFT, FLETCH_TIP,
-  FLETCH_VANE, FS, GILT, GOLD, GOLD_TXT, HEADER_RIDERS, INK_DEEP, LABEL_BOX,
+  FLETCH_VANE, FS, GILT, GILT_LIGHT, GOLD, GOLD_TXT, HEADER_RIDERS, INK_DEEP, LABEL_BOX,
   LIGHT_UNIT, PARCH, PARCH_100,
   PLATE_LIGHT_DEG, SHAFT, SHAFT_BODY, SHAFT_CYLINDER, SHAFT_EDGE, SHAFT_GRAIN_LAYERS,
   SHAFT_GRAIN_TEXTURE, SHAFT_RIM, SHAFT_SHEEN, SHAFT_STOPS, SP, WRAP,
   contactShadow, lightOffset, shadowOffset,
 } from '../../src/components/theme.js';
 import {
-  BAND, BAND_PX_PER_UNIT, BAND_W, BARB, LANE, REACH, RUN, SEAT, SHEENS, SHEEN_FLOOR,
-  VANES, barbBuckets, combCoverage, frayHairs, laneGap, lean, rachis, unitHash,
+  BAND, BAND_PX_PER_UNIT, BAND_W, BARB, DRIFT, LANE, QUILLS, QUILL_H, REACH, RUN, SEAT,
+  SHEENS, SHEEN_FLOOR, SHEEN_PEEK, VANES, barbBuckets, combCoverage, frayHairs, laneGap,
+  lean, quill, rachis, unitHash,
 } from '../../src/components/nav/FletchBand.jsx';
 
 const H = vi.hoisted(() => ({
@@ -343,12 +344,64 @@ describe('2 — ⚠️⚠️ THE SHINGLE: three parallelograms, ascending into R
       // BOTH slanted edges lean by exactly the same run — that is what makes it a
       // parallelogram rather than a trapezoid, and it is why the gap between two
       // adjacent cells is the same at every depth (see the next test).
-      expect(bl.x - tl.x).toBe(RUN);
-      expect(br.x - tr.x).toBe(RUN);
+      expect(bl.x - tl.x).toBe(DRIFT);
+      expect(br.x - tr.x).toBe(DRIFT);
       expect(tr.x - tl.x).toBe(br.x - bl.x);
       // …and the lean is the COMB's own run, so a lap boundary is a barb line and
       // never a cut across the grain.
+      expect(Math.abs(DRIFT)).toBe(FLETCH.barbRun);
       expect(RUN).toBe(FLETCH.barbRun);
+    }
+  });
+
+  test('⚠️⚠️ THE MIRROR: every slanted mark sweeps DOWN AND LEFT, from ONE sign', () => {
+    // THE OWNER'S V4 §c CORRECTION, AS ARITHMETIC: "vane slant MIRRORED on x". Before
+    // it, `+RUN` was spelled at six independent sites — the quad, both rims, the comb,
+    // the fray, the gold path — and agreed with `lean()` only by convention. Mirroring
+    // six spellings by hand is how a band ends up with five edges leaning one way and
+    // one the other, with every pin green because every pin re-derives from the site it
+    // is checking. So the pin is on the SINGLE SIGN and then on every consumer of it.
+    expect(DRIFT).toBeLessThan(0);              // down and to the LEFT
+    expect(DRIFT).toBe(lean(BAND));             // …and DRIFT really is the lean at depth
+    expect(Math.abs(DRIFT)).toBe(RUN);          // …at the magnitude the token names
+    // The drift is LINEAR in depth, which is what makes one number enough for every
+    // mark at every depth. (Half the depth, half the drift.)
+    expect(lean(BAND / 2)).toBeCloseTo(DRIFT / 2, 9);
+    expect(Math.abs(lean(0))).toBe(0);
+    // EVERY CONSUMER, walked. A site that kept a hand-spelled `+RUN` reds here.
+    for (const lane of [0, 1, 2]) {
+      const [tl, , , bl] = ONCURVE(VANES[lane].closed);
+      expect(bl.x - tl.x, `cell ${lane}'s quad did not mirror`).toBe(DRIFT);
+      for (const d of barbBuckets(lane)) {
+        for (const seg of d.match(/M (-?[\d.]+) 0 L (-?[\d.]+) [\d.]+/g) || []) {
+          const [, a, b] = seg.match(/M (-?[\d.]+) 0 L (-?[\d.]+) [\d.]+/);
+          expect(Number(b) - Number(a), `lane ${lane}'s comb did not mirror`)
+            .toBeCloseTo(DRIFT, 0);
+        }
+      }
+      for (const d of SHEENS[lane]) {
+        const pts = ONCURVE(d);
+        const top = pts.filter((q) => q.y === 0).sort((a, b) => a.x - b.x);
+        const low = pts.filter((q) => q.y === SHEEN_FLOOR).sort((a, b) => a.x - b.x);
+        expect(low[0].x - top[0].x, `lane ${lane}'s sheen did not mirror`)
+          .toBeCloseTo(lean(SHEEN_FLOOR), 6);
+      }
+      const fray = frayHairs(lane).match(/M (-?[\d.]+) [\d.]+ L (-?[\d.]+) ([\d.]+)/g) || [];
+      expect(fray.length, `lane ${lane} has no fray to check`).toBeGreaterThan(0);
+      for (const seg of fray) {
+        const [, a, b, y] = seg.match(/M (-?[\d.]+) [\d.]+ L (-?[\d.]+) ([\d.]+)/);
+        expect(Number(b) - Number(a), `lane ${lane}'s fray did not mirror`)
+          .toBeCloseTo(lean(Number(y) - BAND), 0);
+      }
+    }
+    // NEGATIVE CONTROL — the pin is not tautological on its own module. Reconstruct
+    // each quad as it would be WITHOUT the mirror and require it to differ, so a revert
+    // of the one sign really does move geometry rather than shuffling equal numbers.
+    for (const lane of [0, 1, 2]) {
+      const [tl, tr] = ONCURVE(VANES[lane].closed);
+      const asBuilt = ONCURVE(VANES[lane].closed).map((p) => +p.x.toFixed(4));
+      const unmirrored = [tl.x, tr.x, tr.x + RUN, tl.x + RUN].map((x) => +x.toFixed(4));
+      expect(asBuilt, `cell ${lane} is byte-identical mirrored and not`).not.toEqual(unmirrored);
     }
   });
 
@@ -411,41 +464,70 @@ describe('2 — ⚠️⚠️ THE SHINGLE: three parallelograms, ascending into R
         .toBeCloseTo(lane * LANE, 6);
     }
     // NON-VACUITY: the seat is a real, substantial shift — not zero dressed up as a
-    // derivation. Drawn without it every seam would land this far right of its lane.
+    // derivation. Drawn without it every seam would land this far off its lane.
+    // ⚠️ THE SIGN IS ASSERTED SEPARATELY FROM THE MAGNITUDE, and it flipped with the
+    // mirror: the seam now sits to the LEFT of its division without the seat, so the
+    // band shifts RIGHT. Pinning only `> 0` here would have gone green on a band that
+    // had mirrored its edges and forgotten to mirror its seat, which is the exact
+    // half-migration this test exists to catch.
     expect(SEAT).toBe(lean(mid));
-    expect(SEAT).toBeGreaterThan(LANE * 0.05);
+    expect(SEAT).toBeLessThan(0);
+    expect(Math.abs(SEAT)).toBeGreaterThan(LANE * 0.05);
   });
 
-  test('⚠️ THE FRAME squares the band’s two ends, and clips X ONLY', () => {
-    // A slanted OUTER edge cannot end a band cleanly: at one depth it falls short of
-    // the band's box and bare honey wood shows through in a triangle — a wood gap
-    // inside the band, the exact thing the directive forbids — and at the opposite
-    // depth it overshoots and the feather pokes out past its own whipping. The first
-    // cut of this file shipped both, about 10px each. The outer cells are therefore
-    // drawn LONGER than their lanes and the band is clipped to its own box.
+  test('⚠️⚠️ THE FRAME RETIRED: FOUR IDENTICAL PARALLEL SLASHES, and no clip at all', () => {
+    // ⚠️ THIS TEST REPLACES "THE FRAME squares the band's two ends", which is now the
+    // WRONG claim rather than a weakened one. The owner's V4 §c directive is "EVERY
+    // border parallel INCL. the band's two outer ends", and the frame existed precisely
+    // to make the two outer ends NOT parallel: the outer cells were drawn `RUN` longer
+    // than their lanes and the whole band was clipped back to its box in x, which bought
+    // square ends at the price of two of the composition's four visible edges.
+    //
+    // So the pin inverts. It asserts (a) the clip is GONE, (b) the overshoots that fed
+    // it are gone, and (c) the four slashes a user actually sees are identical parallels.
     const { container } = render(<App />);
-    const frame = paint(container).querySelector('[data-testid="nav-fletch-frame"]');
+    const svg = paint(container);
+    const frame = svg.querySelector('[data-testid="nav-fletch-frame"]');
     expect(frame).toBeTruthy();
-    // The reference really resolves to a clipPath in this SVG's own defs — an id
-    // typo here would silently disable the clip and the wedges would be back with
-    // every other pin green.
-    const clipId = frame.getAttribute('clip-path').replace(/^url\(#|\)$/g, '');
-    const framePath = [...paint(container).querySelectorAll('clipPath')]
-      .find((c) => c.id === clipId)?.querySelector('path');
-    expect(framePath, `clip-path url(#${clipId}) resolves to nothing`).toBeTruthy();
-    const pts = ONCURVE(framePath.getAttribute('d'));
-    const xs = pts.map((p) => p.x);
-    const ys = pts.map((p) => p.y);
-    // X: exactly the band's box, so the two ends come out square against the wraps.
-    expect(Math.min(...xs)).toBe(0);
-    expect(Math.max(...xs)).toBe(BAND_W);
-    // ⚠️ Y: OPEN. Clipping y here would undo the whole `overflow: visible` hang
-    // mechanism in one attribute — the vanes must hang free and the contact shadows
-    // must not be sheared off at the bottom.
-    expect(Math.min(...ys)).toBeLessThan(0);
-    expect(Math.max(...ys)).toBeGreaterThan(BAND);
-    // NON-VACUITY: the outer cells really do reach past the frame, else the clip
-    // would be cutting nothing and the wedges would be back.
+    // (a) NO CLIP — on the group, and nowhere in the band's defs either. A clipPath
+    // left behind and merely unreferenced is one attribute away from coming back.
+    expect(frame.getAttribute('clip-path')).toBeNull();
+    const clipIds = [...svg.querySelectorAll('clipPath')].map((c) => c.id);
+    expect(clipIds.some((cid) => cid.endsWith('-frame'))).toBe(false);
+    // …and the clips that DO survive are exactly the three per-lane vane clips, which
+    // is what keeps this from passing on a band that lost its clipping altogether.
+    expect(clipIds.length).toBe(3);
+    for (const lane of [0, 1, 2]) expect(clipIds.some((cid) => cid.endsWith(`-clip-${lane}`))).toBe(true);
+    // (b) NO OVERSHOOTS. Every cell's quill-line span is exactly its lane plus its own
+    // lap — the outer two no longer reach `RUN` past the band to give the clip material.
+    for (const lane of [0, 1, 2]) {
+      const [tl, tr] = ONCURVE(VANES[lane].closed);
+      expect(tl.x, `cell ${lane}'s leading edge is not on its lane`)
+        .toBeCloseTo(lane * LANE - SEAT, 9);
+      expect(tr.x - tl.x, `cell ${lane} overshoots its lane`)
+        .toBeCloseTo(LANE + REACH(lane), 9);
+    }
+    // (c) FOUR IDENTICAL SLASHES. These are the boundaries a user sees: each cell's
+    // leading edge (Library's and Realm's laid OVER the cell beneath), plus Realm's
+    // trailing edge, which is the band's own end. Every one leans by the same DRIFT
+    // over the same depth, and they are EQUALLY SPACED at the quill line — which is
+    // what "identical parallels" means and what the frame's square ends broke.
+    const slashes = [VANES[0].lead, VANES[1].lead, VANES[2].lead, VANES[2].trail];
+    expect(slashes.length).toBe(4);
+    const heads = [];
+    for (const d of slashes) {
+      const [a, b] = ONCURVE(d);
+      expect(a.y).toBe(0);
+      expect(b.y).toBe(BAND);
+      expect(b.x - a.x, 'a visible slash does not lean with the rest').toBe(DRIFT);
+      heads.push(a.x);
+    }
+    const gaps = heads.slice(1).map((x, i) => +(x - heads[i]).toFixed(9));
+    expect(new Set(gaps).size, 'the four slashes are not equally spaced').toBe(1);
+    expect(gaps[0]).toBe(LANE);
+    // NON-VACUITY for the whole block: the band really does paint past its own box
+    // now, which is what the retired clip used to cut off — so "no clip" is a visible
+    // change and not a no-op.
     expect(Math.min(...ONCURVE(VANES[0].closed).map((p) => p.x))).toBeLessThan(0);
     expect(Math.max(...ONCURVE(VANES[2].closed).map((p) => p.x))).toBeGreaterThan(BAND_W);
   });
@@ -571,21 +653,60 @@ describe('2 — ⚠️⚠️ THE SHINGLE: three parallelograms, ascending into R
     }
   });
 
-  test('the gold traces the LOWER EDGE only — a highlight, not a border', () => {
-    // The first cut stroked the whole closed path, so the gold ran up both slants and
-    // along the quill and read as "this badge is selected". The open lower path is the
-    // fix, pinned as a containment relationship rather than a literal so retouching
-    // the quad cannot silently re-close it.
-    for (const v of VANES) {
-      expect(v.lower.trim().endsWith('Z')).toBe(false);
-      // It really is the bottom edge: both its points sit at the vane's full depth.
-      const pts = ONCURVE(v.lower);
-      expect(pts.length).toBe(2);
-      for (const p of pts) expect(p.y).toBe(BAND);
-      // …and the two slanted edges are NOT in it.
-      expect(v.lower).not.toContain(v.lead.slice(2));
-      expect(v.lower).not.toContain(v.trail.slice(2));
+  test('⚠️⚠️ THE INDICATOR IS A QUILL LINE ON THE BINDING — and it MOVED, not copied', () => {
+    // ⚠️ THIS REPLACES "the gold traces the LOWER EDGE only". The owner's V4 directive
+    // moves the active indicator to the TOP, and the cumulative-audit addendum reads
+    // that as MOVED: "a pin asserts NO active-state paint exists below the vane (the
+    // owner's 'move it to the top' means moved, not duplicated)". A band that grew a
+    // quill line while keeping its underline would satisfy every other pin in this file.
+    //
+    // 1 — THE GEOMETRY. A parallelogram lying on the quill line, slant-cut at the lean.
+    for (const lane of [0, 1, 2]) {
+      const pts = ONCURVE(QUILLS[lane]);
+      expect(pts.length, `lane ${lane}'s quill line is not a quad`).toBe(4);
+      expect(QUILLS[lane]).not.toMatch(/[CcQqSsTtAa]/);
+      const [tl, tr, br, bl] = pts;
+      // It sits IN the sheen zone and never touches y=0: a gold bar flush against the
+      // viewport's own top edge reads as browser chrome, not as a mark on the shaft.
+      expect(tl.y).toBe(SHEEN_PEEK);
+      expect(tr.y).toBe(SHEEN_PEEK);
+      expect(SHEEN_PEEK).toBeGreaterThan(0);
+      expect(bl.y - tl.y).toBe(QUILL_H);
+      expect(br.y - tr.y).toBe(QUILL_H);
+      // …and it stays inside the barrel's own lit zone, which is the ground its
+      // 1.4.11 number is quoted against (theme.js's GILT ladder note).
+      expect(bl.y).toBeLessThanOrEqual(SHAFT_STOPS.lit * CHROME.headerDesktop);
+      // The ends are SLANT-CUT at the composition's one lean, so the indicator is
+      // bounded by the same parallels as every other mark on this band.
+      expect(bl.x - tl.x).toBeCloseTo(lean(QUILL_H), 9);
+      expect(br.x - tr.x).toBeCloseTo(lean(QUILL_H), 9);
+      // It spans the lane between its lap boundaries: its right end is exactly where
+      // the NEXT cell's leading edge crosses, so it can never be painted over.
+      expect(tr.x - tl.x).toBeCloseTo(LANE, 9);
+      expect(tl.x).toBeCloseTo(lane * LANE - SEAT + lean(SHEEN_PEEK), 9);
     }
+    // 2 — THE MOVE. `vane()` no longer publishes a lower edge at all, so there is no
+    // path left for an underline to be stroked along.
+    for (const v of VANES) expect(v.lower).toBeUndefined();
+    expect(Object.keys(VANES[0])).toEqual(['closed', 'lead', 'trail']);
+    // 3 — NO ACTIVE PAINT BELOW THE VANE. The addendum's own pin, asserted on the
+    // rendered band: with a fletch lit, nothing gilt is drawn anywhere below the quill
+    // line — not on the lower edge, not in the hang, not anywhere.
+    const { container } = render(<NavRibbon view="settlements" onNavClick={() => {}} />);
+    const svg = paint(container);
+    const gilt = [...svg.querySelectorAll('path')].filter((p) => {
+      const paints = [p.getAttribute('fill'), p.getAttribute('stroke')];
+      return paints.includes(GILT_LIGHT) || paints.includes(GILT) || paints.includes(GOLD);
+    });
+    expect(gilt.length, 'the active band paints no metal at all').toBe(1);
+    expect(gilt[0].dataset.testid).toBe('nav-fletch-quill-1');
+    expect(Math.max(...pathYs(gilt[0].getAttribute('d'))))
+      .toBeLessThanOrEqual(SHEEN_PEEK + QUILL_H);
+    // …stated as the addendum states it, against the vane's own depth.
+    expect(Math.max(...pathYs(gilt[0].getAttribute('d')))).toBeLessThan(BAND);
+    // NON-VACUITY: the retired mark really did live below the vane, so this is a
+    // relocation and not a claim about a mark that was never there.
+    expect(SHEEN_PEEK + QUILL_H).toBeLessThan(BAND * 0.05);
   });
 });
 
@@ -629,17 +750,27 @@ describe('3 — THE COMB: fine barb striations, at the derived angle, jittered',
     for (const lane of [0, 1, 2]) {
       const paths = [...svg.querySelectorAll(`[data-testid^="nav-fletch-barbs-${lane}-"]`)];
       expect(paths.length, `lane ${lane} has no barbs`).toBe(3);
-      const strokes = paths.reduce((n, p) => n + (p.getAttribute('d').match(/M /g) || []).length, 0);
-      // Still a real comb — dozens of marks, not four. ⚠️ THE FLOOR CAME DOWN FROM 30
-      // WITH THE COVERAGE CURE, and deliberately: the gap widened from 4.1 to 6.6
-      // units, so the same cell now carries about 22-26 barbs instead of about 40.
-      // Density is the wrong axis to defend the species on — the coverage pin above
-      // is the one that would have caught the shutter.
-      expect(strokes).toBeGreaterThan(16);
-      // Every bucket carries some — a bucket that never fills is a jitter that is
-      // not jittering.
+      const counts = paths.map((p) => (p.getAttribute('d').match(/M /g) || []).length);
+      const strokes = counts.reduce((n, c) => n + c, 0);
+      // ⚠️ THE CLAIM IS A DENSITY, NOT A COUNT, AND V4 IS WHERE THAT STOPPED BEING A
+      // DISTINCTION WITHOUT A DIFFERENCE. The frame's retirement took the two OUTER
+      // cells' `RUN` overshoot away, and Realm — which has no lap either — went from a
+      // 137-unit span to a 100-unit one, so its barb COUNT fell from ~23 to 17 with the
+      // comb itself completely unchanged. A count floor calibrated on the old spans
+      // would have red on a band that got narrower, which is not the defect this pin is
+      // for. The comb is a spacing, so the pin is a spacing: at least four fifths of the
+      // barbs the lane's own width and gap predict.
+      const span = LANE + REACH(lane) + 12;   // the cell, plus the 6-unit bleed each side
+      expect(strokes, `lane ${lane}'s comb is sparser than its own gap predicts`)
+        .toBeGreaterThan((span / laneGap(lane)) * 0.8);
+      // Every bucket carries a real SHARE — a bucket that never fills is a jitter that
+      // is not jittering, and a bucket that takes most of them is not three buckets.
+      // Stated as a fraction for the same reason as above.
+      for (const c of counts) {
+        expect(c / strokes, `lane ${lane} has a starved brightness bucket`).toBeGreaterThan(0.1);
+        expect(c / strokes, `lane ${lane} has a bucket carrying the whole comb`).toBeLessThan(0.7);
+      }
       for (const p of paths) {
-        expect((p.getAttribute('d').match(/M /g) || []).length).toBeGreaterThan(4);
         expect(p.getAttribute('stroke')).toBe(FLETCH_BARB);
         // Non-scaling stroke is load-bearing under preserveAspectRatio="none": the
         // band's x-scale is not its y-scale, so a scaled hairline would come out
@@ -722,7 +853,7 @@ describe('3 — THE COMB: fine barb striations, at the derived angle, jittered',
     // read as a barb line rather than as a cut across the grain.
     for (const lane of [0, 1, 2]) {
       const [tl, , , bl] = ONCURVE(VANES[lane].closed);
-      expect(bl.x - tl.x).toBe(RUN);
+      expect(bl.x - tl.x).toBe(DRIFT);
     }
   });
 
@@ -746,11 +877,35 @@ describe('3 — THE COMB: fine barb striations, at the derived angle, jittered',
       const hairs = (d.match(/M /g) || []).length;
       // A DENSITY, never a handful: the first cut ran one hair every 2.4-4.6 gaps and
       // they read as stray whiskers at 400%, which is a worse artefact than the ruler.
-      expect(hairs, `lane ${lane}'s fray is too sparse to read as an edge`).toBeGreaterThan(10);
+      // ⚠️ MEASURED AS A DENSITY AND NOT AS A COUNT — same correction as the comb's,
+      // for the same reason: the frame's retirement narrowed Realm's cell from 137 band
+      // units to 100, so its hair count fell from 13 to 10 with the spacing untouched.
+      // The hairs must sit a little over one comb gap apart, which is what makes the
+      // edge read as frayed rather than as a row of whiskers.
+      const spanU = LANE + REACH(lane);
+      expect(hairs, `lane ${lane}'s fray is too sparse to read as an edge`)
+        .toBeGreaterThan((spanU / FLETCH.barbGap) * 0.4);
+      expect(hairs, `lane ${lane}'s fray is a handful, not an edge`).toBeGreaterThan(8);
+      // …and never so dense it becomes a second comb below the cut.
+      expect(hairs).toBeLessThan(spanU / FLETCH.barbGap);
       const ys = pathYs(d);
       // Every hair STARTS on the cut and ENDS below it — that is what makes it an
       // escaped tip rather than a fringe drawn under the band.
       expect(Math.min(...ys)).toBe(BAND);
+      // ⚠️⚠️ AND IT STARTS ON *THIS CELL'S* CUT, WHICH A SURVIVING MUTANT PROVED WAS
+      // UNGUARDED. The pin below checks each hair's own LEAN, and a hair anchored at
+      // `x + RUN` instead of `x + DRIFT` leans identically — it is simply drawn a whole
+      // run to the wrong side, floating in space beside the feather it is supposed to
+      // fringe. Every test in this file stayed green under exactly that edit. So the
+      // ANCHOR is now pinned too: every head lies on the segment the quad's own bottom
+      // edge occupies, which is the thing "escaped from the cut" actually means.
+      const [bl, br] = ONCURVE(VANES[lane].closed).filter((p) => p.y === BAND)
+        .map((p) => p.x).sort((a, b) => a - b);
+      for (const m of d.matchAll(/M (-?[\d.]+) [\d.]+/g)) {
+        const head = Number(m[1]);
+        expect(head, `lane ${lane} frays from off the cut`).toBeGreaterThanOrEqual(bl);
+        expect(head, `lane ${lane} frays from off the cut`).toBeLessThanOrEqual(br);
+      }
       expect(Math.max(...ys)).toBeGreaterThan(BAND);
       // …and no tip reaches so far that it becomes a second silhouette.
       expect(Math.max(...ys) - BAND).toBeLessThan(BAND * 0.07);
@@ -883,10 +1038,40 @@ describe('4 — THE WRAPS: two glossy bands riding the shaft, bracketing the clu
     const trail = container.querySelector('[data-testid="nav-shaft-wrap-trail"]');
     expect(lead).toBeTruthy();
     expect(trail).toBeTruthy();
-    // They BRACKET the cluster: each sits entirely outside its box, which is what
-    // makes them bind the fletching rather than decorate it.
-    expect(lead.style.right).toBe('100%');
-    expect(trail.style.left).toBe('100%');
+    // ⚠️⚠️ THEY BRACKET THE CLUSTER AT ITS QUILL-LINE CORNERS, NOT AT ITS BOX, AND V4
+    // IS WHERE THOSE STOPPED BEING THE SAME PLACE. Until the frame retired, the band's
+    // two outer ends were square, so a wrap at `right: 100%` bound the feather by
+    // construction. The owner's "every border parallel" makes both ends slashes, and the
+    // whole band's quill line is displaced by |SEAT| — so a wrap left at the box would
+    // bind nothing at the lead end and leave bare feather standing proud at the trail.
+    //
+    // The inset is therefore DERIVED from the band's own seat, and the pin re-derives
+    // it here rather than restating the string: a hand-typed percentage that happened to
+    // match today's lean is exactly the side-table hazard this estate keeps being bitten
+    // by. `BITE` is the 3px of thread that paints over the corner.
+    const corner = Math.abs(SEAT) / BAND_W;
+    const BITE = 3;
+    // ⚠️ PARSED, NOT STRING-MATCHED. cssstyle re-serialises a calc() and drops trailing
+    // precision (103.0833% comes back as 103.083%), so a literal comparison would pin
+    // the serialiser rather than the geometry — and would red on a jsdom bump.
+    const calcOf = (v) => {
+      const m = v.match(/^calc\((-?[\d.]+)%\s*-\s*([\d.]+)px\)$/);
+      expect(m, `not a seated inset: ${v}`).toBeTruthy();
+      return { pct: Number(m[1]), px: Number(m[2]) };
+    };
+    expect(calcOf(lead.style.right).pct).toBeCloseTo((1 - corner) * 100, 3);
+    expect(calcOf(trail.style.left).pct).toBeCloseTo((1 + corner) * 100, 3);
+    expect(calcOf(lead.style.right).px).toBe(BITE);
+    expect(calcOf(trail.style.left).px).toBe(BITE);
+    // NON-VACUITY: the offset is a real displacement, not 100% written the long way —
+    // and it is SMALL, because a wrap that walked far into the band would cross a label.
+    expect(corner).toBeGreaterThan(0.02);
+    expect(corner).toBeLessThan(0.05);
+    // …and it really lands on the corner the band draws. Realm's trailing corner sits
+    // `corner` PAST the box and Create's leading corner `corner` INSIDE it, which is
+    // the asymmetry the two insets encode.
+    expect(ONCURVE(VANES[0].closed)[0].x / BAND_W).toBeCloseTo(corner, 9);
+    expect(ONCURVE(VANES[2].closed)[1].x / BAND_W).toBeCloseTo(1 + corner, 9);
     expect(band.contains(lead)).toBe(true);
     // Out of flow, so they spend no row width and cannot wrap the header to a
     // second flex line.
@@ -1391,15 +1576,21 @@ describe('9 — the active fletch LIGHTENS, and takes the gold along its own edg
     const bands = [...svg.querySelectorAll('[data-testid="nav-fletch-sheen-1"] path')];
     expect(bands.length).toBe(3);
     for (const b of bands) expect(b.getAttribute('fill')).toBe(FLETCH_SHEEN_LIFT);
-    // 4 — the gold underline, stroked along the cell's OWN lower edge so it hangs
-    // below the bar with the feather it belongs to instead of ruling across the cell.
-    const edge = svg.querySelector('[data-testid="nav-fletch-edge-1"]');
-    expect(edge).toBeTruthy();
-    expect(edge.getAttribute('d')).toBe(VANES[1].lower);
-    expect(edge.getAttribute('stroke')).toBe(GOLD);
-    expect(edge.getAttribute('fill')).toBe('none');
-    // Authored at double width because the clip halves it: 2px survives inside.
-    expect(edge.getAttribute('stroke-width')).toBe('4');
+    // 4 — the QUILL LINE, lying on the binding at the top of the cell. ⚠️ IT REPLACED
+    // the gold underline that used to ride the vane's lower edge; see the indicator
+    // pin in block 2 for the "moved, not duplicated" half of the claim.
+    const mark = svg.querySelector('[data-testid="nav-fletch-quill-1"]');
+    expect(mark).toBeTruthy();
+    expect(mark.getAttribute('d')).toBe(QUILLS[1]);
+    // FILLED, not stroked, because a stroke's cap cannot be slant-cut at the lean.
+    expect(mark.getAttribute('fill')).toBe(GILT_LIGHT);
+    expect(mark.getAttribute('stroke')).toBeNull();
+    // ⚠️ AND IT IS THE BRIGHT LEAF, NOT THE HOUSE GOLD. It is drawn inside the barrel's
+    // sheen zone, where GOLD manages 2.23:1 against SC 1.4.11's 3:1 and GILT_LIGHT
+    // clears it — the finding that unified the gilding and the indicator onto one metal.
+    expect(mark.getAttribute('fill')).not.toBe(GOLD);
+    expect(ratio(GILT_LIGHT, SHAFT_SHEEN)).toBeGreaterThanOrEqual(3);
+    expect(ratio(GOLD, SHAFT_SHEEN)).toBeLessThan(3);
   });
 
   test('a resting fletch carries none of the channels — the A/B is real', () => {
@@ -1420,14 +1611,18 @@ describe('9 — the active fletch LIGHTENS, and takes the gold along its own edg
       expect(b.getAttribute('fill')).toBe(FLETCH_SHEEN);
     }
     // Absence is the assertion, and it is non-vacuous because the block above proves
-    // the gold edge exists when it should.
-    expect(svg.querySelector('[data-testid="nav-fletch-edge-2"]')).toBeNull();
-    expect(svg.querySelector('[data-testid="nav-fletch-edge-0"]')).toBeNull();
+    // the quill line exists when it should.
+    expect(svg.querySelector('[data-testid="nav-fletch-quill-2"]')).toBeNull();
+    expect(svg.querySelector('[data-testid="nav-fletch-quill-0"]')).toBeNull();
+    // …and the retired underline stays retired on the resting cells too, so a
+    // half-revert that put it back on one register only would red here.
+    expect(svg.querySelectorAll('[data-testid^="nav-fletch-edge-"]').length).toBe(0);
   });
 
   test('on a plain view NO vane is lit — the band knows "none", not "the first"', () => {
     const { container } = render(<NavRibbon view="compendium" onNavClick={() => {}} />);
     expect(paint(container).dataset.activeLane).toBe('-1');
+    expect(paint(container).querySelectorAll('[data-testid^="nav-fletch-quill-"]').length).toBe(0);
     expect(paint(container).querySelectorAll('[data-testid^="nav-fletch-edge-"]').length).toBe(0);
   });
 
@@ -1501,19 +1696,33 @@ describe('10 — ⚠️⚠️ AA against the LIGHTEST tonal band, and the ratios
     // 1 — THE LABEL. A component whose own name is legible on it is identified by the
     //     strongest means WCAG knows, and the label clears AA on every band.
     expect(ratio(PARCH_100, FLETCH_SHEEN_LIFT)).toBeGreaterThanOrEqual(4.5);
-    // 2 — THE ACTIVE INDICATOR. Still a state carrier, so it still owes 1.4.11 on the
-    //     lightest ground it can touch — which the SHEEN_FLOOR geometry above keeps at
-    //     the vane gradient rather than at a sheen band.
-    expect(ratio(GOLD, FLETCH_VANE)).toBeGreaterThanOrEqual(3);
+    // 2 — THE ACTIVE INDICATOR, AND V4 MOVED IT TO THE QUILL LINE. It is still a state
+    //     carrier, so it still owes 1.4.11 on the LIGHTEST ground it can touch — and
+    //     that ground changed with the mark. The quill line lies in the top 3px of the
+    //     active cell, so its ground is the lit vane's own top stop and any sheen band
+    //     crossing it: FLETCH_SHEEN_LIFT is the lightest of those, by the ladder pin
+    //     above. GILT_LIGHT clears it with room.
+    expect(ratio(GILT_LIGHT, FLETCH_SHEEN_LIFT)).toBeGreaterThanOrEqual(3);
+    expect(ratio(GILT_LIGHT, FLETCH_SHEEN_LIFT).toFixed(2)).toBe('4.95');
+    // …and on the BARE SHAFT's sheen zone too, which is the number theme.js's GILT
+    // ladder quotes and the reason the indicator had to leave the house GOLD family.
+    // Kept as a second ground because it is the one that binds if the band ever stops
+    // covering its own quill line.
+    expect(ratio(GILT_LIGHT, SHAFT_SHEEN)).toBeGreaterThanOrEqual(3);
+    expect(ratio(GILT_LIGHT, SHAFT_SHEEN).toFixed(2)).toBe('3.34');
+    // ⚠️ NEGATIVE CONTROL, AND IT IS THE WHOLE REASON THERE ARE TWO GOLDS: the house
+    // GOLD fails on that same ground, so "just use the brand gold" reds with the number.
+    expect(ratio(GOLD, SHAFT_SHEEN)).toBeLessThan(3);
+    expect(ratio(GOLD, SHAFT_SHEEN).toFixed(2)).toBe('2.23');
+    // ⚠️ AND THE OLD REASON THE SHEEN BANDS STOP SHORT IS NOW FULLY DISCHARGED, which
+    // is recorded rather than left as a stale comment. On the V3 ladder the gold ran
+    // along the vane's LOWER edge and measured 2.42:1 on a brightened sheen, so
+    // SHEEN_FLOOR was LOAD-BEARING for the state claim. V4 moved the mark to the top,
+    // where a sheen band cannot reach it at all — SHEEN_FLOOR is 72% of the vane's
+    // depth and the indicator ends inside the first 3px — so the geometry survives as
+    // FEATHER ANATOMY alone. The margin is quoted rather than the necessity re-asserted.
+    expect(SHEEN_PEEK + QUILL_H).toBeLessThan(SHEEN_FLOOR);
     expect(ratio(GOLD, FLETCH_VANE).toFixed(2)).toBe('5.74');
-    // ⚠️ AND THE OLD REASON THE BANDS STOP SHORT NO LONGER HOLDS, which is recorded
-    // rather than left as a stale comment: on the V3 ladder the gold measured 2.42:1 on
-    // a brightened sheen and the SHEEN_FLOOR geometry was LOAD-BEARING for the state
-    // claim. On the V4 ladder it clears there too (3.30:1), so the geometry survives as
-    // FEATHER ANATOMY — a real fletch's sheen does stop short of the cut — with a
-    // recorded margin instead of a necessity.
-    expect(ratio(GOLD, FLETCH_SHEEN_LIFT)).toBeGreaterThanOrEqual(3);
-    expect(ratio(GOLD, FLETCH_SHEEN_LIFT).toFixed(2)).toBe('3.30');
     // 3 — THE HANG. The lower half of every vane sits on the parchment PAGE, where the
     //     same silhouette is unmissable.
     expect(ratio(FLETCH_VANE, PARCH)).toBeGreaterThanOrEqual(4.5);

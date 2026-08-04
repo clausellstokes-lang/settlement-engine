@@ -75,17 +75,20 @@
  * wrong. No ancestor may introduce `overflow: hidden` either. The pin asserts the
  * chain.
  *
- * ACTIVE STATE, in the owner's own words: a BRIGHTENED CELL plus a GOLD UNDERLINE.
- * The whole quad's fill steps one rung up the goose ladder and its sheen bands lift
- * with it, the label brightens to PARCH, and the gold is stroked along the cell's OWN
- * lower edge — so it hangs below the bar with the feather it belongs to instead of
- * ruling across the tab. That is three visual channels plus aria-current="page", none
- * of them colour alone. ⚠️ The brightening is built ENTIRELY from tones already in the
- * ladder, which is why the AA floor did not move: the lightest thing a label can land
- * on is still FLETCH_SHEEN_LIFT. Weight is deliberately not a channel: every fletch
- * label is 600 under the BALANCE LAW. The plain reference tabs keep the underline
- * register, and in V4 they join the fletches in the PARCHMENT one — on cedar there is
- * no ink register left to keep them apart from it (see the cell's own note).
+ * ACTIVE STATE, in the owner's own words: a BRIGHTENED CELL plus a GILT LINE — and in
+ * V4 that line MOVED TO THE TOP. The whole quad's fill steps one rung up the goose
+ * ladder and its sheen bands lift with it, the label brightens to PARCH, and the metal
+ * lies along the cell's own QUILL LINE, on the binding, where the owner's directive puts
+ * it. ⚠️⚠️ MOVED, NOT DUPLICATED: the gold underline that used to ride the vane's lower
+ * edge is RETIRED, and FletchBand's pin asserts that no active-state paint exists below
+ * the vane at all. That is three visual channels plus aria-current="page", none of them
+ * colour alone. ⚠️ The brightening is built ENTIRELY from tones already in the ladder,
+ * which is why the AA floor did not move: the lightest thing a label can land on is
+ * still FLETCH_SHEEN_LIFT. Weight is deliberately not a channel: every fletch label is
+ * 600 under the BALANCE LAW. The plain reference tabs keep the UNDERLINE register —
+ * they are the shelf, not the journey, and nothing about them rides a vane — and in V4
+ * they join the fletches in the PARCHMENT one, because on cedar there is no ink register
+ * left to keep them apart from it (see the cell's own note).
  *
  * THE FLOW MARK MOVED, IT DID NOT DIE. NavFlowArrow no longer renders here; it still
  * draws on the MOBILE bottom nav, where cells have no seam to carry a divider. Both

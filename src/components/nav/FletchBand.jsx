@@ -58,8 +58,9 @@
  *       correction forbids torn or complex cell shapes, so the quad stays a quad and
  *       the ruler line is broken by MATERIAL instead — `frayHairs`, a handful of FREE
  *       BARB TIPS per cell escaping past the cut, which is exactly what a bound fletch
- *       shows in life. The composited lower boundary is no longer straight; the clip,
- *       the gold underline and every geometry pin are untouched.
+ *       shows in life. The composited lower boundary is no longer straight; the clip and
+ *       every geometry pin are untouched. (The gold underline this note used to name
+ *       alongside them RETIRED in V4 — see the quill line.)
  *
  *   (4) THE RACHIS WAS ONE RAIL. Measured: "the rachis renders as one continuous pale
  *       rail across the top of the whole band rather than three quills". CURE: each
@@ -67,18 +68,45 @@
  *       a per-lane height, so the band carries three tapering quills with real breaks
  *       between them instead of a single pale rule.
  *
- * ⚠️⚠️ THE SEAT — WHY THE WHOLE BAND IS SHIFTED LEFT BY `SEAT`, AND IT IS NOT A
+ * ⚠️⚠️⚠️ THE MIRROR (owner directive, ribbon V4 §c, 2026-08-04) — THE LEAN RUNS THE
+ * OTHER WAY NOW, AND FOUR THINGS MOVED WITH IT.
+ *
+ * The owner's V4 correction: "vane slant MIRRORED on x, EVERY border parallel INCL. the
+ * band's two outer ends." Every slanted mark on this band therefore runs (x, 0) →
+ * (x − RUN, BAND) rather than (x + RUN, BAND): the vanes sweep DOWN AND TO THE LEFT.
+ *
+ *   1. THE SIGN HAS ONE HOME. `lean` returns the SIGNED drift and `DRIFT` is its value
+ *      at full depth; the quad, both rims, the comb, the fray and the indicator all read
+ *      one of those two. Before the mirror, `+RUN` was spelled at six sites and agreed
+ *      with the drift function only by convention — six independent spellings is how a
+ *      band ends up with five edges leaning one way and one the other, every pin green.
+ *   2. THE SEAT'S SIGN FLIPPED WITH IT, so the band now shifts RIGHT to put its seams
+ *      across the lane divisions at label height. Same arithmetic, one negative number.
+ *   3. THE FRAME RETIRED. The two outer ends were the only marks here that did not lean;
+ *      the directive says every border parallel, so the clip and the two overshoots that
+ *      fed it are gone and all FOUR visible slashes are identical parallels. See `edges`.
+ *   4. THE EDGE-LIGHT RELAXED, 0.62 → 0.50. Lane FS lifted it as compensation for rims
+ *      that faced away from the upper-left light; mirrored, they face it. The geometry
+ *      pays what the ink used to.
+ *
+ * ⚠️ AND THE ACTIVE MARK MOVED TO THE TOP. The gold underline along each vane's lower
+ * edge is RETIRED, replaced by the GILT_LIGHT quill line lying on the binding — moved,
+ * never duplicated. See `quill()`.
+ *
+ * ⚠️⚠️ THE SEAT — WHY THE WHOLE BAND IS SHIFTED BY `SEAT`, AND IT IS NOT A
  * NUDGE. The lap boundaries are SLANTED, so "where is the seam between Create and
  * Library" has a different answer at every depth. The labels are laid out as equal
  * thirds of the band's box, centred at each lane's midpoint, and they are read at ONE
  * depth: the vertical middle of the bar. Drawn without the shift, the seam at that
- * depth sits `lean(D/2)` to the RIGHT of the lane division — which at today's metrics
- * is about 10 screen px, against a cell that has only ~6px of slack around its label.
- * The label would cross its own leading seam and sit half on the cell beneath it, at a
- * different z, with the contact shadow running through the letterforms. `SEAT` is
- * exactly that lean, subtracted from every x, so the seams cross the lane divisions AT
- * THE HEIGHT THE LABELS ARE READ. It is the whole reason a label can be "centred in
- * its cell's calm zone" while the cell is a slanted quad.
+ * depth sits `|lean(D/2)|` to one side of the lane division — about 8 screen px at
+ * today's metrics, against a cell whose label ink leaves ~16px of slack each side. The
+ * label would drift onto its own leading seam and, at a thinner bar or a wider font,
+ * sit half on the cell beneath it, at a different z, with the contact shadow running
+ * through the letterforms. `SEAT` is exactly that lean, subtracted from every x, so the
+ * seams cross the lane divisions AT THE HEIGHT THE LABELS ARE READ. It is the whole
+ * reason a label can be "centred in its cell's calm zone" while the cell is a slanted
+ * quad. ⚠️ ITS SIGN FOLLOWS THE MIRROR — the shift was leftward before V4 and is
+ * rightward now, with no change at all to the arithmetic that derives it.
  *
  * ⚠️⚠️ WHY THIS IS ONE SVG AND NOT THREE — THE BUG THAT FORCED THE REWRITE, kept
  * because the trap is still live. V3 drew one SVG per nav cell, each `inset: 0` on its
@@ -135,13 +163,16 @@
  * variation was REFUSED: two leans maintained separately is how a feather stops
  * looking like one feather.
  *
- * ⚠️ WHY THE SHEEN BANDS STOP SHORT OF THE LOWER EDGE. SHEEN_FLOOR ends them at 72%
- * of the vane's depth, and that is a CONTRAST guarantee, not a taste: the active
- * vane's gold runs along the vane's own lower edge, and GOLD measures 2.42:1 on the
- * brightened sheen but 4.12:1 on the vane gradient. Letting a band reach the lower
- * edge would put the state-carrying edge under SC 1.4.11's 3:1 floor at whatever x the
- * band happened to cross. Ending them high keeps the edge's ground the vertical
- * gradient alone, which only ever darkens downward.
+ * ⚠️ WHY THE SHEEN BANDS STILL STOP SHORT OF THE LOWER EDGE, AND WHY THE REASON
+ * CHANGED. It used to be a CONTRAST guarantee: the active vane's gold ran along the
+ * vane's own lower edge, GOLD measured 2.42:1 on the brightened sheen against 4.12:1 on
+ * the vane gradient, so a band reaching the cut would have put a state-carrying boundary
+ * under SC 1.4.11's floor at whatever x it crossed. V4 MOVED THAT MARK TO THE QUILL
+ * LINE, so the guarantee it bought is discharged and SHEEN_FLOOR is now held for the
+ * MATERIAL reason that was always the other half of it: a goose primary's sheen dies
+ * into the tip's shadow, and a bright band running to the cut is what makes a vane read
+ * as a printed gradient. Recorded rather than quietly re-justified, because a constant
+ * whose stated reason has expired is a constant nobody will defend next time.
  *
  * WHY THE SHEEN MAY BE BLURRED AND THE AA CLAIM STILL HOLDS. A blur is a weighted
  * average of its inputs, so it cannot produce a tone lighter than the lightest tone it
@@ -153,8 +184,8 @@
  */
 import {
   CHROME, FLETCH, FLETCH_BARB, FLETCH_HANG, FLETCH_LEAD, FLETCH_RACHIS,
-  FLETCH_SHADOW, FLETCH_SHEEN, FLETCH_SHEEN_LIFT, FLETCH_TIP, FLETCH_VANE, GOLD,
-  contactShadow, dropShadow,
+  FLETCH_SHADOW, FLETCH_SHEEN, FLETCH_SHEEN_LIFT, FLETCH_TIP, FLETCH_VANE,
+  GILT_LIGHT, contactShadow, dropShadow,
 } from '../theme.js';
 
 /** One fletch's lane, and the band's own width: three lanes side by side. */
@@ -169,13 +200,51 @@ const RUN = FLETCH.barbRun;
 /** Where the sheen bands stop, short of the lower edge (see the header note). */
 const SHEEN_FLOOR = BAND * 0.72;
 
-/** How far a mark leaning at the comb angle drifts over `depth` of vane. */
-const lean = (depth) => (depth / BAND) * RUN;
+/**
+ * THE INDICATOR'S TWO NUMBERS, in band units — which are viewport px vertically,
+ * because the viewBox is exactly the bar tall.
+ *
+ * `SHEEN_PEEK` is how much of the shaft's own satin sheen stays visible ABOVE the quill
+ * line, and `QUILL_H` is the bar's own depth. Both are deliberately sub-pixel-adjacent:
+ * a 2.5px gilt rule with half a pixel of lit wood above it reads as a mark lying ON the
+ * shaft, and a 4px one reads as a progress bar. See `quill()`.
+ */
+const SHEEN_PEEK = 0.5;
+const QUILL_H = 2.5;
+
+/**
+ * ⚠️⚠️ THE LEAN, AND IT IS MIRRORED ON X (owner directive, ribbon V4 §c). It is the
+ * SIGNED drift a mark makes over `depth` of vane, and it is NEGATIVE: every slanted
+ * mark on this band runs (x, 0) → (x − RUN, BAND), sweeping DOWN AND TO THE LEFT.
+ *
+ * ⚠️ THE SIGN LIVES HERE AND NOWHERE ELSE. Before the mirror, `+RUN` was spelled out
+ * at six sites — the quad, the gold path, both rims, the comb, the fray — and the drift
+ * function agreed with them only by convention. Mirroring six independent spellings is
+ * how a band ends up with five edges leaning one way and one leaning the other, with
+ * every pin green because every pin re-derives from the site it is checking. So the
+ * direction is ONE expression: `lean`, and `DRIFT` (its value at the vane's full depth,
+ * which is the only place any of those six ever needed). A future re-mirror is a sign
+ * change on one line.
+ *
+ * @param {number} depth how deep down the vane, in band units
+ * @returns {number} the signed horizontal drift, negative under the mirrored lean
+ */
+const lean = (depth) => -((depth / BAND) * RUN);
+
+/** The lean's value over the vane's FULL depth — the quad's own slanted run. */
+const DRIFT = lean(BAND);
 
 /**
  * SEAT — the lean at the depth the LABELS are read (the bar's vertical middle),
  * subtracted from every x so the slanted seams cross the lane divisions there.
  * See the header note; this is the number that keeps a label off its own seam.
+ *
+ * ⚠️ ITS SIGN FLIPPED WITH THE MIRROR, and the flip is the whole point rather than a
+ * detail. Under the old rightward lean the seam sat lean(D/2) to the RIGHT of its lane
+ * division at label height, so the band was shifted LEFT to compensate. Mirrored, the
+ * seam sits that far to the LEFT, so the band shifts RIGHT — and because every site
+ * subtracts SEAT, the one thing that had to change is that `lean` now returns a
+ * negative number. Nothing else in the seat's arithmetic moved.
  */
 const SEAT = lean(D / 2);
 
@@ -247,71 +316,106 @@ function combCoverage(pxPerUnit = BAND_PX_PER_UNIT) {
 const REACH = (lane) => (lane === 2 ? 0 : FLETCH.lap);
 
 /**
- * ⚠️⚠️ THE FRAME — WHY THE BAND'S TWO ENDS ARE SQUARE WHILE ALL THREE CELLS ARE
- * PARALLELOGRAMS, AND IT IS THE FIX FOR A DEFECT THE FIRST CUT SHIPPED.
+ * ⚠️⚠️ THE FRAME RETIRED WITH THE MIRROR, AND ITS RETIREMENT IS THE OWNER'S DIRECTIVE
+ * RATHER THAN A TIDY-UP. V4 §c, in the owner's own words: "EVERY border parallel INCL.
+ * THE BAND'S TWO OUTER ENDS."
  *
- * A slanted edge cannot end a band cleanly. Wherever the band's OUTER boundary slants,
- * the box it lives in does not: so at one depth the feather falls short of the box and
- * bare honey wood shows through in a triangle (a WOOD GAP INSIDE THE BAND — the exact
- * thing the directive forbids), and at the opposite depth it overshoots and the feather
- * pokes out past its own whipping. The first cut of this file had both, about 10px
- * each, at the trailing top corner and the leading bottom corner.
+ * WHAT THE FRAME WAS. The band's two outer ends used to be SQUARE while all three cells
+ * were parallelograms. A slanted outer boundary does not agree with the rectangular box
+ * it lives in — at one depth it falls short and bare wood shows in a triangle, at the
+ * opposite depth it overshoots past its own whipping — so the outer cells were drawn
+ * `RUN` LONGER than their lanes and the whole band was CLIPPED back to its box in x.
+ * Square ends, at the price of two of the composition's edges not being parallel.
  *
- * So the outer cells are drawn LONGER than their lanes — `RUN` past the frame at both
- * ends, which is enough to cover the box at every depth — and the whole band is then
- * CLIPPED to its own box horizontally. Every cell stays a true parallelogram, its
- * gradient and its comb are computed on the whole shape, and the band's two ends are
- * square against the wraps that bracket them: "after Realm the band's final trailing
- * edge resolves cleanly onto the bar."
+ * ⚠️ THE DIRECTIVE PRICES THAT TRADE THE OTHER WAY, and the reason is that the two
+ * ends were the ONLY marks on this bar that did not lean. Four visible slashes cross
+ * this band — Create's leading edge, Library's, Realm's, and Realm's trailing end — and
+ * with the frame in place two of them were slashes and two were vertical cuts. Now all
+ * four are IDENTICAL PARALLELS. So the overshoots are gone, the clip is gone, and the
+ * two defects the frame existed to hide are answered by the two things that actually
+ * bind a fletch:
  *
- * ⚠️ THE FRAME IS OPEN VERTICALLY, and that is what keeps the hang. It clips x only;
- * its y range runs from above the quill to well past BAND so the vanes hang free, the
- * free barb tips fray below the cut, and the contact shadows are not sheared off at
- * the bottom. Clipping y here would undo the whole `overflow: visible` mechanism in
- * one attribute.
- */
-const FRAME = `M 0 ${-BAND} L ${BAND_W} ${-BAND} L ${BAND_W} ${BAND * 2} L 0 ${BAND * 2} Z`;
-
-/**
+ *   · AT THE QUILL LINE, the wraps. Each whipping now aligns to its OWN outer slash's
+ *     quill-line corner and paints over it (ShaftWrap owns that alignment and derives
+ *     it from SEAT). That is where a binding goes on a real arrow, and it is why the
+ *     ends can slant at all.
+ *   · BELOW THE BAR, nothing needs to. The slash hangs free over the page, which is
+ *     what the hang has always been. Wood beyond the outermost slash is SHAFT — the
+ *     arrow's own bare barrel before the fletching starts — and not a gap in the band.
+ *
+ * The two outer cells are therefore drawn at exactly their lanes, like the inner one.
+ *
  * The two quill-line x's of one cell's quad — its leading and trailing edges at y=0.
- * The outer cells reach `RUN` past the frame so the clip above always has material to
- * cut, at every depth; the inner boundaries carry the lap.
+ * The inner boundaries carry the lap; the outer ones are the band's own two ends.
  * @param {number} lane 0 Create · 1 Library · 2 Realm
  * @returns {[number, number]} leading x, trailing x
  */
 function edges(lane) {
-  return [
-    lane * LANE - SEAT - (lane === 0 ? RUN : 0),
-    (lane + 1) * LANE + REACH(lane) - SEAT + (lane === 2 ? RUN : 0),
-  ];
+  return [lane * LANE - SEAT, (lane + 1) * LANE + REACH(lane) - SEAT];
 }
 
 /**
  * ONE VANE, as a parallelogram in band coordinates.
  *
- * Four points, two of them slanted edges leaning by RUN over BAND of depth. The top
+ * Four points, two of them slanted edges leaning by DRIFT over BAND of depth. The top
  * edge lies on the quill line (y=0, where the binding is) and the bottom edge at
- * y=BAND, well below the bar. `lower` is the bottom edge alone — what the active gold
- * is stroked along — and `lead`/`trail` are the two slanted edges the edge-light rides.
+ * y=BAND, well below the bar. `lead`/`trail` are the two slanted edges the edge-light
+ * rides.
+ *
+ * ⚠️ `lower` IS GONE, AND ITS ABSENCE IS THE INDICATOR'S MOVE. The bottom edge used to
+ * be a named path because the active state's gold was stroked along it. The owner's V4
+ * directive moved the active mark to the TOP — the quill line — and the cumulative-audit
+ * addendum says MOVED, not duplicated: no active-state paint may exist below the vane
+ * at all. `quill()` below is the whole of the active geometry now, and the bottom edge
+ * is once again nothing but two of the quad's four corners.
  *
  * @param {number} lane 0 Create · 1 Library · 2 Realm
- * @returns {{ closed: string, lower: string, lead: string, trail: string }}
+ * @returns {{ closed: string, lead: string, trail: string }}
  */
 function vane(lane) {
   const [x0, x1] = edges(lane);
   return {
-    closed: `M ${x0} 0 L ${x1} 0 L ${x1 + RUN} ${BAND} L ${x0 + RUN} ${BAND} Z`,
-    // ⚠️ The gold's path is the LOWER EDGE ONLY, deliberately. Stroking the whole
-    // closed silhouette ran the gold up both slants and along the quill too, which
-    // read as a selected-badge outline rather than as a lit lower edge. Gold on the
-    // bottom is a highlight; gold all the way round is a border.
-    lower: `M ${x0 + RUN} ${BAND} L ${x1 + RUN} ${BAND}`,
-    lead: `M ${x0} 0 L ${x0 + RUN} ${BAND}`,
-    trail: `M ${x1} 0 L ${x1 + RUN} ${BAND}`,
+    closed: `M ${x0} 0 L ${x1} 0 L ${x1 + DRIFT} ${BAND} L ${x0 + DRIFT} ${BAND} Z`,
+    lead: `M ${x0} 0 L ${x0 + DRIFT} ${BAND}`,
+    trail: `M ${x1} 0 L ${x1 + DRIFT} ${BAND}`,
   };
 }
 
 const VANES = [0, 1, 2].map(vane);
+
+/**
+ * ⚠️⚠️ THE QUILL LINE — THE ACTIVE INDICATOR, AND IT REPLACES THE GOLD UNDERLINE
+ * ENTIRELY (owner directive, V4: "the active indicator moves to the TOP").
+ *
+ * A gilt bar lying along the binding, spanning the active lane between its two lap
+ * boundaries, with its ends SLANT-CUT at the composition's one lean so it is bounded by
+ * the same parallels as everything else on the bar.
+ *
+ * ⚠️ IT STARTS AT `SHEEN_PEEK`, NOT AT ZERO, AND THAT HALF-PIXEL IS LOAD-BEARING. The
+ * band's box is `inset: 0` on a header stuck at `top: 0`, so y=0 in these coordinates is
+ * the viewport's own top edge. A gold bar drawn there reads as a browser-chrome accent
+ * — a tab strip, or a loading bar — rather than as a mark ON the shaft. Leaving the
+ * shaft's satin sheen visible above it is what puts the metal on the wood.
+ *
+ * ⚠️ IT USES GILT_LIGHT AND NOT THE HOUSE GOLD, and that is a measured requirement
+ * rather than a preference: it is drawn inside the barrel's SHEEN zone (SHAFT_STOPS.lit
+ * is 0.09 of a 38px bar = 3.4px, so the whole bar lies in it), where the house GOLD
+ * manages 2.23:1 against SC 1.4.11's 3:1 and GILT_LIGHT clears it at 3.34:1. theme.js's
+ * GILT ladder note owns that arithmetic; this is its one consumer on the band.
+ *
+ * @param {number} lane 0 Create · 1 Library · 2 Realm
+ * @returns {string} an SVG path — a parallelogram, slant-cut at the lean
+ */
+function quill(lane) {
+  const a = lane * LANE - SEAT;
+  const b = (lane + 1) * LANE - SEAT;
+  const top = SHEEN_PEEK;
+  const bot = SHEEN_PEEK + QUILL_H;
+  return `M ${a + lean(top)} ${top} L ${b + lean(top)} ${top}`
+    + ` L ${b + lean(bot)} ${bot} L ${a + lean(bot)} ${bot} Z`;
+}
+
+const QUILLS = [0, 1, 2].map(quill);
 
 /**
  * ⚠️ THE DETERMINISTIC JITTER — INTEGER ARITHMETIC, NEVER `Math.sin`.
@@ -386,7 +490,14 @@ function barbBuckets(lane) {
   let x = from;
   for (let k = 0; x < to; k += 1) {
     const bucket = Math.floor(unitHash(k * 7 + lane * 131 + 3) * 3) % 3;
-    buckets[bucket].push(`M ${x.toFixed(1)} 0 L ${(x + RUN).toFixed(1)} ${BAND}`);
+    // ⚠️ THE END IS DERIVED FROM THE ROUNDED START, NOT ROUNDED SEPARATELY. Authoring
+    // both ends to 1dp from the raw float lets the two round in opposite directions, so
+    // a barb's measured run comes out 0.1 off DRIFT and the comb is only parallel to the
+    // cut "to within the path's own rounding". Rounding once and adding an integer run
+    // makes it parallel EXACTLY, which is what lets the pin assert equality instead of
+    // a tolerance — and a tolerance is where a real half-mirrored comb would hide.
+    const head = +x.toFixed(1);
+    buckets[bucket].push(`M ${head} 0 L ${(head + DRIFT).toFixed(1)} ${BAND}`);
     // The gap wobbles within +/-barbJitter/2 of THIS LANE's nominal value, and never
     // to zero.
     x += gap * (1 - FLETCH.barbJitter / 2 + FLETCH.barbJitter * unitHash(k + lane * 911));
@@ -423,7 +534,7 @@ function frayHairs(lane) {
     // a worse artefact than the ruler edge was. A frayed edge is a DENSITY, so the
     // spacing is now a little over one comb gap and the drop is a third of what it was.
     const drop = 0.9 + u * 3.1;
-    const bx = x + RUN;
+    const bx = x + DRIFT;
     out.push(`M ${bx.toFixed(1)} ${BAND} L ${(bx + lean(drop)).toFixed(1)} ${(BAND + drop).toFixed(1)}`);
     x += FLETCH.barbGap * (1.1 + u * 0.9);
   }
@@ -599,10 +710,12 @@ export default function FletchBand({ id, activeLane }) {
         {VANES.map((v, lane) => (
           <clipPath key={lane} id={`${id}-clip-${lane}`}><path d={v.closed} /></clipPath>
         ))}
-        <clipPath id={`${id}-frame`}><path d={FRAME} /></clipPath>
       </defs>
 
-      <g clipPath={`url(#${id}-frame)`} data-testid="nav-fletch-frame">
+      {/* ⚠️ NO FRAME CLIP. The band's two outer ends are slashes like every other
+          boundary on it (see `edges` above), so there is nothing left to square off and
+          nothing to cut. The group survives only as the paint-order container. */}
+      <g data-testid="nav-fletch-frame">
         {[0, 1, 2].map((lane) => {
           const v = VANES[lane];
           const active = lane === activeLane;
@@ -677,18 +790,20 @@ export default function FletchBand({ id, activeLane }) {
                 </g>
                 <path d={rachis(lane)} data-testid={`nav-fletch-rachis-${lane}`} fill={FLETCH_RACHIS} />
                 {active && (
-                  // THE GOLD UNDERLINE — the owner's second active channel, and it rides
-                  // the cell's OWN lower edge rather than a rectangle drawn across the
-                  // cell, so it hangs below the bar with the feather it belongs to. The
-                  // clip halves the stroke, which is why it is authored at double width:
-                  // what survives is the 2px inside.
+                  // ⚠️⚠️ THE QUILL LINE — the owner's second active channel, MOVED to the
+                  // top and NOT duplicated there. The gold underline that used to ride
+                  // this cell's lower edge is RETIRED: the cumulative-audit addendum reads
+                  // the owner's "move it to the top" as moved, and the pin in
+                  // tests/components/navFletching.test.jsx asserts that no active-state
+                  // paint exists below the vane at all. A mark at both ends would be the
+                  // band claiming its state twice in the one channel the eye reads first.
+                  //
+                  // It is a FILLED parallelogram rather than a stroke, because the ends
+                  // have to be slant-cut at the lean and a stroke's cap cannot be.
                   <path
-                    d={v.lower}
-                    data-testid={`nav-fletch-edge-${lane}`}
-                    fill="none"
-                    stroke={GOLD}
-                    strokeWidth="4"
-                    vectorEffect="non-scaling-stroke"
+                    d={QUILLS[lane]}
+                    data-testid={`nav-fletch-quill-${lane}`}
+                    fill={GILT_LIGHT}
                   />
                 )}
               </g>
@@ -714,11 +829,16 @@ export default function FletchBand({ id, activeLane }) {
                   on Realm, where it resolves the band's own end. Any heavier and the
                   cells read as outlined shapes, which is the badge failure this band was
                   cut out of.
-                  ⚠️ THE LEADING RIM CARRIES MORE SINCE LANE FS (0.50 → 0.62) because the
-                  light now comes from the upper LEFT and a raised leading edge is what it
-                  strikes; the cast shadow that used to mark this seam cannot, so the lit
-                  rim takes the job. Paid for by the comb — see the shadow note above. */}
-              <path d={v.lead} fill="none" stroke={FLETCH_RACHIS} strokeOpacity="0.62" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+                  ⚠️⚠️ THE LEADING RIM RELAXES BACK, 0.62 → 0.50, AND THE MIRROR IS WHY.
+                  Lane FS lifted it to 0.62 as COMPENSATION: under an upper-left light and
+                  a rightward lean the exposed leading rims faced AWAY from the source, so
+                  the lit rim was being asked to stand in for light it was not actually
+                  catching. Mirrored, those same rims face the light — the compensation is
+                  paid by the geometry instead of by the ink, and holding 0.62 on top of it
+                  would make the seams the loudest marks on the band. The BALANCE LAW's own
+                  bookkeeping: a device is weakened the moment the composition stops
+                  needing it. The LEADING > TRAILING relationship survives untouched. */}
+              <path d={v.lead} fill="none" stroke={FLETCH_RACHIS} strokeOpacity="0.5" strokeWidth="1" vectorEffect="non-scaling-stroke" />
               <path d={v.trail} fill="none" stroke={FLETCH_RACHIS} strokeOpacity="0.38" strokeWidth="1" vectorEffect="non-scaling-stroke" />
             </g>
           );
@@ -729,7 +849,7 @@ export default function FletchBand({ id, activeLane }) {
 }
 
 export {
-  BAND, BAND_PX_PER_UNIT, BAND_W, BARB, D, LANE, REACH, RUN, SEAT, SHEENS, SHEEN_FLOOR,
-  VANES, barbBuckets, combCoverage, frayHairs, laneGap, lean, rachis, unitHash, vane,
-  FLETCH_HANG,
+  BAND, BAND_PX_PER_UNIT, BAND_W, BARB, D, DRIFT, LANE, QUILLS, QUILL_H, REACH, RUN,
+  SEAT, SHEENS, SHEEN_FLOOR, SHEEN_PEEK, VANES, barbBuckets, combCoverage, frayHairs,
+  laneGap, lean, quill, rachis, unitHash, vane, FLETCH_HANG,
 };
