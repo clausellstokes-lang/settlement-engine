@@ -14,7 +14,10 @@
  *     (numeric 75/50/25 silently failed all of them).
  *  1. FACTION_DESCRIPTORS carries crafts/noble pools so those categories stop
  *     falling through to 'The Independent Bloc'.
- *  2. Stress icons carry no bare U+FE0F variation selector.
+ *  2. Stress types carry NO icon slot at all — the dead-slot class, closed by
+ *     Lane IC's icon sweep (d9a1ea5a), must never return. See E2.2 below for
+ *     why this is the post-sweep invariant and why it is stronger than the
+ *     "icon is exactly empty" assertion it replaced.
  */
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -125,10 +128,71 @@ describe('E2.1 — faction descriptor pools cover crafts and noble', () => {
   });
 });
 
-describe('E2.2 — stress-type icon contract', () => {
-  it('every stress-type icon is exactly empty', () => {
-    for (const [key, st] of Object.entries(STRESS_TYPE_MAP)) {
-      expect(st.icon, `stress ${key} unexpectedly carries an icon`).toBe('');
+describe('E2.2 — stress-type icon contract: the dead slot must never return', () => {
+  // THE POST-SWEEP INVARIANT, and it is STRICTLY STRONGER than what stood here.
+  //
+  // This block used to assert `st.icon === ''` — that every stress type still
+  // carried an icon slot, holding the empty string. That assertion was itself the
+  // residue of an earlier mechanical emoji strip: the glyphs were removed and the
+  // KEYS were left behind, so every stress row in the dossier went on laying out
+  // an invisible span beside it, eating a flex gap, for as long as the slots
+  // existed. The old test froze that defect in place as if it were the contract.
+  //
+  // Lane IC's icon sweep (d9a1ea5a, 2026-08-03) deleted the slots themselves —
+  // 15 of them in src/data/stressTypes.js, part of 94 dead slots found across
+  // src/data, src/domain and src/generators — under the owner's icon directive of
+  // 2026-08-03 (clarified): remove ALL icons of any kind that are not logos,
+  // EXCEPT the icon on the AI Surveyor prompt. Stress types are not logos and are
+  // not the Surveyor prompt, so the slot is gone for good. `st.icon` is therefore
+  // `undefined` rather than `''`, and the old assertion went red for the RIGHT
+  // reason — it was reporting the fix, not a regression.
+  //
+  // Relaxing it to `toBeUndefined()` would have been the weak repair: an
+  // explicitly reintroduced `icon: undefined` field would satisfy it while
+  // restoring exactly the phantom column the sweep removed. We assert ABSENCE OF
+  // THE KEY instead, which is the property the sweep actually established and the
+  // one the row layout depends on.
+  //
+  // Spelled over /icon/i rather than the literal 'icon' alone because this
+  // dead-slot class has a camelCase sibling that has already bitten once —
+  // `resourceIcon`/`needIcon` in supplyChainData.js were part of the same 94 — and
+  // a guard that names only one spelling invites the other spelling back.
+  const ICON_KEY = /icon/i;
+  const entries = Object.entries(STRESS_TYPE_MAP);
+
+  it('the map is non-empty and every entry is an object (anti-vacuity)', () => {
+    // An absence assertion over an empty collection proves nothing. This row is
+    // the independent denominator: a zero-entry map can no longer green E2.2.
+    expect(entries.length).toBeGreaterThan(0);
+    for (const [key, st] of entries) {
+      expect(Boolean(st) && typeof st === 'object', `stress ${key} is not an object`).toBe(true);
     }
+  });
+
+  it('no stress type carries an icon key of ANY spelling', () => {
+    const offenders = [];
+    for (const [key, st] of entries) {
+      for (const field of Object.keys(st)) {
+        if (ICON_KEY.test(field)) offenders.push(`${key}.${field}`);
+      }
+    }
+    expect(offenders, `dead icon slot(s) reintroduced: ${offenders.join(', ')}`).toEqual([]);
+  });
+
+  it("the literal 'icon' key is absent — not merely empty — on every stress type", () => {
+    for (const [key, st] of entries) {
+      expect(
+        Object.prototype.hasOwnProperty.call(st, 'icon'),
+        `stress ${key} carries an 'icon' slot again — the phantom column is back`,
+      ).toBe(false);
+    }
+  });
+
+  it('NEGATIVE CONTROL: both detectors fire on a slot-bearing entry', () => {
+    // Without this, a refactor that broke the key walk would leave the two rows
+    // above green while guarding nothing at all.
+    const planted = { label: 'Planted', colour: '#000', icon: '', resourceIcon: '' };
+    expect(Object.keys(planted).filter((f) => ICON_KEY.test(f))).toEqual(['icon', 'resourceIcon']);
+    expect(Object.prototype.hasOwnProperty.call(planted, 'icon')).toBe(true);
   });
 });
