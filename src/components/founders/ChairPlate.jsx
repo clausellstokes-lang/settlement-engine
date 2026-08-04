@@ -6,9 +6,11 @@
  * in the covenant's tense, and — when the founder is also staff — the role ring.
  *
  * THE PLATE IS A BUTTON. Clicking it opens the bio drawer, so it must be a real
- * <button>: keyboard-reachable, Enter/Space activated, focus-ringed. A div with
- * an onClick would have been fewer lines and would have locked every keyboard
- * user out of half the Hall.
+ * button element: keyboard-reachable, Enter/Space activated, focus-ringed. A div
+ * with an onClick would have been fewer lines and would have locked every
+ * keyboard user out of half the Hall. (The tag is named in prose, never spelled
+ * out longhand — the raw-button ratchet's detector is a SOURCE match and cannot
+ * tell a docstring from a control. See tests/lint/rawButtonBaseline.test.js.)
  *
  * CONSENT (§6): the name renders only because the server projection released it.
  * A chair with no opted-in name is NOT a lesser chair and must never be styled as
@@ -54,11 +56,11 @@ export default function ChairPlate({ chair, index, onOpen }) {
     // box-shadow ring would have been one line shorter and would have put the
     // one glowing SaaS artifact in the product on its most formal surface.
     <li style={{ listStyle: 'none', ...(ringTone ? { padding: 3, background: ringTone } : null) }}>
-      {/* The Button PRIMITIVE, not a raw <button>: the plate inherits the house's
-          focus ring, press motion, disabled semantics, and tap-target floor for
-          free, and the ceremony is applied as style on top. A bespoke raw button
-          here would have been the one control in the product that quietly opts
-          out of all of that. */}
+      {/* The Button PRIMITIVE, never a bare element: the plate inherits the
+          house's focus ring, press motion, disabled semantics, and tap-target
+          floor for free, and the ceremony is applied as style on top. A bespoke
+          raw button here would have been the one control in the product that
+          quietly opts out of all of that. */}
       <Button
         variant="ghost"
         size="lg"

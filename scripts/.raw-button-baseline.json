@@ -4,7 +4,6 @@
   "src/components/CompendiumPanel.jsx",
   "src/components/EntityPicker.jsx",
   "src/components/HomeHero.jsx",
-  "src/components/HowToUse.jsx",
   "src/components/PipelineRail.jsx",
   "src/components/PrivacySettings.jsx",
   "src/components/PurchaseModal.jsx",
