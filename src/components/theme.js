@@ -215,24 +215,68 @@ export const SHAFT_CYLINDER =
  * `seed='7'` and `stitchTiles='stitch'` make it deterministic AND seamless when the
  * 320px tile repeats, so the plank has no visible join at any viewport width.
  *
- * The feColorMatrix paints a fixed dark-brown at an alpha DERIVED from the noise
- * (0.20·(R+G+B) − 0.22), so the wash averages ~8% and clamps to zero in the gaps —
- * a grain you can see and never a set of stripes. There is no random call anywhere
- * in this module: the string below is a constant, which is what the determinism pin
- * asserts.
+ * The feColorMatrix paints a fixed dark-brown at an alpha DERIVED from the noise —
+ * GRAIN_AMP · (0.20·(R+G+B) − 0.22) — so the wash clamps to zero in the gaps and is a
+ * grain you can see rather than a set of stripes. ⚠️ GRAIN_AMP is the contrast budget
+ * (see its own note); it scales the strength and leaves the shape alone. There is no
+ * random call anywhere in this module: the string below is a constant of the two
+ * authored numbers, which is what the determinism pin asserts.
+ *
+ * ⚠️⚠️ `color-interpolation-filters='sRGB'` IS SPELLED OUT, AND IT WAS MISSING.
+ * SVG's DEFAULT for a filter chain is linearRGB, and engines do not agree about it —
+ * which made this "deterministic" texture render at materially different STRENGTHS in
+ * different renderers. Measured on the same authored bytes: Chrome put an effective
+ * wash of about 6% under the label band, librsvg about 17%. A fixed seed only buys
+ * determinism of the NOISE; the colour space is what makes the noise turn into the
+ * same picture. That mattered here because the grain is the layer that pushes the
+ * composited bar BELOW SHAFT_BODY, so an engine-dependent wash is an engine-dependent
+ * contrast ratio. Declaring sRGB is a ONE-TIME, DELIBERATE VISUAL SHIFT: the grain
+ * reads slightly differently than it did before this line existed, and
+ * tests/design/compositedBarAA.test.js now measures what it actually costs.
  *
  * ⚠️ ENCODE IN THIS ORDER. `%` must be escaped BEFORE `#`, `<` and `>`, or the
  * `%23` this function itself emits would be re-escaped into `%2523`. The SVG is
  * authored with single-quoted attributes and explicit userSpaceOnUse numbers (never
  * `100%`) precisely to keep the character set this small.
  */
+/**
+ * GRAIN_AMP — HOW HARD THE GRAIN IS ALLOWED TO PRESS ON THE WOOD, and it is an
+ * ACCESSIBILITY NUMBER wearing a texture's name.
+ *
+ * ⚠️⚠️ THE GRAIN IS THE LAYER THAT DECIDES THE BAR'S CONTRAST FLOOR. Every AA ratio
+ * in this file is quoted against SHAFT_BODY, and the cylinder never goes darker than
+ * SHAFT_BODY inside the label band (SHAFT_STOPS.body guarantees it). The grain does:
+ * it is a dark-brown wash painted OVER the cylinder, so the darkest tone a letterform
+ * actually lands on is SHAFT_BODY composited with this wash at its own strongest
+ * point. Turn this number up and every ratio on the bar falls together.
+ *
+ * THE BUDGET, DERIVED RATHER THAN CHOSEN: the tightest claim on the bar is BODY (the
+ * resting reference tab) at 4.5:1, which needs a ground of at least L 0.3865.
+ * SHAFT_BODY is L 0.4243. So the wash may spend at most 0.038 of luminance — about a
+ * 7% alpha at its peak — and this scale is what holds it there.
+ *
+ * The alpha the filter computes is GRAIN_AMP * (0.20*(R+G+B) - 0.22): the SHAPE of
+ * the wash (where it appears and where it clamps to nothing) is unchanged, only its
+ * STRENGTH is scaled, so the grain still reads as lengthwise streaks rather than
+ * becoming a flat tint.
+ *
+ * ⚠️ IT WAS 1.0 AND THE BAR DID NOT CLEAR AA OFF-CHROMIUM. See the colour-space note
+ * below: with linearRGB left to the engines, Chrome rendered the wash at about 6%
+ * and librsvg at 17%, and at 17% the resting tab measures 4.09:1. Declaring sRGB made
+ * the engines agree — at the DARKER number — so this scale is what actually pays for
+ * the AA claim rather than Chrome's leniency paying for it.
+ * tests/design/compositedBarAA.test.js rasterises the real tile and enforces it.
+ */
+export const GRAIN_AMP = 0.24;
+
 const GRAIN_SVG = [
   "<svg xmlns='http://www.w3.org/2000/svg' width='320' height='64'>",
-  "<filter id='grain' filterUnits='userSpaceOnUse' x='0' y='0' width='320' height='64'>",
+  "<filter id='grain' filterUnits='userSpaceOnUse' x='0' y='0' width='320' height='64'",
+  " color-interpolation-filters='sRGB'>",
   "<feTurbulence type='fractalNoise' baseFrequency='0.008 0.42' numOctaves='3'",
   " seed='7' stitchTiles='stitch' result='noise'/>",
   "<feColorMatrix in='noise' type='matrix' values='",
-  "0 0 0 0 0.36 0 0 0 0 0.26 0 0 0 0 0.13 0.20 0.20 0.20 0 -0.22'/>",
+  `0 0 0 0 0.36 0 0 0 0 0.26 0 0 0 0 0.13 ${0.20 * GRAIN_AMP} ${0.20 * GRAIN_AMP} ${0.20 * GRAIN_AMP} 0 ${-0.22 * GRAIN_AMP}'/>`,
   '</filter>',
   "<rect x='0' y='0' width='320' height='64' filter='url(#grain)'/>",
   '</svg>',
