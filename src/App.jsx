@@ -21,7 +21,7 @@
  */
 import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { Zap, Shield, X } from 'lucide-react';
-import HouseDevice from './components/brand/HouseDevice.jsx';
+import Lockup from './components/brand/Lockup.jsx';
 import useIsMobile from './hooks/useIsMobile';
 import useCustomContentCloudSync from './hooks/useCustomContentCloudSync.js';
 import { useStore } from './store/index.js';
@@ -31,7 +31,7 @@ import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
 import { allowsFloatingFeedback, guardForView, redirectForView, viewToPath, NAV } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
 import {
-  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, ELEV, SHAFT, SHAFT_GRAIN_LAYERS, SLATE, SLATE_BG, sans, serif_, SP, R, FS, swatch, CHROME, bottomClearance,
+  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, ELEV, SHAFT, SHAFT_GRAIN_LAYERS, SLATE, SLATE_BG, sans, SP, R, FS, swatch, CHROME, bottomClearance,
 } from './components/theme.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
@@ -539,10 +539,7 @@ export default function App() {
               aria-label="SettlementForge home"
               style={{ gap: SP.xs, minHeight: 44, padding: `0 ${SP.xs}px` }}
             >
-              <HouseDevice size={20} mode="light" style={{ flexShrink: 0 }} />
-              <span aria-hidden="true" style={{ fontSize: FS.lg, fontWeight: 800, color: INK_DEEP, fontFamily: serif_, letterSpacing: '0.01em' }}>
-                <span style={{ fontSize: '1.28em' }}>S</span>ettlement<span style={{ fontSize: '1.28em' }}>F</span>orge
-              </span>
+              <Lockup compact />
             </Button>
 
             <AccountMenu
@@ -560,12 +557,12 @@ export default function App() {
         {/* ── Desktop header ──────────────────────────────────── */}
         {!isMobile && (
           <header style={{ ...headerStyle, minHeight: CHROME.headerDesktop, boxSizing: 'border-box', padding: `0 ${SP.xxl}px`, position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.md }}>
-            {/* Brand block — the wordmark stands alone. "SettlementForge" reads as a
-                single bold serif word with the two capitals (S, F) set a step
-                larger. The wordmark doubles as the home link; rendered as a button
-                for keyboard + AT access, the h1 keeps heading semantics with its
-                per-letter spans hidden from AT (the button's aria-label reads the
-                plain name). */}
+            {/* Brand block. The lockup itself — the maker's plate, the wordmark and
+                its wax-seal `o` — lives in components/brand/Lockup.jsx, which both
+                bars share; what stays here is only the home CONTROL it rides in. The
+                button carries the accessible name ("SettlementForge home") and the
+                lockup is aria-hidden throughout, so the mark can be as pictorial as it
+                likes without ever becoming the way the name is spelled. */}
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
               <button
                 type="button"
@@ -573,23 +570,7 @@ export default function App() {
                 aria-label="SettlementForge home"
                 style={{ background: 'none', border: 'none', padding: 0, margin: 0, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
               >
-                <HouseDevice size={26} mode="light" style={{ marginRight: SP.sm, flexShrink: 0 }} />
-                <h1
-                  aria-hidden="true"
-                  // THE WORDMARK IS DARK INK (v3 directive). It has now moved twice
-                  // with the ground beneath it, and both moves were forced, not
-                  // stylistic: GOLD was right on V1's ink bar and 1.85:1 on wood;
-                  // GOLD_TXT was right on V2's cream plank at 5.75:1 and is 3.38:1 on
-                  // V3's honey-tan barrel, which fails AA as text. INK_DEEP measures
-                  // 7.06:1 against SHAFT_BODY — the darkest tone the cylinder reaches
-                  // inside the label band — and is what the directive asks for in its
-                  // own words. `mode="light"` keeps the house mark on its ink draw.
-                  // The MOBILE wordmark above takes INK_DEEP for the same reason: it
-                  // paints the same honey barrel out of the same headerStyle.
-                  style={{ margin: 0, fontSize: FS.h1, fontWeight: 800, color: INK_DEEP, fontFamily: serif_, letterSpacing: '0.01em', lineHeight: 1.1 }}
-                >
-                  <span style={{ fontSize: '1.32em', fontWeight: 800 }}>S</span><span>ettlement</span><span style={{ fontSize: '1.32em', fontWeight: 800 }}>F</span><span>orge</span>
-                </h1>
+                <Lockup />
               </button>
             </div>
 

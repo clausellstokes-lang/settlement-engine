@@ -338,6 +338,106 @@ export const WRAP_EDGE = '#67321F';
 export const FLETCH_SHADOW = '#2A251E59';
 
 /**
+ * ── THE MAKER'S PLATE + THE WAX SEAL (owner task #78, research-locked spec) ──
+ *
+ * The brand lockup on the shaft: an aged-BRONZE MAKER'S PLATE carrying the house
+ * device, and beside it the wordmark, whose `o` in "Forge" is a blob of DEEP-RED
+ * SEALING WAX with the letter's counter STAMPED THROUGH it.
+ *
+ * ⚠️⚠️ THE RULE OF TINCTURE, AS A CODE-LEVEL PALETTE CONSTRAINT. Heraldry's oldest
+ * legibility law: never metal on metal, never colour on colour. Here that is not
+ * decoration advice, it is the whole AA structure of the plate — THE DEVICE'S FILL
+ * CARRIES 100% OF THE CONTRAST AND THE RELIEF CARRIES 0%. The device is a METAL
+ * (PLATE_DEVICE, pale parchment-gold) on a COLOUR (the bronze face), and it must
+ * clear AA on every tone of that face by itself, with the emboss switched off. The
+ * bevels, the keyline and the grit are CHARACTER ONLY: near-tonal to the face,
+ * carrying no part of any legibility claim, so a browser that renders them badly (or
+ * a user with reduced transparency) loses nothing but texture.
+ *
+ * ⚠️ THE FACE IS MID-TONE, AND THAT IS ALSO A LEGIBILITY DECISION, NOT A MOOD. An
+ * engraved plate needs headroom in BOTH directions — a highlight above the face and a
+ * shadow below it. On a near-black face there is no room below, the shadow half of
+ * every bevel disappears, and the relief flattens into a flat dark shape with a light
+ * scratch on it. PLATE_LIT sits at L 0.109: dark enough to carry a pale device at
+ * 5.05:1, light enough that PLATE_BEVEL_SHADE still reads as a shadow.
+ *
+ * ⚠️ THE BEVEL IS CONFINED TO THE PLATE'S MARGIN, AND THAT IS WHAT MAKES THE AA
+ * CLAIM GEOMETRIC RATHER THAN HOPEFUL — the same move SHAFT_STOPS.body makes for the
+ * barrel. PLATE_BEVEL_LIGHT is lighter than the face, so a device sitting ON it would
+ * measure 4.28:1 and fail. It cannot: the bevel lives in the outer PLATE_MARGIN
+ * fraction of the plate and the device lives inside that box. MakerPlate's pin
+ * asserts the confinement, not the good intentions.
+ *
+ * ONE LIGHT, ONE AZIMUTH. Every relief on this bar — the plate's bevel, the device's
+ * emboss, the plate's mounting shadow — is lit from PLATE_LIGHT_DEG, and so is the
+ * barrel it is mounted on (SHAFT_STOPS puts the barrel's highlight along its top).
+ * Two light directions in one composition is the single fastest way to make a set of
+ * carefully-rendered materials look like stickers.
+ */
+export const PLATE_LIT = '#6E5A33';
+export const PLATE_FACE = '#5A4928';
+export const PLATE_DEEP = '#43351B';
+export const PLATE_BEVEL_LIGHT = '#7A6539';
+export const PLATE_BEVEL_SHADE = '#382C15';
+export const PLATE_KEYLINE = '#241B0C';
+export const PLATE_DEVICE = '#F0E0B4';
+export const PLATE_RIVET = '#8C7444';
+// The mounting stack's three shadows, as one authored tone (see MakerPlate).
+export const PLATE_SHADOW = '#241B0C';
+
+/**
+ * PLATE — the plate's GEOMETRY, in its own 5:6 coordinate space.
+ *
+ * `ratio` is the HEATER SHIELD's 5:6, the proportion an English heater actually is.
+ * (The 9:10 figure the open web repeats is a single-source AI-aggregator echo with no
+ * primary behind it; it was checked and rejected during the research pass.)
+ *
+ * ⚠️ `margin` IS THE BEVEL'S TERRITORY AND THE DEVICE'S FORBIDDEN ZONE — see the
+ * tincture note above. It is a FRACTION of the plate, so the confinement survives
+ * every size the plate is drawn at, including the 32px favicon redraw.
+ *
+ * ⚠️ `gritAmp` IS AN ACCESSIBILITY NUMBER WEARING A TEXTURE'S NAME. It is the
+ * maximum per-channel deviation the grit may add, in 0-255 units. GRIT, NOT GLOSS:
+ * a specular highlight would put a near-white pixel on the face and the device's
+ * contrast floor would move with it. At 8 the wash is visible as age and cannot shift
+ * any ratio by a hundredth.
+ */
+export const PLATE = Object.freeze({
+  ratio: 5 / 6, margin: 0.14, bevel: 0.035, keyline: 1, gritAmp: 8, seed: 19,
+});
+
+/**
+ * PLATE_LIGHT_DEG — the composition's ONE light direction, in SVG/CSS degrees
+ * measured clockwise from "shadow falls straight down" (azimuth ~225° in the
+ * designer's compass: light from the upper left).
+ */
+export const PLATE_LIGHT_DEG = 225;
+
+/**
+ * THE SEALING WAX — the ONE saturated hue in the whole lockup, and it MEANS
+ * something: "sealed". It is rationed on purpose. The bar already spends red once, on
+ * the silk wraps that bind the fletching (WRAP), and the seal is deliberately the
+ * same family a step deeper, so the two read as one object's two red moments rather
+ * than as two unrelated accents.
+ *
+ * ⚠️⚠️ SEAL_WAX IS DEEP BECAUSE IT IS A LETTERFORM, NOT AN ORNAMENT. It stands in for
+ * the `o` of "Forge" inside the wordmark, so it owes TEXT contrast against the bar it
+ * rides — and the bar is honey-tan wood. A mid sealing-wax red (#8C2F2A) measures
+ * 3.52:1 on the composited barrel and fails; this measures 4.80:1 and passes. The
+ * word has to be readable before the seal is allowed to be pretty.
+ *
+ * ⚠️⚠️ THE IMPRESSION IS THE COUNTER, AND THE COUNTER IS A HOLE. The `o`'s bowl is
+ * not painted a darker red — it is genuinely open, so the barrel shows through it.
+ * That is what makes the seal survive being shrunk: at 16px it is an annulus with a
+ * dimple, and at any size the counter is separated from the wax by a LUMINANCE step
+ * of about 4.8:1 rather than by hue, which is what the grayscale test asks for. A
+ * darker-red counter measured 1.39:1 against the wax and merged into a blob by 20px.
+ */
+export const SEAL_WAX = '#6E1F1B';
+export const SEAL_RIM = '#4A1310';
+export const SEAL_GLINT = '#8E322B';
+
+/**
  * FLETCH — the fletching's GEOMETRY, deliberately kept apart from CHROME: none of
  * it may enter the header's layout box.
  *

@@ -121,10 +121,37 @@ describe('the shipped public assets (format contracts, not byte-goldens)', () =>
   });
 });
 
-describe('the eager header component pins to the canonical paths', () => {
-  it('components/brand/HouseDevice.jsx carries byte-equal path data', () => {
-    const src = readFileSync(resolve(process.cwd(), 'src', 'components', 'brand', 'HouseDevice.jsx'), 'utf-8');
-    for (const d of Object.values(DEVICE_PATHS)) expect(src).toContain(d);
-    expect(src).toContain(String(DEVICE_DOT.r));
+describe('every eager module that INLINES the device pins to the canonical paths', () => {
+  // ⚠️ A SET, NOT A FILE. This pin used to name HouseDevice.jsx alone, and the moment
+  // a second eager module inlined the same silhouette (MakerPlate, which strikes it
+  // into the bronze plate and therefore needs the raw geometry three times over) the
+  // pin was guarding one of two copies while reading perfectly correct. A one-file
+  // containment pin also goes VACUOUS on a pure relocation: the file moves, the read
+  // throws or the constant stops appearing, and nobody notices which. So: a declared
+  // set, a non-empty assertion over it, and a negative control.
+  const INLINERS = ['HouseDevice.jsx', 'MakerPlate.jsx'];
+
+  it('the inliner set is non-empty and every member really exists', () => {
+    expect(INLINERS.length).toBeGreaterThan(1);
+    for (const f of INLINERS) {
+      expect(existsSync(resolve(process.cwd(), 'src', 'components', 'brand', f)), `${f} is listed but missing`).toBe(true);
+    }
+  });
+
+  it.each(INLINERS)('%s carries byte-equal path data', (file) => {
+    const src = readFileSync(resolve(process.cwd(), 'src', 'components', 'brand', file), 'utf-8');
+    for (const d of Object.values(DEVICE_PATHS)) {
+      expect(src, `${file} has drifted from the canonical geometry`).toContain(d);
+    }
+    expect(src).toContain(String(DEVICE_DOT.rHeavy));
+  });
+
+  it('NEGATIVE CONTROL — a module that does NOT inline the device is not in the set', () => {
+    // Non-vacuity for the whole block: the containment check must be capable of
+    // failing. WaxSeal is a sibling brand module with its own geometry and none of
+    // the device's, so it is the proof that `toContain` is doing real work.
+    const seal = readFileSync(resolve(process.cwd(), 'src', 'components', 'brand', 'WaxSeal.jsx'), 'utf-8');
+    expect(seal).not.toContain(DEVICE_PATHS.ring);
+    expect(INLINERS).not.toContain('WaxSeal.jsx');
   });
 });
