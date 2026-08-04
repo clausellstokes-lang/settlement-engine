@@ -221,6 +221,54 @@ describe('RR law 3 — every variant of every pool is reachable', () => {
       }
     }
   });
+
+  test('pin:channels-close — a variant that continues past the splice closes the list VISIBLY', () => {
+    // THE DEFECT THIS EXISTS FOR, shipped and measured: `{channels}` splices a
+    // LIST ("magical transport, sanctioned caravans, seasonal access, or
+    // patronage"), and a variant that continued with a bare comma had its own
+    // continuation swallowed by that list —
+    //   "…or patronage, at a price the settlement feels."
+    // reads as a FIFTH channel called "at a price". The list's end was
+    // invisible. Repaired 2026-08-03 (lane MD) with an em-dash, under the RR
+    // window's disclosed one-body amendment.
+    //
+    // PHRASE vs CLAUSE is the real rule, and it is why this pin is an
+    // allowlist rather than a comma ban. A bare comma is FINE when what follows
+    // is an independent clause — index 4's "…or patronage, and the arrangement
+    // is renegotiated every season." cannot be misread as a list item, because
+    // "and the arrangement is renegotiated" is a finite clause, not a noun
+    // phrase. It is NOT fine when what follows is a phrase, which is exactly
+    // the shape that shipped. So: an em-dash, a terminator, or a coordinating
+    // conjunction that opens a clause.
+    const CLOSES_THE_LIST = /^\s*(?:—|[.;:]|,\s*(?:and|but|so|yet)\s)/;
+    const offenders = [];
+    for (const arm of ORIGIN_ARMS) {
+      for (const body of ORIGIN_POOLS[arm]) {
+        const after = body.split(CHANNELS_TOKEN).slice(1).join(CHANNELS_TOKEN);
+        if (!after.trim()) continue; // the token ends the sentence: nothing to close
+        if (!CLOSES_THE_LIST.test(after)) offenders.push(`${arm}: …${CHANNELS_TOKEN}${after}`);
+      }
+    }
+    expect(
+      offenders,
+      'a splice continuation that a reader will absorb into the channel list:\n'
+      + `${offenders.join('\n')}\nClose it with an em-dash or a terminator.`,
+    ).toEqual([]);
+
+    // NEGATIVE CONTROL — the exact sentence that shipped must FAIL this rule,
+    // or the pin is decoration. Without it, a regex that accepted everything
+    // would satisfy the loop above perfectly.
+    const SHIPPED = ', at a price the settlement feels.';
+    expect(CLOSES_THE_LIST.test(SHIPPED), 'the pin no longer refuses the defect it was written for').toBe(false);
+    // …and SPECIFICITY: the legitimate clause coordination still passes, so the
+    // repair is "make the list's end visible", not "ban commas".
+    expect(CLOSES_THE_LIST.test(', and the arrangement is renegotiated every season.')).toBe(true);
+    expect(CLOSES_THE_LIST.test(' — at a price the settlement feels.')).toBe(true);
+    // LIVENESS: the loop must actually have examined continuations.
+    const examined = ORIGIN_POOLS['isolated.deficit']
+      .filter((b) => b.split(CHANNELS_TOKEN).slice(1).join('').trim()).length;
+    expect(examined, 'no variant continues past the token — the loop asserted nothing').toBeGreaterThanOrEqual(5);
+  });
 });
 
 describe('RR law 5 — every authored variant obeys the generation world law', () => {

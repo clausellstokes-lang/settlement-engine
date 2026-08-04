@@ -134,7 +134,14 @@ export const ORIGIN_POOLS = Object.freeze({
 
   'isolated.deficit': Object.freeze([
     `Isolated from major trade routes. The settlement cannot fully feed itself; what the land does not give arrives expensively — through ${CHANNELS_TOKEN} — or not at all.`,
-    `Isolated from major trade routes, and short of what it eats. The gap is closed through ${CHANNELS_TOKEN}, at a price the settlement feels.`,
+    // ⚠️ THE SPLICE POINT NEEDS A VISIBLE CLOSE. `{channels}` is a LIST, and a
+    // comma after it disappears into that list: "…through magical transport,
+    // sanctioned caravans, seasonal access, or patronage, at a price the
+    // settlement feels." reads as a fifth channel called "at a price". The
+    // em-dash is the close the list's end needs — the same device index 0 uses
+    // on both sides of its own splice. Any future variant that continues AFTER
+    // the token must close it the same way; a bare comma cannot.
+    `Isolated from major trade routes, and short of what it eats. The gap is closed through ${CHANNELS_TOKEN} — at a price the settlement feels.`,
     `Set apart from the trade roads, on ground that does not quite feed it. What is missing comes in through ${CHANNELS_TOKEN} — when it comes at all.`,
     `Isolated, and running a shortfall it cannot farm its way out of. Survival here rests on ${CHANNELS_TOKEN} — every one of them fragile.`,
     `Off the trade routes and under-fed by its own land. The shortfall is met through ${CHANNELS_TOKEN}, and the arrangement is renegotiated every season.`,
