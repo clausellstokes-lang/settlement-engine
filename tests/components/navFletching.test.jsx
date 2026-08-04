@@ -96,7 +96,7 @@ import { flowsInto } from '../../src/components/nav/NavFlowArrow.jsx';
 import {
   ANCHOR_OFFSET, BODY, CHROME, FLETCH, FLETCH_BARB, FLETCH_BARB_DEG, FLETCH_HANG,
   FLETCH_LEAD, FLETCH_RACHIS, FLETCH_SHEEN, FLETCH_SHEEN_LIFT, FLETCH_TIP,
-  FLETCH_VANE, GOLD, GOLD_TXT, INK_DEEP, LABEL_BOX, PARCH, PARCH_100, SHAFT,
+  FLETCH_VANE, FS, GOLD, GOLD_TXT, INK_DEEP, LABEL_BOX, PARCH, PARCH_100, SHAFT,
   SHAFT_BODY, SHAFT_CYLINDER, SHAFT_EDGE, SHAFT_GRAIN_LAYERS, SHAFT_GRAIN_TEXTURE,
   SHAFT_RIM, SHAFT_SHEEN, SHAFT_STOPS, SP, WRAP,
 } from '../../src/components/theme.js';
@@ -792,8 +792,69 @@ describe('7 — ⚠️⚠️ the hang is PAINT, and the layout box stays CHROME.
     expect(ANCHOR_OFFSET).toBe(CHROME.headerDesktop + SP.xxl);
     // Today's values, in a SEPARATE assertion so a future resize edits one line that
     // is obviously a record and never the invariant.
-    expect(CHROME.headerDesktop).toBe(48);
-    expect(ANCHOR_OFFSET).toBe(72);
+    expect(CHROME.headerDesktop).toBe(38);
+    expect(ANCHOR_OFFSET).toBe(62);
+  });
+
+  test('⚠️⚠️ THE THIN SHAFT SEATS ITS RIDERS AT THEIR CURRENT FONT SIZES', () => {
+    // THE PIN THAT MAKES 38 A FLOOR RATHER THAN A PREFERENCE, and the one the next
+    // person to thin this bar will actually be stopped by. The directive is "the
+    // thinnest bar that still seats the wordmark, the reference tabs and Sign In AT
+    // CURRENT FONT SIZES" — so the type is what is pinned, and the bar is required to
+    // fit around it. Sizing the bar down by shrinking the type would satisfy any
+    // height pin and betray the whole instruction.
+    //
+    // ⚠️ jsdom HAS NO LAYOUT, so the measured box heights below are receipts from a
+    // real browser (Chrome, 1440x900, this lane) recorded beside the declarations
+    // that produce them. What jsdom CAN prove is that the declarations have not
+    // moved, and that the arithmetic those measurements imply still clears.
+    const RIDERS = {
+      // the wordmark: FS.h1 serif, its two capitals a step larger — the tallest
+      // rider on the bar, and the one that sets the floor.
+      wordmark: { fontSize: FS.h1, capStep: 1.32, lineHeight: 1.1, measured: 34.8 },
+      // the reference tabs and Sign In: FS.sm label in a padded, ruled box.
+      tab: { fontSize: FS.sm, padY: SP.sm, rule: 2, measured: 34 },
+    };
+    // 1. THE TYPE HAS NOT MOVED. These are the sizes the measurement was taken at.
+    expect(RIDERS.wordmark.fontSize).toBe(FS.h1);
+    expect(FS.h1).toBe(24);
+    expect(RIDERS.tab.fontSize).toBe(FS.sm);
+    expect(FS.sm).toBe(12);
+    expect(SP.sm).toBe(8);
+    // 2. THE TAB'S HEIGHT IS ARITHMETIC, not a measurement — label line box (16 at
+    //    FS.sm) + both paddings + its rule — so this half needs no browser at all.
+    expect(16 + RIDERS.tab.padY * 2 + RIDERS.tab.rule).toBe(RIDERS.tab.measured);
+    // 3. THE BAR SEATS THE TALLEST OF THEM, with air on both sides.
+    const tallest = Math.max(...Object.values(RIDERS).map((r) => r.measured));
+    expect(tallest).toBe(34.8);
+    expect(CHROME.headerDesktop, 'the bar no longer seats its tallest rider')
+      .toBeGreaterThan(tallest);
+    // …and it is a SEAT, not a coincidence: at least a pixel of air above and below.
+    // 36 would leave 0.6px, which is one font fallback away from a clipped wordmark.
+    expect((CHROME.headerDesktop - tallest) / 2).toBeGreaterThanOrEqual(1);
+    // 4. NEGATIVE CONTROL — and it is the whole point of the block. The bar is
+    //    genuinely THIN: it is not merely "big enough", it is within a few px of the
+    //    floor its own type imposes. A future edit that fattened it back toward 48
+    //    reds here, with the reason attached.
+    expect(CHROME.headerDesktop - tallest).toBeLessThan(8);
+  });
+
+  test('⚠️ THE BAND IS ROUGHLY TWICE THE BAR, so about half of it HANGS', () => {
+    // The composition, as a number. The owner asked for a band "roughly twice the
+    // bar's height, top-aligned, hanging 40-50% below the bar's bottom edge" — which
+    // is the same statement twice: at exactly twice, exactly half hangs. Pinned as a
+    // BAND rather than an equation on purpose (see theme.js's note): making `band` a
+    // multiple of the chrome would freeze the hang at a fixed fraction and it could
+    // never deepen as the shaft thins, which is the behaviour the directive is FOR.
+    expect(BAND / CHROME.headerDesktop).toBeGreaterThanOrEqual(1.8);
+    expect(BAND / CHROME.headerDesktop).toBeLessThanOrEqual(2.2);
+    const hangShare = FLETCH_HANG / BAND;
+    expect(hangShare, 'the band no longer hangs the share the directive asks for')
+      .toBeGreaterThanOrEqual(0.40);
+    expect(hangShare).toBeLessThanOrEqual(0.50);
+    // Today's values, recorded so a reader knows the bar without running it.
+    expect(BAND).toBe(76);
+    expect(FLETCH_HANG).toBe(38);
   });
 
   test('the DESKTOP HEADER ITSELF spends CHROME.headerDesktop, in border-box', () => {

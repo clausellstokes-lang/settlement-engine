@@ -121,19 +121,42 @@ export { GOLD_TXT, GOLD_SOFT, BORDER_STRONG } from '../design/tokens.js';
  * tests pin that the stop clears the vertically-centred label box on both header
  * heights. Measuring against SHAFT_RIM instead would be over-strict by a factor no
  * glyph ever touches (it would force every label to near-black); measuring against
- * SHAFT_SHEEN would be a lie. SHAFT_BODY is the darkest tone a letterform can land
- * on, and the stop geometry is what makes that true.
+ * SHAFT_SHEEN would be a lie.
  *
- * MEASURED against SHAFT_BODY (tests/design/contrast.test.js recomputes all of it;
- * WCAG 2.2 AA = 4.5:1 for text, SC 1.4.11 = 3:1 for a UI boundary):
- *   INK_DEEP    on SHAFT_BODY .... 7.06:1  wordmark + active reference tab   AA ✓
- *   BODY        on SHAFT_BODY .... 4.89:1  resting reference tab             AA ✓
- *   SECOND      on SHAFT_BODY .... 7.06:1  the ghost-button register         AA ✓
- *   SHAFT_GREEN on SHAFT_BODY .... 4.87:1  the signed-in account chip        AA ✓
- *   SHAFT_SLATE on SHAFT_BODY .... 4.96:1  the developer account chip        AA ✓
- *   GOLD_TXT    on SHAFT_BODY .... 3.38:1  the active tab's underline — a BOUNDARY
- *                                          beside an already-ink label       1.4.11 ✓
- *   FLETCH_VANE on SHAFT_BODY .... 4.46:1  the boundary that says "fletch"   1.4.11 ✓
+ * ⚠️⚠️ BUT SHAFT_BODY IS THE CYLINDER'S FLOOR, NOT THE BAR'S — THE GRAIN GOES LOWER.
+ * The bar a user actually reads is a COMPOSITE: the grain data-URI painted OVER
+ * SHAFT_CYLINDER over the base colour. The grain is a dark-brown wash at an alpha
+ * derived from its own noise, so the darkest COMPOSITED pixel inside the label band
+ * is below SHAFT_BODY — measured on the live bar at 1440x900, Chrome, lane PB:
+ *
+ *   darkest composited wood in the label band .... rgb(197,165,112)  L 0.3995
+ *   the same strip with the grain layer removed .. rgb(204,170,115)  L 0.4282
+ *   SHAFT_BODY .................................... rgb(204,169,114)  L 0.4243
+ *
+ * The second line is the control and it is what makes the attribution certain: strip
+ * the grain and the floor returns to SHAFT_BODY exactly. So every ratio below has TWO
+ * numbers — the TOKEN ratio (what contrast.test.js computes, and what a designer
+ * reasons with) and the COMPOSITE ratio (what a reader actually gets). Every one of
+ * them still clears its floor, but the margin on the 4.5 rows is about a tenth, so
+ * the grain's alpha is now a live accessibility lever and not a decoration knob.
+ *
+ * (WCAG 2.2 AA = 4.5:1 for text, SC 1.4.11 = 3:1 for a UI boundary. TOKEN column
+ * recomputed by tests/design/contrast.test.js; COMPOSITE column measured as above.)
+ *                                          TOKEN    COMPOSITE
+ *   INK_DEEP    wordmark + active tab ..... 7.06  →  6.69   AA ✓
+ *   BODY        resting reference tab ..... 4.89  →  4.63   AA ✓
+ *   SECOND      the ghost-button register . 7.06  →  6.69   AA ✓
+ *   SHAFT_GREEN the signed-in account chip  4.87  →  4.62   AA ✓
+ *   SHAFT_SLATE the developer account chip  4.96  →  4.70   AA ✓
+ *   GOLD_TXT    the active tab's underline  3.38  →  3.20   1.4.11 ✓ (a BOUNDARY
+ *                                                            beside an ink label)
+ *   FLETCH_VANE the "this is a fletch" edge 4.46  →  4.23   1.4.11 ✓
+ *
+ * ⚠️ THE ACCOUNT CHIP IS IN THIS TABLE BECAUSE IT HAS NO GROUND OF ITS OWN.
+ * AccountMenu's chip is `background: transparent`, so SHAFT_GREEN / SHAFT_SLATE are
+ * read against whatever the bar paints beneath them — this composite, in this band.
+ * It renders only when signed in, which the census page cannot reach, so it is
+ * covered by measuring the GROUND rather than the chip.
  */
 export const SHAFT_SHEEN = '#E8CE9E';
 export const SHAFT = '#D2B27E';
@@ -152,10 +175,20 @@ export const SHAFT_RIM = '#A0763F';
  * ⚠️ `body` IS A CLEARANCE, NOT A TASTE. It is the last stop at or above which the
  * wood never goes darker than SHAFT_BODY, so it must sit BELOW the bottom of a
  * vertically-centred label box on every header height. LABEL_BOX below is that box;
- * the pin re-derives (1 + LABEL_BOX/height)/2 on both bars rather than trusting 0.75.
+ * the pin re-derives (1 + LABEL_BOX/height)/2 on both bars rather than trusting 0.80.
+ *
+ * ⚠️⚠️ AND IT MOVED WHEN THE SHAFT WAS THINNED, WHICH IS THE COUPLING TO WATCH.
+ * These are FRACTIONS, so a shorter bar pushes every stop UP in absolute pixels while
+ * the label box stays the same 20px — the clearance therefore gets tighter as the bar
+ * gets thinner, and it is the SMALLEST bar that governs. At the 48px shaft the label
+ * box bottom sat at 0.708 and 0.75 cleared it; at 38 it sits at 0.763 and 0.75 does
+ * NOT, so the falloff would have run through the bottom of every letterform on the bar
+ * and every AA number in this file measured against SHAFT_BODY would have become a
+ * lie. 0.80 restores the clearance. Anyone thinning this bar again must move this
+ * number with it — the pin says so out loud, in the same run.
  */
 export const LABEL_BOX = 20;
-export const SHAFT_STOPS = Object.freeze({ lit: 0.09, mid: 0.38, body: 0.75, edge: 0.92 });
+export const SHAFT_STOPS = Object.freeze({ lit: 0.09, mid: 0.38, body: 0.80, edge: 0.92 });
 
 /**
  * SHAFT_CYLINDER — the barrel shading, as one CSS gradient.
@@ -412,8 +445,29 @@ export const EMPTY_VALUE = '—';
 // fixed content never tucks under the home indicator OR the bottom nav.
 //
 //   headerMobile  — the mobile sticky top bar (~59px painted).
-//   headerDesktop — THE SLIM SHAFT (V2 directive §1): 48px, and it is now the
-//                   desktop bar's REAL height rather than a description of it.
+//                   ⚠️ IT DID NOT FOLLOW THE DESKTOP BAR DOWN, AND THAT IS A FLOOR,
+//                   NOT AN OVERSIGHT. The mobile bar's height is set by the 44px
+//                   TAP TARGET inside it plus its 8px padding, not by this token —
+//                   so thinning it means shaving breathing room around a tap target,
+//                   not slimming a decoration. Deliberately deferred to the owner
+//                   (lane PB, 2026-08-03); documented, not a bug to re-find.
+//   headerDesktop — THE THIN SHAFT (owner's final correction, 2026-08-03 night):
+//                   38px, and it is the desktop bar's REAL height rather than a
+//                   description of it.
+//                   ⚠️ 38 IS A MEASURED FLOOR, NOT A ROUND NUMBER. The bar must
+//                   SEAT its riders at their CURRENT font sizes, and the tallest is
+//                   the wordmark: FS.h1 serif with its two capitals at 1.32em, whose
+//                   laid-out box measures 34.8px in Chrome at 1440x900. The reference
+//                   tabs and Sign In measure 34.0 (FS.sm label + SP.sm padding +
+//                   their 2px rule). 38 seats the tallest with 1.6px of air above and
+//                   below; 36 leaves 0.6px, which is not a seat but a coincidence one
+//                   font-fallback away from clipping. tests/components/navFletching
+//                   pins the SEAT — every rider fits inside the bar — rather than the
+//                   number, so a future type change reds here instead of shipping a
+//                   clipped wordmark.
+//                   The FLETCH BAND does NOT follow: it is the feather's own depth
+//                   (FLETCH.band), so thinning the shaft DEEPENS the hang, which is
+//                   exactly the composition the owner asked for.
 //                   App.jsx spends it as the header's own min-height and every
 //                   derived number below reads it, so this one edit moves the bar,
 //                   the anchor landings and the barb angle together.
@@ -439,7 +493,7 @@ export const EMPTY_VALUE = '—';
 //   stickyTop      — desktop sticky-aside top breathing gap.
 export const CHROME = Object.freeze({
   headerMobile:    59,
-  headerDesktop:   48,
+  headerDesktop:   38,
   toolbarHeight:   64,
   bottomNav:       57,
   scrollPadDesktop: 124,
@@ -458,7 +512,7 @@ export const CHROME = Object.freeze({
  * The desktop ribbon is `position:'sticky', top:0`, so a fragment jump (a link
  * click, a translated deep link, or a programmatic `scrollIntoView`) parks the
  * target heading UNDERNEATH the chrome unless the target names a scroll margin.
- * DERIVED from the chrome token rather than copied — 48 + 24 = 72 — so changing
+ * DERIVED from the chrome token rather than copied — 38 + 24 = 62 — so changing
  * the header height moves every anchor landing with it.
  *
  * ⚠️ NEVER PIN THE SUM. Every assertion about this number, here and in the four
