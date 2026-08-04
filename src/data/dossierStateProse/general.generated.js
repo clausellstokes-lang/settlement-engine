@@ -2365,7 +2365,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
     }
   },
   "DS-GEN-6": {
-    "title": "DS-GEN-6 — Overview › Settlement origin (why it exists) . `settlement.settlementReason[]` from `tier` × `config.tradeRouteAccess` × food-deficit ratio × `config.magicExists` / `priorityMagic`",
+    "title": "DS-GEN-6 — Overview › Settlement origin (why it exists) . `settlement.settlementReason[]` from `tier` × `config.tradeRouteAccess` × `config.terrainType` × food-deficit ratio × `config.magicExists` / `priorityMagic`, with the arm's authored variant selected draw-free from the settlement seed",
     "sectionTarget": [
       "overview",
       "economy (the deficit arms)"

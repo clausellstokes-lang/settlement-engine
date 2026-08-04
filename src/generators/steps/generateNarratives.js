@@ -48,8 +48,12 @@ registerStep('generateNarratives', {
     { tier, population, institutions, economicState, config: { ...effectiveConfig } },
     terrainT, availableResources
   );
+  // The origin rung's variant selection is draw-free and keyed on the pipeline seed,
+  // exactly as generateHistory's is below — effectiveConfig itself carries no _seed,
+  // so it is stamped on here. Without it the rung falls back to canonical-at-zero and
+  // every settlement on a route shares one sentence, which is the defect lane RR closed.
   const settlementReason = generateSettlementReason(
-    tier, tradeRoute, null, effectiveConfig,
+    tier, tradeRoute, null, { ...effectiveConfig, _seed: ctx._seed },
     economicViability?.metrics?.foodBalance || null
   );
   // Stamp the pipeline seed onto the config so generateHistory's prose-variant selection

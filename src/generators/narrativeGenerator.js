@@ -30,6 +30,7 @@ import {
   setActiveRng,
 } from '../kernel/rngContext.js';
 import { pickVariant } from '../kernel/proseHash.js';
+import { selectOriginBody } from './narrative/settlementOriginProse.js';
 import { resolvePrimaryStress } from './stressPriority.js';
 import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
 import { resolveTerrain } from '../domain/resolveTerrain.js';
@@ -758,32 +759,26 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}, fo
   const need = foodBalance?.dailyNeed ?? foodBalance?.need ?? 0;
   const hasFoodDeficit = gap > 0 && (need <= 0 || gap / need >= 0.05);
 
-  // Primary settlement reason
-  let reason;
-  if (route === 'crossroads') {
-    reason = 'Positioned at a major crossroads — trade flows through here by geography, not by choice.';
-  } else if (route === 'port') {
-    reason = _config.terrainType === 'riverside'
-      ? 'A river port built around navigable inland water; barges, wharves, and seasonal river traffic shape its economy.'
-      : _config.terrainType === 'coastal'
-        ? 'A coastal seaport whose existence is inseparable from the sea.'
-        : 'A port settlement whose wharves and navigable water define its trade.';
-  } else if (route === 'river') {
-    reason = 'Built along the river — water access shapes every economic decision.';
-  } else if (route === 'isolated') {
-    const supportChannels = (
-      _config.magicExists !== false
-      && Number(_config.priorityMagic ?? 50) > 0
-    )
-      ? 'magical transport, sanctioned caravans, seasonal access, or patronage'
-      : 'sanctioned caravans, seasonal access, patronage, or emergency rationing';
-    reason = hasFoodDeficit
-      ? `Isolated from major trade routes. The settlement cannot fully feed itself; what the land does not give arrives expensively — through ${supportChannels} — or not at all.`
-      : 'Isolated from major trade routes. Self-sufficiency is not an aspiration here; it is a constraint.';
-  } else {
-    reason = 'Established along a road route — trade flows in, goods flow out, people pass through.';
-  }
-  lines.push(reason);
+  // Primary settlement reason. THE ARM LOGIC IS UNCHANGED — route, with the port
+  // terrain sub-arms and the isolated deficit split — but each arm now holds a pool
+  // of authored variants instead of one frozen sentence, and the variant is chosen
+  // DRAW-FREE from the settlement's founding state (see narrative/settlementOriginProse.js).
+  // A caller that passes no `_seed` gets the pool's index 0, which is the exact
+  // pre-widening sentence: canonical-at-zero, so no seedless caller moved.
+  const supportChannels = (
+    _config.magicExists !== false
+    && Number(_config.priorityMagic ?? 50) > 0
+  )
+    ? 'magical transport, sanctioned caravans, seasonal access, or patronage'
+    : 'sanctioned caravans, seasonal access, patronage, or emergency rationing';
+  lines.push(selectOriginBody({
+    route,
+    terrainType: _config.terrainType ?? null,
+    hasFoodDeficit,
+    supportChannels,
+    specialResources: _config.specialResources ?? null,
+    seed: _config._seed ?? null,
+  }));
 
   // Tier-specific context
   if (tier === 'metropolis') {

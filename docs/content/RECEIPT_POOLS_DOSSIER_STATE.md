@@ -5085,9 +5085,9 @@ unchanged.
 
 ---
 
-### DS-GEN-6 — Overview › Settlement origin (why it exists) . `settlement.settlementReason[]` from `tier` × `config.tradeRouteAccess` × food-deficit ratio × `config.magicExists` / `priorityMagic`
+### DS-GEN-6 — Overview › Settlement origin (why it exists) . `settlement.settlementReason[]` from `tier` × `config.tradeRouteAccess` × `config.terrainType` × food-deficit ratio × `config.magicExists` / `priorityMagic`, with the arm's authored variant selected draw-free from the settlement seed
 
-**RECEIPT:** `src/generators/narrativeGenerator.js:750-804` (`generateSettlementReason`; the deficit branch at `:781-784`, the magic channel list at `:774-780`) · rendered `OverviewTab.jsx:260-268`
+**RECEIPT:** `src/generators/narrativeGenerator.js:751-799` (`generateSettlementReason`; the deficit test at `:758-760`, the magic channel list at `:768-774`) · the authored per-arm origin pools `src/generators/narrative/settlementOriginProse.js` (lane RR, 2026-08-03: eight arms × five variants, index 0 of each pool the pre-widening sentence) · rendered `OverviewTab.jsx:260-268`
 **STATE-KEY:** `route` (`crossroads` / `port` / `river` / `isolated` / `road`) × `hasFoodDeficit` (gap > 0 and gap/need ≥ 0.05) × `tier` (`metropolis` / `city` / `thorp`|`hamlet` / other)
 **SLOTS:** `{settlement}`
 **SECTION-TARGET:** `overview` · also `economy` (the deficit arms)

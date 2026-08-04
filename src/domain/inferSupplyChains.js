@@ -594,6 +594,19 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
       status: 'vulnerable',                       // discovered-but-unconfirmed → amber ◐
       label,
       resource: source.kind === 'resource' ? source.name : null,
+      // ⚠️ THESE TWO EMPTY ICON SLOTS ARE NOT DEAD — DO NOT SWEEP THEM (lane RR).
+      // `resourceIcon` and `needIcon` (below) are REQUIRED KEYS of the reviewed
+      // supply-chain persistence shape: content/reviewedSupplyChainPersistence.js
+      // runs an exactKeys check over CHAIN_KEYS and then demands
+      // `typeof resourceIcon === 'string'`, so a discovered chain missing either
+      // key is rejected with "unsupported shape. Missing: resourceIcon." the
+      // moment an author confirms it (SupplyChainsManager → confirmCustomSupply-
+      // ChainReview spreads this object through unchanged). The icon sweep's
+      // directive was to remove dead icon slots; these two are load-bearing
+      // schema, and the schema shape is owner-gated. The empty string is the
+      // honest value: a discovered chain has no author-supplied icon yet.
+      // Pinned by tests/lint/copyCorruption.test.js (the SIG-1 allowlist and its
+      // "the boundary really does require them" proof).
       resourceIcon: '', resourceDepleted: false,
       processingInstitutions: processors.map((p) => p.name),
       outputs: exports.length ? exports.slice(0, 4) : [sink.name],
@@ -602,6 +615,8 @@ export function inferSupplyChains(customContent = {}, opts = {}) {
       entrepot: false,
       upstreamMissing: importObjs.map((i) => i.label),
       upstreamNote: importObjs.length ? `Imported inputs: ${importObjs.map((i) => i.label).join(', ')}` : '',
+      // needIcon: see the resourceIcon note above — a required persistence key,
+      // not emoji-strip residue.
       needLabel: 'Custom', needIcon: '', needColor: '#a0762a',
       // ── discovery / verification metadata (renderer ignores) ──
       discovered: {
