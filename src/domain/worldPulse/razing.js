@@ -162,6 +162,11 @@ export const RAZING_REFUSALS = Object.freeze([
   'alignment_forbids_initiation',
   'license_absent',
   'nothing_left',
+  // WR-8 amendment R, THE DETERRENT: "a fat victim with devoted friends is
+  // expensive to burn; a friendless one is cheap." This refusal is APPETITE, not
+  // permission — it can only ever turn a PERMITTED verdict down, never open a
+  // road the law closed, which is why it is applied last (see razingGate).
+  'deterrence_prohibitive',
 ]);
 
 /**
@@ -401,9 +406,22 @@ export function razingInitiationPermitted(alignmentBand) {
  * economy turns on the two being counted separately (the endings envelope tracks
  * their ratio as a health metric).
  *
+ * ⚠️ THE DETERRENT IS APPLIED LAST, AND ONLY DOWNWARD (amendment R). The believed
+ * retaliation web is priced BEFORE the act, and what it prices is APPETITE, not
+ * permission: `deterred` can turn a PERMITTED verdict into a refusal and can
+ * never do the reverse. It is checked after the road resolves rather than before,
+ * for the same reason the license is checked after alignment — a court that could
+ * not have burned the town anyway must not be told it was frightened off. The
+ * receipts are read by people, and "deterred" is a claim about a choice.
+ *
+ * Absent (`deterred` not true) ⇒ the verdict is EXACTLY what it was before this
+ * conjunct existed, so every pre-deterrence caller and every dark world is
+ * byte-identical.
+ *
  * @param {{ siegeWon?: unknown, extremity?: ExtremityRead|null|undefined,
  *   alignmentBand?: unknown, licenseHeld?: unknown,
- *   actorId?: unknown, victimId?: unknown }} input
+ *   actorId?: unknown, victimId?: unknown,
+ *   deterred?: unknown, deterrenceReceipt?: unknown }} input
  * @returns {RazingVerdict}
  */
 export function razingGate(input) {
@@ -411,6 +429,16 @@ export function razingGate(input) {
   const actorId = text(row.actorId) || 'the victor';
   const victimId = text(row.victimId) || 'the defeated';
   const extremity = recordOf(row.extremity);
+  /** The deterrent's one expression: a permitted road, declined.
+   *  @param {string} road one of RAZING_ROADS @returns {RazingVerdict} */
+  const deterredFrom = (road) => ({
+    permitted: false,
+    road: null,
+    refusal: 'deterrence_prohibitive',
+    receipt: `${actorId} took ${victimId} and could have burned it by ${road}, and did not:`
+      + ` ${text(row.deterrenceReceipt) || 'the friends the burning would arm are too many'}.`
+      + ' The army rode home and the town still stands.',
+  });
 
   if (row.siegeWon !== true) {
     return {
@@ -431,7 +459,7 @@ export function razingGate(input) {
     };
   }
   if (razingInitiationPermitted(row.alignmentBand)) {
-    return {
+    return row.deterred === true ? deterredFrom('initiation') : {
       permitted: true,
       road: 'initiation',
       refusal: null,
@@ -440,7 +468,7 @@ export function razingGate(input) {
     };
   }
   if (row.licenseHeld === true) {
-    return {
+    return row.deterred === true ? deterredFrom('vengeance') : {
       permitted: true,
       road: 'vengeance',
       refusal: null,

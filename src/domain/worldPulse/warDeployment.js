@@ -746,6 +746,11 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // threaded clock; absent it falls back to the world's own stamp. No
       // wall-clock is ever read (the determinism contract at the head).
       now,
+      // WR-8 amendment R — THE DETERRENT PRICED BEFORE THE ACT. This is the same
+      // lookup the siege verdict and the coalition census read, handed on so the
+      // razing's believed-retaliation web is priced from the tick's ONE answer to
+      // "how strong is that court" rather than from a second reading of it.
+      strengthFor,
       snapshot,
       razerId: occupierId,
       victimId: targetId,

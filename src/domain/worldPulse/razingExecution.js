@@ -138,6 +138,16 @@ import {
   razingWitnessHits,
   razingWitnessTrustAdd,
 } from './razingWitness.js';
+// ⚠️⚠️ WR-6's ALLIANCE-WEB RISK READ, POINTED AT THE AFTERMATH — CONSUMED, NEVER
+// REBUILT. Amendment R: "the would-be razer's intent read now includes the
+// retaliation web it BELIEVES it would arm — who loves the victim, what license
+// each would inherit, what their combined reach is (E3's alliance-web risk read,
+// pointed at the aftermath)". The spec's own pointer says built THERE, consumed
+// here. Before this lane `readAllianceWebRisk` had EXACTLY ONE runtime consumer
+// (warCoalitionDecision.js — WZ-3's census); this is the second and last, and a
+// walker pins the count at two with both named so nothing can grow a second web.
+import { readAllianceWebRisk } from './warAllianceRisk.js';
+import { canonicalAllianceRows } from './warCoalitionGraph.js';
 // R-WZ-1: the severities are K1's own, imported rather than re-declared. A leaf
 // that must not acquire reach re-declares a constant and pins the two equal;
 // this is an assembly layer that already imports the estate's neighbours, so the
@@ -181,6 +191,13 @@ export const RAZING_EXECUTION_TUNING = Object.freeze({
   // and does nothing". Read off the law leaf so the two cannot disagree about
   // where the shell band starts.
   SHELL_BAND: RAZING_TUNING.SHELL_SEVERITY,
+  // ── THE DETERRENT'S ONE THRESHOLD (WR-8 amendment R, vetoable: J-WZ4-4) ────
+  // The believed-retaliation band at which a victor that MAY burn declines to.
+  // It is `readAllianceWebRisk`'s OWN top band rather than a fresh number, so
+  // the razing and the coalition-entry pricing agree about what "too many
+  // friends" means; naming a second float here is how one read starts saying
+  // `decisive` while the other says merely `pressing`.
+  DETERRENCE_BAND: 'decisive',
 });
 
 /** @param {unknown} value @returns {Record<string, unknown>} */
@@ -338,7 +355,81 @@ export function razingExtremityFor({
  * @property {string} alignmentBand  the razer's own nature, as the law reads it
  * @property {boolean} licenseHeld
  * @property {string|null} licenseId the live license the vengeance road spends
+ * @property {ReturnType<typeof razingDeterrenceFor>|null} deterrence
+ *   WR-8 amendment R: the believed retaliation web, priced before the act.
+ *   `null` only on the dormant arm, where nothing was asked.
  */
+
+/**
+ * THE DETERRENT, PRICED BEFORE THE ACT — WR-6's WEB, POINTED AT THE AFTERMATH.
+ *
+ * ⚠️⚠️ IT CONSUMES `readAllianceWebRisk`; IT DOES NOT REBUILD ONE. That is the
+ * whole architectural content of this function. The amendment's own text names
+ * E3's alliance-web risk read as the instrument and says it is built THERE and
+ * consumed here, and a razing that grew its own second web would be two
+ * spellings of "who would answer this" drifting apart from the first edit.
+ *
+ * WHY THE ARGUMENTS POINT WHERE THEY DO. The web is priced from the RAZER's seat
+ * (`observerId`) against the VICTIM (`enemyId`), so what comes back is the
+ * victim's allies to depth two, every strength read through the razer's own
+ * BELIEFS. That is exactly "the retaliation web it BELIEVES it would arm" — K3's
+ * mint-on-the-believed-fact discipline, satisfied by the function's existing
+ * shape rather than by a new rule. A fat victim with devoted friends prices high;
+ * a friendless one prices at zero.
+ *
+ * ⚠️ ABSENT `strengthFor` ⇒ NOT PRICED, AND NEVER DETERRED. `readAllianceWebRisk`
+ * calls `strengthFor` per member, so a caller that cannot supply one has no web
+ * to read. The honest answer is to say the deterrent was not priced rather than
+ * to default the strengths to zero and report a confident `quiet` — a fabricated
+ * all-clear is worse than an admitted absence, and every pre-deterrence caller
+ * (and every unit fixture) stays byte-identical through this door.
+ *
+ * PURE: reads only, no writes, no rng.
+ *
+ * @param {{ worldState?: unknown, snapshot?: unknown, razerId?: unknown,
+ *   victimId?: unknown, strengthFor?: unknown }} args
+ * @returns {{ priced: boolean, risk01: number, band: string, members: unknown[],
+ *   deters: boolean, receipt: string }}
+ */
+export function razingDeterrenceFor({
+  worldState = null, snapshot = null, razerId = '', victimId = '', strengthFor = null,
+} = {}) {
+  const razer = String(razerId || '');
+  const victim = String(victimId || '');
+  if (typeof strengthFor !== 'function' || !razer || !victim || razer === victim) {
+    return {
+      priced: false,
+      risk01: 0,
+      band: 'unpriced',
+      members: [],
+      deters: false,
+      receipt: 'the retaliation web was not priced: no strength read was supplied.',
+    };
+  }
+  const rows = canonicalAllianceRows({ ...recordOf(snapshot), worldState });
+  const risk = readAllianceWebRisk({
+    rows,
+    observerId: razer,
+    enemyId: victim,
+    worldState: recordOf(worldState),
+    strengthFor: /** @type {(id: string) => number} */ (strengthFor),
+  });
+  const members = arrayOf(risk.members);
+  const deters = risk.band === RAZING_EXECUTION_TUNING.DETERRENCE_BAND;
+  return {
+    priced: true,
+    risk01: round4(clamp01(risk.risk01)),
+    band: String(risk.band),
+    members: [...members],
+    deters,
+    // The receipt names the COUNT and the BAND, because those are the two facts a
+    // reader can check against the map.
+    receipt: members.length
+      ? `${members.length} court${members.length === 1 ? '' : 's'} would inherit the right to answer`
+        + ` the burning, and this court reads their combined reach as ${risk.band}`
+      : 'nobody would inherit the right to answer the burning',
+  };
+}
 
 /**
  * MAY THIS VICTOR BURN THIS TOWN? The one entry the mouth calls.
@@ -356,11 +447,13 @@ export function razingExtremityFor({
  * pays one boolean.
  *
  * @param {{ worldState?: unknown, snapshot?: unknown, razerId?: unknown,
- *   victimId?: unknown, tick?: unknown, siegeWon?: unknown }} args
+ *   victimId?: unknown, tick?: unknown, siegeWon?: unknown,
+ *   strengthFor?: unknown }} args
  * @returns {RazingDecision}
  */
 export function razingDecisionFor({
   worldState = null, snapshot = null, razerId = '', victimId = '', tick = 0, siegeWon = false,
+  strengthFor = null,
 } = {}) {
   const razer = String(razerId || '');
   const victim = String(victimId || '');
@@ -378,6 +471,7 @@ export function razingDecisionFor({
       alignmentBand: 'unknown',
       licenseHeld: false,
       licenseId: null,
+      deterrence: null,
     };
   }
   const byId = recordOf(snapshot).byId;
@@ -388,6 +482,11 @@ export function razingDecisionFor({
   const license = vengeanceLicensesActive(worldState)
     ? heldLicense(worldState, { holderId: razer, razerId: victim, tick })
     : null;
+  // THE DETERRENT IS PRICED HERE AND SPENT IN THE LAW. It reads the tick's
+  // worldState like every other decision input, and it can only ever refuse.
+  const deterrence = razingDeterrenceFor({
+    worldState, snapshot, razerId: razer, victimId: victim, strengthFor,
+  });
   const verdict = razingGate({
     siegeWon: siegeWon === true,
     extremity,
@@ -395,6 +494,8 @@ export function razingDecisionFor({
     licenseHeld: license != null,
     actorId: razer,
     victimId: victim,
+    deterred: deterrence.deters,
+    deterrenceReceipt: deterrence.receipt,
   });
   return {
     active: true,
@@ -403,6 +504,10 @@ export function razingDecisionFor({
     alignmentBand,
     licenseHeld: license != null,
     licenseId: license ? String(license.id) : null,
+    // Carried on the decision so the price is INSPECTABLE rather than merely
+    // folded into a boolean — the same discipline the coalition decision applies
+    // to its own conquest lift.
+    deterrence,
   };
 }
 
@@ -877,7 +982,7 @@ export function razingWitnessPatch({
  *   victimId?: unknown, razerName?: unknown, victimName?: unknown,
  *   tick?: unknown, population?: unknown, namedCastCount?: unknown,
  *   institutions?: unknown, movableWealth?: unknown, holderEdges?: unknown,
- *   licenseState?: unknown, now?: unknown }} args
+ *   licenseState?: unknown, now?: unknown, strengthFor?: unknown }} args
  * @returns {{ decision: RazingDecision, plan: RazingPlan,
  *   worldStatePatch: Readonly<Record<string, unknown>>, outcome: Record<string, unknown> }|null}
  *   null when the doctrine is dark or the law refused — and the caller then does
@@ -887,12 +992,16 @@ export function razingSiegeEmission({
   worldState = null, snapshot = null, razerId = '', victimId = '',
   razerName = '', victimName = '', tick = 0, population = null,
   namedCastCount = 0, institutions = [], movableWealth = 0, holderEdges = [],
-  licenseState = null, now = null,
+  licenseState = null, now = null, strengthFor = null,
 } = {}) {
   const razer = String(razerId || '');
   const victim = String(victimId || '');
   const decision = razingDecisionFor({
     worldState, snapshot, razerId: razer, victimId: victim, tick, siegeWon: true,
+    // THE DETERRENT rides the mouth's OWN strength lookup — the same one the
+    // siege verdict and the coalition census read, so "how strong is that court"
+    // has one answer per tick.
+    strengthFor,
   });
   if (!decision.active || decision.verdict.permitted !== true) return null;
   const heat = razingSeverityForPair(worldState, snapshot, razer, victim, decision.extremity);
