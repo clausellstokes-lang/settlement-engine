@@ -138,7 +138,15 @@ describe('the relationship writer is never handed a key it cannot type', () => {
     // The parameter itself, and the derivation that uses it. Either one going
     // missing means the cure was undone at the source rather than at a caller.
     expect(owner).toContain('edge = null');
-    expect(owner).toContain('ensureRelationshipState(edge || {}');
+    // ⚠️ THE DERIVATION READS `typedEdge`, NOT `edge` (CR-WZ5-A). The first cut
+    // of the cure spelled this `ensureRelationshipState(edge || {}` and handed
+    // the raw graph edge straight in — which let `channel_inferred` (a
+    // graph-plane token with no RELATIONSHIP_DEFAULTS row) be PERSISTED as a
+    // relationship's type while its axes fell back to neutral's numbers. The
+    // vocabulary closure that produces `typedEdge` is therefore part of the
+    // cure, and this anchor is what makes deleting it red instead of silent.
+    expect(owner).toContain('ensureRelationshipState(typedEdge,');
+    expect(owner).toContain('RELATIONSHIP_DEFAULTS[edgeType] ? edge : {}');
   });
 
   test('EVERY call site carries the edge, or is a registered exemption', () => {

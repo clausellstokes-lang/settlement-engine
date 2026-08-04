@@ -159,7 +159,12 @@ export function applyWarPeaceRefusal({
   const deployments = asObject(state.deployments);
   const eligibleAllyRows = (Array.isArray(regionalGraph?.edges) ? regionalGraph.edges : [])
     .map((edge) => ({
-      edge,
+      // CR-WZ5-B: the row's edge is NARROWED here, at the one place the raw
+      // graph row enters this function, because it is later handed to
+      // `applyRelationshipPatch`'s typed fourth parameter — an `unknown` riding
+      // that far is what made this file a strict regression. `asObject` returns
+      // the SAME object for a real edge, so nothing about the row changes.
+      edge: asObject(edge),
       allyId: otherEndpoint(edge, targetId),
       relationshipKey: relationshipKeyFromEdge(edge),
     }))

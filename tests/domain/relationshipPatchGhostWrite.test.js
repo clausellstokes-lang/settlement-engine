@@ -38,6 +38,8 @@ import {
   edgeBetween,
 } from '../../src/domain/worldPulse/relationshipEvolution.js';
 import { RELATIONSHIP_DEFAULTS } from '../../src/domain/worldPulse/relationshipState.js';
+import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 
 const KEY = 'rel.karrow.mereth';
 const NOW = '2026-08-04T00:00:00.000Z';
@@ -150,5 +152,248 @@ describe('the shared edge resolver the four forks collapsed into', () => {
     expect(edgeBetween(edges, 'karrow', 'stranger')).toBeNull();
     expect(edgeBetween(null, 'karrow', 'mereth')).toBeNull();
     expect(edgeBetween(undefined, 'karrow', 'mereth')).toBeNull();
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ⚠️⚠️ CR-WZ5-A — THE VOCABULARY CLOSURE. The cure above let THE EDGE speak, and
+// the first cut of it did not ask WHAT LANGUAGE the edge was speaking.
+//
+// The graph plane and the relationship plane do not share a type vocabulary.
+// `ensureRegionalGraph` mints `channel_inferred` for every inferred channel, and
+// `normalizeEdge` falls back to `other` for an edge that declares no type at
+// all. Neither is a RELATIONSHIP_DEFAULTS key, and `normalizeRelationshipType`
+// passes an unknown token straight through. So the edge was believed, the raw
+// graph token was PERSISTED as the relationship's type, and the axes silently
+// fell back to neutral's numbers — the label and the numbers disagreed, the raw
+// token reached DM-facing headlines ("channel inferred may become rival"), and
+// three whole-pipeline same-seed cells moved. Verification rejected the lane on
+// it.
+//
+// WHY WZ-5's OWN PINS DID NOT CATCH THIS, which is the durable lesson: every
+// fixture above hand-authors its edges, so not one of them ever MINTED an
+// inferred channel. The byte-identity claim was true of the paths the fixtures
+// walked and VACUOUS for the path that actually moved. The second pin below
+// therefore drives the REAL pipeline on a world that mints inferred channels,
+// and proves it did so before it claims anything.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * The graph-plane tokens this plane has no defaults for. Both are MINTED by
+ * `src/domain/region/graph.js` — `channel_inferred` for an inferred channel's
+ * edge, `other` as `normalizeEdge`'s fallback for an edge with no declared type.
+ */
+const OUT_OF_VOCABULARY = Object.freeze(['channel_inferred', 'other']);
+
+describe('⚠️⚠️ CR-WZ5-A — an out-of-vocabulary edge cannot type a relationship', () => {
+  /**
+   * BOTH POLARITIES OF THE OUTCOME SIGN. The leak is in the BASELINE derivation,
+   * which runs before the patch is applied, so it is indifferent to the sign —
+   * and a pin driven only by a wounding incident would look like a war-path bug
+   * and invite a war-path fix.
+   */
+  const POLARITIES = Object.freeze([
+    ['a wounding incident (fear up)', { fear: 0.5 }],
+    ['a warming incident (trust up)', { trust: 0.9 }],
+  ]);
+
+  for (const token of OUT_OF_VOCABULARY) {
+    for (const [polarity, relationshipPatch] of POLARITIES) {
+      test(`\`${token}\` + ${polarity} persists \`neutral\`, never the raw token`, () => {
+        const written = applyRelationshipPatch(
+          unmaterialized(),
+          { ...incident, relationshipPatch },
+          NOW,
+          { id: KEY, from: 'karrow', to: 'mereth', relationshipType: token, type: token },
+        );
+        const record = written.relationshipStates[KEY];
+        // The label is in this plane's vocabulary...
+        expect(record.relationshipType).toBe('neutral');
+        expect(Object.prototype.hasOwnProperty.call(RELATIONSHIP_DEFAULTS, record.relationshipType))
+          .toBe(true);
+        // ...and the numbers AGREE with the label. Reading neutral's axes while
+        // persisting a foreign token is exactly the defect: half the record was
+        // already `neutral` and only the name lied.
+        expect(record.resentment).toBe(RELATIONSHIP_DEFAULTS.neutral.resentment);
+        expect(record.trust).toBe(relationshipPatch.trust ?? RELATIONSHIP_DEFAULTS.neutral.trust);
+        // The patch's own axis still lands.
+        for (const [axis, value] of Object.entries(relationshipPatch)) {
+          expect(record[axis], axis).toBe(value);
+        }
+      });
+    }
+  }
+
+  test('the closure is MEMBERSHIP, not a denylist — every authored type still speaks', () => {
+    // A guard written as `!== 'channel_inferred'` would pass the four tests above
+    // and still leak `other`, and the next token minted anywhere in the graph
+    // plane after that. This is the assertion that says the rule is "has
+    // defaults", so a token nobody has thought of yet is closed in advance.
+    for (const type of AUTHORED_TYPES) {
+      const written = applyRelationshipPatch(unmaterialized(), incident, NOW, edgeOf(type));
+      expect(written.relationshipStates[KEY].relationshipType, type).toBe(type);
+    }
+    for (const token of OUT_OF_VOCABULARY) {
+      expect(Object.prototype.hasOwnProperty.call(RELATIONSHIP_DEFAULTS, token), token).toBe(false);
+    }
+  });
+});
+
+// ── THE REAL-PIPELINE PIN ────────────────────────────────────────────────────
+
+/** A settlement shaped enough for the war/trade layers to have opinions. */
+const settlementFor = (name, patch = {}) => ({
+  name,
+  tier: patch.tier || 'town',
+  population: patch.population || 1800,
+  config: { tradeRouteAccess: 'road', priorityEconomy: 25, priorityMilitary: patch.priorityMilitary ?? 35 },
+  institutions: patch.institutions || [],
+  economicState: {
+    prosperity: patch.prosperity || 'Prosperous',
+    primaryExports: patch.exports || [],
+    primaryImports: [],
+  },
+  powerStructure: {
+    publicLegitimacy: { score: patch.legitimacy ?? 60, label: (patch.legitimacy ?? 60) < 40 ? 'Contested' : 'Stable' },
+    factions: [
+      { faction: 'Military Council', category: 'military', power: 78, isGoverning: true },
+      { faction: 'Merchant League', category: 'economy', power: 52 },
+    ],
+    conflicts: [],
+  },
+  npcs: [{ id: `reeve_${name}`, name: `Reeve ${name}`, importance: 'key' }],
+  activeConditions: [],
+});
+
+const saveFor = (id, name, patch = {}) => ({
+  id, name, phase: 'canon', settlement: settlementFor(name, patch),
+  campaignState: { phase: 'canon', eventLog: [], locks: {} },
+});
+
+/**
+ * FOUR SETTLEMENTS AND FIVE AUTHORED EDGES — the smallest world that MINTS.
+ * `ensureRegionalGraph` keys its edge lookup DIRECTIONALLY (`from->to`), so a
+ * channel that runs against an authored edge's direction, or between the one
+ * pair this graph does not connect, finds nothing and mints `channel_inferred`.
+ * A three-settlement fixture never gets there, which is precisely why WZ-5's
+ * fixtures did not.
+ */
+function mintingWorld() {
+  const saves = [
+    saveFor('iron', 'Ironhold', {
+      tier: 'city', population: 60000, legitimacy: 34, priorityMilitary: 40,
+      institutions: [{ name: 'Great Citadel' }, { name: 'City Garrison' }, { name: 'Royal Armory' }, { name: 'War College' }],
+      exports: [{ name: 'Forged Weapons' }],
+    }),
+    saveFor('weak', 'Weakmoor', {
+      tier: 'village', population: 280, legitimacy: 24, priorityMilitary: 10,
+      prosperity: 'Struggling', exports: ['Bulk grain and foodstuffs'],
+    }),
+    saveFor('mid', 'Midwater', { population: 2200, legitimacy: 62, priorityMilitary: 20 }),
+    saveFor('far', 'Everdeep', { population: 5200, legitimacy: 55, priorityMilitary: 30 }),
+  ];
+  const campaign = {
+    id: 'wz5r-vocab', name: 'WZ5r Vocabulary', settlementIds: ['iron', 'weak', 'mid', 'far'],
+    worldState: {
+      rngSeed: 'wz3-alpha', tick: 1,
+      simulationRules: {
+        warLayerEnabled: true, settlementStrategyEnabled: true, peaceEngineEnabled: true,
+        coalitionLedgerEnabled: true, warTerminationEnabled: true, dispositionChannelsEnabled: true,
+        envoyDiplomacyEnabled: true, demographicsEnabled: true, conquestDoctrineEnabled: true,
+      },
+      calendar: { elapsedWeeks: 30 },
+      warPosture: { iron: { state: 'mobilized', progress: 1, sinceTick: 0 } },
+      relationshipStates: {
+        'edge.iron.weak': { relationshipType: 'hostile', resentment: 0.7, trust: 0.1 },
+        'edge.weak.far': { relationshipType: 'allied', trust: 0.9, resentment: 0.02 },
+        'edge.iron.far': { relationshipType: 'hostile', resentment: 0.5, trust: 0.1 },
+      },
+    },
+    regionalGraph: ensureRegionalGraph({
+      edges: [
+        { id: 'edge.iron.weak', from: 'iron', to: 'weak', relationshipType: 'hostile' },
+        { id: 'edge.iron.mid', from: 'iron', to: 'mid', relationshipType: 'trade_partner' },
+        { id: 'edge.weak.mid', from: 'weak', to: 'mid', relationshipType: 'trade_partner' },
+        { id: 'edge.weak.far', from: 'weak', to: 'far', relationshipType: 'allied' },
+        { id: 'edge.iron.far', from: 'iron', to: 'far', relationshipType: 'hostile' },
+      ],
+    }),
+    wizardNews: { currentTick: 1, entries: [] },
+  };
+  return { campaign, saves };
+}
+
+/** The inferred-channel edges a graph is carrying, by id. */
+const inferredEdgeIds = (graph) => (graph?.edges || [])
+  .filter((edge) => edge.relationshipType === 'channel_inferred')
+  .map((edge) => String(edge.id))
+  .sort();
+
+describe('⚠️⚠️ CR-WZ5-A — the closure holds through the REAL pipeline, and the drive PROVES it minted', () => {
+  /**
+   * SIX TICKS, AND THE BOUND IS DELIBERATE. The mint happens on tick index 5 of
+   * this seed; the drive stops there because from tick 8 onward a DIFFERENT and
+   * PRE-EXISTING population appears — `ensureAllRelationshipStates` materializes
+   * a posture row for every edge in the tick's OPENING graph, including an
+   * inferred one, and that row legitimately carries `channel_inferred`. That
+   * behaviour is base-identical, is not this cure's business, and is pinned
+   * elsewhere (tests/domain/tradeWar.test.js asserts exactly such a row). Widening
+   * this drive past it would not find a bug; it would only make the pin assert
+   * something untrue of the tree it guards.
+   */
+  const TICKS = 6;
+
+  test('a minted `channel_inferred` edge reaches the writer, and comes out `neutral`', () => {
+    let { campaign, saves } = mintingWorld();
+    let mintTick = -1;
+    /** Keys the drive materialized while their ONLY edge was an inferred one. */
+    let ghostKeys = [];
+
+    for (let tick = 0; tick < TICKS; tick += 1) {
+      const beforeKeys = new Set(Object.keys(campaign.worldState.relationshipStates || {}));
+      const beforeInferred = inferredEdgeIds(campaign.regionalGraph);
+      const result = simulateCampaignWorldPulse({ campaign, saves, interval: 'week', now: NOW });
+      const afterStates = result.worldState.relationshipStates || {};
+      const afterInferred = inferredEdgeIds(result.regionalGraph);
+
+      // THE NON-VACUITY LEDGER, counted rather than asserted in the abstract: a
+      // tick that MINTS inferred edges AND materializes exactly those keys is a
+      // tick in which the writer was handed a graph-plane token for a record
+      // that did not exist. That is the leaked path, executed.
+      const mintedThisTick = afterInferred.filter((id) => !beforeInferred.includes(id));
+      const materialized = mintedThisTick.filter((id) => !beforeKeys.has(id) && afterStates[id]);
+      if (materialized.length && mintTick === -1) {
+        mintTick = tick;
+        ghostKeys = materialized;
+      }
+
+      // TOTALITY, over the whole drive: no record anywhere carries a token this
+      // plane has no defaults for.
+      const outOfVocabulary = Object.entries(afterStates)
+        .filter(([, row]) => !Object.prototype.hasOwnProperty.call(
+          RELATIONSHIP_DEFAULTS, String(row?.relationshipType),
+        ))
+        .map(([key, row]) => `${key}=${row.relationshipType}`);
+      expect(outOfVocabulary, `tick ${tick} persisted a graph-plane token`).toEqual([]);
+
+      const updates = new Map((result.settlementUpdates || []).map((u) => [String(u.saveId), u.settlement]));
+      saves = saves.map((s) => (updates.has(s.id) ? { ...s, settlement: updates.get(s.id) } : s));
+      campaign = { ...campaign, worldState: result.worldState, regionalGraph: result.regionalGraph || campaign.regionalGraph };
+    }
+
+    // ⚠️ THE ANTI-VACUITY ASSERTION, AND IT IS THE POINT OF THE WHOLE PIN. A pin
+    // that cannot prove it exercised the path is the exact defect that let this
+    // leak land — WZ-5's fixtures were green over a path they never walked.
+    expect(mintTick, 'the drive never minted an inferred channel — the pin is vacuous').toBe(5);
+    expect(ghostKeys).toEqual(['edge.far.iron', 'edge.far.weak']);
+    expect(ghostKeys.length).toBeGreaterThanOrEqual(2);
+
+    // And what those two keys persisted: this plane's vocabulary, with the
+    // matching numbers. Pre-cure they read `channel_inferred` here.
+    const finalStates = campaign.worldState.relationshipStates;
+    for (const key of ghostKeys) {
+      expect(finalStates[key].relationshipType, key).toBe('neutral');
+      expect(inferredEdgeIds(campaign.regionalGraph), key).toContain(key);
+    }
   });
 });

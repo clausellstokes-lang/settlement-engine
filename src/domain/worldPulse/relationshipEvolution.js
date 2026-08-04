@@ -22,6 +22,7 @@ import {
   relationshipKeyFromEdge,
   getRelationshipSettlements,
   normalizeRelationshipEdge,
+  normalizeRelationshipType,
   ensureRelationshipState,
   edgeBetween,
 } from './relationshipState.js';
@@ -348,7 +349,7 @@ export function edgeKeyBetween(edges, a, b) {
  * chokepoint every ghost wiring and the elite bleed pass through — no hand-editing
  * of relationshipStates anywhere. No key / no patch ⇒ a byte-safe no-op.
  * @param {any} worldState
- * @param {{ relationshipKey: string|null, incidentType: string, patch: Record<string, number>, severity?: number, id?: string|null, edge?: unknown }} spec
+ * @param {{ relationshipKey: string|null, incidentType: string, patch: Record<string, number>, severity?: number, id?: string|null, edge?: RelationshipGraphEdge|null }} spec
  *   `edge` is the graph edge the key addresses — carried so the ghost cure in
  *   `applyRelationshipPatch` can see it through this chokepoint too.
  * @param {any} now
@@ -414,6 +415,20 @@ function carriedTermSheetForIncident(outcome) {
 }
 
 /**
+ * THE SHAPE THE WRITER READS OFF A REGIONAL-GRAPH EDGE, spelled once so the
+ * three callers that resolve an edge can name it instead of each inventing a
+ * structural literal (CR-WZ5-B). Every field is `unknown`: this is a
+ * PERMISSION to read those keys, not a claim about what a graph edge contains —
+ * the narrowing still happens inside `normalizeRelationshipEdge`. Widening any
+ * of them to `any` would be a fresh hole the domain any-cast ratchet is right
+ * to refuse, and would hand the writer back the untyped key the cure removed.
+ * @typedef {{
+ *   from?: unknown, to?: unknown, id?: unknown,
+ *   relationshipType?: unknown, type?: unknown, relation?: unknown,
+ * }} RelationshipGraphEdge
+ */
+
+/**
  * THE RELATIONSHIP PLANE'S ONE WRITER.
  *
  * ⚠️⚠️ THE FOURTH ARGUMENT IS THE GHOST-MATERIALIZATION CURE, AND IT IS A CURE
@@ -448,10 +463,37 @@ function carriedTermSheetForIncident(outcome) {
  * module has always used); duplicating them here would be four more unchecked
  * holes for no additional information, which the any-cast ratchet correctly
  * refuses. `edge` is the regional-graph edge `outcome.relationshipKey` addresses.
+ *
+ * ⚠️⚠️ CR-WZ5-A — THE EDGE MAY SPEAK ONLY IN THIS PLANE'S OWN VOCABULARY, AND
+ * THAT CLOSURE IS PART OF THE CURE RATHER THAN A TIDY-UP. The graph plane and the
+ * relationship plane do not share a type vocabulary. `ensureRegionalGraph` mints
+ * `channel_inferred` for every inferred channel and `normalizeEdge` falls back to
+ * `other` for an edge that declares no type at all — neither is a
+ * RELATIONSHIP_DEFAULTS key, and `normalizeRelationshipType` passes an unknown
+ * token straight through. Handed such an edge, the first cut of this cure
+ * PERSISTED the graph-plane token as the relationship's type while the axes fell
+ * back to neutral's numbers: the label and the numbers disagreed, the raw token
+ * reached DM-facing headlines ("channel inferred may become rival"), and TWO of
+ * the six same-seed whole-pipeline cells moved against base `19dd07e2`
+ * (re-measured here; the verifier's report said three). Pre-cure an absent
+ * record resolved to `neutral`, so the closure below is also what makes this
+ * whole change byte-identical again on a world that mints inferred channels.
+ *
+ * THE GUARD READS THE SAME FIELD CHAIN ITS CONSUMER READS (J-WZ5R-1, vetoable).
+ * `normalizeRelationshipEdge` resolves `relationshipType || type || relation`; a
+ * guard that inspected only `relationshipType` would wave through an edge whose
+ * type lived in one of the other two spellings — the recorded class of a guard
+ * measuring a different field than the code it guards. Membership, not a
+ * denylist: a token this plane has no defaults for cannot type a relationship,
+ * whatever it is called.
  */
-export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type {any} */ outcome, /** @type {any} */ now, /** @type {{ from?: unknown, to?: unknown, id?: unknown }|null} */ edge = null) {
+export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type {any} */ outcome, /** @type {any} */ now, /** @type {RelationshipGraphEdge|null} */ edge = null) {
   if (!outcome.relationshipKey || !outcome.relationshipPatch) return worldState;
-  const current = ensureRelationshipState(edge || {}, worldState.relationshipStates?.[outcome.relationshipKey]);
+  const edgeType = normalizeRelationshipType(
+    String(edge?.relationshipType || edge?.type || edge?.relation || ''),
+  );
+  const typedEdge = edge && RELATIONSHIP_DEFAULTS[edgeType] ? edge : {};
+  const current = ensureRelationshipState(typedEdge, worldState.relationshipStates?.[outcome.relationshipKey]);
   // WR-6 exact-once: an applied approval can be replayed, but the same alliance
   // call may never erode the relationship twice or duplicate its durable fact.
   const allianceCall = outcome.metadata?.allianceCall;

@@ -281,7 +281,13 @@ export function strongestLiveGrievance01(worldState, partyId, counterpartId) {
  * @param {unknown} snapshot the pre-tick snapshot (regionalGraph + worldState)
  * @param {unknown} worldState
  * @param {string} aId @param {string} bId
- * @returns {{ relState: Record<string, unknown>, edge: unknown, key: string }|null}
+ * ⚠️ `edge` IS TYPED, NOT `unknown` (CR-WZ5-B). Its one consumer hands it to
+ * `applyRelationshipPatch`'s typed fourth parameter, and an `unknown` here is
+ * what made that call the lane's strict regression. `recordOf` NARROWS rather
+ * than asserts and returns the SAME object for the real edges this loop reaches
+ * (it has already resolved both endpoints off them), so the value handed on is
+ * byte-identical to the raw row.
+ * @returns {{ relState: Record<string, unknown>, edge: Record<string, unknown>, key: string }|null}
  */
 export function razingPairRelationship(snapshot, worldState, aId, bId) {
   const snap = recordOf(snapshot);
@@ -299,7 +305,7 @@ export function razingPairRelationship(snapshot, worldState, aId, bId) {
     const key = relationshipKeyFromEdge(rawEdge);
     return {
       relState: recordOf(ensureRelationshipState(edge, states[key])),
-      edge: rawEdge,
+      edge: recordOf(rawEdge),
       key,
     };
   }
