@@ -172,23 +172,106 @@ export const SHAFT_RIM = '#A0763F';
  * put the mobile silhouette 11px too high and drop the dark falloff straight through
  * the mobile wordmark.
  *
- * ⚠️ `body` IS A CLEARANCE, NOT A TASTE. It is the last stop at or above which the
- * wood never goes darker than SHAFT_BODY, so it must sit BELOW the bottom of a
- * vertically-centred label box on every header height. LABEL_BOX below is that box;
- * the pin re-derives (1 + LABEL_BOX/height)/2 on both bars rather than trusting 0.80.
+ * ⚠️⚠️ THE OLD CLEARANCE ARGUMENT WAS FALSIFIED BY THE TALLEST RIDER, AND THE WHOLE
+ * MODEL IS DIFFERENT NOW. It used to read: "`body` is the last stop at or above which
+ * the wood never goes darker than SHAFT_BODY, so it must sit BELOW the bottom of a
+ * vertically-centred label box" — with LABEL_BOX hand-keyed at 20 and the pin
+ * re-deriving (1 + LABEL_BOX/height)/2. The PB verifier's F2, quoted:
  *
- * ⚠️⚠️ AND IT MOVED WHEN THE SHAFT WAS THINNED, WHICH IS THE COUPLING TO WATCH.
- * These are FRACTIONS, so a shorter bar pushes every stop UP in absolute pixels while
- * the label box stays the same 20px — the clearance therefore gets tighter as the bar
- * gets thinner, and it is the SMALLEST bar that governs. At the 48px shaft the label
- * box bottom sat at 0.708 and 0.75 cleared it; at 38 it sits at 0.763 and 0.75 does
- * NOT, so the falloff would have run through the bottom of every letterform on the bar
- * and every AA number in this file measured against SHAFT_BODY would have become a
- * lie. 0.80 restores the clearance. Anyone thinning this bar again must move this
- * number with it — the pin says so out loud, in the same run.
+ *   "the composited-AA pin's own base premise is falsified by the tallest rider...
+ *    That geometry is enforced by tests/components/navFletching.test.jsx:720, which
+ *    computes labelBottom = (1 + LABEL_BOX/h)/2 from a HAND-KEYED `LABEL_BOX = 20` —
+ *    giving 0.763 < 0.80 on a 38px bar. But the tallest rider is the wordmark, whose
+ *    box is 34.84px, 74% larger than 20... LABEL_BOX=20 is a hand-keyed side table
+ *    standing in for 'every rider's box' — the exact hazard class this estate has
+ *    been bitten by."
+ *
+ * TWO THINGS WERE WRONG, not one. The box was hand-keyed AND the "vertically centred"
+ * model was itself false: the wordmark's ink is not centred in its own box, so even
+ * the correct box would have given the wrong bottom. Rasterising every run at its own
+ * font (Chrome 1440x900, this lane) puts the deepest ink on the bar at **37.08px of
+ * 38** — the descender of the `g` in "Forge", at fraction 0.9758, PAST the old
+ * SHAFT_STOPS.edge of 0.92 entirely. HEADER_RIDERS below is the measurement, and the
+ * label box is now DERIVED from it rather than standing in for it.
+ *
+ * ⚠️⚠️ SO THE STOPS MOVED: body 0.80 -> 0.95, edge 0.92 -> 0.98. A DELIBERATE ONE-TIME
+ * VISUAL SHIFT. The barrel's dark falloff now lives in the last 5% of the bar (1.9px
+ * of 38) instead of the last 20% (7.6px), which is both what the riders need and a
+ * better cylinder: a real barrel seen this near edge-on holds its body tone almost to
+ * the silhouette and then drops fast. The four real shortfalls it repairs, measured on
+ * the composited raster and quoted in tests/design/compositedBarAA.test.js:
+ *   INK_DEEP on the wordmark's descender  4.15 -> 5.59  (AA 4.5 — was FAILING)
+ *   SEAL_WAX, the `o` of Forge            4.48 -> 4.80  (AA 4.5 — was FAILING)
+ *   GOLD_TXT, the plain tab's underline   2.29 -> 3.15  (1.4.11 3:1 — was FAILING)
+ *   BODY on the WRAPPED MOBILE bar        4.24 -> 4.62  (AA 4.5 — was FAILING)
+ * None of these was visible to the old pin, because the old pin measured one floor —
+ * grain over SHAFT_BODY — for every rider, and no rider's real ground was that floor.
+ *
+ * ⚠️ THE COUPLING TO WATCH IS UNCHANGED IN KIND. These are FRACTIONS, so a shorter bar
+ * pushes every stop UP in absolute pixels while the riders' ink stays the same number
+ * of px — the clearance gets tighter as the bar gets thinner, and it is the SMALLEST
+ * bar that governs. Anyone thinning this bar again must re-measure HEADER_RIDERS and
+ * move these numbers with it; the pin now says so per rider, with the rider named.
  */
-export const LABEL_BOX = 20;
-export const SHAFT_STOPS = Object.freeze({ lit: 0.09, mid: 0.38, body: 0.80, edge: 0.92 });
+
+/**
+ * HEADER_RIDERS — EVERY MARK THAT LANDS ON THE BAR, AND THE INK IT ACTUALLY COVERS.
+ *
+ * This replaces `LABEL_BOX = 20`. Each row is a MEASUREMENT, not a layout box: the run
+ * was rasterised at its own font and the first and last rows carrying ink were read
+ * off, so `ink` is where the letterform really is rather than where its line box is.
+ * (The wordmark's box is 34.84px and its ink runs 7.58..37.08 — the ink OVERFLOWS the
+ * box by 0.66px at the bottom, which is precisely why a box-based model could not see
+ * the defect.)
+ *
+ * `bar` is the header height the row was measured on, so a fraction is `ink/bar` and
+ * the desktop and the mobile bars can live in one table. ⚠️ THE MOBILE BAR IS
+ * CONTENT-SIZED and wraps to two rows at phone widths — measured at 390x844 it is
+ * 80.84px tall with its second row of labels at the bottom — so its row is taken at
+ * the narrowest common phone. A taller wrap keeps the last row at the same relative
+ * depth, so this stays the governing mobile case.
+ *
+ * Receipts: Chrome, this lane, 2026-08-03. Desktop 1440x900 (header 38px), mobile
+ * 390x844 (header 80.84px). tests/design/compositedBarAA.test.js computes each rider's
+ * own composited floor from this table; tests/components/navFletching.test.jsx asserts
+ * the bar SEATS the same set.
+ */
+export const HEADER_RIDERS = Object.freeze({
+  // the wordmark: FS.h1 serif with its two capitals at 1.32em. The tallest rider AND
+  // the deepest — the `g` of "Forge" is what sets the floor.
+  wordmark: Object.freeze({ ink: [7.58, 37.08], bar: 38, box: 34.84 }),
+  // the wax seal standing in for one `o`: a graphic, but it owes TEXT contrast.
+  seal: Object.freeze({ ink: [15.82, 31.66], bar: 38, box: 15.84 }),
+  // the plain reference tabs' labels: FS.sm in a padded, ruled box.
+  tab: Object.freeze({ ink: [13.25, 24.25], bar: 38, box: 34 }),
+  // that box's 2px underline, which is the ACTIVE state's boundary and sits far lower
+  // than the label it belongs to — the rider the old single-floor model hid completely.
+  tabRule: Object.freeze({ ink: [34, 36], bar: 38, box: 34 }),
+  // Sign In. ⚠️ It paints its own opaque ground, so measuring it against the bar is
+  // deliberately OVER-strict — kept that way rather than exempted, in the one direction
+  // a safety pin should err.
+  signIn: Object.freeze({ ink: [10, 21.5], bar: 38, box: 34 }),
+  // the signed-in account chip: `background: transparent`, so it genuinely reads
+  // against the bar. It cannot render on the census page, which is why it is measured
+  // by its GROUND rather than by itself.
+  chip: Object.freeze({ ink: [10, 25.25], bar: 38, box: 34 }),
+  // the maker's plate: its keyline is what separates the object from the wood.
+  plate: Object.freeze({ ink: [6, 32], bar: 38, box: 26 }),
+  // the wrapped MOBILE bar's second row of labels — the deepest ink on that bar.
+  mobileTab: Object.freeze({ ink: [58.28, 70.1], bar: 80.84, box: 34 }),
+});
+
+/**
+ * LABEL_BOX — now DERIVED: the tallest rider's own box.
+ *
+ * ⚠️ IT SURVIVES AS A NAME AND NOT AS AN AUTHORITY. Nothing may compute an AA floor
+ * from it any more — the per-rider ink extents above are the authority, because a box
+ * is leading and a floor is about ink. It is kept because the bar's SEAT claim ("38 is
+ * a floor, not a preference") is genuinely about boxes, and that claim now reads the
+ * same table the contrast claim does instead of a second hand-keyed number.
+ */
+export const LABEL_BOX = Math.max(...Object.values(HEADER_RIDERS).map((r) => r.box));
+export const SHAFT_STOPS = Object.freeze({ lit: 0.09, mid: 0.38, body: 0.95, edge: 0.98 });
 
 /**
  * SHAFT_CYLINDER — the barrel shading, as one CSS gradient.
@@ -204,6 +287,67 @@ export const SHAFT_CYLINDER =
   `linear-gradient(180deg, ${SHAFT_SHEEN} 0%, ${SHAFT_SHEEN} ${SHAFT_STOPS.lit * 100}%,`
   + ` ${SHAFT} ${SHAFT_STOPS.mid * 100}%, ${SHAFT_BODY} ${SHAFT_STOPS.body * 100}%,`
   + ` ${SHAFT_EDGE} ${SHAFT_STOPS.edge * 100}%, ${SHAFT_RIM} 100%)`;
+
+/** The barrel's ladder as data, in the order SHAFT_CYLINDER paints it. */
+const CYLINDER_LADDER = Object.freeze([
+  Object.freeze([0, SHAFT_SHEEN]),
+  Object.freeze([SHAFT_STOPS.lit, SHAFT_SHEEN]),
+  Object.freeze([SHAFT_STOPS.mid, SHAFT]),
+  Object.freeze([SHAFT_STOPS.body, SHAFT_BODY]),
+  Object.freeze([SHAFT_STOPS.edge, SHAFT_EDGE]),
+  Object.freeze([1, SHAFT_RIM]),
+]);
+
+/**
+ * cylinderToneAt — WHAT TONE THE BARREL ACTUALLY IS AT A GIVEN DEPTH, and it is THE
+ * SINGLE WRITER for that question.
+ *
+ * ⚠️ IT EXISTS BECAUSE THE ESTATE USED TO ANSWER IT WITH A CONSTANT. Every AA number
+ * on this bar was quoted against SHAFT_BODY, on the strength of a geometric argument
+ * ("the falloff never reaches a letterform") that the tallest rider falsified — see
+ * SHAFT_STOPS' note and HEADER_RIDERS. A stop is not a floor; the floor is whatever
+ * the gradient evaluates to under the ink, and that is a computation, so it is written
+ * once here and read by every pin instead of being re-derived per test.
+ *
+ * ⚠️ INTERPOLATED IN sRGB, per channel, because that is what a CSS `linear-gradient`
+ * does with unprefixed stops. Interpolating in any other space would answer a question
+ * about a gradient nobody paints.
+ *
+ * @param {number} fraction depth down the bar, 0 at the top edge and 1 at the bottom
+ * @returns {[number, number, number]} the 0-255 sRGB triple at that depth
+ */
+export function cylinderToneAt(fraction) {
+  const f = Math.min(1, Math.max(0, fraction));
+  const rgb = (hex) => {
+    const n = parseInt(hex.slice(1, 7), 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  };
+  for (let i = 1; i < CYLINDER_LADDER.length; i += 1) {
+    const [p0, c0] = CYLINDER_LADDER[i - 1];
+    const [p1, c1] = CYLINDER_LADDER[i];
+    if (f <= p1) {
+      const t = p1 === p0 ? 0 : (f - p0) / (p1 - p0);
+      const a = rgb(c0);
+      const b = rgb(c1);
+      return [0, 1, 2].map((k) => a[k] + (b[k] - a[k]) * t);
+    }
+  }
+  return rgb(SHAFT_RIM);
+}
+
+/**
+ * The DARKEST tone one rider's ink can land on — its own floor, before the grain.
+ *
+ * The cylinder only darkens downward, so the worst point of any extent is its BOTTOM.
+ * ⚠️ `vaneEdge` IS NOT IN HEADER_RIDERS AND CANNOT BE: the fletch band's boundary runs
+ * the whole bar and then hangs below it, so its extent is not a measurement of a
+ * letterform but a scoping decision — it is passed explicitly by the pin that makes
+ * that decision, with its residual quoted there rather than buried here.
+ *
+ * @param {{ ink: number[], bar: number }} rider a HEADER_RIDERS row
+ * @returns {[number, number, number]} the 0-255 sRGB triple under its deepest ink
+ */
+export const riderFloorTone = (rider) => cylinderToneAt(rider.ink[1] / rider.bar);
 
 /**
  * SHAFT_GRAIN_TEXTURE — the fine LONGITUDINAL wood grain, as a deterministic inline

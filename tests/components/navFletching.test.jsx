@@ -96,7 +96,8 @@ import { flowsInto } from '../../src/components/nav/NavFlowArrow.jsx';
 import {
   ANCHOR_OFFSET, BODY, CHROME, FLETCH, FLETCH_BARB, FLETCH_BARB_DEG, FLETCH_HANG,
   FLETCH_LEAD, FLETCH_RACHIS, FLETCH_SHEEN, FLETCH_SHEEN_LIFT, FLETCH_TIP,
-  FLETCH_VANE, FS, GOLD, GOLD_TXT, INK_DEEP, LABEL_BOX, LIGHT_UNIT, PARCH, PARCH_100,
+  FLETCH_VANE, FS, GOLD, GOLD_TXT, HEADER_RIDERS, INK_DEEP, LABEL_BOX, LIGHT_UNIT,
+  PARCH, PARCH_100,
   PLATE_LIGHT_DEG, SHAFT, SHAFT_BODY, SHAFT_CYLINDER, SHAFT_EDGE, SHAFT_GRAIN_LAYERS,
   SHAFT_GRAIN_TEXTURE, SHAFT_RIM, SHAFT_SHEEN, SHAFT_STOPS, SP, WRAP,
   contactShadow, lightOffset, shadowOffset,
@@ -934,19 +935,46 @@ describe('5 — THE CYLINDER: the bar is a shaft seen in profile, not a plank', 
     expect(dropLate / late).toBeGreaterThan(dropEarly / early);
   });
 
-  test('⚠️ SHAFT_STOPS.body CLEARS THE LABEL BOX on BOTH header heights', () => {
-    // THE PIN THAT MAKES "SHAFT_BODY is the reference ground" A GEOMETRIC CLAIM
-    // rather than a hopeful one. Every AA number in this lane is measured against
-    // SHAFT_BODY, and that is only honest if the cylinder never goes darker than
-    // SHAFT_BODY anywhere a letterform can land. Labels are vertically centred, so
-    // the bottom of the label box sits at (1 + LABEL_BOX/height)/2 of the bar — and
-    // the stop must be BELOW that on the desktop bar AND the taller mobile one.
-    for (const h of [CHROME.headerDesktop, CHROME.headerMobile]) {
-      const labelBottom = (1 + LABEL_BOX / h) / 2;
-      expect(SHAFT_STOPS.body, `label box is not clear of the falloff on a ${h}px bar`)
-        .toBeGreaterThan(labelBottom);
+  test('⚠️⚠️ THE LABEL BOX IS DERIVED FROM THE MEASURED RIDERS — F2’s cure', () => {
+    // WHAT THIS PIN USED TO SAY, AND WHY IT WAS FALSE. It read: "SHAFT_STOPS.body
+    // CLEARS THE LABEL BOX on BOTH header heights", computing labelBottom =
+    // (1 + LABEL_BOX/h)/2 from a hand-keyed LABEL_BOX = 20. The verifier's F2:
+    // "the tallest rider is the wordmark, whose box is 34.84px, 74% larger than 20...
+    // LABEL_BOX=20 is a hand-keyed side table standing in for 'every rider's box' —
+    // the exact hazard class this estate has been bitten by."
+    //
+    // ⚠️ AND THE MODEL WAS WRONG TWICE. Even the correct box would have given the
+    // wrong answer, because "vertically centred" is false of ink: the wordmark's
+    // deepest ink is the `g` of "Forge" at 37.08px of 38 (fraction 0.9758), which the
+    // centred-box formula puts at 0.958. So the derivation is on MEASURED INK now, and
+    // the box survives only for the SEAT claim, which is genuinely about boxes.
+    expect(LABEL_BOX).toBe(Math.max(...Object.values(HEADER_RIDERS).map((r) => r.box)));
+    expect(LABEL_BOX).toBe(HEADER_RIDERS.wordmark.box);
+    expect(LABEL_BOX).toBe(34.84);        // today's value, recorded
+    expect(LABEL_BOX).not.toBe(20);       // the hand-keyed number this replaced
+    // THE TABLE IS ABOUT THE BARS THIS APP ACTUALLY PAINTS: every desktop row was
+    // measured on a bar of exactly CHROME.headerDesktop, so a future resize that
+    // forgets to re-measure reds here rather than shipping a stale ground.
+    for (const [name, r] of Object.entries(HEADER_RIDERS)) {
+      expect(r.ink[1], `${name}'s ink is not below its own top`).toBeGreaterThan(r.ink[0]);
+      expect(r.ink[1], `${name}'s ink escapes its own bar`).toBeLessThanOrEqual(r.bar);
+      if (name !== 'mobileTab') {
+        expect(r.bar, `${name} was measured on a bar this app no longer paints`)
+          .toBe(CHROME.headerDesktop);
+      }
     }
-    expect(LABEL_BOX).toBe(20); // today's value, recorded so a reader knows the bar
+    // ⚠️ THE MOBILE BAR IS CONTENT-SIZED — it wraps to two rows at phone widths — so
+    // its row is measured rather than derived from CHROME.headerMobile, and it is
+    // TALLER than that token rather than equal to it. Asserting the relationship keeps
+    // the row honest without pretending the token predicts the bar.
+    expect(HEADER_RIDERS.mobileTab.bar).toBeGreaterThan(CHROME.headerMobile);
+    // ⚠️ NO PIN MAY DERIVE A CONTRAST FLOOR FROM THIS NUMBER AGAIN. The floor is per
+    // rider and lives in tests/design/compositedBarAA.test.js; the deepest ink on the
+    // bar sits BELOW SHAFT_STOPS.body, which is exactly the fact the old pin denied.
+    const deepest = Math.max(...Object.values(HEADER_RIDERS).map((r) => r.ink[1] / r.bar));
+    expect(deepest).toBeCloseTo(0.9758, 4);
+    expect(deepest, 'the old "the falloff never reaches a letterform" claim is back')
+      .toBeGreaterThan(SHAFT_STOPS.body);
   });
 
   test('BOTH headers paint the same barrel, grain OVER shading, over a base colour', () => {
@@ -1025,30 +1053,38 @@ describe('7 — ⚠️⚠️ the hang is PAINT, and the layout box stays CHROME.
     // real browser (Chrome, 1440x900, this lane) recorded beside the declarations
     // that produce them. What jsdom CAN prove is that the declarations have not
     // moved, and that the arithmetic those measurements imply still clears.
-    const RIDERS = {
-      // the wordmark: FS.h1 serif, its two capitals a step larger — the tallest
-      // rider on the bar, and the one that sets the floor.
-      wordmark: { fontSize: FS.h1, capStep: 1.32, lineHeight: 1.1, measured: 34.8 },
-      // the reference tabs and Sign In: FS.sm label in a padded, ruled box.
-      tab: { fontSize: FS.sm, padY: SP.sm, rule: 2, measured: 34 },
-    };
+    // ⚠️ THE RIDER SET IS NOW theme.js's HEADER_RIDERS — the SAME table the contrast
+    // floor reads (F2's cure: "make the lane's own SEAT pin cover the same set"). Two
+    // hand-keyed tables describing one bar is how the two claims drifted apart in the
+    // first place: the seat pin knew the wordmark was 34.8 while LABEL_BOX said 20.
+    const RIDERS = HEADER_RIDERS;
+    const DESKTOP = Object.entries(RIDERS).filter(([name]) => name !== 'mobileTab');
     // 1. THE TYPE HAS NOT MOVED. These are the sizes the measurement was taken at.
-    expect(RIDERS.wordmark.fontSize).toBe(FS.h1);
     expect(FS.h1).toBe(24);
-    expect(RIDERS.tab.fontSize).toBe(FS.sm);
     expect(FS.sm).toBe(12);
     expect(SP.sm).toBe(8);
     // 2. THE TAB'S HEIGHT IS ARITHMETIC, not a measurement — label line box (16 at
-    //    FS.sm) + both paddings + its rule — so this half needs no browser at all.
-    expect(16 + RIDERS.tab.padY * 2 + RIDERS.tab.rule).toBe(RIDERS.tab.measured);
+    //    FS.sm) + both paddings + its 2px rule — so this half needs no browser at all.
+    expect(16 + SP.sm * 2 + 2).toBe(RIDERS.tab.box);
     // 3. THE BAR SEATS THE TALLEST OF THEM, with air on both sides.
-    const tallest = Math.max(...Object.values(RIDERS).map((r) => r.measured));
-    expect(tallest).toBe(34.8);
+    const tallest = Math.max(...DESKTOP.map(([, r]) => r.box));
+    expect(tallest).toBe(LABEL_BOX);
+    expect(tallest).toBe(34.84);
     expect(CHROME.headerDesktop, 'the bar no longer seats its tallest rider')
       .toBeGreaterThan(tallest);
     // …and it is a SEAT, not a coincidence: at least a pixel of air above and below.
-    // 36 would leave 0.6px, which is one font fallback away from a clipped wordmark.
+    // 36 would leave 0.58px, which is one font fallback away from a clipped wordmark.
     expect((CHROME.headerDesktop - tallest) / 2).toBeGreaterThanOrEqual(1);
+    // 3b. ⚠️ AND THE INK IS SEATED TOO, WHICH THE BOX ALONE DOES NOT PROVE. The
+    //     wordmark's ink OVERFLOWS its own 34.84px box by 0.66px at the bottom — that
+    //     is exactly why the box-based AA model could not see the defect F2 found —
+    //     so the seat is asserted on the measurement as well as on the box.
+    for (const [name, r] of DESKTOP) {
+      expect(r.ink[0], `${name}'s ink is clipped at the top of the bar`).toBeGreaterThan(0);
+      expect(r.ink[1], `${name}'s ink is clipped at the bottom of the bar`).toBeLessThan(r.bar);
+    }
+    expect(RIDERS.wordmark.ink[1]).toBe(37.08);
+    expect(CHROME.headerDesktop - RIDERS.wordmark.ink[1]).toBeCloseTo(0.92, 2);
     // 4. NEGATIVE CONTROL — and it is the whole point of the block. The bar is
     //    genuinely THIN: it is not merely "big enough", it is within a few px of the
     //    floor its own type imposes. A future edit that fattened it back toward 48
