@@ -135,6 +135,12 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   religious_pact_betrayal: 'faith', religious_authority: 'faith', religious_pressure: 'faith',
   deity_war_pressure: 'faith', deity_peace_pressure: 'faith',
   strategy_missionize: 'faith', compound_gods_abandonment: 'faith',
+  // WR-10. The war annex's FIRST faith-desk kind: the observer-axis judgment of a sale
+  // is a moral reading a temple and its courts make, not a term of the bargain. Its
+  // token files here so SECTION_OF and the governed registry's own desk agree; the four
+  // adjudication kinds cannot do the same (adjudication is never a token output) and
+  // fall to the events catch-all below, exactly as the WR-5 decision records do.
+  sovereignty_sale_judged: 'faith',
   major: 'faith', minor: 'faith', cult: 'faith', // deity tiers (DEITY_TIER_KEYS)
 
   // ── TRADE — goods, money, roads, resources, institutions, non-war relations ───
@@ -183,6 +189,15 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   creditor: 'trade', debtor: 'trade', tribute: 'trade', embargo: 'trade', sanctioned: 'trade',
   proxy: 'trade', smuggling: 'trade', forced_tribute: 'trade', mediated_commerce: 'trade',
   ceasefire_commerce: 'trade',
+  // WR-10 THE SOVEREIGNTY MARKET — the trade desk's own. A settlement changing hands
+  // for a bundle is a bargain before it is anything else, so the offer, the clearing,
+  // the named no-trade, the swap, the wartime discount and the rerouted streams file
+  // beside the other goods-and-price beats. The market's CONSEQUENCE kinds (the
+  // rewritten edge, the grievance, the surviving lineage, the sold valve) are events,
+  // and the four adjudication kinds plus the faith-desk judgment are filed below.
+  sovereignty_sale_offered: 'trade', sovereignty_sale_cleared: 'trade',
+  sovereignty_no_trade: 'trade', sovereignty_swap: 'trade',
+  wartime_firesale: 'trade', streams_rerouted: 'trade',
 
   // ── EVENTS — the explicit catch-all: stressors, traditions, courts, calamity ──
   // stressor types (non-war, non-faith, non-trade)
@@ -225,6 +240,18 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   war_party_overturns_peacemaker: 'events', peace_party_overturns_warmonger: 'events',
   succession_demand_inherited: 'events', war_dissolved_by_verdict: 'events',
   coalition_separate_peace: 'events', coalition_apportionment: 'events',
+  // WR-10 THE SOVEREIGNTY MARKET — the events desk's own four (the conveyance's
+  // consequences: the rewritten holding edge, the sold town's grievance, the founding
+  // line that outlives the sale, and the overflow valve a parent sold out from under
+  // itself), followed by the token-only fallbacks for the four ADJUDICATION kinds.
+  // Those four persist `section: 'adjudication'` and the record router honours it via
+  // the sovereignty_registry authority; events is their fallback for the same reason
+  // the WR-5 rows above take it — adjudication is a property of the governed record,
+  // never a second meaning for the token.
+  sovereignty_edge_rewritten: 'events', sold_settlement_grievance: 'events',
+  lineage_survives_the_sale: 'events', overflow_valve_sold: 'events',
+  cession_for_peace: 'events', bought_seat_fragility: 'events',
+  kinship_opposes_the_sale: 'events', sale_books_diverged: 'events',
   // WR-7a errand records carry governed desks below. Token-only fallbacks for
   // the court acts remain events; the moving-person beat is likewise an event.
   // Silence is a belief forecast and therefore has an explicit divination home.
@@ -261,6 +288,13 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   realm_verb_force_reconsideration: 'events', realm_verb_force_calamity: 'events',
   realm_verb_force_found_steading: 'events', realm_verb_force_abandon: 'events',
   realm_verb_force_resettle: 'trade',
+  // WR-10 TRANSFER_SOVEREIGNTY. Both of the verb's routing keys file under TRADE, and
+  // for the same reason its family is War: a conveyance is a BARGAIN whatever pushed
+  // the courts into it. `sovereignty_conveyed` is the candidateType the proposal beat
+  // carries; `realm_verb_transfer_sovereignty` is the applied order's impactKind. They
+  // agree deliberately — the repudiate-treaty pair is the precedent for a war-family
+  // verb whose beats belong beside the terms and tribute they move.
+  sovereignty_conveyed: 'trade', realm_verb_transfer_sovereignty: 'trade',
 
   // ── DIVINATION — the forecast tokens (pressure / emergence in the token itself) ─
   regional_pressure: 'divination', food_pressure: 'divination', disease_pressure: 'divination',
@@ -434,7 +468,13 @@ export function heraldSectionOfRecord(record = {}) {
   const supplied = tokenStr(r.section);
   if ((r.sectionAuthority === 'war_rulings_registry'
       || r.sectionAuthority === 'war_coalition_registry'
-      || r.sectionAuthority === 'envoy_registry')
+      || r.sectionAuthority === 'envoy_registry'
+      // WR-10. Five of the sovereignty market's fifteen kinds cannot be filed by their
+      // token: SECTION_OF structurally never returns `adjudication`, so the cession, the
+      // bought seat, the kinship refusal and the books divergence would all land in the
+      // events catch-all, and the faith-desk judgment would only agree by coincidence.
+      // Without this token those five file wrong while compiling and passing.
+      || r.sectionAuthority === 'sovereignty_registry')
     && HERALD_SECTIONS.includes(/** @type {HeraldSection} */ (supplied))) {
     return /** @type {HeraldSection} */ (supplied);
   }

@@ -212,6 +212,26 @@ export const WHAT_PHRASES = Object.freeze({
   interceptor_dilemma: 'a column choosing between terms and the field',
   interceptor_parlays_own_edge: 'an ally opening peace on its own edge',
   parlay_terms_neither_court_drafted: 'field terms neither court drafted',
+  // WR-10 THE SOVEREIGNTY MARKET — all fifteen governed reader kinds are phrased even
+  // while the virtual engine flag is dark, so a privileged projection or a later replay
+  // can never fall back to a de-underscored engine token ('sovereignty sale cleared').
+  // The covert books row is phrased for the same reason its WR-5 twin is: a DM view
+  // still needs world words, and phrasing grants no public audience by itself.
+  sovereignty_sale_offered: 'a settlement put up for sale',
+  sovereignty_sale_cleared: 'a settlement sold between courts',
+  sovereignty_no_trade: 'a sale that found no price',
+  sovereignty_swap: 'two courts exchanging settlements',
+  cession_for_peace: 'a town given up to end a war',
+  sovereignty_edge_rewritten: 'a town waking to a new overlord',
+  sold_settlement_grievance: 'a town that has learned it was sold',
+  bought_seat_fragility: 'a bought seat held thinly',
+  lineage_survives_the_sale: 'a founder still named in a sold town',
+  wartime_firesale: 'a town sold cheap in the middle of a war',
+  sovereignty_sale_judged: 'a sale weighed by the temples',
+  kinship_opposes_the_sale: 'a founding bond refusing a sale',
+  sale_books_diverged: 'a seat sold to save itself',
+  overflow_valve_sold: 'a steading sold that the crowding needed',
+  streams_rerouted: 'tribute wagons turning to a new hall',
   // The INDIRECT war and the war of words. These nine are keyed on `kind` rather than
   // `impactKind`, because their authors (momentum.js, supplyWebWarfare.js,
   // informationStatecraft.js) mint no impactKind. That is exactly why the impactKind
