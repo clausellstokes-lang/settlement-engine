@@ -247,6 +247,23 @@ describe('Herald routing table — totality + single-home + consistency', () => 
       expect(heraldSectionOfRecord({ candidateType: 'war_levy' })).toBe('war');
       expect(heraldSectionOfRecord({ impactKind: 'harvest', section: 'adjudication' })).toBe('trade');
     });
+    test('⚠️ WR-8: A RAZING FILES UNDER WAR, beside the conquest it replaces', () => {
+      // THIS PIN EXISTS BECAUSE THE TOKEN SHIPPED UNROUTED. Lane WZ-2 minted
+      // `candidateType: 'razing'` at the siege mouth and never filed it, so the
+      // totality test above reds with exactly one orphan — the biggest thing the
+      // war layer can do had no Herald home and would have fallen to the `events`
+      // catch-all. The routing is asserted through the REAL record reader (not by
+      // reading the table back at itself), on the outcome shape the mouth actually
+      // emits, and beside the conquest so the sibling claim is measured.
+      expect(heraldSectionOfRecord({ candidateType: 'razing' })).toBe('war');
+      expect(heraldSectionOfRecord({ outcome: { candidateType: 'razing' } })).toBe('war');
+      expect(heraldSectionOfRecord({ outcome: { candidateType: 'conquest' } })).toBe('war');
+      // …and it is EXPLICITLY routed, not merely landing in the catch-all: an
+      // unrouted token would answer 'events' here and this pin would still read
+      // 'war' for war_levy, so the explicit check is what separates them.
+      expect(isExplicitlyRouted('razing')).toBe(true);
+      expect(EXACT_SECTION.razing).toBe('war');
+    });
     test('routingKeyOf prefers structured nature fields, never the prose headline', () => {
       expect(routingKeyOf({ headline: 'A great siege', impactKind: 'roads' })).toBe('roads');
       expect(routingKeyOf({ outcome: { candidateType: 'conquest' } })).toBe('conquest');

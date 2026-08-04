@@ -83,6 +83,11 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   war_mobilization: 'war', war_conscription: 'war', war_levy: 'war', war_spoils: 'war',
   war_drain: 'war', war_exhaustion: 'war', war_pressure: 'war', war_front: 'war',
   army_homecoming: 'war', army_deployed: 'war', hostile_raid: 'war', conquest: 'war',
+  // WR-8 amendment R. A razing is the war section's, not the events catch-all's:
+  // it is a siege's terminal act by the same army under the same casus, and it
+  // REPLACES the conquest rather than riding it (LAW 6 — no occupation record),
+  // so the two are siblings in the same file and must be read side by side.
+  razing: 'war',
   siege: 'war', siege_lifted: 'war', siege_initiation: 'war',
   blockade_declared: 'war', blockade_lifted: 'war', field_battle: 'war', sea_battle: 'war',
   intercept_ordered: 'war', convoy_ordered: 'war', reinforcement_ordered: 'war', reinforcement_cost: 'war',
