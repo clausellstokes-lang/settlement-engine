@@ -977,3 +977,119 @@ priced cost of the ambition.
 >    path through `edgeTypeOf`, so the fix is proven for the class; a per-pool
 >    fixture each would pin the REGEX rather than the plumbing, and the regexes are
 >    already pinned synthetically.
+
+> **WAVE SP-A — THE PURE FOUNDATIONS: THE SHARED SHAPES ARE MINTED, AND THE CENSUS
+> FOUND MORE LADDERS THAN THE CHARTER KNEW ABOUT, 2026-08-04.** One commit on
+> `claude/composite-r4` in the minifold worktree, nothing pushed. No flag: the two
+> leaves are imported by nothing at land time — dark by construction, the lane-P
+> precedent — and ZERO existing source files were edited.
+>
+> | What landed | Where |
+> |---|---|
+> | **THE BANDED-STOCK FAMILY (SP-5b).** One half-life ladder — `a_season` 13 · `a_year` 52 · `a_few_years` 156 · `a_decade` 520 · `a_generation` 1040 — DERIVED from `INTERVAL_WEEKS` rather than hand-keyed, and every rung a duration the tree already keeps memory on. One decay shape. One crossing-receipt grammar that refuses any non-integer number, so L5 is structural rather than hoped for. | `src/domain/worldPulse/bandedStock.js` (100 effective) |
+> | **THE TWO BAND FAMILIES (SP-6a/6b).** Significance `routine / notable / major` with the section-cap and significance-floor shapes; the severity ladder `glancing / telling / grave / ruinous`. | `src/domain/worldPulse/bandFamilies.js` (41 effective) |
+> | **THE RECONCILIATION WALKER + THE MINT SCANS.** Bands-line ↔ tuning-table totality both directions with a shrink-only backlog; the SP no-term-literal scan; J-FP-2's pressure-ladder mint census. | `tests/lint/{spBandFamilies,spTermLiteral,pressureLadderMints}.walker.test.js` |
+> | The progress record. | `<this row>` |
+>
+> **THE ANTI-RATCHET GUARANTEE IS ASSERTED ONCE, OVER THE SHAPE.** Fifteen call sites
+> spell `Math.pow(0.5, age / halfLife)` by hand today, each promising individually
+> that its stock relaxes toward neutral. The property — never further, never past,
+> strictly closer with any real time elapsed, unchanged at zero, monotone in time —
+> is now a grid property over the one function, with three EXECUTED mutants proving
+> the pair of clauses is load-bearing: a stock that never decays fails ONLY
+> `strictly-closer` (which is the ratchet, exactly), one that overshoots fails
+> `never-past`, one that grows fails `never-further`.
+>
+> **⚠⚠ TWO CENSUS PREMISES WERE REFUTED. Both are reported to the chair, and neither
+> was built upon.**
+>
+> 1. **`routine` IS LIVE IN THE TREE.** The compiled architecture (§2a class 4) and the
+>    CW architecture (S15) both record the ruled significance vocabulary as two-valued
+>    and `routine` as absent until SP-6a mints it. It is authored on live kind rows in
+>    `eventProse.js` — `war_culture_suppressed`, `lineage_claim_suppressed`,
+>    `trajectory_misread`, `envoy_on_the_road` — and read by four news composers
+>    (`dispositionNews`, `envoyNews`, `warCostsNews`, `lineageNews`). SP-6a is
+>    therefore a BORROW, not a mint: the family adopts the three words the estate
+>    already speaks and mints only the frozen order, the rank and the two shapes. Had
+>    it been minted two-valued, those rows would have been outside their own canonical
+>    vocabulary from the first commit. A pin asserts the family covers every
+>    significance any live registry speaks, and it DISCOVERS the registries from the
+>    module's exports rather than transcribing them. **CW-1 is unblocked on this row:
+>    its damping target exists and always did.**
+> 2. **THERE ARE TWO PRESSURE LADDERS, AND THE SECOND IS DECLARED NINE TIMES.** §2b
+>    item 4 calls `OVERFLOW_BANDS` "THE ONE pressure ladder". True of CAPACITY
+>    pressure — one authority, exactly as ruled. Not true of the tree: the INTENSITY
+>    ladder `{quiet, present, pressing, decisive}` (± an `unknown` head) is declared in
+>    NINE files under EIGHT names — `negotiationPictures`, `conquestFeasibility`,
+>    `conquestIntent`, `envoyNegotiationPictureBuilder`, `conquestDoctrineStage`,
+>    `compromiseRound`, `envoyErrandVocabulary`, `warCosts`, `warTermination`. Reusing
+>    one intensity vocabulary across nine subjects is good design; declaring it nine
+>    times is the per-volume-minting problem on the class the runaway's lesson makes
+>    most dangerous. SP-A does not consolidate them — every one is a war-lane file,
+>    several at or near the size ceiling, and this wave's charter is zero existing-src
+>    edits — so the set is FROZEN SHRINK-ONLY and all nine are pinned to spell the SAME
+>    rungs. The first copy to drift reds and names itself. `pressed` (capacity) and
+>    `pressing` (intensity) already differ by one letter across two ladders, so the two
+>    vocabularies are pinned disjoint from live imports.
+>
+> **THE SEVERITY LADDER IS A GENUINE MINT, AND THE MINT RECORDS WHAT IT LOOKED FOR**
+> (J-WR-10-B). Five severity spellings were measured and not one grades an OUTCOME:
+> `historyBeats` SEVERITY_RANK is module-private and grades authored generator history
+> (and its `major` is the significance family's top class); `activeConditions` /
+> `threatProfile` SEVERITY_BANDS band a 0..1 scalar for an ongoing STATE;
+> `structuralFingerprint` is the analytics plane; `heraldFilter` is display and its
+> bottom rung IS `routine`; `data/constants` SEVERITY is a validation-issue KIND enum,
+> not a ladder. Nothing was borrowable, so four rungs were minted that were measured to
+> appear as quoted literals ZERO times anywhere under `src/` — reading the wrong ladder
+> is now impossible by SPELLING rather than by discipline, and a walker keeps it so.
+>
+> **RECEIPTS.** 58/58 across the five suites (`gate-tail` exit 0). Domain strict green
+> at 1313/1313 with both leaves strict-clean. `sizeBaseline` green — both leaves are
+> far under the 800 layer ceiling and take no baseline entry. FOUR NEGATIVE CONTROLS
+> EXECUTED, each restored from a `cp` backup and hash-verified md5-identical (or, for
+> the planted file, deleted in the same shell), with an attribution control returning
+> 58/58 afterwards: a fourth band in the Bands line reds the forward direction; deleting
+> a §7 row reds the reverse; a term-family literal appended to `bandedStock.js` reds two
+> tests in the no-term-literal scan; a tenth intensity declaration reds three tests in
+> the pressure census at once. `tests/lint` reds at base were attributed against a
+> `git archive` of this lane's start HEAD `99d63d92` with `node_modules` symlinked:
+> `negativeAssertionAnchor` is red at base on `tests/generators/settlementOriginProse.test.js`
+> (lane MD's, unchanged since the archive), and `controlBytes` / `mutationCoverageManifest`
+> were GREEN at base and were red in the live tree for a window on the concurrent CW-0w
+> lane's then-untracked `tests/lint/couplingDesk.walker.test.js` — **a raw NUL at 112:52,
+> the Write-tool escape class biting a seventh time, plus a missing manifest entry.**
+> Observed and reported, never touched: another lane's in-flight file. That lane cured
+> both in its own commit `03dee5fd` before this wave committed, and the final
+> verification run here is green on all seven suites.
+>
+> **ALIGNMENT LINE (req 13): DECLARED-EMPTY, WITH REASON.** Both leaves are pure
+> vocabulary and shape. They read no world state, name no settlement, and colour no
+> verb, so neither alignment axis is engaged in either direction. Consumers that colour
+> a verb by alignment do so in their own volumes under req 13.
+>
+> **EDIT VERB (req 14): ENGINE-ONLY, RECORDED.** These are authored constants under the
+> owner's tuning signature (§7 carries all three rows), not player- or DM-editable
+> state. A DM-set half-life or a DM-set significance scale would be a stored opinion
+> the pacing governor and every instance would immediately fight; the DM's hand on
+> these arrives through J-D12's era presets, which is the owner's designed instrument
+> for exactly this.
+>
+> **WHAT THIS WAVE DELIBERATELY DID NOT DO** — recorded so no one re-finds it as a bug:
+>
+> 1. **NO BANDING PRIMITIVE IN `bandedStock.js`.** A stock's band EDGES are a
+>    per-instance §7 tuning row, and a shared edges table would mint a vocabulary this
+>    wave has no authority to author. Instances band through their own tables and hand
+>    the family the resulting band WORDS.
+> 2. **THE SIGNIFICANCE MIGRATION IS SP-E's.** `heraldFeed.js:95` still mixes a banded
+>    `significance === 'major'` with a raw `severity >= 0.72` float, and every consumer
+>    still spells the classes inline. This wave supplies the thing they migrate ONTO
+>    and edits no existing source; SP-E lands the census that names the debt, and each
+>    surface migrates in its own small wave.
+> 3. **THE FREQUENCY-CADENCE MAPPING IS NOT EXPORTED.** SP-E's floor walker derives a
+>    kind's variant floor from its own significance; the cadence-class boundaries are
+>    SP-E's §7 row, so `bandFamilies.js` deliberately stops at the scale and its two
+>    shapes rather than pre-empting them.
+> 4. **THE NINE INTENSITY DECLARATIONS ARE FROZEN, NOT CONSOLIDATED.** See above. The
+>    consolidation is a war-lane edit across nine files and belongs to whoever owns
+>    that surface; the ratchet makes it a win to be banked rather than a chore to be
+>    re-discovered.

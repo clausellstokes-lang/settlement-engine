@@ -349,6 +349,20 @@ consumes.
 - **Collision map:** zero — new files plus test estate; no war-lane file is
   opened.
 
+**Bands:** the shared half-life band table (the SP-5b shapes) · the SP-6a
+significance family (scale itself, owner-signed ONCE) · the SP-6b severity
+ladder.
+
+**THE LADDER LAW (J-FP-2), authored here and pinned exactly once:**
+`OVERFLOW_BANDS` is a pressure LEVEL, never a DIRECTION. A program needing
+"how full" borrows `OVERFLOW_BANDS`; a program needing "growing / shrinking"
+borrows `SOVEREIGNTY_TRAJECTORY_BANDS` or `populationTrendBand`; reading the
+wrong one is a silent semantic error no walker catches. The single-ladder
+discipline gains structural enforcement in this wave — a shrink-only mint
+census over the pressure-ladder DECLARATIONS (consumers may grow freely;
+authorities may not) — because seven programs are about to read pressure and
+until now the discipline was J-WR-10-B plus two header comments.
+
 ### SP-B — THE BELIEVED-WORLD AXES (flags `believedScarcityEnabled`,
 `believedConditionsEnabled`, `believedDevotionEnabled`)
 **Scope:** the three subject families as beliefAxes fold arms (seam ruling 1).
