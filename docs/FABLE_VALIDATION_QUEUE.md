@@ -2294,4 +2294,266 @@ both; renumbering a chair ruling is the chair's call, so both stand as written a
 the disambiguation is queued rather than invented here.
 
 **Next:** cycle 2 is SP-B + SP-B2 + ES as JOINT waves — the WR-10 lighting road —
-after the integration fold lands.
+after the integration fold lands. SUPERSESSION NOTE: the WR-10 close row
+(FABLE_VALIDATION_QUEUE.md ~:2186) expected the belief-legs wave "inside FP's
+Spine program"; this fold makes ES-4 (an ESPIONAGE wave) the third discharge
+member — the expectation is superseded HERE; the historical row stands unedited.
+
+---
+
+## ⭐⭐ THE INTEGRATION FOLD — TWO OWNER-AMENDMENT VOLUMES ENTER THE QUEUE, AND
+## FIFTEEN RULINGS ARE BAKED IN THIS ROW (chair, 2026-08-05) — NINE from the FP
+## volume (CR-FP-3..CR-FP-10 + CR-FP-12) and SIX from the ESPIONAGE volume
+## (CR-ES-1..CR-ES-6); the WAYFARE volume's own five (Q1-Q5, its §7) ride the
+## SAME commit from their own home, so TWENTY rulings land at this fold. The
+## arithmetic is stated because the count is a receipt, not a flourish.
+## The ESPIONAGE volume (ES-0..ES-7)
+## and the WAYFARE volume (WY, twelve waves in two lanes) fold into
+## `docs/DESIGN_FP_ARCHITECTURE.md` and `docs/SOL_QUEUE.md` at this commit. Every
+## ruling below is VETOABLE; one clause from the owner strikes any of them.
+
+**THE COHESIVE VERDICTS.** Both volumes were run to cohesion before this fold and
+both came back COHESIVE: the ESPIONAGE volume at run `wf_60586a6a-68c` (findings
+F1-F9 closed in place, every closure's symbol home re-measured; owner additions
+G and H integrated in full), and the WAYFARE volume at run `wf_6b8020de-71c`,
+revision **r3** (the r1 fifteen findings confirmed closed by the re-cohesion
+critic; directive sections 2k and 2l absorbed — 2k into WY-8's two slices plus
+the F9 sign-off row and `armySupplyEnabled`, 2l into the §5b item 10 fold
+obligation, seam 1, and §10). Neither verdict is a licence: both volumes carry
+"live code outranks every table" in their own headers, and this fold inherits it.
+
+**⚠️ THE LANDING LANE'S OWN OBLIGATION, DISCHARGED AT THIS COMMIT OR THE COMMIT IS
+INCOMPLETE — the §5b item 10 occupation census.** CENSUS the existing occupation
+economics BY SYMBOL (the occupied-side `benefitYield` to the occupier; the
+war-economy drains; ANY existing occupier-side holding cost), multi-spelling
+greps, live code outranking the row; where the OCCUPIER half is missing, route a
+WAR-chair queue row pinning the occupier-side holding cost (garrison/
+administration drain on the GOVERNING town) so occupation is viable only while
+BOTH prosperities sustain it. The owner believes this mostly built — the census
+is the truth-finder, not a build. THE EXIT IS NAMED: a soured occupation is the
+sovereignty market's firesale story (WR-10's dark instrument is the sell door).
+**⭐ THE CENSUS, EXECUTED AT THIS FOLD — CONFIRMED (landing lane, 2026-08-05,
+run against the tree at `32cc17f7` + this fold's own commits; multi-spelling
+greps, live code outranking the row — and it corrected the row). THE VERDICT IS
+`NO GAP`: the both-sided register is ALREADY BUILT on both halves, so NO
+WAR-chair queue row is routed.** The owner's belief that this was mostly built
+is confirmed, and it is built more completely than the row assumed.
+
+SYMBOLS FOUND, by symbol:
+- **The occupied → occupier BENEFIT half.** `benefitYield` — 10 hits across 3
+  files (`occupation.js` ×8, `occupationRecordMode.js`, `occupationStatus.js`).
+  Computed at `occupation.js`:1146, stamped onto every record of that occupier
+  (:1192), and surfaced as the `war_spoils` condition ON THE OCCUPIER — an
+  EASING condition relieving war_exhaustion. It is CAPPED
+  (`PER_OCCUPATION_BENEFIT_CAP` + `OCCUPIER_BENEFIT_CONTAINMENT`), DELAYED by
+  state (contested ≈ 0 via `STATE_BENEFIT_SCALE`), and CONDITIONAL on the
+  occupied settlement's measured usefulness.
+- **The occupier-side HOLDING COST half — THE ONE THE ROW EXPECTED TO BE
+  MISSING. IT EXISTS, AND IT IS EXACTLY WHAT 2l ASKS TO BE PINNED.**
+  `occupation_burden`, computed by `computeOccupierBurden` (`occupation.js`:563)
+  and emitted on the OCCUPIER at :1112. `activeConditions.js`:436 registers it
+  as "Garrisoning and administering conquered settlements ties down the
+  occupier's strength", driving `economic_capacity` + `defense_readiness` +
+  `public_legitimacy`. **It is a drain on the GOVERNING TOWN, not on an abstract
+  realm:** `worldState.occupations` is keyed by the OCCUPIED settlement and
+  `occupierId` is itself a SETTLEMENT id (the module header calls the loop a
+  CROSS-SETTLEMENT feedback loop). It is deliberately NOT total-capped —
+  `PER_OCCUPATION_BURDEN_CAP` 0.6 per occupation plus
+  `OVEREXTENSION_PER_OCCUPATION` 0.12 for each additional holding — so a greedy
+  occupier degrades itself, and `STATE_BURDEN_SCALE` makes a contested
+  occupation the HEAVIEST (1.0) against a vassalized one's 0.18. That IS the
+  burden-outweighs-benefit guarantee, written as code rather than as doctrine.
+- **The war-economy drains.** `warEconomyDrainEnabled` — 6 hits across 4 files:
+  the read at `warDeployment.js`:470, default + ceiling at
+  `simulationRules.js`:96/449, the conscription debit at
+  `deploymentReturn.js`:260, and the certification row at
+  `subsystemRowsWar.js`:158.
+- **BOTH DOSSIERS' RISK REGISTERS ALREADY READ IT** (2l's stated consumer).
+  `occupationStatus.js` exports `settlementOccupation` (the OCCUPIED side) and
+  `occupierHoldings` (the OCCUPIER side, returning `stretchedThin` /
+  `strengthened`), consumed by WarFaithTab, SessionMode, RealmDashboard and
+  AdminSimTuningPanel.
+- **THE NAMED EXIT IS ALREADY WIRED.** The sovereignty market's sell door reads
+  the occupation ledger directly — `sovereigntyAssets.js`:163-181 conveys a
+  settled vassalage and prices an in-progress occupation off
+  `STATE_BENEFIT_SCALE`, and `sovereigntyTransfer.js` rewrites `occupierId` in
+  place through `conveyOccupationRecord`. The firesale story needs no new
+  plumbing; WR-10's dark instrument already opens onto this ledger.
+
+SYMBOLS ABSENT: **none of the three the row names.** Nothing is owed.
+
+**⚠️ ONE PREMISE OF THE 2l ROW IS REFUTED BY LIVE CODE — REPORTED, NOT SILENTLY
+CORRECTED, AND NOT BUILT AGAINST.** The directive sentence says a drained
+holding "yields nothing AND RESISTS MORE". Live code holds the first and
+INVERTS the second: usefulness — hence benefit — is cut by devastation
+(`occupation.js`:323, `usefulness * (1 - 0.4 * devastation)`), but resistance is
+LOW when the settlement is devastated/compliant (:330-331), because a ruined
+holding has less left to resist with. The engine instead compensates on the
+OCCUPIER'S side, and more sharply than 2l asks: inherited hunger BOTH nets the
+benefit down (`inheritanceBenefitFactor`, :1146 — "you cannot draw tribute from
+an empty granary") AND adds to the burden (`inheritanceBurdenAddend`, :1108 —
+"annexed a famine"). So 2l's actual requirement — "occupation is viable only
+while BOTH prosperities sustain it" — HOLDS, by a different and better
+mechanism than the row assumed. **CONSEQUENCE FOR FUTURE WAVES:** the 2l prose
+is not a spec for a resistance-rises-with-ruin arm, and a wave that "fixes"
+resistance to rise with devastation would be REVERSING a deliberate design, not
+closing a gap. One owner clause may still order that inversion; absent it, this
+row is the standing record that the asymmetry is intentional.
+The same commit carries the two PREFIX ADMISSIONS (ES tenth, WY eleventh in
+`CHARTERED_VOLUME_PREFIXES`; `tests/domain/couplingRegistry.test.js` pins the
+closed set TWICE and BOTH sites move together, with its two count-bearing
+legibility sites repaired alongside) and the war-volume amendments (the
+CR-ES-2 cross-reference beside the foreign-guest hold; the two J-D11(b)
+pointer sentences; **the CR-WR10-H three-member discharge sentence — PART 5,
+owed by name by ES §6 item 5**), so no two binding volumes disagree for a
+single commit. **AND THE SIBLING-VOLUME DELTAS RIDE IT TOO:** the census was
+RE-EXECUTED at the fold HEAD `32cc17f7` (commands quoted in PARENT-DELTAS.md,
+SIBLING-VOLUME DELTAS, so the count re-derives) and the two-member lighting
+discharge lives at **TEN** sites in THREE documents — FIVE in
+`docs/DESIGN_FP_ARCHITECTURE.md` (§2a, §3, §5 wave #4, §9's sequencing
+rationale, §9 seam row 4), FOUR in `docs/DESIGN_FP_ARCH_SP.md`, and the war
+volume's CR-WR10-H paragraph, which names no wave ids at all. All ten are
+amended by this commit (EDITS 11, 15, 26, 36, 41 · 37-40 · PART 5). The SP
+volume is NORMATIVE where the parent compresses, so a
+fold that amends only the parent would ship a binding document telling the
+SP-B2 implementer the discharge is exactly two — the very trap the amendment
+closes, reintroduced one document down; and a fold that amends four of the
+parent's five leaves the parent contradicting ITSELF inside one commit, which
+is worse.
+
+**THE FP VOLUME'S NINE (CR-FP-3..CR-FP-10 plus CR-FP-12, each vetoable):**
+- **CR-FP-3 — Q1, the posture-read naming collision.** ACCEPT the synthesis
+  recommendation: keep `postureOf`; rename ONLY the colliding second export to
+  `courtRiskAppetiteOf` at the SP-C module; one-row constitution erratum; the
+  import-source pin set and both-site headers land regardless of arm.
+- **CR-FP-4 — Q3, the IN-0a envelope transport.** ACCEPT. Primary road: each
+  consumer reads the PRIOR tick's applied `brokerage_plant` events at its own
+  head (zero new keys, zero kernel edits, law-M one-week lag); VERIFY-AT-BUILD
+  the metadata retention; fallback is the `pendingPlants` conditional deposit
+  under the D-3 contract; both fail = STOP for a chair-signed kernel seam.
+- **CR-FP-5 — Q4, J-INT-13 pre-recording.** ACCEPT: pre-record the DARK arm NOW
+  (lit-kind pools ship behind a prose-version flag; every existing golden
+  byte-identical). The owner may later take the re-record arm with the WR-0b
+  field-level diff. This row IS the pre-recording.
+- **CR-FP-6 — Q6, arrivals feeding `mass_migration`.** ACCEPT NO: deliberately
+  deferred beside J-POP-14. ONE owner ruling covers both arrival-side couplings.
+  This goes on the OWNER QUEUE, not into any wave.
+- **CR-FP-7 — Q7, D-W3's formal close.** COUNTERSIGN the CAP-RAISE arm. The trim
+  arm is FORBIDDEN by the spine floor law (measured: five puts all four kinds
+  below their own SP-6 floor); walkers read floors from significance; SP-E's
+  shared helper retires the fixed-five class. **D-W3 IS FORMALLY CLOSED.**
+- **CR-FP-8 — Q8, the sale door vs the one-instrument law.** ACCEPT: not in this
+  build. GR-2 pins the refusal UNCHANGED (fenced baseline); harmonization is
+  recorded as a post-GR-2 candidate owned JOINTLY with the war chair.
+- **CR-FP-9 — Q9, `applyWorldPulse`'s second `storageMonths` fold.** PRE-RULED
+  REPORTED-NOT-DEFECT: the banked file's own treaty fold; TR-4 routes ZERO
+  traffic through it; the sixth-writer scan fences it. The queue row is filed AT
+  THIS FOLD so the lane never stalls on it. (CR-2's TR-4 consolidation order is
+  untouched and still binds.)
+- **CR-FP-10 — Q10, the errand ledger's address.** CONFIRM keep-in-place: SP-D
+  generalizes `worldState.envoyErrands` IN PLACE. The migration arm is DECLINED
+  (owner-gated persistence churn on a live save shape for zero behavioural
+  payoff). The constitution owes the erratum row.
+- **CR-FP-12 — a ruling on CQ2's SCOPE (answers no question; raised at this
+  fold).** ES-0's early MOTION is **DECLINED**. The CQ2 authorized set stays
+  EXACTLY GR-0 + GR-1 + TR-1 + TR-9-contract and the fold does not widen it.
+  ES-0 remains early-ELIGIBLE — a MEASURED FACT about the wave (pure leaves,
+  no flag), recorded as such in FP §5 and §9 — but eligibility is a
+  measurement and CQ2 membership is an authorization only the chair grants.
+  They part here because ES-0 EDITS TWO LIVE WAR-LANE FILES
+  (`warSeatBooks.js` retiring its private `lawfulnessBand` to the new
+  `lawWordFor`; `warMagicGate.js` re-exporting the neutral `magicWorksAt`
+  lift) and the CR-ES-3 retarget those edits carry is a CROSS-FILE war-lane
+  VOCABULARY change with declared golden-shift exposure — the opposite of the
+  pure-density, zero-collision profile CQ2's four members share. ES-0 sits
+  early in cycle 2 under strict order regardless, so nothing real is lost.
+  One owner clause admits it to CQ2.
+
+**THE ESPIONAGE VOLUME'S SIX (CR-ES-1..CR-ES-6, each vetoable):**
+- **CR-ES-1 — Q1, the Roads law-5 amendment.** SIGNED: the §3.11 amendment — a
+  flag-gated GRADED COUNCIL-WEIGHT DISCOUNT via the `memberNpcIds` first
+  consumer; `isOffStage` untouched; dark worlds byte-identical; the lit shift
+  disclosed. The literal full-off-stage reading is REFUSED as implementation for
+  the draft's own reasons (six kernels, every lit-roads golden, and a trade trip
+  is not a hostage-taking).
+- **⚠️⚠️ CR-ES-2 — Q2, the anonymity-law amendment. SIGNED, AND THIS ROW CARRIES
+  A WARNING MARKER BECAUSE IT AMENDS THE HEADER OF AN OWNER RULING (2026-07-19).**
+  Amended-in-place in BOTH homes — the `informationStatecraft.js` BOUNDARY header
+  block AND `DESIGN_FP_INFORMATION.md` §1b (the law and its phrase-scan enforcer
+  amend together); the war volume gets exactly ONE cross-reference line beside
+  the WR-7 foreign-guest-hold machinery, NEVER the amendment text. The amendment
+  text is FINAL and verbatim. **The core of the owner's ruling is PRESERVED — the
+  engine still never executes, permanently turns, or ends a named character —
+  while capture/hold/ransom/release are ADMITTED, which the owner's own espionage
+  directive requires.** The BY-THE-ENGINE qualifier is LOAD-BEARING and must
+  survive every edit: `FOREIGN_GUEST_HOLD_CLOSE_REASONS` already contains
+  `'death'` (measured live at this fold), so an unqualified no-fates reading would
+  outlaw the war lane's authored closes. **THE OWNER'S VETO SURFACE IS ONE
+  CLAUSE: it restores the old header verbatim, and nothing else in the fold
+  depends on it except ES-2.**
+- **CR-ES-3 — Q3, the seat-character vocabulary break.** COUNTERSIGNED (the
+  session chair holds the war chair this era): unify on the CONSUMER vocabularies
+  (`lawless`/`merciful`/`holding`) by retargeting the three module-private word
+  functions in `warSeatBooks`; a both-vocab equality pin lands with it. Until
+  that lands, ES-2 ships the captor-leniency arm DARK behind the ruling's
+  absence — DECLARED, not silent.
+- **CR-ES-4 — Q4, the spy-before-decision sites.** ACCEPT: this program wires the
+  sovereignty buyer, GR-2 pact answers, and its own cadence (J-ES-13). The WAR
+  CHOOSER (`settlementStrategy`, frozen surface) is DEFERRED to a future OWNER
+  ruling — owner queue row, not a rider on an information program.
+- **CR-ES-5 — Q5, third-party alliance topology.** PARKED, RECORDED: ship without
+  it; the pairwise `allianceLabel` REFUTE covers the drama. The new persisted-key
+  family (the ACQUIRE question) goes to the OWNER as a one-line future-widening
+  row. Never smuggle a surface into the SP-B family.
+- **⭐ CR-ES-6 — the ES gauntlet vs the WY encounter table (raised at the
+  cohesion pass as a consolidation question; RULED here).** **THE WY
+  ENCOUNTER-PAIRS TABLE ADMITS A FIFTEENTH ROW.** E15 = **spy-dwell detection
+  — the covert operative × the host settlement watch**, co-located per stop
+  while dwelling (the §3.3(b) hostile-class stay roll), resolver
+  `espionageGauntlet.js` (NEW at ES-2), outcomes in the SAME
+  foreign-guest-hold family rows E3-E7 already carry: capture opens a hold
+  with cause `caught_spying` through THE ONE hold writer; the non-capture arms
+  are uncaught passage and the §3.5 retroactive-exposure road (taint, not a
+  hold). **Anti-vacuity moves from fourteen to fifteen.** ES-2's charter gains
+  a SAME-COMMIT obligation: mounting the resolver adds the table row — a
+  resolver that lands without its row is the hole the walker exists to close.
+  WY-6's walker is BORN SEEING FIFTEEN; it verifies E15, it does not re-close
+  the table around it. **THE CONSOLIDATION BOUNDARY IS RECORDED IN BOTH
+  VOLUMES, so this never has to be re-derived:** the encounter-resolver
+  REGISTRY is **ONE** — the WY table, closed, walker-scanned, one row per
+  resolver — while catch/probability **MATH stays PER-RESOLVER**. The ES catch
+  model (`catchChance01` × `legStack(k)` × `dwellRamp`) is MATHEMATICS, not a
+  registry; unifying the two would buy nothing and would drag a probability
+  model into a manifest whose job is totality. **Why a row and not an
+  exemption:** ES-2 lands in PHASE 3 and WY-6 in PHASE 4, so without this
+  ruling the WY-6 author writes a closed-at-fourteen table against a tree that
+  already contains an untabled resolver, and must either break the pin the
+  same volume states twice or narrow the resolver-set scan — and a narrowed
+  scan is a hole nobody watches, which the estate refuses. Arm (a) of the
+  three the cohesion pass offered; it is the smallest edit and it preserves
+  the walker's totality.
+
+**STANDING RULINGS THIS FOLD RECORDS AS ALREADY RULED (do not re-open):**
+CR-FP-1 (the desk-agreement seam is AUTHORITY-ROUTED) · CR-FP-2 (the
+`proseNumerics` re-record is INSTRUMENT RECONCILIATION, not drift) · CR-FP-11
+(the cross-layer inclusion ratchet reaches the modules no family claimed —
+ruled AND LANDED this era at commit `1137f935`; recorded so the CR-FP-10 →
+CR-FP-12 numbering reads as a taken number, never a dropped ruling) · CQ2
+(early motion authorized for GR-0 + GR-1 + TR-1 + the TR-9 contract —
+**EXACTLY those four; CR-FP-12 above DECLINED widening the set to ES-0, whose
+early ELIGIBILITY is a measurement and not a membership**) · CQ5 (the flag
+one-commit law AFFIRMED; the WR flags recorded as pre-manifest history).
+**THE WAYFARE CHAIR TRANSLATION ALSO STANDS:** low supply drags the ARMY'S OWN
+`accumulatedAttrition`, NEVER the realm's `warExhaustion` — the seam-1 contract.
+**The owner's one-clause veto surface for that translation is the WY-8a ledger
+row**, named there so the veto lands where the build lands.
+
+**⛔ PARKED — OWNER-GATED, RECORDED, NOT BUILT BY THIS FOLD OR ANY WAVE UNDER IT:**
+(1) the **F9 `supplyCargo` sign-off row** — WY-8a does not build until the owner
+signs it; (2) the **ES Q5 alliance-topology ACQUIRE** — a new persisted key
+family, one-line future-widening row; (3) the **war-chooser spy wiring**
+(`settlementStrategy`) — deferred to a future owner ruling per CR-ES-4; (4) the
+**Q6 / J-POP-14 arrival couplings** — ONE owner ruling covers both, per CR-FP-6.
+Every TUNING BAND in both volumes stays RAW-AUTHORED until owner-signed per THE
+PROMISE; none enters `proposedSoakBands` at this fold. Nothing here is lit,
+nothing is soaked, nothing is pushed.

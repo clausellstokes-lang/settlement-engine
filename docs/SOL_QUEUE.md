@@ -24,6 +24,20 @@
   recorded engine-only decision).
 - Chair rulings CR-1..CR-7 (FABLE_VALIDATION_QUEUE.md, FP block) bind at the
   waves named in §1/§2 below.
+- **THE COMPILED FP VOLUME IS `docs/DESIGN_FP_ARCHITECTURE.md`** (2026-08-04,
+  with its per-program siblings `DESIGN_FP_ARCH_{SP,IN,GR,TR,WF,POP,INT,CW}.md`).
+  It carries the cross-program WAVE ORDER, the flag family, the canonical models
+  and the seam matrix; where this queue names a lane and that volume names a
+  position, the volume's §5 is the ordering authority and this queue is the lane
+  pointer. Its §5 wave names (SP-A..SP-E and the numbered phases) SUPERSEDE the
+  older SP-1/SP-2/SP-4/SP-5b/SP-6/SP-7 spellings still standing in §1 A2 item 11
+  below — a rename, not a re-scope; nothing was dropped.
+- Two OWNER-AMENDMENT volumes fold into it and bind their own lanes:
+  the ESPIONAGE volume (ES-0..ES-7, rides §1 A2 row 13) and the WAYFARE volume
+  (WY, engine lane at §1 A2 row 18b, surfaces at §2 row 21b). Chair rulings
+  CR-FP-3..CR-FP-10, CR-FP-12 and CR-ES-1..CR-ES-6 (FABLE_VALIDATION_QUEUE.md,
+  the integration-fold block) bind at the waves those rows name; each is
+  vetoable.
 - EVERYTHING BUILDS DARK. Sol never lights a flag, runs a soak, ratifies a
   band, re-records a golden without a recorded ruling, or pushes — see §4.
 
@@ -56,6 +70,41 @@ volumes corrected @ 36862650 + fdf43790):
     SP-8 THE AGE LAYER is its own later wave, owner veto open on J-D12.)
 12. GRAMMAR GR-0 → GR-7 (DESIGN_FP_GRAMMAR.md)
 13. INFORMATION IN-0 → IN-6 (DESIGN_FP_INFORMATION.md)
+    - **THE ESPIONAGE FAMILY ES-0 → ES-7 RIDES THIS ROW** (the owner-amendment
+      volume of 2026-08-04, folded into the FP volume at the integration fold;
+      eight waves, all DARK, zero new top-level keys). ES-0 is early-ELIGIBLE
+      (pure leaves, no flag) — a MEASUREMENT, not a licence: **CR-FP-12
+      DECLINED its early MOTION and the CQ2 authorized set is NOT widened**,
+      so ES-0 runs in STRICT ORDER on this row. ES-1..ES-3 land immediately after IN-3, so the
+      `suspicionOf` handshake lands one-sided-then-joined. **ES-4 lands directly
+      after ES-3 and is the THIRD MEMBER OF THE CR-WR10-H DISCHARGE:** SP-B mints
+      the leg SURFACES, SP-B2 wires the SEAM, ES-4 proves the SOURCE — a
+      non-neighbour (court, holding) pair appraised `known:true` through a
+      completed confirmation mission — so `sovereigntyTradeEnabled`'s lighting
+      condition reads **SP-B + SP-B2 + ES-4 landed**. ES-5/ES-6 follow; ES-7
+      lands after IN-5 (the knowledge desk exists). Flag `espionageEnabled`
+      requires `errandSpineEnabled` lit first; its axis-fed arms degrade
+      DECLARED while `believedConditionsEnabled` is dark.
+    - ⚠️ **ES IS JOINT WITH THE SPINE'S BELIEF-LEGS WAVES (SP-B/SP-B2)** — the
+      owner's stated reason the program exists is that spies are the SOURCE of
+      the tier/route/trajectory legs about non-neighbours. A market lit on leg
+      SURFACES without distant SOURCES would clear only rumour-range holdings:
+      the CR-WR10-H dead-lighting trap one level up. Lighting stays owner-held
+      at the terminal soak regardless (§4), so citing ES-4 delays nothing real.
+    - **The ordering authority is `docs/DESIGN_FP_ARCHITECTURE.md` §5** (phase 3,
+      INFORMATION), and the per-wave spec is the espionage volume's §4; this row
+      is the lane pointer, never the ordering authority. Chair rulings
+      **CR-ES-1..CR-ES-6** (FABLE_VALIDATION_QUEUE.md, the integration-fold
+      block) bind here, and so do CR-FP-12 (ES-0's early motion DECLINED) and
+      CR-ES-3's gate. ⚠️ **CR-ES-6 CARRIES A SAME-COMMIT OBLIGATION ON A WAVE
+      THAT RIDES THIS ROW:** mounting `espionageGauntlet.js` at **ES-2** ADDS
+      row **E15** (spy-dwell detection) to the WAYFARE volume's §4 closed
+      encounter-pairs table IN ES-2's OWN COMMIT — a resolver that lands
+      without its row is the hole the WY-6 walker exists to close, and WY-6 (a
+      phase later, row 18b) is BORN SEEING FIFTEEN. ⚠️ **CR-ES-3's gate is the
+      RETARGET, not the ruling:** until the `warSeatBooks` vocabulary
+      unification lands, ES-2 ships the captor-leniency arm DARK, declared not
+      silent.
 14. TRADE TR-1 → TR-9 (DESIGN_FP_TRADE.md) — ⚠️ CR-2 binds at TR-4: FIRST
     consolidate the applyWorldPulse.js:322 second storageMonths fold into
     generosityUpdates.applyFoodDeltasToUpdates behind a no-behavior-change pin
@@ -73,6 +122,37 @@ volumes corrected @ 36862650 + fdf43790):
     ⚠️ CW-0 (the registry + walkers) does NOT wait for this slot: it lands
     EARLY — with the FIRST wave that lands a cross-layer read — and grows under
     the same-commit registry obligation the walker asserts.
+18b. **THE WAYFARE ENGINE LANE (WY)** — the owner-amendment volume of 2026-08-05
+    (directive sections 1 through 2l absorbed). This lane is NOT a block: its
+    waves INTERLEAVE into the FP order, and the interleave is FP §5's to hold.
+    The positions the volume's §5b fixes, recorded here so no lane builds them
+    out of order: **WY-1** at the PHASE 1 tail, after SP-E (spine
+    infrastructure, data-gated dark by `spatialDigest.kmScale`; the J-D11(b)
+    cross-reference is DISCHARGED-AND-AMENDED — see the war volume's two
+    amended sites) · **WY-2** in PHASE 3 immediately BEFORE ES-1, so the
+    manipulation seam composes (if the ES fold has not landed, WY-2 slots after
+    IN-3) · **WY-3** in PHASE 4 immediately BEFORE TR-4 (grain inherits the
+    caravan body; TR-4 slice 1's serialize/regen/undo/import round-trip pin
+    LANDS AT WY-3 — TR-4 VERIFIES and extends it to the grain rows, never
+    re-lands it) · **WY-6** after TR-4 · **WY-11** after TR-9 · **WY-4** in
+    PHASE 6 immediately after POP-1 (shared `columnOf` amendments compose by
+    order) · **WY-5** after WY-4. Nine conditional fields on EXISTING records,
+    zero new top-level keys, zero new ledger keys; ⛔ the §2a owner sign-off
+    table gates the field-minting waves one row at a time — an unsigned row
+    stalls exactly one wave, never the program, and **F9 (`supplyCargo`) is
+    UNSIGNED: no build until the owner signs it.**
+    ⚠️ **THE PREFIX ADMISSION (both volumes).** ES joins
+    `CHARTERED_VOLUME_PREFIXES` as the TENTH prefix and WY as the ELEVENTH, each
+    in the SAME commit as its own first cross-layer registry row.
+    `tests/domain/couplingRegistry.test.js` pins the closed set TWICE — the
+    `CHARTERED_VOLUME_PREFIXES` const the id-shape regex is built FROM, and the
+    literal `toEqual([...])` list inside the shape describe — and the admission
+    commit edits BOTH (editing only the const leaves the toEqual red; editing
+    only the toEqual leaves the regex rejecting the new ids). Two further
+    LEGIBILITY sites in the same file — the enclosing test's own count-bearing
+    title and the CLOSED-alternation comment above the describe — are repaired
+    in that same commit, so the file never carries a count it has outgrown.
+    Navigate by SYMBOL.
 
 ## §2 LANE B — THE DOSSIER + PRODUCT SURFACES (parallel to Lane A; different
 ## files; pathspec discipline keeps the lanes from colliding)
@@ -117,6 +197,17 @@ volumes corrected @ 36862650 + fdf43790):
       `/how-to` is a retired redirect and `?tab=guide` never existed. The three
       real targets are `/about/what-this-is`, `/about/guide`, `/founders`. Read
       that amendment before building LD-5, exactly as with the Messages seam.
+21b. **THE WAYFARE SURFACES** (DESIGN_WAYFARE_ARCHITECTURE §5 LANE S) — its own
+    named sub-block beside the LD ladder: "WY surfaces: WY-0 (early opener —
+    independent, buildable now) → WY-7 → WY-8 → WY-9 → WY-10 (serial;
+    WY-10 additionally waits on engine WY-3/WY-4; WY-7/WY-8 require a quiet
+    window on WarFaithTab/treatyDocument/liveWorld — CHECK-GIT-FIRST)." The
+    LD ladder's own size-ratchet gate binds: no WY surface item grows a
+    host file at ceiling; every consumption is a lazy tab-body leaf. The WY-8
+    row gains "(slice 8a is ENGINE — the 2k supply train, F9,
+    `armySupplyEnabled`; it additionally waits on engine WY-3 and takes the
+    commodityFlow quiet window; 8b is the surface mirror as before)."
+    ⛔ Slice 8a does not build until the owner signs the F9 `supplyCargo` row.
 22. **THE RECEIPT-POOL ANNEXES ARE PRE-AUTHORED (2026-08-02)** — docs/content/
     RECEIPT_POOLS_{WAR,TRADE,FAITH,POPULATIONS,INFORMATION,GRAMMAR,INTERIOR,
     COUPLINGS}.md: 676 phrased kinds, ~3,000 angle-distinct variants, authored
