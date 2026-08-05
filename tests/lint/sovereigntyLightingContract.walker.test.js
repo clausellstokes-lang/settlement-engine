@@ -51,83 +51,68 @@
  *   3. THE SUITE MUST RUN — a file is refused WHOLE unless every suite it opens is one
  *      this walker can PROVE runs. Line scanning cannot see block nesting, so refusing
  *      the file is the only honest verdict available for a title a parked suite would
- *      never reach. REPAIRED 2026-08-05 — THE FIRST CUT HAD THIS DOOR'S POLARITY
- *      BACKWARDS and shipped the very forgery this file exists to close, one spelling
- *      narrower. It refused a file only where one line matched BOTH a `describe(` opener
- *      AND the literal dotted `.skip`/`.todo`/`.failing`, so `describe.skipIf(true)`,
- *      `describe['skip']`, `describe . skip` and `xdescribe` were every one read as a LIVE
- *      suite and their inner titles credited. THREE OF THE FOUR ARE LIVE FORGERIES,
- *      executed end to end at the broken commit: a file whose only pin sat inside each of
- *      `describe.skipIf(true)`, `describe['skip']` and `describe . skip` reported
- *      `Test Files 1 skipped (1) / Tests 1 skipped (1)` — nothing ran, the pin's body was
- *      a deliberate `expect(1).toBe(2)` — while the instrument read SATISFIED / missing [].
- *      `xdescribe` is the fourth and is NOT one, and the difference is recorded rather
- *      than smoothed over: vitest exports no `xdescribe` and defines no such global, so
- *      that file dies with `xdescribe is not a function` (imported) or `is not defined`
- *      (bare) instead of quietly crediting. It is refused here as defence in depth against
- *      a jest-compat global or a local shim, not as a hole that was open. The door is now
- *      a CLOSED ALLOWLIST: a suite runs
- *      only when it is spelled bare (`describe(` / `suite(`) or carries a tightly-dotted
- *      chain drawn entirely from `RUNNING_SUITE_MODIFIERS`. An `x`/`f` prefix, a computed
- *      member, a space-broken member, a CONDITIONAL modifier (this estate spells
- *      `describe.runIf` 117 times and `describe.skipIf` 3 — those suites genuinely may
- *      not run) and `only` (which runs its own block by PARKING its siblings) are all
- *      refused. 92 of the estate's 2,314 test files park under this rule; none of them
- *      carries a marker, and the SP-B2 carrier is not among them.
- *      REPAIRED A SECOND TIME, SAME DAY, SAME DOOR — and the second defect was the
- *      CORRECTION's, not the original's. The allowlist above was right; what was wrong is
- *      that it read PHYSICAL lines. `liveTitlesIn` split on '\n' before the detector ran,
- *      so the whitespace tolerance the detector advertises could never see a NEWLINE, and
- *      the same four spellings walked back in with one inside them: `describe`<NL>`.skip(`,
- *      `describe.`<NL>`skip(`, `describe.skipIf`<NL>`(true)(`, `describe`<NL>`['skip'](`,
- *      and `describe`<NL>`.only(` beside a live suite. All five read SATISFIED at that
- *      commit and all five are LIVE forgeries under vitest. THREE OF THE FIVE ARE ALSO
- *      ESLINT-CLEAN — the `.skip`, the trailing-dot and the `.only` spellings all exit 0;
- *      only the `(true)` and `['skip']` continuations trip `no-unexpected-multiline` — so
- *      no other gate in this repository would have stopped them. TWO MORE of the same
- *      shape were found while closing these and are closed with them, both eslint-clean:
- *      a line-broken `it`<NL>`.only(`, and a head separated from its modifier by BLANK
- *      LINES, which is one expression to JavaScript and would have walked through the
- *      four-line budget this rejoin was first drafted with. `suiteScanLines` rejoins a
- *      dangling head before door 3 reads it — additively, so the physical lines are still
- *      scanned and the rejoin can only ever add refusals.
+ *      never reach. REPAIRED THREE TIMES ON 2026-08-05, and the fourth cut — this one —
+ *      stops repairing SPELLINGS and states a POLARITY instead, because the first three
+ *      each closed the spellings that had been found and each was falsified within hours
+ *      by a spelling nobody had thought of. Cut one refused a file only where ONE line
+ *      matched both a `describe(` opener and a literal dotted `.skip`/`.todo`/`.failing`,
+ *      so `describe.skipIf(true)`, `describe['skip']`, `describe . skip` and `xdescribe`
+ *      were read as LIVE suites. Cut two fixed that with a closed allowlist but read
+ *      PHYSICAL lines, so the same spellings walked back in with a newline inside them.
+ *      Cut three welded a dangling head before scanning — but its head detector and its
+ *      opener detector shared the character class `[^\]\n]`, so an UNTERMINATED computed
+ *      member (`describe[` ending a line) was invisible to both, and TEN more spellings
+ *      walked through. NINE of those ten join the earlier rounds in the eighteen-spelling
+ *      escape battery below; the tenth — a comment written between the members — sits in
+ *      the polarity arm beside the routes that are not spellings at all.
  *   4. SELF-EXCLUSION — this walker never vouches for itself (it names every marker by
  *      import). Retained, and pinned as belt-and-braces rather than as the thing holding
  *      the line: door 1 already refuses every position this file spells a marker in.
  *
- * WHERE THAT LEAVES THE FAIL-CLOSED CLAIM — THIRD STATEMENT, and the two before it were
- * both too wide. The first ("EVERY REFUSAL FAILS CLOSED … can never manufacture a lit
- * market") was false for four one-line spellings. The second quantified over "the suite
- * vocabulary this walker recognises" and was false for five LINE-BROKEN spellings of that
- * same vocabulary. So this one is written as two separate statements — what the VERDICT
- * does, and what the DETECTOR can see — because conflating them is precisely how the last
- * two went wrong.
+ * ── WHAT DOOR 3 CLAIMS — A POLARITY, NOT A REACH (fourth statement, chair ruling) ──
+ * The three statements before this one were all of the same KIND: they described what the
+ * detector could SEE, and each was falsified by a spelling outside that description. A
+ * claim of the form "I recognise every parked spelling" is refuted by inventing one, and
+ * the forgery game is unwinnable while the claim has that shape. So this one is about
+ * DIRECTION rather than reach, and it is what the code now implements:
  *
- *   THE VERDICT, and this part is structural rather than a list. Wherever `SUITE_OPENER`
- *   matches, `suiteParksTheFile` PARKS unless the opener is positively proven to run —
- *   bare, or every dot-token drawn from the closed `RUNNING_SUITE_MODIFIERS`. There is no
- *   spelling to enumerate and no spelling to miss: an unrecognised modifier parks because
- *   parking is the DEFAULT, not because it appears on a list. Doors 1 and 2 fail closed
- *   the same way, by construction — an unrecognised modifier breaks the quote anchor the
- *   title read is built on (`it.skipIf(true)('M', …)` and `xit('M', …)` simply fail to
- *   match) — and a line-broken TEST head loses its title rather than gaining one.
+ *   ON ANY LINE WHERE A SUITE-OPENER TOKEN APPEARS — `describe` or `suite`, with or
+ *   without an `x`/`f` prefix, however it is punctuated afterwards — THE FILE IS PARKED
+ *   UNLESS THAT LINE RESOLVES, ON ITS OWN LOGICAL LINE AND AT ITS OWN LINE START, TO A
+ *   HEAD THIS WALKER POSITIVELY RECOGNISES AS RUNNING. Recognition credits; everything
+ *   else parks; there is no third bucket. This file therefore makes NO claim to recognise
+ *   every spelling a parked suite can be written in, and inventing a new one CANNOT
+ *   falsify it, because an unrecognised spelling is a REFUSAL. What would falsify it is a
+ *   suite this walker CREDITS that vitest does not RUN.
  *
- *   THE DETECTOR'S REACH, which is where both overstatements actually lived, and it is a
- *   LEXICAL boundary: door 3 sees a suite head that BEGINS ITS OWN LOGICAL LINE, spelled
- *   `describe` or `suite` with an optional `x`/`f` prefix, with members written dotted,
- *   computed, whitespace-broken, or — since this repair — broken across physical lines.
- *   Anything a line reader cannot resolve to that is OUTSIDE the claim, and three shapes
- *   are named here rather than left to be discovered a third time: a suite opened through
- *   ANOTHER IDENTIFIER (`const d = describe.skip; d('outer', …)`, a `describeMatrix(…)`
- *   factory); an opener SHARING ITS LINE with other code (`if (x) describe.skip(…)`,
- *   `}); describe.skip(…)`), which the `^\s*` anchor does not reach; and a modifier
- *   INTERRUPTED BY A COMMENT — a block comment written between `describe` and its
- *   `.skip(`, which the chain alternation tolerates whitespace between but not comments.
- *   Each is a residual by construction rather than a spelling that was missed, and each
- *   is a real forgery route if it ever appears. PREVALENCE MEASURED, all three: zero
- *   occurrences across the 2,314 test files, the same standing the nine closed spellings
- *   had — so the tree reading is not wrong today, and these are latent, named, and
- *   re-measurable by the census in this file's landing commit.
+ * The positive side is a CLOSED grammar, `RUNNING_SUITE_HEAD`: bare `describe(` / `suite(`,
+ * or a chain whose every member is spelled with a tight dot and drawn from
+ * `RUNNING_SUITE_MODIFIERS`, at the start of its own logical line. Nothing else has a route
+ * to credit. Doors 1 and 2 fail closed the same way and by the same construction — an
+ * unrecognised modifier breaks the quote anchor the title read is built on, so
+ * `it.skipIf(true)('M', …)` and `xit('M', …)` simply fail to match — and a line-broken TEST
+ * head loses its title rather than gaining one.
+ *
+ * WHERE A CREDITED NON-RUNNING SUITE COULD STILL COME FROM, stated as the falsifier class
+ * rather than as a reach boundary, because that is the only thing left that can break the
+ * sentence above. It is a suite opened through an IDENTIFIER THAT IS NOT A SUITE WORD — an
+ * alias (`const d = describe.skip; d('outer', …)`) or a factory (`describeMatrix(…)`) —
+ * because the CALL SITE carries no suite-opener token for any line reader to admit, so the
+ * polarity never gets a chance to apply. THE ALIAS HALF IS NOW CLOSED, at the BINDING rather
+ * than at the call, since that is where the suite word is still visible
+ * (`SUITE_VALUE_BOUND`); and closing it corrected a
+ * measurement the previous cut got wrong: it called this residual prevalence-zero, and the
+ * estate has ONE — `tests/security/customContentLockOrder.postgres.test.js`, whose single
+ * title was CREDITED while its suite is `describe.skip` wherever `ROOT_DATABASE_URL` is
+ * unset. That file is the ONE census move this repair makes, 92 parked to 93. THE FACTORY
+ * HALF REMAINS OPEN and cannot be closed by a line reader at all: a name bound to a suite
+ * word through a helper module, an object property or a function return is invisible to
+ * text. NO PREVALENCE FIGURE IS CLAIMED FOR IT, and that refusal is deliberate — its
+ * prevalence is exactly what a text scanner cannot measure, which is what makes it the
+ * residual rather than a spelling. What IS measured, and is all that honestly can be: no
+ * estate file binds a bare suite word to a new name by declaration (zero across the 2,314
+ * files), and the one binding that did exist is the modified-value form this repair parks.
+ * This is the thing to look for first if the polarity above is ever broken again.
  *
  * ── WHAT THIS FILE DELIBERATELY IS NOT ──────────────────────────────────────────
  * It is not a second gate scanner. `ENGINE_GATED_VIRTUAL_RULE_KEYS` is the estate's own
@@ -184,14 +169,61 @@ const TITLE_LINE = /^\s*(?:describe|test|it)((?:\.[A-Za-z$_][\w$]*)*)\s*\(\s*(['
 const NON_RUNNING = /\.(?:skip|todo|failing)\b/;
 
 /**
- * DOOR 3's DETECTOR — any line that opens a suite, in any access form this estate can
- * spell: an `x`/`f` prefix (group 1), the base word (group 2), and everything between it
- * and the opening paren (group 3 — dotted members, computed members, whitespace anywhere).
- * Deliberately GENEROUS, because it is only the detector: `suiteParksTheFile` below is the
- * verdict, so a spelling this misses is the ONLY way a parked suite can escape, and a
- * spelling it over-catches costs a file nothing but the right to carry a marker.
+ * DOOR 3's ADMISSION TEST — the lines this door judges at all. A suite-opener token at the
+ * head of its own line: `describe` or `suite`, with or without an `x`/`f` prefix, and then
+ * WHATEVER punctuation follows — a member dot, a computed bracket, the call paren, a
+ * comment, or nothing at all because the head runs on to the next line. Admission is not a
+ * verdict. Everything admitted here PARKS unless `RUNNING_SUITE_HEAD` below can positively
+ * classify it, which is the whole polarity: this regex may be as generous as it likes,
+ * because generosity now costs a file marker-carrying rights rather than buying it credit.
  */
-const SUITE_OPENER = /^\s*(x|f)?(describe|suite)((?:\s*\.\s*[A-Za-z$_][\w$]*|\s*\[[^\]\n]*\])*)\s*\(/;
+const SUITE_TOKEN_LINE = /^\s*(?:x|f)?(?:describe|suite)\s*(?:[.[(/]|$)/;
+
+/**
+ * …and the same token standing after a statement terminator, admitted on the PARK side
+ * ALONE, because credit is line-start-only. `}); describe.skip(…)` and
+ * `if (x) describe.skip(…)` — two of the three shapes the previous cut NAMED as residuals
+ * it could not reach — park the file here. Their prevalence is zero across the estate
+ * (measured), so this closes a latent route at no cost to any file's reading.
+ */
+const SUITE_TOKEN_MIDLINE = /[;})]\s*(?:x|f)?(?:describe|suite)\s*(?:[.[(/]|$)/;
+
+/**
+ * DOOR 3's ALIAS ARM — a suite word whose MODIFIED value is handed to a name instead of
+ * called: `const d = cond ? describe : describe.skip;`. A line reader cannot follow `d` to
+ * its use, so the honest verdict for the whole file is refusal.
+ *
+ * THIS ONE IS NOT LATENT, AND THE PREVIOUS CUT SAID IT WAS. That cut named "a suite opened
+ * through ANOTHER IDENTIFIER" as a residual with "zero occurrences across the 2,314 test
+ * files". MEASURED HERE AND FALSE: `tests/security/customContentLockOrder.postgres.test.js`
+ * spells exactly that on its line 44, and its one title — `two backends resolve the same
+ * command id without 40P01` — was CREDITED at the previous commit, while the suite holding
+ * it is `describe.skip` on every machine with no `ROOT_DATABASE_URL`. That file is the ONE
+ * census move this repair makes, 92 parked to 93, and it is a correction rather than a
+ * cost. A BARE value (`RuleTester.describe = describe;`, four estate files) is deliberately
+ * NOT caught: it can only ever alias a suite that runs, so parking it would buy nothing.
+ */
+const SUITE_VALUE_BOUND = /(?:^|[^\w$.'"`])(?:x|f)?(?:describe|suite)(?:\s*\.\s*[A-Za-z$_][\w$]*)+\s*(?:[;,:)\]}]|$)/;
+
+/**
+ * …and the two arms above are the only ones in this file that read a line ANYWHERE rather
+ * than at its start, so this is what keeps them out of the estate's prose. Every other door
+ * is `^\s*`-anchored and a comment could never reach it; these two can, and a header
+ * sentence ending `…exercised in the domain suite. This` would otherwise park a file for a
+ * full stop. It removes no refusal that existed before it: an anchored door never matched a
+ * comment line in the first place.
+ */
+const COMMENT_LINE = /^\s*(?:\/\/|\/\*|\*)/;
+
+/**
+ * DOOR 3's POSITIVE GRAMMAR — the ONLY shape that credits, and it is CLOSED. A bare
+ * `describe(` / `suite(`, or a chain whose every member is spelled with a TIGHT dot and
+ * drawn from `RUNNING_SUITE_MODIFIERS`, at the start of its own logical line. An `x`/`f`
+ * prefix, a computed member, a space-broken member, a comment between members and a
+ * conditional modifier are not refused by clauses that enumerate them — the grammar simply
+ * CANNOT EXPRESS THEM, so they have nowhere to land but the park side.
+ */
+const RUNNING_SUITE_HEAD = /^\s*(?:describe|suite)((?:\.[A-Za-z$_][\w$]*)*)\s*\(/;
 
 /**
  * DOOR 3's CLOSED ALLOWLIST — the only suite modifiers read as RUNNING. Each of these runs
@@ -203,14 +235,19 @@ const SUITE_OPENER = /^\s*(x|f)?(describe|suite)((?:\s*\.\s*[A-Za-z$_][\w$]*|\s*
 const RUNNING_SUITE_MODIFIERS = Object.freeze(['concurrent', 'sequential', 'shuffle', 'each', 'for']);
 
 /**
- * The chain's modifier tokens, split on DOTS ALONE and on nothing else. That is the whole
- * trick, and it is why no second "is this tightly dotted?" clause appears below: a
- * computed member (`['skip']`), a space-broken member (` . skip`) and an empty segment all
- * surface as tokens that are NOT bare identifiers, and `RUNNING_SUITE_MODIFIERS` holds
- * nothing but bare identifiers — a property this file PINS rather than assumes, since it
- * is the only thing standing between a non-dotted access and the allowlist. A separate
- * dotted-chain guard was written first and then removed: no input could make it change the
- * verdict, and a guard that cannot fire is this program's own named hazard class.
+ * The chain tokens of a head the GRAMMAR has already accepted, split on its dots. The
+ * previous cut leaned on this split to refuse computed and space-broken access, reasoning
+ * that such an access could never produce a bare identifier; `RUNNING_SUITE_HEAD` now
+ * refuses those forms outright by being unable to MATCH them, so on every input this walker
+ * can receive, the split only ever sees tight dotted identifiers.
+ *
+ * WHICH MAKES THE TWO A DEFENCE-IN-DEPTH PAIR OVER ONE JOB, AND THAT IS RECORDED RATHER
+ * THAN LEFT TO BE DISCOVERED. Opening either lock alone changes NO verdict — measured:
+ * widening the grammar to capture a computed member leaves the split refusing the bracketed
+ * token, and teaching the split to unwrap brackets leaves the grammar unable to capture one;
+ * both mutants ran 21 passed. Only opening BOTH credits `describe['concurrent'](`, and that
+ * joint mutant reds the allowlist arm. So neither is pinned alone below, because neither CAN
+ * be; they are pinned as the pair they are.
  */
 const chainModifiers = (chain) => chain.replace(/^\./, '').split('.');
 
@@ -222,84 +259,105 @@ const chainModifiers = (chain) => chain.replace(/^\./, '').split('.');
 const FOCUSED = /^\s*(?:f(?:describe|it)\s*\(|(?:describe|suite|test|it)\s*[.[][^(\n]*\bonly\b)/;
 
 /**
- * DOOR 3's VERDICT FOR ONE LINE — `true` when this line forces the whole file to be
- * refused. FAIL-CLOSED BY CONSTRUCTION: a detected suite opener is parked unless it is
- * positively proven to run, so an unrecognised spelling parks rather than credits. A line
- * that opens no suite at all is not this door's business and returns `false`.
+ * AN UNRESOLVED HEAD — a line that is NOTHING BUT a suite or test head so far: the
+ * identifier, whatever members it has reached, and no `(` yet. It is NOT a third verdict
+ * bucket; it is the statement that this physical line is not yet a LOGICAL line, so its
+ * verdict is owed by the join below rather than by the line itself.
+ *
+ * UNDER THE POLARITY THIS IS AN ESCAPE HATCH, NOT A DETECTOR, and the direction matters
+ * enough to state: deferring is the ONLY way a line carrying a suite-opener token avoids an
+ * immediate park, so this pattern wants to be as NARROW as accuracy allows rather than as
+ * wide as possible. It exists to stop `describe`<NL>`('outer'` and
+ * `describe`<NL>`.concurrent(` — two heads that really do run — from being parked for
+ * arriving in pieces. Nothing else needs it.
+ *
+ * SO THE VERIFIER'S PROPOSED REMEDY IS DELIBERATELY NOT TAKEN, and the reason is executed
+ * rather than argued. The bracket family's root cause was that this pattern required its
+ * computed members CLOSED (`\[[^\]\n]*\]`) while the opener detector it fed shared the same
+ * character class, so `describe[` ending a line was invisible to both. Widening this tail to
+ * accept an unterminated member does close that family — inside the OLD architecture. Under
+ * the polarity it changes no verdict at all: `describe[` now carries a suite-opener token
+ * that the running grammar cannot classify, so it parks at ADMISSION, and a deferral that
+ * begins with a bracket can never rejoin into anything `RUNNING_SUITE_HEAD` matches.
+ * MEASURED, not reasoned: the widened tail was planted here and the whole battery — all
+ * eighteen escapes, the bracket family included — stayed green at 21 passed. A widening that
+ * cannot change a verdict is a guard that cannot fire, which is this program's own named
+ * hazard class, so the narrow tail stays and the polarity carries the family.
+ */
+const UNRESOLVED_SUITE_HEAD = /^\s*(?:x|f)?(?:describe|suite|test|it)(?:\s*\.\s*[A-Za-z$_][\w$]*|\s*\[[^\]\n]*\])*\s*\.?\s*$/;
+
+/**
+ * DOOR 3's VERDICT FOR ONE LOGICAL LINE — `true` when this line forces the whole file to be
+ * refused. THE POLARITY IN CODE, and the order of the clauses is the argument: prose is
+ * excluded, the two file-scope facts (focus, an aliased modifier) park outright, an
+ * unresolved head defers to its join, a token after a terminator parks because credit is
+ * line-start-only, and only then does a line that carries a suite-opener token get its ONE
+ * chance to be positively recognised. Fall out of that grammar by any route — an unknown
+ * modifier, a computed member, a prefix, a comment, punctuation nobody has thought of yet —
+ * and the file parks. A line carrying no suite-opener token at all is not this door's
+ * business and returns `false`.
  * @param {string} line @returns {boolean}
  */
 function suiteParksTheFile(line) {
+  if (COMMENT_LINE.test(line)) return false;
   if (FOCUSED.test(line)) return true;
-  const m = SUITE_OPENER.exec(line);
-  if (!m) return false;
-  if (m[1]) return true;            // xdescribe / fdescribe — never a running suite
-  if (m[3] === '') return false;    // bare `describe(` / `suite(` — the one zero-modifier form
-  return !chainModifiers(m[3]).every((mod) => RUNNING_SUITE_MODIFIERS.includes(mod));
+  if (SUITE_VALUE_BOUND.test(line)) return true;
+  if (UNRESOLVED_SUITE_HEAD.test(line)) return false;
+  if (SUITE_TOKEN_MIDLINE.test(line)) return true;
+  if (!SUITE_TOKEN_LINE.test(line)) return false;
+  const m = RUNNING_SUITE_HEAD.exec(line);
+  if (!m) return true;              // a suite token this grammar cannot classify — PARK
+  if (m[1] === '') return false;    // bare `describe(` / `suite(` — the one zero-modifier form
+  return !chainModifiers(m[1]).every((mod) => RUNNING_SUITE_MODIFIERS.includes(mod));
 }
 
 /**
- * DOOR 3's PHYSICAL-LINE REPAIR — the tolerance the detector advertised but could never
- * reach, and the hole that repair left behind. `liveTitlesIn` splits on '\n' BEFORE
- * `SUITE_OPENER` ever runs, so the `\s*` the detector spells between its members could
- * not see the one whitespace character that matters: a NEWLINE. FIVE spellings inside
- * the recognised vocabulary walked straight through that gap and were CREDITED at the
- * previous commit — `describe`<NL>`.skip(`, `describe.`<NL>`skip(`, `describe.skipIf`<NL>`(true)(`,
- * `describe`<NL>`['skip'](` and `describe`<NL>`.only(` — every one of them a LIVE forgery,
- * executed: vitest reported `Tests 1 skipped (1)` for the first four and, for the fifth,
- * ran the focused sibling while SKIPPING the marker's own suite (`1 passed | 1 skipped`),
- * all while the instrument read `SATISFIED / satisfiable true / missing []`.
+ * DOOR 3's FILE VERDICT — every physical line judged on its own, PLUS the continuation-
+ * joined form of every line that dangles a head. Surrounding whitespace is dropped as the
+ * lines are welded, so `describe`<NL>`  .concurrent(` rejoins as `describe.concurrent(` and
+ * is recognised as running instead of parking on a chain token that is nothing but spaces.
  *
- * THE REPAIR — a line that is NOTHING BUT a suite or test head (the identifier, whatever
- * members it has reached, and no `(` yet) is REJOINED with the lines that follow it, and
- * the joined forms are ADDED to door 3's scan rather than replacing it.
+ * ADDITIVE IS THE WHOLE SAFETY ARGUMENT. The physical lines are judged exactly as they were
+ * before any welding, so the join can only ever ADD refusals: it cannot silently UN-park a
+ * file the way a consuming join could, by welding a bare `describe` onto the real
+ * `describe.skip(` opener beneath it and dissolving that file's refusal. That is a
+ * fail-OPEN the repair itself would have introduced, and it is PINNED below rather than
+ * asserted here.
  *
- * ADDITIVE IS THE WHOLE SAFETY ARGUMENT, and it is why this is a join and not a rewrite
- * of the split. The physical lines are still scanned exactly as before, so rejoining can
- * only ever ADD refusals: it cannot silently UN-park a file the way a replacing join
- * could (a prose line ending in the word `describe` would swallow the real
- * `describe.skip(` opener on the line below it and dissolve that file's refusal — a
- * fail-OPEN introduced by the repair itself), and it cannot touch doors 1 and 2, which
- * keep reading physical lines and keep their line anchors where they belong.
- *
- * The head detector is anchored at line start through whitespace, exactly as
- * `SUITE_OPENER` and `FOCUSED` are, which is not a coincidence: a joined line can only
- * park a file if its FIRST physical line already began with a suite identifier, so
- * anchoring here rejoins precisely the lines that can matter and cannot fire on prose.
- * MEASURED: zero of the estate's 2,314 test files hold such a line today, so the join
- * changes no file's verdict on this tree — it closes a latent hole, and the census below
- * is unmoved at 92.
- */
-const DANGLING_SUITE_HEAD = /^\s*(?:x|f)?(?:describe|suite|test|it)(?:\s*\.\s*[A-Za-z$_][\w$]*|\s*\[[^\]\n]*\])*\s*\.?\s*$/;
-
-/**
- * DOOR 3's SCAN SET — the physical lines, PLUS the continuation-joined form of every
- * line that dangles a head. Surrounding whitespace is dropped as the lines are welded, so
- * `describe`<NL>`  .concurrent(` rejoins as `describe.concurrent(` and stays in the
- * allowlist instead of parking on a chain token that is nothing but spaces.
- *
- * BLANK LINES ARE STEPPED OVER RATHER THAN ENDING THE CHASE, and NO line budget bounds
- * it, because both of those are how a bounded chase leaks: `describe`, five blank lines,
+ * BLANK LINES ARE STEPPED OVER RATHER THAN ENDING THE CHASE, and NO line budget bounds it,
+ * because both of those are how a bounded chase leaks: `describe`, five blank lines,
  * `.skip(` is one expression to JavaScript, and a limit of four would have handed that
- * spelling straight back the hole this repair closes. Nothing here can run away — the
- * head only GROWS on a line that contributes text, and the moment the accumulated text
- * stops being a bare dangling head the walk breaks. On this tree the inner loop never
- * executes at all: no test file holds a dangling head.
- * @param {string[]} lines @returns {string[]}
+ * spelling straight back the hole this join closes. Nothing here can run away — the head
+ * only GROWS on a line that contributes text, and the moment the accumulated text stops
+ * being an unresolved head the walk breaks.
+ *
+ * A HEAD THAT NEVER RESOLVES PARKS, which is the last hole the polarity would otherwise
+ * leave: a file ending in `describe[` reaches the end of its lines still unresolved, and a
+ * scan that only judged resolved forms would credit it by saying nothing at all.
+ * @param {string[]} lines @returns {boolean}
  */
-function suiteScanLines(lines) {
-  const scan = [...lines];
+function suitesParkTheFile(lines) {
   for (let i = 0; i < lines.length; i += 1) {
-    if (!DANGLING_SUITE_HEAD.test(lines[i])) continue;
+    if (suiteParksTheFile(lines[i])) return true;
+    // No COMMENT_LINE clause here, deliberately: `UNRESOLVED_SUITE_HEAD` and `COMMENT_LINE`
+    // are both anchored at `^\s*` and demand disjoint next characters, so a comment line can
+    // never dangle a head. A clause guarding against it could not fire, and a guard that
+    // cannot fire is this program's own named hazard class.
+    if (!UNRESOLVED_SUITE_HEAD.test(lines[i])) continue;
     let head = lines[i].trim();
+    let resolved = false;
     for (let j = i + 1; j < lines.length; j += 1) {
       const next = lines[j].trim();
       if (next === '') continue;
       head = `${head}${next}`;
-      scan.push(head);
-      if (!DANGLING_SUITE_HEAD.test(head)) break;
+      if (UNRESOLVED_SUITE_HEAD.test(head)) continue;
+      resolved = true;
+      if (suiteParksTheFile(head)) return true;
+      break;
     }
+    if (!resolved && SUITE_TOKEN_LINE.test(lines[i])) return true;
   }
-  return scan;
+  return false;
 }
 
 /**
@@ -311,10 +369,10 @@ function suiteScanLines(lines) {
  */
 function liveTitlesIn(src) {
   const lines = src.split('\n');
-  // Door 3 reads the physical lines AND their continuation-joined forms. Doors 1 and 2
+  // Door 3 judges the physical lines AND their continuation-joined forms. Doors 1 and 2
   // read the physical lines alone: a line-broken TEST head simply loses its title, which
   // is the fail-closed direction and is pinned as such below.
-  if (suiteScanLines(lines).some((line) => suiteParksTheFile(line))) return [];
+  if (suitesParkTheFile(lines)) return [];
   const titles = [];
   for (const line of lines) {
     const m = TITLE_LINE.exec(line);
@@ -505,21 +563,36 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     expect(carries(liveSuite)).toBe(true);
   });
 
-  test('DOOR 3 REFUSES THE NINE ESCAPE SPELLINGS — the forgeries two cuts credited', () => {
-    // THE REPAIRED DEFECT, IN TWO ROUNDS. Door 3's first cut refused a file only where ONE
-    // line matched both a `describe(` opener AND a literal dotted `.skip`/`.todo`/
-    // `.failing`; its second cut fixed that but still read PHYSICAL lines, so the same
-    // spellings walked back in with a newline inside them. Every spelling below was
-    // CREDITED at one of those two commits, and EIGHT of the nine are LIVE forgeries
-    // proven by running vitest on each — the body is a deliberate `expect(1).toBe(2)` that
-    // never executes, and vitest reported `Tests 1 skipped (1)` for seven of them and
-    // `1 passed | 1 skipped` for the line-broken `only` (the focused sibling ran; the
-    // marker's own suite did not) — while the instrument read SATISFIED / missing [].
-    // `describe.skipIf` is a first-class vitest API, not an exotic spelling.
-    // `xdescribe` is the ONE exception and is pinned as defence in depth rather than as a
-    // closed hole: vitest neither exports nor globals it, so that file dies loudly
-    // (`xdescribe is not defined`, `Test Files 1 failed`) instead of quietly crediting.
-    // Refusing it costs nothing and covers a jest-compat global or a local shim arriving.
+  test('DOOR 3 REFUSES THE EIGHTEEN ESCAPE SPELLINGS — three cuts of forgeries', () => {
+    // THE REPAIRED DEFECT, IN THREE ROUNDS, and the battery is kept whole rather than
+    // rewritten each time so that no earlier round can silently reopen. Every spelling
+    // below was CREDITED by the walker at the commit that preceded its round.
+    //
+    // ROUND ONE (four): door 3 refused a file only where ONE line matched both a
+    // `describe(` opener AND a literal dotted `.skip`/`.todo`/`.failing`.
+    // ROUND TWO (five): the allowlist was right but read PHYSICAL lines, so the same
+    // spellings walked back in with a newline inside them.
+    // ROUND THREE (nine): the dangling-head join closed round two, but its head detector
+    // and the opener detector shared the character class `[^\]\n]` — a bracket that spans
+    // a physical line matched NEITHER — so an unterminated computed member walked through
+    // both. This round is the reason the fail-closed claim is now a POLARITY: the hole was
+    // not a spelling anyone forgot, it was the same blindness in the detector and in the
+    // repair meant to compensate for it.
+    //
+    // GROUND TRUTH, EXECUTED for round three at the previous commit in a git-archive tree —
+    // the NINE below plus the comment-interrupted tenth pinned in the polarity arm, ten
+    // plants in all, each read through the walker's own code and each then run:
+    //   • ALL TEN read `SATISFIED / satisfiable true / missing []` at that commit.
+    //   • NINE OF THE TEN ARE LIVE FORGERIES — vitest reported `Tests 1 skipped (1)` with
+    //     the pin body a deliberate `expect(1).toBe(2)`, and for the bracketed `only`,
+    //     `Test Files 1 passed (1) | Tests 1 passed | 1 skipped (2)` (the focused sibling
+    //     ran, the marker's own suite did not).
+    //   • EIGHT OF THE TEN ARE ESLINT-CLEAN, exit 0 measured per file; only the two that
+    //     break the line BEFORE the bracket opens trip `no-unexpected-multiline`. So for
+    //     eight of them no other gate in this repository would have caught anything.
+    // The bracketed `xdescribe` is the one non-forgery and is pinned as defence in depth,
+    // exactly as bare `xdescribe` is: vitest neither exports nor globals it, so that file
+    // dies loudly (`Test Files 1 failed (1) | Tests no tests`) instead of quietly crediting.
     const body = `\n  it('${PROBE} — a pin that never runs', () => { expect(1).toBe(2); });\n});\n`;
     const escapes = {
       // ── ROUND ONE: one line, an unrecognised modifier ───────────────────────────
@@ -528,20 +601,33 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       'describe . skip (spaced)': `describe . skip ('parked by spaced member', () => {${body}`,
       xdescribe: `xdescribe('parked by the x prefix', () => {${body}`,
       // ── ROUND TWO: the SAME vocabulary, broken across PHYSICAL LINES ────────────
-      // The split-then-scan hole. All five read SATISFIED at the previous commit, and
-      // THREE OF THE FIVE — the `.skip`, the trailing-dot and the `.only` — are also
-      // ESLINT-CLEAN (exit 0, measured); only the `(true)` and `['skip']` continuations
-      // trip `no-unexpected-multiline`, so for three of them no other gate in this
-      // repository would have caught anything. They are closed by rejoining a dangling
-      // head, not by widening any regex — the detector was always generous enough about
-      // whitespace, it simply never saw the one whitespace character it was split on.
+      // The split-then-scan hole. All five read SATISFIED at that commit, and THREE OF THE
+      // FIVE — the `.skip`, the trailing-dot and the `.only` — are also ESLINT-CLEAN
+      // (exit 0, measured); only the `(true)` and `['skip']` continuations trip
+      // `no-unexpected-multiline`. Closed by rejoining a dangling head, not by widening a
+      // regex: the detector was generous enough about whitespace, it simply never saw the
+      // one whitespace character it was split on.
       'describe / newline / .skip(': `describe\n  .skip('parked across a line', () => {${body}`,
       'describe. / newline / skip(': `describe.\n  skip('parked across a line', () => {${body}`,
       'describe.skipIf / newline / (true)(': `describe.skipIf\n  (true)('parked across a line', () => {${body}`,
       "describe / newline / ['skip'](": `describe\n  ['skip']('parked across a line', () => {${body}`,
       'describe / newline / .only(': `describe\n  .only('focused across a line', () => {});\ndescribe('outer', () => {${body}`,
+      // ── ROUND THREE: A COMPUTED MEMBER BROKEN ACROSS PHYSICAL LINES ─────────────
+      // The bracket family. The first four walk the bracket down the file one piece at a
+      // time; the next two put the break INSIDE the member; the last three prove the route
+      // defeats the other doors too — an allowlisted modifier ahead of it, the `x` prefix,
+      // the `suite` word, and FOCUSED.
+      "describe / newline / [ / newline / 'skip' / newline / ](": `describe\n[\n'skip'\n]('bracket walked down', () => {${body}`,
+      "describe / newline / ['skip' / newline / ](": `describe\n['skip'\n]('bracket walked down', () => {${body}`,
+      "describe[ / newline / 'skip'](": `describe[\n'skip']('the attester spelling', () => {${body}`,
+      'describe.concurrent[ / newline / \'skip\'](': `describe.concurrent[\n'skip']('allowlisted, then a bracket', () => {${body}`,
+      'describe[ / newline / templated member](': `describe[\n\`skip\`]('a templated member', () => {${body}`,
+      "describe['sk' + / newline / 'ip'](": `describe['sk' +\n'ip']('a concatenated member', () => {${body}`,
+      "xdescribe[ / newline / 'each'](": `xdescribe[\n'each']('the x prefix plus a bracket', () => {${body}`,
+      "suite[ / newline / 'skip'](": `suite[\n'skip']('the suite word', () => {${body}`,
+      "describe[ / newline / 'only'](": `describe[\n'only']('focused elsewhere', () => {\n  it('a sibling that really runs', () => {});\n});\ndescribe('outer', () => {${body}`,
     };
-    expect(Object.keys(escapes), 'an escape spelling was dropped from the arm').toHaveLength(9);
+    expect(Object.keys(escapes), 'an escape spelling was dropped from the arm').toHaveLength(18);
     for (const [spelling, src] of Object.entries(escapes)) {
       expect(carries(src), `${spelling} was credited — door 3 fails OPEN for it`).toBe(false);
       // …and each really is a forgery rather than a source that says nothing: the refused
@@ -562,6 +648,74 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // rejoin hands the hole back.
     expect(carries(`describe\n\n\n\n\n  .skip('parked far below', () => {${body}`),
       'a head separated from its modifier by blank lines escaped the rejoin').toBe(false);
+    // A TAGGED-TEMPLATE continuation reaches no `(` at all, so the ONLY thing that refuses
+    // it is the polarity — an admitted token that the running grammar cannot classify.
+    expect(carries(`describe.skipIf\n\`t\`('tagged across a line', () => {${body}`),
+      'a tagged-template continuation escaped the polarity').toBe(false);
+    // A HEAD THAT NEVER RESOLVES, which is the ONE arm the EOF clause owns. `describe` on a
+    // line of its own is legal JavaScript and a legal deferral, so it escapes the immediate
+    // park — and if the file then ends, no joined form is ever classified. A scan that
+    // judged only RESOLVED forms would credit this file by saying nothing at all. Delete
+    // `if (!resolved …)` and this line reds while every other arm stays green, MEASURED.
+    expect(carries(`  it('${PROBE} — the pin above a head that never closes', () => {});\ndescribe\n`),
+      'a suite head that never closes was credited by silence').toBe(false);
+    // …and the bracketed shape of the same thing, which parks one door earlier — at
+    // ADMISSION, since `describe[` is a token the running grammar cannot classify.
+    expect(carries(`describe[\n  it('${PROBE} — the pin below an unclosed head', () => {});\n`),
+      'an unterminated computed member was credited').toBe(false);
+  });
+
+  test('DOOR 3 POLARITY: the routes that are not spellings at all', () => {
+    // THE ARMS THE POLARITY BUYS OVER AND ABOVE THE BATTERY. Each of these was named as an
+    // unreachable RESIDUAL by the previous cut and each is now a refusal, because a
+    // suite-opener token that cannot be positively classified parks rather than escaping.
+    const body = `\n  it('${PROBE} — a pin that never runs', () => { expect(1).toBe(2); });\n});\n`;
+    // A MODIFIER INTERRUPTED BY A COMMENT. Executed at the previous commit: CREDITED by the
+    // instrument, `Tests 1 skipped (1)` under vitest, eslint exit 0 — a live, clean forgery.
+    expect(carries(`describe/* c */.skip('comment-interrupted', () => {${body}`),
+      'a comment between describe and its modifier escaped the polarity').toBe(false);
+    // AN OPENER SHARING ITS LINE WITH OTHER CODE, both shapes the previous cut named. The
+    // `^\s*` anchor does not reach them, so they are admitted on the PARK side alone —
+    // credit stays line-start-only, which is why this cannot become a new credit route.
+    expect(carries(`describe('live', () => {});\n}); describe.skip('parked mid-line', () => {${body}`),
+      'a reopened parked suite after }); escaped the polarity').toBe(false);
+    expect(carries(`if (x) describe.skip('parked mid-line', () => {${body}`),
+      'a parked suite introduced by if (x) escaped the polarity').toBe(false);
+    // A SUITE WORD ALIASED AT ITS BINDING. This is the residual the previous cut called
+    // prevalence-zero and the estate has ONE of; it is closed where the VALUE is taken,
+    // since the call site carries no suite word for any line reader to see.
+    expect(carries(`const d = COND ? describe : describe.skip;\nd('outer', () => {${body}`),
+      'a ternary-aliased describe.skip escaped the polarity').toBe(false);
+    expect(carries(`const d = describe.skip;\nd('outer', () => {${body}`),
+      'a plainly-aliased describe.skip escaped the polarity').toBe(false);
+    // …and every one of them really carried the marker, so none of these is a source that
+    // proves nothing.
+    for (const src of [`describe/* c */.skip('x', () => {${body}`,
+      `if (x) describe.skip('x', () => {${body}`,
+      `const d = describe.skip;\nd('x', () => {${body}`]) {
+      expect(mentionedIn(src, PROBE)).toBe(true);
+    }
+  });
+
+  test('DOOR 3 POLARITY: the benign shapes it must NOT park', () => {
+    // THE ACCURACY HALF OF THE TWO NON-ANCHORED ARMS, and the reason `COMMENT_LINE` exists.
+    // `SUITE_VALUE_BOUND` and `SUITE_TOKEN_MIDLINE` are the only doors in this file that
+    // read a line anywhere rather than at its start, so they are the only ones prose can
+    // reach — and this estate writes essays in its headers. Without these three arms the
+    // alias closure would quietly park a large slice of the tree and the census would be
+    // the only thing that noticed.
+    const inner = `\n  it('${PROBE} — a real body', () => {});\n});\n`;
+    // A header sentence that happens to end a clause with the word `suite`.
+    expect(carries(` * exercised in the domain suite. This\ndescribe('outer', () => {${inner}`),
+      'a prose full stop after the word suite parked a live file').toBe(true);
+    // A MULTI-LINE vitest import, whose continuation line is nothing but `describe,`.
+    expect(carries(`import {\n  describe,\n  expect,\n  it,\n} from 'vitest';\ndescribe('outer', () => {${inner}`),
+      'a multi-line vitest import parked a live file').toBe(true);
+    // The BARE-value binding the estate really uses — four files wire eslint's RuleTester
+    // this way. A bare value can only ever alias a suite that RUNS, so parking it would buy
+    // nothing and cost four files their marker rights.
+    expect(carries(`RuleTester.describe = describe;\nRuleTester.it = it;\ndescribe('outer', () => {${inner}`),
+      'the RuleTester binding parked a live file').toBe(true);
   });
 
   test('DOOR 3 REJOIN: a head broken across lines is still read for what it IS', () => {
@@ -607,14 +761,25 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // modifier parks, which is the fail-closed direction.
     expect(carries(`describe.eachly('outer', () => {${inner}`)).toBe(false);
     expect(carries(`describe.concurrent.skipIf(x)('outer', () => {${inner}`)).toBe(false);
-    // THE PROPERTY THE DOT-SPLIT RESTS ON, pinned rather than assumed. `chainModifiers`
-    // splits on dots and nothing else, so a computed or space-broken access only parks
-    // because every allowlist member is a BARE IDENTIFIER and such an access can never
-    // produce one. Admit a member spelled with a bracket or a space and that reasoning
-    // silently dies — this arm is what stops it dying quietly.
+    // THE ALLOWLIST'S REACH, PINNED ON BEHAVIOUR RATHER THAN ON THE SHAPE OF ITS MEMBERS.
+    // The previous cut pinned that every member is a bare identifier, reasoning that a
+    // computed or space-broken access therefore could not produce one and so would park.
+    // True, but it pinned a CONSTANT where the question is about a VERDICT — so this loop
+    // drives the real read instead: the same modifier, credited tightly dotted and refused
+    // in the two access forms the previous cuts leaked.
+    // TWO LOCKS HOLD THESE, AND THE ARM IS HONEST ABOUT PINNING THEM AS A PAIR. The grammar
+    // cannot capture a bracket or a space, and `chainModifiers` would not recognise the
+    // token if it did. Opening either alone changes nothing — both single mutants ran 21
+    // passed, MEASURED — so no assertion here can be attributed to one lock. Opening BOTH
+    // (a grammar that captures `['concurrent']` plus a split that unwraps it) reds this arm,
+    // and that joint mutant is what makes the pair load-bearing rather than decorative.
     for (const mod of RUNNING_SUITE_MODIFIERS) {
-      expect(mod, `${JSON.stringify(mod)} is not a bare identifier — the dot-split no`
-        + ' longer refuses computed and space-broken access').toMatch(/^[A-Za-z$_][\w$]*$/);
+      expect(carries(`describe.${mod}('outer', () => {${inner}`),
+        `describe.${mod} is on the allowlist but was parked`).toBe(true);
+      expect(carries(`describe['${mod}']('outer', () => {${inner}`),
+        `a COMPUTED describe['${mod}'] was credited — the grammar admits brackets`).toBe(false);
+      expect(carries(`describe . ${mod} ('outer', () => {${inner}`),
+        `a SPACE-BROKEN describe . ${mod} was credited — the grammar admits spaces`).toBe(false);
     }
     // Focus parks the file at BOTH levels: `only` runs its own block by silencing the
     // siblings, so a title outside it is exactly as unexecuted as one in a skipped suite.
@@ -631,7 +796,8 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // `fdescribe` exists in vitest, so both are defence in depth, not closed holes.
     expect(carries(`fit('elsewhere', () => {});\ndescribe('outer', () => {${inner}`))
       .toBe(false);
-    // The estate's own dominant conditional spelling parks 92 of 2,314 files, and the one
+    // The estate's own dominant conditional spelling parks 93 of 2,314 files under this
+    // repair (92 before it, plus the one alias file the polarity now reaches), and the one
     // file that actually carries a marker is not among them — asserted, not assumed.
     expect(carries(`describe.runIf(distExists)('outer', () => {${inner}`)).toBe(false);
     expect(filesTitling('SP-B2-LEG-SUPPLY-EVIDENCE'))
