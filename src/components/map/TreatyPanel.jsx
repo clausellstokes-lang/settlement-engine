@@ -15,7 +15,8 @@
 import { useMemo } from 'react';
 import { ScrollText, HeartHandshake, AlertTriangle } from 'lucide-react';
 
-import { renderAllTreaties } from '../../domain/display/treatyDocument.js';
+import { useStore } from '../../store/index.js';
+import { renderAllTreaties, treatyTrueStateChip } from '../../domain/display/treatyDocument.js';
 import { Section } from './WorldPulsePrimitives.jsx';
 import WarCausalBrief from './WarCausalBrief.jsx';
 import { INK, BODY, MUTED, SECOND, CARD, CARD_ALT, BORDER, BORDER2, RED, RED_BG, GREEN, GREEN_BG, AMBER, AMBER_BG, sans, FS, SP } from '../theme.js';
@@ -71,7 +72,11 @@ function TermRow({ term }) {
   );
 }
 
-function TreatyCard({ doc, nameById, worldState }) {
+function TreatyCard({ doc, nameById, worldState, includeGroundTruth }) {
+  // GR-0 THE DM TRUE-STATE CHIP. The read itself is fail-closed on the flag, so this
+  // is null for every viewer who is not holding ground-truth authority, and null again
+  // whenever nothing actually diverges — an honest term earns no chip.
+  const trueStateChip = treatyTrueStateChip(worldState, doc.pairKey, { includeGroundTruth });
   const victor = nameOf(nameById, doc.victorId, doc.victorName);
   const loser = nameOf(nameById, doc.loserId, doc.loserName);
   return (
@@ -114,6 +119,15 @@ function TreatyCard({ doc, nameById, worldState }) {
       {doc.summary && (
         <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.pico, fontStyle: 'italic' }}>{doc.summary.line}</div>
       )}
+      {/* GR-0 the longevity voice — null while the lifecycle-voice flag is dark. */}
+      {doc.ageLine && (
+        <div data-testid="treaty-age-line" style={{ color: SECOND, fontFamily: sans, fontSize: FS.pico, fontStyle: 'italic' }}>{doc.ageLine}</div>
+      )}
+      {/* GR-0 the DM true-state chip: what the ledger knows and the owed court does not.
+          Rendered ONLY for a ground-truth viewer, and only where the truth diverges. */}
+      {trueStateChip && (
+        <div data-testid="treaty-true-state-chip" style={{ color: AMBER, background: AMBER_BG, border: `1px solid ${AMBER}`, fontFamily: sans, fontSize: FS.pico, fontWeight: 700, padding: '3px 7px' }}>{trueStateChip}</div>
+      )}
       {/* ambition-fit-1: the dramatic-irony Reasons lane — the war reasons pressing
           this pair apart and the peace reasons pulling them back, receipt by receipt.
           Self-gates to nothing when neither ledger carries a present reason. */}
@@ -130,6 +144,12 @@ function TreatyCard({ doc, nameById, worldState }) {
 export default function TreatyPanel({ campaign, nameById }) {
   const worldState = campaign?.worldState || null;
   const treaties = useMemo(() => renderAllTreaties(worldState), [worldState]);
+  const tier = useStore(s => s.auth?.tier);
+  const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
+  // The includeGroundTruth convention (BeliefDivergenceBand's, verbatim): a quiet default
+  // is DM knowledge. Premium / elevated only; every other viewer gets the honest public
+  // reading of the same treaty, which is that the term is kept. Fail-closed.
+  const includeGroundTruth = tier === 'premium' || elevated;
 
   if (treaties.length === 0) {
     return (
@@ -144,7 +164,7 @@ export default function TreatyPanel({ campaign, nameById }) {
     <div data-testid="treaty-panel" style={{ display: 'flex', flexDirection: 'column', gap: SP.md }}>
       <Section heading="Treaties" count={`${treaties.length}`}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-          {treaties.map((doc) => <TreatyCard key={doc.pairKey} doc={doc} nameById={nameById} worldState={worldState} />)}
+          {treaties.map((doc) => <TreatyCard key={doc.pairKey} doc={doc} nameById={nameById} worldState={worldState} includeGroundTruth={includeGroundTruth} />)}
         </div>
       </Section>
     </div>

@@ -259,6 +259,9 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
     loserName: doc.loserName,
     complianceState: doc.complianceState,
     frayingLine: doc.frayingLine,
+    // GR-0 the longevity voice. Null while the lifecycle-voice flag is dark, so a
+    // dark world's chapter is byte-identical to the pre-GR-0 export.
+    ageLine: doc.ageLine,
     summary: doc.summary && typeof doc.summary === 'object' ? doc.summary.line : null,
     terms: (doc.termLines || []).map(t => ({
       label: t.label, yearsRemaining: t.yearsRemaining, complianceState: t.complianceState, strainLine: t.strainLine,

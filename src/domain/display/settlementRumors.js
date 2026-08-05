@@ -257,6 +257,12 @@ export const WHAT_PHRASES = Object.freeze({
   commercial_casus_suppressed: 'a commercial grievance struck out by the stock book',
   commercial_severance_crossing: 'a trading tie cut',
   commercial_partnership_crossing: 'two towns binding their markets together',
+  // GR-0 THE LIFECYCLE VOICE — the two moments the pact grammar used to pass over in
+  // silence. Phrased world-side while the virtual flag is dark, for the same reason the
+  // WR-10 cohort above is: a privileged projection or a later replay must never fall
+  // back to a de-underscored engine token ('treaty default detected').
+  treaty_lapsed: 'a pact reaching the end of its own term',
+  treaty_default_detected: 'a court weighing what arrived against what was sworn',
   // The INDIRECT war and the war of words. These nine are keyed on `kind` rather than
   // `impactKind`, because their authors (momentum.js, supplyWebWarfare.js,
   // informationStatecraft.js) mint no impactKind. That is exactly why the impactKind

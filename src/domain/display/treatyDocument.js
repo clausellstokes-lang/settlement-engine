@@ -23,6 +23,19 @@
  */
 
 import { treatyDocument, treatyDocumentsForSettlement, treatyLedgerOf, termLabel } from '../worldPulse/peaceTerms.js';
+// GR-0 — THE LONGEVITY VOICE AND THE DM CHIP. Both draw their sentence from the authored
+// GRAMMAR corpus rather than from a table minted here, because the annex already carries
+// the angle palette and a second spelling of these lines would drift from it. The chip is
+// the ONLY read in this module that touches ground truth, and it is fail-closed: without
+// `includeGroundTruth` it returns null before it reads a single term.
+import { grammarReceipt, grammarSlotRoles } from '../worldPulse/grammarNews.js';
+import { treatyAgeBandWord, treatyAgeClass } from '../worldPulse/treatyLifecycleVoice.js';
+// THE ONE ORIENTATION READER (CR-WR10-G), and it is load-bearing here rather than tidy:
+// the GRAMMAR pools bind their party slots to the OBLIGATION axis (who owes, who is
+// owed), which on a war settlement matches the document's receiver/giver pair and on a
+// WR-10 sale is its exact MIRROR — the buyer receives the holding and still pays. Reading
+// the document's victorName/loserName here would put the wrong court on every sale chip.
+import { treatyOrientationOf } from '../worldPulse/treatyOrientation.js';
 
 /**
  * THE HOUSE-VOICE COMPLIANCE TABLE — VOICE[family][state] is a speakable line for
@@ -103,6 +116,82 @@ export function treatyStrainLine(family, complianceState) {
   return /** @type {Record<string, string>} */ (row)[state] || TREATY_COMPLIANCE_FLOOR[state];
 }
 
+/**
+ * THE LONGEVITY LINE (GR-0). One authored sentence about how long this parchment has
+ * stood, drawn from the pool families that are honest about ITS age class — a two-year
+ * pact can never draw "Old enough that the roads it opened are simply the roads now".
+ * Null when the document carries no age, which is exactly what a dark world's read-model
+ * hands back (the key is drop-when-absent behind the flag).
+ * @param {{ pairKey?: unknown, signedTick?: unknown, ageYears?: unknown }} doc
+ * @param {Record<string, unknown> | null | undefined} [treaty] the raw record, for its
+ *   obligation axis; omitted, the line falls to its party-free families.
+ * @returns {string | null}
+ */
+export function treatyAgeLine(doc, treaty) {
+  const ageYears = Number(doc?.ageYears);
+  if (!Number.isFinite(ageYears)) return null;
+  const receipt = grammarReceipt(
+    'treaty_age_line',
+    `${String(doc.pairKey || '')}.${Number(doc.signedTick) || 0}`,
+    { ...partySlots('treaty_age_line', treaty), band: treatyAgeBandWord(ageYears) },
+    treatyAgeClass(ageYears),
+  );
+  return receipt ? receipt.line : null;
+}
+
+/**
+ * Bind one pool's `{settlement}` / `{counterpart}` to a treaty's obligation axis under
+ * that pool's own declared roles. A name that never resolved yields no slot at all, so
+ * the pool's slotless families answer instead of a slug reaching a reader.
+ * @param {string} kind @param {Record<string, unknown> | null | undefined} treaty
+ * @returns {Record<string, string>}
+ */
+function partySlots(kind, treaty) {
+  const orientation = treatyOrientationOf(treaty);
+  if (!orientation.resolved) return {};
+  const named = (/** @type {string} */ id, /** @type {string} */ name) => (
+    name && name !== id ? name : '');
+  const obligor = named(orientation.obligorId, orientation.obligorName);
+  const obligee = named(orientation.obligeeId, orientation.obligeeName);
+  if (!obligor || !obligee) return {};
+  const roles = grammarSlotRoles(kind);
+  const partyFor = (/** @type {string} */ role) => (role === 'obligor' ? obligor : obligee);
+  return { settlement: partyFor(roles.settlement), counterpart: partyFor(roles.counterpart) };
+}
+
+/**
+ * THE DM TRUE-STATE CHIP (GR-0). The audience-projection law, executed: a free surface
+ * never sees a quiet default, and this returns null before it reads anything unless the
+ * caller holds ground-truth authority. Reads the RAW ledger record rather than the
+ * document read-model, deliberately — `trueState` is not on the read-model and must not
+ * be, or every consumer of a treaty document would carry the truth the fog exists to hide.
+ * Null when nothing diverges: an honest term has no chip.
+ * @param {Record<string, unknown> | null | undefined} worldState @param {string} pairKey
+ * @param {{ includeGroundTruth?: boolean }} [options]
+ * @returns {string | null}
+ */
+export function treatyTrueStateChip(worldState, pairKey, options = {}) {
+  if (options.includeGroundTruth !== true) return null;
+  const doc = treatyDocument(worldState, String(pairKey));
+  const ledger = treatyLedgerOf(worldState);
+  const treaty = doc && ledger ? ledger[doc.pairKey] : null;
+  if (!doc || !treaty) return null;
+  const terms = Array.isArray(treaty.terms) ? treaty.terms : [];
+  // The quiet ones only: a term whose TRUTH has failed while the ledger's own observed
+  // state still reads honored. A detected default is public and speaks for itself.
+  const quiet = terms.filter((t) => normalizeState(String(t.trueState)) !== 'honored'
+    && normalizeState(String(t.complianceState)) === 'honored')
+    .sort((a, b) => (String(a.type) < String(b.type) ? -1 : String(a.type) > String(b.type) ? 1 : 0));
+  if (quiet.length === 0) return null;
+  const receipt = grammarReceipt(
+    'treaty_true_state_chip',
+    `${doc.pairKey}.${quiet[0].type}`,
+    { ...partySlots('treaty_true_state_chip', treaty), term: termLabel(String(quiet[0].type)) },
+    null,
+  );
+  return receipt ? receipt.line : null;
+}
+
 /** One rendered term row of the document. @typedef {Object} TreatyTermLine
  *  @property {string} type @property {string} label @property {string} family
  *  @property {number} yearsRemaining @property {string} complianceState
@@ -121,7 +210,16 @@ export function treatyStrainLine(family, complianceState) {
 export function renderTreatyDocument(worldState, pairKey) {
   const doc = treatyDocument(worldState, String(pairKey));
   if (!doc) return null;
-  return decorate(doc);
+  return decorate(doc, recordFor(worldState, doc));
+}
+
+/** The raw ledger record behind a rendered document — the obligation axis the GRAMMAR
+ *  pools bind to lives there and deliberately not on the read-model.
+ *  @param {Record<string, unknown> | null | undefined} worldState
+ *  @param {{ pairKey: string }} doc */
+function recordFor(worldState, doc) {
+  const ledger = treatyLedgerOf(worldState);
+  return ledger ? ledger[doc.pairKey] || null : null;
 }
 
 /**
@@ -131,7 +229,8 @@ export function renderTreatyDocument(worldState, pairKey) {
  * @returns {Array<ReturnType<typeof decorate>>}
  */
 export function renderTreatiesForSettlement(worldState, settlementId) {
-  return treatyDocumentsForSettlement(worldState, settlementId).map(decorate);
+  return treatyDocumentsForSettlement(worldState, settlementId)
+    .map((doc) => decorate(doc, recordFor(worldState, doc)));
 }
 
 /**
@@ -147,7 +246,7 @@ export function renderAllTreaties(worldState) {
   const out = [];
   for (const key of Object.keys(ledger).sort()) {
     const doc = treatyDocument(worldState, key);
-    if (doc) out.push(decorate(doc));
+    if (doc) out.push(decorate(doc, ledger[key] || null));
   }
   return out;
 }
@@ -162,8 +261,11 @@ function conveyedHoldingOf(doc) {
   return term && term.assetId ? String(term.assetId) : '';
 }
 
-/** Dress one structured document in the house voice. @param {import('../worldPulse/peaceTerms.js').TreatyDocument} doc */
-function decorate(doc) {
+/** Dress one structured document in the house voice.
+ *  @param {import('../worldPulse/peaceTerms.js').TreatyDocument} doc
+ *  @param {Record<string, unknown> | null} [treaty] the raw record, for the age line's
+ *    obligation-axis binding. Absent ⇒ the age line falls to its party-free families. */
+function decorate(doc, treaty = null) {
   /** @type {TreatyTermLine[]} */
   const termLines = doc.terms.map((t) => {
     /** @type {TreatyTermLine} */
@@ -204,5 +306,8 @@ function decorate(doc) {
     frayingLine,
     mediatorLine,
     coalitionLine,
+    // GR-0 THE LONGEVITY VOICE. Null while the flag is dark, because the read-model
+    // carries no `ageYears` then — one gate, read once, upstream of every surface.
+    ageLine: treatyAgeLine(doc, treaty),
   };
 }

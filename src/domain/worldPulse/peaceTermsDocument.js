@@ -25,6 +25,11 @@ import { round4, complianceRank, treatyPairKey } from './peaceTermsPrimitives.js
 // the literal string "undefined" on a reader's screen. Nothing downstream had to change
 // its field names: the historic four slots are still here, now RESOLVED.
 import { treatyOrientationOf, treatyRoleWord } from './treatyOrientation.js';
+// GR-0 — THE LONGEVITY READ. `ageYears` is DROP-WHEN-ABSENT behind the lifecycle-voice
+// gate (T4 byte neutrality: an absent key costs nothing, a key set to zero is a byte), so
+// a dark world's read-model is the pre-GR-0 shape exactly and every consumer that never
+// asks for an age is untouched.
+import { treatyAgeYears, treatyLifecycleVoiceActive } from './treatyLifecycleVoice.js';
 
 /** @typedef {import('./peaceTermsCatalog.js').TermRecord} TermRecord */
 /** @typedef {import('./peaceTermsCatalog.js').TreatyRecord} TreatyRecord */
@@ -130,6 +135,8 @@ export function fracturesAbandoning(worldState, partyId, tick) {
  * @property {{ deserter: string, abandoned: string[], coalitionSize: number, credibilityHit: number, receipt: string } | null} fracture
  * @property {string[]} receipts
  * @property {{ total: number, honored: number, frayingType: string | null, line: string } | null} summary
+ * @property {number} [ageYears]  GR-0: whole elapsed years on the treaty's OWN clock
+ *   marker. Present only under `treatyLifecycleVoiceEnabled` — absent, never zero.
  */
 
 /**
@@ -270,6 +277,7 @@ export function treatyDocument(worldState, pairKey) {
       : null,
     receipts: Array.isArray(treaty.receipts) ? treaty.receipts.map(String) : [],
     summary: treatyFrayingSummary(treaty, tick),
+    ...(treatyLifecycleVoiceActive(worldState) ? { ageYears: treatyAgeYears(treaty, tick) } : {}),
   };
 }
 

@@ -61,6 +61,14 @@ const SOVEREIGNTY = 'sovereigntyTradeEnabled';
 // writes on every war exit, so the census cannot separate a stamped world from an
 // unstamped one even in principle.
 const OATH = 'oathHolderEnabled';
+// Joined 2026-08-04 by FP wave GR-0 under the same CR-WR10-C atomicity. A THIRD zero-key
+// case, and the one whose emptiness was hardest to keep honest: this lane really does own
+// two news kinds outright, so its row could have named a mover family and looked richer
+// than its neighbours. BEHAVIORAL_MOVER_FAMILIES is a closed ten-member BEHAVIOURAL
+// vocabulary, not a list of wizard_news kinds, and the only member these beats could ride
+// is `war` — which would grade the row alive off the war layer's traffic in worlds where
+// the flag has never been true. Empty on purpose, like the three above it.
+const LIFECYCLE_VOICE = 'treatyLifecycleVoiceEnabled';
 // Joined 2026-08-04 by FP wave TR-1, and CONVERTED FROM A WAVE PENDING ENTRY to an
 // authored row by the cycle-1 landing lane. The conversion is not bookkeeping: a key in
 // ENGINE_GATED_VIRTUAL_RULE_KEYS reaches the census, and the partition assertion below
@@ -70,7 +78,7 @@ const OATH = 'oathHolderEnabled';
 // single-writer container and nothing in src/ calls the writer, so a declared channel
 // would grade the row SILENT in every world instead of admitting that nothing has run.
 const CASUS = 'casusCommerciiEnabled';
-const VIRTUAL_RULES = Object.freeze([AXES, CONQUEST, STATECRAFT, RUMORS, OATH, SOVEREIGNTY, CASUS]);
+const VIRTUAL_RULES = Object.freeze([AXES, CONQUEST, STATECRAFT, RUMORS, OATH, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
 
@@ -98,6 +106,14 @@ const LANE_LEAVES = Object.freeze({
   // which is unusual here and is the point — the three mint doors it stamps at belong
   // to the peace engine, and naming them would measure the war layer's vocabulary.
   [OATH]: ['src/domain/worldPulse/oathHolder.js'],
+  // The voice's own leaves: the gate and the beat composers, plus the registry that
+  // selects their sentences. The corpus file beside them is frozen prose and mints
+  // nothing, so it stays out of the trace scope for the same reason the appraisal
+  // leaves do above.
+  [LIFECYCLE_VOICE]: [
+    'src/domain/worldPulse/treatyLifecycleVoice.js',
+    'src/domain/worldPulse/grammarNews.js',
+  ],
   // The casus commercii's own leaves: the gate and its writer, and the projection that
   // joins the typed evidence to the authored corpus. The taxonomy leaf beside them is a
   // dependency-free table and the receipt pools are frozen prose; both mint nothing, so

@@ -109,6 +109,11 @@ import { executeTreatyConveyances } from './sovereigntyTransfer.js';
 // GR-1 — THE SIGNATURE LINE. The one writer of `sworn`, stamped at the mint loop where
 // both roads meet. Dark ⇒ the record gains no key (drop-when-absent, T4).
 import { stampSworn } from './oathHolder.js';
+// GR-0 — THE LIFECYCLE VOICE. The two moments this mover has always executed in silence:
+// the prune that retires a spent instrument, and the tick a court's OBSERVED compliance
+// first crosses out of honored. Composition lives entirely in the leaf, so the head pays
+// four effective lines for the whole wave and the beats stay unit-testable without it.
+import { treatyDefaultDetectedBeats, treatyLapsedBeats, treatyLifecycleVoiceActive } from './treatyLifecycleVoice.js';
 import { stablePart } from './stablePart.js';
 import { buildPressureSummary, settlementStrength } from './relationshipEvolution.js';
 import { readBeliefRelationship } from './beliefMap.js';
@@ -314,6 +319,7 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
   const congressClosures = [];
   /** @type {Array<{id:string, channel:'diplomatic', outcome:'win'|'loss', magnitude?:number}>} */
   const dispositionDeltas = []; const dispositionChannelsActive = dispositionTreatyLearningActive(worldState);
+  const lifecycleVoiceLit = treatyLifecycleVoiceActive(worldState);
   let workingState = worldState;
   let workingSettlementUpdates = settlementUpdates;
   // The tick's conserved granary movements, accumulated across every stream term and
@@ -693,11 +699,21 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
       // not mere clock passage: both parties learned that diplomacy held. The
       // repudiation shell is handled by its direct writer and can never earn this.
       dispositionDeltas.push(...treatyDispositionDeltas({ enabled: dispositionChannelsActive, outcome: 'held', treaty, previousCompliance, victorId, loserId }));
+      // GR-0 THE LAPSE BEAT. `previousCompliance` is the LAST RECORDED observed state —
+      // every term expired above without reaching evolveCompliance, so `worstObserved` is
+      // still 'honored' here and would report a hollowed pact as a clean one. The beats
+      // never feed the disposition learning on the line above; they only speak about it.
+      if (lifecycleVoiceLit) newsEntries.push(...treatyLapsedBeats({ treaty, terms, tick, observedWorst: previousCompliance, orientation }));
       delete nextLedger[key]; // all terms lapsed ⇒ the treaty is spent history (prune)
       continue;
     }
     treaty.terms = liveTerms;
     treaty.complianceState = worstObserved;
+    // GR-0 THE DETECTION BEAT — keyed on the OBSERVED CROSSING, never on the level. The
+    // `prevLedger?.[key]` arm is load-bearing rather than defensive: a treaty minted THIS
+    // tick has been observed once, and one observation is a level. Without it a single-tick
+    // harness could certify a "crossing" pin that never saw a transition at all.
+    if (lifecycleVoiceLit && previousCompliance === 'honored' && prevLedger?.[key]) newsEntries.push(...treatyDefaultDetectedBeats({ tick, observedState: worstObserved, terms: liveTerms, orientation }));
     // DROP-WHEN-ABSENT AT THE WRITE (CR-WR10-G's needs-guard). An unresolved orientation
     // yields the empty string, and a treaty that cannot say who owes it cannot name an
     // oathbreaker — writing the key anyway would put a nameless accusation in the ledger

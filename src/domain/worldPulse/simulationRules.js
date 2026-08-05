@@ -202,6 +202,11 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // first real gate read (sovereigntyAssets.sovereigntyTradeActive) and its
   // certification row — certification tracking reality instead of preceding it.
   'sovereigntyTradeEnabled',
+  // Joined 2026-08-04 by FP wave GR-0 under CR-WR10-C item 4 (the compiled charter's §3
+  // flag law), in the SAME commit as its first real gate read
+  // (treatyLifecycleVoice.treatyLifecycleVoiceActive, read by name with the strict
+  // === true idiom) and its certification row.
+  'treatyLifecycleVoiceEnabled',
 ]);
 
 /**

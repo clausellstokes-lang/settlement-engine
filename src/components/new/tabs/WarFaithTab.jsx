@@ -139,6 +139,8 @@ function TreatyBlock({ treaties, sid }) {
               </div>
             ))}
             {doc.frayingLine && <div style={{ color: RED, fontSize: FS.pico, fontWeight: 700, marginTop: 4 }}>{doc.frayingLine}</div>}
+            {/* GR-0 the longevity voice — null while the lifecycle-voice flag is dark. */}
+            {doc.ageLine && <div style={{ color: SECOND, fontSize: FS.pico, fontStyle: 'italic', marginTop: 4 }}>{doc.ageLine}</div>}
           </div>
         );
       })}

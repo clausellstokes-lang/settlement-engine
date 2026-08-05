@@ -44,6 +44,10 @@ import { readFileSync } from 'node:fs';
  * no caller should have to know about.
  */
 export const WAR_ANNEX_URL = new URL('../../docs/content/RECEIPT_POOLS_WAR.md', import.meta.url);
+/** The FP-GRAMMAR annex (GR-0 onward). EXTENDED here rather than forked: the two defects
+ *  this module closes — the address lie and the first-match hole — are properties of the
+ *  READER, not of the volume, so a second volume takes the same reader. */
+export const GRAMMAR_ANNEX_URL = new URL('../../docs/content/RECEIPT_POOLS_GRAMMAR.md', import.meta.url);
 /**
  * The FP-TRADE annex (FP wave TR-1 onward). Added here rather than forked into a second
  * reader: the address-lie and first-match defects this module exists to close live in the

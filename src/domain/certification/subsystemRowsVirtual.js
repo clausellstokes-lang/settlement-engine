@@ -347,6 +347,53 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // axes above, it declares nothing rather than declaring a channel it cannot own.
     soakEvidence: 'unobserved',
   }),
+  // ── THE LIFECYCLE VOICE (FP GR-0, docs/DESIGN_FP_GRAMMAR.md §GR-0) ─────────
+  Object.freeze({
+    rule: 'treatyLifecycleVoiceEnabled',
+    title: 'The pact lifecycle voice (lapse, detection, longevity)',
+    module: 'src/domain/worldPulse/treatyLifecycleVoice.js,src/domain/worldPulse/grammarNews.js,src/domain/worldPulse/grammarReceiptPools.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: the voice mints no candidate. It observes two moments the
+      // peace engine already executes and there is no `candidateType` literal in it.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY, AND THE TEMPTATION HERE WAS REAL. This lane DOES own two
+      // news kinds outright, so a row could be written that names them — and that is
+      // precisely the standing moverFamily hazard: BEHAVIORAL_MOVER_FAMILIES is a closed
+      // ten-member vocabulary of BEHAVIOURAL families, not a list of wizard_news kinds,
+      // and the only member these beats could ride is `war`, which would grade this row
+      // ALIVE off the entire war layer's traffic in worlds where the flag has never been
+      // true. The kinds are certified by their own walker instead.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY. The voice adds no persisted key at all: the beats are
+      // per-tick emissions and `ageYears` is a read. Declaring the treaties ledger
+      // would grade this row ALIVE off the peace engine's own writes, which populate
+      // that container in worlds where this flag has never been true.
+      stateKeys: Object.freeze([]),
+      other: 'A ZERO-KEY READER LAYER THE CENSUS CANNOT SEE, AND THAT IS THE CORRECT READING. ONE GATE: treatyLifecycleVoiceActive (treatyLifecycleVoice.js) reads treatyLifecycleVoiceEnabled by name with the strict === true idiom, and nothing else gates the lane. WHAT IT DOES: the pact grammar learns to speak at two moments it has always executed in silence. THE LAPSE BEAT fires at the prune that retires a spent instrument (peaceTerms PASS 2, where every term has reached its own expiry) and names both courts, the term that closed the document, the age in BAND WORDS on the treaty own clock marker, the recorded ending, and the warning clause that the road between them is open again — which is true the same tick, because the war layer eligible-target read starts returning the pair the moment the instrument leaves the ledger. THE DETECTION BEAT fires on the OBSERVED CROSSING out of honored, never on the level: evolveCompliance runs every tick on every live term, so a beat keyed on the state would narrate one standing shortfall fifty-two times a year, and a treaty minted THIS tick is refused because one observation is a level rather than a transition. THE FOG IS THE LAW: an undetected cheat mints NOTHING in any feed, because the engine models what courts believe and an unbelieved default is not yet a story. WHAT IT NEVER DOES: it writes no world state, feeds no disposition learning, and never speaks the ground-truth ending — hollowed_quiet is a real vocabulary member this lane produces and deliberately does not publish, because a news entry carries no per-key ground-truth projection to strip it behind. THE OBSERVATION NEEDED to close the remaining gap is the endings MIX rather than the count: a per-year distribution over the closed pact-endings vocabulary, which GR-7 collector section owes. Until then the lane is pinned where its bodies are readable: tests/domain/treatyLifecycleVoice.test.js, tests/lint/grammarLifecycleKindPools.walker.test.js and tests/property/treatyLifecycleVoiceDormancyFence.test.js.',
+    }),
+    // Both beats ride the peace engine's own mover, which runs every pulse; the beats
+    // themselves are rare by construction (a pact lapses once, a court crosses once).
+    expectedTempo: 'rare',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_mints_no_kind',
+        description: 'With the flag dark neither composer is reached, so the news stream is byte-identical to the pre-GR-0 engine and no new kind can appear in any feed. The fence runs with dispositionChannelsEnabled DARK as well, because WR-2 disposition deltas fire at the SAME two sites and would otherwise be read as this lane\'s footprint.',
+        check: 'PARTLY expressible from a receipt: a kind census over the stream would show zero of both. Pinned directly in tests/property/treatyLifecycleVoiceDormancyFence.test.js against a fixture that DOES mint both when lit — the lit-mutant control, without which the fence proves only that the fixture is quiet.',
+      }),
+      Object.freeze({
+        name: 'an_undetected_cheat_stays_silent',
+        description: 'A term whose TRUE delivery has failed while the owed court\'s monitoring reach sits under DETECT_FLOOR mints no beat, carries no chip on a free surface, and ends the pact as ran_its_term in every public reading. Law One: the engine models what courts believe.',
+        check: 'NOT expressible from a receipt: receipts carry no ground truth by construction. Pinned in tests/domain/treatyLifecycleVoice.test.js, where the same fixture is driven with the monitor above and below the floor and the two streams compared.',
+      }),
+      Object.freeze({
+        name: 'the_detection_beat_is_a_transition_not_a_level',
+        description: 'A standing default mints exactly one detection beat, at the crossing. The pin is driven over TWO ticks — a single-tick harness cannot tell a crossing from a level, and certifying one against such a harness is the vacuity class this estate has been bitten by.',
+        check: 'NOT expressible from a receipt: a per-year count could not distinguish one crossing from fifty-two levels without the stream itself. Pinned in tests/domain/treatyLifecycleVoice.test.js on a two-tick fixture, with the crossing guard removed as an executed mutant.',
+      }),
+    ]),
+    // The kinds exist in code but no soak has yet observed their distribution.
+    soakEvidence: 'unobserved',
+  }),
   // ── THE CASUS COMMERCII (FP TR-1, docs/DESIGN_FP_TRADE.md §TR-1) ───────────
   Object.freeze({
     rule: 'casusCommerciiEnabled',

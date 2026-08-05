@@ -216,6 +216,14 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   commercial_route_predation: 'trade', commercial_route_wardenship: 'trade',
   commercial_casus_suppressed: 'trade',
   commercial_severance_crossing: 'trade', commercial_partnership_crossing: 'trade',
+  // GR-0 THE LIFECYCLE VOICE — the treaty cohort's own desk. A pact reaching the end of
+  // its term and a court entering a shortfall in its ledger change the same things a
+  // signing changes (terms, tribute, trade normalization), so they file beside
+  // treaty_signed, treaty_breached and diplomacy rather than under the events catch-all.
+  // Both carry their OWN impactKind rather than `diplomacy`: routing law reads impactKind
+  // before kind, and the SINGLE_PRODUCER_KEYS walker pins `diplomacy` to the one signing
+  // beat, so a second producer of that token would inherit this desk silently.
+  treaty_lapsed: 'trade', treaty_default_detected: 'trade',
 
   // ── EVENTS — the explicit catch-all: stressors, traditions, courts, calamity ──
   // stressor types (non-war, non-faith, non-trade)
@@ -537,6 +545,12 @@ export const KIND_SECTION_DIVERGENCES = Object.freeze(/** @type {Record<string, 
   // repudiated treaty beside the terms and tribute it extinguishes (JUDGMENT,
   // vetoable), matching treaty_signed and diplomacy.
   treaty_breached: 'trade',
+  // KIND_SECTION files both GR-0 lifecycle beats under `courts`, beside the oathbreaking
+  // they sit next to in the letter; the Herald files them beside the terms and tribute
+  // they retire and the shortfall they name (JUDGMENT, vetoable), matching treaty_signed,
+  // diplomacy and treaty_breached. The whole treaty cohort keeps one desk.
+  treaty_lapsed: 'trade',
+  treaty_default_detected: 'trade',
   // NB: cause_lifecycle and moral_reckoning are `traditions` keys, and `traditions`
   // is a documented SPLIT (faith | events) — routing them to events is a split
   // outcome, not a divergence, so they are deliberately NOT listed here.
