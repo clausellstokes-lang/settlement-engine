@@ -150,19 +150,40 @@ const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
  * is missing. `populationTrendBand` is a believed −2 … +2 and indexes the trajectory
  * ladder directly (its member 0 is `unknown`, so +2 shifts the −2 floor onto `emptying`).
  *
- * WHAT IT RETURNS TODAY, AND WHAT IT DOES NOT (corrected 2026-08-05, SP-B repair R8).
- * This `@returns` declared FOUR optional legs while the body has only ever produced ONE:
- * `{}` when the believed trend is non-finite, and otherwise `{ trajectoryBand }`. Three of
- * the four names were a statement of the CR-WR10-H TARGET shape, written in the tense of a
- * contract, and a wave built from the declaration alone would have supplied legs no consumer
- * reads. Worse, the absent leg was spelled `routeBand` here while the SP-B belief surface
- * that now supplies it spells the same rung `routePositionBand` — so the widening had a name
- * collision waiting inside a JSDoc nobody executes. The declaration is therefore cut back to
- * the truth; SP-B2 is the wave that widens BOTH the body and this line together, and it must
- * carry `routePositionBand`'s real spelling across when it does. (This header deliberately
- * does NOT spell the SP-B record field that carries it: naming one admits this module to
+ * WHAT IT RETURNS TODAY, AND WHAT IT DOES NOT (corrected 2026-08-05, SP-B repair R8;
+ * RE-CORRECTED the same day by the settling lane, which measured the consumer instead of
+ * reasoning about it). This `@returns` declared FOUR optional legs while the body has only
+ * ever produced ONE: `{}` when the believed trend is non-finite, and otherwise
+ * `{ trajectoryBand }`. Three of the four names were a statement of the CR-WR10-H TARGET
+ * shape written in the tense of a contract, so the declaration is cut back to the truth and
+ * SP-B2 is the wave that widens BOTH the body and this line together.
+ *
+ * THE FIRST CORRECTION OVERSHOT, AND ITS REPLACEMENT SENTENCE IS MEASURED. R8 wrote that a
+ * wave built from the old declaration "would have supplied legs no consumer reads", and told
+ * SP-B2 to carry the SUPPLYING surface's spelling of the route rung across. Both claims are
+ * false, and the second one is load-bearing. The legs' consumer is `appraiseSettlementAsset`
+ * (sovereigntyAppraisal.js), which this stage feeds by SPREADING `beliefLegsFor({ … })`
+ * straight into it at both clearing call sites in the market loop below. It reads
+ * `row.tierBand`, `row.storesBand`, `row.routeBand` and `row.trajectoryBand` — by PROPERTY
+ * ACCESS, which is exactly why "no consumer DESTRUCTURES the four names" was literally true
+ * and was the wrong test. All four names ARE read, by precisely the old declaration's
+ * spellings. Three of them simply arrive `undefined` today, and the appraisal's `wordOf`
+ * maps an absent key onto `'unknown'` rather than failing — a silent degrade, never a crash,
+ * which is why nothing in the estate ever complained.
+ *
+ * SO SP-B2 MUST EMIT THE CONSUMER'S OWN KEYS: `{ tierBand, storesBand, routeBand,
+ * trajectoryBand }`. The route leg is the trap. The belief surface that will supply its
+ * VALUE spells that rung with a longer name of its own, and `SOVEREIGNTY_ROUTE_BANDS` is
+ * that same ladder with `'unknown'` prefixed — so the VALUES already align and ONLY THE KEY
+ * differs. A wave that emits the supply side's key instead reaches an appraisal that asks
+ * for `routeBand`, receives `undefined`, and reports `'unknown'` with every gate green: the
+ * precise silent-leg defect this paragraph exists to prevent, arrived at by obeying the
+ * instruction it replaces. SP-B2's four-leg totality pin (each leg present ⇒ named in the
+ * appraisal receipt; each absent ⇒ `known:false`) is what makes that failure loud, and it
+ * must be written against these four keys. (This header still deliberately does NOT spell
+ * the supplying record's own field names: naming one admits this module to
  * spAxisVocabulary's ARGUED_FIELD_SPELLERS, and that admission belongs to the commit that
- * starts READING the field — SP-B2's — not to a repair lane correcting a comment.)
+ * starts READING the field — SP-B2's — not to a comment.)
  *
  * @param {{ worldState?: unknown, courtId?: string, assetId?: string }} input
  * @returns {{ trajectoryBand?: string }} the ONE leg that exists — absent entirely when the

@@ -2035,6 +2035,24 @@ per-program volume telling an SP-B2 implementer the discharge is two.
    before diagnosis. tests/lint is red at base: attribute by VIOLATION ROWS
    against a git-archived base with node_modules symlinked, never by walker
    color or failing-file name.
+   **RED-RATCHET CONTENT DIFFS — the attribution law's second half (added
+   2026-08-05, settling lane; SP-B verifier FINDING B).** Failing-ROW identity
+   is NOT sufficient attribution. A ratchet, inventory or allowlist test that
+   is RED ON BOTH SIDES emits the same failing file, the same test name and
+   the same normalised FAIL row while the inventory INSIDE it grows — so a
+   wave can report "net attributed delta ZERO, failing-row identity diff EMPTY
+   in both directions" truthfully at row granularity and falsely at content
+   granularity. This is not hypothetical: SP-B added its three flags to
+   mechanismLitCoverage's shrink-only gap (29 -> 31 entries) under a perfectly
+   empty row diff, and the wave's acceptance record said the gap contained no
+   SP-B name. THE LAW, BINDING AT EVERY WAVE END: for every ratchet /
+   inventory / allowlist / baseline test that is red in BOTH archives, RUN IT
+   DIRECTLY in each archive and diff its ASSERTION PAYLOAD — the actual
+   received name lists, not the row text — attributing every added and every
+   removed entry to a named cause. An entry a wave ADDS to a shrink-only
+   inventory is that wave's own debt: discharge it, or defer it in the ledger
+   row WITH A REASON. It is never inherited silently, and "the ratchet was
+   already red" is not attribution.
 3. **One wave = one commit** (sliced waves: one commit per slice) + focused
    gates per slice + full gate at wave end + a ledger row per the house
    convention. Every authored file byte-scanned (python3 — NUL/control

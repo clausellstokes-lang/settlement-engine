@@ -442,12 +442,26 @@ literals ZERO times elsewhere under `src/` — the bandFamilies.js discipline.
 ### SP-B2 — THE BELIEF-LEGS DISCHARGE (rides SP-B's flags; no new flag)
 **Scope:** the queued "belief-legs wave" named at `sovereigntyMarketStage.js:64`
 — the WR-10 lighting precondition CR-WR10-H discharged.
-- **`beliefLegsOf` (`sovereigntyMarketStage.js:156`) widens** from one leg to
-  four: `trajectoryBand` (existing) + `tierBand`, `storesBand`,
-  `routePositionBand` read from SP-B's conditionsBands through `beliefRecord`
-  — through the EXISTING injectable seam, so the stage's composition logic is
-  untouched (the seam exists precisely so this wave supplies legs without
-  touching the stage — honored, not bypassed).
+- **`beliefLegsOf` (`sovereigntyMarketStage.js`, navigate by symbol) widens**
+  from one leg to four, and **the emitted keys are the CONSUMER'S**:
+  `trajectoryBand` (existing) + `tierBand`, `storesBand`, **`routeBand`** —
+  read from SP-B's `conditionsBands` through `beliefRecord`, through the
+  EXISTING injectable seam, so the stage's composition logic is untouched (the
+  seam exists precisely so this wave supplies legs without touching the stage —
+  honored, not bypassed).
+- **THE ROUTE-LEG KEY IS A TRAP, MEASURED AND CORRECTED 2026-08-05 (settling
+  lane).** This bullet previously named the emitted leg `routePositionBand`,
+  and `sovereigntyMarketStage.js`'s own header repeated the instruction. That is
+  the SUPPLY side's spelling. The consumer, `appraiseSettlementAsset`
+  (`sovereigntyAppraisal.js`), reads `row.routeBand` by property access and maps
+  an absent key onto `'unknown'` through `wordOf` — so emitting
+  `routePositionBand` produces a leg that is silently degraded rather than
+  supplied, with every gate green. `SOVEREIGNTY_ROUTE_BANDS` is SP-B's
+  `ROUTE_POSITION_BANDS` with `'unknown'` prefixed, so **the VALUES already
+  align and only the KEY differs**: SP-B2 emits `routeBand` and reads its value
+  from `conditionsBands.routePositionBand`. The other three names need no
+  translation — the consumer already spells them `tierBand`, `storesBand` and
+  `trajectoryBand`.
 - **The lit-with-legs contract fixture** (already present per CR-WR10-H)
   flips from proves-the-seam to proves-the-supply: with
   `believedConditionsEnabled` ∧ `beliefAxesEnabled` lit on the fixture, the
@@ -457,9 +471,11 @@ literals ZERO times elsewhere under `src/` — the bandFamilies.js discipline.
   function), its test file.
 - **Pins:** the four-leg totality pin (each leg present ⇒ named in the
   appraisal receipt; each absent ⇒ `known:false`, never a guess — R-28's
-  grain); the degraded-arm pin (three legs lit, one dark ⇒ still
-  `known:false` — partial knowledge does not clear a market, per the
-  appraisal's own contract).
+  grain), **written against the four CONSUMER keys above so a leg emitted
+  under the supply side's spelling reds instead of degrading to `'unknown'`**;
+  the degraded-arm pin (three legs lit, one dark ⇒ still `known:false` —
+  partial knowledge does not clear a market, per the appraisal's own
+  contract).
 - **Dormancy:** dark families ⇒ `beliefLegsOf` returns exactly today's
   one-or-zero legs — byte-identical goldens.
 - **Alignment line:** declared-empty with reason (a supply shim; the

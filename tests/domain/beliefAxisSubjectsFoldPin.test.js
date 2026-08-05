@@ -44,6 +44,46 @@
  * engine's own fresh ground truth, never to a word this file spells. A band-edge retune
  * therefore does not touch this file, while a severed fold, a collapsed bar set, or a fold
  * that always adopts (or never does) reds immediately.
+ *
+ * ── THE PER-FAMILY ENGINE ARM, AND THE RECORD IT CORRECTS (added 2026-08-05, settling lane
+ * S1) ────────────────────────────────────────────────────────────────────────────────────
+ *
+ * THE RECORD FIRST, BECAUSE IT WAS BANKED WRONG. The SP-B repair lane's closing report told
+ * the chair that the mechanism lit-coverage gap "is 31 entries and BYTE-IDENTICAL base and
+ * head, and NO SP-B name appears in it", and explained an earlier contrary grep as extraction
+ * bleed from a neighbouring test's diff. THAT RETRACTION WAS THE ERROR; the observation it
+ * retracted was TRUE. Run directly, tests/property/mechanismLitCoverage.test.js prints a
+ * 27-name MODULE gap and a FOUR-name FLAG gap, and the flag gap reads
+ * [believedConditionsEnabled, believedDevotionEnabled, believedScarcityEnabled,
+ * warEconomyEnabled] — all three SP-B flags, in a ratchet whose baseline
+ * (tests/fixtures/mechanism-lit-coverage-baseline.json) is `{"mechanisms": [], "flags": []}`.
+ * The pre-SP-B gap at edea9b1f was 29 (28 modules + 1 flag): SP-B added its three flags and
+ * incidentally covered one module (envoyErrandVocabulary, which its vocabulary walker imports),
+ * 29 -> 31. A shrink-only inventory grew by the wave's own names and the wave reported none.
+ *
+ * WHY NO GATE SAW IT. The walker's flag credit has three roads (its own header, AXIS 2):
+ * (a) a LITERAL `<flag>: true` in some test, (b) DEFAULT-TRUE in DEFAULT_SIMULATION_RULES,
+ * (c) a validated FLAG_LIT_COVERED_BY registry row. SP-B's flags are opt-in, so (b) is out by
+ * construction; and BOTH lit drives that exist — this file's `ALL_LIT` and the dormancy
+ * fence's lit control — build their rules with `Object.fromEntries(FLAGS.map(...))`, a
+ * COMPUTED key. The walker scans text. Three flags were genuinely driven lit through the real
+ * engine and earned no credit for it, and the failing-row identity diff the wave ended on
+ * could not see the growth because the ratchet was already red on BOTH sides with the SAME
+ * row text (the wave-end protocol now carries a red-ratchet CONTENT diff for exactly this —
+ * DESIGN_FP_ARCHITECTURE §10.2).
+ *
+ * THE DISCHARGE IS THE STRONGER ROAD, NOT THE REGISTRY ROW. A FLAG_LIT_COVERED_BY entry would
+ * have closed the gap in three lines, and the walker's credit road (c) exists for exactly this
+ * shape. It was not taken, because the execution that exposed the gap exposed a real hole
+ * beside it: repair R7 measured that the FENCE file's ENGINE-level per-family independence
+ * golden runs on a fixture that never reaches the fold, so nothing at the engine watched the
+ * FOLD's own per-family behaviour. The arm below closes that hole and earns credit road (a)
+ * as a by-product: it lights ONE family at a time, each flag spelled as a LITERAL because
+ * that is the shape the walker can read, drives the same two-step fold-reaching path, and
+ * asserts exactly one of the three fields arrives. The literals are load-bearing — they are
+ * the rules objects the engine runs on — so the credit follows a real drive rather than a
+ * text trick. What the arm does and does not kill is measured at its own block below, in
+ * mutants rather than in reasoning.
  */
 import { describe, expect, test } from 'vitest';
 
@@ -52,6 +92,7 @@ import {
   SCARCITY_BANDS,
   DEVOTION_BANDS,
   CONDITIONS_KEYS,
+  SUBJECT_AXIS_FIELDS,
   SUBJECT_AXIS_TUNING,
 } from '../../src/domain/worldPulse/beliefAxisSubjects.js';
 
@@ -322,6 +363,74 @@ describe('SP-B R1 — the fold arm reached through the REAL beliefMap advance', 
       .toEqual([]);
     // …and D-1's own two axis fields DO survive, so the host axis fold is untouched by the
     // family gates — a dark family is dark, not a dark axis.
+    expect(rec.populationTrendBand, 'the host D-1 axis fold stopped running').toBeDefined();
+  });
+
+  /**
+   * ONE FAMILY LIT AT A TIME, EACH FLAG SPELLED AS A LITERAL.
+   *
+   * WHAT THIS ARM CATCHES — MEASURED, NOT CLAIMED (settling lane; every mutant planted in a
+   * `git archive`, liveness-checked, restored md5-identical):
+   *   - A ONE-DOOR CONJUNCTION THAT STOPS ANY FAMILY LIGHTING ALONE. Flipping
+   *     `subjectAxesActive`'s `!scarcity && !conditions && !devotion` to `||` reds all THREE
+   *     rows here by name (5 failed / 48 passed across the three SP-B files).
+   *   - A FOLD ARM WIRED TO THE WRONG GATE. Swapping the conditionsBands row's gate from
+   *     `gates.conditions` to `gates.scarcity` reds the CONDITIONS row here and the UNIT pin
+   *     in beliefAxisSubjects.test.js (2 failed / 51 passed) — and leaves the FENCE's
+   *     engine-level independence golden GREEN, because that fixture never reaches the fold.
+   *     Among ENGINE-level instruments this arm is the only one that sees a fold-side
+   *     per-family defect, which is the hole repair R7 exposed and did not close.
+   *
+   * AND WHAT IT DOES NOT CATCH, WRITTEN DOWN SO THE NEXT LANE DOES NOT RE-DISCOVER IT.
+   * Deleting `if (!lit) continue;` from `foldSubjectAxes` does NOT red this arm. The
+   * per-family gate is written TWICE — on the truth side in `subjectGroundTruth`'s three
+   * `if (gates.x)` blocks, and again in the fold's arm loop — and a fold arm holding neither
+   * a prior nor a truth writes no key at all, so the surviving guard covers for the deleted
+   * one end to end. Removing BOTH (the `continue` plus the scarcity truth gate) reds two of
+   * these three rows, which is how the masking was confirmed rather than assumed. That
+   * mutant's live instrument is still the UNIT pin, which passes records the engine would
+   * never assemble. This is the SECOND instance in this family of the recorded double-guard
+   * shape — SP-B's own build-time control (4) was the first — and it is exactly why the unit
+   * pin must not be retired on the theory that an engine pin subsumes it.
+   *
+   * THE SECOND JOB IS LIT-COVERAGE CREDIT THAT IS NOT A TEXT TRICK. mechanismLitCoverage's
+   * flag credit (a) is a scan for a literal `<flag>: true`, and every SP-B lit drive in the
+   * estate builds its rules from a FLAGS array with computed keys — so three genuinely-lit
+   * flags sat uncredited in a shrink-only ratchet (see the file header). These three rules
+   * objects ARE what the engine runs on; the credit follows the drive, not the other way.
+   */
+  const ONE_FAMILY_LIT = [
+    { family: 'SCARCITY', field: 'scarcityBands', rules: Object.freeze({ [HOST]: true, believedScarcityEnabled: true }) },
+    { family: 'CONDITIONS', field: 'conditionsBands', rules: Object.freeze({ [HOST]: true, believedConditionsEnabled: true }) },
+    { family: 'DEVOTION', field: 'devotionBand', rules: Object.freeze({ [HOST]: true, believedDevotionEnabled: true }) },
+  ];
+
+  test('the per-family table is TOTAL — three rows, three fields, three DISTINCT flags', () => {
+    // Without this, a fourth family could ship with no single-family arm, and a copy-paste
+    // that lit SCARCITY twice would leave one family unexercised while every assertion in
+    // the arm below still passed. Both are read off the engine's own exported closed sets.
+    expect(ONE_FAMILY_LIT.map((r) => r.field).sort()).toEqual([...SUBJECT_AXIS_FIELDS].sort());
+    const flagsNamed = ONE_FAMILY_LIT.flatMap((r) => Object.keys(r.rules).filter((k) => k !== HOST));
+    expect(flagsNamed.sort()).toEqual([...FLAGS].sort());
+    expect(new Set(flagsNamed).size, 'two rows spell the same family flag').toBe(FLAGS.length);
+  });
+
+  test.each(ONE_FAMILY_LIT)('INDEPENDENCE AT THE ENGINE: $family alone yields $field and nothing else', ({ field, rules }) => {
+    const prior = coldStart(worldBefore(), rules);
+    const rec = legOf(warmAdvance({ world: AFTER, rules, prior, accuracy01: 0.9 }));
+    expect(rec, 'the single-family drive dropped the pair entirely').toBeTruthy();
+    expect(rec.lastUpdateTick, 'the single-family drive did not reach the reconcile branch').toBe(RECONCILE_TICK);
+    // PRESENT first: this is what stops the absence below from being the vacuous kind. A
+    // fidelity of 0.9 clears every bar, so the one lit family must have adopted a real word.
+    expect(rec[field], `${field} is absent though its own family is the one flag lit`).toBeDefined();
+    // anchored: the SAME pair on the SAME path is asserted above to carry ALL THREE of these
+    // fields under ALL_LIT, so the two absences here measure the OTHER TWO FLAGS and not the
+    // drive. This is the assertion `if (!lit) continue;` dies on at the engine.
+    expect(
+      SUBJECT_AXIS_FIELDS.filter((f) => rec[f] !== undefined),
+      'a family the drive never lit still wrote its field — the per-family gate in'
+      + ' foldSubjectAxes is not holding, and one flag is lighting three surfaces',
+    ).toEqual([field]);
     expect(rec.populationTrendBand, 'the host D-1 axis fold stopped running').toBeDefined();
   });
 });

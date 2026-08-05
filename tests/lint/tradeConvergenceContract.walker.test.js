@@ -488,14 +488,40 @@ describe('TR-9c foreign preconditions: every borrowed key is real, at an address
     }
     expect(problems, 'the foreign-precondition table drifted from the tree').toEqual([]);
 
-    // GUARD THE GUARD, BOTH POLARITIES. The join is only a measurement if the manifest really
-    // discriminates between these three flags; if it contained all of them (or none), every
-    // row would agree with it trivially and this test would pass forever.
+    // GUARD THE GUARD, BOTH POLARITIES — AS A PARTITION, NOT AS A LITERAL (respelled
+    // 2026-08-05, settling lane, verifier FINDING D). The join is only a measurement if the
+    // CQ5 manifest really DISCRIMINATES between these rows: holding all of them, or none of
+    // them, would make every row agree with it trivially and this test would pass forever.
+    // That is the property worth asserting. What the guard must NOT do is freeze WHICH flags
+    // are built — the first spelling pinned the built set to the literal
+    // `['believedScarcityEnabled']`, so a CORRECT next landing (the CQ5 one-commit law
+    // executed exactly as written for `pactFormationEnabled`) reddened it with "no FP
+    // precondition reads as built" AT THE MOMENT TWO DID. Simulated and confirmed. A guard
+    // whose failure message is the inverse of the truth sends the next lane hunting a
+    // regression it does not have; the correct landing must pass here and be caught, if at
+    // all, by the row-level arm above, which measures each row against the manifest directly.
     const built = rows.filter((r) => ENGINE_GATED_VIRTUAL_RULE_KEYS.includes(r.flag)).map((r) => r.flag);
     const unbuilt = rows.filter((r) => !ENGINE_GATED_VIRTUAL_RULE_KEYS.includes(r.flag)).map((r) => r.flag);
-    expect(built, 'no FP precondition reads as built — the join proves nothing').toEqual(['believedScarcityEnabled']);
-    expect(unbuilt.sort(), 'no FP precondition reads as unbuilt — the join proves nothing')
-      .toEqual(['errandSpineEnabled', 'pactFormationEnabled']);
+    expect(
+      built,
+      'NO FP precondition reads as built: the CQ5 manifest holds none of these flags, so every'
+      + ' row agrees with it for free and the join above measures nothing. Either a landed'
+      + ' flag was dropped from ENGINE_GATED_VIRTUAL_RULE_KEYS, or this join has outlived the'
+      + ' table it joins and should be retired rather than kept green.',
+    ).not.toEqual([]);
+    expect(
+      unbuilt,
+      'EVERY FP precondition reads as built: the CQ5 manifest holds all of these flags, so'
+      + ' again every row agrees for free. The join needs at least one unbuilt row to'
+      + ' discriminate — extend the table with the next unbuilt precondition, or retire it.',
+    ).not.toEqual([]);
+    // …and the two halves are a PARTITION of the rows, so neither filter can quietly drop a
+    // flag between them and leave both non-empty checks above looking healthy.
+    expect(
+      [...built, ...unbuilt].sort(),
+      'the built/unbuilt split lost or duplicated a row — the two filters are no longer'
+      + ' complementary and the non-empty guards above are measuring a subset',
+    ).toEqual(rows.map((r) => r.flag).sort());
   });
 
   test("the SP-N aliases resolve the TRADE volume's own numbering", () => {
