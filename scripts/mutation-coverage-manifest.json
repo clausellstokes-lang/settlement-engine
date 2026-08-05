@@ -662,6 +662,10 @@
    "kind": "mutation",
    "label": "coupling/unregistered cross-layer import planted"
   },
+  "tests/lint/couplingDesk.walker.test.js": {
+   "kind": "mutation",
+   "label": "coupling/registry desk pulled away from heraldRouting"
+  },
   "tests/lint/deepCloneHotPath.test.js": {
    "kind": "uncovered"
   },

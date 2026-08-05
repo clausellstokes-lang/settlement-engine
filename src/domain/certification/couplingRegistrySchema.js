@@ -16,7 +16,17 @@
  * @enforced-by tests/domain/couplingRegistry.test.js
  */
 
-export const COUPLING_REGISTRY_SCHEMA_VERSION = 2;
+/**
+ * v3 (CW-0w slice 3) adds the OPTIONAL `kinds[]` — the Herald kinds a coupling
+ * mints, which is the row-to-routing join the desk walker needs and v2 lacked.
+ * Optional means ABSENT, never empty: an empty array is a key and a key is a
+ * byte (the T4 discipline, applied to source data). Deriving kinds from the
+ * receiptField string instead would be word-association by another name and is
+ * refused on the moverFamilyOf precedent — but the desk walker DOES scan
+ * receiptFields for undeclared kinds, so a row cannot dodge the join by simply
+ * declining to declare one.
+ */
+export const COUPLING_REGISTRY_SCHEMA_VERSION = 3;
 
 /**
  * @typedef {Object} CouplingRegistryRow
@@ -30,15 +40,19 @@ export const COUPLING_REGISTRY_SCHEMA_VERSION = 2;
  * @property {string} owningVolume
  * @property {string} owningWave
  * @property {string} intendedDesk
+ * @property {ReadonlyArray<string>} [kinds] Herald kinds this coupling mints,
+ *   omitted entirely when it mints none.
  */
 
 /**
- * Freeze one row and its flag list together. A coupling row is evidence, not a
- * runtime switchboard, so callers may inspect it but can never retune it.
+ * Freeze one row and its list fields together. A coupling row is evidence, not
+ * a runtime switchboard, so callers may inspect it but can never retune it.
  *
  * @param {CouplingRegistryRow} row
  * @returns {Readonly<CouplingRegistryRow>}
  */
 export function couplingRow(row) {
-  return Object.freeze({ ...row, flags: Object.freeze([...row.flags]) });
+  const frozen = { ...row, flags: Object.freeze([...row.flags]) };
+  if (frozen.kinds !== undefined) frozen.kinds = Object.freeze([...frozen.kinds]);
+  return Object.freeze(frozen);
 }

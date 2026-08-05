@@ -93,6 +93,7 @@ MUTATED_FILES=(
   src/lib/worldExport.js
   src/generators/narrative/settlementOriginProse.js
   tests/lint/.coupling-inclusion-baseline.json
+  src/domain/certification/couplingRegistryWar.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -746,6 +747,15 @@ check_caught_planted "coupling/unregistered cross-layer import planted" \
 #     demand its registry row.
 perl -0pi -e 's/\{\n    "importer": "src\/domain\/worldPulse\/generosityKernel\.js",\n    "imported": "src\/domain\/worldPulse\/beliefMap\.js",\n    "direction": "[^"]*"\n  \},\n  //' tests/lint/.coupling-inclusion-baseline.json
 check_caught "coupling/inclusion baseline entry deleted while its import lives" tests/lint/.coupling-inclusion-baseline.json "npx vitest run tests/lint/couplingInclusion.walker.test.js --no-file-parallelism"
+
+# 71. The registry's desk and the paper's routing are pulled apart: retag WR-6's
+#     alliance-risk row from the war desk to trade while its kind keeps routing
+#     to war. This is the belief_misjudgment-under-faith misfile class in
+#     miniature — the registry keeps reading as the desk authority while the
+#     Herald files the story elsewhere, and nothing else in the estate compares
+#     the two.
+perl -0pi -e "s/  intendedDesk: 'war',\n  kinds: \['coalition_entry_priced'\],/  intendedDesk: 'trade',\n  kinds: ['coalition_entry_priced'],/" src/domain/certification/couplingRegistryWar.js
+check_caught "coupling/registry desk pulled away from heraldRouting" src/domain/certification/couplingRegistryWar.js "npx vitest run tests/lint/couplingDesk.walker.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

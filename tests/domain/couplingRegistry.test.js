@@ -54,8 +54,8 @@ const COUPLING_ID_SHAPE = new RegExp(
 );
 
 describe('CW-0 coupling registry', () => {
-  test('schema v2 preserves prior waves and appends later waves in decision-flow order', () => {
-    expect(COUPLING_REGISTRY_SCHEMA_VERSION).toBe(2);
+  test('schema v3 preserves prior waves and appends later waves in decision-flow order', () => {
+    expect(COUPLING_REGISTRY_SCHEMA_VERSION).toBe(3);
     expect(WR4_WAR_COST_COUPLINGS).toEqual([
       WR4_TRADE_HOME_FRONT_COUPLING,
       WR4_HANDS_HOME_FRONT_COUPLING,
@@ -302,16 +302,40 @@ describe('CW-0 coupling registry', () => {
       .toEqual(new Set(['CPL-5', 'CPL-19']));
   });
 
-  test('every schema-v2 row has one stable unique identity and a closed shape', () => {
-    const expectedKeys = [
+  test('every schema-v3 row has one stable unique identity and a closed shape', () => {
+    const requiredKeys = [
       'couplingId', 'pairId', 'direction', 'read', 'receiptField',
       'counterforce', 'flags', 'owningVolume', 'owningWave', 'intendedDesk',
     ].sort();
+    const withKinds = [...requiredKeys, 'kinds'].sort();
     expect(new Set(COUPLING_REGISTRY.map((row) => row.couplingId)).size)
       .toBe(COUPLING_REGISTRY.length);
+    let declaring = 0;
     for (const row of COUPLING_REGISTRY) {
-      expect(Object.keys(row).sort(), row.couplingId).toEqual(expectedKeys);
+      // v3's ONE optional field. Absent, never empty — an empty array is a key
+      // and a key is a byte (T4), so a row minting no Herald kind omits it.
+      const keys = Object.keys(row).sort();
+      expect(keys, row.couplingId).toEqual('kinds' in row ? withKinds : requiredKeys);
+      if ('kinds' in row) {
+        declaring += 1;
+        expect(row.kinds.length, row.couplingId).toBeGreaterThan(0);
+        expect(Object.isFrozen(row.kinds), row.couplingId).toBe(true);
+      }
       expect(row.couplingId).toMatch(COUPLING_ID_SHAPE);
+    }
+    // Non-empty floor: the optional field is proven OPTIONAL in both directions
+    // — some rows carry it, some do not — so neither arm above is vacuous.
+    expect(declaring).toBeGreaterThan(0);
+    expect(declaring).toBeLessThan(COUPLING_REGISTRY.length);
+  });
+
+  test('the kinds field survives the freeze factory as a frozen copy', () => {
+    const declaring = COUPLING_REGISTRY.filter((row) => 'kinds' in row);
+    expect(declaring.length).toBeGreaterThanOrEqual(5);
+    for (const row of declaring) {
+      expect(() => {
+        /** @type {any} */ (row.kinds).push('mutation_probe');
+      }, row.couplingId).toThrow();
     }
   });
 

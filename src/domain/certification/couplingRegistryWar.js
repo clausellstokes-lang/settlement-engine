@@ -239,6 +239,7 @@ export const WR6_ALLIANCE_RISK_COUPLING = couplingRow({
   owningVolume: 'WAR',
   owningWave: 'WR-6',
   intendedDesk: 'war',
+  kinds: ['coalition_entry_priced'],
 });
 
 /** WR-6 / CPL-6. The called court's own seat books and learned temperament
@@ -254,6 +255,7 @@ export const WR6_COALITION_BOOKS_COUPLING = couplingRow({
   owningVolume: 'WAR',
   owningWave: 'WR-6',
   intendedDesk: 'war',
+  kinds: ['coalition_joined', 'coalition_refused'],
 });
 
 /** WR-6 / CPL-3. People spent since entry are derived from the existing
@@ -269,6 +271,7 @@ export const WR6_PEOPLE_EXPENDITURE_COUPLING = couplingRow({
   owningVolume: 'WAR',
   owningWave: 'WR-6',
   intendedDesk: 'trade',
+  kinds: ['coalition_expenditure_read'],
 });
 
 /** WR-6 / CPL-1. Live territorial and attributable home-front degradation are
@@ -284,6 +287,7 @@ export const WR6_TRADE_EXPENDITURE_COUPLING = couplingRow({
   owningVolume: 'WAR',
   owningWave: 'WR-6',
   intendedDesk: 'trade',
+  kinds: ['coalition_expenditure_read'],
 });
 
 /** WR-6 / CPL-1. Coalition settlement turns one aggregate judgment into
@@ -299,6 +303,7 @@ export const WR6_COALITION_SETTLEMENT_TRADE_COUPLING = couplingRow({
   owningVolume: 'WAR',
   owningWave: 'WR-6',
   intendedDesk: 'trade',
+  kinds: ['coalition_spoils_divided'],
 });
 
 /** WR-6 / CPL-6. A refusal and an underpaid ally become durable relationship
@@ -413,6 +418,7 @@ export const WR7_SILENCE_INFERENCE_COUPLING = couplingRow({
   owningVolume: 'WAR',
   owningWave: 'WR-7',
   intendedDesk: 'divination',
+  kinds: ['envoy_silence_inference'],
 });
 
 /** WR-7b / CPL-5. Columns and envoys are projected from the same pre-mutation
@@ -429,6 +435,7 @@ export const WR7_ENCOUNTER_COUPLING = couplingRow({
   owningVolume: 'WAR',
   owningWave: 'WR-7',
   intendedDesk: 'war',
+  kinds: ['envoy_intercepted', 'interceptor_dilemma'],
 });
 
 /** WR-7b / CPL-5. The unexpected door is a separate proactive census over one
