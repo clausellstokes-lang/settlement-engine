@@ -297,6 +297,156 @@ function collectOneHopProse(node, context, add, { allowFunctionReturns = true } 
   }
 }
 
+/**
+ * THE FIFTH DETECTOR — PUSH INDIRECTION (CW-0w slice 4).
+ *
+ * The four detectors above find a numeric leak only where the prose surface is
+ * NAMED at the leak site: a prose key, a prose-named binding, a push onto a
+ * prose-named array, a return from a prose-named function. The interior survey
+ * found the shape that satisfies none of them and reaches the reader anyway:
+ *
+ *   function postureReasons(...) {
+ *     const out = [];
+ *     out.push(`High resentment (${relState.resentment.toFixed(2)}) shapes …`);
+ *     return out.slice(0, 4);          // <- the array leaves WRAPPED
+ *   }
+ *
+ * `out` is not prose-named, and the return is a `.slice(...)` CALL rather than
+ * the array itself, so the one-hop resolver — which understood a bare array and
+ * `.join(...)` — saw nothing. relationshipMemory.js pushed three raw floats
+ * straight into reader prose and did not appear in the baseline at all: it
+ * ESCAPED the scanner rather than being frozen debt.
+ *
+ * This detector closes the wrapper hop in both directions the survey named:
+ *   - the array reaches a prose sink through a PASS-THROUGH array method, and
+ *   - the array is returned by a non-prose-named local function whose CALL
+ *     reaches a prose sink (a return consumed by a prose-named surface).
+ *
+ * Only element-PRESERVING methods are followed. `map` transforms and is not
+ * here: a walker that guessed through a transform would report sentences the
+ * reader never sees.
+ */
+const PASS_THROUGH_ARRAY_METHODS = new Set([
+  'slice', 'filter', 'concat', 'sort', 'reverse', 'flat',
+  'toSorted', 'toReversed', 'toSpliced', 'join',
+]);
+
+/** The array-valued expression `E` refers to, if E is `arr` or `arr.slice(…)`. */
+function passThroughArrayIdentifier(node) {
+  if (node?.type === 'Identifier') return node.name;
+  if (node?.type === 'CallExpression'
+    && node.callee?.type === 'MemberExpression'
+    && !node.callee.computed
+    && PASS_THROUGH_ARRAY_METHODS.has(staticKey(node.callee.property))
+    && node.callee.object?.type === 'Identifier') return node.callee.object.name;
+  return '';
+}
+
+/** The enclosing function and its resolved name, from an ancestor chain. */
+function enclosingFunction(ancestors) {
+  for (let i = ancestors.length - 1; i >= 0; i -= 1) {
+    if (!isFunctionNode(ancestors[i])) continue;
+    return { fn: ancestors[i], name: functionName(ancestors[i], ancestors[i - 1] ?? null) };
+  }
+  return null;
+}
+
+/**
+ * Is this expression sitting in a place a reader's words come from?
+ * Returns 'prose', 'carrier:<fnNode>' (a return whose function is not itself
+ * prose-named — resolved one hop later), or '' for everything else.
+ */
+function proseSinkOf(node, parent, ancestors) {
+  if (parent?.type === 'Property' && parent.value === node
+    && PROSE_KEYS.has(staticKey(parent.key).toLowerCase())) return 'prose';
+  if (parent?.type === 'VariableDeclarator' && parent.init === node
+    && isProseBindingName(bindingName(parent.id))) return 'prose';
+  if (parent?.type === 'AssignmentExpression' && parent.right === node
+    && isProseBindingName(bindingName(parent.left))) return 'prose';
+  if (parent?.type === 'CallExpression'
+    && parent.callee?.type === 'MemberExpression'
+    && staticKey(parent.callee.property) === 'push'
+    && isProseBindingName(bindingName(parent.callee.object))
+    && (parent.arguments || []).includes(node)) return 'prose';
+  if (parent?.type === 'ReturnStatement' && parent.argument === node) {
+    const enclosing = enclosingFunction(ancestors);
+    if (!enclosing) return '';
+    return isProseBindingName(enclosing.name) ? 'prose' : `carrier:${enclosing.name}`;
+  }
+  return '';
+}
+
+/**
+ * Add every numeric-leaking push argument of any const array that reaches a
+ * prose surface through a wrapper hop.
+ *
+ * @param {any} ast
+ * @param {Map<any, Map<string, any[]>>} symbols
+ * @param {Map<any, Array<{start:number, arguments:any[]}>>} arrayPushes
+ * @param {(node:any, origin:string)=>void} add
+ */
+function collectPushIndirection(ast, symbols, arrayPushes, add) {
+  /**
+   * Array symbols whose sentences reach a reader, mapped to the LATEST source
+   * position at which they do. A push after every sink cannot be in the
+   * sentence the reader got — the same ordering discipline the one-hop resolver
+   * already applies, and the reason the future-push control stays quiet.
+   */
+  const leaking = new Map();
+  const markLeak = (symbol, boundary) => {
+    leaking.set(symbol, Math.max(leaking.get(symbol) ?? -1, boundary));
+  };
+  /** function name -> [{symbol, boundary}] that function returns. */
+  const carriers = new Map();
+  /** function names whose CALL result reaches a prose surface. */
+  const proseCallers = new Set();
+
+  walk(ast, (node, parent, ancestors) => {
+    const name = passThroughArrayIdentifier(node);
+    if (name) {
+      const symbol = resolveLocalSymbol(name, {
+        position: node.range?.[0] ?? Number.POSITIVE_INFINITY,
+        scopes: lexicalScopes(ancestors),
+        symbols,
+      });
+      if (symbol?.kind === 'binding'
+        && symbol.declarationKind === 'const'
+        && symbol.init?.type === 'ArrayExpression'
+        && arrayPushes.has(symbol)) {
+        const boundary = node.range?.[0] ?? Number.POSITIVE_INFINITY;
+        const sink = proseSinkOf(node, parent, ancestors);
+        if (sink === 'prose') markLeak(symbol, boundary);
+        else if (sink.startsWith('carrier:')) {
+          const carrier = sink.slice('carrier:'.length);
+          if (carrier) {
+            if (!carriers.has(carrier)) carriers.set(carrier, []);
+            carriers.get(carrier).push({ symbol, boundary });
+          }
+        }
+      }
+    }
+    // A local call whose RESULT lands on a reader surface — the second hop.
+    if (node.type === 'CallExpression' && node.callee?.type === 'Identifier'
+      && proseSinkOf(node, parent, ancestors) === 'prose') {
+      proseCallers.add(node.callee.name);
+    }
+  });
+
+  for (const [carrier, exits] of carriers) {
+    if (!proseCallers.has(carrier)) continue;
+    for (const exit of exits) markLeak(exit.symbol, exit.boundary);
+  }
+
+  for (const [symbol, boundary] of leaking) {
+    for (const push of arrayPushes.get(symbol) || []) {
+      if (push.start >= boundary) continue;
+      for (const argument of push.arguments) {
+        if (isStringLikeProseValue(argument)) add(argument, 'push-indirection');
+      }
+    }
+  }
+}
+
 /** @param {any} node */
 function isToFixedCall(node) {
   return node?.type === 'CallExpression'
@@ -692,11 +842,28 @@ export function scanProseNumericsSource({ source, path }) {
     }
   });
 
+  // The fifth detector runs AFTER the four above so it can defer to them: a
+  // node they already see keeps its own category, and only the leaks that
+  // escaped every named surface become `pushIndirection` rows. Without that the
+  // wrapper hop would double-count existing debt and push four frozen ceilings
+  // up for no new finding.
+  const alreadySeen = new Set(candidates.keys());
+  collectPushIndirection(ast, symbols, arrayPushes, (node, origin) => {
+    if (alreadySeen.has(node)) return;
+    add(node, origin);
+  });
+
   const hits = [];
   const seen = new Set();
-  for (const [node] of candidates) {
+  for (const [node, origins] of candidates) {
     let categories = [];
-    if (node.type === 'Literal' || node.type === 'JSXText' || node.type === 'TemplateLiteral') {
+    if (origins.has('push-indirection') && !alreadySeen.has(node)) {
+      // One row per leaking sentence, whatever numeric shape it carries: the
+      // finding is "this reached the reader through a wrapper", and splitting it
+      // across the four shape categories would relitigate ceilings this
+      // detector deliberately leaves alone.
+      categories = categoriesForStringNode(node, source).length ? ['pushIndirection'] : [];
+    } else if (node.type === 'Literal' || node.type === 'JSXText' || node.type === 'TemplateLiteral') {
       categories = categoriesForStringNode(node, source);
     } else if (isStringConcatenation(node)) {
       categories = categoriesForConcatenation(node);

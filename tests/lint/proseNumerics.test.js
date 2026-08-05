@@ -18,12 +18,20 @@ import { scanProseNumericsSource } from '../helpers/proseNumericsWalk.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
-const REVIEWED_TOTAL_CEILING = 401;
+// CW-0w slice 4 admits the FIFTH detector class with its own ceiling. The four
+// above are untouched: the push-indirection walk defers to them, so a leak they
+// already see keeps its own category and only what escaped every named prose
+// surface becomes a pushIndirection row. Measured at landing: exactly 3, all
+// three in relationshipMemory.js's postureReasons, which the scanner had never
+// seen at all. Ceilings still only move DOWN — this one is a new class's floor,
+// not a widening of an existing budget.
+const REVIEWED_TOTAL_CEILING = 404;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 229,
   percentToken: 79,
   multiplier: 24,
   twoDecimalScore: 69,
+  pushIndirection: 3,
 });
 
 function walkSourceFiles(dir, out = []) {
@@ -173,6 +181,73 @@ describe('prose numerics detector discriminates (executed mutants)', () => {
     expect(scanProseNumericsSource({ source: clean, path: 'src/shadow-control.js' }).hits).toEqual([]);
   });
 
+  it('pushIndirection: a float reaches the reader through a WRAPPED return', () => {
+    // The exact live shape CW-0w was pointed at (relationshipMemory.js's
+    // postureReasons): a non-prose-named local array, pushed with a float, then
+    // returned through `.slice(...)` from a prose-NAMED function. None of the
+    // four detectors above can see it — the array is not prose-named and the
+    // return is a call, not the array.
+    const mutant = [
+      'function postureReasons(relState) {',
+      '  const out = [];',
+      '  out.push(`High resentment (${relState.resentment.toFixed(2)}) shapes the posture.`);',
+      '  return out.slice(0, 4);',
+      '}',
+    ].join('\n');
+    const found = scanProseNumericsSource({ source: mutant, path: 'src/wrapped-return.js' }).hits;
+    expect(found.map((hit) => hit.category)).toEqual(['pushIndirection']);
+  });
+
+  it('pushIndirection: the array may also travel through a NON-prose-named carrier', () => {
+    // The second escape the interior survey named: the array leaves an ordinary
+    // function and the CALL is what lands on the prose surface.
+    const mutant = [
+      'function buildLines(state) {',
+      '  const parts = [];',
+      '  parts.push(`Danger ${state.score.toFixed(2)} decides it.`);',
+      '  return parts;',
+      '}',
+      'export const beat = { reasons: buildLines(state) };',
+    ].join('\n');
+    const found = scanProseNumericsSource({ source: mutant, path: 'src/carrier.js' }).hits;
+    expect(found.map((hit) => hit.category)).toEqual(['pushIndirection']);
+  });
+
+  it('pushIndirection: a wrapped array that reaches NO reader surface stays quiet', () => {
+    // The false-positive control. Same array, same float, same `.slice` — but
+    // the function is not prose-named and nothing prose-named consumes it, so a
+    // detector that fired here would be reporting sentences no reader sees.
+    const clean = [
+      'function auditTrail(state) {',
+      '  const out = [];',
+      '  out.push(`Danger ${state.score.toFixed(2)} decides it.`);',
+      '  return out.slice(0, 4);',
+      '}',
+      'export const debugOnly = { trace: auditTrail(state) };',
+    ].join('\n');
+    expect(scanProseNumericsSource({ source: clean, path: 'src/audit-control.js' }).hits).toEqual([]);
+  });
+
+  it('pushIndirection: a TRANSFORMING method is not followed, and banded words stay quiet', () => {
+    // `.map` rebuilds every element, so following it would report a sentence
+    // that may no longer exist. And the whole point of the estate's rule is that
+    // BANDED prose is fine — a wrapped return carrying only words is not a leak.
+    const clean = [
+      'function reasonsA(state) {',
+      '  const out = [];',
+      '  out.push(`Danger ${state.score.toFixed(2)} decides it.`);',
+      '  return out.map((line) => line.toUpperCase());',
+      '}',
+      'function reasonsB() {',
+      '  const out = [];',
+      '  out.push(\'Resentment runs high enough to shape the posture.\');',
+      '  return out.slice(0, 4);',
+      '}',
+      'export const beats = [reasonsA, reasonsB];',
+    ].join('\n');
+    expect(scanProseNumericsSource({ source: clean, path: 'src/transform-control.js' }).hits).toEqual([]);
+  });
+
   it('does not attribute a future array push to an earlier authored value', () => {
     const clean = [
       'const parts = [];',
@@ -293,7 +368,7 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     for (const hit of baseline) {
       expect(typeof hit.path).toBe('string');
       expect(Number.isInteger(hit.line) && hit.line > 0).toBe(true);
-      expect(['floatInterpolation', 'percentToken', 'multiplier', 'twoDecimalScore']).toContain(hit.category);
+      expect(['floatInterpolation', 'percentToken', 'multiplier', 'twoDecimalScore', 'pushIndirection']).toContain(hit.category);
       expect(typeof hit.snippet === 'string' && hit.snippet.length > 0).toBe(true);
       const source = readFileSync(join(ROOT, hit.path), 'utf8');
       const sourceLines = source.split(/\r?\n/);

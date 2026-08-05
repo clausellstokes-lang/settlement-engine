@@ -1518,6 +1518,24 @@
     "snippet": "`Reinforcement flow ${(flowFraction * 100).toFixed(1)}% of max (supply ×${centeredMult.toFixed(2)}, route ×${routeMult.toFixed(2)}, exhaustion ×${exhaustionMult.toFixed(2)}) restored ${flowPoints.toFixed(1)} pts; origin drain ${drainSeve..."
   },
   {
+    "path": "src/domain/worldPulse/relationshipMemory.js",
+    "line": 300,
+    "category": "pushIndirection",
+    "snippet": "`High resentment (${relState.resentment.toFixed(2)}) shapes the posture.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipMemory.js",
+    "line": 301,
+    "category": "pushIndirection",
+    "snippet": "`High trust (${relState.trust.toFixed(2)}) keeps the relationship functional.`"
+  },
+  {
+    "path": "src/domain/worldPulse/relationshipMemory.js",
+    "line": 302,
+    "category": "pushIndirection",
+    "snippet": "`Dependency (${relState.dependency.toFixed(2)}) makes the relationship materially unequal.`"
+  },
+  {
     "path": "src/domain/worldPulse/relationshipRulesAdversarial.js",
     "line": 90,
     "category": "floatInterpolation",
