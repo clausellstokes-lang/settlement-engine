@@ -2206,3 +2206,92 @@ correction, not debt) · the parked owner arms unchanged.
 wiring, Herald voice, DM verb, certification, and the two whole-wave proofs. What
 remains for WR-10 is exactly one thing and it is owner-signed: the lighting, at the
 soak redo, behind the belief-legs precondition.
+
+---
+
+## FP BUILD CYCLE 1 — CLOSED; THE GATE OPENERS ARE BUILT AND EVERY ONE OF THEM IS DARK (chair lane close, 2026-08-05)
+
+**Span:** `59df13a9` (SP-A, the band families) .. `88150241` (the CR-FP-2 re-record)
+— 12 commits on claude/composite-r4, minifold. Nothing lit, no band ratified,
+nothing pushed. Every capability this cycle minted sits behind a flag that is off.
+
+**The waves and their commits:** SP-A the shared shapes `59df13a9` · CW-0w slice 4
+`e30770bd` (the prior lane's tail, inside this span and material to the close row
+below) · TR-9c the trade convergence contract `c7933e84` · TR-1 THE CASUS COMMERCII
+`d7ea69a4` + red repair `93c118b6` · GR-1 THE OATH-HOLDER IDENTITY `caab995a` ·
+GR-0 THE LIFECYCLE VOICE `b441bca5` + landing repair `d1cfdb67` · the three close
+repairs — CR-FP-11 the inclusion-ratchet reach `1137f935`, CR-FP-2 the crossing pin
+`f786df89`, CR-FP-1 the desk rule `79bceff5` · and the CR-FP-2 re-record `88150241`.
+
+**Verification record — four gates, two of them real rejects:** v0 PASS · v1 REJECT
+on the CQ5 flag-law SERIALIZATION DEADLOCK — the flag manifest, the certification
+row and that lane's test are SHARED by every flag wave, so two concurrent flag
+waves in one worktree cannot both land; resolved by the serialized landing
+(constructed staged blobs via `update-index --cacheinfo`, commit with no pathspec,
+and the gate proved inside a `git archive` of the INDEX, because diff-hunk
+filtering fails when two lanes insert at the same anchors) · v1r2 PASS with one
+repaired vacuous pin · w REJECT on the inclusion-ratchet reach — CR-FP-11, BOTH
+arms repaired and the matched-pair control flipped · close re-verify PASS.
+
+**CR-FP-2 — THE ONE RULED RE-RECORD, AND THE MEASUREMENT THAT CORRECTED ITS
+PREMISE.** The ruling read the proseNumerics red as instrument drift: slice 4
+changed the scanner, so the baseline no longer described it. Measured, that is not
+what happened, and the correction matters because it changes what the re-record
+absorbs. `tests/helpers/proseNumericsWalk.js` is BYTE-IDENTICAL to the instrument
+that recorded the 404 census; run against the `e30770bd` tree it yields 413, so
+slice 4 banked a baseline its own scanner already disagreed with by nine rows, and
+the PRE-slice-4 walker on that same tree yields 410 — the identical nine rows minus
+the three pushIndirection finds. Slice 4's reach was fully absorbed at 401 -> 404.
+The nine-row gap is NOT instrument reach: it is exactly the NINE FOREIGN
+proseNumerics ROWS this queue already named at the WR-10w close, war-lane prose
+authored between WR-2 and CW-0w — conquestFeasibility.js (`e8354fb9`),
+occupation.js twice (`ab71f940`), razing.js (`bf731ea6`), plus three detector false
+positives on receipt-SHAPED ledger fields that are not prose at all
+(warCoalitionExpenditure.js twice, warCostsNews.js once, where the `receipt:` key
+and the `receiptTick` name pull `Math.floor` ids and integer ticks into the walk).
+Everything else that moved is ADDRESS ROT: 88 pure line moves and 13 WR-7b
+decomposition relocations (peaceTerms.js -> peaceTermsDrafting.js x6,
+warDeployment.js -> warHomeCosts.js x6 and -> warSiegeVerdict.js x1), which
+discharges both stale identity rows the ruling named and closes SOL_QUEUE's
+SOL-BANK-2 on both of its counts. So D-W2 of the disposition proposal is EXECUTED
+EARLY here, and it is instrument reconciliation, not bank adjudication.
+Receipts: 401 -> 404 -> 413; ceilings pinned to the EXACT live census (total 413,
+floatInterpolation 236, twoDecimalScore 71, percentToken 79, multiplier 24,
+pushIndirection 3) rather than rounded up, so the next leak of any class is red on
+arrival; proseNumerics 29/29 (was 4 failed); the whole tests/lint tree run
+sequentially before and after with no other vitest lane live, 10 failed files / 19
+failed tests -> 9 / 15, the failing-file set shrinking by exactly
+proseNumerics.test.js and nothing else changing colour.
+
+**FP CYCLE 1 AUTHORED ZERO PROSE NUMERICS.** Between `e30770bd` and the close the
+live hit set changed by exactly four rows, all four the same two tradeWar.js
+sentences at shifted line addresses after TR-1's seam. Not one row of the census
+belongs to SP-A, TR-1, GR-1, GR-0 or the repairs.
+
+**Standing disclosures (all vetoable):** (1) GR-0 LIT DISPLACES ranked wizardNews
+feed entries by design — a whole-projection lit-vs-dark hash is the WRONG
+instrument for feed surfaces, and a future verifier that reaches for one should
+read this row first. (2) TR-1's lit path is STRUCTURALLY UNREACHABLE until its
+caller wave wires `advanceCommercialReasons`; this matches its certification row
+and is a precondition, not a defect. (3) THREE new flags this cycle —
+`casusCommerciiEnabled`, `oathHolderEnabled`, `treatyLifecycleVoiceEnabled` — all
+dark, four-fence complete. (4) The nine-copy INTENSITY-LADDER consolidation remains
+a recorded CHAIR DECISION OWED (SP-A measured the ladder declared nine times under
+eight names; all nine are pinned to spell the same rungs, shrink-only, but the
+consolidation itself is unruled). (5) CR-FP-1 executed this close (desk
+authority-routing). (6) The GR-0 DM-chip PREMIUM-AUTHORITY surface remains the
+recorded OWNER item — an always-on premium surface shipped at `b441bca5`; the
+fail-closed belongs on the premium authority, not on the flag.
+
+**Two new items this close, both owed to the chair:** (a) FOUR SENTENCES ARE NOW
+FROZEN AS UN-HUMANIZED READER DEBT by the re-record — conquestFeasibility.js:417,
+occupation.js:1120 and :1173, razing.js:378 — named in the test file header so the
+count cannot swallow them, and owed a humanization wave; the re-record made the
+ratchet honest about where the debt is, it did not make the debt go away. (b) THE
+RULING ID `CR-FP-2` NOW CARRIES TWO DISTINCT REPAIRS — the crossing-pin vacuity
+repair at `f786df89` and this re-record at `88150241`. The brief named CR-FP-2 for
+both; renumbering a chair ruling is the chair's call, so both stand as written and
+the disambiguation is queued rather than invented here.
+
+**Next:** cycle 2 is SP-B + SP-B2 + ES as JOINT waves — the WR-10 lighting road —
+after the integration fold lands.
