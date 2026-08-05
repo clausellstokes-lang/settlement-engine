@@ -23,6 +23,59 @@ classes are owner-only (push→already authorized as backup; PR-merge, deploys,
    + THE_BASE_RESTORATION_LEDGER.md (Phase-D gate: zero PENDING rows),
    DESIGN_DEEP_CRAFT_PAGES.md, C1FIN_CONTROL_CENSUS.md (briefs/).
 
+## 3f. ⭐⭐ SNAPSHOT REFRESH 2026-08-05 (~00:30 EDT — THE FP-ERA HANDOFF; supersedes §3e and everything below; git wins)
+Written as the owner's 5-hour window closes, WORK IN FLIGHT. Same machine ⇒ the
+§6 memory dir survives and its index is CURRENT (read it second). Build lives in
+minifold (.claude/worktrees/minifold, claude/composite-r4, NOTHING pushed).
+- **WR-10 / THE WAR LANE IS FINISHED IN FULL** (wired dark): wave 106df58e..
+  71e78fe9, ledger row @ 67a907fe in FABLE_VALIDATION_QUEUE.md (rulings
+  CR-WR10-C..K; three honest rejects; the two whole-wave proofs @ 3754c6f3).
+  Lighting owner-signed at the soak redo, GATED on the belief-legs waves
+  (SP-B + SP-B2 + ES-4 per the amended condition).
+- **THE FP ERA IS OPEN AND BUILDING.** docs/DESIGN_FP_ARCHITECTURE.md + nine
+  DESIGN_FP_ARCH_*.md companions landed @ 99d63d92 (60 waves, 43 flags, 45
+  refuted premises; chair rulings CQ2 early-motion AUTHORIZED + CQ5 flag
+  one-commit law AFFIRMED in the commit body; 8 CQs remain chair-owed).
+  **FP BUILD CYCLE 1 was IN FLIGHT at handoff** (workflow wf_0cdf49ef-9c9,
+  session c44e5d99): LANDED — CW-0w slices 1-3 @ b3fb8f49/f7da6b60/03dee5fd,
+  SP-A first commit @ 59df13a9; IN FLIGHT — CW-0w slice 4 (proseNumericsWalk
+  push-indirection; dirty WIP in tests/helpers/proseNumericsWalk.js +
+  proseNumerics baseline/test — SURVEY, never sweep), SP-A walkers, then
+  GR-0/GR-1/TR-1/TR-9c behind the phase-0 verifier. A dead session KILLS the
+  workflow but NOT the commits: survey git, read the journal at
+  <session>/subagents/workflows/wf_0cdf49ef-9c9/journal.jsonl, then re-run
+  the script (path in §resume below) with landed lanes converted to data
+  literals (the WR-10w resume precedent).
+- **THE ESPIONAGE LAYER IS DESIGNED AND IN COHESION-REVISION.** Owner
+  directive + 8 additions (A-H) at memory/espionage-confirmers-directive.md
+  (BINDING). Architecture draft (1,186 lines, 8 waves, flag espionageEnabled,
+  zero new keys, ES-4 = the third leg of the WR-10 lighting discharge) at the
+  c44e5d99 scratchpad espionage-arch/; first cohesion verdict NEEDS-REVISION
+  (9 findings, all narrow); the amend + re-cohesion round was RUNNING
+  (wf_60586a6a-68c). 5 espionage OQs + the fold-into-FP-volume integration
+  are chair-owed. The tap-order ruling (H) is CONSTITUTIONAL for the whole
+  information program.
+- **V5 PHOTOREAL**: 13 nano_banana_pro 4K generations complete, spelling
+  gates PASSED, awaiting OWNER CULL (gallery shown; workings in c44e5d99
+  scratchpad v5-photo/); asset plan + prompts there too; 2 owner sign-offs
+  open (lettering grammar, seal ladder); references + curation in Desktop
+  "Settlement Forge template review".
+- **STANDING**: disposition proposal @ 534d17f6 (D-W1 executed by WW-G; the
+  rest waits per §5 order); tests/lint red base is SHRINKING (13 kind-pool
+  rows cured); the espionage-and-FP chair questions ride the integration
+  pass; owner-gated arms unchanged.
+- **RESUME (in order): (1)** cd minifold, git log/status, survey ALL dirty
+  WIP (live lanes at handoff); **(2)** read the two workflow journals
+  (wf_0cdf49ef-9c9 = FP cycle 1, wf_60586a6a-68c = espionage) under
+  /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/c44e5d99-2ba5-49d5-a554-40b68534c8eb/subagents/workflows/;
+  scripts live under the same session's workflows/scripts/ (fp-build-cycle-1
+  script is under the -minifold-keyed twin dir) — re-dispatch with landed
+  lanes as data literals; **(3)** finish cycle 1 through its verifiers;
+  **(4)** the espionage integration pass (fold amended draft into the FP
+  volume, rule 8+5 questions, land, queue insertion); **(5)** next cycles
+  per §5 order (SP-B/SP-B2 + ES joint waves next — the lighting road).
+  The §10 protocol + the FP volume §1 laws bind every lane. CHECK-GIT-FIRST.
+
 ## 3e. ⭐⭐ SNAPSHOT REFRESH 2026-08-04 (~13:00 EDT — THE PAUSED HANDOFF; supersedes §3d and everything below; git wins)
 Written at an ACCOUNT SWITCH with EVERYTHING DELIBERATELY PAUSED by owner order
 ("pause everything for now"). Same machine ⇒ the §6 memory dir survives and its
