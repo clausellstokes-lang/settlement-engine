@@ -106,6 +106,9 @@ import { computeTreatyGrainDraw, applyTreatyFoodDeltas, freshestSettlement } fro
 // inside it would be two spellings of one law, with the carried-sheet road free to
 // drift from the live-appraisal one. The loop is where both roads meet.
 import { executeTreatyConveyances } from './sovereigntyTransfer.js';
+// GR-1 — THE SIGNATURE LINE. The one writer of `sworn`, stamped at the mint loop where
+// both roads meet. Dark ⇒ the record gains no key (drop-when-absent, T4).
+import { stampSworn } from './oathHolder.js';
 import { stablePart } from './stablePart.js';
 import { buildPressureSummary, settlementStrength } from './relationshipEvolution.js';
 import { readBeliefRelationship } from './beliefMap.js';
@@ -526,6 +529,15 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
       }
       continue; // white peace / no affordable term ⇒ no treaty key
     }
+    // GR-1 THE SIGNATURE LINE, STAMPED WHERE BOTH MINT ROADS MEET — for exactly the
+    // reason executeTreatyConveyances is called from this loop below rather than from
+    // inside applyMintEffects: that closure is defined TWICE, once per road, so an arm
+    // added inside it would be two spellings of one law with the carried-sheet road
+    // free to drift from the live-appraisal one. Dark ⇒ no `sworn` key is written.
+    stampSworn(mint.treaty, {
+      worldState: workingState, tick, ids: [victorId, loserId],
+      settlementOf: (sid) => freshestSettlement(workingSettlementUpdates, snapshot, sid),
+    });
     nextLedger[treatyPairKey(victorId, loserId)] = mint.treaty;
     // Mint-time executions (overlay nudge, seam registration) + the signing beat.
     workingState = mint.applyMintEffects(

@@ -244,6 +244,55 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // No channel at all, so the row can never be ALIVE and says so.
     soakEvidence: 'unobserved',
   }),
+  // ── THE OATH-HOLDER IDENTITY (FP GR-1, docs/DESIGN_FP_GRAMMAR.md §GR-1) ────
+  Object.freeze({
+    rule: 'oathHolderEnabled',
+    title: 'The oath-holder identity (who swore)',
+    module: 'src/domain/worldPulse/oathHolder.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: the stamp mints no candidate. It rides another
+      // subsystem's event — the treaty mint — and there is no `candidateType`
+      // literal anywhere in the lane.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY. The identity authors no beat in this wave, by design:
+      // GR-0 owns the lifecycle voice and GR-4 the succession beats. A mover family
+      // declared here would grade this row alive off the peace engine's own signing
+      // beat, which fires whether or not anyone's name is on the parchment.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, and it is the same honest call the two rows around this
+      // one make. The stamp is a conditional drop-when-absent FIELD (`sworn`) inside
+      // treaty records that live in spatialLedgers.treaties — a container the peace
+      // engine fills on every war exit regardless of this flag. Declaring it would
+      // grade this row ALIVE off the war layer's presence, and the census counts
+      // ENTRIES rather than fields, so no census reading could tell a stamped world
+      // from an unstamped one even in principle.
+      stateKeys: Object.freeze([]),
+      other: 'A ZERO-KEY IDENTITY LAYER, WHICH IS WHY THE CENSUS CANNOT SEE IT AND WHY THAT IS THE CORRECT READING. ONE GATE: oathHolderActive (oathHolder.js) reads oathHolderEnabled by name with the strict === true idiom, and nothing else gates the lane. WHAT IT DOES: a treaty records WHO swore it. The read is composed once, from sanctioned helpers only — governingFactionOf for the faction carrying the seat, ladderFactionKey plus npcInFaction for its seated members (never hand-rolled affiliation matching, which is this estate own faction-key defect class), a codepoint-stable pick over roster ids, and durableIdForRoster for the H1 durable identity when the person has graduated. WHERE IT WRITES: all THREE mint doors of the one treaty writer family — the live-appraisal war mint and the carried-sheet mint, which meet at the head mint loop, and the victor-free sovereignty sale. WHAT IT NEVER DOES: it moves no number. Compliance math is untouched by whose name is on the parchment, because an oath-compliance bonus would be a courage ratchet wearing a ring; the death of an oath-holder voids nothing and mints no beat; no legacy treaty is ever backfilled, so unstamped means the seat swore, forever. WHY EVERY CHANNEL IS EMPTY: the lane adds no container, no candidate type and no beat — it adds one conditional field inside a record another subsystem already writes. THE OBSERVATION NEEDED to close this gap is a per-field treaty census in the soak receipt: a count of treaty records carrying `sworn`, against the count minted in the same span, which would also distinguish a world whose courts have no readable roster from one where the stamp never ran. No receipt schema carries it today because censusWorldStateKeys stops one level into spatialLedgers and counts entries. Until then the lane is pinned where its bodies are readable: tests/domain/oathHolderGr1.test.js, tests/lint/oathStampTotality.walker.test.js and tests/property/oathHolderDormancyFence.test.js.',
+    }),
+    // The stamp fires only when another subsystem mints a treaty, so it has no tempo
+    // of its own to hold. `reactive` is the honest declaration rather than a floor
+    // this lane could never be responsible for meeting.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_writes_no_sworn_key',
+        description: 'With the flag dark the stamp writer refuses before it reads anything, so a minted treaty serializes byte-identically to the pre-GR-1 engine. Absent, never null and never an empty object: an empty object is a key and a key is a byte.',
+        check: 'NOT expressible from a receipt: the census counts treaty ENTRIES, never their fields, and a dark world mints exactly as many treaties as a lit one. Pinned in tests/property/oathHolderDormancyFence.test.js, where the own-footprint fence runs on a fixture that DOES stamp when lit.',
+      }),
+      Object.freeze({
+        name: 'all_three_mint_doors_stamp_or_the_walker_reds',
+        description: 'The treaty writer family has three mint doors — the live-appraisal war mint, the carried-sheet mint, and the victor-free sovereignty sale. A door that minted an unstamped treaty would make the signature line silently depend on which road a peace came home by, and a fourth door added later would inherit the same silence.',
+        check: 'NOT expressible from a receipt: a receipt cannot say which road minted a document. Pinned behaviourally in tests/domain/oathHolderGr1.test.js (all three roads driven lit) and structurally in tests/lint/oathStampTotality.walker.test.js, which reds when a module writes the treaties ledger without reaching the one stamp writer.',
+      }),
+      Object.freeze({
+        name: 'the_same_seat_swears_again_after_a_regeneration',
+        description: 'THE PROMISE: a seed is a world, forever. Re-deriving the world and re-minting the treaty must put the SAME person on the parchment, which holds because the pick is a codepoint-stable read over roster ids and carries no PRNG, no clock and no ladder score that an unrelated retune could move.',
+        check: 'NOT expressible from a receipt: receipts record no signatory. Pinned in tests/domain/oathHolderGr1.test.js against a re-minted treaty, with the codepoint tie-break reversal executed as a mutant so the pin is proven to see.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so.
+    soakEvidence: 'unobserved',
+  }),
   // ── THE SOVEREIGNTY MARKET (WR-10 amendment S, the conveyance) ─────────────
   Object.freeze({
     rule: 'sovereigntyTradeEnabled',

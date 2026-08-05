@@ -450,6 +450,10 @@ export function advanceSovereigntyMarket({
           assetId, sellerId, buyerId, components, reasons: [String(clearing.receipt), intent.receipt],
         }],
         worldState: state, settlementUpdates: updates, edges: graphEdges, tick, now,
+        // GR-1: this composer already resolves the freshest roster-bearing record for
+        // every court it prices, so the deed's signature line is read from the same
+        // settlement the sale was priced against rather than from a second lookup.
+        settlementOf,
       });
       if (!mint.minted) {
         // A REFUSED MINT IS RECEIPTED, never silent. The clearing said yes and the

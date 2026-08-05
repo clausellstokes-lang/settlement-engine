@@ -54,6 +54,13 @@ const RUMORS = 'migrationRumorsEnabled';
 // least the shape of a container, while a conveyance rewrites three containers it does
 // not own and adds none, which is why its aliveness channels are empty on purpose.
 const SOVEREIGNTY = 'sovereigntyTradeEnabled';
+// Joined 2026-08-04 by FP wave GR-1 under the same CR-WR10-C atomicity: the oath-holder
+// identity landed its first by-name gate read, its manifest entry and its row in one
+// commit. It is the lane's SECOND zero-key case, and for a different reason than the
+// conveyance's — it adds one conditional FIELD inside a treaty record the peace engine
+// writes on every war exit, so the census cannot separate a stamped world from an
+// unstamped one even in principle.
+const OATH = 'oathHolderEnabled';
 // Joined 2026-08-04 by FP wave TR-1, and CONVERTED FROM A WAVE PENDING ENTRY to an
 // authored row by the cycle-1 landing lane. The conversion is not bookkeeping: a key in
 // ENGINE_GATED_VIRTUAL_RULE_KEYS reaches the census, and the partition assertion below
@@ -63,7 +70,7 @@ const SOVEREIGNTY = 'sovereigntyTradeEnabled';
 // single-writer container and nothing in src/ calls the writer, so a declared channel
 // would grade the row SILENT in every world instead of admitting that nothing has run.
 const CASUS = 'casusCommerciiEnabled';
-const VIRTUAL_RULES = Object.freeze([AXES, CONQUEST, STATECRAFT, RUMORS, SOVEREIGNTY, CASUS]);
+const VIRTUAL_RULES = Object.freeze([AXES, CONQUEST, STATECRAFT, RUMORS, OATH, SOVEREIGNTY, CASUS]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
 
@@ -86,6 +93,11 @@ const LANE_LEAVES = Object.freeze({
     'src/domain/worldPulse/sovereigntyTransfer.js',
     'src/domain/worldPulse/sovereigntyAssets.js',
   ],
+  // The identity's own leaf is the whole lane: the gate, the read and the one stamp
+  // writer live in a single file. The row's `module` list is the same single entry,
+  // which is unusual here and is the point — the three mint doors it stamps at belong
+  // to the peace engine, and naming them would measure the war layer's vocabulary.
+  [OATH]: ['src/domain/worldPulse/oathHolder.js'],
   // The casus commercii's own leaves: the gate and its writer, and the projection that
   // joins the typed evidence to the authored corpus. The taxonomy leaf beside them is a
   // dependency-free table and the receipt pools are frozen prose; both mint nothing, so

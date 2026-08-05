@@ -51,6 +51,9 @@ import { round4, treatyPairKey } from './peaceTermsPrimitives.js';
 import { treatyLedgerOf } from './treatyEnforcement.js';
 import { CURRENT_TREATY_TICKS_PER_YEAR } from './treatyClock.js';
 import { executeTreatyConveyances } from './sovereigntyTransfer.js';
+// GR-1 — the one writer of `sworn`, shared with the head's mint loop so the third door
+// stamps by the SAME law rather than by a second spelling of it.
+import { stampSworn } from './oathHolder.js';
 import { stablePart } from './stablePart.js';
 
 /**
@@ -219,13 +222,22 @@ function buildSaleTreaty(sale, tick, swapId) {
  * conveyances then execute through `executeTreatyConveyances` — the SAME one-shot writer
  * the war road's mint loop calls, so the peacetime sale gains no executor of its own.
  *
+ * GR-1: `settlementOf` is the SIGNATURE LINE's roster resolver. It defaults to "no
+ * record", which resolves no oath-holder and stamps nothing — so every existing caller
+ * and fixture is byte-unchanged, and the composer that HAS a snapshot hands its own
+ * resolver in. A default of `null` rather than a thrown argument is deliberate: a sale
+ * minted without roster access is a sale signed by the seat, which is precisely the
+ * contract a legacy treaty already has.
+ *
  * @param {{ sales?: ReadonlyArray<SovereigntySale>, worldState: Record<string, unknown>,
  *   settlementUpdates?: Array<Record<string, unknown>>, edges?: ReadonlyArray<Record<string, unknown>>,
- *   tick: number, now?: unknown, swapId?: string }} args
+ *   tick: number, now?: unknown, swapId?: string,
+ *   settlementOf?: (id: string) => unknown }} args
  * @returns {SaleMintResult}
  */
 export function mintSovereigntySaleTreaties({
   sales = [], worldState, settlementUpdates = [], edges = [], tick, now = null, swapId = '',
+  settlementOf = () => null,
 }) {
   const nothing = {
     worldState, settlementUpdates, minted: false,
@@ -250,6 +262,15 @@ export function mintSovereigntySaleTreaties({
     built.push(one);
   }
 
+  // GR-1 THE SIGNATURE LINE, at the THIRD mint door. A sale has no victor, so both the
+  // buyer and the seller swear; the stamp lands before the ledger fold so the record
+  // that persists is the record that was signed. Dark ⇒ no `sworn` key on any leg.
+  for (const one of built) {
+    stampSworn(one.treaty, {
+      worldState, tick, settlementOf,
+      ids: [text(one.treaty.buyerId), text(one.treaty.sellerId)],
+    });
+  }
   for (const one of built) ledger[one.key] = one.treaty;
   let state = setSpatialLedger(worldState, 'treaties', Object.fromEntries(
     Object.keys(ledger).sort().map((k) => [k, ledger[k]]),
