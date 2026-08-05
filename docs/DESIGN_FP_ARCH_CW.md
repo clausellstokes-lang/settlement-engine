@@ -222,6 +222,50 @@ aspirational until this lands.
   layer module → walker reds; (b) delete a baseline entry whose import still
   exists → walker reds (shrink-only proven live). Both rows enter
   mutationCoverageManifest.
+- **CR-FP-11 AMENDMENT (the reach repair, 2026-08-05) — WHAT THE INCLUSION**
+  **WALKER CANNOT CATCH.** This clause exists because the first gap was found
+  by a cycle-close verifier rather than by the design: it was never written
+  down, so nobody could look for it. The gap: the layer map is a table of
+  family PREFIXES, and `scanCrossLayerPairs` iterated only layered modules as
+  importers while `continue`-ing on any dependency with no layer. A module
+  matching NO pattern was therefore invisible on BOTH sides — unscannable, not
+  merely unclassified. Nine of the ten leaves FP cycle 1 landed matched
+  nothing (the four `commercial*`, `oathHolder`, `grammarNews`,
+  `grammarReceiptPools`, `bandFamilies`, `bandedStock`); MEASURED matched pair:
+  an unregistered `warCosts` read appended to `commercialReasons.js` left the
+  walker green 7/7, while the identical import in the layered
+  `treatyLifecycleVoice.js` reds by name. Repaired in two arms — (A) the table
+  gains the `commercial*`, `grammar*` and `oath*` families, floors re-measured
+  to the live family sizes, and the two SP substrate leaves join the argued
+  exclusions beside the four infrastructure hosts (each with a written reason
+  and a still-has-no-layer assertion); (B) an UNLAYERED-MODULE CENSUS makes the
+  blind spot itself countable — every module under `src/domain/worldPulse` or
+  `src/domain/spatial` is layered, argued, or frozen in
+  `tests/lint/.coupling-unlayered-baseline.json` (179 at landing, shrink-only),
+  so a new unlayered leaf REDS instead of disappearing. An inventory that grows
+  only by pattern will always trail an estate that grows by file; arm B is what
+  removes the habitat rather than the instance.
+- **THE STANDING CANNOT-CATCH LIST** (kept here and in the walker header, so
+  the next gap is documented before it is discovered): DYNAMIC imports
+  (`await import()` — the scan reads static `from '…'` only); RE-EXPORT
+  LAUNDERING (A→B→C names two pairs and never the A→C coupling when B is
+  same-layer); NON-IMPORT COUPLING (reading a foreign key off `worldState`
+  needs no import — the registry's receipt addresses cover that, not this
+  scan); and ANYTHING OUTSIDE THE CENSUS SCOPE (a layer leaf landing in a third
+  directory is unclaimed and uncounted until the scope widens).
+- **OWED ROWS, FROZEN NOT LAUNDERED (chair ruling owed).** Widening the table
+  revealed two program-era cross-layer reads that landed with no registry row
+  because the importer was invisible: `commercialReasons.js` →
+  `relationshipState.js` (INTERIOR→TRADE, TR-1) and `oathHolder.js` →
+  `npcLadderState.js` (INTERIOR→GRAMMAR, GR-1). They are held in the walker's
+  `REACH_OWED_ROWS` register — exact and shrink-only, reddening the moment
+  either gains a row — rather than dropped into the legacy pair baseline,
+  which is reserved for the volume's §4 pre-program EXISTS blocks; baselining
+  a program-era violation would launder it into permanent invisibility. Minting
+  the rows is a chair declaration (direction/desk/flags/receipt address, plus a
+  `couplingRegistryGrammar.js` leaf that does not exist yet and a widening of
+  the `owningVolume` exact-set pin), so this lane measured and froze it instead
+  of improvising it.
 **Slice 3 — the desk walker + the receipt-field helper (one commit):**
 - Schema v3 (JUDGMENT, vetoable; chair question Q3): rows gain OPTIONAL frozen
   `kinds[]` naming the Herald kinds the coupling mints (rows with no minted
