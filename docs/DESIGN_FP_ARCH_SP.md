@@ -111,7 +111,7 @@ SP-specific bindings, each proven by execution in the WR/H/P lanes:
 | V3 | Truth never leaks past the infoMode gate | `simulationRules.js:739 infoModeOf` (fail-closed string enum) | BUILT |
 | V4 | The axis-extension pattern exists (the fold SP-2's three families join) | `beliefAxes.js` (204 lines): `AXIS_TUNING:32`, `trendBandFromHistory:71`, `axisGroundTruth:120`, folded at `beliefMap.js:654 foldBeliefAxes`; gated by `beliefAxesEnabled` (in ENGINE_GATED list) | BUILT with TWO axes: `populationTrendBand` (numeric −2..+2) and `observanceLabel` (cultural rite). SP-2's families are axes #3-#5+ |
 | V5 | SP-2's three subject families do not yet exist | `grep believedScarcity\|believedConditions\|believedDevotion src` → zero hits | Verified ABSENT — new work, homed in SP-B |
-| V6 | WR-10's appraisal has ONE of four belief legs (CR-WR10-H) | `sovereigntyMarketStage.js:156 beliefLegsOf` returns only `trajectoryBand` from `beliefRecord(...).populationTrendBand`; the injectable seam `beliefLegsFor = beliefLegsOf` at `:311`; header `:64` names "the belief-legs wave, queued" | CONFIRMED. Believed tier, believed stores, believed route position have NO (court, holding) surface. SP-B + SP-B2 discharge this (§9) |
+| V6 | WR-10's appraisal has ONE of four belief legs (CR-WR10-H) | `sovereigntyMarketStage.js:156 beliefLegsOf` returns only `trajectoryBand` from `beliefRecord(...).populationTrendBand`; the injectable seam `beliefLegsFor = beliefLegsOf` at `:311`; header `:64` names "the belief-legs wave, queued" | CONFIRMED. Believed tier, believed stores, believed route position have NO (court, holding) surface. SP-B + SP-B2 supply the SURFACES; ES-4 supplies the distant SOURCE — the three together are the CR-WR10-H discharge (§9, amended at the 2026-08-05 fold) |
 | V7 | The negotiation picture's stores band is errand-scoped, not general | `envoyErrandVocabulary.js:71 ENVOY_STORES_BANDS` — lives in the errand vocabulary; exists only while two courts negotiate | CONFIRMED, exactly as CR-WR10-H measured |
 | V8 | The errand substrate exists with one writer and the ruled lifecycle | `worldState.js:432 'envoyErrands'` (conditional materialization); writer `envoyErrand.js` (823 lines), `'lost'` close paths at `:425/:473/:528`; `ENVOY_ERRAND_STATES` in `envoyErrandVocabulary.js:42`; DM-KILL-closes-lost lifecycle landed with WR-7 | BUILT — SP-1 generalizes IN PLACE (§3 seam ruling 2) |
 | V9 | The purpose vocabulary is war-scoped today | `envoyErrandVocabulary.js:119 ENVOY_PURPOSES = ['sue', 'self_parlay']` | The six-class vocabulary {diplomatic, commercial, religious, factional, personal, covert} is NEW WORK (SP-D) |
@@ -445,12 +445,24 @@ until now the discipline was J-WR-10-B plus two header comments.
 - **Collision map:** `sovereigntyMarketStage.js` is the WAR lane's file
   (WW-A/WW-B lanes live on it as of 2026-08-04) — CHECK-GIT-FIRST, re-read at
   edit time, coordinate through the queue if dirty.
-- **THIS WAVE PLUS SP-B IS THE EXACT DISCHARGE of the WR-10 lighting
-  precondition:** after SP-B (axes exist) + SP-B2 (legs supplied),
-  `sovereigntyTradeEnabled`'s §9 lighting-order row is satisfiable; the WR-9
-  certification walker's invalid-config red for out-of-order lighting gains
-  its green path. Named here so the war program can cite "SP-B/SP-B2 landed"
-  as the precondition's receipt.
+- **THIS WAVE PLUS SP-B ARE TWO OF THE THREE MEMBERS OF THE WR-10 LIGHTING
+  DISCHARGE (amended 2026-08-05, the ES + WY owner-amendment fold, ES ⟨F9⟩):**
+  after SP-B (axes exist) + SP-B2 (legs supplied) + **ES-4** (a non-neighbor
+  (court, holding) pair appraised `known:true` through a completed
+  confirmation mission — the distant SOURCE), `sovereigntyTradeEnabled`'s
+  lighting condition is satisfiable and the war program cites "SP-B + SP-B2 +
+  ES-4 landed" as the receipt: SP-B mints the leg SURFACES, SP-B2 wires the
+  SEAM, ES-4 proves the SOURCE. A market lit on surfaces without distant
+  sources would clear only rumor-range holdings — the CR-WR10-H dead-lighting
+  trap one level up, which is why the third member exists.
+  THE PHANTOM, CORRECTED (not extended): this bullet previously pointed at a
+  §9 "lighting-order row" and a WR-9 certification walker arm as if both were
+  live artifacts. NO SUCH ROW EXISTS anywhere in src/tests/docs (RE-MEASURED
+  AT THE FOLD HEAD `32cc17f7`). The row is MINTED at build by SP-B2/ES-4 (VERIFY-AT-BUILD:
+  locate any row that has appeared since; mint if absent) and it cites all
+  three wave ids. Until it is minted, the lighting condition is RECORDED —
+  in CR-WR10-H (war volume §9), in DESIGN_FP_ARCHITECTURE.md §3 and its seam
+  row 4, and here.
 
 ### SP-C — THE POSTURE READ (flag `strategicPostureEnabled`)
 **Scope:** SP-4a's settlement appetite stock + SP-4b's posture composition.
@@ -685,9 +697,15 @@ season-window width · the frequency-cadence class boundaries.
    `riskToleranceOf` reds on an unknown actor class rather than guessing;
    widening the class set is an explicit SP-4a amendment at the constitution,
    never a volume-local mint. Tripwire: the closed-set pin.
-10. THE WR-10 LIGHTING RECEIPT (toward the war program): SP-B + SP-B2 landed
-    = CR-WR10-H discharged; the WR-9 certification walker's lighting-order
-    row cites those two wave ids as its green condition.
+10. THE WR-10 LIGHTING RECEIPT (toward the war program; AMENDED 2026-08-05 at
+    the ES + WY owner-amendment fold, ES ⟨F9⟩): SP-B + SP-B2 + **ES-4** landed
+    = CR-WR10-H discharged — SP-B mints the leg SURFACES, SP-B2 wires the
+    SEAM, ES-4 proves the distant SOURCE (docs/DESIGN_FP_ARCH_ES.md §6 item
+    5). The certification lighting-order ROW is not a live artifact: it does
+    not exist anywhere in src/tests/docs (RE-MEASURED AT THE FOLD HEAD
+    `32cc17f7`) and is
+    MINTED by SP-B2/ES-4 at build, citing all THREE wave ids as its green
+    condition. Tripwire: a receipt naming only two members reds this item.
 11. THE BAND-FAMILY RECONCILIATION (toward every volume's §7/§8): the SP-A
     walker grows one volume at a time; a volume shipping a Bands line without
     a table row (or vice versa) reds — the fourteen-drift class dies
@@ -703,12 +721,15 @@ other but D's projection rows read no posture — order kept for lane
 serialization on the shared envoy files). Every wave dark; no SP flag is in
 any standing lighting batch; SP flags light at the owner-signed soak redo, in
 build order, with the axis flags requiring `beliefAxesEnabled` lit first (the
-conjunction). THE WR-10 CONVERGENCE, stated once more for the record: the
-exact waves that discharge `sovereigntyTradeEnabled`'s belief-legs
-precondition (CR-WR10-H) are **SP-B (the conditions axis family) and SP-B2
-(the beliefLegsOf supply)** — until both land, that flag's lighting row stays
-red by design. The owner-held boundary is unchanged: soaks, lighting, tuning
-ratification, pushes.
+conjunction). THE WR-10 CONVERGENCE, stated once more for the record (AMENDED
+2026-08-05, the ES + WY owner-amendment fold, ES ⟨F9⟩): the exact waves that
+discharge `sovereigntyTradeEnabled`'s belief-legs precondition (CR-WR10-H) are
+**SP-B (the conditions axis family), SP-B2 (the beliefLegsOf supply) and ES-4
+(the distant SOURCE — a non-neighbor (court, holding) pair carried to
+`known:true` by a completed confirmation mission)** — until all THREE land,
+that flag's lighting condition stays red by design. SP alone cannot discharge
+it: surfaces without sources clear only rumor-range holdings. The owner-held
+boundary is unchanged: soaks, lighting, tuning ratification, pushes.
 
 ## §10 IMPLEMENTER PROTOCOL
 

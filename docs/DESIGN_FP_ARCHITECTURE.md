@@ -1,9 +1,11 @@
-# DESIGN — THE FP ARCHITECTURE (eight programs compiled for build)
+# DESIGN — THE FP ARCHITECTURE (ten programs compiled for build)
 
-## Synthesis architect, 2026-08-04. THE SINGLE COMPILED VOLUME for the FP build:
-## SPINE (SP) · GRAMMAR (GR) · INFORMATION (IN) · TRADE (TR) · FAITH (WF) ·
-## POPULATIONS (POP) · INTERIOR (INT) · COUPLINGS (CW). Compiled from eight
-## program architectures plus one shared-substrate census, all authored
+## Synthesis architect, 2026-08-04; the ES + WY owner-amendment fold, chair
+## 2026-08-05. THE SINGLE COMPILED VOLUME for the FP build: SPINE (SP) ·
+## GRAMMAR (GR) · INFORMATION (IN) · TRADE (TR) · FAITH (WF) · POPULATIONS
+## (POP) · INTERIOR (INT) · COUPLINGS (CW) · ESPIONAGE (ES) · WAYFARE (WY)
+## — TEN programs. Compiled from eight program architectures plus one
+## shared-substrate census, all authored
 ## 2026-08-04 against the LIVE minifold worktree (branch claude/composite-r4;
 ## architect measurements at e564e135, census at 3754c6f3, tree at 67a907fe at
 ## this compile — three points on a moving tree; LIVE CODE OUTRANKS EVERY TABLE
@@ -11,9 +13,15 @@
 ## docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md (its section discipline is copied
 ## here; its §10 binds verbatim in §10 below). This document is self-contained:
 ## an implementer with zero session context and this document can build every
-## wave — the per-program architecture files (SP/GR/IN/TR/WF/POP/INT/CW
-## -ARCHITECTURE.md, this directory) carry the fine-grain per-wave detail and
-## are normative where this volume compresses them.
+## wave — the per-program architecture files (docs/DESIGN_FP_ARCH_{SP, GR,
+## IN, TR, WF, POP, INT, CW}.md, plus docs/DESIGN_FP_ARCH_ES.md and
+## docs/DESIGN_FP_ARCH_WY.md landed at the 2026-08-05 owner-amendment fold)
+## carry the fine-grain per-wave detail and are normative where this volume
+## compresses them. THE TWO AMENDMENT VOLUMES are owner-directive programs,
+## not synthesis outputs: ES compiles the espionage directive (2026-08-04),
+## WY the rumor-durability + absolute-distance directive (2026-08-05,
+## sections 1 through 2l). Their own chair rulings (CR-ES-1..CR-ES-6, WY
+## Q1-Q5) live in their §7s and are NOT re-stated here.
 
 **Status: ARCHITECTURE. Nothing here is scheduled until the owner sequences it
 against the standing pipeline. Every wave ships DARK; no flag lights, no soak
@@ -21,13 +29,22 @@ runs, no band ratifies outside the owner-signed schedule. Where this document
 and a program architecture disagree on SUBSTRATE, the fresher measurement wins
 and the disagreement is a bug to report; where they disagree on DESIGN, the
 source volume (DESIGN_FP_*.md) wins. Judgments are labeled JUDGMENT and are
-vetoable — an implementer NEVER re-rules one silently. Ten open chair
-questions, ranked, close this volume (§11).**
+vetoable — an implementer NEVER re-rules one silently. Ten chair questions,
+ranked, close this volume (§11) — CQ2, CQ5, CR-FP-1, CR-FP-2 and CR-FP-11
+were ruled earlier this era, and CR-FP-3..CR-FP-10 plus CR-FP-12 (a ruling on
+CQ2's SCOPE, not a question answer) are RULED in §11's dated addendum (chair,
+2026-08-05; every one vetoable by one owner clause). The ES and WY amendment
+volumes carry their own ruled lists in their §7s.**
 
 **Reading order for the implementer:** this document top to bottom → the
-program architecture file for the wave being built → the owning
-DESIGN_FP_*.md volume (design law) → DESIGN_WAR_RULINGS_ARCHITECTURE.md §1/§10
-(inherited law + protocol) → SHARED-SUBSTRATE-CENSUS.md (the measured ground).
+program architecture file for the wave being built (an ES-/WY-prefixed wave
+reads docs/DESIGN_FP_ARCH_ES.md / docs/DESIGN_FP_ARCH_WY.md, which are
+normative where this volume compresses them) → the owning DESIGN_FP_*.md
+volume, or for the two amendment programs the owner directive itself
+(memory/espionage-confirmers-directive.md ·
+memory/rumor-durability-and-absolute-distance-directive.md — LAW there) →
+DESIGN_WAR_RULINGS_ARCHITECTURE.md §1/§10 (inherited law + protocol) →
+docs/DESIGN_FP_ARCH_CENSUS.md (the measured ground).
 
 ---
 
@@ -266,7 +283,10 @@ if it existed):**
   arbitrary (court, holding) pair; `storesBand` is ERRAND-SCOPED; only
   `trajectoryBand` exists (and only under beliefAxesEnabled). The injectable
   `beliefLegsFor` seam (sovereigntyMarketStage.js:311) is the supply road —
-  SP-B + SP-B2 are the discharge of CR-WR10-H. `readiness`/`confidence01` are
+  SP-B + SP-B2 supply the leg SURFACES and are two of the THREE members of
+  the CR-WR10-H discharge; ES-4 is the third and proves the distant SOURCE
+  (amended at the 2026-08-05 fold, ES ⟨F9⟩ — see §3's lighting contract).
+  `readiness`/`confidence01` are
   raw floats with NO ladder — an L5 hazard at every consumer; any wave
   narrating them mints the ladder ONCE through SP-A's bandFamilies (J-WR-10-B
   binds the mint). [census §2, SP V6]
@@ -315,7 +335,8 @@ if it existed):**
 - CR-WR10-C (2026-08-04) SUPERSEDES every volume's flag-manifest mechanics:
   manifest membership + certification row (or declared-pending) + first
   strict by-name gate read in ONE commit, never the backlog. §3 binds it for
-  all 43 flags. [POP RF-3, TR S38, IN §2, WF §2, INT §2]
+  all 52 flags (43 at compile + espionageEnabled + the eight WY flags, folded
+  2026-08-05). [POP RF-3, TR S38, IN §2, WF §2, INT §2]
 - `mass_migration` IS a mintable stressor type — only the ARRIVAL coupling is
   absent; the capacityModel:633/stressorGates:476 reads are live for DM- and
   pressure-born stressors. POP must not repurpose them; arrivals-feed is
@@ -399,10 +420,10 @@ build. Never quote a figure from a volume — including this one.
 
 ---
 
-## §3 THE FLAG FAMILY (43 new virtual flags; the manifest law; the lighting
+## §3 THE FLAG FAMILY (52 new virtual flags; the manifest law; the lighting
 ## contract)
 
-**The law (all 43, no exceptions — CR-WR10-C, superseding every volume's §3
+**The law (all 52, no exceptions — CR-WR10-C, superseding every volume's §3
 mechanics):** VIRTUAL (absent from DEFAULT_SIMULATION_RULES and every preset
 spread); strict `=== true` reads, dark-never-permissive; at least one BY-NAME
 read (the conjunction-gate hole, §1 L2); the flag joins
@@ -463,6 +484,15 @@ lane-only; that history-vs-doctrine nonuniformity is chair question Q5.
 | 41 | `deliberateForgivenessEnabled` | INT-6 | burial verb both arms, suppression reads, dig-up |
 | 42 | `legitimacyCrossingsEnabled` | INT-7 | legitimacy crossing receipts |
 | 43 | `cascadeGovernorEnabled` | CW-1 | the cascade braid at Herald composition |
+| 44 | `espionageEnabled` | ES-1 | covert confirmation missions on the errand spine: mission mint + gauntlet + typed products (CONFIRM/ACQUIRE/REFUTE) + doctrine + absence discount |
+| 45 | `severityDurableRumorsEnabled` | WY-2 | severity-durable rumor fidelity: the one-multiplier amendment on organic per-hop weathering |
+| 46 | `caravanBodiesEnabled` | WY-3 | shipment departTick+path stamps, the mission leg clock, the quantization cadence |
+| 47 | `flowMigrationPhysicalEnabled` | WY-4 | the flow_migration exactly-one fence: columns, not teleports, under the spatial canon |
+| 48 | `migrationCargoEnabled` | WY-4 | faith cargo + launching receipt on migration columns |
+| 49 | `moversCarryNewsEnabled` | WY-5 | arrival fidelity injections + the going-dark read |
+| 50 | `caravanSeizureEnabled` | WY-6 | the army×caravan prize arm |
+| 51 | `caravanFloorEnabled` | WY-11 | the per-region subsistence circulation floor |
+| 52 | `armySupplyEnabled` | WY-8 (slice 8a) | military supply: the F9 stock-in-transit, consumption/condition coupling, rest-debits + requisition-resistance (2k) |
 
 Existing flags this volume completes or consumes WITHOUT re-minting:
 `settlementPoliticsEnabled` (INT-2 completes it — exists dark),
@@ -476,17 +506,44 @@ copy its shape and religionDynamicsEnabled gains no new consumers),
 `provenanceLedgerEnabled` (ONE_REGEN cohort, owned by the engine-finale
 program; CW-2x reads its ledger and never touches the cohort),
 `memoryWeaveEnabled` (gates the whole grievance-consumer lane — every INT
-dormancy proof covers the weave-dark arm explicitly).
+dormancy proof covers the weave-dark arm explicitly). `espionageEnabled`
+requires `errandSpineEnabled` lit first; its axis-fed arms degrade declared
+while `believedConditionsEnabled` is dark. The WY flags gate conditional
+FIELDS on existing records (§4's WY entry); none mints a key.
 
 **The lighting contract:** lighting order = build order (§5); a flag lit out
 of order is an invalid config each program's convergence walker reds. SP-B's
 axis flags require `beliefAxesEnabled` lit first; WF SPREAD-lane flags AND
 with `isFaithSpreadEnabled`; POP flags require `demographicsEnabled`;
 `faithNarrationEnabled` lights last within WF. All lighting is owner-held at
-the signed soak redo. THE WR-10 CONVERGENCE: `sovereigntyTradeEnabled`'s
-lighting row (CR-WR10-H) is satisfied by exactly **SP-B + SP-B2 landed** — the
-WR-9 certification lighting-order row cites those two wave ids as its green
-condition.
+the signed soak redo. THE WR-10 CONVERGENCE (amended at the 2026-08-05 fold,
+ES ⟨F9⟩): the `sovereigntyTradeEnabled` lighting condition is satisfied by
+**SP-B + SP-B2 + ES-4 landed**: SP-B mints the leg SURFACES, SP-B2 wires the
+SEAM, and ES-4 proves the SOURCE — a non-neighbor (court, holding) pair
+appraised `known:true` through a completed confirmation mission, per the
+owner's espionage amendment (2026-08-04: spies are the source of
+tier/route/trajectory legs about non-neighbors). A market lit on surfaces
+without distant sources would clear only rumor-range holdings — the CR-WR10-H
+dead-lighting trap one level up. THE INHERITED PHANTOM, CORRECTED (not
+extended): this paragraph previously claimed a WR-9 certification
+lighting-order row cites those wave ids; no such row exists as an artifact
+anywhere in src/tests/docs. RE-MEASURED AT THE FOLD HEAD `32cc17f7` (not
+inherited from the 99d63d92 census, which undercounted): the phantom claim
+lives at FIVE sites in TWO documents — this paragraph, §5 wave #4 (SP-B2's
+charter), §9 seam row 4, and docs/DESIGN_FP_ARCH_SP.md at BOTH its SP-B2 wave
+block and its §8 item 10. All five are amended by this same fold commit; a
+fold that amends fewer leaves a normative per-program volume contradicting
+this one on the exact trap the amendment closes. The corrected clause reads:
+the lighting condition is RECORDED in CR-WR10-H (war volume §9), this
+paragraph, §5 wave #4, seam row 4, and the SP volume's two sites; the
+certification lighting-order ROW is MINTED by SP-B2/ES-4 at build
+(VERIFY-AT-BUILD: locate any row that has appeared since; mint if absent),
+and it cites SP-B + SP-B2 + ES-4 as its green condition. THE NEGATIVE IS
+EXECUTED, NOT REASONED: at `32cc17f7`, `warConvergenceContract.js` carries no
+`requiresLandedWork` field at all, `subsystemRowsVirtual.js`'s
+`sovereigntyTradeEnabled` row carries no landed-work condition, and
+`tradeConvergenceContract.js` — the one file that does use
+`requiresLandedWork` — never names `sovereigntyTradeEnabled`.
 
 ---
 
@@ -494,11 +551,20 @@ condition.
 ## entry lands its full Lifecycle-paths clause in the program file BEFORE its
 ## writer builds; drop-when-empty at every level; exactly ONE writer each)
 
-**The fights won:** ZERO new top-level worldState keys across all eight
+**The fights won:** ZERO new top-level worldState keys across all ten
 programs. All growth is (a) EIGHT new conditionally-materialized
 spatialLedgers sub-keys, (b) conditional drop-when-absent fields on existing
 records, (c) pure modules with no state. One contingent ninth sub-key exists
-only if IN-0a's primary transport fails verification (Q3).
+only if IN-0a's primary transport fails verification (Q3). THE TWO AMENDMENT
+PROGRAMS HOLD THE LINE AND ADD NOTHING TO (a): between them ES and WY mint
+ZERO new top-level keys, ZERO new spatialLedgers sub-keys and ZERO new
+mapState keys — ES one conditional sub-record, WY nine conditional fields on
+existing records plus the frozen-digest datum `spatialDigest.kmScale`. WY's
+nine are an OWNER-GATED BATCH SIGN-OFF (persisted-record shape;
+docs/DESIGN_FP_ARCH_WY.md §2a IS the request). F9 `supplyCargo` is UNSIGNED
+at this fold — no wave mints it until the owner signs its row; every field is
+drop-when-absent and flag-gated, so an unsigned row stalls exactly one wave,
+never the program.
 
 | New spatialLedgers sub-key | Program/wave | Writer (one) | Regen story |
 |---|---|---|---|
@@ -550,6 +616,25 @@ writer):**
   finds itself writing worldState has left its spec and STOPs. The braided
   item is VIEW-ITEM-WITH-RECEIPT-DISCIPLINE (deterministic composition-time
   id, address chain, typed action, entity refs — never persisted).
+- ES: `envoyErrands[].covert` (present only on covert-class rows; itinerary
+  <= 3 + product + demand band + tap-marked gathered gradient partials +
+  standoff mark; drop-when-absent; `normalizeErrand` taught in the writer's
+  commit). Vocabulary members: FOREIGN_GUEST_HOLD_CAUSES + `caught_spying`;
+  TRAVELLER_KINDS/HIDDEN_PATH_KINDS + `covert_envoy`. ZERO new top-level
+  keys; zero new spatialLedgers sub-keys; every
+  clock/doctrine/notoriety/wariness/dwell/promotion-risk read DERIVED (the
+  ransomDwellRead precedent).
+- WY: nine conditional fields on existing records (supplyShipments
+  departTick/path; missions legDepartTick; migration faithCargo/causeReceipt;
+  deployments+armyTransit experience; armyTransit prizeCargo + supplyCargo) +
+  the frozen-digest datum `spatialDigest.kmScale` (CARRIED FORWARD through
+  every receipted re-canonize — the rebuild path re-receives it,
+  lifecycle-pinned); ZERO new top-level keys, ZERO new ledger keys;
+  normalizers taught same-commit (columnOf THROUGH-ENQUEUE; the commodityFlow
+  arrive-loop reconstruction taught departTick/path; supplyShipments
+  round-trip landed at WY-3); route positions stay DERIVED — the
+  route-position-id guard census. Owner sign-off table:
+  docs/DESIGN_FP_ARCH_WY.md §2a.
 
 **Pure modules with no state (the spine's exports):** bandedStock.js (the
 shared half-life shape + crossing-receipt grammar + anti-ratchet property),
@@ -574,7 +659,7 @@ payload builder returns through veilPublicPayload (standing law).
 
 ---
 
-## §5 THE WAVES (60 waves, dependency-ordered ACROSS programs; each: one
+## §5 THE WAVES (75 waves, dependency-ordered ACROSS programs; each: one
 ## commit per wave/slice, focused gates per slice, full gate at wave end
 ## through check:tail / gate-tail.sh, ledger row; every flagged wave DARK per
 ## §3; the per-program architecture file carries the full spec — the block
@@ -584,6 +669,20 @@ Numbering is the compiled build order. "Early-eligible" marks the measured
 buildable-now set whose early motion is chair question Q2; absent that
 authorization, strict order holds. Two lanes may interleave only where a
 wave's block names sanctioned parallelism.
+
+THE FOLDED WAVES CARRY THEIR VOLUME IDS, NOT COMPILED NUMBERS (JUDGMENT,
+vetoable — recorded here rather than taken silently). The 2026-08-05
+owner-amendment fold inserts eight ES waves and seven WY engine waves into
+this order: 60 + 8 + 7 = **75**. They are inserted AT the position each
+volume's queue clause names and are read in document order like every other
+wave, but they keep their `ES-`/`WY-` ids rather than renumbering #1..#60 —
+renumbering would rot every live cross-reference to a numbered wave
+(SOL_QUEUE, the eight program files, the war volume, the memory index, and
+this document's own §9). The compiled number and the volume id are equally
+binding as ORDER; only the number is scarce. WY's five SURFACE waves (WY-0,
+WY-7..WY-10) are NOT in this count — they live in SOL_QUEUE §2 LANE B as
+their own named sub-block, and WY-8's ENGINE slice 8a (which mints flag 52)
+rides that row.
 
 ### PHASE 0 — THE GATE OPENERS (before any FP cross-layer registry row)
 
@@ -645,10 +744,14 @@ THROUGH the existing injectable `beliefLegsFor` seam — the stage's
 composition is untouched. The lit-with-legs contract fixture flips from
 proves-the-seam to proves-the-supply; the four-leg totality pin (each absent
 leg = `known:false`, never a guess); the degraded-arm pin (three lit, one
-dark still refuses). **THIS WAVE PLUS SP-B IS THE EXACT DISCHARGE OF
-CR-WR10-H — the WR-10 lighting precondition.** After #3+#4 land,
+dark still refuses). **THIS WAVE PLUS SP-B ARE TWO OF THE THREE MEMBERS OF
+THE CR-WR10-H DISCHARGE — the WR-10 lighting precondition; ES-4 is the third
+(ES ⟨F9⟩, folded 2026-08-05).** After #3 + #4 + ES-4 land,
 `sovereigntyTradeEnabled`'s lighting-order row is satisfiable and the war
-program cites "SP-B/SP-B2 landed" as the receipt. Collision:
+program cites "SP-B + SP-B2 + ES-4 landed" as the receipt: SP-B mints the leg
+SURFACES, SP-B2 wires the SEAM, ES-4 proves the SOURCE. The row itself is
+MINTED at build — no such artifact exists in src/tests/docs today (measured at 32cc17f7);
+see §3's lighting contract and §9 seam row 4. Collision:
 sovereigntyMarketStage.js is the war lane's file — coordinate through the
 queue if dirty.
 
@@ -696,6 +799,20 @@ PHRASE-REPETITION ENVELOPE soak instrument (own certification leaf; collapse
 mutant executed); the heraldFeed.js:95 significance-migration census
 (assessment first — the census names the debt, each surface migrates in its
 own small wave). Zero engine behavior changes.
+
+**WY-1 — THE SCALE CHARTER** (no flag; DATA-GATED by `spatialDigest.kmScale`;
+WY §5, lane E; slots at the PHASE 1 TAIL — spine infrastructure, dark by
+absent data). Charter: absolute realm distance derived from the map's own km
+scale, the per-map band derivation, and the mode table. J-D11(b) is
+ACTIVATED AND AMENDED here, not contradicted: the mode table lands gated by
+`spatialDigest.kmScale`, DECOUPLED from `portOpportunityEnabled` (which stays
+the J-D11 (a)/(c) port program's flag) — the war volume's two J-D11(b) sites
+carry the pointer sentence landed in this same fold commit (WY §5b item 9).
+The km-scale datum is CARRIED FORWARD through every receipted re-canonize
+(lifecycle-pinned; the rebuild path re-receives it). Seam: SP — one position
+model, no second speed floor (law M binds in every denomination); the
+armyTransit exemption is FILED as a structural-prevention candidate, not
+fixed here.
 
 ### PHASE 2 — GRAMMAR (SOL_QUEUE row 12; GR §5)
 
@@ -803,7 +920,8 @@ red; GR-7 samples its OWN registry rows through couplingReceiptSample
 (SC-9). Never a wizard_news.*-fed identity on a certification row. DONE =
 envelopes hold on an owner-ordered soak.
 
-### PHASE 3 — INFORMATION (SOL_QUEUE row 13; IN §4)
+### PHASE 3 — INFORMATION (SOL_QUEUE row 13; IN §4 + the ES owner-amendment
+### family, docs/DESIGN_FP_ARCH_ES.md)
 
 **#16 IN-0 — THE PRICES BECOME LAW** (four slices, four commits; rides
 existing flags). **0a THE HANDOFF** (re-scoped by R1 — the fold is built; the
@@ -862,6 +980,119 @@ parameter at last; PLANT_REFUSALS grows six->SEVEN with `too_hot`
 no-fates wording; the Watch panel (sightPostures' first UI consumer, DM-only
 fail-closed). Edit-verb: the SWEEP DM verb (same store-action discipline).
 
+**WY-2 — THE DURABLE TRUTH** (flag `severityDurableRumorsEnabled`; WY §5;
+slots in PHASE 3 IMMEDIATELY BEFORE ES-1 so the manipulation seam composes —
+if the ES family is not present, WY-2 slots directly after #19 IN-3).
+Charter: truth durability scales with SEVERITY per hop — the ONE-MULTIPLIER
+amendment on the existing organic per-hop weathering, lit arm on the
+keyed-hash01 closed table, dark arm VERBATIM. Big lies cost more by
+corroboration; manipulated hops bypass the floor and are PRICED AT THE PLANT
+SITE (the pricing pin lands ES-side and cites WY-2). Seam IN: the fork-key-set
+census + the other-consumer stream golden (fork isolation IS the stream
+guarantee — stream theft dies at birth).
+
+**ES-0 — THE PURE LEAVES** (no flag; dark by construction; EARLY-ELIGIBLE is
+a MEASURED FACT about this wave, NOT an authorization — it RUNS IN STRICT
+ORDER: CR-FP-12 DECLINES to extend CQ2's early-motion set to ES-0, because
+ES-0 edits two live WAR-LANE files (`warSeatBooks.js`, `warMagicGate.js`) and
+its `lawWordFor` retarget is a cross-file war-lane VOCABULARY change with
+golden-shift exposure — not the pure-density zero-collision profile CQ2's
+four members share. ES-0 sits early in cycle 2 regardless, so nothing real is
+lost; ES §4). Charter: `espionageDoctrine.js` — `lawWordFor` minted ONCE
+and exported, `warSeatBooks.js` retiring its private `lawfulnessBand` to it
+in the SAME commit (a ~6-line edit; coordinate with the war lane, note INT-1's
+future claim on the file) + `readEspionageDoctrine`; `espionageMath.js` —
+`operativeNotoriety01` (re-export with import-source pin), `covertCompetence01`,
+`catchChance01`, `legStack`, `dwellRamp`, `TAP_LEVELS`/`MISSION_GRADES`
+totality exports, the pure cores of `wariness01` and `promotionRiskOf`,
+`deliberationRead`; `magicWorksAt.js` — the neutral lift of
+`warMagicFunctions` with `warMagicGate.js` re-exporting (the R-BLD-5
+precedent), its header NAMING the module-private twin `magicFunctionsAt` at
+spatial/teleportEdges.js so a sweep never conflates them. Budgets: three
+leaves <= 250 effective each; the warSeatBooks/warMagicGate edits <= 10 lines
+each. Pins: the zero-import pin on the doctrine leaf (the sovereigntyAppraisal
+geometry); two-tail `lawWordFor` reachability built from REAL
+computeLawfulness output (hand-fed numbers refused); dwellRamp monotonicity +
+all-bands-reachable. Dormancy: no flag, no caller — the WR-10 dark-instrument
+precedent.
+
+**ES-1 — THE MISSION** (flag `espionageEnabled` + manifest, ONE commit per
+§3's law; needs #6 SP-D; ES §4). Charter: the covert arm in SP-D's
+`errandMint.js` (mint validation: itinerary <= 3, closed products + demand
+bands + the six-member legRefs set with pullBand refused, dispatch-refusal
+seams, concurrency cap) + `normalizeErrand` taught the `covert` sub-record in
+the SAME commit (the columnOf precedent) + the `covert_envoy` franchise
+members in `routeNetworkConsumers.js` + the one-word kind fork at
+`buildEnvoyRoutePlan`'s call site + covert casting (importance-inverse draw)
+routed through the ONE vetting reader `vetVolunteerEnvoy` (sendTwoDivergence.js
+— neither program forks a second vetting derivation).
+
+**ES-2 — THE GAUNTLET** (second slice of `espionageEnabled`; needs ES-1;
+consumes CR-ES-2 and CR-ES-3; ES §4). Charter: the stay-detection stage —
+`espionageGauntlet.js` mounted INSIDE the errand advance (the covert stage
+composes into `advanceEnvoyErrands`' existing per-tick walk, one transition
+per row per pulse, read-back-before-adopt, the WR-7 stage discipline; NEVER a
+pulseKernel/applyWorldPulse edit — L1) rolling at hostile stops; capture ->
+`openForeignGuestHold` cause `caught_spying` (vocabulary member + the cause's
+news arm) through the ONE hold writer. THE ENCOUNTER-TABLE ROW LANDS IN THIS
+WAVE'S COMMIT (CR-ES-6): mounting the gauntlet adds row E15 — spy-dwell
+detection, covert operative x host settlement watch — to the WY volume's §4
+closed encounter-pairs table, which WY-6 (a phase later) then VERIFIES at
+fifteen rather than re-closing at fourteen. The encounter-resolver REGISTRY is
+ONE (that table); the catch MATH stays in ES §3.3. THE ANONYMITY AMENDMENT
+(CR-ES-2)
+lands at the law's LIVE HOMES BEFORE this wave builds — the
+informationStatecraft.js BOUNDARY header block AND DESIGN_FP_INFORMATION.md
+§1b (the law and its phrase-scan enforcer amend together); the war volume
+gets exactly ONE cross-reference line beside the WR-7 hostage machinery,
+never the amendment text. Until CR-ES-3's vocabulary unification lands, the
+captor-leniency arm ships DARK behind the ruling's absence, DECLARED — not
+silent.
+
+**ES-3 — THE PRODUCTS + THE GRADIENT** (third slice; needs #3 SP-B for the
+full arm, ships the degraded arm regardless; ES §4). Charter:
+`espionageProducts.js` — the three synthetic-report builders (completeness
+floored, sourceId = agent nid) + THE TAP LADDER (`tapLevelFor(stop, face,
+asset)`, the performance-poisoning term over the imported `lieWillingness`,
+the tap-composed accuracy caps, tap recorded on every gathered entry) + the
+gradient accrual writer (`covert.gathered` through the errand writer's
+transaction). J-INA-2 EXTENDED and scan-pinned: products ride the report
+road, plants ride the plant roads, the two NEVER share a writer.
+
+**ES-4 — THE JOINT-LEGS DISCHARGE** (rides SP-B/SP-B2's flags; the lighting
+wave; ES §4). **THE THIRD MEMBER OF THE CR-WR10-H DISCHARGE** (see #4 SP-B2
+and §3's lighting contract). Charter: ACQUIRE/CONFIRM/REFUTE wired to SP-B's
+`conditionsBands` spellings (closed-vocabulary seam pin, both sides); the
+fed-by-espionage companion fixture beside SP-B2's lit-with-legs contract
+fixture — a non-neighbor (court, holding) pair goes `unknown -> known` through
+a completed mission and `appraiseSettlementAsset` prices it end to end; THE
+NON-NEIGHBOR DIFFERENTIAL pin — rumor-range-only feeding leaves the far pair
+`known:false`, the mission fills it. The certification lighting-order row is
+MINTED here (VERIFY-AT-BUILD: locate any row that has appeared since; mint if
+absent) citing SP-B + SP-B2 + ES-4.
+
+**ES-5 — DOCTRINE ENGAGED + THE ABSENCE AMENDMENT** (fourth slice; the
+absence arm rides CR-ES-1, SIGNED; ES §4). Charter: the doctrine STAGE
+(`espionageDoctrineStage.js` — gathers words off worldState/snapshot, returns
+null when dark; the conquestDoctrineStage split) + the autonomous dispatch
+cadence (doctrine frequency01 x the deliberation read x candidate
+availability — the court decides to spy, keyed-hash, receipted in doctrine
+words, setting the mission DEMAND) + `wariness01` wired into the gauntlet +
+the IN-3 `suspicionOf` handshake (ONE derivation; ES consumes it lit, derives
+minimally dark). THE ROADS LAW-5 AMENDMENT (CR-ES-1): a flag-gated GRADED
+COUNCIL-WEIGHT DISCOUNT via the `memberNpcIds` first consumer; `isOffStage`
+UNTOUCHED; dark worlds byte-identical; the lit shift disclosed. The literal
+full-off-stage reading is REFUSED as implementation.
+
+**ES-6 — THE DOUBLE AGENT** (fifth slice; degraded-dark when the corruption
+web is dark; ES §4). Charter: the leash read at dispatch (deterministic,
+keyed on the minted errand id) + the leak delivery (magic two-address sends;
+mundane reach-priced) + meta-intelligence writes + THE SILENT-SUCCESS
+DISCIPLINE (no news, no home state — the negative is the hardest pin) +
+vetting quality from home security x own-web health + the retroactive Herald
+clause on web exposure. ES never writes web state; conversion of ES captives
+rides the web's existing returned-captive road.
+
 **#20 IN-4 — THE ROAD** (flag `reputationRaceEnabled`). The race's degraded
 arm builds NOW (arrivals the existing ledgers stage — armies, exiles,
 refugee columns, envoy returns); RACE_OUTCOMES tokens verbatim; THE TRUTH
@@ -884,6 +1115,23 @@ SC-2); intel_transfer STAYS under trade; the arc composer (pure — save/load
 mid-arc recomposes identically); the inaction receipt court_sat_still with
 its low-confidence negative; the significance ceiling raised to 'major' for
 exactly three banded shapes.
+
+**ES-7 — THE VOICE + THE MEASURE** (final `espionageEnabled` slice; slots
+AFTER #21 IN-5 because it routes to the knowledge desk that wave mints;
+converts the certification pending; ES §4). Charter: the six Herald kinds
+with the L6 FIVE JOINS each in their mint commit (annex-verbatim pool rows ·
+registry row with requiredSlots + slotless fallback · WHAT_PHRASES · section
+authority — knowledge desk for confirmations/refutes, the war/politics desks
+for captures/betrayals per heraldRouting's EXACT_SECTION · the full address
+chain with typed action + recorded reasons + audience); its OWN walker file;
+the TAP REGISTER; significance classes drawn from SP-A's family (covert beats
+the `routine` class so quiet departures never clear
+`passesSignificanceGate`). dm-only covert is fail-closed UPSTREAM. Every ES
+kind is `espionage_*`-prefixed and receipt-addressed so the REAL-mission
+story is distinguishable from the LIVE ambient `cold_war_espionage` drift,
+which stays UNTOUCHED (a diff in its tests is a tripwire). The no-fates
+phrase scan runs at its DESIGN_FP_INFORMATION.md §1b home over these strings
+— the CR-ES-2 amendment's BY-THE-ENGINE qualifier is what makes them lawful.
 
 **#22 IN-6 — THE MEASURE** (no flag). Decontamination ratchet baselines
 re-measured at build; the earned-classification walker (bare `news` token
@@ -926,6 +1174,22 @@ deliberate-average control); dispatchEV gains the destination-consumer seam.
 Staleness reachable (>= two bands, receipted); T-1 tellable (came for the
 famine, found the harvest).
 
+**WY-3 — THE MOVER BODIES** (flag `caravanBodiesEnabled`; owner sign-off rows
+required before the fields mint; WY §5; slots in PHASE 4 IMMEDIATELY BEFORE
+#26 TR-4 so grain inherits the caravan body). Charter: shipment
+departTick+path stamps, the mission leg clock, the quantization cadence; the
+commodityStocks/supplyShipments serialize->regen->undo->import round-trip pin
+LANDS HERE (TR-4 verifies and extends it, never re-lands it); the
+flowRegimeContract PRE-PINS TR-4's T7 rows — and TR-4's T7 row is ROUTED
+CENSUS-SHAPED: "T7 fences the grep-derived `importDependency` consumer census
+of the food ledger, shrink-only" (members at HEAD include foodCapacityOf and
+substitutedImportDependency; the tierResourceDynamics same-name local excluded
+by symbol-home) — NEVER a count-of-N row. Q5 ruled: the caravan map layer
+ships on this wave against the M6a NON-FOOD shipments with an HONEST LEGEND;
+grain caravans join AUTOMATICALLY when TR-4 lights, because the layer binds to
+the LEDGER, not the flag. Collision: commodityFlow edits are SERIAL with the
+TR lanes — CHECK-GIT-FIRST.
+
 **#26 TR-4 — THE GRAIN ROAD** (flag `foodCaravansEnabled`; two slices;
 EARLY-ELIGIBLE). Slice 1: grainFlow (one truth source, two denominations) +
 grainArrivalCredit (units->months via ONE authored constant, credited
@@ -939,10 +1203,24 @@ calm-equivalence band (the disclosed, bounded lit-path shift); the three
 bypass counterforces EACH executed (teleport 0.3 / airshipBesieged 0.15 /
 underways). Slice 1 also LANDS the commodityStocks/supplyShipments
 serialize->regen->undo->import round-trip pin (measured absent — do not
-inherit). Slice 2: treaty streams ride caravans (the lit fork in
+inherit) — LANDED AT WY-3, ordered immediately before; TR-4 VERIFIES and
+extends it to the grain rows, never re-lands it. Slice 2: treaty streams ride
+caravans (the lit fork in
 treatyTransfer; robbery -> I2 reparations claim with the creditor's-picture
 fork). The applyWorldPulse:92-110 second fold is handled per Q9's pre-ruling
 (REPORTED-NOT-DEFECT; the queue row filed; the sixth-writer scan fences it).
+
+**WY-6 — THE PRIZE ARM + THE PAIRS TABLE** (flag `caravanSeizureEnabled`;
+owner sign-off row F8; WY §5; slots AFTER #26 TR-4). Charter: the army x
+caravan prize arm and the CLOSED encounter-pairs table — the map SHOWS
+encounters, it never CREATES them. THE TABLE IS CLOSED AT FIFTEEN, NOT
+FOURTEEN (CR-ES-6, folded 2026-08-05): ES-2 admits row E15 (spy-dwell
+detection) in its own commit a phase earlier, so this wave's walker is BORN
+SEEING FIFTEEN and VERIFIES it — a walker written to re-close at fourteen
+would red a resolver the estate consciously admitted. Prize credit moves real
+stores exclusively
+through commodityFlow's ONE stock-write seam (the same door F9's supply uses;
+a store write outside that seam reds the stock-write source scan).
 
 **#27 TR-5 — THE PACT LANE** (flag `tradePactsEnabled`; needs GR-2/GR-3).
 commercialTermExecutors (five executors as lazy peaceTerms-family siblings)
@@ -1001,6 +1279,12 @@ for all eight TR flags (converting pendings); the kind-availability walker
 registry rows (SC-9); tickScanBudget lanes; house-Gini + corner + pact-mix +
 endings-share envelopes, every window INTERVAL_WEEKS-derived, every envelope
 with an executed mutant.
+
+**WY-11 — THE LIFEBLOOD ENVELOPE** (flag `caravanFloorEnabled` + a
+certification instrument; WY §5; slots AFTER #31 TR-9). Charter: the
+per-region subsistence circulation floor — EV-side only, never a second
+stock-write path — with its envelope window INTERVAL_WEEKS-derived and an
+executed mutant, in the TR-9 convergence idiom.
 
 ### PHASE 5 — FAITH (program 5; WF §4)
 
@@ -1123,6 +1407,30 @@ same-commit, pinned THROUGH-ENQUEUE (RF-1); THE OMNISCIENCE COLLAPSE
 re-executed at 300 ticks over both new arms. The homeward column's
 migration_flight rumor face is ACCEPTED for v1 and recorded in this wave's
 ledger row (POP Q3 resolved).
+
+**WY-4 — THE POPULATION CARGO + THE FENCE** (flags
+`flowMigrationPhysicalEnabled` + `migrationCargoEnabled`; owner sign-off rows
+F4/F5; WY §5; slots in PHASE 6 IMMEDIATELY AFTER #42 POP-1 — the shared
+columnOf amendments compose BY ORDER, POP-1 first). Charter: the
+flow_migration EXACTLY-ONE fence (columns, not teleports, under the spatial
+canon), covering BOTH apply arms (auto + proposal-accept); faith cargo +
+launching receipt on migration columns, the credit writing ONLY through
+religionState's own writer family (single-writer law; occupationFaithPull is
+the shape precedent). Q1 ruled BLEND: the column carries the banded
+composition and arrival pulls the destination mix by
+arrivals/(destPop+arrivals), renormed; the popup says "faiths carried", never
+"faith conserved". The producer overlap with M4's own crisis lane is MEASURED
+at build and fenced by attribution + dedup precedence (the fence yields to a
+same-tick M4 dispatch). Pins: THROUGH-ENQUEUE; the proposal-accept pin; the
+double-send mutant against the dedup pin; the wrong-lane mutant — a columnOf
+edit that drops either program's fields reds BOTH programs' pins.
+
+**WY-5 — THE CARRIED WORD** (flag `moversCarryNewsEnabled`; WY §5; slots
+AFTER WY-4). Charter: arrival fidelity injections and the going-dark read —
+movers carry news, and the tap-order law here is the MOVER instance of the
+espionage volume's owner-addition H ruling. The going-dark Herald kind lands
+with the L6 five joins and IN-5's desk routing honored; the fork-key-set
+census + the other-consumer stream golden guard the stream.
 
 **#43 POP-2 — THE COMMONS ARC** (flag `commonsArcEnabled`). The REFUSAL rung
 + jump rule (lit-no-target time-to-riot equals dark tick-for-tick);
@@ -1599,8 +1907,17 @@ starvation figure and every numerator re-measure at the landing commit.
 **Why this order (§5) and not another:** SP first because three programs'
 subjects (scarcity/conditions/devotion), the posture read, the errand spine,
 and the significance family are five-program dependencies — and because
-SP-B+SP-B2 discharge CR-WR10-H, un-darkening a landed war instrument (the
-single highest-leverage pair of commits in the queue). CW-0w in phase 0
+SP-B+SP-B2 supply the leg SURFACES and the SEAM CR-WR10-H demands,
+un-darkening a landed war instrument — still the highest-leverage motion in
+this order. AMENDED 2026-08-05 (the ES + WY owner-amendment fold, ES ⟨F9⟩):
+that discharge has THREE members, not two — ES-4 is the third and proves the
+distant SOURCE, so the precondition COMPLETES in PHASE 3, not here. This
+SHARPENS the rationale rather than softening it: SP still goes first because
+the surfaces must exist before any source can be proved against them, and a
+market lit on surfaces without distant sources clears only rumor-range
+holdings. The count word this sentence used to carry ("a pair of commits") is
+retired deliberately; see §3's lighting contract, §5 wave #4, ES-4's block,
+and §9 seam row 4. CW-0w in phase 0
 because the registry's growth path is mechanically blocked (the WAR-locked
 regex) and every pre-walker wave widens the honor-system surface. GRAMMAR
 before INFO/TRADE because the term catalog, formation writer, and proposal
@@ -1611,8 +1928,17 @@ and diaspora couplings; INTERIOR after POP because its consumers
 (seatBooks/permits/commons) are the others' callers; CW-1..3 LAST because
 braids, walks, and envelopes over couplings that do not exist yet are
 instruments over an empty sky (the chainDepthDegenerate red says exactly
-that). Early-eligible waves (GR-0, GR-1, TR-1, TR-4, TR-9-contract) are
-measured facts; authorizing their early motion is Q2.
+that). Early-eligible waves (GR-0, GR-1, TR-1, TR-4, TR-9-contract, and —
+folded 2026-08-05 — ES-0's pure leaves) are measured facts about what COULD
+build now; AUTHORIZING early motion is a separate act, and it is Q2, RULED as
+CQ2 for exactly GR-0 + GR-1 + TR-1 + TR-9-contract. **THE FOLD DOES NOT WIDEN
+THAT SET.** ES-0's early ELIGIBILITY is recorded above as the measured fact
+it is, and CR-FP-12 (§11 addendum) DECLINES its early MOTION: ES-0 edits two
+live war-lane files and carries a cross-file vocabulary retarget with
+golden-shift exposure, so it runs in strict order. Eligibility is a
+measurement; membership in CQ2 is a ruling; the two are never the same
+sentence. WY-0 is buildable-now too but is a SURFACE wave: it opens the
+SOL_QUEUE §2 LANE B WY sub-block, not this order.
 
 **The seam matrix (every cross-program contract; pin owner each side; the
 tripwire that makes silence impossible).** HONORED = the counterpart's pin
@@ -1623,7 +1949,7 @@ already exists; PRE-PIN = this volume lands both sides.
 | 1 | Term catalog growth | GR-3 -> WR-10 bundle | HONORED: catalogGrewSinceWr10() reds at GR-3; the one-time discharge is GR-3's (J-FP-1) |
 | 2 | Twin degradation sentence | TR-5 <-> WR-10 | HONORED: byte-equal Seam One sentence, PIN-6 + uniqueness; no second sentence ever |
 | 3 | Trade-rights rows | GR-3 -> TR-5 | PRE-PIN: seam rows minted at GR-3; a GR pin asserts them producer-less and reds the day TR-5 lands executors (the handoff signal) |
-| 4 | Belief legs | SP-B2 -> WR-10 lighting | HONORED: the injectable beliefLegsFor seam; the WR-9 lighting-order row cites SP-B/SP-B2 as its green condition |
+| 4 | Belief legs + the distant SOURCE | SP-B2 + ES-4 -> WR-10 lighting | HONORED/PRE-PIN: the injectable beliefLegsFor seam; the green condition is SP-B + SP-B2 + ES-4 landed (ES §5 seam 6, ⟨F9⟩). CORRECTED AT THE FOLD: no certification lighting-order row exists as an artifact anywhere in src/tests/docs (RE-MEASURED AT THE FOLD HEAD `32cc17f7`, the same head §3's lighting contract cites — the 99d63d92 census this document once leaned on is repudiated as an undercount and is cited nowhere) — SP-B2/ES-4 MINT it at build (VERIFY-AT-BUILD: locate any row that has appeared since; mint if absent), citing all three wave ids |
 | 5 | Axis vocabulary | SP-B <-> TR-3/POP-1/WF-2a/IN-2 | PRE-PIN: closed-vocabulary pin SP-side; each volume's first consumer wave owes its-side pin; spelling-drift scan reds any axis token outside SP-B's module |
 | 6 | Posture consumers | SP-C <-> GR-2/TR/WF/POP/INT-1 | PRE-PIN: with/without-books golden pair; a posture receipt that fails to name its inputs reds; seatBooksEnabled lighting = pre-declared disclosed shift |
 | 7 | Errand consumer registry | SP-D <-> GR/TR-8/WF-2b/IN-4/INT-3b | PRE-PIN: frozen consumer map, both-ways walker (unregistered minter reds; consumerless row reds) |
@@ -1651,7 +1977,7 @@ already exists; PRE-PIN = this volume lands both sides.
 | 29 | Significance family | SP-A -> CW-1 + every mint | SC-3: braid classes derive WITHIN the family; building against the two-valued vocabulary is a STOP |
 | 30 | Engine/display pacing split | CW-1 <-> narrativeTempo | SC-4: zero-engine-import census on cascadeBraid |
 | 31 | causedBy adoption | every state-writing FP wave -> CW | SC-6: each mint populates causedBy at the writer; CW-1 depth fixtures + CW-3's chainDepthDegenerate red are the double tripwire |
-| 32 | couplingId prefix closure | CW-0w <-> all volumes | SC-7: the closed nine-prefix alternation; a new prefix reds until consciously admitted |
+| 32 | couplingId prefix closure | CW-0w <-> all volumes | SC-7: the closed ELEVEN-prefix alternation (WR|TR|GR|WF|POP|IN|INT|SP|CW|ES|WY — ES tenth and WY eleventh, consciously admitted at the 2026-08-05 fold, both sites of tests/domain/couplingRegistry.test.js edited together); a TWELFTH prefix reds until consciously admitted. ADMISSION IS DOCUMENT-ONLY: no walker demands a registry row per admitted prefix, so ES and WY carry zero rows until their first cross-layer read — which owes its row SAME-COMMIT, and whose owningVolume also widens that file's owningVolume set assertion in the same commit |
 | 33 | Braided entity refs | CW-1 <-> heraldIndex | SC-8: facetAvailability PENDING -> available is the tripwire |
 | 34 | Receipt-field sampling | CW-0w helper <-> TR-9/GR-7/POP-7/WF-9/IN-6/INT-7 | SC-9: each convergence wave samples its OWN rows; CW-3 reds never-sampled rows as UNOBSERVED |
 | 35 | DS-FTH spelling law | Lane-P corpus <-> WF-1/5/7 | HONORED: the exactly-once doc pin lands with WF-1; divergence is a STOP; DS edits re-run gen:dossier-prose |
@@ -1665,6 +1991,26 @@ already exists; PRE-PIN = this volume lands both sides.
 | 43 | Belief subjects census | POP-1 <-> SP-B | PRE-PIN: beliefSubjectsGrewSincePop1() — the resolver names no axis outside the closed set; a new family reds until widened |
 | 44 | Conscript share | POP-2 <-> WR-4 | HONORED: the shortfall is a smaller real muster UPSTREAM, never a parallel multiplier |
 | 45 | Draw accounting | POP-5a <-> wave-E instrument | HONORED: column:<id> is the one declared rng fork, draw-accounted |
+| 46-58 | THE ESPIONAGE BLOCK (13 rows) | ES <-> WAR · ROADS · TRADE(TR-8) · SPINE(SP-B/SP-D) · GRAMMAR · SOVEREIGNTY MARKET(WR-10) · HERALD · INTERIOR · INFO siblings(IN-2/3/4) · FAITH+alignment · MAGIC ECONOMY · CORRUPTION WEB · AMBIENT ESPIONAGE FLAVOR | PER-ROW IN docs/DESIGN_FP_ARCH_ES.md §5, which is normative for all thirteen. Their pins in one line: the ONE hold writer and the 16-16 taxonomy count pin (WAR); import-source pins both sites (ROADS); the SP-D consumer map carrying BOTH covert rows (TR-8); the axis-drift scan (SPINE); the by-name espionageEnabled read GR-side (GRAMMAR); the fed-by-espionage fixture + non-neighbor differential (WR-10); per-kind walkers + the covert-departure significance negative (HERALD); the deleted-symbol pin (INTERIOR); the writer-boundary scan + the vetting one-home scan (INFO); the one-spelling law-band scan (FAITH); the signature-shape scan (MAGIC); read-only scan on the web ledgers (WEB); the espionage_* kind-prefix walker (AMBIENT) |
+| 59-66 | THE WAYFARE BLOCK (8 rows) | WY <-> WAR · TR · POP · WF · IN · SP · ES · SURFACES | PER-ROW IN docs/DESIGN_FP_ARCH_WY.md §6, which is normative for all eight. Their pins in one line: the UNIT_SOURCES sixth-ledger census + the F9 single-writer scan + conservation identity, and the war volume's two J-D11(b) sites amended IN THE FOLD COMMIT or the fold is incomplete (WAR); the grain pre-pin rows + the shrink-only T7 census + the one stock-write seam (TR); THROUGH-ENQUEUE + proposal-accept + the double-send and wrong-lane mutants (POP); the single-writer census on share writes (WF); the fork-key-set census + the other-consumer stream golden (IN); law M's second-speed-floor walker (SP); the fail-closed export mutant on covert movers + the plant-site pricing pin citing WY-2 (ES); the mirror walker both directions + the map-only import census + the size ratchet (SURFACES) |
+
+**THE 2026-08-05 FOLD: 45 -> 66.** The two owner-amendment volumes bring
+twenty-one further seams — ES rows 46-58 (thirteen) and WY rows 59-66 (eight)
+— carried here as ONE ROW PER PROGRAM because this volume compresses and the
+program files govern (§10.8). Reading a folded seam means opening its volume's
+seam section; the two rows above are an INDEX, never the contract. FOUR fold
+obligations sit OUTSIDE any wave and are owed by the fold commit itself: the
+war volume's two J-D11(b) pointer sentences (WY §5b item 9); the 2l
+OCCUPATION BOTH-SIDED REGISTER census, routed WAR-side, VERIFY-THEN-PIN (WY
+§5b item 10); the CR-ES-2 anonymity amendment landing in BOTH its homes
+before ES-2 builds; and THE THREE-MEMBER LIGHTING DISCHARGE LANDING IN EVERY
+BINDING VOLUME — TEN sites, re-measured at the fold: this volume's own FIVE
+(§2a, §3, §5 wave #4, §9's sequencing rationale, §9 seam row 4),
+docs/DESIGN_FP_ARCH_SP.md's FOUR, and the war volume's
+CR-WR10-H paragraph (ES §6 item 5 requires the
+war-volume sentence by name). A fold commit missing any of them is
+incomplete, and the fourth is the one whose omission would leave a NORMATIVE
+per-program volume telling an SP-B2 implementer the discharge is two.
 
 ---
 
@@ -1743,7 +2089,18 @@ already exists; PRE-PIN = this volume lands both sides.
 ---
 
 ## §11 OPEN CHAIR QUESTIONS (capped at ten; ranked by blocking power; each
-## with the synthesis recommendation — all vetoable)
+## with the synthesis recommendation — all vetoable; ALL TEN NOW RULED, see
+## the dated addendum at the end of this section)
+
+**The cap holds at ten — the two amendment volumes do NOT inflate it.** The
+ES owner-amendment volume (docs/DESIGN_FP_ARCH_ES.md) carries five
+ES-prefixed chair questions — its §7 is the authoritative list, RULED
+CR-ES-1..CR-ES-5, and it carries CR-ES-6 beside them: the JOINT ES/WY ruling
+admitting the espionage gauntlet to the Wayfare encounter table (raised at the
+fold's cohesion pass, not a numbered question). The WY owner-amendment volume
+(docs/DESIGN_FP_ARCH_WY.md) carries five WY-prefixed chair RULINGS (Q1-Q5,
+each the volume's own recommendation AFFIRMED, each vetoable) — its §7 is the
+authoritative record.
 
 **Q1 — The posture-read naming (blocks SP-C, #5).** The one genuine
 cross-architect conflict: SP rules keep the constitution's
@@ -1818,9 +2175,125 @@ persistence churn on a live save shape with zero behavioral payoff, declined
 
 ---
 
-*Compiled read-only. Inputs: SP/GR/IN/TR/WF/POP/INT/CW-ARCHITECTURE.md +
-SHARED-SUBSTRATE-CENSUS.md (this directory) — 45 refuted premises bound, 60
-waves ordered, 43 flags manifested, 8 new sub-ledgers priced, 45 seams
-pinned. Where this volume compresses, the program files govern; where any
-document disagrees with the tree, the tree wins and the disagreement is
-reported. Nothing is scheduled until the owner sequences it.*
+### §11 ADDENDUM — THE CHAIR RULINGS (chair, 2026-08-05; recorded at the ES +
+### WY owner-amendment fold; every one VETOABLE by one owner clause; an
+### implementer NEVER re-rules, softens, or extends one silently, and a ruling
+### the tree refutes is a STOP-and-report, not a re-ruling)
+
+The ten questions above stand as posed — nothing is deleted. Each ruling
+below is the chair's answer to the like-numbered question — except CR-FP-12,
+which answers no question and instead rules on the SCOPE of the already-ruled
+CQ2, and is marked as such where it sits. All are rowed in
+docs/FABLE_VALIDATION_QUEUE.md at this fold commit. Transcription note: bare
+symbol names gained code spans and transport-stripped possessive apostrophes
+were restored; no word was added, removed, softened, or extended.
+
+**CR-FP-3 (Q1, posture-read naming) — RULED.** ACCEPT the synthesis
+recommendation — keep `postureOf`; rename ONLY the colliding second export to
+`courtRiskAppetiteOf` at SP-C's module; one-row constitution erratum;
+import-source pin set + both-site headers land regardless of arm.
+
+**CR-FP-4 (Q3, IN-0a envelope transport) — RULED.** ACCEPT — primary road:
+each consumer reads the PRIOR tick's applied `brokerage_plant` events at its
+own head (zero new keys, zero kernel edits, law-M one-week lag);
+VERIFY-AT-BUILD the metadata retention; fallback = the `pendingPlants`
+conditional deposit under the D-3 contract; both fail = STOP for a
+chair-signed kernel seam.
+
+**CR-FP-5 (Q4, J-INT-13 pre-recording) — RULED.** ACCEPT — pre-record the
+DARK arm now in FABLE_VALIDATION_QUEUE.md (lit-kind pools ship behind a
+prose-version flag; every existing golden byte-identical); the owner may
+later take the re-record arm with the WR-0b field-level diff.
+
+**CR-FP-6 (Q6, arrivals feeding mass_migration) — RULED.** ACCEPT NO —
+deliberately deferred beside J-POP-14; ONE owner ruling covers both
+arrival-side couplings; this goes on the owner queue, not into any wave.
+
+**CR-FP-7 (Q7, D-W3 formal close) — RULED.** COUNTERSIGN the cap-raise arm —
+the trim arm is forbidden by the spine floor law (measured: five puts all
+four kinds below their own SP-6 floor); walkers read floors from
+significance; SP-E's shared helper retires the fixed-five class. D-W3 is
+formally CLOSED.
+
+**CR-FP-8 (Q8, sale door vs one-instrument law) — RULED.** ACCEPT — not in
+this build; GR-2 pins the refusal UNCHANGED (fenced baseline); harmonization
+recorded as a post-GR-2 candidate owned jointly with the war chair.
+
+**CR-FP-9 (Q9, applyWorldPulse second storageMonths fold) — RULED.**
+PRE-RULED REPORTED-NOT-DEFECT — the banked file's own treaty fold; TR-4
+routes zero traffic through it; the sixth-writer scan fences it; the queue
+row is filed at the fold so the lane never stalls.
+
+**CR-FP-10 (Q10, errand ledger address) — RULED.** CONFIRM keep-in-place —
+SP-D generalizes `worldState.envoyErrands` IN PLACE; the migration arm is
+DECLINED (owner-gated persistence churn on a live save shape, zero
+behavioral payoff); the constitution owes the erratum row.
+
+**CR-FP-12 (NOT a question answer — a ruling on Q2's SCOPE, raised at this
+fold) — RULED.** ES-0's early MOTION is **DECLINED**; the CQ2 authorized set
+stays EXACTLY GR-0 + GR-1 + TR-1 + TR-9-contract and this fold does not widen
+it. ES-0 is early-ELIGIBLE — that is a measured fact about the wave (pure
+leaves, no flag) and §5/§9 record it as such — but eligibility is a
+measurement and CQ2 membership is an authorization, and only the chair grants
+the second. The reason the two part here: ES-0 EDITS TWO LIVE WAR-LANE FILES
+(`warSeatBooks.js` retiring its private `lawfulnessBand` to the new
+`lawWordFor`; `warMagicGate.js` re-exporting the neutral `magicWorksAt` lift),
+and the CR-ES-3 retarget those edits carry is a CROSS-FILE war-lane VOCABULARY
+change with declared golden-shift exposure. CQ2's four members share the
+opposite profile — pure density, zero foreign-lane collision. ES-0 sits early
+in cycle 2 under strict order regardless, so the decline costs no real motion.
+One owner clause admits ES-0 to CQ2 if the owner reads the collision risk
+differently.
+
+**STANDING — ruled earlier this era, recorded here, NOT re-opened.**
+CR-FP-1: the desk-agreement seam is authority-routed (LANDED at commit
+`79bceff5`). CR-FP-2: the proseNumerics re-record is instrument
+reconciliation, not drift (LANDED at `f786df89`). CR-FP-11:
+the cross-layer inclusion ratchet reaches the modules no family claimed
+(ruled and LANDED this era at commit `1137f935` — recorded here so the jump
+from CR-FP-10 to CR-FP-12 reads as a taken number, never a dropped ruling).
+CQ2 (Q2): early motion authorized for GR-0 + GR-1 + TR-1 + TR-9-contract —
+**exactly those four; CR-FP-12 above declined widening it to ES-0.** CQ5
+(Q5): the flag one-commit law is affirmed; the five WR flags are recorded as
+pre-manifest history, not doctrine.
+
+**THE WAYFARE CHAIR TRANSLATION (seam-1 contract, binding on WY-8 slice
+8a).** Low supply drags the army's OWN `accumulatedAttrition`, never the
+realm's `warExhaustion` — the three-exhaustions labeling IS the contract (the
+army's wear is "condition", the realm's is "the home front", the road's is
+"march fatigue"). The owner's one-clause veto surface is the WY-8a ledger
+row.
+
+**⚠ FLAGGED — CR-ES-2 AMENDS THE HEADER OF AN OWNER RULING.** The espionage
+volume's CR-ES-2 (docs/DESIGN_FP_ARCH_ES.md §7) amends the anonymity /
+no-fates header of the owner ruling of 2026-07-19, preserving its core (the
+engine still never executes, permanently turns, or ends a named character)
+while admitting capture/hold/ransom/release, which the owner's own espionage
+directive requires. The BY-THE-ENGINE qualifier is LOAD-BEARING and must
+survive every edit — FOREIGN_GUEST_HOLD_CLOSE_REASONS already contains death,
+so an unqualified no-fates clause would outlaw the war lane's authored
+closes. ONE OWNER CLAUSE RESTORES THE OLD HEADER.
+
+**OWNER-GATED — RECORDED, PARKED, NEVER BUILT BY THIS FOLD.** The F9
+`supplyCargo` sign-off row (no build until the owner signs it); the ES Q5
+alliance-topology ACQUIRE (PARKED — ship without it; the pairwise
+allianceLabel REFUTE covers the drama; the new persisted key family goes to
+the owner as a one-line future-widening row, and no surface is ever smuggled
+into the SP-B family); the WAR-CHOOSER spy wiring (settlementStrategy, frozen
+surface — DEFERRED to a future owner ruling, owner queue row; this program
+wires the sovereignty buyer, GR-2 pact answers, and its own cadence only);
+the Q6 / J-POP-14 arrival couplings; and every tuning band (raw-authored
+until owner-signed, per THE PROMISE).
+
+---
+
+*Compiled read-only. Inputs: docs/DESIGN_FP_ARCH_{SP,GR,IN,TR,WF,POP,INT,CW}.md
++ docs/DESIGN_FP_ARCH_CENSUS.md (this directory), and — folded 2026-08-05 —
+the two owner-amendment volumes docs/DESIGN_FP_ARCH_ES.md (ESPIONAGE) and
+docs/DESIGN_FP_ARCH_WY.md (WAYFARE), each normative where this volume
+compresses it. 45 refuted premises bound, 75 waves ordered, 52 flags
+manifested, 8 new sub-ledgers priced, 66 seams pinned (45 here, ES 46-58, WY
+59-66 — per-row in the two volumes). Where this volume compresses, the
+program files govern; where any document disagrees with the tree, the tree
+wins and the disagreement is reported. Nothing is scheduled until the owner
+sequences it.*

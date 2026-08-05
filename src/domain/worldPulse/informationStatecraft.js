@@ -48,6 +48,18 @@
  * resolutions — no exposure removes, kills, or disappears the NPC. Fates remain unresolvable
  * everywhere. The LIE verb now stamps a SPOKESPERSON (the court's mouthpiece) so the personal
  * charge can land on exposure; the deeper no-fate carve is preserved intact.
+ * AMENDED (espionage era): a named NPC may carry a covert mission and be CAUGHT —
+ * capture, hold, ransom, release, and reputation charges resolve no fate BY THE
+ * ENGINE (the roads-hostage precedent); the engine still never executes,
+ * permanently turns, or ends a named character. The double agent LEAKS (an
+ * information consequence) and is never 'flipped' as a fate.
+ * [Chair ruling CR-ES-2, 2026-08-05, VETOABLE IN ONE CLAUSE — it amends the
+ * header of the owner ruling above while preserving its core. The BY-THE-ENGINE
+ * qualifier is LOAD-BEARING and must survive every future edit:
+ * FOREIGN_GUEST_HOLD_CLOSE_REASONS (foreignGuestHold.js) already contains
+ * 'death' — the DM-authored close vocabulary — so an unqualified "resolves no
+ * fate" would outlaw the war lane's authored closes. The twin home of this
+ * amendment is DESIGN_FP_INFORMATION.md section 1b; the two amend together.]
  */
 
 import { compareCodepoint } from '../deterministicSort.js';

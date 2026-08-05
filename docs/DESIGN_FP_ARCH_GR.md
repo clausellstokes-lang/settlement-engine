@@ -223,10 +223,51 @@ R-4 removes a precondition, R-7 trims a wave's charter.**
 | `mediationGeneralizedEnabled` | intent-stage pressure, fraying-pact pass, temple arm | GR-6 | GR-6's commit |
 
 Shape per flag (all five, no exceptions):
-1. ABSENT from DEFAULT_SIMULATION_RULES and every preset override EXCEPT a
-   dated `false` declaration on the full_simulation ceiling (the WR precedent,
-   `simulationRules.js:445-472` comments — certification visibility without
-   lighting or preset-identity change).
+1. ABSENT from `DEFAULT_SIMULATION_RULES` **and from every preset override,
+   with NO exception — manifest-only is the law.**
+
+   > **⚠️ ERRATUM 2026-08-05 (recorded in place at the ES + WY
+   > owner-amendment fold; REPORTED, NOT SILENT; vetoable in one owner
+   > clause).** This item previously read: "ABSENT from
+   > DEFAULT_SIMULATION_RULES and every preset override EXCEPT a dated
+   > `false` declaration on the full_simulation ceiling (the WR precedent,
+   > `simulationRules.js:445-472` comments — certification visibility without
+   > lighting or preset-identity change)." **That exception is STRUCK.** It
+   > contradicted item 3 of this same list, and the tree sides with item 3.
+   >
+   > **THE CONTRADICTION, EXECUTED.** Item 3 requires every flag here to join
+   > `ENGINE_GATED_VIRTUAL_RULE_KEYS`.
+   > `tests/lint/engineGatedRuleKeys.walker.test.js` asserts of EVERY manifest
+   > member that no preset declares it, failing with "`<key>` is declared in
+   > DEFAULT_SIMULATION_RULES or a preset spread, so it is no longer VIRTUAL —
+   > delete it from ENGINE_GATED_VIRTUAL_RULE_KEYS and move its row to the
+   > subject lane". A flag taking BOTH arms reds that walker on arrival, so
+   > the struck clause and item 3 could never both be obeyed.
+   >
+   > **CR-WR10-C SUPERSEDES.** `src/domain/worldPulse/simulationRules.js`'s
+   > own manifest docblock records the WR-9a fork as exactly two cures —
+   > declare each key `false` in the `full_simulation` spread (+32 serialized
+   > bytes per key on every NEW campaign, a moved new-campaign state hash), or
+   > teach the census to enumerate the keys the engine actually gates on (zero
+   > bytes on every path) — and states: "CR-WR10-C ruled the second." The
+   > struck clause pointed a GR implementer at the arm the ruling REJECTED.
+   >
+   > **THE WR PRECEDENT IS REAL, BUT IT IS NOT PRECEDENT FOR THIS.** The
+   > comments the struck clause cited do exist (`warTerminationEnabled`,
+   > `dispositionChannelsEnabled`, `lineageClaimEnabled`, each `false` on the
+   > ceiling), but those are PRE-MANIFEST HISTORY — CQ5 recorded the five WR
+   > flags as exactly that, "not doctrine". MEASURED at `32cc17f7`: all three
+   > carry ZERO membership in `ENGINE_GATED_VIRTUAL_RULE_KEYS`, which is
+   > precisely what keeps them lawful. The conjunction the struck clause
+   > licensed exists nowhere in the tree.
+   >
+   > **BOTH GR WAVES INDEPENDENTLY RE-DERIVED THIS AND BUILT MANIFEST-ONLY.**
+   > `treatyLifecycleVoiceEnabled` (GR-0) and `oathHolderEnabled` (GR-1) sit
+   > in `ENGINE_GATED_VIRTUAL_RULE_KEYS` and in NO preset — measured at
+   > `32cc17f7`, exactly two occurrences of those names in
+   > `simulationRules.js`, both inside the manifest. **The built code was
+   > already right; only this document was wrong.** This erratum corrects the
+   > document and re-rules nothing.
 2. Every gate reads strict `=== true` (JSDoc-cast spelling is walker-legal).
 3. Joins `ENGINE_GATED_VIRTUAL_RULE_KEYS` in the SAME commit as the first gate
    read; `engineGatedRuleKeys.walker` and the certification totality walker

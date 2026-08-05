@@ -71,6 +71,24 @@ requirements are the density contract for every mechanism below.
   R-28 headline-honesty class is ADOPTED volume-wide: a headline may never
   assert an event that did not happen; the sentence's verb must be entailed
   by the receipt's counts. [CORRECTED 2026-08-02 (fp-audit)]
+  **AMENDED 2026-08-05 (espionage era; chair ruling CR-ES-2, vetoable in one
+  clause — the amended-in-place voice, twin home
+  `src/domain/worldPulse/informationStatecraft.js`'s BOUNDARY header):** "AMENDED
+  (espionage era): a named NPC may carry a covert mission and be CAUGHT —
+  capture, hold, ransom, release, and reputation charges resolve no fate BY THE
+  ENGINE (the roads-hostage precedent); the engine still never executes,
+  permanently turns, or ends a named character. The double agent LEAKS (an
+  information consequence) and is never 'flipped' as a fate." The
+  **BY-THE-ENGINE** qualifier is LOAD-BEARING and must survive every edit:
+  `FOREIGN_GUEST_HOLD_CLOSE_REASONS` (`foreignGuestHold.js`) already contains
+  `'death'` — the DM-authored close vocabulary — and an unqualified "resolves no
+  fate" would outlaw the war lane's authored closes. ENFORCEMENT MOVES WITH THE
+  LAW: the phrase scan above pins FATE VERBS applied by the ENGINE to a named
+  soul (hanged/killed/executed/exiled/shuttered); `capture`, `hold`, `ransom`
+  and `release` are NOT fate verbs and the scan must not read them as such, or
+  ES-2/ES-7's Herald strings red on the very vocabulary this amendment admits.
+  The war volume carries a POINTER to this amendment beside the WR-7
+  foreign-guest hold, never the amendment text.
 - **THE ONE-SUBSTRATE DISTANCE LAW:** five independent consumers price the SAME
   physical distance through one shared reader (latency hopWeeks, recency
   surcharge ×0.5, route impedance, fidelity attenuation 1/(1+0.75×delay), query

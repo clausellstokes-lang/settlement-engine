@@ -901,6 +901,11 @@ congress, no multilateral table, ever.
   alone, and law M's one-week floor binds in EVERY denomination. The map's km
   scale constant does not exist in the tree yet — an owner-signed tuning call,
   carried in §7.]
+  [AMENDED 2026-08-05 (the Wayfare fold, recorded with the war chair):
+  "SUPERSEDED TOWARD DATA-GATING (WY §1a, chair-ruled, vetoable): the
+  mode table lands gated by `spatialDigest.kmScale`, decoupled from
+  `portOpportunityEnabled`, which stays the J-D11 (a)/(c) port program's
+  flag; the owner-signing obligation is unchanged."]
 
 **WR-7b — INTERCEPTION + THE PARLAY.**
 - Four interceptor kinds (K.3), all riding position co-location per tick: (a) the
@@ -920,6 +925,14 @@ congress, no multilateral table, ever.
   the same writer — no second mutation site. Pins: JSON-round-trip (the alias
   trap — a held npc IS a roster object in memory), regen/undo round-trip, and the
   writer/reader payload-spelling pin booting the REAL writer.
+- **CROSS-REFERENCE ONLY (the anonymity law, amended 2026-08-05):** the no-fates
+  boundary now ADMITS capture, hold, ransom and release for a named NPC carrying
+  a covert mission — THIS hold is the precedent that amendment cites. The
+  amendment TEXT lives in its own two homes and nowhere else
+  (`src/domain/worldPulse/informationStatecraft.js`'s BOUNDARY header and
+  `docs/DESIGN_FP_INFORMATION.md` §1b, which also carries its phrase-scan
+  enforcer); chair ruling CR-ES-2, 2026-08-05, vetoable in one clause. This
+  volume carries the pointer, never the text.
 - **The interceptor's dilemma (K2.1):** carry-the-terms-home (abandon position —
   a real military cost through WR-4's comparative read + the commander's books)
   vs hold-the-mission. An occupied enemy settlement is a legal venue (the irony is
@@ -1573,7 +1586,11 @@ The peace-terms TIME-BASE constant (WR-0c item 4 — [RULING LANDED 2026-08-02:
 current `52 == INTERVAL_WEEKS.one_year`, persisted legacy `12`, selected per treaty;
 the original "whichever arm" fork is closed]) · the map km-scale for the transit kernel's mode
 table (J-D11(b); does not exist in the tree — owner-signed when the mode table
-lands).
+lands). [AMENDED 2026-08-05 (the Wayfare fold, recorded with the war chair):
+"SUPERSEDED TOWARD DATA-GATING (WY §1a, chair-ruled, vetoable): the
+mode table lands gated by `spatialDigest.kmScale`, decoupled from
+`portOpportunityEnabled`, which stays the J-D11 (a)/(c) port program's
+flag; the owner-signing obligation is unchanged."]
 Added 2026-08-04 (the wiring declaration, chair-landed): WR-10 geographic-read
 adequacy (incl. MAX_REINFORCEMENT_WEEKS, which must stay inside the measured
 hopWeeks spectrum — the dead-band law) + trajectory weights + reserve/ceiling
@@ -1629,6 +1646,21 @@ trade — a subsystem that is dark by arithmetic while its flag says lit, which 
 a flag that is off. The composer's `beliefLegsFor` seam is injectable so that wave supplies
 the legs without touching the stage, and the lit-with-legs contract fixture already proves
 the clearing runs end to end the moment they arrive.
+[AMENDED 2026-08-05 (the ES + WY owner-amendment fold; chair ruling CR-WR10-H is
+PRESERVED, its discharge NAMED): the "belief-legs wave (queued)" is now three named
+waves — **SP-B + SP-B2 + ES-4 landed** is this precondition's discharge. SP-B mints the
+leg SURFACES (the believed-conditions axis family), SP-B2 wires the SEAM (beliefLegsOf
+widened through the injectable seam), and ES-4 proves the distant SOURCE — a
+non-neighbour (court, holding) pair carried to `known:true` by a completed covert
+confirmation mission, per the owner's espionage directive of 2026-08-04 (spies are the
+SOURCE of tier/route/trajectory legs about non-neighbours). Surfaces without sources
+would clear only rumour-range holdings, which is this very trap at one remove. The
+per-wave specs live in docs/DESIGN_FP_ARCH_SP.md (SP-B/SP-B2) and
+docs/DESIGN_FP_ARCH_ES.md (ES-4); this volume carries the receipt, never their text.
+No certification "lighting-order row" exists as an artifact anywhere in src/tests/docs
+(RE-MEASURED AT THE FOLD HEAD `32cc17f7`, the same head the FP volume's §3 lighting
+contract and §9 seam row 4 cite) — SP-B2/ES-4 MINT it at build citing all three ids.
+Vetoable in one owner clause.]
 
 1. WR-0 lands FIRST (it settles the tree; nothing builds over a dirty tree).
 2. WR-1 → WR-2 → WR-3 → WR-4 → WR-5 in order (each consumes the last).
