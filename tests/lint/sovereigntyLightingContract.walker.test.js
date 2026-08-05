@@ -74,22 +74,60 @@
  *      not run) and `only` (which runs its own block by PARKING its siblings) are all
  *      refused. 92 of the estate's 2,314 test files park under this rule; none of them
  *      carries a marker, and the SP-B2 carrier is not among them.
+ *      REPAIRED A SECOND TIME, SAME DAY, SAME DOOR — and the second defect was the
+ *      CORRECTION's, not the original's. The allowlist above was right; what was wrong is
+ *      that it read PHYSICAL lines. `liveTitlesIn` split on '\n' before the detector ran,
+ *      so the whitespace tolerance the detector advertises could never see a NEWLINE, and
+ *      the same four spellings walked back in with one inside them: `describe`<NL>`.skip(`,
+ *      `describe.`<NL>`skip(`, `describe.skipIf`<NL>`(true)(`, `describe`<NL>`['skip'](`,
+ *      and `describe`<NL>`.only(` beside a live suite. All five read SATISFIED at that
+ *      commit and all five are LIVE forgeries under vitest. THREE OF THE FIVE ARE ALSO
+ *      ESLINT-CLEAN — the `.skip`, the trailing-dot and the `.only` spellings all exit 0;
+ *      only the `(true)` and `['skip']` continuations trip `no-unexpected-multiline` — so
+ *      no other gate in this repository would have stopped them. TWO MORE of the same
+ *      shape were found while closing these and are closed with them, both eslint-clean:
+ *      a line-broken `it`<NL>`.only(`, and a head separated from its modifier by BLANK
+ *      LINES, which is one expression to JavaScript and would have walked through the
+ *      four-line budget this rejoin was first drafted with. `suiteScanLines` rejoins a
+ *      dangling head before door 3 reads it — additively, so the physical lines are still
+ *      scanned and the rejoin can only ever add refusals.
  *   4. SELF-EXCLUSION — this walker never vouches for itself (it names every marker by
  *      import). Retained, and pinned as belt-and-braces rather than as the thing holding
  *      the line: door 1 already refuses every position this file spells a marker in.
  *
- * WHERE THAT LEAVES THE FAIL-CLOSED CLAIM — stated exactly as narrowly as it has been
- * executed, because the sentence that used to stand here ("EVERY REFUSAL FAILS CLOSED …
- * can never manufacture a lit market") was FALSE for door 3 and is the reason this repair
- * exists. Within the suite vocabulary this walker recognises — `describe` and `suite`,
- * with or without an `x`/`f` prefix — an unrecognised modifier spelling PARKS, and doors 1
- * and 2 refuse by construction, because an unrecognised modifier breaks the quote anchor
- * the title read is built on (`it.skipIf(true)('M', …)` and `xit('M', …)` both simply fail
- * to match). What that costs is one honest line in a title; what it buys is that no
- * spelling in that vocabulary can manufacture a lit market. It is NOT a claim about a
- * suite opened through some OTHER identifier: a bespoke `describeMatrix(…)` factory
- * wrapping a parked block is outside anything line scanning can see, and no assertion
- * below pretends otherwise.
+ * WHERE THAT LEAVES THE FAIL-CLOSED CLAIM — THIRD STATEMENT, and the two before it were
+ * both too wide. The first ("EVERY REFUSAL FAILS CLOSED … can never manufacture a lit
+ * market") was false for four one-line spellings. The second quantified over "the suite
+ * vocabulary this walker recognises" and was false for five LINE-BROKEN spellings of that
+ * same vocabulary. So this one is written as two separate statements — what the VERDICT
+ * does, and what the DETECTOR can see — because conflating them is precisely how the last
+ * two went wrong.
+ *
+ *   THE VERDICT, and this part is structural rather than a list. Wherever `SUITE_OPENER`
+ *   matches, `suiteParksTheFile` PARKS unless the opener is positively proven to run —
+ *   bare, or every dot-token drawn from the closed `RUNNING_SUITE_MODIFIERS`. There is no
+ *   spelling to enumerate and no spelling to miss: an unrecognised modifier parks because
+ *   parking is the DEFAULT, not because it appears on a list. Doors 1 and 2 fail closed
+ *   the same way, by construction — an unrecognised modifier breaks the quote anchor the
+ *   title read is built on (`it.skipIf(true)('M', …)` and `xit('M', …)` simply fail to
+ *   match) — and a line-broken TEST head loses its title rather than gaining one.
+ *
+ *   THE DETECTOR'S REACH, which is where both overstatements actually lived, and it is a
+ *   LEXICAL boundary: door 3 sees a suite head that BEGINS ITS OWN LOGICAL LINE, spelled
+ *   `describe` or `suite` with an optional `x`/`f` prefix, with members written dotted,
+ *   computed, whitespace-broken, or — since this repair — broken across physical lines.
+ *   Anything a line reader cannot resolve to that is OUTSIDE the claim, and three shapes
+ *   are named here rather than left to be discovered a third time: a suite opened through
+ *   ANOTHER IDENTIFIER (`const d = describe.skip; d('outer', …)`, a `describeMatrix(…)`
+ *   factory); an opener SHARING ITS LINE with other code (`if (x) describe.skip(…)`,
+ *   `}); describe.skip(…)`), which the `^\s*` anchor does not reach; and a modifier
+ *   INTERRUPTED BY A COMMENT — a block comment written between `describe` and its
+ *   `.skip(`, which the chain alternation tolerates whitespace between but not comments.
+ *   Each is a residual by construction rather than a spelling that was missed, and each
+ *   is a real forgery route if it ever appears. PREVALENCE MEASURED, all three: zero
+ *   occurrences across the 2,314 test files, the same standing the nine closed spellings
+ *   had — so the tree reading is not wrong today, and these are latent, named, and
+ *   re-measurable by the census in this file's landing commit.
  *
  * ── WHAT THIS FILE DELIBERATELY IS NOT ──────────────────────────────────────────
  * It is not a second gate scanner. `ENGINE_GATED_VIRTUAL_RULE_KEYS` is the estate's own
@@ -200,6 +238,71 @@ function suiteParksTheFile(line) {
 }
 
 /**
+ * DOOR 3's PHYSICAL-LINE REPAIR — the tolerance the detector advertised but could never
+ * reach, and the hole that repair left behind. `liveTitlesIn` splits on '\n' BEFORE
+ * `SUITE_OPENER` ever runs, so the `\s*` the detector spells between its members could
+ * not see the one whitespace character that matters: a NEWLINE. FIVE spellings inside
+ * the recognised vocabulary walked straight through that gap and were CREDITED at the
+ * previous commit — `describe`<NL>`.skip(`, `describe.`<NL>`skip(`, `describe.skipIf`<NL>`(true)(`,
+ * `describe`<NL>`['skip'](` and `describe`<NL>`.only(` — every one of them a LIVE forgery,
+ * executed: vitest reported `Tests 1 skipped (1)` for the first four and, for the fifth,
+ * ran the focused sibling while SKIPPING the marker's own suite (`1 passed | 1 skipped`),
+ * all while the instrument read `SATISFIED / satisfiable true / missing []`.
+ *
+ * THE REPAIR — a line that is NOTHING BUT a suite or test head (the identifier, whatever
+ * members it has reached, and no `(` yet) is REJOINED with the lines that follow it, and
+ * the joined forms are ADDED to door 3's scan rather than replacing it.
+ *
+ * ADDITIVE IS THE WHOLE SAFETY ARGUMENT, and it is why this is a join and not a rewrite
+ * of the split. The physical lines are still scanned exactly as before, so rejoining can
+ * only ever ADD refusals: it cannot silently UN-park a file the way a replacing join
+ * could (a prose line ending in the word `describe` would swallow the real
+ * `describe.skip(` opener on the line below it and dissolve that file's refusal — a
+ * fail-OPEN introduced by the repair itself), and it cannot touch doors 1 and 2, which
+ * keep reading physical lines and keep their line anchors where they belong.
+ *
+ * The head detector is anchored at line start through whitespace, exactly as
+ * `SUITE_OPENER` and `FOCUSED` are, which is not a coincidence: a joined line can only
+ * park a file if its FIRST physical line already began with a suite identifier, so
+ * anchoring here rejoins precisely the lines that can matter and cannot fire on prose.
+ * MEASURED: zero of the estate's 2,314 test files hold such a line today, so the join
+ * changes no file's verdict on this tree — it closes a latent hole, and the census below
+ * is unmoved at 92.
+ */
+const DANGLING_SUITE_HEAD = /^\s*(?:x|f)?(?:describe|suite|test|it)(?:\s*\.\s*[A-Za-z$_][\w$]*|\s*\[[^\]\n]*\])*\s*\.?\s*$/;
+
+/**
+ * DOOR 3's SCAN SET — the physical lines, PLUS the continuation-joined form of every
+ * line that dangles a head. Surrounding whitespace is dropped as the lines are welded, so
+ * `describe`<NL>`  .concurrent(` rejoins as `describe.concurrent(` and stays in the
+ * allowlist instead of parking on a chain token that is nothing but spaces.
+ *
+ * BLANK LINES ARE STEPPED OVER RATHER THAN ENDING THE CHASE, and NO line budget bounds
+ * it, because both of those are how a bounded chase leaks: `describe`, five blank lines,
+ * `.skip(` is one expression to JavaScript, and a limit of four would have handed that
+ * spelling straight back the hole this repair closes. Nothing here can run away — the
+ * head only GROWS on a line that contributes text, and the moment the accumulated text
+ * stops being a bare dangling head the walk breaks. On this tree the inner loop never
+ * executes at all: no test file holds a dangling head.
+ * @param {string[]} lines @returns {string[]}
+ */
+function suiteScanLines(lines) {
+  const scan = [...lines];
+  for (let i = 0; i < lines.length; i += 1) {
+    if (!DANGLING_SUITE_HEAD.test(lines[i])) continue;
+    let head = lines[i].trim();
+    for (let j = i + 1; j < lines.length; j += 1) {
+      const next = lines[j].trim();
+      if (next === '') continue;
+      head = `${head}${next}`;
+      scan.push(head);
+      if (!DANGLING_SUITE_HEAD.test(head)) break;
+    }
+  }
+  return scan;
+}
+
+/**
  * THE ADDRESS READ — the titles of the tests in one source that will actually run.
  * Returns `[]` for a file holding a suite this walker cannot prove runs (door 3): line
  * scanning cannot see block nesting, and crediting a title inside a parked `describe` is
@@ -208,7 +311,10 @@ function suiteParksTheFile(line) {
  */
 function liveTitlesIn(src) {
   const lines = src.split('\n');
-  if (lines.some((line) => suiteParksTheFile(line))) return [];
+  // Door 3 reads the physical lines AND their continuation-joined forms. Doors 1 and 2
+  // read the physical lines alone: a line-broken TEST head simply loses its title, which
+  // is the fail-closed direction and is pinned as such below.
+  if (suiteScanLines(lines).some((line) => suiteParksTheFile(line))) return [];
   const titles = [];
   for (const line of lines) {
     const m = TITLE_LINE.exec(line);
@@ -399,24 +505,43 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     expect(carries(liveSuite)).toBe(true);
   });
 
-  test('DOOR 3 REFUSES THE FOUR ESCAPE SPELLINGS — the forgeries the first cut credited', () => {
-    // THE REPAIRED DEFECT. Door 3's first cut refused a file only where ONE line matched
-    // both a `describe(` opener AND a literal dotted `.skip`/`.todo`/`.failing`. Every
-    // spelling below was CREDITED before this repair, and the first three are LIVE
-    // forgeries proven by running vitest on them: each reported `Tests 1 skipped (1)`
-    // — the body is a deliberate `expect(1).toBe(2)` that never executes — while the
-    // instrument read SATISFIED / missing []. `describe.skipIf` is a first-class vitest
-    // API, not an exotic spelling. `xdescribe` is the exception and is pinned as defence
-    // in depth rather than as a closed hole: vitest neither exports nor globals it, so
-    // that file dies loudly instead of crediting. Refusing it costs nothing and covers a
-    // jest-compat global or a local shim arriving later.
+  test('DOOR 3 REFUSES THE NINE ESCAPE SPELLINGS — the forgeries two cuts credited', () => {
+    // THE REPAIRED DEFECT, IN TWO ROUNDS. Door 3's first cut refused a file only where ONE
+    // line matched both a `describe(` opener AND a literal dotted `.skip`/`.todo`/
+    // `.failing`; its second cut fixed that but still read PHYSICAL lines, so the same
+    // spellings walked back in with a newline inside them. Every spelling below was
+    // CREDITED at one of those two commits, and EIGHT of the nine are LIVE forgeries
+    // proven by running vitest on each — the body is a deliberate `expect(1).toBe(2)` that
+    // never executes, and vitest reported `Tests 1 skipped (1)` for seven of them and
+    // `1 passed | 1 skipped` for the line-broken `only` (the focused sibling ran; the
+    // marker's own suite did not) — while the instrument read SATISFIED / missing [].
+    // `describe.skipIf` is a first-class vitest API, not an exotic spelling.
+    // `xdescribe` is the ONE exception and is pinned as defence in depth rather than as a
+    // closed hole: vitest neither exports nor globals it, so that file dies loudly
+    // (`xdescribe is not defined`, `Test Files 1 failed`) instead of quietly crediting.
+    // Refusing it costs nothing and covers a jest-compat global or a local shim arriving.
     const body = `\n  it('${PROBE} — a pin that never runs', () => { expect(1).toBe(2); });\n});\n`;
     const escapes = {
+      // ── ROUND ONE: one line, an unrecognised modifier ───────────────────────────
       'describe.skipIf(true)': `describe.skipIf(true)('parked by skipIf', () => {${body}`,
       "describe['skip']": `describe['skip']('parked by computed member', () => {${body}`,
       'describe . skip (spaced)': `describe . skip ('parked by spaced member', () => {${body}`,
       xdescribe: `xdescribe('parked by the x prefix', () => {${body}`,
+      // ── ROUND TWO: the SAME vocabulary, broken across PHYSICAL LINES ────────────
+      // The split-then-scan hole. All five read SATISFIED at the previous commit, and
+      // THREE OF THE FIVE — the `.skip`, the trailing-dot and the `.only` — are also
+      // ESLINT-CLEAN (exit 0, measured); only the `(true)` and `['skip']` continuations
+      // trip `no-unexpected-multiline`, so for three of them no other gate in this
+      // repository would have caught anything. They are closed by rejoining a dangling
+      // head, not by widening any regex — the detector was always generous enough about
+      // whitespace, it simply never saw the one whitespace character it was split on.
+      'describe / newline / .skip(': `describe\n  .skip('parked across a line', () => {${body}`,
+      'describe. / newline / skip(': `describe.\n  skip('parked across a line', () => {${body}`,
+      'describe.skipIf / newline / (true)(': `describe.skipIf\n  (true)('parked across a line', () => {${body}`,
+      "describe / newline / ['skip'](": `describe\n  ['skip']('parked across a line', () => {${body}`,
+      'describe / newline / .only(': `describe\n  .only('focused across a line', () => {});\ndescribe('outer', () => {${body}`,
     };
+    expect(Object.keys(escapes), 'an escape spelling was dropped from the arm').toHaveLength(9);
     for (const [spelling, src] of Object.entries(escapes)) {
       expect(carries(src), `${spelling} was credited — door 3 fails OPEN for it`).toBe(false);
       // …and each really is a forgery rather than a source that says nothing: the refused
@@ -426,6 +551,47 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // The conditional's other polarity is refused too — this walker reads TEXT, so it can
     // no more prove `runIf(true)` runs than it can prove `runIf(distExists)` does.
     expect(carries(`describe.runIf(true)('parked by runIf', () => {${body}`)).toBe(false);
+    // TEST-LEVEL focus is line-broken exactly as easily, and `FOCUSED` owns `test`/`it`
+    // as well as the suite words — so the rejoin carries the same vocabulary it does.
+    // Without `test|it` in the dangling head this line credits a pin vitest never runs.
+    expect(carries(`it\n  .only('focused elsewhere', () => {});\ndescribe('outer', () => {${body}`),
+      'a line-broken it.only focused the file and the marker was still credited').toBe(false);
+    // …and BLANK LINES DO NOT END THE CHASE. This arm is here because the first draft of
+    // the rejoin carried a four-line budget, and this exact source — one expression to
+    // JavaScript, and skipped by vitest — walked through it. A line budget is how a
+    // rejoin hands the hole back.
+    expect(carries(`describe\n\n\n\n\n  .skip('parked far below', () => {${body}`),
+      'a head separated from its modifier by blank lines escaped the rejoin').toBe(false);
+  });
+
+  test('DOOR 3 REJOIN: a head broken across lines is still read for what it IS', () => {
+    // THE ACCURACY HALF, without which the rejoin could be parking every line-broken
+    // suite in the estate and every arm above would still be green. A `describe` whose
+    // opening paren or whose unconditional modifier merely sits on the next line RUNS,
+    // and vitest agrees — both of these were executed and reported `Tests 1 passed (1)`.
+    const inner = `\n  it('${PROBE} — a real body', () => {});\n});\n`;
+    expect(carries(`describe\n  ('outer', () => {${inner}`),
+      'a bare describe with its paren on the next line was parked, but it runs').toBe(true);
+    expect(carries(`describe\n  .concurrent('outer', () => {${inner}`),
+      'a line-broken describe.concurrent was parked, but it runs').toBe(true);
+    // The join is ADDITIVE — the physical lines are still scanned — so a file that was
+    // already parked on a physical line stays parked no matter what follows it.
+    expect(carries(`describe.skip('outer', () => {${inner}`)).toBe(false);
+    // …and ADDITIVE is load-bearing rather than a word in a comment. Here the rejoin
+    // welds a bare `describe` onto the real opener beneath it and produces
+    // `describedescribe.skip(`, which matches NOTHING; the refusal survives only because
+    // the physical line is still in the scan. Substitute the joined forms for the lines
+    // they came from — the natural way to write this repair — and this file's refusal
+    // dissolves. `describe` on its own line is a complete statement, so the source below
+    // is exactly as legal as the forgeries above it.
+    expect(carries(`describe\ndescribe.skip('outer', () => {${inner}`),
+      'a rejoin that CONSUMED its lines let a real parked opener out of the scan')
+      .toBe(false);
+    // DOORS 1 AND 2 KEEP THEIR PHYSICAL-LINE ANCHORS, and that is the fail-closed
+    // direction: a line-broken TEST head loses its title rather than gaining one. This
+    // understates evidence (the pin below really runs) and is pinned so the day someone
+    // rejoins door 1's input as well, they meet a decision rather than a surprise.
+    expect(carries(`it\n  ('${PROBE} — a real pin, line-broken', () => {});\n`)).toBe(false);
   });
 
   test('DOOR 3 ALLOWLIST: only a suite PROVEN to run keeps its titles', () => {
