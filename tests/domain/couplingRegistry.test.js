@@ -41,10 +41,19 @@ import {
 } from '../../src/domain/certification/couplingRegistry.js';
 
 /**
- * The nine chartered volume prefixes (DESIGN_FP_ARCHITECTURE.md §5 wave #2 /
- * CW seam SC-7). A tenth volume must amend BOTH this list and the wave block.
+ * The eleven chartered volume prefixes (DESIGN_FP_ARCHITECTURE.md §5 wave #2 /
+ * CW seam SC-7). A twelfth volume must amend BOTH this list and the wave block.
+ *
+ * ES (ESPIONAGE) and WY (WAYFARE) were admitted at the 2026-08-05
+ * owner-amendment fold — ES tenth, WY eleventh (docs/DESIGN_FP_ARCH_ES.md §6;
+ * docs/DESIGN_FP_ARCH_WY.md §5b item 7). ADMISSION IS DOCUMENT-ONLY: nothing
+ * in this file or in the coupling walkers demands a registry row per admitted
+ * prefix, so a chartered prefix with zero live rows is green by design. The
+ * obligation runs the other way — every live row must carry a chartered
+ * prefix. The FIRST ES or WY row additionally widens the owningVolume set
+ * asserted below, in that row's own commit.
  */
-const CHARTERED_VOLUME_PREFIXES = Object.freeze(['WR', 'TR', 'GR', 'WF', 'POP', 'IN', 'INT', 'SP', 'CW']);
+const CHARTERED_VOLUME_PREFIXES = Object.freeze(['WR', 'TR', 'GR', 'WF', 'POP', 'IN', 'INT', 'SP', 'CW', 'ES', 'WY']);
 
 /**
  * `CPL-<pair>.<DIRECTION>.<VOLUME>-<wave>[letter].<facet>`, built FROM the list
@@ -397,16 +406,18 @@ describe('CW-0 coupling registry', () => {
   // CW-0w slice 1 / seam SC-7. The shape pin used to hard-code the WR- wave
   // prefix, so the FIRST non-WAR registry row would have RED this file — the
   // growth path the whole FP program depends on was locked at its own gate.
-  // The alternation is deliberately CLOSED: a tenth volume prefix reds here
+  // The alternation is deliberately CLOSED: a TWELFTH volume prefix reds here
   // until it is consciously admitted, which is the tripwire, not a nuisance.
+  // ES and WY were consciously admitted at the 2026-08-05 owner-amendment fold
+  // — the tripwire working as designed, not bypassed.
   describe('the couplingId shape admits every chartered volume prefix and no other', () => {
     const SYNTHETIC = (prefix) => `CPL-1.TRADE_TO_WAR.${prefix}-1.synthetic_row`;
 
-    test('all nine chartered volume prefixes pass, including the INT/IN pair', () => {
+    test('all eleven chartered volume prefixes pass, including the INT/IN pair', () => {
       // INT and IN share a leading two characters; both are asserted so the
       // alternation's ORDER can never silently swallow the longer one.
       expect(CHARTERED_VOLUME_PREFIXES)
-        .toEqual(['WR', 'TR', 'GR', 'WF', 'POP', 'IN', 'INT', 'SP', 'CW']);
+        .toEqual(['WR', 'TR', 'GR', 'WF', 'POP', 'IN', 'INT', 'SP', 'CW', 'ES', 'WY']);
       for (const prefix of CHARTERED_VOLUME_PREFIXES) {
         expect(SYNTHETIC(prefix), prefix).toMatch(COUPLING_ID_SHAPE);
       }
