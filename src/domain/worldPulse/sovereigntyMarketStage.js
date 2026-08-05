@@ -48,23 +48,30 @@
  * belief readers, the shared ladder, and the terms vocabulary — never a raw true-state
  * module for the counterpart's legs.
  *
- * AND THE LEGS THAT EXIST TODAY ARE ONE OF FOUR. Measured against the tree rather than
- * assumed: `beliefRecord` carries a believed `populationTrendBand` (−2 … +2, present only
- * when `beliefAxesEnabled`), which maps EXACTLY onto the appraisal's five real trajectory
- * words. It carries no believed tier, no believed stores and no believed route position —
- * the negotiation picture's `storesBand` lives inside an ERRAND, so it exists only while
- * two courts are already negotiating and not for an arbitrary (court, holding) pair.
- * Three legs missing ⇒ `appraiseSettlementAsset` returns `known: false` ⇒ this stage emits
- * an HONEST receipted no-trade on the `sovereignty_no_trade` road. It NEVER backfills a
- * counterpart's leg from true state — that is the one translation K3 exists to forbid, and
- * doing it here would make the belief seam a decoration.
+ * ALL FOUR LEGS NOW HAVE A SURFACE, AND SP-B2 IS THE WAVE THAT WIRED THEM (2026-08-05).
+ * The measurement this paragraph used to record — one leg of four — was true of the tree
+ * up to SP-B: `beliefRecord` carried a believed `populationTrendBand` (−2 … +2, present
+ * only when `beliefAxesEnabled`), which maps EXACTLY onto the appraisal's five real
+ * trajectory words, and nothing else a court could hold about an arbitrary holding. SP-B
+ * minted the believed-conditions family, so a court now also holds a believed size, a
+ * believed granary and a believed position on the roads for any (court, holding) pair, and
+ * `beliefLegsOf` below reads all three through the table beside it.
  *
- * That is a DEAD-LIGHTING TRAP unless it is written down, so it is: §9 of the war volume
- * now records that `sovereigntyTradeEnabled` lights only after the belief surfaces carry
- * the appraisal's four legs (the belief-legs wave, queued). `beliefLegsFor` is injectable
- * precisely so that wave can supply them without touching this file, and the
- * lit-with-legs contract fixture drives synthetic banded legs through this composer to
- * prove the whole clearing works end to end the moment they arrive.
+ * WHAT DID NOT CHANGE, AND IS THE POINT. A leg with no resolved belief is still ABSENT, so
+ * `appraiseSettlementAsset` still returns `known: false` and this stage still emits an
+ * HONEST receipted no-trade on the `sovereignty_no_trade` road — which is what a dark
+ * world, and a lit world where this court has simply never heard of that town, both look
+ * like. It NEVER backfills a counterpart's leg from true state: that is the one
+ * translation K3 exists to forbid, and doing it here would make the belief seam a
+ * decoration.
+ *
+ * THE DEAD-LIGHTING TRAP IS STILL WRITTEN DOWN, AND NOW IT IS EXECUTABLE. §9 of the war
+ * volume records that `sovereigntyTradeEnabled` lights only after the belief surfaces
+ * carry the appraisal's four legs AND a distant source can fill them; that condition is
+ * `SOVEREIGNTY_LIGHTING_EVIDENCE` in certification/warConvergenceContract.js, whose three
+ * rows are SP-B, SP-B2 and ES-4 and which reads UNSATISFIED until the third lands.
+ * `beliefLegsFor` stayed injectable through this wave exactly as designed — SP-B2 widened
+ * the DEFAULT reader and touched none of the composition below it.
  *
  * ── THREE INJECTED READERS, AND WHY THEY ARE READERS RATHER THAN HOLES ──────────
  * `beliefLegsFor`, `reachFor` and `intentFor` default to the production reads and exist
@@ -93,6 +100,7 @@ import { bandDemandsResponse, overflowBandOf } from './demographicsResponses.js'
 import { plansLedgerOf } from './demographicsPlans.js';
 import { sovereigntyTradeActive, tradeableAssetsOf } from './sovereigntyAssets.js';
 import {
+  SOVEREIGNTY_ROUTE_BANDS, SOVEREIGNTY_STORES_BANDS, SOVEREIGNTY_TIER_BANDS,
   SOVEREIGNTY_TRAJECTORY_BANDS, appraiseSettlementAsset,
 } from './sovereigntyAppraisal.js';
 import { bundleComponentFamilies, clearSovereigntyTrade, valueBundleThroughNeeds } from './sovereigntyBundle.js';
@@ -142,6 +150,25 @@ function text(v) {
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
 /**
+ * SP-B2's SUPPLY→CONSUMER LEG TABLE — the three believed-conditions legs, one row each.
+ *
+ * `leg` is the key `appraiseSettlementAsset` reads. `source` is the key the believed
+ * `conditionsBands` record writes. `ladder` is the CONSUMER'S ladder the emitted word must
+ * belong to. Two of the three rows are identities; the route row is the only translation,
+ * and it exists because the supplying surface spells that rung `routePositionBand` while
+ * the appraisal spells it `routeBand`. The VALUES are the same ladder either way (the
+ * consumer's is the supplier's with `'unknown'` prefixed), so this is a rename and never a
+ * remap — a row that tried to change a word would be inventing a belief.
+ *
+ * @type {ReadonlyArray<{ leg: string, source: string, ladder: readonly string[] }>}
+ */
+const CONDITION_LEGS = Object.freeze([
+  Object.freeze({ leg: 'tierBand', source: 'tierBand', ladder: SOVEREIGNTY_TIER_BANDS }),
+  Object.freeze({ leg: 'storesBand', source: 'storesBand', ladder: SOVEREIGNTY_STORES_BANDS }),
+  Object.freeze({ leg: 'routeBand', source: 'routePositionBand', ladder: SOVEREIGNTY_ROUTE_BANDS }),
+]);
+
+/**
  * THE BELIEF LEGS ONE COURT HOLDS ABOUT ONE HOLDING (CR-WR10-H).
  *
  * Returns only the words the belief surfaces ACTUALLY carry. An absent leg is ABSENT —
@@ -172,33 +199,65 @@ const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
  * which is why nothing in the estate ever complained.
  *
  * SO SP-B2 MUST EMIT THE CONSUMER'S OWN KEYS: `{ tierBand, storesBand, routeBand,
- * trajectoryBand }`. The route leg is the trap. The belief surface that will supply its
- * VALUE spells that rung with a longer name of its own, and `SOVEREIGNTY_ROUTE_BANDS` is
- * that same ladder with `'unknown'` prefixed — so the VALUES already align and ONLY THE KEY
+ * trajectoryBand }`. The route leg is the trap. The belief surface that supplies its VALUE
+ * spells that rung with a longer name of its own, and `SOVEREIGNTY_ROUTE_BANDS` is that
+ * same ladder with `'unknown'` prefixed — so the VALUES already align and ONLY THE KEY
  * differs. A wave that emits the supply side's key instead reaches an appraisal that asks
  * for `routeBand`, receives `undefined`, and reports `'unknown'` with every gate green: the
  * precise silent-leg defect this paragraph exists to prevent, arrived at by obeying the
- * instruction it replaces. SP-B2's four-leg totality pin (each leg present ⇒ named in the
- * appraisal receipt; each absent ⇒ `known:false`) is what makes that failure loud, and it
- * must be written against these four keys. (This header still deliberately does NOT spell
- * the supplying record's own field names: naming one admits this module to
- * spAxisVocabulary's ARGUED_FIELD_SPELLERS, and that admission belongs to the commit that
- * starts READING the field — SP-B2's — not to a comment.)
+ * instruction it replaces.
+ *
+ * ── SP-B2, LANDED: THE SUPPLY IS WIRED AND THE TRANSLATION IS A TABLE ───────────────
+ * `CONDITION_LEGS` below is the whole of the supply→consumer translation, and it is a
+ * DATA row per leg rather than three property reads spread through a body, so the one
+ * place a spelling can drift is a place a reader is looking at. Each row carries the
+ * consumer's key, the supplying record's key, and the LADDER the emitted word must sit
+ * on — because a leg is only supplied when its value is a real rung of the ladder the
+ * appraisal will grade it against. `indexOf(word) > 0` is the whole validity test and its
+ * `> 0` (not `>= 0`) is deliberate: member 0 of every sovereignty ladder is the literal
+ * `unknown`, and emitting that word would hand the appraisal a leg that reads exactly like
+ * an absent one while counting as present. An unresolvable or off-ladder read contributes
+ * NO KEY (T4: a key is a byte; R-28's grain: absent, never a guess), so the appraisal comes
+ * back `known:false` with a receipt rather than a confident price built on a shrug.
+ *
+ * WHY THE THREE LADDER IMPORTS ARE THE RIGHT SIDE TO VALIDATE AGAINST. They are the
+ * CONSUMER'S ladders, imported from the module that grades the words. Validating against
+ * the supplying module's ladders instead would prove the supply self-consistent and say
+ * nothing about whether the appraisal can read it — the writer/reader spelling class, one
+ * level up in the values rather than the keys.
+ *
+ * DORMANCY IS STRUCTURAL, NOT FENCED. The supplying field is written only under
+ * `believedConditionsEnabled` ∧ `beliefAxesEnabled` (SP-B's gate, one module over), so a
+ * dark world carries no such field, every row above contributes nothing, and this function
+ * returns byte-identically what it returned before this wave: `{}` or `{ trajectoryBand }`.
+ * There is no flag read here and there must never be one — a second gate on a field that
+ * only a lit engine can write is a gate that can never disagree with the first.
  *
  * @param {{ worldState?: unknown, courtId?: string, assetId?: string }} input
- * @returns {{ trajectoryBand?: string }} the ONE leg that exists — absent entirely when the
- *   court holds no finite believed population trend for the holding
+ * @returns {{ tierBand?: string, storesBand?: string, routeBand?: string,
+ *   trajectoryBand?: string }} only the legs this court actually holds — `{}` when it
+ *   holds none, and never a key whose value is not a live rung
  */
 export function beliefLegsOf({ worldState, courtId, assetId }) {
-  const record = beliefRecord(
+  const record = recordOf(beliefRecord(
     /** @type {Parameters<typeof beliefRecord>[0]} */ (recordOf(worldState)),
     String(courtId || ''), String(assetId || ''),
-  );
-  const trend = Number(recordOf(record).populationTrendBand);
-  if (!Number.isFinite(trend)) return {};
-  const index = Math.round(trend) + 2 + 1;
-  const band = SOVEREIGNTY_TRAJECTORY_BANDS[index];
-  return band ? { trajectoryBand: band } : {};
+  ));
+  /** @type {Record<string, string>} */
+  const legs = {};
+
+  const conditions = recordOf(record.conditionsBands);
+  for (const row of CONDITION_LEGS) {
+    const word = String(conditions[row.source] ?? '');
+    if (row.ladder.indexOf(word) > 0) legs[row.leg] = word;
+  }
+
+  const trend = Number(record.populationTrendBand);
+  if (Number.isFinite(trend)) {
+    const band = SOVEREIGNTY_TRAJECTORY_BANDS[Math.round(trend) + 2 + 1];
+    if (band) legs.trajectoryBand = band;
+  }
+  return legs;
 }
 
 /**

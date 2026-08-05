@@ -34,7 +34,9 @@ import { reasonPairKey } from '../../src/domain/worldPulse/warReasons.js';
 import { hash01 } from '../../src/domain/region/contestMath.js';
 import { mintSovereigntySaleTreaties, considerationTypeFor } from '../../src/domain/worldPulse/peaceTermsSale.js';
 import { SOVEREIGNTY_REQUIRED_RULES } from '../../src/domain/worldPulse/sovereigntyAssets.js';
-import { SOVEREIGNTY_TRAJECTORY_BANDS } from '../../src/domain/worldPulse/sovereigntyAppraisal.js';
+import {
+  SOVEREIGNTY_TRAJECTORY_BANDS, appraiseSettlementAsset,
+} from '../../src/domain/worldPulse/sovereigntyAppraisal.js';
 import { createOccupationRecord } from '../../src/domain/worldPulse/occupation.js';
 import {
   conveySteading as leafConveySteading,
@@ -70,6 +72,19 @@ const BUYER_LEGS = Object.freeze({
   tierBand: 'city', storesBand: 'deep', routeBand: 'established', trajectoryBand: 'swelling',
 });
 const legsAlways = ({ courtId }) => ({ ...(courtId === 'buyer' ? BUYER_LEGS : SELLER_LEGS) });
+
+/** SP-B2's SUPPLY SIDE, hand-built at the shape SP-B's writer really produces: a belief
+ *  record carrying the believed-conditions family under its OWN key spellings (note
+ *  `routePositionBand`, which is the rename this wave exists to perform) beside the
+ *  believed population trend that was the one leg before it. `overrides` replaces the
+ *  conditions family wholesale so a pin can hand it a word that is not on a ladder. */
+function believedWorld(conditionsBands = { tierBand: 'town', storesBand: 'stocked', routePositionBand: 'steady' }) {
+  return {
+    spatialLedgers: {
+      beliefMaps: { seller: { seat: { holding: { populationTrendBand: 2, conditionsBands } } } },
+    },
+  };
+}
 
 /** A settlement crushed against its food bound — the pressure that puts it in a demanding
  *  band. `dailyProduction` far under `dailyNeed` collapses the food capacity, so the
@@ -288,7 +303,7 @@ describe('WW-B — the treaty IS the cooldown (zero new keys)', () => {
 
 // ═══════════════════════════════════════════════════════════════════════════════
 describe('WW-B — CR-WR10-H: the belief legs, and the honest no-trade', () => {
-  it('THE LEGS THAT EXIST TODAY ARE ONE OF FOUR, and the composer says so instead of guessing', () => {
+  it('A RECORD CARRYING ONLY A TREND YIELDS ONE LEG — the other three are unformed beliefs, not an unreadable reader', () => {
     // The real reader, against a world with a believed population trend and nothing else.
     const withTrend = beliefLegsOf({
       worldState: {
@@ -296,16 +311,134 @@ describe('WW-B — CR-WR10-H: the belief legs, and the honest no-trade', () => {
       },
       courtId: 'seller', assetId: 'holding',
     });
-    expect(withTrend.trajectoryBand, 'the one leg that HAS a surface reads as a real word')
+    expect(withTrend.trajectoryBand, 'the leg this record DOES carry reads as a real word')
       .toBe(SOVEREIGNTY_TRAJECTORY_BANDS[1 + 2 + 1]);
     expect(SOVEREIGNTY_TRAJECTORY_BANDS).toContain(withTrend.trajectoryBand);
-    // anchored: the leg above is a live word off the same reader, so these absences are
-    // missing SURFACES rather than a reader that returned nothing at all.
+    // anchored: the leg above is a live word off the same reader, AND the SP-B2 pin below
+    // drives all four out of the same function, so these absences are a court that has
+    // formed no opinion rather than a reader that cannot form one.
     expect(withTrend.tierBand).toBeUndefined();
     expect(withTrend.storesBand).toBeUndefined();
     expect(withTrend.routeBand).toBeUndefined();
     // No belief record at all ⇒ no legs, and still not a midpoint.
     expect(beliefLegsOf({ worldState: {}, courtId: 'seller', assetId: 'holding' })).toEqual({});
+  });
+
+  it('SP-B2 — ALL FOUR LEGS COME OFF ONE BELIEF RECORD, under the CONSUMER\'s own keys', () => {
+    const legs = beliefLegsOf({ worldState: believedWorld(), courtId: 'seller', assetId: 'holding' });
+    expect(legs, 'the four legs, translated and complete').toEqual({
+      tierBand: 'town', storesBand: 'stocked', routeBand: 'steady', trajectoryBand: 'swelling',
+    });
+    // THE TRAP, PINNED. The supplying record spells the route rung `routePositionBand` and
+    // the appraisal reads `routeBand`; a supply that carried the writer's spelling across
+    // would put the word on the wrong key, and `wordOf` would report `'unknown'` with every
+    // gate in this repository green. anchored: `routeBand` is a live key one line above, so
+    // this absence is the rename having happened rather than an empty return.
+    expectAbsentWithAnchor(Object.keys(legs), 'routePositionBand', 'routeBand',
+      'the route rung arrives under the appraisal key, never the belief-record key');
+    // AND `pullBand` IS NOT A LEG. It is the fourth believed-conditions key and the
+    // appraisal has no fifth input; a supply that forwarded the whole record would have
+    // shipped a key no consumer reads. anchored: same live key set.
+    expectAbsentWithAnchor(Object.keys(legs), 'pullBand', 'tierBand',
+      'the believed-conditions family is wider than the appraisal, and the table is the filter');
+  });
+
+  // The leading token is a JOIN KEY, not decoration: `SOVEREIGNTY_LIGHTING_EVIDENCE`'s
+  // SP-B2 row names it, and tests/lint/sovereigntyLightingContract.walker.test.js measures
+  // the lighting condition by finding it in a live test. Keep it stable across renames.
+  it('SP-B2-LEG-SUPPLY-EVIDENCE — the emitted key set is a SUBSET of the shape the appraisal itself declares', () => {
+    // THE AUTHORITY IS THE CONSUMER'S OWN RUNTIME SHAPE, not a list restated here. The
+    // appraisal reports every leg it graded in `evidence`, so its key set IS the closed set
+    // of names it reads, measured rather than transcribed.
+    const declared = Object.keys(appraiseSettlementAsset({}).evidence);
+    const legs = beliefLegsOf({ worldState: believedWorld(), courtId: 'seller', assetId: 'holding' });
+    // guard the guard: both sides are non-empty, so the subset below is a measurement.
+    expect(declared.length, 'the appraisal declared no evidence shape at all').toBeGreaterThan(3);
+    expect(Object.keys(legs).length, 'the supply produced no legs to check').toBe(4);
+    expect(Object.keys(legs).filter((k) => !declared.includes(k)),
+      'a supplied leg is named by a key the appraisal never reads — it would degrade to'
+      + " `'unknown'` silently, which is the whole defect this pin exists for").toEqual([]);
+  });
+
+  it('SP-B2 — EVERY supplied leg reaches the appraisal by name, and a renamed key degrades it', () => {
+    const legs = beliefLegsOf({ worldState: believedWorld(), courtId: 'seller', assetId: 'holding' });
+    const priced = (row) => appraiseSettlementAsset({ assetId: 'holding', appraiserId: 'seller', ...row });
+
+    const whole = priced(legs);
+    expect(whole.known, 'four legs price a holding').toBe(true);
+    for (const [key, word] of Object.entries(legs)) {
+      expect(whole.evidence[key], `${key} reached the appraisal as its own word`).toBe(word);
+
+      // THE KEY-RENAME MUTANT, EXECUTED PER LEG AND PERMANENT. Carry this one leg's word
+      // under a suffixed name — the exact shape of emitting a supply-side spelling — and
+      // the appraisal must report the leg as unheard and refuse to price. If this ever
+      // passes with `known: true`, a leg is decorative.
+      const { [key]: moved, ...rest } = legs;
+      const renamed = priced({ ...rest, [`${key}Position`]: moved });
+      expect(renamed.evidence[key], `a renamed ${key} is heard as nothing`).toBe('unknown');
+      expect(renamed.known, `and a court missing ${key} does not price`).toBe(false);
+    }
+  });
+
+  it('SP-B2 — an off-ladder or `unknown` word contributes NO key (R-28: absent, never a guess)', () => {
+    const legs = beliefLegsOf({
+      worldState: believedWorld({
+        tierBand: 'unknown', storesBand: 'a rumour of grain', routePositionBand: 'steady',
+      }),
+      courtId: 'seller', assetId: 'holding',
+    });
+    // anchored: `routeBand` resolves on this very record, so the two absences are the
+    // validity test refusing a word rather than a reader that stopped at the first row.
+    expect(legs.routeBand).toBe('steady');
+    expect(legs.tierBand, 'the literal `unknown` is ladder member 0 and is not a belief').toBeUndefined();
+    expect(legs.storesBand, 'a word on no ladder is not a belief either').toBeUndefined();
+    // AND THE DEGRADED ARM: partial knowledge does not clear a market.
+    const appraisal = appraiseSettlementAsset({ assetId: 'holding', appraiserId: 'seller', ...legs });
+    expect(appraisal.known, 'three legs of four is a guess, and a guess is not a price').toBe(false);
+    expect(appraisal.value01, 'and the honest answer is null rather than zero').toBeNull();
+  });
+
+  it('SP-B2 DORMANCY — a record with no believed-conditions family returns exactly the pre-wave shape', () => {
+    // The family is written only under `believedConditionsEnabled` ∧ `beliefAxesEnabled`,
+    // one module over, so a dark world's records carry no such field. This is that record.
+    const dark = beliefLegsOf({
+      worldState: {
+        spatialLedgers: { beliefMaps: { seller: { seat: { holding: { populationTrendBand: 2 } } } } },
+      },
+      courtId: 'seller', assetId: 'holding',
+    });
+    expect(dark, 'byte-identical to what this function returned before SP-B2')
+      .toEqual({ trajectoryBand: SOVEREIGNTY_TRAJECTORY_BANDS[2 + 2 + 1] });
+    expect(Object.keys(dark)).toEqual(['trajectoryBand']);
+    // anchored: the lit record one test above yields four keys off the same reader, so this
+    // one-key shape is the dark surface and not a reader that has stopped working.
+    expect(Object.keys(beliefLegsOf({ worldState: believedWorld(), courtId: 'seller', assetId: 'holding' })))
+      .toHaveLength(4);
+  });
+
+  it('SP-B2 — the PRODUCTION reader clears the market end to end (the fixture flips from seam to supply)', () => {
+    // Every other clearing pin in this file injects `beliefLegsFor`. This one does NOT: the
+    // stage runs on its own default reader over a world whose belief maps really carry the
+    // believed-conditions family, which is the claim CR-WR10-H actually makes — that the
+    // market clears on BELIEFS the engine writes, not on legs a test hands it.
+    const out = advanceSovereigntyMarket({
+      snapshot: SNAPSHOT,
+      worldState: {
+        ...marketWorld(),
+        spatialLedgers: {
+          ...marketWorld().spatialLedgers,
+          beliefMaps: {
+            seller: { seat: { holding: { populationTrendBand: -1, conditionsBands: { tierBand: 'village', storesBand: 'thin', routePositionBand: 'stirring' } } } },
+            buyer: { seat: { holding: { populationTrendBand: 2, conditionsBands: { tierBand: 'city', storesBand: 'deep', routePositionBand: 'established' } } } },
+          },
+        },
+      },
+      settlementUpdates: [], tick: 40, now: null,
+      reachFor: ({ assetIds }) => [...assetIds],
+    });
+    const cleared = out.receipts.filter((r) => r.kind === 'sovereignty_sale_cleared');
+    expect(cleared.length, 'the market clears on engine-written beliefs, no injected legs').toBe(1);
+    expect(out.worldState.occupations.holding.occupierId).toBe('buyer');
   });
 
   it('MISSING LEGS ⇒ an honest receipted no-trade on the sovereignty_no_trade road — never a backfill', () => {

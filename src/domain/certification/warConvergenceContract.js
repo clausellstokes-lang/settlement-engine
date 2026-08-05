@@ -283,6 +283,139 @@ export const WAR_RULINGS_FLAG_KEYS = Object.freeze([
   'sovereigntyTradeEnabled',
 ]);
 
+// ── THE SOVEREIGNTY LIGHTING CONDITION (CR-WR10-H, made executable) ───────────
+
+/**
+ * THE ONE WR FLAG WHOSE LIGHTING HAS A CROSS-PROGRAM PRECONDITION, and the row that
+ * says so in something other than prose.
+ *
+ * THE PHANTOM THIS REPLACES, NAMED RATHER THAN INHERITED. Five doc homes stated the
+ * three-member green condition of `sovereigntyTradeEnabled` — the war volume's
+ * CR-WR10-H, DESIGN_FP_ARCHITECTURE §3 and its seam row 4, and the SP volume's two
+ * discharge sites — and every one of them pointed at "the WR-9 certification
+ * lighting-order row" as if it existed. It did not: re-measured across src/, tests/ and
+ * docs/ at the fold head `32cc17f7` and again at this landing, NO artifact could ever
+ * have flipped that condition green or red. A condition that only prose can evaluate is
+ * a condition that quietly becomes whatever the next reader believes, which is precisely
+ * how a flag gets lit onto surfaces with nothing behind them.
+ *
+ * WHY IT LIVES BESIDE THE WAR FLAG TABLE. `sovereigntyTradeEnabled` is a WR flag and
+ * this module already owns the WR flag vocabulary; the TRADE sibling
+ * (tradeConvergenceContract.js) carries the same idea as `requiresForeignFlags`, whose
+ * TR-3 row already gates on `believedScarcityEnabled`. This is that precedent applied to
+ * the one WR flag that needs it — with one difference the shape forced: TR's
+ * preconditions are FLAGS, and two of these three are LANDED WORK rather than a key
+ * anything can read at runtime. So the rows name EVIDENCE and the evaluator takes a
+ * measurement, which keeps this module pure (no fs, no tree, no world state — the wall
+ * every other export here stands behind).
+ *
+ * @type {string}
+ */
+export const SOVEREIGNTY_LIGHTING_FLAG = 'sovereigntyTradeEnabled';
+
+/**
+ * THE TWO STATES, BOTH REACHABLE BY CONSTRUCTION (the dead-band law, L1). A third
+ * "BLOCKED" was considered and REFUSED: an unbuilt wave and a regressed one would carry
+ * the same word, and a vocabulary member that cannot tell the two apart is worse than
+ * absent. `UNSATISFIED_TRACKED` is deliberately not a failure — it is the honest reading
+ * while a named wave is still ahead in the build order, and the walker that evaluates it
+ * must stay green in that state or the estate's own build order would red its own suite.
+ * @type {ReadonlyArray<string>}
+ */
+export const SOVEREIGNTY_LIGHTING_STATES = Object.freeze(['SATISFIED', 'UNSATISFIED_TRACKED']);
+
+/**
+ * THE THREE WAVE EVIDENCES, in build order. Each row names WHAT the wave contributes and
+ * the ADDRESS at which a walker can measure whether it has arrived — never a boolean this
+ * file could assert on its own, because a contract that declared its own build state
+ * would be the R6 drift the trade sibling already had to repair once.
+ *
+ * TWO KINDS OF ADDRESS, and the split is not stylistic:
+ *   FLAG_MANIFEST — the wave's contribution IS a virtual rule key with a real gate, so
+ *     `ENGINE_GATED_VIRTUAL_RULE_KEYS` is an exact mechanical read of build state (the
+ *     CQ5 one-commit law puts a key there in the same commit as its first gate read).
+ *   TEST_MARKER — the wave's contribution is a PIN, and the only honest evidence that a
+ *     pin exists is that a live test carries its marker. The marker is a join key, not a
+ *     description: keep it stable across renames exactly as the mutation-sweep labels are
+ *     kept stable, and never spell it in a comment where a deletion would leave it behind.
+ *
+ * @type {ReadonlyArray<{ wave: string, supplies: string, kind: string,
+ *   manifestFlags: readonly string[], marker: string, why: string }>}
+ */
+export const SOVEREIGNTY_LIGHTING_EVIDENCE = Object.freeze([
+  Object.freeze({
+    wave: 'SP-B',
+    supplies: 'SURFACES',
+    kind: 'FLAG_MANIFEST',
+    manifestFlags: Object.freeze(['beliefAxesEnabled', 'believedConditionsEnabled']),
+    marker: '',
+    why: 'the believed-world axes: a court can hold a banded opinion about a neighbour\'s'
+      + ' size, granary and position on the roads at all. Without them the appraisal has'
+      + ' three legs it can never be handed.',
+  }),
+  Object.freeze({
+    wave: 'SP-B2',
+    supplies: 'SEAM',
+    kind: 'TEST_MARKER',
+    manifestFlags: Object.freeze([]),
+    marker: 'SP-B2-LEG-SUPPLY-EVIDENCE',
+    why: 'the supply is wired to the CONSUMER\'s own key spellings and pinned against the'
+      + ' appraisal\'s declared shape. A surface nothing carries into the appraisal lights'
+      + ' a market that prices every holding `unknown` with every gate green.',
+  }),
+  Object.freeze({
+    wave: 'ES-4',
+    supplies: 'SOURCE',
+    kind: 'TEST_MARKER',
+    manifestFlags: Object.freeze([]),
+    marker: 'ES-4-DISTANT-SOURCE-EVIDENCE',
+    why: 'a NON-NEIGHBOUR (court, holding) pair priced `known:true` through a completed'
+      + ' confirmation mission. Surfaces without distant sources light a market that can'
+      + ' only ever clear rumour-range holdings — the dead-lighting trap one level up,'
+      + ' which is the whole reason this condition names three waves and not one.',
+  }),
+]);
+
+/**
+ * EVALUATE THE LIGHTING CONDITION AGAINST A MEASUREMENT.
+ *
+ * `presence` maps a wave id onto whether its evidence was FOUND. Anything that is not
+ * strictly `true` is absent — the same dark-never-permissive read the flag tables use, for
+ * the same reason: a measurement that came back `undefined` because a scanner broke must
+ * never read as evidence.
+ *
+ * TOTAL AND DETERMINISTIC. Rows are walked in declared order, so `missing` is stable and
+ * safe to put in a receipt or a failure message. An `UNSATISFIED_TRACKED` result is a
+ * STATEMENT ABOUT BUILD ORDER and never a defect; `SATISFIED` says the condition CAN be
+ * met, never that the flag should be lit — that stays an owner call at the soak.
+ *
+ * @param {unknown} presence `{ [waveId]: boolean }`
+ * @returns {{ flag: string, state: string, satisfiable: boolean, missing: string[],
+ *   rows: Array<{ wave: string, supplies: string, present: boolean }>, message: string }}
+ */
+export function evaluateSovereigntyLighting(presence) {
+  const seen = asRecord(presence);
+  const rows = SOVEREIGNTY_LIGHTING_EVIDENCE.map((row) => ({
+    wave: row.wave, supplies: row.supplies, present: seen[row.wave] === true,
+  }));
+  const missing = rows.filter((row) => !row.present).map((row) => row.wave);
+  const satisfiable = missing.length === 0;
+  return {
+    flag: SOVEREIGNTY_LIGHTING_FLAG,
+    state: satisfiable ? SOVEREIGNTY_LIGHTING_STATES[0] : SOVEREIGNTY_LIGHTING_STATES[1],
+    satisfiable,
+    missing,
+    rows,
+    message: satisfiable
+      ? `${SOVEREIGNTY_LIGHTING_FLAG}: all three wave evidences are present — surfaces,`
+        + ' seam and source. The lighting condition CAN be met; whether to light it is an'
+        + ' owner call at the soak.'
+      : `${SOVEREIGNTY_LIGHTING_FLAG}: TRACKED, not satisfiable yet — ${missing.join(', ')}`
+        + ' has not landed. Lighting it now would clear a market on beliefs no court can'
+        + ' actually form, and every gate in this repository would stay green.',
+  };
+}
+
 /** The selected subsystem-certification fields embedded in the WR-9 receipt. */
 export const WAR_FLAG_RULE_STATES = Object.freeze(['on', 'off', 'unknown']);
 export const WAR_FLAG_CERTIFICATION_VERDICTS = Object.freeze([

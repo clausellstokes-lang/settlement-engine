@@ -1406,19 +1406,23 @@ and `appraiseSettlementAsset` prices it end-to-end (the market clears on
 spy-fed legs); the NON-NEIGHBOR DIFFERENTIAL pin — rumor-range-only feeding
 leaves the far pair `known:false`, the mission fills it (proving spies are
 the SOURCE at distance, not decoration); the LIGHTING-ROW AMENDMENT (§6
-item 5's text) landing in the same commit — ⟨F9⟩ with a VERIFY-AT-BUILD
-step: the phrase "WR-9 certification lighting-order row" names NO measured
-artifact in src/tests/docs today (re-measured at 32cc17f7:
-FABLE_VALIDATION_QUEUE.md carries no such row; the war volume's CR-WR10-H
-paragraph says only "the belief-legs wave (queued)") — the PHANTOM CLAIM
-lives at FIVE doc sites in TWO documents (the FP volume's §3 closing, §5
-wave #4, §9 seam row 4, and DESIGN_FP_ARCH_SP.md's two discharge sites),
-every one amended by this fold; the real INSTRUMENT is built in cycle 2.
-At build, ES-4 LOCATES the concrete artifact if one has appeared; if none
-exists, ES-4 (with SP-B2) MINTS the lighting-order row — a certification/
-queue row whose green condition cites SP-B + SP-B2 + ES-4 — rather than
-"amending" a phantom. Budgets: test estate +
-≤ 20 lines of wiring. Pins: the four-leg totality and degraded-arm pins
+item 5's text) landing in the same commit — ⟨F9⟩, DISCHARGED: the phrase
+"WR-9 certification lighting-order row" named NO measured artifact when this
+charter was written (re-measured at 32cc17f7), and the PHANTOM CLAIM lived at
+FIVE doc sites in TWO documents. **SP-B2 BUILT THE REAL INSTRUMENT ON
+2026-08-05**, so ES-4's VERIFY-AT-BUILD step is now a LOCATE and it resolves:
+`SOVEREIGNTY_LIGHTING_EVIDENCE` + `evaluateSovereigntyLighting` in
+`src/domain/certification/warConvergenceContract.js`, measured by
+`tests/lint/sovereigntyLightingContract.walker.test.js`. **ES-4 MINTS
+NOTHING HERE — it SATISFIES the row that exists.** Its ONE obligation is to
+carry the marker `ES-4-DISTANT-SOURCE-EVIDENCE` in the TITLE of the live pin
+that proves a non-neighbour pair priced through a completed mission; that
+marker is the row's declared address and the join key the walker measures, so
+the condition flips from `UNSATISFIED_TRACKED / missing ['ES-4']` to
+`SATISFIED` in the same commit and with no edit to the instrument. Keep the
+token stable across renames (it is a join key, not a description) and put it
+in the test NAME rather than a comment, so deleting the pin removes the
+evidence. Budgets: test estate + ≤ 20 lines of wiring. Pins: the four-leg totality and degraded-arm pins
 inherited from SP-B2 re-run against espionage-fed rows; the axis-drift scan
 (no espionage module spells an axis token outside SP-B's exports — seam 5's
 law). **THIS WAVE, WITH SP-B AND SP-B2, IS THE DISCHARGE OF THE OWNER'S
@@ -1526,7 +1530,7 @@ walk or the lifecycle host.
 | 3 | TRADE (TR-8) | Merchant cover = declaredPurpose `commercial` on a covert-class errand — the SAME SP-D seam TR-8's compromised factor uses from the other side (TR-8: declared-commercial hiding covert; ES: declared-anything hiding confirmation). One seam, two consumers, zero duplication; ES-2's `caught_spying` cause and TR-8's capture share the one hold writer. `secrecyTradeFactor` (IN-0d) composes untouched. | The SP-D consumer-map walker carries BOTH rows; a spelling scan keeps `caught_spying` the one covert hold cause |
 | 4 | THE SPINE (SP-B/SP-D) | Products write ONLY SP-B's exported axis spellings (`conditionsBands.{tierBand,storesBand,routePositionBand}`); the mission row consumes SP-D's purposeClass/declared/true fields and adds ONLY `covert`. ES registers in SP-D's frozen consumer map (row: espionage/covert). | Seam-5 axis-drift scan (no axis token outside SP-B's module); the both-ways consumer-map walker; normalizeErrand round-trip pin |
 | 5 | TREATY/GRAMMAR | Re-appraisal on confirmed/refuted legs: GR-2's pact triggers re-score on the NEXT tick's changed beliefs automatically (triggers are re-derived — no coupling code); the deliberation read extends `answerDueTick` (one gated line, GR-side, landed by whichever wave is second). Tainted-journey terms re-grade via testimony (§3.5) — no term is voided (CR-WIRE-B inviolate). | The GR-side line carries a by-name `espionageEnabled` read; a fixture proves a REFUTE flips a pact trigger the next tick |
-| 6 | SOVEREIGNTY MARKET (WR-10) | THE LEGS SUPPLY (§6): ES-4 + SP-B + SP-B2 are the amended green condition of `sovereigntyTradeEnabled`'s lighting (recorded in CR-WR10-H + FP §3/§9 row 4; ⟨F9⟩ the certification lighting-order ROW is minted-or-located at ES-4 build — no such artifact exists today, measured at 32cc17f7); the buyer's deliberation arm is a stage-local gated read (the stage's composition untouched — the injectable-seam law). | The fed-by-espionage contract fixture; the non-neighbor differential pin; the minted lighting row cites three wave ids |
+| 6 | SOVEREIGNTY MARKET (WR-10) | THE LEGS SUPPLY (§6): ES-4 + SP-B + SP-B2 are the amended green condition of `sovereigntyTradeEnabled`'s lighting (recorded in CR-WR10-H + FP §3/§9 row 4; ⟨F9⟩ the certification lighting-order ROW was minted at SP-B2 on 2026-08-05 — `SOVEREIGNTY_LIGHTING_EVIDENCE` in src/domain/certification/warConvergenceContract.js, measured by tests/lint/sovereigntyLightingContract.walker.test.js; ES-4 SATISFIES it rather than minting it); the buyer's deliberation arm is a stage-local gated read (the stage's composition untouched — the injectable-seam law). | The fed-by-espionage contract fixture; the non-neighbor differential pin; the marker `ES-4-DISTANT-SOURCE-EVIDENCE` in the pin's TITLE, which flips the existing three-wave row to SATISFIED |
 | 7 | HERALD | Six kinds × the FIVE JOINS in their mint commits; dm-only covert fail-closed UPSTREAM; public kinds carry the full address chain; own walker file; significance classes from SP-A's family (covert beats `routine`-class so quiet departures never clear `passesSignificanceGate` — refinement 9 lands on the existing gate, measured). | Per-kind walker; the covert-departure significance negative (anchored); the retroactive-exposure fixture |
 | 8 | INTERIOR/POLITICS | The absence discount feeds the EXISTING bloc reads via one lazy leaf (no second vote-weight spelling — HZ5); INT-2's counsel and INT-3's decision incidents consume the lightened blocs for free; an espionage SCANDAL (public exposure) is eligible to become an INT-3 `_decision` sibling incident ONLY through INT's own mint (no ES-side incident types). | The deleted-symbol pin (`conquestVoteWeight01` absent) stands guard; the bloc leaf's import-source pin; INT-3's own walker owns incident types |
 | 9 | INFORMATION siblings (IN-2/IN-3/IN-4) | J-INA-2 EXTENDED: products ride the report road; plants ride the plant roads; the two never share a writer (scan-pinned). IN-3's `suspicionOf` gains the two wariness terms when both are lit — ONE derivation, ES consumes it lit / derives minimally dark. ⟨F8⟩ THE VETTING READ HAS ONE HOME: `vetVolunteerEnvoy` (sendTwoDivergence.js) — IN-3's VET (which lands BEFORE ES-1 in the compiled order and composes the same module's vocabulary) and ES-1's casting BOTH route through that one reader; neither program forks a second vetting derivation (the same one-derivation treatment this row gives suspicionOf; source-scan both sides). IN-4's couriers are CARGO movers, ES missions are PRODUCT movers — distinct purposes on the one spine, both in the consumer map. | The writer-boundary scan (ES-3); the suspicionOf handshake pin lands IN-3-side with a by-name espionage read; the vetting one-home scan (no second `vetVolunteer` spelling in src); consumer-map rows distinct |
@@ -1601,15 +1605,19 @@ section. It is written to be landed verbatim:
    CR-WR10-H dead-lighting trap one level up." AND the FP §3 closing's
    sentence "the WR-9 certification lighting-order row cites those two wave
    ids as its green condition" is CORRECTED, not extended: no such row
-   exists as an artifact anywhere in src/tests/docs (re-measured at
-   32cc17f7 — the phantom claim lives at FIVE doc sites in TWO documents,
-   all amended by this fold; the chair flags it as an inherited phantom
-   whose INSTRUMENT is built in cycle 2). The
-   corrected clause reads: "the lighting condition is RECORDED in CR-WR10-H
-   (war volume §9), this paragraph, and seam row 4; the certification
-   lighting-order ROW is MINTED by SP-B2/ES-4 at build (VERIFY-AT-BUILD:
-   locate any row that has appeared since; mint if absent), and it cites
-   SP-B + SP-B2 + ES-4 as its green condition."
+   existed as an artifact anywhere in src/tests/docs (re-measured at
+   32cc17f7 — the phantom claim lived at FIVE doc sites in TWO documents,
+   all amended by this fold; the chair flagged it as an inherited phantom
+   whose INSTRUMENT is built in cycle 2). **BUILT 2026-08-05 AT SP-B2.** The
+   corrected clause now reads: "the lighting condition is RECORDED in
+   CR-WR10-H (war volume §9), this paragraph, and seam row 4, and is
+   EXECUTABLE as `SOVEREIGNTY_LIGHTING_EVIDENCE` /
+   `evaluateSovereigntyLighting` in
+   src/domain/certification/warConvergenceContract.js, measured by
+   tests/lint/sovereigntyLightingContract.walker.test.js; it cites SP-B +
+   SP-B2 + ES-4 as its green condition, reads UNSATISFIED_TRACKED while ES-4
+   is unbuilt, and flips SATISFIED the commit ES-4 carries the marker
+   `ES-4-DISTANT-SOURCE-EVIDENCE` into a live pin title."
 6. **§11:** the FP chair-question list is CAPPED AT TEN by its own header —
    the ES questions do NOT inflate it. §11 gains one POINTER line, and the
    sentence that lands is the one the fold's §11 edit actually carries: "The

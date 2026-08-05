@@ -71,6 +71,9 @@ const ARGUED_FIELD_SPELLERS = Object.freeze({
     'the BeliefRecord typedef: the fields live on its rows, so its type surface must name them',
   'src/domain/certification/subsystemRowsVirtual.js':
     'the three certification rows: a row that cannot name the field it gates says nothing falsifiable',
+  'src/domain/worldPulse/sovereigntyMarketStage.js':
+    'SP-B2, the first CONSUMER: beliefLegsOf reads conditionsBands off a belief record and'
+    + ' renames its route rung onto the appraisal key, so it must spell the field it reads',
 });
 
 function walk(dir, out = []) {

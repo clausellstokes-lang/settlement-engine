@@ -62,11 +62,17 @@ const LIT = Object.freeze({
   peaceEngineEnabled: true,
 });
 
-/** THE FOUR LEGS, SUPPLIED (CR-WR10-H). Three of the appraisal's four legs have no
- *  belief surface in the tree today, so the market as-wired clears nothing and this
- *  fixture would measure that emptiness instead of the road. The asymmetry is
- *  load-bearing: the clearing rule is a two-sided conjunction, so two courts holding the
- *  same picture satisfy both arms only on an exact tie. */
+/** THE FOUR LEGS, SUPPLIED (CR-WR10-H) — AND STILL INJECTED AFTER SP-B2, DELIBERATELY.
+ *  All four legs have had a belief surface since SP-B2 wired `beliefLegsOf` to the
+ *  believed-conditions family (2026-08-05), so this fixture COULD stand a belief map up
+ *  and let the production reader fill them. It does not, and the reason is this file's
+ *  whole subject: it proves the war road and the sale road reach ONE writer on ONE world,
+ *  and a belief map is a second variable that could empty the sale road for belief reasons
+ *  while the war road ran, leaving a green comparison of one road against nothing. The
+ *  supply itself is pinned where it belongs — sovereigntyMarketStageWr10w's SP-B2 battery
+ *  drives the production reader end to end. The asymmetry below is load-bearing: the
+ *  clearing rule is a two-sided conjunction, so two courts holding the same picture
+ *  satisfy both arms only on an exact tie. */
 const SELLER_LEGS = Object.freeze({
   tierBand: 'village', storesBand: 'thin', routeBand: 'stirring', trajectoryBand: 'ebbing',
 });

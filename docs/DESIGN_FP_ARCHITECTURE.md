@@ -524,21 +524,29 @@ appraised `known:true` through a completed confirmation mission, per the
 owner's espionage amendment (2026-08-04: spies are the source of
 tier/route/trajectory legs about non-neighbors). A market lit on surfaces
 without distant sources would clear only rumor-range holdings — the CR-WR10-H
-dead-lighting trap one level up. THE INHERITED PHANTOM, CORRECTED (not
-extended): this paragraph previously claimed a WR-9 certification
-lighting-order row cites those wave ids; no such row exists as an artifact
+dead-lighting trap one level up. THE INHERITED PHANTOM, CORRECTED AND THEN
+DISCHARGED: this paragraph previously claimed a WR-9 certification
+lighting-order row cites those wave ids; no such row existed as an artifact
 anywhere in src/tests/docs. RE-MEASURED AT THE FOLD HEAD `32cc17f7` (not
 inherited from the 99d63d92 census, which undercounted): the phantom claim
-lives at FIVE sites in TWO documents — this paragraph, §5 wave #4 (SP-B2's
+lived at FIVE sites in TWO documents — this paragraph, §5 wave #4 (SP-B2's
 charter), §9 seam row 4, and docs/DESIGN_FP_ARCH_SP.md at BOTH its SP-B2 wave
-block and its §8 item 10. All five are amended by this same fold commit; a
+block and its §8 item 10. All five were amended by that fold commit; a
 fold that amends fewer leaves a normative per-program volume contradicting
-this one on the exact trap the amendment closes. The corrected clause reads:
-the lighting condition is RECORDED in CR-WR10-H (war volume §9), this
-paragraph, §5 wave #4, seam row 4, and the SP volume's two sites; the
-certification lighting-order ROW is MINTED by SP-B2/ES-4 at build
-(VERIFY-AT-BUILD: locate any row that has appeared since; mint if absent),
-and it cites SP-B + SP-B2 + ES-4 as its green condition. THE NEGATIVE IS
+this one on the exact trap the amendment closes. **THE INSTRUMENT WAS BUILT
+AT SP-B2, 2026-08-05.** The clause now reads: the lighting condition is
+RECORDED in CR-WR10-H (war volume §9), this paragraph, §5 wave #4, seam row 4
+and the SP volume's two sites, and it is EXECUTABLE as
+`SOVEREIGNTY_LIGHTING_EVIDENCE` + `evaluateSovereigntyLighting` in
+src/domain/certification/warConvergenceContract.js, measured against the tree
+by tests/lint/sovereigntyLightingContract.walker.test.js. Three rows, one per
+wave, each with an ADDRESS a walker can read rather than a boolean the
+contract asserts about itself: SP-B by the CQ5 flag manifest, SP-B2 and ES-4
+by markers a live pin must carry in its title. It cites SP-B + SP-B2 + ES-4 as
+its green condition, reads `UNSATISFIED_TRACKED / missing ['ES-4']` today, and
+flips `SATISFIED` the commit ES-4 lands — both states executed pins, and the
+tracked state never reds the base suite, because a build-order fact is not a
+defect and an instrument that failed on one would be deleted. THE NEGATIVE IS
 EXECUTED, NOT REASONED: at `32cc17f7`, `warConvergenceContract.js` carries no
 `requiresLandedWork` field at all, `subsystemRowsVirtual.js`'s
 `sovereigntyTradeEnabled` row carries no landed-work condition, and
@@ -749,8 +757,10 @@ THE CR-WR10-H DISCHARGE — the WR-10 lighting precondition; ES-4 is the third
 (ES ⟨F9⟩, folded 2026-08-05).** After #3 + #4 + ES-4 land,
 `sovereigntyTradeEnabled`'s lighting-order row is satisfiable and the war
 program cites "SP-B + SP-B2 + ES-4 landed" as the receipt: SP-B mints the leg
-SURFACES, SP-B2 wires the SEAM, ES-4 proves the SOURCE. The row itself is
-MINTED at build — no such artifact exists in src/tests/docs today (measured at 32cc17f7);
+SURFACES, SP-B2 wires the SEAM, ES-4 proves the SOURCE. The row itself was
+MINTED AT SP-B2 (2026-08-05) as `SOVEREIGNTY_LIGHTING_EVIDENCE` in
+src/domain/certification/warConvergenceContract.js — it did not exist at
+32cc17f7 — and reads UNSATISFIED_TRACKED until ES-4;
 see §3's lighting contract and §9 seam row 4. Collision:
 sovereigntyMarketStage.js is the war lane's file — coordinate through the
 queue if dirty.
@@ -1067,9 +1077,12 @@ fed-by-espionage companion fixture beside SP-B2's lit-with-legs contract
 fixture — a non-neighbor (court, holding) pair goes `unknown -> known` through
 a completed mission and `appraiseSettlementAsset` prices it end to end; THE
 NON-NEIGHBOR DIFFERENTIAL pin — rumor-range-only feeding leaves the far pair
-`known:false`, the mission fills it. The certification lighting-order row is
-MINTED here (VERIFY-AT-BUILD: locate any row that has appeared since; mint if
-absent) citing SP-B + SP-B2 + ES-4.
+`known:false`, the mission fills it. The certification lighting-order row was
+MINTED AT SP-B2 (2026-08-05) citing SP-B + SP-B2 + ES-4 —
+`SOVEREIGNTY_LIGHTING_EVIDENCE` in
+src/domain/certification/warConvergenceContract.js — so ES-4 SATISFIES it
+rather than minting it: carry the marker `ES-4-DISTANT-SOURCE-EVIDENCE` in the
+TITLE of the non-neighbour pin and the condition flips to SATISFIED.
 
 **ES-5 — DOCTRINE ENGAGED + THE ABSENCE AMENDMENT** (fourth slice; the
 absence arm rides CR-ES-1, SIGNED; ES §4). Charter: the doctrine STAGE
@@ -1949,7 +1962,7 @@ already exists; PRE-PIN = this volume lands both sides.
 | 1 | Term catalog growth | GR-3 -> WR-10 bundle | HONORED: catalogGrewSinceWr10() reds at GR-3; the one-time discharge is GR-3's (J-FP-1) |
 | 2 | Twin degradation sentence | TR-5 <-> WR-10 | HONORED: byte-equal Seam One sentence, PIN-6 + uniqueness; no second sentence ever |
 | 3 | Trade-rights rows | GR-3 -> TR-5 | PRE-PIN: seam rows minted at GR-3; a GR pin asserts them producer-less and reds the day TR-5 lands executors (the handoff signal) |
-| 4 | Belief legs + the distant SOURCE | SP-B2 + ES-4 -> WR-10 lighting | HONORED/PRE-PIN: the injectable beliefLegsFor seam; the green condition is SP-B + SP-B2 + ES-4 landed (ES §5 seam 6, ⟨F9⟩). CORRECTED AT THE FOLD: no certification lighting-order row exists as an artifact anywhere in src/tests/docs (RE-MEASURED AT THE FOLD HEAD `32cc17f7`, the same head §3's lighting contract cites — the 99d63d92 census this document once leaned on is repudiated as an undercount and is cited nowhere) — SP-B2/ES-4 MINT it at build (VERIFY-AT-BUILD: locate any row that has appeared since; mint if absent), citing all three wave ids |
+| 4 | Belief legs + the distant SOURCE | SP-B2 + ES-4 -> WR-10 lighting | HONORED/PRE-PIN: the injectable beliefLegsFor seam; the green condition is SP-B + SP-B2 + ES-4 landed (ES §5 seam 6, ⟨F9⟩). CORRECTED AT THE FOLD, DISCHARGED AT SP-B2: no certification lighting-order row existed as an artifact anywhere in src/tests/docs (RE-MEASURED AT THE FOLD HEAD `32cc17f7`, the same head §3's lighting contract cites — the 99d63d92 census this document once leaned on is repudiated as an undercount and is cited nowhere). **SP-B2 MINTED IT 2026-08-05**: `SOVEREIGNTY_LIGHTING_EVIDENCE` + `evaluateSovereigntyLighting` in src/domain/certification/warConvergenceContract.js, three rows citing SP-B / SP-B2 / ES-4, measured against the tree by tests/lint/sovereigntyLightingContract.walker.test.js — UNSATISFIED_TRACKED today (missing ES-4), SATISFIED the commit ES-4 carries its marker |
 | 5 | Axis vocabulary | SP-B <-> TR-3/POP-1/WF-2a/IN-2 | PRE-PIN: closed-vocabulary pin SP-side; each volume's first consumer wave owes its-side pin; spelling-drift scan reds any axis token outside SP-B's module |
 | 6 | Posture consumers | SP-C <-> GR-2/TR/WF/POP/INT-1 | PRE-PIN: with/without-books golden pair; a posture receipt that fails to name its inputs reds; seatBooksEnabled lighting = pre-declared disclosed shift |
 | 7 | Errand consumer registry | SP-D <-> GR/TR-8/WF-2b/IN-4/INT-3b | PRE-PIN: frozen consumer map, both-ways walker (unregistered minter reds; consumerless row reds) |

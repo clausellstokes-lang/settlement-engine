@@ -1657,10 +1657,16 @@ SOURCE of tier/route/trajectory legs about non-neighbours). Surfaces without sou
 would clear only rumour-range holdings, which is this very trap at one remove. The
 per-wave specs live in docs/DESIGN_FP_ARCH_SP.md (SP-B/SP-B2) and
 docs/DESIGN_FP_ARCH_ES.md (ES-4); this volume carries the receipt, never their text.
-No certification "lighting-order row" exists as an artifact anywhere in src/tests/docs
+No certification "lighting-order row" existed as an artifact anywhere in src/tests/docs
 (RE-MEASURED AT THE FOLD HEAD `32cc17f7`, the same head the FP volume's §3 lighting
-contract and §9 seam row 4 cite) — SP-B2/ES-4 MINT it at build citing all three ids.
-Vetoable in one owner clause.]
+contract and §9 seam row 4 cite). **SP-B2 MINTED IT ON 2026-08-05, IN THIS PROGRAM'S OWN
+MODULE:** `SOVEREIGNTY_LIGHTING_EVIDENCE` and `evaluateSovereigntyLighting` in
+src/domain/certification/warConvergenceContract.js, beside `WAR_RULINGS_FLAG_KEYS` —
+three rows (SP-B SURFACES, SP-B2 SEAM, ES-4 SOURCE), each naming an ADDRESS a walker can
+measure rather than a build state the contract asserts about itself, on the TRADE
+sibling's `requiresForeignFlags` precedent. `tests/lint/sovereigntyLightingContract.walker.test.js`
+measures it: `UNSATISFIED_TRACKED / missing ['ES-4']` today, `SATISFIED` the commit ES-4
+lands its marker, and never a red on the tracked state. Vetoable in one owner clause.]
 
 1. WR-0 lands FIRST (it settles the tree; nothing builds over a dirty tree).
 2. WR-1 → WR-2 → WR-3 → WR-4 → WR-5 in order (each consumes the last).

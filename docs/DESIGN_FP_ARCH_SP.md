@@ -439,9 +439,10 @@ second (`FOOD_FLOW_BANDS` grades the food flow and its bottom rung does not
 generalise past food). Both mints were chosen so their words appear as quoted
 literals ZERO times elsewhere under `src/` — the bandFamilies.js discipline.
 
-### SP-B2 — THE BELIEF-LEGS DISCHARGE (rides SP-B's flags; no new flag)
-**Scope:** the queued "belief-legs wave" named at `sovereigntyMarketStage.js:64`
-— the WR-10 lighting precondition CR-WR10-H discharged.
+### SP-B2 — THE BELIEF-LEGS DISCHARGE (rides SP-B's flags; no new flag) — **LANDED 2026-08-05**
+**Scope:** the queued "belief-legs wave" named in `sovereigntyMarketStage.js`'s
+header (navigate by symbol — the line address rotted) — the WR-10 lighting
+precondition CR-WR10-H discharged in its SEAM member.
 - **`beliefLegsOf` (`sovereigntyMarketStage.js`, navigate by symbol) widens**
   from one leg to four, and **the emitted keys are the CONSUMER'S**:
   `trajectoryBand` (existing) + `tierBand`, `storesBand`, **`routeBand`** —
@@ -467,8 +468,16 @@ literals ZERO times elsewhere under `src/` — the bandFamilies.js discipline.
   `believedConditionsEnabled` ∧ `beliefAxesEnabled` lit on the fixture, the
   appraisal returns `known: true` and the market clears end to end; with the
   family dark, the honest receipted no-trade stands (both arms pinned).
-- **Files touched:** `sovereigntyMarketStage.js` (486 lines — the one
-  function), its test file.
+- **Files touched (CORRECTED AT BUILD — the list below omitted two):**
+  `sovereigntyMarketStage.js` (the one function plus a leg table), its test
+  file `tests/domain/sovereigntyMarketStageWr10w.test.js`, **and two the
+  original list missed**: `tests/domain/sovereigntyWaveCloseIntegration.test.js`
+  carries FROZEN leg fixtures under the consumer keys and a comment asserting
+  three legs have no surface — both re-stated coherently rather than left to
+  rot; and `tests/lint/spAxisVocabulary.walker.test.js`, because the moment
+  this stage READS `conditionsBands` it must be admitted to
+  `ARGUED_FIELD_SPELLERS` with its reason (the walker reds otherwise, by
+  design — that admission was always SP-B2's to make).
 - **Pins:** the four-leg totality pin (each leg present ⇒ named in the
   appraisal receipt; each absent ⇒ `known:false`, never a guess — R-28's
   grain), **written against the four CONSUMER keys above so a leg emitted
@@ -494,14 +503,22 @@ literals ZERO times elsewhere under `src/` — the bandFamilies.js discipline.
   SEAM, ES-4 proves the SOURCE. A market lit on surfaces without distant
   sources would clear only rumor-range holdings — the CR-WR10-H dead-lighting
   trap one level up, which is why the third member exists.
-  THE PHANTOM, CORRECTED (not extended): this bullet previously pointed at a
-  §9 "lighting-order row" and a WR-9 certification walker arm as if both were
-  live artifacts. NO SUCH ROW EXISTS anywhere in src/tests/docs (RE-MEASURED
-  AT THE FOLD HEAD `32cc17f7`). The row is MINTED at build by SP-B2/ES-4 (VERIFY-AT-BUILD:
-  locate any row that has appeared since; mint if absent) and it cites all
-  three wave ids. Until it is minted, the lighting condition is RECORDED —
-  in CR-WR10-H (war volume §9), in DESIGN_FP_ARCHITECTURE.md §3 and its seam
-  row 4, and here.
+  THE PHANTOM, CORRECTED AND THEN DISCHARGED. This bullet previously pointed
+  at a §9 "lighting-order row" and a WR-9 certification walker arm as if both
+  were live artifacts. NO SUCH ROW EXISTED anywhere in src/tests/docs
+  (RE-MEASURED AT THE FOLD HEAD `32cc17f7`, and again at the SP-B2 landing).
+  **SP-B2 MINTED IT (2026-08-05).** The artifact is
+  `SOVEREIGNTY_LIGHTING_EVIDENCE` + `evaluateSovereigntyLighting` in
+  `src/domain/certification/warConvergenceContract.js` — three rows naming SP-B
+  (SURFACES, measured against the CQ5 flag manifest), SP-B2 (SEAM, measured by
+  the marker `SP-B2-LEG-SUPPLY-EVIDENCE` in a live pin) and ES-4 (SOURCE,
+  measured by the marker `ES-4-DISTANT-SOURCE-EVIDENCE`, ABSENT today) —
+  with `tests/lint/sovereigntyLightingContract.walker.test.js` measuring the
+  tree and evaluating the condition. It reads `UNSATISFIED_TRACKED / missing
+  ['ES-4']` today and flips `SATISFIED` the commit ES-4 lands its marker; both
+  states are executed pins, and the walker never reds on the tracked state
+  because a build-order fact is not a defect. ES-4's ONE obligation here is to
+  carry that marker in a live test title.
 
 ### SP-C — THE POSTURE READ (flag `strategicPostureEnabled`)
 **Scope:** SP-4a's settlement appetite stock + SP-4b's posture composition.
@@ -746,11 +763,14 @@ season-window width · the frequency-cadence class boundaries.
     the ES + WY owner-amendment fold, ES ⟨F9⟩): SP-B + SP-B2 + **ES-4** landed
     = CR-WR10-H discharged — SP-B mints the leg SURFACES, SP-B2 wires the
     SEAM, ES-4 proves the distant SOURCE (docs/DESIGN_FP_ARCH_ES.md §6 item
-    5). The certification lighting-order ROW is not a live artifact: it does
-    not exist anywhere in src/tests/docs (RE-MEASURED AT THE FOLD HEAD
-    `32cc17f7`) and is
-    MINTED by SP-B2/ES-4 at build, citing all THREE wave ids as its green
-    condition. Tripwire: a receipt naming only two members reds this item.
+    5). The certification lighting-order ROW was not a live artifact when this
+    item was written (RE-MEASURED AT THE FOLD HEAD `32cc17f7`); **SP-B2 minted
+    it on 2026-08-05** as `SOVEREIGNTY_LIGHTING_EVIDENCE` in
+    `src/domain/certification/warConvergenceContract.js`, citing all THREE wave
+    ids as its green condition and measured by
+    `tests/lint/sovereigntyLightingContract.walker.test.js`. Tripwire: a
+    receipt naming only two members reds this item, and the walker's own
+    three-row totality arm reds a table that loses one.
 11. THE BAND-FAMILY RECONCILIATION (toward every volume's §7/§8): the SP-A
     walker grows one volume at a time; a volume shipping a Bands line without
     a table row (or vice versa) reds — the fourteen-drift class dies
