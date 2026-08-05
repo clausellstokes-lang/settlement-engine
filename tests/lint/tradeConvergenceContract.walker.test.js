@@ -68,6 +68,7 @@ import {
 import {
   DEFAULT_SIMULATION_RULES,
   SIMULATION_RULE_PRESETS,
+  ENGINE_GATED_VIRTUAL_RULE_KEYS,
 } from '../../src/domain/worldPulse/simulationRules.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -408,9 +409,13 @@ describe('TR-9c foreign preconditions: every borrowed key is real, at an address
     expect(orphans, 'declared foreign preconditions nothing reads').toEqual([]);
   });
 
-  test('every ENGINE precondition really spells the strict gate, at its declared address', () => {
+  test('every precondition that NAMES an address really spells the strict gate there', () => {
+    // REPAIR R6 — this arm used to run over ENGINE rows only, because FP_PROGRAM rows were
+    // required to carry no address at all. Now that a landed FP flag names its gate (see the
+    // module header), the address check runs over EVERY row that names one: a row's evidence
+    // is worth exactly as much as the file it points at, whichever program owns the flag.
     const problems = [];
-    for (const row of TRADE_FOREIGN_PRECONDITION_FLAGS.filter((r) => r.origin === 'ENGINE')) {
+    for (const row of TRADE_FOREIGN_PRECONDITION_FLAGS.filter((r) => r.gateEvidenceFile || r.origin === 'ENGINE')) {
       if (!row.gateEvidenceFile) {
         problems.push(`${row.flag}: an ENGINE precondition must name its gate evidence file`);
         continue;
@@ -443,8 +448,6 @@ describe('TR-9c foreign preconditions: every borrowed key is real, at an address
     ]);
     const problems = [];
     for (const row of rows) {
-      expect(row.gateEvidenceFile, `${row.flag} is unbuilt and must carry no gate evidence file`)
-        .toBeNull();
       const cell = `\`${row.flag}\` | ${row.owner} |`;
       const found = occurrences(ARCH, cell);
       if (found !== 1) {
@@ -452,6 +455,47 @@ describe('TR-9c foreign preconditions: every borrowed key is real, at an address
       }
     }
     expect(problems).toEqual([]);
+  });
+
+  test('REPAIR R6 — an FP_PROGRAM row names an address IFF the CQ5 manifest says it is built', () => {
+    // THE DRIFT THIS CLOSES. The row for `believedScarcityEnabled` recorded a LANDED flag as
+    // unbuilt for a whole wave: SP-B shipped that flag's first real gate and the walker not
+    // only failed to notice, it REQUIRED the row to stay null (`is unbuilt and must carry no
+    // gate evidence file`). The build state was an assumption baked into a matcher, so the
+    // one thing that could never happen was the table telling the truth.
+    //
+    // THE AUTHORITY IS THE CQ5 MANIFEST, NOT A SCAN. This file deliberately owns no src/
+    // gate scanner (see its header — a second, weaker scanner whose only unique power is to
+    // red a neighbouring lane). It does not need one: `ENGINE_GATED_VIRTUAL_RULE_KEYS` is the
+    // estate's register of virtual keys that have a real gate, and the CQ5 one-commit law
+    // puts a key there in the SAME commit as its first gate read. Joining the two tables is
+    // therefore an exact, mechanical read of build state that costs no new machinery — and
+    // the address check above proves the named file really spells the gate, so the manifest
+    // cannot vouch for a row that points nowhere.
+    const rows = TRADE_FOREIGN_PRECONDITION_FLAGS.filter((r) => r.origin === 'FP_PROGRAM');
+    const problems = [];
+    for (const row of rows) {
+      const built = ENGINE_GATED_VIRTUAL_RULE_KEYS.includes(row.flag);
+      if (built && !row.gateEvidenceFile) {
+        problems.push(`${row.flag}: ${row.owner} has LANDED it (it is in ENGINE_GATED_VIRTUAL_RULE_KEYS)`
+          + ' but its row still records it as unbuilt — name the module that spells the strict gate');
+      }
+      if (!built && row.gateEvidenceFile) {
+        problems.push(`${row.flag}: its row names gate evidence (${row.gateEvidenceFile}) but the flag is`
+          + ' NOT in ENGINE_GATED_VIRTUAL_RULE_KEYS — either the CQ5 manifest arm was missed or the'
+          + ' evidence is fabricated');
+      }
+    }
+    expect(problems, 'the foreign-precondition table drifted from the tree').toEqual([]);
+
+    // GUARD THE GUARD, BOTH POLARITIES. The join is only a measurement if the manifest really
+    // discriminates between these three flags; if it contained all of them (or none), every
+    // row would agree with it trivially and this test would pass forever.
+    const built = rows.filter((r) => ENGINE_GATED_VIRTUAL_RULE_KEYS.includes(r.flag)).map((r) => r.flag);
+    const unbuilt = rows.filter((r) => !ENGINE_GATED_VIRTUAL_RULE_KEYS.includes(r.flag)).map((r) => r.flag);
+    expect(built, 'no FP precondition reads as built — the join proves nothing').toEqual(['believedScarcityEnabled']);
+    expect(unbuilt.sort(), 'no FP precondition reads as unbuilt — the join proves nothing')
+      .toEqual(['errandSpineEnabled', 'pactFormationEnabled']);
   });
 
   test("the SP-N aliases resolve the TRADE volume's own numbering", () => {

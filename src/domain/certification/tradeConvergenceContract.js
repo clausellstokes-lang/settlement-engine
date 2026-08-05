@@ -182,10 +182,27 @@ export const TRADE_FLAG_CERTIFICATION_VERDICTS = Object.freeze([
  * direction for the recorded filename-anchored-vacuity class — the pin never goes
  * quietly green on a moved file.
  *
- * The three FP_PROGRAM rows do not exist in the tree yet, so they carry no
- * evidence file; the walker pins each spelling against the compiled architecture's
- * flag table exactly-once instead, which catches a drift on either side without
- * waiting for the neighbour program to land.
+ * AN FP_PROGRAM ROW CARRIES EVIDENCE THE MOMENT ITS OWNING WAVE LANDS THE FLAG,
+ * AND NOT BEFORE. This table shipped with all three FP_PROGRAM rows pinned to
+ * `null` and a walker that REQUIRED null of them, on the premise that "the three
+ * FP_PROGRAM rows do not exist in the tree yet". SP-B falsified that premise on
+ * 2026-08-05 by landing `believedScarcityEnabled`'s first real gate
+ * (`beliefAxes.subjectAxesActive`), and nothing reddened: the row went on
+ * recording a LANDED flag as unbuilt, in the very module TR-9c built to stop a
+ * wave gating on a spelling nobody minted. J-WR-13 — live code outranks the
+ * table — so the row is now measured rather than assumed.
+ *
+ * WHICH STATE A ROW MUST BE IN IS DECIDED BY THE CQ5 MANIFEST, NOT BY A COMMENT.
+ * `ENGINE_GATED_VIRTUAL_RULE_KEYS` (simulationRules.js) is the estate's own
+ * register of virtual keys that have a real gate, and the CQ5 one-commit law puts
+ * a key there in the SAME commit as its first gate read. The walker therefore
+ * asserts a two-way equivalence: an FP_PROGRAM row names a `gateEvidenceFile` IF
+ * AND ONLY IF its flag is in that manifest — and where it does, the file must
+ * exist and spell the strict gate, exactly as the ENGINE rows are checked. A
+ * neighbouring wave that lands its flag now REDS this table until the row is
+ * brought true, which is the direction the recorded table-drift class wants, and
+ * it is a table-to-table join rather than the src/ scan this walker deliberately
+ * refuses to own (see its header).
  */
 export const TRADE_FOREIGN_PRECONDITION_FLAGS = Object.freeze([
   Object.freeze({
@@ -221,7 +238,9 @@ export const TRADE_FOREIGN_PRECONDITION_FLAGS = Object.freeze([
     origin: 'FP_PROGRAM',
     owner: 'SP-B',
     spineAlias: 'SP-2',
-    gateEvidenceFile: null,
+    // LANDED at SP-B (2026-08-05). The one door where the three believed-world family
+    // flags are read by name: `beliefAxes.subjectAxesActive`.
+    gateEvidenceFile: 'src/domain/worldPulse/beliefAxes.js',
   }),
   Object.freeze({
     flag: 'pactFormationEnabled',

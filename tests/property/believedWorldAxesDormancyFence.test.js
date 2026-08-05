@@ -145,6 +145,61 @@ function drive(rules) {
   return { next: out.next ? clone(out.next) : null, changed: out.changed };
 }
 
+/**
+ * ONE FRESH TELLING reaching Thornwall about Aldenmoor — the thing `drive` above does not
+ * have, and the reason fence 3's fold counter was unfalsifiable before repair R2.
+ */
+const FRESH_TELLING = Object.freeze({
+  b: {
+    'evt.mig.1': {
+      arrivalTick: 12,
+      hopCount: 0,
+      corroborationRoots: ['r1'],
+      completeness01: 1,
+      accuracy01: 0.9,
+      score: 5,
+      framing: [],
+      provenance: { originId: 'a' },
+      eventRef: 'migration.a.b.10',
+      content: { what: 'migration_flight', magnitude: 2, partyIds: ['a', 'b'], whereId: 'a' },
+    },
+  },
+});
+
+/**
+ * THE RECONCILING DRIVE (SP-B repair R2), AND WHY THE FENCE NEEDED IT.
+ *
+ * `drive` above performs a COLD START: no prior ledger, no rumor ledger. `advanceBeliefMaps`
+ * reaches `reconcileBelief` — and therefore `foldSubjectAxes` — only for a pair that has BOTH
+ * a surviving prior belief AND a fresh report this window (beliefMap.js:1170 skips a pair with
+ * neither; :1185 takes the SILENCE branch for a pair with no fresh word). So the cold-start
+ * drive cannot enter the fold in ANY configuration, and fence 3's `calls.folds` counter read
+ * zero in a fully lit world for that reason rather than because the flags were dark. It was a
+ * measurement of a code path the fixture could not reach — the estate's own recorded
+ * harness-default-empty-state class, on the fence built to prevent it.
+ *
+ * This drive advances TWICE over the same fixture: a cold start to seed an engine-derived
+ * ledger, then a second advance carrying that ledger forward alongside one fresh telling, which
+ * reconciles the (Thornwall, Aldenmoor) pair and runs the fold. Both counters can now be
+ * non-zero, so asserting them zero is a claim that can fail.
+ */
+function driveReconciling(rules) {
+  const { snapshot, worldState } = adversarialWorld();
+  const simulationRules = { ...BELIEFS_LIVE, ...rules };
+  const cold = advanceBeliefMaps({ snapshot, pressureIdx: null, worldState: { ...worldState, simulationRules }, tick: 11 });
+  const out = advanceBeliefMaps({
+    snapshot,
+    pressureIdx: null,
+    worldState: {
+      ...worldState,
+      simulationRules,
+      spatialLedgers: { beliefMaps: cold.next, rumorLedgers: clone(FRESH_TELLING) },
+    },
+    tick: 13,
+  });
+  return { next: out.next ? clone(out.next) : null, changed: out.changed };
+}
+
 /** Every belief record in a ledger, flattened. */
 function records(ledger) {
   const out = [];
@@ -237,23 +292,46 @@ describe('SP-B fence 2 — absent versus explicit false, over the whole projecti
 });
 
 describe('SP-B fence 3 — call-path dormancy at the beliefAxisSubjects boundary', () => {
-  test('dark the derivations are NEVER invoked, and lit they are', () => {
+  test('dark BOTH derivations are NEVER invoked, and lit BOTH of them are', () => {
+    // REPAIR R2 — THE BOTH-POLARITY LAW, APPLIED TO THE FOLD COUNTER. As shipped, this
+    // test asserted `calls.folds === 0` dark and never once asserted it non-zero lit; the
+    // control below checked only `calls.groundTruth`. Since the cold-start drive cannot
+    // enter the fold in ANY configuration (see `driveReconciling`), that counter read zero
+    // in a fully lit world too, and the dark claim was a measurement of an unreachable
+    // path rather than of the flags. A zero is only evidence once the same instrument has
+    // been shown capable of a non-zero, so every arm below drives BOTH shapes and every
+    // dark zero has a lit control facing it.
     calls.groundTruth = 0;
     calls.folds = 0;
-    for (const rules of [{}, AXES_ONLY, Object.fromEntries(FLAGS.map((f) => [f, false]))]) drive(rules);
+    for (const rules of [{}, AXES_ONLY, Object.fromEntries(FLAGS.map((f) => [f, false]))]) {
+      drive(rules);
+      driveReconciling(rules);
+    }
     expect(calls.groundTruth, 'the subject derivation ran in a dark world').toBe(0);
     expect(calls.folds, 'the subject fold ran in a dark world').toBe(0);
 
-    // THE CONTROL. The identical drive with the flags lit MUST reach it — otherwise the
-    // zero above proves only that the spy is broken or the seam unreachable.
-    drive(ALL_LIT);
-    expect(calls.groundTruth).toBeGreaterThan(0);
-
-    // And the HOST gate still dominates: no axes, no derivation, however lit the three
-    // family flags are.
+    // THE CONTROL, NOW BOTH HALVES. The identical drives with the flags lit MUST reach
+    // both entry points — otherwise the zeroes above prove only that the spy is broken or
+    // the seam unreachable.
     calls.groundTruth = 0;
-    drive(Object.fromEntries(FLAGS.map((f) => [f, true])));
+    calls.folds = 0;
+    driveReconciling(ALL_LIT);
+    expect(calls.groundTruth, 'the lit control never reached the ground-truth derivation').toBeGreaterThan(0);
+    expect(
+      calls.folds,
+      'the lit control never reached the FOLD. Until this counter can be driven non-zero the'
+      + ' dark zero above measures nothing — which is exactly the defect repair R2 closed.',
+    ).toBeGreaterThan(0);
+
+    // And the HOST gate still dominates BOTH entry points: no axes, no derivation and no
+    // fold, however lit the three family flags are.
+    calls.groundTruth = 0;
+    calls.folds = 0;
+    const familiesWithoutHost = Object.fromEntries(FLAGS.map((f) => [f, true]));
+    drive(familiesWithoutHost);
+    driveReconciling(familiesWithoutHost);
     expect(calls.groundTruth).toBe(0);
+    expect(calls.folds).toBe(0);
   });
 });
 

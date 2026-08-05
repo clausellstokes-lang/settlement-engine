@@ -145,10 +145,28 @@ function tuningTableRows(src) {
   return out;
 }
 
+/**
+ * A wave block's Bands line, split into §7 row phrases. Null when the wave has no line.
+ * The SAME split `tuningTableRows` applies to §7, so the two sides are directly comparable.
+ * @param {string} block @returns {string[] | null}
+ */
+function bandsRows(block) {
+  const line = bandsParagraph(block);
+  return line ? line.split('·').map((r) => stripDot(r.trim())).filter(Boolean) : null;
+}
+
 const spSrc = read(SP_VOLUME);
 const warSrc = read(WAR_VOLUME);
 const spBlocks = waveBlocks(spSrc);
 const spTuning = tuningTableRows(spSrc);
+
+/**
+ * The reconciliation subjects: every SP wave whose §5 block parses a Bands line. DERIVED
+ * from the document rather than listed, so a wave joins the both-ways equality on the day
+ * it authors its line — the repair-R3 property that keeps the walker from reconciling one
+ * hard-coded wave while every later one drifts free.
+ */
+const RECONCILED_WAVES = [...spBlocks.keys()].filter((w) => bandsParagraph(spBlocks.get(w))).sort();
 
 describe('SP band families — Bands line <-> tuning table, both directions', () => {
   test('the doc parsers see a real denominator (guard the guard)', () => {
@@ -179,14 +197,52 @@ describe('SP band families — Bands line <-> tuning table, both directions', ()
     expect(blocksWithLine, 'no wave carries a Bands line — the count would be vacuous').toBeGreaterThanOrEqual(2);
   });
 
-  test('SP-A carries its Bands line and it EQUALS §7 both ways', () => {
-    const line = bandsParagraph(spBlocks.get('SP-A'));
-    expect(line, 'SP-A lost its Bands line').toBeTruthy();
-    const declared = line.split('·').map((r) => stripDot(r.trim())).filter(Boolean);
-    expect(declared.length).toBe(3);
-    // FORWARD (every declared band reaches the owner's signature surface) and REVERSE
-    // (every signable row is a band some wave actually authored) in one equality.
-    expect(declared).toEqual(spTuning.get('SP-A'));
+  test('EVERY wave carrying a Bands line EQUALS its §7 rows, both ways', () => {
+    // REPAIR R3 — THE RECONCILIATION IS TABLE-DRIVEN, NOT SP-A's ALONE. As shipped this
+    // test hard-coded `spTuning.get('SP-A')`, so the both-ways equality existed for
+    // exactly one wave. SP-B landed a Bands line and four §7 rows that NOTHING compared:
+    // a fabricated fourth row in §5, and a §7 row list cut from four to two, both ran
+    // green. Everything the walker checked for SP-B was EXISTENCE — set membership and a
+    // heading count — which left the owner's tuning-signature surface free to drift
+    // silently for SP-B and for every wave after it.
+    //
+    // The subjects are DERIVED from the document (every wave whose block parses a Bands
+    // line), never listed here, so SP-C/D/E join this reconciliation on the day they
+    // author their line rather than on the day someone remembers to widen a literal.
+    expect(RECONCILED_WAVES.length, 'no wave parses a Bands line — the loop below would be vacuous')
+      .toBeGreaterThanOrEqual(2);
+    expect(RECONCILED_WAVES, 'SP-A must always reconcile — it is the exemplar').toContain('SP-A');
+    expect(RECONCILED_WAVES, 'SP-B authored a Bands line at its build and must reconcile').toContain('SP-B');
+
+    /** @type {string[]} */
+    const problems = [];
+    for (const wave of RECONCILED_WAVES) {
+      const declared = bandsRows(spBlocks.get(wave));
+      const table = spTuning.get(wave);
+      if (!table) {
+        problems.push(`${wave}: carries a Bands line but §7 lists no rows for it — the bands it`
+          + ' names never reach the owner\'s signature surface');
+        continue;
+      }
+      if (declared.length < 2) {
+        problems.push(`${wave}: its Bands line parsed ${declared.length} row(s) — the middot split`
+          + ' stopped matching and the equality below would compare one undifferentiated blob');
+        continue;
+      }
+      // FORWARD (every declared band reaches the owner's signature surface) and REVERSE
+      // (every signable row is a band some wave actually authored) in one equality.
+      if (JSON.stringify(declared) !== JSON.stringify(table)) {
+        problems.push(`${wave}: the §5 Bands line and the §7 tuning rows disagree.\n`
+          + `    §5 declares: ${JSON.stringify(declared)}\n`
+          + `    §7 lists   : ${JSON.stringify(table)}`);
+      }
+    }
+    expect(
+      problems,
+      'a wave\'s Bands line drifted from its §7 tuning rows. A band named in a wave and missing'
+      + ' from the table never reaches the owner\'s signature; a table row with no wave behind it'
+      + ' is a number nobody can explain at the soak redo.',
+    ).toEqual([]);
   });
 
   test('every SP wave is in exactly one of: has-a-line, owes-a-line, none-by-design', () => {
@@ -234,17 +290,26 @@ describe('SP band families — Bands line <-> tuning table, both directions', ()
     }
   });
 
-  test('MUTANT: a Bands line that drifts from §7 by ONE ROW is caught, in both directions', () => {
-    const declared = bandsParagraph(spBlocks.get('SP-A')).split('·').map((r) => stripDot(r.trim()));
-    const table = spTuning.get('SP-A');
-    // A wave that bands something the table never lists (the row never reaches the owner).
-    expect(declared.concat('the appetite learn rate')).not.toEqual(table);
-    // A table row no wave claims (a number nobody can explain at the soak redo).
-    // anchored: `declared` is asserted EQUAL to `table` two tests above, so both
-    // inequalities here measure the planted drift rather than a comparison that never held.
-    expect(declared.slice(0, 2)).not.toEqual(table);
+  test.each(RECONCILED_WAVES)('MUTANT (%s): a one-row drift is caught in BOTH directions', (wave) => {
+    // The predicate under test, run against mutated measurements — for EVERY reconciled
+    // wave, not just the exemplar. These are the two mutations the verifier planted against
+    // SP-B and watched survive: a fabricated row appended to the §5 line, and §7's row list
+    // cut short. Both must now be visible to the comparison, per wave.
+    const declared = bandsRows(spBlocks.get(wave));
+    const table = spTuning.get(wave);
+    expect(declared, `${wave} lost its Bands line`).toBeTruthy();
+    expect(table, `${wave} lost its §7 rows`).toBeTruthy();
+    // FORWARD: a wave that bands something the table never lists (the row never reaches
+    // the owner's signature surface).
+    expect(declared.concat('a fabricated row nobody signed')).not.toEqual(table);
+    // REVERSE: a table row no wave claims (a number nobody can explain at the soak redo).
+    // anchored: `declared` is asserted EQUAL to `table` for every wave in this same set two
+    // tests above, so each inequality here measures the planted drift rather than a
+    // comparison that never held in the first place.
+    expect(declared.slice(0, declared.length - 1)).not.toEqual(table);
     // …and a re-spelling, which is the drift class that actually happened fourteen times.
-    expect(declared.map((r) => r.replace('half-life', 'halflife'))).not.toEqual(table);
+    expect(declared.map((r) => r.replace(/band edges/g, 'band-edges').replace('half-life', 'halflife')))
+      .not.toEqual(table);
   });
 
   test("the war volume's Bands lines are a FROZEN shrink-only backlog", () => {

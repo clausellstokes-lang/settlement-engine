@@ -150,8 +150,23 @@ const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
  * is missing. `populationTrendBand` is a believed −2 … +2 and indexes the trajectory
  * ladder directly (its member 0 is `unknown`, so +2 shifts the −2 floor onto `emptying`).
  *
+ * WHAT IT RETURNS TODAY, AND WHAT IT DOES NOT (corrected 2026-08-05, SP-B repair R8).
+ * This `@returns` declared FOUR optional legs while the body has only ever produced ONE:
+ * `{}` when the believed trend is non-finite, and otherwise `{ trajectoryBand }`. Three of
+ * the four names were a statement of the CR-WR10-H TARGET shape, written in the tense of a
+ * contract, and a wave built from the declaration alone would have supplied legs no consumer
+ * reads. Worse, the absent leg was spelled `routeBand` here while the SP-B belief surface
+ * that now supplies it spells the same rung `routePositionBand` — so the widening had a name
+ * collision waiting inside a JSDoc nobody executes. The declaration is therefore cut back to
+ * the truth; SP-B2 is the wave that widens BOTH the body and this line together, and it must
+ * carry `routePositionBand`'s real spelling across when it does. (This header deliberately
+ * does NOT spell the SP-B record field that carries it: naming one admits this module to
+ * spAxisVocabulary's ARGUED_FIELD_SPELLERS, and that admission belongs to the commit that
+ * starts READING the field — SP-B2's — not to a repair lane correcting a comment.)
+ *
  * @param {{ worldState?: unknown, courtId?: string, assetId?: string }} input
- * @returns {{ tierBand?: string, storesBand?: string, routeBand?: string, trajectoryBand?: string }}
+ * @returns {{ trajectoryBand?: string }} the ONE leg that exists — absent entirely when the
+ *   court holds no finite believed population trend for the holding
  */
 export function beliefLegsOf({ worldState, courtId, assetId }) {
   const record = beliefRecord(
