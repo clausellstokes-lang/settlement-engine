@@ -21,11 +21,21 @@
  * (populationHistory ring / traditions mirror) are the re-anchor/cold-start target only; nothing
  * here writes a population count or a tradition record's truth.
  *
+ * SP-B EXTENDS THIS FOLD RATHER THAN FORKING IT (SP seam ruling 1, J-SP-1). Three further
+ * subject families — believed SCARCITY, believed CONDITIONS, believed DEVOTION — join at the
+ * same two injection points through `beliefAxisSubjects.js`, which owns their derivations and
+ * their band vocabularies and reads no rule key. THIS file owns the ONE gate door for them:
+ * `subjectAxesActive` forms the strict conjunction (each family's own flag AND
+ * `beliefAxesEnabled` — a family cannot be lit under dark axes) and hands the resolved gates
+ * down as data, so the three by-name flag reads live in exactly one place and a dark family
+ * contributes no key anywhere.
+ *
  * PURE + lazy: no Date, no Math.random, no store/React, no import of beliefMap (one-way — beliefMap
  * imports this). Zero first-paint bytes (a worldPulse leaf).
  */
 
 import { clamp, clamp01 } from '../../kernel/math.js';
+import { subjectGroundTruth, foldSubjectAxes } from './beliefAxisSubjects.js';
 
 /** Axis tuning (retuned in the checkpoint soak; DESIGN_DEEP_COUPLINGS does not owner-gate the
  *  D-1 tuning constants — the field SHAPE is the owner-visible surface, §14 Q2). */
@@ -59,6 +69,30 @@ function finiteNumber(v, fallback) { return typeof v === 'number' && Number.isFi
 export function beliefAxesActive(worldState) {
   const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
   return !!(rules && typeof rules === 'object' && rules.beliefAxesEnabled === true);
+}
+
+/**
+ * SP-B: THE ONE DOOR for the three subject families. Returns null unless the HOST axis gate
+ * is lit AND at least one family flag is `=== true` — so a campaign with the axes lit and no
+ * family lit is byte-identical to the pre-SP-B engine, and a campaign with a family flag set
+ * under DARK axes is dark (the lighting-order conjunction; a family cannot exist without the
+ * fold that carries it).
+ *
+ * Each of the three keys is read BY NAME with the strict idiom, once, here — the frozen-list
+ * `.every()` hole is what makes a by-name read mandatory, and the engine-gated-key walker
+ * source-scans for exactly these.
+ *
+ * @param {{ simulationRules?: Record<string, unknown> } | null | undefined} worldState
+ * @returns {{ scarcity: boolean, conditions: boolean, devotion: boolean } | null}
+ */
+export function subjectAxesActive(worldState) {
+  if (!beliefAxesActive(worldState)) return null;
+  const rules = /** @type {Record<string, unknown>} */ ((worldState && typeof worldState === 'object' ? worldState.simulationRules : null) || {});
+  const scarcity = rules.believedScarcityEnabled === true;
+  const conditions = rules.believedConditionsEnabled === true;
+  const devotion = rules.believedDevotionEnabled === true;
+  if (!scarcity && !conditions && !devotion) return null;
+  return Object.freeze({ scarcity, conditions, devotion });
 }
 
 // ── Ground-truth axis derivation (cold-start seed + the re-anchor target) ──────
@@ -113,17 +147,31 @@ export function observanceFromTraditions(traditions) {
 }
 
 /**
- * The two ground-truth axis fields for a subject's snapshot item. Pure.
+ * The ground-truth axis fields for a subject's snapshot item. Pure.
+ *
+ * D-1's two fields are ALWAYS returned (the caller only invokes this under `axesActive`).
+ * SP-B's three subject families are appended ONLY where `opts.subjectAxes` names them lit AND
+ * their own read resolves — drop-when-absent at every level, so `axisGroundTruth(item)` with
+ * no options is byte-for-byte the pre-SP-B two-field result.
+ *
+ * L3, THE ONE TRUTH DOOR: this function is the ONLY place the axis family reads truth-side
+ * state. The fold below receives derived words and never reaches back into the world.
+ *
  * @param {{ settlement?: { populationHistory?: unknown, traditions?: unknown } } | null | undefined} item
- * @returns {{ populationTrendBand: number, observanceLabel: string | null }}
+ * @param {{ subjectAxes?: { scarcity: boolean, conditions: boolean, devotion: boolean } | null,
+ *   religionState?: unknown } | null} [opts]
+ * @returns {Record<string, unknown>}
  */
-export function axisGroundTruth(item) {
+export function axisGroundTruth(item, opts = null) {
   const settlement = item && typeof item === 'object' ? item.settlement : null;
   const s = settlement && typeof settlement === 'object' ? settlement : {};
-  return {
+  const base = {
     populationTrendBand: trendBandFromHistory(/** @type {Array<{ delta?: unknown, population?: unknown }>} */ (s.populationHistory)),
     observanceLabel: observanceFromTraditions(/** @type {Array<{ coreMotif?: { element?: unknown }, scaleBand?: unknown, deityRef?: unknown }>} */ (s.traditions)),
   };
+  const subjectAxes = opts && typeof opts === 'object' ? opts.subjectAxes : null;
+  if (!subjectAxes) return base;
+  return { ...base, ...subjectGroundTruth(item, { religionState: opts?.religionState }, subjectAxes) };
 }
 
 // ── The axis fold (run inside reconcileBelief when the flag is lit) ────────────
@@ -167,9 +215,12 @@ function migrationDirectionFor(report, subjectId) {
  * @param {{ populationTrendBand: number, observanceLabel: string | null }} args.groundTruth  the current ground-truth axes
  * @param {AxisReport[]} args.reports  this window's fresh reports (the beliefMap freshReports)
  * @param {string} args.subjectId
- * @returns {{ populationTrendBand: number, observanceLabel: string | null }}
+ * @param {{ scarcity: boolean, conditions: boolean, devotion: boolean } | null} [args.subjectAxes]
+ *   SP-B: the resolved family gates. ABSENT/null ⇒ the three subject arms never run and the
+ *   returned record carries exactly D-1's two fields ⇒ byte-identical.
+ * @returns {Record<string, unknown>}
  */
-export function foldBeliefAxes({ prior, groundTruth, reports, subjectId }) {
+export function foldBeliefAxes({ prior, groundTruth, reports, subjectId, subjectAxes = null }) {
   const T = AXIS_TUNING;
   const priorBand = prior && Number.isFinite(prior.populationTrendBand) ? Number(prior.populationTrendBand) : groundTruth.populationTrendBand;
   const priorLabel = prior && typeof prior === 'object' && 'observanceLabel' in prior ? prior.observanceLabel ?? null : groundTruth.observanceLabel;
@@ -200,5 +251,9 @@ export function foldBeliefAxes({ prior, groundTruth, reports, subjectId }) {
   }
 
   const observanceLabel = culturalAdopt ? groundTruth.observanceLabel : priorLabel;
-  return { populationTrendBand, observanceLabel };
+  const base = { populationTrendBand, observanceLabel };
+  // SP-B: the three subject arms, folded AFTER D-1's two so the base fields are settled.
+  // Dark (null) ⇒ the spread is skipped entirely ⇒ the returned object is byte-identical.
+  if (!subjectAxes) return base;
+  return { ...base, ...foldSubjectAxes({ prior, groundTruth, reports, gates: subjectAxes }) };
 }

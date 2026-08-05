@@ -78,7 +78,20 @@ const LIFECYCLE_VOICE = 'treatyLifecycleVoiceEnabled';
 // single-writer container and nothing in src/ calls the writer, so a declared channel
 // would grade the row SILENT in every world instead of admitting that nothing has run.
 const CASUS = 'casusCommerciiEnabled';
-const VIRTUAL_RULES = Object.freeze([AXES, CONQUEST, STATECRAFT, RUMORS, OATH, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS]);
+// Joined 2026-08-05 by FP wave SP-B, all three in one commit with their manifest entries
+// and their first by-name gate reads. THREE keys rather than one is J-SP-3's ruling: the
+// per-family flags are what let TRADE, POPULATIONS and FAITH light their own subject
+// independently, and the cost is exactly these two extra rows. All three are zero-key
+// cases of the SAME shape as AXES above — each writes one OPTIONAL FIELD inside the belief
+// records another subsystem's container already holds — which is why every channel on all
+// three is empty and why the emptiness is a shape fact rather than a mount fact.
+const SCARCITY = 'believedScarcityEnabled';
+const CONDITIONS = 'believedConditionsEnabled';
+const DEVOTION = 'believedDevotionEnabled';
+const VIRTUAL_RULES = Object.freeze([
+  AXES, SCARCITY, CONDITIONS, DEVOTION,
+  CONQUEST, STATECRAFT, RUMORS, OATH, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS,
+]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
 
@@ -91,6 +104,12 @@ const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule
  */
 const LANE_LEAVES = Object.freeze({
   [AXES]: ['src/domain/worldPulse/beliefAxes.js'],
+  // All three subject families share ONE gate door (beliefAxes.subjectAxesActive) and ONE
+  // derivation leaf, so all three name the same pair. That is the honest scope: the leaf
+  // is where the bodies are, and the door is where the flag is read.
+  [SCARCITY]: ['src/domain/worldPulse/beliefAxisSubjects.js', 'src/domain/worldPulse/beliefAxes.js'],
+  [CONDITIONS]: ['src/domain/worldPulse/beliefAxisSubjects.js', 'src/domain/worldPulse/beliefAxes.js'],
+  [DEVOTION]: ['src/domain/worldPulse/beliefAxisSubjects.js', 'src/domain/worldPulse/beliefAxes.js'],
   [CONQUEST]: ['src/domain/worldPulse/vengeanceLicense.js', 'src/domain/worldPulse/conquestDoctrineStage.js'],
   [STATECRAFT]: ['src/domain/worldPulse/informationStatecraft.js', 'src/domain/worldPulse/brokerageStamps.js'],
   [RUMORS]: ['src/domain/spatial/migrationRumors.js'],

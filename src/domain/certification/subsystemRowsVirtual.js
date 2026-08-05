@@ -104,6 +104,118 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // stronger and more honest statement.
     soakEvidence: 'unobserved',
   }),
+  // ── THE BELIEVED-WORLD AXES (FP SP-B, docs/DESIGN_FP_ARCH_SP.md §SP-B) ─────
+  //
+  // THREE ROWS, NOT ONE, BECAUSE THERE ARE THREE FLAGS (J-SP-3). Per-family flags are
+  // what let TRADE, POPULATIONS and FAITH light their own subject independently, and a
+  // single row over three gates would grade all three off whichever one a receipt
+  // happened to see. Everything else about them is shared and is stated once, here:
+  // each is a CONJUNCTION with beliefAxesEnabled read through ONE door
+  // (beliefAxes.subjectAxesActive), each writes ONE conditional drop-when-absent field
+  // inside the belief records that already live in spatialLedgers.beliefMaps, and each
+  // is therefore invisible to every receipt shape the estate writes for exactly the
+  // reason the belief-axes row above records: censusWorldStateKeys stops one level into
+  // spatialLedgers and counts ENTRIES, never fields.
+  Object.freeze({
+    rule: 'believedScarcityEnabled',
+    title: 'Believed scarcity (what a court thinks its neighbours lack)',
+    module: 'src/domain/worldPulse/beliefAxisSubjects.js,src/domain/worldPulse/beliefAxes.js,src/domain/worldPulse/beliefMap.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY per the evidence law: the family mints no candidate. It is a
+      // pure fold arm inside an existing writer and there is no `candidateType` literal
+      // anywhere in the lane.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: the family authors no Herald beat. Its consumers (TR-3's
+      // WHERE composer) do, in their own waves, under their own flags.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, for the belief-axes row's reason exactly: the output is one
+      // OPTIONAL FIELD (`scarcityBands`) inside spatialLedgers.beliefMaps, a container
+      // the BELIEFS layer fills in worlds where this flag has never been true.
+      stateKeys: Object.freeze([]),
+      other: 'A CONDITIONAL FIELD INSIDE ANOTHER SUBSYSTEM CONTAINER, WHICH IS WHY EVERY CHANNEL IS EMPTY. ONE GATE, A CONJUNCTION: subjectAxesActive (beliefAxes.js) refuses unless beliefAxesEnabled is lit AND believedScarcityEnabled reads === true by name — a family cannot exist without the fold that carries it. WHAT IT DOES: a court forms an opinion, per closed good class, about how well its neighbours are supplied — scant, pinched, sufficient, plentiful — from what those neighbours make, export, buy and cannot do without. The good classes are REGIONAL_GOOD_CATEGORIES verbatim (borrowed, not minted); the rungs are a mint whose four words appear as quoted literals nowhere else under src/, because reading the wrong ladder is a silent semantic error no walker catches. ONE class carries an extra term and only one: food, because the generator MEASURES a food ratio and no other class has a measured ratio anywhere in the tree — a per-class modifier with no per-class input would be a dead arm. WHAT IT NEVER DOES: it writes no commodity stock, no economic state, and no truth of any kind (law 3). A class the subject neither makes nor buys yields NO KEY, because silence is not a band and inventing one would be an opinion the observer never had. THE OBSERVATION NEEDED to close the gap is a per-field belief census in the soak receipt — a count, per observed year, of belief records carrying scarcityBands — which no receipt schema carries. Until then the family is pinned where its bodies are readable: tests/domain/beliefAxisSubjects.test.js and tests/property/believedWorldAxesDormancyFence.test.js.',
+    }),
+    // The fold runs wherever advanceBeliefMaps runs, which is every pulse.
+    expectedTempo: 'per_tick',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dormancy_is_absence_of_the_field',
+        description: 'With the flag dark the gate door returns null, the arm never runs, and no belief record carries scarcityBands — so a dark world serializes byte-identically to the pre-SP-B engine. Absent and explicitly false are indistinguishable in every observable.',
+        check: 'NOT expressible from any receipt schema: the census counts belief-map ENTRIES, never their fields. Pinned in tests/property/believedWorldAxesDormancyFence.test.js against a fixture that DOES write the field when lit — the lit-mutant control, without which the fence proves only that the fixture is quiet.',
+      }),
+      Object.freeze({
+        name: 'every_band_edge_is_reachable',
+        description: 'All four rungs and both arms of the food shift are produced by really-generated settlements rather than by a fixture built to mirror the deriver. The dead-band law: an unreachable rung is a lie the tuning table tells the owner.',
+        check: 'NOT expressible from a receipt. Pinned in tests/domain/beliefAxisSubjects.test.js by driving generateSettlementPipeline over a real corpus and asserting the produced rung set, so a band that stops being reachable reds instead of quietly dying.',
+      }),
+      Object.freeze({
+        name: 'the_good_classes_are_borrowed_not_minted',
+        description: 'The keys of scarcityBands are REGIONAL_GOOD_CATEGORIES, the goods catalog\'s own closed vocabulary. A second good-class list is how one catalog quietly becomes two, which the audit measured happening to a treaty term family.',
+        check: 'NOT expressible from a receipt: receipts carry rendered words, never the vocabulary behind them. Pinned in tests/lint/spAxisVocabulary.walker.test.js, which imports both sides and asserts the closure in both directions.',
+      }),
+    ]),
+    soakEvidence: 'unobserved',
+  }),
+  Object.freeze({
+    rule: 'believedConditionsEnabled',
+    title: 'Believed conditions (tier, stores, road position, pull)',
+    module: 'src/domain/worldPulse/beliefAxisSubjects.js,src/domain/worldPulse/beliefAxes.js,src/domain/worldPulse/beliefMap.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY, all three, for the reasons the scarcity row above states.
+      eventTypes: Object.freeze([]),
+      moverFamilies: Object.freeze([]),
+      stateKeys: Object.freeze([]),
+      other: 'THE ROW THE WAR PROGRAM IS WAITING ON, AND IT STILL DECLARES NO CHANNEL. ONE GATE, A CONJUNCTION: subjectAxesActive refuses unless beliefAxesEnabled is lit AND believedConditionsEnabled reads === true by name. WHAT IT DOES: a court comes to hold four banded opinions about a neighbour — how big it is, how deep its granary runs, where it sits on the roads, and how strongly it draws people. THE FIRST THREE ARE THE WR-10 APPRAISAL\'S THREE MISSING LEGS (CR-WR10-H): sovereigntyMarketStage.beliefLegsOf returns one leg of four today and refuses every sale with an honest receipted no-trade, and this family is what makes the other three sayable. THE LADDERS ARE BORROWED, NOT MINTED: tierBand is TIER_ORDER imported verbatim, storesBand is ENVOY_STORES_BANDS by spelling, routePositionBand is ROUTE_FLOW_BANDS by spelling — the two spellings are mirrors rather than imports because their homes are the GRAMMAR and TRADE ports and licensing a cross-layer read is a chair declaration, so a walker imports both sides and proves them verbatim equal instead. pullBand is the one mint in the wave and it is deliberately NOT OVERFLOW_BANDS: J-FP-2 rules that ladder a pressure LEVEL, and reading it as desirability is precisely the silent semantic error the ladder law exists to kill. WHAT IT NEVER DOES: it supplies SURFACES, not sources. A market lit on this family alone would clear only rumour-range holdings, which is why the lighting condition names three waves and not one (SP-B, SP-B2, ES-4). WHAT IT NEVER WRITES: any truth-side field, and any key at all for a read that did not resolve. THE OBSERVATION NEEDED is the same per-field belief census the belief-axes row asks for. Until then: tests/domain/beliefAxisSubjects.test.js and tests/property/believedWorldAxesDormancyFence.test.js.',
+    }),
+    expectedTempo: 'per_tick',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dormancy_is_absence_of_the_field',
+        description: 'With the flag dark no belief record carries conditionsBands and beliefLegsOf keeps returning exactly today\'s one-or-zero legs, so the sovereignty market keeps refusing exactly as it refuses now. Lighting this family cannot change a dark world.',
+        check: 'NOT expressible from a receipt (the census counts entries, never fields). Pinned in tests/property/believedWorldAxesDormancyFence.test.js with its lit-mutant control.',
+      }),
+      Object.freeze({
+        name: 'an_unresolved_read_yields_no_key_never_a_midpoint',
+        description: 'Each of the four keys is present only where its own read resolved. A settlement with no economicState carries a tierBand and nothing else. The appraisal contract depends on this exactly: an absent leg must read `known: false`, and a midpoint would be the guess K3 exists to forbid.',
+        check: 'NOT expressible from a receipt: an absent key and a never-lit flag look identical in a state census. Pinned in tests/domain/beliefAxisSubjects.test.js on a fixture whose reads resolve one at a time.',
+      }),
+      Object.freeze({
+        name: 'the_borrowed_ladders_cannot_drift',
+        description: 'storesBand and routePositionBand are mirrors of ladders owned by other ports. A mirror that drifts is a writer/reader spelling break that no runtime test would ever fail, because both halves would be internally consistent.',
+        check: 'NOT expressible from a receipt. Pinned in tests/lint/spAxisVocabulary.walker.test.js, which imports ENVOY_STORES_BANDS and ROUTE_FLOW_BANDS and asserts verbatim equality both ways, with a planted re-spelling executed as a mutant.',
+      }),
+    ]),
+    soakEvidence: 'unobserved',
+  }),
+  Object.freeze({
+    rule: 'believedDevotionEnabled',
+    title: 'Believed devotion (how a neighbour\'s gods are thought to fare)',
+    module: 'src/domain/worldPulse/beliefAxisSubjects.js,src/domain/worldPulse/beliefAxes.js,src/domain/worldPulse/beliefMap.js',
+    aliveness: Object.freeze({
+      eventTypes: Object.freeze([]),
+      moverFamilies: Object.freeze([]),
+      stateKeys: Object.freeze([]),
+      other: 'ONE WORD PER PAIR, AND THE ONE WORD IS NOT A THEOLOGY. ONE GATE, A CONJUNCTION: subjectAxesActive refuses unless beliefAxesEnabled is lit AND believedDevotionEnabled reads === true by name. WHAT IT DOES: a court forms a banded opinion about how loudly a neighbour prays — secular, lukewarm, observant, faithful, devout — read off that settlement\'s top unsuppressed deity, lifted one rung when that deity also holds the patron seat. IT IS DISTINCT FROM THE EXISTING observanceLabel AXIS AND THE DISTINCTION IS THE POINT: observanceLabel is WHICH RITE (a motif and a patron, an identity), and this is HOW STRONGLY IT IS HELD (an intensity). A world can rededicate without cooling and can cool without rededicating. THE LADDER IS BORROWED from pietyBandLabel, the five words the faith surfaces already show a player, so nothing new is spoken to anybody. THE EDGES ARE BORROWED TOO, and that is the sharper call: the rungs are keyed on religionState\'s own `standing`, which it already computes with hysteresis against owner-signed thresholds, rather than on a second set of share edges over the same quantity — minting those would have been the fourteen-drift class in miniature. WHAT IT NEVER DOES: it never names a god, never confirms one exists, and never writes a share, a standing, or a patron (the deity doctrine, and law 3). A subject with no religion state at all yields NO KEY: the observer has nothing to have an opinion about, which is different from believing the place is godless. THE OBSERVATION NEEDED is the same per-field belief census. Until then: tests/domain/beliefAxisSubjects.test.js and tests/property/believedWorldAxesDormancyFence.test.js.',
+    }),
+    expectedTempo: 'per_tick',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dormancy_is_absence_of_the_field',
+        description: 'With the flag dark no belief record carries devotionBand, and the two D-1 axes behave byte-identically beside it — lighting one family moves ONLY its own field, which is what makes three flags safer than one.',
+        check: 'NOT expressible from a receipt. Pinned in tests/property/believedWorldAxesDormancyFence.test.js, whose three-family independence goldens light each family alone and compare the whole projection.',
+      }),
+      Object.freeze({
+        name: 'no_god_is_ever_named_or_confirmed',
+        description: 'The field is a single band word. The deityRef that produced it never reaches the belief record, so a court can believe a neighbour is devout without the engine having conceded that anything is listening.',
+        check: 'PARTLY expressible: a field census would show a closed five-word vocabulary and never an id. Pinned directly in tests/domain/beliefAxisSubjects.test.js, where the derivation is driven on a pantheon with named deities and the output is asserted to be a ladder member.',
+      }),
+      Object.freeze({
+        name: 'it_does_not_shadow_the_observance_axis',
+        description: 'devotionBand (intensity) and observanceLabel (rite identity) are different questions with different feeds and different flags. A wave that collapsed them would lose the ability to say that a town kept its god and stopped caring.',
+        check: 'NOT expressible from a receipt: both are fields inside the same container. Pinned in tests/domain/beliefAxisSubjects.test.js, where a rededication moves one and a cooling moves the other on the same fixture.',
+      }),
+    ]),
+    soakEvidence: 'unobserved',
+  }),
   // ── THE CONQUEST DOCTRINE (WR-8 amendment R2, the vengeance license) ───────
   Object.freeze({
     rule: 'conquestDoctrineEnabled',

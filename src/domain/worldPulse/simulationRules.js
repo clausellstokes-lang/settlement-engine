@@ -184,6 +184,16 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
  */
 export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   'beliefAxesEnabled',
+  // Joined 2026-08-05 by FP wave SP-B under CR-WR10-C item 4 (the compiled charter's §3
+  // flag law), all three in the SAME commit as their first real gate reads — the three
+  // by-name strict reads inside beliefAxes.subjectAxesActive, which is the ONE door the
+  // subject families pass through — and their three authored certification rows. Each is
+  // a CONJUNCTION with beliefAxesEnabled (a family cannot be lit under dark axes), which
+  // is why the by-name read matters: a frozen-list `.every()` would hide all three from
+  // this census.
+  'believedConditionsEnabled',
+  'believedDevotionEnabled',
+  'believedScarcityEnabled',
   // Joined 2026-08-04 by FP wave TR-1 under CR-WR10-C item 4 (the compiled charter's §3
   // flag law), in the SAME commit as its first real gate reads — commercialReasons.js's
   // own `casusCommerciiActive` and tradeWar.js's severance-magnitude seam, both read by

@@ -62,7 +62,7 @@ import {
 } from '../spatial/distanceRead.js';
 import { routeAwareHopDelayTicks } from './distancePricedNews.js';
 import { embattlementLevel } from '../spatial/embattlement.js';
-import { beliefAxesActive, axisGroundTruth, foldBeliefAxes } from './beliefAxes.js';
+import { beliefAxesActive, subjectAxesActive, axisGroundTruth, foldBeliefAxes } from './beliefAxes.js';
 import { composeBrokerageSight, makeBrokerageFloorFn } from './brokerageFidelity.js';
 import { applyPatronFeeds } from './brokerageServicesFeed.js';
 
@@ -343,6 +343,9 @@ export function clearEnvoySilenceInference({ worldState, observerId, subjectId, 
  *   priorAllianceLabel:string,priorLastUpdateTick:number}} [hostilityInference]
  * @property {number} [populationTrendBand]  D-1 DEMOGRAPHIC axis: believed −2..+2 (emptying…swelling); present only when beliefAxesEnabled
  * @property {string | null} [observanceLabel]  D-1 CULTURAL axis: believed dominant rite `${motif}:${patron}`; present only when beliefAxesEnabled
+ * @property {Record<string, string>} [scarcityBands]  SP-B: believed plenty per good class; only under believedScarcityEnabled ∧ beliefAxesEnabled
+ * @property {Record<string, string>} [conditionsBands]  SP-B: believed {pullBand, routePositionBand, storesBand, tierBand}; only under believedConditionsEnabled ∧ beliefAxesEnabled
+ * @property {string} [devotionBand]  SP-B: believed devotion; only under believedDevotionEnabled ∧ beliefAxesEnabled
  */
 
 /**
@@ -490,8 +493,15 @@ function groundTruthBelief(subjectId, allianceLabel, ctx, now) {
     lastUpdateTick: now,
   };
   // D-1 (deep-couplings): the two OPTIONAL axis fields, appended ONLY when the flag is lit
-  // (dormancy by absence — law 12). ABSENT ⇒ byte-identical.
-  if (ctx.axesActive) Object.assign(record, axisGroundTruth(item));
+  // (dormancy by absence — law 12). ABSENT ⇒ byte-identical. SP-B's three subject families
+  // ride the SAME call, and the options object is built ONLY when a family is lit: dark, this
+  // is the pre-SP-B single-argument call with no allocation and no religion-state read — the
+  // devotion source is a truth container and a dark family may not so much as look at it.
+  if (ctx.axesActive) {
+    Object.assign(record, ctx.subjectAxes
+      ? axisGroundTruth(item, { subjectAxes: ctx.subjectAxes, religionState: asObject(ctx.worldState?.religionStates)[String(subjectId)] })
+      : axisGroundTruth(item));
+  }
   return record;
 }
 
@@ -512,8 +522,10 @@ function groundTruthBelief(subjectId, allianceLabel, ctx, now) {
  * @typedef {Object} GroundTruthCtx
  * @property {Map<string, SnapItem>} byId     snapshot items by id
  * @property {unknown} pressureIdx            the pressure index (settlementStrength input)
- * @property {{ warPosture?: unknown }} worldState  the ledgers (readiness)
+ * @property {{ warPosture?: unknown, religionStates?: unknown }} worldState  the ledgers (readiness; SP-B's devotion read)
  * @property {boolean} [axesActive]           D-1: the belief-axes flag is lit (append the two axis fields)
+ * @property {{ scarcity: boolean, conditions: boolean, devotion: boolean } | null} [subjectAxes]
+ *   SP-B: the resolved subject-family gates, or null when no family is lit under lit axes
  */
 
 // ── The reconciliation rule (V.4) — the pure, testable core ───────────────────
@@ -586,9 +598,12 @@ function aggregateReports(reports, credibilityOf = null) {
  *   base reconcile (the leaf owns the logic). ABSENT/false ⇒ untouched ⇒ byte-identical.
  * @param {string} [args.subjectId]  D-1: the subject id the axis fold resolves the
  *   migration_flight direction against (unused when axesActive is false).
+ * @param {{ scarcity: boolean, conditions: boolean, devotion: boolean } | null} [args.subjectAxes]
+ *   SP-B: the resolved subject-family gates. ABSENT/null ⇒ the three subject arms never run
+ *   ⇒ byte-identical (the fold returns exactly D-1's two fields).
  * @returns {BeliefRecord}
  */
-export function reconcileBelief({ prior, groundTruth, reports, now, credibilityOf = null, sightFloor01 = 0, commitmentDiscount01 = 1, axesActive = false, subjectId = '' }) {
+export function reconcileBelief({ prior, groundTruth, reports, now, credibilityOf = null, sightFloor01 = 0, commitmentDiscount01 = 1, axesActive = false, subjectId = '', subjectAxes = null }) {
   const T = BELIEF_TUNING;
   const priorConf = prior ? clamp01(prior.confidence01) : 0;
   if (!reports.length) {
@@ -651,7 +666,7 @@ export function reconcileBelief({ prior, groundTruth, reports, now, credibilityO
   };
   // D-1 (deep-couplings): fold the two axes AFTER the base reconcile (the credibilityOf
   // injection shape — the leaf owns the logic). ABSENT flag ⇒ untouched ⇒ byte-identical.
-  if (axesActive) Object.assign(record, foldBeliefAxes({ prior, groundTruth: /** @type {{ populationTrendBand: number, observanceLabel: string | null }} */ (/** @type {unknown} */ (groundTruth)), reports, subjectId }));
+  if (axesActive) Object.assign(record, foldBeliefAxes({ prior, groundTruth: /** @type {{ populationTrendBand: number, observanceLabel: string | null }} */ (/** @type {unknown} */ (groundTruth)), reports, subjectId, subjectAxes }));
   return record;
 }
 
@@ -1170,7 +1185,7 @@ function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, c
     if (freshReports.length) {
       const silent = priorRec ? Math.max(0, now - Math.floor(finiteNumber(priorRec.lastUpdateTick, now))) : 0;
       const decayedPrior = priorRec ? { ...priorRec, confidence01: decayedConfidence(priorRec.confidence01, silent, decayKeep01) } : null;
-      record = reconcileBelief({ prior: decayedPrior, groundTruth, reports: freshReports, now, credibilityOf, sightFloor01, commitmentDiscount01, axesActive: ctx.axesActive === true, subjectId });
+      record = reconcileBelief({ prior: decayedPrior, groundTruth, reports: freshReports, now, credibilityOf, sightFloor01, commitmentDiscount01, axesActive: ctx.axesActive === true, subjectId, subjectAxes: ctx.subjectAxes ?? null });
     } else {
       // Silence: decay confidence, keep the frozen value.
       const silent = Math.max(0, now - Math.floor(finiteNumber(/** @type {BeliefRecord} */ (priorRec).lastUpdateTick, now)));
@@ -1229,8 +1244,10 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
   // D-1 (deep-couplings): the belief-axes flag (requires beliefsActive — already asserted above).
   // ABSENT ⇒ ctx.axesActive false ⇒ every ground-truth/reconcile path is byte-identical.
   const axesActive = beliefAxesActive(worldState);
+  // SP-B: null unless a subject-family flag is lit IN CONJUNCTION with the host axis flag.
+  const subjectAxes = subjectAxesActive(worldState);
   /** @type {GroundTruthCtx} */
-  const ctx = { byId, pressureIdx, worldState, axesActive };
+  const ctx = { byId, pressureIdx, worldState, axesActive, subjectAxes };
   const neighbours = relationshipNeighbourhood(snapshot, worldState);
   const canonVersion = Number(worldState?.spatialCanonVersion) || 0;
   const realObserverKeys = prior ? Object.keys(prior).filter(k => k !== BELIEF_SEED_KEY) : [];

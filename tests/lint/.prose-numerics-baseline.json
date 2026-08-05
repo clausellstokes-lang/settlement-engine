@@ -1033,13 +1033,13 @@
   },
   {
     "path": "src/domain/worldPulse/beliefMap.js",
-    "line": 1539,
+    "line": 1556,
     "category": "floatInterpolation",
     "snippet": "`Confidence in the belief it acted on: ${mis.confidence01.toFixed(2)}.`"
   },
   {
     "path": "src/domain/worldPulse/beliefMap.js",
-    "line": 1539,
+    "line": 1556,
     "category": "twoDecimalScore",
     "snippet": "`Confidence in the belief it acted on: ${mis.confidence01.toFixed(2)}.`"
   },

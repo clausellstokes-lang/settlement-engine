@@ -416,6 +416,29 @@ until now the discipline was J-WR-10-B plus two header comments.
   after (the concurrent-lane silent-revert class). `sovereigntyMarketStage.js`
   is NOT touched in this wave (SP-B2's job).
 
+**Bands:** per-family accuracy-adoption bars · scarcity good-class band edges
+· conditions band edges (tier/stores/route-position/pull) · devotion band
+edges.
+
+**BORROW CENSUS AT BUILD (J-WR-10-B; recorded 2026-08-05, and it changes what
+the rows above mean):** four of the wave's five ladders turned out to be
+BORROWS and only ONE is a mint, so most of the "band edges" the owner signs
+are mappings onto vocabularies the estate already speaks rather than new
+scales. `tierBand` IS `TIER_ORDER`, imported. `storesBand` IS
+`ENVOY_STORES_BANDS` and `routePositionBand` IS `ROUTE_FLOW_BANDS`, borrowed
+by SPELLING rather than by import — their homes are the GRAMMAR and TRADE
+ports and licensing a cross-layer read is a chair declaration, so
+`tests/lint/spAxisVocabulary.walker.test.js` imports both sides and proves
+verbatim equality in both directions instead. `devotionBand` IS the
+`pietyBandLabel` ladder, and its EDGES are borrowed too: the rungs key on
+religionState's own hysteresis-guarded `standing`, so the wave mints no
+devotion numbers at all. `pullBand` is the one genuine mint (`OVERFLOW_BANDS`
+is a pressure LEVEL under J-FP-2; `PROSPERITY_TIERS` grades wealth;
+`destinationScore` is a float with no ladder), and the scarcity rungs are the
+second (`FOOD_FLOW_BANDS` grades the food flow and its bottom rung does not
+generalise past food). Both mints were chosen so their words appear as quoted
+literals ZERO times elsewhere under `src/` — the bandFamilies.js discipline.
+
 ### SP-B2 — THE BELIEF-LEGS DISCHARGE (rides SP-B's flags; no new flag)
 **Scope:** the queued "belief-legs wave" named at `sovereigntyMarketStage.js:64`
 — the WR-10 lighting precondition CR-WR10-H discharged.
@@ -648,14 +671,20 @@ built here. Deliberately deferred — documented, not a bug to re-find.
 
 ## §7 THE TUNING SURFACE (owner-signed at the soak redo, per THE PROMISE;
 ## every band ERA-PRESET-ELIGIBLE-marked per SP-F; none in proposedSoakBands
-## until ratified)
+## until ratified. SP-B AMENDMENT, 2026-08-05, recorded at that wave's build:
+## the era-eligibility qualification below — a family's rows are era-eligible
+## ONLY where J-D12's axes name them — moved OUT of SP-B's row list and up
+## here, because the SP-A reconciliation walker parses each wave's rows by
+## splitting on the middot and a trailing sentence fuses into the LAST row,
+## which would have made "devotion band edges" unreconcilable against any
+## Bands line a human would write. It is a section-wide law and it always
+## was; it now sits where the parser cannot mistake it for a band.)
 
 SP-A: the shared half-life band table (the SP-5b shapes) · the SP-6a
 significance family (scale itself, owner-signed ONCE) · the SP-6b severity
 ladder. SP-B: per-family accuracy-adoption bars · scarcity good-class band
 edges · conditions band edges (tier/stores/route-position/pull) · devotion
-band edges — each family's rows marked era-eligible ONLY where J-D12's axes
-name them. SP-C: appetite learn rates + the shared half-life instance row ·
+band edges. SP-C: appetite learn rates + the shared half-life instance row ·
 posture composition weights · threshold caps (a posture COLOURS, never
 drowns). SP-D: per-class interception weight deltas · the declared/true
 divergence share band. SP-E: the phrase-repetition envelope band + the

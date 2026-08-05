@@ -63,7 +63,7 @@ const FAMILY_HOME = 'src/domain/worldPulse/bandFamilies.js';
  * SP waves that owe a Bands line and have not authored one yet. SHRINK-ONLY: each later
  * SP wave lands its own line and removes its id here. A wave may not be ADDED.
  */
-const SP_WAVES_OWING_A_BANDS_LINE = Object.freeze(['SP-B', 'SP-C', 'SP-D', 'SP-E']);
+const SP_WAVES_OWING_A_BANDS_LINE = Object.freeze(['SP-C', 'SP-D', 'SP-E']);
 
 /**
  * SP waves that carry no bands BY DESIGN, recorded so the totality below is a partition
@@ -166,8 +166,17 @@ describe('SP band families — Bands line <-> tuning table, both directions', ()
     expect(occurrences(spSrc, '## §7 THE TUNING SURFACE')).toBe(1);
     expect(occurrences(spSrc, '## §8 ')).toBe(1);
     expect(occurrences(spSrc, '\nSP-A: ')).toBe(1);
-    expect(occurrences(spSrc, '\n**Bands:**')).toBe(1);
     expect(occurrences(spSrc, 'THE LADDER LAW (J-FP-2)')).toBe(1);
+    // THE BANDS-LINE COUNT IS A RATCHET, NOT A CONSTANT (amended at SP-B's build). It
+    // began as `toBe(1)` when SP-A was the only wave with a line, which would have
+    // demanded that every later wave contort its own heading to avoid tripping a pin
+    // that was really guarding against a DUPLICATE line inside one wave's block. The
+    // guard it was reaching for is the one below: the number of `**Bands:**` headings in
+    // the document must EQUAL the number of §5 wave blocks that parse one, so a second
+    // line inside a single block — the actual first-match hazard — still reds.
+    const blocksWithLine = [...spBlocks.values()].filter((block) => bandsParagraph(block)).length;
+    expect(occurrences(spSrc, '\n**Bands:**')).toBe(blocksWithLine);
+    expect(blocksWithLine, 'no wave carries a Bands line — the count would be vacuous').toBeGreaterThanOrEqual(2);
   });
 
   test('SP-A carries its Bands line and it EQUALS §7 both ways', () => {
@@ -186,7 +195,15 @@ describe('SP band families — Bands line <-> tuning table, both directions', ()
     for (const [wave, block] of spBlocks) {
       (bandsParagraph(block) ? withLine : without).push(wave);
     }
-    expect(withLine, 'SP-A is the only wave with a Bands line today').toEqual(['SP-A']);
+    // The has-a-line set is the EXACT complement of the frozen backlog plus the
+    // none-by-design set, so it grows by exactly one wave each time one lands its line —
+    // it is never a hand-maintained second list that could drift from the backlog.
+    expect(withLine.sort()).toEqual(
+      [...spBlocks.keys()]
+        .filter((w) => !SP_WAVES_OWING_A_BANDS_LINE.includes(w) && !SP_WAVES_WITH_NO_BANDS_BY_DESIGN.includes(w))
+        .sort(),
+    );
+    expect(withLine, 'SP-A must always be in the set — it is the reconciled exemplar').toContain('SP-A');
     const classified = [...SP_WAVES_OWING_A_BANDS_LINE, ...SP_WAVES_WITH_NO_BANDS_BY_DESIGN].sort();
     expect(without.sort()).toEqual(classified);
   });

@@ -37,8 +37,8 @@ const CATALOG_HOME = 'src/domain/worldPulse/peaceTermsCatalog.js';
 
 /**
  * THE SP MODULE SET. Grows one wave at a time:
- *   SP-A  bandedStock.js, bandFamilies.js          (this wave)
- *   SP-B  outboundImpression.js + the axis leaf
+ *   SP-A  bandedStock.js, bandFamilies.js
+ *   SP-B  beliefAxisSubjects.js (the axis leaf), outboundImpression.js
  *   SP-C  strategicPosture.js
  *   SP-D  errandMint.js
  * A wave adding a leaf adds it HERE in the same commit, or the scan is blind to it.
@@ -46,6 +46,8 @@ const CATALOG_HOME = 'src/domain/worldPulse/peaceTermsCatalog.js';
 const SP_MODULES = Object.freeze([
   'src/domain/worldPulse/bandedStock.js',
   'src/domain/worldPulse/bandFamilies.js',
+  'src/domain/worldPulse/beliefAxisSubjects.js',
+  'src/domain/worldPulse/outboundImpression.js',
 ]);
 
 const read = (rel) => readFileSync(join(ROOT, rel), 'utf8');
