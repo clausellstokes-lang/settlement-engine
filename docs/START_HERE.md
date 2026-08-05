@@ -51,8 +51,10 @@ minifold (.claude/worktrees/minifold, claude/composite-r4, NOTHING pushed).
   (BINDING). Architecture draft (1,186 lines, 8 waves, flag espionageEnabled,
   zero new keys, ES-4 = the third leg of the WR-10 lighting discharge) at the
   c44e5d99 scratchpad espionage-arch/; first cohesion verdict NEEDS-REVISION
-  (9 findings, all narrow); the amend + re-cohesion round was RUNNING
-  (wf_60586a6a-68c). 5 espionage OQs + the fold-into-FP-volume integration
+  (9 findings, all narrow); the amend + re-cohesion round then closed
+  COHESIVE (all 9 findings repaired, all EIGHT owner additions A-H verified
+  architected; 1,592 lines; NF-1 fold obligation: admit ES as the TENTH
+  coupling-registry prefix + same-commit registry rows, mechanical). 5 espionage OQs + the fold-into-FP-volume integration
   are chair-owed. The tap-order ruling (H) is CONSTITUTIONAL for the whole
   information program.
 - **V5 PHOTOREAL**: 13 nano_banana_pro 4K generations complete, spelling
