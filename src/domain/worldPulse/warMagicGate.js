@@ -32,20 +32,22 @@
  * at the capacity lookup); feasibilityGate is a READER (it asks the stamped envelope the
  * pair question). Both go through this module so the rule has exactly one definition.
  */
-import { magicLedger } from '../magicLedger.js';
+import { magicWorksAt } from './magicWorksAt.js';
 
 /**
  * Does magic FUNCTION for this settlement? A snapshot item (`{ settlement }`) or a bare
  * settlement both read correctly — the war layer passes both shapes.
  *
- * @param {any} item  a worldSnapshot item, a settlement, or nullish.
- * @returns {boolean} false ONLY when the settlement carries a magic axis that says so.
+ * ⚠ THE BODY MOVED, THE NAME DID NOT (ES-0 ⟨F7⟩, the R-BLD-5 `magicAssertionText.js`
+ * precedent). This predicate was never war-specific: it answers a question about a
+ * SETTLEMENT, and the espionage layer's magical-transmission pair gate asks the same
+ * question of a home and a stop. It now lives at ./magicWorksAt.js under a neutral name
+ * and is RE-EXPORTED here — a re-export and not a wrapper, so there is exactly one body
+ * and `warMagicFunctions === magicWorksAt` is pinned as an object identity. The neutral
+ * leaf's header names the module-private twin `magicFunctionsAt(magicById, id)` at
+ * spatial/teleportEdges.js, which has a different arity and different semantics.
  */
-export function warMagicFunctions(item) {
-  const settlement = item?.settlement || item || null;
-  const ledger = magicLedger(settlement);
-  return !(ledger.present === true && ledger.magicExists === false);
-}
+export { magicWorksAt as warMagicFunctions };
 
 /**
  * Stamp the magic law onto a military-capacity facets envelope. ADDITIVE AND ONE-SIDED:
@@ -60,7 +62,7 @@ export function warMagicFunctions(item) {
  * @returns {any} the facets envelope, stamped only where magic is asserted absent.
  */
 export function stampWarMagicLaw(facets, item) {
-  if (warMagicFunctions(item)) return facets;
+  if (magicWorksAt(item)) return facets;
   return { ...(facets || {}), magicFunctions: false };
 }
 

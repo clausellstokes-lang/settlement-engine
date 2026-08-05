@@ -102,6 +102,13 @@ const LAYER_PATTERNS = Object.freeze({
   ],
   INFO: [
     /^src\/domain\/worldPulse\/(?:beliefMap|belief[A-Z]|credibility|brokerage|information|disinfo|intel|sightPosture|outboundImpression)/,
+    // ES-0: the espionage family. The ES volume folds into the INFORMATION program as a
+    // wave family of it, so its leaves are INFO whatever noun they are named after —
+    // the same reading CR-FP-11 arm A gave TR-1's commercial leaves and GR-0/GR-1's
+    // grammar leaves. It is a DIRECTORY pattern rather than a prefix because the family
+    // lives in its own folder; every future ES leaf is claimed the day it lands, which
+    // is what stops the unclaimed census from trailing the estate again.
+    /^src\/domain\/worldPulse\/espionage\//,
     /^src\/domain\/spatial\/(?:rumorNetwork|intelActs)\.js$/,
   ],
   GRAMMAR: [
@@ -148,6 +155,17 @@ const ARGUED_UNLAYERED = Object.freeze({
   'src/domain/worldPulse/settlementLifecycleKernel.js': 'infrastructure host — L1 routes every FP stage through it',
   'src/domain/worldPulse/bandFamilies.js': 'SP substrate — the shared band/severity vocabulary, spelled by every layer',
   'src/domain/worldPulse/bandedStock.js': 'SP substrate — the shared decay law over that vocabulary',
+  // ES-0 adds two on the SAME argument the two SP leaves above carry, one rung down.
+  // Neither owns a subject; both answer a question every port asks. lawWord.js is the
+  // estate's ONE law-band spelling (CR-ES-3) and is spelled by WAR (warSeatBooks),
+  // INFORMATION (the espionage doctrine) and GRAMMAR (the testimony/ransom consumer
+  // sets), with INTERIOR queued behind INT-1 — giving it a family would make every
+  // layer's reading of the word "lawful" a cross-layer coupling. magicWorksAt.js is the
+  // world-law predicate "does magic function here", lifted out of warMagicGate.js under
+  // ⟨F7⟩ precisely because it was never war-specific: WAR asks it of a siege and
+  // INFORMATION asks it of a message.
+  'src/domain/worldPulse/lawWord.js': 'shared vocabulary — the estate\'s ONE law-band spelling (CR-ES-3), spelled by four ports',
+  'src/domain/worldPulse/magicWorksAt.js': 'shared world-law predicate — does magic function here, asked by WAR and INFORMATION alike',
 });
 
 /** The FP scope the unlayered census is TOTAL over. */

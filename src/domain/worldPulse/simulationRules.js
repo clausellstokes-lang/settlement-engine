@@ -202,6 +202,15 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // certification tracks reality instead of preceding it).
   'casusCommerciiEnabled',
   'conquestDoctrineEnabled',
+  // Joined 2026-08-05 by FP wave ES-0 under CR-WR10-C item 4 (the compiled charter's §3
+  // flag law), in the SAME commit as its first real gate read
+  // (espionage/espionageGate.espionageActive, read BY NAME with the strict === true
+  // idiom) and its AUTHORED certification row — never a pending entry, because
+  // manifesting is itself the act that makes a virtual key censusable and therefore the
+  // act that comes due. The gate is a THREE-DOOR conjunction (beliefs live, the errand
+  // spine lit, then the flag); the by-name read is what keeps all three visible to the
+  // engine-gated-key census, which a frozen-list `.every()` would hide.
+  'espionageEnabled',
   'infoStatecraftEnabled',
   'migrationRumorsEnabled',
   // Joined 2026-08-04 by FP wave GR-1 under CR-WR10-C item 4 (the compiled charter's

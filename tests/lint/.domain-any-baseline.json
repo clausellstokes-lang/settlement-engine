@@ -1,6 +1,6 @@
 {
-  "total": 2224,
-  "totalAny": 2186,
+  "total": 2223,
+  "totalAny": 2185,
   "totalSuppress": 38,
   "files": {
     "src/domain/activeConditions.js": {
@@ -648,7 +648,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/warMagicGate.js": {
-      "any": 4,
+      "any": 3,
       "suppress": 0
     },
     "src/domain/worldPulse/warPeaceDecision.js": {

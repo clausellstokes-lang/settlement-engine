@@ -316,8 +316,14 @@ missions) — mapped as seam row 13.
 DEFAULT_SIMULATION_RULES and every preset spread; strict `=== true` reads,
 dark-never-permissive; at least one BY-NAME read (the conjunction-gate hole);
 joins `ENGINE_GATED_VIRTUAL_RULE_KEYS` (simulationRules.js, measured at :185)
-+ its certification row OR declared-pending entry + its first real gate read
-in ONE COMMIT (the wave is ES-1); the engineGatedRuleKeys walker asserts the
++ its AUTHORED certification row + its first real gate read in ONE COMMIT.
+⚠ **THE WAVE IS ES-0, NOT ES-1 (chair rider, 2026-08-05, postdating this volume),
+AND THE ROW IS AUTHORED, NEVER PENDING.** ES-0 lands `espionageGate.js` carrying the
+conjunction below, which IS a real by-name gate read, and the engine-gated-key walker
+reds an unaccounted gated key — so the manifest entry and the row come due in the same
+commit. "A row OR a pending entry" is not a state this contract can hold: manifesting is
+what makes a virtual key censusable, so manifesting is the act that comes due.
+The engineGatedRuleKeys walker asserts the
 exact one-key delta; the FOUR-FENCE dormancy set (own-footprint golden ·
 absent-vs-false differential · call-path spy · gate-polarity census) + the
 lit-mutant control. Boolean, so it enters `spatialUsage.js` TRACKED_FLAGS
@@ -983,6 +989,11 @@ module-private word functions in `warSeatBooks`, with a both-vocab equality
 pin. What the ruling under-priced is what else must move in the SAME commit.
 
 1. **THE BREAK IS EXACTLY ONE RUNG PER LADDER — measured live, not inferred.**
+   ⚠ **AMENDED AT THE ES-0 LANDING (2026-08-05), MEASURED:** only TWO of the three are
+   module-private FUNCTIONS. `lawfulnessBand` and `moralityBand` are functions; the
+   security ladder is an INLINE TERNARY at the `securityBand` assignment inside
+   `readWarSeatBooks`. The ruling's substance is unchanged — three rungs still move —
+   but an implementer looking for a third private function will not find one.
    `warSeatBooks.js`'s `lawfulnessBand` returns `chaotic|balanced|lawful`,
    `moralityBand` returns `benevolent|balanced|malicious`, and the security
    read emits `secure|contested|precarious`. The consumers' frozen sets are
@@ -1028,6 +1039,23 @@ pin. What the ruling under-priced is what else must move in the SAME commit.
    `'benevolent'` in them SHIFTS. That shift is LEGITIMATE and one-time, and
    it is DECLARED here rather than discovered at the gate. Five test files
    carry the band literals today and are the shift's blast radius.
+   ⚠ **AMENDED AT THE ES-0 LANDING (2026-08-05): THERE IS A FOURTH CONSUMER, AND IT
+   IS THE DANGEROUS ONE.** `warRulingsNews.js` looks the security band up in a WORD
+   table — `BAND_WORD[row.band || row.refusalCostBand || row.rulerSecurityBand]` — and
+   `rulerSecurityBand` really does reach it, because `peaceDecisionRulingEvidence`
+   spreads the whole `warTermination` receipt onto every evidence row. A retarget that
+   moved the producer's rung without moving that KEY drops the `{band}` interp slot out
+   of the WR-5 receipts SILENTLY: no exception, no red, just a poorer sentence. The
+   landing moved the key `contested` -> `holding` and KEPT THE WORD (`'uncertain'`), so
+   the rendered prose is byte-identical for the same world. Measured blast radius at
+   landing: FOUR src consumers (this one, `envoyNegotiationPictureBuilder`, plus
+   `warTermination`/`settlementStrategy` which pass the values through by KEY and need
+   no edit) and ONE test file, not five — `envoyTestimonyWr7c` and `ransomChoicesWr7d`
+   already spell the consumer vocabulary, and `sovereigntyIntentWr10` /
+   `sovereigntyMarketStageWr10w` only assert unchanged rungs. NO committed golden
+   captures a seat band, so the declared golden shift did not materialise anywhere.
+   `sovereigntyIntent`'s receipt prose does move, from "the seat stands contested" to
+   "the seat stands holding"; no pin captured that sentence.
 4. **DO NOT SWEEP THE WORD.** `warSeatBooks.js` also parses D&D ALIGNMENT
    TOKENS with `token.includes('chaotic')`, and `settlementPolitics.js` and
    `piety.js` do the same on their own inputs. Those are the alignment-token
@@ -1260,7 +1288,22 @@ negative carries `// anchored:`; four-fence dormancy + lit-mutant per flagged
 wave; sizes re-measured with the enforcer at the publishing commit (raw
 `wc -l` below is orientation only).
 
-**ES-0 — THE PURE LEAVES (no flag; dark by construction; early-eligible).**
+**ES-0 — THE PURE LEAVES + THE FLAG (dark by construction; early-eligible).**
+⭐ **LANDED 2026-08-05.** Two charter corrections, both MEASURED against the live tree
+and both vetoable. (a) **THE FLAG LANDS HERE**, with its full CQ5 trio — manifest entry,
+AUTHORED certification row, and the first by-name gate read in `espionageGate.js` — per
+the chair rider that postdates this volume; the block below was written "no flag".
+(b) **`lawWordFor` IS MINTED IN `src/domain/worldPulse/lawWord.js`, NOT IN
+`espionageDoctrine.js`.** `warSeatBooks.js` must import it, and
+tests/lint/couplingInclusion.walker.test.js would then either count the doctrine leaf as
+unlayered debt or license a WAR-to-INFORMATION coupling for a four-line ladder. That
+walker's own recorded argument for its two SP substrate leaves applies word for word: a
+shared vocabulary every layer spells against is not a port, and giving it a family
+"would make every layer's reading of a band word a cross-layer coupling, which is
+hosting by another name". The mint is still ONCE, the vocabulary is still the consumer's,
+and the espionage family joins the INFO layer map so its leaves are claimed rather than
+unlayered. The veto restores the charter's file assignment and owes a coupling-registry
+row for the WAR read.
 Charter: `src/domain/worldPulse/espionage/espionageDoctrine.js` —
 `lawWordFor` (minted ONCE, exported; `warSeatBooks.js` (515) retires its
 private `lawfulnessBand` to it in the same commit — a ~6-line edit,

@@ -74,7 +74,15 @@ const BAND_WORD = Object.freeze({
   pressing: 'deeply',
   decisive: 'heavily',
   secure: 'firm',
-  contested: 'uncertain',
+  // CR-ES-3: the seat-security middle rung is `holding`, not `contested`. THE WORD IS
+  // UNCHANGED ON PURPOSE — this is a key rename, so the rendered sentence is
+  // byte-identical for the same world and the retarget costs no prose. The lookup is
+  // fed by `rulerSecurityBand`, which reaches here because `peaceDecisionRulingEvidence`
+  // spreads the whole warTermination receipt onto every evidence row; a retarget that
+  // moved the producer without moving this key would have dropped the `{band}` interp
+  // slot out of the WR-5 receipts silently — no exception, no red, just a poorer
+  // sentence. This is the FOURTH consumer, and the ruling's cost note named three.
+  holding: 'uncertain',
   precarious: 'fragile',
   unseated: 'without a settled holder',
   narrow: 'slightly',

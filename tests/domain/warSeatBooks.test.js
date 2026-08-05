@@ -175,10 +175,15 @@ describe('WR-5 war seat books', () => {
     const war = readWarSeatBooks({ worldState: state, snapshot: snap([item({ npcs: [warmonger] })]), actorId: 'a', opponentId: 'b' });
     const peace = readWarSeatBooks({ worldState: state, snapshot: snap([item({ npcs: [peacemaker] })]), actorId: 'a', opponentId: 'b' });
 
-    expect(war.lawfulnessBand).toBe('chaotic');
+    // CR-ES-3 (chair 2026-08-05): the seat vocabulary is now the CONSUMER's, so the
+    // bottom rung of each ladder is `lawless`/`merciful` rather than
+    // `chaotic`/`benevolent`. The EDGES did not move — `lawWordFor` carries the estate
+    // pair (0.67/0.33) exactly as the retired private band did, so the same rulers land
+    // on the same rungs and only the words changed.
+    expect(war.lawfulnessBand).toBe('lawless');
     expect(war.moralityBand).toBe('malicious');
     expect(peace.lawfulnessBand).toBe('lawful');
-    expect(peace.moralityBand).toBe('benevolent');
+    expect(peace.moralityBand).toBe('merciful');
     expect(war.continueBias01).toBeGreaterThan(peace.continueBias01);
     expect(war.continueBias01 + war.peaceBias01).toBe(1);
     expect(peace.continueBias01 + peace.peaceBias01).toBe(1);
@@ -241,7 +246,7 @@ describe('WR-5 war seat books', () => {
       patronId: 'p',
       patronName: 'Patron Court',
       patronRulerId: 'p:patron_ruler',
-      patronLawfulnessBand: 'chaotic',
+      patronLawfulnessBand: 'lawless',
       patronMoralityBand: 'malicious',
       seatWeight01: 0,
     });

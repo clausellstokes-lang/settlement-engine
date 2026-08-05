@@ -104,6 +104,57 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // stronger and more honest statement.
     soakEvidence: 'unobserved',
   }),
+  // ── THE ESPIONAGE LAYER (FP ES-0, docs/DESIGN_FP_ARCH_ES.md §2) ────────────
+  //
+  // THE FIRST ROW IN THIS LANE WHOSE SUBSYSTEM HAS NO CALLER AT ALL, and the row says so
+  // rather than describing the layer the charter will build. ES-0 lands PURE LEAVES and
+  // the gate that will govern them; the mission mint, the gauntlet and the products are
+  // ES-1..ES-3. The honest grade for that state is UNOBSERVED with every channel empty —
+  // not because the shape hides the output, as the belief-axis rows below record, but
+  // because nothing has run. Declaring a channel now would grade the row SILENT in every
+  // world, which reads as a broken subsystem instead of an unbuilt one.
+  Object.freeze({
+    rule: 'espionageEnabled',
+    title: 'Covert confirmation missions (the espionage layer)',
+    module: 'src/domain/worldPulse/espionage/espionageGate.js,src/domain/worldPulse/espionage/espionageDoctrine.js,src/domain/worldPulse/espionage/espionageMath.js,src/domain/worldPulse/lawWord.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: the lane mints no candidate. There is no `candidateType`
+      // literal anywhere in the espionage module set, and there will not be one until
+      // ES-1 mints the mission — at which point this row gains the vocabulary.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: the six Herald kinds are ES-7's, in ES-7's commit. The
+      // BEHAVIOURAL mover families are a closed ten-member vocabulary owned by other
+      // lanes; claiming one would grade this row alive off their traffic.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, and this one is a DESIGN FACT rather than a wave fact: the
+      // whole program adds ZERO new top-level worldState keys and ZERO new
+      // spatialLedgers sub-keys. Its one piece of state, when ES-1 mints it, is a
+      // conditional `covert` sub-record on the errand row the spine already owns.
+      stateKeys: Object.freeze([]),
+      other: 'A SUBSYSTEM WITH A GATE AND NO CALLER, WHICH IS WHY EVERY CHANNEL IS EMPTY. ONE DOOR, A THREE-PART CONJUNCTION: espionageActive (espionage/espionageGate.js) refuses unless beliefsActive holds, unless errandSpineEnabled is lit, and unless espionageEnabled reads === true BY NAME. The by-name read is load-bearing rather than stylistic - a frozen-list conjunction is a computed member access and would hide this key from the engine-gated-key census entirely, which is how a fully wired flag once shipped invisible. NOT WAR-GATED: none of the six ENVOY_REQUIRED_RULES war flags enters the conjunction, because espionage serves all statecraft and not war alone. WHAT ES-0 LANDED: three pure leaves and one shared-vocabulary mint. The doctrine leaf reads a court espionage doctrine off BOTH alignment axes - who it watches, whether it takes hidden ways, how often it sends, and how it treats the people it sends - as closed words with an unknown arm produced only at the resolution gate. The math leaf carries the notoriety, competence, catch, leg-stack, dwell-ramp, wariness, promotion-risk, grade and deliberation arithmetic, plus the tap and grade vocabularies. lawWord.js is the estate ONE law-band spelling, minted under CR-ES-3 to close a producer/consumer break in which warSeatBooks emitted a rung its two built consumers would reject, nulling the whole row rather than mis-grading it. WHAT NOTHING DOES YET: no engine module imports the espionage set, so a lit world and a dark world are byte-identical for a reason stronger than a gate - there is no code path to gate. THE OBSERVATION NEEDED to move this row off UNOBSERVED is a completed mission in a soak receipt, which cannot exist before ES-1 mints the mission. Until then the layer is pinned where its bodies are readable: tests/domain/espionageDoctrine.test.js, tests/domain/espionageMath.test.js and tests/property/espionageDormancyFence.test.js.',
+    }),
+    // Nothing runs, so no tempo is truthful except the one the layer will have when its
+    // stage mounts inside the errand advance: one transition per row per pulse.
+    expectedTempo: 'per_tick',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dormancy_is_the_absence_of_a_caller',
+        description: 'No module under src/ imports the espionage set, so a world with the flag lit is byte-identical to a world without it - the WR-10 dark-instrument shape, where darkness is structural rather than gated. Absent and explicitly false are indistinguishable at every decision site because every production read is the strict === true form.',
+        check: 'NOT expressible from any receipt schema: a subsystem with no caller writes nothing a census can count. Pinned in tests/property/espionageDormancyFence.test.js by a real pulse run in both flag states plus an import-census fence, with a lit-mutant control so the fences are proven able to SEE rather than merely quiet.',
+      }),
+      Object.freeze({
+        name: 'every_gate_door_is_separately_load_bearing',
+        description: 'The three doors of espionageActive are pinned one at a time. A conjunction whose arms cannot each be dropped and reddened is a conjunction nobody has proven, and this estate has twice shipped a guard that a second guard silently covered for.',
+        check: 'NOT expressible from a receipt: a refusal leaves no trace. Pinned in tests/property/espionageDormancyFence.test.js, which drives the door with each condition failing alone.',
+      }),
+      Object.freeze({
+        name: 'the_law_word_is_minted_exactly_once',
+        description: 'CR-ES-3 unified the seat vocabularies on the CONSUMER spelling (lawless/merciful/holding). The producer and its four live consumers moved in one commit, and the estate gained no fourth law-band vocabulary: a second spelling would let a wired row vanish again exactly as envoyTestimony credibility-first arm sat dead on a word warSeatBooks could not emit.',
+        check: 'NOT expressible from a receipt: vocabularies are source facts. Pinned in tests/lint/seatVocabularyUnification.walker.test.js, which feeds real producer rows through the real consumer normalizers in both directions and asserts the RETIRED words are still rejected.',
+      }),
+    ]),
+    soakEvidence: 'unobserved',
+  }),
   // ── THE BELIEVED-WORLD AXES (FP SP-B, docs/DESIGN_FP_ARCH_SP.md §SP-B) ─────
   //
   // THREE ROWS, NOT ONE, BECAUSE THERE ARE THREE FLAGS (J-SP-3). Per-family flags are

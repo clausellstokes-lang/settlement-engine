@@ -119,7 +119,11 @@ function governingArchetypeOf(item) {
 /** Project existing seat-book character to the closed negotiation press ladder. */
 function alignmentPressBandOf(worldState, snapshot, actorId, opponentId) {
   const books = readWarSeatBooks({ worldState, snapshot, actorId, opponentId });
-  if (books.moralityBand === 'benevolent') return 'merciful';
+  // CR-ES-3: the producer's seat-morality bottom rung is `merciful`, not `benevolent`.
+  // The rung and this read move in the SAME commit — a producer-only retarget would
+  // leave this arm keyed on a word warSeatBooks can no longer emit, which is the
+  // dead-arm class the ruling exists to close, not to create.
+  if (books.moralityBand === 'merciful') return 'merciful';
   if (books.moralityBand === 'malicious') return 'punitive';
   if (books.lawfulnessBand === 'lawful') return 'hard';
   return 'measured';

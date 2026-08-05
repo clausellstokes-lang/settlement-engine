@@ -88,8 +88,17 @@ const CASUS = 'casusCommerciiEnabled';
 const SCARCITY = 'believedScarcityEnabled';
 const CONDITIONS = 'believedConditionsEnabled';
 const DEVOTION = 'believedDevotionEnabled';
+// Joined 2026-08-05 by FP wave ES-0, with its manifest entry and its first by-name gate
+// read in one commit. A FIFTH zero-key case, and the only one whose emptiness is neither
+// a shape fact nor a mount fact but a BUILD fact: ES-0 lands the gate and the pure leaves
+// and nothing imports them, so the layer has no caller at all yet. That is the honest
+// reading and it is why the row declares unobserved with every channel empty — a
+// declared channel would grade an unbuilt subsystem SILENT, which reads as broken.
+const ESPIONAGE = 'espionageEnabled';
+// AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
+// against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
-  AXES, SCARCITY, CONDITIONS, DEVOTION,
+  AXES, ESPIONAGE, SCARCITY, CONDITIONS, DEVOTION,
   CONQUEST, STATECRAFT, RUMORS, OATH, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS,
 ]);
 
@@ -110,6 +119,15 @@ const LANE_LEAVES = Object.freeze({
   [SCARCITY]: ['src/domain/worldPulse/beliefAxisSubjects.js', 'src/domain/worldPulse/beliefAxes.js'],
   [CONDITIONS]: ['src/domain/worldPulse/beliefAxisSubjects.js', 'src/domain/worldPulse/beliefAxes.js'],
   [DEVOTION]: ['src/domain/worldPulse/beliefAxisSubjects.js', 'src/domain/worldPulse/beliefAxes.js'],
+  // The espionage lane's own leaves: the gate door where the flag is read, and the two
+  // pure leaves where the bodies are. lawWord.js is in the row's wider `module` list but
+  // NOT here — it is estate-wide shared vocabulary spelled by four ports, so tracing this
+  // lane's claims through it would measure the war and grammar layers' words.
+  [ESPIONAGE]: [
+    'src/domain/worldPulse/espionage/espionageGate.js',
+    'src/domain/worldPulse/espionage/espionageDoctrine.js',
+    'src/domain/worldPulse/espionage/espionageMath.js',
+  ],
   [CONQUEST]: ['src/domain/worldPulse/vengeanceLicense.js', 'src/domain/worldPulse/conquestDoctrineStage.js'],
   [STATECRAFT]: ['src/domain/worldPulse/informationStatecraft.js', 'src/domain/worldPulse/brokerageStamps.js'],
   [RUMORS]: ['src/domain/spatial/migrationRumors.js'],

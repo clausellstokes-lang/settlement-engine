@@ -29,6 +29,7 @@ import { getSpatialLedger } from '../spatial/distanceRead.js';
 import { npcId } from './npcAgency.js';
 import { foreignAssetsByPatron } from './corruptionWeb.js';
 import { rulingSeatNidOf } from './gratitudeBonds.js';
+import { lawWordFor } from './lawWord.js';
 import { LADDER_TUNING, ladderFactionKey, npcInFaction } from './npcLadderState.js';
 import { coalitionConsolidation01, settlementPoliticsActive } from './settlementPolitics.js';
 
@@ -286,17 +287,29 @@ function rulerAlignment(worldState, rulerId, ruler) {
   return { lawfulness01: 0.5, malice01: clamp01(0.5 - conscience * 0.35) };
 }
 
-/** @param {number} value @returns {'chaotic'|'balanced'|'lawful'} */
-function lawfulnessBand(value) {
-  if (value >= 0.67) return 'lawful';
-  if (value <= 0.33) return 'chaotic';
-  return 'balanced';
-}
+/**
+ * ⚠ CR-ES-3 (chair 2026-08-05, countersigned): THE SEAT VOCABULARY IS THE CONSUMER'S.
+ *
+ * This file's three seat-character ladders each disagreed with their consumers on
+ * EXACTLY ONE RUNG — `chaotic` vs `lawless`, `benevolent` vs `merciful`, `contested` vs
+ * `holding`. The consumers (`RANSOM_SEAT_*` in ransomChoices.js, `TESTIMONY_SEAT_*` in
+ * envoyTestimony.js) normalize through `closedValue`, which nulls the WHOLE ROW on a
+ * non-member, so a wired row would not have been mis-graded — it would have VANISHED.
+ * `envoyTestimony`'s credibility-first arm already tested `lawfulnessBand === 'lawless'`,
+ * a value this producer could not emit: a dead arm, shipped. The consumer sets are
+ * EXPORTED constants two built leaves enforce; these words were module-private and
+ * cheapest to move. Three rungs moved, not three vocabularies.
+ *
+ * ⛔ THE ALIGNMENT TOKEN PARSE IN `alignmentAxes` ABOVE IS A DIFFERENT VOCABULARY and is
+ * DELIBERATELY UNTOUCHED. Its `token.includes('chaotic')` reads a D&D alignment string,
+ * as `settlementPolitics.js` and `piety.js` do on their own inputs. A text sweep of the
+ * word would break all three silently; the retarget is by SYMBOL.
+ */
 
-/** @param {number} value @returns {'benevolent'|'balanced'|'malicious'} */
+/** @param {number} value @returns {'merciful'|'balanced'|'malicious'} */
 function moralityBand(value) {
   if (value >= 0.67) return 'malicious';
-  if (value <= 0.33) return 'benevolent';
+  if (value <= 0.33) return 'merciful';
   return 'balanced';
 }
 
@@ -443,7 +456,7 @@ export function readWarSeatBooks({
   const security01 = securityWeight > 0
     ? clamp01(securityFacts.reduce((sum, fact) => sum + fact.value * fact.weight, 0) / securityWeight)
     : 0.5;
-  const securityBand = security01 >= 0.67 ? 'secure' : security01 >= 0.4 ? 'contested' : 'precarious';
+  const securityBand = security01 >= 0.67 ? 'secure' : security01 >= 0.4 ? 'holding' : 'precarious';
 
   const aggression = traitScore(ruler, TRAIT_AGGRESSION);
   const privateWeight = clamp01(
@@ -493,7 +506,7 @@ export function readWarSeatBooks({
     securityBand,
     lawfulness01: round4(axes.lawfulness01),
     malice01: round4(axes.malice01),
-    lawfulnessBand: lawfulnessBand(axes.lawfulness01),
+    lawfulnessBand: lawWordFor(axes.lawfulness01),
     moralityBand: moralityBand(axes.malice01),
     rivalTriumph01: rivalRisk01,
     rivalTriumphBand: rivalRisk01 >= 0.5 ? 'pressing' : rivalRisk01 > 0 ? 'present' : 'absent',
@@ -508,7 +521,7 @@ export function readWarSeatBooks({
     ...(patronAxes ? {
       patronLawfulness01: round4(patronAxes.lawfulness01),
       patronMalice01: round4(patronAxes.malice01),
-      patronLawfulnessBand: lawfulnessBand(patronAxes.lawfulness01),
+      patronLawfulnessBand: lawWordFor(patronAxes.lawfulness01),
       patronMoralityBand: moralityBand(patronAxes.malice01),
     } : {}),
   };
