@@ -30,6 +30,14 @@ import {
   WR6_WAR_COALITION_COUPLINGS,
   WR7_ENVOY_COUPLINGS,
 } from './couplingRegistryWar.js';
+// The first non-WAR leaf (FP wave TR-1). One sibling per volume, as CW-0w slice 1 built
+// this family to accept.
+import { TR1_CASUS_COMMERCII_COUPLINGS } from './couplingRegistryTrade.js';
+
+export {
+  TR1_SEVERANCE_PRESSURE_COUPLING,
+  TR1_CASUS_COMMERCII_COUPLINGS,
+} from './couplingRegistryTrade.js';
 
 export {
   WR3_LINEAGE_COUPLING,
@@ -70,6 +78,7 @@ export const COUPLING_REGISTRY = Object.freeze([
   ...WR5_WAR_RULING_COUPLINGS,
   ...WR6_WAR_COALITION_COUPLINGS,
   ...WR7_ENVOY_COUPLINGS,
+  ...TR1_CASUS_COMMERCII_COUPLINGS,
 ]);
 
 /** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */

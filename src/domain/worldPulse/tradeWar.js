@@ -62,6 +62,11 @@ import { stablePart } from './worldState.js';
 // ⇒ mult 1 ⇒ byte-identical partner selection (the neutrality interlock the brief names).
 import { effectiveToleranceOf, institutionConscience } from './institutionTolerance.js';
 import { canonicalRelationshipSeed } from './relationshipEdgeSeed.js';
+// TR-1 / CPL-1 TRADE→WAR (couplingRegistryTrade.js). ONE evidence factory, two signs:
+// the defeated incumbent's standing commercial case against the winner, and the standing
+// partnership that argues against cutting the tie. Absent flag or absent ledger ⇒ both
+// read 0 ⇒ byte-identical. One-directional: commercialReasons never imports this module.
+import { makeCommercialPressureRead } from './commercialReasons.js';
 
 /**
  * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js).
@@ -88,6 +93,12 @@ const COERCION_RENEWAL_TICKS = 6;
 // Escalation gate: only a CONFIDENT defeated incumbent can request a march
 // (the one opener still judges it; most losers wind down).
 const ESCALATION_CONFIDENCE = 0.5;
+// TR-1 THE CASUS COMMERCII SEAM (the ONE trade-war edit that wave makes). How much a
+// standing commercial grievance — net of the standing partnership that argues against
+// breaking the tie — may move the escalation probability. It moves the PROBABILITY only,
+// never the strength short-circuit above it, so the number of rng draws is identical in
+// both flag states and a dark world is byte-identical rather than merely similar.
+const COMMERCIAL_PRESSURE_W = 0.25;
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -307,7 +318,7 @@ function conditionOutcome({ id, archetype, targetSaveId, severity, headline, sum
  * @param {Rng} args.rng
  * @param {number} args.tick
  * @param {string|null} [args.now]
- * @param {{ warLayerEnabled?: boolean }} args.rules
+ * @param {{ warLayerEnabled?: boolean, casusCommerciiEnabled?: boolean }} args.rules
  * @returns {{ outcomes: any[], graphChannels: any[], tradeWarState: Record<string, any>, dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number}> }}
  */
 export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = null, rules = {} }) {
@@ -317,6 +328,13 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
     return { outcomes: [], graphChannels: [], tradeWarState: existingState, dispositionDeltas: [] };
   }
 
+  // TR-1's gate, read BY NAME with the strict idiom — a flag read only through a frozen
+  // list conjunction is invisible to the engine-gated-key census, which is a hole this
+  // estate has already been bitten by once. Dark ⇒ null ⇒ the escalation arithmetic below
+  // never sees a commercial term and the ledger is never opened.
+  const commercialPressure = rules?.casusCommerciiEnabled === true
+    ? makeCommercialPressureRead(worldState)
+    : null;
   const strengthFor = buildStrengthLookup(snapshot);
   // item 2c: per-settlement effective tolerance (patron conviction + trade drift) + a supplier's
   // standing institutions, for the conscience embargo. Absent ledger ⇒ tolerance is the patron
@@ -621,8 +639,18 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
       if (defeatedId && defeatedId !== winnerId && snapshot?.byId?.has?.(defeatedId)) {
         const escalationRng = rng.fork(`trade_escalation:${prizeId}:${tick}`);
         const defeatedStrength = strengthFor(defeatedId);
+        // TR-1 THE SEVERANCE-MAGNITUDE READ. A court that already holds a typed, receipted
+        // grievance against the winner reaches for the sword a little sooner; a court that
+        // holds a real partnership with it reaches a little later. Both signs come off the
+        // SAME ledger rows, so the pressure and its counterforce can never disagree about
+        // what happened. Dark ⇒ severance and restraint are both 0 ⇒ the addend is exactly
+        // 0 ⇒ this expression is the pre-TR-1 expression, bit for bit.
+        const severance = commercialPressure?.severancePressureOf(defeatedId, winnerId) || null;
+        const restraint = commercialPressure?.partnershipRestraintOf(defeatedId, winnerId) || null;
+        const commercialTilt = clamp01(severance?.magnitude01 || 0) - clamp01(restraint?.magnitude01 || 0);
         const escalates = defeatedStrength >= ESCALATION_CONFIDENCE
-          && escalationRng.random() < clamp01(defeatedStrength - ESCALATION_CONFIDENCE + 0.2);
+          && escalationRng.random() < clamp01(defeatedStrength - ESCALATION_CONFIDENCE + 0.2
+            + commercialTilt * COMMERCIAL_PRESSURE_W);
         if (escalates) {
           // ESCALATE THROUGH THE ONE OPENER. Hostility makes the pair eligible;
           // warIntent names the march the trade loser wants. The apply pass owns
@@ -647,7 +675,14 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
               severity: clamp01(0.4 + defeatedStrength * 0.2),
               headline: `${nameFor(defeatedId)} answers lost trade with the sword`,
               summary: `Defeated in the contest for ${nameFor(buyerId)}'s ${commodityLabelFor(commodityId)} trade, ${nameFor(defeatedId)} opens hostilities against ${nameFor(winnerId)}.`,
-              reasons: [`Defeated incumbent strength ${defeatedStrength.toFixed(2)} cleared the escalation gate.`],
+              // THE COUPLING'S RECEIPT FIELD (CPL-1.TRADE_TO_WAR.TR-1.severance_pressure).
+              // When a commercial grievance moved the gate, the march says which one, in
+              // the ledger's own authored words. Dark ⇒ the spread is empty ⇒ this array
+              // is the pre-TR-1 array.
+              reasons: [
+                `Defeated incumbent strength ${defeatedStrength.toFixed(2)} cleared the escalation gate.`,
+                ...(severance?.receipt ? [severance.receipt] : []),
+              ],
               tick,
               sourceEventTargetId: defeatedId,
               causes: [{ source: defeatedId, effect: 'war_pressure', reason: `${nameFor(defeatedId)} escalated a lost trade war.` }],

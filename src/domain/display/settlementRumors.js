@@ -232,6 +232,31 @@ export const WHAT_PHRASES = Object.freeze({
   sale_books_diverged: 'a seat sold to save itself',
   overflow_valve_sold: 'a steading sold that the crowding needed',
   streams_rerouted: 'tribute wagons turning to a new hall',
+  // TR-1 THE CASUS COMMERCII — the sixteen taxonomy types, the dm-only suppression
+  // receipt and the two band crossings. Phrased world-side while the virtual flag is
+  // dark, for the same reason the WR-10 cohort above is: a privileged projection or a
+  // later replay must never fall back to a de-underscored engine token, and 'commercial
+  // famine profiteering' is not something a townsperson says. Each phrase is a NOUN
+  // PHRASE so it reads both capitalized-first and after 'word of …'.
+  commercial_contract_default: 'a compact broken by a trading partner',
+  commercial_contract_honored: 'a compact kept season after season',
+  commercial_toll_extortion: 'a gate toll grown into a grievance',
+  commercial_toll_relief: 'a toll eased on a trading road',
+  commercial_market_exclusion: 'a market shut against a neighbour',
+  commercial_market_opened: 'a market opened to a neighbour',
+  commercial_cornering: 'one house holding all of a good',
+  commercial_provision: 'a neighbour who keeps the wagons coming',
+  commercial_famine_profiteering: 'a hungry town charged what it cannot pay',
+  commercial_famine_relief: 'grain sent to a hungry neighbour',
+  commercial_dependency_fear: 'a town frightened of what it must buy',
+  commercial_dependency_comfort: 'a town secure in what it buys',
+  commercial_contraband_injury: 'smuggled goods believed to cross a neighbour gate',
+  commercial_honest_gates: 'a neighbour whose gates are believed honest',
+  commercial_route_predation: 'a road left to the robbers',
+  commercial_route_wardenship: 'a road kept safe by its neighbour',
+  commercial_casus_suppressed: 'a commercial grievance struck out by the stock book',
+  commercial_severance_crossing: 'a trading tie cut',
+  commercial_partnership_crossing: 'two towns binding their markets together',
   // The INDIRECT war and the war of words. These nine are keyed on `kind` rather than
   // `impactKind`, because their authors (momentum.js, supplyWebWarfare.js,
   // informationStatecraft.js) mint no impactKind. That is exactly why the impactKind

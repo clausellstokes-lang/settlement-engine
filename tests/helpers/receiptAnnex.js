@@ -44,6 +44,15 @@ import { readFileSync } from 'node:fs';
  * no caller should have to know about.
  */
 export const WAR_ANNEX_URL = new URL('../../docs/content/RECEIPT_POOLS_WAR.md', import.meta.url);
+/**
+ * The FP-TRADE annex (FP wave TR-1 onward). Added here rather than forked into a second
+ * reader: the address-lie and first-match defects this module exists to close live in the
+ * EXTRACTOR, so a per-volume copy would re-open both once per volume. The one-kind-one-pool
+ * forward is a WAR-volume artifact and the trade annex carries none, so the legacy road
+ * below simply never runs for it — which the TR walker asserts by pinning `from === 'trade'`
+ * rather than leaving it to be discovered when a future merge relocates a pool.
+ */
+export const TRADE_ANNEX_URL = new URL('../../docs/content/RECEIPT_POOLS_TRADE.md', import.meta.url);
 const LEGACY_ANNEX = new URL('../../docs/content/RECEIPT_POOLS_LEGACY.md', import.meta.url);
 
 /** The forward left behind by the one-kind-one-pool merge, 2026-08-03. */
@@ -144,16 +153,20 @@ function parseRequiredSlots(row, kind) {
  * @param {string} options.until    the heading that closes it, e.g. `# WR-5`
  * @param {Record<string,string>} options.interp  slot values for `{slot}` substitution
  * @param {(line: string) => string} [options.strip]  editorial-marker strip applied before interpolation
- * @returns {{ lines: string[], requiredSlots: string[][] | null, from: 'war' | 'legacy' }}
+ * @param {string} [options.annex]  the caller's volume basename, used in throw messages and
+ *   returned as `from`. Defaults to the war volume so every existing caller is unchanged.
+ * @returns {{ lines: string[], requiredSlots: string[][] | null, from: string }}
  *   `requiredSlots` is the annex's own declaration and is non-null only for a relocated pool.
  */
-export function receiptAnnexPool(kind, { source, section, until, interp, strip }) {
+export function receiptAnnexPool(kind, {
+  source, section, until, interp, strip, annex = 'war',
+}) {
   const scope = sectionSlice(source, section, until);
-  const block = kindBlock(scope, kind, `${section} of RECEIPT_POOLS_WAR.md`);
+  const block = kindBlock(scope, kind, `${section} of RECEIPT_POOLS_${annex.toUpperCase()}.md`);
 
   let rows = numberedRows(block);
   let requiredSlots = null;
-  let from = 'war';
+  let from = annex;
 
   if (POINTER_RE.test(block)) {
     if (rows.length > 0) {

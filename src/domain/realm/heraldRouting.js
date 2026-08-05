@@ -198,6 +198,24 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   sovereignty_sale_offered: 'trade', sovereignty_sale_cleared: 'trade',
   sovereignty_no_trade: 'trade', sovereignty_swap: 'trade',
   wartime_firesale: 'trade', streams_rerouted: 'trade',
+  // TR-1 THE CASUS COMMERCII — nineteen kinds, all one desk. A typed commercial
+  // grievance or partnership IS a trade beat by its own nature (law 3: routed by what
+  // the event is, not what caused it), including the severance crossing, which is a
+  // market closing rather than a quarrel: the war it may later feed files under war when
+  // and if the one opener judges it. The twentieth TR-1 kind, commercial_relation_line,
+  // is DELIBERATELY ABSENT — it is the town dossier's relations-panel row, and a panel
+  // line is not an event to file. That exclusion is asserted, not assumed, by
+  // tests/lint/commercialKindPools.walker.test.js.
+  commercial_contract_default: 'trade', commercial_contract_honored: 'trade',
+  commercial_toll_extortion: 'trade', commercial_toll_relief: 'trade',
+  commercial_market_exclusion: 'trade', commercial_market_opened: 'trade',
+  commercial_cornering: 'trade', commercial_provision: 'trade',
+  commercial_famine_profiteering: 'trade', commercial_famine_relief: 'trade',
+  commercial_dependency_fear: 'trade', commercial_dependency_comfort: 'trade',
+  commercial_contraband_injury: 'trade', commercial_honest_gates: 'trade',
+  commercial_route_predation: 'trade', commercial_route_wardenship: 'trade',
+  commercial_casus_suppressed: 'trade',
+  commercial_severance_crossing: 'trade', commercial_partnership_crossing: 'trade',
 
   // ── EVENTS — the explicit catch-all: stressors, traditions, courts, calamity ──
   // stressor types (non-war, non-faith, non-trade)

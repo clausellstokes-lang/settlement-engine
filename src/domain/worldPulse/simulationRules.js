@@ -184,6 +184,13 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
  */
 export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   'beliefAxesEnabled',
+  // Joined 2026-08-04 by FP wave TR-1 under CR-WR10-C item 4 (the compiled charter's §3
+  // flag law), in the SAME commit as its first real gate reads — commercialReasons.js's
+  // own `casusCommerciiActive` and tradeWar.js's severance-magnitude seam, both read by
+  // name with the strict `=== true` idiom — and its declared-pending certification entry
+  // (TR architecture Q4: each TR wave lands PENDING, TR-9 converts all eight to rows, so
+  // certification tracks reality instead of preceding it).
+  'casusCommerciiEnabled',
   'conquestDoctrineEnabled',
   'infoStatecraftEnabled',
   'migrationRumorsEnabled',

@@ -34,6 +34,8 @@ import {
   WR7_SELF_PARLAY_COUPLING,
   WR7_SILENCE_INFERENCE_COUPLING,
   WR7_TWO_PICTURE_PARLAY_COUPLING,
+  TR1_CASUS_COMMERCII_COUPLINGS,
+  TR1_SEVERANCE_PRESSURE_COUPLING,
   couplingRowFor,
   couplingRowsFor,
 } from '../../src/domain/certification/couplingRegistry.js';
@@ -68,6 +70,7 @@ describe('CW-0 coupling registry', () => {
       ...WR5_WAR_RULING_COUPLINGS,
       ...WR6_WAR_COALITION_COUPLINGS,
       ...WR7_ENVOY_COUPLINGS,
+      ...TR1_CASUS_COMMERCII_COUPLINGS,
     ]);
     expect(WR3_LINEAGE_COUPLING).toEqual({
       couplingId: 'CPL-3.POP_TO_WAR.WR-3.lineage',
@@ -302,6 +305,43 @@ describe('CW-0 coupling registry', () => {
       .toEqual(new Set(['CPL-5', 'CPL-19']));
   });
 
+  test('records TR-1 as the registry\'s first non-WAR row, one factory, no claimed kinds', () => {
+    // THE GROWTH PATH, EXERCISED. CW-0w slice 1 split the rows into per-volume leaves and
+    // widened the couplingId shape precisely so this row could exist; until it did, both
+    // changes were untested capability. This is the proof they work.
+    expect(TR1_CASUS_COMMERCII_COUPLINGS).toEqual([TR1_SEVERANCE_PRESSURE_COUPLING]);
+    expect(TR1_SEVERANCE_PRESSURE_COUPLING).toEqual({
+      couplingId: 'CPL-1.TRADE_TO_WAR.TR-1.severance_pressure',
+      pairId: 'CPL-1',
+      direction: 'TRADE→WAR',
+      read: 'src/domain/worldPulse/commercialReasons.js#makeCommercialPressureRead.severancePressureOf',
+      receiptField: 'spatialLedgers.commercialReasons[...][].{type,magnitude01,receipt}',
+      counterforce: 'src/domain/worldPulse/commercialReasons.js#makeCommercialPressureRead.partnershipRestraintOf',
+      flags: ['warLayerEnabled', 'casusCommerciiEnabled'],
+      owningVolume: 'TRADE',
+      owningWave: 'TR-1',
+      intendedDesk: 'trade',
+    });
+    // SAME-EVIDENCE: claim and counterforce resolve through ONE factory in ONE module,
+    // the WR-3 idiom — a counterforce with its own evidence could disagree with its force.
+    const targetOf = (address) => address.split('#')[0];
+    const factoryOf = (address) => address.split('#')[1].split('.')[0];
+    expect(targetOf(TR1_SEVERANCE_PRESSURE_COUPLING.read))
+      .toBe(targetOf(TR1_SEVERANCE_PRESSURE_COUPLING.counterforce));
+    expect(factoryOf(TR1_SEVERANCE_PRESSURE_COUPLING.read)).toBe('makeCommercialPressureRead');
+    expect(factoryOf(TR1_SEVERANCE_PRESSURE_COUPLING.counterforce)).toBe('makeCommercialPressureRead');
+    // NO CLAIMED KINDS, asserted rather than left to chance: the read moves an existing
+    // war-pressure deposit and mints no Herald kind of its own. A future edit that adds
+    // one must argue it against the desk walker instead of inheriting agreement here.
+    expect('kinds' in TR1_SEVERANCE_PRESSURE_COUPLING).toBe(false);
+    // anchored: at least one live row DOES declare kinds, so the assertion above cannot
+    // be green because the optional field stopped being readable.
+    expect(COUPLING_REGISTRY.some((row) => 'kinds' in row)).toBe(true);
+    // The volume prefix is TRADE while the wave prefix is TR — the two vocabularies are
+    // separate and this row is the first place they meet.
+    expect(new Set(COUPLING_REGISTRY.map((row) => row.owningVolume))).toEqual(new Set(['WAR', 'TRADE']));
+  });
+
   test('every schema-v3 row has one stable unique identity and a closed shape', () => {
     const requiredKeys = [
       'couplingId', 'pairId', 'direction', 'read', 'receiptField',
@@ -392,6 +432,7 @@ describe('CW-0 coupling registry', () => {
     expect(couplingRowsFor('CPL-1', 'TRADE→WAR')).toEqual([
       WR4_TRADE_HOME_FRONT_COUPLING,
       WR6_TRADE_EXPENDITURE_COUPLING,
+      TR1_SEVERANCE_PRESSURE_COUPLING,
     ]);
     expect(couplingRowFor('CPL-4', 'INFO→WAR')).toBe(WR4_BELIEF_TRAJECTORY_COUPLING);
     const interiorWar = couplingRowsFor('CPL-6', 'INTERIOR→WAR');
