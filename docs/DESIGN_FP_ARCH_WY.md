@@ -4,10 +4,7 @@
 ## FAMILY; WY is the ELEVENTH chartered volume prefix (admitted at §5b item 7,
 ## in the same commit as this program's first cross-layer registry row).
 ## Master architect, 2026-08-05; PROMOTED TO REPO FORM AT THE QUEUE FOLD,
-## 32cc17f7 (the landing lane stamps the real HEAD into this line and
-## into the ledger row; the placeholder is literal until it does, and an
-## unstamped placeholder in a landed volume is the tell that the fold commit
-## is incomplete). THE OWNER-AMENDMENT VOLUME that refines and
+## 32cc17f7 (stamped by the landing lane). THE OWNER-AMENDMENT VOLUME that refines and
 ## coheres the full directive set of 2026-08-05 (memory/
 ## rumor-durability-and-absolute-distance-directive.md — sections 1, 2, 2b, 2c,
 ## 2d, 2e, 2f, the mid-run additions 2g, 2h, 2i, 2j, and the post-r2 additions

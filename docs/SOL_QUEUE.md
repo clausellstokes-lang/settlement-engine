@@ -197,7 +197,7 @@ volumes corrected @ 36862650 + fdf43790):
       `/how-to` is a retired redirect and `?tab=guide` never existed. The three
       real targets are `/about/what-this-is`, `/about/guide`, `/founders`. Read
       that amendment before building LD-5, exactly as with the Messages seam.
-21b. **THE WAYFARE SURFACES** (DESIGN_WAYFARE_ARCHITECTURE §5 LANE S) — its own
+21b. **THE WAYFARE SURFACES** (docs/DESIGN_FP_ARCH_WY.md §5 LANE S) — its own
     named sub-block beside the LD ladder: "WY surfaces: WY-0 (early opener —
     independent, buildable now) → WY-7 → WY-8 → WY-9 → WY-10 (serial;
     WY-10 additionally waits on engine WY-3/WY-4; WY-7/WY-8 require a quiet

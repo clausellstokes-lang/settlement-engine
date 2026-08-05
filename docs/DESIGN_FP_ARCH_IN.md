@@ -377,6 +377,11 @@ reason (the mirror reads records, not souls). Spine 14: read-only surface,
 recorded engine-only.
 
 ### IN-2 — THE LURE (`infoLureEnabled`)
+> ROUTED AT THE QUEUE FOLD (WY §5b item 8, 32cc17f7): the severity-durable
+> rumor-FIDELITY amendment (per-hop weathering, one multiplier) lives at
+> **WY-2** (docs/DESIGN_FP_ARCH_WY.md, flag `severityDurableRumorsEnabled`) —
+> IN waves that touch rumor tellings CONSUME that law, never re-implement it.
+
 As the volume with the J-INF-14 compliance channels VERBATIM (S22 — the
 restraint stands, degree-and-timing + misjudgment-refusal channels, both states
 pinned), re-scoped in one place:

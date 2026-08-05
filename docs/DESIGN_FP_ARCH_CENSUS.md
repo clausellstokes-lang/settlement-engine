@@ -230,8 +230,9 @@ route_band|routePositionBand`, `storesBand`, `trajectoryBand|populationTrendBand
 | `tierBand` | none. Every `src/` hit is the CONSUMER's declared input shape (`sovereigntyAppraisal.js`:228,287,297,306) or `rulingPower.js`'s unrelated private `tierBand(tier)` helper | **NOWHERE** |
 | `routeBand` | none. Every `src/` hit is the consumer's input shape (`sovereigntyAppraisal.js`:230,287,299,308) | **NOWHERE** |
 
-The war volume states the precondition; `docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md`:1616-1633,
-verbatim:
+The war volume states the precondition; `docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md`,
+the "**THE WR-10 LIGHTING PRECONDITION**" paragraph (navigate by heading — the
+hand-keyed :1616-1633 range rotted +17 at the queue fold), verbatim:
 
 > **THE WR-10 LIGHTING PRECONDITION (added 2026-08-04, chair ruling CR-WR10-H — closing a
 > dead-lighting trap in writing):** `sovereigntyTradeEnabled` lights only AFTER the belief

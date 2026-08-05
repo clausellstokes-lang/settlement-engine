@@ -2557,3 +2557,19 @@ family, one-line future-widening row; (3) the **war-chooser spy wiring**
 Every TUNING BAND in both volumes stays RAW-AUTHORED until owner-signed per THE
 PROMISE; none enters `proposedSoakBands` at this fold. Nothing here is lit,
 nothing is soaked, nothing is pushed.
+
+**FOLD SWEEP (chair, same fold era, one commit):** the landing verifier's
+three low findings + the one open obligation, closed: the SOL_QUEUE 21b
+pointer repointed to docs/DESIGN_FP_ARCH_WY.md (the last pre-promotion
+draft-name in docs/); the WY header stamp parenthetical struck (ES-form);
+DESIGN_FP_ARCH_IN.md gained the routed WY-2 fidelity line (fold obligation
+7, WY §5b item 8 — discharged); the CENSUS.md WR-10-precondition citation
+re-anchored by HEADING (the hand-keyed :1616-1633 range rotted +17 — the
+recorded line-address-rot class, realized exactly as ANOMALY A15
+predicted). RECEIPT CORRECTION, recorded not amended: d789f9f5's message
+claims the stale "eight programs" spelling is at zero; ONE scoped
+historical survivor stands at the parent's refutation-census sentence
+(":195, 45 premises across the eight programs" — a deliberate non-edit;
+the commit-message receipt overstated). SR-5 stands recorded in the fold
+row above: 2l's resists-more premise is INVERTED by a deliberately better
+mechanism — never "fix" it backward.
