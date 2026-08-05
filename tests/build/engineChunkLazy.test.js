@@ -27,8 +27,8 @@
 
 import { describe, it, expect } from 'vitest';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { resolve, join } from 'node:path';
-import viteConfig from '../../vite.config.js';
+import { resolve, join, dirname, relative } from 'node:path';
+import viteConfig, { ENGINE_SHARED_DOMAIN_EXCISIONS } from '../../vite.config.js';
 
 const distDir = resolve(process.cwd(), 'dist');
 const assetsDir = join(distDir, 'assets');
@@ -146,6 +146,113 @@ describe('engine chunk — modulePreload filter contract', () => {
     const kept = filtered();
     expect(kept).toContain(KERNEL);
     expect(kept).toContain(LAZY_ENGINE_CORE);
+  });
+});
+
+// ── The orphan-excision guard (FP-G17, 2026-08-05; needs no build) ──────────
+// vite.config.js excises modules from the derived ENGINE_SHARED_DOMAIN on ONE
+// premise: "no first-paint module reaches this file". Excision alone does not
+// place a module — an excised-and-UNPINNED module is an ORPHAN, and Rollup
+// co-locates orphans into the big lazy `engine` chunk. That is harmless while
+// the premise holds and catastrophic the moment it stops: an EAGER importer of
+// a module living in the engine chunk re-parents the WHOLE chunk (and, hoisted
+// behind it, custom-registry / custom-schema / engine-core-lazy / data-lazy)
+// into first paint. That is exactly what WR-7b did to resolveTerrain.js by
+// adding one static edge in worldPulse, two days before any gate read a dist.
+//
+// This guard is the SOURCE-level early warning the class was missing: it runs
+// in plain `npm test`, before any build, and it names the file. It mirrors
+// NOTHING — the excision list is imported from the config, and the pin is read
+// by EXECUTING the shipped manualChunks. Its boundary is honest: it proves an
+// eager-reachable excision is PLACED, not that its chunk is first-paint-safe
+// (an excision pinned to a lazy chunk is caught by the dist closure guards in
+// this file and vendorPdfLazy.test.js).
+describe('engine chunk — no first-paint-reachable excision is left unpinned', () => {
+  const ROOT = process.cwd();
+  const SRC = resolve(ROOT, 'src');
+
+  const strip = code =>
+    code.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+
+  // Static edges only: `[^'"()]` keeps dynamic `import(...)` out of the
+  // `from`-clause match, so a dynamic import stays a lazy boundary — the same
+  // spelling vite.config.js's own eager-graph derivation uses.
+  function staticSpecifiers(file) {
+    const code = strip(readFileSync(file, 'utf8'));
+    const out = new Set();
+    for (const m of code.matchAll(
+      /(?:^|[^.\w])import\s+(?:[^'"()]*?\sfrom\s+)?['"]([^'"]+)['"]/g,
+    )) out.add(m[1]);
+    for (const m of code.matchAll(
+      /(?:^|[^.\w])export\s+[^'"]*?\sfrom\s+['"]([^'"]+)['"]/g,
+    )) out.add(m[1]);
+    return [...out];
+  }
+
+  function resolveRelative(from, specifier) {
+    if (!specifier.startsWith('.')) return null;
+    const base = resolve(dirname(from), specifier);
+    for (const candidate of [
+      base, `${base}.js`, `${base}.jsx`,
+      join(base, 'index.js'), join(base, 'index.jsx'),
+    ]) if (existsSync(candidate) && statSync(candidate).isFile()) return candidate;
+    return null;
+  }
+
+  function eagerSourceGraph() {
+    const entry = resolve(SRC, 'main.jsx');
+    const seen = new Set([entry]);
+    const queue = [entry];
+    while (queue.length > 0) {
+      const file = queue.shift();
+      for (const specifier of staticSpecifiers(file)) {
+        const dependency = resolveRelative(file, specifier);
+        if (!dependency || seen.has(dependency)) continue;
+        seen.add(dependency);
+        queue.push(dependency);
+      }
+    }
+    return seen;
+  }
+
+  const graph = eagerSourceGraph();
+  const reachable = ENGINE_SHARED_DOMAIN_EXCISIONS
+    .filter(frag => graph.has(join(ROOT, frag.slice(1))));
+
+  // ANTI-VACUITY. Both halves can go silently empty: a broken resolver would
+  // give an empty graph, and a premise that held for every excision would give
+  // an empty reachable set — either would make the assertion below prove
+  // nothing. Anchor on a module that IS eager, and require the guard to have
+  // real work to do (deterministicSort + contentFingerprint are eager by
+  // design, pinned to content-identity, so this cannot go empty by accident).
+  it('the derivation is not vacuous (real graph, at least one reachable excision)', () => {
+    expect(graph.has(resolve(SRC, 'store/index.js'))).toBe(true);
+    expect(graph.size).toBeGreaterThan(100);
+    expect(
+      reachable,
+      'no excision is first-paint reachable — the guard below would prove nothing',
+    ).not.toHaveLength(0);
+  });
+
+  it('every excised module the first paint reaches is PLACED by manualChunks', () => {
+    const { manualChunks } = viteConfig.build.rollupOptions.output;
+    const orphans = reachable.filter(frag => !manualChunks(join(ROOT, frag.slice(1))));
+    expect(
+      orphans,
+      `first-paint-reachable but UNPINNED (Rollup co-locates these into the lazy `
+      + `engine chunk, which an eager importer then drags into first paint):\n  `
+      + `${orphans.join('\n  ')}\nEither pin the module in vite.config.js's `
+      + `manualChunks, or drop it from ENGINE_SHARED_DOMAIN_EXCISIONS so the `
+      + `derived engine-core membership places it.`,
+    ).toEqual([]);
+  });
+
+  it('reports the excisions whose lazy premise still holds (documentation, not a gate)', () => {
+    const unreached = ENGINE_SHARED_DOMAIN_EXCISIONS.filter(f => !reachable.includes(f));
+    // Not an assertion about WHICH — only that the two halves partition the
+    // list, so a fragment can never fall out of both and escape the guard.
+    expect(unreached.length + reachable.length).toBe(ENGINE_SHARED_DOMAIN_EXCISIONS.length);
+    expect(relative(ROOT, SRC)).toBe('src');
   });
 });
 

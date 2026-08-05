@@ -147,11 +147,33 @@ const ENGINE_SHARED_DOMAIN = computeEngineSharedDomain();
 // (the FP-G11 formatNumber incident), which would make the two lazy UI surfaces
 // fetch the whole generation engine to read a culture paragraph.
 // @guarded-by tests/build/vendorPdfLazy.test.js (the first-paint byte budget).
-for (const frag of [
+// FP-G17 (2026-08-05, THE ORPHAN REVERSAL): resolveTerrain.js LEAVES this list.
+// Every excision on it rests on ONE premise — "no first-paint module reaches
+// this file" — and the war lane falsified that premise for resolveTerrain.js
+// without touching a line of it. WR-7b (e51ec17e, 2026-08-03) added the single
+// static edge worldPulse/envoyErrand.js -> worldPulse/negotiationPictures.js;
+// envoyErrand was already eager (campaignSlice -> worldState -> envoyErrand),
+// so that one edge pulled the whole peace/war family into the entry's static
+// graph — the eager worldPulse count went 25 -> 99 at that commit and 140 at
+// HEAD — and with it BOTH terrain readers: warReasons.js ->
+// demographicsRates.js -> resolveTerrain.js, and pressureModel.js ->
+// seasons.js -> resolveTerrain.js. Excised-but-UNPINNED, resolveTerrain was an
+// ORPHAN, so Rollup co-located it into the big lazy `engine` chunk (exactly the
+// FP-G11 formatNumber incident the note above warns about) — and an EAGER
+// importer of a module living in the lazy engine chunk re-parents that whole
+// chunk into first paint. MEASURED at HEAD before this line moved: the entry
+// closure carried engine (677,266 B) and, hoisted behind it, custom-registry,
+// custom-schema, engine-core-lazy and data-lazy (493,264 B, the culture corpus)
+// — 2,921,541 B against a 1,040,000 B budget. resolveTerrain.js is a 63-line
+// ZERO-IMPORT pure leaf that three generators already import, so the derived
+// ESD membership it is being given back is the correct home: it rides eager
+// engine-core (~1.5 kB) and drags nothing with it.
+// @guarded-by tests/build/engineChunkLazy.test.js — "no first-paint-reachable
+//   excision is left unpinned", the executed guard for this whole class.
+export const ENGINE_SHARED_DOMAIN_EXCISIONS = [
   '/src/domain/cultureProfiles.js',
   '/src/domain/customCategories.js',
   '/src/domain/magicFilter.js',
-  '/src/domain/resolveTerrain.js',
   '/src/domain/region/foldTradeCategories.js',
   '/src/domain/settlement.schema.js',
   '/src/domain/formatNumber.js',
@@ -165,7 +187,8 @@ for (const frag of [
   '/src/domain/priorityBands.js',
   '/src/domain/townMap/glyphAssign.js',
   '/src/domain/townScene/customBuildingPresentation.js',
-]) ENGINE_SHARED_DOMAIN.delete(frag);
+];
+for (const frag of ENGINE_SHARED_DOMAIN_EXCISIONS) ENGINE_SHARED_DOMAIN.delete(frag);
 const isEngineSharedDomain = (id) => {
   for (const frag of ENGINE_SHARED_DOMAIN) if (id.includes(frag)) return true;
   return false;
