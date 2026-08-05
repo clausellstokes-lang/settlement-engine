@@ -533,7 +533,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
   Object.freeze({
     rule: 'warTerminationEnabled',
     title: 'War termination and comparative-cost read',
-    module: 'src/domain/certification/couplingRegistry.js,src/domain/worldPulse/warCosts.js,src/domain/worldPulse/warCostsNews.js,src/domain/worldPulse/warTermination.js,src/domain/worldPulse/warSeatBooks.js,src/domain/worldPulse/warPeaceDecision.js,src/domain/worldPulse/warPeaceRefusal.js,src/domain/worldPulse/warPoliticalLoop.js,src/domain/worldPulse/warRulingsEvidence.js,src/domain/worldPulse/warRulingsNews.js,src/domain/worldPulse/npcLadderKernel.js,src/domain/worldPulse/eventProse.js',
+    module: 'src/domain/certification/couplingRegistry.js,src/domain/certification/couplingRegistryWar.js,src/domain/worldPulse/warCosts.js,src/domain/worldPulse/warCostsNews.js,src/domain/worldPulse/warTermination.js,src/domain/worldPulse/warSeatBooks.js,src/domain/worldPulse/warPeaceDecision.js,src/domain/worldPulse/warPeaceRefusal.js,src/domain/worldPulse/warPoliticalLoop.js,src/domain/worldPulse/warRulingsEvidence.js,src/domain/worldPulse/warRulingsNews.js,src/domain/worldPulse/npcLadderKernel.js,src/domain/worldPulse/eventProse.js',
     aliveness: Object.freeze({
       // DELIBERATELY EMPTY. WR-1, WR-4 and WR-5 share one pulse-record receipt for each
       // valid surviving deployment and store no parallel termination/cost ledger.
@@ -615,7 +615,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
   Object.freeze({
     rule: 'lineageClaimEnabled',
     title: 'Lineage claim and kinship mirror',
-    module: 'src/domain/certification/couplingRegistry.js,src/domain/worldPulse/lineageClaim.js,src/domain/worldPulse/lineageNews.js,src/domain/worldPulse/warReasons.js,src/domain/worldPulse/peaceReasons.js,src/domain/worldPulse/eventProse.js',
+    module: 'src/domain/certification/couplingRegistry.js,src/domain/certification/couplingRegistryWar.js,src/domain/worldPulse/lineageClaim.js,src/domain/worldPulse/lineageNews.js,src/domain/worldPulse/warReasons.js,src/domain/worldPulse/peaceReasons.js,src/domain/worldPulse/eventProse.js',
     aliveness: Object.freeze({
       // DELIBERATELY EMPTY. WR-3's five governed kinds are Wizard News
       // presentation receipts, not selected behavioral outcomes, and the
@@ -653,7 +653,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
   Object.freeze({
     rule: 'coalitionLedgerEnabled',
     title: 'Coalition graph, expenditure, and pairwise settlement',
-    module: 'src/domain/certification/couplingRegistry.js,src/domain/worldPulse/warCoalitionGraph.js,src/domain/worldPulse/warAllianceRisk.js,src/domain/worldPulse/warCoalitionDecision.js,src/domain/worldPulse/warCoalitionLedger.js,src/domain/worldPulse/warCoalitionExpenditure.js,src/domain/worldPulse/warCoalitionSettlement.js,src/domain/worldPulse/warCoalitionEvidence.js,src/domain/worldPulse/warCoalitionNews.js,src/domain/worldPulse/warCoalitionPulse.js,src/domain/worldPulse/warDeployment.js,src/domain/worldPulse/warPeaceDecision.js,src/domain/worldPulse/peaceTerms.js,src/domain/worldPulse/peaceReasons.js,src/domain/worldPulse/relationshipEvolution.js,src/domain/worldPulse/eventProse.js',
+    module: 'src/domain/certification/couplingRegistry.js,src/domain/certification/couplingRegistryWar.js,src/domain/worldPulse/warCoalitionGraph.js,src/domain/worldPulse/warAllianceRisk.js,src/domain/worldPulse/warCoalitionDecision.js,src/domain/worldPulse/warCoalitionLedger.js,src/domain/worldPulse/warCoalitionExpenditure.js,src/domain/worldPulse/warCoalitionSettlement.js,src/domain/worldPulse/warCoalitionEvidence.js,src/domain/worldPulse/warCoalitionNews.js,src/domain/worldPulse/warCoalitionPulse.js,src/domain/worldPulse/warDeployment.js,src/domain/worldPulse/warPeaceDecision.js,src/domain/worldPulse/peaceTerms.js,src/domain/worldPulse/peaceReasons.js,src/domain/worldPulse/relationshipEvolution.js,src/domain/worldPulse/eventProse.js',
     aliveness: Object.freeze({
       // DELIBERATELY EMPTY. `joinLedger` is nested inside the parent war
       // deployment container, while alliance-obligation reasons live in shared
@@ -702,7 +702,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
   Object.freeze({
     rule: 'envoyDiplomacyEnabled',
     title: 'Durable peace envoys and carried terms',
-    module: 'src/domain/certification/couplingRegistry.js,src/domain/spatial/armyTransit.js,src/domain/worldPulse/applyWorldPulse.js,src/domain/worldPulse/armyTransitKernel.js,src/domain/worldPulse/beliefMap.js,src/domain/worldPulse/brokerageServicesPlant.js,src/domain/worldPulse/candidateEvents.js,src/domain/worldPulse/envoyDiplomacy.js,src/domain/worldPulse/envoyEncounter.js,src/domain/worldPulse/envoyErrand.js,src/domain/worldPulse/envoyNews.js,src/domain/worldPulse/envoyPulse.js,src/domain/worldPulse/eventProse.js,src/domain/worldPulse/foreignGuestHold.js,src/domain/worldPulse/informationStatecraft.js,src/domain/worldPulse/namedPersonTransit.js,src/domain/worldPulse/negotiationPictures.js,src/domain/worldPulse/npcDmVerbs.js,src/domain/worldPulse/peaceTerms.js,src/domain/worldPulse/pulseKernel.js,src/domain/worldPulse/roadsKernel.js,src/domain/worldPulse/worldState.js',
+    module: 'src/domain/certification/couplingRegistry.js,src/domain/certification/couplingRegistryWar.js,src/domain/spatial/armyTransit.js,src/domain/worldPulse/applyWorldPulse.js,src/domain/worldPulse/armyTransitKernel.js,src/domain/worldPulse/beliefMap.js,src/domain/worldPulse/brokerageServicesPlant.js,src/domain/worldPulse/candidateEvents.js,src/domain/worldPulse/envoyDiplomacy.js,src/domain/worldPulse/envoyEncounter.js,src/domain/worldPulse/envoyErrand.js,src/domain/worldPulse/envoyNews.js,src/domain/worldPulse/envoyPulse.js,src/domain/worldPulse/eventProse.js,src/domain/worldPulse/foreignGuestHold.js,src/domain/worldPulse/informationStatecraft.js,src/domain/worldPulse/namedPersonTransit.js,src/domain/worldPulse/negotiationPictures.js,src/domain/worldPulse/npcDmVerbs.js,src/domain/worldPulse/peaceTerms.js,src/domain/worldPulse/pulseKernel.js,src/domain/worldPulse/roadsKernel.js,src/domain/worldPulse/worldState.js',
     aliveness: Object.freeze({
       // DELIBERATELY EMPTY. `worldState.envoyErrands` is an exclusive persisted
       // substrate, but the v5 state-key census records only presence/max size: it

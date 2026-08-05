@@ -38,6 +38,21 @@ import {
   couplingRowsFor,
 } from '../../src/domain/certification/couplingRegistry.js';
 
+/**
+ * The nine chartered volume prefixes (DESIGN_FP_ARCHITECTURE.md §5 wave #2 /
+ * CW seam SC-7). A tenth volume must amend BOTH this list and the wave block.
+ */
+const CHARTERED_VOLUME_PREFIXES = Object.freeze(['WR', 'TR', 'GR', 'WF', 'POP', 'IN', 'INT', 'SP', 'CW']);
+
+/**
+ * `CPL-<pair>.<DIRECTION>.<VOLUME>-<wave>[letter].<facet>`, built FROM the list
+ * above so the closed set has exactly one spelling. A hand-copied alternation
+ * beside the list would be one edit away from disagreeing with it silently.
+ */
+const COUPLING_ID_SHAPE = new RegExp(
+  `^CPL-\\d+\\.[A-Z_]+\\.(?:${CHARTERED_VOLUME_PREFIXES.join('|')})-\\d+[a-z]?\\.[a-z_]+$`,
+);
+
 describe('CW-0 coupling registry', () => {
   test('schema v2 preserves prior waves and appends later waves in decision-flow order', () => {
     expect(COUPLING_REGISTRY_SCHEMA_VERSION).toBe(2);
@@ -296,8 +311,46 @@ describe('CW-0 coupling registry', () => {
       .toBe(COUPLING_REGISTRY.length);
     for (const row of COUPLING_REGISTRY) {
       expect(Object.keys(row).sort(), row.couplingId).toEqual(expectedKeys);
-      expect(row.couplingId).toMatch(/^CPL-\d+\.[A-Z_]+\.WR-\d+\.[a-z_]+$/);
+      expect(row.couplingId).toMatch(COUPLING_ID_SHAPE);
     }
+  });
+
+  // CW-0w slice 1 / seam SC-7. The shape pin used to hard-code the WR- wave
+  // prefix, so the FIRST non-WAR registry row would have RED this file — the
+  // growth path the whole FP program depends on was locked at its own gate.
+  // The alternation is deliberately CLOSED: a tenth volume prefix reds here
+  // until it is consciously admitted, which is the tripwire, not a nuisance.
+  describe('the couplingId shape admits every chartered volume prefix and no other', () => {
+    const SYNTHETIC = (prefix) => `CPL-1.TRADE_TO_WAR.${prefix}-1.synthetic_row`;
+
+    test('all nine chartered volume prefixes pass, including the INT/IN pair', () => {
+      // INT and IN share a leading two characters; both are asserted so the
+      // alternation's ORDER can never silently swallow the longer one.
+      expect(CHARTERED_VOLUME_PREFIXES)
+        .toEqual(['WR', 'TR', 'GR', 'WF', 'POP', 'IN', 'INT', 'SP', 'CW']);
+      for (const prefix of CHARTERED_VOLUME_PREFIXES) {
+        expect(SYNTHETIC(prefix), prefix).toMatch(COUPLING_ID_SHAPE);
+      }
+      // A lettered wave (WR-7a) is a real spelling in this estate.
+      expect('CPL-5.WAR_TO_GRAMMAR.WR-7a.lettered_wave').toMatch(COUPLING_ID_SHAPE);
+    });
+
+    test('an unlisted prefix and the malformed shapes are refused', () => {
+      // The live registry is non-empty and every live row passes, so this
+      // negative cannot be green because the pin stopped seeing ids.
+      expect(COUPLING_REGISTRY.length).toBeGreaterThan(0);
+      for (const row of COUPLING_REGISTRY) expect(row.couplingId).toMatch(COUPLING_ID_SHAPE);
+      expect(SYNTHETIC('TR')).toMatch(COUPLING_ID_SHAPE);
+      // Each refusal below differs from that PASSING id by exactly one element.
+      // anchored: the same SYNTHETIC builder passes two lines up, so a shape that had stopped matching anything reds there first.
+      expect(SYNTHETIC('XX')).not.toMatch(COUPLING_ID_SHAPE);
+      // anchored: the wave number is the only difference from the WR- ids every live row above just matched.
+      expect('CPL-1.TRADE_TO_WAR.WR.no_wave_number').not.toMatch(COUPLING_ID_SHAPE);
+      // anchored: same builder shape with a capitalised facet; its lower_snake twin passes two assertions up.
+      expect('CPL-1.TRADE_TO_WAR.TR-1.Synthetic_Row').not.toMatch(COUPLING_ID_SHAPE);
+      // anchored: valid tail, missing only the CPL- pair head that the live-row loop above just re-proved.
+      expect('TRADE_TO_WAR.TR-1.synthetic_row').not.toMatch(COUPLING_ID_SHAPE);
+    });
   });
 
   test('multi-row lookup preserves the legacy first-row result and fails closed', () => {

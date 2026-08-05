@@ -534,6 +534,7 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     expect(row.expectedTempo).toBe('per_tick');
     expect(row.module.split(',')).toEqual(expect.arrayContaining([
       'src/domain/certification/couplingRegistry.js',
+      'src/domain/certification/couplingRegistryWar.js',
       'src/domain/worldPulse/warCosts.js',
       'src/domain/worldPulse/warCostsNews.js',
       'src/domain/worldPulse/warTermination.js',
@@ -653,6 +654,7 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     expect(row.expectedTempo).toBe('per_tick');
     expect(row.module.split(',')).toEqual(expect.arrayContaining([
       'src/domain/certification/couplingRegistry.js',
+      'src/domain/certification/couplingRegistryWar.js',
       'src/domain/worldPulse/lineageClaim.js',
       'src/domain/worldPulse/warReasons.js',
       'src/domain/worldPulse/peaceReasons.js',
@@ -681,6 +683,7 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     expect(row.expectedTempo).toBe('reactive');
     expect(row.module.split(',')).toEqual(expect.arrayContaining([
       'src/domain/certification/couplingRegistry.js',
+      'src/domain/certification/couplingRegistryWar.js',
       'src/domain/worldPulse/warCoalitionGraph.js',
       'src/domain/worldPulse/warAllianceRisk.js',
       'src/domain/worldPulse/warCoalitionDecision.js',
@@ -746,6 +749,7 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     expect(row.expectedTempo).toBe('reactive');
     expect(row.module.split(',')).toEqual(expect.arrayContaining([
       'src/domain/certification/couplingRegistry.js',
+      'src/domain/certification/couplingRegistryWar.js',
       'src/domain/spatial/armyTransit.js',
       'src/domain/worldPulse/applyWorldPulse.js',
       'src/domain/worldPulse/armyTransitKernel.js',

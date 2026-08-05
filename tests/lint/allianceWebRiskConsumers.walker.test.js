@@ -54,9 +54,17 @@ const ALLOWED_CONSUMERS = Object.freeze([
  * Registry / certification modules that merely NAME the symbol in a string (the
  * coupling registry records it as a read address). They are not consumers and
  * must be excluded by an explicit list rather than by a loose pattern.
+ *
+ * CW-0w slice 1 split the registry's rows into per-volume leaves; WR-6's
+ * alliance-risk row — and therefore the read address string — now lives in
+ * couplingRegistryWar.js. The head is retained here because a future row leaf
+ * or head comment may name the read again, and an exclusion list that silently
+ * shrank would be one relocation away from re-arming this census against a
+ * registry file.
  */
 const NAME_ONLY = Object.freeze([
   'src/domain/certification/couplingRegistry.js',
+  'src/domain/certification/couplingRegistryWar.js',
 ]);
 
 function walk(dir, out = []) {
