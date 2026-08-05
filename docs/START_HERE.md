@@ -23,6 +23,77 @@ classes are owner-only (push→already authorized as backup; PR-merge, deploys,
    + THE_BASE_RESTORATION_LEDGER.md (Phase-D gate: zero PENDING rows),
    DESIGN_DEEP_CRAFT_PAGES.md, C1FIN_CONTROL_CENSUS.md (briefs/).
 
+## 3g. ⭐⭐ SNAPSHOT REFRESH 2026-08-05 (~05:30 EDT — CYCLE 1 CLOSED, THE FOLD IN FLIGHT; supersedes §3f and everything below; git wins)
+Same machine ⇒ the §6 memory dir survives and is CURRENT (read its index
+second; the freshest hazards live there). Build lives in minifold
+(.claude/worktrees/minifold, claude/composite-r4, NOTHING pushed). Session
+of record: c44e5d99 (workflow journals + scratchpad under its project dir).
+- **FP BUILD CYCLE 1 IS CLOSED IN FULL**: span 59df13a9..32cc17f7. Landing
+  93c118b6/caab995a/b441bca5/d1cfdb67 (TR-1 repair, GR-1, GR-0, premium
+  census row); close repairs 1137f935 (CR-FP-11 BOTH ARMS — LAYER_PATTERNS
+  reach + the 179-entry shrink-only UNLAYERED CENSUS; matched-pair control
+  flipped), f786df89 (the crossing pin now mints same-tick; mutant C2 reds
+  by name), 79bceff5 (CR-FP-1 — desk rule = authority-or-token, 7 rows
+  amended, THE FORBID + controls), 88150241 (CR-FP-2 re-record 404→413 —
+  ⚠ the ruling's stated CAUSE was REFUTED by measurement; the act executed
+  with the MEASURED cause declared in the commit body), 32cc17f7 (the
+  89-line cycle-close ledger row). Verifier chain PASS end-to-end; lint AND
+  domain failing-row diffs EMPTY both directions. Debts: TWO REACH_OWED
+  registry rows frozen in the inclusion walker (rows owed, not baselined).
+- **SEVENTEEN CHAIR RULINGS BANKED** (all vetoable, canonical text in the
+  fold workflow script + memory/fable-build-era-takeover.md): CR-FP-3..10
+  (the FP §11 eight), CR-ES-1..5 (the espionage five; ⚠ CR-ES-2 amends the
+  2026-07-19 anonymity header BOTH homes, BY-THE-ENGINE load-bearing),
+  CR-FP-11 (inclusion reach), CR-FP-12 (ES-0 early motion DECLINED — CQ2
+  set unchanged), CR-ES-6 (the WY encounter table admits the spy-dwell
+  FIFTEENTH row; registry unified, catch math per-resolver).
+- **THE INTEGRATION FOLD IS DRAFTED AND IN FINAL POLISH** (run
+  wf_3ab9cd44-602; package in c44e5d99 scratchpad fold-pass/ —
+  DESIGN_FP_ARCH_ES.md 1,653 lines + DESIGN_FP_ARCH_WY.md + composed
+  PARENT-DELTAS.md + QUEUE-AND-AMENDMENTS.md). Verdict arc: coh
+  NEEDS-REVISION (2 HIGH) → revise → recheck NEEDS-REVISION (6 narrow) →
+  polish+final RUNNING at write time. LANDING = task #34 (tree is FREE):
+  copy the two volumes into docs/ (stamp HEAD-AT-LANDING), apply the edit
+  pairs RE-VERIFYING every OLD anchor at land HEAD (the close lane
+  appended 89 ledger lines — anchors may have drifted), admit ES+WY as the
+  TENTH+ELEVENTH coupling prefixes per the walker-semantics answer,
+  EXECUTE the WY §5b item-10 census (or the commit is incomplete), the GR
+  erratum row (DESIGN_FP_ARCH_GR.md §3 item 1), the five-home three-member
+  lighting condition, byte-scans, pathspec commits, gates via check:tail.
+- **THE ADVANCE-EPOCH DIRECTIVE (owner, "extremely important")** —
+  memory/advance-epoch-living-futures-directive.md is LAW: every user
+  advance/reroll draws FRESH (recorded nonces ⇒ internal byte-exact
+  replay); the lived past immutable; seed = starting-world address; THE
+  PROMISE amends owner-signed. Architecture RUNNING (run wf_ec31fa7e-773:
+  4 censuses → architect → critic; draft lands in c44e5d99 scratchpad
+  epoch-arch/). Slots as its own small wave family at the next integration
+  point. ⚠ its ONE kernel seam (the stream-identity term) is chair-signed;
+  dark state must be BYTE-IDENTICAL including stream strings.
+- **CYCLE 2 RECON IS BANKED** (memory/cycle2-lighting-road-recon.md, run
+  wf_f4c426e7-c21): ⚠⚠ the SP doc's routePositionBand spelling is WRONG
+  (consumer reads routeBand — pin against the appraisal typedef + rename
+  mutant; correct the doc in the landing diff); the WR-9 lighting-order
+  row is a PHANTOM — cycle 2 BUILDS the instrument; SP-B strictly precedes
+  SP-B2 and is CQ5-BOUND (flag names bound by TR-1 forward refs;
+  outboundImpression pre-registered in two walkers); ES-1 gated on SP-D's
+  errandMint.js (unminted). Order: fold lands → SP-B (serialized) → SP-B2
+  + the lighting instrument (+ES-4 per its gates) → onward per §5.
+- **LAUNCH DECISION (owner)**: NO pre-launch post — the whole thing
+  completes first, then it speaks for itself. The launch-post skeleton +
+  r/rpg research + voice calibration are banked in
+  memory/owner-marketing-doctrine.md. "Complete" = the written endgame
+  tail (soak → tuning → ONE REGEN → walk), not a feeling.
+- **V5 PHOTOREAL**: unchanged — 13 4K generations await OWNER CULL; 2
+  sign-offs open (lettering grammar, seal ladder).
+- **RESUME (in order): (1)** cd minifold, git log/status, survey; **(2)**
+  read the wf_3ab9cd44-602 journal — if the fold is unlanded, land it per
+  task #34's obligations above; **(3)** read the wf_ec31fa7e-773 journal —
+  chair the epoch cohesion verdict (amend rounds as needed), then fold it
+  at the next integration point; **(4)** dispatch cycle 2 per the recon
+  charters; **(5)** the continuous-run order stands until usage exhausts →
+  §6b-2 succession with FULL authority. The §10 protocol + FP §1 laws bind
+  every lane. CHECK-GIT-FIRST.
+
 ## 3f. ⭐⭐ SNAPSHOT REFRESH 2026-08-05 (~00:30 EDT — THE FP-ERA HANDOFF; supersedes §3e and everything below; git wins)
 Written as the owner's 5-hour window closes, WORK IN FLIGHT. Same machine ⇒ the
 §6 memory dir survives and its index is CURRENT (read it second). Build lives in
