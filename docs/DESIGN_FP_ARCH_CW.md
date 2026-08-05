@@ -280,6 +280,33 @@ aspirational until this lands.
   IN-5's commit updates the registry row's intendedDesk in the same change
   (the same-commit obligation covers desk moves), and this walker stays green
   through the flip by construction.
+- **CR-FP-1 AMENDMENT (chair ruling, executed 2026-08-05) — THE DESK RULE IS**
+  **AUTHORITY-OR-TOKEN, NOT TOKEN-OUTPUT.** As landed, the walker's own header
+  recorded that the specced rule ("every row's kinds route to intendedDesk" via
+  SECTION_OF) was MEASURED FALSE for 7 of the 12 kind-carrying rows, while TEN
+  rows carried `intendedDesk: 'adjudication'` — a desk SECTION_OF can never
+  return. RULED: a rule falsified 7-of-12 is the wrong premise, not a rule with
+  exceptions. Adjudication is an AUTHORITY-ROUTED desk — the
+  `sovereignty_registry` precedent generalized: `heraldSectionOfRecord` honours
+  a governed `section` on any record carrying one of four closed
+  `sectionAuthority` values (war_rulings, war_coalition, envoy, sovereignty),
+  and files by token only as its last step. EXECUTED: schema v4 adds the
+  optional `deskAuthority`; the seven falsified rows name theirs
+  (`war_coalition_registry` ×2, `envoy_registry` ×5); the walker's rule becomes
+  "the desk must be reachable by the kind's explicit token route OR by the
+  governed kind registry of the authority the row names". The join is per-KIND,
+  not per-word — naming an authority that does not govern the kind buys nothing.
+  RESULT, measured: 9 pairs agree by token, 7 by authority, and the disputed
+  register shrinks 11 → 4 by a ruling rather than an edit to either side. The
+  four survivors are genuine row-vs-projector splits with no structural excuse
+  (WR-6.coalition_settlement/coalition_apportionment,
+  WR-6.pairwise_settlement/coalition_spoils_divided, and
+  WR-7.envoy_encounter's envoy_parlaying + envoy_held) and stay frozen and
+  shrink-only. The walker also gains THE FORBID: a row may not claim a desk
+  neither path can reach, with executed negative controls (unreachable desk
+  refused, wrong-authority refused, no-authority-adjudication refused, and the
+  reachable twins admitted so the refusals are not a predicate that says no to
+  everything).
 - NEW `tests/helpers/couplingReceiptSample.js` (~90): the shared
   receipt-field sampler — boots a REAL writer under locally-lit flags, walks a
   row's receiptField path expression against emitted receipts, seeded

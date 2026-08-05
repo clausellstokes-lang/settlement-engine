@@ -56,8 +56,8 @@ const COUPLING_ID_SHAPE = new RegExp(
 );
 
 describe('CW-0 coupling registry', () => {
-  test('schema v3 preserves prior waves and appends later waves in decision-flow order', () => {
-    expect(COUPLING_REGISTRY_SCHEMA_VERSION).toBe(3);
+  test('schema v4 preserves prior waves and appends later waves in decision-flow order', () => {
+    expect(COUPLING_REGISTRY_SCHEMA_VERSION).toBe(4);
     expect(WR4_WAR_COST_COUPLINGS).toEqual([
       WR4_TRADE_HOME_FRONT_COUPLING,
       WR4_HANDS_HOME_FRONT_COUPLING,
@@ -347,26 +347,41 @@ describe('CW-0 coupling registry', () => {
       'couplingId', 'pairId', 'direction', 'read', 'receiptField',
       'counterforce', 'flags', 'owningVolume', 'owningWave', 'intendedDesk',
     ].sort();
-    const withKinds = [...requiredKeys, 'kinds'].sort();
+    // v3's `kinds` and v4's `deskAuthority`. Absent, never empty — an empty array
+    // is a key and a key is a byte (T4) — so the closed shape is the required set
+    // plus exactly whichever optionals a row actually carries.
+    const OPTIONAL_KEYS = ['kinds', 'deskAuthority'];
+    /** The four closed record-layer authorities heraldSectionOfRecord honours. */
+    const REGISTERED_AUTHORITIES = [
+      'war_rulings_registry', 'war_coalition_registry', 'envoy_registry', 'sovereignty_registry',
+    ];
     expect(new Set(COUPLING_REGISTRY.map((row) => row.couplingId)).size)
       .toBe(COUPLING_REGISTRY.length);
     let declaring = 0;
+    let authored = 0;
     for (const row of COUPLING_REGISTRY) {
-      // v3's ONE optional field. Absent, never empty — an empty array is a key
-      // and a key is a byte (T4), so a row minting no Herald kind omits it.
       const keys = Object.keys(row).sort();
-      expect(keys, row.couplingId).toEqual('kinds' in row ? withKinds : requiredKeys);
+      const expected = [...requiredKeys, ...OPTIONAL_KEYS.filter((key) => key in row)].sort();
+      expect(keys, row.couplingId).toEqual(expected);
       if ('kinds' in row) {
         declaring += 1;
         expect(row.kinds.length, row.couplingId).toBeGreaterThan(0);
         expect(Object.isFrozen(row.kinds), row.couplingId).toBe(true);
       }
+      if ('deskAuthority' in row) {
+        authored += 1;
+        // A desk authority the record router does not honour would be a claim
+        // nothing can check — fail closed on the closed set, not on truthiness.
+        expect(REGISTERED_AUTHORITIES, row.couplingId).toContain(row.deskAuthority);
+      }
       expect(row.couplingId).toMatch(COUPLING_ID_SHAPE);
     }
-    // Non-empty floor: the optional field is proven OPTIONAL in both directions
-    // — some rows carry it, some do not — so neither arm above is vacuous.
+    // Non-empty floor: BOTH optional fields are proven OPTIONAL in both
+    // directions — some rows carry each, some do not — so no arm above is vacuous.
     expect(declaring).toBeGreaterThan(0);
     expect(declaring).toBeLessThan(COUPLING_REGISTRY.length);
+    expect(authored).toBeGreaterThan(0);
+    expect(authored).toBeLessThan(COUPLING_REGISTRY.length);
   });
 
   test('the kinds field survives the freeze factory as a frozen copy', () => {

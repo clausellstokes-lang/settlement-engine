@@ -26,7 +26,21 @@
  * receiptFields for undeclared kinds, so a row cannot dodge the join by simply
  * declining to declare one.
  */
-export const COUPLING_REGISTRY_SCHEMA_VERSION = 3;
+/**
+ * v4 (CR-FP-1) adds the OPTIONAL `deskAuthority` — the closed registry that files
+ * this coupling's kinds at the record layer. It exists because the desk rule was
+ * stated as "every row's kinds route to intendedDesk" through SECTION_OF, and
+ * SECTION_OF structurally never returns `adjudication`: measured, that rule was
+ * FALSE for 7 of the 12 kind-carrying rows while ten rows claimed the adjudication
+ * desk. The premise was the wrong lens. Adjudication is an AUTHORITY-ROUTED desk —
+ * `heraldSectionOfRecord` honours a governed `section` when the record carries one
+ * of four registered `sectionAuthority` values, which is the sovereignty_registry
+ * precedent generalized. A row naming its authority is therefore making a CHECKABLE
+ * claim: the authority's own governed kind registry says which desk the kind files
+ * at, and the walker joins the two. Absent, never empty, like `kinds` — a row whose
+ * desk its token already reaches names no authority.
+ */
+export const COUPLING_REGISTRY_SCHEMA_VERSION = 4;
 
 /**
  * @typedef {Object} CouplingRegistryRow
@@ -42,6 +56,9 @@ export const COUPLING_REGISTRY_SCHEMA_VERSION = 3;
  * @property {string} intendedDesk
  * @property {ReadonlyArray<string>} [kinds] Herald kinds this coupling mints,
  *   omitted entirely when it mints none.
+ * @property {string} [deskAuthority] The closed record-layer registry that files
+ *   this coupling's kinds (one of heraldRouting's four `sectionAuthority` values).
+ *   Omitted entirely when the row's desk is reachable from the kind token alone.
  */
 
 /**

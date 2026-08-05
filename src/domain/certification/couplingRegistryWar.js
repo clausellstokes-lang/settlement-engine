@@ -303,6 +303,7 @@ export const WR6_COALITION_SETTLEMENT_TRADE_COUPLING = couplingRow({
   owningVolume: 'WAR',
   owningWave: 'WR-6',
   intendedDesk: 'trade',
+  deskAuthority: 'war_coalition_registry',
   kinds: ['coalition_spoils_divided'],
 });
 
@@ -334,6 +335,7 @@ export const WR6_PAIRWISE_SETTLEMENT_COUPLING = couplingRow({
   owningVolume: 'WAR',
   owningWave: 'WR-6',
   intendedDesk: 'adjudication',
+  deskAuthority: 'war_coalition_registry',
 });
 
 /** The seven WR-6 cross-layer reads, in call-to-settlement order. */
@@ -370,6 +372,7 @@ export const WR7_PEACE_DISPATCH_COUPLING = couplingRow({
   owningVolume: 'WAR',
   owningWave: 'WR-7',
   intendedDesk: 'adjudication',
+  deskAuthority: 'envoy_registry',
 });
 
 /** WR-7a / CPL-5. Only the exact persisted errand in its home state can carry
@@ -386,6 +389,7 @@ export const WR7_HOME_DELIVERY_COUPLING = couplingRow({
   owningVolume: 'WAR',
   owningWave: 'WR-7',
   intendedDesk: 'adjudication',
+  deskAuthority: 'envoy_registry',
 });
 
 /** WR-7a / CPL-19. A moving envoy may alter its closed departure picture only
@@ -435,6 +439,7 @@ export const WR7_ENCOUNTER_COUPLING = couplingRow({
   owningVolume: 'WAR',
   owningWave: 'WR-7',
   intendedDesk: 'war',
+  deskAuthority: 'envoy_registry',
   kinds: ['envoy_intercepted', 'interceptor_dilemma'],
 });
 
@@ -452,6 +457,7 @@ export const WR7_SELF_PARLAY_COUPLING = couplingRow({
   owningVolume: 'WAR',
   owningWave: 'WR-7',
   intendedDesk: 'adjudication',
+  deskAuthority: 'envoy_registry',
 });
 
 /** WR-7b / CPL-5. Each party drafts once from its own complete carried picture;
@@ -467,6 +473,7 @@ export const WR7_TWO_PICTURE_PARLAY_COUPLING = couplingRow({
   owningVolume: 'WAR',
   owningWave: 'WR-7',
   intendedDesk: 'adjudication',
+  deskAuthority: 'envoy_registry',
 });
 
 /** WR-7b / CPL-5. Home arrival turns the exact carried sheet into authoritative
