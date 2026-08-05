@@ -712,17 +712,18 @@ export const WAVE_PENDING_RULE_KEYS = Object.freeze([
   // they fail in one direction, so they certify together. The partition stays exact, so
   // this is a move, never a gap, and this lane's coverage gap was empty until TR-1.
   //
-  // casusCommerciiEnabled JOINED 2026-08-04 with FP wave TR-1, and it is a DECLARED
-  // PENDING ENTRY BY RULING, not by omission. The TR architecture's Q4 recommendation
-  // (DESIGN_FP_ARCH_TR.md §6) is that each TRADE wave lands its flag PENDING in the same
-  // commit as its first gate read and TR-9 converts all eight to real rows at once, so
-  // certification tracks reality instead of preceding it — the WW-A precedent applied
-  // forward. Writing a row here today would have to declare every aliveness channel
-  // DELIBERATELY EMPTY: TR-1 is a DARK INSTRUMENT with no kernel mount, so it mints no
-  // candidateType, authors no mover beat the receipt can see, and writes
-  // spatialLedgers.commercialReasons only when something drives it. TR-9 lands the row
-  // when there is a lit lane for it to grade. The lane is pinned meanwhile where its
-  // bodies are readable: tests/domain/commercialReasons.test.js and
-  // tests/property/casusCommerciiDormancyFence.test.js.
-  'casusCommerciiEnabled',
+  // casusCommerciiEnabled joined this list on 2026-08-04 with FP wave TR-1 and LEFT IT
+  // THE SAME DAY, converted to an authored row in subsystemRowsVirtual.js beside the
+  // other engine-gated virtual keys. The conversion was forced by the shared law rather
+  // than chosen: the wave landed the key in ENGINE_GATED_VIRTUAL_RULE_KEYS, which is
+  // what puts a virtual key into the census at all, and the virtual lane's own contract
+  // (tests/domain/subsystemRowsVirtual.test.js) then asserts every manifested key
+  // carries a row AND appears in no pending list anywhere. "Manifested in the virtual
+  // lane, pending in the wave lane" is a shape this partition cannot hold, and the
+  // TR architecture's Q4 recommendation (DESIGN_FP_ARCH_TR.md §6, pending until TR-9
+  // converts all eight at once) is superseded for any TRADE flag that manifests. The
+  // row it now carries declares every aliveness channel DELIBERATELY EMPTY and says why
+  // in prose, which is the honest reading for a dark instrument with no mount. The
+  // partition stays exact, so this is a move, never a gap — and this lane's coverage
+  // gap is empty again.
 ]);

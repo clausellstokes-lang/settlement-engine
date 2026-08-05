@@ -54,7 +54,16 @@ const RUMORS = 'migrationRumorsEnabled';
 // least the shape of a container, while a conveyance rewrites three containers it does
 // not own and adds none, which is why its aliveness channels are empty on purpose.
 const SOVEREIGNTY = 'sovereigntyTradeEnabled';
-const VIRTUAL_RULES = Object.freeze([AXES, CONQUEST, STATECRAFT, RUMORS, SOVEREIGNTY]);
+// Joined 2026-08-04 by FP wave TR-1, and CONVERTED FROM A WAVE PENDING ENTRY to an
+// authored row by the cycle-1 landing lane. The conversion is not bookkeeping: a key in
+// ENGINE_GATED_VIRTUAL_RULE_KEYS reaches the census, and the partition assertion below
+// then demands a row and refuses a pending entry anywhere, so "manifested here, pending
+// in the wave lane" is a shape this contract cannot hold. A FOURTH zero-key case, and the
+// only one whose emptiness is a MOUNT fact rather than a shape fact: the lane owns a real
+// single-writer container and nothing in src/ calls the writer, so a declared channel
+// would grade the row SILENT in every world instead of admitting that nothing has run.
+const CASUS = 'casusCommerciiEnabled';
+const VIRTUAL_RULES = Object.freeze([AXES, CONQUEST, STATECRAFT, RUMORS, SOVEREIGNTY, CASUS]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
 
@@ -76,6 +85,14 @@ const LANE_LEAVES = Object.freeze({
   [SOVEREIGNTY]: [
     'src/domain/worldPulse/sovereigntyTransfer.js',
     'src/domain/worldPulse/sovereigntyAssets.js',
+  ],
+  // The casus commercii's own leaves: the gate and its writer, and the projection that
+  // joins the typed evidence to the authored corpus. The taxonomy leaf beside them is a
+  // dependency-free table and the receipt pools are frozen prose; both mint nothing, so
+  // they stay out of the trace scope for the same reason the appraisal leaves do above.
+  [CASUS]: [
+    'src/domain/worldPulse/commercialReasons.js',
+    'src/domain/worldPulse/commercialReasonsNews.js',
   ],
 });
 

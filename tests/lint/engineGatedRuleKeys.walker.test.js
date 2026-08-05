@@ -24,6 +24,33 @@
  *      manifested), in the EXEMPT list, or in the measured BACKLOG. One-way
  *      coverage is the known failure mode of a hand-listed manifest: it would let a
  *      future engine-gated key hide again, which is the class this file closes.
+ *   3. MANIFEST CARRIES ITS ROW, AND IS PENDING NOWHERE — every manifest member is
+ *      authored in VIRTUAL_SUBSYSTEM_ROWS and appears in no lane's pending list.
+ *      See below: this is a narrower law than "a row or a pending entry", and the
+ *      difference is the entire defect.
+ *
+ * ⚠ DIRECTION 3 EXISTS BECAUSE THE ONE-COMMIT LAW HAD ONLY HALF A GUARD, AND THE
+ * MISSING HALF SHIPPED A RED. CR-WR10-C item 4 binds three things into one commit —
+ * the manifest entry, the first real gate read, and the certification row — and the
+ * paragraph at the bottom of this header has said so in prose since the ruling. Only
+ * the first two were ENFORCED here.
+ *
+ * MEASURE THE GAP EXACTLY, because the obvious reading of it is wrong. A manifested key
+ * with NO row and NO pending entry was never the hole: the census grows with the
+ * manifest, so subsystemCertificationTotality.walker reds that shape by name today
+ * (executed — deleting the casus row from a clean tree reds it with "uncertified rule
+ * keys: casusCommerciiEnabled" while THIS file stays green). The hole is the shape
+ * one lane further along: MANIFESTED, and its obligation PARKED as a declared pending
+ * entry in some other lane file. That partition is legal — so the totality walker
+ * passes — and it is simultaneously forbidden by the virtual lane's own contract, which
+ * asserts ENGINE_GATED_VIRTUAL_RULE_KEYS equals the authored virtual rows exactly and
+ * that no manifested key is pending anywhere. On 2026-08-04 FP wave TR-1 landed exactly
+ * that shape: manifest entry here, pending entry in subsystemRowsWaves.js. Both lint
+ * walkers passed; tests/domain/subsystemRowsVirtual.test.js — a DOMAIN suite the lane's
+ * isolation gate never enumerated — was red at HEAD. A guard that sits where lanes do
+ * not look is not a guard, so the audit below now measures the row half in the suite
+ * that told the lane its flag was legal, and it measures it as the virtual lane's
+ * contract states it rather than as the looser partition law.
  *
  * THE CAST IS A GATE. The dominant spelling in this estate is not the bare
  * `rules.<key> === true` but the JSDoc-cast form, a type-cast comment followed by
@@ -47,10 +74,16 @@
  *
  * TO COMPLY when this reds:
  *   - added a virtual gate for a NEW dark subsystem → add the key to
- *     ENGINE_GATED_VIRTUAL_RULE_KEYS (and author its certification row in the same
- *     commit — the totality walker demands it), or, if it is not a subsystem, add
- *     it to EXEMPT_RULE_KEYS with a written rationale. Never to the backlog: that
- *     list is a measured burn-down, not a parking space.
+ *     ENGINE_GATED_VIRTUAL_RULE_KEYS AND author its certification row in the same
+ *     commit (direction 3 below is what makes that structural rather than a good
+ *     intention), or, if it is not a subsystem, add it to EXEMPT_RULE_KEYS with a
+ *     written rationale. Never to the backlog: that list is a measured burn-down,
+ *     not a parking space.
+ *   - manifested a key and parked its row as a PENDING entry → there is no such
+ *     state. A pending entry is for a key the CENSUS already sees through a preset
+ *     or default declaration; a manifest entry is itself the thing that makes a
+ *     virtual key censusable, so manifesting is the act that comes due. Author the
+ *     row in subsystemRowsVirtual.js in the same commit, or do not manifest yet.
  *   - landed the first gate read for a PENDING_MANIFEST_KEYS member → move it into
  *     the manifest IN THE SAME COMMIT. That is CR-WR10-C item 4, and the assertion
  *     below is what makes the atomicity structural rather than a good intention.
@@ -68,8 +101,11 @@ import {
   SIMULATION_RULE_PRESETS,
 } from '../../src/domain/worldPulse/simulationRules.js';
 import {
-  SUBSYSTEM_CERTIFICATION_REGISTRY, simulationRuleKeys,
+  SUBSYSTEM_CERTIFICATION_PENDING_KEYS,
+  SUBSYSTEM_CERTIFICATION_REGISTRY,
+  simulationRuleKeys,
 } from '../../src/domain/certification/subsystemCertification.js';
+import { VIRTUAL_SUBSYSTEM_ROWS } from '../../src/domain/certification/subsystemRowsVirtual.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -241,6 +277,10 @@ export function scanGateReads(files) {
  * The two-way audit. Pure set arithmetic so the tests below can drive it with
  * synthetic inputs and prove it reds (guard the guard).
  *
+ * `virtualRows` and `certPending` are REQUIRED rather than defaulted: a caller that
+ * forgot them would silently disable direction 3, which is the same shape of
+ * blindness direction 3 exists to remove. Omitting them throws.
+ *
  * @param {{
  *   reads: ReadonlyArray<string>,
  *   manifest: ReadonlyArray<string>,
@@ -248,9 +288,17 @@ export function scanGateReads(files) {
  *   exempt: ReadonlyArray<string>,
  *   backlog: ReadonlyArray<string>,
  *   pending: ReadonlyArray<string>,
+ *   virtualRows: ReadonlyArray<string>,
+ *   certPending: ReadonlyArray<string>,
  * }} input
  */
-export function auditEngineGatedKeys({ reads, manifest, census, exempt, backlog, pending }) {
+export function auditEngineGatedKeys({
+  reads, manifest, census, exempt, backlog, pending, virtualRows, certPending,
+}) {
+  if (!Array.isArray(virtualRows) || !Array.isArray(certPending)) {
+    throw new TypeError('auditEngineGatedKeys: virtualRows and certPending are required '
+      + '(CR-WR10-C item 4 direction 3 — a manifest entry without its certification row)');
+  }
   const sorted = (list) => [...list].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0));
   const readSet = new Set(reads);
   const censusSet = new Set(census);
@@ -269,16 +317,29 @@ export function auditEngineGatedKeys({ reads, manifest, census, exempt, backlog,
   // CR-WR10-C item 4: a pending key that is now gated must join the manifest in the
   // SAME commit as its first gate read.
   const pendingAlreadyRead = sorted(pending.filter((key) => readSet.has(key)));
+  // DIRECTION 3, the row half of the same one-commit law, stated as the virtual lane's
+  // own contract states it. A manifest entry is what puts a virtual key INTO the
+  // certification census, so manifesting IS the act that comes due: the key owes an
+  // authored row in VIRTUAL_SUBSYSTEM_ROWS, and it may not stand in any lane's pending
+  // list. The second half is the one the totality partition cannot see — "manifested
+  // here, pending over there" satisfies the partition and breaks the virtual contract.
+  const virtualRowSet = new Set(virtualRows);
+  const certPendingSet = new Set(certPending);
+  const manifestWithoutRow = sorted(manifest.filter((key) => !virtualRowSet.has(key)));
+  const manifestStillPending = sorted(manifest.filter((key) => certPendingSet.has(key)));
   return {
     ok: manifestWithoutRead.length === 0 && unaccountedReads.length === 0
       && staleExempt.length === 0 && staleBacklog.length === 0
-      && backlogInCensus.length === 0 && pendingAlreadyRead.length === 0,
+      && backlogInCensus.length === 0 && pendingAlreadyRead.length === 0
+      && manifestWithoutRow.length === 0 && manifestStillPending.length === 0,
     manifestWithoutRead,
     unaccountedReads,
     staleExempt,
     staleBacklog,
     backlogInCensus,
     pendingAlreadyRead,
+    manifestWithoutRow,
+    manifestStillPending,
   };
 }
 
@@ -288,6 +349,8 @@ const sourceFiles = walk(join(ROOT, 'src'))
 const gateReads = scanGateReads(sourceFiles);
 const readKeys = [...gateReads.keys()];
 
+const virtualRowKeys = VIRTUAL_SUBSYSTEM_ROWS.map((row) => row.rule);
+
 const liveAudit = () => auditEngineGatedKeys({
   reads: readKeys,
   manifest: ENGINE_GATED_VIRTUAL_RULE_KEYS,
@@ -295,6 +358,8 @@ const liveAudit = () => auditEngineGatedKeys({
   exempt: Object.keys(EXEMPT_RULE_KEYS),
   backlog: Object.keys(BACKLOG_RULE_KEYS),
   pending: PENDING_MANIFEST_KEYS,
+  virtualRows: virtualRowKeys,
+  certPending: SUBSYSTEM_CERTIFICATION_PENDING_KEYS,
 });
 
 describe('engine-gated rule keys (the census-invisible subsystem class)', () => {
@@ -322,6 +387,8 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
       exempt: ['cEnabled'],
       backlog: [],
       pending: ['dEnabled'],
+      virtualRows: ['aEnabled'],
+      certPending: [],
     };
     expect(auditEngineGatedKeys(base).ok, 'a clean audit must pass, or every red below is meaningless').toBe(true);
 
@@ -356,6 +423,43 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
     const wired = auditEngineGatedKeys({ ...base, reads: [...base.reads, 'dEnabled'] });
     expect(wired.ok).toBe(false);
     expect(wired.pendingAlreadyRead).toEqual(['dEnabled']);
+
+    // 7. DIRECTION 3a — the manifest entry landed and its virtual row did not.
+    const unrowed = auditEngineGatedKeys({ ...base, manifest: ['aEnabled', 'bEnabled'] });
+    expect(unrowed.ok).toBe(false);
+    expect(unrowed.manifestWithoutRow).toEqual(['bEnabled']);
+
+    // 8. DIRECTION 3b — THE SHAPE THAT ACTUALLY SHIPPED A RED, and the reason 3a alone
+    //    would have been theatre. The key is manifested AND its obligation is parked as
+    //    a declared pending entry in another lane file. That partition is legal, so
+    //    subsystemCertificationTotality.walker passes it; the virtual lane's contract
+    //    forbids it, so a DOMAIN suite reds while every lint walker stays green. Both
+    //    halves are asserted here because the pending entry is what makes 3a's row
+    //    absence look accounted-for.
+    const parked = auditEngineGatedKeys({
+      ...base, manifest: ['aEnabled', 'bEnabled'], certPending: ['bEnabled'],
+    });
+    expect(parked.ok).toBe(false);
+    expect(parked.manifestWithoutRow).toEqual(['bEnabled']);
+    expect(parked.manifestStillPending).toEqual(['bEnabled']);
+
+    // 9. A manifested key that DOES carry its row but was left in a pending list too
+    //    (the half-finished conversion) reds on the pending arm alone.
+    const rowedAndPending = auditEngineGatedKeys({ ...base, certPending: ['aEnabled'] });
+    expect(rowedAndPending.ok).toBe(false);
+    expect(rowedAndPending.manifestWithoutRow).toEqual([]);
+    expect(rowedAndPending.manifestStillPending).toEqual(['aEnabled']);
+
+    // 10. THE VACUITY DIRECTION: an emptied virtual-rows list must red every manifest
+    //     member rather than silently satisfying the check.
+    const emptyRows = auditEngineGatedKeys({ ...base, virtualRows: [] });
+    expect(emptyRows.ok).toBe(false);
+    expect(emptyRows.manifestWithoutRow).toEqual(['aEnabled']);
+
+    // 11. And the inputs are REQUIRED. A caller that omitted them would disable
+    //     direction 3 silently, which is the blindness shape this direction removes.
+    expect(() => auditEngineGatedKeys({ ...base, virtualRows: undefined })).toThrow(TypeError);
+    expect(() => auditEngineGatedKeys({ ...base, certPending: undefined })).toThrow(TypeError);
   });
 
   test('the live scan is non-vacuous and reaches BOTH gate spellings', () => {
@@ -385,7 +489,9 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
       + `  exemptions for gates that no longer exist: ${audit.staleExempt.join(', ') || 'none'}\n`
       + `  backlog rows for gates that no longer exist: ${audit.staleBacklog.join(', ') || 'none'}\n`
       + `  backlog rows whose key reached the census (bank the win, delete the row): ${audit.backlogInCensus.join(', ') || 'none'}\n`
-      + `  pending keys that gained a gate read (CR-WR10-C item 4 — move into ENGINE_GATED_VIRTUAL_RULE_KEYS in THIS commit): ${audit.pendingAlreadyRead.join(', ') || 'none'}`,
+      + `  pending keys that gained a gate read (CR-WR10-C item 4 — move into ENGINE_GATED_VIRTUAL_RULE_KEYS in THIS commit): ${audit.pendingAlreadyRead.join(', ') || 'none'}\n`
+      + `  manifest members with NO authored row in subsystemRowsVirtual.js (CR-WR10-C item 4's row half — author it in THIS commit): ${audit.manifestWithoutRow.join(', ') || 'none'}\n`
+      + `  manifest members ALSO standing in a lane's pending list (manifesting is what makes a virtual key censusable, so it is the act that comes due — delete the pending entry): ${audit.manifestStillPending.join(', ') || 'none'}`,
     ).toMatchObject({
       ok: true,
       manifestWithoutRead: [],
@@ -394,7 +500,28 @@ describe('engine-gated rule keys (the census-invisible subsystem class)', () => 
       staleBacklog: [],
       backlogInCensus: [],
       pendingAlreadyRead: [],
+      manifestWithoutRow: [],
+      manifestStillPending: [],
     });
+    // NON-VACUITY for direction 3, in both of its own directions. The row arm is
+    // fail-loud by construction (an emptied virtual-rows list reds every manifest
+    // member, proven synthetically above), but the pending arm measures an ABSENCE and
+    // an absence can go vacuous by the pending list emptying. So the live pending list
+    // is asserted POPULATED here: it really does carry a key today, and that key really
+    // is not manifested, which is what makes the intersection a measurement.
+    expect(virtualRowKeys.length, 'the virtual lane is populated').toBeGreaterThan(0);
+    expect(
+      SUBSYSTEM_CERTIFICATION_PENDING_KEYS.length,
+      'the pending arm measures an intersection against a NON-EMPTY list, or it proves nothing',
+    ).toBeGreaterThan(0);
+    // And the registry composition is the reason the virtual list is the right authority
+    // to measure against: every virtual row reaches the registry the census reads.
+    for (const key of virtualRowKeys) {
+      expect(
+        SUBSYSTEM_CERTIFICATION_REGISTRY.some((row) => row.rule === key),
+        `${key} is authored in the virtual lane but did not reach SUBSYSTEM_CERTIFICATION_REGISTRY`,
+      ).toBe(true);
+    }
   });
 
   test('the manifest is VIRTUAL keys only, and every member reached the census', () => {

@@ -298,6 +298,63 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // axes above, it declares nothing rather than declaring a channel it cannot own.
     soakEvidence: 'unobserved',
   }),
+  // ── THE CASUS COMMERCII (FP TR-1, docs/DESIGN_FP_TRADE.md §TR-1) ───────────
+  Object.freeze({
+    rule: 'casusCommerciiEnabled',
+    title: 'The casus commercii (commerce\'s typed reason ledger)',
+    module: 'src/domain/worldPulse/commercialReasons.js,src/domain/worldPulse/commercialReasonTaxonomy.js,src/domain/worldPulse/commercialReasonsNews.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: the ledger mints no candidate. It is RECOMPUTED each
+      // pulse from state another layer already owns and it emits typed facts about
+      // what that state is; there is no `candidateType` literal anywhere in the lane.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY, and the temptation was the same one GR-0 records below:
+      // this lane authors NINETEEN Herald reader kinds outright, so a row could name a
+      // family and look richer than its neighbours. BEHAVIORAL_MOVER_FAMILIES is a
+      // closed ten-member BEHAVIOURAL vocabulary, not a list of reader kinds, and the
+      // only members these receipts could ride are `economy` and `war` — either of
+      // which would grade this row ALIVE off the trade and war layers' ordinary
+      // traffic in worlds where this flag has never been true.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, AND THIS IS THE ROW'S SHARPEST CALL. The container
+      // `spatialLedgers.commercialReasons` is real, is this lane's own, and has
+      // exactly ONE writer (advanceCommercialReasons in commercialReasons.js). It is
+      // still not declarable, because that writer HAS NO CALLER IN src/ — measured,
+      // not assumed: the only cross-module import of the leaf is tradeWar.js's
+      // `makeCommercialPressureRead`, which READS the ledger at the T9 seam. So no
+      // world can populate the container, and a declared channel would grade this row
+      // SILENT — "instrumented, and the subsystem minted nothing" — forever, when the
+      // truth is that nothing ever ran. Under-claiming rots exactly like over-claiming;
+      // the difference is that this one would read as an instrument rather than as
+      // modesty. The declaration lands the day the writer is mounted, not before.
+      stateKeys: Object.freeze([]),
+      other: 'A DARK INSTRUMENT WITH NO MOUNT, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE CORRECT READING. TWO GATES, both by name and both strict: casusCommerciiActive (commercialReasons.js) is the leaf\'s own read, and evaluateTradeWar (tradeWar.js) reads the key a second time at the T9 escalation seam rather than through a frozen-list conjunction — the spelling that hides a live gate from the engine-gated-key census. WHAT IT DOES: commerce gains the typed, receipted, decay-inherent reasons layer war has carried since W-PEACE-1. Eight severance causes and eight partnership mirrors form a walker-enforced bijection over ONE read per pair (the toll that gouges is the toll that, relieved, warms), recomputed each pulse from existing state so decay is inherent and a healed cause DROPS rather than ratcheting. Three pairs read live state today — the entrepot toll, the no-trade access predicate, and pair trade salience signed by the relationship\'s own trust and resentment; five are registered seams passed undefined until their producers land, which yields zero, no record, and a byte-identical world. WHAT IT NEVER DOES: it mints no casus belli and imports no war table (J-TR-2). The war coupling runs ONE way through ONE door — tradeWar\'s existing escalation deposit reads a severance magnitude as pressure and adds it to the PROBABILITY only, never to the strength short-circuit, so the rng draw count is identical in both flag states. WHY THE CENSUS CANNOT SEE IT: the lane adds no candidate vocabulary, no mover beat and, today, no reachable container. THE OBSERVATION NEEDED to close the gap is not a better receipt but a WIRING WAVE: mount advanceCommercialReasons on the pulse, and the v5 state census over spatialLedgers.commercialReasons grades this row directly, at which point the stateKeys channel above is owed. Until then the lane is pinned where its bodies are readable: tests/domain/commercialReasons.test.js, tests/lint/commercialReasonTaxonomy.walker.test.js, tests/lint/commercialKindPools.walker.test.js and tests/property/casusCommerciiDormancyFence.test.js.',
+    }),
+    // Recomputed from state on every pulse THE DAY IT IS MOUNTED, so no tempo of its
+    // own to hold: a pair with no grievance produces no record, and that is the layer
+    // working. `reactive` is the honest declaration rather than a per_tick floor the
+    // lane could only meet in a world full of angry courts.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_is_byte_identical_including_the_draw_count',
+        description: 'With the flag dark the ledger is never opened, no record is written, and the T9 seam never sees a commercial term. The claim is stronger than "similar": the pressure read is added to the escalation PROBABILITY only, never to the strength short-circuit above it, so the rng draw count is identical in both flag states and a dark world is byte-for-byte the pre-TR-1 engine.',
+        check: 'NOT expressible from a receipt: an absent container is exactly what a dark world and an unmounted world both look like. Pinned in tests/property/casusCommerciiDormancyFence.test.js on an absent-versus-explicit-false differential over the whole return value, with a call-path spy counting 0 dark and 1 lit from OUTSIDE tradeWar.js.',
+      }),
+      Object.freeze({
+        name: 'every_severance_cause_has_its_authored_mirror',
+        description: 'The taxonomy is a TOTAL BIJECTION: eight severance types, eight partnership types, and no cause may be minted by a wave that has not already authored its mirror and both receipt pools. A one-sided taxonomy is how a grievance ledger starts ratcheting, because the state that would clear a cause has no row to write.',
+        check: 'NOT expressible from a receipt: receipts carry rendered sentences, never the taxonomy behind them. Pinned in tests/lint/commercialReasonTaxonomy.walker.test.js, with a ninth unmirrored severance type executed as a mutant that reds four assertions.',
+      }),
+      Object.freeze({
+        name: 'a_contradicted_grievance_scores_zero_and_says_which_read_struck_it',
+        description: 'Amendment B: a casus contradicted by a LIVE read scores zero and returns a receipt NAMING the read that struck it out — a famine-profiteering grievance against a counterpart whose warehouses are physically empty is not a small grievance, it is a false one. The suppression receipt is RETURNED, never persisted, because a zero-magnitude row on the ledger would be the ratchet this layer refuses.',
+        check: 'NOT expressible from a receipt: a suppression that never persists cannot appear in a state census by construction. Pinned in tests/domain/commercialReasons.test.js, with the suppression conjunct severed as an executed mutant that reds the receipt pin.',
+      }),
+    ]),
+    // No channel at all, so the row can never be ALIVE and says so.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**
