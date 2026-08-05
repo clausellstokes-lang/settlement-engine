@@ -490,6 +490,27 @@ the publishing commit (S40).
   totality pin. **Declared empty with reasons (req 13/14 discharged the
   volume's way):** no forces, no casting, no posture, no couplings, no dossier
   surface — the auditor audits.
+
+**SLICE TR-9c LANDED 2026-08-05 — THE CONTRACT MODULE ONLY.**
+`src/domain/certification/tradeConvergenceContract.js` (pure leaf, zero
+imports, nothing imports it at land time) carries the closed six-word ending
+vocabulary, the eight-flag lighting table, the named degraded arms, the ending
+mint table with its one honest-permanent-zero field, the certification
+vocabulary, and the v1 observation shape with its totality wall.
+`evaluateTradeFlagLighting` is the out-of-order law made executable and
+`tradeEndingAvailability` is the kind-availability read; both are pinned by
+`tests/lint/tradeConvergenceContract.walker.test.js`, whose census parses §3's
+dependency ruling out of the TRADE volume and requires the table to match it —
+an independent denominator, added after an executed mutant proved the
+first draft's both-arms block was self-referential. **STILL OWED at the
+collector waves:** every envelope and its tuning table, the receipt joins, the
+Herald T-11 rows, the tickScanBudget lanes and the eight certification rows.
+Bands were deliberately NOT authored here: an acceptance band for an
+instrument that has never run is a signature this slice has no authority to
+give. **Three cross-program preconditions are resolved once, in the module:**
+SP-1 = SP-D `errandSpineEnabled`, SP-2 = SP-B `believedScarcityEnabled`,
+SP-3 = GR-2/GR-3 `pactFormationEnabled` — each half pinned to the document
+that says it, so no later wave re-derives the join.
 - **Collision:** subsystemRowsWaves.js (363 eff) + settlementRumors.js are
   shared certification/Herald surfaces — pathspec discipline, re-grep after
   every rebase.
