@@ -92,6 +92,7 @@ MUTATED_FILES=(
   supabase/migrations/087_review_money_hardening.sql
   src/lib/worldExport.js
   src/generators/narrative/settlementOriginProse.js
+  tests/lint/.coupling-inclusion-baseline.json
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -725,6 +726,26 @@ check_caught "prose/spine splice guard LENGTH cap deleted" src/domain/simulation
 #     carries none of the tokens), so it takes no test-file entry of its own.
 perl -0pi -e 's/\n[^\n]*Founded at a junction on the oldest logic[^\n]*\n[^\n]*It exists because travellers had to stop somewhere[^\n]*//' src/generators/narrative/settlementOriginProse.js
 check_caught "prose/origin corpus pool shrinks below five" src/generators/narrative/settlementOriginProse.js "npx vitest run tests/generators/settlementOriginProse.test.js --no-file-parallelism"
+
+# ── The cross-layer coupling inclusion ratchet (CW-0w slice 2) ──────────────
+
+# 69. An unregistered cross-layer import lands in a real layer module. Plant a
+#     WAR-family module that reads the FAITH layer with no couplingRegistry row
+#     naming it. The same-commit registry obligation is enforced by nothing but
+#     this walker, so a MISSED here means the registry can go quietly partial
+#     while CW-1's layer counting and CW-3's aliveness floors still treat it as
+#     the layer authority.
+check_caught_planted "coupling/unregistered cross-layer import planted" \
+  src/domain/worldPulse/warMutsweepInclusionLeak.js \
+  "import { sacredClaimFor } from './sacredClaim.js'; export const leak = sacredClaimFor;" \
+  "npx vitest run tests/lint/couplingInclusion.walker.test.js --no-file-parallelism"
+
+# 70. The inclusion inventory is made to GROW instead of shrink: delete a frozen
+#     pair whose import is still live, which is how a maintainer would silently
+#     re-license a legacy edge. The walker must treat the survivor as NEW and
+#     demand its registry row.
+perl -0pi -e 's/\{\n    "importer": "src\/domain\/worldPulse\/generosityKernel\.js",\n    "imported": "src\/domain\/worldPulse\/beliefMap\.js",\n    "direction": "[^"]*"\n  \},\n  //' tests/lint/.coupling-inclusion-baseline.json
+check_caught "coupling/inclusion baseline entry deleted while its import lives" tests/lint/.coupling-inclusion-baseline.json "npx vitest run tests/lint/couplingInclusion.walker.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
