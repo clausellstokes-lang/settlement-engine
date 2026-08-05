@@ -134,6 +134,20 @@ const EXEMPTIONS = {
   'src/components/gallery/GalleryMaps.jsx': 'campaign-or-import-entitlement',
   'src/components/instant/InstantWorldEntry.jsx': 'quota-or-limit',
   'src/components/map/BeliefDivergenceBand.jsx': 'content-visibility',
+  // Joined 2026-08-04 by FP wave GR-0's DM true-state chip. The comparison is
+  // BeliefDivergenceBand's line VERBATIM, two files away — `tier === 'premium' ||
+  // elevated` — and it asks that file's question exactly: may this viewer be shown
+  // GROUND TRUTH, which is the reason class's own first example. Routing it through
+  // viewerCanAuthor would admit the founder tier to a surface premium-or-elevated
+  // currently defines, i.e. a paid-surface behaviour change, which this walker's header
+  // records as owner-gated. Recorded rather than converged, for that reason.
+  // ⚠ AND THE CHIP IS NOT DARK. treatyTrueStateChip is fail-closed on this AUTHORITY
+  // and NOT on treatyLifecycleVoiceEnabled: driven with the flag absent and lit it
+  // returns the identical sentence (executed 2026-08-04). GR-0's sibling surface, the
+  // longevity age line, IS flag-gated and returns null dark. So this row banks a live
+  // premium content surface, not a dormant one — reported to the chair as a stop, and
+  // this comment is where the next reader finds it.
+  'src/components/map/TreatyPanel.jsx': 'content-visibility',
   'src/components/map/useWorldMapCampaignModel.js': 'campaign-or-import-entitlement',
   'src/components/new/tabs/RumorsTab.jsx': 'content-visibility',
   'src/components/new/tabs/WarFaithTab.jsx': 'content-visibility',
