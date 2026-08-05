@@ -23,14 +23,49 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // already see keeps its own category and only what escaped every named prose
 // surface becomes a pushIndirection row. Measured at landing: exactly 3, all
 // three in relationshipMemory.js's postureReasons, which the scanner had never
-// seen at all. Ceilings still only move DOWN — this one is a new class's floor,
-// not a widening of an existing budget.
-const REVIEWED_TOTAL_CEILING = 404;
+// seen at all.
+//
+// CR-FP-2 — THE ONE RULED RE-RECORD (FP cycle 1 close). 404 -> 413.
+//
+// This is a DELIBERATE upward move of three ceilings, recorded here because the
+// rule elsewhere in this file is that ceilings only fall. It was ruled once, for
+// a ratchet that had been RED AT BASE since the war lane, and the measurement
+// behind it is this:
+//
+//   - The instrument is byte-identical to the one that recorded the 404 census
+//     (tests/helpers/proseNumericsWalk.js, unchanged since e30770bd). Running it
+//     against the e30770bd tree yields 413, not 404: the slice-4 commit banked a
+//     baseline its own scanner already disagreed with by nine rows. The
+//     PRE-slice-4 walker against that same tree yields 410 — the identical nine
+//     rows, minus the three pushIndirection finds. So the gap is NOT instrument
+//     reach; slice 4's reach was fully absorbed at 401 -> 404.
+//   - The nine rows are war-lane prose authored between WR-2 and CW-0w, which
+//     nobody re-recorded: conquestFeasibility.js (WR-8 slice 1, e8354fb9),
+//     occupation.js x2 sentences (W8-C slice 3, ab71f940), razing.js (WR-8
+//     slice 4, bf731ea6) — four REAL reader-prose float leaks — plus three rows
+//     on receipt-SHAPED ledger fields that are not prose at all (the `receipt:`
+//     key and the `receiptTick` name pull `Math.floor` ids and integer ticks
+//     into the walk: warCoalitionExpenditure.js x2, warCostsNews.js x1).
+//   - Everything else that moved is address rot, not debt: 88 pure line moves
+//     and 13 WR-7b decomposition relocations (peaceTerms.js ->
+//     peaceTermsDrafting.js x6, warDeployment.js -> warHomeCosts.js x6 and
+//     warSiegeVerdict.js x1). This discharges SOL-BANK-2's parked line-drift
+//     red, whose "line-location drift CONFIRMED, whole-baseline equivalence
+//     PLAUSIBLE" is now measured on both counts.
+//   - FP cycle 1 authored ZERO prose numerics. Between e30770bd and this
+//     commit the live hit set changed by exactly four rows, all four the same
+//     two tradeWar.js sentences at shifted line addresses after TR-1's seam.
+//
+// FOUR SENTENCES ARE THEREFORE FROZEN AS UN-HUMANIZED DEBT, not as clean rows.
+// They are owed a humanization wave and are named above so the debt cannot be
+// lost in the count. Ceilings are pinned to the EXACT live census rather than
+// rounded up, so the next leak of any class is red on arrival.
+const REVIEWED_TOTAL_CEILING = 413;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 229,
+  floatInterpolation: 236,
   percentToken: 79,
   multiplier: 24,
-  twoDecimalScore: 69,
+  twoDecimalScore: 71,
   pushIndirection: 3,
 });
 
@@ -337,11 +372,11 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     expect(categoryCeilingTotal).toBe(REVIEWED_TOTAL_CEILING);
     expect(
       ceilingViolations(baseline),
-      'The committed baseline exceeds the reviewed 401-row census. Remove the leak; never raise a ceiling.',
+      'The committed baseline exceeds the reviewed 413-row census. Remove the leak; never raise a ceiling.',
     ).toEqual([]);
     expect(
       ceilingViolations(LIVE.hits),
-      'The live tree exceeds the reviewed 401-row census. Humanize the new leak; never raise a ceiling.',
+      'The live tree exceeds the reviewed 413-row census. Humanize the new leak; never raise a ceiling.',
     ).toEqual([]);
   });
 
@@ -356,8 +391,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 402 exceeds reviewed ceiling 401',
-      'floatInterpolation 230 exceeds reviewed ceiling 229',
+      'total 414 exceeds reviewed ceiling 413',
+      'floatInterpolation 237 exceeds reviewed ceiling 236',
     ]);
   });
 
