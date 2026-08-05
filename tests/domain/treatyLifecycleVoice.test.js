@@ -137,6 +137,32 @@ function worldWith(treaty, { tick, rules = LIT, blindBand = null } = {}) {
 const advance = (worldState, tick, pIndex) => advanceTreaties({ snapshot: SNAPSHOT, worldState, pIndex, tick });
 const kindsOf = (out) => out.newsEntries.map((entry) => String(entry.kind)).sort();
 
+/**
+ * THE SAME-TICK MINT FIXTURE (CR-FP-2). PASS 1 of advanceTreaties mints a treaty from a
+ * relationship edge that has de-escalated off `hostile` carrying a fresh sue-for-peace
+ * incident; PASS 2 then advances the ledger it just wrote. That is the ONLY shape in
+ * which a treaty is present in the ledger being advanced and ABSENT from the incoming
+ * one — which is the exact state the crossing guard's `prevLedger?.[key]` arm exists to
+ * refuse. A fixture that merely omits the ledger cannot reach it: PASS 2 iterates
+ * nothing and its silence proves nothing.
+ */
+const MINT_EDGE = { from: 'victor', to: 'loser' };
+const MINT_SNAPSHOT = { byId: SNAPSHOT.byId, regionalGraph: { edges: [MINT_EDGE] } };
+const mintingWorld = (tick) => ({
+  tick,
+  simulationRules: { ...LIT },
+  spatialLedgers: {},                       // no treaty yet — PASS 1 writes it THIS tick
+  relationshipStates: {
+    'rel.victor.loser': {
+      relationshipType: 'neutral',          // the war has ended (off 'hostile')
+      recentIncidents: [{ type: 'strategy_sue_for_peace', tick, outcomeId: 'war.bilateral.sue_for_peace.1' }],
+    },
+  },
+});
+const mintAt = (tick, pIndex) => advanceTreaties({
+  snapshot: MINT_SNAPSHOT, worldState: mintingWorld(tick), pIndex, tick,
+});
+
 // ── A) THE PURE LEAF ─────────────────────────────────────────────────────────
 
 describe('GR-0 substrate — age, bands, endings', () => {
@@ -331,16 +357,48 @@ describe('GR-0 the detection beat — the observed crossing', () => {
   });
 
   it('a treaty minted THIS tick cannot cross: one observation is a level', () => {
-    // The record is absent from the incoming ledger, so this tick is its first
-    // observation. Without the prevLedger arm the beat would fire on a "transition"
-    // nobody could have watched happen.
-    const fresh = advanceTreaties({
+    // WHAT THIS PIN USED TO BE, AND WHY IT PROVED NOTHING (CR-FP-2, surviving mutant
+    // C2). The first spelling drove `spatialLedgers: {}` with no treaty anywhere and no
+    // way to mint one, so PASS 2 iterated an EMPTY ledger: the silence it asserted was
+    // the silence of a world with nothing in it. MEASURED — deleting the
+    // `prevLedger?.[key]` arm from the crossing guard left the whole battery green.
+    // The arm is only reachable when a treaty is IN the ledger being advanced and
+    // ABSENT from the incoming one, so the fixture now MINTS one in the same tick.
+    const minted = mintAt(10, STARVED);
+
+    // (1) THE MINT REALLY HAPPENED. Asserted first, because if PASS 1 declined to mint
+    // (white peace, no affordable term) this test would silently become the empty-ledger
+    // vacuity it replaces — passing for the old wrong reason.
+    const ledger = minted.worldState.spatialLedgers.treaties;
+    expect(Object.keys(ledger)).toEqual([PAIR_KEY]);
+    expect(ledger[PAIR_KEY].mintedTick).toBe(10);
+
+    // (2) THE LEVEL REALLY IS THERE. The starved obligor defaults on every term in the
+    // very tick it signs, so the guard's OTHER two conditions are both live: the
+    // observed worst is 'defaulted', and a record with no prior ledger entry carries
+    // 'honored' into `previousCompliance`. Nothing about this world is quiet.
+    expect(ledger[PAIR_KEY].complianceState).toBe('defaulted');
+    expect(ledger[PAIR_KEY].defaultedBy).toBe('loser');
+    const observed = ledger[PAIR_KEY].terms.map((term) => String(term.complianceState));
+    expect(observed.length).toBeGreaterThan(0);
+    expect(new Set(observed)).toEqual(new Set(['defaulted']));
+
+    // (3) AND YET NO CROSSING IS PUBLISHED. Only the signing beat speaks. With (1) and
+    // (2) executed, the single thing standing between this state and a detection beat
+    // is the `prevLedger?.[key]` arm — delete it and 'treaty_default_detected' joins
+    // this exact list, which is what makes this an executable pin rather than a claim.
+    expect(kindsOf(minted)).toEqual(['treaty_signed']);
+
+    // The trivial companion, kept but NOT load-bearing: a world with no treaty and no
+    // mint trigger is silent. It is stated as the weak case so no one mistakes it for
+    // the pin again.
+    const empty = advanceTreaties({
       snapshot: SNAPSHOT,
       worldState: { tick: 10, simulationRules: { ...LIT }, spatialLedgers: {} },
       pIndex: STARVED,
       tick: 10,
     });
-    expect(fresh.newsEntries).toEqual([]);
+    expect(empty.newsEntries).toEqual([]);
   });
 
   it('the beat names the owed court and the obligor in the right roles', () => {
