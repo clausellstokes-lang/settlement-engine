@@ -4627,3 +4627,228 @@ entry) · `kindPoolWalker.js` 89 / 256 · `kindPoolWalker.test.js` 187 / 285 ·
 **Nothing lit. No flag minted. No golden re-recorded. No band ratified. No soak run. No push. No
 engine module edited — `heraldFeed.js` and `warConvergenceContract.js` were read and censused and
 never opened, and the only `src/` file added is consumed by nothing at land time.**
+
+---
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · CYCLE-5 LANE-B CLOSE — THREE WAVES LANDED, A
+## FOURTH THAT NEVER COMMITTED, A GREEN RECEIPT THAT WAS RED WHEN IT WAS WRITTEN,
+## AND ONE NEW RED THAT IS OURS
+## (Opus 5 ledger slice under the 2026-08-06 succession directive. `docs/` only — zero
+## src, test, script or JSON edits in this commit. Every J-* below is a chair-grade
+## judgment made without a Fable chair and is VETOABLE.)
+
+**Span:** `d615171a` (the cycle-4 debt row, exclusive) .. **`d9c7cae4`**, the commit every
+figure in this row was measured at. Branch `claude/composite-r4`, worktree `minifold`.
+**This row covers LANE B ONLY.** The same span carries four commits from the concurrent
+ES lane — `dda24851`, `e7eeaeff`, `1b111399`, `d9c7cae4` — which this slice did **not**
+audit and does not claim. Nobody should read this row as the whole cycle.
+
+### WHAT LANDED — FOUR COMMITS, EACH VERIFIED AGAINST THE TREE BY `git show --stat`
+
+| sha | wave | files | +/− |
+|---|---|---|---|
+| `6a497bab` | **IN-0b** — the intercept consumer (#16 slice 0b) | 5 | +855 / −12 |
+| `db35bad6` | **IN-0d** — HIDE's trade tax (#16 slice 0d) | 3 | +523 / −0 |
+| `7a77c84b` | **SP-E** — the narration kit assembly (#7) | 10 | +1811 / −20 |
+| `a916c0f2` | SP-E's own ledger row | 1 | +198 / −0 |
+
+Four commits, **+3,387 / −32**. Every sha EXISTS, and every file set matches the claim
+made for it — the counts above are the tree's, not the reports'. `#16 IN-0` is now **3 of
+4** (0a from cycle 4, plus 0b and 0d); **0c, the disclosure executor, is UNBUILT**. `#7
+SP-E` is whole.
+
+### ⛔ THE FOURTH WAVE DID NOT LAND, AND THE LOG IS THE PROOF
+
+**GR-3a has ZERO commits in this span.** `git log --oneline d615171a..d9c7cae4` carries no
+GR-3 subject. Its verifier returned **REJECT** on five findings, three of them confirmed
+regressions, and the wave's own report says plainly that nothing was staged. At the
+measurement commit its work sits **entirely in the working tree** — 18 modified files plus
+`tests/domain/peaceTermsGrantTerms.test.js` untracked.
+
+It is **not abandoned, and a successor must not file it as one.** The repair is IN FLIGHT
+and was observed live while this row was being composed: the dirty set GREW by four files
+mid-slice (`docs/DESIGN_FP_GRAMMAR.md`, `docs/DESIGN_FP_TRADE.md`,
+`src/domain/worldPulse/peaceTerms.js`, `tests/domain/peaceTerms.test.js`), and
+`peaceTerms.test.js` now carries the cure for the verifier's first regression in so many
+words — the hand-restated executor union replaced by a pointer at `TERM_EXECUTORS`, with a
+comment naming `grant` and calling *the restatement* the defect rather than the enum
+member. Task #24 is the live home for that work.
+
+### ⚠️⚠️ A LANDED WAVE'S GREEN RECEIPT WAS RED ON THE TREE IT WAS WRITTEN FOR
+
+**CONFIRMED by execution here, not inherited.** IN-0d's report recorded its baselines as
+`domainStrictBaseline + sizeBaseline GREEN; the new module carries zero strict errors,
+satisfied by narrowing (no cast, no any)`. Run against a `git archive` of **`db35bad6`
+itself**, with `node_modules` symlinked in, `node scripts/check-domain-strict.mjs`
+**EXITS 1**:
+
+```
+src/domain/worldPulse/secrecyTradeFactor.js: 1 strict errors (baseline 0) — +1
+```
+
+The claim is **REFUTED**. The per-file ZERO baseline that governs new domain modules was
+breached by the very module the wave minted, and the wave's own verification did not catch
+it. **The repair was made by the OTHER LANE at `1b111399`** (TS2345, `unknown` into
+`Record<string, unknown> | null | undefined`, closed by narrowing rather than a cast) — so
+Lane B shipped the defect and a sibling lane paid for it. Recorded, **not re-repaired**:
+the cure has landed, and a second claim on a cured defect authors a conflict, not a fix.
+
+This also **CONFIRMS SP-E's attribution independently.** SP-E's row called that one strict
+regression `IN-0d's debt, not SP-E's`; measured across three archives here, base
+`d615171a` exits **0** at 1313/1313, `db35bad6` exits **1**, and `d9c7cae4` exits **0** at
+1304 < 1313. SP-E was right by the tree, not merely by argument.
+
+### GATES — STATED HONESTLY, EVERY RED CLASSIFIED WITH ITS BASE RECEIPT
+
+**THE CYCLE DOES NOT EXIT GREEN.** Both ends were measured in `git archive` trees — base
+`d615171a`, wave `d9c7cae4` — with `node_modules` symlinked and the vitest slot confirmed
+free by `scripts/gate-mutex.sh` before every run.
+
+- **`eslint src/ tests/ scripts/`** — **3 errors / 27 warnings at BOTH ends, and the error
+  set is IDENTICAL** (diffed, empty). The three: `lineageClaim.js:532:9` and
+  `settlementStrategy.js:1275:9` (`no-useless-assignment`), and
+  `warCoalitionExpenditure.test.js:166:7` (`no-unexpected-multiline`). **INHERITED** —
+  present at the cycle-5 base, in files no Lane-B wave opened.
+- **`typecheck:domain:strict`** — base exits **0** (1313, ceiling 1313); wave exits **0**
+  (**1304 < 1313**, nine fewer than baseline). **GREEN, and improved across the cycle.**
+  The one regression this cycle produced was IN-0d's, recorded above, closed at `1b111399`
+  before the measurement commit.
+- **`vitest run`, THE WHOLE SUITE, BOTH ENDS** — base: **44 failed files / 69 failed tests
+  / 26,717 passed / 104 skipped** over **2,329** files, exit 1. Wave: **45 failed files /
+  70 failed tests / 26,865 passed / 104 skipped** over **2,337** files, exit 1. Normalized
+  `FAIL` row sets sorted and diffed BOTH directions: **73 rows at base, 74 at the wave,
+  delta EXACTLY ONE ROW, and nothing cleared.** (The base's 2,329 test files is precisely
+  the `files: 2329` the GR-3 verifier cited — its reading was right for the base and has
+  simply been overtaken.)
+
+#### ⛔ THE ONE NEW RED IS OURS — IN-0b, `6a497bab`
+
+```
+tests/lint/proseNumerics.test.js > prose numerics live-tree ratchet
+  (exact legacy identity, shrink-only) > path + line + category + snippet
+  debt exactly matches the committed baseline
+```
+
+**Attributed by execution, not by inference.** It is absent from the base's 73 rows in the
+full-suite run, and it is RED at **`6a497bab` alone** in a `git archive` of that commit —
+1 failed / 28 passed, same file, same snippet, same array sizes.
+
+**THE CAUSE, MEASURED, AND IT IS ONE INTEGER.** IN-0b added 255 lines to
+`src/domain/worldPulse/brokerageServices.js`, which pushed one **pre-existing** legacy debt
+row — snippet `Math.floor(num(tick, 0))`, category `floatInterpolation` — from **line 429
+to line 464**. The ratchet freezes debt by exact path **+ line +** category + snippet, so a
+pure displacement reds it. **Both sides carry 413 entries**: no prose numeric leaked, and
+none fell. This is **line-address rot inside a baseline**, not a content regression, and
+the entire assertion diff is `- "line": 429 / + "line": 464`.
+
+**NOT REPAIRED HERE, DELIBERATELY.** The cure is a one-row re-record of
+`tests/lint/.prose-numerics-baseline.json`, a JSON edit outside this docs-only slice. It is
+owed with its cause measured and its exact delta named, so the re-record is a two-second
+review rather than a regeneration nobody can audit. ⚠ **Regenerate once and read every
+removed row** — the file's own failure message says so, and a blind regeneration on this
+ratchet is exactly how a real leak gets absorbed into the baseline that was meant to catch
+it.
+
+**Every other red — 73 rows across 44 files — is INHERITED**, present identically at both
+ends.
+
+### ⚠️ THE STALE TAIL ADDRESS, REALIZED — "UNIQUE" IS NOT "LAST"
+
+**CONFIRMED by measurement.** GR-3a's uncommitted ledger row splices at **line 4252** of a
+**4,629-line** file. Line 4252 is the last line of the cycle-4 debt row; ES-1's row begins
+at **4257** and SP-E's at **4437**. Both landed *after* GR-3a computed its anchor, so the
+draft row now sits stranded two rows above the tail, ahead of work that preceded it in
+time. The anchor never stopped being UNIQUE — it stopped being LAST, which is exactly the
+distinction the cycle-5 dispatch names. **The repair lane must re-derive the tail inside
+the same command as the splice, not reuse this address.**
+
+### ⚠️ THE VERIFIER'S OWN ARITHMETIC HAS GONE STALE — RE-MEASURE, DO NOT APPLY
+
+GR-3's REJECT cited the estate census as `files: 2329` moving to `2330`. The value recorded
+at `d9c7cae4` is **`files: 2337, parked: 358, credited: 1979, titles: 18793, suiteTitles:
+5378`** — SP-E re-recorded that census at `7a77c84b`, with its inherited split stated. A
+repair that applies the verifier's numbers instead of re-measuring will plant a wrong
+integer into a row that is an EXECUTED self-assertion. Two of the five findings (the census
+row, and the red-ratchet inventory counts `…(71)` → `…(73)`) carry figures the tree has
+already moved past; **the findings themselves stand, their arithmetic does not.**
+
+### THE JUDGMENTS, ENUMERATED AS POINTERS FOR CHEAP RE-RULING
+
+- **J-C5B-1 — GR-3a IS RECORDED AS NOT LANDED, NOT AS LANDED-WITH-CAVEATS.** Survey
+  priority **HIGH**. Rejected: committing the 198-line row GR-3a drafted, whose first
+  section is headed "WHAT LANDED" for a wave with zero commits. VETO ⇒ land that row when
+  the wave does.
+- **J-C5B-2 — THIS ROW WAS STAGED AS A CONSTRUCTED BLOB**, `HEAD`'s file content plus this
+  row, never `git add` on the working file. Survey priority **HIGH**. Rejected: staging the
+  file whole, which at the moment of writing would have committed a REJECTED wave's ledger
+  row and dragged a live repair lane's in-flight edits into a docs-only commit.
+- **J-C5B-3 — THIS ROW WAS ALSO WRITTEN TO DISK**, not left in the index alone. Survey
+  priority **MEDIUM**. Rejected: the cleaner-looking index-only landing, which arms the
+  recorded concurrent-lane silent-revert class — the next lane's `git add` on that file
+  would carry its own disk copy, which lacks this row, and delete it.
+- **J-C5B-4 — THE FP §5 PROGRESS BLOCK NAMES THE ES-LANE COMMITS AS UNAUDITED RATHER THAN
+  OMITTING THEM.** Survey priority **MEDIUM**. That block's own sentence is "Everything not
+  named above is UNBUILT"; a refresh that silently dropped four commits from its own span
+  would have made the block state a falsehood about the tree. **This slice does NOT declare
+  ES-1 landed** — that determination belongs to the ES lane and its repair chain, and is
+  deliberately left unmade rather than denied.
+- **J-C5B-5 — IN-0d's REFUTED STRICT RECEIPT IS REPORTED AS A CORRECTION TO A LANDED WAVE**
+  rather than left to stand as the concurrent lane's repair note. Survey priority **HIGH** —
+  the sharpest item here, because the failure was a verifier's, not a builder's. VETO ⇒
+  strike the correction; the code is unaffected either way.
+- **J-C5B-6 — THE GR-3 REJECT'S FIVE FINDINGS WERE NOT RE-EXECUTED.** Survey priority
+  **LOW**. Rejected: re-verifying a wave under another agent's hands right now, which races
+  a live repair and measures a tree that will not exist in ten minutes. Recorded instead:
+  which of its numbers the tree has already invalidated.
+- **J-C5B-7 — THE proseNumerics RED IS NAMED AS OURS AND LEFT UNREPAIRED.** Survey priority
+  **HIGH**. Rejected: repairing it inside this slice, which is chartered docs-only and would
+  have made a JSON edit under a "ledger" commit message; and rejected harder, calling a
+  displaced line "pre-existing debt, unchanged" — the row IS pre-existing, but the failing
+  assertion is this cycle's and belongs to Lane B.
+
+### DEFERRALS — EVERY ONE DELIBERATE, NONE OF THEM A BUG TO RE-FIND
+
+1. **GR-3a is not committed by this slice.** It did not land, its verifier REJECTED it, and
+   a repair lane holds its files right now. Deliberate.
+2. **GR-3a's drafted 198-line row was not committed, not edited, and not moved** — including
+   its stale address, which is reported above rather than silently corrected, because
+   editing another agent's in-flight row is the destruction this protocol forbids.
+3. **The `tests/lint/.prose-numerics-baseline.json` one-row re-record is OWED**, with the
+   cause measured and the exact delta named (line 429 → 464, `brokerageServices.js`).
+4. **The IN-0d strict defect is recorded, not repaired** — cured at `1b111399`.
+5. **IN-0d's SR-4 attribution is left UNRESOLVED, not corrected.** It called 198 uncommitted
+   ledger lines "Lane A's". The only uncommitted content in that file now is GR-3a's own
+   198-line row, and ES-1's ledger contribution committed at **180** lines — but both drafts
+   could have been on disk at that moment and the question is **not decidable after the
+   fact**. Deliberately left open. What mattered is discharged: the row SR-4 declared OWED
+   is this one.
+6. **IN-0b/0d's SR-1 "seclusion hum" remains OWED**, neither built nor dropped: HIDE posture
+   transitions are receipted nowhere, so there is no existing beat for a toll line to ride,
+   and building a news PRODUCER is outside that wave's budget. It needs a scoping ruling.
+7. **The stop-reports of all three landed waves are carried as POINTERS, not restated.**
+   They live in full in their own commit bodies and in SP-E's row; restating them is the
+   derive-don't-restate hazard, stale by construction.
+8. **The four ES-lane commits in this span are NAMED and NOT AUDITED**, per the dispatch.
+
+### THE PROTOCOL EVENT THIS CYCLE ADDS
+
+**A ledger file with three lanes appending to it is a shared mutable, and this cycle proved
+it twice.** GR-3a's row is stranded at a stale address; IN-0d refused to land its row at all
+because it could not tell whose dirty lines it was looking at, and after the fact **nobody
+can tell** — the information needed to attribute them was destroyed by the appending itself.
+The cure is structural rather than procedural: **a wave's ledger row lands in its own commit
+immediately after the wave's own commit**, and the tail address is re-derived **inside the
+same command as the splice**. Both landed waves that followed their own row with a separate
+commit (`a916c0f2`, and cycle 4's `d615171a`) collided with nothing.
+
+**A second, smaller law falls out of the one new red:** a ratchet that freezes debt by LINE
+NUMBER turns every insertion above it into a gate failure, so any wave that grows a scanned
+file inherits a re-record it did not cause. That is working as designed — the ratchet is
+exact on purpose — but it means the re-record belongs in the WAVE's own commit, where the
+insertion that moved the line is visible, not in a later sweep where it looks like drift.
+
+**One file staged, mine, by constructed blob against `HEAD`'s content. The eighteen modified
+and one untracked file belonging to the concurrent GR-3 repair lane and the ES lane were
+present throughout and NONE was staged, edited, reverted or cleaned. Nothing lit. No flag
+minted. No golden re-recorded. No band ratified. No soak run. Nothing pushed. Zero src, test,
+script or JSON edits in this row's own commit — docs and ledger only, by charter.**
