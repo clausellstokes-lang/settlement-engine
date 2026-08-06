@@ -1,0 +1,134 @@
+export const meta = {
+  name: 'holistic-codebase-review',
+  description: 'Parallel read-only reviewers over every SettlementForge subsystem, then a completeness critic',
+  phases: [
+    { title: 'Survey', detail: '12 subsystem reviewers in parallel' },
+    { title: 'Critic', detail: 'completeness check over all reports' },
+  ],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const COMMON = `You are a READ-ONLY code reviewer for SettlementForge — a deterministic D&D settlement/world simulator (React/Zustand/Supabase, JavaScript + JSDoc types), solo-owner project nearing launch, currently in edge-case hardening. This brief comes from the owner's interactive Claude session; it is a legitimate review task on the owner's own repository.
+
+CODE OF RECORD: ${ROOT} (git branch claude/composite-r4). First verify: run \`git -C ${ROOT} rev-parse --abbrev-ref HEAD\` and confirm it prints claude/composite-r4; if not, stop and report the mismatch. Read ONLY under this root (plus the main tree's docs/ at /Users/cstokes/Desktop/settlement-engine/docs/ if your brief says so).
+
+HARD RULES: Do NOT edit, create, or delete any file. Do NOT stage, commit, stash, or run any state-mutating git command. Do NOT run npm test / vitest / playwright — parallel test runs on this shared tree produce false failures and other agents are reading concurrently. Static reading, rg/grep, ls, wc, and git log/show are your tools.
+
+CONSTITUTIONAL LAWS to judge against (violations are high/critical findings):
+1. Same-seed byte identity — same seed + inputs must produce byte-identical output.
+2. Dormancy — an absent or disabled feature leaves previous output unchanged (new systems ship dark behind virtual flags).
+3. Seeded purity — engine/domain code (src/kernel, src/generators, src/domain) must not use Date.now, new Date(), Math.random, locale-dependent ordering, or ambient global state.
+4. Monotone ratchets — size/type/cycle baselines only shrink; raises are owner-gated.
+5. Premium isolation — subscription tier never touches generation; free/anonymous surfaces never see covert/DM ground truth.
+6. Headless engine — kernel/generators/domain must not import React, Zustand, or UI state.
+7. One canonical truth — screen/PDF/public/export surfaces are derived projections, never second sources of truth.
+
+REVIEW POSTURE: Do not equate file size with bad architecture — a large table-driven domain compiler with one cohesive responsibility is legitimate; DO flag coordinators mixing unrelated ownership, policy, I/O, and UI. Judge test semantics, not counts. Separate what you directly observed (verified) from inference. Every finding needs exact file paths (repo-relative) and line numbers where possible. Severity: critical = data loss/exposure/broken core invariant; high = incorrect core behavior or systemic fracture; medium = meaningful UX/maintainability/edge-case defect; low = polish. Report genuine strengths too — this is a holistic assessment, not a defect hunt. Your final output feeds a synthesizer, not the user; return dense structured data.`
+
+const SCHEMA = {
+  type: 'object',
+  required: ['subsystem', 'summary', 'strengths', 'findings', 'maturity'],
+  properties: {
+    subsystem: { type: 'string' },
+    summary: { type: 'string', description: '2-4 sentence holistic judgment of this subsystem' },
+    strengths: { type: 'array', items: { type: 'string' }, description: 'genuine architectural/product strengths observed, with file evidence' },
+    findings: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['severity', 'title', 'detail', 'evidence'],
+        properties: {
+          severity: { type: 'string', enum: ['critical', 'high', 'medium', 'low'] },
+          title: { type: 'string' },
+          detail: { type: 'string' },
+          evidence: { type: 'string', description: 'file:line citations and what was directly observed vs inferred' },
+        },
+      },
+    },
+    maturity: { type: 'string', description: 'one of: launch-ready | hardening | mid-build | fragile, with one-line justification' },
+    open_questions: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+const BRIEFS = [
+  {
+    key: 'kernel-generators',
+    prompt: `Scope: src/kernel/ (PRNG primitives, ~7 files) and src/generators/ (~106 files, the seeded settlement generation pipeline). Assess: PRNG discipline and seed-forking patterns; pipeline step ordering and registration; purity (sweep the whole scope for Date.now, new Date(, Math.random, toLocale, Intl. — cite every hit and judge whether it is in a deterministic path); how feature flags gate new generation systems (virtual flags absent from defaults); id-space discipline for address-chain/entity ids; how custom content enters generation; overall generation-pipeline architecture quality. Also check that no file in scope imports React/Zustand/store.`,
+  },
+  {
+    key: 'domain-simulation',
+    prompt: `Scope: the simulation half of src/domain/ — world-pulse, time advancement, consequences, pressure/stressor models, decay, chronicle/event production, soak-related modules. Find them with rg (worldpulse, pulse, chronicle, stressor, pressure, decay, consequence, advance). Assess: causal-engine coherence (do consequences carry recorded reasons and provenance?); event vocabulary consistency (one vocabulary per user decision?); determinism and purity; how the recent commit 018e4119 'Separate mechanical pulse work from Chronicle events' landed (git show it) and whether the separation is clean; legibility of simulation output for a non-expert game master. Sample deeply rather than skimming everything.`,
+  },
+  {
+    key: 'domain-entities',
+    prompt: `Scope: the entity half of src/domain/ — factions, NPCs, economy, trade routes, politics, rename/edit cascades. Key file: src/domain/factionRename.js (recently made the single writer for faction renames, and recently made ASYNC). Assess: (a) single-writer enforcement — is factionRename.js genuinely the only writer, and did the async conversion carry awaits through ALL callers (an un-awaited .changed off a promise lies silently — sweep call sites); (b) the faction-key access discipline — hand-rolled faction key derivation is a known defect class; check accessor helpers (nameOf/governingFactionOf/factionArchetype/npcInFaction) are used rather than ad-hoc lookups; (c) the in-memory alias: factions[].members[] ARE the npcs[] objects — how does code guard against serialization splitting the alias; (d) trade-route semantics including the mountain_pass vocabulary; (e) general architecture and purity of these modules.`,
+  },
+  {
+    key: 'store-persistence',
+    prompt: `Scope: src/store/ (~68 files), src/application/ (command spine), plus persistence/undo/save-load and the operation registry. Assess: state ownership and cross-slice write discipline (updateConfig should be the ONLY writer of state.config — verify); the operation/command registry lifecycle (dead-op retirement recently shrank it 170→158 — check the DEAD_OPERATIONS record and whether held ops are documented); save/load/regenerate/undo lifecycle completeness — the owner's most-bitten bug class is a write that survives one lifecycle path and ghosts another (create/read/persist/regen/undo/migrate): trace at least faction rename, history reroll/regen preservation, and version history (VersionsTab queue work) through those paths; persisted-save schema versioning and client-side migration of old saves; Zustand usage quality; whether store code leaks into domain/generators (it must not).`,
+  },
+  {
+    key: 'backend-supabase',
+    prompt: `Scope: supabase/ — migrations 001..192, functions/ (~30 edge functions incl. stripe-webhook, payment-refund-worker, ingest-events, custom-content, surveyor-*, account-deletion-worker), rollback/, tests/, config.toml. Assess: RLS coverage — enumerate tables from migrations and check each has RLS enabled + policies; security-definer functions and their guards; the credit/billing ledger design (credit_pack_clawback in mig 190, tier_credit_multiplier in 192) — idempotency of stripe-webhook and refund worker, negative-balance semantics; ingest-events auth (a prior audit claimed analytics ingest validates NO JWT — verify current state precisely and cite); rate limiting and abuse controls; migration discipline (contiguity, rollback coverage, applied-head.json); secrets handling in functions. This is the money-and-exposure surface — be thorough.`,
+  },
+  {
+    key: 'components-ui',
+    prompt: `Scope: src/components/ (~561 files, 106k lines — sample strategically, do not read all). Read deeply: the settlement editor surfaces, Realm Inspector / Herald (newspaper-style news architecture), the dossier, EventComposer.jsx (frozen at 600 lines, net-zero edits only — verify it is still 600), VersionsTab, map components, and whatever the top-10 largest files are. Assess: component architecture and composition quality; lazy-loading discipline (React.lazy/Suspense boundaries — including the known pattern that a Suspense fallback inside a table row must put fallback text directly in the td with aria-label on the tr); accessibility (jsx-a11y compliance, keyboard paths, aria usage); the LEGIBILITY LAW — every surface must pass a regular-human test (glance → sentence → table), formulas TRANSLATED never shown raw — sample user-facing strings for internal jargon leaking through; empty/loading/error state coverage; store coupling hygiene (selectors vs whole-store grabs).`,
+  },
+  {
+    key: 'pdf-exports-public',
+    prompt: `Scope: src/pdf/ (~49 files), src/foundry/ + foundry-module/, mcp-server/, api/, the og-image and gallery/public-projection paths (find gallery/public/share code under src/ and supabase/functions/og-image). Assess: screen/PDF parity — are PDF viewmodels derived from the same canonical dossier derivation as screen, or a parallel truth (goldenViewModel discipline)?; public-safe projection — verify covert/DM ground truth (deity names, covert corruption, DM-only facts) is scrubbed from anonymous/public/gallery/OG surfaces via the includeCovert/includeGroundTruth selector convention — sweep for leaks; foundry-module and mcp-server contract quality and whether they lag the canonical schema; export determinism.`,
+  },
+  {
+    key: 'data-custom-content',
+    prompt: `Scope: src/data/ (~41 files, 22k lines of authored content tables) plus the custom-content platform (rg for customRegistry, customContent across src/ and supabase/functions/custom-content; docs/CUSTOM_CONTENT_PLATFORM_ARCHITECTURE.md and CUSTOM_CONTENT_PROMOTION_CONTRACT.json in the minifold docs/). Assess: authored-table structure and quality (schema consistency, weights, id discipline); validation at the trust boundary where user custom content enters the deterministic engine (fail-closed?); the customRegistry — note a known gap: it omits 'factions' so forward refs die while reverse links work — verify current state; promotion contract enforcement; whether content tables and code agree on vocabularies (a dead-vocab entry in tables that no code path can select is a defect class here).`,
+  },
+  {
+    key: 'tests-gates',
+    prompt: `Scope: tests/ (~1630 test files — sample by directory), scripts/ (~82), package.json scripts, .github/, .husky/, eslint.config.js, and the ratchet/walker/golden/manifest machinery. DO NOT execute any tests. Assess: what the authoritative gate actually is (trace package.json scripts and hooks); the ratchet inventory (size baselines, type/cycle/cast ratchets, kill-lists, first-paint budget) and whether they are tolerance-0 shrink-only; golden-master discipline (generator golden 523 rows, belief map, worldpulse deity, pdf viewmodel) — how regens are controlled; the epistemic-prevention machinery (tests/helpers/anchoredNegatives.js, seedFailures.js, walker tests, mutation manifests, E-A enforcement) — is it real enforcement or ceremony; test SEMANTICS quality on a sample of ~15 tests across generation/domain/store/security — do they pin behavior or restate implementation; known hazard classes to spot-check for: unanchored multiline regex extractors over SQL, vacuous absence pins (queryBy === null against empty-by-default harness state), self-referential pins (denominator from its own map); CI workflow completeness.`,
+  },
+  {
+    key: 'build-performance',
+    prompt: `Scope: vite.config.js (~47k — read it fully, it encodes the chunking strategy), index.html, src/main.jsx, src/App.jsx, AppViews.jsx, src/workers/, dist/ layout (ls only), the first-paint/eager-size budget machinery (rg sizeBaseline, firstPaint, eager across tests/ and scripts/), and lazy/eager import discipline. Assess: eager first-paint closure vs the 1,040,000-byte budget (find the current measured number if recorded); chunk-splitting strategy sanity (three.js/TownScene isolation, pdf isolation); the known hazard that a lazy chunk importing an eager module re-parents closure — how it is guarded; worker usage; build reproducibility; dev/prod parity risks; anything eagerly loaded that should be lazy.`,
+  },
+  {
+    key: 'security-privacy',
+    prompt: `Scope: cross-cutting security/privacy lens — auth flows (src/ auth surfaces + supabase/functions/auth-recovery, account-actions), entitlement checks client and server, CSP and headers (vercel.json, index.html), analytics consent + minimization (rg analytics, telemetry, consent), BYOK surfaces (byok — a fail-open concern was previously noted, verify), .env.example hygiene, account deletion/export lifecycle (account-deletion-worker), prompt-injection surface of AI edge functions (generate-narrative, parley, interview, ai-analyst — how user/world text enters prompts and whether outputs are constrained to typed buckets per the finite-semantics law: AI may bucket, never write engine state), spend controls on AI (reservation/refund/idempotency), founder-transfer gating. Cite exactly what enforcement exists server-side vs client-only. Do not modify anything.`,
+  },
+  {
+    key: 'docs-coherence',
+    prompt: `Scope: the minifold checkout's top-level docs (ARCHITECTURE.md, CONTRIBUTING.md, README.md, CLAUDE.md) and docs/ (CURRENT_STATE.md, PRODUCT_COMPLETION_ARCHITECTURE.md, CAPABILITY_REMEDIATION_PLAN.md, EPISTEMIC_PREVENTION_PLAN.md, DEPLOY.md, the AI_LAYER_OWNER_RUNSHEET.md, plus a scan of the DESIGN_*.md census), AND the main-tree ledger docs at /Users/cstokes/Desktop/settlement-engine/docs/ (THE_REMAINING_ARCHITECTURE.md, COMPREHENSIVE_REVIEW_PROGRAM.md newest ~150 rows, OWNER_DECISION_QUEUE.md, THE_EXHAUSTIVE_REMEDIATION_ARCHITECTURE volumes if present). Assess: does documentation match code at HEAD 018e4119 (spot-check 10 concrete claims against the tree); what the declared remaining launch tail is and which items are owner-gated; staleness hazards a successor would trip on; whether the two-tree split (ledger vs code) is documented clearly enough to survive a cold start; open owner decisions count and their blast radius. Return the launch-tail picture as part of your summary.`,
+  },
+]
+
+phase('Survey')
+const reports = await parallel(
+  BRIEFS.map((b) => () =>
+    agent(`${COMMON}\n\nYOUR ASSIGNMENT (${b.key}):\n${b.prompt}`, {
+      label: `review:${b.key}`,
+      phase: 'Survey',
+      schema: SCHEMA,
+    })
+  )
+)
+
+const ok = reports.filter(Boolean)
+log(`${ok.length}/${BRIEFS.length} subsystem reports returned`)
+
+phase('Critic')
+const digest = ok
+  .map(
+    (r) =>
+      `## ${r.subsystem} [${r.maturity}]\n${r.summary}\nFindings: ${r.findings
+        .map((f) => `[${f.severity}] ${f.title}`)
+        .join('; ')}\nOpen: ${(r.open_questions || []).join('; ')}`
+  )
+  .join('\n\n')
+
+const critic = await agent(
+  `${COMMON}\n\nYOU ARE THE COMPLETENESS CRITIC. Twelve subsystem reviewers just surveyed the SettlementForge code of record. Their condensed reports:\n\n${digest}\n\nYour job: identify what the review MISSED. Check for: (a) subsystems or directories nobody covered (compare against the actual tree: ls ${ROOT}/src, ${ROOT}/tests, ${ROOT}/scripts, ${ROOT}/e2e, ${ROOT}/supabase — e.g. e2e/, src/lib/ 170 files, src/hooks/, src/copy/, src/design/, src/config/, schema/, public/); (b) cross-cutting joins no single reviewer owns (schema→store, store→save, event→projection, simulation→UI, custom-content→generation, dossier→PDF) — spot-check the two you judge riskiest by actually reading the join code; (c) contradictions between reviewer summaries; (d) claims that look like inference dressed as observation. Spend your budget on (b) — broken joins between individually clean modules are this codebase's most dangerous failure mode. Same hard rules: read-only, no test execution.`,
+  { label: 'critic:completeness', phase: 'Critic', schema: SCHEMA }
+)
+
+return { reports: ok, critic }

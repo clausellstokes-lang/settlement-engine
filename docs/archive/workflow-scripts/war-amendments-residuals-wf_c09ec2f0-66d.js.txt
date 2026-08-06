@@ -1,0 +1,17 @@
+export const meta = {
+  name: 'war-amendments-residuals',
+  description: 'Fix the 14 re-verify residuals in the war amendments doc',
+  phases: [{ title: 'Fix', detail: 'one Opus agent, 14 surgical fixes under 3 mini-rulings' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const DOC = `${MF}/docs/DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md`
+const J = '/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/1c189f3d-9fc3-4fc9-9cb7-b767525d28d5/subagents/workflows/wf_1b5892d6-68e/journal.jsonl'
+const S = { type:'object', required:['fixed','notes'], properties:{ fixed:{type:'number'}, notes:{type:'string'}}}
+phase('Fix')
+const out = await agent(`VERIFY-FIRST: legitimate owner-ordered residual repair. Read the RE-VERIFY result's residuals list (14 items) from ${J} (the second result line), then fix ALL 14 in ${DOC} in place. Edit ONLY that file. No git. CHAIR MINI-RULINGS binding on the three that need them:
+(1) Residual 1 — PEACETIME-DOOR DURATION: at the peacetime door the tribute family's duration drafts from THE DEMAND'S MEASURE (the trigger's own read), per GRAMMAR's no-margin-in-peace law; the margin derivation applies at the WAR DOOR only. State both sources explicitly in TB-1.
+(2) Residual 4 — TB-LAW-4 rewrite: NO drafting-side floor test exists at all (a sheet may promise beyond reserve — courts overpromise); the BUILT transfer-time reserve floor (treatyTransfer.js:107-108) is PHYSICS at payment time — shortfalls pay short and read as strained compliance with the shortfall receipted. No new floors, tests, or clamps anywhere; the built floor is not a clamp, it is conservation.
+(3) Residual 3 — TB-4 preconditions: add TR-6, scoped: the corner-monopolist evidence arm of the economic shared-threat read requires TR-6 LIT; its DEGRADED ARM (TR-6 dark) reads dependency/exclusivity evidence only — declared, pinned.
+For residual 2, assign families/executor kinds: subsidy → economic family, executor transfer (conditioned stream); loan → economic, transfer (two-phase); tribute_prosperity_indexed → economic, transfer (indexed re-size); tribute_service → population family, executor = the receipted-act kind TB-3 requests beside forbearance (one request instrument, J-GR-15's); tribute_population → population family, flow-minting executor request; cult_establishment + patron_imposition → faith family, executor grant (their effect machinery = the built IMPOSE_CULT/flip substrate, consumer-side). For residual 14: home assimilation to the traditions-adoption machinery via CPL-12's pair (FAITH/COUPLINGS-owned), cited as such. Residuals 5-13: mechanical per the verifier's own statements (add the §6 XW-6 row + reasons on all six bare cells; fix the §4 header flag attribution (faithTermsEnabled = FAITH's WF-6 flag, a PRECONDITION not an own-flag); state XW lit-preconditions as LIT with the walker line; sync §2/§10 item (3) wording; add §7 rows for XW-1/XW-2/XW-6; add the CPL-12 general-clause reconciliation line beside the CPL-17 override reference; update §0's thesis to enumerate the eight expansion waves; give tribute_resource_share the same non-row cure tribute_goods got). Return {fixed, notes}.`,
+  {label:'fix:residuals', phase:'Fix', model:'opus', effort:'high', schema:S})
+return out

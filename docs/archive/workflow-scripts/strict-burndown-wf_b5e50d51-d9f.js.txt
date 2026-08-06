@@ -1,0 +1,97 @@
+export const meta = {
+  name: 'strict-burndown',
+  description: 'Wave B — burn the domain strict-typecheck baseline 4,642 → 0 (JSDoc-only, golden-safe)',
+  phases: [
+    { title: 'Foundation', detail: 'entity/trace typedef spine first — improves downstream inference' },
+    { title: 'Burn', detail: '12 parallel batches, disjoint file sets, ~378 errors each' },
+    { title: 'Converge', detail: 're-measure; cleanup rounds for cross-file surfacing until zero' },
+  ],
+}
+
+const REPO = '/Users/cstokes/Desktop/settlement-engine'
+
+const RULES = `
+HARD RULES (violating any = failure):
+- JSDoc/typedef annotations ONLY. Zero runtime changes: no new statements, no changed expressions, no reordered code, no renames, no "fixing" logic. The golden master must stay byte-identical BY CONSTRUCTION (comments don't execute). If typing a site reveals a REAL bug (wrong-shaped value actually flowing), DO NOT fix it — record it in your report's bugsDiscovered list with file:line and evidence.
+- Edit ONLY the files assigned to you. You may READ any file (schemas, typedefs, callers) for context. If a proper fix requires editing a typedef in a file you don't own, use a local inline @typedef in YOUR file and record the wish in crossFileNeeds.
+- Annotation quality bar: real types, not \`any\` laundering. \`unknown\` + narrowing where genuinely dynamic; import types from settlement.schema.js / existing typedefs via {import('...').TypeName} where they exist; honest union types; @param/@returns on every flagged function. tsconfig for this check: tsconfig.domain-strict.json (strict + noImplicitAny over src/domain).
+- Verify your work: run \`cd ${REPO} && npx tsc --noEmit -p tsconfig.domain-strict.json 2>&1 | grep -F "<each-of-your-files>"\` — every assigned file must show ZERO errors. Then run the test files adjacent to your files (tests/domain/... matching your file names) and confirm green. eslint your files (comments can still break lint via jsdoc formatting? no jsdoc lint here — just run it).
+`
+
+const REPORT_SCHEMA = {
+  type: 'object',
+  required: ['filesCleaned', 'errorsBefore', 'errorsAfter', 'bugsDiscovered', 'crossFileNeeds', 'testsRun'],
+  properties: {
+    filesCleaned: { type: 'array', items: { type: 'string' } },
+    errorsBefore: { type: 'number' },
+    errorsAfter: { type: 'number', description: 'must be 0 for your files' },
+    bugsDiscovered: { type: 'array', items: { type: 'string' }, description: 'file:line — evidence (NOT fixed)' },
+    crossFileNeeds: { type: 'array', items: { type: 'string' }, description: 'typedef changes wished for in files you did not own' },
+    testsRun: { type: 'string' },
+  },
+}
+
+// args.batchesPath is read by the agents themselves (workflow scripts have no fs).
+const BATCHES_PATH = args.batchesPath
+
+phase('Foundation')
+log('Cleaning the entity/trace typedef spine first')
+
+const foundation = await agent(
+`You are an Opus strict-typecheck burn-down agent for ${REPO} (branch review-fixes-2026-07-08; work in the checkout, do NOT commit).
+Read the batch file ${BATCHES_PATH} — your assignment is the "foundation" array (5 files, ~109 errors): the entity/trace spine whose types downstream files reference. Make each file STRICT-CLEAN under tsconfig.domain-strict.json.
+${RULES}
+Because you are the FOUNDATION, prefer exporting well-named @typedefs from these files where downstream code obviously passes these shapes — good foundation types reduce the whole burn-down's cost.`,
+  { label: 'foundation', phase: 'Foundation', schema: REPORT_SCHEMA, model: 'opus' }
+)
+log(`Foundation: ${foundation ? foundation.errorsAfter : 'FAILED'} errors remain in spine`)
+
+phase('Burn')
+log('Fanning out 12 disjoint batches')
+
+const batchResults = (await parallel(Array.from({ length: 12 }, (_, i) => () =>
+  agent(
+`You are an Opus strict-typecheck burn-down agent for ${REPO} (branch review-fixes-2026-07-08; work in the checkout, do NOT commit).
+Read the batch file ${BATCHES_PATH} — your assignment is batches[${i}].files (~378 strict errors across ~10 files). Make each assigned file STRICT-CLEAN under tsconfig.domain-strict.json.
+${RULES}
+The foundation spine (entities/, trace.js) was just cleaned and exports good typedefs — import types from there rather than re-declaring. Other agents own other files concurrently: do not touch anything outside batches[${i}].files.`,
+    { label: `batch-${i}`, phase: 'Burn', schema: REPORT_SCHEMA, model: 'opus', effort: 'low' }
+  )
+))).filter(Boolean)
+
+const cleaned = batchResults.reduce((a, r) => a + r.filesCleaned.length, 0)
+log(`Burn complete: ${batchResults.length}/12 batches, ${cleaned} files cleaned`)
+
+phase('Converge')
+
+let rounds = 0
+let remaining = -1
+let lastReport = null
+while (rounds < 3) {
+  rounds++
+  const converge = await agent(
+`You are the CONVERGENCE agent for the strict burn-down in ${REPO}.
+Run: cd ${REPO} && npx tsc --noEmit -p tsconfig.domain-strict.json 2>&1 | tail -80 — and count remaining errors (also run scripts/check-domain-strict.mjs mentally: node scripts/check-domain-strict.mjs to see its per-file view; do NOT pass --update).
+If ZERO errors remain: report errorsAfter=0 and do nothing else.
+If errors remain (cross-file surfacing from the parallel annotation work, or batch leftovers): fix them ALL, in whatever domain files they live (you own the whole src/domain tree this round).
+${RULES}
+`,
+    { label: `converge-${rounds}`, phase: 'Converge', schema: REPORT_SCHEMA, model: 'opus' }
+  )
+  lastReport = converge
+  remaining = converge ? converge.errorsAfter : -1
+  log(`Converge round ${rounds}: ${remaining} errors remain`)
+  if (remaining === 0) break
+}
+
+const allBugs = [
+  ...(foundation?.bugsDiscovered || []),
+  ...batchResults.flatMap((r) => r.bugsDiscovered || []),
+  ...(lastReport?.bugsDiscovered || []),
+]
+const allCrossNeeds = [
+  ...(foundation?.crossFileNeeds || []),
+  ...batchResults.flatMap((r) => r.crossFileNeeds || []),
+]
+
+return { remaining, rounds, filesCleaned: cleaned, bugsDiscovered: allBugs, crossFileNeeds: allCrossNeeds }

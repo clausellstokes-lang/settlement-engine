@@ -1,0 +1,22 @@
+export const meta = {
+  name: 'build-cycle-17-sparkle-sweep',
+  description: 'Owner directive: remove all decorative sparkle/star icons except logos and the AI Surveyor prompt icon',
+  phases: [{ title: 'Sweep', detail: 'census → classify → remove → verify' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const P10 = `THE §10 PROTOCOL BINDS: ${MF} on claude/composite-r4 only (cd + rev-parse first, every command block); pathspec commits of ONLY your lane files; no stash; focused vitest + gate-tail (ps aux | grep vitest first); STOP-and-report; trailer "Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>". Nothing pushed. CONCURRENCY FENCES (cycle 16 is LIVE): src/components/nav/*, src/components/theme.js, src/lib/routes.js, tests/store/appNavSsot.test.js belong to the fletching lane; src/domain/worldPulse/* to the kernel/wiring lanes; causeWalk/heraldCausalVoice/discourseKernel/stateProse to the CF lane — if a sparkle lives in a fenced file, record it in a STOP report for the chair instead of editing. Queue docs: re-read, carve hunks.`
+const S = { type:'object', required:['lane','commits','gates','stopReports','notes'], properties:{lane:{type:'string'},commits:{type:'array',items:{type:'string'}},gates:{type:'array',items:{type:'string'}},stopReports:{type:'array',items:{type:'string'}},notes:{type:'string'}}}
+const V = { type:'object', required:['lane','verdict','findings'], properties:{lane:{type:'string'},verdict:{type:'string'},findings:{type:'array',items:{type:'string'}}}}
+phase('Sweep')
+const r = await agent(`VERIFY-FIRST: OWNER-DIRECTED sweep (directive 2026-08-03, verbatim: remove all icons of the small decorative gold four-pointed-star/sparkle class that are not logos, EXCEPT the one used for the AI Surveyor prompt if it has one). ${P10}
+LANE SP — THE SPARKLE SWEEP. METHOD, census before removal:
+(1) CENSUS the whole render surface (src/components, src/pdf, index.html, public/ SVGs): every occurrence of the sparkle/star ornament class — unicode glyphs (✦ ✧ ✨ ✴ ❋ ⁂ ★ ☆ 🎇 ✳ and kin), star/sparkle SVG paths or components, icon-font references. List EVERY site with file:line in your notes — no silent truncation.
+(2) CLASSIFY each site into exactly one bucket: BRAND (the wordmark/logo lockup and favicon family — KEEP); SURVEYOR (an icon attached to the AI Surveyor prompt/task surfaces — KEEP if it exists, and report whether it does); MAP/GAME SEMANTICS (a glyph that ENCODES data on the town map or in the dossier rather than decorating — report to the chair in a STOP row, do not remove without a ruling); DECORATIVE (section ornaments, header flourishes, bullet dressing — REMOVE).
+(3) REMOVE the decorative bucket: delete the glyph/icon and heal the layout (spacing, alignment, any flex gap that assumed it); where a heading or card leaned on the ornament for rhythm, let the typography carry it — no replacement ornaments.
+(4) Update any pin that asserted the removed glyphs (docstrings cite the directive); run the affected component suites + eslint + sizeBaseline; if any removal changes a snapshot/golden, it is a disclosed owner-directed change — say so in the commit body with the site list.
+One pathspec commit (or one per surface family if large). The full census with per-site classification goes in the commit body. Return {lane:'SP sweep', commits, gates, stopReports, notes}.`,
+  {label:'sp:sparkle-sweep', phase:'Sweep', model:'opus', effort:'high', schema:S})
+const v = await agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Re-run the census YOURSELF with your own grep set (glyphs + SVG star paths + icon components) over the committed bytes: the DECORATIVE bucket must be EMPTY now, the BRAND sites byte-untouched, the SURVEYOR site (if claimed) still rendering — and diff your census against the lane's: any site the lane's census missed is a finding even if it happens to be clean. Spot-render 3 affected surfaces in jsdom to prove no layout orphaned (no empty flex slot, no doubled gap). Confirm fenced files untouched (git show --stat) and any fenced-file sparkle correctly STOP-reported rather than edited. Suites green on committed bytes; pathspec-clean vs cycle 16. Return {lane:'SP verify', verdict, findings}.`,
+  {label:'sp:verify', phase:'Sweep', model:'opus', effort:'high', schema:V})
+return { r, v }

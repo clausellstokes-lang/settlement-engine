@@ -1,0 +1,35 @@
+export const meta = {
+  name: 'wave-f-adjudication-surface',
+  description: 'Wave F: the gathered adjudication screen, the held docket, and the Herald pointer (directive 7 / J-D7 manual half)',
+  phases: [{ title: 'Build', detail: 'one Opus implementer', model: 'opus' }],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = {
+  type: 'object',
+  required: ['agent', 'fixes'],
+  properties: {
+    agent: { type: 'string' },
+    fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } },
+    behavior_shifts: { type: 'array', items: { type: 'string' } },
+    discovered: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+phase('Build')
+const result = await agent(`You are an Opus IMPLEMENTER for SettlementForge. WAVE F: the gathered adjudication surface. BINDING LAW: docs/DESIGN_REALM_DIRECTIVES.md directive 7 + J-D7 ("When auto-resolve is OFF: ONE gathered adjudication screen replaces the advance-time popup (never a sequential modal chain). Dismissal parks unresolved items in a durable HELD DOCKET that re-surfaces on the next advance and shows a one-line Herald pointer; nothing is ever silently dropped — the coup-guarantee law extends to the UI"). Worktree: ${ROOT} branch claude/composite-r4 @ 2cddae4e — verify with \`git -C ${ROOT} rev-parse --abbrev-ref HEAD\`; stop on mismatch.
+
+⚠️ A long-running soak process may be live: never touch artifacts/soak/**, never kill processes; focused vitest only, one at a time; timeout-shaped reds get ONE isolation re-run. When a component test mounts App or heavy surfaces, sever lazy side-effect chains at component boundaries with vi.mock (the navFlowArrows precedent: analytics + stripe + PricingMomentCard mocks — the teardown-race class).
+
+CONTEXT (study first): wave B2 built full auto-resolve through the proposal accept path (src/domain/worldPulse/autoAdjudication.js, src/store/campaignAdvanceSession.js, campaignWorldPulseSlice.js, advanceAutoResolve toggle persisted). The proposals docket currently surfaces inside the Herald (RealmInspector 'adjudication' section — REALM_INSPECTOR_SECTIONS). The advance-time flow lives in CampaignFolder (advance popup) + campaignAdvanceSession. The docket's admission machinery (proposalAdmission.js) carries the coup one-shot guarantee.
+
+IMPLEMENT (J-D7's manual half, whole):
+1. THE GATHERED SCREEN: when advanceAutoResolve is OFF and an advance completes with pending majors, ONE gathered adjudication surface replaces/extends the advance-completion popup — every pending decision in a single screen (accept/veto per item through the EXISTING proposal verbs — one vocabulary, never a fork), in-world prose per the legibility law, keyboard-accessible, never a sequential modal chain. A saturated tick's multiple majors render as a list in one surface.
+2. THE HELD DOCKET: dismissing the screen with unresolved items parks them DURABLY (campaignState — JSON-round-trip; the existing proposals pending state may already BE the durable store: if so, the held docket is a VIEW discipline over it, not a second store — one truth; state your finding). Held items re-surface at the next advance's gathered screen, oldest first. NOTHING silently drops: pin that a dismissed item survives reload and reappears (the coup-guarantee law extended to UI, tested with a coup fixture).
+3. THE HERALD POINTER: pending decisions LEAVE the Herald as work-surfaces — the 'adjudication' section becomes a one-line in-world pointer ("Three matters await the realm's judgment." linking to the advance flow) rather than the full docket UI. Preserve the section id (external consumers pin the section list — check oracleRemoved.test.jsx and the wave-C badge exclusions) and the register doors landed in wave C.
+4. AUTO-MODE COHERENCE: when advanceAutoResolve is ON, the gathered screen never appears (auto path resolves; the B2 provenance marks stand); toggling mid-held-docket is defined: held items resolve through the auto path at the NEXT advance with engine-adjudicated provenance — Herald-noted, never silent. Pin it.
+5. PINS with executed negative controls (revert/red/restore/green, quoted): gathered-not-chained (multiple majors, one surface); dismissal durability + reload survival; oldest-first resurfacing; Herald pointer honesty (count matches held+pending); auto-toggle transition; a11y (focus trap, keyboard resolve); lazy discipline (the screen is a lazy leaf with the second assertion if its parent is lazy).
+
+HARD RULES: no migrations; no git mutations; no full suites/builds; no golden re-records; no ratchet raises; new store actions → operationRegistry + gen:compendium-data + generate-sitemap + build:edge-shared IN ORDER; JSX 600 / js 800 ceilings (several files AT ceiling — net-zero there); anchored negatives; no em dashes in src/domain|src/data string literals; determinism laws; the certification totality walker guards rule keys (do NOT mint a new rule key — this is UI/store surface over existing machinery). Return dense structured data: statuses, files, verbatim test tails, negative-control quotes, behavior shifts plainly, judgment calls vetoable, discovered adjacencies.`, { label: 'wF:adjudication-surface', phase: 'Build', schema: SCHEMA, model: 'opus' })
+
+return { results: [result].filter(Boolean) }

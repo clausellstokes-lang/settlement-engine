@@ -1,0 +1,46 @@
+export const meta = {
+  name: 'cartography-tc0-tc1-tc2',
+  description: 'TC-0 (Map sub-tab shell), TC-1 (manifest contract + dormancy), TC-2 (skeleton: field, streets, walls) in parallel',
+  phases: [{ title: 'Cartography', detail: '3 Opus implementers, disjoint slices', model: 'opus' }],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = { type: 'object', required: ['agent', 'fixes'], properties: { agent: { type: 'string' }, fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } }, behavior_shifts: { type: 'array', items: { type: 'string' } }, discovered: { type: 'array', items: { type: 'string' } } } }
+
+const COMMON = [
+  'Worktree: ' + ROOT + ' branch claude/composite-r4 — verify with git rev-parse --abbrev-ref HEAD; stop on mismatch.',
+  'BINDING LAW: docs/DESIGN_TOWN_CARTOGRAPHY.md — read the WHOLE document first, especially §1 (THE ONE LAW), §2 (what already exists — build ON, never beside), §7 (determinism + performance contracts), §9 (your slice), and every amendment A-1..A-11 that governs your slice.',
+  '',
+  '⚠️ CONCURRENT WRITERS — this tree is BUSY: a war-joins wave is gating (warDeployment, settlementStrategy, applyWorldPulse, peaceTerms, warIntent, occupation, treatyEnforcement, armyTransit), two sibling cartography implementers hold the other TC slices, and the owner wizard-news session holds wizardNews/settlementRumors/heraldRouting/informationStatecraft/momentum/supplyWebWarfare. TOUCH NONE OF THOSE. Cartography must be disjoint from all of it — if your slice seems to need a war or worldPulse file, stop and report rather than reaching in.',
+  '',
+  'HARD RULES: no migrations; no git mutations; no full suites/builds; NO ratchet raises (JSX 600 / js 800 effective lines — several files are AT ceiling so net-zero or extract a leaf; ZERO any-casts in new domain files; the loading-narration ratchet is tolerance-0 so every Suspense fallback NARRATES; the raw-button budget is fixed — use the Button primitive; no em dashes in src/domain|src/data STRING LITERALS); FIRST PAINT is 1,020,590 of an owner-gated 1,040,000 — every new surface is a LAZY leaf with a build pin carrying the SECOND assertion, and never let an eager module import a heavy derivation; determinism (seeded forks, draw-accounted; the Weyl sampler src/domain/lowDiscrepancy.js for ANY cell subsampling — never an arithmetic stride, that hazard is recorded and it made a whole mountain ridge unreachable); headless domain; anchored negatives; conditional keys drop-when-empty and declared on the OWNING typedef; THE GOLDEN LAW — this program ships DARK, so no generation or dormancy golden may move; if one would, STOP and report. Return dense structured data: statuses, files, verbatim test tails, negative-control quotes (revert/red/restore/green per new pin), behavior shifts plainly, judgment calls vetoable, discovered.',
+].join('\n')
+
+phase('Cartography')
+const results = await parallel([
+  () => agent(['You are an Opus IMPLEMENTER for SettlementForge. SLICE TC-0 — THE MAP TAB SUB-TAB SHELL. Design §12 + J-TC-8 govern; the doc says this slice is "buildable NOW, independent of the renderer".',
+    'BUILD: the Map tab becomes a sub-tab container — Plan, 3D Portrait, Player View reorganized as siblings. Lazy pins with the SECOND assertion (the parent is itself lazy — the wave-C heraldRegisterDoorsLazy and H4 heraldWanderersLazy tests are your recipe, including the third layer H4 added: the chrome must hold NO static edge to the heavy leaf). Presence gating (a sub-tab is ABSENT when its content cannot exist, never disabled — the ai_notes lesson). Deep links. Persisted sub-tab preference.',
+    'STUDY FIRST and match: the existing dossier tab machinery, the Herald register doors, and how RealmInspector gates sections. Reuse their idioms rather than inventing a second tab system.',
+    'YOUR OWNERSHIP: the Map tab shell + its sub-tab components + their tests. NOT the renderer, NOT the manifest schema, NOT any worldPulse file.',
+    'PINS with executed negative controls: each sub-tab mounts lazily and is absent when it cannot exist; the deep link resolves and a stale link falls back gracefully; the preference persists and survives reload (JSON round-trip); a11y (tab semantics, keyboard); the lazy build pin with its second and third assertions.',
+    COMMON].join('\n'), { label: 'TC-0:shell', phase: 'Cartography', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(['You are an Opus IMPLEMENTER for SettlementForge. SLICE TC-1 — THE CONTRACT. Design §3 (the manifest gains four layers, schema-versioned and ADDITIVE) + §7 (determinism/performance) + A-1..A-11 as they bear on the model. The doc calls this "the keystone; everything else is additive."',
+    'BUILD: the TownSceneManifest schema extension for the four cartography layers, the CLOSED VOCABULARIES they use, the digest/golden scaffolding, and the DORMANCY PINS. This slice adds MODEL and PROOF, not rendering and not synthesis.',
+    '⚠️ THE ONE LAW (§1) IS YOUR PRIMARY CONSTRAINT — read it and obey it exactly: the cartography synthesis is a STAGE INSIDE TownSceneManifest, never a parallel generator. Verify how the manifest is built today and extend THAT, additively and schema-versioned, so an old manifest still loads and a new one is a superset.',
+    'DORMANCY: the whole program ships dark behind its own virtual flag (declare it, absent from DEFAULT_SIMULATION_RULES, declared false in full_simulation so the certification totality walker can census it — the routeLifecycleEnabled/npcConsequencesEnabled/magicEconomyEnabled/demographicsEnabled precedent). Dark must be byte-identical BY OBJECT IDENTITY with a fenced golden built BEFORE any wiring — the J1 precedent, which is the only honest time to build such a fence.',
+    'ALSO: author the certification row for the new rule key in the appropriate lane file (read src/domain/certification/subsystemCertification.js for the shape). Declare NO aliveness channel you cannot prove a receipt can read — that discipline is recorded and the corpus guard enforces it.',
+    'YOUR OWNERSHIP: the manifest schema + vocabularies + certification row + dormancy golden + your tests. NOT the shell, NOT the synthesis stages, NOT the renderer.',
+    'PINS with executed negative controls: schema is additive (an old manifest loads unchanged, byte-identical); closed vocabularies are total; dormancy by OBJECT IDENTITY with the fence built pre-wiring; the certification row traces to source; JSON round-trip.',
+    COMMON].join('\n'), { label: 'TC-1:contract', phase: 'Cartography', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(['You are an Opus IMPLEMENTER for SettlementForge. SLICE TC-2 — THE SKELETON: field, streets, walls, gates, bridges.',
+    'BUILD per design §4 (the synthesis pipeline: pure, seeded, staged like the settlement pipeline): the town FIELD, the STREET synthesis, WALLS/GATES/BRIDGES, ITERATION CAPS, and the DETERMINISM CORPUS. A-10 (the URBAN MORPHOLOGY LAW) is BINDING on this slice — read it in full; order, chaos and shape must follow from the settlement\'s own governance/tier/economy rather than from a style knob.',
+    '⚠️ DETERMINISM IS THE WHOLE GAME HERE and this codebase has been bitten precisely in this territory: ANY subsampling of a cell or grid array MUST use the Weyl sampler in src/domain/lowDiscrepancy.js — an arithmetic stride resonates with row width and made an entire mountain ridge structurally unreachable (measured, recorded). One named seeded fork, draw-accounted. Same seed + same settlement ⇒ same town, and prove it with a SEED-FAMILY totality pin plus a structural purity scan (no module-scope let/var, no globalThis/Date/Math.random), because a double-pass behavioural check alone is blind to parity-period state — also a recorded hazard.',
+    'ITERATION CAPS ARE A CONTRACT, not a safety net: the synthesis must terminate in bounded work for the largest legal town, and the bound must be a number a test asserts (§7).',
+    'YOUR OWNERSHIP: the synthesis leaves for field/streets/walls + the determinism corpus + your tests. NOT the manifest schema (TC-1 owns it — code against the design contract and say so if it has not landed), NOT the renderer, NOT the shell.',
+    'PINS with executed negative controls: seed-family determinism (two-pass + purity scan); the Weyl requirement (a stride control shows the aliasing it prevents); iteration caps hold at the largest legal town; walls/gates/bridges are coherent with the field (a gate is on a wall, a bridge is on water); morphology follows governance per A-10, not a knob.',
+    COMMON].join('\n'), { label: 'TC-2:skeleton', phase: 'Cartography', schema: SCHEMA, model: 'opus' }),
+])
+const all = results.filter(Boolean)
+log(all.length + '/3 cartography slices returned')
+return { results: all }

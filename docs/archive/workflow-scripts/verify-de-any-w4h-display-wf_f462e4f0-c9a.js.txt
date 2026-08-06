@@ -1,0 +1,56 @@
+export const meta = {
+  name: 'verify-de-any-w4h-display',
+  description: 'Adversarially verify the W4h display de-any pass (armyStrength/tradePressure/visibilityAudit)',
+  phases: [{ title: 'Verify', detail: 'parity + contracts + doctrine, in parallel' }],
+}
+
+const REPO = '/Users/cstokes/Desktop/settlement-engine'
+const FILES = 'src/domain/display/armyStrength.js src/domain/display/tradePressure.js src/domain/display/visibilityAudit.js'
+
+const VERDICT = {
+  type: 'object',
+  properties: {
+    verdict: { type: 'string', enum: ['PASS', 'FAIL'] },
+    issues: { type: 'array', items: { type: 'object', properties: {
+      severity: { type: 'string', enum: ['blocker', 'minor'] },
+      file: { type: 'string' },
+      description: { type: 'string' },
+    }, required: ['severity', 'description'] } },
+    notes: { type: 'string' },
+  },
+  required: ['verdict', 'issues', 'notes'],
+}
+
+phase('Verify')
+const [parity, contracts, doctrine] = await parallel([
+  () => agent(`You are auditing an uncommitted change in ${REPO} (do NOT edit anything; other unrelated uncommitted changes exist in the checkout — ignore everything outside these three files):
+${FILES}
+
+The change claims to be RUNTIME-BEHAVIOR-NEUTRAL: a JSDoc-types-only de-any pass. Run \`git diff -- ${FILES}\` (from ${REPO}) and adversarially try to REFUTE the neutrality claim. Scrutinize every changed line that is not purely inside a JSDoc comment. Known code-line changes you must specifically verify are pure no-ops at runtime:
+1. Default-arg casts \`= /** @type {any} */ ({})\` became \`= {}\` (comment removal only).
+2. In tradePressure.js snapshotFrom, the alias \`const anyIt = /** @type {any} */ (it);\` was removed and the subsequent byId.set line now reads \`it.settlement || it\` / \`it.settlement?.name || it.name\` instead of anyIt.* — verify the substitution is exact (same properties, same operators, same evaluation order/semantics, including optional-chaining placement).
+Also verify NO other executable-code characters changed anywhere in the diff (semicolons, parens, operator changes, reordering). Default to FAIL if you find ANY runtime-reachable difference.`, { label: 'verify:runtime-parity', phase: 'Verify', schema: VERDICT }),
+
+  () => agent(`You are auditing an uncommitted change in ${REPO} (read-only for src; you may run npm/npx commands; other unrelated uncommitted changes exist — attribute carefully). The change replaced @param {any} annotations with narrower JSDoc types in:
+${FILES}
+
+New contracts: ids (settlementId/aId/bId) are now \`string | number | null | undefined\`; worldState is \`import('src/domain/worldPulse/pulseShapes.js').WorldState\` (or | null | undefined); settlements/items are \`Array<SettlementItem> | null | undefined\`; nameFor is \`(id: unknown) => string\`; snapshotFrom's worldState param is NON-nullable WorldState.
+
+Adversarially hunt for a CALLER these narrower types break:
+1. Grep all of src/ and tests/ for every call site of: latentStrength, attritionPhrase, deployedArmyStatus, deployedArmyStandings, hasDeployedArmy, pairTradePressure, settlementTradePressure, hasTradePressure, runVisibilityAudit. For each call site, check the arguments against the new types (watch for: an object passed as an id; null passed where only undefined is allowed; a nameFor whose parameter is declared with a narrower type than unknown; snapshotFrom's internal callers passing possibly-null worldState).
+2. Run \`npm run typecheck\` AND \`npm run typecheck:domain:strict\` from ${REPO}. Any error that mentions these three files or one of their call sites is a FAIL (errors clearly caused by OTHER in-flight uncommitted files are out of scope — note them but don't fail on them).
+3. Run \`npx vitest run tests/domain/ tests/lint/\` and report any failure that involves these modules or the any-cast/strict ratchets.
+Default to FAIL if uncertain whether a breakage is attributable to this change.`, { label: 'verify:caller-contracts', phase: 'Verify', schema: VERDICT }),
+
+  () => agent(`You are reviewing an uncommitted fix in ${REPO} (read-only; ignore unrelated uncommitted changes outside the listed files) for compliance with the repo's any-cast ratchet doctrine. Context: tests/lint/domainAnyCastBaseline.test.js was failing because three new W4h files carried 43 any-holes with no baseline entries. The fix burned all holes to zero via real JSDoc types instead of widening the baseline. Changed files:
+${FILES}
+
+Verify, adversarially:
+1. tests/lint/.domain-any-baseline.json is UNTOUCHED by this change (git diff — it must show no diff; the three files must NOT appear in it, since the ratchet forbids zero-debt entries) and the CEILING constant in tests/lint/domainAnyCastBaseline.test.js is unchanged at 2252.
+2. Run: node -e "import('${REPO}/scripts/count-domain-any.mjs').then(m=>{const c=m.countDomain();console.log(JSON.stringify({total:c.total,a:c.files['src/domain/display/armyStrength.js'],t:c.files['src/domain/display/tradePressure.js'],v:c.files['src/domain/display/visibilityAudit.js']}))})" from ${REPO} — total must be exactly 2252 and all three entries absent.
+3. Read the diffs: the new types must follow the repo idioms — pulseShapes.js typedef adoption (read src/domain/worldPulse/pulseShapes.js header: it invites exactly this) and Record<string,unknown>/unknown narrowing like src/domain/worldPulse/simulationProfile.js. Flag any type that LIES about the runtime shape (e.g. a param typed narrower than what the function actually tolerates at runtime — these functions are documented as total-on-garbage) — but weigh that JSDoc contracts describe the INTENDED caller contract while bodies stay defensive; only flag as blocker if an in-repo caller actually violates the declared type.
+4. The three files' headers claim "Strict-clean (typecheck:domain:strict)" — run \`npm run typecheck:domain:strict\` and confirm 0 errors.
+Report PASS/FAIL with specific issues.`, { label: 'verify:ratchet-doctrine', phase: 'Verify', schema: VERDICT }),
+])
+
+return { parity, contracts, doctrine }

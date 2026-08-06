@@ -1,0 +1,181 @@
+export const meta = {
+  name: 'refute-regen-preservation-fix',
+  description: 'Adversarially refute the NPC reroll preservation fix across five independent lenses, then verify survivors',
+  phases: [
+    { title: 'Refute', detail: 'five skeptics, distinct lenses, each trying to break the fix' },
+    { title: 'Verify', detail: 'independent confirmation of each surviving finding' },
+    { title: 'Synthesize', detail: 'rank what actually holds' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const PREAMBLE = `VERIFY-FIRST: this is a legitimate adversarial code review in the OWNER'S OWN repository. You may READ files and RUN READ-ONLY commands and tests. Make NO edits to src/. Run NO git state-mutating commands — never stash, reset, clean, checkout, rebase, or commit. The tree is SHARED and heavily dirty with other programs' uncommitted WIP; do not touch anything outside the files named below.
+
+Working directory: ${WT} (branch claude/composite-r4).
+
+THE CHANGE UNDER REVIEW — a fix so that user-authored NPCs survive a section reroll:
+- NEW src/domain/regenerationPolicy.js — mode vocabulary + PRESERVATION_RULES + preservesEntity(mode, type, entity).
+- NEW src/domain/regenerationPreservation.js — mergePreservedNpcs(previousNpcs, freshNpcs, {mode}).
+- src/generators/generateSettlementPipeline.js — regenNPCsPipeline now runs a preservation tail AFTER enrichNpcCoherence and before relinkFactionMembers; also a local refreshRelationshipProjections helper.
+- src/domain/regenerationMode.js — now imports the policy leaf instead of defining the rules inline; re-exports REGENERATION_MODES and preservesEntity.
+- Nine user-visible/JSDoc claim strings rescoped.
+- Tests: tests/domain/regenerationPreservation.test.js, tests/generators/regenPreservesUserCanon.test.js, tests/store/regenPreservation.test.js.
+
+THE DESIGN, as claimed: NPC ids are positional (npc_\${idx+1}, re-minted every roll), so a preserved NPC does NOT join the roster — it TAKES OVER a fresh character's slot and inherits that slot's id. Slot chosen by namesake, then role, then category, then first free. Merge happens after enrichment because enrichNpcCoherence overwrites goal.short, an editable field. Dormancy: with zero preserved entities the fresh array is returned BY REFERENCE.
+
+Your job is to REFUTE. Default to reporting a problem when uncertain. Do not be agreeable. Read the actual code; do not take the description above on trust — it may itself be wrong.`
+
+const FINDINGS = {
+  type: 'object',
+  additionalProperties: false,
+  properties: {
+    findings: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          title: { type: 'string' },
+          severity: { type: 'string', enum: ['critical', 'high', 'medium', 'low'] },
+          file: { type: 'string' },
+          line: { type: 'number' },
+          claim: { type: 'string', description: 'the defect, one sentence' },
+          failure_scenario: { type: 'string', description: 'concrete inputs/state -> wrong result' },
+          evidence: { type: 'string', description: 'code quoted or command output that shows it' },
+        },
+        required: ['title', 'severity', 'file', 'claim', 'failure_scenario', 'evidence'],
+      },
+    },
+  },
+  required: ['findings'],
+}
+
+const VERDICT = {
+  type: 'object',
+  additionalProperties: false,
+  properties: {
+    real: { type: 'boolean' },
+    confidence: { type: 'string', enum: ['high', 'medium', 'low'] },
+    reasoning: { type: 'string' },
+    correction: { type: 'string', description: 'if real, the minimal correct fix' },
+  },
+  required: ['real', 'confidence', 'reasoning'],
+}
+
+const LENSES = [
+  {
+    key: 'determinism',
+    prompt: `LENS: DETERMINISM AND THE PROMISE ("a seed is a world, forever").
+Try to prove the change can alter same-seed output or introduce nondeterminism.
+- Does anything in the new modules or the pipeline tail call Math.random, Date, Intl, localeCompare, or depend on object key order or Set/Map iteration order in a way that could vary?
+- Is the DORMANCY claim airtight? Find any input where a settlement with NO authored/locked NPC gets a different reroll than before. Read mergePreservedNpcs' early return carefully — does every path that produces zero keepers really return the fresh array untouched? What about a previous roster containing entities that tag as canon for reasons the author did not anticipate (event-applied entities with appliedAt/causeEventId, ai_overlay, superseded, explicit canonStatus)? tagEntityCanon is in src/domain/canonStatus.js — read inferSource/inferCanonStatus/inferLocked in full and enumerate EVERY field that makes an NPC preserved.
+- CRITICAL: does a normal generated NPC ever tag as preserved under mode 'rebalance'? If worldPulse or applyEvent stamps NPCs with appliedAt/causeEventId/source during play, would a reroll after some campaign time suddenly preserve most of the roster and effectively stop rerolling? Check what stamps those fields on NPCs (grep src/domain/worldPulse and src/domain/events).
+- Does generateSettlementPipeline (initial generation) change at all?`,
+  },
+  {
+    key: 'graph',
+    prompt: `LENS: REFERENCE-GRAPH INTEGRITY.
+Try to construct a case where the merged roster leaves a broken or misleading reference.
+- Read mergePreservedNpcs and chooseSlot line by line. Can two keepers end up with the SAME id? Can a keeper get an id not present in the roster? Trace the slot === -1 append path and mintUnusedId.
+- Can the merged roster contain DUPLICATE NAMES (a keeper whose name matches a surviving fresh NPC it did not displace)? The namesake rule only fires for the FIRST free matching slot — what if the keeper's namesake slot was already claimed by an earlier keeper?
+- factions[].members are object references captured BEFORE enrichment. relinkFactionMembers keys on m.id and does NOT prune. After the substitution, can a faction hold a member object that is not in the final roster, or lose a member entirely?
+- conflicts reference factions by NAME string, baked into desc and plotHooks. Can the substitution invalidate those?
+- What about settlement-level fields NOT regenerated: prominentRelationship (name strings), coherenceNotes, hooks that cite NPC names, npc.factionAffiliation? Does the fix make any of these worse than before?
+- Run: npx vitest run tests/generators/regenPreservesUserCanon.test.js and read what it actually asserts. Then look at finalGraphFindings in src/generators/generationReceiptJudgments.js and check whether the fix could trip any invariant that test does NOT cover.`,
+  },
+  {
+    key: 'lifecycle',
+    prompt: `LENS: STATE LIFECYCLE COVERAGE.
+The owner's most-bitten bug class is a write that survives one path and ghosts another. Try to find a path where the newly-preserved state still dies or behaves inconsistently.
+- Enumerate every caller of regenNPCsPipeline (grep src/). Does each get correct behavior?
+- The store's regenSection (src/store/settlementSlice.js, search 'regenSection') persists after the reroll. Trace: does the preserved NPC survive the persist, a reload/hydrateFromSave, undoLastEvent, revertToSnapshot, and the version-history path?
+- Does the AI overlay path (src/store/aiSlice.js, aiData.pinnedNpcs) interact badly now? Pins are keyed by NPC id and ids are REASSIGNED by the merge — after a reroll, does a pinned id now point at a DIFFERENT character? Is that a new bug the fix introduces? This is the most promising line of attack; pursue it hard.
+- Same question for anything else that stores an NPC id outside the roster: worldPulse ledgers, party links, event log entries, chronicle, EntityLinked news (grep for npc ids being persisted, e.g. npcId, npc_ , linkedNpcIds).
+- Does regenSection's lastRegenerationDelta / deriveRegenerationDelta still make sense with preserved entities?`,
+  },
+  {
+    key: 'vacuity',
+    prompt: `LENS: TEST VACUITY AND COVERAGE.
+Assume the tests are weaker than they look. Try to show they would pass on a broken implementation.
+- Read all three test files in full.
+- For each test, ask: would it still pass if mergePreservedNpcs were subtly wrong (e.g. preserved the WRONG entity, dropped _userEdits but kept _authored, assigned duplicate ids, or silently returned the previous roster wholesale)?
+- Are there skip guards, try/catch, loose matchers, or assertions that can vacuously pass on an empty collection? Specifically: the loops 'for (const rel of parts.relationships || [])' and the faction loop — if relationships were EMPTY the test passes trivially. Verify empirically that the real generated fixture actually produces non-empty relationships and factions, by running node or a scratch vitest that prints the counts. If they can be empty, the tests are partly vacuous.
+- Does the 'it is still a reroll' test actually prove turnover, or could it pass with zero turnover?
+- Does any test depend on wall-clock or on npcs[0] happening to be a particular character?
+- What important behavior has NO test? Name the missing cases precisely.`,
+  },
+  {
+    key: 'layering',
+    prompt: `LENS: LAYERING, BUNDLE, AND REPO CONVENTION.
+- src/domain must not import from src/store or src/generators, statically OR dynamically (tests/architecture/layerBoundaries.test.js, tests/build/domainGeneratorsBoundary.test.js). Verify the two new domain modules comply, including transitively.
+- Does the new import edge create a dependency CYCLE? (tests/architecture/layerBoundaries.test.js does Tarjan SCC.)
+- The author split regenerationPolicy.js out of regenerationMode.js to keep heavy modules (explanation.js) out of the first-paint closure. Verify regenerationPolicy.js's transitive import set is genuinely light, and that regenerationPreservation.js does not reach explanation.js/factionProfile.js/activeConditions.js by any path.
+- Is the re-export in regenerationMode.js correct and complete — did the refactor DROP any previously-exported symbol or change any public behavior? Compare against tests/domain/regenerationMode.test.js and every importer (grep src/ tests/ for regenerationMode).
+- Check the nine reworded claim strings for accuracy: are any still false, or now MISLEADING in a new way? Files: src/components/settlementDetail/SettlementDetailActions.jsx, src/components/settlement/NextActionRail.jsx, src/components/SettlementDetail.jsx, src/components/primitives/EditableText.jsx, src/components/new/tabs/NPCsTab.jsx, src/components/new/npcComponents.jsx, src/copy/en.js, src/domain/userEdits.js, src/domain/canonStatus.js, src/domain/types.js, src/domain/settlement.schema.js.
+- Run: npx eslint on the changed files, and npm run typecheck:domain:strict. Report anything red.`,
+  },
+]
+
+phase('Refute')
+
+const rounds = await pipeline(
+  LENSES,
+  lens => agent(`${PREAMBLE}\n\n${lens.prompt}\n\nReturn every defect you can substantiate. An empty findings array is acceptable ONLY if you genuinely could not substantiate anything after a serious attempt.`, {
+    label: `refute:${lens.key}`,
+    phase: 'Refute',
+    schema: FINDINGS,
+    effort: 'high',
+  }),
+  (result, lens) => {
+    const found = (result && result.findings) || []
+    if (found.length === 0) return []
+    return parallel(found.map(f => () =>
+      agent(`${PREAMBLE}\n\nA reviewer working the ${lens.key} lens reported this defect. Your job is to REFUTE it — assume it is wrong until the code forces you to agree. Read the actual code and, where possible, RUN something that settles it empirically (a scratch vitest file under /private/tmp is fine; do not add files to the repo's tests/ directory).\n\nTITLE: ${f.title}\nFILE: ${f.file}${f.line ? ':' + f.line : ''}\nCLAIM: ${f.claim}\nFAILURE SCENARIO: ${f.failure_scenario}\nEVIDENCE OFFERED: ${f.evidence}\n\nSet real=false if the claim is wrong, already handled elsewhere, cosmetic, or depends on conditions that cannot occur. Set real=true ONLY if you can show the defect actually bites. If real, give the minimal correct fix.`, {
+        label: `verify:${lens.key}:${(f.title || '').slice(0, 34)}`,
+        phase: 'Verify',
+        schema: VERDICT,
+        effort: 'high',
+      }).then(v => ({ lens: lens.key, finding: f, verdict: v }))
+    ))
+  },
+)
+
+const judged = rounds.flat().filter(Boolean)
+const confirmed = judged.filter(j => j.verdict && j.verdict.real)
+const rejected = judged.filter(j => j.verdict && !j.verdict.real)
+
+log(`refuted-and-survived: ${confirmed.length} of ${judged.length} raised`)
+
+phase('Synthesize')
+
+if (confirmed.length === 0) {
+  return {
+    confirmed: [],
+    rejectedCount: rejected.length,
+    rejectedTitles: rejected.map(r => r.finding.title),
+    summary: 'No finding survived adversarial verification.',
+  }
+}
+
+const synthesis = await agent(
+  `${PREAMBLE}\n\nThe following defects SURVIVED independent adversarial verification against the reroll-preservation fix:\n\n${confirmed.map((c, i) => `${i + 1}. [${c.finding.severity}] (${c.lens}) ${c.finding.title}\n   file: ${c.finding.file}${c.finding.line ? ':' + c.finding.line : ''}\n   claim: ${c.finding.claim}\n   scenario: ${c.finding.failure_scenario}\n   verifier: ${c.verdict.reasoning}\n   suggested fix: ${c.verdict.correction || 'none given'}`).join('\n\n')}\n\nAlso rejected during verification (do not resurrect these): ${rejected.map(r => r.finding.title).join('; ') || 'none'}\n\nProduce a decision-ready synthesis for the engineer who wrote the fix:\n- Which findings are genuinely must-fix-before-this-ships, and which are follow-ups or owner decisions?\n- Are any of them duplicates of each other, or symptoms of one root cause?\n- For the must-fix set, give the concrete minimal change, in order.\n- Explicitly state whether the CORE claim still holds: does an authored NPC survive regenSection('npcs'), and is same-seed generation unaffected?\nBe concise and concrete. Prose, not bullets-of-bullets.`,
+  { label: 'synthesize', phase: 'Synthesize', effort: 'high' },
+)
+
+return {
+  confirmed: confirmed.map(c => ({
+    lens: c.lens,
+    severity: c.finding.severity,
+    title: c.finding.title,
+    file: c.finding.file,
+    line: c.finding.line,
+    claim: c.finding.claim,
+    scenario: c.finding.failure_scenario,
+    confidence: c.verdict.confidence,
+    correction: c.verdict.correction,
+  })),
+  rejectedCount: rejected.length,
+  rejectedTitles: rejected.map(r => r.finding.title),
+  synthesis,
+}

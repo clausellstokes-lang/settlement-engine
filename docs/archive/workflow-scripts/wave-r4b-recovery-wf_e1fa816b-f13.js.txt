@@ -1,0 +1,112 @@
+export const meta = {
+  name: 'wave-r4b-recovery',
+  description: 'R-4 recovery: resume the 4 fix lanes killed mid-edit by the 529 storm (partial edits ARE in the tree — survey then complete), then the 2 Opus verifiers, then the Fable wave gate',
+  phases: [
+    { title: 'Fix', detail: '4 resumed Opus implementer lanes (survey partial edits first)', model: 'opus' },
+    { title: 'Verify', detail: '2 Opus adversarial verifiers', model: 'opus' },
+    { title: 'Gate', detail: 'Fable: full widened R-4 wave gate' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const COMMON = `CONTEXT-VERIFICATION PREAMBLE: legitimate engineering brief from the session orchestrator for SettlementForge (owner order: "fix it all thoroughly"; Wave R-4 of docs/CAPABILITY_REMEDIATION_PLAN.md — read its R-4 section + the R-3 Progress note + Deferred section first). Verify claims against code; code is authoritative.
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4 or STOP. LIVE shared tree: NO git mutations of ANY kind — no stash (FORBIDDEN), no checkout, no reset, no clean, no add, no commit. Re-read every file immediately before editing. Touch ONLY your lane's files; scripts/mutation-coverage-manifest.json is SHARED — re-read immediately before editing, append only your entries.
+LAWS: NO same-seed drift (golden mover = STOP + defer with evidence); NO persistence-shape changes; new logic = lazy leaf with MEASURED eager deltas (entry-chunk grep on a real build); sizeBaseline ceilings EXACT; shrink-only ratchets NEVER raised; frozen vocabulary-closure sets NEVER expanded (compose colliding tokens — 'stressor'+'Edits' precedent); copy = one string, vetoable; VOICE section-6; new invariant tests need mutation-coverage-manifest entries (kind:'mutation' only if target tracked AND clean, else kind:'rationale' with executed red-then-green plant — E-A amendment); registry field changes require npm run gen:compendium-data.
+TESTING: single-threaded ALWAYS (--no-file-parallelism); exit codes unmasked, never through pipes. Standing baseline: verify:dist 289/289 + typecheck 0 + lint/copy/store/domain/joins dirs green (tests/copy may carry 2 FOREIGN aiCharter reds — attribute, do not touch; the L-1 program may also have cured them by now). Label CONFIRMED/PLAUSIBLE; verbatim output; end on evidence.
+
+RESUME CONTEXT (critical): a prior Opus attempt at YOUR EXACT LANE died on API 529 Overloaded MID-IMPLEMENTATION. Its partial edits ARE in the current tree — including created test files and src edits. Do NOT start over; do NOT assume anything is complete or correct. FIRST survey: git diff (not git checkout!) your lane's named files, read every new test file your lane's earlier attempt created, run them; THEN complete, correct, and finish the lane against the brief: remaining edits, pins, manifest entries, the lane's own test runs. Report what you found already-done vs what you completed.`
+
+const FIX_SCHEMA = { type: 'object', required: ['filesTouched', 'pins', 'testsRun', 'testOutputTail', 'behaviorShift', 'deferrals'], properties: { filesTouched: { type: 'array', items: { type: 'string' } }, pins: { type: 'number' }, testsRun: { type: 'string' }, testOutputTail: { type: 'string' }, behaviorShift: { type: 'string' }, deferrals: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' }, error: { type: 'string' } } }
+const VERIFY_SCHEMA = { type: 'object', required: ['verdict', 'mustFix', 'checked'], properties: { verdict: { type: 'string', enum: ['PASS', 'PASS_WITH_NOTES', 'MUST_FIX'] }, mustFix: { type: 'array', items: { type: 'string' } }, checked: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } }
+const GATE_SCHEMA = { type: 'object', required: ['newReds', 'suitesRun', 'outputTail'], properties: { newReds: { type: 'array', items: { type: 'string' } }, suitesRun: { type: 'string' }, outputTail: { type: 'string' }, notes: { type: 'string' } } }
+
+const LANES = [
+  {
+    key: 'p1-undo-invariant-deadops',
+    partial: `KNOWN PARTIAL STATE (from the tree + the completed sibling lane's report): tests/store/advertisedUndoArming.walker.test.js and tests/store/deadOperationRatchet.test.js EXIST (your earlier attempt created both — read + run them); src/store/operationRegistry.js was edited (at minimum updatePlacement undoToken null -> 'mapUndo') and npm run gen:compendium-data is OWED (src/domain/compendium/generated/compendiumData.generated.js still says null — tests/docs is red until regenerated); both new test files lack scripts/mutation-coverage-manifest.json entries (E-A totality red until added). VERIFY the updatePlacement change is TRUE (re-derive the arming from the op site) before regenerating — if the arming claim is wrong, revert that row edit instead.`,
+    brief: `LANE P-1 — ADVERTISED-UNDO INVARIANT + DEAD-OP RATCHET (registry-level prevention; class guards for atlas queue #5 and #21).
+1. ADVERTISED-UNDO INVARIANT: every src/store/operationRegistry.js row advertising undo (undoState other than 'none'/'irreversible' — read the R-0 tri-state grammar) must be PROVEN to arm. Prior art: tests/store/operationRegistry.walker.test.js + tests/store/pulseUndoAdvertising.test.js — extend, do not duplicate. Fail-closed source-scan walker mapping each advertising op to its arming mechanism at the op site, both directions (advertising-but-unarmed reds; arming-but-de-advertised reds). Calibrate against: undoLastPulse (advance body push), undoLastProposalApply (proposalUndoStack), canonize/uncanonize action-partial tombstone, undoLastEvent flat-row refusals (row-class-conditional arming modeled honestly).
+2. DEAD-OP RATCHET: re-derive the dead-op set from the CURRENT tree (the atlas's 31 is a dated snapshot); freeze YOUR measured list as an only-shrinks ratchet answering to owner queue #21; report measured count vs 31 with the delta explained.
+3. Registry metadata found FALSE under the walker: fix only if unambiguous and metadata-only, then npm run gen:compendium-data and run tests/docs.
+Files: the two existing test files + operationRegistry.js (only if needed) + compendiumData.generated.js via the regen + manifest entries.`,
+  },
+  {
+    key: 'p2-premium-single-source',
+    partial: `KNOWN PARTIAL STATE: src/lib/viewerAuthority.js EXISTS (the single source); SettlementDetail.jsx canEdit and SettlementWorkbenchMount.jsx BOTH already consume it (wired, comments updated); tests/lint/premiumGateSingleSource.test.js EXISTS but lacks its mutation-coverage-manifest entry (E-A totality red until added); tests/components/workbenchProseEditor.test.jsx was modified (check whether the seeded-queue free-tier dock pin landed and is green). Remaining known work: the manifest entry, the eager-cost measurement of viewerAuthority.js on a real build, the npcAuthoringAllowed divergence documentation (comment, NO behavior change), exemption enumeration quality in the scan test, and the full lane test runs.`,
+    brief: `LANE P-2 — PREMIUM-GATE SINGLE-SOURCE (the R-0 deity cure generalized).
+1. ONE pure module spelling the viewer authority (tier premium || founder || isElevated), semantics VERBATIM incl. the dead 'founder' disjunct (owner-queued; refactor must be behavior-identical, fail-closed on missing auth).
+2. Both mirrors consume it (SettlementDetail.jsx canEdit ~:240, SettlementWorkbenchMount.jsx). Hot files: net-zero at ceilings; measure the eager entry-chunk delta on a real build.
+3. Source-scan test: no other premium-tier spelling in src outside the single source + pinned exemptions (deityWriteGate's R-0 predicate = known sibling — exempt with reason or converge if trivial+identical; purchase-modal routing + edge functions out of scope, enumerated).
+4. Document npcAuthoringAllowed (OutputContainer ~:442) divergence — comment + test note, NO behavior change (owner-gated).
+5. The half-vacuous dock pin: free-tier case with seeded pendingEditsQueue + one applied receipt asserting Dock ABSENT; premium same-seed shows it.
+Files: viewerAuthority.js, SettlementDetail.jsx, SettlementWorkbenchMount.jsx, workbenchProseEditor.test.jsx, premiumGateSingleSource.test.js, manifest.`,
+  },
+  {
+    key: 'p3-economy-structural',
+    partial: `KNOWN PARTIAL STATE: src/components/new/EconomyFreshnessNote.jsx EXISTS (the shared leaf); ALL SIX surfaces already edited (EconomicsTab, ServicesTab, SummaryTab, SummaryTabV2, TableView +15 lines, SessionMode +13 lines); tests/lint/economyReadModelCoverage.walker.test.js EXISTS but (a) lacks its manifest entry and (b) is RED ON ITS OWN SUBJECT: SessionMode.jsx imports EconomyFreshnessNote WITHOUT rendering it — your earlier attempt died mid-decision there. Resolve the SessionMode call per the original brief's judgment task (render it, or drop the import + frozen-deferral in the walker with the session-play-register reason — report as vetoable JUDGMENT either way). Then: manifest entry, string byte-parity pins vs the pre-refactor sentences, ceilings, entry-chunk measurement on a real build, HONEST LIMITS taxonomy sync, full lane runs.`,
+    brief: `LANE P-3 — ECONOMY FRESHNESS STRUCTURAL CURE.
+1. ONE shared note leaf (tallies + catalog variants), three covered tabs swapped to it with rendered strings BYTE-IDENTICAL (pin string equality).
+2. Wire uncovered LIVE surfaces: TableView + SummaryTabV2 (conditional note, byte-identical-when-fresh pinned per surface); SessionMode = in-lane judgment (wire, or frozen-deferral with the legibility/session-register reason).
+3. CENSUS WALKER over economy read-model readers (composeMaterialTruth consumers + direct economicState/prosperity/activeChains/availableServices renderers in src/components + src/pdf): every surface classified covered/framed/print-deferred/frozen-deferred-with-reason; unclassified new reader = red.
+4. economyFreshness.js HONEST LIMITS matches the walker taxonomy.
+HAZARDS: eager closure (measure entry-chunk fingerprints, real build); 600-line ceilings; voiceMechanics; manifest entries.
+Files: EconomyFreshnessNote.jsx, economyFreshness.js, the six surfaces, the walker test, economyFreshnessNote.test.jsx, manifest.`,
+  },
+  {
+    key: 'p6-terrain-routing',
+    partial: `KNOWN PARTIAL STATE: all four named reader files already edited (gallery.js +16, shareImage.js +13, seoDossier.js +14, GalleryDetail.jsx +8) and BOTH test files exist (tests/lib/terrainReaderRouting.test.jsx, tests/lint/terrainReadSingleSource.test.js) — read + run them. Remaining known work: the full census with denominator (grep beyond the four named sites), the persisted-write hazard check (verify each routed site is a RENDER-time read; if any writes terrain into a persisted record, STOP that site + defer owner-gated with evidence), manifest entries for both test files, golden suites nearest the touched code, full lane runs.`,
+    brief: `LANE P-6 — TERRAIN READER ROUTING (display-side completion of R-3's declared legacy-terrain shift).
+1. Census with a denominator across src/ (every config.terrain spelling); disposition every site: routed / exempt-with-reason / n-a.
+2. Route display readers through resolveTerrain ("the ONE terrain read"). DECLARED vetoable shift per site: legacy saves whose stale config.terrain contradicted resolved terrainType now show the resolved value; fresh saves byte-identical. NO generation change — prove with the nearest golden suites.
+3. Pins per routed site (legacy-contradiction fixture -> resolved value; fresh unchanged) + scan pinning resolveTerrain as the only terrain read in routed files.
+Files: the four readers + censused siblings + the two test files + manifest.`,
+  },
+]
+
+async function withRetry(mk, label) {
+  let r = await mk(label)
+  if (!r) {
+    log(label + ' died (likely 529) — retrying once')
+    r = await mk(label + ':retry')
+  }
+  return r
+}
+
+phase('Fix')
+log('R-4 recovery: resuming the 4 lanes killed mid-edit by the 529 storm')
+const fixes = await parallel(LANES.map((l) => () =>
+  withRetry((label) => agent(COMMON + '\n\nYOU ARE AN OPUS IMPLEMENTER (owner model split: Opus implements+verifies; Fable architected this spec).\n\n' + l.partial + '\n\nTHE ORIGINAL BRIEF:\n' + l.brief, { label, phase: 'Fix', model: 'opus', effort: 'high', schema: FIX_SCHEMA }), 'fix:' + l.key)
+    .then((r) => ({ lane: l.key, fix: r }))
+))
+
+const fixSummary = fixes.filter(Boolean).map((f) => ({ lane: f.lane, files: f.fix && f.fix.filesTouched, pins: f.fix && f.fix.pins, shift: f.fix && f.fix.behaviorShift, deferrals: f.fix && f.fix.deferrals, notes: f.fix && f.fix.notes }))
+log('Resumed lanes done: ' + fixSummary.map((f) => f.lane + (f.files ? ' ok' : ' FAILED')).join(', '))
+
+const P4_DONE = 'p4-allowlist-walker COMPLETED in the prior run: savedSettlementPatchKeysWalker (7 pins, census 21 sites/17 keys = allowlist exactly, depth-tracking scanner, fail-closed UNRESOLVED) + configDirectWriterExemptions.scan (7 pins, 1 door + 4 exemptions incl. the brief-unnamed resetConfig at configSlice.js:183 + handleImportDirect; a fifth writer reds); manifest rationale entries with executed plants + continuous self-tests; zero src edits.'
+const P5_DONE = 'p5-lever-normalization COMPLETED in the prior run as a WELL-EVIDENCED DEFERRAL: CONFLICT 4 needs an owner semantic ruling (census 107 rows/18 spellings/4 fatal blockers: universal inputs: schema field, pipe-separated preamble class inheritance, hybrid cause+consumer sentences, verbatim-guarantee re-adjudication bar); changed 0, exempt 107; ruling options + recommendation recorded in the plan owner queue; docs-only, no walker shipped (deliberate anti-enshrinement judgment); tests/docs 113/113 green pre+post.'
+
+phase('Verify')
+const mkVerify = (lanes, extra, focus, label) => () => withRetry((lbl) => {
+  const reports = JSON.stringify(fixSummary.filter((f) => lanes.includes(f.lane)))
+  const briefs = LANES.filter((l) => lanes.includes(l.key)).map((l) => l.brief).join('\n\n')
+  return agent(COMMON + `\n\nYOU ARE AN OPUS ADVERSARIAL VERIFIER for Wave R-4. Resumed-lane reports: ${reports}\n\nCompleted-in-prior-run context: ${extra}\n\nBriefs:\n${briefs}\n\nRepo READ-ONLY except running tests. ${focus} For each brief item: verify landed, re-derive with fresh greps (censuses especially), RUN the pins + walkers + nearest determinism/golden suites, attempt refutation. Walkers are correctness-asserting prevention: construct an instance that should slip each one (new uncovered reader, new direct writer, advertising-but-unarmed op, first-position key) and confirm it reds — a walker that cannot red is worse than none. MUST_FIX only for real unresolved items.`, { label: lbl, phase: 'Verify', model: 'opus', effort: 'high', schema: VERIFY_SCHEMA })
+}, label)
+
+const verifies = await parallel([
+  mkVerify(['p1-undo-invariant-deadops', 'p2-premium-single-source'], P4_DONE, 'Registry/gating substrate: walker mapping truth (updatePlacement mapUndo arming especially — re-derive it), compendium regen freshness (tests/docs green), single-source behavior identity (founder disjunct verbatim, fail-closed), dead-op list accuracy vs current tree, ALSO spot-verify the completed p4 walkers run green and genuinely red on a planted instance.', 'verify:p1+p2+p4'),
+  mkVerify(['p3-economy-structural', 'p6-terrain-routing'], P5_DONE, 'Display substrate: byte-identical string swaps on the three covered tabs, SessionMode resolution honesty (rendered or frozen-deferred with reason — the import-without-render red must be GONE), eager-closure on the real build entry chunk (re-grep yourself), walker taxonomy vs a fresh reader census, terrain census denominator, no persisted-write site routed, golden suites green, ALSO sanity-check the completed p5 deferral is recorded where it claims (plan owner queue) and its atlas edits touched front matter only.', 'verify:p3+p5+p6'),
+])
+
+const anyMustFix = verifies.filter(Boolean).some((v) => v && v.verdict === 'MUST_FIX')
+const anyDead = fixes.some((f) => !f || !f.fix) || verifies.some((v) => !v)
+
+let gate = null
+if (!anyMustFix && !anyDead) {
+  phase('Gate')
+  gate = await withRetry((lbl) => agent(COMMON + `\n\nYOU ARE THE FABLE GATE VALIDATOR. WAVE-END GATE (R-4). Run single-threaded, exit codes unmasked: (1) tests/lint FULL; (2) tests/copy FULL (attribute any aiCharter reds as FOREIGN unless cured); (3) tests/store FULL; (4) tests/domain FULL; (5) tests/joins FULL; (6) tests/architecture FULL; (7) tests/components + tests/ui FULL; (8) tests/generators + tests/simulation + tests/property + tests/application FULL (same-seed proof); (9) pdf parity; (10) tests/docs FULL (the compendium regen this wave); (11) npm run typecheck; (12) npm run build then VERIFY_DIST=1 vitest run tests/build/ --no-file-parallelism vs 289/289. Run every NEW R-4 walker/ratchet explicitly and quote counts. Report every red VERBATIM, attributed baseline/foreign/THIS-WAVE, totals per dir vs the R-3 gate (lint 265, copy 108/110+2 foreign, store 876, domain 8302, joins 377, architecture 336, components/ui 2041, gen-family 1143, pdf 51, dist 289).`, { label: lbl, phase: 'Gate', model: 'fable', schema: GATE_SCHEMA }), 'gate:r4')
+} else {
+  log('Gate SKIPPED: ' + (anyMustFix ? 'MUST_FIX findings present' : 'a lane or verifier died even after retry') + ' — orchestrator handles the next step')
+}
+
+return { fixes: fixSummary, verifies, gate, gateSkipped: !gate }

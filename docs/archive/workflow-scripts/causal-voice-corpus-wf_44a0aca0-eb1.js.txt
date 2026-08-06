@@ -1,0 +1,44 @@
+export const meta = {
+  name: 'causal-voice-corpus',
+  description: 'Author the causal annex: join molds, clause forms, connective pools',
+  phases: [
+    { title: 'Census', detail: 'the join-family taxonomy from COUPLINGS + chains' },
+    { title: 'Author', detail: '4 writers over the family quarters + clauses + connectives' },
+    { title: 'Verify', detail: '2 adversarial checkers (entailment + voice)' },
+  ],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const ANNEX = `${MF}/docs/content/RECEIPT_POOLS_CAUSAL.md`
+const PRE = `VERIFY-FIRST: legitimate owner-ordered CONTENT AUTHORING for THE CAUSAL GRAMMAR (DESIGN_FP_SPINE.md SP-6's 2026-08-03 amendment — read it first). Tree: ${MF} (shared; writers edit ONLY ${ANNEX}; never volumes or src/; no git). VOICE: the Bound-Book chronicle register per the annex headers in ${MF}/docs/content/ (read one). THE THREE LAWS: per-link entailment (a mold's connective must match its provenance edge type; a clause asserts only its own receipt's facts); TIME BANDS only ({this season, within the year, years on, a decade's, a generation's, older than its bearers} — NEVER digits); display-side composition (no state implied). Owner exemplars of the register: "X declares vengeance on its weakened neighbour — a generation's grudge will be met." / "Thorp Y was wiped out by the flood that followed the famine year; trade withered, and the routes turned elsewhere."`
+const CSCHEMA = { type:'object', required:['joinFamilies','chainShapes','clauseKinds','edgeTypes'], properties:{
+  joinFamilies:{type:'array',items:{type:'object',required:['id','causeClass','effectClass','archetype'],properties:{id:{type:'string'},causeClass:{type:'string'},effectClass:{type:'string'},archetype:{type:'string'}}}},
+  chainShapes:{type:'array',items:{type:'string'}},
+  clauseKinds:{type:'array',items:{type:'string'}},
+  edgeTypes:{type:'array',items:{type:'string'}}}}
+const WSCHEMA = { type:'object', required:['section','unitsAuthored','samples'], properties:{
+  section:{type:'string'},unitsAuthored:{type:'number'},samples:{type:'array',items:{type:'string'}}}}
+const VSCHEMA = { type:'object', required:['violationsFixed','verdict'], properties:{violationsFixed:{type:'number'},verdict:{type:'string'}}}
+
+phase('Census')
+const cen = await agent(`${PRE}
+CENSUS (read-only): build the join taxonomy. (1) From ${MF}/docs/DESIGN_FP_COUPLINGS.md §4: every CPL direction with a designed coupling → a join family {id, causeClass, effectClass, archetype (the pair's named historical archetype)}. (2) From the war-amendments story canon (${MF}/docs/DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md §5) + the six signature stories: the within-layer chains (grievance→war, debt→betrayal, tribute→strain→coup, believed-boom→bust, corner→riot, lure→war...). (3) CHAIN SHAPES: the 4-6 compositional skeletons (event+ancestor; event+ancestor+consequence; the three-link cascade; the generation-spanning callback). (4) CLAUSE KINDS: the ~120-180 kinds most likely to appear as ancestors/consequences in chains (calamities, declines, wars, treaties, falls, rushes, corners — from the annexes' major/notable kinds). (5) EDGE TYPES: the provenance edge vocabulary (sourceEventId kinds of relation: caused/followed/answered/priced/inherited...) from causalState.js + the receipts' provenance fields (grep the tree). Return all five lists.`, {label:'census', phase:'Census', model:'opus', schema:CSCHEMA})
+
+phase('Author')
+const quarters = [0,1,2,3]
+const fams = cen.joinFamilies || []
+const per = Math.ceil(fams.length/4) || 1
+const out = await parallel([
+  ...quarters.map(q => () => agent(`${PRE}
+WRITER ${q+1}/4: ${q===0? 'FIRST create '+ANNEX+' with its header (the slot convention; the three laws; the section layout: §1 JOIN MOLDS, §2 CLAUSE FORMS, §3 CONNECTIVES; note composition is display-side).' : 'The annex exists (writer 1 creates it; if absent yet, wait-and-retry by re-reading).'} Author §1 JOIN MOLDS for YOUR quarter of the join families: ${JSON.stringify(fams.slice(q*per,(q+1)*per))}. Per family: 4-8 angle-distinct full-sentence molds in the owner's register, each tagged with its edge type and its slots ({settlement},{counterpart},{timeband},{reason},{good},{npc}...). APPEND your section under a '## WRITER ${q+1}' marker to avoid collisions; the verifier merges.`, {label:`author:joins-q${q+1}`, phase:'Author', model:'opus', schema:WSCHEMA})),
+  () => agent(`${PRE}
+WRITER 5 (clauses + connectives): APPEND to ${ANNEX} under '## WRITER 5': §2 CLAUSE FORMS — one-clause compressed tellings (2-3 variants each) for these kinds: ${JSON.stringify((cen.clauseKinds||[]).slice(0,180))}; §3 CONNECTIVE POOLS — 4-8 connectives per provenance edge type: ${JSON.stringify(cen.edgeTypes)} — plus the TIME-BAND vocabulary table and the ${(cen.chainShapes||[]).length} chain-shape skeletons with one worked example each.`, {label:'author:clauses', phase:'Author', model:'opus', schema:WSCHEMA}),
+])
+
+phase('Verify')
+const ver = await parallel([
+  () => agent(`${PRE}
+VERIFIER 1 (structure + entailment; fix in place): merge the '## WRITER N' sections of ${ANNEX} into the clean §1/§2/§3 layout (dedupe families, stable order); then check EVERY mold: connective matches its tagged edge type; no clause asserts beyond its kind's receipt facts; every duration is a time-band word; zero digits; slots declared=used. Fix violations. Return {violationsFixed, verdict}.`, {label:'verify:entailment', phase:'Verify', model:'opus', schema:VSCHEMA}),
+  () => agent(`${PRE}
+VERIFIER 2 (voice + distinctness; fix in place, run AFTER verifier 1 finishes — if you see '## WRITER' markers still present, re-read until merged): adversarial voice pass on ${ANNEX} — register conformance, angle-distinctness per family (collapse slot-swaps, re-author), the owner's two exemplars present as canonical molds in their families. Return {violationsFixed, verdict}.`, {label:'verify:voice', phase:'Verify', model:'opus', schema:VSCHEMA}),
+])
+return { families: fams.length, clauses: (cen.clauseKinds||[]).length, edges: (cen.edgeTypes||[]).length, authored: out.filter(Boolean), verified: ver.filter(Boolean) }

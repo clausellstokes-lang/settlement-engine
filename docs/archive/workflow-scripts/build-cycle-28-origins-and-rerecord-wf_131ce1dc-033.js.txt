@@ -1,0 +1,31 @@
+export const meta = {
+  name: 'build-cycle-28-origins-and-rerecord',
+  description: 'The PT2 residual repairs + THE COMBINED RE-RECORD: origin-rung variety + resourceIcon camelCase closure under one ruled window',
+  phases: [{ title: 'Build', detail: 'residuals lane ∥ combined re-record lane, verify each' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const P10 = `THE §10 PROTOCOL BINDS: ${MF} on claude/composite-r4 only (cd + rev-parse first, every command block); pathspec commits of ONLY your lane files; no stash; focused vitest + gate-tail (ps aux | grep vitest first); python byte-scan every Write; SHARED-RATCHET LAW (git diff shared baselines before staging); STOP-and-report; trailer "Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>". Nothing pushed. CONCURRENCY: WR-8 razing live on worldPulse; the nav lane live on nav/theme — both fenced. Re-record law: ONLY from proven-clean committed bytes (never the dirty tree), field-diff FIRST, own commit, ruling quoted.`
+const S = { type:'object', required:['lane','commits','gates','stopReports','notes'], properties:{lane:{type:'string'},commits:{type:'array',items:{type:'string'}},gates:{type:'array',items:{type:'string'}},stopReports:{type:'array',items:{type:'string'}},notes:{type:'string'}}}
+const V = { type:'object', required:['lane','verdict','findings'], properties:{lane:{type:'string'},verdict:{type:'string'},findings:{type:'array',items:{type:'string'}}}}
+phase('Build')
+const lanes = await parallel([
+  () => agent(`VERIFY-FIRST: chair-ruled implementation. ${P10}
+LANE RT — THE PT2 RESIDUALS (cycle-25 verifier, all executed findings):
+(1) THE MIRROR'S LABEL-REFUSAL DIVERGENCE: historyBeats' tensionName reads labels bare while the spine routes them through nounPhrase's refusals — a tension with a refused label + a type makes the two name DIFFERENT tensions and the beat prints the splice defect. One-line cure: route tensionName's label rung through the spine's refusal (import the shared helper, no fork); add a fixture per refusal arm to the lockstep suite (the over-long label; the mid-sentence label). Authored/imported-content reachability only — say so in the docstring.
+(2) the vacuity-capable lockstep pin gains a minimum-hit counter (the loop that continues past non-tension fixtures must assert how many it actually checked).
+(3) THE FIGURE CORRECTION: the golden corpus is 525 keys, not 523 — docs/GOLDEN_SHIFT_LEDGER.md lines ~1931/1935/1956 + the PT2-5 stop-report row; correct before any re-record ask cites them.
+(4) the missing sweep plant: MAX_PHRASE_CHARS has a pin but no standing mutation-sweep entry — add plant + dry-run it (the stale-anchor law).
+One commit per item family. Return {lane:'RT', commits, gates, stopReports, notes}.`,
+    {label:'rt:pt2-residuals', phase:'Build', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Re-execute the verifier's own divergence probe (the mill-burned-down label) — spine and beat must now agree; run both refusal fixtures; mutant the min-hit counter (zero-hit family → red); grep the 523s gone (525 everywhere, quote lines); the new plant dry-runs AND lands red; pathspec-clean. Return {lane:'RT verify', verdict, findings}.`,
+      {label:'rt:verify', phase:'Build', model:'opus', effort:'high', schema:V})),
+  () => agent(`VERIFY-FIRST: chair-ruled implementation. ${P10}
+LANE RR — THE COMBINED RE-RECORD, CHAIR RULING (vetoable, cite it): two owed golden-shifting changes ride ONE disclosed window so the estate takes one re-record, not two — (A) THE ORIGIN-RUNG WIDENING: rung-1 collapses 5 tiers × 6 terrains to one body per route arm (7 distinct bodies over 150 generations, measured); widen at the mold per PT2-5's own recorded plan — the origin draws on route × the settlement's actual founding state (terrain, resources, founding condition the spine already knows), authored variants per arm in the estate's voice (check docs/content/ for an origins pool first — check-git-first for corpus), every arm pinned reachable, seeded-family diversity pin; (B) THE resourceIcon CAMELCASE CLOSURE: 4,462 dead resourceIcon:"" fields still ship (the case-sensitive \\bicon guard missed camelCase) — remove the dead fields + heal any consumers, and WIDEN THE GUARD to the camelCase spellings so a third class cannot accrete.
+THE RE-RECORD ITSELF, per the established recipe (generator-golden-shift-record-established.md — read it): field-level diff FIRST over all 525 keys against proven-clean committed bytes; the differing path-template census must decompose into EXACTLY the two ruled classes (origin-prose bodies + resourceIcon key deletions) — ANYTHING else moves → STOP-AND-REPORT (stream corruption, not shape change); re-record in ITS OWN commit quoting the census + this ruling + both causes; the golden test docstring gains the dated shift record; the 60-settlement hook corpus + any sibling fixture carrying either class gets the same treatment with the same proof. Return {lane:'RR', commits, gates, stopReports, notes}.`,
+    {label:'rr:combined-rerecord', phase:'Build', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Re-run the field-level diff with YOUR OWN flattener (old fixture from git history vs regenerated at the commit): the path-template census must decompose into exactly the two ruled classes — quote it; regenerate twice (byte-identical); origin diversity measured by YOU across the seeded family (count distinct bodies per route arm pre/post, quote 8 new bodies verbatim — they must read in the estate's voice, no template-ese); the widened guard mutant (add a camelCase icon field → red); every arm-reachability pin executed; no OTHER fixture hash moved (re-hash the fixture directory); THE PROMISE replay path intact (config._seed replay byte-identical post-re-record); pathspec + shared-ratchet law. Return {lane:'RR verify', verdict, findings}.`,
+      {label:'rr:verify', phase:'Build', model:'opus', effort:'high', schema:V})),
+])
+return { lanes: lanes.filter(Boolean) }

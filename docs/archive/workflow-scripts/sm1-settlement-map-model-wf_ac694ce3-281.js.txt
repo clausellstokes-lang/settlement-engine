@@ -1,0 +1,400 @@
+export const meta = {
+  name: 'sm1-settlement-map-model',
+  description: 'Build SM-1 (deterministic town-map domain model + golden) with Opus implementers/verifiers; trace world-pulse blob preservation (gate 1)',
+  phases: [
+    { title: 'Gate1+Implement', detail: 'world-pulse blob-preservation trace ∥ SM-1 model build (Opus)' },
+    { title: 'Verify', detail: 'adversarial Opus verifiers, diverse lenses' },
+  ],
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// SHARED SUBSTRATE — surveyed by the manager; embedded so agents don't re-derive.
+// ────────────────────────────────────────────────────────────────────────────
+const SUBSTRATE = `
+WORKTREE (cwd): the current directory is the git worktree on branch
+claude/heuristic-wu-f4a0e3, base review-fixes-2026-07-08 @ 5a78af5a. Design doc:
+docs/DESIGN_SETTLEMENT_MAP.md — READ §1,§2,§3,§5,§7,§8,§9 (SM-1 is §9 first bullet).
+
+EXISTING SURFACES THE MODEL COMPOSES (do NOT modify any of these files):
+- createPRNG(seed): src/kernel/prng.js. Methods: .random() .pick(arr) .chance(p)
+  .randInt(min,max) .shuffle(arr) .weightedPick(items,weights) .fork(label) .randFloat(lo,hi).
+  fork(label) === createPRNG(\`\${seed}::\${label}\`). This is the ONLY sanctioned rng.
+- compareCodepoint(a,b) / byNameCodepoint(a,b): src/domain/deterministicSort.js. The ONLY
+  sanctioned string sort in src/domain/** (UTF-16 codeunit order, locale-free). NEVER localeCompare.
+- deriveAllDistricts(settlement): src/domain/districtProfile.js →
+  [{ id:'district.<snake>', name, category, wealth, safety, dominantFaction, institutions,
+     services, hook, connectedDistricts, ... }]. category ∈ DISTRICT_CATEGORIES (exported):
+  religious, merchant, military, craft, residential, noble, civic, arcane, criminal, foreign,
+  industrial, other. Returns [] when spatialLayout.quarters is absent/empty.
+- deriveMapProfile(settlement): src/domain/mapProfile.js →
+  { inputs:{ terrain, tradeRouteAccess, ... }, outputs:{ roadImportance∈low|moderate|major|critical,
+    defensiveTerrain, regionalAuthority[], hazardMarkers:[{id,label,kind,severity,severityBand,visibility}],
+    suggestedFeatures[] } }.
+- resolveTerrain(settlement.config): src/domain/resolveTerrain.js → plains|hills|forest|riverside|
+  coastal|mountain|desert | null. The ONE sanctioned terrain read.
+- defenseProfileHasWalls(settlement.defenseProfile): src/domain/causalState.js — the hardened
+  walls predicate. NEVER re-implement (the phantom-wharf substring bug class).
+- deriveAllActiveConditions(settlement): src/domain/activeConditions.js → conditions with
+  { archetype, label, ... } (for the overlay layer; condition badges ⊆ activeConditions).
+- popToTier(pop): src/data/constants.js → thorp|hamlet|village|town|city|metropolis (pure).
+  TIER_ORDER: src/domain/customContentSchema.js (thorp→metropolis).
+- tradeRouteTier(v)/tradeRouteSemantics(v): src/domain/tradeRouteSemantics.js →
+  major|standard|isolated|unknown. settlement.config.tradeRouteAccess ∈ road|river|crossroads|
+  port|coastal|isolated.
+
+INSTITUTION SHAPE (settlement.institutions[] entries): { name, catalogId (catalog identity anchor),
+localUid (custom identity anchor), priorityCategory ∈ economy|crafts|trade|military|government|
+noble|religion|religious|magic|criminal, category, tags, id }. Anchor precedence for the map:
+catalogId → localUid → name-slug fallback.
+QUARTER SHAPE (settlement.spatialLayout.quarters[]): { name, location, desc, landmarks[] }.
+
+GOLDEN + FIXTURE PATTERNS TO COPY (read these files):
+- Fail-closed golden template: tests/property/spatialDigestGolden.test.js +
+  tests/fixtures/spatial-digest-golden.json (hash + legible meta + reproducibility + fail-closed
+  missing-manifest guard + UPDATE_GOLDEN=1 capture).
+- Deterministic synthetic fixture harness (index-derived, NO Math.random):
+  tests/fixtures/spatialPackFixtures.js.
+- Version-axes + reserved-null-slots exemplar: src/domain/spatial/spatialDigest.js
+  (spatialGeometryVersion/costLawVersion/overlayVersion + reservedSlots{airField:null,...};
+  a slot stays null ⇒ dormant ⇒ byte-identical until its wave "lights" it).
+
+CONSTITUTIONAL CONSTRAINTS (hard, gate-enforced):
+- PURITY: src/domain/** bans Date.now, Math.random, localeCompare. Use createPRNG for ALL rng,
+  compareCodepoint for ALL sorts. (eslint determinism guard + your own source-scan pin.)
+- ANY-CAST BASELINE 0: tests/lint/domainAnyCastBaseline.test.js FAILS any NEW src/domain file that
+  contains ANY of: '@type {any}', '@type {any[]}', '@type {*}', 'any' inside a JSDoc type brace,
+  '@ts-ignore', '@ts-expect-error'. New domain files MUST measure 0. Write fully-typed JSDoc.
+  Verify with: node scripts/count-domain-any.mjs  (your new files must not appear with debt).
+- tsc CLEAN: 'tsc --noEmit -p tsconfig.full.json' (full) AND 'tsc --noEmit' (domain) AND
+  'node scripts/check-domain-strict.mjs' (domain strict-0) must pass.
+- FIRST-PAINT: the model must be imported by NOTHING eager — ONLY test files import it. This keeps
+  the entry static closure byte-identical at 1,216,273 (budget 1,216,350). Do NOT import townMap
+  from any src/ file outside src/domain/townMap/.
+- NO GOLDEN SHIFT: the generator golden hashes the whole settlement; the map is derived at VIEW
+  TIME and persists NOTHING onto the settlement. buildTownMapModel must not mutate its inputs.
+- DETERMINISM/BYTE-IDENTITY: buildTownMapModel(settlement, mapEdits) is a pure function of its
+  inputs. Same input → byte-identical JSON.stringify output across runs/machines. Every iteration
+  that feeds an rng draw or lands in output MUST be compareCodepoint-sorted first. Build output
+  objects with STABLE key insertion order (JS preserves it) so stringify is stable.
+- NEW FILES ONLY. Do NOT modify districtProfile.js, mapProfile.js, or ANY existing file. Do NOT
+  update any existing golden/baseline. Do NOT git add/commit/stash/push. Do NOT run a full 'npm run
+  build' (the manager runs the ONE full gate — you run FOCUSED vitest/tsc/eslint on your files only).
+`
+
+// ────────────────────────────────────────────────────────────────────────────
+phase('Gate1+Implement')
+
+const GATE1_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  required: ['preservesUnknownTopLevelKeys', 'verdict', 'chainTraced', 'pinTestPath', 'pinTestGreen', 'evidence', 'blocksSM3'],
+  properties: {
+    preservesUnknownTopLevelKeys: { type: 'boolean', description: 'true iff the world-pulse canon-member rewrite preserves UNKNOWN top-level settlement keys byte-for-byte' },
+    verdict: { type: 'string', description: 'PRESERVES | STRIPS | CONDITIONAL — one word then a one-sentence justification' },
+    chainTraced: { type: 'array', items: { type: 'string' }, description: 'ordered file:function hops of the mutate/reconcile chain from applyWorldPulse to the settlement rewrite' },
+    pinTestPath: { type: 'string', description: 'path of the NEW pin test file created' },
+    pinTestGreen: { type: 'boolean' },
+    evidence: { type: 'string', description: 'the exact vitest command run + pass/fail summary' },
+    blocksSM3: { type: 'boolean', description: 'true iff mapEdits home (top-level settlement.mapEdits) is UNSAFE and SM-3 must move it or add a preserve guarantee first' },
+  },
+}
+
+const IMPL_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  required: ['filesCreated', 'goldenCaptured', 'goldenMeta', 'focusedResults', 'purityConfirmed', 'anyCastZero', 'tscClean', 'notes', 'openIssues'],
+  properties: {
+    filesCreated: { type: 'array', items: { type: 'string' } },
+    goldenCaptured: { type: 'boolean', description: 'true iff tests/fixtures/town-map-golden.json was captured and the golden test is GREEN without UPDATE_GOLDEN' },
+    goldenMeta: { type: 'object', additionalProperties: true, description: 'the legible meta recorded beside the hash (config count, total buildings, total districts, version axes)' },
+    focusedResults: { type: 'string', description: 'exact focused vitest command(s) run + pass/fail counts' },
+    purityConfirmed: { type: 'boolean', description: 'true iff a source scan confirms zero Date.now/Math.random/localeCompare in the new domain files' },
+    anyCastZero: { type: 'boolean', description: 'true iff node scripts/count-domain-any.mjs shows the new files carry ZERO any/suppress debt' },
+    tscClean: { type: 'boolean', description: 'true iff tsc full + domain + domain-strict all pass' },
+    notes: { type: 'string', description: 'design decisions made (geometry representation, version axes chosen, affinity table)' },
+    openIssues: { type: 'array', items: { type: 'string' }, description: 'anything left unresolved or any deviation from the brief' },
+  },
+}
+
+const results = await parallel([
+  // ── GATE 1: world-pulse blob-preservation trace + pin test ──────────────────
+  () => agent(`You are an Opus IMPLEMENTER acting as a forensic tracer. ${SUBSTRATE}
+
+TASK (design §8.1 pre-build gate): The Settlement Map will (in a later wave, SM-3) store cosmetic
+edits in a NEW top-level settlement key \`settlement.mapEdits\`. For a CANON campaign member, the
+world-pulse rewrites the settlement blob every tick. We must know NOW: does the world-pulse
+mutate/reconcile chain PRESERVE unknown top-level settlement keys BYTE-FOR-BYTE when it rewrites a
+canon member, or does it reconstruct the settlement from a known-keys allowlist (which would silently
+DROP mapEdits)?
+
+DO THIS:
+1. Trace the chain starting from src/domain/worldPulse/applyWorldPulse.js (and worldPulse/index.js).
+   Find where a canon member settlement object is rewritten/reconciled after a pulse tick — the
+   function(s) that take the prior settlement and produce the next-tick settlement. Follow every hop
+   (mutateWorld / reconcile / applyPulseToMember / whatever the real names are). Read the ACTUAL code
+   — establish whether the rewrite (a) spreads the prior settlement { ...prev, <changed fields> }
+   (⇒ PRESERVES unknown keys) or (b) constructs a fresh object from an explicit field list
+   (⇒ STRIPS). Note any deep-clone / normalize / serialize boundary in the path and whether IT
+   preserves unknown top-level keys (normalizeSettlement at src/domain/normalizeSettlement.js line
+   ~178 does 'const out = { ...settlement }' — spreads, so it preserves; confirm nothing downstream
+   re-narrows).
+2. Write a NEW pin test (new file, e.g. tests/domain/worldPulseBlobPreservation.test.js) that:
+   - Builds (or loads) a minimal canon-member settlement carrying a SYNTHETIC unknown top-level key
+     (use the real future key name: \`mapEdits: { layoutVariant: 2, pins: [{ anchor: 'cat:tavern', dx: 3 }] }\`,
+     plus a second arbitrary sentinel key to prove generality).
+   - Runs the REAL world-pulse canon-member rewrite over it (call the real chain function you traced;
+     if it needs a fuller world/context, construct the minimal real inputs — do not mock the function
+     under test).
+   - Asserts the unknown top-level key(s) survive BYTE-FOR-BYTE (deep-equal) on the rewritten member.
+   - If the chain STRIPS: still commit the test but as a documented XFAIL/expect-strips pin that
+     PINS THE CURRENT (stripping) BEHAVIOR and names the remediation SM-3 needs — do NOT leave it
+     silently green. Make the test's intent unmistakable in its docstring.
+   Run ONLY that focused test: npx vitest run <yourfile>. Do not run a full build.
+3. Keep it NEW-FILE-ONLY. Do not modify any worldPulse source. Do not commit.
+
+Return the structured verdict. Be precise about PRESERVES vs STRIPS vs CONDITIONAL and whether it
+blocks the SM-3 mapEdits home.`,
+    { label: 'gate1:blob-preservation', phase: 'Gate1+Implement', model: 'opus', effort: 'high', schema: GATE1_SCHEMA }),
+
+  // ── SM-1 IMPLEMENTATION ─────────────────────────────────────────────────────
+  () => agent(`You are the Opus IMPLEMENTER for wave SM-1 of THE SETTLEMENT MAP. ${SUBSTRATE}
+
+BUILD SM-1 (design §9 first bullet): the deterministic town-map DOMAIN MODEL + its golden manifest.
+This is the model ONLY — no viewer, no React, no chunk. Engine-untouching, zero eager bytes.
+
+════════ FILES TO CREATE (new only) ════════
+SOURCE (all under src/domain/townMap/, fully-typed JSDoc, any-cast 0, pure):
+1. src/domain/townMap/anchors.js — stable identity anchors.
+   - anchorForInstitution(inst) → string key: 'cat:'+catalogId, else 'uid:'+localUid, else
+     'name:'+codepoint-safe-slug(name). Pure, deterministic. (slug: lowercase, non-alphanumerics→'-',
+     trim — do NOT use localeCompare; a plain regex replace is fine.)
+   - anchorForDistrict(district) → district.id (already 'district.<snake>').
+   These keys are what mapEdits deltas key on AND what makes placement stable across roster drift.
+2. src/domain/townMap/institutionAssignment.js — the TOTAL assigner (the one genuinely new
+   derivation). assignInstitutionsToDistricts(institutions, districts, rng) → a Map/array assigning
+   EVERY institution to exactly ONE district (total assignment — districtProfile's fuzzy name-stem
+   matcher leaves most unassigned; the map cannot). Algorithm:
+   - Build a category→district-category AFFINITY table (institution priorityCategory →
+     preferred DISTRICT_CATEGORIES): economy→merchant, trade→merchant, crafts→craft,
+     military→military, government→civic, noble→noble, religion/religious→religious, magic→arcane,
+     criminal→criminal; unknown/absent→['other','residential'] fallback ranking. (You choose the
+     exact ranking; document it.)
+   - For each institution (iterate in compareCodepoint order of anchorKey), pick the highest-affinity
+     district that EXISTS; ties broken by compareCodepoint on district.id; if NO affine district
+     exists, place via a seeded residual draw (rng) among existing districts (still deterministic).
+   - If there are ZERO districts (quarter-less thorp/hamlet — common at small tiers), floor to a
+     single synthetic 'hamlet-cluster' district so every building still stands somewhere. Flag it so
+     the model can render a building-scatter cluster.
+   - GUARANTEE: every institution's anchorKey appears exactly once in the output; no institution
+     dropped, none duplicated. This is a pinned invariant.
+3. src/domain/townMap/townMapModel.js — buildTownMapModel(settlement, mapEdits = null) → renderModel.
+   PUBLIC SIGNATURE is (settlement, mapEdits). Derive the rng INTERNALLY (never ambient):
+     const variant = Number.isInteger(mapEdits?.layoutVariant) && mapEdits.layoutVariant > 0 ? mapEdits.layoutVariant : 0;
+     const seed = settlement?._seed ?? settlement?.id ?? 'town-map-seedless';
+     const forkKey = variant ? \`\${seed}::town-map:v1::variant:\${variant}\` : \`\${seed}::town-map:v1\`;
+     const rng = createPRNG(forkKey);
+   (⇒ absent mapEdits / layoutVariant 0 ⇒ base fork key ⇒ byte-identical to no mapEdits — the
+   DORMANCY law at the model level.) Thread rng EXPLICITLY into every synthesis fn.
+   Compose the existing derivations (deriveAllDistricts, deriveMapProfile, resolveTerrain,
+   defenseProfileHasWalls, deriveAllActiveConditions, popToTier/settlement.tier, tradeRouteTier) and
+   synthesize geometry per §3's 6-step order in a NORMALIZED numeric coordinate space (e.g. a
+   0..1000 × 0..1000 viewBox — pure vectors, numbers only, NO <image>, NO rendering):
+     (1) Frame — terrain edge (river course for riverside; coastline for coastal/port) + approach
+         roads by tradeRoute class, weighted by mapProfile.roadImportance.
+     (2) Skeleton — a street-graph anchor (market square / crossroads / water gate per tradeAccess);
+         organic-radial at low tiers, denser grid fragments at city+.
+     (3) Districts — one polygon per derived district, positioned by category priors (Waterfront hugs
+         water, Government central, Shadows/criminal periphery, Noxious/industrial edge). Each carries
+         { id, name, category, anchorKey, polygon:[[x,y],...], centroid:{x,y}, wealth, safety }.
+     (4) Buildings — EVERY institution placed via the total assigner. Singular institutions →
+         individual landmark buildings at ALL tiers (kind:'landmark'); aggregate categories
+         (lodging, residential) → district FILL at city/metropolis (kind:'fill') and individual
+         buildings below. Each carries { anchorKey, name, catalogId|null, localUid|null, districtId,
+         kind, position:{x,y} }.
+     (5) Fortifications — wall polygon + gates IFF defenseProfileHasWalls(settlement.defenseProfile);
+         readiness label styles wall weight (a numeric/string field, not a stroke).
+     (6) Overlays — mapProfile.hazardMarkers + deriveAllActiveConditions → district-level condition
+         badges (the living layer). conditions overlay MUST be ⊆ activeConditions.
+   Stamp VERSION AXES (townMapGeometryVersion: 1, plus e.g. layoutLawVersion / overlayVersion — your
+   call, document them) + RESERVED-NULL SLOTS per the spatialDigest exemplar (e.g.
+   reserved:{ scarHistory:null, thumbnail:null, pdfPlate:null } — future waves light them; null ⇒
+   dormant ⇒ declared-not-silent). Include a meta block with counts:
+   { tier, terrain, tradeAccess, hasWalls, layoutVariant, buildingCount, districtCount }.
+   Apply mapEdits (forward-compat; SM-3 owns the CONTAINER — you own the READ application):
+   layoutVariant already salts the fork; pins:[{anchor,dx,dy}] nudge the building/district whose
+   anchorKey===anchor AFTER placement; drop pins whose anchor matches nothing (dangling drop). Absent
+   mapEdits ⇒ no nudges. Do NOT mutate inputs (structuredClone or build fresh).
+4. src/domain/townMap/index.js — barrel re-exporting buildTownMapModel (+ the anchor helpers).
+
+TESTS:
+5. tests/fixtures/townMapFixtures.js — a deterministic synthetic SETTLEMENT corpus builder (index-
+   derived, NO Math.random), same philosophy as spatialPackFixtures. Export makeTownFixture(
+   { tier, terrain, walls, water, seed, quarters?, institutions? }) → a minimal settlement object
+   carrying ONLY what the model reads: _seed, id, name, tier, population (consistent with tier),
+   config:{ terrainType, tradeRouteAccess }, spatialLayout:{ quarters:[...] }, institutions:[...]
+   (mix catalogId + localUid to exercise both anchors), defenseProfile (walls present/absent),
+   economicState, powerStructure (minimal). Export GOLDEN_CONFIGS: ~18 configs spanning
+   tier×terrain×walls×water such that EVERY tier (thorp..metropolis), EVERY terrain (plains,hills,
+   forest,riverside,coastal,mountain,desert), walls∈{true,false}, water∈{true,false} each appear ≥2×;
+   MUST include: a quarter-less small tier (thorp/hamlet, zero quarters ⇒ hamlet-cluster floor) AND a
+   metropolis with many quarters + an aggregate lodging district (the owner's lodging-district-fill
+   case) AND at least one custom-institution (localUid) case.
+6. tests/property/townMapGolden.test.js — COPY the spatialDigestGolden.test.js fail-closed template:
+   - Build the model for every GOLDEN_CONFIG; hash sha256(JSON.stringify(perConfigOutputs)); record
+     legible meta beside the hash (config count, total buildings, total districts, version axes).
+   - Fail-closed missing-manifest guard (missing tests/fixtures/town-map-golden.json must RED with a
+     regen instruction, NOT self-mint green).
+   - Reproducibility test: a second build hashes identically.
+   - ANTI-VACUITY test: assert total buildings > 0 AND total districts > 0 AND the corpus actually
+     spans the axes (e.g. >=6 distinct tiers, >=7 distinct terrains, both walls values, both water
+     values present) — so a stubbed/empty model cannot pass green.
+   - UPDATE_GOLDEN=1 capture path. Capture the manifest, then CONFIRM the test is GREEN WITHOUT
+     UPDATE_GOLDEN (hash matches the just-captured manifest).
+7. tests/domain/townMapModel.test.js — unit pins:
+   - PURITY source-scan: read the src/domain/townMap/*.js files and assert NONE contain Date.now,
+     Math.random, or localeCompare (regex over source).
+   - DETERMINISM: buildTownMapModel(s) twice → deep-equal / identical JSON.
+   - TOTAL ASSIGNMENT: for a fixture with N institutions, every institution's anchorKey appears
+     EXACTLY once across buildings[]; count of placed === N (no drop, no dup). Include a
+     quarter-less fixture (hamlet-cluster floor still places all).
+   - ANCHOR STABILITY: removing/adding one institution leaves the OTHER buildings' anchorKeys
+     unchanged (anchors key on catalogId/localUid, not array index).
+   - mapEdits DORMANCY: buildTownMapModel(s, null) deep-equals buildTownMapModel(s, {}) deep-equals
+     buildTownMapModel(s, { layoutVariant: 0 }); a positive layoutVariant produces a DIFFERENT but
+     deterministic arrangement; a pin with a matching anchor nudges exactly that element; a pin with
+     a dangling anchor is dropped (no throw, no phantom).
+   - NO INPUT MUTATION: deep-clone the input before, call build, assert input unchanged after.
+
+════════ VERIFY YOUR OWN WORK (focused only — the manager runs the full gate) ════════
+Run and report exact results:
+- npx vitest run tests/property/townMapGolden.test.js tests/domain/townMapModel.test.js
+- (gate1 owns tests/domain/worldPulseBlobPreservation.test.js — do NOT create it)
+- npx tsc --noEmit -p tsconfig.full.json   (must be clean; if the full project has PRE-EXISTING
+  errors unrelated to your files, report that but ensure YOUR files add none)
+- npx tsc --noEmit                          (domain)
+- node scripts/check-domain-strict.mjs      (domain strict-0)
+- node scripts/count-domain-any.mjs         (confirm your new files carry ZERO any/suppress debt)
+- npx eslint src/domain/townMap/ tests/property/townMapGolden.test.js tests/domain/townMapModel.test.js tests/fixtures/townMapFixtures.js
+Do NOT run 'npm run build' or the full 'npm run test'. Do NOT git add/commit/stash.
+
+Return the structured result with EXACT command outputs (pass/fail counts). If something can't be
+made green, say so in openIssues rather than claiming success.`,
+    { label: 'implement:sm1-model', phase: 'Gate1+Implement', model: 'opus', effort: 'high', schema: IMPL_SCHEMA }),
+])
+
+const gate1 = results[0]
+const impl = results[1]
+
+log(`gate1: ${gate1 ? gate1.verdict : 'NULL'} | impl: ${impl ? (impl.goldenCaptured ? 'golden captured' : 'NO GOLDEN') : 'NULL'}`)
+
+// ────────────────────────────────────────────────────────────────────────────
+phase('Verify')
+
+const VERIFY_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  required: ['lens', 'verdict', 'findings', 'evidenceRun'],
+  properties: {
+    lens: { type: 'string' },
+    verdict: { type: 'string', description: 'SOUND (no defect on this lens) | DEFECT (a real defect found)' },
+    findings: {
+      type: 'array',
+      items: {
+        type: 'object', additionalProperties: false,
+        required: ['severity', 'summary', 'file', 'failureScenario'],
+        properties: {
+          severity: { type: 'string', description: 'blocker | major | minor' },
+          summary: { type: 'string' },
+          file: { type: 'string' },
+          line: { type: 'integer' },
+          failureScenario: { type: 'string', description: 'concrete input/state → wrong output, with the command that demonstrates it if run' },
+        },
+      },
+    },
+    evidenceRun: { type: 'string', description: 'the exact commands run to test the lens + their results (executed, not reasoned)' },
+  },
+}
+
+const LENSES = [
+  {
+    key: 'purity-determinism',
+    prompt: `Refute PURITY + DETERMINISM. Try to make buildTownMapModel non-deterministic or impure.
+Grep src/domain/townMap/** for Date.now, Math.random, new Date, localeCompare, Object entries/keys
+iteration that feeds draws WITHOUT a compareCodepoint sort, and any Map/Set iteration whose order
+could vary. Actually RUN: build the same fixture twice and JSON.stringify-compare; build with keys
+inserted in different source orders if you can construct it. Check the rng fork key is exactly
+\`\${seed}::town-map:v1\` when mapEdits is absent (dormancy). Confirm the 'any-cast 0' claim by running
+node scripts/count-domain-any.mjs and checking the new files are absent from the debt list.`,
+  },
+  {
+    key: 'byte-identity-golden-honesty',
+    prompt: `Refute the GOLDEN's honesty. Confirm the fail-closed guard actually bites: temporarily move
+tests/fixtures/town-map-golden.json aside and assert the golden test REDS (does not self-mint green);
+restore it. Confirm the reproducibility test and anti-vacuity test are REAL (would fail on an empty
+model) — e.g. check they assert positive counts and axis spread, not tautologies. Re-capture with
+UPDATE_GOLDEN=1 on a clean tree and confirm the hash is STABLE across two captures. Confirm the
+generator golden is UNTOUCHED (git status shows no change to tests/fixtures/generator-golden-master.json
+and buildTownMapModel does not mutate the settlement — run a no-mutation check).`,
+  },
+  {
+    key: 'total-assignment-antivacuity',
+    prompt: `Refute TOTAL ASSIGNMENT + geometry sanity. Construct adversarial fixtures: zero
+institutions; zero quarters (hamlet-cluster floor); institutions with duplicate names but distinct
+catalogId/localUid; an institution with neither catalogId nor localUid (name-slug fallback); two
+institutions whose name-slugs collide. RUN buildTownMapModel and assert every institution's anchorKey
+appears EXACTLY once in buildings[] and none is dropped or duplicated. Check aggregate-category
+fill vs landmark behavior flips correctly at the city tier boundary. Check district polygons/centroids
+are finite numbers and buildings sit within the coordinate space. Check conditions overlay ⊆
+activeConditions.`,
+  },
+  {
+    key: 'anchors-mapedits-lifecycle',
+    prompt: `Refute ANCHOR STABILITY + mapEdits application. RUN: build a fixture, then build the same
+fixture with one institution removed and one added — assert the surviving institutions' anchorKeys are
+unchanged (stable across roster drift). Test mapEdits: absent vs {} vs {layoutVariant:0} must be
+byte-identical; layoutVariant:2 deterministic-but-different; a pin{anchor:matching} nudges exactly
+that element by dx/dy; a pin{anchor:'does-not-exist'} is dropped silently (no throw, no phantom
+entry). Confirm buildTownMapModel does not mutate its inputs (deep-clone-and-compare). Confirm the
+name-slug fallback and the design's PRIVATE_KEY_RE trap are not tripped by any mapEdits key the MODEL
+reads (mapEdits keys used: layoutVariant, pins, legendPrefs — none match seed|hook|compass|chronicle|
+secret|private as an unanchored substring — verify).`,
+  },
+  {
+    key: 'types-lint-firstpaint-newfiles',
+    prompt: `Refute CLEANLINESS + FENCE. RUN: npx tsc --noEmit -p tsconfig.full.json ; npx tsc --noEmit ;
+node scripts/check-domain-strict.mjs ; npx eslint src/domain/townMap/ tests/property/townMapGolden.test.js
+tests/domain/townMapModel.test.js tests/fixtures/townMapFixtures.js — report any error the new files
+introduce. Verify the FENCE: git status --porcelain shows ONLY new files (no modification to
+districtProfile.js, mapProfile.js, or any existing golden/baseline). Grep the whole src/ tree
+(EXCLUDING src/domain/townMap/ and tests/) for any import of 'townMap' — there must be NONE (imported
+by nothing eager ⇒ first-paint closure unchanged). Confirm no new file was added under src/ outside
+src/domain/townMap/.`,
+  },
+]
+
+const verifications = await parallel(LENSES.map((l) => () =>
+  agent(`You are an Opus ADVERSARIAL VERIFIER for wave SM-1 of the Settlement Map. Your job is to
+REFUTE, with EXECUTED evidence, not to reason. Default to skeptical. ${SUBSTRATE}
+
+The implementer created: src/domain/townMap/{anchors,institutionAssignment,townMapModel,index}.js,
+tests/fixtures/townMapFixtures.js, tests/fixtures/town-map-golden.json,
+tests/property/townMapGolden.test.js, tests/domain/townMapModel.test.js. Read them, then attack.
+
+LENS = ${l.key}
+${l.prompt}
+
+Rules: RUN commands (vitest, tsc, eslint, node scripts, git status, grep) — every finding needs an
+executed receipt. Write throwaway probe scripts under the scratchpad if useful; do NOT modify the
+implementer's source or tests except to restore anything you temporarily moved. Do NOT commit. If the
+lens is clean, say SOUND with the commands you ran as proof. Report only REAL defects with a concrete
+failure scenario.`,
+    { label: `verify:${l.key}`, phase: 'Verify', model: 'opus', effort: 'high', schema: VERIFY_SCHEMA })
+))
+
+const clean = verifications.filter(Boolean)
+const defects = clean.filter((v) => v.verdict === 'DEFECT')
+
+return {
+  gate1,
+  implementation: impl,
+  verifications: clean,
+  defectCount: defects.length,
+  defects,
+}

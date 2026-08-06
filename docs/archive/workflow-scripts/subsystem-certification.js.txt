@@ -1,0 +1,88 @@
+export const meta = {
+  name: 'subsystem-certification',
+  description: 'Build per-subsystem certification: registry, totality walker, evaluator, and rows for all 45 simulation switches',
+  phases: [
+    { title: 'Core contract', detail: 'registry shape + walker + evaluator + observation wiring', model: 'opus' },
+    { title: 'Registry fill', detail: '8 subsystem-group implementers in parallel', model: 'opus' },
+  ],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const COMMON = `You are an Opus IMPLEMENTER for SettlementForge (deterministic D&D settlement/world simulator). The owner ordered exhaustive per-subsystem certification (2026-07-31, sequenced AFTER the 30/100/300-year soak ladder completed). Worktree: ${ROOT} branch claude/composite-r4 — verify with \`git -C ${ROOT} rev-parse --abbrev-ref HEAD\` first; stop on mismatch.
+
+CONTEXT: src/domain/certification/behavioralContract.js + certificationSchema.js hold the existing behavioral certification the realm soak (scripts/audit/whole-world-soak.mjs, realm-scale-certification.mjs) feeds. Soak receipts live in ${ROOT}/artifacts/soak/ (release.cases/*.json and the research-profile case) — READ-ONLY evidence; never modify artifacts. Receipts carry behavioral.yearly rows (eventTypeCounts, moverCounts, selectedMoverCounts, postApplyMoverCounts, arcCounts, attentionCounts, succession, causal, stateVectors, chronicleSample). SIMULATION_RULE_PRESETS.full_simulation (src/domain/worldPulse/simulationRules.js) lights 45 boolean subsystem switches. The completed soak proved two subsystems effectively silent (knowledge movers: 28 proposed / 0 selected over 30y; settlementLifecycle: zero foundings/deaths despite x4.8 booms) — the certification you build must make exactly those diagnoses automatically.
+
+HARD RULES: no git mutations; no full suites/builds; focused vitest only, one invocation at a time (timeout-shaped red gets ONE isolation re-run before belief); no golden re-records; no ratchet raises; determinism laws (no Date.now/Math.random/toLocale in src/domain — pure extraction from receipt data only); src/domain files stay headless (no React/Zustand/store imports) and under the 800-effective-line ceiling (split into leaves if needed); new domain files must NOT be imported by any eager path (lazy leaf / scripts-only imports — check tests/build pins before adding imports to already-eager modules); new tests under tests/generators|joins|simulation|property use the anchored-negatives/seedFailures helpers; bare negatives anywhere in tests/ must be anchored (the walker scans everything); no em dashes inside string literals in src/data or src/domain. Match house style; comments state constraints.
+
+THE CONTRACT SHAPE (the core agent builds it; group agents conform to it exactly): src/domain/certification/subsystemCertification.js exports SUBSYSTEM_CERTIFICATION_REGISTRY — one row per boolean rule key:
+  { rule: 'warLayerEnabled', title: 'War layer', module: 'src/domain/worldPulse/…',
+    aliveness: { eventTypes: [...], moverFamilies: [...], stateKeys: [...], other: '…' },
+    expectedTempo: 'per_tick' | 'yearly' | 'multi_year' | 'rare' | 'reactive',
+    invariants: [{ name, description, check: 'receipt-expressible predicate description' }],
+    soakEvidence: 'measured' | 'indirect' | 'unobserved' }
+and evaluateSubsystemCertification(receipt) grading every row: ALIVE (aliveness evidence present at plausible tempo) / DORMANT_BY_CONFIG (rule off in the receipt's preset) / SILENT (rule on, zero aliveness evidence — the knowledge-lane diagnosis) / UNOBSERVED (declared evidence not derivable from this receipt's schema — an honest instrument gap, never a pass). Evidence claims MUST be traced from source (rg the module for its emitted event-type strings, its mover family, its worldState keys) — never invented; if a subsystem genuinely emits nothing observable, its row says so via soakEvidence: 'unobserved' and that honesty is the deliverable.
+
+DONE BAR: edits + focused tests green (quote pass lines) + negative control for each new pin (revert, red, restore, green — quote both). Return dense structured data.`
+
+const SCHEMA = {
+  type: 'object',
+  required: ['agent', 'fixes'],
+  properties: {
+    agent: { type: 'string' },
+    fixes: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['finding', 'status', 'files', 'tests', 'notes'],
+        properties: {
+          finding: { type: 'string' },
+          status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] },
+          files: { type: 'array', items: { type: 'string' } },
+          tests: { type: 'string' },
+          notes: { type: 'string' },
+        },
+      },
+    },
+    subsystem_rows: { type: 'array', items: { type: 'string' }, description: 'rule keys whose registry rows this agent authored' },
+    silent_or_unobserved: { type: 'array', items: { type: 'string' }, description: 'rows this agent expects to grade SILENT or UNOBSERVED against the completed soak receipts, with one-line reasons' },
+    discovered: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+phase('Core contract')
+const core = await agent(`${COMMON}
+
+ASSIGNMENT (CORE CONTRACT — everything the group agents will conform to):
+1. Create src/domain/certification/subsystemCertification.js: the registry scaffold with the exact shape above, seeded with TWO exemplar rows you fully trace: 'settlementLifecycleEnabled' (aliveness: the lifecycle event vocabulary from settlementLifecycleKernel/FirstClass + the satellites ledger key; expectedTempo 'rare'; invariant: population conservation across satellite edges) and 'npcAgencyEnabled' (npc_* event types; the 'people' mover family; expectedTempo 'per_tick').
+2. Create evaluateSubsystemCertification(receipt) — pure, receipt-in verdict-out, grading every registry row ALIVE/DORMANT_BY_CONFIG/SILENT/UNOBSERVED per the contract, with a per-row evidence summary (counts found). Validate it against the REAL completed receipts (read ${ROOT}/artifacts/soak/ READ-ONLY): against the 30-year release case it must grade settlementLifecycleEnabled SILENT and npcAgencyEnabled ALIVE — quote the actual output; also run it against the 100-year and 300-year receipts and quote those grade tables.
+3. Totality walker: tests/lint/subsystemCertificationTotality.walker.test.js — every boolean rule key reachable from SIMULATION_RULE_PRESETS plus DEFAULT_SIMULATION_RULES has exactly one registry row, and every registry row names a real rule key (both directions); plus a guard-the-guard fixture proving the walker reds on a synthetic missing row. This makes a new subsystem without certification structurally impossible.
+4. Wire a 'subsystems' section into the soak's emitted receipt (scripts/audit/whole-world-soak.mjs + behavioralContract.js schema bump 4 to 5 with explicit backward-compat: the evaluator accepts v4 receipts, grading what it can and marking the rest UNOBSERVED honestly). Do NOT change what v4 fields mean.
+5. Add an npm script 'certify:subsystems' (package.json) that runs the evaluator against a receipt path argument and prints the per-subsystem grade table.
+6. Focused tests for the evaluator (fixture receipts covering all four verdicts) with negative controls.`, { label: 'cert:core', phase: 'Core contract', schema: SCHEMA, model: 'opus' })
+
+phase('Registry fill')
+const GROUPS = [
+  { key: 'war-stack', rules: 'warLayerEnabled, warDispositionEnabled, warEconomyDrainEnabled, warForageEnabled, warLevyEnabled, warSupplyQualityEnabled, defenderAttritionEnabled, defenderResolveEnabled, allyDefenseEnabled, allyIntelSharingEnabled, navalEnabled, peaceEngineEnabled' },
+  { key: 'economy-trade', rules: 'tradeFlowsEnabled, commodityFlowEnabled, constructiveFlowsEnabled, resourceDynamicsEnabled, resourceDriftEnabled, supplyWebWarfareEnabled, settlementStrategyEnabled, momentumEnabled' },
+  { key: 'faith-politics', rules: 'religionDynamicsEnabled, faithSpreadEnabled, traditionsEnabled, factionCompetitionEnabled, interventionEnabled, reframeEnabled' },
+  { key: 'people', rules: 'npcAgencyEnabled (extend the exemplar if needed), npcGrowthEnabled, npcLadderEnabled, populationDynamicsEnabled, migrationFlowsEnabled, relationshipDynamicsEnabled, stressorsEnabled' },
+  { key: 'place-spatial', rules: 'roadsEnabled, seasonsEnabled, spatialConsequenceEnabled, disastersEnabled, urbanFabricEnabled, settlementLifecycleEnabled (extend the exemplar if needed), tierDriftEnabled' },
+  { key: 'epistemics', rules: 'distancePricedNewsEnabled, provenanceLedgerEnabled, plus the knowledge-mover aliveness sources other rows reference. ALSO: add the belief-divergence observation to the soak receipt (a compact belief-vs-ground-truth distance metric per year, extracted where the belief map already exists in worldState) so infoMode stops being uncertifiable; this closes the certification blind spot found 2026-07-31.' },
+  { key: 'lifecycle-growth', rules: 'institutionLifecycleEnabled, upswingArcsEnabled, emergentEventsEnabled. Coordination note: npcGrowthEnabled belongs to the people agent; settlementLifecycleEnabled to place-spatial.' },
+  { key: 'validation', rules: "NO registry rows. You are the adversarial validator: after the other groups' rows land in the shared file, run the evaluator against the real 30-year receipt AND the century/300-year receipts, verify every claimed ALIVE grade has genuinely traced evidence (spot-check 10 rows against module source), verify the SILENT list contains the manually-found pair (knowledge lane, settlement lifecycle) plus whatever else honestly grades SILENT, and report the full grade tables verbatim." },
+]
+
+const results = await parallel(
+  GROUPS.map((g) => () =>
+    agent(`${COMMON}
+
+CORE CONTRACT LANDED (summary from the core agent): ${JSON.stringify(core?.fixes?.map((f) => f.finding) || 'read the files directly')}. Read src/domain/certification/subsystemCertification.js FIRST and conform to its exact row shape.
+
+ASSIGNMENT (group: ${g.key}): author fully-traced registry rows for these rules: ${g.rules}. For EACH rule: rg its module for the event-type strings it emits, its mover family registration, and the worldState keys it materializes; declare expectedTempo honestly (a war that fires yearly is a bug, not a certification standard); write at least one receipt-expressible invariant. Where a subsystem's evidence is not derivable from the current receipt schema, mark soakEvidence 'unobserved' and say what observation would be needed. Add focused registry-row tests (the shape test the core agent established) and run them plus the totality walker.`, { label: `cert:${g.key}`, phase: 'Registry fill', schema: SCHEMA, model: 'opus' })
+  )
+)
+
+const all = [core, ...results].filter(Boolean)
+log(`${all.length}/9 certification agents returned`)
+return { results: all }

@@ -1,0 +1,115 @@
+export const meta = {
+  name: 'verify-pglite-hook-gap',
+  description: 'Independently verify the eight-file pglite helper-boot hook-gap claims before amending the ratchet',
+  phases: [{ title: 'Verify files', detail: 'one read-only verifier per suspect file plus the shared harness' }],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const FILES = [
+  'tests/security/founderTransferPayout.pglite.test.js',
+  'tests/security/creditAllocationTrigger.pglite.test.js',
+  'tests/security/creditPackClawback.pglite.test.js',
+  'tests/security/moneyPathJourney.pglite.test.js',
+  'tests/security/accountStatusProfilesCustomContent.pglite.test.js',
+  'tests/security/profileModerationColumnLock.pglite.test.js',
+  'tests/security/accountStatusSupportTickets.pglite.test.js',
+  'tests/security/migration062Authz.pglite.test.js',
+]
+
+const HOOK_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['file', 'hooks', 'localHelpers', 'discrepancies'],
+  properties: {
+    file: { type: 'string' },
+    hooks: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['kind', 'line', 'timeoutArg', 'timeoutMs', 'callsHelper', 'directExecOrQuery', 'summary'],
+        properties: {
+          kind: { type: 'string', enum: ['beforeAll', 'beforeEach'] },
+          line: { type: 'integer' },
+          timeoutArg: { type: ['string', 'null'], description: 'verbatim trailing timeout argument of the hook call, or null if none' },
+          timeoutMs: { type: ['integer', 'null'], description: 'resolved milliseconds, or null if none/unresolvable' },
+          callsHelper: { type: ['string', 'null'], description: 'name of the boot-helper function this hook awaits (e.g. makeCreditLedgerDb, baseDb), or null' },
+          directExecOrQuery: { type: 'boolean', description: 'true if the hook callback text itself contains .exec( or .query(' },
+          summary: { type: 'string', description: 'one sentence: what this hook does' },
+        },
+      },
+    },
+    localHelpers: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['name', 'constructsPGlite', 'execsInside'],
+        properties: {
+          name: { type: 'string' },
+          constructsPGlite: { type: 'boolean', description: 'helper body contains new PGlite' },
+          execsInside: { type: 'boolean', description: 'helper body awaits .exec( or .query( — i.e. calling it pays the lazy WASM boot' },
+        },
+      },
+    },
+    discrepancies: { type: 'string', description: 'anything that contradicts the claims in the task prompt, or "none"' },
+  },
+}
+
+const HARNESS_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['exportedHelpers', 'discrepancies'],
+  properties: {
+    exportedHelpers: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['name', 'constructsPGlite', 'execsInside', 'summary'],
+        properties: {
+          name: { type: 'string' },
+          constructsPGlite: { type: 'boolean' },
+          execsInside: { type: 'boolean', description: 'body awaits .exec( or .query( — calling it pays the lazy WASM cold boot' },
+          summary: { type: 'string' },
+        },
+      },
+    },
+    discrepancies: { type: 'string' },
+  },
+}
+
+const filePrompt = (f) => `READ-ONLY verification task. Do not edit any file. Work only under ${ROOT} using absolute paths.
+
+VERIFY-FIRST: everything below is a claim to be checked against the actual file, not a fact to repeat back. Read the ENTIRE file ${ROOT}/${f} yourself and report what is actually there.
+
+Context: PGlite boot is LAZY — "new PGlite()" returns instantly and the cold WASM boot lands on the first .exec()/.query(). A vitest beforeAll/beforeEach that pays that boot while inheriting the default 10000ms hookTimeout is a flake hazard. A hook is "guarded" only if the hook call itself has a trailing numeric timeout argument (second argument after the callback), e.g. "beforeAll(async () => {...}, 180_000)" or ", PGLITE_BOOT_TIMEOUT_MS)" resolving via an in-file const.
+
+Report EVERY beforeAll/beforeEach call in the file: its kind, 1-indexed line of the hook keyword, its verbatim trailing timeout argument (null if the call has only the callback argument), the resolved ms (null if none), the name of any boot-helper function the callback awaits (a function that directly or transitively constructs PGlite or runs its first exec — e.g. makeCreditLedgerDb from ./creditLedgerHarness.js, or a local helper like baseDb/buildDb/supportDb), and whether the callback text itself contains ".exec(" or ".query(".
+
+Also report every LOCALLY-DEFINED helper function in this file that constructs PGlite or execs against it, with whether its body contains "new PGlite" and whether it awaits .exec(/.query(.
+
+Claims to check for the discrepancies field: (1) this file's boot-paying before-hook(s) lack any timeout argument OR carry a tuned 30000; (2) the boot happens through a helper call, not through literal "new PGlite" text inside the hook callback. Note anything contradicting these, plus anything else surprising (e.g. a hook I did not mention, a timeout defined but unused, multiple describe-scoped hook sets).
+
+Return ONLY the structured object.`
+
+const harnessPrompt = `READ-ONLY verification task. Do not edit any file. Work only under ${ROOT} using absolute paths.
+
+VERIFY-FIRST: check every claim against the actual source. Read ${ROOT}/tests/security/creditLedgerHarness.js in full.
+
+Context: PGlite boot is LAZY — "new PGlite()" returns instantly; the cold WASM boot lands on the first awaited .exec()/.query(). I need to know, for each exported helper (especially makeCreditLedgerDb): does its body construct PGlite ("new PGlite") and does it await .exec(/.query( internally — i.e. does CALLING the helper pay the cold boot before it returns?
+
+Also list any other exported boot-related helpers test files might await in hooks.
+
+Claim to check: makeCreditLedgerDb both constructs PGlite and runs migrations/DDL via exec inside itself, so an await of makeCreditLedgerDb() inside a vitest before-hook pays the full cold boot under that hook's timeout.
+
+Return ONLY the structured object.`
+
+phase('Verify files')
+const results = await parallel([
+  ...FILES.map((f) => () => agent(filePrompt(f), { label: `verify:${f.split('/').pop()}`, schema: HOOK_SCHEMA })),
+  () => agent(harnessPrompt, { label: 'verify:creditLedgerHarness', schema: HARNESS_SCHEMA }),
+])
+
+return { files: results.slice(0, FILES.length), harness: results[FILES.length] }

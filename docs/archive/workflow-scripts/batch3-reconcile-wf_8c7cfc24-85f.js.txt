@@ -1,0 +1,30 @@
+export const meta = {
+  name: 'batch3-reconcile',
+  description: 'Batch 3 reconciliation: regen chains, census registrations, and the AUTHORIZED golden re-record with attribution',
+  phases: [{ title: 'Reconcile', detail: 'one Opus implementer', model: 'opus' }],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = { type: 'object', required: ['agent', 'fixes'], properties: { agent: { type: 'string' }, fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } }, golden_diff_profile: { type: 'string' }, behavior_shifts: { type: 'array', items: { type: 'string' } }, discovered: { type: 'array', items: { type: 'string' } } } }
+
+phase('Reconcile')
+const r = await agent(`You are an Opus IMPLEMENTER for SettlementForge. Reconcile the batch-3 gate (J2 + H2 + I1 landed uncommitted). Worktree: ${ROOT} branch claude/composite-r4 — verify; stop on mismatch. FOREIGN, never touch: the owner's wizard-news session files (wizardNews/settlementRumors/heraldRouting/informationStatecraft/momentum/supplyWebWarfare + their tests) and artifacts/soak/**. A soak is live: focused vitest only, one at a time; timeout-shaped reds get ONE isolation re-run.
+
+THE GATE'S EXACT RED SET (16 files, executed):
+A. MECHANICAL REGEN (run the chain IN DEPENDENCY ORDER — a wrong order costs a full gate run; the recorded law is: distillate regen BEFORE build:edge-shared, because the intentAtlas bundle bakes the distillate in):
+   tests/domain/intentAtlasSoakDistiller.test.js · tests/docs/compendiumDataFreshness.test.js · tests/edgeFunctions/{aiCharterBundle,aiGroundingBundle,aiOutputSchemaBundle}.freshness.test.js
+   Chain: \`node scripts/distill-intent-atlas.mjs\` (if the distillate legitimately moved) → \`npm run gen:compendium-data\` → \`node scripts/generate-sitemap.mjs\` → \`npm run build:edge-shared\`. Verify each red clears.
+B. CENSUS / RATCHET REGISTRATIONS — fix PROPERLY, never widen a number:
+   tests/domain/roadsParticipation.test.js (a new worldPulse .npcs reader from J2/H2 — disposition it honestly in the census with a one-line reason, the npcLedger precedent from 2026-08-01)
+   tests/lint/clampPrimitiveBaseline.test.js (a new clamp copy — import the KERNEL primitive src/kernel/math.js instead of re-implementing; the ratchet freezes divergent copies and new code MUST adopt the kernel)
+   tests/lint/ruinFilterRoster.walker.test.js (a new roster reader — register or route through the sanctioned accessor per the walker's own message)
+C. THE GOLDEN FAMILY — **THE RE-RECORD IS AUTHORIZED** (manager ruling 2026-08-01 under the owner's standing delegation, recorded in docs/DESIGN_REALM_DIRECTIVES.md Progress + docs/FABLE_VALIDATION_QUEUE.md). CAUSE, already proven by the I1 agent: assembleInstitutions consumes one rng.chance() draw per catalog candidate clearing its gates, so the six new brokerage placements at town+ translate the seeded stream downstream. Files: tests/property/generatorGoldenMaster.test.js · tests/pdf/goldenViewModel.test.js · tests/generators/effectReachability.coverage.test.js · tests/generators/coherenceRepairPass.test.js · tests/generators/powerEconomyFreshness.test.js · tests/joins/powerConfig.test.js · tests/domain/factionRename.test.js · tests/store/pinnedNpcRegenRemap.test.js
+   EXECUTION RULES (binding):
+   1. BEFORE capturing: snapshot the current golden fixture and record its sha256, so the diff profile is proven rather than claimed.
+   2. Capture ONLY via the sanctioned env-gated mechanisms (UPDATE_GOLDEN=1 for generatorGoldenMaster and goldenViewModel).
+   3. PROVE THE BLAST RADIUS: the changed rows must be EXACTLY the tier bands where the new entries can generate (town/city/metropolis per I1's report — 273 of 525 rows). Quote the changed-row count, a sample of their config keys, and verify NO row outside that predicted set moved. If anything outside the prediction moved, STOP, revert the capture, and report — that would mean a second, unattributed cause.
+   4. effectReachability.coverage: 4 of 12 authored strata stop firing in the pinned corpus. The file's own instruction is 'investigate the producer before widening the corpus'. VERIFY each producer is unchanged and still reachable (the I1 agent already claims this — re-derive it yourself), then RE-SELECT specimen seeds so the strata fire again. You may NOT widen the corpus, weaken an assertion, or delete a stratum to reach green.
+   5. The five expectation snapshots (coherenceRepairPass, powerEconomyFreshness x2, powerConfig, factionRename x2 of 25 denominator seeds, pinnedNpcRegenRemap): re-pin to the new seeded truth, each with a one-line comment naming the cause (the I1 catalog addition) so a future reader is not left guessing.
+   6. Dormancy goldens must stay GREEN AND UNTOUCHED throughout — if one moves, a dark system is leaking and you must STOP and report.
+
+HARD RULES: no migrations; no git mutations; no ratchet/baseline/budget raises; the first-paint closure is at 1,020,590 of 1,040,000 — do not spend it (if you touch an eager seam, extract functions to zero-import leaves per the userRouteIdentity precedent); JSX 600 / js 800; anchored negatives; no em dashes in src/domain|src/data string literals. Finish by re-running EACH of the 16 formerly-red files and quoting their pass lines. Return dense structured data: statuses, files, verbatim test tails, the golden_diff_profile (sha before/after + changed-row proof), behavior shifts stated plainly, judgment calls vetoable, discovered.`, { label: 'batch3:reconcile', phase: 'Reconcile', schema: SCHEMA, model: 'opus' })
+return { results: [r].filter(Boolean) }

@@ -1,0 +1,51 @@
+export const meta = {
+  name: 'w-r2-fix-batch-2b',
+  description: 'Round-2 fix waves batch 2b: SURFACE (display lane) + TRACK-G2 (golden batch, branch-parked) — two Opus implementers in isolated worktrees',
+  phases: [
+    { title: 'Batch-2b', detail: 'W-R2-SURFACE (the engine reaches the eye) ∥ TRACK-G2 (golden-shifting, red-by-design branch)', model: 'opus' },
+  ],
+}
+
+const REPORT_SCHEMA = {
+  type: 'object',
+  required: ['wave', 'branch', 'baseHash', 'commits', 'dispositions', 'gateNumbers', 'report'],
+  properties: {
+    wave: { type: 'string' },
+    branch: { type: 'string' },
+    baseHash: { type: 'string' },
+    commits: { type: 'array', items: { type: 'string' } },
+    dispositions: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['id', 'status', 'evidence'],
+        properties: {
+          id: { type: 'string' },
+          status: { type: 'string', enum: ['fixed', 'deferred', 'excluded', 'stopped_golden_shifting'] },
+          evidence: { type: 'string' },
+        },
+      },
+    },
+    testsAdded: { type: 'number' },
+    gateNumbers: { type: 'string' },
+    byteEvidence: { type: 'string' },
+    judgments: { type: 'array', items: { type: 'string' } },
+    deferrals: { type: 'array', items: { type: 'string' } },
+    report: { type: 'string' },
+  },
+}
+
+const BASE = '163601a4'
+
+const surfacePrompt = 'You are the W-R2-SURFACE implementer for SettlementForge, in YOUR OWN isolated worktree. FIRST read docs/briefs/W_R2_COMMON_PROTOCOL.md, THEN the W-R2-SURFACE half of docs/briefs/W_R2_DATA_SURFACE_BRIEFS.md. Execute completely.\n\nExpected base: ' + BASE + ' (review-fixes lineage) — verify, then branch claude/w-r2-surface from it.\n\nAMENDMENTS to your brief (binding): (1) item 8 — you build hegemonyRead (the pure lazy selector per DESIGN_SIM_DEPTH_R2 D4a) AND its display mounts; the later DEPTH wave will consume your selector for the reason term — export it cleanly. (2) The INTENT wave is UNMERGED (parked on its branch for a budget decision) — its EventComposer.jsx refusal-branch changes are NOT in your base; when you touch EventComposer/PendingIntentions for the forecast affordance (item 12), keep your diff surgical so the later INTENT merge conflicts stay trivial. (3) The GUARDS wave IS merged — its guidance walker allowlist (UNWIRED_WHISPERS) is in your base; item 13 must EMPTY it and turn the walker fully strict.\n\nEVERY component you add is a lazy leaf; measure eager bytes (the tree is currently +39 B over budget pending a reclaim wave — your wave must add ZERO eager bytes; if any item forces eager cost, STOP that item and record it).\n\nFull gate before final commit (the budget test will show the known +39 B — that specific pre-existing red is NOT yours; everything else must be green; state it plainly). Structured output = the §0.3 review input.'
+
+const g2Prompt = 'You are the TRACK-G2 implementer for SettlementForge, in YOUR OWN isolated worktree. FIRST read docs/briefs/W_R2_COMMON_PROTOCOL.md, THEN the TRACK-G2 half of docs/briefs/W_R2_G2_DEPTH_BRIEFS.md. Execute completely.\n\nExpected base: ' + BASE + ' (review-fixes lineage) — verify, then branch claude/w-r2-g2 from it.\n\nYOUR BRANCH IS RED BY DESIGN: every fix legitimately shifts same-seed goldens; you implement + pin + produce THE SHIFT MAP (docs/review-r2/G2_SHIFT_MAP.md on your branch), and the goldens stay red until the owner-signed regen moment executes them all at once. Your gate report distinguishes: (a) the predicted golden reds (enumerated, each mapped), (b) everything else, which MUST be green.\n\nThe D6 Underways catalog half (item 9) follows docs/DESIGN_SIM_DEPTH_R2.md D6 exactly — full parity checklist, every catalog pin extended, the naming-register check recorded as a JUDGMENT.\n\nStructured output = the §0.3 review input.'
+
+log('Dispatching SURFACE + G2 off base ' + BASE)
+const results = await parallel([
+  () => agent(surfacePrompt, { label: 'impl:SURFACE', phase: 'Batch-2b', schema: REPORT_SCHEMA, model: 'opus', isolation: 'worktree' }),
+  () => agent(g2Prompt, { label: 'impl:G2', phase: 'Batch-2b', schema: REPORT_SCHEMA, model: 'opus', isolation: 'worktree' }),
+])
+const landed = results.filter(Boolean)
+log('Batch 2b complete: ' + landed.length + '/2 returned')
+return { waves: landed }

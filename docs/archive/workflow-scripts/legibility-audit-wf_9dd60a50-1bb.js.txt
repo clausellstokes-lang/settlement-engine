@@ -1,0 +1,43 @@
+export const meta = {
+  name: 'legibility-audit',
+  description: 'Regular-human legibility audit of the Realm Inspector and Library, producing the streamline spec',
+  phases: [
+    { title: 'Read', detail: 'three parallel surface lenses' },
+    { title: 'Spec', detail: 'synthesis into the streamline spec' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const LAW = `THE LEGIBILITY LAW (owner doctrine 2026-07-22): the test is a REGULAR HUMAN, not someone versed in spreadsheets — every surface must be readable and navigable, and each page must give AT A GLANCE complete and wholesome information. The balance: SIMPLICITY (one glance = one plain-language truth) x COHERENCY (same concept reads the same everywhere, no jargon door-names) x COMPREHENSIVENESS (depth via progressive disclosure, never omission). Legibility is the measure of the balance.`
+const COMMON = `READ-ONLY audit in ${TREE} (current composite tip; do NOT edit or touch git). ${LAW} Judge each surface AS THAT REGULAR HUMAN: walk the component code and its copy, reconstruct what the rendered page actually presents (door names, table columns, jargon terms, numbers without interpretation, panel layouts), and score the glance-test per page. Cite file:line for every claim. Distinguish CONTENT problems (jargon, bare numbers, missing summary sentence) from STRUCTURE problems (too many doors, wrong hierarchy, table-first layouts).`
+
+const FINDINGS = {
+  type: 'object',
+  required: ['pages', 'topProblems'],
+  properties: {
+    pages: { type: 'array', items: { type: 'object', required: ['page', 'glanceVerdict', 'problems'], properties: {
+      page: { type: 'string' }, glanceVerdict: { type: 'string', description: 'PASS / PARTIAL / FAIL the regular-human glance test, one sentence why' },
+      problems: { type: 'array', items: { type: 'object', required: ['kind', 'detail', 'where'], properties: { kind: { type: 'string', enum: ['jargon', 'bare-number', 'no-summary', 'too-many-doors', 'hierarchy', 'table-first', 'inconsistent-term', 'other'] }, detail: { type: 'string' }, where: { type: 'string' } } } },
+      strengths: { type: 'array', items: { type: 'string' } },
+    } } },
+    topProblems: { type: 'array', items: { type: 'string' }, description: 'the cross-page patterns, worst first' },
+  },
+}
+
+phase('Read')
+const lenses = await parallel([
+  () => agent(`${COMMON}
+LENS 1 — THE REALM INSPECTOR: every panel behind the inspector's doors (Dashboard, Letter, War and Diplomacy, Stage the Road, The Oracle, Pulse Results, Chronicle, Timelapse — find their components under src/components/map/ and siblings). For each panel: what does a regular human see first, is there a plain-language summary or does it open on data, are the door NAMES themselves legible (what does 'Pulse Results' or 'Stage the Road' mean to a first-timer), how many clicks to the answer 'what happened and what matters now'. Also judge the inspector shell itself (9 doors in a floating panel — is that navigable?).`, { label: 'lens:inspector', phase: 'Read', schema: FINDINGS }),
+  () => agent(`${COMMON}
+LENS 2 — THE LIBRARY: the discovery flow (search + sort + All/Drafts/Canon + Filters + Select + the settlement rows with TIER/PHASE/STANDING columns and phase dots). The owner's order: HEAVILY STREAMLINE discovery. Judge: what does a regular human need to find a settlement and know its state at a glance; which controls earn their place at 1-3 saves vs 50; which column vocabularies (Vulnerable?, phase dots 1-5, Draft/Canon) explain themselves; what should collapse behind progressive disclosure. Include the campaign-folder view if present.`, { label: 'lens:library', phase: 'Read', schema: FINDINGS }),
+  () => agent(`${COMMON}
+LENS 3 — THE JARGON CENSUS: sweep the copy the two surfaces above (plus the realm page chrome and the settlement dossier tab names) put in front of a first-session user, and build the census of terms a regular human does not know (Pulse, Oracle, Canon, Standing, Tier, phase dots, band names rendered without their ladders, any raw ids). For each: where it appears (file:line), whether the Compendium defines it, whether a plain synonym exists or a gloss is needed. This census is the coherency half of the law — the same concept must read the same everywhere; flag terms that DRIFT across surfaces.`, { label: 'lens:jargon', phase: 'Read', schema: FINDINGS }),
+])
+
+phase('Spec')
+const good = lenses.filter(Boolean)
+const spec = await agent(`${COMMON}
+SYNTHESIS — THE STREAMLINE SPEC. Inputs: ${JSON.stringify(good).slice(0, 45000)}
+Produce the execution-ready spec for the legibility wave, structured as: (1) THE GLANCE LAYER — for each failing page, the one plain-language summary sentence/strip it should open with (what changed, what matters now) and where the data for it already exists; (2) THE DOOR RENAMES — jargon door names -> plain verbs/nouns (keep product voice: plain, concrete, no exclamation/em-dash), with a keep/rename/gloss verdict per term from the census; (3) THE DISCLOSURE LADDER — per page, what collapses behind glance -> sentence -> table; (4) THE LIBRARY STREAMLINE — the concrete control/column changes (what hides until N saves, what merges, what the row leads with); (5) COHERENCY FIXES — term drift corrections; (6) what NOT to change (expert affordances that earn their place; the comprehensiveness half). Every item: file:line target + effort size (S/M/L) + any golden/pin risk. Return as structured pages/topProblems (pages = spec sections, problems = the itemized changes with kind='other', detail = the spec item, where = target file:line).`, { label: 'spec:synthesis', phase: 'Spec', schema: FINDINGS })
+
+return { lenses: good, spec }

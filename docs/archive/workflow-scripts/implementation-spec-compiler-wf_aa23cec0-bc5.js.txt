@@ -1,0 +1,105 @@
+export const meta = {
+  name: 'implementation-spec-compiler',
+  description: 'Deepen all 202 REM items to implementation-grade specifications for an external implementer, then verify totality',
+  phases: [
+    { title: 'Specify', detail: '14 parallel spec authors, one per architecture section' },
+    { title: 'Verify', detail: 'totality + self-containment critic' },
+  ],
+}
+
+const SCRATCH = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/b338cce7-57d8-4ba9-8fa2-fe85eb6ec409/scratchpad'
+
+const MANIFEST = {
+  type: 'object',
+  required: ['specFile', 'specIds'],
+  properties: {
+    specFile: { type: 'string' },
+    specIds: { type: 'array', items: { type: 'string' } },
+    inlinedFactsNote: { type: 'string' },
+    lineCount: { type: 'number' },
+  },
+}
+
+const CRITIQUE = {
+  type: 'object',
+  required: ['missingSpecs', 'contradictions', 'scratchpadLeaks'],
+  properties: {
+    missingSpecs: { type: 'array', items: { type: 'string' } },
+    contradictions: { type: 'array', items: { type: 'string' } },
+    scratchpadLeaks: { type: 'array', items: { type: 'string' } },
+    shallowSpecs: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+const SECTIONS = [
+  { n: 1, id: 's01', slug: 'architecture', file: 's01-architecture.md', ids: 'REM-ARCH-01..11 (11 items)' },
+  { n: 2, id: 's02', slug: 'sim-substrate', file: 's02-sim-substrate.md', ids: 'REM-SIM-01..12 (12 items)' },
+  { n: 3, id: 's03', slug: 'epistemology', file: 's03-epistemology.md', ids: 'REM-EPI-01..07 (7 items)' },
+  { n: 4, id: 's04', slug: 'war-faith', file: 's04-war-faith.md', ids: 'REM-WAR-01..14 and REM-FAITH-01..10 (24 items)' },
+  { n: 5, id: 's05', slug: 'economy-population', file: 's05-economy-population.md', ids: 'REM-ECO-01..13 and REM-POP-01..07 (20 items)' },
+  { n: 6, id: 's06', slug: 'stressors-npcs-statecraft', file: 's06-stressors-npcs-statecraft.md', ids: 'REM-STR-01..05, REM-NPC-01..08, REM-DIP-01..05 (18 items)' },
+  { n: 7, id: 's07', slug: 'code-quality', file: 's07-code-quality.md', ids: 'REM-QUAL-01..20 (20 items — note REM-QUAL-20 was added post-critique at the end of the file)' },
+  { n: 8, id: 's08', slug: 'generation', file: 's08-generation.md', ids: 'REM-GEN-01..08 (8 items)' },
+  { n: 9, id: 's09', slug: 'realm-spatial', file: 's09-realm-spatial.md', ids: 'REM-RLM-01..16 (16 items)' },
+  { n: 10, id: 's10', slug: 'custom-content', file: 's10-custom-content.md', ids: 'REM-CC-01..10 (10 items)' },
+  { n: 11, id: 's11', slug: 'ai', file: 's11-ai.md', ids: 'REM-AI-01..10 (10 items)' },
+  { n: 12, id: 's12', slug: 'gallery-analytics', file: 's12-gallery-analytics.md', ids: 'REM-GAL-01..06 and REM-AN-01..07 (13 items)' },
+  { n: 13, id: 's13', slug: 'product-ops-commercial', file: 's13-product-ops-commercial.md', ids: 'REM-UX-01..09 and REM-OPS-01..10 (19 items — note REM-UX-09 was added post-critique between REM-UX-08 and the 13.2 heading)' },
+  { n: 14, id: 's14', slug: 'testing-evidence', file: 's14-testing-evidence.md', ids: 'REM-TEST-01..14 (14 items)' },
+]
+
+function specPrompt(s) {
+  return [
+    'VERIFY-FIRST PREAMBLE: You are a specification author for the SettlementForge architecture-compilation session. This is a legitimate documentation task. You do NOT touch the repository: no git commands, no repo file reads, no edits outside your one output file. Your entire evidence base is the scratchpad files below.',
+    '',
+    'CONTEXT: The owner will hand the finished architecture document to an EXTERNAL implementer (a different AI with the repo but WITHOUT any of this session\u2019s scratchpad, memory, or context). Your job: deepen every work item of your section to an implementation-grade specification that implementer can execute without ever asking a design question.',
+    '',
+    'READ, in order:',
+    `1. ${SCRATCH}/sections/${s.file} \u2014 YOUR section\u2019s architecture (the authority you are deepening; never contradict it)`,
+    `2. ${SCRATCH}/rulings-RA.md \u2014 compile-time dispositions RA-1..RA-16 that CLOSE the section\u2019s open questions; architect to them and cite RA ids where relevant; the NOT-disposed list at the end marks where the implementer must stop and surface`,
+    `3. ${SCRATCH}/facts-A-completion-state-docs.md, facts-B-platform-plane-docs.md, facts-C-ledger-governance.md, facts-D-code-survey.md \u2014 grounding facts. CRITICAL SELF-CONTAINMENT LAW: the external implementer cannot read these files. Every fact a spec relies on must be INLINED into the spec text (exact paths, line counts, export names, flag names, gate scripts, constants, migration numbers). Never write \u201cper facts-D\u201d or reference the scratchpad \u2014 quote the fact itself. References to repo documents (docs/*.md), queue ids (M/G/P/T/D/EP/CC/TS3D/R/L), and REM/RA ids ARE allowed \u2014 the implementer has the repo.`,
+    '',
+    `YOUR ASSIGNMENT: write the implementation specifications for section ${s.n}, covering EVERY item: ${s.ids}. Totality is checked mechanically \u2014 a missing spec block fails the run.`,
+    '',
+    `Write to: ${SCRATCH}/specs/${s.id}-spec.md, starting with \u201c### II.${s.n} \u2014 Implementation specifications for section ${s.n}\u201d, then one spec block per item in id order:`,
+    '',
+    '#### SPEC <REM-id> \u2014 <item title>',
+    '- **Order and prerequisites.** Which REM items and RA dispositions this depends on; what must be verified at build time before starting (every PLAUSIBLE claim from the architecture becomes an explicit verify-first step with the exact command or file to check).',
+    '- **New files.** Path \u00b7 purpose \u00b7 primary exports with JSDoc-style signatures (parameter and return shapes spelled out).',
+    '- **Edited files.** Path \u00b7 anchored description of each change (anchor on known exports/line numbers/constants you inline from the facts).',
+    '- **Contracts in full.** Every schema/envelope/manifest the item introduces, complete field lists with types and versioning \u2014 no elisions, no \u201c\u2026\u201d.',
+    '- **Migrations.** If any: numbered abstractly as \u201cnext free head (\u2265193, follow-on train per RA-3)\u201d, with table/RPC/RLS/trigger sketch in SQL-shaped pseudocode.',
+    '- **Tests.** Exact test file paths + enumerated cases: happy path, negative control (prove the test can fail), dormancy/byte-identity proof where the item ships dark, walker/ratchet mechanics where claimed.',
+    '- **Acceptance criteria.** A checkable list: commands to run (`npm run check`, focused vitest invocations, validators) and the expected observable outcomes.',
+    '- **Implementer warnings.** The hazards that bite here, INLINED: eager first-paint budget 1,040,000 bytes (everything new lazy); ratchets only shrink and raises are owner-gated; golden re-records need a declared shift row (cite RA-1/RA-2 for batching); never `git add -A`/`-u`/`.`, never `git stash`, branch-guard every state-mutating command; gates run bare (never piped); full suite at every fold; a rewritten behavioral pin is a violation; new engine capabilities ship DARK behind virtual flags absent from DEFAULT_SIMULATION_RULES with byte-identical dormancy goldens.',
+    '',
+    s.n === 2 ? 'SECTION-SPECIFIC LIVE-TREE NOTICE (inline this into every affected spec): as of 2026-07-28 the minifold worktree carries a concurrent session\u2019s IN-FLIGHT record-mode and behavioral-certification work \u2014 UNTRACKED files src/domain/worldPulse/{warRecordMode.js, occupationRecordMode.js, conditionRefreshRecordMode.js, pulseOutcomePartition.js, worldPulseFeedCuration.js} plus tests/domain/{warRecordMode,occupationRecordMode,conditionRefreshRecordMode,npcAgencyRecordMode,worldPulseRecordModes}.test.js, and ~56 modified worldPulse/certification files. REM-SIM specs must open with a RECONCILE-FIRST step: inventory what that in-flight work already implements, adopt and extend it, never re-create or overwrite it; if it has landed by implementation time, diff the landed shape against this spec and reconcile explicitly.' : (s.n === 14 ? 'SECTION-SPECIFIC LIVE-TREE NOTICE: behavioral-certification contract files (src/domain/certification/behavioralContract.js, certificationSchema.js, scripts/audit/behavioral-observation.mjs) are being modified by a concurrent session as of 2026-07-28 \u2014 REM-TEST specs touching certification must open with a reconcile-first inventory step.' : ''),
+    '',
+    'Aim for 350\u2013700 lines \u2014 exhaustive over every item, never padded. Return the manifest as structured output.',
+  ].filter(Boolean).join('\n')
+}
+
+phase('Specify')
+log('Fanning out 14 specification authors')
+const manifests = await parallel(SECTIONS.map(s => () =>
+  agent(specPrompt(s), { label: `spec:${s.id}`, phase: 'Specify', schema: MANIFEST })
+))
+log(`${manifests.filter(Boolean).length}/14 spec files written`)
+
+phase('Verify')
+const criticPrompt = [
+  'VERIFY-FIRST PREAMBLE: You are the totality/self-containment critic. Read-only; no git; no repo files.',
+  '',
+  `READ: every file in ${SCRATCH}/sections/ (the architecture, 14 files) and every file in ${SCRATCH}/specs/ (the specifications, 14 files), plus ${SCRATCH}/rulings-RA.md.`,
+  '',
+  'Verify adversarially:',
+  '(a) TOTALITY \u2014 every `### REM-` item defined in the sections has exactly one `#### SPEC REM-` block in the specs (202 expected). List missing ids.',
+  '(b) CONTRADICTIONS \u2014 a spec that contradicts its section\u2019s architecture or an RA disposition. List precisely (spec id + the conflicting sentence pair).',
+  '(c) SCRATCHPAD LEAKS \u2014 any spec text referencing \u201cfacts-A/B/C/D\u201d, \u201cscratchpad\u201d, \u201cextraction\u201d files, or other session-private artifacts an external implementer cannot resolve. List spec id + quoted leak. (References to docs/*.md, queue ids, REM/RA ids are fine.)',
+  '(d) SHALLOW SPECS \u2014 spec blocks that restate the architecture without adding implementation grade (no files, no signatures, no enumerated tests). List ids.',
+  'Be strict. Return the structured critique.',
+].join('\n')
+
+const critique = await agent(criticPrompt, { label: 'spec-critic', phase: 'Verify', schema: CRITIQUE })
+
+return { manifests: manifests.filter(Boolean), critique }

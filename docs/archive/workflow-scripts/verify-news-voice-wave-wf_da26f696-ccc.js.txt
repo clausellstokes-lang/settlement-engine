@@ -1,0 +1,95 @@
+export const meta = {
+  name: 'verify-news-voice-wave',
+  description: 'Adversarially verify the Wave-1 news-voice sidecar across five independent lenses',
+  phases: [{ title: 'Lenses' }],
+}
+
+const REPO = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/amazing-euclid-6b4519'
+
+const SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  properties: {
+    lens: { type: 'string' },
+    verdict: { type: 'string', enum: ['clean', 'issues-found'] },
+    findings: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          severity: { type: 'string', enum: ['must-fix', 'should-fix', 'nit'] },
+          claim: { type: 'string' },
+          location: { type: 'string' },
+          failure_scenario: { type: 'string' },
+          recommendation: { type: 'string' },
+        },
+        required: ['severity', 'claim', 'location', 'failure_scenario', 'recommendation'],
+      },
+    },
+  },
+  required: ['lens', 'verdict', 'findings'],
+}
+
+const COMMON = `Repo: ${REPO} (branch claude/round21-backlog; the change is UNSTAGED on disk). This is a SettlementForge Phase 5.5 wave: a display-side "crier's voice" sidecar for the Wizard News feed. Files under review: src/domain/display/newsVoice.js (NEW, pure display read-model), src/components/map/WizardNewsPanel.jsx (MODIFIED — renders the voice line), tests/domain/newsVoice.test.js (NEW). The feed engine is src/domain/region/wizardNews.js. Your job is to REFUTE, not rubber-stamp — hunt for the specific defect. Read the actual files. Report ONLY real, located findings; empty findings + verdict 'clean' is a valid and expected outcome. Do not run heavy gates (build/full test suite) — the manager runs those separately; you analyze code and may grep.`
+
+const LENSES = [
+  {
+    key: 'byte-safety',
+    prompt: `${COMMON}
+
+LENS: FIRST-PAINT BYTE-SAFETY / IMPORT-GRAPH. The constitutional law: newsVoice.js must add ZERO eager first-paint bytes and must NEVER be reachable from generation or the world-pulse kernel (same-seed/golden laws). Try to REFUTE "zero first-paint cost, byte-inert to the engine":
+- Grep the entire tree for every importer of newsVoice.js (grep -rn "newsVoice" src). Confirm the ONLY importer is WizardNewsPanel.jsx.
+- Confirm WizardNewsPanel.jsx is loaded via lazy(() => import(...)) at every import site (grep -rn "WizardNewsPanel" src). If ANY site imports it statically AND that site is in the eager entry graph, that is a MUST-FIX.
+- Confirm newsVoice.js itself imports NOTHING (a static import would drag its target into the news chunk). 
+- Confirm neither src/domain/region/wizardNews.js nor any world-pulse/generation module imports newsVoice (it must be a pure leaf read only the panel calls).
+Report any path by which the module could reach the eager closure or the engine.`,
+  },
+  {
+    key: 'categorization',
+    prompt: `${COMMON}
+
+LENS: CATEGORIZATION CORRECTNESS. newsVoiceCategory() classifies an entry as faith/war/trade/null from entry.impactKind and entry.channelType, precedence faith → war → trade → null. The field vocabularies must match what src/domain/region/wizardNews.js actually emits (see IMPACT_LABELS, CRITICAL_IMPACT_KINDS, CRITICAL_CHANNEL_TYPES, and createWizardNewsEntryFromImpact which sets impactKind=impact.kind, channelType=impact.channelType||channel.type). REFUTE "the categorization is correct and complete":
+- Enumerate every impactKind and channelType value wizardNews can produce. For each, what category does newsVoiceCategory return? Is any MIS-categorized or wrongly null?
+- The key question: the code checks war (impactKind OR channelType) BEFORE trade (impactKind OR channelType). So a war CHANNEL beats a trade IMPACT. Consider impactKind='import_shortage' (a trade impact) on channelType='war_front' (a war channel): it returns 'war'. Consider impactKind='criminal_pressure' (out of scope) on channelType='trade_route': it returns 'trade'. Is voicing-by-channel-when-impact-says-otherwise correct, or should categorization be impactKind-PRIMARY (classify by impactKind across all three first, then fall back to channelType only when impactKind is uninformative)? Give a concrete verdict: is impactKind-primary strictly more correct, and how often would the difference actually fire given real entry generation? 
+- bucketFor(entry.kind): queued/ready→onset, applied→impact, resolved→relief, ignored/expired→fade, default→onset. Does any real entry.kind value get the wrong bucket? (entry.kind is the transition; see TRANSITION_LABELS / createWizardNewsEntryFromImpact.)`,
+  },
+  {
+    key: 'content-scope',
+    prompt: `${COMMON}
+
+LENS: CONTENT — PRODUCT-SCOPE BOUNDARY + REGISTER + QUALITY. Read ALL 57 authored lines in newsVoice.js (VOICE_LINES 12 cells x 4 + VOICE_FLOOR 3 x 3). The binding product boundaries (owner, non-negotiable): (1) WORLD-ONLY, never party-facing (no "you/your party/adventurers/the heroes"); (2) NEVER resolve a NAMED character's fate — mortality is aggregate-population only (no named individuals dying); (3) sub-century horizon; (4) simplicity over fidelity. The voice must be diegetic herald/town-crier register, settlement-agnostic (no place names), speakable, no anachronisms. REFUTE "the content is scope-clean and high-register":
+- Flag ANY line that references the party/players, a named character's death or fate, or a specific place name (MUST-FIX if so).
+- Flag anachronisms or modern-register phrases that break the medieval-fantasy herald voice (e.g. weather-front metaphors, modern idiom). Note: 'cold front' appears twice — assess whether it reads as a modern meteorological term. Rate each as should-fix or nit.
+- Flag any line that is not terminally punctuated, contains a template token ({ } %s TODO), is duplicated within its cell, or reads flat/generic. 
+- Assess overall: does this meaningfully lift the "experiential voice" (the named quality gap), or is it filler? Name the weakest 3-5 lines specifically.`,
+  },
+  {
+    key: 'test-rigor',
+    prompt: `${COMMON}
+
+LENS: TEST RIGOR. Read tests/domain/newsVoice.test.js fully. It claims to prove coverage (12 cells), categorization precedence, out-of-scope→null totality, strict determinism, loose anti-repetition, and a register guard. REFUTE "the tests actually prove what they claim":
+- Does the coverage test genuinely exercise all 12 (category x bucket) cells, or could a cell be empty/unreachable and still pass? Does anything test the VOICE_FLOOR fallback path (currently unreachable since all 12 cells are filled — is it tested at all)?
+- Is the determinism assertion strict (same entry -> byte-identical line across calls)? Is the anti-repetition assertion meaningful (proves distinct ids reach >1 variant) or vacuous?
+- Does the register guard check EVERY authored line (all 57), or a sample? Does it check terminal punctuation, token-freeness, uniqueness-within-cell, length bounds?
+- Is the null/out-of-scope path tested for a representative out-of-scope impactKind AND a totally empty/undefined entry?
+- Name any missing test that a correctness regression could slip through (e.g. a future edit that makes two cells share a variant array, or that breaks the faith→war precedence).`,
+  },
+  {
+    key: 'panel-wiring',
+    prompt: `${COMMON}
+
+LENS: PANEL WIRING / UX INTEGRATION. Read the WizardNewsPanel.jsx diff and the surrounding NewsEntry / ThreadCard / ThreadColumn components. REFUTE "the wiring is correct and non-regressive":
+- NewsEntry is rendered as the thread HEAD (collapsed) AND with compact=true for every PRIOR stage of a multi-stage arc (ThreadCard renders priorStages via <NewsEntry compact />). The voice line is computed unconditionally in NewsEntry, so a multi-stage arc shows a crier line on the head AND on every earlier stage. Is that a wall-of-quotes noise problem? Should the voice render only on the head, or only in non-compact mode? Give a verdict.
+- Does the added <p> break the existing layout (it sits between summary and the meta-pills row), accessibility (the Megaphone icon has no aria-label/alt; is that ok as decorative?), or the compact styling?
+- Does it correctly render nothing (no empty <p>, no stray quote marks) when voiceLine is null? Confirm the {voiceLine && ...} guard.
+- Any React/theme concern: MUTED/sans/FS.xs imported already? Megaphone added to the lucide import? Key/prop issues? Confirm nothing else in the file changed.`,
+  },
+]
+
+phase('Lenses')
+const results = await parallel(LENSES.map(l => () =>
+  agent(l.prompt, { label: `lens:${l.key}`, phase: 'Lenses', schema: SCHEMA })
+))
+
+return results.filter(Boolean)

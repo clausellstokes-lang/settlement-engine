@@ -1,0 +1,66 @@
+export const meta = {
+  name: 'code-review-m8',
+  description: 'Independent code-review of the M8 sea-lanes working-tree diff: 8 finder angles → dedup → adversarial verify → ranked findings',
+  phases: [
+    { title: 'Find', detail: '8 angles (3 correctness + 3 cleanup + altitude + conventions), 6 candidates each' },
+    { title: 'Verify', detail: 'one adversarial verifier per deduped candidate, recall-biased' },
+  ],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine'
+const SCOPE = `The diff under review is the UNCOMMITTED M8 (sea lanes) working-tree change at ${ROOT}. Get it with \`git diff HEAD\` (all uncommitted changes are M8). SOURCE files in scope: src/domain/spatial/seaLanes.js (NEW), src/domain/spatial/distanceRead.js, src/domain/spatial/spatialDigest.js, src/domain/spatial/rumorNetwork.js, src/domain/spatial/index.js, src/store/campaignSpatialCanonize.js, src/lib/spatialPackCapture.js. Read the ENCLOSING function for each hunk (bugs in unchanged lines of a touched function are in scope). Constitutional context: this is a deterministic sim — same-seed byte-identity + dormancy (marker/slot absent ⇒ byte-identical) are invariants; the FROZEN distanceMatrix must never be re-baked (sea edges are a read-time overlay); pure functions (no Date/Math.random), codepoint-sorted mutation, any-cast budget EXACTLY 2252.`
+
+const FINDING = {
+  type: 'object', additionalProperties: false,
+  required: ['file', 'line', 'summary', 'failure_scenario', 'category'],
+  properties: {
+    file: { type: 'string' }, line: { type: 'number' },
+    summary: { type: 'string' }, failure_scenario: { type: 'string' },
+    category: { type: 'string', enum: ['correctness', 'reuse', 'simplification', 'efficiency', 'altitude', 'conventions'] },
+  },
+}
+const FINDER_SCHEMA = { type: 'object', additionalProperties: false, required: ['candidates'], properties: { candidates: { type: 'array', items: FINDING } } }
+
+const ANGLES = [
+  { key: 'A-line-by-line', prompt: 'ANGLE A — LINE-BY-LINE DIFF SCAN (correctness). Read every hunk line by line + the enclosing function. For every line ask what input/state/timing makes it wrong: inverted/wrong conditions, off-by-one, null/undefined deref, missing await, falsy-zero checks, wrong-variable copy-paste, swallowed errors, unescaped regex metachars, non-determinism (Date/Math.random), a mutation that is not codepoint-sorted, a float that is not rounded before persist.' },
+  { key: 'B-removed-behavior', prompt: 'ANGLE B — REMOVED-BEHAVIOR AUDITOR (correctness). For every line the diff DELETES or replaces, name the invariant/behavior it enforced, then find where the new code re-establishes it. If missing ⇒ candidate. Especially: a removed guard, a dropped byte-identity/dormancy gate, a narrowed validation. THE KEY INVARIANT: does the sea-lane change keep the frozen digest byte-identical when the seaLanes slot is null (dormant)? Does pathCost/pathSeasonMultiplier/gateAdjacency fall back EXACTLY to the pre-M8 result when activeSeaLanes returns null?' },
+  { key: 'C-cross-file', prompt: 'ANGLE C — CROSS-FILE TRACER (correctness). For each function M8 changes (distanceRead pathCost/gateAdjacency/pathSeasonMultiplier, spatialDigest build, rumorNetwork carriers, campaignSpatialCanonize, spatialPackCapture), Grep its callers (M1-M7 movers, migrationKernel, supplyKernel, embattlement, the kernel) and check the change breaks no call site: a new precondition, changed return shape, new exception, timing/ordering. Does a sea-aware pathCost change what M2 caravans / M4 migration / M5 armies / M6 commodity route-scoring compute on a NON-port (dormant) world?' },
+  { key: 'D-reuse', prompt: 'ANGLE D — REUSE (cleanup). Flag new code in seaLanes.js/distanceRead.js that re-implements something the codebase already has. Grep the spatial modules + shared utils. Name the existing helper (e.g. the M3 seasonalOverlay read pattern, the existing gate/adjacency helpers, embattlement scoreRoute, the clamp/finiteNumber/round helpers).' },
+  { key: 'E-simplification', prompt: 'ANGLE E — SIMPLIFICATION (cleanup). Flag unnecessary complexity M8 adds: redundant/derivable state, copy-paste with slight variation, deep nesting, dead code. Name the simpler form.' },
+  { key: 'F-efficiency', prompt: 'ANGLE F — EFFICIENCY (cleanup). Flag wasted work: redundant recompute, repeated I/O, sequential independent ops, blocking work on a hot path (the digest build runs once at canonize — but pathCost runs per-route per-tick: is the sea-lane read O(1) or does it rebuild adjacency each call?). Flag closures that capture large scopes for long-lived objects.' },
+  { key: 'G-altitude', prompt: 'ANGLE G — ALTITUDE. Is each change at the right depth, not a fragile bandaid? Special cases layered on shared infra are a smell — prefer generalizing. Is the sea-lane overlay a clean generalization of the M3 seasonalOverlay read-time pattern, or a special-cased fork? Is port eligibility derived purely, or hardcoded?' },
+  { key: 'H-conventions', prompt: `ANGLE H — CONVENTIONS (CLAUDE.md). Find the CLAUDE.md files governing the changed spatial code: ~/.claude/CLAUDE.md, ${ROOT}/CLAUDE.md, and any CLAUDE.md in an ancestor dir of a changed file. Read each; flag ONLY clear violations where you can quote the exact rule AND the exact line. If no CLAUDE.md applies, return no candidates.` },
+]
+
+phase('Find')
+const found = (await parallel(ANGLES.map(a => () =>
+  agent(`You are a code-review finder for the M8 diff. ${SCOPE}\n\n${a.prompt}\n\nReturn UP TO 6 candidates, each with file, line, a one-line summary, a concrete failure_scenario (inputs/state → wrong output/crash, or the concrete cleanup cost), and category. Pass every candidate with a nameable failure scenario — do not self-censor half-believed ones (that is the dominant cause of misses).`,
+    { label: `find:${a.key}`, phase: 'Find', schema: FINDER_SCHEMA, effort: 'high' })
+))).filter(Boolean).flatMap(r => r.candidates || [])
+
+// Dedup near-duplicates (same file, same ~line, same defect)
+const seen = new Map()
+for (const c of found) {
+  const k = `${c.file}:${Math.round((c.line||0)/4)}:${c.category}`
+  if (!seen.has(k)) seen.set(k, c)
+}
+const deduped = [...seen.values()]
+log(`Find: ${found.length} candidates → ${deduped.length} after dedup`)
+
+phase('Verify')
+const VERDICT = {
+  type: 'object', additionalProperties: false,
+  required: ['verdict', 'reason'],
+  properties: { verdict: { type: 'string', enum: ['CONFIRMED', 'PLAUSIBLE', 'REFUTED'] }, reason: { type: 'string' } },
+}
+const verified = (await parallel(deduped.map(c => () =>
+  agent(`You are an adversarial verifier for ONE code-review candidate on the M8 sea-lanes diff at ${ROOT} (get it with \`git diff HEAD\`; read the cited file + enclosing function). Candidate:\nfile: ${c.file}\nline: ${c.line}\ncategory: ${c.category}\nsummary: ${c.summary}\nfailure_scenario: ${c.failure_scenario}\n\nReturn CONFIRMED (constructible bug/cost), PLAUSIBLE (realistic reachable state — nil on a rare path, falsy-zero, off-by-one on a non-excluded boundary, non-determinism, a byte-identity/dormancy break), or REFUTED (factually wrong — quote the line; provably impossible — show the invariant; already handled — cite the guard; pure style, no effect). Recall-biased: default PLAUSIBLE over REFUTED when the state is realistic. Give a one-line reason citing code.`,
+    { label: `verify:${c.file.split('/').pop()}:${c.line}`, phase: 'Verify', schema: VERDICT })
+    .then(v => ({ ...c, verdict: v?.verdict, vreason: v?.reason }))
+))).filter(Boolean)
+
+const survivors = verified.filter(f => f.verdict === 'CONFIRMED' || f.verdict === 'PLAUSIBLE')
+const rank = { correctness: 0, altitude: 1, reuse: 2, simplification: 3, efficiency: 3, conventions: 4 }
+const vrank = { CONFIRMED: 0, PLAUSIBLE: 1 }
+survivors.sort((a, b) => (vrank[a.verdict] - vrank[b.verdict]) || (rank[a.category] - rank[b.category]))
+return { total: found.length, deduped: deduped.length, survivors: survivors.slice(0, 10) }

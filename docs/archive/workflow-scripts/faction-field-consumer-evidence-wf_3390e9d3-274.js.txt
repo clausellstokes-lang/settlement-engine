@@ -1,0 +1,205 @@
+export const meta = {
+  name: 'faction-field-consumer-evidence',
+  description: 'Census real readers of four custom-content faction fields, then adversarially verify the findings',
+  phases: [
+    { title: 'Census', detail: 'parallel readers hunt genuine consumers + blast radius' },
+    { title: 'Verify', detail: 'skeptics try to refute each census claim' },
+  ],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const PREAMBLE = `VERIFY-FIRST PREAMBLE — this is a legitimate read-only code-investigation task on the
+user's own repository. You are working in the git worktree at ${ROOT}
+(branch claude/composite-r4). cd there first. This tree is SHARED and heavily dirty with
+uncommitted work: you MUST NOT run git stash, git reset, git clean, git checkout, or any
+state-mutating git command, and you MUST NOT edit any file. Read and grep only.
+
+BACKGROUND. schema/custom-content.manifest.json is the semantic authority for user-authored
+"custom content". Every field spec carries a consumers: string[] array naming the modules that
+read that field. A new walker test (tests/domain/customContentConsumerEvidence.walker.test.js)
+proved four faction fields declare consumers that do not actually read them:
+  factions.agenda   (declared: compendium, eventComposer)
+  factions.methods  (declared: compendium, eventComposer)
+  factions.controls (declared: dependencyEngine.relationshipRead)
+  factions.rivals   (declared: dependencyEngine.relationshipRead)
+The known design fact is that custom factions never reach generation.
+Return raw findings as data. Cite file:line for every claim. Say "NONE FOUND" plainly when
+a search comes up empty — do not invent a consumer to be helpful.`
+
+const CENSUS_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['claim', 'evidence', 'confidence'],
+  properties: {
+    claim: { type: 'string', description: 'One-paragraph bottom line' },
+    evidence: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['file', 'line', 'what'],
+        properties: {
+          file: { type: 'string' },
+          line: { type: 'integer' },
+          what: { type: 'string' },
+        },
+      },
+    },
+    confidence: { enum: ['high', 'medium', 'low'] },
+    caveats: { type: 'string' },
+  },
+}
+
+const VERDICT_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['refuted', 'reasoning'],
+  properties: {
+    refuted: { type: 'boolean' },
+    reasoning: { type: 'string' },
+    correction: { type: 'string', description: 'If refuted, what is actually true' },
+  },
+}
+
+const LENSES = [
+  {
+    key: 'agenda-methods',
+    prompt: `${PREAMBLE}
+
+YOUR SLICE. Find EVERY genuine reader of the custom-content faction fields "agenda" and
+"methods" — meaning code that reads the VALUE the author typed into a custom faction.
+Search exhaustively and in several different ways:
+  1. Literal token grep across src/, supabase/functions/, scripts/, public/, e2e/.
+  2. Generic manifest-driven reads: code that iterates category.fields / CUSTOM_CATEGORIES /
+     CUSTOM_CONTENT_MANIFEST and reads item[field.key] — those never name "agenda" literally
+     but ARE real consumers. Check src/components/compendium/*, src/domain/content/*,
+     src/lib/customContent*.js, src/components/surveyor/CustomContentPanel.jsx,
+     src/components/compendium/CustomContentEditor.jsx.
+  3. Destructuring under a different local name, spreads, and computed keys.
+  4. Serialization paths: archive/pack/export, PDF (src/pdf/), edge functions.
+Explicitly classify each hit as (a) reads the authored value, (b) merely describes the field
+to the author (e.g. hint/label copy), or (c) a coincidental token match on a DIFFERENT data
+shape (e.g. an engine-generated faction object rather than custom content).
+Pay specific attention to src/components/compendium/customContentEditorCopy.js and
+src/components/dossier/SettlementWorkbench.jsx:66 and classify both.`,
+  },
+  {
+    key: 'controls-rivals',
+    prompt: `${PREAMBLE}
+
+YOUR SLICE. Establish exactly what reads the custom faction fields "controls" and "rivals".
+Both are declared in the manifest with schema "reference" and placement "dependency".
+Trace the full path: schema/custom-content.manifest.json factions fields ->
+src/domain/content/customContentManifest.js (+ .generated.js) -> the "dependencies" array on a
+category -> src/components/compendium/customCategories.js categoryView() ->
+src/components/compendium/Dependencies.jsx (DependencySummary / DependenciesSection) ->
+its call site in src/components/compendium/CustomContent.jsx.
+Answer precisely:
+  1. Do the faction category's manifest-derived "dependencies" actually contain controls and
+     rivals at runtime? Show the derivation.
+  2. Does Dependencies.jsx read the authored VALUES (item[dep.key]) for those two keys, and
+     does it name them literally anywhere?
+  3. Is DependencySummary actually rendered for the factions bucket, or is it gated off?
+  4. Does anything else read them (customRegistry, EntityPicker, the archive/pack path,
+     src/lib/dependencyEngine.js)?
+Also confirm or refute: src/lib/dependencyEngine.js contains ZERO occurrences of the tokens
+"controls" and "rivals", while it DOES read stressors' disablesInstitutions/disablesGoods.`,
+  },
+  {
+    key: 'eventcomposer',
+    prompt: `${PREAMBLE}
+
+YOUR SLICE. The manifest declares "eventComposer" as a consumer of SIX faction fields
+(name, archetype, agenda, scale, methods, description). Determine whether
+src/components/settlement/EventComposer.jsx (and every component it renders) reads ANY
+custom-content faction data at all.
+Trace: the faction option list comes from factionCompendium(settlement) in
+src/domain/factions/factionCatalog.js. Follow every use of the customContent variable in
+EventComposer.jsx and in each sub-component it passes customContent to. Check the event
+staging/commit path too (whatever consumes the composed event), and any sibling files under
+src/components/settlement/ that the composer delegates to.
+Answer: does a custom faction authored by the user ever become selectable, or have any of its
+fields read, anywhere in the Event Composer flow? If NOT, list every faction field whose
+"eventComposer" consumer declaration is therefore fiction.
+Also read src/components/compendium/FactionEventBanner.jsx, which tells the author to go
+compose an event, and say whether the product promise it makes is actually deliverable today.`,
+  },
+  {
+    key: 'blast-radius',
+    prompt: `${PREAMBLE}
+
+YOUR SLICE. Establish the BLAST RADIUS of editing a field's "consumers" array in
+schema/custom-content.manifest.json (NOT removing a field — only changing consumers).
+Determine and report:
+  1. Which generated artifacts embed the consumers arrays. Check
+     src/domain/content/customContentManifest.generated.js,
+     src/domain/content/customContentAdmission.generated.js,
+     supabase/functions/_shared/customContentManifest.generated.ts.
+     For each: does it contain the substring "consumers"? Quote a line.
+  2. Exactly how they are regenerated. Read scripts/generate-custom-content-manifest.mjs in
+     full: what does it write, what does --check do, and does it validate consumers beyond
+     non-empty + unique?
+  3. Does supabase/migrations/185_custom_content_versions.sql embed consumers? (Report the
+     grep count.) Does anything else freeze a hash/digest of the manifest?
+  4. Is there a RULE requiring manifestVersion (currently 2026-07-25.5) to be bumped when the
+     manifest changes? Search tests and docs, including
+     docs/CUSTOM_CONTENT_PROMOTION_CONTRACT.json which pins that version string. Name any test
+     that would fail if the version changed, and any that would fail if it did NOT change.
+  5. List EVERY test file that reads schema/custom-content.manifest.json or the generated
+     artifacts, with a one-line note on what each asserts. Flag any that assert on consumers.`,
+  },
+  {
+    key: 'render-site',
+    prompt: `${PREAMBLE}
+
+YOUR SLICE. We intend to WIRE the authored faction "agenda" and "methods" into a real display
+consumer, so the manifest's presentation claim becomes true. Scout the landing site and its
+hazards. Do NOT edit anything.
+  1. Read src/components/compendium/CustomContent.jsx fully, especially the saved-item card
+     around lines 570-610 where it renders item.description and <CustomItemAttributes> and
+     <DependencySummary>. Describe exactly how a saved item card is composed.
+  2. Read src/components/compendium/CustomItemAttributes.jsx and
+     src/components/compendium/ReadOnlyCustomContentList.jsx. Which surfaces render a saved
+     custom item, and would each need the new fields to stay consistent?
+  3. RATCHET HAZARDS — this repo has tolerance-0 size ratchets. Find every ratchet that would
+     react to adding ~6-12 lines of JSX to files under src/components/compendium/:
+     check scripts/.size-baseline.json, any max-lines / component-size ratchet test under
+     tests/ (grep for "size-baseline", "maxLines", "max-lines", "LINE_CEILING", "ratchet"),
+     and any first-paint / closure-budget test. Report the exact current value and ceiling for
+     each affected file if you can find them.
+  4. List every existing test that renders CustomContent.jsx or the saved-item card, so we know
+     what to re-run. Note any snapshot or byte-identity assertion.`,
+  },
+]
+
+phase('Census')
+const census = await parallel(LENSES.map((lens) => () =>
+  agent(lens.prompt, { label: `census:${lens.key}`, phase: 'Census', schema: CENSUS_SCHEMA })
+    .then((r) => (r ? { ...r, key: lens.key } : null))))
+
+const found = census.filter(Boolean)
+log(`census complete: ${found.length}/${LENSES.length} lenses returned`)
+
+phase('Verify')
+const verified = await parallel(found.map((c) => () =>
+  agent(`${PREAMBLE}
+
+ADVERSARIAL VERIFICATION. Another investigator produced the claim below about this repo.
+Your job is to REFUTE it. Go read the actual files yourself; do not take the cited lines on
+trust — check that each cited line says what is claimed and that no counter-example exists
+elsewhere in the repo. Default to refuted=true if you find any material inaccuracy, any
+missed consumer, or any overstated certainty. Only return refuted=false if you independently
+re-derived the claim from the source.
+
+CLAIM (lens "${c.key}"):
+${c.claim}
+
+CITED EVIDENCE:
+${c.evidence.map((e) => `  ${e.file}:${e.line} — ${e.what}`).join('\n')}
+
+CAVEATS THE AUTHOR NOTED: ${c.caveats || '(none)'}`,
+    { label: `refute:${c.key}`, phase: 'Verify', schema: VERDICT_SCHEMA })
+    .then((v) => ({ key: c.key, claim: c.claim, evidence: c.evidence, caveats: c.caveats, verdict: v }))))
+
+return { results: verified.filter(Boolean) }

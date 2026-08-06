@@ -1,0 +1,73 @@
+export const meta = {
+  name: 'a-plus-gap-register',
+  description: 'Compile the authoritative gap-to-A+ register from the repo ledgers',
+  phases: [
+    { title: 'Sweep', detail: 'five read-only ledger readers' },
+  ],
+}
+
+const ITEM_SCHEMA = {
+  type: 'object',
+  required: ['items'],
+  properties: {
+    items: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['title', 'detail', 'severity', 'status'],
+        properties: {
+          title: { type: 'string' },
+          detail: { type: 'string', description: 'what it is + where recorded (file/section)' },
+          severity: { type: 'string', enum: ['high', 'medium', 'low'] },
+          status: { type: 'string', description: 'open / deferred-recorded / owner-gated / in-current-arc' },
+          launch_blocking: { type: 'boolean' },
+          dimension: { type: 'string', enum: ['code', 'substance', 'product', 'launch-readiness', 'marketing-surface'] },
+        },
+      },
+    },
+    summary: { type: 'string' },
+  },
+}
+
+phase('Sweep')
+
+const READERS = [
+  {
+    key: 'open-findings',
+    prompt: `READ-ONLY task in /Users/cstokes/Desktop/settlement-engine (do not modify anything, do not run test gates).
+Read docs/COMPREHENSIVE_REVIEW_2026-07-15.md (the round-2 register: 269 findings with Phase-V verdicts) and the Round-2 ledger rows in docs/COMPREHENSIVE_REVIEW_PROGRAM.md (which record ~90 findings closed across 8 fix waves + later waves LIGHT/GUIDE-2b).
+Deliverable: the findings that remain OPEN (not closed by any recorded wave, not refuted by Phase V), listed by severity. For each: id/slug, one-line description, severity, whether any current in-flight wave (W-R2-DEPTH covers D1-D6 design items; SM-4 covers settlement-map; soak covers stasis/tuning class) is already slated to close it, and whether it plausibly gates an A+ code/substance/product grade. Be selective: lows can be batched as counts per dimension with only notable examples named. Cap at the ~40 most consequential items.`,
+  },
+  {
+    key: 'deferral-seams',
+    prompt: `READ-ONLY task in /Users/cstokes/Desktop/settlement-engine (do not modify anything, do not run test gates).
+Compile the standing DEFERRAL/SEAM debt inventory. Sources: (1) grep the src tree for deferral markers — try: grep -rn "deliberately deferred\\|DEFERRED\\|deferred to\\|seam-noted\\|SEAM:" src/ --include="*.js" --include="*.jsx" | head -80 (note: generosityKernel.js/generosityEV.js contain embedded NULs — use grep -a for those two); (2) docs/GOLDEN_SHIFT_LEDGER.md if present; (3) the deferral records in docs/COMPREHENSIVE_REVIEW_PROGRAM.md (search "DEFER"); (4) docs/PHASE55_EXECUTION_PLAYBOOK.md §0 parking lot if present.
+Deliverable: the deferred-and-recorded work items that would need closing for an A+ "no known debt beyond signed exemptions" bar. For each: what, where recorded, why deferred, effort guess (small/medium/large), and whether it is engine-touching (must land before the soak freezes the engine) or display/post-launch-safe.`,
+  },
+  {
+    key: 'owner-queue',
+    prompt: `READ-ONLY task in /Users/cstokes/Desktop/settlement-engine (do not modify anything, do not run test gates).
+Compile THE OWNER DECISION BATCH — every owner-gated item awaiting a ruling. Sources: docs/COMPREHENSIVE_REVIEW_PROGRAM.md (search "owner queue", "OWNER QUEUE", "owner-gated", "OWNER-GATED"), docs/DEPLOY.md (the MUST-APPLY block), docs/MASTER_MERGE_PLAN.md if present. Known members to verify and detail: EXEMPT_CEILING 66→69 (+3 list), the covert corruption-impairment anon-gallery leak scrub, support@settlementforge.com confirmation, mapChains tier-gate enforcement, membership id normalization, the daily-life one-spend vs two-spend fork, the W6 wave's ~18-item owner delta (find its list in the ledger or tasks reference), ~20 unapplied migrations including the security set (list migration numbers from supabase/migrations/ — which are post-applied-head; note 135/136 were written this program), economy-upswing-3 defer, EXEMPT envelope emission.
+Deliverable: each item with: what the decision is, options, default recommendation if one was recorded, and whether it blocks LAUNCH vs merely blocks A+ code hygiene.`,
+  },
+  {
+    key: 'product-ux',
+    prompt: `READ-ONLY task in /Users/cstokes/Desktop/settlement-engine (do not modify anything, do not run test gates).
+Compile the PRODUCT/UX gap list to an A+ first-session experience. Sources: the product/UX/immersion/guidance dimension findings in docs/COMPREHENSIVE_REVIEW_2026-07-15.md; the guidance legacy ledger (search the repo for the guidance registry legacy/violator dispositions — HowToUse partial disposition was just recorded 2026-07-16); the map-lane queue (QuickInspector hover wiring commissioned; WorldMapToolbar title tranche deferred to a map-coordinated pass — recorded in docs/COMPREHENSIVE_REVIEW_PROGRAM.md 2026-07-16 rows); onboarding flow state (OnboardingNudge/initOnboarding surfaces); docs/DESIGN_SETTLEMENT_MAP.md SM-4 section for what SM-4 completes.
+Deliverable: the UX work items that remain AFTER the in-flight waves land (SM-4 in flight, GUIDE-2b landed), each with impact on a newcomer DM's first session, effort guess, and whether it needs the owner's voice (e.g. the deferred full Keeper's Handbook rewrite is owner-voice by ruling).`,
+  },
+  {
+    key: 'launch-readiness',
+    prompt: `READ-ONLY task in /Users/cstokes/Desktop/settlement-engine (do not modify anything, do not run test gates).
+Compile the LAUNCH-READINESS checklist state. Sources: docs/DEPLOY.md in full (including the MUST-APPLY security block and any ungated-edge hazard section); the program doc's THE VERY END / deploy batch rows in docs/COMPREHENSIVE_REVIEW_PROGRAM.md; supabase/migrations/ directory listing (count, highest number, which were written-not-deployed this program — 130-136 class); any CSP/email/legal/launch-prep deferral records (search "launch prep", "CSP", "support email", "emails"); the Desktop design handoff reference (docs may reference a landing/dossier template review folder — note it as an unbuilt marketing-surface asset if referenced).
+Deliverable: everything that must happen between "code complete" and "public users", each tagged owner-action vs buildable-by-AI, with any missing pieces named (e.g. landing page state, terms/legal surface state, founders-offer copy state).`,
+  },
+]
+
+const results = await parallel(READERS.map(r => () =>
+  agent(r.prompt, { label: `sweep:${r.key}`, phase: 'Sweep', schema: ITEM_SCHEMA, effort: 'medium' })
+))
+
+const out = {}
+READERS.forEach((r, i) => { out[r.key] = results[i] })
+return out

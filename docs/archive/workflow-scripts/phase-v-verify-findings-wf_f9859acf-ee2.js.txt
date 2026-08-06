@@ -1,0 +1,75 @@
+export const meta = {
+  name: 'phase-v-verify-findings',
+  description: 'Opus 4.8 adversarial verification of the 129 high+medium survey findings',
+  phases: [
+    { title: 'Extract', detail: 'parse the committed findings register' },
+    { title: 'Verify', detail: 'Opus refuters: 2 lenses per high, 1 per medium', model: 'opus' },
+  ],
+}
+
+const EXTRACT_SCHEMA = {
+  type: 'object', required: ['findings'],
+  properties: { findings: { type: 'array', items: {
+    type: 'object', required: ['id', 'severity', 'title', 'file', 'line'],
+    properties: { id: { type: 'string' }, severity: { enum: ['critical', 'high', 'medium'] }, title: { type: 'string' }, file: { type: 'string' }, line: { type: 'integer' } } } } },
+}
+
+const VERDICT_SCHEMA = {
+  type: 'object', required: ['id', 'verdict', 'severity_final', 'evidence', 'fix_blast', 'fix_recommendation'],
+  properties: {
+    id: { type: 'string' },
+    verdict: { enum: ['CONFIRMED', 'REFUTED', 'PARTIAL'] },
+    corrected_statement: { type: 'string', description: 'If PARTIAL/REFUTED: what is actually true' },
+    severity_final: { enum: ['critical', 'high', 'medium', 'low', 'none'] },
+    evidence: { type: 'string', description: 'The executed/traced proof for your verdict — file:line quotes, test output, repro result. Max 120 words.' },
+    fix_blast: { type: 'object', required: ['goldens_shift', 'eager_bytes_risk', 'schema_or_persistence', 'owner_gated'],
+      properties: {
+        goldens_shift: { type: 'boolean', description: 'Would the natural fix shift same-seed golden bytes?' },
+        eager_bytes_risk: { type: 'boolean', description: 'Would it add first-paint eager bytes?' },
+        schema_or_persistence: { type: 'boolean', description: 'Does it change persisted-state shape (owner-gated class)?' },
+        owner_gated: { type: 'boolean', description: 'Any other owner-gated aspect (preset/paid-surface/deploy/data-deletion)?' },
+        notes: { type: 'string' } } },
+    fix_recommendation: { type: 'string', description: 'The fix shape you would actually implement (bold-over-safe within the constitution), max 100 words' },
+  },
+}
+
+const PREAMBLE = `You are an Opus 4.8 adversarial VERIFIER on SettlementForge (repo /Users/cstokes/Desktop/settlement-engine, branch review-fixes-2026-07-08 @ 104b1536, working tree is SHARED — you may READ anything and RUN read-only commands/tests, but NEVER edit, create, stage, or commit repo files; scratch files only under /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/049d4c82-58c0-4be1-956a-d47c628ee704/scratchpad/).
+
+Your job: try to REFUTE the finding below. Only what survives your attack is CONFIRMED. Method:
+1. Read the finding's full entry: search docs/COMPREHENSIVE_REVIEW_2026-07-13.md for its [id].
+2. Read the WHOLE enclosing scope of the cited code plus its callers/consumers — never verdict from a grep window. Follow the actual data flow; a claim like "X has no consumers" must be checked by a real repo-wide search including string spellings, re-exports, and dynamic access.
+3. Check the deferral ledgers (docs/PHASE55_EXECUTION_PLAYBOOK.md sections 0.0.2/0.6/0.8, docs/PHASE55_ROUND21_BACKLOG_PLAN.md Deferred/owner-queue) — a deliberate, soundly-reasoned deferral means verdict REFUTED with corrected_statement noting the deferral, UNLESS the deferral is unsound (then CONFIRMED with that context in notes).
+4. Where cheap, EXECUTE proof: run the relevant existing vitest file(s), or a node repro against the pure engine modules. Executed evidence beats reading. Do not run the full gate.
+5. Judge severity honestly on the product's own bar (deterministic D&D world-sim, constitution: same-seed byte-identity, dormancy, premium seam, endogeneity, first-paint ratchet, any-cast 2252; boundaries: world-only, aggregate-only mortality, deity=alignment).
+6. Assess fix blast radius for wave planning (the fix_blast fields).
+Return ONLY the schema object. Verdict discipline: CONFIRMED = the defect exists as stated (you tried to kill it and failed); PARTIAL = real but materially misstated; REFUTED = not real / already handled / sound deferral.
+
+`
+
+phase('Extract')
+const ex = await agent(
+  'Read docs/COMPREHENSIVE_REVIEW_2026-07-13.md in the repo /Users/cstokes/Desktop/settlement-engine. In "THE FINDINGS REGISTER" section, extract EVERY finding whose severity is CRITICAL, HIGH, or MEDIUM (skip LOW). The register lines look like: **[<id>] <SEVERITY> / <confidence> — <title>** followed by "- Where: `<file>:<line>`". Return them all via the schema, id exactly as printed inside the brackets. Expect roughly 129.',
+  { label: 'extract-register', phase: 'Extract', schema: EXTRACT_SCHEMA, effort: 'low' })
+if (!ex || !ex.findings || !ex.findings.length) { throw new Error('register extraction failed') }
+log('Extracted ' + ex.findings.length + ' findings for verification')
+
+phase('Verify')
+const results = await pipeline(
+  ex.findings,
+  f => {
+    const base = PREAMBLE + 'FINDING [' + f.id + '] (surveyor severity ' + f.severity + '): ' + f.title + ' @ ' + f.file + ':' + f.line + '\nSet id="' + f.id + '".'
+    if (f.severity === 'high' || f.severity === 'critical') {
+      return parallel([
+        () => agent(base + '\nLENS: existence/reproduction — does the defect exist exactly as stated? Trace or execute the failure path.', { label: 'vA:' + f.id, phase: 'Verify', schema: VERDICT_SCHEMA, model: 'opus', effort: 'high' }),
+        () => agent(base + '\nLENS: independent re-derivation + blast radius — re-derive from scratch whether the claim holds, then focus extra care on fix_blast (goldens/eager-bytes/persistence/owner-gates) and the best fix shape.', { label: 'vB:' + f.id, phase: 'Verify', schema: VERDICT_SCHEMA, model: 'opus', effort: 'high' }),
+      ]).then(vs => ({ id: f.id, severity_surveyed: f.severity, verdicts: vs.filter(Boolean) }))
+    }
+    return agent(base + '\nLENS: full — existence, severity, deferral-check, and fix blast radius in one pass.', { label: 'v:' + f.id, phase: 'Verify', schema: VERDICT_SCHEMA, model: 'opus' })
+      .then(v => ({ id: f.id, severity_surveyed: f.severity, verdicts: v ? [v] : [] }))
+  }
+)
+
+const flat = results.filter(Boolean)
+const agree = flat.filter(r => r.verdicts.length && r.verdicts.every(v => v.verdict === r.verdicts[0].verdict))
+log('Verified ' + flat.length + ' findings; ' + agree.length + ' with unanimous verdicts')
+return { count: flat.length, results: flat }

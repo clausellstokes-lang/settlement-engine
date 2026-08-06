@@ -1,0 +1,82 @@
+export const meta = {
+  name: 'parking-lot-adjudication',
+  description: 'Independently verify facts+numbers for the 4 Phase 5.5 parking-lot items and produce owner-decision briefs',
+  phases: [{ title: 'Verify', detail: 'one Opus verifier per parked item; FP-2 builds in the isolated worktree' }],
+}
+
+const MAIN = '/Users/cstokes/Desktop/settlement-engine'
+const P55BASE = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine--claude-worktrees-awesome-ritchie-063978/2a5cf0b9-dc81-4e0a-818b-297ced30d0a1/scratchpad/p55base'
+
+const SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['item', 'verifiedFacts', 'exactNumbers', 'ownerGatedDecision', 'recommendation', 'nonGatedWork', 'risks'],
+  properties: {
+    item: { type: 'string' },
+    verifiedFacts: { type: 'array', items: { type: 'string' }, description: 'facts CONFIRMED against code/ledger, each with file:line evidence' },
+    ledgerCorrections: { type: 'array', items: { type: 'string' }, description: 'any stale/wrong notes found in the playbook §0.6 or ledger' },
+    exactNumbers: { type: 'string', description: 'the precise byte/count numbers (closure, budget, delta, headroom) with how each was obtained' },
+    ownerGatedDecision: { type: 'string', description: 'the exact decision the owner must make — phrased as a ruling they can approve/veto' },
+    recommendation: { type: 'string', description: 'your recommended ruling and the one-sentence crux for why' },
+    nonGatedWork: { type: 'string', description: 'any genuinely-implementable non-gated work, and whether it is safe to do BEFORE the owner rules' },
+    risks: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+const SHARED = `
+You are a READ-ONLY verifier for SettlementForge's Phase 5.5 parking lot. DO NOT edit, stage, commit, or build in any SHARED worktree. The canonical branch is review-fixes-2026-07-08 @ 5ea117ec, checked out CLEAN at ${MAIN} — read files there directly (read-only).
+Established ledger facts (verify, don't assume): CLOSURE_BUDGET_BYTES = 1,255,985 (tests/build/vendorPdfLazy.test.js:296). M10a landed at closure 1,255,965 (20B margin). The playbook §0.0 STATE LEDGER + §0.6 parking lot are the source of truth. §0.0.3 says §0.6 items are OWNER/Fable-reserved for batched adjudication — the manager must NOT self-rule; your job is to produce a crisp, verified brief so the OWNER can rule.
+Return the structured brief. Every number must be traceable to a file:line or a command you ran. Be honest about estimates vs measured.`
+
+const briefs = await parallel([
+  () => agent(`${SHARED}
+
+ITEM 1 — M10b (LIVING/AUTONOMOUS worldProgression + CAPPED CATCH-UP + full_simulation preset mover-flags).
+Verify against ${MAIN}/src:
+1. worldProgressionOf (src/domain/worldPulse/simulationRules.js ~:314) currently only distinguishes 'frozen' vs 'dm_advanced'; 'living'/'autonomous' fall through unimplemented. Quote the code.
+2. Catch-up ('catchUp'/capped catch-up) is entirely UNBUILT in src/ (grep). Confirm.
+3. The full_simulation preset: find its definition (grep DEFAULT/presets in simulationRules.js/simulationProfile.js). Does it currently set worldProgression:'autonomous', commodityFlowEnabled, allyIntelSharingEnabled? These opt-in flags are ABSENT from DEFAULT_SIMULATION_RULES (byte-identity trick). Confirm current state.
+4. The +86B eager measurement: locate WHERE the eager cost comes from (the everything-on preset string literals + the three worldProgression mode branches + the flags). The +86B is documented as GENUINE (three engine modes + everything-on preset), NOT bloat — a reclaim is the WRONG tool (FP-R already harvested). Assess plausibility of +86B; you cannot re-measure without building M10b (don't).
+5. The catch-up CAP is an OWNER-DECISION constant (how many ticks a living/autonomous world simulates on catch-up when reopened, so it doesn't lock the UI). M10a set a PRECEDENT: ACTOR_MAJOR_HOLD_WEEKS=6 as a named/documented/retunable owner-decision default. Recommend a conservative default CAP + rationale, in that same pattern.
+ownerGatedDecision: the budget raise (1,255,985 → what exact number, with margin) AND the catch-up CAP value. recommendation: recommend the raise amount + CAP. nonGatedWork: M10b cannot land green without the raise (constitutional law 5 FIRST-PAINT RATCHET); the owner's sequence is 'ratify raise, THEN build+land in the endgame'. State this.`,
+    { label: 'verify:M10b', phase: 'Verify', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(`${SHARED}
+
+ITEM 2 — W5 re-merge (cosmetic sweep, branch 312a5025).
+Verify:
+1. W5 branch 312a5025 exists (reachable via claude/adoring-wescoff-6a25a8). Its merge-base with review-fixes is df217415 (an OLD base). Confirm via: git -C ${MAIN} merge-base 312a5025 review-fixes-2026-07-08.
+2. W5's TRUE delta against its own base df217415 = 68 files (+3355/-1077). Confirm via git diff --stat df217415 312a5025. The commit chain is W5.1..W5.9 polish + a budget-ratchet commit (312a5025 self-raised first-paint 1,256,000→1,257,000 'owner-ratification pending').
+3. THE BASE-MISMATCH HAZARD: because 312a5025 is on df217415 and review-fixes has advanced ~250 commits past it (the whole M-ladder + 3.5 + Wave A), 'git diff review-fixes 312a5025' shows 189 files / -25,330 deletions — a DIRECT merge would REVERT the M-ladder. W5 must be cherry-picked / re-applied onto review-fixes, NOT merged. Confirm this hazard and quote the numbers.
+4. The +1,000 eager bytes: the playbook says two configSlice store-slice feature fields. Find them (grep the W5 diff for configSlice additions: git diff df217415 312a5025 -- src/store/configSlice.js or similar). Identify the two fields and confirm they are EAGER (in the store create() static graph). 
+5. The OutputContainer.jsx conflict: 404 lines changed between HEAD and W5's version. The resolution recipe: keep BOTH 3.5's dossierLazyTabs AND W5's dossier polish.
+ownerGatedDecision: (a) ratify a +1,000 budget raise to land W5 now, OR (b) run FP-2 first to reclaim headroom then land W5 at the lower budget. recommendation: W5 is cosmetic + non-critical-path; deferring blocks nothing. Give your recommended pick. nonGatedWork: none landable without the ruling; note the re-base hazard makes this non-trivial.`,
+    { label: 'verify:W5', phase: 'Verify', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(`${SHARED}
+
+ITEM 3 — 5.5-K live pack.cells capture.
+The parking-lot note (2026-07-12) claims the real FMG-iframe read-only capture seam is UNWIRED. VERIFY whether that is now STALE:
+1. Iframe-side RPC handler: public/map/sf-bridge.js:863 defines 'settlementEngine:getSpatialPack'(data, rid). Read it — does it do a READ-ONLY copy of pack.cells (H/biome/r/c)? Quote it.
+2. Client capture: src/lib/spatialPackCapture.js — captureSpatialPack does the RPC, and FREEZE-FIRST is coded (a SECOND capture is compared; if they differ it freezes the FIRST with a console.warn, ~lines 90-95). Read it fully and confirm.
+3. Registry: src/lib/spatialCaptureRegistry.js (module-level live bridge handle). Canonize integration: src/store/campaignSpatialCanonize.js imports liveCaptureSpatialPack and uses it; absent bridge ⇒ 'spatial_capture_unavailable' dormant fallback. Confirm the end-to-end wiring.
+4. Conclude: is the seam FULLY WIRED (both sides) by 5.5-M? If yes, the §0.6 'UNWIRED' note is STALE and should be corrected (put this in ledgerCorrections).
+5. The ONLY genuine residual is the EMPIRICAL extraction-determinism question: does the SAME real FMG map yield byte-identical pack.cells across two reads? The code ALREADY handles both outcomes (freeze-first). Describe the EXACT steps to answer it against a real map (dev server + open world map + entitled spatial canonize + observe whether the freeze-first warn fires), and whether any automated test already pins determinism against an injected fixture.
+ownerGatedDecision: whether the residual empirical determinism check is needed now (vs covered by the freeze-first safety net + a checkpoint soak). recommendation: your call. nonGatedWork: the seam is DONE; the residual is verification-only against a real map (needs the running app). State whether it's safe/valuable to run now.`,
+    { label: 'verify:5.5-K', phase: 'Verify', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(`${SHARED}
+
+ITEM 4 — FP-1/FP-2 eager store slices (the headroom release valve for items 1 and 2).
+You MAY BUILD, but ONLY in the ISOLATED detached worktree at ${P55BASE} (HEAD detached at 5ea117ec, node_modules symlinked from main). NEVER build in ${MAIN}.
+Tasks:
+1. Build once: cd ${P55BASE} && npm run build  (this writes ${P55BASE}/dist — isolated). If build fails, report the error and fall back to reading ${MAIN}/dist if present + the ledger number.
+2. Measure the EXACT current entry-static-closure bytes: replicate the walk in tests/build/vendorPdfLazy.test.js (BFS over static import edges from the entry chunk in dist/index.html, summing built-chunk file sizes). Write your measure script in your OWN scratch dir, NOT in the repo. Report the exact total (should be ~1,255,965) and the per-file breakdown sorted by size.
+3. Identify the store-slice contribution: the monolithic 15-slice Zustand create() statically imports settlementSlice (~88K src), aiSlice (~58K src), the campaign trio (~89K src unmin). Find which BUILT entry-closure chunk(s) contain this code and their sizes. Estimate how many EAGER closure bytes an FP-2 dynamic-slice-injection (lazy registration) could reclaim — be honest that the EXACT reclaim needs a prototype (which is the owner-gated architecture work); give a directional estimate.
+4. Draft 2+ candidate dynamic-slice-injection ARCHITECTURES that preserve persist/devtools/subscribeWithSelector semantics (e.g., (a) lazy slice-registration with a placeholder-then-hydrate pattern, (b) splitting create() into an eager-core + dynamically-imported feature-slice bundles registered on first use). One sentence why you'd reject/prefer each.
+5. KEY SYNTHESIS NUMBER: does FP-2's reclaim comfortably exceed M10b's +86B AND W5's +1,000 combined (~1,086B)? If yes, FP-2 is a real alternative to raising the budget for BOTH.
+ownerGatedDecision: approve FP-2 as its own wave with an owner-approved dynamic-slice-injection architecture? recommendation: your call on whether FP-2 is worth it vs simply raising the budget. nonGatedWork: measuring is non-gated (done here); IMPLEMENTING the split is owner-gated architecture. Clean up: leave ${P55BASE}/dist as-is (it's isolated).`,
+    { label: 'measure:FP-2', phase: 'Verify', schema: SCHEMA, model: 'opus' }),
+])
+
+return { briefs: briefs.filter(Boolean) }

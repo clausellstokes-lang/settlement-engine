@@ -1,0 +1,29 @@
+export const meta = {
+  name: 'mobile-companion-research',
+  description: 'Fourth design-research sweep: the $10k mobile companion piece feeding THE ORGANIC CRAFT LAW',
+  phases: [{ title: 'Research' }, { title: 'Critique' }],
+}
+const FINDINGS = {
+  type: 'object',
+  properties: {
+    findings: { type: 'array', items: { type: 'object', properties: {
+      source: { type: 'string' }, url: { type: 'string' },
+      principle: { type: 'string' }, emulate: { type: 'string' }, avoid: { type: 'string' },
+    }, required: ['source', 'principle', 'emulate'] } },
+    firstPrinciples: { type: 'array', items: { type: 'string' } },
+    synthesis: { type: 'string' },
+  },
+  required: ['findings', 'firstPrinciples', 'synthesis'],
+}
+phase('Research')
+const ANGLES = [
+  { key: 'premium-mobile-craft', prompt: `Research the best-crafted PREMIUM MOBILE WEB experiences — sites whose mobile rendering feels bespoke-agency ($10k) rather than "responsive afterthought": mobile typography excellence (sizes, measure, rhythm on small screens), touch-target craft, mobile navigation patterns that stay elegant (no hamburger-dump), premium mobile editorial (publications whose phone reading experience is beloved), and parchment/warm-toned designs on OLED/small screens. FIRST PRINCIPLES: what specifically separates a crafted mobile experience from a collapsed desktop one? The client: a parchment-toned D&D world-simulator whose mobile surface must feel like a fine field notebook, same one-hand art direction as desktop. Return named examples + first principles + emulate/avoid.` },
+  { key: 'document-layout-collapse', prompt: `Research how DOCUMENT/MANUSCRIPT-REGISTER layouts collapse to mobile gracefully: marginalia/side-note strategies on narrow screens (inline expansion, footnote patterns, tap-to-reveal glosses), asymmetric editorial layouts going single-column without losing their authored feel, long-form reading UX on phones (progress, place-keeping, section navigation), and rules/rubrication/drop-cap treatments at mobile scale. Study print-quality publications' mobile renderings and manuscript-inspired sites. FIRST PRINCIPLES: which document-craft elements survive collapse, which transform, which must die on mobile? The client is replacing card grids with rules/marginalia/rubrication on desktop and needs the mobile collapse to stay boring-readable AND authored. Return principles + emulate/avoid.` },
+  { key: 'at-table-companion', prompt: `Research what a TTRPG game-master actually needs ON A PHONE AT THE GAME TABLE — the companion use-case: quick-reference UX during live play (initiative/NPC/location lookups), one-hand operation, glanceability under time pressure, dark/dim environments (candlelit table), interruption-resilient navigation (return to where you were), offline/flaky-wifi tolerance. Study beloved companion apps and mobile references (D&D Beyond's mobile sheet, Foundry mobile attempts, initiative trackers, GM screen apps, recipe-app cook-mode patterns as an analog — cook mode IS the at-table pattern). FIRST PRINCIPLES for a "field companion" mode: what surfaces earn a place on the phone, what should be one tap from launch? The client's dossier has DM Summary + Daily Life tabs "designed for the table" — the mobile piece is their vehicle. Return principles + emulate/avoid.` },
+  { key: 'graceful-desktop-gating', prompt: `Research DESKTOP-ONLY feature gating done respectfully on mobile web: how the best products tell a phone user "this surface needs a desktop" without feeling broken or cheap (Figma's mobile story, video editors, IDEs-on-web, complex dashboards), continuity/handoff patterns (email-me-a-link, QR to desktop, state that waits for you), what the mobile user CAN see of the gated surface (read-only previews vs full gates), and the copy register that keeps trust ("built for a bigger canvas" vs apologetic error-speak). The client ruling: THE REALM (world map + canonize + advance controls) is DESKTOP-ONLY; mobile users must meet a graceful, on-brand, trust-preserving gate with continuity. Return named examples + principles + emulate/avoid.` },
+]
+const results = await parallel(ANGLES.map(a => () =>
+  agent(a.prompt + ' Use WebSearch and WebFetch for real, current sources. Cite URLs.', { label: `research:${a.key}`, phase: 'Research', schema: FINDINGS })))
+phase('Critique')
+const critic = await agent(`You are the completeness critic for the MOBILE COMPANION research sweep — a parchment/gold D&D world-simulator building a $10k-bar mobile experience under THE ORGANIC CRAFT LAW (authored-never-defaulted, artifact/instrument split, legibility floor), with THE REALM ruled desktop-only. The four syntheses + first principles: ${JSON.stringify(results.filter(Boolean).map(r => ({s: r.synthesis, fp: r.firstPrinciples})))}. Name: (1) what is MISSING (esp. performance on mid-range phones, PWA/offline questions, the existing app's isMobile patterns integration, map-viewing on mobile — the town map is NOT realm and presumably stays), (2) the FIVE strongest cross-angle principles for the mobile companion, (3) the biggest mobile-specific failure risk and its guard. Be concrete.`, { label: 'completeness-critic', phase: 'Critique' })
+return { angles: ANGLES.map((a, i) => ({ key: a.key, result: results[i] })), critic }

@@ -1,0 +1,36 @@
+export const meta = {
+  name: 'fp-mechanism-inventory',
+  description: 'Extract every new mechanism + law per FP volume (and war) for the owner briefing',
+  phases: [{ title: 'Extract', detail: '8 Opus readers, one per volume' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const SCHEMA = { type:'object', required:['volume','new_mechanisms','new_laws'], properties:{
+  volume:{type:'string'},
+  new_mechanisms:{type:'array',items:{type:'object',required:['id','name','spec'],properties:{
+    id:{type:'string'},name:{type:'string'},
+    spec:{type:'string'},
+    counterforce:{type:'string'},
+    endings_or_bands:{type:'string'}}}},
+  new_laws:{type:'array',items:{type:'object',required:['name','operative'],properties:{
+    name:{type:'string'},operative:{type:'string'}}}}}}
+
+const PRE = `VERIFY-FIRST: you are a READ-ONLY inventory agent for the SettlementForge design corpus (legitimate owner-ordered briefing work; no edits, no git). Read your assigned volume IN FULL from the live tree. Extract, faithfully to the CURRENT text (it carries [CORRECTED 2026-08-02 (fp-audit)] markers — the corrected text is authoritative):
+(1) new_mechanisms: EVERY new mechanism/wave the volume designs (not pre-existing substrate it merely consumes). id = the wave/judgment id as written (e.g. WT-3, WF-5b, POP-4, GR-2, IN-1, J-INF-2, CW-rows, WR-4). name = the volume's own name for it. spec = 2-4 dense sentences: what it does, key new state/writer, how it works. counterforce = the named opposing force if the text names one. endings_or_bands = its endings vocabulary / named bands if any.
+(2) new_laws: every program-specific LAW or binding ruling the volume states (its §1b/1c program laws, crux rulings it elaborates, chair rulings recorded in it) — name + the one operative sentence, faithful to the text's own phrasing.
+Be exhaustive; use the volume's exact ids and names; do not invent. Your final output is raw data for synthesis, not a human-facing message.`
+
+phase('Extract')
+const VOLS = [
+  ['war', 'DESIGN_WAR_RULINGS_ARCHITECTURE.md'],
+  ['trade', 'DESIGN_FP_TRADE.md'],
+  ['faith', 'DESIGN_FP_FAITH.md'],
+  ['populations', 'DESIGN_FP_POPULATIONS.md'],
+  ['information', 'DESIGN_FP_INFORMATION.md'],
+  ['grammar', 'DESIGN_FP_GRAMMAR.md'],
+  ['interior', 'DESIGN_FP_INTERIOR.md'],
+  ['couplings', 'DESIGN_FP_COUPLINGS.md'],
+]
+const out = await parallel(VOLS.map(([key, file]) => () =>
+  agent(`${PRE}\nASSIGNED VOLUME: ${MF}/docs/${file}`, {label:`read:${key}`, phase:'Extract', model:'opus', effort:'medium', schema:SCHEMA})))
+return out.filter(Boolean)

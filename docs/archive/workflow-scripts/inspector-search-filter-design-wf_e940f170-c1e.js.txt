@@ -1,0 +1,51 @@
+export const meta = {
+  name: 'inspector-search-filter-design',
+  description: 'Design the Realm Inspector search + filter + per-tab organization system for scale (20+ settlements)',
+  phases: [
+    { title: 'Survey', detail: 'the inspector data model + scale behavior + the address layer + legibility findings' },
+    { title: 'Design', detail: 'synthesize the search/filter/organization spec + taste-call decision points' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const CONTEXT = `THE REALM INSPECTOR at scale. The owner's order (2026-07-22): "the realm inspector needs to be searchable and filterable because imagine 20+ settlements each having 10 different things going on. There needs to be high organization per tab in addition to a search bar and filters to help navigate to see what is going on with X settlement." TWO in-flight lanes this composes with: (1) claude/inspector-address-web is adding a REALM-WIDE ENTITY RESOLVER (every inspector entry gets a structured resolved address: settlement id/name, faction via npcInFaction, power via the strata derivation, typed action kind, entity ids) + cross-settlement EntityLinks — that structured metadata IS the filter/search substrate; (2) the parked LEGIBILITY WAVE spec (the legibility audit already flagged the inspector: 11 doors, 4 answering 'what happened', jargon door names). Laws: FINITE-SEMANTICS (filter facets are TYPED vocabularies from producers, never freeform), the LEGIBILITY LAW (regular-human test; glance->sentence->table), closure discipline (search/filter UI rides the lazy inspector chunk, budget margin ~132 bytes).`
+
+const COMMON = `READ-ONLY design work in ${TREE} (current composite tip; do NOT edit or touch git). ${CONTEXT} Cite file:line for every claim about current behavior. Distinguish what EXISTS, what the address-web lane WILL produce, and what this feature must ADD.`
+
+const SURVEY = {
+  type: 'object', required: ['summary', 'findings'],
+  properties: {
+    summary: { type: 'string' },
+    findings: { type: 'array', items: { type: 'object', required: ['surface', 'detail'], properties: {
+      surface: { type: 'string' }, detail: { type: 'string' }, where: { type: 'string' } } } },
+    facetCandidates: { type: 'array', items: { type: 'string' }, description: 'typed vocabularies already in the data that could become filter facets, with their source' },
+  },
+}
+
+phase('Survey')
+const lenses = await parallel([
+  () => agent(`${COMMON}
+LENS 1 — THE INSPECTOR DATA MODEL + SCALE BEHAVIOR. For each inspector surface that lists many items (WorldPulsePanel / Pulse Results, ChronicleSection, ChroniclersLetterPanel / Letter, LiveWarStatus + RealmIntrigue / War, RealmDashboard): what does each ITEM carry structurally (settlement id, entity ids, event/outcome TYPE, tick, severity/significance)? How is the list currently ordered/grouped, and what happens VISUALLY at 20 settlements x 10 items (does it just become a wall)? Which of those item fields are TYPED finite vocabularies (event kinds, outcome types, stress types, relationship kinds, war kinds) that could become filter facets — enumerate them with their producer source. This is the substrate census.`, { label: 'survey:data-model', phase: 'Survey', schema: SURVEY }),
+  () => agent(`${COMMON}
+LENS 2 — SEARCH + CROSS-TAB SCOPE + PRIOR ART. (a) Is there existing search/filter UI anywhere in the app to reuse (the Library discovery — search + sort + All/Drafts/Canon + Filters + Select; the Gallery filter sidebar; the Compendium global search)? Enumerate the reusable primitives with file:line. (b) The owner's phrase 'what is going on with X settlement' implies a SETTLEMENT-FOCUS mode that scopes the WHOLE inspector to one settlement — does any cross-tab state mechanism exist (a shared selected-settlement store field the map/panels already use)? (c) How does the inspector shell (RealmInspector.jsx) manage its sections/state today, and where would a persistent search+filter bar live in the shell vs per-tab? (d) Note the legibility-audit inspector findings if reflected in code (door count, the 'what happened' overlap). Report reusable primitives + the focus-mode substrate.`, { label: 'survey:search-scope', phase: 'Survey', schema: SURVEY }),
+])
+
+phase('Design')
+const good = lenses.filter(Boolean)
+const SPEC = {
+  type: 'object', required: ['architecture', 'facets', 'organization', 'decisions'],
+  properties: {
+    architecture: { type: 'string', description: 'the search+filter+focus architecture: where the bar lives, how filter state flows, what composes with the address-web resolver' },
+    facets: { type: 'array', items: { type: 'object', required: ['facet', 'source', 'values'], properties: { facet: { type: 'string' }, source: { type: 'string', description: 'the typed producer vocabulary, file:line' }, values: { type: 'string' } } } },
+    organization: { type: 'array', items: { type: 'object', required: ['tab', 'scheme'], properties: { tab: { type: 'string' }, scheme: { type: 'string', description: 'the per-tab high-organization scheme: grouping, collapsing, ordering' } } } },
+    focusMode: { type: 'string', description: 'the "what is going on with X settlement" flow: how a settlement-scoped view works across tabs' },
+    searchDesign: { type: 'string', description: 'search scope + mechanism (structured entity/settlement names via the resolver, never blind prose grep)' },
+    decisions: { type: 'array', items: { type: 'object', required: ['question', 'recommendation'], properties: { question: { type: 'string', description: 'a taste/scope call the OWNER must make' }, recommendation: { type: 'string' } } }, description: 'the owner decision points, worst-ambiguity first' },
+    buildNotes: { type: 'string', description: 'closure/lazy-chunk constraints, the address-web dependency, collision sequencing, pin plan' },
+  },
+}
+const spec = await agent(`${COMMON}
+SYNTHESIS — THE INSPECTOR SEARCH/FILTER/ORGANIZATION SPEC. Survey inputs: ${JSON.stringify(good).slice(0, 40000)}
+Produce the execution-ready spec: (1) ARCHITECTURE — where the search bar + filter chips live in the RealmInspector shell (persistent across tabs vs per-tab), how filter state flows, and how it CONSUMES the address-web resolver's structured metadata (settlement/faction/power/action-kind per item) as the filter/search index rather than re-deriving; (2) FACETS — the typed filter vocabularies (settlement, event/outcome kind, entity/faction/power, severity, recency/tick, a 'needs attention' computed facet), each bound to its producer source (FINITE-SEMANTICS — never freeform); (3) ORGANIZATION per tab — the high-organization scheme for each list surface at scale (group-by-settlement collapsible sections? group-by-event-type? the glance->sentence->table disclosure ladder); (4) FOCUS MODE — the 'what is going on with X settlement' flow: a settlement-scoped view that filters the WHOLE inspector to one settlement (reuse any existing selected-settlement store field), so a DM clicks a settlement and sees only its threads across every tab; (5) SEARCH — scope + mechanism (structured over entity/settlement names via the resolver + typed facets, NOT a blind prose grep); (6) DECISIONS — the owner taste/scope calls, each with a recommendation (e.g. persistent-vs-per-tab bar; default grouping; whether focus-mode is a click-a-settlement drill-down or an explicit filter; does the Letter/Dashboard get filtered too or stay summary); (7) BUILD NOTES — the address-web dependency (this builds AFTER that folds, on its resolver), the lazy-chunk/closure constraint, the fold sequencing vs the parked legibility wave, and the pin plan. Return via the schema.`, { label: 'design:spec', phase: 'Design', schema: SPEC })
+
+return { survey: good, spec }

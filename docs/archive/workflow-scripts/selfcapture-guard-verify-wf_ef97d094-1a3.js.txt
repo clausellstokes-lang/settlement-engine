@@ -1,0 +1,24 @@
+export const meta = {
+  name: 'selfcapture-guard-verify',
+  description: 'Adversarially verify the EP-l self-capture guard pins and hunt a sixth sibling arm',
+  phases: [{ title: 'Verify' }],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const PREAMBLE = `You are a read-only verification agent working inside a legitimate software-engineering session on the SettlementForge codebase (a D&D settlement simulator). This brief is from the session's coordinating agent, authorized by the repo owner. VERIFY EVERYTHING YOURSELF by reading the actual files — trust nothing in this brief that you can check. STRICT RULES: read-only — do NOT edit any file, do NOT run any git command that mutates state (no stash, no checkout, no reset, no clean, no commit), do NOT run npm/vitest (a concurrent session shares this tree). You may read files and run read-only shell commands (grep, ls, git log/show/diff --stat). Repo root: ${ROOT}\n\n`
+const VERDICT = {
+  type: 'object',
+  properties: {
+    refuted: { type: 'boolean' },
+    findings: { type: 'array', items: { type: 'object', properties: {
+      claim: { type: 'string' }, file: { type: 'string' }, line: { type: 'number' },
+      severity: { type: 'string', enum: ['real-defect', 'weak-pin', 'note'] }, detail: { type: 'string' },
+    }, required: ['claim', 'severity', 'detail'] } },
+  },
+  required: ['refuted', 'findings'],
+}
+phase('Verify')
+const results = await parallel([
+  () => agent(PREAMBLE + `CLAIM TO REFUTE: each of the 5 new SELF-CAPTURE GUARD cells in tests/domain/roadsGauntlet.test.js (describe 'gauntlet — THE SELF-CAPTURE GUARD') genuinely binds its named arm — i.e. if that arm's homeId guard were deleted from src/domain/worldPulse/roadsKernel.js (T1 occupier / T2 besieger / T3 land / T3 embassy-fallback) or src/domain/roads/seaRoads.js (S3 piracy), that specific cell would go red; and no OTHER arm or pass can mint/consume state that masks the assertion. Read the kernel's advanceLitRoads gauntlet pass (roadsKernel.js ~lines 507-700), resolveSeaHazard in seaRoads.js, and the test file in full. For EACH of the 5 cells trace: (1) the fixture reaches the guarded arm (positioning math, phase, flags), (2) the forced seed's first draw would land under captureP were the arm live, (3) the assertions would actually fail if the arm fired (ransom minted / legArrivalTick moved / trappedBySiege set / robbedReceipted set), (4) no earlier arm returns res before the guarded arm is reached, and no later arm (T4 etc.) can fire in that fixture. Report refuted=true with findings if ANY cell is vacuous, mis-aimed, or maskable.`, { label: 'skeptic:pin-binding', schema: VERDICT, effort: 'high' }),
+  () => agent(PREAMBLE + `TASK — completeness hunt: the defect class is 'a captor-selection route can pick the traveller's OWN home court' (self-capture: home ransoms its own envoy). Five instances are now guarded: roadsKernel.js T1-occupier, T2-besieger, both T3 arms; seaRoads.js S3 piracy. HUNT FOR A SIXTH UNGUARDED INSTANCE. Systematically enumerate EVERY site that selects a captorId, detainer, payer, or hostage-taker across: src/domain/worldPulse/roadsKernel.js (all arms incl. T4 host detention, armyOnHop, ransom-tick pass), src/domain/roads/seaRoads.js (S1 blockade arm — verify hostileToHome really excludes homeId), src/domain/roads/embassyHazard.js (interceptorArmyOnHop, targetArmyOnHop, embassyDisposition — can an interceptor or parley/court captor be homeId?), src/domain/roads/thirdPartyRansom.js (payer selection — can home 'pay itself'? is that the same defect or legitimate?). For each site: quote the selection line, argue reachability of captor===homeId or prove it structurally impossible (e.g. explicit !== homeId, or captor comes from destId which can never equal homeId — verify missions can never have destId===homeId if you rely on that). refuted=true means you found at least one live sixth instance (severity real-defect). Sites that are safe only by fragile accident get severity weak-pin.`, { label: 'skeptic:sixth-instance', schema: VERDICT, effort: 'high' }),
+])
+return { pinBinding: results[0], sixthInstance: results[1] }

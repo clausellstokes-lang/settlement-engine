@@ -1,0 +1,28 @@
+export const meta = {
+  name: 'build-cycle-17-icon-sweep',
+  description: 'Owner directive: remove ALL icons that are not logos, except the AI Surveyor prompt icon',
+  phases: [{ title: 'Sweep', detail: 'full-surface census → classify → remove → verify' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const P10 = `THE §10 PROTOCOL BINDS: ${MF} on claude/composite-r4 only (cd + rev-parse first, every command block); pathspec commits of ONLY your lane files; no stash; focused vitest + gate-tail (ps aux | grep vitest first); STOP-and-report; trailer "Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>". Nothing pushed. CONCURRENCY FENCES (cycle 16 is LIVE): src/components/nav/*, src/components/theme.js, src/lib/routes.js, tests/store/appNavSsot.test.js belong to the fletching lane; src/domain/worldPulse/* to the kernel/wiring lanes; causeWalk/heraldCausalVoice/discourseKernel/stateProse to the CF lane — a fenced-file icon goes in a STOP report, never an edit. Queue docs: re-read, carve hunks.`
+const S = { type:'object', required:['lane','commits','gates','stopReports','notes'], properties:{lane:{type:'string'},commits:{type:'array',items:{type:'string'}},gates:{type:'array',items:{type:'string'}},stopReports:{type:'array',items:{type:'string'}},notes:{type:'string'}}}
+const V = { type:'object', required:['lane','verdict','findings'], properties:{lane:{type:'string'},verdict:{type:'string'},findings:{type:'array',items:{type:'string'}}}}
+phase('Sweep')
+const r = await agent(`VERIFY-FIRST: OWNER-DIRECTED sweep (directive 2026-08-03, clarified: remove ALL ICONS — every icon of any kind, not just sparkles — that are not logos, EXCEPT the icon used for the AI Surveyor prompt if it has one). ${P10}
+LANE IC — THE ICON SWEEP. METHOD, census before removal, chair bucket rulings recorded vetoably in the queue row:
+(1) CENSUS the entire render surface (src/components, src/pdf, index.html, public/): every icon of any kind — emoji characters in JSX/strings, decorative unicode glyphs, inline SVG pictograms, icon components, icon-font refs, img icons. EVERY site with file:line in the commit body — no silent truncation.
+(2) CLASSIFY into exactly one bucket, chair rulings binding:
+  • BRAND (wordmark/logo lockup, favicon family) — KEEP.
+  • SURVEYOR (the icon on the AI Surveyor prompt/task surface) — KEEP if it exists; report whether it does.
+  • FLETCHING/NAV (today's owner-commissioned ribbon arrows, chevrons, and the mobile NavFlowArrow) — KEEP (they are the owner's own directive from this afternoon and are fenced anyway); list them so the owner sees them acknowledged.
+  • FUNCTIONAL CONTROL — a glyph that IS the control or state indicator with no text twin: close ×, expand/collapse carets, the generation checklist's ✓/▸ state marks, scroll-to-bottom arrow, regenerate ↻. KEEP (removing them is a usability regression, not a decluttering) — but LIST every one in the census and the STOP report so the owner can order any of them gone by name.
+  • MAP/DATA SEMANTIC — glyphs that ENCODE data on the town map or dossier surfaces. STOP-report for a ruling, do not remove.
+  • DECORATIVE/PICTOGRAPHIC-LABEL — every icon that dresses a heading, sits beside a text label, bullets a list, or ornaments a card (section emojis, tab pictograms, feature icons, the 🔓 markers, the ✦ ornaments, all of it). REMOVE — the text carries the meaning.
+(3) REMOVE the decorative bucket and heal every layout (spacing, flex gaps, alignment that assumed the icon); no replacement ornaments — typography carries the rhythm.
+(4) Update pins that asserted removed icons (docstrings cite the directive); affected component suites + eslint + sizeBaseline green; snapshot/golden movements are disclosed owner-directed changes, site-listed in the commit body.
+One pathspec commit per surface family if large, else one. Return {lane:'IC sweep', commits, gates, stopReports, notes}.`,
+  {label:'ic:icon-sweep', phase:'Sweep', model:'opus', effort:'high', schema:S})
+const v = await agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Re-census YOURSELF with your own patterns (a unicode emoji/pictograph range scan + SVG pictogram scan + icon-component grep) over committed bytes; diff your census against the lane's — any missed site is a finding even if clean. The DECORATIVE bucket must be EMPTY; BRAND + SURVEYOR + FLETCHING byte-untouched or fenced; every FUNCTIONAL keep genuinely functional (spot-check 5: would removal orphan a control?); spot-render 4 affected surfaces in jsdom for layout health (no empty flex slots, no doubled gaps, no dangling aria-labels pointing at removed glyphs); fenced files untouched (git show --stat); suites green; pathspec-clean vs cycle 16. Return {lane:'IC verify', verdict, findings}.`,
+  {label:'ic:verify', phase:'Sweep', model:'opus', effort:'high', schema:V})
+return { r, v }

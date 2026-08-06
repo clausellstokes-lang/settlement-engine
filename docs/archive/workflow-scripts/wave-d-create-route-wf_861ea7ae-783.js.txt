@@ -1,0 +1,39 @@
+export const meta = {
+  name: 'wave-d-create-route',
+  description: 'Wave D: the CREATE_ROUTE command vertical (directive 3 / J-D3)',
+  phases: [{ title: 'Build', detail: 'one Opus implementer, the cohesive vertical', model: 'opus' }],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const SCHEMA = {
+  type: 'object',
+  required: ['agent', 'fixes'],
+  properties: {
+    agent: { type: 'string' },
+    fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } },
+    behavior_shifts: { type: 'array', items: { type: 'string' } },
+    discovered: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+phase('Build')
+const result = await agent(`You are an Opus IMPLEMENTER for SettlementForge. WAVE D of the realm-directives program: the CREATE_ROUTE command vertical. BINDING LAW: docs/DESIGN_REALM_DIRECTIVES.md directive 3 + J-D3, and docs/DESIGN_ROUTE_LIFECYCLE.md §3 (user routes: provenance 'user', LIFECYCLE-IMMUNE to future organic removal — the provenance mark this wave mints is what W-J will honor). Worktree: ${ROOT} branch claude/composite-r4 @ a19d2d77 — verify with \`git -C ${ROOT} rev-parse --abbrev-ref HEAD\`; stop on mismatch.
+
+⚠️ A long-running soak node process may still be live in this tree: never touch artifacts/soak/**, never kill processes; focused vitest only, one invocation at a time; timeout-shaped reds get ONE isolation re-run before belief.
+
+THE VERTICAL (J-D3, binding): CREATE_ROUTE is the mirror sibling of CUT_TRADE_ROUTE — the SAME command family discipline: study the existing vertical end-to-end FIRST (src/application/commands/, the CUT_TRADE_ROUTE spec, executeCommand.js, the migration-183 journal semantics, the Surveyor review's same-session recovery pattern) and mirror its shape exactly. User picks two endpoint settlements; the engine derives the path via the spatial travel-cost machinery (travelersGeometry / the planMarch-class derivation — geometry is DERIVED, never hand-drawn); the route lands with provenance 'user' in whatever route representation exists TODAY (the W-J network ledger does not exist yet — mint the user route into the CURRENT canonical route/neighbour surface the sim already reads, shaped so W-J's RouteEdge model can adopt it losslessly: include the provenance field and deterministic edge identity from day one, per DESIGN_ROUTE_LIFECYCLE §3's edgeId convention).
+
+HARD RULES: NO new migrations (supabase/migrations frozen at 192 — the journal from 183/184 hosts new command SPECS without schema change; if a schema change is truly unavoidable, implement nothing and report blocked with the exact obstacle); no git mutations; no full suites/builds; no golden re-records; no ratchet raises; new store actions need operationRegistry + gen:compendium-data + generate-sitemap + build:edge-shared IN THAT ORDER; determinism laws; headless domain; JSX 600 / js 800 ceilings; anchored negatives; JSON-round-trip fixtures for persistence tests; no em dashes in src/domain|src/data string literals; the subsystem-certification totality walker now guards ALL simulation rule keys — if you mint a new boolean rule you MUST author its certification row in the matching lane file (read src/domain/certification/subsystemCertification.js for the shape); prefer NO new rule (this is a user command, not a dormant engine system — it should not need a flag; state your reasoning either way).
+
+DELIVERABLES:
+1. The command spec + application-layer wiring (admitted envelope, owner/expected-revision, preview, validation, receipt, replay-safe identity) mirroring CUT_TRADE_ROUTE.
+2. Pure client preparation (endpoint validation: both settlements exist, are campaign members, no duplicate live route for the pair+mode; the spatial path derivation with its cost) — pure, seeded, headless.
+3. The server-authoritative transaction through the EXISTING journal machinery (no dual write, no outbox), with the same-session recovery semantics the sibling has.
+4. UI entry: a minimal, house-style surface where the user picks the two settlements and confirms with the derived path's cost/preview shown in-world prose (legibility law; find the natural home — the Realm/map surface's existing action idiom — and match it; lazy, a11y, presence-gated appropriately).
+5. PROVENANCE + LIFECYCLE PINS (the wave's soul): the user route carries provenance 'user' + deterministic edge id; JSON-round-trip + regenSection + snapshot-undo + import/export survival pins (the write-that-ghosts pre-answer — a player's hand-drawn route must survive EVERY lifecycle path); Herald address-chain news on creation ("By charter of the realm's own hand, the road from X to Y opens").
+6. Executed negative control per new pin (revert/red/restore/green, quoted); focused suites green (quoted); the command registered in operationRegistry with the regen chain run.
+
+Return dense structured data: per-item status, files, verbatim test tails, negative-control quotes, behavior shifts plainly, judgment calls recorded vetoably, discovered adjacencies.`, { label: 'wD:create-route', phase: 'Build', schema: SCHEMA, model: 'opus' })
+
+return { results: [result].filter(Boolean) }

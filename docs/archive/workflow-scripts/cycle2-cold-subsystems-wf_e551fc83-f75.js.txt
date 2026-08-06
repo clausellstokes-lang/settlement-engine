@@ -1,0 +1,80 @@
+export const meta = {
+  name: 'cycle2-cold-subsystems',
+  description: 'Round 3 cycle 2 Phase S second half: cold adversarial deep-review of every subsystem region of the assembled wave',
+  phases: [
+    { title: 'Subsystem sweep', detail: 'one cold adversarial reviewer per code region — the whole tree' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const TIP = 'c8c5baa8'
+const STANDARD = '/Users/cstokes/Desktop/settlement-engine/docs/THE_APLUS_STANDARD.md'
+const SCRATCH = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/ff8b4b71-3ea5-4d7a-9793-42190018c11f/scratchpad'
+
+const SUBSYSTEMS = [
+  { key: 'pulse-spine', scope: 'src/domain/worldPulse/pulseKernel.js + the grown mover-composition chain it names + the tick spine and ordering' },
+  { key: 'ladder-npc', scope: 'src/domain/worldPulse npcLadderKernel/contests/heirs/gratitudeBonds + NPC standing, goals, bonds, grudges, credibility' },
+  { key: 'generosity-supply-migration', scope: 'generosityKernel, supplyKernel, migrationKernel + their deposit-and-consume seams and conservation' },
+  { key: 'statecraft-belief', scope: 'beliefMap, rumors, information statecraft, spokesman/credibility, per-court belief updating and delays' },
+  { key: 'corruption-piety-traditions', scope: 'corruption.js, piety.js, traditions kernels + exposure ledgers' },
+  { key: 'assize-commons', scope: 'assizeKernel.js + commonsVoiceKernel.js + their coupling and the legitimacy/stressor writers they use' },
+  { key: 'roads-travel', scope: 'roadsKernel + roads/ops + roads/state + seaRoads + ransom/refusal/recall + traveling NPC lifecycle' },
+  { key: 'war-occupation', scope: 'war/military/occupation kernels + warReasons + embattlement + refugees' },
+  { key: 'economy-resources', scope: 'trade/money/resource kernels + obligations (foldObligations) + faction-pair incidents' },
+  { key: 'generation-pipeline', scope: 'generateSettlementPipeline/generatePowerStructure + biome truth + founding + name/dedup machinery' },
+  { key: 'spatial-provenance', scope: 'spatial ledgers + provenance recording/cause edges + spatialUsage walkers + secrets seams on ledgers' },
+  { key: 'edit-wall', scope: 'pendingEdits/editFingerprint/tableLedger/tableEvents/campaignImport — the finite-semantics wall, both write paths, the mirror parity guard' },
+  { key: 'store-lifecycle', scope: 'src/store campaignSlice + persist/clone/undo/migrateCampaign/import — every state lifecycle path round-trip' },
+  { key: 'store-registries', scope: 'the remaining store slices + operationRegistry + flag plumbing (flagRegistry.js lean leaf vs flags.js prose sidecar) + COMMITTABLE_EDIT_KINDS' },
+  { key: 'worker-forensics', scope: 'the advance worker harness + transport + crashForensics (armed-at-boot, whitelist {seed,tick,flags_on}) + save museum/tolerant loader' },
+  { key: 'display-chronicle', scope: 'letter/chronicle/timelapse/cause-walk/certificate/aged-map panels and composers + timelapseTick sharing' },
+  { key: 'display-dmscreen', scope: 'DM screen + session ledger UI + auspice + oracle + interview panels (multi-hop thread, citations UI, conjecture styling)' },
+  { key: 'display-maps', scope: 'WorldMap/SettlementMapPane/overlays/styles/town layout + the aged/wear layers + map exports' },
+  { key: 'gallery-sharing', scope: 'gallery + unlisted Model-B (slug, PRIVATE filter, badge) + featured + campaign player view + worldCode //world route + seed post' },
+  { key: 'pdf-books', scope: 'campaign PDF + world book (DM/player faces) + counterseal structured path + skins — tree-walk parity, redaction totality' },
+  { key: 'edge-security', scope: 'supabase/functions + migrations 160-169 (esp. 168/169) + RLS + the AI gate stack (session/burst/metering/kill-switch) + edge-shared bundle freshness' },
+  { key: 'seo-shell', scope: 'api/_metaShell + meta-shell + prerender postbuild + sitemap + vercel.json rewrites + JSON-LD + head single-sourcing' },
+  { key: 'platform-billing', scope: 'stripe/billing/founder transfer/email lifecycle/entitlements (isSurveyorTier door) + account surfaces' },
+  { key: 'enforcement-machinery', scope: 'scripts/check-* + the vitest ratchets/walkers/censuses/goldens themselves + CI parity — review the reviewers: can any gate be silently weakened or bypassed?' },
+  { key: 'exports-integrations', scope: 'foundry-module/ + mcp-server/ + worldExport DM/player variants + locale scaffold (flagRegistry/locale plumbing, pseudo-locale)' },
+  { key: 'copy-a11y', scope: 'src/copy + error-copy register + EmptyState/primitives + keyboard/screen-reader paths + the command palette + 375px surfaces' },
+]
+
+const FINDING = {
+  type: 'object', additionalProperties: false,
+  required: ['title', 'severity', 'claim', 'scenario', 'location', 'evidence'],
+  properties: {
+    title: { type: 'string', maxLength: 90 },
+    severity: { enum: ['must-fix', 'should-fix', 'polish'] },
+    claim: { type: 'string', maxLength: 350 },
+    scenario: { type: 'string', maxLength: 350 },
+    location: { type: 'string', maxLength: 160 },
+    evidence: { enum: ['executed', 'inspected'] },
+  },
+}
+
+const SUB_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  required: ['subsystem', 'health', 'findings', 'evidence_note'],
+  properties: {
+    subsystem: { type: 'string', maxLength: 40 },
+    health: { enum: ['sound', 'sound-with-findings', 'concerning'] },
+    findings: { type: 'array', maxItems: 12, items: FINDING },
+    evidence_note: { type: 'string', maxLength: 400 },
+  },
+}
+
+const COLD = `YOU ARE A COLD ADVERSARIAL REVIEWER — by deliberate protocol you have NO prior context of this program and must not acquire any. FORBIDDEN: every file under /Users/cstokes/Desktop/settlement-engine/docs/ EXCEPT ${STANDARD} (READ-ONLY, for what the product holds itself to); the directory /Users/cstokes/.claude/projects/ (program memory); scratchpad files you did not create. Your ENTIRE evidence base is the product worktree at ${WT} (verify branch claude/composite-r4 tip ${TIP}, then treat it as READ-ONLY — never edit, never touch git, never commit) plus probes you execute. Probe scripts/outputs go ONLY under ${SCRATCH}/cold-sub-<your-key> (create it). Judge the ARTIFACT.
+HARNESS MECHANICS (operational, not context): the full suite exceeds a 10-minute command cap — FOCUSED test files only, and run AT MOST ONE vitest command at a time (many sibling reviewers share this machine); pglite tests need --no-file-parallelism; scripts/check-domain-strict.mjs runs bare, never piped; a slow or failing run may be contention — re-run that file ALONE before believing it. Mark each finding evidence:'executed' only when you ran the proof yourself.`
+
+phase('Subsystem sweep')
+const results = await parallel(SUBSYSTEMS.map((s) => () => agent(
+  `${COLD}
+
+YOUR CHARGE — adversarial deep review of ONE subsystem: **${s.key}** — ${s.scope}. Locate the region's actual files in ${WT} yourself (the scope text is a pointer, not an inventory — enumerate what is really there, including tests). Read the region IN FULL — whole scopes, not grep windows. Hunt what is MATERIAL: logic errors, invariant violations, lifecycle paths that drop writes (create/read/persist/regenerate/undo/clone/import), seams misused, ordering/exact-age mistakes, conservation leaks, security or redaction holes, dead or unreachable intent, tests that assert less than they appear to, hidden coupling to other regions. Attempt to REFUTE the region's apparent guarantees — try to construct the input or path that breaks them, and execute focused probes where feasible. Report at most 12 findings, most material first, each with a concrete scenario and location; health = your overall verdict; evidence_note = what you executed vs inspected.`,
+  { label: `sub-${s.key}`, phase: 'Subsystem sweep', schema: SUB_SCHEMA, model: 'opus' }
+)))
+
+const ok = results.filter(Boolean)
+log(`Subsystem sweep returned ${ok.length}/${SUBSYSTEMS.length} regions`)
+return { subsystems: ok }

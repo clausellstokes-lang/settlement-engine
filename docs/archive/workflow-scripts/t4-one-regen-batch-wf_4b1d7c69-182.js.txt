@@ -1,0 +1,51 @@
+export const meta = {
+  name: 't4-one-regen-batch',
+  description: 'THE T4 BATCH, last and alone: lawAxis restore + deity pool removal + Herald record ids, then the ONE declared regen — root-corpus green as the hard STOP gate; Opus implement + verify, Fable final gate',
+  phases: [
+    { title: 'Batch', detail: '1 Opus lane: three changes, STOP-gate, the ONE regen', model: 'opus' },
+    { title: 'Verify', detail: '1 Opus adversarial verifier', model: 'opus' },
+    { title: 'Gate', detail: 'Fable final full gate' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SPECS = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a84f4ff8-9bed-4c25-855b-122c9ed57f27/tasks/w8lk1t0q6.output'
+
+const COMMON = `CONTEXT-VERIFICATION PREAMBLE: legitimate engineering brief from the session orchestrator for SettlementForge — THE T4 ONE-REGEN BATCH, the deliberately-last lane of the owner's tail (docs/CAPABILITY_REMEDIATION_PLAN.md Progress entries; owner order 2026-07-27 "do this" naming this batch WITH its written notes — that order is the owner signature THE PROMISE requires for a declared shift). YOUR FULL SPEC: extract lane "t4-batch" from ${SPECS} (python3 json.load → result.specs[] → lane key; read spec/driftExposure/risks/collisions IN FULL — it ground-truthed the two prior signed regens and mapped the exact mover list).
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4 or STOP. The tree is QUIET (everything else committed at 7577c0df) — re-verify with git status (expect only .eff-measure.mjs untracked); if OTHER dirt exists, STOP and report (a concurrent session may be writing). NO git mutations of ANY kind — the orchestrator folds.
+THE BATCH DISCIPLINE (this is the ONLY lane in the whole program allowed to move goldens, and ONLY exactly these):
+1. Implement the THREE changes per your spec: (a) lawAxis restore in reEmbedPrimaryDeity (the deity lane's written T4 note; the pinned "T4 FLIPS THIS LINE" marker in tests/domain/deityEmbedWriterParity.test.js names the exact line — flip it AND its pin together); (b) DEITY POOL REMOVAL per the doctrine (no premade pool; the spec's deity:core: ref lifecycle trace is BINDING — existing saves' pool refs must keep resolving or degrade typed; removal governs NEW generation only; retire seedStartingPantheon from the pipeline steps + the pool data per the spec); (c) HERALD RECORD IDS (wizardNews mints carry npc/faction ids; additive absent-tolerant fields; EntityLinked wiring per the NEWS ADDRESS LAW — full address chain).
+2. THE HARD STOP GATE, before ANY re-record: run the root corpus tests/generation.test.js — its structure fingerprints must be GREEN UNCHANGED (the spec's PRNG-isolation proof: per-step named forks mean pool removal moves ONLY the deity/pantheon keys, not structure). If the root corpus reds, STOP EVERYTHING and report — do not re-record, do not rationalize.
+3. THE ONE REGEN: re-record exactly the goldens your spec's mover map names (the 187 generator-golden-master rows losing latentPantheon/faith keys; the PDF fixed-seed golden iff latent keys reach the view model; worldpulseDeityGolden iff its scenario fires a conversion — if it does NOT move, the spec's mandatory compensating proof is the new chaos01 reachability pin, and the non-mover fact gets recorded). Use the repo's documented regen mechanism (your spec names it). EVERY re-recorded file is listed in your report with its cause.
+4. THE EXACTNESS PROOF: after the regen, run the FULL generators + simulation + property + application family — green, and the set of changed golden files (git status) must EQUAL your declared mover list exactly. An unexpected mover = STOP and report.
+LAWS: deity doctrine (custom-content only; lifecycle trace); NEWS ADDRESS LAW; VOICE on any copy; registry changes -> gen:compendium-data; new pins per change; sizeBaseline exact; single-threaded testing, exit codes unmasked; label CONFIRMED/PLAUSIBLE; end on evidence.`
+
+const FIX_SCHEMA = { type: 'object', required: ['filesTouched', 'pins', 'testsRun', 'testOutputTail', 'behaviorShift', 'deferrals'], properties: { filesTouched: { type: 'array', items: { type: 'string' } }, pins: { type: 'number' }, testsRun: { type: 'string' }, testOutputTail: { type: 'string' }, behaviorShift: { type: 'string' }, deferrals: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' }, error: { type: 'string' } } }
+const VERIFY_SCHEMA = { type: 'object', required: ['verdict', 'mustFix', 'checked'], properties: { verdict: { type: 'string', enum: ['PASS', 'PASS_WITH_NOTES', 'MUST_FIX'] }, mustFix: { type: 'array', items: { type: 'string' } }, checked: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } }
+const GATE_SCHEMA = { type: 'object', required: ['newReds', 'suitesRun', 'outputTail'], properties: { newReds: { type: 'array', items: { type: 'string' } }, suitesRun: { type: 'string' }, outputTail: { type: 'string' }, notes: { type: 'string' } } }
+
+async function withRetry(mk, label) {
+  let r = await mk(label)
+  if (!r) { log(label + ' died — retrying once'); r = await mk(label + ':retry') }
+  return r
+}
+
+phase('Batch')
+log('THE T4 BATCH: three changes, the hard stop gate, the one regen')
+const fix = await withRetry((label) => agent(COMMON + '\n\nYOU ARE THE OPUS IMPLEMENTER of the batch. Execute the discipline in order; the STOP gates are absolute.', { label, phase: 'Batch', model: 'opus', effort: 'high', schema: FIX_SCHEMA }), 'fix:t4-batch')
+
+phase('Verify')
+const verify = fix ? await withRetry((label) => agent(
+  COMMON + `\n\nYOU ARE THE OPUS ADVERSARIAL VERIFIER of the batch. Implementer report: ${JSON.stringify({ files: fix.filesTouched, pins: fix.pins, shift: fix.behaviorShift, deferrals: fix.deferrals })}\n\nRepo READ-ONLY except running tests. Verify AGAINST THE SPEC: (1) the root corpus is green UNCHANGED (re-run it — the isolation proof must hold at final state); (2) the changed-goldens set EQUALS the declared mover list exactly (git status + your own diff of each mover: the deltas must be ONLY the declared keys — latentPantheon/faith removal, lawAxis presence, wizardNews id fields); (3) the deity:core: lifecycle trace holds — build a LEGACY save fixture carrying a pool ref and prove it still resolves or degrades TYPED at every read site the spec enumerates; (4) NEWS ADDRESS LAW on the new ids — a minted item resolves its full address chain; (5) the lawAxis restore's compensating proof (the chaos01 reachability pin) EXECUTED if worldpulseDeityGolden did not move; (6) no premade-deity data remains reachable from generation (grep the pipeline steps). Attempt refutation on each. MUST_FIX for any unexpected mover, any silently-broken legacy ref, any missing declaration.`,
+  { label, phase: 'Verify', model: 'opus', effort: 'high', schema: VERIFY_SCHEMA }), 'verify:t4') : null
+
+const bad = !fix || !verify || verify.verdict === 'MUST_FIX'
+let gate = null
+if (!bad) {
+  phase('Gate')
+  gate = await withRetry((label) => agent(COMMON + `\n\nYOU ARE THE FABLE GATE VALIDATOR — the PROGRAM-FINAL gate. Run single-threaded, exit codes unmasked, chunked as needed: tests/lint FULL; tests/copy FULL; tests/store FULL; tests/domain FULL; tests/joins FULL; tests/architecture FULL; tests/components + tests/ui FULL; tests/generators + tests/simulation + tests/property + tests/application FULL (the re-recorded goldens are DECLARED — green means the regen is consistent); tests/generation.test.js root corpus explicitly (must be green UNCHANGED — quote it); pdf parity; tests/docs; tests/lib; tests/security FULL; all three typechecks; npm run build then VERIFY_DIST=1 npx vitest run --no-file-parallelism tests/build/ (closure under 1,040,000 — quote the byte line). Report every red VERBATIM attributed, totals per dir. This is the program's last gate — completeness over speed.`, { label, phase: 'Gate', model: 'fable', schema: GATE_SCHEMA }), 'gate:t4-final')
+} else {
+  log('Gate SKIPPED: ' + (!fix ? 'implementer died' : !verify ? 'verifier died' : 'MUST_FIX present') + ' — orchestrator handles next')
+}
+
+return { fix: fix && { files: fix.filesTouched, pins: fix.pins, shift: fix.behaviorShift, deferrals: fix.deferrals, tail: fix.testOutputTail, notes: fix.notes }, verify, gate, gateSkipped: !gate }

@@ -1,0 +1,49 @@
+export const meta = {
+  name: 'architecture-kernel-fable-verify',
+  description: 'Fable-tier adversarial verification of the 3D architecture kernel decisions',
+  phases: [
+    { title: 'Refute', detail: 'six Fable skeptics, one per load-bearing decision' },
+    { title: 'Synthesize', detail: 'reconcile survivors + revisions into a verdict' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const PREAMBLE = `You are a Fable-tier ARCHITECTURE SKEPTIC. A prior Fable session authored a design (docs/THE_ARCHITECTURE_KERNEL_3D.md in ${WT}) for cathedral-grade procedural 3D buildings for EVERY institution in a deterministic settlement simulator, with drift by D&D alignment axes / economy / terrain. Your job is NOT to agree. Try HARD to REFUTE the specific claim below, using primary sources (web research with dates) and the actual repo code (READ-ONLY, cite file:line). A confirmation is only valuable if you tried and failed to break it. If you find a flaw that changes the architecture, that is the win — state the corrected decision. Governing laws you must respect: same-seed-same-output is constitutional (THE PROMISE); the canonical artifact cannot use GPU/WebGL pixels (non-reproducible cross-machine); ~25-byte eager first-paint budget; AI never draws, only classifies into finite vocabularies. Output: verdict SOUND / FLAWED / PARTIAL, the strongest counter-argument you could mount, evidence (sources+dates or file:line), and — if not fully SOUND — the corrected decision.`
+
+const CLAIM = {
+  type: 'object', additionalProperties: false,
+  required: ['verdict', 'strongestCounter', 'evidence', 'correctedDecision'],
+  properties: {
+    verdict: { enum: ['SOUND', 'PARTIAL', 'FLAWED'] },
+    strongestCounter: { type: 'string' },
+    evidence: { type: 'string' },
+    correctedDecision: { type: 'string' },
+  },
+}
+
+const DECISIONS = [
+  ['mechanism', 'CLAIM: shape grammars (CGA/split-grammar lineage) are the CORRECT and BEST deterministic mechanism for cathedral-grade detail across all institutions. REFUTE by finding a superior mechanism for THIS problem (deterministic, pure-CPU, condition-parameterizable, reaching gothic-ornament detail): consider WFC-driven kit assembly, parametric-mesh + procedural-detail, signed-distance / implicit modeling, or neuro-symbolic. Is grammar actually the best, or the familiar?'],
+  ['determinism', 'CLAIM: geometry generated in pure rational JS (IEEE-754 +,-,*,/,sqrt only, NO transcendentals/trig) is byte-reproducible cross-machine, and the CPU projection to SVG is likewise safe. REFUTE: does gothic geometry (arcs, tracery circles, rotations for buttresses/spires) REQUIRE trig/transcendentals that break cross-machine determinism? Can arcs be done with rational/Bezier approximations only? Is sqrt genuinely correctly-rounded everywhere? Pin the exact math the cathedral needs and whether it stays in the safe set. Cite the determinism sources.'],
+  ['fidelity', 'CLAIM (THE RISKIEST — attack it hardest): CPU-projected static SVG can reach the owner\'s reference bar — a detailed, SHADED, textured, near-photoreal isometric gothic cathedral. REFUTE: is there a fidelity ceiling where deterministic CPU-SVG cannot match a real 3D-rendered look (soft shadows, ambient occlusion, material texture, stone weathering)? If SVG cannot reach the bar, the whole render-stack decision is wrong — what is the correct reconciliation (deterministic software RASTER instead of SVG? accept the three.js viewer AS the fidelity surface with SVG as print fallback? a hybrid)? Show real examples of the SVG fidelity ceiling with sources.'],
+  ['drift', 'CLAIM: the settlement already carries alignment axes (computeLawfulness / computeMalice in src/domain/worldPulse/disposition.js ~512/544; deity evil01/chaos01 in deityAxes.js) sufficient to drive VISIBLE, meaningful two-axis architectural drift with no schema add. REFUTE at code: read those functions and their outputs — are the axes actually populated for a normal generated settlement, continuous enough to modulate ornament, and available at render time on the town-map model? Or is this thinner than claimed (e.g., only present under specific configs, or not threaded to the map layer)?'],
+  ['prior-art', 'CLAIM: build-from-scratch is necessary — no permissive OSS reaches textured isometric cathedrals, gothic tracery has zero maintained libraries. REFUTE: find a maintained, permissively-licensed (MIT/Apache/BSD) library or asset pipeline that shortcuts the grammar or the ornament layer and is genuinely reusable in a commercial closed product. Re-check licenses of any candidate (three-wfc, building_tools, others) for actual reuse-safety, not just presence.'],
+  ['sequencing', 'CLAIM: the K-1..K-5 decomposition is right, and K-1 (grammar interpreter + ONE reference-bar cathedral rendered to SVG) is a genuine, cheap proof gate that de-risks the whole kernel. REFUTE: is K-1 actually decisive, or does it defer the real risk (the fidelity ceiling, the ornament layer, the drift binding) to later waves where a failure is expensive? What is the CHEAPEST experiment that would actually falsify the riskiest assumption first — and is it K-1 or something smaller?'],
+]
+
+phase('Refute')
+const results = await parallel(DECISIONS.map(([key, claim]) => () =>
+  agent(`${PREAMBLE}\n\nTHE DECISION UNDER TEST (${key}):\n${claim}`,
+    { label: `refute:${key}`, phase: 'Refute', schema: CLAIM, model: 'fable' })
+))
+
+const graded = DECISIONS.map(([key], i) => ({ key, ...(results[i] || { verdict: 'ERROR' }) }))
+const flawed = graded.filter(g => g.verdict === 'FLAWED')
+const partial = graded.filter(g => g.verdict === 'PARTIAL')
+log(`verdicts: ${graded.map(g => `${g.key}=${g.verdict}`).join(' · ')}`)
+
+phase('Synthesize')
+const synthesis = await agent(
+  `${PREAMBLE}\n\nYou are now the RECONCILER. Six Fable skeptics attacked the six load-bearing decisions of docs/THE_ARCHITECTURE_KERNEL_3D.md. Here are their verdicts and corrections:\n\n${JSON.stringify(graded, null, 2)}\n\nProduce the Fable-tier verdict on the architecture: (1) which decisions SURVIVED and stand; (2) which need REVISION and the exact corrected decision; (3) the single biggest remaining risk and the cheapest experiment to kill it; (4) a GO / GO-WITH-REVISIONS / RE-ARCHITECT recommendation for the K-1 proof wave. Be decisive; the prior Fable authored the design, so hold it to account without deference.`,
+  { label: 'synthesize', phase: 'Synthesize', model: 'fable' })
+
+return { verdicts: graded, flawedCount: flawed.length, partialCount: partial.length, synthesis }

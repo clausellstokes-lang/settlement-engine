@@ -1,0 +1,45 @@
+export const meta = {
+  name: 'fp-correction-pass',
+  description: 'Correct the seven FP volumes under chair rulings from the 143-finding audit',
+  phases: [
+    { title: 'Correct', detail: '7 volume correctors under rulings' },
+    { title: 'Cohere', detail: 'cross-volume collision fixer' },
+  ],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const J = '/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/2e3ad88b-afe1-4b9a-98ca-b726d4aaa3d7/subagents/workflows/wf_43722bb9-a3e/journal.jsonl'
+
+const RULINGS = `THE CHAIR'S CORRECTION RULINGS (binding; findings' fixSketches apply AS MODIFIED by these):
+R1 ONE INSTRUMENT PER PAIR STANDS: the treaty ledger's one-per-pair key is LAW, not a bug — peacetime formation AMENDS the pair's standing instrument (minting it when absent); reciprocal/two-sided pacts are represented as DIRECTIONAL TERMS inside the one instrument (the §13 stacking machinery hosts bilateral direction — a term gains a beneficiary field); two security terms on one treaty compose under the stacking rules or the second is refused with a receipt. The grammar volume rewrites its formation waves to amendment-shaped drafting.
+R2 THE HOT-FILE LAW APPLIES TO peaceTerms (794/800): ALL new grammar capability lands in LAZY LEAF SIBLINGS (pactFormation.js, pactAmendment.js, etc.) consuming peaceTerms' exports; peaceTerms itself gains only net-zero seam lines. 'Extend never fork' means ONE WRITER FAMILY, never one file.
+R3 TERM-FAMILY OWNERSHIP: GRAMMAR's catalog list is canonical for ALL term families incl. faith + population; FAITH/TRADE/POPULATIONS sections become consumers with pointers. One list, one spelling, one closure contract.
+R4 NAMESPACES: INFORMATION judgment blocks = J-INF-*, INTERIOR = J-INT-*; renumber cleanly, fix all references.
+R5 NO ORPHAN VOCABULARY: every ending either gains its minting wave (a one-line producer declaration in an existing wave) or is CUT from the vocabulary — cut ruthlessly; endings return when producers exist. Every named band lands in its volume's tuning table. Significance/severity band FAMILIES move to the spine's narration kit (SP-6) — volumes reference, never mint.
+R6 COUPLING OWNERSHIP: every §4/CW coupling names its owning wave in the owning volume, or is re-declared DEFERRED (a decision, not an omission); the CW-0 registry rows land in the owning volumes' wave specs.
+R7 SUBSTRATE ERRORS correct to the TREE'S truth: where the volume claimed a seam that does not exist (the bust turn-back, temple-split creed rows, the extinction prune, IN-5's lookback zeroing, the granary applicator's five-writer reality, the premium-gate category error, pacing-governor visibility), the mechanism is respecced against what EXISTS with the missing piece named as NEW WORK carrying its own pins — never papered, never silently narrowed.
+R8 THE LURE COMPLIES WITH LANDED LAW: re-read the amendment the audit cites, and re-scope the weakness-bait to the compliant channels (the lure survives; its specific bait mechanisms adjust to whatever the landed amendment actually rules); document the reconciliation in the wave.
+R9 DOSSIER PINS GET HONEST: round-trip pins may only assert surfaces the surveys verified or mark the surface VERIFY-AT-BUILD with the fallback landing named.
+R10 TRADE FENCES STAND: tradeWar's truth-scored contest stays fenced from belief rewiring (severance casus feed it); WR-10's graceful degradation note is accepted and the war volume gets a matching one-line note via the cohesion agent.`
+
+const PRE = `VERIFY-FIRST: CORRECTION agent for the FP corpus (chair-ruled; the audit stage found your volume's defects — fix them). Tree: ${MF} (two-writer; Sol live; edit ONLY your assigned file(s); no git). METHOD: (1) read the audit journal ${J} and extract the audit whose scope is YOUR volume (results carry findings[] with fixSketch); also read the cohesion + tuning-ledger audits' findings that name your volume; (2) re-verify each against your volume + the tree where cheap; (3) apply fixes per fixSketch AS MODIFIED by the rulings below — rulings win; (4) preserve the twelve-requirement density everywhere you touch (the audit hunted shallow spots — do not create new ones while fixing); (5) mark corrections [CORRECTED 2026-08-02 (fp-audit)]; (6) unresolvable forks go in 'unresolved' with proposals.
+${RULINGS}`
+
+const SCHEMA = { type:'object', required:['changes','unresolved'], properties:{
+  changes:{type:'array',items:{type:'object',required:['finding','action'],properties:{finding:{type:'string'},action:{type:'string'}}}},
+  unresolved:{type:'array',items:{type:'object',required:['finding','why','proposal'],properties:{finding:{type:'string'},why:{type:'string'},proposal:{type:'string'}}}}}}
+
+phase('Correct')
+const fixes = await parallel([
+  () => agent(`${PRE}\nASSIGNED: ${MF}/docs/DESIGN_FP_TRADE.md (the trade audit + cohesion/tuning findings naming TRADE; R5 note: monopoly gains its producer or is cut; R7: the granary seam respecs against the five-writer storageMonths reality).`, {label:'fix:trade', phase:'Correct', schema:SCHEMA}),
+  () => agent(`${PRE}\nASSIGNED: ${MF}/docs/DESIGN_FP_FAITH.md (the faith audit; R7 leads: the premium-gate category error, the temple-split substrate, the extinction beat — respec against the tree with new work named; R3: the faith term list becomes a pointer to GRAMMAR's canonical catalog).`, {label:'fix:faith', phase:'Correct', schema:SCHEMA}),
+  () => agent(`${PRE}\nASSIGNED: ${MF}/docs/DESIGN_FP_POPULATIONS.md (the populations audit; the BLOCKING RE-RULING the auditor demanded is resolved by R7: the bust turn-back seam is NEW WORK named with pins; POP-5b gets its full twelve; the pacing-governor visibility gap becomes a named registration work item).`, {label:'fix:populations', phase:'Correct', schema:SCHEMA}),
+  () => agent(`${PRE}\nASSIGNED: ${MF}/docs/DESIGN_FP_INFORMATION.md (the information audit; R8 governs the lure; R4: renumber to J-INF-*; the news-kind classification finding fixes via proper family registration, not the bare token).`, {label:'fix:information', phase:'Correct', schema:SCHEMA}),
+  () => agent(`${PRE}\nASSIGNED: ${MF}/docs/DESIGN_FP_GRAMMAR.md (the grammar audit — the heaviest: R1 rewrites formation as amendment-shaped drafting on the one-per-pair instrument; R2 restructures all new code into lazy leaf siblings; R3 makes your catalog canonical; the proposals opt-in flag finding respecs against the flag's real semantics).`, {label:'fix:grammar', phase:'Correct', schema:SCHEMA}),
+  () => agent(`${PRE}\nASSIGNED: ${MF}/docs/DESIGN_FP_INTERIOR.md (the interior audit; R4: renumber to J-INT-*; R7: IN-5's lookback and IN-4's pressure-name findings respec against the tree; R9: the eight unverified dossier pins get honest; IN-7's envelope gains its denominator).`, {label:'fix:interior', phase:'Correct', schema:SCHEMA}),
+  () => agent(`${PRE}\nASSIGNED: ${MF}/docs/DESIGN_FP_COUPLINGS.md + ${MF}/docs/DESIGN_FP_SPINE.md (the couplings audit + the spine-family findings: R6 ownership throughout; broken signature-story chains re-derive with real reads or mark their missing link as the owning volume's new work; SP-6 gains the band-family table per R5; the spine gains a one-paragraph SP-8 THE AGE LAYER cross-wiring directive 12 [J-D12] into the corpus).`, {label:'fix:couplings+spine', phase:'Correct', schema:SCHEMA}),
+])
+
+phase('Cohere')
+const sweep = await agent(`${PRE}\nYOU ARE THE COHESION FIXER (may touch ANY FP volume, ONLY for cross-volume consistency): execute the cohesion audit's findings under the rulings — R3 one canonical term catalog with pointers everywhere; R4 namespaces fixed in all references; R5 endings/bands ledger reconciled across volumes (the tuning audit's 14 missing bands landed); flag names reconciled corpus-wide (the SP flag-name gaps the trade drafter flagged); WR-10's graceful-degradation twin note added to DESIGN_WAR_RULINGS_ARCHITECTURE.md (one line, [CORRECTED] marked); verify every cross-volume pointer resolves. Report per fix.`, {label:'cohere', phase:'Cohere', schema:SCHEMA})
+
+return { fixes: fixes.filter(Boolean), sweep }

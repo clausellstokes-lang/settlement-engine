@@ -1,0 +1,61 @@
+export const meta = {
+  name: 'cycle2-cold-reruns',
+  description: 'Re-run the 6 cold lanes that errored on the schema cap: dimension bars 3/4/9/11/20 + subsystem store-registries — raw-JSON output to dodge the retry cap',
+  phases: [{ title: 'Re-run', detail: 'cold reviewers, raw JSON output' }],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const TIP = 'c8c5baa8'
+const STANDARD = '/Users/cstokes/Desktop/settlement-engine/docs/THE_APLUS_STANDARD.md'
+const SCRATCH = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/ff8b4b71-3ea5-4d7a-9793-42190018c11f/scratchpad'
+
+const COLD = `YOU ARE A COLD REVIEWER — NO prior program context, do not acquire any. FORBIDDEN: /Users/cstokes/Desktop/settlement-engine/docs/ EXCEPT ${STANDARD} (READ-ONLY); /Users/cstokes/.claude/projects/ (memory); scratchpad files you did not create. Evidence base = the worktree at ${WT} (verify branch claude/composite-r4 tip ${TIP}; READ-ONLY — never edit/commit/touch git) plus probes under ${SCRATCH}/cold-rerun-<your-key> (create it). HARNESS: full suite exceeds a 10-min cap — FOCUSED test files only; ONE vitest at a time (shared machine); check-domain-strict.mjs bare never piped; pglite needs --no-file-parallelism; a slow/failing run may be contention — re-run that file ALONE before believing it. Judge the ARTIFACT.`
+
+const OUT_BAR = `OUTPUT — return ONLY a JSON object, no prose, no markdown fence, every string within its cap so the object stays small and valid:
+{"bar":<n>,"grade":"A+"|"A"|"A-"|"B+"|"B"|"C-or-below","ceiling_limited":true|false,"ceiling_reason":"<=300","findings":[{"title":"<=90","severity":"must-fix"|"should-fix"|"polish","claim":"<=340","scenario":"<=340","location":"<=160","evidence":"executed"|"inspected"}],"strengths":["<=180", ...up to 3],"evidence_note":"<=380"}
+At most 8 findings, most material first.`
+
+const BARS = [
+  { n: 3, name: 'EXPERIENCE', key: 'bar3-experience' },
+  { n: 4, name: 'SUBSTANCE', key: 'bar4-substance' },
+  { n: 9, name: 'ACCESSIBILITY', key: 'bar9-accessibility' },
+  { n: 11, name: 'DETERMINISM', key: 'bar11-determinism' },
+  { n: 20, name: 'THE STORY', key: 'bar20-thestory' },
+]
+
+phase('Re-run')
+const barThunks = BARS.map((b) => () => agent(
+  `${COLD}
+
+YOUR CHARGE: Read bar ${b.n} ("${b.name}") in ${STANDARD} — its exact words are your entire grading law (also read the tiers + meta-criterion). Survey the product at ${WT} against it as a full-skill stranger: find everything MATERIAL — defects, gaps, unproven or overstated claims, places the bar's A+ words are not yet true of the artifact. Grade honestly (A+ = the bar's maximal expression holds AND is structurally enforced). ceiling_limited=true ONLY if the residual gap is certifiable by nothing but real users, a soak, or owner-only action. If bar ${b.n} is THE STORY (20): you must actually retell a seeded decade — find the repo's deterministic advance-harness idiom in ${WT}/tests, drive a world ~a decade, and judge whether discoverable receipt-backed ARCS exist (cause→escalation→turn→consequence) or only event lists; a decade only summarizable as "things happened" is a fail.
+
+${OUT_BAR}`,
+  { label: b.key, phase: 'Re-run', model: 'opus' }
+))
+
+const storeThunk = () => agent(
+  `${COLD}
+
+YOUR CHARGE — adversarial deep review of ONE subsystem: **store-registries** — the store slices other than campaignSlice/mapSlice (enumerate src/store), operationRegistry.js + its walker, the flag plumbing (src/lib/flagRegistry.js lean leaf vs src/lib/flags.js prose sidecar), and COMMITTABLE_EDIT_KINDS. Read the region IN FULL. Hunt MATERIAL defects: a new store action missing from operationRegistry (the walker's own blind spots), a dispatcher kind not in COMMITTABLE_EDIT_KINDS, flag defaults diverging between flagRegistry and flags.js, registry entries that drift from the actions they name, lifecycle writes dropped on persist/undo/clone. Try to REFUTE the region's guarantees and execute focused probes.
+
+OUTPUT — return ONLY a JSON object, no prose/fence, strings within caps:
+{"subsystem":"store-registries","health":"sound"|"sound-with-findings"|"concerning","findings":[{"title":"<=90","severity":"must-fix"|"should-fix"|"polish","claim":"<=340","scenario":"<=340","location":"<=160","evidence":"executed"|"inspected"}],"evidence_note":"<=380"}
+At most 10 findings, most material first.`,
+  { label: 'sub-store-registries', phase: 'Re-run', model: 'opus' }
+)
+
+const raw = await parallel([...barThunks, storeThunk])
+
+// Parse the raw JSON strings defensively (strip any accidental fence).
+const parsed = raw.map((s, i) => {
+  if (!s || typeof s !== 'string') return { _error: 'empty', idx: i }
+  let t = s.trim()
+  const a = t.indexOf('{'); const b = t.lastIndexOf('}')
+  if (a >= 0 && b > a) t = t.slice(a, b + 1)
+  try { return JSON.parse(t) } catch (e) { return { _error: String(e).slice(0, 120), idx: i, head: s.slice(0, 200) } }
+})
+
+const ok = parsed.filter((p) => p && !p._error)
+const bad = parsed.filter((p) => p && p._error)
+log(`Re-runs parsed: ${ok.length} ok, ${bad.length} failed-parse`)
+return { reruns: parsed }

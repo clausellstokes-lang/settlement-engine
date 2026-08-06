@@ -1,0 +1,74 @@
+export const meta = {
+  name: 'spatial-rounds-7-9-ground-and-stress',
+  description: 'Ground the NEW spatial-engine rounds (7-9: movement modalities, governance, Rumors & News, carriers) against the tree + stress-test the full 9-round system',
+  phases: [
+    { title: 'Ground', detail: 'map the substrate the new layers need (rumor events, channel topologies, governance, modalities, premium seam)' },
+    { title: 'Stress-test', detail: 'attack rumor determinism/perf, dormancy/premium, and full-9-round completeness/contradiction' },
+  ],
+}
+
+const DESIGN = 'docs/PHASE55_SPATIAL_ENGINE_DESIGN.md'
+const ROOT = '/Users/cstokes/Desktop/settlement-engine'
+
+const GROUND_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  properties: {
+    system: { type: 'string' },
+    persists_or_exposes: { type: 'string', description: 'what state/events/graph this exposes that the new layers would read' },
+    key_files: { type: 'array', items: { type: 'object', additionalProperties: false, properties: {
+      file: { type: 'string' }, lines: { type: 'string' }, what: { type: 'string' } }, required: ['file','what'] } },
+    attachment_points: { type: 'string', description: 'concretely where the round-7/8/9 mechanic attaches' },
+    gaps: { type: 'string', description: 'what is MISSING/must be built for the design; be specific' },
+    feasibility: { type: 'string', enum: ['green','yellow','red'], description: 'green=exists+hooks cleanly; yellow=exists but real new work; red=absent/conflicts' },
+  },
+  required: ['system','persists_or_exposes','key_files','attachment_points','gaps','feasibility'],
+}
+const CRITIQUE_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  properties: {
+    axis: { type: 'string' },
+    findings: { type: 'array', items: { type: 'object', additionalProperties: false, properties: {
+      severity: { type: 'string', enum: ['high','med','low'] },
+      claim: { type: 'string' }, evidence: { type: 'string' }, mitigation: { type: 'string' },
+    }, required: ['severity','claim','mitigation'] } },
+    verdict: { type: 'string' },
+  },
+  required: ['axis','findings','verdict'],
+}
+
+const preamble = `Ground a design doc against a REAL codebase. Repo root: ${ROOT} (cwd; relative paths). Read ${DESIGN} — focus on §4c-§4f (migration, movement modalities, Rumors & News, carriers), the II.5 SETTLED decisions, and PART II (the prior grounding verdict for rounds 1-6, already done — do NOT re-ground the cost field; rounds 7-9 are your target). Then investigate ONLY your assigned system in OUR tree (src/**, supabase/**). Report what ACTUALLY exists with file:line facts; do not speculate about unopened code. Reference (read-only, NOT ours): /Users/cstokes/Desktop/settlement-generator/settlement-engine.`
+
+const GROUND_AREAS = [
+  { key: 'rumor-event-substrate', label: 'rumor event substrate (round 8)', focus: `The Rumors & News layer needs STRUCTURED, TYPED events to propagate. Investigate OUR event emission: worldPulse (pulseKernel + the *Dynamics modules), the W-C5 causeLifecycle, any newsfeed/headline/eventLog system. Do emitted events carry structured fields the rumor layer needs — WHO/WHAT/WHERE(origin settlement)/WHEN(tick)/MAGNITUDE/CAUSE/type? Is there ALREADY a SIGNIFICANCE / salience / drama / severity signal (round-8 needs it for the triage gate + how far news travels)? Where would a rumor PAYLOAD + fidelity score attach? Is there an existing per-settlement news/rumor surface to build the tab on?` },
+  { key: 'channel-topologies', label: 'the 7 carrier channel topologies (round 9)', focus: `Round 9 propagates news over a UNION of channel graphs. For EACH of the 7 carriers, report whether a traversable graph/flow exists TODAY (PRESENT spatial / ASPATIAL-only / ABSENT): (1) TRADE — regionalGraph edges / trade links; (2) ARMIES — does army/deployment state MOVE between settlements spatially, or is it static per-settlement? (3) REFUGEES — the round-5 migration flow (distributeMigrants / migrationFlows) — is it route-based or abstract? (4) FAITH NETWORK — is there a CO-RELIGIONIST graph (settlements linked by shared deity/religion), distinct from geography? (religionState / faith share-ledger?) (5) SMUGGLE network; (6) COURIER/postal institution TYPE (is there a courier/messenger institution or comms institution?); (7) MAGIC/teleport link. This tells the architect which channels ride existing state vs are net-new.` },
+  { key: 'governance-allegiance', label: 'governance + faction allegiance depth (round 7)', focus: `The cultureDistance governance term needs: powerStructure.governanceType / governingName / previousGovernments — HOW does the generator POPULATE these (a fixed enum of governance types? free strings?), and how rich? Is there a FACTION ALLEGIANCE / overlord / sovereignty graph (which settlements answer to which power — for the "same overlord" sub-term and the conquest→governingName flip)? Where does settlement ALIGNMENT live (for regime legitimacy axis)? Enough substrate to build the regime-type 3-axis distance + governing-power-identity term as a pure selector?` },
+  { key: 'modality-substrate', label: 'movement-modality substrate (round 7)', focus: `Round 7 = isolation / teleport circles / airships. Investigate: (a) any precedent for a per-settlement CAPABILITY FLAG gated additive behavior (e.g. the W-C1 supplyQuality flag, the magic opt-out) — for airship capability; (b) the MAGIC OPT-OUT — how does a magic-free settlement cleanly suppress magic features today (magicProfile / magicFilter)? — teleport circles must be absent there; (c) authored-edge precedent (DM forced-road / any user-authored graph edge) — for teleport links; (d) does anything derive connectivity/reachability between settlements today (for isolation as an emergent state)?` },
+  { key: 'premium-visibility-seam', label: 'premium / visibility seam for the DM-vs-player rumor reveal (round 8)', focus: `The Rumors & News DM/player asymmetry must reuse OUR constitutional premium seam: the FaithSection gating (free/anon = no deity names) + the visibilityAudit read-model just ported in W4h (src/domain/display/visibilityAudit.js — confirm it landed). Investigate faithPanelModel / FaithSection gating + visibilityAudit + the tier gates (authSlice TIER_GATE) — can the rumor tab's "player-facing rumor vs DM ground-truth reveal" reuse these exact patterns? Where does the premium/DM entitlement get read for a dossier tab? Confirm the seam the rumor reveal must plug into.` },
+]
+
+phase('Ground')
+const ground = await parallel(GROUND_AREAS.map(a => () =>
+  agent(`${preamble}\n\nYOUR SYSTEM: ${a.label}.\n${a.focus}\n\nReturn structured facts, concrete file paths + line ranges, honest feasibility.`,
+    { label: `ground:${a.key}`, phase: 'Ground', schema: GROUND_SCHEMA, effort: 'medium' })
+))
+const groundOk = ground.filter(Boolean)
+log(`Grounded ${groundOk.length}/${GROUND_AREAS.length} systems`)
+const digest = groundOk.map(g =>
+  `### ${g.system} [${g.feasibility}]\nEXPOSES: ${g.persists_or_exposes}\nFILES: ${(g.key_files||[]).map(f => `${f.file}${f.lines?':'+f.lines:''} (${f.what})`).join('; ')}\nATTACH: ${g.attachment_points}\nGAPS: ${g.gaps}`
+).join('\n\n')
+
+const CRITIQUE_AXES = [
+  { key: 'rumor-determinism-perf', label: 'Rumors: determinism + performance (rounds 8-9)', focus: `Same-seed byte-identity + bounded cost. Attack the rumor layer: the round-9 MULTIGRAPH propagation (news over 7 overlaid channel-graphs simultaneously) — iteration order across channels/settlements/rumor-packets (Map/Set order), seeded fork keys for distortion+completeness+scatter draws, the hop-by-hop already-reached guard per (settlement,event,channel). Performance: 7 channels × events × settlements × hops — does it explode? Is the ledger bounded by significance+expiry, and is the entrepôt cross-confirmation (reconcile N versions) cheap? Where does the rumor mill most likely break replay or blow up, and the fix.` },
+  { key: 'rumor-dormancy-premium', label: 'Rumors: dormancy + premium + endogeneity + goldens (round 8)', focus: `Attack the seam: does adding a rumor/news layer to worldState + the dossier perturb the GOLDEN corpus even when DORMANT (no canon map / no trade / free-anon)? The DM ground-truth reveal must hold the faith-seam gate — is there ANY path where a free/anon/lapsed viewer sees the ground truth, provenance, or a gated deity name via the rumor tab? Endogeneity: is the rumor mill truly world-driven, or does anything let the party feed propagation/fit math? Confirm the dormant-⇒-prior-bytes + premium-⇒-gated + party-independent properties actually hold, or where they leak.` },
+  { key: 'full9-completeness', label: 'Full 9-round completeness / contradiction / build-order', focus: `Read all 9 rounds + II.5 as ONE system. NEW cross-round conflicts introduced by rounds 7-9: (a) the round-9 faith-network is a SEPARATE topology (co-religionists, not geography) and carriers form a MULTIGRAPH — does that contradict the round-6 keystone (ONE frozen single-graph cost-field digest)? How is a non-geographic channel frozen/determinized? (b) governance + culture are LIVE reads while geometry is FROZEN — is that boundary coherent and stated? (c) rounds 8-9 carriers RIDE movers (armies, refugees, caravans, smuggle-runs, teleport) that themselves aren't built yet — what's the DEPENDENCY ORDER? (d) revise the minimal v1 BUILD SLICE for the full 9 rounds — where does Rumors & News sit (the owner called it the crown / a top priority — is it buildable earlier than the full military layer)? (e) any NEW owner decision rounds 7-9 surface. Be concrete.` },
+]
+
+phase('Stress-test')
+const critique = await parallel(CRITIQUE_AXES.map(c => () =>
+  agent(`Adversarial design critic for Phase 5.5 spatial engine (read ${DESIGN} in full first, esp. rounds 7-9 §4c-§4f + PART II; repo root ${ROOT}). Axis: ${c.label}.\n\n${c.focus}\n\nGROUNDING DIGEST (what actually exists — make your critique concrete, not hypothetical):\n\n${digest}\n\nBe genuinely adversarial: real failure modes ranked by severity, each with a concrete mitigation. No padding.`,
+    { label: `critique:${c.key}`, phase: 'Stress-test', schema: CRITIQUE_SCHEMA, effort: 'high' })
+))
+const critiqueOk = critique.filter(Boolean)
+log(`Stress-tested ${critiqueOk.length}/${CRITIQUE_AXES.length} axes`)
+
+return { ground: groundOk, critique: critiqueOk }

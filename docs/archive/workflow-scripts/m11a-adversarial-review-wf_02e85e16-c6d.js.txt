@@ -1,0 +1,107 @@
+export const meta = {
+  name: 'm11a-adversarial-review',
+  description: 'Adversarial code review of the M11a pestilence mover (7 dimensions → find → 3-refuter verify)',
+  phases: [
+    { title: 'Find', detail: '7 dimension finders over the M11a diff' },
+    { title: 'Verify', detail: '3 adversarial refuters per candidate' },
+  ],
+}
+
+const RANGE = '5ea117ec..HEAD' // the M11a commit (82ad676b) vs its parent (the fold-in)
+const CONTEXT = `
+M11a — PESTILENCE mover (Phase 5.5), commit ${RANGE.split('..')[1]} on branch review-fixes-2026-07-08.
+Files: src/domain/spatial/pestilence.js (pure engine), src/domain/worldPulse/pestilenceKernel.js
+(adapter), src/domain/worldPulse/pulseKernel.js (dispatch ~line 1830), src/domain/worldPulse/
+candidateEvents.js (reconcile filter ~line 235), + 2 test files.
+DESIGN: a traveling-plague layer over the EXISTING disease_outbreak stressor (ONE PLAGUE TRUTH — no
+parallel system). An epidemic ledger nested under worldState.spatialLedgers (marker-gated, claimed
+ZERO eager bytes) tracks a front that spreads hop-by-hop along trade channels + M2 shipments at
+hopWeeks latency (seeded forks plague:spread:\${edgeId}:\${tick}), rolls onset (density/tier + trade
+volume MINUS a care counterforce read from the institution roster), and materializes the ordinary
+disease_outbreak stressor via normalizeStressor. The aspatial one-hop spread is RECONCILED OUT under
+the marker (M4 origin-loss rule — never both, no double-count).
+CONSTITUTIONAL LAWS this mover MUST hold: (1) same-seed BYTE-IDENTITY — all goldens unchanged;
+(2) DORMANCY — no marker / no epidemic ledger ⇒ byte-identical (the dispatch is unconditional but
+must be a true no-op off-marker, incl. the rng.fork being pure and the reconcile filter inert);
+(3) first-paint closure budget 1,255,985, claimed 0 eager (candidateEvents must stay LAZY, the
+pulseKernel import must not drag pestilence into the eager graph); (4) DETERMINISM — seeded forks
+only (no Date.now/Math.random), codepoint-sorted mutation, order-independent across settlements/edges;
+(5) AGGREGATE-population only — no named NPC touched; (6) the BRAKES must be real: care cap < 1
+(never immune), onset floor > 0 (never certain), recovery floor (no perma-front — every record
+clears), spread cascade cap (bounded per-tick spread).`
+
+const FINDINGS_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  properties: {
+    findings: {
+      type: 'array',
+      items: {
+        type: 'object', additionalProperties: false,
+        properties: {
+          file: { type: 'string' },
+          line: { type: 'number' },
+          summary: { type: 'string' },
+          failure_scenario: { type: 'string' },
+          severity: { type: 'string', enum: ['high', 'med', 'low'] },
+        },
+        required: ['file', 'line', 'summary', 'failure_scenario', 'severity'],
+      },
+    },
+  },
+  required: ['findings'],
+}
+
+const VERDICT_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  properties: {
+    refuted: { type: 'boolean' },
+    verdict: { type: 'string', enum: ['CONFIRMED', 'PLAUSIBLE', 'REFUTED'] },
+    reasoning: { type: 'string' },
+  },
+  required: ['refuted', 'verdict', 'reasoning'],
+}
+
+const DIMENSIONS = [
+  { key: 'correctness', focus: 'Line-by-line correctness of the PURE ENGINE (pestilence.js) + adapter math: propagation selection, onset draw, care counterforce (diminishing + cap), level ramp/relax, cascade cap, recovery-floor clearing, refractory. Hunt inverted/wrong conditions, off-by-one, falsy-zero (a 0 level/tick/volume treated as missing), wrong-variable copy-paste, NaN from a divide, a seeded-fork key that is not stable/unique.' },
+  { key: 'dormancy-byte-identity', focus: 'Is the wiring GENUINELY inert off-marker? The dispatch at pulseKernel.js:~1830 is UNCONDITIONAL — prove the kernel first-line no-op returns the SAME worldState ref + changed:false + empty newsEntries when dormant. Is rng.fork(\"pestilence\") pure (does it advance the parent rng and perturb downstream draws)? Does the candidateEvents reconcile filter change candidate ORDER or content when the marker is absent? Does snapshot?.worldState?.spatialCanonVersion actually resolve at that call site (or is it always undefined ⇒ filter dead)?' },
+  { key: 'determinism', focus: 'Determinism + order-independence: every mutation codepoint-sorted; no Date.now/Math.random/argless Date; iteration over settlements/edges/ledger is order-stable (Map/Object key order, sort before iterate); seeded forks from stable composite keys; no reliance on insertion order that a re-canonize or a shard reorder would break.' },
+  { key: 'one-plague-truth-reconcile', focus: 'ONE PLAGUE TRUTH + the reconcile (M4 origin-loss rule). Grep-verify no parallel plague state/level/catalog is minted — only type:disease_outbreak via normalizeStressor. Does materialization DEDUPE (never double-mint the stressor at a settlement that already has it)? Does the candidateEvents filter (drop stressor_spread_disease_outbreak under marker) correctly avoid BOTH double-count AND accidental total suppression (does the spatial front actually replace what it removed)?' },
+  { key: 'cross-file-integration', focus: 'The pulseKernel dispatch integration: are memoryState / wizardNews / applied.regionalGraph / roadSeason / now / rng the correct in-scope variables at line ~1830 (after M5)? Is the fold-back (if changed → memoryState = ...; if newsEntries → appendWizardNewsEntries) correct and matching the M4 migration dispatch? Is appendWizardNewsEntries called with the right signature? Could the dispatch run before a state the kernel reads is populated?' },
+  { key: 'brakes-invariants', focus: 'Are the BRAKES actually enforced, not just named constants? Prove care capacity is clamped < CARE_MAX_RELIEF(0.6) and onset >= ONSET_FLOOR(0.04) on ALL paths (not bypassable by a high roster or extreme trade volume). Prove RECOVERY_FLOOR_TICKS guarantees every front clears (no infinite re-seed / perma-front). Prove SPREAD_CASCADE_CAP + no-same-tick-cascade actually bounds per-tick seedings. Prove aggregate-only (no npcStates mutation).' },
+  { key: 'budget-eager', focus: 'The 0-eager claim. Is candidateEvents.js genuinely in a LAZY chunk (not first-paint)? Does the new import chain from pulseKernel → pestilenceKernel → pestilence pull anything into the eager first-paint graph? Does the epidemic ledger truly nest under the existing spatialLedgers conditional key (no new eager top-level key)? Flag any structural reason the closure could grow that a passing verify:dist might not have caught on THIS fixture set.' },
+]
+
+phase('Find')
+const results = await pipeline(
+  DIMENSIONS,
+  (d) => agent(
+    `You are an adversarial code reviewer. Review ONLY the M11a diff (run \`git diff ${RANGE}\` and read the enclosing functions of every hunk; also read the whole of pestilence.js + pestilenceKernel.js as needed).\n${CONTEXT}\n\nYOUR DIMENSION — ${d.key}: ${d.focus}\n\nReturn up to 6 candidate findings, each with a CONCRETE failure scenario (specific inputs/state → wrong output / crash / byte-drift / budget-growth / invariant-break). Only findings with a nameable failure scenario. If the dimension is clean, return an empty findings array. Do NOT flag pure style.`,
+    { label: `find:${d.key}`, phase: 'Find', schema: FINDINGS_SCHEMA, model: 'opus' },
+  ),
+  (review, d) => parallel((review?.findings || []).map((f) => () =>
+    parallel([0, 1, 2].map((i) => () =>
+      agent(
+        `You are refuter #${i + 1} (of 3), adversarially trying to REFUTE a code-review finding on the M11a pestilence mover. Default to refuted=true if the finding is not constructible from the actual code.\n${CONTEXT}\n\nTHE FINDING (dimension ${d.key}):\nfile: ${f.file}:${f.line}\nsummary: ${f.summary}\nfailure_scenario: ${f.failure_scenario}\n\nRead the actual code (git diff ${RANGE} + the file) and decide. REFUTED only if: factually wrong (quote the line), provably impossible (cite the type/constant/guard/invariant), already handled in the diff (cite the guard), or pure style with no observable effect. Otherwise CONFIRMED (constructible now) or PLAUSIBLE (realistic rare path). Set refuted=true for REFUTED, false for CONFIRMED/PLAUSIBLE.`,
+        { label: `verify:${d.key}:${f.line}:r${i + 1}`, phase: 'Verify', schema: VERDICT_SCHEMA, model: 'opus' },
+      )
+    )).then((votes) => {
+      const v = votes.filter(Boolean)
+      const refutes = v.filter((x) => x.refuted).length
+      return { ...f, dimension: d.key, votes: v, refutedCount: refutes, survives: refutes < 2 }
+    })
+  )),
+)
+
+const all = results.flat().filter(Boolean)
+const survivors = all.filter((f) => f.survives)
+const rank = { high: 0, med: 1, low: 2 }
+survivors.sort((a, b) => (rank[a.severity] ?? 3) - (rank[b.severity] ?? 3))
+log(`M11a review: ${all.length} candidates → ${survivors.length} survived 3-refuter verify`)
+return {
+  totalCandidates: all.length,
+  survived: survivors.length,
+  findings: survivors.map((f) => ({
+    severity: f.severity, dimension: f.dimension, file: f.file, line: f.line,
+    summary: f.summary, failure_scenario: f.failure_scenario, refutedCount: f.refutedCount,
+  })),
+}

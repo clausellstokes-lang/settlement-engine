@@ -1,0 +1,36 @@
+export const meta = {
+  name: 'credit-economics-survey',
+  description: 'Survey pricing promises, credit debit mechanics, AI call costs, and the history of the flat-price change',
+  phases: [{ title: 'Survey', detail: 'four parallel read-only lenses' }],
+}
+
+phase('Survey')
+
+const FINDINGS = {
+  type: 'object',
+  required: ['summary', 'evidence'],
+  properties: {
+    summary: { type: 'string', description: 'Direct answer to the lens question, 5-15 sentences, concrete' },
+    evidence: { type: 'array', items: { type: 'object', required: ['claim', 'where'], properties: { claim: { type: 'string' }, where: { type: 'string', description: 'file:line or commit hash' }, quote: { type: 'string', description: 'short verbatim quote if load-bearing' } } } },
+    surprises: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+const COMMON = `READ-ONLY recon in the MAIN tree /Users/cstokes/Desktop/settlement-engine (branch review-fixes-2026-07-08). Do NOT edit, stage, commit, or touch git state beyond read commands (git log/show/diff are fine). Do NOT touch .claude/worktrees/. Answer from code you actually read; quote file:line. If a claim cannot be verified, say so rather than guessing.`
+
+const results = await parallel([
+  () => agent(`${COMMON}
+LENS 1 — WHAT THE USER IS PROMISED. Report exactly what user-facing pricing surfaces say about AI credits: (a) the per-action credit cost table (which actions, how many credits each, any model/token mention); (b) the exact "the price is the price" language the owner remembers — find the verbatim copy and file:line; (c) any language promising price stability or fixed costs (tierFacts, FAQ, welcome/pricing docs); (d) whether ANY user-facing surface mentions tokens, models, or variable costs. Files to cover: src/config/pricing.js, src/config/tierFacts.js, src/components/PricingPage.jsx, src/components/pricing/, src/components/account/AccountFAQ.jsx, src/copy/en.js (grep credit/price/token), any docs/welcome or pricing markdown, public marketing copy.`, { label: 'lens:promises', phase: 'Survey', schema: FINDINGS }),
+
+  () => agent(`${COMMON}
+LENS 2 — HOW CREDITS ARE ACTUALLY DEBITED. Trace the real charging mechanism end to end: src/lib/creditLedger.js, every migration matching credit/billing/model (at least 007, 012, 015, 017, 018, 023, 024 — READ 023_explicit_models_and_plan_retention.sql IN FULL, it may be the owner-commissioned per-model system), the account-actions edge fn debit paths. Answer precisely: (a) when a user runs an AI action, what determines the number of credits debited — a flat per-action-kind constant, a per-model table, token counts, or something else? (b) does ANY table or column record input/output token counts or model ids per spend? (c) is there a cost/pricing table in SQL or code keyed by model? (d) are there TWO systems (a display schedule and a metering system), and if so do they agree? Quote the actual debit expression(s).`, { label: 'lens:debit-reality', phase: 'Survey', schema: FINDINGS }),
+
+  () => agent(`${COMMON}
+LENS 3 — WHAT AN ACTION ACTUALLY COSTS. Read every server path that calls an AI model (grep supabase/functions for anthropic/claude/openai/messages.create etc. — at least generate-chronicle, generate-narrative; find any others). For each: (a) which model id is used (hardcoded? configurable?); (b) is max_tokens capped and at what; (c) is the INPUT context bounded or does it grow with settlement/world size (this is the margin-risk question — estimate the realistic input token range from the prompt construction code); (d) is actual usage (input/output tokens) recorded anywhere (logs, tables, analytics) after the call; (e) any retry/fallback logic that multiplies cost. Also note whether the FINITE-SEMANTICS design (AI returns typed buckets, not free prose) bounds output in practice — read the response parsing to see the expected output shape and size.`, { label: 'lens:call-costs', phase: 'Survey', schema: FINDINGS }),
+
+  () => agent(`${COMMON}
+LENS 4 — THE HISTORY: why did it change? Git archaeology: (a) git log --follow --oneline on src/config/pricing.js, src/lib/creditLedger.js, and supabase/migrations/023_explicit_models_and_plan_retention.sql; (b) git log -S with terms like token, per-model, market price, price is the price (use plain -S strings, one at a time) across the repo to find when flat per-action credit costs and the price-is-the-price copy landed and whether a token-scaled or market-priced debit ever existed before; (c) read the commit messages (git show -s) of the relevant commits for recorded rationale — this repo writes rich ledger commits; also grep docs/ for pricing decision records (docs/COMPREHENSIVE_REVIEW_PROGRAM.md, any PRICING or BILLING doc). Deliver a dated timeline: what the original commissioned design was (if findable), what replaced it, when, and any written why. If no token-scaled system ever existed in history, say that plainly — absence is a finding.`, { label: 'lens:history', phase: 'Survey', schema: FINDINGS }),
+])
+
+const [promises, debit, calls, history] = results
+return { promises, debit, calls, history }

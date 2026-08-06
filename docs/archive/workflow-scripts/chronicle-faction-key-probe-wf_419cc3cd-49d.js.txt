@@ -1,0 +1,209 @@
+export const meta = {
+  name: 'chronicle-faction-key-probe',
+  description: 'Trace the true shape of ChroniclePanel aiSettlement fields and census the faction-key defect class',
+  phases: [
+    { title: 'Trace', detail: 'provenance, AI schema, generator shape, sibling census' },
+    { title: 'Verify', detail: 'adversarially refute each shape claim' },
+  ],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a04d3f325c72e62dd'
+
+const PREAMBLE = `You are investigating a repo at ${ROOT} (git branch claude/the-composite).
+READ-ONLY: do not edit, stage, commit, or run any git mutation. Do not run \`git stash\`.
+The worktree's node_modules is EMPTY; if you need to run tests use
+/Users/cstokes/Desktop/settlement-engine/node_modules/.bin/vitest from inside ${ROOT}.
+Report concrete file:line evidence for every claim. Distinguish CONFIRMED (you read the
+code or executed something) from PLAUSIBLE (inference). Your final text is the return value.`
+
+const SHAPE_SCHEMA = {
+  type: 'object',
+  properties: {
+    findings: { type: 'string', description: 'Full prose findings with file:line citations' },
+    keyNames: { type: 'string', description: 'The concrete field key names discovered, per record type' },
+    confidence: { type: 'string', enum: ['CONFIRMED', 'PLAUSIBLE'] },
+  },
+  required: ['findings', 'keyNames', 'confidence'],
+}
+
+phase('Trace')
+
+const TASKS = [
+  {
+    key: 'provenance',
+    prompt: `${PREAMBLE}
+
+QUESTION: What EXACTLY is stored in a chronicle entry's \`aiSettlement\` field?
+
+src/components/ChroniclePanel.jsx line 95 does \`const s = entry.aiSettlement || {}\` and then
+reads s.thesis, s.history, s.economicViability, s.institutions, s.npcs,
+s.powerStructure?.factions, s.powerStructure?.conflicts, s.stress, s.identityMarkers,
+s.frictionPoints, s.dmCompass.
+
+Trace the WRITE side exhaustively:
+- src/lib/chronicle.js
+- src/store/aiSlice.js (especially _appendChronicleEntry and every caller)
+- src/store/settlementSlice.js and src/store/index.js references to aiSettlement
+- anything that persists ai_data.chronicle
+
+Determine: is aiSettlement (a) the raw AI narrative response, (b) the full generator
+settlement object, (c) a merge of both, or (d) something else? Does it carry a
+powerStructure at all, and if so does that powerStructure come from the GENERATOR
+(deterministic sim) or from the AI response? Quote the actual assignment lines.
+
+Also: is there any transform/rename step (edge function response mapping, a normalizer,
+a sanitizer like src/domain/display/publicSafe.js) between the AI/generator object and
+what lands in aiSettlement? If keys get renamed anywhere, say exactly where and how.`,
+  },
+  {
+    key: 'ai-schema',
+    prompt: `${PREAMBLE}
+
+QUESTION: Does the AI narrative response (supabase/functions/generate-narrative) ever
+EMIT a powerStructure.factions array, and if so with what key names?
+
+Read exhaustively:
+- supabase/functions/generate-narrative/index.ts
+- supabase/functions/generate-narrative/prompts.ts (note lines 182-210, 517-580, 830-1030, 1290-1380)
+- supabase/functions/generate-narrative/entityRefWrapper.ts
+- any schema / validator / zod / JSON-schema definition of the AI response
+- supabase/functions/generate-chronicle/* (may be a separate producer)
+
+Critical distinction: prompts.ts appears to READ the incoming generator settlement's
+powerStructure to build prompt context. That is INPUT. I need to know about OUTPUT:
+what fields the model is instructed to RETURN, and whether the function merges any
+AI-returned faction records back into a powerStructure.
+
+If the AI returns faction-ish records, report the exact key names it is told to use
+(e.g. does the prompt schema say "name"/"description" or "faction"/"desc"?). Quote the
+prompt/schema text verbatim.
+
+Also check the "snapshotPath: 'powerStructure.factions'" machinery around prompts.ts:517
+and its \`extract\`/apply pair around line 528 — what key names does extract produce, and
+what does the apply function write back?`,
+  },
+  {
+    key: 'generator-shape',
+    prompt: `${PREAMBLE}
+
+QUESTION: What are the authoritative record key names produced by the deterministic
+generator for EACH of these settlement collections?
+
+- powerStructure.factions  (generatePowerStructure)
+- powerStructure.conflicts
+- institutions
+- npcs
+- stress / stressors
+- identityMarkers
+- frictionPoints
+
+Find the generator source (likely under src/generators/ or src/domain/ or src/lib/).
+For each collection, list the exact keys of a produced record. Prefer EXECUTED proof:
+if you can run a small node/vitest probe that calls the generator and prints
+Object.keys() of the first record of each collection, do that and paste real output.
+Use /Users/cstokes/Desktop/settlement-engine/node_modules/.bin/vitest from inside ${ROOT},
+or node with a temp script written to a scratch path outside the repo.
+
+Specifically confirm or refute: faction records carry \`.faction\` and \`.desc\`, NOT
+\`.name\`/\`.description\`.`,
+  },
+  {
+    key: 'consumer-census',
+    prompt: `${PREAMBLE}
+
+QUESTION: Census the faction-key defect CLASS across the whole repo.
+
+The canonical accessor is nameOf() in src/domain/rulingPower.js which reads
+\`.faction || .name\`. A bug was fixed on this branch (commits 25749ae5 and dc0b6e2b)
+where npcLadder read the wrong key. Read those two commit messages first
+(git log -1 25749ae5, git log -1 dc0b6e2b) for the full analysis and the shape of the fix.
+
+Now find EVERY other site that reads a display name or description off a
+powerStructure.factions record. Search broadly, not just for one spelling:
+- \`.factions\` member access and destructuring
+- \`powerStructure\` traversals
+- \`f.name\`, \`f?.name\`, \`faction.name\`, \`.description\` near faction context
+- PDF/export/foundry paths: src/pdf/, src/foundry/, src/utils/generateSettlementPDF.js
+- display/sanitize paths: src/domain/display/publicSafe.js
+- any component under src/components/
+
+For each site report: file:line, what key it reads, whether it routes through
+rulingPower.nameOf (correct) or hand-rolls an accessor (suspect), and whether the data
+reaching it is generator-shaped or AI-shaped. Give me a disposition ledger with a
+denominator: "found N sites, M correct, K suspect".`,
+  },
+  {
+    key: 'sibling-rows',
+    prompt: `${PREAMBLE}
+
+QUESTION: In src/components/ChroniclePanel.jsx lines 180-187, five sibling rows render
+records with hand-rolled accessors:
+
+  line 180 Institutions:  it?.name / it?.description
+  line 181 NPCs:          n?.name / n?.role / n?.description
+  line 182 Factions:      f?.name / f?.description
+  line 183 Conflicts:     string | c?.description | JSON.stringify(c)
+  line 184 Stressors:     st?.label / st?.description / st?.text
+  line 186 Identity Markers: raw item
+  line 187 Friction Points: fp?.who / fp?.what
+
+For EACH row, determine whether those key names match the real record shape that reaches
+this component. Compare against BOTH the deterministic generator's shape AND the AI
+narrative response shape (they may differ per collection — some of these collections may
+be AI-authored and some generator-authored).
+
+Look for other components that render the SAME collections correctly — e.g. the
+settlement tabs under src/components/new/tabs/, src/components/SettlementDetail.jsx,
+the PDF view model src/pdf/lib/viewModel.js. Those are the reference implementations:
+if a tab renders institutions with a different key than ChroniclePanel does, that is
+the tell.
+
+Report per row: MATCHES / MISMATCHED / PARTIAL (works for one source shape but not the
+other), with file:line evidence for the reference implementation you compared against.`,
+  },
+]
+
+const traced = await parallel(TASKS.map(t => () =>
+  agent(t.prompt, { label: `trace:${t.key}`, phase: 'Trace', schema: SHAPE_SCHEMA })
+    .then(r => ({ key: t.key, ...r }))))
+
+const good = traced.filter(Boolean)
+
+phase('Verify')
+
+const VERDICT_SCHEMA = {
+  type: 'object',
+  properties: {
+    refuted: { type: 'boolean', description: 'true if the claim is wrong or unsupported' },
+    reasoning: { type: 'string' },
+    corrected: { type: 'string', description: 'The corrected claim, if refuted' },
+  },
+  required: ['refuted', 'reasoning'],
+}
+
+const verdicts = await parallel(good.map(r => () =>
+  agent(`${PREAMBLE}
+
+You are an adversarial verifier. Another agent investigated "${r.key}" and reported:
+
+--- CLAIM ---
+${r.findings}
+
+KEY NAMES CLAIMED: ${r.keyNames}
+SELF-REPORTED CONFIDENCE: ${r.confidence}
+--- END CLAIM ---
+
+Your job is to REFUTE this. Independently re-derive the answer from source. Default to
+refuted=true if the claim rests on inference rather than read code, if it conflates the
+generator shape with the AI response shape, if it conflates prompt INPUT context with
+model OUTPUT, or if you cannot reproduce its file:line evidence.
+
+Pay special attention to the central question: does the object reaching
+ChroniclePanel.jsx's \`entry.aiSettlement\` carry powerStructure.factions records keyed
+\`.faction\`/\`.desc\` (generator shape) or \`.name\`/\`.description\` (hypothetical AI shape)?
+A wrong answer here causes a real user-visible bug to be either missed or "fixed" where
+it does not exist.`,
+    { label: `refute:${r.key}`, phase: 'Verify', schema: VERDICT_SCHEMA })
+    .then(v => ({ key: r.key, claim: r.findings, keyNames: r.keyNames, verdict: v }))))
+
+return { traced: good, verdicts: verdicts.filter(Boolean) }

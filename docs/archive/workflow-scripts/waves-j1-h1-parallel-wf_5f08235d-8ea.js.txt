@@ -1,0 +1,47 @@
+export const meta = {
+  name: 'waves-j1-h1-parallel',
+  description: 'J1 (route-network ledger + genesis) and H1 (durable NPC identity + world ledger) in parallel — engine-side slices, disjoint ownership',
+  phases: [{ title: 'Build', detail: '2 Opus implementers, disjoint files, no store actions', model: 'opus' }],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = {
+  type: 'object',
+  required: ['agent', 'fixes'],
+  properties: {
+    agent: { type: 'string' },
+    fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } },
+    behavior_shifts: { type: 'array', items: { type: 'string' } },
+    discovered: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+const SHARED = `Worktree: ${ROOT} branch claude/composite-r4 — verify with \`git -C ${ROOT} rev-parse --abbrev-ref HEAD\`; stop on mismatch. THREE CONCURRENT WRITERS share this tree: wave D (application commands, supabase/migrations/193, SettlementsPanel-adjacent UI, tests/security pglite — NEVER touch), the owner's wizard-news session (wizardNews/settlementRumors/heraldRouting/informationStatecraft/momentum/supplyWebWarfare + their tests — FOREIGN, never touch, its ratchet reds are attributed), and your sibling agent (its ownership stated below — never touch). A soak may be live: never touch artifacts/soak/**; focused vitest only, one at a time; timeout-shaped reds get ONE isolation re-run. HARD RULES: NO store actions in this slice (engine-side only — if one seems unavoidable, defer and report; the regen chain is owned by wave D right now); no migrations; no git mutations; no full suites/builds; no golden re-records (dormancy goldens must stay green untouched); no ratchet raises; determinism laws (seeded forks; the wave-E instruments are house idioms: Weyl sampler src/domain/lowDiscrepancy.js for any cell subsampling, draw accounting for stream-theft pins, seed-family totality for restriction pins, structural purity scans); headless domain; 800-line ceiling (split leaves); anchored negatives; JSON-round-trip persistence pins; no em dashes in src/domain|src/data string literals; conditional worldState keys drop-when-empty (the armyTransit/satellites pattern). THE CERTIFICATION TOTALITY WALKER guards all rule keys: you MUST author your new rule key's certification row in YOUR lane file (read src/domain/certification/subsystemCertification.js for the shape) — traced evidence channels, honest expectedTempo, at least one receipt-expressible invariant. Return dense structured data: statuses, files, verbatim test tails, negative-control quotes (revert/red/restore/green per new pin), behavior shifts plainly, judgment calls vetoable, discovered adjacencies.`
+
+phase('Build')
+const results = await parallel([
+  () => agent(`You are an Opus IMPLEMENTER for SettlementForge. SLICE J1 of the route-lifecycle program: THE NETWORK LEDGER + GENESIS. BINDING LAW: docs/DESIGN_ROUTE_LIFECYCLE.md — §1 (all eight laws), §3 (the canonical model: spatialLedgers.routeNetwork with edges + corridor, RouteEdge shape, deterministic edgeIds route.<a>.<b>.<mode> codepoint-ordered, bounded candidate sets — k-NN pairs + edge endpoints + port pairs, NEVER all-pairs), §8 (ports totality at genesis). ${SHARED}
+
+YOUR OWNERSHIP: new files src/domain/worldPulse/routeNetwork*.js (split leaves under the ceiling), your certification row in src/domain/certification/subsystemRowsWaves.js (rule key routeLifecycleEnabled), tests/domain/routeNetwork*.test.js, and the dormancy golden fixture your pin needs. READ-ONLY: spatial modules, roads/seaRoads (geometry derivation refs — geometry is DERIVED via travelersGeometry/seaRoads, never stored when derivable), tradeRouteSemantics (genesis access vocabulary incl. the seasonal tier), the k-NN leaf (src/domain/region/neutralNeighbourEdges.js — reuse its k-nearest derivation, do not duplicate it).
+
+IMPLEMENT (J1 ONLY — no charter/decay events, no flows, no consumers; those are J2/J3/J4):
+1. The ledger model + accessors (conditional spatialLedgers key, drop-when-empty; dormant ⇒ absent ⇒ byte-identical, fenced dormancy golden aspatial + spatial).
+2. GENESIS DERIVATION at world-connect: initial edges from each member's genesis access vocabulary + the k-NN neighbor structure + PORTS TOTALITY (every port with a navigable counterpart gets a water edge, flavor genesis) — grades per §3, provenance 'generated', deterministic (seed-family pinned, two-pass + structural purity per the wave-E instruments).
+3. The corridor ledger SHAPE only (empty at genesis; J2 fills it) — the bounded candidate-set law pinned structurally (a candidate-enumeration cap pin).
+4. Pins with executed negative controls: dormancy; genesis determinism; ports totality (a port realm fixture + the landlocked negative); edge-id determinism + codepoint ordering; JSON round-trip through campaignState; the user-route ADOPTION seam honored (config._userRoutes entries — wave D's provenance home — are recognized by the ledger reader as provenance 'user' and lifecycle-immune-flagged; coordinate through the DESIGN DOC's convention only, never by importing wave D's in-flight code).`, { label: 'wJ1:network-ledger', phase: 'Build', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(`You are an Opus IMPLEMENTER for SettlementForge. SLICE H1 of the NPC-consequences program: DURABLE IDENTITY + THE WORLD LEDGER. BINDING LAW: docs/DESIGN_NPC_CONSEQUENCES.md — §1 (all seven laws, especially 6 CONSERVATION and 7 AUDIENCE PROJECTION), §3a (identity graduated by consequence: wnpc_<seededHash> minted ONCE, deterministic, collision-checked, one-way, idempotent; roster locals stay positional), §3b (worldState.npcLedger: roamers/placed/exclusions; RoamerRecord with dmTruth; ReputationFacets as closed banded facets per THE FACET LAW — read DESIGN_NPC_LIFECYCLE.md's facet vocabulary and conform), §10 (lifecycle paths). ${SHARED}
+
+YOUR OWNERSHIP: new files src/domain/worldPulse/npcLedger*.js (split leaves), your certification row in src/domain/certification/subsystemRowsPeople.js (rule key npcConsequencesEnabled), tests/domain/npcLedger*.test.js, dormancy golden fixture. READ-ONLY: regenerationPreservation (the slot machinery you must NOT disturb), npcGenerator id conventions, publicSafe/audience projection seams, the facet law doc.
+
+IMPLEMENT (H1 ONLY — no verdicts, no circulation, no UI/verbs; those are H2/H3/H4):
+1. The npcLedger model + accessors (conditional worldState key, drop-when-empty, dormant ⇒ byte-identical, fenced dormancy golden).
+2. IDENTITY GRADUATION: mintDurableNpcId(settlementSeed, rosterIdentity, tick) — deterministic seeded hash, collision-checked against the ledger, ONE-WAY and IDEMPOTENT (pinned: re-graduating returns the existing id, never re-mints); graduation records the roster linkage without touching positional ids or the _preservation machinery (pinned: locks/pinnedNpcs remap behavior byte-unchanged).
+3. ReputationFacets as closed banded facets (notoriety band, edict mark, scandal class, alignment-read, competence-read — THE FACET LAW's shapes); ExclusionEdge shape with windowed/indefinite variants.
+4. AUDIENCE PROJECTION (Law 7): the ledger's public/player projection strips dmTruth structurally (anchored negative: zero dmTruth keys reach a player projection; the includeCovert seam extended — find and extend the existing projection convention, never fork one).
+5. Pins with executed negative controls: dormancy; mint determinism + idempotency + one-way; collision handling; JSON round-trip; projection stripping; conservation shape (a graduation neither duplicates nor removes an NPC — census pin over both alias homes npcs[] and factions[].members[]).`, { label: 'wH1:npc-ledger', phase: 'Build', schema: SCHEMA, model: 'opus' }),
+])
+
+const all = results.filter(Boolean)
+log(`${all.length}/2 parallel slices returned`)
+return { results: all }

@@ -1,0 +1,31 @@
+export const meta = {
+  name: 'round22-grounding',
+  description: 'Ground the three owner round-22 refinements (plague trade-refusal, dependency-from-flow, commodity continuity) against the committed tree',
+  phases: [{ title: 'Ground', detail: '3 parallel readers: economics-tab dependency derivation, embargo/severance seams, commodity substrate' }],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine'
+const SCHEMA = {
+  type: 'object', additionalProperties: false,
+  required: ['question', 'findings', 'seams', 'risks'],
+  properties: {
+    question: { type: 'string' },
+    findings: { type: 'array', items: { type: 'string' }, description: 'code-grounded facts with file:line anchors' },
+    seams: { type: 'array', items: { type: 'string' }, description: 'the exact insertion points the new mechanic would plug into' },
+    risks: { type: 'array', items: { type: 'string' }, description: 'constitutional/architectural risks (byte-identity, cardinality, double-count, eager bytes)' },
+  },
+}
+
+phase('Ground')
+const QUESTIONS = [
+  { key: 'economics-dependency', q: `How does the ECONOMICS TAB / read-model layer derive "trade dependency" TODAY in ${ROOT}? The owner wants it re-derived (under spatial mode only) from MEASURED PHYSICAL FLOW — caravan arrivals (M2 supplyShipments), docks, airship dock institutions, teleportation — with "no movers = no trade effects". Find: (1) where the economics tab UI reads trade/dependency (src/components economics/trade tabs, src/domain/display read-models); (2) what the CURRENT derivation inputs are (declared trade links? channels? deriveRegionalState? tradeSalience? economicState fields?); (3) whether any throughput/arrival COUNT exists anywhere yet (M2's ledger records in-transit — is anything accumulating arrivals?); (4) where the airship dock / docks institutions are detectable in the roster (blockadeTransport references?); (5) the constitutional gating question — how would the read-model switch on the spatialCanonVersion marker while the aspatial path stays byte-identical? Cite file:line.` },
+  { key: 'embargo-severance', q: `Ground the TRADE-REFUSAL seams in ${ROOT}. The owner wants settlements to REFUSE caravans from settlements they BELIEVE are plagued (belief/rumor-driven, not ground truth), at a cost to their own trade. Find: (1) the existing embargo machinery — the gap-analysis inventory mentioned "conscience embargoes" and trade-war escalation (grep embargo/tradeWar/refus in src/domain); how are embargo DECISIONS made today (thresholds? hysteresis? seeded?); (2) M2's severance/hostility predicate shapes — supplyShipments.js pickSource/stepSupplyLink take sourceSevered(id) + isHostileToDestination(id) predicates supplied by supplyKernel.js: exactly how does supplyKernel build those predicates today (file:line), and is that where a quarantine-refusal predicate would plug in; (3) the belief read — beliefMap.js belief(observer, subject, worldState): what does a belief record carry (could it carry/see a plague fact? how do rumors carry event types — rumorNetwork.js event kinds); (4) how war DECLARATION decisions handle the scalar→decision threshold pattern (settlementStrategy) — the model for a refusal decision with hysteresis. Cite file:line.` },
+  { key: 'commodity-substrate', q: `Ground the COMMODITY-FLOW substrate in ${ROOT}. The owner wants goods to have physical origin→destination continuity: a caravan carrying ore departs from an ore-EXPORTING settlement with FINITE stock; intermediary settlements that consume ore TAP the caravan en route; the destination's quantity stockpile drains until another sourced caravan arrives. Find: (1) M2's current denominations — supplyShipments.js BUFFER_WEEKS (time-denominated buffers), the producer side (rankSupplySources takes producerIds — from where does supplyKernel derive producers, and are they INFINITE fountains today?); (2) production quantities — do activeChains / economicState / goodsCatalog / tradeGoodsData carry any RATE or QUANTITY (production per tick, export volume), or only categorical exports/imports? (3) the M6 playbook spec (docs/PHASE55_EXECUTION_PLAYBOOK.md "### M6") — its current scope (entrepots/tolls, gate-crossings of active M2 shipments) — quote it; (4) where qualitative BANDS exist today (shortage/adequate/surplus style prosperity/supply reads) that a stock-level band could feed WITHOUT numeric prices (prices are backlog-frozen); (5) cardinality risk — what would a per-(settlement,good) stock ledger cost, and what sparsity discipline exists (which goods does a settlement actually produce/consume per activeChains)? Cite file:line.` },
+]
+
+const results = (await parallel(QUESTIONS.map(x => () =>
+  agent(`You are grounding an architecture round for SettlementForge (deterministic D&D settlement sim) at ${ROOT}, branch review-fixes-2026-07-08. Answer with code-verified facts ONLY — grep/read the named files; cite file:line for every finding. Do not speculate; where something does not exist, say so explicitly (absence is a finding).\n\n${x.q}`,
+    { label: `ground:${x.key}`, phase: 'Ground', schema: SCHEMA })
+))).filter(Boolean)
+
+return { results }

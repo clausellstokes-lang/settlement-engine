@@ -1,0 +1,30 @@
+export const meta = {
+  name: 'war-amendments-cohesion',
+  description: 'Adversarial cohesion check of the restructured war amendments vs the corpus',
+  phases: [{ title: 'Verify', detail: '5 corpus-slice checkers + 1 completeness critic' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const DOC = `${MF}/docs/DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md`
+const PRE = `VERIFY-FIRST: adversarial COHESION CHECK for a design document (legitimate owner-ordered verification; read-only — NO edits, NO git). Read ${DOC} IN FULL first (the working-tree version, which is newer than HEAD). Then audit it against your assigned corpus slice. Report REAL conflicts, contradictions, duplications, and violated laws — with the exact quote from each side. Do NOT report style preferences. Your final output is raw data for the architect.`
+const S = { type:'object', required:['conflicts','confirmations','notes'], properties:{
+  conflicts:{type:'array',items:{type:'object',required:['claim','docSide','corpusSide','severity'],properties:{
+    claim:{type:'string'},docSide:{type:'string'},corpusSide:{type:'string'},severity:{type:'string'}}}},
+  confirmations:{type:'array',items:{type:'string'}},
+  notes:{type:'string'}}}
+
+phase('Verify')
+const out = await parallel([
+  () => agent(`${PRE}
+SLICE: GRAMMAR — ${MF}/docs/DESIGN_FP_GRAMMAR.md. Check: the new term rows (tribute five, embargo_compact, route_restriction) against TERM_CATALOG closure discipline + R3 canonicality + the no-producer-less-term law + the pact-endings-vs-compliance-states distinction; the olive-branch/rapprochement arm vs GR-2's CLOSED trigger set (four + renewal — does adding an arm re-open a closed vocabulary? how must it be done lawfully?); embargo_compact's third-party reference vs the pairwise law and existing term shapes; TB-6's valuation-persistence assumption vs SP-3/negotiationPictures' actual spec.`, {label:'check:grammar', phase:'Verify', model:'opus', schema:S}),
+  () => agent(`${PRE}
+SLICE: TRADE — ${MF}/docs/DESIGN_FP_TRADE.md. Check: TB-4's claims against T1-T10 (esp. T2 no-coin, T7 double-count, T8 belief discipline, T9 shared-substrate fence); the casus commercii mirror/bijection walker vs TB-LAW-8's self-pricing claim (is market_exclusion actually a TR-1 mirror token? quote it); the embargo lever + severance drafting claims vs TR-5/TR-6; the inequity read vs the two-scarcities seam and the universality clause; dispatch-EV as embargo_compact's consumer vs TR-3's specced dispatch reads.`, {label:'check:trade', phase:'Verify', model:'opus', schema:S}),
+  () => agent(`${PRE}
+SLICE: WAR — ${MF}/docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md. Check: CV-1..4 against WR-6's actual join/exit/settle spec (duplication? contradiction? does WR-6 already carry exit shapes CV-1 re-mints?); the cold edge vs WR-1's termination read + whitePeace precedent; CV-2 vs WR-7b's interceptor kinds; the betrayal market vs the alliance-web risk read's specced inputs; TB-2's doctrine vs WR-8's feasibility/terms drafting + WR-10's bundle; alignment weights vs E3's exact statement + the ally-bar law.`, {label:'check:war', phase:'Verify', model:'opus', schema:S}),
+  () => agent(`${PRE}
+SLICE: INTERIOR + POPULATIONS — ${MF}/docs/DESIGN_FP_INTERIOR.md + ${MF}/docs/DESIGN_FP_POPULATIONS.md. Check: the healing lattice + saturation vs INT-5 (memory clocks) + INT-6 (burial suppression semantics — does saturation duplicate or contradict the burial's suppression-scope rulings J-INT-14?); the justice discount generalization vs INT-4's exact commons-term spec; the population levy vs POP's flow laws, J-POP-10, the arrival clearing (J-POP-15), departure memory causeClasses; the king-who-paid claims; gratitude bonds vs the interior's obligation records.`, {label:'check:int-pop', phase:'Verify', model:'opus', schema:S}),
+  () => agent(`${PRE}
+SLICE: COUPLINGS + SPINE — ${MF}/docs/DESIGN_FP_COUPLINGS.md + ${MF}/docs/DESIGN_FP_SPINE.md. Check: does any declared-EMPTY direction in the coupling volume forbid what TB-4/TB-5 build (quote each relevant declared-empty)? C-LAW-1..8 compliance (counterforce same-evidence, carrier clock, loud-fact usage, pacing registration); CW-0 same-commit obligations acknowledged; requirements 13+14 as stated in the spine vs §6's map and the req-14 lines (any violation of 'no settlement-alignment writer'?); SP-6 band-family rules vs the doc's significance-class assignments; SP-5b vs the betrayal-history decay shape claim.`, {label:'check:cpl-spine', phase:'Verify', model:'opus', schema:S}),
+  () => agent(`${PRE}
+SLICE: COMPLETENESS — run \`git -C ${MF} show HEAD:docs/DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md\` and diff its CONTENT (not text) against the working-tree version: list every substantive commitment, law, ruling, pin, receipt-line, or owner addendum present in HEAD that is MISSING or WEAKENED in the restructure (the restructure was a full rewrite — hunt dropped content). Also: internal consistency of the new version (wave numbering, flag names, cross-references §-to-§, the tuning table vs the waves' named bands).`, {label:'check:completeness', phase:'Verify', model:'opus', schema:S}),
+])
+return { checks: out.filter(Boolean) }

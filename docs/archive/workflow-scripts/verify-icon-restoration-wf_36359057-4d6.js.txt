@@ -1,0 +1,67 @@
+export const meta = {
+  name: 'verify-icon-restoration',
+  description: 'Adversarially verify the F24 data-layer icon restoration (commit dc3c9e63 range)',
+  phases: [
+    { title: 'Verify', detail: '3 independent Opus skeptics: glyph semantics, guard adversary, blast radius' },
+  ],
+}
+
+const REPO = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/ecstatic-noyce-115b4f'
+const CTX = `Repo worktree: ${REPO} (branch claude/ecstatic-noyce-115b4f, rebased on review-fixes-2026-07-08).
+The change under review: git log --oneline -2 shows a docs one-liner and the main commit
+"fix(data): the emoji-strip corruption class dies in the data layer too". View it with:
+  cd ${REPO} && git show HEAD~1 --stat   (main commit is the one touching src/data etc.)
+Files: src/data/supplyChainData.js, src/data/resourceData.js, src/data/stressTypes.js,
+src/generators/computeActiveChains.js, src/domain/display/threatAssessment.js,
+src/domain/inferSupplyChains.js, src/components/new/tabs/DefenseTab.jsx,
+tests/lint/copyCorruption.test.js, tests/fixtures/generator-golden-master.json.`
+
+const VERDICT = {
+  type: 'object',
+  required: ['findings', 'verdict'],
+  properties: {
+    verdict: { type: 'string', enum: ['clean', 'issues-found'] },
+    findings: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['file', 'summary', 'severity'],
+        properties: {
+          file: { type: 'string' },
+          line: { type: 'number' },
+          summary: { type: 'string' },
+          severity: { type: 'string', enum: ['must-fix', 'should-fix', 'nit'] },
+        },
+      },
+    },
+  },
+}
+
+phase('Verify')
+const lenses = [
+  {
+    key: 'glyph-semantics',
+    prompt: `${CTX}
+You are a hostile reviewer of the emoji choices. Read the icon diffs in the main commit (git show <sha> -- src/data src/generators src/domain). For EVERY restored glyph, check: (a) does it semantically match its label (e.g. resource label, stress label, service incomeLabel)? (b) is it a single well-formed emoji or emoji+VS16 — no ZWJ sequences, no orphan VS16, no skin-tone modifiers, nothing that could break the copyCorruption SIG 3 regex /[>'"\\s]️/ (orphan U+FE0F after quote/space/>)? (c) do identical resource labels get identical glyphs everywhere (grep for a few: 'Grazing land', 'Iron ore deposits', 'Hot springs')? (d) any glyph so modern/anachronistic it clashes with a medieval-fantasy settlement generator's tone? Report must-fix only for wrong pairings or malformed sequences; tone quibbles are nits. Return findings via StructuredOutput.`,
+  },
+  {
+    key: 'guard-adversary',
+    prompt: `${CTX}
+You are attacking tests/lint/copyCorruption.test.js as it now stands (SCAN_DIRS=['src'], SIG 1 = /\\b\\w*[Ii]con\\s*[:=]\\s*(?:""|'')/). Tasks: (1) construct corruption shapes of the F24 class (empty icon fields, orphan U+FE0F, ', ' fallbacks, comma-em-dash) that would SLIP past the four signatures — e.g. template literals, icon: \`\`, icon = '' in TS, needIcon:"", spacing variants — and check whether any such shape actually exists in src today (grep). (2) Hunt for FALSE POSITIVES: run the four regexes mentally/by grep across src/pdf, src/lib, src/kernel, src/hooks, src/store, src/config, src/design (newly scanned dirs) — find legitimate lines the widened scan would flag. (3) Verify the guard-on-guard canonical-forms test still compiles and its assertions match the new regex. Actually RUN: cd ${REPO} && npx vitest run tests/lint/copyCorruption.test.js. Report real escapes/false-positives as must-fix; theoretical-only shapes with zero repo instances as nits. Return findings via StructuredOutput.`,
+  },
+  {
+    key: 'blast-radius',
+    prompt: `${CTX}
+You are a blast-radius skeptic for the icon restoration. The claim: no consumer pins the OLD (empty/corrupt) icon values, and the PDF layer never renders these fields as glyphs. Attack it: (1) grep tests/ for any assertion, snapshot, or fixture depending on icon === '' or on specific icon values (beyond tests/domain/supplyChainState.test.js's needIcon:'🌾' fixture input). (2) Check the PDF pipeline: grep src/pdf for needIcon, resourceIcon, svc/service icon renders, and any react-pdf <Text> that could receive an emoji from crisis chips (viewModel crisis.chips[].icon, stress[].icon) — confirm every render is label||icon fallback with label always present (STRESS_TYPE_MAP all have labels). (3) Check serialization/storage: does any save/share/fingerprint path (src/lib/settlementFingerprint.js, structuralFingerprint.js, saves.js, chronicle.js) hash or length-check strings where multi-byte emoji could break an assumption (e.g. byte-length caps, .split on chars)? (4) Confirm tests/pdf/goldenViewModel.test.js.snap has zero icon keys. Actually RUN targeted checks with grep/node where cheap. Report only concrete breakage paths as must-fix. Return findings via StructuredOutput.`,
+  },
+]
+
+const results = await parallel(lenses.map(l => () =>
+  agent(l.prompt, { label: `verify:${l.key}`, phase: 'Verify', schema: VERDICT, model: 'opus' })
+    .then(v => ({ lens: l.key, ...v }))
+))
+
+const all = results.filter(Boolean)
+const mustFix = all.flatMap(r => (r.findings || []).filter(f => f.severity === 'must-fix').map(f => ({ lens: r.lens, ...f })))
+log(`${all.length}/3 verifiers returned; ${mustFix.length} must-fix findings`)
+return { verdicts: all.map(r => ({ lens: r.lens, verdict: r.verdict, findings: r.findings })), mustFix }

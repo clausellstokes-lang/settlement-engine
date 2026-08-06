@@ -1,0 +1,24 @@
+export const meta = {
+  name: 'design-council-ribbon',
+  description: 'Fable-max design consultation: how to improve the war-arrow ribbon overall (advisory only, exhaustive research)',
+  phases: [{ title: 'Counsel', detail: 'one Fable agent at max effort, research-free rein, written proposal only' }],
+}
+const SPEC = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/1c189f3d-9fc3-4fc9-9cb7-b767525d28d5/scratchpad/ribbon-v4-spec.md'
+const S = { type:'object', required:['assessment','recommendations','research','risks'], properties:{assessment:{type:'string'},recommendations:{type:'array',items:{type:'string'}},research:{type:'array',items:{type:'string'}},risks:{type:'array',items:{type:'string'}}}}
+phase('Counsel')
+const c = await agent(`YOU ARE THE DESIGN COUNSEL — advisory ONLY, you implement NOTHING, you edit NO repo file (scratchpad notes are fine). The owner of SettlementForge asked for your unbounded judgment on ONE question: how would you improve the site's top ribbon overall, in line with the owner's intent — the ARROW SHAFT motif, with Create/Library/Realm emphasized as the FEATHER FLETCHING, and the gilded wordmark/badge identity?
+
+THE FULL CONTEXT TO ABSORB FIRST:
+- The current implementation (landed + in flight): read ${SPEC} — the accepted V4 spec (cedar shaft, bole-bedded gold-leaf wordmark with gilded wax-seal o, four mirrored parallel feather slashes shingled toward Realm, quill-line gold indicator, photoreal texture with 1x/retina thresholds). A build lane is executing it now; the live code is at /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold (src/components/nav/*, src/components/brand/*, src/components/theme.js) and a dev server may serve http://localhost:5201.
+- The owner's journey to here (design intent, verbatim spirit): the ribbon is HALF OF A WAR ARROW seen in profile — a thin shaft, the workflow trio as this side's fletching (each tab feeding INTO the next, Create→Library→Realm), thread whipping securing the feathers, the name itself gilded onto the wood with a wax seal as the o of Forge; medieval, artisanal, photoreal-through-texture, never WoW-gloss; reference tabs stay quiet; the brand voice is illuminated-manuscript craft meeting RuneScape material honesty.
+- Prior research already banked (do not redo, build on): Blizzard's shipped UI textures pixel-censused (tier-by-material-swap, near-black fields, flat-silhouette emblems, NameShadow plates, asymmetric single-corner ornament); OSRS interface measured (chroma rationed under 1%, the 1px black keyline, inverted bevels, grit-not-gloss); heraldic craft (5:6 heater, rule of tincture as code, redraw-for-size assay doctrine, engraving-fails-on-dark); letter-substitution marks (counter preservation, mid-word safety, Roblox square-o); SVG determinism (31 degenerate turbulence seeds, within-engine byte stability).
+- The binding laws any recommendation must respect (or explicitly argue to change, with the cost priced): WCAG AA per rider against COMPOSITED grounds; paint-only overhang (header layout box fixed at CHROME.headerDesktop); deterministic rendering; one light direction; the seal only in the drawn wordmark; typed text stays plain; focus rings survive; no filters on ancestors; the dead-band wood-luminance law (body ≤ L 0.13); THE PROMISE (nothing seeded may shift without a ruled window).
+
+YOUR MANDATE: extensive and exhaustive research WHEREVER YOU CHOOSE — real fletching craft and bowyer photography, illuminated manuscript gilding, game UI teardowns beyond the two already done, film/prop design, typography on textured grounds, motion design for state changes, whatever sharpens your judgment. Then deliver:
+(a) ASSESSMENT — your honest critique of the current direction: what is already excellent and must not be touched, what is good-but-improvable, what (if anything) is a wrong turn, judged against the owner's intent.
+(b) RECOMMENDATIONS — ranked, concrete, buildable improvement proposals (composition, materiality, storytelling detail, hierarchy, hover/active/motion states, responsive behavior, how the arrow language should or should not extend to the rest of the chrome, the badge/identity system beyond the header). For each: what, why it serves the intent, roughly what it costs, and which binding law it touches.
+(c) RESEARCH — what you actually consulted and the load-bearing findings (cited to what you saw).
+(d) RISKS — where the design could tip over (kitsch, noise, legibility, performance), each with its tripwire.
+Advisory only. Depth over speed. Your final structured output is the deliverable the owner reads.`,
+  {label:'counsel:ribbon', phase:'Counsel', model:'fable', effort:'max', schema:S})
+return { counsel: c }

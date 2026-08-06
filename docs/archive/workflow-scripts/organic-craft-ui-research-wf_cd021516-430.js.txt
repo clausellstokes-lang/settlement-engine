@@ -1,0 +1,29 @@
+export const meta = {
+  name: 'organic-craft-ui-research',
+  description: 'Third design-research sweep: organic/handcrafted UI first principles feeding THE ORGANIC CRAFT LAW',
+  phases: [{ title: 'Research' }, { title: 'Critique' }],
+}
+const FINDINGS = {
+  type: 'object',
+  properties: {
+    findings: { type: 'array', items: { type: 'object', properties: {
+      source: { type: 'string' }, url: { type: 'string' },
+      principle: { type: 'string' }, emulate: { type: 'string' }, avoid: { type: 'string' },
+    }, required: ['source', 'principle', 'emulate'] } },
+    firstPrinciples: { type: 'array', items: { type: 'string' } },
+    synthesis: { type: 'string' },
+  },
+  required: ['findings', 'firstPrinciples', 'synthesis'],
+}
+phase('Research')
+const ANGLES = [
+  { key: 'handcrafted-web', prompt: `Research the web's best HANDMADE-FEELING sites — the anti-template movement: personal sites, studios, editorial/book-design-on-web, and products whose design reads as human-crafted rather than design-system-generated (the current "AI-made site" tells: uniform rounded cards, gradient heroes, centered symmetric grids, identical shadows). Find celebrated examples (award sites, the small-web/handcrafted-web movement, editorial masterpieces like The Pudding's bespoke pieces, book-like sites, brutalist-adjacent-but-warm work) and extract FIRST PRINCIPLES: what specifically produces the handmade read — asymmetric composition, content-led layout, typographic craft, irregular-but-intentional detail, restraint of ornament? What separates handmade-feeling from merely messy? The client: a parchment-toned D&D world-simulator wanting its React app to not read as platform/AI-made. Return named examples + extracted first principles + emulate/avoid.` },
+  { key: 'print-craft-chrome', prompt: `Research how PRINT AND MANUSCRIPT CRAFT translates to interface CHROME (not content art — the earlier sweep covered that): manuscript page architecture (text block + marginalia + rubrication + drop caps/illuminated initials as an information hierarchy system), letterpress/engraving qualities on screen (ink weight, impression, tapered rules), ledger/register book design (the client's receipts culture wants a ledger aesthetic), and modern masters of print-inspired web design (typography-first sites, publishers, university-press-quality web). FIRST PRINCIPLES wanted: how does a manuscript organize information WITHOUT boxes/cards (rules, space, rubrication, initials, marginal gloss)? How do ink-tone hierarchies replace drop shadows? What did rubrication semantically MEAN and how does it map to UI emphasis? The client wants to replace box-soup card grids with document-register layouts. Return named examples + principles + emulate/avoid.` },
+  { key: 'diegetic-game-ui', prompt: `Research game interfaces that achieve deep IMMERSION without sacrificing usability — the diegetic and diegetic-adjacent UI masters: Pentiment (manuscript UI), Inkle's 80 Days + Overboard + Sorcery (elegant literary UI), Fallen London/Sunless Sea (Victorian document register), Book of Hours/Cultist Simulator (card-as-artifact), Disco Elysium (painterly UI), Wildermyth (storybook), Return of the Obra Dinn, TTRPG digital tools with beloved aesthetics (D&D Beyond's sheet? Foundry themes?). FIRST PRINCIPLES: when does in-fiction chrome IMPROVE usability vs hurt it; the instrument-vs-artifact split (which surfaces stay modern); how these games handle legibility on textured/painted grounds; seeded/procedural ornament precedents (per-item unique decorations). The client: a deterministic D&D world simulator whose UI should feel like a surveyor's field kit — hand-drawn world, machined instruments. Return named examples + principles + emulate/avoid.` },
+  { key: 'legibility-on-craft', prompt: `Research LEGIBILITY AND ACCESSIBILITY first principles for decorated/textured/period-styled interfaces — the constraint side of organic design: WCAG contrast on tinted/textured grounds (how to measure and guarantee AA on parchment tones), type-on-texture rules (when grain/texture under text is safe), minimum sizes for period display faces (the IM Fell class), decorative-vs-functional element separation (ARIA, focus states on ornamented controls), navigation clarity in unconventional layouts (marginalia columns, asymmetric grids — how users still find their way), reduced-motion and print-styled hover states, and dark-mode strategies for paper-toned designs. Find both authoritative guidance (WCAG/NN-g/Baymard) and craft sites that PASS audits while looking handmade. The client must end with: everything readable against its background, everything navigable — this angle defines the review checklist. Return principles + a concrete legibility-audit checklist + emulate/avoid.` },
+]
+const results = await parallel(ANGLES.map(a => () =>
+  agent(a.prompt + ' Use WebSearch and WebFetch for real, current sources. Cite URLs.', { label: `research:${a.key}`, phase: 'Research', schema: FINDINGS })))
+phase('Critique')
+const critic = await agent(`You are the completeness critic for the ORGANIC CRAFT LAW research sweep — a parchment/gold D&D world-simulator's React app being redesigned so it reads handmade/organic, never platform/AI-made, WITHOUT sacrificing legibility or navigability. The four syntheses + first-principles lists: ${JSON.stringify(results.filter(Boolean).map(r => ({s: r.synthesis, fp: r.firstPrinciples})))}. Name: (1) what is MISSING the brief-writer must still consider (esp. anything about performance/CSS cost of ornament, responsive/mobile behavior of document layouts, and how to phase a reskin across a live app), (2) the FIVE strongest cross-angle first principles to build the law around, (3) the biggest failure risk (kitsch, illegibility, or inconsistency) and its guard. Be concrete.`, { label: 'completeness-critic', phase: 'Critique' })
+return { angles: ANGLES.map((a, i) => ({ key: a.key, result: results[i] })), critic }

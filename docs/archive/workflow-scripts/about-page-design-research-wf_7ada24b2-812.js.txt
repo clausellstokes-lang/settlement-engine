@@ -1,0 +1,28 @@
+export const meta = {
+  name: 'about-page-design-research',
+  description: 'Four-angle research sweep feeding the About page overhaul brief',
+  phases: [{ title: 'Research' }, { title: 'Critique' }],
+}
+const FINDINGS = {
+  type: 'object',
+  properties: {
+    findings: { type: 'array', items: { type: 'object', properties: {
+      source: { type: 'string' }, url: { type: 'string' },
+      pattern: { type: 'string' }, emulate: { type: 'string' }, avoid: { type: 'string' },
+    }, required: ['source', 'pattern', 'emulate'] } },
+    synthesis: { type: 'string' },
+  },
+  required: ['findings', 'synthesis'],
+}
+phase('Research')
+const ANGLES = [
+  { key: 'manifesto-pages', prompt: `Research the best product About/manifesto/story pages on the web — pages that convert skeptics through MECHANISM and craft rather than marketing fluff. Look at (and fetch where useful): Stripe's design-heavy pages, Linear's "why" pages, iA's writings, Panic, Anthropic, small-craft indie tools with beloved About pages, any page famous for explaining a deep technical system to civilians. For each: what narrative structure does it use (order of claims), how does it establish trust, what design/layout patterns make depth digestible (progressive disclosure, annotated diagrams, pull-quotes, section rhythm)? The client product: a deterministic D&D world simulator whose About page must translate an engineering constitution (determinism, receipts, AI-cannot-write-state) into DM-trust. Return concrete named patterns with emulate/avoid judgments.` },
+  { key: 'medieval-art-direction', prompt: `Research medieval/antique/cartographic ART DIRECTION for modern web design — sites and products that use parchment, engraving, woodcut, illuminated-manuscript, or antique-map aesthetics WELL (elegant, not kitsch). Also research the canonical public-domain medieval/renaissance visual sources a fantasy-cartography product could draw stylistic vocabulary from: Braun & Hogenberg's Civitates Orbis Terrarum city plans, the Nuremberg Chronicle woodcuts, portolan charts, medieval schematic diagrams (e.g. Opicinus de Canistris), da Vinci-style annotated schematics, cartouches/compass roses/marginalia conventions. For each: what specific visual conventions work on-screen (line weight, hatching, color restraint, aged-paper textures done tastefully), what turns kitsch, and how modern typography pairs with period art. The client already has a parchment-toned app with gold accents and generates its own antique-style town maps. Return concrete emulate/avoid guidance + named public-domain sources.` },
+  { key: 'ttrpg-market-pages', prompt: `Research how TTRPG and worldbuilding tools present themselves — the About/landing/feature pages of: Watabou (city generator), Azgaar's Fantasy Map Generator, Inkarnate, Dungeondraft/Wonderdraft, Dungeon Alchemist, World Anvil, LegendKeeper, Kanka, Foundry VTT, and any beloved indie TTRPG tools. What do their pages emphasize, what design quality bar do they set, what do their communities praise or mock about them, and what gaps exist (what does NOBODY in this market do well on an About page)? The client is a deterministic settlement/world simulator competing on coherence — where is the open lane in how this market talks about itself? Return per-tool observations + the market-gap synthesis.` },
+  { key: 'digestible-depth', prompt: `Research design patterns for making DEEP technical systems digestible on a single page: scrollytelling done tastefully, progressive disclosure, annotated schematic diagrams, "how it works" pages loved by engineers and civilians alike (e.g. famous explorable explanations, Bartosz Ciechanowski's interactive essays, distill.pub, well-regarded systems-explainer pages), plus information-hierarchy patterns for pages that must serve both a 30-second skimmer and a 10-minute reader. The client page must carry: a philosophy (constraint-driven worldbuilding), a promises/guarantees section (determinism, receipts, AI safety), a whole-system map (engine → dossier → maps → AI → play), and a tier ladder — WITHOUT overwhelming a tabletop-DM reader. Return concrete structural patterns (with named examples) + emulate/avoid.` },
+]
+const results = await parallel(ANGLES.map(a => () =>
+  agent(a.prompt + ' Use WebSearch and WebFetch tools for real, current sources. Cite URLs.', { label: `research:${a.key}`, phase: 'Research', schema: FINDINGS })))
+phase('Critique')
+const critic = await agent(`You are the completeness critic for a design-research sweep feeding an About-page overhaul brief for SettlementForge (deterministic D&D world simulator; parchment/gold house style; four goals: best map generator / settlement generator / campaign simulator / TTRPG AI use). Here are the four research angles' syntheses: ${JSON.stringify(results.filter(Boolean).map(r => r.synthesis))}. Name: (1) what is MISSING that the brief-writer should still consider, (2) the three strongest cross-angle patterns worth building the page around, (3) the one biggest kitsch/failure risk. Be concrete.`, { label: 'completeness-critic', phase: 'Critique' })
+return { angles: ANGLES.map((a, i) => ({ key: a.key, result: results[i] })), critic }

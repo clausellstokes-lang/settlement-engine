@@ -1,0 +1,141 @@
+export const meta = {
+  name: 'e0-governor-survey',
+  description: 'Map the integration surface for the E0 Narrative Tempo Governor before implementation',
+  phases: [{ title: 'Survey', detail: '8 parallel readers mapping the pacing-governor integration seams' }],
+}
+
+const SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['area', 'summary', 'keyFiles', 'anchors', 'integrationPoints', 'hazards', 'openQuestions'],
+  properties: {
+    area: { type: 'string' },
+    summary: { type: 'string', description: 'Detailed findings, 3-8 paragraphs of markdown. Be concrete and quote code.' },
+    keyFiles: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['path', 'role'], properties: { path: { type: 'string' }, role: { type: 'string' } } } },
+    anchors: { type: 'array', description: 'Exact code anchors: file, line, snippet, what it means for E0.', items: { type: 'object', additionalProperties: false, required: ['file', 'line', 'snippet', 'meaning'], properties: { file: { type: 'string' }, line: { type: 'integer' }, snippet: { type: 'string' }, meaning: { type: 'string' } } } },
+    integrationPoints: { type: 'array', description: 'Precise "do X at file:line" recommendations for the E0 build.', items: { type: 'string' } },
+    hazards: { type: 'array', description: 'Byte-identity / determinism / dormancy / budget hazards to avoid.', items: { type: 'string' } },
+    openQuestions: { type: 'array', description: 'Anything you could not resolve from the code that the architect must decide.', items: { type: 'string' } },
+  },
+}
+
+const COMMON = `
+CONTEXT: You are surveying the SettlementForge codebase (a deterministic D&D settlement/world simulator, src/domain is a PURE deterministic layer). We are about to build E0, THE NARRATIVE TEMPO GOVERNOR, per the frozen design in docs/DESIGN_PACING_GOVERNOR.md (READ IT FIRST, in full — it is short). The governor gates SPONTANEOUS major-arc births by drama-class budget over a rolling window, NEVER censoring causal consequence chains, and ships FULLY DORMANT (absent activation marker ⇒ every same-seed output byte-identical, mirroring the spatialCanonVersion pattern). The seam is rollCandidates in src/domain/worldPulse/candidateEvents.js.
+
+You are a READ-ONLY surveyor. Do not edit anything. Read the named files IN FULL plus whatever else you must to answer precisely. Quote exact line numbers and code. Your返回 value is structured data for the architect — be concrete, not hand-wavy. Cite file:line for every claim.
+`
+
+const AREAS = [
+  {
+    key: 'S1-causality-vs-spontaneity',
+    prompt: `${COMMON}
+YOUR AREA — THE CONSTITUTIONAL QUESTION (highest stakes): distinguish SPONTANEOUS major-arc births (which consult the governor) from CHAINED CONSEQUENCES (which must NEVER be throttled — throttling causality is a constitutional violation).
+
+Read IN FULL: src/domain/worldPulse/candidateEvents.js (esp. rollCandidates — note the \`guaranteed = probability >= 1\` branch and the comment that probability-1 candidates are "GUARANTEED consequences ... neither consume nor respect the auto budget"), src/domain/worldPulse/stressors.js, src/domain/worldPulse/stressorAftermath.js, src/domain/crisisLifecycle.js, src/domain/worldPulse/calamityKernel.js, src/domain/worldPulse/pestilenceKernel.js, src/domain/worldPulse/realmEvents.js.
+
+ANSWER PRECISELY:
+1. The design's canonical causal chain is "war-born famine → famine-born exodus → exodus-born coup". For EACH link, find where that consequence candidate/event is emitted and state its \`probability\`, \`applyMode\`, \`ruleFamily\`, \`candidateType\`, and any provenance marker (e.g. triggeredAt.sourceEventType, condition.causes[].source, metadata.*). Is each link emitted as probability>=1 (guaranteed) or as a stochastic (<1) candidate?
+2. Is \`guaranteed\` (probability >= 1) a RELIABLE proxy for "this is a chained consequence, exempt from the governor"? Or are there stochastic (<1 probability) candidates that are ALSO chained consequences (and would be wrongly throttled if we gate on probability alone)? Conversely, are there probability>=1 candidates that are actually SPONTANEOUS births (and should be throttled)?
+3. Identify the EXACT predicate the governor should use to classify a candidate as "spontaneous major-class birth" vs "chained consequence". Is there an existing field (provenance, cause, sourceEventType, a "residual"/"aftermath" tag, a ruleFamily value) that reliably marks causation? Quote it.
+4. Enumerate the candidate fields available at the rollCandidates call site that the governor could read to (a) classify drama-class and (b) classify spontaneous-vs-chained.
+Deliver the exact classification predicate recommendation.`,
+  },
+  {
+    key: 'S2-drama-class-registration',
+    prompt: `${COMMON}
+YOUR AREA — DRAMA-CLASS ENUMERATION (the "registration walker" input). The design defines 7 drama classes: war, plague, calamity, succession/coup, schism/contest, economic-shock, boom/flourishing. Every subsequent E-engine must "register its spontaneous-birth class or document exemption."
+
+Read the drama engines: src/domain/worldPulse/calamityKernel.js, pestilenceKernel.js, religiousContest.js, realmEvents.js, tradeWar.js, factionCapture.js, armyTransitKernel.js, stressors.js, settlementStrategy.js, factionCompetition.js, npcAgency.js, relationshipEvolution.js, and grep for others under src/domain/worldPulse/ and src/domain/spatial/ that seed NEW arcs.
+
+ANSWER PRECISELY:
+1. Enumerate EVERY site that seeds a SPONTANEOUS (independent, from-quiet) major-arc birth. For each: file, function, the candidate's candidateType + ruleFamily (or event type if it bypasses candidates), and which of the 7 drama classes it maps to. Where a class has no current producer, say so (future rung).
+2. For each site, state whether it flows THROUGH rollCandidates (the one seam) or spawns INDEPENDENTLY (bypassing candidateEvents). Independent spawners are a HAZARD — the design says "one seam". List every bypass.
+3. Propose a concrete candidateType/ruleFamily → drama-class mapping table (the registration data) covering all spontaneous producers you found. Flag any candidate family whose class is ambiguous.
+4. What existing constant/registry could hold this mapping (a frozen object), and where should it live (which file) to stay in the lazy engine chunk?`,
+  },
+  {
+    key: 'S3-ledger-orchestration',
+    prompt: `${COMMON}
+YOUR AREA — LEDGER MATERIALIZATION + ORCHESTRATION + NORMALIZER DORMANCY.
+
+Read IN FULL: src/domain/worldPulse/pulseKernel.js (find EVERY call to rollCandidates and evaluateWorldPulseRules — trace what builds \`options\`/\`budgets\`, where maxAuto comes from, and how selected candidates are applied to worldState), src/domain/worldPulse/simulationRules.js (the EAGER normalizer normalizeSimulationRules, DEFAULT_SIMULATION_RULES, PROFILE_KEYS, SIMULATION_RULE_PRESETS), and how worldState is rebuilt each tick.
+
+ANSWER PRECISELY:
+1. Every call site of rollCandidates and evaluateWorldPulseRules in pulseKernel.js (file:line). What object holds \`options.maxAuto\`, \`volatility\`, \`budgets\`? Where would the governor read the tempo ledger from worldState and inject class budgets into options?
+2. After candidates are selected, where/how are majors "recorded" into worldState? Is there a per-tick worldState rebuild (immutable) I can hook to write the ledger? Where is the tick counter and the game-year length (for TEMPO_WINDOW = one game year — how many ticks is a game year)?
+3. DORMANCY-CRITICAL: exactly how does normalizeSimulationRules treat keys? If I add a \`narrativeTempo\` axis, will it be INJECTED into every normalized rules object by default (which would perturb golden byte-identity)? Show the normalizer's handling of DEFAULT_SIMULATION_RULES / PROFILE_KEYS. Can \`narrativeTempo\` be added as OPT-IN-ONLY (absent unless the DM sets it), mirroring an existing opt-in key? Find an existing key that is absent-by-default and only materializes when set — quote it.
+4. Where does the ledger structure belong on worldState (mirror worldState.spatialLedgers / spatialCanonVersion)? Recommend the conditionally-materialized shape.`,
+  },
+  {
+    key: 'S4-deferral-persistence',
+    prompt: `${COMMON}
+YOUR AREA — DEFERRAL PERSISTENCE (the "quiet before the storm"). Design §1: "A deferred birth is DELAYED, never denied: its pressure persists and fires when a slot opens — which buys the 'quiet before the storm' texture for free." Design §5 test: "the QUIET-BEFORE-STORM assertion (deferred pressure fires within N ticks of a slot opening)."
+
+Read: src/domain/worldPulse/pressureModel.js, src/domain/worldPulse/pressureModel usage in pulseKernel, src/domain/worldPulse/calamityKernel.js (how a spontaneous calamity DRAW is generated each tick), religiousContest.js (organic contest birth), stressors.js (stressor birth), and how pressures are generated per tick.
+
+ANSWER PRECISELY:
+1. When a spontaneous candidate is SKIPPED this tick (not selected), does the SAME underlying pressure re-generate an equivalent candidate NEXT tick, DETERMINISTICALLY? I.e. is pressure a persistent accumulator (survives non-selection) or a fresh per-tick stochastic draw? Trace the exact source of pressure for: (a) organic settlement pressure conditions, (b) calamity draws, (c) organic religious contests.
+2. Is "pressure persists and fires when a slot opens" EMERGENT FOR FREE (because pressure genuinely persists and re-rolls the same candidate), or does it require an EXPLICIT deferral queue persisted on worldState? Give evidence.
+3. If an explicit deferral queue is needed for the quiet-before-storm GUARANTEE (deterministic fire within N ticks), propose its minimal conditionally-materialized shape on worldState and where it is drained. If NOT needed, explain how the test can deterministically assert the re-fire.
+4. What is the risk that a deferred candidate, once budget frees, fires with a DIFFERENT rng roll than it would have (breaking "same seed ⇒ same deferrals")? How is the roll forked (see candidateRoll: fork on \`roll:\${stableCandidateKey}\`) — is the roll independent of WHEN the candidate fires?`,
+  },
+  {
+    key: 'S5-grace-settlement-history',
+    prompt: `${COMMON}
+YOUR AREA — SETTLEMENT GRACE / MAJOR-HISTORY. Design §2: "SETTLEMENT GRACE: a settlement inside its post-major GRACE_TICKS (it just survived a siege/plague/flood) is exempt from NEW independent majors — chained consequences still land." And per-settlement tempo counts ("realm-wide AND per-settlement").
+
+Read: src/domain/crisisLifecycle.js, src/domain/worldPulse/stressorAftermath.js, src/domain/worldPulse/pestilenceKernel.js, and grep worldState for any per-settlement "last major", crisis-resolution, or aftermath timestamp.
+
+ANSWER PRECISELY:
+1. How does the engine currently know a settlement "just survived a major" (siege lifted, plague ended, flood passed)? Is there a per-settlement record with a tick — a resolved-crisis log, an aftermath stamp, a lastMajorTick? Quote it (file:line). If none exists, say so.
+2. If the governor must maintain its own per-settlement last-major-tick (in the conditionally-materialized ledger), what event/site marks "a major happened at settlement X at tick T"? Where is a major's settlement id + tick available at the moment of birth?
+3. How are per-settlement structures keyed and iterated deterministically (codepoint sort)? Quote the deterministicSort helper usage.
+4. What counts as a "major" for grace purposes vs a minor drift? Is there an existing significance/severity threshold to reuse?`,
+  },
+  {
+    key: 'S6-golden-projection-idiom',
+    prompt: `${COMMON}
+YOUR AREA — GOLDEN + PROJECTION TEST IDIOM. The brief requires "dormancy-normalized projection tests per the worldpulseDeityGolden idiom", plus governor-ON property tests. Also the worldPulse projection (worldPulse.advanced / world pulse feed) must be byte-identical when the governor is dormant.
+
+Find and read: the worldPulse projection code (grep src/domain/display and src/domain/worldPulse for the pulse projection / feed builder), the deity/worldpulse GOLDEN test(s) — grep tests/ for 'golden', 'Golden', 'deity', 'worldPulse' projection snapshot tests, byte-identity assertions, and any existing dormancy-normalization idiom (a helper that strips/normalizes a dormant feature before comparison).
+
+ANSWER PRECISELY:
+1. Where is the worldPulse projection/feed built, and what test golden-checks it byte-for-byte? Quote the golden test's structure (how it builds a fixture, runs the sim, and asserts byte-identity / snapshot). Name the exact idiom the brief calls "worldpulseDeityGolden".
+2. How is DORMANCY normalized in existing tests — how does a dormant feature (e.g. spatial, seasons) prove byte-identity? Is there a "with feature off, output === prior golden" pattern to copy? Quote it.
+3. Recommend the exact test files + shape for: (a) governor-DORMANT byte-identity (same-seed projection unchanged), (b) governor-ON property tests (drama-class budget enforced, deferral determinism, chain immunity, grace exemption, dial monotonicity), (c) the 30y cacophony soak with arc-density envelopes + quiet-before-storm.
+4. What seed/fixture harness do property tests use (how to build a worldState, advance N ticks deterministically, and read arc births)?`,
+  },
+  {
+    key: 'S7-budget-anycast-dial-ui',
+    prompt: `${COMMON}
+YOUR AREA — FIRST-PAINT BUDGET, ANY-CAST BASELINE, VERIFY_DIST, DIAL UI.
+
+Read IN FULL: tests/simulation/worldTickCostEnvelope.test.js, tests/build/vendorPdfLazy.test.js (the VERIFY_DIST / dist-closure test), tests/lint/domainAnyCastBaseline.test.js, scripts/count-domain-any.mjs, package.json (the VERIFY_DIST script + test scripts), src/components/map/SimulationRulesAxes.jsx, src/components/map/SimulationRulesDialog.jsx.
+
+ANSWER PRECISELY:
+1. The first-paint closure budget is 1,216,350 bytes. WHERE is that number asserted, HOW is closure measured, and what does VERIFY_DIST=1 do (which test enforces it, how to run it)? Quote the exact command(s) to run the dist-closure gate and read back the closure number.
+2. Is candidateEvents.js (the seam) in the LAZY engine chunk (so governor code added there costs ZERO first-paint bytes)? What determines whether a src/domain/worldPulse file is eager vs lazy? Which of these are EAGER (first-paint) vs LAZY: candidateEvents.js, pulseKernel.js, simulationRules.js, simulationProfile.js? How do I keep new governor code lazy?
+3. ANY-CAST BASELINE: how does scripts/count-domain-any.mjs + domainAnyCastBaseline.test.js work? How does a NEW domain file "enter the baseline at 0" (the brief's requirement)? Quote the baseline mechanism and how to register a new file with 0 allowed any-casts.
+4. DIAL UI: In SimulationRulesAxes.jsx / SimulationRulesDialog.jsx, how is an axis/dial surfaced (the fiction-voice pattern)? Show the exact shape for adding a "narrativeTempo" World-Laws dial with fiction voice "How loudly does history speak?" and the 4 rungs (quiet_local/realistic_regional/dramatic_campaign/full_simulation). Note: the dial UI is a LATER lighting event, but survey the seam so the domain default is dormancy-safe.`,
+  },
+  {
+    key: 'S8-significance-simultaneity',
+    prompt: `${COMMON}
+YOUR AREA — SIGNIFICANCE/METRONOME (must stay UNTOUCHED) + "LIVE MAJOR ARCS" COUNT for GLOBAL SIMULTANEITY (ARC_MAX). Design §4: "the significance/metronome layers are UNTOUCHED beneath it (they govern repetition; this governs birth density)." Design §2: "GLOBAL SIMULTANEITY: live major arcs realm-wide ≥ ARC_MAX ⇒ defer lowest-priority class (codepoint-deterministic priority; no rng)."
+
+Read: src/domain/worldPulse/pulseHelpers.js (significance), grep for 'metronome' machinery, src/domain/worldPulse/chronicle.js, and worldState structures that represent ACTIVE/LIVE arcs (active stressors, open crises, ongoing wars, live contests).
+
+ANSWER PRECISELY:
+1. What is the significance/metronome layer and where does it live? Confirm it governs REPETITION (cooldowns/dedup), distinct from birth-density. What must the governor NOT touch?
+2. How do I count "live major arcs realm-wide" at the rollCandidates stage — what worldState structure enumerates currently-active majors (active stressors above a severity? open crises? ongoing sieges/wars? live religious contests)? Quote the structure(s) and how to count them deterministically.
+3. The design wants a "codepoint-deterministic priority" ordering of drama classes for which class to defer under simultaneity pressure. Recommend a stable priority ordering of the 7 classes (a frozen ordered list) and how to break ties by codepoint.
+4. TEMPO_WINDOW default is "one game year". Confirm how many ticks a game year is and where that constant lives.`,
+  },
+]
+
+phase('Survey')
+const results = await parallel(AREAS.map(a => () =>
+  agent(a.prompt, { label: a.key, phase: 'Survey', schema: SCHEMA })
+))
+
+return results.filter(Boolean)

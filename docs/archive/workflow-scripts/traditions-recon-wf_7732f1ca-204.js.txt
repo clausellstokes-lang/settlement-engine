@@ -1,0 +1,48 @@
+export const meta = {
+  name: 'traditions-recon',
+  description: 'Ground THE TRADITIONS design in the real engine seams',
+  phases: [
+    { title: 'Recon', detail: '4 parallel readers: time/calendar, powers/legitimacy, movement/relations, event/content machinery' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a04d3f325c72e62dd'
+const PREAMBLE = `READ-ONLY TASK — no edits, no file creation, no state-mutating git commands. Repo worktree: ${WT}, expected branch claude/the-composite @ 78a04afc. FIRST verify branch + short HEAD; if mismatched, report but continue read-only, stating what you actually read. cwd resets between commands — always git -C ${WT} or absolute paths. Locate files with git -C ${WT} ls-files | grep -i <name>. Return file:line-anchored FACTS with exact field/function names and shapes — a design will be frozen on your answers and executed by agents who cannot re-verify cheaply. If something I ask about does NOT exist, say NOT FOUND explicitly — absence is a critical finding.`
+
+const REPORT = {
+  type: 'object',
+  required: ['findings', 'key_apis', 'red_flags'],
+  properties: {
+    findings: { type: 'string', description: 'organized, file:line-anchored facts' },
+    key_apis: { type: 'array', items: { type: 'string' }, description: 'exact function/field signatures a new system would call' },
+    red_flags: { type: 'array', items: { type: 'string' } },
+  }
+}
+
+phase('Recon')
+const [time, powers, movement, machinery] = await parallel([
+  () => agent(`${PREAMBLE}
+
+TIME + CALENDAR for a festival system (traditions occur in a specific season/month; effects resolve at tick time). Map exactly: (1) worldState.calendar — full shape (season values, month/year fields), where it advances, and the tick granularity (monthly? variable intervals?). (2) THE TWO COMMIT PATHS hazard: the program's history says lastLivingAdvanceAt must stamp in BOTH commit paths — find both advance/commit paths a per-tick system must hook (single-month advance vs the catch-up collapse's ONE-orchestrated-interval path). A festival that fires per-month MUST fire correctly (or aggregate correctly) when a decade advances as one collapsed interval — describe how existing per-month systems (upswing? seasons? faith?) handle collapsed catch-up. (3) seasonalSeverityFor(rngSeed, year, settlementId) (domain/worldPulse/seasons.js) — exact signature + value domain. (4) How existing systems schedule RARE periodic events (any annual/periodic event precedent). (5) The E0 tempo governor: how event kinds register with tempo classes, the cadence brake API.`,
+    { label: 'recon:time-calendar', phase: 'Recon', model: 'opus', schema: REPORT }),
+
+  () => agent(`${PREAMBLE}
+
+POWERS + LEGITIMACY for tradition ownership (a power owns each tradition; success/failure pulses its legitimacy; ownership migrates on state change). Map exactly: (1) rulingPower shape — the legitimacy field, where it's read/written, existing legitimacy-delta event precedents. (2) Factions: shape, world-scoped dedup, standing (the ladder's standing integrator read API on claude/the-ladder via git show if not in composite), how a faction's rise/fall is detectable as a checkpoint trigger. (3) Institutions as ownership candidates: how institutions are identified/stable across ticks (ids?), categories (temple/guild/etc.), and whether any existing system assigns an institution a persistent ROLE. (4) Urban fabric regime lingering (urbanFabricKernel): the regime-change signal shape — the natural ownership-migration trigger. (5) Coup/challenge windows (the ladder): what they read — could a failed grand festival legitimately feed an existing window input (name the exact input) WITHOUT a new write path? (6) Deity/patron: settlement patron deity field(s) + faith standing shape.`,
+    { label: 'recon:powers-legitimacy', phase: 'Recon', model: 'opus', schema: REPORT }),
+
+  () => agent(`${PREAMBLE}
+
+MOVEMENT + RELATIONS for cultural transmission (migration influx adopts traditions from the source settlement; vassals get overlord traditions imposed). Map exactly: (1) MOVERS: the mover-ladder records (M1-M11) — does an arrival record carry the ORIGIN settlement id? Full mover/arrival record shape; where population influx lands on the destination settlement; any influx-magnitude signal (fraction of pop). (2) Refugees/war displacement (upswing, occupation, war outcomes) — same question: is origin recorded? (3) VASSAL/OVERLORD state: how vassalization is represented (hegemony D4 reads, occupation, foreign lanes, treaties/peace terms) — the exact field a "you are vassal of X" check reads; is there a precedent for an overlord IMPOSING something on a vassal (any imposition/tribute mechanic to pattern-match). (4) Distance-priced news (D1): the event API for minting a news item that spreads at distance — exact call shape. (5) The reframe layer's act classes (D7 design + code if present): could "tradition imposed" register as an act class LATER — name the extension seam but confirm current act-class list. (6) Cross-settlement references: how one settlement's record can safely reference another settlement (ids, the neighbour system, region/realm membership).`,
+    { label: 'recon:movement-relations', phase: 'Recon', model: 'opus', schema: REPORT }),
+
+  () => agent(`${PREAMBLE}
+
+EVENT + CONTENT MACHINERY for a new dark engine system (traditionsEnabled flag; generation-time genesis; tick-time occurrences; prose). Map exactly: (1) FLAG PATTERN: DEFAULT_SIMULATION_RULES + the virtual-flag idiom (urbanFabricEnabled, npcLadderEnabled) — exact registration steps + the dormancy-proof test pattern (byte-identical when dark). (2) CHRONICLE: the entry-minting API (kinds, receipts, recorded/inferred marks). (3) PROVENANCE: the recording API (provenance ledger + causedBy threading) — how an event records its causal cone. (4) GENERATION-TIME CONTENT: the eventProse.js pattern (pure-FNV, canonical-at-zero) from claude/generation-time-content (git show if absent) + where generator content data leaves live (src/data, max-lines ratchet rule). (5) GOLDEN BINDING: which golden families would a generation-time tradition mint shift (generatorGoldenMaster's coverage — does it pin the full settlement object?), and the parks-red precedent (how generation-time-content declared its shift). (6) FACET LAW: the facetOf chokepoint + how a NEW custom-content kind registers (customContentSchema, S4 CustomContentPanel kinds list, whale-table rules). (7) ECONOMY READS: the prosperity/economic-band read a success-roll would use (name the exact selector); the trade-pulse event precedent (any temporary economic modifier pattern). (8) STRESSORS: activeConditions/selectedStresses read shape (plague/siege/war flags at tick time). (9) PRNG: createPRNG idiom + seed-fork naming convention for a new subsystem.`,
+    { label: 'recon:event-content-machinery', phase: 'Recon', model: 'opus', schema: REPORT }),
+])
+
+const missing = [time, powers, movement, machinery].map((r, i) => r ? null : ['time','powers','movement','machinery'][i]).filter(Boolean)
+if (missing.length) log(`WARNING: recon slots failed: ${missing.join(', ')}`)
+
+return { time, powers, movement, machinery }

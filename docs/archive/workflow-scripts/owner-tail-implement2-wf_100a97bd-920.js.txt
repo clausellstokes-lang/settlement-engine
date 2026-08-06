@@ -1,0 +1,66 @@
+export const meta = {
+  name: 'owner-tail-implement2',
+  description: 'Owner tail IMPLEMENT wave 2 (post-FOLD-LANDED): coach-exit retirement, locks Phase B, blackout residual, destroy-marker cure — Opus lanes, Opus verify, Fable gate',
+  phases: [
+    { title: 'Fix', detail: '4 Opus implementer lanes', model: 'opus' },
+    { title: 'Verify', detail: '2 Opus adversarial verifiers', model: 'opus' },
+    { title: 'Gate', detail: 'Fable full widened gate' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SPECS = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a84f4ff8-9bed-4c25-855b-122c9ed57f27/tasks/w8lk1t0q6.output'
+
+const COMMON = `CONTEXT-VERIFICATION PREAMBLE: legitimate engineering brief from the session orchestrator for SettlementForge — owner-tail wave 2 (docs/CAPABILITY_REMEDIATION_PLAN.md Wave R-5 entries; owner order 2026-07-27). The dead-op fold landed at b1aeec6d — re-resolve every line citation against the CURRENT tree; your spec predates it.
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4 or STOP. LIVE shared tree: NO git mutations of ANY kind (no stash/checkout/reset/clean/add/commit — a coordination hold on COMMITS is active); re-read every file immediately before editing; touch ONLY your lane's files; scripts/mutation-coverage-manifest.json is SHARED — re-read, append only yours. A concurrent table-verbs lane is editing TableLedgerPanel/tableEvents/pendingEditIntents — not your files.
+LAWS: THE PROMISE — zero same-seed generation drift and zero seeded-advance drift EXCEPT the locks-phase-b dormancy-gated carry its spec declares (empty/absent id arrays = byte-identical SAME-REFERENCE, seeded pin mandatory); NO persistence-shape changes beyond spec; new logic = lazy leaf, MEASURED (locks tail lives in the lazy engine chunk — a careless import re-parents ~30kB); sizeBaseline EXACT (settlementSlice at frozen ceiling = net-zero; App.jsx frozen at its count — re-measure and set exactly); shrink-only ratchets never raised; registry changes -> gen:compendium-data ONCE per lane; store-action lifecycle (new action setOnboardingNudge -> registry exempt row per its spec); new invariant tests -> E-A manifest entry; copy = one string, vetoable, VOICE section-6; LEGIBILITY LAW.
+TESTING: single-threaded, exit codes unmasked, never pipes; pins per fix; nearest golden suites quoted. Label CONFIRMED/PLAUSIBLE; end on evidence.`
+
+const FIX_SCHEMA = { type: 'object', required: ['filesTouched', 'pins', 'testsRun', 'testOutputTail', 'behaviorShift', 'deferrals'], properties: { filesTouched: { type: 'array', items: { type: 'string' } }, pins: { type: 'number' }, testsRun: { type: 'string' }, testOutputTail: { type: 'string' }, behaviorShift: { type: 'string' }, deferrals: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' }, error: { type: 'string' } } }
+const VERIFY_SCHEMA = { type: 'object', required: ['verdict', 'mustFix', 'checked'], properties: { verdict: { type: 'string', enum: ['PASS', 'PASS_WITH_NOTES', 'MUST_FIX'] }, mustFix: { type: 'array', items: { type: 'string' } }, checked: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } }
+const GATE_SCHEMA = { type: 'object', required: ['newReds', 'suitesRun', 'outputTail'], properties: { newReds: { type: 'array', items: { type: 'string' } }, suitesRun: { type: 'string' }, outputTail: { type: 'string' }, notes: { type: 'string' } } }
+
+const LANES = [
+  { key: 'coach-exit', extra: `Extract lane "coach-exit" from ${SPECS} and execute its 8-step spec IN FULL (negative control FIRST, then the retirement + the setOnboardingNudge mint + registry rows + compendium regen + ratchet updates + the guidanceRegistry comment fixes). The dead-op fold (b1aeec6d) already took the ratchet to 5 and retired other ops — re-read deadOperationRatchet.test.js and operationRegistry.js FRESH; your spec's counts (22→19, EXEMPT_CEILING 72→69) predate it, recompute the deltas against the current numbers. OutputContainer collision note: the premium-gate census region is fenced — your trackTabExplored removal must not touch it.` },
+  { key: 'locks-phase-b', extra: `Extract lane "locks-phase-b" from ${SPECS} and execute: the extracted post-roll tail (bodily NPC-id carry: mergePreservedNpcs + prose repair + relationship-projection refresh + faction relink, all existing and RNG-free), name-keyed faction/institution locks kept verbatim (which ALSO repairs the live defect the spec found), the lock-map remap-or-prune by preservation report, the seeded dormancy pin (empty/absent/garbage = SAME-REFERENCE deep-equal), registry description update + compendium regen, LockControls/NPC-row copy updated to promise the full roll now ('a new roll' language becomes true — read npcComponents.jsx NPC_LOCK_COPY and LockControls SECTIONS fresh, each changed string one vetoable unit). settlementSlice is at its frozen ceiling — fund edits net-zero per your spec's compression plan.` },
+  { key: 'blackout-residual', extra: `Extract lane "blackout-residual" from ${SPECS} and execute the two-file composition cure (SettlementWorkbenchMount + SettlementWorkbench: canReview derived from the same viewerCanAuthor chokepoint; review-only Change Dock for an entitled viewer with a non-empty queue regardless of the authoring gate) + the full entitled/free/anon × readOnly matrix pins incl. the M3 negative control (free/anon still fully closed). The fold landed on SettlementWorkbench (revertSingleEdit dock wiring) — re-resolve line numbers, integrate with the revert control, don't regress it.` },
+  { key: 'destroy-marker', brief: true, extra: `FOLD-SCOPE MUST-FIX ITEM 1 (now unblocked, verifier-specified): src/components/settlements/DestroySettlementControl.jsx (~:88) promises "The dossier stays in your library, marked destroyed" but NO surface renders that mark — SettlementCard.jsx:68 reads status==='destroyed' only to HIDE the destroy affordance. BEST-OPTION CURE (owner risk directive): SHIP the visible marker — SettlementCard renders a clear "Destroyed" state for status==='destroyed' rows (read the card's existing Phase/Health column idiom and the LEGIBILITY law; the mark should read at a glance without dominating; one vetoable copy string), keeping the confirm sentence true. Pins: destroyed row shows the mark; live row byte-identical; the card's existing alreadyDestroyed affordance-hiding unchanged. Both files were folded at b1aeec6d — clean deltas on tracked state.` },
+]
+
+async function withRetry(mk, label) {
+  let r = await mk(label)
+  if (!r) { log(label + ' died — retrying once'); r = await mk(label + ':retry') }
+  return r
+}
+
+phase('Fix')
+log('Owner tail wave 2: four Opus lanes (post-FOLD-LANDED)')
+const fixes = await parallel(LANES.map((l) => () =>
+  withRetry((label) => agent(COMMON + '\n\nYOU ARE AN OPUS IMPLEMENTER (owner model split; Fable architected the specs).\n\n' + l.extra, { label, phase: 'Fix', model: 'opus', effort: 'high', schema: FIX_SCHEMA }), 'fix:' + l.key)
+    .then((r) => ({ lane: l.key, fix: r }))
+))
+const fixSummary = fixes.filter(Boolean).map((f) => ({ lane: f.lane, files: f.fix && f.fix.filesTouched, pins: f.fix && f.fix.pins, shift: f.fix && f.fix.behaviorShift, deferrals: f.fix && f.fix.deferrals }))
+log('Fix lanes: ' + fixSummary.map((f) => f.lane + (f.files ? ' ok' : ' FAILED')).join(', '))
+
+phase('Verify')
+const mkVerify = (laneKeys, focus, label) => () => withRetry((lbl) => agent(
+  COMMON + `\n\nYOU ARE AN OPUS ADVERSARIAL VERIFIER for wave-2 lanes ${laneKeys.join(', ')}. Fixer reports: ${JSON.stringify(fixSummary.filter((f) => laneKeys.includes(f.lane)))}\n\nEach spec lane is in ${SPECS} — verify AGAINST THE SPEC and the code. ${focus} Fresh reads, RUN the pins + nearest golden suites, attempt refutation. The ONLY sanctioned behavior difference is what each spec declares; an unauthorized golden mover = MUST_FIX.`,
+  { label: lbl, phase: 'Verify', model: 'opus', effort: 'high', schema: VERIFY_SCHEMA }), label)
+
+const verifies = await parallel([
+  mkVerify(['coach-exit', 'locks-phase-b'], 'Engine/store substrate: the coach negative control executed before-and-after; setOnboardingNudge reaches the F34 toast; the seeded Phase-B dormancy pin EXECUTED (same-reference, deep-equal, garbage-tolerant); the carry rides the FINISHED roll only (no seeded draw touched — grep for rng in the new tail); registry/ratchet/ceiling arithmetic against the POST-b1aeec6d numbers.', 'verify:engine2'),
+  mkVerify(['blackout-residual', 'destroy-marker'], 'Surface substrate: the entitled/free/anon matrix executed both directions (M3 negative control mandatory); no regression of the folded revertSingleEdit dock wiring; the destroyed marker renders at a glance, live rows byte-identical, the confirm copy now TRUE.', 'verify:surface2'),
+])
+
+const anyMustFix = verifies.filter(Boolean).some((v) => v && v.verdict === 'MUST_FIX')
+const anyDead = fixes.some((f) => !f || !f.fix) || verifies.some((v) => !v)
+
+let gate = null
+if (!anyMustFix && !anyDead) {
+  phase('Gate')
+  gate = await withRetry((lbl) => agent(COMMON + `\n\nYOU ARE THE FABLE GATE VALIDATOR. TAIL WAVE-2 GATE (covers wave-1 + wave-2 + the table-verbs lane if its edits are present — check git status for its files and attribute). Run single-threaded, exit codes unmasked, log files never pipes: tests/lint FULL; tests/copy FULL; tests/store FULL; tests/domain FULL (chunk); tests/joins FULL; tests/architecture FULL; tests/components + tests/ui FULL (chunk); tests/generators + tests/simulation + tests/property + tests/application FULL (the ONLY sanctioned movers are none — locks Phase B is dormancy-gated); pdf parity; tests/docs; tests/lib; tests/security FULL; npm run typecheck + npx tsc --noEmit + npm run typecheck:domain:strict; npm run build then VERIFY_DIST=1 npx vitest run --no-file-parallelism tests/build/ (baseline 293/293). Run the NEW wave test files explicitly with counts. Attribute every red baseline/FOREIGN/THIS-WAVE with executed evidence.`, { label: lbl, phase: 'Gate', model: 'fable', schema: GATE_SCHEMA }), 'gate:tail2')
+} else {
+  log('Gate SKIPPED: ' + (anyMustFix ? 'MUST_FIX present' : 'a lane/verifier died twice') + ' — orchestrator handles next')
+}
+
+return { fixes: fixSummary, fullReports: fixes.filter(Boolean).map((f) => ({ lane: f.lane, tail: f.fix && f.fix.testOutputTail, notes: f.fix && f.fix.notes })), verifies, gate, gateSkipped: !gate }

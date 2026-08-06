@@ -1,0 +1,129 @@
+export const meta = {
+  name: 'cycle2-cold-survey',
+  description: 'Round 3 cycle 2 Phase S: cold 20-bar survey of the assembled wave + story census + spell-break census + completeness critic',
+  phases: [
+    { title: 'Cold survey', detail: 'one cold reviewer per bar of the standard' },
+    { title: 'Censuses', detail: 'story census + spell-break census walkthroughs' },
+    { title: 'Critic', detail: 'completeness critic over the joined results' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const TIP = 'c8c5baa8'
+const STANDARD = '/Users/cstokes/Desktop/settlement-engine/docs/THE_APLUS_STANDARD.md'
+const SCRATCH = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/ff8b4b71-3ea5-4d7a-9793-42190018c11f/scratchpad'
+
+const BARS = [
+  { n: 1, name: 'CORRECTNESS' }, { n: 2, name: 'COHESION' }, { n: 3, name: 'EXPERIENCE' },
+  { n: 4, name: 'SUBSTANCE' }, { n: 5, name: 'PERFORMANCE' }, { n: 6, name: 'SECURITY' },
+  { n: 7, name: 'AI COST-EFFICIENCY + ECONOMIC VISIBILITY' }, { n: 8, name: 'CONTENT/VOICE' },
+  { n: 9, name: 'ACCESSIBILITY' }, { n: 10, name: 'GAME-FEEL' }, { n: 11, name: 'DETERMINISM' },
+  { n: 12, name: 'STATE-LIFECYCLE INTEGRITY' }, { n: 13, name: 'CLAIMS-VS-ENFORCEMENT PARITY' },
+  { n: 14, name: 'DISCOVERABILITY' }, { n: 15, name: 'OPERABILITY' }, { n: 16, name: 'DATA STEWARDSHIP' },
+  { n: 17, name: 'UI/UX CRAFT' }, { n: 18, name: 'IMMERSION' }, { n: 19, name: 'AI USE & STRUCTURE' },
+  { n: 20, name: 'THE STORY' },
+]
+
+const FINDING = {
+  type: 'object', additionalProperties: false,
+  required: ['title', 'severity', 'claim', 'scenario', 'location'],
+  properties: {
+    title: { type: 'string', maxLength: 90 },
+    severity: { enum: ['must-fix', 'should-fix', 'polish'] },
+    claim: { type: 'string', maxLength: 350 },
+    scenario: { type: 'string', maxLength: 350 },
+    location: { type: 'string', maxLength: 160 },
+  },
+}
+
+const BAR_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  required: ['bar', 'grade', 'ceiling_limited', 'findings', 'strengths', 'evidence_note'],
+  properties: {
+    bar: { type: 'integer' },
+    grade: { enum: ['A+', 'A', 'A-', 'B+', 'B', 'C-or-below'] },
+    ceiling_limited: { type: 'boolean' },
+    ceiling_reason: { type: 'string', maxLength: 300 },
+    findings: { type: 'array', maxItems: 10, items: FINDING },
+    strengths: { type: 'array', maxItems: 3, items: { type: 'string', maxLength: 200 } },
+    evidence_note: { type: 'string', maxLength: 400 },
+  },
+}
+
+const STORY_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  required: ['arcs', 'failures', 'retelling', 'grade', 'findings'],
+  properties: {
+    arcs: { type: 'array', maxItems: 12, items: { type: 'object', additionalProperties: false, required: ['name', 'link_depth', 'receipts_ok'], properties: { name: { type: 'string', maxLength: 120 }, link_depth: { type: 'integer' }, receipts_ok: { type: 'boolean' }, note: { type: 'string', maxLength: 250 } } } },
+    failures: { type: 'array', maxItems: 12, items: { type: 'string', maxLength: 250 } },
+    retelling: { type: 'string', maxLength: 2600 },
+    grade: { enum: ['A+', 'A', 'A-', 'B+', 'B', 'C-or-below'] },
+    findings: { type: 'array', maxItems: 10, items: FINDING },
+  },
+}
+
+const SPELL_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  required: ['breaks', 'clean_stretches', 'grade', 'findings'],
+  properties: {
+    breaks: { type: 'array', maxItems: 20, items: { type: 'object', additionalProperties: false, required: ['surface', 'moment', 'cls'], properties: { surface: { type: 'string', maxLength: 90 }, moment: { type: 'string', maxLength: 250 }, cls: { type: 'string', maxLength: 60 } } } },
+    clean_stretches: { type: 'array', maxItems: 8, items: { type: 'string', maxLength: 200 } },
+    grade: { enum: ['A+', 'A', 'A-', 'B+', 'B', 'C-or-below'] },
+    findings: { type: 'array', maxItems: 10, items: FINDING },
+  },
+}
+
+const CRITIC_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  required: ['gaps'],
+  properties: {
+    gaps: { type: 'array', maxItems: 12, items: { type: 'object', additionalProperties: false, required: ['what', 'why_material', 'probe'], properties: { what: { type: 'string', maxLength: 200 }, why_material: { type: 'string', maxLength: 250 }, probe: { type: 'string', maxLength: 250 } } } },
+  },
+}
+
+const COLD = `YOU ARE A COLD REVIEWER — by deliberate protocol you have NO prior context of this program, and you must not acquire any. FORBIDDEN: every file under /Users/cstokes/Desktop/settlement-engine/docs/ EXCEPT ${STANDARD} (your grading charge, READ-ONLY); the directory /Users/cstokes/.claude/projects/ (program memory); any session scratchpad file you did not create. Your ENTIRE evidence base is the product worktree at ${WT} (verify: branch claude/composite-r4, tip ${TIP}, then treat it as READ-ONLY — never edit, never touch git state, never commit) — its source, tests, configs, and the docs INSIDE that worktree — plus probes you execute. Write any probe scripts/outputs ONLY under ${SCRATCH}/cold-<your-bar> (create it). Judge the ARTIFACT, not intentions.
+HARNESS MECHANICS (operational only, not context): the full test suite exceeds a 10-minute command cap — run FOCUSED files only; pglite-backed tests need --no-file-parallelism; run scripts/check-domain-strict.mjs bare, never piped; sibling reviewers share this machine, so treat a slow or failing run as possible contention and re-run that file ALONE before believing it; findings from EXECUTED evidence outrank inspection and say which kind yours is.`
+
+phase('Cold survey')
+const all = await parallel([
+  ...BARS.map((b) => () => agent(
+    `${COLD}
+
+YOUR CHARGE: Read bar ${b.n} ("${b.name}") in ${STANDARD} — that bar's exact words are your entire grading law (read the tiers/meta-criterion section too). Survey the product at ${WT} against it as a stranger with full engineering skill: find everything MATERIAL — defects, gaps, unproven or overstated claims, places where the bar's A+ words are not yet true of the artifact. Grade honestly against the words (A+ means the bar's maximal expression holds and is enforced structurally). ceiling_limited=true ONLY if the remaining gap is provably certifiable by nothing but real users, a long soak run, or owner-only action — explain in ceiling_reason. Report at most your 10 most material findings (each with a concrete failure/gap scenario and file:line-style location), your top 3 strengths, and one evidence_note saying what you EXECUTED versus inspected.`,
+    { label: `bar${b.n}-${b.name.toLowerCase().split(' ')[0].replace(/[^a-z]/g, '')}`, phase: 'Cold survey', schema: BAR_SCHEMA, model: 'opus' }
+  )),
+  () => agent(
+    `${COLD}
+
+YOUR CHARGE — THE STORY CENSUS (the instrument of bar 20, "THE STORY" — read that bar in ${STANDARD} first): drive the actual simulation and retell what it produced. Find the repo's own deterministic test-harness idioms in ${WT}/tests (how campaigns are created and advanced with a fixed seed), then write a probe under ${SCRATCH}/cold-story that generates a world and advances roughly a simulated DECADE, capturing the chronicle/news/letters the product itself composes. Then RETELL that decade as a story: name the arcs (cause → escalation → turn → consequence), measure each arc's causal link-depth by walking the recorded receipts/ledgers, and verify every beat of your retelling is receipt-backed — a beat you cannot back, a contradiction between surfaces, or a stretch only summarizable as "things happened" is a FAILURE. Grade bar 20 on what you observed.`,
+    { label: 'story-census', phase: 'Censuses', schema: STORY_SCHEMA }
+  ),
+  () => agent(
+    `${COLD}
+
+YOUR CHARGE — THE SPELL-BREAK CENSUS (the instrument of bar 18, "IMMERSION" — read that bar in ${STANDARD} first, including THE CLARITY CLAUSE): walk the full product loop as an in-character user — generate a world, advance time, read the letter/chronicle surfaces, inspect an NPC, follow a road event, view court/judgment surfaces if lit, open the gallery/export surfaces — via rendered component tests, composer outputs, and user-facing copy in ${WT} (write probes under ${SCRATCH}/cold-spell). Count EVERY moment the artifact confesses to being software where world-voice would serve equally: jargon in a beat, raw ids in prose, JSON where sentences belong, error copy that speaks software, register breaks between surfaces. Per the clarity clause, mandated plainness on money/settings/safety surfaces is NOT a break — costume at clarity's expense is. Grade bar 18 on the walk.`,
+    { label: 'spell-census', phase: 'Censuses', schema: SPELL_SCHEMA }
+  ),
+])
+
+const bars = all.slice(0, BARS.length).filter(Boolean)
+const story = all[BARS.length]
+const spell = all[BARS.length + 1]
+
+log(`Cold survey returned: ${bars.length}/20 bars, story=${story ? 'ok' : 'MISSING'}, spell=${spell ? 'ok' : 'MISSING'}`)
+
+phase('Critic')
+const digest = bars.map((r) => `bar ${r.bar}: grade ${r.grade}${r.ceiling_limited ? ' (ceiling)' : ''}; evidence: ${r.evidence_note}; findings: ${r.findings.map((f) => `[${f.severity}] ${f.title}`).join(' · ') || 'none'}`).join('\n')
+const critic = await agent(
+  `${COLD}
+
+YOUR CHARGE — COMPLETENESS CRITIC: below are one-line digests of 20 cold bar-reviews plus two census walkthroughs of the product at ${WT}. Your job is to find what the FLEET missed, not to re-review the product: name the modalities not exercised (surfaces no one rendered, lifecycle paths no one round-tripped, executions no one ran, combinations no one lit), and for each gap say why it is material and the concrete probe that would close it. Do not repeat findings already listed.
+
+STORY CENSUS: grade ${story ? story.grade : 'MISSING'}; failures: ${story ? story.failures.join(' · ') : '—'}
+SPELL CENSUS: grade ${spell ? spell.grade : 'MISSING'}; breaks: ${spell ? spell.breaks.length : '—'}
+
+${digest}`,
+  { label: 'completeness-critic', phase: 'Critic', schema: CRITIC_SCHEMA }
+)
+
+return { bars, story, spell, critic }

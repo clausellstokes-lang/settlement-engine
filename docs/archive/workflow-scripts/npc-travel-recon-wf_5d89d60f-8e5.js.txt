@@ -1,0 +1,27 @@
+export const meta = {
+  name: 'npc-travel-recon',
+  description: 'Confirm NPC travel mechanics and survey the five adjacent systems for the hostage/journey design',
+  phases: [{ title: 'Recon' }],
+}
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a04d3f325c72e62dd'
+const PRE = `READ-ONLY RECON on the SettlementForge composite worktree at ${WT} (branch claude/the-composite @ aad6265e — verify with git -C ${WT} log --oneline -1 before trusting anything; mismatch = report it in your verdict and stop). You make ZERO git mutations and ZERO file edits. Search src/domain, src/lib, src/components, src/store and tests. Return raw findings with file:line anchors — your final output is data for a manager, not prose for a human. `
+const SCHEMA = {
+  type: 'object', required: ['verdict','mechanisms','gaps'],
+  properties: {
+    verdict: { type: 'string', description: 'Direct answer to the lens question, 2-5 sentences, CONFIRMED/ABSENT per claim' },
+    mechanisms: { type: 'array', items: { type: 'object', required: ['name','anchor','note'], properties: {
+      name: { type: 'string' }, anchor: { type: 'string', description: 'file:line' }, note: { type: 'string' } } } },
+    gaps: { type: 'array', items: { type: 'string' }, description: 'What the proposed design needs that does NOT exist yet' }
+  }
+}
+const READERS = [
+  { key: 'travel', prompt: PRE + `LENS 1 — NPC TRAVEL. The traditions wave (branch claude/traditions, folded into this composite) built "the mover". Question: do named NPCs travel between settlements in the tick engine today? Find: what moves them, WHY (what reasons/purposes exist), how destinations/routes are chosen, trip duration and return-home behavior, cadence (how often), whether travel is DARK behind a virtual flag (absent from DEFAULT_SIMULATION_RULES) or live, which rng streams seed it, and what surfaces render it (chronicle lines? map?). Search terms to expand from: mover, travel, journey, visit, sojourn, walkthrough, itinerary, abroad, away. Also check DESIGN_TRADITIONS.md in docs/ if present in this worktree.` },
+  { key: 'threats', prompt: PRE + `LENS 2 — THREATS ON THE MAP. For a hostage-risk design: what hostile-condition state exists today on regions, routes, and settlements? Find: sieges and occupation (does a settlement get besieged/occupied by another? what state records it), armies/warbands as moving or located entities, bandits/monsters/raids/calamities as region or route conditions, "embattled" or danger levels on trade routes or supply-web edges, and how warfare doctrine (supply-web warfare) marks contested space. Search: siege, occup, army, warband, raid, bandit, monster, calamity, embattl, hostil, warfare, blockade, contested. Report exactly which of these are real state machines vs merely narrative text.` },
+  { key: 'power', prompt: PRE + `LENS 3 — POWER, FACTIONS, LEGITIMACY, INFLUENCE. For ransom/stasis mechanics: how are faction power rankings and legitimacy represented and mutated? How is an individual NPC's influence/importance/rank measured (roles, POWER_ROLES, ownership stakes, seats)? What "internal dispute with peers" machinery exists inside an organization? ALSO run: git -C /Users/cstokes/Desktop/settlement-engine log --oneline -10 claude/the-ladder AND git -C /Users/cstokes/Desktop/settlement-engine show claude/the-ladder --stat | head -50 — THE LADDER branch (unfolded) holds intra-faction rank dynamics; report what it adds and its flag name. Search in the worktree: legitimacy, power ranking, influence, prestige, faction, rank, rivalry, dispute, ownership, stakes.` },
+  { key: 'compromised', prompt: PRE + `LENS 4 — THE COMPROMISED SYSTEM + NPC PERSONALITY. For capture-conversion mechanics: how does the corruption/"compromised" system work (owner vocabulary: compromised = corruption, ONE system, covert vs revealed states)? How does an NPC BECOME compromised today — what writes it, to which enemy/beneficiary, and how is it revealed/scrubbed? And separately: what personality/trait/flaw data do named NPCs carry (search: personality, trait, flaw, virtue, vice, temperament, loyalty, ambition) that a conversion-probability weight could read? Report the compromised data model precisely (fields, beneficiary linkage, covert leak protections) with anchors.` },
+  { key: 'intel', prompt: PRE + `LENS 5 — INFORMATION + DETERMINISM RAILS. Two halves. (a) What does a settlement/faction KNOW about the world — the information-statecraft layer (infoMode, intel, espionage, rumor accuracy, fog): could an NPC's route choice read "known enemy movements" from an existing knowledge representation, and what is it? Search: infoMode, intel, espionage, knowledge, rumor, fog, spy, informant. (b) The determinism rails a new subsystem must obey: how are rng streams derived and registered (stream names, seed derivation), how do virtual flags + dormancy byte-identity goldens work mechanically (one concrete example of a dark system and its golden test), and what does the catch-up/collapse path (lastLivingAdvanceAt) require of any new tick-time system? Anchors for each.` },
+]
+phase('Recon')
+const results = await parallel(READERS.map(r => () =>
+  agent(r.prompt, { label: 'recon:' + r.key, phase: 'Recon', schema: SCHEMA, model: 'opus' })))
+return Object.fromEntries(READERS.map((r, i) => [r.key, results[i]]))

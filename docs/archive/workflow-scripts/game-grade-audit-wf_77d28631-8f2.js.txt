@@ -1,0 +1,61 @@
+export const meta = {
+  name: 'game-grade-audit',
+  description: 'Score all six core surfaces against the game-grade UX doctrine (7 machinery points)',
+  phases: [
+    { title: 'Score', detail: 'one read-only scorer per surface' },
+  ],
+}
+
+const RUBRIC = `You are a READ-ONLY auditor. Work in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold (the current composite tree, tip 69b7a8d3 — includes THE HERALD 7-section inspector rebuild and the legibility wave). Do NOT edit any file, do NOT run git mutations. Evidence = file:line reads of the actual components/domain code; run nothing but reads/greps.
+
+THE BAR (owner-ratified 2026-07-22): the product's core surfaces must reach the legibility/UX/navigability grade of The Sims, SimCity, Civilization, Mount & Blade/Bannerlord, Total War: Warhammer. THE TRANSLATION PRINCIPLE governs: the engine's deterministic formulas are NEVER shown — they are TRANSLATED to plain-language meaning for a wide audience. A surface showing modifier arithmetic or raw engine tokens VIOLATES the bar; a surface answering "why" in sentences (glance word -> sentence -> deeper sentences, bands over bare numbers) MEETS it.
+
+Score your assigned surface on these SEVEN machinery points, each rated ABSENT / PARTIAL / PRESENT / GAME_GRADE:
+1. WHY_ON_DEMAND — can the user open any displayed state/number and get its recorded causes as plain-language sentences (not formula terms)? How many hops deep?
+2. NAMED_STATES — does every internal state render as a named band/word with cause (and duration where applicable), never a bare integer or engine token?
+3. QUERY_WEB — click/inspect ANY entity anywhere -> its story; everything cross-links (address web, Compendium deep-links); is it ambient or buried?
+4. FORECAST_BEFORE_COMMIT — before a user commits an action (generate, edit, advance, propose), do they see translated projected consequences?
+5. LENSES — can one view answer many questions via switchable lenses/filters?
+6. ORIENTATION — does the surface tell the user what deserves attention next (needs-attention, badges, banners), scaled so 20+ settlements stay navigable?
+7. VERBS_ON_ENTITIES — do entity cards/panels carry their legal ACTIONS in place (not just facts), and does the world's motion surface ambiently (M&B's 'Count X is besieging Y')?
+
+Also record: TRANSLATION_VIOLATIONS — every place the surface leaks raw engine vocabulary, formula arithmetic, bare tick numbers, or untranslated tokens to the user (file:line + what leaks).
+
+Be adversarial about ratings: GAME_GRADE is reserved for genuinely benchmark-level; healthy skepticism beats flattery. Cite file:line for every rating. End with the 3 highest-leverage gaps and any quick wins (small, display-only).`
+
+const SCHEMA = {
+  type: 'object', additionalProperties: false,
+  required: ['surface','scores','translationViolations','topGaps','quickWins','overall'],
+  properties: {
+    surface: { type: 'string' },
+    scores: { type: 'array', items: { type: 'object', additionalProperties: false,
+      required: ['point','rating','evidence'],
+      properties: {
+        point: { type: 'string', enum: ['WHY_ON_DEMAND','NAMED_STATES','QUERY_WEB','FORECAST_BEFORE_COMMIT','LENSES','ORIENTATION','VERBS_ON_ENTITIES'] },
+        rating: { type: 'string', enum: ['ABSENT','PARTIAL','PRESENT','GAME_GRADE'] },
+        evidence: { type: 'string' },
+        gap: { type: 'string' },
+      } } },
+    translationViolations: { type: 'array', items: { type: 'object', additionalProperties: false,
+      required: ['where','leak'], properties: { where: {type:'string'}, leak: {type:'string'} } } },
+    topGaps: { type: 'array', items: { type: 'string' }, maxItems: 3 },
+    quickWins: { type: 'array', items: { type: 'string' } },
+    overall: { type: 'string', description: 'one-sentence verdict: distance to the bar' },
+  },
+}
+
+const SURFACES = [
+  { key: 'generator', brief: 'THE GENERATOR — the settlement/world creation flow: src/components/create/** (Create page, pickers, InstantDraft), the generation wizard surfaces, post-generation landing into the dossier. Question: does the creator see translated consequence/preview before forging, and is the result explained?' },
+  { key: 'settlement-editor', brief: 'THE SETTLEMENT EDITOR — user edits to a generated settlement: the pendingEdits/dispatcher flow, editable panels inside the dossier (src/components/new/tabs/**, dossier edit affordances, userEdits domain), Rumors/edit surfaces. Question: direct-manipulation feel, instant translated feedback, undo confidence.' },
+  { key: 'map-editor', brief: 'THE MAP EDITOR — town/world map editing + placement: src/components/map/WorldMap.jsx placement flows, PlacementsLayer, town map surfaces (townplan/massing viewers), map exports, sf-bridge/FMG integration (public/map vendored fork boundaries), lenses on maps. Question: manipulation vs configuration, lens system, click-anything-query.' },
+  { key: 'realm', brief: 'THE REALM — the living-world layer OUTSIDE the inspector: the realm map screen chrome (WorldMapToolbar), campaign advance moment (AdvanceReport, WhileYouWereAway), settlement dossier as a READING surface (OutputContainer tabs incl. World/Chronicle/Causes/Outlook), cross-settlement navigation. Question: ambient world motion, query web ambient reach, orientation at 20+ settlements.' },
+  { key: 'custom-content', brief: 'CUSTOM CONTENT — user-authored deities/factions/etc: customRegistry, custom content workspace (My Custom Content mode in the Compendium, authoring buckets), how authored content integrates into engine surfaces, links back into dossiers/Herald. Question: is authored content a first-class citizen of the query web with named states and verbs?' },
+  { key: 'herald', brief: 'THE HERALD — the just-rebuilt 7-section inspector: src/components/map/RealmInspector.jsx + Herald* files + heraldRouting/heraldFeed/heraldGrammar/heraldFilter. Score it honestly against the bar it was built for — hover-grade why, facet depth, ambient reach beyond the inspector, forecast quality in Divination, verbs in Adjudication.' },
+]
+
+phase('Score')
+const results = await parallel(SURFACES.map(s => () =>
+  agent(`${RUBRIC}\n\nYOUR SURFACE: ${s.brief}\n\nReturn the structured verdict. Your final output is data for the manager, not prose for the user.`,
+    { label: `score:${s.key}`, phase: 'Score', schema: SCHEMA, model: 'opus' })
+))
+return { results: results.filter(Boolean) }

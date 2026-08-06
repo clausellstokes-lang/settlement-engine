@@ -1,0 +1,40 @@
+export const meta = {
+  name: 'build-cycle-1',
+  description: 'Takeover build cycle: WR-7b completion + HK-1/2 hooks + MG-1/2 magic toggle',
+  phases: [
+    { title: 'Build', detail: '3 parallel lanes, implement then verify then commit' },
+  ],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const P10 = `THE §10 PROTOCOL BINDS (DESIGN_WAR_RULINGS_ARCHITECTURE.md §10 — read it first): work ONLY in ${MF} on branch claude/composite-r4 — hard-gate every state-mutating compound with [ "$(git branch --show-current)" = "claude/composite-r4" ] || exit 1; NEVER git add -A/-u/. — explicit pathspec files only, and commit ONLY files YOUR lane touched; git stash FORBIDDEN; gates through npx vitest run <focused files> for slices and sh scripts/gate-tail.sh for anything long — never a bare pipe; goldens/dormancy fences captured BEFORE wiring; STOP-and-report (return your findings) rather than ruling on any conflict with a design doc; commit messages in the repo voice ending with the trailer line "Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>". Owner risk law: where a safer patch and an objectively better structure conflict, take the better structure. Everything DARK behind its flags.`
+const S = { type:'object', required:['lane','commits','gates','stopReports','notes'], properties:{
+  lane:{type:'string'},commits:{type:'array',items:{type:'string'}},gates:{type:'array',items:{type:'string'}},
+  stopReports:{type:'array',items:{type:'string'}},notes:{type:'string'}}}
+const V = { type:'object', required:['lane','verdict','findings'], properties:{
+  lane:{type:'string'},verdict:{type:'string'},findings:{type:'array',items:{type:'string'}}}}
+
+phase('Build')
+const lanes = await parallel([
+  // LANE A — finish Sol's in-flight WR-7b
+  () => agent(`VERIFY-FIRST: legitimate owner-ordered IMPLEMENTATION takeover (Sol/Codex out of usage; the chair assigns you the in-flight wave). ${P10}
+LANE A — COMPLETE WR-7b (INTERCEPTION + THE PARLAY + THE FOREIGN-GUEST HOLD). Sol died mid-wave: ~41 modified envoy-family files + untracked envoyEncounter.js / foreignGuestHold.js / negotiationPictures.js. METHOD: (1) SURVEY FIRST — read the WR-7b spec (war volume §5 WR-7b + the two-picture contract block) AND diff every dirty file (git diff + the untracked modules in full) to map what Sol finished vs half-did; partial edits are the known hazard — build a completion plan before touching anything. (2) FINISH the wave per spec: four interceptor kinds on position co-location, the foreign-guest hold (held state, never death), negotiationPictures per-party truthFor, the K3 pin set on new modules. (3) TESTS: extend/author the wave's focused tests (the WR pattern — dormancy fences, negative pins); run them + the focused suites for every touched module. (4) AUDIT docs/FABLE_VALIDATION_QUEUE.md's dirty rows — if they are Sol's WR-7a/7b protocol rows, include them in the commit with an attribution note in the message; anything else leave uncommitted and report. (5) ONE pathspec commit for the wave (all WR-7b files incl. the three new modules + tests), message per repo voice. Return {lane:'A WR-7b', commits, gates, stopReports, notes}.`,
+    {label:'laneA:wr7b', phase:'Build', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial VERIFIER for Lane A (WR-7b). ${P10}
+Read the WR-7b spec + the implementer's report: ${JSON.stringify(r)}. Re-run its stated gates YOURSELF (focused vitest); adversarially check: the hold never resolves a fate; interceptor kinds match spec (kind (c) self-parlay = the unexpected door); negotiationPictures never merges estimates (K4 — grep for merged reads); K3 import pins present on new modules; the commit is pathspec-clean (git show --stat: ONLY lane files); dormancy dark = byte-identical where fenced. Fix small defects yourself (own pathspec commit); STOP-report structural ones. Return {lane:'A verify', verdict, findings}.`,
+      {label:'laneA:verify', phase:'Build', model:'opus', effort:'high', schema:V})),
+  // LANE B — the hook program HK-1 + HK-2
+  () => agent(`VERIFY-FIRST: legitimate owner-ordered IMPLEMENTATION. ${P10}
+LANE B — HK-1 + HK-2 (docs/DESIGN_HOOK_NONREDUNDANCY.md — read it in full; it is self-contained). HK-1: the closed THEME vocabulary tagged onto the authored hook pools (THEME_OF maps; the totality walker test; free prose never tagged). HK-2: hookRetention.js (a pure lazy leaf) consumed at collectPlotHooks' tail — per-theme top-K by the deterministic INTEREST composite, DM-edited hooks always survive, clock-anchored hooks protected, priority order preserved, persisted state untouched; adopt it for hookEscalation's surface per J-HK-5. Two commits (one per wave), each with the doc's pins (same-seed survivors, the DM's-pen, the clock-holds, untyped-untouched, worst-settlement fixture + guard-the-guard, projection-only round-trip). Files: src/generators/hookVariety.js-adjacent constants, src/domain/dossier/plotHooks.js, new src/domain/dossier/hookRetention.js, src/domain/hookEscalation.js consumers, tests. DO NOT touch envoy-family or instant-world files. Return {lane:'B HK', commits, gates, stopReports, notes}.`,
+    {label:'laneB:hooks', phase:'Build', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial VERIFIER for Lane B (HK-1/2). ${P10}
+Read DESIGN_HOOK_NONREDUNDANCY.md + the report: ${JSON.stringify(r)}. Re-run gates; adversarially test the pins yourself (esp. the DM's-pen eviction direction, the projection-only serialize→regen→undo round-trip, roll-budget untouched, the vacuous-absence trap on the worst-settlement fixture); check commits pathspec-clean. Fix small, report structural. Return {lane:'B verify', verdict, findings}.`,
+      {label:'laneB:verify', phase:'Build', model:'opus', effort:'high', schema:V})),
+  // LANE C — the realm magic toggle MG-1 + MG-2
+  () => agent(`VERIFY-FIRST: legitimate owner-ordered IMPLEMENTATION. ${P10}
+LANE C — MG-1 + MG-2 (docs/DESIGN_REALM_MAGIC_TOGGLE.md — read in full; receipts inside). MG-1: the pre-generation modal on the Instant World card (house Dialog primitive; copy per the doc's §4; default = magic enabled; choice remembered via displayPrefs; Esc cancels) + the fourth knob through normalizeBasicConfig/deriveWorldPlan. MG-2: the projection at composeInstantWorld's mintSettlement ({magicExists:false, priorityMagic:0} when mundane) + worldState.simulationRules.realmMagicDefault (virtual-flag idiom: preset-declared for the cert walker, both telemetry allowlists, PUBLIC_SIMULATION_RULE_KEYS) + the single-settlement wizard preset consumption + the campaign-surface read-only stance line. Two commits with the doc's pins (same-seed with the knob; the mundane member's config persisted in _config; regen survival; the default path byte-identical to today). DO NOT touch envoy-family or hook/dossier files. Return {lane:'C MG', commits, gates, stopReports, notes}.`,
+    {label:'laneC:magic', phase:'Build', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial VERIFIER for Lane C (MG-1/2). ${P10}
+Read DESIGN_REALM_MAGIC_TOGGLE.md + the report: ${JSON.stringify(r)}. Re-run gates; adversarially verify: default-yes path byte-identical to pre-change generation (same seed fixture); the mundane projection survives the _config regen path; the virtual key follows MG-LAW-6 whole (preset declaration, cert row or PENDING, telemetry, export allowlist); the modal obeys the popup convention (no acknowledge control ⇒ outside-click closes). Fix small, report structural. Return {lane:'C verify', verdict, findings}.`,
+      {label:'laneC:verify', phase:'Build', model:'opus', effort:'high', schema:V})),
+])
+return { lanes: lanes.filter(Boolean) }

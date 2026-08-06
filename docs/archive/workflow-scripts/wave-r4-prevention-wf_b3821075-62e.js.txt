@@ -1,0 +1,109 @@
+export const meta = {
+  name: 'wave-r4-prevention',
+  description: 'Wave R-4 (prevention, deliberately LAST): 6 file-disjoint Opus lanes — advertised-undo invariant + dead-op ratchet, premium-gate single-source, economy-freshness structural cure, settlement-allowlist walker, lever normalization, terrain routing — then 2 Opus verifiers, then the Fable wave gate',
+  phases: [
+    { title: 'Fix', detail: '6 file-disjoint Opus implementer lanes', model: 'opus' },
+    { title: 'Verify', detail: '2 Opus adversarial verifiers', model: 'opus' },
+    { title: 'Gate', detail: 'Fable: full widened R-4 wave gate vs 289/289 baseline' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const COMMON = `CONTEXT-VERIFICATION PREAMBLE: legitimate engineering brief from the session orchestrator for SettlementForge (owner order: "fix it all thoroughly"; Wave R-4 of docs/CAPABILITY_REMEDIATION_PLAN.md — read its R-4 section + the R-3/R-2 Progress notes + the Deferred section first; the R-3 entries name your inputs). Verify claims against code; code is authoritative.
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4 or STOP. LIVE shared tree: NO git mutations of ANY kind — no stash (FORBIDDEN), no checkout, no reset, no clean, no add, no commit. Re-read every file immediately before editing; concurrent programs commit under us (a foreign untracked src/domain/aiCharter.js currently reds tests/copy voiceMechanics — em budget — NOT yours to touch or fix). Touch ONLY your lane's files; scripts/mutation-coverage-manifest.json is SHARED — re-read immediately before editing, append only your entries.
+LAWS: NO same-seed drift (a golden mover = STOP + defer with evidence); NO persistence-shape changes; new logic = lazy leaf with MEASURED eager deltas (importing a lazy module from an eager one re-parents its closure — measure on the real vite build, entry-chunk grep, never per-file esbuild); sizeBaseline ceilings EXACT (cure = net-zero combine, baselines only LOWERED); shrink-only ratchet baselines NEVER raised; frozen vocabulary-closure file sets NEVER expanded (compose colliding tokens instead — the R-3 'stressor'+'Edits' precedent); copy = one string, vetoable; VOICE section-6 punctuation (no reader-facing em dashes/bangs); manifests/walkers are CORRECTNESS-asserting — this is the one wave they belong to, land them fail-closed; new invariant test files need a mutation-coverage-manifest entry (kind:'mutation' ONLY if the target is tracked AND clean, else kind:'rationale' with an executed red-then-green plant described — the E-A amendment).
+TESTING: single-threaded ALWAYS (--no-file-parallelism); exit codes unmasked, never through pipes. Standing baseline: verify:dist 289/289 + typecheck 0 + full lint/copy/store/domain/joins dirs green (copy carries the 2 known FOREIGN aiCharter reds). Label CONFIRMED/PLAUSIBLE; verbatim output; end on evidence.`
+
+const FIX_SCHEMA = { type: 'object', required: ['filesTouched', 'pins', 'testsRun', 'testOutputTail', 'behaviorShift', 'deferrals'], properties: { filesTouched: { type: 'array', items: { type: 'string' } }, pins: { type: 'number' }, testsRun: { type: 'string' }, testOutputTail: { type: 'string' }, behaviorShift: { type: 'string' }, deferrals: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' }, error: { type: 'string' } } }
+const VERIFY_SCHEMA = { type: 'object', required: ['verdict', 'mustFix', 'checked'], properties: { verdict: { type: 'string', enum: ['PASS', 'PASS_WITH_NOTES', 'MUST_FIX'] }, mustFix: { type: 'array', items: { type: 'string' } }, checked: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } }
+const GATE_SCHEMA = { type: 'object', required: ['newReds', 'suitesRun', 'outputTail'], properties: { newReds: { type: 'array', items: { type: 'string' } }, suitesRun: { type: 'string' }, outputTail: { type: 'string' }, notes: { type: 'string' } } }
+
+const LANES = [
+  {
+    key: 'p1-undo-invariant-deadops',
+    brief: `LANE P-1 — ADVERTISED-UNDO INVARIANT + DEAD-OP RATCHET (registry-level prevention; the class guards for atlas queue #5 and #21).
+1. ADVERTISED-UNDO INVARIANT: every src/store/operationRegistry.js row that advertises undo capability (undoState values other than 'none'/'irreversible' — read the R-0 tri-state grammar in the registry header first, including 'partial:<ref>' and 'action-partial') must be PROVEN to arm. PRIOR ART FIRST: read tests/store/operationRegistry.walker.test.js and tests/store/pulseUndoAdvertising.test.js — extend, do not duplicate. Build the missing half as a fail-closed source-scan walker: map each advertising op to its arming mechanism (snapshot push onto the correct ring, session tombstone, inverse op) at the op SITE, and fail any advertising row with no discoverable arming plus any arming site whose op does not advertise (both directions — the R-0 de-advertising work must not silently regress). Known-good anchors to calibrate against: undoLastPulse (advance body push), undoLastProposalApply (proposalUndoStack, R-1), canonize/uncanonize action-partial tombstone (R-1), undoLastEvent flat-row refusals (R-3: destroy rows refuse BY DESIGN while the op still advertises for real entries — your walker must model row-class-conditional arming honestly, not flatten it).
+2. DEAD-OP RATCHET: the atlas (docs/SETTLEMENT_CAPABILITY_ATLAS.md Part VI/VII, queue #21) records 31 registered ops with zero reachable consumers, pending the owner's retire-vs-wire word. RE-DERIVE the dead set yourself from the current tree (the atlas is a dated snapshot; R-0..R-3 armed/mounted several ops — e.g. undoLastProposalApply is NEW and reachable; ChronicleScrollback/NarrativeArchive mounts changed reachability); freeze YOUR measured list as an only-shrinks ratchet: an op may leave the list (gaining a consumer or being retired) but none may join it, and the test message must say the list answers to owner queue #21. Report your measured dead count vs the atlas's 31 with the delta explained.
+Files: new test files (tests/architecture/ or tests/store/ — follow the repo's placement for registry walkers) + scripts/mutation-coverage-manifest.json entries. operationRegistry.js itself should need NO edits — if you find a row whose advertising is FALSE under your walker, that is a FINDING to report with evidence (fix the row only if the falsehood is unambiguous and the fix is metadata-only; registry field changes need gen:compendium-data regen — run it if so).`,
+  },
+  {
+    key: 'p2-premium-single-source',
+    brief: `LANE P-2 — PREMIUM-GATE SINGLE-SOURCE (the R-0 deity cure generalized; closes the R-2/R-3 spelling-drift class).
+1. Extract the viewer-authority spelling — auth.tier === 'premium' || auth.tier === 'founder' || isElevated() — into ONE tiny pure module (src/domain/access/ or wherever the repo's existing access helpers live; SEARCH for prior art first — settlementDeityHelpers got a single-source predicate in R-0, and there may already be an access/entitlement module to extend). SEMANTICS VERBATIM, including the currently-dead 'founder' disjunct (no code path produces tier==='founder' today — founder-transfer sets tier:'premium' + is_founder — but retiring it is the OWNER'S word per the plan's owner queue; your refactor must be behavior-identical, fail-closed on missing auth).
+2. Consume it from BOTH mirrors: SettlementDetail.jsx canEdit (~:236-239) and SettlementWorkbenchMount.jsx viewerCanAuthor (~:29-33; keep its JUDGMENT + FLAG-ON COUPLING comments intact, update the spelling reference). SettlementDetail is a HOT file — net-zero if at a ceiling. The helper must be eager-cheap: measure the entry-chunk delta on a real build.
+3. SOURCE-SCAN test: no OTHER spelling of the premium-tier check exists in src outside the single source + pinned exemptions (deityWriteGate's R-0 single-source predicate is the known sibling — pin it as an exemption or converge it if trivial and behavior-identical; the paid-surface purchase-modal routing and edge functions are OUT of scope — enumerate what you exempt with reasons).
+4. DOCUMENT (comment + test note, NO behavior change): npcAuthoringAllowed in OutputContainer.jsx (~:442) deliberately does NOT use this authority — aligning it changes which users see NPC authoring levers (paid-surface behavior, owner-gated; the plan's owner queue holds it).
+5. THE HALF-VACUOUS DOCK PIN (R-3 verify note): tests/components/workbenchProseEditor.test.jsx's free-tier case seeds an empty pendingEditsQueue, under which ChangeDock returns null regardless of the gate. Add a free-tier case with a seeded queue + one applied receipt asserting the Dock is ABSENT while the premium case with the same seed shows it — making the gate's suppression half non-vacuous.
+Files: new access module, SettlementDetail.jsx, SettlementWorkbenchMount.jsx, tests/components/workbenchProseEditor.test.jsx, new scan test, manifest entry.`,
+  },
+  {
+    key: 'p3-economy-structural',
+    brief: `LANE P-3 — ECONOMY FRESHNESS: THE STRUCTURAL CURE (R-3's escalated wave-level decision; read economyFreshness.js HONEST LIMITS "NOT YET WIRED" first — the census is already enumerated there).
+1. ONE SHARED NOTE LEAF: the freshness sentence currently exists as three hand-copies (EconomicsTab tallies variant, ServicesTab catalog variant, SummaryTab tallies reuse). Create a single home (a tiny component or string+helper module living lazy — economyFreshness.js itself is the natural host; it is already a lazy shared chunk) exporting the tallies + catalog variants; swap all three surfaces to consume it with the rendered strings BYTE-IDENTICAL to today (pin string equality — this is a pure refactor of the copies, zero user-visible change on the three covered tabs).
+2. WIRE THE UNCOVERED LIVE SURFACES: TableView.jsx (LIVE — flagRegistry ships tableView:true) and SummaryTabV2.jsx get the conditional note (same detector, same tallies string, byte-identical-when-fresh pinned per surface). SessionMode.jsx: EVALUATE in-lane — if the session-play register makes a meta-note wrong there (legibility law: the surface's job is in-fiction play), record it in the walker's frozen deferral list with that reason instead of wiring; report the call either way as a vetoable JUDGMENT.
+3. CENSUS WALKER (the prevention): a fail-closed source-scan walker over economy read-model readers — consumers of composeMaterialTruth() plus direct economicState/prosperity/activeChains/availableServices renderers in src/components + src/pdf — asserting every found surface is classified: covered (renders the shared note), framed (carries the first-survey framing: OverviewTab/ViabilityTab/DefenseTab), print-deferred (the PDF chapters, standing deferral), or explicitly frozen-deferred with reason (SessionMode if so judged; the copyable-markdown owner call). An UNCLASSIFIED new reader = red. This is the "a new reader cannot land uncovered" guarantee.
+4. Update economyFreshness.js HONEST LIMITS to match the walker's taxonomy (single source of the classification story).
+HAZARDS: eager-closure (TableView/SummaryTabV2/SessionMode chunk membership — measure entry-chunk fingerprints on a real build); component 600-line ceilings (net-zero combines); voiceMechanics on any string movement; the walker needs a manifest entry.
+Files: economyFreshness.js, EconomicsTab.jsx, ServicesTab.jsx, SummaryTab.jsx, SummaryTabV2.jsx, TableView.jsx, SessionMode.jsx (evaluate), new walker test, tests/components/economyFreshnessNote.test.jsx, manifest.`,
+  },
+  {
+    key: 'p4-allowlist-walker',
+    brief: `LANE P-4 — SAVED_SETTLEMENT_PATCH_KEYS SOURCE-DERIVED WALKER + CONFIG-WRITER EXEMPTION PINS (R-3 verify note: the settlement allowlist is a hand-copied literal in BOTH settlementSliceHelpers.js and its test, so "the allowlist IS the census" only proves list==list; combined with atomic refusal, a future call site adding one key silently refuses the WHOLE patch in production where import.meta.env.DEV is false — the owner's most-bitten survives-one-path class).
+1. Build tests/store or tests/generators walker (mirror the R-3 configPatchAllowlistWalker method — read it first, including its corrected first-key regex (?:^|[,{])\\s* and its documented residual blind spots): derive the updateSavedSettlement call-site key census from source at run time (the R-3 verify census found exactly 21 sites: settlementSlice x6, aiSlice x9, ShareToGallery x6 — re-derive, do not trust), assert (a) every censused key is in SAVED_SETTLEMENT_PATCH_KEYS (fail-closed: a new call-site key reds the walker BEFORE it can silently refuse in prod) and (b) liveness — every allowlist member is either censused or an explicitly-listed inert carry (enumerate any, with reasons). Document residual blind spots in the header per the R-3 precedent.
+2. EXEMPTION PINS for the config single-door story: src/store/neighbourSlice.js:43,:81 write state.config._neighbourRelType directly and src/store/configSlice.js:218 (setSettlementType) writes settType directly — both bypass updateConfig BY DESIGN (they write admitted keys). Pin both as enumerated exemptions in a small source-scan test (exact-set: these and ONLY these direct config writers exist outside updateConfig) so R-4's one-validated-door claim carries its exemptions and a future third direct writer reds.
+Files: new test files + manifest entries ONLY — no src edits expected; if the walker finds a REAL gap (a censused key missing from the allowlist), that is a finding: add the key to SAVED_TETTLEMENT... (typo guard: SAVED_SETTLEMENT_PATCH_KEYS in src/store/settlementSliceHelpers.js) with evidence and report it prominently.`,
+  },
+  {
+    key: 'p5-lever-normalization',
+    brief: `LANE P-5 — LEVER-FIELD NORMALIZATION (atlas CONFLICT 4 cure; the last normalization the plan defers to this wave).
+1. READ FIRST: docs/SETTLEMENT_CAPABILITY_ATLAS.md section 5 (the 4 recorded CONFLICTs — CONFLICT 4 is the lever-field one) + the atlas's lever-family rows + the slice conventions it names. The plan's one-liner: "lever-field normalization to 'traced input causes' (atlas + slice conventions, CONFLICT 4 cure)".
+2. Determine the exact normalization the atlas prescribes, enumerate every lever-field site (consumer census with a denominator — found N, changed M, exempt K with reasons), and apply it ONLY if it provably cannot move any golden, persisted output, or same-seed generation (run the determinism/golden suites nearest anything you touch). STOP CONDITIONS (defer with evidence instead of shipping): the normalization requires a persistence-shape change; it moves any golden; the atlas conflict turns out to require an owner semantic ruling rather than a mechanical normalization. A well-evidenced deferral verdict is a legitimate lane outcome — report which you took and why.
+3. If applied: pins per normalized site + a walker/scan preventing the un-normalized spelling from returning.
+Files: whatever the atlas names — REPORT your file list in filesTouched and STOP (report, do not edit) if it collides with the other lanes' enumerated files: operationRegistry walker tests, SettlementDetail.jsx, SettlementWorkbenchMount.jsx, economyFreshness.js, the economy tab/table/session components, settlementSliceHelpers.js walker tests, lib/gallery.js, lib/shareImage.js, lib/seoDossier.js, GalleryDetail.jsx.`,
+  },
+  {
+    key: 'p6-terrain-routing',
+    brief: `LANE P-6 — TERRAIN READER ROUTING (R-3 lane B verify NOTE 1; the declared legacy-terrain shift's display-side completion).
+CONTEXT: updateConfig now drops legacy 'terrain' keys (declared R-3 shift — the stale legacy value could contradict the freshly rolled terrainType). Four display readers still read config.terrain FIRST, bypassing resolveTerrain ("the ONE terrain read" per its own docstring): src/lib/gallery.js:691, src/lib/shareImage.js:71, src/lib/seoDossier.js:38, src/components/gallery/GalleryDetail.jsx:123.
+1. CENSUS with a denominator: grep beyond the four named sites (config.terrain, .terrain ||, terrain ??, every spelling) across src/ — the four are the verifier's list, not necessarily the universe. Disposition every site: routed, exempt-with-reason, n/a-with-reason.
+2. Route the display readers through resolveTerrain. DECLARED SHIFT, vetoable per site: gallery cards / share images / SEO dossier text for LEGACY saves whose stale config.terrain contradicted the resolved terrainType will now show the resolved value (the contradiction was the bug — R-3 probe: input 'coastal' vs resolved 'riverside'). New/regenerated saves are byte-identical (config.terrain no longer persists). NO generation change (display-only; run the golden suites nearest anything you touch to prove zero movers).
+3. Pins: per routed site (legacy-contradiction fixture shows resolved value; fresh save unchanged); plus a small scan pinning resolveTerrain as the only terrain read in the routed files.
+HAZARD: lib/gallery.js and lib/seoDossier.js may feed persisted/published artifacts (gallery rows, share images, prerendered SEO routes) — verify these are RENDER-time reads, not values persisted into rows; if any site WRITES the terrain value into a persisted record, STOP that site and defer owner-gated with evidence.
+Files: the four named + any censused siblings + new pins + manifest entries.`,
+  },
+]
+
+phase('Fix')
+log('Wave R-4 prevention: 6 file-disjoint Opus implementer lanes')
+const fixes = await parallel(LANES.map((l) => () =>
+  agent(COMMON + '\n\nYOU ARE AN OPUS IMPLEMENTER (owner model split 2026-07-27: Opus implements and verifies; Fable architected this spec). Your lane owns ONLY the files your brief names.\n\n' + l.brief, { label: 'fix:' + l.key, phase: 'Fix', model: 'opus', effort: 'high', schema: FIX_SCHEMA })
+    .then((r) => ({ lane: l.key, fix: r }))
+))
+
+const fixSummary = fixes.filter(Boolean).map((f) => ({ lane: f.lane, files: f.fix && f.fix.filesTouched, pins: f.fix && f.fix.pins, shift: f.fix && f.fix.behaviorShift, deferrals: f.fix && f.fix.deferrals, notes: f.fix && f.fix.notes }))
+log('Fix lanes done: ' + fixSummary.map((f) => f.lane + (f.files ? ' ok' : ' FAILED')).join(', '))
+
+phase('Verify')
+const mkVerify = (lanes, focus) => {
+  const reports = JSON.stringify(fixSummary.filter((f) => lanes.includes(f.lane)))
+  const briefs = LANES.filter((l) => lanes.includes(l.key)).map((l) => l.brief).join('\n\n')
+  return agent(COMMON + `\n\nYOU ARE AN OPUS ADVERSARIAL VERIFIER for Wave R-4 lanes ${lanes.join(', ')}. Fixer reports: ${reports}\n\nTheir briefs:\n${briefs}\n\nRepo READ-ONLY except running tests. ${focus} For each numbered brief item: verify landed, re-derive with fresh greps (censuses especially — grep beyond every fixer list), RUN the pins + walkers + the determinism/golden suites nearest touched seams, attempt refutation. Walkers are CORRECTNESS-asserting prevention: try to construct an instance that slips each one (a new uncovered reader, a new direct writer, an advertising-but-unarmed op, a first-position key) and confirm the walker reds — a walker that cannot red is worse than none. MUST_FIX only for real unresolved items.`, { label: 'verify:' + lanes[0].split('-')[0] + '+', phase: 'Verify', model: 'opus', effort: 'high', schema: VERIFY_SCHEMA })
+}
+const verifies = await parallel([
+  () => mkVerify(['p1-undo-invariant-deadops', 'p2-premium-single-source', 'p4-allowlist-walker'], 'Registry/gating substrate: false advertising in walker mappings, single-source refactor behavior drift (the founder disjunct must survive verbatim; fail-closed on missing auth), dead-op list accuracy vs the current tree, exemption-set exactness.'),
+  () => mkVerify(['p3-economy-structural', 'p5-lever-normalization', 'p6-terrain-routing'], 'Display/normalization substrate: byte-identical string swaps on the three covered tabs, eager-closure re-parenting (re-grep the built entry chunk yourself), walker taxonomy completeness vs a fresh economicState-reader census, lever-normalization golden safety or deferral-evidence quality, terrain routing census denominator + no persisted-write site routed.'),
+])
+
+const anyMustFix = verifies.filter(Boolean).some((v) => v && v.verdict === 'MUST_FIX')
+const anyDead = fixes.some((f) => !f || !f.fix) || verifies.some((v) => !v)
+
+let gate = null
+if (!anyMustFix && !anyDead) {
+  phase('Gate')
+  gate = await agent(COMMON + `\n\nYOU ARE THE FABLE GATE VALIDATOR. WAVE-END GATE (R-4). Run single-threaded, exit codes unmasked: (1) tests/lint FULL; (2) tests/copy FULL (2 FOREIGN aiCharter reds expected unless the L-1 lane cured them — attribute); (3) tests/store FULL; (4) tests/domain FULL; (5) tests/joins FULL; (6) tests/architecture FULL; (7) tests/components + tests/ui FULL; (8) tests/generators + tests/simulation + tests/property + tests/application FULL (same-seed proof); (9) pdf parity suites; (10) npm run typecheck; (11) npm run build then VERIFY_DIST=1 vitest run tests/build/ --no-file-parallelism vs the 289/289 baseline. Also run every NEW R-4 walker/ratchet file explicitly and quote its counts. Report every red VERBATIM, attributed baseline/foreign/THIS-WAVE, plus totals per dir vs the R-3 gate totals (lint 265, copy 108/110+2 foreign, store 876, domain 8302, joins 377, architecture 336, components/ui 2041, gen-family 1143, pdf 51, dist 289).`, { label: 'gate:r4', phase: 'Gate', model: 'fable', schema: GATE_SCHEMA })
+} else {
+  log('Gate SKIPPED: ' + (anyMustFix ? 'MUST_FIX findings present' : 'a lane or verifier died') + ' — orchestrator handles the next step')
+}
+
+return { fixes: fixSummary, verifies, gate, gateSkipped: !gate }

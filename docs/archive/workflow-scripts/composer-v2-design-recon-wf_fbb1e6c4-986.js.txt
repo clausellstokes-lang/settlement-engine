@@ -1,0 +1,32 @@
+export const meta = {
+  name: 'composer-v2-design-recon',
+  description: 'Read-only recon of the event composer, preview machinery, and event registry for the Composer V2 design',
+  phases: [{ title: 'Recon', detail: '3 read-only surveys: composer UI, preview/pendingEdits, registry/mutate layer' }],
+}
+
+const SCHEMA = {
+  type: 'object',
+  required: ['summary', 'facts', 'hazards', 'reuse', 'openQuestions'],
+  properties: {
+    summary: { type: 'string' },
+    facts: { type: 'array', items: { type: 'object', required: ['point', 'path'], properties: { point: { type: 'string' }, path: { type: 'string' } } } },
+    hazards: { type: 'array', items: { type: 'string' } },
+    reuse: { type: 'array', items: { type: 'string' } },
+    openQuestions: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+const COMMON = `You are a READ-ONLY recon agent in /Users/cstokes/Desktop/settlement-engine (branch review-fixes-2026-07-08). Do NOT run tests/builds, write nothing, no git mutations (read-only git ok). A parallel implementer (E1a) has unstaged work — ignore it, read files as they are. Read whole files/scopes, not grep windows. CONTEXT: we are DESIGNING (not building) EVENT COMPOSER V2 per an owner directive: every simulation capability gets a FORCEABLE dossier counterpart; all inputs BOUNDED by what the sim can do in the settlement's CURRENT STATE (freetext = optional flavor only, never parsed); target-first navigation (click a thing, see its legal verbs) since the verb space is huge; previews must be LIVE, EDITABLE within bounds (payload dials), and canon-legal by construction. The composer should become a PROJECTION of the Track-K operation registry (src/store/operationRegistry.js, landed today: 157 ops + walker) with per-op affordance predicates that are THE SAME functions the sim uses. Return the structured object: summary (<300 words), facts (exact shapes/functions + paths), hazards, reuse, openQuestions.`
+
+const BRIEFS = [
+  { key: 'composer-ui', prompt: `${COMMON}\n\nYOUR SLICE — the CURRENT COMPOSER UI, end to end. Read every file in src/components/settlement/eventComposer/ (Field.jsx, EventComposerConstants.js, buildEvent.js, BatchCart.jsx, PreviewPanel.jsx, the per-family field components) plus the parent that mounts it (where in the edit-dossier flow does the composer open — SettlementDetail? a tab?). Report: the full event-selection UX today (how a DM picks an event type — flat list? grouped?), which fields are already context-gated on current state and HOW (the corruption/deity/tier/target/relationship field gates — exact predicates), what freetext inputs exist and which are parsed vs flavor, how buildEvent assembles payloads, how the BatchCart composes/validates multi-event bundles, what PreviewPanel actually renders (a diff? prose? which derivation), and every UX affordance that exists for discoverability (search? categories? recents?). Also: the mobile posture and any accessibility patterns.` },
+  { key: 'preview-pending', prompt: `${COMMON}\n\nYOUR SLICE — the PREVIEW + PENDING-EDITS machinery. Read src/domain/pendingEdits.js in full (queue, previewCascade, deterministic FNV ids, commitPendingEdits kind dispatcher), how a previewed event's projected delta is DERIVED (is it a real dry-run through the mutate layer? a hand-written summary? which function), whether preview re-derivation is cheap enough for LIVE dial-turning (pure? memoized? how heavy), how commit routes to applyEvent and the undo/eventLog integration, and what happens to previews on state change (staleness). Also the world-pulse PROPOSAL system (approval queue M10a CL-3 — proposals with preview/approve/dismiss): its preview shape, whether it shares machinery with pendingEdits, and whether a unified preview seam exists or two parallel ones. Report exact functions + the delta-shape each preview produces.` },
+  { key: 'registry-mutate', prompt: `${COMMON}\n\nYOUR SLICE — the EVENT REGISTRY + MUTATE layer + the op-registry bridge. Read src/domain/events/registry.js in full (EVENT_REGISTRY shape: payload schemas? validation? the affected-domains lists; EVENT_TYPES), src/domain/events/mutate.js + mutateEntities.js structure (how each event type applies; which have affordance gates like imposeCorruption's no-op-without-criminal-org; which write organic-identical shapes), src/store/operationRegistry.js (today's Track-K manifest: the 157 ops' shape — opType/targets/params — and how composer events map onto registered ops), and the WORLD-PULSE-side DM verbs (what realm-scale actions exist for a DM today — proposals? spatial ops? canonRelationship verbs?). Report: the coverage MAP — which sim capabilities (settlement events, pulse movers, spatial movers, canon verbs) have forceable counterparts today and which do NOT (enumerate the gap: sieges, route cuts, rumors, mobilization, occupations, treaties...); which existing gates could serve as affordance predicates; whether payload validation exists per event type (bounded dials need schemas — what exists vs needs minting).` },
+]
+
+phase('Recon')
+const results = await parallel(BRIEFS.map(b => () =>
+  agent(b.prompt, { label: `recon:${b.key}`, phase: 'Recon', schema: SCHEMA })
+    .then(r => ({ key: b.key, ...r }))
+))
+return { recon: results.filter(Boolean), missing: BRIEFS.filter((b,i)=>!results[i]).map(b=>b.key) }

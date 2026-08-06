@@ -1,0 +1,199 @@
+export const meta = {
+  name: 'settlementforge-exhaustive-survey',
+  description: 'Exhaustive subsystem survey + 8-dimension review of the SettlementForge codebase',
+  phases: [
+    { title: 'Survey', detail: '11 readers, one per subsystem, full coverage' },
+    { title: 'Dimensions', detail: '8 dimension reviewers with cross-subsystem context' },
+    { title: 'Gaps', detail: 'completeness critic + targeted gap-filling round' },
+  ],
+}
+
+const REPO = '/Users/cstokes/Desktop/settlement-engine'
+
+const PRODUCT_CONTEXT = `
+PRODUCT CONTEXT: SettlementForge is a constraint-driven D&D settlement SIMULATOR (explicitly not a random table-roller).
+A config (tier, terrain, culture, trade access, threat, priority sliders) runs through a deterministic seeded 14-step
+pipeline producing an internally-coherent settlement (economy, factions, institutions, NPCs, stressors, history),
+rendered as an on-screen dossier + exportable PDF, with optional AI prose (Anthropic via Supabase edge function),
+Stripe credits/subscription, Supabase auth/Postgres/RLS, community gallery. Stack: React 19 + Zustand 5 + Vite,
+JS with JSDoc types (no .ts app code), inline token-driven styling. Read ${REPO}/ARCHITECTURE.md first for the map.
+The product's stated ambitions live in ${REPO}/docs/A_PLUS_ROADMAP.md, docs/PRODUCT_COHERENCE.md, ASSESSMENT.md.
+Determinism (same seed => same settlement) and internal coherence are the core product promises.
+`
+
+const SURVEY_SCHEMA = {
+  type: 'object',
+  required: ['subsystem', 'purpose', 'health', 'strengths', 'concerns', 'productNotes', 'filesRead'],
+  properties: {
+    subsystem: { type: 'string' },
+    purpose: { type: 'string', description: 'What this subsystem does and its role in the product' },
+    health: { type: 'string', description: '2-3 paragraph objective assessment of code quality, design, and fitness' },
+    strengths: { type: 'array', items: { type: 'string' }, maxItems: 12 },
+    concerns: {
+      type: 'array', maxItems: 20,
+      items: {
+        type: 'object', required: ['title', 'severity', 'detail'],
+        properties: {
+          title: { type: 'string' },
+          severity: { type: 'string', enum: ['critical', 'high', 'medium', 'low'] },
+          file: { type: 'string', description: 'repo-relative path, with :line when known' },
+          detail: { type: 'string', description: 'Concrete evidence-backed description' },
+        },
+      },
+    },
+    productNotes: { type: 'string', description: 'How well this subsystem serves the product goals; gaps between ambition and implementation' },
+    filesRead: { type: 'number', description: 'Approximate count of files you actually opened' },
+  },
+}
+
+const SUBSYSTEMS = [
+  { key: 'data', scope: 'src/data/ (~18k LOC of pure content tables) plus the data-governance tests that pin it (search tests/ for data-schema/coverage pins). Read the structure of every table file, spot-check entries deeply for quality/consistency, verify claimed purity (no logic in data).' },
+  { key: 'generators', scope: 'src/generators/ including steps/ (the 14-step pipeline), pipeline.js, rngContext.js, prng.js, structuralValidator.js, generateSettlement.js vs generateSettlementPipeline.js (strangler-fig migration status). Read EVERY file. Assess determinism discipline, step coupling, dead legacy code.' },
+  { key: 'domain-core', scope: 'src/domain/ top-level files plus state/, events/, entities/, validation/, relationships/ and the settlement schema/migrations. Read every file. This is the causal-state kernel.' },
+  { key: 'domain-analysis', scope: 'src/domain/coherence/, summary/, display/, dossier/, compendium/, campaign/. Read every file. Assess the coherence/contradiction engine quality.' },
+  { key: 'domain-world', scope: 'src/domain/region/, worldPulse/, factions/, institutions/, roles/. Read every file. Assess the regional causality engine vs its design docs (docs/regional-causality-engine.md, docs/REGIONAL_ENGINE_AUDIT.md).' },
+  { key: 'components-core', scope: 'src/App.jsx, src/main.jsx, src/components/generate/, new/ (incl. tabs/), settlement/ (incl. eventComposer/), settlementDetail/, settlements/, dossier/. Read every file; large ones fully. Assess component size/decomposition, state wiring, render hygiene.' },
+  { key: 'components-surfaces', scope: 'src/components/home/, library/, gallery/, map/, compendium/, region/, pricing/, account/, admin/, auth/, dev/, primitives/, plus src/design/, src/styles/, src/index.css, src/copy/. Read every file. Assess primitives quality, a11y, token discipline, surface consistency.' },
+  { key: 'store-hooks', scope: 'src/store/ (all 14 slices + index.js) and src/hooks/, src/config/, src/utils/. Read every file. Assess slice boundaries, persist/partialize, authIntents, selector discipline, cross-slice coupling.' },
+  { key: 'pdf-lib', scope: 'src/pdf/ (sections/, primitives/, lib/viewModel.js) and src/lib/ (saves, analytics, flags, routes, authIntents, customRegistry, dependencyEngine, egress). Read every file. Check the PDF<->screen parity contract (PDF_PARITY_AUDIT.md, SHARED_FIELDS registry).' },
+  { key: 'backend', scope: 'supabase/ — every migration (22+), every edge function (generate-narrative, stripe-webhook, shared code), config.toml, seed_local.sql, plus scripts/build-edge-shared.mjs and scripts/validate-edge-functions.mjs, vercel.json, .env.example. Assess RLS spine, trust boundaries, credit ledger atomicity, webhook handling, secret hygiene.' },
+  { key: 'tests-tooling', scope: 'tests/ (unit/property/snapshot), e2e/ (playwright specs), scripts/ (all custom eslint plugins, mutation-sweep.sh, simulate-generations.mjs, check-domain-strict.mjs, baselines), eslint.config.js, husky hooks, playwright.config.js, vite.config.js, tsconfig*.json, deno.json, package.json check pipeline. Assess verification rigor, ratchet/baseline governance, coverage gaps.' },
+  { key: 'docs-product', scope: 'ARCHITECTURE.md, ASSESSMENT.md, CONTRIBUTING.md, DESIGN_STRESSOR_DYNAMICS.md, PDF_PARITY_AUDIT.md, and ALL of docs/ (~30 files: roadmaps, audits, remediation plans, risk register). Also index.html, public/. Extract: what the product aspires to be, what quality bars it set itself, which documented claims/plans are stale vs delivered (spot-check claims against code). This agent defines the yardstick the code is measured against.' },
+]
+
+phase('Survey')
+log('Fanning out 11 subsystem readers across ~245k LOC')
+
+const survey = (await parallel(SUBSYSTEMS.map(s => () =>
+  agent(
+`You are one reader in an exhaustive whole-codebase survey of ${REPO} (branch analytics-intelligence-layer).
+${PRODUCT_CONTEXT}
+YOUR SCOPE: ${s.scope}
+
+Read your scope COMPREHENSIVELY — open every file in scope (for very large pure-data tables you may read structure + deep representative samples, but open each file). Cross-reference sibling layers only as needed to judge boundaries. You are producing the ground-truth map other reviewers will rely on, so:
+- Describe what the code actually does, not what docs claim.
+- Note concrete strengths (real engineering wins, not flattery).
+- Note concrete concerns with file:line evidence — bugs, design flaws, dead code, drift from stated architecture, complexity hotspots, missing safeguards. Severity honestly calibrated (critical = data loss/security/correctness of core promise).
+- Judge how well this subsystem serves the product ambition (coherent simulator, determinism, dossier quality).
+Be exacting and objective. Do not soften. Do not pad.`,
+    { label: `survey:${s.key}`, phase: 'Survey', schema: SURVEY_SCHEMA }
+  )
+))).filter(Boolean)
+
+log(`Survey complete: ${survey.length}/11 readers returned`)
+
+const surveyDigest = JSON.stringify(survey, null, 1)
+
+const DIM_SCHEMA = {
+  type: 'object',
+  required: ['dimension', 'grade', 'assessment', 'productFit', 'findings'],
+  properties: {
+    dimension: { type: 'string' },
+    grade: { type: 'string', description: 'Letter grade A+ through F, honestly calibrated against professional production software' },
+    assessment: { type: 'string', description: '3-5 paragraph holistic assessment of this dimension across the whole codebase' },
+    productFit: { type: 'string', description: 'How this dimension helps or hurts the product goals/ambitions' },
+    findings: {
+      type: 'array', maxItems: 20,
+      items: {
+        type: 'object', required: ['title', 'severity', 'file', 'evidence', 'fixSketch'],
+        properties: {
+          title: { type: 'string' },
+          severity: { type: 'string', enum: ['critical', 'high', 'medium', 'low'] },
+          file: { type: 'string', description: 'repo-relative path:line' },
+          evidence: { type: 'string', description: 'What you verified by reading the code — concrete, reproducible' },
+          why: { type: 'string', description: 'Why it matters for the product' },
+          fixSketch: { type: 'string', description: 'Sketch of the ideal fix — prefer the objectively better architecture over the minimal patch' },
+        },
+      },
+    },
+  },
+}
+
+const DIMENSIONS = [
+  { key: 'correctness', prompt: 'CORRECTNESS & BUGS: logic errors, edge cases, off-by-ones, wrong math, race conditions, stale state, broken invariants, error handling that swallows or corrupts. Focus on the generation pipeline, domain kernel, store mutations, save/load/migration paths, and credit/refund flows. Actually trace hot paths end to end.' },
+  { key: 'architecture', prompt: 'ARCHITECTURE & LAYERING: the data->generators->presentation rule, domain purity, strangler-fig migration completeness (generateSettlement.js vs pipeline), store slice boundaries, dependency direction violations, god-files, circular imports, abstraction quality, dead architecture. Judge whether the architecture can carry the product ambitions or is accreting.' },
+  { key: 'security', prompt: 'SECURITY & TRUST BOUNDARIES: RLS policies in every migration, SECURITY DEFINER RPC correctness, edge-function auth (JWT verification, spend/refund credit atomicity, replay), Stripe webhook signature + idempotency, XSS (dompurify usage, dangerouslySetInnerHTML), secret handling, gallery privacy sanitization, abuse/rate limits, client-trust mistakes (client-side permission checks not backed by server).' },
+  { key: 'performance', prompt: 'PERFORMANCE: bundle size/code-splitting (vite config, lazy routes), render performance (Zustand selector discipline, memoization, inline-style object churn in 41k LOC of components), generation-pipeline hot loops, PDF generation memory, large data table import cost, localStorage/persist overhead. Quantify where possible (read the code, estimate real cost).' },
+  { key: 'determinism', prompt: 'DETERMINISM & SIMULATION QUALITY: seeded-PRNG discipline (any Math.random/Date.now leaks into generation), rngContext threading, iteration-order stability (object key ordering, Set/Map iteration), the coherence/contradiction engine actually preventing incoherent output, stressor/causality realism, regional engine consistency, migration stability of old saves. This is the core product promise — audit it hardest.' },
+  { key: 'testing', prompt: 'TESTING & VERIFICATION RIGOR: unit/property/snapshot coverage vs risk (what is NOT tested), test quality (assertions that actually bite), the ratchet/baseline governance system (are baselines honest or rubber stamps), e2e coverage of money paths, mutation-sweep credibility, CI gaps (is `npm run check` actually run anywhere), flakiness risks.' },
+  { key: 'product', prompt: 'PRODUCT COHERENCE & UX: does the built product deliver the promised experience — dossier readability, wizard flow, PDF parity, gallery/community loop, pricing/credits UX, a11y reality vs claims, mobile, copy quality, empty/error/loading states, feature completeness vs A_PLUS_ROADMAP/world-pulse-roadmap ambitions. Evaluate as a demanding product reviewer who also reads code.' },
+  { key: 'maintainability', prompt: 'MAINTAINABILITY & CODE HEALTH: duplication, dead code, file-size hotspots, JSDoc-type honesty (how much is actually typechecked strictly), naming, doc drift (docs describing code that changed), tooling ergonomics, onboarding cost, bus factor. Also assess the docs/ audit-trail culture itself — asset or liability?' },
+]
+
+phase('Dimensions')
+log('Fanning out 8 dimension reviewers with full survey context')
+
+const dimensions = (await parallel(DIMENSIONS.map(d => () =>
+  agent(
+`You are one of 8 dimension reviewers in an exhaustive review of ${REPO}.
+${PRODUCT_CONTEXT}
+YOUR DIMENSION: ${d.prompt}
+
+Below is the ground-truth survey produced by 11 subsystem readers. Use it for orientation and leads, but VERIFY EVERYTHING YOURSELF by reading the actual code — your findings must cite file:line evidence you personally confirmed. Go beyond the survey: find what it missed in your dimension.
+
+SURVEY DIGEST:
+${surveyDigest}
+
+Produce: an honest letter grade (calibrated against professional production software, not hobby projects), a holistic multi-paragraph assessment, product-fit judgment, and up to 20 concrete findings ranked by severity. Findings must be real and reproducible — no speculation dressed as fact. For fixSketch, prefer the objectively-better architectural fix over the minimal safe patch (the owner explicitly wants boldness).`,
+    { label: `dim:${d.key}`, phase: 'Dimensions', schema: DIM_SCHEMA }
+  )
+))).filter(Boolean)
+
+log(`Dimensions complete: ${dimensions.length}/8 reviewers returned`)
+
+phase('Gaps')
+
+const CRITIC_SCHEMA = {
+  type: 'object',
+  required: ['overallComment', 'gaps'],
+  properties: {
+    overallComment: { type: 'string', description: 'What the combined review does and does not establish' },
+    gaps: {
+      type: 'array', maxItems: 4,
+      items: {
+        type: 'object', required: ['area', 'why', 'prompt'],
+        properties: {
+          area: { type: 'string' },
+          why: { type: 'string' },
+          prompt: { type: 'string', description: 'Self-contained prompt for a targeted reviewer to close this gap' },
+        },
+      },
+    },
+  },
+}
+
+const critic = await agent(
+`You are the completeness critic for an exhaustive review of ${REPO}.
+${PRODUCT_CONTEXT}
+Here is the full output: 11 subsystem surveys and 8 dimension reviews (JSON).
+
+SURVEYS:
+${surveyDigest}
+
+DIMENSIONS:
+${JSON.stringify(dimensions, null, 1)}
+
+Ask: what is MISSING? A subsystem nobody actually opened? A claim asserted but never verified against code? A dimension reviewed shallowly (grades without evidence)? A cross-cutting interaction (e.g. migration x determinism, credits x offline, gallery x XSS) nobody traced? Spot-check the codebase yourself where you suspect a gap. Return up to 4 concrete gaps, each with a self-contained prompt for a targeted reviewer. If coverage is genuinely complete, return zero gaps — do not invent work.`,
+  { label: 'completeness-critic', phase: 'Gaps', schema: CRITIC_SCHEMA }
+)
+
+let gapFindings = []
+if (critic && critic.gaps && critic.gaps.length) {
+  log(`Critic found ${critic.gaps.length} gaps — running targeted reviewers`)
+  gapFindings = (await parallel(critic.gaps.map(g => () =>
+    agent(
+`Targeted gap-closing reviewer for ${REPO}.
+${PRODUCT_CONTEXT}
+GAP TO CLOSE: ${g.area} — ${g.why}
+
+${g.prompt}
+
+Read the actual code; cite file:line evidence. Return findings honestly calibrated.`,
+      { label: `gap:${g.area.slice(0, 30)}`, phase: 'Gaps', schema: DIM_SCHEMA }
+    )
+  ))).filter(Boolean)
+} else {
+  log('Critic found no gaps')
+}
+
+return { survey, dimensions, critic, gapFindings }

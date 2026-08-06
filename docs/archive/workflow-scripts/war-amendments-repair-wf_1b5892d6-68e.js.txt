@@ -1,0 +1,28 @@
+export const meta = {
+  name: 'war-amendments-repair',
+  description: 'Execute the chair repair brief on the war amendments doc, then adversarially re-verify',
+  phases: [
+    { title: 'Repair', detail: 'one Opus agent folds ~60 findings under rulings R-A..R-L' },
+    { title: 'Reverify', detail: 'one adversarial checker confirms the fold' },
+  ],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const DOC = `${MF}/docs/DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md`
+const BRIEF = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/1c189f3d-9fc3-4fc9-9cb7-b767525d28d5/scratchpad/war-amendments-repair-brief.md'
+const JOURNAL = '/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/1c189f3d-9fc3-4fc9-9cb7-b767525d28d5/subagents/workflows/wf_da74c0bb-20b/journal.jsonl'
+const RSCHEMA = { type:'object', required:['rulingsApplied','findingsFolded','couplingsLineAdded','notes'], properties:{
+  rulingsApplied:{type:'array',items:{type:'string'}}, findingsFolded:{type:'number'},
+  couplingsLineAdded:{type:'boolean'}, notes:{type:'string'}}}
+const VSCHEMA = { type:'object', required:['residuals','verdict'], properties:{
+  residuals:{type:'array',items:{type:'object',required:['finding','severity'],properties:{finding:{type:'string'},severity:{type:'string'}}}},
+  verdict:{type:'string'}}}
+
+phase('Repair')
+const rep = await agent(`VERIFY-FIRST: legitimate owner-ordered DESIGN-DOC REPAIR under a chair brief (you execute rulings, you do not re-open them). Read, in order: (1) the brief ${BRIEF} IN FULL — its rulings R-A..R-L are BINDING; (2) the cohesion findings journal ${JOURNAL} (6 result lines, every conflict with quoted corpus sides); (3) the target ${DOC} IN FULL. Then EDIT THE TARGET IN PLACE, folding every confirmed finding under the rulings — plus the ONE owner-override line into ${MF}/docs/DESIGN_FP_COUPLINGS.md's CPL-17 declared-empty entry exactly as R-F specifies (no other corpus file may be touched). Where a finding and a ruling seem to conflict, the ruling wins; where the brief is silent on a confirmed finding, fold it conservatively (restore HEAD content, defer to corpus law). Preserve the document's voice, structure, and all owner addenda. No git commands. Return {rulingsApplied, findingsFolded, couplingsLineAdded, notes: judgment calls you had to make}.`,
+  {label:'repair', phase:'Repair', model:'opus', effort:'high', schema:RSCHEMA})
+
+phase('Reverify')
+const ver = await agent(`VERIFY-FIRST: adversarial RE-CHECK (read-only, no edits, no git). Read ${DOC} in full, the brief ${BRIEF}, and the findings journal ${JOURNAL}. For EVERY conflict in the journal and every ruling R-A..R-L in the brief: confirm the repaired doc resolves it (quote the repaired text) or report it as a RESIDUAL with severity. Also check the repair introduced no NEW internal contradictions (§ cross-refs, wave numbering, counts, the §6 map vs wave Alignment lines, §7 vs named bands). Return {residuals, verdict}.`,
+  {label:'reverify', phase:'Reverify', model:'opus', effort:'high', schema:VSCHEMA})
+
+return { repair: rep, verify: ver }

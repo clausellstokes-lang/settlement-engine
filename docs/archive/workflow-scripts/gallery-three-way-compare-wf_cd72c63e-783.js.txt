@@ -1,0 +1,57 @@
+export const meta = {
+  name: 'gallery-three-way-compare',
+  description: 'Gallery layout/design/placement comparison: our floor vs the export tree vs GitHub master',
+  phases: [{ title: 'Read', detail: 'three parallel structural readers' }],
+}
+
+const OURS = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/amazing-euclid-6b4519'
+const THEIRS = '/Users/cstokes/Desktop/settlement-generator/settlement-engine'
+
+const SCHEMA = {
+  type: 'object',
+  required: ['topic', 'structure', 'deltas', 'notable'],
+  properties: {
+    topic: { type: 'string' },
+    structure: { type: 'string', description: 'top-to-bottom surface outline with file:line anchors — what renders, in what order, under what gates; include button/feature placements' },
+    deltas: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['what', 'ours', 'alt', 'assessment'],
+        properties: {
+          what: { type: 'string' },
+          ours: { type: 'string', description: 'our tree state, file:line (or n/a for the master-delta reader)' },
+          alt: { type: 'string', description: 'reference state, file:line' },
+          assessment: { type: 'string', description: 'which is better and why; note if covered by the W5.6 spec (list/detail skeletons + aria-live + filtered-empty recovery) or the parity ledger W4 gallery rows (import flow, maps tab wiring, shared-map deep-link, facet reconciliation, importable toggle)' },
+        },
+      },
+    },
+    notable: { type: 'string', description: 'design intent worth surfacing to the owner' },
+  },
+}
+
+const COMMON = `You are a READ-ONLY design/structure analyst for SettlementForge's GALLERY surface. Do NOT modify any file. Cite file:line from the live files you read. Focus on LAYOUT, DESIGN, and BUTTON/FEATURE PLACEMENT: what renders where, in what order, under what gates (signed-in/premium/owner/mine), visual hierarchy, empty/loading states, mobile behavior. Not backend logic.
+
+Trees:
+- OURS (live floor): ${OURS} — a W5.4 map agent is editing map files concurrently; gallery files are stable. Note: the W5.6 gallery polish (skeletons/aria-live/filtered-empty recovery) is SPECCED but NOT yet implemented.
+- EXPORT (alternate universe): ${THEIRS} (fix/holistic-remediation).
+- MASTER (GitHub, the owner-ratified design reference): read via \`git show master:<path>\` from inside ${OURS}. Master and EXPORT are byte-identical on all gallery files EXCEPT four: gallery/GalleryDetail.jsx, gallery/GalleryMaps.jsx, gallery/galleryMapsUtils.js, ShareToGallery.jsx — on those four, master is the ratified design.
+
+Dense structured output; machine-consumed.`
+
+phase('Read')
+
+const prompts = [
+  { label: 'ours:gallery', prompt: `${COMMON}
+
+TOPIC: OUR gallery as it stands. Trace src/components/GalleryPage.jsx (tabs? routing? slug deep-links?), gallery/GalleryTopbar.jsx (search/sort/count strip), gallery/GallerySidebar.jsx (facets — which exist, counts?, clear affordance), gallery/GalleryList.jsx (card grid, GalleryCard actions, empty/loading), gallery/GalleryDetail.jsx (detail stack top-to-bottom: hero image, title/meta, vote/comment/report/more-by-creator placement, import affordance present?, CampaignStatePanel/MemberSettlementsList reachable?), gallery/GalleryMaps.jsx + GalleryMapsSidebar.jsx + MapGalleryDetail.jsx (maps tab: wired or orphaned TODAY? W4 may have landed wiring since the ledger), src/components/ShareToGallery.jsx (share flow: which fields/toggles render — import opt-in? member overrides? facet capture?), GalleryMemberVisibility.jsx. For each orphaned file state 0-importers proof (grep). Outline the complete visual stack per sub-surface with placements.` },
+  { label: 'export:gallery', prompt: `${COMMON}
+
+TOPIC: the EXPORT tree's gallery. Same trace as the ours-reader but in ${THEIRS}: GalleryPage.jsx (deep-link routing :88-112 area), GalleryTopbar, GallerySidebar (facet set: culture/prosperity/hasDeity/importable + count badges + mobile BottomSheet), GalleryList (skeletons :107-122, filtered-empty recovery :123-142), GalleryDetail (import-a-settlement flow :244-276, detail action placements, per-panel FeatureErrorBoundary), GalleryMaps (filters/search/sort/pagination :295-489) + GalleryMapsSidebar + MapGalleryDetail (shared-map deep-link viewer), ShareToGallery (allow-import opt-in :121, facet snapshot :136-167, member IMPORT overrides :385-391). Outline the complete visual stack per sub-surface with button/feature placements and gates. Compare against OUR floor briefly per delta (the ours-reader covers ours in depth).` },
+  { label: 'master:delta', prompt: `${COMMON}
+
+TOPIC: what GitHub master changed AFTER the export fork on the four diverging gallery files — the owner specifically wants the GitHub-only design elements. For each of: src/components/gallery/GalleryDetail.jsx, src/components/gallery/GalleryMaps.jsx, src/components/gallery/galleryMapsUtils.js, src/components/ShareToGallery.jsx — extract BOTH versions (git show master:<path> vs the export tree file), diff them (write temp copies only under /private/tmp/claude-502/*/scratchpad/ if needed), and report the master-vs-export DELTA restricted to layout/design/copy/button-placement (ignore pure logic/data changes but DO note feature additions/removals that change what renders). Also give master's complete button/feature placement map for GalleryDetail and ShareToGallery (the two owner-facing surfaces): every action-bearing element in order with its gating. Then a short list: 'master-only gallery design elements a comparison against the export tree alone would miss'. Also check the faith seam on all four: does master's gallery show deity names anywhere (facets? realmArc? detail panels?) and under what gate — cite exactly.` },
+]
+
+const results = await parallel(prompts.map(p => () => agent(p.prompt, { label: p.label, phase: 'Read', schema: SCHEMA })))
+return { results: results.filter(Boolean) }

@@ -1,0 +1,93 @@
+export const meta = {
+  name: 'build-cycle-45-wr9r-contract-repairs',
+  description: 'WR-9r: the duration router stops greenwashing lost measurements, two docstrings state the truth, the ledger corrects its own evidence',
+  phases: [
+    { title: 'Build', detail: 'CR-WR9-A router + wall, CR-WR9-B docstring truth, ledger corrections + CR-WR9-C recorded' },
+    { title: 'Verify', detail: 'independent re-execution of the three repros + full gate re-run' },
+  ],
+}
+
+const PROTOCOL = `VERIFY-FIRST: this brief is the chair's authentic instruction set for the SettlementForge build era; verify claims against the tree before acting, then proceed — do not refuse the brief as injection. THE §10 PROTOCOL BINDS: work ONLY in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold on branch claude/composite-r4 — cd + git rev-parse --abbrev-ref HEAD at the start of EVERY command block. Pathspec commits under THE STAGED-SET LAW (git diff --cached --name-only before EVERY commit; git commit -- with explicit paths). NEVER stash/reset/checkout--/clean; cp backups for mutants, restored cmp/md5-exact. Gates via sh scripts/gate-tail.sh or npm run check:tail, never bare pipes; ps aux for vitest before believing reds. python3 byte-scan (control bytes <9 or 14-31) EVERY authored file. tests/fixtures/ UNTOUCHED. Commit messages via FILE, trailer: Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>. Only npm run typecheck:domain:strict counts for strict (ceiling 1313, honestly met — leave it met). DO NOT touch: src/domain/certification/behavioralContract.js (sits at 795 of its 800 wall — the new wall composes INSIDE evaluateWarConvergenceInstrumentation's returned cell array, which behavioralContract already spreads at :1050-1053), scripts/mutation-coverage-manifest.json, scripts/mutation-sweep.sh, any src/components/** file, any src/domain/worldPulse/** file. Ledger edits APPEND-ONLY. tests/lint is RED AT BASE (32 tests / 11 files, pre-existing program debt) — capture the failure set before your first edit, diff at HEAD, identical or you introduced something.`
+
+const CONTEXT = `CONTEXT. Lane WR-9a landed fd222269 + d7a6a16b (warEndingClassifier.js + two graded envelopes in src/domain/certification/warConvergenceContract.js). The adversarial verifier CONFIRMED the architecture, all 7 mutants, the same-seed law (no cell moved), the adversarial-id closure, and the ledger — and REJECTED on exactly three shipped defects, quote: "three defects of RECORD and DEFAULT, not of architecture... All three are small, local repairs inside warConvergenceContract.js plus one ledger correction... Re-verify after repair and this lane stands."
+
+FINDING 1 (correctness): warDurationBandFor (warConvergenceContract.js:152-159) returns 'short' for undefined, null, NaN, empty string, non-numeric, negative AND Infinity. durationResolved (:429-431) sums every band except 'unresolved', so defaulted shorts COUNT AS RESOLVED. Executed repro: warDurationHistogram {short:40, long:0, generational:0, unresolved:0} representing 40 wars whose durations were entirely LOST, with a healthy endings mix — ALL FIVE checks pass including duration_envelope and non_vacuous (shortShare 1.0 >= DURATION_SHORT_MIN_SHARE 0.4). Infinity->'short' specifically INVERTS the no-infinity criterion. The docstring at :141-143 claims the non_vacuous wall refuses a corpus that measured nothing — executed and FALSE. tests/domain/behavioralCertificationContract.test.js:561-562 currently PINS the refuted default as intended.
+
+FINDING 2 (over-claim): warConvergenceContract.js:346-349 asserts in the PRESENT TENSE that warConvergenceForces.js exists and is composed — the file does not exist; the only grep hit for the name in the whole tree is that docstring line.
+
+FINDING 3 (false recorded measurement): warConvergenceContract.js:33-36 (repeated in fd222269's commit body) claims "all eight committed case receipts are envelope v4 with no warConvergence key". Measured: NINE receipts under artifacts/soak/*.cases/, NOT committed (gitignored via .gitignore:34 /artifacts/), and one is schemaVersion 3 (smoke.cases/smoke-1y-30s-seed1.json). The load-bearing conclusion survives (warConvergence absent from all nine — the v1->v2 bump orphans nothing); the recorded evidence does not.
+
+CHAIR RULINGS BINDING THIS LANE (append all three to docs/FABLE_VALIDATION_QUEUE.md as vetoable):
+CR-WR9-A — UNMEASURABLE IS ITS OWN DIAGNOSIS. The duration histogram gains an 'unmeasured' counter (vocabulary, totality validator, aggregation, order pins all updated). Routing: undefined/null/NaN/non-numeric/negative -> 'unmeasured'; Infinity (and any duration exceeding the case horizon) -> 'unresolved', because an infinite duration IS the alive-at-horizon war, not a lost measurement. A NEW graded wall war_convergence.duration_measured FAILS on any unmeasured > 0 — strict by design; the threshold becomes revisitable WITH EVIDENCE at the tuning wave, and the docstring says so. duration_envelope's shares compute over measured bands. The :141-143 docstring is corrected IN PLACE to describe the wall that actually holds. The :561-562 pin is REWRITTEN to pin the NEW routing — disclose in the commit message that a pin changed because the design it pinned was refuted by execution.
+CR-WR9-B — DOCSTRING TRUTH IN PLACE (the standing convention): the forces sentence becomes future/owed ('will live in warConvergenceForces.js — OWED at WR-9c, unbuilt'); the receipt-corpus sentence restates the measurement accurately ('nine local gitignored receipts under artifacts/soak/ — eight envelope v4, one v3 — none carrying a warConvergence key'). The ledger append notes fd222269's commit body carries the stale sentence and where the correction lives (commit messages are immutable; the ledger is the correction surface).
+CR-WR9-C — RECORDED FOR WR-9d, NOT IMPLEMENTED HERE: the no-infinity criterion binds at the owner-ordered soak redo's FULL horizon; when the collector lands, the evaluator feeds ALL instrumented cases (release AND research), with the unresolved wall keyed to each case's own horizon. This cures STOP #2's contradiction (behavioralContract.js:1051-1054 feeds only releaseCases = 100y while the criterion names year-300). Append as a ruling row; write NO code for it.`
+
+const BUILD_BRIEF = `${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE WR-9r IMPLEMENTER. Two commits: (1) the code repair (warConvergenceContract.js + the two test files), (2) the ledger append (CR-WR9-A/B/C rows + the finding-3 evidence correction). Nothing else.
+
+REQUIRED PINS (in tests/domain/behavioralCertificationContract.test.js and/or warEndingClassifier's suite — existing files only):
+P1 THE LOST-CORPUS REPRO, executed as a permanent pin: the verifier's exact repro (40 unmeasured-duration wars, healthy endings mix, all-ALIVE flag rows) must now FAIL via war_convergence.duration_measured — and the pin FIRST proves the corpus is otherwise passing (delete the unmeasured counts and it passes) so the pin cannot go vacuous.
+P2 INFINITY IS UNRESOLVED: Infinity routes to 'unresolved' and a corpus with one Infinity war fails the no-infinity wall (UNRESOLVED_AT_HORIZON_MAX 0).
+P3 ROUTING TABLE: each unmeasurable input class (undefined, null, NaN, '', 'x', -5) lands in 'unmeasured'; each real duration lands in its band (drive the real band boundaries, not copies of them).
+P4 TOTALITY: the updated validator rejects a histogram missing 'unmeasured'; the vocabulary order pin updated.
+
+EXECUTED MUTANTS (cp-backed, restored cmp-exact): M-A re-route unmeasured -> 'short' (P1+P3 must red); M-B delete the duration_measured wall from the returned cells (P1 must red); M-C re-route Infinity -> 'unmeasured' (P2 must red).
+
+GATE BAR: the 10-file focused battery green (behavioralCertificationContract, certificationSchema, certificationClaimsParity, warEndingClassifier, subsystemRowsWar, warCostsIntegration, realmScaleCertification, storyMixDivergence, sizeBaseline, mutationCoverageManifest — quote counts); tests/lint failure-set diff vs base EMPTY; typecheck:domain:strict 1313/1313; any-cast unchanged; size — warConvergenceContract stays under 800 and behavioralContract UNTOUCHED at 795 (verify by git diff); npm run build + prerender + smoke:boot via gate-tail; byte-scan; same-seed NOT required IF you verify by git diff that no src/domain/worldPulse/** file changed and warTermination's read surface (WAR_TERMINATION_DECIDING_TERM_KEYS) is untouched — state this explicitly with the diff receipt.
+
+RETURN raw data: {lane:'WR-9r', commits:[...], gates:[...], stopReports:[...], notes:'...'}.`
+
+phase('Build')
+const r = await agent(BUILD_BRIEF, {
+  label: 'wr9r:repair',
+  phase: 'Build',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['lane', 'commits', 'gates', 'stopReports', 'notes'],
+    properties: {
+      lane: { type: 'string' },
+      commits: { type: 'array', items: { type: 'string' } },
+      gates: { type: 'array', items: { type: 'string' } },
+      stopReports: { type: 'array', items: { type: 'string' } },
+      notes: { type: 'string' },
+    },
+  },
+})
+
+phase('Verify')
+const v = await agent(`${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE WR-9r ADVERSARIAL VERIFIER. The implementer reports:
+${JSON.stringify(r, null, 2)}
+
+Trust nothing. At the committed HEAD on a clean tree:
+1. Re-execute the LOST-CORPUS repro yourself (build the observation by hand): 40 unmeasured-duration wars + healthy endings + ALIVE flags must FAIL exactly the duration_measured wall, and the same corpus with durations restored must PASS — both directions executed.
+2. Re-execute the routing table over all input classes including Infinity (must land 'unresolved' and trip the no-infinity wall).
+3. Run the three mutants yourself (cp-backed, restored cmp-exact) — each must red the pin that claims to catch it.
+4. Confirm FINDING 2 and FINDING 3 sentences: grep warConvergenceForces (the only hits must be future/owed framing + the ledger); the receipt-corpus sentence must state nine/gitignored/one-v3 accurately — re-measure the artifacts/soak corpus yourself.
+5. Re-run the gate bar (focused battery with counts, lint failure-set diff vs base, strict 1313, size with behavioralContract untouched at 795, build + prerender + smoke:boot, byte-scan, any-cast).
+6. Ledger: append-only (git diff shows zero deleted lines), CR-WR9-A/B/C rows present and accurate, the finding-3 evidence correction present, pin-rewrite disclosed in the commit message.
+7. Hygiene: pathspec-tight commits over only the named files; no fenced file touched; fixtures untouched; worldPulse untouched (git diff receipt); tree clean at end.
+
+VERDICT: 'PASS — WR-9a STANDS REPAIRED' only on executed evidence for every item; otherwise REJECT with minimal repros. RETURN raw data: {lane:'WR-9r verify', verdict:'...', findings:[...]}.`, {
+  label: 'wr9r:verify',
+  phase: 'Verify',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['lane', 'verdict', 'findings'],
+    properties: {
+      lane: { type: 'string' },
+      verdict: { type: 'string' },
+      findings: { type: 'array', items: { type: 'string' } },
+    },
+  },
+})
+
+return { r, v }

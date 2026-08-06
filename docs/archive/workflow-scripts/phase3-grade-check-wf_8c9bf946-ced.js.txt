@@ -1,0 +1,45 @@
+export const meta = {
+  name: 'phase3-grade-check',
+  description: 'Re-grade all 8 dimensions against the original survey after Phase 2+3',
+  phases: [{ title: 'Regrade', detail: '8 Opus dimension re-graders, evidence-first' }],
+}
+
+const REPO = '/Users/cstokes/Desktop/settlement-engine'
+
+const CONTEXT = `You are a Fable 5 re-grader (the survey model that issued the original grades) for SettlementForge (${REPO}, branch review-fixes-2026-07-08).
+A month-long remediation ran: Phase 2 fixed 47 findings; Phase 3 added the src/kernel + lazy engine (engine out of first paint, ~1.3MB closure), a durable outbox / Track K (ActionResult envelope -> unified Receipt type -> durable sync), the domain strict-typecheck burn-down to ZERO (ceiling 0), a semantic eval-fixture corpus + distribution envelopes, an instrumentation spine (generation_id + fingerprints + metrics registry), an opt-out consent model, anti-repetition machinery (hook repeat 8.19pct->0.20pct), self-hosted fonts + social meta, faction-delta 30/30, cadence damping, wizard-news threading. The full gate (npm run check) is being run separately; assume test/type/lint/build state from that. Your job is CODE-QUALITY JUDGMENT, not re-running the gate.
+
+Your ORIGINAL survey grade for this dimension is given. Re-read the RELEVANT code NOW (cite file:line you personally open), decide the CURRENT honest letter grade against professional production software, and be exacting; do not inflate because effort was spent. If something regressed or a fix was cosmetic, say so. Ground every grade in what you read.`
+
+const SCHEMA = {
+  type: 'object',
+  required: ['dimension', 'originalGrade', 'currentGrade', 'justification', 'whatChanged', 'remaining', 'filesRead'],
+  properties: {
+    dimension: { type: 'string' },
+    originalGrade: { type: 'string' },
+    currentGrade: { type: 'string' },
+    justification: { type: 'string', description: '2-3 paragraphs, file:line evidence you opened' },
+    whatChanged: { type: 'string', description: 'the specific deltas that moved (or failed to move) the grade' },
+    remaining: { type: 'array', items: { type: 'string' }, maxItems: 6, description: 'what still separates this from A-plus (empty if already there)' },
+    filesRead: { type: 'number' },
+  },
+}
+
+const DIMS = [
+  { key: 'correctness', orig: 'B-', prompt: 'CORRECTNESS & BUGS: the pipeline, domain kernel, store mutations, save/load/migration, credit/refund. The originals: dead refund path, unpersisted seed, empty-name stress, exponential version nesting, cross-identity AI leaks, dead string joins, ghost famine. Verify they are actually fixed in code + that the fixes are sound, not papered over. Check the strict burn-down did not introduce any-casts that hide real bugs (it flagged 8 latent bugs; verify those became real guards in commit 4b392108).' },
+  { key: 'architecture', orig: 'B+', prompt: 'ARCHITECTURE & LAYERING: read ARCHITECTURE.md layer map + tests/architecture/layerBoundaries.test.js + the new src/kernel + the economy/power/services barrels + docs/TRACK_K_DESIGN.md + src/store/actionResult.js + outbox.js. Judge whether the North Star (commands->receipts->durable sync) actually landed coherently or is bolted on. The monoliths are decomposed; the engine is lazy; cycles pinned. Is this A-grade architecture now?' },
+  { key: 'security', orig: 'B+', prompt: 'SECURITY & TRUST: migration 048 (role-only privilege), 050 (refund idempotency + allowlist sanitizer + view dedup + verify_jwt), stripe-webhook binding, the fee-schedule parity pin, consent. Verify the owner-email backdoor is gone, the sanitizer is fail-closed allowlist with a drift pin, refunds are idempotent. The abuse-guard audit flagged comment/vote velocity + per-user narrate cap as GAPS; weigh them.' },
+  { key: 'performance', orig: 'C+', prompt: 'PERFORMANCE: read vite.config manualChunks + tests/build/vendorPdfLazy.test.js (budget now 1,377,000; engine ABSENT from entry closure) + the worldPulse lazy path + campaignSliceShared persist ladder (WS31 3.3x flush) + the WebP pipeline. The C+ was driven by a 1.25MB-gz first paint that was 2.8x the intent; verify first paint is now genuinely lean. PDF-on-main-thread was a yield-fix not a worker; weigh it.' },
+  { key: 'determinism', orig: 'B+', prompt: 'DETERMINISM & SIMULATION QUALITY: the localeCompare ban (eslint + compareCodepoint), crossSettlementConflicts deterministic (F10), seed persistence, structuralValidator RNG-free, ghost famine, AND the new tests/simulation/ eval corpus + distribution envelopes. Verify the ambient-RNG class is truly extinct (grep) and that the semantic corpus actually pins meaning. This was the marquee promise; audit hardest.' },
+  { key: 'testing', orig: 'A-', prompt: 'TESTING & VERIFICATION: ~5000 tests, the PDF render lane, money-path Deno tests, e2e money journeys, coverage floors (parallel CI job), mutation sweep in CI, the eval corpus, generate-narrative behavioral test, committed legacy fixture, the strict ratchet at 0. Verify the gate is now the real product-integrity guard the roadmap wanted. What is still grep-only vs executed?' },
+  { key: 'product', orig: 'C+', prompt: 'PRODUCT COHERENCE & UX: the C+ was visible decay; broken crisis prose, PDF tofu, wrong seed, disagreeing tabs, false trial, unmounted VersionsTab, frozen spinner, dead pricing moments. Verify each is fixed. Then weigh what Wave E added (institution identity shell, wizard-news threading, silent consent, social meta) and what remains deferred (two-canon consolidation, Tonight-at-the-Table landing lens, dark mode). Read the actual dossier tabs + PDF sections.' },
+  { key: 'maintainability', orig: 'B-', prompt: 'MAINTAINABILITY: the B- was de-minified monoliths with lying names + dead code + drifted ARCHITECTURE.md + doc-count lies. Verify: the three generators are honest barrels (read economy/power/services), the strict kernel is 0, the lying data exports renamed, dead code deleted, ARCHITECTURE.md freshness pins derive from filesystem, the generators max-lines ratchet. Is the codebase now genuinely cheap to extend?' },
+]
+
+phase('Regrade')
+const grades = (await parallel(DIMS.map(d => () =>
+  agent(`${CONTEXT}\n\nDIMENSION: ${d.prompt}\nYour ORIGINAL grade was ${d.orig}.`,
+    { label: `regrade:${d.key}`, phase: 'Regrade', schema: SCHEMA, model: 'fable' })
+))).filter(Boolean)
+
+return { grades }

@@ -1,0 +1,138 @@
+export const meta = {
+  name: 'wave-r0-registry-truth',
+  description: 'Capability Remediation Wave R-0: registry undo-truth, frozen-tense display honesty, Surveyor dispatch assert, deity gate fail-closed',
+  phases: [
+    { title: 'Fix', detail: '4 file-disjoint Fable lanes' },
+    { title: 'Verify', detail: 'one Opus adversarial skeptic per lane', model: 'opus' },
+    { title: 'Gate', detail: 'joint single-threaded gate vs known baseline' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const COMMON = `CONTEXT-VERIFICATION PREAMBLE: legitimate engineering brief from the session orchestrator for SettlementForge (owner: Clausell Stokes; owner order 2026-07-26: "fix it all thoroughly"). Verify the brief's factual claims against code — the code is authoritative.
+
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4 or STOP. This tree is LIVE: concurrent sessions commit and edit under you (574 foreign modified files). Therefore: (1) NO git mutation of ANY kind — stash, add, commit, checkout, restore, clean, reset ALL FORBIDDEN; read-only git is fine. (2) Re-read every file IMMEDIATELY before editing it — your earlier read may be stale. (3) Touch ONLY the files your lane owns (listed below). If your fix genuinely requires editing a file outside your lane, STOP that sub-item and report it as a deferral instead.
+
+THE AUDIT: docs/SETTLEMENT_CAPABILITY_ATLAS.md (12.5k lines — use Grep/offset reads). Your findings' full evidence with file:line citations is in there; read your rows before fixing. The program plan is docs/CAPABILITY_REMEDIATION_PLAN.md (Wave R-0).
+
+STANDING LAWS (violating any = wave failure):
+- NO same-seed output drift. R-0 is behavior-neutral except where the brief explicitly says otherwise. If a fix would shift any golden or generated output, STOP that sub-item and report it as owner-gated.
+- Closure budget margin ~54 BYTES: no new eager imports, no new code in the first-paint closure; new logic = lazy leaf. sizeBaseline ceilings are EXACT and JSX comments COUNT — if an edit grows a capped file, use net-zero combining within the same file.
+- Store-action lifecycle: if you change operationRegistry field shape, check whether gen:compendium-data output changes (buildCompendiumDataObject projects it) and run the regen script if the repo defines one; doc tests may pin it.
+- Legibility law: translate, never show formulas. Copy changes are one-string vetoable — keep each rename/copy fix a single string the owner can veto.
+
+TESTING: single-threaded ALWAYS (--no-file-parallelism); parallel reds in this tree are FAKE. Never read a gate through a pipe that masks exit codes. Every fix ships pins (regression tests). Known pre-existing red baseline: vendorPdfLazy engine-chunk ceiling (1 failed | 284 passed on verify:dist) — attributed to concurrent uncommitted work, NOT yours to fix; any OTHER red you cause is yours.
+
+Label every claim CONFIRMED (executed this session) or PLAUSIBLE. Report test output VERBATIM. End on evidence, not intention.`
+
+const LANES = [
+  {
+    key: 'registry-truth',
+    files: 'src/store/operationRegistry.js · tests/store/operationRegistry.walker.test.js · the FIVE undoLastPulse op sites ONLY at their undo-arming seam (canonizeCampaignWorld, resolveIntervalMajors, applyWorldPulseProposal, recordPartyImpact, advanceCampaignWorld — surgical edits only) · new test files you create',
+    brief: `LANE A — REGISTRY UNDO-TRUTH. Findings: atlas VI.3 #62 + owner-queue #5 (read the atlas store-ops rows first — Grep "undoToken" in the atlas).
+1. TRI-STATE UNDO METADATA CURE: today undoToken:null means three different things (irreversible-by-design / undo-not-built / not-applicable). Implement the atlas's tri-state proposal as registry metadata: keep undoToken for armed ops, add ONE new explicit field distinguishing the null meanings (read the atlas rows for the proposed shape; keep it minimal and flat — the registry is a lazy module but its shape is projected by buildCompendiumDataObject). Classify ALL ~134 null rows — the atlas store-ops slices already classified most; transcribe their verdicts, verify a sample of 15 against code yourself, and mark any row you cannot determine as the explicit 'undetermined' value rather than guessing. Extend the walker test to REQUIRE the new field on every op (fail-closed enumeration).
+2. THE 4 FALSE ADVERTISERS: exactly 5 ops carry undoToken:'undoLastPulse'; only advanceCampaignWorld arms. For EACH of the other 4 (canonizeCampaignWorld, resolveIntervalMajors, applyWorldPulseProposal, recordPartyImpact): trace where advanceCampaignWorld pushes its snapshot; if that same push is semantically correct and cheaply reachable at this op's site (same snapshot type, same restore semantics, no golden drift), ARM IT; otherwise set undoToken to the honest null-state with the typed reason and note what arming would take. Decide per-op on evidence; write the decision + rationale into the registry row comment. Pins: one test per op asserting its advertised undo either works (arm→mutate→undo→assert restored) or is not advertised.
+3. Reclassify recordSnapshot (two internal-only callers — atlas evidence) with an exposure-honest registry comment; do NOT delete anything (dead-op retire-vs-wire is owner-gated, queue #21).
+Run: the walker test + your new pins + any test file that imports operationRegistry, single-threaded. If registry shape changed, check gen:compendium-data (see STANDING LAWS).`,
+  },
+  {
+    key: 'frozen-tense',
+    files: 'src/components/new/tabs/DefenseTab.jsx · the food-security display leaves the displayRules govern (locate via fieldManifest guards) · src/components/new/npcComponents.jsx (tooltip string ONLY) · new test files you create',
+    brief: `LANE B — FROZEN-TENSE DISPLAY HONESTY. Findings: owner-queue #28 / derived-influenceable G5 family + the setLock/Edit tooltip lie.
+1. THE FROZEN-RECORD FAMILY: src/domain/fieldManifest.js FROZEN_VS_LIVE declares 3 'snapshot' families with explicit displayRules (defenseProfile.scores.{military,internal,monster,economic,magical}; foodSecurity.{dailyNeed,dailyProduction}; foodSecurity.magicTradeChannel). The atlas found these presented in the PRESENT TENSE as if live. Read each displayRule verbatim; fix the display copy at each site so generation-frozen verdicts read as generation verdicts (e.g. founding-assessment framing), per the rule. DO NOT change stored values, derivations, or the fieldManifest itself. Each copy change = one string, vetoable. Check the fieldManifest 'guards' (mustMatch/mustNotMatch regex pins on display sites) BEFORE editing — your new copy must satisfy them; run tests/joins/fieldManifest.test.js after.
+2. THE TOOLTIP LIE: the Edit tooltip promises edits survive reroll while regen provably destroys _userEdits on the committed lineage (atlas CONFLICT 1 — the NPC-branch fix exists only uncommitted). Find the tooltip string (npcComponents.jsx area); reword to promise ONLY what the committed lineage delivers (honest without touching regen — regen work is owner-parked T4). One string, vetoable.
+Pins: fieldManifest guard test green + a copy pin per changed site if the repo pins copy; otherwise assert via the guards. Beware sizeBaseline exact ceilings on these display files — JSX comments count; net-zero combine if capped.`,
+  },
+  {
+    key: 'surveyor-assert',
+    files: 'the command dispatch seam in src/application/commands/ (the one file where commands are dispatched/executed) · tests/architecture/surveyorCommandBoundary.test.js · new test files you create',
+    brief: `LANE C — SURVEYOR RUNTIME ASSERT. Finding: owner-queue #7 (security posture: the 3-kind AI ceiling is enforced by census/test but NOT asserted at dispatch — a Surveyor-originated command of a non-surveyor kind would dispatch if construction ever drifted).
+Read the atlas commands-surveyor rows first (Grep "surveyor" in the atlas Part II.D). Implement: at the dispatch seam, when the command's origin is the Surveyor lane, assert the registered spec carries the surveyor capability flag (spec.surveyor per surveyorCapabilities()); refuse with a typed, translated error otherwise (legibility law — no formula/internal-name leakage in the user-facing message). Zero behavior change for non-Surveyor dispatch; zero new eager code (the seam is already loaded where used — verify import graph before adding any import).
+Pins: extend surveyorCommandBoundary.test.js — a fabricated Surveyor-origin command of a non-flagged kind is REFUSED at dispatch (not just absent from the census); the 3 flagged kinds still pass. Run the architecture suite single-threaded.`,
+  },
+  {
+    key: 'deity-gate',
+    files: 'src/domain/events/settlementDeityHelpers.js · the DeityAssignmentPanel component file · new test files you create (READ buildEvent.js / EventComposerDeityField.jsx / AssignDeityFromMap.jsx but do NOT edit them)',
+    brief: `LANE D — DEITY GATE FAIL-CLOSED + SINGLE SOURCE. Finding: owner-queue #27 (the premium gate is hand-mirrored in three places and enforced in none — settlementDeityHelpers.js:56-58 documents the fail-open; the panel lane also bypasses the AFFORDANCE_MANIFEST availability predicate entirely). JUDGMENT already recorded in the plan: the owner's "fix it all" covers enforcing this; veto reverts these files.
+Read the atlas rows first (Grep "deity" in atlas Parts I/III + the tabs-read-a Gap #14 block). Implement:
+1. SINGLE-SOURCE the premium/tier predicate: one exported gate function (find the authoritative tier/entitlement selector the composer lane uses — reuse it, do not hand-roll) consulted by BOTH setPrimaryDeityImpl and imposeCultImpl at the store seam — fail CLOSED (refuse the dispatch with a typed, translated refusal), replacing the three hand-mirrored checks with calls to the one source. Preserve the existing reconcileCultImposition probe (it is correct — keep it).
+2. MANIFEST PARITY on the panel lane: before dispatch, evaluate the same AFFORDANCE_MANIFEST availability predicate the composer uses for SET_PRIMARY_DEITY / IMPOSE_CULT; surface unavailability with the manifest's own reasons (grayed-with-reason contract), not a silent no-op.
+3. Do NOT break the second mount (AssignDeityFromMap via HeraldBody hydrates a save into the live slot then mounts the same panel) — trace that path and keep it working for entitled users; pin it.
+Deity doctrine: no premade pool; custom-content refs only; do not touch deity:core: lifecycle. Behavior change is EXACTLY: free/lapsed users' writes now refused at the seam (previously inert-but-accepted); entitled users unchanged; same-seed outputs unchanged (the gate sits before any event is built). Pins: free-tier refused (both impls, both mounts) · premium allowed · lapsed read-only honored · manifest-unavailable reason surfaced · reconcile probe still runs. Run the touched suites single-threaded.`,
+  },
+]
+
+const FIX_SCHEMA = {
+  type: 'object',
+  required: ['filesTouched', 'pins', 'testsRun', 'testOutputTail', 'behaviorShift', 'deferrals'],
+  properties: {
+    filesTouched: { type: 'array', items: { type: 'string' } },
+    pins: { type: 'number' },
+    testsRun: { type: 'string' },
+    testOutputTail: { type: 'string', description: 'verbatim final lines of each test run' },
+    behaviorShift: { type: 'string', description: 'exactly what user-visible behavior changed, or "none"' },
+    deferrals: { type: 'array', items: { type: 'string' } },
+    notes: { type: 'string' },
+    error: { type: 'string' },
+  },
+}
+
+const VERIFY_SCHEMA = {
+  type: 'object',
+  required: ['verdict', 'mustFix', 'checked'],
+  properties: {
+    verdict: { type: 'string', enum: ['PASS', 'PASS_WITH_NOTES', 'MUST_FIX'] },
+    mustFix: { type: 'array', items: { type: 'string' } },
+    checked: { type: 'array', items: { type: 'string' } },
+    notes: { type: 'string' },
+  },
+}
+
+function fixPrompt(l) {
+  return COMMON + '\n\nYOUR LANE OWNS ONLY THESE FILES: ' + l.files + '\n\n' + l.brief + '\n\nDeliver: working code + pins + verbatim test output. Deferral over scope-creep, always.'
+}
+
+function verifyPrompt(l, r) {
+  return COMMON + `\n\nYOU ARE THE OPUS ADVERSARIAL VERIFIER for lane ${l.key}. The fixer reports: files=${JSON.stringify(r.filesTouched)}; pins=${r.pins}; behaviorShift=${r.behaviorShift}; tests="${r.testsRun}".\nREPO IS READ-ONLY FOR YOU except you MAY run tests. Protocol:
+1. Read every touched file's full diff context (git diff -- <file> shows combined foreign+lane changes — attribute hunks carefully; the fixer's changes are the ones matching the lane brief).
+2. Try to REFUTE: does the fix hold on every lifecycle path (create/read/persist/regen/undo/restore)? Does any same-seed output move? Any new eager import (check the import graph)? Any capped file grown past its exact ceiling? Any hand-rolled faction/tier access where a cure function exists? Tooltip/copy honest against the COMMITTED lineage, not the uncommitted fix?
+3. Re-run the fixer's tests yourself single-threaded PLUS one suite the fixer did NOT run that the touched files plausibly affect.
+4. For lane registry-truth specifically: re-derive 10 of the null-row classifications independently; refute any 'armed' decision whose undo does not actually restore (run the pin).
+5. For lane deity-gate specifically: verify the second mount path end-to-end and that free-tier refusal cannot be reached from a state where the UI promised availability.
+Verdict MUST_FIX blocks the wave — list each item concretely. PASS_WITH_NOTES for real-but-deferable observations.`
+}
+
+phase('Fix')
+log('Wave R-0: 4 file-disjoint lanes against the live minifold tree')
+const results = await pipeline(
+  LANES,
+  (l) => agent(fixPrompt(l), { label: 'fix:' + l.key, phase: 'Fix', schema: FIX_SCHEMA }),
+  (r, l) => r && !r.error
+    ? agent(verifyPrompt(l, r), { label: 'verify:' + l.key, phase: 'Verify', model: 'opus', effort: 'high', schema: VERIFY_SCHEMA }).then((v) => ({ lane: l.key, fix: r, verify: v }))
+    : { lane: l.key, fix: r, verify: null, failed: true }
+)
+
+const done = results.filter(Boolean)
+const mustFix = done.filter((r) => r.verify && r.verify.verdict === 'MUST_FIX')
+log('Lanes: ' + done.filter((r) => !r.failed).length + '/4 fixed; MUST_FIX lanes: ' + mustFix.map((r) => r.lane).join(', '))
+
+phase('Gate')
+const GATE_SCHEMA = {
+  type: 'object',
+  required: ['newReds', 'baselineRedPresent', 'suitesRun', 'outputTail'],
+  properties: {
+    newReds: { type: 'array', items: { type: 'string' } },
+    baselineRedPresent: { type: 'boolean' },
+    suitesRun: { type: 'string' },
+    outputTail: { type: 'string' },
+    notes: { type: 'string' },
+  },
+}
+const gate = await agent(COMMON + `\n\nYOU ARE THE WAVE-END GATE RUNNER. Lanes touched: ${JSON.stringify(done.map((r) => ({ lane: r.lane, files: r.fix && r.fix.filesTouched })))}.
+Run single-threaded, exit codes unmasked: (1) every touched lane's own test files; (2) tests/store/operationRegistry.walker.test.js; (3) tests/joins/fieldManifest.test.js; (4) tests/architecture/ suite; (5) the sizeBaseline/closure ratchet suites (find their canonical invocation in package.json); (6) npm run build && npm run verify:dist --no-file-parallelism IF wall-clock permits, else the closest dist-contract suites and SAY SO. Compare against baseline: 1 known red (vendorPdfLazy engine-chunk ceiling). Report every red verbatim, attributed: baseline / foreign-uncommitted-work / THIS WAVE. Any THIS-WAVE red = list in newReds.`, { label: 'gate:r0', phase: 'Gate', schema: GATE_SCHEMA })
+
+return {
+  lanes: done.map((r) => ({ lane: r.lane, failed: !!r.failed, pins: r.fix && r.fix.pins, behaviorShift: r.fix && r.fix.behaviorShift, verdict: r.verify && r.verify.verdict, mustFix: r.verify && r.verify.mustFix, deferrals: r.fix && r.fix.deferrals })),
+  gate,
+}

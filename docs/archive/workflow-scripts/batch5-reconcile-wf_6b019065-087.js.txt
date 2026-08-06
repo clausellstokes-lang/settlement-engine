@@ -1,0 +1,26 @@
+export const meta = {
+  name: 'batch5-reconcile',
+  description: 'Batch 5 reconciliation: five census/registration reds including the unwired undo verb',
+  phases: [{ title: 'Fix', detail: 'one Opus implementer', model: 'opus' }],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = { type: 'object', required: ['agent', 'fixes'], properties: { agent: { type: 'string' }, fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } }, behavior_shifts: { type: 'array', items: { type: 'string' } }, discovered: { type: 'array', items: { type: 'string' } } } }
+
+const BRIEF = [
+  'You are an Opus IMPLEMENTER for SettlementForge. Batch 5 (H4 + I2 + J4, landed uncommitted) is gate-red on FIVE census/registration items. Everything else passed: 2,071 files green, typecheck clean, no golden moved.',
+  'Worktree: ' + ROOT + ' branch claude/composite-r4 - verify with git rev-parse --abbrev-ref HEAD; stop on mismatch. FOREIGN, never touch: wizardNews/settlementRumors/heraldRouting/informationStatecraft/momentum/supplyWebWarfare + their tests, and artifacts/soak/**. A soak is live: focused vitest only, one at a time; a timeout-shaped red gets ONE isolation re-run.',
+  '',
+  'THE FIVE REDS:',
+  '1. tests/store/deadOperationRatchet.test.js - the frozen dead list gained undoLastNpcVerb: the operation is REGISTERED but nothing calls it. THIS IS A REAL GAP, not a bookkeeping one: H4 built a typed-inverse undo ring and advertised undo on the verbs, then never gave the user a way to reach it. FIX BY WIRING, not by marking it dead - add the undo control to the wanderer verb surface (src/components/map/WandererVerbControls.jsx is the natural home; read how the verbs are already dispatched there and match it), so the advertised undo is genuinely reachable. Then confirm the ratchet returns to its frozen state. If after honest investigation you conclude the verb should NOT be user-reachable yet, STOP and report rather than marking a live capability dead.',
+  '2. tests/lint/premiumGateSingleSource.test.js - src/components/new/tabs/UnaffiliatesSection.jsx spells a raw premium-tier comparison. The house law is ONE spelling: import the canonical helper (the test names viewerCanAuthor from src/lib/viewerAuthority.js; also study the 2026-07-31 precedent where resolveFaithUnlocked became the single spelling for the export faith seam). Prefer importing the canonical predicate; only if this surface genuinely asks a DIFFERENT question may it be exempted, and then the exemption carries the reason class saying which question.',
+  '3. tests/lint/ruinFilterRoster.walker.test.js - src/domain/worldPulse/brokerageFidelity.js (and one more the message names) read the raw .institutions roster without the ruin filter. A brokerage that is a RUIN cannot weigh anybody news, so route through liveInstitutions()/isLiveInstitution() from src/domain/institutions/institutionRoster.js - the same reasoning K1 recorded for hasPrison (a flattened gaol must not credit a settlement with the power to hold a prisoner). Record the reasoning in source.',
+  '4. tests/domain/roadsParticipation.test.js - new worldPulse .npcs readers from I2/J4 are undispositioned (the message lists the census diff). Disposition each HONESTLY in the census with a one-line written reason (the npcLedger and stripNpcInfluence precedents), or refactor if the read is genuinely avoidable. Never a bare list entry.',
+  '5. tests/docs/architectureFreshness.test.js - a count in ARCHITECTURE.md is stale (expected 19 to be 20). Read the test to learn which fact it derives from the filesystem, then correct the DOC to match the tree (never the other way).',
+  '',
+  'HARD RULES: NO ratchet/baseline/budget raises and no widenings - every fix here is a REGISTRATION with a written reason, a canonical-helper adoption, a real wiring, or a doc correction; no migrations; no git mutations; no full suites/builds; no golden re-records; if you touch a store action run operationRegistry then gen:compendium-data then generate-sitemap then build:edge-shared IN THAT ORDER; if you touch anything the edge bundles bake in, reseal them before declaring done; JSX 600 / js 800; ZERO any-casts in new domain files; the loading-narration ratchet is tolerance-0 (every Suspense fallback narrates); anchored negatives; no em dashes in src/domain or src/data string literals.',
+  'FINISH by re-running all five formerly-red files and quoting their pass lines, plus tests/store/operationRegistry.walker.test.js and tests/store/advertisedUndoArming.walker.test.js. Return dense structured data: per-red status, files, verbatim test tails, behavior shifts, judgment calls vetoable, discovered.',
+].join('\n')
+
+phase('Fix')
+const r = await agent(BRIEF, { label: 'batch5:reconcile', phase: 'Fix', schema: SCHEMA, model: 'opus' })
+return { results: [r].filter(Boolean) }

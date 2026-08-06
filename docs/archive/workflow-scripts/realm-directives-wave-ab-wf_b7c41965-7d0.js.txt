@@ -1,0 +1,74 @@
+export const meta = {
+  name: 'realm-directives-wave-ab',
+  description: 'Waves A+B of the seven realm directives: tier-inertia certification, neutral-connected default, full auto-resolve',
+  phases: [{ title: 'Build', detail: '3 Opus implementers, disjoint ownership', model: 'opus' }],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const COMMON = `You are an Opus IMPLEMENTER for SettlementForge. Program: docs/DESIGN_REALM_DIRECTIVES.md in the worktree — READ IT FIRST; its J-D judgments are BINDING. Owner order 2026-07-31: "do it all then to your best judgement" (the manager's judgments are in that doc). Worktree: ${ROOT} branch claude/composite-r4 — verify with \`git -C ${ROOT} rev-parse --abbrev-ref HEAD\`; stop on mismatch.
+
+⚠️ A 300-year soak node process is RUNNING from this tree. Do NOT touch artifacts/soak/**, do NOT kill processes, focused vitest only, one invocation at a time; a timeout-shaped red under load gets ONE isolation re-run before you believe it.
+
+HARD RULES: no git mutations; no full suites/builds; no golden re-records (dormancy goldens must stay green UNTOUCHED — if your change reds one, your change violates dormancy: fix the change); no ratchet raises; determinism laws (seeded forks only; no Date.now/Math.random/toLocale in src/domain|generators|kernel); engine layers stay headless; 800-effective-line domain ceiling / 600 JSX ceiling (several files pinned AT ceiling — check before editing); new store actions need an operationRegistry row + npm run gen:compendium-data; new engine systems ship DARK behind VIRTUAL flags (ABSENT from DEFAULT_SIMULATION_RULES) with byte-identical dormancy pins; new tests in generation trees use tests/helpers anchored idioms; bare negatives anywhere in tests/ must be anchored; no em dashes inside string literals in src/data|src/domain; persistence-cascade tests JSON-round-trip fixtures. Match house style.
+
+DONE BAR per item: edits + focused tests green (quote pass lines) + executed negative control per new pin (revert, red, restore, green — quote both). Return dense structured data: per-item status, files, verbatim test tails, negative-control quotes, behavior shifts stated plainly, judgment calls recorded vetoably, discovered adjacencies.`
+
+const SCHEMA = {
+  type: 'object',
+  required: ['agent', 'fixes'],
+  properties: {
+    agent: { type: 'string' },
+    fixes: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['finding', 'status', 'files', 'tests', 'notes'],
+        properties: {
+          finding: { type: 'string' },
+          status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] },
+          files: { type: 'array', items: { type: 'string' } },
+          tests: { type: 'string' },
+          notes: { type: 'string' },
+        },
+      },
+    },
+    behavior_shifts: { type: 'array', items: { type: 'string' } },
+    discovered: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+phase('Build')
+const results = await parallel([
+  () => agent(`${COMMON}
+
+ASSIGNMENT — WAVE A (directive 6, judgment J-D6): TIER-INERTIA CONFIRMATION. NO engine edits — this wave is measurement and pins only.
+1. Locate the tier-drift machinery (rg tierDrift src/domain/worldPulse) and the powered distribution-envelope helpers (tests/ — the distributionEnvelopePower machinery, 5 registered envelopes precedent).
+2. Build a powered envelope property: drift probability as a function of tier × prosperity × pressure acuteness, driven through the REAL pulse path over a seeded config matrix (small realms, controlled pressure injections). The property to confirm: higher-tier + prosperous settlements drift strictly less per unit time than lower-tier ones UNDER EQUAL pressure, and acute matched pressure closes the gap. Use the established envelope registration pattern (exact-binomial helper; power documented; loosenPending discipline).
+3. If the property HOLDS: register the envelope + a receipt comment naming the soak evidence (city 8132→2000/100y vs village 629→0/4y). If it FAILS anywhere: do NOT tune anything — freeze the finding as a documented tuning-band item (the J-D6 routing) with the measured matrix quoted, and make the envelope's failing cells a recorded loosenPending with rationale.
+4. Also author the invariant text destined for the subsystem-certification registry row (tierDriftEnabled) as a comment block the certification build can lift.
+OWNERSHIP: tests/ only (plus a comment block file if needed). Run your envelope + the walker suites you touch.`, { label: 'wA:tier-inertia', phase: 'Build', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(`${COMMON}
+
+ASSIGNMENT — WAVE B1 (directive 2, judgment J-D2): NEUTRAL-CONNECTED DEFAULT.
+1. The default edge for campaign members: diplomatic KNOWN + minimal route awareness — NOT a trade route, no resource flow. Find the neighbour-relationship vocabulary (the rulingStructure third-positional relationship object; relationshipDynamics; how campaign membership currently initializes neighbor state — likely void/unknown between non-adjacent members).
+2. Ship it DARK behind a virtual flag (absent from DEFAULT_SIMULATION_RULES; name it in the established *Enabled convention, e.g. neutralNeighborsEnabled) + lit in the deep presets IF AND ONLY IF that is where sibling defaults live (check how the T5 charter flags were preset-lit — mirror that pattern exactly; do NOT edit DEFAULT_SIMULATION_RULES).
+3. Byte-identical dormancy pin (flag off/absent ⇒ same-reference or byte-equal generation + pulse output on a fixture world). With the flag LIT: every pair of campaign members without an explicit relationship gets the neutral-known edge at world-connect time; explicit relationships always win; the edge participates in the interaction graph (it must raise interaction density — that is its purpose per the small-N stasis evidence).
+4. Pins: dormancy; explicit-beats-default; JSON-round-trip persistence of the default edges; and an interaction-density smoke (a 4-settlement flagged world produces strictly more cross-settlement candidates over a seeded 5-year pulse than the unflagged twin — anchored, not vacuous).
+OWNERSHIP: src/domain relationship/campaign-connect surfaces + their tests. Do not touch store UI.`, { label: 'wB1:neutral-connected', phase: 'Build', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(`${COMMON}
+
+ASSIGNMENT — WAVE B2 (directive 7 auto half, judgment J-D7): FULL AUTO-RESOLVE MODE.
+1. Current state: majorChangesRequireProposal routes majors to the proposal docket; an advanceAutoResolve store field + setAdvanceAutoResolve exist (CampaignFolder.jsx:114-115 reads them) — trace what they currently do.
+2. Build the full-auto mode: when the user's auto-resolve toggle is ON, world advances resolve EVERYTHING including majors through the existing proposal machinery's accept path (one vocabulary per decision — reuse, never fork a second adjudication path). Every auto-adjudicated major carries engine-adjudicated provenance (a typed adjudicatedBy: 'engine_auto' mark or the established provenance idiom — find the closest existing pattern and extend it) so retrospective review always shows who ruled.
+3. The store toggle persists per the established display-preference persistence (partialize rules — check what persists and mirror; the toggle is user-owned config).
+4. Pins: auto mode resolves a seeded fixture's major through the SAME machinery (receipt/journal identical shape to a hand-accepted one except the provenance mark); provenance mark present on every auto-resolved major and ABSENT on hand-resolved ones; toggle-off worlds byte-identical to today (negative control); persistence round-trip.
+5. Do NOT build the decisions popup / held docket (that is wave F). Do NOT remove anything from the Herald yet.
+OWNERSHIP: src/store advance/proposal seams + src/domain provenance mark + their tests. If a store action is new: operationRegistry row + gen:compendium-data.`, { label: 'wB2:auto-resolve', phase: 'Build', schema: SCHEMA, model: 'opus' }),
+])
+
+const all = results.filter(Boolean)
+log(`${all.length}/3 wave A+B implementers returned`)
+return { results: all }

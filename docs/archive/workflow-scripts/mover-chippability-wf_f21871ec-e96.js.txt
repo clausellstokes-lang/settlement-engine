@@ -1,0 +1,110 @@
+export const meta = {
+  name: 'mover-chippability',
+  description: 'Analyze which Phase 5.5 movers M2-M10 can be chipped (spun off as independent parallel sessions) vs must run sequentially through the manager loop',
+  phases: [
+    { title: 'Analyze', detail: 'one agent per mover: real deps + files-touched + eager cost, grounded in committed code' },
+    { title: 'Synthesize', detail: 'collision matrix + budget-race + chippable-set verdict' },
+  ],
+}
+
+// M1 is IN FLIGHT (embattlement routing) — analyzed as collision context, not a chip candidate.
+// Candidates are M2-M10. Each agent reads its playbook spec AND greps the actual committed seams.
+const MOVERS = [
+  { id: 'M1', hint: 'embattlement routing (IN FLIGHT — context only, not a candidate)' },
+  { id: 'M2', hint: 'caravans / real shipments' },
+  { id: 'M3', hint: 'winter roads (seasonal route modulation)' },
+  { id: 'M4', hint: 'migration-with-mortality (owner-gated on population-attractor review)' },
+  { id: 'M5', hint: 'army / field combat (armies moving across the map)' },
+  { id: 'M6', hint: 'entrepots (trade hubs / transshipment)' },
+  { id: 'M7', hint: 'smuggling (illicit routes through embattled/disallowing settlements)' },
+  { id: 'M8', hint: 'sea lanes (the reserved seaLanes digest slot)' },
+  { id: 'M9', hint: 'Wave B — belief factions (extends Wave A beliefMap)' },
+  { id: 'M10', hint: 'CL-3 control layer (extends CL-0 simulationRules)' },
+]
+
+const SHARED_HOT_SEAMS = [
+  'src/domain/spatial/spatialDigest.js (the FROZEN keystone digest — amending it = re-canonize path)',
+  'src/domain/spatial/ the distanceRead / route re-score seam (M1,M5,M7,M8 all route)',
+  'src/domain/worldPulse/pulseKernel.js (the tick hook — M1,M4,M5,M9 all advance per tick)',
+  'src/domain/worldPulse/worldState.js CONDITIONAL_LEDGER_KEYS (the ONLY eager file — each NEW key ~13-20B, and headroom is 50B TOTAL)',
+  'src/domain/worldPulse/settlementStrategy.js (the decision reads)',
+  'src/domain/worldPulse/beliefMap.js (Wave A — M9 extends it; already owns the beliefMaps ledger key)',
+  'the CL-0 control layer (simulationRules / domainState / rulesetLog — M10 extends it)',
+  'store slices (a store-slice eager cost is the W5/FP-2 owner-gated concern)',
+]
+
+const ANALYSIS_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['mover', 'title', 'upstreamDeps', 'filesTouched', 'hotSeamsShared', 'eagerCost', 'onTradeChain', 'ownerGated', 'independenceNotes'],
+  properties: {
+    mover: { type: 'string' },
+    title: { type: 'string' },
+    upstreamDeps: { type: 'array', items: { type: 'string' }, description: 'committed waves AND other movers this genuinely needs as input, grounded in the code (e.g. "M1 embattlement scalar", "keystone digest routes")' },
+    filesTouched: { type: 'array', items: { type: 'string' }, description: 'concrete file paths / seams this mover would create or edit' },
+    hotSeamsShared: { type: 'array', items: { type: 'string' }, description: 'which of the SHARED_HOT_SEAMS this mover touches (collision surface)' },
+    eagerCost: { type: 'string', enum: ['new-ledger-key', 'reuses-existing-key', 'store-slice', 'none', 'unknown'], description: 'its first-paint eager cost — the budget-race axis' },
+    onTradeChain: { type: 'boolean', description: 'true if it sits on the M1->M2->M3 physics/trade dependency chain' },
+    ownerGated: { type: 'boolean' },
+    independenceNotes: { type: 'string', description: 'the honest verdict: can this run in a separate parallel session off HEAD a4e04ad5 without colliding on files/budget with M1 or other movers? why / why not' },
+  },
+}
+
+phase('Analyze')
+const analyses = (await parallel(MOVERS.map(m => () =>
+  agent(
+    `You are analyzing Phase 5.5 mover ${m.id} (${m.hint}) in /Users/cstokes/Desktop/settlement-engine (branch review-fixes-2026-07-08, HEAD a4e04ad5) to decide whether it can be CHIPPED — spun off into its own independent parallel Claude Code session/worktree — or whether it must run SEQUENTIALLY through the manager loop because it shares hot seams or races the first-paint budget.
+
+STEP 1: Read docs/PHASE55_EXECUTION_PLAYBOOK.md and find the "### ${m.id}" spec in PART 7 (the mover ladder). Read that spec plus PART 7's universal M-wave header laws.
+
+STEP 2: GROUND IT IN THE COMMITTED CODE. Do not trust the spec's intent — grep/read the actual files to confirm what ${m.id} would truly touch and depend on. The SHARED HOT SEAMS that cause collisions or budget races are:
+${SHARED_HOT_SEAMS.map((s, i) => `  ${i + 1}. ${s}`).join('\n')}
+
+Determine, grounded in the real code:
+- upstreamDeps: what committed waves (keystone digest, 5.5-M modulation, SEASONS-A, 3.5 rumors, Wave A beliefMap, CL-0, the W-C war machinery) AND what OTHER movers ${m.id} genuinely needs as input. Be honest — e.g. does it read the embattlement scalar (M1)? real shipments (M2)? Check whether the thing it needs actually exists in the committed digest/ledger or must be built by a prior mover.
+- filesTouched: the concrete new/edited paths.
+- hotSeamsShared: which of the numbered shared seams above it touches.
+- eagerCost: does it add a NEW conditional-ledger key (~13-20B, races the 50B headroom), REUSE an existing key (e.g. M9 reusing beliefMaps = budget-free), add a store slice (the W5/FP-2 owner-gated concern), or NONE?
+- onTradeChain / ownerGated.
+- independenceNotes: THE VERDICT — can ${m.id} run in a SEPARATE parallel session off the current HEAD without colliding on files or racing the budget with the in-flight M1 or with other movers? Note specifically: (a) file collisions with M1's likely edits (embattlement.js + distanceRead re-score + a new ledger key), (b) whether its eager cost would race M1 for the last 50B, (c) whether it needs a not-yet-built mover's output.
+
+${m.id === 'M1' ? 'NOTE: M1 is currently IN FLIGHT. Analyze it only as collision CONTEXT (what files/seams/budget it is claiming right now) so the others can be judged against it. It is not itself a chip candidate.' : ''}
+
+Return ONLY the structured object.`,
+    { label: `analyze:${m.id}`, phase: 'Analyze', schema: ANALYSIS_SCHEMA }
+  )
+))).filter(Boolean)
+
+phase('Synthesize')
+const SYNTH_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['chipNow', 'chipAfter', 'sequentialOnly', 'collisionMatrix', 'budgetRace', 'recommendation'],
+  properties: {
+    chipNow: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['mover', 'reason'], properties: { mover: { type: 'string' }, reason: { type: 'string' } } }, description: 'movers that can be spun off as an independent parallel chip RIGHT NOW off HEAD a4e04ad5 — no file collision with in-flight M1, no budget race, no unbuilt dependency' },
+    chipAfter: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['mover', 'blockedBy', 'reason'], properties: { mover: { type: 'string' }, blockedBy: { type: 'string' }, reason: { type: 'string' } } }, description: 'movers that become chippable only after a specific dependency lands' },
+    sequentialOnly: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['mover', 'reason'], properties: { mover: { type: 'string' }, reason: { type: 'string' } } }, description: 'movers that must go through the manager loop serially (shared hot seam or forced budget serialization)' },
+    collisionMatrix: { type: 'string', description: 'concise plain-text summary of which movers collide on which files' },
+    budgetRace: { type: 'string', description: 'the 50B headroom analysis: which movers add new eager cost and therefore CANNOT parallelize their budget claim; which are budget-free (reuse key / none)' },
+    recommendation: { type: 'string', description: 'the owner-facing bottom line: exactly which movers to chip now, in what grouping, and what stays on the manager loop — with the one or two biggest risks named' },
+  },
+}
+const synthesis = await agent(
+  `You are the manager synthesizing a chippability verdict for the Phase 5.5 mover ladder. Below are per-mover analyses (grounded in the committed code at HEAD a4e04ad5). M1 (embattlement) is IN FLIGHT and is claiming: embattlement.js + the distanceRead route re-score seam + one new conditional-ledger key (racing the 50B headroom).
+
+Your job: decide which of M2-M10 can be CHIPPED (spun into an independent parallel session/worktree off the current HEAD) versus must run SEQUENTIALLY through the manager loop.
+
+The two hard constraints:
+1. FILE COLLISION — two sessions editing the same file (spatialDigest.js, distanceRead re-score, pulseKernel.js, worldState.js, settlementStrategy.js, beliefMap.js, the CL-0 files) produce merge conflicts. A chip is only safe if its filesTouched are disjoint from M1's and from every other concurrently-chipped mover's.
+2. BUDGET RACE — headroom is 50 BYTES TOTAL. M1 is already claiming ~13-20B of it for its ledger key. Any OTHER mover that adds a NEW ledger key races the same 50B — only ONE new-key mover can be in flight at a time; the rest MUST serialize through the manager so the budget is claimed one wave at a time. Movers that REUSE an existing key (e.g. M9 → beliefMaps) or add NO eager cost are budget-free and can parallelize freely. A store-slice mover (M10 maybe) is owner-gated regardless (W5/FP-2).
+
+Also respect: unbuilt dependencies (a mover needing M2's real shipments can't chip until M2 lands), and owner gates (M4).
+
+Analyses:
+${JSON.stringify(analyses, null, 2)}
+
+Produce the structured verdict. Be decisive and specific — name the actual files in the collision reasons. The recommendation field is what the owner reads: give them the exact chip set (if any), the grouping, and the top risks.`,
+  { label: 'synthesize', phase: 'Synthesize', schema: SYNTH_SCHEMA }
+)
+
+return { analyses, synthesis }

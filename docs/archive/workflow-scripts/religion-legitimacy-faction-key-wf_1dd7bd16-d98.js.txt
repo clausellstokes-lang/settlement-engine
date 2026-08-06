@@ -1,0 +1,111 @@
+export const meta = {
+  name: 'religion-legitimacy-faction-key',
+  description: 'Empirically verify and scope the religionLegitimacy rulerLens faction-key defect',
+  phases: [
+    { title: 'Probe', detail: 'executed probes over real generator data + consumer census' },
+    { title: 'Verify', detail: 'adversarial refutation of each probe conclusion' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a04d3f325c72e62dd'
+const PRE = `You are working in a git worktree at ${WT}. ALWAYS cd there first. The worktree's node_modules is EMPTY: run node/vitest via /Users/cstokes/Desktop/settlement-engine/node_modules/.bin/vitest or with NODE_PATH pointing at /Users/cstokes/Desktop/settlement-engine/node_modules. Do NOT modify any source file. Do NOT run any git state-mutating command (no add/commit/stash/checkout/reset). Read-only investigation plus scratch files under /private/tmp/claude-502 only. Report executed evidence with quoted output; label every conclusion CONFIRMED (you ran it) or PLAUSIBLE (reasoning only).`
+
+const PROBES = [
+  {
+    key: 'record-shape',
+    prompt: `${PRE}
+
+TASK: Empirically establish the REAL shape of settlement.powerStructure.factions records as produced by the actual generator, and test four specific claims.
+
+Find the real power-structure generator (grep for 'powerStructure' writers in src/generators/ — likely rulingStructure.js or similar; there is no export named generatePowerStructure so find the actual one). Write a scratch node script that generates MANY settlements (aim for 200+ across tiers thorp/hamlet/village/town/city/metropolis with varied seeds) through the real pipeline, and answer:
+
+CLAIM 1: faction records carry the display name in '.faction' and carry NEITHER '.name' NOR '.id' NOR '.archetype'. Report the exact union of keys observed across all records, with counts. Report how many records have .name, .id, .archetype (expect 0 each, but MEASURE).
+
+CLAIM 2: In src/domain/worldPulse/religionLegitimacy.js rulerLens (lines 206-210), both .name-based find() calls are dead — execution always falls through to the highest-power sort fallback on line 210. Instrument this: for each generated settlement, determine which of the three branches would fire.
+
+CLAIM 3: The fallback (highest .power) coincidentally picks the SAME faction that src/domain/rulingPower.js governingFactionOf() picks (the .isGoverning record). Measure agreement rate exactly. Report ANY disagreement with the settlement tier/seed and the faction list.
+
+CLAIM 4: after a coup via transferRulingPower(settlement, winnerName, {cause:'coup'}), the fallback STILL agrees with governingFactionOf. Run many post-coup scenarios (aim 500+, varied winners) and measure the disagreement rate exactly. The brief claims 0 disagreements over 1440 scenarios because the winner's +6 never closes the gap; CHALLENGE that — deliberately search for a settlement whose non-governing faction has power >= the governing faction's power, both pre- and post-coup. Report the closest margin observed.
+
+Return: exact key union with counts, per-claim CONFIRMED/REFUTED with the measured numbers, and any counterexample found.`,
+  },
+  {
+    key: 'npc-join',
+    prompt: `${PRE}
+
+TASK: Establish the canonical NPC->faction join key on REAL generated data, because the fix to religionLegitimacy.js line 215 (rulerId = String(ruler?.id || '')) depends on it.
+
+Read in full:
+- src/domain/worldPulse/religionLegitimacy.js rulerLens (lines 203-244) — note the loop at 217-224 uses linkedFactionIds
+- src/domain/worldPulse/npcLadderState.js (the npcInFaction / ladderFactionKey functions, ~lines 110-150) — this is the canonical precedent, recently fixed for exactly this bug class
+- src/domain/worldPulse/clergyTraitPlane.js lines 165-260 — a SECOND consumer of linkedFactionIds in the same subsystem
+- src/generators/factionRoles.js lines 120-215 — the WRITER of linkedFactionIds
+- src/generators/npcGenerator.js around line 1169 and src/generators/npcStructure.js around line 393 — the factionAffiliation writer/join
+
+Then EMPIRICALLY, over 100+ real generated settlements, measure:
+A) What fraction of npcs carry a non-empty linkedFactionIds? What VALUES does it hold (display names? ids? something else)? Give real examples.
+B) What fraction carry factionAffiliation, and does it equal a faction record's .faction value exactly?
+C) TODAY, rulerId is '' so the filter at line 219 never skips anyone: 'lead' is the strongest-orgPower NPC in the WHOLE settlement and rulerFlaw scans ALL npcs. Measure: how often would the strongest-orgPower NPC settlement-wide differ from the strongest-orgPower NPC actually linked to the governing faction? Report the rate and the resulting delta in npcAlignmentScore.
+D) If the fix sets rulerId to nameOf(ruler) (the display name), how many NPCs would match via linkedFactionIds? Would the filter select an EMPTY set for some settlements (making lead=null and align fall back to lean.align)? Measure that rate exactly — this is the critical risk: a fix that narrows to an empty set is a regression.
+E) Would matching on BOTH linkedFactionIds AND factionAffiliation give better coverage? Measure.
+
+Return measured rates with real examples, and a recommendation on the exact predicate the fix should use, labeled CONFIRMED/PLAUSIBLE.`,
+  },
+  {
+    key: 'blast-radius',
+    prompt: `${PRE}
+
+TASK: Map the full blast radius of changing rulerLens() in src/domain/worldPulse/religionLegitimacy.js — specifically whether making rulerLens live on real data would shift same-seed simulation output, and which tests/goldens would move.
+
+1. Trace every consumer of rulerLens outputs. Start at src/domain/worldPulse/religiousContest.js:697 and religionLegitimacy.js:404. Follow lens.temper / lens.align / lens.power / lens.compromise / lens.moralLean / lens.martialLean through deityGrowthFavor, deityLegitimacyTarget, conductFitSignal, chronicleMomentum, deityRulerFit, rulerEndorsement. Report which persisted/serialized world fields ultimately change (legitimacy, tenure, standing, patron selection, heresyStain...).
+
+2. Determine whether this code path is LIT or DARK today. Is the religion/worldPulse contest gated behind a simulation-rules flag? Find the flag(s), check DEFAULT_SIMULATION_RULES, and state whether a default world exercises rulerLens on every tick. Quote the gate.
+
+3. Enumerate every test file and golden fixture that would be affected. Run (read-only, do not edit) the existing focused tests to establish a GREEN BASELINE and quote pass counts:
+   - tests/domain/religionLegitimacy.test.js
+   - tests/domain/martialMoralWF8.test.js
+   - anything else importing religionLegitimacy or religiousContest
+   Also grep tests/ for golden/snapshot files touching religion, legitimacy, patron, worldPulse pulse output.
+
+4. CRITICAL: the existing tests use fixtures. Read tests/domain/religionLegitimacy.test.js in full and report whether its fixtures use '.name' or '.faction' on faction records, and whether they set .archetype and .id. If the fixtures are .name/.archetype-shaped, the fix MUST keep them working (that is exactly how this bug class hid) — report precisely which assertions depend on the .name/.archetype path.
+
+Return: the consumer chain, the lit/dark verdict with the quoted gate, the affected test inventory with baseline pass counts, and the fixture-shape analysis. Label CONFIRMED/PLAUSIBLE.`,
+  },
+  {
+    key: 'pin-template',
+    prompt: `${PRE}
+
+TASK: Extract the exact conventions this repo uses for a faction-key regression pin, so a new pin matches house style.
+
+1. Read tests/domain/npcLadderFactionKey.test.js IN FULL. It is the sibling pin for the same bug class (commits 25749ae5 and dc0b6e2b). Report its structure: how it builds REAL generator data vs fixtures, how it asserts revert-proofness, how it pins precedence (.faction over .name), how it closes a write-read loop, and how it documents deliberate divergences.
+
+2. Read the two commit messages: git log -1 25749ae5 and git log -1 dc0b6e2b. Extract the verification protocol they used (revert-proof in a detached temp worktree against a pre-fix base) and the EXACT commands if recoverable.
+
+3. Report the repo's test gate commands. Read package.json scripts and any CLAUDE.md / docs on gates. Identify: the focused test command, typecheck (tsc --noEmit?), scripts/check-domain-strict.mjs, eslint invocation, and the first-paint byte-budget check (tests/build/vendorPdfLazy.test.js?).
+
+4. Determine whether src/domain/worldPulse/religionLegitimacy.js is an EAGER (first-paint closure) module or a LAZY leaf. Replicate vite.config.js's eager-module-graph derivation if there is a script for it, or find the test that measures the closure. This matters: memory says the composite carries an owner-gated first-paint budget breach at 1,040,998 vs 1,040,000, so the fix must not add eager bytes. Report the module's status with executed evidence, and whether importing governingFactionOf/nameOf from src/domain/rulingPower.js into religionLegitimacy.js would add eager bytes (note rulingPower.js is described as the EAGER entrance, and religionLegitimacy is under worldPulse which is described as lazy).
+
+Return the pin template structure, the verification protocol, the exact gate commands, and the eager/lazy verdict with evidence.`,
+  },
+]
+
+phase('Probe')
+const results = await pipeline(
+  PROBES,
+  (p) => agent(p.prompt, { label: `probe:${p.key}`, phase: 'Probe' }),
+  (report, p) => agent(`${PRE}
+
+You are an ADVERSARIAL VERIFIER. Another agent investigated "${p.key}" and produced the report below. Your job is to REFUTE it, not confirm it. Default to "unsupported" when uncertain.
+
+For each substantive claim: did they actually EXECUTE something that establishes it, or did they reason from source reading and present it as measured? Re-run the decisive checks yourself with your own independent script/commands. Look specifically for: sample sizes smaller than claimed, probes that used FIXTURES instead of the real generator, agreement rates computed over a biased sample, and claims about lit/dark status not backed by a quoted flag default.
+
+REPORT UNDER REVIEW:
+---
+${report}
+---
+
+Return: a list of claims with verdict SUPPORTED / OVERSTATED / REFUTED, your own executed counter-evidence, and a corrected version of any claim you downgrade.`, { label: `verify:${p.key}`, phase: 'Verify' })
+    .then((v) => ({ key: p.key, report, verification: v }))
+)
+
+return results.filter(Boolean)

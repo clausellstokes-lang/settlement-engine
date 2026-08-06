@@ -1,0 +1,47 @@
+export const meta = {
+  name: 'postfix-verify-pipeline-reveal',
+  description: 'Opus post-fix verification of the PipelineReveal timing implementation',
+  phases: [
+    { title: 'Verify fixed implementation', detail: 'three adversarial lenses', model: 'opus' },
+  ],
+}
+
+const FILE = 'src/components/generate/PipelineReveal.jsx'
+const CONTEXT = `Working dir: this repo checkout. Read ${FILE} in full. The ORIGINAL pre-rewrite implementation is at "git show HEAD:${FILE}" — use it as the parity baseline. The component was rewritten (uncommitted, in the working tree) so the reveal derives its step index from monotonic elapsed time (performance.now), with: an interval that paints steps every 280ms and is cleared at the completion tick; a one-shot endTimer armed at the completion tick with finishAtMs = max(elapsed+200, totalMs) where totalMs = max(rolledTierWindow, stepsEnd+200); a visibilitychange listener that re-runs tick and settles up (finish()) if the deadline is overdue; a done-guarded finish() so onComplete can never double-fire; cleanup that clears everything without calling onComplete. Owner contract: the reveal is deliberately NOT skippable; foreground behavior must match the ORIGINAL (HEAD) implementation byte-for-byte in timing (steps every 280ms, WOW_REVEAL_COMPLETED once at steps-end, onComplete at max(rolledWindow, completionElapsed+200) via setTimeout); and a hidden/throttled tab must never stretch the reveal to minutes — worst case ~seconds of slop while hidden, instant settle-up on return. This is the FIXED implementation after a prior review round; your job is to verify the fix is complete and introduced no new defect.`
+
+const VERDICT = {
+  type: 'object',
+  required: ['pass', 'issues'],
+  properties: {
+    pass: { type: 'boolean', description: 'true if this lens finds NO remaining or newly-introduced defect' },
+    issues: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['title', 'detail', 'severity'],
+        properties: {
+          title: { type: 'string' },
+          detail: { type: 'string', description: 'concrete failure scenario in the code as written' },
+          severity: { enum: ['high', 'medium', 'low'] },
+        },
+      },
+    },
+  },
+}
+
+const LENSES = [
+  { key: 'parity', prompt: `${CONTEXT}\n\nLens: FOREGROUND PARITY vs HEAD. Trace both implementations tick-by-tick for a normal visible tab: activeIndex sequence, analytics (SHOWN once on mount, COMPLETED once at steps-end with {steps, elapsedMs} integer payload), and the exact onComplete instant including the 200ms-minimum-dwell case (rolled window < stepsEnd+200) and the jank case (a stalled tick reaching steps-end past the window — old code still gave 200ms dwell; does the new one?). Only report real deviations.` },
+  { key: 'throttle', prompt: `${CONTEXT}\n\nLens: HIDDEN/THROTTLED TAB. Walk: generate then immediately hide the tab (interval->1/sec); hide mid-steps; hide during the dwell after the endTimer is armed (setTimeout also throttled); return to the tab in each phase. Does the reveal always complete within ~1s of its window while hidden, and settle instantly via visibilitychange on return? Any path where onComplete never fires, fires twice, or WOW_REVEAL_COMPLETED is skipped? What if the tab is hidden at mount? What about performance.now() freezing across system sleep on some platforms — can that stall completion unboundedly, and does the visibilitychange path still bound it when the user returns?` },
+  { key: 'lifecycle', prompt: `${CONTEXT}\n\nLens: REACT LIFECYCLE. StrictMode double-invoke of the effect (mount/cleanup/mount): timers, listener, targetMsRef guard, duplicate analytics? Effect re-run on deps change mid-play? setState after unmount? finish() from endTimer racing cleanup? TDZ on id/endTimer/tick/finish given their declaration order? Listener removed on every exit path (finish, cleanup, empty-steps early return)? onComplete identity: it's a zustand action passed as prop — any stale-closure hazard?` },
+]
+
+const results = await parallel(LENSES.map(l => () =>
+  agent(l.prompt, { label: `postfix:${l.key}`, phase: 'Verify fixed implementation', schema: VERDICT, model: 'opus' })
+    .then(v => ({ lens: l.key, ...v }))
+))
+
+const clean = results.filter(Boolean)
+return {
+  allPass: clean.length === LENSES.length && clean.every(r => r.pass),
+  lenses: clean.map(r => ({ lens: r.lens, pass: r.pass, issues: r.issues })),
+}

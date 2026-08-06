@@ -1,0 +1,66 @@
+export const meta = {
+  name: 'content-gt-dossier-recon',
+  description: 'Read-only recon of the dossier/naming content surfaces: exact selection mechanism, rng draw-count invariance, exact-string test pins, consumers, eager/lazy chunk, stable-seed availability',
+  phases: [{ title: 'Recon' }],
+}
+
+const WORKTREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/brave-babbage-67b994'
+
+const PREAMBLE = `READ-ONLY recon. You are mapping ONE content surface for a "content-volume" lane that will GROW seeded prose pools while keeping the rng stream unperturbed. Work ENTIRELY inside the worktree at ${WORKTREE} — you MUST cd there first and use ONLY paths under it. Do NOT use /Users/cstokes/Desktop/settlement-engine/ (the MAIN tree — it is a DIFFERENT branch/lineage and will silently give wrong answers). Confirm with: cd ${WORKTREE} && git branch --show-current  (must print claude/generation-time-content-dossier). MODIFY NOTHING. Run NO gates, NO tests, NO builds. Only read/grep/count.
+
+CRITICAL BACKGROUND — the rng model (already established, do not re-derive):
+- There is ONE global seeded PRNG (src/kernel/rngContext.js, _activeRng). pick(arr) = arr[Math.floor(_roll()*arr.length)] — advances the stream by EXACTLY ONE _roll() regardless of arr.length. So growing a pool selected by a single pick() is STREAM-SAFE (only the chosen string changes; downstream draws are byte-identical). But any path whose NUMBER of _roll()/pick() calls depends on pool size or content (drawUnique reroll-on-collision, retry loops, content-branching draws) changes the draw COUNT when pools grow → cascades the whole downstream stream. That distinction is the whole point of your recon.
+- A separate deterministic idiom exists: fnv1a32(seed) % pool.length (pure hash, ZERO rng draws) — used in src/domain/worldPulse/eventProse.js (pickLine) and src/domain/display/newsVoice.js. This is the safe way to add variety WITHOUT a draw.
+
+For YOUR surface answer these precisely, with file:line evidence:
+1. POOLS: each pool's variable name, file:line, current depth (count), and entry shape (fixed string | function closure). Quote 2 representative existing entries verbatim (for register calibration) and list the interpolated semantic tokens each entry threads (\${name}, counts, etc.).
+2. SELECTION MECHANISM: exactly how ONE entry is chosen from each pool — quote the selecting code with file:line. Classify: single pick() (1 draw) | deterministic-index (e.g. name.length%3, 0 draws) | fnv-hash (0 draws) | drawUnique/reroll (VARIABLE draws) | weightedPick | fixed/no-choice.
+3. DRAW-COUNT INVARIANCE: if the pool grows, does the number of _roll()/pick() draws on this code path CHANGE or stay constant? State exactly why. Flag every reroll/retry/drawUnique/content-branch site as DRAW-COUNT-VARIABLE.
+4. RNG SCOPE + ORDER: is this surface generated inside the main pipeline stream, or a forked/scoped rng? Trace: is the generation rng forked PER-SETTLEMENT or one shared stream across all settlements (grep setActiveRng / createPRNG / fork / seed derivation in the pipeline runner and this surface's caller)? Where does this surface sit in per-settlement generation order (near the end? followed by more structural draws?). What draws, if any, happen AFTER this surface's selection.
+5. EXACT-STRING TEST PINS: grep tests/ for any test that asserts an EXACT string (toBe/toEqual/toContain/toMatch) drawn from these pools. List test file:line + the asserted string. These determine canonical-at-zero requirements.
+6. CONSUMERS: who reads the persisted field (grep the field name across src/). Does any consumer do SUBSTRING/.includes()/keyword matching on the prose (which would break if phrasing changes)? Quote them.
+7. EAGER vs LAZY: is this surface's module in the EAGER first-paint closure or a lazy chunk? (grep imports; check if the generator is dynamically imported / in a worker). Would importing eventProse.js's pickLine (or adding fnv1a32) here risk pulling a domain module into the eager closure? Check for dist/closure budget contracts (tests/**/*closure* or *budget* or verify:dist).
+8. STABLE SEED: at the selection site, is a settlement-stable identifier available (settlement.id, seed, name) that a pure fnv-hash could key on for per-settlement variety without an rng draw?
+9. OWNER-GATED CONCERNS: does growing this surface require a persistence-SHAPE change (new field), touch load-bearing lookup keys, or touch owner-ratified content? Flag explicitly.
+10. RECOMMENDED APPROACH (your read): grow-pool-keep-single-pick (stream-safe) | swap-deterministic-selector-to-fnv-hash | world-scoped-registry (describe how to keep it draw-neutral) | defer-owner-gated | leave-adequate. Include the SPECIFIC risk that would make growth unsafe.`
+
+const SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['surface', 'pools', 'selectionMechanism', 'drawCountInvariance', 'rngScopeAndOrder', 'exactStringPins', 'consumers', 'eagerOrLazy', 'stableSeed', 'ownerGatedConcerns', 'recommendedApproach', 'confidence'],
+  properties: {
+    surface: { type: 'string' },
+    pools: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['name', 'location', 'depth', 'entryShape', 'sampleEntries', 'semanticTokens'], properties: {
+      name: { type: 'string' }, location: { type: 'string' }, depth: { type: 'string' }, entryShape: { type: 'string' }, sampleEntries: { type: 'array', items: { type: 'string' } }, semanticTokens: { type: 'array', items: { type: 'string' } } } } },
+    selectionMechanism: { type: 'string' },
+    drawCountInvariance: { type: 'string', description: 'CONSTANT or VARIABLE, with why, per pool/path' },
+    rngScopeAndOrder: { type: 'string', description: 'per-settlement fork vs shared stream; where in order; what draws follow' },
+    exactStringPins: { type: 'array', items: { type: 'string', description: 'test file:line + asserted string' } },
+    consumers: { type: 'array', items: { type: 'string' } },
+    substringLookupRisk: { type: 'string' },
+    eagerOrLazy: { type: 'string' },
+    stableSeed: { type: 'string' },
+    ownerGatedConcerns: { type: 'string' },
+    recommendedApproach: { type: 'string' },
+    confidence: { type: 'string', description: 'HIGH/MED/LOW + what you could not determine' },
+  },
+}
+
+const SURFACES = [
+  { key: 'pressure-sentence', focus: 'PRESSURE_SENTENCES in src/generators/narrativeText.js AND the selector generatePressureSentence in src/generators/narrativeGenerator.js (~line 1007). CRITICAL: the religious_conversion selector is name.length%3 (quote it exactly). Determine EXACTLY how each stress type selects one sentence from its array — is it pick() (rng) or a deterministic index? succession_void draws _rng() inside its closure. This is the most-surfaced line in the product (TableView.jsx, map/QuickInspector.jsx, SummaryTabV2.jsx). settlement.pressureSentence stamped at steps/assembleSettlement.js:~149.' },
+  { key: 'political-flavor', focus: 'POLITICAL_FLAVOR in src/generators/narrativeText.js and its callers narrativeGenerator.js:~109-145 and historyGenerator.js:~70-99. Each template contains an inner pickRandom2() — count AUTHORED templates vs inner picks. There is a 15% short-circuit to POLITICAL_FLAVOR.stable (quote it). How is the outer template chosen (pick? deterministic?) and how many draws per call (outer pick + inner pickRandom2)?' },
+  { key: 'founding-vignettes', focus: 'src/generators/narrativeGenerator.js genArrivalDetail (~440-655), generateArrivalScene (~1084), STRESS_DESCS (~192) + src/data/narrativeData.js pools: TERRAIN_NARRATIVE_HOOKS, COMMODITY_HOOKS, ARRIVAL_SCENES, ARRIVAL_ADDONS, FOUNDERS_BY_TIER, CHALLENGES_BY_ROUTE, OVERCOMING_BY_PROSPERITY, STRESS_NOTES. For EACH pool: depth + how selected (pick vs index) + draw count. These stamp settlement.arrivalScene and history.founding.* at steps/assembleSettlement.js and steps/generateNarratives.js.' },
+  { key: 'history-catalog', focus: 'src/data/historyData.js (HISTORICAL_EVENTS_DATA: 29 event types, 1 description + 3 plotHooks + faction names each; EVENT_TYPE_NAMES; ECHO_PREFIXES) consumed by src/generators/historyGenerator.js (~509-564 copies description + draws 2-of-3 hooks). How are description and hooks selected/drawn? Is the description a single fixed template per type (0 choice) or drawn? How are 2-of-3 hooks drawn (drawUnique?)? settlement.history persists.' },
+  { key: 'institution-desc', focus: 'src/data/institutionalCatalog.js desc: fields (301 entries, 1 per institution). How is desc copied onto the settlement (economyReconcilePass.js:~153 desc: item.description, steps/assembleInstitutions.js)? Is there ANY selection or is desc a fixed 1-variant field (so growing = adding a variant ARRAY + a picker where none exists today)? CRITICAL: institution NAME (the catalog key) is a load-bearing substring lookup used by rulingStructure.js/governanceNarrative/npcGenerator .includes() — desc is separate from name; confirm growing desc does NOT touch name lookups. Owner-gated: a displayName schema field for NAME variety is OUT of scope.' },
+  { key: 'institution-services', focus: 'src/data/institutionServices.js (INSTITUTION_SERVICES, 935 desc strings, 1 per service). LOW PRIORITY (rated adequate — menu/reference register). Map: how desc is resolved onto institutions (servicesGenerator.js / fuzzy match), is there any selection, and would growing require adding a picker. Just map it; note it is likely defer/leave-adequate.' },
+  { key: 'npc-persona', focus: 'src/data/npcData.js pools (MANNERISMS 30, SPEECH_PATTERNS 20, NPC_WANTS 7x4, NPC_FACTION_GOALS ~2/role, NPC_SECRETS, NPC_CRIMINAL_SECRETS, NPC_FACTION_LOYALTY, relationship archetypes STRESS_ECONOMIC_EFFECTS 18x1 desc templates, NPC_PERSONALITY_TRAITS) consumed by src/generators/npcGenerator.js. CRITICAL: identify every drawUnique() (src/generators/hookVariety.js) and pickFromArray site — drawUnique REROLLS on collision so it is DRAW-COUNT-VARIABLE if pools grow. Also verify the side-finding: npcGenerator.js:~286 clothes: pickFromArray(NPC_WANTS[r]) — is NPC_WANTS wired to the clothes field (mislabel)? Relationship archetype .desc(npc,partner) at ~1788.' },
+  { key: 'faction-names', focus: 'src/data/powerData.js FACTION_DESCRIPTORS (9 categories x 4) + src/generators/power/factionGrouping.js generateFactions (pick(descriptors) + a 1-5 RETRY loop against settlement-LOCAL usedNames + conditional suffix pick). CRITICAL: the retry loop is DRAW-COUNT-VARIABLE. Trace: is generateFactions on the shared pipeline stream or a fork? Called from generatePopulation.js:~40 — where in per-settlement order, and are settlements generated on ONE shared stream or per-settlement forked rng? Is there a WORLD-assembly/realm step where all settlements are post-processed together (a place a pure, rng-free world-scoped dedup pass could run)? Consumers of faction.name: factionCompetition, eventComposer, chronicle — do any substring-match the descriptor? The survey wants a WORLD-SCOPED dedupe registry; assess whether a draw-neutral design is possible (e.g. keep per-settlement naming byte-identical, add a pure post-pass that renames cross-settlement collisions).' },
+  { key: 'rng-eager-crosscutting', focus: 'CROSS-CUTTING (no single pool). Answer definitively: (A) Is the generation pipeline rng ONE shared stream across all settlements in a world/realm, or forked/re-seeded PER settlement? Find the pipeline runner (grep setActiveRng, createPRNG, generateSettlementPipeline, realm/world generation, batch generation) and the seed derivation. (B) Is there a world/realm assembly step that sees all settlements together after per-settlement generation? (C) Are the dossier generators (narrativeGenerator, historyGenerator, npcGenerator, factionGrouping, institution assembly) in the EAGER first-paint closure or a lazy/worker chunk? Find the closure/budget/dist contracts (grep verify:dist, closure, budget, eager in tests/ and scripts/) and state whether importing src/domain/worldPulse/eventProse.js (or adding a local fnv1a32) into the generators would trip an eager-closure size contract. (D) Does the generators layer already have a pure fnv/hash helper to reuse, or should a local one be added? For pools, set name to [] and give one entry {name:"crosscutting", location:"n/a", depth:"n/a", entryShape:"n/a", sampleEntries:[], semanticTokens:[]}.' },
+]
+
+phase('Recon')
+const results = await parallel(SURFACES.map((s) => () =>
+  agent(`${PREAMBLE}\n\n=== YOUR SURFACE: ${s.key} ===\n${s.focus}`, { label: `recon:${s.key}`, phase: 'Recon', schema: SCHEMA })
+    .then((r) => ({ key: s.key, ...(r || {}) }))
+))
+return results.filter(Boolean)
