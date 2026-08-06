@@ -46,6 +46,16 @@
  * strictly worse than the dead arm the cut would be trying to prevent.
  */
 import { ROADS_TUNING, embassyEnvoyWeight01, factionPowerStanding01, roadsImportanceWeight } from '../../roads/state.js';
+// ES-1 — TWO WORDS THIS LEAF USED TO AUTHOR NOW ARRIVE FROM THEIR ONE MINT. The demand
+// vocabulary and the itinerary cap are ROW facts before they are arithmetic facts: the
+// errand's persistence DTO matches against them, so the errand vocabulary leaf owns them
+// and this file BORROWS. Authoring a second `3` and a second demand list here was the
+// arrangement ES-0 landed with, and it would have let the normalizer refuse a fourth stop
+// while `legStack` happily priced one — a disagreement exactly one integer wide.
+import {
+  ENVOY_COVERT_DEMANDS,
+  MAX_COVERT_ITINERARY_STOPS,
+} from '../envoyErrandVocabulary.js';
 import { readCorruptionClimate } from '../../corruption.js';
 import { settlementHasUnderways } from '../clandestineFacet.js';
 import { criminalStrength01Of } from '../supplyKernel.js';
@@ -86,8 +96,13 @@ export const MISSION_GRADES = Object.freeze(['empty', 'exceeded', 'met', 'partia
 /** The grade ranking. Higher is better. */
 export const MISSION_GRADE_ORDER = Object.freeze({ empty: 0, partial: 1, met: 2, exceeded: 3 });
 
-/** The graded bar a mission is sent to clear (§1, addition G). Codepoint-sorted. */
-export const DEMAND_BANDS = Object.freeze(['certain', 'confirm', 'corroborate']);
+/**
+ * The graded bar a mission is sent to clear (§1, addition G). Codepoint-sorted.
+ * ES-1: this is the errand vocabulary's `ENVOY_COVERT_DEMANDS`, re-exported under the
+ * arithmetic's name — the SAME frozen array, not a copy of it, so the two can never
+ * disagree about what a court may ask for.
+ */
+export const DEMAND_BANDS = ENVOY_COVERT_DEMANDS;
 
 /** What a deliberating court decides to do about the gap in its picture (§3.12). Sorted. */
 export const DELIBERATION_VERDICTS = Object.freeze(['act_now', 'dispatch_and_wait', 'wait_expired']);
@@ -128,7 +143,9 @@ export const ESPIONAGE_TUNING = Object.freeze({
   }),
 
   // §3.4 THE ITINERARY. Quadratic, so a third stop is a CHOICE and not free efficiency.
-  MAX_ITINERARY_STOPS: 3,
+  // ES-1: the cap itself is the errand vocabulary's, because the row's normalizer is what
+  // enforces it. This key re-exposes that one number rather than authoring a second.
+  MAX_ITINERARY_STOPS: MAX_COVERT_ITINERARY_STOPS,
   LEG_STACK: 0.35,
 
   // §3.4b THE ROOTED DWELL. Monotone, and the hard cap is a backstop: the soft bound

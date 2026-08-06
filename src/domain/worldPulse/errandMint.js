@@ -62,7 +62,7 @@ import {
   purposeClassOf,
   text,
 } from './envoyErrandVocabulary.js';
-import { errandSpineBlock } from './envoyErrandRecords.js';
+import { errandSpineBlock, normalizeCovertMission } from './envoyErrandRecords.js';
 import { normalizeRoutePlan } from './envoyErrandTransit.js';
 
 /**
@@ -98,12 +98,16 @@ export function errandSpineActive(worldState) {
  * say two different things about what an envoy is really doing is a row a later reader
  * will read the wrong half of.
  *
+ * ES-1 — THE COVERT SUB-RECORD is the fourth conditional and the only one that is not a
+ * word: `covert` rides ONLY a row whose RESOLVED class is `covert`, and the persist side
+ * enforces that, here as everywhere, because it is the side that reads the row back.
+ *
  * @param {{purpose?:unknown, purposeClass?:unknown, declaredPurpose?:unknown,
- *   truePurpose?:unknown}} args
- * @returns {Record<string, string>|null}
+ *   truePurpose?:unknown, covert?:unknown}} args
+ * @returns {Record<string, unknown>|null}
  */
 export function errandSpineFields({
-  purpose, purposeClass, declaredPurpose, truePurpose,
+  purpose, purposeClass, declaredPurpose, truePurpose, covert = null,
 } = {}) {
   const missionPurpose = text(purpose);
   const written = purposeClass == null ? '' : text(purposeClass);
@@ -111,8 +115,17 @@ export function errandSpineFields({
   // The resolved class: what a reader will get back from this row once it is written.
   const resolved = purposeClassOf({ purpose: missionPurpose, purposeClass: written });
   if (!resolved) return null;
-  const declared = declaredPurpose == null ? '' : text(declaredPurpose);
-  if (declared && !PURPOSE_CLASS_SET.has(declared)) return null;
+  const supplied = declaredPurpose == null ? '' : text(declaredPurpose);
+  if (supplied && !PURPOSE_CLASS_SET.has(supplied)) return null;
+  // ES-1 — A COVERT ROW MUST WEAR A FACE, AND ABSENT IS NOT A FACE. For every other class
+  // "no declared purpose" means the declared purpose IS the true one, which is honest and
+  // free. For `covert` it is a VEIL LEAK: `declaredPurposeClassOf` falls back to the true
+  // class when no cover is written, so a covert row with no face would show the word
+  // "covert" to a player through the public reader. So the face is DERIVED from the
+  // errand's own purpose when the caller supplies none, and a covert row that can derive
+  // no face at all is refused rather than written.
+  const declared = resolved === 'covert' ? covertFaceFor(purpose, supplied) : supplied;
+  if (resolved === 'covert' && !declared) return null;
   const claimedTrue = truePurpose == null ? '' : text(truePurpose);
   if (claimedTrue && claimedTrue !== resolved) return null;
   // ONE CONSTRUCTOR OF THE BLOCK, and it is the persist side's. The mint decides whether
@@ -122,10 +135,69 @@ export function errandSpineFields({
   // did not, and the disagreement would be one byte wide and completely silent.
   return errandSpineBlock({
     purposeClass: written,
+    ...(covert != null ? { covert } : {}),
     ...(declared && declared !== resolved
       ? { declaredPurpose: declared, truePurpose: resolved }
       : {}),
   }, missionPurpose);
+}
+
+/**
+ * ES-1 — THE FACE A COVERT ROW WEARS, resolved ONCE for both the refusal and the write.
+ *
+ * A caller may name the cover class outright. When it does not, the face is the class the
+ * errand's OWN PURPOSE already implies — a covert mission riding a peace embassy is
+ * publicly a `diplomatic` errand, and deriving that is strictly safer than letting a
+ * caller declare a face its purpose contradicts. Returns `''` when no lawful face exists,
+ * which is the state a free-standing spy row is in today (R-ES1-1) and is a refusal
+ * rather than a silent absent field.
+ *
+ * @param {unknown} purpose @param {unknown} declaredPurpose @returns {string}
+ */
+export function covertFaceFor(purpose, declaredPurpose) {
+  const declared = declaredPurpose == null ? '' : text(declaredPurpose);
+  const face = declared || purposeClassOf({ purpose: text(purpose) });
+  return PURPOSE_CLASS_SET.has(face) && face !== 'covert' ? face : '';
+}
+
+/**
+ * ES-1 — WHY THE MINT REFUSES COVERT CARGO, BY NAME, or `''` when it does not.
+ *
+ * The persist side HEALS a malformed covert sub-record to absent (a campaign whose save
+ * carries a corrupt mission degrades to an ordinary errand rather than losing a
+ * traveller). The mint may not: a writer handing this head a four-stop itinerary or a
+ * `pullBand` leg reference has a bug, and a mint that quietly dropped the cargo would
+ * hand back a row that looks like a mission and is not one. Both behaviours come out of
+ * the ONE validation in `normalizeCovertMission`, which returns the record AND the
+ * reason there is not one — there is no second spelling of the covert law here.
+ *
+ * THE CLASS CHECK IS DELIBERATELY DEFERENTIAL. An unlawful class WORD is not this
+ * function's refusal to make: it returns `''` so `errandSpineFields` reds it as
+ * `invalid_purpose_class`, which is the reason a caller who mistyped a class wants to
+ * read. What this owns is the lawful-but-wrong case: an errand of the commercial class
+ * carrying a covert mission, because that is a caller who means two different things at
+ * once. (The class word is deliberately not quoted here. This file is a REGISTERED SP
+ * MODULE and `tests/lint/spTermLiteral.walker.test.js` scans it for QUOTED literals that
+ * collide with GRAMMAR's treaty-term families — GR-3 minted a family with the same
+ * spelling as one of the six purpose classes, so a backticked mention in prose is
+ * indistinguishable from a second catalog. The word is the same; the subject is not.)
+ *
+ * @param {{purpose?:unknown, purposeClass?:unknown, declaredPurpose?:unknown,
+ *   covert?:unknown}} args
+ * @returns {string} a mint-refusal reason, or '' for no refusal
+ */
+export function covertMissionRefusal({
+  purpose, purposeClass, declaredPurpose, covert,
+} = {}) {
+  if (covert == null) return '';
+  const written = purposeClass == null ? '' : text(purposeClass);
+  if (written && !PURPOSE_CLASS_SET.has(written)) return '';
+  if (purposeClassOf({ purpose: text(purpose), purposeClass: written }) !== 'covert') {
+    return 'covert_class_required';
+  }
+  if (!covertFaceFor(purpose, declaredPurpose)) return 'covert_face_required';
+  const read = normalizeCovertMission(covert);
+  return read.covert ? '' : read.reason;
 }
 
 /**
@@ -137,11 +209,17 @@ export function errandSpineFields({
  * an unpriceable journey with the same reason at the same moment — the flag can change
  * what an errand IS, never whether the roads are real.
  *
+ * ES-1 — THE COVERT ARM SITS BEHIND THE SAME DARK GUARD AS EVERY OTHER SPINE FIELD, and
+ * that is the whole of this wave's dormancy at the mint: a dark world does not read the
+ * covert cargo, cannot refuse it, and cannot write it. The refusal reasons below
+ * (`covert_class_required` and the five the sub-record validation names) are reachable
+ * ONLY past `errandSpineActive`.
+ *
  * @param {{worldState?:unknown, purpose?:unknown, purposeClass?:unknown,
- *   declaredPurpose?:unknown, truePurpose?:unknown, routePlan?:unknown,
+ *   declaredPurpose?:unknown, truePurpose?:unknown, covert?:unknown, routePlan?:unknown,
  *   fromId?:string, toId?:string, journey?:('outbound'|'return'),
  *   notBeforeTick?:number}} [args]
- * @returns {{ok:boolean, fields:Record<string,string>,
+ * @returns {{ok:boolean, fields:Record<string,unknown>,
  *   plan:Record<string,unknown>|null, reason:string}}
  */
 export function mintErrandSpine({
@@ -150,6 +228,7 @@ export function mintErrandSpine({
   purposeClass = null,
   declaredPurpose = null,
   truePurpose = null,
+  covert = null,
   routePlan = null,
   fromId = '',
   toId = '',
@@ -171,8 +250,12 @@ export function mintErrandSpine({
   if (!errandSpineActive(worldState)) {
     return { ok: true, fields: {}, plan, reason: 'dark' };
   }
+  const covertRefusal = covertMissionRefusal({
+    purpose, purposeClass, declaredPurpose, covert,
+  });
+  if (covertRefusal) return { ok: false, fields: {}, plan, reason: covertRefusal };
   const fields = errandSpineFields({
-    purpose, purposeClass, declaredPurpose, truePurpose,
+    purpose, purposeClass, declaredPurpose, truePurpose, covert,
   });
   if (!fields) return { ok: false, fields: {}, plan, reason: 'invalid_purpose_class' };
   return { ok: true, fields, plan, reason: 'spine' };

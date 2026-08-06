@@ -39,6 +39,10 @@ import {
   GR2_BELIEVED_DEMAND_COUPLING,
   GR2_PACT_FORMATION_COUPLINGS,
   GR2_SHARED_THREAT_COUPLING,
+  ES1_COVERT_MISSION_MINT_COUPLING,
+  ES1_HIDDEN_FRANCHISE_COUPLING,
+  ES1_MISSION_VOCABULARY_COUPLING,
+  ES_ESPIONAGE_COUPLINGS,
   IN0A_PLANT_HANDOFF_COUPLING,
   IN_INFORMATION_COUPLINGS,
   couplingRowFor,
@@ -91,6 +95,8 @@ describe('CW-0 coupling registry', () => {
       // FP IN-0a (2026-08-06): the FOURTH volume leaf. One row — the paid plant's handoff
       // into the envoy-picture stage — and INFORMATION's first cross-layer read.
       ...IN_INFORMATION_COUPLINGS,
+      // FP ES-1 (2026-08-06): the first ESPIONAGE rows, appended in wave order.
+      ...ES_ESPIONAGE_COUPLINGS,
     ]);
     expect(WR3_LINEAGE_COUPLING).toEqual({
       couplingId: 'CPL-3.POP_TO_WAR.WR-3.lineage',
@@ -369,8 +375,13 @@ describe('CW-0 coupling registry', () => {
     // INFORMATION is that FOURTH volume, and it arrived exactly as designed: FP IN-0a
     // (2026-08-06) reds this line, and the line is amended in the commit that admits the
     // volume rather than derived into agreement with whatever the registry happens to hold.
+    // ESPIONAGE is the FIFTH, and it arrived the same way: FP ES-1 (2026-08-06) reds
+    // this line, and the line is amended in the commit that admits the volume. ES was
+    // CHARTERED as a prefix at the 2026-08-05 owner-amendment fold and carried zero rows
+    // until now — the header above records that a chartered prefix with no rows is green
+    // by design, so this widening is the row's arrival and not the charter's.
     expect(new Set(COUPLING_REGISTRY.map((row) => row.owningVolume)))
-      .toEqual(new Set(['WAR', 'TRADE', 'GRAMMAR', 'INFORMATION']));
+      .toEqual(new Set(['WAR', 'TRADE', 'GRAMMAR', 'INFORMATION', 'ESPIONAGE']));
   });
 
   test('every schema-v3 row has one stable unique identity and a closed shape', () => {
@@ -519,8 +530,25 @@ describe('CW-0 coupling registry', () => {
         IN0A_PLANT_HANDOFF_COUPLING,
       ]);
     expect(couplingRowFor('CPL-19', 'INFO→GRAMMAR')).toBe(WR7_MOVING_PICTURE_COUPLING);
+    // ES-1's two mission rows are the SECOND and THIRD reads on this direction and the
+    // first owned by ESPIONAGE. Registration order is the legacy first-row tiebreak and
+    // WR-7's silence inference keeps that seat, which the line below re-asserts.
     expect(couplingRowsFor('CPL-19', 'GRAMMAR→INFO'))
-      .toEqual([WR7_SILENCE_INFERENCE_COUPLING]);
+      .toEqual([
+        WR7_SILENCE_INFERENCE_COUPLING,
+        ES1_COVERT_MISSION_MINT_COUPLING,
+        ES1_MISSION_VOCABULARY_COUPLING,
+      ]);
+    expect(couplingRowFor('CPL-19', 'GRAMMAR→INFO')).toBe(WR7_SILENCE_INFERENCE_COUPLING);
+    // ES-1's third row OPENS a pair: nobody had read across TRADE and GRAMMAR before, and
+    // the read is one constant — the traveller-kind franchise the covert route plan needs.
+    expect(couplingRowsFor('CPL-22', 'TRADE→GRAMMAR')).toEqual([ES1_HIDDEN_FRANCHISE_COUPLING]);
+    // The leaf composes exactly its three rows, in wave order.
+    expect(ES_ESPIONAGE_COUPLINGS).toEqual([
+      ES1_COVERT_MISSION_MINT_COUPLING,
+      ES1_MISSION_VOCABULARY_COUPLING,
+      ES1_HIDDEN_FRANCHISE_COUPLING,
+    ]);
     expect(couplingRowsFor('CPL-1', 'WAR→TRADE'))
       .toEqual([WR6_COALITION_SETTLEMENT_TRADE_COUPLING]);
     expect(couplingRowFor('CPL-21', 'INTERIOR→GRAMMAR')).toBe(WR5_SEAT_ACCEPTANCE_COUPLING);

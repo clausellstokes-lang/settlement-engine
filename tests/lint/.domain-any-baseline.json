@@ -1,6 +1,6 @@
 {
-  "total": 2223,
-  "totalAny": 2185,
+  "total": 2221,
+  "totalAny": 2183,
   "totalSuppress": 38,
   "files": {
     "src/domain/activeConditions.js": {
@@ -384,10 +384,6 @@
       "suppress": 0
     },
     "src/domain/worldPulse/eliteBleed.js": {
-      "any": 2,
-      "suppress": 0
-    },
-    "src/domain/worldPulse/envoyDiplomacy.js": {
       "any": 2,
       "suppress": 0
     },

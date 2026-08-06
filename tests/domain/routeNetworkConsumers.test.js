@@ -32,6 +32,8 @@
 import { describe, expect, it } from 'vitest';
 import {
   ARTERIAL_AUDIENCES,
+  COVERT_ENVOY_KIND,
+  HIDDEN_PATH_KINDS,
   HOP_VERDICTS,
   TRAVELLER_KINDS,
   arterialSeedsFor,
@@ -148,11 +150,25 @@ function valeWorld(options = {}) {
 }
 
 describe('J4 §9 the hidden-path law is a predicate, and it fails closed', () => {
-  it('wanderers and smugglers hold the franchise and nobody else does', () => {
+  it('wanderers, smugglers and covert envoys hold the franchise and nobody else does', () => {
     expect(mayUseHiddenPaths('wanderer')).toBe(true);
     expect(mayUseHiddenPaths('smuggler')).toBe(true);
+    expect(mayUseHiddenPaths(COVERT_ENVOY_KIND)).toBe(true);
     expect(mayUseHiddenPaths('army')).toBe(false);
     expect(mayUseHiddenPaths('caravan')).toBe(false);
+    // ES-1's HALF THAT MATTERS MOST, and it is a negative: the ORDINARY envoy is still
+    // refused. A covert mission may take a forgotten way; an open embassy may not, because
+    // an embassy nobody can witness arriving is not an embassy. The two differ by exactly
+    // one member of a closed set, so this pair is the whole content of the franchise
+    // widening — and it reds if a later lane admits `envoy` "for symmetry".
+    expect(mayUseHiddenPaths('envoy')).toBe(false);
+    // The exported constant IS the member, not a lookalike literal a rename could orphan.
+    expect(HIDDEN_PATH_KINDS).toContain(COVERT_ENVOY_KIND);
+    expect(TRAVELLER_KINDS).toContain(COVERT_ENVOY_KIND);
+    expect([...HIDDEN_PATH_KINDS].sort()).toEqual([...HIDDEN_PATH_KINDS]);
+    // Every franchise member is a lawful traveller kind: a hidden-path word outside the
+    // vocabulary would be a franchise nobody could ever be.
+    for (const kind of HIDDEN_PATH_KINDS) expect(TRAVELLER_KINDS).toContain(kind);
   });
 
   it('a kind this estate has never heard of is refused, not admitted', () => {
@@ -166,7 +182,10 @@ describe('J4 §9 the hidden-path law is a predicate, and it fails closed', () =>
   });
 
   it('the closed vocabulary is exactly the four kinds, codepoint-sorted', () => {
-    expect([...TRAVELLER_KINDS]).toEqual(['army', 'caravan', 'smuggler', 'wanderer']);
+    // ES-1 admitted a FIFTH kind, `covert_envoy`, and the franchise below admitted it to
+    // the hidden ways. The count moved; the LAW did not — an unrecognised kind is still
+    // refused the overgrown road, which the fail-closed negatives in this file re-measure.
+    expect([...TRAVELLER_KINDS]).toEqual(['army', 'caravan', 'covert_envoy', 'smuggler', 'wanderer']);
     expect([...TRAVELLER_KINDS].sort()).toEqual([...TRAVELLER_KINDS]);
   });
 

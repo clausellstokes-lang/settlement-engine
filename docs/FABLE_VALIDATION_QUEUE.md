@@ -4249,3 +4249,183 @@ file that no longer exists.**
 dirty files from the concurrent GR-3 lane were present throughout; four are byte-identical
 across this slice's commit by md5 and the fifth grew under that lane's own editing (+83 → +105
 insertions), which is advancement, not damage.**
+
+---
+
+## ES-1 — THE MISSION: THE COVERT MINT BUILT, THE DOOR AND NOT THE TRAFFIC, AND A
+## WELD THE VOLUME SAYS IS GONE THAT IS STILL THERE
+## ⏳ OPUS-ERA — FABLE SURVEY OWED
+## (Opus 5 build wave under the 2026-08-06 succession directive. Every J-* below is a
+## chair-grade judgment made without a Fable chair and is VETOABLE.)
+
+**Wave:** ES-1, `docs/DESIGN_FP_ARCH_ES.md` §4. Start HEAD `d615171a`, branch
+`claude/composite-r4`. DARK: `espionageEnabled` was minted at ES-0 (`55674790`) and this
+wave RIDES it — no manifest row, no certification row and no by-name gate read were
+re-minted, exactly as the charter's ⛔ strike requires.
+
+**What landed.** The covert mission's DOOR. The closed vocabulary (`ENVOY_COVERT_PRODUCTS`
+/`_DEMANDS`/`_FACES`/`_LEG_REFS`, `MAX_COVERT_ITINERARY_STOPS`, `COVERT_KEYS`) minted ONCE
+in the errand family's own vocabulary leaf; the `covert` sub-record's single validation
+(`normalizeCovertMission`) returning the record AND the reason there is not one, so the
+persist side can heal to absent while the mint refuses by name; the covert arm of SP-D's
+`mintErrandSpine`; `normalizeErrand` taught the sub-record IN THE SAME COMMIT; the
+`covert_envoy` franchise in `routeNetworkConsumers.js` with the one-word kind fork at
+`buildEnvoyRoutePlan`'s single `livedHopToward` call; importance-INVERSE covert casting
+routed through the ONE vetting reader `vetVolunteerEnvoy` (its first consumer in the tree);
+and the errand-consumer registry row that the SP-D tripwire demands of any new minter.
+
+**What did NOT land, deliberately: the DISPATCHER.** Nothing under `src/` calls the mission
+head. Deciding that a court WANTS a confirmation is §3.12's deliberation read and ES-5's
+doctrine targeting. ES-0's import-closure fence 1 therefore stays GREEN and stays CORRECT —
+its header says it is replaced "in the commit that added the caller", and this commit did
+not add one.
+
+### ⛔ STOP-AND-REPORT — A DOC OVERSTATEMENT, MEASURED, NOT SILENTLY CORRECTED
+
+**R-ES1-1. THE ERRAND ROW IS STILL WAR-WELDED; ONLY THE MINT HEAD IS FREE.** The ES volume
+§2 states that "SP-D's generalized mint is exactly what frees the errand from
+`envoyDiplomacyActive`'s six-flag weld". MEASURED at this HEAD: true of `mintErrandSpine`,
+which reads `errandSpineEnabled` and nothing else — and FALSE of the row. `normalizeErrand`
+still requires a normalized peace OFFER, an acceptance, a departure snapshot and a purpose
+drawn from `ENVOY_PURPOSES`; `mintEnvoyErrand`, the one ledger writer, still opens with
+`envoyDiplomacyActive`; and `buildEnvoyRoutePlan` is gated the same way. So a covert mission
+that becomes a PERSISTED ROW today rides a diplomatic errand wearing its face — purposeClass
+`covert`, declaredPurpose `diplomatic`, a real peace offer underneath. That is exactly §3.4's
+composite mission and §3.5's tainted journey, so ES-1 is buildable and honest as charted; the
+FREE-STANDING spy row, with no diplomatic pretext and no war flags, does not exist and is
+owed by a later SP or ES slice. NO WAR GATE WAS WIDENED to paper over it: `mintCovertMission`
+takes `purpose` as a parameter with an empty default and states no opinion about a weld it
+did not create.
+
+### THE JUDGMENTS — each chair-grade, each vetoable
+
+- **J-ES1-1 — THE LAZY-LEAF EXTRACTION IS `envoyCasting.js`, AND THE SIZE WAS THE SMALLER
+  REASON.** `envoyDiplomacy.js` measured 797/800 effective at wave start (three lines of
+  headroom, tolerance-zero ratchet) and ES-1 must edit it. But the binding reason is the
+  charter's own: covert casting must honour the DISPATCH-REFUSAL SEAMS, and that law was a
+  module-PRIVATE function of that file. The espionage mint could only have obeyed it by
+  re-spelling it — a second answer to "who may be sent", which is the drift J-WR-10 forbids.
+  So `rosterIdentity`/`rosterPersonAvailable`/`castableRoster`/`envoyCandidate` lift into a
+  GRAMMAR-layer leaf and both casting laws read the ONE predicate. envoyDiplomacy 797 → 753.
+  REJECTED: extracting `syncEnvoyNpcTransit` instead (bigger, and the war lane's hottest
+  surface); and inlining the kind fork with no extraction, which fits in two lines and leaves
+  the next lane one line of headroom.
+- **J-ES1-2 — THE TWO CASTING LAWS ARE NOT MERGED, AND THE "SIDE BY SIDE" OF J-ES-4 IS A
+  BOTH-SITE HEADER RATHER THAN ONE FILE.** Diplomatic casting is importance-DESCENDING with a
+  `>= 0.4` floor and stays in the GRAMMAR leaf; covert casting is importance-INVERSE over
+  `ROADS_TUNING.DRAW_WEIGHT_BASE − importanceWeight` with NO floor and lives in the espionage
+  leaf. Each law sits with its own program and each header names the other's home and shape.
+  The opposition is pinned by executing BOTH laws on ONE roster and asserting they pick
+  DIFFERENT people. REJECTED: colocating both in `envoyCasting.js`, which would put espionage
+  logic in the GRAMMAR layer for a documentation benefit a header already buys.
+- **J-ES1-3 — THE PRE-PINNED `couriers` REGISTRY ROW WAS SPLIT IN TWO.** It read
+  `couriers … wave: 'ES-1/IN-4'`: one address and one boolean for two programs the volume's
+  own seam row 9 rules DISTINCT (ES missions move PRODUCTS, IN-4's couriers move CARGO).
+  Landing ES-1 against the shared row would have declared IN-4 built and pointed the registry
+  at `covertErrand.js`, a file nobody has written. ES-1 took its own row; IN-4's pre-pin is
+  intact and still `built: false`, so the walker's built/unbuilt partition stays a real
+  measurement.
+- **J-ES1-4 — A COVERT ROW MUST WEAR A DERIVED FACE, AND A FACELESS ONE IS REFUSED. THIS IS
+  A BEHAVIOUR SHIFT AND IT IS RECORDED AS ONE.** Before ES-1, `errandSpineFields({purpose:
+  'sue', purposeClass: 'covert'})` returned `{purposeClass: 'covert'}` — a veil leak waiting
+  for its first writer, because `declaredPurposeClassOf` falls back to the TRUE class when no
+  cover is written and would have shown a player the word "covert". The face is now DERIVED
+  from the errand's own purpose when the caller supplies none, and a covert row that can
+  derive no face is refused with reason `covert_face_required`. THE SHIFT TOUCHES EXACTLY THE
+  CLASS NOBODY MINTS YET; every other class is byte-identical, re-measured in the same test.
+  No golden was re-recorded and no distribution moved.
+- **J-ES1-5 — THE ESPIONAGE LEAF SPELLS NONE OF THE THREE CONDITIONAL FIELD NAMES, AND THAT
+  IS WHY THE FACE IS DERIVED RATHER THAN PASSED.** SP-D's one-reader law reds any module
+  outside the errand family that spells `purposeClass`/`declaredPurpose`/`truePurpose` in any
+  of three forms. A covert consumer handing its own cover word downward would have had to
+  spell one, and the only cures would have been widening that law by a file or indirecting the
+  word past a source scan. Deriving in `errandMint.js` — a family member — keeps the law at
+  its current width and makes the rule stronger, not weaker.
+- **J-ES1-6 — `DEMAND_BANDS` AND `MAX_ITINERARY_STOPS` WERE RETIRED FROM `ESPIONAGE_TUNING`
+  TO THE ERRAND VOCABULARY'S ONE MINT.** They are ROW facts before they are arithmetic facts:
+  the persistence DTO matches against them. The tuning now re-exposes the same frozen array
+  and the same integer (pinned by IDENTITY, not deep-equality). Left as they were, the
+  normalizer could refuse a fourth stop while `legStack` happily priced one — a disagreement
+  one integer wide. COST: two GRAMMAR→INFO coupling rows instead of one.
+- **J-ES1-7 — THE CONCURRENCY CAP AND THE DOUBLE-TRAVEL REFUSAL ARE NOT RE-SPELLED.**
+  `MAX_CONCURRENT_ENVOYS` (episodes per origin, CR-WIRE-C) and `npc_in_transit` live in
+  `mintEnvoyErrand` and every covert mission that becomes a row passes through it, so a court
+  cannot flood the roads with spies BY CONSTRUCTION. The charter's requirement is discharged
+  by PINNING them on a covert mint rather than by counting a second time in the espionage
+  layer. `mintEnvoyErrand` gains two lines (accept `covert`, forward it) on the accept-and-
+  forward precedent SP-D already established for the three word fields.
+- **J-ES1-8 — THE UNKNOWN-KEY GUARD IS A DELIBERATE TRIPWIRE FOR ES-2 AND ES-3.** `gathered`
+  and `standoff` are NOT in `COVERT_KEYS`, so a sub-record carrying either is REFUSED rather
+  than silently trimmed. Silent trimming is the ghost-write class: an amender writes the
+  gradient, the next persist erases it, and both halves look correct in isolation. The wave
+  that mints either key teaches `COVERT_KEYS` and the normalizer in the SAME commit or its
+  own first round-trip reds.
+- **J-ES1-9 — THE DOMAIN-STRICT CEILING WAS NOT TIGHTENED, THOUGH THE WIN IS MEASURED.** The
+  gate reports `1304 < 1313` after this wave (the extraction moved `envoyDiplomacy.js`'s
+  strict errors into a strict-CLEAN new leaf) and invites `:update`. It was DECLINED: a second
+  build lane is mid-flight in this tree, the ceiling is a shared ratchet, and a number measured
+  without that lane's work would red THEM rather than this wave. The 9-error win is recorded
+  here to be banked when the lanes converge. Say "veto" to tighten now.
+
+### RESIDUALS, WRITTEN DOWN SO NOBODY RE-FINDS THEM AS BUGS
+
+- **R-ES1-1** — the war weld above.
+- **R-ES1-2** — `tests/domain/roadsParticipation.test.js`'s `.npcs`-reader census names
+  `envoyDiplomacy.js`; the reader is now `envoyCasting.js`. That row is RED AT BOTH ENDS
+  (38 live vs 31 dispositioned) for a pre-existing reason and its cardinality did not move,
+  so the name was NOT edited — repairing a foreign red is forbidden. Whoever cures that row
+  needs the new name.
+- **R-ES1-3** — `tests/lint/sovereigntyLightingContract.walker.test.js`'s census counts the
+  WORKING TREE, not HEAD. Its five figures were re-recorded to 2331/358/1973/18707/5342,
+  MEASURED against a `git archive` of `d615171a` carrying only this wave's test-side changes
+  and EXECUTED green there (33/33). In the shared working tree it may read RED until the
+  concurrent lane lands, by exactly the count of that lane's uncommitted test files.
+
+### GATES — every figure EXECUTED, every label earned
+
+- **WAVE-END ATTRIBUTION, BOTH WAYS.** `npx vitest run tests/lint tests/property tests/domain`
+  measured against a pristine `git archive` of `d615171a` (base) and against the same archive
+  carrying ONLY this wave's changes (landing state). **16 failed files / 24 failed tests AT
+  BOTH ENDS, and the sorted FAIL-row diff is EMPTY.** Per the red-ratchet law the entire
+  failure BODY was normalized and sorted at both ends: 664 vs 663 lines, FIVE differing lines,
+  every one a SHRINK or a rename inside an already-red row — `envoyErrandProjection` LEFT the
+  mechanism lit-coverage gap (24 → 23, a banked win from this wave's own lit drive);
+  `envoyDiplomacy.js` → `envoyCasting.js` in the `.npcs` census with cardinality unchanged;
+  and the any-cast baseline render 169/168 → 168/167, the zero-debt entry this wave deleted.
+  NOTHING GREW.
+- **FULL TYPECHECK.** `npx tsc --noEmit -p tsconfig.full.json`: **352 errors at BOTH ENDS**,
+  and the per-file error counts are IDENTICAL. Two genuinely new diagnostics appeared
+  mid-wave (`errandSpineBlock`'s declared `Record<string,string>` return, and the projection's
+  cloned sub-record) and both were FIXED, not absorbed.
+- **DOMAIN STRICT.** `[domain-strict] ✓ no regressions — and 9 fewer errors than baseline
+  (1304 < 1313)`. Green at base too; the new leaf is strict-CLEAN (7 errors on its first
+  spelling, all typed away).
+- **MUTANTS: 14 planted, 14 CAUGHT, zero escaped.** Each asserted its anchor was present and
+  that the file's bytes CHANGED before the gate ran; each restored from a cp backup proven
+  byte-exact by `cmp` and by a pre-mutant byte comparison. No `git checkout` anywhere. The
+  battery drops the unknown-key guard, the itinerary cap, the acquire-only legRefs clause, the
+  one-stop-per-place rule, the not-covert face clause, the persist-side class guard, the
+  class-required refusal, the `=== true` fork polarity, the mission head's dark refusal, the
+  projection's covert arm, the draw DIRECTION, the vetting refusal, the hidden-path franchise
+  member, and the shared availability predicate.
+- **NEW TESTS: 47 passed / 47.** `tests/domain/espionageMission.test.js` (27) and
+  `tests/property/espionageMissionDormancyFence.test.js` (20).
+- **eslint** clean on every authored file. **python3 byte-scan**: 0 NUL bytes across 22
+  authored files — ⚠ THREE RAW NULS WERE AUTHORED MID-WAVE by a template literal carrying a
+  code-point escape and were stripped at the byte level; the separator is now built with
+  `String.fromCharCode(0)`, which cannot be mistranscribed. That is the SEVENTH occurrence of
+  the recorded class.
+- **Mutex**: every vitest invocation preceded by `sh scripts/gate-mutex.sh --wait`; every gate
+  read through `sh scripts/gate-tail.sh`. The ps-grep check was never spelled by hand.
+
+### SIZES, RE-MEASURED WITH THE ENFORCER AT THIS COMMIT
+
+envoyDiplomacy 797 → **753** · envoyCasting **76** (new) · errandMint 56 → **82** (budget
+≤120 growth) · envoyErrandRecords 570 → **632** (budget ≤60; MEASURED +60) · envoyErrand
+712 → **714** · espionageMissions **105** (budget ≤250) · routeNetworkConsumers 183 → **184** ·
+envoyErrandProjection 153 → **157** · espionageMath 156 → **160** · couplingRegistryEspionage
+**51** (new). Every file under the 800-line domain ceiling.
+
+**Nothing lit. No golden re-recorded. No band ratified. No soak run. No push. The espionage
+certification row stays UNOBSERVED and says why: the mission exists, the dispatcher does not,
+so nothing has still run.**

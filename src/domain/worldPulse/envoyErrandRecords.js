@@ -30,6 +30,12 @@ import {
 } from './negotiationPictures.js';
 import {
   CONTINUATION_KEYS,
+  COVERT_KEYS,
+  COVERT_DEMAND_SET,
+  COVERT_FACE_SET,
+  COVERT_LEG_REF_SET,
+  COVERT_PRODUCT_SET,
+  COVERT_STOP_KEYS,
   ENCOUNTER_KEYS,
   ENCOUNTER_KIND_SET,
   ENCOUNTER_RESOLUTION_SET,
@@ -41,6 +47,7 @@ import {
   EVIDENCE_KIND_SET,
   JOURNEY_SET,
   LOSS_CAUSE_SET,
+  MAX_COVERT_ITINERARY_STOPS,
   MAX_ENVOY_ENCOUNTER_HISTORY,
   MAX_ENVOY_RUMOR_REFS,
   MAX_TERMINAL_ENVOY_HISTORY,
@@ -296,7 +303,8 @@ export function normalizeTermSheet(raw) {
  *
  * @param {Record<string, unknown>} row the raw errand
  * @param {string} purpose the row's already-validated war purpose
- * @returns {Record<string, string>}
+ * @returns {Record<string, unknown>} the three SP-D word fields, plus ES-1's `covert`
+ *   sub-record — the one member of this block that is not a string
  */
 export function errandSpineBlock(row, purpose) {
   const written = text(row.purposeClass);
@@ -307,11 +315,101 @@ export function errandSpineBlock(row, purpose) {
   const split = PURPOSE_CLASS_SET.has(declared)
     && claimedTrue === resolved
     && declared !== resolved;
+  // ES-1 — THE COVERT SUB-RECORD RIDES THE SAME ONE CONSTRUCTOR, and the class law lives
+  // HERE rather than at each caller: a `covert` block on a row whose RESOLVED class is
+  // anything else is not a mission, it is cargo somebody attached to the wrong journey,
+  // and it is dropped. The mint refuses that same cargo with a reason instead of dropping
+  // it, which is the difference between an import healing and a writer being wrong.
+  const covert = resolved === 'covert' ? normalizeCovertMission(row.covert).covert : null;
   return {
     // Written only when it differs from what the mapping row derives — the same
     // drop-when-derivable rule the mint applies, so a persist is idempotent.
     ...(purposeClass && purposeClass !== purposeClassOf({ purpose }) ? { purposeClass } : {}),
+    ...(covert ? { covert } : {}),
     ...(split ? { declaredPurpose: declared, truePurpose: resolved } : {}),
+  };
+}
+
+/**
+ * ES-1 — THE COVERT SUB-RECORD'S ONE VALIDATION, AND IT HANDS BACK ITS REASON.
+ *
+ * Two consumers need different things from the same law and neither may spell it twice.
+ * The PERSIST side (`errandSpineBlock`, above) needs a malformed sub-record to heal to
+ * ABSENT — §1's rule is that a covert mission with corrupt cargo degrades to an ordinary
+ * errand of its declared class rather than nulling the whole errand and dropping a
+ * traveller. The MINT side needs to REFUSE the same cargo BY NAME, because a writer that
+ * hands the spine a five-stop itinerary has a bug the estate should hear about. So this
+ * returns both halves of one answer: the record, and why there isn't one.
+ *
+ * ⚠ THE KEY GUARD IS A TRIPWIRE FOR THE NEXT TWO WAVES, DELIBERATELY LOUD. `gathered`
+ * (ES-3) and `standoff` (ES-2) are not in `COVERT_KEYS` yet, so a sub-record carrying
+ * either is REFUSED here rather than silently trimmed. Silent trimming is the ghost-write
+ * class: an amender writes the gradient, the next persist erases it, and both halves look
+ * correct in isolation. A wave that mints a new key teaches `COVERT_KEYS` and this
+ * function in the SAME COMMIT, or its own tests red at the first round-trip.
+ *
+ * TOTAL ON GARBAGE: any shape at all produces a reason, never a throw.
+ *
+ * @param {unknown} raw
+ * @returns {{covert: Record<string, unknown>|null, reason: string}}
+ */
+export function normalizeCovertMission(raw) {
+  if (raw == null) return { covert: null, reason: 'absent' };
+  const row = asObject(raw);
+  if (!Object.keys(row).length || Object.keys(row).some((key) => !COVERT_KEYS.includes(key))) {
+    return { covert: null, reason: 'invalid_covert_keys' };
+  }
+  if (!Array.isArray(row.itinerary) || !row.itinerary.length) {
+    return { covert: null, reason: 'invalid_itinerary' };
+  }
+  if (row.itinerary.length > MAX_COVERT_ITINERARY_STOPS) {
+    return { covert: null, reason: 'itinerary_too_long' };
+  }
+  const itinerary = [];
+  for (const entry of row.itinerary) {
+    const stop = asObject(entry);
+    const settlementId = strictText(stop.settlementId);
+    const face = text(stop.face);
+    const stayTicks = wholeTick(stop.stayTicks);
+    if (!settlementId || !COVERT_FACE_SET.has(face) || stayTicks == null
+      || !hasExactKeys(stop, COVERT_STOP_KEYS)) {
+      return { covert: null, reason: 'invalid_itinerary' };
+    }
+    itinerary.push({ face, settlementId, stayTicks });
+  }
+  // One stop per place. A repeated settlement would make the per-stop keyed-hash roll
+  // ES-2 owns collide with itself, and it is never what a planner meant.
+  if (new Set(itinerary.map((stop) => stop.settlementId)).size !== itinerary.length) {
+    return { covert: null, reason: 'invalid_itinerary' };
+  }
+  const product = text(row.product);
+  if (!COVERT_PRODUCT_SET.has(product)) return { covert: null, reason: 'invalid_product' };
+  const demand = text(row.demand);
+  if (!COVERT_DEMAND_SET.has(demand)) return { covert: null, reason: 'invalid_demand' };
+  const subjectId = strictText(row.subjectId);
+  if (!subjectId) return { covert: null, reason: 'invalid_subject' };
+  let legRefs = /** @type {string[]|null} */ (null);
+  if (row.legRefs != null) {
+    // ⟨F5⟩ ONLY an ACQUIRE targets legs — a confirm re-reads what the court already
+    // believes and a refute contradicts it, so neither has a leg list to fill. And
+    // `pullBand` is not in the set, so naming it lands here rather than minting a
+    // member no product can ever satisfy.
+    const refs = Array.isArray(row.legRefs) ? row.legRefs.map((value) => text(value)) : [];
+    if (product !== 'acquire' || !refs.length || new Set(refs).size !== refs.length
+      || refs.some((ref) => !COVERT_LEG_REF_SET.has(ref))) {
+      return { covert: null, reason: 'invalid_leg_refs' };
+    }
+    legRefs = [...refs].sort(compareCodepoint);
+  }
+  return {
+    covert: {
+      demand,
+      itinerary,
+      ...(legRefs ? { legRefs } : {}),
+      product,
+      subjectId,
+    },
+    reason: 'covert',
   };
 }
 

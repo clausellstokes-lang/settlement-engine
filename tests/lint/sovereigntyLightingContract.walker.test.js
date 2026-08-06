@@ -2784,7 +2784,32 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // PARKED IS UNCHANGED at 358 because every one of the seven is a literal title — the
       // conjunction rows are spelled out one per door rather than generated from a table,
       // which is SP-D's own recorded idiom and the reason the count stays creditable.
-      files: 2329, parked: 358, credited: 1971, titles: 18666, suiteTitles: 5331,
+      // ── RE-RECORDED 2026-08-06 BY FP WAVE ES-1, WITH ITS CAUSE STATED AND MEASURED ──
+      // 2,331/358/1,973/18,690/5,346 → 2,333/358/1,975/18,731/5,357. THE CAUSE IS TWO NEW
+      // TEST FILES and nothing else: tests/domain/espionageMission.test.js and
+      // tests/property/espionageMissionDormancyFence.test.js. No rule here widened or
+      // narrowed. The deltas are exactly +2 files, +2 credited, +41 titles, +11 suite
+      // titles, and PARKED IS UNCHANGED at 358 — both new files spell every title as a
+      // literal, so door 3's reader recognises them statically and credits the files.
+      // ⚠ THE PARENT MOVED TWICE MID-WAVE. A concurrent build lane landed IN-0b and then
+      // IN-0d in this same tree, each adding a test file of its own, and this census counts
+      // the WORKING TREE rather than HEAD — so the figures were re-measured from scratch
+      // against THIS commit's actual parent (db35bad6) rather than against the HEAD the
+      // wave opened on. That is what "re-measure, do not re-word" means when two lanes
+      // share a tree: the number belongs to a parent, not to a wave.
+      //
+      // ⚠ HOW THESE FIGURES WERE MEASURED, BECAUSE THE WORKING TREE COULD NOT MEASURE
+      // THEM. A SECOND BUILD LANE was running in the same tree with its own uncommitted
+      // test files, and this census counts the WORKING TREE rather than HEAD — so reading
+      // the numbers off a live run would have recorded the other lane's files against this
+      // wave and left a figure no checkout of this commit could reproduce. They were taken
+      // instead from a `git archive` of this wave's start HEAD (d615171a) carrying ONLY
+      // this wave's test-side changes, and the whole file was EXECUTED green there
+      // (33 passed / 33) before the numbers were written here. That is also why this
+      // census may read RED in a shared working tree between the two lanes' commits: the
+      // difference is exactly the other lane's uncommitted test files, and its own wave
+      // re-measures — which is this walker doing its job rather than failing at it.
+      files: 2333, parked: 358, credited: 1975, titles: 18731, suiteTitles: 5357,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

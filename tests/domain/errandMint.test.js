@@ -95,8 +95,14 @@ describe('SP-D field block — each of the three fields is conditional, and each
   });
 
   it('writes purposeClass when the business is NOT what the purpose implies', () => {
+    // ES-1 BEHAVIOUR SHIFT, RECORDED: a `covert` row now also carries a DERIVED face.
+    // Before ES-1 this returned `{ purposeClass: 'covert' }` — which was a veil leak
+    // waiting for its first writer, because `declaredPurposeClassOf` falls back to the
+    // TRUE class when no cover is written, so the public reader would have shown a player
+    // the word "covert". The shift touches EXACTLY the class nobody mints yet: every other
+    // class is byte-identical, as the `commercial` line below re-measures.
     expect(errandSpineFields({ purpose: 'sue', purposeClass: 'covert' }))
-      .toEqual({ purposeClass: 'covert' });
+      .toEqual({ purposeClass: 'covert', declaredPurpose: 'diplomatic', truePurpose: 'covert' });
     expect(errandSpineFields({ purpose: 'sue', purposeClass: 'commercial' }))
       .toEqual({ purposeClass: 'commercial' });
   });
@@ -107,13 +113,34 @@ describe('SP-D field block — each of the three fields is conditional, and each
     })).toEqual({
       purposeClass: 'covert', declaredPurpose: 'diplomatic', truePurpose: 'covert',
     });
-    // Declaring what you are is not a cover story: zero keys, zero bytes.
+    // Declaring what you are is not a cover story: zero keys, zero bytes — for every
+    // class EXCEPT covert, where "I am a spy" is not a face at all and the mint refuses
+    // the row rather than writing one that shows the truth to the wrong audience.
+    expect(errandSpineFields({
+      purpose: 'sue', purposeClass: 'commercial', declaredPurpose: 'commercial',
+    })).toEqual({ purposeClass: 'commercial' });
     expect(errandSpineFields({
       purpose: 'sue', purposeClass: 'covert', declaredPurpose: 'covert',
-    })).toEqual({ purposeClass: 'covert' });
+    })).toBeNull();
     expect(errandSpineFields({
       purpose: 'sue', declaredPurpose: 'diplomatic',
     })).toEqual({});
+  });
+
+  it('ES-1: a covert row with NO derivable face is refused, not written faceless', () => {
+    // R-ES1-1 made loud. A free-standing covert errand — no war purpose underneath, so no
+    // class its own purpose implies — cannot be given a public face, and a faceless covert
+    // row is the veil leak above. It is refused HERE rather than shipped and patched at
+    // whichever surface happens to read it first.
+    expect(errandSpineFields({ purpose: '', purposeClass: 'covert' })).toBeNull();
+    expect(errandSpineFields({ purpose: 'smuggle', purposeClass: 'covert' })).toBeNull();
+    // ...and the same argument with a face supplied is accepted, so the refusal above
+    // discriminates rather than rejecting every covert row.
+    expect(errandSpineFields({
+      purpose: '', purposeClass: 'covert', declaredPurpose: 'commercial',
+    })).toEqual({
+      purposeClass: 'covert', declaredPurpose: 'commercial', truePurpose: 'covert',
+    });
   });
 
   it('REFUSES a truePurpose that disagrees with the resolved class', () => {

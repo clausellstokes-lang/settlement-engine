@@ -130,6 +130,16 @@ export {
  * conditional field block this row spreads. With `errandSpineEnabled` dark that block is
  * empty, so a war errand minted through this head is byte-identical to the one WR-7a
  * minted before the spine existed.
+ *
+ * ES-1 adds `covert` on exactly the same terms, and the addition is two lines because the
+ * SP-D shape was built to take it: the sub-record is ACCEPTED here and READ nowhere here.
+ * Its closed vocabulary, its itinerary cap, its named refusals and its heal-to-absent
+ * persistence rule all live one layer down, and this head learns none of them — it forwards
+ * the cargo and spreads whatever block the mint hands back. THE ONE THING THIS HEAD DOES
+ * OWN for a covert mission is the pair of refusals a spy must not dodge: `npc_in_transit`
+ * and `origin_capacity` are checked ABOVE the delegation, so a court cannot flood the
+ * roads with operatives and an operative cannot stand in two places, BY CONSTRUCTION
+ * rather than by the espionage layer remembering to ask.
  */
 export function mintEnvoyErrand({
   worldState,
@@ -146,6 +156,7 @@ export function mintEnvoyErrand({
   purposeClass = null,
   declaredPurpose = null,
   truePurpose = null,
+  covert = null,
   routePlan,
   tick,
 } = {}) {
@@ -203,6 +214,7 @@ export function mintEnvoyErrand({
     purposeClass,
     declaredPurpose,
     truePurpose,
+    covert,
     routePlan,
     fromId: from,
     toId: to,

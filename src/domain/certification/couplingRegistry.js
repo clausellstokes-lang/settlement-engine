@@ -35,6 +35,10 @@ import {
 import { TR1_CASUS_COMMERCII_COUPLINGS } from './couplingRegistryTrade.js';
 import { GR2_PACT_FORMATION_COUPLINGS } from './couplingRegistryGrammar.js';
 import { IN_INFORMATION_COUPLINGS } from './couplingRegistryInfo.js';
+// The ESPIONAGE leaf (FP wave ES-1). ES is a wave family OF the INFORMATION program in
+// the LAYER map, and a volume of its own in the WAVE map — couplingIds carry the `ES`
+// prefix and two lanes building IN-* and ES-* must not serialize on one registry file.
+import { ES_ESPIONAGE_COUPLINGS } from './couplingRegistryEspionage.js';
 
 export {
   TR1_SEVERANCE_PRESSURE_COUPLING,
@@ -56,6 +60,14 @@ export {
   IN0A_PLANT_HANDOFF_COUPLING,
   IN_INFORMATION_COUPLINGS,
 } from './couplingRegistryInfo.js';
+
+// The ESPIONAGE leaf (FP wave ES-1), re-exported by name on the same rule.
+export {
+  ES1_COVERT_MISSION_MINT_COUPLING,
+  ES1_HIDDEN_FRANCHISE_COUPLING,
+  ES1_MISSION_VOCABULARY_COUPLING,
+  ES_ESPIONAGE_COUPLINGS,
+} from './couplingRegistryEspionage.js';
 
 export {
   WR3_LINEAGE_COUPLING,
@@ -99,6 +111,11 @@ export const COUPLING_REGISTRY = Object.freeze([
   ...TR1_CASUS_COMMERCII_COUPLINGS,
   ...GR2_PACT_FORMATION_COUPLINGS,
   ...IN_INFORMATION_COUPLINGS,
+  // FP ES-1 (2026-08-06): the FIFTH volume in this registry, and the first ESPIONAGE
+  // rows. Three: the covert mission minting through the estate's one errand spine, the
+  // arithmetic borrowing the row vocabulary it used to author, and the covert
+  // traveller's hidden-path franchise read.
+  ...ES_ESPIONAGE_COUPLINGS,
 ]);
 
 /** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */

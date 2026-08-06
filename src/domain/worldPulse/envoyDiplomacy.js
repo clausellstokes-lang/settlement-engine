@@ -9,9 +9,7 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
-import { importanceWeight } from '../entities/npcs.js';
 import { getSpatialLedger } from '../spatial/distanceRead.js';
-import { isOffStage } from '../roads/state.js';
 import { beliefRecord, strengthBandOf } from './beliefMap.js';
 import {
   ENVOY_STRENGTH_BANDS,
@@ -34,12 +32,13 @@ import {
   settlementStrength,
 } from './relationshipEvolution.js';
 import { censusProactiveSelfParlays } from './envoyEncounter.js';
+import { envoyCandidate } from './envoyCasting.js';
 import {
-  durableIdForRoster,
   graduateNpc,
   moveNpcRecord,
   npcLedgerOf,
 } from './npcLedger.js';
+import { COVERT_ENVOY_KIND } from './routeNetworkConsumers.js';
 import { livedHopToward, livedLegTicks } from './routeNetworkConsumersTransit.js';
 import {
   PRESSURE_BANDS,
@@ -248,63 +247,24 @@ function settlementName(snapshot, id) {
   return name && name !== id ? name : '';
 }
 
-/** @param {Record<string, unknown>} npc */
-function rosterIdentity(npc) {
-  return {
-    rosterId: text(npc.id || npc.npcId),
-    name: text(npc.name),
-    role: text(npc.role || npc.title),
-  };
-}
-
-/** A person already walking another lane cannot stand in two places. */
-function rosterPersonAvailable(npc) {
-  if (isOffStage(npc)) return false;
-  const status = text(npc.status).toLowerCase();
-  if (['dead', 'killed', 'missing', 'exiled', 'imprisoned'].includes(status)) return false;
-  const whereabouts = asObject(npc.whereabouts);
-  const travelState = text(whereabouts.state || whereabouts.phase).toLowerCase();
-  return !['outbound', 'travelling', 'traveling', 'returning', 'visiting', 'hostage'].includes(travelState);
-}
-
-/**
- * Choose one notable-or-higher roster person deterministically. Diplomatic and
- * governing roles win equal-importance ties; identity then wins by codepoint.
- */
-function envoyCandidate(worldState, settlementId, settlement) {
-  const activeNpcIds = new Set(envoyErrandsOf(worldState)
-    .filter((errand) => !['home', 'lost'].includes(String(errand.state)))
-    .map((errand) => String(errand.npcId)));
-  const ledger = npcLedgerOf(worldState);
-  const candidates = (Array.isArray(settlement.npcs) ? settlement.npcs : [])
-    .map((raw) => asObject(raw))
-    .filter((npc) => importanceWeight(/** @type {any} */ (npc)) >= 0.4 && rosterPersonAvailable(npc))
-    .map((npc) => {
-      const identity = rosterIdentity(npc);
-      if (!identity.name) return null;
-      const durableId = durableIdForRoster(worldState, settlementId, identity);
-      if (durableId && activeNpcIds.has(durableId)) return null;
-      if (durableId && ledger.roamers[durableId]) return null;
-      if (durableId && ledger.placed[durableId]
-        && String(ledger.placed[durableId].hostSettlementId || '') !== settlementId) return null;
-      const role = identity.role.toLowerCase();
-      const diplomatic = /envoy|legate|diplomat|ambassador|chancellor|steward|council|ruler|mayor|lord|lady/.test(role) ? 1 : 0;
-      return { npc, identity, durableId, diplomatic, importance: importanceWeight(/** @type {any} */ (npc)) };
-    })
-    .filter(Boolean)
-    .sort((left, right) => (right.importance - left.importance)
-      || (right.diplomatic - left.diplomatic)
-      || compareCodepoint(
-        `${left.identity.rosterId}\u0000${left.identity.name}`,
-        `${right.identity.rosterId}\u0000${right.identity.name}`,
-      ));
-  return candidates[0] || null;
-}
-
 /**
  * Price one complete lived journey through J4's shared named-person seam.
  * Every subsequent edge opens only after the prior edge has landed, matching
  * `advanceLivedTraveller`'s no-second-hop-on-arrival-tick law.
+ *
+ * ES-1 — THE ONE-WORD KIND FORK, and it is one word because the franchise it opens is
+ * one word. `mayUseHiddenPaths` FAILS CLOSED on an unrecognised traveller kind, and this
+ * solve has always passed `'envoy'`, which is not in `HIDDEN_PATH_KINDS` — so every
+ * errand the estate has ever priced took the open road, and it did so structurally
+ * rather than by anyone deciding it. A covert mission is the first errand the design says
+ * may walk a way the realm has forgotten (ES §1), and the ONLY thing that changes is the
+ * kind this solve hands the hop reader. `covert` is compared `=== true`, so every caller
+ * that does not ask — which is all of them today — still gets the open road.
+ *
+ * ⚠ AND THE OPEN ERRAND STILL CANNOT, WHICH IS THE HALF WORTH PINNING. The franchise is
+ * a property of the KIND, not of the caller: an ordinary errand passing `covert: false`
+ * and a covert one passing `covert: true` differ by exactly which member of a closed
+ * two-word set reaches `mayUseHiddenPaths`, and the open one is still refused.
  */
 export function buildEnvoyRoutePlan({
   worldState,
@@ -313,6 +273,7 @@ export function buildEnvoyRoutePlan({
   tick,
   journey = 'outbound',
   season = null,
+  covert = false,
 } = {}) {
   const from = text(fromId);
   const to = text(toId);
@@ -329,7 +290,7 @@ export function buildEnvoyRoutePlan({
       worldState,
       fromId: cursor,
       destId: to,
-      kind: 'envoy',
+      kind: covert === true ? COVERT_ENVOY_KIND : 'envoy',
       season,
     });
     if (reading.verdict !== 'hop' || !reading.hop || seen.has(String(reading.hop.toId))) return null;

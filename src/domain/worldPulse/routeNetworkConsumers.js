@@ -63,17 +63,38 @@ import {
  * which is only a sentence about smuggling if the ordinary caravan is a thing that
  * cannot.
  *
+ * ES-1 ADDS `covert_envoy`, AND IT IS A NEW KIND RATHER THAN A WIDENING OF AN OLD ONE.
+ * A covert operative is not a smuggler wearing a different word: the smuggler moves
+ * GOODS the law forbids and the covert envoy moves CONFIRMATION about a court, and the
+ * two answer to different machinery on every other seam (the errand spine prices one, the
+ * caravan machinery the other). Naming a spy `smuggler` to borrow the franchise would
+ * have made every smuggler read as a mission to a later census.
+ *
  * Codepoint-sorted, so the vocabulary reads the same in every receipt.
  * @type {ReadonlyArray<string>}
  */
-export const TRAVELLER_KINDS = Object.freeze(['army', 'caravan', 'smuggler', 'wanderer']);
+export const TRAVELLER_KINDS = Object.freeze(['army', 'caravan', 'covert_envoy', 'smuggler', 'wanderer']);
 
 /**
- * THE HIDDEN-PATH FRANCHISE (§9, J-D9 (d)). The two kinds that may walk a way the
- * realm has forgotten. Everything else, named or not, may not.
+ * THE COVERT OPERATIVE'S KIND (ES-1), exported by name so its ONE call site —
+ * `buildEnvoyRoutePlan`'s hop solve — spells it from here rather than from a literal that
+ * could drift a character away from the franchise below and fail closed in silence.
+ * @type {string}
+ */
+export const COVERT_ENVOY_KIND = 'covert_envoy';
+
+/**
+ * THE HIDDEN-PATH FRANCHISE (§9, J-D9 (d)). The kinds that may walk a way the realm has
+ * forgotten. Everything else, named or not, may not.
+ *
+ * ES-1 admits `covert_envoy` on the design's own sentence — covert travel is HARDER TO
+ * CATCH and less credible on any simultaneous open purpose (ES §0), and the overgrown road
+ * is where that trade is paid. The ORDINARY envoy is deliberately still absent: an open
+ * embassy that took a forgotten way would be an embassy nobody could witness arriving,
+ * which is the opposite of what an embassy is for.
  * @type {ReadonlyArray<string>}
  */
-export const HIDDEN_PATH_KINDS = Object.freeze(['smuggler', 'wanderer']);
+export const HIDDEN_PATH_KINDS = Object.freeze(['covert_envoy', 'smuggler', 'wanderer']);
 
 /** The grade a forgotten corridor holds (Law 5's floor). @type {string} */
 export const HIDDEN_GRADE = 'hidden';

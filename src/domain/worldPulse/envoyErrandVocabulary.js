@@ -150,6 +150,79 @@ export const PURPOSE_CLASS_BY_PURPOSE = Object.freeze({
 });
 
 /**
+ * ES-1 — THE COVERT SUB-RECORD'S CLOSED WORDS. The espionage layer adds exactly ONE
+ * conditional field to the errand row (`covert`, present only on purposeClass `covert`
+ * rows), and its vocabulary lives HERE rather than in the espionage family for the reason
+ * this leaf's header already gives: the persistence DTOs match against these words, and a
+ * second spelling of a persisted vocabulary is how an import forges a state no writer
+ * authored. The espionage family SPELLS these words; it does not own them.
+ *
+ * ⚠ THIS LEAF STILL HAS ZERO IMPORTS, and that is what forces the direction. The words
+ * are minted here and the espionage arithmetic BORROWS them (espionageMath.js re-binds
+ * `DEMAND_BANDS` and `ESPIONAGE_TUNING.MAX_ITINERARY_STOPS` to these exports rather than
+ * authoring a second 3 and a second demand list) — J-WR-10's one-spelling law, pointed
+ * the only way a zero-import leaf can point it.
+ */
+
+/** The typed mission product (ES §1). Codepoint-ordered. */
+export const ENVOY_COVERT_PRODUCTS = Object.freeze(['acquire', 'confirm', 'refute']);
+
+/**
+ * THE GRADED BAR a mission is sent to clear (owner addition G). Codepoint-ordered.
+ * `espionageMath.js` exports this same frozen array as `DEMAND_BANDS`.
+ */
+export const ENVOY_COVERT_DEMANDS = Object.freeze(['certain', 'confirm', 'corroborate']);
+
+/** Whether a stop rides on the public face or only on the true itinerary. Ordered. */
+export const ENVOY_COVERT_FACES = Object.freeze(['covert', 'declared']);
+
+/**
+ * ⟨F5⟩ THE SIX APPRAISAL LEGS AN ACQUIRE MAY TARGET, ENUMERATED EXACTLY — and the
+ * enumeration is the point. SP-B's `conditionsBands` carries a FOURTH key, `pullBand`,
+ * and it is EXCLUDED HERE BY RULE: pullBand is fed by SP-B's own populations road and no
+ * espionage product can fill it, so admitting it would mint a vocabulary member no writer
+ * can ever satisfy — the dead-band law's exact shape. A mint carrying `pullBand` is
+ * REFUSED, and that refusal is pinned rather than assumed.
+ */
+export const ENVOY_COVERT_LEG_REFS = Object.freeze([
+  'exports',
+  'readiness',
+  'routePositionBand',
+  'storesBand',
+  'strength',
+  'tierBand',
+]);
+
+/**
+ * The itinerary cap (ES §3.4). Minted ONCE, here, because the persistence DTO enforces it
+ * and `ESPIONAGE_TUNING.MAX_ITINERARY_STOPS` re-exposes this same number rather than
+ * authoring a second one that could drift a stop apart from the normalizer.
+ */
+export const MAX_COVERT_ITINERARY_STOPS = 3;
+
+/** Exact-key list for one itinerary stop. */
+export const COVERT_STOP_KEYS = Object.freeze(['face', 'settlementId', 'stayTicks']);
+
+/**
+ * Exact-key list for the covert sub-record AS ES-1 MINTS IT. `legRefs` is conditional.
+ *
+ * ⚠ ES-2/ES-3 OWE THEIR OWN KEYS AND THEIR OWN NORMALIZER ARM, IN THEIR OWN COMMITS.
+ * `gathered` (§3.7's accrual) and `standoff` (§3.4's addition D) are NOT in this list and
+ * are therefore DROPPED by `normalizeCovertMission` today. That is deliberate exact-key
+ * DTO discipline, not an oversight: a normalizer that silently kept unknown keys would
+ * let an import forge a gradient nobody gathered. The wave that mints either field
+ * teaches this list and that normalizer IN THE SAME COMMIT — the columnOf precedent — or
+ * its own amender writes a field the next persist erases.
+ */
+export const COVERT_KEYS = Object.freeze([
+  'demand',
+  'itinerary',
+  'legRefs',
+  'product',
+  'subjectId',
+]);
+
+/**
  * THE ERRAND CONSUMER REGISTRY (SP §8 seam 8) — the frozen consumer map, pointed at five
  * unbuilt programs. `built` is a CLAIM ABOUT THE TREE, and
  * tests/lint/errandConsumerRegistry.walker.test.js measures it BOTH WAYS: a module that
@@ -198,11 +271,25 @@ export const ERRAND_CONSUMERS = Object.freeze([
     wave: 'WF-2b',
     built: false,
   }),
+  // ES-1: THE THIRD BUILT CONSUMER, and the row it was split out of is the reason the
+  // split had to happen. The pre-pin read `couriers … wave: 'ES-1/IN-4'`, one row for two
+  // programs — but the ES volume's own seam row 9 rules them DISTINCT ("IN-4's couriers
+  // are CARGO movers, ES missions are PRODUCT movers — distinct purposes on the one
+  // spine, BOTH in the consumer map"). One row could not have carried both: `built` is a
+  // single boolean and `module` a single address, so landing ES-1 against the shared row
+  // would have declared IN-4 built and pointed the registry at a file that does not exist.
+  Object.freeze({
+    consumer: 'covert missions',
+    purposeClass: 'covert',
+    module: 'src/domain/worldPulse/espionage/espionageMissions.js',
+    wave: 'ES-1',
+    built: true,
+  }),
   Object.freeze({
     consumer: 'couriers',
     purposeClass: 'covert',
     module: 'src/domain/worldPulse/covertErrand.js',
-    wave: 'ES-1/IN-4',
+    wave: 'IN-4',
     built: false,
   }),
   Object.freeze({
@@ -255,6 +342,10 @@ export const POSITION_BAND_SET = new Set(ENVOY_POSITION_BANDS);
 export const LOSS_CAUSE_SET = new Set(ENVOY_LOSS_CAUSES);
 export const PURPOSE_SET = new Set(ENVOY_PURPOSES);
 export const PURPOSE_CLASS_SET = new Set(ENVOY_PURPOSE_CLASSES);
+export const COVERT_PRODUCT_SET = new Set(ENVOY_COVERT_PRODUCTS);
+export const COVERT_DEMAND_SET = new Set(ENVOY_COVERT_DEMANDS);
+export const COVERT_FACE_SET = new Set(ENVOY_COVERT_FACES);
+export const COVERT_LEG_REF_SET = new Set(ENVOY_COVERT_LEG_REFS);
 export const ENCOUNTER_KIND_SET = new Set(ENVOY_ENCOUNTER_KINDS);
 export const PRIVATE_GOAL_SET = new Set(ENVOY_PRIVATE_GOALS);
 export const ENCOUNTER_RESOLUTION_SET = new Set(ENVOY_ENCOUNTER_RESOLUTIONS);

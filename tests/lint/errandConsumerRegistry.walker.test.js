@@ -389,23 +389,33 @@ describe('SP-D errand consumer registry — BOTH WAYS against the tree', () => {
     ).toBeGreaterThan(0);
   });
 
-  test('the TWO built consumers today are the war errand head and the pact proposals', () => {
-    // Recorded as a fact rather than assumed, and the fact MOVED at FP GR-2 (2026-08-06):
-    // the spine's whole purpose is to be minted through by more than one lane, and this is
-    // the first lane to do it. The remaining four pre-pins still point at volumes that have
-    // not landed, so the built/unbuilt partition above is still a real measurement.
+  test('the THREE built consumers today are the war errand head, the pact proposals and the covert missions', () => {
+    // Recorded as a fact rather than assumed, and the fact has MOVED TWICE: at FP GR-2
+    // (2026-08-06) and again at ES-1 (2026-08-06). The spine's whole purpose is to be
+    // minted through by more than one lane, and three now do. The remaining four pre-pins
+    // still point at volumes that have not landed, so the built/unbuilt partition above is
+    // still a real measurement.
     //
     // THAT THE SECOND CONSUMER IS *NOT* A NEW `*Errand.js` FILE IS THE POINT. The registry's
     // unbuilt rows all name a prospective module of their own; GR-2 instead mints from the
     // ledger writer that creates the thing being carried, because a pact proposal has no
     // life of its own outside that row. A wave that felt it needed a private errand module
     // to travel would be building the second substrate this registry exists to prevent.
+    //
+    // THE THIRD SPLIT A PRE-PIN IN TWO, and that is the tripwire working rather than being
+    // worked around. One row read `couriers … wave: 'ES-1/IN-4'` — one address and one
+    // boolean for two programs the ES volume's seam row 9 rules DISTINCT (ES missions move
+    // PRODUCTS, IN-4's couriers move CARGO). Landing ES-1 against the shared row would have
+    // declared IN-4 built and pointed the registry at `covertErrand.js`, a file nobody has
+    // written. So ES-1 took its own row and left IN-4's pre-pin intact and still unbuilt.
     expect(builtModules).toEqual([
       'src/domain/worldPulse/envoyErrand.js',
+      'src/domain/worldPulse/espionage/espionageMissions.js',
       'src/domain/worldPulse/pactProposals.js',
     ]);
     expect(minters).toEqual([
       'src/domain/worldPulse/envoyErrand.js',
+      'src/domain/worldPulse/espionage/espionageMissions.js',
       'src/domain/worldPulse/pactProposals.js',
     ]);
   });

@@ -193,10 +193,23 @@ export function projectEnvoyForEncounter(rawErrand, tick, venueRef = null) {
  * covert mission wearing one — same keys, same words — and the pin that proves it compares
  * two seeded errands rather than asserting an absence on an empty harness.
  *
+ * ES-1 EXTENDS THE SAME SEAM TO `covert.*`, AND THE EXTENSION IS ONE LINE FOR A REASON.
+ * The mission sub-record — its itinerary, its product, its subject, the legs an ACQUIRE
+ * targets — is the most dangerous payload on the row: it names the places a court's
+ * operative will actually stand. It rides the arm that already exists rather than a
+ * second `includeMission` spelling, because two veil switches over one row is how one of
+ * them gets forgotten. The PLAYER arm cannot reach it: that arm returns before this line
+ * and its return is a two-key object with no branch in it.
+ *
+ * ⚠ THE PIN THAT PROVES THIS IS DRIVEN BY A SEEDED COVERT ERRAND, NEVER AN EMPTY HARNESS.
+ * An absence assertion over a row that carries no mission passes with the whole feature
+ * deleted — the recorded empty-harness vacuity class. The pin compares two REAL rows: an
+ * honest embassy and a covert mission wearing one, projected to a player, byte-identical.
+ *
  * @param {unknown} rawErrand
  * @param {{ includeCovert?: boolean }} [opts] DM surfaces ⇒ true; PLAYER views ⇒ false
- * @returns {{errandId:string, purposeClass:string,
- *   declaredPurpose?:string, truePurpose?:string}|null}
+ * @returns {{errandId:string, purposeClass:string, declaredPurpose?:string,
+ *   truePurpose?:string, covert?:Record<string, unknown>}|null}
  */
 export function projectErrandPurpose(rawErrand, opts = {}) {
   const errand = normalizeErrand(rawErrand);
@@ -209,9 +222,13 @@ export function projectErrandPurpose(rawErrand, opts = {}) {
   }
   const declaredPurpose = String(errand.declaredPurpose || '');
   const truePurpose = String(errand.truePurpose || '');
+  const covert = errand.covert
+    ? /** @type {Record<string, unknown>} */ (cloneData(errand.covert))
+    : null;
   return {
     errandId,
     purposeClass: purposeClassOf(errand),
+    ...(covert ? { covert } : {}),
     ...(declaredPurpose && truePurpose ? { declaredPurpose, truePurpose } : {}),
   };
 }
