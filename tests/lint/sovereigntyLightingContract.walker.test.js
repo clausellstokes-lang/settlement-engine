@@ -26,93 +26,73 @@
  *   • NEGATIVE CONTROL — a fabricated marker finds nothing, so "found" is a real read
  *     and not a substring that always hits.
  *
- * ── THE ADDRESS RULE, TIGHTENED 2026-08-05 (chair ruling, ES-4 lane) ────────────
+ * ── THE ADDRESS RULE ───────────────────────────────────────────────────────────
  * The first cut of this file measured a TEST_MARKER row with `src.includes(marker)` over
  * every test file. That read is VACUOUS IN THE ONLY DIRECTION THAT MATTERS, and it was
- * proven so by execution before this edit: a one-line file whose entire content was
- * `// ES-4-DISTANT-SOURCE-EVIDENCE` — a bare comment asserting nothing — flipped the ES-4
- * row to present and the whole condition to `SATISFIED / satisfiable true / missing []`,
- * with this walker still reporting 9 passed. An instrument whose green condition can be
- * forged by a comment is a worse artifact than the phantom row it replaced, because the
- * phantom was at least visibly absent.
+ * proven so by execution: a one-line file whose entire content was the bare comment
+ * `// ES-4-DISTANT-SOURCE-EVIDENCE` flipped the ES-4 row to present and the whole
+ * condition to `SATISFIED / satisfiable true / missing []`. An instrument whose green
+ * condition can be forged by a comment is a worse artifact than the phantom row it
+ * replaced, because the phantom was at least visibly absent.
  *
  * SO A MARKER IS EVIDENCE ONLY WHERE IT STANDS IN THE TITLE OF A TEST THAT WILL ACTUALLY
- * RUN. This is not a new law — the ES volume's §5 seam row 6 already spelled it ("the
- * marker `ES-4-DISTANT-SOURCE-EVIDENCE` in the pin's TITLE") and the contract row's own
- * `why` says to "put it in the test NAME rather than a comment, so deleting the pin
- * removes the evidence". This file simply stopped taking that on trust and started
- * measuring it. FOUR DOORS, each pinned individually below because a second door silently
- * covering a deleted first is this program's most-repeated verification failure:
- *   1. TITLE POSITION — the marker must sit inside the first quoted argument of a
- *      `describe` / `test` / `it` call that OPENS ITS OWN LINE. A comment, a string
- *      constant, an `expect(...)` argument and a mid-line call are all refused.
- *   2. THE TEST MUST RUN — `.skip`, `.todo` and `.failing` titles are refused. A parked
- *      pin proves exactly as much as a comment does.
+ * RUN. FOUR DOORS, each pinned individually below because a second door silently covering
+ * a deleted first is this program's most-repeated verification failure:
+ *   1. TITLE POSITION — the marker must sit in the first argument of an `it`/`test` (or
+ *      `describe`/`suite`) call, and that argument must be a static string. A comment, a
+ *      string constant and an `expect(...)` argument are all refused.
+ *   2. THE TEST MUST RUN — only the closed running TEST grammar keeps its title.
  *   3. THE SUITE MUST RUN — a file is refused WHOLE unless every suite it opens is one
- *      this walker can PROVE runs. Line scanning cannot see block nesting, so refusing
- *      the file is the only honest verdict available for a title a parked suite would
- *      never reach. REPAIRED THREE TIMES ON 2026-08-05, and the fourth cut — this one —
- *      stops repairing SPELLINGS and states a POLARITY instead, because the first three
- *      each closed the spellings that had been found and each was falsified within hours
- *      by a spelling nobody had thought of. Cut one refused a file only where ONE line
- *      matched both a `describe(` opener and a literal dotted `.skip`/`.todo`/`.failing`,
- *      so `describe.skipIf(true)`, `describe['skip']`, `describe . skip` and `xdescribe`
- *      were read as LIVE suites. Cut two fixed that with a closed allowlist but read
- *      PHYSICAL lines, so the same spellings walked back in with a newline inside them.
- *      Cut three welded a dangling head before scanning — but its head detector and its
- *      opener detector shared the character class `[^\]\n]`, so an UNTERMINATED computed
- *      member (`describe[` ending a line) was invisible to both, and TEN more spellings
- *      walked through. NINE of those ten join the earlier rounds in the eighteen-spelling
- *      escape battery below; the tenth — a comment written between the members — sits in
- *      the polarity arm beside the routes that are not spellings at all.
+ *      this walker can PROVE runs.
  *   4. SELF-EXCLUSION — this walker never vouches for itself (it names every marker by
- *      import). Retained, and pinned as belt-and-braces rather than as the thing holding
- *      the line: door 1 already refuses every position this file spells a marker in.
+ *      import).
  *
- * ── WHAT DOOR 3 CLAIMS — A POLARITY, NOT A REACH (fourth statement, chair ruling) ──
- * The three statements before this one were all of the same KIND: they described what the
- * detector could SEE, and each was falsified by a spelling outside that description. A
- * claim of the form "I recognise every parked spelling" is refuted by inventing one, and
- * the forgery game is unwinnable while the claim has that shape. So this one is about
- * DIRECTION rather than reach, and it is what the code now implements:
+ * ── DOOR 3, FIFTH AND FINAL STATEMENT: CLASSIFICATION IS BY PARSE ───────────────
+ * Four cuts of door 3 were REGEX classifiers over TEXT, and all four were falsified the
+ * same way. Cut one read one line and one literal `.skip`. Cut two added a closed
+ * allowlist but read PHYSICAL lines, so the same spellings walked back in with a newline
+ * inside them. Cut three welded a dangling head, but its head detector and its opener
+ * detector shared a character class, so `describe[` ending a line was invisible to both.
+ * Cut four stated a POLARITY instead of a reach — and was falsified on its own stated
+ * falsifier by NINE executed credited-non-running suites in three classes: a leading
+ * block comment on the opener line, a computed or destructured alias binding, and any
+ * line prefix outside the three-character class the mid-line arm enumerated. The root
+ * cause was structural and not three misses: admission was `^\s*`-anchored and narrow
+ * while the DEFAULT was credit, which is the opposite polarity from the one the header
+ * claimed.
  *
- *   ON ANY LINE WHERE A SUITE-OPENER TOKEN APPEARS — `describe` or `suite`, with or
- *   without an `x`/`f` prefix, however it is punctuated afterwards — THE FILE IS PARKED
- *   UNLESS THAT LINE RESOLVES, ON ITS OWN LOGICAL LINE AND AT ITS OWN LINE START, TO A
- *   HEAD THIS WALKER POSITIVELY RECOGNISES AS RUNNING. Recognition credits; everything
- *   else parks; there is no third bucket. This file therefore makes NO claim to recognise
- *   every spelling a parked suite can be written in, and inventing a new one CANNOT
- *   falsify it, because an unrecognised spelling is a REFUSAL. What would falsify it is a
- *   suite this walker CREDITS that vitest does not RUN.
+ * THE FIFTH CUT STOPS READING TEXT. Every test file is PARSED with `espree` — eslint's
+ * own parser, which this repository already declares as a direct dependency and already
+ * uses for three other AST walkers — and every verdict is taken from the syntax tree:
  *
- * The positive side is a CLOSED grammar, `RUNNING_SUITE_HEAD`: bare `describe(` / `suite(`,
- * or a chain whose every member is spelled with a tight dot and drawn from
- * `RUNNING_SUITE_MODIFIERS`, at the start of its own logical line. Nothing else has a route
- * to credit. Doors 1 and 2 fail closed the same way and by the same construction — an
- * unrecognised modifier breaks the quote anchor the title read is built on, so
- * `it.skipIf(true)('M', …)` and `xit('M', …)` simply fail to match — and a line-broken TEST
- * head loses its title rather than gaining one.
+ *   • A SUITE is any CallExpression whose callee chain ROOTS in a suite word. Dotted,
+ *     computed, comment-interrupted, line-broken, parenthesised, prefixed by `void` or
+ *     `await` or `&&` — the parser makes all of these ONE shape, so there is no spelling
+ *     left to enumerate and none left to miss. Comments and line breaks cease to exist.
+ *   • CREDIT is a CLOSED GRAMMAR of AST shapes (`RUNNING_SUITE_MODIFIERS`), stated below
+ *     and MEASURED against vitest 4.1.8 rather than assumed.
+ *   • PARK is the DEFAULT. Any other suite-rooted callee shape, any binding of a suite
+ *     word, and any Identifier reference to a suite word outside a credited call all park
+ *     the file whole.
+ *   • A FILE THAT FAILS TO PARSE PARKS WHOLE. Fail-closed at the parser door.
+ *   • ENUMERATION SURVIVES ONLY ON THE CREDIT SIDE, which is the side that was always
+ *     closed: the running grammars, and an explicit CREDIT-BACK LIST of two benign
+ *     reference positions (a `vitest` import specifier; a bare suite value assigned to a
+ *     member target, which is how four estate files wire eslint's RuleTester). Each is
+ *     pinned individually, and each has an executed mutant below.
  *
- * WHERE A CREDITED NON-RUNNING SUITE COULD STILL COME FROM, stated as the falsifier class
- * rather than as a reach boundary, because that is the only thing left that can break the
- * sentence above. It is a suite opened through an IDENTIFIER THAT IS NOT A SUITE WORD — an
- * alias (`const d = describe.skip; d('outer', …)`) or a factory (`describeMatrix(…)`) —
- * because the CALL SITE carries no suite-opener token for any line reader to admit, so the
- * polarity never gets a chance to apply. THE ALIAS HALF IS NOW CLOSED, at the BINDING rather
- * than at the call, since that is where the suite word is still visible
- * (`SUITE_VALUE_BOUND`); and closing it corrected a
- * measurement the previous cut got wrong: it called this residual prevalence-zero, and the
- * estate has ONE — `tests/security/customContentLockOrder.postgres.test.js`, whose single
- * title was CREDITED while its suite is `describe.skip` wherever `ROOT_DATABASE_URL` is
- * unset. That file is the ONE census move this repair makes, 92 parked to 93. THE FACTORY
- * HALF REMAINS OPEN and cannot be closed by a line reader at all: a name bound to a suite
- * word through a helper module, an object property or a function return is invisible to
- * text. NO PREVALENCE FIGURE IS CLAIMED FOR IT, and that refusal is deliberate — its
- * prevalence is exactly what a text scanner cannot measure, which is what makes it the
- * residual rather than a spelling. What IS measured, and is all that honestly can be: no
- * estate file binds a bare suite word to a new name by declaration (zero across the 2,314
- * files), and the one binding that did exist is the modified-value form this repair parks.
- * This is the thing to look for first if the polarity above is ever broken again.
+ * WHAT WOULD FALSIFY THIS: a suite this walker CREDITS that vitest does not RUN. Inventing
+ * a spelling cannot do it, because a spelling is not a thing the parser sees.
+ *
+ * THE RESIDUAL, NAMED AND NOT CLAIMED AWAY (J-ES-4-F, unchanged). A suite word that
+ * reaches its call site through a value this file cannot follow — a helper module's
+ * export, an object property, a function return — is invisible to a reader that does not
+ * EXECUTE the file. The alias half is closed at the binding (any binding whose init
+ * mentions a suite word parks, and so does any unaccounted reference); the FACTORY half is
+ * not, and no prevalence figure is claimed for it because prevalence is exactly what a
+ * static reader cannot measure there. Two estate files spell `RuleTester.itOnly = it.only`,
+ * which is that shape at TEST level; it is inert here because no estate RuleTester case
+ * sets `only: true` (measured, zero occurrences), and it is recorded rather than smoothed.
  *
  * ── WHAT THIS FILE DELIBERATELY IS NOT ──────────────────────────────────────────
  * It is not a second gate scanner. `ENGINE_GATED_VIRTUAL_RULE_KEYS` is the estate's own
@@ -126,6 +106,7 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
+import { parse } from 'espree';
 import { describe, expect, test } from 'vitest';
 
 import {
@@ -158,228 +139,325 @@ const TEST_FILES = walk(join(ROOT, 'tests'))
 const SELF_REL = 'tests/lint/sovereigntyLightingContract.walker.test.js';
 
 /**
- * DOOR 1 — a `describe`/`test`/`it` call opening its own line, capturing its modifier
- * chain (group 1) and its first quoted argument (group 3, quote-agnostic and
- * escape-aware). Anchored at line start through whitespace only, so a comment, a JSDoc
- * line, an argument to some other call and a mid-line reopen are all outside it.
+ * THE PARSER DOOR. These options are eslint.config.js's base `languageOptions` spelled
+ * back: `ecmaVersion: 'latest'`, `sourceType: 'module'`, `ecmaFeatures.jsx`. That parity is
+ * the reason espree was chosen over acorn — both are direct dependencies of this
+ * repository, but espree IS eslint's parser, so a file the estate's lint gate can read is a
+ * file this walker can read, and a file this walker cannot parse could not have passed
+ * lint. `range` is on because a title's source offset is what puts the titles of one file
+ * into source order.
  */
-const TITLE_LINE = /^\s*(?:describe|test|it)((?:\.[A-Za-z$_][\w$]*)*)\s*\(\s*(['"`])((?:\\.|(?!\2)[^\\])*)\2/;
+const PARSE_OPTIONS = Object.freeze({
+  ecmaVersion: 'latest',
+  sourceType: 'module',
+  ecmaFeatures: { jsx: true },
+  range: true,
+});
 
-/** DOOR 2 — the modifier spellings under which a title never executes. */
-const NON_RUNNING = /\.(?:skip|todo|failing)\b/;
+/** The two words vitest really exports as suite openers. `suite` is measured, not assumed. */
+const SUITE_WORDS = Object.freeze(['describe', 'suite']);
+/** The two it exports as test openers. */
+const TEST_WORDS = Object.freeze(['it', 'test']);
+/**
+ * …and the jest-compat prefixes, which vitest neither exports nor globals. They are here
+ * so a local shim or a stray global cannot open a suite this walker says nothing about:
+ * a call rooted in one of these is outside the running grammar, so it PARKS.
+ */
+const SUITE_ROOTS = new Set([...SUITE_WORDS, 'xdescribe', 'fdescribe', 'xsuite', 'fsuite']);
+const TEST_ROOTS = new Set([...TEST_WORDS, 'xit', 'fit', 'xtest', 'ftest']);
 
 /**
- * DOOR 3's ADMISSION TEST — the lines this door judges at all. A suite-opener token at the
- * head of its own line: `describe` or `suite`, with or without an `x`/`f` prefix, and then
- * WHATEVER punctuation follows — a member dot, a computed bracket, the call paren, a
- * comment, or nothing at all because the head runs on to the next line. Admission is not a
- * verdict. Everything admitted here PARKS unless `RUNNING_SUITE_HEAD` below can positively
- * classify it, which is the whole polarity: this regex may be as generous as it likes,
- * because generosity now costs a file marker-carrying rights rather than buying it credit.
- */
-const SUITE_TOKEN_LINE = /^\s*(?:x|f)?(?:describe|suite)\s*(?:[.[(/]|$)/;
-
-/**
- * …and the same token standing after a statement terminator, admitted on the PARK side
- * ALONE, because credit is line-start-only. `}); describe.skip(…)` and
- * `if (x) describe.skip(…)` — two of the three shapes the previous cut NAMED as residuals
- * it could not reach — park the file here. Their prevalence is zero across the estate
- * (measured), so this closes a latent route at no cost to any file's reading.
- */
-const SUITE_TOKEN_MIDLINE = /[;})]\s*(?:x|f)?(?:describe|suite)\s*(?:[.[(/]|$)/;
-
-/**
- * DOOR 3's ALIAS ARM — a suite word whose MODIFIED value is handed to a name instead of
- * called: `const d = cond ? describe : describe.skip;`. A line reader cannot follow `d` to
- * its use, so the honest verdict for the whole file is refusal.
+ * DOOR 3's RUNNING GRAMMAR — the ONLY suite modifiers read as running, MEASURED against
+ * vitest 4.1.8 in a git-archive tree rather than taken from documentation. Each of these
+ * ran its block unconditionally (`describe.concurrent`, `.sequential`, `.shuffle`,
+ * `.each([1])(…)`, `.for([1])(…)` all reported a passing leaf; bare `describe(` and bare
+ * `suite(` likewise).
  *
- * THIS ONE IS NOT LATENT, AND THE PREVIOUS CUT SAID IT WAS. That cut named "a suite opened
- * through ANOTHER IDENTIFIER" as a residual with "zero occurrences across the 2,314 test
- * files". MEASURED HERE AND FALSE: `tests/security/customContentLockOrder.postgres.test.js`
- * spells exactly that on its line 44, and its one title — `two backends resolve the same
- * command id without 40P01` — was CREDITED at the previous commit, while the suite holding
- * it is `describe.skip` on every machine with no `ROOT_DATABASE_URL`. That file is the ONE
- * census move this repair makes, 92 parked to 93, and it is a correction rather than a
- * cost. A BARE value (`RuleTester.describe = describe;`, four estate files) is deliberately
- * NOT caught: it can only ever alias a suite that runs, so parking it would buy nothing.
- */
-const SUITE_VALUE_BOUND = /(?:^|[^\w$.'"`])(?:x|f)?(?:describe|suite)(?:\s*\.\s*[A-Za-z$_][\w$]*)+\s*(?:[;,:)\]}]|$)/;
-
-/**
- * …and the two arms above are the only ones in this file that read a line ANYWHERE rather
- * than at its start, so this is what keeps them out of the estate's prose. Every other door
- * is `^\s*`-anchored and a comment could never reach it; these two can, and a header
- * sentence ending `…exercised in the domain suite. This` would otherwise park a file for a
- * full stop. It removes no refusal that existed before it: an anchored door never matched a
- * comment line in the first place.
- */
-const COMMENT_LINE = /^\s*(?:\/\/|\/\*|\*)/;
-
-/**
- * DOOR 3's POSITIVE GRAMMAR — the ONLY shape that credits, and it is CLOSED. A bare
- * `describe(` / `suite(`, or a chain whose every member is spelled with a TIGHT dot and
- * drawn from `RUNNING_SUITE_MODIFIERS`, at the start of its own logical line. An `x`/`f`
- * prefix, a computed member, a space-broken member, a comment between members and a
- * conditional modifier are not refused by clauses that enumerate them — the grammar simply
- * CANNOT EXPRESS THEM, so they have nowhere to land but the park side.
- */
-const RUNNING_SUITE_HEAD = /^\s*(?:describe|suite)((?:\.[A-Za-z$_][\w$]*)*)\s*\(/;
-
-/**
- * DOOR 3's CLOSED ALLOWLIST — the only suite modifiers read as RUNNING. Each of these runs
- * its block UNCONDITIONALLY. `only` is deliberately absent: it runs its own block by
- * silencing every sibling, so a file that focuses anything is a parked file by another
- * route. `runIf`/`skipIf` are absent because their argument is evaluated at run time and
- * this walker reads text.
+ * `only` is deliberately ABSENT even though its own block runs, and that is a measurement
+ * too: in the same archive `describe.only` in one file left its SAME-FILE sibling reported
+ * `↓ skipped` while a NEIGHBOURING file ran whole. Focus is therefore a FILE-scope fact,
+ * exactly as a parked suite is, so a file that focuses anything is a parked file by another
+ * route. `runIf`/`skipIf` are absent because their argument is evaluated at run time —
+ * measured both ways, `runIf(true)` ran and `runIf(false)` skipped — and this walker reads
+ * a syntax tree, not a run.
  */
 const RUNNING_SUITE_MODIFIERS = Object.freeze(['concurrent', 'sequential', 'shuffle', 'each', 'for']);
 
 /**
- * The chain tokens of a head the GRAMMAR has already accepted, split on its dots. The
- * previous cut leaned on this split to refuse computed and space-broken access, reasoning
- * that such an access could never produce a bare identifier; `RUNNING_SUITE_HEAD` now
- * refuses those forms outright by being unable to MATCH them, so on every input this walker
- * can receive, the split only ever sees tight dotted identifiers.
- *
- * WHICH MAKES THE TWO A DEFENCE-IN-DEPTH PAIR OVER ONE JOB, AND THAT IS RECORDED RATHER
- * THAN LEFT TO BE DISCOVERED. Opening either lock alone changes NO verdict — measured:
- * widening the grammar to capture a computed member leaves the split refusing the bracketed
- * token, and teaching the split to unwrap brackets leaves the grammar unable to capture one;
- * both mutants ran 21 passed. Only opening BOTH credits `describe['concurrent'](`, and that
- * joint mutant reds the allowlist arm. So neither is pinned alone below, because neither CAN
- * be; they are pinned as the pair they are.
+ * DOOR 2's RUNNING GRAMMAR, the same idea one level in. Measured in the same archive:
+ * `it.concurrent`, `it.sequential`, `it.each([1])(…)`, `it.for([1])(…)` all passed.
  */
-const chainModifiers = (chain) => chain.replace(/^\./, '').split('.');
+const RUNNING_TEST_MODIFIERS = Object.freeze(['concurrent', 'sequential', 'each', 'for']);
 
 /**
- * DOOR 3's OTHER HALF — focus, at suite OR test level. `describe.only` / `it.only` /
- * `fdescribe` / `fit` park every block they do not name, which is a FILE-scope fact
- * exactly as a parked suite is, so it belongs to the same whole-file refusal.
+ * THE KNOWN NON-FOCUSING TEST MODIFIERS — a test that does not run and does not silence
+ * its siblings. Its own title is refused (door 2) while the file keeps its other titles,
+ * because a skipped test proves nothing about itself and nothing about its neighbours.
+ * Measured: `.skip` and `.skipIf(true)` reported `↓ skipped`, `.todo` reported a todo, and
+ * `.fails` RAN its body and reported `1 expected fail` — running, but running to prove a
+ * throw, so it is refused as evidence rather than credited. `.failing` IS NOT A VITEST
+ * MODIFIER AT ALL in 4.1.8 (`TypeError: it.failing is not a function`, executed); it is
+ * kept here as defence in depth against a jest-compat shim, and the file it appears in
+ * would die loudly rather than forge anything.
+ *
+ * THIS LIST IS AN ENUMERATION AND IT IS ON THE SAFE SIDE OF THE POLARITY. Anything rooted
+ * in a test word and outside BOTH grammars parks the file whole, so a modifier nobody has
+ * thought of costs a file its titles rather than buying one credit.
  */
-const FOCUSED = /^\s*(?:f(?:describe|it)\s*\(|(?:describe|suite|test|it)\s*[.[][^(\n]*\bonly\b)/;
+const NON_FOCUSING_TEST_MODIFIERS = Object.freeze(['skip', 'todo', 'failing', 'fails', 'skipIf', 'runIf']);
 
 /**
- * AN UNRESOLVED HEAD — a line that is NOTHING BUT a suite or test head so far: the
- * identifier, whatever members it has reached, and no `(` yet. It is NOT a third verdict
- * bucket; it is the statement that this physical line is not yet a LOGICAL line, so its
- * verdict is owed by the join below rather than by the line itself.
- *
- * UNDER THE POLARITY THIS IS AN ESCAPE HATCH, NOT A DETECTOR, and the direction matters
- * enough to state: deferring is the ONLY way a line carrying a suite-opener token avoids an
- * immediate park, so this pattern wants to be as NARROW as accuracy allows rather than as
- * wide as possible. It exists to stop `describe`<NL>`('outer'` and
- * `describe`<NL>`.concurrent(` — two heads that really do run — from being parked for
- * arriving in pieces. Nothing else needs it.
- *
- * SO THE VERIFIER'S PROPOSED REMEDY IS DELIBERATELY NOT TAKEN, and the reason is executed
- * rather than argued. The bracket family's root cause was that this pattern required its
- * computed members CLOSED (`\[[^\]\n]*\]`) while the opener detector it fed shared the same
- * character class, so `describe[` ending a line was invisible to both. Widening this tail to
- * accept an unterminated member does close that family — inside the OLD architecture. Under
- * the polarity it changes no verdict at all: `describe[` now carries a suite-opener token
- * that the running grammar cannot classify, so it parks at ADMISSION, and a deferral that
- * begins with a bracket can never rejoin into anything `RUNNING_SUITE_HEAD` matches.
- * MEASURED, not reasoned: the widened tail was planted here and the whole battery — all
- * eighteen escapes, the bracket family included — stayed green at 21 passed. A widening that
- * cannot change a verdict is a guard that cannot fire, which is this program's own named
- * hazard class, so the narrow tail stays and the polarity carries the family.
+ * The modifiers that return a FUNCTION rather than opening a block — `describe.each(table)`
+ * is not a suite until the returned function is called with a name. A chain that ends on
+ * one of these without its call has registered NOTHING, so it can never be credited.
  */
-const UNRESOLVED_SUITE_HEAD = /^\s*(?:x|f)?(?:describe|suite|test|it)(?:\s*\.\s*[A-Za-z$_][\w$]*|\s*\[[^\]\n]*\])*\s*\.?\s*$/;
+const TABLE_MODIFIERS = new Set(['each', 'for', 'skipIf', 'runIf']);
+
+const RUNNING_SUITE_SET = new Set(RUNNING_SUITE_MODIFIERS);
+const RUNNING_TEST_SET = new Set(RUNNING_TEST_MODIFIERS);
+const KNOWN_TEST_SET = new Set([...RUNNING_TEST_MODIFIERS, ...NON_FOCUSING_TEST_MODIFIERS]);
 
 /**
- * DOOR 3's VERDICT FOR ONE LOGICAL LINE — `true` when this line forces the whole file to be
- * refused. THE POLARITY IN CODE, and the order of the clauses is the argument: prose is
- * excluded, the two file-scope facts (focus, an aliased modifier) park outright, an
- * unresolved head defers to its join, a token after a terminator parks because credit is
- * line-start-only, and only then does a line that carries a suite-opener token get its ONE
- * chance to be positively recognised. Fall out of that grammar by any route — an unknown
- * modifier, a computed member, a prefix, a comment, punctuation nobody has thought of yet —
- * and the file parks. A line carrying no suite-opener token at all is not this door's
- * business and returns `false`.
- * @param {string} line @returns {boolean}
+ * THE CALLEE CHAIN, FLATTENED. Walks down `.object` / `.callee` / `.tag` to the identifier
+ * the chain roots in, recording each link on the way. A computed member is recorded as
+ * `computed` WITHOUT reading what is inside it: `describe['sk' + 'ip']` and
+ * `describe[someVariable]` are the same shape to this walker, which is the point — the
+ * grammar cannot express a computed member at all, so both park.
+ * @param {any} node @returns {{root: string|null, rootNode: any, steps: Array<any>}}
  */
-function suiteParksTheFile(line) {
-  if (COMMENT_LINE.test(line)) return false;
-  if (FOCUSED.test(line)) return true;
-  if (SUITE_VALUE_BOUND.test(line)) return true;
-  if (UNRESOLVED_SUITE_HEAD.test(line)) return false;
-  if (SUITE_TOKEN_MIDLINE.test(line)) return true;
-  if (!SUITE_TOKEN_LINE.test(line)) return false;
-  const m = RUNNING_SUITE_HEAD.exec(line);
-  if (!m) return true;              // a suite token this grammar cannot classify — PARK
-  if (m[1] === '') return false;    // bare `describe(` / `suite(` — the one zero-modifier form
-  return !chainModifiers(m[1]).every((mod) => RUNNING_SUITE_MODIFIERS.includes(mod));
+function chainOf(node) {
+  const steps = [];
+  let cur = node;
+  for (;;) {
+    if (cur.type === 'MemberExpression') {
+      steps.unshift(cur.computed ? { kind: 'computed' } : { kind: 'dot', name: cur.property.name });
+      cur = cur.object;
+    } else if (cur.type === 'CallExpression') { steps.unshift({ kind: 'call' }); cur = cur.callee; }
+    else if (cur.type === 'TaggedTemplateExpression') { steps.unshift({ kind: 'call' }); cur = cur.tag; }
+    else if (cur.type === 'Identifier') return { root: cur.name, rootNode: cur, steps };
+    else return { root: null, rootNode: null, steps };
+  }
 }
 
 /**
- * DOOR 3's FILE VERDICT — every physical line judged on its own, PLUS the continuation-
- * joined form of every line that dangles a head. Surrounding whitespace is dropped as the
- * lines are welded, so `describe`<NL>`  .concurrent(` rejoins as `describe.concurrent(` and
- * is recognised as running instead of parking on a chain token that is nothing but spaces.
- *
- * ADDITIVE IS THE WHOLE SAFETY ARGUMENT. The physical lines are judged exactly as they were
- * before any welding, so the join can only ever ADD refusals: it cannot silently UN-park a
- * file the way a consuming join could, by welding a bare `describe` onto the real
- * `describe.skip(` opener beneath it and dissolving that file's refusal. That is a
- * fail-OPEN the repair itself would have introduced, and it is PINNED below rather than
- * asserted here.
- *
- * BLANK LINES ARE STEPPED OVER RATHER THAN ENDING THE CHASE, and NO line budget bounds it,
- * because both of those are how a bounded chase leaks: `describe`, five blank lines,
- * `.skip(` is one expression to JavaScript, and a limit of four would have handed that
- * spelling straight back the hole this join closes. Nothing here can run away — the head
- * only GROWS on a line that contributes text, and the moment the accumulated text stops
- * being an unresolved head the walk breaks.
- *
- * A HEAD THAT NEVER RESOLVES PARKS, which is the last hole the polarity would otherwise
- * leave: a file ending in `describe[` reaches the end of its lines still unresolved, and a
- * scan that only judged resolved forms would credit it by saying nothing at all.
- * @param {string[]} lines @returns {boolean}
+ * THE CLOSED GRAMMAR, AS A PREDICATE OVER CHAIN LINKS. Every link must be a tight dotted
+ * member drawn from `allowed`, or a call that immediately follows a table modifier; and
+ * every table modifier must be followed by its call. A computed link fails outright, and so
+ * does a chain that ends on a table modifier without calling it.
+ * @param {Array<any>} steps @param {Set<string>} allowed @returns {boolean}
  */
-function suitesParkTheFile(lines) {
-  for (let i = 0; i < lines.length; i += 1) {
-    if (suiteParksTheFile(lines[i])) return true;
-    // No COMMENT_LINE clause here, deliberately: `UNRESOLVED_SUITE_HEAD` and `COMMENT_LINE`
-    // are both anchored at `^\s*` and demand disjoint next characters, so a comment line can
-    // never dangle a head. A clause guarding against it could not fire, and a guard that
-    // cannot fire is this program's own named hazard class.
-    if (!UNRESOLVED_SUITE_HEAD.test(lines[i])) continue;
-    let head = lines[i].trim();
-    let resolved = false;
-    for (let j = i + 1; j < lines.length; j += 1) {
-      const next = lines[j].trim();
-      if (next === '') continue;
-      head = `${head}${next}`;
-      if (UNRESOLVED_SUITE_HEAD.test(head)) continue;
-      resolved = true;
-      if (suiteParksTheFile(head)) return true;
-      break;
+function grammarAccepts(steps, allowed) {
+  for (let i = 0; i < steps.length; i += 1) {
+    const step = steps[i];
+    if (step.kind === 'dot') {
+      if (!allowed.has(step.name)) return false;
+      if (TABLE_MODIFIERS.has(step.name) && (!steps[i + 1] || steps[i + 1].kind !== 'call')) return false;
+      continue;
     }
-    if (!resolved && SUITE_TOKEN_LINE.test(lines[i])) return true;
+    if (step.kind !== 'call') return false;
+    const prev = steps[i - 1];
+    if (!prev || prev.kind !== 'dot' || !TABLE_MODIFIERS.has(prev.name)) return false;
   }
-  return false;
+  return true;
 }
 
 /**
- * THE ADDRESS READ — the titles of the tests in one source that will actually run.
- * Returns `[]` for a file holding a suite this walker cannot prove runs (door 3): line
- * scanning cannot see block nesting, and crediting a title inside a parked `describe` is
- * the same vacuity one level in.
- * @param {string} src @returns {string[]}
+ * THE TITLE READ, FROM THE TREE. A title is the FIRST argument of a credited call and it
+ * must be STATIC: a string Literal, or the static segments of a template literal. An
+ * interpolated segment is not read, so `it(`${x} MARKER`)` credits `MARKER` while a marker
+ * split ACROSS an interpolation is credited to neither half — which is the honest read,
+ * because such a marker is not in the file.
+ * @param {any} node @param {Array<[number, string]>} out
  */
-function liveTitlesIn(src) {
-  const lines = src.split('\n');
-  // Door 3 judges the physical lines AND their continuation-joined forms. Doors 1 and 2
-  // read the physical lines alone: a line-broken TEST head simply loses its title, which
-  // is the fail-closed direction and is pinned as such below.
-  if (suitesParkTheFile(lines)) return [];
-  const titles = [];
-  for (const line of lines) {
-    const m = TITLE_LINE.exec(line);
-    if (m && !NON_RUNNING.test(m[1])) titles.push(m[3]);
-  }
-  return titles;
+function titleArgs(node, out) {
+  const first = node.arguments && node.arguments[0];
+  if (!first) return;
+  if (first.type === 'Literal' && typeof first.value === 'string') { out.push([first.range[0], first.value]); return; }
+  if (first.type !== 'TemplateLiteral') return;
+  for (const quasi of first.quasis) if (quasi.value.cooked) out.push([quasi.range[0], quasi.value.cooked]);
 }
+
+/** Every identifier a binding pattern introduces — destructuring, defaults and rest included. */
+function patternIds(node, out) {
+  if (!node || typeof node !== 'object') return;
+  if (node.type === 'Identifier') { out.push(node); return; }
+  if (node.type === 'ObjectPattern') {
+    for (const p of node.properties) patternIds(p.type === 'RestElement' ? p.argument : p.value, out);
+    return;
+  }
+  if (node.type === 'ArrayPattern') { for (const e of node.elements) patternIds(e, out); return; }
+  if (node.type === 'AssignmentPattern') { patternIds(node.left, out); return; }
+  if (node.type === 'RestElement') patternIds(node.argument, out);
+}
+
+/**
+ * An inner link of a longer chain — `describe.each([1])` inside `describe.each([1])('n', f)`.
+ * Only the OUTERMOST node of a chain is classified; classifying the links as well would park
+ * every table-driven suite in the estate for the crime of being written in two calls.
+ */
+const isChainLink = (parent, key) => !!parent
+  && ((parent.type === 'CallExpression' && key === 'callee')
+    || (parent.type === 'TaggedTemplateExpression' && key === 'tag')
+    || (parent.type === 'MemberExpression' && key === 'object'));
+
+/** A static member/property NAME that happens to spell a suite word — `RuleTester.describe`. */
+const isNameNotReference = (parent, key) => !!parent
+  && ((parent.type === 'MemberExpression' && key === 'property' && !parent.computed)
+    || ((parent.type === 'Property' || parent.type === 'MethodDefinition' || parent.type === 'PropertyDefinition')
+      && key === 'key' && !parent.computed));
+
+/**
+ * CREDIT-BACK 1 — an import specifier. Both halves of `import { describe } from 'vitest'`
+ * are Identifier nodes spelling a suite word, and every test file in the estate has one, so
+ * without this clause the polarity would park the whole tree. IT IS PINNED, and its mutant
+ * is the chair's own stated verification: delete it and the estate census moves from 93
+ * parked files to 2,312 (MEASURED). A specifier whose ImportDeclaration names any source
+ * OTHER than 'vitest' is NOT credited back — it is treated as a rebind of the word, and the
+ * file parks, because a shim module is exactly the factory route.
+ */
+const isImportSpecifierId = (parent) => !!parent
+  && (parent.type === 'ImportSpecifier' || parent.type === 'ImportDefaultSpecifier'
+    || parent.type === 'ImportNamespaceSpecifier' || parent.type === 'ExportSpecifier');
+
+/**
+ * CREDIT-BACK 2 — `RuleTester.describe = describe;`, four estate files. A BARE suite value
+ * assigned to a member target can only ever alias a suite that RUNS, so parking it would buy
+ * nothing and cost four files their marker rights. A MODIFIED value (`RuleTester.d =
+ * describe.skip`) is not this shape and is not credited back. Mutant: delete this clause and
+ * those four files park (93 → 97, MEASURED).
+ */
+const isBareSuiteValueOnMemberTarget = (ref) => {
+  const p = ref.parent;
+  return !!p && p.type === 'AssignmentExpression' && ref.key === 'right'
+    && p.left.type === 'MemberExpression' && SUITE_WORDS.includes(ref.node.name);
+};
+
+/**
+ * DOOR 3'S VERDICT FOR ONE SOURCE, STRUCTURAL. Returns the park reasons (empty when the file
+ * keeps its titles) and the titles of the tests that will actually run.
+ *
+ * THE ORDER OF THE CLAUSES IS THE ARGUMENT, and every one of them defaults to PARK:
+ *   • the file must PARSE, or it parks whole with reason `PARSE`;
+ *   • a suite word BOUND anywhere in the file (a declaration, a parameter, a destructure, a
+ *     non-vitest import) is either a rebind or a shadow, and a reader without a scope
+ *     resolver cannot tell which — so the word is treated as OPAQUE, and if the same word is
+ *     also used to open a would-be-credited suite the file parks as AMBIGUOUS;
+ *   • every suite-rooted call that is not in the running grammar parks the file;
+ *   • every suite-word reference that is not the root of a credited call and not on the
+ *     two-entry credit-back list parks the file;
+ *   • every test-rooted call outside BOTH test grammars parks the file, because an
+ *     unrecognised test modifier may be `only` and `only` silences its siblings.
+ * @param {string} src @returns {{reasons: string[], titles: string[]}}
+ */
+function classifySource(src) {
+  let ast;
+  try { ast = parse(src, PARSE_OPTIONS); } catch (err) { return { reasons: [`PARSE:${err.message}`], titles: [] }; }
+
+  const shadowed = new Set();
+  const suiteCalls = [];
+  const suiteRefs = [];
+  const reasons = [];
+  const titles = [];
+  const creditedRoots = new Set();
+
+  const stack = [{ node: ast, parent: null, key: null }];
+  while (stack.length) {
+    const { node, parent, key } = stack.pop();
+    if (!node || typeof node !== 'object' || typeof node.type !== 'string') continue;
+
+    if (node.type === 'ImportDeclaration' && node.source.value !== 'vitest') {
+      for (const spec of node.specifiers) if (SUITE_ROOTS.has(spec.local.name)) shadowed.add(spec.local.name);
+    }
+    if (node.type === 'VariableDeclarator') markShadowed(node.id, shadowed);
+    if (node.type === 'FunctionDeclaration' || node.type === 'FunctionExpression'
+      || node.type === 'ArrowFunctionExpression' || node.type === 'ClassDeclaration'
+      || node.type === 'ClassExpression') {
+      if (node.id) markShadowed(node.id, shadowed);
+      for (const param of (node.params || [])) markShadowed(param, shadowed);
+    }
+    if (node.type === 'CatchClause' && node.param) markShadowed(node.param, shadowed);
+
+    if ((node.type === 'CallExpression' || node.type === 'TaggedTemplateExpression') && !isChainLink(parent, key)) {
+      const head = node.type === 'CallExpression' ? node.callee : node.tag;
+      const { root, rootNode, steps } = chainOf(head);
+      if (root && SUITE_ROOTS.has(root)) {
+        const running = node.type === 'CallExpression' && SUITE_WORDS.includes(root)
+          && grammarAccepts(steps, RUNNING_SUITE_SET);
+        suiteCalls.push({ word: root, running, rootNode, node, shape: `${root}${steps.map(stepText).join('')}` });
+      } else if (root && TEST_ROOTS.has(root)) {
+        const running = node.type === 'CallExpression' && TEST_WORDS.includes(root)
+          && grammarAccepts(steps, RUNNING_TEST_SET);
+        const known = TEST_WORDS.includes(root) && grammarAccepts(steps, KNOWN_TEST_SET);
+        if (running) titleArgs(node, titles);
+        else if (!known) reasons.push(`TEST_UNCLASSIFIED:${root}${steps.map(stepText).join('')}`);
+      }
+    }
+
+    if (node.type === 'Identifier' && SUITE_ROOTS.has(node.name)
+      && !isNameNotReference(parent, key) && !isImportSpecifierId(parent)) {
+      suiteRefs.push({ node, parent, key, word: node.name });
+    }
+
+    for (const childKey of Object.keys(node)) {
+      if (childKey === 'loc' || childKey === 'range') continue;
+      const value = node[childKey];
+      if (!value || typeof value !== 'object') continue;
+      if (Array.isArray(value)) {
+        for (const child of value) if (child && typeof child === 'object') stack.push({ node: child, parent: node, key: childKey });
+      } else stack.push({ node: value, parent: node, key: childKey });
+    }
+  }
+
+  for (const word of shadowed) {
+    if (suiteCalls.some((call) => call.word === word && call.running)) reasons.push(`SUITE_SHADOW_AMBIGUOUS:${word}`);
+  }
+  // THE `call.running` CONDITION ON THE TITLE READ IS A DEFENCE-IN-DEPTH PAIR WITH THE PARK
+  // BELOW IT, AND THAT IS RECORDED RATHER THAN LEFT TO BE DISCOVERED. A non-running suite
+  // also pushes `SUITE_NOT_RUNNING`, and a file with any reason returns NO titles at all, so
+  // reading a parked suite's own title here could not change a verdict — MEASURED: the
+  // mutant that reads titles from every suite-rooted call ran 24 passed. It stays because it
+  // is the clause that keeps this loop honest if the park is ever loosened, and it is named
+  // here because a guard that cannot fire is this program's own hazard class.
+  for (const call of suiteCalls) {
+    if (shadowed.has(call.word)) continue;
+    if (call.running) { creditedRoots.add(call.rootNode); titleArgs(call.node, titles); continue; }
+    creditedRoots.add(call.rootNode);
+    reasons.push(`SUITE_NOT_RUNNING:${call.shape}`);
+  }
+  for (const ref of suiteRefs) {
+    if (shadowed.has(ref.word) || creditedRoots.has(ref.node)) continue;
+    if (isBareSuiteValueOnMemberTarget(ref)) continue;
+    reasons.push(`SUITE_REF:${ref.parent ? ref.parent.type : 'Program'}.${ref.key}`);
+  }
+
+  titles.sort((a, b) => a[0] - b[0]);
+  return { reasons, titles: reasons.length > 0 ? [] : titles.map(([, text]) => text) };
+}
+
+function markShadowed(pattern, shadowed) {
+  const ids = [];
+  patternIds(pattern, ids);
+  for (const id of ids) if (SUITE_ROOTS.has(id.name)) shadowed.add(id.name);
+}
+
+const stepText = (step) => (step.kind === 'dot' ? `.${step.name}` : (step.kind === 'call' ? '()' : '[]'));
+
+/**
+ * One parse per distinct source, held for the run. Without it the estate is re-parsed once
+ * per census and the walker's wall time multiplies by the number of arms.
+ */
+const CLASSIFIED = new Map();
+function classify(src) {
+  let hit = CLASSIFIED.get(src);
+  if (!hit) { hit = classifySource(src); CLASSIFIED.set(src, hit); }
+  return hit;
+}
+
+/** THE ADDRESS READ — the titles of the tests in one source that will actually run. */
+const liveTitlesIn = (src) => classify(src).titles;
+
+/** Why one source was refused, so the parser door can be told apart from the grammar. */
+const parkReasonsFor = (src) => classify(src).reasons;
 
 /** THE REFUSED READ, kept executable so the tightening is PROVEN and not merely claimed:
  *  any occurrence anywhere in the file. Used only by the side-by-side control below. */
@@ -498,6 +576,11 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
   // A token no repository file carries, so a stray tree hit can never green these arms.
   const PROBE = 'ZZ-SYNTHETIC-ADDRESS-PROBE';
   const carries = (src) => titledIn(src, PROBE);
+  /** A source is only a forgery if it is a source at all — every refusal below is asserted
+   *  to PARSE, so the parser door can never be the thing doing the work by accident. */
+  const parses = (src) => !parkReasonsFor(src).some((reason) => reason.startsWith('PARSE:'));
+  const body = `\n  it('${PROBE} — a pin that never runs', () => { expect(1).toBe(2); });\n});\n`;
+  const inner = `\n  it('${PROBE} — a real body', () => {});\n});\n`;
 
   test('DOOR 1 ACCEPTS: the marker in the title of a describe / test / it that runs', () => {
     expect(carries(`  it('${PROBE} — a real pin', () => { expect(1).toBe(1); });\n`)).toBe(true);
@@ -508,23 +591,34 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     expect(carries(`  it(\`${PROBE} — templated\`, () => {});\n`)).toBe(true);
     // A modifier that still runs the test keeps the evidence.
     expect(carries(`  it.concurrent('${PROBE} — a real pin', () => {});\n`)).toBe(true);
+    // THREE POSITIONS THE FOUR TEXT CUTS ALL LOST, and the AST reads without effort. A
+    // table-driven title (the estate spells `it.each`/`test.each` 189 times), a title on a
+    // line the reader would have had to rejoin, and a call reopened after another
+    // statement — all of these RUN, and all of them are now credited.
+    expect(carries(`it.each([1])('${PROBE} — %s', () => {});\n`)).toBe(true);
+    expect(carries(`it\n  ('${PROBE} — a real pin, line-broken', () => {});\n`)).toBe(true);
+    expect(carries(`describe('a', () => {\n  it('b', () => {});\n}); it('${PROBE} — reopened', () => {});\n`)).toBe(true);
+    // …and the static SEGMENTS of an interpolated title are read, so an interpolation in
+    // the middle of a title cannot hide the marker standing beside it.
+    expect(carries(`it(\`\${prefix} ${PROBE} — interpolated\`, () => {});\n`)).toBe(true);
   });
 
   test('DOOR 1 REFUSES: a BARE COMMENT no longer flips the condition — the chair control', () => {
-    // THE EXECUTED DEFECT THIS EDIT CLOSES. Under the old `src.includes` read every one
-    // of these returned true, and a file containing only the first line read as a landed
-    // wave. The paired `mentionedIn` assertion is what makes that a proof rather than a
-    // story: the refused read still accepts them, so the two reads really differ.
+    // THE EXECUTED DEFECT THIS INSTRUMENT CLOSES. Under the old `src.includes` read every
+    // one of these returned true, and a file containing only the first line read as a
+    // landed wave. The paired `mentionedIn` assertion is what makes that a proof rather
+    // than a story: the refused read still accepts them, so the two reads really differ.
     const comment = `// ${PROBE}\n`;
     expect(carries(comment)).toBe(false);
     expect(mentionedIn(comment, PROBE)).toBe(true);
 
-    const jsdoc = ` * ${PROBE} — named in a header\n`;
+    const jsdoc = `/**\n * ${PROBE} — named in a header\n */\n`;
     expect(carries(jsdoc)).toBe(false);
     expect(mentionedIn(jsdoc, PROBE)).toBe(true);
 
-    // A `describe`/`it` spelled inside a comment is still a comment.
-    const commentedPin = ` * it('${PROBE} — what the pin will say one day')\n`;
+    // A `describe`/`it` spelled inside a comment is still a comment — and under the AST it
+    // is not merely unanchored, it does not EXIST.
+    const commentedPin = `/**\n * it('${PROBE} — what the pin will say one day')\n */\n`;
     expect(carries(commentedPin)).toBe(false);
     expect(mentionedIn(commentedPin, PROBE)).toBe(true);
 
@@ -537,18 +631,44 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     expect(carries(argument)).toBe(false);
     expect(mentionedIn(argument, PROBE)).toBe(true);
 
-    // A call reopened mid-line is refused too: door 1 is anchored at line start through
-    // whitespace, and an unrecognised spelling fails CLOSED.
-    const midLine = `}); it('${PROBE} — reopened', () => {});\n`;
-    expect(carries(midLine)).toBe(false);
-    expect(mentionedIn(midLine, PROBE)).toBe(true);
+    // A NON-STATIC title carries nothing: the marker is not in the file, it is in whatever
+    // the expression evaluates to, and this walker does not run the file.
+    const computedTitle = `it(marker, () => {});\n`;
+    expect(carries(computedTitle)).toBe(false);
   });
 
   test('DOOR 2 REFUSES: a parked pin proves as little as a comment does', () => {
-    for (const modifier of ['skip', 'todo', 'failing']) {
+    for (const modifier of ['skip', 'todo', 'failing', 'fails']) {
       const parked = `  it.${modifier}('${PROBE} — parked', () => {});\n`;
       expect(carries(parked), `it.${modifier} was credited as evidence`).toBe(false);
       expect(mentionedIn(parked, PROBE)).toBe(true);
+      expect(parses(parked)).toBe(true);
+    }
+    // The CONDITIONAL pair, whose argument is evaluated at run time. Measured both ways in
+    // a git-archive tree: `runIf(true)` ran and `runIf(false)` skipped, so neither polarity
+    // is readable from a syntax tree and both are refused.
+    for (const conditional of ['skipIf(true)', 'runIf(true)', 'skipIf(cond)', 'runIf(cond)']) {
+      const parked = `  it.${conditional}('${PROBE} — conditional', () => {});\n`;
+      expect(carries(parked), `it.${conditional} was credited as evidence`).toBe(false);
+    }
+    // …and a NON-FOCUSING modifier costs only its OWN title: the file keeps the rest.
+    const mixed = `it.skip('${PROBE} — parked', () => {});\nit('${PROBE} — live', () => {});\n`;
+    expect(liveTitlesIn(mixed)).toEqual([`${PROBE} — live`]);
+  });
+
+  test('DOOR 2 PARKS THE FILE for a test modifier outside BOTH grammars', () => {
+    // An unrecognised TEST modifier may be `only`, and `only` silences its siblings — so
+    // the fail-closed verdict is the whole file, not just that title. This is the arm that
+    // makes the test-side grammar closed rather than a skip-list.
+    for (const shape of ['only', 'onlyIf(true)', 'extend({})', 'invented']) {
+      const src = `it.${shape}('elsewhere', () => {});\ndescribe('outer', () => {${inner}`;
+      expect(carries(src), `it.${shape} did not park the file`).toBe(false);
+      expect(parses(src)).toBe(true);
+    }
+    // …and the jest-compat prefixes vitest does not export park the same way.
+    for (const word of ['xit', 'fit', 'xtest', 'ftest']) {
+      expect(carries(`${word}('elsewhere', () => {});\ndescribe('outer', () => {${inner}`),
+        `${word} did not park the file`).toBe(false);
     }
   });
 
@@ -563,60 +683,34 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     expect(carries(liveSuite)).toBe(true);
   });
 
-  test('DOOR 3 REFUSES THE EIGHTEEN ESCAPE SPELLINGS — three cuts of forgeries', () => {
-    // THE REPAIRED DEFECT, IN THREE ROUNDS, and the battery is kept whole rather than
-    // rewritten each time so that no earlier round can silently reopen. Every spelling
-    // below was CREDITED by the walker at the commit that preceded its round.
+  test('DOOR 3 REFUSES THE WHOLE ESCAPE BATTERY — four cuts of forgeries, all parseable', () => {
+    // THE BATTERY IS KEPT WHOLE rather than rewritten each time a cut lands, so that no
+    // earlier round can silently reopen. Every spelling below was CREDITED by the walker at
+    // some commit in this file's history, and every one is now a refusal.
     //
     // ROUND ONE (four): door 3 refused a file only where ONE line matched both a
     // `describe(` opener AND a literal dotted `.skip`/`.todo`/`.failing`.
     // ROUND TWO (five): the allowlist was right but read PHYSICAL lines, so the same
     // spellings walked back in with a newline inside them.
     // ROUND THREE (nine): the dangling-head join closed round two, but its head detector
-    // and the opener detector shared the character class `[^\]\n]` — a bracket that spans
-    // a physical line matched NEITHER — so an unterminated computed member walked through
-    // both. This round is the reason the fail-closed claim is now a POLARITY: the hole was
-    // not a spelling anyone forgot, it was the same blindness in the detector and in the
-    // repair meant to compensate for it.
+    // and the opener detector shared the character class `[^\]\n]`, so an unterminated
+    // computed member walked through both.
+    // ROUND FOUR (the polarity's own): the arms that were not spellings at all.
     //
-    // GROUND TRUTH, EXECUTED for round three at the previous commit in a git-archive tree —
-    // the NINE below plus the comment-interrupted tenth pinned in the polarity arm, ten
-    // plants in all, each read through the walker's own code and each then run:
-    //   • ALL TEN read `SATISFIED / satisfiable true / missing []` at that commit.
-    //   • NINE OF THE TEN ARE LIVE FORGERIES — vitest reported `Tests 1 skipped (1)` with
-    //     the pin body a deliberate `expect(1).toBe(2)`, and for the bracketed `only`,
-    //     `Test Files 1 passed (1) | Tests 1 passed | 1 skipped (2)` (the focused sibling
-    //     ran, the marker's own suite did not).
-    //   • EIGHT OF THE TEN ARE ESLINT-CLEAN, exit 0 measured per file; only the two that
-    //     break the line BEFORE the bracket opens trip `no-unexpected-multiline`. So for
-    //     eight of them no other gate in this repository would have caught anything.
-    // The bracketed `xdescribe` is the one non-forgery and is pinned as defence in depth,
-    // exactly as bare `xdescribe` is: vitest neither exports nor globals it, so that file
-    // dies loudly (`Test Files 1 failed (1) | Tests no tests`) instead of quietly crediting.
-    const body = `\n  it('${PROBE} — a pin that never runs', () => { expect(1).toBe(2); });\n});\n`;
+    // UNDER A PARSER NONE OF THESE IS A CATEGORY. They are kept because a battery that
+    // shrinks is a battery that can be reopened, and because each one is now ALSO asserted
+    // to PARSE — without that, a source refused at the parser door would look exactly like
+    // a source refused by the grammar, and this arm would be crediting the wrong door.
     const escapes = {
-      // ── ROUND ONE: one line, an unrecognised modifier ───────────────────────────
       'describe.skipIf(true)': `describe.skipIf(true)('parked by skipIf', () => {${body}`,
       "describe['skip']": `describe['skip']('parked by computed member', () => {${body}`,
       'describe . skip (spaced)': `describe . skip ('parked by spaced member', () => {${body}`,
       xdescribe: `xdescribe('parked by the x prefix', () => {${body}`,
-      // ── ROUND TWO: the SAME vocabulary, broken across PHYSICAL LINES ────────────
-      // The split-then-scan hole. All five read SATISFIED at that commit, and THREE OF THE
-      // FIVE — the `.skip`, the trailing-dot and the `.only` — are also ESLINT-CLEAN
-      // (exit 0, measured); only the `(true)` and `['skip']` continuations trip
-      // `no-unexpected-multiline`. Closed by rejoining a dangling head, not by widening a
-      // regex: the detector was generous enough about whitespace, it simply never saw the
-      // one whitespace character it was split on.
       'describe / newline / .skip(': `describe\n  .skip('parked across a line', () => {${body}`,
       'describe. / newline / skip(': `describe.\n  skip('parked across a line', () => {${body}`,
       'describe.skipIf / newline / (true)(': `describe.skipIf\n  (true)('parked across a line', () => {${body}`,
       "describe / newline / ['skip'](": `describe\n  ['skip']('parked across a line', () => {${body}`,
       'describe / newline / .only(': `describe\n  .only('focused across a line', () => {});\ndescribe('outer', () => {${body}`,
-      // ── ROUND THREE: A COMPUTED MEMBER BROKEN ACROSS PHYSICAL LINES ─────────────
-      // The bracket family. The first four walk the bracket down the file one piece at a
-      // time; the next two put the break INSIDE the member; the last three prove the route
-      // defeats the other doors too — an allowlisted modifier ahead of it, the `x` prefix,
-      // the `suite` word, and FOCUSED.
       "describe / newline / [ / newline / 'skip' / newline / ](": `describe\n[\n'skip'\n]('bracket walked down', () => {${body}`,
       "describe / newline / ['skip' / newline / ](": `describe\n['skip'\n]('bracket walked down', () => {${body}`,
       "describe[ / newline / 'skip'](": `describe[\n'skip']('the attester spelling', () => {${body}`,
@@ -626,182 +720,184 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       "xdescribe[ / newline / 'each'](": `xdescribe[\n'each']('the x prefix plus a bracket', () => {${body}`,
       "suite[ / newline / 'skip'](": `suite[\n'skip']('the suite word', () => {${body}`,
       "describe[ / newline / 'only'](": `describe[\n'only']('focused elsewhere', () => {\n  it('a sibling that really runs', () => {});\n});\ndescribe('outer', () => {${body}`,
+      'describe.runIf(true)': `describe.runIf(true)('parked by runIf', () => {${body}`,
+      'it / newline / .only(': `it\n  .only('focused elsewhere', () => {});\ndescribe('outer', () => {${body}`,
+      'describe / blank lines / .skip(': `describe\n\n\n\n\n  .skip('parked far below', () => {${body}`,
+      'describe.skipIf / newline / tagged template': `describe.skipIf\n\`t\`('tagged across a line', () => {${body}`,
+      'a suite head that never opens a suite': `  it('${PROBE} — the pin above a bare head', () => {});\ndescribe\n`,
+      'the comment-interrupted modifier': `describe/* c */.skip('comment-interrupted', () => {${body}`,
+      'a parked suite reopened after });': `describe('live', () => {\n  it('a', () => {});\n});\ndescribe.skip('parked after a close', () => {${body}`,
+      'a parked suite introduced by if (x)': `if (x) describe.skip('parked mid-line', () => {${body}`,
+      'a ternary-aliased describe.skip': `const d = COND ? describe : describe.skip;\nd('outer', () => {${body}`,
+      'a plainly-aliased describe.skip': `const d = describe.skip;\nd('outer', () => {${body}`,
     };
-    expect(Object.keys(escapes), 'an escape spelling was dropped from the arm').toHaveLength(18);
+    expect(Object.keys(escapes), 'an escape spelling was dropped from the arm').toHaveLength(28);
     for (const [spelling, src] of Object.entries(escapes)) {
       expect(carries(src), `${spelling} was credited — door 3 fails OPEN for it`).toBe(false);
+      expect(parses(src), `${spelling} was refused at the PARSER door, not by the grammar`).toBe(true);
       // …and each really is a forgery rather than a source that says nothing: the refused
       // read swallows it whole, so the two reads genuinely disagree on every one.
       expect(mentionedIn(src, PROBE), `${spelling} never carried the marker at all`).toBe(true);
     }
-    // The conditional's other polarity is refused too — this walker reads TEXT, so it can
-    // no more prove `runIf(true)` runs than it can prove `runIf(distExists)` does.
-    expect(carries(`describe.runIf(true)('parked by runIf', () => {${body}`)).toBe(false);
-    // TEST-LEVEL focus is line-broken exactly as easily, and `FOCUSED` owns `test`/`it`
-    // as well as the suite words — so the rejoin carries the same vocabulary it does.
-    // Without `test|it` in the dangling head this line credits a pin vitest never runs.
-    expect(carries(`it\n  .only('focused elsewhere', () => {});\ndescribe('outer', () => {${body}`),
-      'a line-broken it.only focused the file and the marker was still credited').toBe(false);
-    // …and BLANK LINES DO NOT END THE CHASE. This arm is here because the first draft of
-    // the rejoin carried a four-line budget, and this exact source — one expression to
-    // JavaScript, and skipped by vitest — walked through it. A line budget is how a
-    // rejoin hands the hole back.
-    expect(carries(`describe\n\n\n\n\n  .skip('parked far below', () => {${body}`),
-      'a head separated from its modifier by blank lines escaped the rejoin').toBe(false);
-    // A TAGGED-TEMPLATE continuation reaches no `(` at all, so the ONLY thing that refuses
-    // it is the polarity — an admitted token that the running grammar cannot classify.
-    expect(carries(`describe.skipIf\n\`t\`('tagged across a line', () => {${body}`),
-      'a tagged-template continuation escaped the polarity').toBe(false);
-    // A HEAD THAT NEVER RESOLVES, which is the ONE arm the EOF clause owns. `describe` on a
-    // line of its own is legal JavaScript and a legal deferral, so it escapes the immediate
-    // park — and if the file then ends, no joined form is ever classified. A scan that
-    // judged only RESOLVED forms would credit this file by saying nothing at all. Delete
-    // `if (!resolved …)` and this line reds while every other arm stays green, MEASURED.
-    expect(carries(`  it('${PROBE} — the pin above a head that never closes', () => {});\ndescribe\n`),
-      'a suite head that never closes was credited by silence').toBe(false);
-    // …and the bracketed shape of the same thing, which parks one door earlier — at
-    // ADMISSION, since `describe[` is a token the running grammar cannot classify.
-    expect(carries(`describe[\n  it('${PROBE} — the pin below an unclosed head', () => {});\n`),
-      'an unterminated computed member was credited').toBe(false);
   });
 
-  test('DOOR 3 POLARITY: the routes that are not spellings at all', () => {
-    // THE ARMS THE POLARITY BUYS OVER AND ABOVE THE BATTERY. Each of these was named as an
-    // unreachable RESIDUAL by the previous cut and each is now a refusal, because a
-    // suite-opener token that cannot be positively classified parks rather than escaping.
-    const body = `\n  it('${PROBE} — a pin that never runs', () => { expect(1).toBe(2); });\n});\n`;
-    // A MODIFIER INTERRUPTED BY A COMMENT. Executed at the previous commit: CREDITED by the
-    // instrument, `Tests 1 skipped (1)` under vitest, eslint exit 0 — a live, clean forgery.
-    expect(carries(`describe/* c */.skip('comment-interrupted', () => {${body}`),
-      'a comment between describe and its modifier escaped the polarity').toBe(false);
-    // AN OPENER SHARING ITS LINE WITH OTHER CODE, both shapes the previous cut named. The
-    // `^\s*` anchor does not reach them, so they are admitted on the PARK side alone —
-    // credit stays line-start-only, which is why this cannot become a new credit route.
-    expect(carries(`describe('live', () => {});\n}); describe.skip('parked mid-line', () => {${body}`),
-      'a reopened parked suite after }); escaped the polarity').toBe(false);
-    expect(carries(`if (x) describe.skip('parked mid-line', () => {${body}`),
-      'a parked suite introduced by if (x) escaped the polarity').toBe(false);
-    // A SUITE WORD ALIASED AT ITS BINDING. This is the residual the previous cut called
-    // prevalence-zero and the estate has ONE of; it is closed where the VALUE is taken,
-    // since the call site carries no suite word for any line reader to see.
-    expect(carries(`const d = COND ? describe : describe.skip;\nd('outer', () => {${body}`),
-      'a ternary-aliased describe.skip escaped the polarity').toBe(false);
-    expect(carries(`const d = describe.skip;\nd('outer', () => {${body}`),
-      'a plainly-aliased describe.skip escaped the polarity').toBe(false);
-    // …and every one of them really carried the marker, so none of these is a source that
-    // proves nothing.
-    for (const src of [`describe/* c */.skip('x', () => {${body}`,
-      `if (x) describe.skip('x', () => {${body}`,
-      `const d = describe.skip;\nd('x', () => {${body}`]) {
-      expect(mentionedIn(src, PROBE)).toBe(true);
+  test('DOOR 3 REFUSES THE PROVING LANE\'S NINE FORGERIES, in the three classes it found', () => {
+    // EVERY ONE OF THESE WAS EXECUTED AGAINST THE FOURTH CUT AND CREDITED BY IT: planted as
+    // a real .test.js in a git-archive tree, vitest reported `Tests 1 skipped (1)` with the
+    // pin body a deliberate `expect(1).toBe(2)`, and eslint exited 0 for seven of the nine.
+    // They are the reason this file stopped classifying text. Each is asserted to PARSE, so
+    // none of them is refused by the parser door.
+    const forgeries = {
+      // CLASS 1 — a leading block comment on the opener line. Named nowhere in the fourth
+      // cut, which pinned only a comment BETWEEN the members.
+      'a leading block comment, then describe.skip': `/* c */ describe.skip('outer', () => {${body}`,
+      'a leading block comment, then a focused sibling': `/* c */ describe.only('elsewhere', () => {});\ndescribe('outer', () => {${body}`,
+      'a leading block comment, then describe.skipIf': `/* c */ describe.skipIf(true)('outer', () => {${body}`,
+      'an indented block comment, then xdescribe': `  /*c*/ xdescribe('outer', () => {${body}`,
+      // CLASS 2 — a computed or destructured alias binding, which the fourth cut's header
+      // declared CLOSED. Its `SUITE_VALUE_BOUND` required a DOTTED chain, so every
+      // non-dotted way of taking the same modified value walked through.
+      'a computed alias binding': `const d = describe['skip'];\nd('outer', () => {${body}`,
+      'a let alias assigned a computed member': `let d;\nd = describe["skip"];\nd('outer', () => {${body}`,
+      'a destructured alias binding': `const { skip: d } = describe;\nd('outer', () => {${body}`,
+      // CLASS 3 — any line prefix outside the three-character class `[;})]` the fourth
+      // cut's mid-line arm enumerated. An enumeration is exactly what that cut claimed to
+      // have abandoned.
+      'a logical-and prefix': `true && describe.skip('outer', () => {${body}`,
+      'a void prefix': `void describe.skip('outer', () => {${body}`,
+      'a comma-operator prefix': `0, describe.skip('outer', () => {${body}`,
+      'an await prefix': `await describe.skip('outer', () => {${body}`,
+    };
+    expect(Object.keys(forgeries), 'a proven forgery was dropped from the arm').toHaveLength(11);
+    for (const [spelling, src] of Object.entries(forgeries)) {
+      expect(carries(src), `${spelling} was credited — the parse classifier fails OPEN for it`).toBe(false);
+      expect(parses(src), `${spelling} was refused at the PARSER door, not by the grammar`).toBe(true);
+      expect(mentionedIn(src, PROBE), `${spelling} never carried the marker at all`).toBe(true);
     }
   });
 
-  test('DOOR 3 POLARITY: the benign shapes it must NOT park', () => {
-    // THE ACCURACY HALF OF THE TWO NON-ANCHORED ARMS, and the reason `COMMENT_LINE` exists.
-    // `SUITE_VALUE_BOUND` and `SUITE_TOKEN_MIDLINE` are the only doors in this file that
-    // read a line anywhere rather than at its start, so they are the only ones prose can
-    // reach — and this estate writes essays in its headers. Without these three arms the
-    // alias closure would quietly park a large slice of the tree and the census would be
-    // the only thing that noticed.
-    const inner = `\n  it('${PROBE} — a real body', () => {});\n});\n`;
-    // A header sentence that happens to end a clause with the word `suite`.
-    expect(carries(` * exercised in the domain suite. This\ndescribe('outer', () => {${inner}`),
-      'a prose full stop after the word suite parked a live file').toBe(true);
-    // A MULTI-LINE vitest import, whose continuation line is nothing but `describe,`.
+  test('DOOR 3 PARSER DOOR: a file this walker cannot parse parks WHOLE', () => {
+    // FAIL-CLOSED AT THE PARSER, and pinned as its own door because it is the one refusal
+    // the grammar has no part in. A source that does not parse cannot be classified, and an
+    // unclassifiable file is exactly the file whose titles must not be believed.
+    const unterminated = `describe[\n  it('${PROBE} — the pin below an unclosed head', () => {});\n`;
+    expect(carries(unterminated)).toBe(false);
+    expect(parkReasonsFor(unterminated).some((r) => r.startsWith('PARSE:')),
+      'an unparseable source was refused for some other reason').toBe(true);
+
+    const truncated = `describe('outer', () => {\n  it('${PROBE} — a pin', () => {});\n`;
+    expect(carries(truncated)).toBe(false);
+    expect(parkReasonsFor(truncated).some((r) => r.startsWith('PARSE:'))).toBe(true);
+
+    // …and the parser door is not swallowing the estate: every real test file parses.
+    const unparseable = TEST_FILES.filter(({ src }) => parkReasonsFor(src).some((r) => r.startsWith('PARSE:')));
+    expect(unparseable.map(({ rel }) => rel), 'a real estate test file failed to parse').toEqual([]);
+  });
+
+  test('DOOR 3 BINDINGS: a suite word bound to a name is opaque, and an ambiguous file parks', () => {
+    // A BINDING IS WHERE THE SUITE WORD IS STILL VISIBLE, and the AST makes every spelling
+    // of it one shape: declaration, destructure, parameter, non-vitest import.
+    expect(carries(`const describe = shim.skip;\ndescribe('outer', () => {${inner}`),
+      'the global suite word was rebound and the file was still credited').toBe(false);
+    expect(carries(`import { describe } from './shim.js';\ndescribe('outer', () => {${inner}`),
+      'a suite word imported from a shim was credited').toBe(false);
+    expect(carries(`function open(describe) {\n  describe('outer', () => {${inner}}\nopen(realDescribe);\n`),
+      'a suite word taken as a parameter was credited').toBe(false);
+    // …AND THE OTHER POLARITY, which is what stops this from parking the estate: a suite
+    // word used as an ORDINARY NAME, with no suite ever opened through it, is opaque rather
+    // than fatal. One estate file does exactly this — `for (const suite of MONEY_PATH_DENO_SUITES)`
+    // in tests/edgeFunctions/contracts.test.js — and its 225 titles survive.
+    expect(carries(`for (const suite of paths) {\n  it(\`${PROBE} \${suite}\`, () => {});\n}\n`),
+      'a loop variable that happens to be called `suite` parked a live file').toBe(true);
+  });
+
+  test('DOOR 3 CREDIT-BACK: the two benign reference positions, and nothing else', () => {
+    // THE ACCURACY HALF OF THE POLARITY. Enumeration is safe HERE and fatal on the park
+    // side, so the credit-back list is exactly two entries and each is pinned alone.
+    // (1) A vitest import specifier. Without it the polarity parks the whole tree — the
+    // executed mutant moves the estate census from 93 parked files to 2,312.
     expect(carries(`import {\n  describe,\n  expect,\n  it,\n} from 'vitest';\ndescribe('outer', () => {${inner}`),
       'a multi-line vitest import parked a live file').toBe(true);
-    // The BARE-value binding the estate really uses — four files wire eslint's RuleTester
-    // this way. A bare value can only ever alias a suite that RUNS, so parking it would buy
-    // nothing and cost four files their marker rights.
+    expect(carries(`import { describe, it } from 'vitest';\ndescribe('outer', () => {${inner}`),
+      'a single-line vitest import parked a live file').toBe(true);
+    // (2) A BARE suite value on a member target — four estate files wire eslint's RuleTester
+    // this way. A bare value can only ever alias a suite that RUNS. Mutant: delete the
+    // clause and those four files park (93 to 97, measured).
     expect(carries(`RuleTester.describe = describe;\nRuleTester.it = it;\ndescribe('outer', () => {${inner}`),
       'the RuleTester binding parked a live file').toBe(true);
+    // …and the MODIFIED form of the same shape is NOT credited back, which is what keeps
+    // entry (2) from being a hole the size of the alias class.
+    expect(carries(`RuleTester.describe = describe.skip;\ndescribe('outer', () => {${inner}`),
+      'a MODIFIED suite value on a member target was credited back').toBe(false);
+    // …and prose is not a category at all any more: a header sentence ending in the word
+    // `suite`, which the fourth cut needed a whole COMMENT_LINE guard to survive, is simply
+    // not in the tree.
+    expect(carries(`/**\n * exercised in the domain suite. This\n */\ndescribe('outer', () => {${inner}`),
+      'a prose full stop after the word suite parked a live file').toBe(true);
   });
 
-  test('DOOR 3 REJOIN: a head broken across lines is still read for what it IS', () => {
-    // THE ACCURACY HALF, without which the rejoin could be parking every line-broken
-    // suite in the estate and every arm above would still be green. A `describe` whose
-    // opening paren or whose unconditional modifier merely sits on the next line RUNS,
-    // and vitest agrees — both of these were executed and reported `Tests 1 passed (1)`.
-    const inner = `\n  it('${PROBE} — a real body', () => {});\n});\n`;
-    expect(carries(`describe\n  ('outer', () => {${inner}`),
-      'a bare describe with its paren on the next line was parked, but it runs').toBe(true);
-    expect(carries(`describe\n  .concurrent('outer', () => {${inner}`),
-      'a line-broken describe.concurrent was parked, but it runs').toBe(true);
-    // The join is ADDITIVE — the physical lines are still scanned — so a file that was
-    // already parked on a physical line stays parked no matter what follows it.
-    expect(carries(`describe.skip('outer', () => {${inner}`)).toBe(false);
-    // …and ADDITIVE is load-bearing rather than a word in a comment. Here the rejoin
-    // welds a bare `describe` onto the real opener beneath it and produces
-    // `describedescribe.skip(`, which matches NOTHING; the refusal survives only because
-    // the physical line is still in the scan. Substitute the joined forms for the lines
-    // they came from — the natural way to write this repair — and this file's refusal
-    // dissolves. `describe` on its own line is a complete statement, so the source below
-    // is exactly as legal as the forgeries above it.
-    expect(carries(`describe\ndescribe.skip('outer', () => {${inner}`),
-      'a rejoin that CONSUMED its lines let a real parked opener out of the scan')
-      .toBe(false);
-    // DOORS 1 AND 2 KEEP THEIR PHYSICAL-LINE ANCHORS, and that is the fail-closed
-    // direction: a line-broken TEST head loses its title rather than gaining one. This
-    // understates evidence (the pin below really runs) and is pinned so the day someone
-    // rejoins door 1's input as well, they meet a decision rather than a surprise.
-    expect(carries(`it\n  ('${PROBE} — a real pin, line-broken', () => {});\n`)).toBe(false);
-  });
-
-  test('DOOR 3 ALLOWLIST: only a suite PROVEN to run keeps its titles', () => {
-    // The positive half, without which the door could be refusing everything and every
-    // arm above would still be green. Bare openers and the unconditional modifiers run.
-    const inner = `\n  it('${PROBE} — a real body', () => {});\n});\n`;
+  test('DOOR 3 RUNNING GRAMMAR: only a suite MEASURED to run keeps its titles', () => {
+    // The positive half, without which the door could be refusing everything and every arm
+    // above would still be green. Every opener here was RUN under vitest 4.1.8 in a
+    // git-archive tree and reported a passing leaf.
     for (const opener of ['describe(', 'suite(', 'describe.concurrent(', 'describe.sequential(',
-      'describe.shuffle(', 'describe.each([1])(']) {
+      'describe.shuffle(', 'describe.each([1])(', 'describe.for([1])(']) {
       expect(carries(`${opener}'outer', () => {${inner}`), `${opener} was parked but it runs`)
         .toBe(true);
     }
-    // …and the allowlist is CLOSED, not a substring test: an unknown-but-plausible
-    // modifier parks, which is the fail-closed direction.
+    // A head broken across lines, or interrupted by a comment, is the SAME head to a parser.
+    expect(carries(`describe\n  ('outer', () => {${inner}`)).toBe(true);
+    expect(carries(`describe\n  .concurrent('outer', () => {${inner}`)).toBe(true);
+    expect(carries(`describe/* c */.concurrent('outer', () => {${inner}`)).toBe(true);
+    // …and the grammar is CLOSED, not a substring test: an unknown-but-plausible modifier
+    // parks, a computed member parks, and a chain that mixes a running modifier with a
+    // conditional one parks.
     expect(carries(`describe.eachly('outer', () => {${inner}`)).toBe(false);
     expect(carries(`describe.concurrent.skipIf(x)('outer', () => {${inner}`)).toBe(false);
-    // THE ALLOWLIST'S REACH, PINNED ON BEHAVIOUR RATHER THAN ON THE SHAPE OF ITS MEMBERS.
-    // The previous cut pinned that every member is a bare identifier, reasoning that a
-    // computed or space-broken access therefore could not produce one and so would park.
-    // True, but it pinned a CONSTANT where the question is about a VERDICT — so this loop
-    // drives the real read instead: the same modifier, credited tightly dotted and refused
-    // in the two access forms the previous cuts leaked.
-    // TWO LOCKS HOLD THESE, AND THE ARM IS HONEST ABOUT PINNING THEM AS A PAIR. The grammar
-    // cannot capture a bracket or a space, and `chainModifiers` would not recognise the
-    // token if it did. Opening either alone changes nothing — both single mutants ran 21
-    // passed, MEASURED — so no assertion here can be attributed to one lock. Opening BOTH
-    // (a grammar that captures `['concurrent']` plus a split that unwraps it) reds this arm,
-    // and that joint mutant is what makes the pair load-bearing rather than decorative.
     for (const mod of RUNNING_SUITE_MODIFIERS) {
-      expect(carries(`describe.${mod}('outer', () => {${inner}`),
-        `describe.${mod} is on the allowlist but was parked`).toBe(true);
+      const opened = TABLE_MODIFIERS.has(mod) ? `describe.${mod}([1])(` : `describe.${mod}(`;
+      expect(carries(`${opened}'outer', () => {${inner}`),
+        `describe.${mod} is in the running grammar but was parked`).toBe(true);
       expect(carries(`describe['${mod}']('outer', () => {${inner}`),
         `a COMPUTED describe['${mod}'] was credited — the grammar admits brackets`).toBe(false);
-      expect(carries(`describe . ${mod} ('outer', () => {${inner}`),
-        `a SPACE-BROKEN describe . ${mod} was credited — the grammar admits spaces`).toBe(false);
     }
-    // Focus parks the file at BOTH levels: `only` runs its own block by silencing the
-    // siblings, so a title outside it is exactly as unexecuted as one in a skipped suite.
-    expect(carries(`describe.only('elsewhere', () => {});\ndescribe('outer', () => {${inner}`))
-      .toBe(false);
-    expect(carries(`it.only('elsewhere', () => {});\ndescribe('outer', () => {${inner}`))
-      .toBe(false);
-    expect(carries(`fdescribe('elsewhere', () => {});\ndescribe('outer', () => {${inner}`))
-      .toBe(false);
-    // `fit` is the ONE spelling FOCUSED's `f(describe|it)` arm uniquely owns — `fdescribe`
-    // is caught a second time by the detector's own `x|f` prefix. Without this line that
-    // arm was a guard that could not fire: deleting it left all 18 arms green, MEASURED,
-    // which is exactly how door 4's first cut failed one commit ago. Neither `fit` nor
-    // `fdescribe` exists in vitest, so both are defence in depth, not closed holes.
-    expect(carries(`fit('elsewhere', () => {});\ndescribe('outer', () => {${inner}`))
-      .toBe(false);
+    // A TABLE MODIFIER WITHOUT ITS CALL REGISTERS NOTHING, and this is the arm that says so.
+    // `describe.each('outer', fn)` returns a function and opens no suite at all; crediting
+    // its first argument as a title would be a credited suite that vitest never ran.
+    for (const mod of ['each', 'for']) {
+      expect(carries(`describe.${mod}('outer', () => {${inner}`),
+        `describe.${mod} without its table call was credited, but it opens no suite`).toBe(false);
+      expect(carries(`it.${mod}('${PROBE} — never registered', () => {});\n`),
+        `it.${mod} without its table call was credited, but it registers no test`).toBe(false);
+    }
+    // Focus parks the file at BOTH levels — MEASURED: in a git-archive tree a
+    // `describe.only` left its SAME-FILE sibling `↓ skipped` while a neighbouring file ran
+    // whole, so focus is a file-scope fact exactly as a parked suite is.
+    expect(carries(`describe.only('elsewhere', () => {});\ndescribe('outer', () => {${inner}`)).toBe(false);
+    expect(carries(`it.only('elsewhere', () => {});\ndescribe('outer', () => {${inner}`)).toBe(false);
+    expect(carries(`fdescribe('elsewhere', () => {});\ndescribe('outer', () => {${inner}`)).toBe(false);
+    expect(carries(`fit('elsewhere', () => {});\ndescribe('outer', () => {${inner}`)).toBe(false);
     // The estate's own dominant conditional spelling parks 93 of 2,314 files under this
-    // repair (92 before it, plus the one alias file the polarity now reaches), and the one
-    // file that actually carries a marker is not among them — asserted, not assumed.
+    // rule, and the one file that actually carries a marker is not among them — asserted,
+    // not assumed.
     expect(carries(`describe.runIf(distExists)('outer', () => {${inner}`)).toBe(false);
     expect(filesTitling('SP-B2-LEG-SUPPLY-EVIDENCE'))
       .toEqual(['tests/domain/sovereigntyMarketStageWr10w.test.js']);
+  });
+
+  test('THE CENSUS FLOOR: admission is not anchored — most of the estate is CREDITED', () => {
+    // THE CHAIR'S OWN STATED VERIFICATION, PINNED PERMANENTLY RATHER THAN RUN ONCE. If the
+    // credit-back list is deleted, or admission ever becomes narrow again, this collapses:
+    // the measured mutant that removes the vitest-import credit-back moves the estate from
+    // 93 parked files to 2,312, and this floor reds on the first one of them.
+    const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
+    expect(TEST_FILES.length - parked.length,
+      'the credited-file count collapsed — admission is anchored again').toBeGreaterThan(2000);
+    // …and the park side has not collapsed the other way into crediting everything: the
+    // estate really does hold parked files, and they are the conditional-suite ones.
+    expect(parked.length, 'nothing parks any more — the polarity has inverted').toBeGreaterThan(50);
+    expect(parked.length, 'the parked set has grown past the conditional-suite family')
+      .toBeLessThan(200);
   });
 
   test('DOOR 4: this walker is excluded, and does not depend on that exclusion', () => {
@@ -812,8 +908,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     expect(filesTitling(PROBE)).toEqual([]);
     expect(filesMentioning(PROBE)).toEqual([]);
     // Braces: the exclusion is not what holds the line TODAY. This file never spells a
-    // live marker in a title, so door 1 would refuse it even with the exclusion gone —
-    // MEASURED, by deleting the exclusion and finding this file's other arms all green.
+    // live marker in a title, so door 1 would refuse it even with the exclusion gone.
     for (const row of SOVEREIGNTY_LIGHTING_EVIDENCE) {
       if (row.kind !== 'TEST_MARKER') continue;
       expect(liveTitlesIn(self.src).some((title) => title.includes(row.marker)),
@@ -833,6 +928,12 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       expect(filesTitling(row.marker, [{ ...selfCorpus[0], rel: 'tests/domain/other.test.js' }]))
         .toEqual(['tests/domain/other.test.js']);
     }
+    // …and the walker's own titles are READ rather than lost: under the four text cuts this
+    // file parked itself on the escape spellings quoted in its own arms, which meant door 4
+    // was being held up by an accident. The parser sees those spellings as STRINGS, so this
+    // file is credited like any other and the exclusion is doing the work alone.
+    expect(liveTitlesIn(self.src).length, 'the walker reads none of its own titles')
+      .toBeGreaterThan(10);
   });
 
   test('THE MUTANT: `measure` driven on a FORGED corpus refuses it and accepts a real pin', () => {
@@ -848,6 +949,14 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
         .toBe(false);
       // …and the forgery IS a forgery: the refused read swallows it whole.
       expect(filesMentioning(row.marker, forged)).toHaveLength(1);
+
+      // …and a PARKED-SUITE forgery, which is the shape four cuts of this door leaked.
+      const parkedForgery = [{
+        rel: 'tests/domain/parkedEvidence.test.js',
+        src: `describe.skip('outer', () => {\n  it('${row.marker} — parked', () => {});\n});\n`,
+      }];
+      expect(measure(row, parkedForgery), `${row.wave}'s evidence can be forged by a parked suite`)
+        .toBe(false);
 
       const real = [{
         rel: 'tests/domain/realEvidence.test.js',
