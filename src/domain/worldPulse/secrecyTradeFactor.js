@@ -169,7 +169,15 @@ export function secrecyTradeBandOf(secrecy01) {
 export function secrecyTradeFactorOf(worldState, settlementId) {
   // THE FLAG, not the ledger — a dark layer leaves stale postures standing (see header).
   if (!infoStatecraftActive(/** @type {never} */ (worldState))) return UNHINDERED;
-  const postures = asObject(getSpatialLedger(worldState, 'secrecyPostures'));
+  // ES-1 REPAIR R2 — NARROWED, NOT CAST. This module's parameter is `unknown` and
+  // `getSpatialLedger` asks for `Record<string, unknown> | null | undefined`, which was
+  // this file's one strict error (TS2345). The module's OWN total narrower closes it, and
+  // it is behaviour-identity rather than a silencer: `asObject` hands a plain object
+  // straight through by reference, and for every other input hands back `{}`, whose
+  // `spatialLedgers` lookup makes `spatialLedgerNamespace` return null — the same null a
+  // raw non-object produced — so `getSpatialLedger` still answers `undefined` and the
+  // identity reading below is unchanged on every path.
+  const postures = asObject(getSpatialLedger(asObject(worldState), 'secrecyPostures'));
   const level = asObject(postures[String(settlementId)]).level01;
   const band = secrecyTradeBandOf(level);
   const factor01 = SECRECY_TRADE_TUNING.BAND_FACTORS[SECRECY_TRADE_BANDS.indexOf(band)];
