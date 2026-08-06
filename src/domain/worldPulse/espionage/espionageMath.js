@@ -52,8 +52,17 @@ import { ROADS_TUNING, embassyEnvoyWeight01, factionPowerStanding01, roadsImport
 // and this file BORROWS. Authoring a second `3` and a second demand list here was the
 // arrangement ES-0 landed with, and it would have let the normalizer refuse a fourth stop
 // while `legStack` happily priced one — a disagreement exactly one integer wide.
+// ES-3 extends that same borrow to the two words the GRADIENT's DTO matches against: the
+// tap vocabulary and the rooted re-sample cap. Both are row facts before they are
+// arithmetic facts — `normalizeCovertMission` refuses a persisted partial whose tap is not
+// in the list and a gradient longer than the cap allows — so the errand vocabulary owns the
+// mint and this file re-exposes it. Authoring a second tap list here would have let the
+// ramp price an interval the ledger cannot hold, which is a disagreement exactly one
+// interval wide and invisible until a save file crossed it.
 import {
   ENVOY_COVERT_DEMANDS,
+  ENVOY_COVERT_TAPS,
+  MAX_COVERT_DWELL_RESAMPLES,
   MAX_COVERT_ITINERARY_STOPS,
 } from '../envoyErrandVocabulary.js';
 import { readCorruptionClimate } from '../../corruption.js';
@@ -78,9 +87,13 @@ function round4(value) {
  * deliberately NOT the sort order — a consumer that needs depth must use
  * `TAP_DEPTH`, never the array index, or it will rank an open visitor's hearsay above
  * an embedded agent's read.
+ *
+ * ES-3: this is the errand vocabulary's `ENVOY_COVERT_TAPS` — the SAME frozen array, not a
+ * copy — for the reason `DEMAND_BANDS` gives below. The persistence DTO matches a gathered
+ * partial's tap against it, so the row owns the mint.
  * @type {ReadonlyArray<string>}
  */
-export const TAP_LEVELS = Object.freeze(['beliefs', 'delta', 'performance']);
+export const TAP_LEVELS = ENVOY_COVERT_TAPS;
 
 /** The depth order the words carry. Higher is deeper access. */
 export const TAP_DEPTH = Object.freeze({ performance: 0, beliefs: 1, delta: 2 });
@@ -151,7 +164,9 @@ export const ESPIONAGE_TUNING = Object.freeze({
   // §3.4b THE ROOTED DWELL. Monotone, and the hard cap is a backstop: the soft bound
   // (gather-or-govern) must bind first on every reachable input, or the cap is a dead band.
   DWELL_RAMP: Object.freeze([1, 1.25, 1.6, 2.1]),
-  DWELL_RESAMPLE_CAP: 6,
+  // ES-3: the errand vocabulary's `MAX_COVERT_DWELL_RESAMPLES`, re-exposed rather than
+  // re-authored — the gradient's LENGTH is what the persistence DTO bounds.
+  DWELL_RESAMPLE_CAP: MAX_COVERT_DWELL_RESAMPLES,
 
   // §3.7 THE GRADIENT.
   SECONDHAND_CAP: 0.75,

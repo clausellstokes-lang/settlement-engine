@@ -30,12 +30,15 @@ import {
 } from './negotiationPictures.js';
 import {
   CONTINUATION_KEYS,
+  COVERT_GATHERED_KEYS,
+  COVERT_GATHERED_SENT_KEYS,
   COVERT_KEYS,
   COVERT_DEMAND_SET,
   COVERT_FACE_SET,
   COVERT_LEG_REF_SET,
   COVERT_PRODUCT_SET,
   COVERT_STOP_KEYS,
+  COVERT_TAP_SET,
   ENCOUNTER_KEYS,
   ENCOUNTER_KIND_SET,
   ENCOUNTER_RESOLUTION_SET,
@@ -47,6 +50,7 @@ import {
   EVIDENCE_KIND_SET,
   JOURNEY_SET,
   LOSS_CAUSE_SET,
+  MAX_COVERT_GATHERED,
   MAX_COVERT_ITINERARY_STOPS,
   MAX_ENVOY_ENCOUNTER_HISTORY,
   MAX_ENVOY_RUMOR_REFS,
@@ -354,12 +358,23 @@ export function errandSpineBlock(row, purpose) {
  * hands the spine a five-stop itinerary has a bug the estate should hear about. So this
  * returns both halves of one answer: the record, and why there isn't one.
  *
- * ⚠ THE KEY GUARD IS A TRIPWIRE FOR THE NEXT TWO WAVES, DELIBERATELY LOUD. `gathered`
- * (ES-3) and `standoff` (ES-2) are not in `COVERT_KEYS` yet, so a sub-record carrying
- * either is REFUSED here rather than silently trimmed. Silent trimming is the ghost-write
- * class: an amender writes the gradient, the next persist erases it, and both halves look
- * correct in isolation. A wave that mints a new key teaches `COVERT_KEYS` and this
- * function in the SAME COMMIT, or its own tests red at the first round-trip.
+ * ⚠ THE KEY GUARD IS THE TRIPWIRE, AND ES-3 PAID IT. `gathered` and `standoff` joined
+ * `COVERT_KEYS` in the commit that first WROTE them, which is exactly what the ES-1
+ * spelling of this comment demanded. The discipline it recorded still binds every later
+ * wave: a sub-record carrying a key this list does not know is REFUSED rather than
+ * silently trimmed, because silent trimming is the ghost-write class — an amender writes
+ * the gradient, the next persist erases it, and both halves look correct in isolation.
+ *
+ * ⚠ THE GRADIENT IS BOUNDED BY THE DTO, NOT BY THE AMENDER'S GOOD MANNERS. §3.4b's soft
+ * bound (gather-or-govern) is what SHOULD end a rooted stay; `MAX_COVERT_GATHERED` is the
+ * backstop the ledger itself enforces — three stops, each with its minted stay plus its
+ * rooted re-samples. That number is DERIVED from the two caps rather than authored, so a
+ * wave that widens either cannot leave this bound behind.
+ *
+ * ⚠ `sentHome` IS ADMITTED ONLY AS `true`, AND THAT IS THE LOSE-THE-SPY RULE'S ONE DOOR.
+ * It marks a partial magic already carried home (addition E). `false` is not a lawful
+ * value — the ABSENCE is the negative (T4: a key is a byte) — and a forged import claiming
+ * everything already landed is refused here rather than believed at the home mouth.
  *
  * TOTAL ON GARBAGE: any shape at all produces a reason, never a throw.
  *
@@ -414,16 +429,84 @@ export function normalizeCovertMission(raw) {
     }
     legRefs = [...refs].sort(compareCodepoint);
   }
+  const gathering = normalizeCovertGathering(row.gathered);
+  if (gathering.reason !== 'gathered') return { covert: null, reason: gathering.reason };
+  // §3.4's addition D. Present-and-true or absent; `standoff: false` is a forged shape,
+  // not a mission that reached its target, and it is refused rather than coerced.
+  if (row.standoff !== undefined && row.standoff !== true) {
+    return { covert: null, reason: 'invalid_standoff' };
+  }
   return {
     covert: {
       demand,
+      ...(gathering.gathered ? { gathered: gathering.gathered } : {}),
       itinerary,
       ...(legRefs ? { legRefs } : {}),
       product,
+      ...(row.standoff === true ? { standoff: /** @type {true} */ (true) } : {}),
       subjectId,
     },
     reason: 'covert',
   };
+}
+
+/**
+ * ES-3 — THE GRADIENT'S OWN DTO ARM (§3.7). Path-dependent accrual is the ONE thing the
+ * canonical model could not derive, so it is row state, and row state is validated on the
+ * way out of a save file exactly as strictly as on the way in.
+ *
+ * ORDER IS PRESERVED, NEVER SORTED. `gathered` is an APPEND LOG: the order is the order
+ * the reads were taken in, and sorting it would destroy the one fact it carries that its
+ * fields do not. Preservation is idempotent, so the round-trip is byte-stable either way —
+ * the difference is only whether the record still means anything.
+ *
+ * @param {unknown} raw
+ * @returns {{gathered: Array<Record<string, unknown>>|null, reason: string}}
+ */
+function normalizeCovertGathering(raw) {
+  if (raw == null) return { gathered: null, reason: 'gathered' };
+  if (!Array.isArray(raw) || !raw.length || raw.length > MAX_COVERT_GATHERED) {
+    return { gathered: null, reason: 'invalid_gathered' };
+  }
+  /** @type {Array<Record<string, unknown>>} */
+  const out = [];
+  for (const entry of raw) {
+    const partial = asObject(entry);
+    const subjectId = strictText(partial.subjectId);
+    const tap = text(partial.tap);
+    const atTick = wholeTick(partial.atTick);
+    const cap = unitNumber(partial.accuracyCap01);
+    const sent = partial.sentHome;
+    const shapeOk = sent === undefined
+      ? hasExactKeys(partial, COVERT_GATHERED_KEYS)
+      : sent === true && hasExactKeys(partial, COVERT_GATHERED_SENT_KEYS);
+    if (!subjectId || !COVERT_TAP_SET.has(tap) || atTick == null || cap == null || !shapeOk) {
+      return { gathered: null, reason: 'invalid_gathered' };
+    }
+    out.push({
+      accuracyCap01: cap,
+      atTick,
+      subjectId,
+      tap,
+      ...(sent === true ? { sentHome: /** @type {true} */ (true) } : {}),
+    });
+  }
+  return { gathered: out, reason: 'gathered' };
+}
+
+/**
+ * A finite number already inside [0,1], VERBATIM — or null. Deliberately not a clamp and
+ * deliberately not a rounder: this is a persistence gate, and a gate that repaired an
+ * out-of-range cap would let a writer's arithmetic bug persist as a plausible number. The
+ * ROUNDING is the writer's (`round4` at the gathering site), so a value that arrives here
+ * unrounded round-trips unchanged and the byte-stability pin measures the writer, not a
+ * second opinion held by the reader.
+ * @param {unknown} value @returns {number|null}
+ */
+function unitNumber(value) {
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 1
+    ? value
+    : null;
 }
 
 /** @param {unknown} raw @returns {Record<string, unknown>|null} */

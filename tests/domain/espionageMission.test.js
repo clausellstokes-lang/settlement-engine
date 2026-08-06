@@ -277,8 +277,13 @@ describe('ES-1 the sub-record normalizer — one validation, two answers, total 
       ['absent', undefined],
       ['absent', null],
       ['invalid_covert_keys', {}],
-      ['invalid_covert_keys', mission({ standoff: true })],
-      ['invalid_covert_keys', mission({ gathered: [] })],
+      // ⏱ RE-AIMED AT ES-3 (2026-08-06). These two rows read `standoff` and `gathered`,
+      // which ES-3 TAUGHT the key set in the commit that first wrote them — which is what
+      // the tripwire below demanded of it. The rows now aim at a key nobody has minted, so
+      // the guard still measures the KEY SET rather than two particular words, and the two
+      // taught keys have their own reasons three rows down.
+      ['invalid_covert_keys', mission({ escort: true })],
+      ['invalid_covert_keys', mission({ tap: 'beliefs' })],
       ['invalid_itinerary', mission({ itinerary: [] })],
       ['invalid_itinerary', mission({ itinerary: 'irontown' })],
       ['invalid_itinerary', mission({ itinerary: [{ face: 'sideways', settlementId: 'a', stayTicks: 1 }] })],
@@ -300,6 +305,24 @@ describe('ES-1 the sub-record normalizer — one validation, two answers, total 
       ['invalid_leg_refs', mission({ product: 'acquire', legRefs: [] })],
       ['invalid_leg_refs', mission({ product: 'acquire', legRefs: ['tierBand', 'tierBand'] })],
       ['invalid_leg_refs', mission({ legRefs: ['tierBand'] })],
+      // ES-3's two taught keys, each with its OWN reason. A shared `invalid_covert_keys`
+      // would have told a writer only that something was wrong with a record it had just
+      // built correctly except for one field.
+      ['invalid_gathered', mission({ gathered: [] })],
+      ['invalid_gathered', mission({ gathered: 'beliefs' })],
+      ['invalid_gathered', mission({
+        gathered: [{ accuracyCap01: 0.5, atTick: 4, subjectId: 'irontown', tap: 'hearsay' }],
+      })],
+      ['invalid_gathered', mission({
+        gathered: [{ accuracyCap01: 1.5, atTick: 4, subjectId: 'irontown', tap: 'beliefs' }],
+      })],
+      ['invalid_gathered', mission({
+        gathered: [{
+          accuracyCap01: 0.5, atTick: 4, subjectId: 'irontown', tap: 'beliefs', sentHome: false,
+        }],
+      })],
+      ['invalid_standoff', mission({ standoff: false })],
+      ['invalid_standoff', mission({ standoff: 1 })],
     ];
     for (const [reason, cargo] of cases) {
       const read = normalizeCovertMission(cargo);
@@ -308,7 +331,7 @@ describe('ES-1 the sub-record normalizer — one validation, two answers, total 
     }
     // NON-VACUITY: every reason above is DISTINCT, so the table measures a discriminating
     // validation rather than one that collapses every wrong into a single word.
-    expect(new Set(cases.map(([reason]) => reason)).size).toBe(8);
+    expect(new Set(cases.map(([reason]) => reason)).size).toBe(10);
   });
 
   test('total on garbage: no shape throws, and none of them produces a record', () => {
@@ -318,16 +341,53 @@ describe('ES-1 the sub-record normalizer — one validation, two answers, total 
     }
   });
 
-  test('⚠ THE ES-2/ES-3 TRIPWIRE: an unknown key is REFUSED, never silently trimmed', () => {
-    // The ghost-write class, foreclosed. If ES-2's amender writes `standoff` without
+  test('⚠ THE UNKNOWN-KEY TRIPWIRE: an unminted key is REFUSED, never silently trimmed', () => {
+    // The ghost-write class, foreclosed. If a wave's amender writes a field without
     // teaching COVERT_KEYS in the same commit, the round-trip below reds loudly instead of
-    // erasing the field on the next persist while both halves look correct alone.
-    for (const key of ['standoff', 'gathered', 'tap', 'anythingElse']) {
+    // erasing the field on the next persist while both halves look correct alone. ES-3 is
+    // the wave that PAID this: `standoff` and `gathered` are gone from the list below and
+    // present in the acceptance pin under it.
+    for (const key of ['tap', 'escort', 'legs', 'anythingElse']) {
       expect(normalizeCovertMission({ ...mission(), [key]: 1 }).reason).toBe('invalid_covert_keys');
     }
     // ...and the SAME cargo without the unknown key is accepted, so the guard above is a
     // measurement of the key set rather than a rejection of everything.
     expect(normalizeCovertMission(mission()).reason).toBe('covert');
+  });
+
+  test('ES-3: the two taught keys ROUND-TRIP, and the gradient keeps its authored ORDER', () => {
+    // The acceptance half of the tripwire above. A gradient is an APPEND LOG and its order
+    // is the only fact its fields do not carry, so the normalizer must preserve it — a
+    // sorted round-trip would pass a key-set pin while destroying the record's meaning.
+    const gathered = [
+      { accuracyCap01: 0.75, atTick: 9, subjectId: 'irontown', tap: 'performance' },
+      { accuracyCap01: 0.4, atTick: 4, subjectId: 'irontown', tap: 'beliefs', sentHome: true },
+      { accuracyCap01: 1, atTick: 12, subjectId: 'irontown', tap: 'delta' },
+    ];
+    const read = normalizeCovertMission(mission({ gathered, standoff: true }));
+    expect(read.reason).toBe('covert');
+    expect(read.covert).toEqual({
+      demand: 'confirm',
+      gathered,
+      itinerary: [{ face: 'declared', settlementId: 'irontown', stayTicks: 2 }],
+      product: 'confirm',
+      standoff: true,
+      subjectId: 'irontown',
+    });
+    // BYTE-STABLE, and measured as bytes rather than as deep equality: the second pass over
+    // the first pass's OWN output must serialize identically, which is what a save file
+    // reloaded twice actually does.
+    expect(JSON.stringify(normalizeCovertMission(read.covert).covert))
+      .toBe(JSON.stringify(read.covert));
+    // The DTO's own backstop: 3 stops x (1 minted stay + 6 rooted re-samples) = 21, and one
+    // more than that is refused. The bound is derived, so this asserts the derivation too.
+    const partial = { accuracyCap01: 0.5, atTick: 1, subjectId: 'irontown', tap: 'beliefs' };
+    expect(normalizeCovertMission(mission({
+      gathered: Array.from({ length: 21 }, () => ({ ...partial })),
+    })).reason).toBe('covert');
+    expect(normalizeCovertMission(mission({
+      gathered: Array.from({ length: 22 }, () => ({ ...partial })),
+    })).reason).toBe('invalid_gathered');
   });
 });
 
@@ -385,7 +445,11 @@ describe('ES-1 the mint — named refusals, and a face a covert row cannot go wi
     expect(refuse({}, mission({ demand: 'absolutely' }))).toBe('invalid_demand');
     expect(refuse({}, mission({ subjectId: '' }))).toBe('invalid_subject');
     expect(refuse({}, mission({ product: 'acquire', legRefs: ['pullBand'] }))).toBe('invalid_leg_refs');
-    expect(refuse({}, mission({ standoff: true }))).toBe('invalid_covert_keys');
+    expect(refuse({}, mission({ escort: true }))).toBe('invalid_covert_keys');
+    // ES-3's two taught keys refuse BY THEIR OWN NAME at the mint too — the persist side
+    // heals a malformed sub-record to absent, and the mint side must say what was wrong.
+    expect(refuse({}, mission({ standoff: false }))).toBe('invalid_standoff');
+    expect(refuse({}, mission({ gathered: [] }))).toBe('invalid_gathered');
     // R-ES1-1 made loud: no war purpose underneath means no face to wear, and a faceless
     // covert row is a veil leak rather than a merely incomplete one.
     expect(refuse({ purpose: '' }, mission())).toBe('covert_face_required');

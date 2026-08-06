@@ -211,6 +211,83 @@ export const ES2_GAUNTLET_TRANSIT_CURSOR_COUPLING = couplingRow({
   intendedDesk: 'war',
 });
 
+/**
+ * ES-3 / GRAMMAR→INFO. THE GRADIENT IS AMENDED ONTO THE ERRAND ROW, THROUGH ITS OWN WRITER.
+ *
+ * This is the ESPIONAGE volume's first WRITE into a GRAMMAR-owned ledger, and the shape of
+ * it is the whole reason the row exists. §1's canonical model gives the covert sub-record
+ * exactly one writer (SP-D's mint) and exactly one AMENDER, and the amender is the product
+ * stage: `gathered` (§3.7's path-dependent accrual — the one thing the model could not
+ * derive) and `standoff` (§3.4's addition D) are written here and nowhere else.
+ *
+ * THE COUNTERFORCE IS THE LEDGER'S OWN SINGLE WRITER. The stage never spreads the ledger
+ * key into a world object; it routes through `writeErrands`, which normalizes both sides,
+ * returns the caller's world BY REFERENCE on a no-op, and DELETES the key rather than
+ * persisting an empty array. `tests/lint/envoyErrandLedgerSingleWriter.walker.test.js`
+ * measures that in both directions over all of src/, so a second write form here reds
+ * before it can ship — and `normalizeCovertMission` refuses on the way back out of a save
+ * file any gradient shape the amender could have got wrong.
+ *
+ * DARK ⇒ NOTHING: the stage refuses at `espionageActive` (whose conjunction also requires
+ * beliefs live and the spine lit) before it walks anything, and past that door a world with
+ * no covert sub-record has nothing to amend.
+ * @type {Readonly<CouplingRegistryRow>}
+ */
+export const ES3_GRADIENT_AMENDER_COUPLING = couplingRow({
+  couplingId: 'CPL-19.GRAMMAR_TO_INFO.ES-3.gradient_amender',
+  pairId: 'CPL-19',
+  direction: 'GRAMMAR→INFO',
+  read: 'src/domain/worldPulse/espionage/espionageProductStage.js#advanceEspionageProducts',
+  receiptField: 'worldState.envoyErrands[].covert.{gathered,standoff}',
+  counterforce: 'src/domain/worldPulse/envoyErrandLedger.js#writeErrands',
+  flags: Object.freeze([
+    'errandSpineEnabled',
+    'espionageEnabled',
+  ]),
+  owningVolume: 'ESPIONAGE',
+  owningWave: 'ES-3',
+  intendedDesk: 'war',
+});
+
+/**
+ * ES-3 / INTERIOR→INFO. A MAN MISREADS THE GATE IN FRONT OF HIM BY HIS OWN FLAWS.
+ *
+ * §3.4's `flawDistortion` is a closed table over the flaw classes `riskAppetiteOf`
+ * (npcLadderGoals.js) ALREADY INTERPRETS — the volume's word is "extended, not forked", and
+ * that is a coupling rather than a copy on purpose: re-parsing personality words here would
+ * mint a second reading of the same trait vocabulary, and the day INTERIOR retunes which
+ * flaws count as bold the standoff would keep the old opinion in silence.
+ *
+ * THE COUNTERFORCE is the ladder's own reader. It is total over its three classes and
+ * returns `mid` for anything it does not recognise, so a widened trait set cannot make this
+ * table return undefined — and `TAP_TUNING.FLAW_DISTORTION` is keyed on exactly those three
+ * words with a 1 fallback, which is the identity multiplier.
+ *
+ * DARK ⇒ NOTHING: reached only past `espionageActive`, and the borrowed read is pure over
+ * an npc record. Nothing here writes ladder state — the ES module set writes none, and the
+ * scan in tests/domain/espionageProducts.test.js proves it.
+ * @type {Readonly<CouplingRegistryRow>}
+ */
+export const ES3_FLAW_DISTORTION_COUPLING = couplingRow({
+  // CPL-20 is the volume's own anchor for INFO × INTERIOR (DESIGN_FP_COUPLINGS §4). The
+  // anchors are CPL-1..CPL-21 and a wave never mints a twenty-second where a canonical one
+  // fits — ES-1's CPL-22 exists because TRADE × GRAMMAR genuinely has no anchor; this pair
+  // has one, and pointing at it is what keeps the pair walkable as a unit.
+  couplingId: 'CPL-20.INTERIOR_TO_INFO.ES-3.flaw_distortion',
+  pairId: 'CPL-20',
+  direction: 'INTERIOR→INFO',
+  read: 'src/domain/worldPulse/espionage/espionageTap.js#flawDistortion',
+  receiptField: 'worldState.envoyErrands[].covert.standoff',
+  counterforce: 'src/domain/worldPulse/npcLadderGoals.js#riskAppetiteOf',
+  flags: Object.freeze([
+    'errandSpineEnabled',
+    'espionageEnabled',
+  ]),
+  owningVolume: 'ESPIONAGE',
+  owningWave: 'ES-3',
+  intendedDesk: 'war',
+});
+
 /** Every ESPIONAGE row, in wave order. @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
 export const ES_ESPIONAGE_COUPLINGS = Object.freeze([
   ES1_COVERT_MISSION_MINT_COUPLING,
@@ -218,4 +295,6 @@ export const ES_ESPIONAGE_COUPLINGS = Object.freeze([
   ES1_HIDDEN_FRANCHISE_COUPLING,
   ES2_GAUNTLET_DWELL_READ_COUPLING,
   ES2_GAUNTLET_TRANSIT_CURSOR_COUPLING,
+  ES3_GRADIENT_AMENDER_COUPLING,
+  ES3_FLAW_DISTORTION_COUPLING,
 ]);

@@ -2918,7 +2918,32 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // tree. The same archive was then overlaid with THIS ROUND'S ONE CHANGED TEST FILE and
       // nothing else, and read 18,857 with every other arm still green. The +3 is therefore
       // attributable by construction: only one file differs between the two readings.
-      files: 2340, parked: 358, credited: 1982, titles: 18857, suiteTitles: 5395,
+      // ── RE-RECORDED 2026-08-06 BY FP WAVE ES-3, CAUSE MEASURED AND ATTRIBUTED EXACTLY ──
+      // 2,340/358/1,982/18,857/5,395 → 2,342/358/1,984/18,896/5,405. THE DELTAS ARE +2
+      // FILES, +2 CREDITED, +39 TITLES, +10 SUITE TITLES, PARKED UNCHANGED — and every one
+      // of them is attributable to a counted artifact rather than to a diff's added lines:
+      //   tests/domain/espionageProducts.test.js .............. 31 titles, 6 suite titles
+      //   tests/property/espionageProductsDormancyFence.test.js  7 titles, 4 suite titles
+      //   tests/domain/espionageMission.test.js ............... +1 title, +0 suite titles
+      // 31 + 7 + 1 = 39 and 6 + 4 = 10, which is the whole movement. The mission file is
+      // ALREADY CREDITED and gained exactly one new pin (the ES-3 round-trip for the two
+      // taught covert keys); its other ES-3 edit RENAMED a title, which moves no count.
+      // BOTH NEW FILES ARE CREDITED, NOT PARKED: every title in each is a string literal, so
+      // door 3's reader recognises all of them statically, and the `for…of` loops in both
+      // walk fixtures INSIDE a single named test — the registry-walker idiom, never a test
+      // generated from a loop.
+      // ⚠ THREE OTHER FILES THIS WAVE TOUCHED MOVE NOTHING, AND SAYING SO IS THE POINT:
+      // tests/property/espionageGauntletDormancyFence.test.js (a title RENAMED and one
+      // `toEqual` array widened), tests/domain/couplingRegistry.test.js (two array members
+      // and one new assertion INSIDE an existing title) and tests/lint/
+      // spAxisVocabulary.walker.test.js (two map entries). A `+N` counted off the diff would
+      // have over-attributed all three.
+      // ⚠ BOTH ENDS READ WITH THE SAME INSTRUMENT. The base figures are a MEASUREMENT of
+      // this wave's own parent (e9d26cec) rather than an inheritance from the row above: the
+      // full suite was run against a fresh `git archive` of that commit with node_modules
+      // symlinked in, and this walker passed there at 33/33 while reading 2,340/358/1,982/
+      // 18,857/5,395.
+      files: 2342, parked: 358, credited: 1984, titles: 18896, suiteTitles: 5405,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

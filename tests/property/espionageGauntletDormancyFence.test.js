@@ -344,7 +344,7 @@ describe('ES-2 dormancy — FENCE 4: one gate read, in one place', () => {
     expect(/espionageEnabled/.test('rules.espionageEnabled === true')).toBe(true);
   });
 
-  test('no other file under src/ reaches the gauntlet except the pulse that mounts it', () => {
+  test('the gauntlet is reached by its mount and by ES-3, and by nothing else', () => {
     const files = [];
     const walk = (dir) => {
       for (const entry of readdirSync(dir)) {
@@ -363,7 +363,17 @@ describe('ES-2 dormancy — FENCE 4: one gate read, in one place', () => {
       .filter((path) => IMPORT_RE.test(readFileSync(path, 'utf8')))
       .map((path) => relative(ROOT, path).replace(/\\/g, '/'))
       .sort();
-    expect(importers).toEqual(['src/domain/worldPulse/envoyPulse.js']);
+    // ⏱ WIDENED AT ES-3 (2026-08-06), AND THE WIDENING IS THE ARCHITECTURE HOLDING. The
+    // product stage borrows THREE things from this leaf — `covertDwellRead`,
+    // `gauntletCatchFactors` and `DWELL_INTERVAL_TICKS` — precisely so the estate keeps ONE
+    // dwell clock, one factor gathering and one interval window. Re-deriving any of them in
+    // ES-3 would have satisfied the old one-importer spelling of this pin while minting the
+    // second position fraction law M forbids, so the honest set is TWO and the exactness of
+    // the assertion is what still keeps a third out.
+    expect(importers).toEqual([
+      'src/domain/worldPulse/envoyPulse.js',
+      'src/domain/worldPulse/espionage/espionageProductStage.js',
+    ]);
     // A POSITIVE CONTROL on the detector, because a regex that stopped matching would report
     // an empty importer set and pass having proved nothing.
     expect(IMPORT_RE.test("import { x } from './espionage/espionageGauntlet.js';")).toBe(true);

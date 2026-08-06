@@ -48,6 +48,8 @@ import {
   ES1_MISSION_VOCABULARY_COUPLING,
   ES2_GAUNTLET_DWELL_READ_COUPLING,
   ES2_GAUNTLET_TRANSIT_CURSOR_COUPLING,
+  ES3_FLAW_DISTORTION_COUPLING,
+  ES3_GRADIENT_AMENDER_COUPLING,
   ES_ESPIONAGE_COUPLINGS,
   IN0A_PLANT_HANDOFF_COUPLING,
   IN_INFORMATION_COUPLINGS,
@@ -568,11 +570,20 @@ describe('CW-0 coupling registry', () => {
         ES1_MISSION_VOCABULARY_COUPLING,
         ES2_GAUNTLET_DWELL_READ_COUPLING,
         ES2_GAUNTLET_TRANSIT_CURSOR_COUPLING,
+        // ES-3 is the SIXTH, and the first of them that WRITES: the gradient amender puts
+        // `covert.{gathered,standoff}` on the errand row through `writeErrands`. Every row
+        // above it is a read, which is why the direction's row list is worth reading in
+        // order rather than as a set.
+        ES3_GRADIENT_AMENDER_COUPLING,
       ]);
     expect(couplingRowFor('CPL-19', 'GRAMMAR→INFO')).toBe(WR7_SILENCE_INFERENCE_COUPLING);
     // ES-1's third row OPENS a pair: nobody had read across TRADE and GRAMMAR before, and
     // the read is one constant — the traveller-kind franchise the covert route plan needs.
     expect(couplingRowsFor('CPL-22', 'TRADE→GRAMMAR')).toEqual([ES1_HIDDEN_FRANCHISE_COUPLING]);
+    // ES-3's second row points at the volume's OWN anchor for INFO × INTERIOR rather than
+    // minting a twenty-second pair: the standoff's flaw distortion extends the ladder's
+    // `riskAppetiteOf` instead of re-parsing personality words.
+    expect(couplingRowsFor('CPL-20', 'INTERIOR→INFO')).toEqual([ES3_FLAW_DISTORTION_COUPLING]);
     // The leaf composes exactly its rows, in wave order.
     expect(ES_ESPIONAGE_COUPLINGS).toEqual([
       ES1_COVERT_MISSION_MINT_COUPLING,
@@ -580,6 +591,8 @@ describe('CW-0 coupling registry', () => {
       ES1_HIDDEN_FRANCHISE_COUPLING,
       ES2_GAUNTLET_DWELL_READ_COUPLING,
       ES2_GAUNTLET_TRANSIT_CURSOR_COUPLING,
+      ES3_GRADIENT_AMENDER_COUPLING,
+      ES3_FLAW_DISTORTION_COUPLING,
     ]);
     expect(couplingRowsFor('CPL-1', 'WAR→TRADE'))
       .toEqual([WR6_COALITION_SETTLEMENT_TRADE_COUPLING]);

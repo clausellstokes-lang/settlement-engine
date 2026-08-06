@@ -42,6 +42,7 @@ import {
 } from './envoyInterceptionStage.js';
 import { envoyNewsEntries } from './envoyNews.js';
 import { advanceEspionageGauntlet } from './espionage/espionageGauntlet.js';
+import { advanceEspionageProducts } from './espionage/espionageProductStage.js';
 import { openRansomClaims } from './envoyRansomStage.js';
 import { ratifyCarriedSheets } from './envoyRatificationStage.js';
 import { npcLedgerOf } from './npcLedger.js';
@@ -137,6 +138,9 @@ export function advanceEnvoyDiplomacyPulse({
       ransomSkipped: [],
       espionageDetections: [],
       espionageSkipped: [],
+      espionageGatherings: [],
+      espionageLandings: [],
+      espionageProductsSkipped: [],
       commissionedPlants,
     };
   }
@@ -379,6 +383,19 @@ export function advanceEnvoyDiplomacyPulse({
     }
   }
 
+  // ES-3 — THE PRODUCTS, AFTER THE MOUTH AND FOR THE MOUTH'S OWN REASON. A mundane
+  // mission's whole gradient folds at `markEnvoyHome`, so this stage must read a world in
+  // which the loop above has already closed the rows that came home this tick; a magic
+  // mission's reads stream at the stop and do not care where in the order they are taken.
+  // It is gated by `espionageActive` inside the stage — a world without the flag walks
+  // nothing — and unlike the gauntlet it DOES write: the gradient onto the errand row
+  // through the errand family's own `writeErrands`, and the products into `beliefMaps`
+  // through `reconcileBelief`. Both are existing shapes; neither is a new ledger.
+  const products = advanceEspionageProducts({
+    worldState: state, tick, snapshot, regionalGraph: graph, detections: gauntlet.detections,
+  });
+  state = products.worldState;
+
   return {
     worldState: state,
     regionalGraph: graph,
@@ -400,6 +417,12 @@ export function advanceEnvoyDiplomacyPulse({
     // terms and for the same owner-gated reason.
     espionageDetections: gauntlet.detections,
     espionageSkipped: gauntlet.skipped,
+    // ES-3's gathered reads and landed products. Handed back as RECEIPTS — the writes
+    // themselves already happened, on the errand row and in the belief maps, so these are
+    // the record of what moved rather than a claim waiting to be applied.
+    espionageGatherings: products.gatherings,
+    espionageLandings: products.landings,
+    espionageProductsSkipped: products.skipped,
     commissionedPlants: planted.commissionedPlants,
   };
 }

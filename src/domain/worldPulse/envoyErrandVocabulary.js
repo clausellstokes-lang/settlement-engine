@@ -204,21 +204,64 @@ export const MAX_COVERT_ITINERARY_STOPS = 3;
 export const COVERT_STOP_KEYS = Object.freeze(['face', 'settlementId', 'stayTicks']);
 
 /**
- * Exact-key list for the covert sub-record AS ES-1 MINTS IT. `legRefs` is conditional.
+ * ES-3 — THE ACCESS DEPTH A GATHERED READ WAS TAKEN AT (owner addition H).
+ * Codepoint-ordered; the SEMANTIC depth order is performance < beliefs < delta and lives
+ * with the arithmetic (`espionageMath.TAP_DEPTH`), never with the sort.
  *
- * ⚠ ES-2/ES-3 OWE THEIR OWN KEYS AND THEIR OWN NORMALIZER ARM, IN THEIR OWN COMMITS.
- * `gathered` (§3.7's accrual) and `standoff` (§3.4's addition D) are NOT in this list and
- * are therefore DROPPED by `normalizeCovertMission` today. That is deliberate exact-key
- * DTO discipline, not an oversight: a normalizer that silently kept unknown keys would
- * let an import forge a gradient nobody gathered. The wave that mints either field
- * teaches this list and that normalizer IN THE SAME COMMIT — the columnOf precedent — or
- * its own amender writes a field the next persist erases.
+ * MINTED HERE FOR THE SAME REASON THE DEMAND BANDS ARE. The word is a ROW fact before it
+ * is an arithmetic fact: `normalizeCovertMission` matches a persisted partial against this
+ * list on the way out of a save file, so the DTO owns the mint and `TAP_LEVELS` re-exposes
+ * this same frozen array rather than authoring a second one that could drift a word apart
+ * from the normalizer.
+ */
+export const ENVOY_COVERT_TAPS = Object.freeze(['beliefs', 'delta', 'performance']);
+
+/**
+ * ES-3 — HOW MANY ROOTED RE-SAMPLES ONE STOP MAY ACCRUE (§3.4b's hard backstop). Minted
+ * here, re-exposed as `ESPIONAGE_TUNING.DWELL_RESAMPLE_CAP`, for the same one-spelling
+ * reason as the itinerary cap: the gradient's LENGTH is what the persistence DTO bounds,
+ * so a ramp that counted to a different number than the normalizer accepts would let the
+ * gauntlet price an interval the ledger cannot hold.
+ */
+export const MAX_COVERT_DWELL_RESAMPLES = 6;
+
+/**
+ * ES-3 — the gradient's hard length bound: every stop's minted stay plus its rooted
+ * re-samples. DERIVED from the two caps above rather than authored, so neither can move
+ * without this moving with it (the count-ledger discipline — a restated derivable goes
+ * stale and greens a shrink-only guard).
+ */
+export const MAX_COVERT_GATHERED = MAX_COVERT_ITINERARY_STOPS * (1 + MAX_COVERT_DWELL_RESAMPLES);
+
+/**
+ * Exact-key list for one gathered partial (§1's gradient row). `sentHome` is CONDITIONAL
+ * and appears only on a magic-transmitted partial, so the two lists below are the whole
+ * lawful shape and anything else is refused.
+ */
+export const COVERT_GATHERED_KEYS = Object.freeze(['accuracyCap01', 'atTick', 'subjectId', 'tap']);
+
+/** The same partial once it has been sent home by magic (addition E). */
+export const COVERT_GATHERED_SENT_KEYS = Object.freeze([...COVERT_GATHERED_KEYS, 'sentHome']);
+
+/**
+ * Exact-key list for the covert sub-record. `legRefs`, `gathered` and `standoff` are all
+ * conditional — drop-when-absent, never null (T4: a key is a byte).
+ *
+ * ⚠ ES-3 TAUGHT THIS LIST `gathered` AND `standoff` IN THE COMMIT THAT FIRST WROTE THEM,
+ * which is the obligation ES-1's version of this comment set. The discipline it records
+ * still binds every later wave: a normalizer that silently kept unknown keys would let an
+ * import forge a gradient nobody gathered, and an amender that wrote a key this list does
+ * not carry would have its field erased by the next persist with both halves looking
+ * correct in isolation. A wave that mints another key teaches this list and
+ * `normalizeCovertMission` in the SAME COMMIT — the columnOf precedent.
  */
 export const COVERT_KEYS = Object.freeze([
   'demand',
+  'gathered',
   'itinerary',
   'legRefs',
   'product',
+  'standoff',
   'subjectId',
 ]);
 
@@ -346,6 +389,7 @@ export const COVERT_PRODUCT_SET = new Set(ENVOY_COVERT_PRODUCTS);
 export const COVERT_DEMAND_SET = new Set(ENVOY_COVERT_DEMANDS);
 export const COVERT_FACE_SET = new Set(ENVOY_COVERT_FACES);
 export const COVERT_LEG_REF_SET = new Set(ENVOY_COVERT_LEG_REFS);
+export const COVERT_TAP_SET = new Set(ENVOY_COVERT_TAPS);
 export const ENCOUNTER_KIND_SET = new Set(ENVOY_ENCOUNTER_KINDS);
 export const PRIVATE_GOAL_SET = new Set(ENVOY_PRIVATE_GOALS);
 export const ENCOUNTER_RESOLUTION_SET = new Set(ENVOY_ENCOUNTER_RESOLUTIONS);

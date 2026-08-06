@@ -91,6 +91,20 @@ const ARGUED_FIELD_SPELLERS = Object.freeze({
     + ' populations road feeds that one and no espionage product can. Renaming a field here'
     + ' would not invent a fourth surface, it would break the join this list exists to make,'
     + ' which is why the spelling is argued rather than indirected',
+  'src/domain/worldPulse/espionage/espionageProducts.js':
+    'FP ES-3, and the FIRST module in the estate that WRITES conditionsBands from outside'
+    + ' the SP-B family. The three typed products compose the ground-truth argument'
+    + ' reconcileBelief re-anchors toward, and an ACQUIRE that fills a granary leg has to'
+    + ' put the observed rung on the field SP-B owns — that is the whole seam, and the'
+    + ' alternative is a parallel espionage surface, which is exactly what this list exists'
+    + ' to prevent. It spells the FIELD and never a RUNG: the band words themselves come'
+    + ' from conditionsGroundTruth, so a re-spelled ladder still reds in the census above',
+  'src/domain/worldPulse/espionage/espionageProductStage.js':
+    'FP ES-3, the stage that feeds the products. It reaches conditionsGroundTruth for the'
+    + ' TARGET read — what a covert agent standing in a market can see of a town\'s size,'
+    + ' granary and roads — and hands the resulting record onward under SP-B\'s own field'
+    + ' name. Like the leaf above it declares no ladder and renames no rung; the spelling'
+    + ' is the join, and indirecting it would hide the coupling this list makes visible',
 });
 
 function walk(dir, out = []) {
