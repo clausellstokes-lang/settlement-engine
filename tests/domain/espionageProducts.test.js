@@ -263,8 +263,9 @@ describe('ES-3 the tap ladder — a spy never reports purer than his access', ()
         }
       }
     }
-    // anchored: the assertion below pins `reached`'s exact value SET, and the positive at
-    // the top of this test proves the same function returns 'delta' when the asset is live
+    // ⚠ THE MARKER MUST SIT ON THE LINE IMMEDIATELY ABOVE — the anchor walker's own
+    // documented edge, and a two-line reason above this assertion left it un-anchored.
+    // anchored: the next line pins `reached`'s exact value SET, and the positive at the top of this test returns 'delta' for the same call with the asset live
     expect(reached).not.toContain('delta');
     expect(new Set(reached)).toEqual(new Set(['beliefs', 'performance']));
   });
