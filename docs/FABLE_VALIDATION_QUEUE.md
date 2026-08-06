@@ -3580,3 +3580,191 @@ third: a chair may reasonably want the transport widened now rather than at IN-1
 3,716-pulse measurement is the evidence that decides it. J-IN0A-R1, R3 and R6 are
 lower-stakes and mechanical. ESCALATION 1 and ESCALATION 2 from the IN-0a row above are
 UNCHANGED by this repair and still owed a disposition.
+
+---
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · SP-D REPAIR WAVE (the adversarial REJECT, answered)
+## (Opus 5 implementer AND verifier under the 2026-08-06 succession directive; every
+## J-* below is a chair-grade judgment made without a Fable chair and is VETOABLE)
+
+**Why this row exists.** SP-D (`0aac6792`) was REJECTED by its adversarial verifier on three
+BLOCKING findings and three lesser ones. This wave repairs them ADDITIVELY — the era's
+zero-revert record stands, and not one line of SP-D was reverted. Every finding was
+REPRODUCED BY EXECUTION at the CURRENT head (`729112df`, two sibling commits above SP-D)
+before any repair, because a verifier's stated cause has been refuted by measurement in
+this program before. All six reproduced. One reproduced with a CORRECTED FIGURE, recorded
+below rather than adopted silently.
+
+**F1 (BLOCKING) — CONFIRMED-AND-REPAIRED. Two persist-side guard doors survived deletion.**
+`errandSpineBlock`'s `split` is a three-conjunct test, and the landing wave proved it by
+deleting the WHOLE expression (control M5) — the JOINT pin the defense-in-depth corollary
+forbids as sufficient. Reproduced exactly: deleting `PURPOSE_CLASS_SET.has(declared)` left
+all four SP-D suites at **55 passed (55)**; deleting `&& declared !== resolved` likewise
+**55/55**; only `&& claimedTrue === resolved` reddened. THE CODE WAS CORRECT AND THE
+INSTRUMENT WAS BLIND — measured on the real normalizer, an unlawful `declaredPurpose`
+already dropped the pair and a redundant pair already dropped. So the repair is pins, not
+behaviour: four new rows under "EVERY DOOR OF THE PAIR CONJUNCTION, PINNED ALONE", each a
+TOTAL key-set `toEqual` on the row's spine keys rather than a list of `not.toContain`
+absences (a total positive assertion cannot go vacuous). Re-executed after the repair, each
+door deleted ALONE: door 1 → **1 failed**, door 2 → **3 failed**, door 3 → **2 failed**,
+whole expression → **14 failed**. Every mutant asserted to have CHANGED the file first, and
+every restore `cmp`-proven.
+
+**F2 (BLOCKING) — CONFIRMED-AND-REPAIRED. An aliased import minted unregistered.**
+Reproduced at head: a planted module spelling `import { mintErrandSpine as mint }` and
+calling `mint(...)` left the walker at **7 passed (7)**, while the SAME module with the
+literal name reddened 2 — the header's claim that the signature "cannot be dodged by
+spelling" was false. Cured per the recorded CREDIT-SIDE-ENUMERATION-FAILS-OPEN law with a
+TOTAL POSITIVE predicate over the module graph, NOT a longer literal list: the walker now
+computes every module that EXPORTS the head to a fixed point (the definition site plus
+re-export homes — `envoyErrand.js` really does re-export it, so the hop is load-bearing),
+resolves each file's imports from those modules, and treats every LOCAL name — plain,
+`as`-renamed, namespace, and destructured dynamic import — as a call name. Four planted
+minters (aliased, namespaced, re-export hop, literal) now each red 3 of 8; the walker
+returns 8/8 on deletion.
+
+**F3 (BLOCKING) — CONFIRMED-AND-REPAIRED. The one-reader law escaped on two spellings and
+stopped at `src/domain`'s edge.** Reproduced at head: a destructure plus a computed access
+inside the scanned tree left the walker **7/7 green**, and the EXACT offender spelling
+`errand.purposeClass === 'covert'` planted in `src/store/` also left it **7/7 green** — the
+UI layer, where a veil leak reaches a player, was outside the scan entirely. The scan is now
+the whole of `src/` (js and jsx, 2,054 files, up from ~200) and the detector is three
+spellings: member access, computed access, and an ELEMENT-PRECISE binding/literal pattern.
+Element-precise rather than brace-greedy on purpose — a certification row's English prose
+names all three fields inside an object literal, and a greedy brace match reads that
+sentence as a destructure. Four planted readers (destructure and computed inside
+`src/domain`, `.field` in `src/store`, destructure in `src/components/*.jsx`) now all red.
+
+**⚠ A REPAIR THAT WAS ITSELF BLIND, CAUGHT BY RUNNING IT AS A MUTANT.** Five
+detector-deletion mutants were run against the repaired walker, one per door. Four reddened
+— and DELETING THE COMPUTED-ACCESS HALF FROM THE COMPOSED PREDICATE LEFT THE FILE AT
+**8 passed (8)**, because only the bare regex was asserted and no module in the tree uses
+that spelling today. The composition is now driven door-by-door through `readsAField`
+itself. This is the defense-in-depth corollary applied to a scanner, and it is exactly the
+class the brief warns about: a proposed remedy must be run as a mutant, because a remedy can
+be dead on arrival.
+
+**F4 — CONFIRMED, AND RULED THE OTHER WAY WITH EXECUTED EVIDENCE (see J-SP-D-R5).**
+Reproduced exactly: a row minted by a lit world and written into a world whose
+`simulationRules` OMIT `errandSpineEnabled` retains all three fields, and `purposeClassOf`
+returns `covert` there. The certification invariant's universal clause was an
+OVERSTATEMENT. Live code outranks the table, so the CLAIM was narrowed and the MECHANISM
+kept — but only after the verifier's preferred cure was built and measured. See J-SP-D-R5.
+
+**F5 — CONFIRMED-AND-REPAIRED (a reporting defect), WITH A CORRECTED FIGURE.** The SP-D
+receipt said the wave "repairs none of them" of the base reds. Executed in git-archive trees
+of both `01d50660` and `0aac6792`: the `mechanismLitCoverage` modules inventory shrank behind
+a byte-identical fail row, with `envoyErrandRecords` REMOVED. ⚠ THE VERIFIER'S CARDINALITY IS
+OFF BY ONE IN BOTH FIGURES: measured **27 → 26**, not 28 → 27 (parent list quoted in full in
+this wave's transcript). Direction beneficial, baseline `[]`, so no re-record is owed; the
+flags gap is byte-identical (`['warEconomyEnabled']` both sides). The correct sentence is
+"repairs one entry of the mechanismLitCoverage modules gap (`envoyErrandRecords`, 27→26)".
+
+**F6 — CONFIRMED-AND-REPAIRED.** `git show`-extracting the SP-D row and grepping it returned
+NOTHING for `J-SP-D-7`, `J-SP-D-8`, `ARGUED_UNLAYERED` or `notBeforeTick`. Both are itemized
+below, as the directive requires.
+
+### THE TWO JUDGMENTS THE SP-D ROW OMITTED (F6's cure)
+
+**J-SP-D-7 — `notBeforeTick` DEFAULTS TO 0, NOT `null`.** `mintErrandSpine` spells the "no
+departure floor" value as `0`. The equivalence argued: the contract compares
+`Number(departTick) < notBeforeTick`, every leg clock is a `wholeTick` (>= 0 or rejected),
+and `x < null` coerces to `x < 0`, so absent and 0 accept precisely the same set of plans.
+Rejected alternative: `null`, which reads more honestly as "no floor" but leaves the seam
+loosely typed. Re-examine: whether a strict-typed 0 that RELIES ON A COERCION EQUIVALENCE is
+the right trade against a `null` that states the absence outright — the equivalence is real
+today and would break silently if a leg clock ever became signed.
+
+**J-SP-D-8 — `errandMint.js` TOOK `ARGUED_UNLAYERED` RATHER THAN A `LAYER_PATTERNS` HOME**
+in `tests/lint/couplingInclusion.walker.test.js`. This registers a NEW exemption row in a
+SHARED SHRINK-ONLY RATCHET, which is precisely the class this directive exists to make
+cheaply re-rulable. ⚠ ITS SUPPORTING CLAIM WAS REFUTED AND IS NOW RESTORED ON NEW EVIDENCE.
+The argument was that `ERRAND_CONSUMERS` "is a stricter register than an import pair"; F2
+measured that false, because the import pair a coupling ratchet requires cannot be aliased
+away and the registry walker could. AFTER THE F2 REPAIR the claim holds again — the registry
+is now total over aliases, namespaces and re-export hops — but Fable should note it was
+true only after this wave, not when it was argued. Re-examine first.
+
+### JUDGMENTS THIS REPAIR WAVE MADE
+
+**J-SP-D-R1 — THE MINT DETECTOR RESOLVES BINDINGS, AND KEEPS THE LITERAL AS A BELT.** The
+literal regex stays in the union alongside the resolver. Rejected alternative: replace it
+outright (cleaner, and the recorded law says never a longer literal list — but the law bans
+a literal list as the LOAD-BEARING half, not as a redundant belt). Cost named: a module
+calling a bare `mintErrandSpine(` with no import would be flagged though unreachable in ESM.
+
+**J-SP-D-R2 — THE ONE-READER SCAN WIDENED TO ALL OF `src/`, NOT TO `src/` PLUS `tests/`.**
+Tests legitimately read the fields to assert them, so including `tests/` would have required
+an exemption list large enough to hide a real offender. Re-examine: whether a narrow
+`tests/`-side rule is owed later.
+
+**J-SP-D-R3 — `envoyErrand.js` JOINS `FAMILY`, A DELIBERATE ONE-FILE LOOSENING.** The
+stricter pattern detector flags `mintEnvoyErrand`'s parameter list, which ACCEPTS caller
+cargo and forwards it unread — the one lawful accept-and-forward in the tree, and
+`envoyErrandRecords.js`'s own header already names this file the family HEAD. Rejected
+alternative: exempt parameter-destructuring syntactically, which would have re-opened the
+hole for `function f({ truePurpose })`. Net effect is strictly stronger: 1 spelling over
+~200 files became 3 spellings over 2,054. The `FAMILY` list is now pinned by TOTALITY —
+every declared member must be a live reader, so a name cannot sit there buying an exemption
+it no longer needs.
+
+**J-SP-D-R4 — EACH CONJUNCT PINNED ALONE, AND THE HEADER FORBIDS RE-PROVING IT JOINTLY.**
+`envoyErrandRecords.js` now carries a standing instruction not to re-prove the expression by
+deleting it whole. Recorded because the next lane to touch this block will otherwise repeat
+the wave's original mistake.
+
+**J-SP-D-R5 — ⚠⚠ THE PERSIST SEAM STAYS UNGATED; THE INVARIANT WAS NARROWED INSTEAD. THE
+VERIFIER'S PREFERRED CURE WAS BUILT AND MEASURED BEFORE BEING REJECTED.** Remedy (a) —
+threading `errandSpineActive` through `normalizeErrand`/`normalizeEnvoyErrands` and gating at
+the `writeErrands` seam — was IMPLEMENTED. It works: the dark import then yields no spine
+keys and `purposeClassOf` returns `diplomatic`. **AND IT BREAKS UNDO.**
+`restoreEnvoyErrands` returned `restore_conflict` where the byte-exact restore expects
+`restored` — because a pure persistence normalizer that suddenly depends on a world has
+callers that do not have one. That is this estate's most-bitten bug class (a fix that
+survives one lifecycle path and dies on another), bought for ZERO behavioural gain: the
+preserved cargo is INERT, since a census found no module outside the errand family reads the
+three fields anywhere in `src/`, and the flag is absent from `DEFAULT_SIMULATION_RULES` and
+every preset, so no save in the wild carries them. Preservation also lands on THE PROMISE's
+side — a lit campaign opened dark keeps its history instead of having it silently destroyed.
+So the invariant `dormancy_is_absence_of_the_three_fields` was renamed
+`..._at_the_MINT`, its universal clause narrowed to the measured truth, and BOTH halves
+pinned. Re-examine: this is the wave's one genuine architectural fork, and a chair may
+legitimately prefer a fully-gated persist seam with `restoreEnvoyErrands` threaded too.
+
+**J-SP-D-R6 — THE CORRECTED F5 FIGURE WAS MEASURED, NOT ADOPTED.** The verifier's 28→27 was
+re-measured as 27→26 in archives of both commits. Recorded rather than deferred to, per the
+standing rule that a stated figure loses to an executed one.
+
+### GATES
+Four SP-D suites **55 → 62 tests, all passing** (+7 pins). The nine suites this wave's edits
+touch, run in the live tree at head `94d0c798`: **9 files, 166 tests, exit 0**. Twenty mutant
+controls executed, each asserted to have CHANGED its file and each restored `cmp`-clean. The
+manifest rationale was spliced as RAW TEXT (**+1 line**, no reformat — `json.dumps` would
+have rewritten 1,977).
+
+### ⚠⚠ STOP-AND-REPORT: THE SHARED CENSUS WAS ALREADY RED ON ARRIVAL, BY 4
+Landing this wave's +7 test titles requires editing `CENSUS.titles` in
+`tests/lint/sovereigntyLightingContract.walker.test.js`, and that constant was WRONG before
+this wave touched it. MEASURED AT PRISTINE HEAD `94d0c798`, zero edits applied: the walker
+reported `expected 18659 to be 18655`. The figure committed by the GR-2/IN-0a repair round
+was 4 short of the tree it was recorded against, so the row arrived RED. The census is ONE
+INTEGER and cannot be corrected by halves, so this wave's re-record necessarily absorbs the
+inherited +4 along with its own +7: **18,655 recorded → 18,659 measured (＋4 INHERITED) →
+18,666 with this wave (＋7 OURS)**. The split is stated in the file itself, not blurred. A
+lane reconciling the GR-2/IN-0a rows should expect their stated +14 to have actually been
++18. NOT REPAIRED BY THIS WAVE beyond the arithmetic it was forced to carry.
+
+### ⚠ A SECOND INHERITED RED, REPORTED AND NOT TOUCHED
+`tests/lint/mutationCoverageManifest.test.js > LABEL JOIN: manifest mutation claims and
+sweep labels match one-to-one` is RED AT PRISTINE HEAD `94d0c798`, executed. The sibling
+repair round changed `scripts/mutation-sweep.sh` without the matching manifest claim. This
+wave's own manifest edit is a RATIONALE entry, not a `kind:"mutation"` claim, so it is not a
+party to that join — confirmed by the red reproducing with none of this wave's files
+present. Left for the lane that owns `mutation-sweep.sh`.
+
+### ⚠ A PROTOCOL EVENT WORTH RECORDING
+`scripts/gate-mutex.sh` reported the slot HELD by a sibling lane running the IDENTICAL wide
+command from `/private/tmp/gr2fix`, and a wide run had already been started against it. That
+run's 28 reds are CONTAMINATED and were DISCARDED, not reported; the attribution was re-run
+uncontended. The mutex script did its job — the lesson is that it must be consulted BEFORE
+the run, not after it looks wrong.

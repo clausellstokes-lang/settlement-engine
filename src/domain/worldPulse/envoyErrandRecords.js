@@ -277,6 +277,23 @@ export function normalizeTermSheet(raw) {
  * on the honest side: an errand can lose a cover story it should have kept, and can never
  * gain a secret it never had.
  *
+ * ⚠⚠ THREE DOORS, AND EACH IS PINNED ALONE (repair SP-D-R4, 2026-08-06). The `split`
+ * conjunction below has three conjuncts, and the landing wave proved it by deleting the
+ * WHOLE expression — the JOINT pin this estate's defense-in-depth corollary forbids as
+ * sufficient. Deleted SEPARATELY, two of the three survived the entire SP-D battery at
+ * 55 passed (55): the declared-word vocabulary check, and the `declared !== resolved`
+ * redundancy check. Each now has its own row in
+ * tests/domain/envoyErrandSpineLifecycle.test.js. DO NOT re-prove this expression by
+ * deleting it whole; delete each conjunct.
+ *
+ * ⚠ THIS BLOCK IS UNGATED BY DESIGN, AND IT IS THE SPINE'S ONE ASYMMETRY (repair
+ * SP-D-R5). `errandSpineActive` is read once, at the MINT. A row IMPORTED into a dark
+ * world therefore KEEPS lawful spine cargo instead of having it stripped. Gating here was
+ * executed and rejected: it works, and it breaks UNDO, because threading a world into a
+ * pure persistence normalizer leaves every caller without one holding a different answer.
+ * The cargo is inert while dark — nothing outside this family reads the three fields —
+ * so preservation costs nothing and destruction would cost a campaign its history.
+ *
  * @param {Record<string, unknown>} row the raw errand
  * @param {string} purpose the row's already-validated war purpose
  * @returns {Record<string, string>}

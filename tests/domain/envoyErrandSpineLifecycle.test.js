@@ -25,6 +25,7 @@ import {
   restoreEnvoyErrands,
 } from '../../src/domain/worldPulse/envoyErrand.js';
 import { normalizeErrand } from '../../src/domain/worldPulse/envoyErrandRecords.js';
+import { writeErrands } from '../../src/domain/worldPulse/envoyErrandLedger.js';
 import { serializeWorldSnapshotPublic } from '../../src/domain/display/worldSnapshotPublic.js';
 import { mintCovert, mintOne, spineWorld } from '../helpers/errandSpineFixture.js';
 
@@ -36,6 +37,18 @@ const COVERT_BLOCK = {
   declaredPurpose: 'diplomatic',
   truePurpose: 'covert',
 };
+
+/**
+ * THE SPINE KEY SET a row actually carries — the EXACT keys, never a `toContain` absence.
+ * A total positive assertion cannot go vacuous the way a list of negatives can, which is
+ * the whole reason the conjunction pins below are spelled with `toEqual` on this.
+ * @param {unknown} row
+ */
+const spineOf = (row) => Object.fromEntries(
+  ['purposeClass', 'declaredPurpose', 'truePurpose']
+    .filter((key) => key in /** @type {Record<string, unknown>} */ (row))
+    .map((key) => [key, /** @type {Record<string, unknown>} */ (row)[key]]),
+);
 
 describe('SP-D lifecycle — CREATE and READ', () => {
   it('a lit mint writes all three fields, and the reader hands them back', () => {
@@ -173,6 +186,118 @@ describe('SP-D lifecycle — IMPORT heals, never null-fills, and never invents a
     );
     expect(Object.keys(rewritten)).not.toContain('purposeClass'); // anchored: the derived class is asserted on the next line
     expect(purposeClassOf(rewritten)).toBe('diplomatic');
+  });
+});
+
+describe('SP-D dormancy — THE MINT IS GATED, THE PERSIST IS NOT, AND THAT IS A DECISION', () => {
+  /**
+   * ⚠⚠ REPAIR SP-D-R5. THE CERTIFICATION ROW USED TO OVERCLAIM, AND LIVE CODE OUTRANKS
+   * THE TABLE. Its invariant read "With the flag dark no errand row EVER GROWS a
+   * purposeClass, declaredPurpose or truePurpose key". That is TRUE of the mint — fences
+   * 1/2/3 of the dormancy suite prove it — and MEASURED FALSE of the import: a row minted
+   * by a lit world and written into a dark one through `writeErrands` keeps all three,
+   * because `normalizeErrand` spreads `errandSpineBlock` unconditionally and only
+   * `errandMint.js` ever reads the flag.
+   *
+   * THE OTHER CURE WAS EXECUTED AND REJECTED, not argued away. Threading `errandSpineActive`
+   * through `normalizeErrand`/`normalizeEnvoyErrands` and gating at the `writeErrands` seam
+   * DOES strip the fields correctly (measured: the dark import then yields no keys and
+   * `purposeClassOf` returns 'diplomatic') — and it BREAKS UNDO. `restoreEnvoyErrands`
+   * returned `restore_conflict` where the byte-exact restore above expects `restored`,
+   * because a pure persistence normalizer that suddenly depends on a world has callers
+   * that do not have one. That is this estate's most-bitten bug class — a fix that
+   * survives one lifecycle path and dies on another — bought for ZERO behavioural gain,
+   * since the preserved cargo is inert: no module outside the errand family reads these
+   * three fields anywhere in `src/`, which the consumer-registry walker now proves.
+   *
+   * So the MECHANISM stands and the CLAIM was narrowed. Both halves are pinned here, and
+   * the second half is the one that had no pin at all.
+   */
+  it('a DARK world MINTS none of the three — the universal half, and it holds', () => {
+    const dark = mintOne(spineWorld(), { purposeClass: 'covert', declaredPurpose: 'diplomatic' });
+    expect(spineOf(only(dark.worldState))).toEqual({});
+  });
+
+  it('a DARK world PRESERVES lawful cargo on an IMPORT — deliberate, and inert', () => {
+    const lit = only(mintCovert().worldState);
+    expect(spineOf(lit), 'the fixture must really carry cargo to preserve').toEqual(COVERT_BLOCK);
+    // A world whose simulationRules OMIT the key entirely — the installed-save shape.
+    const darkWorld = spineWorld();
+    expect(Object.prototype.hasOwnProperty.call(darkWorld.simulationRules, 'errandSpineEnabled'))
+      .toBe(false);
+    const imported = writeErrands(darkWorld, [lit]);
+    // NOT stripped. A lit campaign's history is not destroyed by opening it dark, and
+    // `THE PROMISE` (lived history is immutable) is why that is the right side to err on.
+    expect(spineOf(only(imported))).toEqual(COVERT_BLOCK);
+    expect(purposeClassOf(only(imported))).toBe('covert');
+  });
+});
+
+describe('SP-D persist-side split — EVERY DOOR OF THE PAIR CONJUNCTION, PINNED ALONE', () => {
+  /**
+   * ⚠⚠ REPAIR SP-D-R4, AND IT IS THE ESTATE'S DEFENSE-IN-DEPTH COROLLARY BITING AGAIN.
+   *
+   * `errandSpineBlock` decides whether a declared/true pair survives a write with a THREE
+   * CONJUNCT test:
+   *
+   *     PURPOSE_CLASS_SET.has(declared) && claimedTrue === resolved && declared !== resolved
+   *
+   * The wave that landed it proved the expression by DELETING THE WHOLE THING (control M5,
+   * "THE PAIR ATOMICITY DELETED"), which is precisely the JOINT pin this estate's law
+   * forbids as sufficient. Deleting each conjunct SEPARATELY was then executed, and TWO OF
+   * THE THREE SURVIVED with all four SP-D suites at 55 passed (55):
+   *
+   *   · `PURPOSE_CLASS_SET.has(declared)` replaced by `true`  → 55/55 GREEN
+   *   · `&& declared !== resolved` deleted                    → 55/55 GREEN
+   *   · `&& claimedTrue === resolved` deleted                 → 2 failed (the only red)
+   *
+   * The behavioural cost of each survivor is real and lands on the IMPORT path, which is
+   * the path a forged or hand-edited save enters by. With door 1 gone, an out-of-vocabulary
+   * word survives the persist seam — the FINITE-SEMANTICS habitat exactly. With door 3
+   * gone, an ordinary war errand grows a redundant `diplomatic`/`diplomatic` pair, breaking
+   * both the drop-when-derivable rule and the "an installed save is not rewritten" promise,
+   * silently and one byte at a time.
+   *
+   * So each door gets its own row below, and each row is a TOTAL key-set assertion.
+   */
+  it('DOOR 1 — an UNLAWFUL declared word drops the pair, and does not destroy the errand', () => {
+    const row = only(mintCovert().worldState);
+    expect(spineOf(row), 'the fixture must really carry a live split').toEqual(COVERT_BLOCK);
+    const healed = normalizeErrand({ ...row, declaredPurpose: 'piracy' });
+    expect(healed, 'a bad word must not destroy a traveller').toBeTruthy();
+    // The class is lawful and stays; the cover story built on an unknown word does not.
+    expect(spineOf(healed)).toEqual({ purposeClass: 'covert' });
+    expect(purposeClassOf(/** @type {object} */ (healed))).toBe('covert');
+  });
+
+  it('DOOR 2 — a true half that disagrees with the resolved class drops the pair', () => {
+    const row = only(mintCovert().worldState);
+    const healed = normalizeErrand({ ...row, truePurpose: 'commercial' });
+    expect(healed).toBeTruthy();
+    expect(spineOf(healed)).toEqual({ purposeClass: 'covert' });
+  });
+
+  it('DOOR 3 — a REDUNDANT pair (declared === resolved) is dropped, not restated', () => {
+    // A plain war errand: no class key at all, `diplomatic` by derivation.
+    const legacy = only(mintOne(spineWorld()).worldState);
+    expect(spineOf(legacy), 'a war errand carries no spine keys').toEqual({});
+    const rewritten = normalizeErrand({
+      ...legacy, declaredPurpose: 'diplomatic', truePurpose: 'diplomatic',
+    });
+    expect(rewritten).toBeTruthy();
+    // NEVER RESTATE A DERIVATION: the pair says nothing the purpose did not already say.
+    expect(spineOf(rewritten)).toEqual({});
+    // ...and the promise that an installed save is not rewritten, spelled as bytes.
+    expect(JSON.stringify(rewritten)).toBe(JSON.stringify(legacy));
+  });
+
+  it('DOOR 3 again, on a row that DOES carry a class — the class stays, the pair goes', () => {
+    const row = only(mintCovert().worldState);
+    const rewritten = normalizeErrand({
+      ...row, declaredPurpose: 'covert', truePurpose: 'covert',
+    });
+    expect(rewritten).toBeTruthy();
+    expect(spineOf(rewritten)).toEqual({ purposeClass: 'covert' });
   });
 });
 

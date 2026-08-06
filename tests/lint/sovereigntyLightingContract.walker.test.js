@@ -2757,7 +2757,34 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // its six door tests from a `for…of` over a table; measured, that parked the whole
       // file (358 → 359, credited unmoved). The six tests are now spelled out one by one
       // and the file is credited. SP-D's idiom holds twice over in this block now.
-      files: 2329, parked: 358, credited: 1971, titles: 18655, suiteTitles: 5329,
+      //
+      // ── RE-RECORDED 2026-08-06 BY THE SP-D REPAIR ROUND, WITH ITS CAUSE STATED ──────
+      // 2,329/358/1,971/18,655/5,329 → 2,329/358/1,971/18,666/5,331.
+      //
+      // ⚠⚠ THIS RE-RECORD ABSORBS A +4 TITLE DISCREPANCY THAT IS NOT THIS WAVE'S, AND THE
+      // SPLIT IS STATED RATHER THAN BLURRED. MEASURED AT PRISTINE HEAD 94d0c798, BEFORE A
+      // SINGLE EDIT OF THIS WAVE: the walker reported "expected 18659 to be 18655" — the
+      // figure committed by the GR-2/IN-0a repair round was already 4 short of the tree it
+      // was recorded against, so this row was ALREADY RED on arrival. The census cannot be
+      // corrected by halves (it is one integer), so landing this wave's own +7 necessarily
+      // carries the inherited +4 with it. THE ARITHMETIC, both parts executed:
+      //   18,655 recorded → 18,659 measured at pristine HEAD  = +4 INHERITED, not ours
+      //   18,659 → 18,666 with this wave applied              = +7 OURS, counted below
+      // Reported to the chair as a stop rather than absorbed in silence. A later lane
+      // reconciling the GR-2/IN-0a rows should expect their stated +14 to have been +18.
+      //
+      // THE +7 IS SEVEN NEW PINS IN TWO ALREADY-CREDITED FILES, AND NOTHING ELSE — NO NEW
+      // TEST FILE, which is why files/parked/credited are all UNCHANGED. tests/domain/
+      // envoyErrandSpineLifecycle.test.js gains +6 titles and +2 suite titles (the two new
+      // describes: the dark-mint/dark-import dormancy pair, and the four rows that pin each
+      // door of the persist-side split conjunction ALONE — the adversarial verifier proved
+      // two of those three doors could be deleted with the whole SP-D battery still green).
+      // tests/lint/errandConsumerRegistry.walker.test.js gains +1 title and NO suite title
+      // (the mint-detector guard-the-guard row, added to an existing describe).
+      // PARKED IS UNCHANGED at 358 because every one of the seven is a literal title — the
+      // conjunction rows are spelled out one per door rather than generated from a table,
+      // which is SP-D's own recorded idiom and the reason the count stays creditable.
+      files: 2329, parked: 358, credited: 1971, titles: 18666, suiteTitles: 5331,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
