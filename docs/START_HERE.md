@@ -14,7 +14,7 @@ classes are owner-only (push→already authorized as backup; PR-merge, deploys,
 ## 2. THE THREE DOCUMENTS THAT RUN THE PROGRAM (all in docs/, this branch)
 1. **THE_REMAINING_ARCHITECTURE.md** — THE PLAYBOOK: every remaining slice/phase
    to launch with laws + done-whens (§1b base ruling; §2 slices; Phase D; folds;
-   §4 ROUND 3; soak; ONE REGEN; THE VERY END). Execute FROM this.
+   §4 ROUND 3; then THE ENDGAME TAIL PER §3h). Execute FROM this.
 2. **COMPREHENSIVE_REVIEW_PROGRAM.md** — THE LEDGER: reverse-chronological rows
    of every ruling and landing. The newest rows tell you exactly where things
    stopped. Append a row (+ commit) for everything you land. Never rewrite rows.
@@ -22,6 +22,41 @@ classes are owner-only (push→already authorized as backup; PR-merge, deploys,
    DESIGN_ILLUSTRATED_TOWN.md (slices IT-1..IT-6), THE_BASE_RECONCILIATION_MAP.md
    + THE_BASE_RESTORATION_LEDGER.md (Phase-D gate: zero PENDING rows),
    DESIGN_DEEP_CRAFT_PAGES.md, C1FIN_CONTROL_CENSUS.md (briefs/).
+
+## 3h. ⭐⭐ THE ENDGAME TAIL — THE ONE AUTHORITATIVE ORDERING (owner-constrained
+2026-08-06; supersedes every other tail spelling in this file and in memory)
+**Owner, verbatim:** "The soak and tuning are to be the last thing before push
+and deploy." Clarified: "i trust your judgement. I just want all the soaks to
+be close to the end as possible but not in a way that obstructs the optimal
+path towards completion."
+
+**THE LAW (chair-ruled, and it forces the order):** NOTHING THAT CAN MOVE AN
+OUTPUT MAY LAND AFTER THE TUNING SIGNATURE. The signature is versioned and
+constitutional (THE PROMISE); a band signed against a tree that then
+regenerates, lights a flag, or absorbs a walk repair is stale the moment it is
+signed.
+
+1. Build waves to completion — every flag DARK.
+2. **THE DIAGNOSTIC SOAK** — at build-complete-dark: the LATEST point that
+   still leaves repair room. DISPOSABLE tree, flags forced lit, CONCURRENT with
+   tail work so it obstructs nothing. ⛔ FINDINGS ONLY — it may not sign,
+   apply or adjust one band; movements it suggests ride to step 7 as PROPOSALS.
+3. Composition repairs from its findings (their own gated waves).
+4. ⛔ THE OWNER'S WALK + its repairs (the owner's eye outranks any green suite).
+5. LIGHT THE FLAGS + **THE ONE REGEN** (singular; golden-shift discipline).
+6. **THE TERMINAL SOAK** — on the EXACT shipping tree, lit and regenerated.
+7. **THE TUNING SIGNATURE** — versioned, owner-signed, frozen tree. THE LAST ACT.
+8. PUSH / deploy — each push owner-confirmed (the 08-02 boundary stands). A
+   BACKUP push under the standing authorization is a different act and is
+   unaffected (chair reading, vetoable; resolves at its own confirm gate).
+
+**WHAT THIS CORRECTS — measured, not remembered:** FOUR spellings of the tail
+existed (:17, :85, :379 below, and memory/MEMORY.md) and they disagreed on
+where the walk sits. **ALL FOUR placed THE ONE REGEN AFTER TUNING** — and the
+regen is the act that lights the eight flags, so every recorded plan would
+have signed constitutional bands against a world about to be transformed. Cure:
+ONE spelling (this section), POINTERS everywhere else — the derive-dont-restate
+law. Banked at memory/endgame-tail-order-ruled.md.
 
 ## 3g. ⭐⭐ SNAPSHOT REFRESH 2026-08-05 (~05:30 EDT — CYCLE 1 CLOSED, THE FOLD IN FLIGHT; supersedes §3f and everything below; git wins)
 Same machine ⇒ the §6 memory dir survives and is CURRENT (read its index
@@ -82,7 +117,7 @@ of record: c44e5d99 (workflow journals + scratchpad under its project dir).
   completes first, then it speaks for itself. The launch-post skeleton +
   r/rpg research + voice calibration are banked in
   memory/owner-marketing-doctrine.md. "Complete" = the written endgame
-  tail (soak → tuning → ONE REGEN → walk), not a feeling.
+  tail — §3h is its ONE authoritative spelling — not a feeling.
 - **V5 PHOTOREAL**: unchanged — 13 4K generations await OWNER CULL; 2
   sign-offs open (lettering grammar, seal ladder).
 - **RESUME (in order): (1)** cd minifold, git log/status, survey; **(2)**
@@ -376,8 +411,8 @@ different machine ⇒ THIS FILE + the two queue docs are sufficient alone.
    master at ~/Desktop/settlementforge-marketing-masters/), C3/C5/C6-C16 ·
    Phase D (ratchets 0×4 + restoration ledger zero PENDING) · the folds ·
    ⛔owner finished-site walk · push completion · ROUND 3 (vs THE EIGHT CROWNS,
-   §4, intake pre-stocked) · soak · tuning · THE ONE REGEN (pre-signed; light
-   the EIGHT flags incl. traditionsEnabled) · THE VERY END (⛔owner: legal,
+   §4, intake pre-stocked) · THE ENDGAME TAIL PER §3h (walk and THE ONE REGEN
+   precede the terminal soak; tuning is the last act) · THE VERY END (⛔owner: legal,
    support-email flip after MX verified, merge button, db push).
 4. Ledger row + commit after every landing. The owner walks; their eye overrides
    any green suite — treat their one-line corrections as rulings and record them.
