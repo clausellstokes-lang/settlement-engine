@@ -58,8 +58,14 @@ const FAMILY_TOKENS = Object.freeze({
     'flourishing', 'generosity', 'founding', 'repair', 'accord', 'truce',
   ]),
   knowledge: Object.freeze([
+    // IN-0a adds `plant`: a PLANTED story is an act of the knowledge lane on its own
+    // vocabulary, so `plant_took` (and the `brokerage_plant` act's own applied receipt)
+    // classify here by MEANING rather than by the bare `news` token in a wizard-news id —
+    // the contamination path IN-6's ratchet exists to shrink. Executed census before adding
+    // it: exactly one other token in src/ or scripts/ contains the substring, and it is the
+    // internal envoy-picture patch `kind: 'plant'`, which is not a news kind.
     'belief', 'rumor', 'intel', 'information', 'discourse', 'misjudgment',
-    'reconcile', 'credibility', 'news', 'revelation',
+    'reconcile', 'credibility', 'news', 'revelation', 'plant',
   ]),
 });
 

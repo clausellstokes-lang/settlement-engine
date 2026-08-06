@@ -53,6 +53,12 @@ import {
   credibilityScoreOf,
   credibilityWeight,
 } from './informationStatecraft.js';
+// THE TWIN GUARD (IN-0a). `paidPlantEnvelope` below re-expresses the fold validator's law
+// so `attachEnvoyPictureTarget` can refuse a forged envelope without importing the writer.
+// Two guards over ONE job can only be proven JOINTLY, so the transport window is a SHARED
+// constant read from the law's home rather than a second literal that could drift: if the
+// two ever disagree, a carried envelope targets and then fails to fold, or worse.
+import { PLANT_HANDOFF_LAG_TICKS } from './disinformationPlant.js';
 import { getSpatialLedger } from '../spatial/distanceRead.js';
 import { brokerageEffectsActive, brokerageHouseRosterIn } from './brokerageStamps.js';
 import { servicesAvailable, patronPurse01, QUERY_PRICE_BANDS } from './brokerageServices.js';
@@ -245,7 +251,9 @@ function paidPlantEnvelope(value) {
     || trueBand == null || assertedBand == null || assertedBand !== expectedAsserted
     || record.lineageId !== `disinfo:${liarId}:${audienceId}:${seededTick}`
     || row.key !== `plant:${liarId}:${audienceId}:${subjectId}`
-    || hostId !== liarId || commissionedAtTick !== seededTick
+    || hostId !== liarId
+    || seededTick - commissionedAtTick < 0
+    || seededTick - commissionedAtTick > PLANT_HANDOFF_LAG_TICKS
     || receipt.assertedBand !== assertedBand || receipt.trueBand !== trueBand
     || !strictText(receipt.marketId) || !strictText(receipt.marketName)
     || !QUERY_PRICE_BANDS.includes(String(receipt.priceBand))

@@ -34,6 +34,7 @@ import {
 // this family to accept.
 import { TR1_CASUS_COMMERCII_COUPLINGS } from './couplingRegistryTrade.js';
 import { GR2_PACT_FORMATION_COUPLINGS } from './couplingRegistryGrammar.js';
+import { IN_INFORMATION_COUPLINGS } from './couplingRegistryInfo.js';
 
 export {
   TR1_SEVERANCE_PRESSURE_COUPLING,
@@ -88,6 +89,7 @@ export const COUPLING_REGISTRY = Object.freeze([
   ...WR7_ENVOY_COUPLINGS,
   ...TR1_CASUS_COMMERCII_COUPLINGS,
   ...GR2_PACT_FORMATION_COUPLINGS,
+  ...IN_INFORMATION_COUPLINGS,
 ]);
 
 /** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */

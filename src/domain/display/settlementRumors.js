@@ -279,6 +279,9 @@ export const WHAT_PHRASES = Object.freeze({
   webwar_campaign_complete: 'a town cut off from all that feeds it',
   infowar_lie_exposed: 'a court caught in its own lie',
   infowar_spy_exposed: 'paid eyes found among us',
+  // IN-0a: the week a BOUGHT telling becomes what a court actually reckons. The townsfolk
+  // repeating it do not know it was paid for — the phrase is what they think happened.
+  plant_took: 'a story taking hold that somebody paid to plant',
   intel_transfer: 'word passing quietly between courts',
   // power / faction / coup
   coup_succeeded: 'a seizure of power',

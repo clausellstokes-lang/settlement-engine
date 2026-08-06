@@ -45,6 +45,13 @@ export const SOURCE = Object.freeze({
   NPC_TABLE: 'read:npcTable',                   // tonightAtTheTable / NPC secrets + goals
   PLOT_HOOKS: 'read:plotHooks',                 // collectPlotHooks
   DRAMATIC_IRONY: 'read:dramaticIrony',         // belief-vs-truth divergence
+  // IN-0a — the standing COMMISSIONED lies aimed at (or planted in) a town, projected
+  // through brokerageServicesPlant.projectPlants. DM-ONLY BY CONSTRUCTION and that is the
+  // whole point: a live plant is the mystery the table is supposed to be inside, so its
+  // absence from PLAYER_SAFE_SOURCES below is the fail-closed AUTHORITY. `projectPlants`
+  // is fail-OPEN on its own `audience` default (J-INF-17), so the audience gate that
+  // actually holds is this one — structural, not a flag, not a parameter default.
+  PLANTS_TRUTH: 'read:plants.truth',
   // DESIGN_THE_ROADS §14/§15 — the road-scene truth read (the chosen route + per-hop
   // conditions, army/migrant/envoy movement, siege/occupation/festival at the gates). All
   // sections read TRUTH at the current tick ⇒ DM-ONLY (never player-safe, §15 classification).

@@ -209,6 +209,34 @@ function exactKeys(row, expected) {
     && actual.every((entry, index) => entry === wanted[index]);
 }
 
+/**
+ * IN-0a — THE TRANSPORT WINDOW, and the ONE equality it replaces.
+ *
+ * A commission is PAID on the tick its act applies and SEEDED on the tick the writer folds
+ * it. Those were the same tick only because nothing carried an envelope between pulses;
+ * once `brokeragePlantHandoff` does (the applied receipt is readable one pulse later, and
+ * not one instant sooner — the kernel mouths are banked, see that leaf's header), a real
+ * commission is exactly one week older than the lie it becomes.
+ *
+ * So the validator's `commissionedAtTick === seededTick` equality becomes a BOUNDED,
+ * NON-NEGATIVE lag of at most this many ticks. Nothing else about the boundary moves: the
+ * FRESHNESS law is untouched and still the strongest guard here (`seededTick === now` —
+ * a stale deposit cannot become state no matter what its receipt says), the lineage token
+ * is still re-derived from `seededTick`, the override's `lastUpdateTick` must still equal
+ * it, and an envelope claiming to have been paid for AFTER it was told is refused outright.
+ *
+ * [JUDGMENT J-IN0A-1, vetoable. The alternatives were both worse: re-stamping
+ * `commissionedAtTick` forward would put a one-week falsehood inside a DM-truth receipt and
+ * contradict the act's own news beat; relaxing the FRESHNESS clause instead (folding at the
+ * original seed tick) would leave the belief override claiming to be a week older than the
+ * write that lands it, AND would break `envoyInterceptionStage.prepareEnvoyPlantTargets`,
+ * whose `seededTick === tick` guard a WAR lane owns and this slice must not edit. Say
+ * "veto" to restore the strict equality and take the pendingPlants deposit (Q1's fallback)
+ * instead.]
+ * @type {number}
+ */
+export const PLANT_HANDOFF_LAG_TICKS = 1;
+
 /** @param {unknown} value @returns {number | null} */
 function paidPlantTick(value) {
   return Number.isInteger(value) && Number(value) >= 0 ? Number(value) : null;
@@ -268,7 +296,9 @@ export function commissionedPlantAt(value, now) {
     || trueBand == null || assertedBand == null || assertedBand !== expectedAsserted
     || key !== `plant:${liarId}:${audienceId}:${subjectId}`
     || lineageId !== `disinfo:${liarId}:${audienceId}:${seededTick}`
-    || hostId !== liarId || commissionedAtTick !== seededTick
+    || hostId !== liarId
+    || seededTick - commissionedAtTick < 0
+    || seededTick - commissionedAtTick > PLANT_HANDOFF_LAG_TICKS
     || receipt.assertedBand !== assertedBand || receipt.trueBand !== trueBand
     || !strictText(receipt.marketId) || !strictText(receipt.marketName)
     || !PAID_PLANT_PRICE_BANDS.has(String(receipt.priceBand))

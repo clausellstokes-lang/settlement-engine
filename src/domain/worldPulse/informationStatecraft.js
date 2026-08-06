@@ -90,6 +90,13 @@ import {
   lieWillingness,
   seatBeliefRecord,
 } from './disinformationPlant.js';
+// IN-0a — THE HANDOFF. The carried envelope and the two receipt shapes only a bought lie
+// can produce. A pure READ leaf: this file is still the sole belief/disinfo writer.
+import {
+  appliedPlantEnvelopesAt,
+  plantExposureReasons,
+  plantTookEntry,
+} from './brokeragePlantHandoff.js';
 
 export { LIE_TUNING, lieWillingness };
 
@@ -585,6 +592,10 @@ export function processLies({
             ? `${name(rec.audienceId)}'s reckoning re-anchored toward the truth; the exaggeration no longer holds.`
             : `The bluff outlived its shelf life; a lie meets contradiction in the end.`,
           `The court that lies to neighbours lies to its own people — a legitimacy wound and a people-held grievance ride with the credibility charge.`,
+          // IN-0a: a BOUGHT lie names its seller here, and its buyer where the lineage
+          // still carries one. Empty for a court's own bluff ⇒ byte-identical for every
+          // exposure a world without both information flags lit can produce.
+          ...plantExposureReasons(rec, name),
         ],
         settlementIds: [String(rec.liarId), String(rec.audienceId)],
         // Actor layer (NEWS ADDRESS LAW): the court's stamped mouthpiece, who
@@ -602,6 +613,12 @@ export function processLies({
       continue; // drop the exposed lie (do not carry forward)
     }
     nextDisinfo[key] = rec; // still afield
+    // IN-0a — THE TAKE. A bought story that is still standing a week after it landed, in a
+    // court whose reckoning now sits exactly on the asserted band, has DONE what it was
+    // paid to do. DM truth only, one-shot, no new state (the leaf reads the record's own
+    // age against the belief in hand); null for every uncommissioned bluff.
+    const took = plantTookEntry({ record: rec, currentBand: curBand, tick: now, nameFor: name });
+    if (took) newsEntries.push(took);
   }
 
   // ── (2) FOLD PAID PLANTS through this one writer. They enter the same
@@ -1277,7 +1294,13 @@ export function advanceInformationStatecraft({
     strengthOf: strengthFn,
     alignmentOf: alignFn,
     nameFor: nameFn,
-    commissionedPlants,
+    // IN-0a — THE CONSUME READ. An explicit hand-off from a caller wins (the test seam,
+    // and any future kernel thread); otherwise this head reads the PRIOR pulse's applied
+    // commissions off the pulse record itself. Dark on either information flag ⇒ [] ⇒ the
+    // fold loop runs zero times and this mover is byte-identical.
+    commissionedPlants: commissionedPlants.length
+      ? commissionedPlants
+      : appliedPlantEnvelopesAt(state, tick),
   });
   if (lie.overrides.size) {
     const nextMaps = applyBeliefOverrides(beliefMaps, lie.overrides);

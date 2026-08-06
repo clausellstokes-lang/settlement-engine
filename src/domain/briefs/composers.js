@@ -25,6 +25,8 @@ import { warCausalBrief } from '../worldPulse/peaceReasons.js';
 import { toPublicSafe } from '../display/publicSafe.js';
 import { tonightAtTheTable } from '../summary/tonightAtTheTable.js';
 import { collectPlotHooks } from '../dossier/plotHooks.js';
+import { plantIsExposed, projectPlants } from '../worldPulse/brokerageServicesPlant.js';
+import { seatBeliefRecord } from '../worldPulse/disinformationPlant.js';
 import { SOURCE, section, assembleBrief } from './citations.js';
 
 // ── shared helpers ───────────────────────────────────────────────────────────
@@ -49,6 +51,60 @@ function nameResolver(settlements) {
 /** @param {Record<string, unknown>|null|undefined} settlement @returns {string} */
 function settlementIdOf(settlement) {
   return settlement && settlement.id != null ? String(settlement.id) : '';
+}
+
+/**
+ * IN-0a — STORIES STANDING AGAINST THIS TOWN. The COMMISSIONED lies (the `plant:*` half of
+ * the disinfo ledger, disjoint from a court's own `lie:*` bluffs) that either name this
+ * town as their subject or were placed in its court, projected for ONE named audience.
+ *
+ * A DM asking "what lies are standing about my town?" should find the answer on the town
+ * page, which is where they would look — and the same read, asked as a player, must come
+ * back EMPTY while the lies are live, because a row saying "this belief was bought" hands
+ * the table the answer to the mystery the plant IS.
+ *
+ * THE AUDIENCE IS PASSED EXPLICITLY, ALWAYS. `projectPlants` defaults `audience` to 'dm'
+ * and returns records unchanged on that path — fail-OPEN (J-INF-17, a recorded and
+ * deliberately un-flipped default on a built export). Every call site therefore names its
+ * audience, and a source scan pins that it does.
+ *
+ * Exposure is read through the plant's OWN predicate against the mark's ACTUAL belief:
+ * `plantIsExposed` compares the asserted band to the audience's current reckoning, and
+ * handing it no belief would make it fall back to the record's true band — which is two
+ * bands from the asserted one by construction, i.e. it would call EVERY live plant exposed
+ * and leak all of them to players. The belief is not optional here; it is the guard.
+ *
+ * @param {Record<string, unknown>|null|undefined} worldState
+ * @param {string} settlementId
+ * @param {'dm'|'player'} audience
+ * @param {number} tick
+ * @returns {ReadonlyArray<Record<string, unknown>>}
+ */
+export function standingPlantsAgainst(worldState, settlementId, audience, tick) {
+  const ledgers = worldState && typeof worldState === 'object'
+    ? /** @type {Record<string, unknown>} */ (worldState).spatialLedgers : null;
+  const disinfo = ledgers && typeof ledgers === 'object'
+    ? /** @type {Record<string, unknown>} */ (ledgers).disinfo : null;
+  const maps = ledgers && typeof ledgers === 'object'
+    ? /** @type {Record<string, unknown>} */ (ledgers).beliefMaps : null;
+  if (!disinfo || typeof disinfo !== 'object' || !settlementId) return [];
+  const rows = Object.keys(/** @type {Record<string, unknown>} */ (disinfo)).sort()
+    .filter((key) => key.startsWith('plant:'))
+    .map((key) => /** @type {Record<string, unknown>} */ (disinfo)[key])
+    .filter((r) => r && typeof r === 'object'
+      && (String(/** @type {Record<string, unknown>} */ (r).subjectId) === settlementId
+        || String(/** @type {Record<string, unknown>} */ (r).audienceId) === settlementId));
+  return projectPlants(/** @type {Record<string, unknown>[]} */ (rows), {
+    audience,
+    isExposed: (record) => plantIsExposed(
+      record,
+      seatBeliefRecord(
+        maps && typeof maps === 'object' ? /** @type {Record<string, unknown>} */ (maps) : {},
+        String(record.audienceId), String(record.subjectId),
+      ),
+      tick,
+    ),
+  });
 }
 
 /**
@@ -91,6 +147,8 @@ export function settlementBrief({ settlement, worldState = null, tick = 0 } = {}
   const blocArr = (blocs && Array.isArray(blocs.blocs)) ? blocs.blocs : [];
   const cred = settlementCredibility({ worldState, settlementId: sid, tick, includeGroundTruth: false });
   const rumors = settlementRumors({ worldState, settlementId: sid, includeGroundTruth: true });
+  // IN-0a — projectPlants' FIRST non-test consumer, audience named explicitly.
+  const plants = standingPlantsAgainst(worldState, sid, 'dm', tick);
 
   return assembleBrief({
     kind: 'settlement',
@@ -102,6 +160,9 @@ export function settlementBrief({ settlement, worldState = null, tick = 0 } = {}
         : null,
       cred ? section('credibility', 'Standing', SOURCE.CREDIBILITY, [cred]) : null,
       section('rumors', 'What they say (vs. what is)', SOURCE.RUMORS_TRUTH, rumors),
+      plants.length
+        ? section('plants', 'Stories standing against this town', SOURCE.PLANTS_TRUTH, [...plants])
+        : null,
     ],
   });
 }

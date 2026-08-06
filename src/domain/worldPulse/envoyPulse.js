@@ -44,6 +44,7 @@ import { envoyNewsEntries } from './envoyNews.js';
 import { openRansomClaims } from './envoyRansomStage.js';
 import { ratifyCarriedSheets } from './envoyRatificationStage.js';
 import { npcLedgerOf } from './npcLedger.js';
+import { appliedPlantEnvelopesAt } from './brokeragePlantHandoff.js';
 
 /** @param {unknown} value @returns {Record<string, unknown>} */
 function asObject(value) {
@@ -143,7 +144,17 @@ export function advanceEnvoyDiplomacyPulse({
   // WR-7b (1) — THE PAID PLANT'S TARGET. Attaching an exact envoy-picture target
   // to an already-purchased envelope before the census, so the census sees the
   // intent it will have to honour. Nothing is minted or charged here.
-  const planted = prepareEnvoyPlantTargets({ worldState: state, tick, commissionedPlants });
+  //
+  // IN-0a — THE CONSUME READ (the ONLY line this slice adds to this WAR-owned file, and a
+  // pure read): an explicit hand-off from the caller wins; otherwise the prior pulse's
+  // applied commissions are read off the pulse record. `appliedPlantEnvelopesAt` gates on
+  // informationBrokeragesEnabled AND infoStatecraftEnabled, so with either dark it returns
+  // [] and `prepareEnvoyPlantTargets` takes its existing empty-input early return —
+  // byte-identical for every war golden. Until this line, the stage was fed by tests only.
+  const carriedPlants = commissionedPlants.length
+    ? commissionedPlants
+    : appliedPlantEnvelopesAt(worldState, tick);
+  const planted = prepareEnvoyPlantTargets({ worldState: state, tick, commissionedPlants: carriedPlants });
   state = planted.worldState;
 
   // WR-7b (2) — THE SHARED CUT. Both ledgers are projected from this one

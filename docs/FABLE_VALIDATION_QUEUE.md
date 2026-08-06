@@ -2905,3 +2905,132 @@ worth a look: two defects in this wave were self-consistently GREEN until a real
 was driven — the relationship key was hand-rolled `a|b` in BOTH source and fixture, and
 the term id omitted the beneficiary so a reciprocal sheet's two legs shared one name. Both
 are recorded in the mutation manifest's method note.
+
+---
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · IN-0a THE HANDOFF (the bought lie reaches the world)
+## (Opus 5 implementer AND verifier under the 2026-08-06 succession directive; every
+## J-* below is a chair-grade judgment made without a Fable chair and is VETOABLE)
+
+**What landed.** The paid plant stops dying in candidate metadata. Everything else in that
+lifecycle was already built — the rotation mints a `brokerage_plant` whose `metadata.plant`
+is a complete commission envelope, `commissionedPlantAt` validates it, `processLies` folds
+it under the disjoint `plant:*` namespace — and the ONE missing piece was the road between
+them, because the pulse kernel calls both consumers without `commissionedPlants` and the
+kernel mouths are banked (pulseKernel 1580 / applyWorldPulse 941, ZERO edits). A new pure
+leaf, `brokeragePlantHandoff.js` (94 effective lines), carries the envelope off the PRIOR
+pulse's own applied receipt; the statecraft head and the envoy head each read it at their
+own head behind `informationBrokeragesEnabled` x `infoStatecraftEnabled`. NO new flag, NO
+new world key, NO cert row, NO kernel edit. The DM town page gains
+`projectPlants`' first non-test consumer; `plant_took` is minted and fully registered.
+
+**VERIFY-AT-BUILD, SETTLED BY MEASUREMENT (the chair's Q1 gate).** Retention SUCCEEDS —
+executed three-stage probe: the real rotation producer -> `applyWorldPulseOutcomes` ->
+`compactOutcomeForHistory` preserves `metadata.plant` JSON-identical as a detached deep
+clone, and `brokerage_plant` measures `isStateOnlyOutcome:false` /
+`isSuppressionOnlyOutcome:false`, so it rides `selectedOutcomes` rather than the mechanical
+lane. The pulse record is appended at pulseKernel :2766, AFTER the envoy head (:2031) and
+the statecraft head (:2073), so the freshest readable record at either head is the prior
+tick's: the one-week lag is FORCED by the architecture, not chosen, and it is law M exact.
+Measured over six real kernel pulses, `lastRecordTick === tick - 1` holds every tick. The
+Q1 FALLBACK (pendingPlants) was NOT taken and no kernel seam was requested.
+
+**Alignment line:** DECLARED-ENGAGED, unchanged — willingness already composes
+malice/lawfulness through `lieWillingness` at the commission, and this slice adds no new
+alignment read. **Edit verb:** ENGINE-ONLY this slice, recorded as a decision: the plant
+projection is read-only and the DM lie-commission verb is IN-2's surface, per the block.
+
+**J-IN0A-1 — THE FOLD VALIDATOR'S ONE EQUALITY BECAME A BOUNDED WINDOW, AND THIS IS THE
+WAVE'S ONLY CONTRACT CHANGE.** `commissionedPlantAt` required `commissionedAtTick ===
+seededTick`, which is satisfiable ONLY when nothing carries an envelope between pulses.
+Under the chair's own ruled road a commission is PAID at T and SEEDED at T+1, so the
+equality is now `0 <= seededTick - commissionedAtTick <= PLANT_HANDOFF_LAG_TICKS (1)`.
+Nothing else moved: the FRESHNESS law (`seededTick === now`) is untouched and still the
+strongest guard, the lineage is still re-derived from `seededTick`, and an envelope paid
+for AFTER it was told is refused. Both alternatives were worse and are recorded in the
+leaf: re-stamping `commissionedAtTick` forward puts a one-week falsehood inside a DM-truth
+receipt and contradicts the act's own news beat; relaxing the FRESHNESS clause instead
+leaves the belief override claiming to be a week older than the write that lands it AND
+breaks `envoyInterceptionStage.prepareEnvoyPlantTargets`, whose `seededTick === tick` guard
+a WAR lane owns. Re-examine: whether a chair prefers the pendingPlants deposit to a
+one-clause amendment at a seam contract.
+
+**J-IN0A-2 — THE TWIN GUARD MOVED WITH IT, AND THE TWO ARE PINNED SEPARATELY.**
+`brokerageServicesPlant.paidPlantEnvelope` re-expresses the same law for
+`attachEnvoyPictureTarget` and carried the same equality. Both now read ONE shared
+constant from the law's home rather than two literals. Executed: reverting door ONE alone
+reds the DOOR ONE pin and leaves DOOR TWO GREEN — the doors are proven individually, per
+the recorded hazard that two guards over one job can only be pinned jointly.
+
+**J-IN0A-3 — `plant_took` FILES UNDER THE WAR DESK, ON PURPOSE AND TEMPORARILY.** Its nine
+siblings (`infowar_*`, `webwar_*`) file there under an authored ruling. IN-5 mints the
+KNOWLEDGE desk and re-files the lane; filing this under the `events` catch-all meanwhile
+would have hidden it from the desk it is being written for. Re-examine at IN-5.
+
+**J-IN0A-4 — THE KNOWLEDGE FAMILY GREW THE TOKEN `plant`, WHICH IS A DECONTAMINATION.**
+Measured: `plant_took` classified `knowledge` ONLY through the bare `news` token in its
+wizard-news id — the exact residual path IN-6's ratchet exists to shrink. Executed census
+before adding the token: exactly one other occurrence of the substring exists in src/ or
+scripts/, the internal envoy-picture patch `kind: 'plant'`, which is not a news kind.
+`brokerage_plant`'s own applied receipt now earns the family too. Re-examine: whether IN-6
+wants the residual lists re-measured now rather than at its own wave.
+
+**J-IN0A-5 — THE ENVOY TARGETING ARM NOW RUNS, WHICH IS A BEHAVIOUR CHANGE TO A WAR PATH
+BY FEEDING, NOT BY EDITING.** `prepareEnvoyPlantTargets` was fed by tests only; the ONE
+line IN-0a adds to `envoyPulse.js` is a gated pure read, and the stage's body is
+byte-unedited. Per Q2 the touch carries a coupling row landed in the same commit
+(`couplingRegistryInfo.js`, CPL-19.INFO_TO_GRAMMAR.IN-0a.paid_plant_handoff — INFO's first
+registry file, opened so IN-1..6 never reach into the war or grammar registries).
+DECLARED RESIDUAL: the two heads read INDEPENDENTLY, exactly as the block specifies, so a
+target the envoy stage attaches does NOT reach the fold — `envoyPicturePatches` stays
+unreachable until something threads one return value. This is inherent to the ruled road,
+not introduced here; the cure is a kernel thread or the pendingPlants deposit, and it is
+recorded rather than silently absorbed.
+
+**J-IN0A-6 — `plant_took` IS ONE-SHOT WITHOUT NEW STATE.** It fires on the single tick
+where the record is exactly one week old AND the mark's believed band equals the asserted
+band — two numbers the ledger already holds, so "took" is a read rather than a flag, and
+the anti-hum law is satisfied without a cooldown of its own. A court's own bluff carries no
+`commission` and is silent. Re-examine: whether the take deserves a beat at all, or whether
+the exposure should remain the lane's only moment.
+
+**⚠ ESCALATION 1 — A DOC OVERSTATEMENT, REPORTED AND NOT CORRECTED.** Both
+DESIGN_FP_INFORMATION.md §5 IN-0a and DESIGN_FP_ARCH_IN.md §4 say the corroborated mark's
+plant "DIES AT THE FOLD". The BUILT writer has no such arm: `processLies` section (2) folds
+a validated envelope unconditionally and the contradiction comparator is section (1), which
+runs on the NEXT pass. The resistance is REAL and the drama intact — measured: the plant is
+dropped, the exposure beat fires, and it names the market — but it is ONE TICK LATER than
+both documents claim. LIVE CODE OUTRANKS THE TABLE, so the pin measures the tree and the
+docs are left for a chair to amend.
+
+**⚠ ESCALATION 2 — HEAD (`a18fdcfa`) IS RED ON THREE GATE STEPS, AND THEY ARE NOT IN-0a's.**
+Measured against a `git archive` of HEAD with node_modules symlinked: `npm run typecheck`
+362 errors (per-file census byte-identical to this tree — DIFF EMPTY); `npm run
+typecheck:domain:strict` +13 over baseline in `pactFormation.js`/`pactProposals.js`/
+`pactTriggers.js`; `npm run lint` 30 problems / 3 errors. All three reproduce EXACTLY at
+HEAD. `npm run check` therefore cannot reach its later steps at all, which is why this
+wave's gate evidence is per-step. A 39-module import-cycle SCC (`layerBoundaries`) is also
+standing at HEAD, SCC membership diffed IDENTICAL. The strict and lint reds are the GR-2
+lane's; they need an owner or chair disposition before the next landing.
+
+**Verification (all executed at this build, quoted in the implementer transcript).**
+Attribution measured BOTH WAYS against a `git archive` of HEAD `a18fdcfa`. Full suite in
+this tree: 55 failed / 26,765 passed across 2,328 files. The 40 failing files re-run in
+ISOLATION both ways: the MINE-ONLY failure set is EMPTY after two attributable regressions
+were cured — the `sovereigntyLightingContract` census (re-recorded 2,327/358/1,969/18,624/
+5,317 -> 2,328/358/1,970/18,641/5,324 with the one-new-file cause stated, parked UNCHANGED)
+and `couplingInclusion`'s unlicensed INFO->GRAMMAR edge (cured with the registry row, not
+the baseline). `verify:dist` failures and first-paint byte figures are IDENTICAL base and
+mine (390,810 and 676,999 — this wave adds ZERO first-paint bytes); `npm run build` exit 0
+and `npm run smoke:boot` PASS at 469/469 chunks. New pins: 17, all green. TWO mutants
+executed with cp backups and cmp-proven restores: severing the transport window reds 9 of
+17 pins; reverting door ONE alone reds 1 and leaves door TWO green. The sweep plant is
+registered (`info/paid plant handoff severed at the transport window`) with its manifest
+entry spliced as RAW TEXT (+4/-0 lines, no reformat).
+
+**What Fable should re-examine, in priority order.** J-IN0A-1 is the only contract change
+and should be looked at first. ESCALATION 1 (the doc says "at the fold" and the code does
+not) and J-IN0A-5's declared residual are the two correctness-adjacent items. ESCALATION 2
+is not this wave's but blocks a clean gate for whoever lands next. J-IN0A-3 and -4 are
+registration calls IN-5/IN-6 will settle. J-IN0A-2 and -6 are mechanism calls with genuine
+optionality.

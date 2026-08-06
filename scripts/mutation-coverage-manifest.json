@@ -423,6 +423,10 @@
    "kind": "rationale",
    "ref": "sp-b-fold-arm-integration-pin-executed-2026-08-05"
   },
+  "tests/domain/brokeragePlantHandoffPins.test.js": {
+   "kind": "mutation",
+   "label": "info/paid plant handoff severed at the transport window"
+  },
   "tests/domain/candidateTypeVoicePhrasing.walker.test.js": {
    "kind": "uncovered"
   },

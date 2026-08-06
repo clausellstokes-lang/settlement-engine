@@ -2732,7 +2732,18 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // batteries and the dormancy fence. Every figure below is EXECUTED against the tree
       // by the assertions that follow — this block is a record of a measurement, never a
       // description of one, which is why the header says "re-measure, do not re-word".
-      files: 2327, parked: 358, credited: 1969, titles: 18624, suiteTitles: 5317,
+      //
+      // ── RE-RECORDED 2026-08-06 BY FP WAVE IN-0a, WITH ITS CAUSE STATED ──────────────
+      // 2,327/358/1,969/18,624/5,317 → 2,328/358/1,970/18,641/5,324. THE CAUSE IS ONE NEW
+      // TEST FILE and nothing else: tests/domain/brokeragePlantHandoffPins.test.js. No
+      // rule here widened or narrowed and no existing file changed shape; the deltas are
+      // exactly +1 file, +1 credited, +17 titles, +7 suite titles, and PARKED IS UNCHANGED
+      // at 358 — the new file spells every one of its titles as a literal, so door 3's
+      // reader recognises all of them statically and credits the file rather than parking
+      // it. (Its one `for…of` walks the SOURCE TREE inside a single named test, which is
+      // the registry-walker idiom SP-D recorded: loop INSIDE a named test, never generate
+      // tests from a loop.)
+      files: 2328, parked: 358, credited: 1970, titles: 18641, suiteTitles: 5324,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

@@ -94,6 +94,7 @@ MUTATED_FILES=(
   src/generators/narrative/settlementOriginProse.js
   tests/lint/.coupling-inclusion-baseline.json
   src/domain/certification/couplingRegistryWar.js
+  src/domain/worldPulse/brokeragePlantHandoff.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -756,6 +757,16 @@ check_caught "coupling/inclusion baseline entry deleted while its import lives" 
 #     the two.
 perl -0pi -e "s/  intendedDesk: 'war',\n  kinds: \['coalition_entry_priced'\],/  intendedDesk: 'trade',\n  kinds: ['coalition_entry_priced'],/" src/domain/certification/couplingRegistryWar.js
 check_caught "coupling/registry desk pulled away from heraldRouting" src/domain/certification/couplingRegistryWar.js "npx vitest run tests/lint/couplingDesk.walker.test.js --no-file-parallelism"
+
+# 72. IN-0a — THE HANDOFF SEVERED. The paid plant's envelope reaches the lie writer
+#     only because brokeragePlantHandoff carries it off the PRIOR pulse's applied
+#     receipt (the kernel mouths are banked; nothing hands it over). Move the
+#     transport window off the one-week lag and the carry silently returns nothing
+#     forever: the commission still charges its patron, the act still narrates, and
+#     the world plants NOTHING — which is exactly the live defect IN-0a was built to
+#     close, restored in one token. The pins must see the road go dead.
+perl -0pi -e 's/now - commissionedAtTick !== PLANT_HANDOFF_LAG_TICKS/now - commissionedAtTick !== 99/' src/domain/worldPulse/brokeragePlantHandoff.js
+check_caught "info/paid plant handoff severed at the transport window" src/domain/worldPulse/brokeragePlantHandoff.js "npx vitest run tests/domain/brokeragePlantHandoffPins.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
