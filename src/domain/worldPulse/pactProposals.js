@@ -288,7 +288,13 @@ export function openProposalBetween(rows, a, b) {
  */
 export function openPactProposal({ worldState, from, to, trigger, sheet, tick, digest, season }) {
   const rows = pactProposalsOf(worldState);
-  const terms = Array.isArray(recordOf(sheet).terms) ? recordOf(sheet).terms : [];
+  // ONE `recordOf`, HELD — so `Array.isArray` narrows the very property it tested. Called
+  // twice it tests one expression and reads another, and the read stays `unknown`, which is
+  // why `terms.length` below could not be typed. The value is identical either way:
+  // `recordOf` hands back the argument itself for a record, and a fresh `{}` otherwise,
+  // whose `.terms` is `undefined` on every call.
+  const sheetRecord = recordOf(sheet);
+  const terms = Array.isArray(sheetRecord.terms) ? sheetRecord.terms : [];
   if (!from || !to || from === to || !PACT_TRIGGERS.includes(trigger) || terms.length === 0) {
     return {
       worldState, proposal: null, refusal: 'invalid_term_sheet',

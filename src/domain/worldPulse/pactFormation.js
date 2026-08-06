@@ -208,7 +208,12 @@ function believedBandsOf(worldState, observerId, subjectId) {
  * never re-grades the intensity ladder; `tests/lint/allianceWebRiskConsumers.walker.test.js`
  * is the census that keeps that true, and this wave argues its own row into it.
  *
- * @param {{worldState: Record<string, unknown>, snapshot: unknown, rows: unknown,
+ * ⚠ `snapshot` USED TO STAND IN THIS SIGNATURE AND IN NO CALLER. It was a required member of
+ * a type nothing supplied and this function never destructured, so every one of the three
+ * call sites was a strict-mode error against a parameter that could not have been read. The
+ * signature now names exactly what the body consumes.
+ *
+ * @param {{worldState: Record<string, unknown>, rows: unknown,
  *   fromId: string, toId: string, self: ReturnType<typeof selfBandsOf>,
  *   strengthFor: (id: string) => number, threatId: string}} input
  * @returns {Array<ReturnType<typeof scoreTradeDemand>>}
@@ -307,8 +312,13 @@ export function answerPactProposal({ worldState, proposal, responderDemand01, ti
   const responderId = String(proposal.to);
   const terms = Array.isArray(recordOf(proposal.sheet).terms)
     ? /** @type {Array<Record<string, unknown>>} */ (recordOf(proposal.sheet).terms) : [];
+  // A term's magnitude arrives as `unknown` — the sheet is DM-editable and import-tolerant —
+  // and the `typeof` narrows it without moving a value: `clamp01`'s policy is
+  // `Number.isFinite(x) ? … : 0` over an UNCOERCED check, so a non-number already scored 0
+  // here. Deliberately not `Number(term.magnitude)`, which would newly admit numeric strings.
   const substance = terms.length
-    ? terms.reduce((sum, term) => sum + clamp01(term.magnitude), 0) / terms.length : 0;
+    ? terms.reduce((sum, term) => sum
+      + (typeof term.magnitude === 'number' ? clamp01(term.magnitude) : 0), 0) / terms.length : 0;
   const offer01 = clamp01(0.5 * substance + 0.5 * clamp01(responderDemand01));
   const { reserve01, receipt: reserveReceipt } = reserveFor({
     worldState, responderId, proposerId, tick,
@@ -363,6 +373,12 @@ export function signPactProposal({ worldState, proposal, tick, settlementOf = ()
   // arrive eighteen weeks later, and a clause that had already been running for eighteen
   // weeks when it was signed would quietly shorten every distant pact in the world. The
   // SPAN is preserved exactly; only its origin moves.
+  // ⚠ THE ANNOTATION ON THE CONST IS LOAD-BEARING, not decoration. Spreading a
+  // `Record<string, unknown>` into an object literal loses the index signature, so the mapped
+  // rows inferred as `{mintedTick, expiresTick}` ALONE — and `term.weightSpent` below, a real
+  // key every drafted term carries, did not exist on that type. Naming the row type restores
+  // what a treaty clause actually is: an open record.
+  /** @type {Array<Record<string, unknown>>} */
   const terms = /** @type {Array<Record<string, unknown>>} */ (recordOf(proposal.sheet).terms || [])
     .map((term) => ({
       ...term,
@@ -506,9 +522,14 @@ function rememberRefusal({ worldState, proposal, tick }) {
 /**
  * ADVANCE THE PEACETIME PACT LANE ONE TICK.
  *
+ * ⚠ `strengthFor` IS DECLARED NULLABLE BECAUSE ITS DEFAULT IS `null`. The old spelling said
+ * the parameter was a function or absent, while the destructuring default handed it `null` —
+ * a signature that contradicted the line beneath it. The body's `strengthFor || (…)` fallback
+ * is the whole point of the null: an absent reader means "use the bounded default read".
+ *
  * @param {{snapshot?: unknown, worldState: Record<string, unknown>,
  *   settlementUpdates?: Array<Record<string, unknown>>, digest?: unknown, season?: unknown,
- *   tick: number, strengthFor?: (id: string) => number}} args
+ *   tick: number, strengthFor?: ((id: string) => number) | null}} args
  * @returns {PactAdvanceResult}
  */
 export function advancePeacetimePacts({

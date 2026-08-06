@@ -114,6 +114,24 @@ function recordOf(value) {
 }
 
 /**
+ * A believed number, NARROWED — the third of this file's local narrowers, beside `word` and
+ * `recordOf`, and there for the same reason: every entry point here is total on garbage, so
+ * its inputs arrive as `unknown` and the arithmetic below needs a number.
+ *
+ * ⚠ IT MOVES NO VALUE, and that is provable rather than asserted. Every call site feeds the
+ * result straight to `clamp01`, whose policy is `Number.isFinite(x) ? … : 0` over an
+ * UNCOERCED check — so a string, a null, an object or an undefined already clamped to 0
+ * before this existed, and a non-finite number did too. Returning 0 for a non-number and the
+ * value itself for a number therefore reproduces `clamp01`'s own answer on every input in the
+ * language. It is a type narrowing, not a coercion, and deliberately NOT `Number(value)`,
+ * which would newly admit the numeric strings `clamp01` has always refused.
+ * @param {unknown} value @returns {number}
+ */
+function numeric(value) {
+  return typeof value === 'number' ? value : 0;
+}
+
+/**
  * The rung a believed word stands on, or −1 when the ladder does not carry it.
  * ABSENT IS −1 AND NEVER 0: rung 0 is a real rung on every ladder this leaf is handed —
  * the bottom of each is a WORD a court can genuinely believe — and reading an unresolved
@@ -158,7 +176,8 @@ function crossing(trigger, score01, receipt, subject = '') {
   });
 }
 
-/** The null crossing — an occasion that did not arise, with the reason it did not. */
+/** The null crossing — an occasion that did not arise, with the reason it did not.
+ *  @param {string} trigger @param {string} receipt @returns {PactTriggerCrossing} */
 const NO_CROSSING = (trigger, receipt) => crossing(trigger, 0, receipt);
 
 /**
@@ -287,10 +306,10 @@ export function scoreSharedThreat({ band, risk01, threatId }) {
  * @returns {Readonly<{fear01: number, reliance01: number, refuses: boolean, receipt: string}>}
  */
 export function dependencyFearOf({ demand01, dependency01, leverage01, insularity01 }) {
-  const demand = clamp01(demand01);
-  const dependency = clamp01(dependency01);
-  const leverage = clamp01(leverage01);
-  const insularity = clamp01(insularity01);
+  const demand = clamp01(numeric(demand01));
+  const dependency = clamp01(numeric(dependency01));
+  const leverage = clamp01(numeric(leverage01));
+  const insularity = clamp01(numeric(insularity01));
   const reliance = clamp01(
     T.RELIANCE_DEPENDENCY_WEIGHT * dependency
     + (1 - T.RELIANCE_DEPENDENCY_WEIGHT) * (1 - leverage),
