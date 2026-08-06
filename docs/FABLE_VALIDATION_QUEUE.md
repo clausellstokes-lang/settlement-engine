@@ -5197,3 +5197,136 @@ is why rows are now deferred to the chair.
 
 **Nothing lit. No flag minted. No golden re-recorded. No band ratified. No soak run.
 Nothing pushed.**
+
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · ES-2 REPAIR ROUND, AND THE TOOL THAT ENDS
+## HAND-READ RATCHETS
+## (Chair-landed. Commits `1e3397f0` the tool, `987928a3` the repairs. Vetoable.)
+
+### THE TOOL, BECAUSE THE HAZARD WAS MECHANICAL AND NOT MORAL
+
+`sh scripts/ratchet-inventory.sh <walker> <base-ref> [head-ref]` reads a RED ratchet's
+CONTENTS at two refs and diffs them as a MULTISET. It exists because THREE false gate
+receipts landed in one day and TWICE the false receipt was this exact check.
+
+**THE ROOT CAUSE IS MEASURED, NOT ASSUMED: VITEST NEVER PRINTS THE MEMBERS OF A FAILED
+ARRAY ASSERTION.** The row reads `expected [ …(76) ] to deeply equal []`, and that
+truncation is IDENTICAL in the default reporter AND in `--reporter=json` — the JSON route
+was tried FIRST and REFUTED. Only a CUSTOM reporter is handed the error object itself,
+whose `actual` carries the full array: **46,907 characters for that same 76-row run.** The
+truncation is a display step in the message formatter, not a property of the transported
+error. So every wave has been RECONSTRUCTING this inventory by hand from a cardinality —
+and hand-transcription is exactly where invented numbers come from. A hazard that requires
+a careful manual transcription every single time WILL be got wrong; the fix is to stop
+requiring it.
+
+**IT HARD-ERRORS RATHER THAN REPORTING CLEAN** (exit 2) when the members it extracted do
+not match the cardinality vitest printed, and again when a capture lists zero test cases.
+*"Clean" may never be able to mean "did not look."*
+
+**PROVEN BOTH WAYS BEFORE BEING TRUSTED, AND RE-PROVEN BY THE CHAIR UNPIPED.** RED:
+`8322b8ec` vs `84f50fe4` reports exactly ONE only-in-head row —
+`tests/domain/espionageGauntlet.test.js` line 636 — exit **1**. GREEN: the same base vs the
+repaired HEAD, ONLY IN HEAD (0), exit **0**. Both hard-error arms were driven on synthetic
+captures. ⚠ The chair's first re-proof read the exit code THROUGH A PIPE and got `tail`'s
+status rather than the script's — the recorded piped-gate hazard, live, inside the
+verification of an anti-false-receipt tool. Re-run unpiped for the figures above.
+
+### ES-2's INVENTORY FIGURES WERE NOT MEASURED AT ALL
+
+ES-2 reported *"69 rows / 269 un-anchored negatives at BOTH ends, IDENTICAL as a multiset,
+nothing grew … Mine was flagged mid-wave and cured before commit."* Measured with the tool:
+**78 rows / 292 stated sites at the base and 79 / 293 at ES-2's own commit** — and the ONE
+row that grew was **ES-2's OWN test file**. The reported figures match NEITHER end.
+
+⚠ The tool's 78/79 exceed the chair's earlier corrected 75/76 by exactly THREE because the
+tool inventories EVERY failed array assertion in the walker, including its second one (the
+generation-facing-tree arm), whose three rows are pre-existing at both ends. The 292/293
+site figures agree exactly. Recorded so the two numbers are not read as a contradiction.
+
+### THE SIX FINDINGS — ALL REPRODUCED BY EXECUTION FIRST, NONE SILENTLY "FIXED"
+
+**F3 IS THE ONE THAT MATTERED.** The gauntlet test file's header claimed each catch factor
+*"is dropped ONE AT A TIME … and the chance must MOVE"*, invoking the conjunction-coverage
+law. The pin implementing that claim fed a HAND-WRITTEN LITERAL straight to `catchChance01`
+— ES-0's arithmetic leaf, already covered by its own battery — and never routed through
+`gauntletCatchFactors` at all. **MEASURED: EIGHT of the ten world reads replaced with
+CONSTANTS and the battery stayed GREEN, eight for eight.** The drops now move the WORLD
+through the real gathering function and assert BOTH that the gathered term moved AND that
+the chance moved — the first arm is the constant-killer, because a world edit shifting two
+terms would otherwise leave a constant-ised one covered. **Post-repair the same eight
+mutants RED, eight for eight.** *A comment is not a pin: the claim was made TRUE, not
+reworded.*
+
+**F2** — the single-dip pin built its BOUGHT fixture as `corruption:{compromised,revealed}`,
+a shape `compromisedSecurityInstitutions` never reads (it filters `inst.impairments`). Both
+sides gathered the byte-identical record, and both operators passed on equality, so the pin
+compared a function against itself. Now the real shape, exact values on both sides
+(0.4 → 0.34, catch 0.0473 → 0.0402), strict inequalities, and the once-only property.
+
+**F4** — `covertDwellRead`'s two guards agreed on every ordinary itinerary, so each was
+invisible behind the other (alone: green, green; together: three reds). Each now has a row
+where the OTHER does not fire: a leg that ARRIVES BEFORE IT DEPARTS, and an arrival at tick
+12.5 where the schedule compares raw numbers and this leaf reads whole ticks. ⚠ **RECORDED,
+NOT PAPERED OVER: guard 2's `now < arrivalTick` sub-clause is UNREACHABLE through
+`scheduledEnvoyPosition`**, which reports 'arrived' precisely because the tick has passed.
+Kept as defence against a future producer and DELIBERATELY UNPINNED — pinning it would need
+a fixture no caller can build. Deliberately deferred, documented, not a bug to re-find.
+
+**F5** — `DWELL_RESAMPLE_CAP` survived 6 → 999 because the fixture reached only interval 3.
+The index is now pinned CLIMBING then SATURATED; the saturation arm does not depend on the
+constant's value, which is why the raised-cap mutant cannot survive it.
+
+**F1 — AND THE TOOL'S FIRST REAL USE CAUGHT ITS OWN AUTHOR.** The bare `not.toMatch(/\d/)`
+gained a positive liveness pin and an `// anchored:` reason — **and the first fix DID NOT
+TAKE.** The reason was written as a TWO-LINE comment, so the line immediately above the
+assertion was not the `anchored:` line, and the walker's lookback is EXACTLY ONE LINE (a
+fact it pins). Hand-reading would have recorded that as cured. The tool measured it,
+the fix was corrected, and the inventory re-measured to zero.
+
+**F6 — ES-2's ATTRIBUTION WAS INCOMPLETE.** A THIRD red row's content moved and it named
+only two: `tests/docs/architectureFreshness.test.js` went from `expected 218 to be greater
+than 296` to `296.8`, because `src/domain/worldPulse` went from **370 to 371 modules** and
+the one addition is `espionageGauntlet.js` itself. Red at BOTH ends and not this round's to
+fix — ARCHITECTURE.md's stated ~218 is stale by 153 modules, which is a doc wave.
+
+### ⛔ STOP-ES2-1 — CHAIR DECISION OWED, AND IT IS FAR CHEAPER THAN THE STOP REPORT SAYS
+
+ES-2 could not build `capture → openForeignGuestHold cause caught_spying`, and a **FOURTH
+blocker the stop report never named** was found: `ENVOY_ENCOUNTER_VENUE_KINDS` is
+`['allied_hall','occupied_enemy_settlement','field_node']` — there is **no word for the
+ordinary foreign settlement the gauntlet rolls in.**
+
+⭐ **But the vocabularies already carry almost everything.** `NEGOTIATION_PICTURE_CARRIERS`
+already contains **`court`**, and a settlement watch acting for its court IS one.
+`ENVOY_ENCOUNTER_KINDS` already carries `private_goal`; `ENVOY_PRIVATE_GOALS` already
+carries **`imprison`**; resolutions already carry `held` and `resumed`. And **`armyId` is
+ALREADY A KEY** in the exact-key `ENCOUNTER_KEYS` — the refusal is VALUE-level, not
+shape-level, so admitting a null moves no key set and needs **NO SAVE MIGRATION.**
+
+**RECOMMENDED — Option A, narrow form:** make two clauses in `normalizeEnvoyEncounter`
+carrier-kind-conditional (`armyId` required only for army carriers) and add ONE venue kind.
+Measured cost: 47 `.armyId` sites across 11 src files and 26 test files, several of which
+are army-transit rather than encounter readers. **Rejected: B** (mint the host's garrison as
+the armyId) manufactures an army that never marched and would breach the NEWS ADDRESS LAW —
+the option that would look like it worked and be wrong. **Rejected: C** (a separate custody
+road) buys a narrow diff by minting a SECOND RELEASE ROAD, the anti-pattern the gauntlet's
+own header cites, and leaks into transit anyway.
+
+**NOT BUILT AND NOT RULED — persisted-state shape is escalate-always here regardless of the
+blanket queue sign-off.**
+
+### GATES
+
+Wave battery 66/66 green across three touched files (the gauntlet file 30 → 33). eslint
+clean on all five authored files. `typecheck:domain:strict` green at 1,304 / 1,313 — the
+shared ratchet was NOT tightened, matching the precedent in the row above, because no `src/`
+file was edited and the surplus is not this round's. **Wave-end attribution against a
+`git archive` of the parent: `tests/{domain,property,lint,design,docs}` fails 22 files / 30
+tests at BOTH ends, per-file failing-test sets identical, no head-only and no base-only
+row** — with the ratchet half read BY THE NEW TOOL rather than by hand. Lighting census
+re-recorded 18,854 → 18,857, the title layer alone, cause isolated by construction and both
+ends read with the same instrument against this round's own parent.
+
+**Nothing lit. No flag minted. No band ratified. No golden shifted — no `src/` edit in the
+repair commit. No soak run. Nothing pushed.**
