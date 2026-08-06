@@ -42,14 +42,14 @@
  *      `describe`/`suite`) call, and that argument must be a static string. A comment, a
  *      string constant and an `expect(...)` argument are all refused.
  *   2. THE TEST MUST BE ONE THIS WALKER CAN PROVE RUNS — only the closed running TEST grammar
- *      keeps its title, only through a word this file has not seen BOUND, only with a
- *      FUNCTION BODY in argument two, only off a table this reader can prove has rows, only
- *      with a CONTEXT-FREE callback (no parameters at all), and only where the call stands as
- *      a direct statement of the module body or of a credited suite's STRAIGHT-LINE block. A
- *      test in a helper, a loop, a conditional or a callback registers nothing that a syntax
- *      tree can prove, so it keeps nothing.
+ *      keeps its title, only through a word that RESOLVES to vitest's own `it`/`test` by that
+ *      export's OWN name, only with a FUNCTION BODY in argument two, only off a table this
+ *      reader can prove has rows, only with a CONTEXT-FREE callback (no parameters at all),
+ *      and only where the call stands as a direct statement of the module body or of a
+ *      credited suite's STRAIGHT-LINE block. A test in a helper, a loop, a conditional or a
+ *      callback registers nothing that a syntax tree can prove, so it keeps nothing.
  *   3. THE SUITE MUST BE ONE THIS WALKER CAN PROVE RUNS — a file is refused WHOLE unless every
- *      suite it opens meets the same six conditions AND opens a block that is straight-line
+ *      suite it opens meets the same conditions AND opens a block that is straight-line
  *      registration. The conditions are what this walker CREDITS; they are not a census of
  *      what vitest reads, and § the eighth statement is where that distinction is argued.
  *   4. SELF-EXCLUSION — this walker never vouches for itself (it names every marker by
@@ -116,7 +116,9 @@
  *   B2 — TEST-WORD BINDINGS WERE NOT TRACKED AT ALL. `markShadowed` and the non-vitest
  *     import clause both keyed on SUITE_ROOTS, so `function it(name, fn) {}` — a no-op
  *     shadow that registers nothing — kept full title credit beside a real `describe`, and
- *     the file ran green. Both families now shadow (`OPENER_ROOTS`). Cost: 25 estate files.
+ *     the file ran green. Both families were made to shadow. Cost: 25 estate files. (The
+ *     shadow set itself is RETIRED at the ninth statement — the hole it closed is now closed
+ *     by resolution instead, and those same 25 files park on `OPENER_UNRESOLVED`.)
  *   B3 — REACHABILITY, named nowhere before. A real vitest `it`, squarely inside the
  *     running grammar, that is never invoked: `function never() { it(…) }`,
  *     `cases.forEach((c) => it(…))`, `if (false) { it(…) }`, `for (…) { it(…) }`. All were
@@ -170,10 +172,42 @@
  *     REGISTRATION — see `straightLineBlock`. Estate cost, MEASURED: 9 files newly parked,
  *     135 by reason kind. ENUMERATED in the landing commit.
  *
- * ── THE TERMINAL CLAIM, AND IT QUANTIFIES OVER THIS WALKER AND NOTHING ELSE ────
- * THIS WALKER CREDITS ONLY STRAIGHT-LINE, CONTEXT-FREE, STATICALLY-REGISTERED TESTS UNDER THE
- * CLOSED CALL GRAMMAR; EVERYTHING ELSE PARKS. THE STANDING FALSIFIER IS A CREDITED FILE
- * OUTSIDE THAT GRAMMAR.
+ * ── DOOR 3, NINTH STATEMENT: THE BINDING, AND THE LAST ENUMERATION IS GONE ─────
+ * THE EIGHTH CUT'S STATED FALSIFIER WAS MET — by a construct that is not a property of the
+ * call, nor of its arguments, nor of its body or block, but of the MODULE'S OWN BINDING
+ * STRUCTURE. `import { expect as it } from 'vitest';` rebinds an opener word to a non-opener
+ * vitest export. The eighth cut's shadow clause keyed on the module SOURCE and never on
+ * whether a specifier's local name equalled its imported one, so the rebind never became
+ * opaque and the call through it was credited with `reasons=[]` — the shipped evaluator
+ * reading `SATISFIED / satisfiable true / missing []` off the REAL marker while vitest 4.1.8
+ * registered NO ROW and a deliberate throw never fired. `expect as describe` forged TWO titles
+ * from one line, because `creditedSuiteBody` handed registration through the aliased word.
+ *
+ * THAT IS THE FIFTH CHANNEL THE EIGHTH CUT PREDICTED, AND IT ARRIVED WHERE THAT CUT SAID IT
+ * COULD NOT. Its header called its binding list "a declaration, a parameter, a destructure, a
+ * catch binding, a function name, a non-vitest import" and argued that enumeration was safe
+ * BECAUSE it sat on the credit side, "the side that was always closed". It was an ENUMERATION
+ * ON THE CREDIT SIDE THAT FAILED OPEN. The lesson is the one this file keeps re-learning at a
+ * cost: an enumeration is unsafe on whichever side it decides credit, and which side that is
+ * cannot be read off the polarity of the surrounding sentence.
+ *
+ * SO THE LAST ENUMERATION IS RETIRED AND REPLACED BY A TOTAL PREDICATE. A callee is credited
+ * only where it RESOLVES, through the module's own bindings, to a vitest export whose IMPORTED
+ * name — never its local alias — is in the running grammar. Resolution succeeds for a named
+ * import read by its imported name, and for a namespace member whose member name is the
+ * imported name; it succeeds for nothing else, and a RESERVED word that resolves to anything
+ * but itself parks the file. There is no third state for a new spelling to occupy: "bound by
+ * something else", "bound twice", "not bound at all" and "bound to a different vitest export"
+ * are not rows on a list, they are simply the ways a total function fails to return an opener.
+ * The machinery this deletes is named in `bindingsOf`, and the estate cost is ZERO — measured
+ * file-for-file, title-set for title-set, against the eighth cut.
+ *
+ * ── THE TERMINAL CLAIM, IN BINDING-RESOLUTION TERMS ────────────────────────────
+ * THIS WALKER CREDITS A TITLE ONLY WHERE ITS CALL'S CALLEE RESOLVES, THROUGH THE MODULE'S OWN
+ * BINDING STRUCTURE, TO A VITEST OPENER NAMED BY ITS IMPORTED NAME, AND THAT CALL IS
+ * STRAIGHT-LINE, CONTEXT-FREE AND STATICALLY REGISTERED UNDER THE CLOSED CALL GRAMMAR;
+ * EVERYTHING ELSE PARKS. THE STANDING FALSIFIER IS A CREDITED FILE WHOSE OPENER DOES NOT SO
+ * RESOLVE, OR WHICH IS OUTSIDE THAT GRAMMAR.
  *
  * THAT SENTENCE REPLACES EVERY EARLIER ONE OF THE FORM "run-control has N homes and all N are
  * closed", AND THE REPLACEMENT IS THE POINT RATHER THAN A TIDY-UP. Four cuts in a row stated a
@@ -182,17 +216,20 @@
  * cardinality, the body's context, the block's reachability. A claim about vitest's surface is
  * a claim this file has no way to verify and every reason to get wrong, and under J-WR-13
  * stating one is an overstatement whether or not it happens to be true this week. A claim about
- * what THIS WALKER credits is checkable by reading this file, and it is falsified by exactly one
- * thing: a credited file outside the grammar. So the four homes below are kept as the RECORD OF
- * WHY THE GRAMMAR IS CONSERVATIVE — they are the evidence that enumerating vitest is a losing
- * game — and NOT as an inventory anyone should read as complete. A fifth channel almost
- * certainly exists; the grammar's answer to it is that anything it cannot prove, it parks.
+ * what THIS WALKER credits is checkable by reading this file. The eighth cut's version of that
+ * claim was checkable and FALSE, because "under the closed call grammar" quietly assumed the
+ * word at the head of the call was vitest's — the one thing it never checked. Naming the
+ * BINDING in the claim is what makes the sentence say the whole of what the code requires.
  *
- * THE FOUR CHANNELS THAT TAUGHT THE GRAMMAR ITS SHAPE, kept as record: the CALLEE CHAIN (a
- * closed running grammar, § the fifth and sixth statements), the SECOND ARGUMENT (L1, a
- * function body and no options bag), the TABLE'S CARDINALITY (L2, a non-empty array literal),
- * and the CALLBACK'S BODY AND ITS BLOCK (G1/G2, context-free and straight-line). Each was
- * found by an adversary AFTER a cut of this file declared the previous list complete.
+ * THE FIVE CHANNELS THAT TAUGHT THE GRAMMAR ITS SHAPE, kept as record and NOT as an inventory
+ * anyone should read as complete: the BINDING (§ this statement, a positive resolution), the
+ * CALLEE CHAIN (a closed running grammar, § the fifth and sixth statements), the SECOND
+ * ARGUMENT (L1, a function body and no options bag), the TABLE'S CARDINALITY (L2, a non-empty
+ * array literal), and the CALLBACK'S BODY AND ITS BLOCK (G1/G2, context-free and
+ * straight-line). Each was found by an adversary AFTER a cut of this file declared the previous
+ * list complete. A sixth channel may well exist; the answer to it is that anything this walker
+ * cannot prove, it parks — and the ninth cut's contribution is that the proving is now a total
+ * function rather than a list of the ways proof can fail.
  *
  * THE RESIDUALS, NAMED AND NOT CLAIMED AWAY.
  * (a) `test.extend({})` — vitest's first-class fixture API, EXECUTED under 4.1.8 and it
@@ -230,25 +267,45 @@
  *     hunt: `aroundEach`/`aroundAll` that never call their continuation throw
  *     `AroundHookSetupError`; `this.skip()` throws `Cannot read properties of undefined`;
  *     `beforeAll((ctx) => …)` throws `FixtureParseError`; `it.each([1,2])('…', (n, { skip }) => …)`
- *     throws on the destructure; and an `async` `describe` callback IS awaited, so
- *     `describe('x', async () => { await …; it('MARKER', fn); })` genuinely RUNS and this walker
- *     credits it correctly. None of these forges. G1 parks the first four anyway, on the
+ *     throws on the destructure. None of these forges. G1 parks the first four anyway, on the
  *     parameter rather than on the throw, which is the cheaper thing to state.
- * (b) THE FACTORY ROUTE (J-ES-4-F, unchanged). A suite word that reaches its call site
- *     through a value this file cannot follow — a helper module's export, an object
- *     property, a function return — is invisible to a reader that does not EXECUTE the
- *     file. STATED EXACTLY, because the fifth cut's version of this sentence was the second
- *     of its two overstatements: the ALIAS half is closed not by the binding but by the
- *     reference rules AROUND it — an unaccounted Identifier reference to a suite word parks
- *     (`SUITE_REF`), a bound word is OPAQUE so every call through it parks as
- *     `SUITE_SHADOW_AMBIGUOUS` or `SUITE_NOT_RUNNING`, and a call at an unreachable
- *     position parks as `*_UNREGISTERED`. A binding on its own parks nothing, and must not
- *     — one estate file names a loop variable `suite` and opens no suite at all. The
- *     FACTORY half is not closed, and no prevalence figure is claimed for it because
- *     prevalence is exactly what a static reader cannot measure there. Two estate files
- *     spell `RuleTester.itOnly = it.only`, which is that shape at TEST level; it is inert
- *     here because no estate RuleTester case sets `only: true` (measured, zero
- *     occurrences), and it is recorded rather than smoothed.
+ *     ONE SENTENCE THAT USED TO SIT HERE WAS FALSE AND IS CORRECTED RATHER THAN DELETED, because
+ *     the correction is the useful part. The seventh cut wrote that an `async` `describe`
+ *     callback IS awaited, so `describe('x', async () => { await …; it('MARKER', fn); })`
+ *     "genuinely RUNS and this walker credits it correctly". It no longer credits it: G2 landed
+ *     in the EIGHTH cut and that exact spelling now PARKS — executed,
+ *     `reasons=["TEST_UNREGISTERED:it","SUITE_NOT_STRAIGHT_LINE:describe"]` — because a bare
+ *     `await setup();` is an ExpressionStatement wrapping an AwaitExpression, and
+ *     `straightLineBlock` admits only calls, plain declarations and empty statements. The vitest
+ *     half of the sentence is still true and the walker half was stale for a whole cut: the
+ *     DIRECTION is safe (a title cost, never a credit), and an async suite callback with no
+ *     `await` STATEMENT is credited as before. A file that needs the await should hold it inside
+ *     a hook or a test body, where it is not a registration decision.
+ * (b) THE FACTORY ROUTE (J-ES-4-F), NARROWED BY THE NINTH STATEMENT AND STILL OPEN AT ITS CORE.
+ *     A suite word that reaches its call site through a value this file cannot follow — a
+ *     helper module's export, an object property, a function return — is invisible to a reader
+ *     that does not EXECUTE the file. THE ALIAS HALF IS NOW CLOSED AT THE BINDING RATHER THAN
+ *     AROUND IT, which is what the fifth and eighth cuts each got wrong in their own direction:
+ *     an aliased or rebound opener does not RESOLVE, so the call through it parks as
+ *     `OPENER_UNRESOLVED` on the spot, and there is no longer any need to argue that the
+ *     reference rules happen to catch it. A binding on its own still parks nothing, and must
+ *     not — one estate file names a loop variable `suite` and opens no suite at all.
+ *     THE FACTORY HALF IS NOT CLOSED and no prevalence figure is claimed for it, because
+ *     prevalence is exactly what a static reader cannot measure there: a value taken from a
+ *     resolved opener and passed onward (`const d = describe; d('x', fn)`) is refused, but a
+ *     value that arrives from another MODULE cannot be followed at all. What resolution buys is
+ *     that such a value can never be MISTAKEN for vitest's own — it simply is not an opener
+ *     here, so nothing it opens is credited. Two estate files spell
+ *     `RuleTester.itOnly = it.only`, which is that shape at TEST level; it is inert here because
+ *     no estate RuleTester case sets `only: true` (measured, zero occurrences), and it is
+ *     recorded rather than smoothed.
+ * (b2) THE REFERENCE RULE IS STILL SUITE-ONLY, AND THAT ASYMMETRY IS DELIBERATE RATHER THAN AN
+ *     OVERSIGHT. `SUITE_REF` parks a file that mentions a resolved suite opener outside a
+ *     classified call; there is no `TEST_REF`. Widening it to test words would park the two
+ *     `RuleTester.itOnly = it.only` files above for a shape measured inert, which is a cost with
+ *     no matching risk — a bare `it` handed to a helper cannot silence a sibling the way a bare
+ *     `describe` can hide a whole block. It is named here so that the next cut widens it on
+ *     purpose or leaves it on purpose, rather than discovering it.
  *
  * ── THE DOC CLAUSE ES-4 IS OWED, ADDRESSED BY SENTENCE AND NOT BY LINE ──────────
  * Two documents tell the ES-4 builder to keep the marker stable and to "put it in the test
@@ -257,22 +314,32 @@
  * mints `SOVEREIGNTY_LIGHTING_EVIDENCE`. Both are addressed by their SENTENCE here rather
  * than by a line number, because hand-keyed line addresses rot — the sixth cut's landing
  * commit recorded one of them ~256 lines from where it actually sits, and the endgame caught
- * it. THAT SENTENCE IS NO LONGER SUFFICIENT AND NEEDS SIX CLAUSES, one per closed hole, and the
- * SIX IS THIS WALKER'S COUNT rather than a claim about how many ways vitest can park a test.
- * The ES-4 pin must sit in a title
- *   (1) opened through an UNBOUND `it`/`test` word (B2),
+ * it. THAT SENTENCE IS NO LONGER SUFFICIENT AND NEEDS SEVEN CLAUSES, one per closed hole, and
+ * the SEVEN IS THIS WALKER'S COUNT rather than a claim about how many ways vitest can park a
+ * test. The ES-4 pin must sit in a title
+ *   (1) opened through an `it`/`test` word that RESOLVES to vitest's export of that same name —
+ *       imported from 'vitest' and NOT renamed to or from another export, not destructured off
+ *       a namespace, not taken from a shim, not bound anywhere else in the file, and not left
+ *       to a global (§ the ninth statement),
  *   (2) at a STATICALLY REGISTERED position — a direct statement of the module body or of a
  *       credited suite's block (B3),
- *   (3) in a block that is STRAIGHT-LINE registration, with no `return`, `throw`, conditional
- *       or loop anywhere in it (G2),
+ *   (3) in a block that is STRAIGHT-LINE registration, with no `return`, `throw`, conditional,
+ *       loop or bare `await` STATEMENT anywhere in it (G2),
  *   (4) with a FUNCTION BODY in argument two and NO options bag (L1),
  *   (5) whose callback takes NO PARAMETERS — no context, no destructured `{ skip }`, no table
  *       row (G1),
- *   (6) and, if it is table-driven, off a NON-EMPTY ARRAY LITERAL (L2).
- * A pin that misses any of the six carries the token, does not run or cannot be proven to run,
- * and does not light the wave. THE SHORTEST PIN THAT SATISFIES ALL SIX IS THE PLAIN ONE:
+ *   (6) and, if it is table-driven, off a NON-EMPTY ARRAY LITERAL (L2),
+ *   (7) in a file whose OTHER suites and tests also satisfy all of the above, because every
+ *       refusal in this walker is FILE-SCOPED — one rebound word or one focused sibling costs
+ *       the whole file its titles, the marker's included.
+ * A pin that misses any of the seven carries the token, does not run or cannot be proven to run,
+ * and does not light the wave. THE SHORTEST PIN THAT SATISFIES ALL SEVEN IS THE PLAIN ONE:
+ * `import { describe, it } from 'vitest';` — plainly, with no `as` on either opener — and then
  * `it('ES-4-…-EVIDENCE — …', () => { … });` at the top level of the file, or in a suite whose
- * block holds nothing but calls and declarations. The doc edit is out of this commit's pathspec
+ * block holds nothing but calls and declarations. That import is the ordinary first line of
+ * every one of the estate's 2,314 test files, so clause (1) costs a new pin nothing; it is
+ * spelled out only because the eighth cut credited a pin whose `it` was vitest's `expect`.
+ * The doc edit is out of this commit's pathspec
  * by the chair's ONE-COMMIT scope and both files are read by three other walkers, so it is
  * recorded here — where the ES-4 builder is already reading — rather than left to be discovered.
  *
@@ -341,20 +408,12 @@ const SUITE_WORDS = Object.freeze(['describe', 'suite']);
 /** The two it exports as test openers. */
 const TEST_WORDS = Object.freeze(['it', 'test']);
 /**
- * …and the jest-compat prefixes, which vitest neither exports nor globals. They are here
- * so a local shim or a stray global cannot open a suite this walker says nothing about:
- * a call rooted in one of these is outside the running grammar, so it PARKS.
+ * …and the jest-compat prefixes, which vitest neither exports nor globals. They are RESERVED
+ * WORDS rather than openers: nothing can ever resolve to them, so a call rooted in one of
+ * these can never be credited, and — under the ninth statement's rule — it PARKS THE FILE.
  */
 const SUITE_ROOTS = new Set([...SUITE_WORDS, 'xdescribe', 'fdescribe', 'xsuite', 'fsuite']);
 const TEST_ROOTS = new Set([...TEST_WORDS, 'xit', 'fit', 'xtest', 'ftest']);
-/**
- * BOTH FAMILIES SHADOW. The fifth cut tracked bindings of SUITE words only, and the
- * proving lane executed the hole that left: a locally declared, destructured, aliased or
- * shim-imported `it` kept FULL title credit while registering nothing, so
- * `function it(name, fn) {}` beside a real `describe` forged a title in a file that ran
- * green. A binding is a binding at either level, so the shadow set is keyed on this union.
- */
-const OPENER_ROOTS = new Set([...SUITE_ROOTS, ...TEST_ROOTS]);
 
 /**
  * DOOR 3's RUNNING GRAMMAR — the ONLY suite modifiers read as running, MEASURED against
@@ -550,6 +609,21 @@ function contextFreeCallback(node) {
 const HOOK_WORDS = new Set(['beforeAll', 'beforeEach', 'afterAll', 'afterEach', 'aroundEach', 'aroundAll']);
 
 /**
+ * ── THE NINTH STATEMENT'S WORD LIST: WHAT IS RESERVED ──────────────────────────
+ * The words this walker refuses to let a file redefine. A call whose callee chain roots in
+ * one of these must resolve — through the module's own binding structure — to the vitest
+ * export OF THE SAME NAME; anything else parks the file. That is the whole of the alias,
+ * shadow, rebind and global class in one predicate, and it is stated on the CREDIT side
+ * (resolution must SUCCEED) rather than as a list of the ways it can fail.
+ *
+ * The jest-compat prefixes are in here precisely BECAUSE nothing can resolve to them: vitest
+ * exports no `xdescribe`, so `xdescribe(…)` is a word that reads like an opener and provably
+ * is not one, and the file parks. The hooks are in here for the same reason G1 reads hooks at
+ * all — a hook that is not vitest's own is a hook whose callback this reader cannot classify.
+ */
+const RESERVED_WORDS = new Set([...SUITE_ROOTS, ...TEST_ROOTS, ...HOOK_WORDS]);
+
+/**
  * ── G2: THE BLOCK'S OWN REACHABILITY ───────────────────────────────────────────
  * `markRegistered` is POSITIONAL, not flow-sensitive, and the sixth cut's own sentence
  * ("credit is granted only at statement positions reachable from the module body") was
@@ -677,29 +751,166 @@ const isNameNotReference = (parent, key) => !!parent
       && key === 'key' && !parent.computed));
 
 /**
- * CREDIT-BACK 1 — an import specifier. Both halves of `import { describe } from 'vitest'`
- * are Identifier nodes spelling a suite word, and every test file in the estate has one, so
- * without this clause the polarity would park the whole tree. IT IS PINNED, and its mutant
- * is the chair's own stated verification: delete it and the estate census moves from 93
- * parked files to 2,312 (MEASURED). A specifier whose ImportDeclaration names any source
- * OTHER than 'vitest' is NOT credited back — it is treated as a rebind of the word, and the
- * file parks, because a shim module is exactly the factory route.
+ * ── DOOR 3, NINTH STATEMENT: THE BINDING ENVIRONMENT, READ POSITIVELY ──────────
+ * ONE PASS OVER THE TREE THAT ANSWERS ONE QUESTION: for each name this module binds, WHAT
+ * BINDS IT, and is that binding a vitest import? Everything the eighth cut spent on shadow
+ * tracking — a `shadowed` set, a `markShadowed` writer, two `*_SHADOW_AMBIGUOUS` reasons, a
+ * `node.source.value !== 'vitest'` clause and an import-specifier credit-back — is replaced
+ * by this environment plus one predicate, and the replacement is not a tidy-up: the eighth
+ * cut's arrangement FAILED OPEN, and this one cannot fail in that direction at all.
+ *
+ * WHAT FAILED, AND WHY IT WAS STRUCTURAL RATHER THAN A MISSED ROW. The eighth cut asked
+ * whether a word was BOUND and, if so, treated it as opaque. But its import clause read the
+ * module SOURCE and never the specifier's own names, so a vitest-sourced specifier that
+ * REBOUND an opener word to a NON-opener export was not a binding at all in its eyes:
+ * `import { expect as it } from 'vitest';` followed by `it('MARKER', fn)` was credited with
+ * `reasons=[]`, and the shipped evaluator read `SATISFIED / satisfiable true / missing []`
+ * off the real marker while vitest 4.1.8 registered NO ROW and a deliberate
+ * `throw new Error('THIS RAN')` never fired (RE-EXECUTED by this lane in a git-archive tree:
+ * `Test Files 1 passed (1) / Tests 1 passed (1)`, exit 0, `grep -c 'THIS RAN'` = 0). The
+ * eighth cut's header called its binding list — "a declaration, a parameter, a destructure, a
+ * catch binding, a function name, a non-vitest import" — an enumeration that was safe because
+ * it lived on the credit side. It was an ENUMERATION ON THE CREDIT SIDE THAT FAILED OPEN, in
+ * the one place four cuts of prose had insisted was "always closed". `expect as describe` was
+ * worse still: `creditedSuiteBody` handed registration through the aliased word, so ONE line
+ * forged two titles.
+ *
+ * THE REPLACEMENT IS A POSITIVE PREDICATE AND IT ENUMERATES NOTHING. A callee is credited
+ * only where it RESOLVES to a vitest opener, and resolution is total: it either succeeds by
+ * naming the vitest export, or it fails. There is no third state for a new spelling to
+ * occupy, because "bound by something else", "bound twice", "not bound at all" and "bound to
+ * a different vitest export" are not rows on a list — they are simply the ways resolution
+ * does not succeed. Two forms resolve, and they are the two vitest itself offers:
+ *   • A NAMED IMPORT, read by its IMPORTED name and never by its local alias. `import
+ *     { describe as mkSuite }` resolves `mkSuite` to `describe`; `import { expect as it }`
+ *     resolves `it` to `expect`, which is not an opener, so the call parks.
+ *   • A NAMESPACE MEMBER. `import * as V from 'vitest'` makes the MEMBER NAME the imported
+ *     name, so `V.describe(…)` is `describe`. A COMPUTED member (`V['describe']`) names
+ *     nothing a syntax tree can read, so it parks.
+ * BOTH WERE EXECUTED UNDER VITEST 4.1.8 BEFORE BEING CREDITED, because each is a credit this
+ * walker did not previously grant: `import { describe as mkSuite, it as check }` reported
+ * `✓ RENAMED-SUITE-VIA-ALIAS > RENAMED-TEST-VIA-ALIAS`, and `V.describe`/`V.it` reported
+ * `✓ NAMESPACE-SUITE > NAMESPACE-TEST`. Nothing else resolves — not a destructure off a
+ * namespace, not a shim import, not a helper's return, not a global.
+ *
+ * AND THE RESERVED-WORD RULE, WHICH IS THE OTHER HALF AND THE REASON A GLOBAL CANNOT COAST.
+ * A call rooted in a RESERVED word must resolve to the vitest export OF THAT SAME NAME. So
+ * `import { expect as it }` parks (`it` resolved to `expect`), `import { it as describe }`
+ * parks (`describe` resolved to `it` — accurate, and refused anyway because a word that reads
+ * `describe` and means `it` is the trap this cut exists to close), a locally declared
+ * `function it(){}` parks, and a file with NO vitest import at all parks every opener call it
+ * makes. AN OPENER WORD MAY ONLY EVER MEAN ITSELF; ANY OTHER WORD MAY MEAN AN OPENER.
+ *
+ * ESTATE COST, MEASURED FILE-FOR-FILE AGAINST THE EIGHTH CUT: ZERO. The parked set, the
+ * credited set and the title count are unchanged, and the title SETS are identical on every
+ * credited file — the eighth cut's classifier and this one were run over the same estate and
+ * their outputs compared row by row, in both directions, with no divergence. This is a pure
+ * retirement of machinery, not a behaviour change. THE ABSOLUTE FIGURES ARE DELIBERATELY NOT
+ * RESTATED HERE: they live in the `CENSUS` table of the census arm, where the suite ASSERTS
+ * them against a live measurement, because this header stated that count wrongly in two
+ * consecutive cuts and prose is where the staleness was able to hide (§ the chair's second
+ * ruling). The only movement is in reason KINDS, where `TEST_SHADOW_AMBIGUOUS` (25 files) and
+ * one `SUITE_NOT_RUNNING` (tests/edgeFunctions/contracts.test.js, whose `suite` loop variable
+ * is a string) become the single `OPENER_UNRESOLVED` (26 files). The repository declares no
+ * `globals: true`, and all 2,314 test files import from 'vitest' — measured, and the reason a
+ * positive rule is affordable here at all.
+ * @param {any} ast @returns {{resolve: (name: string) => string|null,
+ *   isNamespace: (name: string) => boolean, bindingNodes: Set<any>, bound: Set<string>}}
  */
-const isImportSpecifierId = (parent) => !!parent
-  && (parent.type === 'ImportSpecifier' || parent.type === 'ImportDefaultSpecifier'
-    || parent.type === 'ImportNamespaceSpecifier' || parent.type === 'ExportSpecifier');
+function bindingsOf(ast) {
+  const counts = new Map();
+  const bindingNodes = new Set();
+  const vitestNamed = new Map();
+  const vitestNamespaces = new Set();
+  const bind = (id) => {
+    if (!id || !id.name) return;
+    bindingNodes.add(id);
+    counts.set(id.name, (counts.get(id.name) || 0) + 1);
+  };
+  const bindPattern = (pattern) => { const ids = []; patternIds(pattern, ids); for (const id of ids) bind(id); };
+
+  const stack = [ast];
+  while (stack.length) {
+    const node = stack.pop();
+    if (!node || typeof node !== 'object' || typeof node.type !== 'string') continue;
+    if (node.type === 'ImportDeclaration') {
+      const fromVitest = node.source.value === 'vitest';
+      for (const spec of node.specifiers) {
+        bind(spec.local);
+        // The `imported` half of `import { describe as d }` is a MODULE-LINKAGE NAME, not a
+        // reference to anything in this file. Recording it here is what lets the reference
+        // rule below read every remaining Identifier as a real reference without needing a
+        // credit-back list for import specifiers — the eighth cut's CREDIT-BACK 1, retired.
+        if (spec.imported) bindingNodes.add(spec.imported);
+        if (!fromVitest) continue;
+        if (spec.type === 'ImportNamespaceSpecifier') vitestNamespaces.add(spec.local.name);
+        else if (spec.type === 'ImportDefaultSpecifier') vitestNamed.set(spec.local.name, 'default');
+        else vitestNamed.set(spec.local.name,
+          spec.imported.type === 'Identifier' ? spec.imported.name : spec.imported.value);
+      }
+    }
+    if (node.type === 'ExportSpecifier') { bindingNodes.add(node.local); bindingNodes.add(node.exported); }
+    if (node.type === 'VariableDeclarator') bindPattern(node.id);
+    if (node.type === 'FunctionDeclaration' || node.type === 'FunctionExpression'
+      || node.type === 'ArrowFunctionExpression' || node.type === 'ClassDeclaration'
+      || node.type === 'ClassExpression') {
+      if (node.id) bind(node.id);
+      for (const param of (node.params || [])) bindPattern(param);
+    }
+    if (node.type === 'CatchClause' && node.param) bindPattern(node.param);
+    for (const key of Object.keys(node)) {
+      if (key === 'loc' || key === 'range') continue;
+      const value = node[key];
+      if (!value || typeof value !== 'object') continue;
+      if (Array.isArray(value)) { for (const child of value) if (child && typeof child === 'object') stack.push(child); }
+      else stack.push(value);
+    }
+  }
+
+  // A name is resolvable only where the file binds it EXACTLY ONCE and that one binding is
+  // the vitest import. Two bindings mean a rebind somewhere this reader has no scope resolver
+  // for, and the honest answer to "which one is at the call site" is that it cannot say.
+  const sole = (name) => counts.get(name) === 1;
+  return {
+    resolve: (name) => (sole(name) && vitestNamed.has(name) ? vitestNamed.get(name) : null),
+    isNamespace: (name) => sole(name) && vitestNamespaces.has(name),
+    bindingNodes,
+    bound: new Set(counts.keys()),
+  };
+}
 
 /**
- * CREDIT-BACK 2 — `RuleTester.describe = describe;`, four estate files. A BARE suite value
- * assigned to a member target can only ever alias a suite that RUNS, so parking it would buy
- * nothing and cost four files their marker rights. A MODIFIED value (`RuleTester.d =
- * describe.skip`) is not this shape and is not credited back. Mutant: delete this clause and
- * those four files park (93 → 97, MEASURED).
+ * THE RESOLUTION OF ONE CALLEE CHAIN. Returns the vitest export the chain's head names
+ * (`name`), the modifier steps that follow it, and the LEXICAL word the chain roots in — the
+ * last of which is what the reserved-word rule needs, because a word that reads like an
+ * opener and resolves to something else is exactly the case the eighth cut credited.
+ * @param {any} head @param {ReturnType<typeof bindingsOf>} env
  */
-const isBareSuiteValueOnMemberTarget = (ref) => {
+function resolveChain(head, env) {
+  const { root, rootNode, steps } = chainOf(head);
+  if (!root) return { name: null, steps: [], rootNode: null, lexicalRoot: null, namespaced: false };
+  if (env.isNamespace(root)) {
+    const first = steps[0];
+    if (!first || first.kind !== 'dot') {
+      return { name: null, steps: [], rootNode, lexicalRoot: root, namespaced: true };
+    }
+    return { name: first.name, steps: steps.slice(1), rootNode, lexicalRoot: root, namespaced: true };
+  }
+  return { name: env.resolve(root), steps, rootNode, lexicalRoot: root, namespaced: false };
+}
+
+/**
+ * THE ONE REFERENCE-SIDE ALLOWANCE THAT SURVIVES — `RuleTester.describe = describe;`, four
+ * estate files. A BARE suite value assigned to a member target can only ever alias a suite
+ * that RUNS, so parking it would buy nothing and cost four files their marker rights. A
+ * MODIFIED value (`RuleTester.d = describe.skip`) is not this shape and is not allowed back.
+ * It is keyed on the RESOLVED name now, not on the spelling, so an aliased import gets the
+ * same treatment as a plain one. Mutant: delete this clause and those four files park.
+ */
+const isBareSuiteValueOnMemberTarget = (ref, resolve) => {
   const p = ref.parent;
   return !!p && p.type === 'AssignmentExpression' && ref.key === 'right'
-    && p.left.type === 'MemberExpression' && SUITE_WORDS.includes(ref.node.name);
+    && p.left.type === 'MemberExpression' && SUITE_WORDS.includes(resolve(ref.node.name));
 };
 
 /**
@@ -746,11 +957,18 @@ function classifySource(src) {
   let ast;
   try { ast = parse(src, PARSE_OPTIONS); } catch (err) { return { reasons: [`PARSE:${err.message}`], titles: [] }; }
 
-  const shadowed = new Set();
+  // THE BINDING ENVIRONMENT IS BUILT FIRST AND WHOLE, which is what lets every verdict below
+  // be taken on the spot instead of deferred. The eighth cut could not do this: it read
+  // bindings during the same DFS that classified calls, so a patch consulting the shadow set
+  // mid-walk was decided by DFS ORDER — measured failing to close the forgery it was written
+  // for. Resolution is a property of the module, so it is computed as one.
+  const env = bindingsOf(ast);
+
   const suiteCalls = [];
   const testCalls = [];
   const suiteRefs = [];
   const hookReasons = [];
+  const unresolvedReasons = [];
   const reasons = [];
   const titles = [];
   const creditedRoots = new Set();
@@ -760,69 +978,63 @@ function classifySource(src) {
     const { node, parent, key } = stack.pop();
     if (!node || typeof node !== 'object' || typeof node.type !== 'string') continue;
 
-    if (node.type === 'ImportDeclaration' && node.source.value !== 'vitest') {
-      for (const spec of node.specifiers) if (OPENER_ROOTS.has(spec.local.name)) shadowed.add(spec.local.name);
-    }
-    if (node.type === 'VariableDeclarator') markShadowed(node.id, shadowed);
-    if (node.type === 'FunctionDeclaration' || node.type === 'FunctionExpression'
-      || node.type === 'ArrowFunctionExpression' || node.type === 'ClassDeclaration'
-      || node.type === 'ClassExpression') {
-      if (node.id) markShadowed(node.id, shadowed);
-      for (const param of (node.params || [])) markShadowed(param, shadowed);
-    }
-    if (node.type === 'CatchClause' && node.param) markShadowed(node.param, shadowed);
-
     if ((node.type === 'CallExpression' || node.type === 'TaggedTemplateExpression') && !isChainLink(parent, key)) {
       const head = node.type === 'CallExpression' ? node.callee : node.tag;
-      const { root, rootNode, steps } = chainOf(head);
+      const { name, steps, rootNode, lexicalRoot, namespaced } = resolveChain(head, env);
+      // THE SHAPE IS SPELLED FROM THE RESOLVED NAME, never from the local alias, so a reason
+      // string names the thing vitest would have run rather than whatever this file called it.
+      const shape = `${name}${steps.map(stepText).join('')}`;
+      // THE NINTH STATEMENT'S TWO REFUSALS, TAKEN BEFORE ANY GRAMMAR IS CONSULTED. A reserved
+      // word that resolved to something other than itself is a rebind however it was spelled;
+      // a vitest namespace reached through a COMPUTED member names nothing a tree can read.
+      // Either way the file parks, and no title anywhere in it is credited.
+      const rebound = !!lexicalRoot && RESERVED_WORDS.has(lexicalRoot) && name !== lexicalRoot;
+      const blindNamespace = namespaced && name === null;
       // THE CHANNELS OF RUN-CONTROL THIS WALKER READS, EACH SEPARATELY SO EACH CAN NAME ITS
-      // OWN REFUSAL. The chain is `grammarOk`, the table's cardinality is `tableOk`, the second
-      // argument's form is `argOk`, the callback's own context is `ctxOk`; a call is credited
-      // only when all four hold. Four cuts in a row were falsified by a channel the header did
-      // not know it was ignoring, so the channels stay separate rather than folded into one
-      // predicate — and the grammar is stated as what this walker CREDITS, never as a census
-      // of what vitest reads.
-      if (root && SUITE_ROOTS.has(root)) {
-        const grammarOk = node.type === 'CallExpression' && SUITE_WORDS.includes(root)
-          && grammarAccepts(steps, RUNNING_SUITE_SET);
+      // OWN REFUSAL. The binding is `resolveChain`, the chain is `grammarOk`, the table's
+      // cardinality is `tableOk`, the second argument's form is `argOk`, the callback's own
+      // context is `ctxOk`; a call is credited only when all five hold. Five cuts in a row were
+      // falsified by a channel the header did not know it was ignoring, so the channels stay
+      // separate rather than folded into one predicate — and the grammar is stated as what this
+      // walker CREDITS, never as a census of what vitest reads.
+      if (rebound || blindNamespace) {
+        unresolvedReasons.push(`OPENER_UNRESOLVED:${lexicalRoot}`);
+      } else if (name && SUITE_WORDS.includes(name)) {
+        const grammarOk = node.type === 'CallExpression' && grammarAccepts(steps, RUNNING_SUITE_SET);
         const tableOk = tableProven(steps);
         const argOk = argFormAccepts(node);
         const ctxOk = contextFreeCallback(node);
-        const running = grammarOk && tableOk && argOk && ctxOk;
         suiteCalls.push({
-          word: root, running, grammarOk, tableOk, argOk, ctxOk, rootNode, node,
-          shape: `${root}${steps.map(stepText).join('')}`,
+          running: grammarOk && tableOk && argOk && ctxOk, grammarOk, tableOk, argOk, ctxOk,
+          rootNode, node, shape,
         });
-      } else if (root && HOOK_WORDS.has(root)) {
+      } else if (name && HOOK_WORDS.has(name)) {
         // G1 AT HOOK LEVEL. A hook is never credited and never carries a title, so it has no
         // entry in either call list — its ONLY consequence is this park, and it is taken
         // wherever the hook stands because a hook that takes the context can cancel every test
         // beneath it from inside its own body.
-        if (!contextFreeCallback(node)) hookReasons.push(`HOOK_CONTEXT_PARAM:${root}`);
-      } else if (root && TEST_ROOTS.has(root)) {
-        const grammarOk = node.type === 'CallExpression' && TEST_WORDS.includes(root)
-          && grammarAccepts(steps, RUNNING_TEST_SET);
+        if (!contextFreeCallback(node)) hookReasons.push(`HOOK_CONTEXT_PARAM:${name}`);
+      } else if (name && TEST_WORDS.includes(name)) {
+        const grammarOk = node.type === 'CallExpression' && grammarAccepts(steps, RUNNING_TEST_SET);
         const tableOk = tableProven(steps);
         const argOk = argFormAccepts(node);
         const ctxOk = contextFreeCallback(node);
-        const running = grammarOk && tableOk && argOk && ctxOk;
-        const known = TEST_WORDS.includes(root) && grammarAccepts(steps, KNOWN_TEST_SET);
-        // THE TEST-SIDE VERDICT IS DEFERRED, exactly as the suite side already deferred it,
-        // and that deferral is the whole reason doors 2 and 3 can now be shadow-aware. The
-        // fifth cut read the title INLINE here while `shadowed` was still being built, so a
-        // patch that consulted `shadowed` at this point was decided by DFS ORDER — measured
-        // failing to close the forgery it was written for. Nothing is credited or refused
-        // until the tree has been walked whole.
         testCalls.push({
-          word: root, running, grammarOk, tableOk, argOk, ctxOk, known, node,
-          shape: `${root}${steps.map(stepText).join('')}`,
+          running: grammarOk && tableOk && argOk && ctxOk, grammarOk, tableOk, argOk, ctxOk,
+          known: grammarAccepts(steps, KNOWN_TEST_SET), node, shape,
         });
       }
     }
 
-    if (node.type === 'Identifier' && SUITE_ROOTS.has(node.name)
-      && !isNameNotReference(parent, key) && !isImportSpecifierId(parent)) {
-      suiteRefs.push({ node, parent, key, word: node.name });
+    // THE REFERENCE RULE, RE-KEYED ON RESOLUTION. A reference to a value this file can PROVE
+    // is vitest's own suite opener, standing anywhere but at the head of a call this walker
+    // classified, is the factory route in plain sight. It is keyed on `resolve` rather than on
+    // the spelling, so an aliased import is read the same way — and a BINDING SITE is not a
+    // reference at all, which is a structural fact rather than the credit-back list the eighth
+    // cut needed for import specifiers.
+    if (node.type === 'Identifier' && !env.bindingNodes.has(node)
+      && SUITE_WORDS.includes(env.resolve(node.name)) && !isNameNotReference(parent, key)) {
+      suiteRefs.push({ node, parent, key });
     }
 
     for (const childKey of Object.keys(node)) {
@@ -835,28 +1047,23 @@ function classifySource(src) {
     }
   }
 
-  // THE REGISTRATION WALK, top-down from the module body, after `shadowed` is closed. It now
+  // THE REGISTRATION WALK, top-down from the module body, over the closed environment. It now
   // reports as well as marks: a credited suite whose block is not straight-line hands out NO
   // registration AND parks the file (G2), and only the walk is in a position to see it.
   const registered = new Set();
   const flowReasons = [];
-  markRegistered(ast.body, registered, shadowed, flowReasons);
+  markRegistered(ast.body, registered, env, flowReasons);
 
-  for (const word of shadowed) {
-    if (suiteCalls.some((call) => call.word === word && call.running)) reasons.push(`SUITE_SHADOW_AMBIGUOUS:${word}`);
-    if (testCalls.some((call) => call.word === word && call.running)) reasons.push(`TEST_SHADOW_AMBIGUOUS:${word}`);
-  }
-  // SHADOWING NEVER DELETES A PARK — THAT WAS THE SIXTH CUT'S ONE HOLE, AND IT IS THE
-  // CLAUSE ORDER THAT FIXES IT. The fifth cut skipped every call whose root was bound
-  // BEFORE the `SUITE_NOT_RUNNING` push, so binding a suite word anywhere in a file did not
-  // make it opaque — it made it MUTE, deleting the park for every non-running suite opened
-  // through it. Two lines put the live marker inside a `describe.skip` and this walker read
-  // SATISFIED off a file vitest reported as `1 skipped`. So the skip is now conditioned on
-  // the call being in the RUNNING grammar, where a park would have said nothing that
-  // `SUITE_SHADOW_AMBIGUOUS` above does not already say. A bound word is OPAQUE, never mute.
+  // B1'S HOLE IS NOW STRUCTURALLY UNREACHABLE, AND THAT IS WHY ITS MACHINERY IS GONE. The
+  // fifth cut skipped every call whose root was bound BEFORE pushing `SUITE_NOT_RUNNING`, so
+  // a bound word was not opaque but MUTE — it DELETED the park for every non-running suite
+  // opened through it, and two lines read SATISFIED off a file vitest reported `1 skipped`.
+  // The sixth cut repaired that by ordering a skip after a push. There is no skip left to
+  // order: an unresolved word never reaches these loops at all, it parks at
+  // `OPENER_UNRESOLVED` above, and a resolved word is vitest's own and has nothing to be
+  // opaque about. A repair that removes the possibility outranks a repair that sequences it.
   for (const call of suiteCalls) {
     creditedRoots.add(call.rootNode);
-    if (call.running && shadowed.has(call.word)) continue;
     if (call.running && registered.has(call.node)) { titleArgs(call.node, titles); continue; }
     if (call.running) { reasons.push(`SUITE_UNREGISTERED:${call.shape}`); continue; }
     // THE CHANNEL THAT REFUSED IT IS THE REASON IT CARRIES. The chain speaks first, so the
@@ -867,21 +1074,20 @@ function classifySource(src) {
     if (!call.argOk) { reasons.push(`SUITE_ARG_FORM:${call.shape}`); continue; }
     reasons.push(`SUITE_CONTEXT_PARAM:${call.shape}`);
   }
-  // DOOR 2, THE SAME THREE LAWS ONE LEVEL IN: a test opened through a BOUND word parks (the
-  // word is not vitest's), a test that is not STATICALLY REGISTERED parks (it may never be
-  // invoked at all), and a test outside both grammars parks (it may be `only`). Only a
-  // running, unbound, registered call keeps its title.
+  // DOOR 2, THE SAME LAWS ONE LEVEL IN: a test whose opener did not RESOLVE has already
+  // parked above (the word is not vitest's), a test that is not STATICALLY REGISTERED parks
+  // (it may never be invoked at all), and a test outside both grammars parks (it may be
+  // `only`). Only a resolved, running, registered call keeps its title.
   for (const call of testCalls) {
     // THE OPTIONS BAG PARKS THE FILE, AND IT PARKS BEFORE THE CHAIN IS CONSULTED — because
     // the bag can spell `only`, and `only` silences its siblings exactly as a chained
     // `.only` does. It is checked ahead of `known` for the same reason `it.invented` is
     // refused: the file-scope consequence does not depend on which modifier the data names.
     if (!call.argOk) { reasons.push(`TEST_ARG_FORM:${call.shape}`); continue; }
-    if (call.running && !shadowed.has(call.word) && registered.has(call.node)) {
+    if (call.running && registered.has(call.node)) {
       titleArgs(call.node, titles);
       continue;
     }
-    if (call.running && shadowed.has(call.word)) continue;
     if (call.running) { reasons.push(`TEST_UNREGISTERED:${call.shape}`); continue; }
     if (call.grammarOk && !call.tableOk) { reasons.push(`TEST_TABLE_UNPROVEN:${call.shape}`); continue; }
     // THE BODY'S OWN CONTEXT SPEAKS LAST OF THE FOUR CHANNELS, and the ORDER IS LOAD-BEARING
@@ -895,13 +1101,15 @@ function classifySource(src) {
     if (!call.known) reasons.push(`TEST_UNCLASSIFIED:${call.shape}`);
   }
   for (const ref of suiteRefs) {
-    if (shadowed.has(ref.word) || creditedRoots.has(ref.node)) continue;
-    if (isBareSuiteValueOnMemberTarget(ref)) continue;
+    if (creditedRoots.has(ref.node)) continue;
+    if (isBareSuiteValueOnMemberTarget(ref, env.resolve)) continue;
     reasons.push(`SUITE_REF:${ref.parent ? ref.parent.type : 'Program'}.${ref.key}`);
   }
-  // THE TWO CHANNELS THAT ARE NOT PROPERTIES OF A CREDITED CALL AT ALL, appended last so the
-  // reason ORDER of every source the earlier cuts already refused is unchanged. A hook is not
-  // a registration, and a block's shape is not a call's shape.
+  // THE CHANNELS THAT ARE NOT PROPERTIES OF A CREDITED CALL AT ALL, appended last so the
+  // reason ORDER of every source the earlier cuts already refused is unchanged. A binding is
+  // not a call's property, a hook is not a registration, and a block's shape is not a call's
+  // shape.
+  for (const reason of unresolvedReasons) reasons.push(reason);
   for (const reason of hookReasons) reasons.push(reason);
   for (const reason of flowReasons) reasons.push(reason);
 
@@ -909,30 +1117,28 @@ function classifySource(src) {
   return { reasons, titles: reasons.length > 0 ? [] : titles.map(([, text]) => text) };
 }
 
-function markShadowed(pattern, shadowed) {
-  const ids = [];
-  patternIds(pattern, ids);
-  for (const id of ids) if (OPENER_ROOTS.has(id.name)) shadowed.add(id.name);
-}
-
 /**
  * DOOR 2's REGISTRATION RULE — the callback body of a suite that is CREDITED. Returns the
- * statement list a credited suite opens, or null for anything else: a non-suite call, a
- * shadowed word, a chain outside the running grammar, a table this reader cannot prove has
- * rows, a second argument that is not a function, or a callback with no block body.
+ * statement list a credited suite opens, or null for anything else: a call whose head does not
+ * RESOLVE to vitest's own `describe`/`suite`, a reserved word that resolved to something else,
+ * a chain outside the running grammar, a table this reader cannot prove has rows, a second
+ * argument that is not a function, or a callback with no block body.
  *
- * ALL FOUR CHANNELS ARE CONSULTED HERE TOO, and that is deliberate defence in depth rather
+ * ALL FIVE CHANNELS ARE CONSULTED HERE TOO, and that is deliberate defence in depth rather
  * than duplication: this predicate decides which blocks OPEN a registered scope, so a suite
  * refused above but credited here would hand registration to every test underneath it. The
- * four refusals are spelled in the same order and from the same predicates. This is where this
- * program's third defence-in-depth bite landed, so `contextFreeCallback` is carried here in the
- * same commit that introduces it rather than left for the next cut to discover.
- * @param {any} node @param {Set<string>} shadowed @returns {Array<any>|null}
+ * refusals are spelled in the same order and from the same predicates. This is exactly where
+ * the eighth cut's alias hole did its worst work — `import { expect as describe }` forged TWO
+ * titles rather than one, because this function handed registration through the aliased word
+ * to everything beneath it — so the ninth statement's rule is carried here in the same commit
+ * that introduces it rather than left for the next cut to discover.
+ * @param {any} node @param {ReturnType<typeof bindingsOf>} env @returns {Array<any>|null}
  */
-function creditedSuiteBody(node, shadowed) {
+function creditedSuiteBody(node, env) {
   if (node.type !== 'CallExpression') return null;
-  const { root, steps } = chainOf(node.callee);
-  if (!root || !SUITE_WORDS.includes(root) || shadowed.has(root)) return null;
+  const { name, steps, lexicalRoot } = resolveChain(node.callee, env);
+  if (lexicalRoot && RESERVED_WORDS.has(lexicalRoot) && name !== lexicalRoot) return null;
+  if (!name || !SUITE_WORDS.includes(name)) return null;
   if (!grammarAccepts(steps, RUNNING_SUITE_SET)) return null;
   if (!tableProven(steps) || !argFormAccepts(node)) return null;
   if (!contextFreeCallback(node)) return null;
@@ -957,23 +1163,23 @@ function creditedSuiteBody(node, shadowed) {
  * opens no registered scope at all — every test under it is `*_UNREGISTERED`, exactly as
  * though the suite had never been invoked — AND the file parks on its own named reason, which
  * is what keeps this from being a guard a later cut can delete silently.
- * @param {Array<any>} statements @param {Set<any>} registered @param {Set<string>} shadowed
- * @param {string[]} flowReasons
+ * @param {Array<any>} statements @param {Set<any>} registered
+ * @param {ReturnType<typeof bindingsOf>} env @param {string[]} flowReasons
  */
-function markRegistered(statements, registered, shadowed, flowReasons) {
+function markRegistered(statements, registered, env, flowReasons) {
   for (const stmt of statements) {
     if (!stmt || stmt.type !== 'ExpressionStatement') continue;
     const expr = stmt.expression;
     if (!expr || (expr.type !== 'CallExpression' && expr.type !== 'TaggedTemplateExpression')) continue;
     registered.add(expr);
-    const inner = creditedSuiteBody(expr, shadowed);
+    const inner = creditedSuiteBody(expr, env);
     if (!inner) continue;
     if (!straightLineBlock(inner)) {
-      const { root, steps } = chainOf(expr.callee);
-      flowReasons.push(`SUITE_NOT_STRAIGHT_LINE:${root}${steps.map(stepText).join('')}`);
+      const { name, steps } = resolveChain(expr.callee, env);
+      flowReasons.push(`SUITE_NOT_STRAIGHT_LINE:${name}${steps.map(stepText).join('')}`);
       continue;
     }
-    markRegistered(inner, registered, shadowed, flowReasons);
+    markRegistered(inner, registered, env, flowReasons);
   }
 }
 
@@ -988,6 +1194,46 @@ function classify(src) {
   let hit = CLASSIFIED.get(src);
   if (!hit) { hit = classifySource(src); CLASSIFIED.set(src, hit); }
   return hit;
+}
+
+/**
+ * ── SYNTHETIC-SOURCE SCAFFOLDING, AND IT IS SCAFFOLDING RATHER THAN A RULE ─────
+ * Under the ninth statement an opener resolves through the file's OWN vitest import, so a
+ * bare fragment like `it('x', () => {})` — which is what 108 battery entries are — names a
+ * word nothing in it binds, and parks. That is the CORRECT verdict for such a file and the
+ * estate proves it costs nothing (all 2,314 real test files import from 'vitest'; the
+ * repository declares no `globals: true`), but it would make every synthetic arm below park
+ * for the same uninteresting reason and the battery would stop discriminating.
+ *
+ * SO EVERY SYNTHETIC SOURCE IS GIVEN THE IMPORT A REAL TEST FILE HAS. The prelude names only
+ * the words the source does not itself bind — otherwise a deliberate rebind like
+ * `import { describe } from './shim.js'` would become a duplicate module-scope declaration
+ * and die at the PARSER door, which would silently move the arm's refusal from the grammar to
+ * the parser and is exactly the confusion `parses()` exists to prevent. A hashbang keeps its
+ * place at the top of the file, because it must.
+ *
+ * THE ARMS THAT PROVE THIS IS SCAFFOLDING AND NOT A LOOPHOLE are in the alias battery: the
+ * SAME fragments WITHOUT a prelude park on `OPENER_UNRESOLVED`, and a preluded fragment whose
+ * prelude is renamed away parks too. The prelude buys a synthetic file the ordinary standing
+ * of a real one and nothing else.
+ */
+const PRELUDE_WORDS = Object.freeze(['describe', 'suite', 'it', 'test',
+  'beforeAll', 'beforeEach', 'afterAll', 'afterEach', 'aroundEach', 'aroundAll']);
+function withVitest(src) {
+  let names;
+  try {
+    const { bound } = bindingsOf(parse(src, PARSE_OPTIONS));
+    names = PRELUDE_WORDS.filter((word) => !bound.has(word));
+  } catch {
+    // A source that does not parse gets the whole prelude, because an import line above an
+    // unparseable body is still unparseable — the parser door stays the parser door.
+    names = PRELUDE_WORDS;
+  }
+  if (names.length === 0) return src;
+  const line = `import { ${names.join(', ')} } from 'vitest';\n`;
+  if (!src.startsWith('#!')) return `${line}${src}`;
+  const afterHashbang = src.indexOf('\n') + 1;
+  return `${src.slice(0, afterHashbang)}${line}${src.slice(afterHashbang)}`;
 }
 
 /** THE ADDRESS READ — the titles of the tests in one source that will actually run. */
@@ -1120,11 +1366,18 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
    */
   const BATTERY = Object.freeze({
     escapes: 28, provingLane: 11, invented: 18, parserDoor: 2, dataForm: 22, bodyBlock: 27,
+    alias: 14,
   });
-  const carries = (src) => titledIn(src, PROBE);
+  /** Every synthetic source is read WITH the vitest import a real test file carries — see
+   *  `withVitest`. The alias battery below is where the prelude itself is put on trial. */
+  const carries = (src) => titledIn(withVitest(src), PROBE);
+  /** …and the REASONS for the same source, which is the discriminator every individually
+   *  pinned clause below uses, because `carries` alone cannot tell a live guard from one
+   *  whose work a later clause silently absorbed. */
+  const parkedFor = (src) => parkReasonsFor(withVitest(src));
   /** A source is only a forgery if it is a source at all — every refusal below is asserted
    *  to PARSE, so the parser door can never be the thing doing the work by accident. */
-  const parses = (src) => !parkReasonsFor(src).some((reason) => reason.startsWith('PARSE:'));
+  const parses = (src) => !parkedFor(src).some((reason) => reason.startsWith('PARSE:'));
   const body = `\n  it('${PROBE} — a pin that never runs', () => { expect(1).toBe(2); });\n});\n`;
   const inner = `\n  it('${PROBE} — a real body', () => {});\n});\n`;
 
@@ -1199,7 +1452,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     }
     // …and a NON-FOCUSING modifier costs only its OWN title: the file keeps the rest.
     const mixed = `it.skip('${PROBE} — parked', () => {});\nit('${PROBE} — live', () => {});\n`;
-    expect(liveTitlesIn(mixed)).toEqual([`${PROBE} — live`]);
+    expect(liveTitlesIn(withVitest(mixed))).toEqual([`${PROBE} — live`]);
   });
 
   test('DOOR 2 PARKS THE FILE for a test modifier outside BOTH grammars', () => {
@@ -1336,12 +1589,12 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // unclassifiable file is exactly the file whose titles must not be believed.
     const unterminated = `describe[\n  it('${PROBE} — the pin below an unclosed head', () => {});\n`;
     expect(carries(unterminated)).toBe(false);
-    expect(parkReasonsFor(unterminated).some((r) => r.startsWith('PARSE:')),
+    expect(parkedFor(unterminated).some((r) => r.startsWith('PARSE:')),
       'an unparseable source was refused for some other reason').toBe(true);
 
     const truncated = `describe('outer', () => {\n  it('${PROBE} — a pin', () => {});\n`;
     expect(carries(truncated)).toBe(false);
-    expect(parkReasonsFor(truncated).some((r) => r.startsWith('PARSE:'))).toBe(true);
+    expect(parkedFor(truncated).some((r) => r.startsWith('PARSE:'))).toBe(true);
 
     // …and the parser door is not swallowing the estate: every real test file parses.
     const unparseable = TEST_FILES.filter(({ src }) => parkReasonsFor(src).some((r) => r.startsWith('PARSE:')));
@@ -1379,13 +1632,20 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     expect(parses(swallow)).toBe(true);
     expect(mentionedIn(swallow, PROBE)).toBe(true);
 
-    // …AND THE CLAUSE IS PINNED ALONE, not merely through `carries`. B3 also parks that
-    // source (the inner `it` is not registered, because a skipped suite opens no credited
-    // block), so a `carries` assertion alone would be a guard that cannot fire — this
-    // program's own hazard class, reproduced inside the repair for it. The REASON is the
-    // discriminator: revert the `&& call.running` and `SUITE_NOT_RUNNING` disappears.
-    expect(parkReasonsFor(swallow), 'B1\'s own park vanished — the shadow is mute again')
-      .toContain('SUITE_NOT_RUNNING:describe.skip');
+    // …AND THE REASON IT NOW CARRIES IS THE NINTH CUT'S, WHICH IS THE HONEST RECORD OF A
+    // REPAIR BEING RETIRED RATHER THAN KEPT. The sixth cut fixed the swallow by ORDERING a
+    // skip after a park push; the ninth cut removed the skip entirely, because a word bound by
+    // a destructure never resolves and so never reaches the loop that could have swallowed
+    // anything. Both openers in this source are refused at the binding, before any grammar is
+    // consulted — so `SUITE_NOT_RUNNING` is no longer what speaks here, and pretending it were
+    // would be a pin asserting machinery that is gone.
+    expect(parkedFor(swallow), 'the destructured suite word resolved to something')
+      .toEqual(['OPENER_UNRESOLVED:describe', 'OPENER_UNRESOLVED:it']);
+    // …and the CHAIN guard is still pinned alone, on a source where the word DOES resolve, so
+    // retiring the shadow machinery did not take `SUITE_NOT_RUNNING` down with it.
+    expect(parkedFor(`describe.skip('outer', () => {${inner}`),
+      'the running-grammar refusal stopped firing on a resolved suite word')
+      .toEqual(['SUITE_NOT_RUNNING:describe.skip', 'TEST_UNREGISTERED:it']);
 
     // THE FULL 6 x 3 MATRIX THE PROVING LANE EXECUTED. The shipped pin covered only the
     // bound-word + RUNNING-opener corner (`SUITE_SHADOW_AMBIGUOUS`); its complement — bound
@@ -1408,12 +1668,18 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
         expect(mentionedIn(src, PROBE)).toBe(true);
       }
     }
-    // …and the two halves park for DIFFERENT stated reasons, which is what makes this a
-    // pair of guards rather than one guard counted twice.
-    expect(parkReasonsFor(`const describe = shim.thing;\ndescribe('outer', () => {${inner}`))
-      .toContain('SUITE_SHADOW_AMBIGUOUS:describe');
-    expect(parkReasonsFor(`const describe = shim.thing;\ndescribe.skip('outer', () => {${inner}`))
-      .toContain('SUITE_NOT_RUNNING:describe.skip');
+    // …AND THE TWO HALVES NOW PARK FOR THE **SAME** REASON, WHICH IS THE POINT OF THE NINTH
+    // CUT AND NOT A LOSS OF DISCRIMINATION. The sixth cut needed two guards here — one for the
+    // bound word under a RUNNING opener (`SUITE_SHADOW_AMBIGUOUS`) and one for its complement
+    // under a NON-RUNNING one (`SUITE_NOT_RUNNING`) — and the leak it was falsified for lived
+    // exactly in the seam between them. Under positive resolution there is no seam: a word
+    // that does not resolve is refused whatever follows it, so the modifier is never reached.
+    // One predicate replaces the pair, and the pair's failure mode with it.
+    expect(parkedFor(`const describe = shim.thing;\ndescribe('outer', () => {${inner}`))
+      .toEqual(['TEST_UNREGISTERED:it', 'OPENER_UNRESOLVED:describe']);
+    expect(parkedFor(`const describe = shim.thing;\ndescribe.skip('outer', () => {${inner}`),
+      'the modifier changed the verdict for a word that never resolved')
+      .toEqual(['TEST_UNREGISTERED:it', 'OPENER_UNRESOLVED:describe']);
   });
 
   test('DOOR 2 B2 — TEST-WORD BINDINGS: a bound `it`/`test` is opaque exactly as a suite is', () => {
@@ -1431,9 +1697,13 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     expect(carries(noOpShadow), 'a no-op local `it` still forges a title').toBe(false);
     expect(parses(noOpShadow)).toBe(true);
     expect(mentionedIn(noOpShadow, PROBE)).toBe(true);
-    // …and it is B2's OWN clause that does it, alone: the forged call sits at a registered
-    // position inside a credited suite, so neither B1 nor B3 is in a position to speak.
-    expect(parkReasonsFor(noOpShadow)).toContain('TEST_SHADOW_AMBIGUOUS:it');
+    // …and it is the BINDING clause that does it, alone and on its own reason: the forged call
+    // sits at a registered position inside a credited suite, in the running grammar, with a
+    // function body and no context parameter, so nothing else in this file is in a position to
+    // speak. Note the shape of the source — the real `it` IS imported here, under the alias
+    // `vitestIt`, and the walker credits the anchor through it while refusing the local `it`.
+    expect(parkedFor(noOpShadow), 'a locally declared `it` resolved to vitest\'s')
+      .toEqual(['OPENER_UNRESOLVED:it']);
 
     // THE OTHER SPELLINGS THE PROVING LANE MEASURED, each independently credited before.
     const bindings = {
@@ -1493,9 +1763,9 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     }
     // B3's clause pinned ALONE, on its own reason, in a source no other clause touches: no
     // binding anywhere, a running grammar, a parseable file.
-    expect(parkReasonsFor(`function never() { it('${PROBE} — forged', () => {}); }\n`))
+    expect(parkedFor(`function never() { it('${PROBE} — forged', () => {}); }\n`))
       .toEqual(['TEST_UNREGISTERED:it']);
-    expect(parkReasonsFor(`function mk() { describe('${PROBE} — forged', () => {}); }\n`))
+    expect(parkedFor(`function mk() { describe('${PROBE} — forged', () => {}); }\n`))
       .toEqual(['SUITE_UNREGISTERED:describe']);
 
     // …AND THE ACCURACY HALF, without which this rule would be a way to park the estate.
@@ -1578,12 +1848,12 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       expect(carries(src), `${spelling} was credited`).toBe(false);
       expect(parses(src), `${spelling} parsed — it belongs in the grammar half of this arm`).toBe(false);
     }
-    // THE WHOLE BATTERY IS 108 ENTRIES — 28 escapes + 11 proving-lane forgeries + 18 newly
+    // THE WHOLE BATTERY IS 122 ENTRIES — 28 escapes + 11 proving-lane forgeries + 18 newly
     // invented spellings + 2 that die at the parser door + 22 data-form forgeries + 27 body
-    // and block forgeries — and the total is asserted here so that dropping a group reds even
-    // if its own arm is deleted with it.
+    // and block forgeries + 14 alias forgeries — and the total is asserted here so that
+    // dropping a group reds even if its own arm is deleted with it.
     expect(Object.values(BATTERY).reduce((a, b) => a + b, 0),
-      'the refusal battery shrank — a closed round has been reopened').toBe(108);
+      'the refusal battery shrank — a closed round has been reopened').toBe(122);
   });
 
   test('DOOR 2+3 REFUSE THE TWO DATA-FORM FORGERY FAMILIES — run-control that is not a chain', () => {
@@ -1659,13 +1929,13 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // NO OTHER CLAUSE TOUCHES. This is the defence-in-depth corollary and it has bitten this
     // program twice: a `carries` assertion alone would be green while a second guard silently
     // covered a deleted first, so the discriminator is the REASON STRING.
-    expect(parkReasonsFor(`it('${PROBE} — bagged', { skip: true }, () => {});\n`))
+    expect(parkedFor(`it('${PROBE} — bagged', { skip: true }, () => {});\n`))
       .toEqual(['TEST_ARG_FORM:it']);
-    expect(parkReasonsFor(`describe('${PROBE} — bagged', { skip: true }, () => {});\n`))
+    expect(parkedFor(`describe('${PROBE} — bagged', { skip: true }, () => {});\n`))
       .toEqual(['SUITE_ARG_FORM:describe']);
-    expect(parkReasonsFor(`it.each([])('${PROBE} — %s', () => {});\n`))
+    expect(parkedFor(`it.each([])('${PROBE} — %s', () => {});\n`))
       .toEqual(['TEST_TABLE_UNPROVEN:it.each()']);
-    expect(parkReasonsFor(`describe.each([])('${PROBE} — %s', () => {});\n`))
+    expect(parkedFor(`describe.each([])('${PROBE} — %s', () => {});\n`))
       .toEqual(['SUITE_TABLE_UNPROVEN:describe.each()']);
 
     // …AND `creditedSuiteBody`'s OWN COPY OF BOTH RULES, which the classifier's park SILENTLY
@@ -1675,11 +1945,11 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // The observable difference is the REGISTRATION it hands out: a suite refused by L1 or L2
     // must open NO registered scope, so the test underneath it is UNREGISTERED too, and the
     // REASON SET is the only place that shows. Delete the clause and exactly these two reds.
-    expect(parkReasonsFor(`describe('outer', { skip: true }, () => {\n`
+    expect(parkedFor(`describe('outer', { skip: true }, () => {\n`
       + `  it('${PROBE} — under a bagged suite', () => {});\n});\n`),
     'a suite refused by L1 still handed out registration to the tests inside it')
       .toEqual(['SUITE_ARG_FORM:describe', 'TEST_UNREGISTERED:it']);
-    expect(parkReasonsFor(`describe.each(rows)('outer %s', () => {\n`
+    expect(parkedFor(`describe.each(rows)('outer %s', () => {\n`
       + `  it('${PROBE} — under an unproven table', () => {});\n});\n`),
     'a suite refused by L2 still handed out registration to the tests inside it')
       .toEqual(['SUITE_TABLE_UNPROVEN:describe.each()', 'TEST_UNREGISTERED:it']);
@@ -1805,20 +2075,20 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // SOURCE NO OTHER CLAUSE TOUCHES — the defence-in-depth corollary, which has now bitten this
     // program three times. A `carries` assertion alone cannot tell a live guard from one whose
     // work a later clause silently absorbed; the REASON SET can.
-    expect(parkReasonsFor(`it('${PROBE} — ctx', ({ skip }) => { skip(); });\n`))
+    expect(parkedFor(`it('${PROBE} — ctx', ({ skip }) => { skip(); });\n`))
       .toEqual(['TEST_CONTEXT_PARAM:it']);
-    expect(parkReasonsFor(`beforeEach(({ skip }) => { skip(); });\nit('${PROBE} — real', () => {});\n`))
+    expect(parkedFor(`beforeEach(({ skip }) => { skip(); });\nit('${PROBE} — real', () => {});\n`))
       .toEqual(['HOOK_CONTEXT_PARAM:beforeEach']);
     // …and G1's copy inside `creditedSuiteBody`, which is the clause the classifier's own park
     // would otherwise cover: a suite refused for taking a context must open NO registered scope,
     // so the test underneath it is UNREGISTERED too, and only the reason SET shows it.
-    expect(parkReasonsFor(`describe('outer', (ctx) => {\n  it('${PROBE} — inside', () => {});\n});\n`),
+    expect(parkedFor(`describe('outer', (ctx) => {\n  it('${PROBE} — inside', () => {});\n});\n`),
       'a suite refused by G1 still handed out registration to the tests inside it')
       .toEqual(['SUITE_CONTEXT_PARAM:describe', 'TEST_UNREGISTERED:it']);
     // …and G2's own reason, in the endgame's exact shape. The two `TEST_UNREGISTERED` rows are
     // the registration withdrawal — the ANCHOR loses its credit too, which is the honest read of
     // a block this walker cannot follow.
-    expect(parkReasonsFor(`describe('the espionage confirmer lane', () => {\n`
+    expect(parkedFor(`describe('the espionage confirmer lane', () => {\n`
       + `  it('an anchor so the suite is not empty', () => {});\n  if (!GATE) return;\n`
       + `  it('${PROBE} — after an early return', () => {});\n});\n`))
       .toEqual(['TEST_UNREGISTERED:it', 'TEST_UNREGISTERED:it', 'SUITE_NOT_STRAIGHT_LINE:describe']);
@@ -1856,20 +2126,197 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       + `  it('${PROBE} — gated inside the body', () => { if (!GATE) return; });\n});\n`)).toBe(true);
   });
 
-  test('DOOR 3 CREDIT-BACK: the two benign reference positions, and nothing else', () => {
-    // THE ACCURACY HALF OF THE POLARITY. Enumeration is safe HERE and fatal on the park
-    // side, so the credit-back list is exactly two entries and each is pinned alone.
-    // (1) A vitest import specifier. Without it the polarity parks the whole tree — the
-    // executed mutant moves the estate census from 93 parked files to 2,312.
+  test('DOOR 2+3 REFUSE THE ALIAS FAMILY — run-control taken at the BINDING', () => {
+    // THE NINTH CUT'S BATTERY, AND THE ONE THAT FALSIFIED THE EIGHTH CUT'S TERMINAL SENTENCE.
+    // Every spelling below was CREDITED by the eighth cut with `reasons=[]`, and the first was
+    // executed at all three layers against it: classifier `reasons=[]`, the SHIPPED evaluator
+    // reading `SATISFIED / satisfiable true / missing []` off the REAL
+    // `SOVEREIGNTY_LIGHTING_EVIDENCE` marker, and — planted as a real .test.js beside a green
+    // anchor in a `git archive` of that commit — vitest 4.1.8 registering ZERO ROWS for the
+    // forged title, `Tests 1 passed (1)`, exit 0, `grep -c 'THIS RAN'` = 0 on the deliberate
+    // throw. RE-EXECUTED BY THIS LANE at the same three layers before the rule was written.
+    //
+    // THE MECHANISM. The eighth cut's shadow clause keyed on the module SOURCE
+    // (`node.source.value !== 'vitest'`) and never on whether a specifier's LOCAL name equals
+    // its IMPORTED one, so a vitest-sourced specifier that rebound an opener word never became
+    // opaque. `expect as describe` was the worst of them: `creditedSuiteBody` handed
+    // registration THROUGH the aliased word, so one line forged two titles at once.
+    const aliases = {
+      'expect as it': `import { expect as it } from 'vitest';\nit('${PROBE} — forged', () => {});\n`,
+      'assert as it': `import { assert as it } from 'vitest';\nit('${PROBE} — forged', () => {});\n`,
+      'vi as test': `import { vi as test } from 'vitest';\ntest('${PROBE} — forged', () => {});\n`,
+      'beforeEach as it': `import { beforeEach as it } from 'vitest';\nit('${PROBE} — forged', () => {});\n`,
+      'beforeEach as test': `import { beforeEach as test } from 'vitest';\ntest('${PROBE} — forged', () => {});\n`,
+      'expect as describe, which forges the suite AND its inner test':
+        `import { expect as describe, it } from 'vitest';\ndescribe('${PROBE} — forged suite', () => {\n`
+        + `  it('${PROBE} — forged inner', () => {});\n});\n`,
+      'expect as suite': `import { expect as suite, it } from 'vitest';\nsuite('outer', () => {\n`
+        + `  it('${PROBE} — forged', () => {});\n});\n`,
+      // …and the OTHER direction of the same rebind: a real opener wearing another opener's
+      // name. It is not a forgery — the title really runs — and it is refused anyway, because
+      // a word that reads `describe` and means `it` is precisely the trap this cut closes.
+      'it as describe': `import { it as describe } from 'vitest';\ndescribe('${PROBE} — really a test', () => {});\n`,
+      'describe as it': `import { describe as it, test } from 'vitest';\nit('${PROBE} — really a suite', () => {\n`
+        + `  test('inner', () => {});\n});\n`,
+      // A DEFAULT import, which vitest does not have at all.
+      'a default import': `import it from 'vitest';\nit('${PROBE} — forged', () => {});\n`,
+      // THE GLOBAL, which is what the whole positive rule buys and what the prelude would
+      // otherwise hide. No binding at all is not a resolution.
+      'no import anywhere in the file': `it('${PROBE} — forged by a global', () => {});\n`,
+      'no import, a suite too': `describe('outer', () => {\n  it('${PROBE} — forged', () => {});\n});\n`,
+      // A NAMESPACE reached through a COMPUTED member names nothing a syntax tree can read.
+      'a computed namespace member': `import * as V from 'vitest';\nV['describe']('outer', () => {\n`
+        + `  V.it('${PROBE} — forged', () => {});\n});\n`,
+      // A locally declared hook, which is not vitest's and whose callback this reader
+      // therefore cannot stand behind.
+      'a locally declared beforeEach': `import { it } from 'vitest';\nfunction beforeEach(fn) { void fn; }\n`
+        + `beforeEach(() => {});\nit('${PROBE} — beside a shim hook', () => {});\n`,
+    };
+    expect(Object.keys(aliases), 'an alias forgery was dropped from the arm')
+      .toHaveLength(BATTERY.alias);
+    for (const [spelling, src] of Object.entries(aliases)) {
+      // NOTE THE RAW READ. These sources are NOT given a prelude — several carry their own
+      // import, and the two `no import` rows are the whole point of the positive rule.
+      expect(titledIn(src, PROBE), `${spelling} was credited — the binding channel leaks`).toBe(false);
+      expect(parkReasonsFor(src).some((r) => r.startsWith('PARSE:')),
+        `${spelling} was refused at the PARSER door, not by the rule`).toBe(false);
+      expect(mentionedIn(src, PROBE), `${spelling} never carried the marker at all`).toBe(true);
+    }
+
+    // THE CLAUSE PINNED ALONE, ON ITS OWN REASON, IN SOURCES NO OTHER CLAUSE TOUCHES — the
+    // defence-in-depth corollary, which has now bitten this program four times. Each source
+    // below is in the running grammar, statically registered, straight-line, context-free and
+    // function-bodied, so `OPENER_UNRESOLVED` is the ONLY clause in a position to speak.
+    expect(parkReasonsFor(`import { expect as it } from 'vitest';\nit('${PROBE}', () => {});\n`))
+      .toEqual(['OPENER_UNRESOLVED:it']);
+    expect(parkReasonsFor(`it('${PROBE}', () => {});\n`))
+      .toEqual(['OPENER_UNRESOLVED:it']);
+    expect(parkReasonsFor(`import { it } from './shim.js';\nit('${PROBE}', () => {});\n`))
+      .toEqual(['OPENER_UNRESOLVED:it']);
+    // A word bound TWICE — once by the vitest import and once by a nested parameter — cannot be
+    // resolved by a reader with no scope analysis, and the honest answer is that it does not
+    // say. (The module-scope spelling of this, `import { it }` beside `function it(){}`, is a
+    // duplicate declaration and dies at the PARSER door instead, which is the same direction.)
+    expect(parkReasonsFor(`import { it } from 'vitest';\nconst wrap = (it) => it;\n`
+      + `it('${PROBE}', () => {});\n`), 'a word bound TWICE resolved to one of its bindings')
+      .toEqual(['OPENER_UNRESOLVED:it']);
+    // …and `creditedSuiteBody`'s OWN copy of the rule, which the classifier's park would
+    // otherwise cover completely. The observable difference is the REGISTRATION it hands out:
+    // a suite whose opener did not resolve must open NO registered scope, so the test beneath
+    // it is UNREGISTERED too. Delete that clause and exactly this red.
+    expect(parkReasonsFor(`import { expect as describe, it } from 'vitest';\n`
+      + `describe('outer', () => {\n  it('${PROBE} — under an aliased suite', () => {});\n});\n`),
+    'a suite whose opener did not resolve still handed out registration to the tests inside it')
+      .toEqual(['TEST_UNREGISTERED:it', 'OPENER_UNRESOLVED:describe']);
+    // …AND THE SAME CLAUSE IN ITS **OTHER** DIRECTION, WHICH THE LINE ABOVE DOES NOT REACH AND
+    // AN EXECUTED MUTANT PROVED IT DOES NOT. `expect as describe` resolves to a NON-suite word,
+    // so `creditedSuiteBody`'s ordinary `SUITE_WORDS.includes(name)` test already refuses it and
+    // the reserved-word clause there is never consulted — deleting that clause left all 31 arms
+    // green. The case that needs it is the reverse rebind: `describe as it` resolves to a REAL
+    // suite word through a RESERVED test word, so without the clause `creditedSuiteBody` opens a
+    // registered scope for a call the classifier refused, and `TEST_UNREGISTERED:test` vanishes
+    // from this set. That reason is the whole discriminator.
+    expect(parkReasonsFor(`import { describe as it, test } from 'vitest';\n`
+      + `it('outer', () => {\n  test('${PROBE} — inside an aliased suite', () => {});\n});\n`),
+    'a RESERVED word resolving to a real suite word still opened a registered scope')
+      .toEqual(['TEST_UNREGISTERED:test', 'SUITE_REF:CallExpression.callee', 'OPENER_UNRESOLVED:it']);
+    // …AND THE COMPUTED-NAMESPACE CLAUSE, pinned on its own reason for the same measured
+    // reason: a computed member registers no suite, so the test under it is UNREGISTERED and
+    // the file parks either way — `carries` cannot tell. Deleting the clause left all 31 arms
+    // green until this line existed. `OPENER_UNRESOLVED:V` is what says the walker SAW a vitest
+    // namespace reached by a name it could not read, rather than merely losing the suite.
+    expect(parkReasonsFor(`import * as V from 'vitest';\nV['describe']('outer', () => {\n`
+      + `  V.it('${PROBE} — under a computed namespace member', () => {});\n});\n`),
+    'a computed vitest-namespace member was passed over instead of parking the file')
+      .toEqual(['TEST_UNREGISTERED:it', 'OPENER_UNRESOLVED:V']);
+
+    // …AND THE ACCURACY HALF, without which this rule would simply park the estate. Both
+    // resolving forms were EXECUTED under vitest 4.1.8 in a git-archive tree BEFORE being
+    // credited, because each is a credit this walker did not previously grant:
+    // `import { describe as mkSuite, it as check }` reported
+    // `✓ RENAMED-SUITE-VIA-ALIAS > RENAMED-TEST-VIA-ALIAS — this must really run`, and
+    // `V.describe`/`V.it` reported `✓ NAMESPACE-SUITE > NAMESPACE-TEST — this must really run`.
+    const resolving = {
+      'a plain named import': `import { describe, it } from 'vitest';\ndescribe('outer', () => {\n`
+        + `  it('${PROBE} — real', () => {});\n});\n`,
+      'a RENAMED import, credited by its TRUE name': `import { describe as mkSuite, it as check } from 'vitest';\n`
+        + `mkSuite('outer', () => {\n  check('${PROBE} — real', () => {});\n});\n`,
+      'a namespace member': `import * as V from 'vitest';\nV.describe('outer', () => {\n`
+        + `  V.it('${PROBE} — real', () => {});\n});\n`,
+      'a namespace member with a running modifier': `import * as V from 'vitest';\n`
+        + `V.describe.concurrent('outer', () => {\n  V.it('${PROBE} — real', () => {});\n});\n`,
+      'a multi-line import': `import {\n  describe,\n  it,\n} from 'vitest';\ndescribe('outer', () => {\n`
+        + `  it('${PROBE} — real', () => {});\n});\n`,
+    };
+    expect(Object.keys(resolving), 'a resolving form was dropped from the accuracy half').toHaveLength(5);
+    for (const [label, src] of Object.entries(resolving)) {
+      expect(titledIn(src, PROBE), `${label} was PARKED but vitest really runs it`).toBe(true);
+    }
+    // …AND THE BINDING-SITE RULE'S OWN ACCURACY PIN, which is the third clause an executed
+    // mutant caught unpinned. `bindingsOf` records a specifier's IMPORTED-name node as a
+    // binding site so the reference rule never reads it as a reference. For a SHORTHAND import
+    // espree hands back one node for both halves, so nothing shows; the case that needs the
+    // rule is a RENAMED specifier beside a plain one, where `describe` appears as an imported
+    // name while a live `describe` binding also exists. Without the rule that node becomes a
+    // `SUITE_REF:ImportSpecifier.imported` and a perfectly ordinary file loses every title.
+    expect(titledIn(`import { describe, it } from 'vitest';\n`
+      + `import { describe as mkSuite, test } from 'vitest';\nmkSuite('a', () => {\n`
+      + `  test('t', () => {});\n});\ndescribe('outer', () => {\n  it('${PROBE} — real', () => {});\n});\n`, PROBE),
+    'a renamed specifier\'s imported NAME was read as a reference and parked a live file').toBe(true);
+    // …and the running grammar still bites THROUGH a resolved alias, so resolution widens the
+    // door rather than replacing it: the shape is spelled by the TRUE name, not the local one.
+    expect(parkReasonsFor(`import { describe as mkSuite, it } from 'vitest';\n`
+      + `mkSuite.skip('outer', () => {\n  it('${PROBE} — under an aliased skip', () => {});\n});\n`))
+      .toEqual(['SUITE_NOT_RUNNING:describe.skip', 'TEST_UNREGISTERED:it']);
+    expect(parkReasonsFor(`import * as V from 'vitest';\nV.describe.skip('outer', () => {\n`
+      + `  V.it('${PROBE} — under a namespaced skip', () => {});\n});\n`))
+      .toEqual(['SUITE_NOT_RUNNING:describe.skip', 'TEST_UNREGISTERED:it']);
+
+    // …AND THE PRELUDE ITSELF ON TRIAL, because every other synthetic arm in this file leans
+    // on it. It must add the import a real file has and buy nothing else: the same fragment
+    // parks bare and is credited preluded, and a fragment that binds the word keeps its park.
+    const fragment = `it('${PROBE} — a plain pin', () => {});\n`;
+    expect(titledIn(fragment, PROBE), 'a bare fragment was credited without any binding').toBe(false);
+    expect(titledIn(withVitest(fragment), PROBE), 'the prelude failed to give a fragment standing').toBe(true);
+    expect(carries(`function it(n, f) { void n; void f; }\n${fragment}`),
+      'the prelude overrode a source\'s own binding of the word').toBe(false);
+  });
+
+  test('DOOR 3 CREDIT-BACK: ONE benign reference position, and nothing else', () => {
+    // THE ACCURACY HALF OF THE POLARITY — AND IT IS NOW A LIST OF ONE, which is the ninth
+    // cut's deletion showing up where a reader will notice it. The eighth cut needed TWO
+    // entries here and argued that "enumeration is safe HERE and fatal on the park side". That
+    // argument was FALSE for entry (1): the import-specifier credit-back was on the credit side
+    // and it FAILED OPEN, because it credited back every specifier without ever reading whether
+    // the specifier's local name matched its imported one. Entry (1) is DELETED rather than
+    // patched — an import specifier is a BINDING SITE, which is a structural fact about the
+    // tree and needs no allowance at all, and `bindingsOf` records those nodes so the reference
+    // rule never sees them. What survives is entry (2), and it survives because it is a
+    // genuine REFERENCE that a resolution rule cannot decide on its own.
+    //
+    // THE VITEST IMPORT IS STILL PINNED, but as an ACCURACY control rather than a credit-back:
+    // if this ever reds, resolution has stopped recognising the ordinary first line of all
+    // 2,314 estate test files and the whole tree parks.
     expect(carries(`import {\n  describe,\n  expect,\n  it,\n} from 'vitest';\ndescribe('outer', () => {${inner}`),
       'a multi-line vitest import parked a live file').toBe(true);
     expect(carries(`import { describe, it } from 'vitest';\ndescribe('outer', () => {${inner}`),
       'a single-line vitest import parked a live file').toBe(true);
     // (2) A BARE suite value on a member target — four estate files wire eslint's RuleTester
-    // this way. A bare value can only ever alias a suite that RUNS. Mutant: delete the
-    // clause and those four files park (93 to 97, measured).
+    // this way. A bare value can only ever alias a suite that RUNS. MUTANT, RE-MEASURED at this
+    // cut rather than carried forward: delete the clause and exactly those four files park,
+    // 357 → 361 — tests/lib/funnelEventContract.test.js, tests/lib/noInlineStoreSelector.test.js,
+    // tests/lint/analyticsPropsHygiene.test.js and tests/lint/rawColorLiteral.test.js, each on
+    // `SUITE_REF:AssignmentExpression.right`. (The eighth cut's prose said "93 to 97", which was
+    // its own census era; the direction held and the base had moved.)
     expect(carries(`RuleTester.describe = describe;\nRuleTester.it = it;\ndescribe('outer', () => {${inner}`),
       'the RuleTester binding parked a live file').toBe(true);
+    // …and the clause is keyed on RESOLUTION, not on spelling, so an aliased import gets the
+    // same treatment — which is the one place the ninth cut WIDENED a credit rather than
+    // narrowing one, and it is pinned so the widening is deliberate.
+    expect(titledIn(`import { describe as mkSuite, it } from 'vitest';\n`
+      + `RuleTester.describe = mkSuite;\nmkSuite('outer', () => {\n`
+      + `  it('${PROBE} — beside an aliased RuleTester wire', () => {});\n});\n`, PROBE),
+    'the RuleTester allowance did not follow a renamed import').toBe(true);
     // …and the MODIFIED form of the same shape is NOT credited back, which is what keeps
     // entry (2) from being a hole the size of the alias class.
     expect(carries(`RuleTester.describe = describe.skip;\ndescribe('outer', () => {${inner}`),
@@ -1930,77 +2377,77 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       .toEqual(['tests/domain/sovereigntyMarketStageWr10w.test.js']);
   });
 
-  test('THE CENSUS FLOOR: admission is not anchored — most of the estate is CREDITED', () => {
-    // THE CHAIR'S OWN STATED VERIFICATION, PINNED PERMANENTLY RATHER THAN RUN ONCE. If the
-    // credit-back list is deleted, or admission ever becomes narrow again, this collapses:
-    // the measured mutant that removes the vitest-import credit-back moves the estate from
-    // 93 parked files to 2,312, and this floor reds on the first one of them.
+  test('THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed', () => {
+    // ── THE CHAIR'S SECOND RULING, AND WHY A FLOOR AND A CEILING WERE NOT ENOUGH ──────
+    // Three cuts in a row stated this census in PROSE and two of them stated it WRONG, in the
+    // same direction, for the same reason: the cut's own new arm added exactly the title its
+    // sentence was describing, and a sentence cannot notice that. The seventh cut wrote 24,456
+    // against a live 24,457 and the eighth corrected it — then wrote 23,674 against a live
+    // 23,675 and shipped, and the adversary found it. A floor of 1,900 and a ceiling of 420
+    // could not catch either, because both figures were true and merely not the truth.
     //
-    // THE CEILING IS RE-RECORDED AT THE SIXTH CUT AND THE SHIFT IS STATED RATHER THAN LET
-    // TO RIDE. Closing the three semantic holes moved the estate from 93 parked / 27,855
-    // titles to 240 parked / 25,376 titles, and every one of the 147 is a file this walker
-    // could no longer PROVE runs what it says: +1 for B1 (tests/edgeFunctions/contracts.test.js,
-    // whose `suite` loop variable is a string), +25 for B2 (files that bind a test word and
-    // open a test through it), +121 for B3 (files that register tests from a loop, a helper
-    // or a conditional). The B3 set is enumerated in that landing commit as reformat debt.
+    // SO THE FIGURES MOVE OUT OF THE PROSE AND INTO THIS TABLE, WHERE BEING WRONG IS RED. The
+    // stale-numeral class cannot survive a constant that the suite compares against a live
+    // measurement — it either matches or the gate says so, which is the whole difference
+    // between a claim and a receipt.
     //
-    // THE SEVENTH CUT RE-RECORDS IT AGAIN, AND THE SECOND SHIFT IS STATED THE SAME WAY:
-    // 240 parked / 25,376 titles → 301 parked / 24,457 titles across the same 2,314 files.
-    // Every one of the +61 is L2, the zero-row/unproven table: a file that calls `each` or
-    // `for` on a table this reader cannot prove has rows (64 files do; three of them were
-    // already parked). L1, the options bag, costs ZERO — it is a LATENT closure, and the arm
-    // below asserts that latency rather than assuming it. (The seventh cut's own prose said
-    // 24,456; the live measurement is 24,457, because that cut's new data-form arm added
-    // exactly the title its sentence was describing. Corrected here, and the correction is the
-    // reason every stated numeral in this file is a measured one.)
-    //
-    // THE EIGHTH CUT RE-RECORDS IT A THIRD TIME: 301 parked / 24,457 titles → 357 parked /
-    // 23,674 titles across the same 2,314 files. The +56 are 47 files for G1 (a test callback
-    // that declares a parameter — overwhelmingly `test.each([…])('…', (row) => …)`) and 9 for
-    // G2 (a credited suite whose block holds a loop, a conditional or a return). By reason kind
-    // the two rules touch more: TEST_CONTEXT_PARAM names 51 files and SUITE_NOT_STRAIGHT_LINE
-    // names 135, the rest of which were parked already. All 56 are ENUMERATED in the landing
-    // commit as reformat debt; the reformat is to drop the callback's parameter and to move any
-    // gating from the suite's block into the test's own body.
+    // THE COST, STATED PLAINLY BECAUSE IT IS REAL AND IT IS THE POINT. Any lane that adds or
+    // removes a test TITLE anywhere in tests/ reds this arm, and any lane that parks or unparks
+    // a file reds it too. That is not a false red: it is this walker asking to be RE-MEASURED
+    // rather than restated, and the fix is one command and one number, never a loosened bound.
+    // A lane that finds this red should confirm the delta is its own, then re-record here.
+    // MEASURED AT THIS COMMIT, AND THE ONE MOVEMENT IS THIS FILE'S OWN. The eighth cut's tree
+    // read 23,675 live titles; the ninth reads 23,676, and the +1 is the alias arm added above
+    // — the SAME shape of off-by-one the seventh and eighth cuts each wrote into prose and
+    // shipped. This arm caught it on its first run, which is the whole argument for the table.
+    const CENSUS = Object.freeze({ files: 2314, parked: 357, credited: 1957, titles: 23676 });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
-    // THE COLLAPSE DIRECTION. The measured mutant that removes the vitest-import credit-back
-    // leaves TWO credited files, so this floor catches an anchored admission by three orders
-    // of magnitude. It is LOWERED from 2,000 to 1,900 at this cut — deliberately, because L2
-    // parks a live and growing idiom (`it.each(SOME_CONST)`) and a floor thirteen files away
-    // from red would fire on the next lane to add one, which is a false red about a rule that
-    // is working. The WIDENING direction is guarded by the ceiling below, which is the arm
-    // that would actually catch a rule getting looser.
-    expect(TEST_FILES.length - parked.length,
-      'the credited-file count collapsed — admission is anchored again').toBeGreaterThan(1900);
-    // …and the park side has not collapsed the other way into crediting everything: the
-    // estate really does hold parked files, and they are the conditional-suite, bound-word,
-    // dynamically-registered and unproven-table ones.
-    expect(parked.length, 'nothing parks any more — the polarity has inverted').toBeGreaterThan(50);
-    // THE CEILING IS RE-RECORDED AT 420 FROM 360, and the re-record is stated rather than let
-    // to ride: the measured 357 is the eighth cut's own cost and a ceiling three files above it
-    // would fire on the next lane to write `it.each` with a row parameter, which is a false red
-    // about a rule that is working. 420 keeps 63 files of headroom, the same order as the floor
-    // below it, and it still catches a rule that widens the park set by a fifth.
-    expect(parked.length, 'the parked set has grown past the measured 357 — a new refusal'
-      + ' class has appeared, or a rule widened past what the eighth cut costed')
-      .toBeLessThan(420);
-    // …and the refusal classes the sixth, seventh and eighth cuts added are really present in
-    // the estate, so none of B1/B2/B3/L2/G1/G2 is a rule that fires only on synthetic sources.
-    // TEST_TABLE_UNPROVEN is in this list for a reason worth keeping: G1's clause was written
-    // directly after `argOk` at first, which swallowed all 64 of L2's files and left this row
-    // firing on NONE — a live rule silently covered by its successor, caught by the census.
+    const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
+    const titles = credited.reduce((sum, { src }) => sum + liveTitlesIn(src).length, 0);
+    expect(TEST_FILES.length, 'the estate\'s file count moved — re-measure, do not re-word')
+      .toBe(CENSUS.files);
+    expect(parked.length, 'the parked-file count moved from the ninth cut\'s measured 357 —'
+      + ' a rule widened or narrowed, or a lane changed a file\'s shape; re-MEASURE and re-record')
+      .toBe(CENSUS.parked);
+    expect(credited.length, 'the credited-file count moved from the ninth cut\'s measured 1,957')
+      .toBe(CENSUS.credited);
+    expect(titles, 'the live-title count moved from the ninth cut\'s measured 23,676 — this is'
+      + ' the exact figure two cuts in a row stated wrongly in prose, which is why it is asserted')
+      .toBe(CENSUS.titles);
+    // …and the three figures are consistent with each other, so a constant cannot be nudged
+    // to silence this arm without the arithmetic saying so.
+    expect(CENSUS.parked + CENSUS.credited, 'the census constants do not add up')
+      .toBe(CENSUS.files);
+    // THE COLLAPSE DIRECTION, KEPT AS AN ARGUMENT RATHER THAN AS A SECOND GUARD. The exact
+    // equalities above subsume the old floor of 1,900 and ceiling of 420 completely — a
+    // collapse to two credited files, or a park set widening by a fifth, reds on the equality
+    // long before it reaches either bound — so those two arms are DELETED rather than kept
+    // beside their successor. A guard whose work a later guard silently absorbs is this
+    // program's most-repeated verification failure, and keeping a redundant bound here would
+    // have reproduced it inside the repair for it.
+    //
+    // …and the refusal classes the sixth through ninth cuts added are really present in the
+    // estate, so none of B1/B2/B3/L2/G1/G2 or the ninth cut's binding rule is a rule that fires
+    // only on synthetic sources. TEST_TABLE_UNPROVEN is in this list for a reason worth
+    // keeping: G1's clause was written directly after `argOk` at first, which swallowed all 64
+    // of L2's files and left this row firing on NONE — a live rule silently covered by its
+    // successor, caught by the census.
     const reasonKinds = new Set(parked.flatMap(({ src }) => parkReasonsFor(src).map((r) => r.split(':')[0])));
-    for (const kind of ['SUITE_NOT_RUNNING', 'TEST_SHADOW_AMBIGUOUS', 'TEST_UNREGISTERED',
-      'SUITE_UNREGISTERED', 'TEST_TABLE_UNPROVEN', 'SUITE_TABLE_UNPROVEN',
+    for (const kind of ['SUITE_NOT_RUNNING', 'OPENER_UNRESOLVED', 'TEST_UNREGISTERED',
+      'SUITE_UNREGISTERED', 'TEST_TABLE_UNPROVEN', 'SUITE_TABLE_UNPROVEN', 'SUITE_REF',
       'TEST_CONTEXT_PARAM', 'SUITE_NOT_STRAIGHT_LINE']) {
       expect(reasonKinds.has(kind), `${kind} fires on no estate file — the rule is synthetic-only`)
         .toBe(true);
     }
-    // …AND THE LATENCY CLAIM IS AN ASSERTION, NOT A SENTENCE. L1 is stated above and in the
-    // header as costing zero estate files today. If that ever stops being true this reds, and
-    // whoever reads it is exactly the person who needs to know that vitest's options argument
-    // is refused here: the cure is to MEASURE the bag's shape under vitest and give it a
-    // grammar, never to loosen the default.
+    // …AND THE SHADOW REASONS ARE GONE FOR GOOD, which is the ninth cut's deletion asserted
+    // rather than described. `TEST_SHADOW_AMBIGUOUS` named 25 estate files under the eighth cut
+    // and `SUITE_SHADOW_AMBIGUOUS` was its suite-level twin; both, and the `shadowed` set that
+    // fed them, are replaced by the single positive `OPENER_UNRESOLVED`. If either string ever
+    // returns, shadow tracking has been reintroduced alongside the rule that subsumed it.
+    for (const kind of ['TEST_SHADOW_AMBIGUOUS', 'SUITE_SHADOW_AMBIGUOUS']) {
+      expect(reasonKinds.has(kind), `${kind} is back — shadow tracking was reintroduced beside`
+        + ' the positive binding rule that replaced it').toBe(false);
+    }
     // …AND THE LATENCY CLAIMS ARE ASSERTIONS, NOT SENTENCES. L1 (both levels) and the SUITE and
     // HOOK halves of G1 are stated above as costing zero estate files today. If any of them ever
     // stops being true this reds, and whoever reads it is exactly the person who needs to know
@@ -2032,7 +2479,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // Delete the exclusion and this arm reds — which is what makes it a door at all.
       const selfCorpus = [{
         rel: SELF_REL,
-        src: `  it('${row.marker} — a title this file must never be credited for', () => {});\n`,
+        src: withVitest(`  it('${row.marker} — a title this file must never be credited for', () => {});\n`),
       }];
       expect(filesTitling(row.marker, selfCorpus),
         `this walker would vouch for ${row.wave} if it ever titled the marker`).toEqual([]);
@@ -2057,7 +2504,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     for (const row of SOVEREIGNTY_LIGHTING_EVIDENCE) {
       if (row.kind !== 'TEST_MARKER') continue;
 
-      const forged = [{ rel: 'tests/domain/forgedEvidence.test.js', src: `// ${row.marker}\n` }];
+      const forged = [{ rel: 'tests/domain/forgedEvidence.test.js', src: withVitest(`// ${row.marker}\n`) }];
       expect(measure(row, forged), `${row.wave}'s evidence can be forged by a bare comment`)
         .toBe(false);
       // …and the forgery IS a forgery: the refused read swallows it whole.
@@ -2066,14 +2513,14 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // …and a PARKED-SUITE forgery, which is the shape four cuts of this door leaked.
       const parkedForgery = [{
         rel: 'tests/domain/parkedEvidence.test.js',
-        src: `describe.skip('outer', () => {\n  it('${row.marker} — parked', () => {});\n});\n`,
+        src: withVitest(`describe.skip('outer', () => {\n  it('${row.marker} — parked', () => {});\n});\n`),
       }];
       expect(measure(row, parkedForgery), `${row.wave}'s evidence can be forged by a parked suite`)
         .toBe(false);
 
-      // …and the THREE SEMANTIC forgeries, driven through the real `measure` rather than
-      // asserted through `carries` alone. These are the shapes the sixth cut closed, and
-      // this is the arm that says the CONDITION — not merely the classifier — refuses them.
+      // …and the SEMANTIC forgeries, driven through the real `measure` rather than asserted
+      // through `carries` alone. These are the shapes the sixth, eighth and ninth cuts closed,
+      // and this is the arm that says the CONDITION — not merely the classifier — refuses them.
       const semantic = {
         'a shadow-swallowed parked suite': `import * as V from 'vitest';\nconst { describe, it } = V;\n`
           + `describe.skip('outer', () => {\n  it('${row.marker} — forged', () => {});\n});\n`,
@@ -2091,17 +2538,46 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
           `describe('the espionage confirmer lane', () => {\n`
           + `  it('an anchor so the suite is not empty', () => {});\n  if (!GATE) return;\n`
           + `  it('${row.marker} — forged', () => {});\n});\n`,
+        // …and the NINTH cut's, driven through the CONDITION and not merely the classifier.
+        // This is THE terminal falsifier the eighth cut shipped with: executed at all three
+        // layers against that cut — classifier `reasons=[]`, shipped evaluator
+        // `SATISFIED / satisfiable true / missing []` off the REAL marker, and vitest 4.1.8
+        // registering NO ROW while the deliberate throw never fired.
+        'a renamed vitest import specifier':
+          `import { expect as it, describe, it as realIt, assert } from 'vitest';\n`
+          + `describe('anchor suite', () => {\n  realIt('a real anchor', () => { assert.ok(true); });\n});\n`
+          + `it('${row.marker} — forged', () => { throw new Error('THIS RAN'); });\n`,
+        'a renamed specifier that forges the SUITE and its inner test at once':
+          `import { expect as describe, it } from 'vitest';\n`
+          + `describe('${row.marker} — forged suite', () => {\n`
+          + `  it('${row.marker} — forged inner', () => {});\n});\n`,
       };
-      for (const [label, src] of Object.entries(semantic)) {
+      for (const [label, plain] of Object.entries(semantic)) {
+        // The alias forgeries carry their OWN vitest import — that is the whole shape — so
+        // `withVitest` adds only what each source does not already bind.
+        const src = withVitest(plain);
         expect(measure(row, [{ rel: 'tests/domain/semanticForgery.test.js', src }]),
           `${row.wave}'s evidence can be forged by ${label}`).toBe(false);
         expect(filesMentioning(row.marker, [{ rel: 'tests/domain/semanticForgery.test.js', src }]),
           `${label} never carried ${row.wave}'s marker at all`).toHaveLength(1);
       }
 
+      // …AND THE ONE FORGERY THE PRELUDE WOULD ITSELF CURE, so it is driven WITHOUT one: an
+      // opener bound by nothing at all. Every real estate file imports its openers from
+      // 'vitest' (all 2,314, measured) and the repository declares no `globals: true`, so a
+      // marker in a file that binds no opener is a marker this reader cannot tie to vitest at
+      // all — and the CONDITION refuses it, not merely the classifier.
+      const bareGlobal = [{
+        rel: 'tests/domain/globalEvidence.test.js',
+        src: `it('${row.marker} — forged by a global opener', () => {});\n`,
+      }];
+      expect(measure(row, bareGlobal),
+        `${row.wave}'s evidence can be forged by an opener bound by nothing`).toBe(false);
+      expect(filesMentioning(row.marker, bareGlobal)).toHaveLength(1);
+
       const real = [{
         rel: 'tests/domain/realEvidence.test.js',
-        src: `  it('${row.marker} — the pin the row is an address for', () => {});\n`,
+        src: withVitest(`  it('${row.marker} — the pin the row is an address for', () => {});\n`),
       }];
       expect(measure(row, real), `${row.wave}'s row cannot be satisfied by a real live pin —`
         + ' the SATISFIED arm would be unreachable and the instrument permanently dark')
