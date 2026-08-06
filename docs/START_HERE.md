@@ -34,6 +34,14 @@ AUTHORITATIVE AND IT IS SUFFICIENT.** Everything load-bearing has been landed
 into git. Where this file and your memory disagree, git wins; where this file
 and the code disagree, THE CODE WINS.
 
+**⭐⭐ THE FULL ARCHIVE IS IN GIT — `docs/archive/` (commit `2149e72d`).**
+Read `docs/archive/README.md` first. It holds THE COMPLETE MEMORY ESTATE
+(384 files, 2.7 MB — every owner directive verbatim, every hazard class, every
+judgment call; **start at `docs/archive/memory-estate/MEMORY.md`, the index —
+do not read all 384**), the 18 workflow scripts that are this program's
+reproducible dispatch record, and an ORPHANED STASH exported as a patch. If you
+have no memory estate of your own, THAT DIRECTORY IS IT.
+
 **⭐ THE VOLUMES ARE NOW IN GIT — `docs/architected-volumes-pending-fold/`.**
 Three architected programs (EPOCH 16 waves SEALED · HABIT 10 waves · WAR-
 CIRCULATION ~12 waves) plus two verification instruments and the diagnostic-
