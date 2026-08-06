@@ -1,17 +1,29 @@
 ---
-name: ""
+name: door3-polarity-principle-landed
+description: "Door 3 of the sovereignty-lighting walker states a POLARITY, not a reach — recognition CREDITS and everything else PARKS (the polarity landed @ 1835d8b0, arc CLOSED at the cap @ d48224e3); three cuts of reach-claims each died to an invented spelling, and the instrument proves a pin RUNS, never that it ASSERTS"
 metadata: 
   node_type: memory
   created: 2026-08-05
-  type: judgment+hazard
+  type: project
+  tags:
+    - judgment
+    - hazard
   scope: tests/lint/sovereigntyLightingContract.walker.test.js — door 3
-  commit: "arc 8a4b0aef..d48224e3 (CLOSED at the cap), branch claude/composite-r4"
+  commit: "polarity landed @ 1835d8b0; arc 8a4b0aef..d48224e3 (CLOSED at the cap), branch claude/composite-r4"
   supersedes: "the three earlier door-3 \"fail-closed reach\" claims (8a4b0aef, 35b7bec7, 7503b00d)"
   originSessionId: c44e5d99-2ba5-49d5-a554-40b68534c8eb
-  modified: 2026-08-05T23:27:18.694Z
+  modified: 2026-08-06T10:27:37.222Z
 ---
 
 # Door 3 is a POLARITY, not a reach — and three cuts of spelling repairs proved why
+
+**The polarity itself landed at `1835d8b0`** (commit subject: "Door 3 states a
+POLARITY — three cuts of spelling repairs each died to a spelling nobody had
+thought of, so recognition now credits and everything else parks"); the arc then
+ran to the ADDRESS CAP at `d48224e3` ("ES-4 door 3, TENTH CUT AND THE CAP:
+evidence is TEST titles at a DECLARED address"). Both shas verified by
+`git log` on 2026-08-06 — the first was carried only in the memory index and is
+recorded here so the index line can point instead of restate.
 
 ## The fact
 

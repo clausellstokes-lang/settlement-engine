@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 1c189f3d-9fc3-4fc9-9cb7-b767525d28d5
-  modified: 2026-08-04T08:04:54.054Z
+  modified: 2026-08-06T10:26:51.684Z
 ---
 
 # V4C — the arrow's final lane LANDED (2026-08-04); V4D repairs the verifier's findings
@@ -81,3 +81,19 @@ DIRTY instrumentation in src/domain — it externalises in the browser and kille
 the dev server for every concurrent lane. Instrument via test-local wrappers,
 never dirty src edits; V4C correctly moved to a detached worktree on :5202 and
 tore it down after.
+
+## V4 IS CLOSED — SUPERSEDED BY V5 (migrated from the memory index, 2026-08-06)
+
+The memory index carries one fact about this lane that this file never recorded:
+**V4 IS CLOSED and V4C is SUPERSEDED by RIBBON V5**, the owner's 2026-08-04
+direction (organic asymmetric vanes, cartographer cartouche with the seal in the
+O, the half-arrow depth law, burned reference tabs) — see
+[[ribbon-v5-direction]]. Consequences for anyone reading the sections above:
+
+- **The owner glance decisions STANDING above are SUPERSEDED, not owed** — the
+  R7 nock keep/drop and the whole-arrow composition verdict are both answered by
+  the V5 redesign. Do not re-open them as open decisions.
+- **The two hazard classes OUTLIVE the supersession** — the ANALYTIC-PIN MIRROR
+  class (pin the RENDERED declaration, never recomputed tokens) and the
+  BREAKPOINT-SCOPE gap (geometry pins run PER BREAKPOINT) are laws, not V4
+  artefacts, and V5 keeps the whole verification harness that enforces them.

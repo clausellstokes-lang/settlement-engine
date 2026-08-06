@@ -5,7 +5,7 @@ metadata:
   type: project
   created: 2026-08-05
   originSessionId: c44e5d99-2ba5-49d5-a554-40b68534c8eb
-  modified: 2026-08-05T03:53:16.568Z
+  modified: 2026-08-06T10:27:45.655Z
 ---
 
 # Two late design directives (owner, 2026-08-05, post-espionage)
@@ -315,3 +315,11 @@ table + km-scale item; creation-flow disclosure noted for the surface
 program). Related: [[espionage-confirmers-directive]],
 [[unreachable-band-and-absent-self-belief]] (the hopWeeks calibration
 whose meaning this changes).
+
+## Migrated from the memory index (2026-08-06)
+
+**THE FOLD IS TASK #34.** The WAYFARE draft folds together with the espionage draft
+at the integration pass, and that landing is queue **task #34**. Fold drafting ran
+as run `wf_3ab9cd44-602` (a READ-ONLY package: promoted ES/WY files + parent deltas
++ queue rows + amendment pairs); the LANDING waits for cycle 1's lane to release
+the tree. See [[espionage-confirmers-directive]], [[fable-build-era-takeover]].

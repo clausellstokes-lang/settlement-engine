@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: c44e5d99-2ba5-49d5-a554-40b68534c8eb
-  modified: 2026-08-05T02:26:49.368Z
+  modified: 2026-08-06T10:25:07.476Z
 ---
 
 # ⚠⚠ THE CQ5 × PARALLEL-LANE COLLISION (measured, FP cycle 1, 2026-08-04)
@@ -55,3 +55,12 @@ needs a per-cycle line budget, not per-wave.
 
 **GR-1's own state at the stop:** BUILT AND GREEN, uncommitted, in
 `.claude/worktrees/minifold`. See [[gr1-oath-holder-identity-built]].
+
+**⛔ WORKAROUND (b) IS SINCE REFUSED (noted 2026-08-06 during an index-verification
+pass; vetoable).** The chair's later ruling — [[concurrency-law-ruled]], 2026-08-06
+— REFUSES a second worktree for engine lanes: the gate is a MACHINE mutex, not a
+tree resource (full suite 636s / 2,129 files / 22,581 tests), and the exact-census /
+shrink-only files merge TEXTUALLY GREEN and SEMANTICALLY WRONG in both parents. The
+sanctioned cure is (a) serialize, or the SERIALIZED LANDING recipe in
+[[fp-cycle1-serialized-landing-and-cq5-row-guard]]. Nothing above is retracted —
+this note only marks which branch of HOW TO APPLY the chair has since closed.

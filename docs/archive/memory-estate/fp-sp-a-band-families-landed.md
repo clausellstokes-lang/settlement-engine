@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: c44e5d99-2ba5-49d5-a554-40b68534c8eb
-  modified: 2026-08-05T01:36:16.330Z
+  modified: 2026-08-06T10:27:16.395Z
 ---
 
 **WHAT LANDED (2026-08-04, `claude/composite-r4`, worktree minifold, NOTHING
@@ -99,3 +99,17 @@ the concurrent CW-0w lane's then-uncommitted `tests/helpers/proseNumericsWalk.js
 Full `tsc` 352 errors live and at base, identical file set. `eslint` 30 problems
 / 3 errors both sides. Domain strict green at 1313/1313, both leaves
 strict-clean. Zero rows attributable to SP-A.
+
+## Migrated from the memory index (2026-08-06)
+
+- **THE NINE-COPY CONSOLIDATION IS A CHAIR DECISION OWED.** SP-A froze the nine
+  declarations / eight names SHRINK-ONLY and did not consolidate (reasons above);
+  the consolidation itself is an OPEN CHAIR DECISION, recorded at cycle-1 close as
+  "the nine-copy intensity-ladder consolidation (CHAIR DECISION OWED, frozen
+  shrink-only meanwhile)" — [[fp-cycle1-serialized-landing-and-cq5-row-guard]].
+  Frozen is the interim state, not the answer.
+- Naming, for the one-line form of REFUTATION 1: the BORROWED significance family
+  (`major`/`notable`/`routine`) is **SP-6a**; the MINTED severity ladder
+  (`glancing`/`telling`/`grave`/`ruinous`) is **SP-6b**. Both live in
+  `bandFamilies.js` (41 effective). "SP-6a is a BORROW, not a mint" is the index's
+  compression of REFUTATION 1.

@@ -6,7 +6,7 @@ metadata:
   type: hazard
   date: 2026-07-27
   originSessionId: 88199162-811c-4be3-8912-b0f33c64d43d
-  modified: 2026-07-27T18:34:40.218Z
+  modified: 2026-08-06T10:28:13.657Z
 ---
 
 ## What happened
@@ -96,3 +96,26 @@ committing with `git commit -F <file>` is the cure.
    Do not wait for controlBytes.
 7. **Compose commit messages via a file, never a heredoc**, when the message
    discusses control characters at all.
+
+## Count correction — the class has BIT **6×**, not 4× (2026-08-06)
+
+**Migrated from the memory index 2026-08-06.** MEMORY.md's standing-hazards row for
+this file records the class as having **BIT 6×** — TWO more bites than the four
+narrated above. The frontmatter description ("HAS BITTEN 4x, latest 2026-08-03") and
+the "Fourth bite" heading are therefore UNDERCOUNTS; quote **6** as the running
+total. Per-incident detail for bites five and six was not carried by the index and is
+deliberately NOT reconstructed here — do not invent it, and do not renumber the
+narrated bites to fill the gap.
+
+⚠️ **The sharpest half of the index's note: one of the six bites happened WHILE
+AUTHORING THAT VERY INDEX LINE** — writing prose *about* the NUL hazard reproduced
+the NUL. So:
+
+8. **Prose about this class is itself a carrier.** A memory file, doc, ledger row or
+   commit message that merely DISCUSSES the backslash-u-0000 spelling can land a raw
+   NUL, exactly as code containing it does. Rule 6's byte check applies to
+   `.claude/**` memory writes and `docs/**` as literally as to `src/**` and
+   `tests/**` — and `tests/lint/controlBytes.test.js` does NOT cover those trees, so
+   for prose the byte check is the ONLY detector. Never emit the four-hex escape in
+   authored prose; spell it in words ("backslash-u-0000") the way this paragraph and
+   the memory index both do.

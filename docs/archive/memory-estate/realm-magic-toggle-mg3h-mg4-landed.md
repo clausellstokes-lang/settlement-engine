@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 1c189f3d-9fc3-4fc9-9cb7-b767525d28d5
-  modified: 2026-08-03T12:11:44.313Z
+  modified: 2026-08-06T10:27:19.181Z
 ---
 
 Program: `docs/DESIGN_REALM_MAGIC_TOGGLE.md` on `claude/composite-r4` (worktree
@@ -49,5 +49,13 @@ independent suppressions; MG-3h's L11 gate is a pinned no-op on the resolved pat
 `scripts/mutation-coverage-manifest.json` entry and reds the E-A totality contract; it needs
 its author's rationale line, not a guessed one.
 
+**THE WHOLE TOGGLE IS DARK — dark-BY-INHERITANCE, not flag-dark** (migrated from the
+memory index, 2026-08-06; the fact is stated in [[realm-magic-toggle-mg1-mg2-landed]] and
+was never written here). A realm only goes mundane if the DM answers so at MG-1's
+pre-generation `ChoiceDialog`, so MG-3h's leak closures and MG-4's acceptance measure are
+inert on every world that does not choose it. There is no simulationRules flag to unlight;
+the default answer IS the darkness.
+
 Related: [[arcane-classifier-catalog-tag-cure]], [[stressor-kernel-byid-wrapper-trap]],
-[[minifold-tree-is-live]], [[sizebaseline-exact-ceiling-hazard]].
+[[minifold-tree-is-live]], [[sizebaseline-exact-ceiling-hazard]],
+[[realm-magic-toggle-mg1-mg2-landed]].

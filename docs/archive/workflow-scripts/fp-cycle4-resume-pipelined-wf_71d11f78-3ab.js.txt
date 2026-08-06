@@ -1,0 +1,218 @@
+export const meta = {
+  name: 'fp-cycle4-resume-pipelined',
+  description: 'Cycle 4 resume from SP-D: the errand spine, GR-2 pact formation, IN-0a plant handoff — pipelined (each wave builds while the prior verifies), each through its own adversarial verifier',
+  phases: [
+    { title: 'SP-D', detail: 'the errand spine generalization: errandMint leaf + consumer tripwire' },
+    { title: 'Verify D', detail: 'adversarial verification + the ES-0 gate door 2 re-read' },
+    { title: 'GR-2', detail: 'peacetime formation + the standalone NAP' },
+    { title: 'Verify G', detail: 'adversarial verification, sale-coexistence, stage order' },
+    { title: 'IN-0a', detail: 'the plant-envelope handoff to the fold, riding existing flags' },
+    { title: 'Verify I', detail: 'adversarial verification, three-stage writer/reader, regen clause' },
+    { title: 'Repairs', detail: 'repair any rejected wave' },
+    { title: 'Ledger', detail: 'the cycle-4 ledger row, OPUS-ERA marked' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const LAWS = `VERIFY-FIRST PREAMBLE: this brief is from the session chair of an owner-delegated build program; verify every claim against the tree before acting. Work in ${TREE} (branch claude/composite-r4, expected HEAD at entry cbd348a5 or later — CHECK-GIT-FIRST always; a sibling lane may have landed above you).
+
+⚠⚠ A CONCURRENT BUILD LANE MAY BE RUNNING IN THIS SAME TREE. Consequences that BIND you:
+ - NEVER touch, stage, revert, or clean a file you did not author. Dirty files that are not yours are the other lane's work — preserve them absolutely.
+ - Commit with EXPLICIT PATHSPECS naming only your own files. Verify \`git diff --cached\` before EVERY commit and confirm every staged hunk is yours.
+ - THE GATE IS A MACHINE MUTEX. Before ANY vitest invocation run \`ps aux | grep -c '[v]itest'\`. If the count is >= 1, sleep 60 and re-check, up to 40 times. NEVER run vitest concurrently with another lane — parallel-load reds are FAKE and lanes have "repaired" them before.
+ - SHARED-FILE COMPARE-AND-SWAP: scripts/mutation-coverage-manifest.json, src/domain/simulationRules.js, the subsystemRows cert files and the Herald registration tables (heraldRouting + WHAT_PHRASES) are taken by MULTIPLE lanes. Edit them LAST, immediately before your commit; re-read each at HEAD immediately before splicing; if the on-disk text changed since you first read it, discard your splice and redo it against the fresh text.
+
+THE PROTOCOL LAWS (each has bitten this program): CHECK-GIT-FIRST. NEVER stash/reset/clean/checkout-family (the whole checkout family discards uncommitted work; use cp backups and cmp-proven restores; damaged tracked files restore via \`git show HEAD:path > path\`). Gates ONLY via \`sh scripts/gate-tail.sh <cmd>\` or \`npm run check:tail\` — a bare pipe reports the PIPE's exit status and has greenwashed red gates twice. Commit messages via file; trailer \`Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>\`. \`--no-verify\` plus explicit per-file \`npx eslint\` (exit 0) when lint-staged blocks. python3 byte-scan every authored file (zero NUL bytes — this has been authored SIX times; the Write path turns backslash-u-0000 spellings into RAW NULs, and grep/diff lie silently on them). New tests/lint walkers need scripts/mutation-coverage-manifest.json entries. Strict ceiling 1313 EXACTLY. tests/fixtures/ and pulseKernel.js / applyWorldPulse.js are UNTOUCHABLE. Navigate by SYMBOL, never by hand-keyed line address (they rot). LIVE CODE OUTRANKS EVERY TABLE — an overstatement in a doc is a STOP-and-report, never a silent correction. Every quoted receipt must be able to FAIL. The four-fence dormancy pattern + a lit-mutant per flag is LAW, WITH the defense-in-depth corollary: enumerate every guard door and pin EACH one individually (a double-guarded conjunction survived an entire fence set). NEVER spell \`vitest list --json PATH\` with a space — the bare form consumes the NEXT POSITIONAL as its output path and OVERWRITES that file silently at exit 0; always \`--json=PATH\` (equals form) to a path OUTSIDE the repo, and run \`git status --porcelain\` immediately after any vitest-CLI flag invocation.
+
+CQ5 FLAG LAW: a manifesting flag lands its manifest row + authored cert row + first real gate read in ONE commit. Flag waves are SERIALIZED in this tree — never begin your flag commit while another lane's flag commit is uncommitted.
+
+⏳ OPUS-ERA MARKING (owner directive, 2026-08-06): this era is managed and validated by Opus 5, not Fable 5. EVERY ledger row you append to docs/FABLE_VALIDATION_QUEUE.md MUST carry "⏳ OPUS-ERA — FABLE SURVEY OWED" in its heading, and every chair-grade judgment you make MUST be itemized as a J-* entry in that row so a later Fable session can re-rule it cheaply. This is not optional and is not a formality.
+
+REPORTING: label every conclusion CONFIRMED (executed evidence quoted in your own transcript) or PLAUSIBLE (reasoning only). Never present the second as the first.`
+
+const VERIFIER_LAWS = `
+
+⚠⚠ VERIFIER CONCURRENCY DISCIPLINE — READ BEFORE ANYTHING ELSE. A BUILD LANE IS ALMOST CERTAINLY WRITING TO THE LIVE TREE WHILE YOU RUN.
+ - Do EVERY execution inside a \`git archive\` of the exact commit you are verifying, never in the live tree. Recipe: \`mkdir -p /tmp/verify-$$ && git archive <sha> | tar -x -C /tmp/verify-$$ && ln -s ${TREE}/node_modules /tmp/verify-$$/node_modules\`. Remove the SYMLINK with \`rm -f\` BEFORE removing the tree, or you will delete the real node_modules.
+ - You MUST NOT assert tree-cleanliness, and you MUST NOT report dirty files as a finding — they belong to the concurrent lane.
+ - You MUST NOT edit, stage, revert or restore anything in the live tree. Mutants go in disposable archive trees ONLY.
+ - The vitest mutex binds you too: \`ps aux | grep -c '[v]itest'\` before any run; if >= 1, sleep 60 and re-check up to 40 times.
+ - Wave-end attribution: compare the wave's commit against a git-archive of its PARENT, row-identity diff EMPTY both directions except attributed rows, PLUS the red-ratchet CONTENT diff (a red ratchet's inventory grows INVISIBLY — a byte-identical fail row can hide a grown inventory).`
+
+phase('SP-D')
+const spd = await agent(LAWS + `
+
+YOU ARE THE SP-D IMPLEMENTER — THE ERRAND SPINE GENERALIZATION, flag \`errandSpineEnabled\`. THIS IS THE HIGHEST-LEVERAGE SINGLE WAVE REMAINING IN THE PROGRAM: it unblocks ES-1, TR-8, WF-2b, IN-4 and INT-3b across four volumes.
+
+THE NORMATIVE SPEC is docs/DESIGN_FP_ARCH_SP.md, the SP-D wave block (locate by SYMBOL "SP-D", near :573) — read it WHOLE, plus its section 1 (SP-1), before any edit. Cross-read docs/DESIGN_FP_ARCHITECTURE.md "#6 SP-D" (near :783). The envoy file family is the war lane's most-recently-edited surface — re-read EVERY target at HEAD before touching it.
+
+THE CHARTER:
+(1) extend \`envoyErrandVocabulary.js\` (~315 lines): the six purpose CLASSES {diplomatic, commercial, religious, factional, personal, covert} as a closed vocabulary beside the existing purposes; the mapping row ('sue'/'self_parlay' -> diplomatic) as DATA, never inference.
+(2) \`envoyErrand.js\` (~823 lines — AT its effective ceiling) gains ONLY a delegation call; the generalized mint head lands in a NEW leaf \`errandMint.js\` (budget 250) — the L8 lazy-leaf recipe. The mint accepts purposeClass + the declared/true split, gated \`errandSpineEnabled === true\`; dark, only the war path exists and it is byte-identical.
+(3) the declared/true split rides the EXISTING covert/revealed seam: truePurpose is covert-side, fail-closed in \`envoyErrandProjection.js\`'s audience split; interception exposure routes the EXISTING covert-to-revealed machinery, never a new one. THE PUBLIC-PAYLOAD VEIL SEAM is law here: every public payload builder RETURNS through veilPublicPayload.
+(4) per-errand keyed forks, the K.2 snapshot, interceptability and the M speed law apply to every class BY CONSTRUCTION (same writer, same transit kernel) — extend \`namedPersonTransitTotality.walker.test.js\` to the new mint leaf.
+(5) THE CONSUMER REGISTRATION TRIPWIRE: a frozen consumer map (GRAMMAR envoys today; factors/legates/pilgrims/couriers/ambitious as their volumes land) with a BOTH-WAYS walker — a volume minting errands without a registry row REDS; a registry row with no minting consumer REDS.
+(6) files: envoyErrandVocabulary.js, envoyErrand.js (delegation only), the new errandMint.js, envoyErrandProjection.js (audience rows), simulationRules.js (one manifest row), a certification row. PER THE CERT-LANE PARTITION RULING (standing practice): route your cert row to the SPINE program's OWN subsystemRows lane file, not a shared one — the totality walker asserts the PARTITION, not the address. The CQ5 trio lands in ONE commit.
+(7) PINS: four-fence + lit-mutant, EVERY guard door pinned individually; JSON-round-trip on the new fields (the JSON-alias trap — factions[].members[] ARE npcs[] objects); the fail-closed truePurpose projection pin proven with a SEEDED covert errand, NEVER an empty harness (an empty-harness absence pin is vacuous — it passes with the feature deleted); the legacy-row derivation pin (absent purposeClass reads diplomatic; a legacy save round-trips byte-identically); DM-KILL-closes-lost re-proven on a generalized errand.
+(8) DORMANCY: flag dark = the mint head unreachable = envoyErrands bytes IDENTICAL through the live pulse, hash-compared over at least a 10-tick run.
+(9) LIFECYCLE TOTALITY (this estate's most-bitten bug class): trace create / read / persist / regenerate / undo / import for every field you add, and prove survival on EACH path by executed round-trip, not by reasoning. A fix that survives one path and dies on another is worse than no fix.
+
+KNOWN DOWNSTREAM SEAM — VERIFY AFTER LANDING: the espionage gate (ES-0, src/domain/worldPulse/espionage/espionageGate.js) spells its door 2 as \`errandSpineEnabled !== true\` DELIBERATELY. After your manifest row lands, that door reads a REAL key for the first time. Execute the gate in BOTH flag states and confirm the espionage family stays parked while errandSpineEnabled is dark and nothing new lights.
+
+Edit-verb decision (no recall verb — record the decision) and the Alignment line per the block. Wave-end attribution per the LAWS. Append your ledger row to docs/FABLE_VALIDATION_QUEUE.md with the ⏳ OPUS-ERA — FABLE SURVEY OWED heading and your J-* judgment entries.
+
+RETURN JSON: {commits: [sha...], files: [...], gates: [{command, result}], goldenShifts: [...], stopReports: [...], judgments: [...], notes}.`, { label: 'build:SP-D', phase: 'SP-D', model: 'opus' })
+
+// Pipelined: GR-2 builds on SP-D's landed commit while SP-D's verifier runs in archive trees.
+const [vspd, gr2] = await parallel([
+  () => agent(LAWS + VERIFIER_LAWS + `
+
+YOU ARE THE ADVERSARIAL VERIFIER FOR SP-D. Default posture: the implementer is WRONG until executed evidence says otherwise. Your job is to REFUTE, not to confirm. The implementer reported: ` + JSON.stringify(spd).slice(0, 12000) + `
+
+VERIFY BY EXECUTION in git-archive trees:
+(1) envoyErrand.js gained ONLY delegation — diff its numstat; the mint logic must live in errandMint.js under budget. Run the dormancy hash YOURSELF through the live pulse in an archive tree: the war path byte-identical dark.
+(2) THE truePurpose FAIL-CLOSED PIN IS NON-VACUOUS: seed a covert errand, render EVERY non-covert projection, truePurpose absent everywhere. Then MUTANT: leak truePurpose into a public projection in an archive tree — the pin MUST red. A pin that stays green is a REJECT.
+(3) the tripwire walker reds BOTH WAYS — delete a registry row (must red); add a phantom row with no minting consumer (must red). Both executed.
+(4) the legacy derivation: build a pre-SP-D errand fixture via JSON round-trip of a REAL record; absent purposeClass reads diplomatic; bytes identical.
+(5) THE ES-0 SEAM: execute espionageGate door 2 with the key now real — the espionage family stays parked dark, and the gate's own pins still pass. Quote the executed reads.
+(6) the transit totality walker extension really covers the new leaf — delete the leaf's registration in an archive tree and the walker must red.
+(7) CQ5 co-commitment via \`git log -S\`; the delete-the-cert-row mutant reds; four-fence; every guard door deleted INDIVIDUALLY reds its own pin (a conjunction pinned only jointly is blind).
+(8) lifecycle totality: independently execute the regen and undo round-trips for every new field. This estate's most-bitten class is the write that survives one path and ghosts another.
+(9) wave-end attribution at BOTH granularities plus the red-ratchet CONTENT diff; strict 1313; byte-scans for NULs; commit hygiene (staged set == claimed set).
+
+A finding is only a finding if you EXECUTED the thing that proves it. RETURN structured JSON only.`, { label: 'verify:SP-D', phase: 'Verify D', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } }),
+
+  () => agent(LAWS + `
+
+YOU ARE THE GR-2 IMPLEMENTER — PEACETIME FORMATION + THE STANDALONE NAP, flag \`pactFormationEnabled\`.
+
+⚠ A SIBLING LANE (SP-D) HAS JUST LANDED ITS COMMIT AND ITS VERIFIER IS RUNNING CONCURRENTLY IN ARCHIVE TREES. Your file set is disjoint from SP-D's by design, EXCEPT the shared files named in the compare-and-swap law above — obey it exactly. Do not begin your flag commit until \`git status --porcelain\` shows SP-D's files committed (they will be; SP-D commits before its verifier starts).
+
+THE NORMATIVE SPEC is docs/DESIGN_FP_ARCH_GR.md, the GR-2 block (locate by SYMBOL, near :431) plus the GRAMMAR volume sections it cites; cross-read docs/DESIGN_FP_ARCHITECTURE.md "#10 GR-2" (near :853). Read whole before any edit.
+
+GR-2 was BLOCKED on spine SP-2/SP-4: SP-2's substrate landed in SP-B (belief-axis families) and SP-4 landed as SP-C at cbd348a5. VERIFY-AT-BUILD their landed SHAPES before writing a single consumer read — do not trust the volume's description of them. THE CHAIR RULING CR-C4-1 BINDS: the court reads are spelled \`courtPostureOf\` / \`courtRiskAppetiteOf\`, NEVER \`riskToleranceOf\` (that spelling is TAKEN by an NPC-level read at roads/state.js:319, and this estate has been bitten by the silent-collision class).
+
+THE CHARTER:
+(1) MOUNT: \`advancePeacetimePacts\` as a stage in settlementLifecycleKernel.js BESIDE advanceSovereigntyMarket (near :90), own-flag-before-host-gate; NEVER a pulseKernel edit (J-GRC-2). Stage ORDER fixed and PINNED — market first, pacts second (recorded JUDGMENT, vetoable: a court that just sold is a court whose believed books changed, so the pact trigger should read the post-sale world).
+(2) MINT/AMEND: \`pactFormation.js\` as a writer-FAMILY member on the peaceTermsSale.js pattern — composes TERM_CATALOG / primitives / clock directly, writes through treatyLedgerOf / setSpatialLedger, NOT re-exported by peaceTerms.js, caller outside the head's import cycle. \`pactAmendment.js\` (family member) carries the AMENDMENT act (standing instrument = lineage append). The war door's amendment awareness is the ONE peaceTerms.js edit this wave makes — state the delta in the commit body. ⚠ peaceTerms.js is a HOT FILE at 776/800 with a PER-CYCLE budget of +24 lines and NINE waves want it: spend as few as you can and state your spend in the commit body.
+(3) new modules + effective budgets: pactTriggers.js (pure, 220), pactProposals.js (one writer, 250), pactFormation.js (200), pactAmendment.js (180).
+(4) TRANSPORT, both arms: errand-spine DARK = answerDueTick from the hopWeeks leg read — state dwell bands against the MEASURED 2..8-week digest spectrum, never a constant (hopWeeks is PER-DIGEST; the calibrated-weeks hazard). Spine LIT = the SP-D/WR-7 envoy, purpose \`diplomatic\`, transport-mode on every receipt. SP-D landed this cycle — read its ACTUAL mint signature from errandMint.js, never from the volume.
+(5) PINS: the volume's full set (refusal / no-overlap / dependency-fear / posture / spam / four-trigger reachability / NAP symmetry / stacking-refusal / two-sided compliance / serial-disavower / DM parity / war-overtaken / transport-mode / dormancy) PLUS the compiled additions: the K3 pin set gains the two new modules with guard-the-guard against a truth-reader OUTSIDE the set; the writer/reader payload pin boots the REAL pactProposals.js writer (a pin that mirrors the deriver is worthless); THE SALE-COEXISTENCE PIN — a pair holding a live sale instrument receives a pact proposal, and acceptance AMENDS that instrument (ONE record at the pair key) while the sale door's refusal behavior is asserted UNCHANGED.
+(6) MUTANTS, each executed and cmp-restored: the two-sided conjunction (drop one side, the no-overlap pin must red); the cap; the stacking-refusal receipt. A MUTANT THAT PLANTS NOTHING GREENS — assert the file actually CHANGED and abort if it did not.
+(7) DORMANCY: dark = the kernel stage body never entered = byte-identical (the sovereigntyMarketStage fence pattern, verbatim).
+(8) EDIT VERB \`PROPOSE_PACT\` with the FULL registration set the volume specifies (manifest row + dials + typed veto codes + authority row + decisionTier + handler + parity pin) — AND the standing store-action law: if this lands a new store action, \`operationRegistry\` + \`npm run gen:compendium-data\` are REQUIRED IN THE SAME WAVE; a missing regen bites silently.
+(9) COLLISION MAP: the allianceWebRiskConsumers walker — GR-2 is the THIRD consumer of readAllianceWebRisk; argue the census update IN-COMMIT. CQ5 trio in ONE commit; route the cert row to GRAMMAR's OWN subsystemRows lane file per the cert-lane partition.
+(10) LIFECYCLE TOTALITY: create / read / persist / regenerate / undo / import for the pactProposals ledger, each proven by executed round-trip.
+
+Wave-end attribution per the LAWS. Append your ledger row with the ⏳ OPUS-ERA — FABLE SURVEY OWED heading and J-* entries.
+
+RETURN JSON: {commits, files, gates, goldenShifts, stopReports, judgments, notes}.`, { label: 'build:GR-2', phase: 'GR-2', model: 'opus' }),
+])
+
+const [vgr2, in0a] = await parallel([
+  () => agent(LAWS + VERIFIER_LAWS + `
+
+YOU ARE THE ADVERSARIAL VERIFIER FOR GR-2. Default posture: wrong until executed evidence. REFUTE, do not confirm. The implementer reported: ` + JSON.stringify(gr2).slice(0, 12000) + `
+
+VERIFY BY EXECUTION in git-archive trees:
+(1) the mount is a KERNEL STAGE, not a pulseKernel edit — \`git log\`/numstat across the wave commits proves pulseKernel.js and applyWorldPulse.js untouched. The stage-order pin must RED when you swap the two stages in an archive tree.
+(2) the writer family holds: peaceTerms.js's diff is EXACTLY the one stated edit (quote the numstat and the line spend against the +24 budget); pactFormation.js is NOT re-exported by peaceTerms.js (grep the export surface); the K3 guard-the-guard reds on a truth-reader planted OUTSIDE the set.
+(3) SALE-COEXISTENCE EXECUTED: seed a pair with a live sale instrument, drive a pact proposal to acceptance, confirm ONE record at the pair key (amendment lineage, not a second instrument), and the sale door's refusal behavior unchanged against the measured baseline.
+(4) SPINE READS: grep proves GR-2 consumes courtPostureOf / courtRiskAppetiteOf and NEVER riskToleranceOf. Drive a posture-priced proposal over two divergent-posture fixtures and confirm the pricing actually MOVES — a pin over identical fixtures is vacuous.
+(5) transport BOTH arms: the dark arm's answerDueTick derives from the real hopWeeks leg across the 2..8-week spectrum, not a constant. The lit arm calls SP-D's real mint.
+(6) the two-sided conjunction mutant, the cap, the stacking-refusal receipt — each executed, each proven to have actually CHANGED its file, each cmp-restored.
+(7) dormancy byte-identity via the fence pattern; four-fence; guard doors INDIVIDUALLY; lit-mutant.
+(8) if PROPOSE_PACT landed as a store action: the operationRegistry row exists AND gen:compendium-data was re-run — DIFF the generated data; stale regen is the recorded silent bite. DM parity pin executed.
+(9) CQ5 co-commitment; wave-end attribution both granularities + red-ratchet CONTENT diff; strict 1313; byte-scans; staged-set hygiene.
+
+RETURN structured JSON only.`, { label: 'verify:GR-2', phase: 'Verify G', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } }),
+
+  () => agent(LAWS + `
+
+YOU ARE THE IN-0a IMPLEMENTER — THE HANDOFF: the applied brokerage_plant envelope carried to the fold. RIDES EXISTING FLAGS (\`informationBrokeragesEnabled\` x the statecraft flag) — NO new flag, NO cert-row mint. This is the re-scoped R1 slice, so the CQ5 serialization does NOT bind you; you may land while a sibling flag lane is mid-wave, provided your pathspecs are disjoint and you obey the shared-file compare-and-swap law.
+
+THE NORMATIVE SPEC is docs/DESIGN_FP_ARCH_IN.md, the IN-0a block (locate by SYMBOL, near :258), plus the sections it cites in docs/DESIGN_FP_INFORMATION.md. Read whole first.
+
+THE CHARTER:
+(1) FILES: brokerageServicesRules.js (~383), candidateEvents.js (~786 — NEAR the 800 layer ceiling: ANY addition beyond ~10 lines needs a lazy leaf), a NEW pure leaf for envelope collection (80-line budget), informationStatecraft.js (head gains ONLY the consume read; it is a HOT FILE at 763/800), envoyPulse.js (~376 — WAR-owned: the head-read gated on informationBrokeragesEnabled; keep the diff minimal and attributable), and a projection mount on the settlement dossier surface.
+(2) THE MODEL: the applied plant's envelope must reach BOTH consumers WITHOUT editing the banked pulse mouths (pulseKernel 1580 / applyWorldPulse 941 — ZERO edits EVER). Primary road: each consumer READS the prior tick's applied brokerage_plant events at its OWN head off the existing applied-event/news record (one-week lag = law M). ⚠ VERIFY-AT-BUILD: applied-event metadata retention through the candidate apply lane — MEASURE it before building. If retention fails, take the Q1 fallback (pendingPlants conditional deposit under the D-3 contract). If BOTH fail: STOP-AND-REPORT — a kernel seam is the chair's to grant, never yours.
+(3) RECEIPTS: \`plant_took\` (DM-truth-only projection line) when the mark's belief crosses to the planted band; the exposure beat extends to NAME THE MARKET (and the commission where lineage collapsed). Registration COMPLETE in this commit: WHAT_PHRASES (settlementRumors.js:116 — navigate by symbol) + heraldRouting + pacing/significance class (routine) + the knowledge family's own-vocabulary token.
+(4) DOSSIER: mount projectPlants (the first non-test consumer) on the town page, DM/premium, audience passed EXPLICITLY; a source scan catches any call site omitting it; the player projection is pinned EMPTY for live plants. ⚠ RECORDED HAZARD: a "dark" wave's DISPLAY surface may be identical flag-absent and flag-lit — fail closed on the premium AUTHORITY, not on the flag.
+(5) PINS (negative hardest): the corroborated mark's plant DIES at the fold (reconcile's contradiction arm — SEEDED non-empty, print the seeded state size); the SPENT MARKET banded margin pin exactly as the volume's corrected block (WEIGHT_FLOOR 0.35 is a DISCOUNT, not silence; pin the fresh-plant-beats-stale-truth sibling too); THE WRITER/READER PIN BOOTS THE REAL ROTATION PRODUCER THROUGH THE REAL APPLY LANE THROUGH THE REAL FOLD — three stages, no shortcut fixture (the fixture-mirrors-deriver hazard: a fixture that mirrors the deriver produces dead arms that read keys the pipeline never writes); reachability — one plant TAKES in a generated lit corpus; the handoff mutant — sever the envelope collection and the fold pin REDS (manifest entry required); dormancy golden — both flags dark = byte-identical INCLUDING the ONE_REGEN preset.
+(6) LIFECYCLE: the fold adds no shape change; JSON-round-trip on a folded record; regen PRESERVES live plants (the section-3 clause) — EXECUTE the regen path, never assume it.
+(7) if any corpus file changes, \`npm run gen:dossier-prose\` is REQUIRED in the same wave.
+
+Spine requirements 13/14 (Alignment line + Edit-verb story) as the block records. Wave-end attribution per the LAWS. Append your ledger row with the ⏳ OPUS-ERA — FABLE SURVEY OWED heading and J-* entries.
+
+RETURN JSON: {commits, files, gates, retentionMeasurement: {roadTaken, executedProof}, stopReports, judgments, notes}.`, { label: 'build:IN-0a', phase: 'IN-0a', model: 'opus' }),
+])
+
+const vin0a = await agent(LAWS + VERIFIER_LAWS + `
+
+YOU ARE THE ADVERSARIAL VERIFIER FOR IN-0a. Default posture: wrong until executed evidence. REFUTE. The implementer reported: ` + JSON.stringify(in0a).slice(0, 12000) + `
+
+VERIFY BY EXECUTION in git-archive trees:
+(1) THE PULSE MOUTHS: git numstat across the wave proves pulseKernel.js and applyWorldPulse.js untouched. Re-run the implementer's retention measurement YOURSELF and confirm the envelope road is the one they claim.
+(2) THE THREE-STAGE WRITER/READER PIN IS REAL: read its fixture construction — it must boot the real rotation producer, the real apply lane, the real fold. A pin that mirrors the deriver is an automatic REJECT. Sever the envelope collection in an archive tree — the fold pin must RED.
+(3) the corroborated-mark death arm is SEEDED non-empty (print the seeded state size); the spent-market margin pin asserts the BAND, not silence.
+(4) DORMANCY: both flags dark, byte-identical INCLUDING the ONE_REGEN preset — run it. Regen PRESERVES live plants — EXECUTE the regen path with a live plant seeded and diff the result.
+(5) the dossier mount: audience explicit at EVERY call site (source scan); the player projection EMPTY for live plants, seeded and non-vacuous. Confirm the surface differs flag-absent vs flag-lit, or that it fails closed on the premium AUTHORITY.
+(6) registration complete: WHAT_PHRASES + heraldRouting + pacing + vocabulary token all in the commit (\`git log -S\` each). If any corpus file changed, gen:dossier-prose was re-run — diff the generated output for staleness.
+(7) the one-week lag: the consumer reads PRIOR-tick events — drive two consecutive ticks and quote the lag.
+(8) wave-end attribution both granularities + red-ratchet CONTENT diff; strict 1313; byte-scans; staged-set hygiene.
+
+RETURN structured JSON only.`, { label: 'verify:IN-0a', phase: 'Verify I', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+// Repair any rejected wave, concurrently — repairs are additive commits, never reverts (zero reverts this era).
+const rejected = [
+  { name: 'SP-D', build: spd, verdict: vspd },
+  { name: 'GR-2', build: gr2, verdict: vgr2 },
+  { name: 'IN-0a', build: in0a, verdict: vin0a },
+].filter(w => w.verdict && w.verdict.verdict === 'REJECT')
+
+let repairs = []
+if (rejected.length) {
+  phase('Repairs')
+  log(`${rejected.length} wave(s) REJECTED: ${rejected.map(w => w.name).join(', ')} — dispatching repairs.`)
+  repairs = await parallel(rejected.map(w => () => agent(LAWS + `
+
+YOU ARE THE REPAIR IMPLEMENTER FOR ${w.name}. Its adversarial verifier REJECTED it. Repairs are ADDITIVE COMMITS — this era has ZERO reverts and keeps that record.
+
+THE VERIFIER'S FINDINGS: ` + JSON.stringify(w.verdict).slice(0, 10000) + `
+
+THE ORIGINAL BUILD REPORT: ` + JSON.stringify(w.build).slice(0, 8000) + `
+
+For EACH finding, in order: (a) REPRODUCE it yourself by execution before repairing — a finding you cannot reproduce is a finding you must report as REFUTED with your executed evidence, not silently fix (a verifier's stated cause has been REFUTED by measurement before, and the correct act was to execute with the MEASURED cause declared in the commit body); (b) repair at the CHOKEPOINT all paths flow through, not at the symptom; (c) prove the repair with a MUTANT — and assert the mutant actually CHANGED the file, because a mutant that plants nothing greens; (d) re-run the pins the finding touched and quote them.
+
+⚠ RUN EVERY PROPOSED REMEDY AS A MUTANT: a trusted verifier's EXECUTED remedy has been DEAD under the new architecture — planted, and the battery stayed green.
+
+Then re-run the wave's own battery and the wave-end attribution. Append a REPAIR ledger row with the ⏳ OPUS-ERA — FABLE SURVEY OWED heading, listing each finding as CONFIRMED-AND-REPAIRED or REFUTED-WITH-EVIDENCE.
+
+RETURN JSON: {commits, findingsDisposition: [{finding, verdict, evidence}], gates, notes}.`, { label: `repair:${w.name}`, phase: 'Repairs', model: 'opus' })))
+}
+
+phase('Ledger')
+const ledger = await agent(LAWS + `
+
+YOU ARE THE CYCLE-4 LEDGER SLICE — docs and ledger ONLY, ZERO src edits.
+
+The cycle-4 waves ran with these results:
+SP-D build: ` + JSON.stringify(spd).slice(0, 5000) + `
+SP-D verdict: ` + JSON.stringify(vspd).slice(0, 4000) + `
+GR-2 build: ` + JSON.stringify(gr2).slice(0, 5000) + `
+GR-2 verdict: ` + JSON.stringify(vgr2).slice(0, 4000) + `
+IN-0a build: ` + JSON.stringify(in0a).slice(0, 5000) + `
+IN-0a verdict: ` + JSON.stringify(vin0a).slice(0, 4000) + `
+Repairs: ` + JSON.stringify(repairs).slice(0, 5000) + `
+
+DO THIS:
+(1) VERIFY THE CLAIMS BEFORE RECORDING THEM. \`git log --oneline\` the cycle span and confirm every claimed commit sha EXISTS and touches the files claimed. A ledger row that records an unlanded commit is worse than no row. Where a claim and the tree disagree, THE TREE WINS and you record the measured fact.
+(2) Append ONE cycle-close row to docs/FABLE_VALIDATION_QUEUE.md in the established format (read the tail first). Its heading MUST carry "⏳ OPUS-ERA — FABLE SURVEY OWED". Enumerate every J-* judgment made across the cycle so a later Fable session can re-rule each cheaply. Record every DEFERRAL with its reason, phrased so nobody re-finds it as a bug.
+(3) Update docs/SOL_QUEUE.md and the FP volume's §5 PROGRESS markers ONLY where the tree proves a wave landed — point, do not restate (the derive-don't-restate law: a hand-maintained restatement of a derivable fact goes stale at its source and greens a shrink-only walker seeded wrong).
+(4) Report the REMAINING-WORK TABLE (the owner's standing reporting preference): what remains after cycle 4, by volume, with wave counts DERIVED from the volumes' own §5 tables — never from a remembered number. The last measured total was 94 waves (FP core 61 with 8 landed, WC 17, WY 12, HB 10, ES 7, EP 6; 49 flagged, 45 not) — re-derive it and state your measured figure and any correction.
+(5) Commit with explicit pathspecs.
+
+RETURN JSON: {commit, remainingWaveTable, unverifiedClaims: [...], deferrals: [...], notes}.`, { label: 'ledger:cycle-4-close', phase: 'Ledger', model: 'opus' })
+
+return { spd, vspd, gr2, vgr2, in0a, vin0a, repairs, ledger }

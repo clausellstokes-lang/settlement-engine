@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 1c189f3d-9fc3-4fc9-9cb7-b767525d28d5
-  modified: 2026-08-04T23:41:50.012Z
+  modified: 2026-08-06T10:27:23.874Z
 ---
 
 # WR-10 — the sovereignty market: FINISHED (wired dark, 2026-08-04 evening)
@@ -143,3 +143,13 @@ base; warDeployment/warSiegeVerdict/pulseKernel shared with the pending
 WZ-2/WZ-3 razing lane. Cert row parked on WR-8's +32-byte preset fork
 (owner-gated). ⚠ the "sovereign-hand law" has NO code spelling anywhere —
 eligibility is LEDGER MEMBERSHIP, never a user-placed flag (none exists).
+
+## Migrated from the memory index (2026-08-06)
+
+⚠ **A SIZE FIGURE IS MEASURED AT THE PUBLISHING COMMIT, NEVER INHERITED.** The
+`18f0ced4` chair erratum above is the instance and the standing rule the index
+carries: the size table's own ✅ figures had been carried forward from PRE-REPAIR
+measurements. True at HEAD: appraisal **160**, bundle **164**; assets **94** /
+reach **104** (the earlier 95/105 pair was the off-by-one the ledger amendment
+corrected). Re-measure every size figure at the commit you publish it in —
+[[wr10-sovereignty-market-dark]] still carries the older 157/165/95/105 reading.

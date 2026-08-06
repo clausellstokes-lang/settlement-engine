@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: c0eb8c59-b585-45a4-afa4-24af69125d15
-  modified: 2026-07-28T11:38:07.286Z
+  modified: 2026-08-06T10:26:23.027Z
 ---
 
 The generation remediation lane lives in the worktree
@@ -158,6 +158,16 @@ and put the drain-wait AND the gate launch in ONE background command so the
 gate fires atomically on true drain. Also confirmed: the harness restores the
 persisted shell cwd for background Bash tasks (it prepends the cd itself), but
 print `pwd` + `rev-parse --abbrev-ref HEAD` in the gate output as the receipt.
+
+⚠️⚠️ **THE `ps aux | grep vitest` PRACTICE HAS A FALSE-POSITIVE MODE (added 2026-08-06).**
+This memory's standing advice — check `ps aux | grep vitest` before believing a
+timeout or launching a gate — is correct, but the *count* spelling of it
+(`ps aux | grep -c "[v]itest"`) SELF-MATCHES whenever any other part of the same
+command line carries the word (an `echo` label is enough), reporting a phantom
+mutex holder that costs up to 40 minutes of scripted sleeping per agent per gate
+run. Run the check standalone and demand visible pid lines before believing a
+positive — full symptom, trigger and cure in
+[[vitest-mutex-check-self-match]].
 
 **FINAL RULINGS COMMITTED (2026-07-27 ~00:50, `9201597f`):** the owner delegated
 the last two open edges; manager ruled and shipped: (1) TIER SHIFTS ADOPT —

@@ -8,7 +8,7 @@ history without checking out the other branch.
 - Build branch: `claude/composite-r4`
 - HEAD: `cbd348a5`
 - Commits: 2950
-- Working tree at refresh: 0 dirty entries
+- Working tree at refresh: 18 dirty entries
 
 ```
 cbd348a5 2026-08-06 SP-C: the posture read — a court's learned nerve, and the name that was already taken

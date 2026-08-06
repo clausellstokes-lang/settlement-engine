@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: c44e5d99-2ba5-49d5-a554-40b68534c8eb
-  modified: 2026-08-05T01:35:35.197Z
+  modified: 2026-08-06T10:27:46.877Z
 ---
 
 Wave CW-0w (DESIGN_FP_ARCHITECTURE.md §5 block #2, pulled forward as J-FP-3),
@@ -67,6 +67,30 @@ sampler), `e30770bd` (prose-numerics fifth detector). Wave base 99d63d92.
    STOP-and-report, never a re-record. A reviewed re-record needs a chair ruling
    in FABLE_VALIDATION_QUEUE.md; re-recording inside any lane would launder nine
    other lanes' prose leaks and raise two frozen ceilings.
+
+## ⭐ BOTH STOPS RULED AND EXECUTED AT CYCLE CLOSE (migrated from the memory index, 2026-08-06)
+
+The two stops above are **no longer owed** — both were ruled by the chair and
+executed at the FP cycle-1 close. Recorded here because the index line carried the
+outcome while this file still read "OWED":
+
+1. **The desk-agreement stop → ruled as `CR-FP-1`, resolved AUTHORITY-ROUTED.**
+   intendedDesk stays owner-facing editorial intent and SECTION_OF stays the
+   paper's single-home law; the 7 disputes stay frozen shrink-only in the DISPUTED
+   register rather than either side being moved by an implementer.
+2. **The proseNumerics stop → ruled as `CR-FP-2`, a REVIEWED RE-RECORD.** The
+   401-baseline / 410-live gap was re-recorded under the ruling rather than
+   laundered inside a lane. ⚠ Note `CR-FP-2`'s originally STATED cause was
+   REFUTED on execution — the act executed against the MEASURED cause, not the
+   documented one (see [[fp-cycle1-serialized-landing-and-cq5-row-guard]]).
+
+## The nine-prefix set is CLOSED, and the fold makes it eleven
+
+The couplingId prefix list (WR TR GR WF POP IN INT SP CW) is a CLOSED set of
+**nine**, and seam SC-7 reds until a new volume is consciously admitted. Recorded
+so the next admission is not mistaken for a defect: **ES and WY become the TENTH
+and ELEVENTH prefixes at their fold** — both volumes are architected and pending
+fold, so two admissions are already owed and expected.
 
 ## Hazards this wave re-confirmed by execution
 

@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 1c189f3d-9fc3-4fc9-9cb7-b767525d28d5
-  modified: 2026-08-04T15:01:37.212Z
+  modified: 2026-08-06T10:27:32.477Z
 ---
 
 Lane WR-10 (the sovereignty market, amendment S), 2026-08-04, branch
@@ -65,3 +65,19 @@ those rows here — GR-3 owns them and R3 owns their canonical spelling.
 Related: [[unreachable-band-and-absent-self-belief]] (WR-10's reinforcement band
 was the third instance of the dead-band class), [[wr8-closed-believed-razing-casus]],
 [[wr9-partial-build-and-stops]], [[hand-keyed-line-address-rot]].
+
+## Migrated from the memory index (2026-08-06)
+
+⚠️ **ELIGIBILITY IS LEDGER MEMBERSHIP — there is NO user flag.** The
+"sovereign-hand law" has no code spelling anywhere in the estate;
+`sovereigntyAssets.js` answers eligibility from LEDGER MEMBERSHIP, and no
+user-placed flag exists to read (none was ever built). Migrated here because the
+index line for THIS file asserts it; also carried in
+[[wr10-sovereignty-market-state]].
+
+⚠️ REPORTED, NOT RESOLVED — the size figures in **WHAT EXISTS NOW** above
+(appraisal 157/800, bundle 165/800, assets 95/800, reach 105/800) are the
+PRE-REPAIR / pre-correction reading. [[wr10-sovereignty-market-state]] records the
+`18f0ced4` chair erratum: true at HEAD appraisal **160**, bundle **164**, with the
+off-by-one pair corrected to assets **94** / reach **104**. Both readings left
+standing; the state file is the later measurement.

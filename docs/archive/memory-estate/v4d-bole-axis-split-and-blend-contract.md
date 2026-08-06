@@ -14,7 +14,7 @@ metadata:
     - pins
     - hazard
   originSessionId: 1c189f3d-9fc3-4fc9-9cb7-b767525d28d5
-  modified: 2026-08-04T13:22:53.982Z
+  modified: 2026-08-06T10:26:59.221Z
 ---
 
 # Lane V4D — three repairs, four commits @ a2dbdd36 · 358a8956 · 273ffbba · 98edbc9f
@@ -163,3 +163,22 @@ thread's rendered read (assertion true, framing the retired idea) — chip spawn
 the header's outerHTML sha256 and its PNG sha256 are identical across two independent
 loads at both breakpoints. Size headroom against the 600-effective-line components
 ceiling: GildedWordmark 154, ShaftWrap 97, theme.js 248, Lockup 38 — none baselined.
+
+## V4 IS CLOSED — SUPERSEDED BY V5 (migrated from the memory index, 2026-08-06)
+
+One fact the memory index carried about this lane and this file did not: **V4 is
+CLOSED and V4D is SUPERSEDED by RIBBON V5** (owner direction, 2026-08-04 —
+organic asymmetric vanes, cartographer cartouche with the seal in the O, the
+half-arrow depth law, burned reference tabs; see [[ribbon-v5-direction]]).
+
+What that does and does not retire:
+
+- **The BLEND CONTRACT survives into V5** — the LAYERS table projecting both
+  `background-image` and `background-blend-mode`, the list-parity arm, and the
+  `@supports not` fallback are named in V5's "what survives" set alongside the
+  breakpoint law, the texture budget, composited-AA and the focus law.
+- **R-1's axis split is a repair of a retired composition** — the bole bed and
+  the cartouche are different objects; V5 explicitly notes the tension that V4D
+  made the bole BLEED OFF the bar while the cartouche re-introduces a CONTAINED
+  badge. Read R-1 for its LAW (a geometry measured on one breakpoint is a claim
+  about one breakpoint), not as live geometry.

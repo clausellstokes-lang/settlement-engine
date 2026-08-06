@@ -5,7 +5,7 @@ metadata:
   type: project
   created: 2026-08-04
   originSessionId: c44e5d99-2ba5-49d5-a554-40b68534c8eb
-  modified: 2026-08-05T04:00:03.860Z
+  modified: 2026-08-06T10:27:41.597Z
 ---
 
 # The espionage layer — owner directive, 2026-08-04 (post-WR close)
@@ -203,4 +203,19 @@ with the belief-legs wave so it discharges WR-10's §9 lighting precondition
 (spies are the SOURCE of tier/route/trajectory legs about non-neighbors).
 Substrate to verify at fold-in: criminal power/activity + internal security
 reads; law/chaos derivability. Related: [[wr10-sovereignty-market-state]],
+[[fable-build-era-takeover]].
+
+## Migrated from the memory index (2026-08-06)
+
+The five §7 rulings, in the order the ✅ block above lists them: **CR-ES-1** Roads
+law-5 graded council-weight discount SIGNED (flag-gated, dark byte-identical) ·
+**CR-ES-2** the anonymity amendment · **CR-ES-3** seat vocab unified on CONSUMER
+(lawless/merciful/holding), war chair countersigned · **CR-ES-4**
+spy-before-decision wires the sovereignty buyer + GR-2 answers + its own cadence,
+WAR CHOOSER deferred to owner · **CR-ES-5** alliance topology PARKED (new-key
+ACQUIRE = an owner question).
+
+⚠ **CR-ES-2 amends the 2026-07-19 owner-ruling header** — amended IN PLACE in BOTH
+homes, preserving that ruling's no-fates core; the **BY-THE-ENGINE** qualifier is
+LOAD-BEARING; a one-clause veto restores the original wording. Full text in
 [[fable-build-era-takeover]].

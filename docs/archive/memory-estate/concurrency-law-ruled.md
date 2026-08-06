@@ -5,6 +5,7 @@ metadata:
   type: project
   created: 2026-08-06
   originSessionId: c44e5d99-2ba5-49d5-a554-40b68534c8eb
+  modified: 2026-08-06T10:29:33.801Z
 ---
 
 # The concurrency law
@@ -65,8 +66,24 @@ registry, and the ratchet baselines.
 **⛔ EP CAN NEVER SHARE A CYCLE** — it is the only program that edits
 pulseKernel.js (banked at 1580), whose PRNG call order IS the stream identity.
 
-**MEASURED CORRECTIONS to earlier counts (2026-08-06):** remaining total is
-**94 waves**, composed FP core 61 (8 landed) · WC 17 · WY 12 · ES 7 · EP **6**
+⚠️⚠️ **THE "94 WAVES REMAIN" FIGURE IS UNVERIFIED — DO NOT CITE IT AS MEASURED
+(chair correction, 2026-08-06).** It is an unmeasured number nested inside another
+unmeasured number, and a census lane has been dispatched to settle it. Two reasons
+it cannot stand as measured: (1) post-fold the declared total would be **108
+waves** (75 in the parent volume + 33 pending), implying 14 landed —
+arithmetically possible, but nobody has counted it; (2) the parent volume's own
+headline **"75 waves / 66 seams" is labelled PLAUSIBLE, not measured** in the fold
+package's anomaly A6, and EP's charter makes the re-count BINDING: if a post-fold
+re-count disagrees with 75/66, **the tree wins and the disagreement is a
+STOP-and-report**. Until the census returns, any statement of a remaining-wave
+count must carry the word UNVERIFIED. The per-volume figures below DID reproduce
+against the volumes themselves (WC 17, HB 10, EP 6) and the three pending volumes
+total **33 waves / 11 flags** — it is the AGGREGATE remaining-work claim that is
+unsourced, not the parts.
+
+**PARTLY-MEASURED counts (2026-08-06):** remaining total was stated as
+**94 waves — ⚠ UNVERIFIED, see above**, composed FP core 61 (8 landed) · WC 17 ·
+WY 12 · ES 7 · EP **6**
 (NOT 16 — the 16 counted EP-N tokens including judgment ids) · HB 10 (in the
 volume, not the tree). 49 carry a flag; 45 do not. ⚠ **ES-1..ES-6 are NO-FLAG**
 — espionageEnabled landed at ES-0 (55674790); the volume text saying it lands

@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: e522b974-c196-4ff7-bdac-3da965f9223d
-  modified: 2026-07-26T19:32:25.959Z
+  modified: 2026-08-06T10:27:51.774Z
 ---
 
 **Built 2026-07-26** in worktree `minifold` (branch `claude/composite-r4`, base `59f76448`),
@@ -94,3 +94,36 @@ without committing work that is not mine — including 2 pre-existing `npm run t
 errors in `refreshRelationshipProjections`, code ABSENT at HEAD and therefore attributable
 to the uncommitted NPC-preservation work, not to this change. See
 [[minifold-tree-is-live]].
+
+## ✅ COMMITTED @ `a88be4f1` — the UNCOMMITTED notes above are STALE
+
+**Migrated from the memory index 2026-08-06; the commit state was measured 2026-08-05
+and RE-CONFIRMED by executed `git` on 2026-08-06.** Both "LEFT UNCOMMITTED,
+deliberately" passages above — and the frontmatter description's "UNCOMMITTED (mixed
+files)" — describe the tree only as it stood on 2026-07-26. They are SUPERSEDED. Do
+not re-derive a landing plan from them, and do not treat this lane as owed work.
+
+Measured (2026-08-06, `git show`/`git cat-file` at the main tree):
+- `a88be4f1` = `a88be4f1134ff0f4a7afa650eb14ff7894b8fb9b`, *"Composite integration:
+  the cross-lane surface -- components, store, domain, edge, and their tests"*,
+  **Sun Jul 26 16:25:29 2026 -0400**, on `claude/composite-r4`.
+- `src/domain/historyPreservation.js` is ADDED by that commit (**+205 lines**);
+  `src/store/settlementSlice.js` (434 changed) and `scripts/.size-baseline.json`
+  (12 changed) ride the same commit.
+- `src/generators/narrative/historyCoherence.js`,
+  `tests/generators/regenHistoryEnrichment.test.js`,
+  `src/generators/narrativeGenerator.js` and `src/generators/historyGenerator.js`
+  are all PRESENT in the tree at `a88be4f1` — the whole lane is in, not just the
+  new domain leaf.
+
+⚠️ **Why the stale note survived so long, and the navigation hazard it leaves.**
+`a88be4f1` sits on `claude/composite-r4`, NOT on the ledger branch
+`review-fixes-2026-07-08`. Run from a ledger-branch HEAD,
+`git log -- src/domain/historyPreservation.js` returns **NOTHING and exits 0**, which
+reads exactly like "never committed" (executed 2026-08-06). Always name the build
+branch — `git log claude/composite-r4 -- <path>` — or ask `git branch -a --contains
+<sha>`, before concluding a build-era lane is unlanded.
+
+Still open regardless of the commit state: the owner question at item 4a (identity
+for authored entries inside `historicalEvents[]` / `currentTensions[]`), the
+`_userEdits.originalValue` deferral, and `[generators-pipeline-5]`.

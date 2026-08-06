@@ -5,6 +5,7 @@ metadata:
   type: feedback
   created: 2026-08-06
   originSessionId: c44e5d99-2ba5-49d5-a554-40b68534c8eb
+  modified: 2026-08-06T10:30:26.076Z
 ---
 
 # Derive, do not restate — and a mutant must prove it changed the file
@@ -40,6 +41,39 @@ restatement is not documentation; it is a load-bearing expectation.
 **Applied beyond the volume the same day:** docs/START_HERE.md carried FOUR
 disagreeing spellings of the endgame tail; cure = ONE spelling at §3h,
 pointers elsewhere ([[endgame-tail-order-ruled]]).
+
+## ⭐⭐ THE LAW BIT IN FOUR HOMES AT ONCE (2026-08-06, the memory-estate pass)
+
+The sharpest single demonstration of Law 1, worth carrying as the canonical
+example: during one memory-index consolidation, hand-maintained counts were found
+drifted from their sources in **FOUR different kinds of home simultaneously**, each
+independently, none detected by the others:
+
+1. **A memory index line** — "NOT YET ARCHITECTED" for a directive that had been
+   architected whole as a 6,492-line volume ([[war-auxiliary-contribution-directive]]).
+2. **A YAML `description:` frontmatter** — carrying the same refuted claim, which
+   is what the index line was mirroring. ⚠ Fixing the index alone would have let
+   the frontmatter re-seed it.
+3. **A repo README** (`docs/architected-volumes-pending-fold/README.md`) — stale on
+   every wave count it indexed (EP "16" vs a declared 6; WC "~12 est." vs a declared
+   17), with an aggregate "~38 build waves" that was internally consistent with its
+   own two wrong figures — the tell that a total derived from restatements
+   validates nothing.
+4. **A volume's own header** — the habit volume's header said "POLISH ROUND
+   (round 2)" while its body carried round-four material throughout
+   ([[habit-conditioning-directive]]).
+
+**The compounding failure mode this exposed:** an unmeasured number nested inside
+another unmeasured number. The "94 waves remain" figure rested on a parent
+volume's "75 waves / 66 seams" headline that is itself labelled PLAUSIBLE, not
+measured ([[concurrency-law-ruled]]). A restatement of a restatement reads as
+doubly authoritative and is doubly unfounded.
+
+**How to apply:** when correcting a stale derived fact, fix EVERY home in the same
+turn — index line, frontmatter description, README, and any header — because they
+re-seed each other. Prefer a POINTER to the source over a restatement at every
+home you can. And label any count you did not personally measure **UNVERIFIED**
+rather than passing it on bare; a number's provenance is part of the number.
 
 ## LAW 2 — A MUTANT THAT PLANTS NOTHING GREENS
 

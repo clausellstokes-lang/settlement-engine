@@ -1,11 +1,11 @@
 ---
 name: habit-conditioning-directive
-description: "OWNER DESIGN INTENT (2026-08-05): actors LEARN — outcome-conditioned habit weights per actor/circumstance/action, and learned predictability becomes an espionage counterforce. ⭐⭐ SEALED-WITH-LIMITATIONS 2026-08-06 after FOUR review rounds: 4,426-line volume + a 1,220-line COUNT LEDGER instrument (52 quantities, 131 prose homes, 42 struck-premise signature phrases, 15/15 mutants). 10 waves HB-0..HB-9, 6 joined sites of 14, a 43-row deferral book. Archived in git at docs/architected-volumes-pending-fold/."
+description: "OWNER DESIGN INTENT (2026-08-05): actors LEARN — outcome-conditioned habit weights per actor/circumstance/action, and learned predictability becomes an espionage counterforce. ⭐⭐ ARCHITECTED THROUGH ROUND 4 WITH INSTRUMENTS GREEN, but the cap round has NO RECORDED CLOSE — no seal, no attestation verdict (corrected 2026-08-06; do not upgrade to sealed). 4,426-line volume, 10 waves HB-0..HB-9, 4 flags, 43-row deferral book. Archived in git at docs/architected-volumes-pending-fold/."
 metadata:
   type: project
   created: 2026-08-05
   originSessionId: c44e5d99-2ba5-49d5-a554-40b68534c8eb
-  modified: 2026-08-06T06:19:30.037Z
+  modified: 2026-08-06T10:29:47.451Z
 ---
 
 # The habit-conditioning directive (owner, 2026-08-05, in-chat)
@@ -140,10 +140,57 @@ law + a coverage walker so no future fork escapes.
 standoffs, spies' own choices); natural JOINT landing with the
 already-signed war-chooser spy-wiring wave (both retrofit the same
 chooser surfaces); believed-doctrine joins SP's axis family; ES gains
-the doctrine-sheet tap product + doctrine plants. Architecture pass =
-the established pattern (censuses → architect → adversarial cohesion),
-read-only, at the owner's word; queue position per the chair at the
-next integration point after it goes COHESIVE.
+the doctrine-sheet tap product + doctrine plants.
+
+⭐⭐ **THE ARCHITECTURE PASS IS DONE — corrected 2026-08-06, MEASURED not
+remembered.** The paragraph that stood here said the architecture pass awaited
+"the owner's word", and the memory-index hook said "NOT YET ARCHITECTED — awaits
+the architect-it word". Both were STALE; this file's own frontmatter description
+(SEALED-WITH-LIMITATIONS after four review rounds) was already correct and wins.
+Measured on disk 2026-08-06, read-only:
+`docs/architected-volumes-pending-fold/HABIT_conditioning_round4-snapshot.md`
+= **4,426 lines / 363,030 bytes**, declaring **TEN waves HB-0..HB-9, all dark**,
+**FOUR flags in one strict ladder** (`habitConditioningEnabled` at HB-2,
+`believedDoctrineEnabled` at HB-6, `habitAnticipationEnabled` at HB-7,
+`doctrineTapEnabled` at HB-8), TWELVE circumstance classes, THIRTEEN seams pinned
+both sides, SIX joined chooser sites of fourteen listed, EIGHT closes, a
+**43-row deferral book** (30 + 3 + 10), TWENTY-EIGHT judgment blocks J-HB-1..28,
+FIVE chair questions, EIGHTEEN premises refuted. All five core mechanisms are
+architected in the volume: habitStrength as persisted STATE (re-deriving it by
+scanning `pulseHistory` is forbidden in writing), the frozen owner-signed curve
+(§3b), believed-doctrine as a fourth SP-B subject family `doctrineBands`, the
+stealable/plantable doctrine sheet (§3e), and the level-one anticipation bound
+(§3d).
+
+⚠ TWO caveats measured at the same time. (1) The archived file is a SNAPSHOT: the
+directory README rows it as **"MID-ROUND-4"** (the cap round) and warns that if
+the round-4 lane closed after the snapshot, its sealed output supersedes the file
+— check the session journal before trusting the archived copy. Nothing in the
+snapshot declares a seal or a "complete". (2) The volume's own header line 3 still
+says "POLISH ROUND (round 2)" while the body carries round-four material
+throughout — the header is stale relative to its own body; the corrected round
+ladder is stated at line 2123: compile → amendment → polish → attestation →
+round three → round four.
+
+⚠ Also measured: all curve constants in the volume are **raw-authored proposals —
+NONE ratified, NONE in `proposedSoakBands.js`** (volume line 1489). Tuning stays
+owner-signed at soak.
+
+⛔ **THE PRECISE STATUS, and the distinction is LOAD-BEARING (chair, 2026-08-06):
+"architected through round 4 with instruments green; the cap round has NO RECORDED
+CLOSE."** Do NOT upgrade this to SEALED or ATTESTED — an earlier spelling of this
+file's own description said "SEALED-WITH-LIMITATIONS" and that was an over-claim.
+There is no seal statement and no attestation verdict; the volume simply ends on a
+lesson paragraph. Round 4 IS the SIXTH pass — the volume's corrected chronology is
+COMPILE → AMENDMENT → POLISH → ATTESTATION → ROUND THREE → round four, so the
+attestation it did pass happened at pass four and was itself superseded by two
+later rounds.
+
+**§9 is MACHINE-EXECUTED census output, not prose** — which is why the figures can
+be trusted where the header could not: `HABIT_countsweep.py`, **exit code 0, 52
+quantities swept, 0 FAIL / 52 PASS, 131 prose homes diffed, 42 struck-premise
+signature phrases scanned, ZERO diffs**. Structure: **10 waves HB-0..HB-9, of which
+4 are flag-bearing; 4 flags; 5 open chair questions; a 43-row deferral book.**
 
 **Risks recorded:** variance collapse (countered by 2 + 6); tuning
 surface growth (one global curve + small per-domain multipliers,

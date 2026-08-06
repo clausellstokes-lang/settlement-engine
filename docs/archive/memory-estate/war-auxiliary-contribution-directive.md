@@ -1,11 +1,11 @@
 ---
 name: war-auxiliary-contribution-directive
-description: "OWNER DIRECTIVE (2026-08-06): allied/vassal/occupied settlements may send reinforcements + supplies to OTHER parties' armies (occupied = near-always coerced) at the cost of their own capability — creating contribution credit (the favor/debt ledger), a war-stance ladder (materiel/auxiliary = joined-but-minimal, scaled consequences both ways), lawful-scaling relay networks through the nearest ally, all entering strategy. Chair refinements 1-9 accepted in-chat. NOT YET ARCHITECTED."
+description: "OWNER DIRECTIVE (2026-08-06): allied/vassal/occupied settlements may send reinforcements + supplies to OTHER parties' armies (occupied = near-always coerced) at the cost of their own capability — creating contribution credit (the favor/debt ledger), a war-stance ladder (materiel/auxiliary = joined-but-minimal, scaled consequences both ways), lawful-scaling relay networks through the nearest ally, all entering strategy. Sections (a)-(p) + chair refinements K1-K8. ARCHITECTED WHOLE as the WC war-circulation volume (corrected 2026-08-06, measured) — but NOT STARTED, no wave has landed."
 metadata:
   type: project
   created: 2026-08-06
   originSessionId: c44e5d99-2ba5-49d5-a554-40b68534c8eb
-  modified: 2026-08-06T05:02:17.735Z
+  modified: 2026-08-06T10:27:00.648Z
 ---
 
 # The auxiliary-contribution directive (owner, 2026-08-06, in-chat)
@@ -321,9 +321,33 @@ people, WELCOMED, are the walls' strength and the streets' peace;
 TURNED AWAY, the siege outside and the rot within — one population, two
 receptions, opposite worlds.
 
-**Status:** banked; NOT YET ARCHITECTED — the full pass (censuses →
-architect → adversarial cohesion) on the owner's word or at the chair's
-next integration window; folds as ONE WAR/WY amendment volume WITH the composite-armies extension (auxiliary contribution and composite armies are one system wearing two descriptions) + the HB-1 vocabulary coordination note above. ⚠ LARGEST census of the directive family: war records, WY projections/supply, belief, habit, occupation, demographics, traditions, INT institutions.
+**Status:** ⭐⭐ **ARCHITECTED — corrected 2026-08-06, MEASURED not remembered.**
+This file previously read "banked; NOT YET ARCHITECTED", and both that line and the
+memory-index hook were STALE. The directive HAS been architected whole, as
+**the WC war-circulation volume** — see [[wc-war-circulation-volume-attested]] and
+`docs/architected-volumes-pending-fold/WC_war-circulation_in-progress-snapshot.md`
+on the ledger branch, whose own line 5 says so explicitly: "This volume architects
+the owner directive of 2026-08-06 (memory: war-auxiliary-contribution-directive.md,
+331 lines, sections (a)-(p) plus chair refinements K1-K8 and the numbered
+refinements R1-R9)". "War circulation" is the volume's name for the program;
+"war auxiliary-contribution" is the directive's name — one system, two names, as
+the volume's line 3 states: "Auxiliary contribution, composite armies, the people
+ledger, and the domestic dividend: one system wearing four descriptions."
+
+Evidence of the measurement (2026-08-06, read-only): all eleven directive elements
+are architected as named sections — §1.1 the arrival-credit ledger, §1.2 the
+war-stance ladder, §1.3 the lawful relay / chaotic skim, §1.4 composite armies as
+the block roster, §1.9 the call-in errand, §1.11 the doctrine reliability page,
+§1.12.5 the mercenary/adventurer pulse, plus the people-ledger conservation
+constitution and origin-tagging throughout. The volume folds it as ONE WAR/WY
+amendment volume with the composite-armies extension, exactly as this directive's
+own fold instruction required, and carries the HB-1 vocabulary coordination note.
+
+⚠ It is ARCHITECTED but **NOT STARTED** — the volume's own PROGRESS line reads
+"ARCHITECTED, NOT STARTED. No wave has landed." Do not read "architected" as
+"built". ⚠ LARGEST census of the directive family: war records, WY
+projections/supply, belief, habit, occupation, demographics, traditions, INT
+institutions.
 
 Related: [[habit-conditioning-directive]] (refinements 16-17 this
 composes with) · [[wr10-sovereignty-market-state]] ·

@@ -6,7 +6,7 @@ metadata:
   topic: WR-7b size-ratchet decomposition program + two ratchets broken at HEAD
   status: "in-flight (3 of 6 blocker files cleared, uncommitted)"
   originSessionId: 1c189f3d-9fc3-4fc9-9cb7-b767525d28d5
-  modified: 2026-08-03T11:23:45.933Z
+  modified: 2026-08-06T10:27:10.918Z
 ---
 
 # WR-7b: the size-ratchet decomposition, and two ratchets already broken at HEAD
@@ -102,3 +102,20 @@ not for 800 without splitting `applyWorldPulseOutcomes` itself.
 
 Never commit a partial: the tree is written by 3+ concurrent sessions and a half-landed
 decomposition of the sole envoy/treaty writers is worse than an uncommitted tree.
+
+## ⚠️⚠️ THE TYPE SURFACE IS PART OF THE PUBLIC SURFACE (migrated from the memory index, 2026-08-06)
+
+The memory index files this recipe under exactly this law, and the law was never written
+here. Measured when `peaceTerms` was finally split **@ `bb44fccc`** (cycle 10, verified
+AST-canonical; the war tranche's file 2 of 4):
+
+**Moved typedefs broke `import('...').Type` consumers OUTSIDE the family**, and nothing in
+the split's own gate saw it — it was caught ONLY by the repaired domain-strict ratchet.
+
+**How to apply:** a decomposition's blast radius is not its import graph. Check the
+WHOLE-DOMAIN strict delta on every split, not just the files you moved and their importers
+— a typedef relocated out of a module is a public-API break to every `import('<module>').<Type>`
+site in the estate. Same-cycle receipts on the same class: R-BLD-9 executed + pinned
+(strict 1329/75 banked, any 2287/159), and `npm run build` went HARD RED on that tranche
+because a rename missed a call site in `envoyInterceptionStage` (chair-fixed @ `fdfbb6c0`).
+Fuller record: [[fable-build-era-takeover]] (cycle 10).

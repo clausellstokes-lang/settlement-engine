@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: c44e5d99-2ba5-49d5-a554-40b68534c8eb
-  modified: 2026-08-05T03:33:40.243Z
+  modified: 2026-08-06T10:24:56.179Z
 ---
 
 # FP CYCLE 1 IS LANDED, AND THE CQ5 DEADLOCK HAS A RECIPE
@@ -146,3 +146,16 @@ so its licensing join is unexercised. ⚠ perl \Q...\n...\E anchors bit
 AGAIN (matched nothing, exit 0) — caught by empty-diff-vs-backup; ⚠
 commits used --no-verify (lint-staged stash hazard), compensated with
 explicit eslint per commit, exit 0 each.
+
+## THE CYCLE'S FULL SPAN (migrated from the memory index, 2026-08-06)
+
+Cycle 1's commit span is **`59df13a9..32cc17f7`** — SP-A ("the shared shapes are
+minted, and one ladder turned out to have nine copies", 2026-08-04) OPENS it; the
+89-line close ledger row shuts it. The four close commits recorded above
+(1137f935 + f786df89 + 79bceff5 + 88150241) sit inside that span, not at its head.
+Re-derived from `git log` on 2026-08-06: THIRTEEN commits inclusive — 59df13a9 ·
+e30770bd · c7933e84 · d7ea69a4 · 93c118b6 · caab995a · b441bca5 · d1cfdb67 ·
+1137f935 · f786df89 · 79bceff5 · 88150241 · 32cc17f7 — which is the twelve the
+ledger row's own subject line claims, PLUS the row itself. The earlier sections of
+this file name only the tail (d7ea69a4 onward), so the span head was recoverable
+from the index alone; it is written down here now.
