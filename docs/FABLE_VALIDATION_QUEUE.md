@@ -3260,3 +3260,323 @@ set precedent for how overstatements and census moves get repaired. J-GR2R-5 and
 cheap to veto either way. The verifier's own NOT-VERIFIED items stand where it left them:
 the lit transport differential still has no independent drive, and `PROPOSE_PACT` is still
 absent by J-GR-2-6 rather than half-wired.
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · IN-0a REPAIR (the verifier's REJECT, answered)
+## (Opus 5 repair implementer under the 2026-08-06 succession directive; every J-* below
+## is a chair-grade judgment made without a Fable chair and is VETOABLE. This row does not
+## replace the IN-0a row above it — that row stands as built, and this one records what an
+## adversarial verifier found in it and what was done about each finding.)
+
+**Why this row exists.** IN-0a's adversarial verifier returned **REJECT** on seven findings
+(two BLOCKING) while confirming six other claims as good. This era has ZERO reverts and
+keeps that record, so every repair here is an ADDITIVE commit on top of `729112df`. Each
+finding was REPRODUCED BY EXECUTION before it was touched — a verifier's stated cause has
+been refuted by measurement in this program before — and each repair is proven by a MUTANT
+that is asserted to have CHANGED the file before its gate is read.
+
+**Disposition.** All seven verifier findings CONFIRMED; NONE refuted. Two were found to be
+WORSE than reported and both corrections are recorded below rather than quietly folded into
+the fix. An EIGHTH defect (F8) was found by this repair's own mutants, and one of the repairs
+was itself caught under-pinned by its mutant before it could land — the brief's warning that
+a trusted remedy can be planted while the battery stays green, realised twice in one session.
+
+- **F1 — the landed red (BLOCKING). CONFIRMED-AND-REPAIRED.** `tests/domain/couplingRegistry.test.js`
+  ran `Tests 12 passed (12)` exit 0 at `a18fdcfa` and `Tests 3 failed | 9 passed (12)` exit 1
+  at `729112df`, both executed in isolated `git archive` trees. IN-0a added a registry row
+  and did not amend the three totality pins that enumerate the registry. Repaired at the
+  pins, never at the row: `COUPLING_REGISTRY` gains `...IN_INFORMATION_COUPLINGS`, the
+  `owningVolume` set admits `'INFORMATION'` as the fourth volume the docstring always said
+  a new volume must amend it to be, and `couplingRowsFor('CPL-19','INFO→GRAMMAR')` carries
+  the fourth row with the legacy first-row tiebreak re-asserted beside it. **A SECOND DEFECT
+  FOUND WHILE REPAIRING:** `couplingRegistry.js` imported the INFO leaf for composition but
+  never re-exported its constants, so IN-0a's row was the only row in the estate that
+  existed in the registry and could not be named through it — the file's own docstring calls
+  the enumerated re-export list "the registry's public surface". The re-export block is
+  added, matching TRADE's and GRAMMAR's. MUTANT: emptying `IN_INFORMATION_COUPLINGS` reds 2
+  of 12; restore cmp-IDENTICAL.
+- **F2 — red-ratchet inventory growth (BLOCKING). CONFIRMED-AND-REPAIRED, AND THE FINDING
+  UNDERSTATED IT.** Executed content diff of the two full walker logs: `expected [ …(75) ]`
+  at base becomes `expected [ …(76) ]` at the wave, one added entry,
+  `brokeragePlantHandoffPins.test.js: 1 un-anchored negative assertion(s) at line(s) 574`.
+  The verifier proposed the `anchoredNegatives` helper or a declared `// anchored:` reason.
+  **BOTH WOULD HAVE BEEN WRONG**, and this is the correction: line 574 was
+  `expect(whatPhrase(PLANT_TOOK_KIND))` excluding an underscore, and that assertion is
+  **UNFALSIFIABLE**, not merely un-anchored. `whatPhrase`'s fallback arm does
+  `key.replace(/_/g, ' ')`, so it returns an underscore-free string for EVERY input,
+  registered or not (executed: `whatPhrase('a_kind_nobody_registered')` === `'a kind nobody
+  registered'`), and zero of the WHAT_PHRASES values carry one. An `// anchored:` comment
+  would have declared a reason that is untrue and silenced the walker over a permanently-true
+  assertion. Repaired by replacing it with what a missing registration ACTUALLY produces —
+  the fallback — plus a live control proving the fallback arm still emits exactly the shape
+  being refused. **A THIRD THING FOUND WHILE REPAIRING:** the walker scans COMMENT text, so
+  the first draft of the explanatory comment re-registered the violation by quoting the
+  matcher; the comment now spells it in prose and says why. Inventory measured back at
+  **75** with the base-vs-repaired content diff **EMPTY**, run in an isolated archive so the
+  concurrent lane's WIP could not contaminate the attribution.
+- **F3 — pin vacuity on the wave's central claim. CONFIRMED-AND-REPAIRED.** Reproduced: the
+  mutant `rows[rows.length - 1]` → `rows[0]` in `appliedPlantEnvelopesAt`, cmp-proven to
+  have changed the file, left `Tests 17 passed (17)` exit 0. Every fixture built
+  `pulseHistory: [record]`, a one-element array, on which newest-last and oldest-first are
+  the same object — so the file was blind to the entire mechanism it exists to pin. New pin
+  12 builds a FOUR-row history of four ticks and asserts both directions: ascending order
+  carries one envelope, the same four rows reversed carry none, and `appendPulseHistory` is
+  called to prove the ascending shape is the world's own rather than the test's invention.
+  MUTANT: `rows[0]` now reds exactly that pin; restore cmp-IDENTICAL.
+- **F4 — the regen pin was a tautology. CONFIRMED-AND-REPAIRED.** The pin asserted
+  `JSON.parse(JSON.stringify(ledger))` equals `ledger` and called it "the same
+  serialize/restore path a regen uses". It booted no restore code and could not fail for any
+  JSON-safe object. Repaired by booting the REAL path: `ensureWorldState`, which every load
+  of a persisted world goes through, and which strips every `CONDITIONAL_LEDGER_KEYS` entry
+  from its shallow spread and re-materializes it through `deepCloneConditionalLedger`. The
+  pin now asserts the plant, its belief override, and the pulse record in flight all survive
+  a serialize/restore round trip. **THE FIRST VERSION OF THIS REPAIR WAS ITSELF UNDER-PINNED
+  AND THE MUTANT CAUGHT IT** — exactly the hazard the brief names. Dropping `'spatialLedgers'`
+  from `CONDITIONAL_LEDGER_KEYS` left all 20 pins GREEN, because `ensureWorldState` has TWO
+  paths that carry the namespace and mask each other: the conditional deep re-materialization
+  and the plain `...cloneObject(raw)` spread, which is SHALLOW (`worldState.js:94`). The data
+  survives either way; what differs is aliasing. The pin now compares against the RAW INPUT
+  rather than the folded ledger, which is the object the two paths actually disagree about.
+  THREE independent mutants now red it: the key dropped from `CONDITIONAL_LEDGER_KEYS`, the
+  materialization guard refusing object ledgers, and `pulseHistory` not restored. All three
+  restores cmp-IDENTICAL.
+- **F5 — the coupling row advertised an unwritable receipt. CONFIRMED-AND-REPAIRED.**
+  Executed: the kernel never threads `envoys.commissionedPlants` anywhere (no reader
+  exists), so the statecraft head always calls `appliedPlantEnvelopesAt` fresh and receives
+  `{key, record, override, receipt}` with no target; `commissionedPlantAt`'s
+  `...(exactTarget ? { target } : {})` arm therefore cannot fire in production and
+  `commission.target` is never persisted. `receiptField` is amended to the reachable half
+  and the unreachable half is written into the row's docstring as a DECLARED RESIDUAL of the
+  ruled road (curing it needs a kernel thread or the pendingPlants deposit — IN-1's
+  business), not left as a bug to re-find. New pin 14 SAMPLES the row's own address against
+  a real folded ledger through `tests/helpers/couplingReceiptSample.js` and asserts
+  `absentFields` is empty; the guard-the-guard runs the same sampler over the same ledger on
+  the address as it SHIPPED and asserts it reports `['target']`. MUTANT: restoring the
+  shipped address reds the pin; restore cmp-IDENTICAL.
+- **F6 — undeclared audit-receipt shift. CONFIRMED-AND-DECLARED.** Independently reproduced
+  base-vs-wave: `moverFamilyOf({candidateType:'brokerage_plant'})` and `{kind:'brokerage_plant'}`
+  return `null` at `a18fdcfa` and `'knowledge'` at `729112df`, caused by adding the token
+  `plant` to `FAMILY_TOKENS.knowledge`. **DECLARED HERE AS A ONE-TIME BEHAVIOUR SHIFT** under
+  the honesty law: any soak or behavioural receipt histogram that classified
+  `brokerage_plant` / `plant_took` as unfamilied will classify them `knowledge` from
+  `729112df` forward. This is the intended semantics (a planted story is an act of the
+  knowledge lane) and it was already pinned; what was missing was the declaration, which is
+  now made rather than left to ride. No over-capture: `implant`, `plantation` and
+  `transplant` all still return `null` (executed) — `containsToken` is token-boundary correct.
+- **F7 — undeclared truncation limit on the transport. CONFIRMED-AND-DECLARED-AND-PINNED,
+  WITH THE LIVE RISK MEASURED.** `pulseKernel` writes
+  `selectedOutcomes: publicSelectedOutcomes.slice(0, 24)`, and the handoff reads only that
+  array, so a `brokerage_plant` outside the window is silently dropped — commission charged,
+  act narrated, nothing planted. **MEASURED rather than asserted:** the kernel's own write
+  was instrumented in a disposable archive and the whole property suite driven through it —
+  3,716 real `simulateCampaignWorldPulse` pulses — and `publicSelectedOutcomes.length` runs
+  0..18 with a maximum of 18 and ZERO pulses over the window. So the defect is REAL and
+  STRUCTURAL but UNOBSERVED in the estate's corpus, with six outcomes of headroom. It is
+  reachable rather than impossible: `rollCandidates`' budget is
+  `maxAuto = 7 + floor(√(max(0, N − 24)))` in realm size N, so ~313 settlements puts the auto
+  budget alone at the window before guaranteed admissions ride on top. The window is now
+  DECLARED on the leaf as `PULSE_RECORD_OUTCOME_WINDOW`, and new pin 13 EXTRACTS the kernel's
+  own literal from source and asserts it equals that constant, so the restatement cannot go
+  stale. MUTANT: moving the kernel literal to 25 reds the pin; restore cmp-IDENTICAL.
+
+**F8 — AN EIGHTH DEFECT, FOUND BY THIS REPAIR'S OWN MUTANTS AND NOT BY THE VERIFIER.
+CONFIRMED-AND-REPAIRED.** The estate's defence-in-depth corollary says every guard door must
+be pinned INDIVIDUALLY, because a double-guarded conjunction has already survived an entire
+fence set in this program. `appliedPlantEnvelopesAt` has TWO age checks — the RECORD door
+(`record.tick === now - LAG`: which pulse this row came from) and the ENVELOPE door
+(`now - receipt.commissionedAtTick === LAG`: whether the commission inside it was bought on
+that pulse) — and IN-0a's pins moved BOTH at once in every fixture, so neither was pinned on
+its own. MEASURED: loosening the RECORD door from an exact age to a lower bound left all
+twenty pins GREEN. New pin 15 builds fixtures that DISAGREE WITH THEMSELVES — one door's
+condition satisfied and the other's not — so exactly one door can be doing the refusing, and
+it carries a positive control so the two refusals cannot both be "this fixture never carries".
+The door-by-door mutants are reported in the gate evidence below. NOTE that the wave's OTHER
+double guard (the two VALIDATOR doors, `commissionedPlantAt` and `attachEnvoyPictureTarget`)
+WAS already pinned individually and the verifier confirmed it in both directions — this is a
+different pair, inside the transport, that the wave's own J-IN0A-2 reasoning did not reach.
+
+**The six CONFIRMED-GOOD findings are left exactly as the verifier found them** and nothing
+in this repair touches them: the banked pulse mouths and `tests/fixtures/` still show an
+EMPTY numstat, the three-stage road is still real rather than a mirrored fixture, the
+one-week retention is re-measured and holds, both validator doors are still pinned
+individually in both directions, the player veil still fails closed structurally, and
+dormancy still holds at both granularities. Two corrections the verifier reported against
+the build report are carried forward UNRE-EXECUTED and are therefore the verifier's
+evidence rather than this repair's — door ONE reds 8 pins and not the 1 the build report
+claimed, and `ONE_REGEN_SPREAD` is a hand copy of `simulationRules.js`'s `ONE_REGEN` that
+is accurate today and will drift. Neither is repaired here: the first is a wrong number in
+a prose report and not in the estate, and the second is a live-code-outranks-the-table
+improvement that belongs to whoever next touches that fixture.
+
+**Judgments made in this repair (all VETOABLE).**
+
+- **J-IN0A-R1 — the three totality pins are AMENDED, never derived.** The `owningVolume`
+  set stays a hand-written literal admitting `'INFORMATION'` rather than becoming
+  `new Set(COUPLING_REGISTRY.map(...))`. WHY: deriving it would make the pin self-referential
+  (list equals list) and it would then be green for a fifth volume arriving silently, which
+  is the exact thing its own docstring says it exists to red on. VETO makes it derived.
+- **J-IN0A-R2 — the unfalsifiable negative is REPLACED, not annotated.** WHY: the walker
+  accepts a `// anchored:` reason, and writing one here would have recorded a false reason
+  for an assertion that can never fail. The load-bearing claim is that a townsperson does not
+  hear the raw slug, and what a missing registration actually produces is the underscore-
+  stripped fallback, so that is what the repaired assertion refuses. VETO restores the
+  original line plus an annotation and accepts a permanently-true pin.
+- **J-IN0A-R3 — F5 is repaired by amending the ROW, not by threading the target.** WHY:
+  threading it is a kernel edit and both mouths are banked; the row must describe the shipped
+  road, and LIVE CODE OUTRANKS EVERY TABLE. The unreachable half is recorded as a declared
+  residual for IN-1 rather than deleted silently. VETO takes the kernel thread instead.
+- **J-IN0A-R4 — the receipt sampler is USED, not extended.** The shared helper cannot walk a
+  keyed-object ledger: `[plant:*]` is a shape hint rather than a predicate and its resolver
+  only expands real arrays, so it reports `status:'missing'` for this row's address either
+  way (executed both ways). Rather than fork or widen CW-0w's helper from an INFO repair, the
+  pin feeds it the plant-keyed RECORDS, which is what that address segment denotes. WHY: an
+  IN repair should not widen another volume's shared grammar. **RESIDUAL RECORDED FOR IN's
+  CONVERGENCE WAVE (SC-9):** `sampleCouplingRow` will report `missing` for EVERY keyed-object
+  ledger, so a convergence lane must fix the helper rather than "repair" a correct row into
+  agreement with a blind sampler. VETO widens the helper now.
+- **J-IN0A-R5 — F7 is DECLARED and PINNED, not widened.** WHY: widening the transport is a
+  kernel edit against a banked mouth, and the measurement says the ceiling has never been
+  reached in the corpus. Declaring it, deriving it from the kernel's own literal, and handing
+  the widening to IN-1 with the pendingPlants deposit is the proportionate act. VETO opens
+  the kernel edit.
+- **J-IN0A-R6 — F6 is answered with a DECLARATION and no code change.** WHY: the semantics
+  are right and were already pinned; only the honesty obligation was unmet, and the cure for
+  an undeclared shift is a declaration. VETO reverts the `plant` token and takes the
+  `news`-token contamination path instead.
+
+**Concurrency note, recorded because it BOUNDS THE EVIDENCE and should shape the next
+dispatch.** The tree was CLEAN at entry and went heavily concurrent mid-repair. By the end,
+TWO other repair lanes (GR-2 and SP-D, identified by their own archive paths
+`/private/tmp/gr2base` and `scratchpad/spdrepair/base`) were running full vitest batteries
+on this machine, and the live tree carried nineteen modified files plus an untracked
+`tests/domain/pactKernelMount.test.js` — including `scripts/mutation-coverage-manifest.json`
+and `tests/lint/sovereigntyLightingContract.walker.test.js`, both declared SHARED files.
+NOTHING outside this repair's own five files was touched, staged, or reverted, and the
+commit names its paths explicitly.
+
+Two consequences are measured and reported rather than absorbed:
+
+1. The negative-assertion walker read in the LIVE tree shows `pactTriggers.test.js` moving
+   2 → 1. That is the pact lane's SHRINK, not this repair's. F2's parity proof was therefore
+   re-run in an isolated `git archive` holding `729112df` plus this repair's five files and
+   nothing else, where the base-vs-repaired inventory diff is EMPTY.
+2. THE GATE MUTEX IS NOW THE BINDING CONSTRAINT ON REPAIR THROUGHPUT. Three lanes serialize
+   onto one vitest slot; a single `tests/lint` pass took ~15 minutes of wall clock and the
+   full four-directory battery could not finish inside the harness's 10-minute command cap
+   even backgrounded. **A CHAIR SHOULD NOT DISPATCH THREE CONCURRENT REPAIR LANES AGAINST
+   ONE GATE SLOT AGAIN** — the concurrency law already rules TWO build lanes / ONE gate slot,
+   and three verification-heavy repair lanes violate its spirit while technically obeying its
+   letter (they are repairs, not builds).
+
+**Gate scope, declared as a judgment rather than left implicit (J-IN0A-R7).** Under that
+contention the attribution was SCOPED rather than run over the whole suite, and the scoping
+rests on a measured claim: this repair changes NO production logic. Its source edits are one
+string literal (`receiptField`), one added exported constant, one re-export block, and
+docstrings — nothing reachable by a kernel path. The attribution therefore covers every test
+that imports the three touched modules (enumerated by grep, seven files), the WHOLE
+`tests/lint` tree because walkers scan every test file and a test-content edit can move a
+census, and `tests/property` because the dormancy goldens are the estate's behaviour oracle.
+VETO widens it to the full suite. The full-suite figures in the IN-0a row above still stand
+for everything this repair does not touch.
+
+**Gate evidence (executed; every read through `gate-tail.sh`, never a bare pipe; every
+vitest run gated on `scripts/gate-mutex.sh --wait`).** Attribution measured BOTH WAYS
+between isolated `git archive` trees — `a18fdcfa` (base) and `729112df` + this repair — so
+the three concurrent lanes' WIP cannot contaminate a single figure.
+
+- CONSUMER SET (the seven test files importing the three touched modules, enumerated by
+  grep): base `Test Files 6 passed (6) / Tests 76 passed (76)` exit 0; repaired
+  `Test Files 7 passed (7) / Tests 97 passed (97)` exit 0. The file count differs because
+  the pins file does not exist at base. NO new failure.
+- `tests/property` (74 files): base `Tests 2 failed | 462 passed (464)`, repaired
+  `Tests 2 failed | 462 passed (464)`, and the failing ROW SET diffs EMPTY both ways (the
+  two pre-existing `mechanismLitCoverage` ratchet rows). NO behavioural movement.
+- `tests/lint` (1,038 tests): base `Tests 15 failed | 1023 passed`, repaired
+  `Tests 16 failed | 1022 passed`. The failure-row diff is EXACTLY ONE row, and it is
+  MINE — see the census escalation below. Every other lint row is identical.
+- THE RED-RATCHET CONTENTS, not just its row: the negative-assertion walker's inventory
+  diffed line-by-line base vs repaired — 75 vs 75, diff EMPTY.
+- MUTANTS, eleven, every one asserted to have CHANGED its file before its gate was read and
+  every restore proven cmp-IDENTICAL: the IN row emptied (reds 2 of 12 coupling tests);
+  `WHAT_PHRASES.plant_took` deleted (reds the registration pin); the history read inverted
+  to `rows[0]` (reds the newest-last pin); `'spatialLedgers'` dropped from
+  `CONDITIONAL_LEDGER_KEYS`, the materialization guard refusing object ledgers, and
+  `pulseHistory` not restored (each reds the lifecycle pin); the receiptField re-advertising
+  `.target` (reds the sampler pin); the kernel window moved 24 → 25 (reds the window pin);
+  and the record door loosened, the record door deleted, and the envelope door loosened
+  (each reds the door pin ALONE, which is the individual-door proof).
+- Per-file `npx eslint` over all six authored files: exit 0 on each. `python3` byte scan:
+  ZERO NUL bytes in all six. Largest authored file 884 lines, clear of the 1313 ceiling.
+- STRUCTURAL PREVENTION: sweep areas 73 and 74 added to `scripts/mutation-sweep.sh` so the
+  inverted history read and the loosened record door are now in the STANDING battery rather
+  than trusted to a reviewer. Both perl anchors are proven LIVE (they are the same
+  substitutions executed as mutants above, each of which changed the file). No manifest
+  entry is owed: the pins file already carries its `kind: mutation` row, and no new test
+  file or walker is added by this repair.
+
+### ⛔ ESCALATION 3 — ONE LANDED RED, MEASURED AND ATTRIBUTED TO THIS REPAIR, THAT THIS
+### LANE MUST NOT BE THE ONE TO CURE (J-IN0A-R8)
+
+`tests/lint/sovereigntyLightingContract.walker.test.js`'s CENSUS asserts an exact whole-tree
+TEST-TITLE count. This repair adds four named pins, so the count moves and the census reds:
+`expected 18644 to be 18641` at the three-pin measurement, and +4 from the four that shipped.
+This is the same class the IN-0a wave itself hit and correctly re-recorded with its cause.
+
+**IT IS NOT CURED HERE, AND THE REASON IS STRUCTURAL RATHER THAN NEGLIGENT — THE FILE WAS
+NEVER FREE.** It was continuously held by one repair lane or another for the whole session,
+and the constant it holds moved twice under measurement:
+
+- While this repair ran, GR-2 held it uncommitted at 2,328/358/1,970/**18,641**/5,324 →
+  2,329/358/1,971/**18,655**/5,329. GR-2 then LANDED (`91075d45`) and the file went clean.
+- Within minutes the SP-D repair lane took it, and it is dirty again NOW at
+  2,329/358/1,971/**18,662**/5,331 — uncommitted.
+
+Staging it at either moment would have staged another lane's hunk with mine, which the
+concurrency law forbids absolutely, and hand-merging another lane's uncommitted work to get
+at one integer risks destroying it. Any number this lane wrote would also have been WRONG the
+moment the other lane landed — the recorded "exact-census files merge green-but-wrong"
+hazard, twice over in one session.
+
+**THE +4 IS CONFIRMED TWICE, INDEPENDENTLY, AGAINST TWO DIFFERENT BASELINES.** Measured
+against IN-0a's own constant: `expected 18645 to be 18641`. Re-measured live against SP-D's
+current uncommitted constant: `expected 18666 to be 18662`. Same delta, different baseline —
+so the figure is a property of this repair and not of whatever else was in the tree.
+
+**THE CURE, precise and executable by whoever lands LAST — every figure below MEASURED, not
+predicted.** This repair's deltas are `files +0, parked +0, credited +0, titles +4,
+suiteTitles +0`.
+
+- `files`, `parked` and `credited` are CONFIRMED UNMOVED by the failing run itself: the
+  census asserts them in that order BEFORE `titles`, and vitest aborts on the first failure,
+  so their passing is executed evidence rather than inference. `parked` holding at 358 is the
+  one worth naming — none of the four new pins generates tests from a loop, which is exactly
+  what parked GR-2's first draft of their mount file, so the pins file stays CREDITED.
+- `titles` measured `expected 18645 to be 18641` at the shipped four pins. The arithmetic
+  reconciles against the diff: five `test(` lines added, one removed (the lifecycle pin was
+  RENAMED, not added — "a folded record JSON-round-trips…" became "a live plant survives the
+  REAL persist/restore path…"), so 5 − 1 = **+4**.
+- `suiteTitles +0` is confirmed from source rather than from the aborted run: the pins file
+  holds seven `describe(` blocks at HEAD and seven after, and the diff adds no `describe(` or
+  `suite(` line at all. All four pins were placed inside EXISTING suites deliberately.
+
+**SO THE ACTION IS OWED BY SP-D'S REPAIR LANE, WHICH HOLDS THE FILE AND IS LANDING LAST.**
+Its uncommitted block already reads 2,329/358/1,971/18,662/5,331. The correct final figure
+with this repair's four pins included is **`titles: 18666`**, EXECUTED and quoted above, with
+the other four constants unchanged at 2,329/358/1,971/5,331. One line, and the cause to state
+is "the IN-0a repair round added four named pins (`94d0c798`)". If SP-D has already landed by
+the time a chair reads this, re-run the walker and add 4 to whatever it reports as expected.
+
+Recorded as a HAZARD for the next dispatch, because it is the second symptom of the same
+root: a whole-tree exact census plus N concurrent lanes is not merely slow, it is
+UNSATISFIABLE for every lane but the last. The census is correct and should not be weakened;
+what must change is the dispatch, which should serialize the lanes that add test titles.
+
+### WHAT FABLE SHOULD RE-EXAMINE (protocol step 2)
+
+J-IN0A-R2 first: it overrides a verifier's explicitly proposed remedy on the grounds that
+the remedy would have written down something untrue, and that is the kind of call a chair
+should confirm. J-IN0A-R4 second — it leaves a shared helper knowingly blind and books the
+fix to another wave, and the residual must not be lost. J-IN0A-R5 and the F7 measurement
+third: a chair may reasonably want the transport widened now rather than at IN-1, and the
+3,716-pulse measurement is the evidence that decides it. J-IN0A-R1, R3 and R6 are
+lower-stakes and mechanical. ESCALATION 1 and ESCALATION 2 from the IN-0a row above are
+UNCHANGED by this repair and still owed a disposition.
