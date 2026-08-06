@@ -42,13 +42,17 @@
  *      `describe`/`suite`) call, and that argument must be a static string. A comment, a
  *      string constant and an `expect(...)` argument are all refused.
  *   2. THE TEST MUST RUN, AND MUST BE STATICALLY REGISTERED — only the closed running TEST
- *      grammar keeps its title, only through a word this file has not seen BOUND, and only
- *      where the call stands as a direct statement of the module body or of a credited
+ *      grammar keeps its title, only through a word this file has not seen BOUND, only with
+ *      a FUNCTION BODY in argument two, only off a table this reader can prove has rows, and
+ *      only where the call stands as a direct statement of the module body or of a credited
  *      suite's block. A test in a helper, a loop, a conditional or a callback registers
  *      nothing that a syntax tree can prove, so it keeps nothing.
  *   3. THE SUITE MUST RUN — a file is refused WHOLE unless every suite it opens is one
- *      this walker can PROVE runs, through a word it has not seen bound, at a position it
- *      can prove is reached.
+ *      this walker can PROVE runs: through a word it has not seen bound, in the closed
+ *      grammar, with a function body, off a proven table, at a position it can prove is
+ *      reached. RUN-CONTROL HAS THREE STATICALLY VISIBLE HOMES — the callee chain, the
+ *      second argument, the table's cardinality — and door 3 reads all three (§ seventh
+ *      statement, which is where the sixth cut's two falsifications live).
  *   4. SELF-EXCLUSION — this walker never vouches for itself (it names every marker by
  *      import).
  *
@@ -123,12 +127,40 @@
  *     reformat to `it.each`, which IS in the running grammar, and the cost of crediting is
  *     a lie. Cost: 121 estate files, ENUMERATED in the landing commit as reformat debt.
  *
- * WHAT WOULD FALSIFY THIS, stated as narrowly as it has been executed: a suite or test this
- * walker CREDITS that vitest does not RUN. Inventing a spelling cannot do it, because a
- * spelling is not a thing the parser sees. Inventing a binding cannot do it, because both
- * opener families now shadow and shadowing never deletes a park. Inventing a registration
- * site cannot do it, because credit is granted only at statement positions the parser can
- * reach from the module body.
+ * ── DOOR 3, SEVENTH STATEMENT: RUN-CONTROL HAS THREE STATICALLY VISIBLE HOMES ──
+ * THE SIXTH CUT'S STATED FALSIFIER WAS MET, TWICE, BY THE ADVERSARIAL ENDGAME — and both
+ * times through a channel the header did not know it was ignoring. Neither was a spelling and
+ * neither was a binding: the walker read the CALLEE CHAIN and nothing else, while vitest 4
+ * takes run-control from two other places, and both sit squarely inside "statically-proven
+ * registration under an unbound running grammar". That is why the sixth cut's sentence
+ * DESCRIBED its mechanism correctly and still did not close the door.
+ *
+ *   L1 — THE OPTIONS ARGUMENT. `{ skip | only | todo | fails | concurrent }` in position two
+ *     is `.skip`/`.only`/`.todo`/`.fails`/`.concurrent` expressed as DATA, which no chain
+ *     reader can see. Executed under 4.1.8: `it(n, { skip: true }, fn)` → `↓ skipped`;
+ *     `{ todo: true }` → `□ todo`; a bagged `describe` skipped its whole block; `{ only: true }`
+ *     left its SAME-FILE SIBLING `↓ skipped` while this walker credited the sibling's title.
+ *     THE SAME PREDICATE CLOSES THE ABSENT BODY — `it('x')` is a todo and `describe('x')`
+ *     registers nothing, both executed, both credited before. CREDIT NOW REQUIRES ARGUMENT
+ *     TWO TO BE A FUNCTION EXPRESSION. Estate cost, measured over all 2,314 files: ZERO.
+ *   L2 — THE TABLE'S CARDINALITY. `each`/`for` are in both running grammars and the grammar
+ *     asks only that the returned function be CALLED, never that the table have rows.
+ *     Executed: `describe.each([])(…)` and `it.each([])(…)` registered ZERO tests beside a
+ *     passing anchor, silently, exit 0. A TABLE IS CREDITED ONLY AS A NON-EMPTY ARRAY LITERAL
+ *     WITH STATICALLY PRESENT ELEMENTS. Estate cost, measured: 61 credited files park.
+ *
+ * WHAT WOULD FALSIFY THIS, stated as narrowly as it has been executed and UNCHANGED because
+ * it is the right sentence: a suite or test this walker CREDITS that vitest does not RUN.
+ * THE THREE STATICALLY VISIBLE HOMES OF RUN-CONTROL ARE NOW ENUMERATED, AND ALL THREE ARE
+ * CLOSED — the CALLEE CHAIN by a closed grammar, the SECOND ARGUMENT by requiring a function,
+ * the TABLE'S CARDINALITY by requiring a non-empty literal. Inventing a spelling cannot
+ * falsify it, because a spelling is not a thing the parser sees. Inventing a binding cannot,
+ * because both opener families shadow and shadowing never deletes a park. Inventing a
+ * registration site cannot, because credit is granted only at statement positions reachable
+ * from the module body. THE ENUMERATION IS THE CLAIM: three cuts in a row were falsified by a
+ * channel nobody had listed, so a FOURTH channel — anything vitest reads to decide whether a
+ * call runs, that is neither chain nor argument two nor table length — is what a falsifier
+ * should look for, and finding one is a defect in this list before it is a defect in a rule.
  *
  * THE RESIDUALS, NAMED AND NOT CLAIMED AWAY.
  * (a) `test.extend({})` — vitest's first-class fixture API, EXECUTED under 4.1.8 and it
@@ -137,6 +169,17 @@
  *     is named here rather than left to be discovered by the first fixture-using suite to
  *     lose its titles. Zero estate instances today, measured. `describe.skipIf(false)` and
  *     `it.runIf(true)` are the same shape and the same deliberate refusal.
+ * (a2) THE RUN-TIME-EMPTY TABLE, the residual L2 leaves and does not claim away. A NON-LITERAL
+ *     table that evaluates empty at run time (`it.each(rows)` where `rows` is `[]`) registers
+ *     nothing, exactly as `[]` does, and no static reader can tell. L2 refuses the whole
+ *     non-literal class rather than pretending to measure it, so this residual costs titles
+ *     rather than buying credit — but it is the J-ES-4-F family by another route, and it is
+ *     listed HERE rather than counted as closed. Its price is 61 estate files of reformat
+ *     debt, enumerated in the landing commit; the reformat is an inline literal table.
+ * (a3) THE THIRD-POSITIONAL BAG IS NOT A RESIDUAL AND IS RECORDED SO NOBODY RE-OPENS IT:
+ *     `it(n, fn, { skip: true })` THROWS under 4.1.8 (`Signature "test(name, fn, { ... })"
+ *     was deprecated in Vitest 3 and removed in Vitest 4`, executed), so it cannot forge —
+ *     a source that cannot run at all cannot lie about running. It is credited, correctly.
  * (b) THE FACTORY ROUTE (J-ES-4-F, unchanged). A suite word that reaches its call site
  *     through a value this file cannot follow — a helper module's export, an object
  *     property, a function return — is invisible to a reader that does not EXECUTE the
@@ -152,6 +195,23 @@
  *     spell `RuleTester.itOnly = it.only`, which is that shape at TEST level; it is inert
  *     here because no estate RuleTester case sets `only: true` (measured, zero
  *     occurrences), and it is recorded rather than smoothed.
+ *
+ * ── THE DOC CLAUSE ES-4 IS OWED, ADDRESSED BY SENTENCE AND NOT BY LINE ──────────
+ * Two documents tell the ES-4 builder to keep the marker stable and to "put it in the test
+ * NAME rather than a comment": docs/DESIGN_FP_ARCH_ES.md, in the paragraph whose VERIFY-AT-
+ * BUILD step resolves to this walker, and docs/DESIGN_FP_ARCH_SP.md, in the paragraph that
+ * mints `SOVEREIGNTY_LIGHTING_EVIDENCE`. Both are addressed by their SENTENCE here rather
+ * than by a line number, because hand-keyed line addresses rot — the sixth cut's landing
+ * commit recorded one of them ~256 lines from where it actually sits, and the endgame caught
+ * it. THAT SENTENCE IS NO LONGER SUFFICIENT AND NEEDS FOUR CLAUSES, one per closed hole: the
+ * ES-4 pin must sit in a title opened through an UNBOUND `it`/`test` word (B2), at a
+ * STATICALLY REGISTERED position — a direct statement of the module body or of a credited
+ * suite's block (B3), with a FUNCTION BODY in argument two and NO options bag (L1), and if it
+ * is table-driven the table must be a NON-EMPTY ARRAY LITERAL (L2). A pin that misses any of
+ * the four carries the token, does not run, and does not light the wave. The doc edit is out
+ * of this commit's pathspec by the chair's ONE-COMMIT scope and both files are read by three
+ * other walkers, so it is recorded here — where the ES-4 builder is already reading — rather
+ * than left to be discovered.
  *
  * ── WHAT THIS FILE DELIBERATELY IS NOT ──────────────────────────────────────────
  * It is not a second gate scanner. `ENGINE_GATED_VIRTUAL_RULE_KEYS` is the estate's own
@@ -267,9 +327,17 @@ const RUNNING_TEST_MODIFIERS = Object.freeze(['concurrent', 'sequential', 'each'
  * kept here as defence in depth against a jest-compat shim, and the file it appears in
  * would die loudly rather than forge anything.
  *
- * THIS LIST IS AN ENUMERATION AND IT IS ON THE SAFE SIDE OF THE POLARITY. Anything rooted
- * in a test word and outside BOTH grammars parks the file whole, so a modifier nobody has
- * thought of costs a file its titles rather than buying one credit.
+ * THIS LIST IS AN ENUMERATION AND IT IS ON THE SAFE SIDE OF THE POLARITY — WITHIN ITS OWN
+ * CHANNEL, WHICH IS THE CLAUSE THE SIXTH CUT DID NOT WRITE AND WAS FALSIFIED FOR. Anything
+ * rooted in a test word whose CALLEE CHAIN is outside both grammars parks the file whole, so
+ * a chained modifier nobody has thought of costs a file its titles rather than buying one
+ * credit. That sentence was stated WITHOUT the chain qualifier and was FALSE as stated: a
+ * modifier expressed in the second-positional OPTIONS OBJECT is not in the chain at all, so
+ * it bought a credit rather than costing one — `it(n, { skip: true }, fn)` was credited while
+ * vitest reported `↓ skipped` (executed). The options argument is now its own refusal
+ * (`argFormAccepts`, L1) and the table's cardinality is a third (`tableProven`, L2). THE
+ * SAFE-SIDE CLAIM NOW HOLDS ONCE PER CHANNEL, AND THE CHANNELS ARE ENUMERATED IN THE
+ * SEVENTH STATEMENT rather than left as a thing this docblock quietly assumed.
  */
 const NON_FOCUSING_TEST_MODIFIERS = Object.freeze(['skip', 'todo', 'failing', 'fails', 'skipIf', 'runIf']);
 
@@ -290,6 +358,12 @@ const KNOWN_TEST_SET = new Set([...RUNNING_TEST_MODIFIERS, ...NON_FOCUSING_TEST_
  * `computed` WITHOUT reading what is inside it: `describe['sk' + 'ip']` and
  * `describe[someVariable]` are the same shape to this walker, which is the point — the
  * grammar cannot express a computed member at all, so both park.
+ *
+ * A `call` link CARRIES ITS ARGUMENT LIST, which the sixth cut did not record and the
+ * seventh needs: `each`/`for` take run-control from the CARDINALITY of the table they are
+ * called with, and a chain that discards its arguments cannot see a zero-row one. A tagged
+ * template carries `args: null` — there is no argument list to read, so no table it opens
+ * can ever be proven non-empty.
  * @param {any} node @returns {{root: string|null, rootNode: any, steps: Array<any>}}
  */
 function chainOf(node) {
@@ -299,8 +373,8 @@ function chainOf(node) {
     if (cur.type === 'MemberExpression') {
       steps.unshift(cur.computed ? { kind: 'computed' } : { kind: 'dot', name: cur.property.name });
       cur = cur.object;
-    } else if (cur.type === 'CallExpression') { steps.unshift({ kind: 'call' }); cur = cur.callee; }
-    else if (cur.type === 'TaggedTemplateExpression') { steps.unshift({ kind: 'call' }); cur = cur.tag; }
+    } else if (cur.type === 'CallExpression') { steps.unshift({ kind: 'call', args: cur.arguments }); cur = cur.callee; }
+    else if (cur.type === 'TaggedTemplateExpression') { steps.unshift({ kind: 'call', args: null }); cur = cur.tag; }
     else if (cur.type === 'Identifier') return { root: cur.name, rootNode: cur, steps };
     else return { root: null, rootNode: null, steps };
   }
@@ -324,6 +398,86 @@ function grammarAccepts(steps, allowed) {
     if (step.kind !== 'call') return false;
     const prev = steps[i - 1];
     if (!prev || prev.kind !== 'dot' || !TABLE_MODIFIERS.has(prev.name)) return false;
+  }
+  return true;
+}
+
+/**
+ * ── THE SECOND HOME OF RUN-CONTROL: THE OPTIONS ARGUMENT (L1) ──────────────────
+ * vitest 4 takes `skip` / `only` / `todo` / `fails` / `concurrent` from a SECOND-POSITIONAL
+ * OBJECT as readily as from the callee chain — the same modifiers, expressed as DATA, which
+ * `chainOf` and `grammarAccepts` never look at because neither reads an argument. EXECUTED
+ * under 4.1.8, each beside a green anchor in a real .test.js: `it(n, { skip: true }, fn)`
+ * reported `↓ skipped`; `{ todo: true }` reported `□ todo`; `describe(n, { skip: true }, fn)`
+ * skipped its whole block; `{ fails: true }` reported `1 expected fail`; `{ only: true }` RAN
+ * the marker and left its SAME-FILE SIBLING `↓ skipped` — which is the very argument door 2
+ * gives for keeping a closed test grammar, defeated through a route the grammar cannot see.
+ *
+ * THE SAME PREDICATE CLOSES THE ABSENT BODY, which no cut before this one named: `it('x')`
+ * with NO second argument is a TODO under 4.1.8 (executed: `□ todo`), and `describe('x')`
+ * with no callback registers nothing at all (executed: no row, file green). Both were
+ * CREDITED by the sixth cut — bare word, running grammar, statically registered, static
+ * title — and both are forgeries of exactly the shape this instrument exists to refuse.
+ *
+ * SO CREDIT REQUIRES A BODY THE PARSER CAN SEE: argument two must EXIST and must be a
+ * function expression. Anything else — an object, an identifier, a call, a member read, or
+ * nothing at all — is run-control this reader cannot classify, and it parks.
+ * ESTATE COST, MEASURED over all 2,314 test files: ZERO. One file holds a non-function
+ * second argument (tests/edgeFunctions/contracts.test.js's `suite.replace(…)`, the known B1
+ * string-loop stray) and it is already parked as `SUITE_NOT_RUNNING`, so this rule takes no
+ * file's titles today. It is a LATENT closure, and it is stated as one.
+ *
+ * `it(n, fn, { skip: true })` — THIRD-positional — IS NOT A ROUTE. Executed: vitest 4 throws
+ * `Signature "test(name, fn, { ... })" was deprecated in Vitest 3 and removed in Vitest 4`,
+ * so the file dies loudly rather than forging anything. It is named, not guarded.
+ * @param {any} node @returns {boolean}
+ */
+const BODY_ARG_TYPES = new Set(['FunctionExpression', 'ArrowFunctionExpression']);
+function argFormAccepts(node) {
+  if (node.type !== 'CallExpression') return false;
+  const second = node.arguments[1];
+  return !!second && BODY_ARG_TYPES.has(second.type);
+}
+
+/**
+ * ── THE THIRD HOME OF RUN-CONTROL: THE TABLE'S CARDINALITY (L2) ────────────────
+ * `each` and `for` sit in BOTH running grammars, and `TABLE_MODIFIERS` demands only that the
+ * returned function BE CALLED — never that the table have rows. So cardinality is invisible
+ * to a grammar that reads only the chain, and a ZERO-ROW table registers NOTHING while the
+ * file stays green. EXECUTED under 4.1.8: `describe.each([])('MARKER — %s', …)` and
+ * `it.each([])('MARKER — %s', fn)`, each beside a real anchor test, both ran the anchor and
+ * registered no marker at all — no row, no skip, no todo, exit 0. Alone in a file they red
+ * loudly (`No test suite found in file`); beside any anchor the absence is SILENT.
+ *
+ * A TABLE IS CREDITED ONLY WHERE IT IS A NON-EMPTY ARRAY LITERAL WITH STATICALLY PRESENT
+ * ELEMENTS. An empty literal registers nothing; a spread, an identifier, a call or any other
+ * expression has a length this reader cannot compute, and "probably non-empty" is precisely
+ * the kind of credit four cuts of this door were falsified for. Run-time emptiness of a
+ * non-literal table is UNDECIDABLE here, which is why the rule refuses the whole class
+ * rather than pretending to measure it.
+ *
+ * ESTATE COST, MEASURED BY THIS LANE'S OWN CENSUS: 61 currently-credited files park
+ * (64 files call `each`/`for` on a non-literal table; three were already parked). They are
+ * ENUMERATED in the landing commit as reformat debt, and the reformat is an inline literal
+ * table. ZERO estate files use an empty literal or a tagged-template table.
+ * @param {any} arg @returns {boolean}
+ */
+const CREDITED_TABLE_MODIFIERS = new Set(['each', 'for']);
+const staticTableRows = (arg) => !!arg && arg.type === 'ArrayExpression' && arg.elements.length > 0
+  && arg.elements.every((el) => !!el && el.type !== 'SpreadElement');
+
+/**
+ * Every `each`/`for` link in a chain must be called with a table this reader can prove has
+ * rows. A chain with no table modifier is vacuously proven — this predicate never widens
+ * credit, it only ever removes it.
+ * @param {Array<any>} steps @returns {boolean}
+ */
+function tableProven(steps) {
+  for (let i = 0; i < steps.length; i += 1) {
+    const step = steps[i];
+    if (step.kind !== 'dot' || !CREDITED_TABLE_MODIFIERS.has(step.name)) continue;
+    const call = steps[i + 1];
+    if (!call || call.kind !== 'call' || !call.args || !staticTableRows(call.args[0])) return false;
   }
   return true;
 }
@@ -419,6 +573,14 @@ const isBareSuiteValueOnMemberTarget = (ref) => {
  *     two-entry credit-back list parks the file;
  *   • every test-rooted call outside BOTH test grammars parks the file, because an
  *     unrecognised test modifier may be `only` and `only` silences its siblings;
+ *   • every suite- or test-rooted call whose SECOND ARGUMENT is not a function expression
+ *     parks the file (L1) — run-control expressed as DATA is unclassifiable-as-running, and
+ *     an options bag can spell `only` exactly as the chain can. Checked on the TEST side
+ *     BEFORE the chain, because the file-scope consequence does not depend on which modifier
+ *     the data names;
+ *   • every `each`/`for` link whose table is not a non-empty array literal with statically
+ *     present elements parks the file (L2) — a table this reader cannot count may be empty,
+ *     and an empty table registers nothing while the file stays green;
  *   • every suite- or test-rooted call that is not STATICALLY REGISTERED parks the file —
  *     one that stands anywhere but as a direct statement of the module body or of a
  *     credited suite's block, because a call in a helper, a loop, a conditional or a
@@ -457,13 +619,27 @@ function classifySource(src) {
     if ((node.type === 'CallExpression' || node.type === 'TaggedTemplateExpression') && !isChainLink(parent, key)) {
       const head = node.type === 'CallExpression' ? node.callee : node.tag;
       const { root, rootNode, steps } = chainOf(head);
+      // THE THREE HOMES OF RUN-CONTROL, READ SEPARATELY SO EACH CAN NAME ITS OWN REFUSAL.
+      // The chain is `grammarOk`, the table's cardinality is `tableOk`, the second argument's
+      // form is `argOk`; a call RUNS only when all three hold. Three cuts in a row were
+      // falsified by a channel the header did not know it was ignoring, so the channels are
+      // enumerated here rather than folded into one predicate.
       if (root && SUITE_ROOTS.has(root)) {
-        const running = node.type === 'CallExpression' && SUITE_WORDS.includes(root)
+        const grammarOk = node.type === 'CallExpression' && SUITE_WORDS.includes(root)
           && grammarAccepts(steps, RUNNING_SUITE_SET);
-        suiteCalls.push({ word: root, running, rootNode, node, shape: `${root}${steps.map(stepText).join('')}` });
+        const tableOk = tableProven(steps);
+        const argOk = argFormAccepts(node);
+        const running = grammarOk && tableOk && argOk;
+        suiteCalls.push({
+          word: root, running, grammarOk, tableOk, argOk, rootNode, node,
+          shape: `${root}${steps.map(stepText).join('')}`,
+        });
       } else if (root && TEST_ROOTS.has(root)) {
-        const running = node.type === 'CallExpression' && TEST_WORDS.includes(root)
+        const grammarOk = node.type === 'CallExpression' && TEST_WORDS.includes(root)
           && grammarAccepts(steps, RUNNING_TEST_SET);
+        const tableOk = tableProven(steps);
+        const argOk = argFormAccepts(node);
+        const running = grammarOk && tableOk && argOk;
         const known = TEST_WORDS.includes(root) && grammarAccepts(steps, KNOWN_TEST_SET);
         // THE TEST-SIDE VERDICT IS DEFERRED, exactly as the suite side already deferred it,
         // and that deferral is the whole reason doors 2 and 3 can now be shadow-aware. The
@@ -471,7 +647,10 @@ function classifySource(src) {
         // patch that consulted `shadowed` at this point was decided by DFS ORDER — measured
         // failing to close the forgery it was written for. Nothing is credited or refused
         // until the tree has been walked whole.
-        testCalls.push({ word: root, running, known, node, shape: `${root}${steps.map(stepText).join('')}` });
+        testCalls.push({
+          word: root, running, grammarOk, tableOk, argOk, known, node,
+          shape: `${root}${steps.map(stepText).join('')}`,
+        });
       }
     }
 
@@ -510,19 +689,31 @@ function classifySource(src) {
     creditedRoots.add(call.rootNode);
     if (call.running && shadowed.has(call.word)) continue;
     if (call.running && registered.has(call.node)) { titleArgs(call.node, titles); continue; }
-    reasons.push(call.running ? `SUITE_UNREGISTERED:${call.shape}` : `SUITE_NOT_RUNNING:${call.shape}`);
+    if (call.running) { reasons.push(`SUITE_UNREGISTERED:${call.shape}`); continue; }
+    // THE CHANNEL THAT REFUSED IT IS THE REASON IT CARRIES. The chain speaks first, so the
+    // sixth cut's reason strings are unchanged for every source it already refused; the two
+    // new channels speak only where the chain had nothing to say.
+    if (!call.grammarOk) { reasons.push(`SUITE_NOT_RUNNING:${call.shape}`); continue; }
+    if (!call.tableOk) { reasons.push(`SUITE_TABLE_UNPROVEN:${call.shape}`); continue; }
+    reasons.push(`SUITE_ARG_FORM:${call.shape}`);
   }
   // DOOR 2, THE SAME THREE LAWS ONE LEVEL IN: a test opened through a BOUND word parks (the
   // word is not vitest's), a test that is not STATICALLY REGISTERED parks (it may never be
   // invoked at all), and a test outside both grammars parks (it may be `only`). Only a
   // running, unbound, registered call keeps its title.
   for (const call of testCalls) {
+    // THE OPTIONS BAG PARKS THE FILE, AND IT PARKS BEFORE THE CHAIN IS CONSULTED — because
+    // the bag can spell `only`, and `only` silences its siblings exactly as a chained
+    // `.only` does. It is checked ahead of `known` for the same reason `it.invented` is
+    // refused: the file-scope consequence does not depend on which modifier the data names.
+    if (!call.argOk) { reasons.push(`TEST_ARG_FORM:${call.shape}`); continue; }
     if (call.running && !shadowed.has(call.word) && registered.has(call.node)) {
       titleArgs(call.node, titles);
       continue;
     }
     if (call.running && shadowed.has(call.word)) continue;
     if (call.running) { reasons.push(`TEST_UNREGISTERED:${call.shape}`); continue; }
+    if (call.grammarOk && !call.tableOk) { reasons.push(`TEST_TABLE_UNPROVEN:${call.shape}`); continue; }
     if (!call.known) reasons.push(`TEST_UNCLASSIFIED:${call.shape}`);
   }
   for (const ref of suiteRefs) {
@@ -544,7 +735,13 @@ function markShadowed(pattern, shadowed) {
 /**
  * DOOR 2's REGISTRATION RULE — the callback body of a suite that is CREDITED. Returns the
  * statement list a credited suite opens, or null for anything else: a non-suite call, a
- * shadowed word, a chain outside the running grammar, or a callback with no block body.
+ * shadowed word, a chain outside the running grammar, a table this reader cannot prove has
+ * rows, a second argument that is not a function, or a callback with no block body.
+ *
+ * ALL THREE CHANNELS ARE CONSULTED HERE TOO, and that is deliberate defence in depth rather
+ * than duplication: this predicate decides which blocks OPEN a registered scope, so a suite
+ * refused above but credited here would hand registration to every test underneath it. The
+ * three refusals are spelled in the same order and from the same predicates.
  * @param {any} node @param {Set<string>} shadowed @returns {Array<any>|null}
  */
 function creditedSuiteBody(node, shadowed) {
@@ -552,6 +749,7 @@ function creditedSuiteBody(node, shadowed) {
   const { root, steps } = chainOf(node.callee);
   if (!root || !SUITE_WORDS.includes(root) || shadowed.has(root)) return null;
   if (!grammarAccepts(steps, RUNNING_SUITE_SET)) return null;
+  if (!tableProven(steps) || !argFormAccepts(node)) return null;
   for (let i = node.arguments.length - 1; i >= 0; i -= 1) {
     const arg = node.arguments[i];
     if ((arg.type === 'FunctionExpression' || arg.type === 'ArrowFunctionExpression')
@@ -722,7 +920,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
    * total. A battery that can quietly shrink is a battery that can quietly reopen, and four
    * cuts of this door were falsified by a spelling somebody had already thought of.
    */
-  const BATTERY = Object.freeze({ escapes: 28, provingLane: 11, invented: 18, parserDoor: 2 });
+  const BATTERY = Object.freeze({ escapes: 28, provingLane: 11, invented: 18, parserDoor: 2, dataForm: 22 });
   const carries = (src) => titledIn(src, PROBE);
   /** A source is only a forgery if it is a source at all — every refusal below is asserted
    *  to PARSE, so the parser door can never be the thing doing the work by accident. */
@@ -1120,10 +1318,16 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     }
     // THE REFORMAT THIS RULE COSTS, AND THE ONE IT ACCEPTS, side by side — the loop form
     // parks and its `it.each` rewrite does not, which is the whole remedy for the 121
-    // estate files enumerated in the landing commit.
+    // estate files enumerated in the sixth cut's landing commit.
+    //
+    // THE REMEDY IS NARROWED BY L2 AND THE NARROWING IS STATED HERE, where whoever pays the
+    // reformat debt will read it: `it.each(cases)` on a NON-LITERAL table no longer buys a
+    // file back, because a table whose length this reader cannot compute may be empty and an
+    // empty table registers nothing. The reformat that works is an INLINE LITERAL table.
     expect(carries(`describe('outer', () => {\n  for (const c of cases) {\n`
       + `    it(\`${PROBE} \${c}\`, () => {});\n  }\n});\n`)).toBe(false);
-    expect(carries(`describe('outer', () => {\n  it.each(cases)(\`${PROBE} %s\`, () => {});\n});\n`)).toBe(true);
+    expect(carries(`describe('outer', () => {\n  it.each(cases)(\`${PROBE} %s\`, () => {});\n});\n`)).toBe(false);
+    expect(carries(`describe('outer', () => {\n  it.each(['a', 'b'])(\`${PROBE} %s\`, () => {});\n});\n`)).toBe(true);
   });
 
   test('DOOR 3 REFUSES TWENTY INVENTED SPELLINGS — the lexical layer, independently probed', () => {
@@ -1174,11 +1378,138 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       expect(carries(src), `${spelling} was credited`).toBe(false);
       expect(parses(src), `${spelling} parsed — it belongs in the grammar half of this arm`).toBe(false);
     }
-    // THE WHOLE BATTERY IS 59 ENTRIES — 28 escapes + 11 proving-lane forgeries + 18 newly
-    // invented spellings + 2 that die at the parser door — and the total is asserted here
-    // so that dropping a group reds even if its own arm is deleted with it.
+    // THE WHOLE BATTERY IS 81 ENTRIES — 28 escapes + 11 proving-lane forgeries + 18 newly
+    // invented spellings + 2 that die at the parser door + 22 data-form forgeries — and the
+    // total is asserted here so that dropping a group reds even if its own arm is deleted
+    // with it.
     expect(Object.values(BATTERY).reduce((a, b) => a + b, 0),
-      'the refusal battery shrank — a closed round has been reopened').toBe(59);
+      'the refusal battery shrank — a closed round has been reopened').toBe(81);
+  });
+
+  test('DOOR 2+3 REFUSE THE TWO DATA-FORM FORGERY FAMILIES — run-control that is not a chain', () => {
+    // THE SEVENTH CUT'S OWN BATTERY, AND THE REASON THIS FILE EXISTS IN ITS CURRENT SHAPE.
+    // The sixth cut's stated falsifier — "a suite or test this walker CREDITS that vitest
+    // does not RUN" — was MET TWICE by the adversarial endgame, in shapes no spelling and no
+    // binding could have produced, because both take run-control from somewhere the callee
+    // chain is not. Every spelling below is the endgame's own, and every behaviour claimed
+    // for it was RE-EXECUTED by this lane under vitest 4.1.8 in a git-archive tree, planted
+    // as real .test.js files beside a green anchor. Each was CREDITED by the sixth cut with
+    // `reasons=[]` and read `SATISFIED / satisfiable true / missing []` off the SHIPPED
+    // evaluator; each parks here.
+    //
+    // FAMILY 1 — THE OPTIONS BAG. vitest 4's second-positional object expresses `.skip`,
+    // `.only`, `.todo`, `.fails` and `.concurrent` as DATA. Executed, each beside a passing
+    // anchor: `{ skip: true }` → `↓ skipped`; `{ todo: true }` → `□ todo`; a bagged
+    // `describe` skipped its whole block while a neighbouring suite ran; `{ fails: true }` →
+    // `1 expected fail`; `{ only: true }` RAN its own marker and left its SAME-FILE SIBLING
+    // `↓ skipped`, which is the exact consequence door 2's closed grammar exists to prevent.
+    //
+    // FAMILY 1b — THE ABSENT BODY, which no cut before this one named and which the same
+    // predicate closes. Executed: `it('x')` with no second argument reported `□ todo` and
+    // never ran; `describe('x')` with no callback registered nothing at all and the file was
+    // green. Both were credited by the sixth cut — bare word, running grammar, statically
+    // registered, static title — so the absent body is a forgery of the same family.
+    //
+    // FAMILY 2 — THE ZERO-ROW AND UNPROVEN TABLE. `each`/`for` sit in both running grammars
+    // and the grammar demands only that the returned function BE CALLED, never that the table
+    // have rows. Executed: `describe.each([])('MARKER — %s', …)` and `it.each([])(…)`, each
+    // beside a real anchor, registered ZERO tests while the file reported the anchor passing
+    // and exited 0. Alone in a file the same source reds loudly; beside an anchor it is
+    // SILENT, which is the property that makes it a forgery rather than a mistake.
+    const anchor = `\n  it('a real anchor that really runs', () => {});\n});\n`;
+    const dataForm = {
+      // FAMILY 1 — the endgame's six, verbatim.
+      'it + { skip: true }': `it('${PROBE} — bagged skip', { skip: true }, () => { throw new Error('THIS RAN'); });\n`,
+      'it + { todo: true }': `it('${PROBE} — bagged todo', { todo: true }, () => {});\n`,
+      'describe + { skip: true }, pin inside': `describe('outer', { skip: true }, () => {${body}`,
+      'it + { only: true }, the pin on its SILENCED sibling':
+        `it('elsewhere', { only: true }, () => {});\nit('${PROBE} — the sibling vitest skips', () => {});\n`,
+      'it + { fails: true }': `it('${PROBE} — bagged fails', { fails: true }, () => { throw new Error('x'); });\n`,
+      'it.each([1]) + { skip: true }': `it.each([1])('${PROBE} — %s', { skip: true }, () => {});\n`,
+      // …and the shapes the RULE closes beside them, each measured under the same rule.
+      'it + { concurrent: true }, WHICH RUNS': `it('${PROBE} — bagged concurrent', { concurrent: true }, () => {});\n`,
+      'it + an EMPTY bag': `it('${PROBE} — empty bag', {}, () => {});\n`,
+      'describe.each([1]) + { skip: true }': `describe.each([1])('outer %s', { skip: true }, () => {${body}`,
+      // FAMILY 1, the non-object halves of "anything but a function".
+      'it + an identifier body': `it('${PROBE} — a named body', sharedBody);\n`,
+      'it + a member-read body': `it('${PROBE} — a borrowed body', bodies.shared);\n`,
+      'it + a call-expression body': `it('${PROBE} — a built body', makeBody());\n`,
+      // FAMILY 1b — the absent body, executed as a todo and as nothing at all.
+      'it with NO second argument': `it('${PROBE} — no body at all');\n`,
+      'describe with NO callback': `describe('${PROBE} — a suite with no body');\n`,
+      // FAMILY 2 — the endgame's two, verbatim, then the rest of the class.
+      'describe.each([]), pin inside': `describe.each([])('outer — %s', () => {${body}`,
+      'it.each([])': `it.each([])('${PROBE} — %s', () => {});\n`,
+      'it.for([])': `it.for([])('${PROBE} — %s', () => {});\n`,
+      'describe.for([]), pin inside': `describe.for([])('outer — %s', () => {${body}`,
+      'it.each(identifier)': `it.each(rows)('${PROBE} — %s', () => {});\n`,
+      'it.each([...spread])': `it.each([...rows])('${PROBE} — %s', () => {});\n`,
+      'it.each(call())': `it.each(rows.filter(Boolean))('${PROBE} — %s', () => {});\n`,
+      'it.each([, 1]) — a table with a HOLE': `it.each([, 1])('${PROBE} — %s', () => {});\n`,
+    };
+    expect(Object.keys(dataForm), 'a data-form forgery was dropped from the arm')
+      .toHaveLength(BATTERY.dataForm);
+    for (const [spelling, src] of Object.entries(dataForm)) {
+      expect(carries(src), `${spelling} was credited — a data channel of run-control leaks`).toBe(false);
+      expect(parses(src), `${spelling} was refused at the PARSER door, not by the rule`).toBe(true);
+      expect(mentionedIn(src, PROBE), `${spelling} never carried the marker at all`).toBe(true);
+    }
+
+    // THE FOUR NEW CLAUSES PINNED INDIVIDUALLY, EACH ON ITS OWN REASON AND EACH IN A SOURCE
+    // NO OTHER CLAUSE TOUCHES. This is the defence-in-depth corollary and it has bitten this
+    // program twice: a `carries` assertion alone would be green while a second guard silently
+    // covered a deleted first, so the discriminator is the REASON STRING.
+    expect(parkReasonsFor(`it('${PROBE} — bagged', { skip: true }, () => {});\n`))
+      .toEqual(['TEST_ARG_FORM:it']);
+    expect(parkReasonsFor(`describe('${PROBE} — bagged', { skip: true }, () => {});\n`))
+      .toEqual(['SUITE_ARG_FORM:describe']);
+    expect(parkReasonsFor(`it.each([])('${PROBE} — %s', () => {});\n`))
+      .toEqual(['TEST_TABLE_UNPROVEN:it.each()']);
+    expect(parkReasonsFor(`describe.each([])('${PROBE} — %s', () => {});\n`))
+      .toEqual(['SUITE_TABLE_UNPROVEN:describe.each()']);
+
+    // …AND `creditedSuiteBody`'s OWN COPY OF BOTH RULES, which the classifier's park SILENTLY
+    // COVERS — measured, not assumed: deleting that clause left all 29 arms green, because a
+    // file whose suite already parked has no titles to lose either way. This program's most
+    // repeated verification failure, reproduced inside the repair for it, for the third time.
+    // The observable difference is the REGISTRATION it hands out: a suite refused by L1 or L2
+    // must open NO registered scope, so the test underneath it is UNREGISTERED too, and the
+    // REASON SET is the only place that shows. Delete the clause and exactly these two reds.
+    expect(parkReasonsFor(`describe('outer', { skip: true }, () => {\n`
+      + `  it('${PROBE} — under a bagged suite', () => {});\n});\n`),
+    'a suite refused by L1 still handed out registration to the tests inside it')
+      .toEqual(['SUITE_ARG_FORM:describe', 'TEST_UNREGISTERED:it']);
+    expect(parkReasonsFor(`describe.each(rows)('outer %s', () => {\n`
+      + `  it('${PROBE} — under an unproven table', () => {});\n});\n`),
+    'a suite refused by L2 still handed out registration to the tests inside it')
+      .toEqual(['SUITE_TABLE_UNPROVEN:describe.each()', 'TEST_UNREGISTERED:it']);
+
+    // …AND THE ACCURACY HALF OF BOTH RULES, without which each would be a way to park the
+    // estate rather than a rule. A function body in position two is credited in every
+    // spelling vitest accepts, and a table with statically present rows still runs.
+    const accurate = {
+      'an arrow body': `it('${PROBE} — real', () => {});\n`,
+      'a function-expression body': `it('${PROBE} — real', function () {});\n`,
+      'an async arrow body': `it('${PROBE} — real', async () => {});\n`,
+      'a generator body': `it('${PROBE} — real', function* () {});\n`,
+      'a body followed by a numeric timeout': `it('${PROBE} — real', () => {}, 5000);\n`,
+      'a one-row literal table': `it.each([1])('${PROBE} — %s', () => {});\n`,
+      'a multi-row literal table': `it.each([[1, 2], [3, 4]])('${PROBE} — %s %s', () => {});\n`,
+      'a literal table of objects': `it.each([{ a: 1 }])('${PROBE} — %s', () => {});\n`,
+      'a literal table on a SUITE': `describe.each(['a'])('outer %s', () => {${inner}`,
+      'a literal table under for': `it.for([1])('${PROBE} — %s', () => {});\n`,
+    };
+    expect(Object.keys(accurate), 'an accuracy control was dropped').toHaveLength(10);
+    for (const [label, src] of Object.entries(accurate)) {
+      expect(carries(src), `${label} was PARKED but vitest really runs it`).toBe(true);
+    }
+
+    // THE THIRD-POSITIONAL BAG IS NOT A ROUTE, AND IT IS NAMED RATHER THAN GUARDED.
+    // EXECUTED: `it(name, fn, { skip: true })` throws under 4.1.8 — `Signature
+    // "test(name, fn, { ... })" was deprecated in Vitest 3 and removed in Vitest 4` — so the
+    // file dies loudly and forges nothing. This walker CREDITS it, which is correct: a source
+    // that cannot run at all is not a source that can lie about running.
+    expect(carries(`it('${PROBE} — third positional', () => {}, { skip: true });\n`)).toBe(true);
   });
 
   test('DOOR 3 CREDIT-BACK: the two benign reference positions, and nothing else', () => {
@@ -1262,29 +1593,53 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // 93 parked files to 2,312, and this floor reds on the first one of them.
     //
     // THE CEILING IS RE-RECORDED AT THE SIXTH CUT AND THE SHIFT IS STATED RATHER THAN LET
-    // TO RIDE. Closing the three semantic holes moves the estate from 93 parked / 27,855
-    // titles to 240 parked / 25,376 titles, and every one of the 147 is a file this walker can no
-    // longer PROVE runs what it says: +1 for B1 (tests/edgeFunctions/contracts.test.js,
+    // TO RIDE. Closing the three semantic holes moved the estate from 93 parked / 27,855
+    // titles to 240 parked / 25,376 titles, and every one of the 147 is a file this walker
+    // could no longer PROVE runs what it says: +1 for B1 (tests/edgeFunctions/contracts.test.js,
     // whose `suite` loop variable is a string), +25 for B2 (files that bind a test word and
     // open a test through it), +121 for B3 (files that register tests from a loop, a helper
-    // or a conditional). The B3 set is enumerated in the landing commit as reformat debt —
-    // `it.each` is in the running grammar and buys every one of them back.
+    // or a conditional). The B3 set is enumerated in that landing commit as reformat debt.
+    //
+    // THE SEVENTH CUT RE-RECORDS IT AGAIN, AND THE SECOND SHIFT IS STATED THE SAME WAY:
+    // 240 parked / 25,376 titles → 301 parked / 24,456 titles across the same 2,314 files.
+    // Every one of the +61 is L2, the zero-row/unproven table: a file that calls `each` or
+    // `for` on a table this reader cannot prove has rows (64 files do; three of them were
+    // already parked). L1, the options bag, costs ZERO — it is a LATENT closure, and the arm
+    // below asserts that latency rather than assuming it.
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
+    // THE COLLAPSE DIRECTION. The measured mutant that removes the vitest-import credit-back
+    // leaves TWO credited files, so this floor catches an anchored admission by three orders
+    // of magnitude. It is LOWERED from 2,000 to 1,900 at this cut — deliberately, because L2
+    // parks a live and growing idiom (`it.each(SOME_CONST)`) and a floor thirteen files away
+    // from red would fire on the next lane to add one, which is a false red about a rule that
+    // is working. The WIDENING direction is guarded by the ceiling below, which is the arm
+    // that would actually catch a rule getting looser.
     expect(TEST_FILES.length - parked.length,
-      'the credited-file count collapsed — admission is anchored again').toBeGreaterThan(2000);
+      'the credited-file count collapsed — admission is anchored again').toBeGreaterThan(1900);
     // …and the park side has not collapsed the other way into crediting everything: the
-    // estate really does hold parked files, and they are the conditional-suite, bound-word
-    // and dynamically-registered ones.
+    // estate really does hold parked files, and they are the conditional-suite, bound-word,
+    // dynamically-registered and unproven-table ones.
     expect(parked.length, 'nothing parks any more — the polarity has inverted').toBeGreaterThan(50);
-    expect(parked.length, 'the parked set has grown past the measured 240 — a new refusal'
-      + ' class has appeared, or a rule widened past what the sixth cut costed')
-      .toBeLessThan(300);
-    // …and the three refusal classes the sixth cut added are all really present in the
-    // estate, so none of B1/B2/B3 is a rule that fires only on synthetic sources.
+    expect(parked.length, 'the parked set has grown past the measured 301 — a new refusal'
+      + ' class has appeared, or a rule widened past what the seventh cut costed')
+      .toBeLessThan(360);
+    // …and the refusal classes the sixth and seventh cuts added are really present in the
+    // estate, so none of B1/B2/B3/L2 is a rule that fires only on synthetic sources.
     const reasonKinds = new Set(parked.flatMap(({ src }) => parkReasonsFor(src).map((r) => r.split(':')[0])));
-    for (const kind of ['SUITE_NOT_RUNNING', 'TEST_SHADOW_AMBIGUOUS', 'TEST_UNREGISTERED', 'SUITE_UNREGISTERED']) {
+    for (const kind of ['SUITE_NOT_RUNNING', 'TEST_SHADOW_AMBIGUOUS', 'TEST_UNREGISTERED',
+      'SUITE_UNREGISTERED', 'TEST_TABLE_UNPROVEN', 'SUITE_TABLE_UNPROVEN']) {
       expect(reasonKinds.has(kind), `${kind} fires on no estate file — the rule is synthetic-only`)
         .toBe(true);
+    }
+    // …AND THE LATENCY CLAIM IS AN ASSERTION, NOT A SENTENCE. L1 is stated above and in the
+    // header as costing zero estate files today. If that ever stops being true this reds, and
+    // whoever reads it is exactly the person who needs to know that vitest's options argument
+    // is refused here: the cure is to MEASURE the bag's shape under vitest and give it a
+    // grammar, never to loosen the default.
+    for (const kind of ['TEST_ARG_FORM', 'SUITE_ARG_FORM']) {
+      expect(reasonKinds.has(kind), `${kind} now fires on an estate file — L1 was measured as`
+        + ' a LATENT closure costing zero files, and that measurement has expired')
+        .toBe(false);
     }
   });
 
