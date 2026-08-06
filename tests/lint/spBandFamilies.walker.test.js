@@ -63,7 +63,7 @@ const FAMILY_HOME = 'src/domain/worldPulse/bandFamilies.js';
  * SP waves that owe a Bands line and have not authored one yet. SHRINK-ONLY: each later
  * SP wave lands its own line and removes its id here. A wave may not be ADDED.
  */
-const SP_WAVES_OWING_A_BANDS_LINE = Object.freeze(['SP-D', 'SP-E']);
+const SP_WAVES_OWING_A_BANDS_LINE = Object.freeze(['SP-D']);
 
 /**
  * SP waves that carry no bands BY DESIGN, recorded so the totality below is a partition
@@ -308,8 +308,25 @@ describe('SP band families — Bands line <-> tuning table, both directions', ()
     // comparison that never held in the first place.
     expect(declared.slice(0, declared.length - 1)).not.toEqual(table);
     // …and a re-spelling, which is the drift class that actually happened fourteen times.
-    expect(declared.map((r) => r.replace(/band edges/g, 'band-edges').replace('half-life', 'halflife')))
-      .not.toEqual(table);
+    //
+    // ⚠ REPAIR, SP-E's build (2026-08-06): A MUTANT THAT PLANTS NOTHING PASSES. As shipped,
+    // this arm re-spelled only the literal phrases `band edges` and `half-life`. Every wave
+    // reconciled at the time happened to contain one, so the mutation always landed — by luck,
+    // not by construction. SP-E's rows ("the phrase-repetition envelope band + the
+    // season-window width · the frequency-cadence class boundaries") contain NEITHER, so the
+    // map was an identity, the mutated value equalled `table`, and the inequality failed while
+    // nothing at all had been planted. The two targeted re-spellings are KEPT — they are the
+    // drift that really happened — and a wave-agnostic separator swap is added beneath them,
+    // with the plant PROVEN before the inequality is asserted.
+    const respelled = declared.map((r) => r
+      .replace(/band edges/g, 'band-edges')
+      .replace('half-life', 'halflife'));
+    const alwaysPlants = respelled.map((r, i) => (i === 0 ? r.replace(/ /g, '-') : r));
+    expect(alwaysPlants, `${wave}: the re-spelling mutant planted nothing`).not.toEqual(declared);
+    // anchored: `declared` is asserted EQUAL to `table` for every wave in this same set two
+    // tests above, and the line above proves this mutation actually changed the value, so the
+    // inequality below measures the planted re-spelling rather than an identity map.
+    expect(alwaysPlants).not.toEqual(table);
   });
 
   test("the war volume's Bands lines are a FROZEN shrink-only backlog", () => {

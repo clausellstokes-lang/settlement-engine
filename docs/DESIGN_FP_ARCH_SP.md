@@ -750,6 +750,9 @@ plus one pure leaf consumption)
   lane's WR-9 instruments — additive files only, no edits to
   `warConvergenceContract.js`.
 
+**Bands:** the phrase-repetition envelope band + the season-window width ·
+the frequency-cadence class boundaries.
+
 ### SP-F — THE AGE-LAYER MARKING (declared NON-WAVE)
 SP-8 owes this program exactly one obligation: every SP band row in §7 below
 carries an ERA-PRESET-ELIGIBLE column (a preset may move only marked bands).
