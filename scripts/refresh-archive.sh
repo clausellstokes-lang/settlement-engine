@@ -93,40 +93,71 @@ if [ -d "$BUILD_TREE" ]; then
 fi
 
 # 5. BYTE-SCAN — zero NULs, valid UTF-8. The authored-NUL class has bitten seven times.
-python3 - "$ARCH" "$VOLS" <<'PY'
-import sys, os
+#
+# ⚠ IT SCANS EXACTLY THE SET `git add` WOULD STAGE BELOW — tracked plus
+# untracked-but-not-ignored — and deliberately does NOT os.walk the directories.
+# WHY THIS CHANGED (2026-08-06): the walk scanned GITIGNORED files too, so a macOS
+# Finder `.DS_Store` (which carries NUL bytes and is not valid UTF-8) failed the scan
+# and BLOCKED EVERY REFRESH — for a file git would never have committed. The archive
+# is this program's durability mechanism and a Finder side-effect must not be able to
+# stop it. Deleting the .DS_Store was rejected as a fix: Finder recreates it.
+LIST="$(mktemp)"
+git ls-files -z --cached --others --exclude-standard -- "$ARCH" "$VOLS" > "$LIST"
+python3 - "$LIST" <<'PY'
+import sys
 bad = []
 n = 0
-for root in sys.argv[1:]:
-    for dirpath, _, names in os.walk(root):
-        for name in names:
-            p = os.path.join(dirpath, name)
-            n += 1
-            d = open(p, 'rb').read()
-            if b'\x00' in d:
-                bad.append(('NUL', p))
-            try:
-                d.decode('utf-8')
-            except Exception:
-                bad.append(('utf8', p))
+for name in open(sys.argv[1], 'rb').read().split(b'\x00'):
+    if not name:
+        continue
+    p = name.decode('utf-8', 'surrogateescape')
+    try:
+        d = open(p, 'rb').read()
+    except (FileNotFoundError, IsADirectoryError):
+        continue  # tracked-but-deleted, or a submodule/gitlink entry
+    n += 1
+    if b'\x00' in d:
+        bad.append(('NUL', p))
+    try:
+        d.decode('utf-8')
+    except Exception:
+        bad.append(('utf8', p))
 print('byte-scan:        %d files, defects: %s' % (n, bad if bad else 'NONE'))
 sys.exit(1 if bad else 0)
 PY
 SCAN=$?
+rm -f "$LIST"
 [ $SCAN -ne 0 ] && { echo "⛔ byte-scan FAILED — not staging."; exit 1; }
 
-CHANGED=$(git status --porcelain -- docs/archive docs/architected-volumes-pending-fold | wc -l | tr -d ' ')
-echo "changed:          $CHANGED path(s)"
+# STAGE ONLY WHAT THIS RUN ACTUALLY SYNCED.
+# ⚠ WHY (2026-08-06): this staged docs/architected-volumes-pending-fold unconditionally,
+# including on runs where the volume sync was SKIPPED for want of ARCHIVE_SCRATCH_DIR.
+# That directory is a live working surface — chair-ruling lanes author into it — so an
+# unconditional stage would sweep another lane's half-written document into a routine
+# refresh commit. Foreign WIP is the owner's; a refresh must never capture it.
+STAGE_PATHS="docs/archive"
+if [ -n "$SCRATCH" ] && [ -d "$SCRATCH" ]; then
+  STAGE_PATHS="$STAGE_PATHS docs/architected-volumes-pending-fold"
+fi
+
+# shellcheck disable=SC2086
+CHANGED=$(git status --porcelain -- $STAGE_PATHS | wc -l | tr -d ' ')
+echo "changed:          $CHANGED path(s) in [$STAGE_PATHS]"
 
 if [ "${1:-}" = "--commit" ] && [ "$CHANGED" -gt 0 ]; then
-  git add -- docs/archive docs/architected-volumes-pending-fold
+  # shellcheck disable=SC2086
+  git add -- $STAGE_PATHS
   git commit -q --no-verify -m "Archive refresh: $CHANGED path(s) — build branch at $(git -C "$BUILD_TREE" rev-parse --short HEAD 2>/dev/null)
 
 Routine refresh by scripts/refresh-archive.sh: the memory estate, the architected
 volumes, the dispatch record, and the build log re-synced from their non-durable
-homes. Byte-scanned clean.
+homes. Byte-scanned clean over the staged set.
 
-Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>"
+⏳ OPUS-ERA — FABLE SURVEY OWED (owner directive 2026-08-06). The trailer below
+was 'Claude Fable 5' until 2026-08-06 and was mislabelling every refresh an Opus
+session ran, which is precisely what the marking directive forbids.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
   echo "committed:        $(git rev-parse --short HEAD)"
 elif [ "$CHANGED" -eq 0 ]; then
   echo "nothing to do — archive already current."
