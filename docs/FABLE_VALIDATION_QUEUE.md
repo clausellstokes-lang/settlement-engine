@@ -4124,3 +4124,128 @@ with product or estate consequence. Everything else in the 46 is mechanical.
 
 **Nothing lit. No golden re-recorded. No band ratified. No soak run. No push. Zero src, test,
 script or JSON edits in this row's own commit — docs and ledger only, by charter.**
+
+---
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · CYCLE-4 DEBT DISCHARGED — THE +13 REPAIRED BY
+## NARROWING, AND THE LABEL JOIN CURED BY SOMEBODY ELSE WHILE THIS SLICE WATCHED
+## (Opus 5 debt slice under the 2026-08-06 succession directive. The cycle-4 close
+## row above named TWO reds as the cycle's OWN rather than inherited. Both are now
+## closed. Every J-* below is a chair-grade judgment made without a Fable chair and
+## is VETOABLE.)
+
+**Commit:** `2a05ce5f`, on top of `e6410bc6`. Three files, **+55 / −9**, all `src/domain/
+worldPulse/pact*.js`. Branch `claude/composite-r4`, worktree `minifold`. Nothing pushed,
+nothing lit, no golden re-recorded, no band ratified, no soak. Zero reverts.
+
+### RED (2) — `typecheck:domain:strict` +13, REPRODUCED THEN REPAIRED
+
+Reproduced by execution before a byte was edited: `pactFormation.js` 6, `pactProposals.js` 1,
+`pactTriggers.js` 6, each against the per-file **ZERO** baseline that governs new domain
+modules. The 1313 ceiling was never in play and is untouched. After: `[domain-strict] ✓ no
+strict-type regressions (1313 errors, ceiling 1313)`.
+
+Seven repairs, all of them a type being made honest — **no `any`, no widened baseline, no
+silencing cast**, because a zero-baseline rule satisfied by a cast is a rule that has been
+deleted quietly. The four `clamp01(unknown)` calls in `dependencyFearOf` pass through a local
+`numeric` narrower; `NO_CROSSING`'s two implicit-`any` parameters are typed; `openPactProposal`
+now calls `recordOf(sheet)` ONCE into a const so `Array.isArray` narrows the property it
+actually tested; `crossingsFor` no longer declares a required `snapshot` that no caller
+supplied and its body never destructured; `answerPactProposal` narrows a term magnitude with
+`typeof`; `signPactProposal`'s re-based terms are annotated as the open records treaty clauses
+are, restoring the `weightSpent` key that the object spread's lost index signature had erased;
+and `advancePeacetimePacts` declares `strengthFor` nullable, which is what the `null` on the
+line beneath the signature had always meant.
+
+**NOT ONE VALUE MOVES, AND IT WAS RUN AS A TABLE RATHER THAN REASONED.** The two
+runtime-visible narrowings are safe only because `clamp01`'s policy is `Number.isFinite(x) ? …
+: 0` over an UNCOERCED check. 23 values — finite, NaN, ±Infinity, −0, numeric and non-numeric
+strings, null, undefined, booleans, arrays, a bare object, a `valueOf` object and a symbol —
+compared under `Object.is` across the direct call and both narrowed spellings: **0 mismatches**.
+Deliberately NOT `Number(value)`, which would newly admit the numeric strings that policy has
+refused since the kernel primitive landed.
+
+**SEVEN MUTANTS, ONE PER REPAIR.** Each asserts its anchor was present and that the file's
+bytes actually changed before measuring — the recorded class where a stale anchor plants
+NOTHING and exits 0. Reverted one at a time the gate returns **4, 2, 1, 3, 1, 1, 1** = exactly
+the 13 measured before any edit, every original error line attributable to exactly one repair.
+Restores from `cp` backups, proven byte-exact by `cmp`; no `git checkout` anywhere.
+
+### RED (1) — THE LABEL JOIN WAS CURED BY THE CONCURRENT LANE AT `e6410bc6`
+
+This slice reproduced it (`sweep script plants a mutation no manifest entry claims` × 2, both
+IN-0a plants, both attributable to `94d0c798` by `git log -S`), read `mutation-sweep.sh`, and
+was composing the two `meta:` splices when the manifest went dirty **with those same two
+entries, written by the sibling lane**. It landed minutes later as `e6410bc6`. VERIFIED rather
+than duplicated: the manifest parses, both orphan labels are claimed by their own `meta:` keys,
+walker **8 passed / 0 failed**. A second claim would have reddened the very arm it repairs —
+*a sweep label may prove exactly one invariant entry*.
+
+### ATTRIBUTION — MEASURED BOTH WAYS AGAINST A `git archive` OF PRISTINE `e6410bc6`
+
+`npx vitest run tests/lint`: **9 failed files / 15 failed tests / 1,024 passed at BOTH ends**,
+sorted FAIL-row diff EMPTY both directions. The row diff was not treated as sufficient — the
+recorded hazard is that a red ratchet's inventory grows behind a byte-identical fail row — so
+the whole failure BODY was normalized and sorted at both ends: **437 lines, identical**, every
+inventory cardinality inside every red row included; the only surviving difference is the two
+wall-clock timing lines. `npx tsc --noEmit -p tsconfig.full.json` moved **362 → 352** and the
+sorted diff is **DELETIONS ONLY** — this repair removes ten diagnostics from the full typecheck
+and adds none. Behaviour gate: the seven pact/K3 suites (`pactAmendment`, `pactFormation`,
+`pactKernelMount`, `pactProposals`, `pactTriggers`, `envoyK3BeliefSeam`, and the
+`pactFormationDormancyFence` property fence) **128 passed / 0 failed**. `eslint` on the three
+files clean; python3 byte-scan **0 NUL bytes**.
+
+### THE JUDGMENTS, ENUMERATED FOR CHEAP RE-RULING
+
+- **J-C4D-1 — VERIFY, DON'T DUPLICATE.** On finding the sibling lane's identical cure on disk,
+  this slice stopped authoring its own and verified theirs. The opposite call (land both, let
+  one lose the merge) would have produced a double-claim red in the join itself.
+- **J-C4D-2 — A LOCAL NARROWER IN `pactTriggers.js`, NOT AN IMPORT.** `finite01OrNull` already
+  exists in `peaceTermsPrimitives.js`, but `tests/domain/envoyK3BeliefSeam.test.js` pins that
+  leaf's import list to EXACTLY `['../../kernel/math.js']`, which is the leaf's whole promise.
+  Importing would have required amending a K3 pin — a chair act. The narrower is two lines and
+  authors no law.
+- **J-C4D-3 — AN INLINE `typeof` AT THE COMPOSER'S ONE SITE**, rather than a fourth copy of the
+  narrower or a new import into `pactFormation.js`, whose header declares its import list
+  pinned. One site does not earn a named surface.
+- **J-C4D-4 — THE PHANTOM `snapshot` WAS DELETED FROM THE SIGNATURE, NOT ADDED TO THE CALLERS.**
+  Three call sites could have been made to pass a value the body never destructures; that would
+  have written a lie into three places to satisfy a lie in one.
+- **J-C4D-5 — `strengthFor` DECLARED NULLABLE, THE DEFAULT LEFT ALONE.** Changing `= null` to
+  `= undefined` would have been a runtime edit to a pulse-stage entry point for a typing
+  reason. The signature was the thing that was wrong.
+- **J-C4D-6 — THE MAPPED `terms` CONST IS ANNOTATED, `weightSpent` IS NOT CAST.** The row type
+  is what a treaty clause is; the cast would have hidden that the spread had erased it.
+- **J-C4D-7 — TWO COMMITS, REPAIR THEN LEDGER**, so the shared ledger file is edited last and
+  its compare-and-swap window is as small as a live two-lane tree allows.
+
+### DEFERRALS — DELIBERATE, DOCUMENTED, NOT BUGS TO RE-FIND
+
+- `pactProposals.js`'s `normalizePactProposal` carries the IDENTICAL double-`recordOf` spelling
+  repaired in `openPactProposal`. It raises no strict error because its result is only tested
+  for truthiness, and `unknown` is truthy-testable. Left untouched: minimal diff is the right
+  posture in a live shared tree, and a latent non-error is not this slice's class.
+- The `numeric` narrower duplicates the SHAPE of `finite01OrNull` without duplicating a law.
+  Consolidation is gated on the K3 import pin and is therefore a chair call, not a refactor.
+- The estate's pre-existing reds are untouched by design: 352 full-typecheck errors and 15
+  `tests/lint` failures, both proven identical or a strict subset against the base archive.
+
+### ⚠ A PROTOCOL EVENT WORTH RECORDING — THE TREE MOVED BETWEEN A `git diff` AND A TEST RUN
+
+`src/domain/worldPulse/brokeragePlantHandoff.js` appeared dirty mid-slice carrying a
+byte-exact copy of mutation-sweep plant #73 (`rows[rows.length - 1]` → `rows[0]`). It looked
+exactly like an abandoned sweep leftover, and the reflex — revert it — would have destroyed a
+sibling lane's in-flight mutant. It was the sibling lane PROVING its two plants red before
+claiming them in the manifest. **Two lessons.** First: a planted-looking mutation in a shared
+tree is a foreign lane's working state until proven otherwise; `ps aux` showed no sweep because
+the sweep was never running. Second, and sharper: the file's md5 CHANGED between reading its
+`git diff` and running the pins suite four calls later, so the failing pin did not correspond
+to the mutation the diff had shown. The only reason that did not become a false finding is that
+the md5 was stamped **in the same command** as the test run. **On a live tree, stamp the
+artefact's hash inside the command that measures it — a hash taken a turn earlier describes a
+file that no longer exists.**
+
+**Nothing lit. No golden re-recorded. No band ratified. No soak run. No push. Five foreign
+dirty files from the concurrent GR-3 lane were present throughout; four are byte-identical
+across this slice's commit by md5 and the fifth grew under that lane's own editing (+83 → +105
+insertions), which is advancement, not damage.**
