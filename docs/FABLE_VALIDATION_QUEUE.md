@@ -4429,3 +4429,201 @@ envoyErrandProjection 153 → **157** · espionageMath 156 → **160** · coupli
 **Nothing lit. No golden re-recorded. No band ratified. No soak run. No push. The espionage
 certification row stays UNOBSERVED and says why: the mission exists, the dispatcher does not,
 so nothing has still run.**
+
+---
+
+## SP-E — THE NARRATION KIT ASSEMBLY: A TRANSCRIBED LAW BECOMES A DERIVED ONE,
+## AND THE CENSUS FINDS TWO DEFECTS THE DOCS NAME AS ONE
+## ⏳ OPUS-ERA — FABLE SURVEY OWED
+## (Opus 5 build wave under the 2026-08-06 succession directive. Every J-* below is a
+## chair-grade judgment made without a Fable chair and is VETOABLE.)
+
+**Wave:** SP-E, `docs/DESIGN_FP_ARCH_SP.md` §5 + the compiled charter's #7. Start HEAD
+`dda24851`, ACTUAL PARENT `1b111399` (the parent moved mid-wave — see the gates section),
+commit `7a77c84b`, branch `claude/composite-r4`. **NO FLAG. ZERO ENGINE BEHAVIOR CHANGES.**
+Ten files: six new, four amended; the ONLY `src/` file is a pure certification leaf imported
+by nothing but its own walker.
+
+**What landed.** (1) `tests/helpers/kindPoolWalker.js` — the template every later FP volume
+imports instead of transcribing a floor table. Floors are DERIVED from `SIGNIFICANCE_CLASSES`'
+own rank (`CHRONIC_FLOOR - rank * CADENCE_STEP` = routine 8 / notable 6 / major 4), and the
+guard proves the derivation reproduces every hand-transcribed `FLOOR_BY_SIGNIFICANCE` in
+`tests/lint` — which is what makes it a drop-in rather than a tenth opinion. (2)
+`tests/lint/kindPoolFloors.walker.test.js` — the estate-wide floor walker over all NINE
+registries (106 kinds), green at birth with the measured legacy backlog frozen shrink-only.
+(3) `src/domain/certification/phraseRepetitionEnvelope.js` + its walker — the phrase-repetition
+soak instrument in its own leaf. (4) `tests/lint/significanceMigration.census.test.js` — the
+SP-6a migration census; `src/components/map/heraldFeed.js` is READ AND NEVER EDITED. (5) SP-E's
+own §5 Bands line, which takes SP-E out of the SP-A walker's shrink-only backlog (only SP-D
+still owes one).
+
+### ⛔ STOP-AND-REPORT — DOC OVERSTATEMENTS, MEASURED, NOT SILENTLY CORRECTED
+
+**R-SPE-1. "FOUR PER-PROGRAM KIND-POOL WALKER FILES" IS NINE.** SP §5's V18 row and the
+compiled charter both size the family at four. MEASURED at this HEAD: nine files match
+`tests/lint/*KindPools.walker.test.js`. FOUR of them (commercial, envoy, grammar, sovereignty)
+transcribe the floor table; FIVE (phrased, lineage, warCoalition, warCost, warRuling) pin a
+hard-coded `toHaveLength(5)` instead — the fixed-five class. The structural blocker SP-E was
+scheduled to remove is therefore LARGER than charted, and the walker addresses all nine.
+
+**R-SPE-2. `warConvergenceContract.js` IS NOT "AN 820-LINE FILE MEASURED".** MEASURED
+independently at this commit with the enforcer's own Linter: **515 effective / 953 raw**. The
+doc's figure matches neither currency. NOT INHERITED FROM THE BRIEF — re-measured here, per
+§2c's "never quote a figure from a volume". The file was NOT edited; the new instrument is its
+own leaf (84 effective / 245 raw), exactly as the collision map requires.
+
+**R-SPE-3. THE "~269 LEGACY SINGLE-VOICED TOKENS" IS 274, AND THE ROUTED-TOKEN COUNT THE
+CHARTER ITSELF CORRECTED TO 354 IS NOW 374.** MEASURED: `EXACT_SECTION` routes 374 tokens; 106
+kinds are registered across the nine registries; 274 routed tokens have no phrased pool at all.
+§2c already warned that counts rot and told us not to quote them — this row obeys that by
+measuring, and the walker asserts all three numerals as EXECUTED self-assertions rather than
+recording them in prose.
+
+**R-SPE-4. THE ARCHITECTURE NAMES ONE MIXED WORD/FLOAT SIGNIFICANCE DECISION; THE TREE HAS
+TWO.** Both the compiled charter and `bandFamilies.js`'s own header name `heraldFeed.js` as THE
+counter-example. `src/components/map/HeraldAdjudication.jsx` makes the identical decision with
+the identical `0.72` constant re-typed, and no doc names it. Both are frozen in the census so a
+migration wave reading only the volume cannot miss the second.
+
+**R-SPE-5. `heraldFeed.js`'s PATH CARRIES `src/`, WHICH BOTH DOCS OMIT.** Confirmed live:
+`src/components/map/heraldFeed.js`. Its ad-hoc read has NOT rotted — `toHeraldItem` still
+decides `major` from a banded word OR `severity >= 0.72`, pinned here BY SYMBOL rather than by
+the line number 95 the docs cite.
+
+### THE JUDGMENTS — each chair-grade, each vetoable
+
+- **J-SPE-1 — THE FLOOR TABLE IS DERIVED ARITHMETICALLY, NOT DECLARED AS DATA.** The four
+  transcriptions agree today; a fifth would not have to. `FREQUENCY_FLOORS` is computed from the
+  significance family's own rank, so a fourth class added to `bandFamilies.js` gets a floor for
+  free and no volume can author a fifth table. The cost is that the numbers are now implied by
+  two constants rather than written out, so the guard asserts the derived table EQUALS
+  `{routine: 8, notable: 6, major: 4}` AND agrees with every transcription in the tree.
+  REJECTED: exporting the literal table from the helper, which is the same transcription with
+  one fewer author and still permits a volume to re-type it.
+- **J-SPE-2 — THE FLOOR LADDER'S INVERSION IS PINNED AS A DIRECTION, NOT AS THREE LITERALS.**
+  A re-tuning that kept the numbers plausible but flipped chronic and rare would be the silent
+  semantic error this program keeps paying for, so the guard asserts `routine > notable > major`
+  and that the gap equals `CADENCE_STEP` — not merely the three values.
+- **J-SPE-3 — GR-0's `n/a` CLASS IS A CALLER-DECLARED EXCEPTION, NEVER A FOURTH FAMILY MEMBER.**
+  A dossier line files no Herald desk, so it has no significance class, yet a reader meets it as
+  often as a notable kind. `floorFor` THROWS on it unless the caller passes an explicit
+  `declaredExceptions` entry with a written reason. REJECTED: adding `n/a` to
+  `SIGNIFICANCE_CLASSES` (it is not a significance) and defaulting unknown classes to the
+  shallowest floor (a silent fallback files a starved kind at whatever depth the fallback chose).
+- **J-SPE-4 — J-SP-8's BACKLOG COVERS THE 28 UNDER-FLOOR ROWS, AND IT IS NOT AN AMNESTY.**
+  MEASURED: 28 registered kinds sit under their own floor, every one at depth EXACTLY FIVE —
+  CR-FP-7's fixed-five class, in five war programs. Frozen shrink-only, because raising 28 pools
+  is a content program's work across five annexes. But three properties keep it honest: every
+  member must still NAME a live registered kind; every member's depth of five is asserted PER
+  ROW so a backlogged pool cut to three reds rather than hiding inside its entry; and the count
+  is measured `<=`. REJECTED: a bare count ceiling (the recorded class where a red ratchet's
+  contents grow while its row diff stays empty).
+- **J-SPE-5 — THE ENVELOPE IS A ONE-SIDED CEILING, AND THE MISSING LOWER BOUND IS DECLARED
+  RATHER THAN OMITTED.** The dead-band law wants both sides of a band to live; here a repeat
+  share of ZERO is the ideal, not a defect, and a lower bound would punish a wave for authoring
+  depth — inverting the incentive the whole SP-6 floor program creates. Declared-empty with that
+  reason. The UPPER side is the owner-signed band. REJECTED: banding the DISTINCT share instead,
+  whose upper bound of 1.0 is trivially satisfied and buys nothing.
+- **J-SPE-6 — THE ENVELOPE MINTS NO WORD LADDER.** It reports a numeric `[0,1]` share against a
+  numeric ceiling, exactly like `RATIFIED_SOAK_BANDS`. A repetition vocabulary would be a second
+  scale in a program whose whole subject is that the estate has too many, and `spBandFamilies`'s
+  vocabulary scan would be right to catch it.
+- **J-SPE-7 — A NO-EVIDENCE REPORT IS `withinEnvelope: false`, NOT `true`.** A soak that
+  produced too few lines has not demonstrated variety, and grading it as a pass is the vacuous
+  green this estate keeps paying for. Windows below `POWERED_WINDOW_MINIMUM` (4 — the shallowest
+  authored floor) are excluded AND counted, so the exclusion is visible in the report.
+- **J-SPE-8 — SP-E AUTHORS ITS OWN BANDS LINE AND LEAVES THE SP-A BACKLOG IN THE SAME COMMIT.**
+  Not in the brief's charter, but §7 already lists SP-E's two rows and the SP-A walker holds
+  SP-E in a shrink-only backlog waiting for them. Authoring the band and not the line would mean
+  the owner never signs a band this wave just created — the exact drift the reconciliation walker
+  exists to kill. The two edits are atomic: either alone reds the walker.
+- **J-SPE-9 — A LATENT VACUITY IN A NEIGHBOUR'S WALKER WAS REPAIRED, NOT ROUTED AROUND.**
+  `spBandFamilies.walker.test.js`'s re-spelling mutant re-spelled only `band edges` and
+  `half-life`. Every wave reconciled before now happened to contain one, so it always planted
+  something — by luck. SP-E's rows contain neither, so the map was an IDENTITY and the arm failed
+  having planted NOTHING. The alternative was to word SP-E's Bands line to contain one of the two
+  phrases, which would have bent a chair-authored §7 row to fit a test. The two targeted
+  re-spellings are kept, a wave-agnostic swap is added, and the plant is now ASSERTED to have
+  changed the value before the inequality is checked. SP-D will need this when it lands its line.
+- **J-SPE-10 — THE MANIFEST WAS STAGED AS A CONSTRUCTED BLOB SO A CONCURRENT LANE'S IN-FLIGHT
+  ROW STAYED UNCOMMITTED.** `scripts/mutation-coverage-manifest.json` carried another lane's
+  uncommitted `gr3-term-family-controls-executed-2026-08-06` rationale. Committing the file
+  wholesale would have landed their work under this wave's name; partial staging would have put
+  a `.json` through lint-staged's stash. Instead the staged blob was built from HEAD + this
+  wave's five rows and set with `git update-index --cacheinfo`, leaving their line on disk and
+  out of HEAD. VERIFIED after the commit: their line is on disk (1) and absent from HEAD (0).
+
+### RESIDUALS, WRITTEN DOWN SO NOBODY RE-FINDS THEM AS BUGS
+
+1. **THE 28 UNDER-FLOOR POOLS ARE CONTENT WORK, NOT A DEFECT TO FIX HERE.** CR-FP-7 countersigned
+   the cap-raise arm; the annex deepening is the content annexes' wiring waves'. The backlog names
+   every one with its shortfall.
+2. **274 ROUTED TOKENS HAVE NO POOL AT ALL.** Seven of the eight FP annexes are read by nothing;
+   each program's first herald wave takes its annex's address. Counted shrink-only, not repaired.
+3. **THE POWER FILTER IS UNREACHABLE AT THE DEFAULT CEILING.** An unpowered window caps at 0.667,
+   below 0.75. The clause is real for any tighter ceiling and the ceiling is an owner-signed
+   tunable, so it is kept and pinned at a reachable ceiling. If the owner ratifies a ceiling below
+   0.667 the clause becomes live at the default too. DELIBERATE.
+4. **`realmItemReadModel.js` GRADES `notable` AND `routine` AS UNCLASSIFIED.** Its `significanceOf`
+   maps a FOURTH vocabulary `{major, critical, moderate, minor}` and defaults everything else to
+   0.35 — so the two words 65 of 106 registered kinds carry receive the same value as an item with
+   no significance at all. NOT REPAIRED: SP-E is assessment-first and each surface migrates in its
+   own wave. Named in the census so the migration wave is scoped.
+5. **THE ENVELOPE HAS NO SOAK CALLER.** Dark by construction (the lane-P precedent); the soak
+   wires it. Its band and season width are UNRATIFIED and deliberately absent from
+   `proposedSoakBands.js`, whose every row must carry the owner's signature.
+6. **`tests/lint/warCostKindPools` AND `warRulingKindPools` STAY RED AT BASE** on the annex-forward
+   defect (D-W3's Class B). Present identically at the parent; NOT this wave's and not repaired.
+
+### GATES — every figure EXECUTED, every label earned
+
+**CONFIRMED — attribution by VIOLATION ROWS, per L7.** `tests/lint` was run against `git archive`
+trees of the ACTUAL PARENT `1b111399`, once with nothing of this wave and once with only this
+wave's files: **17 failing rows without SP-E, 16 with it. ZERO rows attributable to SP-E**, and
+the wave CLEARS one row the ES-1 repair commits left red. The committed state `7a77c84b` was then
+re-run in a clean archive: 16 failed / 1064 passed, and the lighting census row is GREEN there.
+
+**CONFIRMED — SP-E's own estate:** 81 passed / 81 across the six touched test files, in the clean
+archive of the commit.
+
+**CONFIRMED — SIX MUTANTS EXECUTED**, each planted with perl, run, and restored from a cp backup
+proven by `cmp` in the same shell (never the checkout family). `CHRONIC_FLOOR` 8→10 reds 12 of 29;
+dropping a real backlog entry reds 3 of 12; planting an orphan backlog entry reds 3 of 12; the
+no-evidence-as-pass mutant reds 1 of 16; drifting SP-E's Bands line from §7 reds 2 of 16. **THE
+SIXTH SURVIVED ITS FIRST ROUND AND IS THE MOST VALUABLE RESULT HERE:** deleting `row.powered &&`
+from the envelope's violation predicate left all 16 arms GREEN, because an unpowered window's
+repeat share caps at 0.667 and the guard was graded against a 0.75 ceiling it could never cross —
+the unreachable-predicate-conjunction class, caught by this wave's own mutant round rather than by
+review. Re-pinned at a reachable ceiling with a powered window as the anchored control; the
+identical mutant now reds 1 of 16.
+
+**CONFIRMED — THE COLLAPSE MUTANT IS NOT A FILE PLANT** and runs on EVERY ordinary execution: the
+REAL envoy picker over the REAL authored pools, three towns across thirteen weeks, gives worst
+repeat shares 0.3846 (depth 12) / 0.5385 (6) / 0.6154 (5) — monotone in depth, which is the floor
+law's own justification executed rather than argued — against 0.9231 for a one-variant pool
+(3 violations) and a breach for a two-variant half-collapse.
+
+**CONFIRMED — PRE-EXISTING REDS EARNED, NOT ASSUMED.** `npm run lint` at the base archive reports
+the SAME 3 errors / 27 warnings as the worktree, in files this wave never opened; `npx eslint`
+exits 0 on all seven touched JS files. The full `tsc` reports 347 errors at base and 346 in the
+worktree, naming NONE of this wave's files. `typecheck:domain:strict` reports one regression,
+`src/domain/worldPulse/secrecyTradeFactor.js` — reproduced identically in a `git archive` of the
+start HEAD with none of this wave's files present, so it is IN-0d's debt, not SP-E's. The new
+domain leaf is strict-**ZERO**.
+
+**CONFIRMED — THE CENSUS RE-RECORD, WITH ITS SPLIT STATED.**
+2,333/358/1,975/18,731/5,357 → 2,337/358/1,979/18,793/5,378. Of the title delta, **+57 is this
+wave's** (17+12+16+12, reconciled against the four files' own counts) and **+5 is INHERITED** — the
+ES-1 repair commits modified `espionageMission.test.js` mid-wave without re-recording, so the row
+arrived RED at the new parent. PARKED IS UNCHANGED at 358 because none of the four files generates
+tests from a loop.
+
+**SIZES, MEASURED WITH THE ENFORCER AT THIS COMMIT (effective / raw):**
+`phraseRepetitionEnvelope.js` **84 / 245** (new, far under the 800 domain ceiling — no size-baseline
+entry) · `kindPoolWalker.js` 89 / 256 · `kindPoolWalker.test.js` 187 / 285 ·
+`kindPoolFloors.walker.test.js` 183 / 308 · `phraseRepetitionEnvelope.walker.test.js` 209 / 314 ·
+`significanceMigration.census.test.js` 168 / 300.
+
+**Nothing lit. No flag minted. No golden re-recorded. No band ratified. No soak run. No push. No
+engine module edited — `heraldFeed.js` and `warConvergenceContract.js` were read and censused and
+never opened, and the only `src/` file added is consumed by nothing at land time.**
