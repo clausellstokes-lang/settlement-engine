@@ -51,10 +51,23 @@ intent survives even without the memory estate.
   ES-0 (espionage foundations + the CR-ES-3 seat-vocabulary retarget) · the
   ES-4 door-3 arc CLOSED AT THE CAP (`d48224e3`) · the blanket-sign-off row ·
   SP-C (the posture read).
-- **MEASURED REMAINING BUILD INVENTORY (2026-08-06):** FP core 61 waves
-  (8 landed) · EP 16 · WY 12 · HB 10 · ES 8 (1 landed) · WC ~12 est. =
-  **~95 waves plus the WC volume.** An older "~65" figure in any memory is
-  STALE — it predates the three directives architected on 08-05/06.
+- **MEASURED REMAINING BUILD INVENTORY (2026-08-06, re-measured):** **94
+  waves** — FP core 61 (8 landed) · WC 17 · WY 12 · HB 10 · ES 7 · EP **6**.
+  **49 carry a flag; 45 do not.** Older figures are STALE: "~65" predates the
+  08-05/06 directives, and "EP 16" counted EP-N tokens including judgment ids.
+  ⚠ **ES-1..ES-6 are NO-FLAG** — `espionageEnabled` landed at ES-0
+  (`55674790`); the ES volume text saying it lands at ES-1 is STALE.
+  ⚠ **ES-4 IS FIFTH IN ITS SPINE** (ES-0→ES-1→ES-2→ES-3→ES-4), NOT second —
+  its §5 header presents SP-B2 as the last gate and that is FALSE; the stale
+  header ALREADY MISROUTED ONE LANE (see `8a4b0aef`). Both doc repairs are
+  QUEUED, not landed — composite-r4's tree was held when they were found.
+- **CONCURRENCY IS RULED — see memory `concurrency-law-ruled.md`:** TWO build
+  lanes, ONE landing slot, ONE gate slot, ALL IN ONE WORKTREE. A second
+  worktree is REFUSED for engine lanes (the gate is a MACHINE mutex, not a
+  tree resource; and exact-census / shrink-only files merge GREEN-BUT-WRONG in
+  both parents). Standing practice ruled: each program certifies in its OWN
+  subsystemRows lane file (the totality walker asserts the PARTITION, not the
+  address) — this removes ~1/3 of the CQ5 collision at zero cost.
 - **IN FLIGHT when this was written** (if these lanes died with the session,
   their work is recoverable ONLY from what is described here plus git):
   cycle 4 (SP-D, GR-2, IN-0a after SP-C) · the HABIT volume's round-4 CAP ·
