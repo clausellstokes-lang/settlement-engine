@@ -4257,9 +4257,9 @@ and eighteen times now, it was.*
 
 ---
 
-## §9 THE COUNT CENSUS — EXECUTED (J-HB-27)
+## §9 THE COUNT CENSUS — EXECUTED (J-HB-27 + J-HB-28)
 
-**SCRIPT: `countsweep.py`, md5 `0f572e87749d62bd7cb26c64d4a154fa`, run as `python3 countsweep.py`
+**SCRIPT: `countsweep.py`, md5 `0aa8d27dbe8b786ab55c38df7d03a337`, run as `python3 countsweep.py`
 from the volume's own directory. EXIT CODE 0.**
 
 ⭐⭐ **THIS APPENDIX IS OUTPUT, NOT PROSE.** Every figure below was DERIVED by parsing this
@@ -4270,14 +4270,26 @@ surfaces as a HOME DIFF naming the phrase and reporting how many times it was ac
 found. ⭐ **THE BODY MD5 IS THE STABLE ONE AND IS RE-CHECKABLE:** the script hashes
 everything ABOVE this appendix, because an appendix that quoted a hash of the file
 containing it would go stale the moment it was pasted. A self-hashing appendix is not a
-thing that can exist; this is the shape that can.
+thing that can exist; this is the shape that can. ⭐ **AND AT ROUND FOUR BOTH SCRIPT HASHES
+BECAME DIFFED QUANTITIES** (`countsweep_md5`, `sweep_script_md5`) — the sentence above and
+§3b's sweep-script sentence were the last two TRANSCRIBED figures in this volume, which is
+precisely the class this instrument exists to abolish, sitting inside the instrument's own
+appendix.
+
+⭐⭐ **THE SECOND FAMILY LANDS HERE (J-HB-28).** The count ledger closes the stale-NUMBER
+class. The struck-premise scan closes the stale-CLAIM class: every premise in §0.3's
+register declares SIGNATURE PHRASES of the claim that fell, and every occurrence anywhere
+in the volume must hold a positive licence — REGISTER, STRUCK-within-radius, or
+QUOTED-AND-LABELLED. **It found its own chartering defect on its first run**, at J-HB-5,
+and then reddened the paragraph that was written to explain it.
 
 ```
 COUNT CENSUS — countsweep.py over DESIGN_HABIT_ARCHITECTURE-POLISHED.md
-volume BODY md5 (above §9, stable across re-pastes): d67475a0a6541fdd68944b85b371742a
-countsweep.py md5                                  : 0f572e87749d62bd7cb26c64d4a154fa
-volume BODY lines (above §9)                       : 4114
+volume BODY md5 (above §9, stable across re-pastes): 6622a9fbe8b4186d2d29e72cbb6d564a
+countsweep.py md5                                  : 0aa8d27dbe8b786ab55c38df7d03a337
+volume BODY lines (above §9)                       : 4258
 
+FAMILY ONE — THE COUNT LEDGER (J-HB-27): every counted quantity vs every prose home
 QUANTITY                   VERDICT  DERIVED FROM THE VOLUME'S OWN TABLES         HOMES   XCHK
 ----------------------------------------------------------------------------------------------------------------------
 checklist_rows             PASS     14                                           9/9     0
@@ -4302,54 +4314,113 @@ circumstance_classes       PASS     12                                          
 flags                      PASS     4                                            8/8     0
 waves                      PASS     10                                           4/4     1
 bands_anchored_scan        PASS     10 anchored lines, 2 tuning-bearing, 8 NO... 5/5     1
-judgment_blocks            PASS     27                                           1/1     1
+judgment_blocks            PASS     28                                           1/1     1
 refutations                PASS     18                                           7/7     1
 chair_questions            PASS     5                                            5/5     1
 chartered_prefixes         PASS     11                                           2/2     0
 severity_ladder            PASS     4                                            2/2     1
 tradition_outcome          PASS     6                                            4/4     0
-foreign_fields_written     PASS     2 ['deployment', 'treaty']                   5/5     0
-foreign_fields_deferred    PASS     1 ['occupationRecord']                       1/1     0
+foreign_fields_written     PASS     2 ['deployment', 'treaty']                   5/5     1
+foreign_fields_deferred    PASS     1 ['occupationRecord']                       1/1     1
 malformed_row_scan         PASS     0                                            0/0     1
+sweep_script_md5           PASS     ec974edb4ee8f0b776d77d887f28bc6e             1/1     0
+countsweep_md5             PASS     0aa8d27dbe8b786ab55c38df7d03a337             1/1     0
 sweep_figures              PASS     analytic law interval=[0.481481, 2.076923... 9/9     0
 ----------------------------------------------------------------------------------------------------------------------
-32 quantities swept, 0 FAIL, 32 PASS
-TOTAL PROSE HOMES DIFFED: 129 ; TOTAL STRUCTURAL CROSS-CHECKS: 15
-ZERO DIFFS — every counted quantity agrees with every prose home that states it.
+
+FAMILY TWO — THE STRUCK-PREMISE SCAN (J-HB-28): every refuted claim vs every restatement
+QUANTITY                   VERDICT  DERIVED FROM THE VOLUME'S OWN TABLES         HOMES   XCHK
+----------------------------------------------------------------------------------------------------------------------
+struck_R1                  PASS     3 ok (2 reg, 1 struck, 0 quoted) / 0 unli... 0/0     3
+struck_R2                  PASS     2 ok (2 reg, 0 struck, 0 quoted) / 0 unli... 0/0     3
+struck_R3                  PASS     2 ok (2 reg, 0 struck, 0 quoted) / 0 unli... 0/0     3
+struck_R4                  PASS     14 ok (4 reg, 8 struck, 2 quoted) / 0 unl... 0/0     3
+struck_R5                  PASS     2 ok (2 reg, 0 struck, 0 quoted) / 0 unli... 0/0     3
+struck_R6                  PASS     2 ok (2 reg, 0 struck, 0 quoted) / 0 unli... 0/0     3
+struck_R7                  PASS     3 ok (2 reg, 1 struck, 0 quoted) / 0 unli... 0/0     3
+struck_R8                  PASS     5 ok (3 reg, 2 struck, 0 quoted) / 0 unli... 0/0     3
+struck_R9                  PASS     2 ok (2 reg, 0 struck, 0 quoted) / 0 unli... 0/0     3
+struck_R10                 PASS     4 ok (4 reg, 0 struck, 0 quoted) / 0 unli... 0/0     3
+struck_R11                 PASS     2 ok (2 reg, 0 struck, 0 quoted) / 0 unli... 0/0     3
+struck_R12                 PASS     2 ok (2 reg, 0 struck, 0 quoted) / 0 unli... 0/0     3
+struck_R13                 PASS     3 ok (2 reg, 1 struck, 0 quoted) / 0 unli... 0/0     3
+struck_R14                 PASS     5 ok (3 reg, 2 struck, 0 quoted) / 0 unli... 0/0     3
+struck_R15                 PASS     1 ok (1 reg, 0 struck, 0 quoted) / 0 unli... 0/0     3
+struck_R16                 PASS     4 ok (2 reg, 2 struck, 0 quoted) / 0 unli... 0/0     3
+struck_R17                 PASS     4 ok (2 reg, 2 struck, 0 quoted) / 0 unli... 0/0     3
+struck_R18                 PASS     2 ok (2 reg, 0 struck, 0 quoted) / 0 unli... 0/0     3
+----------------------------------------------------------------------------------------------------------------------
+
+52 quantities swept across TWO families, 0 FAIL, 52 PASS
+TOTAL PROSE HOMES DIFFED: 131 ; TOTAL STRUCTURAL CROSS-CHECKS: 71 ; SIGNATURE PHRASES SCANNED: 42
+ZERO DIFFS — every counted quantity agrees with every prose home that states it, and no refuted premise is restated unmarked.
 ```
 
 **HOW TO READ A FAILURE.** A `FAIL` is never "the script is out of date". It is exactly one
 of two things: a table was edited and a sentence was not, or a sentence was edited and the
 table was not. Both are the same bug and both are fixed by re-parsing — never by editing
-the script's expectations. ⛔ **A sweep seeded with expected values fails GREEN**, which is
+the script's EXPECTATIONS. ⛔ **A sweep seeded with expected values fails GREEN**, which is
 the vacuity class this volume reds throughout, so the instrument is forbidden to carry one.
+⭐ **ROUND FOUR SCOPED THAT RULE RATHER THAN LOOSENING IT:** it binds on EXPECTATIONS —
+transcribed quantities, expected sets, figures the script would compare the volume against
+— and NOT on the numeral→word RENDERING TABLE, whose growth can never change a verdict.
 The `HOMES` column counts prose homes diffed; `XCHK` counts STRUCTURAL cross-checks —
 assertions between two of the volume's own tables, which is how a quantity with no prose
 home (the coverage table, the arity table, the disposition partition) is still held.
 
 **THE INSTRUMENT WAS PROVEN BY MUTANT, BECAUSE A GUARD THAT CANNOT BE REDDENED CANNOT BE
-PROVEN.** Seven mutants were planted on COPIES and each reddened the right quantity and
-only that quantity: a stale deferral-book denominator reds `deferral_book`; a stale
+PROVEN. THE ROUND-FOUR BATTERY IS FIFTEEN, ALL FIFTEEN BEHAVED, AND EVERY ONE ASSERTED THE
+FILE ACTUALLY CHANGED BEFORE THE RUN.** The round-three seven re-ran unchanged against the
+rebuilt instrument — a stale deferral-book denominator reds `deferral_book`; a stale
 grade-map count reds `closes`; a stale derived set reds `derived_one_term_set`; a reverted
 `per-action` arity reds `site7_arity`; an added checklist row reds `checklist_rows`,
-`checklist_labels` and `checklist_decomposition` together, which is the correct cascade; a
-table row with a cell removed reds `malformed_row_scan`; and a DUPLICATED home phrase reds
-`waves` on its occurrence count — the assertion that closes the FIRST-MATCH DOCUMENT PIN
-class, where a pin that finds its target by first match retargets silently once a second
-match appears. ⚠⚠ **AN EIGHTH ATTEMPT PLANTED NOTHING AND GREENED, AND IT IS RECORDED
-RATHER THAN DISCARDED**, because it is the sharpest lesson here: the mutation targeted a
-phrase that WRAPS A LINE in the raw file, so the substitution matched nothing and the run
-passed vacuously. **A mutant is not evidence until you have proved it changed the file.**
-Every mutant above therefore asserts the file differs and aborts if it did not plant.
+`checklist_labels` and `checklist_decomposition` together; a row with a cell removed reds
+`malformed_row_scan`; a DUPLICATED home phrase reds `waves` on its occurrence count, which
+is the assertion that closes the FIRST-MATCH DOCUMENT PIN class. **EIGHT ARE NEW.** ⭐ F3's
+exact escapee: re-spelling the TREATY record's stamped-field owner to a different record
+name INSIDE THE WAR SEAM ROW ONLY — which passed at round three because only the
+CARDINALITY was checked, and two is two whatever the two are called — now reds
+`foreign_fields_written`, because the home phrase is BUILT from the derived names and a
+second home (J-HB-13) is diffed against it as a SET. ⚠ **The mutant's re-spelling is
+described here rather than written out, and that is itself a round-four finding:** the
+first draft of this paragraph spelled it, and `foreign_fields_deferred` — which scans the
+WHOLE volume for `<record>.habitEpisode` — correctly reported a THIRD deferred field that
+existed only in a sentence about a mutant. **A census appendix must not mint the spellings
+its own census counts.** ⭐ F2's two crashes: an added
+coverage row (43 → 44) and an added judgment block now produce a FULL census that fails the
+right quantity, and a third mutant drives the book to **47** — a number the rendering table
+has no word for — to prove the numeral fallback rather than merely the enlarged table.
+⭐ And the four that prove J-HB-28: an unmarked re-plant at a fresh home REDS; a
+legitimately quoted-and-labelled one stays GREEN; a drifted register wording reds as a
+STALE SIGNATURE; and a premise planted with a strike token deliberately pushed BEYOND the
+licensing radius REDS — which is the mutant that proves the radius is load-bearing and not
+decoration, because without it the licence would fail open on any long block.
 
-**WHAT THE SWEEP CAUGHT ON ITS FIRST REAL RUN, recorded because an instrument's first catch
-is its warrant.** Beyond the seven findings this revision was chartered to close, it found
-TWO stale denominators nobody had reported. **(i)** The judgment-block census: the footer
-read twenty-five while §6 held more — corrected. **(ii)** A third `<record>.habitEpisode`
-spelling, `occupationRecord.habitEpisode`, living in HB-9's occupation-close bullet, which a
-document-wide scan counts as a foreign field and which would contradict Q1's two-field
-question. **It is now carried as its own derived quantity (`foreign_fields_deferred`), so a
-DEFERRED close's proposed field is VISIBLE beside the two this program actually writes** —
-neither inflating Q1 nor vanishing from view. ⚠ That row is a live note for HB-9: if the
-occupation close converts, it carries a THIRD owner-gated persisted field and Q1 widens
-again.
+⚠⚠ **THE BATTERY FOUND A DEFECT OF ITS OWN, AND IT IS THE SAME DEFECT F2 NAMED, ONE DOOR
+OVER.** The round-three record said a row with a cell removed reds `malformed_row_scan`. Re-run
+at round four against the COVERAGE table, it did not: `coverage()` indexed `c[3]` on a
+three-cell row and the instrument died of an `IndexError` **before the malformed-row scan
+ever ran**, printing nothing at all. **An instrument that aborts on the edit it exists to
+catch has a silence a reader will read as "nothing found".** Three cures landed together:
+short rows are PADDED so every parser is total (the raw row is what the scan measures, so
+the finding is preserved exactly); the two parser `raise`s that could kill a census over one
+bad cell now record a per-quantity note instead; and a BACKSTOP wraps the whole derivation so
+that whatever a future edit does, the instrument's last act is to PRINT a named PARSE ABORT
+rather than a traceback. ⭐ **The generalizable rule, and it is the round-four lesson:
+EVERY guard must be run against the edit it was built to catch, not merely against a
+plausible-looking mutation** — the round-three claim was true of the table it was tried on
+and false of the next one.
+
+**WHAT THE SWEEP CAUGHT, recorded because an instrument's first catch is its warrant.**
+At round three, beyond the findings it was chartered to close, it found TWO stale
+denominators nobody had reported: the judgment-block census read twenty-five while §6 held
+more, and a third `<record>.habitEpisode` spelling — `occupationRecord.habitEpisode` —
+living in HB-9's occupation-close bullet. That third spelling is now a derived quantity
+(`foreign_fields_deferred`) **and Q1 is required to name it**: the deferred field can
+neither inflate Q1 nor vanish from it, and a FOURTH spelling appearing anywhere reds until
+somebody dispositions it. ⭐ **AT ROUND FOUR THE STRUCK-PREMISE FAMILY MADE ITS OWN FIRST
+CATCH, WHICH IS THE ONE THAT MATTERS MOST:** J-HB-5 — a RULING, not a count — had been
+resting on *"an episode key both sides compute independently"* since the compile, three
+rounds after §0.3 refuted it and J-HB-13 replaced it. **A stale ruling reads as authority
+in a way a stale number never does**, and nothing in this volume could see it until the
+scan existed.

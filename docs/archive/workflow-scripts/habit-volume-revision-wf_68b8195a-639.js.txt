@@ -1,0 +1,39 @@
+export const meta = {
+  name: 'habit-volume-revision',
+  description: 'Apply the chair rulings on the nine attestation findings to the habit volume, then re-attest fresh',
+  phases: [
+    { title: 'Revise', detail: 'nine findings closed under chair rulings J-HB-23/24/25 + the five mechanical repairs' },
+    { title: 'Attest 2', detail: 'fresh full-read re-attestation; every count re-executed after every edit' },
+  ],
+}
+
+const VOL = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c44e5d99-2ba5-49d5-a554-40b68534c8eb/scratchpad/habit-arch'
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const GROUND = `VERIFY-FIRST PREAMBLE: brief from the session chair. The habit-conditioning volume lives under ${VOL} (the main volume markdown, ~3,710 lines, plus the amendment file — find both by ls; the volume md5 at attestation was e52354286c44858058fe49d45e89143a — if it differs, STOP and report). The repo at ${TREE} is READ-ONLY for you: never edit, commit, or run tests there; a build lane owns it and is mid-edit on the FP volume docs — re-measure any src claim by SYMBOL at current HEAD and record the sha. Byte-scan (python3, zero NULs) every file you edit. Counts are EXECUTED SELF-ASSERTIONS: after EVERY edit that touches a table, re-run the parse and restate the number — the top finding you are fixing exists because a row was added and a count was not re-run.`
+
+phase('Revise')
+const revise = await agent(GROUND + `
+
+YOU ARE THE REVISER. Close the NINE attestation findings under these CHAIR RULINGS (each vetoable, cite by id in the volume where applied):
+
+J-HB-23 (H1, the fourteen-row denominator): the named-domain checklist count is FOURTEEN data rows (re-execute the parse and quote it). Fix EVERY thirteen spelling the finding lists (lines near 2148, 2152, 2158, 2160, 2748, 2752, 3695 — re-locate by content, never by stale line number). The decomposition sentence becomes: FAITH splits THREE (observance, imposition, patrons+clergy) and the sum is re-stated to equal 14. The habitDomainChecklist.walker charter is re-spelled as THREE assertions: (a) row count == 14; (b) the label set == the CLOSED EXPLICIT ENUMERATION of EIGHT labels, each named in full in the charter (TRADE, FAITH, STRATEGY, ROUTE CREATION, ROUTE CHOICE, INTER-SETTLEMENT DYNAMICS, GOALS, GOAL ORIENTATION) — an explicit set, never a distinct-string count; (c) the recorded mapping from the owner's SEVEN spoken domains to those eight labels (GOALS and GOAL ORIENTATION both map to the owner's phrase "goals, and goal orientation") — so a dropped row, a dropped label, and a dropped owner-domain each red a different assertion.
+
+J-HB-24 (H2, the gated sue join): the sue_for_peace close-2 join becomes LEARN-WHEN-KEYED, honestly conditional. Quote the live gate VERBATIM in the volume (settlementStrategy.js near :886-887 warRulingsLit = warLayerEnabled === true && warTerminationEnabled === true, and near :940-943 bilateralOffer = warRulingsLit && !!termination && front matches target && peaceFrontSinceTick != null — re-measure at HEAD by symbol, quote what you measure). The episode is minted IFF bilateralOffer (the key fields exist exactly then); a sue emitted on any other path mints NO episode and receives no credit — land that as an EXPLICIT deferral row with closeOwed written (a peace sued without a bilateral front is closeless today; close owed when a general offer record exists). Correct the two coverage statements (the coverage table row and the HB-5 charter) to carry the conditionality, and re-state the covered-moves sentence (deploy unconditionally; sue_for_peace conditionally, gate named). The Q1 two-foreign-fields widening note stands as declared.
+
+J-HB-25 (M3, the dyadic set): DERIVE-DONT-ENUMERATE. The prose at both sites (near 1993-1994 and the HB-7 charter near 2374) must not carry a hand-listed set: re-spell both to define the set AS the registry derivation (rows with arity dyadic and anticipationWave null), and where a worked example is wanted, use the MEASURED set {2, 3, 6} with a note that the registry, not this sentence, is authoritative. Site 12 references in that clause are struck (it is monadic and DEFER).
+
+M4 (the Bands anchor): normalize HB-6's Bands line to START-OF-LINE spelling (move the star glyph after the bold token or drop it) so the anchored scan matches 10/10; keep the anchored regex as the instrument (unanchored invites prose false-positives); add one sentence naming the anchored-extractor class and that the glyph-prefixed spelling was the hole.
+
+The five LOW repairs: (1) the 8.5 header becomes FIFTEEN paths (the fifteenth is the volume's own addition — the table is right, the header was stale); (2) the residual "Bands/section-7 reconciliation walker" spelling near 3078 becomes the 8.2 spelling; (3) site 10's row gains its declared arity field: DYADIC (per the P9 answer; advanceIntervention holds both actor ids); (4) the randomized-sweep table: STRIKE the non-reproducing violation-rate figure 0.1756 and replace with the two independently measured agreeing figures (0.2643 / 0.2645), with one sentence that the rate is sampling-distribution-dependent while the analytic bound and the worst/best figures reproduce exactly — a table headed EXECUTED carries only figures that reproduce; (5) section 8.1 row 13 gains the IDENTIFIER-VS-AGE distinction, written down: HB episode keys stamp ticks as opaque IDENTIFIERS (episode identity components, never converted, never aged, never compared to a clock), which is why "stamps no ticks" as an AGE claim holds while the keys visibly carry tick spellings; the chartered import-scan walker is the right instrument for the age half and cannot and need not police identifier stamps.
+
+METHOD: edit the volume in place. After every table edit, re-execute the relevant parse (python3) and quote the count in your report. Byte-scan at the end (zero NULs, md5 stated). RETURN: per-finding disposition with the executed re-count where applicable, the volume's new line count and md5.`, { label: 'revise:9-findings', phase: 'Revise', model: 'opus' })
+
+phase('Attest 2')
+const attest2 = await agent(GROUND + `
+
+YOU ARE THE SECOND ATTESTATION, fresh eyes, after a revision round. The reviser reported: ` + JSON.stringify(revise).slice(0, 14000) + `
+
+Read the revised volume COMPLETELY, fresh. (1) Verify each of the nine findings is CLOSED as ruled (J-HB-23 three-assertion walker charter with the explicit eight-label enumeration; J-HB-24 LEARN-WHEN-KEYED with the gate quoted and the non-bilateral deferral row present; J-HB-25 derive-dont-enumerate at both sites; the Bands 10/10 anchored scan — EXECUTE it; the five lows). (2) THE COUNT SWEEP: re-execute EVERY numeric self-assertion in the volume (row counts, path counts, wave counts, Bands-line counts, the checklist sum) — the last two rounds each introduced a count defect while fixing another; hunt the same class once more. (3) Re-verify the two load-bearing src claims at current HEAD by symbol (the bilateralOffer gate; the emitter ternaries) and note the sha. (4) Hunt NEW defects the revision introduced — read the edited regions with adversarial eyes. RETURN structured JSON: verdict COHESIVE or NEEDS-REVISION, findings[] (empty if cohesive), countSweep (every count checked, with result), notes.`, { label: 'attest:round2', phase: 'Attest 2', model: 'opus', effort: 'xhigh', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['COHESIVE', 'NEEDS-REVISION'] }, findings: { type: 'array', items: { type: 'string' } }, countSweep: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+return { revise, attest2 }

@@ -309,6 +309,25 @@ COUNT EVENTS:
     rejoin        free_unit -> block       (a free unit rejoins an army:
                                             1.7.3's first fate, through
                                             the shared join preference)
+    merge         free_unit -> free_unit'  (two free units combine into
+                                            one: the SIBLING-UNIT arm of
+                                            directive (i)'s "rejoin
+                                            same-origin units", which had
+                                            no event and therefore no
+                                            road before this amendment
+                                            (1.7.3). Conserved, credited
+                                            to the surviving unit key,
+                                            scored by the SAME
+                                            joinPreference.js -- one
+                                            scorer, now three consumers.
+                                            It is INERT to the pool-level
+                                            identity because both sides
+                                            are the free_unit pool, so
+                                            the walker's arm for it is a
+                                            KEY-level conservation check:
+                                            the surviving unit's
+                                            headcount equals the sum of
+                                            the two, per origin block)
     enlist        census -> block          (a free-lance-tagged resident
                                             takes service in the hiring
                                             settlement's OWN roster --
@@ -373,22 +392,89 @@ TAG EVENTS (no counts move):
     demobilize    (none) -> free_lance_tag (a resident becomes hireable:
                                             the pulse of 1.12.5)
     brigand       free_unit state change   (counts unchanged)
+    reclass       column class change      (a LIVE column's travelClass
+                                            moves within
+                                            MILITARY_COLUMN_CLASSES:
+                                            `veteran_return` ->
+                                            `shed_column` when the column
+                                            can no longer reach home
+                                            (1.12.2). COUNTS UNCHANGED,
+                                            but THE LEDGER KEY MIGRATES,
+                                            because the class is part of
+                                            the column key
+                                            (migration.js:553, verified),
+                                            and that migration is the
+                                            event's whole content. It is
+                                            named for exactly the reason
+                                            this list exists: an
+                                            unannounced delete-and-
+                                            recreate of a ledger row is
+                                            the count-dropping SHAPE the
+                                            walker was built to catch,
+                                            and `shed_column` had no
+                                            producer at all until this
+                                            event named one. The event
+                                            carries {fromClass, toClass,
+                                            fromKey, toKey} and its pin
+                                            is a before/after headcount
+                                            identity: same people, one
+                                            row, new key)
 
-WHY ONE `untag` AND NOT A FOURTH EVENT. A fourth member
+WHY ONE `untag` AND NOT A FOURTH TAG-RETIREMENT EVENT. A second
+retirement member
 (`absorb` plus, say, `retire_free_lance`) would have grown the closed
 list to name a branch that is the same branch twice. One kinded event
-keeps the list at three, is TOTAL over RESIDENCY_TAGS by construction
-(a new tag cannot be added without appearing in `untag`'s kind
-argument, and the walker asserts the kind set equals RESIDENCY_TAGS),
-and follows the volume's own instinct at 1.12.5, where an arm was
-DELETED rather than an event added. The cost is the loss of the word
-`absorb` as an event name; it survives as EMBATTLED_RESOLUTIONS'
-`absorption` (7.A.7), which is a different thing and no longer collides.
+keeps the retirement road single, is TOTAL over RESIDENCY_TAGS by
+construction (a new tag cannot be added without appearing in `untag`'s
+kind argument, and the walker asserts the kind set equals
+RESIDENCY_TAGS), and follows the volume's own instinct at 1.12.5, where
+an arm was DELETED rather than an event added. The cost is the loss of
+the word `absorb` as an event name; it survives as
+EMBATTLED_RESOLUTIONS' `absorption` (7.A.7), which is a different thing
+and no longer collides.
 
 THE WALKER LAW: for a seeded world, at every tick,
 
     sum(census) + sum(blocks) + sum(columns) + sum(free_units)
       = initial total + births - fell - mortality - dm_removed
+
+AND `births` IS A NAMED EVENT, NOT A BARE TERM -- THE SOURCE SIDE,
+CLOSED. Until this amendment the word `births` occurred exactly ONCE in
+this whole volume: in the line above. SINKS was a declared, frozen,
+three-member export with per-event signatures, while the identity's
+SOLE SOURCE was an unsignatured term with no tag ruling, no wave, and
+no walker coverage -- against this section's own standard ("no count is
+created or destroyed except by a named event", "an unnamed branch is
+how a defect hides"). A mutant that inflates the birth read was
+invisible to WC-6 by construction, because the walker had nothing to
+compare it against. The source side is closed the same way the sink
+side is:
+
+    SOURCES = ['birth']       (frozen, totality-exported beside SINKS
+                               in the SAME object the movers and the
+                               walker both read, 7.A.4)
+
+    birth         SOURCE -> census        (the demographics birth
+                                           machinery, read as an event
+                                           rather than as a subtotal.
+                                           EVENT_SIGNATURES carries it
+                                           with a source-side signature
+                                           exactly as `mortality` carries
+                                           a sink-side one)
+
+    NO TAG ARM, AND THIS MUST BE SAID. A newborn takes NO cohort tag and
+    NO free_lance overlay. It is stated rather than left implicit
+    because it is precisely what keeps LAW 1's inequality honest as a
+    population grows: births enlarge census and never the tag rows, so
+    the cohort partition's slack widens with the town and a cohort can
+    never chase its host's growth. A birth that credited its parents'
+    cohort would make every long-lived diaspora row grow without a
+    single arrival, and directive (n)'s "first-generation memory dies
+    with the first generation" would be false by arithmetic.
+
+    WC-6 adds the drop-one-count mutant on THIS branch to its
+    red-capability list beside the sink branches: a walker that can see
+    a stolen death and not an invented birth is a guard with one eye.
 
 holds EXACTLY (integer arithmetic, largest-remainder rounding at every
 apportionment, the deploymentReturn.js:270-346 precedent). A branch
@@ -445,7 +531,13 @@ CONTRIBUTION_DELIVERY_GRADES (3, at WC-1),
 CONTRIBUTION_CLOSE_GRADES (4, at WC-9 -- per HABIT's graded-close
 contract), CALL_IN_ANSWERS (4), CALL_IN_OUTCOMES (3), and the people
 ledger's own POOLS (4) / RESIDENCY_TAGS (2) / COUNT_EVENTS /
-TAG_EVENTS. Two vocabularies COMPOSE rather than multiplying:
+TAG_EVENTS / SINKS (3) / SOURCES (1) / TAG_SELECTIONS (3). The last
+two were the compliance line's own holes until round 3: the tag arm's
+SELECTION was a typed bucket named three times in prose and minted
+nowhere (0.2), and `births` was the identity's only source term and not
+an event at all (0.2) -- both now closed, exported, and
+throw-on-unknown like every sibling. Two vocabularies COMPOSE rather
+than multiplying:
 CALL_IN_CLOSE_GRADES is the (outcome, honour) PAIR, never a flattened
 cross-product ladder (1.9.3). The
 realized contribution share is a continuous internal quantity that NO
@@ -571,8 +663,25 @@ advanceObligationDecay stays the one unconditional decay owner (every
 mutation mover passes decayPerTick: 0); treatyEnforcement.treatyLedgerOf
 stays the one treaty entry point. COMPLIANCE: this volume adds
 consumers, never second mouths; each new writer it mints (the
-contribution ledger, the cohort ledger, the free-unit ledger) is itself
-declared single-writer with a source-scan fence in its landing wave.
+contribution ledger, the cohort ledger, the free-unit ledger, and the
+service-bond ledger of 1.6.1) is itself declared single-writer with a
+source-scan fence in its landing wave.
+
+AND ONE MORE ONE-MOUTH RULING, MADE HERE RATHER THAN LEFT TO THE
+BUILDER (it was an open hole until round 3). warHomeCosts.js:443-450 is
+today the SOLE writer of deployment.leviedPopulationBySource, and 1.4.1
+makes blocks[] reconcile against that map. The question the
+reconciliation pin forced into the open is whether
+contributionDispatch.js (1.1.5) ALSO writes it when the elected road
+lands people in a foreign roster. THE RULING: IT DOES NOT.
+warHomeCosts.js keeps sole authorship of the levy map; the elected road
+writes blocks[] and nothing else. Two consequences follow and both are
+stated so no wave can drift: the reconciliation is DIRECTIONAL rather
+than an equality (1.4.1, and WC-6's pin restated there), and no
+source-scan fence has to be widened to admit a second mouth on a
+war-layer field. If a later wave finds it genuinely needs the map
+widened, that is a declared second writer with its own fence
+amendment -- not a quiet addition inside a WC commit.
 
 ---
 
@@ -819,7 +928,49 @@ Credit therefore has EXITS from birth (K8): obligations decay; the
 forgiveness road, the debt-to-vassalage conversion, and jubilee are
 section 1.10.
 
-### 1.1.4 What credit feeds
+### 1.1.4 What credit feeds -- and WHICH "balance" every consumer reads
+
+THE WORD "BALANCE" HAD THREE HOMES WITH THREE LIFETIMES, AND THEY
+DISAGREE. Credit lives in three places by design: (a) the working
+ledger spatialLedgers.warContributions, which 1.1.3 DROPS at war close;
+(b) a `war_contribution` obligation, which DECAYS through
+advanceObligationDecay (obligationDecay.js:12, verified at HEAD) and is
+what 1.10's forgiveness, jubilee and debt-to-vassalage extinguish; and
+(c) an edge-archive row capped at RELATIONSHIP_CONTRIBUTION_CLOSE_CAP =
+24, which never decays at all. Four consumers were written against "the
+balance" without saying which: this section's call-in rights, 1.9.2's
+answer fork ("what the asker is OWED"), WC-5's breach pin ("live credit
++ refused call"), and 7.B's BREACH_CREDIT_FLOOR 'modest', which bands
+an unnamed quantity. For any pair AFTER a war ends the three sources
+give three different answers, and 2.2 gave contributionReads.js a
+single `creditBandFor` with no stated source. That is the same
+one-word-three-quantities shape 1.7.1 carried, and it is ruled the same
+way -- by naming one.
+
+    THE OBLIGATION IS THE BALANCE. `creditBandFor(fromId, toId)` reads
+    the `war_contribution` obligation and nothing else. It is the only
+    home that SURVIVES the war (the working ledger drops), it has a
+    SINGLE decay owner already (advanceObligationDecay, the standing
+    one-mouth law), and it is what K8's exits actually act on -- so
+    forgiving a debt and reading a balance cannot disagree by
+    construction.
+    THE WORKING LEDGER IS THE IN-WAR DETAIL: per-anchor receipts, read
+    for arrival beats, delivery grading, and the shortfall story. A
+    consumer that wants "what has arrived in THIS war" reads it by
+    name, never through creditBandFor.
+    THE ARCHIVE IS THE MEMORY: undecaying, bounded, what the Herald and
+    the doctrine page read years later. It is never a balance and no
+    fork reads it as one.
+
+    ONE FUNCTION, AND THE FENCE THAT KEEPS IT ONE: contributionReads.js
+    exports exactly one balance read; a WC-5 source scan asserts that
+    the answer fork, the breach grade, and the K5 terms weight all call
+    THAT function and never reach into warContributions or the archive
+    for a balance. WC-5 GAINS THE PIN THAT PROVES THEY ARE ONE
+    QUANTITY: forgiving the obligation moves the call-in ANSWER FORK
+    and the K5 TERMS WEIGHT in the SAME TICK -- the
+    forgiveness-invisible-to-the-fork mutant reds, and that mutant is
+    exactly what a second reading of "the balance" would have shipped.
 
 - Treaty-compliance grading: an unpaid call-in against live credit
   reads as breach-grade through the existing treatyBreach machinery
@@ -1052,9 +1203,47 @@ TWO altitudes from ONE arithmetic: the per-roster integral above
 (origin headcount / army headcount, the quantity blocks[].shareIntegral
 carries and the one the blend and drift laws of 1.6 read) and the
 per-EPISODE integral defined above (origin headcount / side headcount),
-which is what warStanceOf reads. Both are maintained as event-updated
-accumulators (updated at muster, dispatch, arrival, loss, fork,
-fission -- the named people-ledger events -- never per tick, per K7),
+which is what warStanceOf reads.
+
+THE UPDATE SET IS DERIVED, NOT LISTED IN PROSE. An earlier drafting
+said the accumulators are "updated at muster, dispatch, arrival, loss,
+fork, fission -- the named people-ledger events", and that list was
+wrong three separate ways. TWO of its six were not event names at all
+(`loss` and `fork`; the events are `fell` and the four
+BLOCK_FORK_OUTCOMES). ONE of them moves no roster: `dispatch` is
+census -> column, so counting it would make the integral count
+COMMITTED-BUT-UNARRIVED people -- letting an interdicted column BUY
+STANCE, in flat contradiction of 1.1.2's arrival law ("credit is
+written at the moment of EFFECT, never at pledge"). And FOUR events
+that DO change a roster's headcount were absent outright: `enlist`
+(census -> block), `rejoin` (free_unit -> block), `orphan`
+(block -> free_unit), and `depart` (block -> column). Since the stance
+ladder, the blend and drift laws (1.6), and the peace-table terms
+weight all read this ONE quantity, a missed event is not a rounding
+error -- it is a silently wrong rung. The rule is therefore STRUCTURAL,
+and it reads off the same frozen object everything else here reads:
+
+    THE INTEGRALS UPDATE ON EVERY COUNT_EVENT WHOSE EVENT_SIGNATURE
+    NAMES THE `block` POOL ON EITHER SIDE -- debit or credit -- and on
+    no others. The set is DERIVED from EVENT_SIGNATURES (7.A.4) at
+    module load, never enumerated by hand, so a later wave cannot mint
+    a block-moving event that skips the integral, and a non-block event
+    (`dispatch`, `shed`, `merge`, `mortality`, every tag event) cannot
+    creep in.
+
+    Today that derivation yields exactly: arrival, defect, depart,
+    enlist, fell (its block arm), fission, muster, orphan, rejoin --
+    and the derivation, not this sentence, is the authority.
+
+WC-7 CARRIES ITS TOTALITY PIN: the DERIVED set equals the movers'
+ACTUAL call set, asserted with toEqual against a named list rather than
+as a subset check, and the planted
+block-moving-event-whose-mover-skips-the-accumulator mutant reds it.
+That pin is what makes the structural rule a fence rather than a
+sentence.
+
+Both altitudes are maintained as event-updated accumulators over that
+derived set (never per tick, per K7),
 and the episode accumulator is the roster accumulators summed over the
 side's rosters at each event, never a second independently-advanced
 quantity that could disagree. A reinforcer
@@ -1187,6 +1376,45 @@ and the three-word vocabulary is:
               chosen deliberately) and booked as shortfallBand on the
               contribution record (the grievance fact)
 
+THE SHORTFALL IS IMMEDIATE; THE THIEF'S NAME TRAVELS. These are TWO
+facts and an earlier drafting published them as one. `wc_relay_skim`
+(7.C, WC-3) was authored as "[stager] took a cut on the [sender] road",
+and this section booked the diversion as a grievance fact AGAINST THE
+NAMED STAGER the moment it happened -- no arrival record, no hop-wear,
+no fog. That is an omniscient covert attribution in a volume whose own
+epistemics make the enemy's read of army COMPOSITION strictly
+belief-lagged at news speed with its own beat (1.2.3, pinned as WC-7's
+hardest negative) and whose 4.3 fails covert facts closed UPSTREAM. It
+is also more than the owner asked for: directive R4 calls the skim
+"visible as ledger shortfall", which is a statement about the
+SHORTFALL, not about the thief's identity. A lawless entrepot diverting
+a consignment three hops from the sender is precisely the fact that
+should have to travel.
+
+    THE SHORTFALL -- IMMEDIATE, ALWAYS. The sender counts what arrived
+    against what it dispatched; the arithmetic is its own and needs no
+    courier. It books shortfallBand at the arrival edge with the typed
+    reason `unknown_hands` -- a MEMBER of the shortfall reason set, so
+    the toEqual reason pin covers the un-attributed case as a first-
+    class outcome rather than as an absence.
+    THE ATTRIBUTION -- LAGGED, ALWAYS. The stager's NAME, and with it
+    the grievance write and the reputation write, fire only when a
+    composition-style rumor naming the diversion ARRIVES at the sender,
+    reusing WC-7's belief-lag machinery verbatim. No second latency law
+    is minted; the skim rides the one this volume already built. Under
+    infoMode omniscient the two collapse into one tick, exactly as the
+    composition read does.
+    THE BEAT SPLITS WITH THEM (7.C): the shortfall beat is the sender's
+    book coming up short with nobody named; the naming is the second,
+    later beat. A shortfall that never earns its rumor stays a hole in
+    the ledger forever, which is the honest outcome and a good one.
+
+WC-3 PINS BOTH ARMS, as WC-7 already does for composition: a lagged
+fixture (skim at tick T, rumor arrival at T+k) asserts the shortfall at
+T and NO grievance/reputation write before T+k, and the
+omniscient-attribution mutant -- writing the stager's name at T -- reds
+it; the omniscient-mode twin pins the collapse.
+
 If the chair prefers a STAGER-ONLY read after all, that is a deliberate
 NARROWING of an owner clause and is ruled at CR-WC-8(iii), never by
 silence -- the same standard 1.3.2 applies to the comradeship term one
@@ -1288,17 +1516,67 @@ volume's own arrival road (1.1.5) wherever it does not:
       shareIntegral,     // event-updated accumulator (1.2.2)
       blend,             // banded, event-updated (1.6)
       driftBand,         // banded, hysteresis-expressed (1.6.3)
-      cohesionWord       // law-band derived (1.5.2)
+      cohesionWord,      // law-band derived (1.5.2)
+      drawnCohorts       // the ORIGIN COMPOSITION this block's muster
+                         // debited from the sender's tag rows, banked
+                         // at the debit and credited back by
+                         // `arrive_home` (0.2's tag-arm rule); bounded,
+                         // drop-when-empty, reconstruction-attributed
     } ]
 
 drop-when-absent (the conditional-stamp idiom: a world without
-composite armies is byte-identical). leviedPopulationBySource remains
-the conservation map and blocks[] must always reconcile with it exactly
-(a reconciliation pin, WC-6); the two are one quantity in two
-projections, and the roster never becomes a second source of truth for
-headcount. normalizeDeployments gains a fail-closed blocks[] arm IN THE
+composite armies is byte-identical).
+
+THE SELF-ORIGIN BLOCK IS MANDATORY, AND THE RECONCILIATION PIN IS
+DIRECTIONAL. WC-6's pin was written as "sum(blocks[].headcount) ===
+deployedPopulation AND per-origin equals leviedPopulationBySource,
+every tick, every seeded war", and MEASURED AT HEAD it was unpassable
+against this volume's own design on BOTH clauses.
+
+1. THE DEPLOYER'S OWN CONSCRIPTS HAD NO BLOCK. deploymentReturn.js:273
+   states that deployedPopulation is "the overlord's OWN conscripts
+   PLUS every vassal's levied", and :302 computes
+   `conscripted = Math.max(0, deployedPopulation - leviedTotal)`
+   (both verified). The deployer's own share carries NO
+   leviedPopulationBySource row by construction -- it is the
+   REMAINDER -- so `sum(blocks) === deployedPopulation` could only hold
+   if a self-origin block existed, and 1.4.1, 7.A.4 and WC-6's LANDS
+   were all silent on whether one did. THE RULE: EVERY deployed army
+   carries a MANDATORY block whose originId is the deploying
+   settlement's own id, holding exactly the `conscripted` remainder,
+   minted at seedDeploymentState beside the first levied block and
+   maintained by the same arithmetic. It is an ordinary block in every
+   other respect -- it drifts, it blends, it forks, it comes home --
+   and it is what makes the total identity true rather than
+   approximately true.
+2. PER-ORIGIN EQUALITY IS FALSE BY DESIGN, THE FIRST TICK A WC
+   DISPATCH LANDS. This section's own next paragraph says blocks[] "is
+   filled by THIS volume's own arrival road (1.1.5) wherever [the map]
+   does not [have rows]", and 0.3 now rules that contributionDispatch.js
+   does NOT write leviedPopulationBySource -- so an elected
+   contribution creates a block with no matching map row, on purpose.
+   An equality pin would red on the volume's central mechanism.
+
+    THE PIN, RESTATED (WC-6): (i) sum(blocks[].headcount) ===
+    deployedPopulation -- TOTAL, unconditional, every tick, every
+    seeded war, and now satisfiable because the self-origin block
+    exists; PLUS (ii) per-origin, blocks[] >= leviedPopulationBySource
+    for every origin, WITH EXACT EQUALITY on every row THE SWEEP
+    WROTE -- a subset law, conditional, with the levied rows pinned
+    exactly and the elected rows pinned as the declared excess. The
+    missing-self-block mutant reds (i); the elected-row-silently-
+    written-to-the-map mutant reds (ii)'s equality arm; and the
+    old equality-everywhere form of this pin is recorded as
+    UNPASSABLE so no later wave restores it as a tightening.
+
+leviedPopulationBySource remains the LEVY map and its sole writer stays
+warHomeCosts.js (0.3's ruling); blocks[] is the roster. The roster
+never becomes a second source of truth for the LEVIED headcount, and
+the levy map never becomes a source of truth for the ELECTED one.
+normalizeDeployments gains a fail-closed blocks[] arm IN THE
 SAME COMMIT (census A hazard 3: an unvalidated persisted array is a
-save-file smuggling surface).
+save-file smuggling surface), and that arm covers drawnCohorts by the
+same fail-closed rule.
 
 armyTransit projection: the transit record gains the same conditional
 blocks projection under the WY seam pattern (a new conditional field on
@@ -1425,6 +1703,61 @@ closes (the attrition application, an existing event edge).
   row kind). No new relationship axis is minted (census C C6 resolved:
   ride the seven axes + an archive row; diaspora bonds are DERIVED, not
   edge state -- 1.13.3).
+
+THE COMRADESHIP INTEGRAL HAS A HOME, AND UNTIL THIS AMENDMENT IT DID
+NOT. The two durable homes above are both correct and both INSUFFICIENT
+for what four consumers of this volume actually do. The relationship
+AXES are a blend of everything, decaying on the relationship plane's
+own clock; the `shared_service` edge-archive row is written exactly
+ONCE, AT WAR CLOSE. But 1.7.2 needs "the (h) integrals ARE the affinity
+matrix" DURING a war (fission cuts the weakest bond); 1.3.2's per-hop
+relay term reads the bond DURING a war; 1.9.2's answer fork reads it
+DURING a war; and 1.6.4 invokes `bondOf(observerId, subjectId)` -- "the
+SAME comradeship integral 1.6.1 banks" -- while EXPLICITLY REFUSING the
+axes ("the term reads the BANKED integral, not the current
+relationship"). CR-WC-9's field batch listed deployment.blocks[], the
+transit projection, the shipment relay buckets, the column tags and
+classes, three spatialLedgers and one edge archive, and NO home for a
+per-SETTLEMENT-PAIR integral -- which blocks[], being per BLOCK,
+structurally cannot carry. `bondOf` was a symbol this volume called and
+never sited. The mint, minimal and shaped exactly like the volume's
+three siblings:
+
+    spatialLedgers.serviceBonds = {
+      '<aId>><bId>': {          // the reasonPairKey spelling, the
+                                // LOWER id first: the bond is symmetric
+                                // (1.6.4), so one row per unordered
+                                // pair and never two that could drift
+        bondBand,               // banded, event-updated
+        rawBond,                // the continuous accumulator; NO
+                                // surface renders it (5.4)
+        firstServiceTick,
+        lastServiceTick
+      }
+    }
+
+    ONE WRITER: serviceIntegrals.js, source-scan fenced like the other
+    three. DROP-WHEN-EMPTY, bounded by the pair set, event-updated at
+    engagement closes only (K7's "event-driven updates +
+    drop-when-neutral mandatory (never per-tick integrals)" -- this
+    shape is what that cost clause prescribes, not an exception to it).
+    `bondOf` reads THIS ledger and nothing else.
+    THE RELATIONSHIP WRITE IS UNCHANGED. applyRelationshipPatch stays
+    the relationship plane's one mouth and still carries the warmth to
+    the axes at the fold points, which is where directive (h)'s "written
+    into the EXISTING relationship machinery" lands and why consumers 1
+    and 2 (caravan density, alliance odds) remain automatic. This ledger
+    is the ACCUMULATOR the patch is computed FROM, not a second
+    relationship surface, and nothing reads it as one.
+    AND THE ARCHIVE ROW IS THE SUMMARY, NOT THE STORAGE. 1.1.3's
+    `shared_service` row at war close is the war's banked bond written
+    down for the Herald and the doctrine page to read years later; it is
+    not where the mid-war consumers read, and this section no longer
+    implies that it is.
+    LANDING: WC-9, in the same commit as the integrals -- with its
+    certification row (subsystemRowsWar.js precedent) and its
+    spatialUsage.js manifest row, per the FINAL FOLD LAW. CR-WC-9's
+    batch grows by this ledger, making it FOUR new spatialLedgers.
 
 THE FOUR CONSUMERS, NAMED WITH THEIR READ SITES. Directive (h) does
 not merely say comradeship is written to the relationship plane; it
@@ -1554,29 +1887,70 @@ existing doctrine page is where it shows.
 
 ## 1.7 Fission, free units, and the map's carrying capacity (i, l)
 
-### 1.7.1 The supply-derived cap
+### 1.7.1 TWO caps, TWO names: the army envelope and the network capacity
 
-An army's MAXIMUM MASS is supply-derived physics, no arbitrary
-constant: sustainable mass = carried supply + relay throughput, over
-burn rate (mass-scaled, seasonal-severity-scaled). Lawful networks
-sustain larger hosts; chaotic skim starves the center. The MAP CAP is
-CARRYING CAPACITY: the owner's two framings (tied to supplies; scaled
-by settlements x tier) are ONE LAW -- sustainable total unit mass is
-what the settlement NETWORK can feed (the network read: reachable
-settlements' stores and tier, distance-attenuated per the digest;
-cloud-world safe, CR-WC-5). Excess upkeep shortens envelopes
-everywhere, forcing wick-aparts and absorptions: clutter self-corrects
-because everything on the map must eat. A renderer sanity ceiling MAY
-exist as a never-hit guard rail (authored, documented as a guard, with
-a pin proving it is not load-bearing at soak scales).
+THE WORD "THE CAP" NAMED TWO DIFFERENT QUANTITIES IN ONE PARAGRAPH, AND
+THE FISSION TRIGGER READ AN UNSPECIFIED ONE. This subsection was titled
+"the supply-derived cap" and defined, in a single breath, an ARMY's
+maximum sustainable mass ("carried supply + relay throughput, over burn
+rate") and the MAP's carrying capacity ("sustainable total unit mass is
+what the settlement NETWORK can feed"). WC-12 lands the second ("excess
+mass shortens envelopes network-wide"); 1.7.2 said only "when the cap
+forces break-up"; WC-11's tuning row reads `FISSION_SLACK 0.10 --
+over-cap grace before the cut`. The two quantities have DIFFERENT UNITS
+and DIFFERENT SCOPES, and an implementer could not build the fission
+trigger without asking which one the 0.10 is slack against. They are
+named separately here and the names are used everywhere after:
+
+    ENDURANCE_ENVELOPE (per ARMY or free unit). (carried supply + relay
+    throughput) / burn rate, mass-scaled and seasonal-severity-scaled
+    -- the same quantity 1.15 already calls by this name, and its
+    arithmetic lives there. Lawful networks sustain larger hosts;
+    chaotic skim starves the center. It is a DURATION.
+
+    NETWORK_CARRYING_CAPACITY (world-wide). What the settlement NETWORK
+    can feed: the owner's two framings (tied to supplies; scaled by
+    settlements x tier) as ONE LAW -- reachable settlements' stores and
+    tier, distance-attenuated per the digest, cloud-world safe
+    (CR-WC-5). It is a MASS.
+
+    FISSION TRIGGERS ON THE ARMY ENVELOPE. FISSION_SLACK is grace
+    against ENDURANCE_ENVELOPE and nothing else; an army breaks up
+    because IT cannot be fed, on a duration its own strategist can see.
+
+    THE NETWORK CAP ENTERS ONLY AS A TERM INSIDE RELAY THROUGHPUT. It
+    never cuts an army directly. When total mass on the map presses
+    against NETWORK_CARRYING_CAPACITY, every army's relay throughput
+    falls, and therefore every ENDURANCE_ENVELOPE shortens -- which is
+    the owner's own sentence in (l), "excess upkeep shortens envelopes
+    everywhere, forcing wick-aparts/absorptions", expressed as one
+    causal path rather than two competing triggers. Clutter
+    self-corrects because everything on the map must eat, and it
+    corrects through the SAME arithmetic every other starvation uses.
+    ONE PIN CARRIES THE COMPOSITION (WC-12): raising world mass with an
+    army's own supply held constant SHORTENS that army's envelope --
+    proving the network cap reached it through throughput -- and the
+    network-cap-cuts-armies-directly mutant reds, because under it the
+    envelope does not move at all and the army fissions anyway.
+
+A renderer sanity ceiling MAY exist as a never-hit guard rail
+(authored, documented as a guard, with a pin proving it is not
+load-bearing at soak scales); it is a THIRD thing, is not either cap,
+and no mechanism reads it.
 
 ### 1.7.2 Fission cuts along the comradeship graph
 
-When the cap forces break-up, fission cuts the WEAKEST comradeship
+When the ENDURANCE_ENVELOPE forces break-up (1.7.1: the ARMY quantity,
+past FISSION_SLACK -- never the network capacity, which reaches this
+decision only by having shortened the envelope), fission cuts the
+WEAKEST comradeship
 bonds first; origin blocks stay whole (a block never splits mid-block
 except by the chaotic-cohesion fragmentation of 1.5.2). The (h)
-integrals ARE the affinity matrix; the SAME mechanism reuses at
-war-end dissolution. Fission products become FREE UNITS:
+integrals ARE the affinity matrix -- read through `bondOf` off
+spatialLedgers.serviceBonds, which 1.6.1 now sites (before round 3 this
+sentence named a matrix with no storage anywhere in the volume); the
+SAME mechanism reuses at war-end dissolution. Fission products become
+FREE UNITS:
 
     spatialLedgers.freeUnits = {
       '<unitKey>': {                // unit.<rootOriginId>.<fissionTick>
@@ -1602,9 +1976,45 @@ SLIDING STATE-ALIGNMENT PREFERENCE -- the join weight blends
 home-alignment with drifted-self-alignment WEIGHTED BY DRIFT DEPTH
 (loyalty vs affinity as a continuous slider, banded at the read). THE
 READ IS joinPreference.js, minted at WC-8 for the block forks (1.5.2)
-and consumed here UNCHANGED -- one scorer, two consumers -- and a
-successful rejoin is the named `rejoin` event (free_unit -> block). An
-unsupplied unit forages; a failed forage escalates: forage -> plunder
+and consumed here UNCHANGED -- one scorer, now three consumers -- and a
+successful rejoin into an ARMY is the named `rejoin` event
+(free_unit -> block).
+
+AND FREE UNITS MAY MERGE WITH EACH OTHER -- THE DROPPED OWNER CLAUSE,
+RESTORED. Directive (i) reads, verbatim: "then rejoin same-origin units
+(general preference) or allies with sliding state-alignment
+preference", in a sentence whose immediately preceding clause is
+"broken armies fission into smaller UNITS" -- so "same-origin UNITS"
+reads most naturally as the sibling free units fission has just made.
+Until this amendment the volume's only reconsolidation event was
+`rejoin` (free_unit -> block, "a free unit rejoins an ARMY"), so two
+free units that met could not combine, and a free unit whose origin
+army had DISSOLVED -- war ended, or the home razed via `orphan` -- had
+no rejoin target at all and could only starve, turn brigand, or
+hop-and-shed. That collapsed the directive's stated GENERAL preference
+into an arm unreachable in exactly the scenarios clause (i) was written
+about ("operate INDEPENDENTLY indefinitely", "may not know the war
+ended"). THE REPAIR IS ONE EVENT, NOT A MECHANISM:
+
+    `merge` (free_unit -> free_unit', 0.2) joins two co-located or
+    one-hop units into the surviving unit key, blocks appended whole,
+    origin identity untouched on every block. It is SCORED BY THE SAME
+    joinPreference.js -- one scorer, now three consumers (block-fork
+    defect targets, army rejoin, and unit-to-unit merger), so the
+    estate still never grows a second join weight that could disagree.
+    THE SURVIVING KEY is the older unit's (lower fissionTick, ties by
+    codepoint on rootOriginId): deterministic under the seed, no draw.
+    CONSERVATION: inert to the pool-level identity, since both sides
+    are the free_unit pool; the walker's arm is a KEY-level check that
+    the survivor's per-origin headcounts equal the sum of the two.
+    WAVE: WC-11, beside the fission-graph pin, with a differentiated
+    fixture -- two units that SHOULD merge (same origin, adjacent) and
+    two that should not (deep opposing drift) -- and the
+    merge-deleted mutant reds by leaving a permanently
+    un-reconsolidatable unit on the map, which is the state the
+    directive's own words forbid.
+
+An unsupplied unit forages; a failed forage escalates: forage -> plunder
 -> BRIGANDAGE (1.8). Peace reaches free units at road speed
 (beliefStaleness): units fighting on after the peace are a structural
 possibility, and the eventual news arrival is a beat. The three fates
@@ -1875,16 +2285,62 @@ A unit or column too starved or far to reach home parks at the nearest
 NEUTRAL or ALLIED settlement with density capacity, shedding people
 town by town until dissolved. Military shed-columns and migrant
 populations are ONE OBJECT CLASS under the people ledger: the
-migration column ledger's travelClass discriminator widens --
+migration column ledger's travelClass discriminator widens.
 
-    DEMOGRAPHIC_COLUMN_CLASSES = ['refugee', 'voluntary']   (existing,
-                                                             untouched)
-    MILITARY_COLUMN_CLASSES    = ['veteran_return', 'shed_column']
-    COLUMN_CLASSES             = the frozen union, totality-exported
+THE CLASS VOCABULARY IS DECLARED IN EXACTLY ONE PLACE, AND IT IS 7.A.8.
+An earlier drafting declared MILITARY_COLUMN_CLASSES HERE at TWO
+members (`veteran_return`, `shed_column`) while 7.A.8 declares it at
+THREE and titles itself "THREE MEMBERS, NOT TWO", and 2.3's attachment
+table also says three: a round-1 residue the round-2 correction did not
+sweep. A closed vocabulary declared twice at two arities is the
+estate's own nine-times-declared intensity-ladder failure in miniature,
+and it was the declaration an implementer building the WC-13 half of
+the column story would have read FIRST. It is DELETED here rather than
+corrected here -- the volume's own first-match document-pin law
+(point-don't-restate, 5.7) applied to itself. SEE 7.A.8 for the three
+military members, the frozen union, the existing
+DEMOGRAPHIC_COLUMN_CLASSES, and the WC-0 landing; this section CONSUMES
+that vocabulary and declares none of it.
 
--- preserving the class-in-the-key collision discipline
-(migration.js:520, verified) so two lanes on the same origin/dest/tick
-never collide. Same capacity-seeking strategy, same road-graph +
+The widening preserves the class-in-the-key collision discipline (the
+class stamp at migration.js:520 / :545 and the key suffix at :553, all
+verified) so two lanes on the same origin/dest/tick never collide.
+
+`shed_column` GETS ITS PRODUCER, AND THE PRODUCER IS A NAMED EVENT.
+Before round 3 `shed_column` was a frozen vocabulary member that NO
+event created: `depart` mints a `veteran_return`, `dispatch` mints a
+`reinforcement_column`, and a free unit sheds straight to census
+(`shed`: free_unit|column -> census) without ever becoming a column.
+The stated trigger above -- a unit or COLUMN too starved or far to
+reach home -- means an existing `veteran_return` column BECOMES a
+`shed_column`; but the class is part of the column KEY
+(migration.js:553), so that re-class is a DELETE-AND-RECREATE of a
+ledger row, which is exactly the count-dropping shape the conservation
+walker exists to catch. WC-13's only `shed_column` obligation was a
+re-run of the key-collision pin, and that pin would have passed
+happily over a class no producer ever stamped. THE RULE: the transition
+is the `reclass` TAG EVENT (0.2) -- counts unchanged, the key migration
+carried in the event's own payload {fromClass, toClass, fromKey,
+toKey}, pinned at WC-13 as a before/after headcount identity: same
+people, one row, new key. The reclass-as-drop-and-recreate mutant reds
+that pin AND the conservation walker.
+
+AND THE RAZED-DESTINATION RULE FOR IN-FLIGHT COLUMNS, STATED. WC-14's
+orphan pin covers BLOCKS ("a destroyed-home block becomes a FREE
+UNIT") -- but a column is no longer a block, and a `veteran_return`
+column whose destination settlement is razed MID-TRANSIT had no rule
+anywhere in this volume at any altitude. THE RULE: on the tick its
+destination becomes unaddressable (razed, or absent from the settlement
+set), the column `reclass`es to `shed_column` and enters the ordinary
+hop-and-shed road of this section, seeking the nearest neutral or
+allied host with capacity. It never credits a settlement row that does
+not exist, and it never dissolves silently. WC-13 PINS IT: a
+razed-destination fixture asserts the reclass, the walker's closure at
+every subsequent hop, and a `shed` at exactly one addressable host --
+the column-credited-to-a-razed-row mutant reds, and so does the
+column-dropped-on-razing mutant.
+
+Same capacity-seeking strategy, same road-graph +
 relationship routing, same foreign-homecoming arithmetic per shed,
 same host rejection fork; military and civilian columns COMPETE for
 one shared absorption-capacity market (the destinationMenuFor /
@@ -2028,10 +2484,46 @@ double-count and reds; a census credit without its tag is a lost cohort
 and reds the WC-15 read fixtures; a census debit without its tag arm
 inflates the cohort and reds LAW 1 the moment the garrison marches.
 
+`arrive_home` RESTORES THE COMPOSITION IT DEBITED; IT DOES NOT RE-KEY
+TO THE HOST. This is the amendment that closes round 3's quietest
+defect. 0.2 rules that "both origin and kind are fixed at the crediting
+event and never re-keyed: a person has exactly one origin." WC-16's
+veterans-first arm debits `<foreignOrigin>:veteran` rows -- a shed
+veteran absorbed at Thornhold is a Thornhold RESIDENT tagged with their
+TRUE origin, which is the entire point of this section's tag model. But
+an earlier drafting of the paragraph below ruled that `arrive_home`
+credits census AND the tag such that the row's "originId EQUALS the
+settlement id", FULL STOP. Read literally, every muster-and-return
+cycle LAUNDERED foreign-origin cohorts into the host's self-origin row:
+1.13.3's diaspora bonds faded and 1.14's veteran read grew, with no
+named event, no receipt, and no walker arm -- and LAW 1 still closed,
+because the SUM was unchanged. The tag-ledger walker is structurally
+blind to it. THE RULE, in two halves:
+
+    THE DEBIT BANKS. `muster` and `dispatch` record the origin
+    composition they drew onto the block (blocks[].drawnCohorts,
+    1.4.1), by the WR-8 reconstruction-attribution idiom this volume
+    already binds itself to at 0.2 -- never by splitting an id.
+    `depart` carries that record onto the return column.
+    THE CREDIT RESTORES. `arrive_home`'s tag arm credits back EXACTLY
+    the banked rows, origin for origin. The SELF-ORIGIN row takes only
+    the share that was drawn from UNTAGGED census -- the townsfolk who
+    were nobody's diaspora when they marched and are the town's own
+    veterans when they return. A returning Emberford-born resident of
+    Thornhold goes back to `Emberford:veteran` at Thornhold, because
+    that is where she came from and marching did not change it.
+    THE ROUND TRIP IS THE PIN (WC-16, walker arm at WC-13): a muster
+    followed by a return leaves residentCohorts BYTE-IDENTICAL, per
+    row, not merely equal in total. The composition-discarded mutant
+    (dropping drawnCohorts and crediting the self row for the whole
+    return) reds it -- and that mutant is exactly what this section
+    said before round 3.
+
 THE SELF-ORIGIN ROW EXISTS, AND IT IS WHAT THE VETERAN READ CONSUMES.
 Tags are keyed '<originId>:<kind>', and `arrive_home` credits census
-AND the tag in one event -- so a settlement's OWN returning veterans
-form a cohort row whose originId EQUALS the settlement id. Neither this
+AND the tag in one event -- so a settlement's own returning townsfolk
+(the untagged-census share above) form a cohort row whose originId
+EQUALS the settlement id. Neither this
 section, nor 1.13.3, nor WC-15, nor WC-16 said whether that row exists,
 and the two waves need OPPOSITE answers. The rule, stated once:
 
@@ -2456,39 +2948,66 @@ new module may join the first paint).
                                         supplyShipments; per-hop
                                         efficiency + skim accounting;
                                         the relay conservation identity.
-    warBlockRoster.js         ~300 eff  block mint/normalize/reconcile
+    warBlockRoster.js         ~320 eff  block mint/normalize/reconcile
                                         (blocks[] vs
-                                        leviedPopulationBySource),
+                                        leviedPopulationBySource,
+                                        DIRECTIONAL per 1.4.1), the
+                                        MANDATORY SELF-ORIGIN BLOCK and
+                                        its `conscripted` remainder,
+                                        blocks[].drawnCohorts banking,
                                         share-integral accumulator,
                                         apportionment (largest-remainder,
                                         reconstruction-attribution).
-    peopleLedger.js           ~200 eff  the closed vocabularies POOLS /
+                                        (+20 eff in round 3.)
+    peopleLedger.js           ~230 eff  the closed vocabularies POOLS /
                                         RESIDENCY_TAGS / COUNT_EVENTS /
-                                        TAG_EVENTS / SINKS + the frozen
+                                        TAG_EVENTS / SINKS / SOURCES /
+                                        TAG_SELECTIONS + the frozen
                                         EVENT_SIGNATURES the walker and
                                         the movers BOTH read, the join
-                                        accessors, and the conservation
-                                        arithmetic helpers the walker
-                                        pins against.
+                                        accessors, the DERIVED
+                                        block-touching event set the
+                                        share integrals read (1.2.2),
+                                        and the conservation arithmetic
+                                        helpers the walker pins
+                                        against. (+30 eff in round 3
+                                        for SOURCES, TAG_SELECTIONS,
+                                        `merge`, `reclass`, and the
+                                        derived-set export.)
     blockForks.js             ~300 eff  news-gated fork evaluator,
                                         law-band cohesion
                                         (whole/fragment/majority),
                                         loading factors as typed
                                         reasons.
-    serviceIntegrals.js       ~250 eff  blend absorbed/imparted,
+    serviceIntegrals.js       ~290 eff  blend absorbed/imparted,
                                         comradeship pair integrals,
                                         drift accumulator + K2
-                                        hysteresis banding.
+                                        hysteresis banding. ALSO THE ONE
+                                        WRITER of
+                                        spatialLedgers.serviceBonds
+                                        (1.6.1) and the home of `bondOf`
+                                        -- the per-PAIR integral four
+                                        consumers read MID-WAR and which
+                                        had no storage anywhere in the
+                                        volume before round 3.
+                                        Source-scan fenced
+                                        single-writer. (Budget ~290 eff,
+                                        +40 in round 3 for the ledger,
+                                        its normalizer, and bondOf.)
     enduranceEnvelope.js      ~200 eff  envelope read (carried +
                                         relay throughput over burn),
                                         carrying-capacity network read,
                                         the dueling-envelopes siege
                                         read, massing-tell emission.
-    freeUnits.js              ~350 eff  FREE_UNIT_STATES, fission
+    freeUnits.js              ~370 eff  FREE_UNIT_STATES, fission
                                         cutter (comradeship-graph),
                                         unit records + normalizer, join
                                         preference (drift-weighted),
-                                        forage escalation.
+                                        the `merge` unit-to-unit
+                                        reconsolidation of 1.7.3
+                                        (directive (i)'s sibling-unit
+                                        arm, restored in round 3),
+                                        forage escalation. (+20 eff.)
     freeUnitKernel.js         ~200 eff  the mover adapter: steps
                                         positions, staleness, peace
                                         news arrival; the ONLY stepper,
@@ -2501,11 +3020,15 @@ new module may join the first paint).
                                         (normalizeStressor road),
                                         EMBATTLED_RESOLUTIONS + buy-off
                                         graded close.
-    moverAbsorption.js        ~250 eff  hop-and-shed shared strategy
+    moverAbsorption.js        ~270 eff  hop-and-shed shared strategy
                                         for COLUMN_CLASSES: parking
                                         search, shed apportionment,
                                         host rejection fork, the shared
-                                        absorption market read.
+                                        absorption market read, the
+                                        `reclass` producer for
+                                        `shed_column` and the
+                                        razed-destination rule of
+                                        1.12.2. (+20 eff in round 3.)
     residentCohorts.js        ~250 eff  THE ONE WRITER of the residency
                                         TAG ledger
                                         spatialLedgers.residentCohorts
@@ -2566,25 +3089,54 @@ BUDGET, ADDED FROM THE TABLE ABOVE (an aggregate that disagrees with
 its own table is a row a later wave will cite without re-adding, so
 this one is stated as a sum with its parts):
 
-    24 domain leaves     ~4,830 eff   (the 21 leaves of the original
+    24 domain leaves     ~4,960 eff   (the 21 leaves of the original
                                        draft summing to 4,330, plus
                                        callInErrand 200 and
                                        joinPreference 120 from round 1,
                                        plus contributionDispatch 180
-                                       from round 2)
+                                       from round 2 -- 4,830 -- plus the
+                                       round-3 deltas below, +130)
      2 display leaves       ~330 eff   (armyRoster 150 +
                                        contributionVoice 180)
     ---------------------------------
-    26 leaves            ~5,160 eff
+    26 leaves            ~5,290 eff
 
-Of that, ~4,960 eff is GENUINELY NEW CODE: armyTransitEnvoy.js's ~200
+    ROUND-3 DELTAS, ITEMISED SO THE SUM STAYS CHECKABLE:
+      peopleLedger.js        200 -> 230   SOURCES, TAG_SELECTIONS,
+                                          `merge`, `reclass`, the
+                                          derived block-touching set
+      serviceIntegrals.js    250 -> 290   spatialLedgers.serviceBonds +
+                                          normalizer + bondOf (1.6.1)
+      warBlockRoster.js      300 -> 320   the mandatory self-origin
+                                          block + drawnCohorts (1.4.1)
+      freeUnits.js           350 -> 370   `merge`, the sibling-unit arm
+                                          (1.7.3)
+      moverAbsorption.js     250 -> 270   `reclass` + the razed-
+                                          destination rule (1.12.2)
+      ------------------------------------------------------------
+      total                              +130
+
+Of that, ~5,090 eff is GENUINELY NEW CODE: armyTransitEnvoy.js's ~200
 is an EXTRACTION from armyTransitKernel.js (2.3's decomposition), which
 MOVES lines rather than adding them. The two figures are consumed
 differently -- the ceiling ledger (2.1) cares about the extraction
 because it buys headroom in a file at 798/800; the size ratchets care
-about the ~4,780. No file is over 350 eff, and every leaf is under
+about the ~5,090. No file is over 370 eff, and every leaf is under
 half its layer ceiling at birth (the hot-file rule: new logic lands
 with room to grow).
+
+ONE FIGURE, NOT TWO -- A ROUND-3 CORRECTION IN THE PARAGRAPH THAT
+EXISTS TO PREVENT EXACTLY THIS. This block opens by saying "an
+aggregate that disagrees with its own table is a row a later wave will
+cite without re-adding", and then stated TWO different genuinely-new
+totals five lines apart: "~4,960 eff is GENUINELY NEW CODE" and, four
+lines later, "the size ratchets care about the ~4,780". VERIFIED BY
+ADDITION at round 3: the pre-round-3 24-leaf table summed to exactly
+4,830 and the two display leaves to 330, giving 5,160; 5,160 minus
+armyTransitEnvoy's 200 is 4,960. `4,780` had no derivation anywhere in
+this volume and is DELETED. The round-3 amendments then added the +130
+itemised above, so the live triple is 4,960 / 5,290 / 5,090 -- one
+genuinely-new figure, used in both sentences, with every part shown.
 
 ## 2.3 Extensions to existing surfaces (the attachment table)
 
@@ -2672,6 +3224,15 @@ with room to grow).
                                                                       union in the same commit
                                                                       (byte-identical: no
                                                                       producer yet)
+    THE COLUMN DISCRIMINATOR   isDemographicColumn (:483) and its     THE THREE-WAY SPLIT of
+    (the release fork -- the   ONE structural consumer                7.A.8, and the :598 guard
+    row that was missing and   releaseArrivals (:598); its other      WIDENED to
+    would have landed every    consumers demographicsMigration.js     `isDemographicColumn(col)
+    WC column in M4's arrival  :458 / :505 / :636 -- all verified     || isMilitaryColumn(col)`
+    pass)                      at HEAD                                IN THE SAME WC-0 COMMIT,
+                                                                      with the fail-closed
+                                                                      normalize arm the same
+                                                                      predicate widening owes
     absorption market          demographicsMigration                  military columns join the
                                competeForDestinations /               existing competition
                                destinationMenuFor
@@ -2813,8 +3374,11 @@ EVERY WAVE CARRIES (stated once here, specialized per wave below):
 Dependencies: none. Buildable now.
 
 LANDS: warStance.js (ladder + rank map, no consumers), peopleLedger.js
-(POOLS / RESIDENCY_TAGS / COUNT_EVENTS incl. their TAG ARMS /
-TAG_EVENTS / SINKS / EVENT_SIGNATURES, no consumers),
+(POOLS / RESIDENCY_TAGS / COUNT_EVENTS incl. `merge` / TAG_EVENTS incl.
+`reclass` / SINKS / SOURCES / TAG_SELECTIONS / EVENT_SIGNATURES with
+its TAG ARMS, each arm's selection a required TAG_SELECTIONS member /
+the DERIVED block-touching event set the share integrals read (1.2.2);
+no consumers),
 lawBandModulation.js -- THE TABLE'S SHAPE ONLY: the closed key set, the
 three-word lawWord axis, throw-on-unknown, the totality export, and the
 registration entry point through which each consuming wave supplies its
@@ -2834,6 +3398,48 @@ the union used to land at WC-13, seven waves after WC-6 needed
 `veteran_return` and `reinforcement_column` to exist, which is a
 wave-order violation the graph could not express. It is byte-identical
 because no producer stamps a military class until WC-6 mints one.
+
+AND THE DISCRIMINATOR WIDENS WITH THE VOCABULARY -- THE ROUND-3
+ADDITION WITHOUT WHICH M4 WOULD HAVE LANDED EVERY WC COLUMN. The
+earlier enumeration of this widening was ":520 / :545 / :553" -- stamp,
+stamp, key -- and `isDemographicColumn` appeared NOWHERE in the volume.
+MEASURED AT HEAD: `isDemographicColumn` (src/domain/spatial/
+migration.js:483) is
+`DEMOGRAPHIC_COLUMN_CLASSES.indexOf(String(column.travelClass ?? ''))
+>= 0`, and its own docstring says it "FAILS CLOSED toward M4: a column
+with no class, or a class this module has never heard of, is M4's".
+`releaseArrivals` (:598) reads
+`if (isDemographicColumn(col)) { next[key] = col; continue; }` -- it
+KEEPS the demographic columns in transit for their own lane and
+RELEASES everything else. Its other consumers are
+demographicsMigration.js:458, :505 and :636, all verified. CONSEQUENCE
+HAD THIS SHIPPED: a `reinforcement_column` would be stamped and keyed
+exactly as designed and then RELEASED BY M4's ARRIVAL PASS, crediting
+destId's population as an ordinary migration arrival -- outside
+`arrival` / `arrive_home` / `shed`, invisible to WC-6's conservation
+walker, delivering lent troops into a settlement's census instead of
+into a block. It is the single defect in this volume most likely to
+have shipped GREEN, because WC-0's byte-identity pin holds perfectly
+(no producer yet) and the failure surfaces only at WC-6.
+
+    THE DISCRIMINATOR IS THREE-WAY, NOT TWO-WAY:
+    `isDemographicColumn` | a NEW `isMilitaryColumn` (over
+    MILITARY_COLUMN_CLASSES) | UNCLASSED-LEGACY = M4's, exactly as the
+    existing fail-closed docstring promises.
+    migration.js:598's guard WIDENS IN THE SAME WC-0 COMMIT to
+    `if (isDemographicColumn(col) || isMilitaryColumn(col))`, so a
+    military column is held for the WC lane's own release pass.
+    PINNED BOTH DIRECTIONS: a military column is NOT released by
+    releaseArrivals, AND it IS released by the WC lane (the second half
+    lands with the WC-6 producer; at WC-0 it is the pre-pinned seam
+    with its executed red-capability proof). The
+    widening-omitted mutant reds the first arm.
+    AND THE PREDICATE WIDENING IS A PERSISTENCE-SURFACE WIDENING: it
+    owes the same fail-closed normalize arm 1.4.1 gives blocks[] --
+    columnOf's conditional class spread (:520) admits the military
+    members too, and an unknown class still falls through to
+    unclassed-legacy rather than being honored.
+
 Also contributionLedger.js record shapes +
 normalizer (no writer calls yet), the normalizeDeployments blocks[]
 fail-closed arm (rejecting, since nothing writes it), the two
@@ -2851,13 +3457,25 @@ one volume's strategy wave cannot restrain the volume that builds
 first, which is the whole failure mode 4.1 is trying to prevent.
 
 PINS: totality exports (every vocabulary closed, codepoint-sorted
-where order-free); module-load throws on unknown members; the
-byte-identity pin (a seeded world with and without this commit is
-byte-identical -- the strongest possible registration pin); TERM
-catalog rows never drafted (no producer = zero treaty diff on the
-seeded soak corpus). HARDEST NEGATIVE: a mutant adding a CLASS_TERM
-producer for amnesty must move the treaty corpus -- proving the
-no-producer fence is what holds byte-identity, not luck.
+where order-free); module-load throws on unknown members -- INCLUDING
+TAG_SELECTIONS, whose planted-fourth-selection negative runs here and
+whose membership is asserted REQUIRED on every CENSUS_DEBITING
+signature (a signature with an unknown or absent selection must fail at
+MODULE LOAD, not at the first muster); SOURCES exported beside SINKS
+with `birth`'s signature present and its no-tag-arm rule asserted; the
+DERIVED block-touching set asserted equal to the hand-named list with
+toEqual (1.2.2), so the derivation is proven to see what it claims;
+THE RELEASE-FORK PIN (a `reinforcement_column` planted on the
+migration ledger is NOT released by releaseArrivals, and the
+widening-omitted mutant reds it -- the highest-value pin in this wave,
+because the rest of WC-0 is byte-identical and this is the one
+predicate that changes); the byte-identity pin (a seeded world with and
+without this commit is byte-identical -- the strongest possible
+registration pin, and it still holds, because no producer stamps a
+military class here); TERM catalog rows never drafted (no producer =
+zero treaty diff on the seeded soak corpus). HARDEST NEGATIVE: a mutant
+adding a CLASS_TERM producer for amnesty must move the treaty corpus --
+proving the no-producer fence is what holds byte-identity, not luck.
 
 THE TERM_FAMILIES CONSUMER CENSUS -- BECAUSE THE FAMILY LIST IS
 DERIVED, AND THE NO-PRODUCER RECIPE DOES NOT REACH IT. Verified at
@@ -3100,7 +3718,18 @@ the walker alone would not name the cause); the lawful-no-skim negative
 (a lawful chain produces zero skim across the whole soak corpus); the
 entrepot pin (relay crossings move the existing crossing counter --
 relay traffic builds entrepots); rebuild round-trip pin through an
-in-transit tick.
+in-transit tick; AND THE SKIM-ATTRIBUTION LAG PIN (1.3.2, new in round
+3): the SHORTFALL books at the arrival edge with the typed reason
+`unknown_hands`, and the reason SET is pinned with toEqual so the
+un-attributed case is a first-class member rather than an absence,
+while the stager's NAME, the grievance write and the reputation write
+fire ONLY when the naming rumor arrives -- a lagged fixture (skim at T,
+rumor at T+k) asserts no attribution write in [T, T+k), and the
+omniscient-attribution mutant, which names the thief at T, reds; the
+omniscient-mode twin pins the one-tick collapse. Before round 3 this
+volume published a covert attribution with NO belief gate at all, while
+its own composition read (1.2.3) was strictly lagged and pinned as
+WC-7's hardest negative.
 
 TUNING: per-band loss fractions (3), skim fraction (1), staging search
 depth; all raw, one-law-band-modulated pattern (K7).
@@ -3218,7 +3847,15 @@ distribution strictly, and the flat-draw mutant reds); THE LAPSE PIN
 (an unanswered ask past its horizon reads `lapsed`, never `refused` --
 silence is not a refusal, and the grading must not teach that it is);
 the two seam rows (SP-D, HABIT) each with an executed red-capability
-proof.
+proof; AND THE ONE-BALANCE PINS (1.1.4, new in round 3): a source scan
+asserting that the answer fork, the breach grade and the K5 terms
+weight all read contributionReads' single balance function and never
+reach into warContributions or the edge archive for a balance, PLUS the
+differentiated behavioral pin -- FORGIVING the obligation moves the
+call-in ANSWER FORK and the K5 TERMS WEIGHT in the SAME TICK, and the
+forgiveness-invisible-to-the-fork mutant reds. That mutant is precisely
+what a second reading of "the balance" would have shipped, since the
+working ledger drops at war close and the archive never decays.
 
 TUNING: breach-grade threshold band; jubilee appraisal weights (raw,
 unconsumed until drafted; amnesty's land with its producer at WC-11);
@@ -3247,11 +3884,14 @@ here for the first time -- this wave is the first producer of any
 military column), share-integral accumulators at BOTH altitudes
 (per-roster and per-episode, 1.2.2, from one arithmetic), the
 episode-share accumulator's anchor -> episode map,
-peopleLedger.js live, and THE
+peopleLedger.js live, THE MANDATORY SELF-ORIGIN BLOCK and
+blocks[].drawnCohorts (the origin composition each muster/dispatch
+banks, 1.4.1 + 0.2), and THE
 CONSERVATION WALKER v1 over the census/block/column pools and their
-events: muster, dispatch, arrival, depart, arrive_home, fell (with its
-column arm), mortality, and dm_removed as a DECLARED sink -- EACH WITH
-ITS TAG ARM where it debits census (0.2), so the walker checks the tag
+events: birth (the DECLARED source), muster, dispatch, arrival, depart,
+arrive_home, fell (with its column arm), mortality, and dm_removed as a
+DECLARED sink -- EACH WITH ITS TAG ARM where it debits census, and each
+arm naming a TAG_SELECTIONS member (0.2), so the walker checks the tag
 selection in the same pass. Later waves
 add the free_unit events (fission, orphan, rejoin, shed, enlist,
 defect) to the same closed list, each IN THE COMMIT that mints its
@@ -3262,10 +3902,35 @@ PINS (hardest negatives):
 - THE CONSERVATION WALKER ITSELF: seeded multi-war worlds, every
   tick, the section 0.2 identity integer-exact. Its RED-CAPABILITY is
   proven at landing by executing a one-count-drop mutant on each
-  branch (a walker that cannot redden is not a guard).
-- THE RECONCILIATION PIN: sum(blocks[].headcount) ===
-  deployedPopulation AND per-origin equals leviedPopulationBySource,
-  every tick, every seeded war.
+  branch (a walker that cannot redden is not a guard) -- AND THE SOURCE
+  BRANCH IS ONE OF THEM: the birth-inflation mutant must red beside the
+  three sink-drop mutants, because a walker that can see a stolen death
+  and not an invented birth is a guard with one eye (0.2's SOURCES).
+- THE RECONCILIATION PIN, RESTATED -- IT WAS UNPASSABLE ON BOTH
+  CLAUSES AS WRITTEN (1.4.1 carries the measurement). The old form was
+  "sum(blocks[].headcount) === deployedPopulation AND per-origin equals
+  leviedPopulationBySource, every tick, every seeded war". MEASURED:
+  deploymentReturn.js:273 states deployedPopulation is "the overlord's
+  OWN conscripts PLUS every vassal's levied" and :302 computes
+  `conscripted = Math.max(0, deployedPopulation - leviedTotal)`, so the
+  deployer's own share has NO levy row and the total could not close
+  without a self-origin block the volume never minted; and per-origin
+  EQUALITY is false by this volume's own design the first tick a WC
+  dispatch lands, because 1.4.1 fills blocks[] from the elected road
+  wherever the map has no row. THE LIVE FORM:
+    (i) sum(blocks[].headcount) === deployedPopulation -- TOTAL,
+        unconditional, every tick, every seeded war, satisfiable
+        because the MANDATORY SELF-ORIGIN BLOCK now exists (1.4.1) and
+        holds exactly the `conscripted` remainder. The
+        missing-self-block mutant reds.
+    (ii) per-origin, blocks[] >= leviedPopulationBySource for every
+        origin, WITH EXACT EQUALITY on every row THE SWEEP WROTE -- a
+        subset law, the elected rows pinned as the declared excess. The
+        elected-row-written-into-the-levy-map mutant reds the equality
+        arm (and would also be a second mouth on a war-layer field,
+        which 0.3 now forbids by ruling).
+  The old equality-everywhere form is recorded here as UNPASSABLE so
+  that no later wave restores it as a tightening.
 - THE RECONSTRUCTION-ATTRIBUTION PIN: no call site splits an id on
   "." (source-scan, the WR-8 law); apportionment reconstructs from
   the banked map.
@@ -3312,7 +3977,16 @@ war's original declarer with a fielded army" -- must red it: that
 mutant IS the priced-shielding hole the derived ladder exists to close;
 THE INTEGRATION PIN (the share integral is event-updated only:
 a tick with no roster events changes no accumulator -- the
-per-tick-integral mutant reds); the crossing-beat exact-once pin
+per-tick-integral mutant reds); THE UPDATE-SET TOTALITY PIN (1.2.2, new
+in round 3): the set DERIVED from EVENT_SIGNATURES -- every COUNT_EVENT
+naming the `block` pool on either side -- equals the movers' ACTUAL
+call set on the seeded corpus, asserted with toEqual against a named
+list rather than as a subset check, so a later wave cannot mint a
+block-moving event that skips the integral and no non-block event
+(`dispatch` above all, whose inclusion in the old prose list would have
+let an interdicted column BUY STANCE) can creep in. The
+block-mover-that-skips-the-accumulator plant reds it, and so does the
+dispatch-counted mutant; the crossing-beat exact-once pin
 (band edge-detect fires once per crossing, not per tick spent across
 the edge); THE BELIEF-LAG PIN (hardest negative: the enemy's casus
 read moves ONLY after the composition news arrives -- a fixture where
@@ -3384,8 +4058,18 @@ this wave's own LANDS text. (Feeds WC-2's K5 read its comradeship
 term.)
 
 LANDS: serviceIntegrals.js -- blend absorbed/imparted (share-scaled
-asymmetry), comradeship pair integrals (duration x hardship from the
-engagement-close severity band), drift accumulator + K2 hysteresis
+asymmetry), comradeship pair integrals AND THEIR STORAGE
+(spatialLedgers.serviceBonds, 1.6.1: the per-PAIR accumulator four
+consumers read MID-WAR -- 1.7.2's affinity matrix, 1.3.2's relay term,
+1.9.2's answer fork, 1.6.4's `bondOf` -- and which had NO declared home
+anywhere in this volume before round 3, since the relationship axes are
+a blend of everything on another clock and the `shared_service` archive
+row is written exactly once at war close. One writer, drop-when-empty,
+event-updated at engagement closes, WITH ITS CERTIFICATION ROW AND ITS
+spatialUsage MANIFEST ROW IN THIS COMMIT per the FINAL FOLD LAW; the
+relationship-plane write through applyRelationshipPatch is unchanged
+and the archive row becomes the war-close SUMMARY of this ledger, never
+its storage), the drift accumulator + K2 hysteresis
 expression, betrayal-priced-by-intimacy (resentment magnitude scaled
 by banked comradeship inside the existing rule bodies), the war-close
 comradeship fold (relationship patch + shared_service archive row),
@@ -3438,6 +4122,15 @@ composed with rather than bent. Three mutants: the term deleted (the
 ordering collapses), the cap removed (the comrade read becomes exact,
 which the fog laws forbid), and the depth raised (the second assertion
 reds). Its seam twin proves the pin CAN red before HABIT lands.
+THE SERVICE-BOND LEDGER PINS (1.6.1, new in round 3): the ledger is
+drop-when-empty on a war-free world (the dormancy fence), symmetric by
+construction (one row per unordered pair -- the two-row plant is caught
+by the writer's key normalization), event-updated only (the per-tick
+mutant reds as it does for every other integral here), and `bondOf`
+reads THIS ledger and not the relationship axes -- a source scan
+asserts it, because 1.6.4's whole point is that two former comrades now
+at WAR still read each other well, which the axes by then no longer
+say.
 GRADE TOTALITY: every (pair, war) close maps to exactly one
 CONTRIBUTION_CLOSE_GRADES member on the seeded corpus, all four members
 reachable (the dead-arm census; `partial` is reachable only because the
@@ -3501,7 +4194,14 @@ LANDS: freeUnits.js + freeUnitKernel.js (the ledger, fission along
 the comradeship graph with whole origin blocks, FREE_UNIT_STATES,
 independent operation, join preference through WC-8's SHARED
 joinPreference.js -- consumed, never re-minted -- forage -> plunder
-escalation, peace-at-road-speed staleness), THE AMNESTY PRODUCER AND
+escalation, peace-at-road-speed staleness), THE `merge` EVENT (1.7.3,
+restored in round 3: free_unit -> free_unit', the sibling-unit arm of
+directive (i)'s "rejoin same-origin units", without which a unit whose
+origin army has dissolved has NO rejoin target at all and the clause's
+stated GENERAL preference is unreachable in exactly the scenarios it
+was written about; scored by the SAME joinPreference.js -- one scorer,
+now three consumers -- with the older unit's key surviving,
+deterministic under the seed), THE AMNESTY PRODUCER AND
 ITS EXECUTOR TOGETHER (moved here from WC-5: the CLASS_TERM producer
 lights the WC-0 catalog row, gated on `freeCompaniesEnabled` by name
 in conjunction with the arc flag, fail-closed, and the free-unit
@@ -3509,9 +4209,17 @@ disposition hook is the executor -- producer and subject population
 arrive in the same commit), dissolution reuse of the fission cutter at
 war end.
 
-PINS: fission-graph pin (the cut severs the weakest banked bond;
+PINS: fission-graph pin (the cut severs the weakest banked bond, read
+through `bondOf` off the WC-9 service-bond ledger that 1.6.1 now sites;
 origin blocks never split at fission -- the block-split mutant reds
-the walker AND this pin); the war-ended-unknown pin (hardest
+the walker AND this pin); THE MERGE PIN (1.7.3): a differentiated
+fixture -- two units that SHOULD merge (same origin, adjacent) and two
+that should not (deep opposing drift) -- asserts the surviving key is
+the older unit's, that per-origin headcounts sum exactly into it (the
+key-level conservation arm; the pool-level identity does not move,
+which is itself asserted), and the merge-deleted mutant reds by leaving
+a permanently un-reconsolidatable unit on the map, the state directive
+(i) forbids in terms; the war-ended-unknown pin (hardest
 negative: a free unit beyond news reach continues operating after
 termination; assert its state unchanged until the arrival record
 exists, then the stand-down fork fires -- and the ground-truth-read
@@ -3544,8 +4252,11 @@ through normalizeStressor with a typed source reference;
 EMBATTLED_RESOLUTIONS; buy-off as a graded close -- tribute teaches
 raiding pays), embattled crime coupling (the CRIME_ARCHETYPES member +
 the smuggling-to-besiegers loop; espionage porosity composes through
-the EXISTING crime term), the carrying-capacity map cap live (excess
-mass shortens envelopes network-wide), suppression demand into the
+the EXISTING crime term), NETWORK_CARRYING_CAPACITY live (1.7.1's
+world-wide MASS, distinct by name from the per-army
+ENDURANCE_ENVELOPE's DURATION -- excess mass shortens envelopes
+network-wide BY REDUCING RELAY THROUGHPUT, which is the only path by
+which it reaches an army at all), suppression demand into the
 mercenary market.
 
 PINS: the contest pin (repel and embattled both reachable on the
@@ -3556,7 +4267,18 @@ ordinary catalog stressor, deduped by canonical id -- the
 parallel-stressor mutant reds); the buy-off-teaches pin (a buy-off
 close writes the graded close the habit system will read; the
 no-close mutant reds the seam row); crime-composition pin (the worse-
-of discipline holds -- no blended fourth spelling; source-scan).
+of discipline holds -- no blended fourth spelling; source-scan); AND
+THE TWO-CAPS COMPOSITION PIN (1.7.1, new in round 3): raising world
+mass with an army's OWN carried supply held constant SHORTENS that
+army's ENDURANCE_ENVELOPE, proving NETWORK_CARRYING_CAPACITY reached it
+through relay throughput and not by a second trigger. The
+network-cap-cuts-armies-directly mutant reds, because under it the
+envelope does not move and the army fissions anyway; a companion arm
+asserts FISSION_SLACK is grace against the ENVELOPE alone (the
+slack-read-against-the-network-cap mutant reds on a fixture where the
+two orderings disagree). Before round 3 one word, "the cap", named both
+quantities in one paragraph and the fission trigger read an unspecified
+one.
 
 TUNING: contest thresholds (derived-from-distribution, then frozen),
 buy-off price bands, embattled trade-interdiction severity.
@@ -3588,7 +4310,22 @@ appears in no event list this volume has (0.2's ruling closed it) --
 and foreign-homecoming arithmetic per shed (homecomingEffects).
 
 PINS: the key-collision pin RE-EXERCISED for `shed_column` (the pin
-itself lands at WC-6 with the first military column); the competition
+itself lands at WC-6 with the first military column) -- AND, NEW IN
+ROUND 3, THE PRODUCER THAT MAKES THAT RE-RUN NON-VACUOUS: the
+`reclass` TAG EVENT (`veteran_return` -> `shed_column`, 0.2 / 1.12.2),
+pinned as a before/after headcount identity (same people, one row, new
+key, because the class is part of the key at migration.js:553) with the
+reclass-as-drop-and-recreate mutant reddening both this pin and the
+conservation walker. Until this amendment `shed_column` was a frozen
+member NO event produced, so the WC-13 collision pin would have passed
+over a class nothing ever stamped. PLUS THE RAZED-DESTINATION PIN: a
+`veteran_return` column whose destination is razed mid-transit
+`reclass`es and enters hop-and-shed, the walker closes at every
+subsequent hop, and it `shed`s at exactly ONE addressable host -- the
+column-credited-to-a-razed-row mutant reds and so does the
+column-dropped-on-razing mutant. WC-14's orphan pin covers BLOCKS; a
+column is not a block, and this path had no rule at any altitude
+before round 3; the competition
 pin (a bad-peace fixture floods both
 column kinds; assert later columns hop further -- the market is one);
 the rejection-hunger pin (a rejected column's next contest is
@@ -3744,8 +4481,21 @@ untouched, both arms read identically, and the pin collapses -- which
 is exactly why it could not be written before round 2. A companion arm
 asserts the embattled contest (1.8.1) moves with the same read, since
 it keys on defense + internal security;
+THE MUSTER-AND-RETURN ROUND-TRIP PIN (0.2 + 1.13.1, new in round 3):
+a muster followed by a return leaves residentCohorts BYTE-IDENTICAL
+PER ROW, not merely equal in total -- the debit banks the origin
+composition onto blocks[].drawnCohorts and `arrive_home` credits back
+exactly those rows, the self-origin row taking only the untagged-census
+share. The composition-discarded mutant (crediting the whole return to
+the host's own origin row) reds it, AND THAT MUTANT IS WHAT 1.13.1 SAID
+BEFORE ROUND 3: it laundered foreign-origin cohorts into the host on
+every muster cycle, faded 1.13.3's diaspora bonds and grew 1.14's
+veteran read, with no named event, no receipt, and no walker arm --
+LAW 1 closes throughout, because the sum never moves, which is why only
+a round trip can see it;
 reactivation pin (a re-muster between former co-belligerents seeds
-nonzero affinity; strangers seed zero).
+nonzero affinity, read off the WC-9 service-bond ledger and the
+shared_service archive rows; strangers seed zero).
 
 TUNING: the three read magnitudes, muster preference weights.
 

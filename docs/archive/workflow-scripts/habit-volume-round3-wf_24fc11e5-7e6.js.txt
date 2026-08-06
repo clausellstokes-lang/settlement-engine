@@ -1,0 +1,45 @@
+export const meta = {
+  name: 'habit-volume-round3',
+  description: 'Round 3: close the seven second-attestation findings under chair rulings, land the count-ledger instrument that removes the stale-denominator habitat, re-attest with the instrument',
+  phases: [
+    { title: 'Revise 2', detail: 'seven findings + J-HB-26 (disposition filter) + J-HB-27 (the count ledger)' },
+    { title: 'Attest 3', detail: 'fresh attestation running the count ledger itself' },
+  ],
+}
+
+const VOL = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c44e5d99-2ba5-49d5-a554-40b68534c8eb/scratchpad/habit-arch'
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const GROUND = `VERIFY-FIRST PREAMBLE: brief from the session chair. The habit volume is ${VOL}/DESIGN_HABIT_ARCHITECTURE-POLISHED.md — expected md5 at open 4a7f0692c1e6c233881e79bca74932ac, 3,922 lines; if it differs, STOP and report. The repo at ${TREE} is READ-ONLY (a build lane owns it and has live WIP including an untracked strategicPosture.js — never touch it); re-measure src claims by SYMBOL and record HEAD sha. Byte-scan (python3, zero NULs) every file you edit. THE ONE-EDIT LAW, now three rounds proven in the breach: a table edit and its count are ONE edit — and this round lands the instrument that enforces it.`
+
+phase('Revise 2')
+const revise2 = await agent(GROUND + `
+
+YOU ARE THE ROUND-3 REVISER. Close the SEVEN second-attestation findings under these CHAIR RULINGS, then land the structural cure.
+
+FINDING 1 (deferral book 42 to 43): re-parse, restate FORTY-THREE with the decomposition 30 + 3 + 10 at all three homes (near lines 1405, 3478, 3905 — relocate by content), and re-spell the line-1414 clause to describe the full 43-row book, not the census subset.
+
+FINDING 2 (HB-3 charter, ruled): EIGHT grade maps (close 8's banded progress map gains its build charter, edges from HABIT_TUNING, named as A BANDING NOT A LOOKUP). The carry-road split becomes: CARRIED {1, 4, 6, 8} / RECOMPUTED {3, 7} / close 2 BOTH ROADS — recomputed for site 8's accept-refuse episodes (terms:<treatyId>, both sides hold the id) AND carried for site 7's keyed sue episodes (treaty.habitEpisode stamped at mint from the sue arm's key) — each road with ITS OWN pin: the recompute-equality pin for the site-8 road, the carry ROUND-TRIP pin for treaty.habitEpisode; close 8 gains the carry round-trip pin. Correct close 2's row (near 1299) from 'no carry owed' to the both-roads truth. Q1's decline figure becomes SEVEN (a veto kills close 1 only, under the eight-close table). VERIFY-AT-BUILD {5} unchanged.
+
+FINDING 3 (STRATEGY row stale arity): re-spell checklist row 6 to PER-ACTION with dyadicActions ['deploy'] (the R17/J-HB-19 measurement, re-confirmed at HEAD by the attestation), and add the ARITY-UNIQUENESS assertion beside the disposition-uniqueness one in the registry walker charter (a symbol appearing with two different arities anywhere in the volume-derived registry is a RED).
+
+FINDING 4 (ruled — J-HB-26, record as a judgment block): the derived-set query gains the DISPOSITION FILTER: 'every LEARN row whose arity is dyadic and whose anticipationWave is null' — executed result {3, 6}. Rationale recorded: the clause the set illustrates characterizes SHIPPED EXPRESSION FORMS, and a DEFER row ships no expression; DEFER rows KEEP their declared arity as registry metadata with one sentence saying what it is for (it becomes load-bearing at promotion when the row's close lands). Site 12's exclusion reason restated accurately: it fails BOTH clauses (MONADIC, and DEFER). Update the site-10 sentence the attestation flagged (it currently claims site 10 ships the ONE-TERM form — a DEFER row ships nothing).
+
+FINDING 5 (ruled): restate the eleven-move figure at 1.6933 WITH the preserved script's score set named ([0.90] + [0.62] x 10, p_deploy 0.2104) — the EXECUTED-table law; note both 1.6933 and the struck 1.7941 exceed the deleted pin's 1.35 cap so the refutation stands unchanged.
+
+FINDING 6: strike R4's refuted sentence AT SOURCE per the volume's own policy — replace with the strike marker pointing at J-HB-13, and fix its stale seven-close denominator in the same stroke.
+
+FINDING 7: add the empty fourth cell to the struck seam-4 row (near 2478).
+
+THE STRUCTURAL CURE (ruled — J-HB-27, record as a judgment block): write ${VOL}/countsweep.py — ONE parse instrument deriving EVERY counted quantity in the volume from the volume's own tables (the attestation's sweep enumerated ~28: checklist rows/labels/sum, closes, coverage rows, joined sites, disposition partition, site table, arity table, derived set, strategy moves, deferral book, seam rows, lifecycle paths, Bands anchored scan, judgment blocks, refutations, chair questions, waves, flags, circumstance classes, anticipation seams, idioms, sweep figures via VERIFY_oddsratio.py, foreign fields, malformed-row scan) and diffing each against a DECLARED list of its prose homes (quantity, parse recipe, home line-contents). Run it; paste its full output into the volume as the closing COUNT CENSUS appendix, headed EXECUTED with the script named and its md5. Add one sentence to the one-edit law: no denominator edit ships without a countsweep run, and the appendix is re-pasted at every future revision. The HB-1 charter gains a note that the repo-side siblings (registry walkers) carry the same derive-dont-restate law.
+
+METHOD: after EVERY edit, re-run the affected parse. At close, run countsweep.py — it must report ZERO diffs — then byte-scan, state line count and md5. RETURN: per-finding disposition, the countsweep output summary (every quantity, PASS/FAIL), new line count, md5.`, { label: 'revise2:7-findings+ledger', phase: 'Revise 2', model: 'opus' })
+
+phase('Attest 3')
+const attest3 = await agent(GROUND + `
+
+YOU ARE THE THIRD ATTESTATION, fresh eyes. The round-3 reviser reported: ` + JSON.stringify(revise2).slice(0, 14000) + `
+
+(1) RUN ${VOL}/countsweep.py YOURSELF — it must exist, parse the volume it claims to parse, cover the counted quantities the attestation-2 sweep enumerated, and report zero diffs; then AUDIT THE INSTRUMENT adversarially: plant one stale count in a COPY of the volume (never the original) and confirm the script catches it; a sweep that cannot fail is the vacuity class. (2) Verify the seven findings closed as ruled (the 43 decomposition; the eight-map both-roads split with BOTH pins named on close 2 and the round-trip pin on close 8 and treaty.habitEpisode; the per-action STRATEGY row + arity-uniqueness assertion; J-HB-26's LEARN filter with {3,6} and the metadata sentence; 1.6933 with the score set; R4 struck at source; the fourth cell). (3) Read the edited regions fresh for revision-introduced defects — the last two rounds each shipped one; pay particular attention to every count the edits touched (the deferral book, the close census, the judgment-block census which should now read TWENTY-SEVEN if J-HB-26/27 landed as blocks — VERIFY, do not assume). (4) Re-verify the treaty.habitEpisode carry claims against src at HEAD by symbol. RETURN structured JSON: verdict COHESIVE or NEEDS-REVISION, findings[] (empty if cohesive), instrumentAudit (what you planted and what it caught), notes.`, { label: 'attest:round3', phase: 'Attest 3', model: 'opus', effort: 'xhigh', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['COHESIVE', 'NEEDS-REVISION'] }, findings: { type: 'array', items: { type: 'string' } }, instrumentAudit: { type: 'string' }, notes: { type: 'string' } } } })
+
+return { revise2, attest3 }

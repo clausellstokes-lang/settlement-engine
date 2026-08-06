@@ -1,0 +1,51 @@
+export const meta = {
+  name: 'habit-volume-round4-cap',
+  description: 'Round 4 AND THE CAP: close the struck-premise class structurally (J-HB-28), repair the two instrument holes, apply the four low findings — then the arc ends regardless, residuals become recorded limitations',
+  phases: [
+    { title: 'Cap Revise', detail: 'J-HB-28 struck-premise scan + J-HB-5 repair + instrument holes + four lows' },
+    { title: 'Cap Attest', detail: 'final attestation; the arc ends with this report' },
+  ],
+}
+
+const VOL = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c44e5d99-2ba5-49d5-a554-40b68534c8eb/scratchpad/habit-arch'
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const GROUND = `VERIFY-FIRST PREAMBLE: brief from the session chair. The habit volume is ${VOL}/DESIGN_HABIT_ARCHITECTURE-POLISHED.md — at round-3 close it measured md5 2c67d6f04ec94e7f4d9e6e2088667683 / 4,211 lines; VERIFY at open and report what you find (do not stop on a mismatch you can explain — report it). Its instrument is ${VOL}/countsweep.py (863 lines, md5 0f572e87749d62bd7cb26c64d4a154fa) and its sweep script is ${VOL}/VERIFY_oddsratio.py. The repo at ${TREE} is READ-ONLY (a concurrent SP-C build lane owns it, ~15 dirty/untracked entries including strategicPosture.js — NEVER touch them); re-measure src claims by SYMBOL, record HEAD sha. Plant mutants only on COPIES in a sibling scratch dir. Every mutant must assert the file actually CHANGED and abort if not (the round-3 vacuous-mutant lesson). Byte-scan (python3, zero NULs) every file you edit.`
+
+phase('Cap Revise')
+const cap = await agent(GROUND + `
+
+YOU ARE THE ROUND-4 REVISER, AND THIS IS THE CAP ROUND. Close the seven findings under these CHAIR RULINGS, land the structural cure, and leave the volume SEALABLE.
+
+**J-HB-28 — THE STRUCK-PREMISE SCAN (the structural cure; record as a judgment block).** The count ledger closed the stale-NUMBER class; this closes the stale-CLAIM class, which is what F1 is. Extend countsweep.py with a SECOND FAMILY: for every premise in the refutation register (R1..R18), declare its SIGNATURE PHRASE (the distinctive wording of the refuted claim), scan the whole volume for it, and RED on any occurrence that is not inside (a) the register entry itself, (b) an explicitly STRUCK marker, or (c) a quotation the volume labels as quoting-to-strike. Seed it with the instance F1 found — 'both sides compute independently' / 'compute independently' / 'both sides can compute it' — plus a signature phrase for every other refuted premise you can extract from R1..R18. Prove it with mutants: re-plant a struck premise unmarked at a fresh home (must red) and a legitimately-quoted struck premise (must stay green). This family, like the count family, re-runs at every future revision.
+
+**F1 (HIGH) — J-HB-5 REPAIRED.** Give J-HB-5 the same treatment R4 received: (i) strike 'an episode key both sides compute independently' at source and point at J-HB-13; (ii) correct the title — the program DOES write two foreign opening stamps (deployment.habitEpisode, treaty.habitEpisode), so the block's claim is now the NARROWER true one (HB's own pledge book carries the credit join; two additive drop-when-absent fields ride records the estate already persists); (iii) correct the veto cost — it is NOT 'three owner-gated schema moves on occupation/tradeWarState/the coup verdict path bought for free'; carry R4's surviving-claim paragraph verbatim in substance (the two carried fields are additive drop-when-absent on already-persisted records, not the schema moves census 2's H-3 believed were owed), and name Q1 as the live price.
+
+**F2 (MEDIUM) — THE INSTRUMENT MUST NOT CRASH ON THE MOST LIKELY FUTURE EDIT.** countsweep.py's WORDS map is a number-word RENDERING table, not an expectation table — make W() TOTAL (any integer renders; fall back to the numeral when no word exists), state that distinction in the docstring, and scope the 'never edit this script's expectations' rule to EXPECTATIONS only, explicitly permitting rendering-table growth. Prove it: the two edits that crashed it (an added coverage row to 44; an added J-HB block to 28) must now produce a FULL census that FAILS the right quantity with stdout intact.
+
+**F3 (MEDIUM) — DIFF THE NAMES, NOT THE CARDINALITY.** foreign_fields_written must derive and diff the NAME SET ({deployment.habitEpisode, treaty.habitEpisode}), not just its length, and the declared home phrases must carry the literal spellings so a re-spelling inside the WAR seam row REDS. Prove with the exact mutant that passed: treaty.habitEpisode → treatyRec.habitEpisode inside the seam row only.
+
+**F4 (MEDIUM-LOW) — MEASURE THE SECOND RECORD.** Add one measured sentence beside Q1's (i), quoting the TreatyRecord typedef BY SYMBOL from the live tree (re-measure it yourself at HEAD; the attestation read src/domain/worldPulse/peaceTermsCatalog.js as an open bag with no exact-key validator on the mint path — confirm or correct that), so the owner pricing a two-field veto sees the cheapness evidence for BOTH fields.
+
+**F5 (LOW)** — fix the provenance chronology in §3c's three-hand-lists paragraph (the polish cannot follow the attestation; {2,3,6,10} is the attestation-era two-clause answer J-HB-26 corrects) and reconcile J-HB-25's veto-cost sentence so both homes of the audit trail agree.
+
+**F6 (LOW)** — 'thirteenth move/option' is anchored to nothing (the largest joined vocabulary is eleven; thirteen was borrowed from the twelve circumstance classes, which are not options). Re-spell all three homes to 'no additional move'.
+
+**F7 (LOW)** — VERIFY_oddsratio.py's caseC comment states the STRUCK 1.7941 as its target. Fix the comment to state the executed result (1.6933, p_deploy 0.2104) and note 1.7941 as struck-not-reproducing. Re-hash the script and update every md5 the volume quotes for it.
+
+**THE Q1 THIRD-FIELD CLAUSE (chair ruling, record it):** the round-3 reviser found a THIRD spelling, occupationRecord.habitEpisode, in HB-9's occupation close, and correctly recorded rather than decided it. Rule: it stays DEFERRED and VISIBLE — Q1 gains an explicit clause stating that IF HB-9's occupation close converts to a carried road, it carries a THIRD owner-gated persisted field and Q1 RE-OPENS at that wave. Persisted shape is owner-gated; this volume does not decide it.
+
+**METHOD:** after every edit, re-run countsweep.py (both families) — it must end at ZERO DIFFS. Re-paste §9's census. Re-run the full mutant battery for any instrument change. RETURN: per-finding disposition, the J-HB-28 family's quantity list and mutant results, the countsweep verdict, new line count and md5s.`, { label: 'cap:revise4', phase: 'Cap Revise', model: 'opus' })
+
+phase('Cap Attest')
+const capAttest = await agent(GROUND + `
+
+YOU ARE THE FINAL ATTESTATION, AND THE ARC ENDS WITH YOUR REPORT REGARDLESS OF WHAT YOU FIND. The chair has capped this review: after four rounds the habit volume seals on your report. Anything you find that is not closed becomes a RECORDED LIMITATION in your return — never a request for a fifth round. Report it as such, plainly, with the shape of a future repair if one exists.
+
+The round-4 reviser reported: ` + JSON.stringify(cap).slice(0, 14000) + `
+
+DO THIS: (1) run countsweep.py yourself — BOTH families — and confirm zero diffs; (2) AUDIT THE NEW FAMILY adversarially: re-plant a struck premise unmarked at a fresh home (must red), plant a legitimately-quoted one (must stay green), and confirm the crash class is gone (add a coverage row and a J-HB block on copies — full census, right quantity fails, stdout intact); (3) confirm the F3 name-diff mutant now reds; (4) verify J-HB-5 no longer asserts the refuted premise and its veto cost is the true one; (5) read the volume's §6 judgment blocks and §0.3 refutation register END TO END with fresh eyes, hunting any OTHER block whose claim the later rounds refuted — that is the class this round exists to close, and it is the last hunt; (6) state, for the record, whether an implementer could build HB-0 and HB-1 from this volume alone.
+
+RETURN structured JSON: sealVerdict SEALED or SEALED-WITH-LIMITATIONS, recordedLimitations[] (each: what it is, why it survived, the shape of a future repair, whether any instrument can see it), buildableFromVolumeAlone (boolean + one sentence), closingSentence (one sentence, honest, on what this volume is and what it is not).`, { label: 'cap:attest4', phase: 'Cap Attest', model: 'opus', effort: 'xhigh', schema: { type: 'object', required: ['sealVerdict', 'recordedLimitations', 'closingSentence'], properties: { sealVerdict: { type: 'string', enum: ['SEALED', 'SEALED-WITH-LIMITATIONS'] }, recordedLimitations: { type: 'array', items: { type: 'string' } }, buildableFromVolumeAlone: { type: 'string' }, closingSentence: { type: 'string' }, notes: { type: 'string' } } } })
+
+return { cap, capAttest }

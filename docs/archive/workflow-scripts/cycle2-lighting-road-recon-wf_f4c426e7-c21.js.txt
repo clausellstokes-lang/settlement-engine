@@ -1,0 +1,26 @@
+export const meta = {
+  name: 'cycle2-lighting-road-recon',
+  description: 'Read-only substrate recon for cycle 2 (SP-B + SP-B2 + ES-4, the WR-10 lighting road): re-measure every load-bearing premise at current HEAD',
+  phases: [
+    { title: 'Recon', detail: 'three substrate lenses in parallel, read-only, no gates' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const LAWS = `You are a READ-ONLY recon surveyor for the session chair of an owner-delegated build program. Work in ${TREE} (branch claude/composite-r4). You MUST NOT edit, create, or delete any file, run vitest/npm/any gate, or run any state-mutating git command (status/log/show/grep are fine). Another lane may take the tree for gated work at any time — your reads must never collide. LIVE CODE OUTRANKS EVERY DOCUMENT: for every premise you report, run the grep/read that proves it at the CURRENT HEAD and label each row CONFIRMED (executed evidence, quote the symbol and file) or REFUTED (what the doc claims vs what the tree holds). The J-WR-13 stop rule binds: an overstatement you find is REPORTED prominently, never silently corrected. Navigate by SYMBOL. Your final message is a data return.`
+
+phase('Recon')
+const [spb, spb2, es4] = await parallel([
+  () => agent(LAWS + `
+
+LENS 1 — SP-B: THE BELIEF AXES. Read the SP-B wave block and its premises in docs/DESIGN_FP_ARCH_SP.md (find the SP-B section by symbol search, not line number) and the parent charter in docs/DESIGN_FP_ARCHITECTURE.md section 5. Then re-measure at HEAD: (a) the belief estate as it exists — beliefMap/beliefRecord machinery, which appraisal axes exist today and which of the four legs the WR-10 memory calls absent really are absent (grep the axis names the SP volume mints; the standing claim is 3 of 4 appraisal legs exist NOWHERE — confirm or refute with the grep that proves it); (b) every symbol SP-B's spec says it will create — confirm ZERO already exist (the collision-at-birth class); (c) every existing symbol SP-B reads — confirm each exists with the exact export name and module; (d) the beliefRecord(x,x) self-belief hazard (the recorded dead-band memory) — is the self-belief row still never written; (e) SP-B's Bands line obligation (the SP volume's shrink-only backlog says SP-B owes its own Bands line to land — quote the backlog clause). RETURN JSON: rows (array of {premise, verdict CONFIRMED|REFUTED, evidence}), hazards (array), buildOrderConstraints (array).`, { label: 'recon:SP-B', phase: 'Recon', model: 'opus' }),
+  () => agent(LAWS + `
+
+LENS 2 — SP-B2: THE LEG SUPPLY. Read the SP-B2 wave block in docs/DESIGN_FP_ARCH_SP.md (find by symbol search) including the THIS-WAVE-PLUS-SP-B lighting-discharge paragraph, and the parent section-5 entry. Re-measure at HEAD: (a) every mechanism site SP-B2 wires — the leg-supply seams into whatever SP-B2 names (quote each symbol + module and confirm it exists); (b) the current spelling of the lighting-discharge condition at BOTH SP-volume sites (the volume may still say two members SP-B + SP-B2 — quote exactly what stands at HEAD; a pending fold amends it to three adding ES-4, so record the current state verbatim for the landing diff); (c) whether ANY SP-B2-named symbol already exists in the tree (collision check); (d) the wave's gate list and what its dormancy fences must cover per the CQ5 flag law if SP-B2 carries a flag (does the spec give it one, or does it ride SP-B's? — the SP-A memory says SP-B2 is recorded no-bands-by-design, a supply shim riding SP-B's flags; confirm from the doc). RETURN JSON: rows, hazards, buildOrderConstraints.`, { label: 'recon:SP-B2', phase: 'Recon', model: 'opus' }),
+  () => agent(LAWS + `
+
+LENS 3 — ES-4 AND THE LIGHTING ROW ITSELF. Read the ES-4 wave block in the PROMOTED espionage volume at /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c44e5d99-2ba5-49d5-a554-40b68534c8eb/scratchpad/fold-pass/DESIGN_FP_ARCH_ES.md (its repo landing is pending; treat it as the spec) plus its section-6 item 5 lighting-convergence clause. Re-measure at HEAD in ${TREE}: (a) the sovereigntyTradeEnabled certification row — where it lives, its current lighting-order condition verbatim; (b) what ES-4 depends on from ES-0..ES-3 (the dependency reality: which symbols ES-4 reads that earlier ES waves mint — list them so the chair can see the strict-order chain); (c) the WR-10 dark instrument's current state (the sovereignty market memory: five pure leaves, eligibility = ledger membership) — confirm the instrument is still dark and untouched since 71e78fe9 (git log the five leaves); (d) the anonymity-law amendment homes (informationStatecraft.js boundary header + DESIGN_FP_INFORMATION.md section 1b) — quote their CURRENT unamended text so the fold landing has a fresh anchor check; (e) the warSeatBooks vocabulary state (CR-ES-3's target): confirm the producer words chaotic|balanced|lawful and benevolent|balanced|malicious still stand, and the three cross-file consumers (envoyNegotiationPictureBuilder, warTermination, settlementStrategy) still read them as recorded. RETURN JSON: rows, hazards, buildOrderConstraints.`, { label: 'recon:ES-4-lighting', phase: 'Recon', model: 'opus' }),
+])
+
+return { spb, spb2, es4 }

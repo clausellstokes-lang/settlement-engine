@@ -1,0 +1,23 @@
+---
+name: dossier-editor-capability-atlas-verdict
+description: 2026-07-26 verified verdict on the dossier-as-editor + Capability Atlas + Surveyor-planner conversation — mostly already ratified/built; atlas legal only as read-only projection; 3 owner rulings open
+metadata: 
+  node_type: memory
+  type: project
+  originSessionId: b393f918-f75e-470b-8e34-78c7bbed8bb8
+  modified: 2026-07-26T19:30:36.053Z
+---
+
+The owner brought a claude.ai conversation proposing: dossier as primary editing surface behind an Edit toggle, per-card contextual editing + section Adds, a "Capability Atlas" mapping everything editable/actionable/influenceable, and Surveyor as NL planner over it. Verified 2026-07-26 by 3 Opus agents against minifold (composite-r4 @ 8033ddbe + live tree).
+
+**Verdict: largely already ratified and partially built.** Dossier-as-editor IS the G-2 Settlement Workbench (see [[game-grade-program-rearchitected]]); an "Edit Dossier" toggle already exists (SettlementDetailActions.jsx:31-46, editMode in settlementSlice); there is NO separate editor page; Event Composer = exactly 31 authorable verbs of 40 (affordanceManifest.js, walker-pinned); the G-2a proof (EntityInspector fixed overlay + ChangeDock inline section) is flag-off in the tree. The Surveyor propose→preview→stage→approve→receipt loop is DESIGN_AI_CONTROL_SURFACE.md §0/§3d ("BIAS TO THE FORM"), shipped per-stage, terminating in exactly 3 registered command kinds (surveyorCommandBoundary.test.js). "AI drafts prose within registered schemas" is an EXISTING class, not a finite-semantics breach: mechanical fields are enum|boolean|reference by generated-manifest construction; free text only lands on effect:'presentation' or shadow ai_data.
+
+**Capability Atlas ruling:** legal ONLY as a derived read-only projection (descriptor union), never an authoritative registry — the program rewrite explicitly bans a cross-layer verb registry owning permissions/dispatch. DESIGN_AI_CONTROL_SURFACE §1 already names the union ("one OperationEnvelope over all six op families") as the standing gap. Substrate today: 43 composer verbs are atlas-grade (executable predicates → available/reasons/unlocks); 181 store ops carry 8 flat fields (scope total; recovery `undoToken:null` overloads irreversible-vs-unbuilt); only the 7 commandRegistry specs carry delivery/atomicity/preflight. Aggregation precedent exists: buildCompendiumDataObject() already projects all 181 ops under test. **Biggest hole: downstream reach — nothing anywhere declares op→affected-systems edges** (consumer registries are field-level: 13 engine fields, 4 npc facets, custom-content declared-not-proven). Constraints: closure budget margin ~54 bytes → atlas must be a lazy leaf or build-time artifact; sceneSemantics deliberately separates scene/canonical address spaces — joining them is an owner decision.
+
+**Genuinely new, owner-gated:** (1) multi-step Surveyor goal decomposition across op families — no substrate; engine-stays-LLM-free ceiling is deliberate; recommend parking until the descriptor union exists. (2) The conversation's interaction-class taxonomy (authorable/structural/actionable/influenceable/presentational/immutable-evidence) is genuinely better vocabulary than the program's write-only change classes — worth adopting as a G-2b column, esp. "influenceable" for derived facts (edit through causes, never overwrite). (3) Global Edit toggle vs the program's contextual-entry ruling (prelude superseded) — keep-or-retire needs an owner word.
+
+**Enforcement gaps found in passing (chips spawned):** table-clerk is a live client AI transport invisible to the E-D census (edge fn never existed in-tree; discovery is edge-directory-based); byok resolveProviderKey fails open to the server key on RPC error. ~~commandRegistry has NO registration walker~~ / ~~custom-content consumers never file-verified~~ — BOTH STALE as of 2026-07-26: the walker exists (untracked, 11-kind pin) and the consumers gap closed via untracked work; see [[capability-atlas-shipped]].
+
+**SUPERSEDED 2026-07-26:** the atlas was BUILT per owner order — see [[capability-atlas-shipped]]. Command kinds are 11 (not 7); ops are 180+72 exempt (not 181).
+
+**UPDATE 2026-07-26 — gaps 2 and 3 are CLOSED** (built in minifold, still uncommitted): see [[command-registry-consumer-evidence-walkers]]. That memory also corrects a claim above — the atlas census must anchor on the DISPATCH point, not on `makeCommandEnvelope`, because `recoverCanonEventCommand` executes a caller-supplied raw envelope. It further confirms this file's "custom-content declared-not-proven" note with 4 exact instances (all `factions.*`). Still open: table-clerk E-D invisibility and the byok fail-open.

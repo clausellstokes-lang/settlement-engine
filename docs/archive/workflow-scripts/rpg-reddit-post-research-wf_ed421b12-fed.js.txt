@@ -1,0 +1,24 @@
+export const meta = {
+  name: 'rpg-reddit-post-research',
+  description: 'Three research lenses on what succeeds on r/rpg: top tool posts and their shared structure, self-promotion rules, and AI sentiment — grounding for a launch-teaser/feedback post',
+  phases: [
+    { title: 'Research', detail: 'three web lenses in parallel' },
+  ],
+}
+
+const NOTE = `You are researching for a Reddit post an indie developer will make on r/rpg (and possibly adjacent tabletop subreddits) about a solo-built settlement/world generator-plus-simulator for tabletop games. You have web access: use WebSearch and WebFetch (load them via ToolSearch first if needed; you can also browse reddit directly). Return CONCRETE findings with examples quoted or closely paraphrased and rough upvote counts where visible. Your final message is a data return for the writer, not prose for a human. Do not draft the post yourself.`
+
+phase('Research')
+const [structure, rules, sentiment] = await parallel([
+  () => agent(NOTE + `
+
+LENS 1 — WHAT THE MOST SUCCESSFUL r/rpg TOOL/GENERATOR POSTS HAVE IN COMMON. Find highly-upvoted posts on r/rpg (and if thin, r/DnD, r/worldbuilding, r/DMAcademy) where a creator announced or previewed a tool, generator, or app — think Azgaar's Fantasy Map Generator, Watabou's city/village generators, donjon, Kanka, LegendKeeper, dScryb-type things, one-page-tool posts, itch.io generator posts. For the top examples you can find, extract: the TITLE pattern (how they phrase it — first person? what verbs? do they name the tool?), the OPENING line strategy, body LENGTH (rough word count), structure (prose vs bullets, screenshots/links placement), how they handled the link (in post vs comments), how they framed FREE vs paid, how they asked for feedback, and what the top comments praised or attacked. Also note failed/removed examples if visible and why they failed. RETURN: a list of 8-15 concrete findings, each one sentence of pattern plus one example, then a compressed COMMON-DENOMINATOR list (the 5-7 things the winners all did).`, { label: 'research:structure', phase: 'Research' }),
+  () => agent(NOTE + `
+
+LENS 2 — r/rpg RULES AND MODERATION REALITY FOR CREATOR POSTS. Fetch the current r/rpg sidebar/wiki rules on self-promotion and advertising (reddit.com/r/rpg — the rules page and any self-promo wiki). Report: the exact self-promotion policy (ratios, disclosure requirements, what counts as advertising, flair requirements, whether feedback-seeking pre-launch posts by disclosed creators are allowed), any rules about AI content specifically, and how strictly these are enforced in practice (look for moderator comments on removed tool posts). Also check the adjacent subs r/DnD, r/DMAcademy, r/worldbuilding, r/DnDBehindTheScreen for whether a creator feedback post would be allowed there, one line each. RETURN: the r/rpg policy compressed but precise (quote the load-bearing phrases), the AI-content rule status, an enforcement-reality note, and the one-line per-sub viability list.`, { label: 'research:rules', phase: 'Research' }),
+  () => agent(NOTE + `
+
+LENS 3 — HOW r/rpg RECEIVES AI-ADJACENT TOOLS, AND WHAT LIVING-WORLD APPETITE LOOKS LIKE. Two halves. (a) AI SENTIMENT: find recent r/rpg (and r/DnD, r/DMAcademy) threads about AI tools for tabletop — generators, AI GMs, AI art. What framings got torched (quote the attack lines), and did ANY AI-adjacent tool post survive or do well — if so, what did it do differently (disclosure? AI-optional? human-authored content emphasized?). List the specific red-flag phrases that reliably draw hostility (AI-powered, revolutionary, game-changer, etc.) and the framings that defuse it. (b) LIVING-WORLD APPETITE: find threads where GMs discuss wanting or using living world / simulationist prep — factions that act between sessions, economies, wars progressing off-screen, news reaching players. What do people say they WANT from such a tool, what do they fear (prep overload, loss of authorship, railroading), and what suggestions recur? RETURN: two lists — AI-framing findings (attack lines, survivor framings, red-flag phrase list) and living-world findings (desires, fears, recurring feature suggestions), each item concrete.`, { label: 'research:sentiment', phase: 'Research' }),
+])
+
+return { structure, rules, sentiment }
