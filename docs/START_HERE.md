@@ -83,6 +83,29 @@ intent survives even without the memory estate.
   parallelization map, the diagnostic-soak harness, the V5 cull counsel).
   **None of them had pushed anything.** Re-dispatch any that did not land.
 
+**⛔ THE BUILD STREAM IS PAUSED — DELIBERATELY, BY THE OWNER (2026-08-06).**
+Paused at build HEAD `cbd348a5` (SP-C, the posture read) with a CLEAN TREE.
+Cycle 4's remaining waves — **SP-D (the errand spine), GR-2 (pact formation),
+IN-0a (the plant handoff)** — are UNSTARTED, not half-done: SP-D was still
+measuring and had written nothing when the lane was stopped. THE STOP COST
+NOTHING; there are no partial edits to survey.
+
+**SP-C WAS INDEPENDENTLY VERIFIED AT THE PAUSE** (chair-executed, not taken
+from the lane's own report): its battery `tests/domain/strategicPosture.test.js`
++ `dispositionAppetite` + `strategicPostureDormancyFence` + the collision walker
++ `subsystemRowsVirtual` = **5 files / 92 tests PASSED**; the four shared
+walkers it touched = **4 files / 66 tests PASSED**;
+`[domain-strict] ✓ no strict-type regressions (1313 errors, ceiling 1313)`,
+exit 0; the CQ5 trio confirmed present (flag in `simulationRules.js`, its
+certification row in `subsystemRowsVirtual.js`); and CR-C4-1 honored —
+`courtPostureOf` / `courtRiskAppetiteOf` are exported and `riskToleranceOf`
+still resolves to exactly ONE definition in `src/domain`, the roads NPC read.
+
+**TO RESUME THE BUILD:** re-dispatch cycle 4 from SP-D. Its brief is archived at
+`docs/archive/workflow-scripts/fp-cycle4-spine-unlock-wf_0c8e63e0-07b.js.txt`.
+SP-D unblocks FIVE downstream waves across four volumes (ES-1, TR-8, WF-2b,
+IN-4, INT-3b), so it is the highest-leverage single wave remaining.
+
 **RULINGS MADE THIS SESSION (all vetoable by the owner, all recorded):**
 - **§3h — THE ENDGAME TAIL.** Nothing that can move an output may land after
   the TUNING SIGNATURE. Read §3h; it is the ONE authoritative ordering.
