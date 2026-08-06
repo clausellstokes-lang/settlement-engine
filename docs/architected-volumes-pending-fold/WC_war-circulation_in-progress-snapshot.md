@@ -27,6 +27,43 @@ WAR/WY amendment volume, per the directive's own fold instruction.
 > contribution is a NEW road, not an extension of the receiver-side levy
 > sweep, and the levy sweep is MEASURED SILENT. The chair question set
 > grew to CR-WC-22 (CR-WC-8 gained a third part).
+> AMENDED, ROUND 3 (2026-08-06): fifteen further adversarial findings
+> applied in place, ZERO parked -- none of the fifteen repairs
+> contradicts the directive's stated intent, so the chair question set
+> stays at CR-WC-22 (CR-WC-9's field batch grew from THREE new
+> spatialLedgers to FOUR). NO new model subsections and NO renumbering;
+> 1.7.1 is RE-TITLED ("TWO caps, TWO names"). The round's largest repair
+> is THE COLUMN RELEASE FORK (7.A.8 / WC-0 / 2.3): the class widening
+> had enumerated the two stamps and the key and never touched
+> `isDemographicColumn`, so every WC column would have been released by
+> M4's arrival pass into a settlement's census -- the single defect in
+> this volume most likely to have shipped GREEN, since WC-0's
+> byte-identity pin holds perfectly and the failure surfaces only at
+> WC-6. Five vocabulary/event holes closed in 0.2 and 7.A.4 (SOURCES
+> with `birth` signatured, TAG_SELECTIONS minted, `merge` and `reclass`
+> named, the block-touching update set DERIVED rather than listed in
+> prose); the comradeship integral SITED
+> (spatialLedgers.serviceBonds -- four mid-war consumers had been
+> calling a symbol with no storage); WC-6's reconciliation pin restated
+> as DIRECTIONAL with a MANDATORY SELF-ORIGIN BLOCK, having been
+> unpassable on both of its clauses; `arrive_home` stopped laundering
+> foreign-origin cohorts into the host; the skim's ATTRIBUTION became
+> belief-lagged while its shortfall stayed immediate; "the balance" and
+> "the cap" each ruled to ONE quantity; and the budget paragraph's two
+> disagreeing totals became one derived triple (4,960 / 5,290 / 5,090).
+> THE ROUND-3 SWEEP INTO THE APPENDICES was completed last and found its
+> own residue: 7.A.4, 7.A.8, 7.B, 7.C, 7.E and CR-WC-9 still carried the
+> pre-round-3 arities, beats and pin inventory after sections 0-3 had
+> moved -- the same two-arity failure 1.12.2's own correction closes,
+> reintroduced by the amendment. All six are now swept.
+> Where the round-3 findings cited LIVE CODE the citations were
+> re-measured at HEAD cbd348a50567114b8743508f9ff954d39123d32b:
+> migration.js :474 / :483 / :520 / :545 / :553 / :578 / :598,
+> demographicsMigration.js :458 / :505 / :636, deploymentReturn.js
+> :273 / :302, warHomeCosts.js :443-450 -- ALL CONFIRMED. Note that
+> `releaseArrivals` is DECLARED at :578 and its release guard sits at
+> :598; both addresses are now stated wherever the symbol is cited, so
+> the volume no longer names one function at two line numbers.
 > Every symbol, line count, and law citation below was
 > re-verified against that sha or carried from one of the six commissioned
 > censuses (A: army lifecycle, B: settlement interior, C: diplomacy,
@@ -530,8 +567,9 @@ COHORT_AGE_BANDS (3), FREE_UNIT_STATES (4), EMBATTLED_RESOLUTIONS (4),
 CONTRIBUTION_DELIVERY_GRADES (3, at WC-1),
 CONTRIBUTION_CLOSE_GRADES (4, at WC-9 -- per HABIT's graded-close
 contract), CALL_IN_ANSWERS (4), CALL_IN_OUTCOMES (3), and the people
-ledger's own POOLS (4) / RESIDENCY_TAGS (2) / COUNT_EVENTS /
-TAG_EVENTS / SINKS (3) / SOURCES (1) / TAG_SELECTIONS (3). The last
+ledger's own POOLS (4) / RESIDENCY_TAGS (2) / COUNT_EVENTS (15) /
+TAG_EVENTS (4) / SINKS (3) / SOURCES (1) / TAG_SELECTIONS (3) --
+arities as 7.A.4 lists them, which is the ONE member-list site. The last
 two were the compliance line's own holes until round 3: the tag arm's
 SELECTION was a typed bucket named three times in prose and minted
 nowhere (0.2), and `births` was the identity's only source term and not
@@ -1404,10 +1442,13 @@ should have to travel.
     is minted; the skim rides the one this volume already built. Under
     infoMode omniscient the two collapse into one tick, exactly as the
     composition read does.
-    THE BEAT SPLITS WITH THEM (7.C): the shortfall beat is the sender's
-    book coming up short with nobody named; the naming is the second,
-    later beat. A shortfall that never earns its rumor stays a hole in
-    the ledger forever, which is the honest outcome and a good one.
+    THE BEAT SPLITS WITH THEM, AND 7.C CARRIES BOTH KINDS BY NAME:
+    `wc_relay_shortfall` is the sender's book coming up short with
+    NOBODY NAMED, and `wc_relay_skim` -- which before round 3 was the
+    ONLY kind and was authored as "[stager] took a cut on the [sender]
+    road" -- becomes the second, later NAMING beat. A shortfall that
+    never earns its rumor stays a hole in the ledger forever, which is
+    the honest outcome and a good one.
 
 WC-3 PINS BOTH ARMS, as WC-7 already does for composition: a lagged
 fixture (skim at tick T, rumor arrival at T+k) asserts the shortfall at
@@ -3225,11 +3266,11 @@ genuinely-new figure, used in both sentences, with every part shown.
                                                                       (byte-identical: no
                                                                       producer yet)
     THE COLUMN DISCRIMINATOR   isDemographicColumn (:483) and its     THE THREE-WAY SPLIT of
-    (the release fork -- the   ONE structural consumer                7.A.8, and the :598 guard
-    row that was missing and   releaseArrivals (:598); its other      WIDENED to
-    would have landed every    consumers demographicsMigration.js     `isDemographicColumn(col)
-    WC column in M4's arrival  :458 / :505 / :636 -- all verified     || isMilitaryColumn(col)`
-    pass)                      at HEAD                                IN THE SAME WC-0 COMMIT,
+    (the release fork -- the   ONE structural consumer                7.A.8, and the guard at
+    row that was missing and   releaseArrivals (declared :578,        :598 WIDENED to
+    would have landed every    its release guard at :598); its        `isDemographicColumn(col)
+    WC column in M4's arrival  other consumers demographicsMigration  || isMilitaryColumn(col)`
+    pass)                      .js :458 / :505 / :636 -- verified     IN THE SAME WC-0 COMMIT,
                                                                       with the fail-closed
                                                                       normalize arm the same
                                                                       predicate widening owes
@@ -3408,8 +3449,11 @@ migration.js:483) is
 `DEMOGRAPHIC_COLUMN_CLASSES.indexOf(String(column.travelClass ?? ''))
 >= 0`, and its own docstring says it "FAILS CLOSED toward M4: a column
 with no class, or a class this module has never heard of, is M4's".
-`releaseArrivals` (:598) reads
-`if (isDemographicColumn(col)) { next[key] = col; continue; }` -- it
+`releaseArrivals` (DECLARED at :578) guards its transit hold at :598
+with `if (isDemographicColumn(col)) { next[key] = col; continue; }`
+-- the function and its guard are two different line addresses and both
+are named, because a single number here is exactly the hand-keyed
+line-address rot 5.7 forbids. It
 KEEPS the demographic columns in transit for their own lane and
 RELEASES everything else. Its other consumers are
 demographicsMigration.js:458, :505 and :636, all verified. CONSEQUENCE
@@ -3703,7 +3747,11 @@ lights at WC-9, 1.3.2), THE TROOP/STORES FORK (troop columns route the
 same roads and take the same interdiction exposure but neither stage
 nor skim, 1.3.3), the relay conservation identity taught
 to the shipment rebuild IN THE SAME COMMIT (the smuggle:true class),
-relay news beats, the twin-note in supplyWebWarfare.js and
+THE TWO RELAY BEATS -- `wc_relay_shortfall` (immediate, nobody named,
+reason `unknown_hands`) and `wc_relay_skim` (the NAMING beat, fired on
+the arrival of the naming rumor at the sender), which were ONE beat
+carrying an omniscient attribution before round 3 (1.3.2, 7.C) -- and
+the twin-note in supplyWebWarfare.js and
 relayNetwork.js (pressure vs physical instruments).
 
 PINS: THE RELAY CONSERVATION WALKER (per consignment, debited = arrived
@@ -4977,16 +5025,29 @@ one -- and 1.3.2's paragraph says so in terms, so the narrowing can
 never again be made by silence.
 
 CR-WC-9 THE FIELD BATCH. How many new persisted fields does WC
-request, and signed how? The list: deployment.blocks[],
+request, and signed how? The list: deployment.blocks[] INCLUDING
+blocks[].drawnCohorts (the banked origin composition of 0.2's tag arm,
+without which `arrive_home` launders foreign-origin cohorts into the
+host -- 1.13.1),
 transit blocks projection, shipment relay buckets
 (consumed/skimmed/destroyed), column cohort tag + military classes,
-plus three new spatialLedgers (warContributions, freeUnits,
-residentCohorts) and one edge archive (contribution closes).
+plus FOUR new spatialLedgers (warContributions, freeUnits,
+residentCohorts, and serviceBonds -- the per-PAIR comradeship
+accumulator four consumers read MID-WAR, which had no home anywhere in
+this volume before round 3 and which blocks[], being per BLOCK,
+structurally cannot carry: 1.6.1) and one edge archive (contribution
+closes, whose `shared_service` row is the war-close SUMMARY of
+serviceBonds, never its storage).
 RECOMMENDATION: one owner batch table per the WY section 2a
 precedent, signed before WC-6 (WC-0/WC-1 touch only the new ledgers,
 which the blanket sign-off's queue coverage arguably reaches --
 chair to confirm whether a fresh table is owed given the blanket
-sign-off's carve-outs).
+sign-off's carve-outs). NOTE FOR THE TABLE: serviceBonds lands at WC-9,
+AFTER the WC-6 signing point, so either the batch is signed as the full
+four-ledger list up front or serviceBonds carries a one-row addendum at
+its own landing; the recommendation is the full list up front, because a
+field batch signed in two pieces is the shape a later wave cites without
+re-reading.
 
 CR-WC-10 THE SECOND (COUNTS-MOVER) MANIFEST. The earlier form of this
 question asked whether to WIDEN MOVEMENT_SITES to army-style steppers.
@@ -5288,9 +5349,17 @@ and never flattened into a cross-product ladder (1.9.3).
                                                    law)
     COUNT_EVENTS = ['arrival', 'arrive_home', 'defect', 'depart',
                     'dispatch', 'dm_removed', 'enlist', 'fell',
-                    'fission', 'mortality', 'muster', 'orphan',
-                    'rejoin', 'shed']             (codepoint-sorted;
-                                                   order-free)
+                    'fission', 'merge', 'mortality', 'muster',
+                    'orphan', 'rejoin', 'shed']   (FIFTEEN, codepoint-
+                                                   sorted; order-free.
+                                                   `merge` is round 3's
+                                                   addition -- directive
+                                                   (i)'s sibling-unit
+                                                   arm, free_unit ->
+                                                   free_unit', which had
+                                                   no event and
+                                                   therefore no road,
+                                                   1.7.3)
     CENSUS_DEBITING = ['dispatch', 'enlist', 'mortality', 'muster']
                                                   (the subset carrying a
                                                    TAG ARM in
@@ -5301,12 +5370,18 @@ and never flattened into a cross-product ladder (1.9.3).
                                                    `untag` of the
                                                    free_lance overlay
                                                    for enlist, pro-rata
-                                                   for mortality -- 0.2)
-    TAG_EVENTS   = ['brigand', 'demobilize', 'untag']
-                                                  (move no counts; named
-                                                   anyway, because an
-                                                   unnamed branch is how
-                                                   a defect hides.
+                                                   for mortality -- 0.2.
+                                                   Each arm's selection
+                                                   is a REQUIRED
+                                                   TAG_SELECTIONS member
+                                                   and an absent or
+                                                   unknown one fails at
+                                                   MODULE LOAD)
+    TAG_EVENTS   = ['brigand', 'demobilize', 'reclass', 'untag']
+                                                  (FOUR; move no counts;
+                                                   named anyway, because
+                                                   an unnamed branch is
+                                                   how a defect hides.
                                                    `untag` carries a
                                                    RESIDENCY_TAGS kind
                                                    and SUBSUMES the
@@ -5321,11 +5396,66 @@ and never flattened into a cross-product ladder (1.9.3).
                                                    event" with no event
                                                    to name -- the one
                                                    unnamed branch this
-                                                   volume had left)
+                                                   volume had left.
+                                                   `reclass` is round 3's
+                                                   addition: it is the
+                                                   ONLY producer of
+                                                   `shed_column` (7.A.8,
+                                                   1.12.2), carries
+                                                   {fromClass, toClass,
+                                                   fromKey, toKey}, and
+                                                   moves a LEDGER KEY
+                                                   with the counts held
+                                                   -- an unannounced
+                                                   delete-and-recreate is
+                                                   the count-dropping
+                                                   shape the walker
+                                                   exists to catch)
     SINKS        = ['fell', 'mortality', 'dm_removed']
                                                   (three DECLARED sinks;
                                                    the identity subtracts
                                                    exactly these)
+    SOURCES      = ['birth']                      (the identity's ONE
+                                                   declared source,
+                                                   exported BESIDE SINKS
+                                                   in the SAME frozen
+                                                   object (0.2). Until
+                                                   round 3 `births` was a
+                                                   bare term in the
+                                                   walker law with no
+                                                   signature, no wave and
+                                                   no coverage, so an
+                                                   invented birth was
+                                                   invisible by
+                                                   construction.
+                                                   `birth`'s signature is
+                                                   SOURCE -> census and
+                                                   it carries NO TAG ARM:
+                                                   a newborn takes no
+                                                   cohort tag and no
+                                                   free_lance overlay,
+                                                   which is what keeps
+                                                   LAW 1's slack honest
+                                                   as a town grows)
+    TAG_SELECTIONS = ['pro_rata', 'untag_only', 'veterans_first']
+                                                  (codepoint-sorted,
+                                                   frozen, throw-on-
+                                                   unknown; the closed
+                                                   vocabulary the tag
+                                                   arms name (0.2), minted
+                                                   in round 3 -- before
+                                                   which the selection was
+                                                   a typed bucket said
+                                                   three times in prose
+                                                   and declared nowhere.
+                                                   The mapping is fixed:
+                                                   `mortality` pro_rata,
+                                                   `muster`/`dispatch`
+                                                   veterans_first (which
+                                                   degrades to pro-rata
+                                                   at zero preference or
+                                                   no veteran row),
+                                                   `enlist` untag_only)
 
 Each event's debit/credit signature is section 0.2's table, exported
 as EVENT_SIGNATURES so the walker derives its checks from the same
@@ -5338,6 +5468,24 @@ PART OF THE SIGNATURE, not a convention beside it: a mover that debits
 census without running its arm diverges from the frozen object and
 reds. `untag`'s kind set is asserted EQUAL to RESIDENCY_TAGS, so a new
 tag cannot be minted without a retirement.
+
+TWO SIGNATURES ARE INTRA-POOL AND THEREFORE INERT TO THE POOL-LEVEL
+IDENTITY, AND BOTH ARE PINNED AT KEY LEVEL INSTEAD. `defect` is
+block -> block' and `merge` is free_unit -> free_unit': the pool sums
+do not move, so the walker's arm for each is a KEY-level conservation
+check (the surviving key's per-origin headcounts equal the sum of the
+two sides) rather than a pool-level one. A pool-level-only walker would
+pass over a merge that silently dropped a block, which is why the arm is
+named here rather than left to the implementer.
+
+AND THE BLOCK-TOUCHING SET IS DERIVED FROM THIS OBJECT, NOT LISTED
+BESIDE IT (1.2.2). The share/blend/comradeship/drift integrals update on
+every COUNT_EVENT whose signature names the `block` pool on either side,
+computed at module load off EVENT_SIGNATURES -- today arrival, defect,
+depart, enlist, fell (its block arm), fission, muster, orphan, rejoin.
+peopleLedger.js exports that derived set; WC-7 pins it equal to the
+movers' actual call set with toEqual. A hand-kept second list here would
+be exactly the two-arity failure 7.A.8's sibling correction closes.
 
 ### 7.A.5 BLOCK_FORK_OUTCOMES (blockForks.js)
 
@@ -5380,6 +5528,11 @@ tag cannot be minted without a retirement.
                                  export; the class is part of the
                                  column KEY (migration.js:553,
                                  verified -- the collision discipline)
+    isMilitaryColumn(column)     the NEW predicate over
+                                 MILITARY_COLUMN_CLASSES, minted at
+                                 WC-0 as the twin of migration.js:483's
+                                 existing isDemographicColumn and shaped
+                                 line for line like it
 
 THREE MEMBERS, NOT TWO. `reinforcement_column` was MISSING: 1.1.2 and
 1.1.5 route an outbound contribution as census -> column (`dispatch`)
@@ -5401,6 +5554,34 @@ union in the same WC-0 commit, byte-identically, because no producer
 stamps a military class until WC-6 mints the first one. The
 key-collision PIN lands at WC-6 with that first producer and is
 re-exercised at WC-13 for `shed_column`.
+
+AND A FOURTH SITE -- THE RELEASE FORK, WHICH THE THREE-SITE ENUMERATION
+ABOVE OMITTED UNTIL ROUND 3. ":520 / :545 / :553" is stamp, stamp, key;
+it says nothing about WHO RELEASES A COLUMN. Measured at HEAD,
+`releaseArrivals` (declared at migration.js:578) guards its transit hold
+at :598 with `if (isDemographicColumn(col)) { next[key] = col;
+continue; }` -- it KEEPS demographic columns for their own lane and
+RELEASES everything else into M4's arrival pass, and
+isDemographicColumn's own docstring (:480-483) says it "FAILS CLOSED
+toward M4: a column with no class, or a class this module has never
+heard of, is M4's". A `reinforcement_column` stamped and keyed exactly
+as this appendix designs would therefore have been released by M4,
+crediting destId's population as an ordinary migration arrival --
+outside `arrival` / `arrive_home` / `shed`, invisible to WC-6's
+conservation walker, delivering lent troops into a census instead of
+into a block. THE DISCRIMINATOR IS THEREFORE THREE-WAY, NOT TWO-WAY:
+`isDemographicColumn` | `isMilitaryColumn` | unclassed-legacy = M4's,
+exactly as the existing fail-closed docstring promises. The :598 guard
+widens to `isDemographicColumn(col) || isMilitaryColumn(col)` IN THE
+SAME WC-0 COMMIT as the vocabulary; the widening is a persistence-
+surface widening and owes the same fail-closed normalize arm 1.4.1
+gives blocks[]; and it is PINNED BOTH DIRECTIONS (a military column is
+NOT released by releaseArrivals; it IS released by the WC lane, whose
+half lands with the WC-6 producer). isDemographicColumn's other three
+consumers -- demographicsMigration.js:458, :505, :636 -- are read-side
+and unchanged, verified at HEAD. WC-0 carries the executed
+widening-omitted mutant, and it is the highest-value pin in that wave
+because everything else there is byte-identical.
 
 ### 7.A.9 COHORT_AGE_BANDS (residentCohorts.js)
 
@@ -5616,6 +5797,26 @@ at WC-8, drift at WC-9, learning at HABIT's own fold.
     WC-9  COMRADESHIP_ACCRUAL_PER_CLOSE   0.03         x hardship01
                                                        from the
                                                        attrition band
+    WC-9  BOND_BAND_EDGES                 DERIVE       the bondBand
+                                                       edges over
+                                                       spatialLedgers.
+                                                       serviceBonds'
+                                                       rawBond (1.6.1),
+                                                       measured against
+                                                       the seeded
+                                                       corpus at WC-9's
+                                                       landing then
+                                                       frozen with its
+                                                       range and date --
+                                                       the dead-band
+                                                       discipline (5.5).
+                                                       The ledger was
+                                                       minted in round 3
+                                                       and its band had
+                                                       no row until this
+                                                       one; rawBond
+                                                       itself reaches NO
+                                                       surface (5.4)
     WC-9  DRIFT_HYSTERESIS_MARGIN         0.08         K2's dead zone
     WC-9  RELAY_COMRADE_BONUS              0.35         of the hop's
                                                        loss fraction,
@@ -5742,9 +5943,22 @@ pool law).
                                        [target]; the kind and band
     wc_contribution_close       WC-1   the war done, the ledger read
                                        aloud: grade + band
+    wc_relay_shortfall          WC-3   the sender's book came up short
+                                       on the [receiver] consignment;
+                                       NOBODY IS NAMED. Fires at the
+                                       arrival edge, always, with the
+                                       typed reason `unknown_hands`
     wc_relay_skim               WC-3   [stager] took a cut on the
-                                       [sender] road; the shortfall
-                                       stands in the book
+                                       [sender] road: the NAMING beat,
+                                       fired when a composition-style
+                                       rumor of the diversion ARRIVES at
+                                       the sender -- never at the theft
+                                       (1.3.2). Under infoMode
+                                       omniscient the two beats collapse
+                                       into one tick; a shortfall whose
+                                       rumor never arrives stays a hole
+                                       in the ledger forever, which is
+                                       the honest outcome
     wc_stance_crossing          WC-2/7 [party] has become the war's
                                        [rung]; mission creep spoken
     wc_composition_revealed     WC-7   [enemy court] learns who truly
@@ -5841,7 +6055,37 @@ proven -- the door-3 law, applied at every landing).
                                             branch; per-event coverage
                                             grows with each wave's
                                             closed-list addition
-    blocks/levied reconciliation     WC-6   headcount-skew mutant
+    THE SOURCE BRANCH                WC-6   the BIRTH-INFLATION mutant,
+                                            run beside the three
+                                            sink-drop mutants. `birth`
+                                            is a signatured member of
+                                            SOURCES (0.2, 7.A.4); before
+                                            round 3 `births` was a bare
+                                            term and an invented birth
+                                            was invisible by
+                                            construction -- a walker that
+                                            can see a stolen death and
+                                            not an invented birth is a
+                                            guard with one eye. The
+                                            no-tag-arm rule is asserted
+                                            in the same pass
+    blocks/levied reconciliation     WC-6   THREE mutants, because the
+                                            pin is now DIRECTIONAL
+                                            (1.4.1): headcount-skew;
+                                            MISSING-SELF-BLOCK (reds
+                                            clause (i)'s total identity,
+                                            which was unpassable before
+                                            the mandatory self-origin
+                                            block existed); and
+                                            ELECTED-ROW-WRITTEN-INTO-
+                                            THE-LEVY-MAP (reds clause
+                                            (ii)'s equality arm, and is
+                                            also the second-mouth 0.3
+                                            forbids by ruling). The old
+                                            equality-everywhere form is
+                                            recorded UNPASSABLE so no
+                                            wave restores it as a
+                                            tightening
     reconstruction-attribution scan  WC-6   an id-split call planted
                                             and caught
     arrival-not-dispatch pin         WC-1   dispatch-write mutant
@@ -5878,12 +6122,111 @@ proven -- the door-3 law, applied at every landing).
     law-band-table single-exporter   WC-0   fences land in REGISTRATION,
                                             before either volume's
                                             strategy wave -- 4.1)
+    THE RELEASE-FORK PIN             WC-0   THE HIGHEST-VALUE PIN IN THE
+                                            REGISTRATION WAVE, because
+                                            everything else there is
+                                            byte-identical and this is
+                                            the one predicate that
+                                            changes. A
+                                            `reinforcement_column`
+                                            planted on the migration
+                                            ledger is NOT released by
+                                            releaseArrivals (declared
+                                            migration.js:578; its guard
+                                            at :598 widens to
+                                            `isDemographicColumn(col) ||
+                                            isMilitaryColumn(col)`), and
+                                            the WIDENING-OMITTED mutant
+                                            reds it. Without this the
+                                            volume ships GREEN at WC-0
+                                            and delivers lent troops
+                                            into a census at WC-6
+                                            (7.A.8). The second
+                                            direction -- the WC lane DOES
+                                            release it -- lands with the
+                                            WC-6 producer
+    TAG_SELECTIONS totality          WC-0   the PLANTED-FOURTH-SELECTION
+                                            negative, plus the assertion
+                                            that every CENSUS_DEBITING
+                                            signature carries a member:
+                                            an absent or unknown
+                                            selection must fail at
+                                            MODULE LOAD, not at the
+                                            first muster. Before round 3
+                                            the selection was a typed
+                                            bucket named three times in
+                                            prose and minted nowhere,
+                                            and the walker derives its
+                                            check from the SAME frozen
+                                            object -- so an invented
+                                            shape would have become law
+                                            silently
     relay conservation walker        WC-3   bucket-drop mutant, through
                                             an in-transit tick
     skim-is-theft pin                WC-3   shortfall-without-transfer
                                             mutant (and its converse)
+    THE SHORTFALL/ATTRIBUTION SPLIT  WC-3   the lagged fixture (skim at
+                                            T, rumor arrival at T+k)
+                                            asserts the shortfall at T
+                                            with the typed reason
+                                            `unknown_hands` -- a MEMBER
+                                            of the toEqual reason set,
+                                            never an absence -- and NO
+                                            grievance or reputation
+                                            write before T+k. The
+                                            OMNISCIENT-ATTRIBUTION
+                                            mutant (naming the stager at
+                                            T, which is what this volume
+                                            designed before round 3)
+                                            reds it; the omniscient-mode
+                                            twin pins the one-tick
+                                            collapse. Two beat kinds,
+                                            not one (7.C)
+    update-set totality (DERIVED)    WC-7   the set derived from
+                                            EVENT_SIGNATURES equals the
+                                            movers' ACTUAL call set,
+                                            asserted with toEqual
+                                            against a named list, never
+                                            as a subset. TWO mutants:
+                                            the block-mover-that-skips-
+                                            the-accumulator plant, and
+                                            the DISPATCH-COUNTED mutant
+                                            (whose inclusion in the old
+                                            prose list would have let an
+                                            interdicted column BUY
+                                            STANCE, against 1.1.2's
+                                            arrival law)
     hysteresis pin                   WC-9   band-flapping mutant
     per-tick-integral fence          WC-7/9 tick-accrual mutant
+    serviceBonds single-writer       WC-9   a second writer of
+                                            spatialLedgers.serviceBonds
+                                            planted and caught by the
+                                            source scan; plus the
+                                            axes-substituted mutant
+                                            (`bondOf` reading the
+                                            relationship axes instead of
+                                            the banked integral reds the
+                                            1.6.4 fidelity fixture,
+                                            because two former comrades
+                                            now at war must still read
+                                            each other well). The ledger
+                                            was sited in round 3; before
+                                            it, four mid-war consumers
+                                            called a symbol with no
+                                            storage
+    two-caps composition pin         WC-12  raising world mass with an
+                                            army's OWN supply held
+                                            constant SHORTENS that
+                                            army's envelope -- proving
+                                            NETWORK_CARRYING_CAPACITY
+                                            reaches the army through
+                                            relay throughput and never
+                                            cuts it directly (1.7.1).
+                                            The network-cap-cuts-armies-
+                                            directly mutant reds,
+                                            because under it the
+                                            envelope does not move and
+                                            the army fissions anyway
     envelope exhaustion write-set    WC-10  realm-exhaustion-write
                                             mutant (the one-clause
                                             veto, executed)
@@ -5897,9 +6240,71 @@ proven -- the door-3 law, applied at every landing).
                                             negative) and its lit twin
     call-in fork + lapse             WC-5   flat-draw mutant;
                                             silence-as-refusal mutant
+    THE ONE-BALANCE FENCE            WC-5   a source scan asserting the
+                                            answer fork, the breach
+                                            grade and the K5 terms
+                                            weight all call
+                                            contributionReads.js's ONE
+                                            balance read and never reach
+                                            into warContributions or the
+                                            edge archive for a balance
+                                            (1.1.4: the obligation IS
+                                            the balance). THE PIN THAT
+                                            PROVES THEY ARE ONE
+                                            QUANTITY: forgiving the
+                                            obligation moves the answer
+                                            fork AND the K5 terms weight
+                                            in the SAME TICK; the
+                                            forgiveness-invisible-to-
+                                            the-fork mutant reds, and
+                                            that mutant is exactly what
+                                            a second reading of "the
+                                            balance" would have shipped
     one-stressor pin                 WC-12  parallel-stressor mutant
+    `merge` key-level conservation   WC-11  the survivor's per-origin
+                                            headcounts equal the sum of
+                                            the two units (the pool sums
+                                            never move, so a pool-level
+                                            walker is blind here). The
+                                            MERGE-DELETED mutant reds by
+                                            leaving a permanently
+                                            un-reconsolidatable unit on
+                                            the map -- the state
+                                            directive (i)'s own words
+                                            forbid -- and the fixture is
+                                            differentiated: two units
+                                            that SHOULD merge (same
+                                            origin, adjacent) and two
+                                            that should not (deep
+                                            opposing drift)
     column key-collision (RE-RUN)    WC-13  class-out-of-key mutant on a
-                                            `shed_column`
+                                            `shed_column` -- NON-VACUOUS
+                                            only since round 3, because
+                                            `reclass` is the first
+                                            producer that ever stamps
+                                            the class (before it, this
+                                            re-run passed happily over a
+                                            member nothing minted)
+    `reclass` key migration          WC-13  the before/after headcount
+                                            identity: same people, one
+                                            row, new key. The
+                                            reclass-as-drop-and-recreate
+                                            mutant reds this pin AND the
+                                            conservation walker
+    razed-destination rule           WC-13  a `veteran_return` column
+                                            whose destination is razed
+                                            mid-transit reclasses to
+                                            `shed_column`, the walker
+                                            closes at every subsequent
+                                            hop, and it `shed`s at
+                                            exactly ONE addressable
+                                            host. The column-credited-
+                                            to-a-razed-row mutant reds,
+                                            and so does the
+                                            column-dropped-on-razing
+                                            mutant (WC-14's orphan pin
+                                            covers BLOCKS; a column is
+                                            no longer a block)
     double-effect single-call pin    WC-14  two-computations mutant
     tag-ledger totality (3 LAWS)     WC-13  FOUR mutants:
                                             tag-without-census-credit
@@ -5967,6 +6372,26 @@ proven -- the door-3 law, applied at every landing).
                                             VARIANTS until CR-WC-21 is
                                             ruled; the wave does not land
                                             on a coin flip
+    muster-and-return round trip     WC-16  (its walker arm lands at
+                                            WC-13) a muster followed by
+                                            a return leaves
+                                            residentCohorts
+                                            BYTE-IDENTICAL, PER ROW --
+                                            not merely equal in total.
+                                            The COMPOSITION-DISCARDED
+                                            mutant (dropping
+                                            blocks[].drawnCohorts and
+                                            crediting the self-origin
+                                            row for the whole return)
+                                            reds it, and that mutant is
+                                            exactly what 1.13.1 designed
+                                            before round 3: LAW 1 still
+                                            CLOSES on the laundering,
+                                            because the sum is
+                                            unchanged, so the tag-ledger
+                                            walker is structurally blind
+                                            and only the round trip can
+                                            see it
     live-not-frozen fence            WC-16  frozen-score-write plant
     raw-share non-exposure           WC-7   a planted decimal render
                                             caught by proseNumerics +
