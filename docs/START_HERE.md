@@ -23,6 +23,81 @@ classes are owner-only (push→already authorized as backup; PR-merge, deploys,
    + THE_BASE_RESTORATION_LEDGER.md (Phase-D gate: zero PENDING rows),
    DESIGN_DEEP_CRAFT_PAGES.md, C1FIN_CONTROL_CENSUS.md (briefs/).
 
+## 3i. ⭐⭐ ACCOUNT-TRANSITION HANDOFF (2026-08-06, ~04:40 EDT — written FOR a
+successor on a DIFFERENT CLAUDE ACCOUNT; supersedes everything below; git wins)
+
+**READ THIS PARAGRAPH FIRST.** The owner is transitioning to another Claude
+account when weekly usage runs out. You may have NO access to this machine's
+memory estate (`~/.claude/projects/-Users-cstokes-Desktop-settlement-engine/memory/`)
+and NO access to the prior session's workflow journals. **THE REPO IS
+AUTHORITATIVE AND IT IS SUFFICIENT.** Everything load-bearing has been landed
+into git. Where this file and your memory disagree, git wins; where this file
+and the code disagree, THE CODE WINS.
+
+**⭐ THE VOLUMES ARE NOW IN GIT — `docs/architected-volumes-pending-fold/`.**
+Three architected programs (EPOCH 16 waves SEALED · HABIT 10 waves · WAR-
+CIRCULATION ~12 waves) plus two verification instruments and the diagnostic-
+soak design lived ONLY in a session scratchpad under `/private/tmp/` until
+commit `82f06898`. Read that directory's README before touching them. Each
+volume quotes its owner directive VERBATIM in its own opening section, so the
+intent survives even without the memory estate.
+
+**STATE AT WRITE TIME (verify with git — never trust this over git):**
+- Ledger branch `review-fixes-2026-07-08` (this file). Build branch
+  `claude/composite-r4` in `.claude/worktrees/minifold`, ~390 commits ahead,
+  **NOTHING PUSHED**. Pushes are owner-confirmed, terminal phase only.
+- **LANDED this era:** FP cycle 1 (closed) · the ES+WY integration fold ·
+  cycle 2 (SP-B, SP-B2, the lighting instrument) · first-paint dist repair ·
+  ES-0 (espionage foundations + the CR-ES-3 seat-vocabulary retarget) · the
+  ES-4 door-3 arc CLOSED AT THE CAP (`d48224e3`) · the blanket-sign-off row ·
+  SP-C (the posture read).
+- **MEASURED REMAINING BUILD INVENTORY (2026-08-06):** FP core 61 waves
+  (8 landed) · EP 16 · WY 12 · HB 10 · ES 8 (1 landed) · WC ~12 est. =
+  **~95 waves plus the WC volume.** An older "~65" figure in any memory is
+  STALE — it predates the three directives architected on 08-05/06.
+- **IN FLIGHT when this was written** (if these lanes died with the session,
+  their work is recoverable ONLY from what is described here plus git):
+  cycle 4 (SP-D, GR-2, IN-0a after SP-C) · the HABIT volume's round-4 CAP ·
+  the WC architecture pass · four read-only lanes (cycle-5 pre-censuses, the
+  parallelization map, the diagnostic-soak harness, the V5 cull counsel).
+  **None of them had pushed anything.** Re-dispatch any that did not land.
+
+**RULINGS MADE THIS SESSION (all vetoable by the owner, all recorded):**
+- **§3h — THE ENDGAME TAIL.** Nothing that can move an output may land after
+  the TUNING SIGNATURE. Read §3h; it is the ONE authoritative ordering.
+- **CR-C4-1** — the court reads are `courtPostureOf` / `courtRiskAppetiteOf`,
+  NEVER `riskToleranceOf` (taken by an NPC read at `roads/state.js:319`).
+- **J-HB-18** — TILT-NEVER-LOCK is an invariant on PAIRWISE ODDS RATIOS; the
+  per-probability claim is FALSE under renormalization and was DELETED.
+- **J-HB-23..28** — the habit volume's document-integrity rulings, incl. the
+  COUNT LEDGER and the STRUCK-PREMISE SCAN (see the two laws below).
+
+**TWO LAWS MINTED THIS SESSION — they generalize to every volume AND to this
+file:**
+1. **DERIVE-DON'T-RESTATE.** A hand-maintained restatement of a derivable
+   fact (a row count, a set membership, a refuted premise) goes stale at its
+   source and GREENS a shrink-only walker seeded wrong. Cures, both proven
+   with mutants: the COUNT LEDGER (numbers — one parse script derives every
+   counted quantity from the document's own tables and diffs each against its
+   declared prose homes, occurrence counts included) and the STRUCK-PREMISE
+   SCAN (claims — every refuted premise gets a signature phrase; any
+   occurrence outside the register, a strike marker, or a labelled quote
+   reds). THIS FILE had the same disease: FOUR spellings of the endgame tail,
+   three stale. Cured at §3h by one spelling and three pointers.
+2. **A MUTANT THAT PLANTS NOTHING GREENS.** A mutant whose target phrase
+   wraps a line substitutes nothing and the battery passes. EVERY mutant must
+   assert the file actually CHANGED and abort if it did not.
+
+**DO THIS FIRST, IN ORDER:** (1) `cd .claude/worktrees/minifold`, `git log`,
+`git status` — survey before believing anything here; foreign WIP is the
+owner's, preserve it. (2) Read `docs/architected-volumes-pending-fold/README.md`.
+(3) Read §3h (the tail) and §4 (the protocol — every rule there has bitten).
+(4) Read `docs/SOL_QUEUE.md` for the build order. (5) Only then resume.
+
+**THE MODEL-SUCCESSION PROTOCOL IS UNCHANGED BY AN ACCOUNT CHANGE** — see
+§6b-3. Work managed or validated by a model other than Fable carries a
+FABLE-SURVEY-OWED marker, and the next Fable session clears that debt FIRST.
+
 ## 3h. ⭐⭐ THE ENDGAME TAIL — THE ONE AUTHORITATIVE ORDERING (owner-constrained
 2026-08-06; supersedes every other tail spelling in this file and in memory)
 **Owner, verbatim:** "The soak and tuning are to be the last thing before push
