@@ -3768,3 +3768,359 @@ command from `/private/tmp/gr2fix`, and a wide run had already been started agai
 run's 28 reds are CONTAMINATED and were DISCARDED, not reported; the attribution was re-run
 uncontended. The mutex script did its job — the lesson is that it must be consulted BEFORE
 the run, not after it looks wrong.
+
+---
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · CYCLE 4 CLOSE — THREE WAVES, THREE REJECTS,
+## THREE REPAIRS, AND TWO REDS THAT LEAVE THE CYCLE STILL RED
+## (Opus 5 ledger slice under the 2026-08-06 succession directive. This row does
+## NOT replace the six wave/repair rows above it — it VERIFIES them against the
+## tree, records the two disagreements it found, and closes the cycle. Every J-*
+## enumerated below is a chair-grade judgment made without a Fable chair and is
+## VETOABLE; the enumeration exists so a later Fable session can re-rule each one
+## cheaply without re-reading six rows.)
+
+**Span:** `cbd348a5` (SP-C, the cycle-3 close) → `57fe385b` (HEAD at this row).
+Aggregate `git diff --stat cbd348a5..HEAD`: **58 files, +9,171 / −44**. Branch
+`claude/composite-r4`, worktree `minifold`. Nothing pushed. Nothing lit. No golden
+re-recorded. Zero reverts — the era's zero-revert record stands through cycle 4.
+
+### THE EIGHT COMMITS, EACH VERIFIED TO EXIST AND TO TOUCH WHAT ITS REPORT CLAIMED
+
+Verified by `git log -1` + `git show --stat` on each sha before any of it was
+recorded, because a ledger row that records an unlanded commit is worse than no row.
+
+| Sha | What | Files / diffstat, MEASURED |
+|---|---|---|
+| `01d50660` | `gate-mutex.sh` — the vitest wait that could never end | 1 file, +124 |
+| `0aac6792` | **SP-D** the errand spine generalization (FP §5 #6) | 23 files, +1,888 / −9 |
+| `a18fdcfa` | **GR-2** peacetime formation + the standalone NAP (FP §5 #10) | 31 files, +3,945 / −32 |
+| `729112df` | **IN-0a** the handoff (slice a of FP §5 #16 IN-0's four) | 17 files, +1,230 / −6 |
+| `91075d45` | GR-2 repair — the mount, the order, the road | 13 files, +719 / −29 |
+| `94d0c798` | IN-0a repair — the pins that could not fail | 6 files, +405 / −15 |
+| `9b6bed7a` | Ledger row for the IN-0a repair round | 1 file, +320 |
+| `57fe385b` | SP-D repair — two doors, and a tripwire you could rename past | 7 files, +624 / −37 |
+
+Every file named in every implementer report appears in its commit's stat. Three
+report-vs-tree notes, none of them a defect: IN-0a's "94 effective lines" for
+`brokeragePlantHandoff.js` is the EFFECTIVE measure against a raw diff of +248
+(the estate measures with `skipBlankLines`+`skipComments`, so the two are not
+comparable and the report is right); GR-2 reported `settlementLifecycleKernel.js`
+at 721→730 effective against a raw +25/−? stat, same reason; SP-D's
+`envoyErrandProjection.js` is listed "NEW" meaning a new FUNCTION in an existing
+file, and the stat correctly shows a modification.
+
+### WHERE A CLAIM AND THE TREE DISAGREED — THE TREE WON, TWICE
+
+**(1) THE `mutationCoverageManifest` LABEL-JOIN RED IS CYCLE 4's OWN, NOT INHERITED.**
+The SP-D repair row above calls it "a second inherited red, reported and not
+touched" and says it was red at pristine `94d0c798`. Both halves of that are true
+from inside that lane. **At CYCLE scope it is false, and this is the framing this
+row corrects.** Measured both ways, executed:
+
+- At `cbd348a5` (a `git archive` in the scratchpad, node_modules symlinked):
+  `tests/lint/mutationCoverageManifest.test.js` — **1 passed file, GREEN**.
+- At `57fe385b` (live tree, through `gate-tail.sh`): **RED** —
+  `sweep script plants a mutation no manifest entry claims ... expected [ …(2) ] to
+  deeply equal []`, the two orphans being
+  `info/plant handoff reads the OLDEST pulse record instead of the newest` and
+  `info/plant handoff record door relaxed from exact age to a lower bound`.
+- Attributed by machine, not by reading: `git log -S '<label>' -- scripts/mutation-sweep.sh`
+  returns **`94d0c798`** for BOTH labels.
+
+So the cycle introduced this red at its own second-to-last commit and exits with it
+open. Cause is exactly J-GR2R-7's shape one lane over: `scripts/mutation-sweep.sh`
+and `scripts/mutation-coverage-manifest.json` are ONE contract and the IN-0a repair
+moved only the sweep half. **Cure is two `kind:"mutation"` manifest claims spliced
+as RAW TEXT** (never `json.dumps` — it reformats ~1,977 lines), one per label.
+It is one edit and it belongs to whichever lane opens `mutation-sweep.sh` next; it
+is NOT a design question.
+
+**(2) `espionageEnabled` WAS MINTED AT ES-0, NOT AT ES-1 AS FP §3 ROW 44 SAYS.**
+`git log -S "'espionageEnabled'," -- src/domain/worldPulse/simulationRules.js`
+returns `55674790` (ES-0). `docs/DESIGN_FP_ARCHITECTURE.md` §3 row 44 names the wave
+as ES-1. REPORTED, NOT CORRECTED, per the J-WR-13 standing rule and the queue's own
+"live code outranks every table" header — a chair amends §3 or rules the row's
+column means "first wave that GATES on it", which would also be defensible. No wave
+should build on the §3 spelling of that cell without re-reading the census first.
+
+### THE EXIT GATE POSTURE, MEASURED AT `57fe385b` — THE CYCLE DOES NOT EXIT GREEN
+
+Measured in the live tree with the mutex clear (`ps aux | grep -c '[v]itest'` → `0`)
+and every read through `sh scripts/gate-tail.sh`, never a bare pipe.
+
+**TWO REDS CYCLE 4 OWNS AND DID NOT CURE:**
+
+1. **`npm run typecheck:domain:strict` — RED, +13, and the rule it breaks is
+   verbatim in the gate's own output.** Executed:
+   `pactFormation.js: 6 strict errors (baseline 0) — +6` ·
+   `pactProposals.js: 1 strict errors (baseline 0) — +1` ·
+   `pactTriggers.js: 6 strict errors (baseline 0) — +6`, under the printed law
+   "New/worsened files must be strict-clean." All three are GR-2's own new modules
+   (`a18fdcfa`). IN-0a's ESCALATION 2 named this first and measured it identically;
+   this row confirms it is UNCHANGED after both repair rounds. The ceiling itself is
+   still 1313 and is not breached — the failure is the per-file zero-baseline rule,
+   not the ceiling.
+2. **`tests/lint/mutationCoverageManifest.test.js` LABEL JOIN — RED**, cause and
+   cure as in disagreement (1) above.
+
+**TWO REDS THE CYCLE INHERITED AND CORRECTLY LEFT ALONE** (measured green-to-green
+against `cbd348a5`, so neither is attributable and neither is a regression):
+
+3. `tests/lint/negativeAssertionAnchor.walker.test.js` — RED at both ends. The
+   un-anchored inventory **SHRANK 72 → 71** across the cycle, which is the ratchet's
+   own preferred direction, and its second arm ("the four generation-facing trees
+   stay at EXACT zero") is red with the SAME two files at both ends —
+   `tests/generators/settlementOriginProse.test.js` and
+   `tests/property/treatyLifecycleVoiceDormancyFence.test.js`. ⚠ THE ROW-COUNT
+   SHRINK IS THE POINT: this is the recorded red-ratchet class where a byte-identical
+   fail row hides an inventory that moved, so the count is quoted here as the
+   cycle's baseline for the next lane to diff against.
+4. `npm run lint` — **30 problems / 3 errors**, executed at HEAD: `lineageClaim.js:532`
+   and `settlementStrategy.js:1275` (`no-useless-assignment`) and
+   `warCoalitionExpenditure.test.js:166` (`no-unexpected-multiline`). Not one is a
+   cycle-4 file. Identical to the figure both SP-D and IN-0a reported at their bases.
+
+**ONE RED THE CYCLE OPENED AND CLOSED WITHIN ITSELF — DISCHARGED, do not re-find it.**
+The `sovereigntyLightingContract` CENSUS (the whole-tree exact test-title count) went
+red under three concurrent lanes and was carried forward by hand twice; the IN-0a
+repair's ESCALATION 3 (J-IN0A-R8) computed the owed `titles: 18666` and handed it to
+the lane landing last. **The SP-D repair absorbed it and the walker is GREEN at HEAD**
+(executed this row: `tests/lint/sovereigntyLightingContract.walker.test.js` passes).
+`tests/domain/couplingRegistry.test.js`, the IN-0a verifier's first BLOCKING finding,
+is likewise **GREEN at HEAD** (12/12). Both are closed.
+
+### THE 46 JUDGMENTS OF CYCLE 4, ENUMERATED FOR CHEAP RE-RULING
+
+Pointers, not restatements — each id's full argument stands in the row named. A
+Fable session re-ruling any one of these should read that row's paragraph, not this
+list. **Priority order for a survey is given at the end of each block.**
+
+**SP-D as built (`0aac6792`; row heading "SP-D THE ERRAND SPINE GENERALIZATION"):**
+`J-SP-D-1` the class is dropped when derivable · `J-SP-D-2` a disagreeing supplied
+`truePurpose` is refused · `J-SP-D-3` the public projection does not announce that a
+secret exists · `J-SP-D-4` the cert row went to `subsystemRowsVirtual.js` not a new
+spine-lane file · `J-SP-D-5` SP-D does not shrink the SP-A bands backlog, deliberately ·
+`J-SP-D-6` a foreign lane's file header was amended additively (`espionageGate.js`) ·
+`J-SP-D-7` `notBeforeTick` defaults to `0` not `null` (recorded LATE, in the repair row —
+the build row omitted it) · `J-SP-D-8` `errandMint.js` took `ARGUED_UNLAYERED` rather
+than a `LAYER_PATTERNS` home (also recorded late; ⚠ its supporting claim was REFUTED by
+the verifier and only RESTORED by the F2 repair — survey this one knowing it was true
+only after the fact). **Survey first: J-SP-D-8, then J-SP-D-1.**
+
+**SP-D repair (`57fe385b`):** `J-SP-D-R1` the mint detector resolves bindings and keeps
+the literal as a belt · `J-SP-D-R2` the one-reader scan widened to all of `src/`, NOT to
+`src/`+`tests/` · `J-SP-D-R3` `envoyErrand.js` joins `FAMILY`, a deliberate one-file
+loosening · `J-SP-D-R4` each conjunct pinned alone and the header forbids re-proving it
+jointly · `J-SP-D-R5` ⚠⚠ the persist seam stays UNGATED and the invariant was narrowed
+instead — the verifier's preferred cure was BUILT, MEASURED to break `restoreEnvoyErrands`
+(`restore_conflict`), and then rejected · `J-SP-D-R6` the verifier's 28→27 figure was
+re-measured as 27→26 and recorded rather than adopted. **Survey first: J-SP-D-R5 — it is
+the cycle's one genuine architectural fork.**
+
+**GR-2 as built (`a18fdcfa`):** `J-GR-2-1` the crossing memory is the proposal ledger and
+the refusal, never a new store · `J-GR-2-2` stage order is market first, pacts second ·
+`J-GR-2-3` two triggers score but cannot draft (a tombstone with a reason) · `J-GR-2-4`
+the war door's amendment awareness is a lineage act, not a term merge · `J-GR-2-5` zero
+news kinds, deliberately, with a tripwire · `J-GR-2-6` `PROPOSE_PACT` deferred to a GR-2b
+slice of the same flag · `J-GR-2-7` the R6 unbuilt-side guard in the trade-contract walker
+is retired by its own instruction · `J-GR-2-8` the cert row landed in
+`subsystemRowsVirtual.js` not a GRAMMAR lane file · `J-GR-2-9` the row declares
+`soakEvidence: 'indirect'`, breaking the lane's pattern · `J-GR-2-10` courts at war neither
+form nor answer, found by a pin. ⚠ `J-GR-2-2` was **materially wrong as stated** — see the
+repair block. **Survey first: J-GR-2-6 (a deferred DM verb is product surface), then
+J-GR-2-2.**
+
+**GR-2 repair (`91075d45`):** `J-GR2R-1` the dark path's missing `market.changed` is fixed
+in the same edit · `J-GR2R-2` the overstated headers are repaired by AUTHORING the pin, not
+by softening the sentence · `J-GR2R-3` the order pin is an identity chain, not a call-order
+list · `J-GR2R-4` the mount file's six door tests are spelled out one by one · `J-GR2R-5`
+the old restated dwell block is kept with its limitation stated · `J-GR2R-6` the anchoring
+banked one site that was not GR-2's · `J-GR2R-7` no mutation-manifest row was added, and
+that is a CONCURRENCY decision · `J-GR2R-8` the prose-numerics re-record is attributed to
+the lane's own comment. **Survey first: J-GR2R-7 — the sibling lane made the opposite call
+minutes later and that is where exit red (2) came from.**
+
+**IN-0a as built (`729112df`):** `J-IN0A-1` the fold validator's one equality became a
+bounded window (the only CONTRACT change in the cycle) · `J-IN0A-2` the twin guard moved
+with it and the two are pinned separately · `J-IN0A-3` `plant_took` files under the WAR
+desk, on purpose and TEMPORARILY (IN-5 re-files) · `J-IN0A-4` the knowledge family grew the
+token `plant` · `J-IN0A-5` the envoy targeting arm now RUNS, a behaviour change to a war
+path · `J-IN0A-6` `plant_took` is one-shot without new state. **Survey first: J-IN0A-1,
+then J-IN0A-5's declared residual.**
+
+**IN-0a repair (`94d0c798` + `9b6bed7a`):** `J-IN0A-R1` the three totality pins are AMENDED,
+never derived · `J-IN0A-R2` the unfalsifiable negative is REPLACED, not annotated (⚠ it
+OVERRIDES a verifier's explicitly proposed remedy) · `J-IN0A-R3` F5 repaired by amending the
+ROW, not by threading the target · `J-IN0A-R4` the receipt sampler is USED, not extended —
+it stays knowingly blind and the fix is booked · `J-IN0A-R5` F7 is DECLARED and PINNED, not
+widened · `J-IN0A-R6` F6 answered with a declaration and no code change · `J-IN0A-R7` gate
+scope declared as a judgment rather than left implicit · `J-IN0A-R8` a landed red measured,
+attributed, and deliberately NOT cured by that lane (the census — now DISCHARGED, see above).
+**Survey first: J-IN0A-R2, then J-IN0A-R5.**
+
+Three ids appear in these rows but are NOT cycle-4 judgments and need no re-rule here:
+`J-SP-2` and `J-GR-14` (prior-era rulings the waves build on) and `J-WR-13` (the standing
+stop-and-report rule the waves invoked).
+
+### DEFERRALS — DELIBERATE, DOCUMENTED, NOT BUGS TO RE-FIND
+
+Every item below was chosen, not missed. Anyone who rediscovers one has found this
+paragraph, not a defect.
+
+1. **A DM "recall errand" verb is NOT minted (SP-D).** A recall without the volume's
+   politics is a free undo of a priced act. The Edit-verb story is recorded PARTIAL, and
+   DM-KILL-closes-`lost` is re-proven on a generalized errand instead.
+2. **SP-D authors no Bands line and stays in the SP-A backlog (J-SP-D-5).** The wave mints
+   no band edge; FP §7's SP-D row describes consumer-side tuning no code in the wave produces.
+3. **A `tests/`-side one-reader rule is NOT written (J-SP-D-R2).** Tests legitimately read
+   `purposeClass`/`declaredPurpose`/`truePurpose` to assert them, so a `tests/` arm would need
+   an exemption list large enough to hide a real offender. Owed later, if ever.
+4. **The errand persist seam stays UNGATED (J-SP-D-R5).** The gated alternative was built and
+   measured: it breaks `restoreEnvoyErrands` with `restore_conflict`, for zero behavioural
+   gain (the preserved cargo is inert; the flag is in no preset). The invariant was renamed
+   `..._at_the_MINT` and narrowed to the measured truth, both halves pinned.
+5. **`PROPOSE_PACT` is deferred to a GR-2b slice of the SAME flag (J-GR-2-6).** Not a new
+   flag, not a new wave number — a second slice of `pactFormationEnabled`.
+6. **GR-2 mints ZERO news kinds (J-GR-2-5).** The four Herald beats §8 promises are GR-3's;
+   a tripwire stands in their place so the absence cannot go quiet.
+7. **Two GR-2 triggers score but cannot draft (J-GR-2-3)** — recorded as a tombstone with its
+   reason rather than as unfinished work.
+8. **The shared coupling receipt sampler stays blind (J-IN0A-R4).** It cannot walk the INFO
+   row's shape; the fix is booked to the wave that needs it, not bolted on here.
+9. **The plant transport is NOT widened (J-IN0A-R5).** F7 is declared and pinned at its
+   measured width; IN-1 is the natural place to widen it, and the 3,716-pulse measurement in
+   the IN-0a repair row is the evidence that should decide it.
+10. **`plant_took` is filed under the WAR Herald desk (J-IN0A-3), temporarily and on purpose.**
+    IN-5 re-files it. A desk row is not a claim about the beat's subject.
+11. **The `mutation-sweep.sh` ↔ manifest join is left red (this row's exit red 2).** Deferred
+    only in the sense that this ledger slice makes ZERO src/scripts edits by charter; the cure
+    is named precisely above and is one raw-text splice.
+12. **The domain-strict +13 is left red (this row's exit red 1).** It is GR-2's debt, it is
+    stated in three named files, and it needs a chair or owner disposition — annotate, fix, or
+    rule the per-file zero-baseline rule inapplicable to new FP modules. IN-0a's ESCALATION 2
+    raised it; nothing has ruled it.
+
+### ESCALATIONS STILL OWED FROM CYCLE 4 (unchanged by this row)
+
+- **ESCALATION 1 (IN-0a) — A DOC OVERSTATEMENT, REPORTED AND NOT CORRECTED.**
+  `DESIGN_FP_INFORMATION.md` §5 IN-0a and `DESIGN_FP_ARCH_IN.md` §4 both say the corroborated
+  mark's plant "DIES AT THE FOLD". The built writer has no such arm — the fold is
+  unconditional and the contradiction comparator runs on the NEXT pass, so the plant dies ONE
+  TICK LATER than both documents claim. The pins measure the tree. **This row deliberately
+  does NOT amend either document** — live code outranks the table and a doc overstatement is a
+  chair's amendment, never a ledger slice's silent correction.
+- **ESCALATION 2 (IN-0a) — the three red gate steps at head.** Re-measured at `57fe385b` by
+  this row, all three CONFIRMED by execution: `typecheck:domain:strict` +13 still open (exit
+  red 1); `npm run lint` 3 errors, none in a cycle-4 file; `npm run typecheck` **362 errors,
+  exit 2** — the identical figure IN-0a measured at `a18fdcfa`, so the cycle added net zero
+  full-typecheck errors while adding thirteen strict ones (the two gates measure different
+  configs and the strict one has a per-file ZERO baseline, which is why only it reds on new
+  work). Heaviest files unchanged: `envoyErrand.js` 39, `envoyErrandEncounterWriter.js` 34,
+  `envoyInterceptionStage.js` 31. `npm run check` still cannot reach its later steps.
+- **The dispatch lesson from J-IN0A-R8, recorded as a standing hazard.** A whole-tree exact
+  test-title census plus N concurrent lanes is not merely slow — it is UNSATISFIABLE for every
+  lane but the last, and it cost this cycle three hand-carries and one contaminated wide run.
+  The census is correct and must not be weakened; **the dispatch must serialize lanes that add
+  test titles**, exactly as CQ5 already serializes flag lanes.
+
+### THE REMAINING-WORK TABLE — RE-DERIVED FROM THE VOLUMES' OWN §5 TABLES
+
+**How every number below was produced, so it can be re-produced in one step and never
+trusted on this row's word.** Wave counts: enumerated from
+`docs/DESIGN_FP_ARCHITECTURE.md` §5 by matching the wave-block headings
+(`^\*\*#[0-9]+ `, `^\*\*ES-[0-9] `, `^\*\*WY-[0-9]+ `) — #1..#60 with no gaps, ES-0..ES-7,
+and WY-1/2/3/6/11/4/5, which is 60 + 8 + 7 = **75** and agrees with that section's own
+header. WY's five SURFACE waves are counted separately because §5's preamble excludes them
+by name and `docs/DESIGN_FP_ARCH_WY.md` §5 ("twelve, two lanes") carries them under LANE S.
+The three unfolded volumes are counted from
+`review-fixes-2026-07-08:docs/architected-volumes-pending-fold/README.md`, which states each
+count WITH the address inside the volume that declares it. Landed set: `git log --oneline`
+on `claude/composite-r4` filtered to wave-shaped subjects, then each candidate read.
+
+| Volume / lane | Where its §5 lives | Waves | Landed | Remaining |
+|---|---|---|---|---|
+| FP compiled, numbered #1..#60 | `DESIGN_FP_ARCHITECTURE.md` §5 | 60 | 10 whole + 2 part-built | 50 whole + 2 part |
+| ES (rides FP §5, keeps its ids) | same §5, ES-0..ES-7 | 8 | 1 (ES-0) | 7 |
+| WY LANE E (rides FP §5) | same §5, WY-1/2/3/6/11/4/5 | 7 | 0 | 7 |
+| WY LANE S (surfaces) | `DESIGN_FP_ARCH_WY.md` §5 LANE S; `SOL_QUEUE.md` §2 row 21b | 5 | 0 | 5 |
+| WC — war circulation | ledger branch, `architected-volumes-pending-fold/WC_…snapshot.md` | 17 | 0 | 17 |
+| HB — habit conditioning | same dir, `HABIT_conditioning_round4-snapshot.md` | 10 | 0 | 10 |
+| EP — advance epoch | same dir, `EPOCH_living-futures_round7-snapshot.md` | 6 | 0 | 6 |
+| **TOTAL** | | **113** | **11 whole + 2 part** | **102** |
+
+**THE LANDED SET, BY SHA** (this is the pointer; the counts above are derived from it):
+#1 SP-A `59df13a9` · #2 CW-0w `b3fb8f49`+`f7da6b60`+`03dee5fd`+`e30770bd` (four slices) ·
+#3 SP-B `4c0f2f38`(+`2a71dee3`) · #4 SP-B2 `f4016560` · #5 SP-C `cbd348a5` ·
+#6 SP-D `0aac6792`(+`57fe385b`) · #8 GR-0 `b441bca5`(+`d1cfdb67`) · #9 GR-1 `caab995a` ·
+#10 GR-2 `a18fdcfa`(+`91075d45`) · #23 TR-1 `d7ea69a4`(+`93c118b6`) · ES-0 `55674790`.
+**PART-BUILT:** #16 IN-0 — slice **a of four** only (`729112df`+`94d0c798`); #31 TR-9 —
+slice **c** only (`c7933e84`, the contract module).
+
+**⚠ ES-4 HAS NOT LANDED, AND THE COMMIT LOG READS AS IF IT HAD.** Eleven commits on this
+branch carry "ES-4" in their subject (`8a4b0aef` and ten "ES-4 door 3" cuts through
+`d48224e3`). `8a4b0aef`'s own body opens **"THE WAVE DID NOT LAND."** — it stopped at the
+dependency wall (ES-4 is FIFTH in its volume, behind ES-1/2/3, and ES-1 was behind SP-D).
+What those eleven commits built is the LIGHTING INSTRUMENT, not the confirmation leg. Anyone
+re-deriving the landed set from subjects alone will over-count by one; the tell is in the
+commit body, and it is the reason this row lists shas rather than titles.
+
+**CORRECTION TO THE FIGURE THIS SLICE WAS HANDED.** The brief carried "94 waves (FP core 61
+with 8 landed, WC 17, WY 12, HB 10, ES 7, EP 6; 49 flagged, 45 not)". Those components sum to
+**113**, which agrees exactly with the measured total above — so the TOTAL was right and only
+the arithmetic that produced "94" is unreproducible: 113 minus the 8 landed it names is 105,
+not 94, and no grouping of the stated parts yields 94 without dropping a whole lane. The
+measured figures replacing it are **113 declared / 11 whole landed / 102 remaining, two of
+them part-built.** The remembered "49 flagged, 45 not" is **NOT restated here and NOT
+corrected**: a text scan of §5's wave blocks classifies only 69 of 75 cleanly (six blocks
+resist the parenthetical form), so any split this row published would be a hand-maintained
+number of exactly the kind the derive-don't-restate law forbids. What IS cleanly derivable and
+is therefore recorded instead: **FP §3's flag table holds exactly 52 rows**, and cross-joining
+it against the live `ENGINE_GATED_VIRTUAL_RULE_KEYS` census (15 keys, of which 5 are WR-era:
+`beliefAxes`, `conquestDoctrine`, `infoStatecraft`, `migrationRumors`, `sovereigntyTrade`)
+shows **10 of the 52 minted, 42 to go** — cycle 4 minted exactly two of them
+(`errandSpineEnabled`, `pactFormationEnabled`) and IN-0a minted none.
+
+**WHAT CYCLE 4 UNBLOCKED, MEASURED.** `errandSpineEnabled` is now in the engine-gated census,
+so `espionageGate`'s second door (`rules.errandSpineEnabled !== true`) can open for the first
+time — **ES-1 is unblocked**, and with it the ES-1→ES-2→ES-3→ES-4 chain that `8a4b0aef`
+stopped against. GR-2 landing discharges half of the "needs GR-2/GR-3" precondition on #27
+TR-5 and #38 WF-6; **both remain blocked on #11 GR-3.** IN-0's remaining three slices (b, c, d)
+are the nearest INFORMATION work.
+
+### THIS ROW'S OWN GATE — A DOCS-ONLY COMMIT, PROVED DOCS-ONLY
+
+Six files, all `docs/`, all authored by this slice; `git status --porcelain` showed no
+foreign dirty file at any point. `python3` byte-scan over all six: **zero NUL bytes**.
+The ledger splice was a compare-and-swap — the file's md5 was re-checked against the read
+it was composed against and the write would have aborted on any change, because this file
+is taken by multiple lanes.
+
+Attribution measured BOTH WAYS against a `git archive` of pristine `57fe385b`
+(node_modules symlinked), mutex clear (`ps aux | grep -c '[v]itest'` → `0`), every read
+through `gate-tail.sh`: `npx vitest run tests/lint` — **10 failed files / 16 failed tests /
+1,023 passed (1,039)** at BOTH ends, and the sorted FAIL-row set **diffs EMPTY** in both
+directions. ⚠ THE ROW DIFF WAS NOT TREATED AS SUFFICIENT, per the recorded hazard that a
+red ratchet's contents grow behind a byte-identical fail row: the inventory CARDINALITIES
+inside the red rows were extracted from both logs and are identical multiset-wise —
+`(2)×4 · (5)×4 · (6) · (8) · (62) · (71)`. The `(71)` is `negativeAssertionAnchor`'s
+un-anchored inventory and it is quoted here deliberately, as the baseline the next lane
+should diff against.
+
+### WHAT FABLE SHOULD RE-EXAMINE (protocol step 2)
+
+**First, the two open reds** — they are dispositions, not discoveries: the domain-strict +13
+in GR-2's three modules (annotate / fix / rule the per-file law inapplicable) and the
+manifest LABEL JOIN (one raw-text splice, no judgment in it). **Second, J-SP-D-R5** — the
+persist-seam fork is the cycle's one architectural choice with a defensible opposite, and it
+was made against an executed measurement rather than against reasoning. **Third, J-IN0A-R2
+and J-GR2R-7** — one overrides a verifier's stated remedy, the other declined a manifest row
+on concurrency grounds and the sibling lane's opposite call is where an exit red came from;
+these two together are the cycle's clearest test of whether the concurrency law is being
+applied consistently. **Fourth, ESCALATION 1** — the IN volume's "dies at the fold" sentence
+is wrong by one tick in two documents and only a chair may amend it. **Fifth, the deferral
+list above** — J-GR-2-6's deferred DM verb and J-SP-D-R2's absent `tests/` rule are the two
+with product or estate consequence. Everything else in the 46 is mechanical.
+
+**Nothing lit. No golden re-recorded. No band ratified. No soak run. No push. Zero src, test,
+script or JSON edits in this row's own commit — docs and ledger only, by charter.**

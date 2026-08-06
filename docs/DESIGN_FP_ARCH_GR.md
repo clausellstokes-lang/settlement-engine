@@ -428,7 +428,13 @@ finder, no new relationship vocabulary.
   hook as a small gated addition with the war chair's queue (FABLE_VALIDATION_
   QUEUE.md row); the alias trap (roster objects) is the recorded hazard class.
 
-### GR-2 — PEACETIME FORMATION + THE STANDALONE NAP (`pactFormationEnabled`)
+### GR-2 — PEACETIME FORMATION + THE STANDALONE NAP (`pactFormationEnabled`) — **LANDED 2026-08-06 @ `a18fdcfa`, repaired @ `91075d45`**
+<!-- Build state is not maintained per-file; FP §5's PROGRESS block is the one home.
+     The "BLOCKED on spine SP-2/SP-4" line immediately below is DISCHARGED, not live:
+     SP-2/SP-4 are the pre-fold spellings of SP-B (`4c0f2f38`) and SP-C (`cbd348a5`),
+     both landed before this wave. It is left standing because the sentence carries the
+     wave's dependency reasoning, which is still the right reasoning. -->
+
 **BLOCKED on spine SP-2/SP-4 (R-5; §7 Q2). Compiled deltas vs the volume:**
 - **Mount (R-3 cure, J-GRC-2):** `advancePeacetimePacts` mounts as a stage in
   `settlementLifecycleKernel.js` beside `advanceSovereigntyMarket` (:90),

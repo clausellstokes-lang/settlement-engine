@@ -621,7 +621,9 @@ would be the fourteen-drift class in miniature. The posture's own band is the
 same ladder read at the composite. What the owner signs here is therefore three
 learn rates, four composition weights and one cap — no edges.
 
-### SP-D — THE ERRAND SPINE GENERALIZATION (flag `errandSpineEnabled`)
+### SP-D — THE ERRAND SPINE GENERALIZATION (flag `errandSpineEnabled`) — **LANDED 2026-08-06 @ `0aac6792`, repaired @ `57fe385b`**
+<!-- Build state is not maintained per-file; FP §5's PROGRESS block is the one home. -->
+
 **Scope:** SP-1 — the war errand becomes the estate's one purposeful-travel
 substrate, in place (seam ruling 2).
 - **Extend `envoyErrandVocabulary.js` (315 lines):** the six purpose CLASSES

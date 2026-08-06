@@ -40,6 +40,17 @@
   vetoable.
 - EVERYTHING BUILDS DARK. Sol never lights a flag, runs a soak, ratifies a
   band, re-records a golden without a recorded ruling, or pushes — see §4.
+- ⭐⭐ **BUILD STATE HAS EXACTLY ONE HOME, AND IT IS NOT THIS FILE.** This queue
+  lists SPECS and ORDER; it deliberately claims nothing about what is built
+  (row 21's own note says so for Lane B, and it is true of every row here).
+  The one place that claims totality is the **PROGRESS block at the top of
+  `docs/DESIGN_FP_ARCHITECTURE.md` §5** — landed waves by SHA, part-built
+  slices named, with the `git log` command that re-derives it and the standing
+  instruction to re-derive before trusting it. **CHECK-GIT-FIRST still binds:**
+  that block is stamped with the commit it was measured at, and a wave-shaped
+  commit SUBJECT is not a landing — one wave in this program logged eleven
+  commits whose bodies say the wave did not land. Per-wave receipts, gate
+  posture, deferrals and the judgment register: `docs/FABLE_VALIDATION_QUEUE.md`.
 
 ## §1 LANE A — THE SIMULATION SPINE (serial; this lane outranks everything)
 

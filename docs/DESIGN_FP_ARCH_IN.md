@@ -255,7 +255,16 @@ commit (L8) — no file below except settlementStrategy.js (baselined 812,
 AT ceiling) and the two banked pulse mouths is currently constrained, but
 MEASURE, never inherit.
 
-### IN-0 — THE PRICES BECOME LAW (four slices, four commits; rides existing flags)
+### IN-0 — THE PRICES BECOME LAW (four slices, four commits; rides existing flags) — **SLICE 0a LANDED 2026-08-06 @ `729112df`, repaired @ `94d0c798`; 0b/0c/0d UNBUILT**
+<!-- Build state is not maintained per-file; FP §5's PROGRESS block is the one home.
+     ⚠ THE "DIES AT THE FOLD" SENTENCE IN §4's 0a BLOCK BELOW (and in
+     DESIGN_FP_INFORMATION.md §5 IN-0a) IS AN OVERSTATEMENT MEASURED AT 0a's BUILD:
+     the built writer folds a validated envelope unconditionally and the contradiction
+     comparator runs on the NEXT pass, so the plant dies ONE TICK LATER than both
+     documents say. Reported under the J-WR-13 stop rule and deliberately NOT corrected
+     here — amending the claim is a chair's act. See the IN-0a row, ESCALATION 1, in
+     docs/FABLE_VALIDATION_QUEUE.md. -->
+
 
 **IN-0a — THE HANDOFF (re-scoped by R1; was "the fold").** The fold is built;
 the envelope dies in candidate metadata. This slice carries it to the fold.

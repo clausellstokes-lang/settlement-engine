@@ -692,6 +692,29 @@ WY-7..WY-10) are NOT in this count — they live in SOL_QUEUE §2 LANE B as
 their own named sub-block, and WY-8's ENGINE slice 8a (which mints flag 52)
 rides that row.
 
+> **PROGRESS — THE ONE HOME FOR BUILD STATE. RE-DERIVE BEFORE YOU TRUST IT.**
+> Measured at `57fe385b` on `claude/composite-r4`, 2026-08-06 (the cycle-4 close).
+> **The command, so this block is never the authority — the tree is:**
+> `git log --oneline --no-merges -300 | grep -E '^[0-9a-f]{7,} (SP-[A-F]|GR-[0-9]|IN-[0-9]|TR-[0-9]|WF-[0-9]|POP-[0-9]|INT-[0-9]|CW-[0-9]|ES-[0-9]|WY-[0-9])'`
+> then READ each candidate's commit body — a wave-shaped subject is not a landing.
+>
+> **LANDED, by sha:** #1 SP-A `59df13a9` · #2 CW-0w `b3fb8f49`+`f7da6b60`+`03dee5fd`+`e30770bd`
+> · #3 SP-B `4c0f2f38`(+`2a71dee3`) · #4 SP-B2 `f4016560` · #5 SP-C `cbd348a5` ·
+> #6 SP-D `0aac6792`(+`57fe385b`) · #8 GR-0 `b441bca5`(+`d1cfdb67`) · #9 GR-1 `caab995a` ·
+> #10 GR-2 `a18fdcfa`(+`91075d45`) · #23 TR-1 `d7ea69a4`(+`93c118b6`) · ES-0 `55674790`.
+> **PART-BUILT:** #16 IN-0 — slice **0a only** (`729112df`+`94d0c798`) of its four;
+> #31 TR-9 — slice **9c only** (`c7933e84`, the contract module).
+> Everything not named above is UNBUILT. Full receipts, gate posture and the
+> per-wave judgment register: `docs/FABLE_VALIDATION_QUEUE.md`, the cycle-4 close row.
+>
+> ⚠ **ES-4 HAS NOT LANDED AND THE LOG READS AS IF IT HAD.** Eleven commits carry "ES-4"
+> in their subject (`8a4b0aef` through `d48224e3`); `8a4b0aef`'s body opens "THE WAVE DID
+> NOT LAND." Those commits built the LIGHTING INSTRUMENT, not the confirmation leg. ES-4
+> is fifth in its volume and ES-1/2/3 are all unbuilt.
+> ⚠ **THE PER-PROGRAM SIBLING FILES CARRY AD-HOC LANDED NOTES AND ARE NOT MAINTAINED AS
+> A SET** — absence of a marker there proves nothing. Only this block claims totality, and
+> only at the commit stamped above.
+
 ### PHASE 0 — THE GATE OPENERS (before any FP cross-layer registry row)
 
 **#1 SP-A — THE PURE FOUNDATIONS** (no flag; dark by construction; SP §5).
