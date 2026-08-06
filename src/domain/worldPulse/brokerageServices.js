@@ -15,7 +15,8 @@
  * carries a `from` naming the record it was read out of and a `ref` locating it, and there
  * is exactly one place a claim is constructed (`claimFrom`). A reading with no record
  * behind it cannot be built, so the pin can enumerate an answer's claims and resolve every
- * single one back into the world it came from. Two sources are admissible and no third:
+ * single one back into the world it came from. THE ANSWER TO A QUERY admits two sources and
+ * no third:
  *
  *   'belief'  the settlement's own belief record about the subject, the same
  *             `spatialLedgers.beliefMaps` slot the belief engine wrote.
@@ -24,6 +25,11 @@
  *             has actually earned it. A house near the subject with correspondents on the
  *             ground can tell you what is so; the same house four roads away cannot, and
  *             hands you the belief instead. That is Law 1 reaching the counter.
+ *
+ * IN-0b adds a third to the MODULE's vocabulary and none to the query's: the INTERCEPT does
+ * not ask what is true of a subject, it asks what LEFT this town, and those outbound records
+ * are neither a belief nor a truth. See CLAIM_SOURCES for the full argument; the query's own
+ * two-source law is unchanged and separately pinned.
  *
  * ── THE PRICE IS REAL, AND THE REFUSAL IS HONEST ──
  *
@@ -233,6 +239,13 @@ function num(v, fallback) {
   return typeof v === 'number' && Number.isFinite(v) ? v : fallback;
 }
 
+/** Codepoint order — the local declaration this family already uses in both siblings
+ *  (brokerageServicesFeed.js, brokerageServicesRules.js) rather than a fourth import.
+ * @param {string} a @param {string} b @returns {number} */
+function compareCodepoint(a, b) {
+  return a < b ? -1 : a > b ? 1 : 0;
+}
+
 /**
  * THE PURSE: the political capital a power can spend on a question, read off the faction
  * ledger the faction layer already keeps. Absent state reads as an EMPTY purse, so a power
@@ -283,14 +296,36 @@ export function localBeliefRecord(worldState, observerId, subjectId) {
  * @typedef {Object} QueryClaim
  * @property {string} axis  the belief axis this claim reads
  * @property {unknown} value
- * @property {string} from  'belief' or 'truth' — the ONLY two admissible sources
+ * @property {string} from  one of CLAIM_SOURCES — the ONLY admissible sources
  * @property {string} ref   where the claim was read from, resolvable by the pin
  */
 
 /**
+ * THE ADMISSIBLE CLAIM SOURCES, closed. Every claim in this module names one of these and
+ * carries a `ref` that resolves back into the exact record it was read out of; that pairing
+ * is what makes "this module mints no new facts" checkable rather than promised.
+ *
+ * ── WHY THERE ARE THREE AND NOT TWO (IN-0b) ──
+ *
+ * I3 admitted two, and the QUERY still admits exactly those two: it answers about a SUBJECT,
+ * and the only things anybody holds about a subject are a belief and (where the house has
+ * earned it) the truth. That pin is unchanged and still passes verbatim.
+ *
+ * The INTERCEPT asks a different question. It does not ask what is true of a subject; it asks
+ * WHAT LEFT THIS TOWN — the standing contract, the read that was couriered, the story that was
+ * bought. Those are records in their own right, not readings of a subject, and filing them as
+ * 'belief' or 'truth' would have been a lie about provenance in the one module whose entire
+ * argument is that provenance is never laundered. So a third source is minted, and it is held
+ * to the SAME law: a 'record' claim resolves to a live ledger address or it cannot be built.
+ * @type {readonly string[]}
+ */
+export const CLAIM_SOURCES = Object.freeze(['belief', 'truth', 'record']);
+
+/**
  * THE ONLY CONSTRUCTOR OF A CLAIM. Every reading in an answer passes through here, which
  * is what makes "a query mints no new facts" checkable rather than promised: a claim
- * cannot exist without naming the record it came out of.
+ * cannot exist without naming the record it came out of. Deliberately NOT exported — the
+ * intercept below lives in this module precisely so the constructor stays singular.
  * @param {string} axis @param {unknown} value @param {string} from @param {string} ref
  * @returns {QueryClaim}
  */
@@ -428,5 +463,219 @@ export function answerBrokerageQuery({
       grade: stamp ? stamp.grade : null,
       askedAtTick: Math.max(0, Math.floor(num(tick, 0))),
     },
+  };
+}
+
+// ── THE INTERCEPT (IN-0b): what left this town, read over a patron's shoulder ─────
+
+/**
+ * THE OUTBOUND SOURCES, closed and in the order the fog strips them. A rival watching a
+ * house's patron edge can learn three different kinds of thing, and they do not survive
+ * concealment equally:
+ *
+ *   feed_contract   THAT a standing contract exists and which channels it carries. The
+ *                   crudest fact and the last to go: an edge between two named parties is
+ *                   a visible thing (it is what makes the act possible at all).
+ *   intel_transfer  a read this town actually couriered out (the D-3 transfer records).
+ *   commission      that this town's market sold somebody a story. The most deniable
+ *                   thing here and therefore the FIRST to be lost to fog.
+ * @type {readonly string[]}
+ */
+export const INTERCEPT_SOURCES = Object.freeze(['feed_contract', 'intel_transfer', 'commission']);
+
+/**
+ * THE VAGUENESS LADDER, ascending in fog. A closed vocabulary; the surface renders the
+ * band's word and never the scalar (the legibility law).
+ *
+ * ── A GENUINE MINT, AND WHAT WAS LOOKED FOR FIRST (J-WR-10-B's borrow-before-minting rule) ──
+ *
+ * bandFamilies.js owns the estate's two band families and its header is explicit that a
+ * volume ASSIGNS to a scale and never authors one. Neither family fits, and the reasons are
+ * the same ones that file records for its own mint: SIGNIFICANCE_CLASSES {routine, notable,
+ * major} grades HOW LOUDLY the world should speak of a beat, and SEVERITY_LADDER {glancing,
+ * telling, grave, ruinous} grades WHAT AN OUTCOME COST. This ladder grades neither. It grades
+ * HOW MUCH OF A RECORD A WATCHER COULD MAKE OUT, which is a legibility axis no family in the
+ * estate carries. QUERY_PRICE_BANDS is a price, and the reliability ladder upstream grades a
+ * telling's provenance, not a watcher's view of one.
+ *
+ * All four rungs were measured to appear as quoted string literals ZERO times anywhere under
+ * src/ before this constant (executed census, 2026-08-06), and they are disjoint from both
+ * band families — so reading the wrong ladder is impossible by SPELLING rather than by
+ * discipline, which is the property bandFamilies.js chose its own rungs for.
+ * @type {readonly string[]}
+ */
+export const INTERCEPT_VAGUENESS_BANDS = Object.freeze(['legible', 'clouded', 'fogged', 'opaque']);
+
+/**
+ * WHICH OUTBOUND SOURCES SURVIVE EACH BAND. Total over INTERCEPT_VAGUENESS_BANDS, and the
+ * pin fails on a missing or extra band, so the ladder cannot be half-widened.
+ * @type {Readonly<Record<string, readonly string[]>>}
+ */
+export const INTERCEPT_LEGIBLE_SOURCES = Object.freeze({
+  legible: Object.freeze(['feed_contract', 'intel_transfer', 'commission']),
+  clouded: Object.freeze(['feed_contract', 'intel_transfer']),
+  fogged: Object.freeze(['feed_contract']),
+  opaque: Object.freeze([]),
+});
+
+/**
+ * THE FOG TUNING (PROPOSED, soak-vetoable in the I1 band idiom).
+ *
+ * ⚠ FOG_SECRECY_W IS MINTED HERE. IN-0b's spec calls for "HIDE's rivals'-reads factor", and
+ * VERIFY-AT-BUILD found NO SUCH CONSTANT in the tree. `SIGHT_TUNING.HIDE_STALENESS` (0.7) is
+ * a belief-DECAY rate — how fast a rival's picture of a hider goes stale — and
+ * `SIGHT_TUNING.HIDE_WEAKNESS_W` (0.7) is a weight inside the concealment PRESSURE that opens
+ * a posture in the first place. Neither is an intercept-vagueness factor, and binding to
+ * either because the number happened to match would have turned a coincidence into a
+ * coupling: a later soak retuning belief decay would silently retune what a spy can read.
+ * So this is a new number with its own name and its own soak row, and it is deliberately NOT
+ * 0.7 so that no future reader can mistake the two for one constant that got copied.
+ *
+ * The STRUCTURE is what the pins lock: rising in the host's secrecy, every band reachable,
+ * and bounded (a town with no gates up is still not perfectly legible).
+ */
+export const INTERCEPT_FOG_TUNING = Object.freeze({
+  /** Vagueness with NO secrecy at all: reading over a shoulder is never crisp. */
+  FOG_BASE: 0.12,
+  /** How much of the host's HIDE level lands on a rival's read. MINTED — see above. */
+  FOG_SECRECY_W: 0.62,
+  /** Band cut points over the fog scalar, ascending. */
+  BAND_CUTS: Object.freeze([0.25, 0.45, 0.65]),
+});
+
+/**
+ * The HIDE secrecy level of one settlement, read WITHOUT importing the statecraft writer
+ * (the same cycle-avoidance the belief read at the top of this file states, and for the same
+ * reason: informationStatecraft.js imports this family's plant leaf).
+ *
+ * RECORDED, deliberately not cured here: this is the estate's THIRD spelling of a three-line
+ * secrecy read — `makeSightFn` inlines it (informationStatecraft.js) and `targetSecrecy01` is
+ * module-private in corruptionWeb.js. Consolidating onto one exported reader is a real debt
+ * and it is NOT this slice's to pay: both existing spellings sit in files this lane does not
+ * own, and IN-0d's `secrecyTradeFactor.js` is the leaf that should host the single reader
+ * once a wave owns those two edits. Deferred and written down, not a bug to re-find.
+ * @param {unknown} worldState @param {string} settlementId @returns {number}
+ */
+export function localSecrecyLevel01(worldState, settlementId) {
+  const postures = asObject(asObject(asObject(worldState).spatialLedgers).secrecyPostures);
+  return clamp01(num(asObject(postures[text(settlementId)]).level01, 0));
+}
+
+/**
+ * The fog one watcher faces reading a house's outbound traffic in a settlement holding a
+ * given HIDE level. TOTAL: an unreadable level reads as no secrecy, which is the honest
+ * direction here (absent gates are open gates, never opaque ones).
+ * @param {unknown} secrecy01 @returns {{ fog01: number, band: string }}
+ */
+export function interceptVagueness(secrecy01) {
+  const T = INTERCEPT_FOG_TUNING;
+  const fog01 = clamp01(T.FOG_BASE + T.FOG_SECRECY_W * clamp01(num(secrecy01, 0)));
+  let band = 0;
+  while (band < T.BAND_CUTS.length && fog01 >= T.BAND_CUTS[band]) band += 1;
+  return { fog01, band: INTERCEPT_VAGUENESS_BANDS[band] };
+}
+
+/**
+ * @typedef {Object} InterceptResult
+ * @property {boolean} refused
+ * @property {{ reason: string, detail: string }|null} refusal
+ * @property {string} band     one of INTERCEPT_VAGUENESS_BANDS
+ * @property {readonly QueryClaim[]} claims
+ * @property {string} ending   'read' or 'refused' (IN-3 adds 'caught' cross-wave)
+ */
+
+/** The endings this act can reach TODAY. `caught` is IN-3's sweep, declared not built. */
+export const INTERCEPT_ENDINGS = Object.freeze(['read', 'refused']);
+
+/** @param {string} band @returns {InterceptResult} */
+function interceptRefused(band) {
+  return {
+    refused: true,
+    // The refusal token is `no_record` from the UNTOUCHED five-token QUERY_REFUSALS: an
+    // intercept that made out nothing is the same honest outcome as a register that held
+    // nothing, and a sixth token would have been a new word for an existing idea.
+    refusal: { reason: 'no_record', detail: 'Nothing legible left that house this week.' },
+    band,
+    claims: Object.freeze([]),
+    ending: 'refused',
+  };
+}
+
+/**
+ * THE INTERCEPT. What a rival power can make out of one house's outbound traffic, composed
+ * from records that already exist and fogged by the HOST settlement's own HIDE posture.
+ *
+ * WHOSE SECRECY, AND WHY IT IS THE HOST'S. HIDE's modelled effect is symmetric isolation: a
+ * town that raises its gates is harder for everyone else to read. The thing being read here
+ * is the traffic leaving THAT town, so the town's own posture is what fogs it. The rival's
+ * posture is irrelevant — sealing your own gates does not sharpen your eyes, and the
+ * statecraft layer already models that asymmetry the same way (HIDE_SELF_DIM dims the
+ * hider's INBOUND sight rather than sharpening it).
+ *
+ * A REFUSAL IS NOT AN EVENT, exactly as the query's caller-side comment says: an intercept
+ * that made out nothing is silent, and the producer mints no candidate for it.
+ *
+ * PURE, TOTAL, ZERO-DRAW.
+ *
+ * @param {Object} args
+ * @param {unknown} args.worldState
+ * @param {string} args.hostId       the settlement whose houses are being watched
+ * @param {Record<string, unknown>} args.edge  the patron feed edge being read over
+ * @returns {InterceptResult}
+ */
+export function interceptOutboundRecord({ worldState, hostId, edge }) {
+  const host = text(hostId);
+  const { band } = interceptVagueness(localSecrecyLevel01(worldState, host));
+  const legible = /** @type {Record<string, readonly string[]>} */
+    (INTERCEPT_LEGIBLE_SOURCES)[band] || [];
+  if (!legible.length) return interceptRefused(band);
+
+  const ledgers = asObject(asObject(worldState).spatialLedgers);
+  /** @type {QueryClaim[]} */
+  const claims = [];
+
+  if (legible.includes('feed_contract')) {
+    const channels = Object.keys(asObject(asObject(edge).pullByChannel)).sort(compareCodepoint);
+    if (channels.length) {
+      claims.push(claimFrom('feedChannels', Object.freeze(channels), 'record',
+        `patronFeedEdges.${host}.${text(asObject(edge).institutionId)}.pullByChannel`));
+    }
+  }
+
+  if (legible.includes('intel_transfer')) {
+    // D-3's transfer records are keyed `intel.<seller>.<receiver>.<subject>.<tick>`; what
+    // LEFT this town is the set whose seller is this town. Generosity owns and prunes the
+    // ledger (the single-writer contract) — this is a read and nothing else.
+    const transfers = asObject(ledgers.intelTransfers);
+    const sent = Object.keys(transfers)
+      .filter((key) => text(asObject(transfers[key]).sellerId) === host)
+      .sort(compareCodepoint);
+    if (sent.length) {
+      claims.push(claimFrom('intelTransfers', sent.length, 'record',
+        `spatialLedgers.intelTransfers[sellerId=${host}]`));
+    }
+  }
+
+  if (legible.includes('commission')) {
+    // A bought story is filed under the disjoint `plant:<market>:<audience>:<subject>`
+    // namespace. EXISTENCE only, deliberately: what the story SAYS is the mark's to
+    // discover through the exposure machinery, not a rival's to read off a ledger.
+    const disinfo = asObject(ledgers.disinfo);
+    const bought = Object.keys(disinfo)
+      .filter((key) => key.startsWith(`plant:${host}:`))
+      .sort(compareCodepoint);
+    if (bought.length) {
+      claims.push(claimFrom('commissions', bought.length, 'record',
+        `spatialLedgers.disinfo[plant:${host}:*]`));
+    }
+  }
+
+  if (!claims.length) return interceptRefused(band);
+  return {
+    refused: false,
+    refusal: null,
+    band,
+    claims: Object.freeze(claims),
+    ending: 'read',
   };
 }

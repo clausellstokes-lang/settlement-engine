@@ -362,6 +362,20 @@ export const PREFIX_RULES = Object.freeze(/** @type {ReadonlyArray<readonly [str
   ['party_', 'events'],
   ['table_', 'events'],
   ['steading_', 'events'],
+  // brokerage_${act}: the knowledge lane's four institutional acts (query/feed/intercept/
+  // plant), minted DYNAMICALLY from a variable like strategy_${move} above, so the shared
+  // literal-scanning walkers cannot see them and only a family prefix can route them.
+  //
+  // THIS DISCHARGES A RECORDED DEFERRAL, and the section is unchanged by it. I3/I4 measured
+  // this exact one-line entry as owed and did not make it because heraldRouting.js belonged
+  // to a concurrent session that wave (the note is in brokerageServicesRules.js's
+  // BROKERAGE_ACT_TEMPO header and in brokerageServices.test.js's display census). All four
+  // acts already LANDED on 'events' through the declared catch-all; what was missing was
+  // that they landed there by DECISION rather than by fall-through, which is the difference
+  // `isExplicitlyRouted` measures and the "no orphan" guarantee depends on. Executed before
+  // and after (2026-08-06, IN-0b): section 'events' both ways for all four acts;
+  // isExplicitlyRouted false → true for all four.
+  ['brokerage_', 'events'],
 ]));
 
 /** The stressor-lifecycle prefixes that DELEGATE to their base type's routing (the

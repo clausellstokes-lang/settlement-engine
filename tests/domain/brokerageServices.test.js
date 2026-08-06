@@ -515,10 +515,13 @@ describe('W-I I3/I4 — THE KNOWLEDGE LANE GAINS ITS INSTITUTIONAL GENERATORS', 
       expect(newsVoiceCategory({ impactKind: act })).toBeNull(); // borrows no crier's voice
       expect(HERALD_SECTIONS).toContain(SECTION_OF(act)); // routes to a real section
     }
-    // RECORDED GAP (deliberate, not a defect): the routing above is the declared
-    // catch-all rather than an explicit entry, because the explicit registration is a
-    // one-line PREFIX_RULES addition in src/domain/realm/heraldRouting.js and that file
-    // belongs to another session this wave. The section it lands on is the same either way.
+    // THE GAP THIS BLOCK ONCE RECORDED IS CLOSED (IN-0b, 2026-08-06). The routing was the
+    // declared catch-all rather than an explicit entry, because the one-line PREFIX_RULES
+    // addition in src/domain/realm/heraldRouting.js belonged to another session that wave.
+    // IN-0b made it; the section is the same either way, which is why this assertion is
+    // unchanged. The explicit-vs-catch-all distinction the note was really about is pinned
+    // where it can actually fail, with an unregistered token as its control, in
+    // tests/domain/brokerageIntercept.test.js.
     expect(SECTION_OF('brokerage_query')).toBe('events');
   });
 });

@@ -47,7 +47,7 @@ import { fnv1a32 } from '../../kernel/proseHash.js';
 import { brokerageEffectsActive } from './brokerageStamps.js';
 import { brokeragePatronBindings, eligiblePatrons } from './brokeragePatronage.js';
 import { patronFeedEdges } from './brokerageServicesFeed.js';
-import { answerBrokerageQuery } from './brokerageServices.js';
+import { answerBrokerageQuery, interceptOutboundRecord } from './brokerageServices.js';
 import { commissionPlant, marketHouseOf } from './brokerageServicesPlant.js';
 
 /**
@@ -72,9 +72,16 @@ export const BROKERAGE_ACTS = Object.freeze([
  * TEMPLATE FAMILY (strategy_${move}, npc_${family}, tier_${direction}, ${kind}_pressure),
  * and both display walkers say in their own headers that a dynamic mint is out of a
  * literal scan's reach. The compliance path for a template family is a family PREFIX rule
- * in src/domain/realm/heraldRouting.js, and that file belongs to another session this
- * wave, so the one-line registration `['brokerage_', 'events']` is REPORTED rather than
- * made (see the handoff note in the slice report).
+ * in src/domain/realm/heraldRouting.js.
+ *
+ * ── THAT REGISTRATION IS NOW MADE (IN-0b, 2026-08-06) ──
+ *
+ * I3/I4 REPORTED the one-line entry `['brokerage_', 'events']` rather than making it,
+ * because heraldRouting.js belonged to a concurrent session that wave. IN-0b makes it, in
+ * the commit that turns the intercept into a real act. The SECTION is unchanged — all four
+ * acts already landed on 'events' through the declared catch-all — so nothing routes
+ * differently; what changed is that they land there by DECISION rather than by
+ * fall-through, which is the difference `isExplicitlyRouted` measures.
  *
  * The census is not skipped in the meantime. tests/domain/brokerageServices.test.js
  * enforces, over BROKERAGE_ACTS itself, the same three invariants the shared walkers
@@ -89,6 +96,25 @@ export const BROKERAGE_ACT_TEMPO = Object.freeze({
   brokerage_feed: Object.freeze({ probability: 0.12, severity: 0.22 }),
   brokerage_intercept: Object.freeze({ probability: 0.07, severity: 0.44 }),
   brokerage_plant: Object.freeze({ probability: 0.06, severity: 0.52 }),
+});
+
+/**
+ * WHAT THE WATCHER GOT, IN WORDS (IN-0b). The intercept's second reason sentence, one per
+ * vagueness band — prose, never the scalar and never the band slug (the legibility law and
+ * the game-grade doctrine's "translate formulas").
+ *
+ * TOTAL over INTERCEPT_VAGUENESS_BANDS, and pinned so; a band added upstream without a
+ * sentence here reds rather than rendering `undefined` into a chronicle. The `opaque` entry
+ * is total-for-totality and is never SELECTED: at that band the read refuses above and the
+ * act mints nothing at all. It is present so the table cannot be half-widened, not because
+ * the mint can reach it.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const INTERCEPT_BAND_REASONS = Object.freeze({
+  legible: 'The town keeps no secrets worth the name, so the whole of the traffic read plainly.',
+  clouded: 'Gates half-raised cost the watcher the subtlest of it, and left the rest standing.',
+  fogged: 'Behind closed gates only the bare shape survived: that a contract exists at all.',
+  opaque: 'Nothing survived the gates.',
 });
 
 /** The relationship labels the seat reads as hostile (beliefMap's own set, local copy). */
@@ -307,6 +333,14 @@ export function evaluateBrokerageServiceRules(snapshot, pressureIdx, context = {
         .filter((candidate) => candidate.factionStateId !== edge.patronId);
       if (!rivals.length) continue;
       const rival = rivals[0];
+      // IN-0b: the act stopped being narration. The rival now READS the outbound record —
+      // the standing contract, what this town couriered out, what its market sold — through
+      // the ONE claim constructor, fogged by the host's own HIDE posture.
+      const taken = interceptOutboundRecord({ worldState, hostId: settlementId, edge });
+      // A REFUSAL IS NOT AN EVENT, exactly as the query arm above: a watcher who made out
+      // nothing is silent. Minting a beat for every failed read would fill the chronicle
+      // with non-events and let the knowledge lane certify itself off failures.
+      if (taken.refused) continue;
       out.push(brokerageCandidate({
         act,
         settlementId,
@@ -315,13 +349,19 @@ export function evaluateBrokerageServiceRules(snapshot, pressureIdx, context = {
         summary: `The contract between a house of ${nameFor(settlementId)} and its patron is a visible thing, and a visible thing can be watched. ${rival.name} has been reading over the patron's shoulder.`,
         reasons: [
           `A standing feed is an edge between two named parties, which makes it a target.`,
-          `Nothing was stolen that anybody will miss, which is what makes it worth doing.`,
+          INTERCEPT_BAND_REASONS[taken.band],
         ],
         metadata: {
           institutionId: edge.institutionId,
           patronId: edge.patronId,
           rivalId: rival.factionStateId,
           covert: edge.covert,
+          // What was actually made out, and how clearly. Claims carry their own `from`
+          // and a resolvable `ref`, so a reader can walk every one of them back into the
+          // record it came out of (the module's no-minted-facts law).
+          vagueness: taken.band,
+          claims: taken.claims,
+          ending: taken.ending,
         },
       }));
       continue;
