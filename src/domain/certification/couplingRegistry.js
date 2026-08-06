@@ -48,6 +48,15 @@ export {
   GR2_PACT_FORMATION_COUPLINGS,
 } from './couplingRegistryGrammar.js';
 
+// The INFORMATION leaf (FP wave IN-0a). Re-exported by name like every other volume's:
+// the docstring above calls the enumerated re-export list "the registry's public surface",
+// and a leaf composed into COUPLING_REGISTRY without its constants re-exported would make
+// this file the one place a row exists but cannot be named.
+export {
+  IN0A_PLANT_HANDOFF_COUPLING,
+  IN_INFORMATION_COUPLINGS,
+} from './couplingRegistryInfo.js';
+
 export {
   WR3_LINEAGE_COUPLING,
   WR4_TRADE_HOME_FRONT_COUPLING,

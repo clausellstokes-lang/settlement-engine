@@ -30,9 +30,24 @@
  *      and the world is byte-identical; captured against the ONE_REGEN preset spread too.
  *   9. THE AUDIENCE — the DM town page mounts the plants, the player projection is EMPTY while
  *      they live, and a source scan proves every `projectPlants` call site names its audience.
- *  10. LIFECYCLE — a folded record JSON-round-trips and survives a ledger rebuild unchanged.
+ *  10. LIFECYCLE — a folded record survives the REAL persist/restore path (ensureWorldState,
+ *      which strips and re-materializes every conditional ledger), belief and all.
  *  11. REGISTRATION — `plant_took` is phrased, routed, significance-classed, and classifies
  *      `knowledge` on its OWN vocabulary rather than through the bare `news` token.
+ *  12. NEWEST-LAST — the history read is pinned on a FOUR-row pulseHistory of four ticks,
+ *      which is the only shape that can tell `rows[0]` from `rows[rows.length - 1]`.
+ *  13. THE TRANSPORT WINDOW — the kernel's truncation literal is EXTRACTED from its source
+ *      and proven equal to the constant this leaf declares.
+ *  14. THE COUPLING ROW'S RECEIPT — the row's own receiptField address is SAMPLED against a
+ *      real folded ledger, and reds on any leaf field the writer does not write.
+ *
+ * ── PINS 10, 12, 13 AND 14 ARE REPAIRS (2026-08-06) ──
+ * IN-0a's adversarial verifier rejected the wave. Pin 10 was a tautology (it asserted
+ * JSON-round-trippability and called it a regen); pin 12's mechanism was unpinned (every
+ * fixture built a ONE-row history, so inverting the read left all 17 pins green); 13 and 14
+ * did not exist, and the two defects they cover — a silent truncation ceiling on the
+ * transport, and a coupling row advertising a structurally unwritable field — shipped. Each
+ * repair carries its executed evidence in the test body; none of them is a baseline bump.
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -42,6 +57,7 @@ import { describe, expect, test } from 'vitest';
 import {
   BROKERAGE_PLANT_CANDIDATE_TYPE,
   PLANT_TOOK_KIND,
+  PULSE_RECORD_OUTCOME_WINDOW,
   appliedPlantEnvelopesAt,
   plantExposureReasons,
   plantTookEntry,
@@ -63,6 +79,13 @@ import { standingPlantsAgainst } from '../../src/domain/briefs/composers.js';
 import { WHAT_PHRASES, whatPhrase } from '../../src/domain/display/settlementRumors.js';
 import { SECTION_OF, HERALD_SECTIONS } from '../../src/domain/realm/heraldRouting.js';
 import { SIGNIFICANCE_CLASSES } from '../../src/domain/worldPulse/bandFamilies.js';
+import {
+  CONDITIONAL_LEDGER_KEYS,
+  appendPulseHistory,
+  ensureWorldState,
+} from '../../src/domain/worldPulse/worldState.js';
+import { IN0A_PLANT_HANDOFF_COUPLING } from '../../src/domain/certification/couplingRegistryInfo.js';
+import { sampleCouplingRow } from '../helpers/couplingReceiptSample.js';
 import { moverFamilyOf } from '../../scripts/audit/behavioral-observation.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -246,6 +269,171 @@ describe('IN-0a — the three-stage writer/reader road', () => {
     expect(appliedPlantEnvelopesAt(worldAt(tick + 1), tick + 1)).toHaveLength(1);
     // Two weeks later: dropped, never re-carried (the D-3 exact-age idiom, not a lower bound).
     expect(appliedPlantEnvelopesAt(worldAt(tick + 2), tick + 2)).toEqual([]);
+  });
+
+  test('THE HISTORY IS READ NEWEST-LAST, on a pulseHistory that can tell the difference', () => {
+    // WHY THIS PIN EXISTS: every other pin in this file builds `pulseHistory: [record]` — a
+    // SINGLE-element array — and on a one-row history `rows[0]` and `rows[rows.length - 1]`
+    // are the same object. So the whole file was blind to the newest-vs-oldest question,
+    // which is the entire mechanism of the handoff. Executed proof of the blindness before
+    // this pin was written: inverting the read to `rows[0]` left all 17 pins GREEN. In
+    // production `appendPulseHistory` is `[...current, record].slice(-MAX_HISTORY)` with
+    // MAX_HISTORY 80, so the inverted spelling would have read an eleven-month-old record
+    // forever and the lane would have been silently dead. A guard that cannot be reddened
+    // cannot be proven — so this history carries FOUR rows of four different ticks.
+    const { record } = driveHandoff(LIT_RULES);
+    const outcome = record.selectedOutcomes[0];
+    // A history row for tick `at`, carrying the REAL applied outcome with its envelope
+    // re-stamped so the commission was bought on that same tick (the shape the producer
+    // actually emits — a commission is paid on the pulse its act is applied on). Only the
+    // envelope's tick fields move; the outcome, the key and the parties are the real ones.
+    const rowAt = (/** @type {number} */ at) => ({
+      tick: at,
+      selectedOutcomes: [{
+        ...outcome,
+        metadata: {
+          ...outcome.metadata,
+          plant: {
+            ...outcome.metadata.plant,
+            record: { ...outcome.metadata.plant.record, seededTick: at },
+            override: { ...outcome.metadata.plant.override, lastUpdateTick: at },
+            receipt: { ...outcome.metadata.plant.receipt, commissionedAtTick: at },
+          },
+        },
+      }],
+    });
+    // FOUR rows at four REAL (non-negative) ticks, oldest FIRST — the order the appender
+    // produces. Ticks are chosen well clear of zero deliberately: the first draft of this
+    // pin put the older rows at NEGATIVE ticks, where the reversed case below failed
+    // because `wholeTick` rejects a negative rather than because the record was stale. It
+    // discriminated correctly and for the wrong reason, which is not a pin.
+    const now = 10;
+    const history = [rowAt(6), rowAt(7), rowAt(8), rowAt(9)];
+    const world = { ...worldOf(LIT_RULES), tick: now, pulseHistory: history };
+    expect(world.pulseHistory.map((row) => row.tick)).toEqual([6, 7, 8, 9]);  // newest LAST
+    expect(appliedPlantEnvelopesAt(world, now)).toHaveLength(1);
+
+    // THE DISCRIMINATOR. The SAME four rows, reversed, so the newest sits at index 0 and
+    // the oldest at the tail. A newest-last reader now lands on tick 6 — a record four
+    // weeks stale, refused by the consume-once guard on its age. A newest-FIRST reader
+    // would land on tick 9 and carry it. The two spellings disagree here, which is exactly
+    // what a one-row history could never make them do.
+    const reversed = { ...world, pulseHistory: [...history].reverse() };
+    expect(reversed.pulseHistory.map((row) => row.tick)).toEqual([9, 8, 7, 6]);
+    expect(reversed.pulseHistory[reversed.pulseHistory.length - 1].tick).toBe(6);
+    expect(now - 6).toBeGreaterThan(PLANT_HANDOFF_LAG_TICKS);   // stale, not malformed
+    expect(appliedPlantEnvelopesAt(reversed, now)).toEqual([]);
+
+    // And the appender really does order newest-last, so the ascending shape above is the
+    // world's own convention and not this test's invention.
+    const appended = appendPulseHistory(
+      { ...worldOf(LIT_RULES), pulseHistory: [rowAt(8)] }, rowAt(9),
+    );
+    expect(appended.pulseHistory.map((row) => row.tick)).toEqual([8, 9]);
+  });
+
+  test('EACH DOOR of the consume-once double guard, pinned INDIVIDUALLY', () => {
+    // THE ESTATE'S OWN LAW, and IN-0a did not satisfy it for this leaf: a defence-in-depth
+    // pair blinds mutants, so every door must be pinned on its own. `appliedPlantEnvelopesAt`
+    // has TWO age checks — the RECORD door (`record.tick === now - LAG`, which pulse this
+    // row came from) and the ENVELOPE door (`now - receipt.commissionedAtTick === LAG`,
+    // whether the commission inside it was bought on that pulse). Every pre-existing pin
+    // moved BOTH at once, so either could have been deleted or loosened silently.
+    //
+    // FOUND BY MUTANT, not by reading: loosening the RECORD door from an exact age to a
+    // lower bound (`record.tick <= now - LAG`) left all twenty pins in this file GREEN,
+    // because the envelope door still refused what the record door had let through.
+    //
+    // The cure is a fixture that DISAGREES with itself: one door's condition satisfied and
+    // the other's not, so exactly one door can be doing the refusing.
+    const { record } = driveHandoff(LIT_RULES);
+    const outcome = record.selectedOutcomes[0];
+    const envelope = outcome.metadata.plant;
+    /** @param {number} rowTick @param {number} commissionedAtTick */
+    const rowWith = (rowTick, commissionedAtTick) => ({
+      tick: rowTick,
+      selectedOutcomes: [{
+        ...outcome,
+        metadata: {
+          ...outcome.metadata,
+          plant: {
+            ...envelope,
+            record: { ...envelope.record, seededTick: rowTick },
+            override: { ...envelope.override, lastUpdateTick: rowTick },
+            receipt: { ...envelope.receipt, commissionedAtTick },
+          },
+        },
+      }],
+    });
+    const now = 10;
+    const carry = (/** @type {Record<string, unknown>} */ row) => appliedPlantEnvelopesAt(
+      { ...worldOf(LIT_RULES), tick: now, pulseHistory: [row] }, now,
+    );
+
+    // THE POSITIVE CONTROL. Both doors satisfied — otherwise the two refusals below could
+    // both be "this fixture never carries anything".
+    expect(carry(rowWith(now - PLANT_HANDOFF_LAG_TICKS, now - PLANT_HANDOFF_LAG_TICKS)))
+      .toHaveLength(1);
+
+    // DOOR ONE ALONE — THE RECORD. The row is three weeks old, but the envelope inside it
+    // claims a commission bought exactly one week ago, so the ENVELOPE door is satisfied
+    // and only the RECORD door can refuse this. A lower-bound record door carries it.
+    expect(carry(rowWith(now - 3, now - PLANT_HANDOFF_LAG_TICKS))).toEqual([]);
+    // The same shape one week newer on the record alone flips it back, so the refusal above
+    // is the record's AGE and not some other property of this fixture.
+    expect(carry(rowWith(now - PLANT_HANDOFF_LAG_TICKS, now - PLANT_HANDOFF_LAG_TICKS)))
+      .toHaveLength(1);
+
+    // DOOR TWO ALONE — THE ENVELOPE. The row is exactly one week old, so the RECORD door is
+    // satisfied and only the ENVELOPE door can refuse: the commission it carries was bought
+    // three weeks ago and has already had its one tick of carriage.
+    expect(carry(rowWith(now - PLANT_HANDOFF_LAG_TICKS, now - 3))).toEqual([]);
+    // And a commission dated AFTER the telling is refused by the same door — an envelope
+    // paid for after it was told is not a late carry, it is a forgery.
+    expect(carry(rowWith(now - PLANT_HANDOFF_LAG_TICKS, now + 1))).toEqual([]);
+  });
+
+  test('THE TRANSPORT WINDOW is the kernel\'s own literal, not a number this leaf invented', () => {
+    // The carry can only see `pulseHistory[].selectedOutcomes`, which pulseKernel truncates
+    // before writing. A plant outside that window is charged, narrated, and never planted —
+    // the exact defect IN-0a closes, restored by a busy tick. The window is DECLARED on the
+    // leaf; this pin proves the declaration equals what the kernel actually spells, so the
+    // restatement cannot go stale (derive-don't-restate: the number below is EXTRACTED).
+    const kernelSource = readFileSync(
+      join(ROOT, 'src/domain/worldPulse/pulseKernel.js'), 'utf8',
+    );
+    const spelled = kernelSource.match(
+      /selectedOutcomes:\s*publicSelectedOutcomes\s*\.slice\(\s*0\s*,\s*(\d+)\s*\)/,
+    );
+    expect(spelled).toBeTruthy();          // the write still has the shape this leaf assumes
+    expect(Number(spelled[1])).toBe(PULSE_RECORD_OUTCOME_WINDOW);
+
+    // THE BEHAVIOUR THE WINDOW IMPLIES, executed rather than described: the leaf itself has
+    // no ceiling, so a plant at the LAST readable slot is carried and one past it is not —
+    // and it is the kernel's truncation, not this leaf, that decides which of those a real
+    // pulse produces.
+    const { record, tick } = driveHandoff(LIT_RULES);
+    const filler = { candidateType: 'other_act', metadata: {} };
+    const atSlot = (/** @type {number} */ index) => ({
+      tick: record.tick,
+      selectedOutcomes: [
+        ...Array.from({ length: index }, () => ({ ...filler })),
+        record.selectedOutcomes[0],
+      ],
+    });
+    const lastKept = PULSE_RECORD_OUTCOME_WINDOW - 1;
+    const worldWith = (/** @type {Record<string, unknown>} */ row) => ({
+      ...worldOf(LIT_RULES), tick: tick + 1, pulseHistory: [row],
+    });
+    // In the last slot the kernel keeps: carried.
+    expect(atSlot(lastKept).selectedOutcomes).toHaveLength(PULSE_RECORD_OUTCOME_WINDOW);
+    expect(appliedPlantEnvelopesAt(worldWith(atSlot(lastKept)), tick + 1)).toHaveLength(1);
+    // Past it: the leaf would still carry it — which is precisely why the loss is SILENT.
+    // The record the kernel writes never contains this row at all, so nothing downstream
+    // can tell a dropped commission from one that was never bought.
+    expect(appliedPlantEnvelopesAt(worldWith(atSlot(lastKept + 1)), tick + 1)).toHaveLength(1);
+    expect(atSlot(lastKept + 1).selectedOutcomes.slice(0, PULSE_RECORD_OUTCOME_WINDOW)
+      .some((row) => row.candidateType === BROKERAGE_PLANT_CANDIDATE_TYPE)).toBe(false);
   });
 
   test('the carry is codepoint-ordered, deduped, and drops a stale target', () => {
@@ -553,25 +741,125 @@ describe('IN-0a — the dossier mount and its audience', () => {
 });
 
 describe('IN-0a — lifecycle and registration', () => {
-  test('a folded record JSON-round-trips and survives a ledger rebuild unchanged', () => {
+  test('a live plant survives the REAL persist/restore path, not just JSON.stringify', () => {
+    // THIS PIN USED TO BE A TAUTOLOGY, and the repair is the whole point of the rewrite.
+    // It asserted `JSON.parse(JSON.stringify(ledger))` equals `ledger` and called that "the
+    // same serialize/restore path a regen uses". It booted no restore code at all: that
+    // assertion holds for every JSON-safe object ever built, so it could not fail, and THE
+    // PROMISE's regen clause stayed unproven while reading as proven.
+    //
+    // `ensureWorldState` IS the restore path. Every load of a persisted world goes through
+    // it (and through `runWorldStateMigrations`, which it calls first), and it does NOT
+    // simply spread the raw: it STRIPS every key in CONDITIONAL_LEDGER_KEYS from the
+    // shallow spread and re-materializes each one through `deepCloneConditionalLedger`,
+    // which DROPS anything empty. `spatialLedgers` is one of those keys — so a live plant
+    // is only preserved because that re-materialization walks the whole nested namespace.
+    // That is a real mechanism with a real way to fail, which is what makes this a pin.
     const { folded } = driveHandoff(LIT_RULES);
     const ledger = disinfoOf(folded);
-    const roundTripped = JSON.parse(JSON.stringify(ledger));
-    expect(roundTripped).toEqual(ledger);
-    // THE PROMISE's regen clause: a rebuild that re-derives spatialLedgers from the
-    // persisted world must not ghost a live plant's DM-truth trace. Rebuilt here through the
-    // same serialize/restore path a regen uses, key for key and byte for byte.
-    const rebuilt = JSON.parse(JSON.stringify({ ...folded.worldState })).spatialLedgers.disinfo;
-    expect(JSON.stringify(rebuilt)).toBe(JSON.stringify(ledger));
-    expect(Object.keys(rebuilt)[0].startsWith('plant:')).toBe(true);
-    expect(rebuilt[Object.keys(rebuilt)[0]].commission.receipt.marketName).toBe('Whisper market');
+    expect(Object.keys(ledger)).toEqual(['plant:aaa:ccc:bbb']);   // NON-EMPTY under test
+
+    // Serialize the way persistence does, then restore the way loading does.
+    const persisted = JSON.parse(JSON.stringify(folded.worldState));
+    const restored = ensureWorldState(persisted, {});
+
+    // The plant survived the strip-and-re-materialize, key for key and byte for byte.
+    expect(JSON.stringify(restored.spatialLedgers.disinfo)).toBe(JSON.stringify(ledger));
+    expect(restored.spatialLedgers.disinfo['plant:aaa:ccc:bbb'].commission.receipt.marketName)
+      .toBe('Whisper market');
+    // The belief the commission bought came back with it — a plant restored without the
+    // override it wrote is a DM-truth trace pointing at a world that no longer reads that way.
+    expect(restored.spatialLedgers.beliefMaps.ccc[GOVERNING_SEAT_KEY].bbb.strengthBand)
+      .toBe(ledger['plant:aaa:ccc:bbb'].assertedBand);
+    // NOT ALIASED TO THE RAW INPUT — and the comparison subject here is load-bearing.
+    // `ensureWorldState` can carry `spatialLedgers` down TWO paths that mask each other:
+    // the conditional strip-and-re-materialize (deepCloneConditionalLedger, a DEEP clone),
+    // and the plain `...cloneObject(raw)` spread, which is SHALLOW (worldState.js:94). The
+    // data survives either way, so an assertion against the FOLDED ledger cannot tell them
+    // apart — measured: dropping 'spatialLedgers' from CONDITIONAL_LEDGER_KEYS left this
+    // whole file green until this line named the right object. Against the RAW INPUT the
+    // two paths disagree: the deep clone yields a fresh graph, the shallow spread hands
+    // back the very object it was given, and a restored world aliasing its own raw is how
+    // a snapshot reaches into live state and corrupts determinism.
+    expect(restored.spatialLedgers).not.toBe(persisted.spatialLedgers);
+    expect(restored.spatialLedgers.disinfo).not.toBe(persisted.spatialLedgers.disinfo);
+    expect(restored.spatialLedgers.disinfo['plant:aaa:ccc:bbb'])
+      .not.toBe(persisted.spatialLedgers.disinfo['plant:aaa:ccc:bbb']);
+    expect(restored.spatialLedgers.disinfo).not.toBe(ledger);
+    // The re-materialization really is the path that carried it: `spatialLedgers` is a
+    // declared conditional key, which is what routes it through the deep clone at all.
+    expect(CONDITIONAL_LEDGER_KEYS).toContain('spatialLedgers');
+
+    // AND THE CARRY STILL WORKS ACROSS A RESTORE. The handoff reads pulseHistory, which
+    // ensureWorldState re-clones and tail-slices on its own path; a restore that kept the
+    // ledger but dropped the record in flight would strand every commission mid-week.
+    const { record, tick } = driveHandoff(LIT_RULES);
+    const live = { ...worldOf(LIT_RULES), tick: tick + 1, pulseHistory: [record] };
+    const reloaded = ensureWorldState(JSON.parse(JSON.stringify(live)), {});
+    expect(appliedPlantEnvelopesAt(reloaded, tick + 1))
+      .toEqual(appliedPlantEnvelopesAt(live, tick + 1));
+    expect(appliedPlantEnvelopesAt(reloaded, tick + 1)).toHaveLength(1);
+  });
+
+  test('THE COUPLING ROW NAMES ONLY FIELDS THE WRITER WRITES, sampled on a real ledger', () => {
+    // A coupling row's receiptField is the address that makes the foreign read reviewable —
+    // DESIGN_FP_COUPLINGS §0.3: "a reader who has only the row can find the whole seam". A
+    // row naming a field the writer never writes converts an unknown into a green, and
+    // IN-0a shipped exactly that: it advertised `commission.{receipt,target}`, and the
+    // `.target` half is structurally unwritable under the ruled road (the two consumers
+    // read at their own heads, so the envoy stage's target never reaches the fold — see the
+    // residual in couplingRegistryInfo.js). Nothing checked it, so nothing caught it.
+    const { folded } = driveHandoff(LIT_RULES);
+    const ledger = disinfoOf(folded);
+    const keys = Object.keys(ledger);
+    expect(keys).toEqual(['plant:aaa:ccc:bbb']);          // sampled on a NON-EMPTY ledger
+    expect(keys.every((key) => key.startsWith('plant:'))).toBe(true);
+    // The shared sampler walks ARRAYS; `disinfo` is a plant-keyed MAP, and `[plant:*]` is a
+    // key-shape hint rather than a predicate the helper evaluates. Feeding it the
+    // plant-keyed RECORDS is what that segment of the address denotes, and it is the whole
+    // adaptation — the grammar, the resolution and the honesty rule are all the helper's.
+    const roots = { spatialLedgers: { disinfo: keys.map((key) => ledger[key]) } };
+    const sampled = sampleCouplingRow(IN0A_PLANT_HANDOFF_COUPLING, roots);
+    expect(sampled).toHaveLength(1);
+    expect(sampled[0].result.status).toBe('sampled');     // never silently UNSAMPLABLE
+    expect(sampled[0].result.matched).toBe(1);
+    expect(sampled[0].result.presentFields).toEqual(['receipt']);
+    expect(sampled[0].result.absentFields).toEqual([]);   // THE ASSERTION THAT WOULD HAVE BIT
+
+    // GUARD THE GUARD, on the exact address that shipped: the same sampler over the same
+    // real ledger reports `target` ABSENT. So the pin above is measuring the writer rather
+    // than agreeing with whatever the row happens to say.
+    const asShipped = { ...IN0A_PLANT_HANDOFF_COUPLING, receiptField: 'spatialLedgers.disinfo[plant:*].commission.{receipt,target}' };
+    expect(sampleCouplingRow(asShipped, roots)[0].result.absentFields).toEqual(['target']);
+    // And the unreachability is the ROAD's, not the validator's: `commissionedPlantAt` still
+    // persists a target when one is genuinely handed to it, which is why the residual is a
+    // missing kernel thread and not a broken guard.
+    expect(Object.keys(appliedPlantEnvelopesAt(
+      { ...worldOf(LIT_RULES), tick: 1, pulseHistory: [] }, 1,
+    ))).toEqual([]);
   });
 
   test('REGISTRATION COMPLETE for plant_took — phrased, routed, classed, and earned', () => {
     // WHAT_PHRASES: a townsperson must not say the raw slug.
     expect(WHAT_PHRASES[PLANT_TOOK_KIND]).toBeTruthy();
     expect(whatPhrase(PLANT_TOOK_KIND)).toBe(WHAT_PHRASES[PLANT_TOOK_KIND]);
-    expect(whatPhrase(PLANT_TOOK_KIND)).not.toContain('_');
+    // THE ORIGINAL SPELLING HERE WAS A BARE UNDERSCORE-EXCLUSION NEGATIVE, AND IT COULD
+    // NEVER FAIL. (Spelled in prose deliberately: the negative-assertion walker scans
+    // COMMENT text too, so quoting the matcher here would register a fresh violation —
+    // measured 2026-08-06, it did exactly that on the first pass of this repair.)
+    // whatPhrase's own fallback arm does `key.replace(/_/g, ' ')`, so it returns an
+    // underscore-free string for EVERY input, registered or not, and no registered phrase
+    // in the corpus contains one either (executed 2026-08-06: whatPhrase(
+    // 'a_kind_nobody_registered') === 'a kind nobody registered'; 0 of the WHAT_PHRASES
+    // values carry an underscore). An unfalsifiable assertion is worse than none, and
+    // annotating it `// anchored:` would have declared a reason that is untrue.
+    //
+    // What a MISSING registration actually produces is the fallback, so that is what this
+    // refuses — and the control below proves the fallback arm is live and produces exactly
+    // the shape being refused, so the negative measures a registration rather than a
+    // collection that drifted away.
+    expect(whatPhrase(PLANT_TOOK_KIND)).not.toBe(PLANT_TOOK_KIND.replace(/_/g, ' '));
+    expect(whatPhrase(`${PLANT_TOOK_KIND}_unregistered`)).toBe('plant took unregistered');
     // heraldRouting: an EXPLICIT desk of the frozen vocabulary, filed with its own siblings.
     // Asserting membership alone would pass on the catch-all, i.e. on no registration at all.
     expect(HERALD_SECTIONS).toContain(SECTION_OF(PLANT_TOOK_KIND));

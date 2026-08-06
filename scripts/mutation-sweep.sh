@@ -768,6 +768,24 @@ check_caught "coupling/registry desk pulled away from heraldRouting" src/domain/
 perl -0pi -e 's/now - commissionedAtTick !== PLANT_HANDOFF_LAG_TICKS/now - commissionedAtTick !== 99/' src/domain/worldPulse/brokeragePlantHandoff.js
 check_caught "info/paid plant handoff severed at the transport window" src/domain/worldPulse/brokeragePlantHandoff.js "npx vitest run tests/domain/brokeragePlantHandoffPins.test.js --no-file-parallelism"
 
+# 73. IN-0a — THE HISTORY READ INVERTED. `appliedPlantEnvelopesAt` takes the LAST
+#     pulse record because `appendPulseHistory` appends newest-last and keeps 80.
+#     Reading the HEAD instead reads an eleven-month-old record forever: the carry
+#     silently returns nothing, and the lane is dead with every commission still
+#     being charged. This survived the wave's whole pin set once — every fixture
+#     built a ONE-row history, on which the two spellings are the same object — so
+#     it is planted here permanently rather than trusted to a reviewer's eye.
+perl -0pi -e 's/const record = asObject\(rows\[rows\.length - 1\]\);/const record = asObject(rows[0]);/' src/domain/worldPulse/brokeragePlantHandoff.js
+check_caught "info/plant handoff reads the OLDEST pulse record instead of the newest" src/domain/worldPulse/brokeragePlantHandoff.js "npx vitest run tests/domain/brokeragePlantHandoffPins.test.js --no-file-parallelism"
+
+# 74. IN-0a — THE RECORD DOOR LOOSENED. The consume-once guard is a PAIR (the record's
+#     own tick, and the commission's tick inside it) and defence in depth blinds
+#     mutants: loosening this half alone left the whole pin file green until the
+#     doors were pinned individually. A lower bound here lets one commission be
+#     carried on every later tick of its life instead of exactly one.
+perl -0pi -e 's/if \(wholeTick\(record\.tick\) !== now - PLANT_HANDOFF_LAG_TICKS\) return \[\];/if (!(Number(record.tick) <= now - PLANT_HANDOFF_LAG_TICKS)) return [];/' src/domain/worldPulse/brokeragePlantHandoff.js
+check_caught "info/plant handoff record door relaxed from exact age to a lower bound" src/domain/worldPulse/brokeragePlantHandoff.js "npx vitest run tests/domain/brokeragePlantHandoffPins.test.js --no-file-parallelism"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done

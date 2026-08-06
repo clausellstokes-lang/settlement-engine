@@ -43,6 +43,29 @@ import { couplingRow } from './couplingRegistrySchema.js';
  * `infoStatecraftEnabled`, so with either absent the collection returns an empty array and
  * the stage takes its existing empty-input early return — byte-identical for every war
  * golden.
+ *
+ * ── THE RECEIPT ADDRESS NAMES ONLY WHAT THE SHIPPED ROAD CAN WRITE (repair, 2026-08-06) ──
+ *
+ * IN-0a first spelled this `commission.{receipt,target}`. The `.target` half was
+ * STRUCTURALLY UNWRITABLE and the row advertised it anyway, which is the one thing a
+ * coupling row must never do — §0.3's whole purpose is that "a reader who has only the row
+ * can find the whole seam", and half of this one led nowhere.
+ *
+ * MEASURED: the two consumers read at their OWN heads. `envoyPulse` collects untargeted
+ * envelopes, hands them to `prepareEnvoyPlantTargets`, which attaches a target to ITS OWN
+ * copy and returns it on `planted.commissionedPlants`; the pulse kernel never threads that
+ * value anywhere (executed grep: `envoys.commissionedPlants` has no reader), and the
+ * statecraft head then calls `appliedPlantEnvelopesAt` FRESH, getting envelopes that carry
+ * exactly `{key, record, override, receipt}` and no target. So
+ * `commissionedPlantAt`'s `...(exactTarget ? { target } : {})` arm cannot fire in
+ * production, and `commission.target` is never persisted.
+ *
+ * The address therefore names the REACHABLE half only. The unreachable half is a DECLARED
+ * RESIDUAL of the ruled road, not a defect of this row: curing it needs a kernel thread of
+ * one return value (both pulse mouths are banked) or the pendingPlants deposit, which is
+ * IN-1's business. `tests/domain/brokeragePlantHandoffPins.test.js` samples THIS row's
+ * address against a REAL folded ledger through tests/helpers/couplingReceiptSample.js and
+ * reds on any leaf the writer does not write, so the two cannot drift apart again.
  * @type {Readonly<CouplingRegistryRow>}
  */
 export const IN0A_PLANT_HANDOFF_COUPLING = couplingRow({
@@ -50,7 +73,7 @@ export const IN0A_PLANT_HANDOFF_COUPLING = couplingRow({
   pairId: 'CPL-19',
   direction: 'INFO→GRAMMAR',
   read: 'src/domain/worldPulse/envoyPulse.js#advanceEnvoyDiplomacyPulse',
-  receiptField: 'spatialLedgers.disinfo[plant:*].commission.{receipt,target}',
+  receiptField: 'spatialLedgers.disinfo[plant:*].commission.{receipt}',
   counterforce: 'src/domain/worldPulse/envoyInterceptionStage.js#prepareEnvoyPlantTargets',
   flags: Object.freeze([
     'informationBrokeragesEnabled',

@@ -39,6 +39,8 @@ import {
   GR2_BELIEVED_DEMAND_COUPLING,
   GR2_PACT_FORMATION_COUPLINGS,
   GR2_SHARED_THREAT_COUPLING,
+  IN0A_PLANT_HANDOFF_COUPLING,
+  IN_INFORMATION_COUPLINGS,
   couplingRowFor,
   couplingRowsFor,
 } from '../../src/domain/certification/couplingRegistry.js';
@@ -86,6 +88,9 @@ describe('CW-0 coupling registry', () => {
       // FP GR-2 (2026-08-06): the THIRD volume leaf, appended in wave order like the
       // second. Three rows, one per direction peacetime formation reads across.
       ...GR2_PACT_FORMATION_COUPLINGS,
+      // FP IN-0a (2026-08-06): the FOURTH volume leaf. One row — the paid plant's handoff
+      // into the envoy-picture stage — and INFORMATION's first cross-layer read.
+      ...IN_INFORMATION_COUPLINGS,
     ]);
     expect(WR3_LINEAGE_COUPLING).toEqual({
       couplingId: 'CPL-3.POP_TO_WAR.WR-3.lineage',
@@ -360,8 +365,12 @@ describe('CW-0 coupling registry', () => {
     // at once (INFO for the believed demand, INTERIOR for the posture reserve, WAR for the
     // shared threat). The set is asserted rather than derived so a fourth volume arriving
     // silently still reds here.
+    //
+    // INFORMATION is that FOURTH volume, and it arrived exactly as designed: FP IN-0a
+    // (2026-08-06) reds this line, and the line is amended in the commit that admits the
+    // volume rather than derived into agreement with whatever the registry happens to hold.
     expect(new Set(COUPLING_REGISTRY.map((row) => row.owningVolume)))
-      .toEqual(new Set(['WAR', 'TRADE', 'GRAMMAR']));
+      .toEqual(new Set(['WAR', 'TRADE', 'GRAMMAR', 'INFORMATION']));
   });
 
   test('every schema-v3 row has one stable unique identity and a closed shape', () => {
@@ -500,8 +509,16 @@ describe('CW-0 coupling registry', () => {
       ]);
     expect(couplingRowsFor('CPL-5', 'GRAMMAR→WAR'))
       .toEqual([WR7_HOME_DELIVERY_COUPLING, WR7_CARRIED_SHEET_COUPLING]);
+    // IN-0a's handoff is the FOURTH independently-owned read on this direction and the
+    // first owned by INFORMATION; the legacy first-row tiebreak below is unmoved by it.
     expect(couplingRowsFor('CPL-19', 'INFO→GRAMMAR'))
-      .toEqual([WR7_MOVING_PICTURE_COUPLING, WR7_ENVOY_PLANT_COUPLING, GR2_BELIEVED_DEMAND_COUPLING]);
+      .toEqual([
+        WR7_MOVING_PICTURE_COUPLING,
+        WR7_ENVOY_PLANT_COUPLING,
+        GR2_BELIEVED_DEMAND_COUPLING,
+        IN0A_PLANT_HANDOFF_COUPLING,
+      ]);
+    expect(couplingRowFor('CPL-19', 'INFO→GRAMMAR')).toBe(WR7_MOVING_PICTURE_COUPLING);
     expect(couplingRowsFor('CPL-19', 'GRAMMAR→INFO'))
       .toEqual([WR7_SILENCE_INFERENCE_COUPLING]);
     expect(couplingRowsFor('CPL-1', 'WAR→TRADE'))

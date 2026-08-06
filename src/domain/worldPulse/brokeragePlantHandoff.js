@@ -29,6 +29,29 @@
  * readable record is the PRIOR tick's, and the handoff is a ONE-WEEK LAG by construction —
  * which is law M and is thematically exact: a commission takes a week to become a telling.
  *
+ * ── THE TRANSPORT HAS A CEILING, AND IT IS NOT THIS LEAF'S (declared 2026-08-06) ──
+ *
+ * The road's carrying capacity is set upstream and silently: `pulseKernel` writes
+ * `selectedOutcomes: publicSelectedOutcomes.slice(0, PULSE_RECORD_OUTCOME_WINDOW)`. This
+ * leaf reads ONLY that array, so a `brokerage_plant` that lands outside the window on a
+ * busy tick is DROPPED — the patron is charged, the act narrates, and nothing is planted,
+ * which is precisely the live defect IN-0a exists to close, restored by a crowded week.
+ *
+ * MEASURED 2026-08-06, executed over the whole property suite (3,716 real
+ * `simulateCampaignWorldPulse` pulses, instrumented at the kernel's own write): the
+ * distribution of `publicSelectedOutcomes.length` runs 0..18 and NOTHING exceeded the
+ * window — headroom of six outcomes, never consumed in the estate's corpus. It is
+ * nonetheless reachable rather than impossible: `rollCandidates`' own budget is
+ * `maxAuto = 7 + floor(√(max(0, N − 24)))` in realm size N (realmScaling.js), so a realm
+ * of ~313 settlements pushes the auto budget alone to the window, before the guaranteed
+ * proposal admissions that ride on top of it.
+ *
+ * The window is therefore DECLARED here rather than assumed, and pinned: the constant
+ * below is proven equal to the number pulseKernel actually spells, so moving the kernel's
+ * literal reds this leaf's pins and forces whoever moves it to re-reason about the carry.
+ * Widening the transport is a KERNEL edit (both mouths are banked) and belongs to IN-1
+ * with the pendingPlants deposit; it is a declared residual, not an open defect to re-find.
+ *
  * THE CONSUME-ONCE DOUBLE GUARD is borrowed VERBATIM from the D-3 intel lane
  * (informationStatecraft.js's intelTransfers consume arm): the record's tick must be
  * EXACTLY `tick - PLANT_HANDOFF_LAG_TICKS`, and the envelope's own
@@ -75,6 +98,18 @@ export const BROKERAGE_PLANT_CANDIDATE_TYPE = 'brokerage_plant';
 
 /** The news kind minted when a carried plant is still standing a week after it landed. */
 export const PLANT_TOOK_KIND = 'plant_took';
+
+/**
+ * THE TRANSPORT'S CEILING — the number of public selected outcomes `pulseKernel` keeps on
+ * a pulse record, and therefore the most plants one week can carry (see the header block).
+ *
+ * DECLARED here, DERIVED nowhere: this leaf must not import the kernel (it is a pure leaf
+ * of the writer family and the kernel imports IT). So the constant is a restatement, and a
+ * restatement goes stale — which is why the pins EXTRACT the kernel's own literal from
+ * source and assert it equals this number. Change one without the other and IN-0a reds.
+ * @type {number}
+ */
+export const PULSE_RECORD_OUTCOME_WINDOW = 24;
 
 /** @param {unknown} v @returns {Record<string, unknown>} */
 function asObject(v) {
