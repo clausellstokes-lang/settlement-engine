@@ -519,6 +519,13 @@ precondition CR-WR10-H discharged in its SEAM member.
   states are executed pins, and the walker never reds on the tracked state
   because a build-order fact is not a defect. ES-4's ONE obligation here is to
   carry that marker in a live test title.
+  **AND SINCE THE CAP (`d48224e3`) "A LIVE TEST TITLE" IS NARROWER THAN IT
+  READS:** the marker counts only in `tests/domain/espionageDistantSourceEs4.test.js`
+  — the address the walker declares — and only as an `it`/`test` title, never a
+  `describe` title. The rest of the recipe is POINTED AT, not copied into this
+  volume, so it cannot rot away from the instrument: clauses (0) and (0b) and
+  what follows them, in the walker header of
+  `tests/lint/sovereigntyLightingContract.walker.test.js`.
 
 ### SP-C — THE POSTURE READ (flag `strategicPostureEnabled`)
 **Scope:** SP-4a's settlement appetite stock + SP-4b's posture composition.
@@ -770,7 +777,12 @@ season-window width · the frequency-cadence class boundaries.
     ids as its green condition and measured by
     `tests/lint/sovereigntyLightingContract.walker.test.js`. Tripwire: a
     receipt naming only two members reds this item, and the walker's own
-    three-row totality arm reds a table that loses one.
+    three-row totality arm reds a table that loses one. **THE ES-4 MEMBER IS
+    DISCHARGED ONLY AT ITS DECLARED ADDRESS SINCE THE CAP (`d48224e3`):** the
+    marker lands in `tests/domain/espionageDistantSourceEs4.test.js` as an
+    `it`/`test` title and never as a `describe` title; anywhere else it carries
+    the token and discharges nothing. Recipe pointed at, not copied — clauses
+    (0) and (0b) in that walker's header.
 11. THE BAND-FAMILY RECONCILIATION (toward every volume's §7/§8): the SP-A
     walker grows one volume at a time; a volume shipping a Bands line without
     a table row (or vice versa) reds — the fourteen-drift class dies

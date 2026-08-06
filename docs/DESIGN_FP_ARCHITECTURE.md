@@ -1082,7 +1082,14 @@ MINTED AT SP-B2 (2026-08-05) citing SP-B + SP-B2 + ES-4 —
 `SOVEREIGNTY_LIGHTING_EVIDENCE` in
 src/domain/certification/warConvergenceContract.js — so ES-4 SATISFIES it
 rather than minting it: carry the marker `ES-4-DISTANT-SOURCE-EVIDENCE` in the
-TITLE of the non-neighbour pin and the condition flips to SATISFIED.
+TITLE of the non-neighbour pin and the condition flips to SATISFIED. **"TITLE"
+IS NARROWER THAN IT READS SINCE THE CAP (`d48224e3`), AND THIS VOLUME STATES
+THE NARROWING SO IT DOES NOT DISAGREE WITH ITS OWN CHILDREN:** the pin lives in
+`tests/domain/espionageDistantSourceEs4.test.js` — the walker's declared
+evidence address — and the marker stands in an `it`/`test` title, never a
+`describe` title. The full recipe is maintained in the walker header of
+`tests/lint/sovereigntyLightingContract.walker.test.js` (clauses (0) and (0b)
+and what follows) and is pointed at from here rather than copied.
 
 **ES-5 — DOCTRINE ENGAGED + THE ABSENCE AMENDMENT** (fourth slice; the
 absence arm rides CR-ES-1, SIGNED; ES §4). Charter: the doctrine STAGE

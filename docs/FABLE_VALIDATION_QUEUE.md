@@ -2573,3 +2573,83 @@ historical survivor stands at the parent's refutation-census sentence
 the commit-message receipt overstated). SR-5 stands recorded in the fold
 row above: 2l's resists-more premise is INVERTED by a deliberately better
 mechanism — never "fix" it backward.
+
+## ⭐⭐ THE BLANKET QUEUE SIGN-OFF — THE OWNER SIGNS EVERY QUEUED OWNER-GATED
+## ITEM, AND FOUR CARVE-OUTS SURVIVE IT (owner grant 2026-08-05; row landed by
+## the row slice, 2026-08-06). This row is NOT an Opus judgment being banked for
+## re-validation — it is an OWNER ACT being recorded, so the Fable column below
+## asks for an audit of the chair's SCOPE READING, never of the grant itself.
+
+**THE GRANT, VERBATIM AND ENTIRE** (owner, in chat, 2026-08-05):
+
+> "I give permission for everything that requires my sign off in the full queue."
+
+**CANONICAL RECORD:** the memory file `owner-blanket-queue-signoff.md` (auto-memory,
+this project) holds the full item-by-item disposition and is the address a successor
+should read before consuming a signature. This row is the REPO-SIDE record, because
+the repo is authoritative for a zero-context successor and a grant that lives only in
+memory is a grant that can vanish.
+
+**THE CHAIR'S SCOPE READING, STATED SO IT CAN BE OVER- OR UNDER-READ BY NOBODY.**
+Every item PARKED AWAITING OWNER SIGN-OFF anywhere in this program's queues — rows in
+this file, `docs/OWNER_DECISION_QUEUE.md`, the integration fold's ⛔ PARKED list above,
+the EP volume's parked rows, and the volumes' own owner-gated arms — is now **SIGNED,
+PER THE CHAIR'S RECORDED RECOMMENDATION FOR THAT ITEM**. The recommendation is the
+content of the signature; the grant supplies the authority, not the decision. So a
+signature RELEASES a blocked-but-recommended item to build at its queue position, and
+it RATIFIES a recommended-defer item AS DEFERRED. **A BLANKET GRANT DOES NOT FLIP A
+PARK INTO A BUILD** — reading it that way would convert the owner's trust into work he
+never asked for, which is the opposite of what a sign-off is. Every lane consuming a
+signature cites this row plus the item's own row.
+
+**RELEASED TO BUILD (at their queue positions, not immediately):** the F9 `supplyCargo`
+sign-off row (WY-8's gate — WY-8 builds whole) · the GR-0 DM true-state chip
+premium/flag convergence (queue as a small GR-side wave) · the war-chooser
+spy-before-decision wiring, CR-ES-4's deferred arm (queue after the ES spine, its own
+wave) · the 12 legacy anchors (the LEG anchors wave unlocks) · XW-7 · PT2-5 · the WR-8
+four parked arms · the CV/TB/XW timing items · the 12 rulings in
+`docs/OWNER_DECISION_QUEUE.md` · V5's two sign-offs (lettering grammar, seal ladder) ·
+EP-4's two parked repairs (paid-surface + persisted-shape, rejoining the EP waves with
+their own gates) · J-INT-13, whose PRE-RECORDED DARK arm stands RATIFIED (the re-record
+arm remains available and is NOT taken) · the LIGHTING signatures
+(`sovereigntyTradeEnabled` et al.) as **PRE-SIGNED, CONSUMED AT THE SOAK REDO** when
+each instrument reads SATISFIED — the sequencing law is untouched: nothing lights
+before its own condition and the soak.
+
+**RATIFIED AS DEFERRED (the recommendation was defer; the grant ratifies that):** the
+ES Q5 alliance-topology new-key ACQUIRE stays parked · the Q6 / J-POP-14 arrival
+couplings stay deferred · the sale-door harmonization stays post-GR-2.
+
+**⛔ FOUR CARVE-OUTS RETAINED — A BLANKET GRANT CANNOT SUBSTITUTE FOR ANY OF THESE, AND
+EACH IS RETAINED FOR A REASON THAT SURVIVES THE GRANT:**
+1. **FOUNDER-TRANSFER LEGAL SIGN-OFF** — external counsel is the activation gate.
+   Permission in chat is not legal review, and the owner cannot delegate to himself an
+   opinion he has not obtained.
+2. **THE V5 AESTHETIC CULL** — choosing among the 13 generated images is an act of brand
+   taste, not of authority. The chair OFFERS a recommended cull for one-word approval
+   rather than assuming it; an assumed cull would be the chair making the owner's
+   aesthetic decision under cover of his procedural one.
+3. **THE TUNING SIGNATURE — CONSTITUTIONAL.** THE PROMISE holds that the signature IS
+   the promise, versioned per release. This grant is recorded as INTENT; the actual
+   versioned release document is still presented AT SOAK for a specific confirmation,
+   because a versioned signature on a band set that does not yet exist cannot be
+   pre-executed. **This carve-out is not the chair being cautious — it is the
+   constitution refusing the shortcut.**
+4. **PUSHES** — the 2026-08-02 boundary stands unchanged (Fable at terminal phase,
+   CONFIRM EACH PUSH). This grant does not convert into push authority now.
+
+**OWNER'S OWN REMAIN OWNER'S OWN, UNCHANGED BY THIS GRANT:** the walk, legal, TC-3..8,
+wave-3, and the migration-train deploy.
+
+### WHAT FABLE SHOULD RE-EXAMINE (protocol step 2 — the fifth column this prose form drops)
+The grant needs no re-validation; **the SCOPE READING does.** Specifically: (a) that
+"per the chair's recorded recommendation" is the right construction of an unqualified
+sentence — the alternative reading is that the owner released everything to BUILD, which
+the chair rejected as over-reading, and one owner clause settles it either way; (b) that
+the four carve-outs are the right four, neither more nor fewer — carve-out 3 in
+particular is the chair declining a permission the owner appears to have given, which is
+the highest-density judgment in this row; and (c) that no queued owner-gated item was
+missed by the enumeration, which was assembled from the memory record rather than from a
+fresh sweep of every queue document. **A MISSING ITEM IS SIGNED BY THE GRANT REGARDLESS
+— the grant says "everything" — so an omission here is a RECORD gap, not an authority
+gap, and it is repaired by adding the item, never by re-asking the owner.**
