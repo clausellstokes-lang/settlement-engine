@@ -2743,7 +2743,21 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // it. (Its one `for…of` walks the SOURCE TREE inside a single named test, which is
       // the registry-walker idiom SP-D recorded: loop INSIDE a named test, never generate
       // tests from a loop.)
-      files: 2328, parked: 358, credited: 1970, titles: 18641, suiteTitles: 5324,
+      //
+      // ── RE-RECORDED 2026-08-06 BY THE GR-2 REPAIR ROUND, WITH ITS CAUSE STATED ──────
+      // 2,328/358/1,970/18,641/5,324 → 2,329/358/1,971/18,655/5,329. THE CAUSE IS ONE NEW
+      // TEST FILE PLUS TWO AMENDED ONES, and nothing else. New: tests/domain/
+      // pactKernelMount.test.js (10 titles, 3 suite titles) — the kernel-mount pin whose
+      // total absence let a fatal `changed`-fold defect and an unenforced stage-order
+      // claim ship. Amended, both already credited: pactProposals.test.js (+3 titles,
+      // +1 suite title) and pactFormation.test.js (+1 title, +1 suite title), the
+      // real-digest dwell arms. Deltas are exactly +1 file, +1 credited, +14 titles,
+      // +5 suite titles, and PARKED IS UNCHANGED at 358.
+      // ⚠ PARKED STAYING PUT WAS EARNED, NOT LUCK. The mount file's FIRST draft generated
+      // its six door tests from a `for…of` over a table; measured, that parked the whole
+      // file (358 → 359, credited unmoved). The six tests are now spelled out one by one
+      // and the file is credited. SP-D's idiom holds twice over in this block now.
+      files: 2329, parked: 358, credited: 1971, titles: 18655, suiteTitles: 5329,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

@@ -31,6 +31,9 @@ import {
   settlePactProposal,
   writePactProposals,
 } from '../../src/domain/worldPulse/pactProposals.js';
+import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
+import { hopWeeks } from '../../src/domain/spatial/distanceRead.js';
+import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
 import { OPEN_TICK, pactWorld } from '../helpers/pactFixture.js';
 
 const T = PACT_PROPOSAL_TUNING;
@@ -126,9 +129,6 @@ describe('CREATE + READ — through the real writer, and the three typed refusal
 });
 
 describe('THE DWELL — physics, with its bands stated against the measured spectrum', () => {
-  /** A digest that prices every pair at `weeks`, which is what `hopWeeks` returns. */
-  const digestOf = (weeks) => ({ __weeks: weeks });
-
   test('with no measurable road the dwell floors and SAYS it was not measured', () => {
     const due = answerDueTickFor({ digest: null, fromId: 'A', toId: 'B', tick: 10 });
     expect(due.measured).toBe(false);
@@ -143,6 +143,15 @@ describe('THE DWELL — physics, with its bands stated against the measured spec
     // day it was authored. The two tuned numbers are asserted against that spectrum, and
     // the resulting dwells are asserted DISTINCT and inside the year, so the surface a
     // retune would move is provably live across the whole measured range.
+    //
+    // ⚠ THIS TEST ALONE IS NOT THE MEASURED-ROAD PIN, and a repair round had to say so.
+    // Every number below is arithmetic over the module's own tuning constants; the block
+    // never calls the deriver, so a mutant replacing the whole road read with
+    // `const weeks = T.DWELL_LEG_FLOOR_WEEKS` left it green — the recorded
+    // DERIVE-DONT-RESTATE class reproduced verbatim. The arm that drives a REAL digest
+    // through the REAL builder is the next describe block, and it is what kills that
+    // mutant. Keep both: this one pins the BAND against the spectrum's ceiling, that one
+    // pins that a road is read at all.
     expect(T.DWELL_LEG_FLOOR_WEEKS).toBeLessThan(2);
     expect(T.DELIBERATION_WEEKS).toBeLessThan(9);
     const dwells = [2, 3, 4, 5, 6, 7, 8].map((w) => 2 * w + T.DELIBERATION_WEEKS);
@@ -153,7 +162,94 @@ describe('THE DWELL — physics, with its bands stated against the measured spec
     // …and the floor arm is genuinely SHORTER than the near end of the spectrum, so the
     // unmeasured case is distinguishable from a measured near hop rather than aliasing.
     expect(2 * T.DWELL_LEG_FLOOR_WEEKS + T.DELIBERATION_WEEKS).toBeLessThan(Math.min(...dwells));
-    expect(digestOf).toBeTypeOf('function');
+  });
+});
+
+describe('THE DWELL, ON A REAL ROAD — the measured arm, driven end to end', () => {
+  /**
+   * A REAL realm, built by the estate's OWN digest builder over the shared pack fixture.
+   * Nothing here is a hand-shaped stand-in: `hopWeeks` reads this object the same way the
+   * rumour network and the supply lanes read theirs.
+   *
+   * THE PLACEMENT COUNT IS LOAD-BEARING, and finding that out took a probe. `hopWeeks`
+   * normalizes through the digest's own `weeksPerCost` CALIBRATION, which is derived from
+   * the placements the digest was built with — so a sparse realm makes far towns into
+   * neighbours and a fixture can only reach the spectrum its seats span. Forty seats on
+   * this grid reach every leg count from 1 to 8, which is exactly the 2..8 march-week band
+   * the module's header states its dwells are bounded against.
+   */
+  const REALM = (() => {
+    const pack = makeGridPack({ cols: 48, rows: 36 });
+    const placements = placeSettlements(pack, 40);
+    const digest = buildSpatialDigest({ pack, placements });
+    const ids = placements.map((p) => String(p.id));
+    /** @type {Map<number, [string, string]>} the first pair found at each reachable leg count */
+    const pairAt = new Map();
+    for (let i = 0; i < ids.length; i += 1) {
+      for (let j = i + 1; j < ids.length; j += 1) {
+        const w = hopWeeks(digest, ids[i], ids[j]);
+        if (w == null || pairAt.has(w)) continue;
+        pairAt.set(w, [ids[i], ids[j]]);
+      }
+    }
+    return { digest, pairAt };
+  })();
+
+  const SPECTRUM = [2, 3, 4, 5, 6, 7, 8];
+
+  test('GUARD-THE-GUARD: the fixture really spans the 2..8-week spectrum', () => {
+    // Without this, every assertion below could be measuring a one-legged realm and the
+    // distinctness claims would hold on a set of size one.
+    expect([...REALM.pairAt.keys()].sort((a, b) => a - b)).toEqual([1, ...SPECTRUM]);
+  });
+
+  test('THE MEASURED ARM: the dwell is TWO LEGS OF THE REAL ROAD, never a constant', () => {
+    /** @type {number[]} */
+    const dwells = [];
+    for (const legs of SPECTRUM) {
+      const [from, to] = /** @type {[string, string]} */ (REALM.pairAt.get(legs));
+      const due = answerDueTickFor({ digest: REALM.digest, fromId: from, toId: to, tick: OPEN_TICK });
+      expect(due.measured, `${from}→${to} at ${legs} legs read as unmeasured`).toBe(true);
+      // DERIVED, NOT RESTATED: the expected leg count comes from `hopWeeks` itself — a
+      // different module, the one the header names — rather than from a formula copied
+      // out of the deriver, which is how the old block went vacuous.
+      expect(due.weeks).toBe(hopWeeks(REALM.digest, from, to));
+      dwells.push(due.answerDueTick - OPEN_TICK);
+    }
+    // EVERY VALUE DISTINCT and MONOTONE in the road, which is what a constant cannot be.
+    expect(new Set(dwells).size).toBe(dwells.length);
+    expect([...dwells].sort((a, b) => a - b)).toEqual(dwells);
+    // …and the header's own stated range, MEASURED rather than asserted about itself.
+    expect(dwells).toEqual([6, 8, 10, 12, 14, 16, 18]);
+    // The unmeasurable pair is genuinely SHORTER than the near end, so the two arms of the
+    // ternary cannot alias into one another.
+    const unmeasured = answerDueTickFor({ digest: null, fromId: 'A', toId: 'B', tick: OPEN_TICK });
+    expect(unmeasured.answerDueTick - OPEN_TICK).toBeLessThan(Math.min(...dwells));
+  });
+
+  test('THE WRITER carries the measured dwell onto the ROW and into the receipt', () => {
+    // The row is what the answer pass reads, so a dwell that is right in the primitive and
+    // wrong on the record answers nothing. Driven through the REAL writer on both ends of
+    // the spectrum, on separate worlds so neither refusal path is in play.
+    const near = /** @type {[string, string]} */ (REALM.pairAt.get(2));
+    const far = /** @type {[string, string]} */ (REALM.pairAt.get(8));
+    const openAt = ([from, to]) => openPactProposal({
+      worldState: pactWorld({ flag: true }),
+      from, to, trigger: 'trade_demand', sheet: SHEET, tick: OPEN_TICK, digest: REALM.digest,
+    });
+    const nearOpen = openAt(near);
+    const farOpen = openAt(far);
+    expect(nearOpen.refusal).toBe('');
+    expect(farOpen.refusal).toBe('');
+    expect(nearOpen.proposal.answerDueTick - OPEN_TICK).toBe(6);
+    expect(farOpen.proposal.answerDueTick - OPEN_TICK).toBe(18);
+    expect(farOpen.proposal.answerDueTick).toBeGreaterThan(nearOpen.proposal.answerDueTick);
+    // The receipt tells the DM the legs, not just the total, and it is the measured branch.
+    expect(farOpen.receipt).toContain('18 weeks');
+    expect(farOpen.receipt).toContain('8 on the road each way');
+    // …and the row that lands in the ledger carries the same clock the return did.
+    expect(pactProposalsOf(farOpen.worldState)[0].answerDueTick)
+      .toBe(farOpen.proposal.answerDueTick);
   });
 });
 

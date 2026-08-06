@@ -34,6 +34,8 @@ import { fileURLToPath } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
 /** The read's own home — the one file allowed to define the walk. */
@@ -157,12 +159,17 @@ describe('THE ONE WEB — readAllianceWebRisk has exactly three runtime consumer
     // to directly below, applied to the wave that widened this census.
     const triggers = codeOf('src/domain/worldPulse/pactTriggers.js');
     const pacts = codeOf('src/domain/worldPulse/pactFormation.js');
+    // THE ANCHORS ARE THE ONE RUNG EACH FILE IS ALLOWED TO NAME, so an emptied or renamed
+    // read reds on the anchor instead of passing every exclusion below on an empty string.
+    // They travel the same path as the members: all four are band words in the same source.
+    const TRIGGERS_ANCHOR = "SHARED_THREAT_FLOOR_BAND: 'quiet'";
+    const PACTS_ANCHOR = "band: 'quiet'";
     for (const band of ['pressing', 'decisive']) {
-      expect(triggers).not.toContain(`'${band}'`);
-      expect(pacts).not.toContain(`'${band}'`);
+      expectAbsentWithAnchor(triggers, `'${band}'`, TRIGGERS_ANCHOR, `pactTriggers names '${band}'`);
+      expectAbsentWithAnchor(pacts, `'${band}'`, PACTS_ANCHOR, `pactFormation names '${band}'`);
     }
     // …while the ONE rung it does name is present, so this is not vacuous.
-    expect(triggers).toContain("SHARED_THREAT_FLOOR_BAND: 'quiet'");
+    expect(triggers).toContain(TRIGGERS_ANCHOR);
   });
 });
 
@@ -189,10 +196,11 @@ describe('NEGATIVE CONTROL — nobody rebuilds the depth-two alliance walk', () 
     // The bands belong to the read (`decisive`/`pressing`/`present`/`quiet`).
     // The razing may NAME one as its threshold; it may not redefine the ladder.
     const razing = codeOf('src/domain/worldPulse/razingExecution.js');
+    const RAZING_ANCHOR = "DETERRENCE_BAND: 'decisive'";
     for (const band of ['pressing', 'present']) {
-      expect(razing).not.toContain(`'${band}'`);
+      expectAbsentWithAnchor(razing, `'${band}'`, RAZING_ANCHOR, `razingExecution names '${band}'`);
     }
     // …while the threshold it DOES name is present, so this is not vacuous.
-    expect(razing).toContain("DETERRENCE_BAND: 'decisive'");
+    expect(razing).toContain(RAZING_ANCHOR);
   });
 });

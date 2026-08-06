@@ -25,6 +25,7 @@ import {
 import {
   DEVOTION_BANDS, PULL_BANDS, SCARCITY_BANDS,
 } from '../../src/domain/worldPulse/beliefAxisSubjects.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const T = PACT_TRIGGER_TUNING;
 
@@ -44,7 +45,9 @@ describe('the closed trigger vocabulary', () => {
     expect(PACT_TRIGGERS_PRODUCED).toEqual(PACT_TRIGGERS.filter((t) => t !== 'renewal'));
     expect(PACT_TRIGGERS_PRODUCED).toHaveLength(4);
     expect(PACT_TRIGGERS).toContain('renewal');
-    expect(PACT_TRIGGERS_PRODUCED).not.toContain('renewal');
+    // `trade_demand` is the anchor because it travels the SAME list: an emptied, renamed or
+    // re-shaped produced set takes it with it, so the exclusion below cannot go vacuous.
+    expectAbsentWithAnchor(PACT_TRIGGERS_PRODUCED, 'renewal', 'trade_demand', 'the produced set');
   });
 });
 
@@ -81,6 +84,9 @@ describe('THE DEMAND — trade_demand', () => {
     // Banded WORDS in the prose, never the scalar (L5).
     expect(crossing.receipt).toContain('scant');
     expect(crossing.receipt).toContain('plentiful');
+    // The subject is a STRING, so the toContain helpers do not apply; the structural
+    // anchor is the pair of positives immediately above.
+    // anchored: both toContain lines prove this receipt is live composed prose carrying BOTH band words, so "no digit" measures the L5 rule rather than an empty string
     expect(crossing.receipt).not.toMatch(/\d/);
   });
 

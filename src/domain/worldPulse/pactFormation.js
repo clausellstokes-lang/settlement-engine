@@ -23,10 +23,16 @@
  * that file is BANKED at 1580 under the standing R-BLD-10 law, and the treaty advance
  * there is no longer a bare call anyway (J-GRC-2).
  *
- * STAGE ORDER IS MARKET FIRST, PACTS SECOND, and it is pinned (JUDGMENT, vetoable): a court
- * that has just sold a holding is a court whose believed books changed this very tick, and
- * the pact trigger should read the post-sale world rather than the world as it stood before
- * its neighbour bought a town from it.
+ * STAGE ORDER IS MARKET FIRST, PACTS SECOND (JUDGMENT, vetoable): a court that has just
+ * sold a holding is a court whose believed books changed this very tick, and the pact
+ * trigger should read the post-sale world rather than the world as it stood before its
+ * neighbour bought a town from it.
+ *
+ * ⚠ THE ORIGINAL WORDING HERE — "and it is pinned" — WAS AN OVERSTATEMENT, caught by GR-2's
+ * adversarial verifier: a mutant that swapped the two stages wholesale left 191 tests green,
+ * because nothing in the estate drove `advanceSettlementLifecycle` with this file's flag
+ * lit. The claim is now carried by an executed enforcer rather than by this sentence.
+ * @enforced-by tests/domain/pactKernelMount.test.js (call order + the identity chain)
  *
  * ── FORMATION AMENDS; IT DOES NOT COMPETE FOR THE SLOT ──────────────────────────
  * One treaty per unordered pair (V-1) is the estate's law, and the war and sale doors both

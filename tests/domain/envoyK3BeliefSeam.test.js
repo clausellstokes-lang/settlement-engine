@@ -36,6 +36,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
 /**
@@ -621,7 +623,13 @@ describe('WR-7b K3 — nobody is ever current', () => {
     // nothing in the lane reads truth at all, which is the vacuity this block
     // exists to refuse. Both halves are asserted.
     const COMPOSER = 'src/domain/worldPulse/pactFormation.js';
-    expect(Object.keys(NEGOTIATION_MODULES)).not.toContain(COMPOSER);
+    // The two GR-2 leaves ARE rows here, and they travel the same registration path the
+    // composer would — so an emptied or re-keyed table reds on the anchor rather than
+    // letting "the composer is absent" pass because everything is.
+    expectAbsentWithAnchor(
+      Object.keys(NEGOTIATION_MODULES), COMPOSER,
+      'src/domain/worldPulse/pactProposals.js', 'the negotiation set',
+    );
     const composer = code(COMPOSER);
     expect(composer.length, 'the composer read empty').toBeGreaterThan(1000);
     // It reads a court's OWN granary (the §IV.4 self-read carve-out) …
@@ -631,7 +639,11 @@ describe('WR-7b K3 — nobody is ever current', () => {
     // And the leaves it feeds reach it in neither direction: no import of the
     // composer from inside the set, so truth cannot travel back down.
     for (const rel of ['src/domain/worldPulse/pactTriggers.js', 'src/domain/worldPulse/pactProposals.js']) {
-      expect(code(rel)).not.toContain('pactFormation.js');
+      // THE ANCHOR TRAVELS THE SAME PATH AS THE MEMBER: the member is an import specifier,
+      // and `.js'` is the tail every import specifier in this estate ends with — so a leaf
+      // that was emptied, renamed or reduced to a stub reds here rather than passing the
+      // exclusion because it holds no import statements at all.
+      expectAbsentWithAnchor(code(rel), 'pactFormation.js', ".js'", `${rel} imports the composer`);
     }
   });
 

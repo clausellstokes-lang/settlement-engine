@@ -544,11 +544,18 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
   // ── GR-2: THE PEACETIME PACT LANE, the sovereignty market's sibling in every structural
   // respect (own-flag-before-host-gate; dark ⇒ the stage body is never entered ⇒ the SAME
   // worldState and settlementUpdates REFERENCES back, so wiring it in cannot perturb a byte).
-  // STAGE ORDER IS FIXED AND PINNED — market first, pacts second (JUDGMENT, vetoable): a
-  // court that has just sold a holding is a court whose believed books changed this tick,
-  // and the pact trigger should read the POST-SALE world. It runs before advanceDemographics
-  // for the same reason the market does — the crossing reads must not see this tick's own
-  // demographic writes. ──
+  // STAGE ORDER IS FIXED — market first, pacts second (JUDGMENT, vetoable): a court that
+  // has just sold a holding is a court whose believed books changed this tick, and the pact
+  // trigger should read the POST-SALE world. It runs before advanceDemographics for the
+  // same reason the market does — the crossing reads must not see this tick's own
+  // demographic writes.
+  // ⚠ THE WORD "PINNED" WAS AN OVERSTATEMENT UNTIL GR-2's REPAIR ROUND. A verifier swapped
+  // the two stages wholesale and 191 tests stayed green, because no test in the estate drove
+  // this function with the pact flag lit at all. The claim is now carried by an EXECUTED
+  // pin — tests/domain/pactKernelMount.test.js asserts the call ORDER and the IDENTITY CHAIN
+  // (pacts receives the market's returned worldState object; demographics receives the
+  // pacts'), which is what a swap actually breaks. Do not restore a bare "PINNED" here
+  // without an enforcer address beside it. ──
   const pacts = advancePeacetimePacts({
     snapshot, worldState: market.worldState, digest: demoDigest, tick,
     settlementUpdates: market.settlementUpdates,
@@ -576,7 +583,18 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
     return {
       worldState,
       settlementUpdates: updates,
-      changed: demo.changed,
+      // ⚠⚠ EVERY STAGE THAT RAN ABOVE THIS GATE VOTES ON `changed`, AND THE DARK PATH IS
+      // THE ONE THAT MATTERS MOST. Each of the three stages carries its OWN virtual flag,
+      // so the ORDINARY configuration for any one of them is "lit while this module's own
+      // flag is absent" — and this return is what that configuration takes. applyPulseMover
+      // opens with `if (!result || !result.changed) return { worldState, … }`, so a stage
+      // that wrote a real ledger under a `false` vote has its whole worldState DISCARDED at
+      // the mount and the feature is inert in exactly the world it was built for. GR-2's
+      // repair round found `pacts` missing here and `market` missing here too; both are
+      // folded, and tests/domain/pactKernelMount.test.js pins EACH stage's vote through its
+      // OWN door so deleting any one clause reds by name rather than being absorbed by a
+      // sibling that happened to be lit in the fixture.
+      changed: demo.changed || market.changed || pacts.changed,
       // WAVE P4: the demographic lane's Herald lines are ITS news, gated by ITS flag, so
       // they must survive this module's own dormancy gate. Dark demographics returns an
       // empty array here, which is the same [] this path always returned.
@@ -1129,7 +1147,9 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
   let nextWorldState = worldState;
   // The demographic step's own write counts as change even when the satellite lane
   // held still, or applyPulseMover would drop its settlementUpdates on the floor.
-  let changed = cloned || demo.changed || market.changed;
+  // The SAME law binds every sibling stage: market and pacts each ran above, each may have
+  // written a ledger, and a lane that held still contributes a harmless `false`.
+  let changed = cloned || demo.changed || market.changed || pacts.changed;
   if (ledgerChanged) {
     nextWorldState = foldSatellitesLedger(nextWorldState, nextLedger);
     changed = true;

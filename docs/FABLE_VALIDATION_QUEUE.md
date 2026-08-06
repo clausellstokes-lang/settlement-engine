@@ -3034,3 +3034,229 @@ not) and J-IN0A-5's declared residual are the two correctness-adjacent items. ES
 is not this wave's but blocks a clean gate for whoever lands next. J-IN0A-3 and -4 are
 registration calls IN-5/IN-6 will settle. J-IN0A-2 and -6 are mechanism calls with genuine
 optionality.
+
+---
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · GR-2 REPAIR ROUND — THE MOUNT, THE ORDER, THE ROAD
+## (Opus 5 implementer AND verifier under the 2026-08-06 succession directive; every
+## J-* below is a chair-grade judgment made without a Fable chair and is VETOABLE.
+## ADDITIVE COMMIT — nothing in `a18fdcfa` is reverted; this era still has zero reverts.)
+
+**Why this row exists.** GR-2's adversarial verifier returned REJECT with four executed
+findings. ALL FOUR REPRODUCED under my own execution before any repair was written, and
+one of them reproduced HARDER than stated. Each repair is at the chokepoint, each is proved
+by a planted mutant whose md5 moved, and the wave's own battery and the wave-end
+attribution were re-run afterwards.
+
+**FINDING 1 — CONFIRMED-AND-REPAIRED (and worse than reported). THE MOUNT DROPPED
+`pacts.changed`, SO THE FEATURE WAS DISCARDED WHEN LIT.** `settlementLifecycleKernel.js`
+voted `let changed = cloned || demo.changed || market.changed` on the lit path and
+`changed: demo.changed` on the dark one; `applyPulseMover` opens with
+`if (!result || !result.changed) return { worldState, … }`, so a falsy vote throws the
+returned worldState away. Reproduced against the live tree with the lane's own fixture:
+
+```
+lifecycleEnabled=ABSENT  | kernel.changed=false | stageWroteLedger=true | ledgerSurvivesMover=false
+lifecycleEnabled=true    | kernel.changed=false | stageWroteLedger=true | ledgerSurvivesMover=false
+```
+
+⚠ THE VERIFIER'S SECOND ROW IS REFUTED BY MEASUREMENT, IN THE DIRECTION THAT MAKES THE
+DEFECT WORSE. It reported `lifecycleEnabled=true ⇒ changed=true ⇒ ledger survives`, i.e. a
+feature that worked by accident whenever the host flag happened to be lit. Measured, the
+lit-host run ALSO voted `false` and ALSO lost the ledger, because on the pact fixture the
+satellite lane writes nothing and `cloned` stays false. GR-2 was inert in BOTH
+configurations, not one. The repair is stated against the measured cause.
+
+Cured at the chokepoint — both return paths now fold every stage's vote:
+`changed: demo.changed || market.changed || pacts.changed` (dark) and
+`let changed = cloned || demo.changed || market.changed || pacts.changed` (lit). Same
+fixture after the repair: `changed=true`, `ledgerSurvivesMover=true`, both configurations.
+
+**FINDING 2 — CONFIRMED-AND-REPAIRED. THE STAGE-ORDER "PIN" DID NOT EXIST.** Reproduced:
+a full stage swap in a disposable archive tree (`settlementLifecycleKernel.js` md5
+`b73ab476d264482390e65d1b806a82b8` → `ce85cf76377995934cfee2dda71d007f`) left
+`Test Files 11 passed (11) / Tests 191 passed (191)` across the four pact suites, the
+dormancy fence, `envoyK3BeliefSeam`, `settlementLifecycleKernel`, `sovereigntyMarketStageWr10w`,
+`sovereigntyTradeDormancyFence`, `settlementLifecycleDormancyGolden` and
+`demographicsLifecycleGolden`. Root cause confirmed: NO test drove
+`advanceSettlementLifecycle` with `pactFormationEnabled` lit at all.
+
+**FINDING 3 — CONFIRMED-AND-REPAIRED. THE DWELL'S MEASURED-ROAD ARM WAS UNPINNED.**
+Reproduced: `const weeks = measured ? Math.max(…) : T.DWELL_LEG_FLOOR_WEEKS` → `const weeks
+= T.DWELL_LEG_FLOOR_WEEKS` (`pactProposals.js` md5 `41e542e5fcc11cfe5465ecc8d154602f` →
+`22c649198104d972ffac75bf0c914463`, the verifier's exact plant) left the same 11 files /
+191 tests green. The old block hand-restated `2*w + DELIBERATION_WEEKS` and its only use of
+its own `digestOf` helper was `expect(digestOf).toBeTypeOf('function')`.
+
+**FINDING 4 — CONFIRMED-AND-REPAIRED, with the count MEASURED HIGHER THAN REPORTED.** The
+verifier said 7 net-new un-anchored negatives; an independent scan implementing the
+walker's own per-line rule measured **9**, across the same four files:
+`pactTriggers.test.js` 0→2, `pactFormationDormancyFence.test.js` 0→3,
+`envoyK3BeliefSeam.test.js` 0→2, `allianceWebRiskConsumers.walker.test.js` 1→3 (the
+verifier appears to have counted that file's delta as its 2 new sites in prose but summed
+only the other three). Whole-corpus totals: parent `0aac6792` 1,545 sites → GR-2
+`a18fdcfa` 1,554. The generation-facing EXACT-ZERO list grew from 2 files to 3.
+
+**THE REPAIRS, AND WHAT PROVES EACH.**
+
+*The habitat, first.* `tests/domain/pactKernelMount.test.js` is new and is the answer to
+findings 1 and 2 together: it is the first test in the estate that drives
+`advanceSettlementLifecycle` with the pact flag lit. Ten tests. Three recorders wrap the
+three stage modules as STRICT pass-throughs (the dormancy fence's FENCE-3 idiom), with one
+deliberate seam — a `force` switch that overrides ONLY the boolean `changed` a stage
+reports, which is exactly the surface under test and is inert in every test that measures
+real behaviour.
+
+SEVEN MUTANTS, each planted with a script that asserts its anchor occurs exactly once and
+compares md5 before/after (unmutated `8d63ee1b7cc49479c51c621fd75e13cf`), each restored
+from a cp backup and `cmp`-proven byte-identical:
+
+| mutant | md5 after | result |
+| --- | --- | --- |
+| M1 drop `pacts.changed`, dark path | `d0a3a6e75d277889af4b173dbc80e5aa` | 2 failed / 8 passed — the DARK survival pin + the dark pact door |
+| M2 drop `pacts.changed`, lit path | `a9aa1177ad00bf9cdf7f18071adc801d` | 2 failed / 8 passed — the LIT survival pin + the lit pact door |
+| M3 drop `market.changed`, dark path | `b40d8dc98e7a2dcc06d37c8eef4a8cec` | 1 failed / 9 passed — the dark market door alone |
+| M4 drop `market.changed`, lit path | `4a940e7d1262af963d78f20527865c59` | 1 failed / 9 passed — the lit market door alone |
+| M5 drop `demo.changed`, dark path | `c403334bdae6f1ca46a0f12b5e61d27a` | 1 failed / 9 passed — the dark demographic door alone |
+| M6 full stage swap | `95aac4ef87150ec6906b89945500d6d1` | 4 failed / 6 passed — including the call-order + identity-chain pin |
+| M7 `changed: true` always | `dd7666e69f04090afcd76bb968ad5d36` | 1 failed / 9 passed — the dormancy negative control |
+
+M3/M4/M5 firing ALONE is the point: this is the recorded defense-in-depth corollary, where
+a single "the ledger survives" pin would have stayed green with two of the three clauses
+deleted.
+
+*The dwell.* `tests/domain/pactProposals.test.js` gains a `THE DWELL, ON A REAL ROAD`
+block built on a REAL digest (`buildSpatialDigest` over `makeGridPack({cols:48,rows:36})`
+with 40 placements — a count chosen by probe, because `hopWeeks` normalizes through the
+digest's own `weeksPerCost` calibration and a sparse realm cannot reach the far end of the
+spectrum). It asserts `measured === true`, `due.weeks === hopWeeks(digest, from, to)`
+(DERIVED from the primitive's own module, never restated), and dwells `[6,8,10,12,14,16,18]`
+across legs 2..8 — distinct, monotone, and the header's own stated range now measured
+rather than described. `tests/domain/pactFormation.test.js` gains `THE STAGE READS THE
+ROADS`, the first test anywhere to pass a non-null digest into `advancePeacetimePacts`,
+using WR-10's controlled-comparison idiom (same forty placements, A and B re-seated) so a
+far pair is owed its answer at +16 where a near pair is owed at +4. Re-running the
+verifier's exact constant mutant against the repaired battery: **3 failed / 46 passed**.
+
+*The anchors.* All nine sites anchored — seven through `expectAbsentWithAnchor` with an
+anchor that travels the same code path as the excluded member, two through `// anchored:`
+where the subject is a string a `toContain` helper cannot hold. The red ratchet's INVENTORY
+was then content-diffed both ways (the recorded red-both-sides law): base HEAD `729112df`
+79 inventory rows / 3 generation-facing files → repaired 74 rows / 2 files, the diff
+showing four DELETIONS and zero additions. Whole-corpus census 1,545 (parent) → 1,544
+(repaired) — one BELOW the parent, because the anchoring also banked a pre-existing site.
+
+**J-GR2R-1 — THE DARK PATH'S MISSING `market.changed` IS FIXED IN THE SAME EDIT, NOT
+DEFERRED TO A SEPARATE ROW.** The verifier flagged it as pre-existing and worth its own
+row. It is the identical defect at the identical chokepoint, one operand away, and leaving
+it would have meant shipping a repair that knowingly left a sibling instance of the bug
+class live — the recorded "size the change to the class" rule. COST NAMED: this is a real
+behaviour change for the WR-10 sovereignty-market lane whenever `sovereigntyTradeEnabled`
+is lit while `settlementLifecycleEnabled` is absent — that lane's ledger writes now reach
+the world where they previously did not. Every flag involved is dark by default, and the
+full-suite attribution below shows zero golden movement. Re-examine: whether the market
+lane's own soak needs a re-run now that its dark-host writes persist.
+
+**J-GR2R-2 — THE OVERSTATED HEADERS ARE REPAIRED BY AUTHORING THE PIN, NOT BY SOFTENING
+THE PROSE.** Both `settlementLifecycleKernel.js` and `pactFormation.js` said the stage
+order was "PINNED". The cheap repair was to delete the word. Instead the claim is now TRUE:
+each header keeps the claim, carries an `@enforced-by` address, and records the
+overstatement as history so a future lane cannot re-introduce a bare "PINNED" without an
+enforcer beside it. Rejected alternative: a source-text scan asserting the argument
+spellings — cheaper, but it would pin the SPELLING of the threading rather than the
+threading, and would rot on any rename.
+
+**J-GR2R-3 — THE ORDER PIN IS AN IDENTITY CHAIN, NOT A CALL-ORDER LIST ALONE.** Asserting
+`['market','pacts','demo']` would red under a swap but NOT under a rebase that kept the
+order and re-threaded the arguments. The pin asserts both, and it asserts them with an
+ANTI-VACUITY line first (`pacts.outWorld !== pacts.inWorld`), because with the market and
+demographic flags dark every object in the chain would otherwise be the same object and the
+identity assertions would hold under any order at all.
+
+**J-GR2R-4 — THE MOUNT FILE'S SIX DOOR TESTS ARE SPELLED OUT ONE BY ONE RATHER THAN
+GENERATED FROM A TABLE, AND THE COST OF THE ALTERNATIVE WAS MEASURED.** The first draft
+looped `test()` over a three-row table. Measured against the lighting instrument, that
+PARKED the whole file: `parked` moved 358 → 359 with `credited` unmoved. Rewritten as six
+literal tests, the file is CREDITED and `parked` stays at SP-C's measured 358. This is
+SP-D's recorded idiom — loop INSIDE a named test, never generate tests from a loop — and
+the census block now carries the measurement rather than the maxim.
+
+**J-GR2R-5 — THE OLD RESTATED DWELL BLOCK IS KEPT, NOT DELETED, WITH ITS LIMITATION
+WRITTEN INTO IT.** It pins the tuned BAND against the spectrum's ceiling, which the new
+measured block does not; the new block pins that a road is read at all, which it never did.
+Deleting it would have spent a real (if narrow) guard to tidy up an embarrassment. Its
+docstring now says plainly that it survived the constant mutant and names the block that
+kills it.
+
+**J-GR2R-6 — THE ANCHORING BANKED ONE SITE THAT WAS NOT GR-2'S.**
+`allianceWebRiskConsumers.walker.test.js` carried one un-anchored negative at the parent
+commit (the razing band scan) with no frozen roster row, so it was already a live
+violation. Driving the file to ZERO rather than back to ONE costs nothing, is shrink-only,
+and removes the file from the violation list outright instead of leaving a row that would
+re-red on the next edit. No frozen roster number was raised, lowered or added anywhere.
+
+**J-GR2R-7 — NO MUTATION-MANIFEST ROW WAS ADDED, AND THAT IS A CONCURRENCY DECISION.**
+`tests/domain/pactKernelMount.test.js` is NOT an enumerated invariant file under
+`mutationCoverage.shared.mjs` (it sits outside the seven enforcer dirs and its basename
+carries none of the sixteen tokens), so the totality contract does not require an entry —
+confirmed by `mutationCoverageManifest.test.js` passing with the file present. Amending the
+existing `gr2-pact-formation-controls-executed-2026-08-06` rationale with this round's seven
+mutants would have been the honest documentation act, and it was DELIBERATELY DEFERRED —
+documented, not a bug to re-find — because `scripts/mutation-coverage-manifest.json` was
+DIRTY with a concurrent lane's uncommitted work throughout this repair, and staging it would
+have staged their hunk. The mutant evidence lives in this row instead. A later lane holding
+the file cleanly should fold the table above into that entry.
+
+**J-GR2R-8 — THE PROSE-NUMERICS BASELINE RE-RECORD IS ATTRIBUTED TO MY OWN COMMENT
+INSERTIONS.** The wave-end attribution caught `tests/lint/proseNumerics.test.js` failing in
+my tree and not in base: the kernel's `Backing fell to …%` row moved from line 990 to 1008
+because this repair inserted comment lines above it. Two rows re-recorded by RAW-TEXT
+splice (anchor asserted to occur exactly twice, md5 `3d54b9648121e33d1cd48597ee97f62d` →
+`e4a4cac9cf31a50f40703605801920be`, +2 bytes, no reformat). This is a line-address move,
+not a new prose numeric — the diff is `"line": 990` → `"line": 1008` and nothing else.
+
+**⚠ HAZARD RECORDED FOR THE NEXT LANE — THE CENSUS AND THE LIVE TREE.** This repair ran
+while THREE other lanes held uncommitted work in the same worktree (the IN-0a repair, an
+SP-D repair touching `envoyErrandRecords.js` / `errandConsumerRegistry.walker.test.js`, and
+edits to `subsystemRowsVirtual.js`). Every measurement above was therefore taken in `git
+archive` trees of HEAD `729112df` plus THIS lane's files only, never in the live tree, and
+nothing outside this lane's own file list was touched, staged or read as a receipt. The
+lighting census figures recorded here (2,329/358/1,971/18,655/5,329) are correct for
+`729112df` + this lane. If a sibling lane lands a test file BEFORE this commit, that block
+reds and must be re-measured — it is a machine mutex on the census as much as on the gate.
+
+**Wave-end attribution, measured BOTH WAYS over `tests/lint tests/domain tests/property
+tests/security` in two `git archive` trees of HEAD `729112df` — one untouched, one carrying
+this lane's files only.**
+
+| | files | tests | failed files | failed | passed | skipped |
+| --- | --- | --- | --- | --- | --- | --- |
+| BASE `729112df` | 1,167 | 16,502 | 19 | 28 | 16,473 | 1 |
+| BASE + this repair | 1,168 | 16,516 | 19 | 28 | 16,487 | 1 |
+
+The failing-FILE set and the failing-TEST-TITLE set are **byte-identical in both
+directions** (`diff` empty both ways). +1 file, +14 tests, +14 passing, **ZERO new reds**,
+and — the granularity the verifier correctly said was missing last time — the red ratchet's
+INVENTORY was content-diffed too and SHRANK: `negativeAssertionAnchor` 79 rows → 74,
+generation-facing files 3 → 2, four deletions and zero additions. One attributable
+regression appeared in the first pass (`proseNumerics`, J-GR2R-8) and was cured before this
+final run rather than reported as pre-existing.
+
+**Gates.** Wave battery in the isolated tree: `Test Files 15 passed (15) / Tests 253 passed
+(253)` over the four pact suites, the new mount file, `envoyK3BeliefSeam`,
+`settlementLifecycleKernel`, `sovereigntyMarketStageWr10w`, all four dormancy/golden
+properties, `allianceWebRiskConsumers`, `sovereigntyLightingContract` and
+`mutationCoverageManifest`. `npx eslint` exit 0 on all eleven touched files; zero NUL bytes
+across every authored file; `settlementLifecycleKernel.js` at 1,231 raw lines against the
+1,313 ceiling and unchanged in effective lines (every addition is a comment, which
+`max-lines` skips). Every vitest invocation gated on `sh scripts/gate-mutex.sh`; one early
+run overlapped a sibling lane and was DISCARDED and re-executed under a held mutex rather
+than reported.
+
+**What Fable should re-examine, in priority order.** J-GR2R-1 first — it is the only
+behaviour change outside GR-2's own flag and it touches the WR-10 lane. J-GR2R-7 next: the
+manifest amendment is owed and deliberately unpaid. J-GR2R-2 and -4 are method calls that
+set precedent for how overstatements and census moves get repaired. J-GR2R-5 and -6 are
+cheap to veto either way. The verifier's own NOT-VERIFIED items stand where it left them:
+the lit transport differential still has no independent drive, and `PROPOSE_PACT` is still
+absent by J-GR-2-6 rather than half-wired.

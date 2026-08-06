@@ -29,6 +29,9 @@ import { treatyBlocksWar, treatyLedgerOf } from '../../src/domain/worldPulse/tre
 import { mintSovereigntySaleTreaties } from '../../src/domain/worldPulse/peaceTermsSale.js';
 import { repudiableTreatyPairs } from '../../src/domain/worldPulse/treatyBreach.js';
 import { PACT_TRIGGERS_PRODUCED } from '../../src/domain/worldPulse/pactTriggers.js';
+import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
+import { hopWeeks } from '../../src/domain/spatial/distanceRead.js';
+import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
 import {
   DUE_TICK, OPEN_TICK, SEAT, pactBeliefs, pactSnapshot, pactWorld, relKey,
 } from '../helpers/pactFixture.js';
@@ -447,5 +450,55 @@ describe('THE ANSWER, driven directly — so both arms are provably separable', 
       worldState: pactWorld({ flag: true }), proposal, responderDemand01: 1, tick: DUE_TICK,
     });
     expect(both.verdict).toBe('signed');
+  });
+});
+
+describe('THE STAGE READS THE ROADS — a non-null digest reaches the row', () => {
+  /**
+   * THE CONTROLLED COMPARISON (WR-10's `realmDigest` idiom, and it is load-bearing here for
+   * the same reason it was there): `hopWeeks` normalizes through the digest's OWN
+   * `weeksPerCost` calibration, derived from the placements the digest was built with — so
+   * "move the two courts further apart" in a THREE-seat realm produces a SHORTER march, not
+   * a longer one. Both realms below carry the SAME forty placements and differ only in
+   * which seats A and B occupy.
+   * @param {number} aSeat @param {number} bSeat
+   */
+  const seatedRealm = (aSeat, bSeat) => {
+    const pack = makeGridPack({ cols: 48, rows: 36 });
+    const seats = placeSettlements(pack, 40);
+    const placements = seats.map((seat, i) => ({
+      id: i === aSeat ? 'A' : i === bSeat ? 'B' : `filler${String(i).padStart(3, '0')}`,
+      cellId: seat.cellId,
+    }));
+    return buildSpatialDigest({ pack, placements });
+  };
+
+  test('a FAR pair is owed its answer LATER than a NEAR one, by the real road', () => {
+    // The stage's own dark arm was the only one any test drove: every existing pin passes
+    // `digest` as undefined, so the whole measured branch of `answerDueTickFor` was
+    // unreachable from the stage. This is that branch, driven through the real stage.
+    const near = seatedRealm(0, 1);
+    const far = seatedRealm(0, 39);
+    // ANTI-VACUITY: the two realms really do price the same pair differently, so a null
+    // read on either side would red HERE rather than silently collapsing the comparison.
+    expect(hopWeeks(near, 'A', 'B')).toBe(1);
+    expect(hopWeeks(far, 'A', 'B')).toBe(7);
+
+    const openWith = (digest) => advancePeacetimePacts({
+      snapshot: pactSnapshot(), worldState: pactWorld({ flag: true }),
+      settlementUpdates: [], tick: OPEN_TICK, digest,
+    });
+    const nearRow = pactProposalsOf(openWith(near).worldState)[0];
+    const farRow = pactProposalsOf(openWith(far).worldState)[0];
+    expect(nearRow.openedTick).toBe(OPEN_TICK);
+    expect(farRow.openedTick).toBe(OPEN_TICK);
+    // Two legs plus the deliberation, on each realm's own measured road.
+    expect(nearRow.answerDueTick - OPEN_TICK).toBe(4);
+    expect(farRow.answerDueTick - OPEN_TICK).toBe(16);
+    expect(farRow.answerDueTick).toBeGreaterThan(nearRow.answerDueTick);
+    // …and the unmeasurable world (no digest at all) still floors where it always did, so
+    // wiring the road in did not move the aspatial campaign's clock.
+    const aspatialRow = pactProposalsOf(openWith(undefined).worldState)[0];
+    expect(aspatialRow.answerDueTick).toBe(DUE_TICK);
   });
 });

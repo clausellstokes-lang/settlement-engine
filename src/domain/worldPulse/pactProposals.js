@@ -20,6 +20,15 @@
  * deliberation, so a far court answers slowly BY PHYSICS and law M's one-week-per-leg floor
  * binds a pact exactly as it binds an embassy.
  *
+ * ⚠ THAT SENTENCE WAS UNENFORCED FOR ONE COMMIT, and a verifier proved it: replacing the
+ * whole road read with `const weeks = T.DWELL_LEG_FLOOR_WEEKS` left 114 tests green,
+ * because the block claiming to pin it hand-restated `2*w + DELIBERATION_WEEKS` and never
+ * called this module — the recorded DERIVE-DONT-RESTATE class. The measured arm is now
+ * driven on a REAL digest built by the estate's own builder, at the primitive, at the
+ * writer, and at the STAGE, across the whole 2..8-week spectrum.
+ * @enforced-by tests/domain/pactProposals.test.js ('THE DWELL, ON A REAL ROAD'),
+ *   tests/domain/pactFormation.test.js ('THE STAGE READS THE ROADS')
+ *
  * ⚠ THE CALIBRATED-WEEKS HAZARD, ANSWERED WITH NUMBERS. `hopWeeks` is CALIBRATED PER
  * DIGEST: a whole realm spans roughly 2..8 march weeks (and the read's own ceiling is
  * MAX_HOP_WEEKS = 52), so ANY band at or above 9 weeks would refuse nothing anywhere in a

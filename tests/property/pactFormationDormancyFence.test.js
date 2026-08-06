@@ -48,6 +48,8 @@ import { fileURLToPath } from 'node:url';
 
 import { describe, expect, test, vi } from 'vitest';
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
 /** FENCE 3's recorder. Hoisted, because vi.mock factories hoist above the imports. */
 const calls = { score: 0 };
 
@@ -211,9 +213,18 @@ describe('FENCE 4 — the gate-polarity census over the real source tree', () =>
     expect(gate).toContain(`${FLAG} === true`);
     // NO LOOSE SPELLING ANYWHERE: a truthy read would make ABSENT and FALSE differ.
     for (const rel of namers) {
-      expect(codeOf(rel), `${rel} loose read`).not.toMatch(new RegExp(`${FLAG}\\s*\\)`));
-      expect(codeOf(rel), `${rel} negated read`).not.toContain(`!${FLAG}`);
-      expect(codeOf(rel), `${rel} inequality read`).not.toContain(`${FLAG} !== true`);
+      const source = codeOf(rel);
+      // LIVENESS ANCHOR, and DELIBERATELY NOT THE SCAN'S OWN PREDICATE. Asserting that the
+      // file still names the flag would be self-referential — `namers` is filtered on
+      // exactly that. `export` and a length floor prove instead that this read returned a
+      // real module body rather than an empty, deleted or comment-only file, which is the
+      // drift that would make all three exclusions below pass on nothing.
+      expect(source, `${rel} read as an empty or comment-only file`).toContain('export');
+      expect(source.length, `${rel} read too short to hold a gate`).toBeGreaterThan(200);
+      // anchored: the `export` + length assertions immediately above prove this exact subject is live source
+      expect(source, `${rel} loose read`).not.toMatch(new RegExp(`${FLAG}\\s*\\)`));
+      expectAbsentWithAnchor(source, `!${FLAG}`, 'export', `${rel} negated read`);
+      expectAbsentWithAnchor(source, `${FLAG} !== true`, 'export', `${rel} inequality read`);
     }
   });
 
