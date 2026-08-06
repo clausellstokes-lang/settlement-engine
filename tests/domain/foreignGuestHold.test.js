@@ -341,6 +341,9 @@ describe('WR-7b foreign guest hold one-writer substrate', () => {
       'private_imprisonment',
       'terms_shopping',
       'parlay_refused',
+      // ES-2: the covert cause. Appended rather than inserted — two consumers key off the
+      // word and one (`ransomDwellRead`) now branches on this exact member.
+      'caught_spying',
     ]);
     expect(FOREIGN_GUEST_HOLD_CLOSE_REASONS).toEqual([
       'release',

@@ -46,6 +46,8 @@ import {
   ES1_COVERT_MISSION_MINT_COUPLING,
   ES1_HIDDEN_FRANCHISE_COUPLING,
   ES1_MISSION_VOCABULARY_COUPLING,
+  ES2_GAUNTLET_DWELL_READ_COUPLING,
+  ES2_GAUNTLET_TRANSIT_CURSOR_COUPLING,
   ES_ESPIONAGE_COUPLINGS,
   IN0A_PLANT_HANDOFF_COUPLING,
   IN_INFORMATION_COUPLINGS,
@@ -554,23 +556,30 @@ describe('CW-0 coupling registry', () => {
       ]);
     expect(couplingRowFor('CPL-19', 'INFO→GRAMMAR')).toBe(WR7_MOVING_PICTURE_COUPLING);
     // ES-1's two mission rows are the SECOND and THIRD reads on this direction and the
-    // first owned by ESPIONAGE. Registration order is the legacy first-row tiebreak and
-    // WR-7's silence inference keeps that seat, which the line below re-asserts.
+    // first owned by ESPIONAGE; ES-2's gauntlet pair are the FOURTH and FIFTH — the stage
+    // reads the errand ledger to find who is standing still, and borrows the family's one
+    // schedule cursor rather than deriving a second position fraction. Registration order
+    // is the legacy first-row tiebreak and WR-7's silence inference keeps that seat, which
+    // the line below re-asserts across two more waves.
     expect(couplingRowsFor('CPL-19', 'GRAMMAR→INFO'))
       .toEqual([
         WR7_SILENCE_INFERENCE_COUPLING,
         ES1_COVERT_MISSION_MINT_COUPLING,
         ES1_MISSION_VOCABULARY_COUPLING,
+        ES2_GAUNTLET_DWELL_READ_COUPLING,
+        ES2_GAUNTLET_TRANSIT_CURSOR_COUPLING,
       ]);
     expect(couplingRowFor('CPL-19', 'GRAMMAR→INFO')).toBe(WR7_SILENCE_INFERENCE_COUPLING);
     // ES-1's third row OPENS a pair: nobody had read across TRADE and GRAMMAR before, and
     // the read is one constant — the traveller-kind franchise the covert route plan needs.
     expect(couplingRowsFor('CPL-22', 'TRADE→GRAMMAR')).toEqual([ES1_HIDDEN_FRANCHISE_COUPLING]);
-    // The leaf composes exactly its three rows, in wave order.
+    // The leaf composes exactly its rows, in wave order.
     expect(ES_ESPIONAGE_COUPLINGS).toEqual([
       ES1_COVERT_MISSION_MINT_COUPLING,
       ES1_MISSION_VOCABULARY_COUPLING,
       ES1_HIDDEN_FRANCHISE_COUPLING,
+      ES2_GAUNTLET_DWELL_READ_COUPLING,
+      ES2_GAUNTLET_TRANSIT_CURSOR_COUPLING,
     ]);
     expect(couplingRowsFor('CPL-1', 'WAR→TRADE'))
       .toEqual([WR6_COALITION_SETTLEMENT_TRADE_COUPLING]);

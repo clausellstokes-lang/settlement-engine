@@ -43,6 +43,18 @@ export const RANSOM_CLAIM_KIND = 'coalition_reimbursement';
 /** The subject discriminator. A ransom claim is owed FOR SOMEBODY. */
 export const RANSOM_SUBJECT_KIND = 'person';
 
+/**
+ * ES-2 — THE COVERT HOLD CAUSE, re-declared for the SAME reason `RANSOM_CLAIM_KIND` is.
+ *
+ * `foreignGuestHold.js` owns this word, and it reaches the spatial ledger to do its job.
+ * Importing it here would pull a world reader into a leaf whose header promises no world
+ * state, for the sake of one string. So the estate's established answer applies unchanged:
+ * re-declare, and PIN THE TWO SPELLINGS EQUAL in a test that imports both, so the
+ * vocabulary cannot fork in silence. The pin lives in tests/domain/espionageGauntlet.test.js
+ * beside the dwell-cut arm this constant selects.
+ */
+export const RANSOM_COVERT_HOLD_CAUSE = 'caught_spying';
+
 /** Closed dwell bands over the hold, shortest first. */
 export const RANSOM_DWELL_BANDS = Object.freeze(['fresh', 'settled', 'protracted']);
 
@@ -59,6 +71,14 @@ export const RANSOM_SILENCE_SHAPES = Object.freeze([
 export const RANSOM_TUNING = Object.freeze({
   /** Dwell cut-points in whole ticks, ascending; below the first is `fresh`. */
   DWELL_CUTS: Object.freeze([2, 8]),
+  /**
+   * ES-2 / J-ES-15b — THE SAME LADDER, STRETCHED, FOR A CAUGHT SPY. "Longer hostage terms"
+   * is a LATER GATE rather than a stored duration: the hold still records only
+   * `heldSinceTick` (a duration field is refused by law), and a `caught_spying` row simply
+   * banded against these cuts sits `fresh` twice as long before the ransom gate opens and
+   * does not reach `protracted` until week sixteen. Zero new keys; derived on every read.
+   */
+  DWELL_CUTS_COVERT: Object.freeze([4, 16]),
   /** The gate opens at this band and never before it. */
   GATE_OPENS_AT: 'settled',
   /** Claim magnitude per worth band, before the dwell lift. */
@@ -122,7 +142,13 @@ export function ransomDwellRead({ hold, tick } = {}) {
   if (!strictText(row.npcId) || !strictText(row.captorId)) return shut('unreadable_hold');
   if (now < heldSinceTick) return shut('hold_not_yet_open');
   const dwellTicks = now - heldSinceTick;
-  const cuts = RANSOM_TUNING.DWELL_CUTS;
+  // ES-2 / J-ES-15b — THE COVERT ARM, and its enforcement is the SIGNATURE. This function
+  // takes a HOLD and a tick and nothing else, so the only way "is this a spy?" can enter is
+  // off the hold row's own cause. No world state, no errand, no importance can reach in and
+  // make one captive's clock different from another's for a reason the row does not carry.
+  const cuts = row.cause === RANSOM_COVERT_HOLD_CAUSE
+    ? RANSOM_TUNING.DWELL_CUTS_COVERT
+    : RANSOM_TUNING.DWELL_CUTS;
   let index = cuts.length;
   for (let at = 0; at < cuts.length; at += 1) {
     if (dwellTicks < Number(cuts[at])) { index = at; break; }

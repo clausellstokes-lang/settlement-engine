@@ -2878,7 +2878,28 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // never at the shared working tree and never at the HEAD the wave opened on. Two
       // lanes have now had to re-record this census after archiving the wrong commit; the
       // parent is the only tree a later checkout of this commit can reproduce.
-      files: 2338, parked: 358, credited: 1980, titles: 18824, suiteTitles: 5384,
+      // ── RE-RECORDED 2026-08-06 BY ES WAVE ES-2, CAUSE MEASURED AND DECOMPOSED ──
+      // 2,338/358/1,980/18,824/5,384 → 2,340/358/1,982/18,854/5,395. THE CAUSE IS TWO NEW
+      // TEST FILES AND NOTHING ELSE — no already-credited file gained or lost a title, and
+      // PARKED IS UNCHANGED at 358 because both new files spell every title as a literal,
+      // so door 3's reader recognises them statically and credits the file.
+      //   tests/domain/espionageGauntlet.test.js                  20 titles,  5 suite titles
+      //   tests/property/espionageGauntletDormancyFence.test.js   10 titles,  6 suite titles
+      // ⚠ THE DELTA IS DECOMPOSED RATHER THAN ASSERTED, and it closes exactly:
+      //   20 + 10 = 30 titles        (18,824 → 18,854)
+      //    5 +  6 = 11 suite titles  ( 5,384 →  5,395)
+      //    2 new files, 2 newly credited, 0 newly parked
+      // ⚠ BOTH ENDS READ WITH THE SAME INSTRUMENT. The BASE figures above are not inherited
+      // from the previous row's prose: this walker was RUN against a fresh `git archive` of
+      // this wave's own parent (8322b8ec) with node_modules symlinked in, and it passed
+      // there — which is what makes 2,338/358/1,980/18,824/5,384 a measurement at the base
+      // rather than a claim about it. The HEAD figures are this walker's own readings.
+      // ES-2 edited three files in tests/ (this one, tests/domain/couplingRegistry.test.js
+      // and tests/domain/foreignGuestHold.test.js) and NONE of the three moved a title
+      // count: the coupling edit extended two existing `toEqual` arrays inside existing
+      // titles, and the hold edit added one array member inside one. A `+N` counted off the
+      // diff's added lines would have over-attributed all three.
+      files: 2340, parked: 358, credited: 1982, titles: 18854, suiteTitles: 5395,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

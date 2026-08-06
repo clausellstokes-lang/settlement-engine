@@ -79,8 +79,24 @@ function wholeTick(value) {
  */
 export function ransomWorthBandFromErrand(errand) {
   const row = asObject(errand);
-  if (asObject(row.termSheet).id) return RANSOM_WORTH_BANDS[2];
-  return text(row.purpose) === 'sue' ? RANSOM_WORTH_BANDS[1] : RANSOM_WORTH_BANDS[0];
+  const base = asObject(row.termSheet).id
+    ? 2
+    : text(row.purpose) === 'sue' ? 1 : 0;
+  // ES-2 / J-ES-15a — A CAUGHT SPY IS WORTH ONE BAND MORE, capped at `principal`.
+  //
+  // THE SIGNAL IS THE MISSION SUB-RECORD, NOT `truePurpose`, AND THAT IS A MEASURED
+  // DEVIATION FROM THE VOLUME'S LITERAL SPELLING RATHER THAN A LOOSER TEST. Two reasons,
+  // both checkable: (1) `errandSpineBlock` writes `covert` ONLY onto a row whose RESOLVED
+  // class is covert, so the sub-record's presence IS the class — and it survives the
+  // faceless-row case in which `truePurpose` is absent but the row is still a mission;
+  // (2) `tests/lint/errandConsumerRegistry.walker.test.js` reserves the three conditional
+  // FACE fields to the errand family, and this file is not in it, so spelling `truePurpose`
+  // here would red the estate's one-reader law for a strictly weaker test.
+  //
+  // The one-argument signature remains the enforcement (the CR-WIRE-A idiom): the lift is
+  // readable off the mission row alone and no world-state importance can enter.
+  const lifted = asObject(row.covert).product ? Math.min(2, base + 1) : base;
+  return RANSOM_WORTH_BANDS[lifted];
 }
 
 /**

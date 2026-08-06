@@ -136,9 +136,86 @@ export const ES1_HIDDEN_FRANCHISE_COUPLING = couplingRow({
   intendedDesk: 'war',
 });
 
+/**
+ * ES-2 / GRAMMAR→INFO. THE GAUNTLET READS THE ERRAND LEDGER TO FIND WHO IS STANDING STILL.
+ *
+ * The stay-detection stage walks `envoyErrandsOf` and asks each row where its traveller is
+ * — which is a GRAMMAR read, and it is the ONLY way the question can be asked, because the
+ * itinerary is expressed as multi-leg outbound routing rather than as a second clock (ES
+ * §1). The dwell is the gap between one leg's arrival and the next leg's departure and
+ * nothing else knows where that gap is.
+ *
+ * ⚠ THE READ IS DELIBERATELY THE ROW'S `covert` SUB-RECORD AND NEVER THE THREE FACE FIELDS.
+ * `errandSpineBlock` writes `covert` only onto a row whose RESOLVED class is covert, so the
+ * sub-record IS the class test — and taking it that way keeps this file outside the reserved
+ * set `tests/lint/errandConsumerRegistry.walker.test.js` grants to the errand family alone.
+ * One read, two laws honoured; the alternative would have been a strictly weaker test that
+ * also broke the estate's one-reader law.
+ *
+ * THE COUNTERFORCE IS THE PERSISTENCE NORMALIZER, on the far side of the same seam. Nothing
+ * this stage reads can exist unless `normalizeCovertMission` accepted it on the way into the
+ * ledger and will accept it again on the way out of a save file — so a gauntlet reading a
+ * mission shape no writer authored is not a state the ledger can hold.
+ *
+ * DARK ⇒ NOTHING: the stage refuses at `espionageActive` before it walks anything, and it
+ * WRITES NOTHING in either state (the custody arm is owner-gated on the encounter shape —
+ * see the stage header's measured stop-report), so the coupling is a read and only a read.
+ * @type {Readonly<CouplingRegistryRow>}
+ */
+export const ES2_GAUNTLET_DWELL_READ_COUPLING = couplingRow({
+  couplingId: 'CPL-19.GRAMMAR_TO_INFO.ES-2.gauntlet_dwell_read',
+  pairId: 'CPL-19',
+  direction: 'GRAMMAR→INFO',
+  read: 'src/domain/worldPulse/espionage/espionageGauntlet.js#covertDwellRead',
+  receiptField: 'worldState.envoyErrands[].{legs,state,covert.itinerary}',
+  counterforce: 'src/domain/worldPulse/envoyErrandRecords.js#normalizeCovertMission',
+  flags: Object.freeze([
+    'errandSpineEnabled',
+    'espionageEnabled',
+  ]),
+  owningVolume: 'ESPIONAGE',
+  owningWave: 'ES-2',
+  intendedDesk: 'war',
+});
+
+/**
+ * ES-2 / GRAMMAR→INFO. THE SCHEDULE CURSOR IS BORROWED, NEVER RE-DERIVED.
+ *
+ * `scheduledEnvoyPosition` is the errand family's ONE statement of where a traveller stands
+ * at one cut, and it evaluates the shared leg law exactly once so a boundary arrival cannot
+ * also hop onto a later leg. The gauntlet needs precisely that answer — an arrived-but-not-
+ * complete cursor IS the dwell — and computing it here would have minted a second position
+ * fraction, which law M forbids for exactly this reason: a covert errand and a peace embassy
+ * cannot disagree about where anybody is.
+ *
+ * THE COUNTERFORCE is the transit seam itself. `envoyErrandTransit.js` is a registered
+ * injected-plan validator with no import through which a local speed floor could grow, so a
+ * borrowed cursor cannot become a private clock without that file changing first.
+ *
+ * DARK ⇒ NOTHING: reached only past `espionageActive`, and the borrowed read is pure.
+ * @type {Readonly<CouplingRegistryRow>}
+ */
+export const ES2_GAUNTLET_TRANSIT_CURSOR_COUPLING = couplingRow({
+  couplingId: 'CPL-19.GRAMMAR_TO_INFO.ES-2.gauntlet_transit_cursor',
+  pairId: 'CPL-19',
+  direction: 'GRAMMAR→INFO',
+  read: 'src/domain/worldPulse/espionage/espionageGauntlet.js#covertDwellRead',
+  receiptField: 'worldState.envoyErrands[].positionRef.{legIndex,progressBand,toId}',
+  counterforce: 'src/domain/worldPulse/envoyErrandTransit.js#scheduledEnvoyPosition',
+  flags: Object.freeze([
+    'errandSpineEnabled',
+    'espionageEnabled',
+  ]),
+  owningVolume: 'ESPIONAGE',
+  owningWave: 'ES-2',
+  intendedDesk: 'war',
+});
+
 /** Every ESPIONAGE row, in wave order. @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
 export const ES_ESPIONAGE_COUPLINGS = Object.freeze([
   ES1_COVERT_MISSION_MINT_COUPLING,
   ES1_MISSION_VOCABULARY_COUPLING,
   ES1_HIDDEN_FRANCHISE_COUPLING,
+  ES2_GAUNTLET_DWELL_READ_COUPLING,
+  ES2_GAUNTLET_TRANSIT_CURSOR_COUPLING,
 ]);

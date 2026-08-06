@@ -24,12 +24,32 @@ export const FOREIGN_GUEST_HOLD_SCHEMA_VERSION = 1;
 export const MAX_ACTIVE_FOREIGN_GUEST_HOLDS = 64;
 export const MAX_HOLD_CONTINUATION_LEGS = 32;
 
+/**
+ * WHY A TRAVELLER IS IN SOMEBODY ELSE'S CUSTODY. Closed, and appended-to rather than
+ * re-ordered, because two built consumers key behaviour off the WORD.
+ *
+ * ES-2 — `caught_spying` is the FIFTH member and the espionage layer's one covert custody
+ * cause (ES §1's vocabulary clause; seam row 3 keeps it the ONE spelling that TR-8's capture
+ * will also use). It is the signal `ransomDwellRead` reads to shift its dwell cuts, which is
+ * the whole of J-ES-15b's "a spy sits twice as long before the ransom gate opens" — and
+ * reading it off the HOLD ROW is what keeps that arm one-argument-readable.
+ */
 export const FOREIGN_GUEST_HOLD_CAUSES = Object.freeze([
   'war_continuation',
   'private_imprisonment',
   'terms_shopping',
   'parlay_refused',
+  'caught_spying',
 ]);
+
+/**
+ * THE COVERT CAUSE, NAMED ONCE. Two modules outside this file branch on this exact word —
+ * `ransomClaim.ransomDwellRead` stretches its dwell cuts for it and the espionage gauntlet
+ * would open custody under it — and a branch keyed on a LITERAL is a second spelling of a
+ * closed-vocabulary member: the day the word moved, the branch would keep compiling and
+ * quietly stop firing. Seam row 3's one-spelling clause, made structural.
+ */
+export const FOREIGN_GUEST_HOLD_COVERT_CAUSE = FOREIGN_GUEST_HOLD_CAUSES[4];
 
 export const FOREIGN_GUEST_HOLD_CLOSE_REASONS = Object.freeze([
   'release',

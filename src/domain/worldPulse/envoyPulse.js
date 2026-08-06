@@ -41,6 +41,7 @@ import {
   resolveStartInterceptions,
 } from './envoyInterceptionStage.js';
 import { envoyNewsEntries } from './envoyNews.js';
+import { advanceEspionageGauntlet } from './espionage/espionageGauntlet.js';
 import { openRansomClaims } from './envoyRansomStage.js';
 import { ratifyCarriedSheets } from './envoyRatificationStage.js';
 import { npcLedgerOf } from './npcLedger.js';
@@ -134,6 +135,8 @@ export function advanceEnvoyDiplomacyPulse({
       ratifications: [],
       ransomClaims: [],
       ransomSkipped: [],
+      espionageDetections: [],
+      espionageSkipped: [],
       commissionedPlants,
     };
   }
@@ -252,6 +255,17 @@ export function advanceEnvoyDiplomacyPulse({
   // home. Nothing is persisted: a ransom claim is new persistent state and its
   // ledger shape is owner-gated, so the arc is computed and handed back.
   const ransom = openRansomClaims({ worldState: state, tick });
+
+  // ES-2 — THE GAUNTLET, in the ransom stage's own slot and for the ransom stage's own
+  // reason: a spy standing still in a hostile market this tick is a spy this tick can
+  // price, and neither read belongs after the home mouth. It is gated by
+  // `espionageActive` inside the stage, so a world without the flag walks nothing, and it
+  // WRITES NOTHING — the capture it computes cannot open custody until the encounter shape
+  // question is ruled (the stage header carries the measured refusal). Handed back exactly
+  // as the ransom claims are.
+  const gauntlet = advanceEspionageGauntlet({
+    worldState: state, tick, snapshot, regionalGraph,
+  });
 
   // WR-7c — THE RATIFICATION STAGE, decided BEFORE the mouth sees anything.
   // Every terms-bearing return in this pulse is voted on together, because two
@@ -382,6 +396,10 @@ export function advanceEnvoyDiplomacyPulse({
     // and must not read as a failure.
     ransomClaims: ransom.claims,
     ransomSkipped: ransom.skipped,
+    // ES-2's stay-detection readings and its receipted refusals, handed back on the same
+    // terms and for the same owner-gated reason.
+    espionageDetections: gauntlet.detections,
+    espionageSkipped: gauntlet.skipped,
     commissionedPlants: planted.commissionedPlants,
   };
 }
