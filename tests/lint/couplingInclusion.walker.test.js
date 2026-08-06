@@ -176,6 +176,21 @@ const ARGUED_UNLAYERED = Object.freeze({
   // INFORMATION asks it of a message.
   'src/domain/worldPulse/lawWord.js': 'shared vocabulary — the estate\'s ONE law-band spelling (CR-ES-3), spelled by four ports',
   'src/domain/worldPulse/magicWorksAt.js': 'shared world-law predicate — does magic function here, asked by WAR and INFORMATION alike',
+  // SP-D adds one on exactly the lawWord.js argument, and it is the argument's clearest
+  // case yet. The generalized errand mint head owns NO SUBJECT: it answers "is this
+  // person lawfully on the road, and what kind of business is this" — a question five
+  // ports are architected to ask (TRADE's factors, FAITH's legates and pilgrims,
+  // ES-1/IN-4's couriers, INTERIOR's emigres), which is the whole content of J-SP-2's
+  // ruling that the estate has ONE purposeful-travel substrate. Giving it a family would
+  // make every port's own lawful mint a cross-layer coupling and would mean choosing a
+  // port for a leaf that exists precisely so no port has to own travel. Note the
+  // contrast with strategicPosture.js three lines up in INTERIOR: that leaf composes a
+  // COURT's memories, which is INTERIOR's subject, so it takes a family. The distinction
+  // both times is SUBJECT, not program. Registration is not lost, it moves: the
+  // consumers are enumerated in ERRAND_CONSUMERS and measured both ways by
+  // tests/lint/errandConsumerRegistry.walker.test.js, which is a stricter register than
+  // an import pair (it reds an unregistered minter AND a registry row with no minter).
+  'src/domain/worldPulse/errandMint.js': 'SP substrate — the estate\'s ONE purposeful-travel mint head (J-SP-2), minted through by five ports; consumers registered in ERRAND_CONSUMERS',
 });
 
 /** The FP scope the unlayered census is TOTAL over. */

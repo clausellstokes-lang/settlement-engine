@@ -325,6 +325,64 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     ]),
     soakEvidence: 'unobserved',
   }),
+  // ── THE ERRAND SPINE (SP-D, docs/DESIGN_FP_ARCH_SP.md §5) ──────────────────
+  // A GENERALIZATION rather than a layer, which is why every channel below is empty and
+  // why that is the honest reading rather than a modest one. The wave adds no ledger, no
+  // stage and no news kind: it turns an existing war artifact into a substrate five
+  // unbuilt volumes will mint against, and the only thing a lit world does differently is
+  // carry up to three conditional WORDS on an errand row the WR-7a layer already writes.
+  Object.freeze({
+    rule: 'errandSpineEnabled',
+    title: 'The errand spine (six purpose classes and the declared/true split)',
+    module: 'src/domain/worldPulse/errandMint.js,src/domain/worldPulse/envoyErrandVocabulary.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY per the evidence law: the lane mints no candidate. The head
+      // returns a field block to an existing writer; there is no `candidateType` literal
+      // anywhere in it.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: the lane authors no Herald beat. A purpose class is what an
+      // errand IS, not something that happened, and the volumes that will narrate a
+      // factor or a courier do so in their own waves with their own kinds.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, for the appetite facet's reason one container over: the
+      // output is up to three OPTIONAL FIELDS inside worldState.envoyErrands rows, which
+      // the WR-7a layer materialises in worlds where this flag has never been true.
+      // Declaring that key would grade this row alive off a different subsystem.
+      stateKeys: Object.freeze([]),
+      other: 'A CONDITIONAL FIELD FAMILY INSIDE ANOTHER SUBSYSTEM\'S CONTAINER, WITH NO FOREIGN CALLER YET, which is why every channel is empty twice over. THE GATE IS ONE DOOR READ ONCE: errandMint.errandSpineActive, the only `errandSpineEnabled === true` in the tree. A SECOND FILE NAMES THE KEY AND IS NOT A GATE ON THIS LAYER — espionage/espionageGate.js reads `!== true` as ES-0\'s lighting-order precondition, refusing to host missions on an unlit spine — and both polarities are pinned so a third site reds. WHAT IT DOES: it makes the war errand the estate ONE purposeful-travel substrate (J-SP-2, confirmed keep-in-place by CR-FP-10). Six closed purpose classes — commercial, covert, diplomatic, factional, personal, religious — say what kind of business a named person is on the road for, and a declared/true split lets an errand wear a face that is not its business. THE MAPPING ROW IS DATA, NOT INFERENCE: sue and self_parlay name diplomatic explicitly, which is what buys the wave its no-migration promise, because every legacy row and every war errand carries NO class key and reads diplomatic anyway through the one reader. NOTHING IS MINTED THAT ALREADY EXISTED: the journey is priced through the family own normalizeRoutePlan seam, so law M binds a covert errand and a peace embassy identically by construction; the audience split borrows the estate own includeCovert spelling rather than forking a second word for one idea. WHAT IT NEVER DOES: it writes no class the caller did not ask for, and it never restates a derivation — a class equal to what the purpose already implies is dropped rather than stored, so a lit world pays bytes only where the business genuinely differs from the face. THE OBSERVATION NEEDED to close the gap is a per-field census of envoyErrands rows carrying a purposeClass, which no receipt schema carries because censusWorldStateKeys counts entries and never fields. Until then the layer is pinned where its bodies are readable: tests/domain/errandMint.test.js, tests/domain/envoyErrandSpineLifecycle.test.js, tests/property/errandSpineDormancyFence.test.js and tests/lint/errandConsumerRegistry.walker.test.js.',
+    }),
+    // The head runs on every errand mint, which is every pulse the WR-7a layer is lit for
+    // and a peace offer is accepted. Declared honestly even though no receipt can see it.
+    expectedTempo: 'per_tick',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dormancy_is_absence_of_the_three_fields',
+        description: 'With the flag dark no errand row ever grows a purposeClass, declaredPurpose or truePurpose key, so a LIT war layer (the adversarial case, since the ledger itself is busy minting, advancing, patching and closing) serializes byte-identically to the pre-SP-D engine across a ten-tick run. Absent and explicitly false are indistinguishable in every observable, and so is every truthy-but-not-true spelling.',
+        check: 'NOT expressible from any receipt schema: the census counts envoyErrands ENTRIES, never their fields. Pinned in tests/property/errandSpineDormancyFence.test.js, which hashes the ledger at every one of ten ticks of real errand traffic and carries the lit-mutant control proving the same fixture DOES carry the class when the flag is on.',
+      }),
+      Object.freeze({
+        name: 'a_legacy_row_needs_no_migration_and_no_re_serialization',
+        description: 'The mapping row derives diplomatic from both war purposes, so an errand written before this wave — and every errand the war path writes after it — reads its class correctly while carrying no class key at all. An installed save is not rewritten, and a save written by a newer vocabulary opens on an older build as an honest embassy rather than as a missing traveller.',
+        check: 'NOT expressible from a receipt. Pinned in tests/domain/envoyErrandSpineLifecycle.test.js by round-tripping a legacy row through the real normalizer and asserting byte-identity, and by healing a forged class word to absent without destroying the errand.',
+      }),
+      Object.freeze({
+        name: 'the_cover_story_is_fail_closed_and_does_not_announce_itself',
+        description: 'A non-covert projection never carries truePurpose. The harder half: it must not betray that a true purpose EXISTS, because the presence of a key is itself the tell — so the public shape of a covert errand wearing a diplomatic face is identical, key for key and word for word, to that of an honest embassy.',
+        check: 'NOT expressible from a receipt: no receipt carries an errand projection. Pinned in tests/domain/envoyErrandSpineLifecycle.test.js against a SEEDED covert errand rather than an empty harness — the two public projections are compared to each other, and every non-true spelling of includeCovert is driven.',
+      }),
+      Object.freeze({
+        name: 'the_row_can_never_hold_two_answers_about_what_an_envoy_is_doing',
+        description: 'The declared/true pair survives only TOGETHER, only as lawful vocabulary words, only when they differ, and only when the true half agrees with the row resolved class. A half-split drops both halves, which lands on the honest side: an errand can lose a cover story it should have kept, and can never gain a secret it never had.',
+        check: 'NOT expressible from a receipt. Pinned in tests/domain/errandMint.test.js (the mint refuses a disagreeing truePurpose) and tests/domain/envoyErrandSpineLifecycle.test.js (the persist normalizer heals a half-split and a disagreeing pair to absent).',
+      }),
+      Object.freeze({
+        name: 'there_is_exactly_one_purposeful_travel_substrate',
+        description: 'Five unbuilt volumes are supposed to mint through this head rather than open their own mover ledgers. A frozen consumer map records who they are and which class each will mint, and the claim is measured against the tree in both directions rather than trusted.',
+        check: 'NOT expressible from a receipt: it is a source fact. Pinned in tests/lint/errandConsumerRegistry.walker.test.js — an unregistered minter reds, a row claiming built with no minting module reds, and a row claiming unbuilt whose module now mints reds. The mint leaf is also registered in the named-person transit totality walker, so no purpose class can acquire a second speed floor.',
+      }),
+    ]),
+    soakEvidence: 'unobserved',
+  }),
   // ── THE CONQUEST DOCTRINE (WR-8 amendment R2, the vengeance license) ───────
   Object.freeze({
     rule: 'conquestDoctrineEnabled',

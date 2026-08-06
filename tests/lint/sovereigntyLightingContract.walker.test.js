@@ -2712,8 +2712,23 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // PURPOSE: those sentences record what the ninth and tenth cuts MEASURED, and rewriting
     // a historical measurement to match a later tree is how a record becomes fiction. The
     // live figures are here, in the assertion, where they can fail.
+    // ── RE-RECORDED 2026-08-06 BY FP WAVE SP-D, WITH ITS CAUSE STATED ────────────────
+    // 2,318/358/1,960/18,471/5,260 → 2,322/358/1,964/18,519/5,279. THE CAUSE IS FOUR NEW
+    // TEST FILES and nothing else: tests/domain/errandMint.test.js,
+    // tests/domain/envoyErrandSpineLifecycle.test.js,
+    // tests/property/errandSpineDormancyFence.test.js and
+    // tests/lint/errandConsumerRegistry.walker.test.js. No rule here widened or narrowed
+    // and no existing file changed shape.
+    //
+    // ALL FOUR ARE CREDITED — parked is UNCHANGED at 358, which is the interesting half
+    // of this re-record and the contrast with SP-C's. Every title in the four is spelled
+    // as a literal: none generates its arms from a `for…of` or a `test.each` over a live
+    // table, so door 3's reader can recognise all of them statically. That was not a
+    // stylistic accident — the registry walker's per-row arms deliberately loop INSIDE a
+    // single named test rather than generating one test per row, which keeps the file
+    // credited while still failing by name on the offending row.
     const CENSUS = Object.freeze({
-      files: 2318, parked: 358, credited: 1960, titles: 18471, suiteTitles: 5260,
+      files: 2322, parked: 358, credited: 1964, titles: 18519, suiteTitles: 5279,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

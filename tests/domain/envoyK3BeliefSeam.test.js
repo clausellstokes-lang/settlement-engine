@@ -107,6 +107,13 @@ const NEGOTIATION_MODULES = Object.freeze({
   // machinery this seam is built on) and `namedPersonTransit.js` (leg physics, reachable
   // from exactly ONE leaf). Neither can return a settlement's strength, stock or pressure,
   // which the token scan below proves for every row independently.
+  // REVIEWED ADDITION (SP-D, the errand spine generalization): the head gains ONE
+  // specifier, `./errandMint.js`, and it is the tenth family member. The reach is
+  // K3-safe by the same DAG argument as the rest: the mint leaf's own row below bottoms
+  // out at the vocabulary's empty list and the transit leaf, so the head cannot reach
+  // anything new through it. The head no longer normalizes its own outbound plan — it
+  // delegates — which is why the mint leaf, not this file, is what the movement-site
+  // manifest gained.
   'src/domain/worldPulse/envoyErrand.js': [
     './envoyErrandEncounterWriter.js',
     './envoyErrandEvidence.js',
@@ -117,11 +124,24 @@ const NEGOTIATION_MODULES = Object.freeze({
     './envoyErrandRecords.js',
     './envoyErrandTransit.js',
     './envoyErrandVocabulary.js',
+    './errandMint.js',
     './negotiationPictures.js',
   ],
   // The family floor: zero imports. A module that reaches nothing cannot pass truth along,
   // and every other member sits above this one, so the whole family inherits the guard.
   'src/domain/worldPulse/envoyErrandVocabulary.js': [],
+  // SP-D's generalized mint head. It reaches the closed words, the row law that has to
+  // read its output back, and the ONE transit seam — and nothing else. In particular it
+  // does NOT reach `namedPersonTransit.js`, which is what makes it a declared
+  // INJECTED-PLAN validator in the movement-site manifest rather than a second physics
+  // owner: a covert errand and a peace embassy cannot be made to walk at different
+  // speeds, because the kernel that would make a local speed floor look legitimate is
+  // out of this leaf's reach.
+  'src/domain/worldPulse/errandMint.js': [
+    './envoyErrandRecords.js',
+    './envoyErrandTransit.js',
+    './envoyErrandVocabulary.js',
+  ],
   // The ONE leaf that may reach leg physics (WR-7a law M). Isolating it here is what lets
   // the head be a declared INJECTED-PLAN validator in the movement-site manifest.
   'src/domain/worldPulse/envoyErrandTransit.js': [

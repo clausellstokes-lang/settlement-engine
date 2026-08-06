@@ -254,7 +254,13 @@ export const TRADE_FOREIGN_PRECONDITION_FLAGS = Object.freeze([
     origin: 'FP_PROGRAM',
     owner: 'SP-D',
     spineAlias: 'SP-1',
-    gateEvidenceFile: null,
+    // LANDED at SP-D (2026-08-06). The ONE door where this key is read positively:
+    // `errandMint.errandSpineActive`. A second file NAMES the key —
+    // espionage/espionageGate.js spells `!== true` as ES-0's lighting-order precondition —
+    // and this row deliberately points at the POSITIVE gate, because the walker below
+    // searches for `<flag> === true` and a row pointing at the negative spelling would
+    // read as evidence while proving the opposite.
+    gateEvidenceFile: 'src/domain/worldPulse/errandMint.js',
   }),
 ]);
 

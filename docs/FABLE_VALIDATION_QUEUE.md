@@ -2653,3 +2653,106 @@ missed by the enumeration, which was assembled from the memory record rather tha
 fresh sweep of every queue document. **A MISSING ITEM IS SIGNED BY THE GRANT REGARDLESS
 — the grant says "everything" — so an omission here is a RECORD gap, not an authority
 gap, and it is repaired by adding the item, never by re-asking the owner.**
+
+
+---
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · SP-D THE ERRAND SPINE GENERALIZATION
+## (Opus 5 implementer AND verifier under the 2026-08-06 succession directive; every
+## J-* below is a chair-grade judgment made without a Fable chair and is VETOABLE)
+
+**What landed.** The war errand became the estate's one purposeful-travel substrate, in
+place (J-SP-2 / CR-FP-10, unchanged). Six closed purpose classes {commercial, covert,
+diplomatic, factional, personal, religious} beside the existing war purposes; the mapping
+row ('sue'/'self_parlay' -> diplomatic) as DATA; a new leaf `errandMint.js` carrying the
+generalized head, the ONE `errandSpineEnabled === true` read and the injected-plan seam;
+`envoyErrand.js` gaining ONLY the delegation call; the declared/true split persisted
+through `normalizeErrand`; a NEW audience split in `envoyErrandProjection.js`; the frozen
+consumer registry with its both-ways walker. DARK: the CQ5 trio landed in one commit and
+no caller supplies spine cargo, so every existing golden is byte-identical.
+
+**Alignment line:** DECLARED EMPTY WITH REASON, per the block — purpose classes are typed
+travel, not moral verbs. The covert class's interception consequences engage alignment in
+the INFO/GRAMMAR consumers, not at the substrate.
+
+**Edit verb:** PARTIAL, per the block, and the decision is RECORDED rather than passed
+over in silence. The DM already kills movers and KILL closes `lost` — re-proven on a
+generalized errand at this build. A DM "recall errand" verb is deliberately NOT minted:
+a recall without the volume's politics is a free undo of a priced act. No recall verb.
+
+**J-SP-D-1 — THE CLASS IS DROPPED WHEN IT IS DERIVABLE.** `purposeClass` is written only
+when it DIFFERS from what the mapping row derives from the errand's purpose, so a peace
+embassy carries no class key and reads `diplomatic` through the one reader. Rejected
+alternative: write the word on every lit-world row (simpler, uniform, one byte per errand
+restating a derivation that cannot drift). The drop-when-derivable arm is what makes the
+field a genuine conditional under L4/T4 and is what buys the no-migration promise for
+installed saves. ITS COST IS NAMED: a consumer reading `errand.purposeClass` directly
+sees `undefined` on the commonest rows, so the wave also lands a one-reader law with a
+source scan. Re-examine: whether the byte saving is worth the reader discipline.
+
+**J-SP-D-2 — A SUPPLIED `truePurpose` THAT DISAGREES WITH THE RESOLVED CLASS IS REFUSED,
+NOT HEALED.** The charter says the head "accepts purposeClass + the declared/true split",
+so both spellings are accepted; but a row may not hold two answers to "what is this envoy
+really doing". At the MINT the disagreement refuses outright; at the PERSIST normalizer it
+heals the PAIR to absent (an errand can lose a cover story, never gain a secret). Rejected
+alternative: derive `truePurpose` and ignore the argument entirely (impossible to violate,
+but silently discards a caller's stated intent). Re-examine: the asymmetry between mint
+(refuse) and import (heal).
+
+**J-SP-D-3 — THE PUBLIC PROJECTION DOES NOT ANNOUNCE THAT A SECRET EXISTS.** Withholding
+`truePurpose` is the easy half. A row answering "purposeClass: diplomatic, covert: true"
+would keep the letter of the veil and give the game away, and so would one carrying
+`declaredPurpose` only when a split rides — the PRESENCE of a key is the tell. The public
+shape is therefore identical, key for key, for an honest embassy and a covert mission
+wearing one. Re-examine: whether any consumer will need to know a split exists without
+being allowed to know its content (today: none).
+
+**J-SP-D-4 — THE CERT ROW WENT TO `subsystemRowsVirtual.js`, NOT A NEW SPINE LANE FILE.**
+The brief directed the cert row to "the SPINE program's OWN subsystemRows lane file, not a
+shared one". LIVE CODE OUTRANKS THE BRIEF HERE: `engineGatedRuleKeys.walker.test.js`
+direction 3 asserts every `ENGINE_GATED_VIRTUAL_RULE_KEYS` member is authored in
+`VIRTUAL_SUBSYSTEM_ROWS` SPECIFICALLY, and SP-B, SP-C and ES-0 all sit there. A separate
+file would have reddened the walker. The virtual lane IS the partition for engine-gated
+virtual keys; the partition is by GATE SHAPE, not by program. Re-examine: whether the
+lane file should eventually split by program as the virtual cohort grows (14 rows now).
+
+**J-SP-D-5 — SP-D DOES NOT SHRINK THE SP-A BANDS BACKLOG, AND THAT IS DELIBERATE.**
+`spBandFamilies.walker.test.js` holds `SP_WAVES_OWING_A_BANDS_LINE = ['SP-D','SP-E']` and
+its header expects each later wave to shrink it. SP-D MINTS NO BAND EDGE: it lands a
+vocabulary, a gate, a validation and a veil, and nothing an owner would sign a number for.
+Section 7's SP-D row ("per-class interception weight deltas · the declared/true divergence
+share band") describes CONSUMER-side tuning that no code in this wave produces, so
+authoring a Bands line for it would put unminted numbers in front of the owner — exactly
+the drift that walker exists to kill. The walker's live assertion is `<=`, so the backlog
+row stands lawfully. Re-examine: whether §7's SP-D row should move to the consumer wave
+that actually mints those numbers (recommended) or stay as a forward declaration.
+
+**J-SP-D-6 — I AMENDED A FOREIGN LANE'S FILE HEADER (`espionageGate.js`), ADDITIVELY.**
+That header asserted "SP-D HAS NOT LANDED (measured at this commit)", which this wave
+falsified. The `!== true` SPELLING IS UNTOUCHED — flipping it is ES-1's act, and `!== true`
+is exactly as strict as `=== true`. Only a dated update note was added. Re-examine:
+whether a landing lane should annotate a neighbour's header at all, or file a note instead.
+
+### ⚠ TWO SUBSTRATE OVERSTATEMENTS FOUND AND REPORTED (the J-WR-13 standing rule)
+1. **`envoyErrandProjection.js` did NOT "already own the audience split"** (SP §4's
+   lifecycle clause). Measured whole-file at the build head: zero occurrences of `covert`,
+   `includeCovert`, or any audience parameter. The ES volume had already measured the same
+   thing and recorded it (`DESIGN_FP_ARCH_ES.md` §1 ⟨seam-nit⟩), so the two volumes
+   disagreed and the tree agreed with ES. SP-D BUILT the seam, borrowing the estate's
+   existing `includeCovert` spelling. Both SP §4 and the SP-D block now carry the
+   supersession, recorded rather than rewritten. NOT A BLOCKER — the block's own
+   Files-touched line always budgeted "envoyErrandProjection.js (audience rows)".
+2. **`envoyErrand.js` was NOT "at the effective ceiling."** The block says "823 lines — AT
+   the effective ceiling"; 823 is the RAW count and the enforcer measures effective
+   (skipBlankLines + skipComments). MEASURED: 695 of an 800 ceiling — 105 lines of
+   headroom. The lazy leaf landed anyway on the block's own collision-map reason (the
+   envoy family is the war lane's most recently edited surface; a delegation-shaped
+   extension keeps the diff attributable). Recorded in the block. NOT A BLOCKER.
+
+### WHAT FABLE SHOULD RE-EXAMINE
+J-SP-D-1 (the byte-saving/reader-discipline trade), J-SP-D-2 (mint refuses vs import
+heals), J-SP-D-5 (§7's SP-D row placement) and J-SP-D-6 (annotating a neighbour's header)
+are the four with real optionality. J-SP-D-3 and J-SP-D-4 are forced — the first by the
+veil's own logic, the second by a live walker. Also worth a look: the wave leaves the
+generalized head with NO foreign caller (the ES-0 precedent, and the certification row
+says so in as many words), so the lit arm is exercised only by pins until ES-1/TR-8 land.

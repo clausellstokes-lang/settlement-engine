@@ -102,10 +102,18 @@ const ESPIONAGE = 'espionageEnabled';
 // so declaring the key would grade this row off a different subsystem), and nothing calls
 // the writer yet — the gate lands before its callers, on the ES-0 precedent.
 const POSTURE = 'strategicPostureEnabled';
+// Joined 2026-08-06 by FP wave SP-D, with its manifest entry and its first by-name gate
+// read in one commit. A SEVENTH zero-key case, and the first whose emptiness is a fact
+// about the KIND of wave rather than about a mount: this one is a GENERALIZATION. It adds
+// no ledger, no stage and no news kind — it turns the war errand into the estate's one
+// purposeful-travel substrate, and the whole persisted surface is up to three optional
+// WORDS on a row worldPulse/envoyErrand.js already writes wherever ITS six war flags are
+// lit. Declaring that container would grade this row off the WR-7a layer's presence.
+const SPINE = 'errandSpineEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
-  AXES, ESPIONAGE, SCARCITY, CONDITIONS, DEVOTION, POSTURE,
+  AXES, ESPIONAGE, SCARCITY, CONDITIONS, DEVOTION, POSTURE, SPINE,
   CONQUEST, STATECRAFT, RUMORS, OATH, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS,
 ]);
 
@@ -141,6 +149,12 @@ const LANE_LEAVES = Object.freeze({
   // so: the ledger is shared substrate, but the facet, its learn map and its decay all
   // live in it, so scoping the trace anywhere else would measure the WR-2 layer instead.
   [POSTURE]: ['src/domain/worldPulse/strategicPosture.js', 'src/domain/worldPulse/dispositionLedger.js'],
+  // The spine's own leaves: the head where the flag is read and the journey is priced,
+  // and the vocabulary leaf that owns the six classes, the mapping row, the consumer
+  // registry and the one reader. The WRITER it delegates from (envoyErrand.js) is
+  // deliberately NOT here — it is the WR-7a layer's file and tracing this lane's claims
+  // through it would measure the war layer's vocabulary.
+  [SPINE]: ['src/domain/worldPulse/errandMint.js', 'src/domain/worldPulse/envoyErrandVocabulary.js'],
   [CONQUEST]: ['src/domain/worldPulse/vengeanceLicense.js', 'src/domain/worldPulse/conquestDoctrineStage.js'],
   [STATECRAFT]: ['src/domain/worldPulse/informationStatecraft.js', 'src/domain/worldPulse/brokerageStamps.js'],
   [RUMORS]: ['src/domain/spatial/migrationRumors.js'],

@@ -292,6 +292,13 @@ not state); no era-preset state (J-D12's wave owns it).
   covert-side — every projection carrying it routes includeCovert fail-closed
   (the errand projection module `envoyErrandProjection.js` already owns the
   audience split; the new fields join ITS discipline, pinned).
+  **⚠ SUPERSEDED AT SP-D's BUILD, 2026-08-06 — recorded, not rewritten.** The
+  parenthesis above is wrong on its facts: that module owned NO audience split
+  and no `includeCovert` anywhere, measured whole-file at the build head. SP-D
+  BUILT the split (`projectErrandPurpose`, borrowing the estate's existing
+  `includeCovert` spelling), and the SP-D block records the measurement. The
+  DISCIPLINE the clause describes is exactly right and is what landed; only
+  the claim that it pre-existed was false.
 - `dispositionStats[sid].appetite` — persists inside the existing lit ledger;
   the load-time normalizer that owns dispositionStats learns the OPTIONAL
   facet (shape discipline at the normalizer since one exists — the
@@ -627,10 +634,37 @@ substrate, in place (seam ruling 2).
   measured reason the lane-W deferral retired):** the generalized mint head
   accepts purposeClass + declared/true split, gated `errandSpineEnabled ===
   true`; dark, only the war path exists, byte-identical.
+  - **⚠ RE-MEASURED AT SP-D's BUILD (2026-08-06), and the ceiling clause above
+    is an OVERSTATEMENT recorded rather than quietly rewritten (J-WR-13):**
+    `envoyErrand.js` measures **695 effective lines against the 800-line
+    `src/domain` ceiling** — 823 is its RAW count, and the enforcer measures
+    with `skipBlankLines` + `skipComments`. There were 105 lines of headroom,
+    so the ceiling was NOT the binding reason for the leaf. THE LEAF LANDED
+    ANYWAY, on this block's own collision map instead: the envoy family is the
+    war lane's most recently edited surface, and a delegation-shaped extension
+    is what keeps the diff small and attributable inside it. Post-build the
+    file measures 712 and the new leaf 56.
 - **The declared/true split** rides the covert/revealed seam: truePurpose is
   covert-side (fail-closed in `envoyErrandProjection.js`'s audience split);
   interception exposure of a true purpose routes the EXISTING covert→revealed
   machinery, never a new one.
+  - **⚠ MEASURED AT SP-D's BUILD: `envoyErrandProjection.js` HAD NO AUDIENCE
+    SPLIT.** §4's lifecycle clause below says the module "already owns the
+    audience split"; it did not — the whole file carried zero occurrences of
+    `covert`, `includeCovert` or any audience parameter. The ES volume had
+    already measured the same thing and said so (`DESIGN_FP_ARCH_ES.md`
+    §1 ⟨seam-nit⟩: "envoyErrandProjection.js carries NO includeCovert/
+    truePurpose today — `includeCovert` is a house pattern in other files;
+    SP-D BUILDS this seam"). SP-D BUILT IT, which is what this block's own
+    Files-touched line always budgeted ("envoyErrandProjection.js (audience
+    rows)"). The spelling is BORROWED, not forked: `includeCovert`, default
+    false, compared `=== true`, as `npcLedgerProjection.projectNpcPool` spells
+    it (J-WR-10). Reported as a substrate overstatement, not silently fixed.
+  - **AND THE HARDER HALF, landed:** withholding `truePurpose` is not enough,
+    because the PRESENCE of a key is itself the tell. The public projection of
+    a covert errand wearing a diplomatic face is IDENTICAL — key for key, word
+    for word — to that of an honest embassy, and the pin compares two seeded
+    errands to each other rather than asserting an absence.
 - **Per-errand keyed forks** (exists — the WR-7 stream discipline), the K.2
   snapshot, interceptability, and the M speed law all apply to every class BY
   CONSTRUCTION (same writer, same transit kernel — the totality walker
@@ -644,6 +678,20 @@ substrate, in place (seam ruling 2).
   `envoyErrand.js` (823 — delegation only), new `errandMint.js`,
   `envoyErrandProjection.js` (audience rows), `simulationRules.js`,
   certification row.
+  - **AS LANDED (2026-08-06), the list is longer by three, each for a reason
+    the pre-build list could not have known:** `envoyErrandRecords.js` — THE
+    ONE THAT MATTERED. Every write reaches the ledger through
+    `writeErrands` → `normalizeEnvoyErrands` → `normalizeErrand`, and that
+    normalizer builds its output from an EXPLICIT key list, so a field it does
+    not name does not error and does not persist — it EVAPORATES on the first
+    write while every unit test of the mint stays green. The three fields
+    survive because that file names them; the executed control (deleting the
+    one spread) reds 9 of 16 lifecycle pins. Also
+    `certification/tradeConvergenceContract.js` (its FP_PROGRAM row asserts a
+    two-way join with `ENGINE_GATED_VIRTUAL_RULE_KEYS`, so the manifest entry
+    FORCES the `gateEvidenceFile`), and a dated additive note in
+    `espionage/espionageGate.js` whose header asserted SP-D had not landed
+    (spelling untouched — the flip is ES-1's).
 - **Pins:** four-fence + lit-mutant; JSON-round-trip on the new fields (the
   alias trap); the fail-closed truePurpose projection pin (the hardest
   negative: a non-covert projection NEVER carries truePurpose, proven with a

@@ -40,6 +40,13 @@ const MOVEMENT_SITES = Object.freeze({
   'src/domain/worldPulse/envoyErrand.js': { route: 'injected', token: 'normalizeRoutePlan' },
   'src/domain/worldPulse/envoyErrandParlay.js': { route: 'injected', token: 'normalizeRoutePlan' },
   'src/domain/worldPulse/envoyErrandTransit.js': { route: 'direct', token: 'namedPersonLegPosition' },
+  // SP-D — THE GENERALIZED MINT HEAD. This is the row that makes law M bind every purpose
+  // class BY CONSTRUCTION rather than by intention: a commercial errand, a covert one and
+  // a peace embassy all price their outbound journey HERE, through the one seam, so there
+  // is no second place in which anyone could be made to walk faster. Registered
+  // `injected` for the family's own reason — it validates a plan the transit owner priced
+  // and cannot import the kernel that would make a local speed floor look legitimate.
+  'src/domain/worldPulse/errandMint.js': { route: 'injected', token: 'normalizeRoutePlan' },
   'src/domain/worldPulse/npcCirculationTransit.js': { route: 'direct', token: 'openNamedPersonLeg' },
   'src/domain/worldPulse/npcDmVerbs.js': { route: 'delegate', token: 'advanceLivedTraveller' },
   'src/domain/worldPulse/npcResidency.js': { route: 'delegate', token: 'advanceWanderer' },

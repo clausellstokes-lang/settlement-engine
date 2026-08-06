@@ -32,6 +32,17 @@
  *      from being gated invisibly. This lane does not get to manifest another lane's
  *      flag; it reads the negative form until SP-D lands its own CQ5 trio, at which
  *      point ES-1 flips the spelling in the commit that also lights the mint.
+ *      ⏱ UPDATE, 2026-08-06 — SP-D HAS NOW LANDED (errandMint.js, its manifest entry
+ *      and its certification row, one commit). The paragraph above is preserved as the
+ *      record of why this door was written negatively, and the SPELLING IS DELIBERATELY
+ *      UNCHANGED HERE: flipping it is ES-1's act, in the commit that mints the first
+ *      covert errand, because this door is a LIGHTING-ORDER precondition and not a gate
+ *      on SP-D's layer — `!== true` is exactly as strict as `=== true` (absent and false
+ *      refuse identically), so nothing is loose in the meantime. What DID change is that
+ *      the key is now real: it sits in ENGINE_GATED_VIRTUAL_RULE_KEYS, and both doors'
+ *      polarities are pinned together in tests/property/errandSpineDormancyFence.test.js,
+ *      whose downstream-seam block executes this gate in both flag states and proves the
+ *      espionage family stays parked while the spine is dark.
  *   3. THE FLAG ITSELF, BY NAME (`espionageEnabled === true`). BY NAME is the point:
  *      a frozen-list `REQUIRED_RULES.every(...)` conjunction is a COMPUTED member access
  *      and attributes to NO key at all, which is exactly how lane WW-A shipped a fully

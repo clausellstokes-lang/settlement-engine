@@ -117,6 +117,90 @@ export const ENVOY_POSITION_BANDS = Object.freeze(['departed', 'underway', 'near
 export const ENVOY_JOURNEYS = Object.freeze(['outbound', 'return']);
 export const ENVOY_LOSS_CAUSES = Object.freeze(['killed', 'route_lost', 'dm_removed']);
 export const ENVOY_PURPOSES = Object.freeze(['sue', 'self_parlay']);
+
+/**
+ * SP-D — THE SIX PURPOSE CLASSES. The errand stopped being a war artifact here: this is
+ * the closed vocabulary of WHY a named person is on a road, and it sits BESIDE
+ * `ENVOY_PURPOSES` rather than replacing it. A purpose is the errand's own errand
+ * ('sue for peace'); a CLASS is the kind of business it is, and the classes are what
+ * five unbuilt volumes (TRADE's factors, FAITH's legates and pilgrims, INFO's couriers,
+ * INTERIOR's emigres) will mint against. Codepoint-ordered, because every enumeration in
+ * this family is.
+ */
+export const ENVOY_PURPOSE_CLASSES = Object.freeze([
+  'commercial',
+  'covert',
+  'diplomatic',
+  'factional',
+  'personal',
+  'religious',
+]);
+
+/**
+ * THE MAPPING ROW, AND IT IS DATA RATHER THAN INFERENCE (SP-D charter). Every war purpose
+ * names its class here explicitly. The alternative — a reader that INFERS 'diplomatic'
+ * from "no class was written" — is the same shape as a default that silently absorbs a
+ * class the vocabulary never learned, and it would classify a future purpose wrongly and
+ * quietly. TOTAL over `ENVOY_PURPOSES` by pin: a new purpose with no row here resolves to
+ * NO class at all rather than to a guess.
+ */
+export const PURPOSE_CLASS_BY_PURPOSE = Object.freeze({
+  self_parlay: 'diplomatic',
+  sue: 'diplomatic',
+});
+
+/**
+ * THE ERRAND CONSUMER REGISTRY (SP §8 seam 8) — the frozen consumer map, pointed at five
+ * unbuilt programs. `built` is a CLAIM ABOUT THE TREE, and
+ * tests/lint/errandConsumerRegistry.walker.test.js measures it BOTH WAYS: a module that
+ * mints errands without a row here reds, and a row whose module does not mint reds. The
+ * tripwire is what stops the sixth volume from quietly opening a second purposeful-travel
+ * substrate on the day it needs one (J-SP-2: there is exactly one).
+ */
+export const ERRAND_CONSUMERS = Object.freeze([
+  Object.freeze({
+    consumer: 'envoys',
+    purposeClass: 'diplomatic',
+    module: 'src/domain/worldPulse/envoyErrand.js',
+    wave: 'WR-7a',
+    built: true,
+  }),
+  Object.freeze({
+    consumer: 'factors',
+    purposeClass: 'commercial',
+    module: 'src/domain/worldPulse/factorErrand.js',
+    wave: 'TR-8',
+    built: false,
+  }),
+  Object.freeze({
+    consumer: 'legates',
+    purposeClass: 'religious',
+    module: 'src/domain/worldPulse/legateErrand.js',
+    wave: 'WF-2b',
+    built: false,
+  }),
+  Object.freeze({
+    consumer: 'pilgrims',
+    purposeClass: 'personal',
+    module: 'src/domain/worldPulse/pilgrimErrand.js',
+    wave: 'WF-2b',
+    built: false,
+  }),
+  Object.freeze({
+    consumer: 'couriers',
+    purposeClass: 'covert',
+    module: 'src/domain/worldPulse/covertErrand.js',
+    wave: 'ES-1/IN-4',
+    built: false,
+  }),
+  Object.freeze({
+    consumer: 'ambitious',
+    purposeClass: 'factional',
+    module: 'src/domain/worldPulse/emigreErrand.js',
+    wave: 'INT-3b',
+    built: false,
+  }),
+]);
 export const ENVOY_ENCOUNTER_KINDS = Object.freeze([
   'field_parlay',
   'war_continue',
@@ -158,6 +242,7 @@ export const JOURNEY_SET = new Set(ENVOY_JOURNEYS);
 export const POSITION_BAND_SET = new Set(ENVOY_POSITION_BANDS);
 export const LOSS_CAUSE_SET = new Set(ENVOY_LOSS_CAUSES);
 export const PURPOSE_SET = new Set(ENVOY_PURPOSES);
+export const PURPOSE_CLASS_SET = new Set(ENVOY_PURPOSE_CLASSES);
 export const ENCOUNTER_KIND_SET = new Set(ENVOY_ENCOUNTER_KINDS);
 export const PRIVATE_GOAL_SET = new Set(ENVOY_PRIVATE_GOALS);
 export const ENCOUNTER_RESOLUTION_SET = new Set(ENVOY_ENCOUNTER_RESOLUTIONS);
@@ -312,4 +397,50 @@ export function stableIdentity(parts) {
     const part = String(value);
     return `${part.length}:${part}`;
   }).join('|');
+}
+
+/**
+ * SP-D — THE ONE READER OF AN ERRAND'S TRUE CLASS, and the reason `purposeClass` is
+ * allowed to be absent at all.
+ *
+ * A written class wins; otherwise the MAPPING ROW derives one from the errand's purpose.
+ * That derivation is what makes the field a genuine conditional (L4/T4: a key is a byte,
+ * absent never null) — every legacy row, every installed save, and every errand the war
+ * path mints today carries NO class key and reads `diplomatic` anyway, so SP-D asks for
+ * no migration and re-serializes nothing.
+ *
+ * THE MIRROR HAZARD THIS CLOSES: a consumer that reads `errand.purposeClass` DIRECTLY
+ * sees `undefined` on exactly those rows, and would file a peace embassy under no class
+ * at all. The writer/reader spelling-drift class, one field wide. There is therefore one
+ * reader, here, and `tests/lint/errandConsumerRegistry.walker.test.js` holds the estate
+ * to it.
+ *
+ * @param {unknown} errand @returns {string} a member of ENVOY_PURPOSE_CLASSES, or ''
+ */
+export function purposeClassOf(errand) {
+  const row = asObject(errand);
+  const written = text(row.purposeClass);
+  if (PURPOSE_CLASS_SET.has(written)) return written;
+  const derived = /** @type {Record<string, string|undefined>} */ (
+    PURPOSE_CLASS_BY_PURPOSE
+  )[text(row.purpose)];
+  return derived && PURPOSE_CLASS_SET.has(derived) ? derived : '';
+}
+
+/**
+ * SP-D — THE PUBLIC HALF OF THE DECLARED/TRUE SPLIT: the class the world is allowed to
+ * believe this errand is. When a cover story is riding, that is `declaredPurpose`; with
+ * no split, the declared purpose IS the true one and this returns the same word.
+ *
+ * FAIL-CLOSED BY SHAPE, not by the caller's care: this function CANNOT return the true
+ * class of a covert errand wearing a face, because it never consults `truePurpose` and
+ * consults `purposeClass` only when no declaration exists. An audience-side caller that
+ * reaches for the true class has to spell a different function to get it, and the
+ * projection's audience split is the only place that spelling is lawful.
+ *
+ * @param {unknown} errand @returns {string} a member of ENVOY_PURPOSE_CLASSES, or ''
+ */
+export function declaredPurposeClassOf(errand) {
+  const declared = text(asObject(errand).declaredPurpose);
+  return PURPOSE_CLASS_SET.has(declared) ? declared : purposeClassOf(errand);
 }

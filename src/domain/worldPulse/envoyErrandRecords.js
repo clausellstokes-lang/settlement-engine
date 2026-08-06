@@ -47,6 +47,7 @@ import {
   PARLAY_REFUSAL_KEYS,
   PARLAY_REFUSAL_REASON_SET,
   PRIVATE_GOAL_SET,
+  PURPOSE_CLASS_SET,
   PURPOSE_SET,
   REFUSAL_BEARING_STATES,
   STATE_SET,
@@ -55,6 +56,7 @@ import {
   cloneData,
   compareCodepoint,
   hasExactKeys,
+  purposeClassOf,
   stableIdentity,
   strictText,
   text,
@@ -252,6 +254,50 @@ export function normalizeTermSheet(raw) {
   return normalizeTermSheetResult(raw).value;
 }
 
+/**
+ * SP-D — the errand spine's conditional field block, read off a persisted or imported row.
+ *
+ * THIS IS THE ONLY PLACE THE THREE FIELDS SURVIVE A WRITE. Every path into
+ * `worldState.envoyErrands` runs through `writeErrands` -> `normalizeEnvoyErrands` ->
+ * `normalizeErrand`, and that normalizer builds its output from an EXPLICIT key list. A
+ * field the list does not name is not rejected; it EVAPORATES, silently, on the first
+ * persist — which is exactly how a mint that looked correct in memory would have shipped
+ * a class nobody could ever read back. The lifecycle-totality suite exists because that
+ * failure is invisible in a unit test of the mint.
+ *
+ * HEALS RATHER THAN REFUSES (SP §4's import clause: validate against the closed
+ * vocabulary and DROP unknown fields, never null-fill). A forged or stale class word does
+ * not destroy the errand; the field drops and the row reads its derived class, which for
+ * every war purpose is `diplomatic`. So a save written by a newer vocabulary opens on an
+ * older build as an honest embassy rather than as a missing traveller.
+ *
+ * THE PAIR IS ATOMIC AND FAIL-CLOSED. `declaredPurpose`/`truePurpose` survive only
+ * TOGETHER, only when both are lawful words, only when they DIFFER, and only when the
+ * true half agrees with the row's resolved class. Anything else drops both, which lands
+ * on the honest side: an errand can lose a cover story it should have kept, and can never
+ * gain a secret it never had.
+ *
+ * @param {Record<string, unknown>} row the raw errand
+ * @param {string} purpose the row's already-validated war purpose
+ * @returns {Record<string, string>}
+ */
+export function errandSpineBlock(row, purpose) {
+  const written = text(row.purposeClass);
+  const purposeClass = PURPOSE_CLASS_SET.has(written) ? written : '';
+  const resolved = purposeClassOf({ purpose, purposeClass });
+  const declared = text(row.declaredPurpose);
+  const claimedTrue = text(row.truePurpose);
+  const split = PURPOSE_CLASS_SET.has(declared)
+    && claimedTrue === resolved
+    && declared !== resolved;
+  return {
+    // Written only when it differs from what the mapping row derives — the same
+    // drop-when-derivable rule the mint applies, so a persist is idempotent.
+    ...(purposeClass && purposeClass !== purposeClassOf({ purpose }) ? { purposeClass } : {}),
+    ...(split ? { declaredPurpose: declared, truePurpose: resolved } : {}),
+  };
+}
+
 /** @param {unknown} raw @returns {Record<string, unknown>|null} */
 export function normalizeErrand(raw) {
   const row = asObject(raw);
@@ -341,6 +387,7 @@ export function normalizeErrand(raw) {
     from,
     to,
     purpose,
+    ...errandSpineBlock(row, purpose),
     offer,
     acceptance,
     snapshot,

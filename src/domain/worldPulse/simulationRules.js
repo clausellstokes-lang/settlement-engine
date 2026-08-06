@@ -202,6 +202,17 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // certification tracks reality instead of preceding it).
   'casusCommerciiEnabled',
   'conquestDoctrineEnabled',
+  // Joined 2026-08-06 by FP wave SP-D under CR-WR10-C item 4 (the compiled charter's §3
+  // flag law), in the SAME commit as its first real gate read
+  // (errandMint.errandSpineActive, the ONE `=== true` by-name read of this key in the
+  // tree) and its AUTHORED certification row. TWO FILES NAME THIS KEY AND ONLY ONE OF
+  // THEM IS A GATE ON THIS LAYER: espionage/espionageGate.js reads `!== true` as a
+  // LIGHTING-ORDER precondition — ES-0 refusing to host missions on a spine that is not
+  // lit — and that negative spelling was written deliberately, at a commit where this
+  // key had no manifest entry to justify a positive one. Both doors are pinned with
+  // their exact polarity in tests/property/errandSpineDormancyFence.test.js, so a third
+  // site or a flipped form reds.
+  'errandSpineEnabled',
   // Joined 2026-08-05 by FP wave ES-0 under CR-WR10-C item 4 (the compiled charter's §3
   // flag law), in the SAME commit as its first real gate read
   // (espionage/espionageGate.espionageActive, read BY NAME with the strict === true

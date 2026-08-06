@@ -83,6 +83,7 @@ import {
 } from './envoyErrandLedger.js';
 import { evidenceFor, lostErrand, lostEvidence } from './envoyErrandEvidence.js';
 import { homeDeliveryFor, silenceEligible } from './envoyErrandProjection.js';
+import { mintErrandSpine } from './errandMint.js';
 
 export {
   ENVOY_BELIEVED_RATIO_BANDS, ENVOY_CONTINUATION_SCHEMA_VERSION, ENVOY_ENCOUNTER_KINDS,
@@ -105,8 +106,13 @@ export { envoyErrandForOffer, hasActiveEnvoyForNpc, hasActiveEnvoyForOffer } fro
 export { envoyEvidenceFor } from './envoyErrandEvidence.js';
 export {
   envoyContinuationForHold, envoyEncounterForErrand, envoyTargetCourtPictureForErrand,
-  previewEnvoyPosition, projectEnvoyForEncounter,
+  previewEnvoyPosition, projectEnvoyForEncounter, projectErrandPurpose,
 } from './envoyErrandProjection.js';
+export {
+  ENVOY_PURPOSE_CLASSES, ERRAND_CONSUMERS, PURPOSE_CLASS_BY_PURPOSE,
+  declaredPurposeClassOf, purposeClassOf,
+} from './envoyErrandVocabulary.js';
+export { errandSpineActive, errandSpineFields, mintErrandSpine } from './errandMint.js';
 export { negotiateEnvoyParlay } from './envoyErrandParlay.js';
 export {
   agreeEnvoyTerms, markEnvoyHeld, markEnvoyIntercepted, markEnvoyParlaying, openEnvoyParlay,
@@ -117,6 +123,13 @@ export {
 /**
  * Mint one outbound errand.  Idempotence keys on the front episode, not the
  * volatile proposal/outcome id.
+ *
+ * SP-D: `purposeClass`, `declaredPurpose` and `truePurpose` are the errand spine's
+ * generalized cargo. They are ACCEPTED here and INTERPRETED nowhere here — `errandMint.js`
+ * owns the gate, the closed vocabulary and the split's invariant, and hands back the
+ * conditional field block this row spreads. With `errandSpineEnabled` dark that block is
+ * empty, so a war errand minted through this head is byte-identical to the one WR-7a
+ * minted before the spine existed.
  */
 export function mintEnvoyErrand({
   worldState,
@@ -130,6 +143,9 @@ export function mintEnvoyErrand({
   negotiationPicture = null,
   targetCourtPicture = null,
   purpose = 'sue',
+  purposeClass = null,
+  declaredPurpose = null,
+  truePurpose = null,
   routePlan,
   tick,
 } = {}) {
@@ -176,15 +192,27 @@ export function mintEnvoyErrand({
     && activeEpisodesAtOrigin.size >= MAX_CONCURRENT_ENVOYS) {
     return { worldState, changed: false, evidence: [], errand: null, reason: 'origin_capacity' };
   }
-  const plan = normalizeRoutePlan(routePlan, {
+  // SP-D — THE ONE DELEGATION. The generalized head prices this journey through the
+  // family's single transit seam (law M binds every purpose class by construction) and
+  // returns the spine's conditional fields. Its refusal reasons are this head's own:
+  // `invalid_route_plan` is the WR-7a reason, unchanged, and it is what a dark world can
+  // still produce here.
+  const spine = mintErrandSpine({
+    worldState,
+    purpose: missionPurpose,
+    purposeClass,
+    declaredPurpose,
+    truePurpose,
+    routePlan,
     fromId: from,
     toId: to,
     journey: 'outbound',
     notBeforeTick: departedTick,
   });
-  if (!plan) {
-    return { worldState, changed: false, evidence: [], errand: null, reason: 'invalid_route_plan' };
+  if (!spine.ok) {
+    return { worldState, changed: false, evidence: [], errand: null, reason: spine.reason };
   }
+  const plan = /** @type {Record<string, unknown>} */ (spine.plan);
   const errandId = errands.some((row) => envoyOfferEpisodeKey(row.offer) === episodeKey)
     ? envoyAttemptIdForOffer(offer)
     : envoyErrandIdForOffer(offer);
@@ -225,6 +253,7 @@ export function mintEnvoyErrand({
     from,
     to,
     purpose: missionPurpose,
+    ...spine.fields,
     offer,
     acceptance: acceptedRuling,
     snapshot: picture,

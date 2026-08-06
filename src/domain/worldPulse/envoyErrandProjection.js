@@ -24,7 +24,14 @@
  *
  * @enforced-by tests/domain/envoyErrand.test.js + tests/domain/envoyEncounter.test.js
  */
-import { asObject, cloneData, strictText, wholeTick } from './envoyErrandVocabulary.js';
+import {
+  asObject,
+  cloneData,
+  declaredPurposeClassOf,
+  purposeClassOf,
+  strictText,
+  wholeTick,
+} from './envoyErrandVocabulary.js';
 import {
   envoyOfferEpisodeKey,
   normalizeEnvoyAcceptance,
@@ -163,6 +170,49 @@ export function projectEnvoyForEncounter(rawErrand, tick, venueRef = null) {
     ...(preview.routeId ? { routeId: preview.routeId } : {}),
     ...(venueRef != null ? { venueRef: { id: venueId, kind: venueKind } } : {}),
     ...(errand.termSheet ? { termsBearing: true } : {}),
+  };
+}
+
+/**
+ * SP-D — THE AUDIENCE SPLIT, and it is NEW HERE. The SP volume's §4 lifecycle clause says
+ * this module "already owns the audience split"; it did not, and the ES volume's own
+ * measurement says so in as many words (⟨seam-nit⟩: "envoyErrandProjection.js carries NO
+ * includeCovert/truePurpose today — SP-D BUILDS this seam"). The overstatement was
+ * reported, not silently corrected; this function is the correction.
+ *
+ * `includeCovert` is the estate's EXISTING spelling for this decision (npcLedgerProjection
+ * .js, projectNpcPool, mobilizationStandings, realmPolitics) and it is BORROWED rather
+ * than forked — J-WR-10 forbids a second word for one idea. Default FALSE, compared
+ * `=== true`, so every caller that forgets the argument gets the player's view.
+ *
+ * THE HARD PART IS NOT WITHHOLDING `truePurpose`. It is that the PUBLIC row must not
+ * betray that a secret EXISTS. A projection that answered "purposeClass: diplomatic,
+ * covert: true" would keep the letter of the veil and give the whole game away; so would
+ * one that carried `declaredPurpose` only when a split rode, since the presence of the key
+ * IS the tell. The public shape is therefore IDENTICAL for an honest embassy and for a
+ * covert mission wearing one — same keys, same words — and the pin that proves it compares
+ * two seeded errands rather than asserting an absence on an empty harness.
+ *
+ * @param {unknown} rawErrand
+ * @param {{ includeCovert?: boolean }} [opts] DM surfaces ⇒ true; PLAYER views ⇒ false
+ * @returns {{errandId:string, purposeClass:string,
+ *   declaredPurpose?:string, truePurpose?:string}|null}
+ */
+export function projectErrandPurpose(rawErrand, opts = {}) {
+  const errand = normalizeErrand(rawErrand);
+  if (!errand) return null;
+  const errandId = String(errand.id);
+  if (asObject(opts).includeCovert !== true) {
+    // THE FACE. Nothing here can reach the true class: `declaredPurposeClassOf` never
+    // consults `truePurpose`, and it consults `purposeClass` only when no cover is worn.
+    return { errandId, purposeClass: declaredPurposeClassOf(errand) };
+  }
+  const declaredPurpose = String(errand.declaredPurpose || '');
+  const truePurpose = String(errand.truePurpose || '');
+  return {
+    errandId,
+    purposeClass: purposeClassOf(errand),
+    ...(declaredPurpose && truePurpose ? { declaredPurpose, truePurpose } : {}),
   };
 }
 
