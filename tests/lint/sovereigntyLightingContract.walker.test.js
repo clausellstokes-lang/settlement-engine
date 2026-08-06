@@ -35,12 +35,17 @@
  * condition can be forged by a comment is a worse artifact than the phantom row it
  * replaced, because the phantom was at least visibly absent.
  *
- * SO A MARKER IS EVIDENCE ONLY WHERE IT STANDS IN THE TITLE OF A TEST THAT WILL ACTUALLY
- * RUN. FOUR DOORS, each pinned individually below because a second door silently covering
- * a deleted first is this program's most-repeated verification failure:
- *   1. TITLE POSITION — the marker must sit in the first argument of an `it`/`test` (or
- *      `describe`/`suite`) call, and that argument must be a static string. A comment, a
- *      string constant and an `expect(...)` argument are all refused.
+ * SO A MARKER IS EVIDENCE ONLY WHERE IT STANDS IN THE TITLE OF A **TEST** THAT WILL ACTUALLY
+ * RUN, IN A FILE WHOSE ADDRESS THIS WALKER DECLARES. FIVE DOORS, each pinned individually
+ * below because a second door silently covering a deleted first is this program's
+ * most-repeated verification failure:
+ *   0. THE DECLARED ADDRESS (THE CAP, § the tenth statement) — the file must be one of the
+ *      three literal paths in `EVIDENCE_FILE_ADDRESSES`. A marker anywhere else in tests/ is
+ *      not evidence, and the census arm says which addresses are declared.
+ *   1. TITLE POSITION — the marker must sit in the first argument of an `it`/`test` call, and
+ *      that argument must be a static string. A comment, a string constant and an `expect(...)`
+ *      argument are all refused — AND SO, SINCE THE TENTH CUT, IS A `describe`/`suite` TITLE,
+ *      which is parsed and kept but never joined against (§ the tenth statement).
  *   2. THE TEST MUST BE ONE THIS WALKER CAN PROVE RUNS — only the closed running TEST grammar
  *      keeps its title, only through a word that RESOLVES to vitest's own `it`/`test` by that
  *      export's OWN name, only with a FUNCTION BODY in argument two, only off a table this
@@ -53,7 +58,9 @@
  *      registration. The conditions are what this walker CREDITS; they are not a census of
  *      what vitest reads, and § the eighth statement is where that distinction is argued.
  *   4. SELF-EXCLUSION — this walker never vouches for itself (it names every marker by
- *      import).
+ *      import). SUBSUMED BY DOOR 0 AND KEPT AS BELT: no declared address is under tests/lint/,
+ *      so the walker's own file could not be a carrier even with the clause deleted. It is
+ *      pinned as what it now is, rather than pinned as if it were still load-bearing.
  *
  * ── DOOR 3, FIFTH STATEMENT: CLASSIFICATION IS BY PARSE ────────────────────────
  * Four cuts of door 3 were REGEX classifiers over TEXT, and all four were falsified the
@@ -202,34 +209,139 @@
  * The machinery this deletes is named in `bindingsOf`, and the estate cost is ZERO — measured
  * file-for-file, title-set for title-set, against the eighth cut.
  *
- * ── THE TERMINAL CLAIM, IN BINDING-RESOLUTION TERMS ────────────────────────────
- * THIS WALKER CREDITS A TITLE ONLY WHERE ITS CALL'S CALLEE RESOLVES, THROUGH THE MODULE'S OWN
- * BINDING STRUCTURE, TO A VITEST OPENER NAMED BY ITS IMPORTED NAME, AND THAT CALL IS
- * STRAIGHT-LINE, CONTEXT-FREE AND STATICALLY REGISTERED UNDER THE CLOSED CALL GRAMMAR;
- * EVERYTHING ELSE PARKS. THE STANDING FALSIFIER IS A CREDITED FILE WHOSE OPENER DOES NOT SO
- * RESOLVE, OR WHICH IS OUTSIDE THAT GRAMMAR.
+ * ── DOOR 3, TENTH STATEMENT AND **THE CAP**: THE TITLE'S OWN LAYER, AND THE ADDRESS ──
+ * THE NINTH CUT'S STATED FALSIFIER — "a credited file whose opener does not so resolve, or which
+ * is outside that grammar" — WAS NOT MET, AND THAT IS THE FINDING. The adversary produced a
+ * credited-non-running forgery that lives ENTIRELY INSIDE the grammar: its `describe` resolves
+ * through the module's own bindings to vitest's `describe` by that export's own name, the call
+ * is straight-line, context-free, statically registered and function-bodied. Every clause of the
+ * ninth cut's sentence is TRUE of it. It forges anyway, because the sentence had stopped being
+ * about evidence:
  *
- * THAT SENTENCE REPLACES EVERY EARLIER ONE OF THE FORM "run-control has N homes and all N are
- * closed", AND THE REPLACEMENT IS THE POINT RATHER THAN A TIDY-UP. Four cuts in a row stated a
- * closure over VITEST — over the set of things vitest reads to decide whether a call runs — and
- * four times a channel arrived that the list had no row for: the options bag, the table's
- * cardinality, the body's context, the block's reachability. A claim about vitest's surface is
- * a claim this file has no way to verify and every reason to get wrong, and under J-WR-13
- * stating one is an overstatement whether or not it happens to be true this week. A claim about
- * what THIS WALKER credits is checkable by reading this file. The eighth cut's version of that
- * claim was checkable and FALSE, because "under the closed call grammar" quietly assumed the
- * word at the head of the call was vitest's — the one thing it never checked. Naming the
- * BINDING in the claim is what makes the sentence say the whole of what the code requires.
+ *   T1 — THE SUITE TITLE, BACKED BY NOTHING. `titleArgs` was called into ONE `titles` array from
+ *     both the suite loop and the test loop, so `filesTitling`/`titledIn`/`measure` read a
+ *     `describe` title exactly as they read an `it` title. EXECUTED AT ALL THREE LAYERS against
+ *     the ninth cut: the source
+ *       `import { describe, it } from 'vitest';`
+ *       `describe('ES-4-DISTANT-SOURCE-EVIDENCE — the espionage confirmer lane', () => {`
+ *       `  it.skip('the pin that never runs', () => { throw new Error('THIS RAN'); });`
+ *       `});`
+ *     classified `{"reasons":[],"titles":["ES-4-DISTANT-SOURCE-EVIDENCE — …"]}`; the SHIPPED
+ *     evaluator, driven through the real `measure` with the real `SOVEREIGNTY_LIGHTING_EVIDENCE`
+ *     row, read `SATISFIED / satisfiable true / missing []`; and vitest 4.1.8 in a `git archive`
+ *     tree reported `↓ … > the pin that never runs`, `Tests 1 passed | 1 skipped (2)`, exit 0,
+ *     `grep -c 'THIS RAN'` = 0, with `vitest list --json` collecting NO runnable test for the
+ *     file at all. WITH A LIVE SIBLING SUITE ABOVE IT THE FILE IS INDISTINGUISHABLE FROM A
+ *     HEALTHY ONE — `Test Files 1 passed (1)`, exit 0 — because the empty-suite case that WOULD
+ *     red loudly (`No test found in suite`) is exactly the case the sibling removes. That is the
+ *     same mistake-versus-forgery line the zero-row table (L2) and the early return (G2) drew.
+ *     EIGHT SPELLINGS of the family were measured and every one classified `reasons=[]` while
+ *     carrying the marker in `titles`: `it.skip` under a marker suite; `it.todo('x', fn)` with a
+ *     body; `it.skipIf(!gate)` — THE LIVE ESTATE SHAPE; `it.runIf(gate)`; `it.fails`, which runs
+ *     only to prove a throw and which door 2 explicitly refuses one level down; a nested suite
+ *     whose inner tests are all skipped; `describe.each([1])('MARKER — %s', …)` over skipped
+ *     rows; and the marker suite beside a live sibling.
+ *     THE ASYMMETRY WAS THIS FILE'S OWN, AND DELIBERATE ONE LEVEL DOWN. `NON_FOCUSING_TEST_
+ *     MODIFIERS` lets `it.skip` cost only its OWN title while the file keeps the rest — correct
+ *     at test level, and pinned since the first cut (`DOOR 2 REFUSES: a parked pin proves as
+ *     little as a comment does`). At SUITE level there was no matching rule, so door 2's own
+ *     principle was defeated by moving the marker up one line.
+ *     THE FIX IS THE LAYER SPLIT: `suiteTitles` is parsed and kept, `titles` is test-only, and
+ *     `measure` joins against `titles` alone. EVIDENCE IS TEST TITLES ONLY. This restores the
+ *     instrument's own original spec — the row's `kind` is `TEST_MARKER` and its `why` names a
+ *     PIN — which every cut of this door had quietly widened.
+ *     THE LIVE ESTATE INSTANCE, DISPOSITIONED RATHER THAN LEFT TO BE FOUND:
+ *     tests/build/prerenderRoutes.test.js opens `describe('prerender — dist walk (the emitted
+ *     files carry their own truth)', …)` whose four tests are ALL `it.skipIf(!requireDistRead)`.
+ *     The ninth cut credited that suite title with `reasons=[]` while `vitest list` collects
+ *     twelve runnable tests for the file and NOT ONE lies under that suite. It was the ONLY such
+ *     divergence in the whole estate. Its suite title was never a marker and the file is not a
+ *     declared evidence address, so the TREE READING IS UNCHANGED by this cut — MEASURED both
+ *     ways, and the census figures below are the receipt.
  *
- * THE FIVE CHANNELS THAT TAUGHT THE GRAMMAR ITS SHAPE, kept as record and NOT as an inventory
- * anyone should read as complete: the BINDING (§ this statement, a positive resolution), the
- * CALLEE CHAIN (a closed running grammar, § the fifth and sixth statements), the SECOND
+ *   T2 — THE ADDRESS, WHICH IS WHY THIS IS A CAP AND NOT AN ELEVENTH CUT. Ten rounds narrowed
+ *     WHICH SHAPES inside an ARBITRARY file may carry a marker, and ten times an adversary found
+ *     a shape the standing sentence had no row for. The surface kept outrunning the parse rule
+ *     and each cut bought a narrower sentence. So the open address is RETIRED ON PURPOSE:
+ *     a marker is evidence only in one of the three literal paths in `EVIDENCE_FILE_ADDRESSES`.
+ *     With the address designated, the whole title-surface question is MOOT for every other file
+ *     in the estate — no `describe`/`it` shape, no grammar, no binding, no options bag and no
+ *     block reachability sits between a marker and the measurement anywhere else, because
+ *     nowhere else is read. EVERYTHING THE PARSE LAYER LEARNED IS KEPT AND STAYS EXECUTED: it is
+ *     what decides whether the pin AT the declared address really runs, and the battery is what
+ *     stops it rotting. It simply stops being the only thing standing between a comment in an
+ *     arbitrary file and a lit wave.
+ *
+ * ── THE STANDING AUDIT: `vitest list --json`, THE FRAMEWORK'S OWN GROUND TRUTH ──
+ * THE ORACLE THAT FOUND T1, RECORDED AS THE AUDITOR'S METHOD RATHER THAN RE-DERIVED NEXT TIME.
+ * vitest can be asked what it will RUN, without running it, and that answer is not a claim this
+ * file makes about vitest — it is vitest's:
+ *
+ *     npx vitest list --json=<ABSOLUTE OUT PATH> [<file filter> …]
+ *
+ * ⚠ THE SPELLING IS LOAD-BEARING AND MIS-SPELLING IT DESTROYS A FILE. `--json` takes an OPTIONAL
+ * VALUE, so the bare `--json <path>` form consumes the NEXT POSITIONAL as the OUTPUT path and
+ * OVERWRITES it. Executed by this lane on 2026-08-06: `npx vitest list --json
+ * tests/domain/sovereigntyMarketStageWr10w.test.js tests/domain/sovereigntyWaveCloseIntegration.
+ * test.js` truncated SP-B2's own evidence file from 836 lines to 41 lines of JSON, silently and
+ * exit 0. It was restored from `git show HEAD:<path>` and verified `cmp`-clean. ALWAYS write
+ * `--json=<path>`, and always to a path outside the repository.
+ *
+ * THE RECONCILIATION, AS THE ADVERSARY EXECUTED IT AND AS THE NEXT AUDITOR SHOULD: collect the
+ * oracle over the estate, then check EVERY title this walker credits, in every file it credits,
+ * against the set of tests vitest reports it will run, by substring containment with
+ * format-specifier heads handled. At the ninth cut that was 23,676 credited titles across 1,957
+ * credited files, and it yielded EXACTLY ONE divergence — the prerenderRoutes suite title above.
+ * ZERO credited TEST titles failed to run: the test-level rule is empirically sound across the
+ * whole estate and the defect was confined to the suite-title surface, which is precisely why
+ * T1's remedy is a LAYER SPLIT and not another grammar clause. Two files are dropped from such a
+ * collection because they need a git repo a `git archive` tree lacks
+ * (tests/ops/migrationRehearsal.test.js and tests/security/committedSecretsScan.test.js), and
+ * `vitest list --filesOnly --json=<path>` collects exactly the same 2,314 files this walker
+ * scans — measured, which is what shuts the file-pattern half of residual (a5).
+ *
+ * WHY THE ORACLE IS DOCUMENTED HERE AND NOT LANDED AS A TEST, MEASURED RATHER THAN ASSERTED.
+ * Collecting the oracle over ONLY the two BUILT declared addresses costs 2.61s wall — against
+ * this walker file's own whole-file vitest Duration of 2.58s. It would more than double the
+ * instrument's runtime to re-derive a fact that does not change between commits, and it would do
+ * it by SPAWNING A SECOND VITEST LANE INSIDE A RUNNING ONE, which this program forbids outright
+ * (one vitest lane per tree). So the method is banked here, executed once at this landing:
+ * `vitest list` collects 31 runnable tests in tests/domain/sovereigntyMarketStageWr10w.test.js
+ * and 10 in tests/domain/sovereigntyWaveCloseIntegration.test.js, and this walker's TEST titles
+ * for those files number exactly 31 and 10 — an EXACT agreement that did not hold before the
+ * layer split, when the same files read 41 and 11 because their 10 and 1 SUITE titles were
+ * counted as evidence. That +11 is T1 measured on the only two files the cap admits.
+ *
+ * ── THE TERMINAL CLAIM, IN ADDRESS-AND-LAYER TERMS ─────────────────────────────
+ * THIS WALKER TREATS A MARKER AS EVIDENCE ONLY WHERE IT STANDS IN THE STATIC TITLE OF A **TEST**
+ * CALL — NEVER A SUITE — IN A FILE AT ONE OF THE THREE DECLARED ADDRESSES, WHERE THAT CALL'S
+ * CALLEE RESOLVES THROUGH THE MODULE'S OWN BINDING STRUCTURE TO A VITEST OPENER NAMED BY ITS
+ * IMPORTED NAME AND IS STRAIGHT-LINE, CONTEXT-FREE AND STATICALLY REGISTERED UNDER THE CLOSED
+ * CALL GRAMMAR. THE STANDING FALSIFIER IS A MARKER THAT LIGHTS A WAVE FROM ANYWHERE ELSE.
+ *
+ * AND THAT FALSIFIER IS NOW AUDITABLE BY READING THREE FILES, WHICH IS THE WHOLE POINT OF THE
+ * CAP. Every earlier terminal sentence quantified over an open surface — first over VITEST (four
+ * cuts, four channels the list had no row for: the options bag, the table's cardinality, the
+ * body's context, the block's reachability), then over THIS WALKER'S grammar (the ninth cut,
+ * which survived by narrowing until it was a claim about parsing rather than about evidence, and
+ * the tenth statement's T1 is what that narrowing cost). A claim about vitest's surface is one
+ * this file has no way to verify and every reason to get wrong, and under J-WR-13 stating one is
+ * an overstatement whether or not it happens to be true this week. A claim about a THREE-FILE
+ * address is one a reader can settle by opening them.
+ *
+ * THE SIX CHANNELS THAT TAUGHT THE GRAMMAR ITS SHAPE, kept as record and NOT as an inventory
+ * anyone should read as complete: the BINDING (§ the ninth statement, a positive resolution),
+ * the CALLEE CHAIN (a closed running grammar, § the fifth and sixth statements), the SECOND
  * ARGUMENT (L1, a function body and no options bag), the TABLE'S CARDINALITY (L2, a non-empty
- * array literal), and the CALLBACK'S BODY AND ITS BLOCK (G1/G2, context-free and
- * straight-line). Each was found by an adversary AFTER a cut of this file declared the previous
- * list complete. A sixth channel may well exist; the answer to it is that anything this walker
- * cannot prove, it parks — and the ninth cut's contribution is that the proving is now a total
- * function rather than a list of the ways proof can fail.
+ * array literal), the CALLBACK'S BODY AND ITS BLOCK (G1/G2, context-free and straight-line),
+ * and — the one that closed the file — THE TITLE'S OWN LAYER (T1, a suite title is not a test
+ * title). Each was found by an adversary AFTER a cut of this file declared the previous list
+ * complete, WHICH IS THE ARGUMENT FOR THE CAP AND NOT MERELY A HISTORY OF IT. The sixth channel
+ * the ninth statement said "may well exist" arrived one round later, in the one place ten cuts
+ * had never looked; a seventh is to be expected on exactly the same evidence. The answer is no
+ * longer a narrower sentence about shapes — it is that only three files are read at all
+ * (§ the tenth statement, T2), so a seventh channel costs a title in a declared home rather
+ * than lighting a wave from anywhere in tests/.
  *
  * THE RESIDUALS, NAMED AND NOT CLAIMED AWAY.
  * (a) `test.extend({})` — vitest's first-class fixture API, EXECUTED under 4.1.8 and it
@@ -314,10 +426,17 @@
  * mints `SOVEREIGNTY_LIGHTING_EVIDENCE`. Both are addressed by their SENTENCE here rather
  * than by a line number, because hand-keyed line addresses rot — the sixth cut's landing
  * commit recorded one of them ~256 lines from where it actually sits, and the endgame caught
- * it. THAT SENTENCE IS NO LONGER SUFFICIENT AND NEEDS SEVEN CLAUSES, one per closed hole, and
- * the SEVEN IS THIS WALKER'S COUNT rather than a claim about how many ways vitest can park a
+ * it. THAT SENTENCE IS NO LONGER SUFFICIENT AND NEEDS NINE CLAUSES, one per closed hole, and
+ * the NINE IS THIS WALKER'S COUNT rather than a claim about how many ways vitest can park a
  * test. The ES-4 pin must sit in a title
- *   (1) opened through an `it`/`test` word that RESOLVES to vitest's export of that same name —
+ *   (0) IN THE FILE `tests/domain/espionageDistantSourceEs4.test.js` — ES-4's DECLARED evidence
+ *       address, listed in `EVIDENCE_FILE_ADDRESSES`. A pin in any other file carries the token
+ *       and lights nothing. If ES-4 needs a different filename, edit that list in the same
+ *       commit and re-measure the census; do not move the marker (§ the tenth statement, T2),
+ *   (0b) IN A **TEST** TITLE AND NOT A SUITE TITLE — `it('ES-4-…', () => {…})`, never
+ *       `describe('ES-4-…', …)`. A suite title is parsed, kept in `suiteTitles`, and joined
+ *       against by nothing, because a suite registers no test of its own and every test under it
+ *       may be skipped while the file stays green (§ the tenth statement, T1),
  *       imported from 'vitest' and NOT renamed to or from another export, not destructured off
  *       a namespace, not taken from a shim, not bound anywhere else in the file, and not left
  *       to a global (§ the ninth statement),
@@ -332,8 +451,9 @@
  *   (7) in a file whose OTHER suites and tests also satisfy all of the above, because every
  *       refusal in this walker is FILE-SCOPED — one rebound word or one focused sibling costs
  *       the whole file its titles, the marker's included.
- * A pin that misses any of the seven carries the token, does not run or cannot be proven to run,
- * and does not light the wave. THE SHORTEST PIN THAT SATISFIES ALL SEVEN IS THE PLAIN ONE:
+ * A pin that misses any of the nine carries the token, does not run or cannot be proven to run,
+ * and does not light the wave. THE SHORTEST PIN THAT SATISFIES ALL NINE IS THE PLAIN ONE, in
+ * `tests/domain/espionageDistantSourceEs4.test.js`:
  * `import { describe, it } from 'vitest';` — plainly, with no `as` on either opener — and then
  * `it('ES-4-…-EVIDENCE — …', () => { … });` at the top level of the file, or in a suite whose
  * block holds nothing but calls and declarations. That import is the ordinary first line of
@@ -357,6 +477,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, relative } from 'node:path';
 import { parse } from 'espree';
 import { describe, expect, test } from 'vitest';
+
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 import {
   SOVEREIGNTY_LIGHTING_EVIDENCE,
@@ -711,6 +833,11 @@ function tableProven(steps) {
  * interpolated segment is not read, so `it(`${x} MARKER`)` credits `MARKER` while a marker
  * split ACROSS an interpolation is credited to neither half — which is the honest read,
  * because such a marker is not in the file.
+ *
+ * IT IS CALLED INTO TWO SEPARATE ARRAYS AND THAT SEPARATION IS THE TENTH CUT — see the tenth
+ * statement. Under every earlier cut this function was called into ONE array from both the
+ * suite loop and the test loop, so `measure` could not tell a suite title from a test title
+ * and a marker in a `describe` was evidence for a wave nothing under it ran.
  * @param {any} node @param {Array<[number, string]>} out
  */
 function titleArgs(node, out) {
@@ -970,7 +1097,11 @@ function classifySource(src) {
   const hookReasons = [];
   const unresolvedReasons = [];
   const reasons = [];
+  // TWO TITLE ARRAYS, NEVER ONE — the tenth statement. `titles` is the EVIDENCE layer and only
+  // a credited TEST ever writes to it; `suiteTitles` is kept so the split is observable (and
+  // pinnable) rather than a silent deletion, and nothing downstream reads it as evidence.
   const titles = [];
+  const suiteTitles = [];
   const creditedRoots = new Set();
 
   const stack = [{ node: ast, parent: null, key: null }];
@@ -1064,7 +1195,14 @@ function classifySource(src) {
   // opaque about. A repair that removes the possibility outranks a repair that sequences it.
   for (const call of suiteCalls) {
     creditedRoots.add(call.rootNode);
-    if (call.running && registered.has(call.node)) { titleArgs(call.node, titles); continue; }
+    // A CREDITED SUITE'S TITLE IS NOT EVIDENCE — it goes to `suiteTitles`, which nothing joins
+    // against. THE TENTH CUT'S WHOLE MECHANISM IS THIS LINE. A suite title is backed by nothing:
+    // vitest registers no test for it, and a `describe` whose every inner test is `.skip`,
+    // `.todo`, `.skipIf`, `.runIf` or `.fails` runs NOTHING while this file still parses it as a
+    // fully credited source with `reasons=[]`. Door 2 has refused `it.skip('MARKER')` since the
+    // first cut; moving the same marker one line up into the enclosing `describe` defeated that
+    // refusal completely, and the fix is to stop reading suite titles as evidence at all.
+    if (call.running && registered.has(call.node)) { titleArgs(call.node, suiteTitles); continue; }
     if (call.running) { reasons.push(`SUITE_UNREGISTERED:${call.shape}`); continue; }
     // THE CHANNEL THAT REFUSED IT IS THE REASON IT CARRIES. The chain speaks first, so the
     // sixth cut's reason strings are unchanged for every source it already refused; the two
@@ -1114,7 +1252,13 @@ function classifySource(src) {
   for (const reason of flowReasons) reasons.push(reason);
 
   titles.sort((a, b) => a[0] - b[0]);
-  return { reasons, titles: reasons.length > 0 ? [] : titles.map(([, text]) => text) };
+  suiteTitles.sort((a, b) => a[0] - b[0]);
+  const parked = reasons.length > 0;
+  return {
+    reasons,
+    titles: parked ? [] : titles.map(([, text]) => text),
+    suiteTitles: parked ? [] : suiteTitles.map(([, text]) => text),
+  };
 }
 
 /**
@@ -1239,8 +1383,47 @@ function withVitest(src) {
 /** THE ADDRESS READ — the titles of the tests in one source that will actually run. */
 const liveTitlesIn = (src) => classify(src).titles;
 
+/** The SUITE titles of the same source — parsed, kept, and NEVER evidence (the tenth cut). */
+const liveSuiteTitlesIn = (src) => classify(src).suiteTitles;
+
 /** Why one source was refused, so the parser door can be told apart from the grammar. */
 const parkReasonsFor = (src) => classify(src).reasons;
+
+/**
+ * ── THE TENTH STATEMENT'S SECOND HALF: THE DECLARED EVIDENCE ADDRESS (THE CAP) ─
+ * EVERY FILE IN tests/ USED TO BE A POSSIBLE CARRIER. Eleven adversarial rounds proved that
+ * open address unwinnable: each cut narrowed WHICH SHAPES inside an arbitrary file could carry
+ * a marker, and each time an adversary found a shape the previous sentence had no row for —
+ * the callee chain, the options bag, the table's cardinality, the callback's context, the
+ * block's reachability, the module's bindings, and finally the title's own LAYER. A DESIGNATED
+ * ADDRESS retires the question instead of narrowing it: there are three files a marker may
+ * stand in, they are listed here, and a reader can audit the whole evidence surface by opening
+ * them. Generality is given up ON PURPOSE and this is THE CAP.
+ *
+ * WHAT THE LIST IS. One literal repo-relative path per evidence home — the tightest pattern
+ * there is, and the one that cannot drift into a prefix that admits a file nobody meant:
+ *   • SP-B2's home, MEASURED: `filesTitling('SP-B2-LEG-SUPPLY-EVIDENCE')` names exactly this
+ *     file today, and the ratchet arm asserts it.
+ *   • the sovereignty WAVE-CLOSE INTEGRATION family, which is where a wave-close pin that
+ *     supplies this condition belongs and where the mutant corpora below are addressed.
+ *   • ES-4's declared home, NOT YET BUILT. The ES charter's VERIFY-AT-BUILD step resolves to
+ *     this walker, so the address is declared HERE and the builder reads it here. A marker in
+ *     any other file is not evidence — the walker will read the pin, refuse it, and the census
+ *     arm below says which addresses are declared and which are still unbuilt.
+ *
+ * THE COST, STATED: an ES-4 pin written into a differently-named file does not light the wave,
+ * and the remedy is a one-line edit to this list (and a re-measure of the census). That is the
+ * trade the cap buys — a red that names its own fix, in place of a surface no sentence could
+ * close.
+ */
+const EVIDENCE_FILE_ADDRESSES = Object.freeze([
+  'tests/domain/sovereigntyMarketStageWr10w.test.js',
+  'tests/domain/sovereigntyWaveCloseIntegration.test.js',
+  'tests/domain/espionageDistantSourceEs4.test.js',
+]);
+/** The declared addresses whose wave has not been built. ES-4's, and today only ES-4's. */
+const UNBUILT_EVIDENCE_ADDRESSES = Object.freeze(['tests/domain/espionageDistantSourceEs4.test.js']);
+const isEvidenceAddress = (rel) => EVIDENCE_FILE_ADDRESSES.includes(rel);
 
 /** THE REFUSED READ, kept executable so the tightening is PROVEN and not merely claimed:
  *  any occurrence anywhere in the file. Used only by the side-by-side control below. */
@@ -1249,12 +1432,15 @@ const mentionedIn = (src, marker) => src.includes(marker);
 /** THE ACCEPTED READ — the marker stands in a title that runs. */
 const titledIn = (src, marker) => liveTitlesIn(src).some((title) => title.includes(marker));
 
-/** Test files whose LIVE TITLES carry a marker token, this walker excluded (door 4).
- *  The corpus is a PARAMETER with the tree as its default, which is what lets the mutant
- *  below drive a forged corpus through the real `measure` — a tightening that could only
- *  be checked against the tree would be uncheckable on any day the tree agreed. */
+/** DECLARED-ADDRESS files whose LIVE TEST TITLES carry a marker token, this walker excluded.
+ *  THREE FILTERS AND EACH IS PINNED ALONE BELOW: the address must be DECLARED (the cap), the
+ *  file must not be this walker (door 4, now subsumed by the cap and kept as belt), and the
+ *  marker must stand in a TEST title that runs (doors 1-3 plus the tenth cut's layer split).
+ *  The corpus is a PARAMETER with the tree as its default, which is what lets the mutants
+ *  below drive forged corpora through the real `measure` — a tightening that could only be
+ *  checked against the tree would be uncheckable on any day the tree agreed. */
 const filesTitling = (marker, corpus = TEST_FILES) => corpus
-  .filter(({ rel, src }) => rel !== SELF_REL && titledIn(src, marker))
+  .filter(({ rel, src }) => isEvidenceAddress(rel) && rel !== SELF_REL && titledIn(src, marker))
   .map(({ rel }) => rel);
 
 /** The same census under the REFUSED read — the control arm, never the measurement. */
@@ -1279,6 +1465,10 @@ describe('the sovereignty lighting condition — the contract is well-formed', (
     expect(TEST_FILES.length, 'the test-file scan found nothing').toBeGreaterThan(300);
     expect(ENGINE_GATED_VIRTUAL_RULE_KEYS.length, 'the CQ5 manifest is empty').toBeGreaterThan(3);
     expect(SOVEREIGNTY_LIGHTING_EVIDENCE).toHaveLength(3);
+    // …and the CAP's own table: an empty address list would refuse every marker in the estate
+    // and read UNSATISFIED forever, which is the way this door fails silently.
+    expect(EVIDENCE_FILE_ADDRESSES.length, 'no evidence address is declared — every marker in'
+      + ' the estate is refused and the condition can never be satisfied').toBeGreaterThan(0);
   });
 
   test('the flag it gates is a REAL war flag, and the three waves are named once each', () => {
@@ -1359,6 +1549,15 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
   // A token no repository file carries, so a stray tree hit can never green these arms.
   const PROBE = 'ZZ-SYNTHETIC-ADDRESS-PROBE';
   /**
+   * A DECLARED evidence address, and one that is not. EVERY forged corpus below is addressed
+   * to `AT_ADDRESS`, because under the cap a corpus at an undeclared address is refused at
+   * door 0 and every mutant would be green FOR THE WRONG REASON — the classifier would never
+   * be consulted at all, and the whole battery would go vacuous in one line. `OFF_ADDRESS` is
+   * the cap's own discriminator and is used only where the cap itself is the thing on trial.
+   */
+  const AT_ADDRESS = 'tests/domain/sovereigntyWaveCloseIntegration.test.js';
+  const OFF_ADDRESS = 'tests/domain/notADeclaredEvidenceHome.test.js';
+  /**
    * THE BATTERY LEDGER. Each group asserts its own size against this table and the table's
    * SUM is asserted once, so a group that shrinks reds twice — at the group and at the
    * total. A battery that can quietly shrink is a battery that can quietly reopen, and four
@@ -1366,7 +1565,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
    */
   const BATTERY = Object.freeze({
     escapes: 28, provingLane: 11, invented: 18, parserDoor: 2, dataForm: 22, bodyBlock: 27,
-    alias: 14,
+    alias: 14, suiteTitle: 8,
   });
   /** Every synthetic source is read WITH the vitest import a real test file carries — see
    *  `withVitest`. The alias battery below is where the prelude itself is put on trial. */
@@ -1381,10 +1580,14 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
   const body = `\n  it('${PROBE} — a pin that never runs', () => { expect(1).toBe(2); });\n});\n`;
   const inner = `\n  it('${PROBE} — a real body', () => {});\n});\n`;
 
-  test('DOOR 1 ACCEPTS: the marker in the title of a describe / test / it that runs', () => {
+  test('DOOR 1 ACCEPTS: the marker in the title of a TEST that runs — and only a test', () => {
     expect(carries(`  it('${PROBE} — a real pin', () => { expect(1).toBe(1); });\n`)).toBe(true);
     expect(carries(`test('${PROBE} — a real pin', () => {});\n`)).toBe(true);
-    expect(carries(`describe('${PROBE} — a real suite', () => {});\n`)).toBe(true);
+    // …AND A SUITE TITLE IS NOT ONE, WHICH IS THE TENTH CUT ASSERTED WHERE THE OLD ACCEPTANCE
+    // STOOD. Every cut before this one credited the line below; the whole suite-title battery
+    // is at `DOOR 1+2 REFUSE THE SUITE-TITLE FAMILY` and this line is its shortest form, kept
+    // here so a reader of the ACCEPT arm cannot miss that the acceptance narrowed.
+    expect(carries(`describe('${PROBE} — a real suite', () => {});\n`)).toBe(false);
     // Quote style is not the point, so all three spellings are admitted.
     expect(carries(`  it("${PROBE} — double quoted", () => {});\n`)).toBe(true);
     expect(carries(`  it(\`${PROBE} — templated\`, () => {});\n`)).toBe(true);
@@ -1453,6 +1656,89 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // …and a NON-FOCUSING modifier costs only its OWN title: the file keeps the rest.
     const mixed = `it.skip('${PROBE} — parked', () => {});\nit('${PROBE} — live', () => {});\n`;
     expect(liveTitlesIn(withVitest(mixed))).toEqual([`${PROBE} — live`]);
+  });
+
+  test('DOOR 1+2 REFUSE THE SUITE-TITLE FAMILY — a marker one line up, backed by nothing', () => {
+    // THE TENTH CUT'S BATTERY, AND THE ONE THAT FALSIFIED THE NINTH CUT'S OPERATIVE SENTENCE
+    // WITHOUT VIOLATING ITS TERMINAL ONE. Every source below is a file this walker classifies as
+    // FULLY CREDITED — `reasons` is empty, the openers resolve to vitest's own exports by their
+    // imported names, the calls are straight-line, context-free, function-bodied and statically
+    // registered — and in every one of them vitest registers NOT ONE RUNNABLE TEST under the
+    // suite carrying the marker. The first was executed at all three layers against the ninth
+    // cut: classifier `{"reasons":[],"titles":["…"]}`, the SHIPPED evaluator reading
+    // `SATISFIED / satisfiable true / missing []` off the real ES-4 row, and vitest 4.1.8 in a
+    // `git archive` tree reporting `Tests 1 passed | 1 skipped (2)`, exit 0, with the deliberate
+    // throw never firing and `vitest list --json` collecting no runnable test for the file.
+    //
+    // THE ASYMMETRY IT EXPLOITED WAS THIS FILE'S OWN. Door 2 has refused `it.skip('MARKER')`
+    // since the first cut — it is pinned directly above — because a parked pin proves as little
+    // as a comment does. Moving the SAME marker one line up into the enclosing `describe`
+    // defeated that refusal entirely, because `titleArgs` fed suite titles and test titles into
+    // one array and `measure` could not tell them apart.
+    const suiteTitle = {
+      'it.skip under a marker suite': `describe('${PROBE} — the lane', () => {\n`
+        + `  it.skip('the pin that never runs', () => { throw new Error('THIS RAN'); });\n});\n`,
+      'it.todo WITH a body': `describe('${PROBE} — the lane', () => {\n`
+        + `  it.todo('the pin that never runs', () => {});\n});\n`,
+      'it.skipIf — THE LIVE ESTATE SHAPE': `describe('${PROBE} — the lane', () => {\n`
+        + `  it.skipIf(!gate)('the pin that may never run', () => {});\n});\n`,
+      'it.runIf': `describe('${PROBE} — the lane', () => {\n`
+        + `  it.runIf(gate)('the pin that may never run', () => {});\n});\n`,
+      'it.fails, which runs only to prove a throw': `describe('${PROBE} — the lane', () => {\n`
+        + `  it.fails('the pin that runs to fail', () => { throw new Error('x'); });\n});\n`,
+      'a NESTED suite whose inner tests are all skipped': `describe('${PROBE} — the lane', () => {\n`
+        + `  describe('inner', () => {\n    it.skip('a', () => {});\n    it.skip('b', () => {});\n  });\n});\n`,
+      'a table-driven marker suite over skipped rows':
+        `describe.each([1])('${PROBE} — the lane %s', () => {\n  it.skip('a', () => {});\n});\n`,
+      // THE PUREST FORM, AND THE REASON THE EMPTY-SUITE CASE NEVER CAUGHT THIS. A marker suite
+      // ALONE in a file reds loudly (`No test found in suite`); beside a live sibling suite
+      // vitest reports `Test Files 1 passed (1)`, exit 0, and nothing distinguishes the file
+      // from a healthy one. That is the same mistake-versus-forgery line the zero-row table
+      // (L2) and the early return (G2) each drew.
+      'a marker suite beside a LIVE sibling suite': `describe('a live sibling', () => {\n`
+        + `  it('a real anchor', () => {});\n});\n`
+        + `describe('${PROBE} — the lane', () => {\n  it.skip('the pin that never runs', () => {});\n});\n`,
+    };
+    expect(Object.keys(suiteTitle), 'a suite-title forgery was dropped from the arm')
+      .toHaveLength(BATTERY.suiteTitle);
+    for (const [spelling, src] of Object.entries(suiteTitle)) {
+      expect(carries(src), `${spelling} was credited — a suite title is being read as evidence`)
+        .toBe(false);
+      expect(parses(src), `${spelling} was refused at the PARSER door, not by the layer split`)
+        .toBe(true);
+      expect(mentionedIn(src, PROBE), `${spelling} never carried the marker at all`).toBe(true);
+      // THE DISCRIMINATOR, AND IT IS WHAT MAKES THIS ARM UNABSORBABLE BY ANY OTHER GUARD. Each
+      // source is a fully CREDITED file — no park reason anywhere in it — so nothing in doors
+      // 1-3 is in a position to be doing this work. The ONLY thing refusing the marker is the
+      // layer split, and the line below says so by reading the title out of `suiteTitles`.
+      expect(parkedFor(src), `${spelling} parked, so this arm is not testing the layer split`)
+        .toEqual([]);
+      expect(liveSuiteTitlesIn(withVitest(src)).some((title) => title.includes(PROBE)),
+        `${spelling} did not put the marker in suiteTitles — the arm is vacuous`).toBe(true);
+    }
+
+    // …AND THE ACCURACY HALF, without which the split would just be a way to lose evidence: the
+    // SAME shapes with the marker in a TEST title are credited exactly as before.
+    const stillCredited = {
+      'a test title under a plain suite': `describe('the lane', () => {\n`
+        + `  it('${PROBE} — a real pin', () => {});\n});\n`,
+      'a test title under a NESTED suite': `describe('a', () => {\n  describe('b', () => {\n`
+        + `    it('${PROBE} — a real pin', () => {});\n  });\n});\n`,
+      'a test title under a table-driven suite':
+        `describe.each([1])('the lane %s', () => {\n  it('${PROBE} — a real pin', () => {});\n});\n`,
+      'a test title beside a skipped sibling': `describe('the lane', () => {\n`
+        + `  it.skip('parked', () => {});\n  it('${PROBE} — a real pin', () => {});\n});\n`,
+    };
+    expect(Object.keys(stillCredited), 'an accuracy control was dropped').toHaveLength(4);
+    for (const [label, src] of Object.entries(stillCredited)) {
+      expect(carries(src), `${label} was PARKED but vitest really runs it`).toBe(true);
+    }
+    // …and the two layers really are two, on ONE source: the suite title is READ and kept, the
+    // test title is READ and joined. A cut that merged the arrays again would red here.
+    const both = withVitest(`describe('${PROBE} — the suite half', () => {\n`
+      + `  it('${PROBE} — the test half', () => {});\n});\n`);
+    expect(liveSuiteTitlesIn(both)).toEqual([`${PROBE} — the suite half`]);
+    expect(liveTitlesIn(both)).toEqual([`${PROBE} — the test half`]);
   });
 
   test('DOOR 2 PARKS THE FILE for a test modifier outside BOTH grammars', () => {
@@ -1725,7 +2011,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // spells `const snap = (it) => ({ settlements: [it] });`), and a binding with NO test
     // opened through that word must stay opaque rather than fatal.
     expect(carries(`const snap = (it) => ({ settlements: [it] });\n`
-      + `describe('${PROBE} — a suite title beside a bound test word', () => {});\n`),
+      + `describe('outer', () => {\n  test('${PROBE} — beside a bound test word', () => {});\n});\n`),
       'a helper parameter named `it` parked a file that opens no test through it').toBe(true);
     expect(carries(`const its = rows.map((row) => row.it);\nit('${PROBE} — beside a property read', () => {});\n`),
       'reading a PROPERTY called `it` was treated as a binding').toBe(true);
@@ -1848,12 +2134,12 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       expect(carries(src), `${spelling} was credited`).toBe(false);
       expect(parses(src), `${spelling} parsed — it belongs in the grammar half of this arm`).toBe(false);
     }
-    // THE WHOLE BATTERY IS 122 ENTRIES — 28 escapes + 11 proving-lane forgeries + 18 newly
+    // THE WHOLE BATTERY IS 130 ENTRIES — 28 escapes + 11 proving-lane forgeries + 18 newly
     // invented spellings + 2 that die at the parser door + 22 data-form forgeries + 27 body
-    // and block forgeries + 14 alias forgeries — and the total is asserted here so that
-    // dropping a group reds even if its own arm is deleted with it.
+    // and block forgeries + 14 alias forgeries + 8 suite-title forgeries — and the total is
+    // asserted here so that dropping a group reds even if its own arm is deleted with it.
     expect(Object.values(BATTERY).reduce((a, b) => a + b, 0),
-      'the refusal battery shrank — a closed round has been reopened').toBe(122);
+      'the refusal battery shrank — a closed round has been reopened').toBe(130);
   });
 
   test('DOOR 2+3 REFUSE THE TWO DATA-FORM FORGERY FAMILIES — run-control that is not a chain', () => {
@@ -2396,28 +2682,63 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // a file reds it too. That is not a false red: it is this walker asking to be RE-MEASURED
     // rather than restated, and the fix is one command and one number, never a loosened bound.
     // A lane that finds this red should confirm the delta is its own, then re-record here.
-    // MEASURED AT THIS COMMIT, AND THE ONE MOVEMENT IS THIS FILE'S OWN. The eighth cut's tree
-    // read 23,675 live titles; the ninth reads 23,676, and the +1 is the alias arm added above
-    // — the SAME shape of off-by-one the seventh and eighth cuts each wrote into prose and
-    // shipped. This arm caught it on its first run, which is the whole argument for the table.
-    const CENSUS = Object.freeze({ files: 2314, parked: 357, credited: 1957, titles: 23676 });
+    // MEASURED AT THIS COMMIT, AND THE MOVEMENT IS THE TENTH CUT'S LAYER SPLIT PLUS THIS FILE'S
+    // OWN TWO NEW ARMS. The ninth cut read 23,676 live titles with SUITE and TEST titles in one
+    // array. They are two arrays now, and the same tree reads 18,434 TEST titles and 5,244 SUITE
+    // titles — 23,678 together, which is the ninth cut's 23,676 plus exactly the two `test(…)`
+    // arms this cut adds (DOOR 0 and the suite-title family). NOTHING WAS LOST: every title the
+    // ninth cut counted is still parsed and still counted, and 5,244 of them simply stopped
+    // being EVIDENCE. Both figures are asserted, so the split cannot silently drift back.
+    const CENSUS = Object.freeze({
+      files: 2314, parked: 357, credited: 1957, titles: 18434, suiteTitles: 5244,
+    });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
     const titles = credited.reduce((sum, { src }) => sum + liveTitlesIn(src).length, 0);
+    const suiteTitles = credited.reduce((sum, { src }) => sum + liveSuiteTitlesIn(src).length, 0);
     expect(TEST_FILES.length, 'the estate\'s file count moved — re-measure, do not re-word')
       .toBe(CENSUS.files);
-    expect(parked.length, 'the parked-file count moved from the ninth cut\'s measured 357 —'
+    expect(parked.length, 'the parked-file count moved from the tenth cut\'s measured 357 —'
       + ' a rule widened or narrowed, or a lane changed a file\'s shape; re-MEASURE and re-record')
       .toBe(CENSUS.parked);
-    expect(credited.length, 'the credited-file count moved from the ninth cut\'s measured 1,957')
+    expect(credited.length, 'the credited-file count moved from the tenth cut\'s measured 1,957')
       .toBe(CENSUS.credited);
-    expect(titles, 'the live-title count moved from the ninth cut\'s measured 23,676 — this is'
-      + ' the exact figure two cuts in a row stated wrongly in prose, which is why it is asserted')
+    expect(titles, 'the live TEST-title count moved from the tenth cut\'s measured 18,434 — this'
+      + ' is the evidence layer, the exact figure two cuts in a row stated wrongly in prose, and'
+      + ' the reason it is asserted rather than described')
       .toBe(CENSUS.titles);
-    // …and the three figures are consistent with each other, so a constant cannot be nudged
-    // to silence this arm without the arithmetic saying so.
+    // …AND THE SUITE LAYER IS COUNTED TOO, WHICH IS WHAT MAKES THE SPLIT UNABSORBABLE. A cut
+    // that merged the two arrays again would leave `titles` at 23,678 and `suiteTitles` at 0,
+    // and BOTH of these reds. Counting only the evidence layer would let the merge look like an
+    // ordinary re-measure.
+    expect(suiteTitles, 'the live SUITE-title count moved from the tenth cut\'s measured 5,244 —'
+      + ' if it went to zero the layer split was deleted and suite titles are evidence again')
+      .toBe(CENSUS.suiteTitles);
+    expect(suiteTitles, 'no estate suite title is parsed at all — the suite layer is not being'
+      + ' read, so the split is not a split').toBeGreaterThan(0);
+    // …and the three FILE figures are consistent with each other, so a constant cannot be
+    // nudged to silence this arm without the arithmetic saying so.
     expect(CENSUS.parked + CENSUS.credited, 'the census constants do not add up')
       .toBe(CENSUS.files);
+    // ── THE LIVE ESTATE INSTANCE OF T1, DISPOSITIONED ─────────────────────────────────
+    // tests/build/prerenderRoutes.test.js opens a suite whose four tests are all
+    // `it.skipIf(!requireDistRead)`. Under the ninth cut that suite TITLE was credited as
+    // evidence with `reasons=[]` while `vitest list` collected no runnable test beneath it —
+    // the only such divergence in the whole estate. It is recorded here rather than left to be
+    // rediscovered, and the disposition is: NOTHING CHANGES IN THE TREE READING. The title was
+    // never a marker, the file is not a declared evidence address, and the title is still
+    // parsed — it has simply moved to the layer nothing joins against. Both facts asserted.
+    const prerender = TEST_FILES.find(({ rel }) => rel === 'tests/build/prerenderRoutes.test.js');
+    expect(prerender, 'the estate instance of T1 was renamed — re-locate it or drop this record')
+      .toBeDefined();
+    expect(liveSuiteTitlesIn(prerender.src),
+      'the T1 estate instance stopped parsing its suite titles')
+      .toContain('prerender — dist walk (the emitted files carry their own truth)');
+    expect(liveTitlesIn(prerender.src).some((title) => title.includes('dist walk (the emitted')),
+      'the all-skipIf suite title is back in the EVIDENCE layer — T1 has reopened').toBe(false);
+    expectAbsentWithAnchor(EVIDENCE_FILE_ADDRESSES, 'tests/build/prerenderRoutes.test.js',
+      'tests/domain/sovereigntyMarketStageWr10w.test.js',
+      'the T1 estate instance is not a declared evidence address');
     // THE COLLAPSE DIRECTION, KEPT AS AN ARGUMENT RATHER THAN AS A SECOND GUARD. The exact
     // equalities above subsume the old floor of 1,900 and ceiling of 420 completely — a
     // collapse to two credited files, or a park set widening by a fifth, reds on the equality
@@ -2460,33 +2781,115 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     }
   });
 
-  test('DOOR 4: this walker is excluded, and does not depend on that exclusion', () => {
+  test('DOOR 0 — THE CAP: only a DECLARED evidence address can carry a marker', () => {
+    // THE TENTH CUT'S SECOND HALF, PINNED AS ITS OWN DOOR. Eleven adversarial rounds narrowed
+    // WHICH SHAPES inside an arbitrary file may carry a marker, and eleven times the address
+    // surface outran the parse rule. The cap retires the surface instead of narrowing it, and
+    // this arm is what makes it a door rather than a sentence in the header.
+    //
+    // THE LIST IS SMALL, LITERAL AND AUDITABLE — three paths, one per evidence home, with no
+    // prefix or glob that could quietly admit a file nobody meant.
+    expect(EVIDENCE_FILE_ADDRESSES).toEqual([
+      'tests/domain/sovereigntyMarketStageWr10w.test.js',
+      'tests/domain/sovereigntyWaveCloseIntegration.test.js',
+      'tests/domain/espionageDistantSourceEs4.test.js',
+    ]);
+    expect(new Set(EVIDENCE_FILE_ADDRESSES).size, 'an address is declared twice')
+      .toBe(EVIDENCE_FILE_ADDRESSES.length);
+    // …and the unbuilt set is a SUBSET of the declared one, so a typo in it cannot silently
+    // excuse an address that was never declared at all.
+    for (const rel of UNBUILT_EVIDENCE_ADDRESSES) {
+      expect(EVIDENCE_FILE_ADDRESSES, `${rel} is marked unbuilt but is not a declared address`)
+        .toContain(rel);
+    }
+
+    // THE CENSUS THE WALKER OWES ITS READER — which declared addresses exist, and whether each
+    // is a file this walker can read titles out of at all. A declared address that PARKS is an
+    // evidence home that can never light its wave, which is exactly the failure a designated
+    // address is supposed to make impossible to miss.
+    const present = EVIDENCE_FILE_ADDRESSES.filter((rel) => TEST_FILES.some((f) => f.rel === rel));
+    const absent = EVIDENCE_FILE_ADDRESSES.filter((rel) => !present.includes(rel));
+    expect(absent, 'a declared evidence address is missing from the tree and is not recorded as'
+      + ' unbuilt — either the file was renamed or the list is stale; re-declare it here')
+      .toEqual(UNBUILT_EVIDENCE_ADDRESSES.filter((rel) => absent.includes(rel)));
+    expect(present.length, 'every declared evidence address has vanished — the instrument has'
+      + ' no home left to read').toBeGreaterThan(0);
+    for (const rel of present) {
+      const file = TEST_FILES.find((f) => f.rel === rel);
+      expect(parkReasonsFor(file.src), `${rel} is a declared evidence address but it PARKS —`
+        + ' no marker in it could ever light a wave. Repair the file, or move the address.')
+        .toEqual([]);
+    }
+
+    // THE DOOR ITSELF, AND ITS DISCRIMINATOR. The SAME source — a real, live, running pin — is
+    // evidence at a declared address and is not evidence one path away. Without the second
+    // line this arm could not tell the cap from a corpus that never matched.
+    for (const row of SOVEREIGNTY_LIGHTING_EVIDENCE) {
+      if (row.kind !== 'TEST_MARKER') continue;
+      const src = withVitest(`  it('${row.marker} — a real, live, running pin', () => {});\n`);
+      expect(filesTitling(row.marker, [{ rel: AT_ADDRESS, src }]),
+        `${row.wave}'s marker was refused at a DECLARED address — the cap admits nothing`)
+        .toEqual([AT_ADDRESS]);
+      expect(filesTitling(row.marker, [{ rel: OFF_ADDRESS, src }]),
+        `${row.wave}'s marker lit the wave from an UNDECLARED address — the cap leaks`)
+        .toEqual([]);
+      // …and the CONDITION refuses it too, not merely the census helper.
+      expect(measure(row, [{ rel: OFF_ADDRESS, src }]),
+        `${row.wave} can be lit from any file in tests/ — the cap is not wired into measure`)
+        .toBe(false);
+      expect(measure(row, [{ rel: AT_ADDRESS, src }]),
+        `${row.wave} cannot be lit from its own declared home — the cap parks the instrument`)
+        .toBe(true);
+    }
+    // …and the LOOSE read is deliberately NOT capped, which is what keeps the control arms
+    // honest: `filesMentioning` still swallows an undeclared address whole, so the two reads
+    // genuinely disagree on it.
+    expect(filesMentioning('SP-B2-LEG-SUPPLY-EVIDENCE', [{ rel: OFF_ADDRESS,
+      src: '// SP-B2-LEG-SUPPLY-EVIDENCE\n' }])).toEqual([OFF_ADDRESS]);
+  });
+
+  test('DOOR 4: this walker is excluded, and the CAP now subsumes that exclusion', () => {
     const self = TEST_FILES.find(({ rel }) => rel === SELF_REL);
     expect(self, 'the walker no longer finds itself — the exclusion joins on a stale path')
       .toBeDefined();
     // Belt: the exclusion is applied to every census this file performs.
     expect(filesTitling(PROBE)).toEqual([]);
     expect(filesMentioning(PROBE)).toEqual([]);
-    // Braces: the exclusion is not what holds the line TODAY. This file never spells a
-    // live marker in a title, so door 1 would refuse it even with the exclusion gone.
+    // THE HONEST RECORD OF A DOOR BEING RETIRED INTO ANOTHER, which this file has done twice
+    // before (the eighth cut's shadow set, the ninth cut's credit-back entry 1) and which it
+    // states rather than smooths. Door 4 was `rel !== SELF_REL` in `filesTitling`; under the cap
+    // the walker's own address is not a declared evidence address at all, and no declared
+    // address is under tests/lint/, so the clause can no longer be the thing doing the work.
+    // IT IS PINNED AS WHAT IT NOW IS — a structural fact about the address list — rather than
+    // pinned as though deleting the clause would still red, which would be a false receipt.
+    expectAbsentWithAnchor(EVIDENCE_FILE_ADDRESSES, SELF_REL,
+      'tests/domain/sovereigntyMarketStageWr10w.test.js',
+      'this walker is not a declared evidence address');
+    expect(EVIDENCE_FILE_ADDRESSES.filter((rel) => rel.startsWith('tests/lint/')),
+      'an evidence address was declared inside the enforcer tree — a walker could then vouch'
+      + ' for its own wave, which is the whole thing door 4 exists to prevent').toEqual([]);
+    // Braces: this file never spells a live marker in a TEST title, so door 1 would refuse it
+    // even with both the exclusion and the cap gone.
     for (const row of SOVEREIGNTY_LIGHTING_EVIDENCE) {
       if (row.kind !== 'TEST_MARKER') continue;
       expect(liveTitlesIn(self.src).some((title) => title.includes(row.marker)),
         `this walker titles ${row.wave}'s marker and would vouch for its own evidence`)
         .toBe(false);
-      // So door 4 gets its own forged corpus, or it would be a guard that cannot fire:
-      // the ONLY file is this walker, carrying a title that would otherwise be evidence.
-      // Delete the exclusion and this arm reds — which is what makes it a door at all.
+      // …and it does not spell one in a SUITE title either. That read is no longer evidence,
+      // but a marker standing there would be read by whoever audits `suiteTitles`, and the
+      // instrument should not be the file that muddies its own audit.
+      expect(liveSuiteTitlesIn(self.src).some((title) => title.includes(row.marker)),
+        `this walker carries ${row.wave}'s marker in a suite title`).toBe(false);
       const selfCorpus = [{
         rel: SELF_REL,
         src: withVitest(`  it('${row.marker} — a title this file must never be credited for', () => {});\n`),
       }];
       expect(filesTitling(row.marker, selfCorpus),
         `this walker would vouch for ${row.wave} if it ever titled the marker`).toEqual([]);
-      // …and the corpus is a real positive under any OTHER address, so the empty result
-      // above is the exclusion talking and not a corpus that could never match.
-      expect(filesTitling(row.marker, [{ ...selfCorpus[0], rel: 'tests/domain/other.test.js' }]))
-        .toEqual(['tests/domain/other.test.js']);
+      // …and the corpus is a real positive at a DECLARED address, so the empty result above is
+      // the address rule talking and not a corpus that could never match.
+      expect(filesTitling(row.marker, [{ ...selfCorpus[0], rel: AT_ADDRESS }]))
+        .toEqual([AT_ADDRESS]);
     }
     // …and the walker's own titles are READ rather than lost: under the four text cuts this
     // file parked itself on the escape spellings quoted in its own arms, which meant door 4
@@ -2504,7 +2907,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     for (const row of SOVEREIGNTY_LIGHTING_EVIDENCE) {
       if (row.kind !== 'TEST_MARKER') continue;
 
-      const forged = [{ rel: 'tests/domain/forgedEvidence.test.js', src: withVitest(`// ${row.marker}\n`) }];
+      const forged = [{ rel: AT_ADDRESS, src: withVitest(`// ${row.marker}\n`) }];
       expect(measure(row, forged), `${row.wave}'s evidence can be forged by a bare comment`)
         .toBe(false);
       // …and the forgery IS a forgery: the refused read swallows it whole.
@@ -2512,7 +2915,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
 
       // …and a PARKED-SUITE forgery, which is the shape four cuts of this door leaked.
       const parkedForgery = [{
-        rel: 'tests/domain/parkedEvidence.test.js',
+        rel: AT_ADDRESS,
         src: withVitest(`describe.skip('outer', () => {\n  it('${row.marker} — parked', () => {});\n});\n`),
       }];
       expect(measure(row, parkedForgery), `${row.wave}'s evidence can be forged by a parked suite`)
@@ -2556,9 +2959,9 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
         // The alias forgeries carry their OWN vitest import — that is the whole shape — so
         // `withVitest` adds only what each source does not already bind.
         const src = withVitest(plain);
-        expect(measure(row, [{ rel: 'tests/domain/semanticForgery.test.js', src }]),
+        expect(measure(row, [{ rel: AT_ADDRESS, src }]),
           `${row.wave}'s evidence can be forged by ${label}`).toBe(false);
-        expect(filesMentioning(row.marker, [{ rel: 'tests/domain/semanticForgery.test.js', src }]),
+        expect(filesMentioning(row.marker, [{ rel: AT_ADDRESS, src }]),
           `${label} never carried ${row.wave}'s marker at all`).toHaveLength(1);
       }
 
@@ -2568,7 +2971,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // marker in a file that binds no opener is a marker this reader cannot tie to vitest at
       // all — and the CONDITION refuses it, not merely the classifier.
       const bareGlobal = [{
-        rel: 'tests/domain/globalEvidence.test.js',
+        rel: AT_ADDRESS,
         src: `it('${row.marker} — forged by a global opener', () => {});\n`,
       }];
       expect(measure(row, bareGlobal),
@@ -2576,7 +2979,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       expect(filesMentioning(row.marker, bareGlobal)).toHaveLength(1);
 
       const real = [{
-        rel: 'tests/domain/realEvidence.test.js',
+        rel: AT_ADDRESS,
         src: withVitest(`  it('${row.marker} — the pin the row is an address for', () => {});\n`),
       }];
       expect(measure(row, real), `${row.wave}'s row cannot be satisfied by a real live pin —`
