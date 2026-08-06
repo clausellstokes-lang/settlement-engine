@@ -272,7 +272,8 @@ Plus three PURE modules with no state and no writer: `bandedStock.js` (SP-A —
 the SP-5b shared idiom: half-life shape, crossing-receipt grammar, the
 anti-ratchet assertion), `bandFamilies.js` (SP-A — SP-6a significance
 {routine, notable, major} + SP-6b severity ladder, minted ONCE), and
-`strategicPosture.js` (SP-C — `postureOf`/`riskToleranceOf` reads).
+`strategicPosture.js` (SP-C — `courtPostureOf`/`courtRiskAppetiteOf` reads,
+per chair ruling CR-C4-1; see the SP-C block).
 
 **What is deliberately NOT modeled:** no second errand ledger; no appetite
 ledger; no believed-world module; no nested second-order belief map (the
@@ -535,14 +536,31 @@ precondition CR-WR10-H discharged in its SEAM member.
   event diet), decayed toward neutral on `bandedStock.js`'s shared shape (the
   first in-tree instantiation of SP-5b, deliberately). THE REVERSAL PIN is
   mandatory (no courage ratchets — the constitution's own law).
-- **New leaf `strategicPosture.js` (budget ≤ 300):** `postureOf(settlementId)`
+- **New leaf `strategicPosture.js` (budget ≤ 300):** `courtPostureOf(actorRef)`
   composing state × disposition channels × appetite × (the ruler's books —
-  ABSENT term until INT-1); `riskToleranceOf(actorRef)` for the closed actor
-  set (settlement today; house/temple bind when their records exist — a
+  ABSENT term until INT-1); `courtRiskAppetiteOf(actorRef)` for the closed
+  actor set (settlement today; house/temple bind when their records exist — a
   tripwire pin reds an unknown actor class rather than guessing).
   Threshold-shaped reads ONLY (E3's law): the import list is pinned (the P4
   no-hidden-governor pattern — no relationship graph, no target lists), the
   module CANNOT name a victim.
+  **THE SPELLINGS ARE CHAIR RULING CR-C4-1 (vetoable), ALIGNED HERE AT SP-C's
+  BUILD.** This bullet previously read `postureOf` / `riskToleranceOf`, which is
+  J-SP-5's ruling below. GRAMMAR's §7 Q2 measured the live collision — R3's
+  `riskToleranceOf(npc)` at `roads/state.js:319`, an NPC-grain roads-courage
+  read — and ruled the court reads `courtPostureOf` / `courtRiskAppetiteOf`.
+  The chair ruled for the GRAMMAR spelling: this estate has been bitten by the
+  silent-collision class, and two exports of one name in one domain tree make a
+  grep-led sweep conflate two contracts. J-SP-5 is superseded in the arm that
+  chose the colliding name; everything else about it stands, and the collision
+  is documented at the new module's header with a walker keeping
+  `riskToleranceOf` resolving to exactly ONE definition under `src/domain`.
+  **AND A SIGNATURE CORRECTION recorded at build rather than left silent:** the
+  reads take the court's ledger row as DATA (`courtPostureOf(actorRef, entry,
+  options)`), because the module is store-blind by contract and imports one
+  pure leaf — `dispositionProfile.thresholdFactorOf(dispositionEntry, channel)`
+  is the same shape one file over. The actor arrives as a TYPED reference
+  rather than a bare id so the closed-set tripwire covers both reads.
 - **THE DEGRADED ARMS, both declared:** books term ABSENT (not zero) until
   `seatBooksEnabled` exists (V13); channels term ABSENT while
   `dispositionChannelsEnabled` is dark. The posture receipt NAMES which
@@ -575,7 +593,26 @@ precondition CR-WR10-H discharged in its SEAM member.
 - **Collision map:** `dispositionLedger.js` is dark-war-lane substrate
   (WR-2's file) — the WR lanes are build-complete on it, but re-read before
   editing; the R3 name collision (roads `riskToleranceOf`) is documented AT
-  the new module's header and in the memory estate; imports disambiguate.
+  the new module's header, and under CR-C4-1 it is also AVOIDED rather than
+  merely disambiguated — `tests/lint/postureNameCollision.walker.test.js`
+  asserts `riskToleranceOf` resolves to exactly ONE definition under
+  `src/domain` (the roads NPC read) from here on.
+
+**Bands:** appetite learn rates + the shared half-life instance row · posture
+composition weights · threshold caps (a posture COLOURS, never drowns).
+
+**BORROW CENSUS AT BUILD (J-WR-10-B; recorded 2026-08-06):** the wave mints NO
+band edges, and that is why the three rows above are the whole signature
+surface. The appetite's half-life is CHOSEN from `bandedStock.js`'s shared
+ladder (`a_few_years` — a court's nerve answers to the last few campaigns,
+where the CHANNELS ride `a_generation`), which is SP-5b's first in-tree
+instantiation exactly as this block asks for. The appetite's band WORDS are
+`dispositionBandOf`'s `CHANNEL_BANDS`, borrowed whole and DERIVED rather than
+transcribed: the appetite is a fifth stock on that file's own 0..1 scale around
+that file's own neutral, so a second five-word ladder over the same quantity
+would be the fourteen-drift class in miniature. The posture's own band is the
+same ladder read at the composite. What the owner signs here is therefore three
+learn rates, four composition weights and one cap — no edges.
 
 ### SP-D — THE ERRAND SPINE GENERALIZATION (flag `errandSpineEnabled`)
 **Scope:** SP-1 — the war errand becomes the estate's one purposeful-travel
@@ -690,11 +727,20 @@ built here. Deliberately deferred — documented, not a bug to re-find.
   dispositionStats under its one writer (J-WR-11's idiom). VETO mints
   `spatialLedgers.settlementAppetite` and accepts a new key + a second
   outcome-learning writer.
-- **J-SP-5 (the posture export names stand):** `postureOf`/`riskToleranceOf`
-  keep the constitution's spellings despite the measured roads collision
-  (R3); module scoping disambiguates; the collision is documented at both
-  sites. VETO renames SP's read (`riskAppetiteOf`) — which requires a
-  constitution erratum, since five volumes bind the current name.
+- **J-SP-5 (the posture export names) — SUPERSEDED IN PART BY CHAIR RULING
+  CR-C4-1, 2026-08-06, and the record is kept rather than rewritten.** This
+  block ruled that `postureOf`/`riskToleranceOf` keep the constitution's
+  spellings despite the measured roads collision (R3), disambiguated by module
+  scope. The chair took the veto this block itself named: GRAMMAR's §7 Q2
+  measured the same collision and ruled the court reads `courtPostureOf` /
+  `courtRiskAppetiteOf`, and the chair ruled for that spelling because a
+  disambiguation that lives in the reader's head is not enforcement — this
+  estate has been bitten by the silent-collision class, and the erratum
+  cascade J-SP-5 priced is a one-time cost against a permanent hazard. What
+  SURVIVES from this block: the collision is documented at both sites. What is
+  ADDED: the walker that keeps `riskToleranceOf` single-definition under
+  `src/domain`. The constitution owes the erratum for the five volumes that
+  bind the old spelling.
 - **J-SP-6 (second-order belief has no flag):** a pure read with no writer
   and no land-time consumer ships dark by construction; INFO's consumers gate
   it. VETO adds `secondOrderBeliefEnabled` and its four-fence cost now.
@@ -763,7 +809,7 @@ season-window width · the frequency-cadence class boundaries.
    the frozen consumer map with the both-ways walker (SP-D). Tripwire: an
    unregistered minting consumer reds; a consumerless registry row reds.
 9. THE APPETITE ACTOR-CLASS CLOSURE (toward TRADE's houses, FAITH's temples):
-   `riskToleranceOf` reds on an unknown actor class rather than guessing;
+   `courtRiskAppetiteOf` (CR-C4-1) reds on an unknown actor class rather than guessing;
    widening the class set is an explicit SP-4a amendment at the constitution,
    never a volume-local mint. Tripwire: the closed-set pin.
 10. THE WR-10 LIGHTING RECEIPT (toward the war program; AMENDED 2026-08-05 at
@@ -820,7 +866,10 @@ re-grep renamed symbols after; (b) python3 byte-scan every authored file (the
 NUL class has bitten six times); (c) new tests in generation trees use
 tests/helpers/{anchoredNegatives,seedFailures}.js; (d) the R1/R3 name
 hazards (injected `alignmentOf`, roads `riskToleranceOf`) are quoted in the
-relevant modules' headers so a grep-led successor cannot conflate them.
+relevant modules' headers so a grep-led successor cannot conflate them — and
+since CR-C4-1 the R3 half is enforced as well as quoted: SP mints no second
+`riskToleranceOf`, and `tests/lint/postureNameCollision.walker.test.js` holds
+that name to exactly ONE definition under `src/domain`.
 
 ## §11 OPEN CHAIR QUESTIONS (max 4, each with recommendation)
 
@@ -829,11 +878,15 @@ relevant modules' headers so a grep-led successor cannot conflate them.
   `spatialLedgers.errands`? RECOMMENDATION: keep; record the constitution
   erratum; migration is persistence churn on a live save shape with zero
   behavioral payoff and a full lifecycle re-proof bill.
-- **Q2 — The riskToleranceOf collision (R3/J-SP-5):** keep the constitution's
-  export name beside roads' existing `riskToleranceOf(npc)`, or amend the
-  constitution to `riskAppetiteOf`? RECOMMENDATION: keep the name,
-  module-scoped, documented at both sites — five volumes already bind the
-  spelling and an erratum cascade costs more than the disambiguation.
+- **Q2 — The riskToleranceOf collision (R3/J-SP-5) — RULED AND CLOSED,
+  CR-C4-1, 2026-08-06, AGAINST THIS RECOMMENDATION.** The question was whether
+  to keep the constitution's export name beside roads' existing
+  `riskToleranceOf(npc)` or amend it; this block recommended keeping the name,
+  module-scoped, because five volumes bind the spelling. The chair ruled for
+  GRAMMAR §7 Q2's spellings — `courtPostureOf` / `courtRiskAppetiteOf` — and
+  SP-C landed them. The erratum for the five volumes is owed at the
+  constitution; the enforcement is
+  `tests/lint/postureNameCollision.walker.test.js`.
 - **Q3 — The appetite home (J-SP-4):** dispositionStats facet (recommended:
   zero new keys, one writer, the learn/decay machinery already there) versus
   a new `spatialLedgers.settlementAppetite` family (cleaner separation of

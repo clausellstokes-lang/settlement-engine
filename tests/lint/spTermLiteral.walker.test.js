@@ -48,6 +48,7 @@ const SP_MODULES = Object.freeze([
   'src/domain/worldPulse/bandFamilies.js',
   'src/domain/worldPulse/beliefAxisSubjects.js',
   'src/domain/worldPulse/outboundImpression.js',
+  'src/domain/worldPulse/strategicPosture.js',
 ]);
 
 const read = (rel) => readFileSync(join(ROOT, rel), 'utf8');

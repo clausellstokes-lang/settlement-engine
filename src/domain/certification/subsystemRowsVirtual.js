@@ -267,6 +267,64 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     ]),
     soakEvidence: 'unobserved',
   }),
+  // ── THE STRATEGIC POSTURE (FP SP-C, docs/DESIGN_FP_ARCH_SP.md §SP-C) ───────
+  //
+  // A SIXTH ZERO-KEY CASE, and its emptiness is a SHAPE fact and a MOUNT fact at once —
+  // the only row in the lane that is both. Shape: the whole persisted surface is ONE
+  // optional facet (`appetite`) inside `worldState.dispositionStats`, a container the
+  // WR-2 disposition layer fills in every world where its own flag is lit, so declaring
+  // that key would grade this row alive off a different subsystem's presence. Mount: the
+  // facet's writer is reached only when a caller passes `appetiteEnabled` into
+  // `advanceDispositionChannels`, and no call site does yet — SP-C lands the learn/decay
+  // machinery, the read, and the gate that will govern them, exactly as ES-0 landed its
+  // gate before its missions. Declaring a channel today would grade an unmounted
+  // subsystem SILENT, which reads as broken rather than as unbuilt.
+  Object.freeze({
+    rule: 'strategicPostureEnabled',
+    title: 'Strategic posture (a court\'s learned appetite for risk)',
+    module: 'src/domain/worldPulse/strategicPosture.js,src/domain/worldPulse/dispositionLedger.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY per the evidence law: the lane mints no candidate. The writer
+      // is a facet inside an existing fold and the read is a pure threshold colour, so
+      // there is no `candidateType` literal anywhere in it.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY: the lane authors no Herald beat. Its crossing receipt is
+      // SP-5b's band-word grammar returned to a caller, not a news kind, and the
+      // consumers that will narrate a court's nerve do so in their own volumes.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, for the belief-axis rows' reason exactly one container over:
+      // the output is one OPTIONAL FIELD inside worldState.dispositionStats, which the
+      // WR-2 layer materialises in worlds where this flag has never been true.
+      stateKeys: Object.freeze([]),
+      other: 'A CONDITIONAL FACET INSIDE ANOTHER SUBSYSTEM\'S CONTAINER, WITH NO CALLER YET, which is why every channel is empty twice over. THE GATE IS A TWO-DOOR CONJUNCTION AND EACH DOOR IS PINNED SEPARATELY: door 1 is the WR-2 channel writer\'s own `enabled` arm, because the appetite decays and the legacy arm has no tick to decay against; door 2 is `appetiteEnabled`, fed by strategicPosture.strategicPostureActive, the ONE by-name strict read of strategicPostureEnabled in the tree. Lighting this flag over dark channels writes nothing at all rather than half-running. WHAT IT DOES: a court learns, from RESOLVED OUTCOMES ONLY, how much risk it has come to stomach: a war won or lost, a covenant kept or broken, a venture that paid or did not, and forgets it again on a few years\' half-life. THE LESSON MAP IS A PARTITION of the ledger\'s own thirteen source kinds, and one kind teaches NOTHING on purpose: `resolved_outcome` is the fallback for a string outside the vocabulary, so letting it teach would let an unrecognised token move a court\'s nerve. NOTHING IS MINTED: the decay is bandedStock.decayTowardNeutral on SP-A\'s shared half-life ladder (this is SP-5b\'s FIRST in-tree instantiation) and the band words are dispositionBandOf\'s, borrowed whole, so this wave asks the owner to sign learn rates and composition weights and not one band edge. WHAT IT NEVER DOES: it names no target. The read module\'s entire import list is the disposition ledger, so there is no relationship graph, no neighbour list and no candidate set within its reach. A posture COLOURS a decision another module was already going to make, bounded to a fifth of that decision\'s bar. THE OBSERVATION NEEDED to close the gap is a per-field census of dispositionStats rows carrying an appetite facet, which no receipt schema carries because censusWorldStateKeys counts entries and never fields. Until then the layer is pinned where its bodies are readable: tests/domain/dispositionAppetite.test.js, tests/domain/strategicPosture.test.js and tests/property/strategicPostureDormancyFence.test.js.',
+    }),
+    // The facet moves wherever the disposition fold runs, which is every pulse the WR-2
+    // layer is lit for. Declared honestly even though no receipt can measure it.
+    expectedTempo: 'per_tick',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dormancy_is_absence_of_the_facet',
+        description: 'With the flag dark no dispositionStats row ever grows an `appetite` key, so a LIT disposition ledger (the adversarial case, since the container itself is busy) serializes byte-identically to the pre-SP-C engine across a multi-tick run. Absent and explicitly false are indistinguishable in every observable.',
+        check: 'NOT expressible from any receipt schema: the census counts dispositionStats ENTRIES, never their fields. Pinned in tests/property/strategicPostureDormancyFence.test.js, which hashes the whole ledger across ten ticks of real outcome traffic and carries the lit-mutant control that proves the same fixture DOES write the facet when the flag is on.',
+      }),
+      Object.freeze({
+        name: 'the_appetite_is_not_a_ratchet',
+        description: 'Courage can be lost. The only non-outcome movement is decay TOWARD neutral, and a loss moves the stock down by the same arithmetic a win moves it up, so a stock that rose above neutral can cross back below it. A one-way courage stock would make every court in a long campaign fearless or reckless forever.',
+        check: 'NOT expressible from a receipt: no receipt carries the facet. Pinned as THE REVERSAL PIN in tests/domain/dispositionAppetite.test.js, which drives a run of wins and then a run of losses through the real writer and asserts the stock crosses neutral in both directions.',
+      }),
+      Object.freeze({
+        name: 'a_dark_flag_never_erases_a_learned_appetite',
+        description: 'The legacy writer REBUILDS an entry rather than spreading it, so any key it does not name is erased. A campaign lit, then deliberately darkened while ordinary outcomes continue, would lose its appetite and face a forbidden re-derivation on the next flip. The facet is preserved verbatim and frozen while dark, exactly as the WR-2 channels are, and independently of them because the two are gated separately.',
+        check: 'NOT expressible from a receipt. Pinned in tests/domain/dispositionAppetite.test.js by driving the legacy arm over an entry that carries a facet and asserting the facet is byte-identical afterwards.',
+      }),
+      Object.freeze({
+        name: 'the_posture_can_never_name_a_victim',
+        description: 'The read is threshold-shaped (E3) and its reach is a reviewed exact set of one leaf. A relationship graph, a neighbour list or a candidate set inside this module would turn a colour into a governor, which is the P4 defect the import pin exists to prevent.',
+        check: 'NOT expressible from a receipt: reach is a source fact. Pinned in tests/domain/strategicPosture.test.js as an exact import-list equality, with an executed violation mutant that adds one import and reds it.',
+      }),
+    ]),
+    soakEvidence: 'unobserved',
+  }),
   // ── THE CONQUEST DOCTRINE (WR-8 amendment R2, the vengeance license) ───────
   Object.freeze({
     rule: 'conquestDoctrineEnabled',

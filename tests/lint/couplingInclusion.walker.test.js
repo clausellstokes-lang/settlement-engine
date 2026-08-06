@@ -119,6 +119,16 @@ const LAYER_PATTERNS = Object.freeze({
   ],
   INTERIOR: [
     /^src\/domain\/worldPulse\/(?:faction|legitimacy|relationship|institution|commons|disposition|generosity|grievance|rulingPower|npcLadder|seatBooks)/,
+    // SP-C: the strategic posture read. It is an SP leaf, and it is NOT unlayered — the
+    // distinction the two exclusions below draw is SUBJECT, not program. bandedStock and
+    // bandFamilies are shared VOCABULARY every port spells against; this leaf composes a
+    // court's remembered standing, its disposition channels, its learned appetite and
+    // (behind INT-1) its ruler's books, and every one of those is INTERIOR's own state.
+    // The SP-B precedent is the same reading in the other direction: beliefAxisSubjects
+    // took INFO because belief is INFO's subject. Giving this a port is also what makes a
+    // future WAR or TRADE consumer of `courtPostureOf` register its coupling, which is
+    // exactly the designed-coupling discipline this ratchet exists to enforce.
+    /^src\/domain\/worldPulse\/strategicPosture\.js$/,
   ],
 });
 

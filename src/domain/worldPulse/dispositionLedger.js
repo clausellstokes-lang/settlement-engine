@@ -13,7 +13,42 @@
  * Read/write timing (pinned across the substrate): callers READ last-tick ledger at
  * candidate-build and WRITE next-tick post-apply, so a contest that resolves on tick
  * N only colours behaviour from tick N+1 — never a half-updated mid-tick read.
+ *
+ * ── SP-C: THE APPETITE FACET (docs/DESIGN_FP_ARCH_SP.md §4, §SP-C) ────────────
+ *
+ * A THIRD instantiation of the same shape rather than a third ledger (seam ruling 4 /
+ * J-SP-4): `appetite` is a CONDITIONAL FACET on the dispositionStats rows this file
+ * already owns, written by this one writer, learned from the SAME resolved-outcome
+ * deltas the channels learn from. A parallel appetite ledger would be J-WR-11's
+ * double-count risk reborn.
+ *
+ * IT MINTS NOTHING. The decay is `bandedStock.decayTowardNeutral` on the shared
+ * half-life ladder — this is SP-5b's FIRST in-tree instantiation and the whole point of
+ * that leaf is that the sixteenth hand-rolled `Math.pow(0.5, age/h)` never gets written.
+ * The band WORDS are `dispositionBandOf`'s, borrowed rather than minted: the appetite is
+ * a fifth stock on this file's own 0..1 scale around this file's own neutral, so a
+ * second five-word ladder over the same quantity would be the fourteen-drift class in
+ * miniature (J-WR-10-B, borrow before minting).
+ *
+ * TWO DOORS, PINNED SEPARATELY (the defense-in-depth corollary — a second guard
+ * silently covering a deleted first is a defect this estate has been bitten by twice):
+ *   1. `options.enabled === true` — the WR-2 channel host. The appetite lives inside
+ *      the lit arm because decay needs a tick, and the legacy arm has none. A world
+ *      with `strategicPostureEnabled` lit and `dispositionChannelsEnabled` dark is an
+ *      invalid config and it is invalid SAFELY: door 1 refuses and nothing is written.
+ *   2. `options.appetiteEnabled === true` — SP-C's own gate, fed by the ONE by-name
+ *      read of `strategicPostureEnabled` (strategicPosture.strategicPostureActive),
+ *      exactly as `enabled` is fed by the by-name read of `dispositionChannelsEnabled`
+ *      at the pulse call site.
+ * Dark on either door, no row ever grows the key, so an installed save and a dark
+ * config serialize byte-identically to the pre-SP-C engine.
+ *
+ * NO COURAGE RATCHET, and it is structural rather than promised: the only non-outcome
+ * movement is decay TOWARD neutral (bandedStock's asserted anti-ratchet property), and
+ * a loss moves the stock down exactly as a win moves it up, so a stock can cross neutral
+ * in both directions. THE REVERSAL PIN is what proves it.
  */
+import { decayTowardNeutral, bandCrossingReceipt } from './bandedStock.js';
 
 // Multiplier shape: ±MULTIPLIER_SPAN at full saturation, reached as |score| → SCORE_SAT.
 const MULTIPLIER_SPAN = 0.5;
@@ -72,6 +107,58 @@ const CHANNEL_BANDS = Object.freeze([
   Object.freeze({ maxExclusive: Infinity, name: 'dominant' }),
 ]);
 
+/** SP-C. What the crossing receipt calls this stock. A token, never a sentence. */
+export const APPETITE_STOCK_KIND = 'court_risk_appetite';
+
+/**
+ * SP-C. The appetite's band ladder, ASCENDING — DERIVED from CHANNEL_BANDS rather than
+ * transcribed, so the borrow can never drift into a private copy.
+ * @type {readonly string[]}
+ */
+export const APPETITE_BAND_LADDER = Object.freeze(CHANNEL_BANDS.map((band) => band.name));
+
+/**
+ * SP-C. The half-life the appetite forgets on, CHOSEN from bandedStock's shared ladder.
+ * A court's nerve is not its culture: `a_generation` is what a people remembers and is
+ * what the CHANNELS ride; courage answers to the last few campaigns.
+ */
+export const APPETITE_HALF_LIFE_BAND = 'a_few_years';
+
+/**
+ * SP-C. WHICH RESOLVED OUTCOMES TEACH COURAGE, as a PARTITION of the closed source-kind
+ * vocabulary above — three lesson families plus the one kind that teaches nothing. The
+ * partition is asserted both ways in tests/domain/dispositionAppetite.test.js, so a
+ * fourteenth source kind cannot land unclassified and quietly teach nothing.
+ *
+ * `resolved_outcome` DELIBERATELY teaches no appetite, and it is the only silent kind:
+ * it is `sourceKindOf`'s fallback for a string outside the vocabulary, so letting it
+ * teach would let an unrecognised token move a court's nerve — precisely the open-schema
+ * leak DISPOSITION_SOURCE_KINDS exists to prevent.
+ */
+const APPETITE_LESSON_FAMILIES = Object.freeze({
+  war: Object.freeze(['occupation_outcome', 'war_resolution']),
+  covenant: Object.freeze(['mediation_landed', 'treaty_default', 'treaty_held', 'treaty_repudiated']),
+  venture: Object.freeze([
+    'coalition_reimbursement_paid',
+    'coalition_reimbursement_unpaid',
+    'coalition_settlement_honored',
+    'coalition_settlement_profit',
+    'coalition_settlement_shortfall',
+    'trade_contest',
+  ]),
+});
+/** The kinds a resolved outcome may carry without moving the appetite at all. */
+const APPETITE_SILENT_SOURCE_KINDS = Object.freeze(['resolved_outcome']);
+/** Per-family learn rates. War teaches hardest; a covenant kept teaches least. */
+const APPETITE_LEARN_RATES = Object.freeze({ war: 0.11, covenant: 0.06, venture: 0.08 });
+/** sourceKind -> lesson family, derived from the partition above. */
+const APPETITE_LESSON_OF = /** @type {Readonly<Record<string, string>>} */ (Object.freeze(
+  Object.fromEntries(
+    Object.entries(APPETITE_LESSON_FAMILIES)
+      .flatMap(([family, kinds]) => kinds.map((kind) => [kind, family])),
+  ),
+));
+
 /** @param {number} value @param {number} lo @param {number} hi */
 const clamp = (value, lo, hi) => (value < lo ? lo : value > hi ? hi : value);
 /** @param {number} value */
@@ -123,6 +210,95 @@ export function readDispositionChannel(entry, channel) {
   if (!DISPOSITION_CHANNELS.includes(channel)) return channelState(NEUTRAL_STOCK01);
   const raw = entry?.channels?.[channel];
   return channelState(finite(raw?.stock01, channel === 'martial' ? legacyStock01(entry) : NEUTRAL_STOCK01));
+}
+
+/**
+ * @typedef {{stock01?: unknown, band?: unknown, updatedTick?: unknown}} AppetiteFacet
+ */
+
+/**
+ * SP-C. The facet on an entry, or null. `unknown` in and a REAL type out, so a caller
+ * holding a loosely-typed ledger row needs no cast and this file grows no any-hole.
+ * @param {unknown} entry @returns {AppetiteFacet | null}
+ */
+function appetiteFacetOf(entry) {
+  if (!entry || typeof entry !== 'object' || Array.isArray(entry)) return null;
+  const raw = /** @type {Record<string, unknown>} */ (entry).appetite;
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+  return /** @type {AppetiteFacet} */ (raw);
+}
+
+/**
+ * SP-C. Tolerant read of the appetite facet. ABSENT IS ABSENT, and the caller is told
+ * so: `present` is what lets the posture composition drop the term entirely rather than
+ * voting neutral on a court that never learned anything. `stock01` still reads neutral
+ * when absent so a careless caller cannot get a number that means "afraid".
+ * @param {unknown} entry
+ * @returns {{present:boolean, stock01:number, band:string}}
+ */
+export function readDispositionAppetite(entry) {
+  const raw = appetiteFacetOf(entry);
+  const state = channelState(raw ? finite(raw.stock01, NEUTRAL_STOCK01) : NEUTRAL_STOCK01);
+  return { present: raw !== null, stock01: state.stock01, band: state.band };
+}
+
+/**
+ * SP-C. The persisted facet shape (§4): stock, its band WORD, and the tick the appetite
+ * itself was last written — its OWN anchor, not the entry's, so a stock that sat through
+ * a dark interval forgets that interval when the flag lights again. Forgetting is not
+ * back-derivation: no outcome is replayed, the memory simply cooled while nobody looked.
+ * @param {number} stock01 @param {number} tick
+ */
+function appetiteFacetAt(stock01, tick) {
+  const state = channelState(stock01);
+  return { stock01: state.stock01, band: state.band, updatedTick: Math.max(0, Math.floor(finite(tick, 0))) };
+}
+
+/**
+ * SP-C. The decay half of the facet's tick, as a SPREADABLE fragment: `{}` means "write
+ * nothing", which is how a dark flag and an unlearned court both cost zero bytes. Decay
+ * NEVER materialises the facet — a court with no lesson has no appetite, and inventing
+ * a neutral one would be an opinion it never formed.
+ * @param {unknown} entry @param {boolean} lit @param {number} now @param {number} entryTick
+ * @returns {{appetite?: {stock01:number, band:string, updatedTick:number}}}
+ */
+function appetiteAfterDecay(entry, lit, now, entryTick) {
+  if (!lit) return {};
+  const raw = appetiteFacetOf(entry);
+  if (!raw) return {};
+  const anchor = Number.isFinite(raw.updatedTick)
+    ? Math.max(0, Math.floor(Number(raw.updatedTick)))
+    : entryTick;
+  const age = Math.max(0, now - anchor);
+  const decayed = decayTowardNeutral(
+    finite(raw.stock01, NEUTRAL_STOCK01),
+    NEUTRAL_STOCK01,
+    age,
+    APPETITE_HALF_LIFE_BAND,
+  );
+  return { appetite: appetiteFacetAt(decayed, now) };
+}
+
+/**
+ * SP-C. The crossing receipt for the appetite, through SP-5b's ONE grammar. Returns
+ * `null` when nothing crossed, so a caller emits on `if (crossing)` rather than on a
+ * comparison it can spell backwards. Words and a tick only — a float cannot enter the
+ * grammar, so a float cannot reach prose through it (L5, enforced structurally).
+ * @param {unknown} beforeEntry @param {unknown} afterEntry @param {string} cause @param {number} tick
+ * @returns {Readonly<{stockKind:string, from:string, to:string, direction:string, cause:string, tick:number}> | null}
+ */
+export function appetiteCrossingOf(beforeEntry, afterEntry, cause, tick) {
+  const before = readDispositionAppetite(beforeEntry);
+  const after = readDispositionAppetite(afterEntry);
+  if (!after.present || before.band === after.band) return null;
+  return bandCrossingReceipt({
+    stockKind: APPETITE_STOCK_KIND,
+    ladder: APPETITE_BAND_LADDER,
+    from: before.band,
+    to: after.band,
+    cause,
+    tick,
+  });
 }
 
 /**
@@ -203,6 +379,15 @@ export function ratchetDisposition(ledger, id, delta) {
       ...(Number.isFinite(prev.updatedTick) ? { updatedTick: prev.updatedTick } : {}),
     }
     : {};
+  // SP-C, the SAME argument one facet along: this writer REBUILDS the entry rather than
+  // spreading it, so any key it does not name is erased. A campaign lit, then deliberately
+  // darkened while ordinary legacy outcomes continue would lose its learned appetite and
+  // face the forbidden re-derivation on the next flip. Preserved VERBATIM and frozen while
+  // dark, exactly as the channels above are. Independent of `extended` on purpose: the two
+  // facets are gated separately, so their preservation must be too.
+  const preservedAppetite = prev?.appetite && typeof prev.appetite === 'object' && !Array.isArray(prev.appetite)
+    ? { appetite: prev.appetite }
+    : {};
   return {
     ...(ledger || {}),
     [key]: {
@@ -210,6 +395,7 @@ export function ratchetDisposition(ledger, id, delta) {
       losses: (Number(prev.losses) || 0) + (delta.outcome === 'loss' ? 1 : 0),
       score: nextScore,
       ...extended,
+      ...preservedAppetite,
     },
   };
 }
@@ -391,7 +577,7 @@ export function coalesceDispositionTransitions(transitions = []) {
  * @param {Record<string, any>} ledger
  * @param {Array<{id:string, channel?:string, outcome:'win'|'loss', magnitude?:number,
  *   sourceKind?:string,sourceEventId?:string,sourceEventIds?:string[],sourceConquestId?:string}>} [deltas]
- * @param {{enabled?:boolean, tick?:number}} [options]
+ * @param {{enabled?:boolean, tick?:number, appetiteEnabled?:boolean}} [options]
  * @returns {{ledger:Record<string, any>, transitions:Array<{kind:'band_crossing'|'reversal', id:string, channel:string, fromBand:string, toBand:string, fromStock01:number, toStock01:number, direction:'up'|'down', source:'decay'|'outcome'|'mixed', sourceKinds:string[],sourceEventIds:string[],outcomeKinds:string[],tick:number}>}}
  */
 export function advanceDispositionChannels(ledger, deltas = [], options = {}) {
@@ -400,6 +586,11 @@ export function advanceDispositionChannels(ledger, deltas = [], options = {}) {
   }
 
   const now = Math.max(0, Math.floor(finite(options.tick, 0)));
+  // SP-C DOOR 2. Strict, and read INSIDE door 1's arm — see the header. The option is
+  // fed by strategicPosture.strategicPostureActive, the ONE by-name read of
+  // `strategicPostureEnabled`, exactly as `enabled` above is fed by the by-name read of
+  // `dispositionChannelsEnabled` at the pulse call site.
+  const appetiteLit = options?.appetiteEnabled === true;
   const migrated = migrateDispositionStats(ledger, now);
   /** @type {Record<string, any>} */
   const next = {};
@@ -408,7 +599,8 @@ export function advanceDispositionChannels(ledger, deltas = [], options = {}) {
   // neutral; no clock passage can manufacture a directional appetite.
   for (const id of Object.keys(migrated).sort()) {
     const prev = migrated[id];
-    const age = Math.max(0, now - Math.floor(finite(prev.updatedTick, now)));
+    const entryTick = Math.floor(finite(prev.updatedTick, now));
+    const age = Math.max(0, now - entryTick);
     /** @type {Record<string, {stock01:number, band:string}>} */
     const channels = {};
     for (const channel of DISPOSITION_CHANNELS) {
@@ -420,6 +612,8 @@ export function advanceDispositionChannels(ledger, deltas = [], options = {}) {
       channels,
       score: round6((channels.martial.stock01 - NEUTRAL_STOCK01) * 2 * SCORE_MAX),
       updatedTick: now,
+      // Dark, this is `{}` and `...prev` carries any persisted facet through verbatim.
+      ...appetiteAfterDecay(prev, appetiteLit, now, entryTick),
     };
   }
   const decayTransitions = dispositionTransitionsBetween(migrated, next, now, 'decay');
@@ -440,6 +634,23 @@ export function advanceDispositionChannels(ledger, deltas = [], options = {}) {
       if (ac !== bc) return ac < bc ? -1 : 1;
       return signedDelta(a) - signedDelta(b);
     });
+
+  // SP-C. The appetite lesson is aggregated SEPARATELY and from the SAME total-ordered
+  // delta list, because it keys on sourceKind while the channel aggregate keys on
+  // channel: a channel row fuses several source kinds into one signed sum, and the
+  // per-kind rate could not be recovered from it afterwards. Folding over `ordered`
+  // keeps the sum permutation-stable for the same reason the channel fold is.
+  /** @type {Map<string, number>} */
+  const appetiteLearned = new Map();
+  if (appetiteLit) {
+    for (const delta of ordered) {
+      const family = APPETITE_LESSON_OF[sourceKindOf(delta)];
+      if (!family) continue;
+      const id = String(delta.id);
+      const rate = /** @type {Record<string, number>} */ (APPETITE_LEARN_RATES)[family];
+      appetiteLearned.set(id, (appetiteLearned.get(id) || 0) + rate * signedDelta(delta));
+    }
+  }
 
   /** @type {Map<string, Map<string, {signed:number,wins:number,losses:number,
    *   sourceKinds:Set<string>,sourceEventIds:Set<string>,outcomeKinds:Set<string>}>>} */
@@ -516,6 +727,15 @@ export function advanceDispositionChannels(ledger, deltas = [], options = {}) {
           - CHANNEL_LEARN_RATES.insular * INSULAR_INVERSE_RATIO * row.signed);
       }
     }
+    // SP-C. Learned appetite. A court with no teaching outcome this tick grows NO key —
+    // silence writes nothing, which is what keeps a lit ledger's bytes honest. An absent
+    // facet materialises from neutral here and only here; a loss moves the stock down by
+    // the same arithmetic a win moves it up, which is the structural half of the
+    // no-courage-ratchet claim (the decay above is the other half).
+    const learned = appetiteLearned.get(id) || 0;
+    const appetiteFacet = learned !== 0
+      ? { appetite: appetiteFacetAt(readDispositionAppetite(prev).stock01 + learned, now) }
+      : {};
     next[id] = {
       ...prev,
       wins: (Number(prev.wins) || 0) + martialWins,
@@ -523,6 +743,7 @@ export function advanceDispositionChannels(ledger, deltas = [], options = {}) {
       score: round6((channels.martial.stock01 - NEUTRAL_STOCK01) * 2 * SCORE_MAX),
       channels,
       updatedTick: now,
+      ...appetiteFacet,
     };
   }
 
@@ -557,4 +778,18 @@ export const DISPOSITION_CHANNEL_TUNING = Object.freeze({
   INSULAR_INVERSE_RATIO,
   LEARN_RATES: CHANNEL_LEARN_RATES,
   BANDS: CHANNEL_BANDS,
+});
+/**
+ * SP-C's owner-signature surface (SP §7 row: "appetite learn rates + the shared
+ * half-life instance row"). The band edges are DELIBERATELY not here: there are none to
+ * sign, because the ladder is CHANNEL_BANDS borrowed whole.
+ */
+export const APPETITE_TUNING = Object.freeze({
+  NEUTRAL_STOCK01,
+  HALF_LIFE_BAND: APPETITE_HALF_LIFE_BAND,
+  LEARN_RATES: APPETITE_LEARN_RATES,
+  LESSON_FAMILIES: APPETITE_LESSON_FAMILIES,
+  SILENT_SOURCE_KINDS: APPETITE_SILENT_SOURCE_KINDS,
+  BAND_LADDER: APPETITE_BAND_LADDER,
+  STOCK_KIND: APPETITE_STOCK_KIND,
 });

@@ -95,10 +95,17 @@ const DEVOTION = 'believedDevotionEnabled';
 // reading and it is why the row declares unobserved with every channel empty — a
 // declared channel would grade an unbuilt subsystem SILENT, which reads as broken.
 const ESPIONAGE = 'espionageEnabled';
+// Joined 2026-08-06 by FP wave SP-C, with its manifest entry and its first by-name gate
+// read in one commit. A SIXTH zero-key case, and the only one whose emptiness is a shape
+// fact AND a mount fact at once: the whole persisted surface is one optional facet inside
+// worldState.dispositionStats (a container the WR-2 layer fills wherever ITS flag is lit,
+// so declaring the key would grade this row off a different subsystem), and nothing calls
+// the writer yet — the gate lands before its callers, on the ES-0 precedent.
+const POSTURE = 'strategicPostureEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
-  AXES, ESPIONAGE, SCARCITY, CONDITIONS, DEVOTION,
+  AXES, ESPIONAGE, SCARCITY, CONDITIONS, DEVOTION, POSTURE,
   CONQUEST, STATECRAFT, RUMORS, OATH, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS,
 ]);
 
@@ -128,6 +135,12 @@ const LANE_LEAVES = Object.freeze({
     'src/domain/worldPulse/espionage/espionageDoctrine.js',
     'src/domain/worldPulse/espionage/espionageMath.js',
   ],
+  // The posture lane's own leaves: the door where the flag is read together with the
+  // composition it feeds, and the ledger that owns the facet. Both are the lane's, and
+  // the row's `module` list is the same pair — unusually narrow here and deliberately
+  // so: the ledger is shared substrate, but the facet, its learn map and its decay all
+  // live in it, so scoping the trace anywhere else would measure the WR-2 layer instead.
+  [POSTURE]: ['src/domain/worldPulse/strategicPosture.js', 'src/domain/worldPulse/dispositionLedger.js'],
   [CONQUEST]: ['src/domain/worldPulse/vengeanceLicense.js', 'src/domain/worldPulse/conquestDoctrineStage.js'],
   [STATECRAFT]: ['src/domain/worldPulse/informationStatecraft.js', 'src/domain/worldPulse/brokerageStamps.js'],
   [RUMORS]: ['src/domain/spatial/migrationRumors.js'],

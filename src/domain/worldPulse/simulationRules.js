@@ -221,6 +221,15 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // first real gate read (sovereigntyAssets.sovereigntyTradeActive) and its
   // certification row — certification tracking reality instead of preceding it.
   'sovereigntyTradeEnabled',
+  // Joined 2026-08-06 by FP wave SP-C under CR-WR10-C item 4 (the compiled charter's §3
+  // flag law), in the SAME commit as its first real gate read
+  // (strategicPosture.strategicPostureActive, the ONE by-name strict read of this key in
+  // the tree) and its AUTHORED certification row. The writer it governs — the appetite
+  // facet on dispositionStats — sits inside the WR-2 channel writer's lit arm, so the
+  // gate is a TWO-DOOR conjunction and each door is pinned separately; the by-name read
+  // is what keeps this key visible to the engine-gated-key census, which a frozen-list
+  // `.every()` would hide.
+  'strategicPostureEnabled',
   // Joined 2026-08-04 by FP wave GR-0 under CR-WR10-C item 4 (the compiled charter's §3
   // flag law), in the SAME commit as its first real gate read
   // (treatyLifecycleVoice.treatyLifecycleVoiceActive, read by name with the strict

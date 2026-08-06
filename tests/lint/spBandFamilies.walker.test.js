@@ -63,7 +63,7 @@ const FAMILY_HOME = 'src/domain/worldPulse/bandFamilies.js';
  * SP waves that owe a Bands line and have not authored one yet. SHRINK-ONLY: each later
  * SP wave lands its own line and removes its id here. A wave may not be ADDED.
  */
-const SP_WAVES_OWING_A_BANDS_LINE = Object.freeze(['SP-C', 'SP-D', 'SP-E']);
+const SP_WAVES_OWING_A_BANDS_LINE = Object.freeze(['SP-D', 'SP-E']);
 
 /**
  * SP waves that carry no bands BY DESIGN, recorded so the totality below is a partition

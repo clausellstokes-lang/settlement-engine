@@ -2689,8 +2689,31 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // arms this cut adds (DOOR 0 and the suite-title family). NOTHING WAS LOST: every title the
     // ninth cut counted is still parsed and still counted, and 5,244 of them simply stopped
     // being EVIDENCE. Both figures are asserted, so the split cannot silently drift back.
+    // ── RE-RECORDED 2026-08-06 BY FP WAVE SP-C, WITH ITS CAUSE STATED ────────────────
+    // 2,314/357/1,957/18,434/5,244 → 2,318/358/1,960/18,471/5,260. THE CAUSE IS FOUR NEW
+    // TEST FILES and nothing else: tests/domain/dispositionAppetite.test.js,
+    // tests/domain/strategicPosture.test.js,
+    // tests/property/strategicPostureDormancyFence.test.js and
+    // tests/lint/postureNameCollision.walker.test.js. No rule here widened or narrowed and
+    // no existing file changed shape — the arithmetic below still adds up, and the deltas
+    // are exactly what four files contribute.
+    //
+    // ONE OF THE FOUR PARKS, AND IT IS THE INTERESTING ONE: dispositionAppetite.test.js
+    // parks on `TEST_UNREGISTERED:it` ×3 + `SUITE_NOT_STRAIGHT_LINE:describe`, because its
+    // per-family reachability arm generates one `it` per lesson family from a `for…of` over
+    // the LIVE table rather than spelling three by hand. That is door 3's polarity working
+    // as designed rather than a defect: the reader cannot statically recognise a
+    // loop-generated title, so it credits nothing and parks the file. The file carries no
+    // marker and is nobody's declared evidence address, so parking costs the instrument
+    // nothing — and the loop is kept deliberately, because a hand-spelled three would drift
+    // from APPETITE_TUNING.LESSON_FAMILIES the day a fourth family lands.
+    //
+    // THE HEADER PROSE ABOVE STILL SAYS 2,314 IN SEVERAL PLACES AND IS LEFT ALONE ON
+    // PURPOSE: those sentences record what the ninth and tenth cuts MEASURED, and rewriting
+    // a historical measurement to match a later tree is how a record becomes fiction. The
+    // live figures are here, in the assertion, where they can fail.
     const CENSUS = Object.freeze({
-      files: 2314, parked: 357, credited: 1957, titles: 18434, suiteTitles: 5244,
+      files: 2318, parked: 358, credited: 1960, titles: 18471, suiteTitles: 5260,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
@@ -2698,12 +2721,12 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     const suiteTitles = credited.reduce((sum, { src }) => sum + liveSuiteTitlesIn(src).length, 0);
     expect(TEST_FILES.length, 'the estate\'s file count moved — re-measure, do not re-word')
       .toBe(CENSUS.files);
-    expect(parked.length, 'the parked-file count moved from the tenth cut\'s measured 357 —'
+    expect(parked.length, 'the parked-file count moved from SP-C\'s measured 358 —'
       + ' a rule widened or narrowed, or a lane changed a file\'s shape; re-MEASURE and re-record')
       .toBe(CENSUS.parked);
-    expect(credited.length, 'the credited-file count moved from the tenth cut\'s measured 1,957')
+    expect(credited.length, 'the credited-file count moved from SP-C\'s measured 1,960')
       .toBe(CENSUS.credited);
-    expect(titles, 'the live TEST-title count moved from the tenth cut\'s measured 18,434 — this'
+    expect(titles, 'the live TEST-title count moved from SP-C\'s measured 18,471 — this'
       + ' is the evidence layer, the exact figure two cuts in a row stated wrongly in prose, and'
       + ' the reason it is asserted rather than described')
       .toBe(CENSUS.titles);
@@ -2711,7 +2734,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // that merged the two arrays again would leave `titles` at 23,678 and `suiteTitles` at 0,
     // and BOTH of these reds. Counting only the evidence layer would let the merge look like an
     // ordinary re-measure.
-    expect(suiteTitles, 'the live SUITE-title count moved from the tenth cut\'s measured 5,244 —'
+    expect(suiteTitles, 'the live SUITE-title count moved from SP-C\'s measured 5,260 —'
       + ' if it went to zero the layer split was deleted and suite titles are evidence again')
       .toBe(CENSUS.suiteTitles);
     expect(suiteTitles, 'no estate suite title is parsed at all — the suite layer is not being'
