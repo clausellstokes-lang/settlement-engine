@@ -1,6 +1,6 @@
 ---
 name: habit-conditioning-directive
-description: "OWNER DESIGN INTENT (2026-08-05): actors LEARN — outcome-conditioned habit weights for every actor decision (success reinforces, failure decays), AND learned predictability becomes an espionage/counter-strategy surface (believed habits of others, anticipation as counterforce, the does-B-know-A-knows information war). ARCHITECTED 2026-08-06: ~3,710-line volume in scratchpad/habit-arch (50-site census, 14-row domain checklist, odds-ratio law INDEPENDENTLY RE-DERIVED AND STANDING); first attestation NEEDS-REVISION (9 findings, all document-consistency); revision under chair rulings J-HB-23 (fourteen-row denominator + explicit eight-label enumeration), J-HB-24 (sue join = LEARN-WHEN-KEYED behind the bilateralOffer gate), J-HB-25 (derive-dont-enumerate) running as wf_68b8195a-639; seal on COHESIVE."
+description: "OWNER DESIGN INTENT (2026-08-05): actors LEARN — outcome-conditioned habit weights per actor/circumstance/action, and learned predictability becomes an espionage counterforce. ⭐⭐ SEALED-WITH-LIMITATIONS 2026-08-06 after FOUR review rounds: 4,426-line volume + a 1,220-line COUNT LEDGER instrument (52 quantities, 131 prose homes, 42 struck-premise signature phrases, 15/15 mutants). 10 waves HB-0..HB-9, 6 joined sites of 14, a 43-row deferral book. Archived in git at docs/architected-volumes-pending-fold/."
 metadata:
   type: project
   created: 2026-08-05
