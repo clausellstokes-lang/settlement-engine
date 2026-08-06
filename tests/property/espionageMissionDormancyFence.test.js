@@ -184,24 +184,69 @@ function walk(dir, out = []) {
 const SRC_FILES = walk(join(ROOT, 'src'))
   .map((p) => ({ rel: relative(ROOT, p).replace(/\\/g, '/'), src: readFileSync(p, 'utf8') }));
 
+/**
+ * ⚠⚠ REPAIR ES-1-R4 — THE REFERENCE THIS FENCE COMPARES AGAINST, AND WHY IT HAD TO BECOME
+ * A STORED ONE. As shipped, FENCE 1 read:
+ *
+ *     const preEs1     = tenTicks({ mission: null });
+ *     const withoutCargo = tenTicks();
+ *
+ * `tenTicks` declares `{ mission = null } = {}`, so those are the SAME CALL with the SAME
+ * arguments over a deterministic pure function. The two assertions that followed compared a
+ * function against itself and could not fail for ANY mutation of the covert arm — the
+ * recorded self-referential pin class, with the header still selling it as a byte-identity
+ * golden. Executed at this repair: a covert-arm leak planted in the mint's own block
+ * constructor left the shipped pair GREEN.
+ *
+ * THE HEADER'S "not a stored hash — a CALL, so there is nothing to rot" IS WHAT CAUSED IT,
+ * and it is struck. The claim FENCE 1 makes is that ES-1's six live errand-family edits are
+ * BYTE-INVISIBLE to a world that mints no mission. "Invisible" is a claim about a tree that
+ * does not have those edits, and no call made by this file can produce one — a same-tree
+ * call can only ever compare ES-1 to itself. So the reference is measured ONCE, at ES-1's
+ * own parent db35bad6 (the last commit before the covert arm existed), by replaying this
+ * exact ten-tick harness with the PRE-ES-1 call signature, and frozen here.
+ *
+ * IF THIS GOES RED, IT IS NOT A ROTTED FIXTURE — IT IS THE FENCE REPORTING THAT SOMETHING
+ * ES-1 ADDED IS NOW VISIBLE TO A WORLD THAT MINTS NO MISSION. Re-record it only with a
+ * stated, legitimate cause under the estate's golden-shift discipline, never to get green.
+ */
+const PRE_ES1_LEDGER_HASH = 'dec3c572d2b7539073a4006c4196daf7a3aa977f3e59cbf2b79fea2214deff19';
+const PRE_ES1_TICK_HASHES = Object.freeze([
+  'f582ee6db7f0d42fc41db02b994ed113ec52344883842ed6326117a5bf923e33', // tick 11
+  'b8564f1fedd6a4fd261a6c724d3f979dccd061148a03038710c968bbbc58f37e', // tick 12
+  '774422f104dbe9c0b5699f5409eb1d8d636b5c1e7651343f4d39b8790661ed56', // tick 13
+  '774422f104dbe9c0b5699f5409eb1d8d636b5c1e7651343f4d39b8790661ed56', // tick 14
+  '774422f104dbe9c0b5699f5409eb1d8d636b5c1e7651343f4d39b8790661ed56', // tick 15
+  '774422f104dbe9c0b5699f5409eb1d8d636b5c1e7651343f4d39b8790661ed56', // tick 16
+  'dec3c572d2b7539073a4006c4196daf7a3aa977f3e59cbf2b79fea2214deff19', // tick 17
+  'dec3c572d2b7539073a4006c4196daf7a3aa977f3e59cbf2b79fea2214deff19', // tick 18
+  'dec3c572d2b7539073a4006c4196daf7a3aa977f3e59cbf2b79fea2214deff19', // tick 19
+  'dec3c572d2b7539073a4006c4196daf7a3aa977f3e59cbf2b79fea2214deff19', // tick 20
+]);
+
 describe('ES-1 dormancy — FENCE 1: the covert arm has no footprint', () => {
-  test('a run that mints NO mission is byte-identical to the PRE-ES-1 call signature', () => {
-    const preEs1 = tenTicks({ mission: null });
+  test('a run that mints NO mission is byte-identical to the PRE-ES-1 engine', () => {
     const withoutCargo = tenTicks();
-    expect(withoutCargo.ledgerHashes).toEqual(preEs1.ledgerHashes);
-    expect(hash(withoutCargo.ledger)).toBe(hash(preEs1.ledger));
-    // anchored: the LIT control below writes a mission into this same ten-tick run, which
-    // is what makes this an absence rather than an empty subject.
+    // THE REAL DIFFERENTIAL — measured against db35bad6, a tree with no covert arm in it,
+    // rather than against a second call to this same function.
+    expect(withoutCargo.ledgerHashes).toEqual(PRE_ES1_TICK_HASHES);
+    expect(hash(withoutCargo.ledger)).toBe(PRE_ES1_LEDGER_HASH);
+    // The golden is a TEN-TICK sequence, not one end state: a leak that appeared mid-run
+    // and was overwritten before tick 20 still reds the array above.
+    expect(withoutCargo.ledgerHashes).toHaveLength(10);
+    // ...and the explicit `mission: null` spelling is the same world, which is the ONLY
+    // thing the shipped pair actually established. Kept, demoted to what it is.
+    expect(tenTicks({ mission: null }).ledgerHashes).toEqual(withoutCargo.ledgerHashes);
     // anchored: the LIT control in the next test asserts BOTH of these words present in
     // this exact ten-tick ledger, and the two assertions below prove this run really
     // moved (a row closed terminal, every row carries a class) — so the ledger is a
     // populated subject and these absences are the covert arm's own footprint.
-    expect(JSON.stringify(preEs1.ledger)).not.toContain('itinerary'); // anchored: the LIT control asserts this word PRESENT in the same ten-tick ledger
-    expect(JSON.stringify(preEs1.ledger)).not.toContain('subjectId'); // anchored: the LIT control asserts this word PRESENT in the same ten-tick ledger
+    expect(JSON.stringify(withoutCargo.ledger)).not.toContain('itinerary'); // anchored: the LIT control asserts this word PRESENT in the same ten-tick ledger
+    expect(JSON.stringify(withoutCargo.ledger)).not.toContain('subjectId'); // anchored: the LIT control asserts this word PRESENT in the same ten-tick ledger
     // The run really exercised the lifecycle rather than sitting still: one row closed
     // terminal by the DM kill, and every row still carries SP-D's own cargo.
-    expect(preEs1.ledger.some((row) => row.state === 'lost')).toBe(true);
-    expect(preEs1.ledger.every((row) => row.purposeClass === 'covert')).toBe(true);
+    expect(withoutCargo.ledger.some((row) => row.state === 'lost')).toBe(true);
+    expect(withoutCargo.ledger.every((row) => row.purposeClass === 'covert')).toBe(true);
   });
 
   test('and the SAME run WITH a mission really carries it — the control', () => {
