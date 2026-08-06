@@ -1334,7 +1334,8 @@ lane). Order: after SP-A (no hard dependency; SP-A's bandFamilies is not
 consumed here — doctrine words are program-local closed sets, recorded
 under J-WR-10-B as borrow-checked: nothing existing matched).
 
-**ES-1 — THE MISSION (flag `espionageEnabled` + manifest, ONE commit;
+**ES-1 — THE MISSION (⚠ RIDES `espionageEnabled`; DOES NOT MINT IT — see §2's
+correction and the FLAG-ATTRIBUTION NOTE in `DESIGN_FP_ARCHITECTURE.md` §3;
 needs SP-D).** Charter: the covert arm in SP-D's `errandMint.js` (mint
 validation: itinerary ≤ 3, closed products + demand bands + the six-member
 legRefs set with pullBand refused ⟨F5⟩, dispatch-refusal seams,
@@ -1342,8 +1343,13 @@ concurrency cap) + `normalizeErrand` taught the `covert` sub-record (same
 commit — the columnOf precedent) + the `covert_envoy` franchise members in
 `routeNetworkConsumers.js` (519) + the one-word kind fork at
 `buildEnvoyRoutePlan`'s call site + covert casting (importance-inverse draw,
-J-ES-4) + `vetVolunteerEnvoy` first consumption + flag manifest row +
-certification declared-pending + the FIRST by-name gate read. Budgets:
+J-ES-4) + `vetVolunteerEnvoy` first consumption. ⛔ **The flag manifest row, the
+certification row and the first by-name gate read are STRUCK from this charter —
+all three landed at ES-0 (`55674790`), and re-minting the key reds the
+`engineGatedRuleKeys` walker's exact one-key delta.** ⚠ **`envoyDiplomacy.js`
+CARRIES NO BUDGET LINE BELOW and it is the file the one-word kind fork edits:
+measured 797/800 effective, THREE lines of headroom. Budget a lazy-leaf
+extraction into this wave or it reds the tolerance-zero size ratchet.** Budgets:
 errandMint growth ≤ 120; a new `espionageMissions.js` leaf ≤ 250 hosts the
 casting/validation logic; envoyErrandRecords.js (634) gains the sub-record
 normalizer arm (≤ 60). Pins: four-fence + lit-mutant; JSON-round-trip

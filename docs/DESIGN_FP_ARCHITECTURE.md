@@ -484,7 +484,7 @@ lane-only; that history-vs-doctrine nonuniformity is chair question Q5.
 | 41 | `deliberateForgivenessEnabled` | INT-6 | burial verb both arms, suppression reads, dig-up |
 | 42 | `legitimacyCrossingsEnabled` | INT-7 | legitimacy crossing receipts |
 | 43 | `cascadeGovernorEnabled` | CW-1 | the cascade braid at Herald composition |
-| 44 | `espionageEnabled` | ES-1 | covert confirmation missions on the errand spine: mission mint + gauntlet + typed products (CONFIRM/ACQUIRE/REFUTE) + doctrine + absence discount |
+| 44 | `espionageEnabled` | **ES-0** ⚠ (this cell said ES-1 until 2026-08-06 — see below) | covert confirmation missions on the errand spine: mission mint + gauntlet + typed products (CONFIRM/ACQUIRE/REFUTE) + doctrine + absence discount |
 | 45 | `severityDurableRumorsEnabled` | WY-2 | severity-durable rumor fidelity: the one-multiplier amendment on organic per-hop weathering |
 | 46 | `caravanBodiesEnabled` | WY-3 | shipment departTick+path stamps, the mission leg clock, the quantization cadence |
 | 47 | `flowMigrationPhysicalEnabled` | WY-4 | the flow_migration exactly-one fence: columns, not teleports, under the spatial canon |
@@ -510,6 +510,39 @@ dormancy proof covers the weave-dark arm explicitly). `espionageEnabled`
 requires `errandSpineEnabled` lit first; its axis-fed arms degrade declared
 while `believedConditionsEnabled` is dark. The WY flags gate conditional
 FIELDS on existing records (§4's WY entry); none mints a key.
+
+**⚠⚠ FLAG-ATTRIBUTION NOTE — `espionageEnabled` WAS MINTED AT ES-0, NOT ES-1.
+THIS PARAGRAPH IS THE ONE SPELLING; every other site points here.** (Chair
+correction, 2026-08-06, vetoable. Row 44's "Wave" cell and ES-1's §5 block both
+said ES-1 and both now point at this note rather than restating it — the
+derive-don't-restate law.)
+
+**THE AUTHORITY IS NOT THIS DOCUMENT — it is the manifest's own inline
+provenance comment** in `src/domain/worldPulse/simulationRules.js`, which reads
+*"Joined 2026-08-05 by FP wave ES-0 … in the SAME commit as its first real gate
+read (`espionage/espionageGate.espionageActive`, read BY NAME with the strict
+`=== true` idiom) and its AUTHORED certification row — never a pending entry."*
+`git log -L` attributes that line to `55674790`, whose own message states *"THE
+FLAG LANDS AT ES-0, not ES-1 — the chair rider that postdates the volume."*
+`espionageGate.js` already implements the full three-door conjunction. **If this
+note and the manifest ever disagree, THE MANIFEST WINS** and this note is the
+thing that is stale.
+
+**WHY THIS MATTERED ENOUGH TO AMEND A §3 CELL.** `SOL_QUEUE.md` names this
+volume as the ordering authority, so an implementer working from row 44 would
+mint a key that is already present with an authored row. The
+`engineGatedRuleKeys` walker asserts an EXACT one-key delta and reds on the
+unaccounted second mint. The correction had existed since 2026-08-05 in
+`DESIGN_FP_ARCH_ES.md`, but was applied only to that volume's header and never
+to the ES-1 block beneath it — **a half-applied correction is worse than none,
+because the volume then contradicts itself and a reader may land on either
+half.** Both halves are now pointers.
+
+**⭐ THE SCHEDULING CONSEQUENCE, which the stale cell was hiding: ES-1 through
+ES-7 are ALL no-new-flag waves.** Every one of them rides `espionageEnabled`.
+They therefore do NOT contend for the CQ5 single-flag landing slot and may run
+concurrently with a flag-minting lane. Seven waves leave the serialized column —
+not the six a stale note elsewhere records.
 
 **The lighting contract:** lighting order = build order (§5); a flag lit out
 of order is an invalid config each program's convergence walker reds. SP-B's
@@ -1049,8 +1082,8 @@ computeLawfulness output (hand-fed numbers refused); dwellRamp monotonicity +
 all-bands-reachable. Dormancy: no flag, no caller — the WR-10 dark-instrument
 precedent.
 
-**ES-1 — THE MISSION** (flag `espionageEnabled` + manifest, ONE commit per
-§3's law; needs #6 SP-D; ES §4). Charter: the covert arm in SP-D's
+**ES-1 — THE MISSION** (⚠ **RIDES `espionageEnabled`; DOES NOT MINT IT** — see
+the flag-attribution note below; needs #6 SP-D; ES §4). Charter: the covert arm in SP-D's
 `errandMint.js` (mint validation: itinerary <= 3, closed products + demand
 bands + the six-member legRefs set with pullBand refused, dispatch-refusal
 seams, concurrency cap) + `normalizeErrand` taught the `covert` sub-record in
