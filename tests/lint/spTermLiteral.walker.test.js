@@ -70,10 +70,21 @@ describe('SP speaks no treaty-term family (seam ruling 3)', () => {
   test('the family list is LIVE and non-empty (guard the guard)', () => {
     // Derived from TERM_CATALOG at declaration time, so a ninth family is covered the
     // day it lands and no pin here carries a hand count.
-    expect(TERM_FAMILIES.length).toBeGreaterThanOrEqual(8);
-    expect(TERM_TYPES.length).toBeGreaterThanOrEqual(12);
+    //
+    // ⚠ THE FLOORS TIGHTENED WHEN GR-3 LANDED, and tightening them is the same-commit
+    // freeze discipline rather than bookkeeping. Left at 8/12 they would have gone on
+    // passing against a catalog half again as large, which is a floor that has stopped
+    // measuring anything — the recorded slack-floor vacuity. They move DOWNWARD toward
+    // reality only, and never upward to admit a shrink.
+    expect(TERM_FAMILIES.length).toBeGreaterThanOrEqual(11);
+    expect(TERM_TYPES.length).toBeGreaterThanOrEqual(24);
     expect(TERM_FAMILIES).toContain('economic');
     expect(TERM_FAMILIES).toContain('sovereignty_transfer');
+    // GR-3's three, named so a family SILENTLY DISAPPEARING reds here rather than merely
+    // lowering a count that a later row could refill.
+    expect(TERM_FAMILIES).toContain('commercial');
+    expect(TERM_FAMILIES).toContain('faith');
+    expect(TERM_FAMILIES).toContain('population');
   });
 
   test('the scanner BITES: it finds every family literal in the catalog itself', () => {

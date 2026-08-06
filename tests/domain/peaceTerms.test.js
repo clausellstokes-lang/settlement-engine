@@ -16,6 +16,9 @@
  * flaky) rather than depending on a full sim reaching sue-for-peace.
  */
 
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { describe, it, expect } from 'vitest';
 
 import {
@@ -23,7 +26,7 @@ import {
   believedAdvantageFromInputs, appraiseLoserPortfolio, appraiseLoserPortfolioFromInputs,
   draftTerms, evolveCompliance, alignmentPress, alignmentPressFromInput,
   treatiesForPair, demilitarizationCapFor, treatyBlocksWar, occupationHoldFor, treatyPairKey,
-  termLabel, TERM_CATALOG, TERM_TYPES, TERM_FAMILIES, PEACE_TERMS_TUNING,
+  termLabel, TERM_CATALOG, TERM_TYPES, TERM_FAMILIES, TERM_EXECUTORS, PEACE_TERMS_TUNING,
 } from '../../src/domain/worldPulse/peaceTerms.js';
 import { repudiateTreaty } from '../../src/domain/worldPulse/treatyBreach.js';
 import { TREATY_TRANSFER_TUNING } from '../../src/domain/worldPulse/treatyTransfer.js';
@@ -106,8 +109,35 @@ describe('W-PEACE-2 catalog + substrate', () => {
       expect(TERM_FAMILIES).toContain(spec.family);
       expect(spec.weight).toBeGreaterThan(0);
       expect(spec.maxYears).toBeGreaterThanOrEqual(spec.baseYears);
-      expect(['transfer', 'overlay', 'readiness_cap', 'war_block', 'occupation_hold', 'seam']).toContain(spec.executor);
+      // POINTS AT THE ONE DECLARATION, NEVER A SECOND COPY OF IT. This line used to
+      // hand-restate the executor union, so GR-3's seventh kind (`grant`) reddened it
+      // while the catalog and its JSDoc were both perfectly correct — the restatement
+      // was the defect, not the enum member. See TERM_EXECUTORS' docstring.
+      expect(TERM_EXECUTORS, `${type}'s executor is a declared kind`).toContain(spec.executor);
     }
+  });
+
+  it('the executor vocabulary is CLOSED and agrees in all three homes it is written down', () => {
+    // A membership check against a declared list only bites while the list is honest, and
+    // an allowlist has two ways to rot: it can miss a kind the catalog uses (the red GR-3
+    // hit), or it can grow a kind nothing uses (a dead branch nobody notices). Pin BOTH
+    // directions as one equality so neither can hide.
+    const used = [...new Set(TERM_TYPES.map((t) => TERM_CATALOG[t].executor))].sort();
+    expect(used, 'every declared executor kind is used by a row, and vice versa')
+      .toEqual([...TERM_EXECUTORS].sort());
+    // THE THIRD HOME IS THE TYPE UNION, and it is the one no runtime check can see —
+    // typecheck failures and test failures are separate gates, so a union that drifted
+    // would stay green here forever. Read the declaration and compare its members.
+    const src = readFileSync(
+      join(dirname(fileURLToPath(import.meta.url)), '../../src/domain/worldPulse/peaceTermsCatalog.js'),
+      'utf8',
+    );
+    const union = /@typedef \{((?:'[a-z_]+'\|)*'[a-z_]+')\} TermExecutor/.exec(src);
+    expect(union, 'the TermExecutor typedef must be findable — if it was renamed, re-point this scan')
+      .toBeTruthy();
+    expect([...union[1].matchAll(/'([a-z_]+)'/g)].map((m) => m[1]).sort(),
+      'the TermExecutor type union and the TERM_EXECUTORS runtime list must carry the same members')
+      .toEqual([...TERM_EXECUTORS].sort());
   });
 
   it('resolveVictor: the believed-stronger party is the victor; a tie breaks codepoint-stable', () => {

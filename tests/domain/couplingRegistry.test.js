@@ -39,6 +39,10 @@ import {
   GR2_BELIEVED_DEMAND_COUPLING,
   GR2_PACT_FORMATION_COUPLINGS,
   GR2_SHARED_THREAT_COUPLING,
+  GR3_FAITH_GRANT_COUPLING,
+  GR3_MUTUAL_DEFENSE_COUPLING,
+  GR3_POPULATION_GRANT_COUPLING,
+  GR3_TERM_FAMILY_COUPLINGS,
   ES1_COVERT_MISSION_MINT_COUPLING,
   ES1_HIDDEN_FRANCHISE_COUPLING,
   ES1_MISSION_VOCABULARY_COUPLING,
@@ -92,6 +96,14 @@ describe('CW-0 coupling registry', () => {
       // FP GR-2 (2026-08-06): the THIRD volume leaf, appended in wave order like the
       // second. Three rows, one per direction peacetime formation reads across.
       ...GR2_PACT_FORMATION_COUPLINGS,
+      // FP GR-3 (2026-08-06): the same leaf's SECOND set, and the first rows in this
+      // registry that point OUT of their owning volume rather than into it. GR-2's three
+      // read other layers' evidence; these three expose GRAMMAR's own standing-right reads
+      // to consumers that have not landed (FAITH WF-6, POP-5b, and the war layer's
+      // `defensive_pact` readers). They are FORWARD DECLARATIONS and the leaf says so — the
+      // producer/consumer law forbids shipping a right with its consumer side merely
+      // unmentioned, which is `non_intervention`'s recorded lesson.
+      ...GR3_TERM_FAMILY_COUPLINGS,
       // FP IN-0a (2026-08-06): the FOURTH volume leaf. One row — the paid plant's handoff
       // into the envoy-picture stage — and INFORMATION's first cross-layer read.
       ...IN_INFORMATION_COUPLINGS,
@@ -518,8 +530,19 @@ describe('CW-0 coupling registry', () => {
         // first-row tiebreak is unaffected, and the line below re-asserts it.
         GR2_SHARED_THREAT_COUPLING,
       ]);
+    // GR-3's `mutual_defense` is the THIRD read on this direction and the first owned by
+    // GRAMMAR. It is deliberately LAST: registration order is the legacy first-row
+    // tiebreak, and WR-7's home delivery keeps that seat.
     expect(couplingRowsFor('CPL-5', 'GRAMMAR→WAR'))
-      .toEqual([WR7_HOME_DELIVERY_COUPLING, WR7_CARRIED_SHEET_COUPLING]);
+      .toEqual([
+        WR7_HOME_DELIVERY_COUPLING,
+        WR7_CARRIED_SHEET_COUPLING,
+        GR3_MUTUAL_DEFENSE_COUPLING,
+      ]);
+    expect(couplingRowFor('CPL-5', 'GRAMMAR→WAR')).toBe(WR7_HOME_DELIVERY_COUPLING);
+    // GR-3's other two open their pairs: nobody had read across CPL-14 or CPL-17 before.
+    expect(couplingRowsFor('CPL-14', 'GRAMMAR→FAITH')).toEqual([GR3_FAITH_GRANT_COUPLING]);
+    expect(couplingRowsFor('CPL-17', 'GRAMMAR→POP')).toEqual([GR3_POPULATION_GRANT_COUPLING]);
     // IN-0a's handoff is the FOURTH independently-owned read on this direction and the
     // first owned by INFORMATION; the legacy first-row tiebreak below is unmoved by it.
     expect(couplingRowsFor('CPL-19', 'INFO→GRAMMAR'))

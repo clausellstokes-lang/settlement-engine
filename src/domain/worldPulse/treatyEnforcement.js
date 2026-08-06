@@ -153,6 +153,182 @@ export function occupationHoldFor(worldState, occupiedId, occupierId, tick) {
   return false;
 }
 
+// ── GR-3: THE SEVENTH EXECUTOR KIND — `grant`, A STANDING RIGHT ─────────────────────
+//
+// The six executors above are things a term DOES TO a party. `grant` is the other half
+// of the vocabulary: a right one party HOLDS while the term lives — to preach, to walk a
+// pilgrim road, to send people across, to be answered when it is struck. Every one of
+// them consolidates HERE for the reason this whole module exists (its header's one-reader
+// law): a right must lift on the SAME TICK the term expires, and a second spelling of
+// "is this right still live" would eventually disagree with this one.
+//
+// WHO HOLDS THE RIGHT. A NEGOTIATED term carries `beneficiary` — the party it runs to, or
+// the literal `'both'` for a symmetric clause — so the direction is on the record and
+// needs no inference. A term carrying NONE is a war-door or sale term, and its direction
+// comes from the ONE orientation reader (CR-WR10-G): the OBLIGEE holds what the OBLIGOR
+// promised, which is the same axis `occupationHoldFor` already reads. Neither path ever
+// splits an id or guesses from a name.
+//
+// A DEFAULTED *TERM* GRANTS NOTHING — AND THE UNIT IS THE TERM, NOT THE INSTRUMENT
+// (chair ruling J-GR3-C1, 2026-08-06). The first spelling of this read skipped any treaty
+// whose INSTRUMENT-level `complianceState` was defaulted, and that was wrong in both
+// directions, each reproduced by execution before the repair:
+//
+//   (a) peaceTerms.js sets `treaty.complianceState = worstObserved` across ALL live terms,
+//       driven by the LOSER's capacity. So a loser who stopped paying tribute silently
+//       stripped the VICTOR of an honored tolerance_guarantee running the other way — a
+//       breach by one party voiding the NON-BREACHING party's rights. Election to void
+//       belongs to the injured party, never to the mechanism. GR-2 widened §13 stacking to
+//       family × beneficiary, so mixed instruments are the NORMAL case: this fired on the
+//       common path, not an edge.
+//   (b) the mirror: a term whose OWN state was defaulted still read as HELD whenever the
+//       instrument around it was honored.
+//
+// So the compliance question is asked of the TERM, and it is asked at the two public doors
+// rather than in the finder — because the finder must still be able to SEE a broken right.
+// That is what keeps NEVER-GRANTED distinguishable from GRANTED-THEN-VOIDED: absence
+// answers `''`, a voided right answers `'defaulted'`, and collapsing the two would be the
+// exact absence-into-denial failure this wave's DARK/ABSENT/NONSENSE pin forbids.
+//
+// It is the OBSERVED state deliberately — the fog governs rights exactly as it governs
+// war-blocks, so a right quietly throttled by a party its counterpart cannot watch is
+// still legally standing, which is the peacetime face of §12.2. `grantedRightStateFor`
+// is how a consumer tells "lawful and kept" from "lawful and fraying" without this
+// module ever handing out truth the observer has not earned.
+//
+// DARK ⇒ every read below returns its identity (false · '') because a world with no
+// treaties ledger short-circuits at `treatyLedgerOf`, and no engine path can mint one of
+// these terms with `pactFormationEnabled` dark — the peacetime draft lens is the only
+// producer and it never runs. Byte-identical, by the same mechanism `non_intervention`
+// has always been byte-identical.
+
+/**
+ * The live term of `type` on the pair's instrument that runs TO `granteeId`, or null.
+ *
+ * ⚠ FINDS A TERM WHATEVER ITS COMPLIANCE — including a defaulted one. That is deliberate
+ * and is what lets the two public doors above disagree usefully: `grantedRightFor` asks
+ * whether the right is HELD (a defaulted term is not), while `grantedRightStateFor` asks
+ * what CONDITION it is in and must be able to answer `'defaulted'` rather than falling
+ * back to the never-granted `''`. Filtering here would collapse absence into denial.
+ * @param {Record<string, unknown> | null | undefined} worldState @param {unknown} type
+ * @param {unknown} grantorId @param {unknown} granteeId @param {number} tick
+ * @returns {TermRecord | null}
+ */
+function grantTermFor(worldState, type, grantorId, granteeId, tick) {
+  const ledger = treatyLedgerOf(worldState);
+  if (!ledger) return null;
+  const grantor = String(grantorId);
+  const grantee = String(granteeId);
+  const wanted = String(type);
+  if (!grantor || !grantee || grantor === grantee || !wanted) return null;
+  for (const key of Object.keys(ledger).sort()) {
+    const t = ledger[key];
+    const parties = Array.isArray(t?.parties) ? t.parties.map(String) : [];
+    if (!parties.includes(grantor) || !parties.includes(grantee)) continue;
+    for (const term of liveTermsOf(t, tick)) {
+      if (term.type !== wanted) continue;
+      const beneficiary = String(term.beneficiary || '');
+      if (beneficiary === 'both' || beneficiary === grantee) return term;
+      // A term with no beneficiary is war-door/sale provenance: the OBLIGEE holds it.
+      if (!beneficiary && treatyOrientationOf(t).obligeeId === grantee) return term;
+    }
+  }
+  return null;
+}
+
+/**
+ * DOES `granteeId` HOLD A LIVE `type` RIGHT GRANTED BY `grantorId`? The generic read every
+ * named right below is a pointer to. False whenever the ledger, the pair, the term or the
+ * direction does not resolve — an unresolved anything grants nobody anything.
+ * @param {Record<string, unknown> | null | undefined} worldState @param {unknown} type
+ * @param {unknown} grantorId @param {unknown} granteeId @param {number} tick @returns {boolean}
+ */
+export function grantedRightFor(worldState, type, grantorId, granteeId, tick) {
+  const term = grantTermFor(worldState, type, grantorId, granteeId, tick);
+  // THE COMPLIANCE DOOR, asked of the TERM (J-GR3-C1). A right observed to be broken is
+  // not held; a right on an instrument some OTHER clause broke is untouched.
+  return term !== null && String(term.complianceState || '') !== 'defaulted';
+}
+
+/**
+ * THE OBSERVED CONDITION of a standing right — `'honored'` / `'strained'` / `'defaulted'`,
+ * or `''` when no such right stands. This is what "honored on parchment and harassed on
+ * the road" reads as: the right is live (so `grantedRightFor` is true) while its observed
+ * state has slipped. It reports the OBSERVED word only; `trueState` is the fog's business
+ * and never leaves the ledger through this door.
+ * @param {Record<string, unknown> | null | undefined} worldState @param {unknown} type
+ * @param {unknown} grantorId @param {unknown} granteeId @param {number} tick @returns {string}
+ */
+export function grantedRightStateFor(worldState, type, grantorId, granteeId, tick) {
+  const term = grantTermFor(worldState, type, grantorId, granteeId, tick);
+  return term ? String(term.complianceState || 'honored') : '';
+}
+
+/** May `granteeId` lawfully preach in `grantorId`'s lands? (FAITH WF-6 consumes.)
+ *  @param {Record<string, unknown> | null | undefined} w @param {unknown} grantorId
+ *  @param {unknown} granteeId @param {number} tick @returns {boolean} */
+export function missionaryAccessFor(w, grantorId, granteeId, tick) {
+  return grantedRightFor(w, 'missionary_access', grantorId, granteeId, tick);
+}
+
+/** Do these two courts keep a signed communion? Symmetric — a `shared_rite` is drafted
+ *  to both parties, so either direction answers the same.
+ *  @param {Record<string, unknown> | null | undefined} w @param {unknown} aId
+ *  @param {unknown} bId @param {number} tick @returns {boolean} */
+export function sharedRiteFor(w, aId, bId, tick) {
+  return grantedRightFor(w, 'shared_rite', aId, bId, tick);
+}
+
+/** May `granteeId`'s pilgrims lawfully travel `grantorId`'s roads?
+ *  @param {Record<string, unknown> | null | undefined} w @param {unknown} grantorId
+ *  @param {unknown} granteeId @param {number} tick @returns {boolean} */
+export function pilgrimageRightFor(w, grantorId, granteeId, tick) {
+  return grantedRightFor(w, 'pilgrimage_right', grantorId, granteeId, tick);
+}
+
+/** Has `grantorId` forsworn suppressing `granteeId`'s creed? (WF-5b's underground
+ *  surfacing arm and the eviction/purge lanes read this.)
+ *  @param {Record<string, unknown> | null | undefined} w @param {unknown} grantorId
+ *  @param {unknown} granteeId @param {number} tick @returns {boolean} */
+export function toleranceGuaranteeFor(w, grantorId, granteeId, tick) {
+  return grantedRightFor(w, 'tolerance_guarantee', grantorId, granteeId, tick);
+}
+
+/** May `granteeId`'s people lawfully cross into `grantorId`? (POP-5b's permit gate.)
+ *  @param {Record<string, unknown> | null | undefined} w @param {unknown} grantorId
+ *  @param {unknown} granteeId @param {number} tick @returns {boolean} */
+export function migrationRightFor(w, grantorId, granteeId, tick) {
+  return grantedRightFor(w, 'migration_right', grantorId, granteeId, tick);
+}
+
+/** Does a labour compact stand from `grantorId` to `granteeId`? (TRADE/POP production
+ *  arms read it as a BANDED colour on output and never as a headcount.)
+ *  @param {Record<string, unknown> | null | undefined} w @param {unknown} grantorId
+ *  @param {unknown} granteeId @param {number} tick @returns {boolean} */
+export function laborCompactFor(w, grantorId, granteeId, tick) {
+  return grantedRightFor(w, 'labor_compact', grantorId, granteeId, tick);
+}
+
+/**
+ * IS THERE A SWORN BOND OF MUTUAL DEFENCE BETWEEN THESE TWO? Symmetric.
+ *
+ * ⚠ THIS IS THE WRITER THE SURVEY LOOKED FOR AND THE CONSUMERS ARE NOT WIRED TO IT YET.
+ * Five reader families treat a `defensive_pact` RELATIONSHIP edge as support — the levy
+ * set (`warHomeCosts.js`), the ally-relief set (`warCapacityReads.js`),
+ * `thirdPartyRansom.js`, `warAllianceRisk.js` and the certification notes — and none of
+ * them consults this read. Wiring them is NOT a catalog wave's business: `computeAllyRelief`
+ * takes no `tick`, so admitting a treaty-scoped right there means threading the clock
+ * through war hot paths, which is a war-owned change with its own verification.
+ * DEFERRED BY NAME in the GRAMMAR×WAR coupling row, and pinned as a tripwire in
+ * tests/domain/peaceTermsGrantTerms.test.js so the day a reader consults this the census
+ * reds and the coupling row must be discharged in that commit.
+ * @param {Record<string, unknown> | null | undefined} w @param {unknown} aId
+ * @param {unknown} bId @param {number} tick @returns {boolean}
+ */
+export function mutualDefenseFor(w, aId, bId, tick) {
+  return grantedRightFor(w, 'mutual_defense', aId, bId, tick);
+}
+
 /**
  * The fraction of the payer's SPAREABLE stock ONE installment of a stream term draws
  * this tick. A term's magnitude is its NOMINAL YEARLY share (§11's vocabulary: "25% of

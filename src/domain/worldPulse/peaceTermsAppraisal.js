@@ -228,13 +228,17 @@ export function appraiseLoserPortfolioFromInputs(args) {
   if (restitution != null && restitution > 0) push('reframed_debt', restitution * (0.6 + believedWealth01), '');
   // D4 SEAM (DELIBERATELY DEFERRED — DESIGN_SIM_DEPTH_R2 D4 consumers (i)/(ii)): the design
   // has fear_of_dominance TILT defensive/mutual_defense + sovereignty/non_intervention term
-  // weights between free settlements near a hegemon. NOT built this wave: `defensive`/
-  // `mutual_defense` terms do NOT exist in TERM_CATALOG, and `non_intervention` has ZERO
-  // asset-class producers here (it is a recorded-not-enforced seam already — see its catalog
-  // entry). Minting those term producers is a separate, larger change that would move the
-  // peace-causal LIT goldens and is outside D4's pinned scope (the pins cover the
-  // fear_of_dominance REASON, which IS wired into the war/peace reason ledgers, plus the
-  // DENIAL motive). The fear read is available via makeHegemonyFear when this seam is closed.
+  // weights between free settlements near a hegemon. Still NOT built, but ⚠ ONE OF THIS
+  // NOTE'S TWO PREMISES WAS STRUCK BY GR-3 (2026-08-06) and the correction is recorded here
+  // rather than left to rot: `mutual_defense` DOES exist in TERM_CATALOG now (security
+  // family, executor `grant`, read from treatyEnforcement.js). What remains true is the part
+  // that actually blocks this seam — no ASSET CLASS names it, so `CLASS_TERM[assetClass]`
+  // still cannot reach it from here, exactly as `non_intervention` cannot. So the deferral
+  // stands on its surviving reason alone: giving either term an asset class is a LIT-PATH
+  // behaviour shift that moves the peace-causal goldens on the same seed, which is outside
+  // D4's pinned scope (the pins cover the fear_of_dominance REASON, which IS wired into the
+  // war/peace reason ledgers, plus the DENIAL motive) and is J-GR-14a's charter rather than
+  // this file's. The fear read is available via makeHegemonyFear when this seam is closed.
   // POLITICAL / INTEL — seam classes; low base, only a rich budget + fitting lens reaches them.
   push('government', 0.18 * believedWealth01 * tilt.political, '');
   if (tradeScarcity != null) push('intel', (0.15 + 0.5 * tradeScarcity) * tilt.informational, '');

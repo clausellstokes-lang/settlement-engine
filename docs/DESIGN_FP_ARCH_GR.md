@@ -480,7 +480,38 @@ finder, no new relationship vocabulary.
   world). SP-4 court reads must NOT be spelled `riskToleranceOf` (R-5's
   collision).
 
-### GR-3 — THE NEW TERM FAMILIES (second slice of `pactFormationEnabled`)
+### GR-3 — THE NEW TERM FAMILIES (second slice of `pactFormationEnabled`) — **GR-3a LANDED 2026-08-06; GR-3b OWED**
+<!-- Build state is not maintained per-file; FP §5's PROGRESS block is the one home. What
+     follows is the SCOPE SPLIT, which is not build state but a change to what this wave IS.
+
+     GR-3a (landed): the twelve catalog rows, the seventh `grant` executor and its seven
+     named reads in treatyEnforcement.js, the three house-voice family rows, the three
+     seam-6 coupling rows, and THE WR-10 TRIPWIRE DISCHARGE — which was this wave's
+     scheduling reason and is now done, so every later catalog-touching wave (TR-5, WF-6,
+     POP-5b) inherits a fired-and-discharged wire instead of a live one.
+
+     GR-3b (owed): THE PRODUCER SIDE. The nine faith/population/security rows have no
+     producer, because their producer is `PACT_DRAFT_LENS` in pactFormation.js and a
+     second build lane held that file under uncommitted strict-typing work for the whole
+     of GR-3a's build window; editing it would have meant committing another lane's
+     unfinished change to land this one. That is a MEASURED blocker, reported rather than
+     raced. The ladder primitive ships (`orderTermsByAsk`, exported and unconsumed, the
+     GR-0 handoff idiom) and the debt is held by a FROZEN shrink-only register in
+     tests/domain/peaceTermsGrantTerms.test.js, so it cannot be lost.
+
+     ALSO DEFERRED BY NAME: J-GR-14a, the war-end appraisal lens extension. Giving the new
+     families asset classes is a lit-path behaviour shift on golden-pinned war-end
+     drafting and deserves its own commit and its own disclosed-shift pin; J-GR-14b (the
+     war door's amendment awareness) already landed with GR-2. The struck premise in
+     peaceTermsAppraisal.js's D4 seam note is corrected in place.
+
+     FOUND WHILE BUILDING, OWED TO THE CHAIR: `reparations` is a PRODUCER-LESS TERM and
+     pre-dates this program — working executor, stream-physics home, label and drafting
+     line, and no CLASS_TERM asset class maps to it, so draftTerms can never select it.
+     `non_intervention` by accident rather than by declaration. Both cures (an asset
+     class, or a seam declaration) move war-end goldens, so it is RECORDED in the owed
+     register under CHAIR rather than repaired by an implementer. -->
+
 - **Catalog mechanics VOID (V-2):** the extraction is done; the new rows land
   directly in `peaceTermsCatalog.js` (235 raw — headroom fine). Rows: five
   faith, three population, `mutual_defense`, each with the volume's executor

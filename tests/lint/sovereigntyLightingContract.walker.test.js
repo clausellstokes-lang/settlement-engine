@@ -2855,7 +2855,30 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // working tree until the other lane commits: the difference is exactly its uncommitted
       // test files, and its own wave re-measures. That is this walker doing its job, not
       // failing at it — and it is the third consecutive wave to have to say so.
-      files: 2337, parked: 358, credited: 1979, titles: 18793, suiteTitles: 5378,
+      // ── RE-RECORDED 2026-08-06 BY FP WAVE GR-3, WITH ITS CAUSE MEASURED AND SPLIT ──
+      // 2,337/358/1,979/18,793/5,378 → 2,338/358/1,980/18,824/5,384. THE CAUSE IS ONE NEW
+      // TEST FILE PLUS ONE PIN ADDED TO AN ALREADY-CREDITED ONE, and nothing else.
+      // New: tests/domain/peaceTermsGrantTerms.test.js (30 titles, 6 suite titles) — the
+      // grant-read battery and the frozen PRODUCER_OWED register. Amended, already
+      // credited: tests/domain/peaceTerms.test.js gains +1 title and NO suite title (the
+      // executor-vocabulary closure pin, added to an existing describe by the GR-3 repair
+      // round). Deltas are exactly +1 file, +1 credited, +31 titles, +6 suite titles, and
+      // PARKED IS UNCHANGED at 358 — the new file spells every title as a literal, so
+      // door 3's reader recognises them statically and credits the file.
+      // ⚠ THE DELTA IS DECOMPOSED RATHER THAN ASSERTED, and it closes exactly:
+      //   30 (the new file) + 1 (peaceTerms.test.js, 34 → 35) = 31 titles
+      //    6 (the new file) + 0                               =  6 suite titles
+      // tests/domain/sovereigntyBundleWr10.test.js is deliberately NOT in that sum even
+      // though this wave edited it: GR-3 RENAMED three existing pins rather than adding
+      // any, so its measured 18/4 is identical at both ends. A per-file reading at BOTH
+      // ends is what showed that; a `+3` counted off the diff's added lines alone would
+      // have over-attributed by three and left this row wrong for the next lane to inherit.
+      // ⚠ MEASURED AT A FRESH `git archive` OF THIS WAVE'S OWN PARENT (d9c7cae4), overlaid
+      // with ONLY this wave's own files, and read at BOTH ends with the same instrument —
+      // never at the shared working tree and never at the HEAD the wave opened on. Two
+      // lanes have now had to re-record this census after archiving the wrong commit; the
+      // parent is the only tree a later checkout of this commit can reproduce.
+      files: 2338, parked: 358, credited: 1980, titles: 18824, suiteTitles: 5384,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

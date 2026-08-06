@@ -138,3 +138,116 @@ export const GR2_PACT_FORMATION_COUPLINGS = Object.freeze([
   GR2_POSTURE_RESERVE_COUPLING,
   GR2_SHARED_THREAT_COUPLING,
 ]);
+
+/**
+ * ── GR-3's THREE ROWS, AND WHY THEY POINT THE OTHER WAY (seam 6) ────────────────────
+ *
+ * GR-2's rows above all read INTO grammar: belief, posture and the alliance web are other
+ * layers' evidence, and `pactFormation.js` is the importer that consumes them. GR-3's are
+ * the mirror. It mints a STANDING RIGHT — the seventh executor kind — and the reads that
+ * bite are `missionaryAccessFor`, `migrationRightFor`, `laborCompactFor`,
+ * `mutualDefenseFor` and their siblings, every one of them consumed by a volume that has
+ * not landed yet: FAITH's WF-6, POPULATIONS' POP-5b, and the war layer's own
+ * `defensive_pact` reader families.
+ *
+ * ⚠ SO THESE ARE FORWARD DECLARATIONS, AND THEY SAY SO RATHER THAN PRETENDING OTHERWISE.
+ * The inclusion walker licenses a cross-layer import by matching `moduleOf(row.read)`
+ * against the IMPORTER, and for a consumer that does not exist there is no importer to
+ * match — so `read` names the PRODUCER (the enforcement leaf where the right is read from
+ * the ledger) and the row licenses nothing today. That is the point: the corpus's
+ * producer/consumer law says a right may not ship with its consumer-side reachability
+ * merely unmentioned, and `non_intervention` is the recorded proof of what happens when
+ * one does. Named here, the debt is findable; the consuming wave re-points `read` at its
+ * own module in ITS commit and the row starts licensing then.
+ *
+ * THE COUNTERFORCE COLUMN IS HONEST HERE TOO. A granted right is not free to the grantor:
+ * every one of these three has its own answering pressure inside the same instrument —
+ * the compliance state that frays, and the strain that a resented right banks against the
+ * court that granted it. `grantedRightStateFor` is that reading's address.
+ */
+
+/**
+ * GR-3 / GRAMMAR→FAITH (CPL-14). THE RITE SETTLED BY COMPACT. Five faith rows land in the
+ * one canonical catalog and their grant reads expose lawful access, communion, pilgrimage
+ * and forsworn suppression. FAITH's WF-6 is the CONSUMER wave — a pointer, never a second
+ * author — and its stance lanes read these as lawful access rather than as intrusion.
+ *
+ * ⚠ LAW ONE BOUNDS THIS COUPLING ABSOLUTELY: it moves believers, believer-share bands and
+ * sacred tension, and it never confirms, denies or resolves a divine.
+ *
+ * THE COUNTERFORCE is inside the same evidence: the host temple reads the same
+ * believer-share drift the missionary counts as success as EROSION. Same numbers, other
+ * sign — which is why the row names the compliance read rather than a second scorer.
+ */
+export const GR3_FAITH_GRANT_COUPLING = couplingRow({
+  couplingId: 'CPL-14.GRAMMAR_TO_FAITH.GR-3.faith_grants',
+  pairId: 'CPL-14',
+  direction: 'GRAMMAR→FAITH',
+  read: 'src/domain/worldPulse/treatyEnforcement.js#missionaryAccessFor',
+  receiptField: 'spatialLedgers.treaties[].{terms,provenance,lineage}',
+  counterforce: 'src/domain/worldPulse/treatyEnforcement.js#grantedRightStateFor',
+  flags: Object.freeze(['pactFormationEnabled', 'peaceEngineEnabled']),
+  owningVolume: 'GRAMMAR',
+  owningWave: 'GR-3',
+  intendedDesk: 'diplomacy',
+});
+
+/**
+ * GR-3 / GRAMMAR→POP (CPL-17). THE LOCATIO CHARTER. `migration_right` is the instrument
+ * behind the permit surface FP-POPULATIONS lights; `labor_compact` colours a production
+ * arm in BANDS and never in counts; `settlement_provision` carries founding grain on the
+ * existing conserved-stream physics with its direction on the term's own beneficiary.
+ *
+ * THE COUNTERFORCE is the commons voice: the same arrivals that are labour to a court are
+ * pressure to the people already there, and POP owns that arc off the same evidence.
+ */
+export const GR3_POPULATION_GRANT_COUPLING = couplingRow({
+  couplingId: 'CPL-17.GRAMMAR_TO_POP.GR-3.population_grants',
+  pairId: 'CPL-17',
+  direction: 'GRAMMAR→POP',
+  read: 'src/domain/worldPulse/treatyEnforcement.js#migrationRightFor',
+  receiptField: 'spatialLedgers.treaties[].{terms,provenance,lineage}',
+  counterforce: 'src/domain/worldPulse/treatyEnforcement.js#grantedRightStateFor',
+  flags: Object.freeze(['pactFormationEnabled', 'peaceEngineEnabled']),
+  owningVolume: 'GRAMMAR',
+  owningWave: 'GR-3',
+  intendedDesk: 'diplomacy',
+});
+
+/**
+ * GR-3 / GRAMMAR→WAR (CPL-5). THE WRITER THE SURVEY WENT LOOKING FOR. Five reader families
+ * have treated a `defensive_pact` RELATIONSHIP edge as support since before the survey, and
+ * NO simulation path ever minted one — a label with no terms. `mutual_defense` is the
+ * instrument side of it, and `mutualDefenseFor` is its read.
+ *
+ * ⚠ THE CONSUMER SIDE IS DEFERRED BY NAME, WHICH IS WHAT THIS ROW IS FOR. Not one of
+ * `warHomeCosts.js`, `warCapacityReads.js`, `warAllianceRisk.js` or `thirdPartyRansom.js`
+ * consults this read yet, and the measured reason is structural rather than lazy:
+ * `computeAllyRelief` takes no `tick`, so admitting a treaty-scoped right at that site
+ * means threading the clock through war hot paths — a war-owned change with its own
+ * verification burden. `tests/domain/peaceTermsGrantTerms.test.js` holds the census as a
+ * TRIPWIRE: the day a reader consults `mutualDefenseFor` it reds, and discharging THIS row
+ * is what that red asks for.
+ *
+ * THE COUNTERFORCE is the entanglement read: the same WR-6 alliance-web evidence that
+ * recommends the bond prices being dragged into the partner's wars when the call comes.
+ */
+export const GR3_MUTUAL_DEFENSE_COUPLING = couplingRow({
+  couplingId: 'CPL-5.GRAMMAR_TO_WAR.GR-3.mutual_defense',
+  pairId: 'CPL-5',
+  direction: 'GRAMMAR→WAR',
+  read: 'src/domain/worldPulse/treatyEnforcement.js#mutualDefenseFor',
+  receiptField: 'spatialLedgers.treaties[].{terms,provenance,lineage}',
+  counterforce: 'src/domain/worldPulse/treatyEnforcement.js#grantedRightStateFor',
+  flags: Object.freeze(['pactFormationEnabled', 'peaceEngineEnabled', 'warLayerEnabled']),
+  owningVolume: 'GRAMMAR',
+  owningWave: 'GR-3',
+  intendedDesk: 'diplomacy',
+});
+
+/** @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
+export const GR3_TERM_FAMILY_COUPLINGS = Object.freeze([
+  GR3_FAITH_GRANT_COUPLING,
+  GR3_POPULATION_GRANT_COUPLING,
+  GR3_MUTUAL_DEFENSE_COUPLING,
+]);

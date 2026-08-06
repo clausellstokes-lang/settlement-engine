@@ -132,7 +132,7 @@ import { applyCoalitionReimbursement, applyCoalitionSettlement } from './warCoal
 import { absorbWarEndIntoStandingPact } from './pactAmendment.js';
 import {
   COALITION_BETRAYAL_CHARACTER_TUNING, PEACE_TERMS_TUNING, TERM_CATALOG,
-  TERM_FAMILIES, TERM_TYPES, termLabel,
+  TERM_EXECUTORS, TERM_FAMILIES, TERM_TYPES, termLabel,
 } from './peaceTermsCatalog.js';
 import {
   nonNegativeInteger, rankState, recordOf, round4, sortedLedger, explicitText,
@@ -1189,6 +1189,7 @@ export {
   COALITION_BETRAYAL_CHARACTER_TUNING,
   PEACE_TERMS_TUNING,
   TERM_CATALOG,
+  TERM_EXECUTORS,
   TERM_FAMILIES,
   TERM_TYPES,
   alignmentPress,

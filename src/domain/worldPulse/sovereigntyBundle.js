@@ -52,6 +52,31 @@
  * bug, it is the message "a new term family landed; re-read this degradation note,
  * widen the bundle, and delete the arm".
  *
+ * ── THE TRIPWIRE FIRED, AND THIS IS ITS DISCHARGE (GR-3, 2026-08-06) ─────────────
+ *
+ * FP-GRAMMAR's GR-3 landed the trade-rights rows under the `commercial` family, plus
+ * `faith` and `population`. `catalogGrewSinceWr10()` therefore returns TRUE from that
+ * commit onward, and its pins now assert exactly that. NOTHING IN THIS MODULE CHANGED,
+ * which was the whole design: the component set derives from `TERM_FAMILIES` at call
+ * time, so the three new families became composable consideration the moment they
+ * landed, with no edit here and no rename sweep anywhere.
+ *
+ * THE DEGRADED ARM IS NARROWER NOW, NOT GONE, and the distinction is load-bearing. Two
+ * separate things were missing when this wave shipped: the trade-rights terms could not
+ * be NAMED (no catalog rows) and they could not BITE (no executors). GR-3 fixed the
+ * first only — the rows are `executor:'seam'` with no producer, the `non_intervention`
+ * mechanism verbatim — and FP-TRADE's TR-5 still owes the second. So a bundle can now
+ * carry a `commercial` component and have it weighed through the valuing court's needs,
+ * while no engine path yet MINTS such a term to put on the table. `offered` versus
+ * `available` keeps saying which of those two facts you are looking at, and that is
+ * still the one signal that says TR-5 is owed.
+ *
+ * WR10_FAMILIES_AT_LANDING IS DELIBERATELY NOT WIDENED. It is named a LANDING RECORD
+ * rather than a policy in its own docstring, and nothing reads it to decide what may
+ * compose — widening it would erase the fact the tripwire exists to preserve (what the
+ * catalog looked like when this wave shipped) and would re-arm a wire whose message has
+ * already been delivered and acted on.
+ *
  * ── THE PEACE COMPONENT, AND A DIVERGENCE THAT HAS NOW BEEN RULED ────────────────
  *
  * `peace` is a component here and it is NOT a TERM_CATALOG family — the cession rider

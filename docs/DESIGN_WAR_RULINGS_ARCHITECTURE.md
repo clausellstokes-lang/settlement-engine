@@ -187,6 +187,31 @@ executors — before the bundle can stack them as consideration. It sits in this
 rather than beside it because it gates the same thing the flags do: what WR-10 can
 actually compose when lit.
 
+> **⚠ HALF DISCHARGED 2026-08-06 — GR-3 LANDED, TR-5 STILL OWED.** GR-3 minted the three
+> rows under a new `commercial` family (plus `faith` and `population`), so
+> `catalogGrewSinceWr10()` now returns TRUE and the pins that asserted otherwise
+> (`tests/domain/sovereigntyBundleWr10.test.js` PIN 1b and PIN 5) are re-pointed at the
+> fired position. **`sovereigntyBundle.js` itself needed no edit**, which was the design:
+> it derives its component set from `TERM_FAMILIES` at call time, so the three families
+> became composable consideration the day they landed.
+>
+> WHAT IS STILL OWED IS THE OTHER HALF, and the two halves are genuinely different. The
+> rows are `executor:'seam'` with NO producer — the `non_intervention` mechanism verbatim
+> — so a trade right can now be NAMED and weighed but no engine path yet MINTS one to put
+> on a table. **TR-5 lands the executors and the producers; until then the degraded arm is
+> narrower, not gone**, and `offered` versus `available` is still the signal that says so.
+>
+> ⚠ **SPELLING: RULED AND CLOSED, SAME COMMIT (chair ruling J-GR3-C2, 2026-08-06).** GR-3
+> built `exclusivity` while FP-TRADE's TR-5 body says `trade_exclusivity`, and GRAMMAR §4
+> — named CANONICAL by all three documents — carried no trade-rights row at all. **A
+> citation cycle whose named authority is silent is how three documents drift apart while
+> each believes it is deferring to another**, so the ruling did not merely pick a spelling:
+> `exclusivity` stands (two chair documents to one, and it is what the wave built) AND
+> GRAMMAR §4 gained the three rows in this same commit, so the canonical home is no longer
+> empty. **Read the spelling in GRAMMAR §4; TR-5 must POINT at `peaceTermsCatalog.js` and
+> must not re-mint under the other name.** The divergent FP-TRADE row is left standing with
+> a pointer beside it rather than silently rewritten, so the drift stays findable.
+
 IT IS THE ONE SOFT PRECONDITION THIS TABLE CARRIES BESIDES WR-1's SUNK-COST FALLBACK,
 and the reason is a real difference in kind rather than an exemption. A dark FLAG makes
 a built mechanism silent; an unbuilt TERM FAMILY makes a component **unnameable**. So

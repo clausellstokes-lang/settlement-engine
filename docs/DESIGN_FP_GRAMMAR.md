@@ -458,6 +458,29 @@ TERM_CATALOG extensions                    — GR-3, same-commit with the frozen
                                            //   (warDeployment.js:218-225);
                                            //   composes with non_aggression via
                                            //   the COMPOSABLE list (above)
+  commercial family: exclusivity | market_access | toll_exemption
+                                           // [ADDED 2026-08-06, chair ruling
+                                           //   J-GR3-C2] THIS ROW WAS MISSING AND
+                                           //   ITS ABSENCE WAS THE DEFECT: WR-10
+                                           //   and DESIGN_FP_ARCH_GR.md say
+                                           //   `exclusivity`, DESIGN_FP_TRADE.md's
+                                           //   TR-5 body says `trade_exclusivity`,
+                                           //   and all three cite THIS list as
+                                           //   canonical — a citation cycle whose
+                                           //   named authority was silent, which is
+                                           //   how three documents drift while each
+                                           //   believes it is deferring to another.
+                                           //   RULED: bare `exclusivity` stands (two
+                                           //   chair documents to one, and no other
+                                           //   catalog row carries a family prefix).
+                                           //   GR-3 mints the ROWS ONLY, as
+                                           //   `executor:'seam'` with NO producer —
+                                           //   the `non_intervention` mechanism
+                                           //   verbatim, so registration is
+                                           //   byte-identical. TR-5 lands the
+                                           //   EXECUTORS and re-points to this
+                                           //   spelling; it must never re-mint under
+                                           //   the other one.
   executor kind 'grant' (7th)              // standing-right reads exposed from
                                            //   treatyEnforcement.js (the one-reader
                                            //   law: expiry lifts same tick)

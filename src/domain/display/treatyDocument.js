@@ -90,6 +90,32 @@ export const TREATY_COMPLIANCE_VOICE = Object.freeze({
     strained: 'The conveyed town answers its new banner slowly, and the seller\'s old stewards have not all gone home.',
     defaulted: 'The conveyed town has thrown off the banner it was sold under, and the deed is waste parchment.',
   }),
+  // GR-3 — the three families the peacetime catalog gained. The register is the same one
+  // every row above keeps: settlement-agnostic, diegetic, and honest about the fact that a
+  // GRANTED right frays QUIETLY. A right is not seized back the way a garrison is thrown
+  // off; it is narrowed, delayed, made unwelcome — which is why every `strained` line here
+  // is about friction rather than refusal, and why the fog reads them as honored until the
+  // watcher is close enough to see.
+  //
+  // ⚠ LAW ONE GOVERNS THE FAITH ROW ABSOLUTELY. Not one of these three sentences says
+  // whether a god is real, answered, or pleased. They speak about PRIESTS, ROADS, DOORS
+  // and PEOPLE — the things a treaty can actually bind — and the theological question the
+  // engine never answers stays unasked.
+  faith: Object.freeze({
+    honored: 'The strangers\' priests walk the roads and speak in the squares, and no hand is raised against them.',
+    strained: 'The strangers\' priests find the roads longer than they were, and the squares oddly empty when they arrive.',
+    defaulted: 'The doors are shut to the strangers\' priests, and what was written about the rites is no longer kept.',
+  }),
+  population: Object.freeze({
+    honored: 'The families cross as the compact allows, and the fields they clear are theirs to work.',
+    strained: 'The families still cross, but the crossing has grown slow and the welcome at the far end thin.',
+    defaulted: 'The crossings are closed and the compact of passage is dead; those already over are on their own.',
+  }),
+  commercial: Object.freeze({
+    honored: 'The named house trades on the terms it was promised, and the tollmen wave its wagons through.',
+    strained: 'The named house still trades, but the tollmen find new reasons to count, and the counting takes all day.',
+    defaulted: 'The promised terms of trade are withdrawn; the named house pays what any stranger pays, or is turned away.',
+  }),
 });
 
 /** A generic register floor for any future family the table does not name (keeps

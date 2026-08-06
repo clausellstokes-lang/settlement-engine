@@ -8,6 +8,15 @@
  * a defect: when GR-3 mints the trade-rights catalog rows, these tests go red and the
  * red says "widen the bundle and delete this arm".
  *
+ * ⚠ THAT MESSAGE HAS BEEN DELIVERED AND ACTED ON (GR-3, 2026-08-06), so the sentence
+ * above is HISTORY and is kept only because it explains why section D is shaped the way
+ * it is. Do not read it as a live prediction. What actually happened: GR-3 minted the
+ * three trade-rights rows under a `commercial` family (plus `faith` and `population`),
+ * PIN 1b and PIN 5 were re-pointed at the fired position, and PIN 2 was RETARGETED
+ * rather than deleted — the thing it protected was never "nobody may spell these words"
+ * but "the spelling may not FORK", and that is now stated directly. The bundle itself
+ * needed no edit at all, which was the design.
+ *
  * THE ABSENCE SCAN STRIPS COMMENTS FIRST, and that is not fussiness. This wave's own
  * modules legitimately NAME the three absent terms in their headers — explaining what
  * is missing is the whole point of a degradation note — and a raw scan would count the
@@ -23,8 +32,11 @@ import {
   clearSovereigntyTrade, SOVEREIGNTY_TRADE_VERDICTS,
   SOVEREIGNTY_NON_CATALOG_COMPONENTS, WR10_FAMILIES_AT_LANDING,
 } from '../../src/domain/worldPulse/sovereigntyBundle.js';
-import { TERM_FAMILIES } from '../../src/domain/worldPulse/peaceTermsCatalog.js';
+import {
+  CLASS_TERM, TERM_CATALOG, TERM_FAMILIES, TERM_TYPES,
+} from '../../src/domain/worldPulse/peaceTermsCatalog.js';
 import { appraiseSettlementAsset, sovereigntyValueBand } from '../../src/domain/worldPulse/sovereigntyAppraisal.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -314,36 +326,93 @@ describe('WR-10c — TR-5 graceful degradation, pinned in both directions', () =
     expect(bundleComponentFamilies().length).toBeGreaterThan(staleHardcodedList.length);
   });
 
-  it('PIN 1b — THE TRIPWIRE: the catalog has NOT grown since WR-10 landed', () => {
-    // WHEN THIS GOES RED IT IS AN INSTRUCTION, NOT A DEFECT: a new term family landed
-    // (GR-3's trade-rights rows, most likely). Re-read the degradation note in
-    // sovereigntyBundle.js, widen WR10_FAMILIES_AT_LANDING, and delete the degraded arm.
-    expect(catalogGrewSinceWr10()).toBe(false);
-    expect([...TERM_FAMILIES].sort()).toEqual([...WR10_FAMILIES_AT_LANDING].sort());
-    expect(WR10_FAMILIES_AT_LANDING.length).toBeGreaterThan(0); // non-vacuity
+  it('PIN 1b — THE TRIPWIRE HAS FIRED AND BEEN DISCHARGED (GR-3, 2026-08-06)', () => {
+    // THIS PIN USED TO ASSERT `false`, AND ITS RED WAS THE INSTRUCTION. GR-3 delivered
+    // the message: the catalog gained `commercial` (the trade-rights rows WR-10's bundle
+    // names), plus `faith` and `population`. The instruction has been carried out — the
+    // degradation note in sovereigntyBundle.js is re-read and re-written, and the arm is
+    // NARROWED rather than deleted because TR-5 still owes the executors. So the wire is
+    // now asserted in its FIRED position, which is the only honest state for it.
+    expect(catalogGrewSinceWr10()).toBe(true);
+    // ...and it fired for the reason claimed, not for some other family drifting in. The
+    // grown-past set is named EXACTLY, so a fourth family arriving reds here rather than
+    // being absorbed by a `true` that had stopped meaning anything.
+    const grown = TERM_FAMILIES.filter((family) => !WR10_FAMILIES_AT_LANDING.includes(family));
+    expect([...grown].sort()).toEqual(['commercial', 'faith', 'population']);
+    // THE LANDING RECORD IS STILL THE LANDING RECORD. It is deliberately NOT widened —
+    // its own docstring calls it a record and not a policy, and widening it would erase
+    // the fact this pin exists to preserve. Every WR-10-era family is still in the live
+    // catalog (a family DELETED under it would be a different and much worse event).
+    for (const family of WR10_FAMILIES_AT_LANDING) expect(TERM_FAMILIES).toContain(family);
+    expect(WR10_FAMILIES_AT_LANDING.length).toBe(8); // non-vacuity + the record is frozen
   });
 
-  it('PIN 2 — NO trade-rights literal is spelled in src/, and the same scan FINDS one that exists', () => {
-    const FORBIDDEN = ['trade_exclusivity', 'market_access', 'toll_exemption',
-      'tradeExclusivity', 'marketAccess', 'tollExemption'];
+  it('PIN 2 — the trade-rights spellings live in ONE file, and the rejected ones nowhere', () => {
+    // RETARGETED BY GR-3, WHICH IS THE WAVE THIS PIN WAS WAITING FOR. The original read
+    // "NO trade-rights literal is spelled in src/", and its reason was explicit: spelling
+    // one would pre-empt chair ruling R3, which makes GRAMMAR §4 canonical for their
+    // spelling. GR-3 IS the wave that exercises R3, so a blanket ban would now forbid the
+    // canonical list from containing the canonical rows. What the pin was actually
+    // protecting — that the spelling cannot FORK — survives intact and is now stated
+    // directly: the minted tokens appear in the catalog and NOWHERE else in src/.
+    const CATALOG_HOME = 'src/domain/worldPulse/peaceTermsCatalog.js';
+    // (a) The spellings GR-3 MINTED. Lawful in the catalog, forbidden everywhere else —
+    // any second home is the second list R3 exists to forbid.
+    const MINTED = ['exclusivity', 'market_access', 'toll_exemption'];
+    // (b) The spellings GR-3 REJECTED. Still forbidden tree-wide, INCLUDING the catalog:
+    // `trade_exclusivity` is FP-TRADE's TR-5 draft spelling and the chair documents say
+    // bare `exclusivity`, so a row appearing under the other name anywhere is the
+    // divergence itself arriving. The camelCase variants were never anyone's proposal.
+    const REJECTED = ['trade_exclusivity', 'tradeExclusivity', 'marketAccess', 'tollExemption'];
     const files = walkJs(join(ROOT, 'src'));
     expect(files.length).toBeGreaterThan(100); // the scan really walked a tree
 
+    // ⚠ WHOLE TOKENS, NOT SUBSTRINGS, AND THAT IS A MEASURED CORRECTION rather than a
+    // tidy-up. `exclusivity` is a SUBSTRING of `trade_exclusivity`, so the original
+    // `body.includes(token)` predicate would report the rejected spelling as ALSO being
+    // the minted one wherever it appeared — the two would be blind through the same hole,
+    // and "no second speller" would have been unprovable in exactly the case that matters.
+    // `_` is a word character, so `\bexclusivity\b` genuinely does not fire inside
+    // `trade_exclusivity`; the separation is proved by the executed mutants below.
+    /** @param {string} body @param {readonly string[]} words @returns {string[]} */
+    const hitsOf = (body, words) => words.filter(
+      (token) => new RegExp(`\\b${token}\\b`).test(body),
+    );
     /** @param {string} body @returns {string[]} */
-    const hits = (body) => FORBIDDEN.filter((token) => body.includes(token));
+    const hits = (body) => hitsOf(body, [...MINTED, ...REJECTED]);
     const offenders = [];
+    const rejectedAnywhere = [];
+    const mintedHomes = [];
     for (const file of files) {
-      const found = hits(code(file.slice(ROOT.length + 1)));
-      if (found.length) offenders.push(`${file}: ${found.join(',')}`);
+      const rel = file.slice(ROOT.length + 1);
+      const body = code(rel);
+      if (hitsOf(body, REJECTED).length) rejectedAnywhere.push(`${rel}: ${hitsOf(body, REJECTED).join(',')}`);
+      const minted = hitsOf(body, MINTED);
+      if (!minted.length) continue;
+      if (rel === CATALOG_HOME) mintedHomes.push(rel);
+      else offenders.push(`${rel}: ${minted.join(',')}`);
     }
+    // No second speller...
     expect(offenders).toEqual([]);
+    // ...no rejected spelling anywhere at all...
+    expect(rejectedAnywhere).toEqual([]);
+    // ...and the ONE lawful home really does spell all three, so the emptiness above is a
+    // measurement rather than the scan having quietly stopped finding anything.
+    expect(mintedHomes).toEqual([CATALOG_HOME]);
+    expect(hitsOf(code(CATALOG_HOME), MINTED).sort()).toEqual([...MINTED].sort());
 
     // GUARD-THE-GUARD. A scan that silently stopped matching would pass as compliance,
     // so the identical predicate must FIND a token that genuinely is in the tree...
     expect(code('src/domain/worldPulse/peaceTermsCatalog.js').includes('tribute')).toBe(true);
     // ...and must FIND a forbidden token when one is actually present (executed mutant).
+    // THE FIRST MUTANT IS THE ALIASING CONTROL: the body carries `trade_exclusivity` and
+    // NOT the minted `exclusivity`, so a substring predicate would return BOTH and this
+    // exact-equality assertion is what forbids the two tokens sharing one hole.
     expect(hits('const x = { trade_exclusivity: 1 };')).toEqual(['trade_exclusivity']);
     expect(hits('const y = { tollExemption: 1 };')).toEqual(['tollExemption']);
+    // ...and the separation runs in the other direction too: the minted spelling alone
+    // must NOT be read as the rejected one.
+    expect(hits('const z = { exclusivity: 1 };')).toEqual(['exclusivity']);
 
     // COMMENT-STRIPPING IS LOAD-BEARING AND PROVED: this wave's own header names the
     // three absent components in prose, and the raw file therefore mentions them while
@@ -379,13 +448,35 @@ describe('WR-10c — TR-5 graceful degradation, pinned in both directions', () =
     expect(valuation.total01).toBe(0.4);
   });
 
-  it('PIN 5 — the trade-rights dimension is an HONEST PERMANENT ZERO with a declared reason', () => {
-    // Nothing this wave publishes reports a trade-rights contribution at all: the
-    // families simply are not in the derived set. Recorded as an explicit absence so a
-    // later soak cannot read an unbuilt dependency as a bad band.
+  it('PIN 5 — the trade-rights dimension is now NAMEABLE, and still UNPRODUCED', () => {
+    // WHAT THIS PIN USED TO SAY: "an HONEST PERMANENT ZERO" — nothing could report a
+    // trade-rights contribution because the family was not in the derived set at all.
+    // GR-3 moved exactly half of that. `commercial` IS in the set now, so a court can
+    // weigh such a component through its own needs and the receipt can name it...
     const available = bundleComponentFamilies();
     expect(available.length).toBe(TERM_FAMILIES.length + SOVEREIGNTY_NON_CATALOG_COMPONENTS.length);
-    expect(catalogGrewSinceWr10()).toBe(false);
+    expect(available).toContain('commercial');
+    // ...and it composes for real, not merely as a legal name: a bundle carrying one is
+    // weighed by the same arithmetic every other family gets.
+    const weighed = valueBundleThroughNeeds({
+      partyId: 'ironvale',
+      components: [{ family: 'commercial', magnitude01: 0.8 }],
+      needs: { commercial: 0.5 },
+    });
+    expect(weighed.offered.map((line) => line.family)).toEqual(['commercial']);
+    expect(weighed.total01).toBe(0.4);
+    // THE OTHER HALF IS STILL OWED, and this is the half that keeps TR-5 honest: the
+    // three commercial rows are `executor:'seam'` with NO producer, so no engine path can
+    // mint one to put on a table. The day that changes, this reds — which is the seam-2
+    // instruction to move the reachability obligation into TR-5's own commit.
+    const commercial = TERM_TYPES.filter((type) => TERM_CATALOG[type].family === 'commercial');
+    expect([...commercial].sort()).toEqual(['exclusivity', 'market_access', 'toll_exemption']);
+    for (const type of commercial) expect(TERM_CATALOG[type].executor).toBe('seam');
+    // ANCHORED on `tribute`, a live CLASS_TERM value read the identical way: an empty or
+    // re-shaped CLASS_TERM would otherwise certify `exclusivity` as producer-less for a
+    // reason that has nothing to do with TR-5.
+    expectAbsentWithAnchor(Object.values(CLASS_TERM), 'exclusivity', 'tribute',
+      'the trade-rights rows stay producer-less until TR-5 lands');
   });
 
   it('PIN 6 — the two volumes\' degradation notes are now TWINS (chair ruling CR-WR10-B)', () => {
