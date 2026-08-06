@@ -4,6 +4,63 @@
 
 ---
 
+> ## ⚠ ERRATA — READ BEFORE THE DOCUMENT
+>
+> This map was verified against the live code by an independent completeness
+> critic after it was written. **One factual error has been corrected in place**
+> (system 35, population — the document had claimed a settlement's headcount was
+> fixed at generation; it is not, and the correction is verified against the
+> running code). The findings below are **verified but NOT yet corrected**. They
+> are recorded here rather than silently left, because a map that misstates what
+> is *running* is worse than no map.
+>
+> **The root cause of most of them is one missing word.** The status vocabulary
+> has no rung for the estate's most common real state: *"runs only in the three
+> world-alive presets."* Entries carrying that state got rounded either up to
+> LIVE or down to dark. Adding the rung and sweeping every entry against it fixes
+> the whole class at once, and is the first thing a next pass should do.
+>
+> **Known errors, each verified against the code:**
+> 1. **The preset story is unreconciled and a reader will get it backwards.**
+>    Seven preset objects exist, but three are legacy (they resolve for old saves
+>    and are applied by toolbar chips) while the world-laws dialog surfaces only
+>    four. This matters because **the preset that lights the war layer is one of
+>    the legacy three** — a reader will otherwise conclude the war layer is a card
+>    in the dialog.
+> 2. **"The two most active presets" names two different pairs** in different
+>    places, and a reader cannot tell which is meant. For the town's
+>    decision-maker and supply-web warfare it means one pair; for the rumour
+>    network it must mean another, because the war-lighting preset carries
+>    *instant omniscient* news.
+> 3. **The loops do not say where they stop.** The information loop runs its
+>    middle steps in only two presets; in the war-lighting preset it collapses to
+>    its first step and then reads a picture that is always true. The corruption
+>    loop genuinely ENDS two steps before the exit it advertises. The scarcity
+>    loop cannot reach its final two steps in the preset that carries the peace
+>    engine but deliberately starts no wars.
+> 4. **The growth loop is under-sold.** It is headed "largely unlit," but its most
+>    vivid step — a town founding a satellite — runs live in the three world-alive
+>    presets, triggered by boom, prosperity, population pressure, and migration
+>    the town cannot absorb.
+> 5. **No loop names aid or generosity.** The hunger loop walks a famine all the
+>    way to a neighbour's opportunism without ever passing through the live layer
+>    that decides whether an ally *relieves* it. That is the most human step in
+>    the flagship loop and it is missing.
+> 6. **Smaller:** the foreign-planting half of corruption is lit by no preset at
+>    all and belongs in the dark inventory; the dossier view list omits Traditions,
+>    the steadings sections, and market prices; and the "about ninety-four
+>    structural census tests" figure is not reproducible as stated and needs its
+>    own definition or should be cut.
+>
+> Everything else the critic checked came back **correct**: the system, loop,
+> promise and boundary counts; the thirteen engine-gated switches and their exact
+> list; 165 registered operations; the 38-entry product flag registry; 13 faction
+> archetypes; 16 grounds for war each mirrored by a ground for peace; the
+> nine-phase tick order; and the espionage double-block.
+
+---
+
+
 ## HOW TO READ THIS DOCUMENT
 
 - **Equal weight.** Every system below gets the same four questions answered, in the same order, at roughly the same depth. The rumour network and the calendar get the same treatment. Nothing is "just plumbing."
@@ -284,10 +341,10 @@
 
 ### 35. Population, and the demographic engine behind it
 
-- **What it is** — Today a settlement's headcount is set at generation from its tier band and then essentially held; the pipeline step named "population" actually generates the *cast*, not the number of souls. Beside it sits a complete births-minus-deaths engine: carrying capacity derived from food, a density ceiling from tier, named characters exempt from the death draw, migration between settlements over the real road network, and a plan system where a crowded town chooses between emigration, imports, infrastructure, promotion, or founding a satellite.
+- **What it is** — A settlement's headcount CHANGES EVERY PULSE in an ordinary campaign: a live pressure model grows towns under favourable conditions and shrinks them under accumulated pressure, and its own two receipts say so in those words. (The pipeline step named "population" at generation makes the *cast* of characters, not the number of souls — a separate thing.) What is NOT reachable is the richer DEMOGRAPHIC ENGINE beside it: births minus deaths, carrying capacity derived from food, a density ceiling from tier, named characters exempt from the death draw, and the plan system where a crowded town chooses between emigration, imports, infrastructure, promotion, or founding a satellite. Beside it sits a complete births-minus-deaths engine: carrying capacity derived from food, a density ceiling from tier, named characters exempt from the death draw, migration between settlements over the real road network, and a plan system where a crowded town chooses between emigration, imports, infrastructure, promotion, or founding a satellite.
 - **Fed by / feeds** — When lit it would drive tier drift, the viability ladder, disease and raid risk, the resource-pressure grounds for war, and the news feed.
-- **At the table** — Today: population is a fixed number with a tier label. Lit: a town that outgrows its fields exports people, builds, or starves, and the DM reads about it in the world news.
-- **Status** — BUILT, NOT REACHABLE. Unlit it returns the same object references — a true no-op.
+- **At the table** — Today: a town's population drifts up in good years and down under sustained pressure, and a severe enough loss reads as mass flight. Lit: a town that outgrows its fields exports people, builds, or starves for reasons the DM can trace to food and land rather than to accumulated pressure.
+- **Status** — SPLIT, AND THE SPLIT MATTERS. Population CHANGE is **LIVE** (the pressure model runs in the ordinary tick order). The **DEMOGRAPHIC ENGINE** is **BUILT, NOT REACHABLE** — its switch is absent from the defaults and declared false in every preset. Curiously, lighting it makes the world *quieter* at first: it suppresses the legacy growth path in order to take that job over.
 
 ### 36. Food — the ledger, the balance, the granary
 
