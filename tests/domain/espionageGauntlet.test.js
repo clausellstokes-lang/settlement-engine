@@ -8,10 +8,20 @@
  *      row minted through `mintEnvoyErrand` — the production writer — and read back out of
  *      the ledger. A hand-shaped object would let the DTO drift out from under the whole
  *      file silently.
- *   2. IT NEVER PROVES A FACTOR LIVE BY ITS PRESENCE IN THE SOURCE. Each of the eight catch
- *      factors is dropped ONE AT A TIME against the same fixture and the chance must MOVE.
- *      A conjunction of eight multipliers is exactly the shape in which one dead term hides
- *      behind seven live ones (the conjunction-coverage law).
+ *   2. IT NEVER PROVES A FACTOR LIVE BY ITS PRESENCE IN THE SOURCE, AND THE DROPS RUN
+ *      THROUGH THE REAL GATHERING FUNCTION. Each of the TEN catch factors is dropped one at
+ *      a time by moving the WORLD that `gauntletCatchFactors` reads, and BOTH the gathered
+ *      term AND the resulting chance must move. A conjunction of ten multipliers is the
+ *      shape in which one dead term hides behind nine live ones (the conjunction-coverage
+ *      law) — but the shape that actually bit here was subtler, and is written down so
+ *      nobody re-derives it: this file used to drop the terms on a HAND-WRITTEN LITERAL fed
+ *      straight to `catchChance01`, which is ES-0's arithmetic leaf and was already ES-0's
+ *      job (tests/domain/espionageMath.test.js, "EVERY factor is individually live"). It
+ *      never routed through the gathering at all — so EIGHT of the ten world reads could be
+ *      replaced with CONSTANTS while this whole battery stayed green. Measured: eight
+ *      mutants, eight greens. Asserting that the GATHERED TERM moved, and not only that the
+ *      chance moved, is what kills a constant — a world edit that shifts two terms at once
+ *      would otherwise leave the one that was constant-ised still covered by the other.
  *   3. IT NEVER SPLITS A COMPOSITE ID. Errand ids contain dots and colons, so attribution
  *      from a roll key is BY RECONSTRUCTION — rebuild the key from the detection's own
  *      fields and compare — never by parsing. WR-8 recorded that lesson the expensive way,
@@ -37,6 +47,7 @@ import {
   dwellRamp,
 } from '../../src/domain/worldPulse/espionage/espionageMath.js';
 import { readEspionageDoctrine } from '../../src/domain/worldPulse/espionage/espionageDoctrine.js';
+import { PATRONAGE_TUNING } from '../../src/domain/corruption.js';
 import {
   FOREIGN_GUEST_HOLD_CAUSES,
   FOREIGN_GUEST_HOLD_COVERT_CAUSE,
@@ -50,6 +61,7 @@ import {
   ransomDwellRead,
 } from '../../src/domain/worldPulse/ransomClaim.js';
 import { ransomWorthBandFromErrand } from '../../src/domain/worldPulse/envoyRansomStage.js';
+import { scheduledEnvoyPosition } from '../../src/domain/worldPulse/envoyErrandTransit.js';
 import {
   ENVOY_REQUIRED_RULES,
   envoyErrandsOf,
@@ -163,8 +175,23 @@ function acceptedRuling(outcome) {
   };
 }
 
+/** The mission's own schedule: arrive westmarch at 12, leave for irontown at 20. */
+const DEFAULT_LEGS = Object.freeze([
+  { fromId: 'ashford', toId: 'westmarch', departTick: 10, arrivalTick: 12 },
+  { fromId: 'westmarch', toId: 'irontown', departTick: 20, arrivalTick: 22 },
+]);
+
+/** THE SAME MISSION WITH A LONG SECOND LEG. The default plan's dwell window closes at tick
+ *  20, which reaches interval 3 — so it can never say anything about a cap of 6. This one
+ *  waits at westmarch until tick 40, which outruns the cap and makes the clamp measurable
+ *  on the read that produces the index. */
+const LONG_DWELL_LEGS = Object.freeze([
+  { fromId: 'ashford', toId: 'westmarch', departTick: 10, arrivalTick: 12 },
+  { fromId: 'westmarch', toId: 'irontown', departTick: 40, arrivalTick: 42 },
+]);
+
 /** A REAL two-leg covert mission: ashford → westmarch (the dwell) → irontown (the target). */
-function mintMission(worldState, { covert = true } = {}) {
+function mintMission(worldState, { covert = true, legs = DEFAULT_LEGS } = {}) {
   const outcome = peaceOffer();
   const minted = mintEnvoyErrand({
     worldState,
@@ -189,11 +216,10 @@ function mintMission(worldState, { covert = true } = {}) {
       }
       : {}),
     routePlan: {
-      legs: [
-        { fromId: 'ashford', toId: 'westmarch', departTick: 10, arrivalTick: 12 },
-        { fromId: 'westmarch', toId: 'irontown', departTick: 20, arrivalTick: 22 },
-      ],
-      expectedReturnTick: 40,
+      legs: legs.map((leg) => ({ ...leg })),
+      // DERIVED, not restated: eighteen ticks after the last arrival, which is the 40 the
+      // default plan carried before this became a parameter.
+      expectedReturnTick: legs[legs.length - 1].arrivalTick + 18,
       routeRef: { id: 'road.north', name: 'North Road' },
     },
     tick: 10,
@@ -224,6 +250,37 @@ const HOSTILE_GRAPH = Object.freeze({
 const FRIENDLY_GRAPH = Object.freeze({
   edges: [{ from: 'ashford', to: 'westmarch', relationshipType: 'allied' }],
 });
+const RIVAL_GRAPH = Object.freeze({
+  edges: [{ from: 'ashford', to: 'westmarch', relationshipType: 'rival' }],
+});
+
+/** Westmarch with ONE compromised watch-house, in the shape `corruption.js` actually reads:
+ *  a security-named institution carrying a `corruption`-typed IMPAIRMENT. */
+const BOUGHT_WATCH_TOWN = Object.freeze({
+  ...SNAPSHOT.settlements[1],
+  institutions: [{ name: 'Town Watch', type: 'guard', impairments: [{ type: 'corruption' }] }],
+});
+
+/** An institution DECLARING the clandestine facet (the facet law's custom-content parity),
+ *  which is what `settlementHasUnderways` resolves — never an English name. */
+const UNDERWAYS_INSTITUTION = Object.freeze({
+  name: 'The Warren', facets: { institutionFunction: 'clandestine' },
+});
+
+/** The gathering under test, on one fixed world. Every drop below is a PATCH to this. */
+function gatherFactors(patch = {}) {
+  return gauntletCatchFactors({
+    worldState: litWorld(),
+    regionalGraph: HOSTILE_GRAPH,
+    homeId: 'ashford',
+    homeItem: SNAPSHOT.settlements[0],
+    targetItem: SNAPSHOT.settlements[1],
+    tick: 13,
+    dwell: { settlementId: 'westmarch', stopIndex: 1, intervalIdx: 0 },
+    hasInsideAsset: false,
+    ...patch,
+  });
+}
 
 function stage(worldState, tick, graph = HOSTILE_GRAPH, extra = {}) {
   return advanceEspionageGauntlet({
@@ -269,6 +326,76 @@ describe('ES-2 — the dwell window is read off the schedule, never off a second
       covert: { ...errand.covert, itinerary: [{ face: 'declared', settlementId: 'irontown', stayTicks: 2 }] },
     };
     expect(covertDwellRead({ errand: strayPlan, tick: 13 }).reason).toBe('unplanned_stop');
+  });
+
+  // ── TWO GUARDS OVER ONE JOB, PINNED SEPARATELY ────────────────────────────────────
+  // `covertDwellRead` refuses twice: once on the SCHEDULE's own word (`progressBand` must
+  // read 'arrived') and once on the LEG's raw `arrivalTick` (a whole tick that has passed).
+  // On an ordinary itinerary the two agree on every row, so each is invisible behind the
+  // other: deleting EITHER one alone left the whole ES-2 battery green, and only deleting
+  // BOTH reddened anything (measured — three tests). Two guards over one job can only be
+  // pinned JOINTLY unless each gets a row where the OTHER one does not fire, so each pin
+  // below is exactly that row, and each states the disagreement it rests on rather than
+  // asserting a bare `false`.
+  test('GUARD 1 alone: the SCHEDULE says he is still moving, though the raw arrival has passed', () => {
+    const { errand } = mintMission(litWorld());
+    // A leg claiming it ARRIVES BEFORE IT DEPARTS. The transit reader clamps every leg to a
+    // minimum length, so at tick 10 it still calls him departed-and-moving, while the raw
+    // `arrivalTick` this leaf reads is already ten ticks behind. Guard 2 is satisfied here;
+    // only guard 1 refuses.
+    const inverted = {
+      ...errand,
+      legs: [{ ...errand.legs[0], departTick: 10, arrivalTick: 5 }, ...errand.legs.slice(1)],
+    };
+    const position = scheduledEnvoyPosition(inverted, 10)?.positionRef;
+    expect(position.progressBand, 'the premise: the schedule does NOT say arrived').toBe('departed');
+    expect(position.legIndex).toBe(0);
+    expect(inverted.legs[0].arrivalTick, 'the premise: the raw arrival has already passed').toBeLessThan(10);
+    expect(covertDwellRead({ errand: inverted, tick: 10 }).dwelling).toBe(false);
+    expect(covertDwellRead({ errand: inverted, tick: 10 }).reason).toBe('not_dwelling');
+  });
+
+  test('GUARD 2 alone: the SCHEDULE says arrived, on a leg whose arrival is not a whole tick', () => {
+    const { errand } = mintMission(litWorld());
+    // `scheduledEnvoyPosition` compares raw numbers, so 12.5 is past at tick 13 and it
+    // reports 'arrived'. This leaf reads WHOLE ticks and gets null, which is the half of
+    // guard 2 that a real producer can reach. Guard 1 is satisfied here; only guard 2 refuses.
+    const fractional = {
+      ...errand,
+      legs: [{ ...errand.legs[0], arrivalTick: 12.5 }, ...errand.legs.slice(1)],
+    };
+    const position = scheduledEnvoyPosition(fractional, 13)?.positionRef;
+    expect(position.progressBand, 'the premise: the schedule DOES say arrived').toBe('arrived');
+    expect(position.legIndex).toBe(0);
+    expect(Number.isInteger(fractional.legs[0].arrivalTick), 'the premise: not a whole tick').toBe(false);
+    expect(covertDwellRead({ errand: fractional, tick: 13 }).dwelling).toBe(false);
+    expect(covertDwellRead({ errand: fractional, tick: 13 }).reason).toBe('not_dwelling');
+    // ⚠ RECORDED, NOT PAPERED OVER: guard 2 reads `arrivalTick == null || now < arrivalTick`
+    // and only the FIRST half is reachable from this producer. `scheduledEnvoyPosition`
+    // reports 'arrived' at a leg index precisely because `tick >= that leg's arrivalTick`,
+    // so a row that is 'arrived' BEFORE its own arrival cannot be built through it. The
+    // `now < arrivalTick` clause is defence against a future second producer, deliberately
+    // kept, and deliberately not pinned — pinning it would take a fixture no caller can
+    // make, which is how a vacuous pin gets authored.
+  });
+
+  test('MEASURED: the resample cap CLAMPS the dwell index, on a stay long enough to reach it', () => {
+    // R-ES2-2 declares `DWELL_RESAMPLE_CAP` LOAD-BEARING at ES-2 rather than a backstop,
+    // and until now it was pinned only inside `gatherOrGovernRead` — never on the read that
+    // PRODUCES the index. The default plan's window closes at tick 20 and reaches interval
+    // 3, so raising the cap from 6 to 999 left the whole battery green (measured). This
+    // mission waits at westmarch until tick 40, which outruns the cap.
+    const { errand } = mintMission(litWorld(), { legs: LONG_DWELL_LEGS });
+    const at = (tick) => covertDwellRead({ errand, tick });
+    // It still CLIMBS below saturation — a flat index would satisfy a saturation pin alone.
+    expect([12, 14, 16, 18, 20, 22].map((tick) => at(tick).intervalIdx)).toEqual([0, 1, 2, 3, 4, 5]);
+    // …and then it STOPS, at the cap, and stays there for the rest of the window. This is
+    // the arm the raised-cap mutant cannot survive: without the clamp tick 38 would read 13.
+    expect(at(24).intervalIdx).toBe(ESPIONAGE_TUNING.DWELL_RESAMPLE_CAP);
+    expect(at(38).intervalIdx).toBe(ESPIONAGE_TUNING.DWELL_RESAMPLE_CAP);
+    expect(at(38).intervalIdx, 'saturated: eight more ticks buy no further interval')
+      .toBe(at(24).intervalIdx);
+    expect(at(38).dwelling, 'the premise: he is still dwelling at the far end of the window').toBe(true);
   });
 });
 
@@ -359,69 +486,74 @@ describe('ES-2 — the stay roll', () => {
     expect(dotted.split('.')[2]).not.toBe('shire.westmarch');
   });
 
-  test('every catch factor is INDIVIDUALLY live — eight drops, eight movements', () => {
-    const live = {
-      hostRung: 3,
-      securityEff01: 0.6,
-      orderBand: 'surplus',
-      stressLoad01: 0.5,
-      hasUnderways: true,
-      hasInsideAsset: true,
-      wariness01: 0.5,
-      competence01: 0.5,
-      stops: 3,
-      intervalIdx: 2,
-    };
-    const reference = catchChance01(live);
-    expect(reference).toBeGreaterThan(0);
-    /** Each entry is the SAME record with exactly one term neutralized. */
+  test('every catch factor is INDIVIDUALLY live THROUGH THE GATHERING — ten world drops', () => {
+    // Each patch moves the WORLD, not a literal, so a gathering expression replaced by a
+    // constant reds HERE. See the file header for the eight-mutant measurement that made
+    // this pin necessary; the arithmetic-only drop battery is ES-0's and stays there.
+    const { worldState: held } = openForeignGuestHold({
+      worldState: mintMission(litWorld()).worldState,
+      hold: covertHold(12),
+    });
     const drops = {
-      hostRung: { hostRung: 2 },
-      securityEff01: { securityEff01: 0.3 },
-      orderBand: { orderBand: 'adequate' },
-      stressLoad01: { stressLoad01: 0 },
-      hasUnderways: { hasUnderways: false },
-      hasInsideAsset: { hasInsideAsset: false },
-      wariness01: { wariness01: 0 },
-      competence01: { competence01: 0 },
-      stops: { stops: 1 },
-      intervalIdx: { intervalIdx: 0 },
+      hostRung: ['a rival host instead of a hostile one', { regionalGraph: RIVAL_GRAPH }],
+      securityEff01: ['a bought watch (the J-ES-3 drag)', { targetItem: BOUGHT_WATCH_TOWN }],
+      orderBand: ['a commune whose rule of law is looser', {
+        targetItem: { ...SNAPSHOT.settlements[1], powerStructure: { government: 'Free city commune' } },
+      }],
+      stressLoad01: ['a town under no active conditions', {
+        targetItem: { ...SNAPSHOT.settlements[1], activeConditions: [] },
+      }],
+      hasUnderways: ['a clandestine institution to shelter him', {
+        targetItem: { ...SNAPSHOT.settlements[1], institutions: [UNDERWAYS_INSTITUTION] },
+      }],
+      hasInsideAsset: ['a live asset inside the target', { hasInsideAsset: true }],
+      wariness01: ['a court that has just caught a spy', { worldState: held }],
+      competence01: ['a home with a real guild to train him', {
+        homeItem: { ...SNAPSHOT.settlements[0], thievesGuildStrength: 0.9 },
+      }],
+      stops: ['a third stop on the itinerary', {
+        dwell: { settlementId: 'westmarch', stopIndex: 3, intervalIdx: 0 },
+      }],
+      intervalIdx: ['a rooted fourth interval', {
+        dwell: { settlementId: 'westmarch', stopIndex: 1, intervalIdx: 3 },
+      }],
     };
-    for (const [name, patch] of Object.entries(drops)) {
-      expect(catchChance01({ ...live, ...patch }), `${name} is a dead term`).not.toBe(reference);
+    const reference = gatherFactors();
+    expect(catchChance01(reference)).toBeGreaterThan(0);
+    for (const [term, [why, patch]] of Object.entries(drops)) {
+      const moved = gatherFactors(patch);
+      // (a) THE GATHERED TERM MOVED. This is the arm a constant cannot survive.
+      expect(moved[term], `${term} is a DEAD TERM: ${why} did not move the gathered value`)
+        .not.toBe(reference[term]);
+      // (b) …and it REACHES THE CHANCE. A term gathered and then ignored is dead too.
+      expect(catchChance01(moved), `${term} moves in the record but not in the chance`)
+        .not.toBe(catchChance01(reference));
     }
   });
 
   test('the single dip (J-ES-3) is real: the patronage drag moves a fixture chance', () => {
-    const clean = gauntletCatchFactors({
-      worldState: litWorld(),
-      regionalGraph: HOSTILE_GRAPH,
-      homeId: 'ashford',
-      homeItem: SNAPSHOT.settlements[0],
-      targetItem: SNAPSHOT.settlements[1],
-      tick: 13,
-      dwell: { settlementId: 'westmarch', stopIndex: 1, intervalIdx: 0 },
-    });
+    const clean = gatherFactors();
     // THE MUTANT: the same town with a BOUGHT WATCH. `patronageSecurityDrag` counts
     // compromised security institutions, so a captured watch-house must lower effective
     // security — and it must do so through the ONE dragged read, never twice.
-    const bought = gauntletCatchFactors({
-      worldState: litWorld(),
-      regionalGraph: HOSTILE_GRAPH,
-      homeId: 'ashford',
-      homeItem: SNAPSHOT.settlements[0],
-      targetItem: {
-        ...SNAPSHOT.settlements[1],
-        institutions: [
-          { name: 'Town Watch', type: 'guard', corruption: { compromised: true, revealed: true } },
-        ],
-      },
-      tick: 13,
-      dwell: { settlementId: 'westmarch', stopIndex: 1, intervalIdx: 0 },
-    });
-    expect(clean.securityEff01).toBeGreaterThan(0);
-    expect(bought.securityEff01).toBeLessThanOrEqual(clean.securityEff01);
-    expect(catchChance01(bought)).toBeLessThanOrEqual(catchChance01(clean));
+    //
+    // ⚠ THE SHAPE IS `impairments`, AND IT IS THE WHOLE PIN. This fixture used to carry
+    // `corruption: { compromised: true, revealed: true }`, which `compromisedSecurityInstitutions`
+    // NEVER READS — it filters `inst.impairments` on `imp.type === 'corruption'`. Both sides
+    // therefore gathered the identical record, and with `toBeLessThanOrEqual` on both
+    // comparisons the pin was a function compared against itself: deleting the entire single
+    // dip left the whole battery green (measured). The values below are EXACT and the
+    // inequalities are STRICT, so equality can never read as a pass again.
+    const bought = gatherFactors({ targetItem: BOUGHT_WATCH_TOWN });
+    expect(clean.securityEff01, 'undragged effective security').toBe(0.4);
+    expect(bought.securityEff01, 'one compromised watch-house, dragged exactly once').toBe(0.34);
+    expect(bought.securityEff01).toBeLessThan(clean.securityEff01);
+    expect(catchChance01(bought)).toBe(0.0402);
+    expect(catchChance01(clean)).toBe(0.0473);
+    expect(catchChance01(bought)).toBeLessThan(catchChance01(clean));
+    // The dip is applied ONCE: the bought town's security is the clean town's times the one
+    // patronage drag, and the catch leaf adds no second criminal discount of its own.
+    expect(bought.securityEff01).toBe(clean.securityEff01 * (1 - PATRONAGE_TUNING.dragPerInstitution));
   });
 
   test("the tell's absent term is DECLARED on every reading, never folded as a silent zero", () => {
@@ -633,6 +765,13 @@ describe('ES-2 — gather or govern, and the captor', () => {
       const { receipt } = captorLeniencyRead({
         doctrine: readEspionageDoctrine({ courtId: 'x', orderWord: pair[0], natureWord: pair[1] }),
       });
+      // THE LIVENESS ANCHOR, and it is not decoration: an absent or empty receipt carries no
+      // digit either, so the no-digit assertion below would outlive the very regression it
+      // exists to catch. This says the receipt is a real finished sentence FIRST.
+      expect(receipt, `${pair.join('/')} must receipt in words`).toMatch(/^[A-Z][^]{20,}\.$/);
+      // The reason has to sit on the line the reader of the assertion sees — the walker's
+      // lookback is exactly one line, and a two-line comment silently fails to exempt.
+      // anchored: the sentence-shape pin two lines up reds first if the receipt drifts away.
       expect(receipt).not.toMatch(/\d/);
     }
   });

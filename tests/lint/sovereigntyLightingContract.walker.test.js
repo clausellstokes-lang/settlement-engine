@@ -2899,7 +2899,26 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // count: the coupling edit extended two existing `toEqual` arrays inside existing
       // titles, and the hold edit added one array member inside one. A `+N` counted off the
       // diff's added lines would have over-attributed all three.
-      files: 2340, parked: 358, credited: 1982, titles: 18854, suiteTitles: 5395,
+      // ── RE-RECORDED 2026-08-06 BY THE ES-2 REPAIR ROUND, CAUSE MEASURED AND ISOLATED ──
+      // 2,340/358/1,982/18,854/5,395 → 2,340/358/1,982/18,857/5,395. ONLY THE TITLE LAYER
+      // MOVES, by exactly +3, and every other figure is UNCHANGED. THE CAUSE IS THREE NEW
+      // PINS IN ONE ALREADY-CREDITED FILE — tests/domain/espionageGauntlet.test.js, 20 → 23
+      // titles — and NO new file, NO new describe, so files/parked/credited/suiteTitles
+      // cannot move and do not. The three are the repairs the ES-2 review owed:
+      //   GUARD 1 alone …  the schedule-band clause of `covertDwellRead`, pinned on a row
+      //                    where the raw arrival guard does NOT fire
+      //   GUARD 2 alone …  the whole-tick arrival clause, pinned on a row the schedule does
+      //                    call 'arrived'
+      //   the resample cap CLAMPS … `DWELL_RESAMPLE_CAP` on the read that produces the index
+      // Each was added to an EXISTING describe, which is why the suite layer stays at 5,395.
+      // ⚠ BOTH ENDS READ WITH THE SAME INSTRUMENT, and the base is a MEASUREMENT rather than
+      // an inheritance from the row above: this walker was RUN against a fresh `git archive`
+      // of this round's own parent (1e3397f0) with node_modules symlinked in, and it passed
+      // there at 33/33 — which is what makes 2,340/358/1,982/18,854/5,395 a reading of that
+      // tree. The same archive was then overlaid with THIS ROUND'S ONE CHANGED TEST FILE and
+      // nothing else, and read 18,857 with every other arm still green. The +3 is therefore
+      // attributable by construction: only one file differs between the two readings.
+      files: 2340, parked: 358, credited: 1982, titles: 18857, suiteTitles: 5395,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
