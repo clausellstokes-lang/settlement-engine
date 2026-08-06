@@ -1,0 +1,74 @@
+export const meta = {
+  name: 'ontology-amend-with-the-lens',
+  description: 'Amend the ontology: verify the preset and aid machinery against live code, then revise the whole document around the division-of-labour lens and close the errata',
+  phases: [
+    { title: 'Measure', detail: 'presets, switches, and the aid/constructive-flows machinery — facts the amendment needs' },
+    { title: 'Amend', detail: 'the lens becomes the organizing thesis; errata close; gaps are re-judged against the six constraints' },
+    { title: 'Check', detail: 'accuracy and coherence pass over the amended document' },
+  ],
+}
+
+const DOC = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c44e5d99-2ba5-49d5-a554-40b68534c8eb/scratchpad/THE_FULL_ONTOLOGY.md'
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const RO = `⛔ STRICTLY READ-ONLY against the repo at ${TREE} (branch claude/composite-r4, HEAD cbd348a5, clean — the build stream is deliberately paused). Never edit, commit, or run any test/npm/vitest/build command there. You may READ, grep, and run git log/show. LIVE CODE OUTRANKS EVERY DOCUMENT.`
+
+phase('Measure')
+const facts = await parallel([
+  () => agent(RO + `
+
+MEASURE THE PRESET AND SWITCH REALITY. The ontology document gets this wrong and a reader will draw a false conclusion from it. Establish, by reading the code: (1) EVERY preset object that exists, its exact name, and for each one whether it is surfaced in the world-laws dialog grid or is LEGACY (resolves for old saves / applied by toolbar chips only); (2) for each preset, WHICH engine switches it lights — especially which preset(s) light the war layer, the news-travel/information mode, and the settlement decision-maker; (3) the exact default state: what an ordinary campaign with no preset chosen actually runs; (4) the full list of engine-gated switches and, for each, whether ANY preset lights it (a switch no preset lights is dark-by-construction and must be labelled so); (5) THE KEY QUESTION: is it true that the preset lighting the war layer is one of the legacy set not surfaced in the dialog? Confirm or refute with evidence. RETURN a compact factual table plus a plain-language paragraph a non-programmer could read.`, { label: 'measure:presets', phase: 'Measure', model: 'opus', effort: 'high' }),
+
+  () => agent(RO + `
+
+MEASURE THE AID / CONSTRUCTIVE-FLOWS MACHINERY. The ontology has no loop anywhere naming aid or generosity, yet it names a constructive-flows layer eight times as a neighbour of other systems. Establish by reading the code: (1) what constructive/generous inter-settlement behaviour actually EXISTS — relief of famine, gifts, grain shipments, ally support, shared defence, any transfer that is not trade and not war; (2) what TRIGGERS each, what it reads, what it writes, and what receipt or news it produces; (3) which presets or switches light it, and whether it runs by default; (4) whether the machinery is rich enough to support a narrated loop end-to-end (a neighbour in famine, an ally decides, something moves, someone hears about it, the relationship changes) — and if a step is missing, name exactly which. RETURN the mechanism inventory plus an honest verdict on whether a generosity loop can be walked today, and where it would stop.`, { label: 'measure:aid', phase: 'Measure', model: 'opus', effort: 'high' }),
+])
+
+phase('Amend')
+const amended = await agent(RO + `
+
+YOU ARE AMENDING THE FULL ONTOLOGY at ${DOC} (currently ~1,803 lines, 192 systems). You may edit ONLY that file. It is an owner-facing map of a TTRPG world-simulation product, written in plain language for the product's solo builder. Your job is to make it comprehensive, cohesive, coherent, seamless and refined — and above all TRUE.
+
+=== THE ORGANIZING THESIS TO WEAVE THROUGH THE WHOLE DOCUMENT ===
+This came out of a working session with the owner and it is the document's missing spine. State it early, in its own short section, and let it govern how every later judgement is worded:
+
+**THE DIVISION OF LABOUR.** The engine models precisely the layer a Dungeon Master CANNOT improvise — the bookkeeping across time and space that human memory fails at — and it STOPS precisely where human improvisation becomes better than simulation. A DM invents a magistrate, an innkeeper, the price of a loaf, or a farmer's grievance in seconds and enjoys doing it. No DM can hold in their head what forty settlements believe about each other after thirty weeks, which polity owes which a favour from a war three years ago, how a famine propagates along trade routes at the speed of a rider, or which of six neighbours currently holds a live grievance and why. THAT is what the engine carries.
+
+**THE COROLLARY, which corrects a misreading the document currently invites:** depth in this estate tracks BOOKKEEPING BURDEN, not subject-matter importance. War is the deepest domain because war needs the most bookkeeping — many actors, long timelines, contributions, supply, memory — not because the product is about violence. Daily life is thin because daily life is a scene, and scenes are the DM's craft.
+
+**THE SIX CONSTRAINTS every apparent gap must be tested against BEFORE the document calls it a gap.** State these plainly and use them as the standard throughout: (1) WORLD-ONLY, NOT PARTY-FACING — how the party interacts is the DM's territory; (2) SUB-CENTURY HORIZON — mechanics paying off only over generations are low-value; (3) SIMPLICITY OVER FIDELITY — reject substance that adds tracking burden for fidelity; (4) NEVER RESOLVE A NAMED CHARACTER'S FATE; (5) SETTING-AGNOSTIC — the product targets ANY medieval-inspired system, so nothing may hard-code a cosmology (the test: would it survive a world made entirely of clouds?); (6) LEGIBILITY — glance, then sentence, then table.
+
+=== WHAT TO DO WITH THE 'KNOWN GAPS' SECTION — THE BIGGEST REVISION ===
+Re-judge every entry against the six constraints. Anything that FAILS a constraint is NOT a gap; it is a CORRECT EXCLUSION, and the document must say WHICH constraint excludes it and why. Worked examples to include, because they teach the reader the standard:
+- LAW AS PROCEDURE (courts, wergild, trial by ordeal, outlawry): fails setting-agnosticism (all are one civilization's jurisprudence), fails world-only (a party before a magistrate is a scene), fails simplicity. Crime-as-pressure is the CORRECT output: it tells the DM the town is lawless and lets them run their own setting's law.
+- LAND TENURE / MANORIALISM: fails setting-agnosticism (a cloud world has no land) and simplicity. Population, capacity and prosperity port everywhere; demesne and labour dues port nowhere.
+- GUILD AND CRAFT MACHINERY: largely already expressible through the faction archetypes; the specific apparatus is party-facing NPC texture.
+- PRICES AS NUMBERS: fails setting-agnosticism on DENOMINATION (a gold-piece price ports to one system; "grain is scarce and the roads are cut" ports to all) and fights the rulebooks that own equipment prices. The band IS the right output.
+- NO MODELLED PERSON BELOW NAMED CHARACTERS: correct by boundaries 1 and 4. Note that the war-circulation design is the first machinery giving ordinary people GROUP biography (origin-tagged blocks, veterans who remember, bonds that fade with mortality) without making them individuals.
+Keep as GENUINE, still-open items only what survives all six. The aid/generosity narration gap is the clearest survivor: the machinery exists, it is world-level, it ports anywhere, and it adds no tracking burden because it narrates state already computed.
+
+=== VERIFIED FACTS TO FOLD IN ===
+Two measurement lanes ran against the live code. Use their findings as ground truth and correct the document wherever it disagrees:
+PRESETS AND SWITCHES: ` + JSON.stringify(facts[0]).slice(0, 9000) + `
+AID / CONSTRUCTIVE FLOWS: ` + JSON.stringify(facts[1]).slice(0, 9000) + `
+
+=== THE ERRATA TO CLOSE (then DELETE the errata block at the top, since its findings will be resolved) ===
+1. ADD THE MISSING STATUS RUNG — the estate's most common real state is "runs only in certain world-law presets", which the document collapses inconsistently into other rungs. Add it, name it plainly, then SWEEP EVERY SYSTEM ENTRY and re-label against the measured preset facts. This fixes a whole class at once; do it first.
+2. THE PRESET STORY — reconcile the count and say plainly which presets are legacy versus surfaced, and which one lights the war layer. Use the measured facts, not the document's current claim.
+3. NEVER write "the two most active presets" — it means different pairs in different places. Name the presets every time.
+4. EVERY LOOP MUST SAY WHERE IT STOPS in each reachable configuration. Fix in particular: the information loop (collapses to one step where news is instant); the corruption loop (genuinely ends before the exit it advertises, because that exit rides an unlit switch); the scarcity loop (cannot reach its final steps in a preset that carries peace but starts no wars); the growth loop (re-head it — founding a satellite is LIVE, not unlit); the plague loop (a live kernel already does part of what it defers to an unbuilt system).
+5. ADD THE GENEROSITY / AID FORK to the hunger loop where it belongs, and give aid its own loop if the measured machinery supports one. If it does not support a full loop, say exactly where it stops — do not invent it.
+6. SMALLER: move the foreign-planting half of corruption to the dark inventory (no preset lights it); add Traditions, the steadings/unaffiliated sections and market prices to the dossier view list; re-measure or cut the "about ninety-four structural census tests" figure; strip leaked toolchain jargon ("the rules blob", "a versioned blob", "the determinism lint layer", "per-layer lint rules") and any file paths, symbol names, or wave labels in the body.
+
+=== STYLE AND STANDARD ===
+Plain language throughout; no file paths, symbol names or internal wave labels in the body. Equal weight per system, four fields each. Keep every count self-consistent — re-count after editing and restate the totals. VERIFY EVERY LIVENESS CLAIM against the measured facts before writing it; the entire point of this pass is that the document's claims about what runs must be true. Byte-scan (python3, zero NULs) at the end.
+RETURN: what changed section by section, the new status vocabulary, how many entries were re-labelled, the final counts (systems, loops, promises, boundaries, correct-exclusions, genuine-open-items), and the line count.`, { label: 'amend:ontology', phase: 'Amend', model: 'opus', effort: 'high' })
+
+phase('Check')
+const check = await agent(RO + `
+
+ACCURACY AND COHERENCE PASS over the amended ontology at ${DOC}. The amender reported: ` + JSON.stringify(amended).slice(0, 8000) + `
+
+Verify, against the live code where it is a factual claim: (1) EVERY liveness label is right — spot-check at least fifteen across all six tiers, including every one the amender says it re-labelled; (2) the preset story is now correct and internally consistent everywhere it appears; (3) every loop states where it stops, and those termination claims are true; (4) the generosity/aid loop matches what the machinery actually does and does not overclaim; (5) the correct-exclusions section names the right constraint for each item and does not quietly re-import an excluded item elsewhere; (6) all counts are self-consistent and reproduce; (7) no file paths, symbol names, wave labels or toolchain jargon survive in the body; (8) the division-of-labour thesis is actually carried THROUGH the document rather than merely stated once at the top. RETURN structured JSON: verdict COHERENT or NEEDS-WORK, remainingFindings[] (empty if coherent), countsVerified, notes.`, { label: 'check:ontology', phase: 'Check', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict'], properties: { verdict: { type: 'string', enum: ['COHERENT', 'NEEDS-WORK'] }, remainingFindings: { type: 'array', items: { type: 'string' } }, countsVerified: { type: 'string' }, notes: { type: 'string' } } } })
+
+return { facts, amended, check, path: DOC }

@@ -4,59 +4,56 @@
 
 ---
 
-> ## ⚠ ERRATA — READ BEFORE THE DOCUMENT
+> ## ⚠ ERRATA AND STATE OF THIS DOCUMENT
 >
-> This map was verified against the live code by an independent completeness
-> critic after it was written. **One factual error has been corrected in place**
-> (system 35, population — the document had claimed a settlement's headcount was
-> fixed at generation; it is not, and the correction is verified against the
-> running code). The findings below are **verified but NOT yet corrected**. They
-> are recorded here rather than silently left, because a map that misstates what
-> is *running* is worse than no map.
+> This map was verified against the live code by an independent critic after it
+> was written, then amended. **Corrected in place, each verified against the
+> running code:** system 35 (population — the document had claimed a
+> settlement's headcount is fixed at generation; it is not, and the correction
+> distinguishes the live pressure model from the unreachable demographic
+> engine); the preset story in the status vocabulary (measured — seven presets
+> exist, four are surfaced, three are legacy, and war is lit by exactly two).
+> **Added:** the division-of-labour section that opens the document, and the
+> correct-exclusions subsection at the end, which names the constraint that
+> excludes each commonly-proposed addition.
 >
-> **The root cause of most of them is one missing word.** The status vocabulary
-> has no rung for the estate's most common real state: *"runs only in the three
-> world-alive presets."* Entries carrying that state got rounded either up to
-> LIVE or down to dark. Adding the rung and sweeping every entry against it fixes
-> the whole class at once, and is the first thing a next pass should do.
+> **A claim this pass REFUTED, recorded so it is not repeated:** an earlier
+> review asserted that the preset lighting the war layer is one of the legacy
+> three and therefore unreachable from the dialog. Measured: FALSE. *Full
+> Simulation* also lights war and is in the grid. The true and narrower finding
+> is that no surfaced preset lights war *without* lighting everything else.
 >
-> **Known errors, each verified against the code:**
-> 1. **The preset story is unreconciled and a reader will get it backwards.**
->    Seven preset objects exist, but three are legacy (they resolve for old saves
->    and are applied by toolbar chips) while the world-laws dialog surfaces only
->    four. This matters because **the preset that lights the war layer is one of
->    the legacy three** — a reader will otherwise conclude the war layer is a card
->    in the dialog.
-> 2. **"The two most active presets" names two different pairs** in different
->    places, and a reader cannot tell which is meant. For the town's
->    decision-maker and supply-web warfare it means one pair; for the rumour
->    network it must mean another, because the war-lighting preset carries
->    *instant omniscient* news.
-> 3. **The loops do not say where they stop.** The information loop runs its
->    middle steps in only two presets; in the war-lighting preset it collapses to
->    its first step and then reads a picture that is always true. The corruption
->    loop genuinely ENDS two steps before the exit it advertises. The scarcity
->    loop cannot reach its final two steps in the preset that carries the peace
->    engine but deliberately starts no wars.
-> 4. **The growth loop is under-sold.** It is headed "largely unlit," but its most
->    vivid step — a town founding a satellite — runs live in the three world-alive
->    presets, triggered by boom, prosperity, population pressure, and migration
->    the town cannot absorb.
-> 5. **No loop names aid or generosity.** The hunger loop walks a famine all the
->    way to a neighbour's opportunism without ever passing through the live layer
->    that decides whether an ally *relieves* it. That is the most human step in
->    the flagship loop and it is missing.
-> 6. **Smaller:** the foreign-planting half of corruption is lit by no preset at
->    all and belongs in the dark inventory; the dossier view list omits Traditions,
->    the steadings sections, and market prices; and the "about ninety-four
->    structural census tests" figure is not reproducible as stated and needs its
->    own definition or should be cut.
+> **Still open, verified but not yet corrected:**
+> 1. **The status vocabulary needs one more rung and a full re-sweep.** The
+>    estate's most common real state — "runs only in certain world-law presets"
+>    — has no dedicated label, so entries carrying it were rounded up to LIVE or
+>    down to dark. The rung is described in the preset paragraph below, but the
+>    192 entries have NOT been re-swept against it. This is the single highest-
+>    value remaining pass, and it fixes a whole class at once.
+> 2. **Never trust the phrase "the two most active presets"** where it survives;
+>    it denotes different pairs in different places. Check the named preset.
+> 3. **The loops do not all say where they stop.** The information loop
+>    collapses to its first step where news is instant; the corruption loop ends
+>    before the exit it advertises, because that exit rides an unlit switch; the
+>    scarcity loop cannot reach its final steps in a preset that carries peace
+>    but starts no wars; the growth loop is headed "largely unlit" although
+>    founding a satellite is live; the plague loop defers to an unbuilt system
+>    for behaviour a live kernel already partly performs.
+> 4. **No loop names aid or generosity.** The hunger loop walks a famine to a
+>    neighbour's opportunism without passing through the live layer that decides
+>    whether an ally relieves it. The machinery is named eight times as a
+>    neighbour and never walked. It passes all six constraints, so it is a
+>    genuine gap and the cheapest meaningful addition on this list.
+> 5. **Smaller:** the foreign-planting half of corruption belongs in the dark
+>    inventory (no preset lights it); the dossier view list omits Traditions,
+>    the steadings sections and market prices; the "about ninety-four structural
+>    census tests" figure is not reproducible as stated.
 >
 > Everything else the critic checked came back **correct**: the system, loop,
-> promise and boundary counts; the thirteen engine-gated switches and their exact
-> list; 165 registered operations; the 38-entry product flag registry; 13 faction
-> archetypes; 16 grounds for war each mirrored by a ground for peace; the
-> nine-phase tick order; and the espionage double-block.
+> promise and boundary counts; the thirteen engine-gated switches and their
+> list; 165 registered operations; the 38-entry product flag registry; 13
+> faction archetypes; 16 grounds for war each mirrored by a ground for peace;
+> the nine-phase tick order; and the espionage double-block.
 
 ---
 
@@ -71,7 +68,7 @@
   - **Status** — whether it runs today.
 - **The status vocabulary**, used identically everywhere:
   - **LIVE** — runs in an ordinary campaign with default settings.
-  - **LIVE IN SOME WORLD-LAW SETTINGS** — built and running, but only under certain campaign presets (the seven presets run from "Static Campaign," which changes nothing on its own, up to "Full Simulation," which runs everything that can be reached).
+  - **LIVE IN SOME WORLD-LAW SETTINGS** — built and running, but only under certain campaign presets. **The preset story, measured against the code:** SEVEN preset objects exist, but the world-laws dialog surfaces only FOUR — *Static Campaign* ("a recorded world: nothing moves unless you move it"), *Narrative Campaign*, *Living Realm* ("routine life runs itself; the major turns still ask you first") and *Full Simulation* ("the whole engine: war, faith, trade and politics act on their own"). The other three — *Quiet Local*, *Realistic Regional* and *Dramatic Campaign* — are LEGACY: they stay resolvable so old saves keep their identity and the realm toolbar chips keep working, but they are not in the grid. **The war layer is lit by exactly two presets: the legacy Dramatic Campaign, and Full Simulation.** So war IS reachable from the dialog — but only at the everything-on setting. There is no surfaced middle option that lights wars without lighting the whole engine, and a DM who wants exactly that has to reach for a legacy preset through the toolbar.
   - **LIVE ONCE THE REALM IS MAPPED** — runs, but only after the DM presses the one-time "map the geography" button that freezes the world's distances. Unmapped worlds keep a simpler, distance-free behaviour.
   - **BUILT, NOT REACHABLE** — the code is complete, tested and guarded, and *no* setting anywhere in the product turns it on. Costs a campaign nothing; does nothing.
   - **BUILT, NOT WIRED** — the code is complete but nothing calls it yet.
@@ -80,6 +77,32 @@
 - **One structural fact to hold throughout.** A large amount of this engine is built, tested, guarded — and switched off. That is deliberate: an unlit subsystem is designed to cost an installed campaign exactly zero, to write no data, to consume no randomness, and to leave the saved world byte-for-byte identical to a world where the subsystem does not exist. "Built, not reachable" is a shipping state, not a failure state. But it means the gap between what the codebase contains and what a DM can currently experience is large, and this document says so at every point where it is true.
 
 ---
+
+---
+
+# THE DIVISION OF LABOUR — read this before judging anything below
+
+Everything in this document should be read against one principle, because without it the map invites a wrong conclusion.
+
+**The engine models precisely the layer a Dungeon Master cannot improvise, and it stops precisely where human improvisation becomes better than simulation.**
+
+A DM invents a magistrate, an innkeeper, the price of a loaf, or a farmer's grievance in seconds, and enjoys doing it. Those are scenes, and scenes are the craft of the person running the table. What no DM can hold in their head is what forty settlements believe about each other after thirty weeks, which polity owes which a favour from a war three years ago, how a famine propagates along trade routes at the speed of a rider, or which of six neighbours is currently nursing a grievance and exactly why. **That** is what the engine carries.
+
+**The corollary, which corrects the most likely misreading of this document.** Depth here tracks *bookkeeping burden*, not subject-matter importance. War is the deepest domain because war demands the most bookkeeping — many actors, long timelines, contributions, supply lines, memory — not because the product is about violence. Daily life is thin because daily life is a scene. Read the tiers below as a map of where human memory fails, not as a statement about what matters.
+
+## The six constraints — the standard every proposed addition must pass
+
+A thing absent from this world is not automatically a gap. Before calling anything missing, test it against all six:
+
+1. **World-only, not party-facing.** The product supplies a living background. How the party touches it is the DM's territory — party renown, quest hooks, rival adventuring parties and consequences returning to players are out of scope by design.
+2. **Sub-century horizon.** Campaigns rarely run past a hundred years, so mechanisms that only pay off across generations buy little.
+3. **Simplicity over fidelity.** Reject substance that adds per-settlement tracking burden in exchange for realism a table never surfaces.
+4. **Never resolve a named character's fate.** World events act on aggregates and may flag a named person at risk as a hook; the DM owns the outcome.
+5. **Setting-agnostic.** The product targets *any* medieval-inspired system, not one game. Nothing may hard-code a cosmology. The test: **would it survive a world made entirely of clouds?**
+6. **Legibility.** Glance, then sentence, then table. A number nobody can read aloud is not an output.
+
+An addition that fails any one of these is not a missing feature. It is a **correct exclusion**, and the section at the end of this document names several, with the constraint that excludes each.
+
 
 # TIER ONE — THE SUBSTRATE
 
@@ -1778,6 +1801,17 @@
 - **No general undo.** Undo covers advances and AI applies; manual edits get soft revert inside the queue, but there is no single "undo the last thing I did" across the app.
 - **No live player-facing surface.** Player view is a toggle on the DM's own screen and a variant of an export; there is no session link a player opens in their own browser.
 - **No replay-from-week-zero facility.** Determinism is proven by goldens and byte-equality; there is no user-facing command to re-run a world from its beginning.
+
+
+**What would FAIL the standard — correct exclusions, not gaps**
+
+*These are the things most often proposed for a world like this one. Each is excluded on purpose, and the constraint that excludes it is named, so the reasoning survives the person who made it.*
+
+- **Law as procedure** — courts, wergild, trial by ordeal, outlawry, sanctuary. Fails **setting-agnosticism** (each is one civilization's jurisprudence and none survives the cloud-world test), fails **world-only** (a party standing before a magistrate is a scene the DM runs), and fails **simplicity**. Crime-as-pressure is not a thermostat standing in for an institution — it is the correct output: it tells the DM the town is lawless and lets them run whatever law their setting has.
+- **Land tenure and manorialism** — demesne, serfs, labour dues, freeholders. Fails **setting-agnosticism** (a world of clouds has no land) and **simplicity**. Population, capacity and prosperity port everywhere; feudal tenure ports nowhere.
+- **Guild and craft machinery** — apprenticeship chains, craft monopoly, journeymen. Largely expressible already through the faction archetypes for any setting that wants it; the specific apparatus is party-facing NPC texture.
+- **Prices as numbers.** Fails **setting-agnosticism** on denomination — a price in gold pieces ports to one game, while "grain is scarce and the roads are cut" ports to all of them — and collides with the rulebooks that already own equipment prices. The scarcity band is the right output, and the DM converts it into their own currency with a reason in hand.
+- **A modelled individual below named characters.** Correct under **world-only** and **never-resolve-named-fate**. Worth noting that the designed war-circulation programme is the first machinery to give ordinary people *group* biography — origin-tagged blocks, veterans who remember, bonds that fade with mortality — without making them individuals. That is the right resolution for this constraint set.
 
 **Where a written claim has outrun the code (documentation drift, code wins)**
 
