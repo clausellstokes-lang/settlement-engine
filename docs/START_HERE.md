@@ -387,6 +387,24 @@ different machine ⇒ THIS FILE + the two queue docs are sufficient alone.
 the index — hazards, rulings, gotchas). If you are NOT Claude: everything
 load-bearing from memory has been mirrored into the docs above; trust the repo.
 
+## 6b-3. ⭐⭐ THE FABLE-DEBT CLAUSE (owner, 2026-08-05 — extends 6b-2, verbatim intent)
+"When [Fable weekly usage runs out] switch every operation to Opus 5.
+However, everything that has not been managed and/or validated by fable
+five will be required upon the next free fable usage from whichever
+Claude to be surveyed and validated by fable."
+PROTOCOL: (1) on Fable exhaustion, Opus 5 takes EVERY operation, full
+authority, nothing pauses — validation is retroactive, never gating;
+(2) EVERY Opus-era ledger row in docs/FABLE_VALIDATION_QUEUE.md carries
+"⏳ OPUS-ERA — FABLE SURVEY OWED" in its heading, with chair-grade
+judgment calls listed as J-* entries for cheap re-ruling; (3) the next
+Fable-available session (from whichever Claude) clears the
+survey-and-validate debt FIRST — survey every owed row, EXECUTED
+spot-validation of load-bearing claims, adversarial re-verification for
+sensitive substrate — marking each ✅ FABLE-VALIDATED or spawning a
+repair; (4) depth default (vetoable): survey + executed spot-validation,
+not a full era re-gate, unless the survey finds cause. Full protocol:
+memory/opus-succession-active.md.
+
 ## 6b-2. ⭐⭐ CONTINUITY ORDER UPDATED (owner, 2026-07-31 — supersedes 6b's model):
 "If i run out of fable, i want you to seemlessley switch to opus 5." An OPUS 5
 successor inherits FULL standing authority the moment the prior session ends — same
