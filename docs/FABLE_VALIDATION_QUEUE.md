@@ -4252,6 +4252,204 @@ insertions), which is advancement, not damage.**
 
 ---
 
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · GR-3a: THE NEW TERM FAMILIES, THE SEVENTH
+## EXECUTOR, AND A TRIPWIRE DISCHARGED — WITH THE PRODUCER SIDE STOPPED AT A
+## MEASURED BLOCKER AND AN ORPHAN FOUND BY THE LAW'S FIRST RUN
+## (Opus 5 build wave under the 2026-08-06 succession directive. Every J-* below is a
+## chair-grade judgment made without a Fable chair and is VETOABLE.)
+
+**Wave:** GR-3a, riding `pactFormationEnabled` (minted by GR-2 at `a18fdcfa`; NO new
+flag key). Normative spec: `docs/DESIGN_FP_ARCH_GR.md` §5 GR-3 + §6 seams 1/2/6.
+
+### WHAT LANDED
+
+Twelve catalog rows in `peaceTermsCatalog.js` (five faith, three population,
+`mutual_defense` into security, and the three trade-rights rows as `executor:'seam'`);
+the **seventh executor kind `grant`** with its generic read plus seven named wrappers
+consolidated in `treatyEnforcement.js` under that module's one-reader law; three
+house-voice family rows; three seam-6 coupling rows; and **the WR-10 catalog tripwire
+discharged**, which was this wave's scheduling reason.
+
+`sovereigntyBundle.js` needed NO code edit — it derives components from `TERM_FAMILIES`
+at call time, so the three families became composable the day they landed. That was the
+design and it held.
+
+### ⛔ THE PRODUCER SIDE IS NOT HERE, AND THE REASON IS A MEASURED BLOCKER
+
+The nine faith/population/security rows have **no producer**. Their producer is
+`PACT_DRAFT_LENS` in `pactFormation.js`, and a second build lane held that file (with
+`pactTriggers.js` and `pactProposals.js`) under **uncommitted** strict-typing work for
+the whole of this wave's build window — task #12, committed at `2a05ce5f` only after
+this wave's src edits were complete. Landing the producer would have meant staging
+another lane's unfinished change to land mine, which the protocol forbids outright.
+
+The first import edit was made and then **reverted** when the tool reported the file had
+moved under it; `git diff` was used to prove the revert left only the sibling lane's
+hunks. The ladder primitive `orderTermsByAsk` ships anyway — exported, consumed by
+nothing, the GR-0 `treatiesPricedDuring` handoff idiom — and the debt is held by a
+FROZEN shrink-only register so it cannot be lost.
+
+### ⚠️⚠️ FOUND BY THE NEW LAW ON ITS FIRST RUN — `reparations` IS A PRODUCER-LESS TERM
+
+The no-producer-less-term walker reddened immediately, and not on anything GR-3 wrote.
+**`reparations`** has a working `transfer` executor, a home among the four stream terms
+in `treatyTransfer.js`, a `termLabel` case and a `peaceTermsDrafting.js` signing-reason
+line — and **no asset class in `CLASS_TERM` maps to it**, so `draftTerms`, which selects
+only through `CLASS_TERM[assetClass]`, can never reach it. It is `non_intervention`
+happening by ACCIDENT rather than by declaration, and it pre-dates this program.
+
+NOT repaired. Both lawful cures are owner/chair-gated: giving it an asset class moves
+war-end drafting on the same seed (a golden shift on a landed, pinned feature), and
+declaring it `executor:'seam'` retires a built executor. Recorded in the owed register
+under `owingWave: 'CHAIR'`, asserted BY NAME separately from GR-3's own nine so GR-3b
+cannot close it by accident.
+
+### ⚠️ A SPELLING DIVERGENCE ACROSS THREE VOLUMES — REPORTED, NOT RESOLVED
+
+`docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md` (CR-WR10-B) and `DESIGN_FP_ARCH_GR.md`
+§5/§7 Q1 both say **`exclusivity`**. `DESIGN_FP_TRADE.md`'s TR-5 body says
+**`trade_exclusivity`**. All three name **GRAMMAR §4 as canonical** — and GRAMMAR §4
+carries **no trade-rights row at all**, so the citation cycle has a hole in it.
+
+Built as `exclusivity` (the two chair documents, and the catalog's own convention — not
+one of its twelve prior rows carries a family prefix). The divergence is recorded in the
+catalog beside the rows, in the WAR §3 row, and here. **A chair ruling amending GRAMMAR
+§4 to carry the three rows explicitly would close the hole for good**; until then TR-5
+must point at `peaceTermsCatalog.js` rather than re-mint.
+
+### THE JUDGMENTS, ENUMERATED FOR CHEAP RE-RULING
+
+- **J-GR3-1 — the trade-rights spelling.** Chose `exclusivity` over `trade_exclusivity`
+  on two chair documents plus catalog convention. VETO ⇒ rename in one file and one pin.
+- **J-GR3-2 — a new `commercial` family rather than folding trade rights into
+  `economic`.** A shared family would make a trade right mutually exclusive with tribute
+  under §13 one-per-family stacking — the exact bug `sovereignty_transfer`'s own comment
+  records having dodged. VETO ⇒ the rows collapse into `economic` and lose that.
+- **J-GR3-3 — the `weight` column doubles as the ask-ladder GR-3b climbs.** Stated in the
+  catalog so a tuner knows a retune reorders which clause a faint crossing writes.
+  Alternative rejected: a hand-written order beside a weight column, which is the
+  recorded stale-restatement class. VETO ⇒ mint a separate `askRank`.
+- **J-GR3-4 — a DEFAULTED instrument grants nothing.** The `treatyBlocksWar` rule applied
+  straight; OBSERVED state, so the fog governs rights as it governs war-blocks. VETO ⇒
+  rights survive an observed default until their own expiry.
+- **J-GR3-5 — `grant` reads live in `treatyEnforcement.js`, not a new leaf.** Its header's
+  one-reader law is the whole reason expiry lifts every effect on one tick. No veto cost.
+- **J-GR3-6 — the four `defensive_pact` READERS are not wired.** `computeAllyRelief` takes
+  no `tick`, so a treaty-scoped right cannot be read there without threading the clock
+  through war hot paths — a war-owned change with its own verification. Producer side
+  pinned here; consumer side deferred by name in the GRAMMAR×WAR row and held by a
+  census tripwire. VETO ⇒ wire them, with a war-lane verifier.
+- **J-GR3-7 — J-GR-14a (the war-end appraisal lens extension) DEFERRED.** Giving the new
+  families asset classes is a lit-path golden shift on war-end drafting and deserves its
+  own commit and disclosed-shift pin. The struck premise in `peaceTermsAppraisal.js`'s D4
+  note is corrected in place. VETO ⇒ fold it into GR-3b.
+- **J-GR3-8 — ZERO new news kinds, so GR-2's "mints no news kind" pin stays GREEN.** The
+  volume's three Herald sentences need the five L6 joins and belong with the producer.
+- **J-GR3-9 — WR-10 PIN 2 RETARGETED, not deleted.** It banned all trade-rights literals
+  in `src/` because spelling one would pre-empt ruling R3; GR-3 IS the wave that exercises
+  R3, so a blanket ban would forbid the canonical list from holding the canonical rows.
+  What it protected — that the spelling cannot FORK — is now stated directly: minted
+  tokens in ONE file, rejected spellings nowhere.
+- **J-GR3-10 — `WR10_FAMILIES_AT_LANDING` deliberately NOT widened.** Its docstring calls
+  it a landing record, not a policy; widening it would erase the fact the tripwire exists
+  to preserve and re-arm a wire whose message has been delivered.
+
+### EVIDENCE — EXECUTED, WITH COUNTS
+
+- New battery `tests/domain/peaceTermsGrantTerms.test.js`: **28 passed**.
+- Tripwire discharge + freeze walker: **24 passed** (`sovereigntyBundleWr10` +
+  `spTermLiteral.walker`).
+- Peace/pact regression set: **86 passed** (`peaceTermsWave3`, `sovereigntyTransferTerm`,
+  `pactFormation`, `pactAmendment`, `pactFormationDormancyFence`).
+- Coupling gates: **42 passed** (registry, inclusion walker, desk walker, receipt sampler).
+- `eslint` over all eleven authored files: **exit 0**.
+- `typecheck:domain:strict`: **1313 errors, ceiling 1313** — no regression; the new code
+  satisfies its per-file zero baseline by NARROWING types, with no cast and no `any`.
+- **EIGHT executed mutants, one per guard door**, each anchor-asserted exactly-once and
+  each restored cmp-proven. Seven reddened on the first round.
+
+### ⚠️⚠️ THE MUTANT THAT SURVIVED — TWO GUARDS OVER ONE JOB, PINNED JOINTLY
+
+**M3 (delete the self-grant guard) left all 27 tests GREEN.** The pin asked for a
+self-grant against a world whose only term ran to the OTHER court, so the BENEFICIARY
+check refused it and the assertion passed for the wrong reason — the recorded
+defence-in-depth blind class, reproduced exactly. Cured by rebuilding the fixture so the
+term's beneficiary IS the self id, which disarms the second guard and leaves the
+self-guard alone holding the door; re-executed at **1 failed / 27 passed**.
+
+The generalizable form, worth carrying: **a pin over a read protected by two guards proves
+nothing about either until the fixture disarms one of them.**
+
+### ⚠️ A SECOND SUBSTRING-ALIASING HOLE, CAUGHT BEFORE IT LANDED
+
+WR-10 PIN 2's scan used `body.includes(token)`, and **`exclusivity` is a substring of
+`trade_exclusivity`** — so the retargeted pin would have reported the rejected spelling as
+also being the minted one, and "no second speller" would have been unprovable in exactly
+the case that matters. Switched to whole-token `\b` matching (`_` is a word character, so
+the boundary genuinely separates them) with executed mutants in BOTH directions. Same
+shape as the recorded character-class hole where a detector and its repair were blind
+through one gap.
+
+### ⚠️⚠️ A SECOND FINDING, LOAD-BEARING FOR GR-3b — A NEGOTIATED TREATY HAS NO
+### RESOLVABLE OBLIGATION AXIS, SO PASS 2 EXECUTES ITS TERMS AGAINST EMPTY IDS
+
+Found while checking whether GR-3's two `transfer` rows (`temple_restitution`,
+`settlement_provision`) could safely ride the conserved-stream physics. They can not yet,
+and neither can GR-2's already-landed one.
+
+**CONFIRMED, executed:** `treatyOrientationOf` on the exact record `signPactProposal`
+mints — `parties` / `provenance:'negotiated'` / `lineage`, and deliberately NO
+`victorId`/`loserId` and no `sellerId`/`buyerId` — returns
+`{kind:'unknown', resolved:false, obligorId:'', obligeeId:''}`. That is the module
+behaving exactly as designed: `unknown` is a real verdict and it refuses to invent a
+party. The gap is that the negotiated door introduced a THIRD provenance and gave the
+orientation reader nothing to read it by.
+
+**CONFIRMED, executed, for the grain half:** `computeTreatyGrainDraw` returns `null` for
+an absent payer AND for an empty-object payer, while the same call with two real
+settlements returns non-null — so once the ids are empty, nothing moves and the control
+proves the primitive was not simply refusing everything.
+
+**PLAUSIBLE for the rest, by reading PASS 2 rather than executing it:** `peaceTerms.js` PASS 2 takes
+`victorId = orientation.obligeeId` and `loserId = orientation.obligorId`, then drives
+`buildPressureSummary`, `evolveCompliance`, `victorMonitorReach`, the
+`computeTreatyGrainDraw` payer/payee pair and the `defaultedBy` write from those two. With
+both empty, a negotiated treaty's stream term should draw grain from nobody to nobody and
+its compliance should be evolved against a court that does not exist. **GR-2's peacetime
+`resource_share` is `stream: true`, so this is already live for the one clause that door
+can draft** — it is not a GR-3 regression, and GR-3 adds no producer that could reach it.
+
+**NOT REPAIRED HERE, and the reason is that the cure is a design decision rather than a
+patch.** §4 says the obligor of a directional term is THE OTHER PARTY, so the axis is
+per-TERM (via `beneficiary`) for a negotiated instrument while `treatyOrientationOf` is
+per-TREATY. Reconciling those is CR-WR10-G's territory and it moves a lit path. **GR-3b
+must not draft `settlement_provision` or `temple_restitution` until it is ruled**, or it
+will mint conserved-stream clauses that silently move nothing — the dead-arm class.
+
+The experiment that would settle what remains: drive `advanceTreaties` for two ticks over a
+world holding one GR-2-minted negotiated instrument with a live `resource_share`, and
+assert whether either party's food ledger moves and what `complianceState` the instrument
+lands on. The grain half is already answered; what is unmeasured is the COMPLIANCE half —
+whether a negotiated treaty evolves toward `honored` or `defaulted` while its obligor is
+the empty string, and whether `defaultedBy` can be written from it.
+
+### DEFERRALS — DELIBERATE, DOCUMENTED, NOT BUGS TO RE-FIND
+
+- **GR-3b (owed, blocking nothing):** widen `PACT_DRAFT_LENS` from trigger→type to
+  trigger→candidate SET, select the rung by crossing reach through `orderTermsByAsk`, and
+  DELETE the nine `GR-3b` rows from `PRODUCER_OWED`. Membership is a design choice; ORDER
+  must stay derived. The §4 frozen COMPOSABLE pair `{non_aggression, mutual_defense}` is
+  its stacking half.
+- **J-GR-14a**, the war-end appraisal lens — see J-GR3-7.
+- **`reparations`** — owed to the chair, see above.
+- **The three trade-rights executors** — TR-5's, held by the seam-2 tripwire.
+
+**Nothing lit. No golden re-recorded. No band ratified. No soak run. No push. Every band
+authored by this wave is UNSOAKED and marked so at its declaration; §7 THE TUNING SURFACE
+owns them and the owner signs them at the soak redo under THE PROMISE.**
+
+---
+
 ## ES-1 — THE MISSION: THE COVERT MINT BUILT, THE DOOR AND NOT THE TRAFFIC, AND A
 ## WELD THE VOLUME SAYS IS GONE THAT IS STILL THERE
 ## ⏳ OPUS-ERA — FABLE SURVEY OWED
@@ -4852,3 +5050,150 @@ and one untracked file belonging to the concurrent GR-3 repair lane and the ES l
 present throughout and NONE was staged, edited, reverted or cleaned. Nothing lit. No flag
 minted. No golden re-recorded. No band ratified. No soak run. Nothing pushed. Zero src, test,
 script or JSON edits in this row's own commit — docs and ledger only, by charter.**
+
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · CHAIR BATCH: THE GR-3a REPAIR ROW, AND FOUR
+## CORRECTIONS TO ES-1's ROW — INCLUDING A GATE RECEIPT THAT WAS FALSE AT THE TREE
+## IT WAS WRITTEN ABOUT
+## (Landed by the chair, not by a lane. Every ruling and judgment below is VETOABLE.)
+
+**WHY THIS ROW IS THE CHAIR'S AND NOT A LANE'S.** This file became the single most
+contended path in the program: every wave appends to it, and a lane that commits it also
+commits whatever another lane left uncommitted here. Cycle 5 therefore moved to DEFERRED
+ROWS — lanes compose their row and return it as text, and the chair lands them in one
+batch against a quiet tree. That is the serialized-landing pattern the concurrency law
+already proved for exact-census files, applied to governance. Two lanes' rows sat
+uncommitted in this file simultaneously today before the practice changed.
+
+### CORRECTION 1 — ES-1's DOMAIN-STRICT RECEIPT WAS FALSE AT THE TREE ES-1 COMMITTED
+
+ES-1's row asserts `[domain-strict] ✓ no regressions — and 9 fewer errors than baseline
+(1304 < 1313). Green at base too`, labelled CONFIRMED GREEN. **Executed inside a `git
+archive` of ES-1's own committed tree, the gate EXITS 1:**
+`src/domain/worldPulse/secrecyTradeFactor.js: 1 strict errors (baseline 0) — +1`.
+The quoted green string reproduces ONLY on a tree built from the wave's ABANDONED start
+HEAD — before the concurrent lane's IN-0d landed `secrecyTradeFactor.js` underneath it.
+The successor-facing clause "Green at base too" is refuted AT the base.
+
+⚠ **THE RED WAS REAL AND IT WAS NOT ES-1's.** `secrecyTradeFactor.js` is not in ES-1's
+23-file set; `git log` attributes it to IN-0d at `db35bad6`, whose OWN verifier passed it.
+So a false receipt in one wave was concealing a genuine per-file-zero breach in another.
+It is now genuinely repaired at `1b111399` by NARROWING through the module's own
+`asObject`, not by a cast, and the gate reads exit 0.
+
+### CORRECTION 2 — THE FULL-TYPECHECK FIGURE, AND WHY IT IS NOT A BARE OFF-BY-ONE
+
+ES-1's row records **352 errors at both ends**. Measured at `dda24851`: **353 errors across
+47 files**. It returns to 352 / 46 at `1b111399` — *because that single error was the one
+Correction 1 repaired*. So this is not a transcription slip to be amended to 353 and
+forgotten; the two figures are the same fact seen before and after the fix.
+
+### CORRECTION 3 — TWO CITED AUTHORITIES WERE NEVER MINTED
+
+ES-1's completion report justifies its manual pre-commit-hook run by citing **J-ES1-10**,
+and refers to a banked result at **R-ES1-4**. Neither exists anywhere in this repository.
+This row's own id set is exactly J-ES1-1..J-ES1-9 and R-ES1-1..R-ES1-3 — the LEDGER is
+correct and the REPORT was not. Recorded because a citation to a non-existent authority
+reads exactly like a citation to a real one, and the only way to tell is to grep.
+
+### CORRECTION 4 — STRIKE THE PROVENANCE PRECEDENT ES-1 RECORDED FOR ITS SUCCESSORS
+
+ES-1's stop report instructs the next lane that moves the lighting census to follow its
+method: archive **the wave's start HEAD** and overlay the wave's test-side changes.
+~~That instruction is STRUCK.~~ It is arithmetically impossible — the tree it names
+measures 2331 test files against the 2333 recorded, and the walker executes RED there.
+**THE LAW: re-measure at YOUR OWN PARENT, never at an older tree.** Two further lanes
+re-recorded this census today and the GR-3a repair round re-measured at its own parent
+per this correction, giving 2,337 → 2,338 read per file at both ends.
+
+### ⭐ THE CLASS BEHIND CORRECTIONS 1, 2 AND 4 — ONE ROOT CAUSE, NOT THREE INCIDENTS
+
+All three figures were **measured on a tree the wave later stopped standing on, and never
+re-run after a sibling lane landed underneath.** In a two-lane tree the ground moves
+between measurement and commit, so **a receipt is only a receipt at the sha it is recorded
+against.** The standing cure, now binding on every verifier: RE-RUN EVERY GATE THE REPORT
+QUOTES, at the committed sha, before believing any of them. Checking the code was never
+enough — today's defects were in the receipts.
+
+### GR-3a REPAIR ROUND — `0be4800d` (row supplied by the lane, landed by the chair)
+
+**What it repaired**, all five reproduced by execution before any fix: a new enum member
+(`grant`, the seventh executor) landed without the runtime allowlist that enumerates it —
+cured by ONE declaration `TERM_EXECUTORS` plus a both-directions equality and a source scan
+pinning the type union; the exact test-file census re-measured at its own parent; the
+red-ratchet inventory put back; the manifest's mutant arithmetic re-executed; and the
+survived self-grant mutant confirmed cured.
+
+**⚠⚠ THE MOST IMPORTANT ONE, AND THE REASON THE CONTENT-DIFF LAW EXISTS.**
+`negativeAssertionAnchor` was red at BOTH base and wave with a **byte-identical fail row**,
+so every row-identity diff reported EMPTY and the wave looked clean. Its INVENTORY had
+grown — four un-anchored negative assertions above a FROZEN CEILING OF ZERO, also breaching
+the standing rule that new generation-tree tests use `tests/helpers/anchoredNegatives.js`.
+Only a diff of the ratchet's CONTENTS as a multiset could see it. Post-repair the inventory
+is byte-for-byte the base's.
+
+⚠ **AND THE VERIFIER'S OWN CARDINALITIES FOR THAT FINDING WERE WRONG** — it reported
+71 → 73; measured, it is **75 → 77 violating files and 292 → 296 sites**. The DELTA (+2
+files, +4 sites) was exactly right and the finding survived; its absolute numbers did not.
+The repair lane re-measured every figure rather than copying any, which is the only reason
+the corrected inventory is trustworthy. **A finding can be true and its receipt still
+wrong; inherit neither without re-execution.**
+
+**BOTH CHAIR RULINGS IMPLEMENTED.** J-GR3-C1 — the compliance question is asked of the
+TERM, at the two public doors rather than inside `grantTermFor`, so the finder still SEES a
+broken right and can answer `defaulted` versus `''` for never-granted. ⚠ The defect proved
+BIDIRECTIONAL, which the ruling did not know: a defaulted TERM on an honored instrument
+also returned true. Post-repair: mixed → `(true,'honored')`, never-granted → `(false,'')`,
+granted-then-voided → `(false,'defaulted')`, with mutant M11 restoring the old
+instrument-level skip and reddening, so the repair is PINNED and not merely present.
+J-GR3-C2 — `exclusivity` stands and GRAMMAR §4 gained the commercial rows; the canonical
+home was genuinely empty, and FP-TRADE's divergent `trade_exclusivity` gets a POINTER, not
+a rewrite, so the drift stays findable.
+
+**GOLDEN SHIFT: ZERO**, measured three independent ways — a consumer census showing the
+seven named reads have no callers outside the wave's own test file (including
+`toleranceGuaranteeFor`, the read the ruling flagged as possibly having prior consumers);
+`treatyEnforcement.js` at 176 insertions / 0 deletions, so the change can only touch code
+this wave introduced; and a byte-identical full-typecheck error set at both ends.
+
+**THREE LANE JUDGMENTS, ALL VETOABLE.** (1) `TERM_EXECUTORS` is a hand-declared literal
+rather than derived from `TERM_CATALOG`'s own rows — deriving it would compare a list
+against itself, the recorded self-referential-pin class, and would green a typo'd executor
+on every row at once. (2) The domain-strict ratchet was NOT tightened despite reporting
+nine fewer errors than baseline: it is a SHARED ratchet, the surplus is not demonstrably
+this wave's, and tightening mid-cycle would collide with the concurrent lane. Deferred, not
+missed. (3) The recorded mutation battery was widened to the MEASURED affected set of 19
+files rather than the wave's declared four, because the entry's own mutant-7 claim could
+only be executed with `peaceTermsWave3.test.js` present.
+
+**CARRIED FORWARD, CHAIR-OWED:** `reparations` is a producer-less term PRE-DATING this
+program (both lawful cures move war-end goldens; held in the frozen `PRODUCER_OWED`
+register, named separately from GR-3's nine so GR-3b cannot close it by accident); and a
+negotiated treaty has NO RESOLVABLE OBLIGATION AXIS — independently re-confirmed by
+execution, `treatyOrientationOf` on GR-2's minted negotiated shape returns
+`{kind:'unknown', resolved:false}` with every id empty, so a beneficiary-less term on a
+negotiated instrument grants nobody anything. **GR-3b must not draft `settlement_provision`
+or `temple_restitution` until that is ruled.**
+
+### AN ATTRIBUTION EVENT, RECORDED SO THE LOG IS NOT READ WRONG
+
+SP-E's commit `7a77c84b` swept up the ES-1 repair lane's UNCOMMITTED edit to the lighting
+census comment. The text is in HEAD verbatim and correct and nothing was lost, but it is
+ATTRIBUTED TO SP-E rather than to the repair that authored it. Both lanes legitimately
+needed the same file. This is the two-lane collision the concurrency law predicts, and it
+is why rows are now deferred to the chair.
+
+### FOUR TOOLING HAZARDS BANKED — each cost real time today
+
+1. **zsh does NOT word-split unquoted parameters.** `npx vitest run $FILES` silently ran
+   ONE file and reported a green that meant nothing. Route multi-file runs through `sh`.
+2. **BSD `sed` has no `\+` in basic regex.** A row-normalizing `s/ [0-9]\+ms$//` silently
+   left timings on every row and made an otherwise clean diff look like a 36 KB difference.
+3. **vitest suppresses `console.log` for PASSING tests**, so an instrumented measurement
+   prints nothing until you force the assertion to fail.
+4. **lint-staged's partial-staging stash DOES fire** on a commit with unstaged siblings
+   ("Backed up original state in git stash"). The unstaged ledger survived byte-exact here
+   ONLY because a `cp` backup and a `cmp` check were taken immediately before committing.
+
+**Nothing lit. No flag minted. No golden re-recorded. No band ratified. No soak run.
+Nothing pushed.**
