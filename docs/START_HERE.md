@@ -71,6 +71,59 @@ nothing. See §3i and `memory/concurrency-law-ruled.md`. The risk directive does
 NOT license a second engine worktree: that refusal was a MEASURED verdict about
 exact-census files merging green-but-wrong, not a caution.
 
+### ⭐⭐ THE WAVE CENSUS — MEASURED FOR THE FIRST TIME (2026-08-06)
+
+**⛔ STRIKE "94 WAVES REMAIN (49 FLAGGED)" WHEREVER YOU MEET IT.** It is not
+merely stale, it is INTERNALLY INCONSISTENT: its own stated composition (FP core
+61 · WC 17 · WY 12 · ES 7 · EP 6 · HB 10) sums to **113**, or 105 net of its
+claimed 8 landed — neither is 94. Three independent defects: "FP core 61"
+contradicts the volume's 60 numbered waves; ES is counted at 7 where the volume
+declares 8 (ES-0..ES-7); WY at 12 folds in the five SURFACE waves that §5
+explicitly excludes. It was also already short by one when written — SP-C landed
+at 04:26 and the figure was recorded at 06:29 the same day. Strike it; do not
+adjust it. The §3i inventory paragraph carrying it is superseded by this block.
+
+**THE MEASURED FIGURES.** `DESIGN_FP_ARCHITECTURE.md`'s own headline numbers were
+labelled PLAUSIBLE-NOT-MEASURED in the integration fold's anomaly A6. They have
+now been counted by two independent methods (regex extraction over §5 wave
+declarations, and a per-phase recount) and **all three are EXACT**: §5's "75
+waves" measures 75, §3's "52 new virtual flags" measures 52 with no duplicates
+or gaps, §9's "66 seams pinned" measures 66. **A6's PLAUSIBLE label is hereby
+upgraded to MEASURED, and EP's STOP-and-report condition is NOT triggered.**
+
+- **FP: 75 declared — 9 LANDED, 2 PARTIAL, 64 NOT-STARTED → 66 remaining.**
+  Landed: SP-A · CW-0w · SP-B · SP-B2 · SP-C · GR-0 · GR-1 · TR-1 · ES-0.
+  Partial: SP-D (in flight) and TR-9 (only the TR-9c contract slice landed).
+- **Program-wide: 108 declared (75 + EP 6 + HB 10 + WC 17) → 99 REMAINING.**
+- **The flag census, which is the scheduling number:** of the 66 remaining FP
+  waves, **42 MINT a flag** and must serialize under CQ5, 12 ride an
+  already-minted flag, and 12 carry no flag — so **24 of 66 parallelize freely
+  and 42 contend for the single flag slot.**
+- ⚠ **SEVEN ES WAVES LEAVE THE SERIALIZED COLUMN, NOT SIX.** `espionageEnabled`
+  landed at ES-0 (`55674790`, "Joined 2026-08-05 by FP wave ES-0"); §3 row 44
+  still says it lands at ES-1 and is STALE. ES-7 is also a slice of that flag,
+  so ES-1..ES-7 are all no-new-flag.
+- Two label corrections, not count corrections: flag 52 `armySupplyEnabled`
+  belongs to WY-8 slice 8a, which is NOT among the 75 (in-scope flags = 51); and
+  the manifest lives at `src/domain/worldPulse/simulationRules.js`, not
+  `src/domain/simulationRules.js`.
+
+**⚠⚠ THE METHODOLOGICAL FINDING, and it binds every future census: ES-4 IS
+NOT-STARTED DESPITE ELEVEN COMMITS NAMING IT.** Commit `8a4b0aef` says verbatim
+"THE WAVE DID NOT LAND" — those commits hardened the lighting instrument.
+**A census by git-subject grep alone would score ES-4 as landed.** Landed-state
+needs the module and manifest evidence, never the commit subject alone.
+
+**THE CRITICAL PATH IS NINE WAVES: SP-D → ES-1 → ES-2 → ES-3 → ES-4 → ES-5 →
+ES-6 → ES-7 → CW-3.** Strictly serial by declaration and no parallelism shortens
+it. ⭐ **Seven of the nine mint no flag, so the critical path is
+DEPENDENCY-bound, not flag-slot-bound — do not spend the second build lane on
+it.** Highest unblock-counts, and therefore what a chair schedules first:
+**SP-D** (5 direct, and it gates the whole 8-wave ES tail), **GR-2** (5 direct,
+and it became FULLY UNBLOCKED the moment SP-C landed), then **GR-3** (3 direct,
+and it owns the one-time `catalogGrewSinceWr10` discharge per J-FP-1, which TR-5
+and WF-6 must not expect to still exist).
+
 ## 3i. ⭐⭐ ACCOUNT-TRANSITION HANDOFF (2026-08-06, ~04:40 EDT — written FOR a
 successor on a DIFFERENT CLAUDE ACCOUNT; supersedes everything below; git wins)
 
