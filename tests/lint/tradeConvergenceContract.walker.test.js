@@ -509,12 +509,38 @@ describe('TR-9c foreign preconditions: every borrowed key is real, at an address
       + ' flag was dropped from ENGINE_GATED_VIRTUAL_RULE_KEYS, or this join has outlived the'
       + ' table it joins and should be retired rather than kept green.',
     ).not.toEqual([]);
+    // ── THE UNBUILT-SIDE ARM, RETIRED BY ITS OWN INSTRUCTION (FP wave GR-2, 2026-08-06) ──
+    //
+    // This assertion used to read `expect(unbuilt).not.toEqual([])`, and its failure text
+    // named the two lawful cures: "extend the table with the next unbuilt precondition, or
+    // retire it." GR-2 landed `pactFormationEnabled`, the THIRD and LAST of TRADE's
+    // FP_PROGRAM preconditions, so the arm became unsatisfiable — and the first cure was
+    // measured and found unavailable rather than assumed away. TRADE has exactly three
+    // foreign FP preconditions and the tree says so in both directions: the alias test
+    // directly below pins the complete set as {SP-1: SP-D, SP-2: SP-B, SP-3: GR-2/GR-3},
+    // and DESIGN_FP_ARCH_TR.md's own precondition column lists SP-1, SP-2 and SP-3 and
+    // nothing else. Adding a fourth row to keep this arm alive would have meant inventing a
+    // precondition TRADE does not have, in the very table whose purpose is that every
+    // borrowed key is REAL — the cure would have been the disease.
+    //
+    // SO THE ARM IS REPLACED, NOT DELETED, and the replacement is a live falsifiable claim
+    // rather than a weakening. It reds in BOTH of the directions that now matter: the day a
+    // FOURTH FP precondition is added unbuilt (at which point the discriminating guard
+    // above should come back with it), and the day a landed flag is dropped from the CQ5
+    // manifest. The join's real measurement was never this arm anyway — it is the row-level
+    // loop above, which measures each row against the manifest and against a file that must
+    // exist and spell the strict gate, and whose R6-b/R6-c controls are recorded executed.
     expect(
       unbuilt,
-      'EVERY FP precondition reads as built: the CQ5 manifest holds all of these flags, so'
-      + ' again every row agrees for free. The join needs at least one unbuilt row to'
-      + ' discriminate — extend the table with the next unbuilt precondition, or retire it.',
-    ).not.toEqual([]);
+      'an FP precondition reads as UNBUILT again. That is expected the day a fourth one is'
+      + ' added, and it is the signal to restore the discriminating guard this line replaced'
+      + ' (see the block comment) rather than to widen this expectation.',
+    ).toEqual([]);
+    expect(
+      built.sort(),
+      'a LANDED FP precondition left the CQ5 manifest — all three of TRADE\'s foreign FP'
+      + ' preconditions are built, and this is the arm that says so.',
+    ).toEqual(['believedScarcityEnabled', 'errandSpineEnabled', 'pactFormationEnabled']);
     // …and the two halves are a PARTITION of the rows, so neither filter can quietly drop a
     // flag between them and leave both non-empty checks above looking healthy.
     expect(

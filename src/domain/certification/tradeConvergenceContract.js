@@ -247,7 +247,14 @@ export const TRADE_FOREIGN_PRECONDITION_FLAGS = Object.freeze([
     origin: 'FP_PROGRAM',
     owner: 'GR-2/GR-3',
     spineAlias: 'SP-3',
-    gateEvidenceFile: null,
+    // LANDED at GR-2 (2026-08-06). The ONE door where this key is read: the gate sits at
+    // the pact-proposal ledger's single writer, `pactProposals.pactFormationActive`,
+    // because the flag governs that ledger and nothing may write it without passing there.
+    // This row is the exact S4-a simulation the walker's own manifest note describes,
+    // executed for real: the key joined ENGINE_GATED_VIRTUAL_RULE_KEYS in this commit, so
+    // the two-way equivalence obliges the row to name a file that both exists and spells
+    // the strict gate.
+    gateEvidenceFile: 'src/domain/worldPulse/pactProposals.js',
   }),
   Object.freeze({
     flag: 'errandSpineEnabled',

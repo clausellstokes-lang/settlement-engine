@@ -572,6 +572,72 @@ export const VIRTUAL_SUBSYSTEM_ROWS = Object.freeze([
     // No channel at all, so the row can never be ALIVE and says so.
     soakEvidence: 'unobserved',
   }),
+  // ── PEACETIME FORMATION (FP GR-2, docs/DESIGN_FP_ARCH_GR.md §GR-2) ─────────
+  Object.freeze({
+    rule: 'pactFormationEnabled',
+    title: 'Peacetime pact formation (the standalone NAP)',
+    module: 'src/domain/worldPulse/pactFormation.js,src/domain/worldPulse/pactProposals.js,src/domain/worldPulse/pactTriggers.js,src/domain/worldPulse/pactAmendment.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY: the lane mints no `candidateType` literal. Its whole story
+      // rides receipts and the relationship record's turning-point archive, and the DM
+      // verb that would carry a candidate type is GR-2b's declared slice.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY, and it is a design commitment rather than an omission: GR-2
+      // mints ZERO new `wizard_news` kinds. Declaring a mover family here would grade this
+      // row alive off the peace engine's own signing beat, which fires for a war's end and
+      // has nothing to do with whether two courts at peace ever wrote anything down — the
+      // recorded moverFamily hazard, exactly.
+      moverFamilies: Object.freeze([]),
+      // THE ONE CHANNEL THAT IS REAL. `spatialLedgers.pactProposals` is a container this
+      // subsystem OWNS outright and is the only writer of, and the v5 census reads one
+      // level into spatialLedgers and counts entries — so a lit world that has opened a
+      // proposal is distinguishable from a dark world by the census alone. That is a
+      // stronger channel than either of this lane's siblings has, and it is why this row
+      // can be graded rather than only pinned.
+      stateKeys: Object.freeze(['spatialLedgers.pactProposals']),
+      other: 'THE SECOND DOOR INTO THE ONE INSTRUMENT-BEARING LEDGER, and the first that needs no war. ONE GATE: pactProposals.pactFormationActive reads pactFormationEnabled by name with the strict === true idiom, and it sits at the ledger writer door because that is the door nothing can write past. WHAT IT DOES: four closed peacetime occasions - a believed trade demand, a believed communion of rite, a believed migration pressure, and a shared threat read through WR-6 alliance-web risk - score from BELIEF on both ends, and a crossing opens a proposal whose answer is owed on a date the roads set (two hopWeeks legs plus a deliberation, so a far court answers slowly by physics). The counterparty answers under its OWN reserve, composed from SP-C posture and risk appetite and raised by the proposer oathbreaker credibility, and the answer is a TWO-SIDED CONJUNCTION: the offer must clear the reserve AND the dependency fear must not win. Both sides sign, or the refusal is remembered as a turning point and a banded trust delta with no grievance and no casus. WHAT IT MINTS: the same treaty record a war end mints, provenance negotiated, carrying a lineage - so a pair that already holds an instrument gets a NEW CLAUSE rather than a second document, which is how one treaty per unordered pair survives a door that cannot refuse. WHAT IT NEVER DOES: it mints no news kind, no grievance, no casus, no second mediation finder and no second alliance web; it never backfills a legacy record, and it never reads a counterparty true state - a court knows itself and believes its neighbour. WHY THE OTHER TWO CHANNELS ARE EMPTY: the lane adds no candidate type and no beat by design, both deferred by name to GR-2b and GR-3. THE OBSERVATION NEEDED to move this row past ALIVE into a graded formation-versus-dictation ratio is GR-7 charter: the treaty section of the convergence collector, counting negotiated against dictated provenance and the endings mix. Until then the lane is pinned where its bodies are readable: tests/domain/pactTriggers.test.js, tests/domain/pactProposals.test.js, tests/domain/pactFormation.test.js, tests/domain/pactAmendment.test.js and tests/property/pactFormationDormancyFence.test.js.',
+    }),
+    // The lane runs every tick but only ACTS on a crossing, and a crossing needs beliefs a
+    // dark belief layer never writes. `rare` is the honest member of the closed tempo
+    // vocabulary: this lane has a cadence of its own (unlike `reactive`, which fires only
+    // when another subsystem acts) but no year is owed a pact, so its floor share is zero.
+    expectedTempo: 'rare',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'dark_writes_no_pact_proposals_key',
+        description: 'With the flag dark the stage returns the SAME worldState and settlementUpdates references before reading anything, so no `pactProposals` key is ever created and an emptied ledger drops the key rather than persisting an empty array. Absent, never null and never `[]`: a key is a byte.',
+        check: 'Expressible from the v5 subsystems section alone: subsystems.stateKeys carries spatialLedgers.pactProposals only when subsystems.rules.pactFormationEnabled is true. Also pinned behaviourally in tests/property/pactFormationDormancyFence.test.js, whose own-footprint fence runs on a fixture that DOES open a proposal when lit.',
+      }),
+      Object.freeze({
+        name: 'one_instrument_per_pair_survives_a_door_that_cannot_refuse',
+        description: 'The war door and the sale door keep the one-treaty-per-unordered-pair law by REFUSING. A peacetime formation cannot refuse and keeps it by APPENDING, so a pair holding a live sale deed that signs a grain pact ends with ONE ledger record carrying both, and the sale door refusal behaviour is unchanged.',
+        check: 'NOT expressible from a receipt: the census counts ledger ENTRIES and cannot say which road wrote them. Pinned in tests/domain/pactFormation.test.js by the sale-coexistence fixture, which mints a sale, signs a pact over it, asserts exactly one record at the pair key, and asserts mintSovereigntySaleTreaties still refuses that pair with its own unchanged word.',
+      }),
+      Object.freeze({
+        name: 'the_counterforce_can_win_on_the_forces_own_evidence',
+        description: 'The dependency fear is priced from the demand magnitude that raised it, read through the pair existing dependency and leverage axes. It is a live band in BOTH directions: at low reliance it never refuses, and at high reliance it refuses a bargain that the demand alone would have signed. A counterforce that could not win would be the recorded dead-band class wearing a design clothes.',
+        check: 'NOT expressible from a receipt: no receipt carries a counterfactual. Pinned in tests/domain/pactFormation.test.js, where ONE fixture is run twice with only the relationship reliance axes changed and the two verdicts differ, and in tests/domain/pactTriggers.test.js at the arithmetic level.',
+      }),
+    ]),
+    // ── `indirect`, NOT `unobserved`, AND THE PRECEDENT IS THE ESTATE'S OWN ──────────
+    // Every sibling row in this lane declares `unobserved`, because none of them has a
+    // channel a receipt can read and saying otherwise would be a shrug dressed as a
+    // verdict. THIS ROW HAS ONE: `censusWorldStateKeys` walks one level into
+    // `spatialLedgers`, so the proposal ledger is enumerated by every v5 envelope exactly
+    // as `spatialLedgers.demographicPlans` is — and wave P4's row records the identical
+    // move for the identical reason, "from soakEvidence unobserved to indirect, which is
+    // what keeps the reviewed override set at its ceiling of five instead of growing to
+    // six". Declaring a channel AND calling the soak blind to it converts a real SILENT
+    // into an instrument gap; `tests/domain/subsystemCertificationCorpus.test.js` ceilings
+    // that escape hatch at five and this row would have been the sixth.
+    //
+    // HOW TO READ THE SILENT THIS NOW ALLOWS, because it has a legitimate cause: the
+    // proposal ledger exists only where a pair CROSSED a peacetime occasion and settled
+    // rows prune, so a realm whose courts never wanted anything from each other — or one
+    // where every question was answered before the sample — holds no key at all. That is
+    // a quiet world, not a broken lane.
+    soakEvidence: 'indirect',
+  }),
   // ── THE SOVEREIGNTY MARKET (WR-10 amendment S, the conveyance) ─────────────
   Object.freeze({
     rule: 'sovereigntyTradeEnabled',

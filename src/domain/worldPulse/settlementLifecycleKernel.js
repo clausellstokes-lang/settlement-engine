@@ -88,6 +88,7 @@ import { advanceDemographics } from './demographicsKernel.js';
 // after that call the cell already holds this tick's, and every crossing would read as
 // a non-crossing forever. Dark ⇒ both input references come straight back.
 import { advanceSovereigntyMarket } from './sovereigntyMarketStage.js';
+import { advancePeacetimePacts } from './pactFormation.js';
 import { lineageReceipt, pickLine, LIFECYCLE_NEWS } from './eventProse.js';
 import { chooseSteadingSite, deriveSteadingResources, landformPlaceName, resourcePhrase } from './steadingTopography.js';
 import {
@@ -540,10 +541,24 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
     season: typeof asObject(asObject(hostWorldState).calendar).season === 'string'
       ? String(asObject(asObject(hostWorldState).calendar).season) : null,
   });
+  // ── GR-2: THE PEACETIME PACT LANE, the sovereignty market's sibling in every structural
+  // respect (own-flag-before-host-gate; dark ⇒ the stage body is never entered ⇒ the SAME
+  // worldState and settlementUpdates REFERENCES back, so wiring it in cannot perturb a byte).
+  // STAGE ORDER IS FIXED AND PINNED — market first, pacts second (JUDGMENT, vetoable): a
+  // court that has just sold a holding is a court whose believed books changed this tick,
+  // and the pact trigger should read the POST-SALE world. It runs before advanceDemographics
+  // for the same reason the market does — the crossing reads must not see this tick's own
+  // demographic writes. ──
+  const pacts = advancePeacetimePacts({
+    snapshot, worldState: market.worldState, digest: demoDigest, tick,
+    settlementUpdates: market.settlementUpdates,
+    season: typeof asObject(asObject(hostWorldState).calendar).season === 'string'
+      ? String(asObject(asObject(hostWorldState).calendar).season) : null,
+  });
   const demo = advanceDemographics({
     snapshot: /** @type {import('./demographicsKernel.js').DemoSnapshot} */ (/** @type {unknown} */ (snapshot)),
-    worldState: market.worldState,
-    settlementUpdates: /** @type {import('./demographicsKernel.js').DemoUpdate[]} */ (/** @type {unknown} */ (market.settlementUpdates)),
+    worldState: pacts.worldState,
+    settlementUpdates: /** @type {import('./demographicsKernel.js').DemoUpdate[]} */ (/** @type {unknown} */ (pacts.settlementUpdates)),
     rng, tick,
     pIndex: /** @type {import('./demographicsKernel.js').DemoPressureIndex|null} */ (
       /** @type {unknown} */ (pIndex || null)),
@@ -565,9 +580,10 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
       // WAVE P4: the demographic lane's Herald lines are ITS news, gated by ITS flag, so
       // they must survive this module's own dormancy gate. Dark demographics returns an
       // empty array here, which is the same [] this path always returned.
-      newsEntries: [...market.newsEntries, ...demo.newsEntries],
+      newsEntries: [...market.newsEntries, ...pacts.newsEntries, ...demo.newsEntries],
       receipts: [
         ...market.receipts,
+        ...pacts.receipts,
         .../** @type {Array<Record<string, unknown>>} */ (/** @type {unknown} */ (demo.receipts)),
         ...demo.migrationReceipts,
         ...demo.planReceipts,
@@ -608,10 +624,11 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
   /** @type {Array<Record<string, unknown>>} */
   // WR-10's beats and receipts are ITS flag's, so they survive this module's own gate on
   // both paths — the same law wave P4's demographic lines already obey here.
-  const newsEntries = [...market.newsEntries];
+  const newsEntries = [...market.newsEntries, ...pacts.newsEntries];
   /** @type {Array<Record<string, unknown>>} */
   const receipts = [
     ...market.receipts,
+    ...pacts.receipts,
     .../** @type {Array<Record<string, unknown>>} */ (/** @type {unknown} */ (demo.receipts)),
     ...demo.migrationReceipts,
     ...demo.planReceipts,

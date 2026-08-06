@@ -36,6 +36,9 @@ import {
   WR7_TWO_PICTURE_PARLAY_COUPLING,
   TR1_CASUS_COMMERCII_COUPLINGS,
   TR1_SEVERANCE_PRESSURE_COUPLING,
+  GR2_BELIEVED_DEMAND_COUPLING,
+  GR2_PACT_FORMATION_COUPLINGS,
+  GR2_SHARED_THREAT_COUPLING,
   couplingRowFor,
   couplingRowsFor,
 } from '../../src/domain/certification/couplingRegistry.js';
@@ -80,6 +83,9 @@ describe('CW-0 coupling registry', () => {
       ...WR6_WAR_COALITION_COUPLINGS,
       ...WR7_ENVOY_COUPLINGS,
       ...TR1_CASUS_COMMERCII_COUPLINGS,
+      // FP GR-2 (2026-08-06): the THIRD volume leaf, appended in wave order like the
+      // second. Three rows, one per direction peacetime formation reads across.
+      ...GR2_PACT_FORMATION_COUPLINGS,
     ]);
     expect(WR3_LINEAGE_COUPLING).toEqual({
       couplingId: 'CPL-3.POP_TO_WAR.WR-3.lineage',
@@ -348,7 +354,14 @@ describe('CW-0 coupling registry', () => {
     expect(COUPLING_REGISTRY.some((row) => 'kinds' in row)).toBe(true);
     // The volume prefix is TRADE while the wave prefix is TR — the two vocabularies are
     // separate and this row is the first place they meet.
-    expect(new Set(COUPLING_REGISTRY.map((row) => row.owningVolume))).toEqual(new Set(['WAR', 'TRADE']));
+    // GRAMMAR joined at FP GR-2 (2026-08-06), in that row's own commit, exactly as the
+    // CHARTERED_VOLUME_PREFIXES docstring says a new volume must: peacetime formation is
+    // the first GRAMMAR wave that reads across a layer boundary, and it reads across three
+    // at once (INFO for the believed demand, INTERIOR for the posture reserve, WAR for the
+    // shared threat). The set is asserted rather than derived so a fourth volume arriving
+    // silently still reds here.
+    expect(new Set(COUPLING_REGISTRY.map((row) => row.owningVolume)))
+      .toEqual(new Set(['WAR', 'TRADE', 'GRAMMAR']));
   });
 
   test('every schema-v3 row has one stable unique identity and a closed shape', () => {
@@ -480,11 +493,15 @@ describe('CW-0 coupling registry', () => {
         WR7_SELF_PARLAY_COUPLING,
         WR7_ENCOUNTER_COUPLING,
         WR7_TWO_PICTURE_PARLAY_COUPLING,
+        // GR-2's `shared_threat`: the war layer read from the PEACE side, and the first
+        // row on this pair whose owning volume is GRAMMAR rather than WAR. The legacy
+        // first-row tiebreak is unaffected, and the line below re-asserts it.
+        GR2_SHARED_THREAT_COUPLING,
       ]);
     expect(couplingRowsFor('CPL-5', 'GRAMMAR→WAR'))
       .toEqual([WR7_HOME_DELIVERY_COUPLING, WR7_CARRIED_SHEET_COUPLING]);
     expect(couplingRowsFor('CPL-19', 'INFO→GRAMMAR'))
-      .toEqual([WR7_MOVING_PICTURE_COUPLING, WR7_ENVOY_PLANT_COUPLING]);
+      .toEqual([WR7_MOVING_PICTURE_COUPLING, WR7_ENVOY_PLANT_COUPLING, GR2_BELIEVED_DEMAND_COUPLING]);
     expect(couplingRowsFor('CPL-19', 'GRAMMAR→INFO'))
       .toEqual([WR7_SILENCE_INFERENCE_COUPLING]);
     expect(couplingRowsFor('CPL-1', 'WAR→TRADE'))

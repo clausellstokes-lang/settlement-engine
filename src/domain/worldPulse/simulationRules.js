@@ -228,6 +228,17 @@ export const ENGINE_GATED_VIRTUAL_RULE_KEYS = Object.freeze([
   // §3 flag law), in the SAME commit as its first real gate read
   // (oathHolder.oathHolderActive, read by name) and its certification row.
   'oathHolderEnabled',
+  // Joined 2026-08-06 by FP wave GR-2 under CR-WR10-C item 4 (the compiled charter's §3
+  // flag law), in the SAME commit as its first real gate read
+  // (pactProposals.pactFormationActive, the ONE `pactFormationEnabled === true` in the
+  // tree) and its AUTHORED certification row. THE GATE SITS AT THE LEDGER'S ONE WRITER
+  // rather than in a file named for the flag, which is the errandSpineActive precedent:
+  // the key governs `spatialLedgers.pactProposals`, and a gate standing at that door is a
+  // gate nothing can write past. Read by NAME because a frozen-list `.every()` conjunction
+  // is a computed member access that attributes to no key and would hide a fully wired flag
+  // from this very census; read ONCE because two doors on one flag is how a deleted guard
+  // hides behind a surviving one.
+  'pactFormationEnabled',
   // Joined 2026-08-04 by lane WW-A under CR-WR10-C item 4, in the SAME commit as its
   // first real gate read (sovereigntyAssets.sovereigntyTradeActive) and its
   // certification row — certification tracking reality instead of preceding it.

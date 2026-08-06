@@ -206,6 +206,40 @@ const NEGOTIATION_MODULES = Object.freeze({
   ],
   'src/domain/worldPulse/envoyTestimony.js': [],
   'src/domain/worldPulse/compromiseRound.js': [],
+  // ── FP GR-2 (peacetime formation). THE TWO LEAVES A PEACETIME NEGOTIATION IS LET READ
+  // THROUGH, and they are here for the same reason the parlay's leaves are: a pact is a
+  // negotiation, and the estate has exactly one promise about what a negotiation may know.
+  //
+  // `pactTriggers.js` is the arithmetic and it reaches ONE kernel primitive. It declares no
+  // band ladder of its own — every scorer takes the ladder as an ARGUMENT — which is the
+  // reason it can sit at this floor at all: the recorded MIRROR-NOT-IMPORT cure would have
+  // put three copies of `beliefAxisSubjects`'s ladders in here plus an equality walker to
+  // keep them honest, and a leaf that names no ladder cannot get one wrong.
+  //
+  // `pactProposals.js` is the ledger's ONE writer. Its reach is the constitutional spatial
+  // accessors (the `foreignGuestHold.js` precedent above, verbatim), the errand mint head
+  // (already pinned in this manifest, and its own row bottoms out at the vocabulary's empty
+  // list), the trigger leaf, and the id primitive. Not one of them can hand back a
+  // settlement's strength, stock or pressure.
+  //
+  // ⚠ WHAT IS DELIBERATELY *NOT* HERE, AND IS THE GUARD ON THIS PAIR: `pactFormation.js`,
+  // GR-2's composer, is a LEGITIMATE TRUTH READER and must stay OUTSIDE this set. A court
+  // knows its own granary — §IV.4's self-read carve-out, the same one
+  // `conquestDoctrineStage.js` takes below — so the composer calls `scarcityGroundTruth`
+  // and would red the token scan forever. What keeps the seam real is that the two modules
+  // it feeds are pinned right here and can reach none of it: the composer assembles the
+  // plate, and the leaves that eat from it are closed. The stage-discovery guard cannot
+  // catch this one (the file is not named `*Stage.js`), so the negative is asserted
+  // directly, below.
+  'src/domain/worldPulse/pactTriggers.js': [
+    '../../kernel/math.js',
+  ],
+  'src/domain/worldPulse/pactProposals.js': [
+    '../spatial/distanceRead.js',
+    './errandMint.js',
+    './pactTriggers.js',
+    './stablePart.js',
+  ],
   // WR-7d. The ransom leaves are negotiation paths too: a price on a person is
   // a demand a court believes, and it must be believed on the same terms as
   // every other. `ransomClaim` reaches ONLY the shared transit kernel — the
@@ -577,6 +611,27 @@ describe('WR-7b K3 — nobody is ever current', () => {
       // event rather than a refactor detail.
       expect(importsOf(source), `${rel} import list`).toEqual([]);
       expect(source, `${rel} must not name worldState`).not.toContain('worldState'); // anchored: see above
+    }
+  });
+
+  test('GR-2 GUARD-THE-GUARD: the pact COMPOSER is outside the set, and reads truth', () => {
+    // The two GR-2 leaves above are pinned closed. That claim is only worth
+    // something if the module FEEDING them is a real truth reader that this same
+    // scan would reject — otherwise the pair could have been admitted because
+    // nothing in the lane reads truth at all, which is the vacuity this block
+    // exists to refuse. Both halves are asserted.
+    const COMPOSER = 'src/domain/worldPulse/pactFormation.js';
+    expect(Object.keys(NEGOTIATION_MODULES)).not.toContain(COMPOSER);
+    const composer = code(COMPOSER);
+    expect(composer.length, 'the composer read empty').toBeGreaterThan(1000);
+    // It reads a court's OWN granary (the §IV.4 self-read carve-out) …
+    expect(composer).toContain('scarcityGroundTruth');
+    // … which means this scan WOULD red it, so the exclusion is load-bearing.
+    expect(TRUE_STATE_TOKENS.some((token) => composer.includes(token))).toBe(true);
+    // And the leaves it feeds reach it in neither direction: no import of the
+    // composer from inside the set, so truth cannot travel back down.
+    for (const rel of ['src/domain/worldPulse/pactTriggers.js', 'src/domain/worldPulse/pactProposals.js']) {
+      expect(code(rel)).not.toContain('pactFormation.js');
     }
   });
 

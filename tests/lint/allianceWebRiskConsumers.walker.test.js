@@ -4,14 +4,16 @@
  * WR-6 built the believed-retaliation read (`readAllianceWebRisk` in
  * warAllianceRisk.js). WR-8 amendment R says the razing's deterrent is "E3's
  * alliance-web risk read, POINTED AT THE AFTERMATH" — built there, consumed
- * here. The failure that ruling exists to prevent is not a missing consumer; it
+ * here. FP GR-2 pointed the same read at a peaceful pair's shared fear — built
+ * there too, and its admission to the census is argued at ALLOWED_CONSUMERS. The failure that ruling exists to prevent is not a missing consumer; it
  * is a SECOND WEB: a razing that answers "who would retaliate" with its own
  * private walk, drifting from the coalition layer's answer at the first edit and
  * never reporting that it had.
  *
  * So this walker pins the census, not the presence:
- *   1. EXACTLY TWO runtime consumers, BOTH NAMED. A third appearing is a design
- *      question that must be argued, not absorbed; a second disappearing means
+ *   1. EXACTLY THREE runtime consumers, ALL NAMED (two until GR-2, and the
+ *      count is a measurement rather than a target). A FOURTH appearing is a
+ *      design question that must be argued, not absorbed; one disappearing means
  *      somebody quietly stopped consuming and probably started rebuilding.
  *   2. NOBODY REBUILDS THE WALK. No module outside the read's own file may
  *      compose the depth-two alliance walk that defines it.
@@ -38,14 +40,33 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const OWNER = 'src/domain/worldPulse/warAllianceRisk.js';
 
 /**
- * THE CLOSED CONSUMER SET. Two, and the reason each is here:
+ * THE CLOSED CONSUMER SET. Three, and the reason each is here:
  *   - warCoalitionDecision.js — WR-6's own consumer: pricing what a court risks
  *     by ANSWERING an alliance call (the web of the enemy it would take on).
  *   - razingExecution.js      — WR-8 amendment R: pricing what a would-be razer
  *     risks by BURNING a town (the web the burning would arm). Added by lane
  *     WZ-4; before it, WZ-3's census recorded exactly one.
+ *   - pactFormation.js        — FP GR-2, and THE CENSUS UPDATE IS ARGUED HERE
+ *     RATHER THAN ABSORBED, because that is what this walker's own docstring
+ *     demands of a third arrival. THE ARGUMENT: GR-2's `shared_threat` trigger
+ *     asks whether two courts AT PEACE have reason to fear the same third court,
+ *     and the compiled architecture (§6 seam 4, V-25) names this read as its
+ *     source by design — "built in WR-6, consumed here — never duplicated".
+ *     The failure this census exists to prevent is a SECOND WEB, and the
+ *     admission is safe against exactly that on three measured counts: the
+ *     consumer composes no `alliesOf` walk of its own (the nested-walk negative
+ *     below covers it automatically, since that scan quantifies over every src
+ *     module); it re-grades no intensity rung, naming exactly ONE band word as a
+ *     floor to sit above and taking `risk01` from the read for everything else
+ *     (`PACT_TRIGGER_TUNING.SHARED_THREAT_FLOOR_BAND`, asserted below); and it
+ *     points the web at a THIRD question none of the other two asks — not what a
+ *     called ally would take on, and not what a burning would arm, but what a
+ *     pair of peaceful courts already share a fear of.
+ *     ⚠ THE CENSUS IS NOW THREE. A FOURTH is a design question that must be
+ *     argued in its own wave's commit, exactly as this one was.
  */
 const ALLOWED_CONSUMERS = Object.freeze([
+  'src/domain/worldPulse/pactFormation.js',
   'src/domain/worldPulse/razingExecution.js',
   'src/domain/worldPulse/warCoalitionDecision.js',
 ]);
@@ -87,7 +108,7 @@ const codeOf = (rel) => sourceOf(rel)
   .replace(/\/\*[\s\S]*?\*\//g, '')
   .replace(/^\s*\/\/.*$/gm, '');
 
-describe('THE ONE WEB — readAllianceWebRisk has exactly two runtime consumers', () => {
+describe('THE ONE WEB — readAllianceWebRisk has exactly three runtime consumers', () => {
   test('the scanned module set is non-empty and contains the read\'s own home', () => {
     // THE ANTI-VACUITY ANCHOR. A relocation that emptied this walk would make
     // every absence below pass while guarding nothing.
@@ -96,13 +117,13 @@ describe('THE ONE WEB — readAllianceWebRisk has exactly two runtime consumers'
     expect(codeOf(OWNER)).toContain('export function readAllianceWebRisk');
   });
 
-  test('the consumer census is EXACTLY the two named modules', () => {
+  test('the consumer census is EXACTLY the three named modules', () => {
     const consumers = SRC_MODULES.filter((rel) => {
       if (rel === OWNER || NAME_ONLY.includes(rel)) return false;
       return /\breadAllianceWebRisk\b/.test(codeOf(rel));
     });
     expect(consumers).toEqual([...ALLOWED_CONSUMERS].sort());
-    expect(consumers).toHaveLength(2);
+    expect(consumers).toHaveLength(3);
   });
 
   test('each named consumer actually CALLS it — the census is not satisfied by an import', () => {
@@ -115,15 +136,33 @@ describe('THE ONE WEB — readAllianceWebRisk has exactly two runtime consumers'
     }
   });
 
-  test('the two consumers point the web at DIFFERENT questions', () => {
-    // Both price a web; the razing's is pointed at the AFTERMATH (the victim's
-    // friends), the coalition's at the enemy a called court would take on. If
-    // these ever became the same call, one of them is redundant and the amendment
-    // pointer is wrong.
+  test('the three consumers point the web at DIFFERENT questions', () => {
+    // All three price a web; the razing's is pointed at the AFTERMATH (the
+    // victim's friends), the coalition's at the enemy a called court would take
+    // on, and the pact lane's at a court a PEACEFUL PAIR both have reason to
+    // fear. If any two ever became the same call, one of them is redundant and
+    // its amendment pointer is wrong.
     const razing = codeOf('src/domain/worldPulse/razingExecution.js');
     const coalition = codeOf('src/domain/worldPulse/warCoalitionDecision.js');
+    const pacts = codeOf('src/domain/worldPulse/pactFormation.js');
     expect(razing).toContain('enemyId: victim');
     expect(coalition).toContain('enemyId: episode.enemyId');
+    expect(pacts).toContain('enemyId: threatId');
+  });
+
+  test('GR-2 consumes the read\'s OWN band ladder and declares no rival', () => {
+    // THE ADMISSION'S LOAD-BEARING HALF (see ALLOWED_CONSUMERS). The intensity
+    // rungs belong to warAllianceRisk.js. The pact lane may NAME one as a floor;
+    // it may not redefine the ladder — the same rule the razing estate is held
+    // to directly below, applied to the wave that widened this census.
+    const triggers = codeOf('src/domain/worldPulse/pactTriggers.js');
+    const pacts = codeOf('src/domain/worldPulse/pactFormation.js');
+    for (const band of ['pressing', 'decisive']) {
+      expect(triggers).not.toContain(`'${band}'`);
+      expect(pacts).not.toContain(`'${band}'`);
+    }
+    // …while the ONE rung it does name is present, so this is not vacuous.
+    expect(triggers).toContain("SHARED_THREAT_FLOOR_BAND: 'quiet'");
   });
 });
 

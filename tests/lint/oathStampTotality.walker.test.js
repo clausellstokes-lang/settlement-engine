@@ -81,6 +81,14 @@ const MINT_MODULES = Object.freeze({
       + ' doors" and the tree has three — which is the whole reason this walker measures the'
       + ' set instead of trusting a sentence.',
   }),
+  'src/domain/worldPulse/pactFormation.js': Object.freeze({
+    doors: Object.freeze(['signPactProposal']),
+    why: 'THE FOURTH DOOR (FP GR-2): peacetime FORMATION — two courts at peace who decide on'
+      + ' their own evidence to write something down. It is the first mint with neither a war'
+      + ' nor a buyer, so both parties swear and neither is a victor. The walker measuring'
+      + ' the set rather than a sentence is what caught this door on arrival: the GRAMMAR'
+      + ' volume still says "both doors", the tree said three, and it now says four.',
+  }),
 });
 
 /**
@@ -88,6 +96,12 @@ const MINT_MODULES = Object.freeze({
  * already signed, so a stamp here would be a second signature on somebody else's oath.
  */
 const REWRITE_MODULES = Object.freeze({
+  'src/domain/worldPulse/pactAmendment.js': 'AMENDMENT, not a mint. It appends a clause and a'
+    + ' lineage act to an instrument that already exists, and the signature on that record is'
+    + ' the one from its own signing. Re-stamping here would re-attribute an oath to whoever'
+    + ' holds the seat on the day a LATER clause was added — the same history-rewrite the'
+    + ' repudiation entry below refuses, reached by a different road. The FORMATION door that'
+    + ' does mint (pactFormation.js) is registered above and stamps both parties.',
   'src/domain/worldPulse/treatyBreach.js': 'REPUDIATION, not a mint. It rewrites a treaty'
     + ' that already exists — the breach is recorded ONTO the instrument the parties'
     + ' already swore — so the signature line it carries is the one from its own signing'

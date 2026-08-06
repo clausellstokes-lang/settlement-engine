@@ -1789,13 +1789,13 @@
   },
   {
     "path": "src/domain/worldPulse/settlementLifecycleKernel.js",
-    "line": 973,
+    "line": 990,
     "category": "floatInterpolation",
     "snippet": "`Backing fell to ${Math.round(backing01 * 100)}% and stayed there for ${dwell} ticks.`"
   },
   {
     "path": "src/domain/worldPulse/settlementLifecycleKernel.js",
-    "line": 973,
+    "line": 990,
     "category": "percentToken",
     "snippet": "`Backing fell to ${Math.round(backing01 * 100)}% and stayed there for ${dwell} ticks.`"
   },

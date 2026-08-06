@@ -165,6 +165,18 @@ export const ERRAND_CONSUMERS = Object.freeze([
     wave: 'WR-7a',
     built: true,
   }),
+  // FP GR-2: the SECOND BUILT consumer, and the first that is not a person-shaped one.
+  // A pact proposal is business on the road exactly as an embassy is — same class, same
+  // transit seam, same speed law — so it mints through the one head rather than growing a
+  // private clock. The mint is at the proposal LEDGER's writer because that is where a
+  // proposal is created; there is no separate `pactErrand.js` and there must not be one.
+  Object.freeze({
+    consumer: 'pact proposals',
+    purposeClass: 'diplomatic',
+    module: 'src/domain/worldPulse/pactProposals.js',
+    wave: 'GR-2',
+    built: true,
+  }),
   Object.freeze({
     consumer: 'factors',
     purposeClass: 'commercial',

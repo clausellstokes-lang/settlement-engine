@@ -2728,7 +2728,11 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
     // single named test rather than generating one test per row, which keeps the file
     // credited while still failing by name on the offending row.
     const CENSUS = Object.freeze({
-      files: 2322, parked: 358, credited: 1964, titles: 18519, suiteTitles: 5279,
+      // RE-MEASURED at FP GR-2 (2026-08-06), which added five test files: the four pact
+      // batteries and the dormancy fence. Every figure below is EXECUTED against the tree
+      // by the assertions that follow — this block is a record of a measurement, never a
+      // description of one, which is why the header says "re-measure, do not re-word".
+      files: 2327, parked: 358, credited: 1969, titles: 18624, suiteTitles: 5317,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

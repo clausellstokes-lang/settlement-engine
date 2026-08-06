@@ -129,6 +129,7 @@ import { joinAnchorOf } from './warCoalitionLedger.js';
 import { applyCoalitionReimbursement, applyCoalitionSettlement } from './warCoalitionSettlement.js';
 
 // ── THE FAMILY (see the header) ─────────────────────────────────────────────
+import { absorbWarEndIntoStandingPact } from './pactAmendment.js';
 import {
   COALITION_BETRAYAL_CHARACTER_TUNING, PEACE_TERMS_TUNING, TERM_CATALOG,
   TERM_FAMILIES, TERM_TYPES, termLabel,
@@ -498,6 +499,15 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
         }
       }
     }
+    // GR-2 (J-GR-14b) — THE WAR DOOR'S AMENDMENT AWARENESS, and the ONE edit this file
+    // takes for the whole GR-2 wave. A standing peacetime instrument used to make this
+    // settlement VANISH: the pair-slot guard below skipped, and nothing anywhere recorded
+    // that a war had ended under a pact these courts had signed. It is now absorbed as a
+    // lineage act on that instrument. DARK ⇒ the call returns false before reading anything
+    // and the guard below runs byte-identically.
+    if (absorbWarEndIntoStandingPact({
+      ledger: nextLedger, worldState: workingState, victorId, loserId, tick,
+    })) continue;
     // Already under a live treaty? Don't re-mint (idempotent within the window).
     if (nextLedger[treatyPairKey(victorId, loserId)] || nextLedger[treatyPairKey(loserId, victorId)]) continue;
 

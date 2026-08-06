@@ -116,6 +116,14 @@ const LAYER_PATTERNS = Object.freeze({
     // CR-FP-11 arm A: GR-0's news/receipt pools and GR-1's oath-holder identity. The
     // pact grammar's own leaves are GRAMMAR whatever noun they are named after.
     /^src\/domain\/worldPulse\/(?:grammar[A-Z]|oath[A-Z])/,
+    // FP GR-2: peacetime formation's four leaves. A LAYER HOME rather than an
+    // ARGUED_UNLAYERED entry, and the distinction is the one this table draws: the
+    // unlayered arguments below are for modules that own NO subject and are spoken by
+    // every layer (the band vocabulary, the law word). These four own the pact grammar's
+    // own subject outright, so their cross-layer reads — WAR's alliance-web risk, SPINE's
+    // posture and errand mint, INFORMATION's credibility — are exactly the couplings this
+    // ratchet exists to make visible, and burying them in an argument would hide them.
+    /^src\/domain\/worldPulse\/pact[A-Z]/,
   ],
   INTERIOR: [
     /^src\/domain\/worldPulse\/(?:faction|legitimacy|relationship|institution|commons|disposition|generosity|grievance|rulingPower|npcLadder|seatBooks)/,

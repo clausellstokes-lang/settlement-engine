@@ -74,6 +74,13 @@ const ARGUED_FIELD_SPELLERS = Object.freeze({
   'src/domain/worldPulse/sovereigntyMarketStage.js':
     'SP-B2, the first CONSUMER: beliefLegsOf reads conditionsBands off a belief record and'
     + ' renames its route rung onto the appraisal key, so it must spell the field it reads',
+  'src/domain/worldPulse/pactFormation.js':
+    'FP GR-2, the SECOND consumer, and the first to read all three families at once: a'
+    + ' peacetime pact is raised by what a court BELIEVES about its neighbour, so'
+    + ' believedBandsOf reads scarcityBands, conditionsBands and devotionBand straight off'
+    + ' the belief record and hands the WORDS to the pure trigger leaf. It spells the three'
+    + ' fields and nothing else — it declares no ladder and renames no rung, which is why it'
+    + ' appears here and not in the ladder census above',
 });
 
 function walk(dir, out = []) {

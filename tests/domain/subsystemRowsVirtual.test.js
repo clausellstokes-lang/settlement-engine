@@ -110,11 +110,18 @@ const POSTURE = 'strategicPostureEnabled';
 // WORDS on a row worldPulse/envoyErrand.js already writes wherever ITS six war flags are
 // lit. Declaring that container would grade this row off the WR-7a layer's presence.
 const SPINE = 'errandSpineEnabled';
+// Joined 2026-08-06 by FP wave GR-2, with its manifest entry and its first by-name gate
+// read in one commit. THE FIRST ROW IN THIS LANE THAT IS NOT ZERO-KEY: it owns
+// `spatialLedgers.pactProposals` outright and is that container's only writer, so unlike
+// every sibling here the census CAN tell a lit world from a dark one without a new
+// receipt channel. Its two empty channels are empty for reasons of design rather than of
+// mount — the lane mints no candidateType and, deliberately, no news kind at all.
+const PACTS = 'pactFormationEnabled';
 // AUTHORING ORDER, not alphabetical: the assertion below is an exact ordered equality
 // against VIRTUAL_SUBSYSTEM_ROWS, so this list mirrors the file's own section order.
 const VIRTUAL_RULES = Object.freeze([
   AXES, ESPIONAGE, SCARCITY, CONDITIONS, DEVOTION, POSTURE, SPINE,
-  CONQUEST, STATECRAFT, RUMORS, OATH, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS,
+  CONQUEST, STATECRAFT, RUMORS, OATH, PACTS, SOVEREIGNTY, LIFECYCLE_VOICE, CASUS,
 ]);
 
 const rowFor = (rule) => SUBSYSTEM_CERTIFICATION_REGISTRY.find((row) => row.rule === rule);
@@ -155,6 +162,12 @@ const LANE_LEAVES = Object.freeze({
   // deliberately NOT here — it is the WR-7a layer's file and tracing this lane's claims
   // through it would measure the war layer's vocabulary.
   [SPINE]: ['src/domain/worldPulse/errandMint.js', 'src/domain/worldPulse/envoyErrandVocabulary.js'],
+  // The pact lane's own leaves: the ledger writer where the flag is read, and the composer
+  // that runs the stage. The two pure leaves beside them (pactTriggers, pactAmendment) are
+  // reachable only through these, and the peaceTerms writer family the mint composes is
+  // deliberately NOT here — tracing this lane's claims through the war layer's own files
+  // would measure that layer's vocabulary instead of this one's.
+  [PACTS]: ['src/domain/worldPulse/pactProposals.js', 'src/domain/worldPulse/pactFormation.js'],
   [CONQUEST]: ['src/domain/worldPulse/vengeanceLicense.js', 'src/domain/worldPulse/conquestDoctrineStage.js'],
   [STATECRAFT]: ['src/domain/worldPulse/informationStatecraft.js', 'src/domain/worldPulse/brokerageStamps.js'],
   [RUMORS]: ['src/domain/spatial/migrationRumors.js'],

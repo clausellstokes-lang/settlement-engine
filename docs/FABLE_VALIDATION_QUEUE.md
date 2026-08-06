@@ -2756,3 +2756,152 @@ are the four with real optionality. J-SP-D-3 and J-SP-D-4 are forced — the fir
 veil's own logic, the second by a live walker. Also worth a look: the wave leaves the
 generalized head with NO foreign caller (the ES-0 precedent, and the certification row
 says so in as many words), so the lit arm is exercised only by pins until ES-1/TR-8 land.
+
+---
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · GR-2 PEACETIME FORMATION + THE STANDALONE NAP
+## (Opus 5 implementer AND verifier under the 2026-08-06 succession directive; every
+## J-* below is a chair-grade judgment made without a Fable chair and is VETOABLE)
+
+**What landed.** The engine can mint a treaty with no war in it. Four closed peacetime
+occasions score from BELIEF on both ends (`pactTriggers.js`, pure, one kernel import); a
+crossing opens a row in the ONE new top-level key `spatialLedgers.pactProposals`
+(`pactProposals.js`, its only writer and the home of the ONE `pactFormationEnabled ===
+true` read); the answer is owed on a date the ROADS set — two `hopWeeks` legs plus a
+deliberation — and is carried `abstract` or, under `errandSpineEnabled`, by a named envoy
+on a `diplomatic` errand minted through SP-D's head. The counterparty answers under its
+own reserve (SP-C posture x risk appetite, raised by the proposer's oathbreaker
+credibility) in a TWO-SIDED CONJUNCTION with the dependency fear. Signing goes through
+`pactFormation.js#signPactProposal` — the FOURTH transport into the one instrument — which
+MINTS where the pair is free and AMENDS where it is not (`pactAmendment.js`, lineage +
+family x beneficiary stacking). A war between signatories closes the negotiated clauses
+with `broken_by_war`. The ONE `peaceTerms.js` edit is +4 effective lines (785 -> 789 of
+800) against a +24 per-cycle budget with nine waves queued. DARK: the CQ5 trio landed in
+one commit and the kernel stage body is never entered, so both input references come back
+untouched and every existing golden is byte-identical.
+
+**Alignment line:** ENGAGEMENT — posture prices proposals, and an out-of-posture court
+that proposes anyway is LEGAL and pays for it in its own receipt (Req 10, priced news
+never forbidden).
+
+**Edit verb:** NOT LANDED THIS WAVE, and the omission is a DECISION rather than a lapse —
+see J-GR-2-6. The lane's story rides receipts and the relationship record's turning-point
+archive; no `wizard_news` kind is minted either (J-GR-2-5).
+
+**J-GR-2-1 — THE CROSSING MEMORY IS THE PROPOSAL LEDGER AND THE REFUSAL, NEVER A NEW
+CELL.** The sovereignty market reads its prior band off the demographic plan ledger; this
+lane has no such cell and mints none. A pair with an open question does not open a second,
+and a pair whose relationship record carries a `pact_refused` turning point inside 52
+ticks does not ask again — the market's "the treaty IS the cooldown" idiom pointed at a
+pact that was never written. Rejected alternative: a per-pair prior-score cell (simpler to
+reason about, one more persisted key, and §4 fought the whole program down to ONE).
+ITS COST IS NAMED AND MEASURED: a pair with NO relationship record has nowhere to
+remember, so it may ask again at the next dwell. Minting an edge from this stage to fix
+that would invent a tie two courts do not have, which is the worse trade. Re-examine:
+whether the edgeless case wants a bound at all.
+
+**J-GR-2-2 — THE STAGE ORDER IS MARKET FIRST, PACTS SECOND.** A court that has just sold
+a holding is a court whose believed books changed this tick, so the pact trigger should
+read the post-sale world. Pinned in the kernel comment and by the mount's position.
+Rejected alternative: pacts first (a sale would then read a world in which its counterpart
+had just signed something — the same argument pointing the other way, and no measurement
+separates them today). Re-examine at the soak, when a receipt can show whether either
+order produces a visibly different world.
+
+**J-GR-2-3 — TWO TRIGGERS SCORE BUT CANNOT DRAFT, AND THAT IS A TOMBSTONE WITH A
+TRIPWIRE.** `faith_communion` and `migration_pressure` are fully reachable scorers whose
+`PACT_DRAFT_LENS` rows are EMPTY, because their term families are GR-3's. A crossing on
+either is refused at the draft with `no_draftable_family` in its own receipt — visible,
+never silent — and a pin asserts the two rows are empty so it REDS the day GR-3 lands,
+which is the instruction to widen the lens in that commit. Rejected alternative: draft
+those two from the existing economic family under the beneficiary axis (all four triggers
+sign immediately; the volume assigns them faith and population terms, and borrowing
+economic would have quietly changed what a communion MEANS). Re-examine: whether a
+scored-but-undraftable trigger is better than a delayed one.
+
+**J-GR-2-4 — THE WAR DOOR'S AMENDMENT AWARENESS IS A LINEAGE ACT, NOT A TERM MERGE.**
+PASS 1's pair-slot guard used to make a negotiated peace VANISH when the pair already held
+an instrument. It now absorbs the fact as a `war_ended` act. Merging the war's drafted
+sheet would require moving the guard BELOW the mint — a far larger edit to a file at 785
+of 800 effective lines with nine waves behind it. The merge is J-GR-14's draft-lens
+extension and belongs to GR-3's slice of this same flag. Re-examine: whether "the
+instrument knows a war ended under it" is enough awareness, or whether the terms must
+actually meet.
+
+**J-GR-2-5 — ZERO NEWS KINDS, DELIBERATELY, WITH A TRIPWIRE.** §8 promises four Herald
+sentences; none is minted here. A "grain for ore" line is not interesting until GR-3 mints
+the families it announces, and L6's five-join law plus an own walker per kind is a
+verification burden equal to this wave's whole engine half. A pin asserts the stage's
+`newsEntries` are empty in every arm, so it reds the day a beat is added — the instruction
+to land the five joins in that commit. Re-examine FIRST: this is the largest scope call in
+the wave, and a chair may reasonably want the signing beat now.
+
+**J-GR-2-6 — `PROPOSE_PACT` IS DEFERRED TO A GR-2b SLICE OF THE SAME FLAG.** The charter
+asks for the verb with its full registration set (manifest row, dials, typed veto codes,
+authority row, decisionTier, handler, parity pin) across five surfaces. It is NOT here.
+What IS here is everything the verb would need: `openPactProposal` is the ONE creation
+path, its three refusals are already the typed veto codes (`invalid_term_sheet`,
+`no_cap_headroom`, `open_proposal_exists`), and the answer path is shared — so DM parity
+is structural rather than something the verb would have to promise. The flag stays dark
+either way, so nothing ships half-lit, and the CQ5 one-commit law binds only the
+manifest/cert/gate-read trio, which this commit satisfies. Re-examine: whether GR-2b is
+the right home or whether the verb should ride GR-3.
+
+**J-GR-2-7 — THE R6 UNBUILT-SIDE GUARD IN THE TRADE CONTRACT WALKER IS RETIRED BY ITS OWN
+INSTRUCTION.** Landing `pactFormationEnabled` made all three of TRADE's FP_PROGRAM
+preconditions built, so `expect(unbuilt).not.toEqual([])` became unsatisfiable. Its
+failure text named two cures — extend the table or retire the arm — and the first was
+MEASURED unavailable: the alias test pins the complete set as {SP-1, SP-2, SP-3} and
+DESIGN_FP_ARCH_TR.md's precondition column lists no fourth, so adding a row would have
+meant inventing a precondition TRADE does not have, in the table whose whole purpose is
+that every borrowed key is real. The arm is REPLACED with two live claims (`unbuilt` is
+empty; `built` is exactly the three), which red the day a fourth arrives unbuilt or a
+landed flag leaves the manifest. Re-examine: whether the discriminating guard should be
+restored differently rather than replaced.
+
+**J-GR-2-8 — THE CERT ROW LANDED IN `subsystemRowsVirtual.js`, NOT A GRAMMAR LANE FILE,
+AND THE BRIEF SAID OTHERWISE.** The dispatch brief directed the row to "GRAMMAR's OWN
+subsystemRows lane file per the cert-lane partition". No such file exists, and the live
+tree rules the other way in two places: `subsystemRowsVirtual.js`'s own "TO ADD A ROW
+HERE" law makes ENGINE_GATED_VIRTUAL_RULE_KEYS membership the criterion, and GR-0's and
+GR-1's rows are both already there (measured). LIVE CODE OUTRANKS THE TABLE, so the row
+followed precedent — REPORTED, not silently corrected. Re-examine: whether the cert-lane
+partition wants a GRAMMAR file minted, which would move three rows rather than one.
+
+**J-GR-2-9 — THE ROW DECLARES `soakEvidence: 'indirect'`, BREAKING THIS LANE'S PATTERN.**
+Every sibling in the virtual lane says `unobserved` because none has a readable channel.
+This lane owns `spatialLedgers.pactProposals` outright and the v5 census walks one level
+into `spatialLedgers`, so it HAS one — and declaring a channel while calling the soak
+blind to it is the escape hatch `subsystemCertificationCorpus` ceilings at five. Wave P4's
+demographics row records the identical move for the identical reason. Re-examine: whether
+a SILENT reading on a lit-but-quiet realm is the verdict a chair wants.
+
+**J-GR-2-10 — COURTS AT WAR NEITHER FORM NOR ANSWER, AND THIS WAS FOUND BY A PIN.** The
+"exactly once" arm of the war-overtaken closure failed because the stage kept answering
+and re-signing across a war, so the closure had fresh clauses to close every tick. A
+hostile pair is now skipped at both the open and the answer, and an outstanding proposal
+EXPIRES unanswered — the war is a louder answer than any refusal. The volume does not
+state this rule; it is inferred from the closure's existence. Re-examine: whether expiry
+or refusal is the right ending for a question a war overtook.
+
+**Verification (all executed at this build, quoted in the implementer transcript).**
+Attribution was measured BOTH WAYS against a `git archive` of HEAD `0aac6792` with
+node_modules symlinked, running the identical four suites: BASE 25 failed / 16,354 passed
+across 18 files; THIS TREE 25 failed / 16,464 passed across 17 files, and the failing SET
+is a strict subset of base's (base additionally fails `committedSecretsScan`, an artifact
+of an archive with no `.git`). GR-2 therefore introduces ZERO new reds and +110 passing.
+Five mutants executed with md5 before/after proving each actually changed its file, and
+cmp-proven restores. MUTANT 3 SURVIVED its first round and is the wave's sharpest finding:
+the cap pin read its bound from the module under test (the recorded self-referential-pin
+class), cured with an independent denominator and re-executed red.
+
+**What Fable should re-examine, in priority order.** J-GR-2-5 (zero news kinds) and
+J-GR-2-6 (the deferred verb) are the two scope calls with real product consequence and
+should be looked at first. J-GR-2-3 (the two undraftable triggers) and J-GR-2-4 (act, not
+merge) are staging calls that GR-3 will settle either way. J-GR-2-1, -2 and -10 are
+mechanism calls with genuine optionality. J-GR-2-7, -8 and -9 are forced by live
+machinery — each was measured before it was decided, and each names the measurement. Also
+worth a look: two defects in this wave were self-consistently GREEN until a real consumer
+was driven — the relationship key was hand-rolled `a|b` in BOTH source and fixture, and
+the term id omitted the beneficiary so a reciprocal sheet's two legs shared one name. Both
+are recorded in the mutation manifest's method note.
