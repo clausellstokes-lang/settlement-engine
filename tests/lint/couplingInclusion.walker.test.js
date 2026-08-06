@@ -109,6 +109,16 @@ const LAYER_PATTERNS = Object.freeze({
     // lives in its own folder; every future ES leaf is claimed the day it lands, which
     // is what stops the unclaimed census from trailing the estate again.
     /^src\/domain\/worldPulse\/espionage\//,
+    // IN-0d: the secrecy family. A HIDE posture is INFORMATION's own state — the layer
+    // mints it, advances it and owns its hysteresis — so a leaf that reads it takes INFO
+    // whatever noun it is named after, on exactly the reading that gave strategicPosture.js
+    // INTERIOR and beliefAxisSubjects INFO: the distinction is SUBJECT, not program. It is
+    // NOT an ARGUED_UNLAYERED case, and the contrast is sharp — the arguments below are for
+    // modules that own no subject and are spoken by every port (the band vocabulary, the
+    // law word, the errand mint). This one owns secrecy outright, and giving it a family is
+    // precisely what will force FP-TRADE's coming consumer of `secrecyTradeFactorOf` to
+    // register its coupling instead of reading across a port in silence.
+    /^src\/domain\/worldPulse\/secrecy[A-Z]/,
     /^src\/domain\/spatial\/(?:rumorNetwork|intelActs)\.js$/,
   ],
   GRAMMAR: [
