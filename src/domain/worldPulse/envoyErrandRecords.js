@@ -315,6 +315,19 @@ export function errandSpineBlock(row, purpose) {
   const split = PURPOSE_CLASS_SET.has(declared)
     && claimedTrue === resolved
     && declared !== resolved;
+  // ⚠⚠ ES-1 REPAIR R1 — THE FACELESS COVERT ROW IS LAWFUL HERE AND MUTE AT THE READER.
+  // A row can reach this block declaring `purposeClass` covert with its `declaredPurpose`/
+  // `truePurpose` pair broken or stripped — an import forgery, or either of the two SP-D-R4
+  // doors below dropping a malformed pair. Healing that by dropping the class was EXECUTED
+  // AND REJECTED at this repair: it reds the three SP-D-R4 door pins that deliberately
+  // require the class to outlive a broken pair, and it destroys campaign history for the
+  // same reason repair SP-D-R5 already refused to strip cargo on this seam — a persistence
+  // normalizer is the wrong place to decide a row should forget what it was. THE VEIL IS
+  // ENFORCED AT `declaredPurposeClassOf` INSTEAD, the estate's ONE public reader of an
+  // errand's face, which now fails closed by shape rather than by the caller's care. See
+  // its header in envoyErrandVocabulary.js; the leak this closes was executed and is
+  // pinned in tests/domain/espionageMission.test.js.
+  //
   // ES-1 — THE COVERT SUB-RECORD RIDES THE SAME ONE CONSTRUCTOR, and the class law lives
   // HERE rather than at each caller: a `covert` block on a row whose RESOLVED class is
   // anything else is not a mission, it is cargo somebody attached to the wrong journey,

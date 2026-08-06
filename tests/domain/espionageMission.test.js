@@ -36,6 +36,7 @@ import {
   ENVOY_PURPOSE_CLASSES,
   ERRAND_CONSUMERS,
   MAX_COVERT_ITINERARY_STOPS,
+  PURPOSE_CLASS_BY_PURPOSE,
   declaredPurposeClassOf,
   purposeClassOf,
 } from '../../src/domain/worldPulse/envoyErrandVocabulary.js';
@@ -598,6 +599,110 @@ describe('ES-1 lifecycle — create, read, persist, regenerate, undo, import, ve
     expect(healed.covert).toBeUndefined();
     expect(healed.id).toBe(minted.errand.id);
     expect(healed.purposeClass).toBe('covert');
+  });
+
+  test('REPAIR R1 — THE VEIL SURVIVES AN IMPORT THAT STRIPS THE FACE, on the PERSIST path', () => {
+    // ⚠⚠ THE PIN THE WAVE'S OWN VEIL TEST STRUCTURALLY COULD NOT SEE. That test drives
+    // MINT-produced rows, and the mint DERIVES a face for every covert row it writes, so
+    // no row it can construct is ever faceless. The leak lived on the other lifecycle
+    // path: a lawful covert row, serialized, re-imported with its cover story deleted.
+    // Executed at ES-1's commit dda24851 this returned `purposeClass: "covert"` to the
+    // PLAYER arm. The forgery is the one `normalizeCovertMission`'s header names.
+    const minted = mintRow(litWorld(), { covert: mission() });
+    // anchored: the seed really is a covert row wearing a face, so the deletion below
+    // removes something that was actually there rather than asserting over an empty row.
+    expect(minted.errand.purposeClass).toBe('covert');
+    expect(minted.errand.declaredPurpose).toBe('diplomatic');
+    expect(minted.errand.truePurpose).toBe('covert');
+    const forged = JSON.parse(JSON.stringify(minted.errand));
+    delete forged.declaredPurpose;
+    delete forged.truePurpose;
+    expect(forged.purposeClass).toBe('covert'); // the forgery keeps the CLASS and drops the FACE
+    const healed = normalizeErrand(forged);
+    // THE TRAVELLER SURVIVES, AND SO DOES ITS HISTORY. The persist seam does NOT strip the
+    // class — repair SP-D-R5 refused that, and the SP-D-R4 doors depend on it — so the row
+    // is still, in the ledger, exactly the covert mission it always was.
+    expect(healed).not.toBeNull();
+    expect(healed.id).toBe(minted.errand.id);
+    expect(healed.purposeClass).toBe('covert');
+    expect(healed.covert).toEqual(minted.errand.covert);
+    expect(purposeClassOf(healed)).toBe('covert');
+    // THE READER IS WHERE THE VEIL HOLDS — the assertion that reds without the repair.
+    expect(declaredPurposeClassOf(healed)).toBe('diplomatic');
+    expect(projectErrandPurpose(healed, {})).toEqual({
+      errandId: minted.errand.id, purposeClass: 'diplomatic',
+    });
+    // ...and the faceless row is INDISTINGUISHABLE from an honest embassy to a player,
+    // which is the property, not merely "some word other than covert".
+    const honest = mintRow(litWorld()).errand;
+    expect(projectErrandPurpose(healed, {}).purposeClass)
+      .toBe(projectErrandPurpose(honest, {}).purposeClass);
+    expect(Object.keys(projectErrandPurpose(healed, {})).sort())
+      .toEqual(Object.keys(projectErrandPurpose(honest, {})).sort());
+    // The DM arm still sees everything, so the veil above is a DECISION and not an
+    // emptied payload — the recorded empty-harness vacuity class, refused.
+    const dm = projectErrandPurpose(healed, { includeCovert: true });
+    expect(dm.purposeClass).toBe('covert');
+    expect(dm.covert.subjectId).toBe('irontown');
+  });
+
+  test('REPAIR R1 — the SAME leak reached from INSIDE, through an SP-D-R4 door', () => {
+    // The import forgery is not the only way to a faceless covert row. DOOR 1 drops a pair
+    // built on an out-of-vocabulary word, and what it leaves behind is the identical state.
+    // A repair pinned only against the forged row would miss this entrance entirely.
+    const minted = mintRow(litWorld(), { covert: mission() });
+    const healed = normalizeErrand({ ...minted.errand, declaredPurpose: 'piracy' });
+    expect(healed.purposeClass).toBe('covert'); // anchored: DOOR 1 kept the class, dropped the pair
+    expect(healed.declaredPurpose).toBeUndefined();
+    expect(projectErrandPurpose(healed, {}).purposeClass).toBe('diplomatic');
+    // And a row whose written FACE names the secret is not wearing a face at all.
+    const selfNaming = normalizeErrand({
+      ...minted.errand, declaredPurpose: 'covert', truePurpose: 'covert',
+    });
+    expect(selfNaming.purposeClass).toBe('covert'); // anchored: the row really resolves covert
+    expect(declaredPurposeClassOf(selfNaming)).toBe('diplomatic');
+    expect(projectErrandPurpose(selfNaming, {}).purposeClass).toBe('diplomatic');
+  });
+
+  test('REPAIR R1 — the SELF-NAMING FACE door, pinned on a RAW row because nothing else can reach it', () => {
+    // ⚠ THIS DOOR NEEDS ITS OWN ROW AND A ROW THE PERSIST SEAM NEVER PRODUCES. The guard
+    // `declared !== 'covert'` was planted-and-deleted at this repair (mutant M2) and the
+    // whole battery stayed GREEN at 31/31, because the assertion above routes through
+    // `normalizeErrand`, and `errandSpineBlock` DROPS a redundant pair — so the normalized
+    // row arrives at the reader with no `declaredPurpose` at all and exercises a different
+    // door. `declaredPurposeClassOf` is exported, typed `unknown`, and documented total, so
+    // the door is real defense against an un-normalized row; it is pinned here DIRECTLY, on
+    // raw input, per the estate's rule that two guards over one job cannot be pinned jointly.
+    const raw = { purpose: 'sue', purposeClass: 'covert', declaredPurpose: 'covert' };
+    // anchored: the raw row really does resolve to the secret class, so this measures the
+    // guard rather than an object the function was never going to say the word about.
+    expect(purposeClassOf(raw)).toBe('covert');
+    expect(declaredPurposeClassOf(raw)).toBe('diplomatic');
+    // A LAWFUL face on the same shape still wins — the door rejects one word, not the arm.
+    expect(declaredPurposeClassOf({ ...raw, declaredPurpose: 'commercial' })).toBe('commercial');
+  });
+
+  test('REPAIR R1 — the veil narrows NOTHING for the five honest classes', () => {
+    // The guard must not become a general downgrade: every non-secret class still reads
+    // back exactly as written, so the repair is a veil and not a lossy filter.
+    for (const purposeClass of ENVOY_PURPOSE_CLASSES.filter((c) => c !== 'covert')) {
+      expect(declaredPurposeClassOf({ purpose: 'sue', purposeClass })).toBe(purposeClass);
+      expect(declaredPurposeClassOf({ purpose: 'sue', declaredPurpose: purposeClass }))
+        .toBe(purposeClass);
+    }
+    // A plain war errand with no spine cargo at all is untouched by any of it.
+    expect(declaredPurposeClassOf({ purpose: 'sue' })).toBe('diplomatic');
+  });
+
+  test('REPAIR R1 TOTALITY — no PURPOSE derives the covert class, so a written class is the only door', () => {
+    // The chokepoint heal drops `purposeClass` to send a faceless row back to its DERIVED
+    // class. That is only a cure while no purpose DERIVES `covert`; a future purpose that
+    // did would resolve covert with nothing to drop, and would re-open the hole from the
+    // other side. This reds in that wave rather than in a player's inspector.
+    const derived = Object.values(PURPOSE_CLASS_BY_PURPOSE);
+    expect(derived.length).toBeGreaterThan(0); // anchored: the map is non-empty, so this is a measurement
+    expect(derived).not.toContain('covert');
+    expect(new Set(derived)).toEqual(new Set(['diplomatic']));
   });
 
   test('A COVERT BLOCK ON A NON-COVERT ROW IS DROPPED at the persist side', () => {

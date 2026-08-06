@@ -541,9 +541,44 @@ export function purposeClassOf(errand) {
  * reaches for the true class has to spell a different function to get it, and the
  * projection's audience split is the only place that spelling is lawful.
  *
+ * ⚠⚠ ES-1 REPAIR R1 — THAT CLAIM WAS TRUE OF A ROW WEARING A FACE AND FALSE OF ONE THAT
+ * IS NOT, AND THE GAP WAS A LIVE VEIL LEAK. The old body fell back to `purposeClassOf`
+ * whenever no lawful `declaredPurpose` was written — and `purposeClassOf` happily returns
+ * the covert class. The MINT refuses to write a faceless covert row, so no row this
+ * estate CREATES could reach the gap; but a row that is minted lawfully, serialized, and
+ * re-imported with its `declaredPurpose`/`truePurpose` pair DELETED heals back into the
+ * ledger keeping `purposeClass` and losing its cover story, and the two SP-D-R4 doors that
+ * drop a malformed pair reach the same state from inside. Executed at ES-1's commit
+ * dda24851, `projectErrandPurpose(healed, {})` — the PLAYER arm — answered
+ * `purposeClass: "covert"`. The absence of a face is not a missing cover story; on a
+ * covert row it IS the secret, printed for whoever asked.
+ *
+ * THE FIX IS HERE RATHER THAN AT THE PERSIST SEAM, and that is a chokepoint choice with a
+ * measured alternative behind it. Enforcing the law in `errandSpineBlock` by dropping the
+ * class was executed: it closes the leak, and it reds the three SP-D-R4 door pins that
+ * deliberately require a class to outlive a broken pair, and it destroys campaign history
+ * exactly as repair SP-D-R5 already refused to. This function is the ONE public reader of
+ * an errand's face — `envoyErrandProjection.js`'s player arm is its ONLY caller in src/,
+ * and the consumer-registry walker is what keeps that true — so closing it here closes it
+ * for every audience path at once, changes not one persisted byte, and leaves the row's
+ * own history intact for the DM arm that is allowed to see it.
+ *
+ * SO THE VEILED CLASS IS NEVER THIS FUNCTION'S ANSWER, by any route: not as a written
+ * face (a cover story that names the secret is not a cover story), not as a resolved
+ * class, and not as a derivation. A later wave that mints a SECOND secret class joins it
+ * to the guard below; a purpose that DERIVES a secret class yields '' rather than the word,
+ * and tests/domain/espionageMission.test.js reds if the mapping row ever grows one.
+ *
  * @param {unknown} errand @returns {string} a member of ENVOY_PURPOSE_CLASSES, or ''
  */
 export function declaredPurposeClassOf(errand) {
-  const declared = text(asObject(errand).declaredPurpose);
-  return PURPOSE_CLASS_SET.has(declared) ? declared : purposeClassOf(errand);
+  const row = asObject(errand);
+  const declared = text(row.declaredPurpose);
+  if (PURPOSE_CLASS_SET.has(declared) && declared !== 'covert') return declared;
+  const resolved = purposeClassOf(row);
+  if (resolved !== 'covert') return resolved;
+  // The face a faceless covert row wears in public: the class its OWN PURPOSE derives,
+  // which is the same word the mint would have derived for it at `covertFaceFor`.
+  const derived = purposeClassOf({ purpose: row.purpose });
+  return derived === 'covert' ? '' : derived;
 }
