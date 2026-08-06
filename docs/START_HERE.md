@@ -23,6 +23,54 @@ classes are owner-only (push→already authorized as backup; PR-merge, deploys,
    + THE_BASE_RESTORATION_LEDGER.md (Phase-D gate: zero PENDING rows),
    DESIGN_DEEP_CRAFT_PAGES.md, C1FIN_CONTROL_CENSUS.md (briefs/).
 
+## 3j. ⭐⭐ THE BUILD IS RESUMED, AND THIS IS THE OPUS ERA (2026-08-06, owner
+order; supersedes §3i's pause paragraph and everything below; git wins)
+
+**THE PAUSE IS LIFTED.** The owner's order, verbatim intent: continue the work
+in the codebase, all decisions delegated, and — where a choice exists between
+what is maximally safe for the code as it stands and what is objectively
+better but carries risk — **take the better option every single time.** Work
+continues until weekly usage is exhausted. A 30-minute lane-keeper tick runs
+for the life of the session to ensure everything parallelizable is running and
+nothing is stalled. Owner-gated classes are UNCHANGED by this: pushes, deploys,
+migrations, schema/persistence shape, data deletion, security posture, paid
+surfaces, legal, and the constitutional tuning signature are still never
+self-ruled. The risk appetite governs ENGINEERING choices inside scope, not the
+gates.
+
+**⏳ THE OPUS-ERA MARKING DIRECTIVE (owner, 2026-08-06, verbatim intent):**
+"use opus 5 for everything. anything that is not validated, managed, and
+architected by fable five must be labeled as such and marked for validation
+from fable at the next time that we have fable 5 weekly usage credit free."
+This RATIFIES and TIGHTENS §6b-3. The operative rules: (1) every operation —
+chair, implementer, verifier, recon — runs on Opus 5; (2) every ledger row this
+era appends to `docs/FABLE_VALIDATION_QUEUE.md` carries **⏳ OPUS-ERA — FABLE
+SURVEY OWED** in its heading; (3) every chair-grade judgment is itemized as a
+`J-*` entry inside its row so a later Fable session can re-rule it cheaply;
+(4) the marking covers all three verbs — architected, managed, AND validated —
+so an Opus-architected volume is owed a Fable survey even if an Opus verifier
+already passed it; (5) the debt is RETROACTIVE, never gating: nothing waits for
+Fable, and the next Fable-available session clears the survey debt FIRST.
+
+**STATE AT WRITE TIME (verify with git — never trust this over git):** build
+branch `claude/composite-r4` in `.claude/worktrees/minifold`, resumed from
+`cbd348a5` (SP-C, chair-verified at the pause — that verification stands and is
+recorded in §3i). Cycle 4 re-dispatched from SP-D, PIPELINED rather than
+serial: each wave builds while its predecessor's adversarial verifier runs in
+disposable `git archive` trees, so verifiers never assert tree-cleanliness and
+a concurrent lane's dirty files cannot pollute wave-end attribution. That
+pipelining is a **JUDGMENT (vetoable)** — it takes the riskier ordering for
+roughly half the cycle wall-clock, per the owner's risk directive above.
+Read-only recon lanes run beside it and are forbidden from invoking vitest: the
+gate is a MACHINE mutex, and a parallel run yields fake reds that a lane then
+"repairs".
+
+**THE CONCURRENCY LAW IS UNCHANGED** — two build lanes, one landing slot, one
+gate slot, one worktree; a third lane only if it is read-only and commits
+nothing. See §3i and `memory/concurrency-law-ruled.md`. The risk directive does
+NOT license a second engine worktree: that refusal was a MEASURED verdict about
+exact-census files merging green-but-wrong, not a caution.
+
 ## 3i. ⭐⭐ ACCOUNT-TRANSITION HANDOFF (2026-08-06, ~04:40 EDT — written FOR a
 successor on a DIFFERENT CLAUDE ACCOUNT; supersedes everything below; git wins)
 
@@ -83,7 +131,11 @@ intent survives even without the memory estate.
   parallelization map, the diagnostic-soak harness, the V5 cull counsel).
   **None of them had pushed anything.** Re-dispatch any that did not land.
 
-**⛔ THE BUILD STREAM IS PAUSED — DELIBERATELY, BY THE OWNER (2026-08-06).**
+**⛔ THE BUILD STREAM WAS PAUSED HERE — AND HAS SINCE BEEN RESUMED. THIS
+PARAGRAPH IS HISTORY; §3j IS THE CURRENT STATE.** (Kept because it records what
+the pause cost and what was verified at it, both of which still bind. Do not
+read it as a live instruction — the derive-don't-restate law: one spelling of a
+fact, pointers everywhere else.)
 Paused at build HEAD `cbd348a5` (SP-C, the posture read) with a CLEAN TREE.
 Cycle 4's remaining waves — **SP-D (the errand spine), GR-2 (pact formation),
 IN-0a (the plant handoff)** — are UNSTARTED, not half-done: SP-D was still
