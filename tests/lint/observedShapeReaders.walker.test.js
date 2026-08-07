@@ -62,6 +62,19 @@
  *      silent. A walker that stays green under its own mutant is not a walker.
  *   4. EXECUTED RATCHET FAILURES — every failure path of the comparison (growth,
  *      a vanished row, a collapsed corpus) is driven and asserted non-empty.
+ *   5. EXECUTED SWAP MUTANT — the one that beat the ratchet's FIRST form. See
+ *      below.
+ *
+ * ── ⚠⚠ WHY THE INVENTORY IS CONTENT-ADDRESSED (the swap that beat form one) ──
+ * The first spelling froze ONE NUMBER per file. A number cannot tell a defect
+ * from its neighbour: a verifier drove it live on `src/domain/rulingPower.js`
+ * (ceiling 10) and showed that REMOVING one real finding and ADDING a different
+ * one leaves the count unchanged — so a fresh reader-without-a-writer lands and
+ * the ratchet reports nothing. The inventory now freezes the finding IDENTITY
+ * (`<key> on <shape|shape>`) with its multiplicity, and a NEW identity in an
+ * already-listed file has ceiling 0 exactly as a new file does. That exact
+ * mutant is driven twice below — synthetically, and against the LIVE
+ * rulingPower.js findings at constant count.
  */
 import { readFileSync, existsSync, writeFileSync, mkdtempSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -73,7 +86,8 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { buildObservedCorpus } from '../../scripts/lib/observed-shape-corpus.mjs';
 import { scanReaders } from '../../scripts/lib/reader-shape-scan.mjs';
 import {
-  MIN_ROWS, sourceFiles, inventoryOf, compare, sentinelOf, sentinelFailures, ratchetMessage,
+  MIN_ROWS, BASELINE_SCHEMA, sourceFiles, inventoryOf, identityOf, rowOf,
+  compare, sentinelOf, sentinelFailures, ratchetMessage,
 } from '../../scripts/check-observed-shape-readers.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -98,16 +112,31 @@ beforeAll(async () => {
 }, 300_000);
 
 describe('reader-with-no-writer ratchet: the frozen inventory', () => {
-  test('the baseline is internally consistent and every row is a real file', () => {
+  test('the baseline is CONTENT-ADDRESSED, internally consistent, and every row is a real file', () => {
+    expect(baseline.schema, 'schema 1 was the count-only form — blind to an identity swap').toBe(BASELINE_SCHEMA);
     const rows = Object.entries(baseline.inventory);
     expect(rows.length).toBeGreaterThan(0);
-    expect(rows.reduce((n, [, c]) => n + c, 0)).toBe(baseline.total);
-    expect(rows.every(([, c]) => Number.isInteger(c) && c > 0)).toBe(true);
+    // Every row is an identity map, never a bare count. This is the pin that
+    // refuses a hand-edit back to the form the swap mutant beat.
+    expect(rows.filter(([, r]) => typeof r !== 'object' || r === null || Array.isArray(r))).toEqual([]);
+    const ids = rows.flatMap(([, r]) => Object.entries(r));
+    expect(ids.reduce((n, [, c]) => n + c, 0)).toBe(baseline.total);
+    expect(ids.length).toBe(baseline.identities);
+    expect(ids.every(([, c]) => Number.isInteger(c) && c > 0)).toBe(true);
+    // An identity is `<key> on <shape|shape>` — the spelling the script mints.
+    expect(ids.filter(([id]) => !/^[^\s]+ on \S/.test(id))).toEqual([]);
     const missing = rows.map(([f]) => f).filter((f) => !existsSync(join(ROOT, f)));
     expect(missing).toEqual([]);
     // Forward slashes only: a backslashed key reads differently on POSIX and
     // Windows CI — spurious reds on one, unlimited headroom on the other.
     expect(rows.filter(([f]) => f.includes('\\'))).toEqual([]);
+  });
+
+  test('the retired count-only row form is REFUSED, not silently accepted', () => {
+    // Accepting `10` as a row would restore "any ten findings you like" — the
+    // exact headroom the swap mutant exploited.
+    expect(() => rowOf(10, 'src/x.js')).toThrow(/RETIRED count-only form/);
+    expect(rowOf({ 'id on factions': 2 }, 'src/x.js')).toEqual({ 'id on factions': 2 });
   });
 
   test('the frozen threshold and sha are recorded, and match the script', () => {
@@ -120,12 +149,23 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
   });
 
   test('the failure message names the rule, the fix, and the only legal shrink', () => {
-    const msg = ratchetMessage('src/x.js', 3, 1, ['id on factions']);
+    const msg = ratchetMessage('src/x.js', [
+      { identity: 'id on factions', count: 3, ceiling: 1 },
+      { identity: 'foundingTier on steadings', count: 1, ceiling: 0 },
+    ]);
     expect(msg).toContain('frozen ceiling is 1');
     expect(msg).toContain('id on factions');
+    // A NEW identity must be named as new, not as growth — the swap's tell.
+    expect(msg).toContain('NEW      foundingTier on steadings');
     expect(msg).toContain('TO COMPLY');
     expect(msg).toContain('LOWER this file');
     expect(msg).toContain('Never raise a number');
+  });
+
+  test('identityOf is the key and the shape, and NEVER the line number', () => {
+    expect(identityOf({ file: 'a.js', line: 7, key: 'id', shapes: ['factions'] })).toBe('id on factions');
+    expect(identityOf({ file: 'a.js', line: 9, key: 'id', shapes: ['factions'] })).toBe('id on factions');
+    expect(identityOf({ file: 'a.js', line: 1, key: 'x', shapes: ['b', 'a'] })).toBe('x on b|a');
   });
 
   test('the report/refreeze entry point is reachable as a named script', () => {
@@ -266,22 +306,23 @@ describe('reader-with-no-writer ratchet: the MUTANTS', () => {
   });
 
   test('RATCHET FAILURE PATHS: growth, a vanished row, and a collapsed corpus each red', () => {
+    const RP = 'src/domain/rulingPower.js';
     const findings = [
-      { file: 'src/domain/rulingPower.js', line: 1, key: 'id', shapes: ['factions'] },
-      { file: 'src/domain/rulingPower.js', line: 2, key: 'id', shapes: ['factions'] },
+      { file: RP, line: 1, key: 'id', shapes: ['factions'] },
+      { file: RP, line: 2, key: 'id', shapes: ['factions'] },
     ];
     // (a) over the ceiling
-    expect(compare(findings, { inventory: { 'src/domain/rulingPower.js': 1 } }).violations).toHaveLength(1);
+    expect(compare(findings, { inventory: { [RP]: { 'id on factions': 1 } } }).violations).toHaveLength(1);
     // (b) exactly at the ceiling — the control that keeps (a) honest
-    expect(compare(findings, { inventory: { 'src/domain/rulingPower.js': 2 } }).violations).toEqual([]);
+    expect(compare(findings, { inventory: { [RP]: { 'id on factions': 2 } } }).violations).toEqual([]);
     // (c) an UNBASELINED file has ceiling ZERO — the law for all new work
     expect(compare([{ file: 'src/brand/new.js', line: 1, key: 'k', shapes: ['settlement'] }], { inventory: {} }).violations)
       .toHaveLength(1);
     // (d) a row whose file is gone is fatal, not merely bankable
-    expect(compare([], { inventory: { 'src/does/not/exist.js': 3 } }).stale).toHaveLength(1);
+    expect(compare([], { inventory: { 'src/does/not/exist.js': { 'k on s': 3 } } }).stale).toHaveLength(1);
     // (e) a shrink is BANKABLE, never a failure — a sibling lane's landed fix
     //     must not red this gate.
-    const shrunk = compare([], { inventory: { 'src/domain/rulingPower.js': 5 } });
+    const shrunk = compare([], { inventory: { [RP]: { 'id on factions': 5 } } });
     expect(shrunk.violations).toEqual([]);
     expect(shrunk.bankable).toHaveLength(1);
     // (f) a collapsed corpus is refused
@@ -290,11 +331,50 @@ describe('reader-with-no-writer ratchet: the MUTANTS', () => {
     expect(sentinelFailures(baseline.sentinel, baseline.sentinel)).toEqual([]);
   });
 
-  test('inventoryOf counts per file and nothing else', () => {
+  test('⚠⚠ THE SWAP MUTANT: a NEW identity at CONSTANT COUNT reds (the defect form one let land)', () => {
+    const RP = 'src/domain/rulingPower.js';
+    const frozen = { inventory: { [RP]: { 'id on factions': 2 } } };
+    const held = [
+      { file: RP, line: 1, key: 'id', shapes: ['factions'] },
+      { file: RP, line: 2, key: 'id', shapes: ['factions'] },
+    ];
+    // CONTROL — same identities, same count: green.
+    expect(compare(held, frozen).violations).toEqual([]);
+    // MUTANT — one finding REMOVED, a different one ADDED. The file's total is
+    // identical, so the retired count-only ratchet was green here.
+    const swapped = [held[0], { file: RP, line: 2, key: 'foundingTier', shapes: ['steadings'] }];
+    expect(swapped.length, 'the mutant must hold the count constant or it proves nothing').toBe(held.length);
+    const out = compare(swapped, frozen);
+    expect(out.violations).toHaveLength(1);
+    expect(out.violations[0]).toContain('foundingTier on steadings');
+    expect(out.violations[0]).toContain('ceiling 0');
+    // and the departed one is offered as a shrink, not swallowed silently
+    expect(out.bankable.join('\n')).toContain('id on factions');
+  });
+
+  test('⚠⚠ THE SWAP MUTANT, LIVE: rulingPower.js swapped at constant count against the REAL baseline', () => {
+    // The verifier drove exactly this against the real frozen inventory. It is
+    // repeated here on live findings so the proof re-executes on every gate.
+    const RP = 'src/domain/rulingPower.js';
+    const rows = live.findings.filter((f) => f.file === RP);
+    expect(rows.length, `${RP} carries no findings — pick another live subject`).toBeGreaterThan(0);
+    const others = live.findings.filter((f) => f.file !== RP);
+    // the tree as it stands is green
+    expect(compare(live.findings, baseline).violations).toEqual([]);
+    // drop one real finding, add one that no writer produces: SAME COUNT
+    const swapped = [...rows.slice(1), { file: RP, line: 1, key: '__swappedInNoWriterKey', shapes: ['settlement'] }];
+    expect(swapped.length).toBe(rows.length);
+    const out = compare([...others, ...swapped], baseline);
+    expect(out.violations, 'a constant-count identity swap MUST red — this is the whole cure').toHaveLength(1);
+    expect(out.violations[0]).toContain('__swappedInNoWriterKey on settlement');
+  });
+
+  test('inventoryOf counts per file AND per identity', () => {
     expect(inventoryOf([
       { file: 'b.js', line: 1, key: 'x', shapes: ['s'] },
       { file: 'a.js', line: 1, key: 'x', shapes: ['s'] },
       { file: 'b.js', line: 2, key: 'y', shapes: ['s'] },
-    ])).toEqual({ 'a.js': 1, 'b.js': 2 });
+      { file: 'b.js', line: 3, key: 'x', shapes: ['s'] },
+    ])).toEqual({ 'a.js': { 'x on s': 1 }, 'b.js': { 'x on s': 2, 'y on s': 1 } });
   });
 });

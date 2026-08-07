@@ -1,12 +1,19 @@
 {
  "_doc": [
-  "READER-WITH-NO-WRITER INVENTORY — per-file ceilings, SHRINK-ONLY.",
-  "Frozen from an EXECUTED multi-seed run of the real producers; see",
-  "scripts/check-observed-shape-readers.mjs and tests/lint/observedShapeReaders.walker.test.js.",
-  "Lower a number when a site is fixed. NEVER raise one; never add a file."
+  "READER-WITH-NO-WRITER INVENTORY — per-file, PER-IDENTITY ceilings, SHRINK-ONLY.",
+  "A row is \"<key> on <shape|shape>\": <count>. The identity is content-addressed on",
+  "purpose: a per-file COUNT cannot tell a defect from its neighbour, so swapping one",
+  "finding for another at constant count landed a fresh defect GREEN. It no longer can.",
+  "The line number is deliberately NOT part of the identity — it churns on every",
+  "unrelated edit above it. Frozen from an EXECUTED multi-seed run of the real",
+  "producers; see scripts/check-observed-shape-readers.mjs and",
+  "tests/lint/observedShapeReaders.walker.test.js.",
+  "Lower a number when a site is fixed (delete the row at 0). NEVER raise one, never",
+  "add a file, never add an identity."
  ],
+ "schema": 2,
  "frozen": "2026-08-07",
- "frozenAtSha": "3800bcb6",
+ "frozenAtSha": "90deb182",
  "minRows": 40,
  "corpusMeta": {
   "seeds": 4,
@@ -29,553 +36,3250 @@
   "resolvedReads": 12411
  },
  "total": 3236,
+ "identities": 2149,
  "inventory": {
-  "src/application/commands/adapters/customContentApply.js": 7,
-  "src/components/admin/AdminSimTuningPanel.jsx": 6,
-  "src/components/admin/AiPricingResyncPanel.jsx": 3,
-  "src/components/BuyThisDossier.jsx": 1,
-  "src/components/compendium/CatalogHubs.jsx": 2,
-  "src/components/compendium/CatalogTabs.jsx": 12,
-  "src/components/compendium/CompendiumDashboard.jsx": 4,
-  "src/components/compendium/ContentPackBar.jsx": 5,
-  "src/components/compendium/customCategories.js": 6,
-  "src/components/compendium/Dependencies.jsx": 4,
-  "src/components/compendium/PantheonActivationStrip.jsx": 1,
-  "src/components/compendium/RegistryHubs.jsx": 5,
-  "src/components/compendium/SupplyChainsManager.jsx": 1,
-  "src/components/CompendiumPanel.jsx": 2,
-  "src/components/contentStudio/CampaignContentBindingLifecycle.jsx": 2,
-  "src/components/contentStudio/ContentEnvironmentLifecycle.jsx": 2,
-  "src/components/contentStudio/ContentInterpretation.jsx": 7,
-  "src/components/dossier/EngineSections.jsx": 8,
-  "src/components/dossier/SettlementWorkbench.jsx": 24,
-  "src/components/gallery/GalleryCampaigns.jsx": 8,
-  "src/components/gallery/GalleryMaps.jsx": 3,
-  "src/components/generate/SaveToLibraryButton.jsx": 2,
-  "src/components/generate/useRealmMagicDefault.js": 1,
-  "src/components/guidance/SurveyorGlossary.jsx": 2,
-  "src/components/InterviewPanel.jsx": 1,
-  "src/components/library/LibraryToolbar.jsx": 8,
-  "src/components/map/AutoplacementConsent.jsx": 1,
-  "src/components/map/CauseWalkPanel.jsx": 1,
-  "src/components/map/HeraldAdjudication.jsx": 3,
-  "src/components/map/heraldFeed.js": 13,
-  "src/components/map/heraldRegister.js": 8,
-  "src/components/map/KeyboardPlacementControl.jsx": 1,
-  "src/components/map/PantheonPanel.jsx": 14,
-  "src/components/map/PlacementDetailCard.jsx": 4,
-  "src/components/map/PlacementsLayer.jsx": 16,
-  "src/components/map/QuickInspector.jsx": 1,
-  "src/components/map/RealmForecast.jsx": 8,
-  "src/components/map/RegionalCausalityLayer.jsx": 12,
-  "src/components/map/RelationshipEdges.jsx": 4,
-  "src/components/map/SettlementPalette.jsx": 1,
-  "src/components/map/TierIcon.jsx": 1,
-  "src/components/map/WorldPulseData.js": 8,
-  "src/components/map/WorldPulsePanel.jsx": 1,
-  "src/components/new/dailyLifeLogic.js": 4,
-  "src/components/new/neighbourComponents.jsx": 1,
-  "src/components/new/SupplyChainsPanel.jsx": 5,
-  "src/components/new/tabs/EconomicsTab.jsx": 5,
-  "src/components/new/tabs/MagicTab.jsx": 1,
-  "src/components/new/tabs/power/PowerStrata.jsx": 8,
-  "src/components/new/tabs/SteadingsSection.jsx": 3,
-  "src/components/new/tabs/TraditionsTab.jsx": 1,
-  "src/components/new/tabs/ViabilityTab.jsx": 6,
-  "src/components/new/tabs/WarFaithTab.jsx": 2,
-  "src/components/organic/samples/CompendiumSample.jsx": 8,
-  "src/components/organic/samples/DossierSample.jsx": 1,
-  "src/components/OutputContainer.jsx": 8,
-  "src/components/session/SessionMode.jsx": 2,
-  "src/components/settlement/DeityAssignmentPanel.jsx": 4,
-  "src/components/settlement/EventComposer.jsx": 5,
-  "src/components/settlement/eventComposer/applyOutcome.js": 1,
-  "src/components/settlement/eventComposer/BatchCart.jsx": 1,
-  "src/components/settlement/eventComposer/buildEvent.js": 1,
-  "src/components/settlement/eventComposer/EventComposerDeityField.jsx": 4,
-  "src/components/settlement/eventComposer/EventComposerLinkNeighbourField.jsx": 1,
-  "src/components/settlement/faithPanelModel.js": 6,
-  "src/components/settlement/NarrativeArchivePanel.jsx": 6,
-  "src/components/settlement/NextActionRail.jsx": 2,
-  "src/components/settlement/PendingIntentions.jsx": 1,
-  "src/components/settlement/ProvenanceBlock.jsx": 3,
-  "src/components/settlement/SuccessorPrompt.jsx": 1,
-  "src/components/settlement/VersionsTab.jsx": 12,
-  "src/components/settlement/WhatChangedPanel.jsx": 2,
-  "src/components/settlements/helpers.js": 6,
-  "src/components/settlements/libraryDeleteHandlers.js": 2,
-  "src/components/settlements/livingWorldSignals.js": 1,
-  "src/components/settlements/RealmStrip.jsx": 1,
-  "src/components/settlements/StructuredCampaignReconciliation.jsx": 2,
-  "src/components/settlements/StructuredCampaignReconciliationParts.jsx": 6,
-  "src/components/SettlementsPanel.jsx": 4,
-  "src/components/ShareToGallery.jsx": 1,
-  "src/components/SingleDossierSuccessPage.jsx": 1,
-  "src/components/surveyor/CorpusFactoryPanel.jsx": 11,
-  "src/components/surveyor/CustomContentPanel.jsx": 1,
-  "src/components/surveyor/InterpretApplyPanel.jsx": 2,
-  "src/components/townMap/edgeAnnotations.js": 2,
-  "src/components/townMap/scene3d/TownSceneLivingSummary.jsx": 5,
-  "src/components/townMap/SettlementMapNotes.jsx": 5,
-  "src/components/townMap/SettlementMapPane.jsx": 2,
-  "src/components/WorldPage.jsx": 4,
-  "src/data/npcTraitWeights.js": 1,
-  "src/data/roadsProse.js": 8,
-  "src/data/sampleSettlements.js": 1,
-  "src/domain/activeConditions.js": 2,
-  "src/domain/ai/personaSlicer.js": 11,
-  "src/domain/aiGrounding.js": 1,
-  "src/domain/autonomy/signalRegistry.js": 2,
-  "src/domain/autonomy/stopConditions.js": 19,
-  "src/domain/campaign/canon.js": 6,
-  "src/domain/canonicalAccessors.js": 6,
-  "src/domain/canonStatus.js": 1,
-  "src/domain/capacityModel.js": 19,
-  "src/domain/causalState.js": 7,
-  "src/domain/causalViews.js": 2,
-  "src/domain/coherence/checkDraftEdit.js": 2,
-  "src/domain/compendium/searchIndex.js": 14,
-  "src/domain/conditionPromotion.js": 3,
-  "src/domain/content/campaignContentBinding.js": 10,
-  "src/domain/content/campaignContentLifecycle.js": 11,
-  "src/domain/content/contentEffectProjection.js": 3,
-  "src/domain/content/contentReview.js": 4,
-  "src/domain/content/contentSampleCategoryFixtures.js": 3,
-  "src/domain/content/contentSamplePreview.js": 2,
-  "src/domain/content/customContentCommands.js": 9,
-  "src/domain/content/customContentUsage.js": 12,
-  "src/domain/content/customDefinitionIdentityProjection.js": 13,
-  "src/domain/content/customSupplyChainActivation.js": 4,
-  "src/domain/content/customSupplyChainReview.js": 6,
-  "src/domain/content/customTradeEndpointProjection.js": 1,
-  "src/domain/content/customTradeLabelOwnership.js": 7,
-  "src/domain/content/reviewedSupplyChainPersistence.js": 9,
-  "src/domain/content/settlementContentProvenance.js": 9,
-  "src/domain/contradictions.js": 2,
-  "src/domain/corruption.js": 7,
-  "src/domain/corruptionLeash.js": 9,
-  "src/domain/counterfactual.js": 3,
-  "src/domain/crisisLifecycle.js": 4,
-  "src/domain/customContent.js": 1,
-  "src/domain/customContentSchema.js": 4,
-  "src/domain/dailyLife.js": 13,
-  "src/domain/deterministicSort.js": 3,
-  "src/domain/display/calamityLedger.js": 2,
-  "src/domain/display/causeLifecycleVocabulary.js": 4,
-  "src/domain/display/causeWalk.js": 10,
-  "src/domain/display/chronicleGraph.js": 9,
-  "src/domain/display/chronicleReadModel.js": 20,
-  "src/domain/display/decreeTracker.js": 17,
-  "src/domain/display/discourseKernel.js": 4,
-  "src/domain/display/economyFreshness.js": 1,
-  "src/domain/display/exportPosture.js": 1,
-  "src/domain/display/faithEventFilter.js": 1,
-  "src/domain/display/glossary.js": 1,
-  "src/domain/display/heraldCausalVoice.js": 1,
-  "src/domain/display/heraldIndex.js": 2,
-  "src/domain/display/newsBody.js": 2,
-  "src/domain/display/npcInteriorityRead.js": 5,
-  "src/domain/display/pantheonDepth.js": 2,
-  "src/domain/display/publicSafe.js": 1,
-  "src/domain/display/rumorHeraldLink.js": 1,
-  "src/domain/display/settlementRumors.js": 3,
-  "src/domain/display/stateProse/economyStateProse.js": 2,
-  "src/domain/display/tradeFlowEconomics.js": 1,
-  "src/domain/display/warResolve.js": 5,
-  "src/domain/display/warStatus.js": 1,
-  "src/domain/districtProfile.js": 2,
-  "src/domain/dossier/chronicleFeed.js": 31,
-  "src/domain/dossier/entityLinks.js": 38,
-  "src/domain/dossier/realmEntityWeb.js": 6,
-  "src/domain/entities/npcs.js": 5,
-  "src/domain/events/affordanceManifest.js": 9,
-  "src/domain/events/batch.js": 11,
-  "src/domain/events/drainQueuedEvents.js": 2,
-  "src/domain/events/eventPipeline.js": 1,
-  "src/domain/events/mutate.js": 11,
-  "src/domain/events/mutateEntities.js": 4,
-  "src/domain/events/mutateHelpers.js": 1,
-  "src/domain/events/mutateUserRoute.js": 2,
-  "src/domain/events/mutateWorld.js": 10,
-  "src/domain/events/realmManifest.js": 1,
-  "src/domain/events/registry.js": 5,
-  "src/domain/events/targetRosters.js": 3,
-  "src/domain/events/undoEvent.js": 12,
-  "src/domain/explanation.js": 11,
-  "src/domain/factionProfile.js": 5,
-  "src/domain/factionRename.js": 4,
-  "src/domain/foodLedger.js": 1,
-  "src/domain/generationOwnership.js": 4,
-  "src/domain/healingLedger.js": 1,
-  "src/domain/historyBeats.js": 6,
-  "src/domain/historyPreservation.js": 4,
-  "src/domain/hookEscalation.js": 10,
-  "src/domain/inferSupplyChains.js": 2,
-  "src/domain/institutions/institutionRoster.js": 1,
-  "src/domain/interior/interiorDraw.js": 10,
-  "src/domain/interior/interiorEdits.js": 3,
-  "src/domain/interior/interiorModel.js": 1,
-  "src/domain/locksPreservation.js": 1,
-  "src/domain/magicFilter.js": 1,
-  "src/domain/magicLedger.js": 2,
-  "src/domain/magicProfile.js": 2,
-  "src/domain/mapProfile.js": 11,
-  "src/domain/normalizeSettlement.js": 1,
-  "src/domain/npc/npcOps.js": 1,
-  "src/domain/npcProfile.js": 3,
-  "src/domain/pendingEditsPreview.js": 7,
-  "src/domain/provenance/rosterProvenance.js": 1,
-  "src/domain/realm/heraldRouting.js": 5,
-  "src/domain/realm/realmItemReadModel.js": 5,
-  "src/domain/regenerationMode.js": 3,
-  "src/domain/region/deriveRegionalState.js": 12,
-  "src/domain/region/graph.js": 4,
-  "src/domain/region/wizardNews.js": 16,
-  "src/domain/regionalGraph.js": 6,
-  "src/domain/relationships/canonicalRelationship.js": 1,
-  "src/domain/relationships/effectiveNeighbours.js": 1,
-  "src/domain/relationships/neighbourBackLink.js": 2,
-  "src/domain/resolveTerrain.js": 4,
-  "src/domain/roads/state.js": 1,
-  "src/domain/roads/thirdPartyRansom.js": 1,
-  "src/domain/roads/userRoutes.js": 7,
-  "src/domain/rulingPower.js": 10,
-  "src/domain/settlementParentRef.js": 1,
-  "src/domain/settlementReconciliation.js": 2,
-  "src/domain/simulationSpine.js": 11,
-  "src/domain/spatial/distanceRead.js": 21,
-  "src/domain/spatial/generosityEV.js": 3,
-  "src/domain/spatial/migration.js": 1,
-  "src/domain/spatial/navalLayer.js": 1,
-  "src/domain/spatial/pestilence.js": 4,
-  "src/domain/spatial/rumorNetwork.js": 8,
-  "src/domain/spatial/spatialSubstrate.js": 2,
-  "src/domain/spatial/teleportEdges.js": 2,
-  "src/domain/state/deriveSystemState.js": 3,
-  "src/domain/stressorPicker.js": 6,
-  "src/domain/summary/settlementQuickGuide.js": 3,
-  "src/domain/supplyChainState.js": 6,
-  "src/domain/tableLedger.js": 4,
-  "src/domain/threatProfile.js": 33,
-  "src/domain/townCartography/cartographyMorphology.js": 4,
-  "src/domain/townCartography/cartographySynthesis.js": 5,
-  "src/domain/townMap/arch/conditionGrammar.js": 1,
-  "src/domain/townMap/arch/conditionParams.js": 1,
-  "src/domain/townMap/arch/emitter.js": 3,
-  "src/domain/townMap/arch/settlementDress.js": 4,
-  "src/domain/townMap/audienceProjection.js": 1,
-  "src/domain/townMap/changeView.js": 8,
-  "src/domain/townMap/fabricRead.js": 6,
-  "src/domain/townMap/fogSessions.js": 2,
-  "src/domain/townMap/ladderRead.js": 6,
-  "src/domain/townMap/mapEdits.js": 1,
-  "src/domain/townMap/townLayoutV2.js": 6,
-  "src/domain/townMap/townMapDraw.js": 4,
-  "src/domain/townMap/townPanorama.js": 2,
-  "src/domain/townScene/buildingProfiles.js": 7,
-  "src/domain/townScene/customBuildingPresentation.js": 5,
-  "src/domain/townScene/manifestContract.js": 1,
-  "src/domain/townScene/sceneBuildingFabric.js": 8,
-  "src/domain/townScene/sceneLiving.js": 14,
-  "src/domain/townScene/sceneLivingPresentation.js": 11,
-  "src/domain/townScene/sceneSemantics.js": 8,
-  "src/domain/traditions/genesis.js": 7,
-  "src/domain/traditions/politics.js": 7,
-  "src/domain/userEdits.js": 3,
-  "src/domain/worldPulse/advanceInterval.js": 2,
-  "src/domain/worldPulse/applyWorldPulse.js": 61,
-  "src/domain/worldPulse/applyWorldPulseFactionRoster.js": 6,
-  "src/domain/worldPulse/applyWorldPulseOccupationAuthority.js": 3,
-  "src/domain/worldPulse/applyWorldPulsePrimitives.js": 8,
-  "src/domain/worldPulse/applyWorldPulseRelationshipGraph.js": 11,
-  "src/domain/worldPulse/armyTransitKernel.js": 4,
-  "src/domain/worldPulse/assizeKernel.js": 2,
-  "src/domain/worldPulse/autoAdjudication.js": 2,
-  "src/domain/worldPulse/beliefMap.js": 3,
-  "src/domain/worldPulse/brokeragePatronage.js": 1,
-  "src/domain/worldPulse/brokeragePlantHandoff.js": 1,
-  "src/domain/worldPulse/brokerageServicesRules.js": 1,
-  "src/domain/worldPulse/brokerageStamps.js": 5,
-  "src/domain/worldPulse/calamityKernel.js": 2,
-  "src/domain/worldPulse/candidateEvents.js": 8,
-  "src/domain/worldPulse/causeLifecycle.js": 5,
-  "src/domain/worldPulse/causeVocabulary.js": 6,
-  "src/domain/worldPulse/clergyTraitPlane.js": 8,
-  "src/domain/worldPulse/commercialReceiptPools.js": 8,
-  "src/domain/worldPulse/commonsVoiceKernel.js": 2,
-  "src/domain/worldPulse/conquestDoctrineStage.js": 2,
-  "src/domain/worldPulse/conquestFeeds.js": 1,
-  "src/domain/worldPulse/convergence.js": 3,
-  "src/domain/worldPulse/corruptionImpair.js": 1,
-  "src/domain/worldPulse/corruptionWeb.js": 1,
-  "src/domain/worldPulse/coup.js": 3,
-  "src/domain/worldPulse/deityAxes.js": 2,
-  "src/domain/worldPulse/deityStanceLane.js": 5,
-  "src/domain/worldPulse/demographicsKernel.js": 2,
-  "src/domain/worldPulse/demographicsLadder.js": 2,
-  "src/domain/worldPulse/demographicsMigration.js": 4,
-  "src/domain/worldPulse/demographicsObservation.js": 2,
-  "src/domain/worldPulse/demographicsPlans.js": 3,
-  "src/domain/worldPulse/demographicsPushPull.js": 4,
-  "src/domain/worldPulse/demographicsRates.js": 3,
-  "src/domain/worldPulse/demographicsRisk.js": 2,
-  "src/domain/worldPulse/demographicsWorks.js": 1,
-  "src/domain/worldPulse/deploymentReturn.js": 1,
-  "src/domain/worldPulse/disposition.js": 6,
-  "src/domain/worldPulse/dispositionLedger.js": 1,
-  "src/domain/worldPulse/dispositionNews.js": 2,
-  "src/domain/worldPulse/dispositionProfile.js": 1,
-  "src/domain/worldPulse/entrepotKernel.js": 2,
-  "src/domain/worldPulse/envoyCasting.js": 2,
-  "src/domain/worldPulse/envoyDiplomacy.js": 3,
-  "src/domain/worldPulse/envoyErrand.js": 3,
-  "src/domain/worldPulse/envoyErrandOffer.js": 3,
-  "src/domain/worldPulse/envoyErrandParlay.js": 5,
-  "src/domain/worldPulse/envoyPulse.js": 2,
-  "src/domain/worldPulse/envoyRansomStage.js": 3,
-  "src/domain/worldPulse/eventProse.js": 5,
-  "src/domain/worldPulse/factionCapture.js": 7,
-  "src/domain/worldPulse/factionCompetition.js": 16,
-  "src/domain/worldPulse/factionPairLedger.js": 4,
-  "src/domain/worldPulse/fidelityNoise.js": 2,
-  "src/domain/worldPulse/flows.js": 1,
-  "src/domain/worldPulse/foodStockpile.js": 1,
-  "src/domain/worldPulse/generosityKernel.js": 7,
-  "src/domain/worldPulse/grammarReceiptPools.js": 4,
-  "src/domain/worldPulse/hegemonyFear.js": 3,
-  "src/domain/worldPulse/informationStatecraft.js": 1,
-  "src/domain/worldPulse/institutionLifecycle.js": 33,
-  "src/domain/worldPulse/institutionLifecycleResourceRead.js": 3,
-  "src/domain/worldPulse/institutionStatusModel.js": 5,
-  "src/domain/worldPulse/institutionTolerance.js": 1,
-  "src/domain/worldPulse/latentPantheon.js": 2,
-  "src/domain/worldPulse/lineageClaim.js": 22,
-  "src/domain/worldPulse/lineageMemberBirth.js": 4,
-  "src/domain/worldPulse/lineageNews.js": 1,
-  "src/domain/worldPulse/magicBufferApply.js": 2,
-  "src/domain/worldPulse/magicSubstitution.js": 2,
-  "src/domain/worldPulse/magicSubstitutionReagents.js": 2,
-  "src/domain/worldPulse/martialReadiness.js": 2,
-  "src/domain/worldPulse/mercenaryMarket.js": 1,
-  "src/domain/worldPulse/migrationKernel.js": 9,
-  "src/domain/worldPulse/militaryStrength.js": 5,
-  "src/domain/worldPulse/mobilization.js": 1,
-  "src/domain/worldPulse/mobilizationEffects.js": 3,
-  "src/domain/worldPulse/momentum.js": 3,
-  "src/domain/worldPulse/moralInstitutionPressure.js": 8,
-  "src/domain/worldPulse/moralMartialLean.js": 1,
-  "src/domain/worldPulse/narrativeTempo.js": 4,
-  "src/domain/worldPulse/navalKernel.js": 1,
-  "src/domain/worldPulse/npcAgency.js": 22,
-  "src/domain/worldPulse/npcDmVerbAuthority.js": 1,
-  "src/domain/worldPulse/npcDmVerbs.js": 4,
-  "src/domain/worldPulse/npcGrowthKernel.js": 4,
-  "src/domain/worldPulse/npcLadderChallenge.js": 10,
-  "src/domain/worldPulse/npcLadderContest.js": 12,
-  "src/domain/worldPulse/npcLadderKernel.js": 4,
-  "src/domain/worldPulse/npcLadderState.js": 58,
-  "src/domain/worldPulse/npcLedger.js": 2,
-  "src/domain/worldPulse/npcLedgerFacets.js": 9,
-  "src/domain/worldPulse/npcReplacement.js": 7,
-  "src/domain/worldPulse/occupation.js": 7,
-  "src/domain/worldPulse/opportunism.js": 2,
-  "src/domain/worldPulse/pactFormation.js": 1,
-  "src/domain/worldPulse/pantheon.js": 2,
-  "src/domain/worldPulse/peaceReasons.js": 3,
-  "src/domain/worldPulse/peaceTerms.js": 1,
-  "src/domain/worldPulse/peaceTermsAppraisal.js": 1,
-  "src/domain/worldPulse/pestilenceKernel.js": 1,
-  "src/domain/worldPulse/piety.js": 2,
-  "src/domain/worldPulse/populationDynamics.js": 9,
-  "src/domain/worldPulse/pressureModel.js": 19,
-  "src/domain/worldPulse/proposalAdmission.js": 5,
-  "src/domain/worldPulse/provenanceKernel.js": 5,
-  "src/domain/worldPulse/pulseKernel.js": 2,
-  "src/domain/worldPulse/realmEvents.js": 3,
-  "src/domain/worldPulse/realmVerbExecution.js": 2,
-  "src/domain/worldPulse/relationshipEdgeSeed.js": 1,
-  "src/domain/worldPulse/relationshipEvolution.js": 20,
-  "src/domain/worldPulse/relationshipHierarchy.js": 3,
-  "src/domain/worldPulse/relationshipMemory.js": 17,
-  "src/domain/worldPulse/relationshipRuleHelpers.js": 3,
-  "src/domain/worldPulse/relationshipRulesAdversarial.js": 1,
-  "src/domain/worldPulse/relationshipState.js": 2,
-  "src/domain/worldPulse/religionLegitimacy.js": 1,
-  "src/domain/worldPulse/religionState.js": 9,
-  "src/domain/worldPulse/religiousContest.js": 7,
-  "src/domain/worldPulse/residueStripGuard.js": 1,
-  "src/domain/worldPulse/resourceDynamicsKernel.js": 16,
-  "src/domain/worldPulse/resourceTaxonomy.js": 1,
-  "src/domain/worldPulse/roadsKernel.js": 1,
-  "src/domain/worldPulse/routeNetworkCharterBypass.js": 6,
-  "src/domain/worldPulse/routeNetworkConsumers.js": 3,
-  "src/domain/worldPulse/routeNetworkConsumersInterdiction.js": 2,
-  "src/domain/worldPulse/routeNetworkConsumersStrategic.js": 3,
-  "src/domain/worldPulse/routeNetworkDecay.js": 2,
-  "src/domain/worldPulse/routeNetworkDecayLifecycle.js": 14,
-  "src/domain/worldPulse/routeNetworkFlows.js": 7,
-  "src/domain/worldPulse/routeNetworkFlowsMaterial.js": 2,
-  "src/domain/worldPulse/routeNetworkFlowsObjective.js": 2,
-  "src/domain/worldPulse/routeNetworkFlowsSelfSufficiency.js": 2,
-  "src/domain/worldPulse/routeNetworkGenesis.js": 11,
-  "src/domain/worldPulse/routeNetworkLedger.js": 11,
-  "src/domain/worldPulse/sacredClaim.js": 4,
-  "src/domain/worldPulse/settlementLifecycleFirstClass.js": 15,
-  "src/domain/worldPulse/settlementLifecycleKernel.js": 8,
-  "src/domain/worldPulse/settlementPolitics.js": 15,
-  "src/domain/worldPulse/settlementStrategy.js": 1,
-  "src/domain/worldPulse/sovereigntyNews.js": 1,
-  "src/domain/worldPulse/sovereigntyReach.js": 1,
-  "src/domain/worldPulse/stressorAftermath.js": 3,
-  "src/domain/worldPulse/stressorDynamics.js": 18,
-  "src/domain/worldPulse/stressorGates.js": 1,
-  "src/domain/worldPulse/stressors.js": 1,
-  "src/domain/worldPulse/subsystemActivation.js": 2,
-  "src/domain/worldPulse/successorNpc.js": 13,
-  "src/domain/worldPulse/supplyCompleteness.js": 2,
-  "src/domain/worldPulse/supplyKernel.js": 13,
-  "src/domain/worldPulse/thievesGuild.js": 4,
-  "src/domain/worldPulse/tickIndices.js": 10,
-  "src/domain/worldPulse/tierOutcomeApply.js": 7,
-  "src/domain/worldPulse/tierResourceDynamics.js": 11,
-  "src/domain/worldPulse/tradeSalience.js": 2,
-  "src/domain/worldPulse/tradeWar.js": 3,
-  "src/domain/worldPulse/upswingKernel.js": 6,
-  "src/domain/worldPulse/urbanFabricKernel.js": 24,
-  "src/domain/worldPulse/vengeanceLicense.js": 3,
-  "src/domain/worldPulse/warAuthorityVerdict.js": 2,
-  "src/domain/worldPulse/warCapacityReads.js": 5,
-  "src/domain/worldPulse/warCoalitionEvidence.js": 10,
-  "src/domain/worldPulse/warCoalitionSettlement.js": 30,
-  "src/domain/worldPulse/warCosts.js": 7,
-  "src/domain/worldPulse/warDeployment.js": 1,
-  "src/domain/worldPulse/warIntent.js": 1,
-  "src/domain/worldPulse/warPeaceDecision.js": 7,
-  "src/domain/worldPulse/warPoliticalLoop.js": 2,
-  "src/domain/worldPulse/warReasons.js": 3,
-  "src/domain/worldPulse/warReceiptPools.js": 2,
-  "src/domain/worldPulse/warRulingsEvidence.js": 1,
-  "src/domain/worldPulse/warRulingsNews.js": 3,
-  "src/domain/worldPulse/warSeatBooks.js": 7,
-  "src/domain/worldPulse/warTermination.js": 1,
-  "src/domain/worldPulse/worldPulseFeedCuration.js": 12,
-  "src/domain/worldPulse/worldSnapshot.js": 2,
-  "src/domain/worldPulse/worldState.js": 1,
-  "src/foundry/journalPages.js": 21,
-  "src/generators/aiLayer.js": 7,
-  "src/generators/cascadeGenerator.js": 1,
-  "src/generators/computeActiveChains.js": 26,
-  "src/generators/defenseGenerator.js": 5,
-  "src/generators/economy/viability.js": 6,
-  "src/generators/factionCorrelation.js": 3,
-  "src/generators/factionDynamics.js": 3,
-  "src/generators/factionRoles.js": 1,
-  "src/generators/generationContext.js": 3,
-  "src/generators/generationReceiptJudgments.js": 6,
-  "src/generators/historyGenerator.js": 2,
-  "src/generators/isolationGenerator.js": 1,
-  "src/generators/isolationSupport.js": 1,
-  "src/generators/narrativeGenerator.js": 1,
-  "src/generators/neighbourGenerator.js": 4,
-  "src/generators/services/institutionServices.js": 4,
-  "src/generators/steps/assembleInstitutions.js": 11,
-  "src/generators/steps/assembleSettlement.js": 1,
-  "src/generators/steps/economyReconcilePass.js": 15,
-  "src/generators/steps/generateEconomy.js": 3,
-  "src/generators/steps/resolveConfig.js": 10,
-  "src/generators/steps/resolveNeighbour.js": 3,
-  "src/generators/steps/resolveResources.js": 7,
-  "src/generators/steps/resolveStress.js": 3,
-  "src/generators/steps/stressConfirmPass.js": 3,
-  "src/generators/structuralValidator.js": 2,
-  "src/hooks/useConfirmPolling.js": 3,
-  "src/hooks/useOwnerScopedSaves.js": 1,
-  "src/hooks/useReaderAudience.js": 1,
-  "src/hooks/useReturnVisit.js": 1,
-  "src/hooks/useRoute.js": 8,
-  "src/lib/accountContentPortability.js": 1,
-  "src/lib/accountData.js": 3,
-  "src/lib/campaigns.js": 6,
-  "src/lib/campaignSync.js": 1,
-  "src/lib/constructionUsage.js": 2,
-  "src/lib/contentPacks.js": 1,
-  "src/lib/copyGuard.js": 2,
-  "src/lib/customContentArchive.js": 27,
-  "src/lib/customContentArchiveService.js": 9,
-  "src/lib/customContentLocalArchive.js": 3,
-  "src/lib/customContentLocalEnvironment.js": 11,
-  "src/lib/customContentLocalLedger.js": 58,
-  "src/lib/customContentLocalReviewedChains.js": 9,
-  "src/lib/customContentReviewedSupplyChainService.js": 8,
-  "src/lib/customContentServiceRuntime.js": 13,
-  "src/lib/customRegistry.js": 6,
-  "src/lib/dependencyEngine.js": 25,
-  "src/lib/foundersHall.js": 2,
-  "src/lib/gallery.js": 2,
-  "src/lib/generationTelemetry.js": 6,
-  "src/lib/importReconciliationAdmission.js": 2,
-  "src/lib/importReconciliationSession.js": 12,
-  "src/lib/instantWorld/composeInstantWorld.js": 4,
-  "src/lib/interview.js": 5,
-  "src/lib/localAuthorityMutex.js": 2,
-  "src/lib/pendingDossier.js": 7,
-  "src/lib/prebuiltResourceChains.js": 12,
-  "src/lib/pulseFingerprint.js": 2,
-  "src/lib/regionalFingerprint.js": 2,
-  "src/lib/relationshipGraph.js": 3,
-  "src/lib/researchCapture.js": 2,
-  "src/lib/roadNetwork.js": 3,
-  "src/lib/saveAdmission.js": 2,
-  "src/lib/saves.js": 7,
-  "src/lib/seoDossier.js": 4,
-  "src/lib/shareImage.js": 1,
-  "src/lib/spatialSubstrateDerive.js": 1,
-  "src/lib/stripe.js": 1,
-  "src/lib/structuralFingerprint.js": 30,
-  "src/lib/supplyChains.js": 2,
-  "src/lib/townScene/adaptiveQuality.js": 8,
-  "src/pdf/lib/format.js": 4,
-  "src/pdf/lib/headlines.js": 4,
-  "src/pdf/lib/liveWorld.js": 4,
-  "src/pdf/lib/viewModel.js": 123,
-  "src/pdf/lib/viewModelBodySlices.js": 89,
-  "src/pdf/lib/viewModelPrimitives.js": 2,
-  "src/pdf/sections/Cover.jsx": 4,
-  "src/pdf/sections/EconomicsTrade.jsx": 18,
-  "src/pdf/sections/HistoryFounding.jsx": 6,
-  "src/pdf/sections/IdentityDailyLife.jsx": 3,
-  "src/pdf/sections/NotableNPCs.jsx": 3,
-  "src/pdf/sections/Overview.jsx": 17,
-  "src/pdf/sections/PowerStructure.jsx": 4,
-  "src/pdf/sections/SupplyChainFlow.jsx": 5,
-  "src/pdf/sections/Timeline.jsx": 1,
-  "src/pdf/sections/ViabilityAssessment.jsx": 5,
-  "src/store/aiChronicleContext.js": 5,
-  "src/store/aiSlice.js": 6,
-  "src/store/campaignCanonRelationshipSession.js": 1,
-  "src/store/campaignContentBindingSession.js": 3,
-  "src/store/campaignPulseHelpers.js": 12,
-  "src/store/campaignRegionalSlice.js": 2,
-  "src/store/campaignSlice.js": 1,
-  "src/store/campaignSliceShared.js": 2,
-  "src/store/campaignWorldPulseDeferred.js": 3,
-  "src/store/canonEventCommandTransaction.js": 32,
-  "src/store/customContentEnvironmentSession.js": 1,
-  "src/store/customContentSliceRuntime.js": 8,
-  "src/store/galleryImportMap.js": 7,
-  "src/store/importReconciliationCommandTransaction.js": 3,
-  "src/store/instantWorldBody.js": 1,
-  "src/store/mapSlice.js": 1,
-  "src/store/selectors.js": 2,
-  "src/store/settlementContentRuntime.js": 1,
-  "src/store/settlementDeityHelpers.js": 8,
-  "src/store/settlementPendingEdits.js": 10,
-  "src/store/settlementPendingEditWriters.js": 7,
-  "src/store/settlementRenameHelpers.js": 1,
-  "src/store/settlementSlice.js": 21,
-  "src/store/settlementSliceHelpers.js": 4,
-  "src/utils/generateCampaignPDF.js": 16,
-  "src/utils/generateSettlementPDF.js": 1,
-  "src/utils/generateWorldBook.js": 14
+  "src/application/commands/adapters/customContentApply.js": {
+   "definitionId on plan": 1,
+   "environment on plan": 1,
+   "kind on plan": 3,
+   "pack on plan": 2
+  },
+  "src/components/admin/AdminSimTuningPanel.jsx": {
+   "level on warnings": 3,
+   "pass on checks": 2,
+   "text on warnings": 1
+  },
+  "src/components/admin/AiPricingResyncPanel.jsx": {
+   "modelId on candidates": 3
+  },
+  "src/components/BuyThisDossier.jsx": {
+   "mapEdits on settlement": 1
+  },
+  "src/components/compendium/CatalogHubs.jsx": {
+   "label on entries": 1,
+   "reading on entries": 1
+  },
+  "src/components/compendium/CatalogTabs.jsx": {
+   "cat on entries": 4,
+   "cond on entries": 1,
+   "desc on entries": 2,
+   "name on entries": 3,
+   "note on powerStructure": 1,
+   "transferCauses on powerStructure": 1
+  },
+  "src/components/compendium/CompendiumDashboard.jsx": {
+   "label on entries": 2,
+   "name on entries": 1,
+   "opType on entries": 1
+  },
+  "src/components/compendium/ContentPackBar.jsx": {
+   "category on entries": 1,
+   "definitionId on entries": 1,
+   "expectedHeadRevisionId on entries": 1,
+   "item on entries": 1,
+   "packEntryId on entries": 1
+  },
+  "src/components/compendium/customCategories.js": {
+   "cardinality on dependencies": 1,
+   "field on dependencies": 2,
+   "targetBuckets on dependencies": 3
+  },
+  "src/components/compendium/Dependencies.jsx": {
+   "key on dependencies": 2,
+   "missing on entries": 1,
+   "single on dependencies": 1
+  },
+  "src/components/compendium/PantheonActivationStrip.jsx": {
+   "latentPantheon on config": 1
+  },
+  "src/components/compendium/RegistryHubs.jsx": {
+   "description on entries": 1,
+   "klass on entries": 1,
+   "label on entries": 2,
+   "reading on entries": 1
+  },
+  "src/components/compendium/SupplyChainsManager.jsx": {
+   "label on exports": 1
+  },
+  "src/components/CompendiumPanel.jsx": {
+   "replaceState on history": 2
+  },
+  "src/components/contentStudio/CampaignContentBindingLifecycle.jsx": {
+   "kind on plan": 1,
+   "targetBinding on plan": 1
+  },
+  "src/components/contentStudio/ContentEnvironmentLifecycle.jsx": {
+   "path on changes": 2
+  },
+  "src/components/contentStudio/ContentInterpretation.jsx": {
+   "bucket on entries": 1,
+   "index on entries": 1,
+   "mechanicalConsumers on entries": 2,
+   "name on entries": 1,
+   "presentationConsumers on entries": 2
+  },
+  "src/components/dossier/EngineSections.jsx": {
+   "band on readiness": 1,
+   "deployment on stockpile": 1,
+   "drawdown on stockpile": 1,
+   "previousGovernments on powerStructure": 2,
+   "storageMonths on stockpile": 2,
+   "tithe on stockpile": 1
+  },
+  "src/components/dossier/SettlementWorkbench.jsx": {
+   "agenda on raw": 1,
+   "cause on raw": 1,
+   "causeReceipt on raw": 1,
+   "compromiseLifecycle on raw": 1,
+   "description on raw": 4,
+   "faction on raw": 1,
+   "factionAffiliation on raw": 1,
+   "function on raw": 1,
+   "goal on raw": 1,
+   "institutionId on raw": 1,
+   "institutionName on raw": 1,
+   "lifecycle on raw": 1,
+   "neighbourName on raw": 1,
+   "provenance on raw": 1,
+   "role on raw": 1,
+   "settlementName on raw": 1,
+   "structuralPosition on raw": 1,
+   "summary on raw": 1,
+   "text on raw": 1,
+   "title on raw": 1,
+   "type on raw": 1
+  },
+  "src/components/gallery/GalleryCampaigns.jsx": {
+   "old_id on members": 2,
+   "public_slug on members": 2,
+   "tier on members": 4
+  },
+  "src/components/gallery/GalleryMaps.jsx": {
+   "old_id on members": 1,
+   "tier on members": 2
+  },
+  "src/components/generate/SaveToLibraryButton.jsx": {
+   "mapEdits on settlement": 2
+  },
+  "src/components/generate/useRealmMagicDefault.js": {
+   "magicExists on config": 1
+  },
+  "src/components/guidance/SurveyorGlossary.jsx": {
+   "term on entries": 2
+  },
+  "src/components/InterviewPanel.jsx": {
+   "register on segments": 1
+  },
+  "src/components/library/LibraryToolbar.jsx": {
+   "canonizedAt on campaignState": 1,
+   "editedAt on campaignState": 6,
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/components/map/AutoplacementConsent.jsx": {
+   "tier on save": 1
+  },
+  "src/components/map/CauseWalkPanel.jsx": {
+   "headline on root": 1
+  },
+  "src/components/map/HeraldAdjudication.jsx": {
+   "appliedAt on selectedOutcomes": 1,
+   "significance on selectedOutcomes": 1,
+   "updatedAt on selectedOutcomes": 1
+  },
+  "src/components/map/heraldFeed.js": {
+   "covert on outcome": 1,
+   "decreed on outcome": 1,
+   "impactKind on outcome": 1,
+   "kind on outcome": 1,
+   "score on outcome": 2,
+   "significance on outcome": 1,
+   "source on outcome": 1,
+   "stressor on outcome": 2,
+   "tick on outcome": 2,
+   "visibility on outcome": 1
+  },
+  "src/components/map/heraldRegister.js": {
+   "campaignEventId on historicalEvents": 2,
+   "destroyedCause on settlement": 1,
+   "destroyedReason on settlement": 1,
+   "lifecycleDiedAtTick on config": 1,
+   "lifecycleHistory on settlement": 2,
+   "status on settlement": 1
+  },
+  "src/components/map/KeyboardPlacementControl.jsx": {
+   "population on save": 1
+  },
+  "src/components/map/PantheonPanel.jsx": {
+   "aId on contests": 3,
+   "aSeats on contests": 2,
+   "bId on contests": 3,
+   "bSeats on contests": 2,
+   "contestedId on contests": 2,
+   "primaryDeitySnapshot on config": 2
+  },
+  "src/components/map/PlacementDetailCard.jsx": {
+   "culture on settlement": 1,
+   "cultureName on settlement": 1,
+   "settlement on settlement": 1,
+   "terrain on settlement": 1
+  },
+  "src/components/map/PlacementsLayer.jsx": {
+   "affectedSettlementIds on selectedOutcomes": 1,
+   "ancientRuin on history": 2,
+   "capital on settlement": 1,
+   "charterPending on steadings": 2,
+   "isCapital on settlement": 1,
+   "lifecycleStatus on config": 2,
+   "lifecycleStatus on settlement": 1,
+   "port on settlement": 1,
+   "settlement on settlement": 3,
+   "settlementIds on selectedOutcomes": 1,
+   "tradeRouteAccess on settlement": 1
+  },
+  "src/components/map/QuickInspector.jsx": {
+   "tier on save": 1
+  },
+  "src/components/map/RealmForecast.jsx": {
+   "beats on members": 1,
+   "populationAfter on members": 1,
+   "populationBefore on members": 1,
+   "saveId on members": 1,
+   "tierAfter on members": 2,
+   "tierBefore on members": 2
+  },
+  "src/components/map/RegionalCausalityLayer.jsx": {
+   "color on channels": 2,
+   "fromName on channels": 1,
+   "fromPoint on channels": 4,
+   "toName on channels": 1,
+   "toPoint on channels": 4
+  },
+  "src/components/map/RelationshipEdges.jsx": {
+   "neighbourLinks on save": 1,
+   "neighbourLinks on settlement": 1,
+   "neighbourNetwork on save": 1,
+   "neighbourNetwork on settlement": 1
+  },
+  "src/components/map/SettlementPalette.jsx": {
+   "tier on save": 1
+  },
+  "src/components/map/TierIcon.jsx": {
+   "settType on settlement": 1
+  },
+  "src/components/map/WorldPulseData.js": {
+   "cause on proposalPayload": 1,
+   "factionName on proposalPayload": 2,
+   "institutionName on metadata": 1,
+   "institutionName on proposalPayload": 2,
+   "rebellionOutcome on metadata": 2
+  },
+  "src/components/map/WorldPulsePanel.jsx": {
+   "recordMode on rollExplanations": 1
+  },
+  "src/components/new/dailyLifeLogic.js": {
+   "description on conflicts": 1,
+   "incomeSources on economicViability": 1,
+   "title on currentTensions": 1,
+   "type on conflicts": 1
+  },
+  "src/components/new/neighbourComponents.jsx": {
+   "interSettlementRelationships on settlement": 1
+  },
+  "src/components/new/SupplyChainsPanel.jsx": {
+   "id on chains": 2,
+   "status on chains": 3
+  },
+  "src/components/new/tabs/EconomicsTab.jsx": {
+   "customChains on economicState": 1,
+   "isCriminal on incomeSources": 1,
+   "state on presentation": 1,
+   "tradeLinks on economicState": 2
+  },
+  "src/components/new/tabs/MagicTab.jsx": {
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/components/new/tabs/power/PowerStrata.jsx": {
+   "direction on edges": 2,
+   "narrative on edges": 2,
+   "pair on edges": 4
+  },
+  "src/components/new/tabs/SteadingsSection.jsx": {
+   "ancientRuin on history": 1,
+   "lifecycleStatus on config": 1,
+   "lifecycleStatus on settlement": 1
+  },
+  "src/components/new/tabs/TraditionsTab.jsx": {
+   "identity on settlement": 1
+  },
+  "src/components/new/tabs/ViabilityTab.jsx": {
+   "category on warnings": 2,
+   "impact on warnings": 2,
+   "suggestedFixes on warnings": 2
+  },
+  "src/components/new/tabs/WarFaithTab.jsx": {
+   "primaryDeitySnapshot on config": 2
+  },
+  "src/components/organic/samples/CompendiumSample.jsx": {
+   "alignment on entries": 2,
+   "domain on entries": 1,
+   "name on entries": 2,
+   "portfolio on entries": 1,
+   "rank on entries": 1,
+   "temperament on entries": 1
+  },
+  "src/components/organic/samples/DossierSample.jsx": {
+   "trait on npcs": 1
+  },
+  "src/components/OutputContainer.jsx": {
+   "canonizedAt on campaignState": 1,
+   "primaryDeitySnapshot on config": 2,
+   "recentEvents on settlement": 1,
+   "startedAt on campaignState": 1,
+   "worldPulse on campaignState": 1,
+   "worldState on campaignState": 2
+  },
+  "src/components/session/SessionMode.jsx": {
+   "primaryDeitySnapshot on config": 2
+  },
+  "src/components/settlement/DeityAssignmentPanel.jsx": {
+   "cultDeitySnapshots on config": 2,
+   "primaryDeityRef on config": 1,
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/components/settlement/EventComposer.jsx": {
+   "id on institutions": 3,
+   "stresses on settlement": 2
+  },
+  "src/components/settlement/eventComposer/applyOutcome.js": {
+   "reason on warnings": 1
+  },
+  "src/components/settlement/eventComposer/BatchCart.jsx": {
+   "message on warnings": 1
+  },
+  "src/components/settlement/eventComposer/buildEvent.js": {
+   "id on institutions": 1
+  },
+  "src/components/settlement/eventComposer/EventComposerDeityField.jsx": {
+   "cultDeitySnapshots on config": 2,
+   "primaryDeitySnapshot on config": 2
+  },
+  "src/components/settlement/eventComposer/EventComposerLinkNeighbourField.jsx": {
+   "neighbourNetwork on settlement": 1
+  },
+  "src/components/settlement/faithPanelModel.js": {
+   "cultDeitySnapshots on config": 2,
+   "faithProfile on config": 3,
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/components/settlement/NarrativeArchivePanel.jsx": {
+   "aiData on save": 2,
+   "event on eventLog": 2,
+   "narrativeSummary on eventLog": 1,
+   "type on eventLog": 1
+  },
+  "src/components/settlement/NextActionRail.jsx": {
+   "aiData on save": 2
+  },
+  "src/components/settlement/PendingIntentions.jsx": {
+   "cancelQueuedEvent on settlement": 1
+  },
+  "src/components/settlement/ProvenanceBlock.jsx": {
+   "campaignId on save": 2,
+   "savedAt on save": 1
+  },
+  "src/components/settlement/SuccessorPrompt.jsx": {
+   "id on institutions": 1
+  },
+  "src/components/settlement/VersionsTab.jsx": {
+   "canonizedAt on campaignState": 2,
+   "editedAt on campaignState": 2,
+   "lastExportAt on campaignState": 2,
+   "savedAt on save": 4,
+   "versionHistory on save": 2
+  },
+  "src/components/settlement/WhatChangedPanel.jsx": {
+   "toLocaleString on history": 2
+  },
+  "src/components/settlements/helpers.js": {
+   "aiData on save": 1,
+   "editedAt on campaignState": 1,
+   "savedAt on save": 2,
+   "timestamp on save": 2
+  },
+  "src/components/settlements/libraryDeleteHandlers.js": {
+   "interSettlementRelationships on settlement": 1,
+   "neighbourNetwork on settlement": 1
+  },
+  "src/components/settlements/livingWorldSignals.js": {
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/components/settlements/RealmStrip.jsx": {
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/components/settlements/StructuredCampaignReconciliation.jsx": {
+   "candidateId on candidates": 1,
+   "proposalId on conflicts": 1
+  },
+  "src/components/settlements/StructuredCampaignReconciliationParts.jsx": {
+   "candidateId on candidates": 3,
+   "matchClass on candidates": 2,
+   "targetName on candidates": 1
+  },
+  "src/components/SettlementsPanel.jsx": {
+   "interSettlementRelationships on settlement": 2,
+   "neighbourNetwork on settlement": 2
+  },
+  "src/components/ShareToGallery.jsx": {
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/components/SingleDossierSuccessPage.jsx": {
+   "settlement on entries": 1
+  },
+  "src/components/surveyor/CorpusFactoryPanel.jsx": {
+   "bucket on entries": 2,
+   "fields on entries": 6,
+   "rationale on entries": 3
+  },
+  "src/components/surveyor/CustomContentPanel.jsx": {
+   "bucket on entries": 1
+  },
+  "src/components/surveyor/InterpretApplyPanel.jsx": {
+   "editedAt on campaignState": 1,
+   "timestamp on save": 1
+  },
+  "src/components/townMap/edgeAnnotations.js": {
+   "neighbors on settlement": 2
+  },
+  "src/components/townMap/scene3d/TownSceneLivingSummary.jsx": {
+   "kind on scars": 1,
+   "severityPermille on scars": 2,
+   "week on scars": 2
+  },
+  "src/components/townMap/SettlementMapNotes.jsx": {
+   "detail on scars": 1,
+   "effectLabel on site": 1,
+   "familyLabel on site": 1,
+   "label on scars": 1,
+   "ref on site": 1
+  },
+  "src/components/townMap/SettlementMapPane.jsx": {
+   "x on gates": 1,
+   "y on gates": 1
+  },
+  "src/components/WorldPage.jsx": {
+   "realmSize on plan": 2,
+   "tonePresetId on plan": 2
+  },
+  "src/data/npcTraitWeights.js": {
+   "acquiredTraits on npcs": 1
+  },
+  "src/data/roadsProse.js": {
+   "captor on npcs": 1,
+   "captor on save": 1,
+   "dest on stressors": 1,
+   "home on npcs": 1,
+   "home on save": 1,
+   "npc on npcs": 1,
+   "npc on save": 1,
+   "npc on stressors": 1
+  },
+  "src/data/sampleSettlements.js": {
+   "seed on config": 1
+  },
+  "src/domain/activeConditions.js": {
+   "eventConditions on _config": 1,
+   "eventConditions on config": 1
+  },
+  "src/domain/ai/personaSlicer.js": {
+   "alignment on personality": 1,
+   "appliedDecrees on settlement": 1,
+   "blocs on settlement": 1,
+   "cultDeitySnapshots on config": 1,
+   "decrees on settlement": 1,
+   "economy on settlement": 1,
+   "politicsLedgers on settlement": 1,
+   "primaryDeity on settlement": 1,
+   "primaryDeitySnapshot on config": 1,
+   "prosperity on settlement": 1,
+   "temperament on personality": 1
+  },
+  "src/domain/aiGrounding.js": {
+   "relationships on relationshipMemory": 1
+  },
+  "src/domain/autonomy/signalRegistry.js": {
+   "source on edges": 1,
+   "target on edges": 1
+  },
+  "src/domain/autonomy/stopConditions.js": {
+   "children on root": 2,
+   "in on test": 6,
+   "is on test": 5,
+   "otherId on root": 4,
+   "root on save": 1,
+   "version on save": 1
+  },
+  "src/domain/campaign/canon.js": {
+   "campaignState on settlement": 2,
+   "canonizedAt on campaignState": 1,
+   "canonizedAt on save": 1,
+   "canonizedAt on settlement": 1,
+   "phase on settlement": 1
+  },
+  "src/domain/canonicalAccessors.js": {
+   "exports on economicState": 3,
+   "imports on economicState": 2,
+   "stresses on settlement": 1
+  },
+  "src/domain/canonStatus.js": {
+   "eventLog on settlement": 1
+  },
+  "src/domain/capacityModel.js": {
+   "id on chains": 3,
+   "magicExists on config": 1,
+   "name on chains": 4,
+   "needKey on chains": 1,
+   "regionalPressures on chains": 2,
+   "status on chains": 8
+  },
+  "src/domain/causalState.js": {
+   "faithProfile on config": 1,
+   "government on config": 1,
+   "hasWalls on defenseProfile": 1,
+   "primaryDeitySnapshot on config": 3,
+   "walls on defenseProfile": 1
+  },
+  "src/domain/causalViews.js": {
+   "eventLog on settlement": 2
+  },
+  "src/domain/coherence/checkDraftEdit.js": {
+   "suggested on suggestions": 2
+  },
+  "src/domain/compendium/searchIndex.js": {
+   "cat on entries": 1,
+   "cond on entries": 1,
+   "desc on entries": 1,
+   "klass on entries": 1,
+   "label on entries": 2,
+   "name on entries": 2,
+   "opType on entries": 3,
+   "receiptRef on entries": 1,
+   "targetScope on entries": 1,
+   "undoToken on entries": 1
+  },
+  "src/domain/conditionPromotion.js": {
+   "eventConditions on _config": 1,
+   "eventConditions on config": 1,
+   "monsterThreat on settlement": 1
+  },
+  "src/domain/content/campaignContentBinding.js": {
+   "bindingHash on history": 4,
+   "environment on history": 1,
+   "resolvedDefinitions on history": 2,
+   "schemaVersion on history": 2,
+   "source on history": 1
+  },
+  "src/domain/content/campaignContentLifecycle.js": {
+   "authorityKey on plan": 1,
+   "bindingHash on history": 2,
+   "campaignId on plan": 1,
+   "expectedBindingHash on plan": 1,
+   "kind on plan": 3,
+   "schemaVersion on plan": 1,
+   "targetBinding on plan": 1,
+   "targetBindingHash on plan": 1
+  },
+  "src/domain/content/contentEffectProjection.js": {
+   "bucket on entries": 2,
+   "entry on entries": 1
+  },
+  "src/domain/content/contentReview.js": {
+   "bucket on entries": 1,
+   "entry on entries": 1,
+   "fieldLabels on entries": 2
+  },
+  "src/domain/content/contentSampleCategoryFixtures.js": {
+   "primaryDeityRef on config": 1,
+   "primaryDeitySnapshot on config": 1,
+   "stresses on settlement": 1
+  },
+  "src/domain/content/contentSamplePreview.js": {
+   "institutions on selectedOutcomes": 2
+  },
+  "src/domain/content/customContentCommands.js": {
+   "category on entries": 1,
+   "data on entries": 1,
+   "definitionId on entries": 2,
+   "expectedHeadRevisionId on entries": 2,
+   "item on entries": 1,
+   "packEntryId on entries": 2
+  },
+  "src/domain/content/customContentUsage.js": {
+   "availableServices on save": 1,
+   "config on save": 1,
+   "data on save": 1,
+   "economicState on save": 1,
+   "institutions on save": 2,
+   "nearbyResourcesCustom on save": 2,
+   "simulationTrace on save": 2,
+   "traditions on save": 2
+  },
+  "src/domain/content/customDefinitionIdentityProjection.js": {
+   "_schemaVersion on raw": 1,
+   "contentHash on raw": 1,
+   "customDefinition on raw": 1,
+   "customDefinitionContentHash on raw": 1,
+   "customDefinitionFingerprint on raw": 1,
+   "customDefinitionId on raw": 1,
+   "customDefinitionRevisionId on raw": 1,
+   "customDefinitionVersion on raw": 1,
+   "definitionFingerprint on raw": 1,
+   "definitionId on raw": 1,
+   "definitionVersion on raw": 1,
+   "revisionId on raw": 1,
+   "revisionNumber on raw": 1
+  },
+  "src/domain/content/customSupplyChainActivation.js": {
+   "tierMax on raw": 2,
+   "tierMin on raw": 2
+  },
+  "src/domain/content/customSupplyChainReview.js": {
+   "commodity on edges": 1,
+   "definitionId on raw": 1,
+   "id on raw": 1,
+   "revisionId on raw": 1,
+   "revisionNumber on raw": 2
+  },
+  "src/domain/content/customTradeEndpointProjection.js": {
+   "satisfies on raw": 1
+  },
+  "src/domain/content/customTradeLabelOwnership.js": {
+   "customCategoryExports on economicState": 1,
+   "customCategoryImports on economicState": 1,
+   "customTradeEndpoints on economicState": 1,
+   "customTradeLabels on economicState": 1,
+   "nativeTradeLabels on economicState": 1,
+   "tradeLabelSources on economicState": 2
+  },
+  "src/domain/content/reviewedSupplyChainPersistence.js": {
+   "artifactId on plan": 1,
+   "chain on plan": 2,
+   "commodity on edges": 1,
+   "expectedHeadRevisionId on plan": 2,
+   "expectedLifecycleVersion on plan": 1,
+   "kind on plan": 1,
+   "schemaVersion on plan": 1
+  },
+  "src/domain/content/settlementContentProvenance.js": {
+   "confirmedCustomSupplyChains on economicState": 1,
+   "cultDeitySnapshots on config": 1,
+   "customCategoryExports on economicState": 1,
+   "customCategoryImports on economicState": 1,
+   "customTradeEndpoints on economicState": 1,
+   "customTradeLabels on economicState": 1,
+   "nearbyResourceDefinitions on settlement": 1,
+   "nearbyResourcesCustom on settlement": 1,
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/contradictions.js": {
+   "criminal_opportunity on scores": 1,
+   "id on institutions": 1
+  },
+  "src/domain/corruption.js": {
+   "factionLink on npcs": 1,
+   "flaw on npcs": 1,
+   "institutionId on npcs": 1,
+   "ousted on npcs": 1,
+   "primaryDeitySnapshot on config": 2,
+   "safetyProfile on settlement": 1
+  },
+  "src/domain/corruptionLeash.js": {
+   "conspiracy on corruptTies": 4,
+   "foreignPatron on corruptTies": 2,
+   "leash on corruptTies": 3
+  },
+  "src/domain/counterfactual.js": {
+   "id on activeChains": 1,
+   "id on factions": 1,
+   "id on institutions": 1
+  },
+  "src/domain/crisisLifecycle.js": {
+   "event on eventLog": 1,
+   "stressorEdits on config": 1,
+   "type on settlement": 1,
+   "undo on eventLog": 1
+  },
+  "src/domain/customContent.js": {
+   "magicExists on config": 1
+  },
+  "src/domain/customContentSchema.js": {
+   "tierMax on raw": 2,
+   "tierMin on raw": 2
+  },
+  "src/domain/dailyLife.js": {
+   "criminal_opportunity on scores": 1,
+   "id on chains": 1,
+   "name on chains": 3,
+   "needKey on chains": 1,
+   "outputs on chains": 1,
+   "recentDisruption on history": 1,
+   "status on chains": 4,
+   "unresolvedWound on history": 1
+  },
+  "src/domain/deterministicSort.js": {
+   "definitionId on raw": 1,
+   "id on raw": 1,
+   "localUid on raw": 1
+  },
+  "src/domain/display/calamityLedger.js": {
+   "calamityHistory on settlement": 2
+  },
+  "src/domain/display/causeLifecycleVocabulary.js": {
+   "causeClass on settlement": 1,
+   "lifecycleStage on settlement": 1,
+   "role on settlement": 1,
+   "situation on settlement": 1
+  },
+  "src/domain/display/causeWalk.js": {
+   "accuracy01 on raw": 3,
+   "covert on raw": 2,
+   "lineageId on raw": 3,
+   "lineageIds on raw": 2
+  },
+  "src/domain/display/chronicleGraph.js": {
+   "applyMode on raw": 1,
+   "impactDigest on settlement": 2,
+   "proposalPayload on raw": 2,
+   "selectedOutcomes on settlement": 2,
+   "tick on settlement": 2
+  },
+  "src/domain/display/chronicleReadModel.js": {
+   "factionId on raw": 1,
+   "npcId on raw": 1,
+   "populationDeltas on raw": 1,
+   "proposalPayload on raw": 1,
+   "relationshipKey on raw": 7,
+   "relationshipPatch on raw": 1,
+   "stressor on raw": 1,
+   "targetSaveId on raw": 1,
+   "tierChange on raw": 6
+  },
+  "src/domain/display/decreeTracker.js": {
+   "id on raw": 2,
+   "proposalPayload on raw": 5,
+   "relationshipKey on raw": 2,
+   "stressor on raw": 4,
+   "targetSaveId on raw": 2,
+   "tierChange on raw": 2
+  },
+  "src/domain/display/discourseKernel.js": {
+   "headline on root": 1,
+   "settlementIds on root": 1,
+   "tick on root": 1,
+   "type on root": 1
+  },
+  "src/domain/display/economyFreshness.js": {
+   "reconciliationLog on settlement": 1
+  },
+  "src/domain/display/exportPosture.js": {
+   "exports on economicState": 1
+  },
+  "src/domain/display/faithEventFilter.js": {
+   "event on eventLog": 1
+  },
+  "src/domain/display/glossary.js": {
+   "category on entries": 1
+  },
+  "src/domain/display/heraldCausalVoice.js": {
+   "headline on root": 1
+  },
+  "src/domain/display/heraldIndex.js": {
+   "covert on outcome": 1,
+   "visibility on outcome": 1
+  },
+  "src/domain/display/newsBody.js": {
+   "kind on settlement": 1,
+   "summary on settlement": 1
+  },
+  "src/domain/display/npcInteriorityRead.js": {
+   "ambition on personality": 1,
+   "ambitions on personality": 1,
+   "grudges on npcs": 1,
+   "ideal on personality": 1,
+   "ideals on personality": 1
+  },
+  "src/domain/display/pantheonDepth.js": {
+   "deityId on channels": 1,
+   "deityRef on channels": 1
+  },
+  "src/domain/display/publicSafe.js": {
+   "covert on settlement": 1
+  },
+  "src/domain/display/rumorHeraldLink.js": {
+   "sourceEventId on outcome": 1
+  },
+  "src/domain/display/settlementRumors.js": {
+   "cultDeitySnapshots on config": 2,
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/display/stateProse/economyStateProse.js": {
+   "detail on foodBalance": 1,
+   "display on foodBalance": 1
+  },
+  "src/domain/display/tradeFlowEconomics.js": {
+   "tradeLinks on economicState": 1
+  },
+  "src/domain/display/warResolve.js": {
+   "effectiveDeficitPct on stockpile": 1,
+   "government on config": 1,
+   "primaryDeitySnapshot on config": 2,
+   "temperament on npcs": 1
+  },
+  "src/domain/display/warStatus.js": {
+   "previousGovernments on powerStructure": 1
+  },
+  "src/domain/districtProfile.js": {
+   "criminal_opportunity on scores": 1,
+   "id on institutions": 1
+  },
+  "src/domain/dossier/chronicleFeed.js": {
+   "appliedAt on eventLog": 1,
+   "cause on eventLog": 2,
+   "created_at on eventLog": 1,
+   "createdAt on eventLog": 1,
+   "date on eventLog": 1,
+   "description on eventLog": 2,
+   "detail on eventLog": 1,
+   "event on eventLog": 3,
+   "eventId on eventLog": 1,
+   "kind on eventLog": 2,
+   "label on eventLog": 1,
+   "name on eventLog": 1,
+   "narrativeSummary on eventLog": 1,
+   "note on eventLog": 1,
+   "partyCaused on eventLog": 2,
+   "scale on eventLog": 1,
+   "severity on eventLog": 1,
+   "summary on eventLog": 1,
+   "text on eventLog": 1,
+   "timestamp on eventLog": 1,
+   "title on eventLog": 1,
+   "type on eventLog": 2,
+   "weight on eventLog": 1,
+   "when on eventLog": 1
+  },
+  "src/domain/dossier/entityLinks.js": {
+   "ambition on npcs": 1,
+   "ambition on personality": 1,
+   "ambitions on npcs": 1,
+   "ambitions on personality": 1,
+   "bond on npcs": 1,
+   "bond on personality": 1,
+   "bonds on npcs": 1,
+   "bonds on personality": 1,
+   "currentName on npcs": 1,
+   "description on goal": 1,
+   "fear on npcs": 1,
+   "fears on npcs": 1,
+   "flaw on npcs": 1,
+   "flaws on npcs": 1,
+   "flaws on personality": 1,
+   "goals on npcs": 1,
+   "id on factions": 4,
+   "ideal on npcs": 1,
+   "ideal on personality": 1,
+   "ideals on npcs": 1,
+   "ideals on personality": 1,
+   "label on factions": 1,
+   "loyalties on npcs": 1,
+   "loyalty on npcs": 1,
+   "name on goal": 1,
+   "name on raw": 2,
+   "neighbourName on raw": 1,
+   "neighbourNetwork on settlement": 1,
+   "primaryDeity on settlement": 2,
+   "primaryDeitySnapshot on config": 3,
+   "text on goal": 1
+  },
+  "src/domain/dossier/realmEntityWeb.js": {
+   "faction on raw": 1,
+   "id on raw": 1,
+   "label on raw": 1,
+   "name on raw": 1,
+   "raw on npcs": 1,
+   "saveId on npcs": 1
+  },
+  "src/domain/entities/npcs.js": {
+   "_idSeed on npcs": 2,
+   "notes on npcs": 1,
+   "potentialSuccessors on npcs": 1,
+   "serviceContribution on npcs": 1
+  },
+  "src/domain/events/affordanceManifest.js": {
+   "cultDeitySnapshots on config": 2,
+   "id on factions": 3,
+   "neighbourLinks on settlement": 1,
+   "neighbourNetwork on settlement": 1,
+   "primaryDeitySnapshot on config": 1,
+   "resources on settlement": 1
+  },
+  "src/domain/events/batch.js": {
+   "customTradeGoods on config": 1,
+   "eventConditions on _config": 2,
+   "eventConditions on config": 2,
+   "good on economicState": 1,
+   "id on factions": 1,
+   "id on institutions": 1,
+   "name on economicState": 1,
+   "neighbourNetwork on settlement": 1,
+   "resources on settlement": 1
+  },
+  "src/domain/events/drainQueuedEvents.js": {
+   "systemState on campaignState": 2
+  },
+  "src/domain/events/eventPipeline.js": {
+   "message on warnings": 1
+  },
+  "src/domain/events/mutate.js": {
+   "deltas on eventLog": 2,
+   "event on eventLog": 3,
+   "narrativeSummary on eventLog": 2,
+   "targetId on eventLog": 3,
+   "type on eventLog": 1
+  },
+  "src/domain/events/mutateEntities.js": {
+   "cultDeitySnapshots on config": 2,
+   "factionLink on npcs": 1,
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/events/mutateHelpers.js": {
+   "__mutationVeto on settlement": 1
+  },
+  "src/domain/events/mutateUserRoute.js": {
+   "neighbourNetwork on settlement": 2
+  },
+  "src/domain/events/mutateWorld.js": {
+   "_cutRoutes on config": 2,
+   "_raidHistory on config": 2,
+   "_refugeeWaves on config": 2,
+   "customTradeGoods on config": 1,
+   "good on economicState": 1,
+   "name on economicState": 1,
+   "resourceEdits on config": 1
+  },
+  "src/domain/events/realmManifest.js": {
+   "lifecycleStatus on config": 1
+  },
+  "src/domain/events/registry.js": {
+   "payload on settlement": 1,
+   "severity on settlement": 1,
+   "targetId on settlement": 2,
+   "type on settlement": 1
+  },
+  "src/domain/events/targetRosters.js": {
+   "neighbourLinks on settlement": 1,
+   "neighbourNetwork on settlement": 1,
+   "resources on settlement": 1
+  },
+  "src/domain/events/undoEvent.js": {
+   "_destroyedByEventId on config": 1,
+   "addedByEventId on settlement": 1,
+   "createdByEventId on factions": 2,
+   "createdByEventId on institutions": 1,
+   "createdByEventId on npcs": 1,
+   "destroyedByEventId on settlement": 1,
+   "eventId on causes": 2,
+   "neighbourNetwork on settlement": 3
+  },
+  "src/domain/explanation.js": {
+   "condition on raw": 3,
+   "controlsInstitutionIds on factions": 2,
+   "id on factions": 1,
+   "id on institutions": 2,
+   "neighbour on raw": 3
+  },
+  "src/domain/factionProfile.js": {
+   "controlsInstitutionIds on factions": 2,
+   "governingFactionName on powerStructure": 1,
+   "power on settlement": 2
+  },
+  "src/domain/factionRename.js": {
+   "interSettlementRelationships on settlement": 4
+  },
+  "src/domain/foodLedger.js": {
+   "foodSecurity on settlement": 1
+  },
+  "src/domain/generationOwnership.js": {
+   "forcedByIsolation on npcs": 1,
+   "locked on npcs": 1,
+   "pinned on npcs": 1,
+   "required on settlement": 1
+  },
+  "src/domain/healingLedger.js": {
+   "availableServices on economicState": 1
+  },
+  "src/domain/historyBeats.js": {
+   "economy on settlement": 1,
+   "label on currentTensions": 1,
+   "name on currentTensions": 1,
+   "primaryExport on economicState": 1,
+   "text on currentTensions": 1,
+   "topExport on economicState": 1
+  },
+  "src/domain/historyPreservation.js": {
+   "_userEdits on settlement": 1,
+   "campaignEra on historicalEvents": 2,
+   "campaignEventId on historicalEvents": 1
+  },
+  "src/domain/hookEscalation.js": {
+   "category on raw": 2,
+   "events on history": 1,
+   "plotHooks on defenseProfile": 2,
+   "plotHooks on powerStructure": 2,
+   "plotHooks on settlement": 2,
+   "test on test": 1
+  },
+  "src/domain/inferSupplyChains.js": {
+   "tierMax on raw": 1,
+   "tierMin on raw": 1
+  },
+  "src/domain/institutions/institutionRoster.js": {
+   "_worldPulseInactive on institutions": 1
+  },
+  "src/domain/interior/interiorDraw.js": {
+   "bounds on goal": 1,
+   "doors on goal": 2,
+   "furnishings on goal": 2,
+   "meta on goal": 1,
+   "rooms on goal": 2,
+   "walls on goal": 2
+  },
+  "src/domain/interior/interiorEdits.js": {
+   "interiorEdits on settlement": 1,
+   "pins on save": 2
+  },
+  "src/domain/interior/interiorModel.js": {
+   "faithProfile on config": 1
+  },
+  "src/domain/locksPreservation.js": {
+   "npcs on locks": 1
+  },
+  "src/domain/magicFilter.js": {
+   "magicExists on config": 1
+  },
+  "src/domain/magicLedger.js": {
+   "magicExists on config": 1,
+   "magicLevel on settlement": 1
+  },
+  "src/domain/magicProfile.js": {
+   "magicExists on config": 1,
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/mapProfile.js": {
+   "biome on config": 1,
+   "defense_readiness on scores": 2,
+   "region on config": 1,
+   "religious_authority on scores": 1,
+   "river on config": 1,
+   "riverAccess on config": 1,
+   "road on config": 1,
+   "roadAccess on config": 1,
+   "trade_connectivity on scores": 2
+  },
+  "src/domain/normalizeSettlement.js": {
+   "neighbourNetwork on settlement": 1
+  },
+  "src/domain/npc/npcOps.js": {
+   "stasis on npcs": 1
+  },
+  "src/domain/npcProfile.js": {
+   "npc1N on relationships": 1,
+   "npc2N on relationships": 1,
+   "ousted on npcs": 1
+  },
+  "src/domain/pendingEditsPreview.js": {
+   "_narrative on settlement": 1,
+   "aiSettlement on settlement": 1,
+   "hooks on settlement": 2,
+   "narrativeNotes on settlement": 1,
+   "plotHooks on settlement": 2
+  },
+  "src/domain/provenance/rosterProvenance.js": {
+   "event on eventLog": 1
+  },
+  "src/domain/realm/heraldRouting.js": {
+   "impactKind on outcome": 1,
+   "kind on outcome": 1,
+   "stressor on outcome": 3
+  },
+  "src/domain/realm/realmItemReadModel.js": {
+   "causedBy on metadata": 1,
+   "causeReceiptId on metadata": 1,
+   "payload on outcome": 1,
+   "stressor on outcome": 1,
+   "tick on outcome": 1
+  },
+  "src/domain/regenerationMode.js": {
+   "id on factions": 1,
+   "id on institutions": 1,
+   "power on settlement": 1
+  },
+  "src/domain/region/deriveRegionalState.js": {
+   "config on save": 5,
+   "economy on settlement": 1,
+   "exports on economicState": 1,
+   "imports on economicState": 1,
+   "population on save": 1,
+   "tier on save": 2,
+   "tradeRouteAccess on save": 1
+  },
+  "src/domain/region/graph.js": {
+   "neighborNetwork on save": 1,
+   "neighbourLinks on save": 1,
+   "neighbourNetwork on save": 1,
+   "severity on channels": 1
+  },
+  "src/domain/region/wizardNews.js": {
+   "covert on entries": 2,
+   "factionIds on entries": 2,
+   "sectionAuthority on entries": 4,
+   "source on entries": 2,
+   "termSheetIds on entries": 2,
+   "thirdPartyIds on entries": 2,
+   "venueIds on entries": 2
+  },
+  "src/domain/regionalGraph.js": {
+   "neighborNetwork on settlement": 2,
+   "neighbourNetwork on settlement": 2,
+   "neighbours on settlement": 2
+  },
+  "src/domain/relationships/canonicalRelationship.js": {
+   "tier on save": 1
+  },
+  "src/domain/relationships/effectiveNeighbours.js": {
+   "neighbourNetwork on settlement": 1
+  },
+  "src/domain/relationships/neighbourBackLink.js": {
+   "interSettlementRelationships on settlement": 1,
+   "neighbourNetwork on settlement": 1
+  },
+  "src/domain/resolveTerrain.js": {
+   "geography on settlement": 1,
+   "settlement on settlement": 1,
+   "terrain on config": 1,
+   "terrain on settlement": 1
+  },
+  "src/domain/roads/state.js": {
+   "recall on whereabouts": 1
+  },
+  "src/domain/roads/thirdPartyRansom.js": {
+   "archetype on factions": 1
+  },
+  "src/domain/roads/userRoutes.js": {
+   "distanceMatrix on settlement": 3,
+   "neighbourNetwork on settlement": 2,
+   "settlementIds on settlement": 2
+  },
+  "src/domain/rulingPower.js": {
+   "id on factions": 2,
+   "modifiers on factions": 4,
+   "previousGovernments on powerStructure": 4
+  },
+  "src/domain/settlementParentRef.js": {
+   "parentRef on settlement": 1
+  },
+  "src/domain/settlementReconciliation.js": {
+   "reconciliationLog on settlement": 2
+  },
+  "src/domain/simulationSpine.js": {
+   "economy on settlement": 1,
+   "governance on powerStructure": 1,
+   "governanceType on powerStructure": 1,
+   "plotHooks on settlement": 1,
+   "power on settlement": 2,
+   "primaryExport on economicState": 1,
+   "prospBand on economicState": 1,
+   "prosperityBand on economicState": 1,
+   "threats on defenseProfile": 1,
+   "topExport on economicState": 1
+  },
+  "src/domain/spatial/distanceRead.js": {
+   "between on edges": 4,
+   "byTerrain on npcs": 1,
+   "cost on edges": 2,
+   "cost on npcs": 1,
+   "distanceMatrix on npcs": 4,
+   "gates on npcs": 2,
+   "reserved on npcs": 2,
+   "routeReceipts on npcs": 1,
+   "spatialLedgers on settlement": 1,
+   "tiers on npcs": 3
+  },
+  "src/domain/spatial/generosityEV.js": {
+   "betrayal on history": 1,
+   "reliefReceived01 on history": 1,
+   "reliefRefusedByThem01 on history": 1
+  },
+  "src/domain/spatial/migration.js": {
+   "spatialCanonVersion on settlement": 1
+  },
+  "src/domain/spatial/navalLayer.js": {
+   "capacity on edges": 1
+  },
+  "src/domain/spatial/pestilence.js": {
+   "level01 on channels": 1,
+   "rng on channels": 3
+  },
+  "src/domain/spatial/rumorNetwork.js": {
+   "causeClass on entries": 3,
+   "covert on entries": 1,
+   "deityName on entries": 3,
+   "recordMode on entries": 1
+  },
+  "src/domain/spatial/spatialSubstrate.js": {
+   "x on gates": 1,
+   "y on gates": 1
+  },
+  "src/domain/spatial/teleportEdges.js": {
+   "catalogId on settlement": 2
+  },
+  "src/domain/state/deriveSystemState.js": {
+   "neighbourLinks on settlement": 1,
+   "neighbourNetwork on settlement": 1,
+   "safetyProfile on settlement": 1
+  },
+  "src/domain/stressorPicker.js": {
+   "description on stressors": 1,
+   "localUid on stressors": 1,
+   "name on stressors": 4
+  },
+  "src/domain/summary/settlementQuickGuide.js": {
+   "culture on settlement": 1,
+   "description on conflicts": 1,
+   "tension on conflicts": 1
+  },
+  "src/domain/supplyChainState.js": {
+   "id on activeChains": 3,
+   "legacyStatus on activeChains": 1,
+   "name on activeChains": 2
+  },
+  "src/domain/tableLedger.js": {
+   "id on factions": 2,
+   "id on institutions": 2
+  },
+  "src/domain/threatProfile.js": {
+   "affectedSystems on raw": 3,
+   "beneficiaries on raw": 3,
+   "currentStage on raw": 1,
+   "description on raw": 1,
+   "id on raw": 3,
+   "label on raw": 2,
+   "name on raw": 2,
+   "neighbourNetwork on settlement": 2,
+   "neighbours on settlement": 2,
+   "severity on raw": 2,
+   "source on raw": 1,
+   "target on raw": 1,
+   "threats on defenseProfile": 1,
+   "threats on settlement": 2,
+   "trajectory on raw": 1,
+   "type on raw": 1,
+   "vector on raw": 1,
+   "victims on raw": 3,
+   "visibility on raw": 1
+  },
+  "src/domain/townCartography/cartographyMorphology.js": {
+   "age on settlement": 1,
+   "covert on activeConditions": 1,
+   "legitimacy on powerStructure": 1,
+   "legitimacy on settlement": 1
+  },
+  "src/domain/townCartography/cartographySynthesis.js": {
+   "id on gates": 2,
+   "position on gates": 2,
+   "wallId on gates": 1
+  },
+  "src/domain/townMap/arch/conditionGrammar.js": {
+   "prosperity on config": 1
+  },
+  "src/domain/townMap/arch/conditionParams.js": {
+   "kind on settlement": 1
+  },
+  "src/domain/townMap/arch/emitter.js": {
+   "indices on settlement": 1,
+   "normals on settlement": 1,
+   "positions on settlement": 1
+  },
+  "src/domain/townMap/arch/settlementDress.js": {
+   "materialTier on settlement": 1,
+   "ornamentOrder on settlement": 1,
+   "reliefMotif on settlement": 1,
+   "traceryFamily on settlement": 1
+  },
+  "src/domain/townMap/audienceProjection.js": {
+   "mapEdits on settlement": 1
+  },
+  "src/domain/townMap/changeView.js": {
+   "deaths on entries": 2,
+   "flavorSuggestion on entries": 1,
+   "institutionsLost on entries": 2,
+   "title on entries": 1,
+   "year on entries": 2
+  },
+  "src/domain/townMap/fabricRead.js": {
+   "kind on scars": 2,
+   "severity on scars": 1,
+   "week on scars": 3
+  },
+  "src/domain/townMap/fogSessions.js": {
+   "fogSessions on settlement": 1,
+   "name on impactDigest": 1
+  },
+  "src/domain/townMap/ladderRead.js": {
+   "id on factions": 1,
+   "instability on factions": 1,
+   "label on factions": 3,
+   "legitimacyModifier on factions": 1
+  },
+  "src/domain/townMap/mapEdits.js": {
+   "mapEdits on settlement": 1
+  },
+  "src/domain/townMap/townLayoutV2.js": {
+   "biome on config": 2,
+   "exports on economicState": 2,
+   "severity on scars": 2
+  },
+  "src/domain/townMap/townMapDraw.js": {
+   "marks on activeChains": 2,
+   "x on gates": 1,
+   "y on gates": 1
+  },
+  "src/domain/townMap/townPanorama.js": {
+   "x on gates": 1,
+   "y on gates": 1
+  },
+  "src/domain/townScene/buildingProfiles.js": {
+   "covert on activeConditions": 1,
+   "legitimacy on powerStructure": 2,
+   "legitimacy on settlement": 2,
+   "moralDrift on settlement": 2
+  },
+  "src/domain/townScene/customBuildingPresentation.js": {
+   "glyph on raw": 1,
+   "landmarkLevel on raw": 1,
+   "materialFamily on raw": 1,
+   "scenePresentation on raw": 1,
+   "sceneProfileId on raw": 1
+  },
+  "src/domain/townScene/manifestContract.js": {
+   "id on gates": 1
+  },
+  "src/domain/townScene/sceneBuildingFabric.js": {
+   "footprint on settlement": 2,
+   "provenanceRefs on settlement": 2,
+   "safety on settlement": 1,
+   "safetyBand on settlement": 1,
+   "wealth on settlement": 1,
+   "wealthBand on settlement": 1
+  },
+  "src/domain/townScene/sceneLiving.js": {
+   "causes on scars": 2,
+   "districtId on scars": 3,
+   "kind on scars": 1,
+   "origin on scars": 1,
+   "severity on scars": 1,
+   "threats on defenseProfile": 2,
+   "triggeredAt on scars": 1,
+   "wallSegmentId on scars": 2,
+   "week on scars": 1
+  },
+  "src/domain/townScene/sceneLivingPresentation.js": {
+   "archetype on scars": 3,
+   "id on scars": 2,
+   "kind on scars": 2,
+   "label on scars": 2,
+   "type on scars": 2
+  },
+  "src/domain/townScene/sceneSemantics.js": {
+   "neighborNetwork on settlement": 2,
+   "neighbors on settlement": 2,
+   "neighbourNetwork on settlement": 2,
+   "neighbours on settlement": 2
+  },
+  "src/domain/traditions/genesis.js": {
+   "identity on settlement": 1,
+   "primaryDeity on settlement": 3,
+   "primaryDeitySnapshot on config": 3
+  },
+  "src/domain/traditions/politics.js": {
+   "identity on settlement": 1,
+   "institutions on eventLog": 2,
+   "powerStructure on eventLog": 1,
+   "previousGovernments on powerStructure": 1,
+   "primaryDeity on settlement": 1,
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/userEdits.js": {
+   "_userEdits on settlement": 3
+  },
+  "src/domain/worldPulse/advanceInterval.js": {
+   "envoyEvidence on pulseHistory": 2
+  },
+  "src/domain/worldPulse/applyWorldPulse.js": {
+   "allianceCall on metadata": 2,
+   "besieger on proposalPayload": 1,
+   "coalition on proposalPayload": 3,
+   "coalitionEnemyRelationship on metadata": 1,
+   "coalitionEvidence on metadata": 2,
+   "deityReembed on outcome": 2,
+   "deployment on proposalPayload": 2,
+   "edge on changes": 2,
+   "edgeKey on changes": 1,
+   "envoyTransportReturn on metadata": 1,
+   "foodStockpileDeltas on outcome": 2,
+   "institutionPatch on outcome": 1,
+   "lifecyclePatch on outcome": 1,
+   "populationDeltas on outcome": 1,
+   "powerTransfer on outcome": 10,
+   "reason on changes": 1,
+   "recallTargetId on metadata": 2,
+   "relationshipKey on changes": 3,
+   "resourceMembership on outcome": 1,
+   "resourcePatch on outcome": 1,
+   "stressor on outcome": 9,
+   "tierChange on outcome": 1,
+   "toType on changes": 2,
+   "type on edges": 1,
+   "warDecisionId on proposalPayload": 3,
+   "warDemand on proposalPayload": 1,
+   "warFront on proposalPayload": 2,
+   "warReturnedSettlementIds on pulseHistory": 2
+  },
+  "src/domain/worldPulse/applyWorldPulseFactionRoster.js": {
+   "id on institutions": 1,
+   "institutionId on proposalPayload": 2,
+   "institutionName on proposalPayload": 2,
+   "rivalFactionId on proposalPayload": 1
+  },
+  "src/domain/worldPulse/applyWorldPulseOccupationAuthority.js": {
+   "archetype on factions": 1,
+   "modifiers on factions": 2
+  },
+  "src/domain/worldPulse/applyWorldPulsePrimitives.js": {
+   "deityReembed on outcome": 1,
+   "foodStockpileDeltas on outcome": 1,
+   "institutionPatch on outcome": 1,
+   "lifecyclePatch on outcome": 1,
+   "populationDeltas on outcome": 1,
+   "powerTransfer on outcome": 1,
+   "resourcePatch on outcome": 1,
+   "tierChange on outcome": 1
+  },
+  "src/domain/worldPulse/applyWorldPulseRelationshipGraph.js": {
+   "coalitionEnemyRelationship on metadata": 1,
+   "edgeKey on changes": 1,
+   "fromType on changes": 1,
+   "reason on changes": 2,
+   "relationshipKey on changes": 1,
+   "tick on outcome": 1,
+   "toType on changes": 2,
+   "type on edges": 2
+  },
+  "src/domain/worldPulse/armyTransitKernel.js": {
+   "byId on settlement": 1,
+   "economic_capacity on scores": 1,
+   "edges on institutions": 2
+  },
+  "src/domain/worldPulse/assizeKernel.js": {
+   "ousted on npcs": 2
+  },
+  "src/domain/worldPulse/autoAdjudication.js": {
+   "proposals on settlement": 2
+  },
+  "src/domain/worldPulse/beliefMap.js": {
+   "captureState on factions": 1,
+   "id on factions": 1,
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/worldPulse/brokeragePatronage.js": {
+   "politics on settlement": 1
+  },
+  "src/domain/worldPulse/brokeragePlantHandoff.js": {
+   "plant on metadata": 1
+  },
+  "src/domain/worldPulse/brokerageServicesRules.js": {
+   "type on edges": 1
+  },
+  "src/domain/worldPulse/brokerageStamps.js": {
+   "id on institutions": 2,
+   "label on institutions": 2,
+   "sourceEventId on outcome": 1
+  },
+  "src/domain/worldPulse/calamityKernel.js": {
+   "calamityHistory on settlement": 2
+  },
+  "src/domain/worldPulse/candidateEvents.js": {
+   "candidateType on config": 1,
+   "factionId on config": 1,
+   "id on config": 2,
+   "npcId on config": 1,
+   "relationshipKey on config": 1,
+   "targetSaveId on config": 1,
+   "type on config": 1
+  },
+  "src/domain/worldPulse/causeLifecycle.js": {
+   "corruptionImpaired on npcs": 1,
+   "law_order on scores": 1,
+   "ousted on npcs": 2,
+   "revealed on corruptTies": 1
+  },
+  "src/domain/worldPulse/causeVocabulary.js": {
+   "cultDeitySnapshots on config": 1,
+   "defense_readiness on scores": 1,
+   "economic_capacity on scores": 1,
+   "food_security on scores": 1,
+   "religious_authority on scores": 1,
+   "trade_connectivity on scores": 1
+  },
+  "src/domain/worldPulse/clergyTraitPlane.js": {
+   "archetype on factions": 2,
+   "corruptionImpaired on npcs": 1,
+   "id on factions": 4,
+   "revealed on corruptTies": 1
+  },
+  "src/domain/worldPulse/commercialReceiptPools.js": {
+   "counterpart on outcome": 1,
+   "counterpart on save": 1,
+   "counterpart on settlement": 2,
+   "good on save": 1,
+   "settlement on settlement": 3
+  },
+  "src/domain/worldPulse/commonsVoiceKernel.js": {
+   "ousted on npcs": 1,
+   "simulationRules on settlement": 1
+  },
+  "src/domain/worldPulse/conquestDoctrineStage.js": {
+   "primaryDeitySnapshot on config": 2
+  },
+  "src/domain/worldPulse/conquestFeeds.js": {
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/worldPulse/convergence.js": {
+   "condition on activeConditions": 1,
+   "economic_capacity on scores": 1,
+   "tick on activeConditions": 1
+  },
+  "src/domain/worldPulse/corruptionImpair.js": {
+   "ousted on npcs": 1
+  },
+  "src/domain/worldPulse/corruptionWeb.js": {
+   "ousted on npcs": 1
+  },
+  "src/domain/worldPulse/coup.js": {
+   "economic_capacity on scores": 1,
+   "factions on locks": 1,
+   "ruling_authority on scores": 1
+  },
+  "src/domain/worldPulse/deityAxes.js": {
+   "alignmentAxis on settlement": 1,
+   "lawAxis on settlement": 1
+  },
+  "src/domain/worldPulse/deityStanceLane.js": {
+   "npcId on metadata": 1,
+   "pairKey on metadata": 2,
+   "rivalRef on metadata": 2
+  },
+  "src/domain/worldPulse/demographicsKernel.js": {
+   "lifecycleStatus on config": 1,
+   "lifecycleStatus on settlement": 1
+  },
+  "src/domain/worldPulse/demographicsLadder.js": {
+   "lifecycleStatus on config": 1,
+   "lifecycleStatus on settlement": 1
+  },
+  "src/domain/worldPulse/demographicsMigration.js": {
+   "lifecycleStatus on config": 2,
+   "lifecycleStatus on settlement": 2
+  },
+  "src/domain/worldPulse/demographicsObservation.js": {
+   "saveId on save": 2
+  },
+  "src/domain/worldPulse/demographicsPlans.js": {
+   "lifecycleStatus on config": 1,
+   "lifecycleStatus on settlement": 1,
+   "site on plan": 1
+  },
+  "src/domain/worldPulse/demographicsPushPull.js": {
+   "criminal_opportunity on scores": 1,
+   "defense_readiness on scores": 1,
+   "economic_capacity on scores": 1,
+   "trade_connectivity on scores": 1
+  },
+  "src/domain/worldPulse/demographicsRates.js": {
+   "terrain on settlement": 3
+  },
+  "src/domain/worldPulse/demographicsRisk.js": {
+   "defense_readiness on scores": 1,
+   "trade_connectivity on scores": 1
+  },
+  "src/domain/worldPulse/demographicsWorks.js": {
+   "spatialLedgers on settlement": 1
+  },
+  "src/domain/worldPulse/deploymentReturn.js": {
+   "ruling_authority on scores": 1
+  },
+  "src/domain/worldPulse/disposition.js": {
+   "influence on factions": 1,
+   "primaryDeitySnapshot on config": 3,
+   "score on factions": 1,
+   "weight on factions": 1
+  },
+  "src/domain/worldPulse/dispositionLedger.js": {
+   "stock01 on channels": 1
+  },
+  "src/domain/worldPulse/dispositionNews.js": {
+   "good on factions": 1,
+   "label on factions": 1
+  },
+  "src/domain/worldPulse/dispositionProfile.js": {
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/worldPulse/entrepotKernel.js": {
+   "institutionHistory on settlement": 2
+  },
+  "src/domain/worldPulse/envoyCasting.js": {
+   "npcId on npcs": 1,
+   "phase on whereabouts": 1
+  },
+  "src/domain/worldPulse/envoyDiplomacy.js": {
+   "placed on quarters": 1,
+   "record on quarters": 1,
+   "seed on settlement": 1
+  },
+  "src/domain/worldPulse/envoyErrand.js": {
+   "expectedReturnTick on plan": 1,
+   "legs on plan": 1,
+   "positionRef on plan": 1
+  },
+  "src/domain/worldPulse/envoyErrandOffer.js": {
+   "coalitionSettlementClosure on proposalPayload": 1,
+   "outcomeId on outcome": 1,
+   "relationshipType on relationshipPatch": 1
+  },
+  "src/domain/worldPulse/envoyErrandParlay.js": {
+   "encounters on npcs": 2,
+   "negotiationPicture on npcs": 1,
+   "parlayId on npcs": 1,
+   "targetCourtPicture on npcs": 1
+  },
+  "src/domain/worldPulse/envoyPulse.js": {
+   "id on settlementUpdates": 2
+  },
+  "src/domain/worldPulse/envoyRansomStage.js": {
+   "covert on settlement": 1,
+   "purpose on settlement": 1,
+   "termSheet on settlement": 1
+  },
+  "src/domain/worldPulse/eventProse.js": {
+   "goal on settlement": 2,
+   "next on quarters": 1,
+   "previous on quarters": 1,
+   "role on settlement": 1
+  },
+  "src/domain/worldPulse/factionCapture.js": {
+   "campaignEra on historicalEvents": 1,
+   "campaignEventId on historicalEvents": 1,
+   "dotRank on internalSeats": 1,
+   "npcId on internalSeats": 3,
+   "tick on historicalEvents": 1
+  },
+  "src/domain/worldPulse/factionCompetition.js": {
+   "captureState on factions": 3,
+   "controlledInstitutions on factions": 2,
+   "governmentPreference on factions": 1,
+   "id on factions": 1,
+   "influence on factions": 1,
+   "label on factions": 2,
+   "momentumBand on factions": 2,
+   "score on factions": 1,
+   "suppressedInstitutions on factions": 2,
+   "weight on factions": 1
+  },
+  "src/domain/worldPulse/factionPairLedger.js": {
+   "context on incidents": 4
+  },
+  "src/domain/worldPulse/fidelityNoise.js": {
+   "faithProfile on config": 1,
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/worldPulse/flows.js": {
+   "trade_connectivity on scores": 1
+  },
+  "src/domain/worldPulse/foodStockpile.js": {
+   "magicExists on config": 1
+  },
+  "src/domain/worldPulse/generosityKernel.js": {
+   "economicBase on config": 1,
+   "economicBase on economicState": 1,
+   "primaryDeitySnapshot on config": 4,
+   "primaryIndustry on economicState": 1
+  },
+  "src/domain/worldPulse/grammarReceiptPools.js": {
+   "counterpart on npcs": 1,
+   "counterpart on settlement": 1,
+   "route on npcs": 1,
+   "settlement on npcs": 1
+  },
+  "src/domain/worldPulse/hegemonyFear.js": {
+   "centerId on settlement": 1,
+   "members on settlement": 2
+  },
+  "src/domain/worldPulse/informationStatecraft.js": {
+   "stasis on npcs": 1
+  },
+  "src/domain/worldPulse/institutionLifecycle.js": {
+   "_worldPulseFoundingSet on institutions": 1,
+   "_worldPulseInactive on institutions": 3,
+   "builtReason on institutions": 1,
+   "category on inst": 2,
+   "controlledInstitutions on factions": 2,
+   "id on chains": 4,
+   "institutionHistory on settlement": 3,
+   "institutionPatch on outcome": 1,
+   "label on chains": 2,
+   "minTier on chains": 1,
+   "name on inst": 7,
+   "processingInstitutions on chains": 1,
+   "requiredForTier on institutions": 2,
+   "suppressedInstitutions on factions": 2,
+   "upstreamChains on chains": 1
+  },
+  "src/domain/worldPulse/institutionLifecycleResourceRead.js": {
+   "nearbyResources on settlement": 1,
+   "nearbyResourcesDepleted on settlement": 2
+  },
+  "src/domain/worldPulse/institutionStatusModel.js": {
+   "_worldPulseEconomyClosed on institutions": 1,
+   "_worldPulseMorallyAbolished on institutions": 1,
+   "id on institutions": 3
+  },
+  "src/domain/worldPulse/institutionTolerance.js": {
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/worldPulse/latentPantheon.js": {
+   "latentPantheon on config": 1,
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/worldPulse/lineageClaim.js": {
+   "_destroyed on config": 1,
+   "a on edges": 2,
+   "b on edges": 2,
+   "lifecycleStatus on config": 2,
+   "lifecycleStatus on settlement": 2,
+   "parentRef on config": 1,
+   "parentRef on save": 1,
+   "parentRef on settlement": 1,
+   "population on config": 1,
+   "settlementAId on edges": 2,
+   "settlementBId on edges": 2,
+   "source on edges": 2,
+   "status on settlement": 1,
+   "target on edges": 2
+  },
+  "src/domain/worldPulse/lineageMemberBirth.js": {
+   "conveyed on steadings": 2,
+   "culture on settlement": 2
+  },
+  "src/domain/worldPulse/lineageNews.js": {
+   "byId on settlement": 1
+  },
+  "src/domain/worldPulse/magicBufferApply.js": {
+   "magicExists on config": 1,
+   "magicLevel on settlement": 1
+  },
+  "src/domain/worldPulse/magicSubstitution.js": {
+   "band on dependency": 2
+  },
+  "src/domain/worldPulse/magicSubstitutionReagents.js": {
+   "settlement on members": 1,
+   "usage on edges": 1
+  },
+  "src/domain/worldPulse/martialReadiness.js": {
+   "faithProfile on config": 1,
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/worldPulse/mercenaryMarket.js": {
+   "_worldPulseInactive on institutions": 1
+  },
+  "src/domain/worldPulse/migrationKernel.js": {
+   "economic_capacity on scores": 3,
+   "primaryDeitySnapshot on config": 1,
+   "source on edges": 1,
+   "target on edges": 1,
+   "thievesGuildStrength on settlement": 1,
+   "trade_connectivity on scores": 1,
+   "type on edges": 1
+  },
+  "src/domain/worldPulse/militaryStrength.js": {
+   "government on config": 1,
+   "primaryDeitySnapshot on config": 1,
+   "settlement on settlement": 3
+  },
+  "src/domain/worldPulse/mobilization.js": {
+   "economic_capacity on scores": 1
+  },
+  "src/domain/worldPulse/mobilizationEffects.js": {
+   "byId on settlement": 1,
+   "regionalGraph on settlement": 1,
+   "worldState on settlement": 1
+  },
+  "src/domain/worldPulse/momentum.js": {
+   "facets on npcs": 1,
+   "kind on deposits": 1,
+   "temperament on npcs": 1
+  },
+  "src/domain/worldPulse/moralInstitutionPressure.js": {
+   "category on inst": 2,
+   "faithProfile on config": 1,
+   "id on institutions": 1,
+   "name on inst": 1,
+   "primaryDeitySnapshot on config": 3
+  },
+  "src/domain/worldPulse/moralMartialLean.js": {
+   "_worldPulseInactive on institutions": 1
+  },
+  "src/domain/worldPulse/narrativeTempo.js": {
+   "class on settlement": 1,
+   "lastMajorWeek on settlement": 1,
+   "settlementId on settlement": 2
+  },
+  "src/domain/worldPulse/navalKernel.js": {
+   "relType on edges": 1
+  },
+  "src/domain/worldPulse/npcAgency.js": {
+   "affiliation on npcs": 1,
+   "description on npcs": 1,
+   "dots on npcs": 3,
+   "faction on npcs": 1,
+   "factionId on npcs": 1,
+   "factionLink on npcs": 1,
+   "institutionId on npcs": 1,
+   "label on npcs": 3,
+   "leash on corruptTies": 1,
+   "nextContext on metadata": 1,
+   "notability on npcs": 3,
+   "organization on npcs": 1,
+   "organizationId on npcs": 1,
+   "ousted on npcs": 1,
+   "previousContext on metadata": 1,
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/worldPulse/npcDmVerbAuthority.js": {
+   "simulationRules on raw": 1
+  },
+  "src/domain/worldPulse/npcDmVerbs.js": {
+   "kind on edges": 2,
+   "settlementId on edges": 2
+  },
+  "src/domain/worldPulse/npcGrowthKernel.js": {
+   "acquiredTraits on npcs": 2,
+   "ousted on npcs": 1,
+   "revealed on corruptTies": 1
+  },
+  "src/domain/worldPulse/npcLadderChallenge.js": {
+   "isChallenging on factions": 2,
+   "nid on factions": 1,
+   "npc on factions": 2,
+   "rungCount on factions": 3,
+   "rungIndex on factions": 1,
+   "standing on factions": 1
+  },
+  "src/domain/worldPulse/npcLadderContest.js": {
+   "bonds on npcs": 2,
+   "grudges on npcs": 2,
+   "loserNid on contests": 2,
+   "supportOf on goal": 6
+  },
+  "src/domain/worldPulse/npcLadderKernel.js": {
+   "captureState on factions": 1,
+   "label on factions": 1,
+   "supportOf on goal": 1,
+   "wasOusted on npcs": 1
+  },
+  "src/domain/worldPulse/npcLadderState.js": {
+   "backedBy on contests": 5,
+   "bonds on npcs": 17,
+   "dots on npcs": 1,
+   "grudges on npcs": 8,
+   "label on npcs": 1,
+   "lastLieSeen on npcs": 7,
+   "loserNid on contests": 5,
+   "stigma on npcs": 6,
+   "supportOf on goal": 5,
+   "wasOusted on npcs": 3
+  },
+  "src/domain/worldPulse/npcLedger.js": {
+   "settlementId on edges": 2
+  },
+  "src/domain/worldPulse/npcLedgerFacets.js": {
+   "indefinite on edges": 2,
+   "kind on edges": 1,
+   "settlementId on edges": 2,
+   "untilTick on edges": 4
+  },
+  "src/domain/worldPulse/npcReplacement.js": {
+   "alignment on config": 1,
+   "alignment on settlement": 1,
+   "prosperity on config": 1,
+   "prosperity on settlement": 1,
+   "unrest on config": 1,
+   "unrest on settlement": 1,
+   "wealth on settlement": 1
+  },
+  "src/domain/worldPulse/occupation.js": {
+   "economic_capacity on scores": 2,
+   "modifiers on factions": 5
+  },
+  "src/domain/worldPulse/opportunism.js": {
+   "faithProfile on config": 1,
+   "public_legitimacy on scores": 1
+  },
+  "src/domain/worldPulse/pactFormation.js": {
+   "religionState on settlement": 1
+  },
+  "src/domain/worldPulse/pantheon.js": {
+   "primaryDeitySnapshot on config": 2
+  },
+  "src/domain/worldPulse/peaceReasons.js": {
+   "kinship_bond on reasons": 2,
+   "obligation_discharged on reasons": 1
+  },
+  "src/domain/worldPulse/peaceTerms.js": {
+   "coalitionContext on npcs": 1
+  },
+  "src/domain/worldPulse/peaceTermsAppraisal.js": {
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/worldPulse/pestilenceKernel.js": {
+   "trade_connectivity on scores": 1
+  },
+  "src/domain/worldPulse/piety.js": {
+   "faithProfile on config": 1,
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/worldPulse/populationDynamics.js": {
+   "populationDeltas on outcome": 1,
+   "settlement on settlement": 3,
+   "source on edges": 2,
+   "target on edges": 2,
+   "tick on outcome": 1
+  },
+  "src/domain/worldPulse/pressureModel.js": {
+   "activeConditions on dependencies": 1,
+   "criminal_opportunity on scores": 2,
+   "defense_readiness on scores": 2,
+   "food_security on scores": 2,
+   "healing_capacity on scores": 1,
+   "housing_pressure on scores": 1,
+   "infrastructure_condition on scores": 2,
+   "labor_capacity on scores": 2,
+   "public_legitimacy on scores": 1,
+   "source on edges": 1,
+   "target on edges": 1,
+   "trade_connectivity on scores": 3
+  },
+  "src/domain/worldPulse/proposalAdmission.js": {
+   "args on proposalPayload": 1,
+   "saveId on outcome": 1,
+   "settlementId on outcome": 1,
+   "targetId on outcome": 1,
+   "targetSaveId on proposalPayload": 1
+  },
+  "src/domain/worldPulse/provenanceKernel.js": {
+   "candidateType on npcs": 1,
+   "causedBy on npcs": 1,
+   "impactKind on npcs": 1,
+   "sourceEventId on npcs": 1,
+   "type on npcs": 1
+  },
+  "src/domain/worldPulse/pulseKernel.js": {
+   "mediation on reasons": 1,
+   "seed on save": 1
+  },
+  "src/domain/worldPulse/realmEvents.js": {
+   "primaryDeitySnapshot on config": 1,
+   "settlements on settlement": 2
+  },
+  "src/domain/worldPulse/realmVerbExecution.js": {
+   "args on proposalPayload": 1,
+   "verb on proposalPayload": 1
+  },
+  "src/domain/worldPulse/relationshipEdgeSeed.js": {
+   "relationshipSeed on metadata": 1
+  },
+  "src/domain/worldPulse/relationshipEvolution.js": {
+   "aidBurden on relationshipPatch": 1,
+   "allianceCall on metadata": 1,
+   "carriedTermSheet on metadata": 1,
+   "clientSaveId on relationshipPatch": 1,
+   "coalitionPeaceExpenditures on metadata": 2,
+   "coalitionSettlement on metadata": 1,
+   "coalitionSettlementClosure on metadata": 1,
+   "coalitionSettlementClosure on proposalPayload": 1,
+   "dependency on relationshipPatch": 1,
+   "envoyTransportReturn on metadata": 1,
+   "militaryBurden on relationshipPatch": 1,
+   "obligationFatigue on relationshipPatch": 1,
+   "overlordSaveId on relationshipPatch": 1,
+   "pactStrength on relationshipPatch": 1,
+   "patronSaveId on relationshipPatch": 1,
+   "relation on edges": 1,
+   "tradeBalance on relationshipPatch": 1,
+   "type on edges": 1,
+   "vassalSaveId on relationshipPatch": 1
+  },
+  "src/domain/worldPulse/relationshipHierarchy.js": {
+   "type on edges": 3
+  },
+  "src/domain/worldPulse/relationshipMemory.js": {
+   "defense_readiness on scores": 1,
+   "direction on relationships": 1,
+   "otherSettlementId on relationships": 2,
+   "otherSettlementName on relationships": 1,
+   "outcomeId on history": 1,
+   "posture on relationships": 1,
+   "practicalEffects on relationships": 2,
+   "public_legitimacy on scores": 1,
+   "recentMemory on relationships": 2,
+   "relationshipType on relationships": 1,
+   "summary on relationships": 1,
+   "tick on history": 1,
+   "trade_connectivity on scores": 1,
+   "type on history": 1
+  },
+  "src/domain/worldPulse/relationshipRuleHelpers.js": {
+   "reason on history": 1,
+   "severity on channels": 1,
+   "type on history": 1
+  },
+  "src/domain/worldPulse/relationshipRulesAdversarial.js": {
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/worldPulse/relationshipState.js": {
+   "turningPoints on settlement": 2
+  },
+  "src/domain/worldPulse/religionLegitimacy.js": {
+   "archetype on factions": 1
+  },
+  "src/domain/worldPulse/religionState.js": {
+   "cultDeitySnapshots on config": 2,
+   "faithProfile on config": 2,
+   "primaryDeitySnapshot on config": 3,
+   "share on settlement": 2
+  },
+  "src/domain/worldPulse/religiousContest.js": {
+   "cultDeitySnapshots on config": 1,
+   "faithProfile on config": 1,
+   "primaryDeitySnapshot on config": 3,
+   "religious_authority on scores": 1,
+   "severity on channels": 1
+  },
+  "src/domain/worldPulse/residueStripGuard.js": {
+   "targetSaveId on settlement": 1
+  },
+  "src/domain/worldPulse/resourceDynamicsKernel.js": {
+   "id on institutions": 1,
+   "lastDiscoveryTick on resourceDynamics": 2,
+   "lastRemovalTick on resourceDynamics": 2,
+   "magicExists on config": 2,
+   "resourceEdits on config": 5,
+   "terrainOverride on raw": 1,
+   "terrainType on raw": 1,
+   "tradeRoute on settlement": 1,
+   "tradeRouteAccess on raw": 1
+  },
+  "src/domain/worldPulse/resourceTaxonomy.js": {
+   "magicLevel on settlement": 1
+  },
+  "src/domain/worldPulse/roadsKernel.js": {
+   "partyRelease on whereabouts": 1
+  },
+  "src/domain/worldPulse/routeNetworkCharterBypass.js": {
+   "a on edges": 2,
+   "b on edges": 2,
+   "mode on edges": 2
+  },
+  "src/domain/worldPulse/routeNetworkConsumers.js": {
+   "edges on institutions": 3
+  },
+  "src/domain/worldPulse/routeNetworkConsumersInterdiction.js": {
+   "usage on edges": 2
+  },
+  "src/domain/worldPulse/routeNetworkConsumersStrategic.js": {
+   "a on edges": 1,
+   "b on edges": 1,
+   "strategicNeed on edges": 1
+  },
+  "src/domain/worldPulse/routeNetworkDecay.js": {
+   "grade on edges": 1,
+   "strategicNeed on edges": 1
+  },
+  "src/domain/worldPulse/routeNetworkDecayLifecycle.js": {
+   "a on edges": 7,
+   "b on edges": 6,
+   "grade on edges": 1
+  },
+  "src/domain/worldPulse/routeNetworkFlows.js": {
+   "a on edges": 2,
+   "b on edges": 2,
+   "config on members": 1,
+   "usage on edges": 2
+  },
+  "src/domain/worldPulse/routeNetworkFlowsMaterial.js": {
+   "imports on economicState": 1,
+   "settlement on members": 1
+  },
+  "src/domain/worldPulse/routeNetworkFlowsObjective.js": {
+   "a on edges": 1,
+   "b on edges": 1
+  },
+  "src/domain/worldPulse/routeNetworkFlowsSelfSufficiency.js": {
+   "saveId on save": 2
+  },
+  "src/domain/worldPulse/routeNetworkGenesis.js": {
+   "a on edges": 1,
+   "b on edges": 1,
+   "config on members": 2,
+   "config on save": 2,
+   "mode on edges": 1,
+   "settlement on settlement": 4
+  },
+  "src/domain/worldPulse/routeNetworkLedger.js": {
+   "a on edges": 1,
+   "a on settlement": 1,
+   "b on edges": 1,
+   "b on settlement": 1,
+   "corridor on settlement": 1,
+   "edges on settlement": 1,
+   "grade on edges": 1,
+   "sinceTick on settlement": 2,
+   "usage on edges": 2
+  },
+  "src/domain/worldPulse/sacredClaim.js": {
+   "faithProfile on config": 1,
+   "primaryDeitySnapshot on config": 3
+  },
+  "src/domain/worldPulse/settlementLifecycleFirstClass.js": {
+   "campaignEra on historicalEvents": 1,
+   "campaignEventId on historicalEvents": 1,
+   "lifecycleDiedAtTick on config": 1,
+   "lifecycleHistory on settlement": 4,
+   "lifecyclePatch on outcome": 3,
+   "lifecycleStatus on config": 1,
+   "lifecycleStatus on settlement": 1,
+   "tick on historicalEvents": 1,
+   "tick on metadata": 2
+  },
+  "src/domain/worldPulse/settlementLifecycleKernel.js": {
+   "charterPending on steadings": 1,
+   "culture on settlement": 1,
+   "lifecycleStatus on config": 2,
+   "lifecycleStatus on settlement": 2,
+   "starvingSince on steadings": 2
+  },
+  "src/domain/worldPulse/settlementPolitics.js": {
+   "influence on factions": 1,
+   "key on a": 3,
+   "key on b": 2,
+   "label on factions": 1,
+   "name on a": 3,
+   "name on b": 3,
+   "score on factions": 1,
+   "weight on factions": 1
+  },
+  "src/domain/worldPulse/settlementStrategy.js": {
+   "economic_capacity on scores": 1
+  },
+  "src/domain/worldPulse/sovereigntyNews.js": {
+   "label on npcs": 1
+  },
+  "src/domain/worldPulse/sovereigntyReach.js": {
+   "usage on edges": 1
+  },
+  "src/domain/worldPulse/stressorAftermath.js": {
+   "campaignEra on historicalEvents": 1,
+   "campaignEventId on historicalEvents": 1,
+   "tick on historicalEvents": 1
+  },
+  "src/domain/worldPulse/stressorDynamics.js": {
+   "fromType on history": 1,
+   "invert on history": 1,
+   "key on history": 9,
+   "kind on history": 1,
+   "labor_capacity on scores": 1,
+   "public_legitimacy on scores": 1,
+   "tick on history": 3,
+   "toType on history": 1
+  },
+  "src/domain/worldPulse/stressorGates.js": {
+   "ruling_authority on scores": 1
+  },
+  "src/domain/worldPulse/stressors.js": {
+   "religious_authority on scores": 1
+  },
+  "src/domain/worldPulse/subsystemActivation.js": {
+   "cultDeitySnapshots on config": 1,
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/domain/worldPulse/successorNpc.js": {
+   "category on settlement": 2,
+   "factionAffiliation on settlement": 1,
+   "factionLink on settlement": 1,
+   "goal on settlement": 1,
+   "importance on settlement": 1,
+   "influence on settlement": 1,
+   "institutionId on settlement": 1,
+   "personality on settlement": 3,
+   "power on settlement": 1,
+   "role on settlement": 1
+  },
+  "src/domain/worldPulse/supplyCompleteness.js": {
+   "economy on settlement": 1,
+   "exports on economicState": 1
+  },
+  "src/domain/worldPulse/supplyKernel.js": {
+   "influence on factions": 2,
+   "inputStockpiles on economicState": 2,
+   "legitimacy on factions": 2,
+   "politics on settlement": 2,
+   "powerFactions on settlement": 2,
+   "strength on factions": 2,
+   "thievesGuildStrength on settlement": 1
+  },
+  "src/domain/worldPulse/thievesGuild.js": {
+   "legitimacy on factions": 3,
+   "thievesGuildStrength on settlement": 1
+  },
+  "src/domain/worldPulse/tickIndices.js": {
+   "channels on settlement": 2,
+   "edges on settlement": 4,
+   "nodes on settlement": 2,
+   "settlements on factions": 2
+  },
+  "src/domain/worldPulse/tierOutcomeApply.js": {
+   "institutionHistory on settlement": 2,
+   "tick on outcome": 1,
+   "tierChange on outcome": 2,
+   "tierHistory on settlement": 2
+  },
+  "src/domain/worldPulse/tierResourceDynamics.js": {
+   "id on chains": 1,
+   "intermediateGoods on chains": 1,
+   "nearbyResources on settlement": 1,
+   "nearbyResourcesDepleted on settlement": 2,
+   "outputs on chains": 1,
+   "rawInputs on chains": 1,
+   "resourcePatch on outcome": 1,
+   "tierChange on outcome": 2,
+   "tradeRoute on settlement": 1
+  },
+  "src/domain/worldPulse/tradeSalience.js": {
+   "imports on economicState": 1,
+   "severity on channels": 1
+  },
+  "src/domain/worldPulse/tradeWar.js": {
+   "exports on economicState": 1,
+   "imports on economicState": 1,
+   "severity on channels": 1
+  },
+  "src/domain/worldPulse/upswingKernel.js": {
+   "calamityHistory on settlement": 6
+  },
+  "src/domain/worldPulse/urbanFabricKernel.js": {
+   "calamityHistory on settlement": 2,
+   "did on scars": 3,
+   "districtId on causes": 2,
+   "economicBase on config": 1,
+   "seg on scars": 4,
+   "sev on scars": 4,
+   "tick on scars": 2,
+   "wallSegmentId on causes": 3,
+   "week on scars": 3
+  },
+  "src/domain/worldPulse/vengeanceLicense.js": {
+   "adequacyToVictim01 on candidates": 1,
+   "holderId on candidates": 1,
+   "sharesEdgeWithRazer on candidates": 1
+  },
+  "src/domain/worldPulse/warAuthorityVerdict.js": {
+   "warAuthorityVerdicts on pulseHistory": 2
+  },
+  "src/domain/worldPulse/warCapacityReads.js": {
+   "byId on settlement": 1,
+   "distance on edges": 1,
+   "economic_capacity on scores": 1,
+   "trade_connectivity on scores": 1,
+   "weight on edges": 1
+  },
+  "src/domain/worldPulse/warCoalitionEvidence.js": {
+   "candidateType on history": 2,
+   "coalitionEvidence on history": 1,
+   "id on history": 2,
+   "kind on history": 2,
+   "metadata on history": 1,
+   "sourceEventId on history": 1,
+   "tick on history": 1
+  },
+  "src/domain/worldPulse/warCoalitionSettlement.js": {
+   "a on edges": 1,
+   "aggregateClaim01 on plan": 1,
+   "apportionment on plan": 1,
+   "b on edges": 1,
+   "bled01 on settlement": 1,
+   "callerId on settlement": 1,
+   "capacity01 on settlement": 1,
+   "closureId on settlement": 1,
+   "closures on plan": 2,
+   "coalitionSettlementId on plan": 1,
+   "coalitionSettlementId on settlement": 1,
+   "culpability01 on settlement": 1,
+   "fieldLoss01 on settlement": 1,
+   "goodId on settlement": 1,
+   "goodName on settlement": 1,
+   "late01 on settlement": 1,
+   "led01 on settlement": 1,
+   "loserId on settlement": 1,
+   "relationshipKey on settlement": 1,
+   "source on edges": 1,
+   "spoils on plan": 1,
+   "target on edges": 1,
+   "tick on plan": 4,
+   "transfers on plan": 2,
+   "winnerId on settlement": 1
+  },
+  "src/domain/worldPulse/warCosts.js": {
+   "a on edges": 1,
+   "b on edges": 1,
+   "byId on settlement": 1,
+   "pulseHistory on settlement": 2,
+   "source on edges": 1,
+   "target on edges": 1
+  },
+  "src/domain/worldPulse/warDeployment.js": {
+   "wealthIndex on economicState": 1
+  },
+  "src/domain/worldPulse/warIntent.js": {
+   "warIntent on metadata": 1
+  },
+  "src/domain/worldPulse/warPeaceDecision.js": {
+   "id on factions": 2,
+   "relationshipType on relationshipPatch": 1,
+   "seatTransitions on npcLadder": 2,
+   "tick on outcome": 1,
+   "type on edges": 1
+  },
+  "src/domain/worldPulse/warPoliticalLoop.js": {
+   "label on factions": 1,
+   "politics on settlement": 1
+  },
+  "src/domain/worldPulse/warReasons.js": {
+   "lineage_claim on reasons": 2,
+   "public_legitimacy on scores": 1
+  },
+  "src/domain/worldPulse/warReceiptPools.js": {
+   "lean on settlement": 1,
+   "settlement on settlement": 1
+  },
+  "src/domain/worldPulse/warRulingsEvidence.js": {
+   "inheritedWarDemand on metadata": 1
+  },
+  "src/domain/worldPulse/warRulingsNews.js": {
+   "id on factions": 1,
+   "label on factions": 1,
+   "label on npcs": 1
+  },
+  "src/domain/worldPulse/warSeatBooks.js": {
+   "id on factions": 6,
+   "label on npcs": 1
+  },
+  "src/domain/worldPulse/warTermination.js": {
+   "alliance_obligation on reasons": 1
+  },
+  "src/domain/worldPulse/worldPulseFeedCuration.js": {
+   "affectedSettlementIds on outcome": 3,
+   "curationClass on outcome": 1,
+   "institutionPatch on outcome": 1,
+   "lifecyclePatch on outcome": 1,
+   "partySourced on outcome": 1,
+   "populationDeltas on outcome": 1,
+   "powerTransfer on outcome": 1,
+   "resourcePatch on outcome": 1,
+   "stressor on outcome": 1,
+   "tierChange on outcome": 1
+  },
+  "src/domain/worldPulse/worldSnapshot.js": {
+   "npcs on save": 1,
+   "settlementId on save": 1
+  },
+  "src/domain/worldPulse/worldState.js": {
+   "candidateId on outcome": 1
+  },
+  "src/foundry/journalPages.js": {
+   "description on chains": 2,
+   "description on quarters": 2,
+   "display on foodBalance": 2,
+   "event on eventLog": 1,
+   "events on history": 2,
+   "hook on stress": 2,
+   "name on chains": 1,
+   "name on relationships": 1,
+   "narrativeSummary on eventLog": 2,
+   "origin on founding": 1,
+   "status on chains": 1,
+   "summary on founding": 2,
+   "target on relationships": 1,
+   "with on relationships": 1
+  },
+  "src/generators/aiLayer.js": {
+   "criticalImports on metrics": 1,
+   "description on conflicts": 1,
+   "incomeSources on economicViability": 1,
+   "name on availableServices": 1,
+   "nearbyResources on resourceAnalysis": 1,
+   "title on currentTensions": 1,
+   "type on conflicts": 1
+  },
+  "src/generators/cascadeGenerator.js": {
+   "processingInstitutions on chains": 1
+  },
+  "src/generators/computeActiveChains.js": {
+   "entrepot on chains": 3,
+   "entrepotNote on chains": 1,
+   "exportable on chains": 1,
+   "id on chains": 3,
+   "label on chains": 4,
+   "labelsByResource on chains": 1,
+   "minTier on chains": 1,
+   "outputs on chains": 1,
+   "outputsByResource on chains": 1,
+   "processingInstitutions on chains": 2,
+   "processingInstitutionsByResource on chains": 1,
+   "resource on chains": 3,
+   "resourceIcon on chains": 1,
+   "resourceSubstitutes on chains": 1,
+   "services on chains": 1,
+   "upstreamChains on chains": 1
+  },
+  "src/generators/defenseGenerator.js": {
+   "_foodSecurity on config": 1,
+   "_institutions on config": 1,
+   "magicExists on config": 2,
+   "tradeRoute on settlement": 1
+  },
+  "src/generators/economy/viability.js": {
+   "outputs on chains": 1,
+   "processingInstitutions on chains": 2,
+   "resource on chains": 3
+  },
+  "src/generators/factionCorrelation.js": {
+   "catalogCategories on outcome": 1,
+   "factionName on outcome": 1,
+   "strength on outcome": 1
+  },
+  "src/generators/factionDynamics.js": {
+   "economyOutput on inst": 2,
+   "safetyRatio on inst": 1
+  },
+  "src/generators/factionRoles.js": {
+   "id on institutions": 1
+  },
+  "src/generators/generationContext.js": {
+   "contentProfileId on config": 1,
+   "cultureProfileId on config": 1,
+   "priorityMagic on settlement": 1
+  },
+  "src/generators/generationReceiptJudgments.js": {
+   "cause on conflicts": 1,
+   "description on conflicts": 1,
+   "name on conflicts": 1,
+   "reason on conflicts": 1,
+   "tension on conflicts": 1,
+   "type on conflicts": 1
+  },
+  "src/generators/historyGenerator.js": {
+   "message on issues": 1,
+   "stability on economicViability": 1
+  },
+  "src/generators/isolationGenerator.js": {
+   "tags on npcs": 1
+  },
+  "src/generators/isolationSupport.js": {
+   "magicExists on config": 1
+  },
+  "src/generators/narrativeGenerator.js": {
+   "need on foodBalance": 1
+  },
+  "src/generators/neighbourGenerator.js": {
+   "dominantLabel on powerStructure": 1,
+   "institutions on powerStructure": 1,
+   "prosperityLevel on economicState": 1,
+   "summary on powerStructure": 1
+  },
+  "src/generators/services/institutionServices.js": {
+   "category on raw": 1,
+   "localUid on raw": 1,
+   "providedBy on raw": 1,
+   "requiredInstitution on raw": 1
+  },
+  "src/generators/steps/assembleInstitutions.js": {
+   "category on raw": 2,
+   "description on raw": 1,
+   "essential on raw": 1,
+   "localUid on raw": 3,
+   "tags on raw": 4
+  },
+  "src/generators/steps/assembleSettlement.js": {
+   "_neighbourRelType on config": 1
+  },
+  "src/generators/steps/economyReconcilePass.js": {
+   "category on raw": 1,
+   "criticality on raw": 1,
+   "customChains on economicState": 1,
+   "customTradeLabels on economicState": 1,
+   "desc on raw": 1,
+   "description on raw": 2,
+   "essential on raw": 1,
+   "localUid on raw": 4,
+   "providedBy on raw": 3
+  },
+  "src/generators/steps/generateEconomy.js": {
+   "customTradeLabels on economicState": 1,
+   "satisfies on raw": 2
+  },
+  "src/generators/steps/resolveConfig.js": {
+   "_categoryToggles on config": 1,
+   "_goodsToggles on config": 1,
+   "_institutionToggles on config": 1,
+   "_randomizePriorities on config": 1,
+   "_servicesToggles on config": 1,
+   "magicExists on config": 1,
+   "population on config": 4
+  },
+  "src/generators/steps/resolveNeighbour.js": {
+   "_importedNeighbor on config": 1,
+   "_neighbourRelType on config": 1,
+   "neighbourRelType on config": 1
+  },
+  "src/generators/steps/resolveResources.js": {
+   "criticality on raw": 1,
+   "essential on raw": 1,
+   "localUid on raw": 1,
+   "nearbyResourcesRandom on config": 3,
+   "resourceEdits on config": 1
+  },
+  "src/generators/steps/resolveStress.js": {
+   "selectedStresses on config": 1,
+   "selectedStressesRandom on config": 1,
+   "stressorEdits on config": 1
+  },
+  "src/generators/steps/stressConfirmPass.js": {
+   "selectedStresses on config": 1,
+   "selectedStressesRandom on config": 1,
+   "stressorEdits on config": 1
+  },
+  "src/generators/structuralValidator.js": {
+   "outOfTier on institutions": 2
+  },
+  "src/hooks/useConfirmPolling.js": {
+   "code on factions": 1,
+   "message on factions": 1,
+   "statusCode on factions": 1
+  },
+  "src/hooks/useOwnerScopedSaves.js": {
+   "savedSettlementsLoaded on eventLog": 1
+  },
+  "src/hooks/useReaderAudience.js": {
+   "lastExportAt on campaignState": 1
+  },
+  "src/hooks/useReturnVisit.js": {
+   "editedAt on campaignState": 1
+  },
+  "src/hooks/useRoute.js": {
+   "pushState on history": 2,
+   "replaceState on history": 3,
+   "state on history": 3
+  },
+  "src/lib/accountContentPortability.js": {
+   "bindingHash on history": 1
+  },
+  "src/lib/accountData.js": {
+   "email on settlement": 1,
+   "errors on settlement": 2
+  },
+  "src/lib/campaigns.js": {
+   "code on entries": 1,
+   "mapState on channels": 1,
+   "name on channels": 1,
+   "regionalGraph on channels": 1,
+   "status on entries": 2
+  },
+  "src/lib/campaignSync.js": {
+   "fmgSnapshot on settlement": 1
+  },
+  "src/lib/constructionUsage.js": {
+   "id on dependencies": 2
+  },
+  "src/lib/contentPacks.js": {
+   "field on dependencies": 1
+  },
+  "src/lib/copyGuard.js": {
+   "closest on settlement": 2
+  },
+  "src/lib/customContentArchive.js": {
+   "archiveFingerprint on foodBalance": 1,
+   "archiveFingerprint on npcs": 1,
+   "auditProvenance on npcs": 2,
+   "format on npcs": 2,
+   "formatVersion on npcs": 2,
+   "ledger on npcs": 12,
+   "ordinal on settlement": 1,
+   "packEntryId on settlement": 1,
+   "packId on settlement": 1,
+   "packVersion on settlement": 1,
+   "source on npcs": 3
+  },
+  "src/lib/customContentArchiveService.js": {
+   "archive on settlement": 1,
+   "fingerprint on settlement": 1,
+   "identityMap on settlement": 1,
+   "transfer on settlement": 6
+  },
+  "src/lib/customContentLocalArchive.js": {
+   "createdAt on npcs": 1,
+   "legacyContentId on npcs": 1,
+   "localUid on npcs": 1
+  },
+  "src/lib/customContentLocalEnvironment.js": {
+   "activePacks on factions": 1,
+   "commandReceipts on factions": 1,
+   "definitions on factions": 1,
+   "packEntryDefinitions on factions": 1,
+   "packEntryRevisions on factions": 1,
+   "packs on factions": 1,
+   "packVersionEntries on factions": 5
+  },
+  "src/lib/customContentLocalLedger.js": {
+   "definitionId on plan": 2,
+   "environment on plan": 7,
+   "expectedActiveEnvironmentRevisionId on plan": 1,
+   "expectedHeadRevisionId on plan": 2,
+   "kind on plan": 24,
+   "pack on plan": 22
+  },
+  "src/lib/customContentLocalReviewedChains.js": {
+   "artifactId on plan": 2,
+   "chain on plan": 2,
+   "expectedHeadRevisionId on plan": 1,
+   "expectedLifecycleVersion on plan": 1,
+   "kind on plan": 3
+  },
+  "src/lib/customContentReviewedSupplyChainService.js": {
+   "artifactId on plan": 3,
+   "chain on plan": 2,
+   "expectedHeadRevisionId on plan": 1,
+   "expectedLifecycleVersion on plan": 1,
+   "kind on plan": 1
+  },
+  "src/lib/customContentServiceRuntime.js": {
+   "definitionId on entries": 1,
+   "definitionId on plan": 1,
+   "environment on plan": 1,
+   "expectedHeadRevisionId on plan": 1,
+   "kind on plan": 7,
+   "pack on plan": 1,
+   "revisionId on entries": 1
+  },
+  "src/lib/customRegistry.js": {
+   "id on raw": 2,
+   "localUid on raw": 2,
+   "localUid on save": 1,
+   "name on raw": 1
+  },
+  "src/lib/dependencyEngine.js": {
+   "disablesGoods on raw": 2,
+   "disablesInstitutions on raw": 2,
+   "economicWeight on raw": 2,
+   "feedsChains on raw": 2,
+   "foodImpact on raw": 4,
+   "localUid on raw": 1,
+   "produces on raw": 2,
+   "providedBy on raw": 2,
+   "requiredInstitution on raw": 4,
+   "satisfies on raw": 2,
+   "subsumes on raw": 2
+  },
+  "src/lib/foundersHall.js": {
+   "chair on institutions": 1,
+   "displayName on institutions": 1
+  },
+  "src/lib/gallery.js": {
+   "governmentType on powerStructure": 1,
+   "primaryDeitySnapshot on config": 1
+  },
+  "src/lib/generationTelemetry.js": {
+   "archetype on stressors": 1,
+   "hooks on settlement": 1,
+   "neighbourNetwork on settlement": 1,
+   "neighbours on settlement": 1,
+   "plotHooks on settlement": 1,
+   "supplyChains on settlement": 1
+  },
+  "src/lib/importReconciliationAdmission.js": {
+   "conflictId on conflicts": 1,
+   "importedFrom on settlement": 1
+  },
+  "src/lib/importReconciliationSession.js": {
+   "candidateId on candidates": 1,
+   "code on conflicts": 1,
+   "confidence on candidates": 1,
+   "conflictId on conflicts": 1,
+   "matchClass on candidates": 1,
+   "proposalId on conflicts": 2,
+   "resolution on conflicts": 4,
+   "targetName on candidates": 1
+  },
+  "src/lib/instantWorld/composeInstantWorld.js": {
+   "fromId on channels": 1,
+   "sourceId on channels": 1,
+   "targetId on channels": 1,
+   "toId on channels": 1
+  },
+  "src/lib/interview.js": {
+   "citations on segments": 2,
+   "register on segments": 1,
+   "text on segments": 2
+  },
+  "src/lib/localAuthorityMutex.js": {
+   "request on locks": 2
+  },
+  "src/lib/pendingDossier.js": {
+   "checkoutToken on entries": 1,
+   "sessionId on entries": 2,
+   "stashedAt on entries": 4
+  },
+  "src/lib/prebuiltResourceChains.js": {
+   "exportable on chains": 1,
+   "id on chains": 4,
+   "label on chains": 2,
+   "outputs on chains": 3,
+   "resource on chains": 2
+  },
+  "src/lib/pulseFingerprint.js": {
+   "populationDeltas on powerStructure": 1,
+   "stressor on autoApplied": 1
+  },
+  "src/lib/regionalFingerprint.js": {
+   "tick on settlement": 1,
+   "wizardNews on settlement": 1
+  },
+  "src/lib/relationshipGraph.js": {
+   "config on save": 1,
+   "id on quarters": 1,
+   "tier on save": 1
+  },
+  "src/lib/researchCapture.js": {
+   "ai_data on save": 1,
+   "aiData on save": 1
+  },
+  "src/lib/roadNetwork.js": {
+   "burgId on channels": 1,
+   "neighbourNetwork on save": 2
+  },
+  "src/lib/saveAdmission.js": {
+   "_seed on config": 1,
+   "index on entries": 1
+  },
+  "src/lib/saves.js": {
+   "_seed on config": 1,
+   "categoryToggles on settlement": 1,
+   "goodsToggles on settlement": 1,
+   "institutionToggles on settlement": 1,
+   "neighbourNetwork on settlement": 2,
+   "servicesToggles on settlement": 1
+  },
+  "src/lib/seoDossier.js": {
+   "blurb on save": 1,
+   "path on save": 1,
+   "title on save": 2
+  },
+  "src/lib/shareImage.js": {
+   "governmentType on powerStructure": 1
+  },
+  "src/lib/spatialSubstrateDerive.js": {
+   "mapEdits on settlement": 1
+  },
+  "src/lib/stripe.js": {
+   "replaceState on history": 1
+  },
+  "src/lib/structuralFingerprint.js": {
+   "_categoryToggles on config": 1,
+   "_goodsToggles on config": 1,
+   "_importedNeighbor on config": 1,
+   "_institutionToggles on config": 1,
+   "_neighbourRelType on config": 2,
+   "_randomizePriorities on config": 2,
+   "_seed on config": 1,
+   "_servicesToggles on config": 1,
+   "ai_data on save": 1,
+   "aiData on save": 1,
+   "categoryToggles on config": 1,
+   "goodsToggles on config": 1,
+   "hooks on settlement": 1,
+   "importedNeighbour on config": 1,
+   "institutionToggles on config": 1,
+   "nearbyResourcesRandom on config": 2,
+   "neighbourNetwork on settlement": 1,
+   "neighbours on settlement": 1,
+   "plotHooks on settlement": 1,
+   "selectedStresses on config": 2,
+   "selectedStressesRandom on config": 1,
+   "services on settlement": 1,
+   "servicesToggles on config": 1,
+   "useCustomContent on config": 1,
+   "versionHistory on save": 1,
+   "worldState on campaignState": 1
+  },
+  "src/lib/supplyChains.js": {
+   "nearbyResources on settlement": 1,
+   "resources on settlement": 1
+  },
+  "src/lib/townScene/adaptiveQuality.js": {
+   "birdsEye on save": 1,
+   "birdsEyeFrames on save": 1,
+   "ceiling on save": 1,
+   "ema on save": 2,
+   "overFrames on save": 1,
+   "quality on save": 1,
+   "underFrames on save": 1
+  },
+  "src/pdf/lib/format.js": {
+   "good on crimeTypes": 1,
+   "label on crimeTypes": 1,
+   "name on crimeTypes": 1,
+   "title on crimeTypes": 1
+  },
+  "src/pdf/lib/headlines.js": {
+   "all on settlement": 1,
+   "events on history": 1,
+   "sorted on settlement": 1,
+   "tensions on history": 1
+  },
+  "src/pdf/lib/liveWorld.js": {
+   "cultDeitySnapshots on config": 2,
+   "primaryDeitySnapshot on config": 1,
+   "saveId on settlement": 1
+  },
+  "src/pdf/lib/viewModel.js": {
+   "activeMagicChains on economicViability": 2,
+   "age on npcs": 1,
+   "appearance on npcs": 1,
+   "blurb on factions": 1,
+   "blurb on npcs": 2,
+   "body on historicalEvents": 1,
+   "body on plotHooks": 1,
+   "byDesignContradictions on economicViability": 2,
+   "category on historicalEvents": 1,
+   "cause on historicalEvents": 1,
+   "coherenceNotes on economicViability": 1,
+   "consequences on historicalEvents": 1,
+   "content on plotHooks": 1,
+   "criticalIssues on economicViability": 1,
+   "crossFactions on settlement": 1,
+   "crossSettlementConflicts on settlement": 1,
+   "crossSettlementNPCContacts on settlement": 1,
+   "culture on npcs": 1,
+   "culture on settlement": 1,
+   "description on conflicts": 2,
+   "description on factions": 1,
+   "description on npcs": 1,
+   "description on plotHooks": 2,
+   "description on quarters": 2,
+   "detail on historicalEvents": 1,
+   "dominantCulture on config": 1,
+   "dominantCulture on settlement": 1,
+   "dominantRace on settlement": 2,
+   "emergentConditions on settlement": 1,
+   "faction on npcs": 3,
+   "foodSecurity on economicViability": 1,
+   "foundedBy on history": 2,
+   "governmentType on powerStructure": 3,
+   "governmentType on settlement": 3,
+   "hooks on historicalEvents": 1,
+   "initialChallenge on history": 2,
+   "institution on issues": 1,
+   "interSettlementRelationships on settlement": 1,
+   "kind on historicalEvents": 1,
+   "label on currentTensions": 3,
+   "label on factions": 1,
+   "label on plotHooks": 1,
+   "legacy on historicalEvents": 1,
+   "magicalCapability on defenseProfile": 1,
+   "magnitude on historicalEvents": 1,
+   "matchedGroups on factions": 1,
+   "modifiers on factions": 1,
+   "motivation on npcs": 1,
+   "nearbyResources on resourceAnalysis": 1,
+   "neighbourNetwork on settlement": 1,
+   "neighbours on settlement": 1,
+   "npcRelationships on settlement": 2,
+   "origin on founding": 2,
+   "origin on history": 2,
+   "outcome on historicalEvents": 1,
+   "overcoming on history": 2,
+   "parties on currentTensions": 3,
+   "previousGovernments on powerStructure": 2,
+   "priorityNote on issues": 1,
+   "race on npcs": 2,
+   "race on settlement": 2,
+   "reason on history": 2,
+   "recency on historicalEvents": 1,
+   "recencyLabel on historicalEvents": 1,
+   "relationships on npcs": 1,
+   "resolution on historicalEvents": 1,
+   "scale on historicalEvents": 1,
+   "search on personality": 1,
+   "secrets on npcs": 1,
+   "stressConsequences on economicViability": 2,
+   "structuralSuggestions on economicViability": 1,
+   "subFactions on factions": 1,
+   "summary on foodBalance": 1,
+   "summary on founding": 2,
+   "summary on historicalEvents": 1,
+   "summary on plotHooks": 1,
+   "terrain on settlement": 3,
+   "terrainAdvantages on resourceAnalysis": 1,
+   "terrainCriticals on resourceAnalysis": 1,
+   "text on historicalEvents": 1,
+   "text on plotHooks": 2,
+   "title on historicalEvents": 1,
+   "title on plotHooks": 2,
+   "trigger on historicalEvents": 1,
+   "verdict on economicViability": 3,
+   "warnings on settlement": 2,
+   "years_ago on historicalEvents": 1
+  },
+  "src/pdf/lib/viewModelBodySlices.js": {
+   "accessibility on exploitation": 1,
+   "amount on incomeSources": 1,
+   "availableResources on settlement": 1,
+   "blurb on institutions": 1,
+   "building on institutions": 1,
+   "capacity on institutions": 1,
+   "chainDepth on institutions": 1,
+   "chainKey on exploitation": 1,
+   "chainName on activeChains": 1,
+   "chainStatus on exploitation": 1,
+   "clientele on institutions": 1,
+   "criminalCapture on safetyProfile": 1,
+   "customCategoryExports on economicState": 1,
+   "customCategoryImports on economicState": 1,
+   "customChains on economicState": 1,
+   "customers on institutions": 1,
+   "customTradeEndpoints on economicState": 1,
+   "customTradeLabels on economicState": 1,
+   "dependencies on institutions": 1,
+   "description on activeChains": 1,
+   "description on institutions": 1,
+   "exportPotential on resourceAnalysis": 1,
+   "exportPotential on settlement": 1,
+   "finalProducts on exploitation": 1,
+   "foodSecurity on economicViability": 2,
+   "founded on institutions": 1,
+   "foundedYear on institutions": 1,
+   "guardAssessment on defenseProfile": 1,
+   "headedBy on institutions": 1,
+   "id on institutions": 1,
+   "incomeContribution on activeChains": 1,
+   "institution on exploitation": 1,
+   "institution on issues": 1,
+   "isService on activeChains": 1,
+   "kind on activeChains": 1,
+   "label on institutions": 1,
+   "leader on institutions": 1,
+   "location on institutions": 1,
+   "magicalCapability on defenseProfile": 1,
+   "master on institutions": 1,
+   "name on activeChains": 1,
+   "name on exploitation": 1,
+   "nativeTradeLabels on economicState": 1,
+   "nearbyResources on resourceAnalysis": 1,
+   "notableUnits on institutions": 1,
+   "notes on institutions": 1,
+   "output on exploitation": 1,
+   "outputs on exploitation": 1,
+   "outputs on institutions": 1,
+   "plotHooks on activeChains": 1,
+   "plotHooks on institutions": 1,
+   "pressures on institutions": 1,
+   "priorityNote on issues": 1,
+   "priorityNotes on economicViability": 1,
+   "processing on activeChains": 1,
+   "processing on exploitation": 1,
+   "processingInstitutions on exploitation": 1,
+   "product on exploitation": 1,
+   "products on institutions": 1,
+   "prominence on institutions": 1,
+   "quality on exploitation": 1,
+   "quarter on institutions": 1,
+   "raw on incomeSources": 1,
+   "rawResource on exploitation": 1,
+   "requirements on institutions": 1,
+   "resource on exploitation": 1,
+   "scale on institutions": 1,
+   "services on institutions": 1,
+   "servicesOffered on institutions": 1,
+   "shadowEconomy on safetyProfile": 1,
+   "shadowEconomy on settlement": 1,
+   "staffing on institutions": 1,
+   "statusNote on institutions": 1,
+   "statusReason on institutions": 1,
+   "stresses on institutions": 1,
+   "structuralGaps on resourceAnalysis": 1,
+   "structuralGaps on settlement": 1,
+   "subCategory on institutions": 1,
+   "summary on foodBalance": 1,
+   "terrainAdvantages on resourceAnalysis": 1,
+   "terrainCriticals on resourceAnalysis": 2,
+   "terrainEffects on resourceAnalysis": 1,
+   "terrainEffects on settlement": 1,
+   "tradeLinks on economicState": 1,
+   "type on institutions": 1,
+   "value on incomeSources": 1,
+   "vulnerabilities on defenseProfile": 1
+  },
+  "src/pdf/lib/viewModelPrimitives.js": {
+   "need on foodBalance": 1,
+   "production on foodBalance": 1
+  },
+  "src/pdf/sections/Cover.jsx": {
+   "dominantRace on settlement": 1,
+   "race on settlement": 1,
+   "region on settlement": 1,
+   "terrain on settlement": 1
+  },
+  "src/pdf/sections/EconomicsTrade.jsx": {
+   "dependency on chains": 2,
+   "description on chains": 1,
+   "hooks on chains": 2,
+   "incomeContribution on chains": 2,
+   "isCriminal on incomeSources": 1,
+   "name on chains": 1,
+   "name on incomeSources": 1,
+   "need on foodBalance": 1,
+   "outputs on chains": 2,
+   "processingInstitutions on chains": 2,
+   "production on foodBalance": 1,
+   "status on chains": 2
+  },
+  "src/pdf/sections/HistoryFounding.jsx": {
+   "events on history": 1,
+   "summary on founding": 2,
+   "tensions on history": 3
+  },
+  "src/pdf/sections/IdentityDailyLife.jsx": {
+   "event on founding": 1,
+   "label on founding": 1,
+   "summary on founding": 1
+  },
+  "src/pdf/sections/NotableNPCs.jsx": {
+   "name on relationships": 1,
+   "target on relationships": 1,
+   "with on relationships": 1
+  },
+  "src/pdf/sections/Overview.jsx": {
+   "description on conflicts": 2,
+   "description on prominentRelationship": 2,
+   "description on quarters": 2,
+   "foundedBy on history": 1,
+   "hook on stress": 3,
+   "hooks on conflicts": 2,
+   "origin on history": 1,
+   "otherSettlement on prominentRelationship": 1,
+   "production on foodBalance": 2,
+   "relationshipType on prominentRelationship": 1
+  },
+  "src/pdf/sections/PowerStructure.jsx": {
+   "description on conflicts": 2,
+   "hooks on conflicts": 2
+  },
+  "src/pdf/sections/SupplyChainFlow.jsx": {
+   "id on chains": 2,
+   "status on chains": 3
+  },
+  "src/pdf/sections/Timeline.jsx": {
+   "appliedAt on eventLog": 1
+  },
+  "src/pdf/sections/ViabilityAssessment.jsx": {
+   "hook on stress": 5
+  },
+  "src/store/aiChronicleContext.js": {
+   "canonizedAt on campaignState": 1,
+   "recentEvents on settlement": 1,
+   "worldPulse on campaignState": 1,
+   "worldState on campaignState": 2
+  },
+  "src/store/aiSlice.js": {
+   "getCampaignForSettlement on powerStructure": 1,
+   "getCampaignRegionalGraph on powerStructure": 1,
+   "getCampaignWorldState on powerStructure": 1,
+   "savedSettlements on powerStructure": 2,
+   "showNarrative on settlement": 1
+  },
+  "src/store/campaignCanonRelationshipSession.js": {
+   "event on eventLog": 1
+  },
+  "src/store/campaignContentBindingSession.js": {
+   "config on save": 1,
+   "configExplicitFields on save": 1,
+   "seed on save": 1
+  },
+  "src/store/campaignPulseHelpers.js": {
+   "canonizedAt on campaignState": 2,
+   "exportState on campaignState": 1,
+   "generatedAt on campaignState": 2,
+   "lastExportAt on campaignState": 2,
+   "narrativeDrift on campaignState": 1,
+   "parentRef on settlement": 1,
+   "systemState on campaignState": 3
+  },
+  "src/store/campaignRegionalSlice.js": {
+   "systemState on campaignState": 2
+  },
+  "src/store/campaignSlice.js": {
+   "campaigns on settlement": 1
+  },
+  "src/store/campaignSliceShared.js": {
+   "campaigns on settlement": 2
+  },
+  "src/store/campaignWorldPulseDeferred.js": {
+   "parentRef on settlement": 1,
+   "systemState on campaignState": 2
+  },
+  "src/store/canonEventCommandTransaction.js": {
+   "afterCommit on institutions": 1,
+   "applyLegacy on institutions": 2,
+   "command on institutions": 8,
+   "editedAt on campaignState": 1,
+   "event on institutions": 18,
+   "savedSettlements on settlement": 1,
+   "systemState on campaignState": 1
+  },
+  "src/store/customContentEnvironmentSession.js": {
+   "expectedActiveEnvironmentRevisionId on plan": 1
+  },
+  "src/store/customContentSliceRuntime.js": {
+   "category on entries": 1,
+   "data on entries": 1,
+   "definitionId on entries": 1,
+   "definitionId on settlement": 1,
+   "environment on plan": 1,
+   "expectedHeadRevisionId on entries": 1,
+   "item on entries": 1,
+   "packEntryId on entries": 1
+  },
+  "src/store/galleryImportMap.js": {
+   "_seed on config": 1,
+   "auth on config": 1,
+   "old_id on members": 1,
+   "settlement on members": 3,
+   "tier on members": 1
+  },
+  "src/store/importReconciliationCommandTransaction.js": {
+   "importedFrom on settlement": 3
+  },
+  "src/store/instantWorldBody.js": {
+   "sites on plan": 1
+  },
+  "src/store/mapSlice.js": {
+   "tier on save": 1
+  },
+  "src/store/selectors.js": {
+   "magicExists on config": 1,
+   "population on config": 1
+  },
+  "src/store/settlementContentRuntime.js": {
+   "useCustomContent on config": 1
+  },
+  "src/store/settlementDeityHelpers.js": {
+   "cultDeitySnapshots on config": 6,
+   "primaryDeitySnapshot on config": 2
+  },
+  "src/store/settlementPendingEdits.js": {
+   "contestBacking on npcs": 1,
+   "editedAt on campaignState": 1,
+   "facets on npcs": 1,
+   "kind on npcs": 4,
+   "pendingEditsQueue on factions": 1,
+   "stasis on npcs": 1,
+   "timestamp on save": 1
+  },
+  "src/store/settlementPendingEditWriters.js": {
+   "contestBacking on npcs": 1,
+   "event on eventLog": 1,
+   "facets on npcs": 2,
+   "sourceIntentId on eventLog": 2,
+   "stasis on npcs": 1
+  },
+  "src/store/settlementRenameHelpers.js": {
+   "systemState on campaignState": 1
+  },
+  "src/store/settlementSlice.js": {
+   "aiData on save": 7,
+   "aiSettlement on save": 1,
+   "canonizedAt on campaignState": 1,
+   "editedAt on campaignState": 1,
+   "event on eventLog": 3,
+   "generatedAt on campaignState": 1,
+   "lastExportAt on campaignState": 1,
+   "seed on save": 1,
+   "systemState on campaignState": 2,
+   "type on eventLog": 2,
+   "undo on eventLog": 1
+  },
+  "src/store/settlementSliceHelpers.js": {
+   "beforeState on eventLog": 1,
+   "event on eventLog": 1,
+   "flavor on eventLog": 1,
+   "tier on save": 1
+  },
+  "src/utils/generateCampaignPDF.js": {
+   "culture on settlement": 2,
+   "getStringUnitWidth on settlement": 1,
+   "hooks on settlement": 1,
+   "internal on settlement": 1,
+   "interSettlementRelationships on settlement": 1,
+   "line on settlement": 1,
+   "neighbourNetwork on settlement": 3,
+   "plotHooks on settlement": 1,
+   "setFont on settlement": 1,
+   "setFontSize on settlement": 1,
+   "setLineWidth on settlement": 1,
+   "text on settlement": 2
+  },
+  "src/utils/generateSettlementPDF.js": {
+   "data on settlement": 1
+  },
+  "src/utils/generateWorldBook.js": {
+   "arrivalScene on history": 1,
+   "covert on entries": 1,
+   "culture on settlement": 1,
+   "hooks on settlement": 2,
+   "plotHooks on settlement": 2,
+   "pressureSentence on history": 1,
+   "rect on settlement": 2,
+   "setLineWidth on settlement": 1,
+   "source on entries": 1,
+   "type on edges": 1,
+   "type on institutions": 1
+  }
  }
 }

@@ -25,6 +25,7 @@
  */
 import { describe, it, expect, beforeAll } from 'vitest';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import url from 'node:url';
 import { ESLint } from 'eslint';
@@ -145,11 +146,92 @@ function gatherClaims() {
   return claims;
 }
 
+// ── executed-text narrowing ──────────────────────────────────────────────────
+// A COMMENT IS NOT ENFORCEMENT. The one-hop resolver below concatenates the text
+// of every script the check chain names; its first spelling concatenated the
+// ENTIRE text, comments included, so an `@enforced-by <path>` could resolve off a
+// prose mention rather than executed enforcement. That is not hypothetical in
+// this repo: `scripts/check-domain-strict.mjs` names `tsconfig.full.json` exactly
+// once, in its header comment ("Step 9 is `typecheck:ratchet` over
+// `tsconfig.full.json`"), and executes it never. Under the un-narrowed resolver
+// that comment alone kept the full-typecheck config "gate-reachable" even with
+// the step that actually runs it deleted from the chain.
+//
+// So: strip comments, keep code AND string-literal contents — the enforcement a
+// script performs lives in its arguments (`'npx tsc --noEmit -p
+// tsconfig.full.json'`), which are string literals, not in its prose.
+const REGEX_PRECEDER_RE =
+  /[([{;,:=?!&|+\-*%~^<>]$|\b(?:return|typeof|instanceof|in|of|new|delete|void|case|do|else|yield|await)$/;
+
+function stripShellComments(src) {
+  return src.split('\n').map((line) => {
+    let quote = null;
+    let out = '';
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (c === '\\' && quote !== "'") { out += line.slice(i, i + 2); i++; continue; }
+      if (quote) { out += c; if (c === quote) quote = null; continue; }
+      if (c === '"' || c === "'") { quote = c; out += c; continue; }
+      // `#` only opens a comment at a word boundary — `$#` and `${#v}` are code.
+      if (c === '#' && (i === 0 || /\s/.test(line[i - 1]))) break;
+      out += c;
+    }
+    return out;
+  }).join('\n');
+}
+
+/**
+ * Remove comment spans, preserving code and string/template/regex literals.
+ * Regex literals are tracked (via the preceding significant token) so a pattern
+ * like `/https:\/\//` is not mistaken for a line comment and does not swallow
+ * the rest of its line.
+ */
+export function executedText(src, file = '') {
+  if (/\.sh$/.test(file)) return stripShellComments(src);
+  let out = '';
+  let tail = ''; // last ≤16 emitted chars — enough for the longest keyword preceder
+  const emit = (s) => { out += s; tail = (tail + s).slice(-16); };
+  for (let i = 0; i < src.length;) {
+    const c = src[i];
+    const d = src[i + 1];
+    if (c === '/' && d === '/') { while (i < src.length && src[i] !== '\n') i++; continue; }
+    if (c === '/' && d === '*') {
+      i += 2;
+      while (i < src.length && !(src[i] === '*' && src[i + 1] === '/')) i++;
+      i += 2;
+      continue;
+    }
+    if (c === '"' || c === "'" || c === '`') {
+      emit(c); i++;
+      while (i < src.length) {
+        const s = src[i];
+        if (s === '\\') { emit(src.slice(i, i + 2)); i += 2; continue; }
+        emit(s); i++;
+        if (s === c) break;
+      }
+      continue;
+    }
+    if (c === '/' && REGEX_PRECEDER_RE.test(tail.replace(/\s+$/, ''))) {
+      emit(c); i++;
+      let inClass = false;
+      while (i < src.length) {
+        const s = src[i];
+        if (s === '\\') { emit(src.slice(i, i + 2)); i += 2; continue; }
+        if (s === '[') inClass = true;
+        else if (s === ']') inClass = false;
+        emit(s); i++;
+        if (s === '\n') break;            // unterminated: it was not a regex
+        if (s === '/' && !inClass) break;
+      }
+      continue;
+    }
+    emit(c); i++;
+  }
+  return out;
+}
+
 // ── gate reachability ────────────────────────────────────────────────────────
 const pkg = JSON.parse(fs.readFileSync(rel('package.json'), 'utf8'));
-const CHECK = pkg.scripts.check || '';
-const CHECK_SUBNAMES = [...CHECK.matchAll(/npm run ([\w:-]+)/g)].map((m) => m[1]);
-const CHECK_CMD_TEXT = CHECK_SUBNAMES.map((n) => pkg.scripts[n] || '').join('\n');
 
 // ONE HOP THROUGH A DELEGATING GATE STEP.
 // `resolveTarget` asks "is this enforcer REACHABLE FROM THE GATE?" and answered it
@@ -161,15 +243,33 @@ const CHECK_CMD_TEXT = CHECK_SUBNAMES.map((n) => pkg.scripts[n] || '').join('\n'
 // (`node scripts/check-full-typecheck.mjs`): the ratchet still runs
 // tsconfig.full.json on every gate run, but the literal moved one file away and
 // ARCHITECTURE.md's `@enforced-by tsconfig.full.json` stopped resolving.
-// A config a gate-run script names IS gate-reachable, so follow the hop. This only
-// ever ADDS resolvable targets; a target naming a non-existent path still fails.
+// A config a gate-run script EXECUTES is gate-reachable, so follow the hop —
+// through executed text only. This only ever ADDS resolvable targets; a target
+// naming a non-existent path still fails.
 const GATE_SCRIPT_RE = /\bscripts\/[\w./-]+\.(?:mjs|js|cjs|sh)\b/g;
-const CHECK_CMDS = [
-  CHECK_CMD_TEXT,
-  ...[...new Set(CHECK_CMD_TEXT.match(GATE_SCRIPT_RE) || [])]
-    .filter((p) => fs.existsSync(rel(p)))
-    .map((p) => fs.readFileSync(rel(p), 'utf8')),
-].join('\n');
+
+/**
+ * The gate's reachable ENFORCEMENT surface for a given package `scripts` map,
+ * rooted at `root`. Pure in its inputs, so the mutants below drive this exact
+ * resolver against a THROWAWAY package.json instead of a hand-simulated copy.
+ */
+export function gateReach(scripts, root) {
+  const check = scripts.check || '';
+  const subnames = [...check.matchAll(/npm run ([\w:-]+)/g)].map((m) => m[1]);
+  const cmdText = subnames.map((n) => scripts[n] || '').join('\n');
+  const hops = [...new Set(cmdText.match(GATE_SCRIPT_RE) || [])]
+    .filter((p) => fs.existsSync(path.join(root, p)))
+    .map((p) => executedText(fs.readFileSync(path.join(root, p), 'utf8'), p));
+  return { subnames, text: [cmdText, ...hops].join('\n') };
+}
+
+const GATE = gateReach(pkg.scripts, REPO);
+const CHECK_SUBNAMES = GATE.subnames;
+const CHECK_CMDS = GATE.text;
+
+// The full typecheck's identity is its CONFIG, not the step's name. See the pin
+// below for why the name is not admissible evidence.
+const FULL_TYPECHECK_CONFIG = 'tsconfig.full.json';
 
 const claims = gatherClaims();
 
@@ -235,6 +335,115 @@ describe('enforcement-claims meta-pin (A+ P1.1)', () => {
       'the check chain runs no typecheck step at all',
     ).not.toEqual([]);
     expect(CHECK_SUBNAMES).toEqual(expect.arrayContaining(['lint', 'test']));
+  });
+
+  // A NAME IS NOT EVIDENCE. The pin above is satisfied by ANY step whose name
+  // begins `typecheck` — and the chain carries two of them
+  // (`typecheck:ratchet` over tsconfig.full.json, `typecheck:domain:strict` over
+  // tsconfig.domain-strict.json, which disagree by construction). So deleting
+  // the FULL typecheck from the chain entirely leaves that pin green, which is
+  // the whole failure it was written to prevent. The full typecheck's identity
+  // is its CONFIG; assert the config is reachable through EXECUTED gate text.
+  it('`npm run check` still runs the FULL typecheck — the config, not a step name', () => {
+    expect(fs.existsSync(rel(FULL_TYPECHECK_CONFIG)), `${FULL_TYPECHECK_CONFIG} is missing`).toBe(true);
+    expect(
+      GATE.text.includes(FULL_TYPECHECK_CONFIG),
+      `no \`npm run check\` step EXECUTES ${FULL_TYPECHECK_CONFIG}. The whole-repo typecheck`
+      + ' has left the gate — restore the step that runs it (currently `typecheck:ratchet`,'
+      + ' scripts/check-full-typecheck.mjs). A step merely NAMED typecheck does not satisfy this.',
+    ).toBe(true);
+  });
+
+  // ── the pin's own mutant: a THROWAWAY package.json with the step deleted ────
+  describe('the full-typecheck step cannot leave the chain unnoticed', () => {
+    /** A throwaway repo root: a mutated package.json plus the REAL scripts/ dir,
+     *  so the one-hop resolver reads the live enforcers and only the chain moves. */
+    function throwawayRoot(mutate) {
+      const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'enforcement-claims-'));
+      const scripts = JSON.parse(JSON.stringify(pkg.scripts));
+      mutate(scripts);
+      fs.writeFileSync(path.join(dir, 'package.json'), JSON.stringify({ scripts }, null, 2));
+      fs.symlinkSync(rel('scripts'), path.join(dir, 'scripts'), 'dir');
+      const thrown = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8'));
+      return gateReach(thrown.scripts, dir);
+    }
+
+    const FULL_STEP = 'typecheck:ratchet';
+    const dropStep = (s) => {
+      s.check = s.check.split(' && ').filter((c) => c.trim() !== `npm run ${FULL_STEP}`).join(' && ');
+    };
+
+    it('CONTROL: an untouched throwaway resolves the full-typecheck config', () => {
+      expect(throwawayRoot(() => {}).text.includes(FULL_TYPECHECK_CONFIG)).toBe(true);
+    });
+
+    it('MUTANT: deleting the full-typecheck step from the chain REDS the pin', () => {
+      const mutant = throwawayRoot(dropStep);
+      expect(mutant.subnames, 'the mutant did not actually remove the step').not.toContain(FULL_STEP);
+      expect(mutant.text.includes(FULL_TYPECHECK_CONFIG)).toBe(false);
+    });
+
+    it('the OLD name-prefix pin stays GREEN under that same mutant (why this pin exists)', () => {
+      // `typecheck:domain:strict` survives the deletion and satisfies the name
+      // filter on its own, so the weakened form proved nothing about the full
+      // typecheck. This control fails the day that stops being true — at which
+      // point the name filter has become load-bearing again and can be revisited.
+      const mutant = throwawayRoot(dropStep);
+      expect(mutant.subnames.filter((n) => /^typecheck(:|$)/.test(n))).not.toEqual([]);
+    });
+
+    it('and it reds for the RIGHT reason: comments do not keep the config reachable', () => {
+      // With `typecheck:ratchet` gone, the only remaining mention of
+      // tsconfig.full.json anywhere in the chain's scripts is
+      // check-domain-strict.mjs's header COMMENT. Un-narrowed, that comment alone
+      // held the pin green; this asserts the raw text still contains it while the
+      // executed text does not — the narrowing is what makes the mutant bite.
+      const mutant = throwawayRoot(dropStep);
+      const rawHops = mutant.subnames
+        .map((n) => pkg.scripts[n] || '').join('\n')
+        .match(GATE_SCRIPT_RE) || [];
+      const rawText = [...new Set(rawHops)]
+        .filter((p) => fs.existsSync(rel(p)))
+        .map((p) => fs.readFileSync(rel(p), 'utf8')).join('\n');
+      expect(rawText.includes(FULL_TYPECHECK_CONFIG), 'the comment mention has gone — update this control').toBe(true);
+      expect(mutant.text.includes(FULL_TYPECHECK_CONFIG)).toBe(false);
+    });
+  });
+
+  // ── the narrowing, proven BOTH ways ────────────────────────────────────────
+  describe('one-hop resolution reads EXECUTED text, not comments', () => {
+    function probeGate(body) {
+      const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'enforcement-probe-'));
+      fs.mkdirSync(path.join(dir, 'scripts'));
+      fs.writeFileSync(path.join(dir, 'scripts', 'probe.mjs'), body);
+      return gateReach({ check: 'npm run probe', probe: 'node scripts/probe.mjs' }, dir).text;
+    }
+    const TARGET = 'tsconfig.__probe_only__.json';
+
+    it('a target named ONLY in a comment does NOT resolve', () => {
+      expect(probeGate(`// runs ${TARGET} eventually\nexport const x = 1;\n`)).not.toContain(TARGET);
+      expect(probeGate(`/**\n * step over \`${TARGET}\`\n */\nexport const x = 1;\n`)).not.toContain(TARGET);
+    });
+
+    it('a target in an EXECUTED argument string still resolves', () => {
+      expect(probeGate(`execSync('npx tsc --noEmit -p ${TARGET}');\n`)).toContain(TARGET);
+      expect(probeGate(`const cfg = \`${TARGET}\`;\n`)).toContain(TARGET);
+    });
+
+    it('the stripper preserves code that only LOOKS like a comment', () => {
+      // A `//` inside a regex literal or a string must not swallow its line —
+      // over-stripping would drop real enforcement and fail this guard closed.
+      expect(executedText('const u = "https://x/tsconfig.a.json";\n')).toContain('tsconfig.a.json');
+      expect(executedText('const r = /https:\\/\\//; const p = "tsconfig.b.json";\n')).toContain('tsconfig.b.json');
+      expect(executedText('const s = "/* not a comment */ tsconfig.c.json";\n')).toContain('tsconfig.c.json');
+      expect(executedText('# comment tsconfig.d.json\nrun tsconfig.e.json\n', 'x.sh')).not.toContain('tsconfig.d.json');
+      expect(executedText('# comment tsconfig.d.json\nrun tsconfig.e.json\n', 'x.sh')).toContain('tsconfig.e.json');
+    });
+
+    it('every live @enforced-by path target still resolves through the narrowed text', () => {
+      // The narrowing must not have quietly broken the motivating case.
+      expect(resolveTarget(FULL_TYPECHECK_CONFIG).ok).toBe(true);
+    });
   });
 
   it('every completeness claim carries an @enforced-by tag with ≥1 target', () => {
