@@ -26,6 +26,17 @@
  *   3. The baseline may never GROW: an entry naming a pair that is not a live
  *      cross-layer import is stale by definition and reds under (2).
  *
+ * ⚠ THE ONE NARROW EXCEPTION TO (3), and it is narrow on purpose (2026-08-07). When a
+ * layering repair moves the SYMBOL a frozen legacy pair reads into a smaller provider
+ * inside the SAME layer, (1) and (2) fire together and the honest record is a
+ * COUNT-NEUTRAL RETARGET of the existing entry — not a bank plus a fresh mint, which
+ * would either force a false licence row or block the cleanup that the layer walkers
+ * demand. A retarget is NOT a general escape hatch: the importer, the direction and the
+ * read symbol must all be unchanged, and the entry carries a `note` field recording the
+ * move so it is machine-visible rather than silent. Exactly one entry carries one today
+ * (peaceTermsPrimitives.js, warReasons.js -> warReasonTaxonomy.js at 67f8a58e). A
+ * retarget that changes what is READ is a new coupling and must go through (1).
+ *
  * Declared-empty directions stay enforced as the ABSENCE of rows (J-CPL-2 — no
  * forbidden-list lives anywhere in this estate).
  *
@@ -122,7 +133,15 @@ const LAYER_PATTERNS = Object.freeze({
     /^src\/domain\/spatial\/(?:rumorNetwork|intelActs)\.js$/,
   ],
   GRAMMAR: [
-    /^src\/domain\/worldPulse\/(?:treaty|peaceTerms|peaceReasons|peaceEngine|negotiationPictures|envoy)/,
+    // 2026-08-07: `negotiationPictures` widened to `negotiation[A-Z]`. The layering
+    // repair at 67f8a58e split the picture module into a RECORD half and an
+    // EVALUATION half, and the new `negotiationEvaluation.js` matched nothing — the
+    // exact CR-FP-11 reach gap, reopened by a split rather than by a new leaf. It
+    // takes GRAMMAR on the reading this table draws everywhere else: pricing a peace
+    // through the term leaves is the pact grammar's own subject, not shared
+    // vocabulary. The idiom is `belief[A-Z]` / `commercial[A-Z]` / `pact[A-Z]`, and
+    // it claims the negotiation family the day a member lands instead of trailing it.
+    /^src\/domain\/worldPulse\/(?:treaty|peaceTerms|peaceReasons|peaceEngine|negotiation[A-Z]|envoy)/,
     // CR-FP-11 arm A: GR-0's news/receipt pools and GR-1's oath-holder identity. The
     // pact grammar's own leaves are GRAMMAR whatever noun they are named after.
     /^src\/domain\/worldPulse\/(?:grammar[A-Z]|oath[A-Z])/,
@@ -209,6 +228,19 @@ const ARGUED_UNLAYERED = Object.freeze({
   // tests/lint/errandConsumerRegistry.walker.test.js, which is a stricter register than
   // an import pair (it reds an unregistered minter AND a registry row with no minter).
   'src/domain/worldPulse/errandMint.js': 'SP substrate — the estate\'s ONE purposeful-travel mint head (J-SP-2), minted through by five ports; consumers registered in ERRAND_CONSUMERS',
+  // 2026-08-07, and it is the worldState.js argument one rung down rather than a new
+  // one. The layering repair at 67f8a58e lifted the four `worldState.spatialLedgers`
+  // accessors verbatim out of distanceRead.js so a property read would stop dragging a
+  // 53 kB digest reader onto first paint. What the leaf accesses is a CONTAINER, not a
+  // subject: the sub-ledgers nested under that one key belong to WAR (warReasons,
+  // embattlement), INFORMATION (beliefMaps, rumorLedgers), TRADE (supplyShipments), POP
+  // (spatialArrivals) and every future mover. Giving it a port would make each layer's
+  // read of ITS OWN ledger a cross-layer coupling — hosting by another name, which is
+  // precisely the argument the four infrastructure hosts carry. The baseline was the
+  // wrong door for the opposite reason it is usually wrong: that file is for the
+  // volume's §4 PRE-PROGRAM debt, and a module minted this week is not that, so putting
+  // it there would launder a program-era edit into permanent invisibility.
+  'src/domain/spatial/spatialLedgerAccess.js': 'infrastructure accessor — the ONE spatialLedgers namespace container, whose sub-ledgers are owned by WAR, INFORMATION, TRADE, POP and every future mover; a port here would make each layer\'s read of its own ledger a cross-layer coupling',
 });
 
 /** The FP scope the unlayered census is TOTAL over. */

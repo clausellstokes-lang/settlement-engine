@@ -4,9 +4,13 @@
  *
  * WHY IT IS ITS OWN LEAF AND NOT PART OF `negotiationPictures.js`. That module
  * sits inside the K3 negotiation fence: it accepts only versioned, qualitative
- * records, its reviewed import set is `./peaceTerms.js` alone, and the word
+ * records, its reviewed import set is a single peace-term leaf (it was the
+ * `./peaceTerms.js` barrel until the layering repair at 67f8a58e repointed both
+ * halves of the wrapper at the leaves that define what they take), and the word
  * `economicState` is one of the true-state tokens the fence forbids it to
- * contain (tests/domain/envoyK3BeliefSeam.test.js). Turning live settlement
+ * contain (tests/domain/envoyK3BeliefSeam.test.js). THIS FILE IS THE FENCE'S
+ * DECLARED OUTSIDE, listed in that test's REVIEWED_NEGOTIATION_EXEMPTIONS with
+ * this reasoning. Turning live settlement
  * facts into a picture is exactly the job the fence pushes OUTSIDE itself —
  * `envoyNegotiationPictureBuilder.js`'s header says so in as many words — so the
  * read lives here, one hop outside, and the fenced module never learns it exists.

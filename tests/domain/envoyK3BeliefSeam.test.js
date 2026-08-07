@@ -176,11 +176,17 @@ const NEGOTIATION_MODULES = Object.freeze({
     './envoyErrandTransit.js',
     './envoyErrandVocabulary.js',
   ],
+  // AMENDED 2026-08-07: gains `./negotiationEvaluation.js`. The parlay is one of the
+  // four evaluation consumers whose import SITE moved when the picture module split —
+  // it still calls `negotiateFromPictures`, it just names the half that owns it. The
+  // reach did not widen: the evaluation half's own row is pinned above and bottoms out
+  // at the record layer and the three peace-term leaves.
   'src/domain/worldPulse/envoyErrandParlay.js': [
     './envoyErrandOffer.js',
     './envoyErrandRecords.js',
     './envoyErrandTransit.js',
     './envoyErrandVocabulary.js',
+    './negotiationEvaluation.js',
     './negotiationPictures.js',
   ],
   'src/domain/worldPulse/envoyErrandEncounterWriter.js': [
@@ -193,8 +199,50 @@ const NEGOTIATION_MODULES = Object.freeze({
     './envoyErrandVocabulary.js',
     './negotiationPictures.js',
   ],
+  // ── AMENDED 2026-08-07 BY THE LAYERING REPAIR AT 67f8a58e, AND THE AMENDMENT IS A
+  // TIGHTENING, NOT A WIDENING. This module used to reach `./peaceTerms.js` — the
+  // BARREL — and take seven symbols through it, none of which is DEFINED there. That
+  // hop dragged the 765-line treaty mover behind it and closed a 39-module cycle. It
+  // now reaches the ONE leaf that defines the ONE symbol the picture RECORD layer
+  // needs. The evaluation half moved out to `./negotiationEvaluation.js`, pinned
+  // directly below, and the union of what the PAIR takes from the peace-term family is
+  // asserted symbol-by-symbol in its own test further down — identical to the seven
+  // that were reviewed through the barrel, so the reviewed SET did not change, only its
+  // ADDRESSES. The barrel is now unreachable from both halves, which is what makes this
+  // strictly stronger than the row it replaces: `advanceTreaties` and its world-reading
+  // kin were re-exported by that barrel and are not re-exported by these leaves.
   'src/domain/worldPulse/negotiationPictures.js': [
-    './peaceTerms.js',
+    './peaceTermsCarriedSheet.js',
+  ],
+  // ── THE EVALUATION HALF (2026-08-07). A NEW MODULE, so it is pinned on arrival rather
+  // than admitted by the silence of a manifest that does not name it — which is the
+  // whole content of the F7 discovery finding, and the reason the negotiation family
+  // gains its own discovery guard below.
+  //
+  // WHY IT IS INSIDE THE FENCE AT ALL: it is the two-picture parlay evaluation, which
+  // Amendment K3's own list names first ("terms, vote, …"). Every declaration in it was
+  // moved VERBATIM out of `negotiationPictures.js`, which was already pinned, so leaving
+  // it unpinned would have QUIETLY NARROWED a reviewed set by moving code out from under
+  // it — the exact failure the discovery guards exist to make impossible.
+  //
+  // ITS REACH, AND WHY EACH ENTRY IS K3-SAFE: `./negotiationPictures.js` is the record
+  // layer pinned directly above, whose own row bottoms out at one carried-sheet leaf.
+  // The other three are the peace-term leaves that DEFINE the reviewed symbols — the
+  // appraisal, the carried sheet and the drafting — reached directly instead of through
+  // the barrel. Each takes already-banded inputs; not one can hand back a settlement's
+  // strength, stores or pressures, which the token scan proves for this row
+  // independently rather than on the strength of this paragraph.
+  //
+  // THE DEPENDENCY RUNS ONE WAY BY CONSTRUCTION: this module imports the record layer
+  // and the record layer never imports this one. That inversion of the house re-export
+  // pattern is deliberate (the module's own docblock argues it), and it is what keeps
+  // the appraisal closure — beliefMap.js and the distanceRead digest reader — off the
+  // save/load path and off first paint.
+  'src/domain/worldPulse/negotiationEvaluation.js': [
+    './negotiationPictures.js',
+    './peaceTermsAppraisal.js',
+    './peaceTermsCarriedSheet.js',
+    './peaceTermsDrafting.js',
   ],
   'src/domain/worldPulse/envoyEncounter.js': [
     './warCoalitionLedger.js',
@@ -202,8 +250,11 @@ const NEGOTIATION_MODULES = Object.freeze({
   'src/domain/worldPulse/foreignGuestHold.js': [
     '../spatial/distanceRead.js',
   ],
+  // AMENDED 2026-08-07 for the same split, and for the same reason as the parlay: the
+  // ballot's terms math moved to the evaluation half, so the vote names it directly.
   'src/domain/worldPulse/coalitionRatification.js': [
     './envoyTestimony.js',
+    './negotiationEvaluation.js',
     './negotiationPictures.js',
   ],
   'src/domain/worldPulse/envoyTestimony.js': [],
@@ -472,6 +523,45 @@ function discoverStageFamily() {
     .sort();
 }
 
+/**
+ * THE THIRD DISCOVERY, over the NEGOTIATION FAMILY (2026-08-07).
+ *
+ * `negotiationPictures.js` was ONE module and one hand-written row. The layering repair
+ * at 67f8a58e split it in two, and the new half was a fenced negotiation module that
+ * appeared in NO discovery pattern here — so `Object.entries(NEGOTIATION_MODULES)` would
+ * have iterated straight past it and this file would have stayed green while code moved
+ * OUT from under a reviewed set. That is F7's finding exactly, arriving by a SPLIT rather
+ * than by a new leaf, which is the variant the two discoveries above could not see: they
+ * watch for files that ARRIVE, and a split is a file that arrives carrying somebody
+ * else's reviewed declarations.
+ *
+ * So the family is discovered like the other two: every `negotiation*.js` on disk is
+ * PINNED or EXPLICITLY EXEMPT, and a third half reds until someone decides which.
+ */
+const NEGOTIATION_FAMILY_RE = /^negotiation.*\.js$/;
+
+/**
+ * `negotiationPicturesExportLeg.js` is the read that turns a settlement's REAL export
+ * list into a banded picture leg, and it is exempt because it is the fence's designed
+ * OUTSIDE: its own header says the fenced module "never learns it exists", it resolves
+ * the `economicState.exports` / `primaryExports` alias through `canonicalAccessors.js`,
+ * and it therefore contains a true-state token and would red the token scan forever.
+ * That is the same shape as `conquestDoctrineStage.js` above — the layer that fills the
+ * plate is declared, and the fenced modules that eat from it are closed. What keeps the
+ * seam real here is the direction: the leg is imported BY the picture mints outside the
+ * fence, and neither pinned half reaches it, which the closed import sets above assert.
+ */
+const REVIEWED_NEGOTIATION_EXEMPTIONS = Object.freeze([
+  'src/domain/worldPulse/negotiationPicturesExportLeg.js',
+]);
+
+function discoverNegotiationFamily() {
+  return readdirSync(join(ROOT, ERRAND_FAMILY_DIR))
+    .filter((name) => NEGOTIATION_FAMILY_RE.test(name) && !/\.test\./.test(name))
+    .map((name) => `${ERRAND_FAMILY_DIR}/${name}`)
+    .sort();
+}
+
 describe('WR-7b K3 — nobody is ever current', () => {
   test('DISCOVERY: every errand-family leaf on disk is a pinned negotiation module', () => {
     const family = discoverErrandFamily();
@@ -536,6 +626,43 @@ describe('WR-7b K3 — nobody is ever current', () => {
     expect(discoverStageFamily().filter((rel) => !accounted.has(rel))).toEqual([dropped]);
   });
 
+  test('DISCOVERY: every negotiation-family half on disk is pinned or explicitly exempt', () => {
+    const family = discoverNegotiationFamily();
+    // Anti-vacuity: a rotted pattern would pass the exact-set assertion below over an
+    // empty list. The split left two halves plus the export leg.
+    expect(family.length, 'the negotiation family read empty — the pattern rotted').toBeGreaterThanOrEqual(3);
+    expect(family).toContain('src/domain/worldPulse/negotiationPictures.js');
+    expect(family).toContain('src/domain/worldPulse/negotiationEvaluation.js');
+
+    const accounted = new Set([
+      ...Object.keys(NEGOTIATION_MODULES),
+      ...REVIEWED_NEGOTIATION_EXEMPTIONS,
+    ]);
+    expect(
+      family.filter((rel) => !accounted.has(rel)),
+      '\nA negotiation-family module exists on disk that is neither pinned in '
+      + 'NEGOTIATION_MODULES nor listed in REVIEWED_NEGOTIATION_EXEMPTIONS. A SPLIT is '
+      + 'the dangerous shape here: declarations move OUT from under a reviewed set into '
+      + 'a file no manifest names, and both the import pin and the token scan iterate '
+      + 'straight past it. Decide which it is and say so here — a closed import list if '
+      + 'it is belief-sourced, an exemption WITH A REASON if it legitimately reads truth.\n',
+    ).toEqual([]);
+    // The exemption list may not rot into a name that no longer exists.
+    for (const rel of REVIEWED_NEGOTIATION_EXEMPTIONS) {
+      expect(family, `${rel} is exempted but not on disk`).toContain(rel);
+    }
+  });
+
+  test('MUTANT: dropping a pinned negotiation half from the manifest reds the discovery', () => {
+    const dropped = 'src/domain/worldPulse/negotiationEvaluation.js';
+    expect(Object.keys(NEGOTIATION_MODULES)).toContain(dropped);
+    const accounted = new Set([
+      ...Object.keys(NEGOTIATION_MODULES).filter((rel) => rel !== dropped),
+      ...REVIEWED_NEGOTIATION_EXEMPTIONS,
+    ]);
+    expect(discoverNegotiationFamily().filter((rel) => !accounted.has(rel))).toEqual([dropped]);
+  });
+
   test('every negotiation module reaches only its reviewed closed import set', () => {
     for (const [rel, expected] of Object.entries(NEGOTIATION_MODULES)) {
       const source = code(rel);
@@ -563,12 +690,53 @@ describe('WR-7b K3 — nobody is ever current', () => {
   });
 
   test('the two-picture wrapper reaches peaceTerms only through input-shaped leaves', () => {
-    const source = code('src/domain/worldPulse/negotiationPictures.js');
-    const imported = [...source.matchAll(/import\s*\{([\s\S]*?)\}\s*from\s*'\.\/peaceTerms\.js'/g)]
-      .flatMap((match) => match[1].split(','))
-      .map((name) => name.trim())
-      .filter(Boolean)
-      .sort();
+    // ── RE-DERIVED 2026-08-07 ACROSS THE SPLIT, AND THE CLAIM IS UNCHANGED.
+    //
+    // This pin used to read ONE module and scan for `from './peaceTerms.js'` — the
+    // BARREL. The layering repair at 67f8a58e split the wrapper into a record half and
+    // an evaluation half and repointed both at the leaves that actually DEFINE the
+    // symbols, so a scan anchored on the barrel now matches nothing and would have gone
+    // silently vacuous rather than red, had the address been the only thing asserted.
+    //
+    // The subject is therefore the PAIR, and the claim is the one the amendment makes:
+    // what the wrapper takes out of the peace-term family, whichever module it lands in,
+    // is exactly the reviewed input-shaped set. That set is IDENTICAL to the seven names
+    // reviewed through the barrel — this is a change of ADDRESS, not of REACH — and it
+    // is asserted as a union so moving a symbol between the two halves cannot smuggle an
+    // eighth in behind the move.
+    const WRAPPER = Object.freeze([
+      'src/domain/worldPulse/negotiationPictures.js',
+      'src/domain/worldPulse/negotiationEvaluation.js',
+    ]);
+    const sources = WRAPPER.map((rel) => {
+      const text = code(rel);
+      expect(text.length, `${rel} read empty`).toBeGreaterThan(1000);
+      return text;
+    });
+    const specifiers = sources.flatMap(
+      (text) => [...text.matchAll(/from\s*'(\.\/peaceTerms[^']*\.js)'/g)].map((m) => m[1]),
+    );
+    // Anti-vacuity, and it is the pin that makes every assertion below mean something:
+    // a rotted regex or a renamed family would otherwise leave the union EMPTY, and an
+    // empty union satisfies "no world-reading export is imported" trivially.
+    expect(specifiers.length, 'the wrapper reaches NO peace-term module — the scan rotted')
+      .toBeGreaterThanOrEqual(3);
+    // ⚠ THE BARREL IS GONE AND MUST STAY GONE. `./peaceTerms.js` re-exports
+    // `advanceTreaties` and the rest of the 765-line treaty mover; the leaves below do
+    // not. Re-importing the barrel would restore the whole cycle in one line and would
+    // put every world-reading export back within one hop of the lit path.
+    expect(specifiers.filter((s) => s === './peaceTerms.js'),
+      'the two-picture wrapper reaches the peaceTerms BARREL again — take the defining leaf instead')
+      .toEqual([]);
+    const imported = [...new Set(sources.flatMap(
+      // `[^{}]` rather than `[\s\S]`: a lazy any-character body still starts at the
+      // FIRST `import {` in the file and runs THROUGH an intervening import block to
+      // reach the first peace-term specifier, dragging that block's names in with it.
+      (text) => [...text.matchAll(/import\s*\{([^{}]*?)\}\s*from\s*'\.\/peaceTerms[^']*\.js'/g)]
+        .flatMap((match) => match[1].split(','))
+        .map((name) => name.trim())
+        .filter(Boolean),
+    ))].sort();
     // Each of these takes already-banded inputs, never a worldState. Importing a
     // world-reading export instead (advanceTreaties and its kin) is exactly how
     // truth would re-enter the lit path.
@@ -581,11 +749,13 @@ describe('WR-7b K3 — nobody is ever current', () => {
       'normalizeCarriedTermSheet',
       'termBudgetFor',
     ]);
-    // The exact imported-symbol list is asserted above, so this file demonstrably
-    // reads peaceTerms: the two absences below are a live selection within a
-    // proven-present import, not a collection that drifted away.
-    expect(source).not.toContain('advanceTreaties'); // anchored: import list asserted above
-    expect(source).not.toContain('worldState'); // anchored: import list asserted above
+    // The exact imported-symbol union is asserted above, so both files demonstrably
+    // read the peace-term family: the two absences below are a live selection within
+    // proven-present imports, not a collection that drifted away.
+    for (const [i, text] of sources.entries()) {
+      expect(text, `${WRAPPER[i]} must not reach advanceTreaties`).not.toContain('advanceTreaties'); // anchored: union asserted above
+      expect(text, `${WRAPPER[i]} must not name worldState`).not.toContain('worldState'); // anchored: union asserted above
+    }
   });
 
   test('WR-7c: the vote reaches the terms math only through the two-picture wrapper', () => {
@@ -596,7 +766,13 @@ describe('WR-7b K3 — nobody is ever current', () => {
     // second terms evaluator — the design defect the seam ruling names.
     // The second entry is the reviewed vocabulary reach documented above; the
     // test below proves the module it reaches for reaches nothing itself.
-    expect(importsOf(source)).toEqual(['./envoyTestimony.js', './negotiationPictures.js']);
+    // AMENDED 2026-08-07: the third entry is the evaluation half the terms math moved
+    // into at 67f8a58e. The claim below is unchanged and is the one that matters — the
+    // vote still reaches the terms math ONLY through the wrapper pair, never through
+    // `peaceTerms` directly, which is what a second terms evaluator would look like.
+    expect(importsOf(source)).toEqual([
+      './envoyTestimony.js', './negotiationEvaluation.js', './negotiationPictures.js',
+    ]);
     expect(source).not.toContain('peaceTerms'); // anchored: import list asserted above
     expect(source).not.toContain('worldState'); // anchored: import list asserted above
   });

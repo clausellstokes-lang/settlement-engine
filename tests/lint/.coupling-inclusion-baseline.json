@@ -471,8 +471,9 @@
   },
   {
     "importer": "src/domain/worldPulse/peaceTermsPrimitives.js",
-    "imported": "src/domain/worldPulse/warReasons.js",
-    "direction": "WAR→GRAMMAR"
+    "imported": "src/domain/worldPulse/warReasonTaxonomy.js",
+    "direction": "WAR→GRAMMAR",
+    "note": "RETARGETED 2026-08-07, count-neutral. This entry read warReasons.js until 67f8a58e moved the two-line `reasonPairKey` template DOWN into the zero-import warReasonTaxonomy.js to cut a 39-module cycle. Same importer, same direction, same symbol, same legacy debt — a smaller provider, so it is recorded as a MOVE rather than banked-and-re-minted. NOT licensed: `${a}>${b}` has no receipt, no desk and no counterforce, so a registry row would be a false claim of designed coupling. The debt itself is UNDISSOLVED and deferred: peaceTermsPrimitives could inline the template under corruptionWeb.js's drift-guard precedent and bank this line outright, which is a chair call because it would mint a third copy of a spelling three ledgers must share."
   },
   {
     "importer": "src/domain/worldPulse/razingExecution.js",
