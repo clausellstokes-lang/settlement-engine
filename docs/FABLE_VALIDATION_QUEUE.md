@@ -5558,3 +5558,113 @@ SATISFIED changes no engine behaviour.
 **Nothing lit. No flag minted. No band ratified. No golden re-recorded. No soak run. Nothing
 pushed. THE CONDITION IS PROVEN SATISFIABLE; LIGHTING REMAINS OWNER-HELD AT THE TERMINAL
 SOAK.**
+
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · SAFE-HOUSE RECON + EXTENSION
+## (Chair-landed. Commit `3bb846bb`. ZERO golden movement. Vetoable.)
+
+### ⚠⚠ THE LAW THIS WAVE ESTABLISHED: `p >= 1` IS NOT STREAM-NEUTRALITY
+
+The stop question — *does adding a service move generated output?* — was the whole wave, and
+the answer is CONDITIONAL. Service selection draws from the SHARED seeded stream at two
+sites: `institutionServices.js:177` per candidate service, and
+`serviceRollMaterialization.js:224` again for any criminal-category service from a criminal
+provider. **Four scratch probes, each regenerating all 525 golden-master settlements as
+OBJECTS and deep-diffing field by field with array indices collapsed:**
+
+| Shape | Rows moved | Result |
+|---|---|---|
+| `on:false`, p 0.5, criminal host | **0 / 525** | byte-identical |
+| `on:true`, p 0.5, criminal host | **156 / 525** | wholesale reshuffle across 8 buckets |
+| `on:true`, **p 1.0**, criminal host | **156 / 525** | ⚠⚠ **`p >= 1` DOES NOT SAVE YOU** |
+| `on:true`, p 1.0, NON-criminal host | 84 / 525 | pure addition; 0 changed, 0 removed |
+
+**WHY `p >= 1` FAILS:** it short-circuits the `:177` draw, but the crime-scaled gate at
+`:224` **draws BEFORE `p` is consulted**, so a guaranteed service at a criminal provider
+shifts the stream exactly as a probabilistic one does. **The only free shapes are `on:false`**
+(`:175` returns before any draw) **and `p >= 1` at a NON-criminal provider.**
+
+⭐ Containment worth recording: every moved path-template in every probe sat under
+`$.availableServices` — the shift is real but does not propagate past the services block.
+
+### THE CAPABILITY ALREADY EXISTED IN FOUR SPELLINGS AND WAS NOT RE-MINTED
+
+`"Safe house"` @ Smuggling waypoint · `"Safe houses"` @ Kidnapping ring · `"Hideout rental"`
+@ Outlaw shelter · `"Transport routes"` @ Human trafficking network (desc: *"Safe houses and
+handoff points"*). **Unique service names 841 → 841; only (institution, service) pairs moved,
+956 → 961.**
+
+⭐ **AND THE CHAIR'S OWN "STRONGEST NON-OBVIOUS CASE" WAS ALREADY BUILT.** The chair proposed
+a temple sanctuary as mechanically distinct — public rather than hidden, lawful rather than
+illicit, an obligation rather than a price. `"Sanctuary"` already ships at Church/Temple and
+Cathedral (10,000+ only), **already carrying exactly that register in its copy**. No distinct
+service was minted. What was found instead was a real GAP: `Great cathedral` carried no
+Sanctuary while its city-tier sibling did.
+
+**FIVE `on:false` EXTENSIONS OF EXISTING SPELLINGS:** Thieves' guild chapter · Thieves' guild
+(powerful) · Underground network · **Bandit affiliate — whose CATALOG entry already promised
+"shelter" that its service menu did not deliver, so this closes a desc-vs-menu contradiction
+rather than inventing a capability** · Great cathedral (Sanctuary).
+
+### ⚠⚠ A SILENT-FALLTHROUGH CLASS, LIVE IN SHIPPED OUTPUT TODAY — RECORDED, NOT FIXED
+
+**AN UNREGISTERED SERVICE NAME NEVER REDS.** `serviceClassifier.js` misses the map, runs a
+~30-branch keyword ternary over the lowercased service AND institution name, and terminates
+at `INSTITUTION_DEFAULT_CATEGORY[instName] || 'equipment'`. Zero throw paths.
+**`SERVICE_CATEGORY_MAP` holds 266 keys against 841 unique names — ~32%.** The other ~575
+ride the heuristic unverified, and **NO WALKER EXISTS**: `SERVICE_CATEGORY_MAP` and
+`classifyService` appear NOWHERE in `tests/`.
+
+**THREE LIVE MIS-FOLDS, MEASURED:**
+- `Discreet passage` @ Underground network → **equipment**. *"Move people beneath the walls
+  unseen"*, filed as equipment in **16 of 525** corpus rows.
+- `Hospitality` @ Monastery or friary → **healing**. *"Food and shelter for travelers and
+  pilgrims"*, filed as healing in **12 of 525**.
+- `Hideout rental` @ Outlaw shelter → **equipment**. The institution's flagship `on:true`
+  `p:0.9` service. LATENT — baseChance 0.08 never rolled in 525 rows; it mis-files the moment
+  it does.
+- `Sanctuary` is EXPLICITLY mapped to `healing` though its desc is *"Legal protection on holy
+  ground"* — arguably `legal`. ⛔ NOT TOUCHED: it is `on:true`, so a re-map is golden-moving
+  and a chair call.
+
+⭐ **THE WAVE'S OWN REGISTRATION FIXED A HOST-DEPENDENCE BUG:** before registering
+`'Safe house': 'criminal'` explicitly, the identical name folded to `lodging` at an inn and
+`criminal` at a guild, because the classifier's `includes('inn')` branch **preempts** the
+criminal keyword. It is now host-independent.
+
+### TWO MORE UNREACHABILITIES, RECORDED NOT FIXED
+
+**`requiredTradeRoute` is set ZERO times** across all 961 authored defs — the vocabulary is
+exactly `{on, p, desc}` — so the conjunction at `institutionServices.js:178` is unreachable
+from native data. Same class as the estate's recorded unreachable-predicate-conjunction
+hazard. And **`on` is a plain boolean in 961/961 authored defs** (591 true / 370 false); the
+`{allow, force}` object form is reachable only through the DM override channel.
+
+### ⚠ THE WHOLE FAMILY IS INVISIBLE IN GENERATED OUTPUT
+
+Across 525 settlements, `Sanctuary` / `Safe house` / `Safe houses` / `Hideout rental` /
+`Safe passage` / `Hidden storage` / `Transport routes` each appear **ZERO times**. They are
+DM-opt-in surface only. ⚠ **`Church/Temple` is a DEAD RESOLUTION KEY** — a `p:1.0 on:true`
+probe there moved **0 of 525 rows**, because no corpus institution ever resolves to it.
+
+### GATES
+
+Affected battery 12 files / 93 tests green, **golden master among them**. Full suite 2,343
+files / 27,173 tests: 39 files / 54 tests red, **INHERITED AND MEASURED** — the same 39
+re-run with both touched files reverted to their HEAD blobs gave the identical 39 / 54 / 478
+/ 2, **zero base-only and zero head-only**. Tree-wide eslint red identically at both ends
+(3 errors / 30 problems), none in a touched file. `generate-institution-service-keys --check`
+verifies 281 ordered keys unchanged. Committed bytes `cmp` byte-identical post-hook; zero NUL
+bytes; 14 added lines pure ASCII.
+
+**GOLDEN 525/525 BYTE-IDENTICAL, manifest reproduced with 0 mismatches on BOTH sides. No
+re-record owed.** Nothing lit, no flag minted, no band ratified, no soak run, nothing pushed.
+
+### ⚠ THE CHAIR'S OWN BRIEF CARRIED A FALSE PREMISE, AND THE LANE CORRECTED IT
+
+The brief stated *"no other build lane is running."* **That was WRONG** — an ES-4 verification
+lane was live in this same worktree throughout and sat queued on `gate-mutex.sh` behind this
+wave's full-suite run. **The mutex held and both lanes behaved correctly.** HEAD was
+re-verified unmoved and both files `cmp`'d immediately before staging. Recorded because a
+chair asserting a quiet tree is exactly the kind of premise a lane should not have to
+discover is false.
