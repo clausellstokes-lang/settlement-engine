@@ -61,7 +61,13 @@ export function carriedClauseFromDraft(term) {
  * mutable authority clocks, unsorted identifiers, duplicate families, and
  * malformed provenance all fail closed. This validates the artifact that was
  * agreed; it intentionally performs no present-day geography or holdings read.
- * @param {unknown} value @returns {Record<string, unknown> | null}
+ * @param {unknown} value
+ * @returns {(Record<string, unknown> & { pictureIds: { proposer: string, responder: string } }) | null}
+ *   The intersection is deliberate and minimal: every existing consumer keeps its
+ *   `Record<string, unknown>` compatibility, while the one field this validator
+ *   proves exhaustively — `pictureIds`, built from two `strictText` reads that are
+ *   null-checked and distinctness-checked above — is stated rather than left
+ *   `unknown`. Widening it back re-breaks every caller that reads a picture id.
  */
 export function normalizeCarriedTermSheet(value) {
   const row = recordOf(value);
