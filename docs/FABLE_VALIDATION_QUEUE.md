@@ -5841,3 +5841,105 @@ archive trees (1.5 GiB free → 11 GiB)**, removing every `node_modules` SYMLINK
 verifying the real one intact at 468 entries. ⭐ **Standing practice from this: build suite
 archives ONE AT A TIME and delete between.** A truncated log is a silent false receipt with no
 author.
+
+---
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · THE HB + WC + EP INTEGRATION FOLD — LANDED
+## (Chair-landed 2026-08-07. Four commits on `claude/composite-r4` from `eca65c8a`.
+## Every judgment below is VETOABLE by one owner clause.)
+
+**WHAT IT DOES.** The three owner-amendment volumes architected 2026-08-05/06 —
+HABIT (HB), WAR CIRCULATION (WC) and ADVANCE EPOCH (EP) — take canonical homes as
+`docs/DESIGN_FP_ARCH_{HB,WC,EP}.md`, promoted whole from the durability snapshots on
+the ledger branch (`review-fixes-2026-07-08` @ `151afbf6`). **This unblocks 33 build
+waves — the largest single blocker in the program.** The compiled volume becomes
+THIRTEEN programs: **52 flags → 63, 75 waves → 108, 66 seams → 112** (47 → 50
+PHYSICAL rows; a folded volume contributes ONE physical row and +N logical seams).
+
+**THE COUNTS ARE EXECUTED, AND THE VERIFY-AT-FOLD EP SCHEDULED FOR ITSELF IS
+DISCHARGED.** The parent was re-counted against the COMMITTED blob at `eca65c8a`
+BEFORE a row was placed — 52 flag rows (ids 1..52 contiguous, no duplicates), 60
+numbered plus 15 folded wave openers = 75, 47 physical seam rows expanding to 66
+logical — so the fold package's PLAUSIBLE 75/66 is CONFIRMED and **no STOP fired**.
+Incoming figures were re-derived, not inherited: HB 10/4/13, WC 17/6/23, EP 6/1/10.
+Every seam count came from executing `HABIT_countsweep.py`'s REAL `seams()` parser
+against the LANDED files. ⚠ A first bare-regex wave probe reported EP-0..EP-15 and
+WC-0..WC-22 — CONTAMINATED by judgment-block and chair-question ids (`J-HB-27`,
+`CR-WC-21`) — and is recorded as DISCARDED so nobody re-runs it.
+
+**DECISIONS TAKEN, EACH VETOABLE.**
+1. **J-FP-13 — WC's §5 POSITION IS A JUDGMENT, NOT A TRANSCRIPTION.** HB and EP each
+   carry a §5 queue-insertion section and their placements transcribe it. WC carries
+   NONE — the only one of the five amendment volumes without a queue clause — so the
+   fold DERIVED the PHASE 4 TAIL slot from the gates its own §7.F graph names. Veto
+   by naming a different slot; nothing else in the fold depends on it.
+2. **HB ADMITTED AS THE TWELFTH CHARTERED COUPLING PREFIX; EP AND WC DECLINED.** HB
+   Q4 ruled YES. EP declines explicitly in its §5 item 7; WC mints no coupling id in
+   6,492 lines. Both abstentions are RECORDED in the enforcer's docstring so neither
+   reads later as a missed edit — a fold that admitted three prefixes because three
+   volumes landed would have widened a closed set on a headcount.
+3. **THE SNAPSHOTS ARE NOT DELETED HERE.** That is a second commit on a second
+   branch and it lands after this. Until it does, five stale snapshots sit beside
+   three landed volumes — the derive-don't-restate hazard, held open deliberately
+   and named here so it is discharged rather than re-found.
+
+**THREE REPORTED ERRATA, STRUCK TEXT PRESERVED, NEVER SILENTLY REWRITTEN.**
+(a) EP §5 item 3 orders EP-1..EP-3 "after ES-4 and BEFORE WY-2" — UNSATISFIABLE, since
+§5's folded openers run WY-1 · WY-2 · ES-0 · … · ES-4, so WY-2 sits BEFORE ES-0. The
+surviving half carries the argument and is where the fold placed them.
+(b) HB's flag paragraph lands VERBATIM including "UNREACHABLE until SP-D lands" —
+STALE BY EVENT: SP-D landed at `0aac6792`, so `doctrineTapEnabled` is reachable and
+HB's stated ordering risk is DISCHARGED rather than carried.
+(c) WC SECTION 4's neighbour headers — "HABIT … NOT YET ARCHITECTED" (HB landed in
+this same fold) and "ESPIONAGE … ES-0 landed, waves in flight" (ES has advanced
+materially) — reported at WC's head, not rewritten in place.
+
+**⭐⭐ THE CROSS-VOLUME COLLISION THE RECONCILIATION PASS EXISTS TO FIND, AND IT
+FOUND ONE.** `docs/DESIGN_FP_ARCH_WY.md` §4 closes the encounter-pairs table at
+FIFTEEN and WY-6's reddenability proof is a **sixteenth-arm plant**; WC SECTION 8
+row 7 claims **E16** (brigand × settlement) and **E17** (column × host). The CR-ES-6
+shape does NOT transfer: E15 could be admitted at its fold because ES-2 lands a
+phase EARLIER than WY-6, but **WC-12 lands AFTER WY-6**, so an E16/E17 row authored
+now would sit resolver-less across WY-6's landing and RED that walker's own "a table
+row without a resolver reds" arm. So the rows land WITH their resolvers in WC's
+commits, and what the fold amends is the PROOF: **a count mutant tests a LITERAL, and
+a literal designed to grow cannot be tested that way twice** — anti-vacuity must
+DERIVE the count from the table pinned equal to the source-scanned resolver set both
+directions, with the UNTABLED-RESOLVER PLANT as the growth-proof mutant. Landed in
+BOTH homes in ONE commit (WY §4 and the parent's WY-6 block). Also reconciled: WY
+seam row 6's filed `armyTransit` structural-prevention candidate is ANSWERED by
+CR-WC-10's SECOND counts-mover manifest at WC-11, with law M's scope, header and
+signature UNTOUCHED and a disjointness proof so the second manifest cannot become a
+fork of the first.
+
+**AN INHERITED MISS FROM THE 2026-08-05 FOLD, FOUND AND REPORTED.** §5 wave #2's
+CW-0w charter still read "the closed nine-prefix alternation" while §9 seam row 32
+had moved to ELEVEN. Marked as HISTORY, with the reader pointed at
+`CHARTERED_VOLUME_PREFIXES` and indexed by seam row 32. Point, don't restate.
+
+**⛔ WHAT REMAINS OWNER-GATED AND IS NOT DISCHARGED BY THIS FOLD.** CR-WC-9 (WC's
+persisted field batch — blocks WC-6 onward, never blocked the fold); WY F9
+`supplyCargo` UNSIGNED, on which WC-10 HARD-GATES; EP's FOUR §7a parked rows; HB Q1's
+two owner-gated persisted fields. **AND THE THREE VOLUMES ARE NOT SEALED BY LANDING:**
+EP is a DRAFT AT ROUND SEVEN with four revision-6 rulings confirmed by nobody; HB's
+round four has NO RECORDED CLOSE; WC is ARCHITECTED, NOT STARTED. Each says so in its
+own header. **A reader who reads "landed" as "sealed" is wrong, and was warned.**
+
+**GATES.** Ten doc-reading and coupling walkers, **174/174, exit 0**, run after the
+last edit of fold 1/4 and again after the cross-volume errata. Prefix admission
+proved by TWO EXECUTED MUTANTS — const-only revert and toEqual-only revert, each
+1 failed | 11 passed, exit 1, each asserting its own byte change before running and
+each restored cmp-clean — plus a regex-arm proof that an `HB-2` coupling id does not
+match the eleven-set shape, does match the twelve-set shape, and that the twelve-set
+still refuses `XX`. Negative control declared with a POSITIVE control beside it: the
+stale spellings ("ten programs", "52 flags", "75 waves", "66 seams", "EIGHT new
+conditionally", "contingent ninth", "THE TWO AMENDMENT VOLUMES") are all at ZERO, and
+the probe is not blind. Zero NUL bytes in every authored file.
+
+**WHAT FABLE SHOULD RE-EXAMINE.** (1) J-FP-13 — WC's PHASE 4 tail slot, the one
+derived position. (2) The encounter-table amendment: is DERIVE-the-count plus an
+untabled-resolver plant the right replacement for WY-6's sixteenth-arm mutant, or
+should WY-6 instead be re-ordered after WC-12? (3) Whether WC's SECTION 8 splice —
+the seam table moved whole into the volume — should instead have stayed a sibling
+file. (4) The three §8.2 tripwire-less ESPIONAGE contracts, RULED wave obligations
+rather than fold blockers, two with a natural inbound ES-side home.

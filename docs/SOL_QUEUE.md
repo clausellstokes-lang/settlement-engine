@@ -32,14 +32,26 @@
   pointer. Its §5 wave names (SP-A..SP-E and the numbered phases) SUPERSEDE the
   older SP-1/SP-2/SP-4/SP-5b/SP-6/SP-7 spellings still standing in §1 A2 item 11
   below — a rename, not a re-scope; nothing was dropped.
-- Two OWNER-AMENDMENT volumes fold into it and bind their own lanes:
+- FIVE OWNER-AMENDMENT volumes fold into it and bind their own lanes:
   the ESPIONAGE volume (ES-0..ES-7, rides §1 A2 row 13) and the WAYFARE volume
-  (WY, engine lane at §1 A2 row 18b, surfaces at §2 row 21b). Chair rulings
+  (WY, engine lane at §1 A2 row 18b, surfaces at §2 row 21b), folded 2026-08-05;
+  and, folded 2026-08-07, **the HABIT volume (HB-0..HB-9, rides §1 A2 row 13
+  behind the ES family, with HB-5 joint with the signed war-chooser wave)**, the
+  WAR-CIRCULATION volume (WC-0..WC-16, §1 A2 row 18c) and the ADVANCE-EPOCH
+  volume (EP-0..EP-5, §1 A2 row 18d). Chair rulings
   CR-FP-3..CR-FP-10, CR-FP-12 and CR-ES-1..CR-ES-6 (FABLE_VALIDATION_QUEUE.md,
   the integration-fold block) bind at the waves those rows name; each is
-  vetoable.
+  vetoable. So do HB Q1-Q5, CR-WC-1..CR-WC-22 and EP Q1-Q5, which live in their
+  own volumes rather than here. ⛔ **THREE OWNER GATES RIDE THESE ROWS AND NONE
+  OF THEM BLOCKED THE FOLD:** WY F9 `supplyCargo` (UNSIGNED — and WC-10 HARD-GATES
+  on it), WC CR-WC-9 (the persisted field batch, blocking WC-6 onward), and EP's
+  four §7a parked rows.
 - EVERYTHING BUILDS DARK. Sol never lights a flag, runs a soak, ratifies a
   band, re-records a golden without a recorded ruling, or pushes — see §4.
+  ⭐ **EP's dark-state claim is defined PER ADVANCE PATH (EP §2.4) and is
+  FLAG-driven, not value-driven (EP §2.3b).** [VERBATIM, docs/DESIGN_FP_ARCH_EP.md
+  §5 item 4 — landed here because this queue's own EVERYTHING-BUILDS-DARK line is
+  now load-bearing for a constitutional change.]
 - ⭐⭐ **BUILD STATE HAS EXACTLY ONE HOME, AND IT IS NOT THIS FILE.** This queue
   lists SPECS and ORDER; it deliberately claims nothing about what is built
   (row 21's own note says so for Lane B, and it is true of every row here).
@@ -81,6 +93,31 @@ volumes corrected @ 36862650 + fdf43790):
     SP-8 THE AGE LAYER is its own later wave, owner veto open on J-D12.)
 12. GRAMMAR GR-0 → GR-7 (DESIGN_FP_GRAMMAR.md)
 13. INFORMATION IN-0 → IN-6 (DESIGN_FP_INFORMATION.md)
+    - **THE HABIT FAMILY HB-0 → HB-9 ALSO RIDES THIS ROW** (the owner-amendment
+      volume of 2026-08-05, folded 2026-08-07; ten waves, four flags, all DARK,
+      ZERO new top-level keys). It lands as a CONTIGUOUS FAMILY immediately
+      AFTER the ES waves, for four reasons in order of force: after the ES spine
+      because the tap machinery must EXIST before a doctrine sheet can be a spy
+      product; JOINT with the signed war-chooser wiring at HB-5 because both
+      retrofit the same frozen 812-line `settlementStrategy` surface and two
+      waves would pay the size-ratchet and CHECK-GIT-FIRST costs twice; BEFORE
+      the instrument-hardening wave because HB adds three new instrument
+      families; and BEFORE the soak necessarily, because habit's entire tuning
+      family is owner-signed AT the soak redo and a habit program landing after
+      it would owe a second soak. HB-0 and HB-1 are early-ELIGIBLE (pure leaves
+      and vocabulary mints, no flag) — a MEASUREMENT, not a licence: **the fold
+      does NOT widen CQ2**, so both run in STRICT ORDER on this row.
+      ⚠️ **HB-1 MINTS THE ONE CLOSED MOVE VOCABULARY AND WC-4 AMENDS IT** — the
+      cross-volume arbitration of WC SECTION 8 row 1 resolves by build order, and
+      in this order HB-1 is first. ⚠️ **HB-2 CARRIES THE TWELFTH CHARTERED
+      COUPLING PREFIX** (HB Q4, RULED) — the prefix itself was admitted at the
+      fold; the ROW it charters lands in HB-2's own commit and widens that file's
+      owningVolume set assertion in the same commit. ⛔ HB Q1 is OWNER-GATED (two
+      persisted fields, plus a third ruled deferred-and-visible) and blocks the
+      fields, not the family. **The ordering authority is
+      `docs/DESIGN_FP_ARCHITECTURE.md` §5** and the per-wave spec is
+      `docs/DESIGN_FP_ARCH_HB.md` §4; this row is the lane pointer, never the
+      ordering authority.
     - **THE ESPIONAGE FAMILY ES-0 → ES-7 RIDES THIS ROW** (the owner-amendment
       volume of 2026-08-04, folded into the FP volume at the integration fold;
       eight waves, all DARK, zero new top-level keys). ES-0 is early-ELIGIBLE
@@ -163,7 +200,62 @@ volumes corrected @ 36862650 + fdf43790):
     LEGIBILITY sites in the same file — the enclosing test's own count-bearing
     title and the CLOSED-alternation comment above the describe — are repaired
     in that same commit, so the file never carries a count it has outgrown.
-    Navigate by SYMBOL.
+    Navigate by SYMBOL. ⭐ **AMENDED 2026-08-07: HB IS THE TWELFTH**,
+    admitted by the same four-site edit under HB Q4; a THIRTEENTH prefix reds
+    until consciously admitted. EP and WC came through that fold and did NOT
+    join — EP declines explicitly (its §5 item 7) and WC mints no coupling id of
+    its own — and both abstentions are recorded in the file's own docstring so
+    neither reads later as a missed edit.
+18c. **THE WAR-CIRCULATION LANE (WC)** — the owner-amendment volume of 2026-08-06
+    (the war auxiliary-contribution directive, sections (a)-(p) plus chair
+    refinements K1-K8 and numbered refinements R1-R9), folded 2026-08-07.
+    Seventeen waves in four arcs — ARC A the circulation core (WC-0..WC-5, K6
+    CORE, ships value early) · ARC B the composite (WC-6..WC-12, K6 EPIC) · ARC C
+    the peace's people (WC-13..WC-14) · ARC D the domestic dividend
+    (WC-15..WC-16) — and SIX flags, all virtual, with `warCirculationEnabled` the
+    ROOT CONJUNCT every gate reads first and by name. The family lands at the
+    **PHASE 4 TAIL**, after WY-11. ⚠️ **THAT POSITION IS A JUDGMENT AND IT IS
+    VETOABLE (J-FP-13):** WC is the only one of the five amendment volumes with
+    NO queue-insertion clause of its own, so the fold DERIVED the slot from the
+    gates its §7.F graph names — WC-4 arbitrates its move vocabulary with HB-1,
+    WC-5's doctrine slice needs HB-6 and WC-9's fidelity rider needs HB-7 (all
+    PHASE 3); WC-3's E-row slice and WC-12's E16/E17 rows need WY's encounter
+    table, which WY-6 lands after TR-4. The earliest slot meeting every in-lane
+    gate is the PHASE 4 tail. ⛔⛔ **TWO GATES AND ONE ESCALATION, EACH BLOCKING
+    WAVES AND NOT THE LANE:** (1) **WC-10 HARD-GATES on WY-8a built** — F9
+    `supplyCargo` is owner-SIGNED but UNBUILT and rides §2 LANE B, not this lane,
+    so WC-10 is a SPEC ROW until it clears (CR-WC-14). (2) **CR-WC-9, the
+    persisted field batch, is OWNER-GATED and LIVE** — the recommendation is the
+    FULL four-ledger list signed UP FRONT, because `serviceBonds` lands at WC-9,
+    after WC-6's signing point, and a batch signed in two pieces is the shape a
+    later wave cites without re-reading; WC-0 and WC-1 are the only WC waves that
+    precede it. (3) **FIVE FLAG-LANDING COMMITS SERIALIZE UNDER CQ5** — WC-0
+    carries TWO trios, then WC-6, WC-10, WC-13, WC-15 — and CQ5's collision law
+    binds ACROSS volumes: no WC flag wave beside an HB or EP flag wave in one
+    worktree. ⚠️ WC-14 reads `DESIGN_TRADITIONS.md`, which lives on the LEDGER
+    BRANCH ONLY — its build brief must carry the pointer. **The ordering authority
+    is `docs/DESIGN_FP_ARCHITECTURE.md` §5** and the per-wave spec is
+    `docs/DESIGN_FP_ARCH_WC.md` SECTION 3; this row is the lane pointer, never
+    the ordering authority.
+18d. **EP — THE ADVANCE EPOCH** (`docs/DESIGN_FP_ARCH_EP.md`; owner directive
+    2026-08-05, the living-futures amendment): EP-0 early-eligible; EP-1 → EP-2 →
+    EP-3 after the CR-WR10-H lighting discharge; EP-4 an independent
+    generator-side lane whose flag-gated slice waits on EP-1; EP-5 at the terminal
+    gate with the copy pass. ⚠ EP-1 edits `pulseKernel.js` under a chair-signed
+    seam citing R-BLD-10 — quiet window mandatory. ⚠ EP-3 slice B is chair-gated
+    on Q1; slice A is not. ⚠⚠ **SERIALIZATION (CQ5 class): EP-1 is a FLAG WAVE
+    (manifest + certification lane + first gate read in ONE commit) and EP-3 ⭐
+    SLICE A (revision 6, chair ruling G1 — it carries the writer now) touches the
+    SHARED `src/lib/spatialUsage.js` ledger-coverage manifest — NEITHER may build
+    concurrently with another flag wave or another ledger-minting wave in the same
+    worktree. Serialize, or one worktree each; CHECK-GIT-FIRST before every stage
+    on a shared file.** [The row above is VERBATIM from
+    docs/DESIGN_FP_ARCH_EP.md §5 item 4.] ⛔ **EP CAN NEVER SHARE A CYCLE** — it
+    is the only program that edits `pulseKernel.js`, where PRNG call order IS the
+    stream identity. **The ordering authority is
+    `docs/DESIGN_FP_ARCHITECTURE.md` §5** and the per-wave spec is
+    `docs/DESIGN_FP_ARCH_EP.md` §4; this row is the lane pointer, never the
+    ordering authority.
 
 ## §2 LANE B — THE DOSSIER + PRODUCT SURFACES (parallel to Lane A; different
 ## files; pathspec discipline keeps the lanes from colliding)
