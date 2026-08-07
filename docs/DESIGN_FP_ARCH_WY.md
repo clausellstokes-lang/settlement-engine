@@ -983,6 +983,39 @@ manifest {pair, resolver module, co-location law, outcomes} and
 source-scans the encounter/collision resolver set: a resolver outside the
 table reds; a table row without a resolver reds; **anti-vacuity at fifteen**.
 
+⛔⛔ **ERRATUM REPORTED AT THE 2026-08-07 (HB + WC + EP) FOLD — THE STRUCK
+TEXT ABOVE AND BELOW IS PRESERVED, NOT REWRITTEN, AND THIS NOTE IS THE
+AMENDMENT.** ~~"anti-vacuity at fifteen"~~ and ~~"this slice mints no
+sixteenth"~~ (§5, F9) and ~~WY-6's "sixteenth-arm plant (walker reds — the
+count moved with CR-ES-6)"~~ are all TRUE AS OF THIS FOLD and all go STALE
+the day the war-circulation volume builds. **THE TABLE GROWS BY TWO:**
+docs/DESIGN_FP_ARCH_WC.md SECTION 8 row 7 claims **E16 (brigand ×
+settlement)** and **E17 (column × host)** as WC's arms, landing at WC-3 and
+WC-12 — "the table is WY's; the rows are this volume's; every new co-location
+resolver adds its row IN ITS OWN COMMIT, moving the closed table's
+anti-vacuity count."
+⚠⚠ **THE ROWS ARE NOT ADMITTED HERE, AND THAT IS DELIBERATE — THE CR-ES-6
+SHAPE DOES NOT TRANSFER.** E15 could be admitted at its fold because ES-2
+lands a PHASE EARLIER than WY-6, so the resolver existed by the time the
+walker ran. **WC-12 lands AFTER WY-6** (the WC family sits at the PHASE 4
+tail; see docs/DESIGN_FP_ARCHITECTURE.md §5), so an E16/E17 row authored now
+would sit resolver-less across WY-6's landing and RED this walker's own
+`a table row without a resolver reds` arm. The rows therefore land WITH their
+resolvers, in WC-3's and WC-12's own commits, exactly as WC row 7 states.
+⭐ **WHAT WY-6 MUST DO INSTEAD, so that neither volume reds the other.** The
+count arm is the only growth-hostile one, and its mutant is the part that goes
+vacuous rather than red: a SIXTEENTH-ARM PLANT tests a literal, and a literal
+designed to grow cannot be tested that way twice. **DERIVE, DON'T RESTATE:**
+the anti-vacuity assertion reads the table's OWN length and pins it EQUAL to
+the source-scanned resolver set, both directions, so it stays true at fifteen,
+at sixteen and at seventeen; and the reddenability proof becomes the
+**UNTABLED-RESOLVER PLANT** (plant a resolver, do not table it — reds
+forever), which is growth-proof, rather than a count plant that stops meaning
+anything the moment the count is allowed to move. A WY-6 walker authored
+against the literal fifteen would red the two resolvers this estate has now
+consciously admitted — the CR-ES-6 failure shape, one level up, and this
+wave's own tripwire firing on its own author for the second time.
+
 **⭐ THE CONSOLIDATION BOUNDARY (CR-ES-6, recorded in this volume and in
 docs/DESIGN_FP_ARCH_ES.md §7 — the two ladders are ONE registry and TWO
 mathematics).** The espionage volume's catch/tap ladder and this table
@@ -1524,7 +1557,7 @@ map-only import census executed. Order: last surface wave.
 | 3 | POP | WY-4 composes with POP-1's columnOf carry-through by ORDER (POP-1 first); the fence's columns land through M4's writer with travelClass absent (RF-2 mutex untouched) and COVER BOTH APPLY ARMS (auto + proposal-accept — r2); the producer overlap with M4's own crisis lane is MEASURED at build and fenced by attribution + the dedup precedence (the fence yields to a same-tick M4 dispatch); conservation identities extended-unweakened; the uncredited-exit hole recorded beside the walker as POP's documented deferral | the THROUGH-ENQUEUE pin; the proposal-accept pin; the double-send mutant against the dedup pin; the wrong-lane mutant; a columnOf edit that drops either program's fields reds both programs' pins |
 | 4 | WF (faith) | the F4 credit writes ONLY through religionState's writer family (single-writer law; occupationFaithPull is the shape precedent); gated on the faith-spread pair with the legacy-mirror handling (both spellings); the HEADS/BLEND ruling (Q1) gates the arm's arithmetic; the WF×POP tellable is the shared fixture | a share write outside the writer family reds the single-writer census; the both-spellings lighting pin |
 | 5 | IN (information) | WY-2 amends the rumor estate IN's waves ride — the lit arm on the keyed-hash01 closed table, the dark arm verbatim (r2 mechanism); WY-5's tap-order law is the mover instance of ES-H's ruling; the going-dark Herald kind lands with the five joins and IN-5's desk routing honored | the fork-key-set census + the other-consumer stream golden (fork isolation is the stream guarantee — stream theft dies at birth); the kind's own walker file |
-| 6 | SP (spine) | WY-1 consumes the transit kernel's documented gradeMultiplier socket — ONE position model, no second floor (law M binds in every denomination); the movement-site manifest is NOT widened here, but the armyTransit exemption (the persisted-position stepper outside MOVEMENT_SITES) is FILED as a structural-prevention candidate; the per-map spectrum surface is SP-consumable | the totality walker's existing rows stay green; a second speed floor anywhere reds law M's walker |
+| 6 | SP (spine) | WY-1 consumes the transit kernel's documented gradeMultiplier socket — ONE position model, no second floor (law M binds in every denomination); the movement-site manifest is NOT widened here, but the armyTransit exemption (the persisted-position stepper outside MOVEMENT_SITES) is FILED as a structural-prevention candidate — ⭐ **ANSWERED AT THE 2026-08-07 FOLD, AND NOT BY AN EDIT TO THIS VOLUME'S GUARD (CR-WC-10):** docs/DESIGN_FP_ARCH_WC.md SECTION 8 row 10 mints a SECOND, COUNTS-MOVER manifest at WC-11 with its own discovery signature, because `MOVEMENT_SITES` is a NAMED-PERSON leg-physics census by its own header and signature and `armyTransit` is OUT OF ITS SCOPE rather than exempt from it; **law M keeps its scope, its header and its signature UNTOUCHED**, and the second manifest carries a DISJOINTNESS PROOF (a planted named-person token does NOT enter it) so it cannot quietly become a fork of the first; the per-map spectrum surface is SP-consumable | the totality walker's existing rows stay green; a second speed floor anywhere reds law M's walker |
 | 7 | ES (espionage) | Wayfare covert rendering RIDES the espionage covert law — one covert predicate chain (hidden legs, covert errand sub-records, viewerSeesDmSecrets, includeCovert-at-the-projection), zero second spellings; the persons layer renders covert operatives DM-only marked covert the day ES lands, with no ES-side surface work; WY-2's durability floor is the thing ES-I's manipulation bypasses, priced at the plant site; the missing-NPC tell composes with the persons layer (absence is visible on the map the way it is in the ledger); **AND THE ENCOUNTER REGISTRY (added at the 2026-08-05 fold, chair ruling CR-ES-6 — this seam row gains the clause; the seam COUNT is unchanged at eight):** ES-2's `espionageGauntlet.js` is an ENCOUNTER RESOLVER, so it carries §4 row **E15** (covert operative × host settlement watch) in ES-2's OWN commit, a phase before WY-6 — the registry is ONE (this volume's §4 table, closed, walker-scanned), while the catch/probability MATH stays ES-side (§3.3) and no shared graded-outcome helper is minted; WY-6's walker VERIFIES E15 rather than re-closing the table, and anti-vacuity is FIFTEEN | the fail-closed export mutant (a covert mover in a player render reds); the plant-site pricing pin lands ES-side and cites WY-2; the encounter walker's resolver-set scan is the tripwire in BOTH directions (an untabled resolver reds; a table row without a resolver reds) and the sixteenth-arm mutant proves the count moved |
 | 8 | SURFACES (map/dossier/PDF estate) | the mirror walker is the standing gate for every new facet on any kind; populations/caravans map-only is enforced structurally (import census + publicSafe rows); the premium-gate census (D14) gains a row for any priced Wayfare affordance (the mapChains three-site pattern, gate the affordance never the derivation); host files at ceiling never grow (lazy leaves; the hook-bundling trick); the sr-only summary and keyboard reach are part of every layer wave's done bar | the mirror walker's both-direction reds; the map-only import census; the size ratchet itself |
 
