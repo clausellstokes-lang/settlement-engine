@@ -5454,3 +5454,107 @@ with its cause decomposed and closing exactly. No NUL bytes in any committed blo
 
 **Nothing lit. No flag minted. No band ratified. No golden shifted. No soak run. Nothing
 pushed.**
+
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · ES-4 — THE DISTANT SOURCE. THE NINE-WAVE
+## CRITICAL PATH CLOSES, AND THE CR-WR10-H LIGHTING CONDITION READS SATISFIED
+## (Chair-landed. Commit `18d28f9a`. Verifier verdict PASS — first attempt.)
+
+### THE DISCHARGE, PROVEN AGAINST THE SHIPPED EVALUATOR
+
+`SP-D → ES-1 → ES-2 → ES-3 → ES-4` is complete. `evaluateSovereigntyLighting` reads
+**state SATISFIED, satisfiable true, missing [], one carrier file, park reasons []** —
+and the method is the point:
+
+⭐ **IT WAS NOT INFERRED FROM THE WALKER STAYING GREEN.** The biconditional passes in BOTH
+build states by design, so a green walker is not evidence of which state it is in. Both the
+implementer and the verifier read the SHIPPED evaluator and the walker's own private helpers
+directly, inside disposable `git archive` trees of the committed sha.
+
+**LOAD-BEARING UNDER FOUR MUTANTS**, each asserting bytes-changed before measuring:
+marker moved into the enclosing `describe` title → UNSATISFIED_TRACKED, carriers `[]`;
+vitest import renamed (`it as trial`) → UNSATISFIED_TRACKED, the file PARKS with 13×
+`OPENER_UNRESOLVED:it`, **and the walker itself REDS — fail-closed**; marker renamed →
+UNSATISFIED_TRACKED; evidence file deleted → the walker reds two tests BY NAME.
+This is the instrument that took TEN CUTS to make honest, doing exactly its job.
+
+### ⭐⭐ NO FALSE RECEIPT — AND THAT IS THE NOTABLE RESULT
+
+The verifier re-ran every quantitative figure the implementer reported and **reproduced each
+one EXACTLY**: full-suite counts at both ends (42/2292/8 → 42/2293/8; 69/26980/105 →
+69/26994/105), both census figures, 33/33 on the walker at both ends, 14/14 on the battery,
+78/292 on the ratchet at both ends. **Failing sets identical BY NAME at both granularities,
+diff-empty.** Four false receipts landed in this program in a single day; this wave carried
+none.
+
+### THE VERIFIER CAUGHT ITSELF TWICE, AND BOTH ARE WORTH KEEPING
+
+1. **A VERIFIER'S OWN INSTRUMENT IN THE TREE IS A CONTAMINATION CLASS.** Its first head-side
+   full-suite run read 43 files / 2,344 because ITS OWN probe copy was still in the archive.
+   It removed the probe and **RE-RAN THE WHOLE SUITE rather than subtracting it on paper.**
+2. **IT READ AN EXIT CODE THROUGH A PIPE** and got `tail`'s status — the recorded piped-gate
+   hazard — then re-tested and established that `ratchet-inventory.sh` exits 2 on a bad
+   argument. **The tool does NOT fail open.**
+
+### ⛔ STOP-ES4-1 — A DOC OVERSTATEMENT, REPORTED AND NOT SILENTLY CORRECTED
+
+`docs/DESIGN_FP_ARCH_ES.md` states the condition flips "in the same commit and **with no edit
+to the instrument**". That is FALSE as written and **could not have been true of any wave**:
+the walker's census is an EXACT EXECUTED SELF-ASSERTION over every title in `tests/`, so the
+arrival of an evidence file necessarily moves it. Two instrument edits were required — the
+census re-record and emptying `UNBUILT_EVIDENCE_ADDRESSES` — and neither touches a rule, a
+grammar, a door or an assertion. **Chair amendment owed: the sentence evidently meant "no
+edit to the instrument's RULES".** The doc is deliberately NOT in this commit's diff.
+
+### ⚠ STOP-ES4-2 — THE RATCHET TOOL IS BLIND ON ONE WALKER, AND REFUSES RATHER THAN GUESSES
+
+`scripts/ratchet-inventory.sh` CANNOT measure `tests/lint/seedLoopTotality.walker.test.js`.
+It exits **2** with *"recovered a member … that vitest's own (untruncated) message does not
+contain. The extractor is inventing rows."* — **AT THE BASE REF**, so the blindness is the
+tool's and not the wave's, and it was reproduced independently by the verifier.
+
+⭐ **THE TOOL IS BEHAVING CORRECTLY: it refuses to report rather than reporting a bad
+number.** That is the integrity guard the tool was built with, firing on its second real
+outing. The fallback is archive-against-archive comparison of the walker's full output, which
+both lanes executed (byte-identical at both ends; this wave's file appears zero times in
+either). **Chair slot owed: either teach the extractor that walker's shape, or record the
+fallback as its standing method.**
+
+### ⚠⚠ A LATENT HAZARD BANKED — `it.skip` ON A CARRYING PIN IS INVISIBLE AND FATAL
+
+MEASURED: `it.skip` does NOT park a file under the lighting walker — it is a
+NON_FOCUSING_TEST_MODIFIER and costs only its own title. On a DECLARED EVIDENCE ADDRESS that
+makes `.skip` uniquely dangerous **on the carrying pin alone**: it would DELETE the wave's
+evidence and UN-LIGHT `sovereigntyTradeEnabled` while DOOR 0, the census and the entire
+battery stayed GREEN. Recorded in the evidence file's own header rather than left to be
+discovered.
+
+### THREE LOW RESIDUALS — none blocking, none touching the discharge
+
+1. A CONFIRM pin's inline message claims evidence it cannot supply: both records carry
+   `lastUpdateTick` 40, so the assertion holds even if the confirm wrote nothing. Its
+   neighbours prove the claim genuinely; the MESSAGE is what overreaches.
+2. ⚠ **CEILING SATURATION SURVIVES ON THE SUPPLY RUNGS** — the fixture writes `deep` (top of
+   5) and `established` (top of 6), so a rung-derivation bug that OVER-shoots would clamp and
+   every equality would stay green. The anti-vacuity guards are real but sit one layer down,
+   on the consumer's band. **This is the same named shape that bit ES-3, one layer further
+   in** — banked for that reason.
+3. One overstated sentence in a comment whose neighbouring sentence is exact.
+
+### ⚠ A CONCURRENT LANE APPEARED MID-VERIFICATION AND WAS CORRECTLY LEFT ALONE
+
+The verifier reported ` M src/data/institutionServices.js` and ` M
+src/generators/services/serviceCategoryTables.js` appearing in the live tree during its run,
+identified them as another lane's, and touched nothing — every mutant and restore of its own
+happened inside disposable archives. That is the shared-tree discipline working as designed.
+
+**GATES:** battery 14/14; walker 33/33 at both ends; full suite archive-against-archive with
+failing sets identical by name; ratchet 78/292 both ends via the script; eslint exit 0; zero
+NUL bytes. ⛔ **Zero `src/` edits — two paths, both under `tests/`.** `simulationRules.js` has
+a zero-line diff, so `DEFAULT_SIMULATION_RULES` is untouched and `sovereigntyTradeEnabled`
+remains the pre-existing WW-A key. `evaluateSovereigntyLighting` has NO runtime consumer, so
+SATISFIED changes no engine behaviour.
+
+**Nothing lit. No flag minted. No band ratified. No golden re-recorded. No soak run. Nothing
+pushed. THE CONDITION IS PROVEN SATISFIABLE; LIGHTING REMAINS OWNER-HELD AT THE TERMINAL
+SOAK.**
