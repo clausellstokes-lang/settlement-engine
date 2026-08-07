@@ -409,6 +409,7 @@ export function foreignGuestHoldForErrand(worldState, errandId) {
 /**
  * Open one active hold.  Integration must prove the six-rule WR-7 conjunction
  * and venue legality before calling; this writer proves only its own authority.
+ * @param {{worldState?:Record<string,unknown>, hold?:unknown}} [args]
  */
 export function openForeignGuestHold({ worldState, hold } = {}) {
   if (!isRecord(worldState)) {
@@ -471,6 +472,8 @@ function normalizeClosure(raw) {
 /**
  * Close one exact active hold.  `expectedHold` is the stale-authority token: an
  * id alone may not release a later custody episode that reused the same label.
+ * @param {{worldState?:Record<string,unknown>, expectedHold?:unknown, tick?:number,
+ *   reason?:string}} [args]
  */
 export function closeForeignGuestHold({ worldState, expectedHold, tick, reason } = {}) {
   if (!isRecord(worldState)) {
@@ -514,6 +517,7 @@ export function closeForeignGuestHold({ worldState, expectedHold, tick, reason }
  * Restore an exact closure during transactional undo.  The supplied tick must
  * still be the close tick, the world's clock (when present) must not have moved,
  * and the entire active hold set must still equal the post-close signature.
+ * @param {{worldState?:Record<string,unknown>, closure?:unknown, tick?:number}} [args]
  */
 export function restoreForeignGuestHold({ worldState, closure, tick } = {}) {
   if (!isRecord(worldState)) {

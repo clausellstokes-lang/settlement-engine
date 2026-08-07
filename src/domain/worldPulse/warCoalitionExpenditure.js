@@ -127,8 +127,8 @@ function settlementFor(snapshot, id) {
  * the live episode could establish.  Healed attrition and evicted occupations
  * are current zero by design, not retroactive cumulative claims.
  *
- * @param {{worldState?:unknown,snapshot?:unknown,partyId:unknown,targetId:unknown,
- *   deployment?:unknown,tick?:unknown}} args
+ * @param {{worldState?:unknown,snapshot?:unknown,partyId?:unknown,targetId?:unknown,
+ *   deployment?:unknown,tick?:unknown}} [args]
  * @returns {null|{partyId:string,callerId:string,targetId:string,joinedTick:number,
  *   pressure01:number,band:string,components:Record<string,unknown>,
  *   completeness:Record<string,boolean>,receipt:Record<string,unknown>}}

@@ -203,7 +203,8 @@ function allocateExactUnits(totalUnits, weighted) {
  * Plan one aggregate claim.  A complete winner×loser closure matrix is required
  * because every material movement must travel on an explicit bilateral closure.
  *
- * @param {{coalitionSettlementId:unknown,closures:unknown,aggregateClaim01:unknown,tick?:unknown}} args
+ * @param {{coalitionSettlementId?:unknown,closures?:unknown,aggregateClaim01?:unknown,
+ *   tick?:unknown}} [args]
  * @returns {Record<string, unknown>|null}
  */
 export function planCoalitionSettlement({
@@ -426,8 +427,8 @@ function archiveSettlementAction(worldState, row, incidentType, severity, edge =
  * primitive.  No treaty or obligation is fabricated when a pair lacks real
  * settlement/granary data; its execution evidence names the incompleteness.
  *
- * @param {{worldState:Record<string,unknown>,snapshot:unknown,
- *   settlementUpdates?:Array<Record<string,unknown>>,plan:unknown,closures:unknown}} args
+ * @param {{worldState?:Record<string,unknown>,snapshot?:unknown,
+ *   settlementUpdates?:Array<Record<string,unknown>>,plan?:unknown,closures?:unknown}} [args]
  */
 export function applyCoalitionSettlement({
   worldState,
@@ -622,10 +623,10 @@ function reimbursementCapacity(settlement) {
  * Pay a caller's internal coalition reimbursement to the member it called.
  * Only a live, valid join anchor can establish the debt direction.
  *
- * @param {{worldState:Record<string,unknown>,snapshot:unknown,
- *   settlementUpdates?:Array<Record<string,unknown>>,coalitionSettlementId:unknown,
- *   callerId:unknown,memberId:unknown,targetId:unknown,claim01:unknown,tick?:unknown,
- *   joinAnchor?:unknown}} args
+ * @param {{worldState?:Record<string,unknown>,snapshot?:unknown,
+ *   settlementUpdates?:Array<Record<string,unknown>>,coalitionSettlementId?:unknown,
+ *   callerId?:unknown,memberId?:unknown,targetId?:unknown,claim01?:unknown,tick?:unknown,
+ *   joinAnchor?:unknown}} [args]
  */
 export function applyCoalitionReimbursement({
   worldState,
@@ -775,6 +776,9 @@ export function applyCoalitionReimbursement({
  * Forgive an existing internal reimbursement without calling it paid.  The
  * obligation is consumed through the same fold, but no food moves and the
  * evidence/incident vocabulary remains explicitly distinct.
+ * @param {{worldState?:Record<string,unknown>, snapshot?:unknown,
+ *   coalitionSettlementId?:unknown, callerId?:unknown, memberId?:unknown, closureId?:unknown,
+ *   relationshipKey?:unknown, amount01?:number, tick?:number|null}} [args]
  */
 export function forgiveCoalitionReimbursement({
   worldState,

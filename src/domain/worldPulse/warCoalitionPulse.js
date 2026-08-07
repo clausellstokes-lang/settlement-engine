@@ -48,6 +48,8 @@ export function mergeWarCoalitionEvidence(...groups) {
  * Read one standing decision per valid joined deployment.  An exit remains a
  * desire until the bilateral proposal is accepted, so only its expenditure
  * read is retained here; peaceTerms owns the eventual separate-peace fact.
+ * @param {{worldState?:Record<string,unknown>|null, snapshot?:unknown, pIndex?:unknown,
+ *   tick?:number|null}} [args]
  */
 export function readCoalitionStandingFronts({
   worldState = null,

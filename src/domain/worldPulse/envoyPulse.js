@@ -113,6 +113,10 @@ function snapshotWithUpdates(snapshot, settlementUpdates, worldState, regionalGr
  * `commissionedPlants` are already-paid I4 envelopes from the pure brokerage
  * producer. They are handed back — targeted or untouched — for the information
  * writer to fold; this pulse never mints or charges one.
+ * @param {{worldState?:unknown, snapshot?:unknown, regionalGraph?:any, wizardNews?:any,
+ *   settlementUpdates?:Array<Record<string,unknown>>, tick?:number, now?:string,
+ *   season?:string|null|null, simulationRules?:unknown,
+ *   commissionedPlants?:Array<Record<string,unknown>>}} [args]
  */
 export function advanceEnvoyDiplomacyPulse({
   worldState,

@@ -243,7 +243,7 @@ function encounterCandidate(envoy, army, tick, kind, privateGoal = '') {
  * Enumerate every eligible collision from one already-projected temporal cut.
  * Candidate order is the arbitration order and therefore part of the contract.
  *
- * @param {{projectedEnvoys?:unknown[],projectedArmies?:unknown[],tick:unknown}} args
+ * @param {{projectedEnvoys?:unknown[],projectedArmies?:unknown[],tick?:unknown}} [args]
  */
 export function censusEnvoyEncounterCandidates({ projectedEnvoys = [], projectedArmies = [], tick } = {}) {
   const at = wholeTick(tick);
@@ -318,7 +318,10 @@ export function selfParlayPairId(aId, bId) {
   return `war_pair:${stableParts(pair)}`;
 }
 
-/** Stable identity for the member's exact joined deployment episode. */
+/**
+ * Stable identity for the member's exact joined deployment episode.
+ * @param {{partyId?:unknown, targetId?:unknown, frontSinceTick?:number, joinCallId?:unknown}} [args]
+ */
 export function selfParlayEpisodeId({ partyId, targetId, frontSinceTick, joinCallId } = {}) {
   const party = text(partyId);
   const target = text(targetId);

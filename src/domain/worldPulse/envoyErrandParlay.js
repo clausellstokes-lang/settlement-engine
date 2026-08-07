@@ -143,6 +143,7 @@ export function frozenParlayPictures(errand) {
  * frozen picture bound it. Pure: no world, no snapshot, no truth — the two
  * pictures are the whole evidence, which is what keeps K3 structural rather
  * than conventional.
+ * @param {{errand?:unknown, tick?:number}} [args]
  */
 export function negotiateEnvoyParlay({ errand, tick } = {}) {
   const row = asObject(errand);

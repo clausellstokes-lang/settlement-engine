@@ -482,7 +482,7 @@ function terminationReason({
  *   pIndex?: unknown,
  *   tick?: unknown,
  *   sunkCostPressureFor?: ((attackerId:string, targetId:string, deployment:Record<string, unknown>) => number) | null,
- * }} args
+ * }} [args]
  * @returns {{
  *   receipts: Array<Record<string, unknown>>,
  *   byAttacker: Map<string, {attackerId:string, targetId:string, suePressure01:number,
@@ -937,10 +937,10 @@ export function readWarTerminations({
  *   snapshot?:{byId?:Map<string, unknown>,settlements?:unknown[],regionalGraph?:{edges?:unknown[]}}|null,
  *   pIndex?:unknown,
  *   tick?:unknown,
- *   actorId:unknown,
- *   opponentId:unknown,
+ *   actorId?:unknown,
+ *   opponentId?:unknown,
  *   sunkCostPressureFor?:((attackerId:string,targetId:string,deployment:Record<string,unknown>)=>number)|null,
- * }} args
+ * }} [args]
  * @returns {{attackerId:string,targetId:string,suePressure01:number,
  *   dissolvedCauseTypes:string[],decidingTerm:string,
  *   bands:{cause:string,cost_to_continue:string,cost_to_stop:string,momentum:string},

@@ -265,6 +265,8 @@ function settlementName(snapshot, id) {
  * a property of the KIND, not of the caller: an ordinary errand passing `covert: false`
  * and a covert one passing `covert: true` differ by exactly which member of a closed
  * two-word set reaches `mayUseHiddenPaths`, and the open one is still refused.
+ * @param {{worldState?:Record<string,unknown>, fromId?:unknown, toId?:unknown, tick?:number,
+ *   journey?:string, season?:string|null|null, covert?:boolean}} [args]
  */
 export function buildEnvoyRoutePlan({
   worldState,
@@ -378,6 +380,8 @@ export function envoyDeparturePicture(decision, {
 /**
  * Convert one already-accepted bilateral decision into a physical errand.
  * Work is transactional: a failed mint or movement returns the original world.
+ * @param {{worldState?:Record<string,unknown>, snapshot?:unknown, outcome?:unknown,
+ *   decision?:unknown, tick?:number, season?:string|null|null}} [args]
  */
 export function dispatchAcceptedPeaceEnvoy({
   worldState,

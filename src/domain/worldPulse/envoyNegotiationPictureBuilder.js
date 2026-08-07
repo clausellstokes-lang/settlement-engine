@@ -165,6 +165,9 @@ function currentTerminationForPicture({ worldState, snapshot, partyId, counterpa
  * Freeze one party's qualitative picture. Self facts may read current truth;
  * opponent strength comes only from a held belief or the party's already-earned
  * believed balance. Unsupported observations normalize to explicit `unknown`.
+ * @param {{worldState?:Record<string,unknown>, snapshot?:unknown, offer?:unknown,
+ *   partyId?:unknown, carrierKind?:string, carrierId?:unknown, tick?:number,
+ *   termination?:unknown}} [args]
  */
 export function buildEnvoyNegotiationPicture({
   worldState,

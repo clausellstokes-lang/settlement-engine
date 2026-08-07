@@ -71,6 +71,8 @@ import {
  * Record the one T transition from travel into interception. The encounter
  * census is external; this writer proves that its projected node and temporal
  * cut still match the exact ledger row before adopting the result.
+ * @param {{worldState?:Record<string,unknown>, errandId?:unknown, encounter?:unknown,
+ *   interceptorPicture?:unknown, expectedErrand?:unknown, tick?:number}} [args]
  */
 export function markEnvoyIntercepted({
   worldState,
@@ -194,7 +196,12 @@ export function markEnvoyIntercepted({
   };
 }
 
-/** Resolve no earlier than T+1 to parlay, custody, or an externally priced continuation. */
+/**
+ * Resolve no earlier than T+1 to parlay, custody, or an externally priced continuation.
+ * @param {{worldState?:Record<string,unknown>, errandId?:unknown, encounterId?:unknown,
+ *   resolution?:unknown, routePlan?:unknown, negotiationPicture?:unknown,
+ *   expectedErrand?:unknown, tick?:number}} [args]
+ */
 export function resolveEnvoyInterception({
   worldState,
   errandId,
@@ -297,7 +304,11 @@ export function resolveEnvoyInterception({
   };
 }
 
-/** Reprice and resume the exact interrupted journey after custody or parlay. */
+/**
+ * Reprice and resume the exact interrupted journey after custody or parlay.
+ * @param {{worldState?:Record<string,unknown>, errandId?:unknown, encounterId?:unknown,
+ *   routePlan?:unknown, plantResumed?:boolean, expectedErrand?:unknown, tick?:number}} [args]
+ */
 export function resumeEnvoyJourney({
   worldState,
   errandId,
@@ -348,7 +359,11 @@ export function markEnvoyHeld(args = {}) {
   return resolveEnvoyInterception({ ...args, resolution: 'held' });
 }
 
-/** Outbound arrival opens an ordinary target-court parlay. */
+/**
+ * Outbound arrival opens an ordinary target-court parlay.
+ * @param {{worldState?:Record<string,unknown>, errandId?:unknown, negotiationPicture?:unknown,
+ *   parlayId?:string, expectedErrand?:unknown, tick?:number}} [args]
+ */
 export function openEnvoyParlay({
   worldState,
   errandId,
@@ -414,7 +429,11 @@ export function markEnvoyParlaying(args = {}) {
   return openEnvoyParlay(args);
 }
 
-/** Apply one exact typed observation to the WR-7b picture through this writer. */
+/**
+ * Apply one exact typed observation to the WR-7b picture through this writer.
+ * @param {{worldState?:Record<string,unknown>, errandId?:unknown, patch?:unknown,
+ *   expectedErrand?:unknown}} [args]
+ */
 export function updateEnvoyNegotiationPicture({
   worldState,
   errandId,
@@ -452,6 +471,8 @@ export function updateEnvoyNegotiationPicture({
  * Persist the first terminal no-sheet verdict for one parlay. Retries and
  * compromise belong to WR-7c, so this witness prevents a later pulse from
  * rebuilding either frozen picture and silently drafting again.
+ * @param {{worldState?:Record<string,unknown>, errandId?:unknown, expectedErrand?:unknown,
+ *   attempt?:unknown, tick?:number}} [args]
  */
 export function recordEnvoyParlayRefusal({
   worldState,
@@ -542,7 +563,11 @@ export function recordEnvoyParlayRefusal({
   };
 }
 
-/** Persist the exact already-negotiated artifact; drafting remains outside. */
+/**
+ * Persist the exact already-negotiated artifact; drafting remains outside.
+ * @param {{worldState?:Record<string,unknown>, errandId?:unknown, termSheet?:unknown,
+ *   expectedErrand?:unknown, tick?:number}} [args]
+ */
 export function agreeEnvoyTerms({
   worldState,
   errandId,

@@ -140,6 +140,11 @@ export {
  * and `origin_capacity` are checked ABOVE the delegation, so a court cannot flood the
  * roads with operatives and an operative cannot stand in two places, BY CONSTRUCTION
  * rather than by the espionage layer remembering to ask.
+ * @param {{worldState?:Record<string,unknown>, outcome?:unknown, acceptance?:unknown,
+ *   npcId?:unknown, npcName?:string, fromName?:string, toName?:string, snapshot?:unknown,
+ *   negotiationPicture?:unknown, targetCourtPicture?:unknown, purpose?:string,
+ *   purposeClass?:unknown, declaredPurpose?:unknown, truePurpose?:unknown, covert?:boolean|null,
+ *   routePlan?:unknown, tick?:number}} [args]
  */
 export function mintEnvoyErrand({
   worldState,
@@ -292,7 +297,11 @@ export function mintEnvoyErrand({
   return { worldState: nextWorldState, changed: nextWorldState !== worldState, evidence, errand: persisted, reason: 'minted' };
 }
 
-/** Update a travelling person's injected transit position, without solving it. */
+/**
+ * Update a travelling person's injected transit position, without solving it.
+ * @param {{worldState?:Record<string,unknown>, errandId?:unknown, positionRef?:unknown,
+ *   tick?:number}} [args]
+ */
 export function updateEnvoyPosition({ worldState, errandId, positionRef, tick } = {}) {
   if (!envoyDiplomacyActive(worldState)) {
     return { worldState, changed: false, evidence: [], errand: null, reason: 'dark' };
@@ -327,6 +336,8 @@ export function updateEnvoyPosition({ worldState, errandId, positionRef, tick } 
  * Begin the mandatory return.  A parlay can never jump directly home: the
  * caller must supply a separately-priced return plan, whether or not it carries
  * a term sheet.
+ * @param {{worldState?:Record<string,unknown>, errandId?:unknown, routePlan?:unknown,
+ *   termSheet?:unknown, tick?:number}} [args]
  */
 export function beginEnvoyReturn({ worldState, errandId, routePlan, termSheet = undefined, tick } = {}) {
   if (!envoyDiplomacyActive(worldState)) {
@@ -394,7 +405,10 @@ export function beginEnvoyReturn({ worldState, errandId, routePlan, termSheet = 
   };
 }
 
-/** The return leg must physically mature before the errand can close home. */
+/**
+ * The return leg must physically mature before the errand can close home.
+ * @param {{worldState?:Record<string,unknown>, errandId?:unknown, tick?:number}} [args]
+ */
 export function markEnvoyHome({ worldState, errandId, tick } = {}) {
   if (!envoyDiplomacyActive(worldState)) {
     return { worldState, changed: false, evidence: [], errand: null, reason: 'dark' };
@@ -440,7 +454,10 @@ export function markEnvoyHome({ worldState, errandId, tick } = {}) {
   };
 }
 
-/** Close one active errand lost. A living overdue envoy uses silence, never this. */
+/**
+ * Close one active errand lost. A living overdue envoy uses silence, never this.
+ * @param {{worldState?:Record<string,unknown>, errandId?:unknown, tick?:number, cause?:string}} [args]
+ */
 export function markEnvoyLost({ worldState, errandId, tick, cause = 'route_lost' } = {}) {
   if (!envoyDiplomacyActive(worldState)) {
     return { worldState, changed: false, evidence: [], errand: null, reason: 'dark' };
@@ -467,7 +484,10 @@ export function markEnvoyLost({ worldState, errandId, tick, cause = 'route_lost'
   };
 }
 
-/** KILL/death closes every active errand owned by the durable NPC id. */
+/**
+ * KILL/death closes every active errand owned by the durable NPC id.
+ * @param {{worldState?:Record<string,unknown>, npcId?:unknown, tick?:number, cause?:string}} [args]
+ */
 export function closeEnvoyErrandsForNpcDeath({ worldState, npcId, tick, cause = 'killed' } = {}) {
   if (!envoyDiplomacyActive(worldState)) {
     return {
@@ -528,6 +548,8 @@ export function loseEnvoyForNpc(args = {}) {
  * successful undo restores the full prior ledger rather than only the traveller.
  * Later movement, a conflicting archive row, another loss, or malformed undo
  * cargo makes this a no-op.
+ * @param {{worldState?:Record<string,unknown>, priorErrands?:Array<Record<string,unknown>>,
+ *   evictedErrands?:Array<Record<string,unknown>>, killedAtTick?:number}} [args]
  */
 export function restoreEnvoyErrands({
   worldState,
@@ -602,6 +624,8 @@ export function restoreEnvoyErrands({
  * released row is the conflict token.  Any subsequent movement, evidence
  * patch, second release, or competing active errand for the same person makes
  * the inverse a no-op.
+ * @param {{worldState?:Record<string,unknown>, priorErrand?:unknown, releasedErrand?:unknown,
+ *   releaseTick?:number}} [args]
  */
 export function restoreReleasedEnvoy({
   worldState,
@@ -659,6 +683,7 @@ export function restoreReleasedEnvoy({
  * The K.7 jewel: once the immutable departure window has passed, emit one
  * hostility inference and remember that it was emitted. A terminal loss is
  * still only remote truth until some later observation reaches home.
+ * @param {{worldState?:Record<string,unknown>, tick?:number, canInferSilenceFor?:unknown}} [args]
  */
 export function advanceEnvoySilence({ worldState, tick, canInferSilenceFor = null } = {}) {
   if (!envoyDiplomacyActive(worldState)) {
@@ -687,7 +712,10 @@ export function advanceEnvoySilence({ worldState, tick, canInferSilenceFor = nul
   return { worldState: nextWorldState, changed: nextWorldState !== worldState, evidence, inferredErrandIds };
 }
 
-/** Apply one injected, idempotent rumour patch to one active envoy picture. */
+/**
+ * Apply one injected, idempotent rumour patch to one active envoy picture.
+ * @param {{worldState?:Record<string,unknown>, errandId?:unknown, patch?:unknown}} [args]
+ */
 export function applyEnvoyRumorPatch({ worldState, errandId, patch } = {}) {
   if (!envoyDiplomacyActive(worldState)) {
     return { worldState, changed: false, errand: null, reason: 'dark' };

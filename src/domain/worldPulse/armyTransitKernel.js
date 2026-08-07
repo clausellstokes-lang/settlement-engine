@@ -215,6 +215,8 @@ function armyRouteId(armyId, departTick, arrivalTick, path) {
  * Byte-identical to envoyOfferEpisodeKey's five-part address.  Keeping this
  * helper explicit lets a target/interceptor column be lawfully re-addressed to
  * the travelling offer's front without changing a single observed band.
+ * @param {{relationshipKey?:unknown, offererId?:unknown, targetId?:unknown,
+ *   frontOwnerId?:unknown, frontSinceTick?:number}} [args]
  */
 export function armyNegotiationEpisodeKey({
   relationshipKey,
@@ -239,7 +241,8 @@ export function armyNegotiationEpisodeKey({
  * explicit input fails closed instead of falling through to a different action.
  * Plant is never inferred here: a court book cannot invent an exact envoy target
  * or paid-disinformation lineage.
- * @param {{armyId:unknown,targetId:unknown,frontSinceTick:unknown,books?:unknown,authoredIntent?:unknown}} args
+ * @param {{armyId?:unknown,targetId?:unknown,frontSinceTick?:unknown,books?:unknown,
+ *   authoredIntent?:unknown}} [args]
  */
 export function deriveArmyEnvoyIntent({
   armyId,
@@ -363,6 +366,10 @@ function createArmyCommandPicture({ snapshot, worldState, graph, record, deploym
  * source picture as its evidence.  It reads no snapshot, belief, court, front,
  * holding, road, or current strength, so orientation repair cannot become a
  * disguised live-truth refresh.
+ *
+ * @param {unknown} record
+ * @param {{relationshipKey?:unknown, offererId?:unknown, targetId?:unknown,
+ *   frontOwnerId?:unknown, frontSinceTick?:unknown, adaptedTick?:number}} [args]
  */
 export function adaptArmyCommandPictureToEnvoyEpisode(record, {
   relationshipKey,
@@ -417,6 +424,10 @@ export function adaptArmyCommandPictureToEnvoyEpisode(record, {
  * direction is converted to exactly one adjacent closed rung; duplicate source,
  * stale clock, unknown starting band, or malformed picture returns the original
  * record reference.
+ *
+ * @param {unknown} record
+ * @param {{sourceId?:unknown, kind?:string, tick?:number, subjectId?:unknown,
+ *   field?:string, direction?:string}} [args]
  */
 export function applyArmyCommandPictureEvidence(record, {
   sourceId,
@@ -940,6 +951,8 @@ function sameCanonicalRow(left, right) {
  * This is chiefly the exact-target plant seam: ordinary intent is derived from
  * court books during the normal army pass, while an information commission must
  * name a lineage and one real envoy before it can become eligible.
+ * @param {{worldState?:Record<string,unknown>, armyId?:unknown, expectedRecord?:unknown,
+ *   intent?:unknown}} [args]
  */
 export function applyArmyEnvoyIntent({ worldState, armyId, expectedRecord, intent } = {}) {
   if (!envoyDiplomacyActive(worldState)) {
@@ -973,6 +986,8 @@ export function applyArmyEnvoyIntent({ worldState, armyId, expectedRecord, inten
  * exact terms is permitted only if the existing deployment recall writer accepts
  * a real withdrawal order; holding the mission changes no position or mission
  * field.  Neither arm drafts, merges, values, or materializes the sheet.
+ * @param {{worldState?:Record<string,unknown>, armyId?:unknown, expectedRecord?:unknown,
+ *   decision?:unknown, tick?:number}} [args]
  */
 export function applyEnvoyInterceptionDecision({
   worldState,

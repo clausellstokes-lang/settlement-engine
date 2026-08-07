@@ -378,7 +378,7 @@ export function readWarPeaceDecision({
  * peace machinery.
  *
  * @param {{worldState?:Record<string,unknown>|null,snapshot?:unknown,pIndex?:unknown,
- *   partyId:unknown,targetId:unknown,tick?:unknown}} args
+ *   partyId?:unknown,targetId?:unknown,tick?:unknown}} [args]
  * @returns {Record<string,unknown>|null}
  */
 export function readStandingCoalitionDecision({
