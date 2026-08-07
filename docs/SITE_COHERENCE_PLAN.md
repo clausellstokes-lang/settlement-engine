@@ -1,15 +1,30 @@
 # Site Coherence & Walker Banking — Plan
 
-> **Progress** — 2026-08-07: program opened at HEAD `2c1ec70f` (branch `claude/composite-r4`). 22 confirmed findings across 5 lenses. 0 of 9 waves landed.
+> **Progress** (append after every wave — this blockquote alone must reconstruct program state)
+> - 2026-08-07 — **Wave 9 SIGNED by the owner** ("I permit it"); blocker `B4` cleared. All 9 waves are now authorized. Still **0 of 9 landed** — every wave remains blocked on `B1`/`B3` (the shared worktree and the single vitest slot).
+> - 2026-08-07 — program opened at HEAD `2c1ec70f` (branch `claude/composite-r4`), plan+audit committed at `2e6d872f`. 22 confirmed findings across 5 lenses. 0 of 9 waves landed.
 
 ## Sources
 
 - **Audit** — `docs/SITE_COHERENCE_AUDIT.md` (companion doc; finding ids `H1–H4`, `M1–M16`, `C1`).
 
-> **Owner sign-off, 2026-08-07 (verbatim scope):** the owner authorized ITEM B — the
+> **Owner sign-off #1, 2026-08-07 (verbatim scope):** the owner authorized ITEM B — the
 > site-coherence question as reported: *substring false positives* and *the missing
-> biome-contradiction guard*. Waves 3–5 execute exactly that. **Wave 9 is NOT covered**
-> (it changes what the generator emits) and stays owner-gated; Option D is queued.
+> biome-contradiction guard*. Waves 3–5 execute exactly that.
+>
+> **Owner sign-off #2, 2026-08-07 — WAVE 9 IS SIGNED.** Put to the owner as the single
+> open call ("Wave 9 — upstream gating — **Owner-gated** — Your call"), answered
+> *"I permit it"*. Wave 9 is therefore authorized and its blocker `B4` is CLEARED.
+> **Scope of this grant is Wave 9 only** — queue rows #2 (Option D, new capability) and
+> #3 (the `coast` arm) were NOT put to the owner in that exchange and are unchanged;
+> #2 remains DEFER-to-after-the-tail, #3 remains ACCEPT-as-is. Row #4 proceeds on the
+> chair's recommendation as a vetoable judgment call, not under this grant: it reverts
+> cleanly with a code change, so by this plan's own reversibility test it was never an
+> owner gate.
+>
+> ⚠ Wave 9 being signed does NOT unblock it. It stays behind `B1`/`B3` (the shared
+> worktree and the single vitest slot) like every other wave, and it is still sequenced
+> after Wave 4 — its measured 47→13 figure is the COMBINED effect, not Wave 9 alone.
 >
 > **Correction to the opening brief:** an earlier session summary claimed the walker
 > ceilings were never banked after TCD-1..TCD-4, so a revert of *any* of the four would
@@ -44,8 +59,8 @@
 
 ## Owner decisions honored throughout
 
-- **THE PROMISE** — a seed is a starting world forever; lived history is immutable; tuning is owner-**signed** and versioned. Waves 0–8 change only **view-time projection** from an unchanged dossier, so no lived history moves. Wave 9 changes what the generator emits and is therefore gated.
-- **Owner sign-off, 2026-08-07** covers ITEM B: *substring false positives* and *the missing biome-contradiction guard*. It does **not** extend to the upstream resource roll (Wave 9) or to new landform vocabulary (Option D).
+- **THE PROMISE** — a seed is a starting world forever; lived history is immutable; tuning is owner-**signed** and versioned. Waves 0–8 change only **view-time projection** from an unchanged dossier, so no lived history moves. Wave 9 changes what the generator emits — it needed a signature and now HAS one (2026-08-07). THE PROMISE is not waived by that signature: worlds already generated keep their economies, so Wave 9 changes only seeds rolled after it lands, and its one-time shift is declared, never silent.
+- **Owner sign-offs, both 2026-08-07** — #1 covers ITEM B (*substring false positives* + *the missing biome-contradiction guard*, Waves 3–5); #2 covers **Wave 9** (upstream resource terrain gating). Neither extends to **Option D** (new landform vocabulary — queue #2, still DEFER) or to the `coast` arm (queue #3, ACCEPT as-is).
 - **Fix philosophy — bold architecture over patches.** The cure is a single-writer export-semantics module, not eight regex tweaks in two files. `/coal/` currently lives in two homes (`siteGenesis.js:247`, `asymmetrySources.js:70`) — that duplication is the mechanism.
 - **Risk appetite** — take the best option even with risk; gated classes stay gated.
 - **Hazard-conversion law** — every class becomes MACHINERY or is ACCEPTED with a written reason. *PARTIAL — a cure you can bypass — is the status that hides.* The metric is **instances per class**.
@@ -173,10 +188,10 @@
 - **Golden churn** **1 new manifest minted**, 0 re-mints. Mint command: `UPDATE_GOLDEN=1 npx vitest run tests/property/<new>.test.js`. If the shared corpus is used instead, the re-mint set is the five files above, via `UPDATE_GOLDEN=1` / `UPDATE_ILLUSTRATED_GOLDEN=1` / `UPDATE_PANORAMA_GOLDEN=1`.
 - **Risk** low.
 
-## Wave 9 — Upstream resource terrain gating — **OWNER-GATED**
+## Wave 9 — Upstream resource terrain gating — **OWNER-SIGNED 2026-08-07**
 
 - **Findings** `M4`, `M5`.
-- **Why gated** It changes what the generator emits — every future seed's economy, and therefore the PDF, the journal pages and the economics tab, not only the map. Under THE PROMISE, campaigns generated in the interval keep those economies permanently: **a veto cannot be honoured by a plain code revert.** It also falls outside the 2026-08-07 sign-off, which covered site *derivation*.
+- **Why it WAS gated (and why the sign-off was required)** It changes what the generator emits — every future seed's economy, and therefore the PDF, the journal pages and the economics tab, not only the map. Under THE PROMISE, campaigns generated in the interval keep those economies permanently: **a veto cannot be honoured by a plain code revert.** That is why it needed a signature rather than a judgment blockquote. **SIGNED 2026-08-07** ("I permit it"); blocker `B4` cleared. The irreversibility itself does not go away — it is now an accepted, recorded consequence, so this wave lands with the one-time generator shift declared explicitly and never re-mints a golden silently.
 - **Deliverable** Give `marshlands` (`resourceData.js:271-280`) and `coal_deposits` (`:218-230`) `terrainRequired` lists, using the machinery that already exists and already works for `fishing_grounds` (`:22`). Suggested: marshlands → `['riverside','coastal','plains','forest']`; coal → `['hills','mountain']`.
 - **Measured effect** Option C alone: flagged 47 → 30 of 126. Combined with Wave 4: **47 → 13**, the best measured ratio of coherence gained to variety lost; the 13 residual are export-implied slopes on plains/forest, the class Option D would absorb.
 - **Exit criteria** `getCompatibleResources('road','desert')` returns `marshlands.compatible=false` **and** `coal_deposits.compatible=false` (today both `true`). The `(desert, marsh, *)` and `(mountain, marsh, *)` ratchet rows reach 0 from the *data* side. A desert town's dossier no longer lists `Waterfowl` as a primary export.
@@ -199,7 +214,7 @@
 | B1 | **Wave 1** | The concurrent lane editing `tests/lint/observedShapeReaders.walker.test.js` (currently `M`, +129/−51, a scan-budget refactor that adds `expect(scansRun).toBe(2)`). Wave 1 touches only the JSON so there is no textual collision, but the walker must not be run under vitest while that lane is live. | `git status --porcelain tests/lint/observedShapeReaders.walker.test.js` returns **empty** **AND** `git log --oneline -1 -- tests/lint/observedShapeReaders.walker.test.js` names a commit newer than `2c1ec70f`. Then re-scan a materialized tree and confirm `townLayoutV2.js "exports on economicState"` is still the **only** bankable row before editing. |
 | B2 | **Wave 1 verification** (not the edit) | Foreign lanes holding `src/domain/worldPulse/commercialReasons.js` (`M` +11/−1) and `src/lib/spatialUsage.js` (`M` +43) — they produce 3 walker violations on the live tree (`M15`). | `node scripts/check-observed-shape-readers.mjs` on the **live** tree prints `violations 0`. Until then the only valid receipt is a materialized-tree scan (`/tmp/sca-probes/lens5/scan-head.mjs`, edit the `R` constant). Do **not** interpret the live red as your own. |
 | B3 | **Every wave's `quick`/`full` gate** | The single vitest slot. | `sh scripts/gate-mutex.sh` exits 0, `&&`-chained to the run in the same command. Never spell the check by hand — the `ps aux \| grep -c '[v]itest'` idiom self-matches and burns up to 40 minutes per gate. |
-| B4 | **Wave 9** | Owner signature (queue #1). | An owner decision recorded in `OWNER_DECISION_QUEUE.md`, or the 2026-08-05 blanket sign-off confirmed to cover it (verify it is not in one of the four carve-outs). |
+| ~~B4~~ | ~~**Wave 9**~~ | ~~Owner signature (queue #1).~~ | ✅ **CLEARED 2026-08-07** — signed explicitly ("I permit it") in direct answer to the wave being put as the single open call. No blanket-sign-off carve-out reasoning was needed or used. Wave 9 remains blocked by `B1`/`B3` like every other wave. |
 
 ## Deferred (documented, NOT bugs to re-find)
 
@@ -216,7 +231,7 @@ Recorded per the judgment-ledger rule: each row carries a recommendation so a ve
 
 | # | Decision | Why it is owner's | Recommendation |
 |---|---|---|---|
-| 1 | **Wave 9** — gate `marshlands` and `coal_deposits` by terrain. | Changes every future seed's economy (dossier, PDF, journal, economics tab), un-revertable for campaigns generated in the window; outside the 2026-08-07 sign-off. | **SIGN.** Measured 47→30 alone, 47→13 with Wave 4; it is the only fix that makes the *dossier* coherent, not just the map, and it reuses machinery that already works for `fishing_grounds`. |
+| 1 ✅ | **Wave 9** — gate `marshlands` and `coal_deposits` by terrain. **SIGNED 2026-08-07.** | Changed every future seed's economy (dossier, PDF, journal, economics tab), un-revertable for campaigns generated in the window. | ~~SIGN.~~ **ACCEPTED by the owner.** Measured 47→30 alone, 47→13 with Wave 4; the only fix that makes the *dossier* coherent, not just the map, reusing the `fishing_grounds` machinery. Now an execution item, no longer a question. |
 | 2 | **Option D** — export-implied water becomes a bounded local feature (millpond/spring/cistern/wadi); export-implied slope becomes a quarry scar; provenance names the export that justified it. | New capability, not repair. | **DEFER to after the tail.** It is the only option that preserves the design's actual intent ("the economy should be visible in the stone") while keeping the site a zoom-in of the realm — but it is a feature, and TUNING IS LAST. |
 | 3 | **The `coast` arm** — `sm1-8` (town/hills) and `sm1-17` (town/forest) resolve `siteKind='coast'` on non-coastal biomes via `water:true` + `tradeRouteAccess:'coastal'`. A guard here would move 2/20 golden configs and re-mint five manifests. | Golden churn on the shared v2 corpus + a judgment about whether a trade lane may override a biome. | **ACCEPT as-is.** A declared coastal trade lane is a dossier fact, not an export accident; the realm-coherence law licenses lane-derived water. Record the acceptance so it is not re-found. |
 | 4 | **Make `bankable` fail the gate** (or assert `bankable` is empty in the walker test). | Machinery-vs-document call under the hazard-conversion law; changes gate behaviour for every lane. | **SIGN.** Today a landed fix's ceiling stands forever while the gate prints the words and returns 0 — this is exactly the PARTIAL status that hides. Pair it with a `--bank` flag so the cure does not push people toward `--write`. |
