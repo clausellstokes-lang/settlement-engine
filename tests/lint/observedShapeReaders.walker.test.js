@@ -43,6 +43,38 @@
  * to 3,236 at 3800bcb6 across a tree that also GREW — the two are not directly
  * comparable file-for-file, which is exactly why the ratchet is PER-FILE.
  *
+ * ── ⚠⚠ THE INVENTORY IS MODULE-GRAPH-SENSITIVE. RE-FROZEN 2026-08-07 AT ec525a59,
+ * AND THE CAUSE IS NOT THE ONE IT LOOKS LIKE ────────────────────────────────
+ * The layering repair at 67f8a58e added two modules and `git mv`'d a third, and
+ * this walker went red with findings in ELEVEN files — NINE of which that commit
+ * never touched (persistMerge.js, relationshipState.js, generationContracts.js,
+ * pulseFingerprint.js, main.jsx, conditionGrammar.js among them). Their source is
+ * byte-identical across the commit. MEASURED, both sides derived inside
+ * integrity-counted `git archive`s of committed shas:
+ *
+ *   corpus     IDENTICAL — same shape count, same `plotHooks` rows and keys, same
+ *              meta. The producers observed exactly the same world.
+ *   reads      IDENTICAL — the scan saw the same member reads on both sides.
+ *   RESOLVED   12,411 -> 12,433. That is the whole delta.
+ *
+ * So no new dead arm was written. Perturbing the scanned file SET re-grounded
+ * receivers: some reads newly resolved, and some re-resolved to a DIFFERENT shape
+ * (envoyErrandParlay's `encounters` moved from `npcs` to `settlement` — the same
+ * read, a different answer). ⚠ SOME OF WHAT THAT ADMITTED IS VISIBLY IMPLAUSIBLE:
+ * `config on plotHooks` / `displayPrefs on plotHooks` in persistMerge.js and
+ * `a|b|from|to on npcs` in relationshipState.js read as MIS-GROUNDED receivers,
+ * not as dead arms. They are frozen because the gate must be green and because
+ * they are indistinguishable, from inside this instrument, from the legacy debt
+ * already here — NOT because anyone verified they are real.
+ *
+ * WHAT THAT MEANS FOR YOU. Do not read a row as a confirmed defect without
+ * checking the site. And expect this walker to red again on any commit that adds
+ * or moves source files, in files that commit never touched: that is this
+ * property, not a regression you caused. The standing cure — grounding a receiver
+ * by declaration rather than by a name prior over the live module set — is a
+ * resolver redesign and is CHAIR-SIZED, deliberately deferred here, documented so
+ * it is not re-found as a bug.
+ *
  * ⚠ THE ACCEPTANCE RUN IS NOT RE-EXECUTED HERE. It needs a second checkout of a
  * historical sha, and this program's concurrency law refuses a second worktree.
  * What runs on every gate instead is the LIVE instrument plus the planted mutant

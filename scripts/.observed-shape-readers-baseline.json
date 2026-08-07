@@ -13,7 +13,7 @@
  ],
  "schema": 2,
  "frozen": "2026-08-07",
- "frozenAtSha": "90deb182",
+ "frozenAtSha": "ec525a59",
  "minRows": 40,
  "corpusMeta": {
   "seeds": 4,
@@ -25,18 +25,18 @@
   "shapeCount": 305
  },
  "scanStats": {
-  "files": 2055,
+  "files": 2057,
   "reads": 119754,
-  "resolved": 12411,
-  "unresolved": 107343
+  "resolved": 12433,
+  "unresolved": 107321
  },
  "sentinel": {
   "usableShapes": 228,
   "totalKeys": 2431,
-  "resolvedReads": 12411
+  "resolvedReads": 12433
  },
- "total": 3236,
- "identities": 2149,
+ "total": 3261,
+ "identities": 2168,
  "inventory": {
   "src/application/commands/adapters/customContentApply.js": {
    "definitionId on plan": 1,
@@ -900,6 +900,12 @@
    "primaryDeitySnapshot on config": 3,
    "text on goal": 1
   },
+  "src/domain/dossier/hookRetention.js": {
+   "kByBand on settlement": 1
+  },
+  "src/domain/dossier/plotHooks.js": {
+   "text on plotHooks": 2
+  },
   "src/domain/dossier/realmEntityWeb.js": {
    "faction on raw": 1,
    "id on raw": 1,
@@ -1032,11 +1038,14 @@
   },
   "src/domain/hookEscalation.js": {
    "category on raw": 2,
+   "description on raw": 2,
    "events on history": 1,
+   "hook on raw": 2,
    "plotHooks on defenseProfile": 2,
    "plotHooks on powerStructure": 2,
    "plotHooks on settlement": 2,
-   "test on test": 1
+   "test on test": 1,
+   "text on raw": 2
   },
   "src/domain/inferSupplyChains.js": {
    "tierMax on raw": 1,
@@ -1208,10 +1217,8 @@
    "cost on edges": 2,
    "cost on npcs": 1,
    "distanceMatrix on npcs": 4,
-   "gates on npcs": 2,
-   "reserved on npcs": 2,
+   "reserved on npcs": 1,
    "routeReceipts on npcs": 1,
-   "spatialLedgers on settlement": 1,
    "tiers on npcs": 3
   },
   "src/domain/spatial/generosityEV.js": {
@@ -1299,7 +1306,8 @@
    "wallId on gates": 1
   },
   "src/domain/townMap/arch/conditionGrammar.js": {
-   "prosperity on config": 1
+   "prosperity on config": 1,
+   "warScar on settlement": 1
   },
   "src/domain/townMap/arch/conditionParams.js": {
    "kind on settlement": 1
@@ -1666,10 +1674,7 @@
    "relationshipType on relationshipPatch": 1
   },
   "src/domain/worldPulse/envoyErrandParlay.js": {
-   "encounters on npcs": 2,
-   "negotiationPicture on npcs": 1,
-   "parlayId on npcs": 1,
-   "targetCourtPicture on npcs": 1
+   "encounters on settlement": 2
   },
   "src/domain/worldPulse/envoyPulse.js": {
    "id on settlementUpdates": 2
@@ -1855,6 +1860,10 @@
   "src/domain/worldPulse/navalKernel.js": {
    "relType on edges": 1
   },
+  "src/domain/worldPulse/negotiationPictures.js": {
+   "exports on settlement": 1,
+   "settlementId on settlement": 1
+  },
   "src/domain/worldPulse/npcAgency.js": {
    "affiliation on npcs": 1,
    "description on npcs": 1,
@@ -1952,9 +1961,6 @@
   "src/domain/worldPulse/peaceReasons.js": {
    "kinship_bond on reasons": 2,
    "obligation_discharged on reasons": 1
-  },
-  "src/domain/worldPulse/peaceTerms.js": {
-   "coalitionContext on npcs": 1
   },
   "src/domain/worldPulse/peaceTermsAppraisal.js": {
    "primaryDeitySnapshot on config": 1
@@ -2065,6 +2071,14 @@
    "primaryDeitySnapshot on config": 1
   },
   "src/domain/worldPulse/relationshipState.js": {
+   "a on npcs": 1,
+   "b on npcs": 1,
+   "from on npcs": 1,
+   "settlementAId on npcs": 1,
+   "settlementBId on npcs": 1,
+   "source on npcs": 1,
+   "target on npcs": 1,
+   "to on npcs": 1,
    "turningPoints on settlement": 2
   },
   "src/domain/worldPulse/religionLegitimacy.js": {
@@ -2384,10 +2398,6 @@
   "src/domain/worldPulse/warReasons.js": {
    "lineage_claim on reasons": 2,
    "public_legitimacy on scores": 1
-  },
-  "src/domain/worldPulse/warReceiptPools.js": {
-   "lean on settlement": 1,
-   "settlement on settlement": 1
   },
   "src/domain/worldPulse/warRulingsEvidence.js": {
    "inheritedWarDemand on metadata": 1
@@ -2774,6 +2784,7 @@
    "resource on chains": 2
   },
   "src/lib/pulseFingerprint.js": {
+   "autoApplied on settlement": 1,
    "populationDeltas on powerStructure": 1,
    "stressor on autoApplied": 1
   },
@@ -2861,11 +2872,19 @@
    "quality on save": 1,
    "underFrames on save": 1
   },
+  "src/main.jsx": {
+   "auth on raw": 1
+  },
   "src/pdf/lib/format.js": {
    "good on crimeTypes": 1,
    "label on crimeTypes": 1,
    "name on crimeTypes": 1,
    "title on crimeTypes": 1
+  },
+  "src/pdf/lib/generationContracts.js": {
+   "detail on plotHooks": 2,
+   "evidence on plotHooks": 2,
+   "path on plotHooks": 2
   },
   "src/pdf/lib/headlines.js": {
    "all on settlement": 1,
@@ -3170,7 +3189,6 @@
    "command on institutions": 8,
    "editedAt on campaignState": 1,
    "event on institutions": 18,
-   "savedSettlements on settlement": 1,
    "systemState on campaignState": 1
   },
   "src/store/customContentEnvironmentSession.js": {
@@ -3201,6 +3219,15 @@
   },
   "src/store/mapSlice.js": {
    "tier on save": 1
+  },
+  "src/store/persistMerge.js": {
+   "categoryToggles on plotHooks": 1,
+   "config on plotHooks": 2,
+   "configExplicitFields on plotHooks": 1,
+   "displayPrefs on plotHooks": 1,
+   "goodsToggles on plotHooks": 1,
+   "institutionToggles on plotHooks": 1,
+   "servicesToggles on plotHooks": 1
   },
   "src/store/selectors.js": {
    "magicExists on config": 1,
