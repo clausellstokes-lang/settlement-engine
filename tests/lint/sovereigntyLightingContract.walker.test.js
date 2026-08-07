@@ -10,6 +10,16 @@
  * each has arrived.
  *
  * ── WHY IT MUST STAY GREEN TODAY, AND WHAT THAT COSTS IT ────────────────────────
+ * ⚠ THE STATE THIS SECTION DESCRIBES ENDED ON 2026-08-06. ES-4 LANDED, and the condition now
+ * reads `SATISFIED / satisfiable true / missing []` — measured off this file's own shipped
+ * evaluator, with `tests/domain/espionageDistantSourceEs4.test.js` as the one carrying file.
+ * The design below is UNCHANGED and every word of it still binds: it was built to be green in
+ * BOTH build states, so nothing here needed loosening when the second state arrived, and the
+ * mutants that proved the flip without waiting for ES-4 are the same ones that now prove it
+ * did not arrive by accident. The paragraph is kept in its own tense because it records why
+ * the assertions are shaped as they are; rewriting it to the new tree would delete the
+ * argument. What follows describes the world before that landing.
+ *
  * ES-4 is unbuilt, so the condition reads `UNSATISFIED_TRACKED`. A walker that failed on
  * that would red the base suite for the crime of the build order being the build order,
  * and the first thing anyone would do is delete it. So the assertions are chosen so that
@@ -1406,10 +1416,11 @@ const parkReasonsFor = (src) => classify(src).reasons;
  *     file today, and the ratchet arm asserts it.
  *   • the sovereignty WAVE-CLOSE INTEGRATION family, which is where a wave-close pin that
  *     supplies this condition belongs and where the mutant corpora below are addressed.
- *   • ES-4's declared home, NOT YET BUILT. The ES charter's VERIFY-AT-BUILD step resolves to
- *     this walker, so the address is declared HERE and the builder reads it here. A marker in
- *     any other file is not evidence — the walker will read the pin, refuse it, and the census
- *     arm below says which addresses are declared and which are still unbuilt.
+ *   • ES-4's declared home. DECLARED HERE BEFORE IT EXISTED and BUILT 2026-08-06 — the ES
+ *     charter's VERIFY-AT-BUILD step resolves to this walker, so the address was declared
+ *     here and the builder read it here, which is exactly how the cap is meant to work. A
+ *     marker in any other file is not evidence — the walker will read the pin, refuse it, and
+ *     the census arm below says which addresses are declared and which are still unbuilt.
  *
  * THE COST, STATED: an ES-4 pin written into a differently-named file does not light the wave,
  * and the remedy is a one-line edit to this list (and a re-measure of the census). That is the
@@ -1421,8 +1432,21 @@ const EVIDENCE_FILE_ADDRESSES = Object.freeze([
   'tests/domain/sovereigntyWaveCloseIntegration.test.js',
   'tests/domain/espionageDistantSourceEs4.test.js',
 ]);
-/** The declared addresses whose wave has not been built. ES-4's, and today only ES-4's. */
-const UNBUILT_EVIDENCE_ADDRESSES = Object.freeze(['tests/domain/espionageDistantSourceEs4.test.js']);
+/**
+ * The declared addresses whose wave has NOT been built. EMPTY since ES-4 landed
+ * (2026-08-06): all three evidence homes now stand in the tree.
+ *
+ * ⚠ EMPTYING THIS LIST IS A TIGHTENING RATHER THAN BOOKKEEPING, AND IT CLOSES A HOLE THAT
+ * ONLY OPENED WHEN THE FILE ARRIVED. The census arm below excuses a DECLARED address that is
+ * missing from the tree exactly when it is named here. With ES-4's address listed AND its
+ * file present, DELETING that file would have been excused as "not built yet" — the
+ * condition would have fallen back to `UNSATISFIED_TRACKED` and this walker would have
+ * stayed green over it. EXECUTED BOTH WAYS AT THE LANDING: with the address still listed a
+ * deleted evidence file passes that arm; with the list empty it reds by name. An address
+ * belongs here only while its wave genuinely has no file.
+ * @type {ReadonlyArray<string>}
+ */
+const UNBUILT_EVIDENCE_ADDRESSES = Object.freeze([]);
 const isEvidenceAddress = (rel) => EVIDENCE_FILE_ADDRESSES.includes(rel);
 
 /** THE REFUSED READ, kept executable so the tightening is PROVEN and not merely claimed:
@@ -2971,7 +2995,40 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // round's own parent (e1be752f) through a fresh `git archive` with node_modules
       // symlinked in, where this walker's census assertion EXECUTED GREEN — so 18,896 is
       // a reading of that tree and not an inheritance from the row above.
-      files: 2342, parked: 358, credited: 1984, titles: 18903, suiteTitles: 5406,
+      // ── RE-RECORDED 2026-08-06 BY ES WAVE ES-4, THE WAVE THIS ROW WAS WAITING FOR ───
+      // 2,342/358/1,984/18,903/5,406 → 2,343/358/1,985/18,917/5,409. THE CAUSE IS ONE NEW
+      // TEST FILE AND NOTHING ELSE: tests/domain/espionageDistantSourceEs4.test.js, which
+      // is ES-4's DECLARED EVIDENCE ADDRESS and now the carrying file for this walker's own
+      // ES-4 row. No rule here widened or narrowed and no existing test file changed shape.
+      //
+      // ⚠ THE DELTA IS DECOMPOSED BY CONSTRUCTION RATHER THAN COUNTED OFF A DIFF, and it
+      // closes exactly, with the file's OWN counts as the reconciliation:
+      //   tests/domain/espionageDistantSourceEs4.test.js …… 14 titles, 3 suite titles
+      //   +1 file, +1 credited, +0 parked, +14 titles, +3 suite titles
+      // Those 14/3 are not read off the source by eye: `vitest run --reporter=verbose`
+      // reports the file at 14 tests under 3 suites, and this walker's own reader — driven
+      // in a disposable archive — returns `liveTitlesIn` 14 and `liveSuiteTitlesIn` 3 for
+      // it. Two independent readers, one number each.
+      //
+      // PARKED IS UNCHANGED AT 358, AND THAT WAS EARNED RATHER THAN LUCKY — it is the one
+      // figure a DECLARED EVIDENCE ADDRESS may never move, because DOOR 0 refuses an
+      // address that parks and a parked evidence home can never light its wave. Every
+      // title in the new file is a string literal and its one `for…of` walks the three
+      // conditions legs INSIDE a single named test, which is SP-D's recorded idiom holding
+      // for the fifth consecutive wave. MEASURED, not assumed: the same file with its
+      // marker test rewritten as `for (const once of [1]) it(…)` parks on
+      // `TEST_UNREGISTERED:it` ×N, DOOR 0 reds by name, and the condition falls back to
+      // `UNSATISFIED_TRACKED / missing ['ES-4']`.
+      //
+      // ⚠ BOTH ENDS READ WITH THE SAME INSTRUMENT, ARCHIVE AGAINST ARCHIVE, NEVER ARCHIVE
+      // AGAINST LIVE — the comparison that made a previous wave's receipt false. The BASE
+      // figures are a MEASUREMENT of this wave's own PARENT (ef9f961f) through a fresh
+      // `git archive` with node_modules symlinked in, where this whole walker EXECUTED
+      // GREEN at 33/33 while reading 2,342/358/1,984/18,903/5,406. The HEAD figures come
+      // from that SAME archive overlaid with this wave's ONE new file and nothing else,
+      // where it again reads 33/33 green. Exactly one file differs between the two trees,
+      // which is what makes the deltas attributable rather than merely plausible.
+      files: 2343, parked: 358, credited: 1985, titles: 18917, suiteTitles: 5409,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
