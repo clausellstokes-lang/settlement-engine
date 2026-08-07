@@ -31,11 +31,28 @@
  * inside the SAME layer, (1) and (2) fire together and the honest record is a
  * COUNT-NEUTRAL RETARGET of the existing entry — not a bank plus a fresh mint, which
  * would either force a false licence row or block the cleanup that the layer walkers
- * demand. A retarget is NOT a general escape hatch: the importer, the direction and the
- * read symbol must all be unchanged, and the entry carries a `note` field recording the
- * move so it is machine-visible rather than silent. Exactly one entry carries one today
- * (peaceTermsPrimitives.js, warReasons.js -> warReasonTaxonomy.js at 67f8a58e). A
- * retarget that changes what is READ is a new coupling and must go through (1).
+ * demand. A retarget is NOT a general escape hatch. A retarget that changes what is
+ * READ is a new coupling and must go through (1).
+ *
+ * ⭐ THAT EXCEPTION IS MACHINERY, NOT PROSE (2026-08-07, second pass). It shipped as
+ * this paragraph plus a `note` on one baseline entry, and a paragraph checks nothing:
+ * a later lane could repoint ANY entry at ANY module and no test would notice, because
+ * the walker cannot see an entry's history. So the exception now has a REGISTER —
+ * BASELINE_RETARGETS below — and every clause of it is asserted against LIVE code
+ * rather than asserted about it: same importer, same direction (DERIVED from the layer
+ * map, never transcribed), same read symbol actually named at the live import site,
+ * a same-layer move, a strictly smaller provider, the old provider still re-exporting
+ * the symbol so no other consumer moved, and the `note` present, provenance-bearing and
+ * joined BOTH WAYS to the register. The register is frozen at its measured length, so
+ * a second retarget is a chair conversation rather than an edit.
+ *
+ * WHAT THAT STILL CANNOT CATCH, stated rather than discovered later: a lane that
+ * repoints an entry, adds no note and adds no register row, in a commit where the OLD
+ * import genuinely died and the NEW pair is genuinely live. Arm (1) closes the common
+ * case — the pair it repointed AWAY from stays live and reds as unlicensed — but not
+ * that one. Closing it needs the PREVIOUS baseline, which no test in a working tree
+ * has. Reviewing the diff is the remaining guard, and it is now a diff that must also
+ * move a frozen count if the lane is honest.
  *
  * Declared-empty directions stay enforced as the ABSENCE of rows (J-CPL-2 — no
  * forbidden-list lives anywhere in this estate).
@@ -194,14 +211,64 @@ const LAYER_FLOORS = Object.freeze({
  * are the shared band/severity/decay VOCABULARY every layer spells against, not a
  * port that owns a subject. Giving them a family would make every layer's reading of
  * a band word a cross-layer coupling, which is hosting by another name.
+ *
+ * ⭐ EACH ADMISSION HAS A MEASURED COVERAGE COST, AND IT IS NOW COUNTED (2026-08-07,
+ * second pass). An argued module has no layer, so `scanCrossLayerPairs` — which
+ * iterates LAYERED importers and skips any dependency with no layer — cannot see it on
+ * EITHER side. Admitting a module therefore does not merely leave its edges
+ * unclassified; it deletes them from the scan. That was true of every entry here from
+ * the day the ratchet landed, and it was invisible, so each new argument silently
+ * subtracted coverage. It is now typed and paid for:
+ *
+ *   kind: 'host'      — exempt from edge declaration, because mounting many layers IS
+ *                       the argument. Bought with a CLOSED set: the host kind is
+ *                       exactly the four named infrastructure hosts, by exact equality,
+ *                       and each is asserted to really mount more than one layer. A
+ *                       fifth host cannot be admitted by adding a line.
+ *   kind: 'substrate' — argued because it owns no subject and is spoken by every port.
+ *                       That claim is now CHECKED: the entry DECLARES `reads`, its exact
+ *                       set of layered imports, and the walker asserts equality against
+ *                       the live scan. A true leaf declares `[]` and any port it later
+ *                       reaches REDS. A substrate that does read a port must declare
+ *                       every module by name and say why in `readsReason`, so the
+ *                       coverage it costs is enumerated instead of erased.
+ *
+ * WHY NOT SIMPLY SCAN THEM ANYWAY (the alternative, considered and rejected with a
+ * reason): a pair's direction is spelled `${sourceLayer}→${consumerLayer}`, so an edge
+ * touching a module with no layer has no direction to carry and cannot enter the
+ * inventory or be licensed by a registry row — the registry addresses couplings BETWEEN
+ * PORTS. Declaring the reach is the same information without inventing a fake port for
+ * a module the whole argument says has none. The residue is honest and named: edges
+ * INTO an argued module (a layered module importing lawWord.js, say) remain outside the
+ * pair scan, which is exactly what "this module is vocabulary, not a coupling" asserts.
  */
 const ARGUED_UNLAYERED = Object.freeze({
-  'src/domain/worldPulse/pulseKernel.js': 'infrastructure host — mounts every layer\'s stages',
-  'src/domain/worldPulse/applyWorldPulse.js': 'infrastructure host — the apply-side mount',
-  'src/domain/worldPulse/worldState.js': 'infrastructure host — the state shape itself',
-  'src/domain/worldPulse/settlementLifecycleKernel.js': 'infrastructure host — L1 routes every FP stage through it',
-  'src/domain/worldPulse/bandFamilies.js': 'SP substrate — the shared band/severity vocabulary, spelled by every layer',
-  'src/domain/worldPulse/bandedStock.js': 'SP substrate — the shared decay law over that vocabulary',
+  'src/domain/worldPulse/pulseKernel.js': Object.freeze({
+    kind: 'host',
+    reason: 'infrastructure host — mounts every layer\'s stages',
+  }),
+  'src/domain/worldPulse/applyWorldPulse.js': Object.freeze({
+    kind: 'host',
+    reason: 'infrastructure host — the apply-side mount',
+  }),
+  'src/domain/worldPulse/worldState.js': Object.freeze({
+    kind: 'host',
+    reason: 'infrastructure host — the state shape itself',
+  }),
+  'src/domain/worldPulse/settlementLifecycleKernel.js': Object.freeze({
+    kind: 'host',
+    reason: 'infrastructure host — L1 routes every FP stage through it',
+  }),
+  'src/domain/worldPulse/bandFamilies.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'SP substrate — the shared band/severity vocabulary, spelled by every layer',
+    reads: Object.freeze([]),
+  }),
+  'src/domain/worldPulse/bandedStock.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'SP substrate — the shared decay law over that vocabulary',
+    reads: Object.freeze([]),
+  }),
   // ES-0 adds two on the SAME argument the two SP leaves above carry, one rung down.
   // Neither owns a subject; both answer a question every port asks. lawWord.js is the
   // estate's ONE law-band spelling (CR-ES-3) and is spelled by WAR (warSeatBooks),
@@ -211,8 +278,16 @@ const ARGUED_UNLAYERED = Object.freeze({
   // world-law predicate "does magic function here", lifted out of warMagicGate.js under
   // ⟨F7⟩ precisely because it was never war-specific: WAR asks it of a siege and
   // INFORMATION asks it of a message.
-  'src/domain/worldPulse/lawWord.js': 'shared vocabulary — the estate\'s ONE law-band spelling (CR-ES-3), spelled by four ports',
-  'src/domain/worldPulse/magicWorksAt.js': 'shared world-law predicate — does magic function here, asked by WAR and INFORMATION alike',
+  'src/domain/worldPulse/lawWord.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'shared vocabulary — the estate\'s ONE law-band spelling (CR-ES-3), spelled by four ports',
+    reads: Object.freeze([]),
+  }),
+  'src/domain/worldPulse/magicWorksAt.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'shared world-law predicate — does magic function here, asked by WAR and INFORMATION alike',
+    reads: Object.freeze([]),
+  }),
   // SP-D adds one on exactly the lawWord.js argument, and it is the argument's clearest
   // case yet. The generalized errand mint head owns NO SUBJECT: it answers "is this
   // person lawfully on the road, and what kind of business is this" — a question five
@@ -227,7 +302,23 @@ const ARGUED_UNLAYERED = Object.freeze({
   // consumers are enumerated in ERRAND_CONSUMERS and measured both ways by
   // tests/lint/errandConsumerRegistry.walker.test.js, which is a stricter register than
   // an import pair (it reds an unregistered minter AND a registry row with no minter).
-  'src/domain/worldPulse/errandMint.js': 'SP substrate — the estate\'s ONE purposeful-travel mint head (J-SP-2), minted through by five ports; consumers registered in ERRAND_CONSUMERS',
+  'src/domain/worldPulse/errandMint.js': Object.freeze({
+    kind: 'substrate',
+    reason: 'SP substrate — the estate\'s ONE purposeful-travel mint head (J-SP-2), minted through by five ports; consumers registered in ERRAND_CONSUMERS',
+    // MEASURED, not assumed: this is the ONE argued module that is not a leaf, and
+    // declaring it is the whole point of the `reads` field. The three are the errand
+    // spine's own record/transit/vocabulary leaves, all GRAMMAR — so the mint head sits
+    // ON TOP of the envoy family rather than beside it, and SP-D's own note that the
+    // errand ROW is still war-welded is the same fact seen from the other side. It is
+    // declared rather than repaired here because dissolving it means giving the spine a
+    // port-free record leaf, which is a chair-sized move, not a walker's.
+    reads: Object.freeze([
+      'src/domain/worldPulse/envoyErrandRecords.js',
+      'src/domain/worldPulse/envoyErrandTransit.js',
+      'src/domain/worldPulse/envoyErrandVocabulary.js',
+    ]),
+    readsReason: 'the mint head composes the errand spine\'s GRAMMAR-family record, transit and vocabulary leaves; the port-free record leaf that would dissolve this is a chair move (J-SP-2), so the reach is declared and counted rather than erased',
+  }),
   // 2026-08-07, and it is the worldState.js argument one rung down rather than a new
   // one. The layering repair at 67f8a58e lifted the four `worldState.spatialLedgers`
   // accessors verbatim out of distanceRead.js so a property read would stop dragging a
@@ -240,8 +331,32 @@ const ARGUED_UNLAYERED = Object.freeze({
   // wrong door for the opposite reason it is usually wrong: that file is for the
   // volume's §4 PRE-PROGRAM debt, and a module minted this week is not that, so putting
   // it there would launder a program-era edit into permanent invisibility.
-  'src/domain/spatial/spatialLedgerAccess.js': 'infrastructure accessor — the ONE spatialLedgers namespace container, whose sub-ledgers are owned by WAR, INFORMATION, TRADE, POP and every future mover; a port here would make each layer\'s read of its own ledger a cross-layer coupling',
+  'src/domain/spatial/spatialLedgerAccess.js': Object.freeze({
+    // NOT kind:'host' — the host kind is closed at the four named mounts, and this is
+    // not a mount. It is argued on the SUBSTRATE reading and it pays the substrate
+    // price: it declares `reads: []`, which is the machine form of "zero-import leaf",
+    // so the day it reaches into a port this reds instead of hiding the edge.
+    kind: 'substrate',
+    reason: 'infrastructure accessor — the ONE spatialLedgers namespace container, whose sub-ledgers are owned by WAR, INFORMATION, TRADE, POP and every future mover; a port here would make each layer\'s read of its own ledger a cross-layer coupling',
+    reads: Object.freeze([]),
+  }),
 });
+
+/** The CLOSED host set. A fifth infrastructure host is a chair conversation. */
+const ARGUED_HOSTS = Object.freeze([
+  'src/domain/worldPulse/pulseKernel.js',
+  'src/domain/worldPulse/applyWorldPulse.js',
+  'src/domain/worldPulse/worldState.js',
+  'src/domain/worldPulse/settlementLifecycleKernel.js',
+]);
+
+/**
+ * THE ROSTER CEILING — the exact count measured today (2026-08-07). It is a CEILING,
+ * not a target: admitting an eleventh argued module now costs a visible ratchet edit
+ * with a written argument, which is the whole cure for "each admission silently
+ * subtracts coverage". Lowering it when an argument dissolves banks the win.
+ */
+const ARGUED_ROSTER_CEILING = 10;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;
@@ -286,6 +401,43 @@ function relativeImportsOf(rel) {
   return [...out].sort();
 }
 
+/** The LAYERED subset of a module's relative imports — the reach an argued module owes. */
+const layeredImportsOf = (rel) => relativeImportsOf(rel).filter((dep) => LAYER_OF.has(dep));
+
+/**
+ * The binding names an importer takes FROM one specific module, at the live import
+ * site. This is what makes "same read symbol" checkable instead of merely stated: a
+ * retarget that quietly widened what it reads reds here rather than passing on a note.
+ */
+function importedNamesFrom(importerRel, targetRel) {
+  const source = readFileSync(join(ROOT, importerRel), 'utf8');
+  const names = new Set();
+  for (const match of source.matchAll(IMPORT_RE)) {
+    const specifier = match[1];
+    if (!specifier.startsWith('.')) continue;
+    const resolved = relative(ROOT, resolve(dirname(join(ROOT, importerRel)), specifier)).replace(/\\/g, '/');
+    if (resolved !== targetRel) continue;
+    const braces = match[0].match(/\{([\s\S]*?)\}/);
+    if (!braces) { names.add('*'); continue; }
+    for (const raw of braces[1].split(',')) {
+      const name = raw.trim().split(/\s+as\s+/)[0].trim();
+      if (name) names.add(name);
+    }
+  }
+  return [...names].sort();
+}
+
+/** Does `rel` export `symbol` by name — as a declaration or in an export clause? */
+function exportsSymbol(rel, symbol) {
+  const source = readFileSync(join(ROOT, rel), 'utf8');
+  if (new RegExp(`export\\s+(?:async\\s+)?(?:function|const|let|var|class)\\s+${symbol}\\b`).test(source)) return true;
+  for (const clause of source.matchAll(/export\s*\{([\s\S]*?)\}/g)) {
+    if (clause[1].split(',').some((raw) => raw.trim().split(/\s+as\s+/).pop().trim() === symbol
+      || raw.trim().split(/\s+as\s+/)[0].trim() === symbol)) return true;
+  }
+  return false;
+}
+
 /** `${sourceLayer}→${consumerLayer}` — the registry's own direction spelling. */
 function scanCrossLayerPairs() {
   const pairs = [];
@@ -304,6 +456,32 @@ const LIVE_PAIRS = scanCrossLayerPairs();
 const LIVE_KEYS = new Set(LIVE_PAIRS.map(keyOf));
 const BASELINE = JSON.parse(readFileSync(BASELINE_PATH, 'utf8'));
 const BASELINE_KEYS = new Set(BASELINE.map(keyOf));
+
+/**
+ * THE RETARGET REGISTER — the machine half of the narrow (3) exception in the header.
+ *
+ * A retarget is the only edit that may change an existing baseline entry's `imported`
+ * without banking-and-re-minting. It shipped as a comment plus one `note`, which
+ * checked nothing; every clause of the exception is now asserted below against LIVE
+ * code, and the register is frozen at length 1 so a second one is a chair conversation
+ * rather than a line. `direction` is stated here ONLY so the test can prove it against
+ * the layer map — it is DERIVED, never trusted (derive-don't-restate).
+ */
+const BASELINE_RETARGETS = Object.freeze([
+  Object.freeze({
+    importer: 'src/domain/worldPulse/peaceTermsPrimitives.js',
+    from: 'src/domain/worldPulse/warReasons.js',
+    to: 'src/domain/worldPulse/warReasonTaxonomy.js',
+    direction: 'WAR→GRAMMAR',
+    symbol: 'reasonPairKey',
+    at: '67f8a58e',
+  }),
+]);
+/** The baseline key a retarget's surviving entry must carry. */
+const retargetKeyOf = (entry) => `${entry.importer}|${entry.to}|${entry.direction}`;
+/** The only field a baseline entry may carry beyond the pair identity. */
+const BASELINE_ENTRY_KEYS = Object.freeze(['importer', 'imported', 'direction', 'note']);
+const basenameOf = (rel) => String(rel).split('/').pop();
 
 /** Scoped modules with no layer home and no argued exclusion — the census subject. */
 const LIVE_UNLAYERED = DOMAIN_MODULES
@@ -389,24 +567,86 @@ describe('CW-0w cross-layer inclusion ratchet — anti-vacuity anchors', () => {
     expect(DOUBLE_CLAIMED).toEqual([]);
   });
 
-  test('every argued exclusion is a real module that still has no layer', () => {
+  test('every argued exclusion is a real module that still has no layer, under a TYPED argument', () => {
     // Stated, not omitted: a host that mounts every layer is not a layer, and the SP
     // substrate leaves are vocabulary rather than a port. If one ever acquires a layer
     // home — or vanishes — this reds and the exclusion must be re-argued. Each carries
     // a written reason, so the map can never grow a silent member.
-    for (const [module, reason] of Object.entries(ARGUED_UNLAYERED)) {
+    for (const [module, argument] of Object.entries(ARGUED_UNLAYERED)) {
       expect(DOMAIN_MODULES, `${module} vanished — re-aim the exclusion`).toContain(module);
       expect(LAYER_OF.has(module), `${module} acquired a layer home`).toBe(false);
-      expect(reason.length, `${module} is excluded without a reason`).toBeGreaterThan(20);
+      expect(['host', 'substrate'], `${module} has no recognised argument kind`).toContain(argument.kind);
+      expect(argument.reason.length, `${module} is excluded without a reason`).toBeGreaterThan(20);
     }
-    // The four infrastructure hosts are named, so a future edit cannot quietly drop one
-    // of them out of the map and leave the census to catch it as ordinary debt.
-    expect(Object.keys(ARGUED_UNLAYERED)).toEqual(expect.arrayContaining([
-      'src/domain/worldPulse/pulseKernel.js',
-      'src/domain/worldPulse/applyWorldPulse.js',
-      'src/domain/worldPulse/worldState.js',
-      'src/domain/worldPulse/settlementLifecycleKernel.js',
-    ]));
+    // The roster is a measured CEILING, so an eleventh admission cannot ride in as one
+    // more line: it must move this number, in the diff, with an argument. That is the
+    // cure for "each future admission silently subtracts coverage".
+    expect(Object.keys(ARGUED_UNLAYERED).length,
+      'the argued roster GREW — every admission deletes that module\'s edges from the pair'
+      + ' scan, so raising ARGUED_ROSTER_CEILING is a deliberate, reviewable act')
+      .toBeLessThanOrEqual(ARGUED_ROSTER_CEILING);
+  });
+
+  test('the HOST kind is CLOSED at the four named mounts, and each really mounts more than one layer', () => {
+    // The host argument buys its exemption from the reach declaration below with an
+    // exact-equality roster: a fifth infrastructure host cannot be admitted by adding a
+    // line, and a future edit cannot quietly drop one of the four out of the map and
+    // leave the census to catch it as ordinary debt.
+    const hosts = Object.entries(ARGUED_UNLAYERED)
+      .filter(([, argument]) => argument.kind === 'host').map(([module]) => module);
+    expect([...hosts].sort()).toEqual([...ARGUED_HOSTS].sort());
+    // …and the claim is checked, not taken: a "host" that mounts one layer or none is a
+    // consumer wearing a host's exemption. Floor 2, the measured minimum today
+    // (settlementLifecycleKernel reads POP and GRAMMAR); pulseKernel reads all seven.
+    for (const host of ARGUED_HOSTS) {
+      const layers = new Set(layeredImportsOf(host).map((dep) => LAYER_OF.get(dep)));
+      expect(layers.size, `${host} is argued as an infrastructure host but mounts ${layers.size} layer(s)`
+        + ' — a module that reads one port is a consumer, and its edges belong in the scan')
+        .toBeGreaterThanOrEqual(2);
+    }
+  });
+
+  test('⭐ every SUBSTRATE exclusion DECLARES its exact cross-layer reach — argued is exempt from CLASSIFICATION, never from the SCAN', () => {
+    // THE COVERAGE ARM. An argued module has no layer, so scanCrossLayerPairs cannot see
+    // it on either side and every edge through it leaves the inventory. The substrate
+    // argument — "it owns no subject, every port speaks it" — implies the module speaks
+    // no port back, and that implication is now MEASURED against the live import graph
+    // rather than asserted in a sentence. A leaf declares []; anything it later reaches
+    // reds by name here instead of vanishing.
+    const drift = [];
+    for (const [module, argument] of Object.entries(ARGUED_UNLAYERED)) {
+      if (argument.kind !== 'substrate') continue;
+      const declared = [...argument.reads].sort();
+      const actual = layeredImportsOf(module);
+      const missing = actual.filter((dep) => !declared.includes(dep));
+      const stale = declared.filter((dep) => !actual.includes(dep));
+      for (const dep of missing) {
+        drift.push(`${module} (argued SUBSTRATE) now reads ${dep} [${LAYER_OF.get(dep)}] and does not`
+          + ' declare it. That edge is INVISIBLE to the pair scan because the importer has no'
+          + ' layer, so either give the module a LAYER_PATTERNS home (and let the read be'
+          + ' licensed like any other coupling), or add it to `reads` with a `readsReason`'
+          + ' saying why the substrate argument survives it.');
+      }
+      for (const dep of stale) {
+        drift.push(`${module} (argued SUBSTRATE) declares a read of ${dep} it no longer has`
+          + ' — DELETE it from `reads`; the declared reach only shrinks.');
+      }
+      if (argument.reads.length > 0) {
+        expect(String(argument.readsReason || '').length,
+          `${module} declares a cross-layer reach with no readsReason — a substrate that speaks`
+          + ' a port owes the reason its argument survives that').toBeGreaterThan(40);
+      }
+    }
+    expect(drift).toEqual([]);
+    // Guard-the-guard: the arm above is worthless if `reads` is never non-empty anywhere,
+    // because then it only ever compares [] to []. errandMint is the live non-leaf, and
+    // this pins that the exactness arm is doing real work on a real reach today.
+    const declaringModules = Object.entries(ARGUED_UNLAYERED)
+      .filter(([, argument]) => argument.kind === 'substrate' && argument.reads.length > 0);
+    expect(declaringModules.length,
+      'no argued substrate declares any reach — if that became true legitimately, delete this'
+      + ' anchor; while it is false the exactness arm above is comparing [] to [] forever')
+      .toBeGreaterThan(0);
   });
 
   test('POSITIVE CONTROL: the scan finds WR-4\'s registered trade read and the join licenses it', () => {
@@ -452,11 +692,86 @@ describe('CW-0w cross-layer inclusion ratchet — the shrink-only inventory', ()
       expect(typeof pair.importer === 'string' && pair.importer.startsWith('src/domain/')).toBe(true);
       expect(typeof pair.imported === 'string' && pair.imported.startsWith('src/domain/')).toBe(true);
       expect(pair.direction).toMatch(/^[A-Z]+→[A-Z]+$/);
+      // No silent fields. `note` is the ONE extra, and it means exactly one thing (a
+      // registered retarget, joined below); a lane cannot invent a new key to carry an
+      // unreviewed exception in a data file nobody reads as code.
+      expect(Object.keys(pair).filter((key) => !BASELINE_ENTRY_KEYS.includes(key)),
+        `${pair.importer} → ${pair.imported} carries an unrecognised baseline field`).toEqual([]);
     }
     // The two tests above are jointly an exact-set assertion for UNLICENSED
     // pairs; this states it as one readable claim: the baseline never carries a
     // pair the live scan does not see.
     expect(BASELINE.filter((pair) => !LIVE_KEYS.has(keyOf(pair)))).toEqual([]);
+  });
+
+  test('⭐ every RETARGET is what it claims: same importer, DERIVED direction, same symbol, same layer, smaller provider', () => {
+    // THE EXCEPTION, MADE CHECKABLE. Nothing here trusts the register's own words:
+    // the direction is recomputed from the layer map, the symbol is read off the live
+    // import site, and the move is confirmed by the old import being GONE. Repoint an
+    // entry at an unrelated module and one of these fires by name.
+    for (const entry of BASELINE_RETARGETS) {
+      const { importer, from, to, symbol } = entry;
+      expect(DOMAIN_MODULES, `${to} vanished — the retarget target is gone`).toContain(to);
+      expect(DOMAIN_MODULES, `${from} vanished — re-argue the retarget`).toContain(from);
+      // SAME LAYER: the exception is a move INSIDE a port, never a hop between ports.
+      expect(LAYER_OF.get(from), `${from} and ${to} are not in the same layer — that is a NEW`
+        + ' coupling, not a retarget; bank the old entry and mint a registry row')
+        .toBe(LAYER_OF.get(to));
+      // SAME DIRECTION, DERIVED. The register's `direction` string is proven, not read.
+      expect(`${LAYER_OF.get(to)}→${LAYER_OF.get(importer)}`).toBe(entry.direction);
+      // THE MOVE HAPPENED: the importer reads the new provider and no longer the old.
+      const imports = relativeImportsOf(importer);
+      expect(imports, `${importer} does not import ${to}`).toContain(to);
+      const stillOld = `${importer} still imports ${from} — the retarget did not happen, so the`
+        + ' old pair is live debt and must keep its own baseline entry';
+      // The assertion above proves `imports` CONTAINS `to` — the same array, in the same
+      // test, read fresh off the live file — so this absence cannot go vacuous on an
+      // emptied or drifted collection.
+      // anchored: the preceding toContain(to) on the same array is the liveness proof
+      expect(imports, stillOld).not.toContain(from);
+      // SAME READ SYMBOL, and ONLY it. A retarget that widened what it reads is a new
+      // coupling and must go through arm (1).
+      expect(importedNamesFrom(importer, to)).toEqual([symbol]);
+      expect(exportsSymbol(to, symbol), `${to} does not export ${symbol}`).toBe(true);
+      // NO CONSUMER MOVED: the old provider still re-exports the symbol, which is what
+      // made the move count-neutral for everyone other than this importer.
+      expect(exportsSymbol(from, symbol), `${from} no longer re-exports ${symbol} — other`
+        + ' consumers moved too, so this was a refactor with a wider blast radius than the'
+        + ' exception permits').toBe(true);
+      // A SMALLER PROVIDER: "moved DOWN" is the whole justification, so it is measured.
+      expect(relativeImportsOf(to).length,
+        `${to} is not a smaller provider than ${from} — the retarget bought nothing`)
+        .toBeLessThan(relativeImportsOf(from).length);
+    }
+  });
+
+  test('⭐ a retarget is joined BOTH WAYS to a provenance-bearing baseline note, and is count-neutral', () => {
+    // The `note` field is the retarget door and nothing else. Both directions are
+    // pinned, so neither a noted entry with no register row nor a register row with no
+    // note can pass — and the note must actually carry its provenance rather than say
+    // "moved".
+    const noted = BASELINE.filter((pair) => Object.prototype.hasOwnProperty.call(pair, 'note'));
+    expect([...noted].map(keyOf).sort())
+      .toEqual([...BASELINE_RETARGETS].map(retargetKeyOf).sort());
+    for (const entry of BASELINE_RETARGETS) {
+      const rows = BASELINE.filter((pair) => keyOf(pair) === retargetKeyOf(entry));
+      expect(rows, `no baseline entry for the retarget onto ${entry.to}`).toHaveLength(1);
+      const note = String(rows[0].note || '');
+      expect(note).toContain('RETARGET');
+      expect(note, 'the note must name the module the entry was moved FROM')
+        .toContain(basenameOf(entry.from));
+      expect(note, 'the note must carry the commit that moved it').toContain(entry.at);
+      expect(note, 'the note must name the symbol whose home moved').toContain(entry.symbol);
+      expect(note.length, 'the note must be provenance, not a word').toBeGreaterThan(120);
+      // COUNT-NEUTRAL: the entry MOVED. A surviving entry for the old pair would be a
+      // bank-plus-mint wearing a retarget's clothes, and would grow the inventory.
+      expect(BASELINE.filter((pair) => pair.importer === entry.importer && pair.imported === entry.from),
+        `the baseline still carries ${entry.importer} → ${entry.from}; a retarget is count-neutral`)
+        .toEqual([]);
+    }
+    // Frozen: a SECOND retarget is a chair conversation. Raising this number is the
+    // reviewable act that stops the exception becoming a general escape hatch.
+    expect(BASELINE_RETARGETS).toHaveLength(1);
   });
 
   test('the owed register is EXACT: each entry is still live, and still unlicensed', () => {
@@ -538,6 +853,10 @@ describe('CW-0w cross-layer inclusion ratchet — the unlayered-module census (C
     // An argued module may never ALSO sit in the baseline — two doors for one module
     // would let a deleted argument pass unnoticed through the other.
     for (const module of Object.keys(ARGUED_UNLAYERED)) {
+      // The exact-set equality above proves UNLAYERED_BASELINE equals the LIVE unlayered
+      // set, and the anti-vacuity anchor holds it over 100 entries, so an emptied
+      // baseline reds there rather than passing silently here.
+      // anchored: the exact-set equality above is the liveness proof for this collection
       expect(UNLAYERED_BASELINE, `${module} is both argued and baselined`).not.toContain(module);
     }
   });

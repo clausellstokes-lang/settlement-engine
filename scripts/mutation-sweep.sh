@@ -94,6 +94,7 @@ MUTATED_FILES=(
   src/generators/narrative/settlementOriginProse.js
   tests/lint/.coupling-inclusion-baseline.json
   src/domain/certification/couplingRegistryWar.js
+  src/domain/spatial/spatialLedgerAccess.js
   src/domain/worldPulse/brokeragePlantHandoff.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
@@ -748,6 +749,26 @@ check_caught_planted "coupling/unregistered cross-layer import planted" \
 #     demand its registry row.
 perl -0pi -e 's/\{\n    "importer": "src\/domain\/worldPulse\/generosityKernel\.js",\n    "imported": "src\/domain\/worldPulse\/beliefMap\.js",\n    "direction": "[^"]*"\n  \},\n  //' tests/lint/.coupling-inclusion-baseline.json
 check_caught "coupling/inclusion baseline entry deleted while its import lives" tests/lint/.coupling-inclusion-baseline.json "npx vitest run tests/lint/couplingInclusion.walker.test.js --no-file-parallelism"
+
+# 70a. THE COUNT-NEUTRAL RETARGET EXCEPTION, PROVEN. A retargeted baseline entry is the
+#      one edit permitted to change an entry's `imported` without banking and re-minting,
+#      and it is licensed by a `note` joined both ways to BASELINE_RETARGETS. Strip the
+#      note and the exception becomes exactly what a silent repoint looks like. It shipped
+#      as a comment for one day and checked nothing; a MISSED here means it is prose again
+#      and any future lane can repoint any entry at anything.
+perl -0pi -e 's/,\n    "note": "RETARGETED[^"]*"\n  \}/\n  }/' tests/lint/.coupling-inclusion-baseline.json
+check_caught "coupling/retarget note stripped from the baseline entry" tests/lint/.coupling-inclusion-baseline.json "npx vitest run tests/lint/couplingInclusion.walker.test.js --no-file-parallelism"
+
+# 70b. AN ARGUED-UNLAYERED SUBSTRATE REACHES INTO A PORT. An ARGUED_UNLAYERED module has
+#      no layer, so scanCrossLayerPairs cannot see it on either side and every edge
+#      through it leaves the inventory — which means each admission SUBTRACTS coverage.
+#      The substrate argument ("owns no subject, spoken by every port") is bought by
+#      declaring an exact `reads` set, so plant the read the declaration forbids:
+#      spatialLedgerAccess.js, admitted 2026-08-07 as a zero-import namespace leaf,
+#      is made to read WAR. A MISSED here means an argued module can quietly become a
+#      cross-layer consumer whose couplings nothing will ever name.
+printf "\nimport { embattlementActive } from './embattlement.js';\nexport const mutsweepReach = embattlementActive;\n" >> src/domain/spatial/spatialLedgerAccess.js
+check_caught "coupling/argued-unlayered substrate reads a port undeclared" src/domain/spatial/spatialLedgerAccess.js "npx vitest run tests/lint/couplingInclusion.walker.test.js --no-file-parallelism"
 
 # 71. The registry's desk and the paper's routing are pulled apart: retag WR-6's
 #     alliance-risk row from the war desk to trade while its kind keeps routing
