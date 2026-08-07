@@ -20,6 +20,7 @@ import { objectiveForArchetype } from '../../src/domain/worldPulse/scoringObject
 import { readWarTerminations } from '../../src/domain/worldPulse/warTermination.js';
 import { advanceTreaties, treatyPairKey } from '../../src/domain/worldPulse/peaceTerms.js';
 import { repudiateTreaty } from '../../src/domain/worldPulse/treatyBreach.js';
+import { dispositionTransitionNewsEntries } from '../../src/domain/worldPulse/dispositionNews.js';
 import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
 
 const NEUTRAL_BARS = Object.freeze({
@@ -426,5 +427,51 @@ describe('WR-2 treaty integration — each resolved verdict teaches diplomacy on
     const laterMover = advanceTreaty(first.worldState, 11);
     expect(laterMover.dispositionDeltas).toEqual([]);
     expect(getSpatialLedger(laterMover.worldState, 'treaties')).toBeTruthy();
+  });
+
+  // SOL-BANK-3. `repudiateTreaty` used to declare its transition rows as the
+  // widened `Array<Record<string, unknown>>`, which the news composer's exact
+  // parameter rejected — the gate's own typecheck named it. The declaration is
+  // now DERIVED from the sole producer, but a JSDoc type is only a claim while
+  // the tsc gate is dark behind ~351 inherited errors, so the RUNTIME truth of
+  // the five members the composer reads by name gets its own executed pin here.
+  //
+  // ANTI-VACUITY: an empty ledger moves the stock without crossing a band and
+  // yields ZERO rows, so a naive fixture would pin an empty array and prove
+  // nothing. The seed below sits just inside `settled` precisely so the loss
+  // crosses into `measured`, and the row count is asserted before the members.
+  it('a repudiation transition row carries every member the news composer reads by name', () => {
+    const seeded = {
+      ...treatyWorld(),
+      dispositionStats: {
+        iron: { channels: { diplomatic: { stock01: 0.405, band: 'settled', updatedTick: 10 } } },
+      },
+    };
+    const result = repudiateTreaty(seeded, { fromId: 'iron', toId: 'weak', tick: 10 });
+    expect(result.ok).toBe(true);
+
+    const rows = result.dispositionTransitions;
+    expect(Array.isArray(rows)).toBe(true);
+    expect(rows).toHaveLength(1);
+
+    const NAMED_BY_THE_COMPOSER = ['channel', 'id', 'kind', 'tick', 'toBand'];
+    const missing = NAMED_BY_THE_COMPOSER.filter((member) => rows[0][member] === undefined);
+    expect(missing).toEqual([]);
+    expect(rows[0]).toMatchObject({
+      kind: 'band_crossing', id: 'iron', channel: 'diplomatic',
+      fromBand: 'settled', toBand: 'measured', tick: 10,
+    });
+
+    // The consumer must actually accept the produced rows, not merely typecheck
+    // against them: one crossing composes exactly one addressed entry.
+    const news = dispositionTransitionNewsEntries({
+      transitions: rows,
+      snapshot: { byId: new Map([['iron', { name: 'Ironhold', settlement: { name: 'Ironhold' } }]]) },
+      worldState: result.worldState,
+      now: '2026-01-01T00:00:00.000Z',
+    });
+    expect(news).toHaveLength(1);
+    expect(news[0].kind).toBe('disposition_diplomatic_crossed');
+    expect(news[0].settlementIds).toEqual(['iron']);
   });
 });

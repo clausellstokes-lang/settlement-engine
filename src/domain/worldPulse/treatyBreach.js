@@ -15,6 +15,16 @@ import { peaceCausalActive } from './warReasons.js';
 /** @typedef {Record<string, unknown>} Mut */
 /** @typedef {Record<string, Mut>} TreatyLedger */
 
+/**
+ * The band-crossing row, DERIVED from its only producer rather than restated.
+ * `advanceDispositionChannels` is the sole writer of these rows and already
+ * declares their exact shape; a hand-copied shape here would go stale the moment
+ * the ledger gains a field, and the consumer (dispositionNews.js) reads named
+ * members — `kind`, `id`, `channel`, `toBand`, `tick` — that a widened
+ * `Record<string, unknown>` row does not promise.
+ * @typedef {ReturnType<typeof advanceDispositionChannels>['transitions'][number]} DispositionTransition
+ */
+
 export const TREATY_REPUDIATION_TYPE = 'repudiation';
 
 /** @param {unknown} v @returns {Mut} */
@@ -85,7 +95,7 @@ export function repudiableTreatyPairs(worldState, tick) {
  * `toId`. Invalid or lapsed requests are strict no-ops (same state reference).
  * @param {Record<string, unknown>} worldState
  * @param {{ fromId?: unknown, toId?: unknown, tick?: unknown }} args
- * @returns {{ ok: true, worldState: Record<string, unknown>, changed: true, treatyKeys: string[], dispositionTransitions?:Array<Record<string, unknown>> }
+ * @returns {{ ok: true, worldState: Record<string, unknown>, changed: true, treatyKeys: string[], dispositionTransitions?:DispositionTransition[] }
  *   | { ok: false, code: string, detail: string, worldState: Record<string, unknown> }}
  */
 export function repudiateTreaty(worldState, { fromId, toId, tick } = {}) {
@@ -147,7 +157,7 @@ export function repudiateTreaty(worldState, { fromId, toId, tick } = {}) {
     };
   }
   let nextWorldState = setSpatialLedger(worldState, 'treaties', next);
-  /** @type {Array<Record<string, unknown>>} */
+  /** @type {DispositionTransition[]} */
   let dispositionTransitions = [];
   const simulationRules = asObject(worldState.simulationRules);
   if (simulationRules.dispositionChannelsEnabled === true) {
