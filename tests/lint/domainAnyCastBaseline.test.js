@@ -111,11 +111,32 @@ const CEILING = 2287;
 //   src/domain/worldPulse/envoyPulse.js           2 any / baseline 0   (+2)
 //     CAUSE: e0c8646e "Idiom sweep: the `= {}` destructure typed at its source".
 //     `regionalGraph?:any, wizardNews?:any` in advanceEnvoyDiplomacyPulse's args.
-//     ⚠ TYPING THESE `unknown` WAS TRIED AND MEASURED (2026-08-07): it improves
-//     envoyPulse itself (domain-strict 19 -> 16, full-config held at 2) but opens
-//     +2 NEW full-config errors in pulseKernel.js, because the pulse assigns
-//     `envoys.wizardNews` / `envoys.regionalGraph` into concretely-typed slots and
-//     the dark early-return path hands the raw inputs straight back. The honest
+//     ⚠ TYPING THESE `unknown` WAS TRIED AND RE-MEASURED. ⚠⚠ THE FIGURE FIRST
+//     RECORDED HERE — "improves envoyPulse itself (domain-strict 19 -> 16,
+//     full-config held at 2)" — IS CORRECTED. A verifier could not reproduce the
+//     19 at any sha in that lane's window, and an unreproducible number in a
+//     declared-debt ledger is worse than none, because the next lane plans
+//     against it. RE-MEASURED 2026-08-07 at HEAD e37f9495 on a clean tree by
+//     actually applying the change (`regionalGraph?:any, wizardNews?:any` ->
+//     `?:unknown`, one line, advanceEnvoyDiplomacyPulse's @param) and running
+//     both checkers before and after, then restoring the file sha256-exact:
+//
+//                                 before   after
+//       domain-strict envoyPulse.js    14      16   (+2 — it gets WORSE)
+//       domain-strict pulseKernel.js    8      10   (+2)
+//       full-config   envoyPulse.js     2       2   (held — this half was true)
+//       full-config   pulseKernel.js    4       6   (+2 — this half was true)
+//
+//     `npx tsc --noEmit -p tsconfig.domain-strict.json` and `-p tsconfig.full.json`,
+//     counting located `src/domain/.../<file>.js(` diagnostics — the two-typechecker
+//     receipt law: neither figure is total, and each is named with its config.
+//     THE DIRECTION WAS BACKWARDS. `unknown` does not improve envoyPulse; it adds
+//     two domain-strict errors there (TS2345 at 258,36 and 387,38 — an `unknown`
+//     is not assignable to `WizardNewsFeed | null | undefined`) on top of the two
+//     it opens in pulseKernel under BOTH configs (TS2739/TS2740 at pulseKernel
+//     2044,5 and 2045,5 — `{}` missing every WizardNewsFeed / region-graph field,
+//     because the dark early-return path hands the raw inputs straight back).
+//     The conclusion is unchanged and now rests on reproduced numbers: the honest
 //     cure needs the real wizardNews / regionalGraph shapes threaded through both
 //     files. DECLARED DEBT, not an oversight — owed to a burn lane.
 //

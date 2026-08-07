@@ -969,17 +969,29 @@ export function applyWorldPulseOutcomes({
             // cannot ride silently). This is NOT a new field appearing: it is a
             // NEW VALUE in a field that was already being persisted. Measured over
             // 30 real generated worlds (5 tiers × 6 seeds) driven through this very
-            // apply mouth, the change is TOTAL — 30 of 30 rows, never a subset:
-            //     before  `hamlet-7100:merchant_guilds`  installerFactionId, in
+            // apply mouth, the change is TOTAL — 30 of 30 rows, never a subset.
+            // The declared row is ONE REAL WORLD end to end, `village-7100`:
+            //     before  `village-7100:merchant_guilds` installerFactionId, in
             //             factionCompetition's `${saveId}:${stablePart(name)}` space
             //     after   `fac.merchant_council`         ladderFactionKey of the body
             //             that HOLDS the seat, in the ladder's `fac.<slug>` space
+            //
+            // ⚠ CORRECTION 2026-08-07 (receipt-correction lane): this row previously
+            // read `hamlet-7100:merchant_guilds` and was illustrated with prior
+            // holder "Feudal Stewardship" — a COMPOSITE of two worlds. `hamlet-7100`'s
+            // prior holder is "Free Elder Council"; "Feudal Stewardship" belongs to
+            // `village-7100`. Re-measured over the same 30-world corpus, `village-7100`
+            // carries all three names at once, so the record is re-pointed at a real
+            // row. Same correction in the PIN-3 header; TCD-1's commit messages are
+            // history and still carry the composite.
+            //
             // It is doubly a change. THE SUBJECT MOVES: transferRulingPower seats a
             // NEW governing body derived from the challenger's preference, and the
             // post-transfer holder shares a name with neither the prior holder (0/30)
-            // nor the installer (0/30) — "Feudal Stewardship" + installer "Merchant
-            // Guilds" ⇒ "Merchant Council". So the old value named a body that does
-            // not hold the seat. THE ID SPACE MOVES: the two spaces are disjoint, so
+            // nor the installer (0/30) — on `village-7100`, prior holder "Feudal
+            // Stewardship" + installer "Merchant Guilds" ⇒ "Merchant Council". So the
+            // old value named a body that does not hold the seat.
+            // THE ID SPACE MOVES: the two spaces are disjoint, so
             // no reader could ever have accepted both, and the ladder's own organic
             // writer was already on `fac.` — this composer was the lone outlier.
             // Pinned by tests/domain/warSeatBooksFactionAddress.test.js (PIN-3).

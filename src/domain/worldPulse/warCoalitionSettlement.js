@@ -437,6 +437,18 @@ export function applyCoalitionSettlement({
   // that `undefined` spills into every annotated caller. All live call sites pass a
   // real state, so this default is unreachable in practice — it closes a type hole,
   // it does not add a behavior.
+  //
+  // ⚠ CORRECTED CENSUS, 2026-08-07 (receipt-correction lane). The receipt that
+  // landed this default said "All six call sites (peaceTerms plus five in tests)".
+  // THERE ARE FIVE INVOCATION SITES, not six. Re-measured at HEAD e37f9495 with a
+  // full-repo grep over src/ tests/ scripts/ supabase/ docs/ — eight occurrences of
+  // the symbol, of which one is this declaration and one is peaceTerms.js:129's
+  // IMPORT. The five real invocations are:
+  //     src/domain/worldPulse/peaceTerms.js:602            (the only production caller)
+  //     tests/domain/warCoalitionSettlement.test.js:216, :247, :276, :292
+  // Six is reached only by counting the import as a call site. The CONCLUSION is
+  // unaffected — all five pass a real worldState — but a census quoted one high is
+  // how a later lane concludes it has found every caller when it has not.
   worldState = {},
   snapshot,
   settlementUpdates = [],

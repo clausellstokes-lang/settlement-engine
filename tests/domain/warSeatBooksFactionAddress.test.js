@@ -17,13 +17,46 @@
  * settlement under test, never transcribed, and the corpus is multi-seed so no
  * single lucky world can carry the suite.
  */
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
+
+/**
+ * ⚠ THE ROUTING PROBE (see PIN-2's "the writer really CALLS the shared helper").
+ *
+ * `seatTransitionGoverningFactionId` is value-identical to `ladderFactionKey`
+ * over this corpus, so NO equality assertion on the persisted value can tell a
+ * call to the shared helper apart from an inline reimplementation — the pin that
+ * claimed "routes through the shared helper, byte-for-byte" proved only that the
+ * two agree. This wrapper makes routing decidable: with `sentinel` null it
+ * DELEGATES to the real helper (so the corpus and every other pin below see
+ * unchanged values), and with `sentinel` set it returns a value the real helper
+ * could never produce. If that value reaches the persisted row, the writer
+ * called THIS export; if it does not, the writer resolved the id some other way.
+ *
+ * `vi.hoisted` is required: `vi.mock` factories are hoisted above the module
+ * body, so a plain `const` here would be in its TDZ when the factory runs.
+ * The mock spreads the original module, so `appendNpcLadderSeatTransition` and
+ * every other export are the real ones, and the kernel's own internal call to
+ * its module-local binding is untouched.
+ */
+const routingProbe = vi.hoisted(() => ({ sentinel: /** @type {string|null} */ (null) }));
+vi.mock('../../src/domain/worldPulse/npcLadderKernel.js', async (importOriginal) => {
+  const actual = /** @type {Record<string, any>} */ (await importOriginal());
+  return {
+    ...actual,
+    seatTransitionGoverningFactionId: (/** @type {unknown} */ faction) => (
+      routingProbe.sentinel === null
+        ? actual.seatTransitionGoverningFactionId(faction)
+        : routingProbe.sentinel
+    ),
+  };
+});
 
 import { gen } from '../simulation/simHelpers.js';
 import { governingFactionOf, nameOf } from '../../src/domain/rulingPower.js';
 import { realmFactionPulseId } from '../../src/domain/dossier/realmEntityWeb.js';
 import { getSpatialLedger, setSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
 import { applyWorldPulseOutcomes } from '../../src/domain/worldPulse/applyWorldPulse.js';
+import { factionCompetitionId } from '../../src/domain/worldPulse/factionCompetition.js';
 import { ladderFactionKey } from '../../src/domain/worldPulse/npcLadderState.js';
 import { seatTransitionGoverningFactionId } from '../../src/domain/worldPulse/npcLadderKernel.js';
 import { stablePart } from '../../src/domain/worldPulse/stablePart.js';
@@ -121,10 +154,44 @@ function snapshotOf(rows) {
 const ROWS = corpus();
 const SNAPSHOT = snapshotOf(ROWS);
 
+/**
+ * ⚠⚠ ANTI-VACUITY FLOORS DO NOT TRAVEL — the rule this file now obeys everywhere.
+ *
+ * A loop body asserts NOTHING over an empty collection, and no comment makes it
+ * true. Until 2026-08-07 the floors in this file lived in TWO tests — the corpus
+ * pin's `ROWS.length >= 20` and PIN-2's `WRITTEN.length >= 20` — and NINE
+ * loop-bearing or `ROWS[0]`-bearing pins across three describes borrowed their
+ * non-vacuity from those SIBLINGS. Delete, rename or `.skip` either sibling and
+ * nine pins go silently green over nothing, which is exactly how the pin-vacuity
+ * class propagates. Counting the collection inside the same test is not enough
+ * either: `expect(checked).toBe(ROWS.length)` reads `0 === 0` on an empty corpus.
+ *
+ * So EVERY pin below that walks a collection, or indexes `ROWS[0]`, now carries
+ * its OWN denominator assertion in its OWN body. The floors are deliberately
+ * redundant with each other — that redundancy IS the property: no single deletion
+ * can silence more than the pin it lives in.
+ */
 describe('TCD-1 governing-seat faction address', () => {
   it('the corpus is real, non-empty, and carries no faction .id at all', () => {
     // The denominator. If this ever shrinks to nothing the pins below go
     // vacuous silently, which is exactly how this defect class propagates.
+    //
+    // ⚠ CORRECTED CENSUS, 2026-08-07 (receipt-correction lane). TCD-1's commit
+    // messages (65ed49fd, 79419449) and its lane report state "196 faction rows"
+    // for this corpus. THE MEASURED FIGURE IS 203, and three independent
+    // environments agree on 203. Re-measured at HEAD e37f9495 on a clean tree by
+    // rebuilding this exact corpus outside vitest — `gen({ settType: tier },
+    // askedSeed)` for the same TIERS × SEEDS as the loop above, then summing
+    // `powerStructure.factions.length` — which gives 203 rows over 30 worlds,
+    // distributed hamlet 26 / village 35 / town 38 / city 49 / metropolis 55, and
+    // 0 of the 203 carrying `.id`. The "0 carry `.id`" half of the receipt is
+    // therefore correct; only the denominator was wrong. The commit messages are
+    // history and still say 196 — quote THIS line, not them.
+    //
+    // The assertions stay FLOORS, deliberately. A hand-restated exact census goes
+    // stale the moment the generator's roster sizes move, and a stale derivable
+    // is the defect class this very lane is repairing; the figure above is dated
+    // and attributed instead of frozen into an expectation.
     expect(ROWS.length).toBeGreaterThanOrEqual(20);
     const factionRows = ROWS.flatMap((row) => row.settlement?.powerStructure?.factions || []);
     expect(factionRows.length).toBeGreaterThanOrEqual(60);
@@ -159,6 +226,8 @@ describe('TCD-1 governing-seat faction address', () => {
   });
 
   it('readWarSeatBooks emits the settlement-scoped address id for every real governing seat', () => {
+    // OWN FLOOR. `checked === ROWS.length` alone is `0 === 0` on an empty corpus.
+    expect(ROWS.length).toBeGreaterThanOrEqual(20);
     let checked = 0;
     for (const row of ROWS) {
       const books = readWarSeatBooks({
@@ -173,6 +242,7 @@ describe('TCD-1 governing-seat faction address', () => {
       checked += 1;
     }
     expect(checked).toBe(ROWS.length);
+    expect(checked).toBeGreaterThanOrEqual(20);
   });
 
   it('the address id is byte-identical to realmFactionPulseId, so the link web can follow it', () => {
@@ -181,6 +251,8 @@ describe('TCD-1 governing-seat faction address', () => {
     // "present" but differently spelled is a dead rung. warSeatBooks cannot
     // import realmEntityWeb (a dossier-layer module would re-parent this lazy
     // worldPulse leaf's closure), so the single-source guarantee is THIS pin.
+    expect(ROWS.length).toBeGreaterThanOrEqual(20); // OWN FLOOR
+    let compared = 0;
     for (const row of ROWS) {
       const books = readWarSeatBooks({
         worldState: {},
@@ -193,7 +265,9 @@ describe('TCD-1 governing-seat faction address', () => {
       expect(index).toBeGreaterThanOrEqual(0);
       expect(books.factionId).toBe(realmFactionPulseId(row.id, row.governing, index));
       expect(books.factionId).toContain(':');
+      compared += 1;
     }
+    expect(compared).toBe(ROWS.length);
   });
 
   it('that id RESOLVES against the real roster — a war ruling that needs the faction rung survives', () => {
@@ -243,6 +317,9 @@ describe('TCD-1 governing-seat faction address', () => {
   });
 
   it('a NEGATIVE CONTROL id resolves to nothing, so the pin above is not passing on the name alone', () => {
+    // OWN FLOOR — this pin indexes ROWS[0] and would otherwise inherit its
+    // liveness from a sibling test's denominator.
+    expect(ROWS.length).toBeGreaterThanOrEqual(20);
     const row = ROWS[0];
     const entry = warRulingNewsEntry({
       evidence: {
@@ -265,6 +342,7 @@ describe('TCD-1 governing-seat faction address', () => {
     // (warSeatBooks.authoritySignatureFor and rulingPower.authorityTransferEpochFor).
     // Feeding the address id into either would make every faction rename read
     // as a legitimate authority transfer.
+    expect(ROWS.length).toBeGreaterThanOrEqual(20); // OWN FLOOR
     const row = ROWS[0];
     const before = authoritySignatureFor({ worldState: {}, snapshot: SNAPSHOT, actorId: row.id });
     const renamedFactions = row.settlement.powerStructure.factions.map((faction) => (
@@ -301,6 +379,7 @@ describe('TCD-1 governing-seat faction address', () => {
     // applyWorldPulse's approved-transfer path and npcLadderKernel's organic
     // succession path compose the same persisted row. They had drifted: one
     // resolved the ladder key, the other fell back to the INSTALLER's id.
+    expect(ROWS.length).toBeGreaterThanOrEqual(20); // OWN FLOOR
     for (const row of ROWS) {
       const spelled = seatTransitionGoverningFactionId(row.governing);
       expect(spelled).toBe(ladderFactionKey(row.governing));
@@ -342,9 +421,15 @@ describe('TCD-1 governing-seat faction address', () => {
  *
  * Everything the pulse needs is derived from the world under test:
  *   • the CHALLENGER is a real non-governing faction off that settlement's own
- *     roster, and `installerFactionId` is spelled exactly as factionCompetition's
- *     `factionId()` spells it (`${saveId}:${stablePart(name)}`) — the same value
- *     the real producer puts in `proposalPayload.factionId`;
+ *     roster, and `installerFactionId` is MINTED BY THE REAL PRODUCER —
+ *     `factionCompetitionId`, factionCompetition's own exported spelling of the
+ *     id it puts in `proposalPayload.factionId`. It used to be hand-spelled here
+ *     as `${row.id}:${stablePart(nameOf(challenger))}` under a comment asserting
+ *     the copy matched the producer, which is exactly the restated-derivable
+ *     class this file's own lane reported (STOP-PR-1): a hand copy of a
+ *     derivable goes stale silently the day the producer changes its mint, and
+ *     the pin would then be testing a spelling nothing writes. Calling the
+ *     producer cannot drift from the producer;
  *   • the ladder's rungs are real npc ids from that same world. They are not
  *     decoration: `normalizeSeatTransitions` DROPS a row with no seat on either
  *     side, so without a resolvable seat the writer runs and persists NOTHING
@@ -357,7 +442,10 @@ function driveApprovedGovernmentChange(row) {
   const npcs = (row.settlement?.npcs || []).filter((npc) => npc?.id);
   if (!challenger || npcs.length < 2) return null;
 
-  const installerFactionId = `${row.id}:${stablePart(nameOf(challenger))}`;
+  // THE REAL PRODUCER, called — never a copy of its spelling. `factionCompetitionId`
+  // is the exported mint factionCompetition itself uses for `proposalPayload.factionId`,
+  // and it takes the roster INDEX because the settlement scope is load-bearing.
+  const installerFactionId = factionCompetitionId(row.id, challenger, factions.indexOf(challenger));
   const ladder = {
     [row.id]: {
       factions: {
@@ -426,6 +514,7 @@ describe('TCD-1 PIN-2 — the seat-transition writer, over real worlds', () => {
     // `String(governingFaction?.id || installerFactionId || '')` fails: with no
     // `.id` on any generated faction row (re-measured above), that expression
     // evaluates to installerFactionId on 100% of real worlds.
+    expect(WRITTEN.length).toBeGreaterThanOrEqual(20); // OWN FLOOR
     for (const written of WRITTEN) {
       expect(written.transition.governingFactionId)
         .toBe(ladderFactionKey(written.governingAfter));
@@ -436,14 +525,49 @@ describe('TCD-1 PIN-2 — the seat-transition writer, over real worlds', () => {
     }
   });
 
-  it('the writer routes through the shared helper, byte-for-byte', () => {
-    // Ties the persisted value to the SINGLE-WRITER helper by name. If a future
-    // edit reimplements the resolution inline and the two ever disagree, this
-    // reds even when the inline copy happens to look right for the common case.
+  it('the persisted value AGREES with the shared helper (agreement only — not routing)', () => {
+    // ⚠ CORRECTED CLAIM, 2026-08-07. This pin used to be titled "the writer
+    // routes through the shared helper, byte-for-byte" and it DID NOT TEST
+    // ROUTING. `seatTransitionGoverningFactionId` is value-identical to
+    // `ladderFactionKey` over this corpus (the pin above asserts exactly that),
+    // so an inline reimplementation in applyWorldPulse would satisfy every
+    // assertion here. A header that overstates its pin is the recorded
+    // doc-overstatement class; the title now names what the body proves, and the
+    // routing claim is discharged by the sentinel pin below instead.
+    expect(WRITTEN.length).toBeGreaterThanOrEqual(20);
     for (const written of WRITTEN) {
       expect(written.transition.governingFactionId)
         .toBe(seatTransitionGoverningFactionId(written.governingAfter));
     }
+  });
+
+  it('the writer really CALLS the shared helper — a sentinel return lands in the persisted row', () => {
+    // THE ROUTING PROOF the old title claimed. The probe makes the shared export
+    // return a value the real resolver cannot produce; the writer is then driven
+    // for real. If applyWorldPulse resolved the id inline, the sentinel could not
+    // appear and this reds — which is precisely the drift the repair removed.
+    const row = ROWS[0];
+    expect(row).toBeTruthy();
+    const SENTINEL = 'fac.__routing_sentinel__';
+    let probed;
+    try {
+      routingProbe.sentinel = SENTINEL;
+      probed = driveApprovedGovernmentChange(row);
+    } finally {
+      routingProbe.sentinel = null;
+    }
+    expect(probed).not.toBeNull();
+    expect(probed.transition.governingFactionId).toBe(SENTINEL);
+
+    // THE NEGATIVE CONTROL, so the pin cannot pass by the probe being stuck on:
+    // the same drive with the probe released writes the real resolver's answer,
+    // which is NOT the sentinel. Without this, a probe that never reset would
+    // make the assertion above true for the wrong reason.
+    const released = driveApprovedGovernmentChange(row);
+    expect(released).not.toBeNull();
+    expect(released.transition.governingFactionId).not.toBe(SENTINEL);
+    expect(released.transition.governingFactionId)
+      .toBe(ladderFactionKey(released.governingAfter));
   });
 
   it('installerFactionId survives under its own honest name, in its own id space', () => {
@@ -451,6 +575,7 @@ describe('TCD-1 PIN-2 — the seat-transition writer, over real worlds', () => {
     // still recorded — under the field that actually names it — and the two
     // fields inhabit disjoint id spaces, which is why the old value could never
     // have been a merely-differently-spelled right answer.
+    expect(WRITTEN.length).toBeGreaterThanOrEqual(20); // OWN FLOOR
     for (const written of WRITTEN) {
       expect(written.transition.installerFactionId).toBe(written.installerFactionId);
       expect(written.transition.governingFactionId).toMatch(/^fac\./);
@@ -471,20 +596,40 @@ describe('TCD-1 PIN-2 — the seat-transition writer, over real worlds', () => {
 // being written, and a behaviour shift that rides silently is the one thing this
 // program forbids outright.
 //
-// MEASURED at this tree over the 30-world corpus above, 30 of 30 rows:
-//   before   `hamlet-7100:merchant_guilds`   (installerFactionId — the INSTALLER,
+// MEASURED at this tree over the 30-world corpus above, 30 of 30 rows. The
+// declared row below is ONE REAL WORLD end to end — `village-7100` — never an
+// example assembled from several:
+//   before   `village-7100:merchant_guilds`  (installerFactionId — the INSTALLER,
 //                                             in factionCompetition's settlement-
 //                                             scoped `${saveId}:${slug}` space)
 //   after    `fac.merchant_council`          (ladderFactionKey of the body that
 //                                             HOLDS the seat, in the ladder's
 //                                             `fac.<slug>` space)
 //
+// ⚠ CORRECTION, 2026-08-07 (receipt-correction lane) — READ THIS BEFORE QUOTING
+// ANY FIGURE ABOVE. Until today this record declared the row as
+// `hamlet-7100:merchant_guilds` ⇒ `fac.merchant_council` and illustrated it as
+// "Feudal Stewardship" + installer "Merchant Guilds" ⇒ "Merchant Council". THAT
+// WAS A COMPOSITE OF TWO DIFFERENT WORLDS: on `hamlet-7100` the prior holder is
+// "Free Elder Council"; "Feudal Stewardship" is `village-7100`'s prior holder.
+// The id pair came from one row and the name illustration from another, and a
+// fabricated-looking example in a golden-shift record poisons every real figure
+// beside it. Re-measured off the live corpus by driving `driveApprovedGovern-
+// mentChange` over all 30 rows: `village-7100` carries prior holder, installer
+// and post-transfer holder together, so the record is RE-POINTED at a real row
+// rather than re-illustrated. The two SURVIVING per-row figures below (0/30 and
+// 0/30) were re-measured and are unchanged. The same composite rode in
+// applyWorldPulse.js's declared-shift comment (corrected there too) and in
+// TCD-1's commit messages, which are history and cannot be edited.
+//
 // The change is TOTAL (30/30, never 0/30 or a subset) and it is doubly a change:
 //   • THE SUBJECT MOVES. `transferRulingPower` seats a NEW governing body derived
-//     from the challenger's government preference — measured, the post-transfer
-//     holder shares a name with NEITHER the prior holder (0/30) NOR the installer
-//     (0/30): "Feudal Stewardship" + installer "Merchant Guilds" ⇒ "Merchant
-//     Council". So the old value named a body that does not hold the seat.
+//     from the challenger's government preference — re-measured 2026-08-07, the
+//     post-transfer holder shares a name with NEITHER the prior holder (0/30) NOR
+//     the installer (0/30). On the declared row `village-7100`, all in one world:
+//     prior holder "Feudal Stewardship", installer "Merchant Guilds", post-
+//     transfer holder "Merchant Council". So the old value named a body that does
+//     not hold the seat.
 //   • THE ID SPACE MOVES. `${saveId}:${slug}` and `fac.<slug>` are disjoint, so no
 //     reader could have accepted both. The ladder's own organic writer already
 //     wrote the `fac.` space; applyWorldPulse was the one composer disagreeing.
@@ -494,6 +639,8 @@ describe('TCD-1 PIN-3 — the declared persisted-value shift', () => {
   it('the shift is TOTAL: the old spelling produced the installer on every world', () => {
     // Re-derives the PRE-FIX expression rather than quoting its result, so this
     // stays true against the live corpus instead of rotting into a stale figure.
+    // OWN FLOOR — `moved === WRITTEN.length` alone is `0 === 0` on an empty drive.
+    expect(WRITTEN.length).toBeGreaterThanOrEqual(20);
     let moved = 0;
     for (const written of WRITTEN) {
       const preFix = String(written.governingAfter?.id || written.installerFactionId || '');
@@ -506,6 +653,7 @@ describe('TCD-1 PIN-3 — the declared persisted-value shift', () => {
   });
 
   it('the shift is a different SUBJECT, not a re-spelling of the same body', () => {
+    expect(WRITTEN.length).toBeGreaterThanOrEqual(20); // OWN FLOOR
     for (const written of WRITTEN) {
       expect(nameOf(written.governingAfter)).not.toBe(nameOf(written.challenger));
       expect(nameOf(written.governingAfter)).not.toBe(nameOf(written.governingBefore));
