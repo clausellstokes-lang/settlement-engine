@@ -5668,3 +5668,101 @@ wave's full-suite run. **The mutex held and both lanes behaved correctly.** HEAD
 re-verified unmoved and both files `cmp`'d immediately before staging. Recorded because a
 chair asserting a quiet tree is exactly the kind of premise a lane should not have to
 discover is false.
+
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · LANE CONTAINED — REPAIR ROUND
+## (Chair-landed. `cef0ac18` rejected, repaired additively at `bcd98a0b`.)
+
+**Both verifier findings UPHELD. Neither touched the code `cef0ac18` shipped — that is still
+correct. What was wrong was every sentence explaining it.** Zero reverts, one additive
+comment-only commit, and every figure below RE-MEASURED by the repair lane in an
+integrity-counted `git archive` of the committed sha — none inherited, and one of the
+verifier's own numbers is refuted.
+
+### F1 — A FALSE RATIONALE AUTHORED INTO THE SOURCE. The refutation came back STRONGER.
+
+The comment claimed the dead-initializer deletion left `inversion01` unassigned *"so an
+unhandled arm is a TDZ error rather than a silent neutral 0."* **A `let` cannot do that** —
+`let x;` initializes the binding to `undefined` at the declaration and the temporal dead zone
+ENDS there. Three probes, `typeof` read immediately after: `"undefined"` every time, zero
+ReferenceErrors.
+
+⭐ **But the repair went further than the finding and measured what an unhandled arm ACTUALLY
+PRODUCES**, against the real `clamp01` and the real tuning:
+
+| unhandled third direction | `clears` | `bondScore01` |
+|---|---|---|
+| WITH the old `= 0` seed | false | **0.8** — the CAP |
+| WITHOUT the seed (as shipped) | false | **0** |
+
+**The deletion did not trade a silent answer for a loud one. It traded one silent answer for a
+DIFFERENT silent answer** — `undefined > 0.15` is false, and `clamp01` clamps non-finite to 0
+by its own documented rule. The comment promised the exact opposite of the behaviour.
+
+⛔ **A THROW IS RECOMMENDED AGAINST, NOT SILENTLY ADDED.** The third arm is UNREACHABLE
+through the only entry point — `direction` is a local two-member set and a guard fifteen lines
+above already returns for anything else. A throw there would be an unpinnable guard, this
+estate's own unreachable-predicate class, while changing runtime behaviour on a dead path. The
+pin-able shape, if the chair ever wants it, is to EXTRACT the computation into an exported
+pure function and pin three things — the throw fires for an unknown direction, does NOT fire
+for either live direction, and same-seed goldens stay byte-identical.
+
+### F2 — THE SIXTH FALSE RECEIPT, AND ITS RULE IS NOW STATED
+
+`SOL-BANK-7` quoted `files 958`. Measured in an archive of `cef0ac18`: **956**. Every other
+figure exact. **CAUSE PROVEN:** the identical probe against the LIVE tree returns 958 with
+every other figure byte-identical, and `git diff --diff-filter=A` restricted to the census
+scope returns exactly the sibling lane's two new files.
+
+> ⭐⭐ **THE RULE, STATED BECAUSE THIS IS THE SIXTH INSTANCE: A CENSUS TAKEN IN A SHARED LIVE
+> TREE MEASURES THE OTHER LANE'S WORK TOO. EVERY CENSUS FIGURE MUST BE TAKEN IN A
+> `git archive` OF THE COMMITTED SHA, NEVER IN THE WORKING TREE.** One number moved and the
+> receipt still looked right — that is what makes the class insidious.
+
+⚠ **956 belongs to `cef0ac18`; 958 belongs to `bcd98a0b`**, where the sibling's files are
+committed history. Do not conflate them.
+
+### ⚠ THE VERIFIER'S OWN FIGURE IS REFUTED — "1304 → 1303" NEVER HAPPENED
+
+Measured at FOUR refs: **1303 at parent, 1303 at head, 1303 at `41ddeae0`, 1303 live.**
+The delta across this wave is **ZERO**. The shared ratchet stays untightened, now for the
+stronger reason that the wave earned nothing to tighten it with. *(A "1304" is most
+economically explained by the same live-tree contamination as F2, measured against sibling WIP
+that differed from what was finally committed. That tree state no longer exists — PLAUSIBLE.)*
+
+### TWO MORE CORRECTIONS, AND A THIRD RED NOBODY HAD NAMED
+
+The inherited any-cast red has **TWO** rows, not one, and the unnamed one is worse:
+⚠⚠ **`commercialReasons.js` at 31 any-holes against a baseline of ZERO** — the
+red-ratchet-grows-invisibly hazard in its loudest shape. Both files are the same blob at every
+ref, so the inherited conclusion stands. **And a THIRD arm of the same walker is red at both
+ends and was named nowhere: live total 2253 against baseline 2221.** Not re-baselined; all
+recorded as burn-downs owed.
+
+`SOL-BANK-2`'s rows were mis-named from stale queue text — the real diff is ONE row relocating
+in ONE file (`brokerageServices.js`, line 429 → 464, snippet byte-identical, 413 vs 413).
+
+### ⚠ A GATE-DISCIPLINE DEFECT THE LANE CAUGHT IN ITSELF
+
+It first issued `gate-mutex.sh --wait` and the vitest run as **SEPARATE statements** — so a
+wait TIMEOUT (exit 3) would have let vitest start anyway, which is precisely the fake-red the
+mutex exists to prevent. Killed before vitest started and re-issued as one `&&` chain.
+**ADOPTED INTO THE STANDING LAWS: the mutex wait and the run are ONE `&&` chain, never two
+statements.**
+
+### GATES
+
+Focused battery **9 files / 175 tests green**, exit 0, taken after a 7-poll wait behind the
+live ES-5 lane. Known-inherited reds run separately and quoted verbatim. Wave-end attribution
+via the ratchet script: **ONLY IN HEAD (0)**, "HEAD grew nothing". Comment-only diff proven on
+the COMMITTED bytes. All three walkers re-run against the edited tree return figures IDENTICAL
+to pre-edit — the sixteen added comment lines move nothing, and `lineageClaim.js` appears in
+no line-bound baseline.
+
+⚠ **EVERY ARCHIVE WAS INTEGRITY-COUNTED BEFORE IT WAS TRUSTED** — `git ls-tree -r | wc -l`
+against `find -type f | wc -l`, matching at all four refs — after a concurrent
+`git archive | tar` silently truncated one file for this slice's verifier and produced FOUR
+FAKE FAILURES. Archives built with `-o file.tar` + `tar -xf`, never through a pipe.
+
+**Nothing lit, no flag minted, no band ratified, no ratchet tightened, no baseline
+regenerated, no soak run, nothing pushed.**
