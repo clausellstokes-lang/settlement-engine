@@ -3062,7 +3062,27 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // test files, so it is a SHARED SERIALIZER between build lanes exactly as the
       // mutation manifest is. A lane landing test files after this commit re-records here,
       // and that is the established pattern rather than a defect.
-      files: 2346, parked: 358, credited: 1988, titles: 18944, suiteTitles: 5419,
+      // ── RE-RECORDED 2026-08-07 BY THE ES-5a REPAIR ROUND (the seven findings) ──────
+      // 2,346/358/1,988/18,944/5,419 -> 2,346/358/1,988/18,951/5,421. NO NEW FILE, which
+      // is why only the two title layers move: the repair round added tests to two files
+      // that were already credited at the figures above.
+      // TWO INDEPENDENT READERS AGREE, both EXECUTED, and the base half was read in a
+      // `git archive` of 74bf5a82 with node_modules symlinked in and its file count
+      // verified against `git ls-tree -r` (6,168 = 6,168) before any figure was trusted:
+      //   READER 1, vitest's own count, base archive -> repaired tree:
+      //     tests/domain/espionageDoctrineStage.test.js .... 12 -> 17 tests (+5)
+      //     tests/domain/espionageWariness.test.js ......... 9 -> 11 tests (+2)
+      //   READER 2, this walker's own `liveTitlesIn` over the whole estate: 18,944 ->
+      //     18,951, i.e. +7, which is the same +7 decomposed above.
+      // THE +5: the doctrine stage gained the `wait_expired` REACHABILITY CENSUS (the pin
+      // that can see a whole verdict arm being swallowed by a door order) and a four-test
+      // suite for §3.9's licensed order prose. THE +2: the wariness leaf gained the
+      // errand-state routing census and the sibling-header cross-reference scan.
+      // SUITE TITLES +2, one per new `describe`, and no `describe` was removed.
+      // PARKED IS UNCHANGED AT 358 for the seventh consecutive wave, earned the same way:
+      // every added title is a string LITERAL, and every new `for…of` walks INSIDE a
+      // single named test rather than generating tests from a loop.
+      files: 2346, parked: 358, credited: 1988, titles: 18951, suiteTitles: 5421,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

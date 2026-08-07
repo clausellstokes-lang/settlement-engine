@@ -55,7 +55,17 @@
  * DECLARED ABSENT rather than folded as a silent zero. The estate's one desperation read is
  * computed inside `processLies` from believed strength bands and is not exported; minting a
  * second spelling is what J-WR-10 forbids. Every gathering receipt names them, exactly as
- * ES-2's detections name `overdueForeignNotables`.
+ * the detection receipts name whatever `TELL_TERMS_ABSENT` (espionageWariness.js) holds.
+ *
+ * ⚠ THAT SENTENCE USED TO NAME ONE TERM BY HAND, AND THE TERM MOVED OUT FROM UNDER IT. It
+ * named ES-2's visibility predicate as the thing the detections declared absent — true when
+ * ES-2 shipped, and FALSE from the moment ES-5 built that predicate and made it LIVE. ES-5
+ * updated the assertion in ES-2's own battery and left this sibling header quoting the old
+ * fact, where nothing pinned it. So the sentence now POINTS AT THE REGISTER instead of
+ * restating a member of it: a hand-restated derivable goes stale silently, and the only cure
+ * that scales is not restating it. tests/domain/espionageWariness.test.js scans this header
+ * for the retired spelling, with a positive control, so the repair cannot itself rot — which
+ * is also why this paragraph describes the old sentence rather than quoting it back.
  *
  * ── ⛔ A DEAD ARM, MEASURED AND DECLARED: THE `delta` RUNG CANNOT OCCUR IN A RUNNING WORLD ─
  * `insideAssetAt` is an injected predicate and THIS ESTATE HAS NO PRODUCER FOR IT. Measured

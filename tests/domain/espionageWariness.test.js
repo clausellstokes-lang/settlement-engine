@@ -298,6 +298,32 @@ describe('ES-5 — the fence is the module’s own emptiness', () => {
   });
 });
 
+describe('ES-5 — the sibling header stops restating a term that moved', () => {
+  const SIBLING = 'src/domain/worldPulse/espionage/espionageProductStage.js';
+
+  test('the product stage points at the REGISTER instead of naming a term that went live', () => {
+    // THE HAND-RESTATED-FACT FAMILY. ES-2's sibling header said its detections name
+    // `overdueForeignNotables` as ABSENT. ES-5 built that predicate, made the term LIVE, and
+    // updated the assertion in ES-2's battery — but not this header, and nothing pinned it.
+    // A stale cross-reference is exactly as wrong as a stale assertion and reds nowhere.
+    const source = readFileSync(join(ROOT, SIBLING), 'utf8');
+    // LIVENESS FIRST — a scan over a file that failed to load, or over a path that moved,
+    // would report a clean absence forever. The corpus is real and it is the right file.
+    expect(source.length).toBeGreaterThan(1000);
+    expect(source).toContain('espionageProductStage.js');
+    // The header points at the register, which cannot go stale when a member changes.
+    expect(source).toContain('TELL_TERMS_ABSENT');
+    // …and the retired restatement is gone. `overdueForeignNotables` is a LIVE term now, so
+    // this file naming it among the absences is the defect, in either direction.
+    expect(source).not.toContain('name `overdueForeignNotables`');
+    // POSITIVE CONTROL: the detector really detects. Without this the absence above could be
+    // the absence of a needle nobody would have found either way.
+    expect(`${source}name \`overdueForeignNotables\``).toContain('name `overdueForeignNotables`');
+    // And the term this header now points at really is the one the leaf publishes.
+    expect(TELL_TERMS_ABSENT).not.toContain('overdueForeignNotables');
+  });
+});
+
 describe('ES-5 — the tell reaches the catch roll, and moves it', () => {
   const SNAPSHOT = Object.freeze([
     {

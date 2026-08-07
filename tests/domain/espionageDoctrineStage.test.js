@@ -27,6 +27,12 @@
  *        example and the reachability census red, which is the point: the census is the
  *        pin that can see a whole ARM being swallowed, and the example alone could have
  *        been deleted by a future author who read it as one more door test.
+ *   M12 — (REPAIR ROUND) `orderProseFor`'s digit screen deleted, so every contributor
+ *        sentence is quoted -> 3 failed / 17. The raw scores reach the receipt and L5's
+ *        no-decimal pin reds along with both screen pins.
+ *   M13 — (REPAIR ROUND) the prose GATHERED but never spliced into the receipt (`${'$'}{explained}`
+ *        dropped from both arms) -> 1 failed / 17. A gather nobody reads is the shape this
+ *        estate calls a dark instrument, and the splice pin is what tells them apart.
  * Every plant restored byte-identically (cmp) in the same shell. See the sibling record in
  * espionageWariness.test.js for why the plants are run by hand rather than by the sweep.
  */
@@ -42,6 +48,7 @@ import {
   dispatchCadenceKey,
   dispatchDemandFor,
   espionageDoctrineFor,
+  orderProseFor,
 } from '../../src/domain/worldPulse/espionage/espionageDoctrineStage.js';
 import {
   DOCTRINE_EMPLOYMENTS,
@@ -57,6 +64,7 @@ import {
 import { LAW_WORD_EDGES } from '../../src/domain/worldPulse/lawWord.js';
 import { natureWordFor } from '../../src/domain/worldPulse/conquestDoctrineStage.js';
 import { settlementAlignment } from '../../src/domain/worldPulse/settlementAlignment.js';
+import { deriveSystemVariable } from '../../src/domain/causalState.js';
 import { hash01 } from '../../src/domain/region/contestMath.js';
 import { litCovertWorld } from '../helpers/covertMissionFixture.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -343,6 +351,109 @@ describe('ES-5 — the cadence: five doors, each dropped on its own', () => {
       'roll01',
       'the cadence result surface',
     );
+  });
+});
+
+describe('ES-5 — §3.9’s licensed order prose, and the two hazards it rides', () => {
+  /** A settlement that lights every arm of `deriveLawOrder` at once, so the screen below is
+   *  measured against a real mixture rather than against a hand-picked sentence. */
+  const EXPLAINED_COURT = {
+    id: 'ashford',
+    settlement: {
+      powerStructure: {
+        government: 'Magistratal Council',
+        publicLegitimacy: 'strong',
+        factions: [
+          { id: 'f.crime', faction: 'The Wet Knives', category: 'criminal', power: 70, isGoverning: false },
+          { id: 'f.seat', faction: 'The Seat', category: 'civic', power: 60, isGoverning: true },
+        ],
+      },
+      defenseProfile: { scores: { internal: 74, external: 50, readiness: 50 } },
+      institutions: [
+        { catalogId: 'courthouse', name: 'The Courthouse' },
+        { catalogId: 'watch_barracks', name: 'Watch Barracks' },
+      ],
+      economicState: { safetyProfile: { blackMarketCapture: 40 } },
+    },
+  };
+
+  test('the obligation ES-0 handed this file BY NAME is discharged, not re-deferred', () => {
+    // `espionageDoctrine.js`'s header assigns the §3.9 prose gather to this stage by name.
+    // ES-5a neither built it nor declared it — the failure mode that LOOKS DISCHARGED. The
+    // pin is that the gather really produces sentences off a real causal read.
+    const prose = orderProseFor({ item: EXPLAINED_COURT });
+    expect(prose.reason).toBe('quoted');
+    expect(prose.lines.length).toBeGreaterThan(0);
+    // DERIVED, NOT TRANSCRIBED: every quoted line must be one the causal deriver actually
+    // emitted for this settlement, so the gather cannot be a table of house sentences.
+    const emitted = deriveSystemVariable('law_order', EXPLAINED_COURT.settlement)
+      .contributors.map((c) => c.reason);
+    expect(emitted.length).toBeGreaterThan(prose.lines.length);
+    for (const line of prose.lines) expect(emitted).toContain(line);
+    // The screen's two halves account for the whole set — nothing is silently dropped.
+    expect(prose.lines.length + prose.withheld).toBe(emitted.length);
+  });
+
+  test('HAZARD 1 — the raw-score screen is TOTAL and fails CLOSED', () => {
+    const prose = orderProseFor({ item: EXPLAINED_COURT });
+    // Not one quoted sentence speaks a number, which is L5 on a string this file did not
+    // write. `deriveLawOrder` interpolates raw scores into its own prose.
+    for (const line of prose.lines) expect(line, line).not.toMatch(/\d/);
+    // THE ANCHOR THAT MAKES THAT MEANINGFUL: sentences carrying numbers really were on
+    // offer and really were withheld. Without this the clean lines could be a court whose
+    // order nobody explained at all.
+    expect(prose.withheld).toBeGreaterThan(0);
+    const withheldText = deriveSystemVariable('law_order', EXPLAINED_COURT.settlement)
+      .contributors.map((c) => c.reason).filter((t) => /\d/.test(t));
+    expect(withheldText.length).toBe(prose.withheld);
+    // …and a court with nothing to explain says so rather than answering an empty quote.
+    expect(orderProseFor({ item: SAINTLY_COURT })).toMatchObject({ reason: 'no_contributors', withheld: 0 });
+    expect(orderProseFor()).toMatchObject({ reason: 'no_contributors' });
+    expect(orderProseFor({ item: null })).toMatchObject({ reason: 'no_contributors' });
+  });
+
+  test('HAZARD 2 — the patron double-count has no arithmetic here to happen in', () => {
+    // §3.9's parenthesis: the deity LAW axis feeds BOTH `computeLawfulness` (this stage's
+    // order word) and `deriveLawOrder`. Blending the SCORE would count the patron twice,
+    // invisibly on every deity-free world. The guard is that only `.reason` is ever read.
+    const read = deriveSystemVariable('law_order', EXPLAINED_COURT.settlement);
+    const prose = orderProseFor({ item: EXPLAINED_COURT });
+    // The score and band exist and are NON-neutral, so this is a live read to have leaked.
+    expect(read.score).not.toBe(50);
+    expect(typeof read.band).toBe('string');
+    // Nothing numeric travels: the result carries lines, a count of what was withheld, and
+    // a reason word. No score, no band, no per-contributor delta.
+    expect(Object.keys(prose).sort()).toEqual(['lines', 'reason', 'withheld']);
+    expect(JSON.stringify(prose)).not.toContain(String(read.score));
+    // And the doctrine's own order word is UNMOVED by the causal read — the two stay
+    // separate reads of the same axis, which is the whole point of quoting prose only.
+    const banded = lawWordFor(
+      settlementAlignment(EXPLAINED_COURT, lit()).lawfulness01,
+      ESPIONAGE_DOCTRINE_TUNING.ORDER_EDGES,
+    );
+    expect(espionageDoctrineFor({ worldState: lit(), item: EXPLAINED_COURT }).method)
+      .toBe(banded === 'lawless' ? 'lawless' : 'lawful');
+  });
+
+  test('the prose reaches the cadence receipt, and the receipt still speaks no number', () => {
+    const out = dispatchCadenceFor({
+      worldState: lit(), item: EXPLAINED_COURT, courtId: 'ashford', tick: 5,
+      castable: true, decidingConfidence01: 0.1,
+    });
+    expect(out.orderProse.lines.length).toBeGreaterThan(0);
+    // THE SPLICE IS REAL: every gathered line is IN the receipt, not merely beside it.
+    for (const line of out.orderProse.lines) expect(out.receipt).toContain(line);
+    // …and the composed receipt still holds L5 — which is only possible because the screen
+    // ran. The doctrine's own words are still there, so this is not an emptied string.
+    expect(out.receipt).toContain('court:');
+    expect(out.receipt).not.toMatch(/\d/);
+    // EVERY DOOR ANSWERS THE SAME SHAPE. A refusing door that omitted the field would make
+    // `.orderProse.lines` an undefined read on some paths and not others.
+    const dark = dispatchCadenceFor({
+      worldState: lit({ espionageEnabled: false }), item: EXPLAINED_COURT, tick: 5,
+    });
+    expect(dark).toMatchObject({ reason: 'dark' });
+    expect(dark.orderProse).toMatchObject({ lines: [], withheld: 0, reason: 'not_read' });
   });
 });
 

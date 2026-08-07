@@ -39,6 +39,40 @@
  * DECISION it is, with the verdict, the bar and the receipt a caller needs — and the
  * absence of a production caller is DECLARED here rather than discovered.
  *
+ * ── THE OBLIGATION ES-0 HANDED THIS FILE BY NAME, AND IT IS DISCHARGED HERE ─────────────
+ * `espionageDoctrine.js`'s header says, of the §3.9 permission to quote
+ * `deriveSystemVariable('law_order', s).contributors` sentences as prose: "gathering
+ * worldState-side prose is the DOCTRINE STAGE's job (`espionageDoctrineStage.js`, ES-5)".
+ * ES-5a neither built it nor declared it, which is the worse of the two failures available:
+ * a deferral handed BY NAME and then silently skipped LOOKS DISCHARGED. `orderProseFor`
+ * below is the discharge.
+ *
+ * ⚠ TWO HAZARDS RIDE THIS PERMISSION AND THEY ARE DIFFERENT HAZARDS.
+ *
+ * 1. THE PATRON DOUBLE-COUNT (§3.9's own parenthesis). The deity LAW axis feeds BOTH
+ *    `computeLawfulness` — which is where this stage's `orderWord` comes from, through
+ *    `settlementAlignment` — AND `deriveLawOrder`. Measured at this repair round, the two
+ *    reads share the deity law axis AND the governance-legitimacy ledger. So blending
+ *    `law_order`'s SCORE into the doctrine's axis would count the patron twice, invisibly on
+ *    every deity-free world (where both terms are 0 and the bug is undetectable). The guard
+ *    is structural rather than careful: this file reads `.contributors[].reason` and NOTHING
+ *    else off that call. The score, the band and each contributor's `delta` are never
+ *    touched, so there is no arithmetic here to double-count with.
+ *
+ * 2. THE RAW-SCORE HAZARD (L5, and this file's runtime no-decimal pin). `deriveLawOrder`
+ *    interpolates raw scores into its own sentences — MEASURED at this round: "Internal-
+ *    security score 74 reflects how well order is kept", "Black-market capture at 40%
+ *    undermines lawful order", "The Wet Knives (power 70) rivals the law". A receipt must
+ *    never speak those. The screen is a TOTAL POSITIVE PREDICATE — a sentence is quotable
+ *    iff it contains no digit at all — and it therefore FAILS CLOSED: an unfamiliar sentence
+ *    shape is withheld, never quoted. It is deliberately NOT a list of known-bad spellings,
+ *    because a credit-side enumeration fails OPEN and this estate has the incident recorded.
+ *    Measured on a settlement that lights every arm: 2 of 5 sentences are quotable; on an
+ *    anarchic one, 2 of 2. The term is neither dead nor unbounded.
+ *
+ * The count WITHHELD travels beside the lines, so a reader of the result can always tell a
+ * court whose order nobody explained from a court whose explanation was screened.
+ *
  * PURE: no Date, no Math.random, no store, no React, no I/O, no mutation. The one
  * stochastic choice is a keyed hash (L1 — zero new PRNG streams).
  *
@@ -46,6 +80,7 @@
  *   tests/property/espionageDoctrineDormancyFence.test.js
  */
 import { hash01 } from '../../region/contestMath.js';
+import { deriveSystemVariable } from '../../causalState.js';
 import { natureWordFor } from '../conquestDoctrineStage.js';
 import { settlementAlignment } from '../settlementAlignment.js';
 import { espionageActive } from './espionageGate.js';
@@ -144,6 +179,53 @@ export function dispatchCadenceKey(courtId, tick) {
   return `es.dispatch.${text(courtId)}.${Number(tick) || 0}`;
 }
 
+/** The empty order-prose read, so every door of the cadence answers the same SHAPE. Frozen
+ *  and shared: it carries no per-call state. @type {{lines: ReadonlyArray<string>,
+ *  withheld: number, reason: string}} */
+const NO_ORDER_PROSE = Object.freeze({ lines: Object.freeze([]), withheld: 0, reason: 'not_read' });
+
+/**
+ * §3.9 — THE ORDER PROSE, gathered world-side. The obligation `espionageDoctrine.js` hands
+ * this file by name; see the header for the two hazards it rides and how each is guarded.
+ *
+ * ⭐ SENTENCES ONLY. `.contributors[].reason` is the ONLY field read off the causal call —
+ * never `score`, never `band`, never a contributor's `delta` — so the patron double-count
+ * has no arithmetic here to happen in.
+ *
+ * The settlement grain is resolved EXACTLY the way `computeLawfulness` resolves it
+ * (`item.settlement || item`), so the prose explains the same record the doctrine's own
+ * order word was banded from rather than a sibling nobody can line it up against.
+ *
+ * @param {{item?: unknown}} [args]
+ * @returns {{lines: ReadonlyArray<string>, withheld: number, reason: string}}
+ */
+export function orderProseFor({ item } = {}) {
+  const settlement = recordOf(item).settlement || item || {};
+  const read = deriveSystemVariable(
+    'law_order',
+    /** @type {Parameters<typeof deriveSystemVariable>[1]} */ (settlement),
+  );
+  const contributors = Array.isArray(recordOf(read).contributors)
+    ? /** @type {unknown[]} */ (recordOf(read).contributors)
+    : [];
+  /** @type {string[]} */
+  const lines = [];
+  let withheld = 0;
+  for (const raw of contributors) {
+    const sentence = text(recordOf(raw).reason);
+    if (!sentence) continue;
+    // THE TOTAL POSITIVE PREDICATE. Quotable iff it speaks no number at all — so an
+    // unfamiliar sentence shape is WITHHELD rather than quoted. Fails closed by
+    // construction; a list of known-bad spellings would fail open (the recorded class).
+    if (/\d/.test(sentence)) withheld += 1;
+    else lines.push(sentence);
+  }
+  const reason = contributors.length === 0
+    ? 'no_contributors'
+    : (lines.length === 0 ? 'all_withheld' : 'quoted');
+  return { lines: Object.freeze(lines), withheld, reason };
+}
+
 /**
  * §3.12 — DOES THIS COURT SEND SOMEBODY THIS TICK, and what is it sending them to settle.
  *
@@ -189,7 +271,8 @@ export function dispatchCadenceKey(courtId, tick) {
  *   castable?: unknown, decidingConfidence01?: unknown, urgent?: unknown,
  *   dispatched?: unknown, ticksSinceDispatch?: unknown}} [args]
  * @returns {{dispatch: boolean, verdict: string, demand: string, roll01: number,
- *   key: string, doctrine: Record<string, unknown>|null, receipt: string, reason: string}}
+ *   key: string, doctrine: Record<string, unknown>|null, receipt: string, reason: string,
+ *   orderProse: ReturnType<typeof orderProseFor>}}
  */
 export function dispatchCadenceFor({
   worldState, item, courtId, tick, castable, decidingConfidence01, urgent,
@@ -199,6 +282,10 @@ export function dispatchCadenceFor({
    *  @param {string} verdict @param {string} receipt */
   const stays = (reason, doctrine, verdict, receipt) => ({
     dispatch: false, verdict, demand: '', roll01: 0, key: '', doctrine, receipt, reason,
+    // ONE SHAPE ON EVERY DOOR. A refusing door that omitted the field would make a consumer
+    // reach for `.orderProse.lines` on some paths and not others, which is how an optional
+    // sub-record becomes an undefined read three waves later.
+    orderProse: NO_ORDER_PROSE,
   });
   const doctrine = espionageDoctrineFor({ worldState, item, courtId });
   if (!doctrine) return stays('dark', null, '', '');
@@ -218,6 +305,12 @@ export function dispatchCadenceFor({
   const roll01 = hash01(key);
   const dispatch = roll01 < Number(doctrine.frequency01);
   const demand = dispatchDemandFor({ frequency01: doctrine.frequency01, urgent });
+  // §3.9's licensed prose, screened (see `orderProseFor` and the header's hazard block). It
+  // is spliced between the doctrine's words and the dispatch sentence because that is where
+  // it reads as a reason: the court's character, why its order stands where it does, then
+  // what it is doing about this week.
+  const prose = orderProseFor({ item });
+  const explained = prose.lines.length ? ` ${prose.lines.join(' ')}` : '';
   return {
     dispatch,
     verdict,
@@ -225,12 +318,15 @@ export function dispatchCadenceFor({
     roll01,
     key,
     doctrine: row,
+    orderProse: prose,
     // DOCTRINE WORDS ONLY. `frequency01` and the roll are control scalars and never enter
     // prose (L5, and the banded-runtime no-decimal pin): a reader learns the court's
-    // character and what it will accept, never its coefficients.
+    // character and what it will accept, never its coefficients. The gathered sentences are
+    // held to the same law by `orderProseFor`'s digit screen, which is what lets them be
+    // spliced here at all.
     receipt: dispatch
-      ? `${doctrine.receipt} It sends a watcher, and will settle for nothing short of ${DEMAND_PHRASE[demand]}.`
-      : `${doctrine.receipt} This week it sends nobody.`,
+      ? `${doctrine.receipt}${explained} It sends a watcher, and will settle for nothing short of ${DEMAND_PHRASE[demand]}.`
+      : `${doctrine.receipt}${explained} This week it sends nobody.`,
     reason: dispatch ? 'dispatched' : 'cadence_declined',
   };
 }
