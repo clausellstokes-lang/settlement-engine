@@ -500,13 +500,14 @@ async function retro() {
   // is "did the instrument name class X before the commit that tripped X", and a
   // summary count cannot answer it.
   const ts = new Date().toISOString();
-  for (const r of results) {
+  const logging = !has('--no-log');
+  for (const r of logging ? results : []) {
     appendLog({
       ts, mode: 'retro-case', sha: r.sha, name: r.name, hit: r.ok,
       expected: r.expectClasses || [], classes: r.got, predicates: r.gotPreds,
     });
   }
-  appendLog({ ts, mode: 'retro', hits, cases: results.length, misses: misses.map((m) => m.sha.slice(0, 8)) });
+  if (logging) appendLog({ ts, mode: 'retro', hits, cases: results.length, misses: misses.map((m) => m.sha.slice(0, 8)) });
   process.exit(has('--strict') && misses.length ? 1 : 0);
 }
 
