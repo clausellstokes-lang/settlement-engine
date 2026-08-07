@@ -99,7 +99,8 @@ volumes corrected @ 36862650 + fdf43790):
       AFTER the ES waves, for four reasons in order of force: after the ES spine
       because the tap machinery must EXIST before a doctrine sheet can be a spy
       product; JOINT with the signed war-chooser wiring at HB-5 because both
-      retrofit the same frozen 812-line `settlementStrategy` surface and two
+      retrofit the same frozen `settlementStrategy` surface (812 EFFECTIVE
+      lines against 1,360 raw — not comparable figures) and two
       waves would pay the size-ratchet and CHECK-GIT-FIRST costs twice; BEFORE
       the instrument-hardening wave because HB adds three new instrument
       families; and BEFORE the soak necessarily, because habit's entire tuning

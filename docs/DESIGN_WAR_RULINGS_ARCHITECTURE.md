@@ -1707,6 +1707,36 @@ lands its marker, and never a red on the tracked state. Vetoable in one owner cl
    do not change the simulation).
 6. Cartography TC-3..8 and the wave-3 programs are ORTHOGONAL to this program by
    path; they may interleave by owner order without contract collisions.
+7. [ADDED 2026-08-07 (the HB + WC + EP owner-amendment fold).] **A WAR-LANE
+   PROGRAM NOW EXISTS OUTSIDE THIS VOLUME AND CONTRACTS AGAINST SIX OF ITS
+   BUILT SURFACES.** `docs/DESIGN_FP_ARCH_WC.md` (WC-0..WC-16, seventeen waves,
+   six virtual flags) architects the owner's war auxiliary-contribution
+   directive of 2026-08-06 and lands in the FP order at the PHASE 4 tail
+   (`docs/DESIGN_FP_ARCHITECTURE.md` §5, which is the ordering authority). It is
+   NOT a WR wave and takes no WR- id. **Its contracts with this program are
+   CONSUMER-SIDE by construction and are stated as one-line veto surfaces in its
+   SECTION 8 rows 14-19; the four that bind a WR-lane implementer:**
+   ⛔ `warTermination.js` — **ZERO EDITS (frozen, shrink-only at tolerance
+   zero); the close EVENT WC folds on is `readWarTerminations`' EXISTING output
+   and the contribution fold is a CONSUMER. Any diff to that file originating in
+   a WC wave is the tripwire.**
+   ⛔ `warCoalitionLedger.js` — **`joinLedger` stays SINGLE-ANCHOR; no
+   membership list and no stored expenditure total on deployments.**
+   Contribution is its own ledger and balances are DERIVED READS.
+   ⛔ `occupation.js` — WC's release standing composes into the EXISTING
+   `stabilizationSuitability` input only. **THE REGRESSION AND LIBERATION ARMS
+   ARE NOT TOUCHED** — the collapse arm, the regress-below-contested arm and the
+   `MAX_CONTESTED_DWELL` valve are RESISTANCE's, and routing loyalty standing
+   into them would put loyalty and revolt on ONE LEVER WHERE THEY CANCEL.
+   ⛔ WR-10's sovereignty market — WC adds **the intent road only**; sale
+   treaties keep `buyerId`/`sellerId` drop-when-absent and **NEVER victor
+   fields** (the standing WR-10 law), and the casus taxonomy takes **ZERO new
+   `WAR_REASON_TYPES` members**.
+   ⚠ `leviedPopulationBySource` is EXTENDED and never forked — WC's `blocks[]`
+   reconciles to it exactly, and attribution is by RECONSTRUCTION from the
+   banked map, **never by splitting an id on `.`** (the standing WR-8 law).
+   ⚠ ONE OWNER GATE IS LIVE ON THAT PROGRAM AND IS NOT THIS VOLUME'S TO CLEAR:
+   CR-WC-9, the persisted field batch, which blocks WC-6 onward.
 
 ## §10 IMPLEMENTER PROTOCOL (binding on the external implementer, Sol 5.6)
 1. **Worktree + branch:** all work in the minifold worktree

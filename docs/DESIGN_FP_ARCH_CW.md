@@ -545,9 +545,25 @@ hold on the owner-signed lit soak, and not before (volume §6, binding).**
   CW-3 are instruments over an empty sky — the tripwire says so at soak, in
   those words.
 - **SC-7 — the couplingId volume-prefix closure** (toward all volumes'
-  waves). CW-0w widens the shape pin to the closed nine-prefix alternation
-  (S4's cure); any FUTURE volume prefix must amend the closed set — the
-  closure IS the tripwire (a new prefix reds until consciously admitted).
+  waves). CW-0w widens the shape pin from the WAR-locked regex to a closed
+  prefix alternation — **NINE at that wave's own landing** (S4's cure); any
+  FUTURE volume prefix must amend the closed set — the closure IS the tripwire
+  (a new prefix reds until consciously admitted). ⚠ **THE SET HAS GROWN TWICE
+  SINCE AND THIS SENTENCE IS HISTORY, NOT THE CURRENT CLOSED SET** — an
+  inherited miss found by the 2026-08-07 fold and reported rather than quietly
+  restated: ES and WY were consciously admitted at the 2026-08-05
+  owner-amendment fold (TENTH and ELEVENTH) and **HB at the 2026-08-07 one
+  (TWELFTH, HB chair question Q4, RULED)**, so a THIRTEENTH now reds. ⭐ **THE
+  ONE CURRENT SPELLING IS `CHARTERED_VOLUME_PREFIXES` in
+  `tests/domain/couplingRegistry.test.js`, indexed by
+  docs/DESIGN_FP_ARCHITECTURE.md §9 seam row 32 — POINT AT IT, NEVER RESTATE
+  IT.** A hand-copied alternation beside the list is one edit away from
+  disagreeing with it silently, which is exactly what this sentence did for two
+  folds. ⛔ ADMISSION IS DOCUMENT-ONLY and the admitting commit edits FOUR sites
+  in that one file (the const the regex is BUILT FROM, the literal `toEqual`,
+  the docstring and the CLOSED-alternation comment); a chartered prefix with
+  ZERO live rows is green by design, and the obligation runs the other way —
+  every live row must carry a chartered prefix.
 - **SC-8 — the braided item's typed entity-refs** (toward SP-6's index,
   landed, and CW-1, unbuilt). heraldIndex PENDING facets light when mint-time
   ref slots land (S16); CW-1's braid carries them at composition; pinned from
