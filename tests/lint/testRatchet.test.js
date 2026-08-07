@@ -192,6 +192,36 @@ describe('per-test suite ratchet — static pins', () => {
     const ids = Object.keys(baseline.entries);
     expect(ids.filter((id) => id.includes('observedShapeReaders'))).toEqual([]);
   });
+
+  test('⛔ NO row is attributed to a TIMEOUT — a phantom entry can never be burned down', () => {
+    // THE PHANTOM CLASS, generalised from the pin directly above. That one names
+    // ONE file; this one closes the class for every row, present and future.
+    //
+    // A test frozen here because it TIMED OUT under parallel contention records
+    // a defect that DOES NOT EXIST. The burn-down lane goes looking for a broken
+    // assertion, finds the test green in isolation, and cannot close the row —
+    // so it sits in the census forever making the ratchet look permanently
+    // indebted, while the real fault (a test whose per-run cost has grown into
+    // the ceiling) stays unfixed and keeps flaking its neighbours. Worst of all,
+    // a flaky gate silently invalidates every census taken through it: the
+    // measured spread at bd5e49f6 was 0, 2 and 5 out-of-census failures across
+    // three full-suite runs at ONE sha.
+    //
+    // A timeout is a COST problem, never debt. Fix it by cutting the test's
+    // per-run work (share an expensive fixture across the file's cases), or by
+    // giving that test an explicit per-test timeout carrying the MEASURED figure
+    // and the reason — the house precedent is tests/joins/ordering.test.js:289.
+    // Never raise the global `testTimeout`: that hides the next one and makes a
+    // genuinely hung test take longer to report.
+    const offenders = Object.entries(baseline.entries)
+      .filter(([, r]) => /\btimed?\s?-?\s?out\b|\btimeouts?\b|STACK_TRACE_ERROR|parallel contention/i
+        .test(`${r.cause} ${r.subsystem}`))
+      .map(([id]) => id);
+    expect(
+      offenders,
+      'these rows blame a TIMEOUT. Cut the test\'s cost or give it an explicit per-test timeout — do not bank it as debt.',
+    ).toEqual([]);
+  });
 });
 
 // ── EXECUTED PINS: every failure path, actually run ──────────────────────────

@@ -129,11 +129,41 @@ const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
 /** The producers run ONCE for the whole file. Every executed pin reads this. */
 let corpus = null;
 let live = null;
+/** The estate's file list, walked ONCE — every scan below reuses it. */
+let estate = null;
 
-beforeAll(async () => {
-  corpus = await buildObservedCorpus();
-  live = scanReaders({
-    files: sourceFiles(ROOT),
+/**
+ * ⚠⚠ THE SCAN BUDGET — why this file counts its own full-tree scans.
+ *
+ * `scanReaders` is not cheap and is not meant to be: it runs
+ * `ts.createSourceFile` over EVERY `src/**` file and then walks the whole tree
+ * three times. MEASURED at bd5e49f6 on an 8-core machine, inside a full-suite
+ * run: ONE scan costs 13,447–15,904 ms.
+ *
+ * This file used to run SIX of them — one live, plus one per mutant — and the
+ * five mutant scans ran INSIDE TEST BODIES, against the bare global
+ * `testTimeout: 20000` (vite.config.js). That is a worst-case margin of
+ * 20,000 / 15,904 = 1.26x, and it did not hold: three full-suite runs at ONE
+ * sha produced 0, 2 and 5 failures, all of them TIMEOUTS with no assertion diff
+ * (`Error: STACK_TRACE_ERROR`, durations 21,173–26,069 ms). A flaky gate is
+ * worse than a red one — it teaches everyone to re-run until green and it
+ * silently invalidates every census taken through it.
+ *
+ * Every OTHER test in the estate that runs longer than 8s carries its own
+ * explicit test-level timeout (30s–240s; the house precedent is stated at
+ * tests/joins/ordering.test.js:289). These five were the only heavy tests in
+ * the suite running on the default. The cure is the one the cost demanded: cut
+ * the work, do not buy headroom. The scans now happen TWICE, both inside
+ * `beforeAll` hooks with explicit 300s HOOK timeouts, and `scansRun` is pinned
+ * below so that re-introducing a per-test scan reds instead of flaking.
+ */
+let scansRun = 0;
+
+/** The one place `scanReaders` is called. `extraFiles` are planted probes. */
+function scanEstateWith(extraFiles = []) {
+  scansRun += 1;
+  return scanReaders({
+    files: extraFiles.length ? [...estate, ...extraFiles] : estate,
     shapes: corpus.shapes,
     arrayShapes: corpus.arrayShapes,
     singleHome: corpus.singleHome,
@@ -141,6 +171,12 @@ beforeAll(async () => {
     minRows: MIN_ROWS,
     root: ROOT,
   });
+}
+
+beforeAll(async () => {
+  corpus = await buildObservedCorpus();
+  estate = sourceFiles(ROOT);
+  live = scanEstateWith();
 }, 300_000);
 
 describe('reader-with-no-writer ratchet: the frozen inventory', () => {
@@ -266,75 +302,117 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
 });
 
 describe('reader-with-no-writer ratchet: the MUTANTS', () => {
-  /** A self-contained module planted into the scanned set. It imports nothing,
-   *  so it resolves through the ROOT NAME PRIOR alone — the same rule the estate
-   *  uses — and it is written to a temp dir, never into the shared `src/` tree. */
-  function plant(body) {
-    const dir = mkdtempSync(join(tmpdir(), 'osr-mutant-'));
-    const file = join(dir, 'plantedProbe.js');
-    writeFileSync(file, body);
-    const out = scanReaders({
-      files: [...sourceFiles(ROOT), file],
-      shapes: corpus.shapes,
-      arrayShapes: corpus.arrayShapes,
-      singleHome: corpus.singleHome,
-      rootShapes: corpus.rootShapes,
-      minRows: MIN_ROWS,
-      root: ROOT,
-    });
-    return out.findings.filter((f) => f.file.endsWith('plantedProbe.js'));
-  }
-
-  test('THE MUTANT REDS: a planted reader of a key with no writer is reported', () => {
-    const hits = plant('export function probe(settlement) {\n'
+  /** Self-contained modules planted into the scanned set. Each imports nothing,
+   *  so each resolves through the ROOT NAME PRIOR alone — the same rule the
+   *  estate uses — and each is written to a temp dir, never into the shared
+   *  `src/` tree.
+   *
+   *  ⚠⚠ ALL FIVE ARE SCANNED IN ONE PASS, and that changes NO probe's answer.
+   *  They are five separate FILES: nothing imports them, they import nothing,
+   *  and `resolveSpec` only follows RELATIVE specifiers that land inside the
+   *  scanned set, so no estate module can resolve into the temp dir and no probe
+   *  can reach another. `declaredFns`/`imports`/`reExports` are per-file maps and
+   *  `bindings` is keyed by scope node, so `probe` and `inner` in one file are
+   *  invisible to the next. Findings partition by file, and every expectation
+   *  below is byte-for-byte the expectation it carried when each probe bought
+   *  its own full-tree scan — which is what made this file flake. */
+  const PROBES = {
+    noWriter: 'export function probe(settlement) {\n'
       + '  return settlement.__noWriterEverWritesThisKey;\n'
-      + '}\n');
-    expect(hits.length).toBe(1);
-    expect(hits[0].key).toBe('__noWriterEverWritesThisKey');
-    expect(hits[0].shapes).toEqual(['settlement']);
-  });
-
-  test('THE MUTANT SHAPE-CHECKS: the SAME key is silent on a shape that carries it', () => {
+      + '}\n',
     // `tier` exists on BOTH `settlement` and `steadings`; `population` exists on
     // both too. A detector that merely disliked unusual key names would flag the
     // negative control as well — this is the discrimination pin.
-    const hits = plant('export function probe(settlement) {\n'
+    observedKeys: 'export function probe(settlement) {\n'
       + '  return [settlement.tier, settlement.population, settlement.economicState];\n'
-      + '}\n');
-    expect(hits).toEqual([]);
-  });
-
-  test('THE MUTANT REACHES A NESTED SHAPE, not just the root', () => {
-    const hits = plant('export function probe(settlement) {\n'
+      + '}\n',
+    nested: 'export function probe(settlement) {\n'
       + '  const ps = settlement.powerStructure;\n'
       + '  const rows = ps.factions;\n'
       + '  return rows.map((faction) => faction.id);\n'
-      + '}\n');
-    expect(hits.map((h) => h.key)).toEqual(['id']);
-    expect(hits[0].shapes).toEqual(['factions']);
-  });
-
-  test('THE MUTANT CROSSES A HELPER: a parameter sentinel does not kill the chain', () => {
+      + '}\n',
     // The path that let TCD-3 escape the FIRST spelling of this scanner. Inside
     // `inner`, `bag` resolves to a PARAMETER SENTINEL, not a shape; a receiver
     // check that treated the sentinel as "grounded" looked up `shapes['@param0']`,
     // found nothing, and silently discarded the whole chain. `factions` has more
     // than one home, so it cannot be recovered by the ungrounded rule — this
     // probe is only reported while the sentinel is handled correctly.
-    const hits = plant('function inner(bag) { return bag.powerStructure.factions; }\n'
+    helper: 'function inner(bag) { return bag.powerStructure.factions; }\n'
       + 'export function probe(settlement) {\n'
       + '  return inner(settlement).map((faction) => faction.id);\n'
-      + '}\n');
+      + '}\n',
+    arraySurface: 'export function probe(settlement) {\n'
+      + '  const rows = settlement.powerStructure.factions;\n'
+      + '  return rows.length + rows.filter(Boolean).length;\n'
+      + '}\n',
+  };
+
+  /** probe name -> that probe's OWN findings, from the single combined scan. */
+  let planted = null;
+
+  const hitsFor = (name) => {
+    expect(planted, 'the combined plant scan did not run — every mutant below would be vacuous').not.toBe(null);
+    return planted[name];
+  };
+
+  beforeAll(() => {
+    const dir = mkdtempSync(join(tmpdir(), 'osr-mutant-'));
+    const basenames = Object.fromEntries(Object.keys(PROBES).map((name) => [name, `probe_${name}.js`]));
+    for (const [name, body] of Object.entries(PROBES)) writeFileSync(join(dir, basenames[name]), body);
+    const out = scanEstateWith(Object.values(basenames).map((b) => join(dir, b)));
+    planted = Object.fromEntries(Object.keys(PROBES)
+      .map((name) => [name, out.findings.filter((f) => f.file.endsWith(basenames[name]))]));
+  }, 300_000);
+
+  test('THE PARTITION HOLDS: each probe was planted and is addressed by its own file', () => {
+    // Without this, a basename typo would hand every mutant an EMPTY array and
+    // the two negative controls below would pass on nothing at all — the exact
+    // vacuity the single-scan refactor could have introduced.
+    expect(Object.keys(planted).sort()).toEqual(Object.keys(PROBES).sort());
+    expect(hitsFor('noWriter').length + hitsFor('nested').length + hitsFor('helper').length)
+      .toBe(3);
+  });
+
+  test('THE MUTANT REDS: a planted reader of a key with no writer is reported', () => {
+    const hits = hitsFor('noWriter');
+    expect(hits.length).toBe(1);
+    expect(hits[0].key).toBe('__noWriterEverWritesThisKey');
+    expect(hits[0].shapes).toEqual(['settlement']);
+  });
+
+  test('THE MUTANT SHAPE-CHECKS: the SAME key is silent on a shape that carries it', () => {
+    expect(hitsFor('observedKeys')).toEqual([]);
+  });
+
+  test('THE MUTANT REACHES A NESTED SHAPE, not just the root', () => {
+    const hits = hitsFor('nested');
+    expect(hits.map((h) => h.key)).toEqual(['id']);
+    expect(hits[0].shapes).toEqual(['factions']);
+  });
+
+  test('THE MUTANT CROSSES A HELPER: a parameter sentinel does not kill the chain', () => {
+    const hits = hitsFor('helper');
     expect(hits.map((h) => h.key)).toEqual(['id']);
     expect(hits[0].shapes).toEqual(['factions']);
   });
 
   test('THE MUTANT IS SILENT ON AN ARRAY: array surface is never a domain key', () => {
-    const hits = plant('export function probe(settlement) {\n'
-      + '  const rows = settlement.powerStructure.factions;\n'
-      + '  return rows.length + rows.filter(Boolean).length;\n'
-      + '}\n');
-    expect(hits).toEqual([]);
+    expect(hitsFor('arraySurface')).toEqual([]);
+  });
+
+  test('⚠⚠ THE SCAN BUDGET: exactly TWO full-tree scans, never one per mutant', () => {
+    // THE DETERMINISM RATCHET. See the scan-budget note at the top of this file:
+    // one `scanReaders` costs 13,447–15,904 ms under full-suite contention, and
+    // six of them — five inside test bodies on the bare 20,000 ms default — is a
+    // 1.26x margin that produced 0, 2 and 5 timeout failures across three runs
+    // at ONE sha. Both surviving scans live in `beforeAll` hooks with explicit
+    // 300s hook timeouts.
+    //
+    // If this number grows, a per-test scan has come back. SHARE the scan — do
+    // NOT raise a timeout to cover it, and do NOT baseline the resulting
+    // failure: a timeout frozen into scripts/.test-ratchet-baseline.json is a
+    // phantom that can never be burned down.
+    expect(scansRun, 'a full-tree scan was added — share it instead of buying headroom').toBe(2);
   });
 
   test('RATCHET FAILURE PATHS: growth, a vanished row, and a collapsed corpus each red', () => {
