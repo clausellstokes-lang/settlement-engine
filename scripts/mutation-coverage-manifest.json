@@ -774,6 +774,10 @@
    "kind": "rationale",
    "ref": "self-proving-meta"
   },
+  "tests/lint/hazardRegistryFailClosed.test.js": {
+   "kind": "rationale",
+   "ref": "self-proving-meta"
+  },
   "tests/lint/fullTypecheckRatchet.test.js": {
    "kind": "rationale",
    "ref": "self-proving-meta",

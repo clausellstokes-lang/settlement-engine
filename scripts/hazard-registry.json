@@ -1,0 +1,520 @@
+{
+  "_doc": [
+    "HAZARD REGISTRY — the machine-readable census of confirmed hazard classes.",
+    "",
+    "⚠ PROVENANCE, AND THE TRANSITION THAT ROTS SUCH FILES ⚠",
+    "This file was DERIVED FROM MEASUREMENT on its first write (2026-08-07, at build",
+    "sha bd5e49f6 on claude/composite-r4): every `enforcer.paths` entry was verified",
+    "to exist on disk, every `status` came from a read of the named enforcer, and the",
+    "baselined-red downgrades were read out of scripts/.test-ratchet-baseline.json.",
+    "FROM THIS COMMIT ONWARD IT IS A HAND-MAINTAINED FILE. That transition is exactly",
+    "where an artifact like this rots: the numbers stop being measurements and become",
+    "transcriptions nobody re-derives. scripts/check-hazard-registry.mjs exists to make",
+    "the rot REDDEN rather than accumulate — it re-derives `enforcer.inChain` from",
+    "package.json on every run and reds on a mismatch, and it re-checks every named",
+    "path against the filesystem. Fields it CANNOT derive (`instances`, prose) are",
+    "still documents and are marked as such in `instanceEvidence`.",
+    "",
+    "WHY THIS FILE EXISTS. The owner's observation: recorded hazard cures keep failing",
+    "because a recorded cure is a DOCUMENT, and a document needs someone to read it at",
+    "exactly the right moment while doing something else. Proof from a single day: the",
+    "config-slot trap was recorded WITH its exact cure and a lane walked into it; the",
+    "piped-exit-code hazard is recorded and the chair hit it twice while briefing others",
+    "against it. THE RULE THIS ENCODES: every confirmed hazard class either becomes",
+    "MACHINERY, or is EXPLICITLY ACCEPTED as a document with a stated reason.",
+    "",
+    "AND THE TRAP THIS FILE MUST NOT COMMIT: that rule is itself a document. So the",
+    "registry's own integrity is GATE-ENFORCED (npm run validate:hazard-registry, step",
+    "one of `npm run check`) and its failure paths are EXERCISED by",
+    "tests/lint/hazardRegistryFailClosed.test.js rather than asserted.",
+    "",
+    "STATUS VOCABULARY (closed set — an entry with any other value, or none, REDS):",
+    "  MACHINERY — an enforcer exists that REDS on a new instance without anyone",
+    "              remembering the hazard. Requires non-empty enforcer.paths, all of",
+    "              which must exist on disk.",
+    "  PARTIAL   — an enforcer exists but can be bypassed, is baselined red, is scoped",
+    "              narrower than the class, or must be invoked on purpose.",
+    "  DOCUMENT  — the cure is written down and nothing enforces it. This is the OWED",
+    "              pile, and `documentBaseline` below is a SHRINK-ONLY ratchet on it.",
+    "  ACCEPTED  — deliberately left as a document, WITH a stated reason in",
+    "              `acceptedReason`. An acceptance without a reason is a silent",
+    "              surrender and REDS.",
+    "",
+    "documentBaseline is EXACT-SHRINK-ONLY: the owed pile may only get smaller. Moving",
+    "a class DOCUMENT -> PARTIAL/MACHINERY/ACCEPTED lowers the count and the baseline is",
+    "lowered with it in the same commit. Adding a new DOCUMENT class REDS until either",
+    "an enforcer is built or the class is ACCEPTED with a reason — which is the ratchet",
+    "on the treadmill itself.",
+    "",
+    "classFloor is a SCOPE SENTINEL: a registry that collapses below it fails loudly",
+    "rather than passing vacuously with nothing to check."
+  ],
+  "measuredAtSha": "bd5e49f6f34a486c460bc0fdcd0f8c6441550996",
+  "measuredAtDate": "2026-08-07",
+  "documentBaseline": 6,
+  "classFloor": 26,
+  "statusValues": ["MACHINERY", "PARTIAL", "DOCUMENT", "ACCEPTED"],
+  "classes": [
+    {
+      "id": "HZ-WRONGLINEAGE",
+      "title": "A launched task lands on the wrong lineage/worktree",
+      "status": "DOCUMENT",
+      "acceptedReason": null,
+      "memory": [
+        "wrong-lineage-worktree-trap-2026-07-14.md",
+        "preview-tool-serves-main-tree.md",
+        "agent-worktree-deleted-cwd-fallback-2026-07-14.md",
+        "e0-tempo-governor-shipped.md",
+        "comprehensive-review-fix-program.md"
+      ],
+      "enforcer": { "paths": [], "inChain": false, "note": "No repo-side guard exists. The cure is a hard-gate first clause in every state-mutating compound." },
+      "instances": 11,
+      "instanceEvidence": "CONFIRMED by count at census time: 11 'Recurrence' headings in wrong-lineage-worktree-trap-2026-07-14.md; preview-tool-serves-main-tree.md self-labels 'Recurrence #10 … via a NEW vector'; e0-tempo-governor-shipped.md labels itself recurrence #4. The recorded cure IS effective when applied — the failure is that applying it is voluntary.",
+      "triggers": [
+        "any agent session start in a provisioned worktree",
+        "first state-mutating git command of a session",
+        "any bash command after a turn boundary (cwd resets)",
+        "preview_start / dev-server launch"
+      ],
+      "upgradePath": "THE #1 TREADMILL: highest instance count in the estate and ZERO machinery. Ship scripts/assert-lineage.sh taking an expected branch and exiting non-zero on mismatch, and emit its invocation from the briefing template so the guard is the first clause rather than a remembered one."
+    },
+    {
+      "id": "HZ-PIPEEXIT",
+      "title": "Reading a gate through a pipe returns the PIPE's exit 0, not the gate's",
+      "status": "PARTIAL",
+      "acceptedReason": null,
+      "memory": ["piped-gate-exit-masking.md", "backup-exposure-2026-07-26.md", "hazard-conversion-law.md"],
+      "enforcer": { "paths": ["scripts/gate-tail.sh"], "inChain": false, "note": "gate-tail.sh COMPLETELY solves it and is routed around by hand-rolled pipelines. A cure you can bypass is a document wearing a tool's clothes. ⚠ CENSUS CORRECTION (this lane, bd5e49f6): the census named 'scripts/check-tail.sh' as an enforcer — that file DOES NOT EXIST. The npm script `check:tail` is `sh scripts/gate-tail.sh npm run check`; there is one script, not two. This is HZ-DERIVERESTATE inside the census itself, and it is exactly what check-hazard-registry.mjs now reds on." },
+      "instances": 7,
+      "instanceEvidence": "CONFIRMED: three bites recorded in piped-gate-exit-masking.md (2026-07-17; 2026-07-26 `npm run check:edge-behavior | tail`; 2026-07-27 pre-push). backup-exposure-2026-07-26.md records two more. hazard-conversion-law.md: 'it fired FOUR times that day, twice by the chair, while the chair was briefing others against it.'",
+      "triggers": [
+        "any shell command containing `| tail`, `| head`, `| grep` whose exit status is then read",
+        "any compound whose LAST pipeline segment is not the command under test",
+        "any brief instructing an agent to run a gate"
+      ],
+      "upgradePath": "THE CANONICAL PARTIAL, named as such by the owner. Mechanisable as a scan of agent-authored command logs, or by making the bare pipeline unavailable (a shell function shadowing `tail` in the gate environment)."
+    },
+    {
+      "id": "HZ-NUL",
+      "title": "An agent Edit/Write emits a RAW NUL byte as a separator",
+      "status": "MACHINERY",
+      "acceptedReason": null,
+      "memory": [
+        "authored-nul-byte-in-agent-edits.md",
+        "cw0w-walkers-landed-two-stops.md",
+        "f24-corruption-class-closed.md",
+        "town-layout-v2-shipped.md",
+        "fix-c2-voice-shipped.md",
+        "w-r2-d7-reframe-layer-shipped.md",
+        "fable-build-era-takeover.md"
+      ],
+      "enforcer": { "paths": ["tests/lint/controlBytes.test.js"], "inChain": true, "note": "DETECTS but does not PREVENT — it caught all 7, which is why 7 instances did not become 7 shipped defects. Still costs a repair each time." },
+      "instances": 7,
+      "instanceEvidence": "CONFIRMED: authored-nul-byte-in-agent-edits.md carries an explicit count correction — 'the class has BIT 6×, not 4× (2026-08-06)'; cw0w-walkers-landed-two-stops.md records 'A raw NUL was authored again (7th time)'.",
+      "triggers": [
+        "any Edit/Write authoring a quoted single-character separator",
+        "any .join()/Set-key/template-literal edit by an agent"
+      ],
+      "upgradePath": "Byte-scan at the Write-tool boundary rather than at gate time, so the repair cost drops to zero."
+    },
+    {
+      "id": "HZ-FACTIONKEY",
+      "title": "The .faction-vs-.name faction-key defect class (and its .id/.archetype variants)",
+      "status": "MACHINERY",
+      "acceptedReason": null,
+      "memory": [
+        "faction-key-defect-class.md",
+        "faction-key-precedence-sweep-shipped.md",
+        "tcd1-faction-address-two-id-spaces.md",
+        "religion-ruler-lens-faction-key-fix.md",
+        "ladder-faction-key-fold-composite.md"
+      ],
+      "enforcer": { "paths": ["tests/lint/factionNamePrecedenceScan.test.js"], "inChain": true, "note": "CI-enforcing source scan. ⚠ The un-mechanised half is fixture discipline: `.name`-shaped FIXTURES hid every instance, so pins must generate real worlds." },
+      "instances": 5,
+      "instanceEvidence": "CONFIRMED: faction-key-defect-class.md — 'FIVE INSTANCES (composite branch claude/the-composite) — four fixed, one OPEN'; the repo-wide sweep fixed 25 reversed + 2 no-fallback sites; #5 clergyTraitPlane remains owner-gated.",
+      "triggers": [
+        "any new read of a faction display name",
+        "paths matching src/domain/**, src/generators/**, src/components/** referencing `.faction`, `.name`, `governingFaction`",
+        "new NPC-to-faction join code"
+      ],
+      "upgradePath": "Class is closed. Residual: force fixture-based faction pins to drive real generation (see HZ-READERNOWRITER's retro-detection pattern)."
+    },
+    {
+      "id": "HZ-EPISTEMIC",
+      "title": "Un-anchored negative assertions and bare seed loops (tests that cannot fail)",
+      "status": "PARTIAL",
+      "acceptedReason": null,
+      "memory": ["epistemic-prevention-shipped.md", "wave-e-hazard-classes.md", "cycle2-lighting-road-recon.md"],
+      "enforcer": {
+        "paths": [
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/seedLoopTotality.walker.test.js",
+          "tests/helpers/anchoredNegatives.js",
+          "tests/helpers/seedFailures.js"
+        ],
+        "inChain": true,
+        "note": "⚠⚠ BASELINED RED. The walkers exist and RUN, but FOUR of their rows sit in scripts/.test-ratchet-baseline.json — including 'no NEW un-anchored negative assertion' and the exact-zero habitat row. A NEW violation therefore reddens nothing: the failing row is already tolerated."
+      },
+      "instances": 4,
+      "instanceEvidence": "⚠⚠ MEASURED DOWNGRADE from the census's SHIPPED claim, re-verified at bd5e49f6: `grep -c` over scripts/.test-ratchet-baseline.json finds 4 occurrences each of 'negativeAssertion', 'un-anchored', 'seed loop' and 'bare seed'. Recorded causes: '78 un-anchored negative assertions' and '8 bare seed loops … in the generation-facing test trees'.",
+      "triggers": [
+        "any new or edited file under tests/domain/, tests/generators/, tests/copy/, tests/simulation/",
+        "any test adding `.not.toMatch`/`.not.toContain`",
+        "any test adding a `for (const seed of ...)` loop"
+      ],
+      "upgradePath": "THE SHARPEST FINDING OF THE CENSUS: a class recorded as SHIPPED machinery whose enforcer is baselined red — 'the worst kind of document, one that looks solved'. Recovery is a burn-down of 4 baselined rows, not new design. Compounded by HZ-REDRATCHETGROWS."
+    },
+    {
+      "id": "HZ-LINEADDR",
+      "title": "A hand-keyed `<module>.js:<n>` address in prose/comments rots silently",
+      "status": "PARTIAL",
+      "acceptedReason": null,
+      "memory": ["hand-keyed-line-address-rot.md", "step12-measured-denominator-and-address-rot-class.md"],
+      "enforcer": { "paths": ["tests/lint/pulseKernelLineAddress.walker.test.js"], "inChain": true, "note": "SCOPED TO ONE FILE. The walker's shape is proven and correct; it simply governs pulseKernel and nothing else, while the habit is live estate-wide." },
+      "instances": 4,
+      "instanceEvidence": "CONFIRMED: step12-measured-denominator-and-address-rot-class.md — 'HAND-KEYED-ADDRESS ROT, 3 instances cured at e37f9495: code right, pin wrong, every time'; hand-keyed-line-address-rot.md records a 4th (lane KR 2026-08-03, cured 51268f56). ALL FIFTEEN addresses in src/domain/certification/ were stale and green, one PINNED by a test.",
+      "triggers": [
+        "any comment or doc line matching /[A-Za-z0-9_]+\\.(js|jsx|mjs|ts):[0-9]+/",
+        "any file relocation or line-shifting refactor"
+      ],
+      "upgradePath": "HIGH-YIELD, SMALL: widen the proven walker to a zero-tolerance estate-wide containment scan. A live instance is recorded under HZ-DERIVERESTATE (check-full-typecheck.mjs names a meta-test that does not exist)."
+    },
+    {
+      "id": "HZ-CONFIGSLOT",
+      "title": "generateSettlementPipeline silently ignores config-slot seed/tier/terrain",
+      "status": "PARTIAL",
+      "acceptedReason": null,
+      "memory": ["pipeline-config-slot-silent-key-traps.md", "lane-pt2-spine-tail-closed.md", "tcd1-faction-address-two-id-spaces.md"],
+      "enforcer": { "paths": ["tests/generators/pipelineSeedSlotContract.test.js"], "inChain": true, "note": "Covers the `seed` key in the CONFIG slot ONLY. tier/terrain/terrainType remain silent — no guard exists for them — and a BARE NUMBER in the neighbour slot defeats the guard entirely." },
+      "instances": 4,
+      "instanceEvidence": "CONFIRMED: both arms bit lane PT2 in one session (spine pins ran UNSEEDED for their entire life; a 5-terrain census silently measured ONE terrain). TCD-1's tests/domain/warSeatBooksFactionAddress.test.js shipped `generateSettlementPipeline({ tier }, seed)` — measured all 30 rows `tier === 'village'`, 0 of 30 carrying seeds 7100-7105, in a commit claiming '6 seeds × 5 tiers'. A 4th bite 08-07 via a bare number in the neighbour slot.",
+      "triggers": [
+        "any test or script calling generateSettlementPipeline",
+        "any new file under tests/domain/, tests/generators/, tests/copy/",
+        "any corpus-builder or census script"
+      ],
+      "upgradePath": "THE OWNER'S EXHIBIT A, and the cure is mechanical: reject UNKNOWN config keys outright, and reject a non-object in the importedNeighbour slot. Both are runtime throws, not walkers."
+    },
+    {
+      "id": "HZ-SEARCHPATH",
+      "title": "migrationSearchPathPin keys on function NAME — a baselined name recreated bare stays green",
+      "status": "MACHINERY",
+      "acceptedReason": null,
+      "memory": ["migration-searchpath-baselined-name-blindness.md"],
+      "enforcer": { "paths": ["tests/lint/migrationSearchPathPin.test.js"], "inChain": true, "note": "POST_CONVENTION_BARE ledger now counts every violator whose net-current migration is >= 131. The name-keyed blindness is cured; the 5 unfixed definers are separate DEBT carried visibly." },
+      "instances": 5,
+      "instanceEvidence": "CONFIRMED: memory records POST_CONVENTION_BARE ledgers every post-131 violator and '147's five gallery definers sit in it unfixed' — 5 live instances carried by the enforcer rather than hidden from it.",
+      "triggers": [
+        "any new file under supabase/migrations/",
+        "any `create or replace function` recreation of a previously-baselined definer"
+      ],
+      "upgradePath": "Class closed. Open debt: burn down the 5 ledgered gallery definers."
+    },
+    {
+      "id": "HZ-DERIVERESTATE",
+      "title": "A hand-maintained restatement of a derivable fact goes stale at its source",
+      "status": "DOCUMENT",
+      "acceptedReason": null,
+      "memory": ["derive-dont-restate-and-mutant-must-change.md", "first-match-document-pin-class.md"],
+      "enforcer": { "paths": [], "inChain": false, "note": "No enforcer. A shrink-only walker SEEDED from a stale restatement is GREEN AND WRONG, which is the compounding form." },
+      "instances": 5,
+      "instanceEvidence": "CONFIRMED: derive-dont-restate-and-mutant-must-change.md — 'THE LAW BIT IN FOUR HOMES AT ONCE (2026-08-06, the memory-estate pass)' and 'THREE CONSECUTIVE review rounds … each CLOSED one stale restatement and SHIPPED another'. ⚠ A FIFTH, FOUND BY THIS LANE AT bd5e49f6 AND NOT PREVIOUSLY RECORDED: scripts/check-full-typecheck.mjs states its failure paths 'are exercised by a meta-test (tests/lint/fullTypecheckFailClosed.test.js)' — `ls` returns 'No such file or directory'. The claim is prose in the very file this round was told to read as the anti-vacuity model.",
+      "triggers": [
+        "any doc/volume edit that states a count, size, or list length",
+        "any walker seeded from a transcribed number rather than a derived one",
+        "paths matching docs/**/*.md alongside a source change"
+      ],
+      "upgradePath": "HIGH VALUE: the recorded cures (the COUNT LEDGER and the STRUCK-PREMISE SCAN) are directly mechanisable as a walker that re-derives every stated figure. This registry applies the cure to ITSELF — `enforcer.inChain` is re-derived from package.json on every run instead of trusted."
+    },
+    {
+      "id": "HZ-EDGEBUNDLE",
+      "title": "build:edge-shared regenerates FIVE bundles — an edge refresh is never a one-artifact repair",
+      "status": "PARTIAL",
+      "acceptedReason": null,
+      "memory": ["edge-shared-builder-rebuilds-five-bundles.md", "dirty-tree-build-artifact-class.md", "fix-c4-platform-shipped.md", "hazard-conversion-law.md"],
+      "enforcer": {
+        "paths": [
+          "tests/edgeFunctions/aiCharterBundle.freshness.test.js",
+          "tests/edgeFunctions/aiGroundingBundle.freshness.test.js",
+          "tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js",
+          "tests/edgeFunctions/intentAtlasBundle.freshness.test.js",
+          "tests/edgeFunctions/analyticsEventsBundle.freshness.test.js"
+        ],
+        "inChain": true,
+        "note": "⚠ THREE freshness rows are BASELINED RED under subsystem 'edge bundles / built artifacts', so a fourth staleness cannot redden anything new."
+      },
+      "instances": 4,
+      "instanceEvidence": "⚠ MEASURED DOWNGRADE: three freshness assertions sit in scripts/.test-ratchet-baseline.json. Bites: three bundles stale as of 2026-08-03; fix-c4-platform-shipped.md 'Bit again here' (generatedAt churn); hazard-conversion-law.md — 'the chair broke it by reading \"touching bundled inputs\" as not covering a pure git mv.'",
+      "triggers": [
+        "any change under supabase/functions/_shared/ or its transitive source inputs",
+        "any `git mv` or rename of a file reachable from an edge bundle's input closure",
+        "any new EDIT_KIND / store action"
+      ],
+      "upgradePath": "The 'touching' ambiguity that bit the chair is exactly what the path-glob `triggers` above fix: a rename matches the glob whether or not anyone reads 'touching' broadly. Recovery also needs the 3 baselined rows burned down."
+    },
+    {
+      "id": "HZ-TESTVACUITY",
+      "title": "A contract/security/lint test goes DARK without reddening (silent extractor, skip-guard, hardcoded mirror)",
+      "status": "MACHINERY",
+      "acceptedReason": null,
+      "memory": ["epistemic-prevention-shipped.md", "filename-anchored-source-pin-vacuity.md"],
+      "enforcer": { "paths": ["tests/lint/contractTestAntiVacuity.walker.test.js", "scripts/check-e2e-not-vacuous.mjs"], "inChain": true, "note": "MODEL MACHINERY: fail-closed, allowlists EMPTY at birth, self-excluded, scoped to the high-trust families." },
+      "instances": 4,
+      "instanceEvidence": "CONFIRMED from the walker's own header read at HEAD: 'The cycle-3 review found four of these (H8/M6/M7/M8); this walker keeps the fifth from shipping.' Scope covers tests/security/**, tests/**/*.contract.test.*, tests/lint/*.test.js.",
+      "triggers": [
+        "any new or edited file under tests/security/",
+        "any file matching tests/**/*.contract.test.*",
+        "any new tests/lint/*.test.js"
+      ],
+      "upgradePath": "This is what every DOCUMENT-status vacuity class should look like. Use as the shape template when upgrading HZ-DEADBAND and HZ-SERVICECAT."
+    },
+    {
+      "id": "HZ-NETCURRENT",
+      "title": "Unanchored `create or replace function public.<name>` extractor matches migration PROSE",
+      "status": "MACHINERY",
+      "acceptedReason": null,
+      "memory": ["unanchored-net-current-extractor-class.md", "netcurrent-extractor-anchor-class-closed.md"],
+      "enforcer": { "paths": ["tests/lint/netCurrentExtractorAnchor.walker.test.js"], "inChain": true, "note": "8-detector walker plus a standing sweep plant. ⚠ Residual: 12 sites still unfixed (chip spawned 2026-07-27), incl. tests/security/refundLedger.contract.test.js (5 sites)." },
+      "instances": 3,
+      "instanceEvidence": "CONFIRMED: migrations 101 and 098 named as live instances; a second bit the same day via surveyorProbeTierSql.pglite.test.js. Class declared FULLY CLOSED + PUSHED 2026-07-27 across d0fdcf7c + 24c85e7f + e2e3852e + 20c195e7 (62-site shrink wave).",
+      "triggers": [
+        "any new SQL extractor regex in tests/security/ or scripts/",
+        "any new file under supabase/migrations/ whose header quotes a create statement"
+      ],
+      "upgradePath": "THE ARCHETYPE OF A PROPERLY-CLOSED CLASS: cure (`^` + `m` flag), sweep, multi-detector walker, standing mutation plant. Use as the template for the DOCUMENT pile."
+    },
+    {
+      "id": "HZ-READERNOWRITER",
+      "title": "A READER asks for a key NO WRITER produces — invisible because the read is defensively guarded",
+      "status": "MACHINERY",
+      "acceptedReason": null,
+      "memory": ["typecheck-red-root-cause-and-reader-without-writer-class.md", "observed-shape-readers-walker-landed.md", "tcd1-faction-address-two-id-spaces.md"],
+      "enforcer": {
+        "paths": [
+          "tests/lint/observedShapeReaders.walker.test.js",
+          "scripts/check-observed-shape-readers.mjs",
+          "scripts/.observed-shape-readers-baseline.json"
+        ],
+        "inChain": true,
+        "note": "⚠ The ratchet is COUNT-based, so an identity swap at constant count passes. The STEADING leg is load-bearing (40 driven intervals mint ZERO)."
+      },
+      "instances": 3,
+      "instanceEvidence": "CONFIRMED: 'THREE live bugs share one shape'; the walker 'rediscovered all three TCD defects at a pre-fix sha' — the retro-detection acceptance test that proves an instrument is real rather than merely present.",
+      "triggers": [
+        "any new optional-chained read of a nested key in src/domain/ or src/store/",
+        "any `= {}` default parameter idiom",
+        "any new persisted-shape consumer"
+      ],
+      "upgradePath": "The estate's best example of the RETRO-DETECTION acceptance test — run a candidate instrument at a pre-fix sha and require it to red. Known soft spot: make the ratchet identity-keyed rather than count-keyed."
+    },
+    {
+      "id": "HZ-DIRTYBUILD",
+      "title": "A generated artifact built over an UNSTAGED tree records a hash that exists on no commit",
+      "status": "PARTIAL",
+      "acceptedReason": null,
+      "memory": ["dirty-tree-build-artifact-class.md"],
+      "enforcer": { "paths": ["tests/edgeFunctions/edgeSharedBundleReproducibility.test.js"], "inChain": true, "note": "⚠ THREE of its assertions are BASELINED RED under subsystem 'edge bundles / dirty-build class'. The cure was built EXACTLY RIGHT — it hashes the git INDEX, not the worktree — and is currently tolerated failing." },
+      "instances": 3,
+      "instanceEvidence": "MEASURED at bd5e49f6: the aiCharterBundle, aiGrounding and aiOutputSchema rows 'the recorded sourceHash equals the builder hash over INDEX content' all sit in scripts/.test-ratchet-baseline.json, cause 'THE DIRTY-BUILD CLASS … computed over content that is neither committed nor staged, so no checkout can reproduce the bundle.'",
+      "triggers": [
+        "any run of build:edge-shared, gen:compendium-data, gen:dossier-prose or gen:analytics-dictionary while `git status --porcelain` is non-empty for its inputs"
+      ],
+      "upgradePath": "The cure is ALREADY CORRECT. Recovering to MACHINERY is a burn-down of 3 baselined rows (one rebuild from a clean committed tree), not new design."
+    },
+    {
+      "id": "HZ-SHAREDINDEX",
+      "title": "Two sessions in one worktree share ONE git index — the other lane's `git add` overwrites your staged blob",
+      "status": "DOCUMENT",
+      "acceptedReason": null,
+      "memory": ["shared-index-commit-race.md", "two-lane-commit-shared-index-race.md", "netcurrent-extractor-anchor-class-closed.md", "concurrency-law-ruled.md"],
+      "enforcer": { "paths": [], "inChain": false, "note": "No shipped script. Every lane hand-rolls the plumbing recipe from memory, which is precisely the failure mode this registry exists to name." },
+      "instances": 3,
+      "instanceEvidence": "CONFIRMED: measured at ES-1 2026-08-06 — 'the OTHER lane's git add OVERWRITES your staged blob and git commit would land their work'; HEAD moved TWICE mid-wave. netcurrent memory records plumbing commits leaving the SHARED index stale, 'showing phantom staged reversions that a concurrent git commit could carry'. The tell: 'an EMPTY diff on a file you edited'.",
+      "triggers": [
+        "any `git add` / `git commit` while a second lane is active in the same worktree",
+        "any state-mutating git command in .claude/worktrees/minifold"
+      ],
+      "upgradePath": "HIGH VALUE, FULLY MECHANISABLE: the recorded cure is already a COMPLETE plumbing recipe (private GIT_INDEX_FILE, hash-object, write-tree, commit-tree, update-ref with old-value CAS). Ship it as scripts/safe-commit.sh and the class closes outright."
+    },
+    {
+      "id": "HZ-SERVICECAT",
+      "title": "An unregistered institution-service name NEVER reds — it silently defaults to 'equipment'",
+      "status": "DOCUMENT",
+      "acceptedReason": null,
+      "memory": ["service-rng-law-and-silent-category-fallthrough.md"],
+      "enforcer": { "paths": [], "inChain": false, "note": "ZERO enforcement — `grep -rl SERVICE_CATEGORY_MAP tests/` returns no files." },
+      "instances": 3,
+      "instanceEvidence": "CONFIRMED by grep at HEAD: no test file references SERVICE_CATEGORY_MAP. Memory states 'three live mis-folds measured, no walker exists.' Sibling law in the same file: adding an institution service MOVES GOLDENS unless on:false, and `p >= 1` is NOT stream-neutrality at a criminal provider (156/525 rows).",
+      "triggers": [
+        "any addition to the institution-services catalog",
+        "any change under src/generators/ touching service names",
+        "any run of gen:institution-service-keys"
+      ],
+      "upgradePath": "TOP OWED WALKER: 3 measured instances, zero enforcement, trivially-shaped cure (a totality walker over SERVICE_CATEGORY_MAP). Already queued as open task #33."
+    },
+    {
+      "id": "HZ-GROUNDMOVE",
+      "title": "Moving the header's GROUND silently breaks foregrounds that were correct the day before",
+      "status": "DOCUMENT",
+      "acceptedReason": null,
+      "memory": ["ribbon-ground-move-foreground-break-class.md", "fletched-ribbon-fl2-landed.md", "anchor-offset-single-writer-and-side-table-class.md"],
+      "enforcer": { "paths": ["tests/design/contrast.test.js"], "inChain": true, "note": "⚠ STATUS IS DOCUMENT DESPITE A NAMED PATH, AND THAT IS DELIBERATE: contrast.test.js catches the contrast half, but the recorded law is 're-census ALL riders' and nothing forces the rider census when the ground moves. The enforcer is real; it does not enforce THIS class." },
+      "instances": 3,
+      "instanceEvidence": "CONFIRMED from the memory's own title: 'THE HEADER'S GROUND HAS MOVED THREE TIMES (ink bar → cream plank → honey-tan shaft) and EACH move silently broke foregrounds' — 'nothing but tests/design/contrast.test.js ever notices, because the cells still render, still navigate and still carry aria-current.'",
+      "triggers": [
+        "any change to a background/ground token in src/styles/theme.js",
+        "any edit to the header/ribbon component tree"
+      ],
+      "upgradePath": "Make the rider census change-triggered: a walker that enumerates every foreground token resolved against the header ground and reds when the ground token's value moves without the rider set being re-measured."
+    },
+    {
+      "id": "HZ-DEADBAND",
+      "title": "Three dead-leg shapes that read as correct code (ratio cap, self-belief, hopWeeks calibration)",
+      "status": "DOCUMENT",
+      "acceptedReason": null,
+      "memory": ["unreachable-band-and-absent-self-belief.md", "unreachable-predicate-conjunction-class.md"],
+      "enforcer": { "paths": [], "inChain": false, "note": "No reachability census exists. Siblings (unreachable conjunctions, loop-step endpoints) share the same shape and could share ONE walker." },
+      "instances": 3,
+      "instanceEvidence": "CONFIRMED — three distinct shapes named and measured in one memory: (1) a RATIO band on theoreticalCapacity can never open (max expressible ratio 1.50 — use a POINTS GAP); (2) beliefRecord(x, x) is NEVER written so any self-belief fallback IS the only path; (3) a band over hopWeeks must sit inside 2..8 because the spatial digest CALIBRATES weeks-per-cost per realm.",
+      "triggers": [
+        "any new threshold/band constant in src/domain/",
+        "any new conjunction filter over generated entities",
+        "any band table added to a volume"
+      ],
+      "upgradePath": "ONE reachability-census walker driven over real generated worlds, covering this class plus the unreachable-conjunction and loop-step-endpoint siblings. Related recorded instance: a door order made `wait_expired` structurally unreachable at grid 0/4,860."
+    },
+    {
+      "id": "HZ-SINGLEWRITER",
+      "title": "A pin that calls the single-writer HELPER never proves the WRITER still calls it",
+      "status": "PARTIAL",
+      "acceptedReason": null,
+      "memory": ["single-writer-claim-needs-a-behavioral-pin.md", "tcd1-faction-address-two-id-spaces.md"],
+      "enforcer": {
+        "paths": [
+          "tests/lint/configMigrationSingleWriter.walker.test.js",
+          "tests/lint/envoyErrandLedgerSingleWriter.walker.test.js",
+          "tests/lint/provenanceStampSingleWriter.walker.test.js"
+        ],
+        "inChain": true,
+        "note": "Per-writer walkers, no general rule. Nothing forces a NEW single-writer claim to acquire a behavioral pin."
+      },
+      "instances": 3,
+      "instanceEvidence": "CONFIRMED: 'TCD-1's drift was replantable with 9 suites green' — nine passing suites did not detect the pre-fix spelling being planted back. Recorded cure: drive the REAL writer over REAL worlds, read what it PERSISTED, then prove it by planting the pre-fix spelling back.",
+      "triggers": [
+        "any new module claiming to be the single writer of a field",
+        "any new *SingleWriter/*SingleSource walker",
+        "any header comment asserting 'the only writer of X'"
+      ],
+      "upgradePath": "Mechanisable: scan source for 'single writer'/'only writer' claims and require each to be matched by a behavioral walker — the same shape as this registry's own MACHINERY-needs-an-enforcer rule."
+    },
+    {
+      "id": "HZ-REDRATCHETGROWS",
+      "title": "A RED ratchet's contents grow INVISIBLY — byte-identical failing row, empty row diff",
+      "status": "PARTIAL",
+      "acceptedReason": null,
+      "memory": ["cycle2-lighting-road-recon.md", "receipt-vacuity-and-shared-ratchet-rules.md"],
+      "enforcer": { "paths": ["scripts/ratchet-inventory.sh", "scripts/lib/ratchet-inventory-reporter.mjs"], "inChain": false, "note": "ON-DEMAND: an agent must remember to run it, which is the same voluntary-application failure as HZ-WRONGLINEAGE." },
+      "instances": 3,
+      "instanceEvidence": "CONFIRMED from the script's own header read at HEAD: 'Doing that BY HAND has now failed three times in one day' — (1) a lane reported the negative-assertion ratchet 71→73 when the truth was 75→77 ('the DELTA was right and both ABSOLUTES were invented'); (2) ES-1's gate receipt was false at the tree it described (corrected at 8322b8ec); (3) ES-2 (84f50fe4) reported 69 rows/269 sites identical at both ends when the truth was 75/292 → 76/293.",
+      "triggers": [
+        "any wave whose gate report cites a ratchet figure",
+        "any commit while a walker is red at base"
+      ],
+      "upgradePath": "DIRECTLY COUPLED TO HZ-EPISTEMIC: the negative-assertion ratchet is BOTH baselined red AND this class's instance #1. Wire the inventory diff into the gate rather than leaving it on-demand."
+    },
+    {
+      "id": "HZ-SIZECEILING",
+      "title": "sizeBaseline is tolerance-0; hot files sit AT their unraisable ceilings",
+      "status": "MACHINERY",
+      "acceptedReason": null,
+      "memory": ["sizebaseline-exact-ceiling-hazard.md", "hot-files-at-max-lines-ceiling.md", "ld-ladder-size-ratchet-gate.md", "wr7b-size-ratchet-decomposition.md", "rbld10-pulsekernel-banked-permanently.md"],
+      "enforcer": { "paths": ["tests/lint/sizeBaseline.test.js", "scripts/.size-baseline.json"], "inChain": true, "note": "It reds correctly and hard. The UN-mechanised half is the RULE — 'new engine logic goes in NEW LAZY LEAVES', 'budget a leaf extraction into every UI item' — nothing warns a wave that its target file is at ceiling BEFORE the work is done." },
+      "instances": 4,
+      "instanceEvidence": "CONFIRMED: five hot engine files sit AT unraisable ceilings (pulseKernel banked permanently, npcAgency, warDeployment); OutputContainer.jsx sits at EXACTLY 600 (UNBASELINED) and BLOCKS LD-1; App.jsx is tolerance-0 at its frozen number; roadsKernel at EXACTLY 800. JSX comments count against it.",
+      "triggers": [
+        "any added line in a file listed in scripts/.size-baseline.json",
+        "any new logic in src/domain/pulseKernel.js, npcAgency.js, warDeployment.js, corruption.js",
+        "any UI feature touching OutputContainer.jsx or App.jsx"
+      ],
+      "upgradePath": "PRIME PREMORTEM TRIGGER: surface the at-ceiling fact when a wave is SCOPED, not when its gate reds."
+    },
+    {
+      "id": "HZ-VEIL",
+      "title": "Every public payload builder must RETURN through veilPublicPayload",
+      "status": "MACHINERY",
+      "acceptedReason": null,
+      "memory": ["public-payload-veil-seam.md"],
+      "enforcer": { "paths": ["tests/security/publicPayloadVeilTotality.test.js"], "inChain": true, "note": "Correctly shaped as a TOTALITY walker over builders rather than a per-builder pin." },
+      "instances": 2,
+      "instanceEvidence": "CONFIRMED by grep at HEAD: veilPublicPayload appears in exactly one test (the totality walker) and three source files (src/lib/worldExport.js, src/lib/gallery.js, src/domain/display/publicSafe.js). The recorded bite: veiling inside toPublicSafe alone is outrun by the raw name each builder hoists beside it.",
+      "triggers": [
+        "any new public/gallery/export payload builder under src/lib/ or src/domain/display/",
+        "any new anon-reachable Supabase RPC projection"
+      ],
+      "upgradePath": "Class closed. Keep the totality shape when new builders land."
+    },
+    {
+      "id": "HZ-DISTBOOT",
+      "title": "The shipped dist is un-bootable with every gate green (chunk-cycle TDZ)",
+      "status": "PARTIAL",
+      "acceptedReason": null,
+      "memory": ["dist-boot-chunk-cycle-tdz.md", "lazy-chunk-import-reparents-eager-closure.md"],
+      "enforcer": { "paths": ["scripts/boot-smoke.mjs"], "inChain": false, "note": "⚠ `smoke:boot` appears EXACTLY ONCE in package.json — its own script definition. It is NOT among the steps of `npm run check`. The only guard for 'build exits 0 while dist cannot boot' is on-demand." },
+      "instances": 1,
+      "instanceEvidence": "MEASURED at bd5e49f6: the `check` chain is validate:data → validate:custom-content-manifest → validate:migration-head → validate:edge → validate:map → validate:tuning-bands → validate:foundry-module → validate:mcp-server → typecheck:ratchet → typecheck:domain:strict → lint → test:ratchet → build → verify:dist. `smoke:boot` is absent. The bite: dist was un-bootable for DAYS with every gate green.",
+      "triggers": [
+        "any new static import between chunks",
+        "any eager module importing a lazily-loaded one",
+        "any module-scope const read across a chunk boundary",
+        "any change to vite.config chunking"
+      ],
+      "upgradePath": "HIGHEST-SEVERITY PARTIAL: one instance, but the instance was 'we shipped a bundle that could not boot, for days'. The fix is ONE LINE — append `&& npm run smoke:boot` to the check chain — gated only on its runtime fitting the gate budget. NOT done by this lane: appending a build-dependent step to the gate is a gate-shape change, which is owner-gated, and its runtime is unmeasured here."
+    },
+    {
+      "id": "HZ-GATEMUTEX",
+      "title": "`ps aux | grep -c \"[v]itest\"` SELF-MATCHES — a phantom holder burns 40 minutes per gate",
+      "status": "PARTIAL",
+      "acceptedReason": null,
+      "memory": ["vitest-mutex-check-self-match.md", "generation-remediation-gate-state.md"],
+      "enforcer": { "paths": ["scripts/gate-mutex.sh"], "inChain": false, "note": "PARTIAL BY CONSTRUCTION — an optional script competing against a one-liner everyone already knows. Never counts, excludes its own ancestry, PRINTS pid lines." },
+      "instances": 2,
+      "instanceEvidence": "CONFIRMED from the script's own header read at HEAD: 'a bug that cost real time, twice, and was CONFIRMED live.' MEASURED 2026-08-06: a build agent's until-loop 'slept 30s x 40 = TWENTY MINUTES against a mutex nobody held, then gave up and exited without running the gate at all.' Reproduced under control: bracket-grep alone returned 1; the same grep on a line also carrying the plain word returned 3.",
+      "triggers": [
+        "any command that waits on a running vitest",
+        "any compound command containing both a mutex check and the word vitest elsewhere on the line"
+      ],
+      "upgradePath": "'The failure mode is the nastiest kind: it looks like patience.' Nothing errors, nothing reds, the lane just quietly does not run its gate. Same voluntary-application shape as HZ-WRONGLINEAGE and HZ-REDRATCHETGROWS — the three of them share one cure: emit the guard into the brief instead of relying on recall."
+    },
+    {
+      "id": "HZ-CAMELBLIND",
+      "title": "A `\\bicon` guard cannot see resourceIcon/needIcon — the guard exists and is BLIND",
+      "status": "PARTIAL",
+      "acceptedReason": null,
+      "memory": ["case-sensitive-guard-blind-to-camelcase-fields.md", "lane-rr-combined-rerecord.md"],
+      "enforcer": { "paths": ["tests/lint/copyCorruption.test.js"], "inChain": true, "note": "SIG 1 reads as a total ban on empty icon slots and in fact bans only the lowercase spelling. A PERFECT PARTIAL: present, green, and its green means far less than its name claims." },
+      "instances": 2,
+      "instanceEvidence": "CONFIRMED: '4,462 dead slots still ship in generated output.' The camelCase arm was closed for the origin rung in lane RR; a 2nd re-record is still owed.",
+      "triggers": [
+        "any new source-scan guard using a \\b-anchored lowercase field name",
+        "any new camelCase field in generated output"
+      ],
+      "upgradePath": "The general shape — 'a source-scan guard whose regex is narrower than its stated claim' — deserves a META-WALKER that compares each guard's stated claim against the population its regex can actually reach."
+    },
+    {
+      "id": "HZ-MUTANTNOOP",
+      "title": "A mutant that plants nothing GREENS — the probe passes without ever changing the file",
+      "status": "PARTIAL",
+      "acceptedReason": null,
+      "memory": ["derive-dont-restate-and-mutant-must-change.md", "door3-polarity-principle-landed.md", "credit-side-enumeration-fails-open.md"],
+      "enforcer": { "paths": ["scripts/mutation-sweep.sh"], "inChain": false, "note": "VERIFIED AT HEAD: check_caught grades BROKEN when `git diff --quiet -- \"$file\"` shows the target unchanged, emitting 'mutation did not apply — … stale anchor?'. Deliberately NOT keyed to a line number here: a `<file>.sh:<n>` address would plant an HZ-LINEADDR instance in the registry that names it. ⚠ The guard covers the SWEEP; a hand-run mutant outside the sweep is unguarded, and the sweep is not in the check chain." },
+      "instances": 3,
+      "instanceEvidence": "CONFIRMED for the guard's existence and text (read at bd5e49f6). ⚠ THE INSTANCE COUNT IS CARRIED FROM A TRUNCATED CENSUS ROW and is the one figure in this file NOT re-derived by this lane — treat it as a floor owing re-measurement, not a measurement.",
+      "triggers": [
+        "any hand-run mutation probe outside scripts/mutation-sweep.sh",
+        "any new check_caught plant whose perl/sed anchor is hand-written",
+        "any refactor that moves a line a standing plant anchors on"
+      ],
+      "upgradePath": "Extend the changed-a-line precondition beyond the sweep: every mutant claimed in a wave receipt should be provable by a diff, not by narration."
+    }
+  ]
+}
