@@ -49,6 +49,15 @@
  *
  * `npm run typecheck` stays a raw command on purpose: a burn lane needs the whole
  * list, not the ratchet's verdict.
+ *
+ * ⚠ THIS IS THE FIRST OF TWO TYPECHECKERS IN THE CHAIN. Step 10 is
+ * `typecheck:domain:strict` over `tsconfig.domain-strict.json`. THEY DISAGREE, and a
+ * figure quoted without naming its config reads as total and is not: the 2026-08-06
+ * idiom sweep (eca65c8a -> 1977db07) introduced 0 rows here and 31 there. Read
+ * CONTRIBUTING.md, "THE TWO-TYPECHECKER RECEIPT LAW", before quoting an
+ * introduced/removed count from either — and note that a green ratchet does NOT mean
+ * "nothing introduced": these compare PER-FILE COUNTS, so introduced rows that fit
+ * inside a file's existing slack redden nothing (29 of that 31 did exactly that).
  */
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';

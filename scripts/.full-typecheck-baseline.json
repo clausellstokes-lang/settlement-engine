@@ -1,8 +1,8 @@
 {
   "_doc": "Per-file ceiling for `tsc --noEmit -p tsconfig.full.json`. SHRINK-ONLY. A file absent from `files` has an allowance of ZERO. Regenerate with `npm run typecheck:ratchet:update` — never hand-edit, and never widen. See scripts/check-full-typecheck.mjs.",
-  "measuredAtSha": "1977db0774c7067fb8eda57f97a4c1db35874c4b",
-  "total": 188,
-  "resolvedCount": 1375,
+  "measuredAtSha": "173e9d7b8a3ee8374e44f0f9bd4ed14f086161ed",
+  "total": 177,
+  "resolvedCount": 1376,
   "roots": [
     "src/application/",
     "src/components/",
@@ -20,8 +20,7 @@
     "src/store/"
   ],
   "files": {
-    "src/domain/rulingPower.js": 2,
-    "src/domain/worldPulse/applyWorldPulse.js": 13,
+    "src/domain/worldPulse/applyWorldPulse.js": 12,
     "src/domain/worldPulse/armyTransitKernel.js": 2,
     "src/domain/worldPulse/autoAdjudication.js": 2,
     "src/domain/worldPulse/beliefMap.js": 1,
@@ -33,11 +32,10 @@
     "src/domain/worldPulse/envoyErrandParlay.js": 2,
     "src/domain/worldPulse/envoyErrandRecords.js": 5,
     "src/domain/worldPulse/envoyInterceptionStage.js": 22,
-    "src/domain/worldPulse/envoyNegotiationPictureBuilder.js": 2,
+    "src/domain/worldPulse/envoyNegotiationPictureBuilder.js": 1,
     "src/domain/worldPulse/envoyPulse.js": 2,
     "src/domain/worldPulse/informationStatecraft.js": 12,
     "src/domain/worldPulse/lineageClaim.js": 1,
-    "src/domain/worldPulse/lineageMemberBirth.js": 1,
     "src/domain/worldPulse/negotiationPictures.js": 2,
     "src/domain/worldPulse/npcDmVerbs.js": 3,
     "src/domain/worldPulse/npcLadderKernel.js": 3,
@@ -58,7 +56,6 @@
     "src/domain/worldPulse/warDeployment.js": 2,
     "src/domain/worldPulse/warPeaceDecision.js": 8,
     "src/domain/worldPulse/warRulingsNews.js": 1,
-    "src/domain/worldPulse/warSeatBooks.js": 6,
     "src/domain/worldPulse/warTermination.js": 15,
     "src/lib/founderChairRequest.js": 3,
     "src/lib/foundersHall.js": 3

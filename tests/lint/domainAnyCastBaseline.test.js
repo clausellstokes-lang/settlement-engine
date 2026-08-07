@@ -87,6 +87,48 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // 1,329 strict errors. Monotone-DOWN hereafter; never raise past 2287.)
 const CEILING = 2287;
 
+// ── THE DECLARED-OVERRUN LEDGER (2026-08-07 gate-repair lane) ───────────────
+// THIS RATCHET IS RED, AND IT HAS BEEN RED LONG ENOUGH THAT ITS FAILING ROW IS
+// NO LONGER INFORMATION. A ratchet red at both ends of a wave prints a
+// BYTE-IDENTICAL failing row in every report and an EMPTY row-diff while the
+// INVENTORY INSIDE IT GROWS — so "the same 2 files / 3 tests fail at both ends"
+// is true and says nothing. Between eca65c8a and 3800bcb6 the overrun SET went
+// from 2 files to 4 and no report showed it. Hence this ledger: every file
+// currently over its baseline is named here WITH THE COMMIT THAT PUT IT OVER, so
+// a grown inventory cannot hide behind an unchanged failing row again. Measured
+// with `node scripts/count-domain-any.mjs` against tests/lint/.domain-any-baseline.json;
+// the reader-friendly diff tool is `sh scripts/ratchet-inventory.sh`.
+//
+//   src/domain/worldPulse/commercialReasons.js   31 any / baseline 0   (+31)
+//     CAUSE: d7ea69a4 "TR-1 THE CASUS COMMERCII" — the file was ADDED carrying 31
+//     holes, and a file absent from the baseline has an allowance of ZERO, so it
+//     has been over since its first commit. THE LARGEST SINGLE DEBT ON THIS LIST.
+//
+//   src/domain/worldPulse/warDeployment.js       17 any / baseline 16  (+1)
+//     CAUSE: 172e5f22 "Lane WZ-2 piece 3: the license ledger". 16 at 6f1bada6,
+//     17 from 172e5f22 onward.
+//
+//   src/domain/worldPulse/envoyPulse.js           2 any / baseline 0   (+2)
+//     CAUSE: e0c8646e "Idiom sweep: the `= {}` destructure typed at its source".
+//     `regionalGraph?:any, wizardNews?:any` in advanceEnvoyDiplomacyPulse's args.
+//     ⚠ TYPING THESE `unknown` WAS TRIED AND MEASURED (2026-08-07): it improves
+//     envoyPulse itself (domain-strict 19 -> 16, full-config held at 2) but opens
+//     +2 NEW full-config errors in pulseKernel.js, because the pulse assigns
+//     `envoys.wizardNews` / `envoys.regionalGraph` into concretely-typed slots and
+//     the dark early-return path hands the raw inputs straight back. The honest
+//     cure needs the real wizardNews / regionalGraph shapes threaded through both
+//     files. DECLARED DEBT, not an oversight — owed to a burn lane.
+//
+// CLEARED by the same lane, recorded so the count is auditable rather than merely
+// smaller: src/domain/worldPulse/npcLadderKernel.js was 3 any / baseline 2 (+1),
+// minted at 9ecec2a2 as `ladderFactionKey(/** @type {any} */ (faction))`, and is
+// re-spelled with the accessor's own parameter type (the idiom warSeatBooks.js
+// already uses) — back to its baseline of 2.
+//
+// ⛔ DO NOT run `--update` to make this list go away. `--update` re-freezes the
+// WHOLE TREE, which would bank commercialReasons.js's 31 holes as permanent debt.
+// Each row above is cleared by TYPING the hole, one file at a time.
+
 const baseline = JSON.parse(readFileSync(join(ROOT, 'tests/lint/.domain-any-baseline.json'), 'utf8'));
 const current = countDomain();
 

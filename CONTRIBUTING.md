@@ -25,6 +25,47 @@ allowance of zero. Use `npm run typecheck` for the raw unfiltered list when burn
 debt down, and `npm run typecheck:ratchet:update` to bank a win. Never widen a baseline
 to green a gate — that is the constitutional violation this repo exists to prevent.
 
+**THE TWO-TYPECHECKER RECEIPT LAW — a typecheck figure MUST name its config.** The
+chain runs **two** typecheckers over overlapping trees: `typecheck:ratchet`
+(`tsconfig.full.json`) at step 9 and `typecheck:domain:strict`
+(`tsconfig.domain-strict.json`) at step 10. They disagree, and a figure quoted
+without its config reads as total when it is not. Measured on the 2026-08-06 idiom
+sweep (`eca65c8a` → `1977db07`, both ends in integrity-counted `git archive`s of the
+committed shas, diagnostics compared message-normalized so shifted line numbers do
+not read as churn):
+
+| window `eca65c8a` → `1977db07` | errors | removed | **introduced** |
+| --- | --- | --- | --- |
+| `tsconfig.full.json` | 351 → 188 | 163 | **0** |
+| `tsconfig.domain-strict.json` | 1303 → 1159 | 175 | **31** |
+
+The sweep reported `introducedCount: 0`. That was true of the config it measured and
+false of the one it did not, and two of those 31 crossed a per-file ceiling and turned
+step 10 red — which, the chain being `&&`, took `lint`, `test`, `build` and
+`verify:dist` dark behind it. So:
+
+- **Quote both numbers, or name the single config the number belongs to.** "Zero
+  introduced" with no config named is not a receipt.
+- **A per-file "I only touched my files" claim is not a safety argument.** Of those
+  31 rows, the ones that reddened the gate were in `peaceTerms.js`, a file that
+  appears in **no** commit of that sweep. JSDoc added to one file narrows inferred
+  types that flow into files nobody opened; the blast radius is the whole compilation,
+  so the receipt has to be measured over the whole compilation.
+- **`introducedCount: 0` and "the ratchet is green" are different claims, and
+  neither implies the other.** These ratchets compare PER-FILE COUNTS, so 29 of
+  those 31 introduced rows landed inside existing per-file slack and reddened
+  nothing. Conversely a file can swap one error for another and stay at its ceiling.
+  Report the ratchet's exit status *and* the introduced set; one does not stand in
+  for the other.
+- **Measure a committed sha in an archive, never the live tree.** This tree is
+  shared; a sibling lane's uncommitted work belongs to no commit. `git archive -o f.tar <sha>`
+  + `tar -xf`, integrity-counted (`git ls-tree -r <sha> | wc -l` against
+  `find -type f | wc -l`), with `node_modules` symlinked in.
+- **A ratchet's stated reason is a claim, and a claim about what a commit contained
+  is settled by measuring that commit** — never by reasoning about which lane was
+  busy. See the correction at the head of `tests/lint/fullTypecheckRatchet.test.js`,
+  where exactly that mistake froze the ceiling 9 errors looser than its own tree.
+
 **CI must be the only path to production.** To enforce that (a one-time maintainer
 action in the GitHub UI — it cannot be set from the repo):
 

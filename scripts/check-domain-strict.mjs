@@ -15,6 +15,17 @@
  * — exact-set governance + a ceiling that only ratchets down.
  *
  * Wired into `npm run check` via `npm run typecheck:domain:strict`.
+ *
+ * ⚠ THIS IS THE SECOND OF TWO TYPECHECKERS IN THE CHAIN. Step 9 is
+ * `typecheck:ratchet` over `tsconfig.full.json`; this is step 10 over
+ * `tsconfig.domain-strict.json`. THEY DISAGREE. A typecheck figure quoted without
+ * naming its config reads as total and is not: the 2026-08-06 idiom sweep
+ * (eca65c8a -> 1977db07) introduced 0 rows under the full config and 31 under this
+ * one, and two of those 31 crossed a per-file ceiling and reddened this step — in a
+ * file (peaceTerms.js) that appears in NO commit of that sweep, because JSDoc added
+ * elsewhere narrows inferred types that flow into files nobody opened.
+ * See CONTRIBUTING.md, "THE TWO-TYPECHECKER RECEIPT LAW", before quoting any
+ * introduced/removed count from either checker.
  */
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';

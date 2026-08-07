@@ -41,18 +41,43 @@ const baseline = JSON.parse(readFileSync(join(ROOT, 'scripts/.full-typecheck-bas
 const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
 
 // The census measured in an integrity-counted `git archive` of committed sha
-// 1977db07 (6,171 tracked paths in, 6,171 files out): 188 errors across 42 files.
+// 173e9d7b (6,182 tracked paths in, 6,182 files out): 177 errors across 39 files.
 //
-// ⚠ THIS IS A HIGH-WATER MARK TAKEN MID-BURN. A sibling lane was actively burning
-// the count down as it was taken (the live working tree read 179 at that moment,
-// against 188 in the committed bytes — the difference was that lane's UNCOMMITTED
-// work). Banking the committed number is deliberate: a baseline measured over
-// another lane's unlanded edits belongs to no commit and reds falsely the moment
-// they reshape it. The ratchet-down rule makes the high mark self-correcting, and
-// a TIGHTENING PASS IS OWED once the burn lane lands.
+// ── CORRECTION, 2026-08-07: THE ORIGINAL EXPLANATION HERE WAS WRONG ─────────
+// This block used to freeze the ceiling at 188 measured at 1977db07, and to
+// explain the gap like this: "A sibling lane was actively burning the count down
+// as it was taken (the live working tree read 179 at that moment, against 188 in
+// the committed bytes — the difference was that lane's UNCOMMITTED work)."
+//
+// GIT CONTRADICTS THAT, and the contradiction was reproduced rather than argued.
+// This ratchet LANDED at a9691e73. a9691e73's DIRECT PARENT is 9ecec2a2, and
+// three integrity-counted archives measure `tsc -p tsconfig.full.json` as:
+//
+//     1977db07  (grandparent)      188 errors / 42 files   6,171 in -> 6,171 out
+//     9ecec2a2  (DIRECT PARENT)    179 errors / 40 files   6,172 in -> 6,172 out
+//     173e9d7b  (this baseline)    177 errors / 39 files   6,182 in -> 6,182 out
+//
+// So 179 was not a live-tree reading contaminated by anyone's unlanded work: 179
+// is exactly what the COMMITTED direct parent measures. The 9-error gap is
+// 9ecec2a2's OWN committed net burn (message-normalized: 22 rows removed, 13
+// introduced, net -9, clearing rulingPower.js, applyWorldPulse.js,
+// warPeaceDecision.js, warSeatBooks.js and warTermination.js of `Property 'id'
+// does not exist on type 'RulingFaction'`). The baseline was simply frozen ONE
+// COMMIT STALE — at the grandparent instead of the parent — and the uncommitted-
+// sibling story was a plausible narrative fitted to a number nobody re-measured.
+//
+// The cost of the wrong story was not the story: a ratchet 9 errors looser than
+// the tree it guards is 9 errors of slack a future regression can hide in, and
+// "a tightening pass is owed" made that slack sound like a scheduled chore rather
+// than a live hole. RE-BASELINED HERE at 173e9d7b, this lane's own committed sha,
+// measured in an archive of that sha and not in the live shared tree.
+//
+// THE RULE THIS COST US, so the next lane does not pay it again: a ratchet's
+// stated reason is a CLAIM, and a claim about what a commit contained is settled
+// by measuring that commit — never by reasoning about which lane was busy.
 //
 // MONOTONE DOWN from here. You may burn it; you may never pad it.
-const CEILING = 188;
+const CEILING = 177;
 
 describe('full-tree typecheck ratchet — static pins', () => {
   test('baseline.total equals the sum of its per-file counts (no stale drift)', () => {
