@@ -49,7 +49,7 @@ import {
 import { isBilateralPeaceOffer, readWarPeaceDecision } from './warPeaceDecision.js';
 import { applyWarPeaceRefusal } from './warPeaceRefusal.js';
 import { applyWarDecisionPolitics, warDemandForInstaller } from './warPoliticalLoop.js';
-import { appendNpcLadderSeatTransition } from './npcLadderKernel.js';
+import { appendNpcLadderSeatTransition, seatTransitionGoverningFactionId } from './npcLadderKernel.js';
 import { buildWorldSnapshot } from './worldSnapshot.js';
 import { rulingSeatNidOf } from './gratitudeBonds.js';
 import { warRulingNewsEntries } from './warRulingsNews.js';
@@ -958,7 +958,12 @@ export function applyWorldPulseOutcomes({
             // seat instead of becoming a fabricated vacancy.
             const toRulerId = rulingSeatNidOf(ladderRecord, nextSettlement) || fromRulerId;
             const governingFaction = governingFactionOf(nextSettlement);
-            const governingFactionId = String(governingFaction?.id || installerFactionId || '');
+            // ONE SPELLING with the organic-succession writer (npcLadderKernel).
+            // The old `governingFaction?.id || installerFactionId` recorded the
+            // INSTALLER under the governing field on every generated world,
+            // because no powerStructure row carries `.id`; installerFactionId is
+            // still emitted below under its own honest name.
+            const governingFactionId = seatTransitionGoverningFactionId(governingFaction);
             const governingFactionName = governingFaction ? nameOf(governingFaction) : '';
             const seatTransition = {
               id: `applied:${String(outcome.id || '')}`,

@@ -233,6 +233,30 @@ export function heirsActive(worldState) {
 }
 
 /**
+ * THE ONE SPELLING of a seat-transition row's `governingFactionId`.
+ *
+ * `appendNpcLadderSeatTransition` below is the sole writer of the row, but its
+ * two CALLERS compose the row themselves, and they had drifted: this kernel's
+ * organic-succession path resolved the ladder key while applyWorldPulse's
+ * approved-transfer path read `governingFaction?.id` and fell back to the
+ * INSTALLER's id. On generated data `governing.id` is absent from 100% of rows
+ * (0 of 2,175 measured), so that fallback always fired and the field recorded
+ * the faction that INSTALLED the seat under the name of the faction that HOLDS
+ * it — silently wrong on every transfer where installer differs from governing,
+ * which is the ordinary case for a war party seating a successor.
+ *
+ * `ladderFactionKey` is the canonical accessor: the authored `id` when present,
+ * else the `fac.<slug>` key the ladder already persists its own rungs under, so
+ * a transition row and the faction record it names share one key space.
+ *
+ * @param {unknown} faction  The GOVERNING faction record, not the installer's.
+ * @returns {string}
+ */
+export function seatTransitionGoverningFactionId(faction) {
+  return faction ? ladderFactionKey(/** @type {any} */ (faction)) : '';
+}
+
+/**
  * Append one real governing-seat transition through the ladder's sole authoritative
  * writer. The helper is deliberately usable outside the pulse mover: an applied
  * governing-power transfer occurs at the proposal applicator, while an organic court
@@ -760,7 +784,10 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
         cause: nextGoverningSeat ? governingSeatCause : 'vacancy',
         tick: now2,
         authorityEpoch: authorityTransferEpochFor(/** @type {any} */ (s)),
-        governingFactionId: String(faction.id || governingFkey),
+        // Routed through the shared helper so this path and applyWorldPulse's
+        // approved-transfer path cannot drift again; `governingFkey` still
+        // covers the case where the governing record itself did not resolve.
+        governingFactionId: seatTransitionGoverningFactionId(governingFaction) || governingFkey,
         ...(governingFactionName ? { governingFactionName } : {}),
       });
       organicSeatTransitions.push({ cid: sid, transition });

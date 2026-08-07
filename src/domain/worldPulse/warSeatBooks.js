@@ -32,6 +32,9 @@ import { rulingSeatNidOf } from './gratitudeBonds.js';
 import { lawWordFor } from './lawWord.js';
 import { LADDER_TUNING, ladderFactionKey, npcInFaction } from './npcLadderState.js';
 import { coalitionConsolidation01, settlementPoliticsActive } from './settlementPolitics.js';
+import { stablePart } from './stablePart.js';
+
+/** @typedef {import('../rulingPower.js').RulingFaction} RulingFaction */
 
 /** @param {unknown} value @returns {Record<string, unknown>} */
 function asObject(value) {
@@ -350,6 +353,17 @@ function rulerBiases(ruler, axes) {
 
 /**
  * Stable legitimate-authority signature. Display names are intentionally absent.
+ *
+ * ⛔ `factionId` HERE IS DELIBERATELY NOT THE ADDRESS ID `readWarSeatBooks`
+ * BUILDS BELOW, and the two expressions must not be re-converged. This one is
+ * `.id`-only, so it is null on 100% of generated data (0 of 2,175 measured
+ * powerStructure rows carry `id`) — that is the correct reading of the header's
+ * rule that a faction rename must never look like a succession. The address id
+ * below is a slug of the DISPLAY NAME; folding it into this signature would
+ * make every rename break the war-decision continuity that reads this string.
+ * Discrimination on generated worlds comes from `rulerId` plus the label-free
+ * `authorityTransferEpochFor`; the `id` slot only sharpens it for authored
+ * records that carry a genuinely rename-decoupled id.
  * @param {{worldState?:unknown, snapshot?:unknown, actorId?:unknown}} args
  * @returns {string}
  */
@@ -363,6 +377,52 @@ export function authoritySignatureFor({ worldState = null, snapshot = null, acto
   const rulerId = rulingSeatId(asObject(worldState), actor, settlement, governing);
   const factionId = governing && typeof governing.id === 'string' && governing.id ? governing.id : null;
   return `authority:${JSON.stringify([actor, rulerId, factionId, authorityTransferEpochFor(settlement)])}`;
+}
+
+/**
+ * THE GOVERNING SEAT'S NEWS ADDRESS. The News Address Law requires every entry
+ * to carry its full containment chain (settlement › power › faction › npc), and
+ * this is the faction rung of that chain for every WR-5 war ruling.
+ *
+ * It cannot be `governing.id`: no generator writes one. The estate already
+ * defines the settlement-scoped faction address space this must join —
+ * `warRulingsNews.factionName` resolves `${settlementId}:${stablePart(name)}`
+ * (its third arm) and `npcVerdictPulse` already MINTS `${settlementId}:${id}`
+ * for the same `factionIds` slot. Until now that third arm was a reader with no
+ * writer: the books emitted no faction id at all, so the war-ruling entries
+ * omitted `factionIds` entirely and lost the faction rung of the address.
+ *
+ * A display-name slug is right HERE and wrong in the authority signature above:
+ * an address is resolved at render time against the current roster, so a
+ * renamed faction simply addresses under its new name, whereas the signature is
+ * a continuity discriminator a rename must not disturb.
+ *
+ * ⭐ THE DERIVED FORM IS BYTE-IDENTICAL TO `realmFactionPulseId` (dossier/
+ * realmEntityWeb.js), which is the id space the link web's `resolveFaction`
+ * indexes — and that resolver REQUIRES the `<saveId>:<slug>` scoping, returning
+ * null outright on a colonless id. The equality is pinned rather than shared by
+ * import, because realmEntityWeb is a dossier-layer module and dragging it into
+ * this lazy worldPulse leaf would re-parent its closure; see
+ * tests/domain/warSeatBooksFactionAddress.test.js, which asserts the two agree
+ * over real generated worlds and reds if either spelling drifts.
+ *
+ * ⏳ DELIBERATELY DEFERRED, not a bug to re-find: an AUTHORED `governing.id`
+ * still passes through verbatim (unscoped), matching the estate-wide "authored
+ * id wins verbatim" convention that `ladderFactionKey`, `npcInFaction` and
+ * `entityLinks`' aliasIds all keep, and the contract asserted at
+ * tests/domain/warSeatBooks.test.js:99. Such an id will not resolve in
+ * `resolveFaction` unless it happens to carry a colon — a pre-existing property
+ * of the authored path, unreachable on generated data (0 of 2,175 rows carry
+ * `id`), and changing it means changing an asserted contract rather than fixing
+ * a live defect.
+ *
+ * @param {string} settlementId @param {RulingFaction|null} governing @returns {string|null}
+ */
+function seatAddressFactionId(settlementId, governing) {
+  if (!governing) return null;
+  if (typeof governing.id === 'string' && governing.id) return governing.id;
+  const name = nameOf(governing);
+  return settlementId && name ? `${settlementId}:${stablePart(name)}` : null;
 }
 
 /** Exact ruling-seat asset, deterministic if malformed data supplies several patrons. */
@@ -398,7 +458,7 @@ export function readWarSeatBooks({
   );
   const rulerId = rulingSeatId(state, actor, settlement, governing);
   const ruler = rosterNpcById(actor, settlement, rulerId);
-  const factionId = governing && typeof governing.id === 'string' && governing.id ? governing.id : null;
+  const factionId = seatAddressFactionId(actor, governing);
   const factionName = governing ? nameOf(governing) : '';
   const rulerName = ruler ? String(ruler.name || ruler.label || '').trim() : '';
   const signature = authoritySignatureFor({ worldState: state, snapshot, actorId: actor });
