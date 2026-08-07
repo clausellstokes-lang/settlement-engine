@@ -5330,3 +5330,127 @@ ends read with the same instrument against this round's own parent.
 
 **Nothing lit. No flag minted. No band ratified. No golden shifted — no `src/` edit in the
 repair commit. No soak run. Nothing pushed.**
+
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · ES-3 REPAIR ROUND — THE PIN AT THE CEILING
+## (Chair-landed. Commit `e39ac76f`. Vetoable.)
+
+### ⭐⭐ A NEW NAMED VACUITY SHAPE: CEILING SATURATION
+
+J-ES3-B — "one man's nine looks are one telling", the wave's central claim — rested on ONE
+assertion and BOTH of its sides were CLAMPED AT 1.0. The fixture's 0.7 prior saturates on a
+single report, so the pin held for one report and for nine alike. EXECUTED: the
+echo-chamber mutant left **4 files / 81 tests green, exit 0**, and measured across ELEVEN
+priors the honest fold and the nine-report echo BOTH land exactly 1.0 from prior 0.5 upward.
+
+**THE CURE IS NOT A SECOND ASSERTION BESIDE A SATURATED ONE.** The prior drops to 0.2 so the
+arithmetic can move; the claim is stated on THREE slots — `readiness` (discriminates at
+every prior measured, 0.15 vs 0.1587), `strengthBand` (named separately because BANDING IS
+LOSSY: it discriminates at 0.7 and rounds the same difference away at 0.05, so it may never
+be the only witness), and `confidence01` last — followed by an **ANTI-VACUITY GUARD**
+`toBeLessThan(1)`, so a later tuning change reds there instead of silently emptying the
+equality. The mutant now names the claim itself.
+
+**SWEPT, NOT PATCHED. The wave's other pins hold 3 VACUOUS, 6 saturated-but-guarded, 6
+equality-by-construction.** All three vacuous are repaired here; the twelve others are
+recorded rather than absorbed. The sharpest of the three: `completeness01` was asserted AT
+ITS CEILING because no fixture had ever SENT anything, so coverage was N/N = 1 by
+construction — and the stage's own sentence, "a captured magic mission that kept one partial
+of five tells a fifth of a story", was asserted NOWHERE. It now measures 0.5556. And a
+restraint term was "proved" at `malice01: 0`, where every positive term is already zero, so
+the floor returns 0 with the restraint subtraction DELETED.
+
+### F2 — THE FINDING THAT REACHED THE WORLD
+
+`envoyPulse` called the stage with `npcFor`, `insideAssetAt` and `credibilityOf` all
+defaulting to null. `walk.npc` was null on every mission, so the standoff returned **0.6906
+for a coward and a hero alike** (0.3719 timid / 0.9563 bold) — and the newly minted coupling
+row `CPL-20.INTERIOR_TO_INFO.ES-3.flaw_distortion` asserted a cross-volume read that never
+happened. Two readers are now WIRED (`rosterPersonById` minted as the INVERSE of the id the
+mint writes, in the mint's own file so the two laws move together; and a credibility fn that
+returns null when the info layer is dormant, so dark stays byte-identical). The third is
+**DECLARED DEAD**: `insideAssetAt` has NO PRODUCER under `src/` — the identifier appears in
+exactly two files and both are CONSUMERS — so the `delta` rung cannot occur in a running
+world. A producer census REDS the day a third file names it.
+
+### F4 WAS UNREACHABLE, NOT MERELY UNPINNED — and the distinction is the lesson
+
+`assessedRisk = catch01 × clusterHostility01 × flawDistortion`, and in the two-stop fixture
+world the only stop AHEAD carried no hostile edge, so the cluster term was **0 at every
+input**. ⭐ **A term that can only be zero is not an unpinned arm, and a green battery cannot
+tell the two apart.** The new three-stop world drives it — risk 0.4812 over bar 0.3719, the
+mark persisted, and the informational plateau measured: a timid man reads `performance`
+where a bold man reads `beliefs`.
+
+### F5 PROVED THE JEWEL ONLY ON THE ARM THAT CANNOT DOUBLE-COUNT
+
+No fixture had driven a MAGIC mission to the home mouth — the one place the fold holds
+partials that ALREADY LANDED. So the double-landing guard, whose whole purpose is to stop
+charging the same telling twice, was pinned only where double-counting was impossible.
+
+### F7 — A CERTIFICATION ROW THAT ASSERTED A FALSE INVARIANT, IN A COMMIT THAT KNEW
+
+The `espionageEnabled` row still read "it writes nothing in either flag state" and "no
+module under src/ imports the espionage set", while ES-3's own dormancy-fence header in the
+SAME COMMIT said "ES-3 IS THE FIRST ESPIONAGE WAVE THAT WRITES". The row is now true, the
+dormancy claim NARROWED and pinned BY NAME AND BY ABSENCE, and the two deleted sentences
+RE-MEASURED against live source in the pin — so it proves they were deleted because they are
+FALSE, not merely deleted, and a later wave cannot restore the wider claim by copying an
+older row.
+
+### F3 — ES-3's FULL-SUITE RECEIPT, CORRECTED
+
+Measured ARCHIVE vs ARCHIVE at both ends: **42 files / 69 tests failing at BOTH**. ES-3's
+base figure was right; its head figure (39/54) is not reproducible and came from comparing an
+archive against a LIVE tree — the very method its own note invoked to explain the gap. And
+`of 2342` is the test-FILE count: the suite carries **27,147 tests**. The conclusion survives;
+the figures do not. **Fourth false receipt in this program in one day, and every one came
+from comparing two things that were not the same kind of thing, or from transcribing rather
+than executing.**
+
+### ⛔ STOP-ES3-1 — CHAIR DECISION OWED, AND THE CHEAP ARM HAS A CLOSING WINDOW
+
+The declaration is CONFIRMED HONEST: `exports` appears nowhere in `beliefAxisSubjects.js`,
+`CONDITIONS_KEYS` is exactly four bands, `loserExports` is a truth read. Arm (a) mint the
+belief slot = a NEW PERSISTED KEY FAMILY (pinned-totality re-record, truth-side deriver,
+normalizer and fence arms, every belief-record golden). Arm (b) cut the leg = 5 consumers,
+and it narrows a PERSISTED vocabulary — **but `mintCovertMission` has NO production caller
+today, so no save file can carry `legRefs:['exports']`, and the cut is FREE until ES-5's
+dispatcher ships.**
+
+**LANE RECOMMENDATION, and the chair finds its central argument decisive: ARM (b), NOW.** The
+same vocabulary already EXCLUDES `pullBand` BY RULE, one member earlier, for the IDENTICAL
+property — no espionage product can ever fill it. Two members with the same property treated
+two different ways is itself the defect, and that asymmetry is what makes the declaration
+read as a workaround rather than a law. The `legsUnfilled` machinery and the grade cap are
+KEPT regardless, since a conditions family going dark makes a leg unfillable for a
+legitimate second reason. ⛔ STILL OWNER-GATED and not executed: the cut is only free while
+the no-production-caller measurement holds, so whichever wave performs it must RE-MEASURE
+that first and STOP if a caller has appeared.
+
+### A SIBLING DEFECT SURFACED, NOT FIXED (scope)
+
+`envoyPulse` calls the ES-2 gauntlet with the same two readers omitted, so
+`covertCompetence01` runs against a null person on every mission and the notability term
+never sees anybody. **PLAUSIBLE, not CONFIRMED** — the lane could not demonstrate a
+behavioural delta because the importance read wanted fields its synthetic npcs lacked. Owed
+its own check; wiring it inside this round would have moved ES-2's arithmetic outside the
+round's mandate.
+
+### GATES
+
+Wave battery 15 files / 245 tests green. **TEN MUTANTS, TEN REDS**, each planted only after
+asserting the file's bytes changed and restored from a `cp` backup proven byte-exact by
+`cmp`; no `git checkout` anywhere. eslint clean on all seven authored files; tree-wide lint
+byte-identical at both ends. `typecheck:domain:strict` green at 1,304 / 1,313 — the SAME
+slack measured at the base archive, so it is INHERITED and the shared ratchet was NOT
+tightened. **Wave-end attribution ARCHIVE vs ARCHIVE: 42 files / 69 tests failing at BOTH
+ends, no head-only and no base-only failing file, +7 passing tests — exactly the seven new
+pins.** Un-anchored-negative ratchet read BY THE SCRIPT: 78 rows / 292 sites at both ends,
+empty both directions. ⚠ An intermediate run of that script caught the lane's OWN three
+un-anchored negatives and one anchor placed TWO lines above its assertion — the
+exactly-one-line hazard, live again — both cured before commit. Lighting census re-recorded
+with its cause decomposed and closing exactly. No NUL bytes in any committed blob.
+
+**Nothing lit. No flag minted. No band ratified. No golden shifted. No soak run. Nothing
+pushed.**
