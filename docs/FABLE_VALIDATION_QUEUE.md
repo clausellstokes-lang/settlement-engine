@@ -5766,3 +5766,78 @@ FAKE FAILURES. Archives built with `-o file.tar` + `tar -xf`, never through a pi
 
 **Nothing lit, no flag minted, no band ratified, no ratchet tightened, no baseline
 regenerated, no soak run, nothing pushed.**
+
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · ES-5a REPAIR ROUND — ACCEPTED WITH EVIDENCE
+## (Chair-landed. Four additive commits, `74bf5a82..9d474834`. Zero reverts.)
+
+**All seven findings reproduced by execution first, none refuted, and an EIGHTH self-found at
+wave end.**
+
+### F1 — THE ONLY CORRECTNESS DEFECT: A STRUCTURALLY UNREACHABLE ARM
+
+A door returned a HARDCODED verdict for every dispatched call BEFORE the read that produces
+the alternative ran, so `wait_expired` could never be emitted. **MEASURED over a 4,860-cell
+grid: 0 occurrences before, 540 after.** ⭐ And the repair was proved behaviour-neutral where
+it matters — both door orders run side by side on the same 4,860 cells gave **dispatchDiffs 0**:
+1,080 cells change LABEL, no cell changes its dispatch decision.
+
+Pinned by a **REACHABILITY CENSUS** over the verdict vocabulary, not an example — *an example
+cannot distinguish "no test reaches it" from "no input CAN reach it."*
+
+### ⭐⭐ F6 — THE DECISIVE RECEIPT OF THE ROUND: A PAIRED MUTANT
+
+The anchored-negative's anchor was appended to its own subject by the test, which the helper
+forbids in terms: *"A hardcoded constant that the pipeline never touches is not an anchor — it
+re-introduces the vacuity one level up."*
+
+Proved by running the two spellings against the SAME emptied register: **the repaired form
+REDS on the helper's own liveness message; ES-5a's spelling passes 10/10 GREEN.** The old pin
+could not see its entire collection drift away.
+
+### F8 — SELF-FOUND, AND THE IRONY IS THE POINT
+
+**The round that repaired an anchored-negative vacuity itself added five un-anchored
+negatives**, growing `negativeAssertionAnchor` from 75 to 77 *inside a byte-identical red row*.
+The wave-end content diff caught it; repaired in commit 4/4. Four were structurally anchored
+but unannotated; the fifth was genuinely vacuous — a negative over a possibly-empty array,
+where no annotation could have made it true — and now asserts non-empty before iterating.
+⚠ Re-learned the hard way: the walker tests the line IMMEDIATELY above, so a two-line comment
+led by the marker still reads as unanchored.
+
+### F2 — THE SEVENTH FALSE RECEIPT
+
+ES-5a reported "38 failed files / 53 failed tests of 2346 / 27200". Measured in an
+integrity-counted archive: **41 / 68 / 27,195** — three of four wrong, all understating
+standing red. The attribution CONCLUSION survives and was re-proved archive-vs-archive.
+
+### THE OTHER FOUR
+
+**F3** — §3.8 defines a UNION and the shipped predicate built one arm; the register named only
+the missing WEIGHT. Arm (b) is genuinely unbuildable (STOP-ES5-1), so the ARM is now DECLARED
+absent — *an undeclared missing arm is the defect whether or not it can be built*. **F4** —
+five of seven errand states rode a catch-all while the header argued three; replaced with a
+frozen per-state map plus an `unrecognized_state` arm, so a newly-minted state cannot silently
+join the wrong bucket. **F5** — a deferral handed BY NAME and silently skipped is worse than
+one never written, because it looks discharged; BUILT rather than re-deferred, with both
+hazards guarded structurally and an L5 screen that is a TOTAL positive predicate failing
+closed. **F7** — point-don't-restate, pinned with a positive control, and *the pin reddened on
+its own author's first draft*.
+
+### GATES
+
+Failing FILE and TEST sets, tip vs base: **EMPTY in both directions**; whole delta +7 tests,
+all passing. Ratchets: `negativeAssertionAnchor` ONLY-IN-HEAD 0 after the F8 repair;
+proseNumerics and seedLoopTotality unmoved. **EIGHT MUTANTS**, each proved to change the
+file's bytes before its run and each restored cmp-clean. Domain-strict NOT tightened. Zero NUL
+bytes. Both STOPs carried forward unbuilt and re-confirmed by execution — `suspicionOf` and
+`counterIntelEnabled` still have ZERO occurrences in code against a positive control.
+
+⚠⚠ **AN OWNER-FACING HAZARD FOUND MID-ROUND, NOT A CODE DEFECT: THE MACHINE'S DATA VOLUME HIT
+100%.** Three concurrent suite archives exhausted it; the Bash tool itself began failing with
+ENOSPC and **one full-suite log was truncated to ZERO BYTES** — that run was discarded and
+re-run, and no reported figure comes from it. The chair has since reclaimed **36 orphaned
+archive trees (1.5 GiB free → 11 GiB)**, removing every `node_modules` SYMLINK first and
+verifying the real one intact at 468 entries. ⭐ **Standing practice from this: build suite
+archives ONE AT A TIME and delete between.** A truncated log is a silent false receipt with no
+author.
