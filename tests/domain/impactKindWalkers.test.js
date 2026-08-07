@@ -134,6 +134,18 @@ const EXPECTED_VOICE = {
   commons_petition: null,
   commons_gathering: null,
   commons_riot: null,
+  // THE PACT LIFECYCLE BEATS (treatyLifecycleVoice.js): a pact reaching the end of its
+  // own term, and an owed court entering its counterpart in default. Both are minted with
+  // an AUTHORED headline + a pact-grammar summary line naming the two courts, the closing
+  // term and the ending — chronicle beats carrying their own receipt, not town-crier
+  // proclamations (the assize_verdict / roads / npc_ladder precedent exactly). They must
+  // also NOT borrow the trade or authority criers: the shortfall a court weighs is an oath
+  // kept or broken, not a market shortage, and the mint's own comment records that these
+  // deliberately took their OWN impactKinds rather than riding `diplomacy` (which the
+  // Herald's SINGLE_PRODUCER_KEYS walker pins to the one treaty-signing beat, and which is
+  // itself classified null here). Deliberately unvoiced (JUDGMENT, vetoable).
+  treaty_lapsed: null,
+  treaty_default_detected: null,
 };
 
 describe('impactKind walkers (content-immersion-r2-1/-2)', () => {

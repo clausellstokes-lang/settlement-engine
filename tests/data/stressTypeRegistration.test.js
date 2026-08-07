@@ -18,7 +18,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../src/data/stressInstitutionEffects.js';
@@ -113,23 +113,67 @@ describe('stress-type registration manifest (structural prevention)', () => {
   }
 
   // ── Source-scanned (function-local) tables — per-key presence ────────────────
-  const scanned = [
-    // STRESS_NOTES moved to the data leaf (CONTENT-GT-FINAL Charge 4: variant pools +
-    // the max-lines leaf rule); the walker follows the table to its home.
-    ['src/data/narrativeData.js', 'STRESS_NOTES'],
-    ['src/generators/npcGenerator.js', 'STRESS_BOOSTS'],
-    ['src/generators/npc/factionLeaderSecret.js', 'STRESS_SECRET_BOOSTS'],
-    ['src/generators/npcGenerator.js', 'STRESS_TO_CATEGORY'],
-    ['src/generators/npcGenerator.js', 'STRESS_MANDATORY_ROLES'],
-    ['src/generators/npcGenerator.js', 'STRESS_GOALS'],
-    ['src/generators/historyGenerator.js', 'STRESS_BOOSTS'],
+  //
+  // ADDRESSED BY NAME, LOCATED BY SEARCH. This list used to hand-key a FILE for each
+  // table, and that address rotted: `STRESS_BOOSTS` was declared to live in
+  // src/generators/historyGenerator.js, the history leaf-extraction moved it to
+  // src/generators/history/historyEventStrands.js, and the row went red on a
+  // "could not locate table" that had nothing to do with stress-type coverage
+  // (measured 2026-08-07: BOTH live STRESS_BOOSTS definitions cover all 15
+  // registered types — the pin was wrong, the code was right).
+  //
+  // So the file column is gone. The walker DISCOVERS every definition site of each
+  // named table under the scan roots and requires full coverage at every one. A table
+  // that moves keeps its guard; a SECOND definition site is covered automatically
+  // rather than being missed until someone remembers to add a row; and the
+  // non-vacuity floor below (at least one site per name, and the whole scan
+  // non-empty) is what stops "found nothing, passed everything".
+  const SCAN_ROOTS = ['src/data', 'src/generators'];
+  const SCANNED_TABLES = [
+    'STRESS_NOTES',
+    'STRESS_BOOSTS',
+    'STRESS_SECRET_BOOSTS',
+    'STRESS_TO_CATEGORY',
+    'STRESS_MANDATORY_ROLES',
+    'STRESS_GOALS',
   ];
-  for (const [file, name] of scanned) {
-    it(`${name} (${file.split('/').pop()}) covers every registered stress type`, () => {
-      const block = tableBlock(read(file), name);
-      expect(block, `could not locate table ${name} in ${file}`).toBeTruthy();
-      const missing = missingIn((t) => new RegExp(`\\b${t}:`).test(block));
-      expect(missing, `${name} is missing: ${missing.join(', ')}`).toEqual([]);
+
+  /** Every .js file under the scan roots. */
+  function scanFiles(dir, out = []) {
+    for (const e of readdirSync(resolve(process.cwd(), dir))) {
+      const rel = `${dir}/${e}`;
+      if (statSync(resolve(process.cwd(), rel)).isDirectory()) scanFiles(rel, out);
+      else if (e.endsWith('.js') && !e.includes('.test.')) out.push(rel);
+    }
+    return out;
+  }
+  const SCANNED_FILES = SCAN_ROOTS.flatMap((d) => scanFiles(d));
+
+  /** Files that DEFINE `name` as an object literal (possibly Object.freeze-wrapped). */
+  const definitionSitesOf = (name) => SCANNED_FILES.filter((f) => {
+    const src = read(f);
+    return new RegExp(`(?:const|let|var)\\s+${name}\\s*=\\s*(?:Object\\.freeze\\()?\\{`).test(src)
+      || new RegExp(`export\\s+const\\s+${name}\\s*=\\s*(?:Object\\.freeze\\()?\\{`).test(src);
+  });
+
+  it('the table scan is non-vacuous (the search itself is pinned)', () => {
+    expect(SCANNED_FILES.length).toBeGreaterThan(50);
+    const emptyNames = SCANNED_TABLES.filter((n) => definitionSitesOf(n).length === 0);
+    expect(emptyNames, `no definition site found for: ${emptyNames.join(', ')} — the table was renamed or removed, not merely moved`).toEqual([]);
+  });
+
+  for (const name of SCANNED_TABLES) {
+    it(`${name} covers every registered stress type at every definition site`, () => {
+      const sites = definitionSitesOf(name);
+      expect(sites.length, `no definition site found for ${name}`).toBeGreaterThan(0);
+      const failures = [];
+      for (const file of sites) {
+        const block = tableBlock(read(file), name);
+        if (!block) { failures.push(`${file}: could not brace-match ${name}`); continue; }
+        const missing = missingIn((t) => new RegExp(`\\b${t}:`).test(block));
+        if (missing.length) failures.push(`${file}: missing ${missing.join(', ')}`);
+      }
+      expect(failures, failures.join('\n  ')).toEqual([]);
     });
   }
 

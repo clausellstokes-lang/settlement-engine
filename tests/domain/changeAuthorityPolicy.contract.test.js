@@ -70,6 +70,25 @@ describe('change-authority contract — behavioral (proposal-gated families cons
 // For each documented change-type, the exact applyMode expression the live
 // generator must still carry. If a generator's gate is rewritten, update BOTH the
 // policy and this anchor deliberately — that is the point of the guard.
+//
+// AN ANCHOR IS EITHER:
+//   • a STRING — the gate expression itself, when that expression is already
+//     unique inside its module; or
+//   • `{ site, gate }` — DERIVE, DON'T RESTATE. When a bare gate string would
+//     match several mints in one module, the entry NAMES THE SITE and lets the
+//     gate be found inside the site's own object literal, instead of padding the
+//     anchor with whatever source lines happen to sit next to it.
+//
+// The padding is what rots, and it rotted here. `faction_government_challenge`'s
+// anchor used to carry a hand-copied `probability:` formula purely as filler to
+// make the surrounding block unique. WR-5 (e1654184) added a third term to that
+// formula (`+ warPressure * 0.08`) and re-wrapped it across three lines — a change
+// that touched no authority at all — and `src.includes(ANCHOR)` went false. The
+// pin failed for a reason the pin does not care about, which is the hand-keyed
+// address-rot class. The `{ site, gate }` form has nothing to rot: the site token
+// is the candidateType literal (load-bearing — renaming it IS an authority-visible
+// change), and the block boundary is DERIVED by brace balance (the object literal
+// the site is a key of), never transcribed.
 const SOURCE_ANCHORS = Object.freeze({
   // proposal-gated: gate reads majorChangesRequireProposal.
   flow_migration: "applyMode: requireProposal && fraction >= MIGRATION_PROPOSAL_FRACTION ? 'proposal' : 'auto'",
@@ -97,7 +116,15 @@ const SOURCE_ANCHORS = Object.freeze({
   stressor_birth: "const major = pressure.score >= 0.78 || ['occupation', 'magic_deadzone', 'siege', 'coup_detat'].includes(type);",
   // always-proposal: unconditional 'proposal', no flag / severity / lock.
   npc_adversarial_action: "const proposal = severity >= action.proposalAt || ['defect', 'sabotage', 'seek_promotion', 'undermine_rival'].includes(actionFamily);",
-  faction_government_challenge: "ruleId: `faction_${band}_government_challenge`,\n    severity,\n    probability: (band === 'crisis' ? 0.12 : 0.04) + severity * (band === 'crisis' ? 0.34 : 0.22),\n    applyMode: 'proposal'",
+  // POINTED, not transcribed (see the note above the table): the mint is named by
+  // its candidateType literal and the gate is asserted inside that mint's own
+  // object literal, so an edit to the neighbouring probability/severity/reasons
+  // lines cannot falsify it and a flip of THIS applyMode cannot hide behind
+  // another mint in the same module.
+  faction_government_challenge: Object.freeze({
+    site: "candidateType: 'faction_government_challenge',",
+    gate: "applyMode: 'proposal',",
+  }),
   relationship_label_change: 'candidateType,\n    applyMode: "proposal",',
   treaty_breached: "applyMode: 'proposal',\n      forced: true",
   // WR-10's conveyance shares that anchor DELIBERATELY, and the sharing is the honest
@@ -129,6 +156,31 @@ const SOURCE_ANCHORS = Object.freeze({
   blockade_declared: "authorityFor(rules, 'blockade_declared', 'auto')",
 });
 
+/** The gate expression an anchor asserts, in either anchor form. */
+const gateTextOf = (anchor) => (typeof anchor === 'string' ? anchor : anchor.gate);
+
+/**
+ * The slice of `src` that is the object literal `site` is a key of: everything
+ * from the end of the site token to the `}`/`]` that closes the enclosing
+ * literal, tracking nested brackets. The boundary is COMPUTED from the source's
+ * own structure — nothing about it is copied into this file, so it cannot go
+ * stale when the mint's other keys are edited.
+ */
+function mintLiteralAfter(src, site) {
+  const at = src.indexOf(site);
+  if (at < 0) return null;
+  let depth = 0;
+  for (let i = at + site.length; i < src.length; i++) {
+    const ch = src[i];
+    if (ch === '{' || ch === '[') depth++;
+    else if (ch === '}' || ch === ']') {
+      if (depth === 0) return src.slice(at + site.length, i);
+      depth--;
+    }
+  }
+  return src.slice(at + site.length);
+}
+
 describe('change-authority contract — source anchors match the policy', () => {
   test('every policy change-type has a source anchor and vice versa', () => {
     expect(Object.keys(SOURCE_ANCHORS).sort()).toEqual(Object.keys(CHANGE_AUTHORITY_POLICY).sort());
@@ -137,36 +189,47 @@ describe('change-authority contract — source anchors match the policy', () => 
   for (const [changeType, entry] of Object.entries(CHANGE_AUTHORITY_POLICY)) {
     test(`${changeType} (${entry.authority}) still carries its live applyMode gate in ${entry.module}`, () => {
       const src = sourceFor(entry.module);
-      expect(src.includes(SOURCE_ANCHORS[changeType])).toBe(true);
+      const anchor = SOURCE_ANCHORS[changeType];
+      if (typeof anchor === 'string') {
+        expect(src.includes(anchor)).toBe(true);
+      } else {
+        // EXACTLY-ONCE, or the first-match retarget class applies: indexOf takes
+        // the first hit, and a second copy of the site token would let the pin
+        // silently start guarding a different mint.
+        expect(src.split(anchor.site).length - 1, `site token is not unique in ${entry.module}`).toBe(1);
+        const mint = mintLiteralAfter(src, anchor.site);
+        expect(mint, `site token missing from ${entry.module}`).not.toBe(null);
+        expect(mint.includes(anchor.gate)).toBe(true);
+      }
 
-      // The flag-consulting claim must match the anchor's text.
-      const anchorReadsFlag = SOURCE_ANCHORS[changeType].includes('RequireProposal')
-        || SOURCE_ANCHORS[changeType].includes('requireProposal');
+      // The flag-consulting claim must match the anchor's gate text.
+      const anchorReadsFlag = gateTextOf(anchor).includes('RequireProposal')
+        || gateTextOf(anchor).includes('requireProposal');
       expect(anchorReadsFlag).toBe(entry.consultsProposalFlag);
 
       // Authority-class invariants on the gate's shape.
       if (entry.authority === 'auto') {
-        expect(SOURCE_ANCHORS[changeType]).toContain("applyMode: 'auto'");
-        expect(SOURCE_ANCHORS[changeType]).not.toContain('proposal');
+        expect(gateTextOf(anchor)).toContain("applyMode: 'auto'");
+        expect(gateTextOf(anchor)).not.toContain('proposal');
       }
       if (entry.authority === 'proposal-gated') {
         expect(anchorReadsFlag).toBe(true);
       }
       if (entry.authority === 'severity-gated') {
         expect(anchorReadsFlag).toBe(false);
-        expect(SOURCE_ANCHORS[changeType]).toMatch(/'proposal'|"proposal"|major/);
+        expect(gateTextOf(anchor)).toMatch(/'proposal'|"proposal"|major/);
       }
       if (entry.authority === 'always-proposal') {
         // No flag, no severity-driven downgrade path in the gate text.
         expect(anchorReadsFlag).toBe(false);
-        expect(SOURCE_ANCHORS[changeType]).toMatch(/'proposal'|"proposal"|\.includes\(actionFamily\)/);
+        expect(gateTextOf(anchor)).toMatch(/'proposal'|"proposal"|\.includes\(actionFamily\)/);
         // An always-proposal anchor must NOT be a bare auto outcome.
-        expect(SOURCE_ANCHORS[changeType]).not.toContain("applyMode: 'auto'");
+        expect(gateTextOf(anchor)).not.toContain("applyMode: 'auto'");
       }
       if (entry.authority === 'structural-proposal') {
         // Auto by default with a single branch routing to proposal.
         expect(anchorReadsFlag).toBe(false);
-        expect(SOURCE_ANCHORS[changeType]).toContain("'proposal' : 'auto'");
+        expect(gateTextOf(anchor)).toContain("'proposal' : 'auto'");
       }
     });
   }

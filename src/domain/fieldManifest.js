@@ -157,7 +157,12 @@ export const FROZEN_VS_LIVE = Object.freeze([
     path: 'neighbourNetwork[].relationshipType',
     field: 'neighbourNetwork',
     mode: 'live',
-    pulseWriter: 'src/domain/worldPulse/applyWorldPulse.js#writeRelationshipLabelToNeighbourNetworks',
+    // RE-POINTED 2026-08-07: the god-module split moved this writer out of
+    // applyWorldPulse.js into the relationship-graph leaf. The write itself never
+    // stopped — applyWorldPulse.js still imports and calls it at two sites — so the
+    // manifest's ADDRESS rotted, not the field. (Measured: the function is defined
+    // once, in the file named below, and still writes neighbourNetwork.)
+    pulseWriter: 'src/domain/worldPulse/applyWorldPulseRelationshipGraph.js#writeRelationshipLabelToNeighbourNetworks',
     displayRule: 'R3/H11: pulse relationship evolution writes back to both settlements’ '
       + 'neighbourNetwork links so dossier/threats/PDF/AI stop asserting stale labels.',
     guards: [],
