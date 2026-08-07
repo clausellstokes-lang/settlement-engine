@@ -10,7 +10,8 @@
  * dossier, in three families:
  *   • REGION   — terrain roughness + water + slope. Rough country (hills/mountain/
  *     forest) leaves a small per-district grain; flat plains/desert come out clean.
- *   • RESOURCE — the settlement's actual exports (economicState.exports) become
+ *   • RESOURCE — the settlement's actual exports (economicState.primaryExports, read
+ *     through canonExports, which also honours the legacy `exports` alias) become
  *     resource sites (the tannery downstream, the quarry at the edge, the mill by the
  *     water) that pull their work-quarter toward them.
  *   • HABIT    — people's worn routes: market accretion at the trade-gate bearing, and

@@ -36,6 +36,7 @@
 import { createPRNG } from '../../kernel/prng.js';
 import { clamp } from '../../kernel/math.js';
 import { compareCodepoint } from '../deterministicSort.js';
+import { canonExports } from '../canonicalAccessors.js';
 import { deriveAllDistricts } from '../districtProfile.js';
 import { deriveMapProfile } from '../mapProfile.js';
 import { resolveTerrain } from '../resolveTerrain.js';
@@ -135,7 +136,7 @@ const AGGREGATE_RE = /lodging|residential|tenement|housing|hostel|dormitor|board
  * @property {{ quarters?: Array<{ location?: string }> }} [spatialLayout]
  * @property {TownInstitution[]} [institutions]
  * @property {{ hasWalls?: unknown, walls?: unknown, institutions?: { walls?: unknown } }} [defenseProfile]
- * @property {{ exports?: string[], prosperity?: string|{ label?: string, tier?: string } }} [economicState]
+ * @property {{ primaryExports?: string[], exports?: string[], prosperity?: string|{ label?: string, tier?: string } }} [economicState]
  * @property {unknown} [urbanFabric]
  */
 /**
@@ -266,7 +267,20 @@ export function buildTownLayoutV2(settlement, mapEdits = null) {
   const institutions = Array.isArray(s.institutions) ? s.institutions : [];
   const isCoast = tradeAccess === 'port' || tradeAccess === 'coastal' || terrain === 'coastal';
   const isRiver = terrain === 'riverside' || tradeAccess === 'river';
-  const exportsList = Array.isArray(s.economicState?.exports) ? s.economicState.exports : [];
+  // THE EXPORT LIST — via canonExports, the schema's single resolution point for the
+  // primaryExports/exports pair. This read USED to spell `economicState.exports`
+  // directly: a field the economy generator has never written (measured 0/60 over the
+  // full pipeline, against 60/60 for primaryExports), so the list was empty on every
+  // generated settlement and the whole RESOURCE family below — sited work-quarters,
+  // and the STAGE-0 water/landform substance that reads the same list — never fired.
+  // `canonExports` still honours the legacy `exports` alias, so old saves are unmoved.
+  // The cast is a TYPE-SURFACE narrowing only, never a runtime change: canonExports is
+  // deliberately typed Array<unknown> (it tolerates legacy shapes), while both consumers
+  // below declare string[]. Measured over the corpus the elements ARE plain strings, and
+  // every use site already coerces defensively (String(e), RegExp.test, template literals),
+  // so a stray non-string stays as safe as it was — mapping to String() here would instead
+  // bake "[object Object]" into the stored list and into provenance prose.
+  const exportsList = /** @type {string[]} */ (canonExports(s));
 
   // ── URBAN FABRIC memory (empty/null when dark — absence is not neutrality) ──
   /** @type {FabricRead} */

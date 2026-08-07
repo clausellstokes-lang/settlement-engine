@@ -216,3 +216,58 @@ describe('v2 engine — lens + export inheritance (the substrate is unchanged)',
     }
   });
 });
+
+describe('v2 engine — the export list is read at its LIVE spelling (TCD-3)', () => {
+  /**
+   * The economy writes `economicState.primaryExports`; `exports` is a legacy SAVE
+   * alias it has never written (measured over the full pipeline: primaryExports
+   * 60/60, exports 0/60). This engine used to read `exports` directly, so the export
+   * list was empty on every generated settlement and the whole RESOURCE family — the
+   * sited work-quarters AND the STAGE-0 water/landform substance that reads the same
+   * list — never fired. The read now goes through canonExports.
+   *
+   * ⚠ THE v2 GOLDEN CANNOT PIN THIS. Its one export-bearing fixture (the marsh
+   * landform config, townMapFixtures.js) writes the LEGACY alias, so it resolves
+   * through canonExports's fallback and is byte-identical either way — the golden
+   * stayed green across this whole fix. These pins drive the LIVE spelling instead,
+   * which is the only spelling a generated settlement actually carries.
+   */
+  const base = makeTownFixture({ tier: 'town', terrain: 'plains', walls: false, water: false, seed: 'tcd3-live' });
+  const withEconomy = (eco) => buildTownMapModel({ ...base, economicState: { ...base.economicState, ...eco } }, V2);
+
+  const none = withEconomy({});
+  const live = withEconomy({ primaryExports: ['Peat fuel', 'Reeds and thatch'] });
+
+  it('ANCHORED NEGATIVE: the export-less control is a real, drawable map', () => {
+    // Without this, the contrast below could pass against an empty harness: an engine
+    // that produced nothing at all would also "differ" from the export-bearing model.
+    expect(none.districts.length).toBeGreaterThan(0);
+    expect(hasDrawableMap(none)).toBe(true);
+    // dry plains, no economy to substantiate water ⇒ a bare plain site
+    expect(none.meta.siteKind).toBe('plain');
+    expect(none.frame.landform ?? null).toBeNull();
+    expect(none.frame.water ?? null).toBeNull();
+  });
+
+  it('primaryExports reaches STAGE 0 — a reed/peat economy substantiates the wetland', () => {
+    expect(live.meta.siteKind).toBe('marsh');
+    expect(live.frame.landform?.kind).toBe('marsh');
+    expect(live.frame.landform.marks.length).toBeGreaterThan(0);
+    // the whole model moves, not merely the site label
+    expect(stable(live)).not.toBe(stable(none));
+  });
+
+  it('primaryExports reaches STAGE 1 — a quarry export sites a named resource cause', () => {
+    const stone = withEconomy({ primaryExports: ['Quarried stone'] });
+    const causes = Object.values(stone.provenance).flat()
+      .filter((p) => p.sourceFamily === 'resource').map((p) => p.sourceRef);
+    // derived from the fixture, not restated: the cause must name the export itself
+    expect(causes.some((c) => c.includes('Quarried stone'))).toBe(true);
+    expect(Object.values(none.provenance).flat().some((p) => p.sourceFamily === 'resource')).toBe(false);
+  });
+
+  it('the legacy `exports` alias still resolves identically (old saves unmoved)', () => {
+    const legacy = withEconomy({ exports: ['Peat fuel', 'Reeds and thatch'] });
+    expect(stable(legacy)).toBe(stable(live));
+  });
+});
