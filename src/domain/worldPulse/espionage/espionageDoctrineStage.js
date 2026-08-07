@@ -152,14 +152,38 @@ export function dispatchCadenceKey(courtId, tick) {
  *   1. DARK — the layer is not live, and nothing is read.
  *   2. NO READABLE DOCTRINE — a court whose axes did not resolve sends nobody, and says so
  *      in the leaf's own words rather than defaulting to a moderate temperament.
- *   3. ALREADY RUNNING — `deliberationRead` answers `dispatch_and_wait` for a court that is
- *      ALREADY waiting on a spy, which is the right answer to "what do I do about the
- *      decision" and the wrong answer to "do I send another man". This door is the
- *      difference, and without it a patient court would send one operative per tick for the
- *      whole of its own patience window.
- *   4. THE DELIBERATION VERDICT — `act_now` and `wait_expired` both mean nobody goes.
+ *   3. THE DELIBERATION VERDICT — `act_now` and `wait_expired` both mean nobody goes.
+ *   4. ALREADY RUNNING — a `dispatch_and_wait` court that is ALREADY waiting on a spy. That
+ *      verdict is the right answer to "what do I do about the decision" and the wrong answer
+ *      to "do I send another man"; without this door a patient court would send one operative
+ *      per tick for the whole of its own patience window.
  *   5. THE DRAW — the doctrine's cadence weight against a keyed hash. Lawless-malicious
  *      courts send often; lawful-benevolent ones rarely.
+ *
+ * ── ⚠⚠ WHY DOOR 3 RUNS BEFORE DOOR 4, AND WHAT THE OTHER ORDER MEASURABLY COST ──────────
+ * ES-5a shipped these two doors the other way round, and the order was not cosmetic: it made
+ * one arm of a THREE-WORD closed vocabulary structurally unreachable. `deliberationRead`
+ * produces `wait_expired` ONLY for a court with `dispatched === true` (espionageMath.js's
+ * timeout arm), so an already-running door that answered EVERY dispatched court ahead of the
+ * read consumed the entire population that arm can ever be computed for. Executed at the
+ * repair round over a 4,860-cell grid (2 courts × 3 `dispatched` × 9 `ticksSinceDispatch` ×
+ * 3 `urgent` × 2 `castable` × 5 confidences × 3 ticks), the shipped order returned exactly
+ * two of the three verdicts — `act_now` 2,808 and `dispatch_and_wait` 2,052 — and
+ * `wait_expired` ZERO times.
+ *
+ * ⚠ A TERM THAT CAN ONLY EVER BE UNREACHABLE IS NOT AN UNPINNED ARM, AND A GREEN BATTERY
+ * CANNOT TELL THE TWO APART. Every ES-5a pin passed over the shadowed arm without a word,
+ * because "no test reaches it" and "no input CAN reach it" produce the identical green. So
+ * the repair is pinned by a REACHABILITY census derived from `DELIBERATION_VERDICTS` itself
+ * rather than by one more example: the test walks the grid and asserts the verdict SET the
+ * stage emits equals the vocabulary's own totality, which reds the day any future door order
+ * swallows an arm again.
+ *
+ * WHAT THE REORDER DOES NOT CHANGE: nobody is dispatched in either order. A court that is
+ * already out stays home whether its wait has expired or not — `dispatch: false` on both
+ * paths, in both orders, at every one of the 4,860 cells. What changes is that the expired
+ * court now says WHY in the deliberation's own word instead of being filed under a door that
+ * describes a court still waiting.
  *
  * @param {{worldState?: unknown, item?: unknown, courtId?: unknown, tick?: unknown,
  *   castable?: unknown, decidingConfidence01?: unknown, urgent?: unknown,
@@ -180,12 +204,15 @@ export function dispatchCadenceFor({
   if (!doctrine) return stays('dark', null, '', '');
   const row = /** @type {Record<string, unknown>} */ (/** @type {unknown} */ (doctrine));
   if (doctrine.known !== true) return stays('no_doctrine', row, '', doctrine.receipt);
-  if (dispatched === true) return stays('already_dispatched', row, 'dispatch_and_wait', doctrine.receipt);
+  // DOOR 3 BEFORE DOOR 4 — see the header's measured block. The deliberation read is the
+  // only producer of `wait_expired`, and it can only produce it for a dispatched court, so
+  // it must run ahead of the door that answers every dispatched court.
   const verdict = deliberationRead({
     decidingConfidence01, frequency01: doctrine.frequency01, urgent, castable, dispatched,
     ticksSinceDispatch,
   });
   if (verdict !== 'dispatch_and_wait') return stays(verdict, row, verdict, doctrine.receipt);
+  if (dispatched === true) return stays('already_dispatched', row, verdict, doctrine.receipt);
   const resolved = text(courtId) || text(recordOf(item).id);
   const key = dispatchCadenceKey(resolved, tick);
   const roll01 = hash01(key);

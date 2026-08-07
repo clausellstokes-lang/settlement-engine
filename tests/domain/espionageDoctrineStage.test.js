@@ -22,7 +22,12 @@
  *        with the estate pair both courts read `balanced` and the doctrine goes inert.
  *   M6 — the already-dispatched door deleted → 1 failed / 10. Without it a patient court
  *        sends a fresh operative every tick for the whole of its own patience window.
- * Both plants restored byte-identically (cmp) in the same shell. See the sibling record in
+ *   M8 — (REPAIR ROUND) the already-dispatched door moved back AHEAD of the deliberation
+ *        read, which is exactly the order ES-5a shipped → 2 failed / 18. Both the expiry
+ *        example and the reachability census red, which is the point: the census is the
+ *        pin that can see a whole ARM being swallowed, and the example alone could have
+ *        been deleted by a future author who read it as one more door test.
+ * Every plant restored byte-identically (cmp) in the same shell. See the sibling record in
  * espionageWariness.test.js for why the plants are run by hand rather than by the sweep.
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
@@ -45,6 +50,10 @@ import {
   ESPIONAGE_DOCTRINE_TUNING,
   lawWordFor,
 } from '../../src/domain/worldPulse/espionage/espionageDoctrine.js';
+import {
+  DELIBERATION_VERDICTS,
+  ESPIONAGE_TUNING,
+} from '../../src/domain/worldPulse/espionage/espionageMath.js';
 import { LAW_WORD_EDGES } from '../../src/domain/worldPulse/lawWord.js';
 import { natureWordFor } from '../../src/domain/worldPulse/conquestDoctrineStage.js';
 import { settlementAlignment } from '../../src/domain/worldPulse/settlementAlignment.js';
@@ -220,7 +229,33 @@ describe('ES-5 — the cadence: five doors, each dropped on its own', () => {
     expect(blank.receipt).toContain('No espionage doctrine can be read');
   });
 
-  test('DOOR 3 — a court already waiting on a spy does not send a second', () => {
+  test('DOOR 3 — the deliberation verdict, all three of its non-dispatching arms', () => {
+    // Urgency forces a decision now: nobody waits on a spy with an army outside.
+    expect(run({ urgent: true })).toMatchObject({ dispatch: false, reason: 'act_now', verdict: 'act_now' });
+    // A court with nobody to send does not send.
+    expect(run({ castable: false })).toMatchObject({ dispatch: false, reason: 'act_now' });
+    // A picture that is already good enough needs no spy.
+    expect(run({ decidingConfidence01: 0.95 })).toMatchObject({ dispatch: false, reason: 'act_now' });
+    // ⭐ THE ARM ES-5a COULD NOT REACH. `wait_expired` is produced ONLY for a dispatched
+    // court, so the shipped door order — already-running tested FIRST — consumed the entire
+    // population this arm exists for and made it structurally unreachable. The window is
+    // DERIVED from the deliberation's own tuning against this court's own cadence, so a
+    // retune of either moves the fixture with the code instead of stranding it.
+    const cadence = espionageDoctrineFor({ worldState: lit(), item: SYNDICATE_COURT }).frequency01;
+    const patience = ESPIONAGE_TUNING.PATIENCE_BASE_TICKS
+      + ESPIONAGE_TUNING.PATIENCE_FREQ_TICKS * cadence;
+    expect(run({ dispatched: true, ticksSinceDispatch: Math.ceil(patience) })).toMatchObject({
+      dispatch: false, reason: 'wait_expired', verdict: 'wait_expired',
+    });
+    // THE ANCHOR THAT KEEPS THE ARM HONEST: one tick INSIDE the same window is the other
+    // side of the same `>=`, and it lands on the already-running door instead. Without this
+    // the expiry above could be any refusal at all.
+    expect(run({ dispatched: true, ticksSinceDispatch: Math.floor(patience) - 1 })).toMatchObject({
+      dispatch: false, reason: 'already_dispatched', verdict: 'dispatch_and_wait',
+    });
+  });
+
+  test('DOOR 4 — a court already waiting on a spy does not send a second', () => {
     const running = run({ dispatched: true, ticksSinceDispatch: 1 });
     expect(running).toMatchObject({
       dispatch: false, reason: 'already_dispatched', verdict: 'dispatch_and_wait',
@@ -230,13 +265,41 @@ describe('ES-5 — the cadence: five doors, each dropped on its own', () => {
     expect(run().dispatch).toBe(true);
   });
 
-  test('DOOR 4 — the deliberation verdict, both non-dispatching arms', () => {
-    // Urgency forces a decision now: nobody waits on a spy with an army outside.
-    expect(run({ urgent: true })).toMatchObject({ dispatch: false, reason: 'act_now', verdict: 'act_now' });
-    // A court with nobody to send does not send.
-    expect(run({ castable: false })).toMatchObject({ dispatch: false, reason: 'act_now' });
-    // A picture that is already good enough needs no spy.
-    expect(run({ decidingConfidence01: 0.95 })).toMatchObject({ dispatch: false, reason: 'act_now' });
+  test('⭐ REACHABILITY CENSUS — the stage emits the WHOLE deliberation vocabulary', () => {
+    // THE PIN THE ES-5a BATTERY COULD NOT HAVE BEEN: a green suite cannot tell "no test
+    // reaches this arm" from "no input CAN reach it", so an example-shaped pin would have
+    // passed over the shadowed arm exactly as every other pin in this file did. This walks
+    // the input space and compares the emitted verdict SET against the vocabulary's own
+    // totality export — DERIVED, never a transcribed list of three words.
+    const seen = new Set();
+    let cells = 0;
+    let dispatches = 0;
+    for (const item of [SAINTLY_COURT, SYNDICATE_COURT]) {
+      for (const dispatched of [true, false, undefined]) {
+        for (const ticksSinceDispatch of [0, 1, 5, 20, 999]) {
+          for (const urgent of [true, false]) {
+            for (const castable of [true, false]) {
+              for (const decidingConfidence01 of [0.1, 0.95]) {
+                cells += 1;
+                const out = dispatchCadenceFor({
+                  worldState: lit(), item, courtId: item.id, tick: 5,
+                  castable, decidingConfidence01, urgent, dispatched, ticksSinceDispatch,
+                });
+                seen.add(out.verdict);
+                if (out.dispatch === true) dispatches += 1;
+              }
+            }
+          }
+        }
+      }
+    }
+    // The corpus is real and it really exercises both outcomes — without this the set
+    // comparison below could be the set of a loop that ran zero times.
+    expect(cells).toBe(240);
+    expect(dispatches).toBeGreaterThan(0);
+    // DOOR 1's empty verdict is the dark answer and is not a deliberation word; every other
+    // word the stage emits must be one, and every word the vocabulary closes must be emitted.
+    expect([...seen].filter(Boolean).sort()).toEqual([...DELIBERATION_VERDICTS].sort());
   });
 
   test('DOOR 5 — the keyed draw, both sides, against the court’s own cadence', () => {
