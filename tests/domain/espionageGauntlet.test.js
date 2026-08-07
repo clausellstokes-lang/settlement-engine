@@ -47,6 +47,7 @@ import {
   dwellRamp,
 } from '../../src/domain/worldPulse/espionage/espionageMath.js';
 import { readEspionageDoctrine } from '../../src/domain/worldPulse/espionage/espionageDoctrine.js';
+import { TELL_TERMS_ABSENT } from '../../src/domain/worldPulse/espionage/espionageWariness.js';
 import { PATRONAGE_TUNING } from '../../src/domain/corruption.js';
 import {
   FOREIGN_GUEST_HOLD_CAUSES,
@@ -562,10 +563,15 @@ describe('ES-2 — the stay roll', () => {
     // ⏱ ES-5 MOVED THIS ASSERTION, and the move is the point rather than a maintenance
     // edit. ES-2 shipped with `overdueForeignNotables` absent because the visibility
     // predicate did not exist; it does now (espionageWariness.js) and the term is live —
-    // `overdueNotables` on the same factor record is its receipt. What remains absent is a
-    // DIFFERENT term of §3.8, `believedNotorietyWeighting`, whose measured reason is a
-    // grain mismatch written out in that leaf's header. The declaration never emptied.
-    expect(row.warinessTermsAbsent).toEqual(['believedNotorietyWeighting']);
+    // `overdueNotables` on the same factor record is its receipt. What remains absent are
+    // DIFFERENT things of §3.8 — the union ARM (b) and the weight over it — both named in
+    // that leaf's own register for one measured reason, the grain mismatch written out in
+    // its header. The declaration never emptied.
+    // POINT, DON'T RESTATE: this asserts the LEAF'S OWN export travelled here intact rather
+    // than re-typing its members, so a term added or dropped there cannot leave this
+    // detection receipt pinned against a set nobody produces any more.
+    expect(row.warinessTermsAbsent).toBe(TELL_TERMS_ABSENT);
+    expect(TELL_TERMS_ABSENT.length).toBeGreaterThan(0);
     expect(row).toHaveProperty('overdueNotables');
     // The half that IS lawful is live: a court that just caught a spy checks harder.
     expect(recentCovertHolds({ worldState, targetId: 'westmarch', tick: 13 })).toBe(0);

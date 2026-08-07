@@ -29,7 +29,25 @@
  *   M4 — the cluster membership check deleted                            → 1 failed / 8.
  *   M7 — `overdueNotables` dropped from the gauntlet's wariness fold      → 2 failed / 46
  *        (run across this file, the doctrine stage, the ES-5 fence and ES-2's battery).
- * M5 and M6 are the doctrine stage's and are recorded in its own file's header.
+ *
+ * ── THE REPAIR ROUND'S OWN PLANTS ───────────────────────────────────────────────────────
+ *   M9  — the declared-absent ARM dropped, leaving only the weight (the ES-5a register)
+ *                                                                    → 1 failed / 33.
+ *   M10 — the five explicit no-tell arms collapsed back into ES-5a's one shared
+ *         `state_raises_no_tell` catch-all                            → 1 failed / 10.
+ *   M11 — `TELL_TERMS_ABSENT` EMPTIED, which is the exact drift an anchored negative
+ *         exists to catch                                             → 1 failed / 10,
+ *         on the helper's own LIVENESS ANCHOR message.
+ *   M11b — ⚠⚠ THE ONE THAT PROVES THE FINDING RATHER THAN THE FIX. With the register
+ *         still EMPTIED, the assertion was reverted to ES-5a's spelling —
+ *         `expectAbsentWithAnchor([...TELL_TERMS_ABSENT, 'overdueForeignNotables'], …,
+ *         'overdueForeignNotables', …)` — and the file went 10 passed / 10, GREEN. The
+ *         anchor was appended to the subject BY THE TEST on the same line, so the liveness
+ *         half was a tautology and the whole collection could vanish underneath it. That
+ *         is the vacuity tests/helpers/anchoredNegatives.js names verbatim in its own
+ *         header; M11 and M11b are the same world one edit apart, and only one of them
+ *         can see it.
+ * M5, M6 and M8 are the doctrine stage's and are recorded in its own file's header.
  */
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -38,12 +56,15 @@ import { describe, expect, test } from 'vitest';
 
 import {
   LAPSE_KINDS,
+  LAPSE_STATES,
+  NO_TELL_STATES,
   TELL_TERMS_ABSENT,
   TELL_TUNING,
   declaredScheduleLapse,
   observerClusterIds,
   overdueForeignNotables,
 } from '../../src/domain/worldPulse/espionage/espionageWariness.js';
+import { ENVOY_ERRAND_STATES } from '../../src/domain/worldPulse/envoyErrandVocabulary.js';
 import {
   catchChance01,
   wariness01Core,
@@ -176,11 +197,6 @@ describe('ES-5 ⟨F3⟩ — the covert-silence negative, and the declared-face-l
     });
     // Both members of the closed set are reached above, and no third word exists.
     expect(LAPSE_KINDS).toEqual(['never_arrived', 'never_left']);
-    // A schedule KEPT is not a story: `returning` and `home` raise nothing at any tick.
-    for (const state of ['returning', 'home', 'held']) {
-      expect(declaredScheduleLapse({ errand: { ...row, state }, tick: 999 }))
-        .toMatchObject({ lapsed: false, reason: 'state_raises_no_tell' });
-    }
     // Garbage in, silence out — never an invented lapse.
     expect(declaredScheduleLapse({ errand: row, tick: -1 }).reason).toBe('invalid_tick');
     expect(declaredScheduleLapse({ errand: { state: 'travelling' }, tick: 5 }).reason)
@@ -188,17 +204,73 @@ describe('ES-5 ⟨F3⟩ — the covert-silence negative, and the declared-face-l
     expect(overdueForeignNotables().count).toBe(0);
   });
 
-  test('the absent term is DECLARED by name and the live one is not among them', () => {
-    // anchored: `overdueForeignNotables` is the sibling term of the same read — ES-2 named
-    // it absent here and ES-5 made it live, so its presence proves this list is the real
-    // declaration rather than a stale copy.
+  test('⭐ THE STATE CENSUS — every live errand state is routed EXPLICITLY, none by a catch-all', () => {
+    // ES-5a routed five of seven states into one trailing catch-all whose comment argued
+    // three. This is the walker half of the MIRROR-NOT-IMPORT pair: the leaf declares its
+    // state set locally (it imports nothing — that is ⟨F3⟩'s whole fence), and the equality
+    // below is what keeps the local copy from rotting away from the real vocabulary.
+    expect([...LAPSE_STATES, ...NO_TELL_STATES].sort())
+      .toEqual([...ENVOY_ERRAND_STATES].sort());
+    // The two halves are disjoint — a state that both lapses and raises no tell would make
+    // the union above pass while the routing contradicted itself.
+    expect(LAPSE_STATES.filter((s) => NO_TELL_STATES.includes(s))).toEqual([]);
+
+    const legs = [{ fromId: 'ashford', toId: 'irontown', departTick: 10, arrivalTick: 14 }];
+    const { errands } = missionWorld({ legs });
+    const row = errands[0];
+    const reasonFor = (state) => declaredScheduleLapse({
+      errand: { ...row, state, expectedReturnTick: 32 }, tick: 999,
+    });
+    // EVERY no-tell state answers with its OWN argued reason, and NONE of them lapses. A
+    // shared reason string is what let two states go unargued in the first place.
+    const reasons = Object.fromEntries(NO_TELL_STATES.map((s) => [s, reasonFor(s).reason]));
+    expect(reasons).toEqual({
+      held: 'fate_is_visible',
+      home: 'schedule_kept',
+      intercepted: 'fate_is_visible',
+      lost: 'absence_already_accounted',
+      returning: 'schedule_kept',
+    });
+    for (const state of NO_TELL_STATES) expect(reasonFor(state).lapsed).toBe(false);
+    // …and the anchor that keeps those five falses honest: the SAME row in a lapsing state
+    // at the SAME tick really does lapse, so the zeros are the routing and not the fixture.
+    for (const state of LAPSE_STATES) expect(reasonFor(state).lapsed).toBe(true);
+
+    // ⭐ THE POINT OF THE WHOLE CENSUS: a state nobody has minted yet does NOT join the
+    // no-tell bucket. It lands in its own arm, which is the tell that a vocabulary grew.
+    expect(reasonFor('sequestered').reason).toBe('unrecognized_state');
+    // And the lookup is an OWN-KEY test, so a row whose state names a prototype member is
+    // an unrecognized state rather than a truthy non-reason off Object.prototype.
+    for (const poison of ['constructor', 'toString', '__proto__', 'hasOwnProperty']) {
+      expect(reasonFor(poison), poison).toMatchObject({
+        lapsed: false, reason: 'unrecognized_state',
+      });
+    }
+  });
+
+  test('the absent ARM and the absent WEIGHT are both DECLARED, and the live term is not among them', () => {
+    // ⚠ THE ANCHOR IS THE PIPELINE'S, NOT THIS TEST'S. ES-5a wrote the anchor INTO the
+    // subject on the assertion line — `[...TELL_TERMS_ABSENT, 'overdueForeignNotables']` —
+    // so the liveness half could never fail no matter what the register did, which is the
+    // exact shape tests/helpers/anchoredNegatives.js names in its own header: "A hardcoded
+    // constant that the pipeline never touches is not an anchor — it re-introduces the
+    // vacuity one level up." The collection below is the register as a REAL READ hands it
+    // back, and the anchor is a member the leaf itself put there.
+    const read = tellAt(missionWorld({ covert: FULLY_COVERT }).errands, ANNOUNCED_ARRIVAL + 1);
+    expect(read.count, 'the read that carries the register must be a live one').toBe(1);
     expectAbsentWithAnchor(
-      [...TELL_TERMS_ABSENT, 'overdueForeignNotables'],
+      read.termsAbsent,
       'overdueNotables',
-      'overdueForeignNotables',
+      'believedNotorietyWeighting',
       'the §3.8 declared-absent register',
     );
-    expect(TELL_TERMS_ABSENT).toEqual(['believedNotorietyWeighting']);
+    // BOTH absences, in codepoint order: §3.8's union ARM (b) and the weight over the
+    // union. ES-5a declared only the weight, which reads as "the union is built, one
+    // multiplier is missing" — it is not, and the arm is the bigger silence of the two.
+    expect(TELL_TERMS_ABSENT).toEqual(['believedNotorietyWeighting', 'heldAbsenceBeliefs']);
+    expect([...TELL_TERMS_ABSENT].sort()).toEqual([...TELL_TERMS_ABSENT]);
+    // The register a real read hands back IS the export, not a copy that can drift.
+    expect(read.termsAbsent).toBe(TELL_TERMS_ABSENT);
   });
 });
 
@@ -290,7 +362,10 @@ describe('ES-5 — the tell reaches the catch roll, and moves it', () => {
     // THE CONSEQUENCE. A wary town is a more dangerous town.
     expect(catchChance01(wary)).toBeGreaterThan(catchChance01(calm));
     // The declaration travels with the reading in both states.
-    expect(calm.warinessTermsAbsent).toEqual(['believedNotorietyWeighting']);
-    expect(wary.warinessTermsAbsent).toEqual(['believedNotorietyWeighting']);
+    expect(calm.warinessTermsAbsent).toEqual(TELL_TERMS_ABSENT);
+    expect(wary.warinessTermsAbsent).toEqual(TELL_TERMS_ABSENT);
+    // POINT, DON'T RESTATE: the gauntlet must hand back the leaf's OWN register, so a term
+    // added or dropped at the leaf cannot leave this detection receipt quoting a stale set.
+    expect(wary.warinessTermsAbsent).toBe(TELL_TERMS_ABSENT);
   });
 });

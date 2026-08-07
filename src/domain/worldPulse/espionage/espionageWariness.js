@@ -38,22 +38,43 @@
  * owner's design, and exactly §3.8's "an absence with a declared face raises no tell until
  * the face's clock also runs out".
  *
- * ── ⛔ ONE CLAUSE OF §3.8 THIS WAVE COULD NOT BUILD, MEASURED RATHER THAN ASSUMED ────────
- * §3.8 clause (b) says the count is "weighted by `believedNotorietyRank` (the notable are
- * missed loudly)". Measured at build: `believedNotorietyRank({worldState, observerId,
- * wnpcId, roamer, tick})` (npcCirculation.js) is a read over the WANDERING-NPC CIRCULATION
- * POOL. It takes a `roamer` RECORD and reads `roamer.originRef.settlementId`,
- * `roamer.reputation` and `roamer.sinceTick` through `believedReputation`; `wnpcId` is a
- * circulation id. An errand carries a ROSTER `npcId` and no circulation record exists for a
- * roster envoy, so the weighting cannot be computed for the population this tell is about.
- * That is a GRAIN MISMATCH, not a spelling: the two families are different people.
+ * ── ⛔ WHAT §3.8 ASKS FOR THAT THIS WAVE COULD NOT BUILD — AN ARM AND A WEIGHT ───────────
+ * §3.8 defines "reason to believe" as EXACTLY THE UNION of two arms, weighted by a third
+ * thing. This module implements ARM (a) — declared-face schedules — and the other two are
+ * DECLARED ABSENT BY NAME on every read rather than left to be discovered by the next
+ * reader of the volume. Both absences have the SAME measured cause.
  *
- * So every lapsed row weighs ONE and `believedNotorietyWeighting` is DECLARED ABSENT by
- * name on every read (the SP-C idiom, and the same treatment ES-2 gave this very term from
- * the other side). It is NOT folded as a silent 1.0 that a reader would mistake for a
- * measured weight. The alternative — calling the roamer read with a roster id and taking
- * whatever `notorietyRank(undefined)` answers — would have been a live-looking term that is
- * structurally dead, which is the class this estate has now been bitten by three times.
+ *   ARM (a) — declared-face schedules it can see. BUILT, and it is the whole of the
+ *     arithmetic below.
+ *   ARM (b) — `heldAbsenceBeliefs`: "absence-beliefs it already holds through the
+ *     npcCirculation observer-side belief surfaces (the `believedNotorietyRank` family)".
+ *     ABSENT. Not implemented, and it is a UNION arm rather than a refinement, so the count
+ *     this leaf answers is a LOWER BOUND on §3.8's count — never an equal.
+ *   THE WEIGHT — `believedNotorietyWeighting`: "weighted by `believedNotorietyRank` (the
+ *     notable are missed loudly)". ABSENT; every lapsed row weighs exactly ONE.
+ *
+ * ⚠ THE MEASURED CAUSE, WHICH IS ONE CAUSE FOR BOTH. `believedNotorietyRank({worldState,
+ * observerId, wnpcId, roamer, tick})` (npcCirculation.js:714) is a read over the
+ * WANDERING-NPC CIRCULATION POOL. It takes a `roamer` RECORD and reads
+ * `roamer.originRef.settlementId`, `roamer.reputation` and `roamer.sinceTick` through
+ * `believedReputation`; `wnpcId` is a circulation id. An errand carries a ROSTER `npcId` and
+ * NO circulation record exists for a roster envoy. So the family §3.8 names is not a
+ * spelling this leaf could look up differently — it is a different POPULATION. Arm (b)'s
+ * absence-beliefs and the weight are both reads of that family about people it does not
+ * contain, which is why one grain mismatch takes out both.
+ *
+ * ⚠⚠ AND THE ARM IS DECLARED, NOT ONLY THE WEIGHT. ES-5a shipped the weight in the register
+ * and left the ARM undeclared, which reads — to anything downstream and to any reader —
+ * as "the union is built, one multiplier is missing". It is not: half the union is missing.
+ * An undeclared missing arm is the defect whether or not the arm can be built, and this is
+ * the second time this estate has had to learn that a folded term and a folded ARM are
+ * different sizes of silence. STOP-ES5-1 (chair) carries the grain mismatch itself.
+ *
+ * Neither is folded as a silent 1.0 or a silent zero that a reader would mistake for a
+ * measured term. The alternative — calling the roamer read with a roster id and taking
+ * whatever it answers for a person it has never heard of — would have been a live-looking
+ * term that is structurally dead, which is the class this estate has now been bitten by
+ * three times.
  *
  * PURE: no rng, no clock, no store, no world read, no I/O, no mutation.
  *
@@ -80,14 +101,67 @@ export const TELL_TUNING = Object.freeze({
 });
 
 /**
- * The §3.8 term this wave folds WITHOUT an input, named on every read. See the header's
- * measured block: it is a grain mismatch, not an omission.
+ * Everything §3.8 asks for that this read does NOT contain, named on every read — a UNION
+ * ARM and a WEIGHT, in codepoint order. See the header's measured block: one grain mismatch
+ * takes out both, and the arm's absence means this count is a LOWER BOUND on §3.8's.
  * @type {ReadonlyArray<string>}
  */
-export const TELL_TERMS_ABSENT = Object.freeze(['believedNotorietyWeighting']);
+export const TELL_TERMS_ABSENT = Object.freeze([
+  'believedNotorietyWeighting',
+  'heldAbsenceBeliefs',
+]);
 
 /** The two lapse kinds, codepoint-sorted totality export. @type {ReadonlyArray<string>} */
 export const LAPSE_KINDS = Object.freeze(['never_arrived', 'never_left']);
+
+/**
+ * §3.8(a) — THE STATES THAT CARRY A DECLARED SCHEDULE, and can therefore lapse. Sorted.
+ * @type {ReadonlyArray<string>}
+ */
+export const LAPSE_STATES = Object.freeze(['parlaying', 'travelling']);
+
+/**
+ * §3.8(a) — EVERY OTHER ERRAND STATE, ROUTED EXPLICITLY AND ARGUED ONE AT A TIME.
+ *
+ * ⚠⚠ THIS REPLACES A CATCH-ALL, AND THE CATCH-ALL WAS THE DEFECT. ES-5a routed five of the
+ * seven live states into one trailing `return` whose comment argued three of them. Two
+ * (`intercepted`, `lost`) were never argued at all, and — worse than the missing prose — a
+ * catch-all over a FROZEN VOCABULARY is how an eighth state silently joins the no-tell
+ * bucket the day somebody mints one. A state this map does not name now lands in its own
+ * `unrecognized_state` arm instead, which the census below reds on.
+ *
+ * ⭐ MIRROR, NEVER IMPORT. `ENVOY_ERRAND_STATES` is the vocabulary's own totality export and
+ * this map deliberately does not import it — the whole of ⟨F3⟩'s structural guarantee is
+ * that this module imports NOTHING (see the header). So the set is declared locally and
+ * `tests/domain/espionageWariness.test.js` runs the EQUALITY WALKER against the real export:
+ * `LAPSE_STATES ∪ keys(NO_TELL_BY_STATE) === ENVOY_ERRAND_STATES`. A local mirror with no
+ * walker is a copy that rots; a walker without a local mirror is an import that breaks the
+ * fence. The estate's answer to that pair is both.
+ *
+ * THE ARGUMENT, PER STATE:
+ *   `returning`, `home`   — the announced schedule was KEPT. He arrived, and a lapse is a
+ *     story about a broken promise, not about a person who is elsewhere.
+ *   `held`, `intercepted` — his fate is a thing the world can SEE. A court that is holding
+ *     him, or watched him taken, has an account of where he is; an unexplained absence is
+ *     precisely what these states are not. (`held` is also ES-2's own holds term, counted
+ *     once there — routing it here too would double-count the same custody row.)
+ *   `lost`                — the absence is already ACCOUNTED. The row was closed as lost by
+ *     the home-side silence inference (`advanceEnvoySilence`, J-ES-14), which is the
+ *     HOME-side read; counting it again here would generalize a home-side conclusion across
+ *     courts, which is the one thing §3.8 names as forbidden.
+ * @type {Readonly<Record<string, string>>}
+ */
+const NO_TELL_BY_STATE = Object.freeze({
+  held: 'fate_is_visible',
+  home: 'schedule_kept',
+  intercepted: 'fate_is_visible',
+  lost: 'absence_already_accounted',
+  returning: 'schedule_kept',
+});
+
+/** The no-tell states, codepoint-sorted, so the census reads one export rather than a map's
+ *  key order. @type {ReadonlyArray<string>} */
+export const NO_TELL_STATES = Object.freeze(Object.keys(NO_TELL_BY_STATE).sort());
 
 /** @param {unknown} value @returns {Record<string, unknown>} */
 function recordOf(value) {
@@ -182,10 +256,15 @@ export function declaredScheduleLapse({ errand, tick } = {}) {
       ? { lapsed: true, kind: 'never_left', placeId, dueTick: due, reason: 'never_left' }
       : inSchedule('return_pending');
   }
-  // Every other state is a row that is not standing anywhere it was announced to be:
-  // `returning` and `home` are a schedule KEPT, `held` is a fate the court can see for
-  // itself, and a lapse is a story about a promise, not about a person.
-  return inSchedule('state_raises_no_tell');
+  // EXPLICIT, PER STATE — see NO_TELL_BY_STATE's block for the argument on each of the five.
+  // `Object.hasOwn` rather than a bare lookup, because a bare lookup on a row whose `state`
+  // reads `constructor` or `toString` finds a PROTOTYPE member and answers a truthy
+  // non-reason; the own-key test is total over every string a save file could carry.
+  if (Object.hasOwn(NO_TELL_BY_STATE, state)) return inSchedule(NO_TELL_BY_STATE[state]);
+  // A state no arm above names. NOT a lapse — the conservative answer, because inventing a
+  // tell for a word this leaf does not understand is the louder failure — but it is reported
+  // under its own reason so a newly-minted state reds the census instead of joining a bucket.
+  return inSchedule('unrecognized_state');
 }
 
 /**
