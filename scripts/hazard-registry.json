@@ -153,16 +153,16 @@
           "tests/helpers/seedFailures.js"
         ],
         "inChain": true,
-        "note": "⚠⚠ BASELINED RED. The walkers exist and RUN, but FOUR of their rows sit in scripts/.test-ratchet-baseline.json — including 'no NEW un-anchored negative assertion' and the exact-zero habitat row. A NEW violation therefore reddens nothing: the failing row is already tolerated."
+        "note": "✔ NO LONGER BASELINED (2026-08-07). The four walker rows were REMOVED from scripts/.test-ratchet-baseline.json and each walker's own shrink-only inventory was re-frozen at 36e50c73 instead, so a NEW un-anchored negative or bare seed loop REDS THE GATE AGAIN. Generation-facing re-admissions live in a separate READMITTED_GENERATION_FACING quarantine audited by EXACT identity — a new file reds, growth reds, and an un-banked shrink reds. ⛔ NEVER RE-ADD A WALKER ROW TO THE TEST CENSUS: a failing TEST is debt, a failing WALKER is a disabled guard, and the two may not share one freezing mechanism."
       },
-      "instances": 4,
-      "instanceEvidence": "⚠⚠ MEASURED DOWNGRADE from the census's SHIPPED claim, re-verified at bd5e49f6: `grep -c` over scripts/.test-ratchet-baseline.json finds 4 occurrences each of 'negativeAssertion', 'un-anchored', 'seed loop' and 'bare seed'. Recorded causes: '78 un-anchored negative assertions' and '8 bare seed loops … in the generation-facing test trees'.",
+      "instances": 2,
+      "instanceEvidence": "MEASURED 2026-08-07 by each walker's own UPDATE_EPISTEMIC_ALLOWLIST regeneration inside an integrity-counted `git archive` of 36e50c73 (6,196 paths in, 6,196 out): 519 files / 1,565 un-anchored negative assertions, and 18 files / 26 bare seed loops. ⚠⚠ BOTH GREW WHILE THE ROWS WERE BASELINED — 1,303 → 1,565 sites and 13 → 26 loops against the inventories actually frozen in the walkers — which is HZ-REDRATCHETGROWS observed live: a tolerated failing row is byte-identical however much worse the tree gets.",
       "triggers": [
         "any new or edited file under tests/domain/, tests/generators/, tests/copy/, tests/simulation/",
         "any test adding `.not.toMatch`/`.not.toContain`",
         "any test adding a `for (const seed of ...)` loop"
       ],
-      "upgradePath": "THE SHARPEST FINDING OF THE CENSUS: a class recorded as SHIPPED machinery whose enforcer is baselined red — 'the worst kind of document, one that looks solved'. Recovery is a burn-down of 4 baselined rows, not new design. Compounded by HZ-REDRATCHETGROWS."
+      "upgradePath": "ENFORCEMENT IS RESTORED; THE HABITAT IS NOT CLEARED, which is why this stays PARTIAL rather than MACHINERY. Reaching MACHINERY is a burn-down of the two frozen inventories to empty — anchor each site via tests/helpers/anchoredNegatives.js, route each loop through tests/helpers/seedFailures.js — not new design. Priority order: empty READMITTED_GENERATION_FACING first (3 files / 5 sites, and 1 file / 2 loops), because that restores the EP-2/EP-6 four-tree zero this lane had to relax in order to record it honestly."
     },
     {
       "id": "HZ-LINEADDR",

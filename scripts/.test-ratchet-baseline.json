@@ -1,6 +1,6 @@
 {
   "_doc": "PER-TEST failure census for `vitest run`. SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. `--update` can only REMOVE entries; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
-  "measuredAtSha": "c658fb4461503c2e0167ef3d3f92c16c6c9329d9",
+  "measuredAtSha": "36e50c73ac3e0b3f2771f8f3a9eb310c8db8708a",
   "totalTests": 27292,
   "totalFiles": 2350,
   "skippedCeiling": 105,
@@ -13,38 +13,6 @@
     }
   },
   "entries": {
-    "tests/architecture/layerBoundaries.test.js :: layer boundaries (F29) dependency-cycle set equals the checked-in baseline (shrink-only)": {
-      "file": "tests/architecture/layerBoundaries.test.js",
-      "test": "layer boundaries (F29) dependency-cycle set equals the checked-in baseline (shrink-only)",
-      "subsystem": "architecture / layering (domain↔generators cycle set)",
-      "cause": "The import-cycle SCC set drifted past the allowlist: HK-2 put src/domain/dossier/hookRetention.js on src/generators/hookThemes.js, adding domain→generators edges that close new cycles. A sibling layering lane holds an uncommitted inversion (git mv hookThemes.js into src/domain/) that clears it.",
-      "introducedAt": "16b4a416e1f0ccb4e7a283d629abb656d8b5a98a",
-      "class": "debt"
-    },
-    "tests/build/domainGeneratorsBoundary.test.js :: architecture boundary — domain → generators ratchet baseline is exactly the 6 known edges (cardinality guard)": {
-      "file": "tests/build/domainGeneratorsBoundary.test.js",
-      "test": "architecture boundary — domain → generators ratchet baseline is exactly the 6 known edges (cardinality guard)",
-      "subsystem": "architecture / layering (domain→generators edge ratchet)",
-      "cause": "Live domain→generators edge count is 8 against a frozen baseline of 6. The new edges are the HK-2 retention layer reaching up into src/generators/hookThemes.js from src/domain/dossier/**. Same root cause as layerBoundaries; the sibling layering lane inverts it.",
-      "introducedAt": "16b4a416e1f0ccb4e7a283d629abb656d8b5a98a",
-      "class": "debt"
-    },
-    "tests/build/domainGeneratorsBoundary.test.js :: architecture boundary — domain → generators ratchet introduces NO new domain→generators edge beyond the frozen baseline": {
-      "file": "tests/build/domainGeneratorsBoundary.test.js",
-      "test": "architecture boundary — domain → generators ratchet introduces NO new domain→generators edge beyond the frozen baseline",
-      "subsystem": "architecture / layering (domain→generators edge ratchet)",
-      "cause": "Live domain→generators edge count is 8 against a frozen baseline of 6. The new edges are the HK-2 retention layer reaching up into src/generators/hookThemes.js from src/domain/dossier/**. Same root cause as layerBoundaries; the sibling layering lane inverts it.",
-      "introducedAt": "16b4a416e1f0ccb4e7a283d629abb656d8b5a98a",
-      "class": "debt"
-    },
-    "tests/build/userRouteIdentityLeaf.test.js :: wave D — the user-route identity leaf (source contracts) no module reachable from main.jsx statically reaches the derivation or the digest reader": {
-      "file": "tests/build/userRouteIdentityLeaf.test.js",
-      "test": "wave D — the user-route identity leaf (source contracts) no module reachable from main.jsx statically reaches the derivation or the digest reader",
-      "subsystem": "first-paint graph / spatial",
-      "cause": "src/domain/spatial/distanceRead.js re-entered the first-paint static graph via main.jsx → store/index.js → campaignSlice.js → worldPulse/worldState.js → warCoalitionLedger.js, which WR-6 taught to read distanceRead. The wave-D contract says no module reachable from main.jsx may reach the derivation.",
-      "introducedAt": "b243d34988bc5d91b2b5b5d3ce655ff2368388d7",
-      "class": "debt"
-    },
     "tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)": {
       "file": "tests/copy/voiceMechanics.test.js",
       "test": "E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)",
@@ -261,22 +229,6 @@
       "introducedAt": "d7ea69a4baf64d8c4281650b5160103519f453ef",
       "class": "debt"
     },
-    "tests/lint/negativeAssertionAnchor.walker.test.js :: negative-assertion anchor walker (habitat removal) no NEW un-anchored negative assertion in the generation-facing test trees": {
-      "file": "tests/lint/negativeAssertionAnchor.walker.test.js",
-      "test": "negative-assertion anchor walker (habitat removal) no NEW un-anchored negative assertion in the generation-facing test trees",
-      "subsystem": "epistemic prevention / anchored negatives",
-      "cause": "78 un-anchored negative assertions are present in the generation-facing test trees where the walker demands zero, and 3 landed back inside the four trees whose EP-2/EP-6 win is explicitly not spendable.",
-      "introducedAt": "unbisectable: 78 sites accumulated across many test-authoring waves. Burn-down lane must anchor each via tests/helpers/anchoredNegatives.js.",
-      "class": "debt"
-    },
-    "tests/lint/negativeAssertionAnchor.walker.test.js :: negative-assertion anchor walker (habitat removal) the four generation-facing trees stay at EXACT zero (the EP-2/EP-6 win is not spendable)": {
-      "file": "tests/lint/negativeAssertionAnchor.walker.test.js",
-      "test": "negative-assertion anchor walker (habitat removal) the four generation-facing trees stay at EXACT zero (the EP-2/EP-6 win is not spendable)",
-      "subsystem": "epistemic prevention / anchored negatives",
-      "cause": "78 un-anchored negative assertions are present in the generation-facing test trees where the walker demands zero, and 3 landed back inside the four trees whose EP-2/EP-6 win is explicitly not spendable.",
-      "introducedAt": "unbisectable: 78 sites accumulated across many test-authoring waves. Burn-down lane must anchor each via tests/helpers/anchoredNegatives.js.",
-      "class": "debt"
-    },
     "tests/lint/proseNumerics.test.js :: prose numerics live-tree ratchet (exact legacy identity, shrink-only) path + line + category + snippet debt exactly matches the committed baseline": {
       "file": "tests/lint/proseNumerics.test.js",
       "test": "prose numerics live-tree ratchet (exact legacy identity, shrink-only) path + line + category + snippet debt exactly matches the committed baseline",
@@ -291,22 +243,6 @@
       "subsystem": "ruins / institutions reader roster",
       "cause": "6 `.institutions` readers are neither COMPLIANT (ruin-filtered) nor EXEMPT — new readers landed without being dispositioned in the roster.",
       "introducedAt": "unbisectable: 6 readers added across several waves. Burn-down lane must disposition each as compliant or exempt.",
-      "class": "debt"
-    },
-    "tests/lint/seedLoopTotality.walker.test.js :: seed-loop totality walker (habitat removal) no NEW bare seed loop in the generation-facing test trees": {
-      "file": "tests/lint/seedLoopTotality.walker.test.js",
-      "test": "seed-loop totality walker (habitat removal) no NEW bare seed loop in the generation-facing test trees",
-      "subsystem": "epistemic prevention / seed-loop totality",
-      "cause": "8 bare seed loops are present in the generation-facing test trees where the walker demands zero, and 1 landed back inside the four trees whose EP-2 win is not spendable.",
-      "introducedAt": "unbisectable: 8 sites accumulated across many test-authoring waves. Burn-down lane must route each through tests/helpers/seedFailures.js.",
-      "class": "debt"
-    },
-    "tests/lint/seedLoopTotality.walker.test.js :: seed-loop totality walker (habitat removal) the four generation-facing trees stay at EXACT zero (the EP-2 win is not spendable)": {
-      "file": "tests/lint/seedLoopTotality.walker.test.js",
-      "test": "seed-loop totality walker (habitat removal) the four generation-facing trees stay at EXACT zero (the EP-2 win is not spendable)",
-      "subsystem": "epistemic prevention / seed-loop totality",
-      "cause": "8 bare seed loops are present in the generation-facing test trees where the walker demands zero, and 1 landed back inside the four trees whose EP-2 win is not spendable.",
-      "introducedAt": "unbisectable: 8 sites accumulated across many test-authoring waves. Burn-down lane must route each through tests/helpers/seedFailures.js.",
       "class": "debt"
     },
     "tests/lint/sovereigntyLightingContract.walker.test.js :: the sovereignty lighting condition — a marker is EVIDENCE only in a live title THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed": {
@@ -395,14 +331,6 @@
       "subsystem": "content / reviewed supply-chain persistence",
       "cause": "Same root cause as accountContentPortability: reviewedSupplyChainContentHash throws `needIcon must be bounded non-empty text` from boundedText() when a durable command race replays a reviewed response whose artifact has no needIcon.",
       "introducedAt": "unbisectable: shares the accountContentPortability cause — the writer that stopped supplying needIcon is not yet identified. Fix once, and all three tests clear.",
-      "class": "debt"
-    },
-    "tests/ui/mapOverlayTransformContract.test.jsx :: WorldMapStage ↔ MapOverlay transform-ref contract image-mode overlay writes the parent transform ref after the fit effect": {
-      "file": "tests/ui/mapOverlayTransformContract.test.jsx",
-      "test": "WorldMapStage ↔ MapOverlay transform-ref contract image-mode overlay writes the parent transform ref after the fit effect",
-      "subsystem": "UI / WorldMapStage ↔ MapOverlay transform ref",
-      "cause": "In image mode the overlay does not write the parent transform ref after the fit effect (the ref reads null), breaking the stage↔overlay transform contract.",
-      "introducedAt": "unbisectable: a render-effect ordering change in the map stage; no single commit isolated. Burn-down lane must drive the fit effect and observe the ref write.",
       "class": "debt"
     }
   }

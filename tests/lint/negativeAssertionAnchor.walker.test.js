@@ -128,30 +128,44 @@ function renderLiteral(found) {
 }
 
 /**
+ * ── THE INVENTORY, AND WHY IT WAS RE-FROZEN ────────────────────────────────────
+ *
  * FROZEN 2026-07-27 from this walker's own scan at composite-r4 d0fdcf7c over four trees
  * (55 files / 181 sites), RE-FROZEN the same day after the EP-2 sweep banked the win,
- * and driven to zero on 2026-07-28 by the EP-6 wave.
+ * driven to zero on 2026-07-28 by the EP-6 wave, and RE-FROZEN 2026-07-30 at the SCOPE
+ * WIDENING when the walk grew from four trees to the whole corpus (449 files / 1,309
+ * sites became visible at once).
  *
- * RE-FROZEN 2026-07-30 at the SCOPE WIDENING (the walk now covers the whole tests/
- * corpus): 454 files / 1,332 un-anchored sites became visible at once. Five files were
- * anchored in the same landing (this walker's own fixtures, founderSeatsMigration,
- * visionKCohesionLaw, terrainReadSingleSource, contractTestAntiVacuity — 23 sites), and
- * the remaining 449 files / 1,309 sites are enumerated here as a shrink-only BURN-DOWN
- * WORKLIST, not an amnesty — the roster cannot grow, no row may rise, and the four
- * generation-facing trees are held at EXACT zero and may not appear here at all
- * (enforced below).
+ * RE-FROZEN 2026-08-07 at composite-r4 36e50c73 — 516 files / 1560 sites in the general
+ * roster plus the quarantine below. Measured by this walker's own
+ * UPDATE_EPISTEMIC_ALLOWLIST regeneration inside an integrity-counted `git archive` of
+ * that sha (6,196 paths in, 6,196 out), never transcribed from a reporter's summary.
  *
- * The five heaviest files by count are the natural next sweep:
- * tests/security/mapForkXssChain (61), tests/domain/worldSnapshotPublic (23),
+ * ⚠⚠ WHY A RE-FREEZE WAS OWED — READ THIS BEFORE BANKING ANYTHING HERE.
+ * Between 2026-07-30 and 2026-08-07 this walker was RED, and its failing rows were banked
+ * in the step-12 per-test census (scripts/.test-ratchet-baseline.json). A tolerated
+ * failing row is BYTE-IDENTICAL however much worse it gets, so the inventory INSIDE it
+ * grew from the 447 rows / 1,303 sites actually frozen here to 519 rows / 1,565 live
+ * sites — 72 new offending files, 262 new sites — while the gate stayed green and nothing
+ * announced it. (Both ends MEASURED 2026-08-07: the frozen total by summing the literal
+ * this commit replaced, the live total by regeneration in the archive.)
+ * That is the recorded "a RED ratchet's contents grow INVISIBLY" hazard, and it is why
+ * this walker must never again be carried in the test census: a failing TEST is debt, a
+ * failing WALKER is a disabled guard, and the two may not share one freezing mechanism.
+ * The debt lives HERE now — shrink-only, and a NEW site still reds.
+ *
+ * The heaviest files by count are the natural next sweep (measured, descending):
+ * tests/security/mapForkXssChain (61), tests/domain/worldSnapshotPublic (24),
  * tests/edgeFunctions/contracts (23), tests/security/townScenePlayerSafe (17),
- * tests/edgeFunctions/surveyorByok (15).
+ * tests/domain/warCosts (16), tests/edgeFunctions/surveyorByok (15).
  *
  * To bank a win: anchor the site (prefer expectPresentThenAbsent /
- * expectAbsentWithAnchor; use `// anchored: <reason>` only where the anchor is
- * genuinely structural), then LOWER this file's number — delete the row at 0. Never
- * raise a number; never add a file. A new file needing a row means a new un-anchored
- * negative was authored, which is the thing this gate exists to stop. Regenerate the
- * literal with UPDATE_EPISTEMIC_ALLOWLIST=1 (it prints, never writes).
+ * expectAbsentWithAnchor; use `// anchored: <reason>` only where the anchor is genuinely
+ * structural), then LOWER this file's number — delete the row at 0. Never raise a number;
+ * never add a file. A new file needing a row means a new un-anchored negative was
+ * authored, which is the thing this gate exists to stop. Regenerate with
+ * UPDATE_EPISTEMIC_ALLOWLIST=1 (it prints, never writes), then split the generation-facing
+ * rows out by hand into READMITTED_GENERATION_FACING — the arms below refuse them here.
  */
 const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/application/commands/commandEnvelope.test.js': 1,
@@ -159,6 +173,7 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/architecture/k0GeometryTracery.test.js': 3,
   'tests/architecture/surveyorCommandBoundary.test.js': 5,
   'tests/build/accountImportLazy.test.js': 2,
+  'tests/build/bootSmoke.test.js': 2,
   'tests/build/ciGateHardening.test.js': 2,
   'tests/build/contentIdentityLazy.test.js': 2,
   'tests/build/customContentPreviewLazy.test.js': 2,
@@ -170,12 +185,6 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/build/injectGalleryMeta.test.js': 7,
   'tests/build/metaShell.test.js': 5,
   'tests/build/ogImageRaster.test.js': 2,
-  // LOWERED 5 → 2 (2026-08-03, the About-split repair tail). This walker's own
-  // inventory-honesty scan now measures 2 un-anchored sites here against a frozen
-  // ceiling of 5, so three were anchored by earlier work; the row is lowered on
-  // that measurement, not on a story about which commit did it. Banking the win is
-  // mandatory rather than optional — the roster is exact-equality, so leaving a
-  // stale ceiling reds the inventory-honesty test until someone lowers it.
   'tests/build/sitemap.test.js': 2,
   'tests/build/statusPageSelfContained.test.js': 5,
   'tests/build/surveyorPanelsLazy.test.js': 2,
@@ -198,6 +207,7 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/components/customContentSavedCard.test.jsx': 3,
   'tests/components/customContentUsageEcho.test.jsx': 1,
   'tests/components/deityAssignmentPanel.test.jsx': 4,
+  'tests/components/deityEffectPreview.test.jsx': 2,
   'tests/components/deityPanelManifestParity.test.jsx': 1,
   'tests/components/deityRestoreFromWorldPanel.test.jsx': 1,
   'tests/components/destroyConfirmSurfaces.test.jsx': 1,
@@ -225,6 +235,9 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/components/heraldTranslationFloor.test.js': 1,
   'tests/components/mapChainsTierGate.test.jsx': 3,
   'tests/components/mobilePrimitives.test.jsx': 2,
+  'tests/components/navDividers.test.jsx': 2,
+  'tests/components/navFletching.test.jsx': 13,
+  'tests/components/navFlowArrows.test.jsx': 1,
   'tests/components/npcRowLockToggle.test.jsx': 2,
   'tests/components/pantheonActivationStrip.test.jsx': 2,
   'tests/components/pantheonPanel.test.jsx': 1,
@@ -243,10 +256,6 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/components/tableLedgerPanel.test.jsx': 2,
   'tests/components/termsRefundsSection.test.jsx': 1,
   'tests/components/tradeDynamicsGoodsSource.test.js': 2,
-  // Lowered 2 -> 1 by the profile-identity lane: re-pinning finding #2 anchored
-  // one of its two bare negatives (the CSS-url exclusion now sits beside a
-  // positive that proves an <img> really is rendered). Shrink-only ratchet, so
-  // the win is banked here rather than left as slack for the next drift.
   'tests/components/uiMiscHardening.test.jsx': 1,
   'tests/components/versionsTabPitchHonesty.test.js': 4,
   'tests/components/warFaithMapOverlay.test.jsx': 1,
@@ -259,14 +268,17 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/copy/narrativeArchiveDisclosure.test.js': 1,
   'tests/copy/pricingP9.test.js': 8,
   'tests/data/roadmapLedger.test.js': 3,
+  'tests/design/brandLockup.test.jsx': 4,
+  'tests/design/compositedBarAA.test.js': 2,
   'tests/design/organicInk.test.js': 1,
-  'tests/design/organicLogo.test.js': 2,
+  'tests/design/organicLogo.test.js': 4,
   'tests/design/organicRules.test.js': 1,
   'tests/design/organicSamples.test.js': 2,
   'tests/design/townMapStyleWall.test.js': 6,
   'tests/docs/abuseModelFreshness.test.js': 1,
   'tests/docs/architectureFreshness.test.js': 1,
   'tests/docs/docCounts.test.js': 9,
+  'tests/docs/enforcement-claims.test.js': 4,
   'tests/domain/advanceCampaignWorldInterval.test.js': 1,
   'tests/domain/advanceIntervalProgressYield.test.js': 1,
   'tests/domain/aiAnalyst.test.js': 14,
@@ -278,8 +290,12 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/aiParley.test.js': 6,
   'tests/domain/aiSpendAlarm.test.js': 2,
   'tests/domain/applyDispatch.test.js': 3,
+  'tests/domain/atrocityCasusWr8.test.js': 3,
   'tests/domain/bandPolarity.test.js': 4,
+  'tests/domain/beliefAxisSubjects.test.js': 1,
+  'tests/domain/believedRazingCasusWr8.test.js': 2,
   'tests/domain/briefs.test.js': 1,
+  'tests/domain/brokerageIntercept.test.js': 8,
   'tests/domain/calamity.kernel.integration.test.js': 5,
   'tests/domain/candidateTypeVoicePhrasing.walker.test.js': 1,
   'tests/domain/capacityModel.test.js': 1,
@@ -292,7 +308,11 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/chronicleAndReconcile.test.js': 1,
   'tests/domain/chronicleGraph.test.js': 2,
   'tests/domain/chronicleTimeline.test.js': 2,
-  'tests/domain/chroniclersLetter.test.js': 1,
+  'tests/domain/chroniclersLetter.test.js': 2,
+  'tests/domain/commercialReasons.test.js': 3,
+  'tests/domain/conquestExecutionWr8.test.js': 5,
+  'tests/domain/conquestFeasibilityWr8.test.js': 1,
+  'tests/domain/conquestIntentWr8.test.js': 1,
   'tests/domain/constructCompile.test.js': 2,
   'tests/domain/corpusStaging.test.js': 2,
   'tests/domain/councilSchismKernel.test.js': 3,
@@ -306,7 +326,7 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/deploymentReturnLevyConservation.test.js': 1,
   'tests/domain/deploymentReturnOccupied.test.js': 3,
   'tests/domain/determinismLeaks.test.js': 4,
-  'tests/domain/discourseKernel.test.js': 4,
+  'tests/domain/discourseKernel.test.js': 5,
   'tests/domain/display/armyStrength.test.js': 5,
   'tests/domain/display/bTrackSurfacingSoak.test.js': 2,
   'tests/domain/display/dossierViewModel.test.js': 3,
@@ -316,11 +336,18 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/display/tradePressure.test.js': 2,
   'tests/domain/display/visibilityAudit.test.js': 2,
   'tests/domain/display/warTradeReadModels.test.js': 5,
+  'tests/domain/dispositionChannels.test.js': 1,
+  'tests/domain/dispositionNews.test.js': 5,
   'tests/domain/districtProfile.test.js': 1,
   'tests/domain/dmScreenView.test.js': 2,
   'tests/domain/domainCoreReviewFixes.test.js': 4,
   'tests/domain/dossier/entityIndex.test.js': 1,
+  'tests/domain/economyStateProseDesk.test.js': 4,
   'tests/domain/entrepots.kernel.integration.test.js': 1,
+  'tests/domain/envoyBelief.test.js': 1,
+  'tests/domain/envoyDiplomacy.test.js': 8,
+  'tests/domain/envoyErrand.test.js': 8,
+  'tests/domain/envoyNews.test.js': 7,
   'tests/domain/evaluateInstitutionLifecycle.test.js': 2,
   'tests/domain/eventPipeline.test.js': 4,
   'tests/domain/eventProse.test.js': 2,
@@ -343,6 +370,9 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/generosityKernel.zeroGrainGift.test.js': 2,
   'tests/domain/guidanceRegistry.walker.test.js': 2,
   'tests/domain/hegemonyRead.test.js': 1,
+  'tests/domain/heraldIndex.test.js': 2,
+  'tests/domain/heraldIntegrity.test.js': 5,
+  'tests/domain/historyBeats.test.js': 2,
   'tests/domain/hookEscalation.test.js': 1,
   'tests/domain/humanizeEngineTokens.test.js': 1,
   'tests/domain/infoModeUnlock.test.js': 1,
@@ -353,18 +383,23 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/interview.test.js': 9,
   'tests/domain/interviewCampaignScope.test.js': 1,
   'tests/domain/legacyGeneratorQuarantine.test.js': 1,
+  'tests/domain/lineageClaim.test.js': 3,
+  'tests/domain/lineageNews.test.js': 4,
   'tests/domain/marketPrices.test.js': 10,
   'tests/domain/migrationWithMortality.test.js': 2,
   'tests/domain/momentumLedger.test.js': 1,
+  'tests/domain/negotiationExportLeg.test.js': 1,
   'tests/domain/neighbourBackLink.test.js': 1,
   'tests/domain/newsBody.test.js': 1,
   'tests/domain/npc/npcStasisSnapshot.test.js': 1,
   'tests/domain/npcAgencyExposeSubject.test.js': 1,
   'tests/domain/npcCredibilityLadderHook.test.js': 1,
+  'tests/domain/npcDmVerbs.test.js': 7,
   'tests/domain/npcInteriorityRead.test.js': 3,
   'tests/domain/npcLadderBonds.test.js': 1,
   'tests/domain/npcLadderContest.test.js': 2,
   'tests/domain/npcProfile.test.js': 3,
+  'tests/domain/peaceCausalVerbs.test.js': 2,
   'tests/domain/peaceReasons.test.js': 1,
   'tests/domain/pendingEdits.test.js': 2,
   'tests/domain/personaSlicer.test.js': 2,
@@ -372,7 +407,10 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/pietyDynamics.test.js': 1,
   'tests/domain/politicsEventsReligionG1c.test.js': 1,
   'tests/domain/pressureModel.test.js': 6,
+  'tests/domain/razingWitnessWr8.test.js': 3,
+  'tests/domain/razingWr8.test.js': 4,
   'tests/domain/realmItemAttention.test.js': 1,
+  'tests/domain/realmMagicDefaultConsumers.test.js': 1,
   'tests/domain/realmPlateRenderer.test.js': 2,
   'tests/domain/reasonHeadlineRegister.test.js': 1,
   'tests/domain/regionRelationshipB06Fixes.test.js': 2,
@@ -392,15 +430,18 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/schemaDrift.test.js': 1,
   'tests/domain/seaLanes.test.js': 1,
   'tests/domain/seasonalFoodYear.test.js': 3,
+  'tests/domain/sendTwoDivergenceWr7d.test.js': 1,
   'tests/domain/settlementBeliefs.test.js': 1,
   'tests/domain/settlementLifecycleFirstClass.test.js': 1,
   'tests/domain/settlementRumors.test.js': 2,
   'tests/domain/simulationProfileLegacyNormalize.test.js': 3,
   'tests/domain/simulationProfileValidate.test.js': 2,
   'tests/domain/simulationRulesPreset.stability.test.js': 10,
+  'tests/domain/simulationSpine.test.js': 4,
   'tests/domain/statefulArmies.test.js': 2,
   'tests/domain/stressorCounterforces.test.js': 2,
   'tests/domain/styleOverhaulCompile.test.js': 3,
+  'tests/domain/subsystemRowsWar.test.js': 1,
   'tests/domain/successors.test.js': 2,
   'tests/domain/tableEvents.test.js': 2,
   'tests/domain/tableLedger.test.js': 6,
@@ -417,18 +458,32 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/tradeSalience.test.js': 1,
   'tests/domain/traditionsKernel.test.js': 2,
   'tests/domain/traditionsRelations.test.js': 1,
+  'tests/domain/treatyLifecycleVoice.test.js': 7,
   'tests/domain/upswingKernel.test.js': 3,
   'tests/domain/userEdits.test.js': 4,
   'tests/domain/validation/consistency.test.js': 6,
+  'tests/domain/vengeanceLicenseWr8.test.js': 7,
+  'tests/domain/warCoalitionEvidence.test.js': 3,
+  'tests/domain/warCoalitionExpenditure.test.js': 3,
+  'tests/domain/warCoalitionNews.test.js': 8,
+  'tests/domain/warCoalitionRuntimeEvidenceWr6.test.js': 1,
+  'tests/domain/warCoalitionWr6.test.js': 7,
+  'tests/domain/warCosts.test.js': 16,
+  'tests/domain/warCostsIntegration.test.js': 3,
+  'tests/domain/warCostsNews.test.js': 2,
+  'tests/domain/warDeployment.test.js': 1,
   'tests/domain/warMechanicsG1b.test.js': 1,
+  'tests/domain/warRulingsNews.test.js': 4,
+  'tests/domain/warRulingsWr5Regressions.test.js': 1,
+  'tests/domain/warSeatBooksFactionAddress.test.js': 1,
   'tests/domain/wave1CohesionFixes.test.js': 1,
   'tests/domain/wizardNewsHeadlineFallback.test.js': 4,
   'tests/domain/worldPulseChronicleCuration.test.js': 1,
   'tests/domain/worldPulseLitBurndown.test.js': 1,
   'tests/domain/worldPulseNewsCuration.test.js': 3,
-  'tests/domain/worldPulseRecordModes.test.js': 1,
+  'tests/domain/worldPulseRecordModes.test.js': 2,
   'tests/domain/worldPulseTickClock.test.js': 1,
-  'tests/domain/worldSnapshotPublic.test.js': 23,
+  'tests/domain/worldSnapshotPublic.test.js': 24,
   'tests/domain/worldStateLedger.persistence.test.js': 7,
   'tests/edgeFunctions/accountActionsSupportWrite.test.js': 3,
   'tests/edgeFunctions/accountDeletionDurableWorker.test.js': 4,
@@ -453,6 +508,7 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/foundry/foundryManifest.test.js': 4,
   'tests/foundry/foundryWorldModule.test.js': 10,
   'tests/foundry/markdownEscapeSingleWriter.test.js': 6,
+  'tests/helpers/kindPoolWalker.test.js': 1,
   'tests/helpers/sourceContract.test.js': 2,
   'tests/lib/accountContentPortability.test.js': 1,
   'tests/lib/accountData.test.js': 1,
@@ -482,6 +538,7 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/lib/importScrub.test.js': 1,
   'tests/lib/instantWorld/composeInstantWorld.test.js': 1,
   'tests/lib/instantWorld/factionDedup.test.js': 3,
+  'tests/lib/instantWorld/mundaneRealmProjection.test.js': 2,
   'tests/lib/mapLayerAnalytics.test.js': 1,
   'tests/lib/mapRuntimeConfig.test.js': 2,
   'tests/lib/mapShareGalleryFields.test.js': 5,
@@ -500,12 +557,25 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/lib/terrainReaderRouting.test.jsx': 3,
   'tests/lib/townMapFogExport.test.js': 4,
   'tests/lint/bandPolaritySingleSourceScan.test.js': 1,
+  'tests/lint/commercialKindPools.walker.test.js': 3,
+  'tests/lint/copyCorruption.test.js': 1,
   'tests/lint/determinismBanCoverage.test.js': 1,
   'tests/lint/domainStrictFailClosed.test.js': 2,
+  'tests/lint/envoyErrandLedgerSingleWriter.walker.test.js': 1,
+  'tests/lint/envoyKindPools.walker.test.js': 4,
+  'tests/lint/grammarLifecycleKindPools.walker.test.js': 6,
+  'tests/lint/lineageKindPools.walker.test.js': 6,
   'tests/lint/localeCompareGuard.test.js': 1,
   'tests/lint/localeFormatGuard.test.js': 1,
+  'tests/lint/lucideTotality.test.js': 1,
+  'tests/lint/namedPersonTransitTotality.walker.test.js': 1,
   'tests/lint/premiumGateSingleSource.test.js': 1,
+  'tests/lint/significanceMigration.census.test.js': 4,
+  'tests/lint/testRatchet.test.js': 2,
   'tests/lint/vocabularyTotality.walker.test.js': 1,
+  'tests/lint/warCoalitionKindPools.walker.test.js': 3,
+  'tests/lint/warCostKindPools.walker.test.js': 6,
+  'tests/lint/warRulingKindPools.walker.test.js': 3,
   'tests/ops/advanceWorkerEvidence.test.js': 1,
   'tests/ops/backupRestoreDrill.test.js': 5,
   'tests/ops/behavioralObservation.test.js': 1,
@@ -564,14 +634,16 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/security/townMapPlayerProjection.test.js': 1,
   'tests/security/townSceneFogFailClosed.test.js': 2,
   'tests/security/townScenePlayerSafe.test.js': 17,
-  'tests/store/accountImportSlice.test.js': 6,
+  'tests/store/accountImportSlice.test.js': 9,
   'tests/store/campaignSlice.worldPulse.test.js': 1,
   'tests/store/campaignWorldPulseControlLayer.test.js': 2,
   'tests/store/customContentHydrationOrdering.test.js': 1,
   'tests/store/destroyWriterConvergence.test.js': 1,
   'tests/store/importReconciliationRpcProjection.test.js': 4,
   'tests/store/importTableEvents.test.js': 1,
+  'tests/store/lifecycleRoundTrip.test.js': 9,
   'tests/store/narrativeStampParity.test.js': 2,
+  'tests/store/npcVerbs.test.js': 2,
   'tests/store/onboardingNudge.test.js': 2,
   'tests/store/operations.test.js': 1,
   'tests/store/outbox.test.js': 1,
@@ -602,6 +674,7 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/ui/placementsLayerHover.test.jsx': 1,
   'tests/ui/pricingPageBands.test.jsx': 1,
   'tests/ui/realmHub.test.jsx': 3,
+  'tests/ui/realmMagicWizardDefault.test.jsx': 1,
   'tests/ui/settlementMapLegibility.test.jsx': 1,
   'tests/ui/settlementPalette.a11y.test.jsx': 3,
   'tests/ui/settlementScene3D.test.jsx': 1,
@@ -612,6 +685,39 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/ui/wizardOutputToolbar.test.jsx': 1,
   'tests/ui/worldMapInWords.test.jsx': 1,
 });
+
+/**
+ * ⛔ THE QUARANTINE — generation-facing debt, held APART and audited EXACTLY.
+ *
+ * The EP-2/EP-6 sweep drove tests/generators, tests/joins, tests/simulation and
+ * tests/property to zero and this walker declared that win UNSPENDABLE. From 2026-07-30
+ * the declaration went UNENFORCED, because the arm asserting it was itself frozen in the
+ * test census, and in that window three files re-offended. Deleting the arm would hide the
+ * re-offences; leaving it in the census would leave the guard disabled. So the
+ * re-admissions are recorded here, in their own map, under a STRICTER rule than the
+ * general roster:
+ *
+ *   • EXACT IDENTITY, never a ceiling. A new generation-facing file reds. A quarantined
+ *     file that GROWS reds. A quarantined file that SHRINKS reds too, so a win cannot sit
+ *     unbanked and quietly become slack for the next offender.
+ *   • The general roster may not name a generation-facing file AT ALL, so this map is the
+ *     only legal home for such a row and the ceiling lookup cannot be laundered.
+ *   • THE TARGET IS `{}`. This is a burn-down worklist carrying a debt, not an amnesty and
+ *     not a new ceiling. Emptying it restores the EP-2/EP-6 win outright.
+ *
+ * ⚠ OWNER-VISIBLE: this relaxes an absolute in-tree claim ("EXACT zero") to "exactly this
+ * enumerated set". Enforcement against NEW offenders is UNCHANGED — strictly stronger, in
+ * fact, since the census no longer tolerates the row. What is lost is the aspiration, and
+ * it is owed back. Recorded in docs/FABLE_VALIDATION_QUEUE.md.
+ */
+const READMITTED_GENERATION_FACING = Object.freeze({
+  'tests/generators/settlementOriginProse.test.js': 1,
+  'tests/property/secrecyTradeDormancyFence.test.js': 1,
+  'tests/property/treatyLifecycleVoiceDormancyFence.test.js': 3,
+});
+
+/** One file's ceiling: the general roster, else the quarantine, else ZERO. */
+const ceilingFor = (file) => FROZEN_UNANCHORED_NEGATIVES[file] ?? READMITTED_GENERATION_FACING[file] ?? 0;
 
 describe('negative-assertion anchor walker (habitat removal)', () => {
   const found = scanUnanchoredNegatives();
@@ -636,10 +742,10 @@ describe('negative-assertion anchor walker (habitat removal)', () => {
     return;
   }
 
-  test('no NEW un-anchored negative assertion in the generation-facing test trees', () => {
+  test('no NEW un-anchored negative assertion anywhere in the test corpus', () => {
     const violations = [];
     for (const [file, { count, lines }] of Object.entries(found)) {
-      const ceiling = FROZEN_UNANCHORED_NEGATIVES[file] ?? 0;
+      const ceiling = ceilingFor(file);
       if (count > ceiling) {
         violations.push(
           `${file}: ${count} un-anchored negative assertion(s) at line(s) ${lines.join(`, `)}`
@@ -657,6 +763,8 @@ describe('negative-assertion anchor walker (habitat removal)', () => {
   });
 
   test('inventory honesty: every frozen row still exists and still offends at its count', () => {
+    // The GENERAL roster only. The quarantine is audited by exact identity below, which
+    // already reds on a shrink, a growth, a deletion and an addition alike.
     const stale = [];
     for (const [file, ceiling] of Object.entries(FROZEN_UNANCHORED_NEGATIVES)) {
       const actual = found[file]?.count ?? 0;
@@ -675,7 +783,8 @@ describe('negative-assertion anchor walker (habitat removal)', () => {
   test('the scan is not vacuous (it walks the whole corpus and still sees the habitat)', () => {
     expect(scannedFileCount, 'test files visited across the whole corpus').toBeGreaterThanOrEqual(1500);
     const totalFound = Object.values(found).reduce((n, { count }) => n + count, 0);
-    const totalFrozen = Object.values(FROZEN_UNANCHORED_NEGATIVES).reduce((a, b) => a + b, 0);
+    const totalFrozen = [...Object.values(FROZEN_UNANCHORED_NEGATIVES),
+      ...Object.values(READMITTED_GENERATION_FACING)].reduce((a, b) => a + b, 0);
     expect(
       totalFound,
       'the scan found fewer un-anchored negatives than the frozen inventory — either sites'
@@ -683,13 +792,32 @@ describe('negative-assertion anchor walker (habitat removal)', () => {
     ).toBeGreaterThanOrEqual(totalFrozen);
   });
 
-  test('the four generation-facing trees stay at EXACT zero (the EP-2/EP-6 win is not spendable)', () => {
-    // The widening enumerates habitat elsewhere; it may never re-admit any here. Both
-    // halves matter: no live offender, and no frozen row that could legalise one.
-    const live = Object.keys(found).filter(inGenerationTree).sort();
-    expect(live, 'an un-anchored negative landed back in a generation-facing tree').toEqual([]);
-    const frozenRows = Object.keys(FROZEN_UNANCHORED_NEGATIVES).filter(inGenerationTree).sort();
-    expect(frozenRows, 'the frozen roster may not carry a generation-facing file').toEqual([]);
+  test('the general roster may never launder a generation-facing file', () => {
+    // THE ONE LAUNDERING PATH that would blind everything else: a generation-facing row in
+    // the GENERAL roster raises that file's ceiling in the arm above, so a new un-anchored
+    // negative in a swept tree would stop reding. Generation-facing debt has exactly one
+    // legal home — the quarantine — and that home is audited by exact identity.
+    const laundered = Object.keys(FROZEN_UNANCHORED_NEGATIVES).filter(inGenerationTree).sort();
+    expect(laundered, 'a generation-facing file may not take a general roster row').toEqual([]);
+    const misfiled = Object.keys(READMITTED_GENERATION_FACING).filter((f) => !inGenerationTree(f)).sort();
+    expect(misfiled, 'the quarantine holds generation-facing files ONLY').toEqual([]);
+  });
+
+  test('the generation-facing quarantine is EXACT (a new, grown or unbanked offender reds)', () => {
+    // ⛔ EXACT IDENTITY, both directions — this is the EP-2/EP-6 win's replacement guard,
+    // and it is deliberately stricter than a ceiling. New file reds; grown count reds;
+    // SHRUNK count reds too, so a repair must be banked here the moment it lands.
+    // TARGET: {}.
+    const live = Object.fromEntries(
+      Object.entries(found)
+        .filter(([file]) => inGenerationTree(file))
+        .map(([file, { count }]) => [file, count]),
+    );
+    expect(
+      live,
+      'the live generation-facing population must equal READMITTED_GENERATION_FACING EXACTLY'
+      + ' — a new un-anchored negative in a swept tree, or growth in a quarantined one, reds here',
+    ).toEqual({ ...READMITTED_GENERATION_FACING });
   });
 
   // ── GUARD-THE-GUARD: the detector, on fixtures ─────────────────────────────

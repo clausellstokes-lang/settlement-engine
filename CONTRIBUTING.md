@@ -7,7 +7,8 @@
 
 ## The gate
 
-Everything runs through `npm run check` — the full 14-step chain: `validate:data` →
+Everything runs through `npm run check` — the full 16-step chain:
+`validate:hazard-registry` → `validate:premortem` → `validate:data` →
 `validate:custom-content-manifest` → `validate:migration-head` → `validate:edge` → `validate:map` →
 `validate:tuning-bands` → `validate:foundry-module` → `validate:mcp-server` → `typecheck:ratchet` →
 `typecheck:domain:strict` → `lint` → `test:ratchet` (the full Vitest suite — measured
@@ -31,10 +32,21 @@ failures, and it was red — so `build` and `verify:dist`, the two steps that gu
 against shipping a `dist` that cannot boot, had not run in the gate since 2026-08-02
 either. It is now `test:ratchet` (`scripts/check-test-ratchet.mjs`), which **runs the
 entire suite** — it never skips, excludes or suppresses a test — and compares the
-result against a frozen **per-test** census of 49 known failures, each carrying an
+result against a frozen **per-test** census of 40 known failures, each carrying an
 attribution (subsystem, cause, introducing commit, class). A failing test absent from
 the census is a REGRESSION and reds the gate; `--update` can only REMOVE entries and
 refuses to bank a failure it has not seen, so adding one is a deliberate hand edit.
+
+**⛔ AN ENFORCEMENT WALKER MAY NEVER BE PUT IN THAT CENSUS.** A failing TEST is debt;
+a failing WALKER is a DISABLED GUARD, and the two must not share a freezing mechanism.
+Once a walker's row is tolerated, its verdict is byte-identical however much worse the
+tree gets, so a NEW violation reddens nothing — and the inventory inside it grows
+unseen. That happened: from 2026-07-30 to 2026-08-07 four rows of
+`negativeAssertionAnchor.walker` and `seedLoopTotality.walker` sat in the census while
+their populations grew from 1,303 to 1,565 un-anchored negatives and from 13 to 26 bare
+seed loops. A walker's debt belongs in the walker's OWN shrink-only inventory, where a
+new violation still reds. If a walker is red and you cannot fix it, re-freeze its own
+baseline — do not bank its row here.
 A baselined test that turns up **skipped** reds too, and the suite-wide skip count is
 frozen: a skipped test is not debt, it is a hole. Use `npm run test` for the raw
 unfiltered reporter output when burning the census down.

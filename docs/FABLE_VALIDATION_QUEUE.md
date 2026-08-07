@@ -5943,3 +5943,123 @@ should WY-6 instead be re-ordered after WC-12? (3) Whether WC's SECTION 8 splice
 the seam table moved whole into the volume — should instead have stayed a sibling
 file. (4) The three §8.2 tripwire-less ESPIONAGE contracts, RULED wave obligations
 rather than fold blockers, two with a natural inbound ES-side home.
+
+## ⏳ OPUS-ERA — FABLE SURVEY OWED · THE WALKER/CENSUS SPLIT — LANDED
+## (Opus-implemented, chair-briefed, 2026-08-07. One commit on `claude/composite-r4`
+## from `36e50c73`. Every judgment below is VETOABLE by one owner clause.)
+
+**⭐⭐ THE PREMISE WAS CONFIRMED BY EXECUTION BEFORE ANYTHING WAS REPAIRED, AND IT IS
+WORSE THAN THE BRIEF STATED.** The chair asked for a plant-and-observe proof that a NEW
+un-anchored negative assertion in a generation-facing tree leaves `npm run test:ratchet`
+un-reddened. It does. A bare `not.toContain` was planted at
+`tests/simulation/discourseParity.test.js` inside an integrity-counted `git archive` of
+`36e50c73` (6,196 paths in, 6,196 out, `git init`ed and committed so the three
+git-shelling walkers do not lie), and the full suite was run. **The planted violation
+appears NOWHERE in the ratchet's regression list.** The four walker rows absorbed it in
+silence, exactly as the hazard census predicted.
+
+**AND THE INVENTORY INSIDE THE TOLERATED ROWS HAD BEEN GROWING THE WHOLE TIME.**
+Re-measured by each walker's OWN `UPDATE_EPISTEMIC_ALLOWLIST` regeneration in that
+archive, never transcribed from a reporter: un-anchored negatives stood at **519 files /
+1,565 sites** against the **447 rows / 1,303 sites** actually frozen in the walker, and
+bare seed loops at **18 files / 26 loops** against a frozen **10 / 13** — the seed
+population had **DOUBLED**. Both prior figures were re-derived by summing the literal
+this commit replaced, not read off the walker's own stale header prose (which said
+"1,309" and was itself wrong). This is `HZ-REDRATCHETGROWS` observed live: a tolerated
+failing row is byte-identical however much worse the tree gets.
+
+**⭐⭐ THE DESIGN — CHOSEN, AND THE ALTERNATIVE THAT WAS REJECTED AND WHY.**
+CHOSEN: **re-freeze each walker's own shrink-only inventory at `36e50c73`, split the
+generation-facing re-admissions into a separately-named `READMITTED_GENERATION_FACING`
+QUARANTINE audited by EXACT IDENTITY, and remove all four rows from the test census.**
+The quarantine is deliberately stricter than the general roster: a new generation-facing
+file reds, growth in a quarantined file reds, and an **un-banked shrink also reds**, so a
+repair cannot sit unclaimed and become slack for the next offender. A third arm keeps the
+GENERAL roster forbidden from naming a generation-facing file at all, which closes the one
+laundering path that would otherwise blind the rest — a generation-facing row in the
+general roster would raise that file's ceiling and silence new offences in a swept tree.
+REJECTED: **splitting the assertions and leaving the "trees are at EXACT zero" arm red in
+the census** (the chair's own second option). It fails on a detail that only shows up when
+you read the arm: that test asserts TWO things, and its second half is the anti-laundering
+check. Baselining the whole arm to carry the debt would have disabled that half too,
+re-opening the very hole being closed — and it would have left walker rows in the census,
+which is the mechanism under repair.
+
+**⚠ WHAT THIS COST, STATED PLAINLY BECAUSE IT IS OWNER-VISIBLE.** The walkers declared the
+EP-2/EP-6 four-tree zero UNSPENDABLE. That declaration went unenforced from 2026-07-30
+because the arm asserting it was itself frozen, and in that window **four files
+re-offended** — 3 files / 5 un-anchored negatives and 1 file / 2 bare seed loops. This
+commit records them rather than hiding them, which relaxes an absolute in-tree claim
+("EXACT zero") to "exactly this enumerated set". **Enforcement against NEW offenders is not
+weakened — it is strictly stronger, because the census no longer tolerates the row.** What
+is lost is the aspiration, and it is owed back: emptying the quarantine restores the win
+outright, and `HZ-EPISTEMIC`'s `upgradePath` now names that as the priority. Per the brief,
+the 1,565 sites and 26 loops were INVENTORIED, NOT BURNED DOWN — that is a separate wave.
+
+**THE FIVE RATCHET-DOWN WINS WERE RE-VERIFIED, NOT INHERITED.** `--update` is REMOVE-ONLY
+by design, so a removal that cannot be reproduced is a silent widening. All five were run
+in the pristine archive at `36e50c73` and observed PASSING, exit 0 — `layerBoundaries`,
+`domainGeneratorsBoundary` ×2, `userRouteIdentityLeaf`, `mapOverlayTransformContract` —
+and the first three have a causal story, not just an observation: the layering inversion
+landed at `67f8a58e` (`src/generators/hookThemes.js` → `src/domain/hookThemes.js`), which
+is precisely the repair their census attributions predicted. Census 49 → 40, and
+`testRatchet.test.js`'s own `CEILING` was ratcheted 49 → 40 with it so the count cannot
+silently re-grow.
+
+**⚠ THE SIX BUILT-ARTIFACT ROWS WERE LEFT FROZEN, AND THE MEASUREMENT IS REPORTED AGAINST
+INTEREST.** The chair ruled them artifacts that prove nothing. Measured both ways today,
+they pass in the clean archive AND in the live dirty tree (4 files / 87 tests, exit 0 in
+each), so by the letter of the ratchet-down rule they are removal candidates too. They were
+NOT removed: their verdict is a function of build state rather than of source, so one green
+reading is not evidence the debt is repaid, and the chair reserved the call. Reported so it
+is a decision on the record rather than an omission.
+
+**THREE UNRELATED REDS SURFACED, AND ONE OF THEM WAS THE INSTRUMENT.** The premise run's
+regression list carried three failures that had nothing to do with the plant. (a) and (b)
+`contributingFreshness` / `architectureFreshness` — `validate:hazard-registry` and
+`validate:premortem` were added to `npm run check` at `1e4c493b` and `1333f0ff` without the
+docs following, so the chain is 16 steps while `CONTRIBUTING.md` said 14 and neither doc
+named the two. REAL, reproduced by inspection against `package.json`, and REPAIRED here as
+a docs-only edit, because they red the very gate step this lane exists to restore. (c)
+`archViewWall` — **a FALSE red produced by this lane's own apparatus.** Its pin asserts
+`govPath.includes('/arch/') === false` on an ABSOLUTE path, and the scratch archive had been
+materialised into a directory literally named `arch`. Renaming the archive cleared it. ⚠ A
+NEW HAZARD SHAPE WORTH THE REGISTRY: **an absolute-path pin is sensitive to the name of the
+directory the checkout sits in**, so any census taken in a throwaway tree can be poisoned by
+that tree's own path. Never name a scratch archive after a token any pin matches on.
+
+**DECISIONS TAKEN, EACH VETOABLE.**
+1. **The quarantine is EXACT-IDENTITY, not a ceiling.** A shrink reds as loudly as a growth.
+   Veto by making it a ceiling; the cost is that a banked repair could sit unclaimed.
+2. **The two doc-freshness reds were repaired in this commit rather than reported and left.**
+   They are docs-only, carry no behavioural risk, and describe the check chain this lane is
+   repairing; leaving them red would have blocked the chain, which the brief forbids. Veto by
+   splitting them into their own commit.
+3. **`measuredAtSha` was set to the PARENT `36e50c73`, not to this commit.** That is the sha
+   every figure here was measured at, in an integrity-counted archive; this commit's own sha
+   cannot be known before it exists. Veto by ordering a follow-up re-freeze.
+4. **`HZ-EPISTEMIC` stays PARTIAL, not MACHINERY.** Enforcement is restored, but the habitat
+   is not cleared, and over-claiming a status is the failure mode that registry exists to
+   prevent. Veto by ordering the upgrade after the burn-down wave.
+
+**GATES.** The acceptance test the brief called non-negotiable was run as a PAIRED FULL-SUITE
+MUTANT in the archive, not scoped and not simulated. THREE plants — a new un-anchored
+negative in a generation-facing tree (ceiling 0), one MORE negative in a file already at its
+frozen ceiling of 1, and a new bare seed loop in a generation-facing tree — each asserted its
+own byte change and its own violation message before the gate ran. **WITH the plants:
+`npm run test:ratchet` exit 1, and the four regressions named are EXACTLY this lane's four new
+walker arms.** Plants then restored and proved clean two independent ways — `cmp` against
+pre-plant copies, and the archive's own `git status`, which listed only the seven cure files
+and none of the three planted ones. **WITHOUT the plants: exit 0, the 40 remaining census rows
+tolerated as designed.** Also executed: `eslint` on both walkers, exit 0 unpiped;
+`validate:hazard-registry`, exit 0; the five ratchet-down candidates, exit 0. Zero NUL bytes in
+every authored file. No exit code in this round was read through a pipe.
+
+**WHAT FABLE SHOULD RE-EXAMINE.** (1) The quarantine relaxes the EP-2/EP-6 "not spendable"
+claim — is recording the four re-admissions the right call, or should this lane have spent a
+surgical sweep on 5 sites and 2 loops to keep the claim absolute? The brief said inventory,
+not fix, and that instruction was followed. (2) The six built-artifact rows now pass in both
+trees; should they come out of the census, or does their build-state dependence justify
+keeping them. (3) The absolute-path-pin hazard in (c) above wants a registry class of its own.
+(4) `tests/lint/sizeBaseline` does not govern `tests/**`, so the negative-assertion walker is
+now 893 lines with no ceiling over it — deliberate here, but worth a ruling.

@@ -59,7 +59,21 @@ const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
 // self-referential pin class — and would rise silently with every added row.
 //
 // MONOTONE DOWN from here. You may burn it; you may never pad it.
-const CEILING = 49;
+//
+// RATCHETED 49 → 40 on 2026-08-07. Nine rows left the census in one commit, in two
+// classes that must not be confused:
+//   • FOUR ENFORCEMENT-WALKER ROWS (negativeAssertionAnchor.walker ×2,
+//     seedLoopTotality.walker ×2). They did not leave because they were repaired —
+//     they left because a failing WALKER is a DISABLED GUARD and may not be frozen by
+//     the same mechanism that freezes a failing TEST. Their debt moved into the
+//     walkers' own shrink-only inventories, where a NEW violation still reds. While
+//     they sat here their populations grew unseen, 1,303 → 1,565 un-anchored negatives
+//     and 13 → 26 bare seed loops. ⛔ NEVER RE-ADD A WALKER ROW HERE.
+//   • FIVE GENUINE RATCHET-DOWN WINS, each re-verified PASSING in an integrity-counted
+//     `git archive` of the committed parent before removal (layerBoundaries,
+//     domainGeneratorsBoundary ×2 — all three cleared by the layering inversion at
+//     67f8a58e — userRouteIdentityLeaf, mapOverlayTransformContract).
+const CEILING = 40;
 
 describe('per-test suite ratchet — static pins', () => {
   test('every entry is keyed by its own `<file> :: <test>` identity (no hand-typed drift)', () => {

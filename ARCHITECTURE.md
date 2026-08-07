@@ -315,13 +315,20 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 
 ## The gate
 
-`npm run check` = `validate:data && validate:custom-content-manifest &&
+`npm run check` = `validate:hazard-registry && validate:premortem &&
+validate:data && validate:custom-content-manifest &&
 validate:migration-head && validate:edge && validate:map &&
 validate:tuning-bands && validate:foundry-module && validate:mcp-server &&
 typecheck:ratchet && typecheck:domain:strict && lint && test:ratchet && build &&
 verify:dist`.
 <!-- @enforced-by tests/docs/architectureFreshness.test.js (each sub-step derived from package.json) -->
 
+- **validate:hazard-registry** — integrity of `scripts/hazard-registry.json`: every
+  recorded hazard class either names live enforcing machinery or carries an explicit
+  accepted-reason, so a class cannot sit recorded-but-unenforced.
+- **validate:premortem** — `scripts/premortem.mjs --self-check`, the instrument that
+  reads a changeset and names the recorded hazard classes that shape exposes, before
+  the error rather than after it.
 - **validate:data** — duplicate-key scan (dupe keys silently corrupt sim output).
 - **validate:custom-content-manifest** — regenerates the canonical custom-content
   authority in check mode and fails if any generated client, edge, or SQL
