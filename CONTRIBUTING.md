@@ -10,8 +10,9 @@
 Everything runs through `npm run check` — the full 14-step chain: `validate:data` →
 `validate:custom-content-manifest` → `validate:migration-head` → `validate:edge` → `validate:map` →
 `validate:tuning-bands` → `validate:foundry-module` → `validate:mcp-server` → `typecheck:ratchet` →
-`typecheck:domain:strict` → `lint` → `test` (the full Vitest suite, ~20,100 tests /
-~1988 files) → `build` → `verify:dist` (the first-paint ratchet) — plus the Playwright
+`typecheck:domain:strict` → `lint` → `test:ratchet` (the full Vitest suite — measured
+27,292 tests / 2,350 files at c658fb44) → `build` → `verify:dist` (the first-paint
+ratchet) — plus the Playwright
 `e2e` job. Both run in CI (`.github/workflows/ci.yml`) on every PR to `master`/`main`.
 Counts are approximate; executable output remains the authority.
 
@@ -24,6 +25,19 @@ while a NEW or WORSENED file still reds. Files absent from the baseline get an
 allowance of zero. Use `npm run typecheck` for the raw unfiltered list when burning the
 debt down, and `npm run typecheck:ratchet:update` to bank a win. Never widen a baseline
 to green a gate — that is the constitutional violation this repo exists to prevent.
+
+**Step 12 is the same move, one step later.** `test` was also a boolean gate at zero
+failures, and it was red — so `build` and `verify:dist`, the two steps that guard
+against shipping a `dist` that cannot boot, had not run in the gate since 2026-08-02
+either. It is now `test:ratchet` (`scripts/check-test-ratchet.mjs`), which **runs the
+entire suite** — it never skips, excludes or suppresses a test — and compares the
+result against a frozen **per-test** census of 49 known failures, each carrying an
+attribution (subsystem, cause, introducing commit, class). A failing test absent from
+the census is a REGRESSION and reds the gate; `--update` can only REMOVE entries and
+refuses to bank a failure it has not seen, so adding one is a deliberate hand edit.
+A baselined test that turns up **skipped** reds too, and the suite-wide skip count is
+frozen: a skipped test is not debt, it is a hole. Use `npm run test` for the raw
+unfiltered reporter output when burning the census down.
 
 **THE TWO-TYPECHECKER RECEIPT LAW — a typecheck figure MUST name its config.** The
 chain runs **two** typecheckers over overlapping trees: `typecheck:ratchet`

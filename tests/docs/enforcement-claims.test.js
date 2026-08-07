@@ -293,7 +293,13 @@ describe('enforcement-claims meta-pin (A+ P1.1)', () => {
     if (isPathTarget(t)) {
       if (!fs.existsSync(rel(t))) return { ok: false, why: `path does not exist: ${t}` };
       if (t.startsWith('tests/') && t.endsWith('.test.js')) {
-        return CHECK_SUBNAMES.includes('test')
+        // The vitest CLASS must be in the chain; which spelling carries it is an
+        // implementation detail — same reasoning as the typecheck class below.
+        // It is `test:ratchet` since 2026-08-07: the bare boolean step was red,
+        // and the chain being `&&`, it took `build` and `verify:dist` dark
+        // behind it. A literal `includes('test')` here made EVERY tests/** claim
+        // in the corpus unresolvable the moment the step was renamed.
+        return CHECK_SUBNAMES.some((n) => /^test(:|$)/.test(n))
           ? { ok: true }
           : { ok: false, why: 'check chain has no `test` step — vitest not reachable' };
       }
@@ -334,7 +340,16 @@ describe('enforcement-claims meta-pin (A+ P1.1)', () => {
       CHECK_SUBNAMES.filter((n) => /^typecheck(:|$)/.test(n)),
       'the check chain runs no typecheck step at all',
     ).not.toEqual([]);
-    expect(CHECK_SUBNAMES).toEqual(expect.arrayContaining(['lint', 'test']));
+    // Same for the TEST class, and for the same reason: it is `test:ratchet`
+    // since 2026-08-07 (scripts/check-test-ratchet.mjs), which RUNS the whole
+    // vitest suite and compares the result against a frozen, attributed,
+    // per-test census. Asserting the literal name `test` would red on the
+    // rename while proving nothing about whether tests actually run.
+    expect(CHECK_SUBNAMES).toEqual(expect.arrayContaining(['lint']));
+    expect(
+      CHECK_SUBNAMES.filter((n) => /^test(:|$)/.test(n)),
+      'the check chain runs no test step at all',
+    ).not.toEqual([]);
   });
 
   // A NAME IS NOT EVIDENCE. The pin above is satisfied by ANY step whose name

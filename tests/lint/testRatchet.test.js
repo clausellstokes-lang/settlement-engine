@@ -533,6 +533,37 @@ describe('per-test suite ratchet — the guards, EXECUTED', () => {
       expect(written.entries[identityOf(REAL, 'a')].introducedAt).toMatch(/^[0-9a-f]{40}$/);
     });
 
+    test('⚠ a VANISHED baselined test reds the gate but does NOT wedge --update', () => {
+      // The membership check's own message says "re-freeze explicitly with
+      // `npm run test:ratchet:update`". If that check also fired during the
+      // re-freeze, the instruction would name a command that cannot succeed and
+      // a legitimately RENAMED test would wedge the ratchet permanently.
+      const suites = [{ file: REAL, tests: [T('renamed', 'passed')] }];
+      const entries = { [identityOf(REAL, 'oldName')]: {} };
+      // (a) the GATE reds — the erasure is still caught
+      const gate = run({ entries, suites });
+      expect(gate.status, gate.out).not.toBe(0);
+      expect(gate.out).toMatch(/did NOT RUN/);
+      // (b) the RE-FREEZE succeeds, drops the row, and says so loudly
+      const upd = run({ entries, suites, args: ['--update'] });
+      expect(upd.status, upd.out).toBe(0);
+      expect(upd.out).toMatch(/did not RUN AT ALL/);
+      expect(Object.keys(JSON.parse(readFileSync(upd.baselineFile, 'utf8')).entries)).toEqual([]);
+    });
+
+    test('--update still refuses a re-freeze when the whole suite collapsed', () => {
+      // The escape above must not become a hole: the gross case the membership
+      // check guarded against during --update is still caught by the count floor.
+      const r = run({
+        entries: { [identityOf(REAL, 'a')]: {} },
+        totalTests: 5000,
+        suites: [{ file: REAL, tests: [T('a')] }],
+        args: ['--update'],
+      });
+      expect(r.status, r.out).not.toBe(0);
+      expect(r.out).toMatch(/collapsed/);
+    });
+
     test('a broken runner cannot re-freeze the census', () => {
       const r = run({
         entries: { [identityOf(REAL, 'a')]: {} },

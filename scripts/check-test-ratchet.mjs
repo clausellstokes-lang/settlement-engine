@@ -288,12 +288,26 @@ export async function run(argv = []) {
   // ratchet-down (handled below, not fatal); a test that vanished while its file
   // remains is the erasure this sentinel exists for — a rename, a deletion, or a
   // de-registration that makes banked debt read as repaid without a repair.
+  //
+  // ⚠ NOT UNDER `--update`. This check reds and its own message says "re-freeze
+  // explicitly with `npm run test:ratchet:update`" — so if it also fired during
+  // the re-freeze, the instruction would name a command that cannot succeed and
+  // a legitimately RENAMED test would wedge the ratchet permanently, escapable
+  // only by hand-editing the census (exactly the hand edit this design reserves
+  // for attributed additions). Under `--update` a vanished row is reported and
+  // DROPPED, which is the same treatment a deleted file already gets. The gross
+  // case this check exists for — a whole tree falling out of collection — is
+  // still caught during `--update` by the count floor and the uncollected guard.
+  const vanished = [];
   for (const [id, row] of Object.entries(entries)) {
     const file = row.file || id.split(' :: ')[0];
     if (!fs.existsSync(path.join(ROOT, file))) continue;
-    if (!liveById.has(id)) {
-      scopeFailures.push(`  ${id}: baselined, its file is on disk, but it did NOT RUN — renamed, deleted or de-registered`);
-    }
+    if (!liveById.has(id)) vanished.push(id);
+  }
+  if (vanished.length && !UPDATE) {
+    scopeFailures.push(...vanished.map(
+      (id) => `  ${id}: baselined, its file is on disk, but it did NOT RUN — renamed, deleted or de-registered`,
+    ));
   }
 
   // (2) COUNT FLOOR: a collapse in the total test count is a scope event, not
@@ -362,6 +376,12 @@ export async function run(argv = []) {
     console.log(`[test-ratchet] baseline updated: ${Object.keys(kept).length} failing test(s) remain, `
       + `${dropped.length} removed.`);
     if (dropped.length) console.log(dropped.map((id) => `  - ${id}`).join('\n'));
+    if (vanished.length) {
+      console.log(`[test-ratchet] ⚠ ${vanished.length} of those did not RUN AT ALL (their file is still on disk).`);
+      console.log('  They were renamed, deleted or de-registered rather than fixed. Confirm each was');
+      console.log('  intentional — this re-freeze bank a win for every one of them:');
+      console.log(vanished.map((id) => `    ? ${id}`).join('\n'));
+    }
     return 0;
   }
 

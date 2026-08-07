@@ -318,7 +318,8 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 `npm run check` = `validate:data && validate:custom-content-manifest &&
 validate:migration-head && validate:edge && validate:map &&
 validate:tuning-bands && validate:foundry-module && validate:mcp-server &&
-typecheck:ratchet && typecheck:domain:strict && lint && test && build && verify:dist`.
+typecheck:ratchet && typecheck:domain:strict && lint && test:ratchet && build &&
+verify:dist`.
 <!-- @enforced-by tests/docs/architectureFreshness.test.js (each sub-step derived from package.json) -->
 
 - **validate:data** — duplicate-key scan (dupe keys silently corrupt sim output).
@@ -357,6 +358,20 @@ typecheck:ratchet && typecheck:domain:strict && lint && test && build && verify:
   sha, that may only shrink. A file absent from the baseline has an allowance of
   ZERO, so new work must still be typecheck-clean. Burn it down with
   `npm run typecheck`, then bank the win with `npm run typecheck:ratchet:update`.
+- **test:ratchet** — the full Vitest suite, run through the PER-TEST census
+  (`scripts/check-test-ratchet.mjs`). Step 12 was a boolean gate at zero failures
+  and it was red, so **`build` and `verify:dist` — the two steps that guard
+  against shipping a `dist` that cannot boot — had not run in the gate since
+  2026-08-02** either. Same repair as step 9, one step later. It **runs the whole
+  suite** (it never skips, excludes or suppresses a test) and compares the result
+  against a frozen census of 49 known failures across 34 files, measured in an
+  integrity-counted checkout of a committed sha. Every entry carries an
+  attribution — subsystem, cause, introducing commit, class — so a row nobody can
+  trace is refused. A failing test ABSENT from the census is a regression;
+  `--update` may only REMOVE entries. A baselined test that turns up **skipped**
+  reds, and the suite-wide skip count is frozen: a skipped test is not debt, it is
+  a hole. Raw list: `npm run test`. Bank a win: `npm run test:ratchet:update`.
+  <!-- @enforced-by tests/lint/testRatchet.test.js -->
 - **typecheck:domain:strict** — the `src/domain/` strict ratchet
   (`scripts/check-domain-strict.mjs`): the any-cast burn-down that may only shrink.
 - **typecheck:ui-boundaries** — an opt-in, baseline-free strict manifest for
