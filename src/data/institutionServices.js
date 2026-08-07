@@ -721,7 +721,8 @@ export const INSTITUTION_SERVICES = {
   "Bandit affiliate": {
     "Protection racket": { on: true,  p: 0.9, desc: "Pay or have accidents. Simple arrangement." },
     "Contraband fencing": { on: false, p: 0.7, desc: "Move stolen goods with no questions asked." },
-    "Road intelligence": { on: false, p: 0.5, desc: "Know which caravans are carrying what and when. Sellable information." }
+    "Road intelligence": { on: false, p: 0.5, desc: "Know which caravans are carrying what and when. Sellable information." },
+    "Safe house": { on: false, p: 0.4, desc: "A barn or a back room for men the roads are too hot for. Board paid in kind." }
   },
   "Banking district": {
     "Large loans": { on: true,  p: 1.0, desc: "Capital loans for major ventures, construction, and war financing." },
@@ -967,7 +968,8 @@ export const INSTITUTION_SERVICES = {
     "High religious ceremony": { on: true,  p: 1.0, desc: "The most significant religious observances. Major feast days and state occasions." },
     "Pilgrimage services": { on: true, p: 0.9, desc: "Accommodate and process pilgrims. Relics, blessings, and indulgences." },
     "Ecclesiastical courts": { on: false, p: 0.6, desc: "Church legal proceedings for matters within clerical jurisdiction." },
-    "Dispensations": { on: false, p: 0.5, desc: "Church permission for forbidden actions: marriages, business practices, oaths." }
+    "Dispensations": { on: false, p: 0.5, desc: "Church permission for forbidden actions: marriages, business practices, oaths." },
+    "Sanctuary": { on: false, p: 0.4, desc: "The ancient right of refuge, claimed at the altar and honoured by custom." }
   },
   "Great library": {
     "Research access": { on: true,  p: 1.0, desc: "Access to an enormous collection of texts, scrolls, and records." },
@@ -1300,11 +1302,13 @@ export const INSTITUTION_SERVICES = {
     "Burglary": { on: true,  p: 0.9, desc: "Targeted theft of specific items. Professional and discreet." },
     "Fence services": { on: true, p: 1.0, desc: "Move stolen goods through legitimate-seeming channels." },
     "Intelligence network": { on: false, p: 0.7, desc: "Information on individuals, security arrangements, and valuables." },
-    "Criminal protection": { on: false, p: 0.5, desc: "Pay the guild and small criminal operations are left alone." }
+    "Criminal protection": { on: false, p: 0.5, desc: "Pay the guild and small criminal operations are left alone." },
+    "Safe house": { on: false, p: 0.5, desc: "Rotating addresses across the city, no two known to the same people. Lent at the guild's discretion." }
   },
   "Thieves' guild chapter": {
     "Theft coordination": { on: true,  p: 0.8, desc: "Coordinate pickpocketing, burglary, and robbery within the district." },
     "Fencing": { on: true, p: 0.9, desc: "Local fence network for chapter members." },
+    "Safe house": { on: false, p: 0.5, desc: "A room kept ready for members who need to be elsewhere for a while. Guild business only." },
     "Protection": { on: false, p: 0.4, desc: "Chapter-level protection for allied criminal operations." }
   },
   "Toll bridge": {
@@ -1503,7 +1507,8 @@ export const INSTITUTION_SERVICES = {
   "Underground network": {
     "Discreet passage": { on: true, p: 1.0, desc: "Move people beneath the walls unseen." },
     "Untaxed storage": { on: true, p: 0.8, desc: "Hold goods in dug caches off the rolls." },
-    "No-questions transport": { on: false, p: 0.6, desc: "Carry cargo with no manifest or toll." }
+    "No-questions transport": { on: false, p: 0.6, desc: "Carry cargo with no manifest or toll." },
+    "Safe house": { on: false, p: 0.5, desc: "A dug chamber off the passage where someone can wait out a search." }
   },
   "Underground city": {
     "Black market bazaar": { on: true, p: 1.0, desc: "Full criminal marketplace for goods and services unavailable above ground." },

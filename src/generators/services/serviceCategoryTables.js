@@ -262,6 +262,11 @@ export const SERVICE_CATEGORY_MAP = {
   'Hired muscle': 'criminal',
   'No law, bring coin': 'criminal',
   'Protection (informal)': 'criminal',
+  // Registered explicitly rather than left to the keyword heuristic: the
+  // heuristic reaches 'criminal' only via a `safe house` substring test that a
+  // lodging-institution branch runs BEFORE, so the same service name folded
+  // differently depending on its host. The shelter is illicit wherever it sits.
+  'Safe house': 'criminal',
   'Legitimate facade': 'criminal',
   'Administrative orders': 'employment',
   'Apprenticeship and training': 'employment',
