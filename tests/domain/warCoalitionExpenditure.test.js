@@ -162,8 +162,10 @@ describe('WR-6 coalition expenditure', () => {
     const rootPressure = coalitionSunkCostPressureFor({ ...f, tick: 10 });
     expect(rootPressure('root', 'enemy', f.worldState.deployments.root)).toBeUndefined();
     const dark = { ...f.worldState, simulationRules: { ...RULES, coalitionLedgerEnabled: false } };
-    expect(coalitionSunkCostPressureFor({ worldState: dark, snapshot: f.snapshot, tick: 10 })
-      ('member', 'enemy', f.worldState.deployments.member)).toBeUndefined();
+    // Named rather than called across a newline: `f(...)\n(...)` is
+    // eslint no-unexpected-multiline (a gate-step-11 ERROR). Same call, same assertion.
+    const darkPressure = coalitionSunkCostPressureFor({ worldState: dark, snapshot: f.snapshot, tick: 10 });
+    expect(darkPressure('member', 'enemy', f.worldState.deployments.member)).toBeUndefined();
   });
 
   it('builds only the join-anchor component and excludes a coincidental co-besieger', () => {

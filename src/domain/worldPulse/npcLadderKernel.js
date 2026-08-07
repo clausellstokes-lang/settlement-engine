@@ -253,7 +253,11 @@ export function heirsActive(worldState) {
  * @returns {string}
  */
 export function seatTransitionGoverningFactionId(faction) {
-  return faction ? ladderFactionKey(/** @type {any} */ (faction)) : '';
+  // The accessor's OWN parameter type, not `any` — the spelling warSeatBooks.js
+  // already uses at its ladderFactionKey call. An `any` here would have been a
+  // fresh hole in the domain any-cast ratchet, and it buys nothing: the cast only
+  // has to say "this unknown is the record the accessor destructures".
+  return faction ? ladderFactionKey(/** @type {Parameters<typeof ladderFactionKey>[0]} */ (faction)) : '';
 }
 
 /**

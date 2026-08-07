@@ -356,6 +356,7 @@ function perceivedPeaceExhaustion({ exhaustion, rng, tick, sId, chaosPull, rust 
  * a single settlement S reasons about: its hostile targets, its vassals, whether it
  * (or any vassal) is besieged/occupied. All sets codepoint-sorted / order-free.
  * @param {any} snapshot @param {any} graph @param {any} sId
+ * @param {boolean} [active] @param {number|null} [tick] the pulse tick, when the caller has one
  */
 function contextFor(snapshot, graph, sId, active = false, tick = null) {
   const states = snapshot?.worldState?.relationshipStates || {};
@@ -405,7 +406,9 @@ function contextFor(snapshot, graph, sId, active = false, tick = null) {
   };
 }
 
-/** Exact public helper for WR-6's pre-decision hard-override parity. */
+/** Exact public helper for WR-6's pre-decision hard-override parity.
+ *  @param {number|null} [tick] a real pulse tick, not just the `null` its default implies:
+ *  typed here because an inferred `null`-only parameter reds every annotated caller. */
 export function strategyEmergencyRecallFor(snapshot, settlementId, tick = null) {
   const worldState = snapshot?.worldState || {};
   const context = contextFor(
@@ -1272,7 +1275,10 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
       ? inheritedWarDemandFor(worldState, String(sId), String(termination.targetId), snapshot)
       : null;
     let decisionMoves = moves;
-    let chosen = null;
+    // No `= null` initializer: every arm below assigns before the read at
+    // `chosen.move`, so the initializer was dead (eslint no-useless-assignment,
+    // a gate-step-11 ERROR that had been dark behind the red step above it).
+    let chosen;
     if (coalitionDecision
       && String(coalitionDecision.partyId || '') === sId
       && String(coalitionDecision.targetId || '') === String(termination?.targetId || '')) {

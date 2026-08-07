@@ -431,7 +431,13 @@ function archiveSettlementAction(worldState, row, incidentType, severity, edge =
  *   settlementUpdates?:Array<Record<string,unknown>>,plan?:unknown,closures?:unknown}} [args]
  */
 export function applyCoalitionSettlement({
-  worldState,
+  // The body already REQUIRES an object here (archiveSettlementAction below takes
+  // `Record<string, unknown>`), so the declared contract is made to match: without
+  // the default the early returns hand back `Record<string,unknown>|undefined` and
+  // that `undefined` spills into every annotated caller. All live call sites pass a
+  // real state, so this default is unreachable in practice — it closes a type hole,
+  // it does not add a behavior.
+  worldState = {},
   snapshot,
   settlementUpdates = [],
   plan,
