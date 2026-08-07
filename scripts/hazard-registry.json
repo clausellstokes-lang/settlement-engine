@@ -52,7 +52,7 @@
   "measuredAtSha": "bd5e49f6f34a486c460bc0fdcd0f8c6441550996",
   "measuredAtDate": "2026-08-07",
   "documentBaseline": 6,
-  "classFloor": 26,
+  "classFloor": 27,
   "statusValues": ["MACHINERY", "PARTIAL", "DOCUMENT", "ACCEPTED"],
   "classes": [
     {
@@ -515,6 +515,23 @@
         "any refactor that moves a line a standing plant anchors on"
       ],
       "upgradePath": "Extend the changed-a-line precondition beyond the sweep: every mutant claimed in a wave receipt should be provable by a diff, not by narration."
+    },
+    {
+      "id": "HZ-NEWFILECEILING",
+      "title": "A NEW un-baselined source file carries an implicit ZERO error ceiling — and a net-zero TOTAL hides it",
+      "status": "MACHINERY",
+      "acceptedReason": null,
+      "memory": ["receipt-vacuity-and-shared-ratchet-rules.md", "domain-layer-ratchets-hazard.md", "generation-remediation-gate-state.md"],
+      "enforcer": { "paths": ["scripts/check-full-typecheck.mjs", "scripts/check-domain-strict.mjs", "scripts/.full-typecheck-baseline.json", "scripts/.domain-strict-baseline.json", "tests/lint/domainStrictFailClosed.test.js"], "inChain": true, "note": "Both tsc ratchets are PER-FILE, never total. A file ABSENT from the baseline has a ceiling of ZERO, so a new module may not introduce a single error. ⚠ A per-file tsc run against the new file is a VACUUM (receipt-vacuity law) — run the ratchet, never tsc on one file." },
+      "instances": 1,
+      "instanceEvidence": "CONFIRMED from the landed commit message of f16de756, the repair for the two files 67f8a58e added: 'THE NET WAS ZERO AND THE RATCHET STILL CAUGHT IT. Full-config total was 177 before and 177 after 67f8a58e — the two new errors were offset by two the same commit removed elsewhere. A TOTAL-count ratchet would have passed this silently; the per-file zero-ceiling law for un-baselined files is the only reason it reds.' The cure landed AT THE SOURCE (an intersection narrowing on the validator), not at the use site and not by widening the baseline.",
+      "triggers": [
+        "any file ADDED under a root listed in the full-typecheck baseline's own roots list",
+        "any rename whose DESTINATION path is absent from both tsc baselines",
+        "any edit to a file carrying an exact per-file error ceiling in either baseline",
+        "any decomposition or leaf-extraction wave, which creates un-baselined modules by construction"
+      ],
+      "upgradePath": "Already MACHINERY and already in the gate chain, so the residual risk is human rather than mechanical: the reflex on a red is to ADD the new file to the baseline, which converts a caught defect into banked debt. scripts/premortem.mjs names this class the moment a new source file appears in a changeset, so the author meets the rule BEFORE the gate does."
     }
   ]
 }
