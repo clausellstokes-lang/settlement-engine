@@ -22,6 +22,8 @@ import { describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { governingFactionOf, nameOf } from '../../src/domain/rulingPower.js';
 import { realmFactionPulseId } from '../../src/domain/dossier/realmEntityWeb.js';
+import { getSpatialLedger, setSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
+import { applyWorldPulseOutcomes } from '../../src/domain/worldPulse/applyWorldPulse.js';
 import { ladderFactionKey } from '../../src/domain/worldPulse/npcLadderState.js';
 import { seatTransitionGoverningFactionId } from '../../src/domain/worldPulse/npcLadderKernel.js';
 import { stablePart } from '../../src/domain/worldPulse/stablePart.js';
@@ -32,15 +34,50 @@ import {
 import { warRulingNewsEntry } from '../../src/domain/worldPulse/warRulingsNews.js';
 
 const TIERS = Object.freeze(['hamlet', 'village', 'town', 'city', 'metropolis']);
+const SEEDS = Object.freeze([7100, 7101, 7102, 7103, 7104, 7105]);
 
-/** Real worlds, several seeds and every tier — never one lucky settlement. */
+/**
+ * Real worlds, several seeds and every tier — never one lucky settlement.
+ *
+ * ⚠⚠ THE CALL SHAPE IS LOAD-BEARING AND WAS WRONG UNTIL 2026-08-07. This corpus
+ * was built by `generateSettlementPipeline({ tier }, seed)`, which is the RECORDED
+ * CONFIG-SLOT SILENT KEY TRAP firing twice in one call:
+ *
+ *   (a) `tier` IS NOT A CONFIG KEY. The generator reads `settType`; `tier` is the
+ *       field it WRITES onto the finished settlement. An unrecognized config key
+ *       is not rejected, so all 30 rows generated at the default and
+ *       `settlement.tier` was `'village'` on every one of them — measured. The
+ *       header's "every tier" and the commit's "5 tiers" were both false, and the
+ *       four tier-sensitive shapes (a hamlet's three-faction roster, a
+ *       metropolis's dozen) were never once exercised.
+ *
+ *   (b) THE SEED LANDED IN THE `importedNeighbour` SLOT. The pipeline's signature
+ *       is (config, importedNeighbour, options), and its fail-closed guard only
+ *       rejects an OBJECT carrying a recognized option key — a bare number sails
+ *       through. `options.seed` was therefore absent, generation fell through to
+ *       `generateSeed()`, and every run produced 30 DIFFERENT random worlds.
+ *       Measured: 0 of 30 rows carried any of the seeds 7100–7105, and `_seed`
+ *       read as a fresh clock-derived token each run. The corpus was not merely
+ *       un-varied, it was NON-REPRODUCIBLE — a pin over it is a lottery, and a
+ *       flake would have been unreproducible by construction.
+ *
+ * Both cures are below, and both are GUARDED rather than asserted in a comment:
+ * `the corpus is real…` re-measures the distinct-tier set against TIERS and
+ * re-measures that every asked-for seed ARRIVED as `settlement._seed`. A corpus
+ * that silently collapses to one tier and one lucky world is a lottery wearing a
+ * denominator, and nothing in the old file could have said so.
+ */
 function corpus() {
   const rows = [];
-  for (let seed = 7100; seed < 7106; seed += 1) {
+  for (const seed of SEEDS) {
     for (const tier of TIERS) {
+      // `settType` is the config key; the seed goes in the THIRD slot. A string
+      // seed keyed by tier+seed keeps the 30 worlds independent rather than
+      // making one seed's world reappear at five tiers.
+      const askedSeed = `tcd1:${tier}:${seed}`;
       let generated;
       try {
-        generated = generateSettlementPipeline({ tier }, seed);
+        generated = generateSettlementPipeline({ settType: tier }, null, { seed: askedSeed });
       } catch {
         continue;
       }
@@ -50,6 +87,8 @@ function corpus() {
       const id = `${tier}-${seed}`;
       rows.push({
         id,
+        askedTier: tier,
+        askedSeed,
         settlement,
         governing,
         item: { id, name: settlement?.name || id, settlement },
@@ -78,6 +117,32 @@ describe('TCD-1 governing-seat faction address', () => {
     expect(factionRows.length).toBeGreaterThanOrEqual(60);
     // The premise of the whole repair, re-measured every run rather than quoted.
     expect(factionRows.filter((faction) => faction?.id != null)).toEqual([]);
+
+    // ── THE TWO GUARDS THE CONFIG-SLOT TRAP DEMANDS (see corpus()'s header) ──
+    // NOT "at least a few tiers": the CARDINALITY this file's own header claims,
+    // asserted against the same TIERS list the loop walks, so the claim and the
+    // check cannot drift apart. Under the old `{ tier }` spelling this read
+    // `['village']` — one tier, cardinality 1 — and nothing said so.
+    const distinctTiers = [...new Set(ROWS.map((row) => row.settlement?.tier))].sort();
+    expect(distinctTiers).toEqual([...TIERS].sort());
+    expect(distinctTiers).toHaveLength(TIERS.length);
+    // Every asked-for tier is really represented, not merely present somewhere.
+    for (const tier of TIERS) {
+      expect(ROWS.filter((row) => row.settlement?.tier === tier).length).toBeGreaterThan(0);
+    }
+
+    // ASSERT THE SEED ACTUALLY ARRIVED — the guard the recorded hazard
+    // prescribes, and the one thing that distinguishes a seeded corpus from a
+    // fresh random draw. `_seed` is the pipeline's own record of the seed it
+    // RAN with, so this compares what we asked for against what the generator
+    // says it used, rather than trusting the call site's spelling.
+    for (const row of ROWS) {
+      expect(row.settlement?._seed).toBe(row.askedSeed);
+    }
+    // …and the 30 worlds are 30 DIFFERENT worlds, so no single seed carries the
+    // suite. Both counts are derived from ROWS, never transcribed.
+    expect(new Set(ROWS.map((row) => row.settlement?._seed)).size).toBe(ROWS.length);
+    expect(new Set(ROWS.map((row) => row.settlement?.name)).size).toBe(ROWS.length);
   });
 
   it('readWarSeatBooks emits the settlement-scoped address id for every real governing seat', () => {
@@ -230,5 +295,207 @@ describe('TCD-1 governing-seat faction address', () => {
       expect(spelled).not.toBe('');
     }
     expect(seatTransitionGoverningFactionId(null)).toBe('');
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PIN-2 — THE SINGLE-WRITER CLAIM, ENFORCED OVER THE REAL WRITER'S REAL OUTPUT
+//
+// TCD-1 asserted that applyWorldPulse's approved-transfer path and
+// npcLadderKernel's organic-succession path "cannot drift again" because both
+// route through `seatTransitionGoverningFactionId`. That was a CLAIM, not a
+// GUARD. A verifier planted the exact pre-fix spelling back at the call site —
+//
+//     src/domain/worldPulse/applyWorldPulse.js:966
+//     const governingFactionId = String(governingFaction?.id || installerFactionId || '');
+//
+// — left the helper untouched, and ran NINE suites: ALL GREEN. The one pin that
+// mentioned the helper (`both seat-transition writers spell governingFactionId
+// the same way`, above) calls `seatTransitionGoverningFactionId` DIRECTLY, so it
+// proves the helper is correct and says nothing at all about whether the writer
+// still calls it. A drift the repair removed could be reintroduced tomorrow with
+// the whole gate green.
+//
+// ⚠ THE ANCHOR IS THE WRITER'S OUTPUT, NEVER A FIXTURE. These pins drive the
+// REAL `applyWorldPulseOutcomes` over the REAL generated worlds of the corpus
+// above and read the row it actually persisted onto the npcLadder ledger. A
+// fixture of the READER's shape is precisely what hid the four earlier members
+// of this defect class, and a fixture here would hide the fifth.
+// ═══════════════════════════════════════════════════════════════════════════
+
+/**
+ * Drive ONE approved `government_change` through the production apply mouth over
+ * a real generated world, and return what was actually persisted.
+ *
+ * Everything the pulse needs is derived from the world under test:
+ *   • the CHALLENGER is a real non-governing faction off that settlement's own
+ *     roster, and `installerFactionId` is spelled exactly as factionCompetition's
+ *     `factionId()` spells it (`${saveId}:${stablePart(name)}`) — the same value
+ *     the real producer puts in `proposalPayload.factionId`;
+ *   • the ladder's rungs are real npc ids from that same world. They are not
+ *     decoration: `normalizeSeatTransitions` DROPS a row with no seat on either
+ *     side, so without a resolvable seat the writer runs and persists NOTHING
+ *     and every assertion below would pass vacuously. The `expect(rows.length)`
+ *     check is what makes that failure loud.
+ */
+function driveApprovedGovernmentChange(row) {
+  const factions = row.settlement?.powerStructure?.factions || [];
+  const challenger = factions.find((faction) => faction !== row.governing);
+  const npcs = (row.settlement?.npcs || []).filter((npc) => npc?.id);
+  if (!challenger || npcs.length < 2) return null;
+
+  const installerFactionId = `${row.id}:${stablePart(nameOf(challenger))}`;
+  const ladder = {
+    [row.id]: {
+      factions: {
+        [ladderFactionKey(row.governing)]: { rungs: [npcs[0].id] },
+        [ladderFactionKey(challenger)]: { rungs: [npcs[1].id] },
+      },
+    },
+  };
+  const worldState = setSpatialLedger(
+    { tick: 3, simulationRules: { warLayerEnabled: true, warTerminationEnabled: true } },
+    'npcLadder',
+    ladder,
+  );
+  const result = applyWorldPulseOutcomes({
+    snapshot: { settlements: [row.item], byId: new Map([[row.id, row.item]]) },
+    worldState,
+    settlementMap: new Map([[row.id, { saveId: row.id, settlement: row.settlement }]]),
+    outcomes: [{
+      id: `tcd1:gc:${row.id}`,
+      type: 'faction',
+      targetSaveId: row.id,
+      factionId: installerFactionId,
+      proposalPayload: {
+        kind: 'government_change',
+        factionId: installerFactionId,
+        settlementId: row.id,
+      },
+      metadata: { factionName: nameOf(challenger) },
+    }],
+    tick: 3,
+    now: '2026-08-07T00:00:00.000Z',
+  });
+
+  const record = getSpatialLedger(result.worldState, 'npcLadder')?.[row.id];
+  const transition = (record?.seatTransitions || [])
+    .find((seat) => seat?.cause === 'government_change');
+  if (!transition) return null;
+  const nextSettlement = result.settlementUpdates
+    .find((update) => update.saveId === row.id)?.settlement;
+  const governingAfter = nextSettlement ? governingFactionOf(nextSettlement) : null;
+  return {
+    id: row.id, transition, installerFactionId, challenger, governingAfter,
+    governingBefore: row.governing,
+  };
+}
+
+const WRITTEN = ROWS.map(driveApprovedGovernmentChange).filter(Boolean);
+
+describe('TCD-1 PIN-2 — the seat-transition writer, over real worlds', () => {
+  it('every corpus world really produced a persisted transition (no vacuous denominator)', () => {
+    // A TOTAL POSITIVE PREDICATE, not "some rows survived". An enumeration on
+    // the credit side fails OPEN: were the drive to stop persisting rows — a
+    // renamed cause, a dropped seat, a gating rule change — every per-row
+    // assertion below would iterate an empty list and report green.
+    expect(WRITTEN).toHaveLength(ROWS.length);
+    expect(WRITTEN.length).toBeGreaterThanOrEqual(20);
+    for (const written of WRITTEN) {
+      expect(written.governingAfter).toBeTruthy();
+      expect(written.installerFactionId).not.toBe('');
+      expect(String(written.transition.governingFactionId || '')).not.toBe('');
+    }
+  });
+
+  it('the persisted governingFactionId is the HOLDER\'s ladder key — the exact plant reds here', () => {
+    // THIS is the assertion the planted pre-fix spelling
+    // `String(governingFaction?.id || installerFactionId || '')` fails: with no
+    // `.id` on any generated faction row (re-measured above), that expression
+    // evaluates to installerFactionId on 100% of real worlds.
+    for (const written of WRITTEN) {
+      expect(written.transition.governingFactionId)
+        .toBe(ladderFactionKey(written.governingAfter));
+      // …and it is NOT the installer. Stated as its own assertion rather than
+      // left implicit, because this is the drift itself, in one line.
+      expect(written.transition.governingFactionId)
+        .not.toBe(written.installerFactionId);
+    }
+  });
+
+  it('the writer routes through the shared helper, byte-for-byte', () => {
+    // Ties the persisted value to the SINGLE-WRITER helper by name. If a future
+    // edit reimplements the resolution inline and the two ever disagree, this
+    // reds even when the inline copy happens to look right for the common case.
+    for (const written of WRITTEN) {
+      expect(written.transition.governingFactionId)
+        .toBe(seatTransitionGoverningFactionId(written.governingAfter));
+    }
+  });
+
+  it('installerFactionId survives under its own honest name, in its own id space', () => {
+    // The repair MOVED a value; it must not have DELETED one. The installer is
+    // still recorded — under the field that actually names it — and the two
+    // fields inhabit disjoint id spaces, which is why the old value could never
+    // have been a merely-differently-spelled right answer.
+    for (const written of WRITTEN) {
+      expect(written.transition.installerFactionId).toBe(written.installerFactionId);
+      expect(written.transition.governingFactionId).toMatch(/^fac\./);
+      expect(written.transition.installerFactionId).toContain(':');
+      expect(written.transition.installerFactionId).not.toMatch(/^fac\./);
+    }
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PIN-3 — THE PERSISTED-VALUE SHIFT, MEASURED AND DECLARED
+//
+// TCD-1's "DECLARED GOLDEN SHIFT" section named the `war_continued_for_the_seat`
+// prose-variant move and "two new field appearances" — and OMITTED this: on every
+// approved `government_change` that produces a transition, the EXISTING persisted
+// field `seatTransitions[].governingFactionId` CHANGES VALUE. That is not a new
+// field appearing; it is a different string landing in a field that was already
+// being written, and a behaviour shift that rides silently is the one thing this
+// program forbids outright.
+//
+// MEASURED at this tree over the 30-world corpus above, 30 of 30 rows:
+//   before   `hamlet-7100:merchant_guilds`   (installerFactionId — the INSTALLER,
+//                                             in factionCompetition's settlement-
+//                                             scoped `${saveId}:${slug}` space)
+//   after    `fac.merchant_council`          (ladderFactionKey of the body that
+//                                             HOLDS the seat, in the ladder's
+//                                             `fac.<slug>` space)
+//
+// The change is TOTAL (30/30, never 0/30 or a subset) and it is doubly a change:
+//   • THE SUBJECT MOVES. `transferRulingPower` seats a NEW governing body derived
+//     from the challenger's government preference — measured, the post-transfer
+//     holder shares a name with NEITHER the prior holder (0/30) NOR the installer
+//     (0/30): "Feudal Stewardship" + installer "Merchant Guilds" ⇒ "Merchant
+//     Council". So the old value named a body that does not hold the seat.
+//   • THE ID SPACE MOVES. `${saveId}:${slug}` and `fac.<slug>` are disjoint, so no
+//     reader could have accepted both. The ladder's own organic writer already
+//     wrote the `fac.` space; applyWorldPulse was the one composer disagreeing.
+// ═══════════════════════════════════════════════════════════════════════════
+
+describe('TCD-1 PIN-3 — the declared persisted-value shift', () => {
+  it('the shift is TOTAL: the old spelling produced the installer on every world', () => {
+    // Re-derives the PRE-FIX expression rather than quoting its result, so this
+    // stays true against the live corpus instead of rotting into a stale figure.
+    let moved = 0;
+    for (const written of WRITTEN) {
+      const preFix = String(written.governingAfter?.id || written.installerFactionId || '');
+      // The `.id` arm never rescued it: no generated faction row carries `id`.
+      expect(preFix).toBe(written.installerFactionId);
+      expect(written.transition.governingFactionId).not.toBe(preFix);
+      moved += 1;
+    }
+    expect(moved).toBe(WRITTEN.length);
+  });
+
+  it('the shift is a different SUBJECT, not a re-spelling of the same body', () => {
+    for (const written of WRITTEN) {
+      expect(nameOf(written.governingAfter)).not.toBe(nameOf(written.challenger));
+      expect(nameOf(written.governingAfter)).not.toBe(nameOf(written.governingBefore));
+    }
   });
 });

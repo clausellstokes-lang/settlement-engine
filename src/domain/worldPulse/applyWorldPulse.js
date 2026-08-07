@@ -963,6 +963,26 @@ export function applyWorldPulseOutcomes({
             // INSTALLER under the governing field on every generated world,
             // because no powerStructure row carries `.id`; installerFactionId is
             // still emitted below under its own honest name.
+            //
+            // ⚠ DECLARED PERSISTED-VALUE SHIFT (measured 2026-08-07, omitted from
+            // TCD-1's own "DECLARED GOLDEN SHIFT" section and recorded here so it
+            // cannot ride silently). This is NOT a new field appearing: it is a
+            // NEW VALUE in a field that was already being persisted. Measured over
+            // 30 real generated worlds (5 tiers × 6 seeds) driven through this very
+            // apply mouth, the change is TOTAL — 30 of 30 rows, never a subset:
+            //     before  `hamlet-7100:merchant_guilds`  installerFactionId, in
+            //             factionCompetition's `${saveId}:${stablePart(name)}` space
+            //     after   `fac.merchant_council`         ladderFactionKey of the body
+            //             that HOLDS the seat, in the ladder's `fac.<slug>` space
+            // It is doubly a change. THE SUBJECT MOVES: transferRulingPower seats a
+            // NEW governing body derived from the challenger's preference, and the
+            // post-transfer holder shares a name with neither the prior holder (0/30)
+            // nor the installer (0/30) — "Feudal Stewardship" + installer "Merchant
+            // Guilds" ⇒ "Merchant Council". So the old value named a body that does
+            // not hold the seat. THE ID SPACE MOVES: the two spaces are disjoint, so
+            // no reader could ever have accepted both, and the ladder's own organic
+            // writer was already on `fac.` — this composer was the lone outlier.
+            // Pinned by tests/domain/warSeatBooksFactionAddress.test.js (PIN-3).
             const governingFactionId = seatTransitionGoverningFactionId(governingFaction);
             const governingFactionName = governingFaction ? nameOf(governingFaction) : '';
             const seatTransition = {
