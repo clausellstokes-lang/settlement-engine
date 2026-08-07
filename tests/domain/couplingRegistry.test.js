@@ -349,7 +349,7 @@ describe('CW-0 coupling registry', () => {
     expect(WR7_ENCOUNTER_COUPLING.read)
       .toBe('src/domain/worldPulse/envoyEncounter.js#selectEnvoyEncounters');
     expect(WR7_TWO_PICTURE_PARLAY_COUPLING.read)
-      .toBe('src/domain/worldPulse/negotiationPictures.js#negotiateFromPictures');
+      .toBe('src/domain/worldPulse/negotiationEvaluation.js#negotiateFromPictures');
     expect(WR7_CARRIED_SHEET_COUPLING.read)
       .toBe('src/domain/worldPulse/peaceTerms.js#materializeCarriedTermSheet');
     expect(WR7_ENVOY_PLANT_COUPLING.read)

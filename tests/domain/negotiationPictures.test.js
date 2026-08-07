@@ -2,15 +2,20 @@ import { describe, expect, it } from 'vitest';
 
 import {
   applyNegotiationPictureMutation,
-  compareOfferToResponderDraft,
   createNegotiationPicture,
-  evaluateNegotiationPicture,
   mutateNegotiationPicture,
-  negotiateFromPictures,
   normalizeNegotiationPicture,
   normalizeParlayTermSheet,
-  validateTermSheetAgainstPictures,
 } from '../../src/domain/worldPulse/negotiationPictures.js';
+// The four EVALUATION entry points moved to their own module so the picture RECORD
+// layer stays off the first-paint graph. Behaviour is unchanged — the bodies moved
+// verbatim — so every expectation below still addresses the same code.
+import {
+  compareOfferToResponderDraft,
+  evaluateNegotiationPicture,
+  negotiateFromPictures,
+  validateTermSheetAgainstPictures,
+} from '../../src/domain/worldPulse/negotiationEvaluation.js';
 import { materializeCarriedTermSheet } from '../../src/domain/worldPulse/peaceTerms.js';
 
 function subject(settlementId, patch = {}) {

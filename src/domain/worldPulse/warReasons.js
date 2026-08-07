@@ -108,6 +108,7 @@ import {
   DECLARABLE_WAR_REASON_TYPES,
   REASON_MIRRORS,
   isWarReasonType,
+  reasonPairKey,
 } from './warReasonTaxonomy.js';
 import { buildPatronCounterforceIndex, patronCounterforceFor } from './patronCounterforce.js';
 import { allianceObligationReason, joinAnchorOf } from './warCoalitionLedger.js';
@@ -196,11 +197,12 @@ export const REASON_TUNING = Object.freeze({
 
 /** @typedef {Record<string, ReasonPairEntry>} ReasonLedger keyed by pairKey */
 
-/** The directed pair key: `from`'s reasons regarding `to`.
- * @param {unknown} fromId @param {unknown} toId @returns {string} */
-export function reasonPairKey(fromId, toId) {
-  return `${String(fromId)}>${String(toId)}`;
-}
+/** The directed pair key: `from`'s reasons regarding `to`. MOVED DOWN to the
+ * dependency-free `warReasonTaxonomy.js` leaf (F29 layering — the 108-line
+ * peaceTermsPrimitives leaf needed only this template and reaching for it through
+ * this 1,100-line mover closed a 39-module cycle). Re-exported VERBATIM here so
+ * every existing consumer import site — src/ and tests/ alike — is unchanged. */
+export { reasonPairKey };
 
 /** @param {number} n @returns {number} */
 function round4(n) { return Math.round(n * 10000) / 10000; }

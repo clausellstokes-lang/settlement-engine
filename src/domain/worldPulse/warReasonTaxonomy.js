@@ -126,3 +126,26 @@ export const REASON_MIRRORS = Object.freeze({
 export function isWarReasonType(type) {
   return typeof type === 'string' && WAR_REASON_TYPES.includes(type);
 }
+
+/**
+ * The DIRECTED pair key — `from`'s case against `to`. The one authority for the
+ * reason-ledger key shape; `warReasons.js` re-exports it verbatim so no consumer
+ * import site moved.
+ *
+ * WHY IT LIVES IN THIS LEAF AND NOT IN THE MOVER (F29 layering): the key is a
+ * two-line string template, but `warReasons.js` is a 1,100-line orchestrator that
+ * imports ~25 modules (distanceRead, corruptionWeb, informationStatecraft,
+ * convergence …). The 108-line `peaceTermsPrimitives.js` leaf needed ONLY this
+ * template, and reaching for it through the mover closed a 39-MODULE IMPORT CYCLE
+ * across src/domain — the whole peaceTerms/envoyErrand family plus roads/state.js.
+ * Moving the FUNCTION down to the dependency-free leaf is the house cure
+ * (deityConstants / stablePart / userRouteIdentity): the taxonomy is already the
+ * authority for what a reason IS, so the key that addresses a reason pair belongs
+ * beside it. `corruptionWeb.js` keeps its deliberately INLINED copy and its
+ * drift-guard test — that duplication predates this move and is untouched by it.
+ *
+ * @param {unknown} fromId @param {unknown} toId @returns {string}
+ */
+export function reasonPairKey(fromId, toId) {
+  return `${String(fromId)}>${String(toId)}`;
+}

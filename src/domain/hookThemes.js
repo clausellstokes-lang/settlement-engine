@@ -23,6 +23,17 @@
  * is not authorized over human prose, so the classifier must be incapable of
  * mistaking human prose for an authored template.
  *
+ * WHY THIS FILE LIVES IN src/domain AND NOT src/generators (moved 2026-08-07).
+ * It was authored under src/generators, but three of its five consumers are domain
+ * modules (dossier/plotHooks.js, dossier/hookRetention.js, hookEscalation.js), and
+ * those edges REDDENED tests/build/domainGeneratorsBoundary.js: the domain is the pure
+ * kernel every other layer trusts, so it must not reach UP into generators. The cure
+ * for that ratchet is inversion, never a widened baseline — and inversion is free here
+ * because this module is a zero-import leaf that imports nothing from either layer. It
+ * therefore moved DOWN to the layer that must not reach up; the two generator-side
+ * consumers (npcGenerator.js, hookVariety.js) now reach DOWN into domain, which is the
+ * already-established permitted direction. Nothing about the module's content changed.
+ *
  * WHY THE TEMPLATES ARE SPELLED OUT HERE rather than derived by importing the
  * pools: this module is a ZERO-IMPORT LEAF. Its dossier-side consumers
  * (src/domain/dossier/**) would, by reaching into src/data/npcData.js, pull the

@@ -47,7 +47,7 @@ import { afterEach, describe, expect, test } from 'vitest';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { drawUnique } from '../../src/generators/hookVariety.js';
-import { themeOfText, UNTYPED } from '../../src/generators/hookThemes.js';
+import { themeOfText, UNTYPED } from '../../src/domain/hookThemes.js';
 import { NPC_FACTION_LOYALTY } from '../../src/data/npcData.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';

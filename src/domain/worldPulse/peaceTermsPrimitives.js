@@ -13,7 +13,12 @@
  * file 2 of 4).
  */
 import { clamp01 } from '../../kernel/math.js';
-import { reasonPairKey } from './warReasons.js';
+// F29 LAYERING: read the pair key from the DEPENDENCY-FREE taxonomy leaf, never
+// from the warReasons mover. This file is a 108-line primitives leaf; warReasons.js
+// is a 1,100-line orchestrator importing ~25 modules, and that one edge closed a
+// 39-module import cycle spanning the whole peaceTerms/envoyErrand family plus
+// roads/state.js. warReasons.js re-exports the same function verbatim.
+import { reasonPairKey } from './warReasonTaxonomy.js';
 
 /** @typedef {import('./peaceTermsCatalog.js').TreatyLedger} TreatyLedger */
 

@@ -2,7 +2,7 @@
  * hookThemeTotality.walker.test.js — HABITAT REMOVAL for VOCABULARY ROT
  * (wave HK-1, docs/DESIGN_HOOK_NONREDUNDANCY.md §3).
  *
- * THE CLASS: src/generators/hookThemes.js names the dramatic BEAT of every
+ * THE CLASS: src/domain/hookThemes.js names the dramatic BEAT of every
  * authored hook template so the retention layer can tell "two actors, one story"
  * from "two stories". A theme map is a PARALLEL structure — nothing in the
  * language ties it to the pools it describes — so it rots in three silent ways:
@@ -46,7 +46,7 @@ import {
   taggedTemplates,
   themeOfText,
   themeOfRelArchetype,
-} from '../../src/generators/hookThemes.js';
+} from '../../src/domain/hookThemes.js';
 
 /** Every authored loyalty template the generator can draw, in pool order. */
 const livePoolTemplates = Object.values(NPC_FACTION_LOYALTY).flat();
@@ -78,7 +78,7 @@ describe('HK-1 hook-theme vocabulary — totality against the live pools', () =>
       `\nAuthored loyalty template(s) with NO theme tag. Every authored template must`
       + ` carry exactly one theme from the closed set, or it is invisible to hook`
       + ` retention forever. Add a row to AUTHORED_HOOK_THEMES in`
-      + ` src/generators/hookThemes.js for each:\n${untagged.map((t) => `  + ${t}`).join('\n')}\n`,
+      + ` src/domain/hookThemes.js for each:\n${untagged.map((t) => `  + ${t}`).join('\n')}\n`,
     ).toEqual([]);
     expect(
       orphaned,

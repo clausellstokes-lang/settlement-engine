@@ -1,7 +1,7 @@
 import { compareCodepoint } from '../deterministicSort.js';
 import { traditionHook } from '../traditions/prose.js';
 import { normalizePlotHook } from '../../lib/proseSeams.js';
-import { themeOfText, themeOfRelArchetype, UNTYPED } from '../../generators/hookThemes.js';
+import { themeOfText, themeOfRelArchetype, UNTYPED } from '../hookThemes.js';
 import { retainHooks, retentionKey, editedHookTextKeys } from './hookRetention.js';
 
 const TENSION_LABELS = Object.freeze({

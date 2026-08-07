@@ -9,7 +9,16 @@ import { compareCodepoint } from '../deterministicSort.js';
 import { isWarReasonType } from './warReasonTaxonomy.js';
 import { normalizeJoinAnchor } from './warCoalitionLedger.js';
 import { migrateDispositionStats } from './dispositionLedger.js';
-import { normalizeEnvoyErrands } from './envoyErrand.js';
+// FIRST-PAINT SEAM — READ THE NORMALIZER FROM ITS HOME, NOT THE BARREL. This module
+// is on the store's critical path (main.jsx -> store/index.js -> campaignSlice.js ->
+// HERE), and `envoyErrand.js` is a 691-line BARREL over nine leaves whose transitive
+// closure reaches the parlay/appraisal machinery, beliefMap and the 53 kB
+// distanceRead.js digest reader. ensureWorldState needs exactly ONE save-normalizer,
+// which envoyErrand.js merely re-exports from here. Taking it from the barrel put ~38
+// modules of negotiation and geography on the browser's critical path to normalize a
+// persisted array. Same function, same behaviour — only the address changed.
+// @enforced-by tests/build/userRouteIdentityLeaf.test.js
+import { normalizeEnvoyErrands } from './envoyErrandRecords.js';
 
 export const WORLD_STATE_SCHEMA_VERSION = 2;
 

@@ -25,7 +25,9 @@
  * @enforced-by tests/lint/namedPersonTransitTotality.walker.test.js
  *   + tests/domain/envoyErrand.test.js
  */
-import { negotiateFromPictures, normalizeNegotiationPicture } from './negotiationPictures.js';
+import { normalizeNegotiationPicture } from './negotiationPictures.js';
+// The parlay EVALUATION moved out of negotiationPictures.js (first-paint split).
+import { negotiateFromPictures } from './negotiationEvaluation.js';
 import {
   ENVOY_CONTINUATION_SCHEMA_VERSION,
   asObject,

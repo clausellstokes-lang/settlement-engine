@@ -48,7 +48,7 @@
  */
 
 import { random as _rng } from '../kernel/rngContext.js';
-import { UNTYPED } from './hookThemes.js';
+import { UNTYPED } from '../domain/hookThemes.js';
 
 /**
  * The theme a candidate BLOCKS, or null when it blocks nothing. `UNTYPED`, an

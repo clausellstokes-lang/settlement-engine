@@ -26,7 +26,13 @@ const DOMAIN = join(ROOT, 'src', 'domain');
 
 // The accessor DEFINITION writes a VARIABLE key (`setSpatialLedger(worldState, key, …)`);
 // exclude it so the scan sees only the literal-key CALL SITES.
-const ACCESSOR_DEF = 'src/domain/spatial/distanceRead.js';
+// ADDRESS MOVED 2026-08-07 (F29 first-paint repair): the four namespace accessors were
+// extracted VERBATIM out of the 1,080-line distanceRead.js digest reader into this
+// zero-import leaf, because importing any symbol from the digest reader pulled ~53 kB of
+// geography onto the first-paint critical path. distanceRead.js now only RE-EXPORTS them
+// and holds no accessor definition, so it is no longer the file to exclude — this is a
+// pointer correction, not a widened exemption (still exactly ONE file skipped).
+const ACCESSOR_DEF = 'src/domain/spatial/spatialLedgerAccess.js';
 
 function walk(dir, out = []) {
   for (const e of readdirSync(dir)) {

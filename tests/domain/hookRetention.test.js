@@ -30,7 +30,7 @@ import {
   editedHookTextKeys,
   DEFAULT_RETENTION_TUNING,
 } from '../../src/domain/dossier/hookRetention.js';
-import { themeOfText, themeOfRelArchetype, UNTYPED } from '../../src/generators/hookThemes.js';
+import { themeOfText, themeOfRelArchetype, UNTYPED } from '../../src/domain/hookThemes.js';
 
 /** A hook shaped like the aggregator's own output. */
 const hook = (text, extra = {}) => ({ text, category: 'npc', priority: 5, accent: false, ...extra });

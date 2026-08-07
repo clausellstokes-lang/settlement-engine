@@ -50,7 +50,7 @@
  */
 import { compareCodepoint } from '../deterministicSort.js';
 import { walkUserEdits } from '../userEdits.js';
-import { UNTYPED, hookThemeKey } from '../../generators/hookThemes.js';
+import { UNTYPED, hookThemeKey } from '../hookThemes.js';
 
 /**
  * The shape this layer needs from a hook, and no more. Both collectors emit

@@ -30,7 +30,7 @@
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { retainHooks, retentionKey, editedHookTextKeys } from './dossier/hookRetention.js';
-import { themeOfText } from '../generators/hookThemes.js';
+import { themeOfText } from './hookThemes.js';
 
 // ── Hook collection ─────────────────────────────────────────────────────
 // Walks every location the generator might have planted hooks and

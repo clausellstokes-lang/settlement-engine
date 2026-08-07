@@ -35,10 +35,8 @@ import {
   ratificationPowerWeight,
   ratifyTermSheet,
 } from '../../src/domain/worldPulse/coalitionRatification.js';
-import {
-  createNegotiationPicture,
-  negotiateFromPictures,
-} from '../../src/domain/worldPulse/negotiationPictures.js';
+import { createNegotiationPicture } from '../../src/domain/worldPulse/negotiationPictures.js';
+import { negotiateFromPictures } from '../../src/domain/worldPulse/negotiationEvaluation.js';
 import { TESTIMONY_DESIRED_OUTCOMES } from '../../src/domain/worldPulse/envoyTestimony.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');

@@ -5,7 +5,13 @@
  * No membership list and no stored expenditure total is permitted here.
  */
 
-import { getSpatialLedger } from '../spatial/distanceRead.js';
+// FIRST-PAINT SEAM: read the accessor from the ZERO-IMPORT leaf, never from
+// distanceRead.js. This module is reached statically from the store (main.jsx ->
+// store/index.js -> campaignSlice.js -> worldState.js -> HERE), and distanceRead.js is
+// the 1,080-line / ~53 kB frozen-digest reader that "never reaches first paint" —
+// importing one property read from it put the whole geography on the critical path.
+// @enforced-by tests/build/userRouteIdentityLeaf.test.js
+import { getSpatialLedger } from '../spatial/spatialLedgerAccess.js';
 import { isWarReasonType } from './warReasonTaxonomy.js';
 import { allianceRowForAnchor, canonicalAllianceRows } from './warCoalitionGraph.js';
 

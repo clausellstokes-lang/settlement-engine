@@ -14,7 +14,7 @@ import { nativeSemanticName, nativeSemanticNames } from '../domain/content/custo
 import { getUpgradeOpportunities } from './economicGenerator.js';
 import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';
 import { drawUnique } from './hookVariety.js';
-import { themeOfText } from './hookThemes.js';
+import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js';

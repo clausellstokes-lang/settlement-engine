@@ -32,11 +32,14 @@
  * PURE: no world state, no writer, no RNG.
  */
 
+import { normalizeParlayTermSheet } from './negotiationPictures.js';
+// The parlay EVALUATION moved out of negotiationPictures.js so the picture RECORD
+// layer (which the save path normalizes through) stops dragging peaceTermsAppraisal ->
+// beliefMap -> distanceRead onto first paint. Same functions, verbatim; new address.
 import {
   compareOfferToResponderDraft,
   evaluateNegotiationPicture,
-  normalizeParlayTermSheet,
-} from './negotiationPictures.js';
+} from './negotiationEvaluation.js';
 // THE ONE COURT-DESIRE VOCABULARY. `desiredOutcome` means the same thing on a
 // ballot as it does on a seat reading testimony, so it is declared ONCE and
 // imported — two spellings of peace would silently break unanimity (the
