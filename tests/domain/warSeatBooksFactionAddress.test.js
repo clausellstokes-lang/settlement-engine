@@ -19,7 +19,7 @@
  */
 import { describe, expect, it } from 'vitest';
 
-import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { gen } from '../simulation/simHelpers.js';
 import { governingFactionOf, nameOf } from '../../src/domain/rulingPower.js';
 import { realmFactionPulseId } from '../../src/domain/dossier/realmEntityWeb.js';
 import { getSpatialLedger, setSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
@@ -66,18 +66,31 @@ const SEEDS = Object.freeze([7100, 7101, 7102, 7103, 7104, 7105]);
  * re-measures that every asked-for seed ARRIVED as `settlement._seed`. A corpus
  * that silently collapses to one tier and one lucky world is a lottery wearing a
  * denominator, and nothing in the old file could have said so.
+ *
+ * ⚠ AND THE CALL GOES THROUGH THE ESTATE'S ONE SPELLING, `gen` — not a hand-rolled
+ * `generateSettlementPipeline(...)`. `gen` passes `customContent: {}`, which is
+ * not decoration: with that option ABSENT, dependencyEngine's `_override` stays
+ * null and the registry falls through to `getCustomContentSource()()` — the LIVE
+ * STORE SEAM (src/lib/dependencyEngine.js:128). The default source returns `{}`
+ * today, so both spellings generate BYTE-IDENTICAL worlds here (verified, 30/30,
+ * every tier/seed/name/roster/ladder-key equal). But the hand-rolled form leaves
+ * this corpus reading AMBIENT state, so anything that ever wires a source — an
+ * app boot, another test in the same worker — would silently move these worlds.
+ * A pin whose corpus can be moved from outside the pin is the same lottery in a
+ * second costume; `customContent: {}` pins it headless.
  */
 function corpus() {
   const rows = [];
   for (const seed of SEEDS) {
     for (const tier of TIERS) {
-      // `settType` is the config key; the seed goes in the THIRD slot. A string
-      // seed keyed by tier+seed keeps the 30 worlds independent rather than
-      // making one seed's world reappear at five tiers.
+      // `settType` is the config key; the seed is `gen`'s second argument, which
+      // routes it to options.seed. A string seed keyed by tier+seed keeps the 30
+      // worlds independent rather than making one seed's world reappear at five
+      // tiers.
       const askedSeed = `tcd1:${tier}:${seed}`;
       let generated;
       try {
-        generated = generateSettlementPipeline({ settType: tier }, null, { seed: askedSeed });
+        generated = gen({ settType: tier }, askedSeed);
       } catch {
         continue;
       }
