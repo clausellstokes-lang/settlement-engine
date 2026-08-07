@@ -332,6 +332,58 @@ describe('engine-gated virtual rows — TRACE against live source', () => {
     expect(ledgerWriters.get('beliefMaps')).toBeTruthy();
   });
 
+  test('THE ESPIONAGE ROW\'S DORMANCY CLAIM IS THE NARROWED ONE, and the old one is FALSE', () => {
+    // ⚠⚠ WHY THIS PIN EXISTS. Through ES-2 the espionage row carried the strongest dormancy
+    // sentence in this cohort: "No module under src/ imports the espionage set", and "it
+    // writes nothing in either flag state". ES-3 mounted a stage in the envoy pulse that
+    // writes an errand row AND a belief map, and shipped WITHOUT touching this row — so the
+    // certification authority spent a commit asserting an invariant its own wave had
+    // broken, which is worse than carrying no row at all because the walkers read this as
+    // the authority. The narrowing is pinned by NAME and by ABSENCE so a later wave cannot
+    // restore the wider sentence by copying an older row.
+    const row = rowFor(ESPIONAGE);
+    const leaves = row.module.split(',');
+    for (const leaf of [
+      'src/domain/worldPulse/espionage/espionageTap.js',
+      'src/domain/worldPulse/espionage/espionageProducts.js',
+      'src/domain/worldPulse/espionage/espionageProductStage.js',
+    ]) expect(leaves).toContain(leaf);
+
+    const names = row.invariants.map((invariant) => invariant.name);
+    expect(names).toContain('dormancy_rests_on_the_gate_and_on_an_empty_ledger');
+    // anchored: the positive one line up proves `names` is populated and spellable, so this absence is the retirement of a name and not an empty list
+    expect(names).not.toContain('dormancy_is_the_absence_of_a_caller');
+    const prose = [
+      row.aliveness.other,
+      ...row.invariants.map((invariant) => `${invariant.description} ${invariant.check}`),
+    ].join(' ');
+    // The subject is a real, populated string — the non-vacuity control both absences
+    // below stand on, and the reason neither of them can pass by measuring nothing.
+    expect(prose.length).toBeGreaterThan(2000);
+    // anchored: the length control one line up proves `prose` is populated, so this measures a DELETED claim rather than an empty subject
+    expect(prose).not.toContain('writes nothing in either flag state');
+    // anchored: the same length control governs this line, and the live-source re-measurement below proves the sentence was deleted because it is FALSE
+    expect(prose).not.toContain('No module under src/ imports the espionage set');
+
+    // ...and the two sentences are gone because they are FALSE, RE-MEASURED here against
+    // live source rather than taken on the wave's word. Without this half the assertions
+    // above only prove that some words were deleted.
+    const importers = sourceFiles
+      .filter(({ rel, src }) => !rel.includes('/espionage/')
+        && /from\s+'[^']*espionage\/[A-Za-z]+\.js'/.test(src))
+      .map(({ rel }) => rel);
+    expect(importers).toContain('src/domain/worldPulse/envoyPulse.js');
+    const stage = sourceFiles
+      .find(({ rel }) => rel === 'src/domain/worldPulse/espionage/espionageProductStage.js');
+    expect(stage).toBeTruthy();
+    // The two writes the narrowed claim now has to live with, named at their call form.
+    expect(/\bwriteErrands\s*\(/.test(stage.src)).toBe(true);
+    expect(/\breconcileBelief\b/.test(
+      /** @type {string} */ (sourceFiles
+        .find(({ rel }) => rel === 'src/domain/worldPulse/espionage/espionageProducts.js').src),
+    )).toBe(true);
+  });
+
   test('the conquest row single-writer claim holds: one file writes the license ledger', () => {
     const writers = [...(ledgerWriters.get(VENGEANCE_LICENSE_LEDGER_KEY) || [])].sort();
     expect(writers).toEqual(['src/domain/worldPulse/vengeanceLicense.js']);

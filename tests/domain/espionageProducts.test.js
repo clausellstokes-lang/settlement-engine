@@ -149,10 +149,65 @@ function withBeliefs(worldState, { host = HOST_BELIEF, home = null } = {}) {
 const AXES_LIT = Object.freeze({ beliefAxesEnabled: true, believedConditionsEnabled: true });
 
 /** One covert mission, seeded beliefs, ready to walk. */
-function mission({ rules = AXES_LIT, covert = null, host = HOST_BELIEF, home = null } = {}) {
-  const { worldState, errand } = mintCovertFixture(litCovertWorld(rules), { covert });
+function mission({
+  rules = AXES_LIT, covert = null, host = HOST_BELIEF, home = null, legs = undefined,
+} = {}) {
+  const { worldState, errand } = mintCovertFixture(litCovertWorld(rules), {
+    covert, ...(legs ? { legs } : {}),
+  });
   return { worldState: withBeliefs(worldState, { host, home }), errand };
 }
+
+// ── The three-stop world the STANDOFF is reachable in ──────────────────────────
+/**
+ * ⚠ THE STANDOFF WAS UNREACHABLE AT EVERY EARLIER FIXTURE, AND THE REASON IS ARITHMETIC.
+ * `assessedRisk` is `catch01 x clusterHostility01 x flawDistortion`, and in the two-stop
+ * world above the only stop AHEAD of the waypoint is the target, which carries no hostile
+ * edge — so `clusterHostility01` was 0 and the product was 0 at every input. A term that can
+ * only ever be zero is not an unpinned arm, it is an unreachable one, and a battery cannot
+ * tell the difference between the two by staying green.
+ *
+ * This world fixes each factor by name: a THIRD stop so the approach is measured over a
+ * genuinely hostile remainder AND the leg stack is at its second rung, a well-policed target
+ * (`safetyProfile.safetyRatio` is the security lever `readCorruptionClimate` actually reads,
+ * off the ITEM rather than the settlement), and a FRIENDLY waypoint so the integrity term
+ * does not quietly raise the bar out of reach.
+ */
+function policedTown(id, name) {
+  return { ...town(id, name), safetyProfile: { safetyRatio: 2.5 } };
+}
+const STANDOFF_SNAPSHOT = Object.freeze({
+  settlements: [
+    town('ashford', 'Ashford'),
+    town('westmarch', 'Westmarch'),
+    policedTown('harrowgate', 'Harrowgate'),
+    policedTown('irontown', 'Irontown'),
+  ],
+});
+const STANDOFF_GRAPH = Object.freeze({
+  edges: [
+    { from: 'ashford', to: 'westmarch', relationshipType: 'allied' },
+    { from: 'ashford', to: 'harrowgate', relationshipType: 'hostile' },
+    { from: 'ashford', to: 'irontown', relationshipType: 'hostile' },
+  ],
+});
+const STANDOFF_LEGS = Object.freeze([
+  { fromId: 'ashford', toId: 'westmarch', departTick: 10, arrivalTick: 12 },
+  { fromId: 'westmarch', toId: 'harrowgate', departTick: 20, arrivalTick: 22 },
+  { fromId: 'harrowgate', toId: 'irontown', departTick: 30, arrivalTick: 32 },
+]);
+const STANDOFF_COVERT = Object.freeze({
+  demand: 'confirm',
+  product: 'confirm',
+  subjectId: 'irontown',
+  itinerary: [
+    { face: 'covert', settlementId: 'westmarch', stayTicks: 2 },
+    { face: 'covert', settlementId: 'harrowgate', stayTicks: 2 },
+    { face: 'declared', settlementId: 'irontown', stayTicks: 2 },
+  ],
+});
+const TIMID_NPC = Object.freeze({ personality: { dominant: 'cowardly', flaw: 'timid' } });
+const BOLD_NPC = Object.freeze({ personality: { dominant: 'bold' } });
 
 // ── 1. THE WRITER BOUNDARY (J-ES-5) ────────────────────────────────────────────
 describe('ES-3 the writer boundary — the products ride reconcileBelief, never the plant road', () => {
@@ -305,6 +360,16 @@ describe('ES-3 the tap ladder — a spy never reports purer than his access', ()
     expect(perfPoison01({ ...malicious, relationship: 'allied' })).toBe(0);
     // And a saintly hostile court poisons nothing either — the first factor.
     expect(perfPoison01({ ...malicious, malice01: 0, lawfulness01: 1 })).toBe(0);
+    // ⚠ THAT LAST LINE ALONE PROVES LESS THAN IT READS, AND THE GAP IS A FLOOR. With malice
+    // and desperation both zero every POSITIVE term in `lieWillingness` is already zero, so
+    // the clamp returns 0 whether or not the lawful-good RESTRAINT term exists — the pin
+    // holds with `- restraint` deleted. The restraint has to be measured where it is
+    // SUBTRACTING from something: a court that is genuinely malicious AND genuinely lawful
+    // poisons strictly less than the same malice without the conscience.
+    const wicked = { malice01: 0.8, lawfulness01: 0, desperation01: 0, relationship: 'hostile' };
+    expect(perfPoison01({ ...wicked, lawfulness01: 1 }))
+      .toBeLessThan(perfPoison01(wicked));
+    expect(perfPoison01({ ...wicked, lawfulness01: 1 })).toBeGreaterThan(0);
     // The rung ladder is normalized against its own top rung and is zero off-ladder.
     expect(hostileRung01('hostile')).toBe(1);
     expect(hostileRung01('rival')).toBeLessThan(hostileRung01('cold_war'));
@@ -424,6 +489,33 @@ describe('ES-3 the three products — what each one crosses, and what it refuses
     // The legs it did NOT name are untouched: no opinion about the garrison's readiness.
     expect(out.groundTruth.readiness).toBe(HOME_PRIOR.readiness);
     expect(out.groundTruth.routePositionBand).toBeUndefined();
+  });
+
+  test('J-ES3-E: an ACQUIRE naming NO legs is a general reconnaissance, never inert', () => {
+    // THE JUDGMENT, MEASURED. `legRefs` is CONDITIONAL on the errand row, so a lawful
+    // acquire may name nothing at all — and the ruling is that such a mission crosses
+    // everything readable rather than landing having learned nothing. It was recorded as
+    // decided and never asserted: deleting the `word === 'acquire' && !refs.length` clause
+    // left the whole battery green while every legless acquire silently became a no-op.
+    const sweeping = productGroundTruth({
+      product: 'acquire', prior: HOME_PRIOR, read, conditionsLit: true,
+    });
+    expect(sweeping.crossed).toEqual([
+      'allianceLabel', 'faithLabel', 'readiness', 'strengthBand', 'conditionsBands',
+    ]);
+    expect(sweeping.groundTruth.strengthBand).toBe(3);
+    expect(sweeping.groundTruth.conditionsBands).toEqual(read.conditions);
+    // An EMPTY array is the same mission as an absent one — the DTO drops the key when the
+    // list is empty, so the two spellings must not disagree about what was asked for.
+    expect(productGroundTruth({
+      product: 'acquire', prior: HOME_PRIOR, read, legRefs: [], conditionsLit: true,
+    }).crossed).toEqual(sweeping.crossed);
+    // BOTH SIDES LIVE, and this is the half that makes the clause load-bearing rather than
+    // decorative: the SAME product naming ONE leg crosses that leg and nothing else. Without
+    // it the assertion above would hold for a function that always swept.
+    expect(productGroundTruth({
+      product: 'acquire', prior: HOME_PRIOR, read, legRefs: ['strength'], conditionsLit: true,
+    }).crossed).toEqual(['strengthBand']);
   });
 
   test('REFUTE crosses everything readable, so the contradiction term can bite', () => {
@@ -613,8 +705,13 @@ describe('ES-3 the stage — the gradient accrues once, persists, and survives t
   });
 
   test('MAGIC lands at the stop; MUNDANE holds everything until the home mouth', () => {
+    // ⚠ THE SEND PRIOR IS HELD BELOW THE CEILING for the fold test's reason exactly: on the
+    // file's 0.7 seed a single send CLAMPS `confidence01` at 1.0, so "the certainty rose"
+    // would have been true for every accuracy the tap ladder could possibly produce — and
+    // for no accuracy at all. At 0.2 the rise is a measurement.
+    const SEND_PRIOR = Object.freeze({ ...HOME_PRIOR, confidence01: 0.2 });
     // MAGIC — the pair gate is true at both ends, so the read is SENT as it is taken.
-    const magic = mission({ home: HOME_PRIOR });
+    const magic = mission({ home: SEND_PRIOR });
     const sent = run(magic.worldState, 13);
     expect(sent.gatherings[0].sentHome).toBe(true);
     expect(envoyErrandsOf(sent.worldState)[0].covert.gathered[0].sentHome).toBe(true);
@@ -622,7 +719,8 @@ describe('ES-3 the stage — the gradient accrues once, persists, and survives t
     expect(sent.landings[0]).toMatchObject({ world: 'magic', reason: 'landed', changed: true });
     const landed = beliefRecord(sent.worldState, 'ashford', 'irontown');
     expect(landed.lastUpdateTick).toBe(13);
-    expect(landed.confidence01).toBeGreaterThan(HOME_PRIOR.confidence01);
+    expect(landed.confidence01).toBeGreaterThan(SEND_PRIOR.confidence01);
+    expect(landed.confidence01).toBeLessThan(1);
     // A CONFIRM CROSSES NO OBSERVED SLOT — its ground truth IS the prior, which is the
     // whole product. ⚠ THE BAND STILL DRIFTS, AND SAYING SO IS THE POINT: `reconcileBelief`
     // re-anchors every numeric attribute toward a FIDELITY-DEGRADED truth (`accuracy x gt +
@@ -648,7 +746,16 @@ describe('ES-3 the stage — the gradient accrues once, persists, and survives t
   });
 
   test('the MUNDANE fold at the home mouth lands the whole gradient, once', () => {
-    const { worldState } = mission({ home: HOME_PRIOR });
+    // ⚠⚠ THE PRIOR IS HELD BELOW THE CEILING ON PURPOSE, AND THE SHAPE IT DODGES HAS A
+    // NAME: CEILING SATURATION. `confidence01` is CLAMPED at 1.0, and at the file's own
+    // 0.7 prior a single report already saturates it — MEASURED across eleven priors, the
+    // correct ONE-report fold and a NINE-report echo chamber BOTH land exactly 1.0 from
+    // prior 0.5 upward. The equality this test exists for therefore HELD UNDER THE VERY
+    // DEFECT IT EXCLUDES, which is how it shipped. At 0.2 the honest fold lands 0.7 while
+    // the echo chamber still lands 1.0, so the arithmetic has room to move and the pin
+    // bites. The REFUTE test below holds its prior at 0.2 for exactly this reason.
+    const FOLD_PRIOR = Object.freeze({ ...HOME_PRIOR, confidence01: 0.2 });
+    const { worldState } = mission({ home: FOLD_PRIOR });
     let state = run(worldState, 13, MUNDANE_SNAPSHOT).worldState;
     // Walk the REAL writers to the home mouth: advance, return, advance, mark home.
     for (let t = 14; t <= 30; t += 1) {
@@ -683,7 +790,7 @@ describe('ES-3 the stage — the gradient accrues once, persists, and survives t
     expect(gradient.length).toBeGreaterThan(2);
     expect(new Set(gradient.map((row) => row.tap))).toEqual(new Set(['beliefs', 'performance']));
     expect(gradient.every((row) => row.sentHome === undefined)).toBe(true);
-    expect(beliefRecord(state, 'ashford', 'irontown').lastUpdateTick).toBe(HOME_PRIOR.lastUpdateTick);
+    expect(beliefRecord(state, 'ashford', 'irontown').lastUpdateTick).toBe(FOLD_PRIOR.lastUpdateTick);
 
     const fold = run(state, 40, MUNDANE_SNAPSHOT);
     expect(fold.landings).toHaveLength(1);
@@ -703,12 +810,12 @@ describe('ES-3 the stage — the gradient accrues once, persists, and survives t
     expect(landedRecord.lastUpdateTick).toBe(40);
     // ...and the record the stage wrote is EXACTLY the record ONE such telling produces,
     // recomputed here independently through the substrate's own function. A threshold would
-    // not have caught the defect: `weight x CONF_GAIN` on a 0.7 prior CLAMPS at 1.0 whether
-    // the fold hands over one report or nine, so the inflation would have hidden behind the
-    // ceiling. Equality against a single-report reconcile is the only shape that sees it.
+    // not have caught the defect — `weight x CONF_GAIN` CLAMPS at 1.0 whether the fold hands
+    // over one report or nine — so the shape has to be an EQUALITY against a single-report
+    // reconcile, at a prior where that equality can fail.
     const oneTelling = reconcileBelief({
-      prior: HOME_PRIOR,
-      groundTruth: { ...HOME_PRIOR },
+      prior: FOLD_PRIOR,
+      groundTruth: { ...FOLD_PRIOR },
       reports: [{
         accuracy01: best,
         ageTicks: 0,
@@ -721,9 +828,111 @@ describe('ES-3 the stage — the gradient accrues once, persists, and survives t
       }],
       now: 40,
     });
+    // THE CLAIM, stated on three slots rather than one. `readiness` is re-anchored by the
+    // AGGREGATE WEIGHT, so nine reports move it at every prior measured — it is the term
+    // that sees the echo chamber whether or not the certainty is saturated. `strengthBand`
+    // is named separately because BANDING IS LOSSY: it discriminates at a confident prior
+    // and rounds the same difference away at a weak one, so it may never be the only
+    // witness. `confidence01` is the quantity the defect INFLATES and is stated last.
+    expect(landedRecord.readiness).toBe(oneTelling.readiness);
+    expect(landedRecord.strengthBand).toBe(oneTelling.strengthBand);
     expect(landedRecord.confidence01).toBe(oneTelling.confidence01);
+    // ⚠ AND THE ANTI-VACUITY GUARD ON THE CLAIM ITSELF, which is not decoration: an
+    // equality between two CLAMPED quantities is true for every implementation. This
+    // asserts the compared number is still INSIDE the range where the arithmetic can move,
+    // so a later tuning change that re-saturates this fixture reds HERE instead of silently
+    // emptying the equality above.
+    expect(landedRecord.confidence01).toBeLessThan(1);
     // ONCE: the mouth fires on the tick the row came home, so a later tick folds nothing.
     expect(run(fold.worldState, 41, MUNDANE_SNAPSHOT).landings).toEqual([]);
+  });
+
+  /**
+   * Walk one mission all the way to `markEnvoyHome` through the REAL writers, under whatever
+   * magic geography the caller hands in, and return the world standing at the mouth.
+   * Shared by the two tests below so the double-landing guard and the coverage share are
+   * measured on the same journey rather than on two fixtures that could drift apart.
+   */
+  function walkToTheMouth(snapshot, home = HOME_PRIOR) {
+    const { worldState } = mission({ home });
+    let state = run(worldState, 13, snapshot).worldState;
+    const errandId = envoyErrandsOf(state)[0].id;
+    for (let t = 14; t <= 30; t += 1) {
+      state = advanceEnvoyErrands({ worldState: state, tick: t }).worldState;
+      state = run(state, t, snapshot).worldState;
+    }
+    state = beginEnvoyReturn({
+      worldState: state,
+      errandId,
+      routePlan: {
+        legs: [{ fromId: 'irontown', toId: 'ashford', departTick: 31, arrivalTick: 34 }],
+        expectedReturnTick: 34,
+        routeRef: { id: 'road.north', name: 'North Road' },
+      },
+      tick: 30,
+    }).worldState;
+    for (let t = 31; t <= 39; t += 1) {
+      state = advanceEnvoyErrands({ worldState: state, tick: t }).worldState;
+    }
+    state = markEnvoyHome({ worldState: state, errandId, tick: 40 }).worldState;
+    return { state, errandId, gathered: envoyErrandsOf(state)[0].covert.gathered };
+  }
+
+  test('A MAGIC MISSION COMES HOME AND THE MOUTH CHARGES NOTHING TWICE', () => {
+    // ⚠⚠ THE ARM THE JEWEL WAS NEVER PROVEN ON. `landableGatherings` returns EVERY row as
+    // landable when nobody was caught, sentHome or not, so at the mouth of an uncaught magic
+    // mission the fold is holding nine partials that ALREADY LANDED at their own send ticks.
+    // The only thing standing between that and charging one telling twice is the
+    // `row.sentHome !== true` filter — and deleting it left the whole battery green, because
+    // no fixture had ever driven a magic mission to the home mouth. Every earlier magic pin
+    // stopped at the stop.
+    const { state, gathered } = walkToTheMouth(MAGIC_SNAPSHOT);
+    // The premise, asserted so this is not the identity of an empty run: he really did gather
+    // a gradient and every partial really did leave his head on the road.
+    expect(gathered.length).toBeGreaterThan(2);
+    expect(gathered.every((row) => row.sentHome === true)).toBe(true);
+    const before = beliefRecord(state, 'ashford', 'irontown');
+    const fold = run(state, 40, MAGIC_SNAPSHOT);
+    // NOTHING LANDS, and the mouth SAYS SO rather than falling silent.
+    expect(fold.landings).toEqual([]);
+    expect(fold.skipped[0]).toMatchObject({ reason: 'home_uncaught', lost: 0 });
+    // ...and the court's belief is byte-identical across the mouth, which is the claim the
+    // receipt above is only evidence for.
+    expect(JSON.stringify(beliefRecord(fold.worldState, 'ashford', 'irontown')))
+      .toBe(JSON.stringify(before));
+  });
+
+  test('A MIXED-MAGIC MISSION FOLDS ONLY WHAT NEVER LEFT HIS HEAD, and coverage says so', () => {
+    // Magic works at home and at the waypoint and is DEAD at the target — a lawful world,
+    // and the one that puts BOTH kinds of partial on a single errand row. It is what makes
+    // `completeness01` a measurement instead of a constant: every other fixture in this file
+    // folds a gradient with nothing already sent, so COVERAGE is N/N = 1 by construction and
+    // the stage's own sentence — "a captured magic mission that kept one partial of five
+    // tells a fifth of a story" — was asserted nowhere.
+    const MIXED_SNAPSHOT = Object.freeze({
+      settlements: [
+        town('ashford', 'Ashford'),
+        town('westmarch', 'Westmarch'),
+        town('irontown', 'Irontown', MUNDANE_AXIS),
+      ],
+    });
+    const { gathered, state } = walkToTheMouth(MIXED_SNAPSHOT);
+    const sent = gathered.filter((row) => row.sentHome === true);
+    const unsent = gathered.filter((row) => row.sentHome !== true);
+    // BOTH KINDS ARE REALLY PRESENT — without this the test below is a mundane fold wearing
+    // a different fixture's name.
+    expect(sent.length).toBeGreaterThan(0);
+    expect(unsent.length).toBeGreaterThan(0);
+    const fold = run(state, 40, MIXED_SNAPSHOT);
+    expect(fold.landings).toHaveLength(1);
+    // THE COUNT: only the partials that never left his head. Not the whole gradient.
+    expect(fold.landings[0].partials).toBe(unsent.length);
+    expect(fold.landings[0].partials).toBeLessThan(gathered.length);
+    // THE SHARE: a man who sent four of nine home by magic comes back carrying five ninths
+    // of a story, and the report he hands the court is discounted to exactly that.
+    expect(fold.landings[0].completeness01)
+      .toBe(Math.round((unsent.length / gathered.length) * 10000) / 10000);
+    expect(fold.landings[0].completeness01).toBeLessThan(1);
   });
 
   test('a CAUGHT mundane mission loses the man AND the gradient at the mouth', () => {
@@ -833,6 +1042,80 @@ describe('ES-3 the stage — the gradient accrues once, persists, and survives t
     expect(saintly.termsAbsent).toEqual(['desperation01']);
   });
 
+  test('THE STANDOFF WRITE ARM: the mark is decided, PERSISTED, and caps every later read', () => {
+    // ⚠⚠ THE SEAM THIS PIN EXISTS FOR. The pure decision's true arm was pinned, and the
+    // covert DTO's `standoff` round-trip was pinned, and NOTHING JOINED THEM: reducing
+    // `standoffMarkFor` to `return { mark: false, receipt: null }` left the whole battery
+    // green. Both ends of a wire are not the wire.
+    const walkOne = (npc) => {
+      let state = mission({
+        legs: STANDOFF_LEGS,
+        covert: STANDOFF_COVERT,
+        host: HOST_BELIEF,
+      }).worldState;
+      // Harrowgate must hold an opinion about Irontown or the second stop yields nothing.
+      state = {
+        ...state,
+        spatialLedgers: {
+          beliefMaps: {
+            ...state.spatialLedgers.beliefMaps,
+            harrowgate: { seat: { irontown: HOST_BELIEF } },
+          },
+        },
+      };
+      const seen = [];
+      for (let t = 12; t <= 29; t += 1) {
+        const out = advanceEspionageProducts({
+          worldState: state,
+          tick: t,
+          snapshot: STANDOFF_SNAPSHOT,
+          regionalGraph: STANDOFF_GRAPH,
+          npcFor: () => npc,
+        });
+        state = out.worldState;
+        seen.push(...out.gatherings);
+        state = advanceEnvoyErrands({ worldState: state, tick: t }).worldState;
+      }
+      return { row: envoyErrandsOf(state)[0], gatherings: seen };
+    };
+
+    // A TIMID MAN AT THE SECOND GATE STANDS OFF. The mark is written onto his own errand row
+    // through the one amender, and the receipt names the gate he refused.
+    const timid = walkOne(TIMID_NPC);
+    expect(timid.row.covert.standoff).toBe(true);
+    const marked = timid.gatherings.find((row) => row.standoff);
+    expect(marked).toBeTruthy();
+    expect(marked.stopId).toBe('harrowgate');
+    expect(marked.standoff.nextStopId).toBe('irontown');
+    expect(marked.standoff.assessedRisk).toBeGreaterThan(marked.standoff.bar);
+    expect(marked.standoff.termsAbsent).toEqual(['desperation01']);
+    // ...and the INFORMATIONAL consequence, which is the half §3.7 makes arithmetic: from the
+    // moment he stands off, every read plateaus at the performance rung even at a stop whose
+    // face is `covert` and would otherwise have bought him the host's own beliefs.
+    const atHarrowgate = timid.gatherings.filter((row) => row.stopId === 'harrowgate');
+    expect(atHarrowgate.length).toBeGreaterThan(1);
+    expect(new Set(atHarrowgate.map((row) => row.tap))).toEqual(new Set(['performance']));
+
+    // THE CONTROL, AND IT IS THE SAME GATE. A bold man walks through it: no mark, no receipt,
+    // and the covert face still buys him what the host believes. So the mark above is the
+    // decision's doing and not a stage that marks everybody.
+    const bold = walkOne(BOLD_NPC);
+    expect(bold.row.covert.standoff).toBeUndefined();
+    expect(bold.gatherings.some((row) => row.standoff)).toBe(false);
+    expect(new Set(bold.gatherings.filter((row) => row.stopId === 'harrowgate').map((row) => row.tap)))
+      .toEqual(new Set(['beliefs']));
+    // ⚠ AND THE THIRD ARM IS THE ONE THE PRODUCTION CALL SITE USED TO TAKE. With NO npc
+    // reaching the stage the decision is made against a temperament nobody has — it lands
+    // between the two and stands off at neither gate, which is why the wiring at
+    // envoyPulse.js is a correctness fix and not a tidy-up.
+    const faceless = walkOne(null);
+    expect(faceless.row.covert.standoff).toBeUndefined();
+
+    // THE MARK SURVIVES THE SAVE FILE, through the real normalizer rather than a probe.
+    const reloaded = normalizeErrand(JSON.parse(JSON.stringify(timid.row)));
+    expect(reloaded.covert.standoff).toBe(true);
+  });
+
   test('a host with NO belief about the subject yields no partial at all', () => {
     const { worldState } = mission({ host: null });
     const out = advanceEspionageProducts({
@@ -892,5 +1175,116 @@ describe('ES-3 the stage — the gradient accrues once, persists, and survives t
     expect(confirmed.landings[0].crossed).toEqual([]);
     expect(record.confidence01).toBeLessThan(confirmRecord.confidence01);
     expect(record.strengthBand).toBeGreaterThan(confirmRecord.strengthBand);
+  });
+});
+
+// ── 7. THE PRODUCTION CALL SITE (the injected world readers) ───────────────────
+describe('ES-3 the world readers — what actually reaches the stage in a running world', () => {
+  /**
+   * ⚠⚠ WHY A SOURCE CENSUS AND NOT A PULSE RUN. `advanceEspionageProducts` takes its three
+   * world readers as ARGUMENTS, which is the ES-0 discipline that lets each be mutated out —
+   * and it is also the shape whose failure mode is silent: a call site that OMITS one gets
+   * the null default, the term goes structurally dead in the running world, and every
+   * pure-leaf pin in this file stays green. ES-3 shipped omitting all three. Only the CALL
+   * SITE can be asked whether they arrive, so the call site is what is read.
+   */
+  const stripComments = (source) => source
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/^\s*\/\/.*$/gm, '');
+
+  /**
+   * The argument text of one call, by BRACE MATCHING from the callee name rather than by a
+   * line window — a line-anchored extractor goes vacuous the first time somebody reformats
+   * the call, which is the recorded filename/line-anchored pin class.
+   * @param {string} source @param {string} callee @returns {string|null}
+   */
+  function callArgsOf(source, callee) {
+    const at = source.indexOf(`${callee}(`);
+    if (at < 0) return null;
+    const from = at + callee.length;
+    let depth = 0;
+    for (let i = from; i < source.length; i += 1) {
+      if (source[i] === '(') depth += 1;
+      else if (source[i] === ')') {
+        depth -= 1;
+        if (depth === 0) return source.slice(from + 1, i);
+      }
+    }
+    return null;
+  }
+
+  /** Every .js/.jsx under src/, keyed by repo-relative path. */
+  function srcSources() {
+    /** @type {Record<string, string>} */
+    const out = {};
+    const walk = (dir) => {
+      for (const entry of readdirSync(join(ROOT, dir), { withFileTypes: true })) {
+        const rel = `${dir}/${entry.name}`;
+        if (entry.isDirectory()) { walk(rel); continue; }
+        if (!/\.jsx?$/.test(entry.name)) continue;
+        out[rel] = readFileSync(join(ROOT, rel), 'utf8');
+      }
+    };
+    walk('src');
+    return out;
+  }
+
+  test('the ONE production caller passes the man AND his credibility', () => {
+    const sources = srcSources();
+    // ANTI-VACUITY: the walk really reached the tree, and the stage really is in it.
+    expect(Object.keys(sources).length).toBeGreaterThan(500);
+    expect(sources).toHaveProperty('src/domain/worldPulse/espionage/espionageProductStage.js');
+    // Exactly one module under src/ CALLS the stage. (The registry leaf names it as a string
+    // address, and the stage names its own definition; neither is a call.)
+    const callers = Object.entries(sources)
+      .filter(([file, source]) => file !== 'src/domain/worldPulse/espionage/espionageProductStage.js'
+        && /\badvanceEspionageProducts\s*\(/.test(stripComments(source)))
+      .map(([file]) => file)
+      .sort();
+    expect(callers).toEqual(['src/domain/worldPulse/envoyPulse.js']);
+
+    const args = callArgsOf(stripComments(sources[callers[0]]), 'advanceEspionageProducts');
+    expect(args).toBeTruthy();
+    // THE TWO THAT ARE LAWFULLY AVAILABLE AND ARE NOW PASSED. Without `npcFor` the standoff
+    // reads the same number for a coward and a hero; without `credibilityOf` the taint model
+    // `buildProductReport`'s own header promises never reaches the belief write.
+    expect(/\bnpcFor\s*:/.test(args)).toBe(true);
+    expect(/\bcredibilityOf\s*:/.test(args)).toBe(true);
+    // NON-VACUITY FOR THE EXTRACTOR, planted rather than assumed: it must be able to see an
+    // argument's ABSENCE, or the two assertions above are a scan that always says yes.
+    expect(callArgsOf('advanceEspionageProducts({ worldState, tick })', 'advanceEspionageProducts'))
+      .toBe('{ worldState, tick }');
+    expect(/\bnpcFor\s*:/.test(
+      /** @type {string} */ (callArgsOf('advanceEspionageProducts({ worldState, tick })', 'advanceEspionageProducts')),
+    )).toBe(false);
+    // ...and it must not stop at the first `)` inside a nested call.
+    expect(callArgsOf('f(a, g(b), c)', 'f')).toBe('a, g(b), c');
+  });
+
+  test('⛔ THE DELTA ARM IS DECLARED DEAD, and this census REDS the day it stops being', () => {
+    const sources = srcSources();
+    // `insideAssetAt` has NO PRODUCER in this estate. The identifier appears in exactly two
+    // files and both are CONSUMERS with a null default, so `tapLevelFor` can never return
+    // `delta` in a running world: TAP_DEPTH.delta, the `lieSeen` road, the delta receipt and
+    // the counter-disinformation story are all unreachable outside this battery.
+    //
+    // THIS IS A DECLARATION, NOT A DEFECT — the leaves are built and pinned so that the wave
+    // minting an inside-asset ledger turns them on by supplying one argument (the SP-C
+    // idiom). What WOULD be a defect is the silence, so the day a third file names the
+    // predicate this reds and the DEAD ARM block in espionageProductStage.js must be revised
+    // rather than quietly outliving its own fact.
+    const namers = Object.entries(sources)
+      .filter(([, source]) => /\binsideAssetAt\b/.test(stripComments(source)))
+      .map(([file]) => file)
+      .sort();
+    expect(namers).toEqual([
+      'src/domain/worldPulse/espionage/espionageGauntlet.js',
+      'src/domain/worldPulse/espionage/espionageProductStage.js',
+    ]);
+    // AND THE ARITHMETIC CONSEQUENCE, stated where a reader will meet it: with the predicate
+    // absent the ladder's deepest rung is simply not produced. Both arms live, so this is the
+    // absence of a PRODUCER and not the absence of a working function.
+    expect(tapLevelFor({ face: 'covert', hasInsideAsset: false })).toBe('beliefs');
+    expect(tapLevelFor({ face: 'covert', hasInsideAsset: true })).toBe('delta');
   });
 });

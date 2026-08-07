@@ -41,6 +41,8 @@ import {
   resolveStartInterceptions,
 } from './envoyInterceptionStage.js';
 import { envoyNewsEntries } from './envoyNews.js';
+import { rosterPersonById } from './envoyCasting.js';
+import { makeCredibilityWeightFn } from './informationStatecraft.js';
 import { advanceEspionageGauntlet } from './espionage/espionageGauntlet.js';
 import { advanceEspionageProducts } from './espionage/espionageProductStage.js';
 import { openRansomClaims } from './envoyRansomStage.js';
@@ -391,8 +393,47 @@ export function advanceEnvoyDiplomacyPulse({
   // nothing — and unlike the gauntlet it DOES write: the gradient onto the errand row
   // through the errand family's own `writeErrands`, and the products into `beliefMaps`
   // through `reconcileBelief`. Both are existing shapes; neither is a new ledger.
+  //
+  // ⚠⚠ THE THREE WORLD READERS ARE INJECTED HERE, AND TWO OF THEM WERE MISSING FOR ONE
+  // COMMIT. `advanceEspionageProducts` takes `npcFor`, `credibilityOf` and `insideAssetAt`
+  // as arguments precisely so each can be mutated out — the ES-0 discipline — and a call
+  // site that omits one does not degrade gracefully, it makes that term STRUCTURALLY DEAD
+  // in the running world while every pure-leaf pin stays green. ES-3 shipped omitting all
+  // three; MEASURED, `walk.npc` was null on every mission, so the standoff read the same
+  // number for a coward and a hero (0.6906 for both, against 0.3719 timid and 0.9563 bold),
+  // and a coupling row asserted a temperament read that never happened. Two are now wired
+  // and the third is DECLARED DEAD in the stage header, because it has no producer.
+  //
+  // The roster index is built ONCE for the whole stage rather than per errand: the reader
+  // below is called for every covert row and re-projecting the snapshot inside it would be
+  // O(rows x settlements) for an answer that cannot change within one pulse.
+  const productRosters = snapshotWithUpdates(snapshot, updates, state, graph);
   const products = advanceEspionageProducts({
-    worldState: state, tick, snapshot, regionalGraph: graph, detections: gauntlet.detections,
+    worldState: state,
+    tick,
+    snapshot,
+    regionalGraph: graph,
+    detections: gauntlet.detections,
+    // THE MAN, found again in the roster that cast him, through the errand family's OWN
+    // inverse of the id it wrote (`envoyCasting.rosterPersonById`) rather than a second
+    // spelling of `durableId || rosterId` at this call site.
+    npcFor: (errand) => {
+      const homeId = String(asObject(errand).from || '');
+      const item = asObject(productRosters.byId.get(homeId));
+      const settlement = item.settlement || asObject(item.save).settlement || item;
+      return rosterPersonById(state, homeId, settlement, String(asObject(errand).npcId || ''));
+    },
+    // W-DOCTRINE-2, and `buildProductReport`'s own header already promised it: a discredited
+    // agent's word weighs less. The closure returns NULL when the info layer is dormant or no
+    // credibility ledger has materialized, so a world without it is byte-identical — and the
+    // product's `sourceId` is the composite `settlement#npc` shape D-2 was built for.
+    credibilityOf: makeCredibilityWeightFn(state, tick),
+    // ⛔ `insideAssetAt` IS NOT PASSED, AND THAT IS A DECLARATION RATHER THAN AN OMISSION:
+    // this estate has no inside-asset ledger and no producer for that predicate anywhere
+    // under src/. See the DEAD ARM block in espionageProductStage.js — the `delta` rung is
+    // unreachable in a running world until the wave that mints one lands, and the census in
+    // tests/domain/espionageProducts.test.js REDS the day a producer appears, so the
+    // declaration cannot quietly outlive the fact.
   });
   state = products.worldState;
 

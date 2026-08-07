@@ -57,6 +57,30 @@
  * second spelling is what J-WR-10 forbids. Every gathering receipt names them, exactly as
  * ES-2's detections name `overdueForeignNotables`.
  *
+ * ── ⛔ A DEAD ARM, MEASURED AND DECLARED: THE `delta` RUNG CANNOT OCCUR IN A RUNNING WORLD ─
+ * `insideAssetAt` is an injected predicate and THIS ESTATE HAS NO PRODUCER FOR IT. Measured
+ * at the repair round: the identifier `insideAssetAt` appears under src/ in exactly two
+ * files — this stage and ES-2's gauntlet — and both are CONSUMERS with a null default. No
+ * inside-asset ledger exists, no caller supplies one, and the covert vocabulary mints no
+ * field for one. The consequences are named rather than left to be discovered:
+ *
+ *   • `tapLevelFor` can never return `delta` in production, so `TAP_DEPTH.delta`, the
+ *     `lieSeen` road, the delta receipt phrase and the whole counter-disinformation-by-
+ *     access-depth story are UNREACHABLE outside the battery.
+ *   • `catchChance01`'s `INSIDE_ASSET_RELIEF` term is likewise never applied by a live call.
+ *
+ * They are BUILT AND PINNED as leaves because the wave that mints the asset ledger (the
+ * handler/asset road) turns them on by supplying one argument — that is the SP-C idiom, not
+ * a defect. What would have been a defect is the silence, so the census in
+ * tests/domain/espionageProducts.test.js asserts the producer set is EMPTY and REDS the day
+ * one appears, which forces this block to be revisited instead of quietly outliving its fact.
+ *
+ * ⚠ THE OTHER TWO READERS ARE NOW WIRED. `npcFor` and `credibilityOf` shipped omitted at the
+ * one production call site (envoyPulse.js) and were therefore dead in the same way — the
+ * standoff read an identical number for a coward and a hero. The repair round wired both;
+ * the coupling row CPL-20.INTERIOR_TO_INFO.ES-3.flaw_distortion asserts that read and is
+ * true only because of it.
+ *
  * PURE apart from the two writes it owns: no Date, no Math.random, no React, no I/O. The
  * whole layer's stochastic surface is the gauntlet's keyed hash (L1) and none of it is here.
  *

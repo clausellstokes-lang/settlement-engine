@@ -2943,7 +2943,35 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // full suite was run against a fresh `git archive` of that commit with node_modules
       // symlinked in, and this walker passed there at 33/33 while reading 2,340/358/1,982/
       // 18,857/5,395.
-      files: 2342, parked: 358, credited: 1984, titles: 18896, suiteTitles: 5405,
+      // ── RE-RECORDED 2026-08-06 BY THE ES-3 REPAIR ROUND, WITH ITS CAUSE MEASURED ────
+      // 2,342/358/1,984/18,896/5,405 → 2,342/358/1,984/18,903/5,406. THE CAUSE IS SEVEN
+      // NEW PINS IN TWO ALREADY-CREDITED FILES AND NOTHING ELSE — NO NEW TEST FILE, which
+      // is why files, parked and credited are all UNCHANGED (and are not merely asserted
+      // unchanged: the three assertions below them PASSED at head before the title
+      // assertion reddened, which is what proves the deltas are title-layer only).
+      //
+      // THE DELTA IS DECOMPOSED RATHER THAN ASSERTED, and it closes exactly:
+      //   tests/domain/espionageProducts.test.js      31 → 37 = +6 titles, +1 suite title
+      //   tests/domain/subsystemRowsVirtual.test.js   12 → 13 = +1 title,  +0 suite titles
+      //                                                        ─────────────────────────
+      //                                                         +7 titles, +1 suite title
+      // The six are the repair round's own: the standoff WRITE seam (unreachable at every
+      // earlier fixture), the magic home mouth and the mixed-magic coverage share (the
+      // double-landing guard and the completeness term, neither previously driven), the
+      // legless-ACQUIRE judgment J-ES3-E, and the two production-call-site censuses. The
+      // seventh is the certification row's narrowed dormancy claim.
+      // PARKED IS UNCHANGED at 358 and that was earned: every one of the seven titles is a
+      // LITERAL, so door 3's reader recognises them statically and both files stay
+      // credited. The two censuses each walk the source tree with a `for…of` INSIDE a
+      // single named test, which is SP-D's recorded idiom — loop inside a named test,
+      // never generate tests from a loop — holding for the fourth consecutive wave.
+      // ⚠ BOTH ENDS READ WITH THE SAME INSTRUMENT, and that is not a formality here: the
+      // finding this round repaired (F3) was a full-suite receipt taken by comparing an
+      // ARCHIVE against a LIVE tree. The base figures below are a MEASUREMENT of this
+      // round's own parent (e1be752f) through a fresh `git archive` with node_modules
+      // symlinked in, where this walker's census assertion EXECUTED GREEN — so 18,896 is
+      // a reading of that tree and not an inheritance from the row above.
+      files: 2342, parked: 358, credited: 1984, titles: 18903, suiteTitles: 5406,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

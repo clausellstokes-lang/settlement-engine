@@ -155,6 +155,44 @@ export function castableRoster(worldState, settlementId, settlement) {
 }
 
 /**
+ * THE INVERSE OF THE CAST — the person an errand's `npcId` NAMES, found again in the roster
+ * that produced him.
+ *
+ * ⭐ THIS EXISTS SO THE ID LAW HAS ONE SPELLING IN BOTH DIRECTIONS. Both casting laws write
+ * the errand's `npcId` as `durableId || rosterId` (the covert mint spells it exactly that
+ * way, and the diplomatic one takes the same entry). A CONSUMER that wanted the person back
+ * — to read his temperament, his flaws, his competence — had no reader and would have had to
+ * re-derive that expression at its own call site. The day the graduation road changes which
+ * half wins, an inlined copy keeps matching nothing and hands back null in silence, which is
+ * the structurally-dead-world-term class this estate keeps paying for. So the forward law and
+ * the inverse law sit in one file and move together.
+ *
+ * ⚠ IT DELIBERATELY DOES NOT FILTER ON AVAILABILITY. `castableRoster` refuses anyone already
+ * carrying an errand, which is exactly who this function is asked about: the traveller is on
+ * the road BECAUSE he was cast. Reusing that walk would return null for every live errand.
+ *
+ * @param {unknown} worldState @param {string} settlementId @param {unknown} settlement
+ * @param {unknown} npcId the errand's own `npcId`
+ * @returns {Record<string, unknown>|null} the roster record, or null when nobody matches
+ */
+export function rosterPersonById(worldState, settlementId, settlement, npcId) {
+  const wanted = text(npcId);
+  if (!wanted) return null;
+  const world = /** @type {Parameters<typeof npcLedgerOf>[0]} */ (worldState);
+  const roster = Array.isArray(asObject(settlement).npcs)
+    ? /** @type {unknown[]} */ (asObject(settlement).npcs)
+    : [];
+  for (const raw of roster) {
+    const npc = asObject(raw);
+    const identity = rosterIdentity(npc);
+    if (!identity.name) continue;
+    const durableId = durableIdForRoster(world, settlementId, identity) || '';
+    if ((durableId || identity.rosterId) === wanted) return npc;
+  }
+  return null;
+}
+
+/**
  * THE DIPLOMATIC DRAW — importance-DESCENDING. Choose one notable-or-higher roster person
  * deterministically. Diplomatic and governing roles win equal-importance ties; identity
  * then wins by codepoint.
