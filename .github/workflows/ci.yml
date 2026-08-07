@@ -108,8 +108,16 @@ jobs:
       # impairment dimensions, event types, and faction-response shapes
       # are all enforced at edit time. Adding a new event without
       # updating EventType union fails here.
-      - name: Type check
-        run: npm run typecheck
+      # GATE RESTORATION (2026-08-07): this step was `npm run typecheck`, a BOOLEAN
+      # gate at zero errors. It went red on 2026-08-02 (7796954e) and stayed red,
+      # and because CI steps are sequential, Lint / Run tests / Build /
+      # Verify bundle chunk contracts BELOW never ran either — the same `&&`-chain
+      # blackout the local gate suffered. It is now the per-file RATCHET
+      # (scripts/check-full-typecheck.mjs): a truthful, shrink-only ceiling that
+      # reds on any NEW or WORSENED file while letting the rest of the gate run.
+      # `npm run typecheck` stays available raw for burn lanes reading the full list.
+      - name: Type check (full-tree ratchet)
+        run: npm run typecheck:ratchet
 
       # The domain strict-typecheck RATCHET (scripts/check-domain-strict.mjs):
       # a monotone-shrink baseline of strict-mode errors in the domain kernel.

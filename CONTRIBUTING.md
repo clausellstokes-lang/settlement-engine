@@ -9,11 +9,21 @@
 
 Everything runs through `npm run check` — the full 14-step chain: `validate:data` →
 `validate:custom-content-manifest` → `validate:migration-head` → `validate:edge` → `validate:map` →
-`validate:tuning-bands` → `validate:foundry-module` → `validate:mcp-server` → `typecheck` →
+`validate:tuning-bands` → `validate:foundry-module` → `validate:mcp-server` → `typecheck:ratchet` →
 `typecheck:domain:strict` → `lint` → `test` (the full Vitest suite, ~20,100 tests /
 ~1988 files) → `build` → `verify:dist` (the first-paint ratchet) — plus the Playwright
 `e2e` job. Both run in CI (`.github/workflows/ci.yml`) on every PR to `master`/`main`.
 Counts are approximate; executable output remains the authority.
+
+**The chain is `&&`, so a red step blacks out everything behind it.** That is not
+hypothetical: the typecheck step was a boolean gate at zero errors, went red on
+2026-08-02, and took `lint`, `test`, `build` and `verify:dist` dark with it for four
+days. It is now `typecheck:ratchet` (`scripts/check-full-typecheck.mjs`) — a per-file
+ceiling that may only shrink, so a pre-existing debt cannot hide the rest of the gate,
+while a NEW or WORSENED file still reds. Files absent from the baseline get an
+allowance of zero. Use `npm run typecheck` for the raw unfiltered list when burning the
+debt down, and `npm run typecheck:ratchet:update` to bank a win. Never widen a baseline
+to green a gate — that is the constitutional violation this repo exists to prevent.
 
 **CI must be the only path to production.** To enforce that (a one-time maintainer
 action in the GitHub UI — it cannot be set from the repo):

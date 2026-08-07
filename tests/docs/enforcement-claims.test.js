@@ -149,7 +149,27 @@ function gatherClaims() {
 const pkg = JSON.parse(fs.readFileSync(rel('package.json'), 'utf8'));
 const CHECK = pkg.scripts.check || '';
 const CHECK_SUBNAMES = [...CHECK.matchAll(/npm run ([\w:-]+)/g)].map((m) => m[1]);
-const CHECK_CMDS = CHECK_SUBNAMES.map((n) => pkg.scripts[n] || '').join('\n');
+const CHECK_CMD_TEXT = CHECK_SUBNAMES.map((n) => pkg.scripts[n] || '').join('\n');
+
+// ONE HOP THROUGH A DELEGATING GATE STEP.
+// `resolveTarget` asks "is this enforcer REACHABLE FROM THE GATE?" and answered it
+// by string-matching the target against the package.json command text alone. That
+// read a gate step as covering only what its own command line spells out — so the
+// moment a step delegates to a script, everything the script drives became
+// invisible. It broke concretely when `typecheck`
+// (`tsc --noEmit -p tsconfig.full.json`) became `typecheck:ratchet`
+// (`node scripts/check-full-typecheck.mjs`): the ratchet still runs
+// tsconfig.full.json on every gate run, but the literal moved one file away and
+// ARCHITECTURE.md's `@enforced-by tsconfig.full.json` stopped resolving.
+// A config a gate-run script names IS gate-reachable, so follow the hop. This only
+// ever ADDS resolvable targets; a target naming a non-existent path still fails.
+const GATE_SCRIPT_RE = /\bscripts\/[\w./-]+\.(?:mjs|js|cjs|sh)\b/g;
+const CHECK_CMDS = [
+  CHECK_CMD_TEXT,
+  ...[...new Set(CHECK_CMD_TEXT.match(GATE_SCRIPT_RE) || [])]
+    .filter((p) => fs.existsSync(rel(p)))
+    .map((p) => fs.readFileSync(rel(p), 'utf8')),
+].join('\n');
 
 const claims = gatherClaims();
 
@@ -206,7 +226,15 @@ describe('enforcement-claims meta-pin (A+ P1.1)', () => {
   });
 
   it('`npm run check` includes typecheck, lint, and test (the three enforcer classes)', () => {
-    expect(CHECK_SUBNAMES).toEqual(expect.arrayContaining(['typecheck', 'lint', 'test']));
+    // The typecheck CLASS must be in the chain; which spelling carries it is an
+    // implementation detail. It is `typecheck:ratchet` since 2026-08-07 — the bare
+    // boolean step went red on 2026-08-02 and, the chain being `&&`, took lint,
+    // test, build and verify:dist dark behind it for four days.
+    expect(
+      CHECK_SUBNAMES.filter((n) => /^typecheck(:|$)/.test(n)),
+      'the check chain runs no typecheck step at all',
+    ).not.toEqual([]);
+    expect(CHECK_SUBNAMES).toEqual(expect.arrayContaining(['lint', 'test']));
   });
 
   it('every completeness claim carries an @enforced-by tag with ≥1 target', () => {

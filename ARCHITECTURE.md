@@ -318,7 +318,7 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 `npm run check` = `validate:data && validate:custom-content-manifest &&
 validate:migration-head && validate:edge && validate:map &&
 validate:tuning-bands && validate:foundry-module && validate:mcp-server &&
-typecheck && typecheck:domain:strict && lint && test && build && verify:dist`.
+typecheck:ratchet && typecheck:domain:strict && lint && test && build && verify:dist`.
 <!-- @enforced-by tests/docs/architectureFreshness.test.js (each sub-step derived from package.json) -->
 
 - **validate:data** — duplicate-key scan (dupe keys silently corrupt sim output).
@@ -340,11 +340,23 @@ typecheck && typecheck:domain:strict && lint && test && build && verify:dist`.
 - **validate:mcp-server** — the standalone `mcp-server/` package (the local Truth
   Server) is dependency-free, parses, has no write/network path, and its tool
   manifest is read-only by construction (no mutating tool exists).
-- **typecheck** — `tsc --noEmit -p tsconfig.full.json` over the **non-JSX src
-  logic tree** (domain/store/lib/hooks/generators plus `.js` PDF/foundry
-  modules). It deliberately does not claim `src/components/**/*.jsx` or
-  `src/pdf/**/*.jsx`; those remain covered by ESLint, rendered tests, and the
-  Vite build. `typecheck:domain` keeps the fast domain-only check.
+- **typecheck:ratchet** — `tsc --noEmit -p tsconfig.full.json` over the **non-JSX
+  src logic tree** (domain/store/lib/hooks/generators plus `.js` PDF/foundry
+  modules), read through the per-file ceiling in
+  `scripts/check-full-typecheck.mjs`. It deliberately does not claim
+  `src/components/**/*.jsx` or `src/pdf/**/*.jsx`; those remain covered by
+  ESLint, rendered tests, and the Vite build. `typecheck:domain` keeps the fast
+  domain-only check, and `npm run typecheck` remains the RAW, unfiltered tsc run
+  a burn-down lane reads.
+
+  This step was a boolean gate at zero errors until 2026-08-07. It went red on
+  2026-08-02 (`7796954e`) and stayed red, and because the gate is an `&&` chain,
+  **`lint`, `test`, `build` and `verify:dist` — every step behind it — stopped
+  running with it** for four days and ~368 commits. The ratchet is the repair: a
+  truthful ceiling, measured in an integrity-counted `git archive` of a committed
+  sha, that may only shrink. A file absent from the baseline has an allowance of
+  ZERO, so new work must still be typecheck-clean. Burn it down with
+  `npm run typecheck`, then bank the win with `npm run typecheck:ratchet:update`.
 - **typecheck:domain:strict** — the `src/domain/` strict ratchet
   (`scripts/check-domain-strict.mjs`): the any-cast burn-down that may only shrink.
 - **typecheck:ui-boundaries** — an opt-in, baseline-free strict manifest for
