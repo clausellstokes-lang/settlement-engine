@@ -171,11 +171,27 @@ export function buildLineageMemberBirth({ campaignId, parentId, parent, satellit
     liveEdgeId: edgeId,
     foundedTick: satellite.foundedTick,
     graduatedTick: tick,
-    // The satellite's live tier is normally `hamlet` by charter time.  Preserve
-    // the rung at which its founding population actually left the parent; older
-    // satellite records predate the explicit field but every engine mint began
-    // at thorp, so that is the only honest compatibility fallback.
-    foundingTier: satellite.foundingTier || 'thorp',
+    // THE RUNG THE FOUNDING POPULATION LEFT THE PARENT AT — a constant because the
+    // MINT is. `mintSteading` (settlementLifecycleKernel.js) is the only author of a
+    // `SatelliteRecord`, and it writes `tier: 'thorp'` unconditionally; the two other
+    // paths that produce a row copy an already-minted one (`conveySteading`'s sale
+    // move, the convergence fold, both of which keep the survivor's founding facts).
+    // Promotion to `hamlet` is a later mutation of the SAME record, which is exactly
+    // why the founding rung cannot be read off the live record at charter time.
+    //
+    // ⚠ THIS WAS SPELLED `satellite.foundingTier || 'thorp'` AND CALLED A COMPATIBILITY
+    // FALLBACK FOR "older satellite records". MEASURED 2026-08-07: no satellite record
+    // has ever carried the field — it is absent from the `SatelliteRecord` typedef and
+    // from every mint — so the fallback was not a fallback, it was the only path, and
+    // the comment describing it was false. The dead read is gone; the value it always
+    // produced is unchanged, so no output moved.
+    //
+    // GIVING THE RECORD AN EXPLICIT FOUNDING RUNG IS A PERSISTED-SHAPE CHANGE AND IS
+    // OWNER-GATED (it would widen `SatelliteRecord` on a ledger that round-trips).
+    // `tests/domain/settlementLifecycleKernel.test.js` pins BOTH halves of the fact
+    // this constant rests on: that the mint founds only at thorp, and that it writes
+    // no `foundingTier` — the second assertion is the tripwire that forces the ruling.
+    foundingTier: 'thorp',
     graduationTier: 'village',
     graduationPopulation: Math.max(0, Math.round(Number(satellite.population) || 0)),
     provenance: satellite.provenance,

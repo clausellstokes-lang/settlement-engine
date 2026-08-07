@@ -24,6 +24,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { createPRNG } from '../../src/kernel/prng.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { appendWizardNewsEntries } from '../../src/domain/region/index.js';
 import { SECTION_OF } from '../../src/domain/realm/heraldRouting.js';
 import {
@@ -35,9 +36,11 @@ import {
   stepSeeding,
   settlementLifecycleActive,
   drawSteadingName,
+  mintSteading,
 } from '../../src/domain/worldPulse/settlementLifecycleKernel.js';
 import {
   applyLineageBirthsToGraph,
+  buildLineageMemberBirth,
   lineageMemberSaveId,
 } from '../../src/domain/worldPulse/lineageMemberBirth.js';
 
@@ -595,6 +598,69 @@ describe('peakTier (write-once-upward, dual-written, absent-tolerated, frozen on
       settlements: { a: town('a', { tier: 'thorp', population: 0, peakTier: 'city', lifecycleStatus: 'relic_ruin' }) }, ticks: 1,
     });
     expect(updates[0].settlement.config.peakTier).toBe('city');
+  });
+});
+
+// ── THE FOUNDING RUNG (TCD-3) ──────────────────────────────────────────────────
+// `parentRef.foundingTier` was spelled `satellite.foundingTier || 'thorp'` and
+// documented as a compatibility path for older records. No satellite record has ever
+// carried that field, so the "fallback" was the only path. The constant that replaced
+// it is only honest while the two facts below hold, so both are pinned HERE, against
+// the real mint rather than a hand-written fixture.
+describe('the founding rung is the mint\'s constant, never a record field (TCD-3)', () => {
+  const PARENT_POPULATION = { town: 4800, city: 12000, metropolis: 40000 };
+  /** The whole minting surface: every parent tier that may seed × every provenance
+   *  the mint accepts × five seeds (a single seed would pin one draw, not the mint). */
+  const MINTS = ['town', 'city', 'metropolis'].flatMap((tier) => (
+    ['growth', 'resource_strike', 'resettlement', 'forced'].flatMap((provenance) => (
+      ['rung-a', 'rung-b', 'rung-c', 'rung-d', 'rung-e'].map((seed) => ({ tier, provenance, seed }))
+    ))
+  ));
+
+  function mintOne({ tier, provenance, seed }) {
+    const fork = createPRNG(seed).fork(`satellite:a:100:${tier}:${provenance}`);
+    return mintSteading({
+      parent: town('a', { tier, population: PARENT_POPULATION[tier] }),
+      parentId: 'a', sats: [], tick: 100,
+      draw: () => fork.random(),
+      provenance,
+      resourceKey: provenance === 'resource_strike' ? 'iron_vein' : null,
+    });
+  }
+
+  it('every steading the mint can produce is founded at thorp and carries NO foundingTier', () => {
+    expect(MINTS).toHaveLength(60);
+    for (const spec of MINTS) {
+      const minted = mintOne(spec);
+      expect(minted.refusal).toBeUndefined();
+      expect(minted.record.tier).toBe('thorp');
+      // THE WRITER THAT NEVER EXISTED. Minting an explicit founding rung would widen
+      // a PERSISTED record shape and is owner-gated; this line is the tripwire that
+      // forces the ruling rather than letting a second authority appear quietly.
+      // `tier` is the anchor because it is authored on the SAME object literal in
+      // `mintSteading`: a drift that stopped emitting the record's tier keys would
+      // red here instead of turning the absence assertion vacuous.
+      expectAbsentWithAnchor(
+        Object.keys(minted.record), 'foundingTier', 'tier',
+        `mintSteading ${spec.tier}/${spec.provenance}/${spec.seed}`,
+      );
+    }
+  });
+
+  it('a REAL minted record graduates at thorp, and a field planted on it cannot move the rung', () => {
+    const parent = town('a', { tier: 'city', population: PARENT_POPULATION.city });
+    const record = mintOne({ tier: 'city', provenance: 'growth', seed: 'rung-a' }).record;
+    // The record as it actually reaches the charter: promoted up the in-orbit ladder,
+    // grown to village scale, charter-pending. Its LIVE tier is not its founding rung.
+    const chartered = { ...record, tier: 'hamlet', population: 430, charterPending: true, charterPendingSince: 299 };
+    const args = { campaignId: 'camp-1', parentId: 'a', parent, tick: 300, now: NOW };
+    const birth = buildLineageMemberBirth({ ...args, satellite: chartered });
+    expect(birth.save.settlement.parentRef).toMatchObject({ foundingTier: 'thorp', graduationTier: 'village' });
+    // THE MUTANT ARM: the old spelling read the record FIRST, so any record carrying
+    // the field would have decided the rung. Nothing on a satellite may.
+    const planted = buildLineageMemberBirth({ ...args, satellite: { ...chartered, foundingTier: 'village' } });
+    expect(planted.save.settlement.parentRef.foundingTier).toBe('thorp');
+    expect(planted.save.settlement.parentRef).toEqual(birth.save.settlement.parentRef);
   });
 });
 
