@@ -1,0 +1,409 @@
+{
+  "_doc": "PER-TEST failure census for `vitest run`. SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. `--update` can only REMOVE entries; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
+  "measuredAtSha": "c658fb4461503c2e0167ef3d3f92c16c6c9329d9",
+  "totalTests": 27292,
+  "totalFiles": 2350,
+  "skippedCeiling": 105,
+  "uncollectedSuites": {
+    "tests/ops/migrationRehearsal.test.js": {
+      "subsystem": "migrations / rehearsal wave train (OWNER-GATED)",
+      "cause": "OWNER-GATED migration debt, and a COLLECTION failure: the module throws at import time — \"The wave manifest ends at 194, but the repository head is 195. Extend and review the final bounded wave.\" MIGRATION_TRAIN_REPO_HEAD is 194 in scripts/ops/migrationRehearsalCore.mjs while migration 195 has landed, so the whole suite collects ZERO tests. Extending the wave train is an owner-gated migration act — do NOT repair this in a build lane.",
+      "introducedAt": "7aa43b50bcbfa1c0223a4222df17606cf91b57c9",
+      "class": "owner-gated"
+    }
+  },
+  "entries": {
+    "tests/architecture/layerBoundaries.test.js :: layer boundaries (F29) dependency-cycle set equals the checked-in baseline (shrink-only)": {
+      "file": "tests/architecture/layerBoundaries.test.js",
+      "test": "layer boundaries (F29) dependency-cycle set equals the checked-in baseline (shrink-only)",
+      "subsystem": "architecture / layering (domain↔generators cycle set)",
+      "cause": "The import-cycle SCC set drifted past the allowlist: HK-2 put src/domain/dossier/hookRetention.js on src/generators/hookThemes.js, adding domain→generators edges that close new cycles. A sibling layering lane holds an uncommitted inversion (git mv hookThemes.js into src/domain/) that clears it.",
+      "introducedAt": "16b4a416e1f0ccb4e7a283d629abb656d8b5a98a",
+      "class": "debt"
+    },
+    "tests/build/domainGeneratorsBoundary.test.js :: architecture boundary — domain → generators ratchet baseline is exactly the 6 known edges (cardinality guard)": {
+      "file": "tests/build/domainGeneratorsBoundary.test.js",
+      "test": "architecture boundary — domain → generators ratchet baseline is exactly the 6 known edges (cardinality guard)",
+      "subsystem": "architecture / layering (domain→generators edge ratchet)",
+      "cause": "Live domain→generators edge count is 8 against a frozen baseline of 6. The new edges are the HK-2 retention layer reaching up into src/generators/hookThemes.js from src/domain/dossier/**. Same root cause as layerBoundaries; the sibling layering lane inverts it.",
+      "introducedAt": "16b4a416e1f0ccb4e7a283d629abb656d8b5a98a",
+      "class": "debt"
+    },
+    "tests/build/domainGeneratorsBoundary.test.js :: architecture boundary — domain → generators ratchet introduces NO new domain→generators edge beyond the frozen baseline": {
+      "file": "tests/build/domainGeneratorsBoundary.test.js",
+      "test": "architecture boundary — domain → generators ratchet introduces NO new domain→generators edge beyond the frozen baseline",
+      "subsystem": "architecture / layering (domain→generators edge ratchet)",
+      "cause": "Live domain→generators edge count is 8 against a frozen baseline of 6. The new edges are the HK-2 retention layer reaching up into src/generators/hookThemes.js from src/domain/dossier/**. Same root cause as layerBoundaries; the sibling layering lane inverts it.",
+      "introducedAt": "16b4a416e1f0ccb4e7a283d629abb656d8b5a98a",
+      "class": "debt"
+    },
+    "tests/build/userRouteIdentityLeaf.test.js :: wave D — the user-route identity leaf (source contracts) no module reachable from main.jsx statically reaches the derivation or the digest reader": {
+      "file": "tests/build/userRouteIdentityLeaf.test.js",
+      "test": "wave D — the user-route identity leaf (source contracts) no module reachable from main.jsx statically reaches the derivation or the digest reader",
+      "subsystem": "first-paint graph / spatial",
+      "cause": "src/domain/spatial/distanceRead.js re-entered the first-paint static graph via main.jsx → store/index.js → campaignSlice.js → worldPulse/worldState.js → warCoalitionLedger.js, which WR-6 taught to read distanceRead. The wave-D contract says no module reachable from main.jsx may reach the derivation.",
+      "introducedAt": "b243d34988bc5d91b2b5b5d3ce655ff2368388d7",
+      "class": "debt"
+    },
+    "tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)": {
+      "file": "tests/copy/voiceMechanics.test.js",
+      "test": "E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)",
+      "subsystem": "copy / voice (string-literal + JSX em-dash ratchets)",
+      "cause": "Lane P-3 landed machine-generated dossier prose (src/data/dossierCausalProse.generated.js and src/data/dossierStateProse/*.generated.js) carrying em-dashes; total string-literal debt is 1369 against a committed budget of 670, and JSX debt 18 against 6. The generated corpora were never passed through the voice ratchet.",
+      "introducedAt": "23d118eb25473f8a64e22253802a986045e596ad",
+      "class": "debt"
+    },
+    "tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) total JSX debt never grows past its committed budget": {
+      "file": "tests/copy/voiceMechanics.test.js",
+      "test": "E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) total JSX debt never grows past its committed budget",
+      "subsystem": "copy / voice (string-literal + JSX em-dash ratchets)",
+      "cause": "Lane P-3 landed machine-generated dossier prose (src/data/dossierCausalProse.generated.js and src/data/dossierStateProse/*.generated.js) carrying em-dashes; total string-literal debt is 1369 against a committed budget of 670, and JSX debt 18 against 6. The generated corpora were never passed through the voice ratchet.",
+      "introducedAt": "23d118eb25473f8a64e22253802a986045e596ad",
+      "class": "debt"
+    },
+    "tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)": {
+      "file": "tests/copy/voiceMechanics.test.js",
+      "test": "E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)",
+      "subsystem": "copy / voice (string-literal + JSX em-dash ratchets)",
+      "cause": "Lane P-3 landed machine-generated dossier prose (src/data/dossierCausalProse.generated.js and src/data/dossierStateProse/*.generated.js) carrying em-dashes; total string-literal debt is 1369 against a committed budget of 670, and JSX debt 18 against 6. The generated corpora were never passed through the voice ratchet.",
+      "introducedAt": "23d118eb25473f8a64e22253802a986045e596ad",
+      "class": "debt"
+    },
+    "tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) total debt never grows past its committed budget": {
+      "file": "tests/copy/voiceMechanics.test.js",
+      "test": "E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) total debt never grows past its committed budget",
+      "subsystem": "copy / voice (string-literal + JSX em-dash ratchets)",
+      "cause": "Lane P-3 landed machine-generated dossier prose (src/data/dossierCausalProse.generated.js and src/data/dossierStateProse/*.generated.js) carrying em-dashes; total string-literal debt is 1369 against a committed budget of 670, and JSX debt 18 against 6. The generated corpora were never passed through the voice ratchet.",
+      "introducedAt": "23d118eb25473f8a64e22253802a986045e596ad",
+      "class": "debt"
+    },
+    "tests/design/deepCraftKillList.test.js :: THE DEEP CRAFT kill-list ratchets (shrink-only; zero closes the wave) tintedCallouts: count <= 163 (grew = new SaaS structure; shrank = lower this ceiling)": {
+      "file": "tests/design/deepCraftKillList.test.js",
+      "test": "THE DEEP CRAFT kill-list ratchets (shrink-only; zero closes the wave) tintedCallouts: count <= 163 (grew = new SaaS structure; shrank = lower this ceiling)",
+      "subsystem": "design / deep-craft kill list",
+      "cause": "tintedCallouts census is 164 against a frozen ceiling of 163 — the Founders' Hall page added one more tinted callout structure.",
+      "introducedAt": "531a84887b81177cbb493463541de46864cb554f",
+      "class": "debt"
+    },
+    "tests/docs/architectureFreshness.test.js :: ARCHITECTURE.md carries the spatial engine + the real gate (docs-knowledge-2) states the worldPulse module count within drift tolerance": {
+      "file": "tests/docs/architectureFreshness.test.js",
+      "test": "ARCHITECTURE.md carries the spatial engine + the real gate (docs-knowledge-2) states the worldPulse module count within drift tolerance",
+      "subsystem": "docs / ARCHITECTURE.md freshness",
+      "cause": "ARCHITECTURE.md states a worldPulse module count that has drifted outside tolerance against the live tree (measured 218 vs a stated figure whose lower bound is 301.6). The worldPulse area was split and renamed across many waves without the doc being re-derived.",
+      "introducedAt": "unbisectable: a doc-drift walker over a module count that moved across many worldPulse waves in the 493-commit window since 2026-08-01; no single commit introduced the drift. Burn-down lane must re-derive the figure, not bisect it.",
+      "class": "debt"
+    },
+    "tests/docs/deployRunbookFreshness.test.js :: DEPLOY.md freshness — the runbook derives from the filesystem names the current migration head file": {
+      "file": "tests/docs/deployRunbookFreshness.test.js",
+      "test": "DEPLOY.md freshness — the runbook derives from the filesystem names the current migration head file",
+      "subsystem": "migrations / deploy runbook (OWNER-GATED)",
+      "cause": "OWNER-GATED migration debt. Migration 195_civility_guard_and_public_identity.sql landed past the manifest head of 194; docs/DEPLOY.md line 150 still names 194_operator_messages.sql as the current migration head. Migrations and deploys are an owner-gated class — do NOT repair this in a build lane.",
+      "introducedAt": "7aa43b50bcbfa1c0223a4222df17606cf91b57c9",
+      "class": "owner-gated"
+    },
+    "tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target": {
+      "file": "tests/docs/enforcement-claims.test.js",
+      "test": "enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target",
+      "subsystem": "docs / enforcement-claim meta-pin",
+      "cause": "A completeness claim in docs/FABLE_VALIDATION_QUEUE.md:179 (the R-BLD-10 chair ruling row) carries no resolvable @enforced-by target, so the meta-pin that refuses unbacked claims reds.",
+      "introducedAt": "1caf2fbe3f294e7f7a9cee4266110fea8ef08979",
+      "class": "debt"
+    },
+    "tests/docs/migrationRollbackDiscipline.test.js :: migration rollback discipline new money/PII migrations ship a reversal or an explicit @rollback note": {
+      "file": "tests/docs/migrationRollbackDiscipline.test.js",
+      "test": "migration rollback discipline new money/PII migrations ship a reversal or an explicit @rollback note",
+      "subsystem": "migrations / rollback discipline (OWNER-GATED)",
+      "cause": "OWNER-GATED migration debt. 195_civility_guard_and_public_identity.sql is a money/PII migration with no supabase/rollback/195_*.down.sql and no `-- @rollback:` note. The whole tree carries ZERO .down.sql beside the migrations (measured). Migrations are an owner-gated class — do NOT author a reversal in a build lane.",
+      "introducedAt": "7aa43b50bcbfa1c0223a4222df17606cf91b57c9",
+      "class": "owner-gated"
+    },
+    "tests/domain/generosityReactions.test.js :: the obligation sub-ledger (§3.1) — fold, deepen, repay, prune every other runtime obligation fold is mutation-only (decayPerTick:0)": {
+      "file": "tests/domain/generosityReactions.test.js",
+      "test": "the obligation sub-ledger (§3.1) — fold, deepen, repay, prune every other runtime obligation fold is mutation-only (decayPerTick:0)",
+      "subsystem": "worldPulse / obligation sub-ledger",
+      "cause": "The §3.1 obligation fold census expects 5 mutation-only runtime folds and measures 7 — two new obligation folds landed with decayPerTick:0 without being added to the dispositioned set.",
+      "introducedAt": "unbisectable: an inventory pin over runtime obligation folds; two folds were added by separate worldPulse waves in the 2026-08 window. Burn-down lane must disposition both, not bisect one.",
+      "class": "debt"
+    },
+    "tests/domain/guidanceRegistry.walker.test.js :: title= ratchet — native OS tooltips are a shrink-only census the src title= count stays at or below the shrink-only baseline (482)": {
+      "file": "tests/domain/guidanceRegistry.walker.test.js",
+      "test": "title= ratchet — native OS tooltips are a shrink-only census the src title= count stays at or below the shrink-only baseline (482)",
+      "subsystem": "UI / glossary affordance (native title= census)",
+      "cause": "src title= census is 484 against a shrink-only baseline of 482 — two new native OS tooltips were added instead of routing through the glossary affordance.",
+      "introducedAt": "unbisectable: a shrink-only census that grew by 2 across the 2026-08 UI waves; the walker names the count, not the sites. Burn-down lane must re-run the walker for the two new sites.",
+      "class": "debt"
+    },
+    "tests/domain/metronomeCooldownLint.test.js :: metronome-cooldown lint — condition-bearing outcome sources self-limit the non-cooldown emitter set may only SHRINK (no NEW condition-bearing source bypasses the metronome)": {
+      "file": "tests/domain/metronomeCooldownLint.test.js",
+      "test": "metronome-cooldown lint — condition-bearing outcome sources self-limit the non-cooldown emitter set may only SHRINK (no NEW condition-bearing source bypasses the metronome)",
+      "subsystem": "worldPulse / metronome cooldown (E4-2a flood class)",
+      "cause": "src/domain/worldPulse/razingExecution.js stamps a condition/stressor as a metronome-EXEMPT outcome source but names no cooldown/metronome mechanism, so the non-cooldown emitter set grew instead of shrinking.",
+      "introducedAt": "86d83f6ed5cd4384683e12acab4ce3db0eee9b6b",
+      "class": "debt"
+    },
+    "tests/domain/roadsParticipation.test.js :: participation chokepoint — the .npcs-reader inventory ratchet (§8 census) the set of participation .npcs readers is exactly the dispositioned census (a new reader trips this)": {
+      "file": "tests/domain/roadsParticipation.test.js",
+      "test": "participation chokepoint — the .npcs-reader inventory ratchet (§8 census) the set of participation .npcs readers is exactly the dispositioned census (a new reader trips this)",
+      "subsystem": "roads / participation chokepoint",
+      "cause": "The participation `.npcs` reader inventory measures 38 readers against a dispositioned census of 31 — WR-7a envoy-errand work added readers that were never dispositioned at the chokepoint.",
+      "introducedAt": "02a8eddbcc9644c10ffce05679316a3729dae4c1",
+      "class": "debt"
+    },
+    "tests/edgeFunctions/aiCharterBundle.freshness.test.js :: aiCharter bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)": {
+      "file": "tests/edgeFunctions/aiCharterBundle.freshness.test.js",
+      "test": "aiCharter bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)",
+      "subsystem": "edge bundles / built artifacts",
+      "cause": "THE BUILT-ARTIFACT HAZARD: supabase/functions/_shared/aiCharterBundle is stale against its inputs. Edge bundles are BUILT artifacts and a lane touching a bundled input must rebuild edge-shared IN the same commit; later lanes changed inputs without rebuilding. Last clean rebuild was f2c10742.",
+      "introducedAt": "unbisectable: the bundles were last rebuilt clean at f2c1074266fc3243f73cc05a11feb6f33004ca07; every later commit touching a bundled input without running npm run build:edge-shared contributed. No single introducing commit. Cure is one rebuild of all five bundles from a clean committed tree.",
+      "class": "debt"
+    },
+    "tests/edgeFunctions/aiGroundingBundle.freshness.test.js :: Tier 6.8 — aiGrounding bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)": {
+      "file": "tests/edgeFunctions/aiGroundingBundle.freshness.test.js",
+      "test": "Tier 6.8 — aiGrounding bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)",
+      "subsystem": "edge bundles / built artifacts",
+      "cause": "THE BUILT-ARTIFACT HAZARD: aiGroundingBundle is stale — src/data/constants.js, entityTags.js, institutionalCatalog.js, npcTraitWeights.js, powerData.js and the stressor spine phrases all changed since the bundle was built.",
+      "introducedAt": "unbisectable: same accumulation as aiCharterBundle — last clean rebuild f2c1074266fc3243f73cc05a11feb6f33004ca07, then many input-touching lanes. Cure is one rebuild of all five bundles.",
+      "class": "debt"
+    },
+    "tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js :: aiOutputSchema bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)": {
+      "file": "tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js",
+      "test": "aiOutputSchema bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)",
+      "subsystem": "edge bundles / built artifacts",
+      "cause": "THE BUILT-ARTIFACT HAZARD: aiOutputSchemaBundle is stale against its recorded input hash.",
+      "introducedAt": "unbisectable: same accumulation as aiCharterBundle — last clean rebuild f2c1074266fc3243f73cc05a11feb6f33004ca07. Cure is one rebuild of all five bundles.",
+      "class": "debt"
+    },
+    "tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiCharterBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content": {
+      "file": "tests/edgeFunctions/edgeSharedBundleReproducibility.test.js",
+      "test": "edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiCharterBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content",
+      "subsystem": "edge bundles / dirty-build class",
+      "cause": "THE DIRTY-BUILD CLASS: the recorded sourceHash in the *.meta.json files was computed over content that is neither committed nor staged, so no checkout can reproduce the bundle. The freshness suite agrees with it only because it reads the same dirty tree. Three bundles affected.",
+      "introducedAt": "unbisectable: a bundle built from a dirty working tree; the offending build is not itself a commit. Last reproducible rebuild was f2c1074266fc3243f73cc05a11feb6f33004ca07. Cure is one rebuild from a clean committed tree.",
+      "class": "debt"
+    },
+    "tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiGroundingBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content": {
+      "file": "tests/edgeFunctions/edgeSharedBundleReproducibility.test.js",
+      "test": "edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiGroundingBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content",
+      "subsystem": "edge bundles / dirty-build class",
+      "cause": "THE DIRTY-BUILD CLASS: the recorded sourceHash in the *.meta.json files was computed over content that is neither committed nor staged, so no checkout can reproduce the bundle. The freshness suite agrees with it only because it reads the same dirty tree. Three bundles affected.",
+      "introducedAt": "unbisectable: a bundle built from a dirty working tree; the offending build is not itself a commit. Last reproducible rebuild was f2c1074266fc3243f73cc05a11feb6f33004ca07. Cure is one rebuild from a clean committed tree.",
+      "class": "debt"
+    },
+    "tests/edgeFunctions/edgeSharedBundleReproducibility.test.js :: edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiOutputSchemaBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content": {
+      "file": "tests/edgeFunctions/edgeSharedBundleReproducibility.test.js",
+      "test": "edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) aiOutputSchemaBundle.meta.json the recorded sourceHash equals the builder hash over INDEX content",
+      "subsystem": "edge bundles / dirty-build class",
+      "cause": "THE DIRTY-BUILD CLASS: the recorded sourceHash in the *.meta.json files was computed over content that is neither committed nor staged, so no checkout can reproduce the bundle. The freshness suite agrees with it only because it reads the same dirty tree. Three bundles affected.",
+      "introducedAt": "unbisectable: a bundle built from a dirty working tree; the offending build is not itself a commit. Last reproducible rebuild was f2c1074266fc3243f73cc05a11feb6f33004ca07. Cure is one rebuild from a clean committed tree.",
+      "class": "debt"
+    },
+    "tests/joins/crisisTripleSync.test.js :: source scan — the trio is written only through the lifecycle the twin actions are referenced only by their definitions and the directive consumer": {
+      "file": "tests/joins/crisisTripleSync.test.js",
+      "test": "source scan — the trio is written only through the lifecycle the twin actions are referenced only by their definitions and the directive consumer",
+      "subsystem": "joins / crisis twin-directive lifecycle",
+      "cause": "The source scan finds 7 references to the twin actions where the lifecycle allows 6, and the `twinDirectiveForEvent(` wiring probe now reads an empty/blank source region — the consumer moved or was renamed, so the pin reads a file that no longer carries the call.",
+      "introducedAt": "unbisectable: a source-address pin whose target moved; the first-match/line-address rot class. Burn-down lane must re-point the pin at the live consumer rather than bisect the move.",
+      "class": "debt"
+    },
+    "tests/joins/crisisTripleSync.test.js :: source scan — the trio is written only through the lifecycle the wiring is live, not vacuously empty": {
+      "file": "tests/joins/crisisTripleSync.test.js",
+      "test": "source scan — the trio is written only through the lifecycle the wiring is live, not vacuously empty",
+      "subsystem": "joins / crisis twin-directive lifecycle",
+      "cause": "The source scan finds 7 references to the twin actions where the lifecycle allows 6, and the `twinDirectiveForEvent(` wiring probe now reads an empty/blank source region — the consumer moved or was renamed, so the pin reads a file that no longer carries the call.",
+      "introducedAt": "unbisectable: a source-address pin whose target moved; the first-match/line-address rot class. Burn-down lane must re-point the pin at the live consumer rather than bisect the move.",
+      "class": "debt"
+    },
+    "tests/lib/accountContentPortability.test.js :: account custom-content identity portability preflight refuses reviewed bindings absent from the full ledger archive": {
+      "file": "tests/lib/accountContentPortability.test.js",
+      "test": "account custom-content identity portability preflight refuses reviewed bindings absent from the full ledger archive",
+      "subsystem": "content / reviewed supply-chain persistence",
+      "cause": "reviewedSupplyChainContentHash throws `TypeError: needIcon must be bounded non-empty text` — boundedText(artifact.needIcon) at src/domain/content/reviewedSupplyChainPersistence.js:542 rejects fixtures/records whose needIcon is absent or empty, so the hash cannot be computed for reviewed bindings.",
+      "introducedAt": "unbisectable: the boundedText validator and the needIcon field predate the 2026-08 window (the field is in the schema list at line 80); what changed is the shape reaching it. Burn-down lane must find the writer that stopped supplying needIcon.",
+      "class": "debt"
+    },
+    "tests/lib/accountContentPortability.test.js :: account custom-content identity portability remaps reviewed evidence only through a full archive receipt": {
+      "file": "tests/lib/accountContentPortability.test.js",
+      "test": "account custom-content identity portability remaps reviewed evidence only through a full archive receipt",
+      "subsystem": "content / reviewed supply-chain persistence",
+      "cause": "reviewedSupplyChainContentHash throws `TypeError: needIcon must be bounded non-empty text` — boundedText(artifact.needIcon) at src/domain/content/reviewedSupplyChainPersistence.js:542 rejects fixtures/records whose needIcon is absent or empty, so the hash cannot be computed for reviewed bindings.",
+      "introducedAt": "unbisectable: the boundedText validator and the needIcon field predate the 2026-08 window (the field is in the schema list at line 80); what changed is the shape reaching it. Burn-down lane must find the writer that stopped supplying needIcon.",
+      "class": "debt"
+    },
+    "tests/lib/spatialLedgerCoverage.walker.test.js :: spatialUsage ledger-coverage walker (lib-infra-copy-1) every written spatialLedgers key is TRACKED or EXEMPT (and no phantom classifications)": {
+      "file": "tests/lib/spatialLedgerCoverage.walker.test.js",
+      "test": "spatialUsage ledger-coverage walker (lib-infra-copy-1) every written spatialLedgers key is TRACKED or EXEMPT (and no phantom classifications)",
+      "subsystem": "spatial / spatialLedgers coverage walker",
+      "cause": "The written spatialLedgers key set measures 59 against a tracked/exempt census of 61 — two keys are written that are neither TRACKED nor EXEMPT (or two classifications are phantom). The sibling layering lane also touches this file.",
+      "introducedAt": "unbisectable: a key-coverage census that moved with the spatial ledger namespace across several waves. Burn-down lane must re-run the walker and disposition each key.",
+      "class": "debt"
+    },
+    "tests/lint/clampPrimitiveBaseline.test.js :: clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01": {
+      "file": "tests/lint/clampPrimitiveBaseline.test.js",
+      "test": "clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01",
+      "subsystem": "lint / clamp primitive ratchet",
+      "cause": "The baseline lists 62 files that define a local clamp/clamp01 while the tree now has 73 — 11 new local clamp definitions landed instead of importing the shared primitive.",
+      "introducedAt": "unbisectable: 11 separate local clamp definitions across many 2026-08 waves; no single introducing commit. Burn-down lane must route each to the shared primitive.",
+      "class": "debt"
+    },
+    "tests/lint/domainAnyCastBaseline.test.js :: domain any-cast ratchet — frozen baseline governance baseline exactly matches the tree (airtight against any drift mode)": {
+      "file": "tests/lint/domainAnyCastBaseline.test.js",
+      "test": "domain any-cast ratchet — frozen baseline governance baseline exactly matches the tree (airtight against any drift mode)",
+      "subsystem": "types / domain any-cast ratchet",
+      "cause": "any-cast debt grew past the per-file frozen baseline: src/domain/worldPulse/commercialReasons.js carries 31 any-holes against a baseline of 0 (the file is new — TR-1 CASUS COMMERCII), plus envoyPulse.js at 2. New files get a ceiling of 0.",
+      "introducedAt": "d7ea69a4baf64d8c4281650b5160103519f453ef",
+      "class": "debt"
+    },
+    "tests/lint/domainAnyCastBaseline.test.js :: domain any-cast ratchet — frozen baseline governance no file exceeds its baseline (new files get 0) — fix the types, do not widen": {
+      "file": "tests/lint/domainAnyCastBaseline.test.js",
+      "test": "domain any-cast ratchet — frozen baseline governance no file exceeds its baseline (new files get 0) — fix the types, do not widen",
+      "subsystem": "types / domain any-cast ratchet",
+      "cause": "any-cast debt grew past the per-file frozen baseline: src/domain/worldPulse/commercialReasons.js carries 31 any-holes against a baseline of 0 (the file is new — TR-1 CASUS COMMERCII), plus envoyPulse.js at 2. New files get a ceiling of 0.",
+      "introducedAt": "d7ea69a4baf64d8c4281650b5160103519f453ef",
+      "class": "debt"
+    },
+    "tests/lint/negativeAssertionAnchor.walker.test.js :: negative-assertion anchor walker (habitat removal) no NEW un-anchored negative assertion in the generation-facing test trees": {
+      "file": "tests/lint/negativeAssertionAnchor.walker.test.js",
+      "test": "negative-assertion anchor walker (habitat removal) no NEW un-anchored negative assertion in the generation-facing test trees",
+      "subsystem": "epistemic prevention / anchored negatives",
+      "cause": "78 un-anchored negative assertions are present in the generation-facing test trees where the walker demands zero, and 3 landed back inside the four trees whose EP-2/EP-6 win is explicitly not spendable.",
+      "introducedAt": "unbisectable: 78 sites accumulated across many test-authoring waves. Burn-down lane must anchor each via tests/helpers/anchoredNegatives.js.",
+      "class": "debt"
+    },
+    "tests/lint/negativeAssertionAnchor.walker.test.js :: negative-assertion anchor walker (habitat removal) the four generation-facing trees stay at EXACT zero (the EP-2/EP-6 win is not spendable)": {
+      "file": "tests/lint/negativeAssertionAnchor.walker.test.js",
+      "test": "negative-assertion anchor walker (habitat removal) the four generation-facing trees stay at EXACT zero (the EP-2/EP-6 win is not spendable)",
+      "subsystem": "epistemic prevention / anchored negatives",
+      "cause": "78 un-anchored negative assertions are present in the generation-facing test trees where the walker demands zero, and 3 landed back inside the four trees whose EP-2/EP-6 win is explicitly not spendable.",
+      "introducedAt": "unbisectable: 78 sites accumulated across many test-authoring waves. Burn-down lane must anchor each via tests/helpers/anchoredNegatives.js.",
+      "class": "debt"
+    },
+    "tests/lint/proseNumerics.test.js :: prose numerics live-tree ratchet (exact legacy identity, shrink-only) path + line + category + snippet debt exactly matches the committed baseline": {
+      "file": "tests/lint/proseNumerics.test.js",
+      "test": "prose numerics live-tree ratchet (exact legacy identity, shrink-only) path + line + category + snippet debt exactly matches the committed baseline",
+      "subsystem": "copy / prose numerics ratchet",
+      "cause": "The path+line+category+snippet debt list drifted from the committed baseline (413 rows) — new prose numerics leaked and/or legacy rows moved lines, which this exact-identity ratchet reads as drift.",
+      "introducedAt": "unbisectable: an exact line-addressed inventory that rots whenever any governed file shifts lines; the hand-keyed line-address rot class. Burn-down lane must regenerate once and review every removed row.",
+      "class": "debt"
+    },
+    "tests/lint/ruinFilterRoster.walker.test.js :: ruin-filter roster ratchet (structural-prevention Pattern 2) every `.institutions` reader is COMPLIANT or EXEMPT": {
+      "file": "tests/lint/ruinFilterRoster.walker.test.js",
+      "test": "ruin-filter roster ratchet (structural-prevention Pattern 2) every `.institutions` reader is COMPLIANT or EXEMPT",
+      "subsystem": "ruins / institutions reader roster",
+      "cause": "6 `.institutions` readers are neither COMPLIANT (ruin-filtered) nor EXEMPT — new readers landed without being dispositioned in the roster.",
+      "introducedAt": "unbisectable: 6 readers added across several waves. Burn-down lane must disposition each as compliant or exempt.",
+      "class": "debt"
+    },
+    "tests/lint/seedLoopTotality.walker.test.js :: seed-loop totality walker (habitat removal) no NEW bare seed loop in the generation-facing test trees": {
+      "file": "tests/lint/seedLoopTotality.walker.test.js",
+      "test": "seed-loop totality walker (habitat removal) no NEW bare seed loop in the generation-facing test trees",
+      "subsystem": "epistemic prevention / seed-loop totality",
+      "cause": "8 bare seed loops are present in the generation-facing test trees where the walker demands zero, and 1 landed back inside the four trees whose EP-2 win is not spendable.",
+      "introducedAt": "unbisectable: 8 sites accumulated across many test-authoring waves. Burn-down lane must route each through tests/helpers/seedFailures.js.",
+      "class": "debt"
+    },
+    "tests/lint/seedLoopTotality.walker.test.js :: seed-loop totality walker (habitat removal) the four generation-facing trees stay at EXACT zero (the EP-2 win is not spendable)": {
+      "file": "tests/lint/seedLoopTotality.walker.test.js",
+      "test": "seed-loop totality walker (habitat removal) the four generation-facing trees stay at EXACT zero (the EP-2 win is not spendable)",
+      "subsystem": "epistemic prevention / seed-loop totality",
+      "cause": "8 bare seed loops are present in the generation-facing test trees where the walker demands zero, and 1 landed back inside the four trees whose EP-2 win is not spendable.",
+      "introducedAt": "unbisectable: 8 sites accumulated across many test-authoring waves. Burn-down lane must route each through tests/helpers/seedFailures.js.",
+      "class": "debt"
+    },
+    "tests/lint/sovereigntyLightingContract.walker.test.js :: the sovereignty lighting condition — a marker is EVIDENCE only in a live title THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed": {
+      "file": "tests/lint/sovereigntyLightingContract.walker.test.js",
+      "test": "the sovereignty lighting condition — a marker is EVIDENCE only in a live title THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed",
+      "subsystem": "lighting / sovereignty census",
+      "cause": "THE LIGHTING CENSUS COUNTS TEST FILES: the estate's file count moved to 2350 against a stated 2346. This walker reds whenever ANY new test file lands — a recorded hazard. The figure must be re-measured off an archive of the actual parent, never re-worded.",
+      "introducedAt": "unbisectable: by construction this reds on any test-file addition; four files were added since the figure was frozen. Note this lane adds one more (tests/lint/testRatchet.test.js), so the burn-down must re-measure at its own parent.",
+      "class": "debt"
+    },
+    "tests/lint/transcendentalMathBaseline.test.js :: transcendental-math ratchet — frozen baseline governance baseline exactly matches the tree (airtight against any drift mode)": {
+      "file": "tests/lint/transcendentalMathBaseline.test.js",
+      "test": "transcendental-math ratchet — frozen baseline governance baseline exactly matches the tree (airtight against any drift mode)",
+      "subsystem": "determinism / transcendental math ratchet",
+      "cause": "Transcendental-float sites grew past the per-file frozen baseline, putting cross-engine same-seed replay at risk. The baseline map also no longer matches the tree exactly (drift in both directions).",
+      "introducedAt": "unbisectable: sites accumulated across several 2026-08 math-bearing waves. Burn-down lane must reformulate or same-engine-golden each new site.",
+      "class": "debt"
+    },
+    "tests/lint/transcendentalMathBaseline.test.js :: transcendental-math ratchet — frozen baseline governance no file exceeds its baseline (new files get 0) — reformulate, do not widen": {
+      "file": "tests/lint/transcendentalMathBaseline.test.js",
+      "test": "transcendental-math ratchet — frozen baseline governance no file exceeds its baseline (new files get 0) — reformulate, do not widen",
+      "subsystem": "determinism / transcendental math ratchet",
+      "cause": "Transcendental-float sites grew past the per-file frozen baseline, putting cross-engine same-seed replay at risk. The baseline map also no longer matches the tree exactly (drift in both directions).",
+      "introducedAt": "unbisectable: sites accumulated across several 2026-08 math-bearing waves. Burn-down lane must reformulate or same-engine-golden each new site.",
+      "class": "debt"
+    },
+    "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'trajectory_misread' retains the five receipt-annex families verbatim": {
+      "file": "tests/lint/warCostKindPools.walker.test.js",
+      "test": "SP-6 phrased-kind registry — WR-4 war costs 'trajectory_misread' retains the five receipt-annex families verbatim",
+      "subsystem": "war / SP-6 phrased-kind registry (war costs)",
+      "cause": "The receipt-annex family sets for 'war_trajectory_winning', 'war_trajectory_losing' and 'trajectory_misread' no longer retain exactly the five annex families verbatim (measured 6, 6 and 10). Extra families were minted into the war-cost pools without amending the registry pin.",
+      "introducedAt": "unbisectable: pool families were added across several WR-4/SP-6 waves. Burn-down lane must reconcile the registry against the pools.",
+      "class": "debt"
+    },
+    "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_losing' retains the five receipt-annex families verbatim": {
+      "file": "tests/lint/warCostKindPools.walker.test.js",
+      "test": "SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_losing' retains the five receipt-annex families verbatim",
+      "subsystem": "war / SP-6 phrased-kind registry (war costs)",
+      "cause": "The receipt-annex family sets for 'war_trajectory_winning', 'war_trajectory_losing' and 'trajectory_misread' no longer retain exactly the five annex families verbatim (measured 6, 6 and 10). Extra families were minted into the war-cost pools without amending the registry pin.",
+      "introducedAt": "unbisectable: pool families were added across several WR-4/SP-6 waves. Burn-down lane must reconcile the registry against the pools.",
+      "class": "debt"
+    },
+    "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_winning' retains the five receipt-annex families verbatim": {
+      "file": "tests/lint/warCostKindPools.walker.test.js",
+      "test": "SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_winning' retains the five receipt-annex families verbatim",
+      "subsystem": "war / SP-6 phrased-kind registry (war costs)",
+      "cause": "The receipt-annex family sets for 'war_trajectory_winning', 'war_trajectory_losing' and 'trajectory_misread' no longer retain exactly the five annex families verbatim (measured 6, 6 and 10). Extra families were minted into the war-cost pools without amending the registry pin.",
+      "introducedAt": "unbisectable: pool families were added across several WR-4/SP-6 waves. Burn-down lane must reconcile the registry against the pools.",
+      "class": "debt"
+    },
+    "tests/lint/warRulingKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-5 war rulings 'succession_demand_inherited' retains the five annex families without editorial cross-references": {
+      "file": "tests/lint/warRulingKindPools.walker.test.js",
+      "test": "SP-6 phrased-kind registry — WR-5 war rulings 'succession_demand_inherited' retains the five annex families without editorial cross-references",
+      "subsystem": "war / SP-6 phrased-kind registry (war rulings)",
+      "cause": "'succession_demand_inherited' no longer retains the five annex families without editorial cross-references (measured 6).",
+      "introducedAt": "unbisectable: same SP-6 registry drift as warCostKindPools. Burn-down lane must reconcile the registry against the pools.",
+      "class": "debt"
+    },
+    "tests/property/mechanismLitCoverage.test.js :: mechanism lit-coverage walker (Enforcer E-H, bar 4) THE RATCHET (flags): the flag lit-coverage gap exactly equals the shrink-only baseline": {
+      "file": "tests/property/mechanismLitCoverage.test.js",
+      "test": "mechanism lit-coverage walker (Enforcer E-H, bar 4) THE RATCHET (flags): the flag lit-coverage gap exactly equals the shrink-only baseline",
+      "subsystem": "certification / mechanism lit-coverage (Enforcer E-H bar 4)",
+      "cause": "The lit-coverage gap is non-empty where the shrink-only baseline demands zero: 23 modules (applyWorldPulseBetrayal and 22 more) and the warEconomyEnabled flag have no lit family. CR-FP-11 taught the inclusion ratchet to SEE modules no family covers, which surfaced the pre-existing gap.",
+      "introducedAt": "1137f935ee4c1d27ac1f515e2500ee82821e5cef",
+      "class": "debt"
+    },
+    "tests/property/mechanismLitCoverage.test.js :: mechanism lit-coverage walker (Enforcer E-H, bar 4) THE RATCHET (modules): the lit-coverage gap exactly equals the shrink-only baseline": {
+      "file": "tests/property/mechanismLitCoverage.test.js",
+      "test": "mechanism lit-coverage walker (Enforcer E-H, bar 4) THE RATCHET (modules): the lit-coverage gap exactly equals the shrink-only baseline",
+      "subsystem": "certification / mechanism lit-coverage (Enforcer E-H bar 4)",
+      "cause": "The lit-coverage gap is non-empty where the shrink-only baseline demands zero: 23 modules (applyWorldPulseBetrayal and 22 more) and the warEconomyEnabled flag have no lit family. CR-FP-11 taught the inclusion ratchet to SEE modules no family covers, which surfaced the pre-existing gap.",
+      "introducedAt": "1137f935ee4c1d27ac1f515e2500ee82821e5cef",
+      "class": "debt"
+    },
+    "tests/security/mapSnapshotImport.contract.test.js :: cross-user map import never carries an untrusted raw snapshot (F6) still imports the safe fields (seed) so geography can regenerate locally": {
+      "file": "tests/security/mapSnapshotImport.contract.test.js",
+      "test": "cross-user map import never carries an untrusted raw snapshot (F6) still imports the safe fields (seed) so geography can regenerate locally",
+      "subsystem": "security / cross-user map import contract",
+      "cause": "The import no longer carries the safe `seed` field through, so geography cannot regenerate locally after a cross-user import — the F6 contract requires the raw snapshot be dropped but the seed retained.",
+      "introducedAt": "unbisectable: a field-projection change in the import path; the projection is assembled in more than one place. Burn-down lane must trace the seed through the import projection.",
+      "class": "debt"
+    },
+    "tests/store/customContentSlice.race.test.js :: customContentSlice durable command race a delayed reviewed response cannot rewind a newer archive": {
+      "file": "tests/store/customContentSlice.race.test.js",
+      "test": "customContentSlice durable command race a delayed reviewed response cannot rewind a newer archive",
+      "subsystem": "content / reviewed supply-chain persistence",
+      "cause": "Same root cause as accountContentPortability: reviewedSupplyChainContentHash throws `needIcon must be bounded non-empty text` from boundedText() when a durable command race replays a reviewed response whose artifact has no needIcon.",
+      "introducedAt": "unbisectable: shares the accountContentPortability cause — the writer that stopped supplying needIcon is not yet identified. Fix once, and all three tests clear.",
+      "class": "debt"
+    },
+    "tests/ui/mapOverlayTransformContract.test.jsx :: WorldMapStage ↔ MapOverlay transform-ref contract image-mode overlay writes the parent transform ref after the fit effect": {
+      "file": "tests/ui/mapOverlayTransformContract.test.jsx",
+      "test": "WorldMapStage ↔ MapOverlay transform-ref contract image-mode overlay writes the parent transform ref after the fit effect",
+      "subsystem": "UI / WorldMapStage ↔ MapOverlay transform ref",
+      "cause": "In image mode the overlay does not write the parent transform ref after the fit effect (the ref reads null), breaking the stage↔overlay transform contract.",
+      "introducedAt": "unbisectable: a render-effect ordering change in the map stage; no single commit isolated. Burn-down lane must drive the fit effect and observe the ref write.",
+      "class": "debt"
+    }
+  }
+}

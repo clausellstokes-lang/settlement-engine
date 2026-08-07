@@ -151,8 +151,16 @@ jobs:
       # store + lib integration, component/UI smoke, a11y, security, and
       # edge-function contract tests. (Live total: see this step's log — the
       # hardcoded count drifted, so it is no longer pinned in this comment.)
-      - name: Run tests
-        run: npm run test
+      # THE PER-TEST RATCHET, not the bare boolean. `npm run test` is a boolean
+      # gate at zero failures; it was red, and because both this job's steps and
+      # the local `npm run check` chain are sequential, everything BEHIND it —
+      # Build and Verify bundle chunk contracts — had not run since 2026-08-02.
+      # scripts/check-test-ratchet.mjs RUNS THE WHOLE SUITE (it never skips or
+      # excludes anything) and compares the result against a frozen, ATTRIBUTED,
+      # per-test census that may only shrink. See scripts/check-test-ratchet.mjs
+      # and tests/lint/testRatchet.test.js. `npm run test` stays raw for burn lanes.
+      - name: Run tests (per-test ratchet)
+        run: npm run test:ratchet
 
       # Production build — confirms Vite/Rollup chunking is healthy, the
       # bundle still produces, and (via the vite.config onwarn guard) that
