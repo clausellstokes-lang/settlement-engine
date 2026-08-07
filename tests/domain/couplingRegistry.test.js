@@ -59,19 +59,29 @@ import {
 } from '../../src/domain/certification/couplingRegistry.js';
 
 /**
- * The eleven chartered volume prefixes (DESIGN_FP_ARCHITECTURE.md §5 wave #2 /
- * CW seam SC-7). A twelfth volume must amend BOTH this list and the wave block.
+ * The twelve chartered volume prefixes (DESIGN_FP_ARCHITECTURE.md §9 seam row 32 /
+ * CW seam SC-7). A thirteenth volume must amend BOTH this list and that seam row.
  *
  * ES (ESPIONAGE) and WY (WAYFARE) were admitted at the 2026-08-05
  * owner-amendment fold — ES tenth, WY eleventh (docs/DESIGN_FP_ARCH_ES.md §6;
- * docs/DESIGN_FP_ARCH_WY.md §5b item 7). ADMISSION IS DOCUMENT-ONLY: nothing
+ * docs/DESIGN_FP_ARCH_WY.md §5b item 7). HB (HABIT) is the TWELFTH, admitted at
+ * the 2026-08-07 fold under HB chair question Q4, RULED YES with its own
+ * couplingRegistryHabit.js leaf (docs/DESIGN_FP_ARCH_HB.md §7 Q4; the first row
+ * lands at HB-2). ⛔ NEITHER OF THAT FOLD'S OTHER TWO VOLUMES JOINS, AND BOTH
+ * ABSTENTIONS ARE REASONED RATHER THAN OVERSIGHTS: EP declines explicitly (its
+ * §5 item 7 — "NO PREFIX ADMISSION IS OWED": couplingInclusion.walker scopes its
+ * census to src/domain/{worldPulse,spatial}/, so src/store and src/kernel are
+ * outside it, pulseKernel.js and worldState.js are ARGUED_UNLAYERED, and an epoch
+ * is SUBSTRATE, not a subject any layer family owns); and WC mints no coupling id
+ * of its own — it carries zero CPL- ids in 6,492 lines. ADMISSION IS
+ * DOCUMENT-ONLY: nothing
  * in this file or in the coupling walkers demands a registry row per admitted
  * prefix, so a chartered prefix with zero live rows is green by design. The
  * obligation runs the other way — every live row must carry a chartered
  * prefix. The FIRST ES or WY row additionally widens the owningVolume set
  * asserted below, in that row's own commit.
  */
-const CHARTERED_VOLUME_PREFIXES = Object.freeze(['WR', 'TR', 'GR', 'WF', 'POP', 'IN', 'INT', 'SP', 'CW', 'ES', 'WY']);
+const CHARTERED_VOLUME_PREFIXES = Object.freeze(['WR', 'TR', 'GR', 'WF', 'POP', 'IN', 'INT', 'SP', 'CW', 'ES', 'WY', 'HB']);
 
 /**
  * `CPL-<pair>.<DIRECTION>.<VOLUME>-<wave>[letter].<facet>`, built FROM the list
@@ -456,18 +466,21 @@ describe('CW-0 coupling registry', () => {
   // CW-0w slice 1 / seam SC-7. The shape pin used to hard-code the WR- wave
   // prefix, so the FIRST non-WAR registry row would have RED this file — the
   // growth path the whole FP program depends on was locked at its own gate.
-  // The alternation is deliberately CLOSED: a TWELFTH volume prefix reds here
+  // The alternation is deliberately CLOSED: a THIRTEENTH volume prefix reds here
   // until it is consciously admitted, which is the tripwire, not a nuisance.
-  // ES and WY were consciously admitted at the 2026-08-05 owner-amendment fold
-  // — the tripwire working as designed, not bypassed.
+  // ES and WY were consciously admitted at the 2026-08-05 owner-amendment fold,
+  // and HB at the 2026-08-07 one (HB Q4, RULED) — the tripwire working as
+  // designed, not bypassed. EP and WC came through that same fold and did NOT
+  // join: see the CHARTERED_VOLUME_PREFIXES docstring, where both abstentions
+  // are reasoned, so a later reader does not mistake them for a missed edit.
   describe('the couplingId shape admits every chartered volume prefix and no other', () => {
     const SYNTHETIC = (prefix) => `CPL-1.TRADE_TO_WAR.${prefix}-1.synthetic_row`;
 
-    test('all eleven chartered volume prefixes pass, including the INT/IN pair', () => {
+    test('all twelve chartered volume prefixes pass, including the INT/IN pair', () => {
       // INT and IN share a leading two characters; both are asserted so the
       // alternation's ORDER can never silently swallow the longer one.
       expect(CHARTERED_VOLUME_PREFIXES)
-        .toEqual(['WR', 'TR', 'GR', 'WF', 'POP', 'IN', 'INT', 'SP', 'CW', 'ES', 'WY']);
+        .toEqual(['WR', 'TR', 'GR', 'WF', 'POP', 'IN', 'INT', 'SP', 'CW', 'ES', 'WY', 'HB']);
       for (const prefix of CHARTERED_VOLUME_PREFIXES) {
         expect(SYNTHETIC(prefix), prefix).toMatch(COUPLING_ID_SHAPE);
       }

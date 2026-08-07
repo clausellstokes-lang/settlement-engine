@@ -946,8 +946,17 @@ recorded. Zero existing-src edits.
 
 **#2 CW-0w — THE WALKERS THE REGISTRY IS OWED** (no flag; four slices; CW §4;
 pulled forward per Q2-CW ratified here as J-FP-3). Charter: slice 1 widens the
-WAR-locked couplingId regex to the closed nine-prefix alternation
-(WR|TR|GR|WF|POP|IN|INT|SP|CW) + splits couplingRegistryWar.js out of the
+WAR-locked couplingId regex to the closed prefix alternation — NINE AT THAT
+WAVE'S OWN LANDING (WR, TR, GR, WF, POP, IN, INT, SP, CW), which is what this
+charter records and why it is not amended into a present-tense claim. ⚠ **THE
+SET HAS GROWN TWICE SINCE AND THIS SENTENCE IS HISTORY, NOT THE CURRENT CLOSED
+SET** — an inherited miss found by the 2026-08-07 fold, reported rather than
+quietly restated: the 2026-08-05 fold moved seam row 32 to ELEVEN and left this
+charter reading nine. **THE ONE CURRENT SPELLING IS
+`CHARTERED_VOLUME_PREFIXES` in tests/domain/couplingRegistry.test.js, indexed
+here by §9 seam row 32; point at it, never restate it** — a hand-copied
+alternation beside the list is one edit away from disagreeing with it silently,
+which is precisely what happened here. Slice 1 also splits couplingRegistryWar.js out of the
 575-line head (verbatim row moves, head re-exports, census strings updated
 same commit); slice 2 lands the baseline-frozen shrink-only cross-layer
 INCLUSION RATCHET (`couplingInclusion.walker` over module SETS, positive
@@ -2618,7 +2627,7 @@ already exists; PRE-PIN = this volume lands both sides.
 | 29 | Significance family | SP-A -> CW-1 + every mint | SC-3: braid classes derive WITHIN the family; building against the two-valued vocabulary is a STOP |
 | 30 | Engine/display pacing split | CW-1 <-> narrativeTempo | SC-4: zero-engine-import census on cascadeBraid |
 | 31 | causedBy adoption | every state-writing FP wave -> CW | SC-6: each mint populates causedBy at the writer; CW-1 depth fixtures + CW-3's chainDepthDegenerate red are the double tripwire |
-| 32 | couplingId prefix closure | CW-0w <-> all volumes | SC-7: the closed ELEVEN-prefix alternation (WR|TR|GR|WF|POP|IN|INT|SP|CW|ES|WY — ES tenth and WY eleventh, consciously admitted at the 2026-08-05 fold, both sites of tests/domain/couplingRegistry.test.js edited together); a TWELFTH prefix reds until consciously admitted. ADMISSION IS DOCUMENT-ONLY: no walker demands a registry row per admitted prefix, so ES and WY carry zero rows until their first cross-layer read — which owes its row SAME-COMMIT, and whose owningVolume also widens that file's owningVolume set assertion in the same commit |
+| 32 | couplingId prefix closure | CW-0w <-> all volumes | SC-7: the closed TWELVE-prefix alternation (WR \| TR \| GR \| WF \| POP \| IN \| INT \| SP \| CW \| ES \| WY \| HB — ES tenth and WY eleventh, consciously admitted at the 2026-08-05 fold; **HB TWELFTH at the 2026-08-07 fold** under HB Q4, RULED, with its own couplingRegistryHabit.js leaf and its first row at HB-2); a THIRTEENTH prefix reds until consciously admitted. ⛔ **THE OTHER TWO VOLUMES OF THE 2026-08-07 FOLD DECLINED, AND BOTH ABSTENTIONS ARE REASONED SO NEITHER READS LATER AS A MISSED EDIT:** EP declines explicitly (its §5 item 7 — `couplingInclusion.walker` scopes its census to `src/domain/{worldPulse,spatial}/`, so `src/store` and `src/kernel` are outside it, `pulseKernel.js` and `worldState.js` are ARGUED_UNLAYERED, and an epoch is SUBSTRATE rather than a subject any layer family owns), and WC mints no coupling id of its own. ⚠ **FOUR EDIT SITES IN ONE FILE MOVE TOGETHER** — `tests/domain/couplingRegistry.test.js` pins the closed set TWICE (the const the id-shape regex is BUILT FROM, and the literal `toEqual`), plus the docstring and the CLOSED-alternation comment: editing only the const leaves the `toEqual` red, editing only the `toEqual` leaves the regex rejecting the new ids. ADMISSION IS DOCUMENT-ONLY: no walker demands a registry row per admitted prefix, so ES, WY and HB carry zero rows until their first cross-layer read — which owes its row SAME-COMMIT, and whose owningVolume also widens that file's owningVolume set assertion in the same commit |
 | 33 | Braided entity refs | CW-1 <-> heraldIndex | SC-8: facetAvailability PENDING -> available is the tripwire |
 | 34 | Receipt-field sampling | CW-0w helper <-> TR-9/GR-7/POP-7/WF-9/IN-6/INT-7 | SC-9: each convergence wave samples its OWN rows; CW-3 reds never-sampled rows as UNOBSERVED |
 | 35 | DS-FTH spelling law | Lane-P corpus <-> WF-1/5/7 | HONORED: the exactly-once doc pin lands with WF-1; divergence is a STOP; DS edits re-run gen:dossier-prose |
