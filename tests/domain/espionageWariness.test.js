@@ -315,11 +315,16 @@ describe('ES-5 — the sibling header stops restating a term that moved', () => 
     expect(source).toContain('TELL_TERMS_ABSENT');
     // …and the retired restatement is gone. `overdueForeignNotables` is a LIVE term now, so
     // this file naming it among the absences is the defect, in either direction.
+    // A file that failed to load, or moved, reds on the positive above instead of here.
+    // anchored: the live `TELL_TERMS_ABSENT` mention is asserted on the SAME string above.
     expect(source).not.toContain('name `overdueForeignNotables`');
     // POSITIVE CONTROL: the detector really detects. Without this the absence above could be
     // the absence of a needle nobody would have found either way.
     expect(`${source}name \`overdueForeignNotables\``).toContain('name `overdueForeignNotables`');
     // And the term this header now points at really is the one the leaf publishes.
+    expect(TELL_TERMS_ABSENT).toContain('believedNotorietyWeighting');
+    // This exclusion cannot be satisfied by a register that drifted away to nothing.
+    // anchored: the live member asserted one line up proves the register is populated.
     expect(TELL_TERMS_ABSENT).not.toContain('overdueForeignNotables');
   });
 });

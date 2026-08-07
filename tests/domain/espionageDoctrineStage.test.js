@@ -397,7 +397,12 @@ describe('ES-5 — §3.9’s licensed order prose, and the two hazards it rides'
   test('HAZARD 1 — the raw-score screen is TOTAL and fails CLOSED', () => {
     const prose = orderProseFor({ item: EXPLAINED_COURT });
     // Not one quoted sentence speaks a number, which is L5 on a string this file did not
-    // write. `deriveLawOrder` interpolates raw scores into its own prose.
+    // write. `deriveLawOrder` interpolates raw scores into its own prose. The non-empty
+    // assertion comes FIRST because a for-loop over an empty array asserts nothing at all —
+    // the vacuity would be in the LOOP, not in the matcher.
+    expect(prose.lines.length).toBeGreaterThan(0);
+    // The withheld count below proves digit-bearing sentences were on offer and screened.
+    // anchored: the non-empty count one line up means this loop runs at least once.
     for (const line of prose.lines) expect(line, line).not.toMatch(/\d/);
     // THE ANCHOR THAT MAKES THAT MEANINGFUL: sentences carrying numbers really were on
     // offer and really were withheld. Without this the clean lines could be a court whose
@@ -424,6 +429,8 @@ describe('ES-5 — §3.9’s licensed order prose, and the two hazards it rides'
     // Nothing numeric travels: the result carries lines, a count of what was withheld, and
     // a reason word. No score, no band, no per-contributor delta.
     expect(Object.keys(prose).sort()).toEqual(['lines', 'reason', 'withheld']);
+    // This absence is a screened score, not the absence of a serialized nothing.
+    // anchored: the exact key set one line up proves `prose` is the live shaped record.
     expect(JSON.stringify(prose)).not.toContain(String(read.score));
     // And the doctrine's own order word is UNMOVED by the causal read — the two stay
     // separate reads of the same axis, which is the whole point of quoting prose only.
@@ -446,6 +453,8 @@ describe('ES-5 — §3.9’s licensed order prose, and the two hazards it rides'
     // …and the composed receipt still holds L5 — which is only possible because the screen
     // ran. The doctrine's own words are still there, so this is not an emptied string.
     expect(out.receipt).toContain('court:');
+    // An emptied or undefined receipt reds on the phrase above and never reaches this.
+    // anchored: the doctrine's own live phrase one line up is in the SAME string.
     expect(out.receipt).not.toMatch(/\d/);
     // EVERY DOOR ANSWERS THE SAME SHAPE. A refusing door that omitted the field would make
     // `.orderProse.lines` an undefined read on some paths and not others.
