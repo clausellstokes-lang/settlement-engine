@@ -31,6 +31,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.full.json",
     "typecheck:ratchet": "node scripts/check-full-typecheck.mjs",
     "typecheck:ratchet:update": "node scripts/check-full-typecheck.mjs --update",
+    "check:observed-shape-readers": "node scripts/check-observed-shape-readers.mjs",
     "typecheck:domain": "tsc --noEmit",
     "typecheck:domain:strict": "node scripts/check-domain-strict.mjs",
     "typecheck:domain:strict:update": "node scripts/check-domain-strict.mjs --update",
