@@ -65,6 +65,30 @@ jobs:
         run: npm audit --audit-level=high
         continue-on-error: true
 
+      # HAZARD CONVERSION LAW (owner, 2026-08-07). Every confirmed hazard class
+      # either becomes MACHINERY or is EXPLICITLY ACCEPTED with a stated reason —
+      # because a recorded hazard is a DOCUMENT, and documents do not prevent
+      # recurrence (three classes bit on the same day they were already written
+      # down with their cures). This step is what stops the registry becoming one
+      # more such document: a class with no status reds, an ACCEPTED entry with no
+      # reason reds, and the DOCUMENT (owed) count is shrink-only.
+      #
+      # ⚠ THESE TWO STEPS WERE ADDED TO `npm run check` AND OMITTED HERE, which
+      # reddened tests/build/ciCheckParity.test.js — the guard that pins the local
+      # chain and this job step-for-step in BOTH directions. That guard did its
+      # job; this is the repair. If you add a step to the chain, add it here in
+      # the same commit.
+      - name: Validate hazard registry
+        run: npm run validate:hazard-registry
+
+      # The pre-mortem is the only instrument that runs BEFORE the error rather
+      # than after it: given a changeset it names the recorded hazard classes that
+      # shape exposes. Advisory by design — its triggers are heuristic and a noisy
+      # blocker gets disabled — so this step validates the instrument itself
+      # (predicates resolve, retro-corpus still warns), never the changeset.
+      - name: Validate pre-mortem
+        run: npm run validate:premortem
+
       # Fail fast on data corruption: duplicate object keys silently
       # overwrite earlier definitions in JS, so a regression here would
       # quietly distort the simulation outputs without breaking the build.
