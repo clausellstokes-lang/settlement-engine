@@ -28,6 +28,7 @@ import { advanceEnvoyErrands, envoyErrandsOf } from '../../src/domain/worldPulse
 import { beliefRecord } from '../../src/domain/worldPulse/beliefMap.js';
 import { espionageActive } from '../../src/domain/worldPulse/espionage/espionageGate.js';
 import { advanceEspionageProducts } from '../../src/domain/worldPulse/espionage/espionageProductStage.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const ESPIONAGE_DIR = 'src/domain/worldPulse/espionage';
@@ -290,9 +291,19 @@ describe('ES-3 dormancy — FENCE 3: the call path, and FENCE 4: the gate polari
       .filter(([, source]) => /\bespionageActive\b/.test(source))
       .map(([file]) => file)
       .sort();
+    // ⏱ ES-5 ADDS ONE MEMBER AND DELIBERATELY DOES NOT ADD THE OTHER. The doctrine STAGE
+    // gates (it is the wave's world-side reader, and dark must compose nothing); the
+    // visibility predicate does NOT, because it is a counting function over rows its caller
+    // already holds and its dormancy is the gauntlet's. That distinction is asserted rather
+    // than left to be inferred from a list nobody reads twice.
     expect(gated).toEqual([
-      'espionageGate.js', 'espionageGauntlet.js', 'espionageMissions.js', 'espionageProductStage.js',
+      'espionageDoctrineStage.js', 'espionageGate.js', 'espionageGauntlet.js',
+      'espionageMissions.js', 'espionageProductStage.js',
     ]);
+    // The visibility predicate is a REAL module in the family that deliberately carries no
+    // gate, so its exclusion is anchored by a gating sibling that travels the same scan.
+    expectAbsentWithAnchor(gated, 'espionageWariness.js', 'espionageGate.js', 'the espionage gate census');
+    expect(Object.keys(sources)).toContain('espionageWariness.js');
   });
 });
 

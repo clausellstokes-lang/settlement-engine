@@ -559,7 +559,14 @@ describe('ES-2 — the stay roll', () => {
   test("the tell's absent term is DECLARED on every reading, never folded as a silent zero", () => {
     const { worldState } = mintMission(litWorld());
     const row = stage(worldState, 13).detections[0];
-    expect(row.warinessTermsAbsent).toEqual(['overdueForeignNotables']);
+    // ⏱ ES-5 MOVED THIS ASSERTION, and the move is the point rather than a maintenance
+    // edit. ES-2 shipped with `overdueForeignNotables` absent because the visibility
+    // predicate did not exist; it does now (espionageWariness.js) and the term is live —
+    // `overdueNotables` on the same factor record is its receipt. What remains absent is a
+    // DIFFERENT term of §3.8, `believedNotorietyWeighting`, whose measured reason is a
+    // grain mismatch written out in that leaf's header. The declaration never emptied.
+    expect(row.warinessTermsAbsent).toEqual(['believedNotorietyWeighting']);
+    expect(row).toHaveProperty('overdueNotables');
     // The half that IS lawful is live: a court that just caught a spy checks harder.
     expect(recentCovertHolds({ worldState, targetId: 'westmarch', tick: 13 })).toBe(0);
     const held = openForeignGuestHold({ worldState, hold: covertHold(12) });

@@ -3028,7 +3028,41 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // from that SAME archive overlaid with this wave's ONE new file and nothing else,
       // where it again reads 33/33 green. Exactly one file differs between the two trees,
       // which is what makes the deltas attributable rather than merely plausible.
-      files: 2343, parked: 358, credited: 1985, titles: 18917, suiteTitles: 5409,
+      // ── RE-RECORDED 2026-08-07 BY ES WAVE ES-5a (the doctrine stage + the tell) ─────
+      // 2,343/358/1,985/18,917/5,409 -> 2,346/358/1,988/18,944/5,419. THE CAUSE IS THREE
+      // NEW TEST FILES AND NOTHING ELSE, and the delta is DECOMPOSED BY CONSTRUCTION
+      // rather than counted off a diff, with two independent readers agreeing on each
+      // file's numbers (vitest's own verbose count, and this walker's `liveTitlesIn` /
+      // `liveSuiteTitlesIn` driven over the same tree):
+      //   tests/domain/espionageDoctrineStage.test.js ........ 12 titles, 4 suite titles
+      //   tests/domain/espionageWariness.test.js .............  9 titles, 3 suite titles
+      //   tests/property/espionageDoctrineDormancyFence.test.js  5 titles, 3 suite titles
+      //   +3 files, +3 credited, +0 parked, +26 titles, +10 suite titles
+      // PARKED IS UNCHANGED AT 358, earned the same way ES-4 earned it: every title in the
+      // three files is a string LITERAL, and the one `for…of` (the demand ladder over the
+      // nine reachable cadences) walks INSIDE a single named test — SP-D's recorded idiom,
+      // loop inside a named test, never generate tests from a loop, holding for the sixth
+      // consecutive wave.
+      //
+      // ⚠⚠ ONE OF THE FIVE FIGURES WAS ALREADY DRIFTED AT BASE, AND ABSORBING IT SILENTLY
+      // WOULD HAVE BEEN THE WHOLE HAZARD THIS BLOCK EXISTS TO PREVENT — so it is named.
+      // MEASURED at this wave's base (HEAD content restored over every file this wave
+      // touches, the three new test files moved out of the tree, this walker run with a
+      // one-line probe printing the five computed values): the base reads
+      // 2,343/358/1,985/**18,918**/5,409 — one title MORE than the committed 18,917, so
+      // this walker was ALREADY RED at base on the titles figure alone and ES-5a did not
+      // turn it red. THE +1 IS ATTRIBUTED, and to the OTHER BUILD LANE: commit 52791876
+      // (SOL-BANK-3, landed 2026-08-07 while this wave was building) added exactly one
+      // `it(…)` to tests/domain/dispositionIntegration.test.js — +47 lines, one test, no
+      // new file, which is precisely a +1 title with the file and suite counts unmoved.
+      // It is named rather than absorbed, and the decomposition below is stated against
+      // the MEASURED base (18,918 + 26 = 18,944), never against the stale constant, so
+      // nobody later reconstructs a +26 that never happened from a subtraction.
+      // ⚠ THE CONCURRENCY NOTE THAT GOES WITH IT: this census counts the WHOLE estate's
+      // test files, so it is a SHARED SERIALIZER between build lanes exactly as the
+      // mutation manifest is. A lane landing test files after this commit re-records here,
+      // and that is the established pattern rather than a defect.
+      files: 2346, parked: 358, credited: 1988, titles: 18944, suiteTitles: 5419,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

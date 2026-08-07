@@ -54,12 +54,21 @@
  * advances more than one tick, which is a hole nobody would watch.
  *
  * ── WHAT IS DEGRADED, DECLARED, AND WHY (the SP-C idiom) ───────────────────────────────
- * `wariness01` (§3.8) has two terms. `recentCovertHolds` is LAWFULLY OBSERVABLE now — a
- * court's own holds are its own state — and is live here. `overdueForeignNotables` needs
- * ES-5's visibility predicate, which must count only what a target can lawfully see, and
- * deriving it from bare covert rows would leak a mission's existence into a foreign court's
- * state. So this wave folds the holds term ALONE and every detection receipt names the
- * absent term rather than narrating a tell no machinery delivers.
+ * ⏱ ES-5 CLOSED THE FIRST HALF OF THIS BLOCK, and the record of what it said is kept
+ * because the shape of the fence is the interesting part. `wariness01` (§3.8) has two
+ * terms. `recentCovertHolds` is LAWFULLY OBSERVABLE — a court's own holds are its own state
+ * — and has been live here since ES-2. `overdueForeignNotables` was declared absent at ES-2
+ * because it "needs ES-5's visibility predicate, which must count only what a target can
+ * lawfully see, and deriving it from bare covert rows would leak a mission's existence into
+ * a foreign court's state". That predicate is now `espionageWariness.js`, a leaf with ZERO
+ * IMPORTS — it cannot resolve a true purpose because there is no reader in it that could —
+ * and both terms are folded below.
+ *
+ * ONE TERM REMAINS DECLARED ABSENT AND IT IS A DIFFERENT ONE: §3.8's
+ * `believedNotorietyWeighting`. The measured reason is a GRAIN MISMATCH written out in
+ * espionageWariness.js's header — `believedNotorietyRank` is a wandering-NPC circulation
+ * read and errand travellers are roster people — and the name travels on every detection
+ * exactly as its predecessor did, so nothing here narrates a tell no machinery delivers.
  *
  * PURE: no Date, no Math.random, no store, no React, no I/O, no mutation. The one
  * stochastic choice is a keyed hash (L1 — zero new PRNG streams).
@@ -89,6 +98,10 @@ import {
   dwellRamp,
   wariness01Core,
 } from './espionageMath.js';
+// ES-5 — THE TELL'S OTHER HALF. The predicate arrives from a leaf with no imports at all,
+// and the errand rows go IN as an argument rather than being fetched there: the visibility
+// fence is the module's own emptiness, so this file's `covert` reads cannot reach it.
+import { observerClusterIds, overdueForeignNotables } from './espionageWariness.js';
 
 /**
  * The cause a stay-detection custody row would carry — IMPORTED from the vocabulary's own
@@ -247,7 +260,8 @@ export function recentCovertHolds({ worldState, targetId, tick } = {}) {
  *   dwell?: unknown, hasInsideAsset?: unknown}} args
  * @returns {{hostRung: number, securityEff01: number, orderBand: string, stressLoad01: number,
  *   hasUnderways: boolean, hasInsideAsset: boolean, wariness01: number, competence01: number,
- *   stops: number, intervalIdx: number, warinessTermsAbsent: ReadonlyArray<string>}}
+ *   stops: number, intervalIdx: number, overdueNotables: number,
+ *   warinessTermsAbsent: ReadonlyArray<string>}}
  */
 export function gauntletCatchFactors({
   worldState,
@@ -288,6 +302,17 @@ export function gauntletCatchFactors({
   const conditions = Array.isArray(recordOf(targetItem).activeConditions)
     ? /** @type {unknown[]} */ (recordOf(targetItem).activeConditions).length
     : 0;
+  // ES-5 — BOTH §3.8 TERMS, each gathered on its own road. The tell counts foreign
+  // travellers whose DECLARED schedule has lapsed at this town or one of its neighbours;
+  // the holds term counts the spies this town has caught lately. Neither reads a covert
+  // sub-record: the first cannot (its module imports nothing), and the second reads the
+  // captor's own custody rows.
+  const tell = overdueForeignNotables({
+    errands: envoyErrandsOf(worldState),
+    observerId: targetId,
+    clusterIds: observerClusterIds(regionalGraph, targetId),
+    tick,
+  });
   return {
     hostRung: Number.isFinite(rung) ? rung : 0,
     securityEff01,
@@ -297,12 +322,18 @@ export function gauntletCatchFactors({
       /** @type {Parameters<typeof settlementHasUnderways>[0]} */ (targetItem),
     ) === true,
     hasInsideAsset: hasInsideAsset === true,
-    wariness01: wariness01Core({ recentCovertHolds: recentCovertHolds({ worldState, targetId, tick }) }),
+    wariness01: wariness01Core({
+      overdueNotables: tell.count,
+      recentCovertHolds: recentCovertHolds({ worldState, targetId, tick }),
+    }),
     competence01: covertCompetence01(homeItem, npc),
     stops: Number(stop.stopIndex) || 1,
     intervalIdx: Number(stop.intervalIdx) || 0,
-    // DECLARED, NOT SILENT: the tell half of §3.8 needs ES-5's visibility predicate.
-    warinessTermsAbsent: Object.freeze(['overdueForeignNotables']),
+    overdueNotables: tell.count,
+    // DECLARED, NOT SILENT — and it is a DIFFERENT term from the one ES-2 named here. See
+    // espionageWariness.js's measured block: the notoriety weighting is a circulation-pool
+    // read and errand travellers are roster people.
+    warinessTermsAbsent: tell.termsAbsent,
   };
 }
 
@@ -506,6 +537,11 @@ export function advanceEspionageGauntlet({
       custodyWritten: false,
       custodyCause: COVERT_HOLD_CAUSE,
       custodyBlockedReason: 'encounter_required_by_errand_dto',
+      // ES-5 — THE TELL'S RECEIPT. The count travels with the detection so a reader can see
+      // WHY a town was watchful, not merely that it was: a term folded into one multiplier
+      // and never reported is a term nobody can audit.
+      wariness01: factors.wariness01,
+      overdueNotables: factors.overdueNotables,
       warinessTermsAbsent: factors.warinessTermsAbsent,
     });
   }

@@ -50,6 +50,7 @@ import {
   ES2_GAUNTLET_TRANSIT_CURSOR_COUPLING,
   ES3_FLAW_DISTORTION_COUPLING,
   ES3_GRADIENT_AMENDER_COUPLING,
+  ES5_DOCTRINE_MORAL_LADDER_COUPLING,
   ES_ESPIONAGE_COUPLINGS,
   IN0A_PLANT_HANDOFF_COUPLING,
   IN_INFORMATION_COUPLINGS,
@@ -584,6 +585,12 @@ describe('CW-0 coupling registry', () => {
     // minting a twenty-second pair: the standoff's flaw distortion extends the ladder's
     // `riskAppetiteOf` instead of re-parsing personality words.
     expect(couplingRowsFor('CPL-20', 'INTERIOR→INFO')).toEqual([ES3_FLAW_DISTORTION_COUPLING]);
+    // ES-5 OPENS A DIRECTION on a pair that was already busy the other way: WR-4 and WR-6
+    // both read INFO→WAR across CPL-4, and the doctrine stage is the first read back the
+    // other way — the espionage doctrine spelling its moral axis with the estate's ONE
+    // exported moral ladder rather than growing a private band inside the ES family.
+    expect(couplingRowsFor('CPL-4', 'WAR→INFO')).toEqual([ES5_DOCTRINE_MORAL_LADDER_COUPLING]);
+    expect(couplingRowFor('CPL-4', 'WAR→INFO')).toBe(ES5_DOCTRINE_MORAL_LADDER_COUPLING);
     // The leaf composes exactly its rows, in wave order.
     expect(ES_ESPIONAGE_COUPLINGS).toEqual([
       ES1_COVERT_MISSION_MINT_COUPLING,
@@ -593,6 +600,7 @@ describe('CW-0 coupling registry', () => {
       ES2_GAUNTLET_TRANSIT_CURSOR_COUPLING,
       ES3_GRADIENT_AMENDER_COUPLING,
       ES3_FLAW_DISTORTION_COUPLING,
+      ES5_DOCTRINE_MORAL_LADDER_COUPLING,
     ]);
     expect(couplingRowsFor('CPL-1', 'WAR→TRADE'))
       .toEqual([WR6_COALITION_SETTLEMENT_TRADE_COUPLING]);

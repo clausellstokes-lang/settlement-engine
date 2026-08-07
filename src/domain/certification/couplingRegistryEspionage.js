@@ -288,6 +288,54 @@ export const ES3_FLAW_DISTORTION_COUPLING = couplingRow({
   intendedDesk: 'war',
 });
 
+/**
+ * ES-5 / WAR→INFO. THE DOCTRINE READS THE ESTATE'S ONE MORAL LADDER, WHEREVER IT LIVES.
+ *
+ * §3.9 spells the doctrine's moral axis as `natureWordFor(settlementAlignment(...).malice01)`
+ * and says why in one clause: the ladder is "exported precisely because J-WR-10 forbids a
+ * second spelling". It is exported from `conquestDoctrineStage.js`, which the layer map
+ * claims for WAR — so the honest reading of the same axis from an INFORMATION leaf is a
+ * cross-layer read, and this row is its receipt rather than a reason to avoid it. The
+ * alternative was a private moral band inside the espionage family, which is the exact
+ * defect CR-ES-3 spent a whole commit retiring on the LAW axis.
+ *
+ * ⚠ NOTE THE ASYMMETRY WITH THE LAW AXIS, BECAUSE IT LOOKS LIKE AN INCONSISTENCY AND IS
+ * NOT. The law word arrives with NO coupling, because CR-ES-3 rehomed `lawWordFor` into the
+ * neutral `lawWord.js` (argued-unlayered — shared vocabulary spelled by four ports). The
+ * moral word still lives inside a WAR module, and rehoming it is a war-lane vocabulary move
+ * with its own blast radius that no information wave gets to make on the way past. So the
+ * two ladders are spelled once each, and exactly one of them is currently a coupling. If a
+ * later wave gives `natureWordFor` the `lawWord.js` treatment, THIS ROW is what tells that
+ * wave the read exists.
+ *
+ * THE COUNTERFORCE is the doctrine leaf's own resolution gate. `readEspionageDoctrine`
+ * refuses any word outside its two closed tables and mints `unknownDoctrine(why)` instead —
+ * so a moral ladder that grew a fourth rung cannot silently become a doctrine; it becomes a
+ * court with no readable doctrine and a quotable reason, which is the loud failure.
+ *
+ * DARK ⇒ NOTHING: `espionageDoctrineFor` refuses at `espionageActive` and returns null
+ * BEFORE it reads an alignment, so a dark world composes no words and pays no read.
+ * @type {Readonly<CouplingRegistryRow>}
+ */
+export const ES5_DOCTRINE_MORAL_LADDER_COUPLING = couplingRow({
+  // CPL-4 is the canonical anchor for WAR × INFO (DESIGN_FP_COUPLINGS §4) — the pair has
+  // one, so this wave points at it rather than minting a twenty-third. It is also the pair's
+  // FIRST row in the WAR→INFO direction: WR-4 and WR-6 both read the other way.
+  couplingId: 'CPL-4.WAR_TO_INFO.ES-5.doctrine_moral_ladder',
+  pairId: 'CPL-4',
+  direction: 'WAR→INFO',
+  read: 'src/domain/worldPulse/espionage/espionageDoctrineStage.js#espionageDoctrineFor',
+  receiptField: 'worldState.envoyErrands[].covert.demand',
+  counterforce: 'src/domain/worldPulse/espionage/espionageDoctrine.js#unknownDoctrine',
+  flags: Object.freeze([
+    'errandSpineEnabled',
+    'espionageEnabled',
+  ]),
+  owningVolume: 'ESPIONAGE',
+  owningWave: 'ES-5',
+  intendedDesk: 'war',
+});
+
 /** Every ESPIONAGE row, in wave order. @type {ReadonlyArray<Readonly<CouplingRegistryRow>>} */
 export const ES_ESPIONAGE_COUPLINGS = Object.freeze([
   ES1_COVERT_MISSION_MINT_COUPLING,
@@ -297,4 +345,5 @@ export const ES_ESPIONAGE_COUPLINGS = Object.freeze([
   ES2_GAUNTLET_TRANSIT_CURSOR_COUPLING,
   ES3_GRADIENT_AMENDER_COUPLING,
   ES3_FLAW_DISTORTION_COUPLING,
+  ES5_DOCTRINE_MORAL_LADDER_COUPLING,
 ]);
