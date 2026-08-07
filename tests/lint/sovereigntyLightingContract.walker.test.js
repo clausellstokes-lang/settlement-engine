@@ -3082,6 +3082,70 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // PARKED IS UNCHANGED AT 358 for the seventh consecutive wave, earned the same way:
       // every added title is a string LITERAL, and every new `for…of` walks INSIDE a
       // single named test rather than generating tests from a loop.
+      // ── ATTRIBUTION CORRECTED 2026-08-07 BY THE RATCHET-REPAIR LANE ───────────────
+      // ⚠⚠ THE RECORD THIS BLOCK INHERITED WAS WRONG, AND IT IS CORRECTED HERE RATHER
+      // THAN LEFT IN A COMMIT MESSAGE NOBODY CAN EDIT. Commit 1d3cdf73 (SP-F) recorded
+      // its deferral like this: "It was ALREADY RED at this lane's parent (2,349 against
+      // a frozen 2,346 — the concurrent lane's three TCD test pins)". The DEFERRAL was
+      // right; the ATTRIBUTION was not. Measured per sha with `git ls-tree -r <sha>`
+      // counting `^tests/.*\.test\.(js|jsx)$` — one commit at a time, off committed
+      // objects, never off this live tree:
+      //     1977db07  2346   the frozen figure
+      //     9ecec2a2  2347   TCD-1                                       +1
+      //     a9691e73  2348   Gate restoration: the typecheck ratchet      +1  ← NOT A TCD
+      //     b19038ec  2349   TCD-2                                       +1
+      //     3800bcb6  2349   TCD-3                                       +0  ← ADDED NONE
+      //     1d3cdf73  2350   SP-F, the lane that wrote the sentence      +1
+      //     173e9d7b  2350   Gate repair BR-1/BR-2                       +0
+      // So the parent's +3 was TCD-1, THE GATE LANE, and TCD-2 — not "three TCD pins".
+      // TCD-3 added ZERO test files, and the gate lane added one and never said so while
+      // this ratchet was already red. That is the recorded A-RED-RATCHET'S-CONTENTS-GROW-
+      // INVISIBLY hazard firing a second time, and it is why the table above is written
+      // per sha instead of as a single subtraction.
+      //
+      // ⚠⚠ THE MECHANISM OF THE BLINDNESS, MEASURED, because it is sharper than "it was
+      // red": the five figures are asserted in SEQUENCE, and `files` is asserted FIRST.
+      // At HEAD 173e9d7b this arm fails with `expected 2350 to be 2346` — and vitest stops
+      // there, so `parked`, `credited`, `titles` and `suiteTitles` ARE NEVER EVALUATED AT
+      // ALL. While the file count is off, the other four can drift by any amount and no
+      // run will say so. A red ratchet does not merely fail to protect; this one stops
+      // measuring. Whoever re-records MUST re-derive all five, and must not assume the
+      // four unasserted ones are still at their frozen values.
+      //
+      // ── THE RE-RECORD: RULED, AND STILL DEFERRED (ratchet-repair lane, 2026-08-07) ──
+      // SP-F's stated reason for deferring — banking five figures whose title and
+      // suite-title layers come from another lane's authored tests it had not read — was
+      // sound, and it STILL HOLDS. It is not weaker now that the tree has settled; it is
+      // STRONGER, for a reason SP-F did not have:
+      //   1. A SECOND BUILD LANE IS LIVE IN THIS WORKTREE, AND IT MOVED THE TREE WHILE
+      //      THIS BLOCK WAS BEING WRITTEN — this is observed, not hypothesised. HEAD went
+      //      173e9d7b -> a223d368 (gate repair BR-3/BR-4/BR-5) between drafting this
+      //      paragraph and staging it, and that commit edited TWO files under tests/:
+      //      tests/lint/fullTypecheckRatchet.test.js and
+      //      tests/lint/domainAnyCastBaseline.test.js. This time the five figures
+      //      survived — measured, not assumed: `git ls-tree -r a223d368` still counts
+      //      2350 test files, and neither diff added an `it(`/`test(`/`describe(`, so
+      //      `titles` and `suiteTitles` did not move either. But a lane that edits test
+      //      files mid-round is one `it(…)` away from moving `titles` WITHOUT moving
+      //      `files`, and the sequencing defect above means that particular drift is the
+      //      one nothing would have reported. A re-record banked in that window rots
+      //      before it is pushed.
+      //   2. THE ARCHIVE-CENSUS LAW forbids censusing a live shared tree, and this tree is
+      //      mid-flight: the other lane is holding uncommitted work. A defensible
+      //      re-record has to be measured inside an integrity-counted `git archive` of a
+      //      COMMITTED sha, and any sha available to freeze against is one the other lane
+      //      is about to supersede.
+      //   3. This lane did not author the tests behind the two title layers and has not
+      //      read them, so banking them here would be transcription, not measurement —
+      //      the DERIVE-DON'T-RESTATE failure this estate has already taken four times.
+      // THE PRECONDITION, so this is a deferral and not a dropped thread: re-record when
+      // BOTH build lanes have landed and the worktree is clean, in ONE commit, with all
+      // five figures re-derived inside an integrity-counted archive of the sha being
+      // frozen, and with the per-sha decomposition above extended rather than replaced.
+      // DELIBERATELY DEFERRED — DOCUMENTED, NOT A BUG TO RE-FIND. The frozen constants
+      // below are LEFT AT THEIR 1977db07 VALUES ON PURPOSE: this lane will not half-bank
+      // a figure it cannot derive, and a knowingly-red ratchet with a written cause is
+      // honest where a green one bought by transcription would not be.
       files: 2346, parked: 358, credited: 1988, titles: 18951, suiteTitles: 5421,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);

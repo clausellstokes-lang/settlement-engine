@@ -132,7 +132,17 @@ jobs:
       # (undefined vars, dupe keys, rules-of-hooks, the design-token and
       # analytics-event contracts) are errors; forward-looking React 19
       # rules and unused-vars are warnings, surfaced for drift tracking
-      # without blocking. The tree currently lints clean (0 problems).
+      # without blocking. The tree lints with ZERO ERRORS — that, not "clean",
+      # is what this step enforces: the warning count is deliberately nonzero
+      # and drifts, so no figure is frozen here (a restated count rots into the
+      # next false claim). Read the step's own log for the live tally.
+      # CORRECTED 2026-08-07: this comment read "the tree currently lints clean
+      # (0 problems)" and was FALSE — measured 27 problems (0 errors, 27
+      # warnings). It went unnoticed because `npm run lint` is step 11 of the
+      # `npm run check` &&-chain and step 10 had been red, so lint had not run;
+      # and because tests/docs/enforcement-claims.test.js, the meta-pin whose
+      # whole job is to red on an unbacked "0 problems" claim, scans root *.md +
+      # docs/**/*.md + eslint.config.js and does NOT scan .github/workflows/**.
       # Promote the React 19 warnings to errors when adopting React Compiler.
       - name: Lint
         run: npm run lint

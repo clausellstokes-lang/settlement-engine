@@ -769,6 +769,11 @@
    "kind": "rationale",
    "ref": "self-proving-meta"
   },
+  "tests/lint/fullTypecheckRatchet.test.js": {
+   "kind": "rationale",
+   "ref": "self-proving-meta",
+   "kindNote": "The full-tree typecheck ratchet's sentinel, the exact sibling of domainStrictFailClosed above and the same shape the shared rationale names literally: it injects a FAKE tsc (a node script printing canned diagnostics and exiting with a chosen code) and a temp baseline through FULL_TYPECHECK_BASELINE / FULL_TYPECHECK_TSC_CMD / FULL_TYPECHECK_LISTFILES_CMD, then spawns scripts/check-full-typecheck.mjs and asserts it reds. The guards are EXECUTED on every suite run across four families -- the anti-vacuity sentinel (tsc that could not run, non-zero exit with no TS diagnostic, a config-level TS18003-shape diagnostic, a TS5083-shape diagnostic located in the tsconfig itself), the per-file shrink-only ceiling (at / above / absent-means-zero / no credit from slack elsewhere / below names the ratchet-down command), path-format hardening (absolute, backslash, ./-prefixed, indented elaboration lines), and the scope sentinel (a baselined file not compiled, an include root that now resolves to nothing, a >10% collapse in compiled file count, an empty file-set probe, plus the not-always-red control) -- with --update proven to be behind the same sentinel. NO STANDING SWEEP PLANT IS OWED OR ELIGIBLE: every fixture is written into an mkdtempSync directory under the OS tmpdir, so the file the sweep would have to mutate is scripts/check-full-typecheck.mjs itself, and a plant there would prove strictly less than the injected-fixture guards already do while adding a git-checkout revert target in a live shared tree. Entered by the ratchet-repair lane; the invariant file landed at a9691e73 with no manifest row, which reds TOTALITY."
+  },
   "tests/lint/errorCopyBaseline.test.js": {
    "kind": "uncovered"
   },
