@@ -529,12 +529,28 @@ export function makeLineageClaimRead({ snapshot, worldState, graph }) {
     const childRank = tierRankOf(childItem);
     const parentPopulation = populationOf(parentItem);
     const childPopulation = populationOf(childItem);
-    // DECLARED WITHOUT AN INITIALIZER ON PURPOSE. `direction` is proven non-null by
-    // the guard above, so the if/else below is EXHAUSTIVE and both arms assign before
-    // the first read at `clears`. A `= 0` seed here is dead on every path — that is
-    // what `no-useless-assignment` reported — and worse, it would silently supply a
-    // neutral value if a future third direction were ever added, hiding the hole
-    // instead of throwing. Leave it unassigned so an unhandled arm is a TDZ error.
+    // DECLARED WITHOUT AN INITIALIZER, AND THE REASON IS NARROWER THAN IT LOOKS.
+    // `direction` is proven non-null by the guard above, so the if/else below is
+    // EXHAUSTIVE and both arms assign before the first read at `clears`. A `= 0` seed
+    // here was therefore dead on every path — which is exactly what
+    // `no-useless-assignment` reported, and the whole of why it is gone.
+    //
+    // IT BUYS NO SAFETY AGAINST AN UNHANDLED ARM, AND AN EARLIER SPELLING OF THIS
+    // COMMENT CLAIMED IT DID. `let inversion01;` initializes the binding to
+    // `undefined` the moment the declaration executes: the temporal dead zone ENDS at
+    // the declaration, so every later read returns `undefined` and nothing throws.
+    // MEASURED 2026-08-07 on this exact if/else shape with a third direction added —
+    // `clears` evaluates `undefined > 0.15` to false, `claimScore01` is 0, and
+    // `clamp01(undefined)` is 0 under kernel/math.js's non-finite rule, so the
+    // standing lands SILENTLY at bondScore01 0, where the `= 0` seed would have
+    // landed it just as silently at the CAP, 0.8. Two different silent answers;
+    // neither of them an error.
+    //
+    // A future third direction is therefore a silent hole either way. Making it loud
+    // needs an explicit `throw` (or an exhaustiveness check) in a final `else` — a
+    // real runtime-behaviour change on a path that is currently unreachable, and so
+    // its own act with its own golden question, not a side effect of deleting a dead
+    // assignment.
     /** @type {number} */
     let inversion01;
     if (direction === 'parent_to_child') {
