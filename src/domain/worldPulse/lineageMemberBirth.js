@@ -8,6 +8,7 @@
  * and the live regional edge.  Persistence remains a store responsibility.
  */
 
+import { deepClone } from '../clone.js';
 import { edgeIdFor, ensureRegionalGraph } from '../region/graph.js';
 
 const INHERITED_CONFIG_KEYS = Object.freeze([
@@ -32,10 +33,46 @@ function objectOf(value) {
     : {};
 }
 
-/** @param {unknown} value @returns {unknown} */
-function cloneJson(value) {
+/**
+ * Deep-copy one inherited value through the sanctioned clone seam.
+ *
+ * This routes to `domain/clone.js` rather than round-tripping JSON itself, which is
+ * what `tests/lint/deepCloneHotPath.test.js` requires.
+ *
+ * ⚠ THAT SOURCE-SCAN TEST IS THE ONLY ENFORCEMENT, contrary to its own header and
+ * `clone.js`'s ("the eslint no-restricted-syntax selectors are the primary
+ * enforcement"). MEASURED 2026-08-07: `eslint.config.js` carries NO
+ * `JSON.parse(JSON.stringify(…))` selector in any block, and linting this file's
+ * pre-fix HEAD content exited 0 while the walker's own regex matched it. Reported
+ * to the chair; do not rely on eslint to catch a reintroduction here.
+ *
+ * ⚠ THE SEAM IS NOT UNIVERSALLY EQUIVALENT TO THE JSON ROUND-TRIP, and this record
+ * is PERSISTED, so the swap was measured rather than assumed. `deepClone` prefers
+ * `structuredClone`, which PRESERVES what JSON round-tripping destroys: `Date`
+ * (JSON → ISO string), `Map`/`Set`/`RegExp` (JSON → `{}`), `undefined`-valued keys
+ * and `NaN`/`Infinity`/`-0` (JSON → dropped / `null` / `0`). Any of those inside a
+ * cloned subtree would move this birth record's shape.
+ *
+ * MEASURED 2026-08-07 against three real `generateSettlementPipeline` outputs
+ * (seeds CONTAINED-A1/B2/C3, tiers city/town/village): every value that actually
+ * reaches this function — the twelve `INHERITED_CONFIG_KEYS`, `parent.culture`,
+ * `parent.culturalIdentity`, `satellite.site`, `satellite.conveyed` — is plain
+ * JSON data, so both clones produce byte-identical AND type-identical results.
+ * Same-seed persisted and structural hashes of the whole birth were unchanged.
+ * A future field carrying a `Date` or a `Map` into any of those five subtrees WOULD
+ * move the persisted shape; that is a declared golden shift, not a free change.
+ *
+ * The `null`/`undefined` short-circuit is retained deliberately. It was load-bearing
+ * for the old path (`JSON.parse(JSON.stringify(undefined))` throws) and is exactly
+ * behaviour-neutral for the new one (`structuredClone` returns both unchanged), so
+ * keeping it preserves the drop-when-absent contract the `conveyed`/`site` spreads
+ * below depend on.
+ *
+ * @param {unknown} value @returns {unknown}
+ */
+function cloneInherited(value) {
   if (value == null) return value;
-  return JSON.parse(JSON.stringify(value));
+  return deepClone(value);
 }
 
 /**
@@ -71,7 +108,7 @@ function inheritedConfig(source) {
   /** @type {Record<string, unknown>} */
   const next = {};
   for (const key of INHERITED_CONFIG_KEYS) {
-    if (source[key] !== undefined) next[key] = cloneJson(source[key]);
+    if (source[key] !== undefined) next[key] = cloneInherited(source[key]);
   }
   return next;
 }
@@ -142,7 +179,7 @@ export function buildLineageMemberBirth({ campaignId, parentId, parent, satellit
     graduationTier: 'village',
     graduationPopulation: Math.max(0, Math.round(Number(satellite.population) || 0)),
     provenance: satellite.provenance,
-    ...(satellite.site ? { site: cloneJson(satellite.site) } : {}),
+    ...(satellite.site ? { site: cloneInherited(satellite.site) } : {}),
     ...(Array.isArray(satellite.resources) ? { resources: [...satellite.resources] } : {}),
     // WR-10 — THE SALE SURVIVES THE CHARTER. A steading that changed hands carries
     // `conveyed` provenance; a satellite has no relationship object, no seat and no
@@ -151,7 +188,7 @@ export function buildLineageMemberBirth({ campaignId, parentId, parent, satellit
     // the immutable receipt is what lets WR-3's claims read "this town was sold by the
     // line that founded it" instead of losing the fact at the charter. Conditional and
     // drop-when-absent: a steading that was never sold graduates byte-identically.
-    ...(satellite.conveyed ? { conveyed: cloneJson(satellite.conveyed) } : {}),
+    ...(satellite.conveyed ? { conveyed: cloneInherited(satellite.conveyed) } : {}),
     ...(evidenceIds.length ? {
       provisioningRecord: {
         id: `lineage.provisioning.${saveId}`,
@@ -169,9 +206,9 @@ export function buildLineageMemberBirth({ campaignId, parentId, parent, satellit
     name: String(satellite.name || 'The New Charter'),
     tier: 'village',
     population,
-    ...(parent.culture !== undefined ? { culture: cloneJson(parent.culture) } : {}),
+    ...(parent.culture !== undefined ? { culture: cloneInherited(parent.culture) } : {}),
     ...(parent.culturalIdentity !== undefined
-      ? { culturalIdentity: cloneJson(parent.culturalIdentity) }
+      ? { culturalIdentity: cloneInherited(parent.culturalIdentity) }
       : {}),
     config,
     _config: { ...config },

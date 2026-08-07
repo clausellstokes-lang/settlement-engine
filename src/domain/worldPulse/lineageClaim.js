@@ -529,7 +529,14 @@ export function makeLineageClaimRead({ snapshot, worldState, graph }) {
     const childRank = tierRankOf(childItem);
     const parentPopulation = populationOf(parentItem);
     const childPopulation = populationOf(childItem);
-    let inversion01 = 0;
+    // DECLARED WITHOUT AN INITIALIZER ON PURPOSE. `direction` is proven non-null by
+    // the guard above, so the if/else below is EXHAUSTIVE and both arms assign before
+    // the first read at `clears`. A `= 0` seed here is dead on every path — that is
+    // what `no-useless-assignment` reported — and worse, it would silently supply a
+    // neutral value if a future third direction were ever added, hiding the hole
+    // instead of throwing. Leave it unassigned so an unhandled arm is a TDZ error.
+    /** @type {number} */
+    let inversion01;
     if (direction === 'parent_to_child') {
       const foundingRank = foundingTierRankOf(parentRef);
       const tierInversion = foundingRank >= 0 && childRank >= 0 ? tierGap01(foundingRank - childRank) : 0;
