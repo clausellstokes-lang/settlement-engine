@@ -59,6 +59,25 @@ export function canonExports(settlement) {
 }
 
 /**
+ * Whether the settlement CARRIES an export list at all, under either alias.
+ *
+ * `canonExports` deliberately collapses "no list authored" and "an authored but
+ * empty list" to the same `[]`, which is right for every reader that only wants
+ * the goods. It is wrong for a reader that must keep ignorance and knowledge
+ * apart — worldPulse's negotiation pictures draft a TRIBUTE term against a rival
+ * believed to ship nothing, and appraise no export term at all against a rival
+ * whose trade is simply unknown. Those readers ask this instead of re-deriving
+ * the alias chain, so the aliases stay enumerated in exactly one file.
+ *
+ * @param {{ economicState?: { primaryExports?: unknown, exports?: unknown } } | null | undefined} settlement
+ * @returns {boolean}
+ */
+export function canonExportsPresent(settlement) {
+  const ec = settlement?.economicState || {};
+  return Array.isArray(ec.primaryExports) || Array.isArray(ec.exports);
+}
+
+/**
  * The settlement's imports — canonical `economicState.primaryImports`, falling
  * back to the legacy `imports` alias.
  * @param {{ economicState?: { primaryImports?: unknown, imports?: unknown } } | null | undefined} settlement

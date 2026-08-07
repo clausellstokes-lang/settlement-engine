@@ -10,7 +10,6 @@
  * it mints is FROZEN at the moment of minting and never refreshed afterwards.
  */
 
-import { compareCodepoint } from '../deterministicSort.js';
 import { factionArchetype } from '../factionArchetypes.js';
 import { governingFactionOf } from '../rulingPower.js';
 import { beliefRecord, strengthBandOf } from './beliefMap.js';
@@ -20,6 +19,7 @@ import {
   normalizeEnvoyPeaceOffer,
 } from './envoyErrand.js';
 import { createNegotiationPicture } from './negotiationPictures.js';
+import { negotiationExportLeg } from './negotiationPicturesExportLeg.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import { buildPressureSummary, settlementStrength } from './relationshipEvolution.js';
 import { readWarSeatBooks } from './warSeatBooks.js';
@@ -129,22 +129,17 @@ function alignmentPressBandOf(worldState, snapshot, actorId, opponentId) {
   return 'measured';
 }
 
-/** A court knows its own explicitly authored export list, if one exists. */
+/**
+ * A court knows its own explicitly authored export list, if one exists.
+ *
+ * The read itself lives in `negotiationExportLeg` — this probe used to walk
+ * `economicState.exports`, `economy.exports` and `trade.exports`, none of which
+ * the generator writes, so the `known` arm below was unreachable on every
+ * generated settlement. See that function's header for the measurement and for
+ * why the alias chain is resolved in exactly one place.
+ */
 function ownExportsOf(item) {
-  const settlement = settlementOf(item);
-  const containers = [
-    asObject(settlement.economicState),
-    asObject(settlement.economy),
-    asObject(settlement.trade),
-  ];
-  const container = containers.find((row) => Array.isArray(row.exports));
-  if (!container) return { exportKnowledge: 'unknown', exports: [] };
-  const exports = [...new Set(container.exports.map((raw) => {
-    if (typeof raw === 'string') return text(raw);
-    const row = asObject(raw);
-    return text(row.name || row.good || row.resource || row.label);
-  }).filter(Boolean))].sort(compareCodepoint);
-  return { exportKnowledge: 'known', exports };
+  return negotiationExportLeg(settlementOf(item));
 }
 
 /** Current own-court termination read used only at picture capture. */

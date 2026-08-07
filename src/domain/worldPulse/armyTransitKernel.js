@@ -52,6 +52,7 @@ import {
   normalizeNegotiationPicture,
   normalizeParlayTermSheet,
 } from './negotiationPictures.js';
+import { negotiationExportLeg } from './negotiationPicturesExportLeg.js';
 import { readWarSeatBooks } from './warSeatBooks.js';
 import { stampDeploymentRecall } from './warIntent.js';
 
@@ -194,16 +195,15 @@ function governingArchetypeOf(item) {
   return ['merchant', 'military', 'religious'].includes(kind) ? kind : 'other';
 }
 
-/** @param {unknown} item @returns {{exportKnowledge:'known'|'unknown',exports:string[]}} */
+/**
+ * This probe used to read `economicState.exports` alone — a field the economy
+ * generator does not write (it writes `primaryExports`) — so its `known` arm was
+ * unreachable on every generated settlement. `negotiationExportLeg` owns the
+ * read for both picture mints; see its header for the measurement.
+ * @param {unknown} item @returns {{exportKnowledge:'known'|'unknown',exports:string[]}}
+ */
 function exportPictureOf(item) {
-  const economic = asObject(settlementOf(item).economicState);
-  if (!Array.isArray(economic.exports)) return { exportKnowledge: 'unknown', exports: [] };
-  const exports = [...new Set(economic.exports.map((raw) => {
-    if (typeof raw === 'string') return raw.trim();
-    const row = asObject(raw);
-    return text(row.name || row.good || row.resource || row.label);
-  }).filter(Boolean))].sort(codepoint);
-  return { exportKnowledge: 'known', exports };
+  return negotiationExportLeg(settlementOf(item));
 }
 
 /** @param {string} armyId @param {number} departTick @param {number} arrivalTick @param {string[]} path */
