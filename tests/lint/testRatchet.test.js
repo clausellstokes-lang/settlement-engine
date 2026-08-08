@@ -280,7 +280,7 @@ describe('per-test suite ratchet — static pins', () => {
 // and reports success is worse than no guard, because it converts an open problem into a
 // solved-looking one.
 //
-// So the identification is DERIVED, from FOUR INDEPENDENT arms, and a file is an
+// So the identification is DERIVED, from FIVE INDEPENDENT arms, and a file is an
 // enforcement walker if ANY of them fires:
 //
 //   A1 NAME     — the filename declares it (`*.walker.test.js`).
@@ -293,6 +293,9 @@ describe('per-test suite ratchet — static pins', () => {
 //   A4 DELEGATED— the same structural predicate, holding inside a NON-TEST local module
 //     STRUCTURE   the file IMPORTS. A ratchet whose counter lives in `scripts/` contains
 //                 no enumeration of its own; the walk is one import away.
+//   A5 MARKER   — `@enforcement-walker`, the explicit source-local declaration used when
+//                 a freeze lives in a bare literal, exception Set, or external document
+//                 and therefore cannot be recovered reliably from syntax alone.
 //
 // ⚠ WHAT "ENUMERATES A SOURCE TREE" MEANS, AND WHY IT WAS WIDENED. The first cut spelled
 // it `readdirSync|globSync|fg.sync` and that MISSED roadsParticipation.test.js, which
@@ -313,9 +316,10 @@ describe('per-test suite ratchet — static pins', () => {
 // then caught only if A3 or A4 sees it. Those two are structural and cannot be talked out
 // of, but they only see walkers whose ENUMERATION is visible from the test file or one
 // import away. A registry-reading walker that is renamed and re-titled still escapes all
-// four, and so does one whose walk is two imports deep. That is the known hole; it is
-// narrower than it was, it requires deliberate acts, and no cheaper total predicate was
-// found.
+// five, and so does one whose walk is two imports deep. A5 exists because the classifier
+// has now missed all three of the non-token spellings above in live census rows. The
+// declaration can still be deleted, so the structural residual remains; the source-local
+// marker makes that deletion explicit and reviewable instead of relying on a central list.
 //
 // ── THE FALSE-POSITIVE FIGURES, MEASURED, AND THE ARM THAT WAS REJECTED ───────────────
 // All figures below come from an integrity-counted `git archive` of committed abc5a78b
@@ -331,6 +335,10 @@ describe('per-test suite ratchet — static pins', () => {
 //                                                                      transcendentalMathBaseline,
 //                                                                      aiFallbackTotality
 //   THE FOUR-ARM UNION       140 of 2,352                     5.95%
+//   + A5 explicit marker     +3 files                                 → architectureFreshness,
+//                                                                      migrationRollbackDiscipline,
+//                                                                      generosityReactions
+//   THE FIVE-ARM UNION       143 of 2,352                     6.08%
 //
 // PRECISION OF THE WIDENING, AUDITED ONE FILE AT A TIME: all five newly-swept files are
 // enforcement walkers. roadsParticipation was CONFIRMED BY EXECUTION (its census row was
@@ -385,6 +393,7 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   const SHELL_SCAN = /(?:execFileSync|execSync|spawnSync)\s*\(\s*['"`](?:grep|git|find|rg)['"`]/;
   const TREE_SCAN = new RegExp(`${DIR_SCAN.source}|${SHELL_SCAN.source}`);
   const FROZEN_INVENTORY = /\bBASELINE\b|\bCEILING\b|\bCENSUS\b|\bEXPECTED\b|\bFROZEN\b|\bALLOWLIST\b|\bEXEMPT\b|\bROSTER\b|\bINVENTORY\b|\bMANIFEST\b|-baseline\.json|shrink-only/;
+  const ENFORCEMENT_WALKER_MARKER = /@enforcement-walker\b/;
 
   /** The structural predicate, applied to ONE source text. */
   const isGuardSource = (src) => TREE_SCAN.test(src) && FROZEN_INVENTORY.test(src);
@@ -421,7 +430,7 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
     return [...out];
   }
 
-  /** @returns {{ name: boolean, title: boolean, structure: boolean, delegated: boolean }} */
+  /** @returns {{ name: boolean, title: boolean, structure: boolean, delegated: boolean, marker: boolean }} */
   function walkerArmsOf(file) {
     const src = readSrc(file);
     return {
@@ -431,6 +440,7 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
       delegated: localModulesOf(file, src).some((dep) => {
         try { return isGuardSource(readSrc(dep)); } catch { return false; }
       }),
+      marker: ENFORCEMENT_WALKER_MARKER.test(src),
     };
   }
 
@@ -466,9 +476,15 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // an OPEN, tree-derived population, so its failing verdict is byte-identical however
   // many more violations land. They are named here so the debt is VISIBLE and CANNOT
   // GROW: a NEW walker row in neither ledger reds. ⛔ This list is not permission — it is
-  // an outstanding bill, and the honest reading of it is "twelve guards are switched off
-  // and one is waiting on the owner".
+  // an outstanding bill, and the honest reading of it is "sixteen guards are switched
+  // off; two of those wait on owner-gated work".
   const WALKER_ROWS_OWED = Object.freeze({
+    'tests/docs/architectureFreshness.test.js :: ARCHITECTURE.md carries the spatial engine + the real gate (docs-knowledge-2) states the worldPulse module count within drift tolerance':
+      'DISABLED DOC-FRESHNESS GUARD. ARCHITECTURE.md says about 218 worldPulse modules while the open filesystem population measures 378. Re-derive the claim, then remove this census row and this owed entry together.',
+    'tests/docs/migrationRollbackDiscipline.test.js :: migration rollback discipline new money/PII migrations ship a reversal or an explicit @rollback note':
+      'OWNER-GATED DEPLOY-SAFETY GUARD. Migration 195 has neither a reviewed rollback script nor an inline @rollback note. A build lane may expose this debt but may not choose the live reversal posture.',
+    'tests/domain/generosityReactions.test.js :: the obligation sub-ledger (§3.1) — fold, deepen, repay, prune every other runtime obligation fold is mutation-only (decayPerTick:0)':
+      'DISABLED OPEN-POPULATION GUARD. The worldPulse scan expects five runtime obligation folds and measures seven. Disposition the two added folds in the walker own inventory before deleting this census row.',
     'tests/lib/spatialLedgerCoverage.walker.test.js :: spatialUsage ledger-coverage walker (lib-infra-copy-1) every written spatialLedgers key is TRACKED or EXEMPT (and no phantom classifications)':
       'OWNER-HELD. The cure is two entries in src/lib/spatialUsage.js, a file an owner session holds UNCOMMITTED together with both writers; with those edits applied the walker PASSES in the live tree. Drop this row and the census row together when the owner commits.',
     'tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) total debt never grows past its committed budget':
@@ -504,11 +520,11 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // derived from its own list proves list == list and rises silently with every entry.
   // MONOTONE DOWN from here. You may burn them; you may never pad them.
   const ADMITTED_CEILING = 4;
-  const OWED_CEILING = 13;
+  const OWED_CEILING = 16;
 
   test('⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS IT IS LEDGERED', () => {
     // THE PIN THIS WHOLE BLOCK EXISTS FOR. Add a walker row to the census — any walker,
-    // by any of the four arms — and this reds until someone writes down which of the
+    // by any of the five arms — and this reds until someone writes down which of the
     // two ledgers it belongs in and why. That is the difference between a law and a
     // sentence: the cost of violating it is paid at the gate, not at the next audit.
     const ledgered = new Set([...admittedIds, ...owedIds]);
@@ -567,6 +583,19 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
     expect(DIR_SCAN.test(roads), 'roadsParticipation reads no directory — this is why the walk regex had to widen').toBe(false);
     expect(SHELL_SCAN.test(roads), 'roadsParticipation enumerates by shelling out to grep -rl').toBe(true);
     expect(walkerArmsOf('tests/domain/roadsParticipation.test.js').structure, 'the widened STRUCTURE arm must catch it').toBe(true);
+
+    // A3 also misses freezes written as bare numeric literals, exception Sets, or a
+    // number in an external document. Those spellings caused the third live miss in two
+    // days, so each file declares the source-local A5 marker instead of being certified
+    // as ordinary debt by a central control list.
+    for (const file of [
+      'tests/docs/architectureFreshness.test.js',
+      'tests/docs/migrationRollbackDiscipline.test.js',
+      'tests/domain/generosityReactions.test.js',
+    ]) {
+      const arms = walkerArmsOf(file);
+      expect(arms.marker, `${file}: the explicit MARKER arm must classify this open-population guard`).toBe(true);
+    }
   });
 
   test('every walker FREED by this lane still classifies (re-adding one would red)', () => {
@@ -606,9 +635,6 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // the two ex-members to classify as walkers. A future author who re-adds a walker here
   // reds three pins, not zero.
   const ORDINARY_TEST_CONTROL = Object.freeze([
-    'tests/docs/architectureFreshness.test.js',
-    'tests/docs/migrationRollbackDiscipline.test.js',
-    'tests/domain/generosityReactions.test.js',
     'tests/edgeFunctions/aiCharterBundle.freshness.test.js',
     'tests/edgeFunctions/aiGroundingBundle.freshness.test.js',
     'tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js',
@@ -619,7 +645,7 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   ]);
 
   test('⚠ THE ORDINARY-TEST CONTROL — the classifier leaves real non-walker debt alone', () => {
-    // The mirror of the enforcing pin, and the reason the identification is four narrow
+    // The mirror of the enforcing pin, and the reason the identification is five narrow
     // arms rather than "it reads the filesystem". Every file named here carries REAL debt
     // in this census — a thrown TypeError, a field-projection break, a stale built
     // artifact, a durable-command race, a docs-freshness drift — and none of them is a

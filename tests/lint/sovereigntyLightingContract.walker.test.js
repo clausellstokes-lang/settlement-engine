@@ -3183,7 +3183,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       //     1977db07  the frozen figures                2346    358     1988  18951  5421
       //     af8815e9  this lane's PARENT                2352    358     1994  19122  5455
       //     9f060332  the first cut's tree (write-tree)  2352    358     1994  19132  5456
-      //     bc544124  THIS tree (write-tree)             2352    358     1994  19142  5458
+      //     08fd3304  THIS tree (committed by fd947d59)  2352    358     1994  19142  5458
       // PARENT MINUS FROZEN is the growth that accrued WHILE THIS RATCHET WAS RED AND
       // BANKED: +6 files, +6 credited, +171 titles, +34 suite titles, with `parked`
       // genuinely unmoved for the eighth consecutive wave. That is the recorded

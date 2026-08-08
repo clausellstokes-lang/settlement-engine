@@ -5,6 +5,10 @@
  * easiest to let rot. This doesn't try to verify every claim — it pins a couple
  * of facts that have already drifted (or easily could), so the same drift can't
  * silently come back.
+ *
+ * @enforcement-walker Open filesystem populations are compared with documented
+ * claims. If one of those claims drifts, its debt belongs here, not in the
+ * per-test failure census where further drift would become invisible.
  */
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';

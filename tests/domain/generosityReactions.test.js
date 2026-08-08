@@ -4,6 +4,10 @@
  * DORMANCY (drop-when-empty ⇒ byte-identical), the predatory-weight mint (scenario 3),
  * fog-mediated forgiveness + refusal damage (§3.2/§3.3), the typed incidents (§2.1), the
  * §G named-tie CLAMP, and the moral-hazard buffer decay + recovery (scenario 10).
+ *
+ * @enforcement-walker The obligation-fold census ranges over the open worldPulse
+ * source tree. If it fails, further folds must remain visible rather than being
+ * absorbed by the per-test failure census.
  */
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';

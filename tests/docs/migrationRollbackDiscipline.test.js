@@ -2,6 +2,8 @@ import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, test, expect } from 'vitest';
+// @enforcement-walker This file scans the open migration population. A failing
+// forward-contract row is a disabled deploy-safety guard, never ordinary test debt.
 // The reviewed wave train is the totality layer the runbook names over this
 // convention; the exception list below is checked against it, never asserted.
 import { MIGRATION_WAVES } from '../../scripts/ops/migrationRehearsalCore.mjs';

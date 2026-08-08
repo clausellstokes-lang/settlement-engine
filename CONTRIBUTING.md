@@ -54,11 +54,14 @@ commit that itself left TEN violating rows in the census**, across seven files. 
 `describe` of `tests/lint/testRatchet.test.js` now enforces it: every census row is
 classified, and a row belonging to an enforcement walker reds unless it is written into
 one of two explicit, shrink-only, exact-identity ledgers with a stated reason. A walker
-is identified by the UNION of four independent arms — its **name** (`*.walker.test.js`),
+is identified by the UNION of five independent arms — its **name** (`*.walker.test.js`),
 its module header's own **title line**, the **structure** of what it does (it enumerates
 a source tree — by directory read, by glob, or by shelling out to `grep -rl` — *and*
 compares the result against a frozen inventory), and that same structure **delegated** to
-a non-test module it imports. No single arm is enough and the test proves each gap by
+a non-test module it imports. The fifth arm is the source-local
+`@enforcement-walker` marker, required when the frozen comparison is spelled as a bare
+number, an exception `Set`, or a figure in another document and syntax alone cannot
+classify it reliably. No single arm is enough and the test proves each gap by
 execution: the filename check misses `mechanismLitCoverage.test.js`, which is a walker
 with no `.walker.` in its name; the structure arm misses
 `warCostKindPools.walker.test.js`, which walks nothing; and name, title and structure all

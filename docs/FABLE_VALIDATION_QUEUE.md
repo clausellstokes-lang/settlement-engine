@@ -6596,3 +6596,48 @@ cannot be dropped until the owner commits `spatialUsage.js`.
 3. **The archive-census recipe needs its `node_modules` leg written down.** Two lanes in two
    days have now taken an archive census; the hazard above cost this one a full suite run and
    would have read as a real collection regression to anyone who trusted the sentinel.
+
+---
+
+## S12-W2-VR1 — THE RECOVERY VERIFIER'S REJECT: three more controls were certifying disabled guards (2026-08-08, Codex continuation)
+
+**⏳ NON-FABLE — FABLE SURVEY AND SIGN-OFF STILL OWED.** The four-phase recovery workflow
+completed its Opus recovery and adversarial-verification phases, but both Fable phases returned
+`usage credits required`. The verifier returned **REJECT**, narrowly: the orphan's five freed
+guards and their relocation were sound, but the same commit added three other open-population
+guards to `ORDINARY_TEST_CONTROL` and thereby certified their misses.
+
+**THE THREE, REPRODUCED BEFORE THE REPAIR:**
+
+- `architectureFreshness` walks the open `worldPulse` tree and fails on the doc's 218-module
+  claim against 378 live modules.
+- `migrationRollbackDiscipline` walks the open migration train and fails because owner-gated
+  migration 195 has neither a reviewed reversal nor an inline `@rollback` note.
+- `generosityReactions` walks the open `worldPulse` tree and fails because its exact runtime
+  obligation-fold count is five while the live count is seven.
+
+The verifier's focused run was **3 failed / 66 passed** across the three guards plus the
+classifier. The defect was not in their assertions. It was that a green control said all three
+were ordinary debt, so future growth inside each already-failing row remained invisible.
+
+**THE NARROW TRUTH REPAIR.** All three names leave `ORDINARY_TEST_CONTROL` and enter
+`WALKER_ROWS_OWED` with their actual blockers. `OWED_CEILING` moves **13 → 16** openly in the
+same diff; this is a chair judgment restoring the ledger to reality, not permission to add
+more rows. Each file now carries a source-local `@enforcement-walker` marker, and the
+classifier gains A5 for that marker. This is the answer to the prior row's re-examine item:
+after three distinct miss classes in two days, a declaration is cheaper than pretending bare
+numeric literals, exception Sets and figures in external docs can always be inferred from
+syntax. The marker is source-local rather than a central filename list, so deleting it is an
+explicit code change next to the guard it protects.
+
+**ACCEPTANCE EXECUTED.** `tests/lint/testRatchet.test.js`: **58 passed / 58**. The marker arm
+is pinned by all three counterexamples; the ordinary-control anti-padding floor still has
+seven real census files; both owed/admitted ledgers remain exact and disjoint. ESLint over all
+five changed test files exits 0. The verifier's minor address finding is also corrected:
+`sovereigntyLightingContract.walker` now names committed tree `08fd3304` / commit `fd947d59`,
+not the pre-commit write-tree label `bc544124`; its figures were already correct.
+
+**VETOABLE JUDGMENTS.** J-S12-VR1-1 is the A5 marker rather than another expanding heuristic.
+J-S12-VR1-2 is the honest 13 → 16 owed-ceiling increase before any burn-down. Fable should
+re-rule both when credits return. Until then, these three guards are visibly disabled and may
+be repaired one at a time; none is allowed to masquerade as ordinary debt again.
