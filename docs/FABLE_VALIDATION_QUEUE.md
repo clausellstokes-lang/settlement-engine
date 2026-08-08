@@ -6641,3 +6641,31 @@ not the pre-commit write-tree label `bc544124`; its figures were already correct
 J-S12-VR1-2 is the honest 13 → 16 owed-ceiling increase before any burn-down. Fable should
 re-rule both when credits return. Until then, these three guards are visibly disabled and may
 be repaired one at a time; none is allowed to masquerade as ordinary debt again.
+
+---
+
+## S12-W2-VR2 — TWO VERIFIED WALKERS RETURN TO SERVICE (2026-08-08, Codex continuation)
+
+**⏳ NON-FABLE — FABLE SURVEY AND SIGN-OFF STILL OWED.** Two of VR1's three disabled guards
+now pass for the right reason. `ARCHITECTURE.md` is re-derived to the live `worldPulse`
+population of **378 modules**. `generosityReactions` replaces a single unexplained total with
+an exact per-file runtime inventory: **six files / seven `foldObligations` calls**, including
+the two distinct calls in `warCoalitionSettlement.js`.
+
+The corresponding two census rows are removed, `CEILING` moves **30 → 28**, and the owed
+walker ledger moves **16 → 14**. `migrationRollbackDiscipline` remains both censused and owed:
+migration 195 is owner-gated, so this lane neither invents a reversal nor treats that failure
+as repaired.
+
+**ACCEPTANCE EXECUTED.** Normal focused acceptance across `architectureFreshness`,
+`generosityReactions`, and `testRatchet` is **96 passed / 96**. Two independent negative
+controls then proved the assertions are live: restoring the stale 218-module prose failed
+only the architecture guard, and adding a dead eighth fold call failed only the generosity
+inventory (**2 failed / 36 passed** in the mutant run). Both mutations were removed and the
+source file returned byte-clean before this row was recorded. JSON parse, ESLint and
+`git diff --check` also pass.
+
+**VETOABLE JUDGMENTS.** J-S12-VR2-1 is documenting the exact live module count rather than
+loosening the architecture tolerance. J-S12-VR2-2 is a per-file call inventory rather than a
+new global count. Both make future drift name its location; Fable should re-rule them when
+credits return.

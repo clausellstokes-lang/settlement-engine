@@ -99,7 +99,11 @@ const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
 // the classifier and the control are repaired below, and the two arms added are STRUCTURAL,
 // not declarative — see the arm block for the measured catch/false-positive pairs and for
 // the TITLE-arm hypothesis that was tested and REJECTED on its numbers.
-const CEILING = 30;
+// RATCHETED 30 → 28 on 2026-08-08 after the recovery verifier exposed three more
+// disabled guards. architectureFreshness was repaired by re-deriving the documented
+// module count; generosityReactions now carries an exact per-file runtime-fold inventory.
+// migrationRollbackDiscipline remains owner-gated and stays in the census + OWED ledger.
+const CEILING = 28;
 
 describe('per-test suite ratchet — static pins', () => {
   test('every entry is keyed by its own `<file> :: <test>` identity (no hand-typed drift)', () => {
@@ -476,15 +480,11 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // an OPEN, tree-derived population, so its failing verdict is byte-identical however
   // many more violations land. They are named here so the debt is VISIBLE and CANNOT
   // GROW: a NEW walker row in neither ledger reds. ⛔ This list is not permission — it is
-  // an outstanding bill, and the honest reading of it is "sixteen guards are switched
+  // an outstanding bill, and the honest reading of it is "fourteen guards are switched
   // off; two of those wait on owner-gated work".
   const WALKER_ROWS_OWED = Object.freeze({
-    'tests/docs/architectureFreshness.test.js :: ARCHITECTURE.md carries the spatial engine + the real gate (docs-knowledge-2) states the worldPulse module count within drift tolerance':
-      'DISABLED DOC-FRESHNESS GUARD. ARCHITECTURE.md says about 218 worldPulse modules while the open filesystem population measures 378. Re-derive the claim, then remove this census row and this owed entry together.',
     'tests/docs/migrationRollbackDiscipline.test.js :: migration rollback discipline new money/PII migrations ship a reversal or an explicit @rollback note':
       'OWNER-GATED DEPLOY-SAFETY GUARD. Migration 195 has neither a reviewed rollback script nor an inline @rollback note. A build lane may expose this debt but may not choose the live reversal posture.',
-    'tests/domain/generosityReactions.test.js :: the obligation sub-ledger (§3.1) — fold, deepen, repay, prune every other runtime obligation fold is mutation-only (decayPerTick:0)':
-      'DISABLED OPEN-POPULATION GUARD. The worldPulse scan expects five runtime obligation folds and measures seven. Disposition the two added folds in the walker own inventory before deleting this census row.',
     'tests/lib/spatialLedgerCoverage.walker.test.js :: spatialUsage ledger-coverage walker (lib-infra-copy-1) every written spatialLedgers key is TRACKED or EXEMPT (and no phantom classifications)':
       'OWNER-HELD. The cure is two entries in src/lib/spatialUsage.js, a file an owner session holds UNCOMMITTED together with both writers; with those edits applied the walker PASSES in the live tree. Drop this row and the census row together when the owner commits.',
     'tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) total debt never grows past its committed budget':
@@ -520,7 +520,7 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // derived from its own list proves list == list and rises silently with every entry.
   // MONOTONE DOWN from here. You may burn them; you may never pad them.
   const ADMITTED_CEILING = 4;
-  const OWED_CEILING = 16;
+  const OWED_CEILING = 14;
 
   test('⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS IT IS LEDGERED', () => {
     // THE PIN THIS WHOLE BLOCK EXISTS FOR. Add a walker row to the census — any walker,
@@ -612,6 +612,9 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
       'tests/lint/domainAnyCastBaseline.test.js',
       'tests/lint/transcendentalMathBaseline.test.js',
       'tests/domain/roadsParticipation.test.js',
+      // verifier-reject burn-down: these retain A5 after their rows leave
+      'tests/docs/architectureFreshness.test.js',
+      'tests/domain/generosityReactions.test.js',
     ]) {
       expect(isEnforcementWalker(file), `${file}: freed by this lane and no longer classified as a walker`).toBe(true);
     }

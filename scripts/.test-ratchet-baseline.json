@@ -53,14 +53,6 @@
       "introducedAt": "531a84887b81177cbb493463541de46864cb554f",
       "class": "debt"
     },
-    "tests/docs/architectureFreshness.test.js :: ARCHITECTURE.md carries the spatial engine + the real gate (docs-knowledge-2) states the worldPulse module count within drift tolerance": {
-      "file": "tests/docs/architectureFreshness.test.js",
-      "test": "ARCHITECTURE.md carries the spatial engine + the real gate (docs-knowledge-2) states the worldPulse module count within drift tolerance",
-      "subsystem": "docs / ARCHITECTURE.md freshness",
-      "cause": "ARCHITECTURE.md states a worldPulse module count that has drifted outside tolerance against the live tree (measured 218 vs a stated figure whose lower bound is 301.6). The worldPulse area was split and renamed across many waves without the doc being re-derived.",
-      "introducedAt": "unbisectable: a doc-drift walker over a module count that moved across many worldPulse waves in the 493-commit window since 2026-08-01; no single commit introduced the drift. Burn-down lane must re-derive the figure, not bisect it.",
-      "class": "debt"
-    },
     "tests/docs/deployRunbookFreshness.test.js :: DEPLOY.md freshness — the runbook derives from the filesystem names the current migration head file": {
       "file": "tests/docs/deployRunbookFreshness.test.js",
       "test": "DEPLOY.md freshness — the runbook derives from the filesystem names the current migration head file",
@@ -84,14 +76,6 @@
       "cause": "OWNER-GATED migration debt. 195_civility_guard_and_public_identity.sql is a money/PII migration with no supabase/rollback/195_*.down.sql and no `-- @rollback:` note. The whole tree carries ZERO .down.sql beside the migrations (measured). Migrations are an owner-gated class — do NOT author a reversal in a build lane.",
       "introducedAt": "7aa43b50bcbfa1c0223a4222df17606cf91b57c9",
       "class": "owner-gated"
-    },
-    "tests/domain/generosityReactions.test.js :: the obligation sub-ledger (§3.1) — fold, deepen, repay, prune every other runtime obligation fold is mutation-only (decayPerTick:0)": {
-      "file": "tests/domain/generosityReactions.test.js",
-      "test": "the obligation sub-ledger (§3.1) — fold, deepen, repay, prune every other runtime obligation fold is mutation-only (decayPerTick:0)",
-      "subsystem": "worldPulse / obligation sub-ledger",
-      "cause": "The §3.1 obligation fold census expects 5 mutation-only runtime folds and measures 7 — two new obligation folds landed with decayPerTick:0 without being added to the dispositioned set.",
-      "introducedAt": "unbisectable: an inventory pin over runtime obligation folds; two folds were added by separate worldPulse waves in the 2026-08 window. Burn-down lane must disposition both, not bisect one.",
-      "class": "debt"
     },
     "tests/domain/metronomeCooldownLint.test.js :: metronome-cooldown lint — condition-bearing outcome sources self-limit the non-cooldown emitter set may only SHRINK (no NEW condition-bearing source bypasses the metronome)": {
       "file": "tests/domain/metronomeCooldownLint.test.js",

@@ -122,9 +122,25 @@ describe('the obligation sub-ledger (§3.1) — fold, deepen, repay, prune', () 
     const calls = files.flatMap(path => [...readFileSync(path, 'utf8')
       .matchAll(/foldObligations\([\s\S]*?\);/g)]
       .map(match => ({ path, source: match[0] })));
+    const callInventory = {};
+    for (const row of calls) {
+      const file = row.path.slice(root.length + 1);
+      callInventory[file] = (callInventory[file] || 0) + 1;
+    }
+    const RUNTIME_FOLD_INVENTORY = Object.freeze({
+      'assizeKernel.js': 1,
+      'convergence.js': 1,
+      'generosityKernel.js': 1,
+      'obligationDecay.js': 1,
+      'upswingKernel.js': 1,
+      'warCoalitionSettlement.js': 2,
+    });
     const decayOwners = calls.filter(row => !row.source.includes('decayPerTick: 0'));
 
-    expect(calls).toHaveLength(5);
+    // Exact by file in both directions: a new fold reds, a removed/moved fold asks
+    // this inventory to bank the win, and the two coalition folds are dispositioned
+    // explicitly instead of hiding behind a total of seven.
+    expect(callInventory).toEqual(RUNTIME_FOLD_INVENTORY);
     expect(decayOwners).toHaveLength(1);
     expect(decayOwners[0].path.endsWith('/obligationDecay.js')).toBe(true);
     expect(decayOwners[0].source).toContain('REACTION_TUNING.OBLIGATION_DECAY');
