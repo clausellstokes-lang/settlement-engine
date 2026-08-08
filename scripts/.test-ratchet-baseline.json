@@ -165,14 +165,6 @@
       "introducedAt": "unbisectable: the boundedText validator and the needIcon field predate the 2026-08 window (the field is in the schema list at line 80); what changed is the shape reaching it. Burn-down lane must find the writer that stopped supplying needIcon.",
       "class": "debt"
     },
-    "tests/lib/spatialLedgerCoverage.walker.test.js :: spatialUsage ledger-coverage walker (lib-infra-copy-1) every written spatialLedgers key is TRACKED or EXEMPT (and no phantom classifications)": {
-      "file": "tests/lib/spatialLedgerCoverage.walker.test.js",
-      "test": "spatialUsage ledger-coverage walker (lib-infra-copy-1) every written spatialLedgers key is TRACKED or EXEMPT (and no phantom classifications)",
-      "subsystem": "spatial / spatialLedgers coverage walker (OWNER-HELD — see walkerRowsOwed)",
-      "cause": "⛔ A DISABLED GUARD, OWED REMOVAL, AND OWNER-GATED IN THIS TREE — the one row of the ten walker rows this lane could not free. The direction recorded here before 2026-08-07 was WRONG and is corrected by measurement: it is not \"two classifications are phantom\". The walker's own dump inside an integrity-counted `git archive` of af8815e9 gives onlyClassified=[] and onlyWritten=[\"commercialReasons\",\"pactProposals\"] — two keys are WRITTEN by kernels and classified in NEITHER list. The cure is to add them to TRACKED_LEDGER_KEYS/MOVER_PRESENCE or EXEMPT_LEDGER_KEYS in src/lib/spatialUsage.js, and an OWNER-STARTED SESSION HOLDS THAT FILE UNCOMMITTED together with both writers (src/domain/worldPulse/commercialReasons.js, src/domain/worldPulse/pactProposals.js) — a build lane may not touch it. That work IS the cure and it is already in flight: with the owner's uncommitted edits applied, this walker PASSES in the live tree (measured 2026-08-07), so this row is a ratchet-down waiting on the owner's commit, not a repair anyone else should attempt. PRECONDITION FOR DROPPING THE ROW: the owner's spatialUsage work lands; then re-run the walker in an archive of that commit and remove this row and its walkerRowsOwed entry together.",
-      "introducedAt": "unbisectable: a key-coverage census that moved with the spatial ledger namespace across several waves; the two unclassified keys arrived with TR-1 (commercialReasons) and GR-2 (pactProposals), whose classification is the owner's in-flight edit.",
-      "class": "owner-gated"
-    },
     "tests/lint/clampPrimitiveBaseline.test.js :: clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01": {
       "file": "tests/lint/clampPrimitiveBaseline.test.js",
       "test": "clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01",

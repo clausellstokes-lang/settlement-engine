@@ -6669,3 +6669,38 @@ source file returned byte-clean before this row was recorded. JSON parse, ESLint
 loosening the architecture tolerance. J-S12-VR2-2 is a per-file call inventory rather than a
 new global count. Both make future drift name its location; Fable should re-rule them when
 credits return.
+
+---
+
+## S12-W2-VR3 — THE OWNER-HELD SPATIAL GUARD IS LIVE AGAIN (2026-08-08, Codex continuation)
+
+**⏳ NON-FABLE — FABLE SURVEY AND SIGN-OFF STILL OWED.** STOP-S12W-1 is discharged by
+commit `05af1e8b`, not by a quarantine or a wider census. The two missed kernel writers are
+now classified on their semantics: the persistent, road-priced `pactProposals` queue is
+TRACKED as the id-free `pact_formation` mover, while pulse-recomputed
+`commercialReasons` is EXEMPT as reason annotation rather than movement. Both writer
+constants use the convention the coverage walker resolves.
+
+The independent audit found no blocking correctness issue and exposed one worthwhile
+control gap: exact-set coverage proved only that each key appeared on *a* side, not that it
+stayed on the ruled side. `spatialUsage.test` therefore pins both memberships directly. It
+also names the intended stale-row policy: if the virtual pact flag is turned off after rows
+exist, telemetry reports the still-persisted queue as active state even though the stage did
+not run. That behavior was already in the extractor; the new test makes the meaning explicit.
+
+**ACCEPTANCE EXECUTED.** Four focused source suites passed **52 / 52** before landing. A
+negative control then removed the pact count read: `spatialLedgerCoverage.walker` remained
+green while `spatialUsage` failed exactly its behavioral pin (**1 failed / 14 passed**),
+proving the pin closes the tracked-side fail-open; restoration returned **15 / 15** green.
+The committed `05af1e8b` archive, with no working-tree edits, passes the coverage walker
+**4 / 4**. The expanded analytics, pact, commercial, size, classifier and telemetry battery
+passes **15 files / 208 tests**. JSON parse, ESLint and `git diff --check` pass.
+
+The last precondition is therefore met: the spatial row leaves the test census and
+`WALKER_ROWS_OWED` together, `CEILING` moves **28 → 27**, and `OWED_CEILING` moves
+**14 → 13**. Migration 195 remains owner-gated; this release does not touch it.
+
+**VETOABLE JUDGMENTS.** J-S12-VR3-1 is TRACKED for the pact queue and EXEMPT for commercial
+reasons. J-S12-VR3-2 is state-presence telemetry for a stranded dark-flag pact row rather
+than pretending it means “stage executed this tick.” Fable should re-rule both when credits
+return.

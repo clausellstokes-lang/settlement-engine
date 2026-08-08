@@ -11,7 +11,11 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { extractSpatialUsage } from '../../src/lib/spatialUsage.js';
+import {
+  EXEMPT_LEDGER_KEYS,
+  TRACKED_LEDGER_KEYS,
+  extractSpatialUsage,
+} from '../../src/lib/spatialUsage.js';
 import { extractCanonizeUsage } from '../../src/lib/spatialCanonizeUsage.js';
 
 // Distinctive strings that must NEVER survive into any emitted shape.
@@ -116,6 +120,13 @@ describe('spatialUsage — privacy canary', () => {
 });
 
 describe('spatialUsage — coarse signal', () => {
+  it('pins pact proposals as TRACKED and commercial reasons as EXEMPT', () => {
+    expect(TRACKED_LEDGER_KEYS).toContain('pactProposals');
+    expect(TRACKED_LEDGER_KEYS).not.toContain('commercialReasons');
+    expect(Object.keys(EXEMPT_LEDGER_KEYS)).toContain('commercialReasons');
+    expect(Object.keys(EXEMPT_LEDGER_KEYS)).not.toContain('pactProposals');
+  });
+
   it('counts mover activity id-free + bands the migration population', () => {
     const out = extractSpatialUsage(loadedWorldState());
     expect(out.spatial_active).toBe(true);
@@ -197,6 +208,20 @@ describe('spatialUsage — coarse signal', () => {
 });
 
 describe('spatialUsage — dormant / aspatial', () => {
+  it('reports a stranded pact row after its virtual flag goes dark (state presence, not stage execution)', () => {
+    const out = extractSpatialUsage({
+      simulationRules: { pactFormationEnabled: false },
+      spatialLedgers: {
+        pactProposals: [{
+          id: 'pact.4.a.b.shared_threat', from: 'a', to: 'b', state: 'open',
+          openedTick: 4, answerDueTick: 12,
+        }],
+      },
+    });
+    expect(out.mover_counts.pacts_awaiting_answer).toBe(1);
+    expect(out.movers_active).toContain('pact_formation');
+  });
+
   it('emits only the light config block when the spatial engine is off', () => {
     const out = extractSpatialUsage({ simulationRules: { presetId: 'realistic_regional' } });
     expect(out.spatial_active).toBe(false);
