@@ -121,10 +121,17 @@ describe('spatialUsage — privacy canary', () => {
 
 describe('spatialUsage — coarse signal', () => {
   it('pins pact proposals as TRACKED and commercial reasons as EXEMPT', () => {
-    expect(TRACKED_LEDGER_KEYS).toContain('pactProposals');
-    expect(TRACKED_LEDGER_KEYS).not.toContain('commercialReasons');
-    expect(Object.keys(EXEMPT_LEDGER_KEYS)).toContain('commercialReasons');
-    expect(Object.keys(EXEMPT_LEDGER_KEYS)).not.toContain('pactProposals');
+    expect({
+      pactTracked: TRACKED_LEDGER_KEYS.includes('pactProposals'),
+      pactExempt: Object.hasOwn(EXEMPT_LEDGER_KEYS, 'pactProposals'),
+      commercialTracked: TRACKED_LEDGER_KEYS.includes('commercialReasons'),
+      commercialExempt: Object.hasOwn(EXEMPT_LEDGER_KEYS, 'commercialReasons'),
+    }).toEqual({
+      pactTracked: true,
+      pactExempt: false,
+      commercialTracked: false,
+      commercialExempt: true,
+    });
   });
 
   it('counts mover activity id-free + bands the migration population', () => {
