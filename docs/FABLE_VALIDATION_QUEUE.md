@@ -6222,3 +6222,377 @@ regardless. (2) The twelve OWED rows want a wave and an order. (3) `guidanceRegi
 `title=` ceiling is a TOTAL, so a swap nets to zero and stays invisible; the per-file inventory
 upgrade (182 rows) is deferred and written down in the walker. (4) STOP-S12W-1 needs the
 owner's spatialUsage commit before anyone touches that row.
+
+---
+
+## S12-W2 — THE GUARD THAT CLOSED A GAP HAD A GAP, AND A CONTROL PIN CERTIFIED IT (2026-08-07, Opus-era build lane)
+
+**⏳ OPUS-ERA — FABLE SURVEY OWED.**
+
+**THE PREMISE, CONFIRMED BY EXECUTION BEFORE ANYTHING WAS CHANGED.** `abc5a78b`'s three-arm
+classifier catches 10/10 of the rows it was aimed at and misses more. The chair named four —
+`domainAnyCastBaseline.test.js ×2` and `transcendentalMathBaseline.test.js ×2`. Run inside an
+integrity-counted `git archive` of committed `abc5a78b` (6,196 tracked paths in, 6,196 files
+out, `git status` clean, `node_modules` symlinked and git-excluded), those two files plus one
+more give **`Test Files 3 failed (3)` / `Tests 5 failed | 19 passed`**. **THE CHAIR'S FOUR IS
+A FIVE.** `tests/domain/roadsParticipation.test.js :: … the .npcs-reader inventory ratchet (§8
+census) …` is the same defect: one assertion over an open, tree-derived population, frozen.
+
+**⛔⛔ AND `domainAnyCastBaseline.test.js` AND `roadsParticipation.test.js` WERE *BOTH* ON
+`abc5a78b`'s OWN ORDINARY-TEST CONTROL LIST.** A green pin asserted, every run, that the
+classifier was CORRECT to ignore two disabled guards. That is the worst failure mode a control
+has: it converts an open hole into a proof, in the one place a reader checks whether the hole
+exists. The cause was the ordinary one — the list was populated by asking *which of these feel
+like ordinary debt?* and trusting the answer, and both misses look ordinary (one is named
+after a lint baseline, one lives in `tests/domain`).
+
+### THE ARM — MEASURED, AND THE CHAIR'S HYPOTHESIS TESTED AND REJECTED ON ITS NUMBERS
+
+The chair proposed A4 classify from the **census row's TITLE** ("ratchet", "shrink-only",
+"frozen baseline governance"), needing no file read. It was measured over **every collected
+test title in the estate** — `vitest list`, 27,287 titles across 2,343 files, `--json=` written
+outside the repo per the recorded clobber hazard.
+
+| candidate | reach | catches the 5 | verdict |
+| --- | --- | --- | --- |
+| TITLE, narrow (`ratchet`\|`shrink-only`) | 362 titles = **1.33%**; 83 files, **40 outside the union** | yes | **REJECTED** |
+| TITLE, broad (+`frozen`/`census`/`roster`/…) | 1,159 titles = **4.25%**; 344 files, **253 outside** | yes | REJECTED |
+| A3 widened to shell-out enumeration | **+2 files** | `roadsParticipation` | **TAKEN** |
+| A4 delegated structure (non-test imports) | **+3 files** | both baseline ratchets | **TAKEN** |
+
+The title arm's precision on TODAY's census is perfect (12 of 35 rows, all twelve genuine
+walkers) and it was still refused, for three measured reasons. **(1) THE TOKENS ARE DOMAIN
+NOUNS IN A WORLD SIM.** "ratchet" is this house's word for a one-way STAT as well as for a
+guard — `pantheon.test.js` *"ratchet wins/losses (commutative fold)"*, `martialMoralWF8.test.js`
+*"martial readiness ratchet"*, `warConservationDismiss.test.js` *"strips the exhaustion
+ratchet"*, `welcomeJourney.test.jsx` *"lazy-ratchet finger"* — four confirmed non-guards in the
+first sample; "census" and "roster" are far worse (a settlement census, a faction roster).
+**(2) IT BUYS NOTHING THE STRUCTURAL ARMS DO NOT** — all twelve of its census hits are covered
+by A1–A4, so its entire marginal contribution here is false positives. **(3) IT IS A THIRD
+DECLARATION,** and the recorded residual is precisely that declarations fail open.
+
+**WHAT WAS TAKEN INSTEAD IS STRUCTURAL, AND THE MISSES WERE NOT RANDOM.** Both baseline
+ratchets DELEGATE their tree walk to an imported counter in `scripts/`, so the test file
+contains no enumeration at all; `roadsParticipation` enumerates by SHELLING OUT
+(`execFileSync('grep', ['-rl', …])`), which no `readdirSync|globSync|fg.sync` regex can match.
+So A3's walk predicate now also matches `exec*Sync|spawnSync` of `grep`/`git`/`find`/`rg`, and
+a fourth arm applies the same predicate to the non-test local modules a file imports.
+
+**FALSE-POSITIVE RATE, MEASURED IN THE SAME ARCHIVE: the union goes 135/2,352 (5.74%) to
+140/2,352 (5.95%).** All five newly-swept files were audited one at a time and **all five are
+enforcement walkers** — `roadsParticipation` (confirmed by execution), `committedSecretsScan`
+(matches every git-TRACKED file against key shapes), `aiFallbackTotality` (*"the fallback
+drivers cover the full discovered AI-surface roster (a new surface reds)"*), and the two
+targets. Five catches, zero false positives, for five files of extra reach.
+
+**⚠ ONE EXCLUSION IN A4 WAS MEASURED, NOT ASSUMED.** Without it, three ordinary domain tests
+(`brokerageIntercept`, `strategicPosture`, `secrecyTradeDormancyFence`) were claimed, because
+each imports a helper EXPORTED FROM a walker test file. A walker file's walker-ness belongs to
+its OWN census rows, never to its importers'; `.test.` files are therefore excluded from the
+transitive follow, and A4's hits drop from 8 to 5 — all five genuine.
+
+### THE TRIAGE, ON THE LANE'S OWN STRUCTURAL LINE
+
+All five range over an OPEN, tree-derived population, so all five are **DISABLED GUARDS** and
+all five are **FREED**. None of the underlying debt was burned down; each is RELOCATED to an
+exact-identity, shrink-only, attributed ledger inside the walker, where a NEW violation reds.
+
+**`domainAnyCastBaseline` — the debt could NOT be relocated by a re-freeze, and the honest home
+is a DECLARED-OVERRUN LEDGER IN CODE.** The file already carried that ledger *as a comment*,
+with causes and introducing commits written out with real care, under a recorded prohibition:
+*⛔ DO NOT run `--update` — it re-freezes the WHOLE TREE and would bank `commercialReasons.js`'s
+31 any-holes as permanent debt.* The prohibition is right and it is exactly why the ledger has
+to be machinery: `DECLARED_OVERRUNS` now carries the three files as `{any, suppress,
+introducedAt, cause}` — `commercialReasons.js` 31/0 (`d7ea69a4`), `warDeployment.js` 17/0
+against a baseline of 16 (`172e5f22`), `envoyPulse.js` 2/0 (`e0c8646e`) — and four new arms
+govern it: every row attributed with a 40-hex sha and a >60-char cause; the set EXACT in both
+directions; **no UNDECLARED file may exceed its baseline**; and two monotone-down literal
+ceilings (34 excess occurrences, 3 rows) that are what make the ledger a bill rather than a
+permission slip. The two freed arms read the declared allowance and are LIVE again for every
+other file in `src/domain`. **Nothing was typed and nothing was forgiven — 34 holes remain,
+now named, capped and unable to grow.**
+
+**`transcendentalMathBaseline` — same machinery, and the two rows are one shape.**
+`bandedStock.js` (1 site, `59df13a9`) and `dispositionLedger.js` (1 site, `7796954e`) both
+carry the SAME expression, `Math.pow(0.5, age / halfLife)`. `bandedStock.js` exists precisely
+to be its one home (its own header records fifteen hand-spelled call sites), and
+`dispositionLedger.js:468` is a site not yet routed through it. Re-freezing would bank a fork
+of a shared primitive; the cure is the routing wave, and for the primitive itself an
+integer/rational reformulation, since `Math.pow` is implementation-approximated per spec and
+can fork a same-seed world ACROSS engines. Declared, capped at 2, owed to that wave.
+
+**`roadsParticipation` — an `UNDISPOSITIONED_NPCS_READERS` quarantine, the `ruinFilterRoster`
+precedent verbatim.** Seven `.npcs` readers landed in worldPulse without ever being
+dispositioned; they are named, capped at 7 and audited both directions, and deliberately NOT
+moved into the §8 `EXPECTED` table, because a disposition asserts a judgement nobody made.
+**AND THE INVENTORY HAD ALREADY GROWN UNSEEN, MEASURED: 38 readers against a frozen 31 —
+seven undispositioned arrivals plus one stale address — with no report ever showing it,
+because the failing row's bytes never changed.** The stale address is a real address move, not
+a removal: WR-7b (`e51ec17e`) split the DM-verb records leaf out, and `markRosterDeath` /
+`clearJailHold` — the two functions that disposition is ABOUT — went with it verbatim.
+`npcDmVerbs.js` now contains **zero** occurrences of `.npcs` (measured), so its row retires and
+`npcDmVerbRecords.js` takes it, the `applyWorldPulseBetrayal` precedent's second instance.
+
+**Census 35 → 30; `testRatchet` CEILING 35 → 30.** `WALKER_ROWS_ADMITTED` (4) and
+`WALKER_ROWS_OWED` (13) are untouched — the five freed rows were never in either ledger,
+because the classifier could not see them.
+
+### THE CONTROL PIN, REPAIRED SO IT CANNOT CERTIFY A MISS AGAIN
+
+The list is now a named constant of **ten** genuinely-ordinary census files (the two walkers
+removed), and membership is no longer a judgement: a second arm requires **every named file to
+carry a real census row**, which ties the control to the population it is a control FOR and
+makes it self-cleaning. A future author who re-adds a walker reds three pins, not zero — the
+control arm, the anti-padding arm, and the freed-walker arm.
+
+### ACCEPTANCE, ALL BY EXECUTION, ALL WITH PLANTS RESTORED `cmp`-CLEAN
+
+Every run went through `scripts/gate-mutex.sh --wait && scripts/gate-tail.sh`; no exit code was
+read through a pipe. All plants were made **inside the archive**, never in the shared tree.
+
+**(a) THE FOUR ROWS — AND THE FIFTH — CLASSIFY NOW.** Standing pins, not one-off runs: the
+counterexample pin asserts per file that A1, A2 and A3 all miss both baseline ratchets while A4
+catches them, and that the narrow directory-scan regex misses `roadsParticipation` while the
+widened one catches it. The freed-walker pin lists all seven freed files. The three suites that
+carried the five rows now run **`Test Files 3 passed (3)` / `Tests 33 passed (33)`** (was
+`3 failed` / `5 failed | 19 passed`).
+
+**(b) THE CORRECTED CONTROL PASSES AND WOULD RED ON A REGRESSION — FOUR MUTANTS, EACH RUN.**
+Delete the A4 arm → **2 of 58 red**, naming `domainAnyCastBaseline`. Narrow `TREE_SCAN` back to
+directory reads → **2 of 58 red**, naming `roadsParticipation`. Put `domainAnyCastBaseline`
+back on the control list → **2 of 58 red** (the control arm reporting `["delegated"]` as the
+arm that fires, and the anti-padding arm). Pad the control with a green non-census file
+(`npcProfile.test.js`) → **exactly 1 of 58 red**, the anti-padding arm, naming it.
+
+**(c) A NEW VIOLATION OF EACH FREED WALKER REDS.** Three plants — one `@type {any}` in
+`aiOverlayVerifier.js`, one `2 ** 3` in `contestMath.js`, one new `.npcs` reader file —
+produced **`Test Files 3 failed (3)` / `Tests 7 failed | 26 passed`**, and the seven include
+**both of the previously-frozen rows in each ratchet** plus `roadsParticipation`'s exactness
+row. A walker row planted in the census — paired with the removal of ONE of
+`accountContentPortability`'s TWO rows, so the count stayed at 30 (the CEILING pin cannot fire)
+and the file kept a census row (the anti-padding pin cannot fire) — reddened **exactly one test
+of 58**, the law pin, naming the plant.
+
+**⚠ A FAKE RED WAS CAUGHT AND ITS CAUSE IS A HAZARD WORTH RECORDING.** The first full
+`npm run test:ratchet` reported one failing test outside the census —
+`tests/architecture/archViewWall.test.js :: the K-5 governor module is view-only … lives
+outside the arch/ determinism perimeter in the view-policy layer`. It failed in ISOLATION too,
+so it was not parallel contention. The cause is the measurement environment: that pin asserts
+`expect(govPath.includes('/arch/')).toBe(false)` over an **ABSOLUTE** path, and the archive had
+been unpacked into a scratch directory literally named `arch`. Renamed to `tree`, the same
+committed bytes give `Tests 19 passed (19)`. **A path-substring pin evaluated over an absolute
+path is sensitive to the CHECKOUT'S OWN DIRECTORY NAME, and the red it produces is
+indistinguishable from a real architectural violation.** Every archive-census run under a path
+containing `/arch/` will see it. The pin is not this lane's to change and is left alone; the
+hazard is recorded here so the next lane does not spend an hour on it.
+
+**(d) PRE-EXISTING DEBT UNCHANGED, MEASURED AT A COMMITTED SHA.** `countDomain()` at `abc5a78b`
+gives total 2,255 against a baseline of 2,221 — excess 34, exactly the three declared rows. The
+live tree gives the identical 2,255, so the owner's uncommitted `commercialReasons.js` edits
+have not moved the any-count and the declared 31 is true at both. `countTrees()` gives 51
+against a baseline of 49 — excess 2, exactly the two declared rows.
+
+**(e) THE FULL `npm run test:ratchet`, NO PLANTS: exit 0.** *"OK — no regressions, and 6
+baselined test(s) no longer fail (24 < 30). RATCHET DOWN."* **REPORTED AGAINST INTEREST AND
+DELIBERATELY NOT BANKED:** those six are the built-artifact rows (`aiCharterBundle`,
+`aiGroundingBundle`, `aiOutputSchemaBundle` freshness ×3 and `edgeSharedBundleReproducibility`
+×3) that `af8815e9` left frozen **per the chair**, reporting then exactly what is reported now
+— they pass in a clean archive and in the live tree. This lane reproduces that state and
+changes nothing about it; banking the win is the chair's call, not a build lane's.
+
+**THE LIGHTING CENSUS, RE-DERIVED AND MEASURED TO THE UNIT.**
+
+|  | files | parked | credited | titles | suite |
+| --- | --- | --- | --- | --- | --- |
+| `9f060332` the first cut | 2352 | 358 | 1994 | 19132 | 5456 |
+| `bc544124` this tree | 2352 | 358 | 1994 | **19142** | **5458** |
+
+**+10 titles, +2 suite titles**, PREDICTED from the diff (4 `test(` + 1 `describe(` in each
+baseline ratchet, 1 `it(` in `roadsParticipation`, 1 `test(` in `testRatchet`) and then
+measured. **⚠ THE SEQUENCE HAZARD BIT AGAIN ON THE WAY THROUGH:** the first measurement
+reddened on `titles` and therefore **never evaluated `suiteTitles`**, so 5458 is a SECOND
+measurement taken after `titles` was corrected, not a figure carried along. The archive's own
+`HEAD^{tree}` was verified byte-identical to the `git write-tree` sha
+`b202efe16681c9b64fe25672b7993d35127b86dd` built through a private `GIT_INDEX_FILE`, so the
+shared index was never touched.
+
+### DECISIONS TAKEN, EACH VETOABLE
+
+1. **The TITLE arm was refused on measured aliasing, not on taste.** Veto by ordering it added
+   anyway; the cost is a classifier that claims domain tests whose titles use "ratchet" for a
+   one-way stat, and a third declaration arm that does not narrow the structural hole.
+2. **`roadsParticipation` was freed even though the brief said four.** It is the same defect on
+   the same line and it was CONFIRMED failing. Veto by ordering it re-frozen; the cost is a
+   `.npcs`-reader guard that stays switched off over a population already grown 31 → 38.
+3. **The declared-overrun ledgers are EXACT, not ceilings.** So if the owner's in-flight burn
+   takes `commercialReasons.js` from 31 to 20, the gate REDS with *"declared 31, measured 20 —
+   lower the declared figure (bank the win)"*. That is deliberate and it is the same law the
+   baseline's own `no file is below its baseline` arm already enforces. Veto by ordering `<=`
+   ceilings instead; the cost is slack a future regression can hide in.
+4. **The stale `npcDmVerbs.js` row was RETIRED and `npcDmVerbRecords.js` inherited its
+   disposition.** The two functions moved verbatim and the old file measures zero `.npcs`.
+   Veto by ordering `npcDmVerbRecords.js` into the quarantine instead; the cost is a
+   quarantine row for a reader whose judgement is already written down.
+5. **The seven undispositioned readers were quarantined, not dispositioned.** Reading each and
+   writing its §8 disposition is a domain judgement, not a ratchet repair. Veto by ordering the
+   dispositions written; that is its own wave.
+
+### WHAT FABLE SHOULD RE-EXAMINE
+
+1. **The classifier has now been wrong twice in two days, both times by MISSING.** The
+   remaining hole is stated against interest in the file: a registry-reading walker that is
+   renamed AND re-titled still escapes all four arms, and so does one whose walk is two
+   imports deep. Is a mandatory declared marker on every walker (69 files) now the cheaper law?
+2. **The two `Math.pow(0.5, age/h)` sites want the routing wave ordered.** `bandedStock.js` was
+   minted to be the one home for an expression spelled by hand fifteen times, and the
+   sixteenth is still hand-rolled in `dispositionLedger.js:468`.
+3. **`commercialReasons.js`'s 31 holes are the largest single item on either ledger** and the
+   owner is holding that file uncommitted. The declared row will red the moment the count
+   moves — by design — and the message names the cure.
+4. **The seven undispositioned `.npcs` readers** (`envoyCasting`, `npcVerdictPulse`,
+   `oathHolder`, `sovereigntyNews`, `warDeployment`, `warRulingsNews`, `warSeatBooks`) are a
+   §8 disposition wave that nobody has scheduled.
+
+---
+
+## S12-W2-R — THE ORPHAN RECOVERY: eight files re-verified from zero, by a lane that read no report (2026-08-08, Opus-era recovery lane)
+
+**⏳ OPUS-ERA — FABLE SURVEY OWED.** (Implementation and verification both Opus; the row above
+is the dead lane's own account and is preserved verbatim, not edited.)
+
+**WHAT HAPPENED.** The S12-W2 lane above was killed mid-task by the weekly credit limit with
+**eight files uncommitted and no report filed**. Its work was backed up (full tree copy plus a
+1,491-line `git diff HEAD`) and this lane was dispatched to decide, per file, LAND /
+COMPLETE-THEN-LAND / DISCARD. **The row above was therefore treated as EVIDENCE TO BE CHECKED,
+never as a receipt** — the §3k recovery procedure's step 3, and the reason every figure below
+was re-derived rather than read.
+
+**THE NUMBER TO FEAR WAS `scripts/.test-ratchet-baseline.json` +0/−40 — a census that had
+REMOVED FIVE ROWS.** If the dead lane removed rows without finishing the walker-inventory
+relocation, the guards would be off *and* the census silent about it: strictly worse than the
+state it started from. **Coherence was established before anything else, and it holds.**
+
+### THE MEASUREMENT ENVIRONMENT (built fresh; nothing measured on the live tree)
+
+A private `GIT_INDEX_FILE` read `HEAD` (`abc5a78b`) and staged **only the eight orphan files**;
+`git write-tree` gave `782a39e7ef3311c282f8d737cf92273f7f415fc3`; the **shared index was never
+touched** and the owner's four dirty files were never staged. That tree was `git archive`d and
+**integrity-counted: 6,196 tracked paths in, 6,196 files out**, then `git init` + committed
+(`git status` clean, `node_modules` symlinked and git-excluded) so the tests that shell out to
+git see a real repository. ⚠ The scratch tree is named `tree`, never `arch` — the recorded
+absolute-path-substring fake red the dead lane hit is avoided by construction, not diagnosed.
+
+### DISPOSITION: ALL EIGHT **LAND**. Evidence per file, all executed.
+
+| file | disposition | evidence |
+| --- | --- | --- |
+| `scripts/.test-ratchet-baseline.json` | LAND | key-set diff vs HEAD is **pure removal of exactly 5 rows; 0 added, 0 modified**, header fields byte-identical (`measuredAtSha` still `36e50c73` — proof no `--update` ran) |
+| `tests/lint/domainAnyCastBaseline.test.js` | LAND | green in the archive; 3 mutants red it |
+| `tests/lint/transcendentalMathBaseline.test.js` | LAND | green in the archive; mutant reds it |
+| `tests/domain/roadsParticipation.test.js` | LAND | green in the archive; mutants red it in **both** directions |
+| `tests/lint/testRatchet.test.js` | LAND | 58 tests green; 2 mutants red it |
+| `tests/lint/sovereigntyLightingContract.walker.test.js` | LAND | **33 passed (33)** — all five sequenced figures evaluated, so `suiteTitles: 5458` is a real assertion and not an unreached line |
+| `CONTRIBUTING.md` | LAND | every claim in the new prose is pinned by an executable arm in `testRatchet.test.js` |
+| `docs/FABLE_VALIDATION_QUEUE.md` | LAND | complete row — premise, arm, triage, control, acceptance (a)–(e), decisions, re-examine; **appended to, never clobbered** |
+
+**FIVE WALKERS GREEN AT THE COMMITTED TREE: `Test Files 5 passed (5)` / `Tests 124 passed`**
+(91 across the four + 33 lighting).
+
+### (a) EVERY REMOVED CENSUS ROW IS JUSTIFIED — SIX PLANTS, EACH RUN, EACH REVERTED `git status`-CLEAN
+
+The relocation is not asserted, it is **demonstrated**: each freed walker was given a NEW
+violation in the **source tree** (never in the test file — an in-file mutant is self-proving)
+and each still reds.
+
+| plant | result |
+| --- | --- |
+| `/** @type {any} */` in **undeclared** `oathHolder.js` | **3 of 13 red** — `no file exceeds its baseline` (*"oathHolder.js: 1 any-holes (allowance 0)"*), the totality arm, and `⛔ no UNDECLARED file exceeds its baseline` |
+| one more any-hole in **declared** `commercialReasons.js` (31→32) | **3 of 13 red** — the ledger-exactness arm naming *"declared 31 … MEASURED 32 … that is a REGRESSION, type the hole instead of raising the row"* |
+| `Math.pow` in **undeclared** `oathHolder.js` | **3 of 14 red** — allowance arm, totality arm, undeclared arm |
+| a new `.npcs` reader file in `worldPulse` | **1 of 6 red** — the exactness arm, `expected […(39)] to deeply equal […(38)]` |
+| a quarantine row that reads nothing (un-banked shrink) | **2 of 6 red** — the honesty arm: *"no longer reads .npcs … delete its quarantine row"* |
+| a walker row put **back** into the census | **3 of 58 red** in `testRatchet`, including `⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS IT IS LEDGERED` naming the plant |
+
+And the classifier itself is not self-certifying: **deleting the A4 delegated arm reds 2 of 58**
+— `"domainAnyCastBaseline.test.js: the DELEGATED arm is the only one that reaches it — if this
+is false, A4 is broken"` and the freed-walker pin. The guard cannot be quietly removed.
+
+### (b) PRE-EXISTING DEBT UNCHANGED, MEASURED AT A COMMITTED SHA
+
+The census diff is **removal-only, zero modified rows**, and **not one of the surviving 30 rows
+lives in any of the five test files this change touches** (21 distinct files carry rows; the
+intersection with the edited set is empty). `tests/lint/.domain-any-baseline.json` and
+`tests/lint/.transcendental-math-baseline.json` are **both clean at HEAD** — the standing
+`--update` prohibition was honoured, and `commercialReasons.js`'s 31 holes were **not** banked.
+
+**The full `npm run test:ratchet` in the archive: `RATCHET_EXIT=0`** —
+*"OK — no regressions, and 6 baselined test(s) no longer fail (24 < 30). RATCHET DOWN."* That
+reproduces the dead lane's reported result to the word, from a tree this lane built itself. It
+also settles the five freed walkers independently of any targeted run: none of them is in the
+census any more, so had any one still failed it would have surfaced as an unattributed
+regression and exited 1. The six are the built-artifact rows `af8815e9` left frozen per the
+chair; **they are still NOT banked** — that is the chair's call, not a recovery lane's.
+`eslint` on all six code/doc paths: **0 errors**.
+
+**⚠⚠ A HAZARD MINTED WHILE EARNING THAT LINE — THE FIRST RUN WAS A FAKE RED AND THE APPARATUS
+WAS THE CAUSE.** It exited 1 on the SCOPE SENTINEL: *"2 suite(s) produced ZERO tests"* —
+`tests/ui/townSceneCanvas.contract.test.jsx` and
+`tests/security/customContentLockOrder.postgres.test.js`. Run in isolation they gave
+*"Failed to resolve import `three`"* and *"Cannot find package `pg`"*. **The archive had
+symlinked the MAIN tree's `node_modules`, and the main tree's is INCOMPLETE** —
+`three` (a declared `dependencies` entry at 0.185.1) and `pg` are both absent there and both
+PRESENT in `.claude/worktrees/minifold/node_modules`, which the worktree carries in its own
+right. Re-pointing the symlink at the worktree's copy, same committed bytes, gives exit 0.
+⛔ **The standing note that "worktrees test against MAIN node_modules" is FALSE for this
+worktree and following it produces a red that reads exactly like a collection regression.**
+An archive census must symlink `.claude/worktrees/minifold/node_modules`, and the tell is a
+scope-sentinel zero-test suite rather than an assertion diff — the same signature class as a
+heavy-test timeout, and equally not about the code under test.
+
+### THE FOUR FACTUAL CLAIMS THE DEAD LANE COULD MOST EASILY HAVE GOT WRONG — ALL RE-DERIVED
+
+1. `npcDmVerbs.js` really does contain **zero** `.npcs` (measured), and `markRosterDeath`
+   (`:221`) / `clearJailHold` (`:250`) really do now live in `npcDmVerbRecords.js`, whose two
+   `.npcs` reads are at **`:224` and `:253`** exactly as claimed. The retirement is a real
+   address move, not a dropped guard.
+2. Both declared transcendental sites are the **same** expression: `bandedStock.js:125` and
+   `dispositionLedger.js:468`, both `Math.pow(0.5, age / …)`.
+3. **All six `introducedAt` shas resolve, and every subject line matches its stated cause** —
+   `d7ea69a4` *TR-1 THE CASUS COMMERCII*, `172e5f22` *Lane WZ-2 piece 3: the license ledger*,
+   `e0c8646e` *Idiom sweep: the `= {}` destructure*, `59df13a9` *SP-A: the shared shapes*,
+   `7796954e` *WR-2 DISPOSITION*, `e51ec17e` *WR-7b: the intercepted envoy*. The attribution
+   arm only checks 40-hex shape; **the arm cannot tell a real sha from a plausible one, so this
+   was checked by hand and should be checked by hand again on the next ledger row.**
+4. Census 35 → 30 and `CEILING` 35 → 30 agree, and `totalTests`/`measuredAtSha` needed no
+   update — `totalTests` feeds only a scope FLOOR, not an equality.
+
+### (c) THE FOUR OWNER FILES WERE NEVER TOUCHED
+
+`src/domain/worldPulse/{commercialReasons,pactProposals}.js`, `src/lib/spatialUsage.js` and
+`tests/lib/spatialUsage.test.js` were excluded from the private index, from the archive's
+delta, and from the commit's pathspecs. They remain dirty and unmodified in the shared tree.
+⛔ **STOP-S12W-1 is untouched and still binding** — `spatialLedgerCoverage.walker`'s census row
+cannot be dropped until the owner commits `spatialUsage.js`.
+
+### DECISIONS TAKEN BY THIS LANE, EACH VETOABLE
+
+1. **All eight landed as written; nothing was completed and nothing discarded.** The dead lane
+   had finished its work and died before committing, not during editing. Veto by ordering any
+   file re-done; the cost is re-deriving figures that six plants have now confirmed.
+2. **The dead lane's queue row is preserved verbatim and this row appended below it.** Its
+   account is the primary record of what was decided and why; overwriting it to make one tidy
+   entry would destroy the only statement of intent behind the code. Veto by ordering a merge.
+3. **The six "no longer fail" rows are still NOT banked**, exactly as the row above leaves
+   them. Banking is the chair's call and this lane changed nothing about it.
+
+### WHAT FABLE SHOULD RE-EXAMINE (in addition to the four above, all still open)
+
+1. **An orphan of this size was recoverable only because the work was DONE-BUT-UNCOMMITTED.**
+   Had the lane died mid-edit, the +0/−40 census would have been a live disabled-guard hazard
+   with no report. Is a lane that removes census rows owed an ordering rule — *relocate first,
+   remove the row last, in that commit order*?
+2. **`introducedAt` is attested by SHAPE, not by EXISTENCE.** Both new ledgers accept any
+   40-hex string. A `git cat-file -e` arm would cost one shell-out per row and close it.
+3. **The archive-census recipe needs its `node_modules` leg written down.** Two lanes in two
+   days have now taken an archive census; the hazard above cost this one a full suite run and
+   would have read as a real collection regression to anyone who trusted the sentinel.

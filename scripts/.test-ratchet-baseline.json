@@ -101,14 +101,6 @@
       "introducedAt": "86d83f6ed5cd4384683e12acab4ce3db0eee9b6b",
       "class": "debt"
     },
-    "tests/domain/roadsParticipation.test.js :: participation chokepoint — the .npcs-reader inventory ratchet (§8 census) the set of participation .npcs readers is exactly the dispositioned census (a new reader trips this)": {
-      "file": "tests/domain/roadsParticipation.test.js",
-      "test": "participation chokepoint — the .npcs-reader inventory ratchet (§8 census) the set of participation .npcs readers is exactly the dispositioned census (a new reader trips this)",
-      "subsystem": "roads / participation chokepoint",
-      "cause": "The participation `.npcs` reader inventory measures 38 readers against a dispositioned census of 31 — WR-7a envoy-errand work added readers that were never dispositioned at the chokepoint.",
-      "introducedAt": "02a8eddbcc9644c10ffce05679316a3729dae4c1",
-      "class": "debt"
-    },
     "tests/edgeFunctions/aiCharterBundle.freshness.test.js :: aiCharter bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)": {
       "file": "tests/edgeFunctions/aiCharterBundle.freshness.test.js",
       "test": "aiCharter bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)",
@@ -205,44 +197,12 @@
       "introducedAt": "unbisectable: 11 separate local clamp definitions across many 2026-08 waves; no single introducing commit. Burn-down lane must route each to the shared primitive.",
       "class": "debt"
     },
-    "tests/lint/domainAnyCastBaseline.test.js :: domain any-cast ratchet — frozen baseline governance baseline exactly matches the tree (airtight against any drift mode)": {
-      "file": "tests/lint/domainAnyCastBaseline.test.js",
-      "test": "domain any-cast ratchet — frozen baseline governance baseline exactly matches the tree (airtight against any drift mode)",
-      "subsystem": "types / domain any-cast ratchet",
-      "cause": "any-cast debt grew past the per-file frozen baseline: src/domain/worldPulse/commercialReasons.js carries 31 any-holes against a baseline of 0 (the file is new — TR-1 CASUS COMMERCII), plus envoyPulse.js at 2. New files get a ceiling of 0.",
-      "introducedAt": "d7ea69a4baf64d8c4281650b5160103519f453ef",
-      "class": "debt"
-    },
-    "tests/lint/domainAnyCastBaseline.test.js :: domain any-cast ratchet — frozen baseline governance no file exceeds its baseline (new files get 0) — fix the types, do not widen": {
-      "file": "tests/lint/domainAnyCastBaseline.test.js",
-      "test": "domain any-cast ratchet — frozen baseline governance no file exceeds its baseline (new files get 0) — fix the types, do not widen",
-      "subsystem": "types / domain any-cast ratchet",
-      "cause": "any-cast debt grew past the per-file frozen baseline: src/domain/worldPulse/commercialReasons.js carries 31 any-holes against a baseline of 0 (the file is new — TR-1 CASUS COMMERCII), plus envoyPulse.js at 2. New files get a ceiling of 0.",
-      "introducedAt": "d7ea69a4baf64d8c4281650b5160103519f453ef",
-      "class": "debt"
-    },
     "tests/lint/proseNumerics.test.js :: prose numerics live-tree ratchet (exact legacy identity, shrink-only) path + line + category + snippet debt exactly matches the committed baseline": {
       "file": "tests/lint/proseNumerics.test.js",
       "test": "prose numerics live-tree ratchet (exact legacy identity, shrink-only) path + line + category + snippet debt exactly matches the committed baseline",
       "subsystem": "copy / prose numerics ratchet",
       "cause": "The path+line+category+snippet debt list drifted from the committed baseline (413 rows) — new prose numerics leaked and/or legacy rows moved lines, which this exact-identity ratchet reads as drift.",
       "introducedAt": "unbisectable: an exact line-addressed inventory that rots whenever any governed file shifts lines; the hand-keyed line-address rot class. Burn-down lane must regenerate once and review every removed row.",
-      "class": "debt"
-    },
-    "tests/lint/transcendentalMathBaseline.test.js :: transcendental-math ratchet — frozen baseline governance baseline exactly matches the tree (airtight against any drift mode)": {
-      "file": "tests/lint/transcendentalMathBaseline.test.js",
-      "test": "transcendental-math ratchet — frozen baseline governance baseline exactly matches the tree (airtight against any drift mode)",
-      "subsystem": "determinism / transcendental math ratchet",
-      "cause": "Transcendental-float sites grew past the per-file frozen baseline, putting cross-engine same-seed replay at risk. The baseline map also no longer matches the tree exactly (drift in both directions).",
-      "introducedAt": "unbisectable: sites accumulated across several 2026-08 math-bearing waves. Burn-down lane must reformulate or same-engine-golden each new site.",
-      "class": "debt"
-    },
-    "tests/lint/transcendentalMathBaseline.test.js :: transcendental-math ratchet — frozen baseline governance no file exceeds its baseline (new files get 0) — reformulate, do not widen": {
-      "file": "tests/lint/transcendentalMathBaseline.test.js",
-      "test": "transcendental-math ratchet — frozen baseline governance no file exceeds its baseline (new files get 0) — reformulate, do not widen",
-      "subsystem": "determinism / transcendental math ratchet",
-      "cause": "Transcendental-float sites grew past the per-file frozen baseline, putting cross-engine same-seed replay at risk. The baseline map also no longer matches the tree exactly (drift in both directions).",
-      "introducedAt": "unbisectable: sites accumulated across several 2026-08 math-bearing waves. Burn-down lane must reformulate or same-engine-golden each new site.",
       "class": "debt"
     },
     "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'trajectory_misread' retains the five receipt-annex families verbatim": {

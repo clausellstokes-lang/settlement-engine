@@ -30,7 +30,9 @@ import { mkdtempSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
+import {
+  dirname, join, relative, resolve,
+} from 'node:path';
 import { describe, expect, test } from 'vitest';
 
 import {
@@ -81,7 +83,23 @@ const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
 // readers; mechanismLitCoverage's 23 modules + 1 flag; sovereigntyLightingContract's
 // five census figures). NONE of them left because the underlying debt was repaired —
 // the debt is RELOCATED to where a NEW violation still reds, and inventoried by name.
-const CEILING = 35;
+//
+// RATCHETED 35 → 30 on 2026-08-07 by the same lane's SECOND cut, which closed a MEASURED
+// GAP IN THE CLASSIFIER THAT HAD JUST BEEN BUILT TO CLOSE A GAP. The three-arm union
+// missed five more rows across three files, and the misses were not random — each was a
+// walker whose ENUMERATION the arms structurally could not see:
+//   • domainAnyCastBaseline ×2 and transcendentalMathBaseline ×2 DELEGATE the tree walk
+//     to an imported counter (scripts/count-{domain-any,transcendental-math}.mjs), so
+//     the test file itself contains no `readdirSync` at all;
+//   • roadsParticipation ×1 enumerates by SHELLING OUT (`execFileSync('grep', ['-rl', …])`),
+//     which no `readdirSync|globSync|fg.sync` regex can match.
+// ⛔⛔ AND domainAnyCastBaseline.test.js WAS ON THIS FILE'S OWN ORDINARY-TEST CONTROL LIST,
+// so a standing pin ASSERTED the classifier was CORRECT to ignore a walker. A control that
+// certifies a miss is worse than no control: it converts an open hole into a proof. Both
+// the classifier and the control are repaired below, and the two arms added are STRUCTURAL,
+// not declarative — see the arm block for the measured catch/false-positive pairs and for
+// the TITLE-arm hypothesis that was tested and REJECTED on its numbers.
+const CEILING = 30;
 
 describe('per-test suite ratchet — static pins', () => {
   test('every entry is keyed by its own `<file> :: <test>` identity (no hand-typed drift)', () => {
@@ -262,38 +280,92 @@ describe('per-test suite ratchet — static pins', () => {
 // and reports success is worse than no guard, because it converts an open problem into a
 // solved-looking one.
 //
-// So the identification is DERIVED, from three INDEPENDENT arms, and a file is an
+// So the identification is DERIVED, from FOUR INDEPENDENT arms, and a file is an
 // enforcement walker if ANY of them fires:
 //
 //   A1 NAME     — the filename declares it (`*.walker.test.js`).
 //   A2 TITLE    — the module header's own title line declares it. A walker that is
 //                 RENAMED loses A1 and keeps this.
-//   A3 STRUCTURE— the file ENUMERATES A SOURCE TREE (readdirSync/globSync) *and*
-//                 compares the result against a FROZEN INVENTORY token (BASELINE,
-//                 CEILING, CENSUS, ALLOWLIST, EXEMPT, ROSTER, …). This arm needs no
-//                 declaration of any kind and is the one that catches
-//                 mechanismLitCoverage.
+//   A3 STRUCTURE— the file ENUMERATES A SOURCE TREE *and* compares the result against a
+//                 FROZEN INVENTORY token (BASELINE, CEILING, CENSUS, ALLOWLIST, EXEMPT,
+//                 ROSTER, …). This arm needs no declaration of any kind and is the one
+//                 that catches mechanismLitCoverage.
+//   A4 DELEGATED— the same structural predicate, holding inside a NON-TEST local module
+//     STRUCTURE   the file IMPORTS. A ratchet whose counter lives in `scripts/` contains
+//                 no enumeration of its own; the walk is one import away.
 //
-// NEITHER A1 NOR A3 ALONE IS SUFFICIENT, and the pin `no single arm classifies all ten`
-// below proves it by execution rather than by assertion in a comment: A1 misses
-// mechanismLitCoverage (no `.walker.` in the name), and A3 misses warCostKindPools and
-// warRulingKindPools (they read a registry through imports and never walk a tree). Each
-// arm covers the others' blind spot, which is why the union is used and why deleting any
-// one of them reds a pin here.
+// ⚠ WHAT "ENUMERATES A SOURCE TREE" MEANS, AND WHY IT WAS WIDENED. The first cut spelled
+// it `readdirSync|globSync|fg.sync` and that MISSED roadsParticipation.test.js, which
+// enumerates by SHELLING OUT — `execFileSync('grep', ['-rl', '\\.npcs', …])`. A shell-out
+// walk is a walk. The predicate now also matches an `execFileSync|execSync|spawnSync` of
+// `grep`/`git`/`find`/`rg`, which is what a source scan actually looks like when the
+// author wanted a recursive matcher rather than a directory reader.
+//
+// NO SINGLE ARM IS SUFFICIENT, and the pins below prove it BY EXECUTION rather than by
+// assertion in a comment: A1 misses mechanismLitCoverage (no `.walker.` in the name); A3
+// misses warCostKindPools and warRulingKindPools (they read a registry through imports and
+// never walk anything) AND both baseline ratchets (their walk is delegated); A4 misses
+// everything whose walk is in the test file itself. Each arm covers another's blind spot,
+// which is why the union is used and why deleting any one of them reds a pin here.
 //
 // ⚠ RESIDUAL, STATED AGAINST INTEREST: A1 and A2 are DECLARATIONS, so they fail OPEN — a
 // walker that is renamed AND whose header stops calling it a walker escapes both, and is
-// then caught only if A3 sees it. A3 is structural and cannot be talked out of, but it
-// only sees TREE-SCANNING walkers. A registry-reading walker that is renamed and
-// re-titled would escape all three. That is the known hole; it is narrow, it requires
-// two deliberate acts, and no cheaper total predicate was found.
+// then caught only if A3 or A4 sees it. Those two are structural and cannot be talked out
+// of, but they only see walkers whose ENUMERATION is visible from the test file or one
+// import away. A registry-reading walker that is renamed and re-titled still escapes all
+// four, and so does one whose walk is two imports deep. That is the known hole; it is
+// narrower than it was, it requires deliberate acts, and no cheaper total predicate was
+// found.
 //
-// FALSE-POSITIVE RATE, MEASURED 2026-08-07 in an integrity-counted `git archive` of
-// af8815e9 (6,196 tracked paths in, 6,196 out): the union flags 135 of the estate's
-// 2,352 test files (5.7%) — 69 by A1, 85 by A2, 73 by A3. The figure is recorded for
-// scale only and is NOT asserted anywhere (it would rot on the next test file); what IS
-// asserted is the ORDINARY-TEST CONTROL below, which names real census files carrying
-// real, non-walker debt and requires the classifier to leave every one of them alone.
+// ── THE FALSE-POSITIVE FIGURES, MEASURED, AND THE ARM THAT WAS REJECTED ───────────────
+// All figures below come from an integrity-counted `git archive` of committed abc5a78b
+// (6,196 tracked paths in, 6,196 files out, `git status` clean), never from the live
+// shared tree (THE ARCHIVE-CENSUS LAW). They are recorded for SCALE and are NOT asserted
+// anywhere — they would rot on the next test file. What IS asserted is the ORDINARY-TEST
+// CONTROL below.
+//
+//   THE THREE-ARM UNION      135 of 2,352 estate test files   5.74%   (69 A1 / 85 A2 / 73 A3)
+//   + A3's widened walk      +2 files                                 → roadsParticipation,
+//                                                                      committedSecretsScan
+//   + A4 delegated structure +3 files                                 → domainAnyCastBaseline,
+//                                                                      transcendentalMathBaseline,
+//                                                                      aiFallbackTotality
+//   THE FOUR-ARM UNION       140 of 2,352                     5.95%
+//
+// PRECISION OF THE WIDENING, AUDITED ONE FILE AT A TIME: all five newly-swept files are
+// enforcement walkers. roadsParticipation was CONFIRMED BY EXECUTION (its census row was
+// failing, and the failure is an inventory that had grown from 31 dispositioned readers
+// to 38 while the row was banked); committedSecretsScan matches every git-TRACKED file
+// against key shapes; aiFallbackTotality asserts "the fallback drivers cover the full
+// discovered AI-surface roster (a new surface reds)" over the shared aiSurfaceCensus.
+// FIVE catches, ZERO false positives, for 5 files of extra reach.
+//
+// ⛔ THE TITLE-ARM HYPOTHESIS WAS TESTED AND REJECTED — ON ITS NUMBERS, NOT ON TASTE.
+// The census key is `<file> :: <full test title>`, and both baseline ratchets announce
+// themselves in the TITLE ("ratchet", "frozen baseline governance") while saying nothing
+// in the module header — so an arm reading the census ROW, with no file read at all, was
+// the obvious cheap fix. Measured over every collected test title in the estate
+// (`vitest list`, 27,287 titles across 2,343 files):
+//
+//   narrow (`ratchet`|`shrink-only`)   362 titles  1.33%   83 files, 40 outside the union
+//   broad  (+ frozen/census/roster/…)  1,159       4.25%  344 files, 253 outside the union
+//
+// It does catch all five, and on TODAY'S census its precision is perfect (12 of 35 rows,
+// all twelve genuine walkers). It was still refused, for three measured reasons.
+//   (1) THE TOKENS ARE DOMAIN NOUNS IN A WORLD SIM. "ratchet" is a house term for a
+//       one-way STAT as well as for a guard: tests/domain/pantheon.test.js "ratchet
+//       wins/losses (commutative fold)", tests/domain/martialMoralWF8.test.js "martial
+//       readiness ratchet", tests/domain/warConservationDismiss.test.js "strips the
+//       exhaustion ratchet", tests/components/welcomeJourney.test.jsx "lazy-ratchet
+//       finger" — four confirmed non-guards in the first sample. "census", "roster" and
+//       "frozen" are far worse (a settlement census, a faction roster), which is what
+//       takes the broad variant to 253 files.
+//   (2) IT BUYS NOTHING THE STRUCTURAL ARMS DO NOT. Every one of its twelve census hits
+//       is covered by A1–A4, so its entire contribution here would be false positives.
+//   (3) IT IS A THIRD DECLARATION. The recorded residual above is precisely that
+//       declarations fail open; adding another does not narrow the structural hole.
+// The finding that came OUT of testing it is kept: it is what surfaced roadsParticipation,
+// which A3 then had to be widened to see structurally.
 describe('⛔ the walker-census law — an enforcement walker may not be frozen as debt', () => {
   /** The header's TITLE LINE: the first non-empty line of the leading docblock. */
   function headerTitleLine(src) {
@@ -306,16 +378,59 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
     return '';
   }
 
-  const TREE_SCAN = /readdirSync\s*\(|globSync\s*\(|\bfg\.sync\b/;
+  // A DIRECTORY READ, a glob, or a recursive matcher SHELLED OUT TO. The last clause is
+  // not decoration: roadsParticipation.test.js enumerates worldPulse+spatial entirely
+  // through `execFileSync('grep', ['-rl', …])` and was invisible to the first three.
+  const DIR_SCAN = /readdirSync\s*\(|globSync\s*\(|\bfg\.sync\b/;
+  const SHELL_SCAN = /(?:execFileSync|execSync|spawnSync)\s*\(\s*['"`](?:grep|git|find|rg)['"`]/;
+  const TREE_SCAN = new RegExp(`${DIR_SCAN.source}|${SHELL_SCAN.source}`);
   const FROZEN_INVENTORY = /\bBASELINE\b|\bCEILING\b|\bCENSUS\b|\bEXPECTED\b|\bFROZEN\b|\bALLOWLIST\b|\bEXEMPT\b|\bROSTER\b|\bINVENTORY\b|\bMANIFEST\b|-baseline\.json|shrink-only/;
 
-  /** @returns {{ name: boolean, title: boolean, structure: boolean }} the three arms. */
+  /** The structural predicate, applied to ONE source text. */
+  const isGuardSource = (src) => TREE_SCAN.test(src) && FROZEN_INVENTORY.test(src);
+
+  const srcCache = new Map();
+  const readSrc = (file) => {
+    if (!srcCache.has(file)) srcCache.set(file, readFileSync(join(ROOT, file), 'utf8'));
+    return srcCache.get(file);
+  };
+
+  /**
+   * The RELATIVE, NON-TEST modules a file imports, resolved to repo-relative paths.
+   *
+   * ⚠ TEST FILES ARE DELIBERATELY EXCLUDED, and the exclusion was measured rather than
+   * assumed. Three ordinary domain tests (brokerageIntercept, strategicPosture,
+   * secrecyTradeDormancyFence) import a helper EXPORTED FROM a walker test file
+   * (tests/lint/engineGatedRuleKeys.walker.test.js), and without this clause A4 claimed
+   * all three. A walker file's walker-ness belongs to ITS OWN census rows, never to its
+   * importers'. With the clause, A4's five hits are five genuine walkers.
+   */
+  function localModulesOf(file, src) {
+    const out = new Set();
+    const re = /(?:from|import|require)\s*\(?\s*['"](\.[^'"]+)['"]/g;
+    let m;
+    while ((m = re.exec(src))) {
+      const rel = relative(ROOT, resolve(join(ROOT, dirname(file)), m[1]));
+      for (const cand of [rel, `${rel}.js`, `${rel}.mjs`, `${rel}.cjs`]) {
+        if (existsSync(join(ROOT, cand))) {
+          if (!/\.test\.[cm]?jsx?$/.test(cand)) out.add(cand);
+          break;
+        }
+      }
+    }
+    return [...out];
+  }
+
+  /** @returns {{ name: boolean, title: boolean, structure: boolean, delegated: boolean }} */
   function walkerArmsOf(file) {
-    const src = readFileSync(join(ROOT, file), 'utf8');
+    const src = readSrc(file);
     return {
       name: /\.walker\.test\.[cm]?jsx?$/.test(file),
       title: /\bwalkers?\b/i.test(headerTitleLine(src)),
-      structure: TREE_SCAN.test(src) && FROZEN_INVENTORY.test(src),
+      structure: isGuardSource(src),
+      delegated: localModulesOf(file, src).some((dep) => {
+        try { return isGuardSource(readSrc(dep)); } catch { return false; }
+      }),
     };
   }
 
@@ -393,7 +508,7 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
 
   test('⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS IT IS LEDGERED', () => {
     // THE PIN THIS WHOLE BLOCK EXISTS FOR. Add a walker row to the census — any walker,
-    // by any of the three arms — and this reds until someone writes down which of the
+    // by any of the four arms — and this reds until someone writes down which of the
     // two ledgers it belongs in and why. That is the difference between a law and a
     // sentence: the cost of violating it is paid at the gate, not at the next audit.
     const ledgered = new Set([...admittedIds, ...owedIds]);
@@ -417,55 +532,134 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
     ).toBeGreaterThan(0);
   });
 
-  test('⛔ NO SINGLE ARM CLASSIFIES ALL TEN — the filename check alone would miss two', () => {
-    // The chair's warning, executable. These two files are the counterexamples that
-    // force the union, and if either ever changes shape this reds and the next author
+  test('⛔ NO SINGLE ARM CLASSIFIES THEM ALL — each arm has a named counterexample', () => {
+    // The chair's warning, executable. Every file here is a counterexample that FORCES one
+    // arm into the union, and if any of them changes shape this reds and the next author
     // has to re-derive the identification instead of trusting a comment.
+    //
+    // A1 NAME cannot see it:
     const litCoverage = walkerArmsOf('tests/property/mechanismLitCoverage.test.js');
     expect(litCoverage.name, 'mechanismLitCoverage is a walker with NO `.walker.` in its name').toBe(false);
     expect(litCoverage.structure, 'the STRUCTURE arm is what catches it — if this is false the arm is broken').toBe(true);
 
+    // A3 STRUCTURE cannot see it (it walks nothing — it reads a registry through imports):
     const warCosts = walkerArmsOf('tests/lint/warCostKindPools.walker.test.js');
     expect(warCosts.name, 'warCostKindPools is caught by NAME').toBe(true);
     expect(warCosts.structure, 'warCostKindPools walks no tree — the STRUCTURE arm cannot see it').toBe(false);
+    expect(warCosts.delegated, 'warCostKindPools delegates no walk either — only NAME/TITLE reach it').toBe(false);
+
+    // A1, A2 AND A3 ALL MISS IT — the walk is DELEGATED to an imported counter. This is the
+    // gap the 2026-08-07 second cut closed, and it is pinned per-file so that inlining the
+    // counter, or moving it, is a visible event rather than a silent loss of coverage.
+    for (const file of ['tests/lint/domainAnyCastBaseline.test.js', 'tests/lint/transcendentalMathBaseline.test.js']) {
+      const arms = walkerArmsOf(file);
+      expect(arms.name, `${file} carries no \`.walker.\` in its name`).toBe(false);
+      expect(arms.title, `${file}'s header title line never says "walker"`).toBe(false);
+      expect(arms.structure, `${file} contains no enumeration of its own — the walk is in scripts/`).toBe(false);
+      expect(arms.delegated, `${file}: the DELEGATED arm is the only one that reaches it — if this is false, A4 is broken`).toBe(true);
+    }
+
+    // AND THE WALK CAN BE A SHELL-OUT. roadsParticipation enumerates with `grep -rl`, which
+    // the original `readdirSync|globSync|fg.sync` spelling could not match at all. Pin BOTH
+    // halves: the narrow directory-scan regex must still miss it, and the widened predicate
+    // must still catch it — otherwise a future tidy-up of the regex silently reopens the gap.
+    const roads = readSrc('tests/domain/roadsParticipation.test.js');
+    expect(DIR_SCAN.test(roads), 'roadsParticipation reads no directory — this is why the walk regex had to widen').toBe(false);
+    expect(SHELL_SCAN.test(roads), 'roadsParticipation enumerates by shelling out to grep -rl').toBe(true);
+    expect(walkerArmsOf('tests/domain/roadsParticipation.test.js').structure, 'the widened STRUCTURE arm must catch it').toBe(true);
   });
 
   test('every walker FREED by this lane still classifies (re-adding one would red)', () => {
-    // The five rows removed on 2026-08-07 are gone from the census, so the enforcing pin
-    // above says nothing about them. This is the standing proof that the law would
-    // REFUSE them on the way back in — the acceptance plant, kept rather than run once.
+    // The rows removed on 2026-08-07 are gone from the census, so the enforcing pin above
+    // says nothing about them. This is the standing proof that the law would REFUSE them on
+    // the way back in — the acceptance plant, kept rather than run once.
     for (const file of [
+      // first cut (35 → 30 predecessors)
       'tests/domain/guidanceRegistry.walker.test.js',
       'tests/lint/ruinFilterRoster.walker.test.js',
       'tests/lint/sovereigntyLightingContract.walker.test.js',
       'tests/property/mechanismLitCoverage.test.js',
+      // second cut — the three the classifier had been MISSING
+      'tests/lint/domainAnyCastBaseline.test.js',
+      'tests/lint/transcendentalMathBaseline.test.js',
+      'tests/domain/roadsParticipation.test.js',
     ]) {
       expect(isEnforcementWalker(file), `${file}: freed by this lane and no longer classified as a walker`).toBe(true);
     }
   });
 
+  // ⛔⛔ A CONTROL THAT CERTIFIES A MISS IS WORSE THAN NO CONTROL — READ THIS BEFORE
+  // ADDING A NAME BELOW. On 2026-08-07 this list contained
+  // `tests/lint/domainAnyCastBaseline.test.js` and `tests/domain/roadsParticipation.test.js`.
+  // BOTH ARE ENFORCEMENT WALKERS, and both were carrying live, failing, frozen census rows
+  // at the time. The pin therefore ASSERTED — with a green tick, every run — that the
+  // classifier was CORRECT to ignore two disabled guards. That is the worst possible
+  // failure mode for a control: it converts an open hole into a proof, and it does it in
+  // the one place a reader goes to check whether the hole exists.
+  //
+  // THE CAUSE WAS THE OBVIOUS ONE, WHICH IS WHY THE FIX IS STRUCTURAL AND NOT A RE-READ.
+  // The list was populated by asking "which census files feel like ordinary debt?" and
+  // trusting the answer. Both misses look ordinary: one is named after a lint baseline and
+  // one lives in tests/domain. So the membership test below is no longer a judgement — the
+  // two arms after it require every named file to carry a REAL census row and to be
+  // structurally unable to qualify, and the freed-walker pin above independently requires
+  // the two ex-members to classify as walkers. A future author who re-adds a walker here
+  // reds three pins, not zero.
+  const ORDINARY_TEST_CONTROL = Object.freeze([
+    'tests/docs/architectureFreshness.test.js',
+    'tests/docs/migrationRollbackDiscipline.test.js',
+    'tests/domain/generosityReactions.test.js',
+    'tests/edgeFunctions/aiCharterBundle.freshness.test.js',
+    'tests/edgeFunctions/aiGroundingBundle.freshness.test.js',
+    'tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js',
+    'tests/edgeFunctions/edgeSharedBundleReproducibility.test.js',
+    'tests/lib/accountContentPortability.test.js',
+    'tests/security/mapSnapshotImport.contract.test.js',
+    'tests/store/customContentSlice.race.test.js',
+  ]);
+
   test('⚠ THE ORDINARY-TEST CONTROL — the classifier leaves real non-walker debt alone', () => {
-    // The mirror of the pin above, and the reason the identification is three narrow arms
-    // rather than "it reads the filesystem". Every file named here carries REAL debt in
-    // this census — a thrown TypeError, a field-projection break, a stale built artifact,
-    // a durable-command race — and none of them is a guard. A classifier that swept them
-    // in would refuse legitimate debt and be deleted within a week.
-    for (const file of [
-      'tests/lib/accountContentPortability.test.js',
-      'tests/store/customContentSlice.race.test.js',
-      'tests/security/mapSnapshotImport.contract.test.js',
-      'tests/edgeFunctions/aiCharterBundle.freshness.test.js',
-      'tests/edgeFunctions/edgeSharedBundleReproducibility.test.js',
-      'tests/domain/roadsParticipation.test.js',
-      'tests/lint/domainAnyCastBaseline.test.js',
-    ]) {
+    // The mirror of the enforcing pin, and the reason the identification is four narrow
+    // arms rather than "it reads the filesystem". Every file named here carries REAL debt
+    // in this census — a thrown TypeError, a field-projection break, a stale built
+    // artifact, a durable-command race, a docs-freshness drift — and none of them is a
+    // guard. A classifier that swept them in would refuse legitimate debt and be deleted
+    // within a week.
+    for (const file of ORDINARY_TEST_CONTROL) {
       const arms = walkerArmsOf(file);
       expect(
         Object.entries(arms).filter(([, hit]) => hit).map(([arm]) => arm),
-        `${file} is ordinary debt, not a guard — the classifier must not claim it`,
+        `${file} is named here as ordinary debt and the classifier CLAIMS IT. One of the two is\n`
+        + 'wrong, and it is almost certainly this list: read the file, and if it enumerates a\n'
+        + 'population and compares the result against a frozen one, it is a WALKER — free its\n'
+        + 'census row into its own shrink-only inventory and take it off this list. Do NOT narrow\n'
+        + 'the classifier to make this green; that is exactly how the 2026-08-07 misses happened.',
       ).toEqual([]);
     }
   });
+
+  test('⛔ the control list is REAL — every named file carries a census row of its own', () => {
+    // THE ANTI-PADDING ARM. Without it the control is trivially satisfiable: name ten
+    // arbitrary green tests and the classifier "proves" it has no false positives while
+    // saying nothing about the rows that actually matter. Requiring each name to own a
+    // live census row ties the control to the population it is a control FOR, and it also
+    // makes the list self-cleaning — a file whose debt is burned down leaves the list
+    // rather than lingering as a stale certificate.
+    const censusFiles = new Set(Object.values(baseline.entries).map((r) => r.file));
+    const notInCensus = ORDINARY_TEST_CONTROL.filter((f) => !censusFiles.has(f));
+    expect(
+      notInCensus,
+      'these control files carry no census row — a control over green tests proves nothing about'
+      + ' the census. Drop them, or name a file whose debt is real.',
+    ).toEqual([]);
+    // anchored: the membership check above proves the list was compared against a populated
+    // census, so the floor below is a floor on a real list rather than on an empty one.
+    expect(
+      ORDINARY_TEST_CONTROL.length,
+      'the control emptied — the false-positive half of this block is no longer being tested',
+    ).toBeGreaterThanOrEqual(5);
+  });
+
 
   test('both ledgers are EXACT — no stale entry survives its census row', () => {
     // A ledger row whose census row is gone is worse than noise: it silently lowers the

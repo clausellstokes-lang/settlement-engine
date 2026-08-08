@@ -153,6 +153,99 @@ const CEILING = 2287;
 const baseline = JSON.parse(readFileSync(join(ROOT, 'tests/lint/.domain-any-baseline.json'), 'utf8'));
 const current = countDomain();
 
+// ── ⛔ AND THAT LEDGER IS NOW MACHINERY, BECAUSE PROSE CHECKS NOTHING ────────
+//
+// Everything above this line was a COMMENT. It named three overrunning files, their
+// causes and their introducing commits with real care — and it enforced none of it,
+// because two rows of this file sat in scripts/.test-ratchet-baseline.json:
+//
+//   … :: frozen baseline governance baseline exactly matches the tree (airtight …)
+//   … :: frozen baseline governance no file exceeds its baseline (new files get 0) …
+//
+// Each is ONE assertion over an OPEN, tree-derived population, so freezing it froze
+// THE WHOLE POPULATION. A FOURTH overrunning file, or commercialReasons.js going from
+// 31 holes to 60, produced the byte-identical failing verdict and reddened nothing.
+// A failing TEST is debt; a failing WALKER is a DISABLED GUARD (CONTRIBUTING.md,
+// "The gate"), and this ratchet is a walker: it enumerates src/domain through
+// scripts/count-domain-any.mjs and compares the result against a frozen inventory.
+//
+// THE DEBT IS RELOCATED, NOT FORGIVEN AND NOT BURNED DOWN. The three overruns move
+// into the exact-identity ledger below, which is audited in BOTH directions, and the
+// two arms go back to being LIVE for every other file in src/domain.
+//
+// ⚠ WHY THIS AND NOT `--update`: the prohibition above is the reason this ledger has
+// to exist at all. `--update` re-freezes the WHOLE TREE and would bank all 34 holes as
+// permanent baseline, which is precisely the laundering the prohibition forbids. A
+// declared overrun is a NAMED, ATTRIBUTED, CAPPED bill; a re-freeze is amnesia.
+//
+// MEASURED, NEVER TRANSCRIBED — `countDomain()` run inside an integrity-counted
+// `git archive` of committed abc5a78b (6,196 tracked paths in, 6,196 files out,
+// `git status` clean), never over the live shared tree, which holds an owner session's
+// uncommitted edits to commercialReasons.js itself (THE ARCHIVE-CENSUS LAW).
+//
+// ⚠⚠ AND THAT OWNER SESSION IS EXPECTED TO RED THIS, BY DESIGN. The ledger is EXACT,
+// not a ceiling: if commercialReasons.js's 31 holes become 20, the exactness arm reds
+// with "declared 31, measured 20 — lower the declared figure (bank the win)", and if
+// they become 0 it reds with "delete the row". That is the same law the baseline's own
+// `no file is below its baseline` arm already enforces, and it is what stops a
+// quarantine drifting upward in effect. A red here is a WIN being banked, not a break.
+const DECLARED_OVERRUNS = Object.freeze({
+  'src/domain/worldPulse/commercialReasons.js': {
+    any: 31,
+    suppress: 0,
+    introducedAt: 'd7ea69a4baf64d8c4281650b5160103519f453ef',
+    cause: 'TR-1 THE CASUS COMMERCII added the file already carrying 31 holes, and a file absent '
+      + 'from the baseline has an allowance of ZERO, so it has been over since its first commit. '
+      + 'THE LARGEST SINGLE DEBT ON THIS LIST, and the reason `--update` is forbidden here: a '
+      + 'blanket re-freeze would bank all 31 as permanent baseline. Cleared only by typing the '
+      + 'commercial-reason payload shapes, one at a time.',
+  },
+  'src/domain/worldPulse/warDeployment.js': {
+    any: 17,
+    suppress: 0,
+    introducedAt: '172e5f2252fada7e297ff2355147e4e42979ad2d',
+    cause: 'Lane WZ-2 piece 3 (the license ledger) took this file from 16 holes to 17 against a '
+      + 'baseline of 16. The smallest row on the list and the cheapest to clear: ONE hole, in a '
+      + 'file the wave-5b burn-down already gave named pulseShapes typedefs (89 -> 64).',
+  },
+  'src/domain/worldPulse/envoyPulse.js': {
+    any: 2,
+    suppress: 0,
+    introducedAt: 'e0c8646ee36fdfc6a34f7e8d20dce8885b2dffa3',
+    cause: 'The `= {}` destructure idiom sweep left `regionalGraph?:any, wizardNews?:any` in '
+      + "advanceEnvoyDiplomacyPulse's @param. ⚠ TYPING THEM `unknown` WAS TRIED, RE-MEASURED AND "
+      + 'IS BACKWARDS — it adds two domain-strict errors here and two more in pulseKernel under '
+      + 'BOTH configs (the full re-measurement is in this file\'s header ledger above). The honest '
+      + 'cure needs the real WizardNewsFeed / region-graph shapes threaded through both files.',
+  },
+});
+
+// A LITERAL total EXCESS (measured occurrences minus baselined allowance, summed over the
+// ledger), not a figure derived from the object it is supposed to cap — a ceiling read out
+// of its own list proves list == list and rises silently with every row added.
+// MONOTONE DOWN from here. You may burn it; you may never pad it.
+const DECLARED_OVERRUN_CEILING = 34;
+
+/** Baseline allowance, widened ONLY by an attributed declared overrun. */
+const allowanceFor = (file) => {
+  const declared = DECLARED_OVERRUNS[file];
+  if (declared) return { any: declared.any, suppress: declared.suppress };
+  return baseline.files[file] ?? { any: 0, suppress: 0 };
+};
+
+/** What the tree must look like: the frozen baseline OVERLAID with the declared overruns. */
+const expectedFiles = () => {
+  const out = { ...baseline.files };
+  for (const [file, d] of Object.entries(DECLARED_OVERRUNS)) out[file] = { any: d.any, suppress: d.suppress };
+  return out;
+};
+
+/** The excess a declared row carries over its baseline allowance (0 if it has none). */
+const excessOf = (file, d) => {
+  const base = baseline.files[file] ?? { any: 0, suppress: 0 };
+  return Math.max(0, d.any - base.any) + Math.max(0, d.suppress - base.suppress);
+};
+
 describe('domain any-cast ratchet — the detector is honest', () => {
   test('counts every any/star form this codebase actually writes', () => {
     expect(countText('/** @type {any} */').any).toBe(1);
@@ -223,11 +316,17 @@ describe('domain any-cast ratchet — frozen baseline governance', () => {
   test('no file exceeds its baseline (new files get 0) — fix the types, do not widen', () => {
     const regressions = [];
     for (const [file, { any, suppress }] of Object.entries(current.files)) {
-      const base = baseline.files[file] ?? { any: 0, suppress: 0 };
-      if (any > base.any) regressions.push(`${file}: ${any} any-holes (baseline ${base.any})`);
-      if (suppress > base.suppress) regressions.push(`${file}: ${suppress} ts-suppressions (baseline ${base.suppress})`);
+      const base = allowanceFor(file);
+      if (any > base.any) regressions.push(`${file}: ${any} any-holes (allowance ${base.any})`);
+      if (suppress > base.suppress) regressions.push(`${file}: ${suppress} ts-suppressions (allowance ${base.suppress})`);
     }
-    expect(regressions, `any-cast debt grew — replace the any/* / ts-ignore with a real type:\n  ${regressions.join('\n  ')}`).toEqual([]);
+    expect(
+      regressions,
+      'any-cast debt grew — replace the any/* / ts-ignore with a real type. ⛔ Widening the'
+      + ' baseline is not the cure and neither is adding a DECLARED_OVERRUN row: both ledger'
+      + ' ceilings are MONOTONE-DOWN literals, so a new row (or a raised count on an existing'
+      + ' one) only moves the red from this arm to the ceiling arm:\n  ' + regressions.join('\n  '),
+    ).toEqual([]);
   });
 
   test('no file is below its baseline — ratchet down instead of leaving slack', () => {
@@ -244,11 +343,102 @@ describe('domain any-cast ratchet — frozen baseline governance', () => {
   });
 
   test('baseline exactly matches the tree (airtight against any drift mode)', () => {
-    expect(current.files).toEqual(baseline.files);
-    expect(current.total).toBe(baseline.total);
+    // THE TOTALITY ARM, and the reason the declared overruns are OVERLAID rather than
+    // skipped: an exclusion would blind this comparison to the three files entirely, so a
+    // declared file could then drift to any value at all. Overlaying keeps every file in
+    // src/domain under an exact-equality check — the declared three simply have a
+    // different, attributed, capped expected value.
+    expect(current.files).toEqual(expectedFiles());
+    const declaredExcess = Object.entries(DECLARED_OVERRUNS).reduce((a, [f, d]) => a + excessOf(f, d), 0);
+    expect(current.total).toBe(baseline.total + declaredExcess);
   });
 
   test('the committed ceiling never rises (ratchet is monotone-down)', () => {
     expect(baseline.total).toBeLessThanOrEqual(CEILING);
+  });
+});
+
+// ── ⛔ THE DECLARED-OVERRUN LEDGER'S OWN GOVERNANCE ──────────────────────────
+// The ledger widens two live guards, so it carries the same discipline the census it
+// replaced carries: every row ATTRIBUTED, the set EXACT in both directions, and both
+// sizes capped by literals that only ever go down. Without these three arms the ledger
+// is just a softer baseline with no `--update` guard on it at all.
+describe('domain any-cast ratchet — the declared-overrun ledger is honest', () => {
+  const declaredFiles = Object.keys(DECLARED_OVERRUNS);
+
+  test('⛔ EVERY DECLARED OVERRUN IS ATTRIBUTED — an unattributed row is a defect laundered into debt', () => {
+    for (const [file, d] of Object.entries(DECLARED_OVERRUNS)) {
+      expect(file.startsWith('src/domain/'), `${file} is outside the domain`).toBe(true);
+      expect(Number.isInteger(d.any) && d.any >= 0, `${file}: malformed any count`).toBe(true);
+      expect(Number.isInteger(d.suppress) && d.suppress >= 0, `${file}: malformed suppress count`).toBe(true);
+      expect(
+        String(d.introducedAt),
+        `${file}: introducedAt must be a 40-hex sha — an overrun nobody can bisect cannot be argued about`,
+      ).toMatch(/^[0-9a-f]{40}$/);
+      expect(String(d.cause).length, `${file}: declared with a stub, not an argument`).toBeGreaterThan(60);
+    }
+  });
+
+  test('⛔ the ledger is EXACT — a stale or padded row reds, and so does an un-banked shrink', () => {
+    // Audited in BOTH directions, which is what stops the ledger becoming a second, softer
+    // baseline. A row that is no longer over its baseline is a WIN and reds until it is
+    // banked; a row whose measured count has MOVED (either way) reds with both figures.
+    const problems = [];
+    for (const [file, d] of Object.entries(DECLARED_OVERRUNS)) {
+      const cur = current.files[file];
+      const base = baseline.files[file] ?? { any: 0, suppress: 0 };
+      if (!cur) {
+        problems.push(`${file}: carries NO any/suppress debt at all any more — delete its declared row (bank the win)`);
+        continue;
+      }
+      if (cur.any !== d.any || cur.suppress !== d.suppress) {
+        problems.push(
+          `${file}: declared ${d.any} any / ${d.suppress} suppress, MEASURED ${cur.any} / ${cur.suppress}`
+          + ' — if it shrank, lower the declared figure (bank the win); if it grew, that is a REGRESSION,'
+          + ' type the hole instead of raising the row',
+        );
+        continue;
+      }
+      if (cur.any <= base.any && cur.suppress <= base.suppress) {
+        problems.push(`${file}: no longer exceeds its baseline (${base.any}/${base.suppress}) — delete its declared row, the baseline covers it`);
+      }
+    }
+    expect(problems, `the declared-overrun ledger disagrees with the tree:\n  ${problems.join('\n  ')}`).toEqual([]);
+    // anchored: the loop above walked every declared row against a LIVE countDomain(), so
+    // the non-emptiness floor below is a floor on a real population, not on an empty object.
+    expect(
+      declaredFiles.length,
+      'the ledger emptied — if every overrun is genuinely typed, DELETE this ledger and this describe'
+      + ' together and let the plain baseline do the work again. Do not leave an empty hatch open.',
+    ).toBeGreaterThan(0);
+  });
+
+  test('⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path)', () => {
+    // The mirror of the exactness arm: the regression arm above uses `allowanceFor`, so a
+    // file over its baseline is silent there IF it is declared. This arm proves the
+    // converse — that nothing is over baseline WITHOUT a declared row — so the two
+    // together are a total partition of src/domain with no unnamed slack in it.
+    const undeclared = [];
+    for (const [file, { any, suppress }] of Object.entries(current.files)) {
+      if (file in DECLARED_OVERRUNS) continue;
+      const base = baseline.files[file] ?? { any: 0, suppress: 0 };
+      if (any > base.any || suppress > base.suppress) {
+        undeclared.push(`${file}: ${any} any / ${suppress} suppress against baseline ${base.any}/${base.suppress}`);
+      }
+    }
+    expect(undeclared, `undeclared overruns:\n  ${undeclared.join('\n  ')}`).toEqual([]);
+  });
+
+  test('the ledger ceilings never rise (both are monotone-down literals)', () => {
+    // THE ANTI-LAUNDERING CAP, and the arm that makes the ledger a bill rather than a
+    // permission slip. The exactness arms above are satisfied by ANY set that matches the
+    // tree — including a set that grew — so without a frozen ceiling the honest way to
+    // absorb the next regression would be "add a row and write a nice cause". These two
+    // literals close that: new debt cannot be declared, only typed.
+    const declaredExcess = Object.entries(DECLARED_OVERRUNS).reduce((a, [f, d]) => a + excessOf(f, d), 0);
+    expect(declaredExcess, 'the declared any-cast excess GREW — type the hole, do not widen the ledger')
+      .toBeLessThanOrEqual(DECLARED_OVERRUN_CEILING);
+    expect(declaredFiles.length, 'a FOURTH file was declared — the ledger is monotone-down in rows too')
+      .toBeLessThanOrEqual(3);
   });
 });

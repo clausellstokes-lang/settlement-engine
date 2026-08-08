@@ -54,12 +54,24 @@ commit that itself left TEN violating rows in the census**, across seven files. 
 `describe` of `tests/lint/testRatchet.test.js` now enforces it: every census row is
 classified, and a row belonging to an enforcement walker reds unless it is written into
 one of two explicit, shrink-only, exact-identity ledgers with a stated reason. A walker
-is identified by the UNION of three independent arms — its **name** (`*.walker.test.js`),
-its module header's own **title line**, and the **structure** of what it does (it
-enumerates a source tree *and* compares the result against a frozen inventory). A
-filename check alone is not enough and the test proves it by execution: it misses
-`mechanismLitCoverage.test.js`, which is a walker with no `.walker.` in its name, while
-the structure arm misses `warCostKindPools.walker.test.js`, which walks no tree.
+is identified by the UNION of four independent arms — its **name** (`*.walker.test.js`),
+its module header's own **title line**, the **structure** of what it does (it enumerates
+a source tree — by directory read, by glob, or by shelling out to `grep -rl` — *and*
+compares the result against a frozen inventory), and that same structure **delegated** to
+a non-test module it imports. No single arm is enough and the test proves each gap by
+execution: the filename check misses `mechanismLitCoverage.test.js`, which is a walker
+with no `.walker.` in its name; the structure arm misses
+`warCostKindPools.walker.test.js`, which walks nothing; and name, title and structure all
+miss `domainAnyCastBaseline.test.js`, whose walk lives one import away in
+`scripts/count-domain-any.mjs`.
+
+**The classifier's own first cut had this gap and a control pin CERTIFIED it.** The
+three-arm version shipped on 2026-08-07 missed five rows across three files, and
+`domainAnyCastBaseline.test.js` was named on that same commit's ORDINARY-TEST CONTROL
+list — so a green pin asserted, every run, that ignoring a disabled guard was correct. If
+you add a name to that control list, the file must carry a real census row and must be
+structurally incapable of qualifying; a control that certifies a miss is worse than no
+control, because it turns an open hole into a proof.
 
 The two ledgers mean different things and must not be confused. **ADMITTED** is for a row
 that merely LIVES in a walker file while asserting a CLOSED, per-member identity — a

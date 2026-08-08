@@ -3182,21 +3182,31 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       //     sha / tree                                 files parked credited titles suite
       //     1977db07  the frozen figures                2346    358     1988  18951  5421
       //     af8815e9  this lane's PARENT                2352    358     1994  19122  5455
-      //     9f060332  this lane's own tree (write-tree) 2352    358     1994  19132  5456
+      //     9f060332  the first cut's tree (write-tree)  2352    358     1994  19132  5456
+      //     bc544124  THIS tree (write-tree)             2352    358     1994  19142  5458
       // PARENT MINUS FROZEN is the growth that accrued WHILE THIS RATCHET WAS RED AND
       // BANKED: +6 files, +6 credited, +171 titles, +34 suite titles, with `parked`
       // genuinely unmoved for the eighth consecutive wave. That is the recorded
       // A-RED-RATCHET'S-CONTENTS-GROW-INVISIBLY hazard measured rather than asserted —
       // 171 test titles landed inside a census that was reporting a single stale file
       // count and had stopped reading the other four layers entirely.
-      // THIS TREE MINUS PARENT IS THIS LANE'S OWN CONTRIBUTION AND IT IS FULLY ACCOUNTED:
-      // +10 titles and +1 suite title, being the nine `test(` of the new walker-census-law
-      // block plus its one `describe(` in tests/lint/testRatchet.test.js, and the one new
-      // quarantine-honesty `test(` in tests/lint/ruinFilterRoster.walker.test.js. No test
-      // FILE was added or removed by this lane, which is why `files` and `parked` do not
-      // move. The +10/+1 was PREDICTED from the diff and then MEASURED to the unit; had
-      // the two disagreed, the disagreement — not the number — would be the finding.
-      files: 2352, parked: 358, credited: 1994, titles: 19132, suiteTitles: 5456,
+      // THE FIRST CUT'S OWN CONTRIBUTION: +10 titles and +1 suite title, being the nine
+      // `test(` of the new walker-census-law block plus its one `describe(` in
+      // tests/lint/testRatchet.test.js, and the one new quarantine-honesty `test(` in
+      // tests/lint/ruinFilterRoster.walker.test.js.
+      // THE SECOND CUT'S OWN CONTRIBUTION (this row) IS +10 TITLES AND +2 SUITE TITLES,
+      // AND IT IS FULLY ACCOUNTED: four `test(` + one `describe(` for the declared-overrun
+      // ledger governance in tests/lint/domainAnyCastBaseline.test.js, the same four + one
+      // in tests/lint/transcendentalMathBaseline.test.js, one quarantine-honesty `it(` in
+      // tests/domain/roadsParticipation.test.js, and one control anti-padding `test(` in
+      // tests/lint/testRatchet.test.js. No test FILE was added or removed by either cut,
+      // which is why `files` and `parked` do not move.
+      // ⚠ BOTH CUTS PREDICTED THE DELTA FROM THE DIFF AND THEN MEASURED IT TO THE UNIT; had
+      // the two disagreed, the disagreement — not the number — would be the finding. And
+      // the sequence hazard bit again on the way through: the first measurement of this cut
+      // reddened on `titles` and therefore NEVER EVALUATED `suiteTitles`, so 5458 is a
+      // SECOND measurement taken after `titles` was corrected, not a figure carried along.
+      files: 2352, parked: 358, credited: 1994, titles: 19142, suiteTitles: 5458,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

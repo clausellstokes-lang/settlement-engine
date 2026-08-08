@@ -149,7 +149,16 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     // JSON-alias trap) exactly as the H2 relinquishment would. Dormant by default
     // (npcConsequencesEnabled has no entry in DEFAULT_SIMULATION_RULES) and unreachable
     // from the pulse: only a DM pressing a verb calls it.
-    'src/domain/worldPulse/npcDmVerbs.js',
+    //
+    // ⚠ THE ADDRESS MOVED, THE READER DID NOT — the applyWorldPulseBetrayal precedent
+    // above, second instance. WR-7b (e51ec17ecb5c4ed64a337379d306a89ec2c12702) split the
+    // DM-verb RECORDS leaf out of npcDmVerbs.js, and `markRosterDeath` / `clearJailHold`
+    // — the two functions this disposition is ABOUT — went with it verbatim, taking both
+    // `s.npcs` reads to npcDmVerbRecords.js:224 and :253. MEASURED, not assumed:
+    // npcDmVerbs.js now contains ZERO occurrences of `.npcs` (it imports both functions
+    // and calls them at :556 and :701), so its row here was STALE and is retired rather
+    // than kept as slack. Same reader, same disposition, new address.
+    'src/domain/worldPulse/npcDmVerbRecords.js',
     'src/domain/worldPulse/npcGrowthKernel.js',
     'src/domain/worldPulse/npcLadderChallenge.js',
     // D-4 (fold batch 3): `.npcs` here is the ladder-standings map PARAMETER (a
@@ -197,9 +206,99 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     'src/domain/worldPulse/successorNpc.js',
     'src/domain/worldPulse/worldSnapshot.js',
   ];
-  it('the set of participation .npcs readers is exactly the dispositioned census (a new reader trips this)', () => {
+
+  /**
+   * ⛔ THE UNDISPOSITIONED QUARANTINE — SHRINK-ONLY, EXACT IDENTITY BOTH DIRECTIONS.
+   *
+   * These are NOT dispositions and they must never be moved into EXPECTED without a
+   * written §8 disposition: every entry in EXPECTED above carries (or inherits) a
+   * judgement about whether the reader is via-snapshot, a deliberate raw read, or a
+   * belt that had to be widened. Nobody has made that judgement about these seven.
+   * They are `.npcs` readers that landed in worldPulse WITHOUT being dispositioned at
+   * all, and they are named here so this ratchet can tell the debt it already knows
+   * about from an EIGHTH new reader.
+   *
+   * WHY THEY ARE HERE RATHER THAN IN THE TEST CENSUS. Until 2026-08-07 the row
+   * `tests/domain/roadsParticipation.test.js :: … the set of participation .npcs readers
+   * is exactly the dispositioned census` sat in scripts/.test-ratchet-baseline.json.
+   * That row is ONE assertion over an OPEN, tree-derived population, so tolerating it
+   * tolerated the whole population: an eighth undispositioned reader produced the
+   * byte-identical failing verdict and reddened nothing. A failing TEST is debt; a
+   * failing WALKER is a DISABLED GUARD (CONTRIBUTING.md, "The gate"). The census row is
+   * gone; the debt is INVENTORIED here, where a new reader reds again.
+   *
+   * ⚠ AND THE INVENTORY HAD ALREADY GROWN UNSEEN, MEASURED rather than feared: at the
+   * moment the row was banked this scan found 38 readers against a frozen 31 — seven
+   * undispositioned arrivals plus one stale address — and no report ever showed it,
+   * because the failing row's bytes never changed. That is the recorded
+   * A-RED-RATCHET'S-CONTENTS-GROW-INVISIBLY hazard, live in this file.
+   *
+   * MEASURED, NEVER TRANSCRIBED: this test's own `grep -rl` run inside an
+   * integrity-counted `git archive` of committed abc5a78b (6,196 tracked paths in,
+   * 6,196 files out, `git status` clean) — never over the live shared tree, which holds
+   * an owner session's uncommitted work (THE ARCHIVE-CENSUS LAW).
+   *
+   * TO SHRINK IT (the only permitted direction): read the file, decide what its `.npcs`
+   * read IS — via-snapshot, a deliberate raw read with a reason, or a belt that must be
+   * widened — write that disposition as a comment in EXPECTED, move the row there, and
+   * delete it here. The honesty arm below reds if a row goes stale without being
+   * banked, so a silent shrink is not available either.
+   */
+  const UNDISPOSITIONED_NPCS_READERS = Object.freeze([
+    'src/domain/worldPulse/envoyCasting.js',
+    'src/domain/worldPulse/npcVerdictPulse.js',
+    'src/domain/worldPulse/oathHolder.js',
+    'src/domain/worldPulse/sovereigntyNews.js',
+    'src/domain/worldPulse/warDeployment.js',
+    'src/domain/worldPulse/warRulingsNews.js',
+    'src/domain/worldPulse/warSeatBooks.js',
+  ]);
+
+  // A LITERAL, not a figure read out of the list it is supposed to cap — a ceiling
+  // derived from its own array proves list == list and rises silently with every entry.
+  // MONOTONE DOWN from here. You may burn it; you may never pad it.
+  const UNDISPOSITIONED_CEILING = 7;
+
+  /** The live scan this whole block is about. */
+  function foundReaders() {
     const out = execFileSync('grep', ['-rl', '\\.npcs', 'src/domain/worldPulse', 'src/domain/spatial'], { cwd: process.cwd(), encoding: 'utf-8' });
-    const found = out.split('\n').filter((l) => l && !l.includes('.test.')).sort();
-    expect(found).toEqual([...EXPECTED].sort());
+    return out.split('\n').filter((l) => l && !l.includes('.test.')).sort();
+  }
+
+  it('the set of participation .npcs readers is exactly the dispositioned census (a new reader trips this)', () => {
+    const known = [...EXPECTED, ...UNDISPOSITIONED_NPCS_READERS].sort();
+    expect(
+      foundReaders(),
+      'a `.npcs` reader appeared in worldPulse/spatial that is neither DISPOSITIONED in the §8'
+      + ' table above nor named in the undispositioned quarantine. Read what it does with the'
+      + ' roster and add it to ONE of them — EXPECTED with a written disposition if you know'
+      + ' the answer, the quarantine if you do not. Do not raise a ceiling to make it go away.',
+    ).toEqual(known);
+  });
+
+  it('⛔ quarantine honesty: the undispositioned list is EXACT — an un-banked shrink reds too', () => {
+    // Audited in BOTH directions, which is what stops the quarantine becoming a second,
+    // softer census:
+    //   • a row that no longer reads `.npcs`, or has since been given a real disposition
+    //     in EXPECTED, is a WIN — and it reds here until it is banked, because a
+    //     quarantine that silently keeps stale rows drifts upward in effect exactly like
+    //     the census row it replaced;
+    //   • a NEW undispositioned reader never reaches this list at all — it reds in the
+    //     exactness arm above, which is the whole point of moving the debt here.
+    const found = new Set(foundReaders());
+    const expected = new Set(EXPECTED);
+    const stale = [];
+    for (const rel of UNDISPOSITIONED_NPCS_READERS) {
+      if (!found.has(rel)) stale.push(`${rel}: no longer reads .npcs (moved/renamed/cleaned) — delete its quarantine row`);
+      else if (expected.has(rel)) stale.push(`${rel}: now carries a §8 disposition — delete its quarantine row (a file is one or the other, never both)`);
+    }
+    expect(stale, `bank these wins:\n  ${stale.join('\n  ')}`).toEqual([]);
+    // anchored: the exactness loop above walked the quarantine against a LIVE scan, so
+    // the two pins below are floors on a real population rather than on an empty array.
+    expect(
+      UNDISPOSITIONED_NPCS_READERS.length,
+      'the quarantine emptied — if that is real, delete it and this arm together; if it is not, the scan stopped finding readers',
+    ).toBeGreaterThan(0);
+    expect(UNDISPOSITIONED_NPCS_READERS.length).toBeLessThanOrEqual(UNDISPOSITIONED_CEILING);
   });
 });
