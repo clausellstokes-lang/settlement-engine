@@ -41,8 +41,9 @@
  *                    HZ-DERIVE-DONT-RESTATE applied to this file itself: the one
  *                    field that could rot into a comfortable fiction cannot,
  *                    because nothing here is trusted to have stayed true.
- *  G. DOCUMENT COUNT SHRINK-ONLY against documentBaseline. That is the ratchet on
- *                    the treadmill itself — the owed pile may only get smaller.
+ *  G. STATUS RATCHETS DOCUMENT count shrink-only; DOCUMENT + PARTIAL owed count
+ *                    shrink-only; MACHINERY count grow-only. A new class cannot
+ *                    route around the first ratchet by merely claiming PARTIAL.
  *  H. SENTINELS      anti-vacuity (empty/unparseable/zero-class registry FAILS
  *                    CLOSED, never reads as "no violations") and scope (a class
  *                    count below classFloor fails loudly).
@@ -146,6 +147,14 @@ if (classes.length < classFloor) {
 const documentBaseline = Number.isInteger(registry.documentBaseline) ? registry.documentBaseline : null;
 if (documentBaseline === null) {
   fatal('ANTI-VACUITY: registry.documentBaseline is missing or not an integer — failing closed.');
+}
+const owedBaseline = Number.isInteger(registry.owedBaseline) ? registry.owedBaseline : null;
+if (owedBaseline === null) {
+  fatal('ANTI-VACUITY: registry.owedBaseline is missing or not an integer — failing closed.');
+}
+const machineryFloor = Number.isInteger(registry.machineryFloor) ? registry.machineryFloor : null;
+if (machineryFloor === null) {
+  fatal('ANTI-VACUITY: registry.machineryFloor is missing or not an integer — failing closed.');
 }
 
 // ── Derive the `check` chain, so `inChain` cannot rot into a fiction ─────────
@@ -284,11 +293,12 @@ classes.forEach((entry, i) => {
     return;
   }
 
-  // C. MACHINERY must name an enforcer.
-  if (status === 'MACHINERY' && paths.length === 0) {
+  // C. MACHINERY and PARTIAL must name an enforcer. PARTIAL means a real guard
+  // exists but is bypassable/narrow/on-demand; [] is DOCUMENT under another name.
+  if ((status === 'MACHINERY' || status === 'PARTIAL') && paths.length === 0) {
     problems.push(
-      `${at}: status MACHINERY but enforcer.paths is EMPTY — MACHINERY means something reds`
-      + ' without anyone remembering the hazard. Name it, or the status is a claim.',
+      `${at}: status ${status} but enforcer.paths is EMPTY — ${status} means a real enforcer exists`
+      + ' (complete for MACHINERY, bypassable or narrower for PARTIAL). Name it, or use DOCUMENT.',
     );
   }
 
@@ -332,7 +342,7 @@ classes.forEach((entry, i) => {
   }
 });
 
-// G. The DOCUMENT ratchet — the treadmill only shrinks.
+// G. The status ratchets — the treadmill only shrinks and machinery never retreats.
 if (documentCount > documentBaseline) {
   problems.push(
     `DOCUMENT COUNT GREW: ${documentCount} > baseline ${documentBaseline}.`
@@ -341,6 +351,22 @@ if (documentCount > documentBaseline) {
     + '\n  document is the treadmill this registry exists to stop.'
     + '\n  If a class genuinely regressed to DOCUMENT, say so and raise the baseline deliberately'
     + '\n  in the same commit — where it is reviewable — rather than letting it drift.',
+  );
+}
+const owedCount = byStatus.DOCUMENT + byStatus.PARTIAL;
+if (owedCount > owedBaseline) {
+  problems.push(
+    `OWED COUNT GREW: ${owedCount} > baseline ${owedBaseline} (DOCUMENT + PARTIAL).`
+    + '\n  PARTIAL is still owed: it names a real but bypassable, narrower, or on-demand enforcer.'
+    + '\n  A new hazard must arrive as MACHINERY or as ACCEPTED with a stated reason; labelling an'
+    + '\n  undefended class PARTIAL cannot route around the DOCUMENT ratchet.',
+  );
+}
+if (byStatus.MACHINERY < machineryFloor) {
+  problems.push(
+    `MACHINERY COUNT FELL: ${byStatus.MACHINERY} < floor ${machineryFloor}.`
+    + '\n  A formerly mechanised class was removed or downgraded. If the machinery genuinely'
+    + '\n  regressed, lower the floor deliberately in the same commit so the retreat is reviewable.',
   );
 }
 
@@ -357,7 +383,8 @@ if (problems.length) {
 const summary = STATUS_VALUES.map((s) => `${s} ${byStatus[s]}`).join(', ');
 console.log(
   `[hazard-registry] OK — ${classes.length} class(es): ${summary}.`
-  + ` DOCUMENT ${documentCount}/${documentBaseline} (shrink-only), floor ${classFloor}.`,
+  + ` DOCUMENT ${documentCount}/${documentBaseline}, OWED ${owedCount}/${owedBaseline}`
+  + ` (shrink-only), MACHINERY ${byStatus.MACHINERY}/${machineryFloor} (grow-only), floor ${classFloor}.`,
 );
 
 if (REPORT) {

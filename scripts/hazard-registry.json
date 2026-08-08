@@ -40,11 +40,11 @@
     "              `acceptedReason`. An acceptance without a reason is a silent",
     "              surrender and REDS.",
     "",
-    "documentBaseline is EXACT-SHRINK-ONLY: the owed pile may only get smaller. Moving",
-    "a class DOCUMENT -> PARTIAL/MACHINERY/ACCEPTED lowers the count and the baseline is",
-    "lowered with it in the same commit. Adding a new DOCUMENT class REDS until either",
-    "an enforcer is built or the class is ACCEPTED with a reason — which is the ratchet",
-    "on the treadmill itself.",
+    "documentBaseline is EXACT-SHRINK-ONLY for the wholly unenforced pile. owedBaseline",
+    "separately caps DOCUMENT + PARTIAL together, so relabelling a new undefended class",
+    "PARTIAL cannot route around the treadmill ratchet. machineryFloor keeps a formerly",
+    "mechanised class from silently falling back to PARTIAL. All three literals may move",
+    "only in the strengthening direction: document/owed baselines down, machinery floor up.",
     "",
     "classFloor is a SCOPE SENTINEL: a registry that collapses below it fails loudly",
     "rather than passing vacuously with nothing to check."
@@ -52,6 +52,8 @@
   "measuredAtSha": "bd5e49f6f34a486c460bc0fdcd0f8c6441550996",
   "measuredAtDate": "2026-08-07",
   "documentBaseline": 6,
+  "owedBaseline": 18,
+  "machineryFloor": 9,
   "classFloor": 27,
   "statusValues": ["MACHINERY", "PARTIAL", "DOCUMENT", "ACCEPTED"],
   "classes": [
@@ -158,7 +160,7 @@
       "instances": 2,
       "instanceEvidence": "MEASURED 2026-08-07 by each walker's own UPDATE_EPISTEMIC_ALLOWLIST regeneration inside an integrity-counted `git archive` of 36e50c73 (6,196 paths in, 6,196 out): 519 files / 1,565 un-anchored negative assertions, and 18 files / 26 bare seed loops. ⚠⚠ BOTH GREW WHILE THE ROWS WERE BASELINED — 1,303 → 1,565 sites and 13 → 26 loops against the inventories actually frozen in the walkers — which is HZ-REDRATCHETGROWS observed live: a tolerated failing row is byte-identical however much worse the tree gets.",
       "triggers": [
-        "any new or edited file under tests/domain/, tests/generators/, tests/copy/, tests/simulation/",
+        "any new or edited file under a generation-facing root declared by tests/lint/negativeAssertionAnchor.walker.test.js",
         "any test adding `.not.toMatch`/`.not.toContain`",
         "any test adding a `for (const seed of ...)` loop"
       ],
@@ -296,7 +298,7 @@
           "scripts/.observed-shape-readers-baseline.json"
         ],
         "inChain": true,
-        "note": "⚠ The ratchet is COUNT-based, so an identity swap at constant count passes. The STEADING leg is load-bearing (40 driven intervals mint ZERO)."
+        "note": "IDENTITY-KEYED since 53029151: each `<key> on <shape>` has its own ceiling, the retired count-only row form is rejected, and an identity swap at constant count reds. The source of truth is scripts/check-observed-shape-readers.mjs; the STEADING leg remains load-bearing (40 driven intervals mint ZERO)."
       },
       "instances": 3,
       "instanceEvidence": "CONFIRMED: 'THREE live bugs share one shape'; the walker 'rediscovered all three TCD defects at a pre-fix sha' — the retro-detection acceptance test that proves an instrument is real rather than merely present.",
@@ -305,7 +307,7 @@
         "any `= {}` default parameter idiom",
         "any new persisted-shape consumer"
       ],
-      "upgradePath": "The estate's best example of the RETRO-DETECTION acceptance test — run a candidate instrument at a pre-fix sha and require it to red. Known soft spot: make the ratchet identity-keyed rather than count-keyed."
+      "upgradePath": "The estate's best example of the RETRO-DETECTION acceptance test — run a candidate instrument at a pre-fix sha and require it to red. Preserve the identity-keyed inventory and its rejection of the retired count-only row form."
     },
     {
       "id": "HZ-DIRTYBUILD",

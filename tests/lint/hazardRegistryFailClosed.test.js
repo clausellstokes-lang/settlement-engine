@@ -80,6 +80,8 @@ function validRegistry(overrides = {}) {
   return {
     _doc: 'fixture',
     documentBaseline: 1,
+    owedBaseline: 1,
+    machineryFloor: 1,
     classFloor: 2,
     classes: [
       {
@@ -192,6 +194,15 @@ describe('the hazard registry gate — MACHINERY must be backed by a file that E
     const r = run(fixture(reg));
     expect(r.status).not.toBe(0);
     expect(out(r)).toMatch(/MACHINERY but enforcer\.paths is EMPTY/);
+  });
+
+  it('REDS when a PARTIAL entry names NO enforcer at all (that is DOCUMENT under another name)', () => {
+    const reg = clone(validRegistry());
+    reg.classes[1].status = 'PARTIAL';
+    const r = run(fixture(reg));
+    expect(r.status).not.toBe(0);
+    expect(out(r)).toMatch(/PARTIAL but enforcer\.paths is EMPTY/);
+    expect(out(r)).toMatch(/use DOCUMENT/);
   });
 });
 
@@ -307,6 +318,37 @@ describe('the hazard registry gate — the DOCUMENT pile is SHRINK-ONLY (the rat
   });
 });
 
+describe('the hazard registry gate — DOCUMENT + PARTIAL is the whole OWED pile', () => {
+  it('REDS when a new undefended class claims PARTIAL with an unrelated existing path', () => {
+    const reg = clone(validRegistry());
+    reg.classes.push({
+      id: 'HZ-DELTA',
+      title: 'an undefended class routed around the document ratchet',
+      status: 'PARTIAL',
+      acceptedReason: null,
+      memory: ['m.md'],
+      // The old gate checked only that this path existed and accepted the lie.
+      enforcer: { paths: ['package.json'], inChain: false, note: 'unrelated existing file' },
+      instances: 1,
+      instanceEvidence: 'measured',
+      triggers: ['t'],
+    });
+    const r = run(fixture(reg));
+    expect(r.status).not.toBe(0);
+    expect(out(r)).toMatch(/OWED COUNT GREW: 2 > baseline 1/);
+    expect(out(r)).toMatch(/labelling an\s+undefended class PARTIAL cannot route around/);
+  });
+
+  it('REDS when a MACHINERY class silently downgrades to PARTIAL', () => {
+    const reg = clone(validRegistry());
+    reg.classes[0].status = 'PARTIAL';
+    const r = run(fixture(reg));
+    expect(r.status).not.toBe(0);
+    expect(out(r)).toMatch(/OWED COUNT GREW: 2 > baseline 1/);
+    expect(out(r)).toMatch(/MACHINERY COUNT FELL: 0 < floor 1/);
+  });
+});
+
 describe('the hazard registry gate — SCOPE SENTINEL', () => {
   it('REDS when the class count collapses below the frozen floor', () => {
     const reg = clone(validRegistry());
@@ -332,6 +374,22 @@ describe('the hazard registry gate — SCOPE SENTINEL', () => {
     const r = run(fixture(reg));
     expect(r.status).not.toBe(0);
     expect(out(r)).toMatch(/documentBaseline is missing/);
+  });
+
+  it('FAILS CLOSED when owedBaseline is missing entirely', () => {
+    const reg = clone(validRegistry());
+    delete reg.owedBaseline;
+    const r = run(fixture(reg));
+    expect(r.status).not.toBe(0);
+    expect(out(r)).toMatch(/owedBaseline is missing/);
+  });
+
+  it('FAILS CLOSED when machineryFloor is missing entirely', () => {
+    const reg = clone(validRegistry());
+    delete reg.machineryFloor;
+    const r = run(fixture(reg));
+    expect(r.status).not.toBe(0);
+    expect(out(r)).toMatch(/machineryFloor is missing/);
   });
 });
 

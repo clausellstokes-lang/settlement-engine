@@ -6704,3 +6704,32 @@ The last precondition is therefore met: the spatial row leaves the test census a
 reasons. J-S12-VR3-2 is state-presence telemetry for a stranded dark-flag pact row rather
 than pretending it means “stage executed this tick.” Fable should re-rule both when credits
 return.
+
+---
+
+## S12-W2-HZ1 — THE HAZARD REGISTRY CANNOT LAUNDER NEW DEBT AS PARTIAL (2026-08-08, Codex continuation)
+
+**⏳ NON-FABLE — FABLE SURVEY AND SIGN-OFF STILL OWED.** The registry's DOCUMENT-only
+ratchet left a status-word escape: a new undefended class could call itself PARTIAL, point at
+an unrelated existing file, and avoid growing the governed pile. Three bounded controls now
+close that route. PARTIAL must name a real enforcer path; DOCUMENT + PARTIAL share an owed
+ceiling of **18**; and the existing **9** MACHINERY classes form a floor, so a mechanised
+class cannot silently retreat to PARTIAL.
+
+The real-script meta-suite drives all three refusals, including a new PARTIAL row that names
+unrelated `package.json`, a MACHINERY → PARTIAL downgrade, and an empty PARTIAL enforcer.
+Missing `owedBaseline` or `machineryFloor` also fails closed. Two stale registry statements
+are corrected at the same time: the epistemic trigger now points to its walker's declared
+generation roots, and the observed-shape reader is recorded as identity-keyed rather than
+still owing that already-landed upgrade.
+
+**ACCEPTANCE EXECUTED.** `npm run validate:hazard-registry` reports **27 classes**:
+MACHINERY 9, PARTIAL 12, DOCUMENT 6, ACCEPTED 0; DOCUMENT **6 / 6**, OWED **18 / 18**,
+MACHINERY **9 / 9**. The first meta run found one test-only regex that did not cross the
+validator's deliberate line wrap; the assertion now permits whitespace and the real-script
+suite passes **33 / 33**. JSON parse, ESLint and `git diff --check` pass.
+
+**VETOABLE JUDGMENT.** J-S12-HZ1-1 is the aggregate owed ceiling + machinery floor rather
+than an identity ledger for all 27 statuses. It closes the measured one-way evasions but a
+coordinated equal-count status swap remains review-visible rather than mechanically
+identity-pinned. Fable should decide whether that residual warrants a later identity wave.
