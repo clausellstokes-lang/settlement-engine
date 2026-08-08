@@ -68,6 +68,24 @@ function loadedWorldState() {
       moralDrift: { 'Blackreach': { malice: 0.4, lawlessness: 0.2, instigations: 1 } },
       dispatchWillingness: { 'Duskport': { phase: 'refusing', sinceTick: 7, lastTick: 9 } },
       spatialArrivals: { 'imp-1': { arrivalTick: 12, note: 'granary-riot-secret' } },
+      // GR-2, and it is the ONE ARRAY-valued sub-ledger in the manifest. Its rows name
+      // settlements outright and carry prose term sheets, so feeding it through the
+      // canary above proves the extractor reads array INDICES as a count and never the
+      // ids or the terms — the hygiene question the record-keyed ledgers cannot ask.
+      pactProposals: [
+        {
+          id: 'pact.4.Blackreach.Duskport.shared_threat',
+          from: 'Blackreach', to: 'Duskport', trigger: 'shared_threat',
+          sheet: { terms: ['the smugglers of Duskport'] },
+          openedTick: 4, answerDueTick: 12, state: 'open', transport: 'envoy',
+        },
+        {
+          id: 'pact.6.Ironhold.Blackreach.trade_demand',
+          from: 'Ironhold', to: 'Blackreach', trigger: 'trade_demand',
+          sheet: { terms: ['granary-riot-secret'] },
+          openedTick: 6, answerDueTick: 14, state: 'open', transport: 'abstract',
+        },
+      ],
     },
     proposals: [
       { id: 'p1', status: 'pending', outcome: { candidateType: 'strategy_deploy' }, headline: 'the smugglers of Duskport' },
@@ -112,6 +130,15 @@ describe('spatialUsage — coarse signal', () => {
     expect(out.mover_counts.armies_cut_off).toBe(1);      // beliefStaleness > 0
     expect(out.mover_counts.dispatch_refusing).toBe(1);
     expect(out.mover_counts.approvals_pending).toBe(2);   // p1 + p3 (p2 resolved)
+    // GR-2. THE TRACKED HALF OF THE MANIFEST IS NOT SELF-PROVING, which is why this
+    // line exists. The coverage walker (tests/lib/spatialLedgerCoverage.walker.test.js)
+    // asserts only that the written-key set equals TRACKED ∪ EXEMPT; `counts` and
+    // MOVER_PRESENCE are function-LOCAL and unexported, so listing a key in
+    // TRACKED_LEDGER_KEYS alone GREENS that gate while emitting nothing at all — the
+    // credit-side enumeration that fails open. An EXEMPT row is self-proving (the reason
+    // string is the artifact); a TRACKED row is a promise until something drives the
+    // extractor. This drives it: two open proposals, counted off an ARRAY sub-ledger.
+    expect(out.mover_counts.pacts_awaiting_answer).toBe(2);
     // migration pop 340 + 210 = 550 -> village_100_500? no, 550 -> small_town_500_2k
     expect(out.migration_pop_band).toBe('small_town_500_2k');
     // movers_active lists only the layers that fired
@@ -119,6 +146,7 @@ describe('spatialUsage — coarse signal', () => {
       'embattlement', 'caravans', 'smuggle', 'migration', 'field_combat',
       'entrepots', 'trade_flow', 'rumor', 'belief', 'moral_drift',
       'dispatch_refusal', 'propagation', 'approval_queue',
+      'pact_formation',
     ]));
   });
 

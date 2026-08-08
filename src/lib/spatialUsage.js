@@ -154,6 +154,16 @@ export function extractSpatialUsage(worldState) {
     // holding a cooldown, or has banked a completed public work — the ledger is
     // drop-when-empty, so a nonzero count means the valve lane genuinely fired.
     demographic_plans: recCount(L.demographicPlans),
+    // GR-2 THE PEACETIME PACT QUEUE. One row per offer standing between two courts,
+    // opened at a tick and owed an answer on a date the ROADS priced (two hopWeeks legs
+    // plus a deliberation) — a thing in flight with an arrival time, the armyTransit /
+    // spatialArrivals shape. Settled rows prune before this read, so the count is OPEN
+    // conversations only.
+    // ⚠ THE ONLY ARRAY-VALUED SUB-LEDGER in either manifest list. `recCount` reads it
+    // correctly — `Object.keys` of an array yields its indices, so this IS the row count
+    // — and it is left as recCount on purpose: do NOT "fix" it to `.length` and fork the
+    // one reader idiom every other ledger here is read through.
+    pacts_awaiting_answer: recCount(L.pactProposals),
   };
   const migrationPop = sumLeaf(L.migration, r => r?.arrivals);
 
@@ -185,6 +195,7 @@ export function extractSpatialUsage(worldState) {
     ['war_campaign', counts.war_campaigns],
     ['route_network', counts.route_edges],           // W-J lived route network
     ['demographic_plans', counts.demographic_plans], // wave P3 the overflow valves
+    ['pact_formation', counts.pacts_awaiting_answer], // GR-2 peacetime offers afoot
   ];
   const moversActive = MOVER_PRESENCE.filter(([, n]) => n > 0).map(([name]) => name);
 
@@ -229,6 +240,37 @@ export const TRACKED_LEDGER_KEYS = Object.freeze([
   // tracked flag, because `demographicsEnabled` is a virtual flag lit in no preset. A
   // reading of zero while the wave is dark is the truth rather than a blind spot.
   'demographicPlans',
+  // GR-2 THE PEACETIME PACT QUEUE (pactProposals.js, its ONE writer). TRACKED for
+  // routeNetwork's and demographicPlans' reason, and the exemption's conjunction fails
+  // in BOTH of its halves here, which is what makes the call unopposed rather than
+  // merely defensible. NO TRACKED FLAG: `pactFormationEnabled` is virtual, lit in no
+  // preset, so it is absent from TRACKED_FLAGS — and `settlementLifecycleEnabled`, which
+  // IS tracked, does not gate it either, because the pact stage runs ABOVE its host
+  // kernel's dormancy gate and its writes survive a dark host. NO TRACKED MOVER: a
+  // signed offer mints a `treaties` record, which is itself EXEMPT as the outcome
+  // register; a refused one becomes a banded trust delta carrying no key at all; an
+  // expired one simply goes. Nothing else in this list can see the lane.
+  //
+  // AND POSITIVELY, which is what separates it from the `warIntents` exemption: a
+  // proposal is a DEPOSIT, not a re-derivation. It is opened at a tick and PERSISTS,
+  // carrying an answerDueTick the roads priced, until it is answered — a thing in flight
+  // with an arrival time, which is the armyTransit / supplyShipments / navalTransit /
+  // spatialArrivals shape, and all four of those are TRACKED. `warIntents` is exempt on
+  // a footing that does not reach here: settlementStrategyEnabled and warLayerEnabled are
+  // BOTH in TRACKED_FLAGS, and the movement its order causes is already legible as
+  // armyTransit. Prop hygiene does not bar it either — the rows name SETTLEMENTS, not
+  // people, and we emit the key COUNT and never a key (the vengeanceLicenses row draws
+  // that same distinction explicitly).
+  //
+  // ⚠ TWO HONEST LIMITS ON WHAT THE COUNT MEANS, recorded rather than smoothed over.
+  // (1) `prunePactProposals` runs before this read, so the number is UNFINISHED
+  // conversations, never a tally of pacts signed — what the lane achieved lands in
+  // `treaties` and in the convergence collector's negotiated-versus-dictated ratio.
+  // (2) The writer returns inert BEFORE the prune when the flag is dark, so a campaign
+  // that lights the flag, opens rows, then unlights it STRANDS those rows open and this
+  // mover will report them as live forever. That is the one path on which the ledger
+  // does not drain.
+  'pactProposals',
 ]);
 
 /**
@@ -251,6 +293,7 @@ export const EXEMPT_LEDGER_KEYS = Object.freeze({
   sightPostures: 'infoStatecraft SEE posture sub-state (ditto)',
   peaceReasons: 'W-PEACE-1 typed peace-reason ANNOTATIONS (metadata on the war/peace layer, not a mover)',
   warReasons: 'W-PEACE-1 typed war-reason ANNOTATIONS (metadata on the war/peace layer, not a mover)',
+  commercialReasons: 'TR-1 THE CASUS COMMERCII (docs/DESIGN_FP_TRADE.md §TR-1; commercialReasons.js, its ONE writer) — a directed per-pair ledger of typed severance grievances and their partnership mirrors, eight walker-enforced pairs over ONE read each. EXEMPT ON THE HEADER CRITERION ABOVE, whose two clauses both hold. (1) IT IS A REASON-ANNOTATION, the warReasons / peaceReasons / reframes kind: it is RECOMPUTED EACH PULSE FROM EXISTING STATE, so decay is inherent and a healed cause DROPS rather than ratcheting, and nothing is banked — a count would report how much friction the CURRENT commercial state contains, which is a photograph of the realm\'s trading mood rather than a reading of what this layer did. It moves nothing; it says WHY commerce is as it is, and tradeWar\'s T9 escalation deposit consumes a magnitude as pressure exactly as war\'s own reason ledger is consumed. ⚠ THIS IS A SHARED KIND, NOT A SHARED LAYER: J-TR-2 in the writer\'s header is BINDING — this is not war\'s reasons layer in a trade costume, it imports no war table and mints no casus belli, and warReasonTaxonomy.js was the SHAPE template and nothing more. (2) THE OWNING LAYER IS COMMERCE, whose adoption is already carried by the tracked entrepots / trade_flow / caravans movers and by the tracked commodityFlowEnabled and tradeFlowsEnabled flags. A separate presence signal is redundant noise rather than new information, which is the exemption\'s stated test. ⚠⚠ WHAT IS DELIBERATELY *NOT* THE REASON, recorded so nobody re-derives it and reaches the wrong answer: advanceCommercialReasons has NO CALLER IN src/ (measured — the leaf\'s only cross-module import is tradeWar.js\'s makeCommercialPressureRead, which READS the ledger), so the container is unreachable today. That is TRUE and it is NOT a ground for exemption in this file, because routeNetwork is unmounted in exactly the same way — writeRouteNetwork is reached only from accrueRouteFlows and ensureGenesisRouteNetwork, and neither has a caller — and routeNetwork is TRACKED, on the stated ruling that a dark lane\'s zero is the truth rather than a blind spot. The classification here therefore must survive the wiring wave the lane\'s certification row calls for, and it does: warReasons is EXEMPT while fully mounted. Do not revisit this row when the mount lands.',
   treaties: 'peace-OUTCOME state record (the diplomatic result of the war/peace layer, not a distinct mover)',
   npcLadder: 'THE LADDER intra-faction standings SIDECAR (recorded rank/standing stocks + challenge state; annotation/state ledger like reframes/warReasons — the faction movers already signal that layer, not a distinct mover)',
   reframes: 'D7 per-pair motive-INTERPRETATION annotations (belief-side reframe readings — metadata on the war/peace/corruption layer, like warReasons/peaceReasons, not a distinct mover)',

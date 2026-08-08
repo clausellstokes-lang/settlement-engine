@@ -67,7 +67,14 @@ import { PACT_TRIGGERS } from './pactTriggers.js';
 import { stablePart } from './stablePart.js';
 
 /** The ledger's key under `worldState.spatialLedgers`. ONE new top-level key in the whole
- *  GRAMMAR program, and this is it (§4 L4). */
+ *  GRAMMAR program, and this is it (§4 L4). The `_LEDGER_KEY` suffix is load-bearing: it
+ *  is what lets the spatialUsage coverage walker
+ *  (tests/lib/spatialLedgerCoverage.walker.test.js) resolve this constant to its string
+ *  value at the setSpatialLedger call site, since that scan reads literals and
+ *  UPPER_SNAKE ledger constants and nothing else. Classified TRACKED in
+ *  src/lib/spatialUsage.js#TRACKED_LEDGER_KEYS and surfaced as the `pact_formation`
+ *  mover — an offer in flight with a road-priced answer date, not a re-derived
+ *  annotation; the manifest row carries the argument and its two honest limits. */
 export const PACT_PROPOSAL_LEDGER_KEY = 'pactProposals';
 
 /** The closed state vocabulary, codepoint-frozen. @type {readonly string[]} */

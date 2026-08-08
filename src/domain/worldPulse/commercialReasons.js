@@ -84,7 +84,17 @@ import {
 } from './relationshipState.js';
 import { pairTradeSalience } from './tradeSalience.js';
 
-/** The ledger's home under the spatialLedgers namespace. ONE spelling, one writer. */
+/**
+ * The ledger's home under the spatialLedgers namespace. ONE spelling, one writer.
+ * Named as a `_LEDGER` constant so the spatialUsage coverage walker resolves it to its
+ * string value and can hold the manifest honest
+ * (tests/lib/spatialLedgerCoverage.walker.test.js). Classified EXEMPT in
+ * src/lib/spatialUsage.js#EXEMPT_LEDGER_KEYS — a recomputed reason-ANNOTATION over a
+ * commerce layer whose adoption the tracked movers already carry, NOT because this
+ * writer currently has no mount (that is true and is deliberately not the ground; the
+ * row says why).
+ * @type {string}
+ */
 export const COMMERCIAL_REASONS_LEDGER = 'commercialReasons';
 
 /**
