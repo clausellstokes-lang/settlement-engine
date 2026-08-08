@@ -93,14 +93,6 @@
       "introducedAt": "unbisectable: an inventory pin over runtime obligation folds; two folds were added by separate worldPulse waves in the 2026-08 window. Burn-down lane must disposition both, not bisect one.",
       "class": "debt"
     },
-    "tests/domain/guidanceRegistry.walker.test.js :: title= ratchet — native OS tooltips are a shrink-only census the src title= count stays at or below the shrink-only baseline (482)": {
-      "file": "tests/domain/guidanceRegistry.walker.test.js",
-      "test": "title= ratchet — native OS tooltips are a shrink-only census the src title= count stays at or below the shrink-only baseline (482)",
-      "subsystem": "UI / glossary affordance (native title= census)",
-      "cause": "src title= census is 484 against a shrink-only baseline of 482 — two new native OS tooltips were added instead of routing through the glossary affordance.",
-      "introducedAt": "unbisectable: a shrink-only census that grew by 2 across the 2026-08 UI waves; the walker names the count, not the sites. Burn-down lane must re-run the walker for the two new sites.",
-      "class": "debt"
-    },
     "tests/domain/metronomeCooldownLint.test.js :: metronome-cooldown lint — condition-bearing outcome sources self-limit the non-cooldown emitter set may only SHRINK (no NEW condition-bearing source bypasses the metronome)": {
       "file": "tests/domain/metronomeCooldownLint.test.js",
       "test": "metronome-cooldown lint — condition-bearing outcome sources self-limit the non-cooldown emitter set may only SHRINK (no NEW condition-bearing source bypasses the metronome)",
@@ -200,10 +192,10 @@
     "tests/lib/spatialLedgerCoverage.walker.test.js :: spatialUsage ledger-coverage walker (lib-infra-copy-1) every written spatialLedgers key is TRACKED or EXEMPT (and no phantom classifications)": {
       "file": "tests/lib/spatialLedgerCoverage.walker.test.js",
       "test": "spatialUsage ledger-coverage walker (lib-infra-copy-1) every written spatialLedgers key is TRACKED or EXEMPT (and no phantom classifications)",
-      "subsystem": "spatial / spatialLedgers coverage walker",
-      "cause": "The written spatialLedgers key set measures 59 against a tracked/exempt census of 61 — two keys are written that are neither TRACKED nor EXEMPT (or two classifications are phantom). The sibling layering lane also touches this file.",
-      "introducedAt": "unbisectable: a key-coverage census that moved with the spatial ledger namespace across several waves. Burn-down lane must re-run the walker and disposition each key.",
-      "class": "debt"
+      "subsystem": "spatial / spatialLedgers coverage walker (OWNER-HELD — see walkerRowsOwed)",
+      "cause": "⛔ A DISABLED GUARD, OWED REMOVAL, AND OWNER-GATED IN THIS TREE — the one row of the ten walker rows this lane could not free. The direction recorded here before 2026-08-07 was WRONG and is corrected by measurement: it is not \"two classifications are phantom\". The walker's own dump inside an integrity-counted `git archive` of af8815e9 gives onlyClassified=[] and onlyWritten=[\"commercialReasons\",\"pactProposals\"] — two keys are WRITTEN by kernels and classified in NEITHER list. The cure is to add them to TRACKED_LEDGER_KEYS/MOVER_PRESENCE or EXEMPT_LEDGER_KEYS in src/lib/spatialUsage.js, and an OWNER-STARTED SESSION HOLDS THAT FILE UNCOMMITTED together with both writers (src/domain/worldPulse/commercialReasons.js, src/domain/worldPulse/pactProposals.js) — a build lane may not touch it. That work IS the cure and it is already in flight: with the owner's uncommitted edits applied, this walker PASSES in the live tree (measured 2026-08-07), so this row is a ratchet-down waiting on the owner's commit, not a repair anyone else should attempt. PRECONDITION FOR DROPPING THE ROW: the owner's spatialUsage work lands; then re-run the walker in an archive of that commit and remove this row and its walkerRowsOwed entry together.",
+      "introducedAt": "unbisectable: a key-coverage census that moved with the spatial ledger namespace across several waves; the two unclassified keys arrived with TR-1 (commercialReasons) and GR-2 (pactProposals), whose classification is the owner's in-flight edit.",
+      "class": "owner-gated"
     },
     "tests/lint/clampPrimitiveBaseline.test.js :: clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01": {
       "file": "tests/lint/clampPrimitiveBaseline.test.js",
@@ -235,22 +227,6 @@
       "subsystem": "copy / prose numerics ratchet",
       "cause": "The path+line+category+snippet debt list drifted from the committed baseline (413 rows) — new prose numerics leaked and/or legacy rows moved lines, which this exact-identity ratchet reads as drift.",
       "introducedAt": "unbisectable: an exact line-addressed inventory that rots whenever any governed file shifts lines; the hand-keyed line-address rot class. Burn-down lane must regenerate once and review every removed row.",
-      "class": "debt"
-    },
-    "tests/lint/ruinFilterRoster.walker.test.js :: ruin-filter roster ratchet (structural-prevention Pattern 2) every `.institutions` reader is COMPLIANT or EXEMPT": {
-      "file": "tests/lint/ruinFilterRoster.walker.test.js",
-      "test": "ruin-filter roster ratchet (structural-prevention Pattern 2) every `.institutions` reader is COMPLIANT or EXEMPT",
-      "subsystem": "ruins / institutions reader roster",
-      "cause": "6 `.institutions` readers are neither COMPLIANT (ruin-filtered) nor EXEMPT — new readers landed without being dispositioned in the roster.",
-      "introducedAt": "unbisectable: 6 readers added across several waves. Burn-down lane must disposition each as compliant or exempt.",
-      "class": "debt"
-    },
-    "tests/lint/sovereigntyLightingContract.walker.test.js :: the sovereignty lighting condition — a marker is EVIDENCE only in a live title THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed": {
-      "file": "tests/lint/sovereigntyLightingContract.walker.test.js",
-      "test": "the sovereignty lighting condition — a marker is EVIDENCE only in a live title THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed",
-      "subsystem": "lighting / sovereignty census",
-      "cause": "THE LIGHTING CENSUS COUNTS TEST FILES: the estate's file count moved to 2350 against a stated 2346. This walker reds whenever ANY new test file lands — a recorded hazard. The figure must be re-measured off an archive of the actual parent, never re-worded.",
-      "introducedAt": "unbisectable: by construction this reds on any test-file addition; four files were added since the figure was frozen. Note this lane adds one more (tests/lint/testRatchet.test.js), so the burn-down must re-measure at its own parent.",
       "class": "debt"
     },
     "tests/lint/transcendentalMathBaseline.test.js :: transcendental-math ratchet — frozen baseline governance baseline exactly matches the tree (airtight against any drift mode)": {
@@ -299,22 +275,6 @@
       "subsystem": "war / SP-6 phrased-kind registry (war rulings)",
       "cause": "'succession_demand_inherited' no longer retains the five annex families without editorial cross-references (measured 6).",
       "introducedAt": "unbisectable: same SP-6 registry drift as warCostKindPools. Burn-down lane must reconcile the registry against the pools.",
-      "class": "debt"
-    },
-    "tests/property/mechanismLitCoverage.test.js :: mechanism lit-coverage walker (Enforcer E-H, bar 4) THE RATCHET (flags): the flag lit-coverage gap exactly equals the shrink-only baseline": {
-      "file": "tests/property/mechanismLitCoverage.test.js",
-      "test": "mechanism lit-coverage walker (Enforcer E-H, bar 4) THE RATCHET (flags): the flag lit-coverage gap exactly equals the shrink-only baseline",
-      "subsystem": "certification / mechanism lit-coverage (Enforcer E-H bar 4)",
-      "cause": "The lit-coverage gap is non-empty where the shrink-only baseline demands zero: 23 modules (applyWorldPulseBetrayal and 22 more) and the warEconomyEnabled flag have no lit family. CR-FP-11 taught the inclusion ratchet to SEE modules no family covers, which surfaced the pre-existing gap.",
-      "introducedAt": "1137f935ee4c1d27ac1f515e2500ee82821e5cef",
-      "class": "debt"
-    },
-    "tests/property/mechanismLitCoverage.test.js :: mechanism lit-coverage walker (Enforcer E-H, bar 4) THE RATCHET (modules): the lit-coverage gap exactly equals the shrink-only baseline": {
-      "file": "tests/property/mechanismLitCoverage.test.js",
-      "test": "mechanism lit-coverage walker (Enforcer E-H, bar 4) THE RATCHET (modules): the lit-coverage gap exactly equals the shrink-only baseline",
-      "subsystem": "certification / mechanism lit-coverage (Enforcer E-H bar 4)",
-      "cause": "The lit-coverage gap is non-empty where the shrink-only baseline demands zero: 23 modules (applyWorldPulseBetrayal and 22 more) and the warEconomyEnabled flag have no lit family. CR-FP-11 taught the inclusion ratchet to SEE modules no family covers, which surfaced the pre-existing gap.",
-      "introducedAt": "1137f935ee4c1d27ac1f515e2500ee82821e5cef",
       "class": "debt"
     },
     "tests/security/mapSnapshotImport.contract.test.js :: cross-user map import never carries an untrusted raw snapshot (F6) still imports the safe fields (seed) so geography can regenerate locally": {

@@ -168,6 +168,44 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/display/visibilityAudit.js': 'display/audit — covert-dossier impairment read',
 });
 
+/**
+ * ⛔ THE UNDISPOSITIONED QUARANTINE — SHRINK-ONLY, EXACT IDENTITY BOTH DIRECTIONS.
+ *
+ * These are NOT exemptions and they must never be moved into RUIN_AGNOSTIC_EXEMPT: an
+ * exemption asserts "this reader is ruin-agnostic on purpose, here is the reason", and
+ * nobody has made that judgement about these six. They are `.institutions` readers that
+ * landed WITHOUT being dispositioned at all, and they are named here so the walker can
+ * tell the debt it already knows about from a NEW undispositioned reader.
+ *
+ * WHY THEY ARE HERE RATHER THAN IN THE TEST CENSUS. Until 2026-08-07 the row
+ * `tests/lint/ruinFilterRoster.walker.test.js :: every `.institutions` reader is
+ * COMPLIANT or EXEMPT` sat in scripts/.test-ratchet-baseline.json. That row is a single
+ * assertion over an OPEN, tree-derived population, so tolerating it tolerated the whole
+ * population: a SEVENTH undispositioned reader would have produced the byte-identical
+ * failing verdict and reddened nothing. A failing TEST is debt; a failing WALKER is a
+ * DISABLED GUARD (CONTRIBUTING.md, "The gate"). The census row is gone; the debt is
+ * INVENTORIED here, where a new violation reds again.
+ *
+ * MEASURED, NEVER TRANSCRIBED: this walker's own discoverReaders() run inside an
+ * integrity-counted `git archive` of committed af8815e9 (6,196 tracked paths in, 6,196
+ * out, `git status` clean) — never over the live shared tree, which holds an owner
+ * session's uncommitted work (THE ARCHIVE-CENSUS LAW).
+ *
+ * TO SHRINK IT (the only permitted direction): route the file through
+ * liveInstitutions()/isLiveInstitution(), or decide it is genuinely ruin-agnostic and
+ * move it to RUIN_AGNOSTIC_EXEMPT WITH ITS REASON — then delete its row here. The
+ * honesty arm below reds if you fix one without banking the win, so a silent shrink is
+ * not available either.
+ */
+const UNDISPOSITIONED_RUIN_READERS = Object.freeze([
+  'src/domain/certification/couplingRegistryWar.js',
+  'src/domain/worldPulse/dispositionNews.js',
+  'src/domain/worldPulse/envoyNegotiationPictureBuilder.js',
+  'src/domain/worldPulse/razingExecution.js',
+  'src/domain/worldPulse/warArmyRecord.js',
+  'src/domain/worldPulse/warCosts.js',
+]);
+
 function walk(dir, out = []) {
   for (const e of readdirSync(dir)) {
     const p = join(dir, e);
@@ -200,6 +238,7 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     for (const { rel, compliant } of readers) {
       if (compliant) continue;
       if (rel in RUIN_AGNOSTIC_EXEMPT) continue;
+      if (UNDISPOSITIONED_RUIN_READERS.includes(rel)) continue;
       violations.push(
         `${rel}: reads the raw .institutions roster but neither routes through the ruin filter `
         + `nor is exempted.\n  If it aggregates institutions as LIVE providers, route it through `
@@ -209,6 +248,35 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
       );
     }
     expect(violations).toEqual([]);
+  });
+
+  test('⛔ quarantine honesty: the undispositioned list is EXACT — an un-banked shrink reds too', () => {
+    // The quarantine is audited in BOTH directions, which is what stops it becoming a
+    // second, softer allowlist:
+    //   • a row that no longer reads .institutions, or now routes through the ruin
+    //     filter, or has since been given a real exemption, is a WIN — and it reds here
+    //     until it is banked, because a quarantine that silently keeps stale rows drifts
+    //     upward in effect (its ceiling stops meaning anything) exactly like the census
+    //     row this list replaced;
+    //   • a NEW undispositioned reader never reaches this list at all — it reds in the
+    //     COMPLIANT-or-EXEMPT arm above, which is the whole point of moving the debt here.
+    const readerByRel = new Map(readers.map((r) => [r.rel, r]));
+    const stale = [];
+    for (const rel of UNDISPOSITIONED_RUIN_READERS) {
+      const r = readerByRel.get(rel);
+      if (!r) stale.push(`${rel}: no longer reads .institutions (moved/renamed/cleaned) — delete its quarantine row`);
+      else if (r.compliant) stale.push(`${rel}: now routes through the ruin filter — delete its quarantine row (bank the win)`);
+      else if (rel in RUIN_AGNOSTIC_EXEMPT) {
+        stale.push(`${rel}: now carries a real exemption — delete its quarantine row (a file is one or the other, never both)`);
+      }
+    }
+    expect(stale).toEqual([]);
+    // anchored: the exactness assertion above proves the list was walked against the
+    // live scan, so the non-emptiness pin below is a floor on a REAL population.
+    expect(
+      UNDISPOSITIONED_RUIN_READERS.length,
+      'the quarantine emptied — if that is real, delete it and this arm together; if it is not, the walker stopped discovering readers',
+    ).toBeGreaterThan(0);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

@@ -1,5 +1,40 @@
 {
   "comment": "E-H per-mechanism lit-walkthrough baseline — the CURRENT lit-coverage gap, SHRINK-ONLY. Each entry is a worldPulse mechanism (module) or simulation-rules flag with NO standing flag-ON lit proof (no direct-import lit test, no LIT_COVERED_BY registry reference in tests/property/mechanismLitCoverage.test.js). Strike entries as lit tests land; never add one except as a deliberate, vetoable burn-down decision. The walker fails on ANY drift in either direction.",
-  "mechanisms": [],
-  "flags": []
+  "reFrozen": {
+    "at": "af8815e9261977b8dfa3e7ee248cbe6989e522d6",
+    "on": "2026-08-07",
+    "by": "the walker-census lane (S12-W)",
+    "why": "⛔ A DELIBERATE, VETOABLE ADMISSION OF DEBT — NOT A WIN, AND NOT A SILENT ONE. Both RATCHET rows of tests/property/mechanismLitCoverage.test.js were sitting in scripts/.test-ratchet-baseline.json, where a failing row is TOLERATED. Each of those rows is ONE assertion over an OPEN, source-derived population (`expect(uncoveredMechanisms).toEqual(baseline.mechanisms)`), so tolerating the row tolerated the whole population: a 24th uncovered mechanism, or a second uncovered flag, would have produced the byte-identical failing verdict and reddened NOTHING. A failing TEST is debt; a failing WALKER is a DISABLED GUARD (CONTRIBUTING.md, 'The gate'). The census rows are gone and the gap is INVENTORIED here instead, by exact name and in the walker's own order, so a NEW uncovered mechanism or flag reds again while the 23 + 1 known ones stay green.",
+    "measurement": "MEASURED by this walker's own uncoveredMechanisms / uncoveredFlags computation inside an integrity-counted `git archive` of committed af8815e9 (6,196 tracked paths in, 6,196 out, `git status` clean) — never over the live shared tree, which holds an owner session's uncommitted work (THE ARCHIVE-CENSUS LAW). Names and ORDER are taken from the walker's own output, never transcribed from a review.",
+    "notBurnedDown": "The 23 modules and the one flag are INVENTORIED, not repaired. Writing their lit walkthroughs is a separate wave; this lane restores the guard, it does not clear the habitat. The list is SHRINK-ONLY: the walker reds if a name gains coverage and is not struck (an un-banked win) exactly as it reds if a new name appears.",
+    "introducedAt": "1137f935ee4c1d27ac1f515e2500ee82821e5cef"
+  },
+  "mechanisms": [
+    "applyWorldPulseBetrayal",
+    "applyWorldPulseFactionRoster",
+    "applyWorldPulseOccupationAuthority",
+    "applyWorldPulsePrimitives",
+    "applyWorldPulseRelationshipGraph",
+    "applyWorldPulseStressorMerge",
+    "envoyErrandEncounterWriter",
+    "envoyErrandEvidence",
+    "envoyErrandParlay",
+    "envoyInterceptionStage",
+    "lineageNews",
+    "npcDmVerbAuthority",
+    "npcDmVerbRecords",
+    "peaceTermsAppraisal",
+    "peaceTermsCarriedSheet",
+    "peaceTermsCoalition",
+    "peaceTermsDocument",
+    "peaceTermsGraph",
+    "peaceTermsOverlay",
+    "peaceTermsPrimitives",
+    "secrecyTradeFactor",
+    "sovereigntyReceiptPools",
+    "warReceiptPools"
+  ],
+  "flags": [
+    "warEconomyEnabled"
+  ]
 }

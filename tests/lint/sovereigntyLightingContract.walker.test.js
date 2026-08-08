@@ -3146,7 +3146,57 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // below are LEFT AT THEIR 1977db07 VALUES ON PURPOSE: this lane will not half-bank
       // a figure it cannot derive, and a knowingly-red ratchet with a written cause is
       // honest where a green one bought by transcription would not be.
-      files: 2346, parked: 358, credited: 1988, titles: 18951, suiteTitles: 5421,
+      //
+      // ══ THE DEFERRAL IS DISCHARGED. RE-RECORDED 2026-08-07 BY THE WALKER-CENSUS LANE ══
+      // WHY IT COULD NOT STAY DEFERRED, WHICH IS A NEW FACT AND NOT A CHANGE OF MIND. The
+      // deferral above was written while this row sat in scripts/.test-ratchet-baseline.json
+      // — the per-test failure census — and that is the thing that turned out to be
+      // impermissible. A failing TEST is debt; a failing WALKER is a DISABLED GUARD, and
+      // this one is the worst-behaved kind: the five figures are asserted IN SEQUENCE, so
+      // while `files` is wrong the other four are NEVER EVALUATED. Leaving the row banked
+      // did not merely tolerate a stale number, it switched the whole census off. The row
+      // is gone; the figures are re-derived here, where drift reds again.
+      //
+      // AND THE THREE DEFERRAL REASONS, ANSWERED ONE AT A TIME RATHER THAN WAVED OFF:
+      //   1. "A LANE COULD MOVE THE TREE MID-ROUND." Still true, and it is why the
+      //      measurement below was taken from a `git write-tree` of THE EXACT CHANGE BEING
+      //      COMMITTED (a private GIT_INDEX_FILE, never the shared index) and re-verified
+      //      against the live worktree immediately before the commit. A figure derived
+      //      from the tree you are about to write cannot be stale at the moment you write
+      //      it; it can only be superseded afterwards, which is what a ratchet is for.
+      //   2. "THE ARCHIVE-CENSUS LAW FORBIDS CENSUSING A LIVE SHARED TREE." Obeyed to the
+      //      letter: every figure below comes from this walker's OWN computation running
+      //      inside an integrity-counted `git archive` (6,196 tracked paths in, 6,196
+      //      files out, `git status` clean, node_modules symlinked and excluded), never
+      //      from the live worktree — which still holds an owner session's uncommitted
+      //      work in four files.
+      //   3. "BANKING TITLES THIS LANE DID NOT AUTHOR WOULD BE TRANSCRIPTION." This is the
+      //      one the earlier lane got wrong, and it is worth being precise about because
+      //      the mistake is cheap to repeat: DERIVE-DON'T-RESTATE forbids RETYPING a
+      //      figure, not banking one you did not personally author. The numbers below were
+      //      not read from any document — they are `titles` and `suiteTitles` as computed
+      //      by liveTitlesIn()/liveSuiteTitlesIn() in that archive and printed straight
+      //      out of the walker. That is measurement by the strictest reading available.
+      //
+      // ── THE DECOMPOSITION, MEASURED AT BOTH ENDS, NEVER SUBTRACTED FROM A SENTENCE ──
+      //     sha / tree                                 files parked credited titles suite
+      //     1977db07  the frozen figures                2346    358     1988  18951  5421
+      //     af8815e9  this lane's PARENT                2352    358     1994  19122  5455
+      //     9f060332  this lane's own tree (write-tree) 2352    358     1994  19132  5456
+      // PARENT MINUS FROZEN is the growth that accrued WHILE THIS RATCHET WAS RED AND
+      // BANKED: +6 files, +6 credited, +171 titles, +34 suite titles, with `parked`
+      // genuinely unmoved for the eighth consecutive wave. That is the recorded
+      // A-RED-RATCHET'S-CONTENTS-GROW-INVISIBLY hazard measured rather than asserted —
+      // 171 test titles landed inside a census that was reporting a single stale file
+      // count and had stopped reading the other four layers entirely.
+      // THIS TREE MINUS PARENT IS THIS LANE'S OWN CONTRIBUTION AND IT IS FULLY ACCOUNTED:
+      // +10 titles and +1 suite title, being the nine `test(` of the new walker-census-law
+      // block plus its one `describe(` in tests/lint/testRatchet.test.js, and the one new
+      // quarantine-honesty `test(` in tests/lint/ruinFilterRoster.walker.test.js. No test
+      // FILE was added or removed by this lane, which is why `files` and `parked` do not
+      // move. The +10/+1 was PREDICTED from the diff and then MEASURED to the unit; had
+      // the two disagreed, the disagreement — not the number — would be the finding.
+      files: 2352, parked: 358, credited: 1994, titles: 19132, suiteTitles: 5456,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

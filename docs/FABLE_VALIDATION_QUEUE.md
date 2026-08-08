@@ -6063,3 +6063,162 @@ trees; should they come out of the census, or does their build-state dependence 
 keeping them. (3) The absolute-path-pin hazard in (c) above wants a registry class of its own.
 (4) `tests/lint/sizeBaseline` does not govern `tests/**`, so the negative-assertion walker is
 now 893 lines with no ceiling over it — deliberate here, but worth a ruling.
+
+---
+
+## S12-W — THE WALKER-CENSUS LAW BECOMES MACHINERY (2026-08-07, Opus-era build lane)
+
+**⏳ OPUS-ERA — FABLE SURVEY OWED.**
+
+**THE PREMISE, CONFIRMED BEFORE ANYTHING WAS CHANGED.** `af8815e9` wrote the law — *a
+failing TEST is debt; a failing WALKER is a DISABLED GUARD; an enforcement walker may never
+be put in the test census* — into `CONTRIBUTING.md` and into the header of
+`tests/lint/testRatchet.test.js`, **as comments that check nothing**, and left ten violating
+rows in the census it was writing about. Measured, not assumed: the seven files carrying
+those rows were run inside an integrity-counted `git archive` of committed `af8815e9`
+(6,196 tracked paths in, 6,196 files out, `git status` clean, `node_modules` symlinked and
+git-excluded), and the result was **`Test Files 7 failed (7)` / `Tests 10 failed | 144
+passed`** — exactly ten, exactly the chair's ten.
+
+**HOW AN ENFORCEMENT WALKER IS IDENTIFIED BY MACHINE, AND WHY NOT BY FILENAME.** The
+identification is DERIVED, from three independent arms, union: **A1 NAME** (`*.walker.test.js`),
+**A2 TITLE** (the module header's own first line calls it a walker — survives a rename),
+**A3 STRUCTURE** (the file enumerates a source tree *and* compares against a frozen-inventory
+token — needs no declaration at all). **No single arm classifies all ten, and the test proves
+it by execution rather than by claiming it**: A1 misses both rows of
+`mechanismLitCoverage.test.js` (a walker with no `.walker.` in its name — the chair's warning,
+reproduced), and A3 misses all four `warCostKindPools` / `warRulingKindPools` rows (they read a
+registry through imports and walk no tree). Deleting either arm reds a standing pin.
+FALSE-POSITIVE CHECK, EXECUTED: the union flags 135 of the estate's 2,352 test files (5.7%) —
+69 by A1, 85 by A2, 73 by A3 — and the standing ORDINARY-TEST CONTROL pin requires the
+classifier to leave seven named census files alone, each carrying real non-walker debt (a
+thrown `TypeError`, a field-projection break, a stale built artifact, a durable-command race,
+a per-file any-cast baseline). All seven classify as NOT walkers.
+FALSE-NEGATIVE CHECK, EXECUTED: all ten rows classify, and the four walkers freed below carry
+a standing pin that they *still* classify — so re-adding any of them reds.
+@enforced-by tests/lint/testRatchet.test.js
+
+**THE TRIAGE — THE TEN ARE NOT ONE DEFECT, AND THE LINE IS STRUCTURAL.** The question that
+separates them is whether the frozen row's assertion ranges over an **OPEN, tree-derived
+population** (freezing it freezes the whole population, so a new violation is absorbed
+silently) or over a **CLOSED, per-member identity** (a new member mints a new test identity,
+which is absent from the census and reds as a regression).
+
+| rows | file | verdict |
+| --- | --- | --- |
+| 1 | `guidanceRegistry.walker` | DISABLED GUARD — **FREED**, ceiling re-frozen 482 → 484 |
+| 1 | `ruinFilterRoster.walker` | DISABLED GUARD — **FREED**, six undispositioned readers quarantined by name |
+| 2 | `mechanismLitCoverage` | DISABLED GUARD — **FREED**, 23 modules + 1 flag inventoried in the baseline fixture |
+| 1 | `sovereigntyLightingContract.walker` | DISABLED GUARD — **FREED**, all five census figures re-derived |
+| 1 | `spatialLedgerCoverage.walker` | DISABLED GUARD — **STOP, OWNER-HELD** (below) |
+| 3 | `warCostKindPools.walker` | **LEGITIMATE DEBT, KEPT** — per-kind identity |
+| 1 | `warRulingKindPools.walker` | **LEGITIMATE DEBT, KEPT** — per-kind identity |
+
+The four war-pool rows come from `test.each(WAR_COST_KIND_REGISTRY)`, which mints **one test
+per kind**: measured at `af8815e9`, **6 of the 9 war-cost kinds PASS** while these 3 fail, and
+a kind added tomorrow mints an identity the census does not contain, so it reds. The guard is
+not disabled; three named members of it are banked debt. Their corpus is chair-gated
+independently — `tests/helpers/receiptAnnex.js` records that the kinds DEEPENED past the
+fixed-five assumption (`1e8bf8a8`) stay red under **D-W3 Class B**, which needs a ruling (cap
+raised vs corpus trimmed), not a parser. They are written into `WALKER_ROWS_ADMITTED` with
+that reason.
+
+**⛔ STOP-S12W-1 — `spatialLedgerCoverage.walker` CANNOT BE FREED BY A BUILD LANE.** Its
+recorded cause was WRONG IN DIRECTION and is corrected by measurement: the walker's own dump
+gives `onlyClassified: []` and `onlyWritten: ["commercialReasons","pactProposals"]` — two keys
+are WRITTEN and classified in neither list; nothing is phantom. The cure is two entries in
+`src/lib/spatialUsage.js`, and **an owner session holds that file uncommitted together with
+both writers** (`src/domain/worldPulse/commercialReasons.js`, `.../pactProposals.js`). That
+work IS the cure and it is already in flight: **with the owner's uncommitted edits applied the
+walker PASSES in the live tree** (measured today) while it FAILS at the committed parent. So
+the row is a ratchet-down waiting on the owner's commit, and removing it now would red the
+gate for CI at a tree the owner has not written yet. The row STAYS, its cause is corrected and
+re-classed `owner-gated`, and it is entered in `WALKER_ROWS_OWED` with the precondition:
+**when the owner's spatialUsage work lands, re-run the walker in an archive of that commit and
+delete the census row and the OWED entry together.**
+
+**⚠ THE CHAIR'S TEN IS AN UNDERCOUNT — TWELVE MORE ROWS ARE THE SAME DEFECT.** A derived
+classifier sees what a filename check cannot. Beyond the ten, **twelve** further census rows
+across eight files are enforcement walkers by the same test: `voiceMechanics` ×4,
+`crisisTripleSync` ×2, and one each of `deepCraftKillList`, `deployRunbookFreshness`,
+`enforcement-claims`, `metronomeCooldownLint`, `clampPrimitiveBaseline`, `proseNumerics`.
+Each is ONE assertion over an open population, so each is a switched-off guard today. **They
+are NOT freed here** — two are owner-gated (the DEPLOY.md migration head; the chair-ruling row
+behind `enforcement-claims`), two must be RE-POINTED rather than re-frozen (`crisisTripleSync`
+reads a source region its consumer moved out of — re-freezing a mis-pointed pin banks the
+wrong address), and the rest need re-freezes large enough to be their own waves (a 413-row
+line-addressed prose inventory; a 1,369-against-670 voice corpus; 11 forked clamp primitives;
+a metronome bypass whose cure is a mechanism, not a number). **They are named, one line of
+blocker each, in `WALKER_ROWS_OWED`, which is exact-identity and shrink-only: the debt is now
+visible and cannot grow.** The honest reading of that ledger is *twelve guards are switched
+off and one is waiting on the owner* — this lane converted an invisible problem into a
+counted one, and did not solve it.
+
+**THE FOUR FREES, EACH DEBT RELOCATED AND NEVER FORGIVEN.** (1) `guidanceRegistry`'s
+`title=` census 482 → 484, measured by the walker's own `countTitles()` in the archive (484
+sites across 182 source files). (2) `ruinFilterRoster` gains
+`UNDISPOSITIONED_RUIN_READERS` — six named files, deliberately NOT moved into
+`RUIN_AGNOSTIC_EXEMPT`, because an exemption asserts a judgement nobody has made about them —
+audited in both directions by a new honesty arm, so an un-banked repair reds too. (3)
+`mechanism-lit-coverage-baseline.json` records the 23 uncovered modules and the one uncovered
+flag by name and in the walker's own order, with the admission written into the fixture. (4)
+`sovereigntyLightingContract`'s five figures are re-derived (below). **None of the underlying
+debt was burned down; that was the instruction.**
+
+**THE LIGHTING RE-RECORD, AND WHY A STANDING DEFERRAL WAS DISCHARGED.** `af8815e9` deferred
+these five figures for three stated reasons. The deferral was written while the row sat in the
+census — which is the thing that turned out to be impermissible, because this walker asserts
+its five figures IN SEQUENCE and a wrong `files` count means **the other four are never
+evaluated at all**. Reasons 1 and 2 are obeyed rather than waived: the figures were measured
+inside an integrity-counted archive of a `git write-tree` of **the exact change being
+committed**, built through a private `GIT_INDEX_FILE` so the shared index was never touched,
+and then re-verified against the live worktree. Reason 3 was mistaken and is corrected on the
+record: DERIVE-DON'T-RESTATE forbids RETYPING a figure, not banking one you did not author —
+these came out of `liveTitlesIn()` / `liveSuiteTitlesIn()` printed straight from the walker.
+
+|  | files | parked | credited | titles | suite |
+| --- | --- | --- | --- | --- | --- |
+| `1977db07` frozen | 2346 | 358 | 1988 | 18951 | 5421 |
+| `af8815e9` parent | 2352 | 358 | 1994 | 19122 | 5455 |
+| `9f060332` this tree | 2352 | 358 | 1994 | 19132 | 5456 |
+
+Parent minus frozen — **+6 files, +6 credited, +171 titles, +34 suite titles** — is growth
+that accrued **while the ratchet was red and banked**: the recorded A-RED-RATCHET'S-CONTENTS-
+GROW-INVISIBLY hazard, measured. This tree minus parent is **+10 titles, +1 suite title**, and
+it is fully accounted: the nine `test(` of the new law block plus its one `describe(`, and the
+one new quarantine-honesty `test(`. The delta was PREDICTED from the diff and then MEASURED to
+the unit.
+
+**GATES.** Acceptance (a): a walker row planted in the census (paired with the removal of one
+ordinary row so the census stayed at 35 and the CEILING pin could not be the thing that fired)
+reddened **exactly one test of 57** — `⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS
+IT IS LEDGERED` — naming the plant. Acceptance (b): four violations planted, one per freed
+walker (a new `title=`, a new unfiltered `.institutions` reader, a new uncovered worldPulse
+module, a new test file) produced **`Test Files 4 failed (4)` / `Tests 4 failed | 68 passed`**,
+one named failure per walker, including `expected 2353 to be 2352` from the lighting census.
+Acceptance (c): the full `npm run test:ratchet` without plants. Every plant restored and proved
+clean by `cmp` against pre-plant copies plus `git status`, which lists only this lane's files
+and the owner's four untouched ones. No exit code was read through a pipe; every run went
+through `scripts/gate-mutex.sh --wait && scripts/gate-tail.sh`.
+
+**DECISIONS TAKEN, EACH VETOABLE.**
+1. **The classifier is a UNION of three arms, not a single predicate.** A1/A2 are declarations
+   and fail OPEN — a walker renamed AND re-titled escapes both, and is then caught only if A3
+   sees it, which it does only for tree-scanning walkers. That residual is stated in the file
+   against interest. Veto by ordering a mandatory declared marker on every walker instead; the
+   cost is a migration across 69 files and a new way to forget.
+2. **Four war-pool rows were KEPT as legitimate debt.** Veto by ordering them freed too; the
+   cost is banking a deepened corpus against D-W3 Class B before the chair rules it.
+3. **The twelve newly-found rows were INVENTORIED, not freed.** The brief said inventory, not
+   burn down, and two of the twelve are owner-gated. Veto by ordering a follow-up wave.
+4. **The lighting deferral was discharged rather than re-deferred.** Veto by restoring the
+   census row; the cost is that the whole five-figure census stays switched off.
+5. **`spatialLedgerCoverage` was left in the census.** Veto by ordering it freed with a
+   quarantine inside the walker; the cost is colliding with the owner's in-flight cure.
+
+**WHAT FABLE SHOULD RE-EXAMINE.** (1) Is the OPEN-population / CLOSED-per-member-identity line
+the right test for "disabled guard vs legitimate debt", or should every walker row come out
+regardless. (2) The twelve OWED rows want a wave and an order. (3) `guidanceRegistry`'s
+`title=` ceiling is a TOTAL, so a swap nets to zero and stays invisible; the per-file inventory
+upgrade (182 rows) is deferred and written down in the walker. (4) STOP-S12W-1 needs the
+owner's spatialUsage commit before anyone touches that row.

@@ -301,7 +301,30 @@ describe('title= ratchet — native OS tooltips are a shrink-only census', () =>
   // all use `heading` rather than `title` — the new page could have added five
   // tooltip-shaped props, so the same migration was applied at authoring time
   // instead of after the ratchet reddened. Nine local props moved. 487 → 482.
-  const TITLE_BASELINE = 482;
+  //
+  // ── RE-FROZEN 2026-08-07 BY THE WALKER-CENSUS LANE. 482 → 484. ───────────────
+  // ⛔ THIS IS A RELOCATION OF DEBT, NOT A WIN, AND IT IS THE FIRST ENTRY ABOVE
+  // THAT RAISES THE CEILING RATHER THAN LOWERING IT. Read why before adding a
+  // third: this row (`tests/domain/guidanceRegistry.walker.test.js :: the src
+  // title= count stays at or below the shrink-only baseline (482)`) was sitting in
+  // scripts/.test-ratchet-baseline.json, so its verdict was TOLERATED — and a
+  // tolerated ratchet is byte-identical however much worse the tree gets, which
+  // means every FURTHER native tooltip would also have reddened nothing. A failing
+  // TEST is debt; a failing WALKER is a DISABLED GUARD (CONTRIBUTING.md, "The
+  // gate"). The census row is gone and the ceiling is re-frozen HERE, where the
+  // next new tooltip reds again.
+  // MEASURED, NEVER TRANSCRIBED: 484, by this file's own countTitles() run inside
+  // an integrity-counted `git archive` of committed af8815e9 (6,196 tracked paths
+  // in, 6,196 out, `git status` clean) — not in the live shared tree, which holds
+  // an owner session's uncommitted work (THE ARCHIVE-CENSUS LAW). The same run
+  // measured the sites spread across 182 source files.
+  // ⚠ RESIDUAL, DELIBERATELY DEFERRED — DOCUMENTED, NOT A BUG TO RE-FIND: this is
+  // a TOTAL, so a swap (one tooltip removed, one added) nets to zero and stays
+  // invisible. The stronger shape is the per-file inventory the estate uses
+  // elsewhere (a 182-row frozen census, exact identity both directions). It is a
+  // separate wave: it changes what this walker reads, and this lane's business is
+  // the census row, not the guard's grain.
+  const TITLE_BASELINE = 484;
 
   function countTitles() {
     let n = 0;

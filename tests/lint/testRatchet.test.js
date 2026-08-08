@@ -73,7 +73,15 @@ const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
 //     `git archive` of the committed parent before removal (layerBoundaries,
 //     domainGeneratorsBoundary ×2 — all three cleared by the layering inversion at
 //     67f8a58e — userRouteIdentityLeaf, mapOverlayTransformContract).
-const CEILING = 40;
+//
+// RATCHETED 40 → 35 on 2026-08-07 by the WALKER-CENSUS lane, which turned the ⛔ law
+// above from a sentence into the machinery in the last describe of this file. Five more
+// enforcement-walker rows left, each freed by re-freezing the walker's OWN shrink-only
+// inventory (guidanceRegistry title= 482 → 484; ruinFilterRoster's six undispositioned
+// readers; mechanismLitCoverage's 23 modules + 1 flag; sovereigntyLightingContract's
+// five census figures). NONE of them left because the underlying debt was repaired —
+// the debt is RELOCATED to where a NEW violation still reds, and inventoried by name.
+const CEILING = 35;
 
 describe('per-test suite ratchet — static pins', () => {
   test('every entry is keyed by its own `<file> :: <test>` identity (no hand-typed drift)', () => {
@@ -235,6 +243,258 @@ describe('per-test suite ratchet — static pins', () => {
       offenders,
       'these rows blame a TIMEOUT. Cut the test\'s cost or give it an explicit per-test timeout — do not bank it as debt.',
     ).toEqual([]);
+  });
+});
+
+// ── ⛔ THE WALKER-CENSUS LAW, MADE EXECUTABLE ────────────────────────────────
+//
+// THE LAW (CONTRIBUTING.md, "The gate"; restated in this file's header): a failing TEST
+// is debt; a failing WALKER is a DISABLED GUARD; an enforcement walker may never be put
+// in the test census. Until 2026-08-07 that law existed in TWO PLACES AND BOTH OF THEM
+// WERE COMMENTS THAT CHECKED NOTHING — and the commit that wrote it left TEN rows in
+// scripts/.test-ratchet-baseline.json that violate it. Prose is not enforcement; this
+// block is.
+//
+// ── HOW AN ENFORCEMENT WALKER IS IDENTIFIED, AND WHY NOT BY FILENAME ─────────────────
+// The obvious check is `.walker.` in the filename, and it is WRONG. Measured against the
+// ten rows: it misses BOTH rows of tests/property/mechanismLitCoverage.test.js, which is
+// an enforcement walker carrying no `.walker.` in its name. A guard that catches 8 of 10
+// and reports success is worse than no guard, because it converts an open problem into a
+// solved-looking one.
+//
+// So the identification is DERIVED, from three INDEPENDENT arms, and a file is an
+// enforcement walker if ANY of them fires:
+//
+//   A1 NAME     — the filename declares it (`*.walker.test.js`).
+//   A2 TITLE    — the module header's own title line declares it. A walker that is
+//                 RENAMED loses A1 and keeps this.
+//   A3 STRUCTURE— the file ENUMERATES A SOURCE TREE (readdirSync/globSync) *and*
+//                 compares the result against a FROZEN INVENTORY token (BASELINE,
+//                 CEILING, CENSUS, ALLOWLIST, EXEMPT, ROSTER, …). This arm needs no
+//                 declaration of any kind and is the one that catches
+//                 mechanismLitCoverage.
+//
+// NEITHER A1 NOR A3 ALONE IS SUFFICIENT, and the pin `no single arm classifies all ten`
+// below proves it by execution rather than by assertion in a comment: A1 misses
+// mechanismLitCoverage (no `.walker.` in the name), and A3 misses warCostKindPools and
+// warRulingKindPools (they read a registry through imports and never walk a tree). Each
+// arm covers the others' blind spot, which is why the union is used and why deleting any
+// one of them reds a pin here.
+//
+// ⚠ RESIDUAL, STATED AGAINST INTEREST: A1 and A2 are DECLARATIONS, so they fail OPEN — a
+// walker that is renamed AND whose header stops calling it a walker escapes both, and is
+// then caught only if A3 sees it. A3 is structural and cannot be talked out of, but it
+// only sees TREE-SCANNING walkers. A registry-reading walker that is renamed and
+// re-titled would escape all three. That is the known hole; it is narrow, it requires
+// two deliberate acts, and no cheaper total predicate was found.
+//
+// FALSE-POSITIVE RATE, MEASURED 2026-08-07 in an integrity-counted `git archive` of
+// af8815e9 (6,196 tracked paths in, 6,196 out): the union flags 135 of the estate's
+// 2,352 test files (5.7%) — 69 by A1, 85 by A2, 73 by A3. The figure is recorded for
+// scale only and is NOT asserted anywhere (it would rot on the next test file); what IS
+// asserted is the ORDINARY-TEST CONTROL below, which names real census files carrying
+// real, non-walker debt and requires the classifier to leave every one of them alone.
+describe('⛔ the walker-census law — an enforcement walker may not be frozen as debt', () => {
+  /** The header's TITLE LINE: the first non-empty line of the leading docblock. */
+  function headerTitleLine(src) {
+    const block = src.match(/^\s*\/\*\*?([\s\S]*?)\*\//);
+    if (!block) return '';
+    for (const raw of block[1].split('\n')) {
+      const line = raw.replace(/^\s*\*?\s?/, '').trim();
+      if (line) return line;
+    }
+    return '';
+  }
+
+  const TREE_SCAN = /readdirSync\s*\(|globSync\s*\(|\bfg\.sync\b/;
+  const FROZEN_INVENTORY = /\bBASELINE\b|\bCEILING\b|\bCENSUS\b|\bEXPECTED\b|\bFROZEN\b|\bALLOWLIST\b|\bEXEMPT\b|\bROSTER\b|\bINVENTORY\b|\bMANIFEST\b|-baseline\.json|shrink-only/;
+
+  /** @returns {{ name: boolean, title: boolean, structure: boolean }} the three arms. */
+  function walkerArmsOf(file) {
+    const src = readFileSync(join(ROOT, file), 'utf8');
+    return {
+      name: /\.walker\.test\.[cm]?jsx?$/.test(file),
+      title: /\bwalkers?\b/i.test(headerTitleLine(src)),
+      structure: TREE_SCAN.test(src) && FROZEN_INVENTORY.test(src),
+    };
+  }
+
+  const isEnforcementWalker = (file) => Object.values(walkerArmsOf(file)).some(Boolean);
+
+  const walkerRows = Object.entries(baseline.entries)
+    .filter(([, row]) => isEnforcementWalker(row.file))
+    .map(([id]) => id);
+
+  // ── THE TWO LEDGERS. Both are SHRINK-ONLY and audited by EXACT IDENTITY, and they
+  // mean DIFFERENT things. Confusing them is how a quarantine becomes a second census.
+  //
+  // ADMITTED — the row lives in a walker file but is NOT a disabled guard, because its
+  // assertion ranges over a CLOSED, per-member identity rather than an open tree-derived
+  // population. `test.each(REGISTRY)('$kind retains …')` mints ONE TEST PER KIND, so
+  // freezing three kinds leaves the guard fully live for every other kind and for every
+  // kind added later (a new kind mints a new identity, which is absent from the census
+  // and reds as a regression — the law pinned in "A FAILING TEST ABSENT FROM THE CENSUS
+  // IS A REGRESSION"). Measured at af8815e9: 6 of the 9 war-cost kinds PASS while these
+  // 3 fail. That is ordinary banked debt and it is allowed to stay.
+  const WALKER_ROWS_ADMITTED = Object.freeze({
+    "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_winning' retains the five receipt-annex families verbatim":
+      'PER-KIND IDENTITY, not an open population: test.each mints one test per kind, 6 of 9 war-cost kinds pass, and a NEW kind mints a NEW identity that reds. The corpus itself is chair-gated — tests/helpers/receiptAnnex.js records that the kinds DEEPENED past the fixed-five assumption (1e8bf8a8) stay red under D-W3 Class B, which needs a ruling (cap raised vs corpus trimmed), not a parser.',
+    "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'war_trajectory_losing' retains the five receipt-annex families verbatim":
+      'PER-KIND IDENTITY (see war_trajectory_winning). Annex deepened to 6 families against a wired 5; D-W3 Class B, chair-gated.',
+    "tests/lint/warCostKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-4 war costs 'trajectory_misread' retains the five receipt-annex families verbatim":
+      'PER-KIND IDENTITY (see war_trajectory_winning). Annex deepened to 10 families against a wired 5; D-W3 Class B, chair-gated.',
+    "tests/lint/warRulingKindPools.walker.test.js :: SP-6 phrased-kind registry — WR-5 war rulings 'succession_demand_inherited' retains the five annex families without editorial cross-references":
+      'PER-KIND IDENTITY (see war_trajectory_winning). Annex deepened to 6 families against a wired 5; D-W3 Class B, chair-gated.',
+  });
+
+  // OWED — CONFIRMED disabled guards this lane did not free. Each is ONE assertion over
+  // an OPEN, tree-derived population, so its failing verdict is byte-identical however
+  // many more violations land. They are named here so the debt is VISIBLE and CANNOT
+  // GROW: a NEW walker row in neither ledger reds. ⛔ This list is not permission — it is
+  // an outstanding bill, and the honest reading of it is "twelve guards are switched off
+  // and one is waiting on the owner".
+  const WALKER_ROWS_OWED = Object.freeze({
+    'tests/lib/spatialLedgerCoverage.walker.test.js :: spatialUsage ledger-coverage walker (lib-infra-copy-1) every written spatialLedgers key is TRACKED or EXEMPT (and no phantom classifications)':
+      'OWNER-HELD. The cure is two entries in src/lib/spatialUsage.js, a file an owner session holds UNCOMMITTED together with both writers; with those edits applied the walker PASSES in the live tree. Drop this row and the census row together when the owner commits.',
+    'tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) total debt never grows past its committed budget':
+      'NOT FREED — needs a re-freeze of the voice ratchet fixture at a measured sha (string-literal debt 1369 against a budget of 670, from Lane P-3 generated corpora). Own wave: the re-freeze is large and the corpora are machine-generated.',
+    'tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)':
+      'NOT FREED — the per-file arm of the same string-literal ratchet; same re-freeze, same wave.',
+    'tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) total JSX debt never grows past its committed budget':
+      'NOT FREED — the JSX arm of the same ratchet (18 against a budget of 6); same re-freeze, same wave.',
+    'tests/copy/voiceMechanics.test.js :: E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (shrink-only) per-file JSX debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)':
+      'NOT FREED — the per-file JSX arm of the same ratchet; same re-freeze, same wave.',
+    'tests/design/deepCraftKillList.test.js :: THE DEEP CRAFT kill-list ratchets (shrink-only; zero closes the wave) tintedCallouts: count <= 163 (grew = new SaaS structure; shrank = lower this ceiling)':
+      'NOT FREED — a one-line ceiling re-freeze (164 against 163), but the kill-list is a design wave whose ceilings are meant to be driven to zero; raising one is a design call, not a ratchet-repair call.',
+    'tests/docs/deployRunbookFreshness.test.js :: DEPLOY.md freshness — the runbook derives from the filesystem names the current migration head file':
+      'NOT FREED and OWNER-GATED: the cure is to name migration 195 as the head in docs/DEPLOY.md, and migrations/deploys are an owner-gated class a build lane may not touch.',
+    'tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target':
+      'NOT FREED — the cure is to give the R-BLD-10 chair-ruling row in docs/FABLE_VALIDATION_QUEUE.md a resolvable @enforced-by target, which is a chair ruling about that row, not a ratchet edit.',
+    'tests/domain/metronomeCooldownLint.test.js :: metronome-cooldown lint — condition-bearing outcome sources self-limit the non-cooldown emitter set may only SHRINK (no NEW condition-bearing source bypasses the metronome)':
+      'NOT FREED — razingExecution.js stamps a metronome-EXEMPT outcome source naming no cooldown mechanism. Re-freezing would bank a flood-class bypass; the right cure is to give it a mechanism, which is a worldPulse change outside this lane.',
+    'tests/joins/crisisTripleSync.test.js :: source scan — the trio is written only through the lifecycle the twin actions are referenced only by their definitions and the directive consumer':
+      'NOT FREED — the pin reads a source region its consumer has moved out of (the first-match/line-address rot class). The cure is to RE-POINT the pin at the live consumer, and a mis-pointed pin must not be re-frozen at its wrong address.',
+    'tests/joins/crisisTripleSync.test.js :: source scan — the trio is written only through the lifecycle the wiring is live, not vacuously empty':
+      'NOT FREED — the anti-vacuity arm of the same mis-pointed scan; it must be re-pointed with its sibling, never frozen.',
+    'tests/lint/clampPrimitiveBaseline.test.js :: clamp primitive baseline ratchet (code-quality-4) baseline exactly matches the files that still define a local clamp/clamp01':
+      'NOT FREED — 73 local clamp definitions against a baseline of 62. Re-freezing banks 11 forks of a shared primitive; the cure is to route them, which is its own sweep.',
+    'tests/lint/proseNumerics.test.js :: prose numerics live-tree ratchet (exact legacy identity, shrink-only) path + line + category + snippet debt exactly matches the committed baseline':
+      'NOT FREED — a 413-row LINE-ADDRESSED inventory that rots whenever any governed file shifts lines. A regeneration must review every removed row, which is a wave, not a step.',
+  });
+
+  const admittedIds = Object.keys(WALKER_ROWS_ADMITTED);
+  const owedIds = Object.keys(WALKER_ROWS_OWED);
+
+  // LITERALS, not figures read out of the objects they are supposed to cap — a ceiling
+  // derived from its own list proves list == list and rises silently with every entry.
+  // MONOTONE DOWN from here. You may burn them; you may never pad them.
+  const ADMITTED_CEILING = 4;
+  const OWED_CEILING = 13;
+
+  test('⛔ NO ENFORCEMENT-WALKER ROW SITS IN THE CENSUS UNLESS IT IS LEDGERED', () => {
+    // THE PIN THIS WHOLE BLOCK EXISTS FOR. Add a walker row to the census — any walker,
+    // by any of the three arms — and this reds until someone writes down which of the
+    // two ledgers it belongs in and why. That is the difference between a law and a
+    // sentence: the cost of violating it is paid at the gate, not at the next audit.
+    const ledgered = new Set([...admittedIds, ...owedIds]);
+    const offenders = walkerRows.filter((id) => !ledgered.has(id));
+    expect(
+      offenders,
+      'these census rows are ENFORCEMENT WALKERS. A failing walker is a DISABLED GUARD:\n'
+      + 'freeze its OWN shrink-only inventory instead, then delete the row. If the row is\n'
+      + 'genuinely ordinary debt (a per-member identity, so new members still red), add it\n'
+      + 'to WALKER_ROWS_ADMITTED with the reason. If it is a disabled guard you cannot fix\n'
+      + 'today, add it to WALKER_ROWS_OWED with the blocker — and raise no ceiling to do it.',
+    ).toEqual([]);
+  });
+
+  test('the classifier is not vacuous — it really does flag rows in this census', () => {
+    // Without this, the pin above passes trivially the moment the classifier breaks.
+    expect(
+      walkerRows.length,
+      'the walker classifier flagged NOTHING. Either every walker row is gone (delete this'
+      + ' block with the ledgers) or the classifier stopped working (far likelier).',
+    ).toBeGreaterThan(0);
+  });
+
+  test('⛔ NO SINGLE ARM CLASSIFIES ALL TEN — the filename check alone would miss two', () => {
+    // The chair's warning, executable. These two files are the counterexamples that
+    // force the union, and if either ever changes shape this reds and the next author
+    // has to re-derive the identification instead of trusting a comment.
+    const litCoverage = walkerArmsOf('tests/property/mechanismLitCoverage.test.js');
+    expect(litCoverage.name, 'mechanismLitCoverage is a walker with NO `.walker.` in its name').toBe(false);
+    expect(litCoverage.structure, 'the STRUCTURE arm is what catches it — if this is false the arm is broken').toBe(true);
+
+    const warCosts = walkerArmsOf('tests/lint/warCostKindPools.walker.test.js');
+    expect(warCosts.name, 'warCostKindPools is caught by NAME').toBe(true);
+    expect(warCosts.structure, 'warCostKindPools walks no tree — the STRUCTURE arm cannot see it').toBe(false);
+  });
+
+  test('every walker FREED by this lane still classifies (re-adding one would red)', () => {
+    // The five rows removed on 2026-08-07 are gone from the census, so the enforcing pin
+    // above says nothing about them. This is the standing proof that the law would
+    // REFUSE them on the way back in — the acceptance plant, kept rather than run once.
+    for (const file of [
+      'tests/domain/guidanceRegistry.walker.test.js',
+      'tests/lint/ruinFilterRoster.walker.test.js',
+      'tests/lint/sovereigntyLightingContract.walker.test.js',
+      'tests/property/mechanismLitCoverage.test.js',
+    ]) {
+      expect(isEnforcementWalker(file), `${file}: freed by this lane and no longer classified as a walker`).toBe(true);
+    }
+  });
+
+  test('⚠ THE ORDINARY-TEST CONTROL — the classifier leaves real non-walker debt alone', () => {
+    // The mirror of the pin above, and the reason the identification is three narrow arms
+    // rather than "it reads the filesystem". Every file named here carries REAL debt in
+    // this census — a thrown TypeError, a field-projection break, a stale built artifact,
+    // a durable-command race — and none of them is a guard. A classifier that swept them
+    // in would refuse legitimate debt and be deleted within a week.
+    for (const file of [
+      'tests/lib/accountContentPortability.test.js',
+      'tests/store/customContentSlice.race.test.js',
+      'tests/security/mapSnapshotImport.contract.test.js',
+      'tests/edgeFunctions/aiCharterBundle.freshness.test.js',
+      'tests/edgeFunctions/edgeSharedBundleReproducibility.test.js',
+      'tests/domain/roadsParticipation.test.js',
+      'tests/lint/domainAnyCastBaseline.test.js',
+    ]) {
+      const arms = walkerArmsOf(file);
+      expect(
+        Object.entries(arms).filter(([, hit]) => hit).map(([arm]) => arm),
+        `${file} is ordinary debt, not a guard — the classifier must not claim it`,
+      ).toEqual([]);
+    }
+  });
+
+  test('both ledgers are EXACT — no stale entry survives its census row', () => {
+    // A ledger row whose census row is gone is worse than noise: it silently lowers the
+    // effective ceiling below, so the next real walker row slips in under a cap that was
+    // being held up by a corpse.
+    const present = new Set(Object.keys(baseline.entries));
+    const stale = [...admittedIds, ...owedIds].filter((id) => !present.has(id));
+    expect(stale, 'ledgered ids that are no longer in the census — delete their rows here').toEqual([]);
+  });
+
+  test('the two ledgers are disjoint (a row is admitted OR owed, never both)', () => {
+    const both = admittedIds.filter((id) => id in WALKER_ROWS_OWED);
+    expect(both, 'a row cannot be legitimate debt AND a disabled guard at once').toEqual([]);
+  });
+
+  test('the ledger ceilings never rise (both are monotone-down)', () => {
+    expect(admittedIds.length).toBeLessThanOrEqual(ADMITTED_CEILING);
+    expect(owedIds.length).toBeLessThanOrEqual(OWED_CEILING);
+  });
+
+  test('⛔ every ledger entry carries a REAL reason (a stub launders the same defect)', () => {
+    // The attribution discipline the census itself enforces, applied to its escape
+    // hatches — otherwise the hatches become the cheapest way to bank a disabled guard.
+    for (const [id, reason] of Object.entries(WALKER_ROWS_ADMITTED)) {
+      expect(String(reason).length, `${id}: admitted with a stub, not an argument`).toBeGreaterThan(60);
+    }
+    for (const [id, blocker] of Object.entries(WALKER_ROWS_OWED)) {
+      expect(String(blocker).length, `${id}: owed with a stub — name the blocker`).toBeGreaterThan(60);
+    }
   });
 });
 

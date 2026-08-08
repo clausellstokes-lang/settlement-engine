@@ -32,7 +32,7 @@ failures, and it was red — so `build` and `verify:dist`, the two steps that gu
 against shipping a `dist` that cannot boot, had not run in the gate since 2026-08-02
 either. It is now `test:ratchet` (`scripts/check-test-ratchet.mjs`), which **runs the
 entire suite** — it never skips, excludes or suppresses a test — and compares the
-result against a frozen **per-test** census of 40 known failures, each carrying an
+result against a frozen **per-test** census of 35 known failures, each carrying an
 attribution (subsystem, cause, introducing commit, class). A failing test absent from
 the census is a REGRESSION and reds the gate; `--update` can only REMOVE entries and
 refuses to bank a failure it has not seen, so adding one is a deliberate hand edit.
@@ -47,6 +47,27 @@ their populations grew from 1,303 to 1,565 un-anchored negatives and from 13 to 
 seed loops. A walker's debt belongs in the walker's OWN shrink-only inventory, where a
 new violation still reds. If a walker is red and you cannot fix it, re-freeze its own
 baseline — do not bank its row here.
+
+**AND THAT LAW IS NOW MACHINERY, BECAUSE PROSE CHECKS NOTHING.** It was written on
+2026-08-07 in this file and in `tests/lint/testRatchet.test.js` — **as comments, in a
+commit that itself left TEN violating rows in the census**, across seven files. The last
+`describe` of `tests/lint/testRatchet.test.js` now enforces it: every census row is
+classified, and a row belonging to an enforcement walker reds unless it is written into
+one of two explicit, shrink-only, exact-identity ledgers with a stated reason. A walker
+is identified by the UNION of three independent arms — its **name** (`*.walker.test.js`),
+its module header's own **title line**, and the **structure** of what it does (it
+enumerates a source tree *and* compares the result against a frozen inventory). A
+filename check alone is not enough and the test proves it by execution: it misses
+`mechanismLitCoverage.test.js`, which is a walker with no `.walker.` in its name, while
+the structure arm misses `warCostKindPools.walker.test.js`, which walks no tree.
+
+The two ledgers mean different things and must not be confused. **ADMITTED** is for a row
+that merely LIVES in a walker file while asserting a CLOSED, per-member identity — a
+`test.each` row per registry kind, where a new kind mints a new test identity that still
+reds — which is ordinary debt. **OWED** is for a CONFIRMED disabled guard nobody has freed
+yet; it is an outstanding bill, not permission, and it exists so the debt is visible and
+cannot grow.
+
 A baselined test that turns up **skipped** reds too, and the suite-wide skip count is
 frozen: a skipped test is not debt, it is a hole. Use `npm run test` for the raw
 unfiltered reporter output when burning the census down.
