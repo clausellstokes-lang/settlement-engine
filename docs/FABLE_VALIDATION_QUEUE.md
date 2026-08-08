@@ -6733,3 +6733,27 @@ suite passes **33 / 33**. JSON parse, ESLint and `git diff --check` pass.
 than an identity ledger for all 27 statuses. It closes the measured one-way evasions but a
 coordinated equal-count status swap remains review-visible rather than mechanically
 identity-pinned. Fable should decide whether that residual warrants a later identity wave.
+
+---
+
+## S12-W2-DET5 — THE REAL PDF BYTE RENDER GETS CONTENTION HEADROOM (2026-08-08, Codex continuation)
+
+**⏳ NON-FABLE — FABLE SURVEY AND SIGN-OFF STILL OWED.** The metropolis case in
+`fullDocByteRender` previously exhausted its per-case **30,000 ms** limit at **30,013 ms**
+only inside the loaded full suite; focused runs remained healthy. The test still builds and
+renders the complete document, counts real PDF pages and asserts real bytes. Only its
+per-case limit moves to **60,000 ms**, with the measured contention incident beside the
+literal. No production code, fixture, assertion or rendered scope changes.
+
+**ACCEPTANCE EXECUTED.** The focused full-document + font-parity pair passes **2 files /
+7 tests**; metropolis renders in 4.402 s there. Five serial contention bundles, each pairing
+the full-document suite with five build/simulation/PGlite/join suites, pass **34 / 34** each
+(**170 / 170** total). Their metropolis times are 9.163 s, 8.388 s, 9.618 s, 9.261 s and
+9.660 s; the worst complete full-document file is 11.569 s. ESLint and `git diff --check`
+pass.
+
+**LIMIT, NOT SMOOTHED OVER.** This is five bounded contention reproductions, not five full
+suite runs. The new ceiling is about **2× the historical loaded failure**, while the local
+five-run worst has about **6.2×** headroom. J-S12-DET5-1 is that 60 seconds is a timeout
+stability repair rather than permission to erase the render; Fable should re-rule it when
+credits return, and a later five-run full-suite soak remains the strongest acceptance.
