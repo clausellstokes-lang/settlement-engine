@@ -120,13 +120,26 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { buildObservedCorpus } from '../../scripts/lib/observed-shape-corpus.mjs';
 import { scanReaders } from '../../scripts/lib/reader-shape-scan.mjs';
 import {
-  MIN_ROWS, BASELINE_SCHEMA, sourceFiles, inventoryOf, identityOf, rowOf,
+  MIN_ROWS, ORIGIN_MIN_ROWS, BASELINE_SCHEMA, sourceFiles, inventoryOf, identityOf, rowOf,
   compare, sentinelOf, sentinelFailures, ratchetMessage,
 } from '../../scripts/check-observed-shape-readers.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const baseline = JSON.parse(readFileSync(join(ROOT, 'scripts/.observed-shape-readers-baseline.json'), 'utf8'));
 const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
+const SITE_CONTEXT = '1'.repeat(64);
+const SITE_EXPRESSION = '2'.repeat(64);
+const exactSite = (key, ordinal = 0) => (
+  `v2|owner=function%3Atest|context=${SITE_CONTEXT}|expr=${SITE_EXPRESSION}`
+  + `|ordinal=${ordinal}|kind=dot|key=${encodeURIComponent(key)}`
+);
+const exactFinding = (file, line, key, shape, origin = `test/${shape}`, ordinal = 0) => ({
+  file, line, pos: line, site: exactSite(key, ordinal), key, shapes: [shape], origins: [origin],
+  text: `row.${key}`,
+});
+const exactIdentity = (key, shape, origin = `test/${shape}`, ordinal = 0) => (
+  `${key} on ${shape} @ ${origin} # ${exactSite(key, ordinal)}`
+);
 
 /** The producers run ONCE for the whole file. Every executed pin reads this. */
 let corpus = null;
@@ -166,11 +179,8 @@ function scanEstateWith(extraFiles = []) {
   scansRun += 1;
   return scanReaders({
     files: extraFiles.length ? [...estate, ...extraFiles] : estate,
-    shapes: corpus.shapes,
-    arrayShapes: corpus.arrayShapes,
-    singleHome: corpus.singleHome,
-    rootShapes: corpus.rootShapes,
-    minRows: MIN_ROWS,
+    graph: corpus.graph,
+    minRows: ORIGIN_MIN_ROWS,
     root: ROOT,
   });
 }
@@ -206,11 +216,13 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
     // Accepting `10` as a row would restore "any ten findings you like" — the
     // exact headroom the swap mutant exploited.
     expect(() => rowOf(10, 'src/x.js')).toThrow(/RETIRED count-only form/);
-    expect(rowOf({ 'id on factions': 2 }, 'src/x.js')).toEqual({ 'id on factions': 2 });
+    expect(rowOf({ 'id on factions @ test/factions': 2 }, 'src/x.js'))
+      .toEqual({ 'id on factions @ test/factions': 2 });
   });
 
   test('the frozen threshold and sha are recorded, and match the script', () => {
     expect(baseline.minRows).toBe(MIN_ROWS);
+    expect(baseline.originMinRows).toBe(ORIGIN_MIN_ROWS);
     expect(baseline.frozenAtSha).toMatch(/^[0-9a-f]{7,40}$/);
     expect(baseline.frozen).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     expect(baseline.sentinel.usableShapes).toBeGreaterThan(0);
@@ -220,22 +232,27 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
 
   test('the failure message names the rule, the fix, and the only legal shrink', () => {
     const msg = ratchetMessage('src/x.js', [
-      { identity: 'id on factions', count: 3, ceiling: 1 },
-      { identity: 'foundingTier on steadings', count: 1, ceiling: 0 },
+      { identity: exactIdentity('id', 'factions'), count: 3, ceiling: 1 },
+      { identity: exactIdentity('foundingTier', 'steadings'), count: 1, ceiling: 0 },
     ]);
     expect(msg).toContain('frozen ceiling is 1');
-    expect(msg).toContain('id on factions');
+    expect(msg).toContain(exactIdentity('id', 'factions'));
     // A NEW identity must be named as new, not as growth — the swap's tell.
-    expect(msg).toContain('NEW      foundingTier on steadings');
+    expect(msg).toContain(`NEW      ${exactIdentity('foundingTier', 'steadings')}`);
     expect(msg).toContain('TO COMPLY');
     expect(msg).toContain('LOWER this file');
     expect(msg).toContain('Never raise a number');
   });
 
-  test('identityOf is the key and the shape, and NEVER the line number', () => {
-    expect(identityOf({ file: 'a.js', line: 7, key: 'id', shapes: ['factions'] })).toBe('id on factions');
-    expect(identityOf({ file: 'a.js', line: 9, key: 'id', shapes: ['factions'] })).toBe('id on factions');
-    expect(identityOf({ file: 'a.js', line: 1, key: 'x', shapes: ['b', 'a'] })).toBe('x on b|a');
+  test('identityOf is the key, exact executed origin, and NEVER the line number', () => {
+    expect(identityOf(exactFinding('a.js', 7, 'id', 'factions')))
+      .toBe(exactIdentity('id', 'factions'));
+    expect(identityOf(exactFinding('a.js', 9, 'id', 'factions')))
+      .toBe(exactIdentity('id', 'factions'));
+    expect(identityOf({
+      file: 'a.js', line: 1, pos: 1, site: exactSite('x'), key: 'x', text: 'row.x',
+      shapes: ['b'], origins: ['root/b'],
+    })).toBe(exactIdentity('x', 'b', 'root/b'));
   });
 
   test('the report/refreeze entry point is reachable as a named script', () => {
@@ -436,23 +453,25 @@ describe('reader-with-no-writer ratchet: the MUTANTS', () => {
   test('RATCHET FAILURE PATHS: growth, a vanished row, and a collapsed corpus each red', () => {
     const RP = 'src/domain/rulingPower.js';
     const findings = [
-      { file: RP, line: 1, key: 'id', shapes: ['factions'] },
-      { file: RP, line: 2, key: 'id', shapes: ['factions'] },
+      exactFinding(RP, 1, 'id', 'factions'),
+      exactFinding(RP, 2, 'id', 'factions', 'test/factions', 1),
     ];
-    // (a) over the ceiling
-    expect(compare(findings, { inventory: { [RP]: { 'id on factions': 1 } } }).violations).toHaveLength(1);
-    // (b) exactly at the ceiling — the control that keeps (a) honest
-    expect(compare(findings, { inventory: { [RP]: { 'id on factions': 2 } } }).violations).toEqual([]);
+    const exactInventory = inventoryOf(findings);
+    // (a) one exact site absent from the frozen inventory
+    expect(compare(findings, { inventory: { [RP]: { [exactIdentity('id', 'factions')]: 1 } } }).violations)
+      .toHaveLength(1);
+    // (b) exact site inventory — the control that keeps (a) honest
+    expect(compare(findings, { inventory: exactInventory }).violations).toEqual([]);
     // (c) an UNBASELINED file has ceiling ZERO — the law for all new work
-    expect(compare([{ file: 'src/brand/new.js', line: 1, key: 'k', shapes: ['settlement'] }], { inventory: {} }).violations)
+    expect(compare([exactFinding('src/brand/new.js', 1, 'k', 'settlement')], { inventory: {} }).violations)
       .toHaveLength(1);
     // (d) a row whose file is gone is fatal, not merely bankable
-    expect(compare([], { inventory: { 'src/does/not/exist.js': { 'k on s': 3 } } }).stale).toHaveLength(1);
-    // (e) a shrink is BANKABLE, never a failure — a sibling lane's landed fix
-    //     must not red this gate.
-    const shrunk = compare([], { inventory: { [RP]: { 'id on factions': 5 } } });
+    expect(compare([], { inventory: { 'src/does/not/exist.js': { [exactIdentity('k', 's')]: 1 } } }).stale)
+      .toHaveLength(1);
+    // (e) an unbanked shrink is stale: exact schema-3 inventory has no headroom.
+    const shrunk = compare([findings[0]], { inventory: exactInventory });
     expect(shrunk.violations).toEqual([]);
-    expect(shrunk.bankable).toHaveLength(1);
+    expect(shrunk.stale).toHaveLength(1);
     // (f) a collapsed corpus is refused
     expect(sentinelFailures({ usableShapes: 1, totalKeys: 1, resolvedReads: 1 }, baseline.sentinel).length)
       .toBeGreaterThanOrEqual(3);
@@ -461,23 +480,23 @@ describe('reader-with-no-writer ratchet: the MUTANTS', () => {
 
   test('⚠⚠ THE SWAP MUTANT: a NEW identity at CONSTANT COUNT reds (the defect form one let land)', () => {
     const RP = 'src/domain/rulingPower.js';
-    const frozen = { inventory: { [RP]: { 'id on factions': 2 } } };
     const held = [
-      { file: RP, line: 1, key: 'id', shapes: ['factions'] },
-      { file: RP, line: 2, key: 'id', shapes: ['factions'] },
+      exactFinding(RP, 1, 'id', 'factions'),
+      exactFinding(RP, 2, 'id', 'factions', 'test/factions', 1),
     ];
+    const frozen = { inventory: inventoryOf(held) };
     // CONTROL — same identities, same count: green.
     expect(compare(held, frozen).violations).toEqual([]);
     // MUTANT — one finding REMOVED, a different one ADDED. The file's total is
     // identical, so the retired count-only ratchet was green here.
-    const swapped = [held[0], { file: RP, line: 2, key: 'foundingTier', shapes: ['steadings'] }];
+    const swapped = [held[0], exactFinding(RP, 2, 'foundingTier', 'steadings')];
     expect(swapped.length, 'the mutant must hold the count constant or it proves nothing').toBe(held.length);
     const out = compare(swapped, frozen);
     expect(out.violations).toHaveLength(1);
-    expect(out.violations[0]).toContain('foundingTier on steadings');
+    expect(out.violations[0]).toContain('foundingTier on steadings @ test/steadings');
     expect(out.violations[0]).toContain('ceiling 0');
-    // and the departed one is offered as a shrink, not swallowed silently
-    expect(out.bankable.join('\n')).toContain('id on factions');
+    // and the departed site is stale, not swallowed silently
+    expect(out.stale.join('\n')).toContain(exactIdentity('id', 'factions', 'test/factions', 1));
   });
 
   test('⚠⚠ THE SWAP MUTANT, LIVE: rulingPower.js swapped at constant count against the REAL baseline', () => {
@@ -490,19 +509,29 @@ describe('reader-with-no-writer ratchet: the MUTANTS', () => {
     // the tree as it stands is green
     expect(compare(live.findings, baseline).violations).toEqual([]);
     // drop one real finding, add one that no writer produces: SAME COUNT
-    const swapped = [...rows.slice(1), { file: RP, line: 1, key: '__swappedInNoWriterKey', shapes: ['settlement'] }];
+    const swapped = [
+      ...rows.slice(1),
+      exactFinding(RP, 1, '__swappedInNoWriterKey', 'settlement', 'settlement'),
+    ];
     expect(swapped.length).toBe(rows.length);
     const out = compare([...others, ...swapped], baseline);
     expect(out.violations, 'a constant-count identity swap MUST red — this is the whole cure').toHaveLength(1);
-    expect(out.violations[0]).toContain('__swappedInNoWriterKey on settlement');
+    expect(out.violations[0]).toContain('__swappedInNoWriterKey on settlement @ settlement');
   });
 
   test('inventoryOf counts per file AND per identity', () => {
     expect(inventoryOf([
-      { file: 'b.js', line: 1, key: 'x', shapes: ['s'] },
-      { file: 'a.js', line: 1, key: 'x', shapes: ['s'] },
-      { file: 'b.js', line: 2, key: 'y', shapes: ['s'] },
-      { file: 'b.js', line: 3, key: 'x', shapes: ['s'] },
-    ])).toEqual({ 'a.js': { 'x on s': 1 }, 'b.js': { 'x on s': 2, 'y on s': 1 } });
+      exactFinding('b.js', 1, 'x', 's'),
+      exactFinding('a.js', 1, 'x', 's'),
+      exactFinding('b.js', 2, 'y', 's'),
+      exactFinding('b.js', 3, 'x', 's', 'test/s', 1),
+    ])).toEqual({
+      'a.js': { [exactIdentity('x', 's')]: 1 },
+      'b.js': {
+        [exactIdentity('x', 's')]: 1,
+        [exactIdentity('x', 's', 'test/s', 1)]: 1,
+        [exactIdentity('y', 's')]: 1,
+      },
+    });
   });
 });

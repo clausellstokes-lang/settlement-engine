@@ -33,25 +33,23 @@
  *      is the record the engine writes. Only the ORDER is authored here; every
  *      key on the resulting record comes from the shipped writer.
  *
- * ── SHAPE IDENTITY, AND WHY DICTIONARIES ARE TRANSPARENT ────────────────────
- * A shape is named by the CONTAINER KEY the object was found under (array
- * indices collapse: `powerStructure.factions[]` rows are shape `factions`).
- * Id-keyed maps would poison that: `spatialLedgers.satellites` is
- * `{ [parentId]: ParentSatellites }`, so naively the shape called `satellites`
- * would have the parent ids as its "keys" and every real read of it would look
- * like a finding.
+ * ── SHAPE IDENTITY, AND WHY DYNAMIC VALUES ARE A FACET ─────────────────
+ * A record is identified by its full EXECUTED ORIGIN, not by its last container
+ * name. Path segments are typed and URI-escaped: a literal key `items[]` cannot
+ * collide with an array element, and a key containing a separator cannot merge
+ * two unrelated records.
  *
- * Dictionaries are therefore detected STRUCTURALLY and made TRANSPARENT — their
- * values inherit the dictionary's own name, and their id keys never enter the
- * corpus. The detector is derived, not a list: a path is a dictionary when it
- * has 2+ children, every child is a plain object, and the children's key sets
- * agree (mean pairwise Jaccard ≥ 0.6). `satellites` and `steadings` both
- * classify; `powerStructure` (factions[] / conflicts[] / publicLegitimacy{})
- * does not, because its children disagree.
- *   ACCEPTED COST, recorded rather than hidden: a genuine RECORD whose every
- *   field holds a same-shaped object would misclassify as a dictionary and lose
- *   its own key set. Nothing in the measured corpus does, and the failure is in
- *   the quiet direction (a shape drops out; no false finding is minted).
+ * JavaScript dictionaries are still ordinary objects. Choosing "dictionary OR
+ * record" destroyed information: a fixed `{left:{...}, right:{...}}` could be
+ * misclassified and lose `left`/`right`, while a conservative classifier left
+ * thousands of runtime ids embedded in schema paths. Every parent therefore
+ * remains a RECORD with its observed keys and may independently expose a
+ * `dynamicValues` optimization facet. Named reads follow `fields`. A computed
+ * read may use that facet after its key domain proves the dynamic subset; an
+ * unconstrained read must also retain every traversable named field because the
+ * facet is not the record's complete `Object.values` domain. The legacy
+ * leaf-name view remains dictionary-transparent only for compatibility; the
+ * reader resolver consumes the path-qualified graph.
  */
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
@@ -87,32 +85,137 @@ export function discoverSimulationFlags(readFileSync, globFiles) {
 
 // ── The walk ────────────────────────────────────────────────────────────────
 
-/** Path segments join on `|>` — a pair no observed key contains, where a bare `.`
- *  would be split apart by the ids the engine mints (`steading.osr000.99`). */
-const SEP = '|>';
+const PATH_SEPARATOR = '/';
+const ROOT_SEGMENT = 'root:';
+const FIELD_SEGMENT = 'field:';
+const ARRAY_ELEMENT_SEGMENT = 'element';
+const DYNAMIC_VALUE_SEGMENT = 'dynamic';
+const MAX_WALK_DEPTH = 64;
 
-/** @typedef {{ instances: number, keys: Map<string, number>, children: Set<string> }} PathNode */
+const encodePathValue = (value) => encodeURIComponent(String(value));
+const decodePathValue = (value) => decodeURIComponent(value);
+const rootPathOf = (name) => `${ROOT_SEGMENT}${encodePathValue(name)}`;
+const fieldPathOf = (path, key) => `${path}${PATH_SEPARATOR}${FIELD_SEGMENT}${encodePathValue(key)}`;
+const elementPathOf = (path) => `${path}${PATH_SEPARATOR}${ARRAY_ELEMENT_SEGMENT}`;
+const dynamicPathOf = (path) => `${path}${PATH_SEPARATOR}${DYNAMIC_VALUE_SEGMENT}`;
 
-/** Collect per-PATH key sets against a known dictionary set. Array indices
- *  collapse to `[]`; every child of a KNOWN dictionary collapses to `*`. */
-function collectPaths(path, value, paths, dicts, seen, depth = 0) {
-  if (value == null || depth > 16) return;
-  if (Array.isArray(value)) {
-    for (const el of value) collectPaths(`${path}[]`, el, paths, dicts, seen, depth + 1);
-    return;
-  }
-  if (typeof value !== 'object') return;
-  if (value instanceof Map || value instanceof Set || value instanceof Date) return;
-  if (seen.has(value)) return;
-  seen.add(value);
+/** @typedef {{
+ *   recordInstances: number,
+ *   arrayInstances: number,
+ *   recordObservations: Set<number>,
+ *   arrayObservations: Set<number>,
+ *   keys: Map<string, number>,
+ *   fieldKinds: Map<string, Set<'array'|'object'|'scalar'>>,
+ *   fieldOccurrences: Map<string, number>,
+ *   fieldIdMatches: Map<string, number>,
+ *   instanceKeySets: Set<string>[],
+ *   elementKinds: Set<'array'|'object'|'scalar'>,
+ * }} PathNode */
+
+function pathNode(paths, path) {
   let node = paths.get(path);
-  if (!node) { node = { instances: 0, keys: new Map(), children: new Set() }; paths.set(path, node); }
-  node.instances += 1;
-  const collapsed = dicts.has(path);
-  for (const [k, v] of Object.entries(value)) {
-    node.keys.set(k, (node.keys.get(k) || 0) + 1);
-    node.children.add(k);
-    collectPaths(`${path}${SEP}${collapsed ? '*' : k}`, v, paths, dicts, seen, depth + 1);
+  if (!node) {
+    node = {
+      recordInstances: 0,
+      arrayInstances: 0,
+      recordObservations: new Set(),
+      arrayObservations: new Set(),
+      keys: new Map(),
+      fieldKinds: new Map(),
+      fieldOccurrences: new Map(),
+      fieldIdMatches: new Map(),
+      instanceKeySets: [],
+      elementKinds: new Set(),
+    };
+    paths.set(path, node);
+  }
+  return node;
+}
+
+/** Runtime value kind retained for the provenance graph. `null`, Date, Map and
+ * Set are scalar from the JSON-record walker's point of view: none exposes a
+ * producer-owned record shape that a normal property reader may safely follow. */
+function observedFieldKind(value) {
+  if (Array.isArray(value)) return 'array';
+  if (value && typeof value === 'object'
+    && !(value instanceof Map) && !(value instanceof Set) && !(value instanceof Date)) return 'object';
+  return 'scalar';
+}
+
+/** Collect typed locations. A selected dynamic key is routed to the wildcard
+ * value location while its spelling remains on the parent record. The ancestor
+ * guard applies to arrays as well as objects, so cycles stop by identity rather
+ * than by a silent depth cut. */
+function collectPaths(path, value, observation, paths, dynamicPlans, ancestors, stats, depth = 0) {
+  if (value == null) return;
+  const kind = observedFieldKind(value);
+  if (kind === 'scalar') return;
+  if (depth > MAX_WALK_DEPTH) {
+    throw new Error(`observed-shape corpus exceeded depth ${MAX_WALK_DEPTH} at ${path}; refusing a truncated graph`);
+  }
+  stats.maxDepth = Math.max(stats.maxDepth, depth);
+  if (ancestors.has(value)) {
+    stats.cycleCuts += 1;
+    throw new Error(`observed-shape corpus encountered an ancestor cycle at ${path}; refusing a cycle-truncated provenance graph`);
+  }
+  ancestors.add(value);
+  try {
+    const node = pathNode(paths, path);
+    if (kind === 'array') {
+      node.arrayInstances += 1;
+      node.arrayObservations.add(observation);
+      const childPath = elementPathOf(path);
+      for (const element of value) {
+        const elementKind = observedFieldKind(element);
+        node.elementKinds.add(elementKind);
+        collectPaths(childPath, element, observation, paths, dynamicPlans, ancestors, stats, depth + 1);
+      }
+      return;
+    }
+
+    node.recordInstances += 1;
+    node.recordObservations.add(observation);
+    const entries = Object.entries(value);
+    node.instanceKeySets.push(new Set(entries.map(([key]) => key)));
+    const collapsed = dynamicPlans.get(path)?.collapsed || new Set();
+    for (const [key, child] of entries) {
+      const childKind = observedFieldKind(child);
+      node.keys.set(key, (node.keys.get(key) || 0) + 1);
+      node.fieldOccurrences.set(key, (node.fieldOccurrences.get(key) || 0) + 1);
+      if (!node.fieldKinds.has(key)) node.fieldKinds.set(key, new Set());
+      node.fieldKinds.get(key).add(childKind);
+      if (childKind === 'object' && String(child.id ?? '') === key) {
+        node.fieldIdMatches.set(key, (node.fieldIdMatches.get(key) || 0) + 1);
+      }
+      // Named-property provenance is never collapsed: `left` and `right` may
+      // carry different shapes even when both also participate in a computed-id
+      // facet. The wildcard is a second observation of the value, used only by
+      // computed/Object.values traversal.
+      collectPaths(
+        fieldPathOf(path, key),
+        child,
+        observation,
+        paths,
+        dynamicPlans,
+        ancestors,
+        stats,
+        depth + 1,
+      );
+      if (collapsed.has(key)) {
+        collectPaths(
+          dynamicPathOf(path),
+          child,
+          observation,
+          paths,
+          dynamicPlans,
+          ancestors,
+          stats,
+          depth + 1,
+        );
+      }
+    }
+  } finally {
+    ancestors.delete(value);
   }
 }
 
@@ -135,75 +238,170 @@ function meanJaccard(sets) {
   return pairs ? total / pairs : 1;
 }
 
-/** Structural dictionary detection (see the header for the accepted cost).
- *  MONOTONE: a path once classed a dictionary stays one, so the fixed point below
- *  terminates. */
-function dictionaryPaths(paths, known) {
-  const dicts = new Set(known);
+/** Add computed-value optimization facets without deleting record identity. Exact child-id
+ * matches are selected per key, so an impure `{id1: entity, summary: record}`
+ * container never lends summary-only keys to entity values. With no such strong
+ * subset proof, homogeneous object/array fields and churned traversable fields
+ * are useful dynamic-map candidates. This facet is deliberately not a claim
+ * that other named fields cannot be returned by unconstrained `record[k]` or
+ * `Object.values(record)`; the reader must retain those alternatives too. */
+function discoverDynamicPlans(paths, known) {
+  const next = new Map([...known].map(([path, plan]) => [path, {
+    collapsed: new Set(plan.collapsed),
+    union: new Set(plan.union),
+  }]));
   for (const [path, node] of paths) {
-    if (dicts.has(path)) continue;
-    const kids = [...node.children];
-    if (kids.length < 2) continue;
-    const childNodes = kids.map((k) => paths.get(`${path}${SEP}${k}`)).filter(Boolean);
-    if (childNodes.length !== kids.length) continue;       // a primitive child ⇒ a record
-    if (childNodes.some((c) => c.keys.size < 2)) continue;  // thin children ⇒ not a record map
-    if (meanJaccard(childNodes.map((c) => new Set(c.keys.keys()))) < 0.6) continue;
-    dicts.add(path);
+    if (!node.recordInstances || node.keys.size === 0) continue;
+    if (!next.has(path)) next.set(path, { collapsed: new Set(), union: new Set() });
+    const plan = next.get(path);
+    const collapse = (keys) => {
+      for (const key of keys) {
+        plan.union.delete(key);
+        plan.collapsed.add(key);
+      }
+    };
+    const summarize = (keys) => {
+      for (const key of keys) if (!plan.collapsed.has(key)) plan.union.add(key);
+    };
+    const exactIdKeys = [...node.keys.keys()].filter((key) => {
+      const matches = node.fieldIdMatches.get(key) || 0;
+      const occurrences = node.fieldOccurrences.get(key) || 0;
+      return matches > 0 && matches === occurrences;
+    });
+    if (exactIdKeys.length) {
+      collapse(exactIdKeys);
+      continue;
+    }
+
+    const keys = [...node.keys.keys()];
+    const allObject = keys.length >= 2 && keys.every((key) => (
+      node.fieldKinds.get(key)?.size === 1 && node.fieldKinds.get(key).has('object')
+    ));
+    if (allObject) {
+      const childNodes = keys.map((key) => paths.get(fieldPathOf(path, key))).filter(Boolean);
+      if (childNodes.length === keys.length) {
+        const similar = meanJaccard(childNodes.map((child) => new Set(child.keys.keys()))) >= 0.6;
+        if (!similar) continue;
+        // A small fixed record gets a non-destructive union of its exact child
+        // origins. High-cardinality homogeneous keys are runtime data and are
+        // summarized to one wildcard to keep ids out of schema paths.
+        if (keys.length >= 8) collapse(keys);
+        else summarize(keys);
+        continue;
+      }
+    }
+
+    const allArray = keys.length >= 2 && keys.every((key) => (
+      node.fieldKinds.get(key)?.size === 1 && node.fieldKinds.get(key).has('array')
+    ));
+    if (allArray) {
+      if (keys.length >= 8) collapse(keys);
+      else summarize(keys);
+      continue;
+    }
+
+    const sets = node.instanceKeySets;
+    if (sets.length < 2) continue;
+    const frequencies = new Map();
+    for (const set of sets) for (const key of set) frequencies.set(key, (frequencies.get(key) || 0) + 1);
+    const churned = keys.filter((key) => {
+      const kinds = node.fieldKinds.get(key) || new Set();
+      return (frequencies.get(key) || 0) / sets.length < 0.8
+        && kinds.size === 1 && (kinds.has('object') || kinds.has('array'));
+    });
+    if (churned.length >= 2) collapse(churned);
   }
-  return dicts;
+  for (const [path, plan] of [...next]) {
+    if (!plan.collapsed.size && !plan.union.size) next.delete(path);
+  }
+  return next;
 }
 
-/** Resolve the SHAPE NAME of a path: the last real container segment. A `*`
- *  segment is a collapsed dictionary level, so the values inherit the
- *  dictionary's own name. */
+/** Resolve the human label of a typed path. Container markers deliberately do
+ * not change it, so `factions/element` and `steadings/dynamic` retain the label
+ * a report reader recognizes while their origin ids remain disjoint. */
 export function shapeNameOf(path) {
   let name = '';
-  for (const seg of path.split(SEP)) {
-    if (seg === '*' || seg === '[]') continue;
-    name = seg.replace(/\[\]$/, '');
+  for (const segment of path.split(PATH_SEPARATOR)) {
+    if (segment.startsWith(ROOT_SEGMENT)) name = decodePathValue(segment.slice(ROOT_SEGMENT.length));
+    else if (segment.startsWith(FIELD_SEGMENT)) name = decodePathValue(segment.slice(FIELD_SEGMENT.length));
   }
   return name;
+}
+
+function sameDynamicPlans(a, b) {
+  if (a.size !== b.size) return false;
+  for (const [path, plan] of a) {
+    const other = b.get(path);
+    if (!other) return false;
+    for (const part of ['collapsed', 'union']) {
+      if (plan[part].size !== other[part].size) return false;
+      for (const key of plan[part]) if (!other[part].has(key)) return false;
+    }
+  }
+  return true;
+}
+
+function parentPathOf(path) {
+  const cut = path.lastIndexOf(PATH_SEPARATOR);
+  return cut < 0 ? '' : path.slice(0, cut);
+}
+
+function descriptorEdges(descriptors) {
+  let count = 0;
+  for (const descriptor of descriptors) {
+    if (descriptor.kind === 'record') count += descriptor.origins.length;
+    else if (descriptor.kind === 'array') count += descriptor.arrays.length;
+  }
+  return count;
 }
 
 /**
  * Fold a set of walked roots into `{ shapeName -> { rows, keys[] } }`.
  *
- * The walk runs to a FIXED POINT because dictionaries nest: the satellites
- * ledger is `satellites[parentId].steadings[satId]`, and until the OUTER map is
- * known to be a dictionary the inner one is scattered across one path per parent
- * — each with a single child, which no structural test can recognise as a map.
- * One pass finds `satellites`, the next finds `steadings` underneath it.
+ * The walk runs to a FIXED POINT because dynamic containers nest: the satellites
+ * ledger is `satellites[parentId].steadings[satId]`. The first pass discovers a
+ * computed-value facet for `satellites`; only the summarized second pass can see
+ * all `steadings` values at one typed location and discover its facet in turn.
  * @param {Array<{ name: string, value: unknown }>} roots
  */
 export function foldCorpus(roots) {
-  let dicts = new Set();
+  let dynamicPlans = new Map();
   let paths = new Map();
-  for (let iter = 0; iter < 8; iter += 1) {
+  let walkStats = { maxDepth: 0, cycleCuts: 0 };
+  // Monotone fixed point, with no silent iteration ceiling. A dynamic-value
+  // summary can reveal another dynamic container underneath it; rebuild until
+  // no location gains a selected key.
+  for (;;) {
     paths = new Map();
-    for (const { name, value } of roots) collectPaths(name, value, paths, dicts, new WeakSet());
-    const next = dictionaryPaths(paths, dicts);
-    if (next.size === dicts.size) break;
-    dicts = next;
+    walkStats = { maxDepth: 0, cycleCuts: 0 };
+    roots.forEach(({ name, value }, observation) => {
+      collectPaths(rootPathOf(name), value, observation, paths, dynamicPlans, new WeakSet(), walkStats);
+    });
+    const next = discoverDynamicPlans(paths, dynamicPlans);
+    if (sameDynamicPlans(next, dynamicPlans)) break;
+    dynamicPlans = next;
   }
+  // Monotone discovery retains pre-summary locations that no longer exist in
+  // the final walk. Only live record locations are graph facets or telemetry.
+  const liveDynamic = new Map([...dynamicPlans].filter(([path]) => paths.has(path)));
   /** @type {Map<string, { rows: number, keys: Set<string> }>} */
   const shapes = new Map();
   /** Names whose container was observed holding an ARRAY. The reader scan needs
    *  this: without it every `factions.map(...)` reads as a key no writer wrote. */
   const arrayShapes = new Set();
-  /** Name → the set of PARENT shapes it was observed under. A name with exactly
-   *  ONE home is the only kind the reader scan will bind an UNGROUNDED receiver
-   *  to: `steadings` lives in one place, so `entry.steadings` is unambiguous,
-   *  while `entries`, `plan`, `status` and `result` live everywhere and binding
-   *  them by name alone mints thousands of false findings (measured, 2026-08-07:
-   *  14,027 against 305 shapes before this rule). */
+  /** Legacy compatibility metadata only. The schema-2 reader must never use a
+   * leaf-name home as provenance; exact graph transitions replaced that prior. */
   /** @type {Map<string, Set<string>>} */
   const homes = new Map();
   for (const [path, node] of paths) {
-    if (dicts.has(path)) continue;                          // an id-keyed map is not a shape
+    if (!node.recordInstances) continue;
+    const plan = liveDynamic.get(path);
+    if (plan?.collapsed.size === node.keys.size) continue; // compatibility view remains map-transparent
     const name = shapeNameOf(path);
     if (!name) continue;
-    if (path.endsWith('[]')) arrayShapes.add(name);
-    const parentPath = path.split(SEP).slice(0, -1).join(SEP);
+    if (path.endsWith(`${PATH_SEPARATOR}${ARRAY_ELEMENT_SEGMENT}`)) arrayShapes.add(name);
+    const parentPath = parentPathOf(path);
     const parent = parentPath ? shapeNameOf(parentPath) : '';
     if (parent && parent !== name) {
       if (!homes.has(name)) homes.set(name, new Set());
@@ -211,7 +409,7 @@ export function foldCorpus(roots) {
     }
     let e = shapes.get(name);
     if (!e) { e = { rows: 0, keys: new Set() }; shapes.set(name, e); }
-    e.rows += node.instances;
+    e.rows += node.recordInstances;
     for (const k of node.keys.keys()) e.keys.add(k);
   }
   /** @type {Record<string, { rows: number, keys: string[] }>} */
@@ -220,7 +418,152 @@ export function foldCorpus(roots) {
     out[name] = { rows: e.rows, keys: [...e.keys].sort() };
   }
   const singleHome = [...homes].filter(([, v]) => v.size === 1).map(([k]) => k).sort();
-  return { shapes: out, arrayShapes: [...arrayShapes].sort(), singleHome };
+
+  // Schema-v2 provenance graph. The legacy aggregate above remains as a
+  // reporting/compatibility view for the executed-corpus assertions, but the
+  // reader resolver must use these path-qualified origins. Two unrelated
+  // records called `edges`, `members`, `plan`, or `raw` therefore never pool
+  // their keys or lend one another child transitions.
+  /** @type {Record<string, {
+   *   id:string, path:string, label:string, rows:number, instances:number,
+   *   keys:string[], requiredKeys:string[],
+   *   fields:Record<string, Array<
+   *     {kind:'scalar'} | {kind:'record', origins:string[]} | {kind:'array', arrays:string[]}
+   *   >>,
+   *   dynamicValues:Array<
+   *     {kind:'record', origins:string[]} | {kind:'array', arrays:string[]}
+   *   >,
+   * }>} */
+  const origins = {};
+  /** @type {Record<string, {
+   *   id:string, path:string, label:string, rows:number, instances:number,
+   *   elements:Array<{kind:'scalar'} | {kind:'record', origins:string[]} | {kind:'array', arrays:string[]}>,
+   * }>} */
+  const arrays = {};
+  let transitions = 0;
+
+  const descriptorsAt = (path, kinds) => {
+    const target = paths.get(path);
+    const descriptors = [];
+    if (kinds.has('scalar')) descriptors.push({ kind: 'scalar' });
+    if (kinds.has('object') && target?.recordInstances) {
+      descriptors.push({ kind: 'record', origins: [path] });
+    }
+    if (kinds.has('array') && target?.arrayInstances) {
+      descriptors.push({ kind: 'array', arrays: [path] });
+    }
+    return descriptors;
+  };
+
+  const mergeDescriptors = (groups) => {
+    const records = new Set();
+    const arrayNodes = new Set();
+    let scalar = false;
+    for (const descriptors of groups) {
+      for (const descriptor of descriptors) {
+        if (descriptor.kind === 'scalar') scalar = true;
+        else if (descriptor.kind === 'record') {
+          for (const origin of descriptor.origins) records.add(origin);
+        } else if (descriptor.kind === 'array') {
+          for (const array of descriptor.arrays) arrayNodes.add(array);
+        }
+      }
+    }
+    const out = [];
+    if (scalar) out.push({ kind: 'scalar' });
+    if (records.size) out.push({ kind: 'record', origins: [...records].sort() });
+    if (arrayNodes.size) out.push({ kind: 'array', arrays: [...arrayNodes].sort() });
+    return out;
+  };
+
+  for (const [path, node] of [...paths].sort(([a], [b]) => a.localeCompare(b))) {
+    if (node.recordInstances) {
+      const fields = {};
+      const plan = liveDynamic.get(path) || { collapsed: new Set(), union: new Set() };
+      for (const key of [...node.keys.keys()].sort()) {
+        const descriptors = descriptorsAt(
+          fieldPathOf(path, key),
+          node.fieldKinds.get(key) || new Set(),
+        );
+        if (descriptors.length) {
+          fields[key] = descriptors;
+          transitions += descriptorEdges(descriptors);
+        }
+      }
+      const collapsedKinds = new Set();
+      for (const key of plan.collapsed) {
+        for (const kind of node.fieldKinds.get(key) || []) collapsedKinds.add(kind);
+      }
+      const dynamicGroups = [];
+      if (plan.collapsed.size) dynamicGroups.push(descriptorsAt(dynamicPathOf(path), collapsedKinds));
+      for (const key of plan.union) {
+        dynamicGroups.push(descriptorsAt(fieldPathOf(path, key), node.fieldKinds.get(key) || new Set()));
+      }
+      const dynamicValues = mergeDescriptors(dynamicGroups);
+      transitions += descriptorEdges(dynamicValues);
+      origins[path] = {
+        id: path,
+        path,
+        label: shapeNameOf(path),
+        rows: node.recordObservations.size,
+        instances: node.recordInstances,
+        keys: [...node.keys.keys()].sort(),
+        requiredKeys: [...node.fieldOccurrences]
+          .filter(([, occurrences]) => occurrences === node.recordInstances)
+          .map(([key]) => key)
+          .sort(),
+        fields,
+        dynamicValues,
+      };
+    }
+    if (node.arrayInstances) {
+      const elements = descriptorsAt(elementPathOf(path), node.elementKinds);
+      transitions += descriptorEdges(elements);
+      arrays[path] = {
+        id: path,
+        path,
+        label: shapeNameOf(path),
+        rows: node.arrayObservations.size,
+        instances: node.arrayInstances,
+        elements,
+      };
+    }
+  }
+
+  /** @type {Record<string, Array<{kind:'record', origins:string[]} | {kind:'array', arrays:string[]}>>} */
+  const graphRoots = {};
+  for (const { name } of roots) {
+    if (graphRoots[name]) continue;
+    const rootPath = rootPathOf(name);
+    const descriptors = [];
+    if (origins[rootPath]) descriptors.push({ kind: 'record', origins: [rootPath] });
+    if (arrays[rootPath]) descriptors.push({ kind: 'array', arrays: [rootPath] });
+    if (descriptors.length) graphRoots[name] = descriptors;
+  }
+
+  return {
+    shapes: out,
+    arrayShapes: [...arrayShapes].sort(),
+    singleHome,
+    graph: {
+      schema: 2,
+      pathEncoding: 'typed-uri-v1',
+      separator: PATH_SEPARATOR,
+      origins,
+      arrays,
+      roots: graphRoots,
+      meta: {
+        origins: Object.keys(origins).length,
+        arrays: Object.keys(arrays).length,
+        nodes: Object.keys(origins).length + Object.keys(arrays).length,
+        transitions,
+        dynamicContainers: liveDynamic.size,
+        maxDepth: walkStats.maxDepth,
+        cycleCuts: walkStats.cycleCuts,
+        depthTruncations: 0,
+      },
+    },
+  };
 }
 
 // ── The executed producers ──────────────────────────────────────────────────
@@ -327,11 +670,12 @@ export async function buildObservedCorpus({ intervals = PULSE_INTERVALS, quiet =
     steadingsMinted += 1;
   }
 
-  const { shapes, arrayShapes, singleHome } = foldCorpus(roots);
+  const { shapes, arrayShapes, singleHome, graph } = foldCorpus(roots);
   return {
     shapes,
     arrayShapes,
     singleHome,
+    graph,
     /** The names the walk STARTED from. Only these may bind a bare identifier
      *  the resolver could not follow; anything wider binds `window`, `raw` and
      *  `plan` to unrelated corpus shapes. */
@@ -344,6 +688,8 @@ export async function buildObservedCorpus({ intervals = PULSE_INTERVALS, quiet =
       simulationFlagsLit: flags.length,
       steadingsMinted,
       shapeCount: Object.keys(shapes).length,
+      originCount: graph.meta.origins,
+      transitionCount: graph.meta.transitions,
     },
   };
 }

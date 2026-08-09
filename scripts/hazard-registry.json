@@ -294,20 +294,35 @@
       "enforcer": {
         "paths": [
           "tests/lint/observedShapeReaders.walker.test.js",
+          "tests/lint/observedShapeCorpus.graph.test.js",
+          "tests/lint/observedShapeMigration.test.js",
+          "tests/lint/observedShapeSentinel.test.js",
+          "tests/lint/observedShapeBaseline.test.js",
+          "tests/lint/governedArtifactIo.test.js",
+          "tests/lint/legacyReaderShapeScan.test.js",
+          "tests/lint/readerShapeResolver.test.js",
           "scripts/check-observed-shape-readers.mjs",
+          "scripts/migrate-observed-shape-readers.mjs",
+          "scripts/lib/observed-shape-corpus.mjs",
+          "scripts/lib/governed-artifact-io.mjs",
+          "scripts/lib/legacy-reader-shape-scan.mjs",
+          "scripts/lib/observed-shape-baseline.mjs",
+          "scripts/lib/observed-shape-governance.mjs",
+          "scripts/lib/reader-shape-scan.mjs",
           "scripts/.observed-shape-readers-baseline.json"
         ],
         "inChain": true,
-        "note": "IDENTITY-KEYED since 53029151: each `<key> on <shape>` has its own ceiling, the retired count-only row form is rejected, and an identity swap at constant count reds. The source of truth is scripts/check-observed-shape-readers.mjs; the STEADING leg remains load-bearing (40 driven intervals mint ZERO)."
+        "note": "SCHEMA-3 MACHINERY: every finding is an exact `<key> on <shape> @ <origin> # <semantic-site>` identity with no dormant inventory headroom. The observed corpus retains typed path-qualified origins, explicit array layers, required-key and dynamic-value facets; the resolver uses one TypeScript Program/checker to carry symbols through wrappers, callbacks, recursion and defaults, and folds object spreads, Object.assign and local writes in execution order. The predecessor bytes, complete execution inputs, pinned legacy algorithm, both fresh detector results, migration report and complete per-row review are digest-bound before a baseline can be frozen; malformed schema 3 and unsafe artifact outputs fail before producer execution. This describes the enforcement design and does not stand in for a fresh historical receipt."
       },
       "instances": 3,
       "instanceEvidence": "CONFIRMED: 'THREE live bugs share one shape'; the walker 'rediscovered all three TCD defects at a pre-fix sha' — the retro-detection acceptance test that proves an instrument is real rather than merely present.",
       "triggers": [
-        "any new optional-chained read of a nested key in src/domain/ or src/store/",
-        "any `= {}` default parameter idiom",
-        "any new persisted-shape consumer"
+        "any new or changed persisted-shape producer or property read in src/domain/, src/store/ or another scanned root",
+        "any array, keyed-ledger, dynamic property, optional property, object spread, Object.assign or local-object mutation that changes writer provenance",
+        "any wrapper, callback, recursive helper, destructuring/default parameter or alias that transports a persisted shape",
+        "any change to the observed corpus, reader resolver, semantic-site schema, scan artifact, migration review or schema-3 baseline"
       ],
-      "upgradePath": "The estate's best example of the RETRO-DETECTION acceptance test — run a candidate instrument at a pre-fix sha and require it to red. Preserve the identity-keyed inventory and its rejection of the retired count-only row form."
+      "upgradePath": "For a scanner or baseline migration, produce legacy and schema-3 scan artifacts from the same immutable subject tree, require exact source-address pairing and a complete digest-bound review, then freeze only from a clean HEAD whose full SHA matches the reviewed subject. Re-run the pre-fix retro-detection and record historical and performance receipts separately before making renewed closure claims."
     },
     {
       "id": "HZ-DIRTYBUILD",
