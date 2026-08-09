@@ -6974,5 +6974,5 @@ If step 1 regresses, audit `callEntriesOfView`, `withViewCallFrames`, `heapTarge
 first. The intended invariant is finite no-repeat static call chains, with repeated sites
 closing to multiplicity `many`. Fable should specifically re-rule the call-chain identity,
 invocation-owned receiver proof, relevant-flow-context projection, and demand-key refinement;
-no baseline or golden change is authorized until the explicit later freeze ruling in step 6
+no baseline or golden change is authorized until the explicit later freeze ruling in step 7
 supersedes this checkpoint clause.
