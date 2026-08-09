@@ -6770,13 +6770,15 @@ the observed-shape reader scanner, recorded because the Codex session may exhaus
 allowance before the validation train completes. Code of record is worktree
 `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`, branch
 `claude/composite-r4`, at progress-enabled scanner checkpoint `34531b26`, built on
-performance checkpoint `8445a5a3` and parallel-owned head `1ca709aa`. Preserve every other
-dirty file as parallel-owned.
+performance checkpoint `8445a5a3` and parallel-owned head `1ca709aa`; the current durable
+handoff checkpoint is `96f6f0e7`. Preserve every other dirty file as parallel-owned. The owner
+delegated implementation judgment to Codex for this continuation, so one bounded NON-FABLE
+semantic repair may proceed while Fable survey/sign-off remains explicitly owed.
 
 **LANDED FOUNDATION.** Commits `93e7ed50`, `6e7acc4d`, `0ea7ff12`, `2c810d16`, `07ab7d01`,
 and `4d34711d` contain the prior contract, isolation, migration-governance, fixed-point,
-invocation-identity, and null-initializer repairs. The current uncommitted continuation adds
-the bounded performance repair: it indexes completed call edges once, memoizes owner closure
+invocation-identity, and null-initializer repairs. Committed performance checkpoint `8445a5a3`
+adds the bounded repair: it indexes completed call edges once, memoizes owner closure
 by cutoff, filters heap effects to the read's executable owners once per read, memoizes a heap
 demand only for the complete cutoff + active-effect call context, and captures proven-fresh
 recursive allocation frames without splitting memoized/cross-invocation storage.
@@ -6892,12 +6894,19 @@ rebuilt the same **8,637-origin / 2,074-file** corpus and index, then entered th
 3,169 resolver. It was terminated at the predeclared **90-second target ceiling** without
 finishing even fixed-point iteration 1 and without publishing a result. Its retained trace,
 `/var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/sf-osr-evidence.XXXXXX.LDN2WVToaB/read-3169-semantic-cache.jsonl`,
-contains **23,282 events / 6.19 MiB**: 9,385 binding starts, 9,370 binding completions, 3,433
+contains **23,282 events / 5.90 MiB**: 9,385 binding starts, 9,370 binding completions, 3,433
 call starts and 543 completed function-return summaries. `id`-irrelevant
 `factionRename.js` and settlement-helper bindings still dominate. This proves framed memo
 misses are only an amplifier, not the root semantic fan-out; further cache tuning is out of
 scope for this checkpoint. All diagnostic hooks and temporary probe scripts remain confined
 to the disposable clone, and the real scanner source is unchanged from `34531b26`.
+The direct driver ran as `node scripts/osr-read-3169-direct.tmp.mjs` under the live atomic
+mutex plus the explicit watchdog; termination was SIGTERM / exit **143**, and the result
+target is a zero-byte unpublished file. This evidence is ephemeral macOS `/T` state, not a
+governed artifact: the trace SHA-256 is
+`0f5f489f4ecb42b7d874250f30cf2997288c007e44be18965c82129765665875`, and the measured
+prototype's tracked scanner diff SHA-256 is
+`4c982461a37ff2f29146617fa6e586727686eeda2bbc12c03b678b6b8839aa04`.
 
 **EXACT RESUME ORDER.** Use the mutex atomically and preserve all foreign worktree dirt:
 
@@ -6906,22 +6915,31 @@ to the disposable clone, and the real scanner source is unchanged from `34531b26
 3. The progress-enabled authoritative run is complete as a failed performance proof at read
    3,169. The one allowed context-cache repair was tested, measured and rejected above. Do not
    port it and do not resume cache or broad adversarial analyzer research.
-4. Any next repair must narrow the **semantic execution context** that makes an intrinsic array
-   callback element depend on unrelated enclosing-owner helpers, with a focused non-timing
-   correctness regression. If that invariant cannot be stated and proven locally, declare the
-   repository-scale scanner operationally blocked rather than rerunning it.
-5. After a green bounded semantic repair, create another fresh clone and rerun the
-   authoritative exact artifact under the same progress control and 30-minute ceiling.
-6. Generate exact and legacy artifacts from the same committed scanner/input snapshot, build
-   and review the schema-3 migration bundle, then perform the explicit governed re-freeze.
-7. Prove the governed historical/archive path against the same scanner inputs; do not treat it
-   as a substitute for current-tree evidence.
-8. Run `npm run check`, then `npm run verify:dist`, both with no concurrent Vitest/scanner lane,
-   and record every immutable receipt here.
+4. The one owner-delegated NON-FABLE repair may narrow only the function-summary cutoff cache
+   identity, preserving every cutoff owner whose mutable/captured binding, heap effect,
+   transitive callee or deferred field can affect returned provenance. Unknown dependency
+   closure fails closed to the current full signature. Add both an exact-origin non-crossing
+   regression and a captured-mutable negative control; Fable still owes the final re-ruling.
+5. Commit a green bounded repair first. Use that exact clean scanner SHA in a fresh clone for
+   the authoritative exact artifact under the same progress control and 30-minute ceiling.
+6. Generate current exact and legacy artifacts from that same committed scanner/input
+   snapshot, build and manually review the schema-3 migration bundle, and record an explicit
+   owner/Fable freeze ruling that supersedes the current no-freeze checkpoint.
+7. Perform the governed schema-3 freeze in that clean clone, then commit the baseline and its
+   honest evidence as the first descendant of the scanner SHA. Baseline-history validation
+   cannot pass before that committed schema-3 genesis exists.
+8. Prove the historical/archive path with the same committed scanner toolchain but the
+   historical subject/source tree and schema-2 predecessor baseline. It is evidence only, not
+   a substitute for current-tree migration evidence.
+9. Run the ordinary `npm run check:observed-shape-readers` report, then `npm run check`, then a
+   separate `npm run verify:dist`, with no concurrent scanner/Vitest lane. Use exactly one mutex
+   layer: current package test/distribution scripts already acquire atomic `--run`, so do not
+   externally wrap those package commands. Record every immutable receipt here.
 
 If step 1 regresses, audit `callEntriesOfView`, `withViewCallFrames`, `heapTargetIdentity`,
 `sameHeapTarget`, `activeEffectCallChain`, and the local-token arm of `instantiateSymbolic`
 first. The intended invariant is finite no-repeat static call chains, with repeated sites
 closing to multiplicity `many`. Fable should specifically re-rule the call-chain identity,
 invocation-owned receiver proof, relevant-flow-context projection, and demand-key refinement;
-no baseline or golden change is authorized by this checkpoint row.
+no baseline or golden change is authorized until the explicit later freeze ruling in step 6
+supersedes this checkpoint clause.
