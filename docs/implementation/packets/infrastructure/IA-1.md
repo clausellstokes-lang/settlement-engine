@@ -1,6 +1,6 @@
 # Implementation Acceleration / IA-1 — packet, gate, and integration tooling
 
-- **Status:** STALE
+- **Status:** LANDED
 - **Branch:** `claude/composite-r4`
 - **Verified base:** `2c810d167d016302e641fc9cfe74fff57475b14e`
 - **Owner authority:** 2026-08-09 request to build the four bounded acceleration
@@ -178,11 +178,13 @@ An unrelated gate failure is measured and reported, not repaired.
 
 ## 9. Completion receipt
 
-- **Final state:** IMPLEMENTED in the shared working-tree diff, deliberately
-  unstaged and uncommitted. The packet is now **STALE/non-dispatchable** so the
-  completed work cannot be handed to another coding model as a fresh assignment.
-- **Verified base:** `claude/composite-r4` at
-  `2c810d167d016302e641fc9cfe74fff57475b14e`; final HEAD is unchanged.
+- **Final state:** LANDED in implementation commit
+  `d7ec3885dbcd7e09ff3bcd28d6f55a51bb1ae78b`; this follow-up receipt records
+  that immutable SHA and makes the packet non-dispatchable as **LANDED**.
+- **Verified base:** implementation began from `claude/composite-r4` at
+  `2c810d167d016302e641fc9cfe74fff57475b14e`. The reserved reader-shape lane
+  landed independently before IA-1 was committed; IA-1 then landed at the SHA
+  above without staging or attributing that lane's files.
 - **Changed files and budget:** exactly the 29 manifest paths, within the 30-file
   allowance. The nine production/tooling paths contain 1,515 added and 268
   removed line events (1,783 total, within the 1,800-line allowance):
@@ -235,16 +237,18 @@ An unrelated gate failure is measured and reported, not repaired.
 
 ## 10. Final handoff — update 2026-08-09
 
-If this session moves to Claude/Fable, do **not** reimplement IA-1. Review the
-existing diff in
-`/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`; the packet's
-STALE status means implemented-but-uncommitted, not incomplete.
+If this session moves to Claude/Fable, do **not** reimplement IA-1. The
+implementation is present in
+`d7ec3885dbcd7e09ff3bcd28d6f55a51bb1ae78b` in
+`/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`; the packet
+is LANDED and closed.
 
 ### Authority and preservation
 
-- Branch/base: `claude/composite-r4` at
-  `2c810d167d016302e641fc9cfe74fff57475b14e`; no staging or commit authority was
-  granted.
+- Branch/landing: `claude/composite-r4` at implementation commit
+  `d7ec3885dbcd7e09ff3bcd28d6f55a51bb1ae78b`. The owner granted commit authority
+  on 2026-08-09; the implementation commit contains exactly the 29 IA-1 manifest
+  paths.
 - Preserve all unrelated dirty work. Never touch, stage, restore, or attribute
   `scripts/lib/reader-shape-scan.mjs` or
   `tests/lint/readerShapeResolver.test.js`.
@@ -265,9 +269,8 @@ STALE status means implemented-but-uncommitted, not incomplete.
 
 ### Continuation boundary
 
-No coding remains inside IA-1. If any IA file is edited, first run
-`npm run validate:packets`, then the exact six-file held-lock command in this
-packet; keep the full gate limitation above explicit. A future full-suite run
-should occur only on a quiet machine with a declared external bound. Staging,
-committing, resolving the unrelated domain-strict debt, or changing packet status
-to LANDED each requires separate owner/coordinator authority.
+No coding remains inside IA-1. Any further IA behavior change requires a new
+packet or explicit owner authority; do not reopen this landed packet. A future
+full-suite run should occur only on a quiet machine with a declared external
+bound. Resolving the unrelated domain-strict debt or staging/committing unrelated
+working-tree files remains outside IA-1.

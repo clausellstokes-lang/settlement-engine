@@ -117,7 +117,7 @@
     },
     {
       "id": "IA-1",
-      "status": "STALE",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/infrastructure/IA-1.md",
       "verifiedBase": "2c810d167d016302e641fc9cfe74fff57475b14e",
       "changeManifest": [

@@ -32,7 +32,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 
 | Dispatch | Packet | Status | Why this is bounded | Explicitly excluded |
 |---:|---|---|---|---|
-| — | [`IA-1`](./packets/infrastructure/IA-1.md) | **STALE** — implemented in the uncommitted working-tree diff; do not redispatch | Automates packet enforcement and feedback topology without changing simulation behavior | event bus, pulse reorder, persistence, automatic worktree deletion, product-scope changes |
+| LANDED-I1 | [`IA-1`](./packets/infrastructure/IA-1.md) | **LANDED** at `d7ec3885dbcd7e09ff3bcd28d6f55a51bb1ae78b`; do not redispatch | Automates packet enforcement and feedback topology without changing simulation behavior | event bus, pulse reorder, persistence, automatic worktree deletion, product-scope changes |
 
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.
