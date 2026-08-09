@@ -240,50 +240,14 @@ function defaultSkin(shapeFamily, terrain, wealth, scarLevel) {
 }
 
 /**
- * A condition without explicit spatial targets is settlement-wide. When a
- * canonical row does carry district/building targets, keep its treatment on
- * those targets rather than tinting unrelated neighborhoods.
- *
- * @param {Record<string, unknown>} condition
- * @param {Record<string, unknown>} district
- * @param {Record<string, unknown>} building
- * @param {string} buildingId
- * @param {string} anchorKey
- */
-function conditionTargetsBuilding(
-  condition,
-  district,
-  building,
-  buildingId,
-  anchorKey,
-) {
-  const districtTargets = [
-    condition.districtId,
-    condition.targetDistrictId,
-    ...(Array.isArray(condition.districtIds) ? condition.districtIds : []),
-    ...(Array.isArray(condition.targetDistrictIds) ? condition.targetDistrictIds : []),
-  ].filter((value) => typeof value === 'string' && value);
-  const buildingTargets = [
-    condition.buildingId,
-    condition.targetBuildingId,
-    condition.anchorKey,
-    ...(Array.isArray(condition.buildingIds) ? condition.buildingIds : []),
-    ...(Array.isArray(condition.targetBuildingIds) ? condition.targetBuildingIds : []),
-    ...(Array.isArray(condition.anchorKeys) ? condition.anchorKeys : []),
-  ].filter((value) => typeof value === 'string' && value);
-  if (!districtTargets.length && !buildingTargets.length) return true;
-  const districtId = String(district.id || building.districtId || '');
-  return districtTargets.includes(districtId)
-    || buildingTargets.includes(buildingId)
-    || buildingTargets.includes(anchorKey);
-}
-
-/**
  * Build the frozen architecture-compatible condition vector from already
- * authorized settlement/district facts. Covert corruption is a literal zero.
+ * authorized settlement/district facts. Canonical ActiveCondition rows are
+ * settlement-scoped, so every visible building receives their treatment;
+ * future local effects need one typed TownScene-local target derived after the
+ * map exists rather than guessed persistence aliases. Covert corruption is a
+ * literal zero.
  * @param {Record<string, unknown>} settlement
  * @param {Record<string, unknown>} district
- * @param {Record<string, unknown>} building
  * @param {string} terrain
  * @param {number} scarLevel
  * @param {string} entropy
@@ -291,7 +255,6 @@ function conditionTargetsBuilding(
 function conditionProfile(
   settlement,
   district,
-  building,
   terrain,
   scarLevel,
   entropy,
@@ -319,15 +282,10 @@ function conditionProfile(
   let neglect = clamp((3 - prosperityRank) / 3, 0, 1);
   let repair = 0;
   let construction = 0;
-  const anchorKey = typeof building.anchorKey === 'string' ? building.anchorKey : '';
-  const buildingId = `building:${anchorKey}`;
   const conditions = Array.isArray(settlement.activeConditions) ? settlement.activeConditions : [];
   for (const condition of conditions) {
     const item = record(condition);
     if (item.covert === true) continue;
-    if (!conditionTargetsBuilding(item, district, building, buildingId, anchorKey)) {
-      continue;
-    }
     const text = [
       item.id,
       item.label,
@@ -506,7 +464,6 @@ export function buildSceneBuildingProfile(args) {
     conditionProfile: conditionProfile(
       settlement,
       district,
-      building,
       terrain,
       scarLevel,
       entropy,

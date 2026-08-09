@@ -22,11 +22,14 @@
  * fuller legitimacy / conversion-defense / targeted-foothold consumption is W-F4's
  * — the reading object is the named, typed seam it will read.
  *
- * PURE: no rng, no wall-clock, no mutation. Imports only the personality readers
- * from the (leaf) corruption module, so it carries no religion-engine dependency.
+ * PURE: no rng, no wall-clock, no mutation. Imports only leaf personality,
+ * faction-identity, and deity-axis readers, so it carries no religion-engine
+ * dependency.
  */
 
 import { npcCorruptibleFlaw, npcAlignmentScore } from '../corruption.js';
+import { factionArchetype } from '../factionArchetypes.js';
+import { entityLinksFaction } from '../factionRefs.js';
 import { evil01, chaos01 } from './deityAxes.js';
 
 /**
@@ -157,12 +160,11 @@ function orgPower(npc) {
 export function readClergyPlane(settlement) {
   const ps = settlement?.powerStructure || {};
   const factions = Array.isArray(ps.factions) ? ps.factions : [];
-  const clergyFactionIds = new Set(
-    factions.filter((f) => String(f?.archetype || '') === 'religious' && f?.id != null)
-      .map((f) => String(f.id)),
-  );
+  const clergyFactions = factions.filter((f) => (
+    String(f?.archetype || '') === 'religious' || factionArchetype(f) === 'religious'
+  ));
   const empty = { e: 0, c: 0, taint: 0, variance: 0, revealedTaint: 0, weight: 0 };
-  if (!clergyFactionIds.size) return empty;
+  if (!clergyFactions.length) return empty;
 
   const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
   let weight = 0;
@@ -170,8 +172,7 @@ export function readClergyPlane(settlement) {
   // Weighted first + second moment of the malice reading to recover disagreement.
   let sumE2 = 0;
   for (const npc of npcs) {
-    const linked = Array.isArray(npc?.linkedFactionIds) ? npc.linkedFactionIds.map(String) : [];
-    if (!linked.some((/** @type {string} */ id) => clergyFactionIds.has(id))) continue;
+    if (!clergyFactions.some((faction) => entityLinksFaction(npc, faction, factions))) continue;
     const w = orgPower(npc);
     if (w <= 0) continue;
     const plane = npcTraitPlane(npc);
@@ -238,10 +239,10 @@ export function targetedFootholds(settlement, patronDeity, rivals) {
   if (!patronDeity || !Array.isArray(rivals) || !rivals.length) return [];
   const ps = settlement?.powerStructure || {};
   const factions = Array.isArray(ps.factions) ? ps.factions : [];
-  const clergyFactionIds = new Set(
-    factions.filter((f) => String(f?.archetype || '') === 'religious' && f?.id != null).map((f) => String(f.id)),
-  );
-  if (!clergyFactionIds.size) return [];
+  const clergyFactions = factions.filter((f) => (
+    String(f?.archetype || '') === 'religious' || factionArchetype(f) === 'religious'
+  ));
+  if (!clergyFactions.length) return [];
   const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
   const patronPlane = deityPlaneOf(patronDeity);
   const dot = (/** @type {{e:number,c:number}} */ p, /** @type {{e:number,c:number}} */ q) => p.e * q.e + p.c * q.c;
@@ -249,8 +250,7 @@ export function targetedFootholds(settlement, patronDeity, rivals) {
   // Collect the influential, trait-bearing ministers ONCE (codepoint-stable order).
   const ministers = [];
   for (const npc of npcs) {
-    const linked = Array.isArray(npc?.linkedFactionIds) ? npc.linkedFactionIds.map(String) : [];
-    if (!linked.some((/** @type {string} */ id) => clergyFactionIds.has(id))) continue;
+    if (!clergyFactions.some((faction) => entityLinksFaction(npc, faction, factions))) continue;
     if (orgPower(npc) < T.MIN_ORG_POWER) continue;
     const plane = npcTraitPlane(npc);
     if (plane.spread <= 0) continue;                          // trait-neutral ⇒ never available

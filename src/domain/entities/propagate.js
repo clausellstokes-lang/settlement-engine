@@ -23,6 +23,11 @@
 
 import { withImpairment } from './status.js';
 import { factionArchetype } from '../factionArchetypes.js';
+import {
+  factionDisplayNameOf,
+  factionRefOf,
+  resolveFactionRef,
+} from '../factionRefs.js';
 
 // domain-top-3: institution catalog category → canonical faction archetype. Used
 // only as the DOCUMENTED FALLBACK when a faction carries no explicit
@@ -326,10 +331,11 @@ function findLinkedEntities(settlement, node) {
     const instArchetype = institutionCategoryArchetype(inst);
     for (const f of factions) {
       const strength = factionInstitutionStrength(f, node.entityId, instArchetype);
-      if (strength > 0) out.push({ targetType: 'faction', targetId: factionId(f), strength });
+      const targetId = factionRefOf(f);
+      if (strength > 0 && targetId) out.push({ targetType: 'faction', targetId, strength });
     }
   } else if (node.entityType === 'faction') {
-    const fac = factions.find(f => factionId(f) === node.entityId);
+    const fac = resolveFactionRef(factions, node.entityId);
     for (const i of settlement.institutions || []) {
       const strength = fac ? factionInstitutionStrength(fac, instId(i), institutionCategoryArchetype(i)) : 0;
       if (strength > 0) out.push({ targetType: 'institution', targetId: instId(i), strength });
@@ -340,8 +346,13 @@ function findLinkedEntities(settlement, node) {
       for (const linkedId of npc.linkedInstitutionIds || []) {
         out.push({ targetType: 'institution', targetId: linkedId, strength: importanceWeight(npc) });
       }
+      const emittedFactionRefs = new Set();
       for (const linkedId of npc.linkedFactionIds || []) {
-        out.push({ targetType: 'faction', targetId: linkedId, strength: importanceWeight(npc) });
+        const faction = resolveFactionRef(factions, linkedId);
+        const targetId = factionRefOf(faction);
+        if (!targetId || emittedFactionRefs.has(targetId)) continue;
+        emittedFactionRefs.add(targetId);
+        out.push({ targetType: 'faction', targetId, strength: importanceWeight(npc) });
       }
     }
   }
@@ -440,13 +451,15 @@ function applyImpairmentToEntity(settlement, type, id, impairment) {
     // is the canonical home for generator output; settlement.factions
     // exists in legacy paths. Pick the populated one.
     if (settlement.powerStructure?.factions) {
+      const target = resolveFactionRef(settlement.powerStructure.factions, id);
       const next = settlement.powerStructure.factions.map(f =>
-        factionId(f) === id ? withImpairment(f, impairment) : f,
+        f === target ? withImpairment(f, impairment) : f,
       );
       return { ...settlement, powerStructure: { ...settlement.powerStructure, factions: next } };
     }
+    const target = resolveFactionRef(settlement.factions || [], id);
     const next = (settlement.factions || []).map(f =>
-      factionId(f) === id ? withImpairment(f, impairment) : f,
+      f === target ? withImpairment(f, impairment) : f,
     );
     return { ...settlement, factions: next };
   }
@@ -463,8 +476,6 @@ function applyImpairmentToEntity(settlement, type, id, impairment) {
 //    normalize via name fallback. Long-term, structured IDs replace this.
 /** @type {(i: PropagationInstitution | null | undefined) => string} */
 const instId    = (i) => i?.id || i?.name || '';
-/** @type {(f: PropagationFaction | null | undefined) => string} */
-const factionId = (f) => f?.id || f?.faction || f?.name || '';
 /** @type {(n: PropagationNpc | null | undefined) => string} */
 const npcId     = (n) => n?.id || n?.name || '';
 /** Normalize the two faction-storage shapes the codebase ships with.
@@ -477,9 +488,11 @@ const factionsList = (s) => s?.powerStructure?.factions || s?.factions || [];
  * @returns {string}
  */
 function entityName(s, type, id) {
-  const list = type === 'institution' ? s.institutions : type === 'faction' ? s.factions : s.npcs;
-  const e = (list || []).find(x => (type === 'institution' ? instId(x) : type === 'faction' ? factionId(x) : npcId(x)) === id);
-  return e?.name || id;
+  const list = type === 'institution' ? s.institutions : type === 'faction' ? factionsList(s) : s.npcs;
+  const e = type === 'faction'
+    ? resolveFactionRef(/** @type {PropagationFaction[]} */ (list || []), id)
+    : (list || []).find(x => (type === 'institution' ? instId(x) : npcId(x)) === id);
+  return (type === 'faction' ? factionDisplayNameOf(e) : e?.name) || id;
 }
 /** @param {number} v @returns {number} */
 function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
@@ -501,8 +514,9 @@ function currentSeverity(settlement, type, id, dimension, causeEventId) {
   const list = type === 'institution' ? settlement.institutions
     : type === 'faction' ? factionsList(settlement)
     : settlement.npcs;
-  const entity = (list || []).find(x =>
-    (type === 'institution' ? instId(x) : type === 'faction' ? factionId(x) : npcId(x)) === id);
+  const entity = type === 'faction'
+    ? resolveFactionRef(/** @type {PropagationFaction[]} */ (list || []), id)
+    : (list || []).find(x => (type === 'institution' ? instId(x) : npcId(x)) === id);
   const match = (entity?.impairments || []).find(i => i.type === dimension && i.causeEventId === causeEventId);
   return match?.severity ?? 0;
 }

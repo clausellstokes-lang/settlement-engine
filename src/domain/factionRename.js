@@ -180,7 +180,7 @@ const NPC_FACTION_FIELDS = Object.freeze([
   { parent: null, key: 'secondaryAffiliation', kind: 'key',
     why: 'the second display-name link npcGenerator writes for a character with a criminal tie' },
   { parent: null, key: 'linkedFactionIds', kind: 'key', list: true,
-    why: 'despite the name it holds a DISPLAY name for generated NPCs (factionRoles falls back id, then .faction, then .name) and entity propagation joins on it' },
+    why: 'id-bearing seats store a durable id; legacy generated seats without ids store the canonical display key, which must follow the rename' },
   { parent: 'secret', key: 'what', kind: 'prose',
     why: 'the secret itself is faction-token prose (npcGenerator substitutes the faction token into it)' },
   { parent: 'secret', key: 'stakes', kind: 'prose',

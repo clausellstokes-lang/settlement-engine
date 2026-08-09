@@ -70,6 +70,7 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
     expect(priest).toBeTruthy();
     // Stamped: belongs to its seat and links the temple institution.
     expect(priest.factionAffiliation).toBe('Religious Authorities');
+    expect(priest.linkedFactionIds).toEqual(['Religious Authorities']);
     expect(priest.linkedInstitutionIds).toContain('inst_temple');
   });
 

@@ -43,7 +43,7 @@ import { walkUserEdits } from './userEdits.js';
 
 /**
  * An entity node the AI overlay might touch (npc / faction / institution /
- * hook / condition / supply chain). Identity is carried on `id`, `name`, or
+ * root hook / condition / supply chain). Identity is carried on `id`, `name`, or
  * the legacy `faction` alias; canon-status fields are inherited so the same
  * value can be handed to {@link tagEntityCanon}.
  * @typedef {import('./canonStatus.js').CanonTaggable & {
@@ -480,7 +480,9 @@ export function verifyAiOverlay(original, refined) {
   // Root-level facts.
   violations.push(...compareRootFacts(original, refined));
 
-  // Entity arrays — institutions, factions, npcs, hooks, chains, conditions.
+  // Entity arrays — institutions, factions, npcs, ROOT hooks, chains,
+  // conditions. `dmCompass.hooks` is intentionally a different nested address:
+  // AI-authored compass prompts never enter this root entity contract.
   violations.push(...compareEntityArrays('institutions', original.institutions, refined.institutions));
   violations.push(...compareEntityArrays(
     'powerStructure.factions',

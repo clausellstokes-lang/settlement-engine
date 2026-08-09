@@ -258,8 +258,9 @@ export function rulerLens(settlement) {
   // silently covered the WHOLE roster. `lead` was therefore the strongest NPC in the
   // settlement, not the seat's, and `rulerFlaw` rotted the throne for a flaw carried by
   // ANY townsperson. Membership now routes through npcInFaction, the canonical chokepoint,
-  // which matches the generator's real joins (factionAffiliation / linkedFactionIds, both of
-  // which hold the DISPLAY NAME) as well as `.id` for authored records.
+  // which matches the generator's display affiliation plus the id-first
+  // `linkedFactionIds` compatibility contract (name-only generated seats still
+  // carry their display handle; authored id-bearing seats carry their id).
   //
   // THIS NARROWING FIRES ON REAL DATA: measured over generateSettlementPipeline, the
   // governing seat has at least one affiliated NPC in 180/180 settlements, so the scan
@@ -275,7 +276,12 @@ export function rulerLens(settlement) {
   const allNpcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
   const seatKey = ruler ? ladderFactionKey(ruler) : '';
   const seatMembers = ruler
-    ? allNpcs.filter((n) => npcInFaction(/** @type {Record<string, unknown>} */ (n || {}), ruler, seatKey))
+    ? allNpcs.filter((n) => npcInFaction(
+      /** @type {Record<string, unknown>} */ (n || {}),
+      ruler,
+      seatKey,
+      factions,
+    ))
     : [];
   const npcs = seatMembers.length ? seatMembers : allNpcs;
   let lead = null; let leadPow = -1; let rulerFlaw = 0;

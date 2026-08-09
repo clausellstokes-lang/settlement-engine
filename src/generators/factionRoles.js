@@ -20,6 +20,7 @@ import { factionArchetype, FACTION_ARCHETYPES as FA } from '../domain/factionArc
 import {
   nativeSemanticName,
 } from '../domain/content/customContentSemanticAuthority.js';
+import { factionDisplayNameOf, factionRefOf } from '../domain/factionRefs.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 
 // inferImportance is not used directly here yet — kept on the import
@@ -140,8 +141,11 @@ export function generateFactionStructuralNpcs(
   if (!arch) return [];
   const worldLaw = resolveGenerationWorldLaw(generationContext);
   const defs = (FACTION_ROLES[arch] || []).filter(worldLaw.allowsRole);
-  const factionId = faction.id || faction.faction || faction.name || '';
-  const factionName = faction.faction || faction.name || 'Unknown faction';
+  // `linkedFactionIds` is the propagation identity: prefer a durable authored
+  // id, falling back to the canonical display key only for legacy/generated
+  // seats that genuinely carry no id. `factionAffiliation` remains display prose.
+  const factionKey = factionRefOf(faction);
+  const factionName = factionDisplayNameOf(faction) || 'Unknown faction';
   return defs.map((def, i) => {
     const linkedInstId = def.linkToInst
       ? institutions.find(inst => def.linkToInst.test(
@@ -161,7 +165,10 @@ export function generateFactionStructuralNpcs(
       // covers its own office, so it is not re-synthesized).
       factionAffiliation: factionName,
       linkedInstitutionIds: linkedInstId ? [linkedInstId] : [],
-      linkedFactionIds: factionId ? [factionId] : [],
+      // Canonical faction identity. Name-only legacy seats intentionally fall
+      // back to their display key; id-bearing seats must never be downgraded to
+      // a rename-sensitive label because propagation and clergy joins are id-first.
+      linkedFactionIds: factionKey ? [factionKey] : [],
       // Defaults for the structural fields the impairment engine reads.
       // Influence is a BAND STRING everywhere it is consumed (npcComponents,
       // campaign PDF filter `influence === 'high'`) — the prior numeric 75/50/25
@@ -218,7 +225,7 @@ export function ensureFactionStructuralNpcs(
   // its seat's canonical archetype (→ role-key).
   const seatByName = new Map();
   for (const seat of seats) {
-    const nm = String(seat.faction || seat.name || '').toLowerCase();
+    const nm = factionDisplayNameOf(seat).toLowerCase();
     if (nm) seatByName.set(nm, seat);
   }
 

@@ -74,6 +74,7 @@ import {
   openForeignGuestHold,
 } from '../../src/domain/worldPulse/foreignGuestHold.js';
 import { ensureWorldState } from '../../src/domain/worldPulse/worldState.js';
+import { hydratePersistedWorldState } from '../../src/domain/worldPulse/worldStateHydration.js';
 import { syncEnvoyNpcTransit } from '../../src/domain/worldPulse/envoyDiplomacy.js';
 import {
   emptyRouteNetwork,
@@ -594,9 +595,9 @@ describe('W-H4 — KILL is the only death, and it is undoable', () => {
     expect(killed.undo.envoyPriorErrands).toHaveLength(1);
     expect(killed.undo.envoyPriorErrands[0]).toMatchObject({ state: 'returning' });
 
-    // The real import boundary is JSON followed by ensureWorldState. The session undo
+    // The real import boundary is JSON followed by persisted hydration. The session undo
     // payload is JSON-safe too, so replay it after the same transport hop.
-    const importedWorld = ensureWorldState(
+    const importedWorld = hydratePersistedWorldState(
       JSON.parse(JSON.stringify(killed.worldState)),
       { id: 'campaign.dm-kill' },
     );

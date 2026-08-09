@@ -4,6 +4,8 @@
  * Centralised so floats don't show up as "37.80241935483871" anywhere.
  */
 
+import { plotHookText } from '../../lib/proseSeams.js';
+
 export function cap(s) {
   if (!s || typeof s !== 'string') return s || '';
   return s.charAt(0).toUpperCase() + s.slice(1);
@@ -107,27 +109,11 @@ export function humanize(s) {
 }
 
 /**
- * hookText — extract the text of a plot hook regardless of shape. The engine
- * emits hooks under many keys depending on which subsystem produced them
- * (NPC, conflict, viability, history, neighbour). Walk the common ones.
+ * hookText — extract plot-hook prose from the canonical raw/normalized shapes:
+ * a bare string, `{ hook }`, or `{ text }`.
  */
 export function hookText(h) {
-  if (!h) return '';
-  if (typeof h === 'string') return noLig(h);
-  if (typeof h !== 'object') return noLig(String(h));
-  const raw =
-       h.hook
-    || h.text
-    || h.description
-    || h.summary
-    || h.prompt
-    || h.title
-    || h.label
-    || h.body
-    || h.content
-    || (typeof h.value === 'string' ? h.value : null)
-    || '';
-  return noLig(raw);
+  return noLig(plotHookText(h));
 }
 
 /**

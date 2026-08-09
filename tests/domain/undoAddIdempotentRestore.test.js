@@ -1,21 +1,18 @@
 /**
- * undoAddIdempotentRestore.test.js — regression for the idempotent un-remove
- * branch of ADD_INSTITUTION / ADD_FACTION.
+ * undoAddIdempotentRestore.test.js — regression for ADD_INSTITUTION's
+ * idempotent un-remove branch and ADD_FACTION's duplicate-refusal boundary.
  *
- * addInstitution/addFaction are idempotent by name: re-adding an entity that
- * already exists does NOT duplicate it — it re-activates the existing record
- * (status 'active', only REMOVAL-caused impairments cleared). That un-remove branch writes NO
- * createdByEventId, so undoEvent's withoutEventCreations (which only drops
- * records stamped with the popped event's id) cannot reach it. Without a
- * pre-event snapshot, undoing the ADD left the entity permanently resurrected
- * — the prior REMOVED/impaired state was lost (data integrity).
+ * ADD_INSTITUTION can lawfully re-open a removed institution. That branch
+ * writes no createdByEventId, so undo needs the pre-event entity snapshot.
+ * Factions have no removal lifecycle: a duplicate ADD_FACTION is refused and
+ * therefore never becomes a loggable event that could require undo.
  *
- * The fix snapshots the entity-graph subtree for the ADD events, so undo
- * restores the exact pre-add state in both the create and the un-remove case.
+ * The institution pin proves the snapshot restores the exact pre-add state;
+ * the faction pin proves the checked/legacy mutation boundary stays intact.
  */
 
 import { describe, it, expect } from 'vitest';
-import { mutateSettlement } from '../../src/domain/events/mutate.js';
+import { mutateSettlement, mutateSettlementChecked } from '../../src/domain/events/mutate.js';
 import { captureEventUndoSnapshot, scrubUndoneEvent } from '../../src/domain/events/undoEvent.js';
 
 /** Apply an event the way the slice does, then undo it via the snapshot. */
@@ -26,8 +23,9 @@ function applyThenUndo(before, event) {
   return { after, undone };
 }
 
-// Landed events wave — needs pre-add entity-graph snapshot for idempotent ADD_INSTITUTION/ADD_FACTION undo in src/domain/events/undoEvent.js
-describe('undo of an idempotent ADD restores the pre-add removed state', () => {
+// Landed events wave — needs a pre-add entity-graph snapshot for the supported
+// ADD_INSTITUTION reopen path in src/domain/events/undoEvent.js.
+describe('idempotent ADD lifecycle and undo boundaries', () => {
   it('REMOVE_INSTITUTION then ADD_INSTITUTION (same name): undoing the ADD returns it to REMOVED', () => {
     const base = {
       name: 'Oakmere',
@@ -62,11 +60,7 @@ describe('undo of an idempotent ADD restores the pre-add removed state', () => {
     expect(restored.removedByEventId).toBe('e-remove');
   });
 
-  it('an impaired-then-readded FACTION keeps its unrelated impairment; undo restores the pre-add state', () => {
-    // A faction carrying an UNRELATED (non-removal) impairment, re-added by name.
-    // The idempotent re-add now only clears REMOVAL-caused impairments, so the
-    // prior unrelated damage is KEPT (no blanket wipe). Undo still restores the
-    // exact pre-add faction.
+  it('a duplicate ADD_FACTION is refused before an undoable event exists', () => {
     const impaired = {
       name: 'Oakmere',
       institutions: [],
@@ -82,16 +76,14 @@ describe('undo of an idempotent ADD restores the pre-add removed state', () => {
     };
 
     const addEvent = { id: 'e-add-faction', type: 'ADD_FACTION', targetId: 'faction.The_Garrison' };
-    const { after, undone } = applyThenUndo(impaired, addEvent);
+    const checked = mutateSettlementChecked({ settlement: impaired, event: addEvent });
+    const legacy = mutateSettlement({ settlement: impaired, event: addEvent });
 
-    const reAdded = after.powerStructure.factions.find(f => f.id === 'faction.garrison');
-    expect(reAdded.impairments).toEqual([{ type: 'public_support', severity: 0.6, causeEventId: 'e-prior' }]);  // re-add KEEPS the unrelated impairment
-    expect(reAdded.createdByEventId).toBeUndefined();  // idempotent branch stamps nothing
-    expect(after.powerStructure.factions.length).toBe(1);
-
-    // Undo restores the pre-add impaired faction exactly.
-    expect(undone.powerStructure).toEqual(impaired.powerStructure);
-    const restored = undone.powerStructure.factions.find(f => f.id === 'faction.garrison');
-    expect(restored.impairments).toEqual([{ type: 'public_support', severity: 0.6, causeEventId: 'e-prior' }]);
+    expect(checked.veto).toMatchObject({
+      code: 'faction_already_present',
+      detail: 'The Garrison',
+    });
+    expect(checked.settlement).toEqual(impaired);
+    expect(legacy).toEqual(impaired);
   });
 });

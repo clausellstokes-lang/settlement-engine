@@ -47,6 +47,13 @@ const gatedEvent = () => ({
   payload: { cause: 'coup' },
 });
 
+const duplicateFactionEvent = () => ({
+  id: 'ev_duplicate_faction',
+  type: 'ADD_FACTION',
+  targetId: 'Town Council',
+  payload: {},
+});
+
 describe('the handler-veto channel (phantom-event hole closed)', () => {
   it('runEventPipeline: a vetoed mutation commits NO deltas and NO narration', () => {
     const s = settlement();
@@ -98,6 +105,31 @@ describe('the handler-veto channel (phantom-event hole closed)', () => {
     expect(applied.logEntry.deltas).toEqual([]);
     expect(applied.logEntry.narrativeSummary).toBe('');
     expect(applied.nextSettlement).toBe(s);
+  });
+
+  it('duplicate ADD_FACTION is non-loggable: full apply commits no state, deltas, responses, or narration', () => {
+    const s = settlement();
+    const applied = applyEvent({
+      settlement: s,
+      systemState: null,
+      event: duplicateFactionEvent(),
+      now: NOW,
+    });
+
+    expect(applied.veto).toMatchObject({
+      severity: 'veto',
+      code: 'faction_already_present',
+      detail: 'Town Council',
+    });
+    expect(applied.nextSettlement).toBe(s);
+    expect(applied.nextSystemState).toStrictEqual(applied.logEntry.beforeState);
+    expect(applied.logEntry.afterState).toStrictEqual(applied.logEntry.beforeState);
+    expect(applied.logEntry.deltas).toEqual([]);
+    expect(applied.logEntry.causalStateDeltas).toEqual([]);
+    expect(applied.logEntry.factionResponses).toEqual([]);
+    expect(applied.logEntry.factionRelationshipDeltas).toEqual([]);
+    expect(applied.logEntry.narrativeSummary).toBe('');
+    expect(applied.logEntry.undo).toBeUndefined();
   });
 
   it('a committing event carries veto: null on the apply envelope', () => {
@@ -171,6 +203,7 @@ describe('the handler-veto channel (phantom-event hole closed)', () => {
       [{ id: 'v1', type: 'KILL_NPC', targetId: 'Nobody' }, 'npc_not_found'],
       [{ id: 'v2', type: 'IMPAIR_INSTITUTION', targetId: 'No Such Hall' }, 'institution_not_found'],
       [{ id: 'v3', type: 'IMPAIR_FACTION', targetId: 'No Such Circle' }, 'faction_not_found'],
+      [duplicateFactionEvent(), 'faction_already_present'],
       [{ id: 'v4', type: 'IMPOSE_CORRUPTION', targetId: 'Alderman Puce' }, 'no_criminal_org'],
       // SETTLEMENT_DISPUTE with an unlinked target deliberately does NOT veto:
       // the Lane-2 campaign ripple gives a campaign-peer dispute real effect

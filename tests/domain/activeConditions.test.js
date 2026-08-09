@@ -147,6 +147,23 @@ describe('deriveActiveCondition()', () => {
     expect(c2.id).toBe(c1.id);
   });
 
+  it('drops unsupported spatial-target aliases from the canonical shape', () => {
+    const aliases = {
+      districtId: 'district.one',
+      targetDistrictId: 'district.two',
+      districtIds: ['district.three'],
+      targetDistrictIds: ['district.four'],
+      buildingId: 'building.one',
+      targetBuildingId: 'building.two',
+      anchorKey: 'anchor.one',
+      buildingIds: ['building.three'],
+      targetBuildingIds: ['building.four'],
+      anchorKeys: ['anchor.two'],
+    };
+    const c = deriveActiveCondition({ archetype: 'abandonment', ...aliases });
+    for (const key of Object.keys(aliases)) expect(c).not.toHaveProperty(key);
+  });
+
   it('returns null for nullish input', () => {
     expect(deriveActiveCondition(null)).toBeNull();
     expect(deriveActiveCondition('plague')).toBeNull();

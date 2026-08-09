@@ -41,7 +41,8 @@
  *  @property {NpcImportance} importance
  *  @property {NpcStatus} status
  *  @property {string[]=} linkedInstitutionIds
- *  @property {string[]=} linkedFactionIds
+ *  @property {string[]=} linkedFactionIds  id-first faction handles: faction.id,
+ *    else the generated seat's canonical .faction/.name until the ID-only migration
  *  @property {(number|null)=} influence              0-100; null when never generated
  *  @property {(number|null)=} legitimacyContribution 0-100 — what they prop up when alive
  *  @property {(number|null)=} stabilityContribution  0-100 — how much their absence destabilizes

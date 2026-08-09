@@ -14,7 +14,8 @@
  * head, so there is no cycle.
  */
 import { criminalOpNote, criminalOpEcon, deriveCriminalStructure, deriveSupportingCapabilities,
-  deriveDefenseReadiness, deriveArmedForces, DEFENSE_STRESS_STATUS } from '../../domain/display/defenseDisplay.js';
+  deriveDefenseReadiness, deriveArmedForces, deriveGuardAssessment,
+  deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../domain/display/defenseDisplay.js';
 import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
 import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
 import { entityIdFor } from '../../domain/dossier/entityLinks.js';
@@ -157,7 +158,7 @@ export function defenseSlice(active) {
     threatReadiness,
     militaryStress,
     readiness:             dp.readiness || null,
-    guardAssessment:       s?.guardAssessment || dp?.guardAssessment || null,
+    guardAssessment:       deriveGuardAssessment(s),
     institutions:          dp.institutions || {},
     armedForces,
     safetyLabel:           sp.safetyLabel || null,
@@ -178,12 +179,12 @@ export function defenseSlice(active) {
     criminalStructure,
     criminalFaction,
     orderHooks,
-    publicOrder: s?.publicOrder || null,
-    lawEnforcement: s?.lawEnforcement || null,
     // Computed from defense scores + institution presence, mirroring the web
     // Defense tab (the engine does not emit these as fields).
     supportingCapabilities: deriveSupportingCapabilities(s),
-    vulnerabilities: dp?.vulnerabilities || s?.defenseVulnerabilities || [],
+    vulnerabilities: deriveDefenseVulnerabilities(s)
+      .map((violation) => typeof violation.reason === 'string' ? violation.reason.trim() : '')
+      .filter(Boolean),
     // Surfaced for defenseHeadline (it reads def.magicDependency).
     magicDependency: !!dp?.magicDependency,
     magicalCapability: dp?.magicalCapability || null,

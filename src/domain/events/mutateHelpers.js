@@ -3,21 +3,27 @@
  * id/label utilities used across the event-mutation handlers
  * (mutateEntities.js, mutateWorld.js) and the mutate.js router.
  *
- * Pure leaf: imports only the kernel slugify primitive, so both handler groups
- * can depend on it without an import cycle. Extracted verbatim from mutate.js as
- * part of the god-module split — every function body is byte-identical to its
- * pre-split form (slugify now delegates to the shared kernel primitive, proven
- * byte-identical in tests/kernel/slugify.parity.test.js).
+ * Pure leaf: imports only the kernel slugify primitive and the import-free faction
+ * reference contract, so both handler groups can depend on it without an import
+ * cycle. Extracted from mutate.js as part of the god-module split; slugify delegates
+ * to the shared kernel primitive (proven in tests/kernel/slugify.parity.test.js),
+ * while faction targeting delegates to the shared id-first reference contract.
  */
 
 import { slugify as kernelSlugify } from '../../kernel/slugify.js';
+import {
+  factionMatchesRef,
+  factionRefOf,
+  resolveFactionRef,
+} from '../factionRefs.js';
 
 // Schemaless open objects at this layer (see mutateEntities.js).
 /** @typedef {any} MutSettlement */
 /** @typedef {any} MutEntity */
+/** @typedef {{ kind: 'none' } | { kind: 'ambiguous' } | { kind: 'found', faction: MutEntity }} FactionMatch */
 
 const idOf        = (/** @type {MutEntity} */ i) => i?.id || i?.name || '';
-const factionIdOf = (/** @type {MutEntity} */ f) => f?.id || f?.faction || f?.name || '';
+const factionIdOf = (/** @type {MutEntity} */ f) => factionRefOf(f);
 const eventTime = (/** @type {MutEntity} */ event) => event.timestamp || event.createdAt;
 
 /**
@@ -41,15 +47,74 @@ function findInstitution(s, target) {
 function findFaction(s, target) {
   // Generated settlements carry their factions on powerStructure.factions (every
   // reader and replaceFaction's write target use it); s.factions is often an empty
-  // legacy array. Search the union so faction-targeted events don't silently no-op.
-  const list = [...(s.powerStructure?.factions || []), ...(s.factions || [])];
+  // legacy array. Resolve each authority tier separately so a mirrored legacy
+  // copy cannot make the canonical roster look ambiguous.
+  const rosters = [s.powerStructure?.factions || [], s.factions || []];
+  for (const roster of rosters) {
+    const exact = resolveFactionRef(roster, target);
+    if (exact) return exact;
+    // An exact alias that did not resolve is ambiguous. Fail closed instead of
+    // letting the legacy case-insensitive fallback pick the first matching seat.
+    if (roster.some((/** @type {MutEntity} */ f) => factionMatchesRef(f, target))) return null;
+
+    // Finish this authority tier before consulting the next one. A stale exact
+    // alias in settlement.factions must not override a unique case-folded match
+    // in the canonical powerStructure roster.
+    const legacy = resolveLegacyFactionTarget(roster, target);
+    if (legacy.kind === 'found') return legacy.faction;
+    if (legacy.kind === 'ambiguous') return null;
+  }
+  return undefined;
+}
+
+/**
+ * Resolve the old case-insensitive / dotted-label event syntax without reviving
+ * first-match behavior. IDs retain priority over names, and every fallback tier
+ * must identify exactly one record or fail closed.
+ *
+ * @param {MutEntity[]} roster
+ * @param {MutEntity} target
+ * @returns {FactionMatch}
+ */
+function resolveLegacyFactionTarget(roster, target) {
   const t = String(target || '').toLowerCase();
-  return list.find((/** @type {MutEntity} */ f) =>
-    String(f.id || '').toLowerCase() === t ||
-    String(f.faction || '').toLowerCase() === t ||
-    String(f.name || '').toLowerCase() === t ||
-    String(f.name || '').toLowerCase() === labelFromTarget(target).toLowerCase(),
+  if (!t) return { kind: 'none' };
+
+  const byId = uniqueFactionMatch(
+    roster,
+    (f) => String(f.id || '').toLowerCase() === t,
   );
+  if (byId.kind !== 'none') return byId;
+
+  const byName = uniqueFactionMatch(
+    roster,
+    (f) => String(f.faction || '').toLowerCase() === t
+      || String(f.name || '').toLowerCase() === t,
+  );
+  if (byName.kind !== 'none') return byName;
+
+  const label = labelFromTarget(target).toLowerCase();
+  if (!label || label === t) return { kind: 'none' };
+  return uniqueFactionMatch(
+    roster,
+    (f) => String(f.name || '').toLowerCase() === label,
+  );
+}
+
+/**
+ * @param {MutEntity[]} roster
+ * @param {(faction: MutEntity) => boolean} predicate
+ * @returns {FactionMatch}
+ */
+function uniqueFactionMatch(roster, predicate) {
+  /** @type {MutEntity | null} */
+  let found = null;
+  for (const faction of roster) {
+    if (!predicate(faction)) continue;
+    if (found && found !== faction) return { kind: 'ambiguous' };
+    found = faction;
+  }
+  return found ? { kind: 'found', faction: found } : { kind: 'none' };
 }
 
 /**

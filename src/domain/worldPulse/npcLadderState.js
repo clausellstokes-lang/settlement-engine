@@ -15,6 +15,10 @@ import { npcId } from './npcAgency.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
 import { slugify } from '../../kernel/slugify.js';
 import { isOffStage } from '../roads/state.js';
+import {
+  entityLinksFaction,
+  factionDisplayNameOf,
+} from '../factionRefs.js';
 
 /** @param {unknown} v @param {number} fallback @returns {number} */
 export function num(v, fallback) {
@@ -117,8 +121,8 @@ export function rungCapForTier(tier) {
  *  slugified to `fac.unknown` and the ladder merged them into one — THE FACTION-KEY BUG.
  *  Single chokepoint for both the key and the membership match. @param {Record<string, unknown>} f @returns {string} */
 function factionName(f) {
-  if (typeof f.faction === 'string' && f.faction) return f.faction;
-  if (typeof f.name === 'string' && f.name) return f.name;
+  const canonical = factionDisplayNameOf(f);
+  if (canonical) return canonical;
   if (typeof f.label === 'string' && f.label) return f.label;
   return '';
 }
@@ -147,17 +151,17 @@ function npcFactionHandle(npc) {
   return '';
 }
 /** Does this NPC belong to the given faction? Matches the generator affiliation handle
- *  (normalized) against the faction name/key, or linkedFactionIds against the faction id.
+ *  (normalized) against the faction name/key, or linkedFactionIds against the faction's
+ *  id-first compatibility aliases.
  *  The faction name is read via factionName (`.faction` on real records, else `.name`).
- *  @param {Record<string, unknown>} npc @param {{ id?: unknown, name?: unknown, faction?: unknown }} faction @param {string} fkey */
-export function npcInFaction(npc, faction, fkey) {
+ *  @param {Record<string, unknown>} npc @param {{ id?: unknown, name?: unknown, faction?: unknown }} faction @param {string} fkey
+ *  @param {Array<{ id?: unknown, name?: unknown, faction?: unknown }>} [factions] full roster for ambiguity-safe linked-ref resolution */
+export function npcInFaction(npc, faction, fkey, factions) {
   const f = asObject(faction);
   const name = factionName(f);
   const handle = npcFactionHandle(npc);
   if (handle && (normalizeToken(handle) === normalizeToken(name) || handle === f.id || `fac.${normalizeToken(handle)}` === fkey)) return true;
-  const linked = Array.isArray(npc.linkedFactionIds) ? npc.linkedFactionIds : [];
-  if (typeof f.id === 'string' && f.id && linked.map(String).includes(f.id)) return true;
-  return false;
+  return entityLinksFaction(npc, f, factions);
 }
 
 /** The structural-rank score of an npc (the generator's dominant/subordinate/minor

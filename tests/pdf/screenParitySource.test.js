@@ -50,6 +50,8 @@ describe('PDF↔screen parity — shared derivation source is pinned on BOTH sid
     const vm = readViewModelSet();
     expect(vm, 'PDF view-model must derive food via deriveFoodBalance').toContain('deriveFoodBalance');
     expect(vm, 'PDF view-model must derive defense via deriveDefenseReadiness').toContain('deriveDefenseReadiness');
+    expect(vm, 'PDF view-model must derive guard prose via deriveGuardAssessment').toContain('deriveGuardAssessment');
+    expect(vm, 'PDF view-model must derive defense vulnerabilities via deriveDefenseVulnerabilities').toContain('deriveDefenseVulnerabilities');
   });
 
   it('EconomicsTab (screen) sources the contracted FOOD fact from the SAME helper the PDF uses', () => {
@@ -61,5 +63,7 @@ describe('PDF↔screen parity — shared derivation source is pinned on BOTH sid
   it('DefenseTab (screen) sources the contracted DEFENSE fact from the SAME helper the PDF uses', () => {
     const tab = read('src/components/new/tabs/DefenseTab.jsx');
     expect(tab, 'DefenseTab must derive defense via deriveDefenseReadiness (screen↔PDF parity)').toContain('deriveDefenseReadiness');
+    expect(tab, 'DefenseTab must derive guard prose via deriveGuardAssessment (screen↔PDF parity)').toContain('deriveGuardAssessment');
+    expect(tab, 'DefenseTab must derive vulnerabilities via deriveDefenseVulnerabilities (screen↔PDF parity)').toContain('deriveDefenseVulnerabilities');
   });
 });

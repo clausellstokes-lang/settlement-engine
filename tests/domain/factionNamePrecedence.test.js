@@ -33,7 +33,7 @@ import { rulerLens } from '../../src/domain/worldPulse/religionLegitimacy.js';
 
 /** A record carrying BOTH keys, divergently. `.faction` is canonical per nameOf. */
 const CANON = 'Merchant Guild';
-const divergent = (over = {}) => ({ faction: CANON, name: 'STALE ALIAS', power: 70, ...over });
+const divergent = (over = {}) => ({ id: 'faction.stable', faction: CANON, name: 'STALE ALIAS', power: 70, ...over });
 
 describe('the canonical accessor (the contract every pin below is measured against)', () => {
   it('nameOf reads .faction ahead of .name', () => {
@@ -52,6 +52,7 @@ describe('PIN 1 — factionRoles: the structural-NPC write/read join', () => {
     for (const npc of npcs) {
       expect(npc.id).toMatch(/^npc\.merchant_guild_/);
       expect(npc.id).not.toContain('stale_alias');
+      expect(npc.linkedFactionIds).toEqual(['faction.stable']);
     }
   });
 

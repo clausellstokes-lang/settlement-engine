@@ -39,6 +39,27 @@
 const PLOT_HOOK_PREFIX_RE = /^\s*PLOT HOOK:\s*/i;
 
 /**
+ * Extract plot-hook prose from the three shapes the generators actually emit:
+ * a bare string, `{ hook }`, or the normalized dossier shape `{ text }`.
+ *
+ * This deliberately rejects label-like object fallbacks. A field called
+ * `description`, `summary`, `title`, etc. is not part of the plot-hook contract;
+ * accepting one here would silently turn an unrelated record into authored hook
+ * prose and make malformed producer output impossible to detect.
+ *
+ * @param {unknown} value
+ * @returns {string}
+ */
+export function plotHookText(value) {
+  if (typeof value === 'string') return value;
+  if (!value || typeof value !== 'object') return '';
+  const shaped = /** @type {{ hook?: unknown, text?: unknown }} */ (value);
+  if (typeof shaped.hook === 'string') return shaped.hook;
+  if (typeof shaped.text === 'string') return shaped.text;
+  return '';
+}
+
+/**
  * Strip the authored ' PLOT HOOK: ' marker from a hook string and trim the ends.
  * Non-string input coerces to ''. This is byte-identical to the per-surface
  * strippers it replaces (domain/dossier/plotHooks.cleanHook and the tail of

@@ -3,6 +3,9 @@
  * chokepoint (src/lib/proseSeams.js).
  *
  * Contract:
+ *   plotHookText - accepts only the generator/dossier hook shapes: a bare
+ *     string, `{ hook }`, or `{ text }`; unrelated label-like objects are not
+ *     silently promoted to plot hooks.
  *   normalizePlotHook - strips a leading ' PLOT HOOK: ' authoring marker
  *     (whitespace + case tolerant) and trims; non-strings coerce to ''. Must be
  *     byte-identical to the per-surface strippers it replaced (plotHooks.cleanHook
@@ -14,7 +17,7 @@
  */
 import { describe, expect, test } from 'vitest';
 
-import { normalizePlotHook, collapseDoubledArticles } from '../../src/lib/proseSeams.js';
+import { plotHookText, normalizePlotHook, collapseDoubledArticles } from '../../src/lib/proseSeams.js';
 
 // The exact stripper implementations proseSeams replaced, re-declared here as
 // the byte-identity oracle: consolidation must not change what they returned.
@@ -23,6 +26,28 @@ const legacyArticleCollapse = (text) =>
   String(text || '')
     .replace(/\bthe\s+(the|a|an)\s+/gi, 'the ')
     .replace(/\bthe\s+(The|A|An)\s+/g, 'the ');
+
+describe('plotHookText', () => {
+  test('accepts the three canonical raw/normalized hook shapes', () => {
+    expect(plotHookText('A bare hook')).toBe('A bare hook');
+    expect(plotHookText({ hook: 'A generator hook' })).toBe('A generator hook');
+    expect(plotHookText({ text: 'A dossier hook' })).toBe('A dossier hook');
+  });
+
+  test.each([
+    'description', 'summary', 'prompt', 'title',
+    'label', 'body', 'content', 'value',
+  ])('rejects the unsupported %s alias', (key) => {
+    expect(plotHookText({ [key]: 'Not a plot hook contract' })).toBe('');
+  });
+
+  test('rejects malformed and non-string payloads without object coercion', () => {
+    expect(plotHookText({ hook: 42, text: null })).toBe('');
+    expect(plotHookText({})).toBe('');
+    expect(plotHookText(null)).toBe('');
+    expect(plotHookText(42)).toBe('');
+  });
+});
 
 describe('normalizePlotHook', () => {
   test('strips the authored " PLOT HOOK: " marker foodBalance bakes in', () => {

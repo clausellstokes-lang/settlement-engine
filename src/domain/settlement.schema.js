@@ -464,6 +464,8 @@ export const FIELD_ALIASES = Object.freeze({
  * `structuralRank` are unioned (string|number) because both forms appear across
  * legacy generator output. Nested prose/pointer fields (secret, goal, personality,
  * corruptTies …) stay loose until their own sub-shapes are enumerated.
+ * `linkedFactionIds` currently stores id-first handles (`faction.id`, else the
+ * generated seat's `.faction` / `.name`) pending the governed ID-only migration.
  */
 
 /**

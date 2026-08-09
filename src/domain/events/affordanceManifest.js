@@ -421,7 +421,7 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
   // ── Power ──────────────────────────────────────────────────────────────
   ADD_FACTION: entry({
     type: 'ADD_FACTION', family: 'Power', entityKind: 'settlement',
-    coversVetoCodes: ['empty_target'],
+    coversVetoCodes: ['empty_target', 'faction_already_present'],
     predicate: () => ok(),
   }),
   IMPAIR_FACTION: entry({
@@ -664,6 +664,7 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
 const VETO_PROSE = {
   institution_not_found: d => `No institution "${d}" is here to act on.`,
   faction_not_found: d => `No faction "${d}" is here to act on.`,
+  faction_already_present: d => `${d || 'That faction'} is already present; impair or restore it instead of adding it again.`,
   npc_not_found: d => `No NPC "${d}" is here to act on.`,
   target_not_found: d => `No corrupt NPC, faction, or institution "${d}" to expose.`,
   npc_already_corrupt: d => `${d || 'That NPC'} is already compromised.`,

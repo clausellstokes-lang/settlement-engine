@@ -9,6 +9,24 @@ import { describe, expect, test } from 'vitest';
 
 import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
 
+describe('collectPlotHooks canonical input shapes', () => {
+  test('keeps normalized {text} hooks and drops alias-only objects', () => {
+    const hooks = collectPlotHooks({
+      npcs: [{
+        id: 'npc.witness',
+        name: 'The Witness',
+        plotHooks: [
+          { text: 'The normalized dossier hook survives.' },
+          { description: 'This unrelated alias must not become a hook.' },
+        ],
+      }],
+    });
+    expect(hooks.map((hook) => hook.text)).toEqual([
+      'The normalized dossier hook survives.',
+    ]);
+  });
+});
+
 describe('collectPlotHooks tension roles', () => {
   const description =
     'Merchant guilds resist investigation into the missing harbor ledgers while dock crews trade accusations.';

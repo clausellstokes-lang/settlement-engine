@@ -79,9 +79,44 @@ export const DEFENSE_STRESS_STATUS = Object.freeze(
  * @typedef {Object} DefenseDisplaySettlement
  * @property {Array<{ name?: string }>} [institutions]
  * @property {{ scores?: Record<string, number>, economicGates?: Record<string, number>, institutions?: Record<string, ForceEntry[]> }} [defenseProfile]
- * @property {{ compound?: { inst?: Record<string, boolean> }, foodSecurity?: { resilienceScore?: number, stockpile?: { blockaded?: unknown, blockadeBypass?: string | null } | null } }} [economicState]
+ * @property {{ compound?: { inst?: Record<string, boolean> }, foodSecurity?: { resilienceScore?: number, stockpile?: { blockaded?: unknown, blockadeBypass?: string | null } | null }, safetyProfile?: { guardEffectivenessDesc?: unknown } }} [economicState]
  * @property {{ tradeRouteAccess?: string }} [config]
+ * @property {Array<{ reason?: unknown, severity?: unknown }>} [structuralViolations]
  */
+
+const DEFENSE_VULNERABILITY_RE = /fort|milit|wall|garrison|defense|guard|structural|survival/i;
+
+/**
+ * The guard assessment is authored by the safety-profile generator and is the
+ * same prose the Defense screen already presents. Keep the derivation here so
+ * every export surface reads the real producer instead of speculative root or
+ * defenseProfile aliases.
+ *
+ * @param {DefenseDisplaySettlement | null | undefined} settlement
+ * @returns {string | null}
+ */
+export function deriveGuardAssessment(settlement) {
+  const value = settlement?.economicState?.safetyProfile?.guardEffectivenessDesc;
+  return typeof value === 'string' && value.trim() ? value.trim() : null;
+}
+
+/**
+ * First-survey defense vulnerabilities are the defense-related subset of the
+ * structural validator's root receipt. Preserve each receipt row for screen
+ * severity styling; export view models can project its `reason` to prose.
+ *
+ * @param {DefenseDisplaySettlement | null | undefined} settlement
+ * @returns {Array<{ reason?: unknown, severity?: unknown }>}
+ */
+export function deriveDefenseVulnerabilities(settlement) {
+  const rows = Array.isArray(settlement?.structuralViolations)
+    ? settlement.structuralViolations
+    : [];
+  return rows.filter((row) => (
+    typeof row?.reason === 'string'
+    && DEFENSE_VULNERABILITY_RE.test(row.reason)
+  ));
+}
 
 // scoreColor + scoreBand moved to display/defenseScoreBands.js (R-5b item #20)
 // so OverviewTab / SummaryTab can read the SAME ladder without importing this

@@ -5,7 +5,7 @@ import Button from '../../primitives/Button.jsx';
 
 import {buildThreatAssessment} from '../../../domain/display/threatAssessment.js';
 import {NarrativeNote} from '../NarrativeNote';
-import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
+import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
 import { truncateAtWord } from '../../../lib/text.js';
@@ -94,11 +94,8 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
 
   // Supporting capabilities (shared with the PDF viewModel)
   const caps = deriveSupportingCapabilities(r);
-
-  // Defense violations
-  const defViolations = (r.structuralViolations||[]).filter(v=>
-    /fort|milit|wall|garrison|defense|guard|structural|survival/i.test(v.reason||'')
-  );
+  const guardAssessment = deriveGuardAssessment(r);
+  const defViolations = deriveDefenseVulnerabilities(r);
 
   // Force card component
   const ForceCard = ({inst:i,accent}) => (
@@ -128,9 +125,9 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
               {ra.strategicValue&&<span style={{fontSize:FS.xs,color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d0c090',padding:'2px 8px'}}>{ra.strategicValue.split(' - ')[0]}</span>}
             </div>
           </div>
-          {sp.guardEffectivenessDesc&&<div style={{flex:1,minWidth:200}}>
+          {guardAssessment&&<div style={{flex:1,minWidth:200}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>Guard Assessment</div>
-            <p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.6,margin:0}}>{sp.guardEffectivenessDesc}</p>
+            <p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.6,margin:0}}>{guardAssessment}</p>
           </div>}
         </div>
       </div>

@@ -13,8 +13,9 @@
  *         surfaces, where the earlier pdf-4 fix had instead shrunk the PDF to 6.
  */
 import { describe, test, expect } from 'vitest';
-import { noteText, label } from '../../src/pdf/lib/format.js';
+import { noteText, label, hookText } from '../../src/pdf/lib/format.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
+import { buildJournalPages } from '../../src/foundry/journalPages.js';
 import { DEFENSE_STRESS_STATUS } from '../../src/domain/display/defenseDisplay.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 
@@ -42,6 +43,20 @@ describe('pdf-2 — noteText coerces object-shaped notes to prose', () => {
     expect(noteText('food_security_low')).toBe(label('food_security_low'));
     expect(noteText('low food security')).toBe('low food security');
     expect(noteText({ label: 'Iron Ore' })).toBe('Iron Ore');
+  });
+});
+
+describe('plot-hook formatting honors the canonical producer contract', () => {
+  test('renders string/{hook}/{text} and rejects alias-only objects', () => {
+    expect(hookText('Bare hook')).toBe('Bare hook');
+    expect(hookText({ hook: 'Generator hook' })).toBe('Generator hook');
+    expect(hookText({ text: 'Dossier hook' })).toBe('Dossier hook');
+    for (const key of [
+      'description', 'summary', 'prompt', 'title',
+      'label', 'body', 'content', 'value',
+    ]) {
+      expect(hookText({ [key]: 'Unsupported alias' }), key).toBe('');
+    }
   });
 });
 
@@ -96,5 +111,46 @@ describe('pdf-4 — defense military-status set matches the web DefenseTab', () 
 
   test('the shared constant covers EVERY registered stress type (H3 — derived from the producer)', () => {
     expect(Object.keys(DEFENSE_STRESS_STATUS).sort()).toEqual(Object.keys(STRESS_TYPE_MAP).sort());
+  });
+});
+
+describe('PDF/Foundry defense fields come from real producers', () => {
+  const guardAssessment = 'The watch controls the gates but cannot patrol the outer ward.';
+  const wallVulnerability = 'The north wall has no surviving garrison.';
+  const settlement = settlementWith({
+    economicState: {
+      primaryImports: [],
+      primaryExports: [],
+      safetyProfile: { guardEffectivenessDesc: `  ${guardAssessment}  ` },
+    },
+    defenseProfile: {
+      scores: {},
+      guardAssessment: 'POISONED nested fallback',
+      vulnerabilities: ['POISONED nested fallback'],
+    },
+    guardAssessment: 'POISONED root fallback',
+    defenseVulnerabilities: ['POISONED root fallback'],
+    publicOrder: 'POISONED dead field',
+    lawEnforcement: 'POISONED dead field',
+    structuralViolations: [
+      { reason: wallVulnerability, severity: 'critical' },
+      { reason: 'The market lacks covered drainage.', severity: 'warning' },
+    ],
+  });
+  const vm = buildViewModel({ settlement });
+
+  test('the view model derives guard prose and normalized defense vulnerabilities', () => {
+    expect(vm.defense.guardAssessment).toBe(guardAssessment);
+    expect(vm.defense.vulnerabilities).toEqual([wallVulnerability]);
+    expect(vm.defense).not.toHaveProperty('publicOrder');
+    expect(vm.defense).not.toHaveProperty('lawEnforcement');
+  });
+
+  test('the Foundry defense journal prints the derived vulnerability reason', () => {
+    const page = buildJournalPages(vm, { variant: 'canon_dossier' })
+      .find((candidate) => candidate.name === 'Defense & Security');
+    expect(page).toBeTruthy();
+    expect(page.markdown).toContain(wallVulnerability);
+    expect(page.markdown).not.toContain('POISONED');
   });
 });

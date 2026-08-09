@@ -22,6 +22,7 @@
  */
 
 import { flag } from '../../lib/flags.js';
+import { plotHookText } from '../../lib/proseSeams.js';
 import { collectPlotHooks } from '../../domain/dossier/plotHooks.js';
 import { deriveFoodBalance, deriveViability } from '../../domain/display/dossierViewModel.js';
 import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
@@ -846,9 +847,7 @@ function characterSentence(npc) {
 }
 
 function labelOfHook(h) {
-  if (!h) return '';
-  if (typeof h === 'string') return h;
-  return h.hook || h.text || h.description || h.title || '';
+  return plotHookText(h);
 }
 
 /**
@@ -887,14 +886,7 @@ function normSeverity(s) {
  */
 function cleanHooks(arr) {
   if (!Array.isArray(arr)) return [];
-  return arr.filter(h => {
-    if (!h) return false;
-    if (typeof h === 'string') return h.trim().length > 0;
-    if (typeof h === 'object') {
-      return !!(h.hook || h.text || h.description || h.summary || h.title || h.label || h.body || h.content);
-    }
-    return false;
-  });
+  return arr.filter(h => plotHookText(h).trim().length > 0);
 }
 
 

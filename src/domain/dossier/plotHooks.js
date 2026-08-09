@@ -1,6 +1,6 @@
 import { compareCodepoint } from '../deterministicSort.js';
 import { traditionHook } from '../traditions/prose.js';
-import { normalizePlotHook } from '../../lib/proseSeams.js';
+import { normalizePlotHook, plotHookText } from '../../lib/proseSeams.js';
 import { themeOfText, themeOfRelArchetype, UNTYPED } from '../hookThemes.js';
 import { retainHooks, retentionKey, editedHookTextKeys } from './hookRetention.js';
 
@@ -56,15 +56,6 @@ export const PLOT_HOOK_CATEGORIES = Object.freeze({
  * @property {boolean} [accent]
  * @property {Array<{ kind: string, label: unknown, id: unknown }>} [links]
  */
-
-/** @param {unknown} hook @returns {string} */
-function textForHook(hook) {
-  if (typeof hook === 'string') return hook;
-  if (!hook) return '';
-  if (typeof (/** @type {{ hook?: unknown }} */ (hook)).hook === 'string') return /** @type {string} */ ((/** @type {{ hook?: unknown }} */ (hook)).hook);
-  if (typeof (/** @type {{ text?: unknown }} */ (hook)).text === 'string') return /** @type {string} */ ((/** @type {{ text?: unknown }} */ (hook)).text);
-  return String(hook);
-}
 
 // Hook-prefix cleanup is the shared display chokepoint (src/lib/proseSeams.js);
 // `normalizePlotHook` here is byte-identical to the local `cleanHook` it replaced.
@@ -227,7 +218,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
 
   (settlement.npcs || []).forEach((npc) => {
     (npc.plotHooks || []).forEach((hook) => push(hooks, {
-      text: textForHook(hook),
+      text: plotHookText(hook),
       source: npc.name || 'NPC',
       role: npc.role || npc.title || '',
       sub: [
@@ -244,7 +235,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   (settlement.conflicts || []).forEach((conflict) => {
     const intensity = conflict.intensity || 'moderate';
     (conflict.plotHooks || []).forEach((hook) => push(hooks, {
-      text: textForHook(hook),
+      text: plotHookText(hook),
       source: (conflict.parties || []).join(' vs ') || 'Conflict',
       role: conflict.issue || '',
       sub: `${intensity} tension`,
@@ -258,7 +249,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   (settlement.history?.currentTensions || []).forEach((tension) => {
     const label = TENSION_LABELS[/** @type {keyof typeof TENSION_LABELS} */ (tension.type)] || tension.type || 'Tension';
     (tension.plotHooks || []).forEach((hook) => push(hooks, {
-      text: textForHook(hook),
+      text: plotHookText(hook),
       source: label,
       // Full description — tension prose runs ~95 chars and the role renders
       // small/muted; a hard slice left mid-word fragments ('…resist investi').
@@ -290,7 +281,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   (settlement.economicViability?.plotHooks || []).forEach((hook) => {
     const h = /** @type {{ hook?: unknown, text?: unknown, category?: unknown, severity?: unknown }} */ (typeof hook === 'object' && hook ? hook : { hook });
     push(hooks, {
-      text: textForHook(h),
+      text: plotHookText(h),
       source: h.category || 'Economy',
       role: '',
       sub: ['high', 'critical'].includes(/** @type {string} */ (h.severity)) ? `${h.severity} severity` : null,
@@ -301,7 +292,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   });
 
   (settlement.economicState?.safetyProfile?.plotHooks || []).forEach((hook) => push(hooks, {
-    text: textForHook(hook),
+    text: plotHookText(hook),
     source: 'Safety & Crime',
     role: '',
     category: 'safety',
@@ -311,7 +302,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   (settlement.history?.historicalEvents || []).forEach((event) => {
     const label = EVENT_LABELS[/** @type {keyof typeof EVENT_LABELS} */ (event.type)] || EVENT_LABELS.political;
     (event.plotHooks || []).forEach((hook) => push(hooks, {
-      text: textForHook(hook),
+      text: plotHookText(hook),
       source: `${label} Event`,
       role: event.yearsAgo ? `${event.yearsAgo}y ago` : '',
       sub: event.anchored ? 'Still affecting this settlement' : null,

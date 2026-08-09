@@ -340,10 +340,12 @@ function restoreFaction(s, event) {
 }
 
 /**
- * ADD_FACTION — introduce a new faction. Mirrors addInstitution: idempotent
- * by name (re-adding an existing faction just clears removed/impaired state),
- * and writes to powerStructure.factions (the canonical location) so the
- * power-structure rerun and seat logic see it.
+ * ADD_FACTION — introduce a new faction. Idempotent by canonical name: an
+ * existing faction is left byte-for-byte unchanged. Factions have impairment
+ * and restoration events, but no removal lifecycle; ADD_FACTION must not act as
+ * a hidden resurrection path for unsupported provenance fields. New factions
+ * write to powerStructure.factions (the canonical location) so the
+ * power-structure rerun and seat logic see them.
  */
 /**
  * @param {MutSettlement} s
@@ -358,19 +360,7 @@ function addFaction(s, event) {
   const existing = list.find(
     (/** @type {MutEntity} */ f) => String(f.faction || f.name || '').toLowerCase() === name.toLowerCase(),
   );
-  if (existing) {
-    // Re-add is scoped like restoreFaction: clear ONLY the removal — the
-    // REMOVED/DESTROYED status and any impairments whose cause was that removal
-    // (removedByEventId) — never a blanket clear that wipes UNRELATED impairments
-    // from other in-timeline events (a riot, a levy) the re-add never touched.
-    const removalCause = existing.removedByEventId || existing.destroyedByEventId || null;
-    const { removedByEventId: _r, destroyedByEventId: _d, ...rest } = existing;
-    const restored = {
-      ...(removalCause ? withoutEventImpairments(rest, removalCause) : rest),
-      status: 'active',
-    };
-    return replaceFaction(s, existing, restored);
-  }
+  if (existing) return vetoMutation('faction_already_present', name);
   const newFaction = {
     id: `faction.${slugify(name)}`,
     name,

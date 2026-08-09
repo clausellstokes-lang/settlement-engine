@@ -726,7 +726,7 @@ describe('TownSceneManifest — living layers and cache axes', () => {
       .toBe(true);
   });
 
-  it('scopes explicitly targeted condition treatment while global rows remain global', () => {
+  it('keeps canonical conditions settlement-wide despite unsupported targeting aliases', () => {
     const baseSettlement = makeTownFixture({
       tier: 'town',
       terrain: 'plains',
@@ -738,49 +738,36 @@ describe('TownSceneManifest — living layers and cache axes', () => {
       audience: 'dm',
     });
     const targetDistrictId = baseline.districts[0].id;
-    const targeted = compileTownSceneManifest({
+    const withDecoyTargets = compileTownSceneManifest({
       settlement: {
         ...baseSettlement,
         activeConditions: [{
-          id: 'targeted-abandonment',
-          archetype: 'abandonment',
-          label: 'Only this ward is abandoned',
-          severity: 0.8,
-          districtId: targetDistrictId,
-        }],
-      },
-      mapEdits: { layoutLawVersion: 2 },
-      audience: 'dm',
-    });
-    const global = compileTownSceneManifest({
-      settlement: {
-        ...baseSettlement,
-        activeConditions: [{
-          id: 'global-abandonment',
+          id: 'condition.abandonment.decoy',
           archetype: 'abandonment',
           label: 'The settlement is abandoned throughout',
           severity: 0.8,
+          // These fields are deliberately outside ActiveCondition. TownScene
+          // must not let them smuggle a derived map identity into persistence.
+          districtId: targetDistrictId,
+          targetBuildingIds: ['building:not-a-canonical-target'],
         }],
       },
       mapEdits: { layoutLawVersion: 2 },
       audience: 'dm',
     });
 
-    const targetedBuildings = targeted.buildings.filter(
+    const namedDistrictBuildings = withDecoyTargets.buildings.filter(
       (building) => building.districtId === targetDistrictId,
     );
-    const otherBuildings = targeted.buildings.filter(
+    const otherBuildings = withDecoyTargets.buildings.filter(
       (building) => building.districtId !== targetDistrictId,
     );
-    expect(targetedBuildings).not.toHaveLength(0);
+    expect(namedDistrictBuildings).not.toHaveLength(0);
     expect(otherBuildings).not.toHaveLength(0);
-    expect(targetedBuildings.every(
+    expect(namedDistrictBuildings.every(
       (building) => building.conditionProfile.abandonment > 0,
     )).toBe(true);
     expect(otherBuildings.every(
-      (building) => building.conditionProfile.abandonment === 0,
-    )).toBe(true);
-    expect(global.buildings.every(
       (building) => building.conditionProfile.abandonment > 0,
     )).toBe(true);
   });
