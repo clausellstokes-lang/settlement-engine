@@ -344,6 +344,64 @@ describe('campaignSlice deletion reconciliation', () => {
     expect(h.service.loadTombstones('user_a').map(entry => entry.id)).toContain(UUID_X);
   });
 
+  test('strictly hydrates raw cache and cloud worlds before either can be published', async () => {
+    const forgedWorld = { envoyErrands: [{ id: 'forged-row' }] };
+    h.caches.set('user_a', [{
+      id: UUID_X,
+      name: 'Cached raw realm',
+      updatedAt: '2026-01-01T00:00:00Z',
+      settlementIds: [],
+      pendingSync: true,
+      worldState: forgedWorld,
+    }]);
+    h.cloud.set(UUID_Y, {
+      id: UUID_Y,
+      name: 'Cloud raw realm',
+      updatedAt: '2026-01-02T00:00:00Z',
+      settlementIds: [],
+      worldState: forgedWorld,
+    });
+
+    const store = makeStore();
+    const loading = store.getState().loadCampaigns();
+    await loading;
+    await flush();
+
+    expect(store.getState().campaigns.map(campaign => campaign.id)).toEqual([UUID_Y, UUID_X]);
+    for (const campaign of store.getState().campaigns) {
+      expect(campaign.worldState).not.toHaveProperty('envoyErrands');
+    }
+  });
+
+  test('an immediate list rejection is handled while the cold hydration chunk loads', async () => {
+    const originalList = h.service.list;
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    h.caches.set('user_a', [{
+      id: UUID_X,
+      name: 'Offline fallback',
+      updatedAt: '2026-01-01T00:00:00Z',
+      settlementIds: [],
+      worldState: { envoyErrands: [{ id: 'forged-row' }] },
+    }]);
+    h.service.list = () => Promise.reject(new Error('immediate network failure'));
+
+    try {
+      const store = makeStore();
+      await expect(store.getState().loadCampaigns()).resolves.toEqual([
+        expect.objectContaining({ id: UUID_X, name: 'Offline fallback' }),
+      ]);
+      expect(store.getState().campaignsLoaded).toBe(true);
+      expect(store.getState().campaigns[0].worldState).not.toHaveProperty('envoyErrands');
+      expect(warn).toHaveBeenCalledWith(
+        '[campaignSlice] campaign cloud load failed',
+        expect.objectContaining({ message: 'immediate network failure' }),
+      );
+    } finally {
+      h.service.list = originalList;
+      warn.mockRestore();
+    }
+  });
+
   test('a rejected A list cannot mark B campaigns loaded', async () => {
     const originalList = h.service.list;
     let rejectList;
@@ -352,6 +410,7 @@ describe('campaignSlice deletion reconciliation', () => {
     });
     const store = makeStore('user_a');
     const loadingA = store.getState().loadCampaigns();
+    expect(rejectList, 'list() must start synchronously before cold hydration').toBeTypeOf('function');
 
     store.getState().clearCampaigns();
     store.setState({

@@ -7,8 +7,9 @@
  * legible and gives the view table a single home. `Loading` lives here because both
  * the shell's Suspense fallback and the guarded-view loaders need it.
  *
- * Pure presentational: every input is a prop (no store reads), so it re-renders only
- * when the shell passes new values.
+ * Render selection remains prop-driven, so this component re-renders only when
+ * the shell passes new values. The campaignLazy module loaders consult the store
+ * only while arming a campaign-capable route; AppViews itself does not subscribe.
  *
  * NOTE on HomeLanding: the redesign template imported it statically (the Welcome
  * landing IS first paint for anon). This tree's first-paint byte budget is tighter
@@ -17,25 +18,40 @@
  * lazy here — the shell's Suspense shows the brief Loading fallback before the hero.
  * Its proof card lazy-loads from inside HomeLanding.
  */
-import { Suspense, lazy } from 'react';
+import { Suspense } from 'react';
 import { IconsContext } from './components/primitives/IconsContext.js';
 import { MUTED, sans } from './components/theme.js';
 import HouseDevice from './components/brand/HouseDevice.jsx';
+import { useStore } from './store/index.js';
+import {
+  createRetryableCampaignLazy,
+  createRetryableLazy,
+} from './store/campaignRuntimeView.js';
+
+const campaignLazy = importer => createRetryableCampaignLazy(useStore, importer, {
+  fallback: <Loading />,
+});
+// Every route lives beneath App's recoverable boundary. Use a fresh lazy
+// identity on its explicit retry so ordinary chunk failures recover just as
+// campaign-runtime failures do, without arming the campaign capsule.
+const lazy = importer => createRetryableLazy(importer, {
+  fallback: <Loading />,
+});
 
 // Lazy-loaded views (code-split off the first-paint graph).
 const HomeLanding     = lazy(() => import('./components/HomeLanding.jsx'));
-const GenerateWizard  = lazy(() => import('./components/GenerateWizard.jsx'));
-const SettlementsPanel = lazy(() => import('./components/SettlementsPanel'));
+const GenerateWizard  = campaignLazy(() => import('./components/GenerateWizard.jsx'));
+const SettlementsPanel = campaignLazy(() => import('./components/SettlementsPanel'));
 const CompendiumPanel = lazy(() => import('./components/CompendiumPanel'));
 const HowToUse        = lazy(() => import('./components/HowToUse'));
 // THE ABOUT SPLIT (docs/DESIGN_ABOUT_PAGES.md): the conceptual page. The
 // operational half is HowToUse above, now /about/guide.
 const AboutWhatThisIs = lazy(() => import('./components/about/AboutWhatThisIs.jsx'));
-const WorldMap         = lazy(() => import('./components/WorldMap.jsx'));
-const AccountPage      = lazy(() => import('./components/AccountPage.jsx'));
-const AdminPanel       = lazy(() => import('./components/AdminPanel.jsx'));
+const WorldMap         = campaignLazy(() => import('./components/WorldMap.jsx'));
+const AccountPage      = campaignLazy(() => import('./components/AccountPage.jsx'));
+const AdminPanel       = campaignLazy(() => import('./components/AdminPanel.jsx'));
 const PricingPage      = lazy(() => import('./components/PricingPage.jsx'));
-const GalleryPage      = lazy(() => import('./components/GalleryPage.jsx'));
+const GalleryPage      = campaignLazy(() => import('./components/GalleryPage.jsx'));
 const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSuccessPage.jsx'));
 // Dedicated auth routes (/signin · /register · /reset-password · /verify-email
 // · /set-new-password · /confirm-email). Thin page wrappers around the same
@@ -59,7 +75,7 @@ const PrivacyPage       = lazy(() => import('./components/legal/PrivacyPage.jsx'
 // R-7/R-9 trust pages + V-18 the DM Screen — all lazy (off the first-paint graph).
 const CovenantPage      = lazy(() => import('./components/legal/CovenantPage.jsx'));
 const BountyPage        = lazy(() => import('./components/legal/BountyPage.jsx'));
-const DmScreen          = lazy(() => import('./components/screen/DmScreen.jsx'));
+const DmScreen          = campaignLazy(() => import('./components/screen/DmScreen.jsx'));
 // THE FOUNDERS' HALL (/founders) — thirty chairs, all by invitation, none ever
 // sold. Lazy — off the first-paint graph; its chair read (lib/foundersHall.js) and
 // its letterbox seam (lib/founderChairRequest.js) are both dynamically imported on

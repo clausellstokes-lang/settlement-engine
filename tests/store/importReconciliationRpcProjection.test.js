@@ -118,7 +118,10 @@ function migrationRpcResponse() {
           id: TARGET,
           name: 'Target campaign',
           settlementIds: [CREATED],
-          worldState: { pendingEvents: [] },
+          worldState: {
+            pendingEvents: [],
+            envoyErrands: [{ id: 'forged.rpc' }],
+          },
           unrelated: { keep: true },
         },
       },
@@ -233,6 +236,7 @@ describe('structured-import RPC projection', () => {
       accessState: 'active',
       updatedAt: APPLIED_AT,
     });
+    expect(projectedCampaign.worldState).not.toHaveProperty('envoyErrands');
     expect(projectedCampaign).not.toHaveProperty('map_data');
     expect(projectedCampaign).not.toHaveProperty('user_id');
   });

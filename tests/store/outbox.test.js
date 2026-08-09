@@ -16,6 +16,7 @@ import {
   resolveBarrier,
   reviveAllPending,
   getStatus,
+  initOutboxStatusReporter,
   loadMirror,
   activateOutboxOwner,
   resetOutbox,
@@ -53,6 +54,7 @@ beforeEach(() => {
   now = 1_000_000;
   setOutboxClock(clock);
   setOutboxScheduler(null);
+  initOutboxStatusReporter(null);
   resetOutbox();
   activateOutboxOwner('test-owner');
   okRunner.mockClear();
@@ -70,6 +72,41 @@ function enq(saveId, kind = 'settlement', payload = { v: 1 }, extra = {}) {
 }
 
 describe('op identity + enqueue', () => {
+  test('one-argument status registration preserves singleton replacement semantics', () => {
+    const first = vi.fn();
+    const second = vi.fn();
+    initOutboxStatusReporter(first);
+    initOutboxStatusReporter(second);
+
+    enq('legacy-reporter-save');
+
+    expect(first).not.toHaveBeenCalled();
+    expect(second).toHaveBeenLastCalledWith(
+      { queued: 1, failed: 0, inflight: 0 },
+      'test-owner',
+    );
+    initOutboxStatusReporter(null);
+  });
+
+  test('status notifications carry the active owner and keyed listeners can unsubscribe', () => {
+    const storeKey = () => {};
+    const reporter = vi.fn();
+    const unsubscribe = initOutboxStatusReporter(storeKey, reporter);
+
+    enq('owner-visible-save');
+    expect(reporter).toHaveBeenLastCalledWith(
+      { queued: 1, failed: 0, inflight: 0 },
+      'test-owner',
+    );
+    expect(getStatus('test-owner')).toEqual({ queued: 1, failed: 0, inflight: 0 });
+    expect(getStatus('different-owner')).toEqual({ queued: 0, failed: 0, inflight: 0 });
+
+    unsubscribe();
+    const callsBefore = reporter.mock.calls.length;
+    enq('after-unsubscribe');
+    expect(reporter).toHaveBeenCalledTimes(callsBefore);
+  });
+
   test('op ids are deterministic (monotonic counter, no Date.now)', () => {
     const a = enq('s1');
     const b = enq('s2');

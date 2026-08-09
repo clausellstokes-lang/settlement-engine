@@ -66,6 +66,19 @@ describe('persistSaveUpdate reports failures (no silent drift)', () => {
     expect(report).toHaveBeenCalledTimes(1);
   });
 
+  test('one-argument failure registration replaces the prior legacy reporter', async () => {
+    const first = vi.fn();
+    const second = vi.fn();
+    initPersistFailureReporter(first);
+    initPersistFailureReporter(second);
+    saves.update.mockRejectedValueOnce(new Error('network down'));
+
+    await persistSaveUpdate('save-legacy-reporter', { settlement: {} });
+
+    expect(first).not.toHaveBeenCalled();
+    expect(second).toHaveBeenCalledTimes(1);
+  });
+
   test('a successful cloud save resolves true and never reports', async () => {
     const report = vi.fn();
     initPersistFailureReporter(report);

@@ -24,6 +24,7 @@ import {
   captureSavedSettlementsHydration,
   isCurrentSavedSettlementsHydration,
 } from './savedSettlementsHydration.js';
+import { hydratePersistedCampaignWorld } from './campaignHydration.js';
 
 const CREATE_KIND = 'import.settlement.create-and-attach';
 const ATTACH_KIND = 'import.campaign.attach-existing';
@@ -222,7 +223,10 @@ async function admittedRemoteProjection(remote, command) {
     }
     [save] = saveAdmission.entries;
   }
-  return { campaigns: campaignAdmission.entries, save };
+  return {
+    campaigns: campaignAdmission.entries.map(hydratePersistedCampaignWorld),
+    save,
+  };
 }
 
 function applyRemoteProjection(set, get, snapshot, projection, command) {

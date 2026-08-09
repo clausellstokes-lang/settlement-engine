@@ -512,6 +512,34 @@ function entryStaticClosure() {
   return { entry, files: [...seen] };
 }
 
+// Compression at Brotli quality 11 is deliberately expensive. The gzip and
+// Brotli budgets are independent laws (one may pass while the other fails), so
+// they need independent tests, but re-compressing the same closure in each test
+// would double the post-build gate cost. Cache one immutable measurement for
+// both assertions; dist/ cannot change during a single Vitest module run.
+let transferMeasurement = null;
+function entryTransferMeasurement() {
+  if (transferMeasurement) return transferMeasurement;
+  const { files } = entryStaticClosure();
+  let gzipTotal = 0;
+  let brotliTotal = 0;
+  const lines = [];
+  for (const file of files.sort()) {
+    const bytes = readFileSync(join(assetsDir, file));
+    const gzip = gzipSync(bytes, { level: 9 }).length;
+    const brotli = brotliCompressSync(bytes, {
+      params: {
+        [zlibConstants.BROTLI_PARAM_QUALITY]: 11,
+      },
+    }).length;
+    gzipTotal += gzip;
+    brotliTotal += brotli;
+    lines.push(`  gzip ${String(gzip).padStart(7)}  br ${String(brotli).padStart(7)}  ${file}`);
+  }
+  transferMeasurement = Object.freeze({ gzipTotal, brotliTotal, breakdown: lines.join('\n') });
+  return transferMeasurement;
+}
+
 // ── VERIFY_DIST post-build anti-vacuity guard ([tests-1]/[test-quality-1]) ──
 // Every dist-reading contract in this file is `describe.runIf(distExists)` and
 // silently NO-OPs when dist/ is absent. That is correct in the plain `npm run
@@ -732,31 +760,20 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
   });
 
   it.skipIf(!requireDistRead)(
-    `entry static closure transfer bytes stay under gzip ${CLOSURE_GZIP_BUDGET_BYTES} and Brotli ${CLOSURE_BROTLI_BUDGET_BYTES}`,
+    `entry static closure gzip bytes stay under ${CLOSURE_GZIP_BUDGET_BYTES}`,
     () => {
-      const { files } = entryStaticClosure();
-      let gzipTotal = 0;
-      let brotliTotal = 0;
-      const lines = [];
-      for (const file of files.sort()) {
-        const bytes = readFileSync(join(assetsDir, file));
-        const gzip = gzipSync(bytes, { level: 9 }).length;
-        const brotli = brotliCompressSync(bytes, {
-          params: {
-            [zlibConstants.BROTLI_PARAM_QUALITY]: 11,
-          },
-        }).length;
-        gzipTotal += gzip;
-        brotliTotal += brotli;
-        lines.push(
-          `  gzip ${String(gzip).padStart(7)}  br ${String(brotli).padStart(7)}  ${file}`,
-        );
-      }
-      const breakdown = lines.join('\n');
+      const { gzipTotal, breakdown } = entryTransferMeasurement();
       expect(
         gzipTotal,
         `first-paint gzip transfer = ${gzipTotal} B (budget ${CLOSURE_GZIP_BUDGET_BYTES}):\n${breakdown}`,
       ).toBeLessThanOrEqual(CLOSURE_GZIP_BUDGET_BYTES);
+    },
+  );
+
+  it.skipIf(!requireDistRead)(
+    `entry static closure Brotli bytes stay under ${CLOSURE_BROTLI_BUDGET_BYTES}`,
+    () => {
+      const { brotliTotal, breakdown } = entryTransferMeasurement();
       expect(
         brotliTotal,
         `first-paint Brotli transfer = ${brotliTotal} B (budget ${CLOSURE_BROTLI_BUDGET_BYTES}):\n${breakdown}`,

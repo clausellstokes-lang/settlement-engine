@@ -9,16 +9,6 @@ import { compareCodepoint } from '../deterministicSort.js';
 import { isWarReasonType } from './warReasonTaxonomy.js';
 import { normalizeJoinAnchor } from './warCoalitionLedger.js';
 import { migrateDispositionStats } from './dispositionLedger.js';
-// FIRST-PAINT SEAM — READ THE NORMALIZER FROM ITS HOME, NOT THE BARREL. This module
-// is on the store's critical path (main.jsx -> store/index.js -> campaignSlice.js ->
-// HERE), and `envoyErrand.js` is a 691-line BARREL over nine leaves whose transitive
-// closure reaches the parlay/appraisal machinery, beliefMap and the 53 kB
-// distanceRead.js digest reader. ensureWorldState needs exactly ONE save-normalizer,
-// which envoyErrand.js merely re-exports from here. Taking it from the barrel put ~38
-// modules of negotiation and geography on the browser's critical path to normalize a
-// persisted array. Same function, same behaviour — only the address changed.
-// @enforced-by tests/build/userRouteIdentityLeaf.test.js
-import { normalizeEnvoyErrands } from './envoyErrandRecords.js';
 
 export const WORLD_STATE_SCHEMA_VERSION = 2;
 
@@ -171,6 +161,16 @@ function deepCloneConditionalLedger(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;
   if (Object.keys(value).length === 0) return undefined;
   return deepClone(value);
+}
+
+// FIRST-PAINT TRUST BOUNDARY. Live world state has already crossed persisted
+// hydration or the envoy family's single writer. The hot normalizer therefore
+// preserves and DEEP-clones the admitted rows; it must not import the cold,
+// strict DTO family. Raw cache/cloud/RPC rows enter through
+// worldStateHydration.js, which injects that validator into the same body below.
+// @enforced-by tests/build/envoyPersistenceHydrationLazy.test.js
+function cloneAdmittedEnvoyErrands(value) {
+  return Array.isArray(value) ? deepClone(value) : [];
 }
 
 // DEEP-FREEZE (idempotent): recursively Object.freeze an object/array graph. Used
@@ -456,7 +456,16 @@ function normalizeSpatialCanonVersion(value) {
   return Number.isInteger(value) && value > 0 ? value : null;
 }
 
-export function ensureWorldState(rawInput = {}, campaign = {}) {
+/**
+ * Shared world-state materializer. The third argument is an internal composition
+ * seam: eager live callers use the deep structural clone; the cold persisted
+ * hydrator injects the envoy family's strict validator exactly once.
+ */
+export function ensureWorldStateWithEnvoyNormalizer(
+  rawInput = {},
+  campaign = {},
+  normalizeEnvoyRows = cloneAdmittedEnvoyErrands,
+) {
   const raw = runWorldStateMigrations(rawInput);
   const base = createDefaultWorldState(campaign);
   const calendar = raw?.calendar && typeof raw.calendar === 'object' ? raw.calendar : {};
@@ -483,7 +492,7 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     // ~11 ensures per tick stop cloning the 47-400KB digest and hand back a stable
     // identity; every other conditional ledger deep-clones (mutable across ticks).
     const materialized = key === 'envoyErrands'
-      ? normalizeEnvoyErrands(raw?.[key])
+      ? normalizeEnvoyRows(raw?.[key])
       : FROZEN_CONDITIONAL_LEDGER_KEYS.has(key)
         ? freezeConditionalLedger(raw?.[key])
         : deepCloneConditionalLedger(raw?.[key]);
@@ -550,6 +559,19 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     // ONLY when its deep-cloned value is present and non-empty.
     ...conditionalLedgers,
   };
+}
+
+/**
+ * Hot/live normalization. `envoyErrands` must already be admitted; persisted or
+ * otherwise untrusted worlds must use `hydratePersistedWorldState` from the cold
+ * hydration module instead.
+ */
+export function ensureWorldState(rawInput = {}, campaign = {}) {
+  return ensureWorldStateWithEnvoyNormalizer(
+    rawInput,
+    campaign,
+    cloneAdmittedEnvoyErrands,
+  );
 }
 
 /**

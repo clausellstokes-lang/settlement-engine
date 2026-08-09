@@ -52,6 +52,8 @@
  * replay re-run the very same runner against the mirror.
  */
 
+import { createWeakReporterRegistry } from './weakReporterRegistry.js';
+
 // ── Schema + bounds ──────────────────────────────────────────────────────────
 
 const LEGACY_MIRROR_KEY = 'sf_outbox_v1';
@@ -151,12 +153,14 @@ const _memoryByOwner = new Map();
  */
 let _inflightByKey = new Map();
 
-/** @type {null | ((status: {queued:number, failed:number, inflight:number}) => void)} */
-let _statusReporter = null;
+const _statusReporters = createWeakReporterRegistry();
 
-/** Wire a status listener (queued/failed counts) — the chip subscribes here. */
-export function initOutboxStatusReporter(fn) {
-  _statusReporter = typeof fn === 'function' ? fn : null;
+/** Wire or replace one store's status listener. One-argument use remains valid. */
+export function initOutboxStatusReporter(storeKey, reporter) {
+  if (arguments.length === 1) {
+    return _statusReporters.replaceLegacy(storeKey);
+  }
+  return _statusReporters.subscribe(storeKey, reporter);
 }
 
 // ── localStorage mirror (schema-versioned, tolerant, guarded) ────────────────
@@ -332,7 +336,14 @@ function rememberDetachedOwner(ownerId) {
  */
 export function activateOutboxOwner(ownerId) {
   const nextOwnerId = normalizeOwnerId(ownerId);
-  if (_ownerKnown && nextOwnerId === _activeOwnerId) return 0;
+  if (_ownerKnown && nextOwnerId === _activeOwnerId) {
+    // Auth transitions detach/attach before publishing the replacement auth
+    // object. A same-owner refresh after that store commit must re-emit the
+    // current status; otherwise the first notification was correctly filtered
+    // against the old owner and the new/anonymous session can retain stale UI.
+    notify();
+    return 0;
+  }
 
   const wasKnown = _ownerKnown;
   const previousOwnerId = _activeOwnerId;
@@ -375,7 +386,13 @@ export function getActiveOutboxOwner() {
 // ── Status / notification ────────────────────────────────────────────────────
 
 /** Current queue status for the chip: pending + parked counts (barriers excluded). */
-export function getStatus() {
+export function getStatus(ownerId) {
+  if (arguments.length > 0) {
+    const requestedOwner = normalizeOwnerId(ownerId);
+    if (!_ownerKnown || requestedOwner !== _activeOwnerId) {
+      return { queued: 0, failed: 0, inflight: 0 };
+    }
+  }
   let queued = 0;
   let failed = 0;
   let inflight = 0;
@@ -389,7 +406,8 @@ export function getStatus() {
 }
 
 function notify() {
-  try { _statusReporter?.(getStatus()); } catch { /* reporting must never throw */ }
+  const status = getStatus();
+  _statusReporters.publish(status, _ownerKnown ? _activeOwnerId : null);
 }
 
 /** Commit in-memory changes to the mirror and fan out the status. */

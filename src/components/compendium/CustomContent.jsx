@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { INK, BODY, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, serif_, FS, SP, swatch } from '../theme.js';
 import { deityTemper } from '../../domain/worldPulse/deityAxes.js';
 import PantheonActivationStrip from './PantheonActivationStrip.jsx';
@@ -9,6 +9,7 @@ import CustomContentUsageEcho from './CustomContentUsageEcho.jsx';
 import SupplyChainsManager from './SupplyChainsManager.jsx';
 import { AUTHORING_LANES } from './customCategories.js';
 import { useStore } from '../../store/index.js';
+import { createRetryableCampaignLazy } from '../../store/campaignRuntimeView.js';
 import { t } from '../../copy/index.js';
 import { navigate } from '../../hooks/useRoute.js';
 import { buildRegistry } from '../../lib/customRegistry.js';
@@ -28,7 +29,6 @@ import {
   ContentDefinitionHistory,
 } from '../contentStudio/CustomContentLifecycle.jsx';
 import ContentEnvironmentLifecycle from '../contentStudio/ContentEnvironmentLifecycle.jsx';
-import CampaignContentBindingLifecycle from '../contentStudio/CampaignContentBindingLifecycle.jsx';
 export { default as ReadOnlyCustomContentList } from './ReadOnlyCustomContentList.jsx';
 import ReadOnlyCustomContentList from './ReadOnlyCustomContentList.jsx';
 // CustomItemAttributes + CustomContentUpsell live in leaf modules so this
@@ -45,6 +45,11 @@ import { CustomContentUpsell } from './CustomContentGate.jsx';
 // stays under the component-size ratchet; re-exported for existing import sites.
 export { CUSTOM_CATEGORIES } from './customCategoryDefs.js';
 import { CUSTOM_CATEGORIES, CATEGORY_BY_KEY } from './customCategoryDefs.js';
+
+const campaignLazy = importer => createRetryableCampaignLazy(useStore, importer);
+const CampaignContentBindingLifecycle = campaignLazy(() => import(
+  '../contentStudio/CampaignContentBindingLifecycle.jsx'
+));
 
 // Clone a prebuilt registry seed into an editable draft — the registry entry's
 // stable display fields mapped onto the form's draft shape (a "start from a
@@ -391,7 +396,7 @@ export function CustomContentManager({ search, initialCat }) {
           (premium; file-based, no backend). */}
       <ContentPackBar />
       <ContentEnvironmentLifecycle />
-      <CampaignContentBindingLifecycle />
+      <Suspense fallback={null}><CampaignContentBindingLifecycle /></Suspense>
       <ArchivedContentLibrary />
       {/* Sync status — visible whenever a cloud sync is in flight, regardless of
           which bucket is active. Without it, switching to a cached bucket during

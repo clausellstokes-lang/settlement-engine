@@ -92,7 +92,7 @@ function alignCampaignAuthBoundary(get, user, session, { forceSession = false } 
   const previousOwnerId = state.auth?.user?.id ?? null;
   const nextOwnerId = user?.id ?? null;
   if (String(previousOwnerId || '') !== String(nextOwnerId || '')) {
-    state.clearCampaigns?.();
+    state.clearCampaigns?.({ ownerBoundary: true, nextOwnerId });
   } else if (forceSession || state.auth?.session !== session) {
     state.invalidateCampaignSession?.();
   }
@@ -157,6 +157,9 @@ export const createAuthSlice = (set, get) => ({
         error: null,
       };
     });
+    // Re-publish after auth commits: the pre-commit activation is the security
+    // detach, while this same-owner refresh is the reporter/UI handoff.
+    activateOutboxOwner(user?.id);
   },
 
   /**
@@ -193,14 +196,21 @@ export const createAuthSlice = (set, get) => ({
     // Always invalidate on sign-out, even if the same account signs straight
     // back in: a response from the prior session must not certify the new cache.
     alignSavedSettlementsOwner(get, null, { invalidate: true });
+    try {
+      // Clear owner-scoped campaign errors/status before publishing anon auth so
+      // no subscriber can observe A's warning under the anonymous session.
+      get().clearCampaigns?.({ ownerBoundary: true, nextOwnerId: null });
+    } catch {
+      // Other slices may not be present in isolated unit tests.
+    }
     set(state => {
       state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, loading: false, error: null };
       // Durable-rights cache is per-user — drop it on sign-out so a later user on
       // the same device never reads the previous account's entitlements.
       state.dossierEntitlements = {};
     });
+    activateOutboxOwner(null);
     try {
-      get().clearCampaigns?.();
       get().clearCloudCustomContent?.();
     } catch {
       // Other slices may not be present in isolated unit tests.
@@ -307,11 +317,12 @@ export const createAuthSlice = (set, get) => ({
             loading: false, error: null,
           };
         });
+        activateOutboxOwner(result.user?.id);
       } else {
-        alignCampaignAuthBoundary(get, null, null);
-        alignSavedSettlementsOwner(get, null);
-        activateOutboxOwner(null);
-        set(state => { state.auth.loading = false; });
+        // initAuth is HMR/remount-safe and may rerun on a live signed-in store.
+        // A null authoritative session is a full sign-out boundary, not merely
+        // the end of loading; reuse the same atomic cache/outbox transition.
+        get().clearAuth();
       }
     } catch (e) {
       console.error('Auth init error:', e);
@@ -353,6 +364,7 @@ export const createAuthSlice = (set, get) => ({
           // the user to their (persisted) work with a clean slate.
           state.sessionEvicted = false;
         });
+        activateOutboxOwner(user?.id);
 
         // M-9d — claim this account to THE CURRENT session (last-login-wins, §7.1).
         // Fire-and-forget via the LAZY sessionClient (off the first-paint closure). Only
@@ -452,6 +464,7 @@ export const createAuthSlice = (set, get) => ({
             loading: false, error: null,
           };
         });
+        activateOutboxOwner(result.user?.id);
       } else {
         set(state => { state.auth.loading = false; });
       }
@@ -482,6 +495,7 @@ export const createAuthSlice = (set, get) => ({
           loading: false, error: null,
         };
       });
+      activateOutboxOwner(result.user?.id);
     } catch (e) {
       set(state => { state.auth.loading = false; state.auth.error = e.message; });
       throw e;

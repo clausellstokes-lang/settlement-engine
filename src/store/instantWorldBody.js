@@ -97,10 +97,17 @@ async function cleanupPersistedSaves(saveIds, ownerId) {
  *   get: Function,
  *   basicConfig?: object,
  *   options?: { seed?: string, name?: string },
+ *   expectedSession?: { ownerId:string, generation:number }|null,
  * }} args
  * @returns {Promise<InstantWorldResult>}
  */
-export async function runInstantWorld({ set, get, basicConfig = {}, options = {} }) {
+export async function runInstantWorld({
+  set,
+  get,
+  basicConfig = {},
+  options = {},
+  expectedSession = null,
+}) {
   const seed = options.seed || generateSeed();
   // One wall-clock stamp threaded through the whole artifact (the composer is a
   // pure domain kernel and defaults to a fixed epoch; the binding supplies real
@@ -112,6 +119,10 @@ export async function runInstantWorld({ set, get, basicConfig = {}, options = {}
   // The resulting members and the campaign cutoff therefore cannot disagree on
   // which definitions and tunables governed the instant realm's birth.
   const stateAtStart = get();
+  const session = expectedSession || captureCampaignSession(stateAtStart);
+  if (!isCurrentCampaignSession(stateAtStart, session)) {
+    return accountChangedResult(0);
+  }
   const {
     failedClosed: contentResolutionFailed,
     runtime: accountRuntime,
@@ -130,8 +141,6 @@ export async function runInstantWorld({ set, get, basicConfig = {}, options = {}
   // Capture auth before the synchronous composition work as well as before the
   // first durable write. JavaScript cannot interleave an account switch during
   // the composer, but this keeps the transaction's authority boundary honest.
-  const session = captureCampaignSession(stateAtStart);
-
   // Compose the tier-blind bundle with real time and the exact content cutoff.
   const bundle = composeInstantWorld({
     seed,

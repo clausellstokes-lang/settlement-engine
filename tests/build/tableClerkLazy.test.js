@@ -143,12 +143,12 @@ describe('R-1 table clerk — the single-lazy-parent discipline', () => {
     ).toEqual([LAZY_PARENT]);
   });
 
-  it('the lazy membership chain to that panel is intact (AppViews lazy → DmScreen → panel)', () => {
+  it('the lazy membership chain to that panel is intact (campaign gate → DmScreen → panel)', () => {
     const read = (p) => readFileSync(resolve(ROOT, p), 'utf8');
     expect(
       read('src/AppViews.jsx'),
-      'DmScreen is no longer React.lazy in AppViews — the panel (and the clerk under it) may now ride first paint',
-    ).toMatch(/lazy\(\s*\(\)\s*=>\s*import\('\.\/components\/screen\/DmScreen\.jsx'\)\s*\)/);
+      'DmScreen is no longer campaign-lazy in AppViews — the panel (and the clerk under it) may now ride first paint',
+    ).toMatch(/campaignLazy\(\s*\(\)\s*=>\s*import\('\.\/components\/screen\/DmScreen\.jsx'\)\s*\)/);
     expect(read('src/components/screen/DmScreen.jsx')).toMatch(/TableLedgerPanel/);
   });
 });

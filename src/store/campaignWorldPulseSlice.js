@@ -9,19 +9,20 @@
  * actions were scattered through the campaignSlice megafile; grouping them here
  * shrinks that file and gives the pulse surface a single home.
  *
- * Composed into the same store as a spread sub-slice (store/index.js) so it
- * shares one set/get with campaignSlice — every cross-action call already goes
- * through get(), so nothing about call semantics changes. The slice owns the
- * session-scoped `pulseUndoStack` state (NOT persisted; a reload clears it).
+ * campaignRuntime.js constructs this body with the same set/get as the eager
+ * pulse entry, then publishes all actions atomically. Every cross-action call
+ * still goes through get(), so return semantics do not change once the route
+ * preload has armed the runtime. The eager entry owns the session-scoped
+ * `pulseUndoStack` state (NOT persisted; a reload clears it).
  *
  * Imports only leaf helpers (shared persistence, pulse helpers, the
  * region/worldPulse domains, and the fingerprint/analytics libs) and never
  * campaignSlice, so there is no cycle.
  */
-// Light, first-paint-safe world-state helpers ONLY. Imported from their leaf
-// modules (never the `export *` barrel) so the barrel's whole re-export graph
-// can't be pulled into the boot path. The heavy simulation machinery is loaded
-// lazily via loadWorldEngine() below.
+// Narrow world-state helpers only. Import them from leaf modules (never the
+// `export *` barrel) so the cold campaign capsule does not absorb the barrel's
+// whole re-export graph. The heavier tick machinery remains a second-stage lazy
+// load via loadWorldEngine() below.
 import { ensureWorldState } from '../domain/worldPulse/worldState.js';
 import { worldProgressionOf, advancesOnOpen } from '../domain/worldPulse/simulationRules.js';
 import {
@@ -29,6 +30,8 @@ import {
   captureCampaignSession, isCurrentCampaignSession,
   parkedIntervalUndoSnapshot,
 } from './campaignSliceShared.js';
+
+export const CAMPAIGN_PULSE_RUNTIME_SENTINEL = 'settlementforge_campaign_pulse_body_v1';
 // The advance/resume BODY (with its advance-only fingerprint/analytics/consent
 // imports) lives in the lazily-loaded ./campaignAdvanceSession.js so it stays out
 // of the first-paint entry closure; this slice keeps only the light mutators +
@@ -75,7 +78,10 @@ function loadWorldEngine() {
       // M10b catch-up body — lazified out of this eager slice (FP-2 reclaim); rides
       // the SAME lazy session chunk as the advance/resume bodies.
       runCatchUpCampaignWorld: session.runCatchUpCampaignWorld,
-    }));
+    })).catch(error => {
+      _worldEnginePromise = null;
+      throw error;
+    });
   }
   return _worldEnginePromise;
 }
@@ -94,7 +100,10 @@ function loadWorldEngine() {
 let _deferredPulseMutationsPromise = null;
 function loadDeferredPulseMutations() {
   if (!_deferredPulseMutationsPromise) {
-    _deferredPulseMutationsPromise = import('./campaignWorldPulseDeferred.js');
+    _deferredPulseMutationsPromise = import('./campaignWorldPulseDeferred.js').catch(error => {
+      _deferredPulseMutationsPromise = null;
+      throw error;
+    });
   }
   return _deferredPulseMutationsPromise;
 }

@@ -24,27 +24,32 @@ import {
   OP_KIND_FULL_ROW_UPSERT,
   OP_KIND_FULL_ROW_DELETE,
 } from './outbox.js';
+import {
+  loadCampaignSyncTools,
+} from './campaignSyncBookkeeping.js';
+import { createWeakReporterRegistry } from './weakReporterRegistry.js';
 
-// Campaign merge/signature bookkeeping is only exercised after an authenticated
-// campaign load or a persistence action. Keep it behind the same async boundary
-// as those operations instead of charging anonymous first paint for it.
-let campaignSyncToolsPromise = null;
-let campaignSessionReader = null;
+export {
+  clearCampaignSyncBookkeeping,
+  loadCampaignSyncTools,
+} from './campaignSyncBookkeeping.js';
+
+// Each store carries its own live-state reader under this non-persisted symbol.
+// Persistence helpers receive an Immer draft rather than `get`, so the symbol is
+// the capability that keeps their async session checks bound to the originating
+// store instead of a module-global last-writer-wins reader.
+export const CAMPAIGN_SESSION_READER = Symbol.for(
+  'settlementforge.campaignSessionReader',
+);
 
 export function initCampaignSessionReader(reader) {
-  campaignSessionReader = typeof reader === 'function' ? reader : null;
+  return typeof reader === 'function' ? reader : null;
 }
 
-function liveCampaignSessionCheck(session) {
-  if (!session || !campaignSessionReader) return null;
-  return () => isCurrentCampaignSession(campaignSessionReader(), session);
-}
-
-export function loadCampaignSyncTools() {
-  if (!campaignSyncToolsPromise) {
-    campaignSyncToolsPromise = import('../lib/campaignSync.js');
-  }
-  return campaignSyncToolsPromise;
+function liveCampaignSessionCheck(state, session) {
+  const reader = state?.[CAMPAIGN_SESSION_READER];
+  if (!session || typeof reader !== 'function') return null;
+  return () => isCurrentCampaignSession(reader(), session);
 }
 
 export function cloneJson(value) {
@@ -235,7 +240,7 @@ export function persistCampaignState(state, changedId = null, options = {}) {
   return persistCampaigns(state.campaigns, changedId, session?.ownerId, {
     ...options,
     sessionGeneration: session?.generation,
-    isSessionCurrent: options.isSessionCurrent || liveCampaignSessionCheck(session),
+    isSessionCurrent: options.isSessionCurrent || liveCampaignSessionCheck(state, session),
   });
 }
 
@@ -243,12 +248,18 @@ export function cacheCampaignState(state) {
   const session = captureCampaignSession(state);
   const ownerId = session?.ownerId || campaignCacheOwner(state);
   const snapshot = cloneJson(state.campaigns) || [];
+  const isSessionCurrent = liveCampaignSessionCheck(state, session);
   localWrite(snapshot, ownerId);
-  return { ownerId, generation: session?.generation || 0, snapshot };
+  return {
+    ownerId,
+    generation: session?.generation || 0,
+    snapshot,
+    ...(isSessionCurrent ? { isSessionCurrent } : {}),
+  };
 }
 
 export function syncCampaignSnapshot(snapshot, changedId, session = null, isSessionCurrent = null) {
-  const sessionCheck = isSessionCurrent || liveCampaignSessionCheck(session);
+  const sessionCheck = isSessionCurrent || session?.isSessionCurrent || null;
   return loadCampaignSyncTools().then(({ syncCampaignChanges }) =>
     syncCampaignChanges(snapshot, {
       service: campaignService,
@@ -285,27 +296,25 @@ export function deletePersistedCampaignState(state, id, options = {}) {
   return deletePersistedCampaign(id, state.campaigns, session?.ownerId, {
     ...options,
     sessionGeneration: session?.generation,
-    isSessionCurrent: options.isSessionCurrent || liveCampaignSessionCheck(session),
+    isSessionCurrent: options.isSessionCurrent || liveCampaignSessionCheck(state, session),
   });
 }
 
-export function clearCampaignSyncBookkeeping() {
-  loadCampaignSyncTools()
-    .then(({ clearCampaignSync }) => clearCampaignSync())
-    .catch(() => {
-      // Bookkeeping is an optimization, and session-keyed signatures are already
-      // unable to certify the replacement session. A chunk-load failure during
-      // sign-out must not become an unhandled rejection.
-    });
+// Store-keyed subscribers: constructing a headless/secondary store must not
+// steal persistence failures from the live app store. The outbox is process-wide,
+// so one failed op fans out; each store callback filters by owner when possible.
+const persistFailureReporters = createWeakReporterRegistry();
+
+/** Wire or replace one store's failure reporter. One-argument use is test-compatible. */
+export function initPersistFailureReporter(storeKey, reporter) {
+  if (arguments.length === 1) {
+    return persistFailureReporters.replaceLegacy(storeKey);
+  }
+  return persistFailureReporters.subscribe(storeKey, reporter);
 }
 
-// Set by campaignSlice via initPersistFailureReporter so this module-scoped
-// helper can report a failed cloud save into store state (the UI then warns).
-let _reportPersistFailure = null;
-
-/** Wire the store-state failure reporter (called once from createCampaignSlice). */
-export function initPersistFailureReporter(fn) {
-  _reportPersistFailure = fn;
+function reportPersistFailure(error, op) {
+  persistFailureReporters.publish(error, op);
 }
 
 // The persist-partial key -> DB COLUMN map (saves.js supabaseUpdate). `timestamp`
@@ -370,7 +379,7 @@ async function outboxRunner(op, payload) {
     // Never rethrow — callers fire-and-forget, and the pool must not reject.
     // Not SILENT either: report so the UI warns (the chip / banner).
     console.warn('[campaignSlice] save update failed', e);
-    try { _reportPersistFailure?.(e); } catch { /* reporting must never throw */ }
+    reportPersistFailure(e, op);
     ok = false;
   }
   // Differential cache: record ONLY on success, so an identical next flush skips

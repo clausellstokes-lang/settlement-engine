@@ -45,13 +45,12 @@
  *      than the writer set, so the narrow WRITE regex is provably not just a
  *      broken pattern matching nothing.
  *
- * THE ONE REVIEWED EXEMPTION — `src/domain/worldPulse/worldState.js`. The
- * persistence layer materializes EVERY conditional ledger generically, through a
- * loop over CONDITIONAL_LEDGER_KEYS with the key in a variable, so it never spells
- * a write form of this key and never trips the scan. That is not an accident this
- * file tolerates but a property it PINS below: worldState.js's only envoy-specific
- * token is a rehydration dispatch that must route to `normalizeEnvoyErrands` — it
- * rehydrates persisted rows, it never authors one.
+ * THE ONE REVIEWED PERSISTENCE EXEMPTION IS NOW TWO-LAYERED. Eager
+ * `worldState.js` materializes every conditional ledger generically and only
+ * deep-clones envoy rows that already crossed admission. Cold
+ * `worldStateHydration.js` injects `normalizeEnvoyErrands` for raw cache/cloud/RPC
+ * worlds. Neither layer authors a row, and the strict DTO family stays out of the
+ * first-paint graph.
  *
  * KNOWN BLIND SPOT (deliberate, and the same one the provenance walker declares).
  * The scan is textual, so a write through a fully computed key held in a local
@@ -73,6 +72,7 @@ const LEDGER_LEAF = 'src/domain/worldPulse/envoyErrandLedger.js';
 const WRITER_FUNCTION = 'writeErrands';
 const VOCABULARY_LEAF = 'src/domain/worldPulse/envoyErrandVocabulary.js';
 const PERSISTENCE_LAYER = 'src/domain/worldPulse/worldState.js';
+const HYDRATION_LAYER = 'src/domain/worldPulse/worldStateHydration.js';
 const RECORDS_LEAF = 'src/domain/worldPulse/envoyErrandRecords.js';
 
 /** @type {Map<string, string>} */
@@ -226,7 +226,7 @@ describe('worldState.envoyErrands — one writer, one function (WR-7a / R-BLD-4)
     expect(body).toMatch(/delete\s+\w+\[\s*ENVOY_ERRAND_LEDGER_KEY\s*\]/);
   });
 
-  test('THE ONE EXEMPTION: the persistence layer rehydrates the key, it never authors one', () => {
+  test('THE ONE EXEMPTION: eager preservation and cold hydration never author the key', () => {
     const code = executable(read(PERSISTENCE_LAYER));
     // It is in the census as a MENTIONER (it must name the key to rehydrate it)…
     expect(mentioners, `${PERSISTENCE_LAYER} must still name the key it rehydrates`).toContain(PERSISTENCE_LAYER);
@@ -234,8 +234,21 @@ describe('worldState.envoyErrands — one writer, one function (WR-7a / R-BLD-4)
     // variable, so it materializes every ledger generically and can never author
     // an envoy row of its own.
     expect(writeFormsIn(code), `${PERSISTENCE_LAYER} now spells a direct write of the ledger key`).toEqual([]);
-    // Its one envoy-specific branch must route to the family's own normalizer.
-    expect(code).toMatch(/key === 'envoyErrands'[\s\S]{0,120}normalizeEnvoyErrands\s*\(/);
+    // The eager branch may only invoke the injected/structural normalizer. A
+    // direct records import would pull the strict family back into first paint.
+    expect(code).toMatch(/key === 'envoyErrands'[\s\S]{0,120}normalizeEnvoyRows\s*\(/);
+    expect(code).not.toContain("from './envoyErrandRecords.js'");
+    expect(code).not.toContain('normalizeEnvoyErrands');
+    expect(code).toMatch(/function\s+cloneAdmittedEnvoyErrands[\s\S]*deepClone\s*\(value\)/);
+
+    // Raw persistence hydration is the one cold site allowed to inject the
+    // family's exact validator into that generic materializer.
+    const hydration = executable(read(HYDRATION_LAYER));
+    expect(hydration).toMatch(/import\s*\{\s*normalizeEnvoyErrands\s*\}/);
+    expect(hydration).toMatch(
+      /ensureWorldStateWithEnvoyNormalizer\([\s\S]*normalizeEnvoyErrands/,
+    );
+    expect(writeFormsIn(hydration), `${HYDRATION_LAYER} must not author the ledger`).toEqual([]);
   });
 
   test('the key literal lives in the vocabulary leaf and the readers go through it', () => {

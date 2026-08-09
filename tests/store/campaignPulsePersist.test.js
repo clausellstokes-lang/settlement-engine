@@ -46,8 +46,8 @@ import {
   flushWorldPulsePersist,
   clearPersistFingerprintCache,
   clearCampaignSyncBookkeeping,
+  CAMPAIGN_SESSION_READER,
   initPersistFailureReporter,
-  initCampaignSessionReader,
   persistCampaignState,
   retryOutboxPersist,
 } from '../../src/store/campaignSliceShared.js';
@@ -73,7 +73,6 @@ beforeEach(() => {
   clearPersistFingerprintCache();
   clearCampaignSyncBookkeeping();
   initPersistFailureReporter(null);
-  initCampaignSessionReader(null);
   resetOutbox();
   activateOutboxOwner('test-owner');
 });
@@ -84,9 +83,9 @@ describe('campaign-session persistence fence', () => {
       auth: { user: { id: 'owner-a' } },
       campaignSessionGeneration: 73,
     };
-    initCampaignSessionReader(() => liveState);
     const sourceState = {
       ...liveState,
+      [CAMPAIGN_SESSION_READER]: () => liveState,
       campaigns: [{
         id: 'camp-session-fence',
         name: 'Old session snapshot',

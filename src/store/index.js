@@ -48,9 +48,9 @@ import { createAiSlice }         from './aiSlice.js';
 import { createNeighbourSlice }  from './neighbourSlice.js';
 import { createMapSlice }        from './mapSlice.js';
 import { createCreditsSlice }      from './creditsSlice.js';
-import { createCampaignSlice }     from './campaignSlice.js';
-import { createCampaignRegionalSlice } from './campaignRegionalSlice.js';
-import { createCampaignWorldPulseSlice } from './campaignWorldPulseSlice.js';
+import { createCampaignSlice }     from './campaignSliceEntry.js';
+import { createCampaignRegionalSlice } from './campaignRegionalSliceEntry.js';
+import { createCampaignWorldPulseSlice } from './campaignWorldPulseSliceEntry.js';
 import { createCustomContentSlice } from './customContentSlice.js';
 import { createCorpusFactorySlice } from './corpusFactorySlice.js';
 import { createInstantWorldSlice }  from './instantWorldSlice.js';
@@ -63,6 +63,7 @@ import { createFogEditSlice }       from './fogEditSlice.js';
 // eager by construction: the bodies dynamic-import on first use.
 import { createNpcVerbsSlice }      from './npcVerbsSlice.js';
 import { mergePersistedState }     from './persistMerge.js';
+import { partializeStoreState }    from './persistProjection.js';
 import { setCustomContentSource }   from '../lib/customContentSource.js';
 import { setCrashForensics }        from '../lib/errorReporter.js';
 import { buildCrashForensics }      from '../lib/crashForensics.js';
@@ -113,34 +114,10 @@ export const useStore = create(
           // returning user's missing keys backfill to what a fresh user gets, while the
           // top-level spread still restores every other slice's methods + state.
           merge: mergePersistedState,
-          partialize: (state) => ({
-            // Persist only lightweight, user-owned data.
-            // Never persist the massive generated settlement object.
-            // wizardStep / wizardMode are intentionally NOT persisted — users
-            // expect to land on the mode picker on every visit, not get
-            // dumped straight into whatever flow they used last session.
-            config: state.config,
-            configExplicitFields: state.configExplicitFields,
-            institutionToggles: state.institutionToggles,
-            categoryToggles:    state.categoryToggles,
-            goodsToggles:       state.goodsToggles,
-            servicesToggles:    state.servicesToggles,
-            // R-5b (owner queue #17): device-scoped DISPLAY preferences — the 3D
-            // portrait's quality ceiling today. Persistence CONTENT, not a schema
-            // change: an additive top-level key whose absence rehydrates to the
-            // slice defaults (mergePersistedState deep-merges it over them), so no
-            // persist `version` bump and no migrate branch is owed. Deliberately
-            // NOT uiSlice's userPrefs, which is the session-only bag by contract.
-            displayPrefs:       state.displayPrefs,
-            // Realm directive 7 (J-D7): the FULL AUTO-RESOLVE play mode. Same
-            // additive-top-level-key discipline as displayPrefs above — persistence
-            // CONTENT, not a schema change, absent-tolerant (an older blob rehydrates
-            // to the slice's `false` default), so no persist `version` bump and no
-            // migrate branch. Deliberately NOT folded into displayPrefs: that bag is
-            // chartered for preferences about the MACHINE the user is sitting at, and
-            // this one is about how the WORLD advances.
-            advanceAutoResolve: state.advanceAutoResolve,
-          }),
+          // Persist only lightweight, user-owned, device-local data. The named
+          // projection is independently executable so capability symbols and
+          // owner/session state cannot enter storage unnoticed.
+          partialize: partializeStoreState,
           // On rehydrate: always start the Create page at the mode picker.
           // (Also wipes any stale wizardMode persisted by older builds.) AND heal
           // legacy service toggles keyed under the pre-Stage-2b display-name form

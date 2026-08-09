@@ -20,6 +20,9 @@ vi.mock('../../src/store/campaignSliceShared.js', async (orig) => {
 });
 
 import { runInstantWorld } from '../../src/store/instantWorldBody.js';
+import {
+  createInstantWorldSliceWithDependencies,
+} from '../../src/store/instantWorldSlice.js';
 import { isCanonSave } from '../../src/domain/campaign/canon.js';
 
 function makeHarness({
@@ -162,5 +165,53 @@ describe('runInstantWorld — store binding', () => {
     expect(h.state.savedSettlements).toEqual([]);
     expect(h.state.campaigns).toEqual([]);
     expect(h.state.activeCampaignId).toBeNull();
+  });
+
+  test('the public action arms campaign runtime and fences auth before loading its persistence body', async () => {
+    let resolveRuntime;
+    const preloadRuntime = vi.fn(() => new Promise(resolve => {
+      resolveRuntime = resolve;
+    }));
+    const runBody = vi.fn();
+    const loadBody = vi.fn(async () => ({ runInstantWorld: runBody }));
+    const h = makeHarness({ ownerId: 'owner-a' });
+    Object.assign(
+      h.state,
+      createInstantWorldSliceWithDependencies(h.set, h.get, {
+        preloadRuntime,
+        loadBody,
+      }),
+    );
+
+    const pending = h.state.instantWorld({}, { seed: 'preflight-fence' });
+    expect(preloadRuntime).toHaveBeenCalledWith(h.set, h.get);
+    expect(loadBody).not.toHaveBeenCalled();
+    expect(saveMock).not.toHaveBeenCalled();
+
+    h.state.auth = { user: { id: 'owner-b' } };
+    h.state.campaignSessionGeneration += 1;
+    resolveRuntime({});
+
+    await expect(pending).resolves.toMatchObject({
+      ok: false,
+      reason: 'auth_session_changed',
+    });
+    expect(loadBody).not.toHaveBeenCalled();
+    expect(runBody).not.toHaveBeenCalled();
+    expect(saveMock).not.toHaveBeenCalled();
+  });
+
+  test('a passed preflight session is rechecked by the body before its first save', async () => {
+    const h = makeHarness({ ownerId: 'owner-b' });
+    const result = await runInstantWorld({
+      set: h.set,
+      get: h.get,
+      basicConfig: { realmSize: 'small' },
+      options: { seed: 'stale-preflight' },
+      expectedSession: { ownerId: 'owner-a', generation: 0 },
+    });
+
+    expect(result).toMatchObject({ ok: false, reason: 'auth_session_changed' });
+    expect(saveMock).not.toHaveBeenCalled();
   });
 });

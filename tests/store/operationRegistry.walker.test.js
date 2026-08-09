@@ -312,12 +312,20 @@ function findActionFactoryObjectStart(code, factoryName) {
 
 /** The slice files the store actually composes — derived from index.js so the
  *  census scans exactly the live surface even if a slice is renamed. */
+const LOGICAL_SLICE_BODY = Object.freeze({
+  'campaignSliceEntry.js': 'campaignSlice.js',
+  'campaignRegionalSliceEntry.js': 'campaignRegionalSlice.js',
+  'campaignWorldPulseSliceEntry.js': 'campaignWorldPulseSlice.js',
+});
+
 function composedSliceFiles() {
   const index = readFileSync(join(STORE_DIR, 'index.js'), 'utf8');
   const re = /import\s*\{\s*create[A-Za-z]+Slice\s*\}\s*from\s*['"]\.\/([\w]+\.js)['"]/g;
   const files = [];
   let m;
-  while ((m = re.exec(index)) !== null) files.push(m[1]);
+  while ((m = re.exec(index)) !== null) {
+    files.push(LOGICAL_SLICE_BODY[m[1]] || m[1]);
+  }
   return files;
 }
 
@@ -471,6 +479,21 @@ describe('walker locator — slice-factory shape pins', () => {
     // never tolerate-and-miscount.
     expect(findSliceObjectStart(arrow('(_set, get)'))).toBe(-1);
     expect(findSliceObjectStart(arrow('(store, get)'))).toBe(-1);
+  });
+});
+
+describe('walker census follows lazy campaign implementation bodies', () => {
+  test('all thin campaign entries map to their mutating logical slices', () => {
+    expect(LOGICAL_SLICE_BODY).toEqual({
+      'campaignSliceEntry.js': 'campaignSlice.js',
+      'campaignRegionalSliceEntry.js': 'campaignRegionalSlice.js',
+      'campaignWorldPulseSliceEntry.js': 'campaignWorldPulseSlice.js',
+    });
+    expect(composedSliceFiles()).toEqual(expect.arrayContaining([
+      'campaignSlice.js',
+      'campaignRegionalSlice.js',
+      'campaignWorldPulseSlice.js',
+    ]));
   });
 });
 

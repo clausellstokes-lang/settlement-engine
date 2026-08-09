@@ -95,6 +95,18 @@ vi.mock('../../src/store/index.js', () => {
   return { useStore };
 });
 
+// This suite exercises the shell/error-boundary contract, not campaign-runtime
+// hydration. AppViews now gates campaign-capable routes behind that preload;
+// bypass it here so the deliberately tiny store stub above remains sufficient
+// and the mocked GenerateWizard can reach the boundary under test.
+vi.mock('../../src/store/campaignRuntimeView.js', async () => {
+  const { lazy } = await import('react');
+  return {
+    createRetryableCampaignLazy: (_store, importer) => lazy(importer),
+    createRetryableLazy: importer => lazy(importer),
+  };
+});
+
 // stripe.js is dynamically imported in a mount effect; stub it so the effect
 // resolves without network.
 vi.mock('../../src/lib/stripe.js', () => ({

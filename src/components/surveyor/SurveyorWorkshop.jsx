@@ -15,19 +15,39 @@
  * (initialPrompt/initialScope are initialization-only; absent ⇒ identical behavior).
  */
 
-import { lazy, Suspense, useState } from 'react';
+import { Suspense, useState } from 'react';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { INK, MUTED, BORDER, CARD, BODY, sans, SP, FS } from '../theme.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Segmented from '../primitives/Segmented.jsx';
 import { AnchorChip, EarlyAccessBadge } from './surveyorPanelKit.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
+import { useStore } from '../../store/index.js';
+import {
+  createRetryableCampaignLazy,
+  createRetryableLazy,
+} from '../../store/campaignRuntimeView.js';
+import FeatureErrorBoundary from '../FeatureErrorBoundary.jsx';
+
+const stageLoading = (
+  <p style={{ margin: 0, fontSize: FS.sm, color: MUTED, fontFamily: sans }}>
+    Loading…
+  </p>
+);
+const campaignLazy = importer => createRetryableCampaignLazy(useStore, importer, {
+  fallback: stageLoading,
+});
+// Drop-in lazy for the ordinary stages. Keeping the local `lazy` spelling also
+// preserves the caller census's ordinary-vs-campaign root classification.
+const lazy = importer => createRetryableLazy(importer, {
+  fallback: stageLoading,
+});
 
 const CustomContentPanel = lazy(() => import('./CustomContentPanel.jsx'));
 const StyleOverhaulPanel = lazy(() => import('./StyleOverhaulPanel.jsx'));
 const ConstructionPanel = lazy(() => import('./ConstructionPanel.jsx'));
-const InterpretApplyPanel = lazy(() => import('./InterpretApplyPanel.jsx'));
-const AutonomyPanel = lazy(() => import('./AutonomyPanel.jsx'));
+const InterpretApplyPanel = campaignLazy(() => import('./InterpretApplyPanel.jsx'));
+const AutonomyPanel = campaignLazy(() => import('./AutonomyPanel.jsx'));
 const CorpusFactoryPanel = lazy(() => import('./CorpusFactoryPanel.jsx'));
 
 const STAGES = [
@@ -79,9 +99,15 @@ export default function SurveyorWorkshop({ open = false, onClose, initialStage =
 
       <Segmented options={STAGES.map((s) => ({ id: s.id, label: s.label }))} value={stage} onChange={setStage} size="sm" ariaLabel="Surveyor write stage" />
 
-      <Suspense fallback={<p style={{ margin: 0, fontSize: FS.sm, color: MUTED, fontFamily: sans }}>Loading…</p>}>
-        <Body initialPrompt={seeded ? initialPrompt : ''} initialScope={seeded ? initialScope : undefined} />
-      </Suspense>
+      <FeatureErrorBoundary
+        label="SurveyorWorkshop.stage"
+        kind="react.render.surveyor-stage"
+        resetKeys={[stage]}
+      >
+        <Suspense fallback={stageLoading}>
+          <Body initialPrompt={seeded ? initialPrompt : ''} initialScope={seeded ? initialScope : undefined} />
+        </Suspense>
+      </FeatureErrorBoundary>
     </div>
   );
 }

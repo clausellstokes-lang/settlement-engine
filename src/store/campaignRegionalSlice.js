@@ -5,10 +5,10 @@
  * These actions all operate on a campaign's regionalGraph / worldState stressors
  * and the settlements they touch. They were scattered through the campaignSlice
  * megafile; grouping them here shrinks that file and gives the regional surface a
- * single home. They are composed into the same store as a spread sub-slice
- * (store/index.js), so they share one set/get with campaignSlice — every
- * cross-action call already goes through get(), so nothing about call semantics
- * changes.
+ * single home. campaignRuntime.js constructs this body with the same set/get as
+ * the eager entry delegates, then publishes its actions atomically; every
+ * cross-action call still goes through get(), so return semantics do not change
+ * once the route preload has armed the runtime.
  *
  * The module imports only leaf helpers (shared persistence, pulse helpers, and
  * the region/worldPulse domains) and never campaignSlice, so there is no cycle.
@@ -28,11 +28,11 @@ import {
 // Leaf-module imports (not the `export *` barrel). ensureWorldState/proposalIdFor/
 // upsertProposal are light world-state helpers; normalizeStressor/resolveStressorById
 // live in the stressor cluster (stressors → stressorDynamics/stressorGates/
-// foodStockpile). These are used SYNCHRONOUSLY inside injectCampaignStressor /
+// foodStockpile). These remain SYNCHRONOUS inside injectCampaignStressor /
 // resolveCampaignStressor / undoCampaignStressorBridge, which settlementSlice's
-// rippleEventThroughWorld calls synchronously on canon edits — a true sync edge
-// that cannot go dynamic without changing that call ordering, so it stays static.
-// This still keeps the barrel's heavy advance/AI graph out of first paint.
+// rippleEventThroughWorld calls synchronously on canon edits. The campaign route
+// gate loads this entire body first, preserving that call ordering while keeping
+// the barrel's heavier advance/AI graph out of this capsule.
 import {
   ensureWorldState,
   proposalIdFor,
@@ -55,6 +55,8 @@ import {
 } from './campaignPulseHelpers.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { extractRegionalImpactDecision, extractRegionalChannelChange } from '../lib/regionalFingerprint.js';
+
+export const CAMPAIGN_REGIONAL_RUNTIME_SENTINEL = 'settlementforge_campaign_regional_body_v1';
 
 /**
  * The slice of a pending world-pulse proposal's outcome that the roaming-twin

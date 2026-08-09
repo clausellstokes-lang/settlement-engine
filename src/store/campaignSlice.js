@@ -37,9 +37,9 @@ import {
 // V-17 THE CAMPAIGN IMPORT — light domain leaf (pure schema wall + news projection);
 // no store/sim-graph imports, so it never rides into first paint.
 import { tableEventToNewsEntry } from '../domain/tableEvents.js';
-// Leaf-module import (not the `export *` barrel) so the heavy simulation graph
-// can't ride into first paint via the barrel. ensureWorldState is a light,
-// synchronous default-shape helper used on read paths.
+// Leaf-module import (not the `export *` barrel) so the cold campaign capsule
+// does not absorb the barrel's full simulation graph. ensureWorldState is the
+// synchronous default-shape helper used on its read paths.
 import { ensureWorldState } from '../domain/worldPulse/worldState.js';
 import {
   legacyCampaignContentBinding,
@@ -52,17 +52,23 @@ import {
 } from './campaignImportedCreation.js';
 // WS4 decomposition — pure utils + persistence helpers extracted to a sibling.
 import {
-  cloneJson, campaignCacheOwner,
-  captureCampaignSession, isCurrentCampaignSession, localWrite, persistCampaignState,
+  CAMPAIGN_SESSION_READER, campaignCacheOwner, cloneJson,
+  captureCampaignSession, isCurrentCampaignSession, persistCampaignState,
   deletePersistedCampaignState,
-  clearCampaignSyncBookkeeping, syncCampaignSnapshot,
-  initCampaignSessionReader, loadCampaignSyncTools,
-  initPersistFailureReporter,
+  clearCampaignSyncBookkeeping,
   retryOutboxPersist,
   newCampaignId, isUuid, uuidFromLegacyId, findActiveCampaign,
 } from './campaignSliceShared.js';
-import { initOutboxStatusReporter, getStatus as outboxStatus } from './outbox.js';
+import { getStatus as outboxStatus } from './outbox.js';
+import {
+  CAMPAIGN_REPORTING_LEASE,
+  clearCampaignOwnerReporting,
+  initCampaignEntryReporting,
+} from './campaignEntryReporting.js';
+import { runCampaignLoad } from './campaignLoadSession.js';
 import { track, EVENTS } from '../lib/analytics.js';
+
+export const CAMPAIGN_CORE_RUNTIME_SENTINEL = 'settlementforge_campaign_core_body_v1';
 
 const SCHEMA_VERSION = 2;
 let settlementDeletionLockSequence = 0;
@@ -243,13 +249,9 @@ function deleteCampaignWithConfirmedPersistence({
  * track() itself never throws.
  */
 
-function localLoad(ownerId = 'anon', inferredCustomContent = undefined) {
-  return campaignService.loadCached(ownerId)
-    .map(campaign => migrateCampaign(campaign, inferredCustomContent));
-}
-
 /** Migrate a single campaign object to the current schema.
- *  Exported for the correctness-1 regression pin (settlementIds normalization). */
+ *  Exported for structural/live migration tests. Persisted cache/cloud rows must
+ *  first cross campaignHydration.js; its strict world pass is not repeated here. */
 export function migrateCampaign(camp, inferredCustomContent = undefined) {
   if (!camp || typeof camp !== 'object') return camp;
   // Array.prototype.map passes the numeric index as argument two. Treat only a
@@ -383,25 +385,19 @@ export const SAVED_CAMPAIGN_PATCH_KEYS = new Set([
 ]);
 
 export const createCampaignSlice = (set, get) => {
-  initCampaignSessionReader(get);
-  // Route module-scoped persist failures (in campaignSliceShared) into store
-  // state so the UI can warn the user instead of silently losing a cloud save.
-  initPersistFailureReporter(() => set(state => {
-    // Covers BOTH campaign saves and (since A+ P0.1 unified persistSaveUpdate) the
-    // canon settlement path — applied-locally-but-not-persisted, surfaced via the banner.
-    state.campaignSyncError = 'Some changes could not be saved to the cloud. '
-      + 'They are applied locally but may not persist — check your connection, then reload to confirm.';
-  }));
-
-  // Track K C3 — mirror the durable outbox's pending/parked counts into store
-  // state so the sync chip can render "n queued / n failed". Last-writer-wins
-  // (module-scoped, like initPersistFailureReporter); fires on every op change.
-  initOutboxStatusReporter(status => set(state => { state.outboxStatus = status; }));
+  // Reuse the eager store-held reporter lease, or install one for isolated slice
+  // stores that construct this implementation body directly (tests/headless tools).
+  const reporting = initCampaignEntryReporting(set, get);
 
   return {
+  [CAMPAIGN_REPORTING_LEASE]: reporting,
+  [CAMPAIGN_SESSION_READER]: reporting.sessionReader || get,
   // ── State ──────────────────────────────────────────────────────────────────
   campaigns: [],
+  /** True only after local rows pass strict admission; remote outage may degrade to that safe cache. */
   campaignsLoaded: false,
+  /** Typed strict-admission failure; cleared by a later successful validation. */
+  campaignLoadError: null,
   /** Monotonic auth/cache boundary for every async campaign operation. */
   campaignSessionGeneration: 0,
   /** The currently-loaded campaign id (null if none) — used by WorldMap */
@@ -412,9 +408,12 @@ export const createCampaignSlice = (set, get) => {
   /** Session-only locks held while settlement deletion awaits its cloud batch. */
   campaignMutationLocks: [],
   /** Dismiss the cloud-sync warning banner. */
-  clearCampaignSyncError: () => set(state => { state.campaignSyncError = null; }),
+  clearCampaignSyncError: () => set(state => {
+    state.campaignSyncError = null;
+    state.campaignLoadError = null;
+  }),
   /** Durable-outbox status for the sync chip: pending + parked op counts. */
-  outboxStatus: outboxStatus(),
+  outboxStatus: outboxStatus(campaignCacheOwner(get())),
   /** Retry affordance: revive parked ops and re-drain, clearing the warning. */
   retryOutbox: () => {
     set(state => { state.campaignSyncError = null; });
@@ -510,70 +509,18 @@ export const createCampaignSlice = (set, get) => {
     executeImportReconciliationDraftFromStore({ set, get, draft, options })
   )),
 
-  loadCampaigns: () => {
-    const session = captureCampaignSession(get());
-    const ownerId = session?.ownerId || campaignCacheOwner(get());
-    const customContentReady = ownerId === 'anon'
-      || get().customContentSyncedAt != null;
-    const inferredCustomContent = customContentReady
-      ? (get().customContent || {})
-      : undefined;
-    const cached = localLoad(ownerId, inferredCustomContent);
-    set(state => {
-      state.campaigns = cached;
-      state.campaignsLoaded = !campaignService.isConfigured;
-    });
-    if (!campaignService.isConfigured) return Promise.resolve(cached);
-    return Promise.all([campaignService.list(), loadCampaignSyncTools()])
-      .then(([remote, {
-        mergeCampaignLists,
-        primeCampaignSync,
-        reconcileTombstones,
-      }]) => {
-        // Stale-owner guard: a sign-out/sign-in completing mid-flight would
-        // otherwise write the previous user's campaigns into state/cache.
-        if (!isCurrentCampaignSession(get(), session)) return get().campaigns;
-        const migratedRemote = remote.map(campaign => (
-          migrateCampaign(campaign, inferredCustomContent)
-        ));
-        primeCampaignSync(migratedRemote, ownerId, session.generation);
-        // Read tombstones HERE (at list()-resolve), not at load start: a delete
-        // that ran while list() was in flight has by now written its tombstone,
-        // and that is exactly the same-device race we must not lose to.
-        const tombstones = campaignService.loadTombstones(ownerId);
-        // Merge against the LIVE list, not the load-start `cached` snapshot
-        // (ported master fix): a campaign created while the remote load was in
-        // flight exists only in the live list — merging against the stale
-        // snapshot silently dropped it.
-        const merged = mergeCampaignLists(get().campaigns, migratedRemote, { tombstones });
-        const prunedTombstones = reconcileTombstones(tombstones, migratedRemote);
-        if (prunedTombstones.length !== tombstones.length) {
-          campaignService.writeTombstones(prunedTombstones, ownerId);
-        }
-        set(state => {
-          state.campaigns = merged;
-          state.campaignsLoaded = true;
-        });
-        localWrite(merged, ownerId);
-        syncCampaignSnapshot(
-          merged, null, session, () => isCurrentCampaignSession(get(), session),
-        ).catch(e => {
-          console.warn('[campaignSlice] campaign cloud backfill failed', e);
-        });
-        return merged;
-      })
-      .catch(error => {
-        if (!isCurrentCampaignSession(get(), session)) return get().campaigns;
-        console.warn('[campaignSlice] campaign cloud load failed', error);
-        set(state => { state.campaignsLoaded = true; });
-        return cached;
-      });
-  },
+  loadCampaigns: () => runCampaignLoad({
+    set,
+    get,
+    migrateCampaign,
+  }),
 
-  clearCampaigns: () =>
+  clearCampaigns: (options = {}) =>
     set(state => {
       state.campaigns = [];
       state.campaignsLoaded = false;
+      state.campaignLoadError = null;
+      if (options?.ownerBoundary === true) clearCampaignOwnerReporting(state, options.nextOwnerId);
       state.activeCampaignId = null;
       state.campaignSessionGeneration = (Number(state.campaignSessionGeneration) || 0) + 1;
       clearTransientCampaignWork(state);
@@ -1196,3 +1143,17 @@ export const createCampaignSlice = (set, get) => {
   // Recorded as a G-2b design note rather than lost.
   };
 };
+
+/** Dependency-injected constructor for strict-admission failure tests. */
+export function createCampaignSliceWithHydration(set, get, loadHydration) {
+  const slice = createCampaignSlice(set, get);
+  return {
+    ...slice,
+    loadCampaigns: () => runCampaignLoad({
+      set,
+      get,
+      migrateCampaign,
+      loadHydration,
+    }),
+  };
+}

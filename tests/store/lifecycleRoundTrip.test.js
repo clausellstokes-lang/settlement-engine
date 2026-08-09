@@ -90,7 +90,9 @@ import {
   runWorldStateMigrations,
   CONDITIONAL_LEDGER_KEYS,
 } from '../../src/domain/worldPulse/worldState.js';
+import { hydratePersistedWorldState } from '../../src/domain/worldPulse/worldStateHydration.js';
 import { mergePersistedState } from '../../src/store/persistMerge.js';
+import { partializeStoreState } from '../../src/store/persistProjection.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { normalizeServicesToggles } from '../../src/store/toggleSlice.js';
 import { createDisplayPrefsSlice, DEFAULT_DISPLAY_PREFS } from '../../src/store/displayPrefsSlice.js';
@@ -104,7 +106,7 @@ import { envoyErrandIdForOffer } from '../../src/domain/worldPulse/envoyErrand.j
 // Frozen 2026-07-21, hand-audited against src. SHRINK/EDIT ONLY WITH A POLICY.
 // ═══════════════════════════════════════════════════════════════════════════
 
-/** Substrate A — zustand persist partialize keys (src/store/index.js).
+/** Substrate A — zustand persist partialize keys (src/store/persistProjection.js).
  *
  *  `displayPrefs` joined this list in R-5b (owner queue #17 / atlas
  *  presentation-scene gap 11) with a written reason, per the header's rule 3. It
@@ -132,7 +134,7 @@ const ZUSTAND_PERSIST_KEYS = Object.freeze([
   'institutionToggles', 'categoryToggles', 'goodsToggles', 'servicesToggles',
   'displayPrefs',
   // Realm directive 7 (J-D7): the FULL AUTO-RESOLVE play mode. Persisted as an
-  // additive top-level key (store/index.js partialize), absent-tolerant on rehydrate.
+  // additive top-level key (persistProjection.js), absent-tolerant on rehydrate.
   'advanceAutoResolve',
 ]);
 
@@ -314,11 +316,8 @@ function makeSettingsStore() {
   return create(immer((...a) => ({ ...createDisplayPrefsSlice(...a) })));
 }
 
-/** The REAL partialize, derived from the registry the source scan above proves is
- *  identical to src/store/index.js — so this cannot drift from what ships. */
-function partializeOf(state) {
-  return Object.fromEntries(ZUSTAND_PERSIST_KEYS.map((k) => [k, state[k]]));
-}
+/** The exact projection passed to Zustand persist by src/store/index.js. */
+const partializeOf = partializeStoreState;
 
 function makeStore() {
   return create(immer((...a) => ({
@@ -598,9 +597,11 @@ describe('E-C completeness — every persisted family is registered (new family 
   });
 
   test('zustand persist: the partialize key list matches the registry exactly (source scan)', () => {
-    const src = readSrc('src/store/index.js');
-    const block = src.match(/partialize:\s*\(state\)\s*=>\s*\(\{([\s\S]*?)\}\)/);
-    if (!block) throw new Error('partialize block not found in src/store/index.js — the scan anchor moved; re-anchor this walker, do not delete it');
+    const index = readSrc('src/store/index.js');
+    expect(index).toMatch(/partialize:\s*partializeStoreState/);
+    const src = readSrc('src/store/persistProjection.js');
+    const block = src.match(/return\s*\{([\s\S]*?)\};/);
+    if (!block) throw new Error('projection return object not found in persistProjection.js — re-anchor this walker, do not delete it');
     const discovered = [...block[1].matchAll(/(\w+):\s*state\.\w+/g)].map((m) => m[1]);
     expectExactSet(
       discovered, ZUSTAND_PERSIST_KEYS,
@@ -724,7 +725,8 @@ describe('E-C worldState — ensure fixpoint, persist, clone, migrate, dormancy'
     expectByteEqual(revived.envoyErrands, ensured.envoyErrands);
   });
 
-  test('ensureWorldState rejects envoy lifecycle rows whose cursor or terminal clocks claim a teleport', () => {
+  test('persisted hydration rejects envoy lifecycle rows whose cursor or terminal clocks claim a teleport', () => {
+    const ensureWorldState = hydratePersistedWorldState;
     const parlaying = richWorldStateRaw();
     Object.assign(parlaying.envoyErrands[0], {
       state: 'parlaying',

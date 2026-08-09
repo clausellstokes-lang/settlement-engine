@@ -27,6 +27,18 @@ import {
 import {
   createReviewedSupplyChainActions,
 } from './customContentReviewedSupplyChainActions.js';
+import { preloadCampaignRuntime } from './campaignRuntimeBridge.js';
+
+async function pinLegacyCampaignBindings(set, get, customContent, ownerId) {
+  try {
+    await preloadCampaignRuntime(set, get);
+  } catch (error) {
+    console.warn('campaign runtime preload failed during content hydration:', error);
+    return;
+  }
+  if (ownerIdFromState(get()) !== ownerId) return;
+  get().pinLegacyCampaignContentBindings(customContent);
+}
 
 // ── Canonical validation chokepoint ──────────────────────────────────────────
 // The generated manifest adapter loads only when a write reaches this boundary.
@@ -705,7 +717,7 @@ export const createCustomContentRuntimeActions = (set, get) => {
       }
       if (ownerIdFromState(get()) !== ownerId) return;
       if (environmentHydrated) {
-        get().pinLegacyCampaignContentBindings?.(merged);
+        await pinLegacyCampaignBindings(set, get, merged, ownerId);
       }
       // Force the generator's custom-content registry to re-read. The registry
       // caches by a (count : latest-updatedAt) key, which can't detect a cloud
@@ -747,7 +759,7 @@ export const createCustomContentRuntimeActions = (set, get) => {
               );
             }
             if (environmentHydrated) {
-              get().pinLegacyCampaignContentBindings?.(merged);
+              await pinLegacyCampaignBindings(set, get, merged, ownerId);
             }
             // Same wholesale-replace stale-key concern as the cloud path above.
             invalidateCustomDepsIfLoaded();
