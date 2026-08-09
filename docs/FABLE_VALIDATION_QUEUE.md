@@ -6760,3 +6760,79 @@ suite runs. The new ceiling is about **2× the historical loaded failure**, whil
 five-run worst has about **6.2×** headroom. J-S12-DET5-1 is that 60 seconds is a timeout
 stability repair rather than permission to erase the render; Fable should re-rule it when
 credits return, and a later five-run full-suite soak remains the strongest acceptance.
+
+---
+
+## S12-OSR-FP — OBSERVED-SHAPE FIXED-POINT HARDENING HANDOFF (2026-08-09, Codex continuation)
+
+**⏳ NON-FABLE — FABLE SURVEY AND SIGN-OFF STILL OWED.** This is a resumable checkpoint for
+the observed-shape reader scanner, recorded because the Codex session may exhaust its weekly
+allowance before the validation train completes. Code of record is worktree
+`/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`, branch
+`claude/composite-r4`, at committed head `2c810d167d016302e641fc9cfe74fff57475b14e`.
+The only scanner-lane source/test edits are `scripts/lib/reader-shape-scan.mjs` and
+`tests/lint/readerShapeResolver.test.js`; preserve every other dirty file as parallel-owned.
+
+**LANDED FOUNDATION.** Commits `93e7ed50`, `6e7acc4d`, `0ea7ff12`, and `2c810d16` contain the
+prior contract, isolation, migration-governance, and fixed-point repairs. The current
+uncommitted continuation removes two unsound shortcuts found by adversarial review, separates
+family-only heap preflight from exact occurrence identity, refines `Object.keys` clone writes
+to the demanded key, projects flow contexts to mutation-owner cutoffs that can actually be
+queried, and composes nested wrapper call sites into invocation-owned allocation identities.
+It also adds regressions for recursive JSON detachment, cross-invocation mutation, strong
+singleton writes, wrapper identity, memoized-wrapper aliasing, demand-scoped key copying,
+captured memo effects, mixed local/external receiver identity, and raw recursive-clone
+invocation isolation.
+The flow-context cache invalidates when a local gains another overlay step, and optional inner
+calls qualify an outer allocation only with direct-return ownership proof. Temporary
+demand-debug plumbing has been removed. Caller-side alias mutations perform exact receiver
+resolution only when the shallow family token cannot match a call-qualified target and no
+helper execution chain exists in the original reader owner; this preserves memoized aliases
+without recursively expanding helper receivers. Empty, baseless allocation shells use their
+lexical-owner context plus call views, while literals with deferred fields retain complete
+caller cutoffs. `node --check`, focused ESLint, and `git diff --check` pass here.
+
+**EVIDENCE BOUNDARY.** Before the final wrapper-chain composition, the complete resolver file
+passed **83 / 83** in 13.78 s. After that composition, the four new heap/key regressions passed
+**4 / 4** with 80 skipped in 1.73 s. An adversarial audit then added a memoized-wrapper
+regression, which initially failed world-only and exposed a caller-side alias mismatch. A
+second adversarial audit then exposed both sides of the remaining occurrence problem: a
+fresh receiver was over-joining sibling invocations, while a captured memoized receiver lost
+a later invocation's mutation. The final proof requires a same-owner lexical receiver whose
+every object identity source is fresh in that invocation; parameters, captures, aliases,
+logical transfers and unproven calls fail closed. Captured receivers use exact resolution
+only under their already-selected execution cutoff. The current complete resolver file passes
+**88 / 88** in 15.79 s.
+The foreign `node scripts/check-test-ratchet.mjs` mutex owner was allowed to finish; no process
+was killed and the passing run acquired the slot atomically.
+
+**THE EXACT ESTATE BLOCKER IS CLOSED.** The decisive diagnostic showed that `detachJson`'s
+`detached = {}` target was still a raw owner-local allocation while its effect was already
+executing inside one concrete invocation. It therefore had no call view, and the resolver
+replayed all callers despite having already selected one. The resolver now carries the active
+effect call chain through the allocation owner only after the fresh-receiver proof succeeds.
+The exact `src/application/commands/commandEnvelope.js:4233:4251`
+(`ownerRef.accountId`) probe passes over a healthy **2,074-file / 8,637-origin** estate:
+**106 tokens**, known local container, fixed point in 3 iterations, maximum token length 313,
+and **9,925 / 16,384** state-growth steps. The temporary probe driver and all debug plumbing
+were removed. No repository-scale report, historical proof, full gate, distribution
+verification, or commit has run after this green; do not infer them from the exact receipt.
+
+**EXACT RESUME ORDER.** Use the mutex atomically and preserve all foreign worktree dirt:
+
+1. Resolver acceptance is complete: `sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint/readerShapeResolver.test.js --reporter=dot` → **88 / 88**.
+2. Exact estate acceptance is complete with the receipt above.
+3. Execute
+   `sh scripts/gate-mutex.sh --run -- node scripts/check-observed-shape-readers.mjs --report`.
+4. Prove the governed historical/archive path against the same scanner inputs; do not write or
+   re-freeze `scripts/.observed-shape-readers-baseline.json`.
+5. Run `npm run check`, then `npm run verify:dist`, both with no concurrent Vitest/scanner lane.
+6. Record the immutable results here and commit only the two scanner files plus this row through
+   an isolated index/CAS update. Never stage unrelated worktree dirt.
+
+If step 1 regresses, audit `callEntriesOfView`, `withViewCallFrames`, `heapTargetIdentity`,
+`sameHeapTarget`, `activeEffectCallChain`, and the local-token arm of `instantiateSymbolic`
+first. The intended invariant is finite no-repeat static call chains, with repeated sites
+closing to multiplicity `many`. Fable should specifically re-rule the call-chain identity,
+invocation-owned receiver proof, relevant-flow-context projection, and demand-key refinement;
+no baseline or golden change is authorized by this checkpoint row.

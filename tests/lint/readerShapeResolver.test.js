@@ -990,6 +990,19 @@ describe('reader shape resolver provenance', () => {
     ]);
   });
 
+  test('classifies ternary suspension branches without assuming an if-statement shape', () => {
+    const result = scan(`
+      export async function probe(worldState, flag) {
+        flag ? await Promise.resolve() : null;
+        return worldState.__afterTernaryAwait;
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterTernaryAwait', origins: ['root/worldState'] },
+    ]);
+  });
+
   test('keeps deferred closure fields isolated between helper call sites', () => {
     const result = scan(`
       export function probe(worldState, save) {
@@ -1390,6 +1403,51 @@ describe('reader shape resolver provenance', () => {
     expect(result.stats.maxReadTokenLength).toBeLessThanOrEqual(512);
   });
 
+  test('rejects fresh recursive clone effects without losing source-defined map aliases', () => {
+    const result = scan(`
+      function detachJson(value) {
+        if (value === null || typeof value === 'string' || typeof value === 'boolean') {
+          return value;
+        }
+        if (typeof value === 'number') return value;
+        if (typeof value !== 'object') throw new TypeError('JSON only');
+        let detached;
+        if (Array.isArray(value)) {
+          detached = value.map(entry => detachJson(entry));
+        } else {
+          detached = {};
+          for (const key of Object.keys(value)) detached[key] = detachJson(value[key]);
+        }
+        return detached;
+      }
+      function normalize(value) {
+        const detached = detachJson(value);
+        detached.__freshCloneOnly = null;
+        return detached;
+      }
+      function sourceMap(value) { return value; }
+      const facade = { map: sourceMap };
+      function mutateAlias(value) {
+        const alias = facade.map(value);
+        alias.__sourceMapAlias = null;
+      }
+      export function probe(worldState) {
+        normalize(worldState);
+        mutateAlias(worldState);
+        return [
+          worldState.__freshCloneOnly,
+          worldState.__sourceMapAlias,
+        ];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__freshCloneOnly', origins: ['root/worldState'] },
+    ]);
+    expect(result.stats.abstractStateBudgetFailures).toBe(0);
+    expect(result.stats.maxReadStateGrowth).toBeLessThan(128);
+  });
+
   test('closes direct and mutually recursive array-literal producers', () => {
     const direct = scan(`
       function nest(value) {
@@ -1587,6 +1645,198 @@ describe('reader shape resolver provenance', () => {
       { key: '__capturedChild', origins: ['root/save'] },
       { key: '__distinctFactory', origins: ['root/worldState'] },
     ]);
+  });
+
+  test('lets later invocations mutate prior allocations and keeps singleton writes strong', () => {
+    const crossInvocation = scan(`
+      function act(previous, create, worldState, save) {
+        if (previous) previous.selected = save;
+        return create ? { selected: worldState } : previous;
+      }
+      export function probe(worldState, save) {
+        const first = act(null, true, worldState, save);
+        act(first, false, worldState, save);
+        return first.selected.__crossInvocation;
+      }
+    `);
+
+    expect(crossInvocation.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__crossInvocation', origins: ['root/save'] },
+      { key: '__crossInvocation', origins: ['root/worldState'] },
+    ]);
+
+    const mixedLocal = scan(`
+      function act(previous, create, worldState, save) {
+        let receiver;
+        if (create) receiver = { selected: worldState };
+        else receiver = previous;
+        receiver.selected = create ? worldState : save;
+        return receiver;
+      }
+      export function probe(worldState, save) {
+        const first = act(null, true, worldState, save);
+        act(first, false, worldState, save);
+        return first.selected.__localCrossInvocation;
+      }
+    `);
+
+    expect(mixedLocal.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__localCrossInvocation', origins: ['root/save'] },
+      { key: '__localCrossInvocation', origins: ['root/worldState'] },
+    ]);
+
+    const returnedSingleton = scan(`
+      export function probe(worldState, save) {
+        const singleton = { selected: worldState };
+        function getSingleton() { return singleton; }
+        Object.assign(getSingleton(), { selected: save });
+        return singleton.selected.__strongSingletonWrite;
+      }
+    `);
+
+    expect(returnedSingleton.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__strongSingletonWrite', origins: ['root/save'] },
+    ]);
+  });
+
+  test('composes wrapper call sites into invocation-owned heap identities', () => {
+    const result = scan(`
+      function make(value) { return { selected: value }; }
+      function wrap(value) { return make(value); }
+      export function probe(worldState, save) {
+        const first = wrap(save);
+        const second = wrap(worldState);
+        first.selected = save;
+        return second.selected.__nestedFactoryIdentity;
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__nestedFactoryIdentity', origins: ['root/worldState'] },
+    ]);
+  });
+
+  test('does not split an allocation memoized across wrapper invocations', () => {
+    const result = scan(`
+      let cached;
+      function make(value) { return { selected: value }; }
+      function wrap(value) {
+        if (cached) return cached;
+        cached = make(value);
+        return cached;
+      }
+      export function probe(worldState, save) {
+        const first = wrap(worldState);
+        const second = wrap(worldState);
+        first.selected = save;
+        return second.selected.__memoizedWrapperIdentity;
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__memoizedWrapperIdentity', origins: ['root/save'] },
+    ]);
+  });
+
+  test('keeps memoized receiver effects cross-invocation', () => {
+    const memoized = scan(`
+      let cached;
+      function make(value) { return { selected: value }; }
+      function wrap(value, selected) {
+        if (!cached) cached = make(value);
+        cached.selected = selected;
+        return cached;
+      }
+      export function probe(worldState, save) {
+        const first = wrap(worldState, worldState);
+        wrap(worldState, save);
+        return first.selected.__memoOwnerMutation;
+      }
+    `);
+
+    expect(memoized.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__memoOwnerMutation', origins: ['root/save'] },
+    ]);
+  });
+
+  test('isolates effects on invocation-owned fresh receivers', () => {
+    const invocationOwned = scan(`
+      function make(value, selected) {
+        const owned = { selected: value };
+        owned.selected = selected;
+        return owned;
+      }
+      function wrap(value, selected) { return make(value, selected); }
+      export function probe(worldState, save) {
+        wrap(worldState, save);
+        const second = wrap(worldState, worldState);
+        return second.selected.__ownedIsolation;
+      }
+    `);
+
+    expect(invocationOwned.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__ownedIsolation', origins: ['root/worldState'] },
+    ]);
+  });
+
+  test('refines Object.keys clone writes to the property currently demanded', () => {
+    const result = scan(`
+      function detachJson(value) {
+        if (value === null || typeof value !== 'object') return value;
+        let detached;
+        detached = {};
+        for (const key of Object.keys(value)) {
+          detached[key] = detachJson(value[key]);
+        }
+        return detached;
+      }
+      export function probe(worldState, save) {
+        const detached = detachJson({
+          owner: { selected: worldState },
+          decoy: { selected: save },
+        });
+        return detached.owner.selected.__demandScopedClone;
+      }
+    `);
+
+    expect(result.findings
+      .filter(({ key }) => key === '__demandScopedClone')
+      .map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__demandScopedClone', origins: ['root/worldState'] },
+    ]);
+    expect(result.stats.abstractStateBudgetFailures).toBe(0);
+    expect(result.stats.maxReadStateGrowth).toBeLessThan(128);
+  });
+
+  test('keeps raw recursive-clone effects in the active allocation invocation', () => {
+    const result = scan(`
+      function detachJson(value) {
+        if (value === null || typeof value !== 'object') return value;
+        let detached;
+        if (Array.isArray(value)) detached = value.map(entry => detachJson(entry));
+        else {
+          detached = {};
+          for (const key of Object.keys(value)) detached[key] = detachJson(value[key]);
+        }
+        return detached;
+      }
+      function build(value) {
+        return detachJson({ owner: { selected: value } });
+      }
+      export function probe(worldState, save) {
+        build(save);
+        const current = build(worldState);
+        return current.owner.selected.__activeCloneInvocation;
+      }
+    `);
+
+    expect(result.findings
+      .filter(({ key }) => key === '__activeCloneInvocation')
+      .map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__activeCloneInvocation', origins: ['root/worldState'] },
+    ]);
+    expect(result.stats.abstractStateBudgetFailures).toBe(0);
+    expect(result.stats.maxReadStateGrowth).toBeLessThan(256);
   });
 
   test('does not leak element provenance through nonnumeric array properties', () => {

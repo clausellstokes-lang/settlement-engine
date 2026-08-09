@@ -83,6 +83,10 @@ const ELEMENT_CB_METHODS = new Set(['map', 'filter', 'find', 'findLast', 'forEac
 const ELEMENT_RESULT_METHODS = new Set(['find', 'findLast', 'at', 'pop', 'shift']);
 /** Array methods whose RESULT is the receiver itself (still an array). */
 const ARRAY_RESULT_METHODS = new Set(['filter', 'sort', 'slice', 'reverse']);
+/** Default-library array methods that always allocate a distinct array result. */
+const FRESH_ARRAY_RESULT_METHODS = new Set([
+  'map', 'filter', 'slice', 'concat', 'flat', 'flatMap',
+]);
 
 const RECORD = 'record:';
 const ARRAY = 'array:';
@@ -350,6 +354,7 @@ const normalizedFlatDepth = (value) => {
 const unwrap = (n) => {
   let cur = n;
   for (;;) {
+    if (!cur) return cur;
     if (ts.isParenthesizedExpression(cur) || ts.isAsExpression(cur) || ts.isNonNullExpression(cur)
       || ts.isTypeAssertionExpression?.(cur) || ts.isSatisfiesExpression?.(cur)) { cur = cur.expression; continue; }
     return cur;
@@ -400,6 +405,7 @@ const addDelayRanges = (left = ZERO_DELAY, right = ZERO_DELAY) => ({
 });
 const staticBooleanSyntax = (expression) => {
   const value = unwrap(expression);
+  if (!value) return null;
   if (value.kind === ts.SyntaxKind.TrueKeyword) return true;
   if (value.kind === ts.SyntaxKind.FalseKeyword || value.kind === ts.SyntaxKind.NullKeyword) {
     return false;
@@ -474,7 +480,9 @@ const suspensionRangeAt = (node, kind = 'await') => {
         if (ts.isIfStatement(ancestor) || ts.isConditionalExpression(ancestor)) {
           const checkpointRole = branchRoleWithin(ancestor, current);
           if (checkpointRole !== 'then' && checkpointRole !== 'else') continue;
-          const condition = staticBooleanSyntax(ancestor.expression);
+          const condition = staticBooleanSyntax(
+            ts.isIfStatement(ancestor) ? ancestor.expression : ancestor.condition,
+          );
           const chosen = condition == null ? null : (condition ? 'then' : 'else');
           if (chosen && checkpointRole !== chosen) { reachable = false; break; }
           const targetRole = ancestor.pos <= node.pos && node.end <= ancestor.end
@@ -617,13 +625,17 @@ export function buildIndex(files) {
 
   const symbolAt = (node) => canonicalSymbol(checker.getSymbolAtLocation(node));
 
-  const isIntrinsicGlobal = (node, name) => {
-    const value = unwrap(node);
-    if (!ts.isIdentifier(value) || value.text !== name) return false;
-    const symbol = symbolAt(value);
+  const isDefaultLibrarySymbol = (node) => {
+    const symbol = symbolAt(node);
     return Boolean(symbol && (symbol.declarations || []).some(
       (declaration) => program.isSourceFileDefaultLibrary(declaration.getSourceFile()),
     ));
+  };
+
+  const isIntrinsicGlobal = (node, name) => {
+    const value = unwrap(node);
+    if (!ts.isIdentifier(value) || value.text !== name) return false;
+    return isDefaultLibrarySymbol(value);
   };
   const classifyCall = (node) => {
     const call = unwrap(node);
@@ -682,6 +694,12 @@ export function buildIndex(files) {
       if (ts.isPropertyAssignment(declaration)) {
         const initializer = unwrap(declaration.initializer);
         if (ts.isFunctionExpression(initializer) || ts.isArrowFunction(initializer)) return initializer;
+        if (ts.isIdentifier(initializer) || ts.isPropertyAccessExpression(initializer)) {
+          const target = functionOfSymbol(symbolAt(
+            ts.isPropertyAccessExpression(initializer) ? initializer.name : initializer,
+          ), seen);
+          if (target) return target;
+        }
       }
     }
     return null;
@@ -791,6 +809,7 @@ export function buildIndex(files) {
         projection,
         fallbacks,
         file,
+        declarationOwner: flowOwnerOf(definitionNode),
         writes: [],
         definitionSite: (initializer || additionalInitializers.length)
           ? executionSiteOf(definitionNode, file)
@@ -2047,6 +2066,7 @@ export function buildIndex(files) {
     functionOf,
     classifyCall,
     isIntrinsicGlobal,
+    isDefaultLibrarySymbol,
   };
 }
 
@@ -2094,14 +2114,143 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
   let approximationVersion = 0;
   let evaluationEpoch = 0;
   let currentReadContext = null;
+  let currentReaderOwner = null;
   // Immutable snapshot of the exact caller cutoffs currently in force, keyed
   // by lexical owner. Nested helpers retain their callers' cutoffs and add the
   // call site in their own owner; this is what makes closed-over mutable reads
   // flow-sensitive across more than one function boundary.
   let activeCutoffs = new Map();
   let currentReadBudget = null;
+  let activeNonEscapingProducerOwners = null;
+  let activeExecutionOwners = null;
+  let activeHeapEffectDiagnostic = null;
+  let activeEffectCallChain = [];
+  let heapEffectsResolvingReceiver = new Set();
+  const nonEscapingBindingCache = new WeakMap();
+  const producerOwnerCache = new WeakMap();
+  const reachableOwnerCache = new WeakMap();
   const diagnosticSites = new Map();
   const siteOf = (node, file) => (node ? `${file}:${node.pos}:${node.end}` : null);
+  const safeIdentityUse = (identifier) => {
+    let current = identifier;
+    while (current.parent && (ts.isParenthesizedExpression(current.parent)
+      || ts.isAsExpression(current.parent)
+      || ts.isNonNullExpression(current.parent)
+      || ts.isSatisfiesExpression?.(current.parent))) current = current.parent;
+    const parent = current.parent;
+    if (!parent) return false;
+    if ((ts.isPropertyAccessExpression(parent) || ts.isElementAccessExpression(parent))
+      && parent.expression === current) return !isWriteTarget(parent);
+    if ((ts.isIfStatement(parent) || ts.isWhileStatement(parent)
+      || ts.isDoStatement(parent)) && parent.expression === current) return true;
+    if (ts.isConditionalExpression(parent) && parent.condition === current) return true;
+    if (ts.isTypeOfExpression(parent) && parent.expression === current) return true;
+    return ts.isPrefixUnaryExpression(parent)
+      && parent.operand === current
+      && parent.operator === ts.SyntaxKind.ExclamationToken;
+  };
+  const bindingDoesNotEscape = (binding) => {
+    if (nonEscapingBindingCache.has(binding)) return nonEscapingBindingCache.get(binding);
+    if (binding.k !== 'expr' || binding.projection?.length || binding.fallbacks?.length
+      || binding.additionalInitializers?.length || binding.writes?.length) {
+      nonEscapingBindingCache.set(binding, false);
+      return false;
+    }
+    const source = idx.sources.get(binding.file);
+    if (!source) return false;
+    let safe = true;
+    const visit = (node) => {
+      if (!safe) return;
+      if (ts.isIdentifier(node) && idx.bindingOf(node) === binding) {
+        const declaration = node.parent;
+        if (!(ts.isVariableDeclaration(declaration) && declaration.name === node)
+          && !safeIdentityUse(node)) safe = false;
+      }
+      ts.forEachChild(node, visit);
+    };
+    visit(source);
+    nonEscapingBindingCache.set(binding, safe);
+    return safe;
+  };
+  const producerOwnersForReceiver = (receiver) => {
+    const value = unwrap(receiver);
+    let call = ts.isCallExpression(value) ? value : null;
+    if (ts.isIdentifier(value)) {
+      const binding = idx.bindingOf(value);
+      const initializer = binding?.node ? unwrap(binding.node) : null;
+      if (!binding || !bindingDoesNotEscape(binding)
+        || !ts.isCallExpression(initializer)) return null;
+      call = initializer;
+    }
+    if (!call) return null;
+    if (producerOwnerCache.has(call)) return producerOwnerCache.get(call);
+    const target = idx.functionOf(unwrap(call.expression));
+    if (!target) return null;
+    const owners = new Set();
+    const pending = [target.fn];
+    while (pending.length) {
+      const owner = pending.pop();
+      if (owners.has(owner)) continue;
+      owners.add(owner);
+      for (const called of idx.callGraph.get(owner) || []) pending.push(called);
+    }
+    producerOwnerCache.set(call, owners);
+    return owners;
+  };
+  const reachableOwnersFrom = (rootOwner) => {
+    if (!rootOwner) return EMPTY;
+    if (reachableOwnerCache.has(rootOwner)) return reachableOwnerCache.get(rootOwner);
+    const owners = new Set();
+    const pending = [rootOwner];
+    while (pending.length) {
+      const owner = pending.pop();
+      if (!owner || owners.has(owner)) continue;
+      owners.add(owner);
+      if (ts.isFunctionLike(owner)) owners.add(owner.getSourceFile());
+      for (const called of idx.callGraph.get(owner) || []) pending.push(called);
+    }
+    reachableOwnerCache.set(rootOwner, owners);
+    return owners;
+  };
+  const ownersExecutingBefore = (owner, cutoff) => {
+    if (!owner) return EMPTY;
+    let owners = new Set([owner]);
+    if (ts.isFunctionLike(owner)) owners.add(owner.getSourceFile());
+    for (const target of idx.callGraph.get(owner) || []) {
+      const completed = [
+        ...(idx.callSites.get(target) || []),
+        ...(idx.elementCallSites.get(target) || []),
+      ].some((callSite) => {
+        const site = callSite.site || {
+          end: callSite.call.end,
+          owner: flowOwnerOf(callSite.call),
+        };
+        return site.owner === owner && site.end <= cutoff;
+      });
+      if (completed) owners = union(owners, reachableOwnersFrom(target));
+    }
+    if (ts.isFunctionLike(owner)) {
+      owners = union(
+        owners,
+        ownersExecutingBefore(owner.getSourceFile(), Number.POSITIVE_INFINITY),
+      );
+    }
+    return owners;
+  };
+  const executionOwnersForRead = (owner, events, cutoff) => {
+    let owners = new Set(ownersExecutingBefore(owner, cutoff));
+    for (const event of events) {
+      for (const entry of event.callChain || []) {
+        const caller = entry.callSite?.site?.owner
+          || flowOwnerOf(entry.callSite?.call);
+        const callerCutoff = entry.callSite?.site?.end
+          ?? entry.callSite?.call?.end
+          ?? Number.POSITIVE_INFINITY;
+        owners = union(owners, ownersExecutingBefore(caller, callerCutoff));
+      }
+    }
+    return owners;
+  };
   const bump = (key, site = null) => {
     if (site) {
       let sites = diagnosticSites.get(key);
@@ -2115,7 +2264,11 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     diagnostics.abstractStateBudgetFailures = (diagnostics.abstractStateBudgetFailures || 0) + 1;
     throw new Error(
       `reader-shape abstract-state budget exceeded at ${currentReadBudget?.site || 'unknown reader'}: `
-      + `${kind} ${value} > ${limit} while ${reason}${detail}; refusing partial provenance`,
+      + `${kind} ${value} > ${limit} while ${reason}${detail}`
+      + (activeHeapEffectDiagnostic
+        ? `; heap effect ${activeHeapEffectDiagnostic}`
+        : '')
+      + '; refusing partial provenance',
     );
   };
   const tokenStructureDiagnostic = (token) => {
@@ -2530,8 +2683,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
   const localFieldsEvaluating = new Map();
   const localFieldEpoch = new Map();
   const localContextIds = new Map();
-  const localContextId = () => {
-    const signature = cutoffSignatureOf();
+  const internLocalContext = (signature) => {
     let id = localContextIds.get(signature);
     if (id == null) {
       id = localContextIds.size;
@@ -2539,8 +2691,27 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     }
     return id;
   };
+  const localContextId = () => internLocalContext(cutoffSignatureOf());
+  const ownerLocalContextId = (node, file) => {
+    const ownerId = flowContextId({ file, owner: flowOwnerOf(node) });
+    const ownerCutoff = activeCutoffs.get(ownerId);
+    const signature = cutoffSignatureOf(
+      ownerCutoff ? new Map([[ownerId, ownerCutoff]]) : new Map(),
+    );
+    return internLocalContext(`owner:${signature}`);
+  };
   const localTokenOf = (node, file) => (
     `${LOCAL}${encodeURIComponent(file)}:${node.pos}:c${localContextId()}`
+  );
+  const ownerLocalTokenOf = (node, file) => (
+    `${LOCAL}${encodeURIComponent(file)}:${node.pos}:c${ownerLocalContextId(node, file)}`
+  );
+  // Shallow heap-alias checks need only the allocation family. Registering a
+  // context-qualified local here would mutate the fixed point merely to prove
+  // that two families differ, and repeated call contexts could manufacture an
+  // otherwise unbounded set of records that are immediately discarded.
+  const shallowLocalFamilyTokenOf = (node, file) => (
+    `${LOCAL}${encodeURIComponent(file)}:${node.pos}:c*`
   );
   const registerLocalToken = (
     token,
@@ -2647,10 +2818,79 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
   };
   const registerLocal = (
     node, file, bases, written, fields, fieldSources = new Map(), overlaySteps = [],
-  ) => registerLocalToken(
-    localTokenOf(node, file), bases, written, fields, localTokenOf(node, file), fieldSources,
-    overlaySteps, flowOwnerOf(node),
-  );
+  ) => {
+    // An empty, baseless allocation shell has no declaration-time value to
+    // capture; all of its contents arrive through separately contextualized
+    // heap effects. Caller combinations therefore belong in finite call views,
+    // not in the raw source token. Rich literals retain the complete cutoff
+    // identity required to isolate deferred closure fields between callers.
+    const token = !bases.size && !fields.size && !fieldSources.size
+      ? ownerLocalTokenOf(node, file)
+      : localTokenOf(node, file);
+    return registerLocalToken(
+      token,
+      bases,
+      written,
+      fields,
+      token,
+      fieldSources,
+      overlaySteps,
+      flowOwnerOf(node),
+    );
+  };
+  const callEntriesOfView = (view) => view?.kind === 'call'
+    ? (view.calls || [{ call: view.call, file: view.file, target: view.target }])
+    : [];
+  const indexedCallSiteOf = ({ call, target }) => {
+    if (!target?.fn) return null;
+    return [
+      ...(idx.callSites.get(target.fn) || []),
+      ...(idx.elementCallSites.get(target.fn) || []),
+    ].find((candidate) => candidate.call === call) || null;
+  };
+  const callFlowsDirectlyToReturn = (call, owner) => {
+    let current = call;
+    while (current?.parent && current.parent !== owner) {
+      const parent = current.parent;
+      if ((ts.isParenthesizedExpression(parent)
+        || ts.isAsExpression(parent)
+        || ts.isNonNullExpression(parent)
+        || ts.isTypeAssertionExpression?.(parent)
+        || ts.isSatisfiesExpression?.(parent)
+        || ts.isAwaitExpression(parent))
+        && parent.expression === current) {
+        current = parent;
+        continue;
+      }
+      if (ts.isConditionalExpression(parent)
+        && (parent.whenTrue === current || parent.whenFalse === current)) {
+        current = parent;
+        continue;
+      }
+      if (ts.isBinaryExpression(parent)
+        && (parent.operatorToken.kind === ts.SyntaxKind.AmpersandAmpersandToken
+          || parent.operatorToken.kind === ts.SyntaxKind.BarBarToken
+          || parent.operatorToken.kind === ts.SyntaxKind.QuestionQuestionToken)
+        && (parent.left === current || parent.right === current)) {
+        current = parent;
+        continue;
+      }
+      if (ts.isReturnStatement(parent) && parent.expression === current) return true;
+      return false;
+    }
+    return false;
+  };
+  const nestedCallOwnsInvocationAllocation = (entry, owner) => {
+    const callSite = indexedCallSiteOf(entry);
+    if (!callSite || flowOwnerOf(entry.call) !== owner) return false;
+    // An unconditional inner call creates the invocation's product. If the
+    // call can be skipped, qualify it only when its value itself leaves through
+    // that invocation's return. Otherwise a memoized module/closure binding
+    // can replay one earlier allocation at several outer call sites, and
+    // adding those sites would unsoundly split one runtime singleton.
+    return !callSite.site?.optional
+      || callFlowsDirectlyToReturn(entry.call, owner);
+  };
   /** Instantiating a symbolic object literal at a call site must not eagerly
    * clone its entire local graph. A view retains the exact declaration + call
    * context and instantiates only the property path a reader actually asks
@@ -2671,7 +2911,8 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         hasMutations: false,
         hasFlowSensitiveMutations: false,
         intrinsicKeys: new Set(),
-        multiplicity: view.kind === 'callback' || loopOwnerOf(view.call)
+        multiplicity: view.kind === 'callback'
+          || callEntriesOfView(view).some(({ call }) => loopOwnerOf(call))
           ? 'many'
           : 'one',
         sourceToken,
@@ -2689,11 +2930,42 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         noteApproximationGrowth(record.view.elementTokens, 'growing a callback local view');
       }
     }
-    if ((view.kind === 'callback' || loopOwnerOf(view.call)) && record.multiplicity !== 'many') {
+    if ((view.kind === 'callback'
+      || callEntriesOfView(view).some(({ call }) => loopOwnerOf(call)))
+      && record.multiplicity !== 'many') {
       record.multiplicity = 'many';
     }
     return token;
   };
+
+  function withViewCallFrames(entries, evaluate) {
+    const priorFrames = [];
+    try {
+      // View entries are stored allocation-first. Install wrapper frames from
+      // the outside in so each inner wrapper argument resolves under its
+      // concrete caller before the allocation's symbolic fields are replayed.
+      for (const entry of [...entries].reverse()) {
+        const fn = entry.target?.fn;
+        if (!fn) continue;
+        priorFrames.push([fn, sentinelFrames.get(fn)]);
+        sentinelFrames.set(fn, invocationFrameFor({
+          fn,
+          callSite: {
+            file: entry.file,
+            args: [...entry.call.arguments],
+            call: entry.call,
+            awaited: false,
+          },
+        }, 0));
+      }
+      return evaluate();
+    } finally {
+      for (const [fn, frame] of priorFrames.reverse()) {
+        if (frame) sentinelFrames.set(fn, frame);
+        else sentinelFrames.delete(fn);
+      }
+    }
+  }
 
   const instantiateViewTokens = (record, tokens) => {
     if (!record.view) return tokens;
@@ -2726,19 +2998,24 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       epochs.set(token, evaluationEpoch);
       evaluating.add(token);
       try {
-        const addition = record.view.kind === 'call'
-          ? instantiateSymbolic(
+        let addition;
+        if (record.view.kind === 'call') {
+          const entries = callEntriesOfView(record.view);
+          const allocation = entries[0];
+          addition = withViewCallFrames(entries.slice(1), () => instantiateSymbolic(
             token,
-            record.view.call,
-            record.view.file,
+            allocation.call,
+            allocation.file,
             0,
-            record.view.target,
-          )
-          : instantiateCallbackSymbolic(
+            allocation.target,
+          ));
+        } else {
+          addition = instantiateCallbackSymbolic(
             token,
             record.view.elementTokens,
             record.view.diagnosticSite,
           );
+        }
         const next = union(prior, addition);
         if (next.size !== prior.size) {
           approximations.set(token, next);
@@ -2773,6 +3050,24 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
 
   const flowLocalTokens = new Map();
   const flowContextsByHash = new Map();
+  const relevantFlowContextIds = new WeakMap();
+  const flowContextIdsForSource = (source) => {
+    const cached = relevantFlowContextIds.get(source);
+    if (cached?.stepCount === source.overlaySteps.length) return cached.ids;
+    const ids = new Set(
+      source.overlaySteps
+        .filter((step) => step.mutation && step.mutationSite)
+        .map((step) => flowContextId(step.mutationSite)),
+    );
+    // Local records grow monotonically during the fixed point. Key the cache
+    // by the current step count so a mutation registered after an earlier
+    // demand cannot be projected out by stale context metadata.
+    relevantFlowContextIds.set(source, {
+      stepCount: source.overlaySteps.length,
+      ids,
+    });
+    return ids;
+  };
   const flowContextsOf = (token) => {
     const flow = flowParts(token);
     return flow ? flowContextsByHash.get(flow.hash) || new Map() : new Map();
@@ -2850,11 +3145,25 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         out.add(token);
         continue;
       }
+      // A local mutation queries flow context only by its own lexical owner.
+      // Carrying every caller cutoff into the token cannot affect visibility,
+      // but recursively nested helpers multiply those dead dimensions into an
+      // unbounded state family. Canonicalize the identity to the exact owner
+      // IDs that this source's mutation steps can observe.
+      const relevantIds = flowContextIdsForSource(evaluation.source);
       const existing = existingFlow
         ? flowContextsByHash.get(existingFlow.hash) || new Map()
         : new Map();
-      const combined = new Map(existing);
-      for (const [id, context] of inheritedContexts) combined.set(id, context);
+      const combined = new Map(
+        [...existing].filter(([id]) => relevantIds.has(id)),
+      );
+      for (const [id, context] of inheritedContexts) {
+        if (relevantIds.has(id)) combined.set(id, context);
+      }
+      if (!combined.size) {
+        out.add(baseToken);
+        continue;
+      }
       if (sameFlowContexts(existing, combined) && existingFlow) {
         out.add(token);
         continue;
@@ -2878,7 +3187,11 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         destination = flowToken(baseToken, hash);
         flowLocalTokens.set(identity, destination);
         flowContextsByHash.set(hash, combined);
-        noteApproximationGrowth(new Set([destination]), 'creating a flow-sensitive local token');
+        noteApproximationGrowth(
+          new Set([destination]),
+          `creating a flow-sensitive local token for ${heapTargetFamily(baseToken)}`
+            + ` across ${combined.size} owner cutoff(s)`,
+        );
       }
       out.add(destination);
     }
@@ -3098,9 +3411,21 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     if (!record?.view) return heapTargetFamily(base);
     const source = heapTargetFamily(record.sourceToken || base);
     if (record.view.kind === 'call') {
-      return `call:${record.view.file}:${record.view.call.pos}:${record.view.call.end}:${source}`;
+      const chain = callEntriesOfView(record.view).map(({ call, file }) => (
+        `${file}:${call.pos}:${call.end}`
+      )).join('>');
+      return `call:${chain}:${source}`;
     }
     return `callback:${record.view.diagnosticSite || 'unknown'}:${source}`;
+  };
+  const callSequenceContains = (executedCalls, requiredCalls) => {
+    let cursor = 0;
+    for (const required of requiredCalls) {
+      const index = executedCalls.indexOf(required, cursor);
+      if (index < 0) return false;
+      cursor = index + 1;
+    }
+    return true;
   };
   const sameHeapTarget = (left, right, execution = null) => {
     if (left === right || heapTargetIdentity(left) === heapTargetIdentity(right)) return true;
@@ -3117,9 +3442,13 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     // while the helper's return value is a call-qualified local view. Relate
     // those only through the exact invocation edge; two independent calls to
     // the same allocation site must never alias strongly by family alone.
-    return (execution?.executionCallChain || []).some(
-      ({ callSite }) => callSite.call === views[0].call,
+    const executedCalls = (execution?.executionCallChain || []).map(
+      ({ callSite }) => callSite.call,
     );
+    const requiredCalls = [...callEntriesOfView(views[0])]
+      .reverse()
+      .map(({ call }) => call);
+    return callSequenceContains(executedCalls, requiredCalls);
   };
   const heapTokenIsSingleton = (token) => {
     const reference = referenceParts(token);
@@ -3128,42 +3457,589 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     return localRecords.get(unflowToken(token))?.multiplicity === 'one';
   };
 
+  const shallowHeapCallFrames = new Map();
+  const expressionReadsBinding = (expression, binding) => {
+    const value = unwrap(expression);
+    return ts.isIdentifier(value) && idx.bindingOf(value) === binding;
+  };
+  /** A deliberately closed primitive refinement. The proof is target-relative:
+   * record/array/local provenance can never be returned by one of these strict
+   * branches. Loose equality, truthiness, negative typeof tests, and mutated
+   * bindings remain unknown. */
+  const truthyConditionReturnsPrimitiveBinding = (condition, binding) => {
+    const value = unwrap(condition);
+    if (!ts.isBinaryExpression(value)) return false;
+    const operator = value.operatorToken.kind;
+    if (operator === ts.SyntaxKind.BarBarToken) {
+      return truthyConditionReturnsPrimitiveBinding(value.left, binding)
+        && truthyConditionReturnsPrimitiveBinding(value.right, binding);
+    }
+    if (operator === ts.SyntaxKind.AmpersandAmpersandToken) {
+      return truthyConditionReturnsPrimitiveBinding(value.left, binding)
+        || truthyConditionReturnsPrimitiveBinding(value.right, binding);
+    }
+    if (operator !== ts.SyntaxKind.EqualsEqualsEqualsToken) return false;
+    const sides = [
+      [unwrap(value.left), unwrap(value.right)],
+      [unwrap(value.right), unwrap(value.left)],
+    ];
+    for (const [subject, comparison] of sides) {
+      if (expressionReadsBinding(subject, binding)
+        && comparison.kind === ts.SyntaxKind.NullKeyword) return true;
+      if (!ts.isTypeOfExpression(subject)
+        || !expressionReadsBinding(subject.expression, binding)
+        || !ts.isStringLiteral(comparison)) continue;
+      if ([
+        'undefined', 'boolean', 'number', 'bigint', 'string', 'symbol',
+      ].includes(comparison.text)) return true;
+    }
+    return false;
+  };
+  const returnIsStrictlyGuardedPrimitive = (statement, binding) => {
+    if ((binding.writes || []).length) return false;
+    let child = statement;
+    for (let parent = statement.parent; parent; child = parent, parent = parent.parent) {
+      if (ts.isFunctionLike(parent)) return false;
+      if (ts.isIfStatement(parent) && parent.thenStatement === child
+        && truthyConditionReturnsPrimitiveBinding(parent.expression, binding)) return true;
+    }
+    return false;
+  };
+
+  const shallowHeapReceiverTokens = (
+    expression,
+    file,
+    targetToken,
+    seenBindings = new Set(),
+    seenCalls = new Set(),
+    familiesOnly = false,
+  ) => {
+    const value = unwrap(expression);
+    if (!value) return { known: true, tokens: EMPTY };
+    if (ts.isObjectLiteralExpression(value)) {
+      return {
+        known: true,
+        tokens: new Set([familiesOnly
+          ? shallowLocalFamilyTokenOf(value, file)
+          : registerLocal(value, file, EMPTY, EMPTY, new Map())]),
+      };
+    }
+    if (ts.isArrayLiteralExpression(value)) {
+      return isArrayLikeToken(targetToken)
+        ? { known: false, tokens: EMPTY }
+        : { known: true, tokens: EMPTY };
+    }
+    if (ts.isIdentifier(value)) {
+      const binding = idx.bindingOf(value);
+      if (!binding) return { known: false, tokens: EMPTY };
+      const shallowFrame = shallowHeapCallFrames.get(binding.fn);
+      if (binding.k === 'param' && shallowFrame?.has(binding)) {
+        return shallowFrame.get(binding);
+      }
+      if (binding.k === 'param' && sentinelFrames.has(binding.fn)) {
+        return {
+          known: true,
+          tokens: sentinelFrames.get(binding.fn).get(binding)?.objects || EMPTY,
+        };
+      }
+      if (binding.k !== 'expr' || binding.projection?.length
+        || seenBindings.has(binding)) return { known: false, tokens: EMPTY };
+      const version = bindingVersionOf(binding, value, file);
+      const nextSeen = new Set(seenBindings).add(binding);
+      const resolveSource = (node, sourceFile, fallbacks = []) => {
+        let resolved = node
+          ? shallowHeapReceiverTokens(
+            node,
+            sourceFile,
+            targetToken,
+            nextSeen,
+            seenCalls,
+            familiesOnly,
+          )
+          : { known: true, tokens: EMPTY };
+        if (!resolved.known) return resolved;
+        let tokens = resolved.tokens;
+        for (const fallback of fallbacks) {
+          const alternative = shallowHeapReceiverTokens(
+            fallback,
+            sourceFile,
+            targetToken,
+            nextSeen,
+            seenCalls,
+            familiesOnly,
+          );
+          if (!alternative.known) return alternative;
+          tokens = union(tokens, alternative.tokens);
+        }
+        return { known: true, tokens };
+      };
+      let tokens = EMPTY;
+      if (version.initialVisible) {
+        for (const node of [binding.node, ...(binding.additionalInitializers || [])]) {
+          if (!node) continue;
+          const resolved = resolveSource(node, binding.file, binding.fallbacks || []);
+          if (!resolved.known) return resolved;
+          tokens = union(tokens, resolved.tokens);
+        }
+      }
+      for (const write of version.writes) {
+        // A property/dictionary write changes the receiver's contents, not the
+        // identity held by its lexical binding. Following its RHS here would
+        // recursively materialize the very heap effect whose receiver we are
+        // trying to disambiguate.
+        if (write.kind !== 'assign') continue;
+        if (write.transfer === 'primitive') {
+          if (!write.site?.optional) tokens = EMPTY;
+          continue;
+        }
+        const resolved = resolveSource(
+          write.node,
+          write.file || binding.file,
+          write.fallbacks || [],
+        );
+        if (!resolved.known) return resolved;
+        tokens = write.transfer === 'replace' && !write.site?.optional
+          ? resolved.tokens
+          : union(tokens, resolved.tokens);
+      }
+      return { known: true, tokens };
+    }
+    if (ts.isConditionalExpression(value)) {
+      const whenTrue = shallowHeapReceiverTokens(
+        value.whenTrue, file, targetToken, seenBindings, seenCalls, familiesOnly,
+      );
+      const whenFalse = shallowHeapReceiverTokens(
+        value.whenFalse, file, targetToken, seenBindings, seenCalls, familiesOnly,
+      );
+      return whenTrue.known && whenFalse.known
+        ? { known: true, tokens: union(whenTrue.tokens, whenFalse.tokens) }
+        : { known: false, tokens: EMPTY };
+    }
+    if (ts.isBinaryExpression(value)
+      && (value.operatorToken.kind === ts.SyntaxKind.AmpersandAmpersandToken
+        || value.operatorToken.kind === ts.SyntaxKind.BarBarToken
+        || value.operatorToken.kind === ts.SyntaxKind.QuestionQuestionToken)) {
+      const left = shallowHeapReceiverTokens(
+        value.left, file, targetToken, seenBindings, seenCalls, familiesOnly,
+      );
+      const right = shallowHeapReceiverTokens(
+        value.right, file, targetToken, seenBindings, seenCalls, familiesOnly,
+      );
+      return left.known && right.known
+        ? { known: true, tokens: union(left.tokens, right.tokens) }
+        : { known: false, tokens: EMPTY };
+    }
+    if (ts.isCallExpression(value)) {
+      const callee = unwrap(value.expression);
+      if (idx.classifyCall(value).kind === 'Object.assign' && value.arguments[0]) {
+        return shallowHeapReceiverTokens(
+          value.arguments[0], file, targetToken, seenBindings, seenCalls, familiesOnly,
+        );
+      }
+      const classification = idx.classifyCall(value);
+      if (classification.kind === 'source' && classification.target) {
+        const target = classification.target;
+        if (isAsyncFunction(target.fn) || isGeneratorFunction(target.fn)
+          || seenCalls.has(target.fn)) return { known: false, tokens: EMPTY };
+        const frame = new Map();
+        target.fn.parameters?.forEach((parameter, index) => {
+          if (!ts.isIdentifier(parameter.name)) return;
+          const binding = idx.bindingOf(parameter.name);
+          if (!binding) return;
+          const effective = effectiveArgument(
+            value.arguments,
+            index,
+            parameter,
+            file,
+            target.file,
+          );
+          frame.set(binding, effective
+            ? shallowHeapReceiverTokens(
+              effective.expression,
+              effective.file,
+              targetToken,
+              seenBindings,
+              seenCalls,
+              familiesOnly,
+            )
+            : { known: true, tokens: EMPTY });
+        });
+        const priorFrame = shallowHeapCallFrames.get(target.fn);
+        shallowHeapCallFrames.set(target.fn, frame);
+        const nextCalls = new Set(seenCalls).add(target.fn);
+        let tokens = EMPTY;
+        let known = true;
+        const inspectReturn = (statement) => {
+          if (!statement.expression) return;
+          const returned = unwrap(statement.expression);
+          if (ts.isIdentifier(returned)) {
+            const binding = idx.bindingOf(returned);
+            if (binding?.k === 'param'
+              && returnIsStrictlyGuardedPrimitive(statement, binding)) return;
+          }
+          const resolved = shallowHeapReceiverTokens(
+            statement.expression,
+            target.file,
+            targetToken,
+            seenBindings,
+            nextCalls,
+            familiesOnly,
+          );
+          if (!resolved.known) known = false;
+          else tokens = union(tokens, resolved.tokens);
+        };
+        const visit = (node) => {
+          if (ts.isFunctionLike(node) && node !== target.fn) return;
+          if (ts.isReturnStatement(node)) {
+            inspectReturn(node);
+            return;
+          }
+          ts.forEachChild(node, visit);
+        };
+        try {
+          if (target.fn.body && ts.isBlock(target.fn.body)) visit(target.fn.body);
+          else if (target.fn.body) {
+            const resolved = shallowHeapReceiverTokens(
+              target.fn.body,
+              target.file,
+              targetToken,
+              seenBindings,
+              nextCalls,
+              familiesOnly,
+            );
+            known = resolved.known;
+            tokens = resolved.tokens;
+          }
+        } finally {
+          if (priorFrame) shallowHeapCallFrames.set(target.fn, priorFrame);
+          else shallowHeapCallFrames.delete(target.fn);
+        }
+        // Return raw allocation families. Call qualification would overstate
+        // singleton identity across nested wrappers; family comparison is the
+        // only fact the context-free preflight consumes.
+        return known ? { known: true, tokens } : { known: false, tokens: EMPTY };
+      }
+      if (classification.kind !== 'source'
+        && ts.isPropertyAccessExpression(callee)
+        && ['map', 'filter', 'slice', 'concat', 'flat', 'flatMap'].includes(callee.name.text)
+        && !isArrayLikeToken(targetToken)) return { known: true, tokens: EMPTY };
+      return { known: false, tokens: EMPTY };
+    }
+    if (ts.isAwaitExpression(value)) {
+      return shallowHeapReceiverTokens(
+        value.expression, file, targetToken, seenBindings, seenCalls, familiesOnly,
+      );
+    }
+    if (value.kind === ts.SyntaxKind.NullKeyword
+      || value.kind === ts.SyntaxKind.TrueKeyword
+      || value.kind === ts.SyntaxKind.FalseKeyword
+      || ts.isStringLiteral(value) || ts.isNumericLiteral(value)
+      || ts.isNoSubstitutionTemplateLiteral(value)) {
+      return { known: true, tokens: EMPTY };
+    }
+    return { known: false, tokens: EMPTY };
+  };
+  const shallowHeapReceiverFamilies = (expression, file, targetToken) => (
+    shallowHeapReceiverTokens(
+      expression,
+      file,
+      targetToken,
+      new Set(),
+      new Set(),
+      true,
+    )
+  );
+  const invocationOwnedReceiverCache = new Map();
+  const primitiveIdentitySource = (expression) => {
+    const value = unwrap(expression);
+    if (!value) return true;
+    if (value.kind === ts.SyntaxKind.NullKeyword
+      || value.kind === ts.SyntaxKind.TrueKeyword
+      || value.kind === ts.SyntaxKind.FalseKeyword
+      || ts.isStringLiteral(value) || ts.isNumericLiteral(value)
+      || ts.isNoSubstitutionTemplateLiteral(value)
+      || ts.isVoidExpression(value)) return true;
+    return ts.isIdentifier(value) && value.text === 'undefined' && !idx.bindingOf(value);
+  };
+  /**
+   * Prove the narrow condition under which an effect receiver cannot carry an
+   * allocation from a different invocation. This is intentionally stronger
+   * than ordinary alias resolution: the receiver must be a same-owner lexical
+   * binding, and every object-valued identity source must be a fresh allocation
+   * in that owner. Parameters, captures, aliases, logical transfers, and
+   * unproven calls fail closed so later invocations can still mutate objects
+   * created by earlier ones.
+   *
+   * The proof is target-relative. A default-library array producer cannot be
+   * the non-array local target currently demanded, but it is not treated as a
+   * general freshness proof for array targets.
+   */
+  const invocationOwnsReceiverForTarget = (effect, targetToken) => {
+    const targetFamily = heapTargetFamily(targetToken);
+    const cacheKey = `${effect.id}\u0000${targetFamily}`;
+    if (invocationOwnedReceiverCache.has(cacheKey)) {
+      return invocationOwnedReceiverCache.get(cacheKey);
+    }
+    const owner = effect.mutationSite?.owner;
+    const receiver = unwrap(effect.receiver);
+    const binding = receiver && ts.isIdentifier(receiver) ? idx.bindingOf(receiver) : null;
+    if (!owner || !binding || binding.k !== 'expr' || binding.projection?.length
+      || binding.fallbacks?.length || binding.declarationOwner !== owner) {
+      invocationOwnedReceiverCache.set(cacheKey, false);
+      return false;
+    }
+
+    let matchesTargetFreshAllocation = false;
+    const sourceIsInvocationOwnedOrDisjoint = (expression, file) => {
+      if (primitiveIdentitySource(expression)) return true;
+      const value = unwrap(expression);
+      if (ts.isObjectLiteralExpression(value)) {
+        if (flowOwnerOf(value) !== owner) return false;
+        const family = heapTargetFamily(shallowLocalFamilyTokenOf(value, file));
+        if (family === targetFamily) matchesTargetFreshAllocation = true;
+        return true;
+      }
+      if (ts.isArrayLiteralExpression(value)) {
+        return flowOwnerOf(value) === owner && !isArrayLikeToken(targetToken);
+      }
+      if (ts.isCallExpression(value)) {
+        const callee = unwrap(value.expression);
+        return !isArrayLikeToken(targetToken)
+          && idx.classifyCall(value).kind !== 'source'
+          && ts.isPropertyAccessExpression(callee)
+          && FRESH_ARRAY_RESULT_METHODS.has(callee.name.text)
+          && idx.isDefaultLibrarySymbol(callee.name);
+      }
+      return false;
+    };
+
+    let proven = true;
+    for (const initializer of [binding.node, ...(binding.additionalInitializers || [])]) {
+      if (initializer && !sourceIsInvocationOwnedOrDisjoint(initializer, binding.file)) {
+        proven = false;
+        break;
+      }
+    }
+    if (proven) for (const write of binding.writes || []) {
+      // Dictionary/property writes alter contents without replacing identity.
+      if (write.kind === 'dictionary' || write.transfer === 'primitive') continue;
+      if (write.kind !== 'assign' || write.transfer !== 'replace'
+        || write.projection?.length || write.fallbacks?.length
+        || !sourceIsInvocationOwnedOrDisjoint(write.node, write.file || binding.file)) {
+        proven = false;
+        break;
+      }
+    }
+    const result = proven && matchesTargetFreshAllocation;
+    invocationOwnedReceiverCache.set(cacheKey, result);
+    return result;
+  };
+  const keyDomainRefinements = new Map();
+  const ownKeyEnumerationSourceOf = (binding) => {
+    if (!binding || binding.k !== 'expr' || (binding.writes || []).length
+      || binding.fallbacks?.length || binding.additionalInitializers?.length
+      || binding.projection?.length !== 1
+      || binding.projection[0].kind !== 'element' || !binding.node) return null;
+    const call = unwrap(binding.node);
+    if (!ts.isCallExpression(call) || call.arguments.length !== 1) return null;
+    const callee = unwrap(call.expression);
+    if (!ts.isPropertyAccessExpression(callee) || callee.name.text !== 'keys'
+      || !idx.isIntrinsicGlobal(callee.expression, 'Object')) return null;
+    return call.arguments[0];
+  };
+  const withKeyDomainRefinement = (binding, domains, evaluate) => {
+    const prior = keyDomainRefinements.get(binding);
+    keyDomainRefinements.set(binding, domains);
+    try {
+      return evaluate();
+    } finally {
+      if (prior) keyDomainRefinements.set(binding, prior);
+      else keyDomainRefinements.delete(binding);
+    }
+  };
+
   function contextualHeapStepsFor(targetToken, demandedKey = null) {
     const demand = `${heapTargetIdentity(targetToken)}:${demandedKey ?? '*'}:${cutoffSignatureOf()}`;
     const prior = heapStepApprox.get(demand) || new Map();
     if (heapStepsEvaluating.has(demand)) return [...prior.values()];
+    const targetLocal = isLocalToken(unflowToken(targetToken))
+      ? localRecords.get(unflowToken(targetToken))
+      : null;
+    const targetSourceOwner = targetLocal
+      ? localEvaluationOf(targetLocal).source?.allocationOwner
+      : null;
+    const viewInvocationChain = targetLocal?.view?.kind === 'call'
+      ? [...callEntriesOfView(targetLocal.view)].reverse().flatMap((entry) => (
+        entry.target?.fn
+          ? [{
+            fn: entry.target.fn,
+            callSite: {
+              file: entry.file,
+              args: [...entry.call.arguments],
+              call: entry.call,
+              site: indexedCallSiteOf(entry)?.site,
+              awaited: false,
+            },
+          }]
+          : []
+      ))
+      : [];
+    let activeOwnerIndex = -1;
+    if (targetLocal && !viewInvocationChain.length && targetSourceOwner) {
+      for (let index = 0; index < activeEffectCallChain.length; index += 1) {
+        if (activeEffectCallChain[index].fn === targetSourceOwner) activeOwnerIndex = index;
+      }
+    }
+    // A raw owner-local allocation can be demanded while resolving an effect
+    // inside its concrete invocation, before the function return has wrapped it
+    // in a call view. Inherit that active outer-to-inner chain through the
+    // allocation owner; otherwise every estate caller would be replayed while
+    // evaluating one already-selected invocation.
+    const targetInvocationChain = viewInvocationChain.length
+      ? viewInvocationChain
+      : (activeOwnerIndex >= 0
+        ? activeEffectCallChain.slice(0, activeOwnerIndex + 1)
+        : []);
+    const targetInvocationCalls = targetInvocationChain.map(
+      ({ callSite }) => callSite.call,
+    );
+    const producerOwnedNonEscape = Boolean(
+      targetSourceOwner && activeNonEscapingProducerOwners?.has(targetSourceOwner),
+    );
     heapStepsEvaluating.add(demand);
     try {
       for (const effect of idx.heapEffects || []) {
+        if (heapEffectsResolvingReceiver.has(effect.id)) continue;
+        const effectOwner = effect.mutationSite?.owner;
+        if (activeExecutionOwners && !activeExecutionOwners.has(effectOwner)) continue;
+        if (producerOwnedNonEscape
+          && !activeNonEscapingProducerOwners.has(effectOwner)) continue;
         if (demandedKey != null && effect.kind !== 'spread'
           && effect.key != null && effect.key !== demandedKey) continue;
+        // Reject syntactically provable non-aliases before expanding execution
+        // occurrences. Occurrence construction installs complete invocation
+        // frames and can itself demand recursive object contents; allocation
+        // family is the only context-free identity fact strong enough here.
+        // Same-family call views continue to the invocation-aware comparison.
+        if (effect.receiver) {
+          const preflight = shallowHeapReceiverFamilies(
+            effect.receiver,
+            effect.file,
+            targetToken,
+          );
+          if (preflight.known && [...preflight.tokens].every(
+            (candidate) => heapTargetFamily(candidate) !== heapTargetFamily(targetToken),
+          )) continue;
+        }
+        const receiverInvocationOwned = effectOwner === targetSourceOwner
+          && invocationOwnsReceiverForTarget(effect, targetToken);
+        const invocationOwnedReceiver = Boolean(
+          targetInvocationCalls.length && receiverInvocationOwned,
+        );
         const template = {
           ...effect,
           mutation: true,
           context: captureLocalFieldContext(),
         };
         for (const occurrence of mutationOccurrences(template)) {
+          const occurrenceChain = occurrence.executionCallChain || [];
+          if (invocationOwnedReceiver && occurrenceChain.length
+            && !callSequenceContains(
+              occurrenceChain.map(({ callSite }) => callSite.call),
+              targetInvocationCalls,
+            )) continue;
           const execution = {
             ...occurrence,
             executionVisibility: occurrence.executionVisibility || 'definite',
+            // A direct cutoff inside the allocation owner proves when the
+            // effect runs but carries no parameter frame. Replay the exact
+            // target view's outer-to-inner calls so a recursive producer reads
+            // this allocation's argument rather than joining every estate
+            // caller. Caller-side effects keep their own occurrence chain (or
+            // the narrow exact-receiver fallback below).
+            executionCallChain: invocationOwnedReceiver && !occurrenceChain.length
+              ? targetInvocationChain
+              : occurrenceChain,
           };
-          const instantiated = withEffectExecution(execution, 0, () => {
-            const targets = effect.receiver
-              ? resolve(effect.receiver, effect.file, 0)
-              : EMPTY;
-            const matchingTargets = [...targets].filter(
+          const priorEffectDiagnostic = activeHeapEffectDiagnostic;
+          activeHeapEffectDiagnostic = `${effect.id} at ${effect.file}:${effect.mutationSite?.pos}:${effect.mutationSite?.end}`;
+          let instantiated;
+          try {
+            instantiated = withEffectExecution(execution, 0, () => {
+            const priorReceiverEffects = heapEffectsResolvingReceiver;
+            heapEffectsResolvingReceiver = new Set(priorReceiverEffects).add(effect.id);
+            let targets;
+            try {
+              const shallow = effect.receiver
+                ? shallowHeapReceiverTokens(
+                  effect.receiver,
+                  effect.file,
+                  targetToken,
+                )
+                : { known: true, tokens: EMPTY };
+              targets = shallow.known
+                ? shallow.tokens
+                : resolve(effect.receiver, effect.file, 0);
+            } finally {
+              heapEffectsResolvingReceiver = priorReceiverEffects;
+            }
+            let matchingTargets = [...targets].filter(
               (candidate) => sameHeapTarget(candidate, targetToken, execution),
             );
+            const receiverRoot = unwrap(effect.receiver);
+            const receiverBinding = receiverRoot && ts.isIdentifier(receiverRoot)
+              ? idx.bindingOf(receiverRoot)
+              : null;
+            const capturedLexicalReceiver = receiverBinding?.k === 'expr'
+              && receiverBinding.declarationOwner !== effectOwner;
+            if (!matchingTargets.length && effect.receiver
+              && targetLocal?.view?.kind === 'call'
+              && (capturedLexicalReceiver
+                || (!(execution.executionCallChain || []).length
+                  && effect.mutationSite?.owner === currentReaderOwner))) {
+              // The shallow resolver intentionally returns allocation-family
+              // locals without constructing call views. That is sufficient for
+              // rejection and for effects executing inside a modeled call
+              // chain. Two cases still require exact receiver materialization:
+              // a caller-side alias has no execution chain to relate its raw
+              // family to the returned object, while a captured/module binding
+              // can replay one memoized allocation in a later invocation whose
+              // chain does not contain the original factory call. Both execute
+              // under a concrete cutoff here; same-owner helper receivers stay
+              // shallow so they cannot recursively enumerate every caller.
+              const priorReceiverEffects = heapEffectsResolvingReceiver;
+              heapEffectsResolvingReceiver = new Set(priorReceiverEffects).add(effect.id);
+              try {
+                targets = resolve(effect.receiver, effect.file, 0);
+              } finally {
+                heapEffectsResolvingReceiver = priorReceiverEffects;
+              }
+              matchingTargets = [...targets].filter(
+                (candidate) => sameHeapTarget(candidate, targetToken, execution),
+              );
+            }
             if (!matchingTargets.length) {
               return null;
             }
             const resolvedKeyDomains = effect.key != null
               ? new Set([literalKeyDomain(effect.key)])
               : resolveKeyDomain(effect.keyNode, effect.file, 0);
-            const valueTokens = effect.node && effect.kind !== 'delete'
-              && effect.kind !== 'dynamicDelete' && effect.assignment !== 'compound'
-              ? resolve(effect.node, effect.file, 0)
-              : EMPTY;
+            let valueTokens = EMPTY;
+            if (effect.node && effect.kind !== 'delete'
+              && effect.kind !== 'dynamicDelete' && effect.assignment !== 'compound') {
+              const keyNode = effect.keyNode ? unwrap(effect.keyNode) : null;
+              const keyBinding = demandedKey != null && keyNode && ts.isIdentifier(keyNode)
+                ? idx.bindingOf(keyNode)
+                : null;
+              const evaluateValue = () => resolve(effect.node, effect.file, 0);
+              valueTokens = keyBinding && ownKeyEnumerationSourceOf(keyBinding)
+                ? withKeyDomainRefinement(
+                  keyBinding,
+                  new Set([literalKeyDomain(demandedKey)]),
+                  evaluateValue,
+                )
+                : evaluateValue();
+            }
             return {
               ...execution,
               heapEffect: true,
@@ -3178,7 +4054,10 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
                 ? 'maybe'
                 : execution.executionVisibility,
             };
-          });
+            });
+          } finally {
+            activeHeapEffectDiagnostic = priorEffectDiagnostic;
+          }
           if (!instantiated) continue;
           const id = instantiated.executionId || instantiated.id;
           const existing = prior.get(id);
@@ -3584,7 +4463,25 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         const priorFacet = approximations.get(demand);
         if (!priorFacet || !samePropertyFacet(priorFacet, state)) {
           approximations.set(demand, state);
-          noteApproximationGrowth(state.values, 'growing a demanded local-property facet');
+          const newestValue = [...state.values].at(-1);
+          const newestPresent = [...state.presentRecords].at(-1);
+          const newestAbsent = [...state.absentRecords].at(-1);
+          noteApproximationGrowth(
+            state.values,
+            `growing a demanded local-property facet for ${heapTargetFamily(token)}.${key}`
+              + ` with ${state.values.size} value token(s)`
+              + `, ${state.presentRecords.size} present record(s)`
+              + `, ${state.absentRecords.size} absent record(s)`
+              + `, flags=${JSON.stringify([
+                state.missingLocal,
+                state.locallyWritten,
+                state.mayPresent,
+                state.mayAbsent,
+              ])}`
+              + (newestValue ? tokenStructureDiagnostic(newestValue) : '')
+              + (newestPresent ? ` newestPresent:${tokenStructureDiagnostic(newestPresent)}` : '')
+              + (newestAbsent ? ` newestAbsent:${tokenStructureDiagnostic(newestAbsent)}` : ''),
+          );
         }
         if (includeValues) {
           localPropertyFacetCache.set(demand, { epoch: evaluationEpoch, facet: state });
@@ -4657,6 +5554,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
   const withEffectExecution = (effect, depth, evaluate) => {
     const priorContext = currentReadContext;
     const priorCutoffs = activeCutoffs;
+    const priorEffectCallChain = activeEffectCallChain;
     const priorFrames = [];
     const effectSite = effect.site || effect.mutationSite;
     currentReadContext = {
@@ -4667,6 +5565,9 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       resume: effectSite?.resume || ZERO_DELAY,
     };
     activeCutoffs = effect.executionCutoffs || priorCutoffs;
+    activeEffectCallChain = effect.executionCallChain?.length
+      ? effect.executionCallChain
+      : priorEffectCallChain;
     try {
       for (const entry of effect.executionCallChain || []) {
         priorFrames.push([entry.fn, sentinelFrames.get(entry.fn)]);
@@ -4679,6 +5580,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         else sentinelFrames.delete(fn);
       }
       activeCutoffs = priorCutoffs;
+      activeEffectCallChain = priorEffectCallChain;
       currentReadContext = priorContext;
     }
   };
@@ -5067,6 +5969,8 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     if (!ts.isIdentifier(n)) return new Set([KEY_UNKNOWN]);
     const binding = lookupBinding(n);
     if (!binding) return new Set([KEY_UNKNOWN]);
+    const refined = keyDomainRefinements.get(binding);
+    if (refined) return refined;
     if (binding.k === 'param' && sentinelFrames.has(binding.fn)) {
       return sentinelFrames.get(binding.fn).get(binding)?.keys || EMPTY;
     }
@@ -5658,20 +6562,50 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       const local = localRecords.get(token);
       if (!local) return EMPTY;
       const source = localEvaluationOf(local).source || local;
-      // A call creates a fresh heap identity only for syntax allocations whose
-      // lexical execution owner is that callee. Returning a captured local is
-      // an identity alias: qualifying it by the current call would split one
-      // runtime singleton into unrelated abstract objects.
-      if (!tokenNeedsInstantiation(token)
-        || !target?.fn
-        || source.allocationOwner !== target.fn) return new Set([token]);
-      const sourceToken = local.sourceToken || token;
-      const destination = `${LOCAL}inst:${encodeURIComponent(file)}:${call.pos}:${encodeURIComponent(sourceToken)}`;
+      const existingCalls = callEntriesOfView(local.view);
+      const extendsNestedAllocation = Boolean(
+        target?.fn && existingCalls.length
+        && nestedCallOwnsInvocationAllocation(existingCalls.at(-1), target.fn),
+      );
+      const repeatsStaticCall = extendsNestedAllocation
+        && existingCalls.some((entry) => entry.call === call);
+      if (repeatsStaticCall) {
+        if (local.multiplicity !== 'many') {
+          local.multiplicity = 'many';
+          noteApproximationGrowth(
+            new Set([token]),
+            'closing a recursive call-qualified allocation',
+          );
+        }
+        return new Set([token]);
+      }
+      // A direct allocation is qualified by the callee invocation that creates
+      // it. When that allocation is returned through one or more wrappers,
+      // compose each outer call as well: the inner static call alone is shared
+      // by every wrapper invocation and therefore is not a runtime identity.
+      // Captured locals have no allocation-owned call view and remain aliases.
+      const createsOwnedAllocation = Boolean(
+        target?.fn && source.allocationOwner === target.fn
+        && tokenNeedsInstantiation(token),
+      );
+      if (!createsOwnedAllocation && !extendsNestedAllocation) return new Set([token]);
+      const calls = extendsNestedAllocation
+        ? [...existingCalls, { call, file, target }]
+        : [{ call, file, target }];
+      const sourceToken = source.sourceToken || local.sourceToken || token;
+      const callIdentity = calls.map((entry) => [
+        entry.file,
+        entry.call.pos,
+        entry.call.end,
+        entry.target?.fn?.pos ?? null,
+        entry.target?.fn?.end ?? null,
+      ]);
+      const destination = `${LOCAL}inst:${sha256(JSON.stringify(callIdentity))}:${encodeURIComponent(sourceToken)}`;
       const priorToken = localMap.get(token);
       if (priorToken) return new Set([priorToken]);
       localMap.set(token, destination);
       registerLocalView(destination, sourceToken, {
-        kind: 'call', call, file, target,
+        kind: 'call', call, file, target, calls,
       });
       return new Set([destination]);
     }
@@ -6563,8 +7497,11 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
 
   function inspectNodeRead(receiver, file, key, readNode) {
     const prior = currentReadContext;
+    const priorReaderOwner = currentReaderOwner;
     const priorCutoffs = activeCutoffs;
     const priorBudget = currentReadBudget;
+    const priorProducerOwners = activeNonEscapingProducerOwners;
+    const priorExecutionOwners = activeExecutionOwners;
     const budget = {
       site: siteOf(readNode, file),
       tokens: new Set(),
@@ -6583,12 +7520,19 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       delay: suspensionRangeAt(readNode),
       resume: suspensionRangeAt(readNode, 'yield'),
     };
+    currentReaderOwner = currentReadContext.owner;
     activeCutoffs = withAddedCutoff(priorCutoffs, currentReadContext);
     currentReadBudget = budget;
+    activeNonEscapingProducerOwners = producerOwnersForReceiver(receiver);
     try {
       const ownerEvents = ts.isFunctionLike(currentReadContext.owner)
         ? invocationEventsBefore(currentReadContext.owner)
         : [];
+      activeExecutionOwners = executionOwnersForRead(
+        currentReadContext.owner,
+        ownerEvents,
+        currentReadContext.pos,
+      );
       const contexts = ownerEvents.length
         ? ownerEvents.map((event) => withAddedCutoff(event.cutoffs, currentReadContext))
         : [activeCutoffs];
@@ -6616,7 +7560,10 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     } finally {
       finishReadBudget(budget);
       currentReadBudget = priorBudget;
+      activeNonEscapingProducerOwners = priorProducerOwners;
+      activeExecutionOwners = priorExecutionOwners;
       activeCutoffs = priorCutoffs;
+      currentReaderOwner = priorReaderOwner;
       currentReadContext = prior;
     }
   }
