@@ -398,7 +398,7 @@ button {
    Visually hidden until focused, then slides into the top-left so keyboard / SR
    users can jump past the header/nav straight to <main id="main-content">. */
 .skip-link {
-  position: absolute;
+  /* `position` is owned by the authoritative a11y.css rule loaded after this sheet. */
   left: 8px;
   top: -56px;
   z-index: 300;
