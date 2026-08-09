@@ -6769,10 +6769,9 @@ credits return, and a later five-run full-suite soak remains the strongest accep
 the observed-shape reader scanner, recorded because the Codex session may exhaust its weekly
 allowance before the validation train completes. Code of record is worktree
 `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`, branch
-`claude/composite-r4`, at scanner checkpoint `8445a5a3`, built on parallel-owned head
-`1ca709aa`. That checkpoint contains exactly `scripts/lib/reader-shape-scan.mjs`,
-`tests/lint/readerShapeResolver.test.js`, and this row. Preserve every other dirty file as
-parallel-owned.
+`claude/composite-r4`, at progress-enabled scanner checkpoint `34531b26`, built on
+performance checkpoint `8445a5a3` and parallel-owned head `1ca709aa`. Preserve every other
+dirty file as parallel-owned.
 
 **LANDED FOUNDATION.** Commits `93e7ed50`, `6e7acc4d`, `0ea7ff12`, `2c810d16`, `07ab7d01`,
 and `4d34711d` contain the prior contract, isolation, migration-governance, fixed-point,
@@ -6860,21 +6859,41 @@ the artifact remains governed by the ordinary no-overwrite output path. The call
 change resolver inputs or outputs, and the unit boundary drives a synthetic read through the
 real runner. `node --check`, focused ESLint, and diff hygiene pass; the progress/governance
 suite plus the full resolver suite pass **2 files / 103 tests** in **23.81 s**. This telemetry
-continuation is verified but not yet checkpointed at this handoff line.
+continuation landed as isolated checkpoint `34531b26`.
+
+**PROGRESS-ENABLED AUTHORITATIVE RESULT.** A fresh detached clone at exact commit
+`34531b26d58962e9146cb155f9783c10cb6be52b` ran the governed command with exclusive external
+artifact output and redirected official progress. The corpus completed in **68.253 s** with
+**8,637 origins**; the exact scanner indexed **2,074 files**, cleared the prior command-context
+hotspot, and advanced to read **3,169**. It then spent more than **5 minutes** on the single
+`id` read at `src/components/SettlementsPanel.jsx:359:82`, whose receiver is the element of
+`updatedSaves.filter(...).map(s => s.id)`. The process remained CPU-active and reached a
+sampled **2.7 GiB** physical-footprint peak. It was stopped at **2026-08-09 17:12:06 EDT**
+rather than consume the 30-minute ceiling; no partial artifact was published.
+
+Durable evidence is
+`/var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/sf-osr-evidence.XXXXXX.LDN2WVToaB/current-exact-34531b26.progress.jsonl`
+(3,172 JSONL events) and
+`/var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/sf-osr-evidence.XXXXXX.LDN2WVToaB/read-3169-34531b26.sample.txt`
+(6.7 MiB). The absent artifact target is `current-exact-34531b26.json` in that evidence
+directory. This is a new, precisely attributed array-callback fixed-point blocker; the first
+optimization is valid and materially faster but does not yet make the whole gate acceptable.
 
 **EXACT RESUME ORDER.** Use the mutex atomically and preserve all foreign worktree dirt:
 
 1. Resolver verification and isolated scanner checkpoint are complete at `8445a5a3`.
-2. Official durable read progress and its parser/runner boundary are verified; checkpoint it
-   without staging unrelated worktree dirt.
-3. Create a fresh clean detached clone at the resulting checkpoint. Run one authoritative external
-   `--scan-only` artifact with durable read progress and a substantially tighter operational
-   ceiling; never reuse the dirty diagnostic clone as governance evidence.
-4. Generate exact and legacy artifacts from the same committed scanner/input snapshot, build
+2. Official durable read progress and its parser/runner boundary are complete at `34531b26`.
+3. The progress-enabled authoritative run is complete as a failed performance proof at read
+   3,169. Reproduce that exact reader in a disposable clone, identify the finite array-callback
+   state explosion, and either land one bounded semantic repair or stop with the trace above;
+   do not resume broad adversarial analyzer research.
+4. After a green bounded repair, create another fresh clone and rerun the authoritative exact
+   artifact under the same progress control and 30-minute ceiling.
+5. Generate exact and legacy artifacts from the same committed scanner/input snapshot, build
    and review the schema-3 migration bundle, then perform the explicit governed re-freeze.
-5. Prove the governed historical/archive path against the same scanner inputs; do not treat it
+6. Prove the governed historical/archive path against the same scanner inputs; do not treat it
    as a substitute for current-tree evidence.
-6. Run `npm run check`, then `npm run verify:dist`, both with no concurrent Vitest/scanner lane,
+7. Run `npm run check`, then `npm run verify:dist`, both with no concurrent Vitest/scanner lane,
    and record every immutable receipt here.
 
 If step 1 regresses, audit `callEntriesOfView`, `withViewCallFrames`, `heapTargetIdentity`,
