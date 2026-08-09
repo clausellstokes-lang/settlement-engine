@@ -3,7 +3,7 @@
 - **Status:** CANONICAL
 - **Code of record:** `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`
 - **Measured branch/SHA:** `claude/composite-r4` at
-  `2c810d167d016302e641fc9cfe74fff57475b14e`
+  `f1895e6004eb512a5c7b4c9b4caaf79604bccea6`
 - **Measured:** 2026-08-09
 - **Packet law:** [`PACKET_STANDARD.md`](./PACKET_STANDARD.md)
 
@@ -33,6 +33,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | Dispatch | Packet | Status | Why this is bounded | Explicitly excluded |
 |---:|---|---|---|---|
 | LANDED-I1 | [`IA-1`](./packets/infrastructure/IA-1.md) | **LANDED** at `d7ec3885dbcd7e09ff3bcd28d6f55a51bb1ae78b`; do not redispatch | Automates packet enforcement and feedback topology without changing simulation behavior | event bus, pulse reorder, persistence, automatic worktree deletion, product-scope changes |
+| READY-I2 | [`IA-2`](./packets/infrastructure/IA-2.md) | **READY** at `f1895e6004eb512a5c7b4c9b4caaf79604bccea6` | Seals one packet dispatch, proves diff scope, and checkpoints resumable evidence | test sharding, affected-test inference, auto worktree/commit/merge/cleanup, product code |
 
 The status in this table and the status inside the packet must agree. A mismatch
 means the less permissive status wins.

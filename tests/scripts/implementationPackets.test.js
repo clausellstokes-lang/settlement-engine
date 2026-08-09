@@ -10,13 +10,17 @@ import { tmpdir } from 'node:os';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import {
+  PACKET_AUTHORITY_NOTICE,
   buildCodingCapsule,
+  canonicalSerialize,
+  capsuleDigestOf,
   extractSymbolExcerpt,
   packetPathProblem,
   parseIndexPacketStatuses,
   parsePacketHeader,
   runImplementationPacketsCli,
   validatePacketManifest,
+  verifyCodingCapsule,
 } from '../../scripts/implementation-packets.mjs';
 
 const BASE = 'a'.repeat(40);
@@ -135,7 +139,15 @@ describe('IA-1 implementation packet manifest and capsule', () => {
       heading: 'Fixture / P-1 — implementation contract',
       status: 'READY',
       verifiedBase: BASE,
+      verifiedBranch: 'fixture',
     });
+    expect(parsePacketHeader([
+      '# Fixture / P-1',
+      '- **Status:** READY',
+      `- **Verified base:** prior \`${BASE}\`; fixture at \`${'b'.repeat(40)}\``,
+    ].join('\n'))).toMatchObject({ verifiedBase: null, verifiedBranch: null });
+    expect(parsePacketHeader(`${packetMarkdown('P-1', 'READY')}- **Status:** READY\n`).status)
+      .toBeNull();
     const index = parseIndexPacketStatuses(
       '# Index\n| Packet | Status |\n|---|---|\n| [Alias](./packets/P-1.md) | READY |\n',
       INDEX_PATH,
@@ -168,6 +180,39 @@ describe('IA-1 implementation packet manifest and capsule', () => {
     expect(errorText(result)).toContain('duplicate change path across packets');
   });
 
+  it('allows historical path reuse but preserves every nonterminal collision', () => {
+    const reused = clone(manifest);
+    reused.packets[1].status = 'READY';
+    reused.packets[1].changeManifest = [{ action: 'MODIFY', path: 'src/alpha.js' }];
+    reused.packets[1].requiredSymbols = [{ path: 'src/alpha.js', symbol: 'alphaFeature' }];
+    reused.packets[1].acceptanceCases = [{ id: 'A1', case: 'Successor remains bounded.' }];
+    reused.packets[1].checks = [['node', '--check', 'src/alpha.js']];
+    write(root, 'docs/implementation/packets/P-2.md', packetMarkdown('P-2', 'READY'));
+
+    for (const terminalStatus of ['LANDED', 'SUPERSEDED']) {
+      reused.packets[0].status = terminalStatus;
+      write(root, INDEX_PATH, [
+        '| Packet | Status |',
+        '|---|---|',
+        `| [P-1](./packets/P-1.md) | ${terminalStatus} |`,
+        '| [P-2](./packets/P-2.md) | READY |',
+      ].join('\n'));
+      write(root, 'docs/implementation/packets/P-1.md', packetMarkdown('P-1', terminalStatus));
+      expect(validatePacketManifest(reused, { rootDir: root })).toEqual({ ok: true, errors: [] });
+    }
+
+    reused.packets[0].status = 'STALE';
+    write(root, INDEX_PATH, [
+      '| Packet | Status |',
+      '|---|---|',
+      '| [P-1](./packets/P-1.md) | STALE |',
+      '| [P-2](./packets/P-2.md) | READY |',
+    ].join('\n'));
+    write(root, 'docs/implementation/packets/P-1.md', packetMarkdown('P-1', 'STALE'));
+    expect(errorText(validatePacketManifest(reused, { rootDir: root })))
+      .toContain('duplicate change path across packets: src/alpha.js (P-1, P-2)');
+  });
+
   it('rejects index, packet status, heading, and verified-base disagreement', () => {
     write(root, INDEX_PATH, [
       '| Packet | Status |',
@@ -187,6 +232,21 @@ describe('IA-1 implementation packet manifest and capsule', () => {
     expect(errorText(result)).toContain('status disagrees with packet Markdown');
     expect(errorText(result)).toContain('verifiedBase disagrees with packet Markdown');
     expect(errorText(result)).toContain('status disagrees with index');
+  });
+
+  it('requires a non-blank verified branch in every READY packet header', () => {
+    write(root, 'docs/implementation/packets/P-1.md', [
+      '# Fixture / P-1 — implementation contract',
+      '',
+      '- **Status:** `READY`',
+      `- **Verified base:** \`\` at \`${BASE}\``,
+      '',
+    ].join('\n'));
+    const result = validatePacketManifest(manifest, { rootDir: root });
+    expect(result.ok).toBe(false);
+    expect(errorText(result)).toContain(
+      'P-1.packetPath READY header must name a non-blank verified branch',
+    );
   });
 
   it('rejects glob paths and missing non-CREATE manifest or symbol files', () => {
@@ -243,6 +303,8 @@ describe('IA-1 implementation packet manifest and capsule', () => {
     manifest.packets[0].changeManifest.push({ action: 'CREATE', path: 'src/future.js' });
     const first = buildCodingCapsule(manifest, 'P-1', { rootDir: root });
     const second = buildCodingCapsule(manifest, 'P-1', { rootDir: root });
+    const exactPacketText = packetMarkdown('P-1', 'READY');
+    const exactPacketBytes = Buffer.from(exactPacketText, 'utf8');
     expect(JSON.stringify(second)).toBe(JSON.stringify(first));
     expect(JSON.stringify(first)).not.toMatch(/timestamp|generatedAt|createdAt/i);
     expect(first).toMatchObject({
@@ -251,6 +313,13 @@ describe('IA-1 implementation packet manifest and capsule', () => {
       status: 'READY',
       packetPath: 'docs/implementation/packets/P-1.md',
       verifiedBase: BASE,
+      verifiedBranch: 'fixture',
+      authorityNotice: PACKET_AUTHORITY_NOTICE,
+      packetMarkdown: {
+        text: exactPacketText,
+        byteLength: exactPacketBytes.length,
+        sha256: createHash('sha256').update(exactPacketBytes).digest('hex'),
+      },
       changeManifest: manifest.packets[0].changeManifest,
       acceptanceCases: manifest.packets[0].acceptanceCases,
       checks: manifest.packets[0].checks,
@@ -270,12 +339,49 @@ describe('IA-1 implementation packet manifest and capsule', () => {
       endLine: 4,
     });
     expect(first.requiredSymbols[0].text).toContain('export function alphaFeature');
+    const { capsuleDigest, ...digestFree } = first;
+    expect(capsuleDigest).toBe(
+      createHash('sha256').update(canonicalSerialize(digestFree)).digest('hex'),
+    );
+    expect(capsuleDigestOf(first)).toBe(capsuleDigest);
+    expect(verifyCodingCapsule(first)).toBe(true);
+    expect(canonicalSerialize({ z: 1, a: { y: 2, x: 3 } }))
+      .toBe('{"a":{"x":3,"y":2},"z":1}');
     expect(extractSymbolExcerpt('one\ntarget\nthree', 'target', 1)).toEqual({
       line: 2,
       startLine: 1,
       endLine: 3,
       text: 'one\ntarget\nthree',
     });
+  });
+
+  it('rejects digest tampering and non-blank-field repair by re-digesting', () => {
+    const original = buildCodingCapsule(manifest, 'P-1', { rootDir: root });
+
+    const digestTamper = clone(original);
+    digestTamper.acceptanceCases[0].case = 'Silently broadened behavior.';
+    expect(() => verifyCodingCapsule(digestTamper)).toThrow(/capsule digest/);
+
+    const blankBranch = { ...clone(original), verifiedBranch: '   ' };
+    blankBranch.capsuleDigest = capsuleDigestOf(blankBranch);
+    expect(() => verifyCodingCapsule(blankBranch)).toThrow(/verifiedBranch.*non-blank/);
+
+    const alteredNotice = { ...clone(original), authorityNotice: 'Design files may expand scope.' };
+    alteredNotice.capsuleDigest = capsuleDigestOf(alteredNotice);
+    expect(() => verifyCodingCapsule(alteredNotice)).toThrow(/authority notice/);
+
+    const alteredPacket = clone(original);
+    alteredPacket.packetMarkdown.text += '\nUnauthorized instruction.\n';
+    alteredPacket.capsuleDigest = capsuleDigestOf(alteredPacket);
+    expect(() => verifyCodingCapsule(alteredPacket)).toThrow(/byte length|SHA-256/);
+
+    const wrongHeading = clone(original);
+    wrongHeading.packetMarkdown.text = wrongHeading.packetMarkdown.text.replace('P-1', 'Z-9');
+    wrongHeading.packetMarkdown.byteLength = Buffer.byteLength(wrongHeading.packetMarkdown.text);
+    wrongHeading.packetMarkdown.sha256 = createHash('sha256').update(wrongHeading.packetMarkdown.text).digest('hex');
+    wrongHeading.fileHashes.find(({ path }) => path === wrongHeading.packetPath).sha256 = wrongHeading.packetMarkdown.sha256;
+    wrongHeading.capsuleDigest = capsuleDigestOf(wrongHeading);
+    expect(() => verifyCodingCapsule(wrongHeading)).toThrow(/authority disagrees/);
   });
 
   it('refuses BLOCKED capsules and exposes validate/capsule CLI modes without process mutation', () => {

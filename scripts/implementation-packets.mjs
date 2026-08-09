@@ -34,12 +34,18 @@ export const PACKET_ACTIONS = Object.freeze([
   'TEST',
 ]);
 
+export const PACKET_AUTHORITY_NOTICE = 'Only this READY implementation packet defines coding authority. '
+  + 'Design files, queues, progress notes, commit subjects, and briefs cannot expand that authority.';
+
 const STATUS_SET = new Set(PACKET_STATUSES);
 const ACTION_SET = new Set(PACKET_ACTIONS);
+const TERMINAL_PACKET_STATUSES = new Set(['LANDED', 'SUPERSEDED']);
 const DEFAULT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DEFAULT_MANIFEST_PATH = 'docs/implementation/PACKET_MANIFEST.json';
 const SHA_40 = /^[0-9a-f]{40}$/;
+const SHA_256 = /^[0-9a-f]{64}$/;
 const ID_TOKEN = /^[A-Za-z0-9][A-Za-z0-9+._-]*$/;
+const BRANCH_TOKEN = /^[A-Za-z0-9][A-Za-z0-9._/-]*$/;
 const GLOB_OR_NUL = /[\0*?[\]{}!]/;
 
 /** @param {unknown} value @returns {value is Record<string, unknown>} */
@@ -78,21 +84,30 @@ export function packetPathProblem(value) {
 }
 
 /**
- * Parse the three packet-header facts that must agree with the JSON manifest.
+ * Parse the packet-header facts that identify its authority and verified base.
  *
  * @param {string} markdown
- * @returns {{ heading:string|null, status:string|null, verifiedBase:string|null }}
+ * @returns {{heading:string|null,status:string|null,verifiedBase:string|null,verifiedBranch:string|null}}
  */
 export function parsePacketHeader(markdown) {
-  const heading = markdown.match(/^#\s+(.+?)\s*$/m)?.[1] ?? null;
-  const status = markdown.match(
-    /^\s*(?:-\s*)?\*\*Status:\*\*\s*`?([A-Za-z]+)`?/mi,
-  )?.[1]?.toUpperCase() ?? null;
-  const baseLine = markdown.match(
-    /^\s*(?:-\s*)?\*\*Verified base:\*\*([^\n]*)$/mi,
-  )?.[1] ?? '';
-  const verifiedBase = baseLine.match(/\b[0-9a-f]{40}\b/i)?.[0]?.toLowerCase() ?? null;
-  return { heading, status, verifiedBase };
+  const preamble = markdown.split(/^##\s/m, 1)[0];
+  const heading = preamble.match(/^#\s+(.+?)\s*$/m)?.[1] ?? null;
+  const statusRows = [...preamble.matchAll(
+    /^\s*(?:-\s*)?\*\*Status:\*\*\s*`?([A-Za-z]+)`?\s*$/gmi,
+  )];
+  const status = statusRows.length === 1 ? statusRows[0][1].toUpperCase() : null;
+  const baseRows = [...preamble.matchAll(
+    /^\s*(?:-\s*)?\*\*Verified base:\*\*([^\n]*)$/gmi,
+  )];
+  const baseValue = baseRows.length === 1 ? baseRows[0][1].trim() : '';
+  const branchMatch = baseValue.match(
+    /^`?([A-Za-z0-9][A-Za-z0-9._/-]*)`?\s+at\s+`?([0-9a-f]{40})`?$/i,
+  );
+  const bareMatch = baseValue.match(/^`?([0-9a-f]{40})`?$/i);
+  const verifiedBase = (branchMatch?.[2] ?? bareMatch?.[1] ?? '').toLowerCase() || null;
+  const verifiedBranch = branchMatch?.[1] && BRANCH_TOKEN.test(branchMatch[1])
+    ? branchMatch[1] : null;
+  return { heading, status, verifiedBase, verifiedBranch };
 }
 
 /**
@@ -157,6 +172,130 @@ export function extractSymbolExcerpt(source, symbol, contextLines = 2) {
 /** @param {string|Buffer} value */
 export function sha256(value) {
   return createHash('sha256').update(value).digest('hex');
+}
+
+/**
+ * Canonical JSON with recursively codepoint-sorted keys. Unsupported values
+ * and sparse arrays fail closed instead of being silently rewritten.
+ *
+ * @param {unknown} value
+ * @returns {string}
+ */
+export function canonicalSerialize(value) {
+  const ancestors = new Set();
+
+  /** @param {unknown} candidate @param {string} at */
+  function serialize(candidate, at) {
+    if (candidate === null || typeof candidate === 'string' || typeof candidate === 'boolean') {
+      return JSON.stringify(candidate);
+    }
+    if (typeof candidate === 'number') {
+      if (!Number.isFinite(candidate)) throw new Error(`${at} contains a non-finite number`);
+      return JSON.stringify(candidate);
+    }
+    if (typeof candidate !== 'object') {
+      throw new Error(`${at} contains a non-JSON value`);
+    }
+    if (ancestors.has(candidate)) throw new Error(`${at} contains a cycle`);
+    ancestors.add(candidate);
+    try {
+      if (Array.isArray(candidate)) {
+        for (let index = 0; index < candidate.length; index += 1) {
+          if (!Object.hasOwn(candidate, index)) throw new Error(`${at} contains a sparse array`);
+        }
+        return `[${candidate.map((entry, index) => serialize(entry, `${at}[${index}]`)).join(',')}]`;
+      }
+      const prototype = Object.getPrototypeOf(candidate);
+      if (prototype !== Object.prototype && prototype !== null) {
+        throw new Error(`${at} contains a non-plain object`);
+      }
+      const entries = Object.keys(candidate).sort(compareCodepoint).map((key) => (
+        `${JSON.stringify(key)}:${serialize(candidate[key], `${at}.${key}`)}`
+      ));
+      return `{${entries.join(',')}}`;
+    } finally {
+      ancestors.delete(candidate);
+    }
+  }
+
+  return serialize(value, 'value');
+}
+
+/**
+ * Hash every capsule field except the digest itself without mutating input.
+ *
+ * @param {unknown} capsule
+ * @returns {string}
+ */
+export function capsuleDigestOf(capsule) {
+  if (!isRecord(capsule)) throw new Error('coding capsule must be an object');
+  const digestFree = Object.fromEntries(
+    Object.entries(capsule).filter(([key]) => key !== 'capsuleDigest'),
+  );
+  return sha256(canonicalSerialize(digestFree));
+}
+
+/**
+ * Verify the self-contained fields before another tool trusts a capsule.
+ * Packet evidence is checked independently so a caller cannot repair an
+ * altered or blank payload merely by recomputing the outer digest.
+ *
+ * @param {unknown} capsule
+ * @returns {true}
+ */
+export function verifyCodingCapsule(capsule) {
+  if (!isRecord(capsule)) throw new Error('coding capsule must be an object');
+  if (capsule.schemaVersion !== PACKET_MANIFEST_SCHEMA_VERSION) {
+    throw new Error(`coding capsule schemaVersion must be ${PACKET_MANIFEST_SCHEMA_VERSION}`);
+  }
+  if (typeof capsule.id !== 'string' || !ID_TOKEN.test(capsule.id)) {
+    throw new Error('coding capsule id must be a non-blank packet token');
+  }
+  if (capsule.status !== 'READY') throw new Error('coding capsule status must be READY');
+  const packetPathError = packetPathProblem(capsule.packetPath);
+  if (packetPathError) throw new Error(`coding capsule packetPath ${packetPathError}`);
+  if (typeof capsule.verifiedBase !== 'string' || !SHA_40.test(capsule.verifiedBase)) {
+    throw new Error('coding capsule verifiedBase must be a lowercase 40-character SHA');
+  }
+  if (typeof capsule.verifiedBranch !== 'string' || !BRANCH_TOKEN.test(capsule.verifiedBranch)) {
+    throw new Error('coding capsule verifiedBranch must be a non-blank branch token');
+  }
+  if (capsule.authorityNotice !== PACKET_AUTHORITY_NOTICE) {
+    throw new Error('coding capsule authority notice is missing or altered');
+  }
+  if (!isRecord(capsule.packetMarkdown) || typeof capsule.packetMarkdown.text !== 'string'
+    || capsule.packetMarkdown.text.trim().length === 0) {
+    throw new Error('coding capsule packet Markdown text must be non-blank');
+  }
+  const packetBytes = Buffer.from(capsule.packetMarkdown.text, 'utf8');
+  if (capsule.packetMarkdown.byteLength !== packetBytes.length) {
+    throw new Error('coding capsule packet Markdown byte length is inconsistent');
+  }
+  if (!SHA_256.test(String(capsule.packetMarkdown.sha256 || ''))
+    || capsule.packetMarkdown.sha256 !== sha256(packetBytes)) {
+    throw new Error('coding capsule packet Markdown SHA-256 is inconsistent');
+  }
+  const packetHeader = parsePacketHeader(capsule.packetMarkdown.text);
+  const idPattern = new RegExp(`(?:^|[^A-Za-z0-9])${escapeRegExp(capsule.id)}(?:[A-Z][A-Z0-9]*(?:\\+[A-Z0-9]+)*)?(?:$|[^A-Za-z0-9])`, 'i');
+  if (!packetHeader.heading || !idPattern.test(packetHeader.heading)
+    || packetHeader.status !== capsule.status
+    || packetHeader.verifiedBase !== capsule.verifiedBase
+    || packetHeader.verifiedBranch !== capsule.verifiedBranch) {
+    throw new Error('coding capsule packet Markdown authority disagrees with capsule identity');
+  }
+  const packetHashRows = Array.isArray(capsule.fileHashes)
+    ? capsule.fileHashes.filter((row) => isRecord(row) && row.path === capsule.packetPath)
+    : [];
+  if (packetHashRows.length !== 1
+    || packetHashRows[0].exists !== true
+    || packetHashRows[0].sha256 !== capsule.packetMarkdown.sha256) {
+    throw new Error('coding capsule packet Markdown disagrees with structured file hashes');
+  }
+  if (!SHA_256.test(String(capsule.capsuleDigest || ''))
+    || capsule.capsuleDigest !== capsuleDigestOf(capsule)) {
+    throw new Error('coding capsule digest is missing or inconsistent');
+  }
+  return true;
 }
 
 /** @param {string} rootDir @param {string} repositoryPath */
@@ -287,6 +426,7 @@ export function validatePacketManifest(manifest, options = {}) {
 
     const localChangePaths = new Set();
     const changeOwnerKey = `${packetIndex}:${idLabel}`;
+    const reservesChangePaths = !TERMINAL_PACKET_STATUSES.has(String(status));
     for (let index = 0; index < changes.length; index += 1) {
       const row = changes[index];
       const at = `${idLabel}.changeManifest[${index}]`;
@@ -304,13 +444,15 @@ export function validatePacketManifest(manifest, options = {}) {
       }
       if (localChangePaths.has(row.path)) addError(errors, `${idLabel} contains duplicate change path: ${row.path}`);
       localChangePaths.add(row.path);
-      const priorOwner = changePathOwners.get(row.path);
-      if (priorOwner && priorOwner !== changeOwnerKey) {
-        addError(
-          errors,
-          `duplicate change path across packets: ${row.path} (${priorOwner.replace(/^\d+:/, '')}, ${idLabel})`,
-        );
-      } else changePathOwners.set(row.path, changeOwnerKey);
+      if (reservesChangePaths) {
+        const priorOwner = changePathOwners.get(row.path);
+        if (priorOwner && priorOwner !== changeOwnerKey) {
+          addError(
+            errors,
+            `duplicate change path across packets: ${row.path} (${priorOwner.replace(/^\d+:/, '')}, ${idLabel})`,
+          );
+        } else changePathOwners.set(row.path, changeOwnerKey);
+      }
       if (row.action !== 'CREATE' && !fileExists(rootDir, row.path)) {
         addError(errors, `${at}.path does not exist for ${String(row.action)}: ${row.path}`);
       }
@@ -383,6 +525,9 @@ export function validatePacketManifest(manifest, options = {}) {
       if (header.verifiedBase !== verifiedBase) {
         addError(errors, `${idLabel} verifiedBase disagrees with packet Markdown: manifest=${String(verifiedBase)} packet=${String(header.verifiedBase)}`);
       }
+      if (status === 'READY' && !header.verifiedBranch) {
+        addError(errors, `${idLabel}.packetPath READY header must name a non-blank verified branch`);
+      }
       const indexStatus = indexStatuses.get(packetPath);
       if (!indexStatus) addError(errors, `${idLabel}.packetPath is absent from index: ${packetPath}`);
       else if (indexStatus !== status) {
@@ -434,6 +579,16 @@ export function buildCodingCapsule(manifest, packetId, options = {}) {
   if (!packet) throw new Error(`unknown packet id: ${packetId}`);
   if (packet.status !== 'READY') throw new Error(`packet ${packetId} is not READY`);
 
+  const packetBytes = readFileSync(absoluteRepositoryPath(rootDir, packet.packetPath));
+  const packetText = packetBytes.toString('utf8');
+  if (!Buffer.from(packetText, 'utf8').equals(packetBytes)) {
+    throw new Error(`packet ${packetId} is not valid UTF-8: ${packet.packetPath}`);
+  }
+  const packetHeader = parsePacketHeader(packetText);
+  if (!packetHeader.verifiedBranch) {
+    throw new Error(`packet ${packetId} has no valid verified branch`);
+  }
+
   const changeManifest = /** @type {Array<{action:string,path:string}>} */ (packet.changeManifest);
   const requiredSymbols = /** @type {Array<{path:string,symbol:string}>} */ (packet.requiredSymbols);
   const filePaths = new Set([
@@ -460,12 +615,19 @@ export function buildCodingCapsule(manifest, packetId, options = {}) {
     return { path: row.path, symbol: row.symbol, ...excerpt };
   });
 
-  return {
+  const digestFreeCapsule = {
     schemaVersion: PACKET_MANIFEST_SCHEMA_VERSION,
     id: packet.id,
     status: packet.status,
     packetPath: packet.packetPath,
     verifiedBase: packet.verifiedBase,
+    verifiedBranch: packetHeader.verifiedBranch,
+    authorityNotice: PACKET_AUTHORITY_NOTICE,
+    packetMarkdown: {
+      text: packetText,
+      byteLength: packetBytes.length,
+      sha256: sha256(packetBytes),
+    },
     fileHashes,
     requiredSymbols: symbolEvidence,
     changeManifest: changeManifest.map((row) => ({ action: row.action, path: row.path })),
@@ -473,6 +635,12 @@ export function buildCodingCapsule(manifest, packetId, options = {}) {
       .map((row) => ({ id: row.id, case: row.case })),
     checks: /** @type {string[][]} */ (packet.checks).map((command) => [...command]),
   };
+  const capsule = {
+    ...digestFreeCapsule,
+    capsuleDigest: capsuleDigestOf(digestFreeCapsule),
+  };
+  verifyCodingCapsule(capsule);
+  return capsule;
 }
 
 /** @param {NodeJS.WritableStream} stream @param {string} value */

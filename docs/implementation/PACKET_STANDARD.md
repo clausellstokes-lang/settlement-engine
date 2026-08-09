@@ -5,7 +5,7 @@
 **Scope:** instructions compiled for coding agents from SettlementForge design law
 
 **Measured tree:** `claude/composite-r4` at
-`2c810d167d016302e641fc9cfe74fff57475b14e` on 2026-08-09
+`f1895e6004eb512a5c7b4c9b4caaf79604bccea6` on 2026-08-09
 
 ## Purpose
 
@@ -31,8 +31,8 @@ Packet authors reconcile sources in this order before marking a packet READY:
 2. The newest owner ruling decides intended product behavior.
 3. `CONTRIBUTING.md`, `ARCHITECTURE.md`, canonical contracts, and repository
    agent instructions define system invariants and operating law.
-4. A READY packet is authoritative only at its named branch and verified base
-   SHA.
+4. A READY packet is authoritative only at its named branch and verified base,
+   or an unchanged descendant admitted and pinned by sealed dispatch.
 5. `DESIGN_*.md` files supply intent and rationale after reconciliation.
 6. `SOL_QUEUE.md`, ledger-only bootstrap documents, resume snapshots, old
    roadmaps, and `docs/briefs/` never prove that work is open.
@@ -70,8 +70,34 @@ code; disagreement makes the packet non-dispatchable.
 invalid or duplicate paths, missing required symbols, unbounded acceptance cases,
 and READY packets without executable checks. `npm run implementation:capsule --
 <ID>` emits a deterministic READY-only coding capsule containing hashes and symbol
-evidence. The capsule is the preferred coding-model input; architecture and queue
-documents remain coordinator inputs.
+evidence. It is the structured component of the sealed dispatch bundle below;
+architecture and queue documents remain coordinator inputs, not coding authority.
+
+## Sealed dispatch and handoff lifecycle
+
+The operator order for a READY packet is fixed:
+
+1. `npm run implementation:dispatch -- <ID>` validates the packet and emits one
+   bundle with exact packet Markdown and a worktree-local Git-administration seal;
+   the seal is handoff evidence, not a project file or permission to edit.
+2. A verified-base descendant is admissible only when ancestry succeeds and every
+   declared substrate fingerprint remains unchanged. Dispatch pins exact HEAD and
+   fingerprints pre-existing Git-visible foreign dirt without
+   staging, restoring, or attributing it.
+3. The coding model edits only paths in the packet's exact change manifest.
+   Authority, HEAD, or foreign-work drift invalidates the session. A declared
+   target edit is permitted coding work, but it makes earlier check evidence stale.
+4. `npm run check:packet -- <ID>` requires the seal and writes an atomic receipt
+   per step with exact argv, status, exit, elapsed time, and state. A heartbeat
+   is liveness only and never claims that a command passed.
+5. `npm run implementation:resume -- <ID>` reads that same worktree's seal and
+   receipt. It reuses completed evidence only when the recorded exact state still
+   matches; otherwise it reports stale, incomplete, or invalid work and requires
+   the affected command to run again.
+
+Dispatch and resume do not create/delete worktrees, stage, commit, merge, restore,
+clean files, infer affected tests, or interpret or waive semantic line budgets.
+Those remain operator decisions; only the complete `npm run check` chain is landing authority.
 
 ## Dispatch unit
 
@@ -230,10 +256,10 @@ shape.
 Focused commands and expected exit codes belong in each packet. `Run relevant
 tests` is not an instruction.
 
-During implementation, `npm run check:packet -- <ID>` is the packet-declared
-inner loop and `npm run check:quick` is a non-authoritative changed-file static
-loop. `npm run check:diagnose` collects all gate-group failures and timings after
-a red. None replaces the final `npm run check` landing gate.
+During implementation, `npm run check:packet -- <ID>` is the sealed packet inner
+loop and `npm run check:quick` is a non-authoritative changed-file static loop.
+`npm run check:diagnose` collects all gate-group failures and timings after a red.
+An unsealed packet check is non-dispatchable. None replaces the final `npm run check` landing gate.
 
 ## Golden and behavior-shift law
 

@@ -10,17 +10,23 @@
  *
  * @enforced-by tests/scripts/implementationGate.test.js
  */
-import { spawnSync } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { performance } from 'node:perf_hooks';
 import { validatePacketManifest } from './implementation-packets.mjs';
+import {
+  acquireSessionRunLock, allocateSessionRun, assertImplementationScope,
+  deriveResumeProjection, openImplementationSession, planDigestOf, publishStepReceipt,
+  readSessionState, readStepReceipts, releaseSessionRunLock, writeSessionHeartbeat,
+  writeSessionState,
+} from './implementation-session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const LOGIC_EXTENSIONS = new Set(['.cjs', '.js', '.jsx', '.mjs', '.ts', '.tsx']);
 const PACKET_ID = /^[A-Za-z0-9][A-Za-z0-9+._-]*$/;
-const CLI_USAGE = 'usage: implementation-gate.mjs <packet <ID>|quick [--base <ref>]|diagnose>';
+const CLI_USAGE = 'usage: implementation-gate.mjs <packet <ID>|resume <ID>|quick [--base <ref>]|diagnose>';
 
 function executableName(token) {
   return String(token || '').replace(/\\/g, '/').split('/').pop().toLowerCase();
@@ -67,15 +73,21 @@ export function classifyVitestCommand(argv) {
   return 'none';
 }
 
+export function effectiveArgv(argv) {
+  return classifyVitestCommand(argv) === 'raw' ? [
+    'sh', 'scripts/gate-mutex.sh', '--run', '--', ...argv,
+  ] : [...argv];
+}
+
 /** Parse every mode before any filesystem or child-process work. */
 export function parseCliArgs(args) {
   if (!Array.isArray(args) || args.some((arg) => typeof arg !== 'string')) {
     throw new Error(CLI_USAGE);
   }
   const [mode, ...rest] = args;
-  if (mode === 'packet') {
+  if (mode === 'packet' || mode === 'resume') {
     if (rest.length !== 1 || !PACKET_ID.test(rest[0])) {
-      throw new Error(`packet mode requires exactly one bounded ID\n${CLI_USAGE}`);
+      throw new Error(`${mode} mode requires exactly one bounded ID\n${CLI_USAGE}`);
     }
     return { mode, id: rest[0] };
   }
@@ -135,9 +147,13 @@ export function diagnosticGroups(steps) {
   return groups;
 }
 
-export function aggregateExit(results) {
-  return results.some((result) => Number(result.exitCode) !== 0) ? 1 : 0;
+export function resultPassed(result) {
+  return result?.exitCode === 0 && !result.signal && !result.spawnError
+    && !result.orchestrationError && result.invalidated !== true &&
+    (!Object.hasOwn(result, 'status') || result.status === 'PASSED');
 }
+
+export function aggregateExit(results) { return results.some((result) => !resultPassed(result)) ? 1 : 0; }
 
 export function logicBearingPaths(entries, root = ROOT) {
   return [...new Set((entries || [])
@@ -168,9 +184,7 @@ export function packetPlan(packet, root = ROOT) {
 }
 
 function runArgv(argv, { cwd = ROOT, env = process.env } = {}) {
-  const command = classifyVitestCommand(argv) === 'raw'
-    ? ['sh', 'scripts/gate-mutex.sh', '--run', '--', ...argv]
-    : argv;
+  const command = effectiveArgv(argv);
   const started = performance.now();
   const result = spawnSync(command[0], command.slice(1), {
     cwd,
@@ -184,6 +198,99 @@ function runArgv(argv, { cwd = ROOT, env = process.env } = {}) {
     elapsedMs: Math.round(performance.now() - started),
     error: result.error ? String(result.error.message || result.error) : null,
   };
+}
+
+function serializeSpawnError(error) {
+  if (!error) return null;
+  return { name: typeof error.name === 'string' ? error.name : 'Error',
+    message: typeof error.message === 'string' ? error.message : String(error),
+    code: typeof error.code === 'string' || typeof error.code === 'number' ? error.code : null,
+    errno: typeof error.errno === 'string' || typeof error.errno === 'number' ? error.errno : null,
+    syscall: typeof error.syscall === 'string' ? error.syscall : null,
+    path: typeof error.path === 'string' ? error.path : null };
+}
+
+export function forwardChildSignal(child, signal) {
+  if (!child || !signal) return false;
+  if (process.platform !== 'win32' && Number.isInteger(child.pid)) {
+    try {
+      process.kill(-child.pid, signal);
+      return true;
+    } catch {
+      // The group may have already closed; fall through to the direct child.
+    }
+  }
+  try {
+    return child.kill(signal);
+  } catch {
+    return false;
+  }
+}
+
+export async function runArgvAsync(argv, options = {}) {
+  if (!Array.isArray(argv) || argv.length === 0 || argv.some((token) => typeof token !== 'string')) {
+    throw new Error('async argv must be a non-empty string array');
+  }
+  const command = effectiveArgv(argv);
+  const started = performance.now();
+  const heartbeatMs = Number.isFinite(options.heartbeatMs)
+    ? Math.max(10, Math.floor(options.heartbeatMs))
+    : 30_000;
+  const spawnChild = options.spawnChild ?? spawn;
+
+  return new Promise((resolveResult) => {
+    let child;
+    let spawnError = null;
+    let orchestrationError = null;
+    let timer = null;
+    let settled = false;
+    const finish = (exitCode, signal) => {
+      if (settled) return;
+      settled = true;
+      if (timer) clearInterval(timer);
+      resolveResult({
+        declaredArgv: [...argv],
+        effectiveArgv: command,
+        exitCode: Number.isInteger(exitCode) ? exitCode : null,
+        signal: typeof signal === 'string' ? signal : null,
+        spawnError,
+        orchestrationError,
+        elapsedMs: Math.round(performance.now() - started),
+      });
+    };
+
+    try {
+      child = spawnChild(command[0], command.slice(1), {
+        cwd: options.cwd ?? ROOT,
+        env: options.env ?? process.env,
+        stdio: 'inherit',
+        shell: false,
+        detached: options.detached ?? process.platform !== 'win32',
+      });
+    } catch (error) {
+      spawnError = serializeSpawnError(error);
+      finish(null, null);
+      return;
+    }
+
+    child.once('error', (error) => {
+      spawnError = serializeSpawnError(error);
+    });
+    child.once('close', (exitCode, signal) => finish(exitCode, signal));
+    const runHook = (hook) => {
+      if (!hook || orchestrationError) return;
+      try {
+        hook(child);
+      } catch (error) {
+        orchestrationError = serializeSpawnError(error);
+        forwardChildSignal(child, 'SIGTERM');
+      }
+    };
+    runHook(options.onSpawn);
+    runHook(options.onHeartbeat);
+    timer = setInterval(() => runHook(options.onHeartbeat), heartbeatMs);
+    timer.unref?.();
+  });
 }
 
 export function runPlan(plan, options = {}) {
@@ -225,6 +332,174 @@ export function runPacketPlan(plan, options = {}, executePlan = runPlan) {
   ];
 }
 
+const SESSION_API = {
+  acquireSessionRunLock, allocateSessionRun, assertImplementationScope,
+  deriveResumeProjection, openImplementationSession, planDigestOf, publishStepReceipt,
+  readSessionState, readStepReceipts, releaseSessionRunLock, writeSessionHeartbeat,
+  writeSessionState,
+};
+
+function sealedPlan(packet, root) {
+  return packetPlan(packet, root).map((step) => ({ id: step.id,
+    declaredArgv: [...step.argv], effectiveArgv: effectiveArgv(step.argv) }));
+}
+
+function scopeFailure(error) {
+  return { scopeOk: false,
+    snapshot: error?.sessionInspection?.snapshot ?? null,
+    diffStats: error?.sessionInspection?.diffStats ?? null,
+    error: error instanceof Error ? error.message : String(error) };
+}
+
+function durableState(run, status, fingerprint, completed, failed, blocked, plan) {
+  const accounted = new Set([...completed, ...failed, ...blocked]);
+  return { runId: run.runId, runOrdinal: run.runOrdinal, sealDigest: run.session.sealDigest,
+    planDigest: run.planDigest, currentFingerprint: fingerprint, status,
+    completed: [...completed], failed: [...failed], blocked: [...blocked],
+    remaining: plan.map((step) => step.id).filter((id) => !accounted.has(id)) };
+}
+
+export async function runSealedPacketPlan(packet, options = {}) {
+  const root = resolve(options.root ?? ROOT);
+  const mode = options.mode ?? 'packet';
+  const api = options.sessionApi ?? SESSION_API;
+  const plan = sealedPlan(packet, root);
+  const planDigest = api.planDigestOf(plan);
+  const session = api.openImplementationSession({ rootDir: root, packetId: packet.id });
+  const lock = api.acquireSessionRunLock(session, { allowDeadOwnerRecovery: mode === 'resume' });
+  const signalBus = options.signalBus ?? process;
+  const runChild = options.runChild ?? runArgvAsync;
+  let currentChild = null;
+  let requestedSignal = null;
+  let signalForwarded = false;
+  const requestSignal = (signal) => {
+    if (requestedSignal) return;
+    requestedSignal = signal;
+    if (currentChild) signalForwarded = forwardChildSignal(currentChild, signal);
+  };
+  const handlers = new Map([['SIGINT', () => requestSignal('SIGINT')],
+    ['SIGTERM', () => requestSignal('SIGTERM')]]);
+  try {
+    const initial = api.assertImplementationScope(session);
+    const priorState = api.readSessionState(session);
+    const canResume = mode === 'resume'
+      && priorState?.sealDigest === session.sealDigest
+      && priorState?.planDigest === planDigest
+      && priorState?.currentFingerprint === initial.snapshot.fingerprint;
+    const projection = canResume ? api.deriveResumeProjection({ plan,
+      receipts: api.readStepReceipts(session),
+      currentFingerprint: initial.snapshot.fingerprint, planDigest,
+      sealDigest: session.sealDigest })
+      : { completed: [], selected: plan.map((step) => step.id) };
+    const run = api.allocateSessionRun(session, { plan, mode });
+    const abandoned = priorState?.status === 'RUNNING' ? new Set(priorState.remaining || []) : new Set(); const reusable = new Set((projection.completed || []).filter((id) => !abandoned.has(id)));
+    const completed = [];
+    const failed = [];
+    const blocked = [];
+    const results = [];
+    let fingerprint = initial.snapshot.fingerprint;
+    let validatorPassed = false;
+    for (const [signal, handler] of handlers) signalBus.on(signal, handler);
+
+    for (let ordinal = 0; ordinal < plan.length; ordinal += 1) {
+      const step = plan[ordinal];
+      if (requestedSignal || (step.id !== 'validate-packets' && !validatorPassed)) {
+        const scope = { scopeOk: true, snapshot: { fingerprint }, diffStats: null }; const receipt = { ordinal, stepId: step.id, declaredArgv: step.declaredArgv, effectiveArgv: step.effectiveArgv, exitCode: null, signal: null, requestedSignal, spawnError: null, orchestrationError: null, elapsedMs: 0, pre: scope, post: scope, status: 'BLOCKED' };
+        api.publishStepReceipt(run, receipt);
+        blocked.push(step.id);
+        results.push({ id: step.id, ...receipt });
+        continue;
+      }
+
+      let pre;
+      try {
+        pre = api.assertImplementationScope(session); if (pre.snapshot.fingerprint !== fingerprint) throw Object.assign(new Error('implementation state moved between session steps'), { sessionInspection: pre });
+      } catch (error) {
+        const failedScope = scopeFailure(error);
+        const receipt = { ordinal, stepId: step.id,
+          declaredArgv: step.declaredArgv, effectiveArgv: step.effectiveArgv,
+          exitCode: null, signal: null, requestedSignal, spawnError: null,
+          orchestrationError: null, elapsedMs: 0, pre: failedScope,
+          post: failedScope, status: 'BLOCKED' };
+        api.publishStepReceipt(run, receipt);
+        blocked.push(step.id);
+        results.push({ id: step.id, ...receipt });
+        validatorPassed = false;
+        continue;
+      }
+      fingerprint = pre.snapshot.fingerprint;
+      if (step.id !== 'validate-packets' && reusable.has(step.id)) {
+        completed.push(step.id);
+        results.push({ id: step.id, status: 'PASSED', exitCode: 0, elapsedMs: 0, reused: true });
+        continue;
+      }
+      api.writeSessionState(session, durableState(
+        run, 'RUNNING', fingerprint, completed, failed, blocked, plan,
+      ));
+      const stepStarted = performance.now();
+      const childResult = await runChild(step.declaredArgv, {
+        cwd: root,
+        heartbeatMs: options.heartbeatMs,
+        onSpawn: (child) => {
+          currentChild = child;
+          if (requestedSignal && !signalForwarded) {
+            signalForwarded = forwardChildSignal(child, requestedSignal);
+          }
+        },
+        onHeartbeat: () => api.writeSessionHeartbeat(run, {
+          ordinal, stepId: step.id, phase: 'RUNNING', pid: currentChild?.pid ?? null,
+          elapsedMs: Math.round(performance.now() - stepStarted),
+        }),
+      });
+      currentChild = null;
+      let post;
+      let postError = null;
+      try {
+        post = api.assertImplementationScope(session);
+      } catch (error) {
+        postError = error;
+        post = scopeFailure(error);
+      }
+      const moved = !post.scopeOk && post.scopeOk !== undefined
+        ? true
+        : post.snapshot?.fingerprint !== pre.snapshot.fingerprint;
+      const argvMoved = canonicalArgv(childResult.declaredArgv) !== canonicalArgv(step.declaredArgv)
+        || canonicalArgv(childResult.effectiveArgv) !== canonicalArgv(step.effectiveArgv);
+      let status = 'FAILED';
+      if (requestedSignal || childResult.signal) status = 'INTERRUPTED';
+      else if (postError || moved || argvMoved || childResult.orchestrationError) status = 'INVALIDATED';
+      else if (childResult.exitCode === 0 && !childResult.spawnError) status = 'PASSED';
+      const receipt = { ordinal, stepId: step.id,
+        declaredArgv: childResult.declaredArgv, effectiveArgv: childResult.effectiveArgv,
+        exitCode: childResult.exitCode, signal: childResult.signal, requestedSignal,
+        spawnError: childResult.spawnError, orchestrationError: childResult.orchestrationError,
+        elapsedMs: childResult.elapsedMs, pre: { ...pre, scopeOk: true },
+        post: postError ? post : { ...post, scopeOk: true }, status };
+      api.publishStepReceipt(run, receipt);
+      results.push({ id: step.id, ...receipt });
+      fingerprint = post.snapshot?.fingerprint ?? fingerprint;
+      if (status === 'PASSED') completed.push(step.id);
+      else if (status === 'FAILED' || status === 'INTERRUPTED') failed.push(step.id);
+      else blocked.push(step.id);
+      if (step.id === 'validate-packets') validatorPassed = status === 'PASSED';
+      if (['INTERRUPTED', 'INVALIDATED'].includes(status)) validatorPassed = false;
+      api.writeSessionState(session, durableState(
+        run, status, fingerprint, completed, failed, blocked, plan,
+      ));
+    }
+    let finalScope; try { finalScope = api.assertImplementationScope(session); } catch (error) { api.writeSessionState(session, durableState(run, 'INVALIDATED', error?.sessionInspection?.snapshot?.fingerprint ?? fingerprint, completed, failed, blocked, plan)); throw error; }
+    if (finalScope.snapshot.fingerprint !== fingerprint) { api.writeSessionState(session, durableState(run, 'INVALIDATED', finalScope.snapshot.fingerprint, completed, failed, blocked, plan)); throw new Error('implementation state moved before final session receipt'); }
+    const finalStatus = requestedSignal || results.some(({ status }) => status === 'INTERRUPTED') ? 'INTERRUPTED' : blocked.length ? 'BLOCKED' : failed.length ? 'FAILED' : 'PASSED';
+    api.writeSessionState(session, durableState(run, finalStatus, fingerprint, completed, failed, blocked, plan));
+    return results;
+  } finally {
+    for (const [signal, handler] of handlers) signalBus.off(signal, handler);
+    api.releaseSessionRunLock(lock);
+  }
+}
+
+function canonicalArgv(argv) { return Array.isArray(argv) ? JSON.stringify(argv) : ''; }
+
 function readManifest(root = ROOT) {
   return JSON.parse(readFileSync(join(root, 'docs/implementation/PACKET_MANIFEST.json'), 'utf8'));
 }
@@ -258,7 +533,7 @@ function printSummary(results, label) {
 
 export function runCli(args = process.argv.slice(2), root = ROOT) {
   const command = parseCliArgs(args);
-  if (command.mode === 'packet') {
+  if (command.mode === 'packet' || command.mode === 'resume') {
     const manifest = readManifest(root);
     const validation = validatePacketManifest(manifest, { rootDir: root });
     if (!validation.ok) {
@@ -266,10 +541,11 @@ export function runCli(args = process.argv.slice(2), root = ROOT) {
     }
     const packet = manifest.packets.find((entry) => entry.id === command.id);
     if (!packet) throw new Error(`unknown implementation packet: ${command.id}`);
-    process.stdout.write('[implementation-gate] packet check is an inner loop; `npm run check` remains the landing gate.\n');
-    const results = runPacketPlan(packetPlan(packet, root), { cwd: root });
-    printSummary(results, `packet ${command.id}`);
-    return aggregateExit(results);
+    process.stdout.write('[implementation-gate] sealed packet evidence is an inner loop; `npm run check` remains the landing gate.\n');
+    return runSealedPacketPlan(packet, { root, mode: command.mode }).then((results) => {
+      printSummary(results, `${command.mode} ${command.id}`);
+      return aggregateExit(results);
+    });
   }
 
   if (command.mode === 'quick') {
@@ -317,7 +593,16 @@ export function runCli(args = process.argv.slice(2), root = ROOT) {
 
 if (resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) {
   try {
-    process.exitCode = runCli();
+    const result = runCli();
+    if (result && typeof result.then === 'function') {
+      result.then(
+        (exitCode) => { process.exitCode = exitCode; },
+        (error) => {
+          console.error(`[implementation-gate] ${error instanceof Error ? error.message : String(error)}`);
+          process.exitCode = 2;
+        },
+      );
+    } else process.exitCode = result;
   } catch (error) {
     console.error(`[implementation-gate] ${error instanceof Error ? error.message : String(error)}`);
     process.exitCode = 2;

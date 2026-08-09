@@ -62,6 +62,8 @@
     "check:diagnose": "node scripts/implementation-gate.mjs diagnose",
     "check:tail": "sh scripts/gate-tail.sh npm run check",
     "implementation:capsule": "node scripts/implementation-packets.mjs capsule",
+    "implementation:dispatch": "node scripts/implementation-session.mjs dispatch",
+    "implementation:resume": "node scripts/implementation-gate.mjs resume",
     "check:edge-behavior": "node scripts/check-edge-behavior.mjs",
     "ops:obligations": "node scripts/ops/obligation-probe.mjs",
     "ops:worktrees": "node scripts/ops/worktree-inventory.mjs",

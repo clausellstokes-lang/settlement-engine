@@ -67,26 +67,31 @@ Overrides approved before dispatch: `NONE | <exact limit and reason>`.
 
 Exceeding any limit is a STOP and split, not an invitation to renegotiate.
 
-## 4. Preflight
+## 4. Sealed dispatch and preflight
 
 Run from the packet's worktree before any edit:
 
 ```sh
-git status --short --branch
-git rev-parse HEAD
-git merge-base --is-ancestor <verified-base> HEAD
-git diff --name-only
-rg -n '<required-symbol-1>|<required-symbol-2>' <exact-files>
+npm run implementation:dispatch -- <ID>
 ```
 
 Expected:
 
-- branch and ancestry match this packet;
-- every target file is clean;
-- foreign dirty files match the index's reserved list and do not overlap;
-- every required symbol resolves exactly where the verified tree table says.
+- exact packet Markdown and structured capsule are emitted;
+- verified-base ancestry and unchanged declared substrate are proven before the
+  seal pins exact HEAD;
+- non-CREATE targets are clean, CREATE targets absent, and required symbols resolve;
+- Git-visible foreign dirt is fingerprinted without target overlap, and the seal
+  lives outside project files in Git administrative storage.
 
 Any mismatch makes this packet STALE. Stop before coding.
+
+Edit only exact-manifest paths. Sealed `check:packet` writes atomic per-step
+receipts and heartbeats without treating liveness as success. `implementation:resume`
+reuses evidence only on exact HEAD, authority, foreign-work, and target fingerprints;
+target edits stale evidence, while other drift is a STOP. This lifecycle never
+creates/deletes worktrees, stages, commits, merges, restores, cleans, infers affected
+tests, or automates semantic line-budget rulings.
 
 ## 5. Verified tree contract
 
@@ -193,7 +198,7 @@ No other file may be edited.
 
 ## 8. Ordered coding sequence
 
-0. Run preflight; stop on any mismatch.
+0. Dispatch and seal the packet; stop on any preflight mismatch.
 1. Capture `<named baseline/golden/dormancy evidence>`.
 2. Add failing tests for acceptance cases `<ids>`.
 3. Implement `<pure leaf/data contract>`.
@@ -241,7 +246,11 @@ sh scripts/gate-mutex.sh --run -- npx vitest run <exact test files>
 # Named golden/dormancy proof, when applicable
 sh scripts/gate-mutex.sh --run -- npx vitest run <exact oracle files>
 
-# Wave-end gate; never pipe
+# Sealed receipt and exact-state handoff; neither is landing authority
+npm run check:packet -- <ID>
+npm run implementation:resume -- <ID>
+
+# Wave-end presentation-safe invocation of the authoritative npm run check; never pipe
 npm run check:tail
 ```
 
@@ -252,6 +261,8 @@ packet's baseline posture. Report actual counts; do not copy historical counts.
 
 In addition to `PACKET_STANDARD.md`, stop if:
 
+- the dispatch seal is missing, invalid, or belongs to another worktree state;
+- resume reports authority, HEAD, foreign-work, or receipt-integrity drift;
 - `<packet-specific dependency or collision>`;
 - `<packet-specific forbidden shift>`;
 - `<packet-specific owner or schema boundary>`.
@@ -262,10 +273,12 @@ or continue into the next wave.
 ## 12. Completion receipt
 
 - Base SHA:
+- Dispatch bundle and seal identity:
 - Final commit or working-tree state:
 - Exact changed files and effective-line deltas:
 - Acceptance cases:
 - Focused commands, exits, and counts:
+- Sealed per-step receipt and exact-state resume status:
 - Both typecheck configurations:
 - Wave-end gate stages actually executed:
 - Base-versus-wave failure identity diff:

@@ -180,6 +180,51 @@
           "tests/build/ciGateHardening.test.js"
         ]
       ]
+    },
+    {
+      "id": "IA-2",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/infrastructure/IA-2.md",
+      "verifiedBase": "f1895e6004eb512a5c7b4c9b4caaf79604bccea6",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "package.json" },
+        { "action": "MODIFY", "path": "scripts/implementation-packets.mjs" },
+        { "action": "MODIFY", "path": "scripts/implementation-gate.mjs" },
+        { "action": "CREATE", "path": "scripts/implementation-session.mjs" },
+        { "action": "MODIFY", "path": "tests/scripts/implementationPackets.test.js" },
+        { "action": "MODIFY", "path": "tests/scripts/implementationGate.test.js" },
+        { "action": "CREATE", "path": "tests/scripts/implementationSession.test.js" },
+        { "action": "MODIFY", "path": "docs/implementation/PACKET_MANIFEST.json" },
+        { "action": "MODIFY", "path": "docs/implementation/PACKET_STANDARD.md" },
+        { "action": "MODIFY", "path": "docs/implementation/PACKET_TEMPLATE.md" },
+        { "action": "MODIFY", "path": "docs/implementation/INDEX.md" },
+        { "action": "CREATE", "path": "docs/implementation/packets/infrastructure/IA-2.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/implementation-packets.mjs", "symbol": "buildCodingCapsule" },
+        { "path": "scripts/implementation-gate.mjs", "symbol": "runPacketPlan" },
+        { "path": "scripts/ops/releaseEvidenceCore.mjs", "symbol": "writeJsonReceiptAtomically" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "deterministic self-contained packet-text dispatch bundle" },
+        { "id": "A2", "case": "READY branch ancestry target-cleanliness and CREATE-absence preflight" },
+        { "id": "A3", "case": "terminal historical reuse without nonterminal path collisions" },
+        { "id": "A4", "case": "worktree-local seal preserves foreign dirt and rejects scope drift" },
+        { "id": "A5", "case": "per-step atomic receipts preserve exact child results and state" },
+        { "id": "A6", "case": "during-step mutation invalidates evidence and blocks later commands" },
+        { "id": "A7", "case": "exact-state resume reuses valid evidence and invalidates stale evidence" },
+        { "id": "A8", "case": "heartbeats locks signals and abandoned runs never manufacture success" }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/scripts/implementationPackets.test.js",
+          "tests/scripts/implementationGate.test.js",
+          "tests/scripts/implementationSession.test.js"
+        ]
+      ]
     }
   ]
 }
