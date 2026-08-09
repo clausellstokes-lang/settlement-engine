@@ -6770,10 +6770,11 @@ the observed-shape reader scanner, recorded because the Codex session may exhaus
 allowance before the validation train completes. Code of record is worktree
 `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`, branch
 `claude/composite-r4`, at progress-enabled scanner checkpoint `34531b26`, built on
-performance checkpoint `8445a5a3` and parallel-owned head `1ca709aa`; the current durable
-handoff checkpoint is `96f6f0e7`. Preserve every other dirty file as parallel-owned. The owner
-delegated implementation judgment to Codex for this continuation, so one bounded NON-FABLE
-semantic repair may proceed while Fable survey/sign-off remains explicitly owed.
+performance checkpoint `8445a5a3` and parallel-owned head `1ca709aa`; later branch descendants
+are handoff-only checkpoints and do not change scanner bytes. Preserve every other dirty file
+as parallel-owned. The owner delegated implementation judgment to Codex for this continuation;
+the resulting bounded NON-FABLE semantic repair was evaluated and rejected below, while Fable
+survey/sign-off remains explicitly owed.
 
 **LANDED FOUNDATION.** Commits `93e7ed50`, `6e7acc4d`, `0ea7ff12`, `2c810d16`, `07ab7d01`,
 and `4d34711d` contain the prior contract, isolation, migration-governance, fixed-point,
@@ -6908,6 +6909,35 @@ governed artifact: the trace SHA-256 is
 prototype's tracked scanner diff SHA-256 is
 `4c982461a37ff2f29146617fa6e586727686eeda2bbc12c03b678b6b8839aa04`.
 
+**BOUNDED FUNCTION-CUTOFF PROJECTION REJECTED.** Two independent audits agreed that the
+`k: 'elem'` callback binding and 42-owner execution slice are sound: rename helpers really do
+produce the array whose element is read. They localized a second multiplier at
+`functionVersionOf`, which keyed even parameter/intrinsic-only helpers by the complete caller
+cutoff map. In the first trace, pure `listOf(value)` alone rebuilt **355** return summaries.
+
+A second disposable-only prototype therefore shared a function summary only after a
+fail-closed proof of an **empty external cutoff dependency**: no captured/external binding,
+object/array allocation, heap mutation, suspension, recursion, nested closure, unknown call or
+deferred field. All other functions retained the exact full signature. The existing resolver
+suite passed **90 / 90** in **18.34 s**, but the exact read still exceeded the predeclared
+**90-second target ceiling** during fixed-point iteration 1 and was terminated with SIGTERM /
+exit **143**. The zero-byte result was not published.
+
+This experiment did collapse function-return recomputation from 543 completed summaries to
+**13**, but without the separately rejected framed binding cache it expanded to
+**520,911 trace events** / **133.20 MiB**: 221,472 binding starts, 221,465 completions and
+77,940 call starts.
+The retained ephemeral trace is
+`/var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/sf-osr-evidence.XXXXXX.LDN2WVToaB/read-3169-cutoff-independent.jsonl`
+with SHA-256
+`95e82489d390815c6dd9367257337c08ae1619222389877032ee8fbfc8094e8b`; the tracked prototype
+diff SHA-256 is
+`95b3d24b8dd82f98567ce4c512784e479c3dfcc0f50110a506576384cc33992c`. It was **not ported**.
+The evidence now shows two interacting state dimensions, not one isolated cache defect. A
+future repair must define one canonical dependency-state/worklist identity that covers both
+framed bindings and function cutoffs; mechanically combining the two rejected prototypes
+without that invariant is not authorized.
+
 **EXACT RESUME ORDER.** Use the mutex atomically and preserve all foreign worktree dirt:
 
 1. Resolver verification and isolated scanner checkpoint are complete at `8445a5a3`.
@@ -6915,23 +6945,26 @@ prototype's tracked scanner diff SHA-256 is
 3. The progress-enabled authoritative run is complete as a failed performance proof at read
    3,169. The one allowed context-cache repair was tested, measured and rejected above. Do not
    port it and do not resume cache or broad adversarial analyzer research.
-4. The one owner-delegated NON-FABLE repair may narrow only the function-summary cutoff cache
-   identity, preserving every cutoff owner whose mutable/captured binding, heap effect,
-   transitive callee or deferred field can affect returned provenance. Unknown dependency
-   closure fails closed to the current full signature. Add both an exact-origin non-crossing
-   regression and a captured-mutable negative control; Fable still owes the final re-ruling.
-5. Commit a green bounded repair first. Use that exact clean scanner SHA in a fresh clone for
+4. The owner-delegated function-summary projection was tested and rejected above. No scanner
+   bytes from either rejected prototype are in the real worktree, and no more analyzer variant
+   is authorized by this continuation.
+5. The repository-scale exact scanner is operationally blocked at read 3,169. A future repair
+   must unify framed binding and relevant-cutoff dependencies behind one finite canonical
+   resolver-state identity, then add exact-origin non-crossing and captured-mutable negative
+   controls. If that invariant cannot be stated locally, retain the block rather than combine
+   ad hoc caches or rerun the estate.
+6. Commit a green future repair first. Use that exact clean scanner SHA in a fresh clone for
    the authoritative exact artifact under the same progress control and 30-minute ceiling.
-6. Generate current exact and legacy artifacts from that same committed scanner/input
+7. Generate current exact and legacy artifacts from that same committed scanner/input
    snapshot, build and manually review the schema-3 migration bundle, and record an explicit
    owner/Fable freeze ruling that supersedes the current no-freeze checkpoint.
-7. Perform the governed schema-3 freeze in that clean clone, then commit the baseline and its
+8. Perform the governed schema-3 freeze in that clean clone, then commit the baseline and its
    honest evidence as the first descendant of the scanner SHA. Baseline-history validation
    cannot pass before that committed schema-3 genesis exists.
-8. Prove the historical/archive path with the same committed scanner toolchain but the
+9. Prove the historical/archive path with the same committed scanner toolchain but the
    historical subject/source tree and schema-2 predecessor baseline. It is evidence only, not
    a substitute for current-tree migration evidence.
-9. Run the ordinary `npm run check:observed-shape-readers` report, then `npm run check`, then a
+10. Run the ordinary `npm run check:observed-shape-readers` report, then `npm run check`, then a
    separate `npm run verify:dist`, with no concurrent scanner/Vitest lane. Use exactly one mutex
    layer: current package test/distribution scripts already acquire atomic `--run`, so do not
    externally wrap those package commands. Record every immutable receipt here.
