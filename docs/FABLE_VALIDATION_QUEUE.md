@@ -6769,11 +6769,10 @@ credits return, and a later five-run full-suite soak remains the strongest accep
 the observed-shape reader scanner, recorded because the Codex session may exhaust its weekly
 allowance before the validation train completes. Code of record is worktree
 `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`, branch
-`claude/composite-r4`, at committed head `1ca709aa` after parallel-owned continuation commits.
-The scanner source/test remained unchanged by those later commits and still derive from
-checkpoint `4d34711d`. The only scanner-lane source/test edits are
-`scripts/lib/reader-shape-scan.mjs` and `tests/lint/readerShapeResolver.test.js`; this row is
-the third owned path. Preserve every other dirty file as parallel-owned.
+`claude/composite-r4`, at scanner checkpoint `8445a5a3`, built on parallel-owned head
+`1ca709aa`. That checkpoint contains exactly `scripts/lib/reader-shape-scan.mjs`,
+`tests/lint/readerShapeResolver.test.js`, and this row. Preserve every other dirty file as
+parallel-owned.
 
 **LANDED FOUNDATION.** Commits `93e7ed50`, `6e7acc4d`, `0ea7ff12`, `2c810d16`, `07ab7d01`,
 and `4d34711d` contain the prior contract, isolation, migration-governance, fixed-point,
@@ -6848,20 +6847,27 @@ The bounded post-repair corpus checkpoint is
 The hotspot now carries **2–3 concrete invocation calls** and instantiates **1–8** matching
 effects. Representative `commandContext.js` nested reads fell from **4.309 s / 5.032 s** to
 **1.222 s / 1.248 s** before the checkpoint was deliberately stopped after read 577. The
-production-clean patch is now ported to the live worktree and remains uncommitted. Live
+production-clean patch landed as isolated checkpoint `8445a5a3`. Live
 `node --check`, focused ESLint, and `git diff --check` pass; the complete resolver file passes
 **90 / 90** in **18.12 s** through the atomic mutex. The disposable clone's old
 `scripts/gate-mutex.sh` predates atomic `--run` execution and silently performs only an
 availability check; always invoke the live worktree's wrapper by absolute path.
 
+**OFFICIAL PROGRESS CONTROL.** The governed entry point now accepts `--progress` in every
+mode and emits timestamped JSONL to stderr for `corpus-start`, `corpus-complete`, `scan-start`,
+every exact `read-start`, and `scan-complete`. Redirect stderr to an exclusive external trace;
+the artifact remains governed by the ordinary no-overwrite output path. The callback does not
+change resolver inputs or outputs, and the unit boundary drives a synthetic read through the
+real runner. `node --check`, focused ESLint, and diff hygiene pass; the progress/governance
+suite plus the full resolver suite pass **2 files / 103 tests** in **23.81 s**. This telemetry
+continuation is verified but not yet checkpointed at this handoff line.
+
 **EXACT RESUME ORDER.** Use the mutex atomically and preserve all foreign worktree dirt:
 
-1. In the live worktree run `node --check`, focused ESLint, `git diff --check`, and the complete
-   resolver file through the live absolute mutex wrapper; expected result is **90 / 90**.
-2. Record that receipt here and create one isolated-index/CAS checkpoint containing only the
-   two scanner files plus this row. Never stage unrelated worktree dirt or discard later
-   parallel-owned commits.
-3. Create a fresh clean detached clone at that checkpoint. Run one authoritative external
+1. Resolver verification and isolated scanner checkpoint are complete at `8445a5a3`.
+2. Official durable read progress and its parser/runner boundary are verified; checkpoint it
+   without staging unrelated worktree dirt.
+3. Create a fresh clean detached clone at the resulting checkpoint. Run one authoritative external
    `--scan-only` artifact with durable read progress and a substantially tighter operational
    ceiling; never reuse the dirty diagnostic clone as governance evidence.
 4. Generate exact and legacy artifacts from the same committed scanner/input snapshot, build

@@ -58,6 +58,8 @@
  *   node scripts/check-observed-shape-readers.mjs --scan-only
  *     --scan-mode=legacy-leaf --corpus-artifact=<exact-p> --json=<external-p>
  *                                           write pinned legacy governed artifact
+ *   node scripts/check-observed-shape-readers.mjs --scan-only --json=<external-p>
+ *     --progress 2> <external-progress.jsonl>     emit durable JSONL read progress
  * Artifact outputs are always outside the repository and never overwrite.
  * OSR_SUBJECT_SHA/OSR_SCANNER_SHA are accepted only for immutable Git-less
  * historical archives; authoritative current scans bind directly to clean HEAD.
@@ -779,6 +781,7 @@ export function commandOf(argv = []) {
     '--corpus-artifact': { kind: 'value', name: 'corpusArtifactPath' },
     '--json': { kind: 'value', name: 'jsonPath' },
     '--report': { kind: 'flag', name: 'report' },
+    '--progress': { kind: 'flag', name: 'progress' },
     '--write': { kind: 'flag', name: 'write' },
     [`--migrate-schema=${BASELINE_SCHEMA}`]: { kind: 'flag', name: 'migrationFlag' },
     '--migration-review': { kind: 'value', name: 'migrationReviewPath' },
@@ -848,12 +851,16 @@ export async function run(argv = [], overrides = {}) {
       stringify: (value) => canonicalJson(value, 2),
     }),
     readJson: (path) => JSON.parse(readFileSync(path, 'utf8')),
+    writeProgress: (event) => process.stderr.write(`${JSON.stringify(event)}\n`),
     baselineExists: () => existsSync(BASELINE),
     readBaseline: () => JSON.parse(readFileSync(BASELINE, 'utf8')),
     readBaselineText: () => readFileSync(BASELINE, 'utf8'),
     writeBaseline: writeBaselineAtomically,
     ...overrides,
   };
+  const emitProgress = command.progress
+    ? (event) => runtime.writeProgress({ at: new Date().toISOString(), ...event })
+    : null;
   const readBaselineEnvelope = () => {
     if (overrides.readBaseline && !overrides.readBaselineText) {
       const value = runtime.readBaseline();
@@ -922,6 +929,7 @@ export async function run(argv = [], overrides = {}) {
   }
 
   let corpus;
+  emitProgress?.({ phase: 'corpus-start', scanMode: command.scanMode });
   if (command.scanMode === 'legacy-leaf') {
     const inputCorpusArtifact = runtime.readJson(command.corpusArtifactPath);
     runtime.validateScanArtifact(inputCorpusArtifact);
@@ -937,7 +945,13 @@ export async function run(argv = [], overrides = {}) {
   } else {
     corpus = await runtime.corpusFor();
   }
+  emitProgress?.({
+    phase: 'corpus-complete',
+    scanMode: command.scanMode,
+    origins: Object.keys(corpus.graph?.origins || {}).length,
+  });
 
+  emitProgress?.({ phase: 'scan-start', scanMode: command.scanMode, files: before.files.length });
   const scan = command.scanMode === 'legacy-leaf'
     ? runtime.scanLegacyReaders({
       files: before.files,
@@ -953,7 +967,16 @@ export async function run(argv = [], overrides = {}) {
       graph: corpus.graph,
       minRows: ORIGIN_MIN_ROWS,
       root: ROOT,
+      onReadStart: emitProgress
+        ? (read) => emitProgress({ phase: 'read-start', ...read })
+        : null,
     });
+  emitProgress?.({
+    phase: 'scan-complete',
+    scanMode: command.scanMode,
+    findings: scan.findings.length,
+    reads: scan.stats.reads,
+  });
   runtime.assertFindingSourceEvidence(scan.findings, before);
   const sentinel = scanSentinelOf(command.scanMode, corpus, scan.stats, SCAN_CONFIG);
   runtime.assertHealthyScanProvenance({

@@ -356,6 +356,52 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     expect(artifact.digests.inventory).toBe(digestOf(artifact.inventory));
   });
 
+  test('progress mode emits JSONL-ready lifecycle and exact reader events', async () => {
+    const runtime = scanRuntime();
+    const events = [];
+    runtime.overrides.writeProgress = (event) => events.push(event);
+    runtime.overrides.scanReaders = (options) => {
+      options.onReadStart?.({
+        read: 1,
+        file: 'src/probe.js',
+        line: 1,
+        column: 11,
+        key: 'ghost',
+        kind: 'dot',
+      });
+      return { findings: [findingOf()], stats: healthyStats() };
+    };
+
+    await expect(run(
+      ['--scan-only', '--json=/virtual/progress.json', '--progress'],
+      runtime.overrides,
+    )).resolves.toBe(0);
+
+    expect(commandOf(['--scan-only', '--json=/tmp/scan.json', '--progress']).progress)
+      .toBe(true);
+    expect(events.map(({ phase }) => phase)).toEqual([
+      'corpus-start',
+      'corpus-complete',
+      'scan-start',
+      'read-start',
+      'scan-complete',
+    ]);
+    expect(events).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        phase: 'read-start',
+        read: 1,
+        file: 'src/probe.js',
+        key: 'ghost',
+      }),
+      expect.objectContaining({
+        phase: 'scan-complete',
+        findings: 1,
+        reads: 2,
+      }),
+    ]));
+    expect(events.every(({ at }) => /^\d{4}-\d{2}-\d{2}T/.test(at))).toBe(true);
+  });
+
   test('scan-only mode is admitted before corpus execution only with a JSON target', async () => {
     let corpusCalls = 0;
     expect(commandOf(['--scan-only', '--json=/tmp/scan.json'])).toMatchObject({
