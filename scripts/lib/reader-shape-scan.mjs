@@ -2179,7 +2179,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       const binding = idx.bindingOf(value);
       const initializer = binding?.node ? unwrap(binding.node) : null;
       if (!binding || !bindingDoesNotEscape(binding)
-        || !ts.isCallExpression(initializer)) return null;
+        || !initializer || !ts.isCallExpression(initializer)) return null;
       call = initializer;
     }
     if (!call) return null;

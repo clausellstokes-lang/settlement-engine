@@ -363,6 +363,18 @@ describe('reader shape resolver provenance', () => {
     ]);
   });
 
+  test('treats a safely-read uninitialized local as a non-producer', () => {
+    const result = scan(`
+      export function probe() {
+        let uninitialized;
+        return uninitialized?.__neverProduced;
+      }
+    `);
+
+    expect(result.findings).toEqual([]);
+    expect(result.stats.abstractStateBudgetFailures).toBe(0);
+  });
+
   test('tracks exact, dynamic, aliased, and Object.assign mutations on local objects', () => {
     const result = scan(`
       export function probe(worldState, save, unknownKey, unknownObject) {

@@ -6802,7 +6802,7 @@ a later invocation's mutation. The final proof requires a same-owner lexical rec
 every object identity source is fresh in that invocation; parameters, captures, aliases,
 logical transfers and unproven calls fail closed. Captured receivers use exact resolution
 only under their already-selected execution cutoff. The current complete resolver file passes
-**88 / 88** in 15.79 s.
+**89 / 89** in 16.46 s, including the later full-estate null-guard regression.
 The foreign `node scripts/check-test-ratchet.mjs` mutex owner was allowed to finish; no process
 was killed and the passing run acquired the slot atomically.
 
@@ -6818,9 +6818,19 @@ and **9,925 / 16,384** state-growth steps. The temporary probe driver and all de
 were removed. No repository-scale report, historical proof, full gate, distribution
 verification, or commit has run after this green; do not infer them from the exact receipt.
 
+**REPOSITORY-SCALE CHECKPOINT.** Scanner checkpoint `07ab7d01` was created through an
+isolated index/CAS update and a clean detached clone at that SHA admitted the authoritative
+`--scan-only` run. After about eight minutes of healthy CPU-bound analysis, that full estate
+found one separate fail-closed defect: an uninitialized lexical receiver with no initializer
+could pass the non-escaping preflight and reach `ts.isCallExpression(null)`. The repair now
+rejects the absent initializer before the TypeScript predicate, with a focused optional-read
+regression. The first run published no partial artifact. The resolver rerun passes
+**89 / 89**; the new checkpoint commit and authoritative restart remain pending at this exact
+handoff point.
+
 **EXACT RESUME ORDER.** Use the mutex atomically and preserve all foreign worktree dirt:
 
-1. Resolver acceptance is complete: `sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint/readerShapeResolver.test.js --reporter=dot` → **88 / 88**.
+1. Resolver acceptance is complete: `sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint/readerShapeResolver.test.js --reporter=dot` → **89 / 89**.
 2. Exact estate acceptance is complete with the receipt above.
 3. Execute
    `sh scripts/gate-mutex.sh --run -- node scripts/check-observed-shape-readers.mjs --report`.
