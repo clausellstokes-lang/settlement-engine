@@ -472,7 +472,9 @@ export function makeResolver(idx, shapes, arrayShapes, minRows, singleHome = [],
    *  hop `satellite.foundingTier` needs, since its only evidence is one module
    *  away in settlementLifecycleKernel's `satellite: next`. */
   function resolveParam(b, depth) {
-    const key = `${b.fn.pos}:${b.index}:${b.prop ?? ''}`;
+    // Node positions restart in every source file. Without the file identity,
+    // unrelated same-offset functions share one cached parameter shape.
+    const key = `${b.file}:${b.fn.pos}:${b.index}:${b.prop ?? ''}`;
     if (memoParam.has(key)) return memoParam.get(key);
     memoParam.set(key, EMPTY);
     const sites = idx.callSites.get(b.fn) || [];

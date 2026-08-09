@@ -3184,6 +3184,7 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       //     af8815e9  this lane's PARENT                2352    358     1994  19122  5455
       //     9f060332  the first cut's tree (write-tree)  2352    358     1994  19132  5456
       //     08fd3304  THIS tree (committed by fd947d59)  2352    358     1994  19142  5458
+      //     2026-08-08 continuation repair tree          2352    358     1994  19150  5459
       // PARENT MINUS FROZEN is the growth that accrued WHILE THIS RATCHET WAS RED AND
       // BANKED: +6 files, +6 credited, +171 titles, +34 suite titles, with `parked`
       // genuinely unmoved for the eighth consecutive wave. That is the recorded
@@ -3206,7 +3207,12 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // the sequence hazard bit again on the way through: the first measurement of this cut
       // reddened on `titles` and therefore NEVER EVALUATED `suiteTitles`, so 5458 is a
       // SECOND measurement taken after `titles` was corrected, not a figure carried along.
-      files: 2352, parked: 358, credited: 1994, titles: 19142, suiteTitles: 5458,
+      // THE CONTINUATION DELTA IS +8 TEST TITLES, +1 SUITE: five hazard-registry
+      // fail-closed arms, two spatial-telemetry policy/classification pins, and one
+      // cross-file parameter-memo collision mutant; the hazard owed-pile block is the
+      // added suite. It is re-measured from the exact repair tree below before that tree
+      // is committed; no file-layer figure moves.
+      files: 2352, parked: 358, credited: 1994, titles: 19150, suiteTitles: 5459,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);

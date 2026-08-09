@@ -96,6 +96,8 @@
  *      a vanished row, a collapsed corpus) is driven and asserted non-empty.
  *   5. EXECUTED SWAP MUTANT — the one that beat the ratchet's FIRST form. See
  *      below.
+ *   6. FILE-SCOPED PARAMETER MEMO — same-position helpers in separate files
+ *      resolve independently rather than inheriting each other's shape.
  *
  * ── ⚠⚠ WHY THE INVENTORY IS CONTENT-ADDRESSED (the swap that beat form one) ──
  * The first spelling froze ONE NUMBER per file. A number cannot tell a defect
@@ -307,8 +309,8 @@ describe('reader-with-no-writer ratchet: the MUTANTS', () => {
    *  estate uses — and each is written to a temp dir, never into the shared
    *  `src/` tree.
    *
-   *  ⚠⚠ ALL FIVE ARE SCANNED IN ONE PASS, and that changes NO probe's answer.
-   *  They are five separate FILES: nothing imports them, they import nothing,
+   *  ⚠⚠ ALL SEVEN ARE SCANNED IN ONE PASS, and that changes NO probe's answer.
+   *  They are seven separate FILES: nothing imports them, they import nothing,
    *  and `resolveSpec` only follows RELATIVE specifiers that land inside the
    *  scanned set, so no estate module can resolve into the temp dir and no probe
    *  can reach another. `declaredFns`/`imports`/`reExports` are per-file maps and
@@ -317,6 +319,13 @@ describe('reader-with-no-writer ratchet: the MUTANTS', () => {
    *  below is byte-for-byte the expectation it carried when each probe bought
    *  its own full-tree scan — which is what made this file flake. */
   const PROBES = {
+    // Both `inspect` declarations begin at source-file position 0. `fn.pos` alone
+    // therefore aliases their parameter memo entries even though one call site
+    // supplies `settlement` and the other supplies `save`.
+    paramMemoSettlement: 'function inspect(value) { return value.__memoSettlement; }\n'
+      + 'export function probe(settlement) { return inspect(settlement); }\n',
+    paramMemoSave: 'function inspect(value) { return value.__memoSave; }\n'
+      + 'export function probe(save) { return inspect(save); }\n',
     noWriter: 'export function probe(settlement) {\n'
       + '  return settlement.__noWriterEverWritesThisKey;\n'
       + '}\n',
@@ -371,6 +380,15 @@ describe('reader-with-no-writer ratchet: the MUTANTS', () => {
     expect(Object.keys(planted).sort()).toEqual(Object.keys(PROBES).sort());
     expect(hitsFor('noWriter').length + hitsFor('nested').length + hitsFor('helper').length)
       .toBe(3);
+  });
+
+  test('THE PARAMETER MEMO IS FILE-SCOPED: same-position helpers keep distinct shapes', () => {
+    expect(PROBES.paramMemoSettlement.indexOf('function inspect')).toBe(0);
+    expect(PROBES.paramMemoSave.indexOf('function inspect')).toBe(0);
+    expect(hitsFor('paramMemoSettlement').map(({ key, shapes }) => ({ key, shapes })))
+      .toEqual([{ key: '__memoSettlement', shapes: ['settlement'] }]);
+    expect(hitsFor('paramMemoSave').map(({ key, shapes }) => ({ key, shapes })))
+      .toEqual([{ key: '__memoSave', shapes: ['save'] }]);
   });
 
   test('THE MUTANT REDS: a planted reader of a key with no writer is reported', () => {
