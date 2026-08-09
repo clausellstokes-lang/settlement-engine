@@ -45,12 +45,14 @@ const smithTown = (nearbyResources, over = {}) => ({
 const discoverOutcome = (resource, id = 'out.disc') => ({
   id, targetSaveId: 'a', severity: 0.5, candidateType: 'resource_discovery',
   headline: `${resource} discovered`, summary: 'A strike.',
-  resourceMembership: { saveId: 'a', resource, op: 'add' }, metadata: { tick: 100 },
+  generatedAtTick: 100,
+  resourceMembership: { saveId: 'a', resource, op: 'add' },
 });
 const removeOutcome = (resource, id = 'out.rem') => ({
   id, targetSaveId: 'a', severity: 0.5, candidateType: 'resource_removal',
   headline: `${resource} worked out`, summary: 'A dead vein.',
-  resourceMembership: { saveId: 'a', resource, op: 'remove' }, metadata: { tick: 100 },
+  generatedAtTick: 100,
+  resourceMembership: { saveId: 'a', resource, op: 'remove' },
 });
 
 // ── 1. DISCOVERY write ─────────────────────────────────────────────────────────
@@ -72,6 +74,7 @@ describe('the writer — discovery', () => {
   it('plants the bounded positive resource_strike condition', () => {
     const c = applied.activeConditions.find((x) => x.archetype === 'resource_strike');
     expect(c, 'resource_strike planted').toBeTruthy();
+    expect(c.triggeredAt.tick).toBe(100);
     expect(c.duration.expiresAtTicks, 'bounded (capped duration — no snowball)').toBeGreaterThan(0);
   });
   it('the surgical reconcile activates the iron chain + adds its export next tick', () => {
@@ -101,6 +104,7 @@ describe('the writer — removal', () => {
   it('plants the negative vein_exhausted condition (bounded)', () => {
     const c = applied.activeConditions.find((x) => x.archetype === 'vein_exhausted');
     expect(c, 'vein_exhausted planted').toBeTruthy();
+    expect(c.triggeredAt.tick).toBe(100);
     expect(c.duration.expiresAtTicks).toBeGreaterThan(0);
   });
   it('the surgical reconcile deactivates the iron chain + prunes its export', () => {

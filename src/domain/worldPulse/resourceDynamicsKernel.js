@@ -116,7 +116,7 @@ import { pickLine, RESOURCE_NEWS } from './eventProse.js';
  *   resourceHistory?: unknown[], _config?: Record<string, unknown> }} RDSettlement
  */
 /** @typedef {{ saveId?: unknown, resource?: string, op?: string }} RDMembership */
-/** @typedef {{ id?: string, severity?: number, headline?: string, summary?: string, candidateType?: string, resourceMembership?: RDMembership, metadata?: { tick?: number } }} RDOutcome */
+/** @typedef {{ id?: string, severity?: number, headline?: string, summary?: string, candidateType?: string, generatedAtTick?: number, resourceMembership?: RDMembership }} RDOutcome */
 /** @typedef {{ id?: unknown, name?: unknown, settlement?: RDSettlement }} RDSnapItem */
 /** @typedef {{ settlements?: RDSnapItem[] }} RDSnapshot */
 /** @typedef {{ tick?: number, settlementTickStates?: Record<string, Record<string, unknown>>, simulationRules?: Record<string, unknown> }} RDWorldState */
@@ -369,6 +369,7 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
         ruleId: 'resource_discovery',
         ruleFamily: 'resource',
         targetSaveId: item.id,
+        generatedAtTick: tick,
         severity: clamp01(0.3 + nextAcc * 0.35),
         probability: clamp01(T.DISCOVERY_EMIT_P + nextAcc * 0.22),
         applyMode: authorityFor(rules, 'resource_discovery', 'auto'),
@@ -425,6 +426,7 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
         ruleId: 'resource_removal',
         ruleFamily: 'resource',
         targetSaveId: item.id,
+        generatedAtTick: tick,
         severity,
         probability: clamp01(T.REMOVAL_EMIT_P + severity * 0.28),
         applyMode: authorityFor(rules, 'resource_removal', 'auto'),
@@ -882,7 +884,7 @@ export function applyResourceMembershipOutcomeToSettlement(settlement, outcome) 
   // polarity. resource_strike is a bounded positive MARKER (affectedSystems [] — its
   // upside flows through the boom seam + reconcile, not a free condition bonus);
   // vein_exhausted DRAINS economic_capacity (a worked-out vein hurts the economy).
-  const condTick = Number.isFinite(outcome?.metadata?.tick) ? Number(outcome?.metadata?.tick) : undefined;
+  const condTick = Number.isFinite(outcome?.generatedAtTick) ? Number(outcome?.generatedAtTick) : undefined;
   next = op === 'add'
     ? withActiveCondition(next, {
         id: `condition.resource_strike.${nk}`,

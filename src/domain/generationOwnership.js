@@ -86,6 +86,7 @@ export function isAuthoredGenerationEntity(entity) {
     || record.isCustom === true
     || record.forced === true
     || record.forcedByToggle === true
+    || record.createdByEventId
     || record.addedByEventId
     || record.customDefinitionId
     || record.customDefinitionCategory
@@ -228,6 +229,7 @@ export function isProtectedFromCustomSubsumption(
     || record.forcedByIsolation === true
     || record._authored === true
     || record.authored === true
+    || record.createdByEventId
     || record.addedByEventId
     || record.locked === true
     || record.pinned === true

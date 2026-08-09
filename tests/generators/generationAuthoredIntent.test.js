@@ -39,6 +39,9 @@ describe('central generation ownership law', () => {
     expect(isAuthoredGenerationEntity({ source: 'event' })).toBe(true);
     expect(isAuthoredGenerationEntity({ source: 'forced' })).toBe(true);
     expect(isAuthoredGenerationEntity({ isCustom: true })).toBe(true);
+    expect(isAuthoredGenerationEntity({ createdByEventId: 'ev-add' })).toBe(true);
+    expect(isAuthoredGenerationEntity({ addedByEventId: 'ev-stress' })).toBe(true);
+    expect(isAuthoredGenerationEntity({ createdByEventId: '' })).toBe(false);
     expect(isAuthoredGenerationEntity({ source: 'generated' })).toBe(false);
 
     expect(isProtectedGenerationEntity({
@@ -50,6 +53,17 @@ describe('central generation ownership law', () => {
       required: true,
     })).toBe(false);
     expect(isGeneratorOwnedEntity({ source: 'generated' })).toBe(true);
+    expect(isGeneratorOwnedEntity({ createdByEventId: 'ev-add' })).toBe(false);
+
+    expect(isProtectedGenerationEntity({ createdByEventId: 'ev-add' })).toBe(true);
+    expect(isProtectedFromCustomSubsumption(
+      { createdByEventId: 'ev-add' },
+      { exactTarget: true },
+    )).toBe(true);
+    expect(isProtectedFromCustomSubsumption(
+      { addedByEventId: 'ev-stress' },
+      { exactTarget: true },
+    )).toBe(true);
 
     const optionalCustom = {
       source: 'custom',

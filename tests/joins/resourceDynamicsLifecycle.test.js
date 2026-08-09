@@ -39,8 +39,8 @@ const gen = (config, seed, customContent = {}) =>
   generateSettlementPipeline(config, null, { seed, customContent });
 const buildNextConfig = (settlement) => ({ ...(settlement?._config || stripDerivedConfigKeys(settlement?.config) || {}) });
 
-const discoverOutcome = (resource) => ({ id: 'o.d', targetSaveId: 'a', severity: 0.5, candidateType: 'resource_discovery', headline: `${resource} found`, summary: 's', resourceMembership: { saveId: 'a', resource, op: 'add' }, metadata: { tick: 100 } });
-const removeOutcome = (resource) => ({ id: 'o.r', targetSaveId: 'a', severity: 0.5, candidateType: 'resource_removal', headline: `${resource} gone`, summary: 's', resourceMembership: { saveId: 'a', resource, op: 'remove' }, metadata: { tick: 100 } });
+const discoverOutcome = (resource) => ({ id: 'o.d', targetSaveId: 'a', generatedAtTick: 100, severity: 0.5, candidateType: 'resource_discovery', headline: `${resource} found`, summary: 's', resourceMembership: { saveId: 'a', resource, op: 'add' } });
+const removeOutcome = (resource) => ({ id: 'o.r', targetSaveId: 'a', generatedAtTick: 100, severity: 0.5, candidateType: 'resource_removal', headline: `${resource} gone`, summary: 's', resourceMembership: { saveId: 'a', resource, op: 'remove' } });
 
 function deepFreeze(o) {
   if (o && typeof o === 'object') { Object.freeze(o); for (const k of Object.keys(o)) deepFreeze(o[k]); }

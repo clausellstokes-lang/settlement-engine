@@ -154,12 +154,15 @@ describe('discovery integrator — cap-held, floor-gated, golden-safe', () => {
     let ws = { tick: 0, simulationRules: { resourceDynamicsEnabled: true }, settlementTickStates: {} };
     const pIdx = pIndexWith({ s1: { food: 1, trade: 1 } });
     let discovery = null;
+    let discoveryTick = null;
     for (let t = 0; t < 40 && !discovery; t++) {
       const out = evaluateResourceDynamics({ ...ws, tick: t }, snapshotWith(settlement), pIdx, { tick: t, rng: rngStub });
       discovery = out.candidates.find(c => c.candidateType === 'resource_discovery') || null;
+      if (discovery) discoveryTick = t;
       ws = out.worldState;
     }
     expect(discovery, 'a discovery armed under sustained max drive').toBeTruthy();
+    expect(discovery.generatedAtTick).toBe(discoveryTick);
     expect(discovery.resourceMembership.op).toBe('add');
     expect(pool.has(discovery.resourceMembership.resource), 'the struck node is in the latent pool').toBe(true);
   });
@@ -245,6 +248,7 @@ describe('removal — nonrenewable-only, dwell-gated, catch-up-robust', () => {
     const out = evaluateResourceDynamics(ws, snapshotWith(depletedTown('iron_deposits')), pIndexWith(), { tick: now, rng: rngStub });
     const removal = out.candidates.find(c => c.candidateType === 'resource_removal');
     expect(removal, 'the vein gives out at the dwell wall').toBeTruthy();
+    expect(removal.generatedAtTick).toBe(now);
     expect(removal.resourceMembership).toEqual({ saveId: 's1', resource: 'iron_deposits', op: 'remove' });
     expect(removal.metadata.dwell).toBe(T.REMOVAL_DWELL);
   });
