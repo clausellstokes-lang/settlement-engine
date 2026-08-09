@@ -5,17 +5,41 @@
 > for the why, [`docs/PHASE55_EXECUTION_PLAYBOOK.md`](docs/PHASE55_EXECUTION_PLAYBOOK.md) §0.0.2
 > for the current risks and standing rulings, and [`ARCHITECTURE.md`](ARCHITECTURE.md) for the map.
 
+## Subsystem dispatch
+
+For not-yet-built subsystem work, start at
+[`docs/implementation/INDEX.md`](docs/implementation/INDEX.md). Only a SHA-pinned
+packet marked **READY** is a coding assignment. Architecture files, queue rows,
+old briefs, receipts, and progress blocks provide intent or history but do not
+authorize implementation. The packet's manifest, scope budget, acceptance
+matrix, verification commands, and STOP conditions bind the change; discoveries
+outside that boundary are reported without investigation or repair.
+
 ## The gate
 
-Everything runs through `npm run check` — the full 16-step chain:
-`validate:hazard-registry` → `validate:premortem` → `validate:data` →
+Everything runs through `npm run check` — the full 17-step chain:
+`validate:hazard-registry` → `validate:premortem` → `validate:packets` → `validate:data` →
 `validate:custom-content-manifest` → `validate:migration-head` → `validate:edge` → `validate:map` →
 `validate:tuning-bands` → `validate:foundry-module` → `validate:mcp-server` → `typecheck:ratchet` →
 `typecheck:domain:strict` → `lint` → `test:ratchet` (the full Vitest suite — measured
 27,292 tests / 2,350 files at c658fb44) → `build` → `verify:dist` (the first-paint
 ratchet) — plus the Playwright
-`e2e` job. Both run in CI (`.github/workflows/ci.yml`) on every PR to `master`/`main`.
+`e2e` job. CI runs the local chain as parallel validation, type, lint, test, and
+paired build/`verify:dist` groups behind the required `check` aggregate; `e2e`
+runs separately. They run on every PR to `master`/`main`.
 Counts are approximate; executable output remains the authority.
+
+Implementation has faster, explicitly non-release loops. `npm run check:packet --
+<ID>` validates the packet, runs both global type ratchets, lints its existing
+logic-bearing manifest paths, and executes only its closed focused checks.
+`npm run check:quick` performs the changed-file static subset and does not claim
+behavioral coverage. After a red fail-fast gate, `npm run check:diagnose` runs every
+independent group and reports all exits/timings while keeping build and
+`verify:dist` paired. None of these replaces `npm run check` before landing.
+
+All canonical Vitest package scripts hold the machine slot for the whole child
+process through `sh scripts/gate-mutex.sh --run -- ...`. A separate "slot free"
+check followed by Vitest is a time-of-check/time-of-use race and is prohibited.
 
 **The chain is `&&`, so a red step blacks out everything behind it.** That is not
 hypothetical: the typecheck step was a boolean gate at zero errors, went red on
@@ -27,7 +51,7 @@ allowance of zero. Use `npm run typecheck` for the raw unfiltered list when burn
 debt down, and `npm run typecheck:ratchet:update` to bank a win. Never widen a baseline
 to green a gate — that is the constitutional violation this repo exists to prevent.
 
-**Step 12 is the same move, one step later.** `test` was also a boolean gate at zero
+**The test ratchet is the same move, later in the chain.** `test` was also a boolean gate at zero
 failures, and it was red — so `build` and `verify:dist`, the two steps that guard
 against shipping a `dist` that cannot boot, had not run in the gate since 2026-08-02
 either. It is now `test:ratchet` (`scripts/check-test-ratchet.mjs`), which **runs the
@@ -89,8 +113,8 @@ unfiltered reporter output when burning the census down.
 
 **THE TWO-TYPECHECKER RECEIPT LAW — a typecheck figure MUST name its config.** The
 chain runs **two** typecheckers over overlapping trees: `typecheck:ratchet`
-(`tsconfig.full.json`) at step 9 and `typecheck:domain:strict`
-(`tsconfig.domain-strict.json`) at step 10. They disagree, and a figure quoted
+(`tsconfig.full.json`) followed by `typecheck:domain:strict`
+(`tsconfig.domain-strict.json`). They disagree, and a figure quoted
 without its config reads as total when it is not. Measured on the 2026-08-06 idiom
 sweep (`eca65c8a` → `1977db07`, both ends in integrity-counted `git archive`s of the
 committed shas, diagnostics compared message-normalized so shifted line numbers do
@@ -103,7 +127,7 @@ not read as churn):
 
 The sweep reported `introducedCount: 0`. That was true of the config it measured and
 false of the one it did not, and two of those 31 crossed a per-file ceiling and turned
-step 10 red — which, the chain being `&&`, took `lint`, `test`, `build` and
+the domain-strict ratchet red — which, the chain being `&&`, took `lint`, `test`, `build` and
 `verify:dist` dark behind it. So:
 
 - **Quote both numbers, or name the single config the number belongs to.** "Zero

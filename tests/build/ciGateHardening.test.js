@@ -32,6 +32,27 @@ import { decideDeploy, runGate, REQUIRED_CHECKS } from '../../scripts/vercel-ign
 import { readAppliedHeadLedger } from '../../scripts/check-migration-head.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+const REQUIRED_DEPLOY_JOB_IDS = [
+  'check',
+  'e2e',
+  'performance',
+  'deno-tests',
+  'coverage-floors',
+  'determinism-hostile-locale',
+];
+
+function ciJobBody(yaml, jobId) {
+  const start = yaml.search(new RegExp(`^ {2}${jobId}:`, 'm'));
+  if (start < 0) return null;
+  const tail = yaml.slice(start);
+  const next = tail.slice(1).search(/\n {2}[A-Za-z0-9_-]+:\s*(?:#.*)?$/m);
+  return next >= 0 ? tail.slice(0, next + 1) : tail;
+}
+
+function inlineNeeds(job) {
+  const value = job?.match(/^\s{4}needs:\s*\[([^\]]+)\]\s*$/m)?.[1];
+  return value ? value.split(',').map((id) => id.trim()) : null;
+}
 
 // ── The Deno edge gate installs + type-checks before execution ────────────────
 describe('Deno edge-function CI gate is reproducible and fail-closed', () => {
@@ -310,16 +331,13 @@ describe('REQUIRED_CHECKS stays in sync with ci.yml jobs', () => {
 // ── The redeploy job retriggers Vercel after CI goes green ──────────────────────
 describe('ci.yml redeploy job retriggers Vercel after CI goes green', () => {
   const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
-  const start = ci.search(/^ {2}redeploy:/m);
-  const jobBlock = start >= 0 ? ci.slice(start) : '';
+  const jobBlock = ciJobBody(ci, 'redeploy');
 
-  it('exists and needs every gating job (a red/cancelled gate skips the trigger)', () => {
-    expect(start, 'ci.yml must have a top-level `redeploy:` job').toBeGreaterThanOrEqual(0);
-    // needs must cover the same gating set the deploy gate requires.
-    const [needsLine] = jobBlock.match(/^\s{4}needs:\s*\[(.+)\]/m) ?? [''];
-    for (const job of ['check', 'e2e', 'deno-tests', 'coverage-floors', 'determinism-hostile-locale']) {
-      expect(needsLine, `redeploy must wait on ${job}`).toMatch(new RegExp(`\\b${job}\\b`));
-    }
+  it('deploy and redeploy need the exact same complete gating job set', () => {
+    expect(ciJobBody(ci, 'deploy'), 'ci.yml must have a top-level `deploy:` job').toBeTruthy();
+    expect(jobBlock, 'ci.yml must have a top-level `redeploy:` job').toBeTruthy();
+    expect(inlineNeeds(ciJobBody(ci, 'deploy'))).toEqual(REQUIRED_DEPLOY_JOB_IDS);
+    expect(inlineNeeds(jobBlock)).toEqual(REQUIRED_DEPLOY_JOB_IDS);
   });
 
   it('fires only on a master push — never PRs or other branches', () => {

@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "indexPath": "docs/implementation/INDEX.md",
+  "packets": [
+    {
+      "id": "TC-3",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/TC-3.md",
+      "verifiedBase": "2c810d167d016302e641fc9cfe74fff57475b14e",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyWardsParcels.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographyTuning.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographySynthesis.js" },
+        { "action": "MODIFY", "path": "src/domain/townScene/cartographyContract.js" },
+        { "action": "CREATE", "path": "tests/domain/townCartographyWardsParcels.test.js" },
+        { "action": "TEST", "path": "tests/domain/townSceneCartography.test.js" },
+        { "action": "TEST", "path": "tests/domain/townCartographyDeterminism.test.js" },
+        { "action": "TEST", "path": "tests/property/townCartographyDormancyGolden.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townScene/cartographyContract.js", "symbol": "TOWN_CARTOGRAPHY_SCHEMA_VERSION" },
+        { "path": "src/domain/townCartography/cartographySynthesis.js", "symbol": "compileTownCartography" },
+        { "path": "src/domain/townCartography/cartographyTuning.js", "symbol": "TOWN_CARTOGRAPHY_TUNING" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "real lit compile" },
+        { "id": "A2", "case": "schema and name negatives" },
+        { "id": "A3", "case": "replay and order independence" },
+        { "id": "A4", "case": "one-law audience projection" },
+        { "id": "A5", "case": "geometry and bounds" },
+        { "id": "A6", "case": "institution binding" },
+        { "id": "A7", "case": "dormancy regression" },
+        { "id": "A8", "case": "budget and purity" }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/domain/townCartographyWardsParcels.test.js",
+          "tests/domain/townSceneCartography.test.js",
+          "tests/domain/townCartographyDeterminism.test.js",
+          "tests/property/townCartographyDormancyGolden.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "SC-1",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/surveyor-chat/SC-1.md",
+      "verifiedBase": "2c810d167d016302e641fc9cfe74fff57475b14e",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/components/surveyor/SurveyorTextIntentShell.jsx" },
+        { "action": "CREATE", "path": "src/components/surveyor/ProposalCard.jsx" },
+        { "action": "CREATE", "path": "src/styles/surveyorChat.css" },
+        { "action": "MODIFY", "path": "src/components/surveyor/SurveyorDoor.jsx" },
+        { "action": "MODIFY", "path": "src/components/surveyor/InterpretApplyPanel.jsx" },
+        { "action": "TEST", "path": "tests/components/surveyorDoor.test.jsx" },
+        { "action": "CREATE", "path": "tests/components/surveyorProposalCard.test.jsx" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/components/surveyor/SurveyorDoor.jsx", "symbol": "routeDoorPrompt" },
+        { "path": "src/components/surveyor/InterpretApplyPanel.jsx", "symbol": "OpCard" },
+        { "path": "src/hooks/useIsMobile.js", "symbol": "useIsMobile" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "main analyst route" },
+        { "id": "A2", "case": "existing write route" },
+        { "id": "A3", "case": "empty and whitespace absence" },
+        { "id": "A4", "case": "keyboard and composer growth" },
+        { "id": "A5", "case": "mobile focus and entitlement privacy" },
+        { "id": "A6", "case": "controlled proposal decisions" },
+        { "id": "A7", "case": "protected consent integration" },
+        { "id": "A8", "case": "ownership prevention guards" }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/components/surveyorDoor.test.jsx",
+          "tests/components/surveyorProposalCard.test.jsx",
+          "tests/components/surveyorInterpretApplyPanel.test.jsx",
+          "tests/domain/doorRouter.test.js",
+          "tests/build/surveyorPanelsLazy.test.js",
+          "tests/design/deepCraftKillList.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "GR-3B",
+      "status": "BLOCKED",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-3B.md",
+      "verifiedBase": "2c810d167d016302e641fc9cfe74fff57475b14e",
+      "changeManifest": [],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/pactFormation.js", "symbol": "PACT_DRAFT_LENS" },
+        { "path": "src/domain/worldPulse/peaceTermsCatalog.js", "symbol": "orderTermsByAsk" },
+        { "path": "src/domain/worldPulse/treatyOrientation.js", "symbol": "treatyOrientationOf" }
+      ],
+      "acceptanceCases": [],
+      "checks": []
+    },
+    {
+      "id": "IN-0C",
+      "status": "BLOCKED",
+      "packetPath": "docs/implementation/packets/foreign-policy/IN-0C.md",
+      "verifiedBase": "2c810d167d016302e641fc9cfe74fff57475b14e",
+      "changeManifest": [],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/beliefMap.js", "symbol": "advanceBeliefMaps" },
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "advanceInformationStatecraft" },
+        { "path": "src/domain/worldPulse/dispositionChannels.js", "symbol": "advanceTreatiesWithDisposition" }
+      ],
+      "acceptanceCases": [],
+      "checks": []
+    },
+    {
+      "id": "IA-1",
+      "status": "STALE",
+      "packetPath": "docs/implementation/packets/infrastructure/IA-1.md",
+      "verifiedBase": "2c810d167d016302e641fc9cfe74fff57475b14e",
+      "changeManifest": [
+        { "action": "MODIFY", "path": ".github/workflows/ci.yml" },
+        { "action": "MODIFY", "path": "package.json" },
+        { "action": "MODIFY", "path": "scripts/gate-mutex.sh" },
+        { "action": "MODIFY", "path": "scripts/hazard-registry.json" },
+        { "action": "CREATE", "path": "scripts/implementation-packets.mjs" },
+        { "action": "CREATE", "path": "scripts/implementation-gate.mjs" },
+        { "action": "CREATE", "path": "docs/implementation/PACKET_MANIFEST.json" },
+        { "action": "MODIFY", "path": "docs/implementation/PACKET_STANDARD.md" },
+        { "action": "MODIFY", "path": "docs/implementation/PACKET_TEMPLATE.md" },
+        { "action": "MODIFY", "path": "docs/implementation/INDEX.md" },
+        { "action": "MODIFY", "path": "AGENTS.md" },
+        { "action": "MODIFY", "path": "CONTRIBUTING.md" },
+        { "action": "MODIFY", "path": "ARCHITECTURE.md" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/pulseStageResult.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/pulseStageManifest.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/ledgerOwnershipManifest.js" },
+        { "action": "CREATE", "path": "tests/scripts/gateMutex.test.js" },
+        { "action": "CREATE", "path": "tests/scripts/implementationPackets.test.js" },
+        { "action": "CREATE", "path": "tests/scripts/implementationGate.test.js" },
+        { "action": "CREATE", "path": "tests/domain/pulseStageContracts.test.js" },
+        { "action": "MODIFY", "path": "tests/build/ciCheckParity.test.js" },
+        { "action": "MODIFY", "path": "tests/build/ciGateHardening.test.js" },
+        { "action": "MODIFY", "path": "tests/lint/hazardRegistryFailClosed.test.js" },
+        { "action": "MODIFY", "path": "tests/lint/testRatchet.test.js" },
+        { "action": "DOC", "path": "docs/implementation/packets/town-cartography/TC-3.md" },
+        { "action": "DOC", "path": "docs/implementation/packets/surveyor-chat/SC-1.md" },
+        { "action": "DOC", "path": "docs/implementation/packets/foreign-policy/GR-3B.md" },
+        { "action": "DOC", "path": "docs/implementation/packets/foreign-policy/IN-0C.md" },
+        { "action": "DOC", "path": "docs/implementation/packets/infrastructure/IA-1.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "package.json", "symbol": "\"check\"" },
+        { "path": "scripts/gate-mutex.sh", "symbol": "holders()" },
+        { "path": ".github/workflows/ci.yml", "symbol": "jobs:" },
+        { "path": "src/domain/worldPulse/pulseStageManifest.js", "symbol": "PULSE_STAGE_TOPOLOGY" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "held lock excludes a second caller and preserves exit status" },
+        { "id": "A2", "case": "stale lock recovery never removes a live foreign lock" },
+        { "id": "A3", "case": "packet validation accepts canon and rejects bounded drift fixtures" },
+        { "id": "A4", "case": "READY-only deterministic hash-bearing coding capsules" },
+        { "id": "A5", "case": "packet quick and diagnostic plans remain non-vacuous" },
+        { "id": "A6", "case": "CI runtime and parallel gate parity" },
+        { "id": "A7", "case": "pulse result identity and explicit substage order metadata" },
+        { "id": "A8", "case": "resolvable and honest ledger ownership metadata" }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/scripts/gateMutex.test.js",
+          "tests/scripts/implementationPackets.test.js",
+          "tests/scripts/implementationGate.test.js",
+          "tests/domain/pulseStageContracts.test.js",
+          "tests/build/ciCheckParity.test.js",
+          "tests/build/ciGateHardening.test.js"
+        ]
+      ]
+    }
+  ]
+}

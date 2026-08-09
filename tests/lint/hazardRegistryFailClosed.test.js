@@ -311,7 +311,7 @@ describe('the hazard registry gate — the DOCUMENT pile is SHRINK-ONLY (the rat
   it('PASSES when the DOCUMENT count SHRINKS (upgrading a class must never red)', () => {
     const reg = clone(validRegistry());
     reg.classes[1].status = 'PARTIAL';
-    reg.classes[1].enforcer = { paths: ['scripts/gate-mutex.sh'], inChain: false, note: '' };
+    reg.classes[1].enforcer = { paths: ['scripts/gate-tail.sh'], inChain: false, note: '' };
     const r = run(fixture(reg)); // baseline 1, now 0 DOCUMENT entries
     expect(out(r)).toMatch(/DOCUMENT 0\/1/);
     expect(r.status).toBe(0);
@@ -396,8 +396,8 @@ describe('the hazard registry gate — SCOPE SENTINEL', () => {
 describe('the hazard registry gate — inChain is DERIVED, never restated', () => {
   it('REDS when an entry CLAIMS in-chain but the check chain does not run it', () => {
     const reg = clone(validRegistry());
-    // gate-mutex.sh is real but deliberately NOT wired into `npm run check`.
-    reg.classes[0].enforcer = { paths: ['scripts/gate-mutex.sh'], inChain: true, note: '' };
+    // gate-tail.sh is real but deliberately not reached from `npm run check`.
+    reg.classes[0].enforcer = { paths: ['scripts/gate-tail.sh'], inChain: true, note: '' };
     const r = run(fixture(reg));
     expect(r.status).not.toBe(0);
     expect(out(r)).toMatch(/inChain claims true but the `check` chain says false/);

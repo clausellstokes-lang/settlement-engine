@@ -16,14 +16,68 @@ on:
     - cron: '0 6 * * 1'   # Mondays 06:00 UTC
 
 jobs:
-  check:
-    name: Validate, test, build
+  check-validation:  # deploy-gate: optional — required transitively by the `check` aggregate
+    name: Gate / validation
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - name: Audit production dependencies
+        run: npm audit --audit-level=high --omit=dev
+      - name: Audit dev dependencies (non-blocking visibility)
+        run: npm audit --audit-level=high
+        continue-on-error: true
+      - run: npm run validate:hazard-registry
+      - run: npm run validate:premortem
+      - run: npm run validate:packets
+      - run: npm run validate:data
+      - run: npm run validate:custom-content-manifest
+      - run: npm run validate:migration-head
+      - run: npm run validate:edge
+      - run: npm run validate:map
+      - run: npm run validate:tuning-bands
+      - run: npm run validate:foundry-module
+      - run: npm run validate:mcp-server
+
+  check-types:  # deploy-gate: optional — required transitively by the `check` aggregate
+    name: Gate / type ratchets
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck:ratchet
+      - run: npm run typecheck:domain:strict
+
+  check-lint:  # deploy-gate: optional — required transitively by the `check` aggregate
+    name: Gate / lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+
+  check-tests:  # deploy-gate: optional — required transitively by the `check` aggregate
+    name: Gate / test ratchet
+    runs-on: ubuntu-latest
+    # The ratchet executes the real ~710s full suite. Keep measured headroom for
+    # runner variance; a timeout is not a test verdict.
+    timeout-minutes: 30
     env:
-      # The PGlite security matrix is single-backend by design. This disposable
-      # service enables the one lock-order receipt that must exercise two real
-      # PostgreSQL sessions to prove a cross-lane 40P01 cannot recur.
       CUSTOM_CONTENT_CONCURRENCY_DATABASE_URL: >-
         postgresql://postgres:postgres@127.0.0.1:5432/postgres
     services:
@@ -40,173 +94,44 @@ jobs:
           --health-retries 10
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: npm
+      - run: npm ci
+      - run: npm run test:ratchet
 
-      - name: Install dependencies
-        run: npm ci
+  check-build:  # deploy-gate: optional — required transitively by the `check` aggregate
+    name: Gate / build and dist
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run verify:dist
 
-      # A+ P0.4: fail the gate on a HIGH+ vulnerability in a PRODUCTION dependency
-      # (e.g. the dompurify advisory behind the gallery XSS floor). Dev-only
-      # advisories (esbuild/vite dev server) are excluded via --omit=dev — they
-      # require a breaking major bump and must not gate production users.
-      - name: Audit production dependencies
-        run: npm audit --audit-level=high --omit=dev
-
-      # C4 (bar-6): dev/build advisories are no longer tracked ONLY by hand. This
-      # standing step surfaces the FULL (dev-inclusive) HIGH+ audit on every run, so a
-      # dev-time-exploitable advisory can no longer ride green indefinitely. It is
-      # continue-on-error (NON-BLOCKING) — a dev-server advisory awaiting a breaking
-      # major bump annotates the run without failing production's gate above.
-      - name: Audit dev dependencies (non-blocking visibility)
-        run: npm audit --audit-level=high
-        continue-on-error: true
-
-      # HAZARD CONVERSION LAW (owner, 2026-08-07). Every confirmed hazard class
-      # either becomes MACHINERY or is EXPLICITLY ACCEPTED with a stated reason —
-      # because a recorded hazard is a DOCUMENT, and documents do not prevent
-      # recurrence (three classes bit on the same day they were already written
-      # down with their cures). This step is what stops the registry becoming one
-      # more such document: a class with no status reds, an ACCEPTED entry with no
-      # reason reds, and the DOCUMENT (owed) count is shrink-only.
-      #
-      # ⚠ THESE TWO STEPS WERE ADDED TO `npm run check` AND OMITTED HERE, which
-      # reddened tests/build/ciCheckParity.test.js — the guard that pins the local
-      # chain and this job step-for-step in BOTH directions. That guard did its
-      # job; this is the repair. If you add a step to the chain, add it here in
-      # the same commit.
-      - name: Validate hazard registry
-        run: npm run validate:hazard-registry
-
-      # The pre-mortem is the only instrument that runs BEFORE the error rather
-      # than after it: given a changeset it names the recorded hazard classes that
-      # shape exposes. Advisory by design — its triggers are heuristic and a noisy
-      # blocker gets disabled — so this step validates the instrument itself
-      # (predicates resolve, retro-corpus still warns), never the changeset.
-      - name: Validate pre-mortem
-        run: npm run validate:premortem
-
-      # Fail fast on data corruption: duplicate object keys silently
-      # overwrite earlier definitions in JS, so a regression here would
-      # quietly distort the simulation outputs without breaking the build.
-      - name: Validate data
-        run: npm run validate:data
-
-      # The authored manifest is the sole custom-content vocabulary authority.
-      # Its generated browser, edge, and SQL projections must remain byte-current
-      # with the schema committed in this checkout.
-      - name: Validate custom-content manifest projections
-        run: npm run validate:custom-content-manifest
-
-      # Migration-chain ledger: contiguity + the applied-head marker
-      # (supabase/applied-head.json). Catches double-booked or gapped
-      # migration numbers at CI time; the pending-deploy window is
-      # visible-not-fatal, matching the manual `supabase db push` flow.
-      - name: Validate migration head
-        run: npm run validate:migration-head
-
-      - name: Validate edge functions
-        run: npm run validate:edge
-
-      - name: Validate vendored map JavaScript
-        run: npm run validate:map
-
-      # Schema-guard the R-15 tuning-band manifest (src/domain/tuning/
-      # proposedSoakBands.js): every proposed soak band is well-formed and
-      # ships 'PROPOSED' (soak-vetoable), so a malformed or pre-ratified band
-      # cannot slip in.
-      - name: Validate tuning bands
-        run: npm run validate:tuning-bands
-
-      - name: Validate Foundry module package
-        run: npm run validate:foundry-module
-
-      - name: Validate MCP truth-server package
-        run: npm run validate:mcp-server
-
-      # tsc --noEmit against src/domain/. The JSDoc types in the domain
-      # layer get validated by tsc; the pipeline output object shapes,
-      # impairment dimensions, event types, and faction-response shapes
-      # are all enforced at edit time. Adding a new event without
-      # updating EventType union fails here.
-      # GATE RESTORATION (2026-08-07): this step was `npm run typecheck`, a BOOLEAN
-      # gate at zero errors. It went red on 2026-08-02 (7796954e) and stayed red,
-      # and because CI steps are sequential, Lint / Run tests / Build /
-      # Verify bundle chunk contracts BELOW never ran either — the same `&&`-chain
-      # blackout the local gate suffered. It is now the per-file RATCHET
-      # (scripts/check-full-typecheck.mjs): a truthful, shrink-only ceiling that
-      # reds on any NEW or WORSENED file while letting the rest of the gate run.
-      # `npm run typecheck` stays available raw for burn lanes reading the full list.
-      - name: Type check (full-tree ratchet)
-        run: npm run typecheck:ratchet
-
-      # The domain strict-typecheck RATCHET (scripts/check-domain-strict.mjs):
-      # a monotone-shrink baseline of strict-mode errors in the domain kernel.
-      # It is wired into `npm run check` but CI previously omitted it, so a
-      # strict regression could ship green and was caught only by the
-      # bypassable pre-push hook (finding F35 / maintainability). Now enforced
-      # in CI so the local gate and CI can't diverge.
-      - name: Domain strict-type ratchet
-        run: npm run typecheck:domain:strict
-
-      # ESLint on the full src/ + tests + scripts. Correctness rules
-      # (undefined vars, dupe keys, rules-of-hooks, the design-token and
-      # analytics-event contracts) are errors; forward-looking React 19
-      # rules and unused-vars are warnings, surfaced for drift tracking
-      # without blocking. The tree lints with ZERO ERRORS — that, not "clean",
-      # is what this step enforces: the warning count is deliberately nonzero
-      # and drifts, so no figure is frozen here (a restated count rots into the
-      # next false claim). Read the step's own log for the live tally.
-      # CORRECTED 2026-08-07: this comment read "the tree currently lints clean
-      # (0 problems)" and was FALSE — measured 27 problems (0 errors, 27
-      # warnings). It went unnoticed because `npm run lint` is step 11 of the
-      # `npm run check` &&-chain and step 10 had been red, so lint had not run;
-      # and because tests/docs/enforcement-claims.test.js, the meta-pin whose
-      # whole job is to red on an unbacked "0 problems" claim, scans root *.md +
-      # docs/**/*.md + eslint.config.js and does NOT scan .github/workflows/**.
-      # Promote the React 19 warnings to errors when adopting React Compiler.
-      - name: Lint
-        run: npm run lint
-
-      # Vitest: unit + property-based (fast-check) engine tests, domain +
-      # store + lib integration, component/UI smoke, a11y, security, and
-      # edge-function contract tests. (Live total: see this step's log — the
-      # hardcoded count drifted, so it is no longer pinned in this comment.)
-      # THE PER-TEST RATCHET, not the bare boolean. `npm run test` is a boolean
-      # gate at zero failures; it was red, and because both this job's steps and
-      # the local `npm run check` chain are sequential, everything BEHIND it —
-      # Build and Verify bundle chunk contracts — had not run since 2026-08-02.
-      # scripts/check-test-ratchet.mjs RUNS THE WHOLE SUITE (it never skips or
-      # excludes anything) and compares the result against a frozen, ATTRIBUTED,
-      # per-test census that may only shrink. See scripts/check-test-ratchet.mjs
-      # and tests/lint/testRatchet.test.js. `npm run test` stays raw for burn lanes.
-      - name: Run tests (per-test ratchet)
-        run: npm run test:ratchet
-
-      # Production build — confirms Vite/Rollup chunking is healthy, the
-      # bundle still produces, and (via the vite.config onwarn guard) that
-      # no named import is missing/unresolved. NOTE: Vercel currently
-      # deploys on push to master independently of this workflow — see
-      # docs/DEPLOY.md ("Gating production on CI") to make this check a
-      # required gate before a production deploy.
-      - name: Build
-        run: npm run build
-
-      # Post-build verification: the dist-reading chunk contracts in tests/build/
-      # (vendor-pdf lazy isolation, the engine-chunk split, the first-paint
-      # closure RATCHET) are `runIf(distExists)` and silently NO-OP in the "Run
-      # tests" step above — a fresh checkout has no dist/ yet. Re-run the suite
-      # AFTER the build with VERIFY_DIST=1, which turns a missing dist/ into a
-      # HARD failure so a chunk contract can never count green having verified
-      # nothing. Locally, `npm run check` chains this same step after its build
-      # (the pre-fix ordering measured the PREVIOUS run's dist — a one-run lag
-      # that let W-F0..W-F6 first-paint growth ride a green gate to +293 B over
-      # budget before anything tripped).
-      - name: Verify bundle chunk contracts (post-build, anti-vacuity)
-        run: npm run verify:dist
+  check:
+    name: Validate, test, build
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [check-validation, check-types, check-lint, check-tests, check-build]
+    steps:
+      - name: Require every parallel gate group
+        env:
+          VALIDATION_RESULT: ${{ needs.check-validation.result }}
+          TYPES_RESULT: ${{ needs.check-types.result }}
+          LINT_RESULT: ${{ needs.check-lint.result }}
+          TESTS_RESULT: ${{ needs.check-tests.result }}
+          BUILD_RESULT: ${{ needs.check-build.result }}
+        run: |
+          for result in "$VALIDATION_RESULT" "$TYPES_RESULT" "$LINT_RESULT" "$TESTS_RESULT" "$BUILD_RESULT"; do
+            test "$result" = success || exit 1
+          done
 
   e2e:
     name: Chromium end-to-end
@@ -217,7 +142,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: npm
 
       - name: Install dependencies
@@ -269,7 +194,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: npm
 
       - name: Install dependencies
@@ -326,7 +251,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: '.nvmrc'
           cache: npm
       - run: npm ci
       - name: Coverage floors
@@ -345,7 +270,7 @@ jobs:
       # made the production type gate fail before it could check any source.
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: npm
 
       - name: Install locked Node type dependencies
@@ -391,7 +316,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: npm
 
       - name: Install dependencies
@@ -426,7 +351,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: npm
 
       - name: Install dependencies
@@ -466,7 +391,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: npm
 
       - name: Install dependencies
@@ -499,7 +424,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: npm
 
       - name: Install dependencies
@@ -547,7 +472,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version-file: '.nvmrc'
           cache: npm
 
       - name: Install dependencies

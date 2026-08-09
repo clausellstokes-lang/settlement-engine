@@ -490,17 +490,17 @@
     {
       "id": "HZ-GATEMUTEX",
       "title": "`ps aux | grep -c \"[v]itest\"` SELF-MATCHES — a phantom holder burns 40 minutes per gate",
-      "status": "PARTIAL",
+      "status": "MACHINERY",
       "acceptedReason": null,
       "memory": ["vitest-mutex-check-self-match.md", "generation-remediation-gate-state.md"],
-      "enforcer": { "paths": ["scripts/gate-mutex.sh"], "inChain": false, "note": "PARTIAL BY CONSTRUCTION — an optional script competing against a one-liner everyone already knows. Never counts, excludes its own ancestry, PRINTS pid lines." },
+      "enforcer": { "paths": ["scripts/gate-mutex.sh"], "inChain": true, "note": "Canonical Vitest package runners enter through the atomic held-lock mode. The script still excludes its own ancestry and prints auditable legacy-holder PID lines." },
       "instances": 2,
       "instanceEvidence": "CONFIRMED from the script's own header read at HEAD: 'a bug that cost real time, twice, and was CONFIRMED live.' MEASURED 2026-08-06: a build agent's until-loop 'slept 30s x 40 = TWENTY MINUTES against a mutex nobody held, then gave up and exited without running the gate at all.' Reproduced under control: bracket-grep alone returned 1; the same grep on a line also carrying the plain word returned 3.",
       "triggers": [
         "any command that waits on a running vitest",
         "any compound command containing both a mutex check and the word vitest elsewhere on the line"
       ],
-      "upgradePath": "'The failure mode is the nastiest kind: it looks like patience.' Nothing errors, nothing reds, the lane just quietly does not run its gate. Same voluntary-application shape as HZ-WRONGLINEAGE and HZ-REDRATCHETGROWS — the three of them share one cure: emit the guard into the brief instead of relying on recall."
+      "upgradePath": "COMPLETED by IA-1: the lock is acquired and held inside canonical Vitest package runners, so callers cannot separate the observation from the protected process."
     },
     {
       "id": "HZ-CAMELBLIND",

@@ -183,10 +183,11 @@ describe('per-test suite ratchet — static pins', () => {
     expect(steps.indexOf('build')).toBeLessThan(steps.indexOf('verify:dist'));
   });
 
-  test('`npm run test` survives as a RAW vitest command (burn lanes need the full list)', () => {
+  test('`npm run test` keeps the raw unfiltered reporter inside the held lock', () => {
     // The ratchet reports a verdict; a burn-down lane needs the unfiltered
-    // reporter output. Keeping the raw script is a requirement, not an accident.
-    expect(pkg.scripts.test).toBe('vitest run');
+    // reporter output. Atomic ownership changes concurrency, not the denominator.
+    expect(pkg.scripts.test).toBe('sh scripts/gate-mutex.sh --run -- npx vitest run');
+    expect(pkg.scripts.test).not.toMatch(/--exclude|--changed|--related|--passWithNoTests/);
   });
 
   test('CI runs the ratchet too (the local gate and CI must not diverge)', () => {

@@ -59,6 +59,10 @@ domain/      Pure business logic that ISN'T generation: causal state, events,
              the gate now covers the non-JSX logic tree, and `worldPulse/` also carries a
              strict-typecheck ratchet + an any-cast burn-down ratchet
              (scripts/count-domain-any.mjs). <!-- @enforced-by tsconfig.full.json + tsconfig.domain-strict.json + tests/lint/domainAnyCastBaseline.test.js -->
+             `pulseStageManifest.js` records non-executing stage order/read/write
+             contracts and `ledgerOwnershipManifest.js` records certification-only
+             writer families; `pulseKernel.js` remains execution authority.
+             <!-- @enforced-by tests/domain/pulseStageContracts.test.js -->
 application/ Application-command lifecycle: admitted envelopes, owner/target/
              revision context, legal command specifications, replay-safe receipts,
              and bounded server-authoritative command adapters. This is a
@@ -316,7 +320,7 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 ## The gate
 
 `npm run check` = `validate:hazard-registry && validate:premortem &&
-validate:data && validate:custom-content-manifest &&
+validate:packets && validate:data && validate:custom-content-manifest &&
 validate:migration-head && validate:edge && validate:map &&
 validate:tuning-bands && validate:foundry-module && validate:mcp-server &&
 typecheck:ratchet && typecheck:domain:strict && lint && test:ratchet && build &&
@@ -329,6 +333,10 @@ verify:dist`.
 - **validate:premortem** — `scripts/premortem.mjs --self-check`, the instrument that
   reads a changeset and names the recorded hazard classes that shape exposes, before
   the error rather than after it.
+- **validate:packets** — fail-closed parity across the implementation index,
+  human packet contracts, live required symbols, and the machine-readable packet
+  manifest; it also supplies deterministic READY-only coding capsules.
+  <!-- @enforced-by tests/scripts/implementationPackets.test.js -->
 - **validate:data** — duplicate-key scan (dupe keys silently corrupt sim output).
 - **validate:custom-content-manifest** — regenerates the canonical custom-content
   authority in check mode and fails if any generated client, edge, or SQL
@@ -397,6 +405,12 @@ verify:dist`.
   chunk's static closure must stay under `CLOSURE_BUDGET_BYTES`, a monotone,
   owner-gated ceiling (see the playbook §0.2). Lazy/dormant additions cost zero
   first-paint bytes; a new eager import must fit the margin or reclaim it.
+
+Locally the 17-step chain remains fail-fast. CI runs the same evidence across
+parallel validation, type, lint, test, and paired build/`verify:dist` jobs, then
+joins them behind the required `Validate, test, build` aggregate. Every setup-node
+job reads the repository runtime from `.nvmrc`.
+<!-- @enforced-by tests/build/ciCheckParity.test.js -->
 
 Runs in CI (`.github/workflows/ci.yml`) on push/PR and via husky `pre-push`;
 `pre-commit` runs lint-staged `eslint --fix`. E2E (Playwright, `e2e/`) is

@@ -69,3 +69,101 @@ export const PULSE_STAGE_TOPOLOGY = Object.freeze([
     purpose: 'Commit the immutable pulse receipt and expose the next-state envelope.',
   }),
 ]);
+
+/**
+ * Exact integration contracts for the three ordering-sensitive substages in
+ * the consequence fold. Reads name the caller-to-callee ports and their direct
+ * host sources, never transitive mover reads; writes name only host-visible
+ * commits. All references are certification data, and `pulseKernel.js` remains
+ * the sole execution and ordering authority.
+ */
+export const PULSE_SUBSTAGE_MANIFEST_VERSION = 2;
+
+/** @param {string} port @param {string[]} sources */
+const readPort = (port, sources) => Object.freeze({ port, sources: Object.freeze([...sources]) });
+/** @param {string} target @param {string[]} evidence */
+const writeTarget = (target, evidence) => Object.freeze({ target, evidence: Object.freeze([...evidence]) });
+/** @param {string} module @param {string} symbol @param {string} evidence */
+const check = (module, symbol, evidence) => Object.freeze({ module, symbol, evidence });
+/** @param {string} id @param {string} mode @param {{module:string,symbol:string}|null} predicate @param {ReadonlyArray<Readonly<{module:string,symbol:string,evidence:string}>>} checks */
+const scopedGate = (id, mode, predicate, checks) => Object.freeze({
+  id,
+  mode,
+  predicate: predicate ? Object.freeze({ ...predicate }) : null,
+  checks: Object.freeze([...checks]),
+});
+
+export const PULSE_SUBSTAGE_CONTRACTS = Object.freeze([
+  Object.freeze({
+    id: 'belief_maps', phase: 'consequence_fold', after: Object.freeze([]),
+    host: Object.freeze({ module: 'src/domain/worldPulse/pulseKernel.js', symbol: 'simulateCampaignWorldPulse' }),
+    call: Object.freeze({ module: 'src/domain/worldPulse/beliefMap.js', symbol: 'advanceBeliefMaps' }),
+    gates: Object.freeze([scopedGate('belief_activation', 'callee',
+      { module: 'src/domain/worldPulse/beliefMap.js', symbol: 'beliefsActive' },
+      [check('src/domain/worldPulse/beliefMap.js', 'advanceBeliefMaps', 'if (!beliefsActive(worldState))')])]),
+    reads: Object.freeze([
+      readPort('snapshot', ['postTimeSnapshot']), readPort('pressureIdx', ['pIndex']),
+      readPort('worldState', ['memoryState']), readPort('tick', ['worldState.tick']),
+      readPort('commitmentDiscountFor', ['memoryState', 'worldState.tick', 'momentumCliffOf']),
+      readPort('allyIntel', ['simulationRules.allyIntelSharingEnabled', 'postTimeSnapshot', 'memoryState']),
+      readPort('credibilityOf', ['memoryState', 'worldState.tick']), readPort('sightOf', ['memoryState']),
+    ]),
+    writes: Object.freeze([writeTarget('memoryState.spatialLedgers.beliefMaps', [
+      "setSpatialLedger(memoryState, 'beliefMaps'", "dropSpatialLedger(memoryState, 'beliefMaps'",
+    ])]),
+    result: Object.freeze({ kind: 'next_changed', fields: Object.freeze(['next', 'changed']), commonEnvelope: false }),
+  }),
+  Object.freeze({
+    id: 'information_statecraft', phase: 'consequence_fold', after: Object.freeze(['belief_maps']),
+    host: Object.freeze({ module: 'src/domain/worldPulse/pulseKernel.js', symbol: 'simulateCampaignWorldPulse' }),
+    call: Object.freeze({ module: 'src/domain/worldPulse/informationStatecraft.js', symbol: 'advanceInformationStatecraft' }),
+    gates: Object.freeze([scopedGate('information_statecraft_activation', 'host_and_callee',
+      { module: 'src/domain/worldPulse/informationStatecraft.js', symbol: 'infoStatecraftActive' }, [
+        check('src/domain/worldPulse/pulseKernel.js', 'simulateCampaignWorldPulse', 'if (infoStatecraftActive(memoryState))'),
+        check('src/domain/worldPulse/informationStatecraft.js', 'advanceInformationStatecraft', 'if (!infoStatecraftActive(worldState))'),
+      ])]),
+    reads: Object.freeze([
+      readPort('snapshot', ['postTimeSnapshot']), readPort('worldState', ['memoryState']),
+      readPort('graph', ['applied.regionalGraph']), readPort('rng', ['rng']),
+      readPort('tick', ['worldState.tick']), readPort('now', ['now']),
+      readPort('strengthOf', ['postTimeSnapshot', 'pIndex']),
+      readPort('alignmentOf', ['postTimeSnapshot', 'memoryState']), readPort('nameFor', ['settlementNameFor']),
+    ]),
+    writes: Object.freeze([
+      writeTarget('memoryState', ['if (infowar.changed) memoryState =']),
+      writeTarget('wizardNews', ['wizardNews = appendObservedWizardNewsEntries(']),
+      writeTarget('newsReceiptSink', ['appendObservedWizardNewsEntries(wizardNews, infowar.newsEntries, { now }, newsReceiptSink)']),
+    ]),
+    result: Object.freeze({ kind: 'world_state_mover', fields: Object.freeze(['worldState', 'changed', 'newsEntries', 'envoyPicturePatches']), commonEnvelope: false }),
+  }),
+  Object.freeze({
+    id: 'treaties', phase: 'consequence_fold', after: Object.freeze(['information_statecraft']),
+    host: Object.freeze({ module: 'src/domain/worldPulse/pulseKernel.js', symbol: 'simulateCampaignWorldPulse' }),
+    call: Object.freeze({ module: 'src/domain/worldPulse/dispositionChannels.js', symbol: 'advanceTreatiesWithDisposition' }),
+    gates: Object.freeze([
+      scopedGate('peace_causality', 'nested_callee',
+        { module: 'src/domain/worldPulse/warReasons.js', symbol: 'peaceCausalActive' },
+        [check('src/domain/worldPulse/peaceTerms.js', 'advanceTreaties', 'if (!peaceCausalActive(')]),
+      scopedGate('disposition_channels', 'host_argument_and_wrapper', null, [
+        check('src/domain/worldPulse/pulseKernel.js', 'simulateCampaignWorldPulse', 'dispositionEnabled: simulationRules.dispositionChannelsEnabled === true'),
+        check('src/domain/worldPulse/dispositionChannels.js', 'advanceTreatiesWithDisposition', 'enabled: args.dispositionEnabled === true'),
+        check('src/domain/worldPulse/dispositionChannels.js', 'advanceTreatiesWithDisposition', 'const dispositionNews = args.dispositionEnabled === true'),
+      ]),
+    ]),
+    reads: Object.freeze([
+      readPort('snapshot', ['postTimeSnapshot']), readPort('worldState', ['memoryState']),
+      readPort('settlementUpdates', ['settlementUpdates']), readPort('graph', ['applied.regionalGraph']),
+      readPort('pIndex', ['pIndex']), readPort('tick', ['worldState.tick']), readPort('now', ['now']),
+      readPort('dispositionEnabled', ['simulationRules.dispositionChannelsEnabled']),
+      readPort('dispositionTransitions', ['dispositionTransitions']),
+    ]),
+    writes: Object.freeze([
+      writeTarget('treatyCoalitionEvidence', ['treatyCoalitionEvidence = mergeWarCoalitionEvidence(treatyAdvance.coalitionEvidence)']),
+      writeTarget('memoryState', ['({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover({']),
+      writeTarget('settlementUpdates', ['({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover({']),
+      writeTarget('wizardNews', ['({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover({']),
+      writeTarget('newsReceiptSink', ['}, memoryState, settlementUpdates, wizardNews, now, newsReceiptSink));']),
+    ]),
+    result: Object.freeze({ kind: 'world_state_mover', fields: Object.freeze(['worldState', 'changed', 'newsEntries', 'settlementUpdates', 'coalitionEvidence', 'dispositionDeltas']), commonEnvelope: false }),
+  }),
+]);
