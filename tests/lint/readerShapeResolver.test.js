@@ -196,7 +196,7 @@ describe('reader shape resolver provenance', () => {
       { key: '__worldField', origins: ['root/worldState'] },
       { key: '__saveField', origins: ['root/save'] },
     ]);
-    expect(result.stats.materializedLocalFields).toBe(1);
+    expect(result.stats.materializedLocalFields).toBe(2);
   });
 
   test('consults a spread base only when the demanded key is not locally written', () => {
@@ -397,6 +397,75 @@ describe('reader shape resolver provenance', () => {
     ]);
   });
 
+  test('instantiates heap effects through parameters and runtime alias versions', () => {
+    const parameter = scan(`
+      function set(target, value) {
+        target.x = value;
+        return target.x;
+      }
+      export function probe(worldState, save) {
+        const box = { x: worldState };
+        return [
+          set(box, save).__insideParameterMutator,
+          box.x.__afterParameterMutation,
+        ];
+      }
+    `);
+    expect(parameter.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__insideParameterMutator', origins: ['root/save'] },
+      { key: '__afterParameterMutation', origins: ['root/save'] },
+    ]);
+
+    const returnedAlias = scan(`
+      function id(value) { return value; }
+      export function probe(worldState, save) {
+        const box = { x: worldState };
+        const alias = id(box);
+        alias.x = save;
+        return box.x.__returnedAliasMutation;
+      }
+    `);
+    expect(returnedAlias.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__returnedAliasMutation', origins: ['root/save'] },
+    ]);
+
+    const reassignedAway = scan(`
+      export function probe(worldState, save) {
+        const box = { x: worldState };
+        let alias = box;
+        alias = { x: worldState };
+        alias.x = save;
+        return box.x.__aliasReassignedAway;
+      }
+    `);
+    expect(reassignedAway.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__aliasReassignedAway', origins: ['root/worldState'] },
+    ]);
+
+    const reassignedTo = scan(`
+      export function probe(worldState, save) {
+        let alias = { x: worldState };
+        const box = { x: worldState };
+        alias = box;
+        alias.x = save;
+        return box.x.__aliasReassignedTo;
+      }
+    `);
+    expect(reassignedTo.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__aliasReassignedTo', origins: ['root/save'] },
+    ]);
+
+    const incoming = scan(`
+      export function probe(worldState, save) {
+        worldState.x = save;
+        return worldState.x.__directIncomingMutation;
+      }
+    `);
+    expect(incoming.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__directIncomingMutation', origins: ['root/save'] },
+    ]);
+  });
+
   test('applies local mutations only after their execution point, including through helpers', () => {
     const result = scan(`
       function inspect(value) { return value.future.__helperBorrowedFuture; }
@@ -458,7 +527,6 @@ describe('reader shape resolver provenance', () => {
       { key: '__afterCoalesce', origins: ['root/worldState'] },
       { key: '__afterOr', origins: ['root/save'] },
       { key: '__afterAnd', origins: ['root/save'] },
-      { key: '__afterAnd', origins: ['root/worldState'] },
       { key: '__beforeDelete', origins: ['root/worldState'] },
       { key: 'deleted', origins: ['syntax/local-object'] },
       { key: 'assigned', origins: ['syntax/local-object'] },
@@ -467,6 +535,24 @@ describe('reader shape resolver provenance', () => {
       { key: '__afterNested', origins: ['root/worldState'] },
       { key: '__afterSignedMutation', origins: ['root/save'] },
     ]);
+  });
+
+  test('treats property update expressions as primitive cell writes', () => {
+    const result = scan(`
+      export function probe(worldState) {
+        const direct = { selected: worldState };
+        direct.selected++;
+        const computed = { selected: worldState };
+        const key = 'selected';
+        --computed[key];
+        return [
+          direct.selected?.__afterDirectIncrement,
+          computed.selected?.__afterComputedDecrement,
+        ];
+      }
+    `);
+
+    expect(result.findings).toEqual([]);
   });
 
   test('scans canonical static numeric and signed-numeric element keys', () => {
@@ -579,11 +665,17 @@ describe('reader shape resolver provenance', () => {
       const right = {
         read(worldState) { return worldState.__ownerCollision; },
       };
-      { function duplicate(worldState) { return worldState.__duplicateOwner; } }
-      { function duplicate(worldState) { return worldState.__duplicateOwner; } }
       export function probe(worldState) {
         left.read(worldState);
         right.read(worldState);
+        {
+          function duplicate() { return worldState.__duplicateOwner; }
+          duplicate();
+        }
+        {
+          function duplicate() { return worldState.__duplicateOwner; }
+          duplicate();
+        }
       }
     `);
     const owners = result.findings.map(({ site }) => decodeURIComponent(
@@ -594,8 +686,8 @@ describe('reader shape resolver provenance', () => {
     expect(owners).toEqual(expect.arrayContaining([
       'object-binding:left#0/method:read#0',
       'object-binding:right#0/method:read#0',
-      'function:duplicate#0',
-      'function:duplicate#1',
+      'function:probe#0/function:duplicate#0',
+      'function:probe#0/function:duplicate#1',
     ]));
   });
 
@@ -694,7 +786,6 @@ describe('reader shape resolver provenance', () => {
         return next.__afterOverlayFeedback;
       }
     `);
-
     expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
       { key: '__afterOverlayFeedback', origins: ['root/worldState'] },
     ]);
@@ -727,10 +818,455 @@ describe('reader shape resolver provenance', () => {
     expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
       { key: '__afterPropertyFeedback', origins: ['root/worldState'] },
     ]);
-    expect(result.stats.resolvedSccBackEdges).toBe(1);
+    // Invocation-qualified flow closes this through the mutable binding SCC;
+    // no separate local-property recursion edge remains to count.
+    expect(result.stats.resolvedSccBackEdges).toBe(0);
+    expect(result.stats.mutableBindingSccBackEdges).toBeGreaterThan(0);
     expect(result.stats.cycleCuts).toBe(0);
     expect(result.stats.depthTruncations).toBe(0);
     expect(result.stats.fixedPointIterations).toBeLessThan(8);
+  });
+
+  test('versions a pulse-like mutable pipeline at each write instead of inventing a global cycle', () => {
+    const result = scan(`
+      function advance({ settlementUpdates }) {
+        return { changed: true, settlementUpdates };
+      }
+      function applyPulseMover(result, settlementUpdates) {
+        return {
+          settlementUpdates: result.settlementUpdates ?? settlementUpdates,
+        };
+      }
+      function inspect(row) { return row.__afterPulsePipeline; }
+      export function probe(worldState, save, chooseSave) {
+        let settlementUpdates = worldState.rows;
+        if (chooseSave) settlementUpdates = save.rows;
+        const first = applyPulseMover(advance({ settlementUpdates }), settlementUpdates);
+        settlementUpdates = first.settlementUpdates;
+        const second = applyPulseMover(advance({ settlementUpdates }), settlementUpdates);
+        settlementUpdates = second.settlementUpdates;
+        return inspect(settlementUpdates[0]);
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterPulsePipeline', origins: ['root/satellite'] },
+      { key: '__afterPulsePipeline', origins: ['root/saveItem'] },
+    ]);
+    expect(result.stats.mutableBindingSccBackEdges).toBe(0);
+    expect(result.stats.abstractStateBudgetFailures).toBe(0);
+    expect(result.stats.maxReadAbstractTokens).toBeLessThanOrEqual(16);
+    expect(result.stats.maxReadTokenLength).toBeLessThanOrEqual(256);
+    expect(result.stats.maxReadStateGrowth).toBeLessThanOrEqual(48);
+    expect(result.stats.fixedPointIterations).toBeLessThanOrEqual(3);
+  });
+
+  test('replays straight-line mutable versions through a deferred local field', () => {
+    const result = scan(`
+      function applyFactionDeltas(settlement) {
+        return { ...settlement, factionsApplied: true };
+      }
+      function tickDurations(settlement) {
+        return { ...settlement, durationsTicked: true };
+      }
+      function removeExpired(settlement) {
+        return {
+          settlement: { ...settlement, expiredRemoved: true },
+          expired: [],
+        };
+      }
+      function inspect(settlement) { return settlement.__afterTimeProgression; }
+      export function probe(worldState) {
+        let newSettlement = applyFactionDeltas(worldState);
+        newSettlement = tickDurations(newSettlement);
+        const expiryResult = removeExpired(newSettlement);
+        newSettlement = expiryResult.settlement;
+        return inspect(newSettlement);
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterTimeProgression', origins: ['root/worldState'] },
+    ]);
+    expect(result.stats.resolvedBindingVersionBackEdges).toBe(0);
+    expect(result.stats.mutableBindingSccBackEdges).toBe(0);
+    expect(result.stats.abstractStateBudgetFailures).toBe(0);
+    expect(result.stats.cycleCuts).toBe(0);
+    expect(result.stats.depthTruncations).toBe(0);
+    expect(result.stats.fixedPointIterations).toBeLessThan(8);
+  });
+
+  test('cuts off a closed-over mutable binding at each exact helper call', () => {
+    const result = scan(`
+      export function probe(worldState, save) {
+        let current = worldState;
+        function grab() { return current; }
+        const before = grab();
+        current = save;
+        const after = grab();
+        return [before.__capturedBefore, after.__capturedAfter];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__capturedBefore', origins: ['root/worldState'] },
+      { key: '__capturedAfter', origins: ['root/save'] },
+    ]);
+    expect(result.stats.depthTruncations).toBe(0);
+    expect(result.stats.cycleCuts).toBe(0);
+  });
+
+  test('evaluates a closure-owned property read at every invocation cutoff', () => {
+    const result = scan(`
+      export function probe(worldState, save) {
+        let current = worldState;
+        function grab() { return current.__insideHelper; }
+        grab();
+        current = save;
+        grab();
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__insideHelper', origins: ['root/save'] },
+      { key: '__insideHelper', origins: ['root/worldState'] },
+    ]);
+  });
+
+  test('keeps implicit getter invocations conservative across outer writes', () => {
+    const result = scan(`
+      export function probe(worldState, save) {
+        let current = worldState;
+        const holder = {
+          get selected() { return current.__insideImplicitGetter; },
+        };
+        Object.values(holder);
+        current = save;
+        Object.values(holder);
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__insideImplicitGetter', origins: ['root/save'] },
+      { key: '__insideImplicitGetter', origins: ['root/worldState'] },
+    ]);
+  });
+
+  test('retains prior-frame writes at a recursive invocation backedge', () => {
+    const result = scan(`
+      export function probe(worldState, save) {
+        let current = worldState;
+        function recurse(next, depth) {
+          current.__insideRecursiveInvocation;
+          if (depth <= 0) return;
+          current = next;
+          recurse(save, depth - 1);
+        }
+        recurse(save, 1);
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__insideRecursiveInvocation', origins: ['root/save'] },
+      { key: '__insideRecursiveInvocation', origins: ['root/worldState'] },
+    ]);
+  });
+
+  test('does not move an unawaited post-suspension effect before a synchronous read', () => {
+    const result = scan(`
+      export async function probe(worldState, save) {
+        let current = worldState;
+        async function setLater() {
+          await Promise.resolve();
+          current = save;
+        }
+        setLater();
+        return current.__afterUnawaitedAsyncEffect;
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterUnawaitedAsyncEffect', origins: ['root/worldState'] },
+    ]);
+  });
+
+  test('keeps deferred closure fields isolated between helper call sites', () => {
+    const result = scan(`
+      export function probe(worldState, save) {
+        let current = worldState;
+        function grab() { return { value: current }; }
+        const before = grab();
+        current = save;
+        const after = grab();
+        return [before.value.__fieldBefore, after.value.__fieldAfter];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__fieldBefore', origins: ['root/worldState'] },
+      { key: '__fieldAfter', origins: ['root/save'] },
+    ]);
+  });
+
+  test('orders closed-over binding writes by direct and transitive invocation sites', () => {
+    const direct = scan(`
+      export function probe(worldState, save) {
+        let current = worldState;
+        function setSave() { current = save; }
+        current.__beforeSet;
+        setSave();
+        return current.__afterSet;
+      }
+    `);
+    expect(direct.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__beforeSet', origins: ['root/worldState'] },
+      { key: '__afterSet', origins: ['root/save'] },
+    ]);
+
+    const declarationOrder = scan(`
+      export function probe(worldState, save) {
+        let current = save;
+        function setSave() { current = save; }
+        function setWorld() { current = worldState; }
+        setWorld();
+        current.__afterWorld;
+        setSave();
+        return current.__afterSave;
+      }
+    `);
+    expect(declarationOrder.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterWorld', origins: ['root/worldState'] },
+      { key: '__afterSave', origins: ['root/save'] },
+    ]);
+
+    const transitive = scan(`
+      export function probe(worldState, save) {
+        let current = worldState;
+        function setSave() { current = save; }
+        function outer() { setSave(); }
+        current.__beforeOuter;
+        outer();
+        return current.__afterOuter;
+      }
+    `);
+    expect(transitive.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__beforeOuter', origins: ['root/worldState'] },
+      { key: '__afterOuter', origins: ['root/save'] },
+    ]);
+  });
+
+  test('evaluates repeated parameterized effects in their exact invocation frames', () => {
+    const bindingResult = scan(`
+      export function probe(worldState, save) {
+        let current = save;
+        function set(value) { current = value; }
+        set(worldState);
+        current.__parameterizedBefore;
+        set(save);
+        return current.__parameterizedAfter;
+      }
+    `);
+    expect(bindingResult.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__parameterizedBefore', origins: ['root/worldState'] },
+      { key: '__parameterizedAfter', origins: ['root/save'] },
+    ]);
+
+    const fieldResult = scan(`
+      export function probe(worldState, save) {
+        const box = { value: save };
+        function set(value) { box.value = value; }
+        set(worldState);
+        box.value.__fieldParameterizedBefore;
+        set(save);
+        return box.value.__fieldParameterizedAfter;
+      }
+    `);
+    expect(fieldResult.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__fieldParameterizedBefore', origins: ['root/worldState'] },
+      { key: '__fieldParameterizedAfter', origins: ['root/save'] },
+    ]);
+  });
+
+  test('models uninitialized, logical-assignment, and primitive-kill transfers', () => {
+    const result = scan(`
+      export function probe(worldState, save) {
+        let assignedLater;
+        assignedLater = save;
+        let nullish = null;
+        nullish ??= save;
+        let orValue = null;
+        orValue ||= save;
+        let andValue = worldState;
+        andValue &&= save;
+        let incremented = worldState;
+        incremented++;
+        let compounded = worldState;
+        compounded += save;
+        return [
+          assignedLater.__uninitialized,
+          nullish.__nullish,
+          orValue.__orValue,
+          andValue.__andValue,
+          incremented.__primitiveAfterIncrement,
+          compounded.__primitiveAfterCompound,
+        ];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__uninitialized', origins: ['root/save'] },
+      { key: '__nullish', origins: ['root/save'] },
+      { key: '__orValue', origins: ['root/save'] },
+      { key: '__andValue', origins: ['root/save'] },
+      { key: '__andValue', origins: ['root/worldState'] },
+    ]);
+  });
+
+  test('tracks destructuring, for-of targets, and caught thrown values', () => {
+    const graph = {
+      ...GRAPH,
+      origins: {
+        ...GRAPH.origins,
+        'root/saveItem': origin('root/saveItem', ['child'], {
+          child: [record(['root/save'])],
+        }),
+      },
+    };
+    const result = scan(`
+      export function probe(worldState, save) {
+        let objectValue = worldState;
+        ({ picked: objectValue } = { picked: save });
+        let shorthand = worldState;
+        ({ shorthand } = { shorthand: save });
+        let arrayValue = worldState;
+        [arrayValue] = [save];
+        let loopValue = worldState;
+        for (loopValue of save.rows) {
+          loopValue.__forOfAssigned;
+        }
+        for (const { child } of save.rows) {
+          child.__forOfDestructured;
+        }
+        try {
+          throw save;
+        } catch (caught) {
+          caught.__caughtValue;
+        }
+        return [
+          objectValue.__objectDestructured,
+          shorthand.__shorthandDestructured,
+          arrayValue.__arrayDestructured,
+        ];
+      }
+    `, graph);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__forOfAssigned', origins: ['root/saveItem'] },
+      { key: '__forOfAssigned', origins: ['root/worldState'] },
+      { key: '__forOfDestructured', origins: ['root/save'] },
+      { key: '__caughtValue', origins: ['root/save'] },
+      { key: '__objectDestructured', origins: ['root/save'] },
+      { key: '__shorthandDestructured', origins: ['root/save'] },
+      { key: '__arrayDestructured', origins: ['root/save'] },
+    ]);
+  });
+
+  test('does not lend a var initializer to a helper call that precedes it', () => {
+    const result = scan(`
+      export function probe(save) {
+        function grab() { return current; }
+        grab()?.__beforeInitializer;
+        var current = save;
+        return grab().__afterInitializer;
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterInitializer', origins: ['root/save'] },
+    ]);
+  });
+
+  test('orders a closed-over local mutation by its helper call site', () => {
+    const result = scan(`
+      export function probe(save) {
+        const box = {};
+        function mutate() { box.future = save; }
+        box.future?.__borrowedFuture;
+        mutate();
+        return box.future.__afterMutation;
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: 'future', origins: ['syntax/local-object'] },
+      { key: '__afterMutation', origins: ['root/save'] },
+    ]);
+  });
+
+  test('orders competing closed-over local mutations by invocation sites', () => {
+    const result = scan(`
+      export function probe(worldState, save) {
+        const box = { value: save };
+        function setSave() { box.value = save; }
+        function setWorld() { box.value = worldState; }
+        setWorld();
+        box.value.__afterWorldMutation;
+        setSave();
+        return box.value.__afterSaveMutation;
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterWorldMutation', origins: ['root/worldState'] },
+      { key: '__afterSaveMutation', origins: ['root/save'] },
+    ]);
+  });
+
+  test('keeps effects after a possible early exit optional', () => {
+    const graph = {
+      ...GRAPH,
+      origins: {
+        ...GRAPH.origins,
+        'root/save': origin(
+          'root/save',
+          ['__afterSkipped', '__borrowedAfterSkip', 'rows'],
+          { rows: [{ kind: 'array', elements: ['root/saveItem'] }] },
+        ),
+      },
+    };
+    const result = scan(`
+      export function probe(worldState, save) {
+        let current = worldState;
+        const box = {};
+        function setBinding(skip) {
+          if (skip) return;
+          current = save;
+        }
+        function setField(skip) {
+          if (skip) return;
+          box.future = save;
+        }
+        setBinding(true);
+        setField(true);
+        return [current.__afterSkipped, box.future?.__borrowedAfterSkip];
+      }
+    `, graph);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterSkipped', origins: ['root/worldState'] },
+      { key: 'future', origins: ['syntax/local-object'] },
+    ]);
+  });
+
+  test('fails closed when one reader exceeds the abstract-token budget', () => {
+    const longKey = `field${'x'.repeat(75)}`;
+    const path = Array.from({ length: 60 }, () => `.${longKey}`).join('');
+    expect(() => scan(`
+      function project(value) { return value${path}; }
+      export function probe(worldState) {
+        return project(worldState).__afterPathExplosion;
+      }
+    `)).toThrow(/abstract-state budget exceeded .*token length .*refusing partial provenance/);
   });
 
   test('terminates map-element feedback in the reduced symbolic path domain', () => {
@@ -813,6 +1349,763 @@ describe('reader shape resolver provenance', () => {
     expect(result.stats.fixedPointIterations).toBeLessThan(8);
     expect(result.stats.depthTruncations).toBe(0);
     expect(result.stats.cycleCuts).toBe(0);
+  });
+
+  test('closes a detachJson array recurrence without losing its first element', () => {
+    const result = scan(`
+      function detachJson(value) {
+        if (value === null || typeof value !== 'object') return value;
+        let detached;
+        if (Array.isArray(value)) {
+          detached = value.map(entry => detachJson(entry));
+        } else {
+          detached = {};
+          for (const key of Object.keys(value)) {
+            detached[key] = detachJson(value[key]);
+          }
+        }
+        return detached;
+      }
+      function wrapper(value) { return detachJson(value); }
+      export function probe(worldState) {
+        const rows = wrapper(worldState.rows);
+        return [
+          wrapper(worldState).__afterRecursiveDetach,
+          rows.find(Boolean).__afterRecursiveDetachElement,
+        ];
+      }
+    `);
+
+    // Concrete recursive closure may conservatively retain every reachable
+    // executed element origin; the contract here is that neither the root nor
+    // the first array element disappears while the recurrence is closed.
+    expect(result.findings
+      .filter(({ origins }) => origins[0] !== 'syntax/local-object')
+      .map(({ key, origins }) => ({ key, origins }))).toEqual(expect.arrayContaining([
+      { key: '__afterRecursiveDetach', origins: ['root/worldState'] },
+      { key: '__afterRecursiveDetachElement', origins: ['root/satellite'] },
+    ]));
+    expect(result.stats.recursiveArrayPlusClosures).toBeGreaterThan(0);
+    expect(result.stats.abstractStateBudgetFailures).toBe(0);
+    expect(result.stats.maxReadTokenLength).toBeLessThanOrEqual(512);
+  });
+
+  test('closes direct and mutually recursive array-literal producers', () => {
+    const direct = scan(`
+      function nest(value) {
+        if (value) return value;
+        return [nest(value)];
+      }
+      function wrapper(value) { return nest(value); }
+      export function probe(worldState) {
+        return wrapper(worldState.rows)
+          .find(Boolean).find(Boolean).__afterRecursiveArrayLiteral;
+      }
+    `);
+    expect(direct.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterRecursiveArrayLiteral', origins: ['root/satellite'] },
+    ]);
+    expect(direct.stats.recursiveArrayPlusClosures).toBeGreaterThan(0);
+
+    const mutual = scan(`
+      function left(value) {
+        if (value) return value;
+        return [right(value)];
+      }
+      function right(value) {
+        if (value) return value;
+        return [left(value)];
+      }
+      function wrapper(value) { return left(value); }
+      export function probe(worldState) {
+        return wrapper(worldState.rows)
+          .find(Boolean).find(Boolean).find(Boolean).__afterMutualArrayLiterals;
+      }
+    `);
+    expect(mutual.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterMutualArrayLiterals', origins: ['root/satellite'] },
+    ]);
+    expect(mutual.stats.recursiveArrayPlusClosures).toBeGreaterThan(0);
+    expect(mutual.stats.abstractStateBudgetFailures).toBe(0);
+  });
+
+  test('detects recursive map feedback through a transitive helper', () => {
+    const result = scan(`
+      function deep(value, terminal) {
+        if (Array.isArray(value)) {
+          return value.map(child => again(child, terminal));
+        }
+        return terminal;
+      }
+      function again(value, terminal) {
+        return deep(value, terminal);
+      }
+      function wrapper(value, terminal) { return deep(value, terminal); }
+      export function probe(worldState) {
+        const terminal = worldState.rows.find(Boolean);
+        const rows = wrapper(worldState.rows, terminal).filter(Boolean);
+        return [
+          rows.__transitiveMapArraySurface,
+          rows.find(Boolean).find(Boolean).__afterTransitiveRecursiveMap,
+        ];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterTransitiveRecursiveMap', origins: ['root/satellite'] },
+    ]);
+    expect(result.stats.recursiveArrayPlusClosures).toBeGreaterThan(0);
+  });
+
+  test('closes an array literal owned by an inline recursive-map callback', () => {
+    const result = scan(`
+      function deepen(value) {
+        if (Array.isArray(value)) {
+          return value.map(child => [deepen(child)]);
+        }
+        return value;
+      }
+      function wrapper(value) { return deepen(value); }
+      export function probe(worldState) {
+        return wrapper(worldState.rows)
+          .find(Boolean).find(Boolean).find(Boolean).find(Boolean)
+          .__afterInlineArrayProducer;
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterInlineArrayProducer', origins: ['root/satellite'] },
+    ]);
+    expect(result.stats.recursiveArrayPlusClosures).toBeGreaterThan(0);
+    expect(result.stats.abstractStateBudgetFailures).toBe(0);
+  });
+
+  test('closes recursive Object.values array production', () => {
+    const result = scan(`
+      function valuesDeep(value) {
+        if (value) return value;
+        return Object.values({ nested: valuesDeep(value) });
+      }
+      function wrapper(value) { return valuesDeep(value); }
+      export function probe(worldState) {
+        return wrapper(worldState.rows)
+          .find(Boolean).find(Boolean).__afterRecursiveObjectValues;
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterRecursiveObjectValues', origins: ['root/satellite'] },
+    ]);
+    expect(result.stats.recursiveArrayProducts).toBeGreaterThan(0);
+    expect(result.stats.recursiveArrayPlusClosures).toBeGreaterThan(0);
+  });
+
+  test('keeps distinct helper call sites exact and closes reuse at one recursive call site', () => {
+    const finite = scan(`
+      function wrap(value) { return [value]; }
+      export function probe(worldState) {
+        const twice = wrap(wrap(worldState));
+        return [
+          twice.find(Boolean).__stillArraySurface,
+          twice.find(Boolean).find(Boolean).__afterTwoDistinctCalls,
+        ];
+      }
+    `);
+
+    expect(finite.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterTwoDistinctCalls', origins: ['root/worldState'] },
+    ]);
+    expect(finite.stats.recursiveArrayPlusClosures).toBe(0);
+
+    const transitive = scan(`
+      function wrap(value) { return [value]; }
+      function pass(value) { return wrap(value); }
+      export function probe(worldState) {
+        const twice = pass(pass(worldState));
+        return [
+          twice.find(Boolean).__transitiveArraySurface,
+          twice.find(Boolean).find(Boolean).__afterTransitiveCalls,
+        ];
+      }
+    `);
+
+    expect(transitive.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterTransitiveCalls', origins: ['root/worldState'] },
+    ]);
+    expect(transitive.stats.recursiveArrayPlusClosures).toBe(0);
+
+    const recursive = scan(`
+      function wrap(value) { return [value]; }
+      function nest(value) {
+        if (value) return value;
+        return wrap(nest(value));
+      }
+      function wrapper(value) { return nest(value); }
+      export function probe(worldState) {
+        return wrapper(worldState.rows)
+          .find(Boolean).find(Boolean).__afterSameSiteRecursion;
+      }
+    `);
+
+    expect(recursive.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterSameSiteRecursion', origins: ['root/satellite'] },
+    ]);
+    expect(recursive.stats.recursiveArrayPlusClosures).toBeGreaterThan(0);
+    expect(recursive.stats.abstractStateBudgetFailures).toBe(0);
+  });
+
+  test('qualifies invocation-owned allocations without splitting captured singletons', () => {
+    const result = scan(`
+      export function probe(worldState, save) {
+        const singleton = { selected: worldState };
+        function getSingleton() { return singleton; }
+        const firstSingleton = getSingleton();
+        const secondSingleton = getSingleton();
+        firstSingleton.selected = save;
+
+        const captured = { child: { selected: worldState } };
+        function getCapturedChild() { return captured.child; }
+        const firstChild = getCapturedChild();
+        const secondChild = getCapturedChild();
+        firstChild.selected = save;
+
+        function factory() { return { selected: worldState }; }
+        const firstFactory = factory();
+        const secondFactory = factory();
+        firstFactory.selected = save;
+
+        return [
+          secondSingleton.selected.__capturedSingleton,
+          secondChild.selected.__capturedChild,
+          secondFactory.selected.__distinctFactory,
+        ];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__capturedSingleton', origins: ['root/save'] },
+      { key: '__capturedChild', origins: ['root/save'] },
+      { key: '__distinctFactory', origins: ['root/worldState'] },
+    ]);
+  });
+
+  test('does not leak element provenance through nonnumeric array properties', () => {
+    const result = scan(`
+      export function probe(worldState) {
+        const product = worldState.rows.map(row => ({ ...row }));
+        return [
+          worldState.rows['notAnIndex']?.__ordinaryArrayLeak,
+          product['alsoNotAnIndex']?.__productArrayLeak,
+        ];
+      }
+    `);
+
+    expect(result.findings).toEqual([]);
+    expect(result.stats.recursiveArrayProducts).toBeGreaterThan(0);
+  });
+
+  test('preserves symbolic Object.values, array spreads, and literal getter returns', () => {
+    const valuesGraph = {
+      schema: 2,
+      roots: { worldState: [record(['root/worldState'])] },
+      origins: {
+        'root/worldState': origin('root/worldState', ['child', 'rows'], {
+          child: [record(['root/satellite'])],
+          rows: [{ kind: 'array', elements: ['root/satellite'] }],
+        }),
+        'root/satellite': origin('root/satellite', ['id']),
+      },
+    };
+    const result = scan(`
+      function values(value) { return Object.values(value); }
+      export function probe(worldState) {
+        const spread = [...worldState.rows];
+        return [
+          values(worldState).find(Boolean).__fromObjectValue,
+          spread.find(Boolean).__afterSpread,
+          Object.values({
+            get nested() { return worldState; },
+          }).find(Boolean).__afterGetter,
+        ];
+      }
+    `, valuesGraph);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__fromObjectValue', origins: ['root/satellite'] },
+      { key: '__afterSpread', origins: ['root/satellite'] },
+      { key: '__afterGetter', origins: ['root/worldState'] },
+    ]);
+  });
+
+  test('instantiates symbolic concat and flat transfers at the caller', () => {
+    const result = scan(`
+      function append(rows, value) { return rows.concat(value); }
+      function flatten(rows) { return rows.flat(); }
+      function flattenAt(rows, depth) { return rows.flat(depth); }
+      export function probe(worldState, save) {
+        return [
+          append(worldState.rows, save).find(Boolean).__afterScalarConcat,
+          flatten(worldState.matrix).find(Boolean).__afterSymbolicFlat,
+          worldState.matrix.flat(-1).find(Boolean)?.__negativeFlatMustNotLeak,
+          worldState.matrix.flat(+2).find(Boolean).__afterSignedPositiveFlat,
+          flattenAt(worldState.matrix, 0).find(Boolean)?.__paramFlatZeroMustNotLeak,
+        ];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterScalarConcat', origins: ['root/satellite'] },
+      { key: '__afterScalarConcat', origins: ['root/save'] },
+      { key: '__afterSymbolicFlat', origins: ['root/satellite'] },
+      { key: '__afterSignedPositiveFlat', origins: ['root/satellite'] },
+    ]);
+  });
+
+  test('applies ordered Object.values fields, call-time getters, and unary arity', () => {
+    const result = scan(`
+      export function probe(worldState, save) {
+        const box = { selected: worldState };
+        const holder = {
+          get selected() { return box.selected; },
+        };
+        const captured = Object.values(holder);
+        box.selected = save;
+        return [
+          Object.values({
+            get x() { return worldState; },
+            x: 0,
+          }).find(Boolean)?.__overwrittenGetter,
+          Object.values({ ...{ x: worldState }, x: 0 })
+            .find(Boolean)?.__overwrittenSpread,
+          Object.values({}, worldState).find(Boolean)?.__ignoredExtraArgument,
+          captured.find(Boolean).__getterAtValuesCall,
+        ];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__getterAtValuesCall', origins: ['root/worldState'] },
+    ]);
+  });
+
+  test('preserves accessors on assignment and snapshots getters when copying', () => {
+    const result = scan(`
+      export function probe(worldState, save) {
+        const accessor = {
+          get selected() { return worldState; },
+          set selected(value) {},
+        };
+        accessor.selected = save;
+
+        let current = worldState;
+        const holder = {
+          get selected() { return current; },
+        };
+        const spread = { ...holder };
+        const assigned = Object.assign({}, holder);
+        current = save;
+        return [
+          accessor.selected.__afterSetterInvocation,
+          spread.selected.__spreadGetterSnapshot,
+          assigned.selected.__assignGetterSnapshot,
+        ];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterSetterInvocation', origins: ['root/worldState'] },
+      { key: '__spreadGetterSnapshot', origins: ['root/worldState'] },
+      { key: '__assignGetterSnapshot', origins: ['root/worldState'] },
+    ]);
+  });
+
+  test('binds accessor this receivers and preserves Object.assign setter micro-order', () => {
+    const result = scan(`
+      export function probe(worldState, save) {
+        const getter = {
+          other: worldState,
+          get selected() { return this.other; },
+        };
+        getter.other = save;
+
+        const setter = {
+          other: worldState,
+          set selected(value) { this.other = value; },
+        };
+        setter.selected = save;
+
+        const assigned = {
+          other: worldState,
+          set selected(value) { this.other = value; },
+        };
+        Object.assign(assigned, { selected: worldState }, { selected: save });
+
+        return [
+          getter.selected.__getterThis,
+          setter.other.__setterThis,
+          assigned.other.__lastAssignSourceWins,
+        ];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__getterThis', origins: ['root/save'] },
+      { key: '__setterThis', origins: ['root/save'] },
+      { key: '__lastAssignSourceWins', origins: ['root/save'] },
+    ]);
+  });
+
+  test('folds accessor descriptors and setter effects in execution order', () => {
+    const result = scan(`
+      export function probe(worldState, save) {
+        let current = worldState;
+        const effect = {
+          get selected() { return current; },
+          set selected(value) { current = value; },
+        };
+        effect.selected = save;
+        const effected = effect.selected;
+
+        const assignNoop = {
+          get selected() { return worldState; },
+          set selected(value) {},
+        };
+        Object.assign(assignNoop, { selected: save });
+
+        const deleted = {
+          get selected() { return worldState; },
+          set selected(value) {},
+        };
+        delete deleted.selected;
+        deleted.selected = save;
+
+        let skipped = worldState;
+        const logical = {
+          get selected() { return worldState; },
+          set selected(value) { skipped = value; },
+        };
+        logical.selected ||= save;
+
+        const frozen = { selected: worldState };
+        const data = { selected: current };
+        current = worldState;
+        return [
+          effected.__setterEffect,
+          assignNoop.selected.__assignSetterNoop,
+          deleted.selected.__afterDeleteThenData,
+          skipped.__afterSkippedLogicalSetter,
+          frozen.selected.__ordinaryDataSnapshot,
+          data.selected.__dataInitializerProgramPoint,
+        ];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__setterEffect', origins: ['root/save'] },
+      { key: '__assignSetterNoop', origins: ['root/worldState'] },
+      { key: '__afterDeleteThenData', origins: ['root/save'] },
+      { key: '__afterSkippedLogicalSetter', origins: ['root/worldState'] },
+      { key: '__ordinaryDataSnapshot', origins: ['root/worldState'] },
+      { key: '__dataInitializerProgramPoint', origins: ['root/save'] },
+    ]);
+  });
+
+  test('retains getter values when another field makes the literal mutable', () => {
+    const result = scan(`
+      export function probe(worldState, save) {
+        const holder = {
+          get selected() { return worldState; },
+          other: worldState,
+        };
+        holder.other = save;
+        return Object.values(holder).map(value => value.__mutatedGetterHolder);
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__mutatedGetterHolder', origins: ['root/save'] },
+      { key: '__mutatedGetterHolder', origins: ['root/worldState'] },
+    ]);
+  });
+
+  test('folds computed mutation cells in execution order', () => {
+    const result = scan(`
+      export function probe(worldState, save, key) {
+        const replaced = {};
+        replaced[key] = worldState;
+        replaced[key] = save;
+
+        const deleted = {};
+        deleted[key] = worldState;
+        delete deleted[key];
+
+        const compound = {};
+        compound[key] += worldState;
+
+        const maybe = { x: worldState };
+        maybe[key] = save;
+
+        const disjoint = { x: worldState };
+        const disjointKey = 'y';
+        disjoint[disjointKey] = save;
+
+        const exact = {};
+        const exactKey = 'x';
+        exact[exactKey] = worldState;
+        exact.x = save;
+
+        return [
+          Object.values(replaced).find(Boolean).__afterDynamicReplace,
+          Object.values(deleted).find(Boolean)?.__afterDynamicDelete,
+          Object.values(compound).find(Boolean)?.__afterDynamicCompound,
+          compound.selected?.__afterNamedDynamicCompound,
+          maybe.x.__afterMaybeAlias,
+          disjoint.x.__afterDisjointDynamicWrite,
+          Object.values(exact).find(Boolean).__afterExactFieldReplace,
+        ];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterDynamicReplace', origins: ['root/save'] },
+      { key: '__afterMaybeAlias', origins: ['root/save'] },
+      { key: '__afterMaybeAlias', origins: ['root/worldState'] },
+      { key: '__afterDisjointDynamicWrite', origins: ['root/worldState'] },
+      { key: '__afterExactFieldReplace', origins: ['root/save'] },
+    ]);
+  });
+
+  test('keeps stable computed-key correlation in named facets', () => {
+    const result = scan(`
+      export function probe(worldState, save, key) {
+        const deleted = { x: save };
+        deleted[key] = worldState;
+        delete deleted[key];
+
+        const replaced = { x: save };
+        replaced[key] = worldState;
+        replaced[key] = save;
+
+        return [
+          deleted.x.__afterStableDynamicDelete,
+          replaced.x.__afterStableDynamicReplace,
+        ];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: 'x', origins: ['syntax/local-object'] },
+      { key: '__afterStableDynamicDelete', origins: ['root/save'] },
+      { key: '__afterStableDynamicReplace', origins: ['root/save'] },
+    ]);
+  });
+
+  test('canonicalizes immutable aliases of one unknown computed key cell', () => {
+    const result = scan(`
+      export function probe(worldState, save, key) {
+        const alias = key;
+        const second = alias;
+        const box = {};
+        box[key] = worldState;
+        box[second] = save;
+        return Object.values(box).find(Boolean).__afterUnknownKeyAlias;
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterUnknownKeyAlias', origins: ['root/save'] },
+    ]);
+  });
+
+  test('lets a definite computed write replace spread absence provenance', () => {
+    const result = scan(`
+      export function probe(worldState, save) {
+        const box = { ...worldState };
+        const key = 'localOnly';
+        box[key] = save;
+        return box.localOnly.__afterExactDynamicWrite;
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterExactDynamicWrite', origins: ['root/save'] },
+    ]);
+  });
+
+  test('uses object truthiness and nullishness for logical dynamic cells', () => {
+    const result = scan(`
+      export function probe(worldState, save, key) {
+        const coalesced = {};
+        coalesced[key] = worldState;
+        coalesced[key] ??= save;
+
+        const orValue = {};
+        orValue[key] = worldState;
+        orValue[key] ||= save;
+
+        const andValue = {};
+        andValue[key] = worldState;
+        andValue[key] &&= save;
+
+        return [
+          Object.values(coalesced).find(Boolean).__logicalCoalesceCell,
+          Object.values(orValue).find(Boolean).__logicalOrCell,
+          Object.values(andValue).find(Boolean).__logicalAndCell,
+        ];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__logicalCoalesceCell', origins: ['root/worldState'] },
+      { key: '__logicalOrCell', origins: ['root/worldState'] },
+      { key: '__logicalAndCell', origins: ['root/save'] },
+    ]);
+  });
+
+  test('preserves stable dynamic cells across spread and Object.assign order', () => {
+    const result = scan(`
+      export function probe(worldState, save, key) {
+        const first = {};
+        first[key] = worldState;
+        const second = {};
+        second[key] = save;
+
+        const spread = { ...first, ...second };
+        const assigned = {};
+        assigned[key] = worldState;
+        Object.assign(assigned, second);
+
+        return [
+          Object.values(spread).find(Boolean).__afterDynamicSpread,
+          spread.x?.__afterDynamicSpreadNamed,
+          Object.values(assigned).find(Boolean).__afterDynamicAssign,
+        ];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterDynamicSpread', origins: ['root/save'] },
+      { key: 'x', origins: ['syntax/local-object'] },
+      { key: '__afterDynamicSpreadNamed', origins: ['root/save'] },
+      { key: '__afterDynamicAssign', origins: ['root/save'] },
+    ]);
+  });
+
+  test('does not let an absent source cell delete a spread destination cell', () => {
+    const result = scan(`
+      export function probe(worldState, save, key) {
+        const first = {};
+        first[key] = worldState;
+        const second = {};
+        second[key] = save;
+        delete second[key];
+
+        const spread = { ...first, ...second };
+        const assigned = {};
+        assigned[key] = worldState;
+        Object.assign(assigned, second);
+        return [
+          Object.values(spread).find(Boolean).__spreadAbsentMustNotKill,
+          Object.values(assigned).find(Boolean).__assignAbsentMustNotKill,
+        ];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__spreadAbsentMustNotKill', origins: ['root/worldState'] },
+      { key: '__assignAbsentMustNotKill', origins: ['root/worldState'] },
+    ]);
+  });
+
+  test('preserves paired getter descriptors and computed literal cells', () => {
+    const result = scan(`
+      export function probe(worldState, save, key) {
+        const paired = {
+          get selected() { return worldState; },
+          set selected(value) {},
+        };
+        const setterOnly = {
+          selected: worldState,
+          set selected(value) {},
+        };
+        const computed = {
+          [key]: worldState,
+          [key]: save,
+        };
+        const computedPair = {
+          get [key]() { return worldState; },
+          set [key](value) {},
+        };
+
+        return [
+          Object.values(paired).find(Boolean).__pairedAccessor,
+          Object.values(setterOnly).find(Boolean)?.__setterOnlyKillsData,
+          Object.values(computed).find(Boolean).__computedLastWriter,
+          Object.values(computedPair).find(Boolean).__computedAccessorPair,
+        ];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__pairedAccessor', origins: ['root/worldState'] },
+      { key: '__computedLastWriter', origins: ['root/save'] },
+      { key: '__computedAccessorPair', origins: ['root/worldState'] },
+    ]);
+  });
+
+  test('does not attribute elements through a plain-record array spread', () => {
+    const result = scan(`
+      export function probe(worldState) {
+        const invalidAtRuntime = [...worldState];
+        return invalidAtRuntime.find(Boolean)?.__plainRecordSpread;
+      }
+    `);
+
+    expect(result.findings).toEqual([]);
+  });
+
+  test('closes Object.values through an immutable alias chain', () => {
+    const result = scan(`
+      function valuesDeep(value) {
+        if (value) return value;
+        const holder = { nested: valuesDeep(value) };
+        const alias = holder;
+        const secondAlias = alias;
+        return Object.values(secondAlias);
+      }
+      function wrapper(value) { return valuesDeep(value); }
+      export function probe(worldState) {
+        return wrapper(worldState.rows)
+          .find(Boolean).find(Boolean).__afterAliasedObjectValues;
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterAliasedObjectValues', origins: ['root/satellite'] },
+    ]);
+    expect(result.stats.recursiveArrayPlusClosures).toBeGreaterThan(0);
+    expect(result.stats.abstractStateBudgetFailures).toBe(0);
+  });
+
+  test('falls back to flow-sensitive locals for mutated Object.values aliases', () => {
+    const result = scan(`
+      export function probe(worldState, save) {
+        const holder = { selected: worldState };
+        const alias = holder;
+        alias.selected = save;
+        let rebound = { selected: worldState };
+        rebound = { selected: save };
+        return [
+          Object.values(alias).find(Boolean).__afterAliasMutation,
+          Object.values(rebound).find(Boolean).__afterAliasRebind,
+        ];
+      }
+    `);
+
+    expect(result.findings.map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__afterAliasMutation', origins: ['root/save'] },
+      { key: '__afterAliasRebind', origins: ['root/save'] },
+    ]);
   });
 
   test('keeps inline recursive-map callers in separate symbolic contexts', () => {
