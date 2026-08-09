@@ -6769,16 +6769,19 @@ credits return, and a later five-run full-suite soak remains the strongest accep
 the observed-shape reader scanner, recorded because the Codex session may exhaust its weekly
 allowance before the validation train completes. Code of record is worktree
 `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`, branch
-`claude/composite-r4`, at committed head `2c810d167d016302e641fc9cfe74fff57475b14e`.
-The only scanner-lane source/test edits are `scripts/lib/reader-shape-scan.mjs` and
-`tests/lint/readerShapeResolver.test.js`; preserve every other dirty file as parallel-owned.
+`claude/composite-r4`, at committed head `1ca709aa` after parallel-owned continuation commits.
+The scanner source/test remained unchanged by those later commits and still derive from
+checkpoint `4d34711d`. The only scanner-lane source/test edits are
+`scripts/lib/reader-shape-scan.mjs` and `tests/lint/readerShapeResolver.test.js`; this row is
+the third owned path. Preserve every other dirty file as parallel-owned.
 
-**LANDED FOUNDATION.** Commits `93e7ed50`, `6e7acc4d`, `0ea7ff12`, and `2c810d16` contain the
-prior contract, isolation, migration-governance, and fixed-point repairs. The current
-uncommitted continuation removes two unsound shortcuts found by adversarial review, separates
-family-only heap preflight from exact occurrence identity, refines `Object.keys` clone writes
-to the demanded key, projects flow contexts to mutation-owner cutoffs that can actually be
-queried, and composes nested wrapper call sites into invocation-owned allocation identities.
+**LANDED FOUNDATION.** Commits `93e7ed50`, `6e7acc4d`, `0ea7ff12`, `2c810d16`, `07ab7d01`,
+and `4d34711d` contain the prior contract, isolation, migration-governance, fixed-point,
+invocation-identity, and null-initializer repairs. The current uncommitted continuation adds
+the bounded performance repair: it indexes completed call edges once, memoizes owner closure
+by cutoff, filters heap effects to the read's executable owners once per read, memoizes a heap
+demand only for the complete cutoff + active-effect call context, and captures proven-fresh
+recursive allocation frames without splitting memoized/cross-invocation storage.
 It also adds regressions for recursive JSON detachment, cross-invocation mutation, strong
 singleton writes, wrapper identity, memoized-wrapper aliasing, demand-scoped key copying,
 captured memo effects, mixed local/external receiver identity, and raw recursive-clone
@@ -6801,12 +6804,16 @@ fresh receiver was over-joining sibling invocations, while a captured memoized r
 a later invocation's mutation. The final proof requires a same-owner lexical receiver whose
 every object identity source is fresh in that invocation; parameters, captures, aliases,
 logical transfers and unproven calls fail closed. Captured receivers use exact resolution
-only under their already-selected execution cutoff. The current complete resolver file passes
-**89 / 89** in 16.46 s, including the later full-estate null-guard regression.
+only under their already-selected execution cutoff. The production-clean continuation adds a
+90th nested-clone/storage-identity regression. The current complete resolver file passes
+**90 / 90** in 16.04 s in the disposable clone after every diagnostic hook and the rejected
+record-only experiment were removed. The older Product-to-Plus counter assertion was retired
+because captured recursive invocation frames can close the same array relation directly; the
+root/element provenance, zero-budget-failure, and bounded-token assertions remain.
 The foreign `node scripts/check-test-ratchet.mjs` mutex owner was allowed to finish; no process
 was killed and the passing run acquired the slot atomically.
 
-**THE EXACT ESTATE BLOCKER IS CLOSED.** The decisive diagnostic showed that `detachJson`'s
+**THE EXACT TARGET CORRECTNESS BLOCKER IS CLOSED.** The decisive diagnostic showed that `detachJson`'s
 `detached = {}` target was still a raw owner-local allocation while its effect was already
 executing inside one concrete invocation. It therefore had no call view, and the resolver
 replayed all callers despite having already selected one. The resolver now carries the active
@@ -6815,30 +6822,54 @@ The exact `src/application/commands/commandEnvelope.js:4233:4251`
 (`ownerRef.accountId`) probe passes over a healthy **2,074-file / 8,637-origin** estate:
 **106 tokens**, known local container, fixed point in 3 iterations, maximum token length 313,
 and **9,925 / 16,384** state-growth steps. The temporary probe driver and all debug plumbing
-were removed. No repository-scale report, historical proof, full gate, distribution
-verification, or commit has run after this green; do not infer them from the exact receipt.
+were removed. This is a focused correctness receipt, not proof that the repository-scale scan
+finishes within an operationally acceptable time.
 
-**REPOSITORY-SCALE CHECKPOINT.** Scanner checkpoint `07ab7d01` was created through an
-isolated index/CAS update and a clean detached clone at that SHA admitted the authoritative
-`--scan-only` run. After about eight minutes of healthy CPU-bound analysis, that full estate
-found one separate fail-closed defect: an uninitialized lexical receiver with no initializer
-could pass the non-escaping preflight and reach `ts.isCallExpression(null)`. The repair now
-rejects the absent initializer before the TypeScript predicate, with a focused optional-read
-regression. The first run published no partial artifact. The resolver rerun passes
-**89 / 89**; the new checkpoint commit and authoritative restart remain pending at this exact
-handoff point.
+**REPOSITORY-SCALE CHECKPOINT.** The clean `4d34711d` authoritative restart began at
+**2026-08-09 13:31:27 EDT** and was stopped at the promised hard ceiling at approximately
+**15:31:30 EDT**. It remained CPU-bound with stable memory behavior, but published no partial
+artifact. The exclusive target
+`/var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/sf-osr-evidence.XXXXXX.LDN2WVToaB/current-exact.json`
+does not exist. Native sample evidence is retained at
+`/var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/sf-osr-evidence.XXXXXX.LDN2WVToaB/current-exact-timeout.sample.txt`.
+This proves active pathological scaling, not a lock wait and not an acceptable routine gate.
+
+Reader-level instrumentation localized the dominant path. One demand on the recursive
+`commandEnvelope.js:3304` fresh `{}` allocation repeatedly scanned a 2,357-effect estate
+across 1,061 owners, enumerated 63–71 occurrence contexts, and instantiated 40 even though
+only five effects could be relevant. The safe repair combines a pre-indexed call closure,
+read-scoped active-effect slice, approximation-version heap memo keyed by the full execution
+context, and a captured recursive allocation frame admitted only by same-owner freshness plus
+return-only escape proof. The nested clone regression preserves the first invocation, while a
+stored recursive memo regression proves later mutation still aliases the earlier product.
+
+The bounded post-repair corpus checkpoint is
+`/var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/sf-osr-evidence.XXXXXX.LDN2WVToaB/current-exact-progress-wrapper-composition.jsonl`.
+The hotspot now carries **2–3 concrete invocation calls** and instantiates **1–8** matching
+effects. Representative `commandContext.js` nested reads fell from **4.309 s / 5.032 s** to
+**1.222 s / 1.248 s** before the checkpoint was deliberately stopped after read 577. The
+production-clean patch is now ported to the live worktree and remains uncommitted. Live
+`node --check`, focused ESLint, and `git diff --check` pass; the complete resolver file passes
+**90 / 90** in **18.12 s** through the atomic mutex. The disposable clone's old
+`scripts/gate-mutex.sh` predates atomic `--run` execution and silently performs only an
+availability check; always invoke the live worktree's wrapper by absolute path.
 
 **EXACT RESUME ORDER.** Use the mutex atomically and preserve all foreign worktree dirt:
 
-1. Resolver acceptance is complete: `sh scripts/gate-mutex.sh --run -- npx vitest run tests/lint/readerShapeResolver.test.js --reporter=dot` → **89 / 89**.
-2. Exact estate acceptance is complete with the receipt above.
-3. Execute
-   `sh scripts/gate-mutex.sh --run -- node scripts/check-observed-shape-readers.mjs --report`.
-4. Prove the governed historical/archive path against the same scanner inputs; do not write or
-   re-freeze `scripts/.observed-shape-readers-baseline.json`.
-5. Run `npm run check`, then `npm run verify:dist`, both with no concurrent Vitest/scanner lane.
-6. Record the immutable results here and commit only the two scanner files plus this row through
-   an isolated index/CAS update. Never stage unrelated worktree dirt.
+1. In the live worktree run `node --check`, focused ESLint, `git diff --check`, and the complete
+   resolver file through the live absolute mutex wrapper; expected result is **90 / 90**.
+2. Record that receipt here and create one isolated-index/CAS checkpoint containing only the
+   two scanner files plus this row. Never stage unrelated worktree dirt or discard later
+   parallel-owned commits.
+3. Create a fresh clean detached clone at that checkpoint. Run one authoritative external
+   `--scan-only` artifact with durable read progress and a substantially tighter operational
+   ceiling; never reuse the dirty diagnostic clone as governance evidence.
+4. Generate exact and legacy artifacts from the same committed scanner/input snapshot, build
+   and review the schema-3 migration bundle, then perform the explicit governed re-freeze.
+5. Prove the governed historical/archive path against the same scanner inputs; do not treat it
+   as a substitute for current-tree evidence.
+6. Run `npm run check`, then `npm run verify:dist`, both with no concurrent Vitest/scanner lane,
+   and record every immutable receipt here.
 
 If step 1 regresses, audit `callEntriesOfView`, `withViewCallFrames`, `heapTargetIdentity`,
 `sameHeapTarget`, `activeEffectCallChain`, and the local-token arm of `instantiateSymbolic`

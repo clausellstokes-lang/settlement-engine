@@ -1404,13 +1404,14 @@ describe('reader shape resolver provenance', () => {
     // Concrete recursive closure may conservatively retain every reachable
     // executed element origin; the contract here is that neither the root nor
     // the first array element disappears while the recurrence is closed.
+    // Captured recursive invocation frames can close this relation directly,
+    // without requiring the older Product-to-Plus widening path.
     expect(result.findings
       .filter(({ origins }) => origins[0] !== 'syntax/local-object')
       .map(({ key, origins }) => ({ key, origins }))).toEqual(expect.arrayContaining([
       { key: '__afterRecursiveDetach', origins: ['root/worldState'] },
       { key: '__afterRecursiveDetachElement', origins: ['root/satellite'] },
     ]));
-    expect(result.stats.recursiveArrayPlusClosures).toBeGreaterThan(0);
     expect(result.stats.abstractStateBudgetFailures).toBe(0);
     expect(result.stats.maxReadTokenLength).toBeLessThanOrEqual(512);
   });
@@ -1849,6 +1850,71 @@ describe('reader shape resolver provenance', () => {
     ]);
     expect(result.stats.abstractStateBudgetFailures).toBe(0);
     expect(result.stats.maxReadStateGrowth).toBeLessThan(256);
+  });
+
+  test('persists recursive clone frames without splitting stored products', () => {
+    const nested = scan(`
+      function detachJson(value, path = '$', seen = new Set(), depth = 0) {
+        if (value === null || typeof value === 'string' || typeof value === 'boolean') {
+          return value;
+        }
+        if (typeof value === 'number') return value;
+        if (typeof value !== 'object') throw new TypeError('JSON only');
+        if (seen.has(value)) throw new TypeError('cycle');
+        seen.add(value);
+        let detached;
+        if (Array.isArray(value)) {
+          detached = value.map((entry, index) => (
+            detachJson(entry, path + '[' + index + ']', seen, depth + 1)
+          ));
+        } else {
+          detached = {};
+          for (const key of Object.keys(value)) {
+            detached[key] = detachJson(value[key], path + '.' + key, seen, depth + 1);
+          }
+        }
+        seen.delete(value);
+        return detached;
+      }
+      function wrap(value) {
+        return detachJson({ nested: { selected: value } });
+      }
+      export function probe(worldState, save) {
+        const first = wrap(worldState);
+        wrap(save);
+        return first.nested.selected.__nestedCloneInvocation;
+      }
+    `);
+
+    expect(nested.findings
+      .filter(({ key }) => key === '__nestedCloneInvocation')
+      .map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__nestedCloneInvocation', origins: ['root/worldState'] },
+    ]);
+    const stored = scan(`
+      let cached;
+      function recursiveMemo(value, selected) {
+        if (!cached) {
+          const product = {};
+          product.selected = value;
+          cached = product;
+        }
+        cached.selected = selected;
+        if (value.next) recursiveMemo(value.next, selected);
+        return cached;
+      }
+      export function probe(worldState, save) {
+        const first = recursiveMemo(worldState, worldState);
+        recursiveMemo(worldState, save);
+        return first.selected.__storedRecursiveIdentity;
+      }
+    `);
+
+    expect(stored.findings
+      .filter(({ key }) => key === '__storedRecursiveIdentity')
+      .map(({ key, origins }) => ({ key, origins }))).toEqual([
+      { key: '__storedRecursiveIdentity', origins: ['root/save'] },
+    ]);
   });
 
   test('does not leak element provenance through nonnumeric array properties', () => {

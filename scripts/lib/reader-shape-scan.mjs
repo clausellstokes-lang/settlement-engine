@@ -2123,12 +2123,14 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
   let currentReadBudget = null;
   let activeNonEscapingProducerOwners = null;
   let activeExecutionOwners = null;
+  let activeHeapEffects = null;
   let activeHeapEffectDiagnostic = null;
   let activeEffectCallChain = [];
   let heapEffectsResolvingReceiver = new Set();
   const nonEscapingBindingCache = new WeakMap();
   const producerOwnerCache = new WeakMap();
   const reachableOwnerCache = new WeakMap();
+  const executingOwnersBeforeCache = new WeakMap();
   const diagnosticSites = new Map();
   const siteOf = (node, file) => (node ? `${file}:${node.pos}:${node.end}` : null);
   const safeIdentityUse = (identifier) => {
@@ -2212,21 +2214,40 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     reachableOwnerCache.set(rootOwner, owners);
     return owners;
   };
+  // Index the first statically completed call edge once. The former query
+  // scanned every global call-site list for every target, invocation event and
+  // property read even though the only question is whether ANY matching edge
+  // has completed before the cutoff.
+  const earliestCallEndByOwner = new WeakMap();
+  const indexCallEnd = (target, callSite) => {
+    const site = callSite.site || {
+      end: callSite.call.end,
+      owner: flowOwnerOf(callSite.call),
+    };
+    if (!site.owner) return;
+    let byTarget = earliestCallEndByOwner.get(site.owner);
+    if (!byTarget) {
+      byTarget = new WeakMap();
+      earliestCallEndByOwner.set(site.owner, byTarget);
+    }
+    const prior = byTarget.get(target);
+    if (prior == null || site.end < prior) byTarget.set(target, site.end);
+  };
+  for (const [target, sites] of idx.callSites) {
+    for (const callSite of sites) indexCallEnd(target, callSite);
+  }
+  for (const [target, sites] of idx.elementCallSites) {
+    for (const callSite of sites) indexCallEnd(target, callSite);
+  }
   const ownersExecutingBefore = (owner, cutoff) => {
     if (!owner) return EMPTY;
+    let versions = executingOwnersBeforeCache.get(owner);
+    if (versions?.has(cutoff)) return versions.get(cutoff);
     let owners = new Set([owner]);
     if (ts.isFunctionLike(owner)) owners.add(owner.getSourceFile());
     for (const target of idx.callGraph.get(owner) || []) {
-      const completed = [
-        ...(idx.callSites.get(target) || []),
-        ...(idx.elementCallSites.get(target) || []),
-      ].some((callSite) => {
-        const site = callSite.site || {
-          end: callSite.call.end,
-          owner: flowOwnerOf(callSite.call),
-        };
-        return site.owner === owner && site.end <= cutoff;
-      });
+      const earliest = earliestCallEndByOwner.get(owner)?.get(target);
+      const completed = earliest != null && earliest <= cutoff;
       if (completed) owners = union(owners, reachableOwnersFrom(target));
     }
     if (ts.isFunctionLike(owner)) {
@@ -2235,10 +2256,25 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         ownersExecutingBefore(owner.getSourceFile(), Number.POSITIVE_INFINITY),
       );
     }
+    if (!versions) {
+      versions = new Map();
+      executingOwnersBeforeCache.set(owner, versions);
+    }
+    versions.set(cutoff, owners);
     return owners;
   };
   const executionOwnersForRead = (owner, events, cutoff) => {
-    let owners = new Set(ownersExecutingBefore(owner, cutoff));
+    const cutoffsByOwner = new Map();
+    const addCutoff = (candidate, candidateCutoff) => {
+      if (!candidate) return;
+      let cutoffs = cutoffsByOwner.get(candidate);
+      if (!cutoffs) {
+        cutoffs = new Set();
+        cutoffsByOwner.set(candidate, cutoffs);
+      }
+      cutoffs.add(candidateCutoff);
+    };
+    addCutoff(owner, cutoff);
     for (const event of events) {
       for (const entry of event.callChain || []) {
         const caller = entry.callSite?.site?.owner
@@ -2246,7 +2282,13 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         const callerCutoff = entry.callSite?.site?.end
           ?? entry.callSite?.call?.end
           ?? Number.POSITIVE_INFINITY;
-        owners = union(owners, ownersExecutingBefore(caller, callerCutoff));
+        addCutoff(caller, callerCutoff);
+      }
+    }
+    let owners = new Set();
+    for (const [candidate, candidateCutoffs] of cutoffsByOwner) {
+      for (const candidateCutoff of candidateCutoffs) {
+        owners = union(owners, ownersExecutingBefore(candidate, candidateCutoff));
       }
     }
     return owners;
@@ -2912,7 +2954,9 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         hasFlowSensitiveMutations: false,
         intrinsicKeys: new Set(),
         multiplicity: view.kind === 'callback'
-          || callEntriesOfView(view).some(({ call }) => loopOwnerOf(call))
+          || callEntriesOfView(view).some(({ call, recursiveFrame }) => (
+            recursiveFrame || loopOwnerOf(call)
+          ))
           ? 'many'
           : 'one',
         sourceToken,
@@ -2931,7 +2975,9 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       }
     }
     if ((view.kind === 'callback'
-      || callEntriesOfView(view).some(({ call }) => loopOwnerOf(call)))
+      || callEntriesOfView(view).some(({ call, recursiveFrame }) => (
+        recursiveFrame || loopOwnerOf(call)
+      )))
       && record.multiplicity !== 'many') {
       record.multiplicity = 'many';
     }
@@ -2948,7 +2994,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         const fn = entry.target?.fn;
         if (!fn) continue;
         priorFrames.push([fn, sentinelFrames.get(fn)]);
-        sentinelFrames.set(fn, invocationFrameFor({
+        sentinelFrames.set(fn, entry.frame || invocationFrameFor({
           fn,
           callSite: {
             file: entry.file,
@@ -3002,13 +3048,16 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         if (record.view.kind === 'call') {
           const entries = callEntriesOfView(record.view);
           const allocation = entries[0];
-          addition = withViewCallFrames(entries.slice(1), () => instantiateSymbolic(
+          addition = withViewCallFrames(
+            allocation.frame ? entries : entries.slice(1),
+            () => instantiateSymbolic(
             token,
             allocation.call,
             allocation.file,
             0,
             allocation.target,
-          ));
+            ),
+          );
         } else {
           addition = instantiateCallbackSymbolic(
             token,
@@ -3394,6 +3443,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
   }
 
   const heapStepApprox = new Map();
+  const heapStepStableVersion = new Map();
   const heapStepsEvaluating = new Set();
   const heapTargetFamily = (token) => {
     let base = unflowToken(token);
@@ -3411,8 +3461,8 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     if (!record?.view) return heapTargetFamily(base);
     const source = heapTargetFamily(record.sourceToken || base);
     if (record.view.kind === 'call') {
-      const chain = callEntriesOfView(record.view).map(({ call, file }) => (
-        `${file}:${call.pos}:${call.end}`
+      const chain = callEntriesOfView(record.view).map(({ call, file, frameKey }) => (
+        `${file}:${call.pos}:${call.end}:${frameKey || 'dynamic'}`
       )).join('>');
       return `call:${chain}:${source}`;
     }
@@ -3750,6 +3800,8 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     )
   );
   const invocationOwnedReceiverCache = new Map();
+  const invocationReturnBindingCache = new WeakMap();
+  const recursiveInvocationProductCache = new WeakMap();
   const primitiveIdentitySource = (expression) => {
     const value = unwrap(expression);
     if (!value) return true;
@@ -3834,6 +3886,77 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     invocationOwnedReceiverCache.set(cacheKey, result);
     return result;
   };
+  /** A recursive allocation may be qualified by its concrete invocation only
+   * when its fresh receiver never enters cross-invocation storage. Returning
+   * the receiver and reading/writing its own properties are safe; aliases,
+   * captures, outer assignments, collection storage and unknown calls fail
+   * closed so memoized products retain their shared identity. */
+  const bindingEscapesOnlyByReturn = (binding, owner) => {
+    if (invocationReturnBindingCache.has(binding)) {
+      return invocationReturnBindingCache.get(binding);
+    }
+    const source = idx.sources.get(binding.file);
+    if (!source) return false;
+    let safe = true;
+    const visit = (node) => {
+      if (!safe) return;
+      if (ts.isIdentifier(node) && idx.bindingOf(node) === binding) {
+        let current = node;
+        while (current.parent && (ts.isParenthesizedExpression(current.parent)
+          || ts.isAsExpression(current.parent)
+          || ts.isNonNullExpression(current.parent)
+          || ts.isSatisfiesExpression?.(current.parent))) current = current.parent;
+        const parent = current.parent;
+        const declaration = node.parent;
+        const directWrite = Boolean(
+          (ts.isVariableDeclaration(declaration) && declaration.name === node)
+          || (parent && ts.isBinaryExpression(parent) && parent.left === current
+            && (parent.operatorToken.kind === ts.SyntaxKind.EqualsToken
+              || (parent.operatorToken.kind >= ts.SyntaxKind.FirstCompoundAssignment
+                && parent.operatorToken.kind <= ts.SyntaxKind.LastCompoundAssignment)))
+          || (parent && (ts.isForInStatement(parent) || ts.isForOfStatement(parent))
+            && parent.initializer === current)
+          || (parent && (ts.isPrefixUnaryExpression(parent)
+            || ts.isPostfixUnaryExpression(parent)) && parent.operand === current)
+        );
+        const propertyReceiver = Boolean(
+          parent && (ts.isPropertyAccessExpression(parent)
+            || ts.isElementAccessExpression(parent)) && parent.expression === current
+        );
+        if (flowOwnerOf(node) !== owner
+          || (!directWrite && !propertyReceiver
+            && !callFlowsDirectlyToReturn(node, owner)
+            && !safeIdentityUse(node))) safe = false;
+      }
+      ts.forEachChild(node, visit);
+    };
+    visit(source);
+    invocationReturnBindingCache.set(binding, safe);
+    return safe;
+  };
+  const recursiveInvocationProductBinding = (target, token) => {
+    let byFamily = recursiveInvocationProductCache.get(target.fn);
+    if (!byFamily) {
+      byFamily = new Map();
+      recursiveInvocationProductCache.set(target.fn, byFamily);
+    }
+    const family = heapTargetFamily(token);
+    if (byFamily.has(family)) return byFamily.get(family);
+    let product = null;
+    for (const effect of idx.heapEffects || []) {
+      if (effect.mutationSite?.owner !== target.fn) continue;
+      const invocationOwned = invocationOwnsReceiverForTarget(effect, token);
+      const receiver = unwrap(effect.receiver);
+      const binding = receiver && ts.isIdentifier(receiver) ? idx.bindingOf(receiver) : null;
+      const returnOnly = binding ? bindingEscapesOnlyByReturn(binding, target.fn) : false;
+      if (invocationOwned && binding && returnOnly) {
+        product = binding;
+        break;
+      }
+    }
+    byFamily.set(family, product);
+    return product;
+  };
   const keyDomainRefinements = new Map();
   const ownKeyEnumerationSourceOf = (binding) => {
     if (!binding || binding.k !== 'expr' || (binding.writes || []).length
@@ -3859,8 +3982,33 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
   };
 
   function contextualHeapStepsFor(targetToken, demandedKey = null) {
-    const demand = `${heapTargetIdentity(targetToken)}:${demandedKey ?? '*'}:${cutoffSignatureOf()}`;
+    const targetIdentity = heapTargetIdentity(targetToken);
+    // A recursive heap demand can be evaluated under several concrete effect
+    // call chains at the same lexical cutoff. Cache only within the complete
+    // execution context; sharing a raw demand with an effect-qualified demand
+    // would conflate distinct runtime allocations.
+    const effectCallSignature = activeEffectCallChain.map(({ fn, callSite }) => [
+      callSite.file,
+      callSite.call.pos,
+      callSite.call.end,
+      fn.getSourceFile().fileName,
+      fn.pos,
+      fn.end,
+    ]);
+    const demand = JSON.stringify([
+      targetIdentity,
+      demandedKey,
+      cutoffSignatureOf(),
+      activeHeapEffectDiagnostic,
+      effectCallSignature,
+    ]);
     const prior = heapStepApprox.get(demand) || new Map();
+    if (heapStepStableVersion.get(demand) === approximationVersion) {
+      return [...prior.values()].sort((left, right) => compareExecutionOrder(
+        left.executionOrder,
+        right.executionOrder,
+      ));
+    }
     if (heapStepsEvaluating.has(demand)) return [...prior.values()];
     const targetLocal = isLocalToken(unflowToken(targetToken))
       ? localRecords.get(unflowToken(targetToken))
@@ -3873,6 +4021,8 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         entry.target?.fn
           ? [{
             fn: entry.target.fn,
+            frame: entry.frame,
+            recursiveFrame: entry.recursiveFrame,
             callSite: {
               file: entry.file,
               args: [...entry.call.arguments],
@@ -3900,15 +4050,15 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       : (activeOwnerIndex >= 0
         ? activeEffectCallChain.slice(0, activeOwnerIndex + 1)
         : []);
-    const targetInvocationCalls = targetInvocationChain.map(
-      ({ callSite }) => callSite.call,
-    );
+    const targetInvocationCalls = targetInvocationChain
+      .filter(({ recursiveFrame }) => !recursiveFrame)
+      .map(({ callSite }) => callSite.call);
     const producerOwnedNonEscape = Boolean(
       targetSourceOwner && activeNonEscapingProducerOwners?.has(targetSourceOwner),
     );
     heapStepsEvaluating.add(demand);
     try {
-      for (const effect of idx.heapEffects || []) {
+      for (const effect of activeHeapEffects || idx.heapEffects || []) {
         if (heapEffectsResolvingReceiver.has(effect.id)) continue;
         const effectOwner = effect.mutationSite?.owner;
         if (activeExecutionOwners && !activeExecutionOwners.has(effectOwner)) continue;
@@ -4077,10 +4227,12 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         }
       }
       heapStepApprox.set(demand, prior);
-      return [...prior.values()].sort((left, right) => compareExecutionOrder(
+      heapStepStableVersion.set(demand, approximationVersion);
+      const result = [...prior.values()].sort((left, right) => compareExecutionOrder(
         left.executionOrder,
         right.executionOrder,
       ));
+      return result;
     } finally {
       heapStepsEvaluating.delete(demand);
     }
@@ -5571,7 +5723,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     try {
       for (const entry of effect.executionCallChain || []) {
         priorFrames.push([entry.fn, sentinelFrames.get(entry.fn)]);
-        sentinelFrames.set(entry.fn, invocationFrameFor(entry, depth + 1));
+        sentinelFrames.set(entry.fn, entry.frame || invocationFrameFor(entry, depth + 1));
       }
       return evaluate();
     } finally {
@@ -6842,6 +6994,89 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     return out.size ? out : new Set([KEY_UNKNOWN]);
   }
 
+  const cloneInvocationFrame = (frame) => new Map(
+    [...frame].map(([binding, value]) => [binding, {
+      objects: new Set(value.objects || EMPTY),
+      keys: new Set(value.keys || EMPTY),
+    }]),
+  );
+  const callIsInsideRecursiveComponent = (fn, call) => {
+    const caller = flowOwnerOf(call);
+    return Boolean(
+      ts.isFunctionLike(caller)
+      && reachableOwnersFrom(caller).has(fn)
+      && reachableOwnersFrom(fn).has(caller),
+    );
+  };
+  const recursiveCallEntry = (fn, callSite) => {
+    const call = callSite.call;
+    return {
+      call,
+      file: callSite.file,
+      target: { fn, file: fn.getSourceFile().fileName },
+      recursiveFrame: callIsInsideRecursiveComponent(fn, call),
+    };
+  };
+  const qualifyRecursiveCallReturns = (tokens, target, call, file, frame, signature) => {
+    let out = EMPTY;
+    const frameKey = sha256(signature);
+    const currentEntry = {
+      call,
+      file,
+      target,
+      frame: cloneInvocationFrame(frame),
+      frameKey,
+      recursiveFrame: callIsInsideRecursiveComponent(target.fn, call),
+    };
+    const seenCalls = new Set([call]);
+    const outerEntries = [];
+    // Execution chains are outer-to-inner; local views are allocation-first.
+    // Retain the exact nonrecursive caller suffix while closing repeated SCC
+    // edges as multiplicity-many rather than growing an infinite call string.
+    for (const execution of [...activeEffectCallChain].reverse()) {
+      const entry = recursiveCallEntry(execution.fn, execution.callSite);
+      if (seenCalls.has(entry.call)) continue;
+      seenCalls.add(entry.call);
+      outerEntries.push(entry);
+    }
+    for (const token of tokens) {
+      if (!isLocalToken(token)) {
+        out = union(out, new Set([token]));
+        continue;
+      }
+      const local = localRecords.get(unflowToken(token));
+      const source = local ? localEvaluationOf(local).source : null;
+      if (local?.view && !currentEntry.recursiveFrame && !isArrayLikeToken(token)) {
+        out = union(out, instantiateSymbolic(token, call, file, 0, target));
+        continue;
+      }
+      const productBinding = local && !local.view && source?.allocationOwner === target.fn
+        ? recursiveInvocationProductBinding(target, token)
+        : null;
+      if (!local || local.view || source?.allocationOwner !== target.fn
+        || !productBinding) {
+        out = union(out, new Set([token]));
+        continue;
+      }
+      const sourceToken = source.sourceToken || local.sourceToken || token;
+      const calls = [currentEntry, ...outerEntries];
+      const callIdentity = calls.map((entry) => [
+        entry.file,
+        entry.call.pos,
+        entry.call.end,
+        entry.target?.fn?.pos ?? null,
+        entry.target?.fn?.end ?? null,
+        entry.frameKey || null,
+      ]);
+      const destination = `${LOCAL}inst:${sha256(JSON.stringify(callIdentity))}:${encodeURIComponent(sourceToken)}`;
+      registerLocalView(destination, sourceToken, {
+        kind: 'call', call, file, target, calls,
+      });
+      out = union(out, new Set([destination]));
+    }
+    return out;
+  };
+
   /** Evaluate a recursive SCC in concrete call context. Symbolic path expansion
    * cannot represent recursion finitely (`row.next` grows forever); concrete
    * executed origins can. The memo key is the complete object + key-domain
@@ -6892,6 +7127,9 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       }
     });
     const signature = `${cutoffSignatureOf()}|${signatureParts.join('|')}`;
+    const qualify = (tokens) => qualifyRecursiveCallReturns(
+      tokens, target, call, file, frame, signature,
+    );
     let approximations = recursiveCallApprox.get(target.fn);
     if (!approximations) {
       approximations = new Map();
@@ -6903,13 +7141,13 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       recursiveCallsEvaluating.set(target.fn, evaluating);
     }
     const prior = approximations.get(signature) || EMPTY;
-    if (evaluating.has(signature)) return prior;
+    if (evaluating.has(signature)) return qualify(prior);
     let epochs = recursiveCallEpoch.get(target.fn);
     if (!epochs) {
       epochs = new Map();
       recursiveCallEpoch.set(target.fn, epochs);
     }
-    if (epochs.get(signature) === evaluationEpoch) return prior;
+    if (epochs.get(signature) === evaluationEpoch) return qualify(prior);
     epochs.set(signature, evaluationEpoch);
     evaluating.add(signature);
     const priorFrame = sentinelFrames.get(target.fn);
@@ -6920,7 +7158,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         approximations.set(signature, next);
         noteApproximationGrowth(next, 'growing a recursive call summary');
       }
-      return next;
+      return qualify(next);
     } finally {
       if (priorFrame) sentinelFrames.set(target.fn, priorFrame);
       else sentinelFrames.delete(target.fn);
@@ -7502,6 +7740,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
     const priorBudget = currentReadBudget;
     const priorProducerOwners = activeNonEscapingProducerOwners;
     const priorExecutionOwners = activeExecutionOwners;
+    const priorHeapEffects = activeHeapEffects;
     const budget = {
       site: siteOf(readNode, file),
       tokens: new Set(),
@@ -7533,6 +7772,13 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
         ownerEvents,
         currentReadContext.pos,
       );
+      // Preserve the global effect order while applying the exact owner guard
+      // once per read. Contextual heap resolution is recursive and can ask the
+      // same question thousands of times; rescanning the full estate inside
+      // every nested demand is observationally equivalent but pathological.
+      activeHeapEffects = (idx.heapEffects || []).filter(
+        (effect) => activeExecutionOwners.has(effect.mutationSite?.owner),
+      );
       const contexts = ownerEvents.length
         ? ownerEvents.map((event) => withAddedCutoff(event.cutoffs, currentReadContext))
         : [activeCutoffs];
@@ -7562,6 +7808,7 @@ export function makeResolver(idx, graph, minRows, diagnostics = {}) {
       currentReadBudget = priorBudget;
       activeNonEscapingProducerOwners = priorProducerOwners;
       activeExecutionOwners = priorExecutionOwners;
+      activeHeapEffects = priorHeapEffects;
       activeCutoffs = priorCutoffs;
       currentReaderOwner = priorReaderOwner;
       currentReadContext = prior;
@@ -7805,7 +8052,10 @@ function semanticSiteOf(node, key, kind, sourceFile) {
  * Scan every property read in `files` against the executed corpus.
  * @returns {{ findings: object[], stats: object }}
  */
-export function scanReaders({ files, graph, minRows = 8, root }) {
+export function scanReaders({ files, graph, minRows = 8, root, onReadStart = null }) {
+  if (onReadStart != null && typeof onReadStart !== 'function') {
+    throw new TypeError('reader-shape onReadStart must be a function when provided');
+  }
   const idx = buildIndex(files);
   const diagnostics = {
     computedRecordUnknown: 0,
@@ -7837,6 +8087,17 @@ export function scanReaders({ files, graph, minRows = 8, root }) {
     const inspectRead = (node, receiver, key, keyNode, kind) => {
       if (BUILTIN_MEMBERS.has(key) || isWriteTarget(node)) return;
       reads += 1;
+      if (onReadStart) {
+        const { line, character } = sf.getLineAndCharacterOfPosition(keyNode.getStart(sf));
+        onReadStart({
+          read: reads,
+          file: rel,
+          line: line + 1,
+          column: character + 1,
+          key,
+          kind,
+        });
+      }
       const { concrete } = inspectNodeRead(receiver, file, key, node);
       if (!concrete.knownContainer) return;
       resolved += 1;
