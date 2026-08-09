@@ -6879,21 +6879,44 @@ Durable evidence is
 directory. This is a new, precisely attributed array-callback fixed-point blocker; the first
 optimization is valid and materially faster but does not yet make the whole gate acceptable.
 
+**BOUNDED FRAME-CACHE EXPERIMENT REJECTED.** A disposable-clone prototype extended the
+existing per-evaluation-epoch binding/parameter memoization into symbolic-frame contexts. Its
+cache key used semantic frame contents (binding identity plus sorted object-token and key
+domains), active function/effect context, key refinements and cutoff rather than transient
+`Map` identity. The complete resolver suite remained green at **90 / 90** in **17.59 s**, so
+the semantic key removed the first prototype's test-suite overhead without conflating the
+existing invocation/alias cases.
+
+That optimization is nevertheless insufficient and was **not ported**. A direct reproduction
+rebuilt the same **8,637-origin / 2,074-file** corpus and index, then entered the exact read
+3,169 resolver. It was terminated at the predeclared **90-second target ceiling** without
+finishing even fixed-point iteration 1 and without publishing a result. Its retained trace,
+`/var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/sf-osr-evidence.XXXXXX.LDN2WVToaB/read-3169-semantic-cache.jsonl`,
+contains **23,282 events / 6.19 MiB**: 9,385 binding starts, 9,370 binding completions, 3,433
+call starts and 543 completed function-return summaries. `id`-irrelevant
+`factionRename.js` and settlement-helper bindings still dominate. This proves framed memo
+misses are only an amplifier, not the root semantic fan-out; further cache tuning is out of
+scope for this checkpoint. All diagnostic hooks and temporary probe scripts remain confined
+to the disposable clone, and the real scanner source is unchanged from `34531b26`.
+
 **EXACT RESUME ORDER.** Use the mutex atomically and preserve all foreign worktree dirt:
 
 1. Resolver verification and isolated scanner checkpoint are complete at `8445a5a3`.
 2. Official durable read progress and its parser/runner boundary are complete at `34531b26`.
 3. The progress-enabled authoritative run is complete as a failed performance proof at read
-   3,169. Reproduce that exact reader in a disposable clone, identify the finite array-callback
-   state explosion, and either land one bounded semantic repair or stop with the trace above;
-   do not resume broad adversarial analyzer research.
-4. After a green bounded repair, create another fresh clone and rerun the authoritative exact
-   artifact under the same progress control and 30-minute ceiling.
-5. Generate exact and legacy artifacts from the same committed scanner/input snapshot, build
+   3,169. The one allowed context-cache repair was tested, measured and rejected above. Do not
+   port it and do not resume cache or broad adversarial analyzer research.
+4. Any next repair must narrow the **semantic execution context** that makes an intrinsic array
+   callback element depend on unrelated enclosing-owner helpers, with a focused non-timing
+   correctness regression. If that invariant cannot be stated and proven locally, declare the
+   repository-scale scanner operationally blocked rather than rerunning it.
+5. After a green bounded semantic repair, create another fresh clone and rerun the
+   authoritative exact artifact under the same progress control and 30-minute ceiling.
+6. Generate exact and legacy artifacts from the same committed scanner/input snapshot, build
    and review the schema-3 migration bundle, then perform the explicit governed re-freeze.
-6. Prove the governed historical/archive path against the same scanner inputs; do not treat it
+7. Prove the governed historical/archive path against the same scanner inputs; do not treat it
    as a substitute for current-tree evidence.
-7. Run `npm run check`, then `npm run verify:dist`, both with no concurrent Vitest/scanner lane,
+8. Run `npm run check`, then `npm run verify:dist`, both with no concurrent Vitest/scanner lane,
    and record every immutable receipt here.
 
 If step 1 regresses, audit `callEntriesOfView`, `withViewCallFrames`, `heapTargetIdentity`,
