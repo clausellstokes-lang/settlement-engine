@@ -4,7 +4,7 @@
   "packets": [
     {
       "id": "TC-3A",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/TC-3A.md",
       "verifiedBase": "6da84cfdf9eb533986d34e9a0f18a32b7d592736",
       "changeManifest": [
@@ -52,7 +52,7 @@
       "id": "TC-3B",
       "status": "BLOCKED",
       "packetPath": "docs/implementation/packets/town-cartography/TC-3B.md",
-      "verifiedBase": "6da84cfdf9eb533986d34e9a0f18a32b7d592736",
+      "verifiedBase": "5066c34bf6dd3a1982f92d22b0687ab4f204f17c",
       "changeManifest": [
         { "action": "CREATE", "path": "src/domain/townCartography/cartographyParcels.js" },
         { "action": "CREATE", "path": "tests/domain/townCartographyParcels.test.js" }

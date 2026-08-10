@@ -1,6 +1,7 @@
 # Town Cartography / TC-3a — names, wards, and the naming-pool injection
 
-- **Status:** `READY`
+- **Status:** `LANDED`
+- **Landed:** `5066c34b` (2026-08-10; implementing lane + manager re-earned greens — focused 60/60, verify:dist 50/50 files / 396/396 tests, bounded pair 373,321 B < 400,000, ratchets 175/175 + 1140/1140)
 - **Packet version:** `1`
 - **Verified base:** `claude/composite-r4` at `6da84cfdf9eb533986d34e9a0f18a32b7d592736`
 - **Base note:** `2c810d167d016302e641fc9cfe74fff57475b14e` — the parent packet's base — is

@@ -24,7 +24,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 
 | Dispatch | Packet | Status | Why this is the boundary | Explicitly excluded |
 |---:|---|---|---|---|
-| READY-1 | [`TC-3a`](./packets/town-cartography/TC-3A.md) | **READY** at `6da84cfd` (chair promotion 2026-08-10) | Adds named streets and wards at schema v2 and moves the naming pools off the bounded chunk by injection | parcels, carving, institution binding, byte band, TC-4..8, buildings, promotion, 3D defaulting, visual soak |
+| LANDED-1 | [`TC-3a`](./packets/town-cartography/TC-3A.md) | **LANDED** at `5066c34b`; do not redispatch | Adds named streets and wards at schema v2 and moves the naming pools off the bounded chunk by injection | parcels, carving, institution binding, byte band, TC-4..8, buildings, promotion, 3D defaulting, visual soak |
 | BLOCKED | [`TC-3b`](./packets/town-cartography/TC-3B.md) | **BLOCKED** — verified base is TC-3a's landing SHA | Adds bounded contained parcels and the pure institution-to-parcel binding receipt for TC-4 | naming, schema changes, TC-4..8, buildings, promotion, 3D defaulting, visual soak |
 | LANDED-2 | [`SC-1A+B`](./packets/surveyor-chat/SC-1.md) | **LANDED** at `455a29b5`; do not redispatch | Ephemeral text-intent shell and typed-op card extraction landed; SC-2+ remain excluded | direct chat proposals, audience/provenance decisions, uploads, SC-2/3, migrations, pricing/legal |
 | BLOCKED | [`GR-3b`](./packets/foreign-policy/GR-3B.md) | **BLOCKED** — producer eligibility and ladder selection are unruled | Would finish the already-split producer half of GR-3 | GR-4+, later grammar, tuning, lighting |

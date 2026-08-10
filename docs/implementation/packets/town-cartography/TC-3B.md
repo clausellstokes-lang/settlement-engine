@@ -6,7 +6,10 @@
 - **Blocked on:** TC-3a landing. This packet's verified base is TC-3a's landing SHA, which
   does not exist yet. The chair records it and moves this packet to `READY`.
 - **Packet version:** `1`
-- **Verified base:** `claude/composite-r4` at `6da84cfdf9eb533986d34e9a0f18a32b7d592736`
+- **Verified base:** `claude/composite-r4` at `5066c34bf6dd3a1982f92d22b0687ab4f204f17c`
+- **Base note:** TC-3a's landing SHA, recorded by the chair 2026-08-10; the C-1 unblock
+  revalidation (symbol re-verification + shared manifest rows re-entry + status flip)
+  remains the next coordinator act
 - **Base note:** the TRUE dispatch base is TC-3a's landing SHA, which does not exist yet —
   the chair replaces the line above with it at the C-1 unblock revalidation. Authored
   against `6da84cfd` and the preserved TC-3 implementation. The parent packet's base `2c810d16` is still an ancestor; of the 17
