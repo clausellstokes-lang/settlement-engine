@@ -169,6 +169,7 @@ function deepCloneConditionalLedger(value) {
 // strict DTO family. Raw cache/cloud/RPC rows enter through
 // worldStateHydration.js, which injects that validator into the same body below.
 // @enforced-by tests/build/envoyPersistenceHydrationLazy.test.js
+/** @param {unknown} value */
 function cloneAdmittedEnvoyErrands(value) {
   return Array.isArray(value) ? deepClone(value) : [];
 }
