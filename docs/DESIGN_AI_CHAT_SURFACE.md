@@ -6,8 +6,15 @@
 ## rides. Implementation = the external implementer, sequenced with the AI lanes.
 ## SELF-AUDIT PASS 2026-08-02: the two audit journals' findings against this doc were
 ## adjudicated by the chair and folded in. Every corrected block is marked; missing
-## substrate is now NAMED WORK with numbered items and pins — Sol builds from this page
-## without inventing architecture.
+## substrate is NAMED here with numbered items and pins; current implementation is
+## dispatched only through the packet below.
+
+> **Current implementation handoff (reconciled 2026-08-09):** this file remains
+> product architecture, not a coding assignment. Only the bounded subset in
+> [`implementation/packets/surveyor-chat/SC-1.md`](./implementation/packets/surveyor-chat/SC-1.md)
+> may be dispatched, and only while that packet is marked READY. Uploads,
+> folders, audio, persistence/migrations, SC-2/3, and unsealed approval or
+> audience contracts remain outside that packet.
 
 ## §0 The owner's orders (verbatim intent, binding)
 1. NO WORKSHOP. The Surveyor surface simplifies to a PROMPT BOX.

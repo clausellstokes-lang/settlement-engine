@@ -10,12 +10,17 @@ When a historical doc and the code disagree, the code wins. When a historical do
 and a canonical doc disagree, the canonical doc wins.
 
 > The root [`ARCHITECTURE.md`](../ARCHITECTURE.md) is the canonical system map;
-> [`CONTRIBUTING.md`](../CONTRIBUTING.md) is the operating standard.
+> [`CONTRIBUTING.md`](../CONTRIBUTING.md) is the operating standard. For
+> unbuilt subsystem work, [`implementation/INDEX.md`](./implementation/INDEX.md)
+> is the only current dispatch surface.
 
 ## CANONICAL — living references (keep these current)
 
 | Doc | What it is |
 |---|---|
+| [`implementation/INDEX.md`](./implementation/INDEX.md) | SHA-pinned registry of the few subsystem packets currently READY, BLOCKED, or being reconciled; only READY rows may be dispatched. |
+| [`implementation/PACKET_STANDARD.md`](./implementation/PACKET_STANDARD.md) | Canonical scope, authority, verification, edge-case, and STOP contract for coding-agent instructions. |
+| [`implementation/PACKET_TEMPLATE.md`](./implementation/PACKET_TEMPLATE.md) | Copyable packet skeleton; remove every placeholder before a packet can become READY. |
 | [`CURRENT_STATE.md`](./CURRENT_STATE.md) | Short, honest product/release status and current reading order. |
 | [`PRODUCT_COMPLETION_ARCHITECTURE.md`](./PRODUCT_COMPLETION_ARCHITECTURE.md) | End-state command/read/ops architecture and completion sequence. |
 | [`TOWN_SCENE_3D_ARCHITECTURE.md`](./TOWN_SCENE_3D_ARCHITECTURE.md) | One-truth/two-presentations architecture for the opt-in 3D settlement portrait and permanent 2D plan. |
@@ -23,7 +28,7 @@ and a canonical doc disagree, the canonical doc wins.
 | [`CUSTOM_CONTENT_PLATFORM_ARCHITECTURE.md`](./CUSTOM_CONTENT_PLATFORM_ARCHITECTURE.md) | Controlled-extension-language architecture for manifest truth, reviewed authoring, immutable revisions, packs, campaign environments, usage, and bounded scene presentation. |
 | [`CUSTOM_CONTENT_PROMOTION_CONTRACT.json`](./CUSTOM_CONTENT_PROMOTION_CONTRACT.json) | Machine-readable boundary between implemented custom-content capabilities, open platform-integration gates, and intentional deferrals. |
 | [`GENERATION_CONTRACTS.md`](./GENERATION_CONTRACTS.md) | Canonical ownership and persistence rules for world law, resources, cultural identity, generated-theme profiles, isolation support, and final coherence receipts. |
-| [`GENERATION_REMEDIATION_HANDOFF.md`](./GENERATION_REMEDIATION_HANDOFF.md) | Live program log for the generation-remediation lane; the repo `CLAUDE.md` makes it compulsory reading before changing anything here. Its continuation sequence and "tree is live" section are current; the wave sections are that program's own record. |
+| [`GENERATION_REMEDIATION_HANDOFF.md`](./GENERATION_REMEDIATION_HANDOFF.md) | Program log for the generation-remediation lane; read it with `GENERATION_CONTRACTS.md` when touching that lane's ownership or persistence. It is not the global open-work queue. |
 | [`CAPABILITY_REMEDIATION_PLAN.md`](./CAPABILITY_REMEDIATION_PLAN.md) | Program log for the Capability-Atlas remediation (waves R-0…R-5). The Progress blockquote, the deferral ledger, and the owner-gated tail are current; the resume protocol at the top self-labels HISTORICAL. |
 | [`EPISTEMIC_PREVENTION_PLAN.md`](./EPISTEMIC_PREVENTION_PLAN.md) | Program log for the test-truthfulness machinery (waves EP-1…EP-6) — the anchored-negative / seeded-failure helpers (`tests/helpers/`) and the walkers that new tests must satisfy. The Progress blockquote is current. |
 | [`DEPLOY.md`](./DEPLOY.md) | Deploy + gating runbook (client, Supabase, edge, the fail-closed CI gate). |
@@ -55,11 +60,12 @@ Snapshots from past review/design passes. Read for rationale, not for current tr
 - Multi-agent audit dumps: [`GENERATION_COHERENCE_AUDIT.md`](./GENERATION_COHERENCE_AUDIT.md), [`SIMULATION_LOGIC_AUDIT.md`](./SIMULATION_LOGIC_AUDIT.md), [`REGIONAL_ENGINE_AUDIT.md`](./REGIONAL_ENGINE_AUDIT.md), [`refund-ledger-audit.md`](./refund-ledger-audit.md), [`a11y-audit.md`](./a11y-audit.md), [`mobile-responsive-audit.md`](./mobile-responsive-audit.md).
 - `.review_findings.json` — raw machine-generated review-findings dump (heavy build artifact, not hand-maintained).
 - Plans / design specs (largely realized; describe intent at authoring time): [`COHESION_REMEDIATION_PLAN.md`](./COHESION_REMEDIATION_PLAN.md), [`SUBSYSTEM_INTEGRATION_PLAN.md`](./SUBSYSTEM_INTEGRATION_PLAN.md), [`UX_OVERHAUL_PLAN.md`](./UX_OVERHAUL_PLAN.md), [`PROPOSAL_ASSESSMENT.md`](./PROPOSAL_ASSESSMENT.md), [`A_PLUS_ROADMAP.md`](./A_PLUS_ROADMAP.md) (self-labeled HISTORICAL; the prescriptive A+ build order at authoring time), [`GEOPOLITICAL_WAR_LAYER.md`](./GEOPOLITICAL_WAR_LAYER.md) (DESIGN, partially implemented), [`SIMULATION_TO_10.md`](./SIMULATION_TO_10.md), [`STRESSOR_WAVE_DESIGN.md`](./STRESSOR_WAVE_DESIGN.md), [`simulation-intelligence-layer.md`](./simulation-intelligence-layer.md), [`regional-causality-engine.md`](./regional-causality-engine.md), [`world-pulse-roadmap.md`](./world-pulse-roadmap.md), [`P3_CONSERVED_LEDGER.md`](./P3_CONSERVED_LEDGER.md).
-- **Design specs** — the `DESIGN_*.md` family (32 files at this writing): commissioned
+- **Design specs** — the `DESIGN_*.md` family: commissioned
   architecture written before a wave was built, so they state intent at authoring time and
-  the code wins wherever they disagree. Most are realized in whole or in part. A few are
-  still the live spec of a dispatched lane; the program logs in the canonical table above
-  and `docs/OWNER_DECISION_QUEUE.md` (ledger tree) name which — e.g.
+  the code wins wherever they disagree. Most are realized in whole or in part. A design
+  file may inform a packet, but it never dispatches work directly; only a READY row in
+  `implementation/INDEX.md` does that. Older program logs and
+  `docs/OWNER_DECISION_QUEUE.md` retain decision provenance — e.g.
   [`DESIGN_AI_CAPABILITY_LADDER.md`](./DESIGN_AI_CAPABILITY_LADDER.md) carries queue item
   M43. Grouped by subject:
   - AI + authoring platform: [`DESIGN_AI_CAPABILITY_LADDER.md`](./DESIGN_AI_CAPABILITY_LADDER.md), [`DESIGN_AI_CONTROL_SURFACE.md`](./DESIGN_AI_CONTROL_SURFACE.md), [`DESIGN_AI_INTENT_ATLAS.md`](./DESIGN_AI_INTENT_ATLAS.md), [`DESIGN_CONTENT_PLANE.md`](./DESIGN_CONTENT_PLANE.md), [`DESIGN_EVENT_COMPOSER_V2.md`](./DESIGN_EVENT_COMPOSER_V2.md), [`DESIGN_ANALYTICS_V2.md`](./DESIGN_ANALYTICS_V2.md), [`DESIGN_TRACK_K_COMPLETION.md`](./DESIGN_TRACK_K_COMPLETION.md).

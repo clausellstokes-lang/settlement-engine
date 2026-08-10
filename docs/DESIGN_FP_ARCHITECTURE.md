@@ -884,47 +884,26 @@ membership in an authorized early-motion set is a RULING; the two are never the
 same sentence. The CQ2 set stays exactly GR-0 + GR-1 + TR-1 + TR-9-contract,
 and all four of these run in STRICT ORDER at the positions above.
 
-> **PROGRESS — THE ONE HOME FOR BUILD STATE. RE-DERIVE BEFORE YOU TRUST IT.**
-> Measured at `d9c7cae4` on `claude/composite-r4`, 2026-08-06 (the CYCLE-5 close, LANE-B
-> slice — read the scope caveat at the foot of this block before trusting its totality).
-> **The command, so this block is never the authority — the tree is:**
-> `git log --oneline --no-merges -300 | grep -E '^[0-9a-f]{7,} (SP-[A-F]|GR-[0-9]|IN-[0-9]|TR-[0-9]|WF-[0-9]|POP-[0-9]|INT-[0-9]|CW-[0-9]|ES-[0-9]|WY-[0-9])'`
-> then READ each candidate's commit body — a wave-shaped subject is not a landing.
+> **PROGRESS — HISTORICAL CORROBORATION; RE-DERIVED 2026-08-09.**
+> Measured on `claude/composite-r4` at
+> `2c810d167d016302e641fc9cfe74fff57475b14e`. Live code and commit bodies decide what
+> exists; [`implementation/INDEX.md`](./implementation/INDEX.md) is the only current
+> dispatch surface. A design row or this block is not a coding assignment.
 >
-> **LANDED, by sha:** #1 SP-A `59df13a9` · #2 CW-0w `b3fb8f49`+`f7da6b60`+`03dee5fd`+`e30770bd`
-> · #3 SP-B `4c0f2f38`(+`2a71dee3`) · #4 SP-B2 `f4016560` · #5 SP-C `cbd348a5` ·
-> #6 SP-D `0aac6792`(+`57fe385b`) · **#7 SP-E `7a77c84b`** · #8 GR-0 `b441bca5`(+`d1cfdb67`) ·
-> #9 GR-1 `caab995a` ·
-> #10 GR-2 `a18fdcfa`(+`91075d45`) · #23 TR-1 `d7ea69a4`(+`93c118b6`) · ES-0 `55674790`.
-> **PART-BUILT:** #16 IN-0 — slices **0a** (`729112df`+`94d0c798`), **0b** (`6a497bab`) and
-> **0d** (`db35bad6`) of its four; **0c, the disclosure executor, is UNBUILT**;
-> #31 TR-9 — slice **9c only** (`c7933e84`, the contract module).
-> Everything not named above is UNBUILT. Full receipts, gate posture and the
-> per-wave judgment register: `docs/FABLE_VALIDATION_QUEUE.md` — the cycle-4 close row, and
-> the CYCLE-5 LANE-B close row for this stamp.
+> **LANDED:** SP-A/B/B2/C/D/E and SP-F; CW-0w; GR-0/1/2 and GR-3a; IN-0a/0b/0d;
+> TR-1 and TR-9c; ES-0/1/2/3/4 and ES-5a. The detailed SHA and repair-chain receipts
+> remain in `FABLE_VALIDATION_QUEUE.md` and git history.
 >
-> ⚠ **GR-3 HAS NOT LANDED, AND ITS WORK IS SITTING IN THE WORKING TREE.** At this stamp
-> GR-3a has ZERO commits in `d615171a..d9c7cae4`; its verifier returned REJECT and a repair
-> lane holds nineteen uncommitted files. **A dirty tree is not a landing** — do not promote
-> it here until a sha exists.
-> ⚠ **THIS STAMP WAS TAKEN BY A LANE-B SLICE AND IS NOT A TOTALITY CLAIM OVER ITS OWN SPAN.**
-> The span also carries four ES-lane commits — `dda24851`, `e7eeaeff`, `1b111399`,
-> `d9c7cae4` — which that slice did NOT audit. **Whether ES-1 has LANDED is deliberately
-> UNDETERMINED here**, not denied; it belongs to the ES lane and its repair chain. Every
-> FP-numbered row above, and ES-0, was re-derived at this commit. Re-stamp from a slice that
-> audited both lanes.
+> **PARTIAL, NOT AUTOMATICALLY DISPATCHABLE:** GR-3b and IN-0c remain owed. Their
+> reconciled packets are
+> [`GR-3B.md`](./implementation/packets/foreign-policy/GR-3B.md) and
+> [`IN-0C.md`](./implementation/packets/foreign-policy/IN-0C.md); each packet's status
+> controls. No implementation-wave landing was found at this snapshot for WY, HB, WC,
+> EP, WF, POP, INT, or later CW. That is an existence statement, not permission to build.
 >
-> ⚠ **ES-4 HAS NOT LANDED AND THE LOG READS AS IF IT HAD.** Eleven commits carry "ES-4"
-> in their subject (`8a4b0aef` through `d48224e3`); `8a4b0aef`'s body opens "THE WAVE DID
-> NOT LAND." Those commits built the LIGHTING INSTRUMENT, not the confirmation leg. ES-4
-> is fifth in its volume. **ES-2 and ES-3 are unbuilt.** (This clause read "ES-1/2/3 are all
-> unbuilt" at the `57fe385b` stamp, which was true then; ES-1 commits landed inside the
-> cycle-5 span, so its status is now the UNDETERMINED item flagged above rather than
-> "unbuilt". Corrected at re-stamp and reported, not changed silently.)
-> ⚠ **THE PER-PROGRAM SIBLING FILES CARRY AD-HOC LANDED NOTES AND ARE NOT MAINTAINED AS
-> A SET** — absence of a marker there proves nothing. Only this block claims totality, and
-> only at the commit stamped above — and at this stamp only as qualified by the LANE-B scope
-> caveat, which is the first thing to close on the next full-tree re-derive.
+> **RE-DERIVATION:** search all wave families, including `SP|CW|GR|IN|TR|WF|POP|INT|ES|WY|HB|WC|EP`,
+> then read every candidate's body and inspect live symbols. A wave-shaped subject is not
+> a landing. Per-program sibling notes and old queue rows are incomplete by construction.
 
 ### PHASE 0 — THE GATE OPENERS (before any FP cross-layer registry row)
 

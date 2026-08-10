@@ -1,5 +1,12 @@
 # SOL'S QUEUE — the master build sequence (compiled 2026-08-02)
 
+> **Status: HISTORICAL DEPENDENCY ORDER, not current dispatch.** Reconciled
+> 2026-08-09: the later blanket owner grant in `FABLE_VALIDATION_QUEUE.md`
+> supersedes older `UNSIGNED`/owner-gated wording below for F9 and CR-WC-9 and
+> releases them only at their queue positions. It does not make either one a
+> coding assignment. [`implementation/INDEX.md`](./implementation/INDEX.md) is
+> the only current dispatch surface.
+
 ## For the external implementer (Sol), zero session context assumed. Compiled by
 ## the Fable chair under full owner delegation; owner orders embedded verbatim
 ## where they bind. Every pointer below is to a committed, AUDITED document in
@@ -52,14 +59,12 @@
   FLAG-driven, not value-driven (EP §2.3b).** [VERBATIM, docs/DESIGN_FP_ARCH_EP.md
   §5 item 4 — landed here because this queue's own EVERYTHING-BUILDS-DARK line is
   now load-bearing for a constitutional change.]
-- ⭐⭐ **BUILD STATE HAS EXACTLY ONE HOME, AND IT IS NOT THIS FILE.** This queue
-  lists SPECS and ORDER; it deliberately claims nothing about what is built
-  (row 21's own note says so for Lane B, and it is true of every row here).
-  The one place that claims totality is the **PROGRESS block at the top of
-  `docs/DESIGN_FP_ARCHITECTURE.md` §5** — landed waves by SHA, part-built
-  slices named, with the `git log` command that re-derives it and the standing
-  instruction to re-derive before trusting it. **CHECK-GIT-FIRST still binds:**
-  that block is stamped with the commit it was measured at, and a wave-shaped
+- ⭐⭐ **BUILD STATE AND DISPATCH ARE NOT OWNED BY THIS FILE.** This queue lists
+  historical specs and order; it deliberately claims nothing about what is
+  built (row 21's own note says so for Lane B, and it is true of every row
+  here). The FP progress block is a dated reconciliation record;
+  `docs/implementation/INDEX.md` and its SHA-pinned packets control current
+  dispatch. **CHECK-GIT-FIRST still binds:** a wave-shaped
   commit SUBJECT is not a landing — one wave in this program logged eleven
   commits whose bodies say the wave did not land. Per-wave receipts, gate
   posture, deferrals and the judgment register: `docs/FABLE_VALIDATION_QUEUE.md`.

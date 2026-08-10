@@ -17,6 +17,12 @@
 >   production build and 47-file / 364-test dist verification. TC-3 wards/parcels is the
 >   next cartography slice.
 
+> **Current implementation handoff (reconciled 2026-08-09):** this architecture
+> supplies intent, not dispatch. Only
+> [`implementation/packets/town-cartography/TC-3.md`](./implementation/packets/town-cartography/TC-3.md)
+> may authorize TC-3, and only while that packet is marked READY. TC-4 through
+> TC-8 remain deliberately uncompiled until TC-3 lands and the tree is re-derived.
+
 ## 0. THESIS
 
 The settlement map becomes a Watabou-class organic town map — tier-appropriate street

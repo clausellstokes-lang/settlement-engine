@@ -31,6 +31,12 @@ live believed axis on BeliefRecord, so IN-2's DEVOTION bait is no longer hard
 has rotted at least once — NAVIGATE BY SYMBOL (the estate's recorded
 hand-keyed-line-address-rot hazard; it bit this compilation five times).
 
+> **Current implementation handoff (reconciled 2026-08-09):** IN-0a, IN-0b,
+> and IN-0d are landed. IN-0c is owed but **BLOCKED**, not dispatchable from
+> this design. The only coding contract is
+> [`implementation/packets/foreign-policy/IN-0C.md`](./implementation/packets/foreign-policy/IN-0C.md).
+> Do not invent its same-tick signing-credit ordering.
+
 ---
 
 ## §1 SUBSTRATE CLAIMS — every existing-code premise, re-measured 2026-08-04
@@ -72,8 +78,8 @@ detail a wave would have tripped on). Live code outranks this table too.
 | S27 | Irony surfaces built; BeliefDivergenceBand v1 lacks its truth join | src/domain/briefs/composers.js — dramaticIronyBrief :272-312; src/components/map/BeliefDivergenceBand.jsx + WarCausalBrief.jsx exist | VERIFIED |
 | S28 | avgTieStrength reads ground-truth trust on a K3-adjacent path (cross-volume bug note) | MOVED but TRUE: now src/domain/worldPulse/peaceTermsGraph.js :73-84 — reads `relationshipStates[key].trust` raw. The bug-report row stands for GRAMMAR's K3 sweep, at the NEW address | VERIFIED (address REFINED) |
 | S29 | Disclosure term minted/strains/expires; executor 'seam'; the credit is W-PEACE's seam | TERM_CATALOG moved to src/domain/worldPulse/peaceTermsCatalog.js — disclosure :157 (`family:'informational', executor:'seam'`), intel→disclosure war-spoil mapping :209, label :225; the statecraft foot notes (informationStatecraft.js :1400-1428) restate the seam and name the landing: "a signed disclosure term should CREDIT the loser's credibility … at the draftTerm executor:'seam' branch"; AND the credit hook is PRE-PLUMBED — advanceInformationStatecraft already accepts `provenTrue = []` / `npcProvenTrue = []` (:1216-1218) | VERIFIED (address REFINED; hook NEW) |
-| S30 | HIDE's trade tax narrated, unwired; SEE gate-not-drain; SELL spammer deliberately absent | informationStatecraft.js foot seam notes :1400-1428 — all three stand verbatim ("wiring the actual merchantAppetite/tradeSalience penalty into the trade read is a thin downstream hook, NOT a pinned effect") | VERIFIED — IN-0d remains real work |
-| S31 | Intercept act is narrative-only (no claim, no belief record) | src/domain/worldPulse/brokerageServicesRules.js :303-327 — mints headline + metadata {institutionId, patronId, rivalId, covert}; constructs NO claim | VERIFIED — IN-0b remains real work |
+| S30 | HIDE's trade tax narrated, unwired; SEE gate-not-drain; SELL spammer deliberately absent | informationStatecraft.js foot seam notes :1400-1428 — all three stood at the 2026-08-04 compile | HISTORICAL SUBSTRATE FINDING — IN-0d later landed at `db35bad6` |
+| S31 | Intercept act is narrative-only (no claim, no belief record) | src/domain/worldPulse/brokerageServicesRules.js :303-327 — this was the 2026-08-04 producer shape | HISTORICAL SUBSTRATE FINDING — IN-0b later landed at `6a497bab` |
 | S32 | The six planned receipt kinds do not exist; the two built beats do | executed greps: plant_took, lure_sprung, mirror_shift, court_sat_still, false_accusation, treaty_disclosure_opened — ZERO src hits; infowar_lie_exposed + infowar_spy_exposed live in informationStatecraft.js + settlementRumors.js | VERIFIED |
 | S33 | Flag manifest + walker exist; infoStatecraftEnabled is a member | src/domain/worldPulse/simulationRules.js — ENGINE_GATED_VIRTUAL_RULE_KEYS :185-194 = ['beliefAxesEnabled','conquestDoctrineEnabled','infoStatecraftEnabled','migrationRumorsEnabled','sovereigntyTradeEnabled']; walker tests/lint/engineGatedRuleKeys.walker.test.js | VERIFIED |
 | S34 | Mutation-manifest + tripwire idioms exist for L7/L9 obligations | tests/lint/mutationCoverageManifest.test.js + tests/lint/mutationCoverage.shared.mjs; the TR-5 tripwire pattern live at src/domain/worldPulse/sovereigntyBundle.js :166 (`catalogGrewSinceWr10()`) | VERIFIED |
@@ -255,8 +261,9 @@ commit (L8) — no file below except settlementStrategy.js (baselined 812,
 AT ceiling) and the two banked pulse mouths is currently constrained, but
 MEASURE, never inherit.
 
-### IN-0 — THE PRICES BECOME LAW (four slices, four commits; rides existing flags) — **SLICE 0a LANDED 2026-08-06 @ `729112df`, repaired @ `94d0c798`; 0b/0c/0d UNBUILT**
-<!-- Build state is not maintained per-file; FP §5's PROGRESS block is the one home.
+### IN-0 — THE PRICES BECOME LAW (four slices, four commits; rides existing flags) — **0a/0b/0d LANDED; 0c OWED/BLOCKED**
+<!-- Build state is not maintained per-file; docs/implementation/INDEX.md controls current
+     dispatch and FP §5 retains dated corroboration only.
      ⚠ THE "DIES AT THE FOLD" SENTENCE IN §4's 0a BLOCK BELOW (and in
      DESIGN_FP_INFORMATION.md §5 IN-0a) IS AN OVERSTATEMENT MEASURED AT 0a's BUILD:
      the built writer folds a validated envelope unconditionally and the contradiction
@@ -316,7 +323,7 @@ the envelope dies in candidate metadata. This slice carries it to the fold.
   remains engine-only THIS slice — recorded as an engine-only decision with
   rationale (the DM lie-commission verb is IN-2's surface).
 
-**IN-0b — THE INTERCEPT CONSUMER.** As the volume (S31 verified narrative-only),
+**IN-0b — THE INTERCEPT CONSUMER — LANDED 2026-08-06 @ `6a497bab`.** Built from the volume's S31 pre-build finding,
 with these tree-corrections: the claim rides `claimFrom` (brokerageServices.js:
 297 — grep pin: no second construction site); refusal = `no_record` from the
 UNTOUCHED five-token QUERY_REFUSALS (S7); the fog compose WIRES HIDE's -0.7
@@ -331,7 +338,7 @@ refused} minted here, `caught` declared cross-wave (IN-3's sweep). Spine 13:
 declared-empty with reason (a priced read, no alignment lever). Spine 14:
 engine-only, recorded.
 
-**IN-0c — THE DISCLOSURE EXECUTOR.** As the volume, re-priced by R4 and armed
+**IN-0c — THE DISCLOSURE EXECUTOR — OWED/BLOCKED; packet status controls.** As the volume, re-priced by R4 and armed
 by S29: lands as a NEW pure leaf of the peaceTerms family (e.g.
 peaceTermsDisclosure.js, ~200-line budget) consuming peaceTerms' exports —
 minting/compliance/expiry stay the head's; the M9b-style loser→victor feed
@@ -351,7 +358,7 @@ alignment through the existing compliance scorer; declared. Spine 14: the
 treaty document's disclosure article is read-only; term editing stays the
 treaty lane's — recorded.
 
-**IN-0d — HIDE'S TRADE TAX.** As the volume; S30 confirms it open, and the foot
+**IN-0d — HIDE'S TRADE TAX — LANDED 2026-08-06 @ `db35bad6`.** Built from the volume's S30 pre-build seam; the foot
 note names the landing ("the merchantAppetite/tradeSalience penalty into the
 trade read is a thin downstream hook"). A NEW pure read leaf
 `secrecyTradeFactor.js` (~100-line budget) exported from the statecraft family;

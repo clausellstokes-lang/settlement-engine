@@ -480,8 +480,15 @@ finder, no new relationship vocabulary.
   world). SP-4 court reads must NOT be spelled `riskToleranceOf` (R-5's
   collision).
 
-### GR-3 — THE NEW TERM FAMILIES (second slice of `pactFormationEnabled`) — **GR-3a LANDED 2026-08-06; GR-3b OWED**
-<!-- Build state is not maintained per-file; FP §5's PROGRESS block is the one home. What
+> **Current implementation handoff (reconciled 2026-08-09):** GR-3a is landed;
+> GR-3b is owed but **BLOCKED**, not dispatchable from this design. The only
+> coding contract is
+> [`implementation/packets/foreign-policy/GR-3B.md`](./implementation/packets/foreign-policy/GR-3B.md).
+> Do not infer its unresolved producer-selection rules from the prose below.
+
+### GR-3 — THE NEW TERM FAMILIES (second slice of `pactFormationEnabled`) — **GR-3a LANDED 2026-08-06; GR-3b OWED/BLOCKED**
+<!-- Build state is not maintained per-file; docs/implementation/INDEX.md controls current
+     dispatch and FP §5 retains dated corroboration only. What
      follows is the SCOPE SPLIT, which is not build state but a change to what this wave IS.
 
      GR-3a (landed): the twelve catalog rows, the seventh `grant` executor and its seven
