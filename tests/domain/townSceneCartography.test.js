@@ -268,8 +268,17 @@ describe('TC-2 compiler mount — the skeleton crosses the TC-1 contract, not be
       .toEqual(manifest.districts.map((district) => district.id));
     expect(block.wards.map((ward) => ward.id))
       .toEqual(manifest.districts.map((district) => `ward:${district.id}`));
-    // TC-3b owns parcels and TC-4 owns buildings; TC-3a must not start either.
-    expect(block.parcels).toEqual([]);
+    // B1: TC-3b fills the parcel layer by carving INSIDE the wards above, so every
+    // parcel names a ward that exists in this same block — the containment is a
+    // theorem about a convex fan, and a parcel referencing elsewhere would mean the
+    // carve found a second town. TC-4 still owns buildings, so that layer stays empty.
+    const litWardIds = new Set(block.wards.map((ward) => ward.id));
+    expect(block.parcels.length).toBeGreaterThan(0);
+    for (const parcel of block.parcels) {
+      expect(litWardIds.has(parcel.wardId), parcel.id).toBe(true);
+      expect(parcel.polygon.length, parcel.id).toBe(3);
+      expect(parcel.provenance, parcel.id).toEqual({ kind: 'generated', ref: null });
+    }
     expect(block.buildings).toEqual([]);
     // The naming layer is REQUIRED at v2 and never leaks into an id or a polygon.
     for (const row of [...block.streets.arterials, ...block.streets.lanes, ...block.wards]) {

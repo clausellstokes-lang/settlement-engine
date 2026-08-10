@@ -192,9 +192,13 @@ describe('town cartography — the gate arms (the teeth that bite at TC-1)', () 
     expect(lit.cartography.wards.length).toBe(dark.districts.length);
     expect(lit.cartography.wards.length).toBeGreaterThan(0);
     for (const ward of lit.cartography.wards) expect(ward.name.length, ward.id).toBeGreaterThan(0);
-    // TC-3b owns parcels and TC-4 owns buildings; either appearing here means the
-    // wave grew past the slice this packet was scoped to.
-    expect(lit.cartography.parcels).toEqual([]);
+    // B6: TC-3b fills the parcel layer, and ONLY that layer newly appears. TC-4 owns
+    // buildings, so a row there would mean the wave grew past the slice it was scoped
+    // to — and the dark corpus above is what proves neither growth reached base bytes.
+    expect(lit.cartography.parcels.length).toBeGreaterThan(0);
+    for (const parcel of lit.cartography.parcels) {
+      expect(parcel.wardId.startsWith('ward:'), parcel.id).toBe(true);
+    }
     expect(lit.cartography.buildings).toEqual([]);
 
     // ONE infrastructure truth: the block references the manifest's records and

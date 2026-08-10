@@ -1,6 +1,15 @@
 # Town Cartography / TC-3b — parcel carving and the institution binding
 
 - **Status:** `READY`
+- **Amended (CR-TC3B-BYTES, chair, 2026-08-10, at landing):** §13's "the bounded pair
+  moves at all" STOP is RULED OVER-BROAD and amended — the invariant CR-TC3A-1 protects
+  is IMPORT-EDGE-TRACKED: no foreign payload may enter the bounded closure. A packet's
+  own mandated leaf necessarily carries its bytes into the compiler chunk (here
+  104→105 closure members, the leaf alone, zero new transitive edges, +3,926 B, final
+  377,247 < 400,000). TC-4 inherits this amended reading. Two observations carried to
+  TC-4's compile: metropolis candidateCount === parcelCount (the cap does not bind at
+  a 4-gon fan), and the zero-padded edge index is defensive-cosmetic under the current
+  vertex cap.
 - **C-1 unblock revalidation (chair, 2026-08-10): COMPLETE.** TC-3a landed at
   `5066c34b`; required symbols verified live (sourceDistricts, compileTownWardLayers
   with the {streets, wards, receipts} shape, the shared premise prefix); substrate

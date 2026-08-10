@@ -67,10 +67,12 @@ describe('TC-2 determinism: the seed family is total', () => {
   test('the package actually has sources to scan (the scan is not vacuous)', () => {
     expect(SOURCES.length).toBeGreaterThanOrEqual(5);
     expect(SOURCES).toContain('cartographySynthesis.js');
-    // TC-3a's two leaves travel every package scan below; naming them here means a
-    // rename or a relocation reds HERE rather than silently emptying the coverage.
+    // TC-3a's two leaves and TC-3b's one travel every package scan below; naming them
+    // here means a rename or a relocation reds HERE rather than silently emptying the
+    // coverage.
     expect(SOURCES).toContain('cartographyPlan.js');
     expect(SOURCES).toContain('cartographyWards.js');
+    expect(SOURCES).toContain('cartographyParcels.js');
   });
 
   test('every seed in the family synthesizes byte-identically twice', () => {
@@ -181,11 +183,31 @@ describe('TC-2 determinism: the draw ledger', () => {
     expect(withoutComments(readSource('cartographyPlan.js'))).not.toMatch(/'carto:/);
   });
 
-  test('TC-3a lowers with bounded FOR loops only — no retry, no while, no do/while', () => {
-    // The lowering is a total pass over a narrowed district list, not the output of a
-    // rejection loop. A `while` appearing here would mean someone reintroduced the
-    // "try again with a smaller box" repair the design explicitly does not own.
-    for (const name of ['cartographyPlan.js', 'cartographyWards.js']) {
+  test('TC-3b adds ONE label — a digest DOMAIN, not a fork — and roots no stream', () => {
+    const source = withoutComments(readSource('cartographyParcels.js'));
+    const labels = [...source.matchAll(/'(carto:[^']*)'/g)].map((match) => match[1]);
+    expect(labels).toEqual(['carto:institution-parcel']);
+    // anchored: the label above is the live subject; this asserts it never spells
+    // '::', which would alias a fork CHAIN (kernel/prng.js's delimiter contract).
+    for (const label of labels) expect(label.includes('::')).toBe(false);
+    // It is a DIGEST domain, not a PRNG fork label. The naming left with TC-3a and
+    // took the stream with it, so this leaf may not root or fork one at all: every
+    // choice it makes is a digest of named inputs, and a draw appearing here would be
+    // entropy no draw ledger counts.
+    const code = codeOnly(readSource('cartographyParcels.js'));
+    expect(code).not.toMatch(/\bcreatePRNG\b/);
+    expect(code).not.toMatch(/\.fork\s*\(/);
+    // anchored: the two negatives above are measured against a live source whose own
+    // digest call the positive below proves is present.
+    expect(code).toMatch(/\bsceneDigest\s*\(/);
+  });
+
+  test('TC-3 lowers and carves with bounded FOR loops only — no retry, no while, no do/while', () => {
+    // The lowering is a total pass over a narrowed district list and the carve is a
+    // fan bounded by vertex count, not the output of a rejection loop. A `while`
+    // appearing here would mean someone reintroduced the "try again with a smaller
+    // box" repair the design explicitly does not own.
+    for (const name of ['cartographyPlan.js', 'cartographyWards.js', 'cartographyParcels.js']) {
       const code = codeOnly(readSource(name));
       expect(/\bwhile\s*\(/.test(code), name).toBe(false);
       expect(/\bdo\s*\{/.test(code), name).toBe(false);

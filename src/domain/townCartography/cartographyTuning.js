@@ -201,15 +201,45 @@ export const TOWN_CARTOGRAPHY_TUNING = Object.freeze({
   // district count this stage is willing to lower. Exceeding it is a premise error
   // rather than a truncation: silently dropping a canonical district would make the
   // map disagree with the dossier, which is the exact fork the ONE LAW forbids.
-  // The parcel-side rows (edge divisions, per-ward counts, institution bindings,
-  // prominence bands, the TC-3 byte band) are TC-3b's and are deliberately absent:
-  // a constant with no reader is dead tuning.
   MAXIMUM_WARDS: Object.freeze({
     thorp: 8, hamlet: 10, village: 12, town: 16, city: 24, metropolis: 48,
   }),
   // The lowering copies a district footprint verbatim, so this is a cap on the
   // SOURCE polygon, not a simplification target.
   MAXIMUM_WARD_VERTICES: 8,
+
+  // ── TC-3b PARCELS (design §3, A-8) ───────────────────────────────────────────
+  // THREE IS A LOAD-BEARING NUMBER, not a taste knob. A convex ward, its own
+  // centroid, and each edge cut into exactly this many integer segments give a
+  // triangle fan that is contained and non-overlapping BY CONSTRUCTION. A fourth
+  // division would need the general polygon clipping this program does not own, so
+  // raising it is a STOP rather than a tuning choice.
+  PARCEL_EDGE_DIVISIONS: 3,
+  // How many of the ward's bounded candidate fan the tier actually keeps. The fan
+  // is always larger than the take, which is what makes the A-8 placement ordering
+  // a real selection rather than a relabelling of the whole fan.
+  PARCELS_PER_WARD: Object.freeze({
+    thorp: 2, hamlet: 3, village: 4, town: 6, city: 8, metropolis: 12,
+  }),
+  // The binding is a synthesis-local receipt for TC-4, and this caps how many of
+  // them one town may emit. Exceeding it is a premise error for the same reason the
+  // ward cap is: a silently dropped institution would make the map disagree with
+  // the dossier.
+  MAXIMUM_INSTITUTION_BINDINGS: Object.freeze({
+    thorp: 8, hamlet: 12, village: 20, town: 32, city: 64, metropolis: 96,
+  }),
+  // A-8 PROMINENCE, in plan-space AREA of the canonical building footprint. A large
+  // institution may choose only from the ward's largest third, a medium one from
+  // the largest two thirds, and anything smaller from all of them.
+  INSTITUTION_PROMINENCE_AREA_PLAN2: Object.freeze({ medium: 150, large: 400 }),
+  // ── BYTE BUDGET (A-3: measured, ratchet-pinned) ──────────────────────────────
+  // The per-tier UTF-8 ceiling for the TC-3 layers together — the street NAMES, the
+  // wards and the parcels — against the live TOWN_SCENE_COMPILE_INPUT_MAX_BYTES cap.
+  // Output over the band is a premise error; the band is never raised to fit it.
+  TC3_LAYER_MAX_BYTES: Object.freeze({
+    thorp: 8000, hamlet: 12000, village: 18000,
+    town: 32000, city: 52000, metropolis: 80000,
+  }),
 });
 
 const T = TOWN_CARTOGRAPHY_TUNING;

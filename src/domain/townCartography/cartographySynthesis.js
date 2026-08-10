@@ -54,6 +54,7 @@ import {
   buildWalls,
 } from './cartographyDefenses.js';
 import { readTownMorphology } from './cartographyMorphology.js';
+import { compileTownParcelLayers } from './cartographyParcels.js';
 import { growArterials, growLanes } from './cartographySkeleton.js';
 import {
   TOWN_CARTOGRAPHY_TUNING,
@@ -375,11 +376,26 @@ export function compileTownCartography(manifest, settlement, options = {}) {
     namingPools: options.namingPools,
   });
 
+  // TC-3b: the carve happens INSIDE the wards the line above just lowered, from the
+  // SAME manifest's districts and buildings. Called ONCE, after the ward leaf, for
+  // the same reason: this adapter is the only place allowed to cross into the
+  // manifest. `institutionBindings` and every receipt stay synthesis-local — the
+  // binding is TC-4's input, not a TC-3 record, so no new key reaches the block.
+  const parcelLayers = compileTownParcelLayers({
+    districts: base.districts,
+    wards: layers.wards,
+    streets: layers.streets,
+    buildings: base.buildings,
+    digest,
+    tier,
+    placement: synthesis.morphology.placement,
+  });
+
   return {
     schemaVersion: TOWN_CARTOGRAPHY_SCHEMA_VERSION,
     streets: layers.streets,
     wards: layers.wards,
-    parcels: [],
+    parcels: parcelLayers.parcels,
     buildings: [],
   };
 }
