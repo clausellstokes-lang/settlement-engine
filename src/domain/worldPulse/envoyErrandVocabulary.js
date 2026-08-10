@@ -375,9 +375,35 @@ export const ENVOY_ENCOUNTER_RESOLUTIONS = Object.freeze([
   'resumed',
   'plant_resumed',
 ]);
+/**
+ * ⛔ STOP-ES2-1's FOURTH BLOCKER, CLOSED BY ONE WORD (EP-q).
+ *
+ * The first three kinds are all read off the INTERCEPTOR's standing at the place: its own
+ * or an allied hall, a town it occupies, a bare road node. ES-2's gauntlet collides
+ * somewhere none of them describes — the host's ORDINARY settlement, where the traveller
+ * is a guest and the watch that takes him acts for the court whose town it is.
+ *
+ * `allied_hall` would have fit the SHAPE (its first arm is `node === actor`, the
+ * interceptor's own seat) and stated a FALSEHOOD in the address: the gauntlet's host is
+ * precisely the realm that does not like where he came from, and the venue kind travels
+ * into evidence and news. `host_settlement` is the counterpart noun to the custody record
+ * already in the tree — `foreignGuestHold` — so guest and host are one idea in two
+ * voices rather than a second word minted for one place.
+ *
+ * ⚠ THIS LIST HAS A SECOND HOME: `envoyEncounter.js` carries its own copy for the pure
+ * census leaf, and a third, deliberately NARROWER private copy lives in
+ * `armyTransitKernel.js` (the ARMY projection's venue law, which has no meaning for a
+ * host settlement and is left at three on purpose). The two exported homes must move
+ * together; `tests/domain/envoyEncounter.test.js` reds if they drift.
+ *
+ * ⚠ NO PRODUCER YET. `legalEncounterVenue` (envoyInterceptionStage.js) is the only
+ * production writer of an encounter venue kind and it still emits exactly the original
+ * three. This member is admitted by the DTO and minted by nobody until ES-2b.
+ */
 export const ENVOY_ENCOUNTER_VENUE_KINDS = Object.freeze([
   'allied_hall',
   'occupied_enemy_settlement',
+  'host_settlement',
   'field_node',
 ]);
 export const ENVOY_PARLAY_REFUSAL_REASONS = Object.freeze([

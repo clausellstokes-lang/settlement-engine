@@ -20,9 +20,18 @@
  *      `} else if (interceptedTick != null || heldTick != null || releasedTick != null
  *          || ['intercepted','held'].includes(state)) return null;`
  *      so custody is welded to an encounter by the PERSISTENCE DTO, not merely by a writer.
- *   2. `normalizeEnvoyEncounter` in turn requires a non-empty `armyId` AND an
- *      `interceptorPicture` whose `carrier.kind === 'army'`. A settlement WATCH has no army
- *      and no negotiation picture, so no lawful encounter row describes this collision.
+ *   2. ⏱ EP-q MOVED THIS ONE, AND THE BLOCKER SURVIVED THE MOVE — recorded rather than
+ *      deleted, because a sentence that merely disappears cannot be checked. It USED TO
+ *      read: `normalizeEnvoyEncounter` requires a non-empty `armyId` AND an
+ *      `interceptorPicture` whose `carrier.kind === 'army'`, so a settlement WATCH — which
+ *      has no army — could not be described by any lawful encounter row. The owner's
+ *      Option-A ruling made both clauses CARRIER-CONDITIONAL: a `court`-carried picture
+ *      with a null `armyId` at the new `host_settlement` venue is now a lawful PERSISTED
+ *      row. What EP-q deliberately did NOT move is the WRITER. `openEnvoyInterception` —
+ *      the only genesis of an encounter anywhere in the tree — still demands an army
+ *      carrier at its own gate, so the SHAPE now exists and nothing can mint it. ES-2b
+ *      opens that gate; until it does, blockers 1 and 3 stand untouched and this stage
+ *      still computes the capture, receipts it, and hands it back.
  *   3. `resumeEnvoyJourney` — the only release road in the tree, reached by the DM pardon
  *      verb through `releaseHeldEnvoy` — refuses `stale_encounter` without that same row.
  *      A hold opened here would therefore be a hold that could only ever end in `death`.

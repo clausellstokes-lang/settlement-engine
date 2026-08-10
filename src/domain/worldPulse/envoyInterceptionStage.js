@@ -142,7 +142,16 @@ function holdVenueFromEncounter(encounter) {
   const venue = asObject(row.venueRef);
   const venueId = text(row.venueId);
   if (text(venue.id) !== venueId) return null;
-  if (['allied_hall', 'occupied_enemy_settlement'].includes(text(venue.kind))) {
+  // EP-q — `host_settlement` joins the settlement arm the moment the vocabulary admits it,
+  // and it is added HERE rather than left for ES-2b because this mapper FAILS CLOSED
+  // SILENTLY: an unlisted kind returns null and the caller's `if (!holdVenue) continue;`
+  // drops the encounter with no throw and no red. A venue kind the vocabulary accepts and
+  // this line does not is a row that persists and then never resolves.
+  //
+  // ⚠ BEHAVIOUR-NEUTRAL TODAY BY CONSTRUCTION, NOT BY LUCK: `legalEncounterVenue` above is
+  // the only production producer of an encounter venue kind and still emits exactly three,
+  // so no reachable row can take this arm until ES-2b opens the producer.
+  if (['allied_hall', 'occupied_enemy_settlement', 'host_settlement'].includes(text(venue.kind))) {
     return { kind: 'settlement', settlementId: venueId };
   }
   const routeId = text(row.routeId);

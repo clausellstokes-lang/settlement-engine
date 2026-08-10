@@ -23,9 +23,18 @@ export const ENVOY_PRIVATE_GOALS = Object.freeze([
   'imprison',
   'terms_shop',
 ]);
+/**
+ * ⚠ THE SECOND HOME of the venue vocabulary — `envoyErrandVocabulary.js` carries the
+ * other, and that copy holds the full reasoning for `host_settlement` (EP-q, closing
+ * ⛔ STOP-ES2-1's fourth blocker). THE TWO MUST MOVE IN ONE EDIT: this leaf is the pure
+ * census and that one is the persistence DTO's vocabulary, so a drift would let a venue
+ * project cleanly and then fail to persist, or the reverse. `tests/domain/envoyEncounter.test.js`
+ * asserts the two lists are identical so the next drift reds instead of shipping.
+ */
 export const ENVOY_ENCOUNTER_VENUE_KINDS = Object.freeze([
   'allied_hall',
   'occupied_enemy_settlement',
+  'host_settlement',
   'field_node',
 ]);
 

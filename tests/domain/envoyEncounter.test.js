@@ -376,3 +376,95 @@ describe('WR-7b proactive self-parlay correction', () => {
     })).toEqual(['grievance']);
   });
 });
+
+/**
+ * EP-q — THE VENUE VOCABULARY HAS THREE HOMES IN src/ AND, UNTIL THIS BLOCK, NOTHING
+ * CHECKED THAT ANY TWO OF THEM AGREED.
+ *
+ * The list is duplicated rather than imported ON PURPOSE, and the duplication is
+ * load-bearing: `tests/domain/envoyK3BeliefSeam.test.js` pins this leaf's import list to
+ * exactly `['./warCoalitionLedger.js']` and pins `envoyErrandVocabulary.js` to the EMPTY
+ * list ("the family floor: zero imports"), so deduplicating by importing either direction
+ * reds an unrelated architectural guard. The cure for a duplicated law is therefore a
+ * PARITY PIN, not an import — the same shape CR-ES-3 used for the seat vocabulary.
+ *
+ * THE THIRD HOME IS DELIBERATELY DIFFERENT AND IS PINNED AS SUCH. `armyTransitKernel.js`
+ * keeps a private, NARROWER Set: the ARMY projection has no meaning for a settlement whose
+ * own watch made the arrest, and that Set FAILS OPEN (it drops `venueRef` rather than
+ * erroring), so its contents are pinned exactly. A future wave that widens it must say so
+ * here, and a future wave that narrows the exported homes reds here too.
+ */
+describe('EP-q — envoy encounter venue vocabulary parity', () => {
+  const ORIGINAL_THREE = ['allied_hall', 'occupied_enemy_settlement', 'field_node'];
+
+  test('the two EXPORTED homes are byte-identical, and both carry host_settlement', async () => {
+    const leaf = await import('../../src/domain/worldPulse/envoyEncounter.js');
+    const vocabulary = await import('../../src/domain/worldPulse/envoyErrandVocabulary.js');
+    // ANTI-VACUITY: both sides must actually be non-empty frozen lists before an equality
+    // between them proves anything at all.
+    expect(Object.isFrozen(leaf.ENVOY_ENCOUNTER_VENUE_KINDS)).toBe(true);
+    expect(Object.isFrozen(vocabulary.ENVOY_ENCOUNTER_VENUE_KINDS)).toBe(true);
+    expect(leaf.ENVOY_ENCOUNTER_VENUE_KINDS.length).toBeGreaterThan(ORIGINAL_THREE.length);
+    expect([...leaf.ENVOY_ENCOUNTER_VENUE_KINDS])
+      .toEqual([...vocabulary.ENVOY_ENCOUNTER_VENUE_KINDS]);
+    // The member EP-q added, named so a silent revert of one home cannot pass by making
+    // both homes equal at the OLD list.
+    expect(leaf.ENVOY_ENCOUNTER_VENUE_KINDS).toContain('host_settlement');
+    expect(vocabulary.ENCOUNTER_VENUE_KIND_SET.has('host_settlement')).toBe(true);
+    // Every original member survives — a widening, never a replacement.
+    for (const kind of ORIGINAL_THREE) {
+      expect(vocabulary.ENCOUNTER_VENUE_KIND_SET.has(kind)).toBe(true);
+    }
+  });
+
+  test('the THIRD, private home in armyTransitKernel stays narrow, and the narrowness is a decision', async () => {
+    const { readFileSync } = await import('node:fs');
+    const { fileURLToPath } = await import('node:url');
+    const { dirname, join } = await import('node:path');
+    const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
+    const source = readFileSync(join(root, 'src/domain/worldPulse/armyTransitKernel.js'), 'utf8');
+    const match = source.match(/const ENCOUNTER_VENUE_KINDS = new Set\(\[([^\]]*)\]\)/);
+    // ANTI-VACUITY: a renamed or reshaped declaration must RED here rather than silently
+    // matching nothing and leaving the assertion below comparing two empty lists.
+    expect(match, 'armyTransitKernel private venue Set not found — the pin has rotted, not the code').toBeTruthy();
+    const members = match[1].split(',')
+      .map((part) => part.trim().replace(/^'|'$/g, ''))
+      .filter(Boolean);
+    expect(members).toEqual(ORIGINAL_THREE);
+  });
+
+  /**
+   * THE SHARPEST BUG THIS CHANGE COULD HAVE INTRODUCED, GUARDED STRUCTURALLY BECAUSE IT
+   * CANNOT BE GUARDED BEHAVIOURALLY YET.
+   *
+   * `holdVenueFromEncounter` maps an encounter venue kind onto a custody venue, and it
+   * FAILS CLOSED IN SILENCE: an unlisted kind returns null and its caller's
+   * `if (!holdVenue) continue;` drops the encounter with no throw and no red. A venue kind
+   * the DTO accepts and that arm does not is a row that persists and never resolves.
+   *
+   * No behavioural fixture can reach the new arm — `legalEncounterVenue` is the only
+   * producer and does not emit `host_settlement` until ES-2b — so this DERIVES the
+   * expectation from the vocabulary rather than restating it: every venue kind that is not
+   * the road node must appear in the settlement arm. Adding a fifth kind without touching
+   * that arm reds HERE, at the vocabulary edit, instead of silently in a running world.
+   */
+  test('every settlement-shaped venue kind reaches holdVenueFromEncounter\'s settlement arm', async () => {
+    const { readFileSync } = await import('node:fs');
+    const { fileURLToPath } = await import('node:url');
+    const { dirname, join } = await import('node:path');
+    const vocabulary = await import('../../src/domain/worldPulse/envoyErrandVocabulary.js');
+    const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
+    const source = readFileSync(join(root, 'src/domain/worldPulse/envoyInterceptionStage.js'), 'utf8');
+    const match = source.match(/if \(\[([^\]]*)\]\.includes\(text\(venue\.kind\)\)\)/);
+    expect(match, 'holdVenueFromEncounter settlement arm not found — the pin has rotted, not the code').toBeTruthy();
+    const arm = match[1].split(',')
+      .map((part) => part.trim().replace(/^'|'$/g, ''))
+      .filter(Boolean);
+    const settlementKinds = vocabulary.ENVOY_ENCOUNTER_VENUE_KINDS
+      .filter((kind) => kind !== 'field_node');
+    // ANTI-VACUITY: the derived expectation must be a real, growing list — not the empty
+    // set an over-eager filter would produce.
+    expect(settlementKinds.length).toBeGreaterThan(2);
+    expect([...arm].sort()).toEqual([...settlementKinds].sort());
+  });
+});

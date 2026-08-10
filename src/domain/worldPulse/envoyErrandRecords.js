@@ -161,7 +161,46 @@ export function normalizeEncounterContinuation(raw) {
   };
 }
 
-/** Strict, complete persistence DTO for one actual army/envoy collision. */
+/**
+ * EP-q — WHO CAUGHT HIM, AND THEREFORE WHETHER AN ARMY ID EXISTS AT ALL.
+ *
+ * ⛔ STOP-ES2-1, Option A in its NARROW form, signed by the owner 2026-08-10. Until now the
+ * DTO welded custody to an ARMY: `armyId` was unconditionally required and the interceptor's
+ * frozen picture had to be carried by `kind:'army'`. ES-2's gauntlet collides with a
+ * settlement WATCH acting for its court, which has no army and never marched, so no lawful
+ * encounter row could describe it. The two rejected alternatives are recorded because the
+ * cheap one is the wrong one: MINTING the host's garrison as the armyId (option B) would
+ * manufacture an army that never existed and put a false address on the news — the option
+ * that would look like it worked; a SECOND release road (option C) buys a narrow diff by
+ * forking custody in two, the anti-pattern this family's own header cites.
+ *
+ * WRITTEN AS A TOTAL POSITIVE PREDICATE, NOT AS A REFUSAL LIST. Each admitted carrier must
+ * EARN its arm; an unrecognised carrier kind falls through to `false`. A negative
+ * enumeration here would fail OPEN the day a fourth carrier is minted, which is the exact
+ * shape that has bitten this estate before.
+ *
+ * `envoy` is NOT admitted, and its absence is the point rather than an oversight: the
+ * interceptor is never the traveller, so an envoy-carried interceptor picture describes a
+ * man stopping himself.
+ *
+ * @param {Record<string, unknown>} picture the ALREADY-normalized interceptor picture
+ * @param {string|null} armyId
+ * @param {string} interceptorId
+ */
+function lawfulEncounterCarrier(picture, armyId, interceptorId) {
+  const carrier = asObject(picture?.carrier);
+  const carrierKind = strictText(carrier.kind);
+  const carrierId = strictText(carrier.id);
+  // An ARMY carrier names the column that stopped him; the id IS the army's.
+  if (carrierKind === 'army') return !!armyId && carrierId === armyId;
+  // A COURT carrier is the seat itself — its watch, its town, no column anywhere. There is
+  // no army to name, so naming one is refused rather than tolerated: a null here is the
+  // record's own statement that nobody marched.
+  if (carrierKind === 'court') return armyId === null && carrierId === interceptorId;
+  return false;
+}
+
+/** Strict, complete persistence DTO for one actual interceptor/envoy collision. */
 export function normalizeEnvoyEncounter(raw) {
   const row = asObject(raw);
   if (!hasExactKeys(row, ENCOUNTER_KEYS)
@@ -169,7 +208,10 @@ export function normalizeEnvoyEncounter(raw) {
   const id = strictText(row.id);
   const kind = strictText(row.kind);
   const interceptorId = strictText(row.interceptorId);
-  const armyId = strictText(row.armyId);
+  // EP-q — armyId joins routeId/privateGoal/termSheetId as a CONDITIONAL field, read with
+  // their exact idiom: absent reads null, present-but-unparseable is refused below rather
+  // than healed to ''. It stays a member of ENCOUNTER_KEYS, so no key set moves.
+  const armyId = row.armyId == null ? null : strictText(row.armyId);
   const venueId = strictText(row.venueId);
   const routeId = row.routeId == null ? null : strictText(row.routeId);
   const venueRef = normalizeEncounterVenueRef(row.venueRef, venueId, routeId);
@@ -183,7 +225,8 @@ export function normalizeEnvoyEncounter(raw) {
   const interceptorPictureId = strictText(row.interceptorPictureId);
   const interceptorPicture = normalizeNegotiationPicture(row.interceptorPicture);
   const termSheetId = row.termSheetId == null ? null : strictText(row.termSheetId);
-  if (!id || !ENCOUNTER_KIND_SET.has(kind) || !interceptorId || !armyId || !venueId
+  if (!id || !ENCOUNTER_KIND_SET.has(kind) || !interceptorId
+    || (row.armyId != null && !armyId) || !venueId
     || !venueRef || (row.routeId != null && !routeId) || encounteredTick == null
     || !['travelling', 'returning'].includes(priorState)
     || !JOURNEY_SET.has(priorJourney)
@@ -191,8 +234,7 @@ export function normalizeEnvoyEncounter(raw) {
     || !destinationId || !ENCOUNTER_RESOLUTION_SET.has(resolution)
     || !interceptorPictureId || !interceptorPicture
     || interceptorPicture.id !== interceptorPictureId
-    || interceptorPicture.carrier?.kind !== 'army'
-    || interceptorPicture.carrier?.id !== armyId
+    || !lawfulEncounterCarrier(interceptorPicture, armyId, interceptorId)
     || interceptorPicture.partyId !== interceptorId
     || Number(interceptorPicture.lastChangedTick) > Number(encounteredTick)
     || (row.termSheetId != null && !termSheetId)) return null;

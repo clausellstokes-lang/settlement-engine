@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  ENVOY_ERRAND_LEDGER_KEY,
   ENVOY_REQUIRED_RULES,
   MAX_CONCURRENT_ENVOYS,
   MAX_TERMINAL_ENVOY_HISTORY,
@@ -1283,5 +1284,167 @@ describe('WR-7b envoy interception substrate', () => {
     const malformed = JSON.parse(JSON.stringify(returning.worldState));
     malformed.envoyErrands[0].termSheet.extraAuthorityClock = 99;
     expect(envoyErrandsOf(malformed)).toEqual([]);
+  });
+});
+
+/**
+ * EP-q — ⛔ STOP-ES2-1, OPTION A NARROW, DRIVEN THROUGH THE PERSIST SEAM RATHER THAN THE
+ * VALIDATOR.
+ *
+ * `normalizeEnvoyEncounter` is not exported from this family's barrel and no test in the
+ * tree called it directly before this block, so the armyId law had never been pinned at
+ * all — it was only ever exercised incidentally by writer fixtures that always supplied an
+ * army. These rows therefore go in through `envoyErrandsOf`, the SAME re-normalization
+ * every saved world crosses on every read: an admitted encounter yields one errand, and a
+ * refused one collapses the whole row to nothing. That makes the pin a HYDRATION pin, not
+ * merely a DTO pin, which is the property the persisted-shape ruling actually needed.
+ *
+ * THE ARMY ARM IS PINNED FIRST AND UNCHANGED, so the widening cannot be mistaken for a
+ * relaxation: an army-carried picture still demands its army id, and a court-carried one
+ * still refuses to name an army nobody marched with.
+ */
+describe('EP-q — the encounter DTO admits a court-carried capture, and nothing else', () => {
+  function interceptedBase() {
+    const outcome = peaceOffer();
+    const minted = mintOne(litWorld(), {
+      outcome,
+      routePlan: {
+        legs: [
+          { fromId: 'ashford', toId: 'ford', departTick: 10, arrivalTick: 12 },
+          { fromId: 'ford', toId: 'irontown', departTick: 13, arrivalTick: 15 },
+        ],
+        expectedReturnTick: 20,
+        routeRef: { id: 'road.north' },
+      },
+      negotiationPicture: negotiationPictureFor(outcome),
+    });
+    const intercepted = markEnvoyIntercepted({
+      worldState: minted.worldState,
+      errandId: minted.errand.id,
+      encounter: {
+        id: 'encounter.epq',
+        kind: 'private_goal',
+        privateGoal: 'imprison',
+        tick: 11,
+        errandId: minted.errand.id,
+        npcId: 'npc.reeve',
+        actorId: 'red-court',
+        armyId: 'army.red.1',
+        nodeId: 'ashford',
+        relationshipKey: 'ashford::irontown',
+        episodeKey: envoyOfferEpisodeKey(outcome),
+        routeId: 'road.north',
+        venueRef: { id: 'ashford', kind: 'field_node' },
+      },
+      interceptorPicture: armyPictureFor({
+        outcome,
+        armyId: 'army.red.1',
+        interceptorId: 'red-court',
+        counterpartId: 'ashford',
+        tick: 11,
+      }),
+      expectedErrand: minted.errand,
+      tick: 11,
+    });
+    // ANTI-VACUITY: every refusal assertion below reads as "no errand came back", which is
+    // also what a broken FIXTURE produces. The base must be proven to come back first.
+    expect(intercepted.reason).toBe('intercepted');
+    return { worldState: intercepted.worldState, errand: intercepted.errand };
+  }
+
+  /** Re-read one hand-built errand through the exact seam a saved world crosses. */
+  function readBack(worldState, errand) {
+    return envoyErrandsOf({ ...worldState, [ENVOY_ERRAND_LEDGER_KEY]: [errand] });
+  }
+
+  function withEncounter(errand, encounter) {
+    return { ...errand, encounters: [encounter] };
+  }
+
+  it('still requires the army id when an ARMY carried the picture — the old law, unmoved', () => {
+    const { worldState, errand } = interceptedBase();
+    const army = errand.encounters[0];
+    expect(army.armyId).toBe('army.red.1');
+    expect(readBack(worldState, errand)).toHaveLength(1);
+    expect(readBack(worldState, errand)[0].encounters[0]).toMatchObject({
+      armyId: 'army.red.1',
+      interceptorPicture: { carrier: { kind: 'army', id: 'army.red.1' } },
+    });
+
+    // An army carrier with no army to name is refused exactly as it always was.
+    expect(readBack(worldState, withEncounter(errand, { ...army, armyId: null }))).toEqual([]);
+    // …and one naming a DIFFERENT army than its own picture carries.
+    expect(readBack(worldState, withEncounter(errand, { ...army, armyId: 'army.blue.9' }))).toEqual([]);
+  });
+
+  it('admits a COURT-carried capture at a host settlement with a null army id', () => {
+    const { worldState, errand } = interceptedBase();
+    const army = errand.encounters[0];
+    const courtPicture = {
+      ...army.interceptorPicture,
+      id: 'court-picture.red-court',
+      carrier: { kind: 'court', id: 'red-court' },
+    };
+    const court = {
+      ...army,
+      armyId: null,
+      routeId: null,
+      venueRef: { id: 'ashford', kind: 'host_settlement' },
+      interceptorPictureId: 'court-picture.red-court',
+      interceptorPicture: courtPicture,
+    };
+
+    const [admitted] = readBack(worldState, withEncounter(errand, court));
+    // The whole point of the ruling: this row is now PERSISTABLE. It was not before.
+    expect(admitted, 'a court-carried capture must survive re-normalization').toBeTruthy();
+    expect(admitted.encounters[0]).toMatchObject({
+      armyId: null,
+      routeId: null,
+      venueId: 'ashford',
+      venueRef: { id: 'ashford', kind: 'host_settlement' },
+      interceptorId: 'red-court',
+      interceptorPicture: { carrier: { kind: 'court', id: 'red-court' } },
+    });
+    // ROUND-TRIP: the emitted null is the same null the reader accepts, so a saved world
+    // written from this row re-reads byte-identically rather than healing to ''.
+    expect(readBack(worldState, withEncounter(errand, admitted.encounters[0]))[0].encounters[0])
+      .toEqual(admitted.encounters[0]);
+  });
+
+  it('refuses an army id on a court-carried capture — nobody marched, so nobody is named', () => {
+    const { worldState, errand } = interceptedBase();
+    const army = errand.encounters[0];
+    const courtPicture = {
+      ...army.interceptorPicture,
+      id: 'court-picture.red-court',
+      carrier: { kind: 'court', id: 'red-court' },
+    };
+    const court = {
+      ...army,
+      armyId: null,
+      routeId: null,
+      venueRef: { id: 'ashford', kind: 'host_settlement' },
+      interceptorPictureId: 'court-picture.red-court',
+      interceptorPicture: courtPicture,
+    };
+    // ANTI-VACUITY: the lawful court row is admitted, so the refusals below isolate the
+    // ONE field each mutates rather than a broken fixture.
+    expect(readBack(worldState, withEncounter(errand, court))).toHaveLength(1);
+
+    // THE LOAD-BEARING MUTANT'S TARGET. Emitting armyId unconditionally — the shape before
+    // EP-q, and the shape a careless revert restores — must be refused here.
+    expect(readBack(worldState, withEncounter(errand, { ...court, armyId: 'army.red.1' })))
+      .toEqual([]);
+    // A court that is not the interceptor cannot carry the interceptor's own picture.
+    expect(readBack(worldState, withEncounter(errand, {
+      ...court,
+      interceptorPicture: { ...courtPicture, carrier: { kind: 'court', id: 'ashford' } },
+    }))).toEqual([]);
+    // The predicate is TOTAL and POSITIVE: `envoy` is a real member of the carrier
+    // vocabulary and is still refused, because the interceptor is never the traveller.
+    expect(readBack(worldState, withEncounter(errand, {
+      ...court,
+      interceptorPicture: { ...courtPicture, carrier: { kind: 'envoy', id: 'red-court' } },
+    }))).toEqual([]);
   });
 });
