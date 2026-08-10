@@ -115,6 +115,38 @@
       ]
     },
     {
+      "id": "GR-3B-ORIENT",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-3B-ORIENT.md",
+      "verifiedBase": "820ed989df1747cfbeb8b0a5a9a07b253736151f",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/domain/worldPulse/treatyOrientation.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/treatyTermRoles.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTerms.js" },
+        { "action": "TEST", "path": "tests/domain/treatyOrientationWr10g.test.js" },
+        { "action": "TEST", "path": "tests/domain/peaceTerms.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/treatyOrientation.js", "symbol": "treatyOrientationOf" },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "advanceTreaties" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "per-term obligor and obligee through the real PASS 2" },
+        { "id": "A2", "case": "beneficiary-less terms delegate to the instrument orientation" },
+        { "id": "A3", "case": "symmetric beneficiaries resolve mutual with no transfer direction" },
+        { "id": "A4", "case": "transfer payer and payee follow the term axis" },
+        { "id": "A5", "case": "defaultedBy names the term obligor" },
+        { "id": "A6", "case": "swapped-proposer invariance of the resolved roles" },
+        { "id": "A7", "case": "closed obligation-kind vocabulary" },
+        { "id": "A8", "case": "round-trip stability of the per-term resolution" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/treatyOrientationWr10g.test.js",
+          "tests/domain/peaceTerms.test.js"]
+      ]
+    },
+    {
       "id": "GR-3B",
       "status": "BLOCKED",
       "packetPath": "docs/implementation/packets/foreign-policy/GR-3B.md",
