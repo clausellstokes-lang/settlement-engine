@@ -1,6 +1,7 @@
 # Foreign Policy / GR-3B — peacetime term producers
 
-- **Status:** `READY`
+- **Status:** `LANDED`
+- **Landed:** `40afbdd6` (2026-08-10; 8/8, 13/14 mutants killed + one found-and-fixed, coupling identity = base, 0-of-52 introduced, the declared shared-threat pair shift measured and controlled)
 - **Promotion (chair, 2026-08-10):** GR-3B-ORIENT LANDED at `d56d944c` — the
   sequencing dependency is DISCHARGED and this packet goes READY at CR-FP-ORDER
   position 3, the chain's last link. Original block note follows:
