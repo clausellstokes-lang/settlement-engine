@@ -11,6 +11,13 @@
   CR-GR3B-3-R1 replaced; §3.7 records what version 1 got right and what it got wrong)
 - **Verified base:** `claude/composite-r4` at `820ed989df1747cfbeb8b0a5a9a07b253736151f`
 - **Last revalidated:** `2026-08-10` at `820ed989`
+- **Amended (CR-ORIENT-C, chair, 2026-08-10):** §6.2's `pIndex` argument is REPLACED by an
+  injected pure closure `pressureFor: (id) => PressureSummary`, supplied by `peaceTerms.js`
+  inline at the construction expression — dependency inversion after CW-0w's pair-keyed
+  coupling ratchet refused the leaf's `relationshipEvolution.js` import (the §6.2
+  reachability argument was refuted: the ratchet keys on (importer, imported) PAIRS).
+  Zero new cross-layer pairs, zero registry motion, zero baseline motion, zero line cost.
+  The implementation receipt records the applied delta.
 - **Depends on:** `NONE beyond the verified base`
 - **Collision group:** `IN-0C` — **both packets modify
   `src/domain/worldPulse/peaceTerms.js`, which has exactly 10 effective lines of

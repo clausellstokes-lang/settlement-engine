@@ -161,6 +161,85 @@ export function treatyOrientationOf(treaty) {
   return unresolvedOrientation();
 }
 
+/** THE PER-TERM OBLIGATION VOCABULARY (chair ruling CR-GR3B-3-R1). A SUPERSET of
+ *  TREATY_ORIENTATION_KINDS by exactly one member: the three instrument kinds pass
+ *  through from the delegation arm below, and `negotiated` is the only kind this reader
+ *  can add.
+ *  ⚠ TREATY_ORIENTATION_KINDS and TREATY_ROLE_WORDS are NOT widened, and must not be —
+ *  both are pinned exactly by tests/domain/treatyOrientationWr10g.test.js. A negotiated
+ *  instrument stays `unknown` at the TREATY level, because §3.2's multi-round record
+ *  makes a treaty-level direction ill-defined: one record, two clauses, opposite ways. */
+export const TERM_OBLIGATION_KINDS = Object.freeze(['unknown', 'wartime', 'sale', 'negotiated']);
+
+/**
+ * @typedef {Object} TermObligation
+ * @property {string} kind       a TERM_OBLIGATION_KINDS member
+ * @property {boolean} resolved  false ⇒ both ids below are the empty string
+ * @property {boolean} mutual    true ⇒ both parties hold it; there is NO transfer direction
+ * @property {string} obligorId  bears this clause's burden — pays, is watched, is named on default
+ * @property {string} obligeeId  is owed it
+ */
+
+/** The unresolved obligation. `unknown` is a verdict here exactly as it is above: a
+ *  caller treating it as "this clause binds nobody" is correct. @returns {TermObligation} */
+function unresolvedObligation() {
+  return { kind: 'unknown', resolved: false, mutual: false, obligorId: '', obligeeId: '' };
+}
+
+/**
+ * READ ONE CLAUSE'S OBLIGATION — who owes THIS term, on THIS instrument.
+ *
+ * A war settlement and a sale carry one direction for the whole document, and every one
+ * of their clauses inherits it. A negotiated pact does not: its clauses are asked for one
+ * at a time, by either court, and a reciprocal bargain is two opposed promises on a single
+ * record. So the axis is the datum the record already carries — the term's `beneficiary`,
+ * written by `draftPactSheet` and read by `grantTermFor` since GR-3. The party a clause
+ * runs TO is owed it; the OTHER party promised it, and therefore pays it, is watched on
+ * it, and is the one named when it defaults. That is what the clause's own receipt has
+ * always said in words: `<the non-beneficiary> promises … to <the beneficiary>`.
+ *
+ * THE ORDER OF THE THREE ARMS IS THE CONTRACT. A term carrying a beneficiary is
+ * negotiated provenance and never consults the instrument; a term carrying none delegates,
+ * and that arm is TOTAL over every war-door, carried-sheet and sale term in the tree,
+ * because no such term literal writes the key. Anything else fails closed — no guess, no
+ * placeholder, and never one party standing in for the other.
+ *
+ * @param {Record<string, unknown> | null | undefined} treaty
+ * @param {Record<string, unknown> | null | undefined} term
+ * @returns {TermObligation}
+ */
+export function termObligationOf(treaty, term) {
+  const beneficiary = text(recordOf(term).beneficiary);
+  if (beneficiary === 'both') {
+    // A REAL VERDICT, NOT AN UNRESOLVED ONE: both courts hold this clause and nobody hands
+    // anything over. `mutual` is its own field precisely so no caller has to infer that
+    // from the empty ids and get "unknown" instead.
+    return { kind: 'negotiated', resolved: true, mutual: true, obligorId: '', obligeeId: '' };
+  }
+  if (beneficiary) {
+    const rawParties = recordOf(treaty).parties;
+    const parties = Array.isArray(rawParties) ? rawParties.map(text) : [];
+    const [first, second] = parties;
+    if (parties.length !== 2 || !first || !second || first === second) return unresolvedObligation();
+    if (first !== beneficiary && second !== beneficiary) return unresolvedObligation();
+    return {
+      kind: 'negotiated',
+      resolved: true,
+      mutual: false,
+      obligorId: first === beneficiary ? second : first,
+      obligeeId: beneficiary,
+    };
+  }
+  const instrument = treatyOrientationOf(treaty);
+  return {
+    kind: instrument.kind,
+    resolved: instrument.resolved,
+    mutual: false,
+    obligorId: instrument.obligorId,
+    obligeeId: instrument.obligeeId,
+  };
+}
+
 /**
  * The word for one party's role in one treaty — 'victor' / 'the bound party' on a war
  * settlement, 'the buyer' / 'the seller' on a sale, 'a party' for anyone else. Exported

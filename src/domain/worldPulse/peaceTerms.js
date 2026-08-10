@@ -93,6 +93,16 @@ import { CURRENT_TREATY_TICKS_PER_YEAR } from './treatyClock.js';
 // separately who OWES. WR-10 mints treaties with a seller and a buyer and no war in
 // them, so "the loser" stopped being a field this file may read directly.
 import { treatyOrientationOf } from './treatyOrientation.js';
+// CR-GR3B-3-R1 — THE PER-TERM OBLIGATION AXIS. A negotiated pact's clauses can point
+// opposite ways on one record, so PASS 2's capacity, monitoring and conserved movement
+// follow the CLAUSE. The leaf prices the instrument's own direction eagerly, in the order
+// this file used to, so every war and sale treaty is priced byte-identically.
+// ⚠ THE PRESSURE READ IS HANDED DOWN, NOT IMPORTED BY THE LEAF (chair ruling CR-ORIENT-C).
+// `relationshipEvolution.js` is across a port, and CW-0w's inventory keys on the (importer,
+// imported) PAIR — so a new module reading it is a new unlicensed coupling however
+// well-trodden the port is. THIS file already holds the baselined row, so it does the
+// reading and the leaf stays inside GRAMMAR. Keep the closure here if the leaf ever grows.
+import { makeTermRoleReader } from './treatyTermRoles.js';
 import { dispositionTreatyLearningActive, treatyDispositionDeltas, withTreatyDispositionDeltas } from './treatyDisposition.js';
 import { thresholdFactorOf } from './dispositionProfile.js';
 // THE MATERIAL EXECUTOR: a stream term's installment moves REAL granary months
@@ -141,7 +151,7 @@ import {
 import {
   alignmentPress, alignmentPressFromInput, appraiseLoserPortfolio,
   appraiseLoserPortfolioFromInputs, believedAdvantage, believedAdvantageFromInputs,
-  evolveCompliance, resolveVictor, termBudgetFor, victorMonitorReach,
+  evolveCompliance, resolveVictor, termBudgetFor,
 } from './peaceTermsAppraisal.js';
 import { draftReceipt, draftTerms, signingReason } from './peaceTermsDrafting.js';
 import {
@@ -649,28 +659,29 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
       continue;
     }
 
-    // The loser's true delivery capacity (economic headroom) + the victor's
-    // monitoring reach (belief source — truth ⇒ sight, banded belief ⇒ fog).
-    const loserPressure = buildPressureSummary(pIndex, loserId);
-    const loserBurden01 = clamp01(0.6 * clamp01(Number(loserPressure?.economy) || 0) + 0.4 * clamp01(Number(loserPressure?.food) || 0));
-    const loserCapacity01 = clamp01(1 - loserBurden01);
-    const monitorReach01 = victorMonitorReach(victorId, loserId, workingState, truthFor);
+    // The obligor's true delivery capacity (economic headroom) + the obligee's monitoring
+    // reach (belief source — truth ⇒ sight, banded belief ⇒ fog), PER CLAUSE. The reader is
+    // built here rather than hoisted because `workingState` moves between treaties (the
+    // strain accrual below rewrites it) and it must see the state this iteration sees.
+    const roles = makeTermRoleReader({ treaty, orientation, pressureFor: (id) => buildPressureSummary(pIndex, id), worldState: workingState, truthFor });
 
     /** @type {TermRecord[]} */
     const liveTerms = [];
     let worstObserved = 'honored';
     let anyStrainThisTick = false;
     let defaultSeverity01 = 0;
+    let defaultObligorId = '';
     for (const term of terms) {
       if (Number(tick) >= Number(term.expiresTick)) {
         // EXPIRY (§12.5): the term lapses; its effect lifts (the reads stop
         // returning it once it is gone). Dropped from the live set.
         continue;
       }
-      const comp = evolveCompliance({ loserCapacity01, monitorReach01 });
+      const role = roles.forTerm(term);
+      const comp = evolveCompliance({ loserCapacity01: role.capacity01, monitorReach01: role.reach01 });
       term.trueState = comp.trueState;
       term.complianceState = comp.observedState;
-      term.burden01 = round4(loserBurden01);
+      term.burden01 = round4(role.burden01);
 
       // ── STREAMS EXECUTE A REAL, CONSERVED INSTALLMENT. The term's magnitude is its
       // nominal YEARLY share; one tick draws one installment of it from the loser's
@@ -685,21 +696,24 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
       const spec = TERM_CATALOG[term.type];
       if (spec?.stream) {
         const draw = computeTreatyGrainDraw({
-          payer: freshestSettlement(workingSettlementUpdates, snapshot, loserId),
-          payee: freshestSettlement(workingSettlementUpdates, snapshot, victorId),
+          payer: freshestSettlement(workingSettlementUpdates, snapshot, role.obligorId),
+          payee: freshestSettlement(workingSettlementUpdates, snapshot, role.obligeeId),
           takeFraction: streamInstallmentFraction(term, comp.trueDelivery01, treaty),
-          committedDebit: -(foodDeltas.get(loserId) || 0),
-          committedCredit: foodDeltas.get(victorId) || 0,
+          committedDebit: -(foodDeltas.get(role.obligorId) || 0),
+          committedCredit: foodDeltas.get(role.obligeeId) || 0,
         });
         if (draw && draw.lostMonths > 0) {
-          foodDeltas.set(loserId, round4((foodDeltas.get(loserId) || 0) - draw.lostMonths));
-          if (draw.gainedMonths > 0) foodDeltas.set(victorId, round4((foodDeltas.get(victorId) || 0) + draw.gainedMonths));
+          foodDeltas.set(role.obligorId, round4((foodDeltas.get(role.obligorId) || 0) - draw.lostMonths));
+          if (draw.gainedMonths > 0) foodDeltas.set(role.obligeeId, round4((foodDeltas.get(role.obligeeId) || 0) + draw.gainedMonths));
           term.extractedFromLoser = round4((Number(term.extractedFromLoser) || 0) + draw.lostMonths);
           term.deliveredToVictor = round4((Number(term.deliveredToVictor) || 0) + draw.gainedMonths);
         }
       }
       if (comp.trueState !== 'honored') anyStrainThisTick = true;
-      if (comp.observedState === 'defaulted') defaultSeverity01 = Math.max(defaultSeverity01, round4(1 - comp.trueDelivery01));
+      if (comp.observedState === 'defaulted') {
+        defaultSeverity01 = Math.max(defaultSeverity01, round4(1 - comp.trueDelivery01));
+        defaultObligorId = role.obligorId;
+      }
       if (rankState(comp.observedState) > rankState(worstObserved)) worstObserved = comp.observedState;
       liveTerms.push(term);
     }
@@ -724,13 +738,19 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
     // tick has been observed once, and one observation is a level. Without it a single-tick
     // harness could certify a "crossing" pin that never saw a transition at all.
     if (lifecycleVoiceLit && previousCompliance === 'honored' && prevLedger?.[key]) newsEntries.push(...treatyDefaultDetectedBeats({ tick, observedState: worstObserved, terms: liveTerms, orientation }));
-    // DROP-WHEN-ABSENT AT THE WRITE (CR-WR10-G's needs-guard). An unresolved orientation
-    // yields the empty string, and a treaty that cannot say who owes it cannot name an
-    // oathbreaker — writing the key anyway would put a nameless accusation in the ledger
+    // DROP-WHEN-ABSENT AT THE WRITE (CR-WR10-G's needs-guard). An unresolved obligation —
+    // and a MUTUAL clause, which binds both courts and therefore accuses neither — yields
+    // the empty string, and a clause that cannot say who owes it cannot name an
+    // oathbreaker: writing the key anyway would put a nameless accusation in the ledger
     // and feed it to scoreTreatyDefault. No obligor ⇒ no default record, and the branch
     // below prunes any stale one exactly as it always did.
-    if (defaultSeverity01 > 0 && loserId) {
-      treaty.defaultedBy = loserId;                 // the obligor is the oathbreaker (feeds scoreTreatyDefault)
+    // ⚠ THE KEY STAYS A SCALAR STRING (warReasons reads `String(t?.defaultedBy || '')`), so
+    // when several clauses default the LAST defaulting one in the treaty's stored term
+    // order names the oathbreaker — the same fold `defaultSeverity01` already takes, and
+    // deterministic because the term order is. On a war or sale treaty every candidate is
+    // the same id, so the record is byte-identical to what it has always been.
+    if (defaultSeverity01 > 0 && defaultObligorId) {
+      treaty.defaultedBy = defaultObligorId;        // the obligor is the oathbreaker (feeds scoreTreatyDefault)
       treaty.defaultSeverity01 = defaultSeverity01;
       // Learn the breach once on the observed transition, never once per tick of
       // an already-defaulted treaty. The other party does not receive a synthetic
@@ -743,7 +763,7 @@ export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], 
     // §12.3 STRAIN → the E1b resentment seam: the paying loser resents its burden;
     // that resentment is the §5 revanchism fuel a future war reads.
     if (anyStrainThisTick && orientation.resolved) {
-      workingState = accrueStrainResentment(workingState, /** @type {Array<Record<string, unknown>>} */ (edges), loserId, victorId, loserBurden01, now, treaty);
+      workingState = accrueStrainResentment(workingState, /** @type {Array<Record<string, unknown>>} */ (edges), loserId, victorId, roles.instrument.burden01, now, treaty);
     }
   }
 

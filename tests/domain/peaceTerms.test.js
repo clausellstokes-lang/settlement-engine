@@ -39,6 +39,12 @@ import { INTERVAL_WEEKS } from '../../src/domain/worldPulse/intervalWeeks.js';
 import { advanceWarReasons, warReasonsFor } from '../../src/domain/worldPulse/warReasons.js';
 import { GOVERNING_SEAT_KEY } from '../../src/domain/worldPulse/beliefMap.js';
 import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
+import { buildPressureSummary } from '../../src/domain/worldPulse/relationshipEvolution.js';
+import {
+  TREATY_ORIENTATION_KINDS, TREATY_ROLE_WORDS, termObligationOf, treatyOrientationOf,
+} from '../../src/domain/worldPulse/treatyOrientation.js';
+import { draftPactSheet, signPactProposal } from '../../src/domain/worldPulse/pactFormation.js';
+import { lineageOf } from '../../src/domain/worldPulse/pactAmendment.js';
 
 const LIT = { warLayerEnabled: true, peaceEngineEnabled: true };
 
@@ -723,5 +729,269 @@ describe('W-PEACE-2 treaty_default feed — a detected default mints the war rea
     const out2 = advanceWarReasons({ snapshot: snapshotFor(items, edges), worldState: honored, graph: { edges }, pIndex: null, tick: 20 });
     const honoredCase = warReasonsFor(out2.worldState, 'iron', 'weak');
     expect(honoredCase?.reasons?.treaty_default, 'an honored treaty is no casus').toBeFalsy();
+  });
+});
+
+// ── G) GR-3B-ORIENT — THE PER-TERM OBLIGATION AXIS (CR-GR3B-3-R1) ───────────
+//
+// The axis a negotiated clause is resolved on is the term's own persisted `beneficiary`:
+// the obligee is the party the clause runs to, the obligor is the counterparty, and a
+// clause both courts hold binds them MUTUALLY with no transfer direction at all. A war
+// or sale term carries no `beneficiary`, so it DELEGATES to the instrument reader and
+// must resolve exactly as it always has.
+
+/** A pressure index that records every `(saveId, kind)` read the mover performs, in
+ *  order. It is the instrument A5 needs and it mocks NOTHING: `buildPressureSummary`
+ *  reaches the index once per summary, and `victorMonitorReach(obligee, obligor, …)`
+ *  reaches the same index through `truthFor(obligor)`. A changed call count, a changed
+ *  order or a swapped argument pair all move this log. */
+function recordingIndex(log) {
+  return { get: (sid, kind) => { log.push(`${String(sid)}:${String(kind)}`); return undefined; } };
+}
+
+describe('GR-3B-ORIENT A5 — the counterforce: a war treaty is priced exactly as it always was', () => {
+  it('ONE capacity summary + ONE monitor read, both for the OBLIGOR, for a THREE-term treaty', () => {
+    // The expected shape is DERIVED from the real leaf rather than restated: one summary
+    // is whatever `buildPressureSummary` reads, and PASS 2 performs exactly two of them.
+    const oneSummary = [];
+    buildPressureSummary(recordingIndex(oneSummary), 'weak');
+    expect(oneSummary.length, 'the recorder really sees a summary').toBeGreaterThan(0);
+
+    const log = [];
+    const ws = ledgerWorld(treatyOf([
+      term('tribute', { magnitude: 0.3 }), term('non_aggression'), term('demilitarization', { magnitude: 0.5 }),
+    ]));
+    advance(ws, FED, IW_EDGES, 10, recordingIndex(log));
+    // MEASURED AT THE VERIFIED BASE BEFORE THE WIRING EXISTED, AND RE-MEASURED AFTER IT:
+    // the capacity read and the monitor read are one summary each, in that order, and
+    // THREE terms still cost two — the figures are per DIRECTION, not per clause.
+    expect(log, 'the capacity read then the monitor read, both on the obligor')
+      .toEqual([...oneSummary, ...oneSummary]);
+
+    // AND THE OBLIGEE IS NEVER PRICED. A swapped `victorMonitorReach` argument pair would
+    // call `truthFor('iron')` and put iron in this log.
+    const ironProbe = [];
+    buildPressureSummary(recordingIndex(ironProbe), 'iron');
+    // anchored: the detector demonstrably CAN see the obligee one line above, so the
+    // absence below is PASS 2's direction rather than a scanner that never fires.
+    expect(ironProbe.some((row) => row.startsWith('iron:')), 'the detector can see it').toBe(true);
+    expect(log.some((row) => row.startsWith('iron:')), 'and PASS 2 never priced it').toBe(false);
+  });
+
+  it('EVERY war and sale clause DELEGATES — the per-term reader returns the instrument answer exactly', () => {
+    const sale = {
+      parties: ['iron', 'weak'], sellerId: 'weak', buyerId: 'iron', mintedTick: 0,
+      complianceState: 'honored', receipts: ['pin'],
+      terms: [term('tribute'), term('occupation_continuation')],
+    };
+    const nameless = {
+      parties: ['iron', 'weak'], mintedTick: 0, complianceState: 'honored', receipts: ['pin'],
+      terms: [term('tribute')],
+    };
+    /** @type {Array<[string, Record<string, any>]>} */
+    const fixtures = [
+      ['a war settlement', treatyOf([term('tribute'), term('non_aggression'), term('demilitarization')])],
+      ['a defaulted war settlement', treatyOf([term('tribute')], { complianceState: 'defaulted', defaultedBy: 'weak', defaultSeverity01: 0.7 })],
+      ['a repudiation shell', treatyOf([term('tribute')], { breachType: 'repudiation', breachExpiresTick: 40 })],
+      ['a sovereignty SALE', sale],
+      ['an orientation-less record', nameless],
+    ];
+    for (const [why, treaty] of fixtures) {
+      const instrument = treatyOrientationOf(treaty);
+      for (const clause of treaty.terms) {
+        expect(termObligationOf(treaty, clause), why).toEqual({
+          kind: instrument.kind,
+          resolved: instrument.resolved,
+          mutual: false,
+          obligorId: instrument.obligorId,
+          obligeeId: instrument.obligeeId,
+        });
+      }
+    }
+    // THE TOTALITY CLAIM'S ONE PREMISE, MEASURED: the delegation arm is total only while no
+    // war-door, carried-sheet or sale clause writes a `beneficiary` key. The day one does,
+    // it silently changes courts — which is why this is asserted rather than assumed.
+    for (const [why, treaty] of fixtures) {
+      for (const clause of treaty.terms) {
+        expect(Object.prototype.hasOwnProperty.call(clause, 'beneficiary'), why).toBe(false);
+      }
+    }
+    // anchored: the same reader DOES resolve differently the moment the key appears, so the
+    // equalities above measure the delegation arm rather than a reader that ignores terms.
+    const spelled = { ...sale.terms[0], beneficiary: 'weak' };
+    expect(termObligationOf(sale, spelled).obligorId, 'the key really does redirect').toBe('iron');
+    expect(treatyOrientationOf(sale).obligorId, 'against the instrument answer').toBe('iron');
+    const reversed = { ...sale.terms[0], beneficiary: 'iron' };
+    expect(termObligationOf(sale, reversed).obligorId).toBe('weak');
+  });
+
+  it('the negotiated arm reproduces the delegated one BYTE FOR BYTE when they name the same direction', () => {
+    // A war settlement's clauses all inherit one direction: the obligee is the victor. Spell
+    // that out as a `beneficiary` on each clause and PASS 2 must produce the identical tick.
+    const plain = treatyOf([term('tribute', { magnitude: 0.3 }), term('non_aggression')]);
+    const spelledSame = treatyOf(plain.terms.map((t) => ({ ...t, beneficiary: 'iron' })));
+    const spelledOther = treatyOf(plain.terms.map((t) => ({ ...t, beneficiary: 'weak' })));
+    /** The whole tick, minus the key that selects the arm. */
+    const tickOf = (treaty) => {
+      const out = advance(ledgerWorld(JSON.parse(JSON.stringify(treaty))), FED, IW_EDGES, 10);
+      const stored = getSpatialLedger(out.worldState, 'treaties')[treatyPairKey('iron', 'weak')];
+      return JSON.stringify({
+        treaty: { ...stored, terms: stored.terms.map(({ beneficiary, ...rest }) => rest) },
+        updates: out.settlementUpdates,
+        changed: out.changed,
+      });
+    };
+    expect(tickOf(spelledSame), 'the two arms agree on every byte').toBe(tickOf(plain));
+    // anchored: naming the OTHER court really does move the tick, so the equality above is
+    // a byte comparison with teeth rather than one that could not have failed.
+    expect(tickOf(spelledOther), 'and the reversed direction does NOT').not.toBe(tickOf(plain));
+  });
+});
+
+// ── GR-3B-ORIENT — THE NEGOTIATED ARM, DRIVEN THROUGH THE REAL MINT ─────────
+
+/** Mint a negotiated instrument through the REAL drafter and the REAL signer. Nothing
+ *  below hand-builds a negotiated record: a fixture written to the resolver's own shape
+ *  would mirror the deriver it is meant to measure. */
+function mintPact({ fromId, toId, trigger, reciprocal = false, signTick = 10, worldState = null }) {
+  const sheet = draftPactSheet({ trigger, fromId, toId, reciprocal, tick: signTick - 4 });
+  return signPactProposal({
+    worldState: worldState || {
+      rngSeed: 'gr3b-orient', simulationRules: { pactFormationEnabled: true },
+      relationshipStates: {}, spatialLedgers: {},
+    },
+    proposal: { from: fromId, to: toId, sheet },
+    tick: signTick,
+  });
+}
+
+const PACT_KEY = treatyPairKey('iron', 'weak');
+const pactRecord = (signed) => getSpatialLedger(signed.worldState, 'treaties')[PACT_KEY];
+const fresh = (record) => JSON.parse(JSON.stringify(record));
+
+/** A negotiated record has no victor and no loser, so `ledgerWorld` (which keys on that
+ *  pair) cannot address it. Same world, keyed by the pair key the mint actually used. */
+function pactLedgerWorld(treaty, extra = {}) {
+  return {
+    tick: 10, simulationRules: { ...LIT }, calendar: { elapsedWeeks: 30 }, deployments: {},
+    relationshipStates: {}, spatialLedgers: { treaties: { [PACT_KEY]: treaty } }, ...extra,
+  };
+}
+
+/** THE WEEKLY-CLOCK PAIR. A negotiated instrument runs on the CURRENT 52-tick year, so one
+ *  installment is a fifty-second of the yearly share — MEASURED to round away entirely
+ *  against the FED pair's six months, which would make a movement pin vacuous. The payer
+ *  gets the headroom that makes a weekly stream actually felt. */
+const WEEKLY_PAYER_MONTHS = 8;
+const WEEKLY = [
+  item('iron', { tier: 'town', population: VICTOR_POP, storageMonths: VICTOR_MONTHS }),
+  item('weak', { tier: 'city', population: LOSER_POP, storageMonths: WEEKLY_PAYER_MONTHS }),
+];
+
+/** Crushes ONE court's economy and food — enough capacity loss to observe a default. */
+const crushingOne = (id) => ({
+  get: (sid, kind) => (String(sid) === id && (kind === 'economy' || kind === 'food') ? { score: 95 } : undefined),
+});
+
+describe('GR-3B-ORIENT — a negotiated clause knows which court owes it', () => {
+  it('A1: the stream draws the OBLIGOR\'s granary and credits the OBLIGEE\'s, and the burden is the obligor\'s', () => {
+    const record = pactRecord(mintPact({ fromId: 'iron', toId: 'weak', trigger: 'trade_demand' }));
+    const clause = record.terms[0];
+    expect(clause.type, 'the real lens drafts an economic clause').toBe('resource_share');
+    expect(TERM_CATALOG[clause.type].stream, 'and it is a real stream').toBe(true);
+    expect(clause.beneficiary, 'the court that ASKED is the one it runs to').toBe('iron');
+    // The clause's own receipt has always named the promiser in words; the resolution
+    // agrees with it rather than with a second spelling of the same question.
+    expect(clause.receipt).toContain('weak promises');
+    expect(termObligationOf(record, clause)).toEqual({
+      kind: 'negotiated', resolved: true, mutual: false, obligorId: 'weak', obligeeId: 'iron',
+    });
+
+    // MOVEMENT. The magnitude is raised the way every other stream pin in this file raises
+    // it: at the weekly clock a base-magnitude installment MEASURES to zero after the
+    // tenth-month floor, and a direction pin that moves nothing measures nothing. Every
+    // datum the axis reads — beneficiary, parties, receipt — is still the real mint's.
+    const out = advance(
+      pactLedgerWorld(fresh({ ...record, terms: [{ ...clause, magnitude: 0.9 }] })), WEEKLY, IW_EDGES, 10,
+    );
+    const moved = getSpatialLedger(out.worldState, 'treaties')[PACT_KEY].terms[0];
+    expect(moved.extractedFromLoser, 'the obligor actually paid').toBeGreaterThan(0);
+    expect(moved.deliveredToVictor, 'the obligee actually received').toBeGreaterThan(0);
+    expect(monthsIn(out, 'weak'), "the obligor's granary fell").toBeLessThan(WEEKLY_PAYER_MONTHS);
+    expect(monthsIn(out, 'iron'), "and the obligee's rose").toBeGreaterThan(VICTOR_MONTHS);
+
+    // BURDEN, CAPACITY AND THE DEFAULT NAME all follow the obligor.
+    const onObligor = getSpatialLedger(
+      advance(pactLedgerWorld(fresh(record)), WEEKLY, IW_EDGES, 10, crushingOne('weak')).worldState, 'treaties',
+    )[PACT_KEY];
+    expect(onObligor.terms[0].burden01, "the obligor's distress IS the clause's burden").toBeGreaterThan(0);
+    expect(onObligor.complianceState).toBe('defaulted');
+    expect(onObligor.defaultedBy, 'and the obligor is the oathbreaker').toBe('weak');
+    // anchored: the SAME index aimed at the obligee leaves the clause entirely untouched,
+    // so the burden above measures the direction rather than the pressure index.
+    const onObligee = getSpatialLedger(
+      advance(pactLedgerWorld(fresh(record)), WEEKLY, IW_EDGES, 10, crushingOne('iron')).worldState, 'treaties',
+    )[PACT_KEY];
+    expect(onObligee.terms[0].burden01, "the obligee's distress is not this clause's burden").toBe(0);
+    expect(onObligee.complianceState).toBe('honored');
+  });
+
+  it('A4: swapping the proposer MIRRORS the obligation on a record whose key, parties and receipts do not move', () => {
+    const askedMint = mintPact({ fromId: 'iron', toId: 'weak', trigger: 'trade_demand' });
+    const swappedMint = mintPact({ fromId: 'weak', toId: 'iron', trigger: 'trade_demand' });
+    const asked = pactRecord(askedMint);
+    const swapped = pactRecord(swappedMint);
+
+    // WHAT DOES NOT MOVE, compared between two LIVE mints rather than restated.
+    expect(Object.keys(getSpatialLedger(swappedMint.worldState, 'treaties')), 'the same ledger key')
+      .toEqual(Object.keys(getSpatialLedger(askedMint.worldState, 'treaties')));
+    expect(swapped.parties, 'the same parties, in the same order').toEqual(asked.parties);
+    expect(swapped.receipts, 'the same treaty receipts').toEqual(asked.receipts);
+    expect(swapped.mintedTick).toBe(asked.mintedTick);
+
+    // WHAT DOES: the obligation mirrors, per term.
+    const a = termObligationOf(asked, asked.terms[0]);
+    const b = termObligationOf(swapped, swapped.terms[0]);
+    expect(a).toEqual({ kind: 'negotiated', resolved: true, mutual: false, obligorId: 'weak', obligeeId: 'iron' });
+    expect(b.obligorId, 'the obligor and obligee exchange places').toBe(a.obligeeId);
+    expect(b.obligeeId).toBe(a.obligorId);
+    // …because the proposer DOES survive the mint — per term, as `beneficiary`, and nowhere
+    // else. anchored: the invariant fields were just proved equal, so this inequality
+    // locates the difference in the terms rather than anywhere a consumer reads.
+    expect(JSON.stringify(swapped), 'the WHOLE record is not invariant').not.toBe(JSON.stringify(asked));
+    expect(swapped.terms.map((t) => t.beneficiary)).toEqual(['weak']);
+    expect(asked.terms.map((t) => t.beneficiary)).toEqual(['iron']);
+  });
+
+  it('A8: the multi-round instrument — two courts, two rounds, ONE record, two independent directions', () => {
+    const first = mintPact({ fromId: 'iron', toId: 'weak', trigger: 'shared_threat', signTick: 10 });
+    const second = mintPact({
+      fromId: 'weak', toId: 'iron', trigger: 'trade_demand', signTick: 20, worldState: first.worldState,
+    });
+    expect(first.minted, 'the first round mints').toBe(true);
+    expect(second.amended, 'and the second AMENDS — the pair never gains a second instrument').toBe(true);
+    const record = pactRecord(second);
+    expect(Object.keys(getSpatialLedger(second.worldState, 'treaties'))).toEqual([PACT_KEY]);
+    expect(lineageOf(record), 'two acts on one record').toHaveLength(2);
+
+    const duties = record.terms.map((t) => termObligationOf(record, t));
+    // The security clause both courts hold binds them mutually; the economic clause weak
+    // asked for binds IRON. THIS is the shape a treaty-level `proposedBy` could not have
+    // expressed — one record, two clauses, and no single direction between them.
+    expect(duties.filter((d) => d.mutual), 'one mutual clause').toHaveLength(1);
+    expect(duties.filter((d) => !d.mutual), 'and one directed clause').toHaveLength(1);
+    expect(duties.find((d) => !d.mutual)).toEqual({
+      kind: 'negotiated', resolved: true, mutual: false, obligorId: 'iron', obligeeId: 'weak',
+    });
+    // …while the INSTRUMENT-level orientation stays unresolved at both rounds, which is
+    // precisely why the axis had to be per term and why nothing about the treaty-level
+    // reader needed to move.
+    expect(treatyOrientationOf(record).resolved).toBe(false);
+    expect(treatyOrientationOf(record).kind).toBe('unknown');
+
+    // AND THE INSTRUMENT VOCABULARY IS STILL EXACTLY THREE MEMBERS. Widening it would bind
+    // negotiated pacts into nine consumers that have never bound one.
+    expect([...TREATY_ORIENTATION_KINDS].sort()).toEqual(['sale', 'unknown', 'wartime']);
+    expect(Object.keys(TREATY_ROLE_WORDS).sort()).toEqual([...TREATY_ORIENTATION_KINDS].sort());
   });
 });

@@ -37,11 +37,15 @@ import { dirname, join, relative } from 'node:path';
 import { describe, it, expect } from 'vitest';
 
 import {
+  TERM_OBLIGATION_KINDS,
   TREATY_ORIENTATION_KINDS,
   TREATY_ROLE_WORDS,
+  termObligationOf,
   treatyOrientationOf,
   treatyRoleWord,
 } from '../../src/domain/worldPulse/treatyOrientation.js';
+import { draftPactSheet, signPactProposal } from '../../src/domain/worldPulse/pactFormation.js';
+import { ensureWorldState } from '../../src/domain/worldPulse/worldState.js';
 import {
   advanceTreaties, demilitarizationCapFor, occupationHoldFor, treatyDocument,
   treatyPairKey, TERM_CATALOG,
@@ -65,12 +69,12 @@ const POP = 1800;
 
 /** A snapshot item with a REAL granary, so a stream term has somewhere to move grain
  *  from and to and the direction pin measures physics rather than a no-op. */
-function item(id, storageMonths) {
+function item(id, storageMonths, population = POP) {
   return {
     id,
     name: id,
     settlement: {
-      name: id, tier: 'town', population: POP,
+      name: id, tier: 'town', population,
       config: { tradeRouteAccess: 'road', priorityMilitary: 35 },
       institutions: [{ name: 'State Granary', type: 'economic' }],
       economicState: {
@@ -143,10 +147,10 @@ function ledgerWorld(treaty, key, extra = {}) {
 
 /** Run the mover once over a ledger world. `pIndex` drives the obligor's capacity, which
  *  is what decides whether a term strains or defaults. */
-function advance(worldState, pIndex = null) {
-  const settlementUpdates = PARTIES.map((i) => ({ saveId: String(i.id), settlement: i.settlement }));
+function advance(worldState, pIndex = null, items = PARTIES) {
+  const settlementUpdates = items.map((i) => ({ saveId: String(i.id), settlement: i.settlement }));
   return advanceTreaties({
-    snapshot: { byId: new Map(PARTIES.map((i) => [String(i.id), i])), regionalGraph: { edges: EDGES } },
+    snapshot: { byId: new Map(items.map((i) => [String(i.id), i])), regionalGraph: { edges: EDGES } },
     worldState, settlementUpdates, graph: { edges: EDGES }, pIndex, tick: 10,
     now: '2026-01-01T00:00:00.000Z',
   });
@@ -245,6 +249,225 @@ describe('CR-WR10-G — the orientation reader itself', () => {
     // A stranger is 'a party' under either instrument — the word is never guessed.
     expect(treatyRoleWord(sale, 'bystander')).toBe('a party');
     expect(treatyRoleWord(treatyOrientationOf({}), 'buyer')).toBe('a party');
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// CR-GR3B-3-R1 — THE PER-TERM OBLIGATION AXIS.
+//
+// A negotiated instrument has no victor and no seller, and §3.2's multi-round record
+// proves it can have no single treaty-level direction either: one record, two clauses,
+// opposite ways. So the axis is PER TERM and it is the datum the record already carries —
+// the term's `beneficiary`. The party that asked is owed; the counterparty promises, is
+// watched, pays, and is the one named when the clause defaults. A clause both courts hold
+// binds them MUTUALLY and moves nothing in either direction.
+//
+// Every fixture below is minted by the REAL drafter and the REAL signer. A hand-built
+// negotiated record would mirror the resolver it is meant to measure.
+// ═══════════════════════════════════════════════════════════════════════════════
+
+/** Mint a negotiated instrument through `draftPactSheet` → `signPactProposal`. */
+function mintPact({ fromId, toId, trigger, reciprocal = false, signTick = 10, worldState = null }) {
+  const sheet = draftPactSheet({ trigger, fromId, toId, reciprocal, tick: signTick - 4 });
+  return signPactProposal({
+    worldState: worldState || {
+      rngSeed: 'gr3b-orient', simulationRules: { pactFormationEnabled: true },
+      relationshipStates: {}, spatialLedgers: {},
+    },
+    proposal: { from: fromId, to: toId, sheet },
+    tick: signTick,
+  });
+}
+
+/** The persisted record, read straight off the mint's own ledger. */
+const pactRecord = (signed) => getSpatialLedger(signed.worldState, 'treaties')[treatyPairKey('buyer', 'seller')];
+
+/** Crushes EVERY court whatever its id — INCLUDING the empty id a mutual or unresolved
+ *  clause resolves to. That is the only input that can drive a clause with no obligor
+ *  into the branch that writes `defaultedBy`, so an absence pin below measures the guard
+ *  rather than a code path the fixture could never have reached. */
+const crushingAll = () => ({
+  get: (_sid, kind) => ((kind === 'economy' || kind === 'food') ? { score: 95 } : undefined),
+});
+
+const UNRESOLVED_DUTY = { kind: 'unknown', resolved: false, mutual: false, obligorId: '', obligeeId: '' };
+
+/** THE WEEKLY-CLOCK PAIR, and it is load-bearing rather than decorative. A negotiated
+ *  instrument runs on the CURRENT 52-tick year, so one installment is a fifty-second of
+ *  the yearly share — MEASURED to round away entirely between the two evenly-matched
+ *  six-month courts above, which would make "the mutual clause moved nothing" vacuously
+ *  true. This pair is the case where a weekly stream is actually felt: a populous payer
+ *  with real headroom beside a small, near-empty payee. */
+const HEAVY_PAYER_MONTHS = 8;
+const HEAVY_PAYEE_MONTHS = 1;
+const HEAVY = [item('buyer', HEAVY_PAYEE_MONTHS, 1500), item('seller', HEAVY_PAYER_MONTHS, 6000)];
+
+describe('CR-GR3B-3-R1 — the per-term obligation reader', () => {
+  it('A2: a clause BOTH courts hold is MUTUAL — resolved, and with no transfer direction', () => {
+    const record = pactRecord(mintPact({ fromId: 'buyer', toId: 'seller', trigger: 'shared_threat' }));
+    expect(record.terms.map((t) => t.beneficiary), 'the real drafter emits the symmetric clause').toEqual(['both']);
+    const duty = termObligationOf(record, record.terms[0]);
+    expect(duty).toEqual({ kind: 'negotiated', resolved: true, mutual: true, obligorId: '', obligeeId: '' });
+    // ASSERTED DIRECTLY, NEVER INFERRED FROM THE EMPTY IDS. `resolved: true` with no ids
+    // is a REAL verdict — "both hold this, and nobody hands anything over" — which is a
+    // different answer from `unknown`, and the two must never be read as one.
+    expect(duty.mutual, 'mutuality is its own field').toBe(true);
+    expect(duty.resolved, 'and the verdict is a real one').toBe(true);
+    expect(termObligationOf(record, record.terms[0])).not.toEqual(UNRESOLVED_DUTY);
+
+    // NO TRANSFER DIRECTION, MEASURED ON REAL GRANARIES. The ladder never drafts a
+    // symmetric TRANSFER clause (security terms are the only symmetric family and both
+    // are `stream: false`), so the movement half is probed on a deliberately hand-shaped
+    // stream clause: were it ever reachable, payer and payee resolve to the empty id.
+    const key = treatyPairKey('buyer', 'seller');
+    const runWith = (beneficiary, pIndex = null, items = HEAVY) => advance(
+      ledgerWorld({ ...record, terms: [{ ...term('tribute', { magnitude: 0.9 }), beneficiary }] }, key),
+      pIndex, items,
+    );
+    const storedOf = (out) => getSpatialLedger(out.worldState, 'treaties')[key];
+
+    // MOVEMENT. A mutual clause resolves to the empty pair, so PASS 2 finds no payer and
+    // no payee and the tick is COMPLETELY inert — not a delta that happened to round to 0.
+    const mutualOut = runWith('both');
+    expect(mutualOut.changed, 'a mutual clause moves nothing whatsoever').toBe(false);
+    expect(mutualOut.settlementUpdates, 'and emits no settlement write at all').toBeUndefined();
+    // anchored: the SAME clause on the SAME pair with ONE beneficiary really does move
+    // grain out of the counterparty and into the beneficiary, so the inertness above
+    // measures mutuality rather than a fixture that had nothing to move.
+    const oneSidedOut = runWith('buyer');
+    expect(storedOf(oneSidedOut).terms[0].extractedFromLoser, 'the control really pays').toBeGreaterThan(0);
+    expect(storedOf(oneSidedOut).terms[0].deliveredToVictor, 'and is really received').toBeGreaterThan(0);
+    expect(monthsIn(oneSidedOut, 'seller'), "the counterparty's granary fell").toBeLessThan(HEAVY_PAYER_MONTHS);
+    expect(monthsIn(oneSidedOut, 'buyer'), "and the beneficiary's rose").toBeGreaterThan(HEAVY_PAYEE_MONTHS);
+
+    // THE DEFAULT WRITE, under an index that crushes every court INCLUDING the empty id a
+    // mutual clause resolves to — the only input that reaches the branch the guard guards.
+    const mutualCrushed = storedOf(runWith('both', crushingAll()));
+    expect(mutualCrushed.complianceState, 'the probe really did drive it into default').toBe('defaulted');
+    expectAbsentWithAnchor(
+      Object.keys(mutualCrushed), 'defaultedBy', 'complianceState',
+      'the mutual clause is live and its compliance verdict IS written, and it still names no oathbreaker',
+    );
+    // anchored: the same crushing index on the one-sided clause DOES name an oathbreaker.
+    expect(storedOf(runWith('buyer', crushingAll())).defaultedBy, 'the control accuses').toBe('seller');
+  });
+
+  it('A3: a reciprocal ask is TWO one-sided clauses on ONE record, resolving in mirrored directions', () => {
+    const record = pactRecord(mintPact({
+      fromId: 'buyer', toId: 'seller', trigger: 'trade_demand', reciprocal: true,
+    }));
+    expect(record.terms, 'one instrument, two clauses').toHaveLength(2);
+    expect(record.terms.map((t) => t.beneficiary).sort()).toEqual(['buyer', 'seller']);
+    const duties = record.terms.map((t) => termObligationOf(record, t));
+    for (const duty of duties) {
+      expect(duty.kind).toBe('negotiated');
+      expect(duty.resolved).toBe(true);
+      expect(duty.mutual, 'a reciprocal pair is NOT symmetric — each clause has a direction').toBe(false);
+    }
+    // MIRRORED: each clause's obligee is the other clause's obligor, on the same record.
+    expect(duties[0].obligeeId).toBe(duties[1].obligorId);
+    expect(duties[1].obligeeId).toBe(duties[0].obligorId);
+    expect([duties[0].obligorId, duties[0].obligeeId].sort()).toEqual(['buyer', 'seller']);
+
+    // WHEN BOTH DEFAULT the scalar `defaultedBy` names the obligor of the LAST defaulting
+    // clause in stored order (§6.3's declared, vetoable rule) — DERIVED from the stored
+    // record, never restated as a literal.
+    const key = treatyPairKey('buyer', 'seller');
+    const stored = getSpatialLedger(advance(ledgerWorld(record, key), crushingAll()).worldState, 'treaties')[key];
+    expect(stored.complianceState, 'both clauses really did default').toBe('defaulted');
+    expect(stored.terms.every((t) => t.complianceState === 'defaulted')).toBe(true);
+    const last = stored.terms[stored.terms.length - 1];
+    expect(stored.defaultedBy).toBe(termObligationOf(stored, last).obligorId);
+    // anchored: the two clauses have OPPOSED obligors (asserted above), so naming the last
+    // one is a choice this record can distinguish rather than the only answer available.
+    expect(termObligationOf(stored, stored.terms[0]).obligorId).not.toBe(stored.defaultedBy);
+    expect(typeof stored.defaultedBy, 'and the key stays a SCALAR string').toBe('string');
+  });
+
+  it('A6: every malformed or boundary shape FAILS CLOSED — no guess, no placeholder, no throw', () => {
+    const parties = ['buyer', 'seller'];
+    /** @type {Array<[string, unknown, unknown]>} */
+    const cases = [
+      ['a beneficiary absent from parties', { parties }, { beneficiary: 'stranger' }],
+      ['a one-party record', { parties: ['buyer'] }, { beneficiary: 'buyer' }],
+      ['a three-party record', { parties: ['buyer', 'seller', 'third'] }, { beneficiary: 'buyer' }],
+      ['an empty beneficiary', { parties }, { beneficiary: '' }],
+      ['a beneficiary equal to BOTH entries', { parties: ['buyer', 'buyer'] }, { beneficiary: 'buyer' }],
+      ['no parties key at all', {}, { beneficiary: 'buyer' }],
+      ['a non-string party id', { parties: [null, 'seller'] }, { beneficiary: 'seller' }],
+      ['parties that is not an array', { parties: 'buyer,seller' }, { beneficiary: 'buyer' }],
+      ['a null treaty', null, { beneficiary: 'buyer' }],
+      ['an undefined treaty', undefined, { beneficiary: 'buyer' }],
+      ['a null term', { parties }, null],
+      ['an undefined term', { parties }, undefined],
+      ['both null', null, null],
+    ];
+    for (const [why, treaty, termRow] of cases) {
+      const duty = termObligationOf(treaty, termRow);
+      expect(duty, why).toEqual(UNRESOLVED_DUTY);
+      expect(`${duty.obligorId}${duty.obligeeId}`, `${why}: never the word "undefined"`).toBe('');
+    }
+    // anchored: the SAME reader resolves a well-formed clause one describe-block over, so
+    // the thirteen unresolved verdicts above are a fail-closed policy rather than a reader
+    // that can never resolve anything.
+    const good = pactRecord(mintPact({ fromId: 'buyer', toId: 'seller', trigger: 'trade_demand' }));
+    expect(termObligationOf(good, good.terms[0]).resolved).toBe(true);
+
+    // AND NO `defaultedBy` IS WRITTEN for a clause naming a party the record does not
+    // carry, even when the pass drives it all the way into default.
+    const key = treatyPairKey('buyer', 'seller');
+    const orphan = { ...good, terms: [{ ...term('tribute', { magnitude: 0.9 }), beneficiary: 'stranger' }] };
+    const stored = getSpatialLedger(advance(ledgerWorld(orphan, key), crushingAll()).worldState, 'treaties')[key];
+    expect(stored.complianceState, 'the probe really did reach the default branch').toBe('defaulted');
+    expectAbsentWithAnchor(
+      Object.keys(stored), 'defaultedBy', 'complianceState',
+      'the compliance verdict IS written and the nameless clause still accuses nobody',
+    );
+  });
+
+  it('A7: the per-term resolution survives save and load on a byte-identical record', () => {
+    const first = mintPact({ fromId: 'buyer', toId: 'seller', trigger: 'trade_demand', reciprocal: true });
+    const second = mintPact({
+      fromId: 'seller', toId: 'buyer', trigger: 'shared_threat', signTick: 20, worldState: first.worldState,
+    });
+    expect(second.amended, 'ONE record, two lineage acts').toBe(true);
+    const before = pactRecord(second);
+    expect(before.terms, 'a mutual clause beside a mirrored pair').toHaveLength(3);
+
+    const hydrated = ensureWorldState(JSON.parse(JSON.stringify(second.worldState)));
+    const after = getSpatialLedger(hydrated, 'treaties')[treatyPairKey('buyer', 'seller')];
+    expect(JSON.stringify(after), 'the record is byte-identical across the trip').toBe(JSON.stringify(before));
+    expect(after.terms.map((t) => termObligationOf(after, t)))
+      .toEqual(before.terms.map((t) => termObligationOf(before, t)));
+    // …and both sides carry REAL verdicts, not two matching unresolved ones.
+    expect(after.terms.map((t) => termObligationOf(after, t).kind)).toEqual(['negotiated', 'negotiated', 'negotiated']);
+    expect(after.terms.filter((t) => termObligationOf(after, t).mutual)).toHaveLength(1);
+    expect(after.terms.filter((t) => termObligationOf(after, t).obligorId)).toHaveLength(2);
+  });
+
+  it('the per-term vocabulary is CLOSED, and the instrument vocabulary is NOT widened', () => {
+    expect([...TERM_OBLIGATION_KINDS].sort()).toEqual(['negotiated', 'sale', 'unknown', 'wartime']);
+    // A SUPERSET BY EXACTLY ONE. The three instrument kinds pass through the delegation
+    // arm; `negotiated` is the only kind this reader can add.
+    expect([...TREATY_ORIENTATION_KINDS].sort()).toEqual(['sale', 'unknown', 'wartime']);
+    expect(TREATY_ORIENTATION_KINDS.filter((k) => !TERM_OBLIGATION_KINDS.includes(k))).toEqual([]);
+    expect(TERM_OBLIGATION_KINDS.filter((k) => !TREATY_ORIENTATION_KINDS.includes(k))).toEqual(['negotiated']);
+    // The ROLE WORDS are not widened either: no consumer speaks a negotiated role yet, and
+    // unconsumed vocabulary is the recorded self-referential-pin habitat.
+    expect(Object.keys(TREATY_ROLE_WORDS).sort()).toEqual([...TREATY_ORIENTATION_KINDS].sort());
+
+    // EVERY KIND THE READER CAN ACTUALLY EMIT IS A DECLARED MEMBER — walked over one
+    // instrument of each provenance, so the closure is measured rather than asserted.
+    const negotiated = pactRecord(mintPact({ fromId: 'buyer', toId: 'seller', trigger: 'trade_demand' }));
+    const mutual = pactRecord(mintPact({ fromId: 'buyer', toId: 'seller', trigger: 'shared_threat' }));
+    const emitted = [
+      termObligationOf(warTreaty([term('tribute')]), term('tribute')),
+      termObligationOf(saleTreaty([term('tribute')]), term('tribute')),
+      termObligationOf(negotiated, negotiated.terms[0]),
+      termObligationOf(mutual, mutual.terms[0]),
+      termObligationOf({}, {}),
+    ].map((duty) => duty.kind);
+    expect([...new Set(emitted)].sort()).toEqual([...TERM_OBLIGATION_KINDS].sort());
   });
 });
 
