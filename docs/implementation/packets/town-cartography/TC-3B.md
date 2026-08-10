@@ -1,6 +1,7 @@
 # Town Cartography / TC-3b — parcel carving and the institution binding
 
-- **Status:** `READY`
+- **Status:** `LANDED`
+- **Landed:** `a45c969d` (2026-08-10; 6/6 mutant-proven, bounded pair 377,247 B with one closure member added, all tier bands honored, dormancy byte-identical)
 - **Amended (CR-TC3B-BYTES, chair, 2026-08-10, at landing):** §13's "the bounded pair
   moves at all" STOP is RULED OVER-BROAD and amended — the invariant CR-TC3A-1 protects
   is IMPORT-EDGE-TRACKED: no foreign payload may enter the bounded closure. A packet's

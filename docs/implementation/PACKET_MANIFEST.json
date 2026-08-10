@@ -50,7 +50,7 @@
     },
     {
       "id": "TC-3B",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/town-cartography/TC-3B.md",
       "verifiedBase": "5066c34bf6dd3a1982f92d22b0687ab4f204f17c",
       "changeManifest": [
