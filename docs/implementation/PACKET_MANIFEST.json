@@ -162,11 +162,17 @@
     },
     {
       "id": "IN-0C",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/foreign-policy/IN-0C.md",
       "verifiedBase": "e6d963430046f07b2ebac4dd06ce4eddd386343c",
       "changeManifest": [
         { "action": "CREATE", "path": "src/domain/worldPulse/peaceTermsDisclosure.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryInfo.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistry.js" },
+        { "action": "DOC", "path": "docs/content/RECEIPT_POOLS_GRAMMAR.md" },
+        { "action": "DOC", "path": "docs/content/RECEIPT_POOLS_INFORMATION.md" },
+        { "action": "TEST", "path": "tests/domain/couplingRegistry.test.js" },
+        { "action": "TEST", "path": "tests/lint/kindPoolFloors.walker.test.js" },
         { "action": "MODIFY", "path": "src/domain/worldPulse/informationStatecraft.js" },
         { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTerms.js" },
         { "action": "MODIFY", "path": "src/domain/worldPulse/treatyLifecycleVoice.js" },

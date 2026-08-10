@@ -1,6 +1,7 @@
 # Foreign Policy / IN-0C — disclosure treaty executor
 
-- **Status:** `READY`
+- **Status:** `LANDED`
+- **Landed:** `29e2dc3c` (2026-08-10; 8/8 acceptance, three mid-wave rulings recorded above, coupling identity = base with the licensed pair, peaceTerms.js at 794/800)
 - **Status note:** **Promoted READY by the chair 2026-08-10 after ORIENT landed (CR-FP-ORDER position 2).** All three of version 2's
   blockers are **CLOSED** — two by second-round rulings, one by a measurement this
   compile executed (§3). The packet withholds no coding instruction and names no unruled

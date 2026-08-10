@@ -29,7 +29,7 @@ re-derives that lane and decides whether to compile its immediate dependent.
 | LANDED-2 | [`SC-1A+B`](./packets/surveyor-chat/SC-1.md) | **LANDED** at `455a29b5`; do not redispatch | Ephemeral text-intent shell and typed-op card extraction landed; SC-2+ remain excluded | direct chat proposals, audience/provenance decisions, uploads, SC-2/3, migrations, pricing/legal |
 | LANDED-3 | [`GR-3B-ORIENT`](./packets/foreign-policy/GR-3B-ORIENT.md) | **LANDED** at `d56d944c`; do not redispatch | Adds the per-term obligation reader (CR-GR3B-3-R1) that GR-3b and IN-0c's transfer semantics consume | GR-3b producers, IN-0c, any persisted-shape change, treatyOrientationOf edits |
 | BLOCKED | [`GR-3b`](./packets/foreign-policy/GR-3B.md) | **BLOCKED** — producer eligibility and ladder selection are unruled | Would finish the already-split producer half of GR-3 | GR-4+, later grammar, tuning, lighting |
-| READY-2 | [`IN-0c`](./packets/foreign-policy/IN-0C.md) | **READY** at `e6d96343` (chair promotion 2026-08-10; CR-FP-ORDER position 2) | Finishes the sole missing IN-0 slice: next-tick derived signing credit through the provenTrue seam | IN-1+, broader disclosure redesign, pulseKernel edits, any new persisted family |
+| LANDED-4 | [`IN-0c`](./packets/foreign-policy/IN-0C.md) | **LANDED** at `29e2dc3c`; do not redispatch | Finishes the sole missing IN-0 slice: next-tick derived signing credit through the provenTrue seam | IN-1+, broader disclosure redesign, pulseKernel edits, any new persisted family |
 
 ## Authorized implementation infrastructure
 
