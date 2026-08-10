@@ -357,6 +357,49 @@
           "tests/scripts/implementationSession.test.js"
         ]
       ]
+    },
+    {
+      "id": "TC-4",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/town-cartography/TC-4.md",
+      "verifiedBase": "7699e367d9fc2fb87bfd5f8b72142969ec52c36e",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyMultiplicity.js" },
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyBuildings.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographyTuning.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographySynthesis.js" },
+        { "action": "CREATE", "path": "tests/domain/townCartographyBuildings.test.js" },
+        { "action": "TEST", "path": "tests/domain/townSceneCartography.test.js" },
+        { "action": "TEST", "path": "tests/property/townCartographyDormancyGolden.test.js" },
+        { "action": "TEST", "path": "tests/domain/townCartographyDeterminism.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townCartography/cartographyParcels.js", "symbol": "compileTownParcelLayers" },
+        { "path": "src/domain/townCartography/cartographyParcels.js", "symbol": "bindCanonicalInstitutionsToParcels" },
+        { "path": "src/domain/townCartography/cartographySynthesis.js", "symbol": "compileTownCartography" },
+        { "path": "src/domain/townCartography/cartographyTuning.js", "symbol": "TOWN_CARTOGRAPHY_TUNING" },
+        { "path": "src/domain/townMap/anchors.js", "symbol": "slugify" },
+        { "path": "src/domain/townScene/cartographyContract.js", "symbol": "validateTownCartography" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "real lit compile emits a validating buildings layer" },
+        { "id": "C2", "case": "multiplicity resolution, monotonicity, and append-stability" },
+        { "id": "C3", "case": "footprint containment geometry over the map corpus" },
+        { "id": "C4", "case": "population-responsive dwelling fill without parallel identity" },
+        { "id": "C5", "case": "dress derivations and the first-match condition chain" },
+        { "id": "C6", "case": "determinism, purity, and the digest-domain label scans" },
+        { "id": "C7", "case": "dormancy regression with the golden untouched" },
+        { "id": "C8", "case": "bounded chunk-pair posture with zero new closure edges" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/townCartographyBuildings.test.js",
+          "tests/domain/townCartographyParcels.test.js",
+          "tests/domain/townCartographyWards.test.js",
+          "tests/domain/townSceneCartography.test.js",
+          "tests/domain/townCartographyDeterminism.test.js",
+          "tests/property/townCartographyDormancyGolden.test.js"]
+      ]
     }
   ]
 }
