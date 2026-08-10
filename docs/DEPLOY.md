@@ -147,10 +147,14 @@ remembered number.** Migration numbers grow every release, so this guide
 deliberately does NOT pin a "latest" number that would rot and cause an operator
 to under-apply.
 
-**Current migration head: `194_operator_messages.sql`** (this filename is kept
-current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js` derives the
-head from `supabase/migrations/` and fails the gate if this line drifts).
+**Current migration head: `195_civility_guard_and_public_identity.sql`** (this
+filename is kept current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js`
+derives the head from `supabase/migrations/` and fails the gate if this line drifts).
 <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
+
+This line records the head **on disk**, not a clearance to apply it: `195` carries its
+own owner-gated, dark header (`AUTHORED, NOT DEPLOYED`), so whether it ships in a given
+cutover is the owner's call — read that file's preamble before pushing.
 
 Do **not** hand-count from a fixed starting migration — `db push` applies EVERY
 pending migration on top of the current schema, in order, and self-corrects

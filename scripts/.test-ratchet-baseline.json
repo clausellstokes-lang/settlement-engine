@@ -57,7 +57,7 @@
       "file": "tests/docs/deployRunbookFreshness.test.js",
       "test": "DEPLOY.md freshness — the runbook derives from the filesystem names the current migration head file",
       "subsystem": "migrations / deploy runbook (OWNER-GATED)",
-      "cause": "OWNER-GATED migration debt. Migration 195_civility_guard_and_public_identity.sql landed past the manifest head of 194; docs/DEPLOY.md line 150 still names 194_operator_messages.sql as the current migration head. Migrations and deploys are an owner-gated class — do NOT repair this in a build lane.",
+      "cause": "OWNER-GATED migration debt. ⭐ THE CURE LANDED 2026-08-10 and this test now PASSES: docs/DEPLOY.md names 195_civility_guard_and_public_identity.sql as the head. The row is deliberately LEFT IN PLACE, so the runner reports it as a RATCHET DOWN win, never as an unattributed regression. It is NOT removed because the pin '⚠ the three migration reds are marked OWNER-GATED' (tests/lint/testRatchet.test.js) asserts at least one owner-gated row survives in `entries`, and rewriting that pin to accept zero is the exact act it exists to prevent. Retire this row together with its migrationRollbackDiscipline twin and their two WALKER_ROWS_OWED entries, dropping OWED_CEILING 13 → 11 in the same change, once the owner clears it.",
       "introducedAt": "7aa43b50bcbfa1c0223a4222df17606cf91b57c9",
       "class": "owner-gated"
     },
@@ -73,7 +73,7 @@
       "file": "tests/docs/migrationRollbackDiscipline.test.js",
       "test": "migration rollback discipline new money/PII migrations ship a reversal or an explicit @rollback note",
       "subsystem": "migrations / rollback discipline (OWNER-GATED)",
-      "cause": "OWNER-GATED migration debt. 195_civility_guard_and_public_identity.sql is a money/PII migration with no supabase/rollback/195_*.down.sql and no `-- @rollback:` note. The whole tree carries ZERO .down.sql beside the migrations (measured). Migrations are an owner-gated class — do NOT author a reversal in a build lane.",
+      "cause": "OWNER-GATED migration debt. ⭐ THE CURE LANDED 2026-08-10 and this test now PASSES: 195 ships supabase/rollback/195_civility_guard_and_public_identity.down.sql AND an inline `-- @rollback:` note. (The old cause claimed 'the whole tree carries ZERO .down.sql beside the migrations' — that was WRONG when written: 087, 097, 103, 107 and 108 all had one.) The row is deliberately LEFT IN PLACE so the runner reports a RATCHET DOWN win, never an unattributed regression. It is NOT removed because the pin '⚠ the three migration reds are marked OWNER-GATED' (tests/lint/testRatchet.test.js) asserts at least one owner-gated row survives in `entries`. Retire it with its deployRunbookFreshness twin and both WALKER_ROWS_OWED entries, dropping OWED_CEILING 13 → 11, once the owner clears it.",
       "introducedAt": "7aa43b50bcbfa1c0223a4222df17606cf91b57c9",
       "class": "owner-gated"
     },

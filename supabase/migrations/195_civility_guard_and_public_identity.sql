@@ -39,6 +39,22 @@
 -- than implied to exist: BLOCK mode is mirrored server-side and is law; VEIL mode
 -- is currently client-side defense-in-depth only. If the owner wants the veil in
 -- _gallery_sanitize_public_json too, that is its own wave and its own ruling.
+--
+-- @rollback: supabase/rollback/195_civility_guard_and_public_identity.down.sql
+--   PARTIAL and data-safe. It drops the four avatars RLS policies, restores
+--   add_gallery_comment to 131's body verbatim and update_display_name to 009's
+--   (keeping the `public, pg_temp` pin — un-pinning it would reverse a security
+--   tightening, which supabase/rollback/README.md forbids in a blanket down),
+--   then drops the four civility functions.
+--   NOT scripted, deliberately: profiles.public_identity_opt_in (dropping it
+--   erases every account's recorded consent), civility_terms + civility_allow
+--   (the allowlist is operator-curated and lives nowhere else), the RLS-enable
+--   and `revoke all` on those two tables (a tightening), and the `avatars`
+--   bucket row (deleting it orphans uploaded objects). Those are data and
+--   security reversals: forward-fix, or PITR.
+--   ⚠️ The script is NOT a resting state by itself — revert the client in the
+--   same window or blank the consent column by hand, otherwise an account that
+--   already opted in stays published with no server-side guard behind it.
 -- ────────────────────────────────────────────────────────────────────────────
 
 -- ── 1. THE SINGLE CONSENT SWITCH (§1) ───────────────────────────────────────

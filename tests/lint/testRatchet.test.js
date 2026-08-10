@@ -484,9 +484,17 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
   // GROW: a NEW walker row in neither ledger reds. ⛔ This list is not permission — it is
   // an outstanding bill, and the honest reading of it is "thirteen guards are switched
   // off; two of those wait on owner-gated work".
+  //
+  // ⭐ 2026-08-10 — THE TWO OWNER-GATED ROWS ARE CURED BUT NOT YET RETIRED. Both now
+  // PASS (195 ships a .down.sql and an inline `-- @rollback:` note; DEPLOY.md names 195
+  // as the head), so the runner reports them as RATCHET DOWN wins. They stay listed
+  // because deleting their census rows empties the owner-gated class and reds the pin
+  // '⚠ the three migration reds are marked OWNER-GATED' above, and rewriting THAT pin is
+  // the one move a lane may not make on its own authority. Retiring them is a four-part
+  // single change — both census rows, both entries here, and OWED_CEILING 13 → 11.
   const WALKER_ROWS_OWED = Object.freeze({
     'tests/docs/migrationRollbackDiscipline.test.js :: migration rollback discipline new money/PII migrations ship a reversal or an explicit @rollback note':
-      'OWNER-GATED DEPLOY-SAFETY GUARD. Migration 195 has neither a reviewed rollback script nor an inline @rollback note. A build lane may expose this debt but may not choose the live reversal posture.',
+      'CURED 2026-08-10, RETIREMENT OWNER-GATED. 195 now ships supabase/rollback/195_civility_guard_and_public_identity.down.sql and an inline `-- @rollback:` note, and the walker is GREEN. The row survives only because emptying the owner-gated class reds the pin above; retire it with its deployRunbookFreshness twin and drop this ceiling to 11.',
     'tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) total debt never grows past its committed budget':
       'NOT FREED — needs a re-freeze of the voice ratchet fixture at a measured sha (string-literal debt 1369 against a budget of 670, from Lane P-3 generated corpora). Own wave: the re-freeze is large and the corpora are machine-generated.',
     'tests/copy/voiceMechanics.test.js :: E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)':
@@ -498,7 +506,7 @@ describe('⛔ the walker-census law — an enforcement walker may not be frozen 
     'tests/design/deepCraftKillList.test.js :: THE DEEP CRAFT kill-list ratchets (shrink-only; zero closes the wave) tintedCallouts: count <= 163 (grew = new SaaS structure; shrank = lower this ceiling)':
       'NOT FREED — a one-line ceiling re-freeze (164 against 163), but the kill-list is a design wave whose ceilings are meant to be driven to zero; raising one is a design call, not a ratchet-repair call.',
     'tests/docs/deployRunbookFreshness.test.js :: DEPLOY.md freshness — the runbook derives from the filesystem names the current migration head file':
-      'NOT FREED and OWNER-GATED: the cure is to name migration 195 as the head in docs/DEPLOY.md, and migrations/deploys are an owner-gated class a build lane may not touch.',
+      'CURED 2026-08-10, RETIREMENT OWNER-GATED. docs/DEPLOY.md now names 195_civility_guard_and_public_identity.sql as the migration head and the freshness walker is GREEN. The row survives only because emptying the owner-gated class reds the pin above; retire it with its migrationRollbackDiscipline twin and drop this ceiling to 11.',
     'tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target':
       'NOT FREED — the cure is to give the R-BLD-10 chair-ruling row in docs/FABLE_VALIDATION_QUEUE.md a resolvable @enforced-by target, which is a chair ruling about that row, not a ratchet edit.',
     'tests/domain/metronomeCooldownLint.test.js :: metronome-cooldown lint — condition-bearing outcome sources self-limit the non-cooldown emitter set may only SHRINK (no NEW condition-bearing source bypasses the metronome)':
