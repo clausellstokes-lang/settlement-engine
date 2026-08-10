@@ -267,6 +267,22 @@ export const SERVICE_CATEGORY_MAP = {
   // lodging-institution branch runs BEFORE, so the same service name folded
   // differently depending on its host. The shelter is illicit wherever it sits.
   'Safe house': 'criminal',
+  // M5 — the one recorded mis-fold that MEASURED DARK, so the only one repaired
+  // here. Outlaw shelter's flagship service ("Secure hiding place for fugitives.
+  // Paid in advance.") folded to 'equipment': no criminal keyword matches
+  // "hideout"/"rental", and the institution-default fallback is never reached
+  // because an earlier arm claims it. Its own sibling `Underground contacts`
+  // already folds 'criminal'. Registered, exactly as 'Safe house' was.
+  //   DARKNESS MEASURED, not assumed: 0 of the 525 golden-master rows carry
+  //   Hideout rental, and a full-corpus object regeneration + deep diff after
+  //   this line moved 0 rows / 0 fields.
+  //   ⚠ DISCLOSED LATENCY: 'criminal' is the one category that adds a stream
+  //   draw (the crime-scaled gate in serviceRollMaterialization.js draws BEFORE
+  //   `p` is consulted — the recorded "`p >= 1` is not stream-neutrality" law).
+  //   For any seed where this service DOES roll at a criminal provider the
+  //   stream forks. That is invisible to the golden corpus by construction; it
+  //   is named here rather than left to be discovered.
+  'Hideout rental': 'criminal',
   'Legitimate facade': 'criminal',
   'Administrative orders': 'employment',
   'Apprenticeship and training': 'employment',
@@ -415,7 +431,22 @@ export const SERVICE_CATEGORY_MAP = {
   'Poor relief': 'healing',
   Quarantine: 'healing',
   'Religious services': 'healing',
-  Sanctuary: 'healing',
+  // E6 (F-S1-E6, chair-ruled 2026-08-09) — THE ONE DISCLOSED SHIFT of the M5
+  // classifier-coverage micro-wave. Sanctuary was registered 'healing'; its
+  // authored desc at Church/Temple is "Legal protection on holy ground" and at
+  // both cathedrals "the ancient right of refuge". That is a LEGAL immunity
+  // claimed on consecrated ground, not medical care — the register the recon
+  // named as the chair's own "strongest non-obvious case". Re-mapped to 'legal'.
+  //   MEASURED, not predicted: 0 of the 525 golden-master rows carry Sanctuary
+  //   (Church/Temple is a dead resolution key; both cathedral rows are on:false),
+  //   so the disclosed shift moved ZERO goldens — see the disclosed-shift pin in
+  //   tests/lint/serviceCategoryRegistration.walker.test.js, which reds if this
+  //   line is silently reverted.
+  //   The row stays in the healing block it was authored in rather than moving
+  //   to the legal one: this table is grouped by category only as a reading
+  //   convenience (lookup is by key, order is inert), and keeping the address
+  //   makes the diff show a re-map instead of a delete plus an unrelated add.
+  Sanctuary: 'legal',
   Surgery: 'healing',
   'Advanced education': 'information',
   'Copying services': 'information',

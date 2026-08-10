@@ -3324,7 +3324,25 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // COINCIDENCE: 24 newly credited MINUS the 1 that lost credit = +23; 5 newly parked
       // PLUS that same 1 = +6; and 23 + 6 = 29, the file layer. A file-layer delta that
       // failed to reconcile against the park layer would itself have been the finding.
-      files: 2381, parked: 364, credited: 2017, titles: 19491, suiteTitles: 5510,
+      //
+      // ── RE-MEASURED 2026-08-10 (M5/E6, the service-classifier coverage micro-wave) ──
+      // ONE test file added: tests/lint/serviceCategoryRegistration.walker.test.js, the
+      // registration ratchet over classifyService/SERVICE_CATEGORY_MAP. Every figure below
+      // moved by exactly that file and nothing else, and the four deltas RECONCILE against
+      // each other, which is the check rather than a coincidence:
+      //   files      2381 -> 2382  (+1)  the added file
+      //   parked      364 ->  364  ( 0)  it parks for no reason — standard arrow bodies
+      //   credited   2017 -> 2018  (+1)  so the whole file-layer delta lands in credit,
+      //                                  and +1 credited + 0 parked = the +1 file layer
+      //   titles    19491 -> 19500  (+9) its nine `test(` pins, counted not assumed
+      //   suiteTitles 5510 -> 5511  (+1) its single `describe(`
+      // MEASURED, NOT PREDICTED: all five were read in ONE run from this walker's own
+      // liveTitlesIn/liveSuiteTitlesIn over the live TEST_FILES scan, because this census
+      // is SEQUENCED and stops at its first red figure — re-running it five times would
+      // have re-measured the estate five times and banked whichever figure happened to
+      // move first. The added file was also parked out of the tree and the walker re-run
+      // to prove it was the sole cause: without it this census is GREEN at the old five.
+      files: 2382, parked: 364, credited: 2018, titles: 19500, suiteTitles: 5511,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
