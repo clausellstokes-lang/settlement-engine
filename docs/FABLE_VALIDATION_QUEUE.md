@@ -2660,7 +2660,7 @@ gap, and it is repaired by adding the item, never by re-asking the owner.**
 
 ---
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · SP-D THE ERRAND SPINE GENERALIZATION
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · SP-D THE ERRAND SPINE GENERALIZATION
 ## (Opus 5 implementer AND verifier under the 2026-08-06 succession directive; every
 ## J-* below is a chair-grade judgment made without a Fable chair and is VETOABLE)
 
@@ -2762,7 +2762,7 @@ says so in as many words), so the lit arm is exercised only by pins until ES-1/T
 
 ---
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · GR-2 PEACETIME FORMATION + THE STANDALONE NAP
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · GR-2 PEACETIME FORMATION + THE STANDALONE NAP
 ## (Opus 5 implementer AND verifier under the 2026-08-06 succession directive; every
 ## J-* below is a chair-grade judgment made without a Fable chair and is VETOABLE)
 
@@ -2911,7 +2911,7 @@ are recorded in the mutation manifest's method note.
 
 ---
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · IN-0a THE HANDOFF (the bought lie reaches the world)
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · IN-0a THE HANDOFF (the bought lie reaches the world)
 ## (Opus 5 implementer AND verifier under the 2026-08-06 succession directive; every
 ## J-* below is a chair-grade judgment made without a Fable chair and is VETOABLE)
 
@@ -3040,7 +3040,7 @@ optionality.
 
 ---
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · GR-2 REPAIR ROUND — THE MOUNT, THE ORDER, THE ROAD
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · GR-2 REPAIR ROUND — THE MOUNT, THE ORDER, THE ROAD
 ## (Opus 5 implementer AND verifier under the 2026-08-06 succession directive; every
 ## J-* below is a chair-grade judgment made without a Fable chair and is VETOABLE.
 ## ADDITIVE COMMIT — nothing in `a18fdcfa` is reverted; this era still has zero reverts.)
@@ -3264,7 +3264,7 @@ cheap to veto either way. The verifier's own NOT-VERIFIED items stand where it l
 the lit transport differential still has no independent drive, and `PROPOSE_PACT` is still
 absent by J-GR-2-6 rather than half-wired.
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · IN-0a REPAIR (the verifier's REJECT, answered)
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · IN-0a REPAIR (the verifier's REJECT, answered)
 ## (Opus 5 repair implementer under the 2026-08-06 succession directive; every J-* below
 ## is a chair-grade judgment made without a Fable chair and is VETOABLE. This row does not
 ## replace the IN-0a row above it — that row stands as built, and this one records what an
@@ -3586,7 +3586,7 @@ UNCHANGED by this repair and still owed a disposition.
 
 ---
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · SP-D REPAIR WAVE (the adversarial REJECT, answered)
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · SP-D REPAIR WAVE (the adversarial REJECT, answered)
 ## (Opus 5 implementer AND verifier under the 2026-08-06 succession directive; every
 ## J-* below is a chair-grade judgment made without a Fable chair and is VETOABLE)
 
@@ -3774,7 +3774,7 @@ the run, not after it looks wrong.
 
 ---
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · CYCLE 4 CLOSE — THREE WAVES, THREE REJECTS,
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · CYCLE 4 CLOSE — THREE WAVES, THREE REJECTS,
 ## THREE REPAIRS, AND TWO REDS THAT LEAVE THE CYCLE STILL RED
 ## (Opus 5 ledger slice under the 2026-08-06 succession directive. This row does
 ## NOT replace the six wave/repair rows above it — it VERIFIES them against the
@@ -4130,7 +4130,7 @@ script or JSON edits in this row's own commit — docs and ledger only, by chart
 
 ---
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · CYCLE-4 DEBT DISCHARGED — THE +13 REPAIRED BY
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · CYCLE-4 DEBT DISCHARGED — THE +13 REPAIRED BY
 ## NARROWING, AND THE LABEL JOIN CURED BY SOMEBODY ELSE WHILE THIS SLICE WATCHED
 ## (Opus 5 debt slice under the 2026-08-06 succession directive. The cycle-4 close
 ## row above named TWO reds as the cycle's OWN rather than inherited. Both are now
@@ -4255,7 +4255,7 @@ insertions), which is advancement, not damage.**
 
 ---
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · GR-3a: THE NEW TERM FAMILIES, THE SEVENTH
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · GR-3a: THE NEW TERM FAMILIES, THE SEVENTH
 ## EXECUTOR, AND A TRIPWIRE DISCHARGED — WITH THE PRODUCER SIDE STOPPED AT A
 ## MEASURED BLOCKER AND AN ORPHAN FOUND BY THE LAW'S FIRST RUN
 ## (Opus 5 build wave under the 2026-08-06 succession directive. Every J-* below is a
@@ -4455,7 +4455,7 @@ owns them and the owner signs them at the soak redo under THE PROMISE.**
 
 ## ES-1 — THE MISSION: THE COVERT MINT BUILT, THE DOOR AND NOT THE TRAFFIC, AND A
 ## WELD THE VOLUME SAYS IS GONE THAT IS STILL THERE
-## ⏳ OPUS-ERA — FABLE SURVEY OWED
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1)
 ## (Opus 5 build wave under the 2026-08-06 succession directive. Every J-* below is a
 ## chair-grade judgment made without a Fable chair and is VETOABLE.)
 
@@ -4635,7 +4635,7 @@ so nothing has still run.**
 
 ## SP-E — THE NARRATION KIT ASSEMBLY: A TRANSCRIBED LAW BECOMES A DERIVED ONE,
 ## AND THE CENSUS FINDS TWO DEFECTS THE DOCS NAME AS ONE
-## ⏳ OPUS-ERA — FABLE SURVEY OWED
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1)
 ## (Opus 5 build wave under the 2026-08-06 succession directive. Every J-* below is a
 ## chair-grade judgment made without a Fable chair and is VETOABLE.)
 
@@ -4831,7 +4831,7 @@ never opened, and the only `src/` file added is consumed by nothing at land time
 
 ---
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · CYCLE-5 LANE-B CLOSE — THREE WAVES LANDED, A
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · CYCLE-5 LANE-B CLOSE — THREE WAVES LANDED, A
 ## FOURTH THAT NEVER COMMITTED, A GREEN RECEIPT THAT WAS RED WHEN IT WAS WRITTEN,
 ## AND ONE NEW RED THAT IS OURS
 ## (Opus 5 ledger slice under the 2026-08-06 succession directive. `docs/` only — zero
@@ -5055,7 +5055,7 @@ minted. No golden re-recorded. No band ratified. No soak run. Nothing pushed. Ze
 script or JSON edits in this row's own commit — docs and ledger only, by charter.**
 
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · CHAIR BATCH: THE GR-3a REPAIR ROW, AND FOUR
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · CHAIR BATCH: THE GR-3a REPAIR ROW, AND FOUR
 ## CORRECTIONS TO ES-1's ROW — INCLUDING A GATE RECEIPT THAT WAS FALSE AT THE TREE
 ## IT WAS WRITTEN ABOUT
 ## (Landed by the chair, not by a lane. Every ruling and judgment below is VETOABLE.)
@@ -5202,7 +5202,7 @@ is why rows are now deferred to the chair.
 Nothing pushed.**
 
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · ES-2 REPAIR ROUND, AND THE TOOL THAT ENDS
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · ES-2 REPAIR ROUND, AND THE TOOL THAT ENDS
 ## HAND-READ RATCHETS
 ## (Chair-landed. Commits `1e3397f0` the tool, `987928a3` the repairs. Vetoable.)
 
@@ -5335,7 +5335,7 @@ ends read with the same instrument against this round's own parent.
 repair commit. No soak run. Nothing pushed.**
 
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · ES-3 REPAIR ROUND — THE PIN AT THE CEILING
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · ES-3 REPAIR ROUND — THE PIN AT THE CEILING
 ## (Chair-landed. Commit `e39ac76f`. Vetoable.)
 
 ### ⭐⭐ A NEW NAMED VACUITY SHAPE: CEILING SATURATION
@@ -5459,7 +5459,7 @@ with its cause decomposed and closing exactly. No NUL bytes in any committed blo
 pushed.**
 
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · ES-4 — THE DISTANT SOURCE. THE NINE-WAVE
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · ES-4 — THE DISTANT SOURCE. THE NINE-WAVE
 ## CRITICAL PATH CLOSES, AND THE CR-WR10-H LIGHTING CONDITION READS SATISFIED
 ## (Chair-landed. Commit `18d28f9a`. Verifier verdict PASS — first attempt.)
 
@@ -5563,7 +5563,7 @@ pushed. THE CONDITION IS PROVEN SATISFIABLE; LIGHTING REMAINS OWNER-HELD AT THE 
 SOAK.**
 
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · SAFE-HOUSE RECON + EXTENSION
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · SAFE-HOUSE RECON + EXTENSION
 ## (Chair-landed. Commit `3bb846bb`. ZERO golden movement. Vetoable.)
 
 ### ⚠⚠ THE LAW THIS WAVE ESTABLISHED: `p >= 1` IS NOT STREAM-NEUTRALITY
@@ -5673,7 +5673,7 @@ chair asserting a quiet tree is exactly the kind of premise a lane should not ha
 discover is false.
 
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · LANE CONTAINED — REPAIR ROUND
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · LANE CONTAINED — REPAIR ROUND
 ## (Chair-landed. `cef0ac18` rejected, repaired additively at `bcd98a0b`.)
 
 **Both verifier findings UPHELD. Neither touched the code `cef0ac18` shipped — that is still
@@ -5771,7 +5771,7 @@ FAKE FAILURES. Archives built with `-o file.tar` + `tar -xf`, never through a pi
 regenerated, no soak run, nothing pushed.**
 
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · ES-5a REPAIR ROUND — ACCEPTED WITH EVIDENCE
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · ES-5a REPAIR ROUND — ACCEPTED WITH EVIDENCE
 ## (Chair-landed. Four additive commits, `74bf5a82..9d474834`. Zero reverts.)
 
 **All seven findings reproduced by execution first, none refuted, and an EIGHTH self-found at
@@ -5847,7 +5847,7 @@ author.
 
 ---
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · THE HB + WC + EP INTEGRATION FOLD — LANDED
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · THE HB + WC + EP INTEGRATION FOLD — LANDED
 ## (Chair-landed 2026-08-07. Four commits on `claude/composite-r4` from `eca65c8a`.
 ## Every judgment below is VETOABLE by one owner clause.)
 
@@ -5947,7 +5947,7 @@ the seam table moved whole into the volume — should instead have stayed a sibl
 file. (4) The three §8.2 tripwire-less ESPIONAGE contracts, RULED wave obligations
 rather than fold blockers, two with a natural inbound ES-side home.
 
-## ⏳ OPUS-ERA — FABLE SURVEY OWED · THE WALKER/CENSUS SPLIT — LANDED
+## ✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1) · THE WALKER/CENSUS SPLIT — LANDED
 ## (Opus-implemented, chair-briefed, 2026-08-07. One commit on `claude/composite-r4`
 ## from `36e50c73`. Every judgment below is VETOABLE by one owner clause.)
 
@@ -6071,7 +6071,7 @@ now 893 lines with no ceiling over it — deliberate here, but worth a ruling.
 
 ## S12-W — THE WALKER-CENSUS LAW BECOMES MACHINERY (2026-08-07, Opus-era build lane)
 
-**⏳ OPUS-ERA — FABLE SURVEY OWED.**
+**✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1).**
 
 **THE PREMISE, CONFIRMED BEFORE ANYTHING WAS CHANGED.** `af8815e9` wrote the law — *a
 failing TEST is debt; a failing WALKER is a DISABLED GUARD; an enforcement walker may never
@@ -6230,7 +6230,7 @@ owner's spatialUsage commit before anyone touches that row.
 
 ## S12-W2 — THE GUARD THAT CLOSED A GAP HAD A GAP, AND A CONTROL PIN CERTIFIED IT (2026-08-07, Opus-era build lane)
 
-**⏳ OPUS-ERA — FABLE SURVEY OWED.**
+**✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1).**
 
 **THE PREMISE, CONFIRMED BY EXECUTION BEFORE ANYTHING WAS CHANGED.** `abc5a78b`'s three-arm
 classifier catches 10/10 of the rows it was aimed at and misses more. The chair named four —
@@ -6460,7 +6460,7 @@ shared index was never touched.
 
 ## S12-W2-R — THE ORPHAN RECOVERY: eight files re-verified from zero, by a lane that read no report (2026-08-08, Opus-era recovery lane)
 
-**⏳ OPUS-ERA — FABLE SURVEY OWED.** (Implementation and verification both Opus; the row above
+**✅ OPUS-ERA — FABLE-SURVEYED 2026-08-09 (F-S1).** (Implementation and verification both Opus; the row above
 is the dead lane's own account and is preserved verbatim, not edited.)
 
 **WHAT HAPPENED.** The S12-W2 lane above was killed mid-task by the weekly credit limit with
@@ -6604,7 +6604,7 @@ cannot be dropped until the owner commits `spatialUsage.js`.
 
 ## S12-W2-VR1 — THE RECOVERY VERIFIER'S REJECT: three more controls were certifying disabled guards (2026-08-08, Codex continuation)
 
-**⏳ NON-FABLE — FABLE SURVEY AND SIGN-OFF STILL OWED.** The four-phase recovery workflow
+**✅ NON-FABLE — FABLE-SURVEYED AND SIGNED OFF 2026-08-09 (F-S1).** The four-phase recovery workflow
 completed its Opus recovery and adversarial-verification phases, but both Fable phases returned
 `usage credits required`. The verifier returned **REJECT**, narrowly: the orphan's five freed
 guards and their relocation were sound, but the same commit added three other open-population
@@ -6649,7 +6649,7 @@ be repaired one at a time; none is allowed to masquerade as ordinary debt again.
 
 ## S12-W2-VR2 — TWO VERIFIED WALKERS RETURN TO SERVICE (2026-08-08, Codex continuation)
 
-**⏳ NON-FABLE — FABLE SURVEY AND SIGN-OFF STILL OWED.** Two of VR1's three disabled guards
+**✅ NON-FABLE — FABLE-SURVEYED AND SIGNED OFF 2026-08-09 (F-S1).** Two of VR1's three disabled guards
 now pass for the right reason. `ARCHITECTURE.md` is re-derived to the live `worldPulse`
 population of **378 modules**. `generosityReactions` replaces a single unexplained total with
 an exact per-file runtime inventory: **six files / seven `foldObligations` calls**, including
@@ -6677,7 +6677,7 @@ credits return.
 
 ## S12-W2-VR3 — THE OWNER-HELD SPATIAL GUARD IS LIVE AGAIN (2026-08-08, Codex continuation)
 
-**⏳ NON-FABLE — FABLE SURVEY AND SIGN-OFF STILL OWED.** STOP-S12W-1 is discharged by
+**✅ NON-FABLE — FABLE-SURVEYED AND SIGNED OFF 2026-08-09 (F-S1).** STOP-S12W-1 is discharged by
 commit `05af1e8b`, not by a quarantine or a wider census. The two missed kernel writers are
 now classified on their semantics: the persistent, road-priced `pactProposals` queue is
 TRACKED as the id-free `pact_formation` mover, while pulse-recomputed
@@ -6712,7 +6712,7 @@ return.
 
 ## S12-W2-HZ1 — THE HAZARD REGISTRY CANNOT LAUNDER NEW DEBT AS PARTIAL (2026-08-08, Codex continuation)
 
-**⏳ NON-FABLE — FABLE SURVEY AND SIGN-OFF STILL OWED.** The registry's DOCUMENT-only
+**✅ NON-FABLE — FABLE-SURVEYED AND SIGNED OFF 2026-08-09 (F-S1).** The registry's DOCUMENT-only
 ratchet left a status-word escape: a new undefended class could call itself PARTIAL, point at
 an unrelated existing file, and avoid growing the governed pile. Three bounded controls now
 close that route. PARTIAL must name a real enforcer path; DOCUMENT + PARTIAL share an owed
@@ -6741,7 +6741,7 @@ identity-pinned. Fable should decide whether that residual warrants a later iden
 
 ## S12-W2-DET5 — THE REAL PDF BYTE RENDER GETS CONTENTION HEADROOM (2026-08-08, Codex continuation)
 
-**⏳ NON-FABLE — FABLE SURVEY AND SIGN-OFF STILL OWED.** The metropolis case in
+**✅ NON-FABLE — FABLE-SURVEYED AND SIGNED OFF 2026-08-09 (F-S1).** The metropolis case in
 `fullDocByteRender` previously exhausted its per-case **30,000 ms** limit at **30,013 ms**
 only inside the loaded full suite; focused runs remained healthy. The test still builds and
 renders the complete document, counts real PDF pages and asserts real bytes. Only its
@@ -6765,7 +6765,7 @@ credits return, and a later five-run full-suite soak remains the strongest accep
 
 ## S12-OSR-FP — OBSERVED-SHAPE FIXED-POINT HARDENING HANDOFF (2026-08-09, Codex continuation)
 
-**⏳ NON-FABLE — FABLE SURVEY AND SIGN-OFF STILL OWED.** This is a resumable checkpoint for
+**✅ NON-FABLE — FABLE-SURVEYED AND SIGNED OFF 2026-08-09 (F-S1).** This is a resumable checkpoint for
 the observed-shape reader scanner, recorded because the Codex session may exhaust its weekly
 allowance before the validation train completes. Code of record is worktree
 `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold`, branch
@@ -6976,3 +6976,325 @@ closing to multiplicity `many`. Fable should specifically re-rule the call-chain
 invocation-owned receiver proof, relevant-flow-context projection, and demand-key refinement;
 no baseline or golden change is authorized until the explicit later freeze ruling in step 7
 supersedes this checkpoint clause.
+
+---
+
+## F-SURVEY-1 — THE FABLE SURVEY CLEARS THE OPUS/CODEX-ERA DEBT (2026-08-09, Fable chair, session 0e891b2f; survey workflow wf_d700df0a-35d, 11/11 groups)
+
+### FINAL CHAIR RULINGS on the 21 workflow-surveyed rows (wf_d700df0a-35d: 11/11 groups,
+### 21 rows, all HIGH confidence; claims 184 CONFIRMED / 4 FAILED / 23 UNVERIFIABLE;
+### judgments 163 RATIFY / 8 AMEND / 0 OVERRULE / 8 ESCALATE)
+
+**Blanket disposition:** the 163 RATIFY recommendations are ACCEPTED as ruled — each was
+verified with executed methods by a Fable surveyor; per-row detail is preserved in the
+workflow output (session 0e891b2f, run wf_d700df0a-35d). The 23 UNVERIFIABLE claims are
+transcript-cited figures a read-only survey cannot re-derive; none is load-bearing for a
+verdict, and two carry explicit re-measure notes below.
+
+**The four FAILED claims are all count-slips, none invalidating its row:** "five files"
+(actually six, row 3267); "eleven ES-4 commits" (eight, row 3777); "+255 lines" (+252/−3,
+row 4834); "spells none" (should be "reads none", row 4458). Standing note minted: restated
+integers rot — QUOTE command output, never retype (derive-don't-restate applies to queue
+prose too), and EVERY row must name its own landing SHA (three rows didn't).
+
+**Escalations ruled (E1-E7):**
+- **F-S1-E1** (rows 2914+3777): the two "DIES AT THE FOLD" design sentences
+  (DESIGN_FP_ARCH_IN.md:308, DESIGN_FP_INFORMATION.md:419) are AMENDED at this landing to
+  say the plant dies on the contradiction comparator's next pass, one tick after the fold.
+- **F-S1-E2** (row 4258): `reparations` becomes an EXPLICIT seam row (the V-4
+  non_intervention idiom — declared no-producer with reason; zero behavior change; the
+  accidental walker exemption becomes declared). Its draftability rides the J-GR-14a
+  war-end appraisal lens wave (flagged, disclosed-shift). The PRODUCER_OWED 'CHAIR' row
+  retires when the seam declaration lands. Vetoable.
+- **F-S1-E3** (row 4258): the GR-3b transfer-term drafting ban is SUSTAINED and encoded in
+  CR-GR3B-3 — the negotiated-orientation prerequisite is a HARD dependency of the GR-3b
+  packet recompile (verified: TREATY_ORIENTATION_KINDS still lacks 'negotiated').
+- **F-S1-E4** (row 5205, ES-2 armyId): SUSTAINED as an OWNER item (persisted-shape
+  carve-out). Chair recommendation Option A narrow form stands. Execution notes for the
+  owner's yes: amend BOTH venue-kind homes (envoyErrandVocabulary.js:359 AND
+  envoyEncounter.js:26 — the CR-ES-2 both-homes shape) and re-measure the armyId census
+  first (already drifted by one in each figure). → OWNER_DECISION_QUEUE.
+- **F-S1-E5** (row 5338, ES-3 'exports' leg cut): SUSTAINED as an OWNER item, marked
+  TIME-SENSITIVE — the free window (mintCovertMission has no production caller, re-measured
+  2026-08-09) closes when ES-5's dispatcher lands. → OWNER_DECISION_QUEUE.
+- **F-S1-E6** (row 5566, Sanctuary healing→legal re-map): DEFERRED to ride the
+  classifier-coverage micro-wave (M5) as ONE disclosed golden shift, not piecemeal.
+- **F-S1-E7** (row 5950, the six built-artifact census rows): KEPT FROZEN (they assert
+  dist state and step 12 runs before the build step). The honest cure is STRUCTURAL and is
+  ORDERED: relocate the edge-bundle freshness/reproducibility guards to a post-build gate
+  step, THEN bank the six census rows. Micro-packet.
+
+**Amendments accepted (all 8), with the machinery each is owed (hazard-conversion law):**
+- **M1** test-title-census lane serialization (row 3777) → a hazard-registry row + a line
+  in the packet-dispatch procedure: lanes that ADD test titles serialize like CQ5 flag lanes.
+- **M2** hash-inside-the-measuring-command receipt law (row 4133) → appended to the
+  receipts memory.
+- **M3** ES-1 row annotated with its own repair round (e7eeaeff, 1b111399 — the persist-path
+  veil leak its 14 mutants missed); J-ES1-5 restated as defense-in-depth (the one-reader
+  walker's three regexes match READ forms only — an object-literal key evades; recorded as
+  that walker's known residual, same family as the quoted-source blindness class).
+- **M4** band-top fixture saturation, instance TWO (row 5462) → a fixture-saturation guard
+  in the ratchet-governance micro-packet (with F-S1-J8's cat-file arm).
+- **M5** SERVICE_CATEGORY_MAP silent fallthrough, 3 live mis-folds re-reproduced 08-09
+  (row 5566) → a registration/coverage walker micro-wave; E6's Sanctuary re-map rides it.
+- **M6** ENOSPC one-archive-at-a-time practice (row 5774) → appended to the archive-census
+  memory.
+- **M7** (row 5058's open items): the J-GR2R-7 manifest fold is NOW ACTIONABLE (manifest
+  clean at HEAD) — fold the seven-mutant table by RAW-TEXT SPLICE per the never-re-serialize
+  law; ordered into the ratchet-governance micro-packet. The "re-run every quoted gate at
+  the committed sha" rule is ACCEPTED as machined (packet-standard receipts + gate law).
+  The domain-strict "ceiling 1313, tighten owed" item is SUPERSEDED — the live ceiling is
+  1140 and holding exactly (measured this session).
+- Misc doc corrections at this landing: espionageGate.js header gets a dated additive note
+  correcting the superseded "ES-1 flips the spelling" promise (the J-SP-D-6 norm, hereby
+  ratified as standing); DESIGN_FP_ARCH_SP.md:828's SP-D bands row moves to its consumer
+  volume per the SP-D surveyor's recommendation.
+- Owed to the SOAK PHASE, recorded: the WR-10 dark-host soak re-run (J-GR2R-1) has still
+  never been re-run since GR-2's dark path began persisting that lane's ledger writes.
+
+### Chair-scope rows (9), each ⏳ marker flips to: ✅ FABLE-SURVEYED 2026-08-09 (F-S1)
+
+#### S12-W (line ~6074) — walker/census split
+- All 5 recorded decisions RATIFIED. Re-examine answers:
+  - F-S1-J1: the OPEN-population vs CLOSED-per-member-identity triage line is RATIFIED as
+    the correct test — the axis is whether a new violation mints a visible new test
+    identity or is absorbed into an existing failing row.
+  - F-S1-J2: the twelve OWED walker rows burn down as chair-compiled micro-waves through
+    the packet system; FIRST: the two crisisTripleSync RE-POINTS (mis-pointed pins bank
+    wrong addresses — correctness, cheap); owner-gated rows (DEPLOY.md migration head,
+    enforcement-claims) stay parked with Migration 195.
+  - F-S1-J3: guidanceRegistry per-file inventory upgrade (182 rows) stays deferred-recorded.
+  - STOP-S12W-1: DISCHARGED by VR3 @ 05af1e8b (owner's spatialUsage landed). Closed.
+
+#### S12-W2 (line ~6233) — the control pin that certified misses
+- All 5 decisions RATIFIED (title-arm refusal on measured aliasing stands; EXACT ledgers
+  not ceilings stands). Re-examine answers:
+  - F-S1-J4: the declared-marker question is ANSWERED by VR1's A5 source-local
+    `@enforcement-walker` marker — RATIFIED as the correct synthesis (source-local
+    declaration beside the guard + the structural arms retained as defense in depth).
+  - F-S1-J5: the Math.pow routing wave (dispositionLedger.js:468 → bandedStock) is ordered
+    as a future micro-packet; the integer/rational reformulation of the primitive rides
+    with it. Low urgency, recorded.
+  - F-S1-J6: the seven undispositioned .npcs readers get a chair-authored §8 disposition
+    pass (judgment-dense, Fable work), scheduled after the survey debt clears.
+  - commercialReasons' 31 any-holes: declared rows stand; burn-down is owner-file typing
+    work, future micro-packet.
+
+#### S12-W2-R (line ~6463) — orphan recovery
+- All 3 decisions RATIFIED (all-eight land was verified independently; row preserved
+  verbatim; six wins not banked). Re-examine answers:
+  - F-S1-J7: NO new commit-ordering mechanism needed — the census-exactness arm already
+    reds any COMMIT that removes a row while its walker still fails; the feared state is
+    the UNCOMMITTED orphan, which §3k's recovery procedure owns. Derivation recorded.
+  - F-S1-J8: the `git cat-file -e` attribution arm is ADOPTED — add to both
+    DECLARED_OVERRUNS governance arms as a tiny ratchet-governance micro-packet.
+  - F-S1-J9: the archive-census node_modules leg is recorded (queue row + memory
+    archive-census-node-modules-leg); sufficient.
+  - F-S1-J10: the six built-artifact "no longer fail" rows stay NOT banked — their pass
+    state is dist-dependent (stale-dist environments red them); banking would convert
+    environmental variance into gate noise. Chair rationale now on record.
+
+#### S12-W2-VR1 (line ~6605) — J-S12-VR1-1 (A5 marker) RATIFIED; J-S12-VR1-2 (owed ceiling
+13→16 honest increase) RATIFIED — ceilings exist to force honesty, hiding the three would
+have been the defect. (VR2/VR3 burned it back down 16→14→13; verified live: OWED_CEILING=13.)
+
+#### S12-W2-VR2 (line ~6650) — J-S12-VR2-1 RATIFIED with the note that the exact 378-module
+count is a WALKER-PINNED restatement (the guard is what licenses it under
+derive-dont-restate); J-S12-VR2-2 (per-file call inventory) RATIFIED — drift must name its
+location.
+
+#### S12-W2-VR3 (line ~6678) — J-S12-VR3-1 RATIFIED: pact_formation TRACKED (persistent
+road-priced queue = DEPOSIT), commercialReasons EXEMPT (pulse-recomputed = RE-DERIVATION)
+— consistent with the spatial-ledger manifest classification law's axis, and the row's
+rationale explicitly survives the future mount. J-S12-VR3-2 (state-presence telemetry for
+a stranded dark-flag row) RATIFIED — honest presence reporting over pretend execution.
+Verified live: spatialUsage.js:198 pact_formation tracked; :296 commercialReasons EXEMPT.
+
+#### S12-W2-HZ1 (line ~6713) — J-S12-HZ1-1 RATIFIED (aggregate owed ceiling + machinery
+floor). The residual (equal-count status swap is review-visible only) is ACCEPTED — the
+registry is low-churn meta-governance; revisit only past ~40 classes or on a swap
+incident. Verified live: 27 classes, MACHINERY 10 (floor 9, grow-only holding), OWED 17/18.
+
+#### S12-W2-DET5 (line ~6742) — J-S12-DET5-1 RATIFIED: 60 s per-case ceiling on
+fullDocByteRender metropolis (verified live at tests/pdf/fullDocByteRender.test.js:69) is
+a per-test stability repair honoring the timeout law (never the global), with N=5
+contention bundles executed. The five-run full-suite soak rides the terminal-soak phase.
+
+#### S12-OSR-FP (line ~6766) — the observed-shape fixed-point arc
+- The Codex continuation's bounded repairs, rejected prototypes, and evidence discipline
+  are RATIFIED as recorded (both rejections were correctly refused on measured grounds).
+- The four semantic re-rulings Fable owed: call-chain identity, invocation-owned receiver
+  proof, relevant-flow-context projection, demand-key refinement — ALL FOUR RATIFIED, and
+  the repair is AUTHORIZED along one canonical dependency-state identity. Full ruling +
+  conditions: memory/osr-resolver-state-identity-ruling.md (splice its "AUTHORIZED repair"
+  and "Conditions" sections into the row verbatim at landing).
+- The no-freeze checkpoint stands: no baseline/golden motion until the step-7 freeze
+  ruling; steps 6-10 of the recorded resume order are unchanged.
+
+### Also landing in this row
+- CR-GR3B-1..4 + CR-IN0C-1..3 (memory/gr3b-in0c-chair-rulings.md — splice verbatim);
+  GR-3B/IN-0C packets go to coordinator recompile citing them.
+- The TC-3 authority reconciliation: JUDGMENT — the 2026-08-01 external-implementer order
+  (recorded in DESIGN_TOWN_CARTOGRAPHY.md's header) supersedes the 08-05 blanket-grant
+  note's "TC-3..8 owner's own" line for IMPLEMENTATION; the owner-eye/soak/promotion
+  gates it names remain held. Vetoable.
+- The 21 workflow-surveyed rows: append per-row verdicts from wf_d700df0a-35d results;
+  any ESCALATE recommendation gets an explicit chair ruling here.
+- The walker-red repair lane's row (three guards freed, mutant-proven; the two minted
+  hazard classes are in memory/walker-scan-textual-blindness-classes.md — splice both).
+  Follow-ups recorded: the test-3 declaration-vs-call indexOf pin (one-line fix); the
+  quoted-object-key blind spot in the object-property write form (pre-existing, recorded
+  not re-found).
+
+### Spliced verbatim from memory/osr-resolver-state-identity-ruling.md (the S12-OSR-FP ruling)
+
+#### The four re-rulings the queue tail requested — all RATIFIED
+
+1. **Call-chain identity** — finite no-repeat static call chains, repeated sites close to
+   multiplicity `many`. Three independent spellings implement it (`contextualArrayProducer`
+   ~:3267, `instantiateSymbolic` local arm ~:6722 `repeatsStaticCall`,
+   `qualifyRecursiveCallReturns` ~:7020). RATIFIED as law; the triple spelling is a
+   one-home-law hazard — the authorized repair consolidates to one helper, pinning each
+   former call site.
+2. **Invocation-owned receiver proof** (`invocationOwnsReceiverForTarget` ~:3829) —
+   fail-closed: parameters, captures, aliases, logical transfers, unproven calls all refuse;
+   only same-owner lexical receivers with every identity source fresh in that invocation
+   qualify. RATIFIED; any repair must keep the exact-receiver fallback (~:4139-4170)
+   reachable.
+3. **Relevant-flow-context projection** (`flowContextIdsForSource` ~:3103, stepCount-based
+   invalidation) — RATIFIED, and it is the PRECEDENT the unified identity generalizes.
+4. **Demand-key refinement** (heap-demand memo ~:3998; `Object.keys` key-domain narrowing
+   ~:3961-3982) — semantics RATIFIED. The FULL cutoff signature + FULL effect-chain in the
+   key is part of the performance disease; re-keying to projected identities is authorized
+   PROVIDED the pinned risks below stay green.
+
+#### The disease, in one sentence
+
+Chains/views use a finite lattice; cutoff-dependent state (function versions ~:5458,
+binding versions ~:5739, local records `:c<id>` ~:2745, heap demands ~:3998) keys on RAW
+COMPLETE cutoff maps; frames have either NO cache identity (four `cacheable =
+sentinelFrames.size === 0` guards disable binding/param caches whenever any frame is
+installed) or TOTAL-STATE identity (context keys serializing full frame contents, rotated
+by every monotone growth). The blocked read (`SettlementsPanel.jsx:359`,
+`updatedSaves.filter(...).map(s => s.id)` element receiver via the 959-line
+`factionRename.js`) dies of RECOMPUTATION WITHOUT GROWTH, which no budget meters (budgets
+count growth steps/tokens only).
+
+Why the two rejected prototypes failed: **P1** (framed-binding cache) embedded monotone
+token-set CONTENTS in its keys — every growth rotates the key, hit rate collapses exactly
+on growing reads. **P2** (cutoff-independent summary sharing) collapsed the cutoff
+dimension (543→13 summaries) while frames stayed uncached — instantiated tokens re-entered
+frame-disabled binding resolution, 9,385 → 221,472 binding starts. Collapsing one dimension
+without an identity for the other moves the product.
+
+#### The AUTHORIZED repair (chair ruling, vetoable; supersedes the prior continuation's
+#### "no more analyzer variant" clause, which bound only that continuation)
+
+ONE canonical dependency-state identity for all cached resolver facts:
+
+    DependencyState(subject) = Π_{owner ∈ Relevant(subject)} CutoffBand(owner)
+                             × Π_{param ∈ Consulted(subject)} FrameCellRef(param)
+                             × Multiplicity{one, many}
+
+- **Relevance projection generalized from flow tokens to functions/bindings**:
+  Relevant(fn) = owners of writes on free mutable bindings transitively read by its
+  returns + owners of heap effects on locals it allocates (the write-occurrence census
+  `bindingVersionOf` already computes). `functionVersionOf` keys on the PROJECTED map.
+  Pure helper ⇒ ⊥ ⇒ exactly one version (P2's win, per-owner and fail-closed).
+- **Frames as interned REFERENCES, never contents**: key framed bindings by (binding,
+  projected cutoffs, reference to the interned frame cell identified by call-entry
+  identity — the `local:inst:`/frameKey scheme ~:6748/:7022); growth of a cell's contents
+  invalidates by VERSION STAMP (the `heapStepStableVersion === approximationVersion`
+  pattern ~:4006), never by key rotation.
+- **Fail-closed**: when a subject's write census cannot be established (dynamic calls,
+  unknown escapes), project to the FULL cutoff map — today's behavior; degraded
+  performance, never degraded soundness.
+
+#### Conditions on the repair (each is a gate)
+
+1. The invariant stated LOCALLY in the file header (resume-order step 5's requirement).
+2. Risk pins stay green — sibling-invocation distinctness (`readerShapeResolver.test.js`
+   ~:1715, ~:1775), captured-memoized cross-invocation mutation (~:1732, ~:1754),
+   demand-scoped clones; PLUS new negative controls: exact-origin non-crossing and
+   captured-mutable (resume-order step 5 names both).
+3. Advisory recomputation-without-growth meter added (observability, not a failure mode).
+4. Acceptance ladder: resolver suite 90/90 + new controls → the blocked read completes
+   within the 90 s target on the 2,074-file corpus → full-tree run under the 30-minute
+   ceiling with `--progress`. Then resume-order steps 6-10 unchanged (commit green scanner
+   FIRST, fresh clone for the authoritative artifact, schema-3 freeze needs the explicit
+   later owner/Fable freeze ruling — still owed, NOT granted here).
+5. Staffing: Opus implementation lane, chair-briefed (JUDGMENT: not an implementation
+   packet — the packet INDEX governs product dispatch; scanner apparatus lanes run
+   chair-briefed). Dispatch when a write-lane slot frees (concurrency law: two lanes).
+
+### Spliced verbatim from memory/gr3b-in0c-chair-rulings.md (CR-GR3B-1..4 + CR-IN0C-1..3)
+
+#### CR-GR3B-1 — candidate sets (rung ladders, explicit frozen data, non-cumulative)
+
+`PACT_DRAFT_LENS` becomes per-trigger rung ladders; each rung `{ min, terms }`, inclusive
+lower bound on clamped `score01`, select the HIGHEST rung whose `min <= s`; ladders start
+at 0 so a crossed trigger always drafts (preserves current always-draft behavior):
+
+- `faith_communion`: 0 → [shared_rite] · 0.45 → [pilgrimage_right, tolerance_guarantee] ·
+  0.7 → [missionary_access] · 0.9 → [temple_restitution]
+- `migration_pressure`: 0 → [migration_right] · 0.6 → [labor_compact] ·
+  0.85 → [settlement_provision]
+- `shared_threat`: 0 → [non_aggression] · 0.75 → [non_aggression, mutual_defense] (the
+  frozen composable pair, both in one sheet at the top rung)
+- `trade_demand`: 0 → [resource_share] (unchanged, confirmed)
+- `renewal`: [] (empty until GR-5, which owns renewal terms — confirmed)
+
+Bounds are AUTHORED literals, not derived from catalog weights (the packet forbids
+weight-as-threshold). The drafted set feeds `orderTermsByAsk` (GR-3a's shipped, deliberately
+unconsumed ladder primitive — this is its intended consumer).
+
+#### CR-GR3B-2 — selection function exactness
+
+Input: the crossing's own `score01`. `s = clamp(Number(score01), 0, 1)`; non-finite → 0.
+Boundaries inclusive at `min`; ties impossible (distinct literals); output cardinality =
+exactly the rung's term list; beneficiary expansion AFTER rung selection (per-term at mint).
+
+#### CR-GR3B-3 — negotiated orientation (the two transfer terms)
+
+For beneficiary-bearing terms from a peacetime crossing: OBLIGOR = the PROPOSING party
+(`proposal.from`), OBLIGEE = counterparty. Transfer payer = obligor, payee = obligee;
+compliance capacity subject = obligor; monitor = obligee; `defaultedBy` = obligor.
+Mechanism: a SEPARATE ORIENTATION PREREQUISITE micro-wave extending `treatyOrientationOf`
+to resolve negotiated instruments DERIVATIONALLY from the instrument's persisted parties
+(`signPactProposal` mints from `proposal.from/to` — pactFormation.js:367). VERIFY-AT-COMPILE
+that from/to survive the instrument round-trip; if they do NOT, the fix needs a persisted
+field → park to OWNER_DECISION_QUEUE (persisted-shape widening not covered by the blanket).
+
+#### CR-GR3B-4 — composable pair exception
+
+`amendPactInstrument` gains a CLOSED exception: exactly `{non_aggression, mutual_defense}`
+may co-occupy `security|<same beneficiary>` — a frozen pair constant, both arrival orders,
+including both-in-one-draft. Duplicate of a live member: refused (existing law). A third
+security term (e.g. demilitarization): refused. No general stacking rule.
+
+#### CR-IN0C-1 — signing-credit transport: NEXT-TICK DERIVED, nothing moves
+
+At tick T the pulse caller (pulseKernel, at the existing statecraft call site) derives
+`provenTrue` CredibilityDelta[] from PERSISTED treaty state: every disclosure-family term
+with `signedTick === T - 1` (peaceTerms.js:250 persists signedTick) credits the disclosing
+obligor once. Consumer: the existing `provenTrue` seam (informationStatecraft.js:1403 fold).
+NO stage move, NO second pass, NO pending-credit deposit, NO new persisted family, NO
+direct credibility write. Replay-safe and exactly-once by construction (pure predicate on
+persisted state). Pipeline order unchanged: beliefs → statecraft (consuming last tick's
+signings) → treaties. The design's "same-tick" language binds only the expiry lift.
+
+#### CR-IN0C-2 — closed kinds/audience
+
+`treaty_disclosure_opened` = ENGINE EVENT, registered, minted at treaty PASS 1 via the
+existing beat machinery. `disclosure_feed` = RESERVED CONTENT HANDLE (pool only).
+`disclosure_strained` = DM PROJECTION ONLY (derived from observed compliance; no engine
+kind). `disclosure_expired` = EXCLUDED — expiry uses the existing standard lapse kind
+(`treatyLapsedBeats`); the chair-flagged inferred token is REFUSED. Honored stays quiet;
+default uses the existing standard default kind.
+
+#### CR-IN0C-3 — compliance fidelity
+
+Feed multiplier by observed compliance: honored = 1.0; strained = `RELAY_KEEP` BY IMPORT
+(0.95 — semantic law: a strained compelled feed degrades to ally-relay fidelity, never a
+second spelling); defaulted/lapsed = feed stops. Multiply then clamp [0,1]; no rounding.
+Merge = the existing strongest-confidence precedent UNCHANGED; no third merge law.

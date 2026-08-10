@@ -43,6 +43,10 @@
  *      polarities are pinned together in tests/property/errandSpineDormancyFence.test.js,
  *      whose downstream-seam block executes this gate in both flag states and proves the
  *      espionage family stays parked while the spine is dark.
+ *      ⏱ UPDATE, 2026-08-09 (F-S1): the original header's promise that ES-1 would flip
+ *      this spelling was SUPERSEDED, not executed — the certification row pins both
+ *      polarities (=== true at the mint gate in errandMint.js, !== true here) as
+ *      deliberate and permanent.
  *   3. THE FLAG ITSELF, BY NAME (`espionageEnabled === true`). BY NAME is the point:
  *      a frozen-list `REQUIRED_RULES.every(...)` conjunction is a COMPUTED member access
  *      and attributes to NO key at all, which is exactly how lane WW-A shipped a fully

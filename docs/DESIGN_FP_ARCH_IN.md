@@ -268,9 +268,10 @@ MEASURE, never inherit.
      DESIGN_FP_INFORMATION.md §5 IN-0a) IS AN OVERSTATEMENT MEASURED AT 0a's BUILD:
      the built writer folds a validated envelope unconditionally and the contradiction
      comparator runs on the NEXT pass, so the plant dies ONE TICK LATER than both
-     documents say. Reported under the J-WR-13 stop rule and deliberately NOT corrected
-     here — amending the claim is a chair's act. See the IN-0a row, ESCALATION 1, in
-     docs/FABLE_VALIDATION_QUEUE.md. -->
+     documents say. Reported under the J-WR-13 stop rule; the chair amended both
+     sentences 2026-08-09 (F-S1), so this note is now the escalation's discharge
+     record, not an open flag. See the IN-0a row, ESCALATION 1, and the F-SURVEY-1
+     row in docs/FABLE_VALIDATION_QUEUE.md. -->
 
 
 **IN-0a — THE HANDOFF (re-scoped by R1; was "the fold").** The fold is built;
@@ -305,8 +306,10 @@ the envelope dies in candidate metadata. This slice carries it to the fold.
   town page, DM/premium, audience passed EXPLICITLY; source scan catches any
   call site omitting it (J-INF-17); player projection pinned EMPTY for live
   plants.
-- Pins (negative hardest): the corroborated mark's plant DIES at the fold
-  (reconcile's contradiction arm — seeded non-empty); THE SPENT MARKET banded
+- Pins (negative hardest): the corroborated mark's plant DIES on the
+  contradiction comparator's NEXT pass, ONE TICK AFTER the fold (reconcile's
+  contradiction arm — seeded non-empty) (amended 2026-08-09 F-S1; previously
+  overstated as dying at the fold itself); THE SPENT MARKET banded
   margin pin exactly as the volume's CORRECTED block (WEIGHT_FLOOR 0.35 is a
   discount, not silence; the fresh-plant-beats-stale-truth sibling pinned
   too); the WRITER/READER pin boots the REAL rotation producer through the

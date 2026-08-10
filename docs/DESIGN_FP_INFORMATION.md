@@ -416,8 +416,10 @@ wave lands them. Historical archetype, one clause each below.
 - **Couplings:** INFO×WAR and INFO×TRADE rows in DESIGN_FP_COUPLINGS.md (the
   planted story is the input side of IN-2's baits).
 - **Pins (negative hardest):** a commissioned plant against a mark whose
-  independent corroborated sources contradict it DIES at the fold (reconcile's
-  contradiction arm wins — the lure is resistible by good sourcing); THE SPENT
+  independent corroborated sources contradict it DIES on the contradiction
+  comparator's NEXT pass, ONE TICK AFTER the fold (reconcile's contradiction
+  arm wins — the lure is resistible by good sourcing) (amended 2026-08-09
+  F-S1; previously overstated as dying at the fold itself); THE SPENT
   MARKET [CORRECTED 2026-08-02 (fp-audit)]: the same plant from a
   spent-credibility market moves the mark's belief STRICTLY LESS than from an
   unmarked one, by a banded margin the fixture asserts (§7 names the expected
