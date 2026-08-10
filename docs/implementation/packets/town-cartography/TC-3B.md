@@ -1,8 +1,12 @@
 # Town Cartography / TC-3b — parcel carving and the institution binding
 
-- **Status:** `BLOCKED`
-- **Chair promotion (2026-08-10):** promoted BLOCKED; full chair validation deliberately
-  deferred to the C-1 unblock revalidation, when TC-3a's landing SHA is recorded here.
+- **Status:** `READY`
+- **C-1 unblock revalidation (chair, 2026-08-10): COMPLETE.** TC-3a landed at
+  `5066c34b`; required symbols verified live (sourceDistricts, compileTownWardLayers
+  with the {streets, wards, receipts} shape, the shared premise prefix); substrate
+  untouched since the landing (0 commits over the cartography paths); shared manifest
+  rows re-entered below per the deferred-rows note. READY under the 2026-08-10 full
+  delegation grant.
 - **Blocked on:** TC-3a landing. This packet's verified base is TC-3a's landing SHA, which
   does not exist yet. The chair records it and moves this packet to `READY`.
 - **Packet version:** `1`

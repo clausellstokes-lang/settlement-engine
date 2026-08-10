@@ -50,11 +50,16 @@
     },
     {
       "id": "TC-3B",
-      "status": "BLOCKED",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/town-cartography/TC-3B.md",
       "verifiedBase": "5066c34bf6dd3a1982f92d22b0687ab4f204f17c",
       "changeManifest": [
         { "action": "CREATE", "path": "src/domain/townCartography/cartographyParcels.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographyTuning.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographySynthesis.js" },
+        { "action": "TEST", "path": "tests/domain/townSceneCartography.test.js" },
+        { "action": "TEST", "path": "tests/domain/townCartographyDeterminism.test.js" },
+        { "action": "TEST", "path": "tests/property/townCartographyDormancyGolden.test.js" },
         { "action": "CREATE", "path": "tests/domain/townCartographyParcels.test.js" }
       ],
       "requiredSymbols": [
@@ -69,7 +74,14 @@
         { "id": "B5", "case": "byte budget and domain separation" },
         { "id": "B6", "case": "dormancy and purity" }
       ],
-      "checks": []
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/townCartographyParcels.test.js",
+          "tests/domain/townCartographyWards.test.js",
+          "tests/domain/townSceneCartography.test.js",
+          "tests/domain/townCartographyDeterminism.test.js",
+          "tests/property/townCartographyDormancyGolden.test.js"]
+      ]
     },
     {
       "id": "SC-1",
