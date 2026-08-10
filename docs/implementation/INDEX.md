@@ -15,7 +15,8 @@ subject, stale progress block, or old brief is not a coding assignment.
 
 This index deliberately exposes only the next bounded product slices plus any
 explicitly owner-authorized infrastructure packet. It is not a transcription of
-every designed wave. TC-3 and SC-1 are independent lanes; the blocked
+every designed wave. TC-3a and SC-1 are independent lanes; TC-3b depends on TC-3a
+and is not a parallel lane; the blocked
 foreign-policy rows do not hold them. When a packet lands, the coordinator
 re-derives that lane and decides whether to compile its immediate dependent.
 
@@ -23,7 +24,8 @@ re-derives that lane and decides whether to compile its immediate dependent.
 
 | Dispatch | Packet | Status | Why this is the boundary | Explicitly excluded |
 |---:|---|---|---|---|
-| READY-1 | [`TC-3`](./packets/town-cartography/TC-3.md) | **READY** at the verified base | Adds named wards, parcels, and a bounded binding seam over landed TC-0..2 | TC-4..8, buildings, promotion, 3D defaulting, visual soak |
+| READY-1 | [`TC-3a`](./packets/town-cartography/TC-3A.md) | **READY** at `6da84cfd` (chair promotion 2026-08-10) | Adds named streets and wards at schema v2 and moves the naming pools off the bounded chunk by injection | parcels, carving, institution binding, byte band, TC-4..8, buildings, promotion, 3D defaulting, visual soak |
+| BLOCKED | [`TC-3b`](./packets/town-cartography/TC-3B.md) | **BLOCKED** — verified base is TC-3a's landing SHA | Adds bounded contained parcels and the pure institution-to-parcel binding receipt for TC-4 | naming, schema changes, TC-4..8, buildings, promotion, 3D defaulting, visual soak |
 | LANDED-2 | [`SC-1A+B`](./packets/surveyor-chat/SC-1.md) | **LANDED** at `455a29b5`; do not redispatch | Ephemeral text-intent shell and typed-op card extraction landed; SC-2+ remain excluded | direct chat proposals, audience/provenance decisions, uploads, SC-2/3, migrations, pricing/legal |
 | BLOCKED | [`GR-3b`](./packets/foreign-policy/GR-3B.md) | **BLOCKED** — producer eligibility and ladder selection are unruled | Would finish the already-split producer half of GR-3 | GR-4+, later grammar, tuning, lighting |
 | BLOCKED | [`IN-0c`](./packets/foreign-policy/IN-0C.md) | **BLOCKED** — same-tick signing credit conflicts with pipeline order | Would finish the sole missing IN-0 slice | IN-1+, broader disclosure redesign |
@@ -71,8 +73,11 @@ live symbols were checked at the measured SHA.
   GR-3a, IN-0a/0b/0d, TR-1, TR-9c, and ES-0 through ES-4 plus ES-5a are landed.
   GR-3b and IN-0c are the only partial-slice closers reconciled now, and both
   are blocked on the explicit decisions above.
-- **Town Cartography:** TC-0 through TC-2 are landed. TC-3 is next. TC-4
-  through TC-8 remain designed but intentionally uncompiled until TC-3 lands.
+- **Town Cartography:** TC-0 through TC-2 are landed. TC-3 was dispatched, reached
+  green, and STOPped on three measured size breaches; it is SUPERSEDED by TC-3a
+  (names and wards) and TC-3b (parcels and binding), which land in that order. The
+  preserved TC-3 implementation is the raw material for both. TC-4 through TC-8
+  remain designed but intentionally uncompiled until TC-3b lands.
 - **Surveyor Chat:** the old Workshop presentation is superseded. SC-1 is the
   next bounded surface packet; later ingestion and migration stages are excluded.
 

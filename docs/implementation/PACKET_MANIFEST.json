@@ -3,46 +3,73 @@
   "indexPath": "docs/implementation/INDEX.md",
   "packets": [
     {
-      "id": "TC-3",
+      "id": "TC-3A",
       "status": "READY",
-      "packetPath": "docs/implementation/packets/town-cartography/TC-3.md",
-      "verifiedBase": "2c810d167d016302e641fc9cfe74fff57475b14e",
+      "packetPath": "docs/implementation/packets/town-cartography/TC-3A.md",
+      "verifiedBase": "6da84cfdf9eb533986d34e9a0f18a32b7d592736",
       "changeManifest": [
-        { "action": "CREATE", "path": "src/domain/townCartography/cartographyWardsParcels.js" },
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyPlan.js" },
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyWards.js" },
         { "action": "MODIFY", "path": "src/domain/townCartography/cartographyTuning.js" },
         { "action": "MODIFY", "path": "src/domain/townCartography/cartographySynthesis.js" },
         { "action": "MODIFY", "path": "src/domain/townScene/cartographyContract.js" },
-        { "action": "CREATE", "path": "tests/domain/townCartographyWardsParcels.test.js" },
+        { "action": "MODIFY", "path": "src/domain/townScene/compileTownSceneManifest.js" },
+        { "action": "MODIFY", "path": "src/workers/townScene.worker.js" },
+        { "action": "MODIFY", "path": "src/lib/townScene/townSceneExport.js" },
+        { "action": "CREATE", "path": "tests/domain/townCartographyWards.test.js" },
         { "action": "TEST", "path": "tests/domain/townSceneCartography.test.js" },
         { "action": "TEST", "path": "tests/domain/townCartographyDeterminism.test.js" },
         { "action": "TEST", "path": "tests/property/townCartographyDormancyGolden.test.js" }
       ],
       "requiredSymbols": [
         { "path": "src/domain/townScene/cartographyContract.js", "symbol": "TOWN_CARTOGRAPHY_SCHEMA_VERSION" },
+        { "path": "src/domain/townScene/cartographyContract.js", "symbol": "townCartographyActive" },
+        { "path": "src/domain/townCartography/cartographySynthesis.js", "symbol": "compileTownCartography" },
+        { "path": "src/domain/townCartography/cartographyTuning.js", "symbol": "TOWN_CARTOGRAPHY_TUNING" },
+        { "path": "src/domain/townScene/compileTownSceneManifest.js", "symbol": "compileTownSceneManifestFromAuthorizedInput" },
+        { "path": "src/workers/townScene.worker.js", "symbol": "loadManifestCompiler" },
+        { "path": "src/lib/townScene/townSceneExport.js", "symbol": "downloadTownSceneArtifact" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "real lit compile with named streets and wards" },
+        { "id": "A2", "case": "schema v2 and name negatives" },
+        { "id": "A3", "case": "replay and order independence" },
+        { "id": "A4", "case": "one-law audience projection" },
+        { "id": "A5", "case": "naming-pool injection across the lazy boundary" },
+        { "id": "A6", "case": "dormancy regression" },
+        { "id": "A7", "case": "purity and draw ledger" },
+        { "id": "A8", "case": "bounded chunk-pair posture" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/townCartographyWards.test.js",
+          "tests/domain/townSceneCartography.test.js",
+          "tests/domain/townCartographyDeterminism.test.js",
+          "tests/property/townCartographyDormancyGolden.test.js"]
+      ]
+    },
+    {
+      "id": "TC-3B",
+      "status": "BLOCKED",
+      "packetPath": "docs/implementation/packets/town-cartography/TC-3B.md",
+      "verifiedBase": "6da84cfdf9eb533986d34e9a0f18a32b7d592736",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyParcels.js" },
+        { "action": "CREATE", "path": "tests/domain/townCartographyParcels.test.js" }
+      ],
+      "requiredSymbols": [
         { "path": "src/domain/townCartography/cartographySynthesis.js", "symbol": "compileTownCartography" },
         { "path": "src/domain/townCartography/cartographyTuning.js", "symbol": "TOWN_CARTOGRAPHY_TUNING" }
       ],
       "acceptanceCases": [
-        { "id": "A1", "case": "real lit compile" },
-        { "id": "A2", "case": "schema and name negatives" },
-        { "id": "A3", "case": "replay and order independence" },
-        { "id": "A4", "case": "one-law audience projection" },
-        { "id": "A5", "case": "geometry and bounds" },
-        { "id": "A6", "case": "institution binding" },
-        { "id": "A7", "case": "dormancy regression" },
-        { "id": "A8", "case": "budget and purity" }
+        { "id": "B1", "case": "real lit compile emits parcels" },
+        { "id": "B2", "case": "replay, order independence, and placement selection" },
+        { "id": "B3", "case": "geometry and bounds over the map corpus" },
+        { "id": "B4", "case": "institution binding" },
+        { "id": "B5", "case": "byte budget and domain separation" },
+        { "id": "B6", "case": "dormancy and purity" }
       ],
-      "checks": [
-        [
-          "npx",
-          "vitest",
-          "run",
-          "tests/domain/townCartographyWardsParcels.test.js",
-          "tests/domain/townSceneCartography.test.js",
-          "tests/domain/townCartographyDeterminism.test.js",
-          "tests/property/townCartographyDormancyGolden.test.js"
-        ]
-      ]
+      "checks": []
     },
     {
       "id": "SC-1",

@@ -1,6 +1,12 @@
 # Town Cartography / TC-3 — wards and parcels implementation contract
 
-- **Status:** `READY`
+- **Status:** `SUPERSEDED`
+- **Superseded by:** [`TC-3a`](./TC-3A.md) (names, wards, naming injection) and
+  [`TC-3b`](./TC-3B.md) (parcels, binding, byte band), split 2026-08-09 after a valid
+  STOP: the implementation reached green (`63/63` focused) but breached three size
+  limits — leaf `408` effective lines against `250`, production delta `+454` against
+  `355`, and the bounded worker + manifest-compiler chunk pair at `416,577 B` against
+  `400,000 B`. The split is ratified; `CR-TC3A-1` rules the naming-byte cause.
 - **Packet version:** `1`
 - **Verified base:** `claude/composite-r4` at `2c810d167d016302e641fc9cfe74fff57475b14e`
 - **Last revalidated:** `2026-08-09`
