@@ -162,17 +162,50 @@
     },
     {
       "id": "IN-0C",
-      "status": "BLOCKED",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/foreign-policy/IN-0C.md",
-      "verifiedBase": "2c810d167d016302e641fc9cfe74fff57475b14e",
-      "changeManifest": [],
-      "requiredSymbols": [
-        { "path": "src/domain/worldPulse/beliefMap.js", "symbol": "advanceBeliefMaps" },
-        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "advanceInformationStatecraft" },
-        { "path": "src/domain/worldPulse/dispositionChannels.js", "symbol": "advanceTreatiesWithDisposition" }
+      "verifiedBase": "e6d963430046f07b2ebac4dd06ce4eddd386343c",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/peaceTermsDisclosure.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/informationStatecraft.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTerms.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/treatyLifecycleVoice.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarNews.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarReceiptPools.js" },
+        { "action": "REGISTER", "path": "src/domain/realm/heraldRouting.js" },
+        { "action": "REGISTER", "path": "src/domain/display/chroniclersLetter.js" },
+        { "action": "REGISTER", "path": "src/domain/display/settlementRumors.js" },
+        { "action": "TEST", "path": "tests/domain/informationStatecraftPins.test.js" },
+        { "action": "TEST", "path": "tests/domain/peaceTerms.test.js" },
+        { "action": "TEST", "path": "tests/domain/allyIntelSharing.test.js" },
+        { "action": "TEST", "path": "tests/lint/grammarLifecycleKindPools.walker.test.js" },
+        { "action": "TEST", "path": "tests/property/informationStatecraftDormancyGolden.test.js" }
       ],
-      "acceptanceCases": [],
-      "checks": []
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "advanceInformationStatecraft" },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "advanceTreaties" },
+        { "path": "src/domain/worldPulse/beliefMap.js", "symbol": "ALLY_INTEL_TUNING" },
+        { "path": "src/domain/worldPulse/treatyLifecycleVoice.js", "symbol": "treatyLapsedBeats" },
+        { "path": "src/domain/worldPulse/grammarNews.js", "symbol": "grammarKindRow" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "next-tick derived credit through the real pulse" },
+        { "id": "A2", "case": "exactly-once under replay" },
+        { "id": "A3", "case": "fidelity ladder honored/strained/defaulted/expired" },
+        { "id": "A4", "case": "fails closed on malformed compliance" },
+        { "id": "A5", "case": "predicate counterforce and per-door totality" },
+        { "id": "A6", "case": "dormancy byte-identical both oracles" },
+        { "id": "A7", "case": "real PASS 1 writer to reader integration" },
+        { "id": "A8", "case": "explicit provenTrue wins over the derived default" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/informationStatecraftPins.test.js",
+          "tests/domain/peaceTerms.test.js",
+          "tests/domain/allyIntelSharing.test.js",
+          "tests/lint/grammarLifecycleKindPools.walker.test.js",
+          "tests/property/informationStatecraftDormancyGolden.test.js"]
+      ]
     },
     {
       "id": "IA-1",
