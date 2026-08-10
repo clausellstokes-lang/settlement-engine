@@ -56,9 +56,15 @@ Snapshots from past review/design passes. Read for rationale, not for current tr
   release ledger.
 - [`PRODUCT_COHERENCE.md`](./PRODUCT_COHERENCE.md) — the 2026-06-16 product mental
   model; superseded for current planning by `PRODUCT_COMPLETION_ARCHITECTURE.md`.
-- [`REVIEW_FINDINGS.md`](./REVIEW_FINDINGS.md) — already self-labeled SUPERSEDED.
+- `REVIEW_FINDINGS.md` — **EXTRACTED FROM THE REPO 2026-08-10** (self-labeled SUPERSEDED,
+  but it names files and line numbers for live security seams). It and its
+  `.review_findings.json` sidecar now live in the owner's out-of-repo design-handoff
+  folder under `repo-extracted-2026-08-10/`; see that folder's `INDEX.md`. The in-repo
+  summary that survives it is [`RISK_REGISTER.md`](./RISK_REGISTER.md) §4.
 - Multi-agent audit dumps: [`GENERATION_COHERENCE_AUDIT.md`](./GENERATION_COHERENCE_AUDIT.md), [`SIMULATION_LOGIC_AUDIT.md`](./SIMULATION_LOGIC_AUDIT.md), [`REGIONAL_ENGINE_AUDIT.md`](./REGIONAL_ENGINE_AUDIT.md), [`refund-ledger-audit.md`](./refund-ledger-audit.md), [`a11y-audit.md`](./a11y-audit.md), [`mobile-responsive-audit.md`](./mobile-responsive-audit.md).
-- `.review_findings.json` — raw machine-generated review-findings dump (heavy build artifact, not hand-maintained).
+- `.review_findings.json` — raw machine-generated review-findings dump (heavy, not hand-maintained).
+  Gitignored on this branch and **extracted from the repo 2026-08-10** alongside
+  `REVIEW_FINDINGS.md`; it was still tracked on the ledger branch until then.
 - Plans / design specs (largely realized; describe intent at authoring time): [`COHESION_REMEDIATION_PLAN.md`](./COHESION_REMEDIATION_PLAN.md), [`SUBSYSTEM_INTEGRATION_PLAN.md`](./SUBSYSTEM_INTEGRATION_PLAN.md), [`UX_OVERHAUL_PLAN.md`](./UX_OVERHAUL_PLAN.md), [`PROPOSAL_ASSESSMENT.md`](./PROPOSAL_ASSESSMENT.md), [`A_PLUS_ROADMAP.md`](./A_PLUS_ROADMAP.md) (self-labeled HISTORICAL; the prescriptive A+ build order at authoring time), [`GEOPOLITICAL_WAR_LAYER.md`](./GEOPOLITICAL_WAR_LAYER.md) (DESIGN, partially implemented), [`SIMULATION_TO_10.md`](./SIMULATION_TO_10.md), [`STRESSOR_WAVE_DESIGN.md`](./STRESSOR_WAVE_DESIGN.md), [`simulation-intelligence-layer.md`](./simulation-intelligence-layer.md), [`regional-causality-engine.md`](./regional-causality-engine.md), [`world-pulse-roadmap.md`](./world-pulse-roadmap.md), [`P3_CONSERVED_LEDGER.md`](./P3_CONSERVED_LEDGER.md).
 - **Design specs** — the `DESIGN_*.md` family: commissioned
   architecture written before a wave was built, so they state intent at authoring time and

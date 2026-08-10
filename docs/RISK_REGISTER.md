@@ -10,10 +10,13 @@
 > [`docs/PHASE55_EXECUTION_PLAYBOOK.md`](./PHASE55_EXECUTION_PLAYBOOK.md) §0.0.2 and the
 > newest review doc [`docs/COMPREHENSIVE_REVIEW_2026-07-15.md`](./COMPREHENSIVE_REVIEW_2026-07-15.md).
 >
-> **Supersedes [`REVIEW_FINDINGS.md`](./REVIEW_FINDINGS.md)** — that file is a point-in-time
-> snapshot (2026-06-13) of a 133-finding multi-agent review; most of its high-severity items
-> have since been remediated (see [§4](#4-historical-findings-the-133-finding-snapshot)); it is
-> retained only as a historical record.
+> **Supersedes `REVIEW_FINDINGS.md`** — a point-in-time snapshot (2026-06-13) of a
+> 133-finding multi-agent review; most of its high-severity items have since been
+> remediated (see [§4](#4-historical-findings-the-133-finding-snapshot)).
+> ⚠ **That file was EXTRACTED FROM THE REPO on 2026-08-10** (IP exposure: it names
+> files and line numbers for live security seams). It and its `.review_findings.json`
+> sidecar now live outside the repo in the owner's design-handoff folder under
+> `repo-extracted-2026-08-10/`. §4 below is the in-repo summary that survives it.
 
 ## How to use this
 
@@ -21,7 +24,8 @@
 - Each entry cites **`file:line` on the current branch** so it can be re-verified, not taken on faith.
 - Update an entry the same commit you change its code. Add new risks at the top of [§3](#3-open-risk-register-prioritized).
 - This register is deliberately a **register**, not a findings dump. Exhaustive per-finding evidence
-  for the old review lives in `REVIEW_FINDINGS.md` / `.review_findings.json`.
+  for the old review lived in `REVIEW_FINDINGS.md` / `.review_findings.json`, both **extracted from
+  the repo 2026-08-10** — see the owner's out-of-repo `repo-extracted-2026-08-10/INDEX.md`.
 
 ---
 
@@ -125,5 +129,11 @@ On **2026-06-16** the 15 **critical + high** items were re-verified against the 
 ¹ A second critical (`refund_credits`) — the SQL/RLS one — making the header's "1 critical" effectively understated; both money-path criticals are fixed.
 
 The **65 medium + 53 low** findings were **not** individually re-triaged in this pass. Many were
-addressed by the Cohesion Waves; treat the archived `REVIEW_FINDINGS.md` as the lookup for any specific
-medium/low item, and verify against current code before acting (it predates the 2026-06-16 remediation).
+addressed by the Cohesion Waves, but **118 findings carry no remediation status of any kind** — neither
+the markdown nor the JSON sidecar ever had a per-finding open/closed field.
+
+⚠ The per-item lookup is **no longer in the repo.** `REVIEW_FINDINGS.md` and `.review_findings.json`
+were extracted 2026-08-10; the JSON (every row carrying `file`, `line`, `severity`, `evidence`,
+`suggested_fix`) is the worklist for any specific medium/low item and lives in the owner's out-of-repo
+`repo-extracted-2026-08-10/`. Verify against current code before acting on any of them — the register
+predates the spatial engine, the multi-wave engine stack, and the whole Cohesion Wave remediation.
