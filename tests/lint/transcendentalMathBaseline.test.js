@@ -32,6 +32,12 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, expect, test } from 'vitest';
+import {
+  GIT_OBJECTS_REACHABLE,
+  UNRESOLVABLE_WELL_FORMED_SHA,
+  gitDirPresent,
+  gitResolvesCommit,
+} from '../helpers/gitObjectStore.js';
 import { countText, countTrees, TREES } from '../../scripts/count-transcendental-math.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -211,10 +217,51 @@ describe('transcendental-math ratchet — frozen baseline governance', () => {
 // replaced carries: every row ATTRIBUTED, the set EXACT in both directions, and both sizes
 // capped by literals that only ever go down. Without these arms the ledger is a softer
 // baseline with no `--update` guard on it at all.
+//
+// ── THE ATTRIBUTION ARM'S EXISTENCE LEG (F-S1-J8) ────────────────────────────
+// The arm below attested `introducedAt` BY 40-HEX SHAPE ALONE, and a shape check accepts any
+// well-formed string — `f`×40 satisfies it exactly as well as a real commit does. A sha that
+// LOOKS bisectable and is not is worse than a missing one, because the next lane plans
+// against it. This leg RESOLVES each declared sha against the real object store, ONE
+// `git cat-file -e <sha>^{commit}` PER ROW.
+//
+// ⚠ IT IS ENVIRONMENT-AWARE AND STILL FAIL-CLOSED, which are not in tension. The wave-end
+// attribution method runs this suite inside `git archive` extractions, and an archive tree
+// carries NO object store at all, so an unconditional shell-out would red this walker in
+// exactly the trees it is read in most — a disabled guard bought with rigour. So the branch
+// is ASSERTED, never trusted: where git answers, a well-formed FAKE sha must FAIL to resolve
+// before any row is believed (the negative control that stops this leg passing vacuously),
+// and where it does not, the tree must genuinely carry no `.git` entry — so "no git here"
+// can never become a silent downgrade back to the shape check.
+//
+// ⚠⚠ THE SHELL-OUT LIVES IN tests/helpers/gitObjectStore.js AND MAY NOT MOVE BACK IN HERE.
+// This file is one of the estate's two NAMED COUNTEREXAMPLES for the walker-census law's
+// DELEGATED arm (tests/lint/testRatchet.test.js, "NO SINGLE ARM CLASSIFIES THEM ALL"): the
+// pin asserts that the NAME, TITLE and STRUCTURE arms all MISS this file and only A4 reaches
+// it. A3's predicate matches a shell-out to git, so writing `execFileSync` here flips the
+// structure arm true and destroys the counterexample — MEASURED, not feared: the first cut of
+// this leg did exactly that and reds testRatchet's pin by name.
+
 describe('transcendental-math ratchet — the declared-overrun ledger is honest', () => {
   const declaredFiles = Object.keys(DECLARED_OVERRUNS);
 
   test('⛔ EVERY DECLARED OVERRUN IS ATTRIBUTED — an unattributed row is a defect laundered into debt', () => {
+    // THE EXISTENCE LEG'S OWN HONESTY, TAKEN BEFORE ANY ROW IS TRUSTED BY IT.
+    if (GIT_OBJECTS_REACHABLE) {
+      expect(
+        gitResolvesCommit(UNRESOLVABLE_WELL_FORMED_SHA),
+        'the existence leg cannot discriminate — a 40-hex sha that is a commit in NO repository'
+        + ' RESOLVED, so `git cat-file -e` is answering yes to everything and every row below'
+        + ' would pass this arm vacuously',
+      ).toBe(false);
+    } else {
+      expect(
+        gitDirPresent(),
+        'git could not read HEAD in a tree that HAS a `.git` entry — the existence leg was'
+        + ' skipped for a reason that is NOT "this is a `git archive` extraction". Repair the'
+        + ' environment; do not let the attribution arm quietly degrade back to a shape check.',
+      ).toBe(false);
+    }
     for (const [file, d] of Object.entries(DECLARED_OVERRUNS)) {
       expect(TREES.some((t) => file.startsWith(`${t}/`)), `${file} is outside the scanned trees`).toBe(true);
       expect(Number.isInteger(d.sites) && d.sites > 0, `${file}: malformed site count`).toBe(true);
@@ -222,6 +269,15 @@ describe('transcendental-math ratchet — the declared-overrun ledger is honest'
         String(d.introducedAt),
         `${file}: introducedAt must be a 40-hex sha — an overrun nobody can bisect cannot be argued about`,
       ).toMatch(/^[0-9a-f]{40}$/);
+      // ...AND THE SHAPE IS NOT THE CLAIM. One `git cat-file -e` per row, so an invented but
+      // plausible sha reds HERE, named, instead of reading as an attribution forever.
+      if (GIT_OBJECTS_REACHABLE) {
+        expect(
+          gitResolvesCommit(String(d.introducedAt)),
+          `${file}: introducedAt ${d.introducedAt} resolves to NO commit in this repository — a`
+          + ' well-formed sha nobody can check out is a fabricated attribution, not a bisect point',
+        ).toBe(true);
+      }
       expect(String(d.cause).length, `${file}: declared with a stub, not an argument`).toBeGreaterThan(60);
     }
   });

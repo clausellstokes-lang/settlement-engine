@@ -104,9 +104,14 @@ import { LEG_SLOTS } from '../../src/domain/worldPulse/espionage/espionageProduc
 import { advanceEspionageProducts } from '../../src/domain/worldPulse/espionage/espionageProductStage.js';
 import { beliefLegsOf } from '../../src/domain/worldPulse/sovereigntyMarketStage.js';
 import {
+  SOVEREIGNTY_ROUTE_BANDS,
+  SOVEREIGNTY_STORES_BANDS,
+  SOVEREIGNTY_TIER_BANDS,
+  SOVEREIGNTY_TRAJECTORY_BANDS,
   SOVEREIGNTY_VALUE_BANDS,
   appraiseSettlementAsset,
 } from '../../src/domain/worldPulse/sovereigntyAppraisal.js';
+import { expectRungBelowBandTop } from '../helpers/bandSaturation.js';
 import { SOVEREIGNTY_LIGHTING_EVIDENCE } from '../../src/domain/certification/warConvergenceContract.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -449,8 +454,10 @@ describe('ES-4 — the distant source: a holding no rumour reaches, priced becau
     expect(after.appraisal.value01).toBeGreaterThan(0);
     expect(after.appraisal.value01).toBeLessThan(1);
     expect(SOVEREIGNTY_VALUE_BANDS.indexOf(after.appraisal.valueBand)).toBeGreaterThan(1);
-    expect(SOVEREIGNTY_VALUE_BANDS.indexOf(after.appraisal.valueBand))
-      .toBeLessThan(SOVEREIGNTY_VALUE_BANDS.length - 1);
+    // The ceiling half goes through the shared guard (F-SURVEY-1 M4), which also refuses a
+    // band word the ladder does not carry — a typo indexes to -1 and passes a bare
+    // `toBeLessThan(top)` vacuously.
+    expectRungBelowBandTop(after.appraisal.valueBand, SOVEREIGNTY_VALUE_BANDS, 'valueBand');
     // AND THE MISSION TOUCHED EXACTLY ONE PAIR. The near holding's row is byte-identical
     // across the whole journey, so the price above is the spy's doing and not a belief
     // advance running underneath the fixture.
@@ -477,9 +484,23 @@ describe('ES-4 — the distant source: a holding no rumour reaches, priced becau
 
 // ═══════════════════════════════════════════════════════════════════════════════
 describe('ES-4 — SP-B2\'s totality and degraded arms, re-run against espionage-fed rows', () => {
-  it('THE FOUR-LEG TOTALITY on a spy-fed row: every leg the appraisal reads is supplied, and nothing else is', () => {
+  it('THE FOUR-LEG TOTALITY on a spy-fed row: every leg the appraisal reads is supplied, and nothing else is — AT THE BAND TOP: storesBand, routeBand', () => {
     const walked = walkOneMission();
     const { legs } = priceOf(walked.after, FAR);
+    // ── THE FIXTURE-SATURATION GUARD (F-SURVEY-1 M4, instance TWO) ───────────────────
+    // This wave's own row banked a residual here: the far holding is deliberately rich, so
+    // `storesBand` and `routeBand` land on the LAST rung of their ladders, and a rung
+    // derivation that OVERSHOOTS clamps back onto the expected word with every equality in
+    // this file still green. The residual was prose in a queue row; it is machinery now.
+    // Two legs carry real headroom and are guarded LIVE; the two that do not are DECLARED
+    // in this test's own NAME, and a declaration is a CLAIM — the guard inverts on a
+    // declared label and reds if that leg ever comes off its ceiling, so the declaration
+    // can never become a mute button. Moving the fixture down instead would move the
+    // NEAR/FAR differential the whole wave rests on, which is why it is declared, not cured.
+    expectRungBelowBandTop(legs.tierBand, SOVEREIGNTY_TIER_BANDS, 'tierBand');
+    expectRungBelowBandTop(legs.trajectoryBand, SOVEREIGNTY_TRAJECTORY_BANDS, 'trajectoryBand');
+    expectRungBelowBandTop(legs.storesBand, SOVEREIGNTY_STORES_BANDS, 'storesBand');
+    expectRungBelowBandTop(legs.routeBand, SOVEREIGNTY_ROUTE_BANDS, 'routeBand');
     // THE AUTHORITY IS THE CONSUMER'S OWN RUNTIME SHAPE, measured rather than transcribed —
     // SP-B2's precedent, re-run here on a row no rumour produced.
     const declared = Object.keys(appraiseSettlementAsset({}).evidence);

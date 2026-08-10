@@ -24,6 +24,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
+import { expectRungBelowBandTop } from '../helpers/bandSaturation.js';
 import { litCovertWorld, mintCovertFixture } from '../helpers/covertMissionFixture.js';
 import {
   advanceEnvoyErrands,
@@ -739,7 +740,9 @@ describe('ES-3 the stage — the gradient accrues once, persists, and survives t
     const landed = beliefRecord(sent.worldState, 'ashford', 'irontown');
     expect(landed.lastUpdateTick).toBe(13);
     expect(landed.confidence01).toBeGreaterThan(SEND_PRIOR.confidence01);
-    expect(landed.confidence01).toBeLessThan(1);
+    // The same guard as the fold test below, through the same shared helper — the sibling
+    // instance of the class, not a second hand-rolled copy of the cure.
+    expectRungBelowBandTop(landed.confidence01, 1, 'confidence01');
     // A CONFIRM CROSSES NO OBSERVED SLOT — its ground truth IS the prior, which is the
     // whole product. ⚠ THE BAND STILL DRIFTS, AND SAYING SO IS THE POINT: `reconcileBelief`
     // re-anchors every numeric attribute toward a FIDELITY-DEGRADED truth (`accuracy x gt +
@@ -860,8 +863,10 @@ describe('ES-3 the stage — the gradient accrues once, persists, and survives t
     // equality between two CLAMPED quantities is true for every implementation. This
     // asserts the compared number is still INSIDE the range where the arithmetic can move,
     // so a later tuning change that re-saturates this fixture reds HERE instead of silently
-    // emptying the equality above.
-    expect(landedRecord.confidence01).toBeLessThan(1);
+    // emptying the equality above. ⭐ IT IS NOW MACHINERY RATHER THAN A HAND-ROLLED LINE
+    // (F-SURVEY-1 M4): the shared guard names the slot, names the clamp, and carries the
+    // declaration path a legitimately-saturated fixture has to take.
+    expectRungBelowBandTop(landedRecord.confidence01, 1, 'confidence01');
     // ONCE: the mouth fires on the tick the row came home, so a later tick folds nothing.
     expect(run(fold.worldState, 41, MUNDANE_SNAPSHOT).landings).toEqual([]);
   });
