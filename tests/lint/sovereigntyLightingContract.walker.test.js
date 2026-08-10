@@ -3212,7 +3212,119 @@ describe('the sovereignty lighting condition — a marker is EVIDENCE only in a 
       // cross-file parameter-memo collision mutant; the hazard owed-pile block is the
       // added suite. It is re-measured from the exact repair tree below before that tree
       // is committed; no file-layer figure moves.
-      files: 2352, parked: 358, credited: 1994, titles: 19150, suiteTitles: 5459,
+      //
+      // ══ RE-RECORDED 2026-08-10 BY THE OPUS WALKER-CENSUS LANE, AT SHA 01a81a1e ══════
+      // 2,352/358/1,994/19,150/5,459 -> 2,381/364/2,017/19,491/5,510. THIS IS THE FIRST
+      // RE-RECORD IN NINE WAVES IN WHICH `parked` MOVES, and that figure — not the file
+      // count — is the finding: the +29 files were ordinary growth, the +6 was not.
+      //
+      // ⚠⚠ THE SEQUENCE HAZARD FIRED FOR THE THIRD TIME, AND ALL FOUR OF THE UNASSERTED
+      // FIGURES HAD DRIFTED. The five are asserted IN SEQUENCE with `files` asserted
+      // FIRST, so from the moment the estate passed 2,352 this arm failed at `expected
+      // 2381 to be 2352` and vitest NEVER EVALUATED `parked`, `credited`, `titles` or
+      // `suiteTitles` again. Measured rather than feared: every one of the four had moved
+      // — +6, +23, +341, +51 — inside a window in which no run could have said so. The
+      // block above warned that whoever re-records MUST re-derive all five and must not
+      // assume the four are still at their frozen values. This is the measurement showing
+      // that warning was not theoretical: assuming would have been wrong four times out
+      // of four.
+      //
+      // ── BOTH ENDS READ WITH THE SAME INSTRUMENT, AND HERE THAT IS LITERAL ──────────
+      // `git diff 2b4ca96f 01a81a1e --` over THIS FILE, tests/helpers/anchoredNegatives.js
+      // and src/domain/certification/warConvergenceContract.js is EMPTY: this walker and
+      // both of its readers are BYTE-IDENTICAL at the two ends, so no rule widened or
+      // narrowed between them and every delta below is the ESTATE moving, never the
+      // instrument. And the base is EXECUTED rather than inherited from the row above:
+      // this walker ran 33/33 GREEN inside an integrity-counted `git archive` of 2b4ca96f
+      // (6,196 tracked paths in, 6,196 files out, `git status` clean, node_modules
+      // symlinked and excluded), which is what makes 2,352/358/1,994/19,150/5,459 a
+      // reading of that tree rather than a claim about it. The HEAD figures are this
+      // walker's OWN `TEST_FILES.length`, `parkReasonsFor`, `liveTitlesIn` and
+      // `liveSuiteTitlesIn`, printed straight out of a second integrity-counted archive of
+      // 01a81a1e (6,271 tracked paths in, 6,271 files out) — never off the live worktree,
+      // and never retyped from a document.
+      // ⚠ THE ARCHIVE'S node_modules LEG IS LOAD-BEARING AND THE MAIN TREE'S WILL NOT DO:
+      // it is missing `three` and `pg`, and an archive linked to it fake-reds the scope
+      // sentinel with a ZERO-TEST suite rather than an assertion diff. Both archives here
+      // link THIS WORKTREE'S OWN node_modules.
+      // ⚠ AND THE BASE ARCHIVE LIED ONCE ON THE WAY THROUGH, WITH EXIT 0, WHICH IS WORTH
+      // A LINE: `scripts/gate-mutex.sh` at 2b4ca96f HAS NO `--run` MODE (it arrived at
+      // d7ec3885, inside this very +29). Invoking `--run` there took the INSPECT path,
+      // printed "FREE", ran no vitest at all, and exited 0. A green with an EMPTY LOG is
+      // the tell. The base was re-run under the HEAD tree's own copy of the script — the
+      // lock is machine-wide, so driving an old tree with the new script is sound.
+      //
+      // ── THE DECOMPOSITION, EXTENDED RATHER THAN REPLACED ───────────────────────────
+      //     sha / tree                                 files parked credited titles suite
+      //     2b4ca96f  the frozen figures, RE-EXECUTED   2352    358     1994  19150  5459
+      //     01a81a1e  THIS tree                         2381    364     2017  19491  5510
+      //
+      // THE FILE LAYER, +29, IS A LIST AND NOT A SUBTRACTION: 29 test files ADDED, ZERO
+      // REMOVED, from `git ls-tree -r` on committed objects at each end. Per sha, printed
+      // only where the count MOVED (the recorded per-sha method, one commit at a time,
+      // never a single subtraction across a range):
+      //     93e7ed50  2353   +1   repair observed contracts and faction identity
+      //     6e7acc4d  2366  +13   isolate campaign runtime and strict hydration
+      //     0ea7ff12  2373   +7   govern observed-shape scanner migration
+      //     d7ec3885  2377   +4   chore: add implementation acceleration tooling
+      //     1ca709aa  2378   +1   chore: add sealed resumable implementation sessions
+      //     455a29b5  2379   +1   SC-1, the Surveyor's text-intent shell
+      //     5066c34b  2380   +1   TC-3a, the wards get their names
+      //     a45c969d  2381   +1   TC-3b, the wards get their parcels
+      // 1+13+7+4+1+1+1+1 = 29. NO SINGLE WAVE OWNS THIS, which is the whole reason no
+      // single wave re-recorded: it is the S12 observed-shape/reader-shape family, the
+      // campaign-runtime isolation cut, the implementation-tooling trio and the TC-3
+      // cartography split, accruing across eight commits while the ratchet was red.
+      //
+      // ⚠⚠ THE PARKED LAYER MOVED, +6, AND THE SIXTH ROW IS NOT A NEW FILE — THAT ONE IS
+      // THE FINDING. The park sets were compared BY IDENTITY, not by count: an identity
+      // swap at constant count passes a count comparison, and this estate has recorded
+      // being bitten by exactly that shape. SIX files park at 01a81a1e that did not park
+      // at 2b4ca96f, and ZERO unparked, so the movement is pure addition — with each
+      // file's reasons read off `parkReasonsFor` in the archive rather than guessed:
+      //   tests/build/campaignRuntimeLazy.test.js ......... SUITE_NOT_RUNNING:describe.runIf()
+      //   tests/build/envoyPersistenceHydrationLazy.test.js SUITE_NOT_RUNNING:describe.runIf()
+      //   tests/store/campaignRuntimeCallerCoverage.test.js TEST_UNREGISTERED:test x8
+      //   tests/domain/worldStateHydration.test.js ........ TEST_CONTEXT_PARAM:test.each()
+      //   tests/lint/observedShapeBaseline.test.js ........ TEST_CONTEXT_PARAM:test.each()
+      //   tests/lib/proseSeams.test.js .................... TEST_CONTEXT_PARAM:test.each()
+      // THE LAST ROW EXISTED AND WAS CREDITED AT 2b4ca96f. Commit 93e7ed50 added a
+      // `test.each([...])` alias battery to tests/lib/proseSeams.test.js, and a
+      // table-generated title is precisely what door 3's reader cannot recognise
+      // statically — so the file PARKED and took its 11 titles and 2 suite titles out of
+      // the evidence layer with it. SP-D's recorded idiom — loop INSIDE a named test,
+      // never generate tests from a loop — held for eight consecutive waves and is now
+      // BROKEN, by a file no wave was re-recording. It is named rather than absorbed.
+      // NOTHING IN THE TREE IS CHANGED TO CHASE IT: proseSeams carries no marker and is
+      // nobody's declared evidence address, so its parking costs the instrument nothing,
+      // and rewriting another lane's battery to buy back a number this census does not
+      // need would be the tail wagging the dog. DELIBERATELY NOT DONE — DOCUMENTED, NOT A
+      // BUG TO RE-FIND.
+      //
+      // ── AND THE TWO TITLE LAYERS, DECOMPOSED TO THE UNIT, NEVER SUBTRACTED ─────────
+      // Per-file `liveTitlesIn`/`liveSuiteTitlesIn` were dumped for EVERY credited file at
+      // BOTH ends and diffed. The per-file sums reconcile to the aggregates independently
+      // (19,150/5,459 at base, 19,491/5,510 at head), so the totals below are a second
+      // reading rather than a restatement of the first:
+      //   +282 titles, +38 suite … the 24 NEWLY CREDITED files (of the 29 added; the other
+      //                            five park, above). The largest single contributor is
+      //                            tests/lint/readerShapeResolver.test.js at 99 titles,
+      //                            most of the S12 reader-shape family's evidence in one
+      //                            file.
+      //    -11 titles,  -2 suite … tests/lib/proseSeams.test.js LOSING credit, above. A
+      //                            title layer can go DOWN without a file being deleted,
+      //                            and this is the row that proves it.
+      //    +70 titles, +15 suite … 23 already-credited files that gained pins without any
+      //                            file being added or removed. The five largest:
+      //                            peaceTerms 35->46, surveyorDoor 10->20,
+      //                            informationStatecraftPins 30->36,
+      //                            treatyOrientationWr10g 16->21, pactFormation 24->28.
+      //   282 - 11 + 70 = 341 and 38 - 2 + 15 = 51, which is the whole movement, closed.
+      // ⚠ THE `credited` ARITHMETIC CLOSES THE SAME WAY, AND THAT IS A CHECK RATHER THAN A
+      // COINCIDENCE: 24 newly credited MINUS the 1 that lost credit = +23; 5 newly parked
+      // PLUS that same 1 = +6; and 23 + 6 = 29, the file layer. A file-layer delta that
+      // failed to reconcile against the park layer would itself have been the finding.
+      files: 2381, parked: 364, credited: 2017, titles: 19491, suiteTitles: 5510,
     });
     const parked = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length > 0);
     const credited = TEST_FILES.filter(({ src }) => parkReasonsFor(src).length === 0);
