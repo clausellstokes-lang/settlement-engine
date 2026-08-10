@@ -146,6 +146,16 @@ const EXPECTED_VOICE = {
   // itself classified null here). Deliberately unvoiced (JUDGMENT, vetoable).
   treaty_lapsed: null,
   treaty_default_detected: null,
+  // IN-0C's open-article beat (treatyLifecycleVoice.js treatyDisclosureOpenedBeats,
+  // minted at 29e2dc3c) is the same cohort and the same shape as treaty_lapsed: an
+  // AUTHORED headline over a GR-0 grammar-receipt summary, with a registry row that
+  // MIRRORS treaty_lapsed's by chair ruling CR-IN0C-2-R1 (grammarNews.js). It must NOT
+  // borrow the trade crier merely because it shares that kind's trade DESK: the desk
+  // FILES a beat, the crier VOICES one, and a market-shortage line beneath "must open
+  // its books" is the exact mis-route the set-but-unclassified guard exists to stop.
+  // No crier register fits a transparency clause, so it stays deliberately unvoiced,
+  // which is what newsVoiceCategory already returns (JUDGMENT, vetoable).
+  treaty_disclosure_opened: null,
 };
 
 describe('impactKind walkers (content-immersion-r2-1/-2)', () => {

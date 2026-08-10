@@ -160,6 +160,11 @@ const LIT_COVERED_BY = {
     evidence: 'resolveRelationshipHierarchy',
     note: 'drives both exports via the index barrel re-export',
   },
+  treatyTermRoles: {
+    file: 'tests/domain/peaceTerms.test.js',
+    evidence: 'onObligor.terms[0].burden01',
+    note: 'GR-3B-ORIENT (d56d944c) minted the leaf and shipped its proof through the HEAD rather than by import, so AUTO cannot see it. peaceTerms.js:669 is the only caller of makeTermRoleReader, and burden01 is computed nowhere but figuresFor (treatyTermRoles.js:89); the test mints a pact through the real drafter/signer, advances PASS 2 flag-ON, and asserts the figure follows the OBLIGOR and is zero for the obligee — a directional claim that cannot hold unless the leaf ran.',
+  },
 };
 
 // ── AXIS 2 denominator: every simulation-rules `<x>Enabled` flag ─────────────

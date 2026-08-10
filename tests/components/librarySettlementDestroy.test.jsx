@@ -26,7 +26,7 @@
  *      surface behind it (the state the fold-scope review found).
  */
 
-import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
+import { afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 vi.mock('../../src/lib/saves.js', () => ({
@@ -35,6 +35,15 @@ vi.mock('../../src/lib/saves.js', () => ({
 
 import { SettlementCard } from '../../src/components/settlements/SettlementCard.jsx';
 import { useStore } from '../../src/store/index.js';
+import { preloadCampaignRuntimeForStore } from '../../src/store/campaignRuntimeBridge.js';
+
+// SettlementCard reads campaign actions DURING RENDER, and since the cold-slice
+// split at 6e7acc4d those names are always-present delegates that THROW until the
+// runtime chunk preloads. Production only ever mounts this card behind AppViews'
+// `campaignLazy` gate, which awaits exactly this preload first — both facts are
+// pinned by tests/store/campaignRuntimeRouteGate.test.js. Render it the way
+// production does instead of outside its gate; no assertion below changes.
+beforeAll(async () => { await preloadCampaignRuntimeForStore(useStore); });
 
 const baseProps = {
   allModifiers: new Map(),

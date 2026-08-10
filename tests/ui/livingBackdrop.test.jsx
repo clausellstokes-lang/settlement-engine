@@ -11,8 +11,10 @@
  * full loop (pane writes → key → backdrop reads → identical SVG) and prove the
  * backdrop degrades to null — never a crash — on the degenerate inputs.
  */
-import { describe, test, expect, beforeEach, afterEach } from 'vitest';
+import { describe, test, expect, beforeAll, beforeEach, afterEach } from 'vitest';
 import { render, cleanup, fireEvent } from '@testing-library/react';
+import { useStore } from '../../src/store/index.js';
+import { preloadCampaignRuntimeForStore } from '../../src/store/campaignRuntimeBridge.js';
 import SettlementMapPane from '../../src/components/townMap/SettlementMapPane.jsx';
 import SettlementDossierBackdrop from '../../src/components/settlementDetail/SettlementDossierBackdrop.jsx';
 import { readLastMapView, writeLastMapView } from '../../src/lib/lastMapView.js';
@@ -40,6 +42,12 @@ function decodedSvg(img) {
   expect(src.startsWith(PREFIX)).toBe(true);
   return decodeURIComponent(src.slice(PREFIX.length));
 }
+
+// The pane's bridge reads getCampaignForSettlement during render; since 6e7acc4d
+// that delegate THROWS until the campaign runtime preloads, and production mounts
+// the pane only behind AppViews' `campaignLazy` gate, which awaits this preload
+// (pinned by tests/store/campaignRuntimeRouteGate.test.js).
+beforeAll(async () => { await preloadCampaignRuntimeForStore(useStore); });
 
 beforeEach(() => { localStorage.clear(); stubMatchMedia(true); });
 afterEach(cleanup);

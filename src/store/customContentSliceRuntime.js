@@ -37,7 +37,19 @@ async function pinLegacyCampaignBindings(set, get, customContent, ownerId) {
     return;
   }
   if (ownerIdFromState(get()) !== ownerId) return;
-  get().pinLegacyCampaignContentBindings(customContent);
+  // BEST-EFFORT BY CONTRACT — the pin may never fail a hydration. Both call sites run
+  // this INSIDE their own try, so an escaping throw skips the caller's `restored = true`
+  // and stamps customContentError over content that WAS successfully restored (and, on
+  // the cloud leg, downgrades a SUCCEEDED sync into a mirror restore). Two throws are
+  // live: a store composed without the campaign slice has no pin at all — which is why
+  // campaignAdvanceSession.js calls it optionally — and since 6e7acc4d the eager entry
+  // slice's stable delegate throws CampaignRuntimeNotReadyError until the runtime chunk
+  // installs. The preload above is already non-fatal; the call it enables must be too.
+  try {
+    get().pinLegacyCampaignContentBindings?.(customContent);
+  } catch (error) {
+    console.warn('legacy campaign content binding failed during content hydration:', error);
+  }
 }
 
 // ── Canonical validation chokepoint ──────────────────────────────────────────

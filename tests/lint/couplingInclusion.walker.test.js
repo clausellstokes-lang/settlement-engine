@@ -64,8 +64,12 @@
  * seven layers are DESIGN_FP_COUPLINGS.md §2's seven ports.
  *
  * DELIBERATELY UNMAPPED — see ARGUED_UNLAYERED below: the four infrastructure
- * hosts and, since CR-FP-11, the two SP substrate leaves. Each carries a written
- * reason and is asserted to still exist and still have no layer.
+ * hosts, plus a SUBSTRATE roster that opened with CR-FP-11's two SP leaves and has
+ * grown since, every growth a recorded act against the ceiling. Each entry carries a
+ * written reason and is asserted to still exist and still have no layer. This sentence
+ * deliberately names no COUNT: the count lives on ARGUED_ROSTER_CEILING, which is
+ * asserted, and a prose second copy of it could only drift out of step — as this one
+ * silently had, still saying "two" at a roster of ten, until 2026-08-10.
  *
  * ── CR-FP-11: WHAT THIS FILE COULD NOT CATCH, AND WHY IT CAN NOW ─────────────
  *
@@ -340,6 +344,82 @@ const ARGUED_UNLAYERED = Object.freeze({
     reason: 'infrastructure accessor — the ONE spatialLedgers namespace container, whose sub-ledgers are owned by WAR, INFORMATION, TRADE, POP and every future mover; a port here would make each layer\'s read of its own ledger a cross-layer coupling',
     reads: Object.freeze([]),
   }),
+  // ── 2026-08-10: THREE LEAVES THAT LANDED WITHOUT THEIR CLASSIFICATION ──────────
+  //
+  // These three are not new arguments. They are the SAME two arguments already on this
+  // map — worldState.js's host reading one rung down, and the bandFamilies/lawWord
+  // vocabulary reading — applied to three modules that landed inside CENSUS_SCOPE_RE
+  // owing a classification and not carrying one. IA-1 (d7ec3885) minted the first two
+  // and 6e7acc4d the third; neither commit discharged the same-commit obligation
+  // DESIGN_FP_ARCHITECTURE.md states for exactly this case ("a NEW .js file under
+  // src/domain/worldPulse/ or src/domain/spatial/ … takes a NEW ARGUED_UNLAYERED entry
+  // with a written reason in the same commit, never a baseline row"). The census caught
+  // all three, which is arm B doing precisely the job it was built for.
+  //
+  // WHAT THE ADMISSION COSTS, MEASURED RATHER THAN ASSUMED (and it is the cheapest kind
+  // this roster holds). The header above says each admission deletes a module's edges
+  // from the pair scan. That is true of a module that HAD edges in it. None of these
+  // three did: all three are unlayered TODAY, so `scanCrossLayerPairs` already skips
+  // them on both sides, and LIVE_PAIRS is the same 176 before and after. Their outbound
+  // reach measures 0, 0 and 1. The single edge — worldStateHydration.js reading the
+  // GRAMMAR errand-record normalizer — is UNDECLARED today and is declared below, so
+  // the net effect of these three rows is one cross-layer edge that was dark becoming
+  // enumerated. Nothing is erased. What the roster genuinely buys with the ceiling move
+  // is the SECOND edge each of them might grow, which now reds by name.
+  'src/domain/worldPulse/ledgerOwnershipManifest.js': Object.freeze({
+    // The spatialLedgerAccess.js argument applied to the RECORD rather than the
+    // container. This manifest says who may write each ledger, and those ledgers belong
+    // to different ports — envoyErrands and treaties to GRAMMAR, beliefMaps to
+    // INFORMATION. A port here would make ONE layer the owner of the record of every
+    // other layer's writer family, which is hosting by another name.
+    kind: 'substrate',
+    reason: 'certification-only ownership record over ledgers owned by GRAMMAR (envoyErrands, treaties) and INFORMATION (beliefMaps) alike; every module and symbol is stored as TEXT, it imports nothing, and no runtime writer reads it',
+    // Structural, not restraint: the file carries no import statement at all, and the
+    // arm below re-derives that from the live file on every run.
+    reads: Object.freeze([]),
+  }),
+  'src/domain/worldPulse/pulseStageResult.js': Object.freeze({
+    // The bandFamilies.js / bandedStock.js argument one rung up. Those two are the band
+    // VOCABULARY every layer spells; this is the result SHAPE every layer's stage
+    // returns. `changed` / `worldState` / `settlementUpdates` / `newsEntries` /
+    // `evidence` / `effects` is the mover protocol, not any port's state, so giving it a
+    // family would make every port's own stage return a cross-layer coupling.
+    //
+    // ⚠ THE ONE RESIDUE ON THIS PAGE WORTH NAMING, because it grows rather than shrinks,
+    // and the arm below CANNOT see it. `reads` is measured against `layeredImportsOf`, so
+    // it is OUTBOUND-only: it catches this envelope reaching into a port, and it is blind
+    // to ports reaching into the envelope. This leaf exists precisely to be adopted, so
+    // its INBOUND edges are the ones that will multiply, and every one of them sits
+    // outside the pair scan. Stated concretely rather than as a caution: the adoption this
+    // file is waiting for is pulseKernel.js calling `normalizePulseStageResult` — pinned
+    // as not-yet-happened by tests/domain/pulseStageContracts.test.js — and pulseKernel.js
+    // is itself an argued HOST four entries up, so that first edge would be invisible
+    // under EVERY door, including a LAYER_PATTERNS home. Nothing here is being hidden that
+    // a different classification would have caught. What the substrate claim asserts is
+    // that returning the common shape is not reading another port's subject, which is the
+    // same residue the header already names for edges INTO lawWord.js.
+    kind: 'substrate',
+    reason: 'the shared pulse-stage result SHAPE every port\'s stage returns; it schedules, imports and executes no mover, so the envelope is the movers\' common protocol rather than any one layer\'s subject',
+    reads: Object.freeze([]),
+  }),
+  'src/domain/worldPulse/worldStateHydration.js': Object.freeze({
+    // NOT kind:'host', on the same reading spatialLedgerAccess.js carries: the host kind
+    // is closed at the four named mounts by exact equality, and cold ingress is not a
+    // mount. So it is argued as SUBSTRATE and pays the substrate price below.
+    //
+    // It is worldState.js's argument one rung down. The world this leaf admits is every
+    // port's state at once, so a family here would make each layer's own persisted state
+    // a cross-layer read on admission. The tempting alternative — GRAMMAR, because it
+    // imports the envoy record leaf — is the mistake this table refuses everywhere else:
+    // the distinction is SUBJECT, not import. Admitting a whole persisted world is the
+    // subject; the envoy normalizer is an argument this leaf passes through.
+    kind: 'substrate',
+    reason: 'the cold persisted-world ingress into the state shape itself — the world it admits belongs to all seven ports, so a port here would make each layer\'s own persisted state a cross-layer read at admission',
+    reads: Object.freeze([
+      'src/domain/worldPulse/envoyErrandRecords.js',
+    ]),
+    readsReason: 'the one GRAMMAR read is the strict envoy DTO normalizer, held HERE rather than in worldState.js precisely so its negotiation/peace-term closure does not ride first paint while every raw world still crosses the validator once — that split is the module\'s whole reason for existing, so the reach is declared and counted rather than erased, and a second port reds this arm by name',
+  }),
 });
 
 /** The CLOSED host set. A fifth infrastructure host is a chair conversation. */
@@ -351,16 +431,62 @@ const ARGUED_HOSTS = Object.freeze([
 ]);
 
 /**
- * THE ROSTER CEILING — the exact count measured today (2026-08-07). It is a CEILING,
- * not a target: admitting an eleventh argued module now costs a visible ratchet edit
- * with a written argument, which is the whole cure for "each admission silently
- * subtracts coverage". Lowering it when an argument dissolves banks the win.
+ * THE ROSTER SIZE — the exact count measured today, and asserted EXACTLY. Admitting one
+ * more argued module costs a visible ratchet edit with a written argument, which is the
+ * whole cure for "each admission silently subtracts coverage"; retiring one costs the
+ * same edit downward, which is what banks the win.
+ *
+ * ⚠ It is deliberately NOT "a ceiling, not a target" — it said exactly that until
+ * 2026-08-10 while the arm was `toBeLessThanOrEqual`, and the two halves of that sentence
+ * were in conflict: under an inequality the shrink half was unenforceable, so a dissolved
+ * argument left headroom no diff ever recorded. Both directions are now the same
+ * deliberate act. The full reasoning sits on the assertion itself.
+ *
+ * 10 → 13 on 2026-08-10, and the raise is recorded rather than merely made. It admits
+ * ledgerOwnershipManifest.js, pulseStageResult.js and worldStateHydration.js — three
+ * leaves that landed inside the census scope owing a classification, under two arguments
+ * this map already carried rather than any new one. Measured at the raise: all three were
+ * unlayered and therefore already invisible to `scanCrossLayerPairs`, LIVE_PAIRS is 176
+ * on both sides of the edit, and their outbound reach is 0, 0 and 1 — against 43 and 26
+ * for the two big hosts and 3 for errandMint. The single edge is declared below, so the
+ * roster grew by three and the estate's DECLARED cross-layer reach grew by one edge that
+ * was previously dark. A fourteenth admission is the next deliberate act.
  */
-const ARGUED_ROSTER_CEILING = 10;
+const ARGUED_ROSTER_CEILING = 13;
 
 /** The FP scope the unlayered census is TOTAL over. */
 const CENSUS_SCOPE_RE = /^src\/domain\/(?:worldPulse|spatial)\//;
 const UNLAYERED_BASELINE_PATH = join(ROOT, 'tests/lint/.coupling-unlayered-baseline.json');
+
+/**
+ * THE UNLAYERED-BASELINE SIZE, and until 2026-08-10 the census's central claim had
+ * NOTHING BEHIND IT.
+ *
+ * DESIGN_FP_ARCHITECTURE.md states the rule absolutely — "the unlayered baseline MAY
+ * NEVER GROW; such a file takes a NEW ARGUED_UNLAYERED entry with a written reason in
+ * the same commit, never a baseline row" — and arm B's own header below says the frozen
+ * set "only shrinks". The test that carries the words "never grew" in its NAME checked
+ * four things and not one of them was the size: an anti-vacuity floor, uniqueness,
+ * in-scope-and-still-exists, and exact-set equality against LIVE_UNLAYERED. Exact-set
+ * equality is the trap: a lane that lands a new unlayered module AND adds its baseline
+ * line moves BOTH sides of that equality together and passes green, every arm. The
+ * forbidden door was held shut by prose and review courtesy alone — in the same file
+ * that says, of a different exception, "a paragraph checks nothing".
+ *
+ * MEASURED as a matched pair before this landed, which is the only way to know a guard
+ * is not decoration: plant a zero-import module under src/domain/worldPulse/ and add its
+ * line to the baseline JSON. Against the walker as it stood ten minutes earlier — 16/16
+ * GREEN, the growth completely silent. Against this constant — RED, by name, here.
+ *
+ * EXACT rather than a `<=` ceiling, for the reason the roster arm above now carries: a
+ * bound that only forbids growth lets a shrink go unbanked and leaves free slots behind
+ * it. The census legitimately shrinks whenever a baselined module finds a layer home, and
+ * the arm above already reds to demand that line be deleted; this makes the SAME event
+ * also move the recorded size, so the reduction is banked in the diff instead of becoming
+ * invisible headroom. That is the sizeBaseline honesty idiom this file's header already
+ * cites for the pair inventory, applied at last to the module census.
+ */
+const UNLAYERED_BASELINE_CEILING = 179;
 
 function walk(dir, out = []) {
   for (const entry of readdirSync(dir)) {
@@ -578,13 +704,27 @@ describe('CW-0w cross-layer inclusion ratchet — anti-vacuity anchors', () => {
       expect(['host', 'substrate'], `${module} has no recognised argument kind`).toContain(argument.kind);
       expect(argument.reason.length, `${module} is excluded without a reason`).toBeGreaterThan(20);
     }
-    // The roster is a measured CEILING, so an eleventh admission cannot ride in as one
-    // more line: it must move this number, in the diff, with an argument. That is the
-    // cure for "each future admission silently subtracts coverage".
+    // The roster is a measured count, so an admission cannot ride in as one more line:
+    // it must move this number, in the diff, with an argument. That is the cure for
+    // "each future admission silently subtracts coverage".
+    //
+    // ⭐ EXACT, NOT `toBeLessThanOrEqual` (2026-08-10). It was an inequality until today,
+    // and that quietly defeated half of its own purpose. The docblock on the constant
+    // says "Lowering it when an argument dissolves banks the win" — under `<=` nothing
+    // ever made that happen: a dissolved argument left the ceiling untouched and the
+    // roster one BELOW it, so the next admission rode in through the free slot with no
+    // ceiling diff and therefore no review trigger. The whole cure is the diff, so a
+    // number that only has to be "not exceeded" is not a ratchet, it is a budget. Exact
+    // equality makes BOTH directions a recorded act, and it puts this arm in the same
+    // form as the two registers below it (BASELINE_RETARGETS toHaveLength(1),
+    // REACH_OWED_ROWS toHaveLength(2)), which were exact from the day they landed.
     expect(Object.keys(ARGUED_UNLAYERED).length,
-      'the argued roster GREW — every admission deletes that module\'s edges from the pair'
-      + ' scan, so raising ARGUED_ROSTER_CEILING is a deliberate, reviewable act')
-      .toBeLessThanOrEqual(ARGUED_ROSTER_CEILING);
+      'the argued roster no longer matches ARGUED_ROSTER_CEILING. If it GREW: every'
+      + ' admission deletes that module\'s edges from the pair scan, so raise the ceiling'
+      + ' deliberately, in this diff, with a written argument. If it SHRANK: an argument'
+      + ' dissolved — LOWER the ceiling in the same commit so the win is banked and the'
+      + ' slot cannot be refilled unreviewed.')
+      .toBe(ARGUED_ROSTER_CEILING);
   });
 
   test('the HOST kind is CLOSED at the four named mounts, and each really mounts more than one layer', () => {
@@ -842,6 +982,20 @@ describe('CW-0w cross-layer inclusion ratchet — the unlayered-module census (C
   });
 
   test('the frozen unlayered set is exact, unique, in scope, and never grew', () => {
+    // ⭐ THE ARM THAT MAKES THE TEST'S OWN NAME TRUE (2026-08-10). Everything else here
+    // pins the baseline's CONTENT against the live set; nothing pinned its SIZE, so the
+    // one edit the doctrine forbids outright — a new unlayered module smuggled in with a
+    // matching baseline line — moved both sides together and passed. It reds here now,
+    // and it reds FIRST, before the content arms, because "the census grew" is the more
+    // fundamental fact about a diff than which entry moved.
+    expect(UNLAYERED_BASELINE.length,
+      'the unlayered census CHANGED SIZE. If it GREW, that is the edit'
+      + ' DESIGN_FP_ARCHITECTURE.md forbids outright: a new .js under src/domain/worldPulse'
+      + ' or src/domain/spatial takes a LAYER_PATTERNS home or an ARGUED_UNLAYERED entry'
+      + ' with a written reason in the same commit, NEVER a baseline row. If it SHRANK, a'
+      + ' module found a home — bank the win by lowering UNLAYERED_BASELINE_CEILING in this'
+      + ' same commit.')
+      .toBe(UNLAYERED_BASELINE_CEILING);
     expect(new Set(UNLAYERED_BASELINE).size).toBe(UNLAYERED_BASELINE.length);
     for (const rel of UNLAYERED_BASELINE) {
       expect(typeof rel === 'string' && CENSUS_SCOPE_RE.test(rel), rel).toBe(true);

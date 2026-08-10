@@ -167,7 +167,11 @@ const KNOWN_UNCONVERTED = Object.freeze({
     'TRUE MEMBER, and the sharpest: the arcane row is ENTIRELY ambiguous (sanctum|college|conclave|circle|enclave|atheneum|spire) with no unambiguous token at all, so every match it makes is a guess.',
   'src/domain/worldPulse/tierOutcomeApply.js:143':
     'TRUE MEMBER. A ruined settlement\'s institution fate: academy|library|sage|college|school route to "abandoned" beside the real arcane tokens.',
-  'src/generators/factionRoles.js:57':
+  // RE-POINTED 57 → 58 on 2026-08-10 (step-15 reconciliation). The pattern text is
+  // byte-identical; 93e7ed50 added one import at line 23 and pushed the table down a
+  // line. Address rot, not a new site — re-freezing here would have banked a wrong
+  // address, and deleting the row would have re-presented the same pattern as new.
+  'src/generators/factionRoles.js:58':
     'CONTEXTUALLY SCOPED, not the class. The Archmagister\'s `linkToInst` runs only INSIDE the already-classified `arcane:` bucket, so tower|academy|college is searching an arcane faction\'s own building, not deciding whether one is arcane. Listed for completeness so a future audit does not re-find it as a defect.',
   'src/generators/isolationGenerator.js:97':
     'CONTEXTUALLY SCOPED, not the class. "Does this settlement already have an arcane maintainer?" runs inside the magic-forcing arm and searches the Magic-category catalog, where "academy" means "Academy of magic".',

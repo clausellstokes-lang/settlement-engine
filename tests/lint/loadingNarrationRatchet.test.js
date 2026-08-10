@@ -36,7 +36,10 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
 // Bare loading confessions in user-facing component source (src/components):
 // a string/JSX text beginning with the word "Loading".
-const BARE_LOADING_PIN = 34;
+// LOWERED 34 → 33 on 2026-08-10 by the step-15 ratchet reconciliation: the debt
+// had fallen to 33 and the pin's own BELOW arm demands the win be locked, or a
+// stale higher ceiling would silently let the confession regrow.
+const BARE_LOADING_PIN = 33;
 // Silent Suspense boundaries across src/ — each renders NOTHING while a lazy
 // chunk loads. Existing ones are deliberate imperceptible overlay seams;
 // new perceptible boundaries must narrate instead.

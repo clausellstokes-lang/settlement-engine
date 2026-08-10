@@ -8,7 +8,7 @@
  * riding the store's applyMapEdit into settlement.mapEdits.annotations. A non-editor
  * sees existing markers (viewing is free) but never the placement affordances.
  */
-import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest';
+import { describe, test, expect, beforeAll, beforeEach, afterEach, vi } from 'vitest';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 
 vi.mock('../../src/lib/saves.js', () => ({
@@ -17,7 +17,14 @@ vi.mock('../../src/lib/saves.js', () => ({
 
 import SettlementMapPane from '../../src/components/townMap/SettlementMapPane.jsx';
 import { useStore } from '../../src/store/index.js';
+import { preloadCampaignRuntimeForStore } from '../../src/store/campaignRuntimeBridge.js';
 import { makeTownFixture } from '../fixtures/townMapFixtures.js';
+
+// The pane's bridge reads getCampaignForSettlement during render; since 6e7acc4d
+// that delegate THROWS until the campaign runtime preloads, and production mounts
+// the pane only behind AppViews' `campaignLazy` gate, which awaits this preload
+// (pinned by tests/store/campaignRuntimeRouteGate.test.js).
+beforeAll(async () => { await preloadCampaignRuntimeForStore(useStore); });
 
 const SAVE_ID = 'sm5-ann-save';
 

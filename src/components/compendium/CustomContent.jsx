@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { INK, BODY, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, serif_, FS, SP, swatch } from '../theme.js';
 import { deityTemper } from '../../domain/worldPulse/deityAxes.js';
 import PantheonActivationStrip from './PantheonActivationStrip.jsx';
@@ -396,7 +396,11 @@ export function CustomContentManager({ search, initialCat }) {
           (premium; file-based, no backend). */}
       <ContentPackBar />
       <ContentEnvironmentLifecycle />
-      <Suspense fallback={null}><CampaignContentBindingLifecycle /></Suspense>
+      {/* No outer Suspense: createRetryableCampaignLazy already renders the view
+          inside its OWN per-instance boundary (campaignRuntimeView.js), which is
+          what lets the wrapper commit while the chunk resolves. A second boundary
+          here added nothing and cost a silent-wait debt row. */}
+      <CampaignContentBindingLifecycle />
       <ArchivedContentLibrary />
       {/* Sync status — visible whenever a cloud sync is in flight, regardless of
           which bucket is active. Without it, switching to a cached bucket during

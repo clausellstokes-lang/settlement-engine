@@ -9,9 +9,23 @@
  * war/deity campaign card renders it. Also pins the select-mode checkbox.
  */
 
-import { describe, it, expect, afterEach, vi } from 'vitest';
+import { describe, it, expect, afterEach, beforeAll, vi } from 'vitest';
 import { render, screen, cleanup, fireEvent, within } from '@testing-library/react';
 import { SettlementCard } from '../../src/components/settlements/SettlementCard.jsx';
+import { useStore } from '../../src/store/index.js';
+import { preloadCampaignRuntimeForStore } from '../../src/store/campaignRuntimeBridge.js';
+
+// SettlementCard reads campaign actions (getSettlementDeletionBlock,
+// getCampaignMutationBlock, getCampaignMembershipBlock) DURING RENDER. Since the
+// cold-slice split at 6e7acc4d those names are always present as stable delegates
+// that THROW CampaignRuntimeNotReadyError until the runtime chunk preloads — so
+// the defensive `state.getX?.(…)` at the call site no longer short-circuits.
+// Production never renders this card cold: every campaign-capable route is behind
+// AppViews' `campaignLazy` gate, which awaits exactly this preload before it will
+// import the view (both facts pinned by tests/store/campaignRuntimeRouteGate.test.js).
+// Satisfying the same precondition here renders the card the way production does,
+// rather than outside its gate. Every assertion below is unchanged.
+beforeAll(async () => { await preloadCampaignRuntimeForStore(useStore); });
 
 afterEach(cleanup);
 
