@@ -14,16 +14,13 @@ import { useState, useCallback, useMemo } from 'react';
 import { useStore } from '../../store/index.js';
 import { operationLabel } from '../../store/operationRegistry.js';
 import { getSurveyorAiCost } from '../../config/pricing.js';
-import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, RED, SLATE, sans, SP, FS } from '../theme.js';
+import { BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, RED, sans, SP, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
-import IconButton from '../primitives/IconButton.jsx';
-import Badge from '../primitives/Badge.jsx';
 import { t } from '../../copy/index.js';
-import { identityConsentNote } from '../../domain/intent/opVocabulary.js';
+import ProposalCard from './ProposalCard.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
 import { MoneyLine, RefusalNote, MusingsBlock, Eyebrow, PromptArea, ReceiptLine, ProposalSlipLine } from './surveyorPanelKit.jsx';
 
-const OP_LABEL_TONE = { required: 'gold', inferred: 'info', optional: 'muted', uncertain: 'warning' };
 let reviewSequence = 0;
 
 /**
@@ -112,84 +109,6 @@ function canonAuthorityReceipt(recovery) {
   return recovery?.authorityReceipt
     || recovery?.receipt?.result?.commandPersistence?.authorityReceipt
     || null;
-}
-
-/** One proposed op's review row. Protected ops expose the consent tick (the barrier). */
-function OpCard({ op, index, decision, onDecide }) {
-  const action = decision?.action || 'pending';
-  const protectedFlags = Array.isArray(op.protectedFlags) ? op.protectedFlags : [];
-  const isProtected = protectedFlags.length > 0;
-  const params = (op.params && typeof op.params === 'object') ? op.params : {};
-  const editedType = decision?.editedType ?? op.opType;
-
-  return (
-    <div
-      data-testid={`op-${index}`}
-      style={{
-        border: `1px solid ${action === 'reject' ? BORDER : action === 'approve' ? GOLD : SLATE}`, padding: SP.sm,
-        background: action === 'reject' ? CARD_ALT : '#fff', opacity: action === 'reject' ? 0.6 : 1,
-        display: 'flex', flexDirection: 'column', gap: 6,
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
-        {/* The authored, human label for the proposed verb (falls back to the raw
-            opType for an unregistered/edited verb); the opType stays as a small
-            monospace reference since it is the verb actually dispatched. */}
-        <span style={{ fontSize: FS.sm, color: INK, fontFamily: sans, fontWeight: 700 }}>{operationLabel(op.opType)}</span>
-        <code style={{ fontSize: FS.xxs, color: MUTED, fontFamily: 'monospace' }}>{op.opType}</code>
-        {op.label && <Badge tone={OP_LABEL_TONE[op.label] || 'muted'} size="sm">{op.label}</Badge>}
-        {isProtected && <Badge tone="danger" size="sm">protected</Badge>}
-        <span style={{ flex: 1 }} />
-        <IconButton glyph="✓" label="Approve this op" size="sm" tone={action === 'approve' ? 'active' : 'default'}
-          pressed={action === 'approve'} onClick={() => onDecide(index, { ...decision, action: 'approve' })} />
-        <IconButton glyph="✎" label="Edit this op" size="sm" tone={action === 'edit' ? 'active' : 'default'}
-          pressed={action === 'edit'} onClick={() => onDecide(index, { ...decision, action: 'edit' })} />
-        <IconButton glyph="×" label="Reject this op" size="sm" tone={action === 'reject' ? 'active' : 'default'}
-          pressed={action === 'reject'} onClick={() => onDecide(index, { ...decision, action: 'reject' })} />
-      </div>
-
-      {action === 'edit' && (
-        <input
-          aria-label="Edit op type"
-          value={editedType}
-          onChange={(e) => onDecide(index, { ...decision, action: 'edit', editedType: e.target.value })}
-          style={{ fontSize: FS.xs, fontFamily: sans, color: INK, border: `1px solid ${BORDER}`, padding: `2px ${SP.xs}px` }}
-        />
-      )}
-
-      {Object.keys(params).length > 0 && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-          {Object.entries(params).map(([k, v]) => (
-            <div key={k} style={{ display: 'flex', gap: SP.xs }}>
-              <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, minWidth: 78 }}>{k}</span>
-              <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>{typeof v === 'object' ? JSON.stringify(v) : String(v)}</span>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {isProtected && (
-        <label htmlFor={`surveyor-consent-${index}`} style={{ display: 'flex', alignItems: 'center', gap: SP.xs, fontSize: FS.xs, color: RED, fontFamily: sans }}>
-          <input
-            id={`surveyor-consent-${index}`}
-            type="checkbox"
-            checked={decision?.consented === true}
-            onChange={(e) => onDecide(index, { ...decision, consented: e.target.checked })}
-            aria-label={`Consent to the protected op ${operationLabel(op.opType)}`}
-          />
-          {/* Wave R-1 (named-fate consent): a verb that DELETES a named character says so
-              before the tick — consent to a party-caused kill is informed consent to the
-              roster deletion its world-pulse linkage triggers. Generic copy is unchanged
-              for every other protected op. */}
-          {(() => {
-            const note = identityConsentNote(op);
-            const base = 'This op touches a protected constraint. Tick to consent, or it will not apply.';
-            return note ? `${note} ${base}` : base;
-          })()}
-        </label>
-      )}
-    </div>
-  );
 }
 
 export default function InterpretApplyPanel({ initialPrompt = '' }) {
@@ -405,7 +324,8 @@ export default function InterpretApplyPanel({ initialPrompt = '' }) {
           <ProposalSlipLine />
           {ops.length === 0 && <p style={{ margin: 0, fontSize: FS.sm, color: MUTED }}>The Surveyor proposed no ops from this text.</p>}
           {ops.map((op, i) => (
-            <OpCard key={i} op={op} index={i} decision={decisions[i]} onDecide={decide} />
+            <ProposalCard key={i} id={`op-${i}`} op={op} decision={decisions[i]}
+              protectedFlags={op.protectedFlags} onDecide={(next) => decide(i, next)} />
           ))}
 
           <Button variant="primary" size="sm" busy={applying} disabled={!anyApproved || applying} onClick={applyAccepted}>

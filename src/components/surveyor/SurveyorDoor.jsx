@@ -3,7 +3,9 @@
  *
  * The single AI entry point: one floating slate tab on the LEFT edge of the page (the
  * marginalia position), no text until hover/focus (the label reveals as a flag; AT always
- * hears the aria-label). It opens a prompt slip; every prompt routes through the S3 intent
+ * hears the aria-label). It opens the EPHEMERAL TEXT-INTENT SHELL
+ * (SurveyorTextIntentShell.jsx — presentation only, kept mounted while the door is so a
+ * close/reopen keeps the draft); every prompt routes through the S3 intent
  * compiler's client fore-stage (domain/intent/doorRouter.js) to a DESTINATION — the S1
  * analyst or a Surveyor workshop stage — so the stage panels are destinations, never entry
  * points. The dossier Polish/Narrate lane is the owner-named carve-out and does not route
@@ -34,11 +36,9 @@
 
 import { useState } from 'react';
 import { t } from '../../copy/index.js';
-import { CARD, SLATE, SLATE_DEEP, MUTED, sans, SP, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
-import IconButton from '../primitives/IconButton.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
-import { AnchorChip, PromptArea } from './surveyorPanelKit.jsx';
+import SurveyorTextIntentShell from './SurveyorTextIntentShell.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
 import { useSurveyorEntitled } from './useSurveyorEntitled.js';
 import { routeDoorPrompt } from '../../domain/intent/doorRouter.js';
@@ -53,7 +53,6 @@ export { isSurveyorTier } from './surveyorGate.js';
 
 export default function SurveyorDoor({ visible = true }) {
   const [promptOpen, setPromptOpen] = useState(false);
-  const [text, setText] = useState('');
   // The routed destination: null | { id: 'analyst', question } | { id: stageId, prompt, scope }.
   const [dest, setDest] = useState(null);
   // Remount destinations per routing so initial* props re-seed (panels stay dumb).
@@ -80,13 +79,17 @@ export default function SurveyorDoor({ visible = true }) {
         : { id: routed.destination, prompt: promptText, scope: routed.scope });
     setNonce((n) => n + 1);
     setPromptOpen(false);
-    setText('');
   };
 
-  const route = () => {
-    const q = text.trim();
-    if (!q) return;
-    openDestination(routeDoorPrompt(q), q);
+  // The door still owns routing: the shell hands up the typed text and gets back the
+  // destination it produced (null for absence), which is the shell's ONLY signal that a
+  // turn actually left the composer. It never sees the router itself.
+  const route = (raw) => {
+    const q = String(raw ?? '').trim();
+    if (!q) return null;
+    const routed = routeDoorPrompt(q);
+    openDestination(routed, q);
+    return routed;
   };
 
   return (
@@ -108,60 +111,15 @@ export default function SurveyorDoor({ visible = true }) {
         </Button>
       )}
 
-      {promptOpen && (
-        <div
-          ref={doorRef}
-          role="dialog"
-          aria-modal="true"
-          tabIndex={-1}
-          aria-label={t('surveyorDoor.heading')}
-          className="sf-door-panel"
-          style={{
-            background: CARD, border: `1px solid ${SLATE}`,
-            display: 'flex', flexDirection: 'column', gap: SP.sm,
-            padding: SP.lg, fontFamily: sans,
-          }}
-        >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: SP.sm }}>
-            <span className="sf-smallcap" style={{ fontSize: FS.sm, fontWeight: 700, color: SLATE_DEEP }}>
-              {t('surveyorDoor.heading')}
-            </span>
-            <IconButton glyph="×" label={t('surveyorDoor.close')} size="sm" onClick={() => setPromptOpen(false)} />
-          </div>
-
-          {/* CONTEXT-FIRST made visible: the Surveyor reads what the page shows. */}
-          <AnchorChip label={anchorLabel} />
-
-          <PromptArea
-            value={text}
-            onChange={setText}
-            label={t('surveyorDoor.promptLabel')}
-            placeholder={t('surveyorDoor.placeholder')}
-            rows={3}
-          />
-
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: SP.sm }}>
-            <span style={{ fontSize: FS.xs, color: MUTED }}>{t('surveyorDoor.routeHint')}</span>
-            <Button variant="aiSolid" size="sm" disabled={!text.trim()} onClick={route}>
-              {t('surveyorDoor.route')}
-            </Button>
-          </div>
-
-          {/* Promptless doors (capability retention: the retired launchers allowed opening
-              the panels without a prompt — these quiet register links keep that path). */}
-          <div style={{ display: 'flex', gap: SP.sm }}>
-            <Button variant="ghost" size="sm" onClick={() => openDestination({ destination: 'analyst' }, '')}>
-              {t('surveyorDoor.openAnalyst')}
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => openDestination({ destination: 'interview' }, '')}>
-              {t('surveyorDoor.openInterview')}
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => openDestination({ destination: 'content', scope: 'settlement' }, '')}>
-              {t('surveyorDoor.openWorkshop')}
-            </Button>
-          </div>
-        </div>
-      )}
+      {/* The shell stays MOUNTED while the door is, so a close/reopen keeps the draft
+          and the transient log; it renders nothing while `open` is false. */}
+      <SurveyorTextIntentShell
+        open={promptOpen} dialogRef={doorRef} anchorLabel={anchorLabel}
+        onClose={() => setPromptOpen(false)} onRoute={route}
+        onOpenAnalyst={() => openDestination({ destination: 'analyst' }, '')}
+        onOpenInterview={() => openDestination({ destination: 'interview' }, '')}
+        onOpenWorkshop={() => openDestination({ destination: 'content', scope: 'settlement' }, '')}
+      />
 
       {dest?.id === 'analyst' && (
         <AiAnalystPanel key={nonce} open initialQuestion={dest.question} onClose={() => setDest(null)} />

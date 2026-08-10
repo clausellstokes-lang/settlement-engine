@@ -678,11 +678,15 @@ describe('Compendium legibility — no display surface renders a bare operation 
     ).toBe(true);
   });
 
-  test('the Surveyor apply panel renders the operation label via the accessor', () => {
-    const src = read('src/components/surveyor/InterpretApplyPanel.jsx');
+  test('the Surveyor proposal card renders the operation label via the accessor', () => {
+    // Re-pointed 2026-08-10 (SC-1 landing): the op-heading render moved from
+    // InterpretApplyPanel's nested OpCard into ProposalCard.jsx per SC-1 §7, and the
+    // extracted card guards its prop with optional chaining. Hand-keyed-address-rot
+    // class: code right, pin wrong — the pin follows the symbol, not the old file.
+    const src = read('src/components/surveyor/ProposalCard.jsx');
     expect(
-      src.includes('operationLabel(op.opType)'),
-      'InterpretApplyPanel must render operationLabel(op.opType) as the op heading (not a bare {op.opType}).',
+      /operationLabel\(op\??\.opType\)/.test(src),
+      'ProposalCard must render operationLabel(op.opType) as the op heading (not a bare {op.opType}).',
     ).toBe(true);
   });
 });
