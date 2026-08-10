@@ -116,7 +116,7 @@
     },
     {
       "id": "GR-3B-ORIENT",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/foreign-policy/GR-3B-ORIENT.md",
       "verifiedBase": "820ed989df1747cfbeb8b0a5a9a07b253736151f",
       "changeManifest": [

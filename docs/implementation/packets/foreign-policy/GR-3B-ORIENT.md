@@ -1,6 +1,7 @@
 # Foreign Policy / GR-3B-ORIENT — the per-term obligation axis (CR-GR3B-3-R1)
 
-- **Status:** `READY`
+- **Status:** `LANDED`
+- **Landed:** `d56d944c` (2026-08-10; 8/8 acceptance, CR-ORIENT-C inversion applied, coupling row cleared, peaceTerms.js at 793/800)
 - **Status note:** **Promoted READY by the chair 2026-08-10 (CR-FP-ORDER: ORIENT → IN-0C → GR-3B, strictly serial).** Every decision this
   packet needs is ruled (CR-GR3B-3-R1), every premise it rests on is measured at the
   verified base (§3), and it withholds no coding instruction. It is DRAFT only because
