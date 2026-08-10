@@ -1,5 +1,5 @@
 {
-  "total": 1140,
+  "total": 1134,
   "files": {
     "src/domain/display/heraldCausalGrammar.js": 2,
     "src/domain/display/heraldCausalVoice.js": 3,
@@ -28,7 +28,7 @@
     "src/domain/worldPulse/envoyErrandOffer.js": 8,
     "src/domain/worldPulse/envoyErrandParlay.js": 13,
     "src/domain/worldPulse/envoyErrandProjection.js": 12,
-    "src/domain/worldPulse/envoyErrandRecords.js": 27,
+    "src/domain/worldPulse/envoyErrandRecords.js": 25,
     "src/domain/worldPulse/envoyErrandTransit.js": 8,
     "src/domain/worldPulse/envoyErrandVocabulary.js": 7,
     "src/domain/worldPulse/envoyInterceptionStage.js": 115,
@@ -49,7 +49,7 @@
     "src/domain/worldPulse/peaceReasons.js": 1,
     "src/domain/worldPulse/peaceTerms.js": 29,
     "src/domain/worldPulse/peaceTermsAppraisal.js": 1,
-    "src/domain/worldPulse/peaceTermsCoalition.js": 12,
+    "src/domain/worldPulse/peaceTermsCoalition.js": 10,
     "src/domain/worldPulse/peaceTermsOverlay.js": 6,
     "src/domain/worldPulse/pulseKernel.js": 8,
     "src/domain/worldPulse/relationshipEvolution.js": 5,
@@ -62,7 +62,7 @@
     "src/domain/worldPulse/warCoalitionEvidence.js": 5,
     "src/domain/worldPulse/warCoalitionExpenditure.js": 3,
     "src/domain/worldPulse/warCoalitionGraph.js": 6,
-    "src/domain/worldPulse/warCoalitionLedger.js": 57,
+    "src/domain/worldPulse/warCoalitionLedger.js": 56,
     "src/domain/worldPulse/warCoalitionNews.js": 26,
     "src/domain/worldPulse/warCoalitionPulse.js": 8,
     "src/domain/worldPulse/warCoalitionSettlement.js": 22,
@@ -76,7 +76,6 @@
     "src/domain/worldPulse/warRulingsEvidence.js": 2,
     "src/domain/worldPulse/warRulingsNews.js": 42,
     "src/domain/worldPulse/warSeatBooks.js": 26,
-    "src/domain/worldPulse/warTermination.js": 33,
-    "src/domain/worldPulse/worldState.js": 1
+    "src/domain/worldPulse/warTermination.js": 33
   }
 }

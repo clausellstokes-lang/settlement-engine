@@ -1,8 +1,8 @@
 {
   "_doc": "Per-file ceiling for `tsc --noEmit -p tsconfig.full.json`. SHRINK-ONLY. A file absent from `files` has an allowance of ZERO. Regenerate with `npm run typecheck:ratchet:update` — never hand-edit, and never widen. See scripts/check-full-typecheck.mjs.",
-  "measuredAtSha": "67f8a58e1e199ba7e7cf81d46e9609a07c3e8701",
-  "total": 175,
-  "resolvedCount": 1378,
+  "measuredAtSha": "0f7424f7303d52020c9ca630588c78e7ce318d02",
+  "total": 173,
+  "resolvedCount": 1400,
   "roots": [
     "src/application/",
     "src/components/",
@@ -30,7 +30,7 @@
     "src/domain/worldPulse/envoyErrand.js": 3,
     "src/domain/worldPulse/envoyErrandEncounterWriter.js": 5,
     "src/domain/worldPulse/envoyErrandParlay.js": 2,
-    "src/domain/worldPulse/envoyErrandRecords.js": 5,
+    "src/domain/worldPulse/envoyErrandRecords.js": 3,
     "src/domain/worldPulse/envoyInterceptionStage.js": 22,
     "src/domain/worldPulse/envoyNegotiationPictureBuilder.js": 1,
     "src/domain/worldPulse/envoyPulse.js": 2,
